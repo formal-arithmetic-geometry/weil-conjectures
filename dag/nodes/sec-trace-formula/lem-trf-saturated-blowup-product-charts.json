@@ -1,0 +1,282 @@
+{
+ "id": "lem-trf-saturated-blowup-product-charts",
+ "kind": "statement",
+ "title": "Saturated monomial blowup charts commute with free monoid products",
+ "statement": "Let $k$ be a field, $P$ a fine commutative monoid with torsion-free group completion $G$, and $I\\subseteq P$ a finitely generated nonempty ideal. Let $H=\\mathbf N^r\\oplus\\mathbf Z^t$ for finite $r,t\\geq0$, $Q=P\\oplus H$, and $I_Q=I\\times H$ [def-trf-fine-fan-blowup] [def-trf-monoscheme-toric-realization]. For $a\\in I$ put $C_a=P[I-a]$. Inside $Q^{\\rm gp}=G\\oplus H^{\\rm gp}$ one has\n$$Q[I_Q-(a,0)]=C_a\\oplus H,\\qquad (C_a\\oplus H)^{\\rm sat}=C_a^{\\rm sat}\\oplus H.$$\nConsequently the ordinary and normalized scheme blowup charts for the extended ideal $k[I_Q]$ are respectively $k[C_a]\\otimes_k k[H]$ and $k[C_a^{\\rm sat}]\\otimes_k k[H]$. In particular the canonical map\n$$k[C_a^{\\rm sat}]\\otimes_{k[P]}k[Q]\\longrightarrow k[(Q[I_Q-(a,0)])^{\\rm sat}]$$\nis an isomorphism, sending $e^c\\otimes e^{(p,h)}$ to $e^{(c+p,h)}$. These maps identify the saturated monoscheme blowup charts and the normalized scheme blowup charts with pullbacks of the corresponding charts for $P$. They commute with all monomial overlap localizations, the comparison maps to the base, and the torus coactions. They are compatible with identities and composites of free product extensions and their localizations.",
+ "source": {
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "VIII Remark 3.1.23, Lemma 3.2.17 and Corollary 3.2.18, pp.101,105; explicit product-chart and saturation argument supplied by an agent."
+ },
+ "stmt_deps": [
+  "def-trf-fine-fan-blowup",
+  "def-trf-monoscheme-toric-realization",
+  "def-weil-pbc-module-tensor-product",
+  "def-pc-fibre-product"
+ ],
+ "proof": [
+  {
+   "text": "Choose finite nonempty ideal generators $E$ of $I$, enlarging $E$ by the chosen $a\\in I$ when necessary. Then $E\\times\\{0\\}$ generates $I_Q$: $(b,h)=(e,0)+(p,h)$ whenever $b=e+p$. The generators of $Q[I_Q-(a,0)]$ are $Q$ and $(b-a,h)$ for $b\\in I,h\\in H$. Each belongs to $C_a\\oplus H$. Conversely $Q$ contains $(p,0)$ and $(0,h)$, and the difference generators with $h=0$ include $(b-a,0)$. They generate $C_a\\oplus H$, proving the first equality. The group completion is $G\\oplus\\mathbf Z^{r+t}$: every element is a difference of elements of $P\\oplus H$.",
+   "uses": [
+    "def-trf-fine-fan-blowup"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "VIII 3.1.19 and Remark 3.1.23, p.101; explicit additive generator calculation."
+   }
+  },
+  {
+   "text": "For $(g,u)\\in G\\oplus\\mathbf Z^{r+t}$, membership in $(C_a\\oplus H)^{\\mathrm{sat}}$ means that $ng\\in C_a$ and $nu\\in H$ for some integer $n>0$. The latter condition says the first $r$ integer coordinates of $nu$ are nonnegative, equivalently those of $u$ are nonnegative; the last $t$ are unrestricted. Thus $u\\in H$ and $g\\in C_a^{\\mathrm{sat}}$. Conversely a witness $ng\\in C_a$ and $u\\in H$ give $n(g,u)\\in C_a\\oplus H$. This proves the saturation equality, including $r=0$ or $t=0$.",
+   "uses": [
+    "def-trf-fine-fan-blowup"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "VIII 3.1.17 and Remark 3.1.23, p.101; explicit coordinatewise root-saturation calculation."
+   }
+  },
+  {
+   "text": "For either $M=C_a$ or $M=C_a^{\\mathrm{sat}}$, define $k[M]\\otimes_k k[H]\\to k[M\\oplus H]$ by $e^m\\otimes e^h\\mapsto e^{(m,h)}$. Finite-sum bilinear extension is well-defined by the tensor universal property. Its inverse is $e^{(m,h)}\\mapsto e^m\\otimes e^h$, extended $k$-linearly on the monomial basis. Both preserve multiplication and the unit, since addition is componentwise; both composites fix the respective monomial or pure-tensor generators. Hence these are $k$-algebra isomorphisms. In particular $k[Q]=k[P]\\otimes_k k[H]$.",
+   "uses": [
+    "def-trf-monoscheme-toric-realization",
+    "def-weil-pbc-module-tensor-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "VIII 3.2.1--3.2.2, pp.103--104, and Remark 3.1.23, p.101; explicit finite-sum tensor calculation supplied by an agent."
+   }
+  },
+  {
+   "text": "Apply [lem-trf-toric-blowup-chart-normalization] to $(P,I,E)$ and $(Q,I_Q,E\\times\\{0\\})$. The second monoid is fine because $P$ and $H$ have finite generating sets and both embed in their group completions; its group completion is torsion free by Step 1. That lemma gives ordinary chart rings $k[C_a]$ and $k[C_a\\oplus H]$ and normalized rings $k[C_a^{\\mathrm{sat}}]$ and $k[C_a^{\\mathrm{sat}}\\oplus H]$, using Steps 1--2. Step 3 gives exactly the two asserted tensor descriptions. In particular both normalized chart monoids are fine. Enlarging $E$ as in Step 1 makes this argument valid for every $a\\in I$.",
+   "uses": [
+    "lem-trf-toric-blowup-chart-normalization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "VIII Lemma 3.2.17 and Corollary 3.2.18, p.105; normalization input isolated in the existing toric chart node."
+   }
+  },
+  {
+   "text": "Put $M=C_a^{\\mathrm{sat}}$ and $B=k[M]\\otimes_{k[P]}k[Q]$. The proposed map $F:B\\to k[M\\oplus H]$ sends $e^c\\otimes e^{(p,h)}$ to $e^{(c+p,h)}$; the balancing relation holds because moving $e^{p_0}$ across the tensor adds $(p_0,0)$ on either side. Define $V(e^{(c,h)})=e^c\\otimes e^{(0,h)}$ and extend $k$-linearly. Both maps preserve products and units. Then $FV(e^{(c,h)})=e^{(c,h)}$, while\n$$VF(e^c\\otimes e^{(p,h)})=e^{c+p}\\otimes e^{(0,h)}=e^c\\otimes e^{(p,h)}.$$\nPure tensors of monomials generate $B$, so $F,V$ are inverses. The affine-spectrum fibre-product theorem identifies $\\operatorname{Spec}B$ with the pullback of the $M$-chart over $\\operatorname{Spec}k[P]$ to $\\operatorname{Spec}k[Q]$, including both projection maps. Taking $M=C_a$ gives the identical ordinary-chart argument.",
+   "uses": [
+    "def-weil-pbc-module-tensor-product",
+    "def-trf-monoscheme-toric-realization",
+    "lem-weil-pbc-fibre-product-affine-spectra"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "VIII Remark 3.1.23, p.101, and 3.2.17--3.2.18, p.105; explicit inverse and scheme pullback verification supplied by an agent."
+   }
+  },
+  {
+   "text": "For $M=C_a^{\\mathrm{sat}}$, the amalgamated sum $M\\oplus_P(P\\oplus H)$ is $M\\oplus H$. Indeed compatible homomorphisms $f:M\\to N$ and $g:P\\oplus H\\to N$ have the unique extension $(c,h)\\mapsto f(c)+g(0,h)$; it restricts to $g$ because $f(p)=g(p,0)$. Apply [lem-trf-affine-monoscheme-hom-universal] to any locally monoidal test space $(T,\\mathcal A)$ and $N=\\Gamma(T,\\mathcal A)$. Naturality identifies pairs of maps to $A(M)$ and $A(Q)$ agreeing over $A(P)$ with these compatible homomorphisms, hence with the unique map to $A(M\\oplus H)$. This is the categorical pullback property, including its projections. The same calculation with $M=C_a$ proves the unsaturated version. No sharpness of the test stalks is required.",
+   "uses": [
+    "lem-trf-affine-monoscheme-hom-universal"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "VIII Lemma 3.1.8(i), p.99, and Remark 3.1.23, p.101; explicit amalgamated-sum universal property."
+   }
+  },
+  {
+   "text": "For $a,b\\in E$ the overlap denominator in the $a$-chart is $d=b-a$, which becomes $(d,0)$ in the product chart. The chart-normalization node gives these overlap localizations before and after normalization. The finite-saturation node gives $(C_a-S)^{\\mathrm{sat}}=C_a^{\\mathrm{sat}}-S$, so the saturated formulas use precisely the same denominators. The maps in Steps 3 and 5 send each denominator to the corresponding monomial, and their inverses do likewise, so on a localized monomial they send $e^x/(e^d)^n$ to the monomial with exponent equal to the image of $x-nd$. This proves commutation with overlap maps and all further monomial localizations, including base localizations. On the monoid side the identical formula is $x-nd\\mapsto\\phi(x)-n\\phi(d)$. Thus the chart identifications glue by the tuple-of-compatible-sections definition of the blowups, and retain the asserted pullback comparisons on every chart.",
+   "uses": [
+    "lem-trf-toric-blowup-chart-normalization",
+    "lem-trf-fine-monoid-finite-saturation",
+    "def-trf-monoscheme-toric-realization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "VIII 3.1.17--3.1.23, p.101, and localization sentence in the proof of 3.2.17, p.105; explicit fraction formulas."
+   }
+  },
+  {
+   "text": "The base map sends $e^{(p,h)}$ to $1\\otimes e^{(p,h)}$, whose image under $F$ is $e^{(p,h)}$, proving compatibility over the base. For the torus with group $G\\oplus H^{\\mathrm{gp}}$, the tensor monomial $e^c\\otimes e^{(p,h)}$ has total degree $(c,0)+(p,h)=(c+p,h)$; both routes through the coaction therefore give $e^{(c+p,h)}\\otimes e^{(c+p,h)}$. Finite-sum extension proves the full coaction square. For another free factor $H'$, both the iterated comparison and the direct comparison send $e^c\\otimes e^{(p,h)}\\otimes e^{(p',u,h')}$ to $e^{(c+p+p',h+u,h')}$; both inverses are the corresponding monomial decompositions. For the identity extension ($H=0$), the comparison is $e^c\\otimes e^p\\mapsto e^{c+p}$, the canonical identity pullback map. These equalities hold on generators and hence on the rings, on monoids, and their associated spaces. Step 7's fraction formula gives the same equalities after any stated localization.",
+   "uses": [
+    "def-trf-monoscheme-toric-realization"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "VIII Remark 3.1.23, p.101, and coaction convention 3.2.15, p.105; explicit degree, identity and composition calculations."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-trf-fine-fan-blowup",
+  "def-trf-monoscheme-toric-realization",
+  "def-weil-pbc-module-tensor-product",
+  "lem-trf-toric-blowup-chart-normalization",
+  "lem-weil-pbc-fibre-product-affine-spectra",
+  "lem-trf-affine-monoscheme-hom-universal",
+  "lem-trf-fine-monoid-finite-saturation"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "Expose VIII Remark 3.1.23, p.101, with 3.1.8(i), p.99, and Lemma 3.2.17/Corollary 3.2.18, p.105. The source leaves the product-chart calculation implicit; the generator, saturation, tensor inverse and compatibility arguments are supplied explicitly here."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For Q=P direct sum N^r direct sum Z^t, the blowup difference monoid for an extended ideal is P[I-a] direct sum N^r direct sum Z^t; saturation and normalized monoid algebra charts commute with this product.",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"HomogeneousLocalization\", \"module\": \"Mathlib/RingTheory/GradedAlgebra/HomogeneousLocalization\", \"type\": \"{ι : Type u_1} →\\n  {A : Type u_2} → {σ : Type u_3} → [inst : CommRing A] → [SetLike σ A] → (ι → σ) → Submonoid A → Type (max u_1 u_2)\", \"doc\": \"The type representing the quotient of homogeneous fractions (with numerator and denominator in the submonoid $ x $) by the equivalence relation induced by their equality in the localization $ A_x $, w\"}\n  {\"name\": \"HomogeneousLocalization.awayMapAux_mk\", \"module\": \"Mathlib/RingTheory/GradedAlgebra/HomogeneousLocalization\", \"type\": \"∀ {ι : Type u_1} {A : Type u_2} {σ : Type u_3} [inst : CommRing A] [inst_1 : SetLike σ A]\\n  [inst_2 : AddSubgroupClass σ A] [inst_3 : AddCommMonoid ι] [inst_4 : DecidableEq ι] (𝒜 : ι → σ)\\n  [inst_5 : GradedRing 𝒜] {f g x : A} (hx : x = f * g) (n : ι) (a : ↥(𝒜 n)) (i : ℕ) (hi : f ^ i ∈ 𝒜 n),\\n  (Homog\", \"doc\": \"In the context of a graded algebra $\\\\mathcal{A}$ over a commutative ring $A$, this theorem establishes that applying the auxiliary map $\\\\text{awayMapAux}$ to a homogeneous element constructed from num\"}\n  {\"name\": \"HomogeneousLocalization.awayMap_mk\", \"module\": \"Mathlib/RingTheory/GradedAlgebra/HomogeneousLocalization\", \"type\": \"∀ {ι : Type u_1} {A : Type u_2} {σ : Type u_3} [inst : CommRing A] [inst_1 : SetLike σ A]\\n  [inst_2 : AddSubgroupClass σ A] [inst_3 : AddCommMonoid ι] [inst_4 : DecidableEq ι] (𝒜 : ι → σ)\\n  [inst_5 : GradedRing 𝒜] {e : ι} {f g : A} (hg : g ∈ 𝒜 e) {x : A} (hx : x = f * g) {d : ι} (n : ℕ) (hf : f ∈ 𝒜 \", \"doc\": \"In a graded algebra $\\\\mathcal{A}$ over an additive monoid $\\\\iota$, let $f \\\\in \\\\mathcal{A}_d$ and $g \\\\in \\\\mathcal{A}_e$ be homogeneous elements. For any natural number $n$ and homogeneous element $a \\\\i\"}\n  {\"name\": \"HomogeneousLocalization.Away.span_mk_prod_pow_eq_top\", \"module\": \"Mathlib/RingTheory/GradedAlgebra/HomogeneousLocalization\", \"type\": \"∀ {ι : Type u_1} {A : Type u_2} {σ : Type u_3} [inst : CommRing A] [inst_1 : SetLike σ A]\\n  [inst_2 : AddSubgroupClass σ A] [inst_3 : AddCommMonoid ι] [inst_4 : DecidableEq ι] {𝒜 : ι → σ}\\n  [inst_5 : GradedRing 𝒜] {f : A} {d : ι} (hf : f ∈ 𝒜 d) {ι' : Type u_4} [inst_6 : Fintype ι'] (v : ι' → A),\\n  A\", \"doc\": \"Let $\\\\mathcal{A}$ be a graded algebra over an additive monoid $\\\\iota$, and let $f \\\\in \\\\mathcal{A}_d$ for some degree $d \\\\in \\\\iota$. Suppose $\\\\{v_i\\\\}_{i \\\\in \\\\iota'}$ is a finite family of elements in $\"}\n  {\"name\": \"HomogeneousLocalization.Away.adjoin_mk_prod_pow_eq_top\", \"module\": \"Mathlib/RingTheory/GradedAlgebra/HomogeneousLocalization\", \"type\": \"∀ {A : Type u_2} {σ : Type u_3} [inst : CommRing A] [inst_1 : SetLike σ A] [inst_2 : AddSubgroupClass σ A] {𝒜 : ℕ → σ}\\n  [inst_3 : GradedRing 𝒜] {f : A} {d : ℕ} (hf : f ∈ 𝒜 d) (ι' : Type u_4) [inst_4 : Fintype ι'] (v : ι' → A),\\n  Algebra.adjoin (↥(𝒜 0)) (Set.range v) = ⊤ →\\n    ∀ (dv : ι' → ℕ) (hxd :\", \"doc\": \"Let $\\\\mathcal{A}$ be a graded algebra over an additive monoid $\\\\iota$, and let $f \\\\in \\\\mathcal{A}_d$ for some degree $d \\\\in \\\\iota$. Suppose $\\\\{v_i\\\\}_{i \\\\in \\\\iota'}$ is a finite set of homogeneous elem\"}\n  {\"name\": \"HomogeneousLocalization.Away.isLocalization_mul\", \"module\": \"Mathlib/RingTheory/GradedAlgebra/HomogeneousLocalization\", \"type\": \"∀ {A : Type u_2} {σ : Type u_3} [inst : CommRing A] [inst_1 : SetLike σ A] [inst_2 : AddSubgroupClass σ A] {𝒜 : ℕ → σ}\\n  [inst_3 : GradedRing 𝒜] {e d : ℕ} {f : A} (hf : f ∈ 𝒜 d) {g : A} (hg : g ∈ 𝒜 e) {x : A} (hx : x = f * g),\\n  d ≠ 0 → IsLocalization.Away (HomogeneousLocalization.Away.isLocalizatio\", \"doc\": \"Given a graded algebra $\\\\mathcal{A}$ and elements $f, x$ such that $f$ divides $x$, and for a non-zero $d$, the homogeneous localization of $\\\\mathcal{A}$ at $x$ is equivalent to the localization away \"}\n  {\"name\": \"HomogeneousIdeal.irrelevant_eq_iSup\", \"module\": \"Mathlib/RingTheory/GradedAlgebra/Homogeneous/Ideal\", \"type\": \"∀ {ι : Type u_1} {σ : Type u_2} {A : Type u_3} [inst : Semiring A] [inst_1 : DecidableEq ι] [inst_2 : AddCommMonoid ι]\\n  [inst_3 : PartialOrder ι] [inst_4 : CanonicallyOrderedAdd ι] [inst_5 : SetLike σ A] [inst_6 : AddSubmonoidClass σ A]\\n  (𝒜 : ι → σ) [inst_7 : GradedRing 𝒜],\\n  (HomogeneousIdeal.irr\", \"doc\": \"The irrelevant ideal $ A_+ $ of a graded ring $ A $ is equal to the supremum (join) of the additive submonoids generated by the graded components $ A_i $ for all $ i > 0 $.\"}\n  {\"name\": \"HomogeneousLocalization.Away\", \"module\": \"Mathlib/RingTheory/GradedAlgebra/HomogeneousLocalization\", \"type\": \"{ι : Type u_1} → {A : Type u_2} → {σ : Type u_3} → [CommRing A] → [SetLike σ A] → (ι → σ) → A → Type (max u_1 u_2)\", \"doc\": \"The homogeneous localization of a graded algebra $ A $ at the submonoid generated by the powers of an element $ f $, consisting of homogeneous fractions where numerators and denominators are homogeneo\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: homogeneous localizations and scheme normalization diagrams do not give the saturated difference-monoid product formula and the resulting chart pullback"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AddMonoidAlgebra\", \"IsLocalization\"",
+   "results": "[loogle] OK 0 hit(s)",
+   "date": "2026-10-22",
+   "verdict": "no match: homogeneous localizations and scheme normalization diagrams do not give the saturated difference-monoid product formula and the resulting chart pullback"
+  },
+  {
+   "tool": "grep",
+   "query": "saturat.*(prod|blow)|blow.*(Laurent|monoid)",
+   "results": "[grep] OK 0 hit(s)",
+   "date": "2026-10-22",
+   "verdict": "no match: homogeneous localizations and scheme normalization diagrams do not give the saturated difference-monoid product formula and the resulting chart pullback"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Normalized toric blowup charts commute with adjoining polynomial and invertible variables, naturally in all chart transition maps.",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.ι_fromNormalization\", \"module\": \"Mathlib.AlgebraicGeometry.Normalization\", \"type\": \"(U : Y.affineOpens) :\\n  f.normalizationOpenCover.f U ≫ f.fromNormalization = Spec.map (f.normalizationDiagramMap.app (.op U.1)) ≫ U.2.fromSpec\", \"doc\": \"For an affine open subset $U$ of $Y$, the composition of the open cover morphism $f.\\\\text{normalizationOpenCover}.f(U)$ with the normalization morphism $f.\\\\text{fromNormalization}$ equals the composit\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.normalizationDesc.congr_simp\", \"module\": \"Mathlib.AlgebraicGeometry.Normalization\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [inst : AlgebraicGeometry.QuasiCompact f]\\n  [inst_1 : AlgebraicGeometry.QuasiSeparated f] {T : AlgebraicGeometry.Scheme} (f₁ f₁_1 : X ⟶ T) (e_f₁ : f₁ = f₁_1)\\n  (f₂ f₂_1 : T ⟶ Y) (e_f₂ : f₂ = f₂_1) [inst_2 : AlgebraicGeometry.IsIntegralHom f₂]\\n  (H : f =\", \"doc\": \"Given schemes $X, Y, T$ and morphisms $f: X \\\\to Y$, $f_1, f_1': X \\\\to T$, $f_2, f_2': T \\\\to Y$ such that $f_1 = f_1'$, $f_2 = f_2'$, and $f = f_1 \\\\circ f_2 = f_1' \\\\circ f_2'$, with $f$ quasi-compact, \"}\n  {\"name\": \"chartAt_comp\", \"module\": \"Mathlib.Geometry.Manifold.ChartedSpace\", \"type\": \"(H : Type*) [TopologicalSpace H] (H' : Type*) [TopologicalSpace H'] {M : Type*} [TopologicalSpace M]\\n  [ChartedSpace H H'] [ChartedSpace H' M] (x : M) :\\n  (letI := ChartedSpace.comp H H' M;\\n    chartAt H x) =\\n    chartAt H' x ≫ₕ chartAt H (chartAt H' x x)\", \"doc\": \"For a point $x$ in a charted space $M$ over $H'$ and $H'$ over $H$, the chart from $M$ to $H$ at $x$ is equal to the composition of the chart from $M$ to $H'$ at $x$ and the chart from $H'$ to $H$ at \"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.inr_normalizationCoprodIso_hom_fromNormalization\", \"module\": \"Mathlib.AlgebraicGeometry.Normalization\", \"type\": \": coprod.inr ≫ (f.normalizationCoprodIso e).hom ≫ f.fromNormalization = (iV ≫ f).fromNormalization\", \"doc\": \"The composition of the right inclusion into the coproduct, followed by the normalization coproduct isomorphism and the normalization morphism to $ Y $, equals the composition of the inclusion morphism\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.preservesLocalization_normalizationDiagramMap\", \"module\": \"Mathlib.AlgebraicGeometry.Normalization\", \"type\": \": PreservesLocalization _ ((toOpensFunctor Y).op.whiskerLeft f.normalizationDiagramMap)\", \"doc\": \"For a scheme morphism $ f $, the normalization diagram functor $ F $ equipped with a natural transformation $ \\\\alpha: \\\\mathcal{O}_Y \\\\Rightarrow F $ satisfies the localization condition: for every affi\"}\n  {\"name\": \"Polynomial.integralNormalization_map\", \"module\": \"Mathlib.RingTheory.Polynomial.IntegralNormalization\", \"type\": \"(f : R →+* A) (p : R[X]) (H : f p.leadingCoeff ≠ 0) : (p.map f).integralNormalization = p.integralNormalization.map f\", \"doc\": \"For any ring homomorphism $ f : R \\\\to A $ and polynomial $ p \\\\in R[X] $ such that $ f(\\\\text{leading coefficient of } p) \\\\neq 0 $, the integral normalization of $ p $ after applying $ f $ to its coeffi\"}\n  {\"name\": \"Polynomial.map_normalize\", \"module\": \"Mathlib.Algebra.Polynomial.FieldDivision\", \"type\": \"[DecidableEq R] [Field S] [DecidableEq S] (f : R →+* S) : map f (normalize p) = normalize (map f p)\", \"doc\": \"For any ring homomorphism $ f : R \\\\to S $ from a commutative ring $ R $ to a field $ S $, and for any polynomial $ p \\\\in R[X] $, applying $ f $ to the normalized polynomial $ \\\\text{normalize}(p) $ yie\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.toNormalization_normalizationDesc\", \"module\": \"Mathlib.AlgebraicGeometry.Normalization\", \"type\": \"(H : f = f₁ ≫ f₂) : f.toNormalization ≫ f.normalizationDesc f₁ f₂ H = f₁\", \"doc\": \"Given a morphism $ f $ that factors as $ f = f_1 \\\\circ f_2 $, the composition of the normalization morphism $ f.toNormalization $ and the normalization description morphism $ f.normalizationDesc(f_1, \"}",
+   "date": "2026-10-22",
+   "verdict": "no match: homogeneous localizations and scheme normalization diagrams do not give the saturated difference-monoid product formula and the resulting chart pullback"
+  },
+  {
+   "tool": "grep",
+   "query": "blowup|saturat.*(prod|tensor)|(prod|tensor).*saturat",
+   "results": "{\"t\": \"2026-10-23T10:39:02Z\", \"tool\": \"grep\", \"query\": \"blowup|saturat.*(prod|tensor)|(prod|tensor).*saturat\", \"sub\": \"Algebra/MonoidAlgebra\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"} Returned signatures read. Tensor-product monoid-algebra equivalences cover only the elementary tensor factorization; homogeneous-localization and presentation hits do not state the blowup/saturation result. Submonoid.saturation and Subalgebra.saturation use a different, multiplicative-localization saturation, not root saturation.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Saturation of a monoid commutes with product and normalized monomial blowup charts commute with polynomial and Laurent polynomial extension.",
+   "results": "{\"t\": \"2026-10-23T10:39:02Z\", \"tool\": \"leansearch\", \"query\": \"Saturation of a monoid commutes with product and normalized monomial blowup charts commute with polynomial and Laurent polynomial extension.\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Subalgebra.saturation\", \"UniqueFactorizationMonoid.normalizationMonoid\", \"Polynomial.instNormalizationMonoid\", \"Polynomial.instNormalizationMonoid.congr_simp\", \"Subalgebra.le_saturation\", \"MonoidAlgebra.smulCommClass_symm_self\", \"Subalgebra.mem_saturation_iff\", \"MonoidAlgebra.prod_single\"], \"digest\": \"85a749daf8fa0ad6\"} Returned signatures read. Tensor-product monoid-algebra equivalences cover only the elementary tensor factorization; homogeneous-localization and presentation hits do not state the blowup/saturation result. Submonoid.saturation and Subalgebra.saturation use a different, multiplicative-localization saturation, not root saturation.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "AddMonoidAlgebra, TensorProduct",
+   "results": "{\"t\": \"2026-10-23T10:39:02Z\", \"tool\": \"loogle\", \"query\": \"AddMonoidAlgebra, TensorProduct\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"AddMonoidAlgebra.scalarTensorEquiv\", \"AddMonoidAlgebra.tensorEquiv\", \"AddMonoidAlgebra.lTensorAlgEquiv\", \"AddMonoidAlgebra.rTensorEquivAlgEquiv\", \"AddMonoidAlgebra.rTensorEquivAlgEquiv.invFun\", \"AddMonoidAlgebra.scalarTensorEquiv_symm_single\", \"AddMonoidAlgebra.scalarTensorEquiv_tmul\", \"AddMonoidAlgebra.tensorEquiv_single_tmul_single\"], \"digest\": \"b26dccf6932a7fbd\"} Returned signatures read. Tensor-product monoid-algebra equivalences cover only the elementary tensor factorization; homogeneous-localization and presentation hits do not state the blowup/saturation result. Submonoid.saturation and Subalgebra.saturation use a different, multiplicative-localization saturation, not root saturation.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Saturation of the monoid of a monomial blowup chart commutes with direct product with a free commutative monoid and a free abelian group; the induced monoid algebra tensor product isomorphism respects localizations.",
+   "results": "{\"t\": \"2026-10-23T10:39:03Z\", \"tool\": \"leanfinder\", \"query\": \"Saturation of the monoid of a monomial blowup chart commutes with direct product with a free commutative monoid and a free abelian group; the induced monoid algebra tensor product isomorphism respects localizations.\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Proj.lift_awayMapₐ_awayMapₐ_surjective\", \"Algebra.Presentation.tensorModelOfHasCoeffsInv\", \"MvPolynomial.universalFactorizationMapPresentation_val\", \"Algebra.Presentation.tensorModelOfHasCoeffsEquiv_symm_tmul\", \"Algebra.Presentation.tensorModelOfHasCoeffsEquiv_tmul\", \"Algebra.Presentation.relation_comp_localizationAway_inl\", \"Algebra.tensorH1CotangentOfIsLocalization\", \"Algebra.Presentation.tensorModelOfHasCoeffsInv_aeval_val\"], \"digest\": \"baf7b49240f4144e\"} Returned signatures read. Tensor-product monoid-algebra equivalences cover only the elementary tensor factorization; homogeneous-localization and presentation hits do not state the blowup/saturation result. Submonoid.saturation and Subalgebra.saturation use a different, multiplicative-localization saturation, not root saturation.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "saturat|blowup",
+   "results": "{\"t\": \"2026-10-23T10:42:17Z\", \"tool\": \"grep\", \"query\": \"saturat|blowup\", \"sub\": \"Algebra/Group/Submonoid\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"Mathlib/Algebra/Group/Submonoid/Saturation.lean\", \"Mathlib/Algebra/Group/Submonoid/Saturation.lean\", \"Mathlib/Algebra/Group/Submonoid/Saturation.lean\", \"Mathlib/Algebra/Group/Submonoid/Saturation.lean\", \"Mathlib/Algebra/Group/Submonoid/Saturation.lean\"], \"digest\": \"b3dd247a22932b2e\"} Returned signatures read. Tensor-product monoid-algebra equivalences cover only the elementary tensor factorization; homogeneous-localization and presentation hits do not state the blowup/saturation result. Submonoid.saturation and Subalgebra.saturation use a different, multiplicative-localization saturation, not root saturation.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For integral additive monoids P and H, the saturation of P times H in their group completion is the product of their saturations; charts P[I-a] commute with extension of the ideal to P times H.",
+   "results": "{\"t\": \"2026-10-23T10:42:18Z\", \"tool\": \"leanfinder\", \"query\": \"For integral additive monoids P and H, the saturation of P times H in their group completion is the product of their saturations; charts P[I-a] commute with extension of the ideal to P times H.\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Subalgebra.mem_saturation_of_mul_mem_left\", \"FractionalIdeal.extended_mul\", \"Subalgebra.mem_saturation_of_mul_mem_right\", \"Ideal.span_prod\", \"Ideal.ideal_prod_eq\", \"Subalgebra.saturation_saturation\", \"Algebra.zariskisMainProperty_iff_exists_saturation_eq_top\", \"Ideal.span_prod_le\"], \"digest\": \"74fd29cb47749dd3\"} Returned signatures read. Tensor-product monoid-algebra equivalences cover only the elementary tensor factorization; homogeneous-localization and presentation hits do not state the blowup/saturation result. Submonoid.saturation and Subalgebra.saturation use a different, multiplicative-localization saturation, not root saturation.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-toric-monoid-comparison",
+  "date": "2026-10-22",
+  "group": "Q25"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Historical nearby-duality/alteration branch of lem-trf-local-term-locality, proof (1)--(2), through lem-trf-log-regular-desingularization: monoidal resolution used for the regular modification of nodal pairs; ILO VIII 3.3.15, pp.109--110. Expose VIII, Theorems 3.1.27 and 3.2.20, and Remark 3.2.21, pp.102,106; construction in 3.2.19 over k=Q. Supporting source: Expose VIII, 3.1.17--3.1.23, Lemmas 3.2.9, 3.2.12 and 3.2.15, Lemma 3.2.17 and Corollary 3.2.18, printed pp.101--105; regular-over-Q application in 3.2.19, p.106. Re-split of lem-trf-toric-monoid-comparison, original step(s) 7: Saturated monomial blowup charts commute with free monoid products.",
+   "via": [
+    "lem-trf-toric-monoid-comparison",
+    "lem-trf-functorial-fan-desingularization",
+    "lem-trf-monoidal-resolution-tower",
+    "lem-trf-log-regular-desingularization",
+    "lem-trf-nodal-pair-projective-resolution",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-trf-saturated-blowup-product-charts",
+  "worker": "stage1",
+  "summary": "Kept the statement unchanged and wrote eight explicit steps. Reused toric chart normalization, finite saturation/localization, affine-spectrum fibre products and tensor definitions. Added only the unsharpened monoid-spectrum universal property, distinguished from the existing sharp-fan lemma. Checked zero ranks, units, principal and unit ideals and nonsaturated monoids; no Lean work.",
+  "blueprint": "Historical branch of lem-trf-local-term-locality through lem-trf-toric-monoid-comparison, original Step 7: product-chart smooth pullback. Realizes ILO VIII Remark 3.1.23 via generators, coordinatewise saturation, tensor inverses and compatibility formulas. The newest blueprint replaces the historical alteration route by contracting correspondences; this split supplies the assigned historical auxiliary lemma without changing the unit route."
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q06-76f50ecbd",
+  "group": "Q06",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q06-76f50ecbd (reviewer sub-agent of L); spot-checked: I read ILO VIII 3.1.2-3.1.8 (p.98-99), 3.1.17-3.1.23 (p.101), 3.2.1-3.2.3 and 3.2.14-3.2.18 (pp.103-105). The item's statement is unchanged from live. Its stmt_deps gained def-weil-pbc-module-tensor-product and def-pc-fibre-product; the statement uses both notions and both are Mathlib leaves, so I accept that. New node lem-trf-affine-monoscheme-hom-universal is ILO 3.1.8(i), restricted to fine P: the unsharpened spectrum with local stalk maps and no sharpness, natural in both arguments. It is statement-only, self-contained, with all three kinds of search logged and blueprint from/via correct. It does not duplicate lem-trf-affine-fan-hom-universal, which is 3.1.8(ii) with sharp stalks, nor the other sharp-fan nodes; I checked them with rg -L over dag/nodes. It is not a clause of the item, and I tested it with P=0, P=Z and T empty. Step checks: Step 1, generators of Q[I_Q-(a,0)] are C_a+H and Q^gp=G+Z^{r+t}. Step 2, H is saturated, so saturation is taken coordinatewise. Step 3, monoid-algebra tensor iso. Step 4, toric-blowup-chart-normalization applied to (Q, I_Q, E x 0); Q is fine with torsion-free Q^gp, and enlarging E covers every a in I. Step 5, F is balanced and FV=VF=id, and the affine fibre-product leaf supplies the projections. Step 6, the amalgamated sum M+_P(P+H)=M+H by (c,h)->f(c)+g(0,h), with existence and uniqueness checked; naturality of the new node then gives the monoscheme pullback, and all monoids used are fine. Step 7, overlaps at (b-a,0); fine-monoid-finite-saturation gives (C-S)^sat=C^sat-S, with its hypotheses met; explicit fraction formula. Step 8, base map, coaction degree (c+p,h), composite (c+p+p',h+u,h') recomputed by both routes, identity. Edge cases checked: r=t=0, I=P with P=<2,3> (saturation retained), P=N^2 charts, P with units. No SGA source. No off-unit tool uses beyond Mathlib leaves. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SaturatedBlowupProductCharts",
+  "declaration": "AlgebraicGeometry.BlowupProductCharts.saturatedBlowupProductCharts",
+  "declarations": [
+   "AlgebraicGeometry.BlowupProductCharts.FreeFactor",
+   "AlgebraicGeometry.BlowupProductCharts.extendedGenerators",
+   "AlgebraicGeometry.BlowupProductCharts.completionProduct",
+   "AlgebraicGeometry.BlowupProductCharts.ordinaryInclusion",
+   "AlgebraicGeometry.BlowupProductCharts.chart",
+   "AlgebraicGeometry.BlowupProductCharts.inclusion",
+   "AlgebraicGeometry.BlowupProductCharts.monomialIdeal",
+   "AlgebraicGeometry.BlowupProductCharts.ordinaryRing",
+   "AlgebraicGeometry.BlowupProductCharts.normalizedRing",
+   "AlgebraicGeometry.BlowupProductCharts.relativeTensor",
+   "AlgebraicGeometry.BlowupProductCharts.relativeTensorRing",
+   "AlgebraicGeometry.BlowupProductCharts.relativePure",
+   "AlgebraicGeometry.BlowupProductCharts.gradingCoaction",
+   "AlgebraicGeometry.BlowupProductCharts.IsLocalPullback",
+   "AlgebraicGeometry.BlowupProductCharts.Identification",
+   "AlgebraicGeometry.BlowupProductCharts.saturateInclusion",
+   "AlgebraicGeometry.BlowupProductCharts.RingCharts",
+   "AlgebraicGeometry.BlowupProductCharts.OverlapCompatibility",
+   "AlgebraicGeometry.BlowupProductCharts.IdentityCompatibility",
+   "AlgebraicGeometry.BlowupProductCharts.CompositeCompatibility",
+   "AlgebraicGeometry.BlowupProductCharts.saturatedBlowupProductCharts"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/SaturatedBlowupProductCharts.lean",
+  "statement": "theorem saturatedBlowupProductCharts (k P : Type u) [Field k] [CommMonoid P] (hP : FineFan.IsFine P) (hG : ∀ (g : Algebra.GrothendieckGroup P) (n : ℕ), 0 < n → g ^ n = 1 → g = 1) (I : SemigroupIdeal P) (hI : I.FG) (hne : (I : Set P).Nonempty) (E : Finset P) (hE : I = SemigroupIdeal.closure (E : Set P)) : (∀ (H : Type u) [CommMonoid H], (∃ r t : ℕ, Nonempty (H ≃* FreeFactor r t)) → (Function.Bijective (completionProduct P H)) ∧ (∀ a : P, a ∈ I → (FineFan.blowupChart (P × H) (extendedGenerators E) (a, 1)).map (completionProduct P H) = (FineFan.blowupChart P E a).prod ((⊤ : Submonoid H).map Algebra.GrothendieckGroup.of) ∧ FineFan.saturation ((FineFan.blowupChart P E a).prod ((⊤ : Submonoid H).map Algebra.GrothendieckGroup.of)) = (FineFan.saturatedChart P E a).prod ((⊤ : Submonoid H).map Algebra.GrothendieckGroup.of) ∧ Nonempty (RingCharts k P E a) ∧ Nonempty (RingCharts k (P × H) (extendedGenerators E) (a, 1))) ∧ ∃ D : ∀ (saturated : Bool) (a : P), a ∈ SemigroupIdeal.closure (E : Set P) → Identification k P H E a saturated, (∀ saturated : Bool, OverlapCompatibility k P H E saturated (D saturated)) ∧ (∀ (saturated : Bool) (a : P) (ha : a ∈ SemigroupIdeal.closure (E : Set P)), IdentityCompatibility k P H E a saturated (D saturated a ha))) ∧ (∀ (H H' : Type u) [CommMonoid H] [CommMonoid H'], (∃ r t : ℕ, Nonempty (H ≃* FreeFactor r t)) → (∃ r t : ℕ, Nonempty (H' ≃* FreeFactor r t)) → ∀ (a : P) (ha : a ∈ I) (saturated : Bool) (D : Identification k P H E a saturated) (D' : Identification k (P × H) H' (extendedGenerators E) (a, 1) saturated) (D'' : Identification k P (H × H') E a saturated), CompositeCompatibility k P H H' E a saturated D D' D'')",
+  "branch": "newtargets-dag",
+  "by": "Q66",
+  "date": "2026-10-23",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-58c1aa99b",
+  "group": "Q66",
+  "result": "pass",
+  "note": "Read node, report (Worker report + Second reading present), item module in full, FineFanBlowup/MonoschemeToricRealization decls used (IsFine, saturation, blowupChart, saturatedChart, chartInclusion, IsLocalMorphism, Monoscheme.affine, IsAffineMap), ChartAlgebra chartRing. All hypotheses (Field k, IsFine P, torsion-free completion, FG nonempty SemigroupIdeal with arbitrary finite E, H ≃ N^r×Z^t incl. zero ranks) and clauses (Q^gp bijection, chart and saturation equalities ∀a∈I, RingCharts pinned on scalars/base/fractions + normalization extension, relative tensor iso pinned e^c⊗e^(p,h)↦e^(c+p,h), monoscheme IsLocalPullback + scheme IsPullback, localization/overlap, base, torus degree, identity, composite) match; all Identification data pinned uniquely by ambient + monomial formulas. lean.statement verbatim; declarations list exact; no name clash. Dep §1(B) repairs are header-only (module/public import/@[expose]) vs side-live, records change only by/note; NN's identical 13:00Z conversion failed the 13:03Z global build (PowSaturated) in a race with the FsFaceSharpening re-landing; the snapshot FineFanBlowup now compiles clean (nt_compile 5.9 s), as do two legacy importers (AffineMonoschemeHomUniversal, ToricMonoidComparison) with the deps overlaid; full trio clean (item 35.2 s) in a probe with one extra, unneeded import. Advisories: IdentityCompatibility follows from the ambient field; chartRing owner def-nagata-blowup-chart-ring not in stmt_deps; proof-only nodes not imported (legacy). No fixes."
+ }
+}

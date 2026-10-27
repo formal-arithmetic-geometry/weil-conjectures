@@ -1,0 +1,255 @@
+{
+ "id": "lem-trf-cotangent-retract-scalar-cancellation",
+ "kind": "statement",
+ "title": "Free cotangent model and derived scalar cancellation along a ring retraction",
+ "statement": "Let $A\\to B$ and $j:B\\to D$, $r:D\\to B$ be homomorphisms of commutative rings with $rj=\\mathrm{id}_B$. Let $P_\\bullet=P^{\\mathrm{std}}_\\bullet(B/A)$ and $K=s(\\Omega^1_{P_\\bullet/A}\\otimes_{P_\\bullet}B)$ be the standard cotangent representative of [lem-trf-cotangent-resolution-coherence], with Kähler differentials as in [def-weil-pbc-kahler-differentials]. In the derived categories of ordinary modules [def-weil-abstract-derived-category], use derived scalar extension as the universal total left derived functor of termwise extension [def-weil-module-base-change]. The complex $K$ has free $B$-module terms, is zero in positive degrees, and is K-flat [def-pc-module-kflat-complex]. Its termwise scalar extension $K\\otimes_{B,j}D$ likewise has free $D$-module terms and is K-flat. The derived-to-ordinary comparison maps identify the iterated derived scalar extension $(L_{B/A}\\otimes_{B,j}^{\\mathbf L}D)\\otimes_{D,r}^{\\mathbf L}B$ with the localization of $(K\\otimes_{B,j}D)\\otimes_{D,r}B$. The degreewise formulas $(k\\otimes d)\\otimes b\\mapsto r(d)b\\,k$ and $k\\mapsto(k\\otimes1)\\otimes1$ define inverse $B$-linear chain isomorphisms between that complex and $K$. They induce a canonical isomorphism $(L_{B/A}\\otimes_{B,j}^{\\mathbf L}D)\\otimes_{D,r}^{\\mathbf L}B\\cong L_{B/A}$ in $D(B)$. No flatness of either ring map and no Tor-vanishing hypothesis are required.",
+ "source": {
+  "document": "literature/stacks-project/cotangent.tex",
+  "place": "Tag 08R1 (lemma-bootstrap), final displayed derived tensor cancellation, made explicit using the standard free differential model (Tags 08PM, 08PN, 08QI) as in returned Step 3."
+ },
+ "stmt_deps": [
+  "lem-trf-cotangent-resolution-coherence",
+  "def-weil-pbc-kahler-differentials",
+  "def-weil-abstract-derived-category",
+  "def-weil-module-base-change",
+  "def-pc-module-kflat-complex"
+ ],
+ "proof": [
+  {
+   "text": "By [lem-trf-cotangent-resolution-coherence], write $P_n=A[E_n]$ and $K^{-n}=\\Omega^1_{P_n/A}\\otimes_{P_n}B$, with zero positive terms; its localization is $L_{B/A}$. Apply [lem-weil-pbc-polynomial-ring-kahler-basis-any-variables] with $R=A$, $T=E_n$, $S=B$. After exchanging the two tensor factors, it gives the basis $e_x=\\mathrm dx\\otimes1$ of $K^{-n}$ for $x\\in E_n$. Thus each term is free, with no finiteness restriction on $E_n$.",
+   "uses": [
+    "lem-trf-cotangent-resolution-coherence",
+    "lem-weil-pbc-polynomial-ring-kahler-basis-any-variables",
+    "def-weil-pbc-module-tensor-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/cotangent.tex",
+    "place": "Tags 08PM (definition-standard-resolution), 08PN (definition-cotangent-complex-ring-map); algebra.tex Tag 00RX (lemma-differentials-polynomial-ring), arbitrary-variable form as in the cited node."
+   }
+  },
+  {
+   "text": "Put $E=K\\otimes_{B,j}D$, termwise as in [def-weil-module-base-change]. In each degree its basis consists of $e_x\\otimes1$. Explicitly, if $k=\\sum_x a_xe_x$ has finite support, send $k\\otimes d$ to the finite family $(j(a_x)d)_x$; its inverse sends $(d_x)_x$ to $\\sum_x e_x\\otimes d_x$. Bilinearity and the balancing relation make these inverse maps. The differential is $d_E(k\\otimes d)=d_K(k)\\otimes d$, so $E$ is also zero in positive degrees.",
+   "uses": [
+    "def-weil-module-base-change",
+    "def-weil-pbc-module-tensor-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/cotangent.tex",
+    "place": "Tag 08PN (definition-cotangent-complex-ring-map), term description; more-algebra.tex Tag 06Y6 (lemma-derived-base-change), termwise extension of a K-flat model."
+   }
+  },
+  {
+   "text": "Every free module is flat by [lem-weil-pbc-projective-module-flat]. Apply [lem-pc-module-bounded-flat-kflat] first over $B$ to $K$, then over $D$ to $E$. Both complexes are bounded above by degree $0$, so both are K-flat in the ordinary-module sense [def-pc-module-kflat-complex]. This uses flatness of the individual free terms, not flatness of $j$ or $r$.",
+   "uses": [
+    "lem-weil-pbc-projective-module-flat",
+    "lem-pc-module-bounded-flat-kflat",
+    "def-pc-module-kflat-complex"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 064K (lemma-derived-tor-quasi-isomorphism); free modules are flat as in algebra.tex Tag 051G (lemma-local-artinian-characterize-flat)."
+   }
+  },
+  {
+   "text": "Write $F_j$ and $F_r$ for the chosen universal derived scalar extensions and $Q_B,Q_D$ for localization. Apply [lem-pc-kflat-scalar-extension-counit] to $j$ and $K$, obtaining $c_j:F_j(Q_BK)\\xrightarrow{\\sim}Q_DE$. Apply it again to $r$ and $E$, obtaining $c_r:F_r(Q_DE)\\xrightarrow{\\sim}Q_B(E\\otimes_{D,r}B)$. Hence $c_r\\circ F_r(c_j)$ identifies the iterated derived scalar extension with $Q_B(E\\otimes_{D,r}B)$. These are precisely the derived-to-ordinary counits; the second application is justified by K-flatness over $D$, proved in Step 3.",
+   "uses": [
+    "lem-pc-kflat-scalar-extension-counit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 06Y6 (lemma-derived-base-change), proof computing LF on K-flat complexes; derived.tex Tag 06XN (lemma-find-existence-computes)."
+   }
+  },
+  {
+   "text": "In each degree define $u((k\\otimes d)\\otimes b)=r(d)b\\,k$ and $v(k)=(k\\otimes1)\\otimes1$. The tensor universal property [def-weil-pbc-module-tensor-product] applies: inner balancing follows from $r(j(a)d)b\\,k=r(d)b\\,(ak)$, using $rj=1$, and outer balancing follows from $r(dt)b=r(d)r(t)b$. Additivity and $B$-linearity of $u$ follow from the formula. For $v$, $(ak\\otimes1)\\otimes1=(k\\otimes j(a))\\otimes1=(k\\otimes1)\\otimes a$, proving $B$-linearity. Now $uv(k)=k$, while $vu((k\\otimes d)\\otimes b)=(r(d)b\\,k\\otimes1)\\otimes1=(k\\otimes1)\\otimes r(d)b=(k\\otimes d)\\otimes b$. Pure tensors generate, so both composites are identities. Finally $d_K(r(d)b\\,k)=r(d)b\\,d_K(k)$, and $d(v(k))=v(d_Kk)$. Thus $u,v$ are inverse chain maps.",
+   "uses": [
+    "def-weil-pbc-module-tensor-product",
+    "def-weil-module-base-change"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/cotangent.tex",
+    "place": "Tag 08R1 (lemma-bootstrap), last displayed cancellation; elementary tensor-balancing verification of that cancellation."
+   }
+  },
+  {
+   "text": "Apply the localization functor of [def-weil-abstract-derived-category] to the inverse chain maps of Step 5. Composing $Q_B(u)$ with the comparison $c_r\\circ F_r(c_j)$ of Step 4 gives the asserted isomorphism to $Q_BK=L_{B/A}$. The maps are specified by their formulas and the comparisons by the derived counits, so this is the canonical isomorphism for the specified derived scalar extensions. The proof has imposed neither a flatness condition on the ring maps nor a Tor-vanishing condition.",
+   "uses": [
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/cotangent.tex",
+    "place": "Tag 08R1 (lemma-bootstrap), final displayed equality, with its comparison made explicit."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-module-kflat-complex",
+  "def-weil-abstract-derived-category",
+  "def-weil-module-base-change",
+  "def-weil-pbc-module-tensor-product",
+  "lem-pc-kflat-scalar-extension-counit",
+  "lem-pc-module-bounded-flat-kflat",
+  "lem-trf-cotangent-resolution-coherence",
+  "lem-weil-pbc-polynomial-ring-kahler-basis-any-variables",
+  "lem-weil-pbc-projective-module-flat"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/cotangent.tex",
+  "place": "Tag 08R1 (lemma-bootstrap), final displayed cancellation; Tags 08PM and 08PN; algebra.tex Tag 00RX; more-algebra.tex Tags 064K and 06Y6. Explicit elementary balancing expands the final equality."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The standard cotangent complex L B over A has a bounded above free module representative K and for a split ring extension B to D to B its iterated derived extension of scalars is canonically isomorphic to L B over A",
+   "results": "8 hits; top=['Algebra.Extension.cotangentComplex', 'retractionKerCotangentToTensorEquivSection', 'Algebra.SubmersivePresentation.cotangentEquiv_apply', 'Algebra.Extension.cotangentComplex_mk', 'Algebra.PreSubmersivePresentation.cotangentComplexAux', 'Algebra.Extension.cotangentEquiv', 'Algebra.Extension.formallySmooth_iff_split_injection', 'Algebra.SubmersivePresentation.cotangentEquiv']; note=; digest=075b0111a7cfc3f1. Read the returned signatures. Mathlib Extension.cotangentComplex is the presentation linear map (Extension/Cotangent/Basic.lean:60), not the full derived cotangent complex. Tensor cancellation in TensorProduct/Tower.lean:436-459 is for individual modules, not derived scalar extensions of the standard complex.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "cotangent.*(resolution|[Kk][Ff]lat|retract)|derived.*scalar.*(comp|retract)",
+   "results": "0 hits; top=[]; note=; digest=4f53cda18c2baa0c. Read the returned signatures. Mathlib Extension.cotangentComplex is the presentation linear map (Extension/Cotangent/Basic.lean:60), not the full derived cotangent complex. Tensor cancellation in TensorProduct/Tower.lean:436-459 is for individual modules, not derived scalar extensions of the standard complex.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.DerivedCategory, ModuleCat.extensionOfScalars",
+   "results": "0 hits; top=[]; note=loogle: unknown identifier 'CategoryTheory.DerivedCategory'; digest=4f53cda18c2baa0c. Read the returned signatures. Mathlib Extension.cotangentComplex is the presentation linear map (Extension/Cotangent/Basic.lean:60), not the full derived cotangent complex. Tensor cancellation in TensorProduct/Tower.lean:436-459 is for individual modules, not derived scalar extensions of the standard complex.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived scalar extension cancellation for a free cotangent complex representative",
+   "results": "8 hits; top=['Algebra.Extension.Cotangent.map_mk', 'Algebra.Extension.cotangentComplexBaseChange_eq_lTensor_cotangentComplex', 'Algebra.Extension.tensorH1Cotangent', 'Algebra.Extension.H1Cotangent', 'Algebra.Extension.CotangentSpace.map_comp_cotangentComplex', 'Algebra.Generators.map_comp_cotangentCompAwaySec', 'KaehlerDifferential.cotangentComplexBaseChange.congr_simp', 'Algebra.Extension.cotangentComplex']; note=; digest=cadd85d8c467f6a6. Read the returned signatures. Mathlib Extension.cotangentComplex is the presentation linear map (Extension/Cotangent/Basic.lean:60), not the full derived cotangent complex. Tensor cancellation in TensorProduct/Tower.lean:436-459 is for individual modules, not derived scalar extensions of the standard complex.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Compute double derived scalar extension of the simplicial polynomial resolution cotangent complex along a ring retraction by the inverse chain maps (k tensor d) tensor b maps to r(d)b k and k maps to (k tensor 1) tensor 1",
+   "results": "8 hits; top=['Algebra.Extension.tensorCotangentInvFun', 'Algebra.Extension.tensorCotangent', 'KaehlerDifferential.cotangentComplexBaseChange', 'Algebra.Extension.tensorCotangentSpace', 'Algebra.Generators.H1Cotangent.δ', 'Algebra.H1Cotangent.δ', 'Algebra.Generators.H1Cotangent.δAux', 'Algebra.Extension.cotangentComplex']; note=; digest=d69f293ebc209464. Read the returned signatures. Mathlib Extension.cotangentComplex is the presentation linear map (Extension/Cotangent/Basic.lean:60), not the full derived cotangent complex. Tensor cancellation in TensorProduct/Tower.lean:436-459 is for individual modules, not derived scalar extensions of the standard complex.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "TensorProduct.AlgebraTensorModule.cancelBaseChange",
+   "results": "11 hits; top=['TensorProduct.AlgebraTensorModule.cancelBaseChange_self_eq_lid', 'TensorProduct.AlgebraTensorModule.cancelBaseChange', 'TensorProduct.AlgebraTensorModule.cancelBaseChange_tmul', 'TensorProduct.AlgebraTensorModule.cancelBaseChange_symm_tmul', 'TensorProduct.AlgebraTensorModule.ker_baseChange_comp_cancelBaseChange_symm', 'TensorProduct.AlgebraTensorModule.baseChange_comp_cancelBaseChange_symm_self', 'LinearMap.baseChange_baseChange', 'TensorProduct.AlgebraTensorModule.lTensor_comp_cancelBaseChange']; note=; digest=9a9f648d74dadbba. Read the returned signatures. Mathlib Extension.cotangentComplex is the presentation linear map (Extension/Cotangent/Basic.lean:60), not the full derived cotangent complex. Tensor cancellation in TensorProduct/Tower.lean:436-459 is for individual modules, not derived scalar extensions of the standard complex.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The full cotangent complex of a ring map is represented by a bounded above free complex and derived extension of scalars along a ring retraction cancels",
+   "results": "8 hits; top=['Algebra.Extension.cotangentComplex', 'Algebra.Extension.cotangentComplex_mk', 'Algebra.Extension.exact_cotangentComplex_toKaehler', 'Algebra.Extension.H1Cotangent', 'Algebra.SubmersivePresentation.cotangentEquiv_apply', 'retractionKerCotangentToTensorEquivSection', 'Algebra.PreSubmersivePresentation.cotangentComplexAux', 'Algebra.Extension.CotangentSpace.map_cotangentComplex']; note=; digest=24527f7c09c35cbe. Read hits: presentation cotangent linear maps and ordinary module scalar composition do not state the full derived cotangent assertion. Extension/Cotangent/Basic.lean:61; TensorProduct/Tower.lean:436-455; ModuleCat/ChangeOfRings.lean:954.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "TensorProduct.AlgebraTensorModule.cancelBaseChange",
+   "results": "11 hits; top=['TensorProduct.AlgebraTensorModule.cancelBaseChange_self_eq_lid', 'TensorProduct.AlgebraTensorModule.cancelBaseChange', 'TensorProduct.AlgebraTensorModule.cancelBaseChange_tmul', 'TensorProduct.AlgebraTensorModule.cancelBaseChange_symm_tmul', 'TensorProduct.AlgebraTensorModule.ker_baseChange_comp_cancelBaseChange_symm', 'TensorProduct.AlgebraTensorModule.baseChange_comp_cancelBaseChange_symm_self', 'LinearMap.baseChange_baseChange', 'TensorProduct.AlgebraTensorModule.lTensor_comp_cancelBaseChange']; note=; digest=9a9f648d74dadbba. Read hits: presentation cotangent linear maps and ordinary module scalar composition do not state the full derived cotangent assertion. Extension/Cotangent/Basic.lean:61; TensorProduct/Tower.lean:436-455; ModuleCat/ChangeOfRings.lean:954.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "cotangentComplex|IsKFlat|leftDerived [sub=RingTheory/Extension]",
+   "results": "17 hits; top=['Mathlib/RingTheory/Extension/ExtendScalars.lean', 'Mathlib/RingTheory/Extension/ExtendScalars.lean', 'Mathlib/RingTheory/Extension/ExtendScalars.lean', 'Mathlib/RingTheory/Extension/ExtendScalars.lean', 'Mathlib/RingTheory/Extension/ExtendScalars.lean', 'Mathlib/RingTheory/Extension/Cotangent/Free.lean', 'Mathlib/RingTheory/Extension/Cotangent/Free.lean', 'Mathlib/RingTheory/Extension/Cotangent/Basic.lean']; note=; digest=c91ce0f7a782d964. Read hits: presentation cotangent linear maps and ordinary module scalar composition do not state the full derived cotangent assertion. Extension/Cotangent/Basic.lean:61; TensorProduct/Tower.lean:436-455; ModuleCat/ChangeOfRings.lean:954.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Iterated total left derived extension of scalars on the full cotangent complex along a split ring inclusion and its retraction is canonically the identity",
+   "results": "8 hits; top=['ModuleCat.extendScalarsId', 'CategoryTheory.Functor.totalLeftDerived', 'ModuleCat.extendScalars_id_comp', 'ModuleCat.extendScalars_comp_id', 'AlgebraicTopology.DoldKan.splitMonoInclusionOfMooreComplexMap', 'retractionOfSectionOfKerSqZero', 'ModuleCat.ExtendRestrictScalarsAdj.unit', 'CategoryTheory.ShortComplex.Splitting.ext_r']; note=; digest=8365c6762b2c4775. Read hits: presentation cotangent linear maps and ordinary module scalar composition do not state the full derived cotangent assertion. Extension/Cotangent/Basic.lean:61; TensorProduct/Tower.lean:436-455; ModuleCat/ChangeOfRings.lean:954.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A bounded above complex of free modules computes derived base change for arbitrary ring maps and successive scalar extension along B to D to B with identity composite cancels",
+   "results": "8 hits; top=['IsBaseChange.of_comp', 'IsBaseChange.comp', 'IsBaseChange.comp_iff', 'KaehlerDifferential.exact_mapBaseChange_map', 'LinearMap.baseChange_baseChange', 'TensorProduct.AlgebraTensorModule.lTensor_comp_cancelBaseChange', \"KaehlerDifferential.moduleBaseChange'\", 'Module.Dual.baseChange_baseChange']; note=; digest=d9fd525c34d84187. Read hits: presentation cotangent linear maps and ordinary module scalar composition do not state the full derived cotangent assertion. Extension/Cotangent/Basic.lean:61; TensorProduct/Tower.lean:436-455; ModuleCat/ChangeOfRings.lean:954.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "KFlat|kFlat|extendScalars.*[Cc]omp|[Cc]omp.*extendScalars [sub=Algebra/Category/ModuleCat]",
+   "results": "10 hits; top=['Mathlib/Algebra/Category/ModuleCat/Pseudofunctor.lean', 'Mathlib/Algebra/Category/ModuleCat/Pseudofunctor.lean', 'Mathlib/Algebra/Category/ModuleCat/Pseudofunctor.lean', 'Mathlib/Algebra/Category/ModuleCat/Pseudofunctor.lean', 'Mathlib/Algebra/Category/ModuleCat/Monoidal/Adjunction.lean', 'Mathlib/Algebra/Category/ModuleCat/ChangeOfRings.lean', 'Mathlib/Algebra/Category/ModuleCat/ChangeOfRings.lean', 'Mathlib/Algebra/Category/ModuleCat/ChangeOfRings.lean']; note=; digest=558897c619065c1a. Read hits: presentation cotangent linear maps and ordinary module scalar composition do not state the full derived cotangent assertion. Extension/Cotangent/Basic.lean:61; TensorProduct/Tower.lean:436-455; ModuleCat/ChangeOfRings.lean:954.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-cotangent-bootstrap",
+  "date": "2026-10-22",
+  "group": "Q52"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Proof (1)--(2), semistable-alteration input in the nearby-cycle branch: ILO Exposé X, Theorem 3.4, Step 3, invoking Temkin 2010, Theorems 1.5 and 1.1 for a semistable multipointed modification. Temkin proof component: Marked dualizing line bundle and contracted-component degrees. Auxiliary input: Local complete-intersection determinant adjunction underlying the marked dualizing construction, before the marking is inserted. Supporting ring/sheaf input: Vanishing of the full cotangent complex for etale ring maps (Step 3 there): the Tor-vanishing bootstrap from the diagonal cotangent complex to $L_{B/A}$ (Stacks Tag 08R1). Re-split argument: Tag 08R1 (lemma-bootstrap), final displayed derived tensor cancellation, made explicit using the standard free differential model (Tags 08PM, 08PN, 08QI) as in returned Step 3.",
+   "via": [
+    "lem-trf-cotangent-bootstrap",
+    "lem-trf-etale-cotangent-vanishing",
+    "lem-trf-lci-cotangent-presentation",
+    "lem-trf-flat-lci-canonical-adjunction",
+    "lem-trf-marked-nodal-dualizing-degrees",
+    "lem-trf-temkin-stable-modification",
+    "lem-trf-stable-modification-flat-curve-pair",
+    "lem-trf-dejong-relative-marked-semistable",
+    "lem-trf-relative-marked-nodal-reduction",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-trf-cotangent-retract-scalar-cancellation",
+  "worker": "stage1",
+  "summary": "Q43: reused existing arbitrary-variable differential basis, free-flat, bounded-above K-flat and universal scalar-extension counit nodes. Six steps explicitly prove termwise freeness, both K-flat hypotheses, the two comparison isomorphisms, balancing, inverses and differential compatibility. No new nodes or statement changes.",
+  "blueprint": "Historical auxiliary chain in blueprint.from, supporting the final cancellation of cotangent-bootstrap (Stacks 08R1). Read latest lem-trf-local-term-locality.proof.md: its present (1)--(2) use contracting correspondences, so this inherited algebraic support chain is not claimed as a new realization of the current unit proof.",
+  "tool_uses": [
+   {
+    "node": "lem-pc-module-bounded-flat-kflat",
+    "why": "Ordinary module bounded-above flat criterion over B and D; no node of this trace-formula unit states it."
+   },
+   {
+    "node": "lem-pc-kflat-scalar-extension-counit",
+    "why": "Universal derived scalar-extension counits on K-flat ordinary module complexes for j and r; no node of this unit supplies this general comparison."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pc-module-bounded-flat-kflat",
+  "lem-pc-kflat-scalar-extension-counit"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q43-aa066986f",
+  "group": "Q43",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q43-aa066986f (reviewer sub-agent of L); spot-checked: I read the whole item and each cited statement, and found no fault to repair. Statement and stmt_deps are byte-identical to live, where the item is still unsplit; there is no repair or re-split note and no new nodes. Source check: Stacks 08R1 lemma-bootstrap, final display L⊗^L(B⊗B)⊗^L B = L_{B/A}, matches the item for a general retraction rj=id. The only citer, cotangent-bootstrap, uses (ι_1, μ) and needs exactly α: F(L⊗^L D) ≅ L_{B/A} in D(B). Step 1: coherence gives P_n = A[U P_{n-1}], and the basis leaf (any variable set, any P-algebra) gives free terms. Step 2: basis of K⊗_{B,j}D via (j(a_x)d)_x; I checked balancing and the inverse. Step 3: free ⇒ flat, and bounded-flat-kflat (= Stacks 064K) over B and over D, both complexes bounded above by 0. Step 4: kflat-scalar-extension-counit applied to (B,D,j,K) and (D,B,r,E), with no flatness of the ring maps; c_r∘F_r(c_j) is well typed. Step 5: I re-derived inner and outer balancing, B-linearity of v, vu = uv = id and the chain-map property. Step 6: Q_B is a functor, so the composite is the stated isomorphism. Edge cases: non-flat j (Z → Z×Z/2), non-flat r (k[ε] → k), zero rings, infinite bases. No duplicate in the DAG, including the sibling transitivity-vanishing node and lem-sfb-scalar-extension-kflat. Cycle check by script: none. Accepted tool_uses: lem-pc-module-bounded-flat-kflat and lem-pc-kflat-scalar-extension-counit, generic module homological algebra outside the sk-i-curve-zero route. Advisory: Step 3 names algebra Tag 051G as the source place, but that tag is the local-Artinian characterization; the cited node carries the fact."
+ }
+}

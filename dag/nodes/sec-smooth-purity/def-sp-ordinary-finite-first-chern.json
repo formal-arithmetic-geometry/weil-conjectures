@@ -1,0 +1,123 @@
+{
+ "id": "def-sp-ordinary-finite-first-chern",
+ "kind": "definition",
+ "title": "Canonical derived scalar Kummer Chern arrow",
+ "statement": "For a ring A killed by N, a scheme T on which N is invertible, and a Picard class M, define its derived Chern arrow as the inverse of the proved ordinaryFiniteClass bijection applied to the scalar Kummer class. The bijection determines the arrow uniquely. Its ordinary class is the Kummer class; equality is detected by that class; tensor products give sums; and normalized pullback commutes with this arrow [lem-sp-ordinary-finite-class-arbitrary-base, def-asd-ordinary-finite-p1-kummer-class, def-asd-ordinary-finite-p1-arrows, lem-sp-ordinary-finite-chern-pullback].",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-tower-geometric/sk-prop-sp-tower-geometric-p1.proof.md",
+  "place": "Levelwise finite diagonal calculation, expanded in lem-sp-finite-p1-diagonal-kummer-component-formula"
+ },
+ "stmt_deps": [
+  "def-asd-ordinary-finite-p1-kummer-class",
+  "def-asd-ordinary-finite-p1-arrows",
+  "lem-sp-ordinary-finite-class-arbitrary-base"
+ ],
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sp-tower-geometric",
+ "proof": [
+  {
+   "text": "Bundle the proved ordinaryFiniteClass bijection on the named degree-zero objects as ordinaryFiniteClassEquiv. Define the canonical Chern arrow by its inverse on the scalar Kummer class. Inverse cancellation proves the class formula; injectivity proves uniqueness. Additivity of the Ext equivalence, exact-functor map and Yoneda precomposition gives additivity of realization. Kummer additivity then gives the tensor-product formula. Apply scalar Chern pullback naturality and uniqueness to obtain the derived pullback equation.",
+   "uses": [
+    "def-asd-ordinary-finite-p1-kummer-class",
+    "def-asd-ordinary-finite-p1-arrows",
+    "lem-sp-ordinary-finite-class-arbitrary-base",
+    "lem-sp-ordinary-finite-chern-pullback"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-tower-geometric/sk-prop-sp-tower-geometric-p1.proof.md",
+    "place": "Levelwise finite diagonal calculation, expanded in lem-sp-finite-p1-diagonal-kummer-component-formula"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-asd-ordinary-finite-p1-kummer-class",
+  "def-asd-ordinary-finite-p1-arrows",
+  "lem-sp-ordinary-finite-class-arbitrary-base",
+  "lem-sp-ordinary-finite-chern-pullback"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-tower-geometric/sk-prop-sp-tower-geometric-p1.proof.md",
+  "place": "Levelwise finite diagonal calculation, expanded in lem-sp-finite-p1-diagonal-kummer-component-formula"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The Kummer Chern class of the diagonal of the projective line over any base is the sum of the two hyperplane Chern classes",
+   "results": "Only unrelated elliptic-curve/projectivization results.",
+   "date": "2026-10-26",
+   "verdict": "No matching theorem."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.homEquiv_naturality_left",
+   "results": "CategoryTheory.Adjunction.homEquiv_naturality_left.",
+   "date": "2026-10-26",
+   "verdict": "Available for adjunct algebra, not the geometric or scalar Kummer comparisons."
+  },
+  {
+   "tool": "grep",
+   "query": "ordinaryFiniteClass|diagonal.*chern|chern.*diagonal",
+   "results": "No Mathlib match. Local source search found arbitrary-base bijectivity and supported normalization, but not the diagonal Picard identity or the normalized scalar Kummer pullback formula.",
+   "date": "2026-10-26",
+   "verdict": "Use the existing comparison and normalization; separate the two missing steps."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.FiniteP1DiagonalKummerComponentFormula",
+  "date": "2026-10-26",
+  "group": "F1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sp-finite-p1-diagonal-kummer-component-formula",
+   "place": "Canonical derived scalar Kummer Chern arrow",
+   "via": []
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.OrdinaryFiniteFirstChern",
+  "file": "lean/Sheaf/AlgebraicGeometry/OrdinaryFiniteFirstChern.lean",
+  "declaration": "AlgebraicGeometry.Etale.ordinaryFiniteFirstChern",
+  "declarations": [
+   "AlgebraicGeometry.Etale.ordinaryFiniteClassEquiv",
+   "AlgebraicGeometry.Etale.ordinaryFiniteClassEquiv_apply",
+   "AlgebraicGeometry.Etale.ordinaryFiniteFirstChern",
+   "AlgebraicGeometry.Etale.ordinaryFiniteFirstChern_class",
+   "AlgebraicGeometry.Etale.ordinaryFiniteFirstChern_unique",
+   "AlgebraicGeometry.Etale.ordinaryFiniteFirstChern_mul",
+   "AlgebraicGeometry.Etale.ordinaryFiniteFirstChern_pullback"
+  ],
+  "statement": "def ordinaryFiniteFirstChern (A : Type (u + 1)) [CommRing A] (N : ℕ)\n    (hA : (N : A) = 0) (T : Scheme.{u}) (hT : IsUnit (N : Γ(T, ⊤))) (M : T.Pic) :\n    ordinaryFiniteUnit A T ⟶ (ordinaryFiniteLine A N hA T)⟦(2 : ℤ)⟧",
+  "branch": "sheaf-dag",
+  "by": "F1",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-efdbd",
+  "group": "F1",
+  "result": "fix",
+  "landing": "20261026T222636-L-676965",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-efdbd",
+  "group": "F1",
+  "result": "fix",
+  "landing": "20261026T222636-L-676965",
+  "kind": "interface",
+  "note": "independent cc review: item proof + 4 new modules + 4 adapted modules against published clone, DAG nodes and 6 change records; delivered set built in sandbox and 7 direct importers + 4 exposed transitive users (SfP1IntegralTransport, SfP1ChartExchange, SfP1ChartMapComposition, TowerP1KernelScalarData) compiled against it, all OK; #print axioms"
+ }
+}

@@ -1,0 +1,166 @@
+{
+ "id": "lem-sf-integral-projection-open-tensor-coordinates",
+ "kind": "statement",
+ "title": "Open tensor and pullback-compositor coefficient square before proper image",
+ "statement": "Fix a finite-field datum D, its coefficient datum C, a finite extension E of Q_l, n >= 1, and a normalized operation datum S at (E,n) [def-fix-six-functor-datum]. Assume l is invertible in D.k. Let o be simultaneous-system operations and z their specified realization data. Let f:X -> Y be a morphism of finite-type spaces over D.k and c=(i:X -> Z,g:Z -> Y) its compactification. Put A=S.higher.integralExchange(identitySquare(f,c)); write red_T for the specified reduction functor and T_T for the system tensor [def-sf-integral-projection-coordinate-data]. Use barTensorReduction, properPullReduction, directReduction and openReduction of [def-sf-integral-projection-middle-map]. Assume f is quasi-compact. Let K and L be constructible derived-complete integral objects on X and Y, with L of uniform finite-reduction Tor amplitude. Put W=S.higher.integralTensor_X(K,S.higher.integral.pull(f)(L)). Let e:A.stage.tensorX(K,A.stage.pull(L))=W be the equality from A.tensorX and A.pull, and q=A.stage.openProjection(K,L) followed by A.stage.openExtension(eqToHom(e)). The composite barTensorReduction(openExtension K,properPull L).hom, T_Z(openReduction K,properPullReduction L), z.openComparisons.projection(i)(red_X K,pull_g red_Y L), and system i-extension of T_X(id, z.compositors.pullComp(i,g).inv followed by transport through c.comm) equals red_Z(q) followed by openReduction(W) followed by system i-extension of inputReduction(f,K,L).inv. Both arrows end at system i-extension of T_X(red_X K,pull_f red_Y L). Neither proper direct image nor compact support occurs in this equality.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-prop-sf-pf-coherence/prop-sf-pf-coherence.proof.md",
+  "place": "Compactification-independence sentence, compatibility with counits and j_!, together with naturality. The local open and one-input support portions of lem-sf-integral-projection-open-factor-reduction."
+ },
+ "stmt_deps": [
+  "def-fix-six-functor-datum",
+  "def-sf-operation-stages",
+  "def-sf-integral-projection-middle-map",
+  "def-sf-integral-projection-coordinate-data",
+  "def-sf-integral-projection-local-factors"
+ ],
+ "proof": [
+  {
+   "text": "Construct the natural reduction/open isomorphism from the actual scalar mate. Use the open-adjunction unit and counit squares and the inverse pullback/tensor square. Tensor naturality pastes these with the input pullback-factorization square. Transpose under the system open adjunction to obtain the inverse projection square, then cancel the two projection isomorphisms to obtain the forward normalized square.",
+   "uses": [
+    "def-sf-integral-open-projection-coefficient-data",
+    "lem-sf-integral-open-adjunction-reduction",
+    "lem-sf-integral-open-pull-tensor-reduction",
+    "lem-sf-integral-datum-pull-composition-reduction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-prop-sf-pf-coherence/prop-sf-pf-coherence.proof.md",
+    "place": "Compactification-independence sentence, compatibility with counits and j_!, together with naturality. The local open and one-input support portions of lem-sf-integral-projection-open-factor-reduction."
+   }
+  },
+  {
+   "text": "Apply the normalized square to identitySquare(f,c). The proved generic equality-transport lemma carries the stage tensor, open-extension and proper-pull functors to the actual datum functors. Rewrite the component formulas for extensionComparison and pullComparison, and the input tensor/pullback comparison. Functoriality of equality transports cancels the normalized projection endpoint casts. Expand the inverse system compositor and compactification transport to obtain precisely the displayed openMap square.",
+   "uses": [
+    "def-sf-integral-projection-coordinate-data",
+    "def-sf-integral-projection-middle-map",
+    "def-sf-integral-projection-local-factors",
+    "def-sf-integral-proper-projection-coordinates"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-prop-sf-pf-coherence/prop-sf-pf-coherence.proof.md",
+    "place": "Compactification-independence sentence, compatibility with counits and j_!, together with naturality. The local open and one-input support portions of lem-sf-integral-projection-open-factor-reduction."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sf-integral-open-projection-coefficient-data",
+  "lem-sf-integral-open-adjunction-reduction",
+  "lem-sf-integral-open-pull-tensor-reduction",
+  "lem-sf-integral-datum-pull-composition-reduction",
+  "def-sf-integral-projection-coordinate-data",
+  "def-sf-integral-projection-middle-map",
+  "def-sf-integral-projection-local-factors",
+  "def-sf-integral-proper-projection-coordinates"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-prop-sf-pf-coherence/prop-sf-pf-coherence.proof.md",
+  "place": "Explicit adjunction transposition, inverse-square cancellation, and equality-transport assembly in X5."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Scalar extension commutes with open extension by zero and their adjunction units and counits",
+   "results": "Eight ModuleCat scalar extension/restriction facts (unit, counit and Hom equivalence) and unrelated Unitization result. No normalized geometric coefficient square.",
+   "date": "2026-10-27",
+   "verdict": "General scalar adjunction tools only; no matching statement."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "compatibility of projection formula open immersion with scalar reduction adjunction mates",
+   "results": "Eight scheme/projective spectrum/restriction facts; no completed open tensor coefficient normalization. Loogle CategoryTheory.Adjunction.homEquiv additionally found generic Hom naturality used in the assembly.",
+   "date": "2026-10-27",
+   "verdict": "No theorem for the prescribed completed/system coordinates."
+  },
+  {
+   "tool": "grep",
+   "query": "projection.*[Rr]eduction|[Rr]eduction.*[Pp]rojection",
+   "results": "msearch Mathlib: zero hits. Local library inspection found GeneratorReductionStatement and OpenTensorReductionSquare in ordinary/completed expression coordinates, plus IntegralSupportReductionNormalization (invertibility and refinement only), none with these local endpoint maps. Blueprint search open tensor reduction and support factorization: zero exact blueprint matches.",
+   "date": "2026-10-27",
+   "verdict": "No duplicate. The ordinary generator theorem is a proof dependency, not an identification of these datum coordinates."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.IntegralProjectionOpenFactorReduction",
+  "date": "2026-10-27",
+  "group": "U9"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-fix-weil-operations",
+   "place": "Proof, paragraph beginning \"For an admissible exceptional adjoint\", sentence \"the projection transformation of [def-exchange-projection] is a composite of precisely these tensor and counit maps, hence is equivariant as well\": the Frobenius-transported compactification differs from the chosen one, so the two projection composites must be compared through the refinement comparison. Individual-arrow integral system realization of these tensor and counit maps, before their compactification comparison square is deduced. The single-compactification projection-generator square, without the refinement assertions. Separate proper counit factor and open tensor factor. Local open tensor square before proper image and one-input support factorization.",
+   "via": [
+    "lem-sf-integral-projection-open-factor-reduction",
+    "lem-sf-integral-projection-reduction-normalization",
+    "lem-sf-integral-projection-system-coordinates",
+    "lem-sf-integral-projection-refinement-square",
+    "lem-fix-projection-compactification-comparison"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-rem-sf-pf-done",
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.IntegralProjectionOpenTensorCoordinates",
+  "file": "lean/Sheaf/Paper/IntegralProjectionOpenTensorCoordinates.lean",
+  "declaration": "WeilConjectures.FixProjectionCompactification.integralProjectionOpenTensorCoordinates",
+  "statement": "theorem integralProjectionOpenTensorCoordinates\n    (D : FiniteFieldDatum.{u}) (C : D.CoefficientDatum)\n    (E : Type u) [Field E] [Algebra (Padic C.l) E]\n    [FiniteDimensional (Padic C.l) E] (n : ℕ) (hn : 1 ≤ n)\n    (S : SixFunctorOperationDatum D C E n hn) (hl : IsUnit (C.l : D.k))\n    (o : Operations C.l E) (z : Realizations C.l E D o)\n    {X Y : SixFunctorSpace D} (f : X ⟶ Y)\n    [QuasiCompact f.hom.left]\n    (c : Compactification f.hom.left)\n    (K : sfIntegralConstructibleCategory C.l E X.obj.left)\n    (L : sfIntegralConstructibleCategory C.l E Y.obj.left)\n    (hL : finiteTorConstructibleIntegral C.l E Y.obj.left L.obj) :\n    let A := S.higher.integralExchange (identitySquare f c)\n    let W := ((S.higher.integralTensor X).obj K).obj ((S.higher.integral.pull f).obj L)\n    let q := ProjectionFactors.openMap A K L\n    (ProjectionFactors.barTensorReduction D C E n hn S hl f c\n        (A.stage.openExtension.obj K) (A.stage.properPull.obj L)).hom ≫\n      (calculus C.l E c.Z).systemClosed.tensor.map\n        (Prod.mkHom (ProjectionFactors.openReduction D C E n hn S hl o z f c K)\n          (ProjectionFactors.properPullReduction D C E n hn S hl o z f c L).hom) ≫\n      (z.openComparisons.projection c.i).hom.app\n        ((calculus C.l E X.obj.left).reduction.obj K.obj,\n          (pull C.l E c.g).obj ((calculus C.l E Y.obj.left).reduction.obj L.obj)) ≫\n      (Operations.shriek C.l E o c.i).map\n        ((calculus C.l E X.obj.left).systemClosed.tensor.map\n          (Prod.mkHom (𝟙 _)\n            ((z.compositors.pullComp c.i c.g).inv.app\n                ((calculus C.l E Y.obj.left).reduction.obj L.obj) ≫\n              eqToHom (congrArg (fun g : X.obj.left ⟶ Y.obj.left ↦\n                (pull C.l E g).obj\n                  ((calculus C.l E Y.obj.left).reduction.obj L.obj)) c.comm.symm)))) =\n      (calculus C.l E c.Z).reduction.map q.hom ≫\n        ProjectionFactors.openReduction D C E n hn S hl o z f c W ≫\n        (Operations.shriek C.l E o c.i).map\n          (Coordinates.inputReduction D C E S.higher hl o z f K L).inv",
+  "branch": "sheaf-dag",
+  "by": "U9",
+  "date": "2026-10-27"
+ },
+ "split_report": {
+  "summary": "Open tensor and pullback-compositor coefficient square before proper image. Strictly a part of the parent argument; no restatement or conjugation of its entire square.",
+  "blueprint": "Counit and open-factor comparisons of prop-sf-pf-coherence, unchanged unit route.",
+  "tool_uses": [
+   {
+    "node": "lem-sf-generator-reduction-coherence",
+    "why": "Generic strict coefficient/complete-domain tool for the supplied operation models; replaces no unit statement or step."
+   },
+   {
+    "node": "lem-sf-open-reconstruction-effectivity",
+    "why": "Generic strict coefficient/complete-domain tool for the supplied operation models; replaces no unit statement or step."
+   },
+   {
+    "node": "lem-coef-integral-residue-tor",
+    "why": "Generic strict coefficient/complete-domain tool for the supplied operation models; replaces no unit statement or step."
+   }
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U9",
+  "result": "pass",
+  "landing": "20261027T012953-L-2353578",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "X5",
+  "result": "pass",
+  "landing": "20261027T050654-L-252705",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

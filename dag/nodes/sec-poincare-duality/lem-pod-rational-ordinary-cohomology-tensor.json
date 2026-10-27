@@ -1,0 +1,280 @@
+{
+ "id": "lem-pod-rational-ordinary-cohomology-tensor",
+ "kind": "statement",
+ "title": "Canonical scalar comparison for rational ordinary cohomology",
+ "statement": "Fix the finite-field datum $p,a,q,k_0,k$ of [def-weil-finite-field-fiber], a prime $\\ell\\ne p$, a finite extension $E/\\mathbf Q_\\ell$ with valuation ring $V=\\mathcal O_E$, uniformizer $\\varpi$, and $A_n=V/\\varpi^n$ for $n\\geq1$ [def-weil-l-adic-coefficient-extension]. Let $Y$ be a separated finite-type $k$-scheme [def-weil-scheme-morphism-properties], put $s=\\operatorname{Spec}k$ and $f:Y\\to s$, and use the small pro-etale sites [def-weil-pbc-proetale-site]. Let $K$ be an object of $D^b_c(Y,V)$ [def-weil-derived-complete-integral-detailed], and write $K_E$ for its image in the rationalized category [def-weil-rationalization-karoubi]. Use the integral and rational direct images [def-weil-derived-direct-image], the point evaluation of [def-weil-finite-coefficient-point] and ordinary cohomology of [def-weil-ordinary-compact-cohomology]. For every integer $i$ the canonical cycle-tensor map followed by that point-evaluation comparison is an $E$-linear isomorphism $\\tau^i_K:H^i(Y,K)\\otimes_V E\\xrightarrow{\\sim}H^i(Y,K_E)$. If $C^\\bullet$ represents the integral point complex, $z\\in\\ker(d^i:C^i\\to C^{i+1})$, and $\\lambda\\in E$, then $\\tau^i_K([z]\\otimes\\lambda)=[z\\otimes\\lambda]$ in the rational point complex $C^\\bullet\\otimes_V E$. The maps are natural in integral coefficient morphisms. For $K=\\widehat V_Y$ [def-weil-completed-integral-coefficients], a degree-zero class $e$ therefore satisfies $\\tau^0_K(e\\otimes1)=[e\\otimes1]$; when $e$ is the integral unit class, this is the rational unit class specified by rational point evaluation. There is no connectedness, properness, smoothness, or prior computation of $H^0(Y,K)$ among the hypotheses.",
+ "source": {
+  "document": "literature/milne-lectures-on-etale-cohomology_LEC.pdf",
+  "place": "Printed p. 126, Sheaves of Q_l-modules; Stacks algebra.tex Tag 00HT, lemma-flat-localization, and Tag 00HD, lemma-flat (exact tensor); point evaluation item (3)."
+ },
+ "stmt_deps": [
+  "def-weil-finite-field-fiber",
+  "def-weil-l-adic-coefficient-extension",
+  "def-weil-scheme-morphism-properties",
+  "def-weil-pbc-proetale-site",
+  "def-weil-derived-complete-integral-detailed",
+  "def-weil-rationalization-karoubi",
+  "def-weil-derived-direct-image",
+  "def-weil-finite-coefficient-point",
+  "def-weil-ordinary-compact-cohomology",
+  "def-weil-completed-integral-coefficients"
+ ],
+ "proof": [
+  {
+   "text": "Apply [lem-sf-integral-direct-image-constructible] to $f:Y\\to s$ over $k$: both schemes are finite type over $k$ and $\\ell$ is invertible since $\\ell\\ne p$. Thus $L=Rf_*K$ lies in $D^b_c(s,V)$. Choose an algebraic closure of $\\mathbf Q_\\ell$ containing $E$, as permitted in the coefficient conventions. The strict direct image is $V$-linear by [lem-sf-strict-direct-image-scalar-comparison], applied to the same separated finite-type morphism. Its rationalization therefore sends an integral morphism $u$ to $Rf_*(u)\\otimes1$, with the same object $L$, by [def-weil-derived-direct-image, def-weil-rationalization-karoubi]. Choose any module complex $C^\\bullet$ representing $\\operatorname{Fib}_s L$. By [def-weil-finite-coefficient-point] (2)-(3) the rational point complex is represented by $C^\\bullet\\otimes_V E$, with integral morphisms extended termwise. Hence [def-weil-ordinary-compact-cohomology] identifies the two cohomology groups in the assertion with $H^i(C^\\bullet)$ and $H^i(C^\\bullet\\otimes_V E)$.",
+   "uses": [
+    "lem-sf-integral-direct-image-constructible",
+    "lem-sf-strict-direct-image-scalar-comparison",
+    "def-weil-derived-direct-image",
+    "def-weil-rationalization-karoubi",
+    "def-weil-finite-coefficient-point",
+    "def-weil-ordinary-compact-cohomology"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-def-sf-admissible/def-weil-finite-coefficient-point.md",
+    "place": "Point-evaluation equivalences in the blueprint snapshot; explicit evaluation construction in the live DAG statement def-weil-finite-coefficient-point, items (2)-(3)"
+   }
+  },
+  {
+   "text": "By [lem-weil-l-adic-extension-integers-dvr] (1), $E$ is the fraction field of the domain $V$. For $T=V\\setminus\\{0\\}$, the inclusion $V\\to E$ satisfies the three localization conditions of [lem-weil-pbc-localization-flat]: nonzero denominators become units, every field element is a fraction, and an element of $V$ mapping to zero already vanishes. That node gives flatness of $E$ over $V$. Consequently [lem-weil-pbc-flat-tensor-exact] applies to every exact sequence of $V$-modules below.",
+   "uses": [
+    "lem-weil-l-adic-extension-integers-dvr",
+    "lem-weil-pbc-localization-flat",
+    "lem-weil-pbc-flat-tensor-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tags 00HT (lemma-flat-localization), 00HD (lemma-flat)"
+   }
+  },
+  {
+   "text": "Write $Z^i=\\ker d^i$, $B^i=\\operatorname{im}d^{i-1}$. Tensor the sequences $0\\to Z^i\\to C^i\\to B^{i+1}\\to0$, $0\\to B^{i+1}\\to C^{i+1}$ and $0\\to B^i\\to Z^i\\to H^i(C^\\bullet)\\to0$. They stay exact by [lem-weil-pbc-flat-tensor-exact] (including surjectivity by applying it to the last three terms ending in zero). The differential after tensoring factors through the surjection onto $B^{i+1}\\otimes_V E$ and its injection into $C^{i+1}\\otimes_V E$. Thus its kernel is $Z^i\\otimes_V E$, and its boundaries are $B^i\\otimes_V E$ inside that kernel. The third sequence identifies their quotient with $H^i(C^\\bullet)\\otimes_V E$. The induced inverse quotient identification is $[z]\\otimes\\lambda\\mapsto[z\\otimes\\lambda]$: replacing $z$ by $z+d w$ changes the image by $d(w\\otimes\\lambda)$. This is the specified canonical map, and it is $E$-linear because multiplication acts on the second tensor factor.",
+   "uses": [
+    "lem-weil-pbc-flat-tensor-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tags 00HT (lemma-flat-localization), 00HD (lemma-flat)"
+   }
+  },
+  {
+   "text": "For a chain map $h:C^\\bullet\\to D^\\bullet$, the two naturality composites send $[z]\\otimes\\lambda$ to $[h(z)\\otimes\\lambda]$; pure tensors generate, so the composites agree. The isomorphism in Step 3 implies that tensoring any quasi-isomorphism is again a quasi-isomorphism. By the localization definition [def-weil-abstract-derived-category], this naturality identity passes to derived morphisms: it holds for chain maps, therefore for inverses of quasi-isomorphisms, and hence for all composites generating the localization. It also shows independence of the representing complex. Combine with the functorial point identifications in Step 1 to obtain the required maps $\\tau^i_K$ and their naturality in integral coefficient morphisms.",
+   "uses": [
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-lectures-on-etale-cohomology_LEC.pdf",
+    "place": "Printed p. 126, Sheaves of Q_l-modules; cycle-level elaboration using point evaluation item (3)"
+   }
+  },
+  {
+   "text": "For $K=\\widehat V_Y$ [def-weil-completed-integral-coefficients], insert $i=0$ and $\\lambda=1$ in Step 3 to obtain $\\tau^0_K(e\\otimes1)=[e\\otimes1]$. In particular the integral unit class is represented by the coefficient section $1$; its rational point-evaluation class is, by item (3) of [def-weil-finite-coefficient-point], the class of that same section tensored with $1$. This proves the unit normalization without computing the group $H^0(Y,K)$ or assuming connectedness, properness or smoothness.",
+   "uses": [
+    "def-weil-completed-integral-coefficients",
+    "def-weil-finite-coefficient-point"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-def-sf-admissible/def-weil-finite-coefficient-point.md",
+    "place": "Point-evaluation equivalences in the blueprint snapshot; explicit evaluation construction in the live DAG statement def-weil-finite-coefficient-point, items (2)-(3)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sf-integral-direct-image-constructible",
+  "lem-sf-strict-direct-image-scalar-comparison",
+  "def-weil-derived-direct-image",
+  "def-weil-rationalization-karoubi",
+  "def-weil-finite-coefficient-point",
+  "def-weil-ordinary-compact-cohomology",
+  "lem-weil-l-adic-extension-integers-dvr",
+  "lem-weil-pbc-localization-flat",
+  "lem-weil-pbc-flat-tensor-exact",
+  "def-weil-abstract-derived-category",
+  "def-weil-completed-integral-coefficients"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/milne-lectures-on-etale-cohomology_LEC.pdf",
+  "place": "Printed p. 126, Sheaves of Q_l-modules; cycle-level elaboration using point evaluation item (3); full cycle-boundary argument from Stacks Tags 00HT and 00HD"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Rationalization integral pro-etale cohomology point evaluation scalar extension fraction field degree zero unit normalization",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"galLift\", \"module\": \"Mathlib/RingTheory/IntegralClosure/IntegralRestrict\", \"type\": \"{A : Type u_1} →\\n  (K : Type u_2) →\\n    (L : Type u_3) →\\n      (L₂ : Type u_4) →\\n        {B : Type u_6} →\\n          {B₂ : Type u_7} →\\n            [inst : CommRing A] →\\n              [inst_1 : CommRing B] →\\n                [inst_2 : CommRing B₂] →\\n                  [inst_3 : Algebra A B] →\\n          \", \"doc\": \"Given commutative rings $A$, $B$, and $B_2$, fields $K$, $L$, and $L_2$ with $K$ as the fraction field of $A$, and $L$, $L_2$ as algebraic extensions of $K$, if $B$ and $B_2$ are the integral closures\"}\n  {\"name\": \"groupCohomology.exists_mul_galRestrict_of_norm_eq_one\", \"module\": \"Mathlib/RepresentationTheory/Homological/GroupCohomology/Hilbert90\", \"type\": \"∀ {K L : Type} [inst : Field K] [inst_1 : Field L] [inst_2 : Algebra K L] [FiniteDimensional K L]\\n  [inst_4 : IsGalois K L] [IsCyclic Gal(L/K)] {g : Gal(L/K)} {A : Type u_1} {B : Type u_2} [inst_6 : CommRing A]\\n  [inst_7 : CommRing B] [inst_8 : Algebra A B] [inst_9 : Algebra A L] [inst_10 : Algebra \", \"doc\": \"In a cyclic Galois extension $ L/K $ with generator $ g $, if an element $ \\\\eta \\\\in B $ (the integral closure of $ A $ in $ L $) satisfies $ \\\\operatorname{Norm}_{L/K}(\\\\eta) = 1 $, then there exists a \"}\n  {\"name\": \"StandardEtalePresentation.toPresentation_σ'\", \"module\": \"Mathlib/RingTheory/Etale/StandardEtale\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S]\\n  (P : StandardEtalePresentation R S) (x : S), P.toPresentation.σ' x = ⋯.choose\", \"doc\": \"For any commutative rings $ R $ and $ S $ with an $ R $-algebra structure on $ S $, and a standard étale presentation $ P $ of $ S $ over $ R $, the function $ \\\\sigma' $ associated to the presentation\"}\n  {\"name\": \"StandardEtalePair.homEquiv_symm_apply\", \"module\": \"Mathlib/RingTheory/Etale/StandardEtale\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S]\\n  (P : StandardEtalePair R) (x : { x // P.HasMap x }), P.homEquiv.symm x = P.lift ↑x ⋯\", \"doc\": \"For a commutative ring $ R $, a standard étale pair $ P $ over $ R $, and an $ R $-algebra $ S $, the inverse of the equivalence $ \\\\text{homEquiv} $ maps an element $ x \\\\in S $ satisfying $ P.\\\\text{Ha\"}\n  {\"name\": \"StandardEtalePresentation.toPresentation_algebra_smul\", \"module\": \"Mathlib/RingTheory/Etale/StandardEtale\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S]\\n  (P : StandardEtalePresentation R S) (c : MvPolynomial (Fin 2) R) (x : S),\\n  SMul.smul c x =\\n    (MvPolynomial.aeval\\n          ((⇑(P.lift P.x ⋯) ∘\\n              ⇑P.equivMvPolynomialQuotient.symm ∘\\n     \", \"doc\": \"Let $R$ and $S$ be commutative rings, with $S$ an $R$-algebra. A standard étale presentation $P$ of $S$ (determined by an element $x \\\\in S$ and polynomials $f, g \\\\in R[T]$) induces a module structure \"}\n  {\"name\": \"Algebra.etaleLocus_eq_compl_support\", \"module\": \"Mathlib/RingTheory/Etale/Locus\", \"type\": \"∀ {R : Type u_1} {A : Type u_2} [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A],\\n  Algebra.etaleLocus R A = (Module.support A Ω[A⁄R])ᶜ ∩ (Module.support A (Algebra.H1Cotangent R A))ᶜ\", \"doc\": \"The étale locus of an $ R $-algebra $ A $ is equal to the intersection of the complements of the supports of the module of Kähler differentials $ \\\\Omega_{A/R} $ and the first cotangent cohomology modu\"}\n  {\"name\": \"StandardEtalePair.homEquiv_apply_coe\", \"module\": \"Mathlib/RingTheory/Etale/StandardEtale\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S]\\n  (P : StandardEtalePair R) (f : P.Ring →ₐ[R] S), ↑(P.homEquiv f) = f P.X\", \"doc\": \"For a standard étale pair $ P $ over a commutative ring $ R $, and an $ R $-algebra homomorphism $ f: P.\\\\text{Ring} \\\\to S $, the equivalence $ P.\\\\text{homEquiv} $ sends $ f $ to the element $ f(X) \\\\in\"}\n  {\"name\": \"StandardEtalePair.homEquiv\", \"module\": \"Mathlib/RingTheory/Etale/StandardEtale\", \"type\": \"{R : Type u_1} →\\n  {S : Type u_2} →\\n    [inst : CommRing R] →\\n      [inst_1 : CommRing S] →\\n        [inst_2 : Algebra R S] → (P : StandardEtalePair R) → (P.Ring →ₐ[R] S) ≃ { x // P.HasMap x }\", \"doc\": \"For a commutative ring $R$, a standard étale pair $P=(f,g)$ over $R$, and a commutative $R$-algebra $S$, there is a natural equivalence:\\\\n$$ \\\\operatorname{Hom}_{R\\\\text{-alg}}(P.\\\\text{Ring}, S) \\\\cong \\\\\"}",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "Module.Flat, Algebra.TensorProduct",
+   "results": "[loogle] OK 0 hit(s) | loogle: unknown identifier 'Algebra.TensorProduct'",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "[eE]llAdic|[rR]ationaliz|[pP]roetale",
+   "results": "[grep] OK 10 hit(s)\n  {\"file\": \"Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean\", \"line\": \"11\", \"text\": \"public import Mathlib.AlgebraicGeometry.Sites.Proetale\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean\", \"line\": \"27\", \"text\": \"- `AlgebraicGeometry.Scheme.ellAdicSheaf`: The sheaf `U ↦ C(U, ℤ_[ℓ])`.\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean\", \"line\": \"28\", \"text\": \"- `AlgebraicGeometry.Scheme.EllAdicCohomology`: The pro-étale cohomology groups `Hⁱ(X, ℤ_[ℓ])`.\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean\", \"line\": \"39\", \"text\": \"- [Bhatt, Bhargav and Scholze, Peter, The pro-étale topology for schemes][proetale2015]\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean\", \"line\": \"61\", \"text\": \"[Definition 6.8.1.][proetale2015]\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Sites/Proetale.lean\", \"line\": \"34\", \"text\": \"- [Bhatt, Bhargav and Scholze, Peter, The pro-étale topology for schemes][proetale2015]\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Sites/Proetale.lean\", \"line\": \"50\", \"text\": \"[Definition 4.1.1][proetale2015]\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Sites/Proetale.lean\", \"line\": \"52\", \"text\": \"def proetalePrecoverage : Precoverage Scheme.{u} :=\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Sites/Proetale.lean\", \"line\": \"57\", \"text\": \"lemma proetalePrecoverage_le_precoverage_weaklyEtale :\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Sites/Proetale.lean\", \"line\": \"58\", \"text\": \"    proetalePrecoverage ≤ MorphismProperty.precoverage @WeaklyEtale :=\"}",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Rational adic cohomology is tensor product of integral cohomology and fraction field with canonical comparison",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AdicCompletion.ofTensorProductEquivOfFiniteNoetherian\", \"module\": \"Mathlib.RingTheory.AdicCompletion.AsTensorProduct\", \"type\": \"{R : Type u} →\\n  [inst : CommRing R] →\\n    (I : Ideal R) →\\n      (M : Type u) →\\n        [inst_1 : AddCommGroup M] →\\n          [inst_2 : Module R M] →\\n            [IsNoetherianRing R] →\\n              [Module.Finite R M] → TensorProduct R (AdicCompletion I R) M ≃ₗ[AdicCompletion I R] AdicCompletion I \", \"doc\": \"For a Noetherian commutative ring $ R $, an ideal $ I $, and a finitely generated $ R $-module $ M $, the tensor product of the $ I $-adic completion of $ R $ with $ M $ is linearly equivalent to the \"}\n  {\"name\": \"AdicCompletion.coe_ofTensorProductEquivOfFiniteNoetherian\", \"module\": \"Mathlib.RingTheory.AdicCompletion.AsTensorProduct\", \"type\": \"[Module.Finite R M] : ofTensorProductEquivOfFiniteNoetherian I M = ofTensorProduct I M\", \"doc\": \"For a Noetherian commutative ring $ R $, an ideal $ I $, and a finitely generated $ R $-module $ M $, the tensor product of the $ I $-adic completion of $ R $ with $ M $ is linearly equivalent to the \"}\n  {\"name\": \"Padic.adicCompletionEquiv\", \"module\": \"Mathlib.NumberTheory.Padics.HeightOneSpectrum\", \"type\": \"(p : Nat.Primes) : ℚ_[p] ≃A[ℚ] ((primesEquiv (R := R)).symm p).adicCompletion ℚ\", \"doc\": \"For a prime number $ p $, there is a continuous algebra equivalence between the field of $ p $-adic numbers $ \\\\mathbb{Q}_p $ and the adic completion of $ \\\\mathbb{Q} $ with respect to the height one pr\"}\n  {\"name\": \"PadicInt.isFractionRing\", \"module\": \"Mathlib.NumberTheory.Padics.PadicIntegers\", \"type\": \": IsFractionRing ℤ_[p] ℚ_[p]\", \"doc\": \"The field of p-adic numbers $\\\\mathbb{Q}_p$ is the fraction field of the ring of p-adic integers $\\\\mathbb{Z}_p$. This means every non-zero element of $\\\\mathbb{Z}_p$ becomes invertible in $\\\\mathbb{Q}_p$\"}\n  {\"name\": \"Rat.HeightOneSpectrum.adicCompletion.padicEquiv\", \"module\": \"Mathlib.NumberTheory.Padics.HeightOneSpectrum\", \"type\": \"(v : HeightOneSpectrum R) : v.adicCompletion ℚ ≃A[ℚ] ℚ_[primesEquiv v]\", \"doc\": \"For a height one prime ideal $ v $ in the integral closure of $ \\\\mathbb{Z} $ in $ \\\\mathbb{Q} $, the adic completion of $ \\\\mathbb{Q} $ with respect to the valuation induced by $ v $ is canonically equi\"}\n  {\"name\": \"Rat.isFractionRing\", \"module\": \"Mathlib.RingTheory.Localization.FractionRing\", \"type\": \": IsFractionRing ℤ ℚ\", \"doc\": \"The field of rational numbers $\\\\mathbb{Q}$ is the fraction field of the integers $\\\\mathbb{Z}$, meaning every non-zero integer becomes invertible in $\\\\mathbb{Q}$ and $\\\\mathbb{Q}$ satisfies the universa\"}\n  {\"name\": \"AdicCompletion.ofTensorProductEquivOfFiniteNoetherian_apply\", \"module\": \"Mathlib.RingTheory.AdicCompletion.AsTensorProduct\", \"type\": \"[Module.Finite R M] (x : AdicCompletion I R ⊗[R] M) :\\n  ofTensorProductEquivOfFiniteNoetherian I M x = ofTensorProduct I M x\", \"doc\": \"For a Noetherian commutative ring $ R $, an ideal $ I $, and a finitely generated $ R $-module $ M $, the tensor product of the $ I $-adic completion of $ R $ with $ M $ (over $ R $) is isomorphic to \"}\n  {\"name\": \"AdicCompletion.ofTensorProduct_tmul\", \"module\": \"Mathlib.RingTheory.AdicCompletion.AsTensorProduct\", \"type\": \"(r : AdicCompletion I R) (x : M) : ofTensorProduct I M (r ⊗ₜ x) = r • of I M x\", \"doc\": \"For any element $ r $ in the $ I $-adic completion of a commutative ring $ R $ and any element $ x $ in an $ R $-module $ M $, the canonical linear map from the tensor product $ (\\\\varprojlim R/I^nR) \\\\\"}",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Constant coefficient rational derived direct image H0 tensor localization of complete discrete valuation ring",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"BDeRham\", \"module\": \"Mathlib/RingTheory/Perfectoid/BDeRham\", \"type\": \"(R : Type u) →\\n  [inst : CommRing R] →\\n    (p : ℕ) → [Fact (Nat.Prime p)] → [Fact ¬IsUnit ↑p] → [IsAdicComplete (Ideal.span {↑p}) R] → Type u\", \"doc\": \"The ring $\\\\mathbb{B}_{\\\\mathrm{dR}}^+$ is constructed as the localization of the adic completion of the kernel of the Fontaine theta homomorphism $\\\\Theta: \\\\mathbb{W}(R^\\\\flat) \\\\to R$ (which inverts the \"}\n  {\"name\": \"BDeRhamPlus\", \"module\": \"Mathlib/RingTheory/Perfectoid/BDeRham\", \"type\": \"(R : Type u) →\\n  [inst : CommRing R] →\\n    (p : ℕ) → [Fact (Nat.Prime p)] → [Fact ¬IsUnit ↑p] → [IsAdicComplete (Ideal.span {↑p}) R] → Type u\", \"doc\": \"The adic completion of the kernel of the Fontaine theta homomorphism (which inverts the prime $ p $) in the localization of Witt vectors away from $ p $.\"}\n  {\"name\": \"Tilt\", \"module\": \"Mathlib/RingTheory/Perfection\", \"type\": \"(K : Type u₁) →\\n  [inst : Field K] →\\n    (v : Valuation K NNReal) →\\n      (O : Type u₂) →\\n        [inst_1 : CommRing O] →\\n          [inst_2 : Algebra O K] → v.Integers O → (p : ℕ) → [Fact (Nat.Prime p)] → [hvp : Fact (v ↑p ≠ 1)] → Type u₂\", \"doc\": \"Given a commutative ring $ O $, a prime number $ p $, and a valuation $ v $ on $ O $ satisfying $ v(p) \\neq 1 $, the tilt is defined as the fraction ring of the pretilt of $ O $ modulo $ p $. The preti\"}\n  {\"name\": \"instCommRingBDeRhamPlus\", \"module\": \"Mathlib/RingTheory/Perfectoid/BDeRham\", \"type\": \"(R : Type u) →\\n  [inst : CommRing R] →\\n    (p : ℕ) →\\n      [inst_1 : Fact (Nat.Prime p)] →\\n        [inst_2 : Fact ¬IsUnit ↑p] → [inst_3 : IsAdicComplete (Ideal.span {↑p}) R] → CommRing (BDeRhamPlus R p)\", \"doc\": \"The adic completion of the kernel of the Fontaine theta homomorphism (which inverts the prime $ p $) in the localization of Witt vectors away from $ p $ is equipped with a canonical commutative ring s\"}\n  {\"name\": \"IsDedekindDomain.HeightOneSpectrum.adicCompletion\", \"module\": \"Mathlib/RingTheory/DedekindDomain/AdicValuation\", \"type\": \"{R : Type u_1} →\\n  [inst : CommRing R] →\\n    [IsDedekindDomain R] →\\n      (K : Type u_2) →\\n        [inst_2 : Field K] →\\n          [inst_3 : Algebra R K] → [IsFractionRing R K] → IsDedekindDomain.HeightOneSpectrum R → Type u_2\", \"doc\": \"Given a Dedekind domain $ R $, its fraction field $ K $, and a height one prime ideal $ v $, this constructs the completion of $ K $ with respect to the non-Archimedean valuation induced by $ v $. The\"}\n  {\"name\": \"IsDedekindDomain.HeightOneSpectrum.adicCompletionIntegers\", \"module\": \"Mathlib/RingTheory/DedekindDomain/AdicValuation\", \"type\": \"{R : Type u_1} →\\n  [inst : CommRing R] →\\n    [inst_1 : IsDedekindDomain R] →\\n      (K : Type u_2) →\\n        [inst_2 : Field K] →\\n          [inst_3 : Algebra R K] →\\n            [inst_4 : IsFractionRing R K] →\\n              (v : IsDedekindDomain.HeightOneSpectrum R) →\\n                ValuationSubring \", \"doc\": \"The valuation subring of the adic completion of a Dedekind domain's fraction field with respect to a height one prime ideal, consisting of all elements in the completion whose valuation is less than o\"}\n  {\"name\": \"instIsDiscreteValuationRingSubtypeAdicCompletionMemValuationSubringAdicCompletionIntegers\", \"module\": \"Mathlib/NumberTheory/NumberField/FinitePlaces\", \"type\": \"∀ (A : Type u_1) [inst : CommRing A] [inst_1 : IsDedekindDomain A] (K : Type u_2) [inst_2 : Field K]\\n  [inst_3 : Algebra A K] [inst_4 : IsFractionRing A K] (v : IsDedekindDomain.HeightOneSpectrum A),\\n  IsDiscreteValuationRing ↥(IsDedekindDomain.HeightOneSpectrum.adicCompletionIntegers K v)\", \"doc\": \"The valuation subring of the adic completion of a Dedekind domain's fraction field with respect to a height one prime ideal, consisting of elements with valuation less than or equal to 1, is a discret\"}\n  {\"name\": \"IsDedekindDomain.HeightOneSpectrum.instInhabitedSubtypeAdicCompletionMemValuationSubringAdicCompletionIntegers\", \"module\": \"Mathlib/RingTheory/DedekindDomain/AdicValuation\", \"type\": \"{R : Type u_1} →\\n  [inst : CommRing R] →\\n    [inst_1 : IsDedekindDomain R] →\\n      (K : Type u_2) →\\n        [inst_2 : Field K] →\\n          [inst_3 : Algebra R K] →\\n            [inst_4 : IsFractionRing R K] →\\n              (v : IsDedekindDomain.HeightOneSpectrum R) →\\n                Inhabited ↥(IsDed\", \"doc\": \"In a Dedekind domain $ R $ with fraction field $ K $, for any height one prime ideal $ v $, the valuation subring of the adic completion of $ K $ at $ v $ contains the zero element. This ensures the v\"}",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "Module.Flat, TensorProduct",
+   "results": "Algebra.TensorProduct.nontrivial_of_algebraMap_injective_of_flat_left, Algebra.TensorProduct.nontrivial_of_algebraMap_injective_of_flat_right, LinearIndependent.tmul_of_flat_left, LinearIndependent.tmul_of_flat_right, TensorProduct.LinearIndepOn.tmul_of_flat_left, TensorProduct.LinearIndepOn.tmul_of_flat_right, TensorProduct.nontrivial_of_linearMap_injective_of_flat_left, TensorProduct.nontrivial_of_linearMap_injective_of_flat_right",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "rational.*cohomology|cohomology.*rational|homology.*tensor|tensor.*homology",
+   "results": "No hits",
+   "date": "2026-10-22",
+   "verdict": "no match: algebraic tensor and homology tools do not state the pro-etale rational point comparison with all clauses"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Flat extension of scalars commutes with cohomology of a cochain complex",
+   "results": "ModuleCat.preservesFiniteLimits_extendScalars_of_flat; Module.Flat.rTensor_shortComplex_exact; Module.Flat.isBaseChange; AlgHom.extendScalars; Module.Flat.lTensor_shortComplex_exact; comonadicExtendScalars; Algebra.FormallyUnramified.flat_of_restrictScalars; CochainComplex.HomComplex.Cochain.rightUnshift_smul",
+   "date": "2026-10-22",
+   "verdict": "no match: algebraic tensor and homology tools do not state the pro-etale rational point comparison with all clauses"
+  },
+  {
+   "tool": "loogle",
+   "query": "Module.Flat, IsLocalization",
+   "results": "Module.Flat.of_isLocalizedModule; IsLocalization.flat; Module.flat_iff_of_isLocalization; Algebra.FormallySmooth.of_formallySmooth_residueField_tensor",
+   "date": "2026-10-22",
+   "verdict": "no match: algebraic tensor and homology tools do not state the pro-etale rational point comparison with all clauses"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Rational ordinary pro-etale cohomology of an integral constructible complex is its cohomology tensored with the fraction field, naturally on cycles",
+   "results": "KaehlerDifferential.tensorKaehlerEquivOfFormallyEtale; Algebra.tensorH1CotangentOfIsLocalization; KaehlerDifferential.tensorKaehlerEquivOfFormallyEtale_apply; Algebra.Extension.tensorH1Cotangent; Algebra.Extension.tensorCotangentSpace; Algebra.tensorH1CotangentOfIsLocalization_toLinearMap; Algebra.etaleLocus_eq_compl_support; KaehlerDifferential.isBaseChange_of_formallyEtale",
+   "date": "2026-10-22",
+   "verdict": "no match: algebraic tensor and homology tools do not state the pro-etale rational point comparison with all clauses"
+  },
+  {
+   "tool": "grep",
+   "query": "mapHomologyIso|preservesHomologyOfExact",
+   "results": "Mathlib/Algebra/Homology/ShortComplex/PreservesHomology.lean; Mathlib/Algebra/Homology/ShortComplex/PreservesHomology.lean; Mathlib/Algebra/Homology/ShortComplex/PreservesHomology.lean; Mathlib/Algebra/Homology/ShortComplex/PreservesHomology.lean; Mathlib/Algebra/Homology/ShortComplex/PreservesHomology.lean; Mathlib/Algebra/Homology/HomologicalComplexAbelian.lean",
+   "date": "2026-10-22",
+   "verdict": "no match: algebraic tensor and homology tools do not state the pro-etale rational point comparison with all clauses"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An exact additive functor preserves cohomology and the canonical map sends a tensor of a cycle class to the class of the tensor cycle",
+   "results": "groupCohomology.mapShortComplex₂_exact; groupCohomology.mapShortComplex₁_exact; groupCohomology.mapShortComplex₃_exact; groupCohomology.map_cochainsFunctor_shortExact; groupCohomology.δ_apply; groupCohomology.mapShortComplex₁; groupCohomology.mapShortComplex₃; groupCohomology.δ₁_apply",
+   "date": "2026-10-22",
+   "verdict": "no match: algebraic tensor and homology tools do not state the pro-etale rational point comparison with all clauses"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-pod-connected-constant-h0",
+  "date": "2026-10-22",
+  "group": "Q38"
+ },
+ "chapter": "sec-poincare-duality",
+ "unit": "sk-lem-finite",
+ "blueprint": {
+  "from": {
+   "node": "prop-cohomological-finiteness",
+   "place": "Proof, Step 7, final paragraph: connected constant coefficients; rational point realization and flat scalar extension (old step 9)",
+   "via": [
+    "lem-pod-connected-constant-h0"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-pod-rational-ordinary-cohomology-tensor",
+  "worker": "stage1",
+  "summary": "No exact project attachment. No new nodes: use the explicit rational point evaluation, existing direct-image constructibility and linearity interfaces, fraction-field/localization flatness and flat-tensor exactness. Write cycles, boundaries, naturality through localization, and unit normalization. Statement unchanged. Resumed the interrupted sandbox; retained its proof and all search records, verified the live cited statements and repaired the source locator to distinguish the snapshot equivalence from the later explicit point-evaluation definition.",
+  "blueprint": "Realizes prop-cohomological-finiteness proof Step 4 (rationalization and flat scalar extension), and its Step 7 connected constant-coefficient application, via the parent lem-pod-connected-constant-h0. The argument imposes no connectedness or geometric extra hypotheses.",
+  "tool_uses": [
+   {
+    "node": "lem-sf-integral-direct-image-constructible",
+    "why": "Ensures the integral direct image is in the domain of point evaluation; this is the existing ordinary-direct-image interface, not a new finiteness route."
+   },
+   {
+    "node": "lem-sf-strict-direct-image-scalar-comparison",
+    "why": "Only its V-linearity clause is used to rationalize the specified strict-tower direct image on morphisms; the unit has no narrower linearity lemma."
+   },
+   {
+    "node": "lem-weil-l-adic-extension-integers-dvr",
+    "why": "Only the fraction-field clause is used to apply the existing localization-flatness leaf."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sf-integral-direct-image-constructible",
+  "lem-sf-strict-direct-image-scalar-comparison",
+  "lem-weil-l-adic-extension-integers-dvr"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q99-e54df483b",
+  "group": "Q99",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q99-e54df483b (reviewer sub-agent of L); spot-checked: I read the whole split; it has no new nodes and the statement is unchanged. It is not a re-split order (no repair note exists); it splits the node Q38 created for lem-pod-connected-constant-h0, and that parent's Step 3 uses exactly the degree-0 unit clause. The claim is true: H^i(Y,K)=H^i(Fib_s Rf_*K) (def-weil-ordinary-compact-cohomology), Fib_s at E is Gamma(s,-) tensor E on objects and sends f tensor lambda to lambda(Gamma f tensor E) (def-weil-finite-coefficient-point item 3), and E is flat over O_E. Step 1: the hypotheses of lem-sf-integral-direct-image-constructible hold (finite type, l invertible), so Rf_*K is in D^b_c(s,V) and Fib_s applies. Only the R_E-linearity clause of lem-sf-strict-direct-image-scalar-comparison is used; it makes the rational direct image u tensor lambda -> Rf_*u tensor lambda well defined. Step 2: lem-weil-l-adic-extension-integers-dvr(1) gives E as the fraction field, and conditions (a)-(c) of the localization-flat leaf hold for T=V minus 0. Step 3: I re-derived the cycle/boundary argument (Z tensor E is the kernel, B tensor E the image, right exactness gives the quotient); the formula [z] tensor lambda -> [z tensor lambda] and E-linearity are correct, with no boundedness needed. Step 4 (naturality through roofs, since tensoring with E preserves quasi-isomorphisms) and Step 5 (i=0, lambda=1) are correctly marked elementary, and proof_deps equals the union of the step uses. Sources read: Milne LEC pdf p.126 'Sheaves of Q_l-modules' (motivation, as the node says); Stacks 00HT (algebra-lemma-flat-localization) and 00HD (algebra-lemma-flat); main-20261015 def-weil-finite-coefficient-point.md, which states only the equivalences, so the explicit evaluation comes from the DAG node's items (2)-(3). No SGA. Edge cases: Y empty, Y=Spec k, two points, C=[V -varpi-> V] (torsion H^1 goes to 0 and the rational complex is acyclic), and unbounded representatives. Accepted tool uses: lem-sf-integral-direct-image-constructible, lem-sf-strict-direct-image-scalar-comparison (linearity clause only), lem-weil-l-adic-extension-integers-dvr (fraction-field clause only). Duplicate search with rg -L: lem-zl-rational-realization-tensor-comparison, lem-zl-point-realization-coefficient-comparison, lem-tw-lisse-rational-realization and lem-fd-finite-etale-adic-cohomology are not duplicates. Maintainer note: lem-pc-flat-tensor-complex-cohom (off-unit sk-thm-picard-semicon) states Step 3's algebra for bounded complexes only and without the formula. Step 3 instead writes the argument out from two Mathlib leaves; I accept that, and citing or merging later is optional."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.RationalOrdinaryCohomologyTensor",
+  "declaration": "WeilConjectures.RationalOrdinaryTensor.rational_ordinary_cohomology_tensor",
+  "declarations": [
+   "WeilConjectures.RationalOrdinaryTensor.moduleDerived",
+   "WeilConjectures.RationalOrdinaryTensor.tensor",
+   "WeilConjectures.RationalOrdinaryTensor.derivedComparison",
+   "WeilConjectures.RationalOrdinaryTensor.cohomologyComparison",
+   "WeilConjectures.RationalOrdinaryTensor.integralCoordinates",
+   "WeilConjectures.RationalOrdinaryTensor.rationalCoordinates",
+   "WeilConjectures.RationalOrdinaryTensor.cycleClass",
+   "WeilConjectures.RationalOrdinaryTensor.tensorCycleClass",
+   "WeilConjectures.RationalOrdinaryTensor.CycleFormula",
+   "WeilConjectures.RationalOrdinaryTensor.naturality",
+   "WeilConjectures.RationalOrdinaryTensor.ordinaryDerivedComparison",
+   "WeilConjectures.RationalOrdinaryTensor.ordinaryComparison",
+   "WeilConjectures.RationalOrdinaryTensor.rational_ordinary_cohomology_tensor"
+  ],
+  "file": "lean/Sheaf/Paper/RationalOrdinaryCohomologyTensor.lean",
+  "statement": "theorem rational_ordinary_cohomology_tensor (K : sfIntegralConstructibleCategory l E Y) : (∀ i : ℤ, IsIso (ordinaryComparison D l hl E Y K i).hom) ∧ CycleFormula D l hl E (integralImage D l hl E Y K) ∧ (∀ (C : CochainComplex (ModuleCat.{u + 1} (ULift.{u + 1, u} (Padic.coefficientExtensionIntegers l E))) ℤ) (e : DerivedCategory.Q.{u + 1}.obj C ≅ (integralOrdinarySections D l hl E Y (integralCohomologyCoefficient D l hl E Y)).obj) (z : LinearMap.ker (C.sc 0).g.hom), (ordinaryComparison D l hl E Y (integralCohomologyCoefficient D l hl E Y) 0).hom (ULift.up (1 : E) ⊗ₜ[ULift.{u + 1, u} (Padic.coefficientExtensionIntegers l E), pointIntegralToField l E] (integralCoordinates D l hl E (integralImage D l hl E Y (integralCohomologyCoefficient D l hl E Y)) C e 0).hom (cycleClass l E C 0 z)) = (rationalCoordinates D l hl E (integralImage D l hl E Y (integralCohomologyCoefficient D l hl E Y)) C e 0).hom (tensorCycleClass l E C 0 z 1))",
+  "branch": "newtargets-dag",
+  "by": "Q09",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "The actual normalized derived isomorphism ordinaryDerivedComparison is retained along with its E-linear per-degree ordinaryComparison. The two postponed statements give the cycle formula in every representative, naturality for all integral point-image morphisms (hence for Rf_* of coefficient morphisms), and degree-zero normalization for every constant-coefficient class, including the unit. E tensor H coordinates are canonically H tensor E by the tensor commutor; coefficient/carrier ULifts are those already used by point evaluation."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-2e3ef922a",
+  "group": "Q09",
+  "result": "pass",
+  "note": "First delivery of Sheaf.Paper.RationalOrdinaryCohomologyTensor. Item node changed only in lean; 10 dep nodes identical to live; statement verbatim; report has Worker report + Second reading by Q09; lines <=100; imports per rule 7. Clause match: D, l, hl, finite E/Q_l, Y sep. finite type (same binders as OrdinaryCompactCohomology), K in sfIntegralConstructibleCategory, K_E raw localization; ordinaryComparison = Mathlib exact-functor homology iso of extendScalars (exactness from proved pointFibreFraction_exact) composed with recorded pointRationalNormalization/pointFibreRationalDownIso, codomain the recorded rational ordinary cohomology (ULift carrier), all i in Z. CycleFormula reduces via mapDerivedCategoryHomologyFunctorIso_hom_app_Q to the canonical cycle comparison a⊗[z] -> [a⊗z] (Stacks 00HD), true and pinning the map since pure tensors generate. naturality stated for all integral morphisms over Spec k (integralImage is object-only, so this general form specializes to Rf_* of any coefficient morphism); provable since pointRationalFibre_existsUnique pins the morphism action. Unit clause: K = completed constant coefficient, i=0, a=1, every cycle of every representative. Derived iso ordinaryDerivedComparison retained (2026-10-21 rule). Universes as deps, no pro-etale substitute, defs have data, only two sorry theorems. Non-blocking: IsIso clause is automatic (map is constructed as an Iso; content in construction + CycleFormula); unit conjunct is a specialization of the cycle formula; public priority-2000 moduleDerived instance = ofIsGrothendieckAbelian, same as parent's, defeq but broad. No file changed, no compile run."
+ }
+}

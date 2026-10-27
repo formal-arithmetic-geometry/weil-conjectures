@@ -20,6 +20,7 @@ public import Sheaf.Paper.IntegralFinitePullbackComposition
 public import Sheaf.AlgebraicGeometry.ContinuousCoefficientPullback
 public import Sheaf.CategoryTheory.LocalizationInverseImageCoherence
 public import Sheaf.AlgebraicGeometry.ProfiniteCoefficientInverseImage
+public import WeilConjectures.ConstructibleSheaf.ProEtaleModule.DerivedCategory
 
 /-! # Completion-unit-normalized realization and pullback
 

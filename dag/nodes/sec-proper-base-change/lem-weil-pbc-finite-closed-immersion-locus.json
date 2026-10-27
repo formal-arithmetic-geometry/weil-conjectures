@@ -1,0 +1,143 @@
+{
+ "id": "lem-weil-pbc-finite-closed-immersion-locus",
+ "kind": "statement",
+ "title": "The closed-immersion locus of a finite morphism under arbitrary base change",
+ "statement": "Let f:Y→X be a finite morphism of schemes [def-pc-scheme] [def-weil-finite-integral-morphism]. Let f₀:Y₀→X₀, b:Y₀→Y and a:X₀→X form a cartesian square [def-pc-fibre-product]. If W₀⊆X₀ is open [def-weil-open-immersion] and the restriction f₀⁻¹W₀→W₀ is a closed immersion [def-weil-closed-immersion], then there is an open W⊆X such that f⁻¹W→W is a closed immersion and W₀⊆a⁻¹W. No flatness, finite-presentation or Noetherian hypothesis is imposed on a, and W₀ is allowed to be empty.",
+ "source": {
+  "document": "literature/stacks-project/morphisms.tex; literature/stacks-project/modules.tex",
+  "place": "Morphisms lemma-closed-immersion and lemma-support-finite-type (056J); Modules lemma-support-finite-type-closed. Finite-cokernel argument for the marked-open step of Tag 0GK7"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-finite-integral-morphism",
+  "def-pc-fibre-product",
+  "def-weil-open-immersion",
+  "def-weil-closed-immersion"
+ ],
+ "proof": [
+  {
+   "text": "For a cartesian square and a point x of the new base, Mathlib isPullback_fiberToSpecResidueField_of_isPullback identifies the new fibre with the base change of the old fibre along Spec kappa(x) -> Spec kappa(a x). Install the proved source theorem IsClosedImmersion.descendsAlong_surjective_inf_flat_inf_quasicompact. This residue-field map is faithfully flat: flat_and_surjective_SpecMap_iff and RingHom.faithfullyFlat_algebraMap_iff give flatness and surjectivity, and an affine morphism is quasi-compact. MorphismProperty.of_isPullback_of_descendsAlong therefore descends the closed-immersion fibre condition. This is the proved private helper closedImmersion_fiber_descend; it does not assume flatness of the original base change.",
+   "uses": [
+    "def-pc-fibre-product",
+    "def-weil-closed-immersion"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Let W consist of points where the fibre of f is a closed immersion. For any x in W, exists_isClosedImmersion_restrict_of_fiber gives an open neighbourhood U on which f is a closed immersion. Every y in U is in W: the restriction has a closed-immersion fibre by base change, and the helper applied to the restriction square descends this to the fibre over y. Hence W is open by isOpen_iff_forall_mem_open.",
+   "uses": [
+    "lem-weil-pbc-finite-closed-immersion-near-fibre",
+    "def-weil-closed-immersion"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Restrict f to W. For x in W, its fibre is the base change of the closed-immersion fibre of f, so it is a closed immersion. Apply exists_isClosedImmersion_restrict_of_fiber to f restricted to W at every x. IsZariskiLocalAtTarget.of_forall_exists_morphismRestrict glues these neighbourhoods into a closed immersion over W. The arrow isomorphism morphismRestrictOpensRange identifies this restriction with pullback.snd f W.ι.",
+   "uses": [
+    "lem-weil-pbc-finite-closed-immersion-near-fibre",
+    "def-weil-closed-immersion"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For x in W0, the assumed closed immersion over W0 has a closed-immersion fibre. Apply the private helper first to the restriction square over W0 and then to the supplied square H. The fibre of f at a(x) is a closed immersion, so a(x) belongs to W. This is precisely W0 <= a preimage W. Empty opens, sources, targets and fibres are included throughout.",
+   "uses": [
+    "def-pc-fibre-product",
+    "def-weil-closed-immersion"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-pc-fibre-product",
+  "def-weil-closed-immersion",
+  "lem-weil-pbc-finite-closed-immersion-near-fibre"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/etale.tex; literature/stacks-project/descent.tex; lean/WeilConjectures/AlgebraicGeometry/FiniteClosedImmersionNearFibre.lean; lean/WeilConjectures/Mathlib/AlgebraicGeometry/Morphisms/FlatDescent.lean",
+  "place": "04DG, final Nakayama and localization sentences; 02L6 closed-immersion descent specialized to residue-field extensions; E9 assembles the open fibre locus using Mathlib restriction squares and target locality, 2026-10-25"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "For a finite morphism the locus where its fibres are closed immersions is open and contains every closed immersion locus after arbitrary base change",
+   "results": "8 hits on finite and closed immersion definitions and stability, no locus theorem",
+   "date": "2026-10-25",
+   "verdict": "No matching theorem; ingredients only"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A finite morphism has an open closed immersion locus detected after arbitrary base change by Nakayama and its finite cokernel",
+   "results": "8 hits, finite and closed immersion properties only",
+   "date": "2026-10-25",
+   "verdict": "No matching theorem; ingredients only"
+  },
+  {
+   "tool": "loogle",
+   "query": "IsClosedImmersion",
+   "results": "Unknown identifier returned by service; no locus theorem",
+   "date": "2026-10-25",
+   "verdict": "No matching theorem; ingredients only"
+  },
+  {
+   "tool": "grep",
+   "query": "rg closedImmersionLocus|closedImmersion.*locus|locus.*closedImmersion in library and Mathlib; blueprint_refs search closed immersion locus",
+   "results": "No matching declaration. FiniteLocallyFreeClosedEmbeddingLocus assumes source finite locally free over a parameter base and does not apply here",
+   "date": "2026-10-25",
+   "verdict": "No matching theorem; ingredients only"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.MarkedCurveDiagramModel",
+  "date": "2026-10-25",
+  "group": "H9"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "Tag 0GK7, marked-open paragraph: replace descent of the marked open by the finite-cokernel support argument; its support and arbitrary-pullback property are Morphisms 056J",
+   "via": [
+    "lem-weil-pbc-marked-curve-diagram-model",
+    "lem-weil-pbc-spread-marked-curve-diagram"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.FiniteClosedImmersionLocus",
+  "file": "lean/Sheaf/AlgebraicGeometry/FiniteClosedImmersionLocus.lean",
+  "declaration": "AlgebraicGeometry.exists_finite_closedImmersion_locus",
+  "statement": "theorem exists_finite_closedImmersion_locus\n    {Y X Y₀ X₀ : Scheme.{u}} (f : Y ⟶ X) [IsFinite f]\n    (f₀ : Y₀ ⟶ X₀) (b : Y₀ ⟶ Y) (a : X₀ ⟶ X)\n    (H : IsPullback b f₀ f a) (W₀ : X₀.Opens)\n    (hW₀ : IsClosedImmersion (pullback.snd f₀ W₀.ι)) :\n    ∃ W : X.Opens, IsClosedImmersion (pullback.snd f W.ι) ∧ W₀ ≤ a ⁻¹ᵁ W",
+  "branch": "sheaf-dag",
+  "by": "H9",
+  "date": "2026-10-25"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H9",
+  "result": "pass",
+  "landing": "20261025T123106-L-1831624",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E9",
+  "result": "pass",
+  "landing": "20261025T143159-L-962219",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

@@ -1,0 +1,250 @@
+{
+ "id": "lem-pod-point-dual-evaluation-transport",
+ "kind": "statement",
+ "title": "Normalized point-dual evaluation and its coefficient transport",
+ "statement": "Fix the Poincare coefficient conventions [def-pod-conventions]: $k=\\overline{\\mathbf F}_q$, $s=\\operatorname{Spec}k$, $\\ell\\ne\\operatorname{char}k$, and a finite extension $E/\\mathbf Q_\\ell$ with valuation ring $\\mathcal O_E$ and uniformizer $\\varpi_E$. Write $A_{E,n}=\\mathcal O_E/\\varpi_E^n$ for $n\\ge1$ and $\\Lambda\\in\\{A_{E,n},\\mathcal O_E,E,\\overline{\\mathbf Q}_\\ell\\}$. Use the point categories and $F_\\Lambda=\\operatorname{Fib}_s$ of [def-weil-finite-coefficient-point], finite Tor amplitude [def-weil-finite-tor-amplitude], and derived tensor and internal Hom [def-weil-derived-pullback-tensor-hom]. Let $Q_s$ be finite reduction $A_{E,n}\\to A_{E,m}$ with $1\\le m\\le n$, integral reduction $\\mathcal O_E\\to A_{E,n}$, completed integral scalar extension for a finite coefficient-field extension, rationalization, or extension at a common finite coefficient-field stage. Write $\\Lambda'$ for its target coefficient ring and $q$ for the corresponding coefficient-module functor.\nLet $C\\in D^b_{ctf}(s,\\Lambda)$, let $u_\\Lambda:\\omega_{s,\\Lambda}\\xrightarrow{\\sim}\\Lambda_s$ be the identity-adjunction normalization, and set $D_sC=R\\mathcal Hom_s(C,\\omega_{s,\\Lambda})$, $c=F_\\Lambda C$, $d=F_\\Lambda(D_sC)$. Write $j_{\\Lambda,C}:d\\xrightarrow{\\sim}R\\operatorname{Hom}_\\Lambda(c,\\Lambda)=c^\\vee$ for the specified point-duality map [lem-pod-point-dualizing-complex]. Let $\\mu_\\Lambda:d\\otimes^Lc\\xrightarrow{\\sim}F_\\Lambda(D_sC\\otimes^LC)$ be the inverse fibre tensor comparison [lem-sf-point-fibre-derived-tensor], and define\n$$e_{\\Lambda,C}=F_\\Lambda(u_\\Lambda\\circ\\operatorname{ev}_C)\\circ\\mu_\\Lambda:d\\otimes^Lc\\to\\Lambda,$$\nusing the fibre unit comparison. Then the actual specified $j$ satisfies\n$$\\operatorname{ev}_c\\circ(j_{\\Lambda,C}\\otimes1_c)=e_{\\Lambda,C}.$$\nThis normalization holds for the signed Hom-complex evaluation [def-pur-hom-complex], for completed integral tensor, and after rationalization and passage to a common finite field. In the order with the Hom factor first a degree-$r$ family $f$ evaluates on a section $x$ as $u_\\Lambda(f(x))$, with Hom differential $df-(-1)^rfd$; when the factors are interchanged use the symmetry constraint.\nUse the specified comparisons $t_{Q,B}$, their domains, and $\\delta_{Q,C}$ of [lem-pod-point-dual-coefficient-domains]. Write $c'=F_{\\Lambda'}Q_sC$, $d'=F_{\\Lambda'}D_s(Q_sC)$, and define $e_{\\Lambda',Q_sC}$ by the same formula, with its corresponding evaluation normalization for $j_{\\Lambda',Q_sC}$. Let $\\nu_q:qd\\otimes^Lqc\\xrightarrow{\\sim}q(d\\otimes^Lc)$ be the coefficient tensor constraint, with the coefficient unit identified with $\\Lambda'$. Then the following equality of derived pairings holds:\n$$e_{\\Lambda',Q_sC}\\circ\\bigl((F_{\\Lambda'}(\\delta_{Q,C})\\circ t_{Q,D_sC})\\otimes t_{Q,C}\\bigr)=q(e_{\\Lambda,C})\\circ\\nu_q.$$\nThe internal-Hom comparison in this formula is the canonical evaluation transpose: if $\\nu_{Q_s}:Q_sD_sC\\otimes^LQ_sC\\to Q_s(D_sC\\otimes^LC)$ is the coefficient tensor constraint, its defining identity, including the dualizing comparison, is\n$$\\operatorname{ev}_{Q_sC}\\circ(\\delta_{Q,C}\\otimes1)=Q_s(\\operatorname{ev}_C)\\circ\\nu_{Q_s},$$\nwhere the right side is followed by $Q_s\\omega_{s,\\Lambda}\\cong\\omega_{s,\\Lambda'}$. All equalities use the prescribed comparisons, rather than arbitrary objectwise isomorphisms.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/thm-pod-global-verdier-duality.proof.md",
+  "place": "second paragraph, site-perfect compatibility"
+ },
+ "stmt_deps": [
+  "def-pod-conventions",
+  "def-weil-finite-coefficient-point",
+  "def-weil-finite-tor-amplitude",
+  "def-weil-derived-pullback-tensor-hom",
+  "lem-pod-point-dualizing-complex",
+  "lem-sf-point-fibre-derived-tensor",
+  "def-pur-hom-complex",
+  "lem-pod-point-dual-coefficient-domains"
+ ],
+ "proof": [
+  {
+   "text": "Put $F=F_\\Lambda$, $F'=F_{\\Lambda'}$ and $A=D_sC$. By [lem-pod-point-dual-coefficient-domains], $A$, $Q_sC$ and $D_sQ_sC$ are in the required bounded constructible finite-Tor categories. Thus all displayed evaluations and $t_{Q,A},t_{Q,C}$ are defined. That node supplies naturality of $t$, its tensor and unit compatibility, and the normalization of $\\delta_{Q,C}$. The tensor comparisons below are precisely those of [lem-sf-point-fibre-derived-tensor].",
+   "uses": [
+    "lem-pod-point-dual-coefficient-domains",
+    "lem-sf-point-fibre-derived-tensor"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/thm-pod-global-verdier-duality.proof.md",
+    "place": "second paragraph: domains and specified tensor/unit comparisons"
+   }
+  },
+  {
+   "text": "First take $\\Lambda=A_{E,n}$ or $\\mathcal O_E$. Write $H=R\\mathcal Hom_s(C,\\Lambda_s)$ and $\\rho=R\\mathcal Hom_s(C,u_\\Lambda)$. By [lem-pod-point-integral-evaluation-normalization], $j=\\kappa\\circ F\\rho$, where $\\kappa:FH\\to c^\\vee$ is the transpose of the actual sections evaluation through the specified tensor and unit maps, including completed tensor integrally. Uncurrying [lem-pod-closed-uncurry-laws], and using naturality of the tensor comparison, gives\n$$\\operatorname{ev}_c(j\\otimes1)=F(\\operatorname{ev}_{C,\\Lambda_s})\\mu_{H,C}(F\\rho\\otimes1)=F(\\operatorname{ev}_{C,\\Lambda_s}(\\rho\\otimes1))\\mu_{A,C}=F(u_\\Lambda\\operatorname{ev}_{C,\\omega})\\mu_{A,C}=e_{\\Lambda,C}.$$\nThe middle evaluation identity is postcomposition: on Hom-first representatives both sides send $f\\otimes x$ to $u_\\Lambda(f(x))$. In the input-first order the cited normalization gives $(-1)^{pr}$ on degrees $p,r$; the Koszul symmetry contributes the same sign, so the Hom-first formula has none. The differential [def-pur-hom-complex] verifies the chain identity explicitly:\n$$(df)(x)+(-1)^r f(dx)=d(f(x)),\\qquad df=d f-(-1)^r f d.$$\nPostcomposition with the chain map $u_\\Lambda$ preserves this identity.",
+   "uses": [
+    "lem-pod-point-integral-evaluation-normalization",
+    "lem-pod-closed-uncurry-laws",
+    "def-pur-hom-complex"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/thm-pod-global-verdier-duality.proof.md",
+    "place": "second paragraph: normalized point evaluation; finite and completed integral stages"
+   }
+  },
+  {
+   "text": "For $\\Lambda=E$ or $\\overline{\\mathbf Q}_\\ell$, [lem-pod-point-field-evaluation-normalization] supplies the same factorization $j=\\kappa\\circ F\\rho$, with $\\kappa$ the transpose of the actual evaluation, and the same signed convention. Hence the identical uncurrying calculation of step 2 proves $\\operatorname{ev}_c(j\\otimes1)=e_{\\Lambda,C}$. Its representative-independent rational and common-stage comparisons ensure this is the specified $j$, including torsion integral representatives. At $\\overline{\\mathbf Q}_\\ell$, choose a common finite coefficient field for the finitely many objects and arrows in the calculation; equality there gives equality of the represented arrows by [def-weil-finite-coefficient-point]. Applying steps 2 and 3 also to $Q_sC$ gives the required target normalization.",
+   "uses": [
+    "lem-pod-point-field-evaluation-normalization",
+    "lem-pod-closed-uncurry-laws",
+    "def-weil-finite-coefficient-point"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/thm-pod-global-verdier-duality.proof.md",
+    "place": "second paragraph: rational and common finite-field evaluation normalization"
+   }
+  },
+  {
+   "text": "Let $w:Q_s\\omega_{s,\\Lambda}\\xrightarrow{\\sim}\\omega_{s,\\Lambda'}$ be the dualizing comparison fixed by [lem-pod-point-dual-coefficient-domains], so $u_{\\Lambda'}w=Q_su_\\Lambda$ after the unit identification. That node defines $\\delta_{Q,C}$ as the transpose of $w\\,Q_s(\\operatorname{ev}_C)\\nu_{Q_s}$. Uncurrying [lem-pod-closed-uncurry-laws] gives exactly\n$$\\operatorname{ev}_{Q_sC}(\\delta_{Q,C}\\otimes1)=w\\,Q_s(\\operatorname{ev}_C)\\nu_{Q_s}.$$\nPostcomposing with $u_{\\Lambda'}$ yields $u_{\\Lambda'}\\operatorname{ev}_{Q_sC}(\\delta\\otimes1)=Q_s(u_\\Lambda\\operatorname{ev}_C)\\nu_{Q_s}$. This proves the claimed defining identity with its explicitly stated dualizing comparison.",
+   "uses": [
+    "lem-pod-point-dual-coefficient-domains",
+    "lem-pod-closed-uncurry-laws"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/thm-pod-global-verdier-duality.proof.md",
+    "place": "second paragraph: coefficient internal-Hom comparison is the evaluation transpose"
+   }
+  },
+  {
+   "text": "Set $v=u_\\Lambda\\operatorname{ev}_C:A\\otimes^LC\\to\\Lambda_s$, $v'=u_{\\Lambda'}\\operatorname{ev}_{Q_sC}$, and abbreviate $t_{Q,B}$ to $t_B$. Naturality of the fibre tensor map and step 4 give\n$$e'((F'\\delta\\,t_A)\\otimes t_C)=F'(Q_sv)\\,F'(\\nu_{Q_s})\\,\\mu'_{Q_sA,Q_sC}(t_A\\otimes t_C).$$\nThe tensor compatibility stated in [lem-pod-point-dual-coefficient-domains], with the orientations fixed by [lem-sf-point-fibre-derived-tensor], is\n$$F'(\\nu_{Q_s})\\mu'_{Q_sA,Q_sC}(t_A\\otimes t_C)=t_{A\\otimes^LC}\\,q(\\mu_{A,C})\\nu_q.$$\nSubstitute this and apply naturality of $t$ to $v$:\n$$e'((F'\\delta\\,t_A)\\otimes t_C)=t_{\\Lambda_s}\\,q(Fv)\\,q(\\mu_{A,C})\\nu_q=q(e_{\\Lambda,C})\\nu_q.$$\nThe last equality is the unit compatibility of $t$, identifying $t_{\\Lambda_s}$ with the coefficient unit map. This is the asserted pairing equality. The two coherence identities used here hold for every coefficient functor listed in step 1, so the calculation includes finite reduction without any Tor-dimension assumption on the quotient ring, completed extension, rationalization and common-stage extension.",
+   "uses": [
+    "lem-pod-point-dual-coefficient-domains",
+    "lem-sf-point-fibre-derived-tensor"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/thm-pod-global-verdier-duality.proof.md",
+    "place": "second paragraph: explicit naturality and monoidal pasting for coefficient transport"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-pod-point-dual-coefficient-domains",
+  "lem-sf-point-fibre-derived-tensor",
+  "lem-pod-point-integral-evaluation-normalization",
+  "lem-pod-closed-uncurry-laws",
+  "def-pur-hom-complex",
+  "lem-pod-point-field-evaluation-normalization",
+  "def-weil-finite-coefficient-point"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/thm-pod-global-verdier-duality.proof.md",
+  "place": "second paragraph, site-perfect compatibility; explicit evaluation and monoidal-naturality expansion using existing point-normalization nodes"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "(eval|Eval).*(dual|Dual)|(dual|Dual).*(eval|Eval)",
+   "results": "Mathlib/CategoryTheory/Monoidal/Rigid/Basic.lean; Mathlib/CategoryTheory/Monoidal/Rigid/Basic.lean; Mathlib/CategoryTheory/Monoidal/Rigid/Basic.lean; Mathlib/CategoryTheory/Monoidal/Rigid/Basic.lean; Mathlib/CategoryTheory/Monoidal/Rigid/Basic.lean",
+   "date": "2026-10-22",
+   "verdict": "no match: general categorical or ordinary module results do not state this derived point comparison"
+  },
+  {
+   "tool": "grep",
+   "query": "(eval|Eval).*(comparison|Comparison)|(comparison|Comparison).*(eval|Eval)",
+   "results": "0 hits",
+   "date": "2026-10-22",
+   "verdict": "no match: general categorical or ordinary module results do not state this derived point comparison"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.Monoidal, CategoryTheory.MonoidalClosed",
+   "results": "CategoryTheory.MonoidalClosed.ofEquiv; CategoryTheory.MonoidalClosed.ofEquiv_curry_def; CategoryTheory.MonoidalClosed.ofEquiv_uncurry_def; CategoryTheory.Monoidal.Reflective.monoidalClosed; CategoryTheory.Monoidal.Reflective.closed; CategoryTheory.Monoidal.Reflective.instIsIsoAppUnitObjIhom",
+   "date": "2026-10-22",
+   "verdict": "no match: general categorical or ordinary module results do not state this derived point comparison"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived coefficient reduction and scalar extension preserve the point dualizing evaluation pairing including tensor and unit constraints",
+   "results": "LinearMap.IsPerfPair.restrictScalars_of_field; IsBaseChange.toDualBaseChange_tmul; LinearMap.IsPerfPair.dualEval; FGModuleCat.FGModuleCatEvaluation; RootPairing.root'In_corootSpanMem_eq_pairingIn; FGModuleCat.exactPairing; Module.DualBases.coeffs_apply; Module.dualPairing_apply",
+   "date": "2026-10-22",
+   "verdict": "no match: general categorical or ordinary module results do not state this derived point comparison"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.MonoidalClosed.uncurry, CategoryTheory.ihom",
+   "results": "CategoryTheory.MonoidalClosed.uncurry; CategoryTheory.MonoidalClosed.uncurry_injective; CategoryTheory.MonoidalClosed.curry_uncurry; CategoryTheory.MonoidalClosed.curry_eq_iff; CategoryTheory.MonoidalClosed.eq_curry_iff; CategoryTheory.MonoidalClosed.uncurry_id_eq_ev; CategoryTheory.MonoidalClosed.uncurry_natural_left; CategoryTheory.MonoidalClosed.uncurry_natural_right",
+   "date": "2026-10-22",
+   "verdict": "no match: general categorical or ordinary module results do not state this derived point comparison"
+  },
+  {
+   "tool": "leansearch",
+   "query": "At a geometric point sections of the internal derived dual evaluate by module evaluation with the normalized point dualizing isomorphism",
+   "results": "Module.Dual.eval_apply; LinearMap.IsPerfPair.dualEval; PresheafOfModules.sections.eval; AlgebraicGeometry.Scheme.evaluation; smoothSheaf.evalAt; Module.Dual.eval; Module.dualPairing_apply; CategoryTheory.sheafSectionsNatIsoEvaluation",
+   "date": "2026-10-22",
+   "verdict": "no match: general categorical or ordinary module results do not state this derived point comparison"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The canonical identification of sections of a point dualizing internal Hom with the derived module dual is the transpose of sections of evaluation normalized by the identity adjunction",
+   "results": "ModuleCat.ihom_ev_app; Module.apply_evalEquiv_symm_apply; ModuleCat.ihom_coev_app; FGModuleCat.FGModuleCatEvaluation; FGModuleCat.FGModuleCatCoevaluation; Module.Dual.eval_comp_comp_evalEquiv_eq; Module.Dual.eval_naturality; FGModuleCat.FGModuleCatEvaluation_apply'",
+   "date": "2026-10-22",
+   "verdict": "no match: general categorical or ordinary module results do not state this derived point comparison"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Coefficient change carries the point duality evaluation pairing to the target pairing through the canonical internal Hom comparison and strong monoidal sections comparison",
+   "results": "CategoryTheory.tensorRightHomEquiv_symm_coevaluation_comp_whiskerLeft; CategoryTheory.tensorLeftHomEquiv_symm_coevaluation_comp_whiskerRight; CategoryTheory.tensorLeftHomEquiv_whiskerRight_comp_evaluation; CategoryTheory.tensorRightHomEquiv_whiskerLeft_comp_evaluation; CategoryTheory.tensorRightHomEquiv; CategoryTheory.coev_expComparison; CategoryTheory.tensorLeftHomEquiv; CategoryTheory.tensorLeftHomEquiv_whiskerLeft_comp_evaluation",
+   "date": "2026-10-22",
+   "verdict": "no match: general categorical or ordinary module results do not state this derived point comparison"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Global sections of a dualizing Hom complex at a proetale geometric point intertwine the specified evaluation and the ordinary module dual evaluation, including adic completion and rationalization",
+   "results": "AlgebraicGeometry.Scheme.Γevaluation_naturality_apply; smoothSheafCommRing.ι_evalHom; AlgebraicGeometry.LocallyRingedSpace.Γevaluation_naturality_apply; AlgebraicGeometry.LocallyRingedSpace.Γevaluation_naturality; AlgebraicGeometry.Scheme.Γevaluation_naturality; AlgebraicGeometry.LocallyRingedSpace.Γevaluation_naturality_assoc; smoothSheafCommRing.ι_evalHom_apply; AlgebraicGeometry.Scheme.Γevaluation_naturality_assoc",
+   "date": "2026-10-22",
+   "verdict": "no match: general categorical or ordinary module results do not state this derived point comparison"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For point sheaf complexes of finite Tor amplitude applying sections to coefficient changed evaluation equals scalar extension of the sections evaluation pairing",
+   "results": "AlgebraicGeometry.Scheme.Modules.map_smul; CategoryTheory.Presieve.FamilyOfElements.isCompatible_map_smul_aux; ModuleCat.Tilde.res_const; CategoryTheory.Presieve.FamilyOfElements.isCompatible_map_smul; ModuleCat.Tilde.smul_section_apply; AlgebraicGeometry.Scheme.Modules.Hom.app_smul; ModuleCat.Tilde.toOpen; CategoryTheory.Sheaf.H",
+   "date": "2026-10-22",
+   "verdict": "no match: general categorical or ordinary module results do not state this derived point comparison"
+  },
+  {
+   "tool": "grep",
+   "query": "(evaluation|eval).*(point|coefficient)|(point|coefficient).*(evaluation|eval)",
+   "results": "Mathlib/CategoryTheory/Galois/GaloisObjects.lean; Mathlib/CategoryTheory/Functor/KanExtension/Adjunction.lean; Mathlib/CategoryTheory/Functor/KanExtension/Adjunction.lean; Mathlib/CategoryTheory/ConcreteCategory/Basic.lean; Mathlib/CategoryTheory/ConcreteCategory/Basic.lean; Mathlib/CategoryTheory/Sites/LocalSite.lean; Mathlib/CategoryTheory/Sites/LocalSite.lean; Mathlib/CategoryTheory/Sites/LocalSite.lean",
+   "date": "2026-10-22",
+   "verdict": "no match: categorical uncurrying and ordinary dual base change do not identify the specified derived pro-etale point maps at all coefficient stages"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Global sections of the derived internal Hom at a geometric point preserve the normalized duality evaluation pairing under derived change of coefficient rings",
+   "results": "IsBaseChange.toDual_apply; IsBaseChange.toDualBaseChange_tmul; AlgebraicGeometry.LocallyRingedSpace.Γevaluation_naturality; Module.Dual.eval; AlgebraicGeometry.Scheme.Γevaluation_naturality_assoc; Module.Dual.eval_apply; AlgebraicGeometry.Scheme.Γevaluation_naturality_apply; Module.Dual.eval_naturality",
+   "date": "2026-10-22",
+   "verdict": "no match: categorical uncurrying and ordinary dual base change do not identify the specified derived pro-etale point maps at all coefficient stages"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.MonoidalClosed.uncurry, CategoryTheory.ihom.ev",
+   "results": "CategoryTheory.MonoidalClosed.uncurry_id_eq_ev; CategoryTheory.MonoidalClosed.uncurry_ihom_map; CategoryTheory.MonoidalClosed.uncurry_eq; CategoryTheory.MonoidalClosed.uncurry_pre; CategoryTheory.uncurry_expComparison; CategoryTheory.MonoidalClosed.uncurry_uncurry_ihomCurry; CategoryTheory.MonoidalClosed.uncurry_ihomCurry; CategoryTheory.MonoidalClosed.uncurry_ihomUncurry",
+   "date": "2026-10-22",
+   "verdict": "no match: categorical uncurrying and ordinary dual base change do not identify the specified derived pro-etale point maps at all coefficient stages"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The specified global sections identification of the derived dual at a geometric point preserves evaluation, and coefficient change preserves this pairing through the monoidal tensor and unit comparisons",
+   "results": "AlgebraicGeometry.Scheme.Γevaluation_naturality_apply; AlgebraicGeometry.Scheme.Γevaluation_naturality; AlgebraicGeometry.Scheme.evaluation_naturality_apply; AlgebraicGeometry.Scheme.Γevaluation_naturality_assoc; AlgebraicGeometry.Scheme.Γevaluation; FGModuleCat.FGModuleCatEvaluation; AlgebraicGeometry.Scheme.evaluation_naturality; AlgebraicGeometry.LocallyRingedSpace.evaluation_naturality_apply",
+   "date": "2026-10-22",
+   "verdict": "no match: categorical uncurrying and ordinary dual base change do not identify the specified derived pro-etale point maps at all coefficient stages"
+  },
+  {
+   "tool": "grep",
+   "query": "uncurry_ihom_map|uncurry_natural_right|uncurry_eq",
+   "results": "Mathlib/CategoryTheory/Monoidal/Closed/InternalCurrying.lean; Mathlib/CategoryTheory/Monoidal/Closed/InternalCurrying.lean; Mathlib/CategoryTheory/Monoidal/Closed/Functor.lean; Mathlib/CategoryTheory/Monoidal/Closed/Basic.lean; Mathlib/CategoryTheory/Monoidal/Closed/Basic.lean; Mathlib/CategoryTheory/Monoidal/Closed/Basic.lean; Mathlib/CategoryTheory/Monoidal/Closed/Basic.lean; Mathlib/CategoryTheory/Monoidal/Closed/Basic.lean",
+   "date": "2026-10-22",
+   "verdict": "no match: categorical uncurrying and ordinary dual base change do not identify the specified derived pro-etale point maps at all coefficient stages"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A strong symmetric monoidal global sections functor on perfect complexes intertwines dual evaluation and the canonical internal Hom comparison under change of scalars",
+   "results": "LightCondensed.ihomPoints_symm_comp; LightCondensed.ihom_map_val_app; LightCondensed.ihomPoints; LightCondensed.ihomPoints_apply; LightCondensed.ihomPoints_symm_apply; CategoryTheory.Sheaf.ΓHomEquiv_naturality_left_symm; CategoryTheory.coev_expComparison; CategoryTheory.Sheaf.ΓHomEquiv_naturality_left",
+   "date": "2026-10-22",
+   "verdict": "no match: categorical uncurrying and ordinary dual base change do not identify the specified derived pro-etale point maps at all coefficient stages"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-pod-point-duality-coefficient-compatibility",
+  "date": "2026-10-22",
+  "group": "Q14"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-thm-sf-package",
+ "blueprint": {
+  "from": {
+   "node": "thm-pod-global-verdier-duality",
+   "place": "second paragraph, site-perfect coefficient compatibility: the evaluation characterization of the point duality identification and transport of the actual pairing (returned item steps 5--6)",
+   "via": [
+    "lem-pod-point-duality-coefficient-compatibility"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-pod-point-dual-evaluation-transport",
+  "worker": "stage1",
+  "group": "Q07",
+  "summary": "Unchanged statement. Reused existing finite/integral and field evaluation-normalization nodes rather than creating clause duplicates. Proved the evaluation identity by uncurrying the specified j, checked the Hom-first sign, and wrote the coefficient pairing transport as two explicit monoidal/naturality identities. No new nodes or Lean changes.",
+  "blueprint": "thm-pod-global-verdier-duality.proof.md second paragraph: site-perfect evaluation and coefficient-change compatibility; the point-duality identification in the first paragraph is used with its specified normalization.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q07-4f07869e9",
+  "group": "Q07",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q07-4f07869e9 (reviewer sub-agent of L); spot-checked: I read all five steps in full, with every cited statement open. The delivery has no new nodes, and the statement and stmt_deps are identical to the version Q14 created (PASSed). The item is still unsplit on live and side-live, there is no repair note, there is no cycle, proof_deps equals the union of the steps' uses, and there is no SGA. Step 2: lem-pod-point-integral-evaluation-normalization states j=κ∘Fρ, with κ the transpose of F(ev) and the completed tensor used integrally. Uncurry_curry and uncurry_eq, naturality of μ, and naturality of the counit in the target (ev(RHom(C,u)⊗1)=u∘ev) give ev_c(j⊗1)=e. The sign is right: input-first (-1)^{pj} composed with the swap leaves no sign Hom-first; I checked this against the def-pur-hom-complex differential. Step 3: the field node's final clause gives the same factorization for E and Q̄_ℓ, and equality at a common stage is equality of arrows by def-weil-finite-coefficient-point. Step 4 uncurries δ as defined in the domains node, with w normalized by u'w=Q_su. Step 5 pastes μ' naturality, step 4, the tensor compatibility of t, naturality of t at v, and the unit compatibility; I checked the source and target of each equality. Edge cases checked: C=0, the unit, a shifted unit, m=n, no Tor assumption on A_m, torsion representatives, and δ never assumed invertible. Advisory: t at A⊗^LC needs that object to be ctf; the cited fibre-tensor and domains statements presuppose this. The blueprint source is thm-pod-global-verdier-duality.proof.md, second paragraph. lem-fix-operation-reduction is sheaf-level, so it is not a duplicate. Batch-5: the closure diff for the two targets is 0 (20860 nodes both ways). integral-evaluation-normalization and its path to lem-pod-point-sections-derived-reduction were already in the base closure, through lem-pod-global-duality-map-identification and the item's own stmt_dep lem-pod-point-dual-coefficient-domains; it is a point sections/derived-reduction coefficient fact, not a step of the Poincaré duality or trace formula proofs. lem-pod-closed-uncurry-laws is a generic Mathlib leaf for monoidal closed categories that the parent already cites. Both flags are accepted. There are no tool_uses."
+ }
+}

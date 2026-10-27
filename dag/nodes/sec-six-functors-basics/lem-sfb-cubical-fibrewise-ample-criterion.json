@@ -1,0 +1,418 @@
+{
+ "id": "lem-sfb-cubical-fibrewise-ample-criterion",
+ "kind": "statement",
+ "title": "Fibrewise ampleness criterion for cubical lines on semiabelian schemes",
+ "statement": "Let $T$ be a normal locally Noetherian scheme [def-pc-scheme, pqf-def-locnoeth], where normal means that every local ring is an integrally closed domain [def-weil-pbc-normal-ring]. Let $p:H\\to T$ be a smooth separated commutative group scheme of finite presentation [def-pc-scheme, def-sbc-smooth-morphisms, def-sbc-locally-finite-presentation]. Its addition, inverse $\\iota$ and identity $e$ are $T$-morphisms satisfying the commutative group identities, and separated means that the diagonal is a closed immersion. Assume its geometric fibres are semiabelian [def-sfb-semiabelian-geometric-fibres]. Let $(B,r,\\tau)$ be a cubical rigidified line on $H$ [def-sfb-cubical-rigidified-line]. In particular $B$ is an invertible module [def-sc-invertible-module], with $r:e^*B\\simeq\\mathcal O_T$ and a normalized permutation-invariant cube trivialization satisfying the cube cocycle identity. All line pullbacks are tensor inverse images [def-pc-module-pullback]. For each $t\\in T$, let $H_t=H\\times_T\\operatorname{Spec}\\kappa(t)$ be the residue-field fibre [def-pc-fibre-product, def-weil-residue-field] and $B_t$ the pulled-back line. If $B_t$ is ample for every $t\\in T$ [def-weil-pbc-ample-invertible-module], then for every affine open $V\\subseteq T$, the restriction $B|_{p^{-1}(V)}$ is ample. No generic ampleness or symmetry hypothesis is imposed, and $p$ need not be proper.",
+ "source": {
+  "document": "literature/raynaud-faisceaux-amples-LNM119-1970.pdf",
+  "place": "XI, fibrewise-to-relative positivity input for cubical lines; original local WANTED. Agent-formulated supporting criterion, not the proper-morphism ample-neighbourhood lemma. No precise numbered Raynaud lemma is asserted without the original."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-sbc-smooth-morphisms",
+  "def-sbc-locally-finite-presentation",
+  "def-sfb-semiabelian-geometric-fibres",
+  "def-sfb-cubical-rigidified-line",
+  "def-sc-invertible-module",
+  "def-pc-module-pullback",
+  "def-weil-pbc-ample-invertible-module",
+  "pqf-def-locnoeth",
+  "def-weil-pbc-normal-ring",
+  "def-pc-fibre-product",
+  "def-weil-residue-field"
+ ],
+ "proof": [
+  {
+   "text": "Fix an affine open $V\\subseteq T$ and $t\\in V$. Put $A=\\mathcal O_{T,t}$. Normality gives that $A$ is an integrally closed domain. A Noetherian affine chart around $t$ presents $A$ as a localization of a Noetherian ring, so it is Noetherian by the localization lemma. Pull back $H,B,r,\\tau$ to $\\operatorname{Spec}A$. Smoothness, separatedness and finite presentation persist by the cited base-change statements, and the group identities persist by pulling back their commuting diagrams. Every residue fibre here is the corresponding original residue fibre at a generalization of $t$; in particular its line is ample. Semiabelian geometric fibres and the cubical structure persist by their definitions. Choose a separable closure of $\\kappa(t)$ and put $R=A^{\\mathrm{sh}}$, $X=H_R$, $L=B_R$. The triples lemma makes $R$ a strictly henselian local ring, and the strict-henselization Noetherian lemma makes it Noetherian.",
+   "uses": [
+    "pqf-def-locnoeth",
+    "lem-weil-pbc-localization-noetherian",
+    "lem-pc-proper-base-change",
+    "lem-weil-pbc-separated-base-change",
+    "lem-weil-pbc-qcqs-morphism-permanence",
+    "def-sfb-semiabelian-geometric-fibres",
+    "def-sfb-cubical-rigidified-line",
+    "lem-weil-pbc-invertible-pullback-tensor",
+    "lem-weil-pbc-strict-henselization-triples",
+    "lem-sc-strict-henselization-noetherian"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/_section.md",
+    "place": "Agent proof: cubical fibrewise ampleness supporting the relative Picard input"
+   }
+  },
+  {
+   "text": "Apply the strict-local affine-seed lemma to the $A$-family, using ampleness at every prime of $A$, to obtain $n\\geq1$ and $s\\in\\Gamma(X,L^n)$ with $U=X_s$ affine and containing the closed identity. The rigidification identifies $e_R^*L^n$ with $\\mathcal O_R$. Thus $e_R^*s$ is an element of $R$ outside its maximal ideal and hence a unit. Consequently the WHOLE identity section factors through $U$, so $U_\\Omega$ is nonempty for every geometric fibre. The scheme $X$ is quasi-compact and quasi-separated since it is of finite presentation over the affine scheme $\\operatorname{Spec}R$.",
+   "uses": [
+    "lem-sfb-cubical-strict-local-affine-seed",
+    "def-sfb-cubical-rigidified-line",
+    "lem-weil-pbc-qcqs-morphism-permanence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/_section.md",
+    "place": "Agent proof: cubical fibrewise ampleness supporting the relative Picard input"
+   }
+  },
+  {
+   "text": "Every geometric fibre of $X$ is connected: in its semiabelian presentation the split torus and the abelian variety are connected; a clopen decomposition of the middle group is constant on each torus coset, descends along the fppf quotient to a clopen decomposition of the abelian variety, and is therefore constant. Applying the smooth-section component lemma, its open subfamily contains every point of every fibre, since all those fibres are connected; hence that open is $X$. Thus all residue fibres of $X$ are geometrically irreducible. The section-density lemma now applies to $X/R$: the values of $X(R)$ meet every nonempty open of each geometric fibre. All its hypotheses hold: $R$ is Noetherian strictly henselian, $X/R$ is smooth separated of finite presentation, and it has the identity section.",
+   "uses": [
+    "def-sfb-semiabelian-geometric-fibres",
+    "lem-sbc-smooth-section-component-geometrically-irreducible",
+    "lem-sfb-strict-henselian-fibrewise-section-density"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/_section.md",
+    "place": "Agent proof: cubical fibrewise ampleness supporting the relative Picard input"
+   }
+  },
+  {
+   "text": "For any $a\\in X(R)$ write $t_a(x)=x+a$. Pull the trivialized cube $\\Theta_3(L)$ back along $x\\mapsto(x,a,-a)$. Its factors are $L$ at $x$ twice, $L$ at $a,-a$, the inverse factors at $x+a,x-a,0$, and the inverse factor at $0$. Cancelling the identity factors with the rigidification gives\n$t_a^*L\\otimes t_{-a}^*L\\simeq L^2\\otimes p_R^*(a^*L\\otimes(-a)^*L)$.\nAn invertible module on the local scheme $\\operatorname{Spec}R$ is trivial: a trivializing open containing its closed point is the whole scheme. Choose a trivialization of the base factor. Tensoring the displayed isomorphism $n$ times transports $t_a^*s\\otimes t_{-a}^*s$ to a section $q_a\\in\\Gamma(X,L^{2n})$. The pullback and tensor fibre formulas show exactly that $X_{q_a}=t_a^{-1}(U)\\cap t_{-a}^{-1}(U)$. No symmetry of $L$ is used.",
+   "uses": [
+    "def-sfb-cubical-rigidified-line",
+    "def-sc-invertible-module",
+    "lem-weil-pbc-invertible-pullback-tensor"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/_section.md",
+    "place": "Agent proof: cubical fibrewise ampleness supporting the relative Picard input"
+   }
+  },
+  {
+   "text": "The open $t_a^{-1}(U)$ is affine because translation is an isomorphism. Intersect it with the nonvanishing locus of the section $t_{-a}^*s$ of $t_{-a}^*L^n$; the affine-cap-section lemma makes $X_{q_a}$ affine. To see these opens cover $X$, take a geometric point $x$ of any fibre $X_\\Omega$. The possible translation parameters form the open\n$W_x=(U_\\Omega-x)\\cap(x-U_\\Omega)\\subset X_\\Omega$.\nBoth terms are nonempty opens, as $U_\\Omega$ contains the identity and translation/inversion are automorphisms. Geometric irreducibility makes $W_x$ nonempty. Section density gives $a\\in X(R)$ with $a_\\Omega\\in W_x$. Then $x+a_\\Omega$ and $x-a_\\Omega$ lie in $U_\\Omega$, so $x\\in X_{q_a}$. Every scheme point admits a geometric point above it, so these opens cover all points of $X$. The quasi-compactness from step 2 and these positive-power global sections with affine nonvanishing opens give ampleness of $L$ by the definition.",
+   "uses": [
+    "lem-sc-affine-cap-section-open",
+    "lem-sfb-strict-henselian-fibrewise-section-density",
+    "def-weil-pbc-ample-invertible-module"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/_section.md",
+    "place": "Agent proof: cubical fibrewise ampleness supporting the relative Picard input"
+   }
+  },
+  {
+   "text": "Use the small cofiltered category of affine pointed etale neighbourhoods of the chosen geometric point over $t\\in V$. Its limit is $\\operatorname{Spec}R$ by the strict-henselization limit construction (the affine strict-local ring comparison identifies this limit with the algebraic strict henselization of $\\mathcal O_{V,t}$, respecting the map to $V$). Each neighbourhood $W_i$ is affine. Inverse images $H_i=H\\times_TW_i$ are quasi-compact and quasi-separated by finite presentation; every transition is affine, being a base change of a map between affine schemes. Their limit is $X$: a compatible family of maps to $H_i$ is precisely a map to $H$ together with a compatible family to $W_i$, and the latter uniquely gives a map to $\\operatorname{Spec}R$. Reindex this small cofiltered diagram by a nonempty directed set as in the reindexing lemma; the terms and affine transitions are unchanged. The line on any chosen stage is the pullback of $B$, with pullback $L$ on the limit. The ample limit-descent lemma therefore supplies an affine pointed etale neighbourhood $W_t\\to V$ on which $B|_{H_{W_t}}$ is ample.",
+   "uses": [
+    "def-weil-pbc-strict-henselization-limit",
+    "lem-weil-pbc-strict-henselization-triples",
+    "lem-weil-pbc-qcqs-morphism-permanence",
+    "lem-weil-pbc-affine-morphism-permanence",
+    "lem-weil-pbc-cofiltered-limit-directed-reindex",
+    "lem-trf-ample-affine-limit-descent",
+    "lem-exc-affine-strict-local-ring-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/_section.md",
+    "place": "Agent proof: cubical fibrewise ampleness supporting the relative Picard input"
+   }
+  },
+  {
+   "text": "For every affine open $W'\\subseteq W_t$, its inclusion into the affine scheme $W_t$ is affine (on affine schemes it is induced by the corresponding ring map). Its base change $H_{W'}\\to H_{W_t}$ is affine, so the ample pullback lemma makes $B|_{H_{W'}}$ ample. The pointed neighbourhoods $W_t\\to V$ for all $t\\in V$ form a jointly surjective etale family. Apply the ample-local lemma in its scheme case to $H_V\\to V$ and this family: it gives ampleness over the inverse image of every affine open of $V$, including $V$ itself. Since $V\\subseteq T$ was arbitrary, this proves the asserted relative ampleness. For $V$ empty the assertion follows directly from the ample definition.",
+   "uses": [
+    "lem-weil-pbc-affine-morphism-permanence",
+    "lem-weil-pbc-pullback-ample-invertible",
+    "lem-trf-algebraic-space-ample-local",
+    "def-weil-pbc-ample-invertible-module"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/_section.md",
+    "place": "Agent proof: cubical fibrewise ampleness supporting the relative Picard input"
+   }
+  }
+ ],
+ "proof_deps": [
+  "pqf-def-locnoeth",
+  "lem-weil-pbc-localization-noetherian",
+  "lem-pc-proper-base-change",
+  "lem-weil-pbc-separated-base-change",
+  "lem-weil-pbc-qcqs-morphism-permanence",
+  "def-sfb-semiabelian-geometric-fibres",
+  "def-sfb-cubical-rigidified-line",
+  "lem-weil-pbc-invertible-pullback-tensor",
+  "lem-weil-pbc-strict-henselization-triples",
+  "lem-sc-strict-henselization-noetherian",
+  "lem-sfb-cubical-strict-local-affine-seed",
+  "lem-sbc-smooth-section-component-geometrically-irreducible",
+  "lem-sfb-strict-henselian-fibrewise-section-density",
+  "def-sc-invertible-module",
+  "lem-sc-affine-cap-section-open",
+  "def-weil-pbc-ample-invertible-module",
+  "def-weil-pbc-strict-henselization-limit",
+  "lem-weil-pbc-affine-morphism-permanence",
+  "lem-weil-pbc-cofiltered-limit-directed-reindex",
+  "lem-trf-ample-affine-limit-descent",
+  "lem-exc-affine-strict-local-ring-comparison",
+  "lem-weil-pbc-pullback-ample-invertible",
+  "lem-trf-algebraic-space-ample-local"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/_section.md",
+  "place": "Supporting cubical fibrewise-ampleness input, via strict-local affine seed, translation of the cubical identity, and etale descent; not claimed as a transcription of Raynaud."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Scheme, \"IsAmple\"",
+   "results": "{\"t\": \"2026-10-23T21:33:15Z\", \"tool\": \"loogle\", \"query\": \"AlgebraicGeometry.Scheme, \\\"IsAmple\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected the returned types. Affine fibres, structure-sheaf localization, valuative criteria for scheme morphisms, ring Picard groups and Riemannian symmetry do not assert ampleness of an invertible module on a semiabelian family."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Fibrewise ample cubical line bundle on a semiabelian scheme over a normal Noetherian base is relatively ample",
+   "results": "{\"t\": \"2026-10-23T21:34:02Z\", \"tool\": \"leanfinder\", \"query\": \"Fibrewise ample cubical line bundle on a semiabelian scheme over a normal Noetherian base is relatively ample\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.AffineSpace.isPullback_map\", \"AlgebraicGeometry.instIsAffineFiberOfIsAffineHom\", \"AlgebraicGeometry.AffineSpace\", \"AlgebraicGeometry.AffineSpace.instIsOverHomOfVectorOverSchemeInferInstanceOverClass\", \"AlgebraicGeometry.instIsAffinePullbackSchemeOfIsAffineHom_1\", \"AlgebraicGeometry.instIsAffinePullbackSchemeOfIsAffineHom\", \"AlgebraicGeometry.Scheme.isPullback_toSpecΓ_toSpecΓ\", \"AlgebraicGeometry.AffineSpace.homOfVector\"], \"digest\": \"cd64118d9a5774e5\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected the returned types. Affine fibres, structure-sheaf localization, valuative criteria for scheme morphisms, ring Picard groups and Riemannian symmetry do not assert ampleness of an invertible module on a semiabelian family."
+  },
+  {
+   "tool": "grep",
+   "query": "fibrewise.*ample|fiberwise.*ample|relativelyAmple|IsRelativelyAmple",
+   "results": "{\"t\": \"2026-10-23T21:35:01Z\", \"tool\": \"grep\", \"query\": \"fibrewise.*ample|fiberwise.*ample|relativelyAmple|IsRelativelyAmple\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected the returned types. Affine fibres, structure-sheaf localization, valuative criteria for scheme morphisms, ring Picard groups and Riemannian symmetry do not assert ampleness of an invertible module on a semiabelian family."
+  },
+  {
+   "tool": "leansearch",
+   "query": "An invertible sheaf with a cubical structure on a semiabelian group scheme is relatively ample if its restriction to every residue field fibre is ample",
+   "results": "{\"t\": \"2026-10-23T21:35:01Z\", \"tool\": \"leansearch\", \"query\": \"An invertible sheaf with a cubical structure on a semiabelian group scheme is relatively ample if its restriction to every residue field fibre is ample\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Modules\", \"Submodule.unitsQuotEquivRelPic_apply_coe\", \"CommRing.relPic\", \"AlgebraicGeometry.Scheme.Modules.instAdditivePullback\", \"CategoryTheory.sheafIsAbelian\", \"Submodule.unitsQuotEquivRelPic\", \"AlgebraicGeometry.ProjectiveSpectrum.StructureSheaf.structureSheafInType\", \"SheafOfModules.QuasicoherentData.IsFinitePresentation\"], \"digest\": \"279df0b1a0d52c99\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected the returned types. Affine fibres, structure-sheaf localization, valuative criteria for scheme morphisms, ring Picard groups and Riemannian symmetry do not assert ampleness of an invertible module on a semiabelian family."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsAmple\", \"fiber\"",
+   "results": "{\"t\": \"2026-10-23T21:38:22Z\", \"tool\": \"loogle\", \"query\": \"\\\"IsAmple\\\", \\\"fiber\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected the returned types. Affine fibres, structure-sheaf localization, valuative criteria for scheme morphisms, ring Picard groups and Riemannian symmetry do not assert ampleness of an invertible module on a semiabelian family."
+  },
+  {
+   "tool": "grep",
+   "query": "IsAmple|isAmple|relativelyAmple|Relative.*Ample",
+   "results": "{\"t\": \"2026-10-23T23:13:04Z\", \"tool\": \"grep\", \"query\": \"IsAmple|isAmple|relativelyAmple|Relative.*Ample\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected results; affine-space fibres, convex ample sets, and ordinary sheaf operations do not state cubical fibrewise relative ampleness. Loogle queries using IsAmple report an unknown identifier, not a match."
+  },
+  {
+   "tool": "grep",
+   "query": "ample|cubical|semiabelian|group scheme",
+   "results": "{\"t\": \"2026-10-23T23:13:04Z\", \"tool\": \"grep\", \"query\": \"ample|cubical|semiabelian|group scheme\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 20, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/Sites/AffineEtale.lean\", \"Mathlib/AlgebraicGeometry/Sites/AffineEtale.lean\", \"Mathlib/AlgebraicGeometry/AffineSpace.lean\", \"Mathlib/AlgebraicGeometry/Sites/Affine.lean\", \"Mathlib/AlgebraicGeometry/EllipticCurve/NormalForms.lean\", \"Mathlib/AlgebraicGeometry/EllipticCurve/NormalForms.lean\", \"Mathlib/AlgebraicGeometry/Group/Smooth.lean\", \"Mathlib/AlgebraicGeometry/Group/Smooth.lean\"], \"digest\": \"23990925ad1bc287\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected results; affine-space fibres, convex ample sets, and ordinary sheaf operations do not state cubical fibrewise relative ampleness. Loogle queries using IsAmple report an unknown identifier, not a match."
+  },
+  {
+   "tool": "loogle",
+   "query": "IsAmple, IsSmooth, IsSeparated",
+   "results": "{\"t\": \"2026-10-23T23:13:04Z\", \"tool\": \"loogle\", \"query\": \"IsAmple, IsSmooth, IsSeparated\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"loogle: unknown identifier 'IsAmple'\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected results; affine-space fibres, convex ample sets, and ordinary sheaf operations do not state cubical fibrewise relative ampleness. Loogle queries using IsAmple report an unknown identifier, not a match."
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Scheme.IsAmple, AlgebraicGeometry.IsProper",
+   "results": "{\"t\": \"2026-10-23T23:13:05Z\", \"tool\": \"loogle\", \"query\": \"AlgebraicGeometry.Scheme.IsAmple, AlgebraicGeometry.IsProper\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"loogle: unknown identifier 'AlgebraicGeometry.Scheme.IsAmple'\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected results; affine-space fibres, convex ample sets, and ordinary sheaf operations do not state cubical fibrewise relative ampleness. Loogle queries using IsAmple report an unknown identifier, not a match."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "fibrewise ample line bundle on semiabelian group scheme",
+   "results": "{\"t\": \"2026-10-23T23:13:05Z\", \"tool\": \"leanfinder\", \"query\": \"fibrewise ample line bundle on semiabelian group scheme\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.AffineSpace\", \"AmpleSet.preimage\", \"AmpleSet.preimage_iff\", \"AlgebraicGeometry.instIsAffineFiberOfIsAffineHom\", \"AlgebraicGeometry.AffineSpace.over\", \"AlgebraicGeometry.AffineSpace.instSurjectiveOverSchemeInferInstanceOverClass\", \"AlgebraicGeometry.exists_appTop_map_eq_zero_of_isAffine_of_isLimit\", \"AlgebraicGeometry.exists_appTop_map_eq_zero_of_isLimit\"], \"digest\": \"a39e17a805cbd1b7\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected results; affine-space fibres, convex ample sets, and ordinary sheaf operations do not state cubical fibrewise relative ampleness. Loogle queries using IsAmple report an unknown identifier, not a match."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A cubical rigidified invertible module on a smooth separated semiabelian group scheme over a normal locally Noetherian base is relatively ample when all residue-field fibres are ample",
+   "results": "{\"t\": \"2026-10-23T23:13:06Z\", \"tool\": \"leanfinder\", \"query\": \"A cubical rigidified invertible module on a smooth separated semiabelian group scheme over a normal locally Noetherian base is relatively ample when all residue-field fibres are ample\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.AffineSpace.not_isIntegralHom\", \"AlgebraicGeometry.AffineSpace.instLocallyOfFinitePresentationOverSchemeInferInstanceOverClassOfFinite\", \"AlgebraicGeometry.AffineSpace\", \"AlgebraicGeometry.AffineSpace.instIsAffineHomOverSchemeInferInstanceOverClass\", \"AlgebraicGeometry.instIsAffineFiberOfIsAffineHom\", \"AlgebraicGeometry.AffineSpace.isIntegralHom_over_iff_isEmpty\", \"AlgebraicGeometry.AffineSpace.instIsAffine\", \"AlgebraicGeometry.formallyUnramified_iff\"], \"digest\": \"492c8020e8c642b0\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected results; affine-space fibres, convex ample sets, and ordinary sheaf operations do not state cubical fibrewise relative ampleness. Loogle queries using IsAmple report an unknown identifier, not a match."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A cubical rigidified line on a semiabelian group scheme is relatively ample if every fibre is ample",
+   "results": "{\"t\": \"2026-10-23T23:16:37Z\", \"tool\": \"leansearch\", \"query\": \"A cubical rigidified line on a semiabelian group scheme is relatively ample if every fibre is ample\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.instIsAffineFiberOfIsAffineHom\", \"AlgebraicGeometry.IsAffine.recOn\", \"AlgebraicGeometry.IsFinite.toIsAffineHom\", \"AlgebraicGeometry.FormallyUnramified.casesOn\", \"AlgebraicGeometry.FormallyUnramified.recOn\", \"CommRing.relPic\", \"AlgebraicGeometry.Scheme.IsQuasiAffine.of_forall_exists_mem_basicOpen\", \"AlgebraicGeometry.Scheme.instIsSeparatedOfIsAffine\"], \"digest\": \"43373afa196d68e7\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected results; affine-space fibres, convex ample sets, and ordinary sheaf operations do not state cubical fibrewise relative ampleness. Loogle queries using IsAmple report an unknown identifier, not a match."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-semiabelian-supplied-norm-ampleness",
+  "date": "2026-10-24",
+  "group": "Q15"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Scheme representability of the stable abelian-level normalization. Supporting input: freeness at normalized boundary branches. Comparison of the full cohomology frame in the item with Deligne 3.3--3.5 Picard torsion frames; relative Picard existence for the pulled-back stable family. Supporting input for the present split: A relatively ample line module on the stable-curve multidegree-zero Picard space. Supporting input: Generic ampleness criterion for smooth connected group schemes. Raynaud input: existence, locally on a normal base, of an ample extension of a positive power of a symmetric line on the dense abelian open; comparison with the supplied line is a separate proof step. Cubical proof input: extension of cubical objects and isomorphisms, without positivity; supporting input: Local prolongation of a tensor power of a symmetric line; Moret-Bailly II 3.3.3 opening application of Raynaud XI 1.13 to generic ample modules; isolate the positive generic input before forming a tensor quotient and comparing over U. Supporting input for Q35: Relative ampleness of the inversion norm of a supplied line. Q15 support: Fibrewise ampleness criterion for cubical lines on semiabelian schemes.",
+   "via": [
+    "lem-sfb-semiabelian-supplied-norm-ampleness",
+    "lem-sfb-raynaud-generic-ample-symmetrization",
+    "lem-sfb-symmetric-line-power-prolongation",
+    "lem-sfb-normal-symmetric-cubical-extension",
+    "lem-sfb-symmetric-ample-power-extension",
+    "lem-sfb-regular-group-generic-ampleness",
+    "lem-sfb-stable-picard-theta-ampleness",
+    "lem-sfb-stable-relative-picard-kummer",
+    "lem-sfb-stable-level-versal-branch-freeness",
+    "lem-sfb-stable-abelian-level-normalization",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-cubical-fibrewise-ample-criterion",
+  "worker": "stage1",
+  "summary": "Preserved the full all-fibres criterion, without properness or symmetry. Isolated one affine chart after strict henselization and a group-independent density lemma as the two unsplit inputs. Gave the cube cancellation, affine intersections, all-geometric-fibre covering, small directed-limit descent and etale-local assembly explicitly. Searched project, DAG, current blueprint and Mathlib; no attachment or Mathlib leaf found. Raynaud unavailable; proof is agent-written.",
+  "blueprint": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Scheme representability of the stable abelian-level normalization. Supporting input: freeness at normalized boundary branches. Comparison of the full cohomology frame in the item with Deligne 3.3--3.5 Picard torsion frames; relative Picard existence for the pulled-back stable family. Supporting input for the present split: A relatively ample line module on the stable-curve multidegree-zero Picard space. Supporting input: Generic ampleness criterion for smooth connected group schemes. Raynaud input: existence, locally on a normal base, of an ample extension of a positive power of a symmetric line on the dense abelian open; comparison with the supplied line is a separate proof step. Cubical proof input: extension of cubical objects and isomorphisms, without positivity; supporting input: Local prolongation of a tensor power of a symmetric line; Moret-Bailly II 3.3.3 opening application of Raynaud XI 1.13 to generic ample modules; isolate the positive generic input before forming a tensor quotient and comparing over U. Supporting input for Q35: Relative ampleness of the inversion norm of a supplied line. Q15 support: Fibrewise ampleness criterion for cubical lines on semiabelian schemes.",
+  "tool_uses": [
+   {
+    "node": "pqf-def-locnoeth",
+    "why": "Generic scheme/line-bundle/local-algebra tool for the strict-local translation argument; no replacement of the unit alteration/Picard route."
+   },
+   {
+    "node": "lem-weil-pbc-localization-noetherian",
+    "why": "Generic scheme/line-bundle/local-algebra tool for the strict-local translation argument; no replacement of the unit alteration/Picard route."
+   },
+   {
+    "node": "lem-pc-proper-base-change",
+    "why": "Generic scheme/line-bundle/local-algebra tool for the strict-local translation argument; no replacement of the unit alteration/Picard route."
+   },
+   {
+    "node": "lem-weil-pbc-separated-base-change",
+    "why": "Generic scheme/line-bundle/local-algebra tool for the strict-local translation argument; no replacement of the unit alteration/Picard route."
+   },
+   {
+    "node": "lem-weil-pbc-qcqs-morphism-permanence",
+    "why": "Generic scheme/line-bundle/local-algebra tool for the strict-local translation argument; no replacement of the unit alteration/Picard route."
+   },
+   {
+    "node": "lem-weil-pbc-invertible-pullback-tensor",
+    "why": "Generic scheme/line-bundle/local-algebra tool for the strict-local translation argument; no replacement of the unit alteration/Picard route."
+   },
+   {
+    "node": "lem-weil-pbc-strict-henselization-triples",
+    "why": "Generic scheme/line-bundle/local-algebra tool for the strict-local translation argument; no replacement of the unit alteration/Picard route."
+   },
+   {
+    "node": "lem-sc-strict-henselization-noetherian",
+    "why": "Generic scheme/line-bundle/local-algebra tool for the strict-local translation argument; no replacement of the unit alteration/Picard route."
+   },
+   {
+    "node": "lem-sbc-smooth-section-component-geometrically-irreducible",
+    "why": "Generic scheme/line-bundle/local-algebra tool for the strict-local translation argument; no replacement of the unit alteration/Picard route."
+   },
+   {
+    "node": "def-sc-invertible-module",
+    "why": "Generic scheme/line-bundle/local-algebra tool for the strict-local translation argument; no replacement of the unit alteration/Picard route."
+   },
+   {
+    "node": "lem-sc-affine-cap-section-open",
+    "why": "Generic scheme/line-bundle/local-algebra tool for the strict-local translation argument; no replacement of the unit alteration/Picard route."
+   },
+   {
+    "node": "def-weil-pbc-ample-invertible-module",
+    "why": "Generic scheme/line-bundle/local-algebra tool for the strict-local translation argument; no replacement of the unit alteration/Picard route."
+   },
+   {
+    "node": "def-weil-pbc-strict-henselization-limit",
+    "why": "Generic scheme/line-bundle/local-algebra tool for the strict-local translation argument; no replacement of the unit alteration/Picard route."
+   },
+   {
+    "node": "lem-weil-pbc-affine-morphism-permanence",
+    "why": "Generic scheme/line-bundle/local-algebra tool for the strict-local translation argument; no replacement of the unit alteration/Picard route."
+   },
+   {
+    "node": "lem-weil-pbc-cofiltered-limit-directed-reindex",
+    "why": "Generic scheme/line-bundle/local-algebra tool for the strict-local translation argument; no replacement of the unit alteration/Picard route."
+   },
+   {
+    "node": "lem-trf-ample-affine-limit-descent",
+    "why": "Generic scheme/line-bundle/local-algebra tool for the strict-local translation argument; no replacement of the unit alteration/Picard route."
+   },
+   {
+    "node": "lem-weil-pbc-pullback-ample-invertible",
+    "why": "Generic scheme/line-bundle/local-algebra tool for the strict-local translation argument; no replacement of the unit alteration/Picard route."
+   },
+   {
+    "node": "lem-trf-algebraic-space-ample-local",
+    "why": "Generic scheme/line-bundle/local-algebra tool for the strict-local translation argument; no replacement of the unit alteration/Picard route."
+   },
+   {
+    "node": "lem-exc-affine-strict-local-ring-comparison",
+    "why": "Identifies the pointed-neighbourhood limit with the local-ring strict henselization, including the structural map; needed for ample limit descent."
+   }
+  ]
+ },
+ "tool_uses": [
+  "pqf-def-locnoeth",
+  "lem-weil-pbc-localization-noetherian",
+  "lem-pc-proper-base-change",
+  "lem-weil-pbc-separated-base-change",
+  "lem-weil-pbc-qcqs-morphism-permanence",
+  "lem-weil-pbc-invertible-pullback-tensor",
+  "lem-weil-pbc-strict-henselization-triples",
+  "lem-sc-strict-henselization-noetherian",
+  "lem-sbc-smooth-section-component-geometrically-irreducible",
+  "def-sc-invertible-module",
+  "lem-sc-affine-cap-section-open",
+  "def-weil-pbc-ample-invertible-module",
+  "def-weil-pbc-strict-henselization-limit",
+  "lem-weil-pbc-affine-morphism-permanence",
+  "lem-weil-pbc-cofiltered-limit-directed-reindex",
+  "lem-trf-ample-affine-limit-descent",
+  "lem-weil-pbc-pullback-ample-invertible",
+  "lem-trf-algebraic-space-ample-local",
+  "lem-exc-affine-strict-local-ring-comparison"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q06-1a5631d5a",
+  "group": "Q06",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q06-1a5631d5a (reviewer sub-agent of L); spot-checked: I read the item, both new nodes and every cited statement in full. This is a first split (the base item was unsplit with no proof, and live/side-live still show it unsplit). The statement is unchanged and keeps every hypothesis (normal locally Noetherian T; smooth separated commutative group of finite presentation; semiabelian geometric fibres; cubical rigidified line; ample on every fibre), with no properness or symmetry assumption. Step 1: the Noetherian local A comes from a Noetherian chart plus the localization lemma; only the smoothness clause (2) of lem-pc-proper-base-change is used; every fibre over a prime of A is an original fibre at a generalization, so ampleness holds at every prime; the triples lemma and 06LJ give R strictly henselian and Noetherian. Step 2: through the rigidification e_R^*s is a unit, so the whole identity section lies in U. Step 3: connectedness follows from the fppf exact sequence (same argument as the parent's reviewed step 2), and the smooth-section component lemma then gives geometrically irreducible fibres, so the density lemma's hypotheses hold. Step 4: I recomputed the eight Θ_3 factors along (x,a,-a) and get t_a^*L⊗t_{-a}^*L≅L^2⊗p^*(a^*L⊗(-a)^*L), and the nonvanishing locus of q_a is t_a^{-1}U∩t_{-a}^{-1}U. Step 5: 01PV makes these opens affine, and the open (U_Ω-x)∩(x-U_Ω) plus density gives the cover, matching 01PS. Step 6: 04HX identifies the neighbourhood limit with (O_{V,t})^sh; the 09MT hypotheses hold (small directed index, qcqs terms, affine transitions). Step 7: 0892(2) and the scheme case of 0D3C/0D36 conclude. New node lem-sfb-cubical-strict-local-affine-seed is true (it follows from the item over Spec A by affine pullback; I also checked the Tate degeneration case). It is strictly smaller than the item: one chart, no covering; steps 3-7 are real arguments on top of it. It is self-contained, all three search kinds are recorded, and I found no duplicate. New node lem-sfb-strict-henselian-fibrewise-section-density is true: étale chart over A^d (054L), lifts c+m^d, m/q infinite, quasi-finite dimension count and irreducibility, then density passes to Ω by linear independence; it is distinct from the 055U and 056U nodes. Batch-5 flags: lem-trf-ample-affine-limit-descent (09MT) and lem-trf-algebraic-space-ample-local (0D3C) are generic limit-descent and étale-descent results in sk-i-curve-zero. Neither assumption leaf gives them and their closures contain no trace-formula or Poincaré content. Both already lie in the closure of the two batch-5 targets without this item, which adds only itself and its two new nodes. Accepted. The 19 tool_uses are generic and accepted. No SGA citation. A parallel Q96 delivery of the same item exists, which I did not read; the maintainer chooses which one merges."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.CubicalFibrewiseAmpleCriterion",
+  "declaration": "AlgebraicGeometry.CubicalRigidifiedLine.isAmple_over_affine_of_fibrewise",
+  "file": "lean/Sheaf/AlgebraicGeometry/CubicalFibrewiseAmpleCriterion.lean",
+  "statement": "theorem CubicalRigidifiedLine.isAmple_over_affine_of_fibrewise {T : Scheme.{u}} [IsLocallyNoetherian T] (hnormal : ∀ t : T, IsDomain (T.presheaf.stalk t) ∧ IsIntegrallyClosed (T.presheaf.stalk t)) (H : Grp (Over T)) [IsCommMonObj H.X] [Smooth H.X.hom] [IsSeparated H.X.hom] [QuasiCompact H.X.hom] (B : CubicalRigidifiedLine H.X) (hample : ∀ t : T, ∃ hBt : ((Scheme.Modules.tensorPullback (H.X.hom.fiberι t)).obj B.line).IsInvertible, @Scheme.Modules.IsAmple (H.X.hom.fiber t) ((Scheme.Modules.tensorPullback (H.X.hom.fiberι t)).obj B.line) hBt) (hsemi : HasSemiabelianGeometricFibres H) : ∀ V : T.Opens, IsAffineOpen V → ∃ hBV : ((Scheme.Modules.tensorPullback (H.X.hom ⁻¹ᵁ V).ι).obj B.line).IsInvertible, @Scheme.Modules.IsAmple (H.X.hom ⁻¹ᵁ V).toScheme ((Scheme.Modules.tensorPullback (H.X.hom ⁻¹ᵁ V).ι).obj B.line) hBV",
+  "branch": "newtargets-dag",
+  "by": "Q102",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-328066833",
+  "group": "Q102",
+  "result": "pass",
+  "note": "The node copy differs from live only in lean, the dependency records are identical to side-live, and lean.statement is verbatim in the file. Clause by clause: IsLocallyNoetherian plus stalkwise IsDomain∧IsIntegrallyClosed (recorded normal form); Grp (Over T)+IsCommMonObj = Mathlib CommGrpObj (class abbrev), the same law used by CubicalRigidifiedLine and HasSemiabelianGeometricFibres; Smooth+IsSeparated+QuasiCompact = lfp+qc+qs, which is finite presentation and not stronger; fiber/fiberι is the residue-field pullback; tensorPullback is used throughout. The IsInvertible witnesses are automatic and unused by the IsAmple body (real 01PS definition). No properness, symmetry or generic hypothesis. Edge cases: empty T and empty V are trivial, rank-0 tori are allowed, single universe u. sorry only; no new definitions or theorem stmt_deps; source and blueprint docstrings present with the 7-step proof; no duplicate in side-live; proof imports exist; the report has both sections. Not recompiled because no file changed; the worker reports a clean scompile and an OK dry run. No findings."
+ }
+}

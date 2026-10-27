@@ -1,0 +1,146 @@
+{
+ "id": "lem-trf-charted-fan-resolution-procedure",
+ "kind": "statement",
+ "title": "Fan resolution procedure on globally charted log schemes",
+ "statement": "Let $R$ be a smooth-functorial saturated fan desingularization [def-trf-fine-fan-blowup]. There exists a strict etale log blowup procedure $T$ on charted admissible inputs [def-trf-strict-etale-log-blowup-procedure]. For each such input $X$, there is a fine torsion-free fan $F$ with finite affine cover, and a fan chart $c$ from the terminal log scheme of $T(X)$ to the terminal fan of $R(F)$ [lem-trf-log-fan-chart-blowup]. At each geometric point $t$ of that terminal log scheme, there is a multiplicative isomorphism from the fan stalk at $c(t)$ to the geometric characteristic monoid at $t$, normalized by the Zariski log-section germ equations of IsGeometricComparison.",
+ "source": {
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "Exposé VIII, Remark 3.3.13 and proof of Theorem 3.3.15, printed pp. 108--110."
+ },
+ "stmt_deps": [
+  "def-trf-fine-fan-blowup",
+  "def-trf-strict-etale-log-blowup-procedure",
+  "lem-trf-log-fan-chart-blowup"
+ ],
+ "proof": [
+  {
+   "text": "For a globally charted input, use quasi-compactness to restrict the chart fan to a finite union of affine localizations covering its image. Chart stalks are the sharp fs characteristic stalks. Their torsion-free group completions imply torsion-freeness on those affine localization fans. The restriction is therefore a ResolutionInput. For the empty input use the empty fan.",
+   "uses": [
+    "lem-trf-log-fan-chart-blowup",
+    "def-trf-fine-fan-blowup"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply the given R to this input and lift its finite ordered fan tower by log_fan_chart_blowup. Centers are the prescribed inverse-image log ideals and are nonempty coherent. Delete exactly whole-monoid centers: the identity principalizes a whole ideal after every morphism, so uniqueness in the saturated log blowup universal property makes these stages log identities. Transport the final fan chart and its normalized geometric comparisons through the resulting log isomorphism of terminal levels. Retain proper principal centers.",
+   "uses": [
+    "lem-trf-log-fan-chart-blowup",
+    "def-trf-fs-log-blowup"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply strict_fan_chart_local_comparison to two charts and the identity log map. On its neighbourhoods their target fans are identified through affine localizations. The identity and composition laws of R identify the ordered localized fan centers. Pulling back these centers gives the same log ideals. Universal log blowups give unique comparisons at every level; their uniqueness proves agreement on overlaps and the cocycle law. Glue the centers and level maps inside the already charted input. The tower is independent of the chosen chart.",
+   "uses": [
+    "lem-trf-strict-fan-chart-local-comparison",
+    "lem-trf-log-fan-chart-blowup",
+    "def-trf-fine-fan-blowup",
+    "def-trf-fs-log-blowup"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For a strict etale map of globally charted inputs, use the same chart-local comparison and strict pullback of log fan towers. The identified ideals give Cartesian blowup squares. Delete exactly whole pulled ideals to obtain the order-preserving comparison indices, retained centers and deleted identity steps. Uniqueness of blowup factorizations gives the identity and composition equations. Apply also to component inclusions into finite disjoint unions, using R on the disjoint union fan to synchronize the ordering. This constructs T on the charted domain as a property of X, with the terminal chart and geometric comparisons from the lifted R-tower.",
+   "uses": [
+    "lem-trf-strict-fan-chart-local-comparison",
+    "lem-trf-log-fan-chart-blowup",
+    "def-trf-fine-fan-blowup",
+    "def-trf-fs-log-blowup",
+    "def-trf-strict-etale-log-blowup-procedure"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-trf-log-fan-chart-blowup",
+  "def-trf-fine-fan-blowup",
+  "def-trf-fs-log-blowup",
+  "lem-trf-strict-fan-chart-local-comparison",
+  "def-trf-strict-etale-log-blowup-procedure"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "Exposé VIII, Remark 3.3.13 and proof of Theorem 3.3.15, printed pp. 108--110. The terminal-stalk descent argument is expanded from the descent reduction."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Construct chart independent strict etale functorial logarithmic blowup resolution from smooth functorial fan resolution",
+   "results": "Search succeeded with 8 hits: AlgebraicGeometry.Scheme.Etale, CategoryTheory.LocalizerMorphism.isRightDerivabilityStructure_of_functorial_resolutions, AlgebraicGeometry.IsSmooth.casesOn, CategoryTheory.LocalizerMorphism.functorialRightResolutions.ι, Algebra.FormallyEtale.of_unramified_and_smooth, AlgebraicGeometry.IsEtale.instIsSmooth, RingHom.IsStandardSmooth.exists_etale_mvPolynomial, Algebra.FormallyEtale.of_formallyUnramified_and_formallySmooth. Read the returned types; none states a logarithmic fan-resolution procedure or the terminal log-characteristic comparison for a descended tower.",
+   "date": "2026-10-26",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Smooth functorial fan desingularization induces a chart independent strict etale functorial saturated log blowup procedure on globally fan charted schemes",
+   "results": "Search succeeded with 8 hits: AlgebraicGeometry.Scheme.Etale, AlgebraicGeometry.IsEtale.instIsSmooth, AlgebraicGeometry.IsSmooth.exists_isStandardSmooth, AlgebraicGeometry.IsEtale, AlgebraicGeometry.Scheme.instCategoryEtale, AlgebraicGeometry.IsSmooth, AlgebraicGeometry.IsEtale.instHasOfPostcompPropertyScheme, AlgebraicGeometry.IsSmoothOfRelativeDimension.exists_isStandardSmoothOfRelativeDimension. Read the returned types; none states a logarithmic fan-resolution procedure or the terminal log-characteristic comparison for a descended tower.",
+   "date": "2026-10-26",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "rg -n -i logblowup|log_blowup|LogFanChart|LogBlowupComparison Mathlib WeilConjectures; rg on lean/Sheaf for terminal characteristic, charted resolution and procedure agreement; blueprint_refs.py search log blowup",
+   "results": "No matches in Mathlib or WeilConjectures. Sheaf has StrictEtaleLogBlowupProcedure, LogFanChartBlowup, FunctorialLogBlowupEtaleDescent and RigidifiedQuotientTowerComparison. Read their signatures: they define procedures, lift one fixed chart, or extend a supplied procedure, but do not construct the chart-independent procedure with its terminal chart certificate. The whole-blueprint search returned zero matches.",
+   "date": "2026-10-26",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.MonoidalResolutionTower",
+  "date": "2026-10-26",
+  "group": "D6"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Proof (1)--(2), nearby-duality alteration reduction: the regular modification of each log regular nodal pair, used in Expose X, proof of Lemma 2.2, through the existing nearby-duality/alteration ancestry. Expose VIII, 3.3.14--Theorem 3.3.15, printed p. 109 and proof pp. 109--110, with the saturated fan desingularization constructed in 3.1.27 and 3.2.19--3.2.21, printed pp. 102 and 105--106. The auxiliary toric resolution is taken over Q; the resulting monoidal construction has no characteristic restriction on X. This node supplies the global-chart construction and chart-independence in steps 1--4 of lem-trf-monoidal-resolution-tower.",
+   "via": [
+    "lem-trf-monoidal-resolution-tower",
+    "lem-trf-log-regular-desingularization",
+    "lem-trf-nodal-pair-projective-resolution",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.ChartedFanResolutionProcedure",
+  "file": "lean/Sheaf/AlgebraicGeometry/ChartedFanResolutionProcedure.lean",
+  "declaration": "AlgebraicGeometry.exists_charted_fan_resolution_procedure",
+  "statement": "theorem exists_charted_fan_resolution_procedure\n    (R : FineFan.SmoothFunctorialDesingularization.{u}) :\n    ∃ T : StrictEtaleLogBlowupProcedure IsChartedLogBlowupInput.{u},\n      ∀ (X : FineSaturatedLogScheme.{u}) (hX : IsChartedLogBlowupInput X),\n        ∃ (F : FineFan.ResolutionInput.{u})\n          (c : LogFanChart\n            ((T.tower X hX).tower.level (Fin.last (T.tower X hX).tower.length))\n            ((R.resolution F).tower.level (Fin.last (R.resolution F).length))),\n          ∀ (Ω : Type u) [Field Ω] [IsAlgClosed Ω]\n            (t : Spec (.of Ω) ⟶\n              ((T.tower X hX).tower.level (Fin.last (T.tower X hX).tower.length)).scheme),\n            ∃ e : FineFan.stalk\n                ((R.resolution F).tower.level (Fin.last (R.resolution F).length)).space.presheaf\n                (c.map.hom.base (t default)) ≃*\n                ((T.tower X hX).tower.level\n                  (Fin.last (T.tower X hX).tower.length)).logStructure.characteristic t,\n              c.IsGeometricComparison t e",
+  "branch": "sheaf-dag",
+  "by": "D6",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D6",
+  "result": "pass",
+  "landing": "20261026T091407-L-3339768",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D6",
+  "result": "pass",
+  "landing": "20261026T091407-L-3339768",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

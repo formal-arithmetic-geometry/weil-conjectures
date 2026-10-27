@@ -1,0 +1,65 @@
+# Q16 stage-1 delivery: lem-tw-lisse-scalar-comparison-coherence
+
+## Files written
+
+- `dag/nodes/sec-purity-real-sheaves/lem-tw-lisse-scalar-comparison-coherence.json`: statement node, split into ten proof steps; not a Mathlib leaf. Statement and original statement dependencies retained.
+- `citations.json`: one verbatim statement quote for every step/node citation.
+- `report.md`: this report. `prepare.py` is sandbox-only preparation, and `searches.jsonl` is the search command's actual log.
+
+New nodes: 0. New Mathlib leaves: 0.
+
+## Attachments
+
+None. Searched the exact blueprint tag and scalar/completed coherence and lisse-realization notions in `lean/WeilConjectures/`. Ordinary scalar-extension coherence declarations concern different coefficient categories and do not provide all clauses of this item.
+
+## WANTED
+
+None. The source PDF and Stacks source are present.
+
+## Findings and corrections
+
+The imported item had a statement but no proof. I kept its statement. Its simultaneous quotient-cone and homology-normalization clauses are an agent specification, not a verbatim consequence claimed by the numbering in Bhatt–Scholze. The proof is consequently marked `proof_origin.by: agent`, with the actual literature and the smaller technical results cited.
+
+A strict augmentation into the cone has zero shifted-product component. An inverse to it in the derived category need not be represented by a strict chain inverse. The proof explicitly retains that distinction: compare the augmentation diagrams first, pass to derived maps and only then cancel invertible completion comparisons. Nor does equality of individual finite reductions alone establish equality of derived arrows: the proof uses whole coherent systems and the two actual cone coordinates before passing to derived morphisms.
+
+The finite residue map for a ramified field extension is not assumed flat. The finite derived normalization and strict quotient-realization statements expressly allow those coefficient maps. Exactness of rational field extension instead comes from the finite-free completed coefficient sheaf and localization at the image of the old uniformizer.
+
+## Unfinished work
+
+None for this one-level split. The existing cited statement-only nodes remain their own future stage-1 items; none was split or modified here.
+
+## Not duplicates
+
+No new nodes were created. The searches found existing nodes for scalar associator normalization, coherent completed-operation substitution, finite derived comparison normalization and whole quotient-system realization; these were cited directly. The blueprint searches `scalar comparison`, `lisse realization` and `completion associator` supplied no blueprint node stating this entire realization-coherence item. `same_as` remains empty. The nearest blueprint ancestor is `lem-tw-dual-negation` through the already recorded realization chain.
+
+## Sources and Mathlib searches
+
+Read Bhatt–Scholze, *The pro-étale topology for schemes*, Lemma 6.8.2 and Definition 6.8.3 / Proposition 6.8.4, pp. 58–60, and Proposition 6.8.14 / Remark 6.8.15, pp. 61–62. In particular Remark 6.8.15 describes ordinary module pullback by a structural ring map rather than identifying inverse images of completed rings for an arbitrary morphism. This is why step 1 checks that ring square and why ordinary derived pullback comparisons are needed. Read Stacks Tag 093M, `sites-modules.tex`, `lemma-completion-flat`: its actual claim is flatness over the constant ring and the quotient identifications, not flatness of every finite residue-field-change map. The present proof reuses the more specific completed-coefficient comparison nodes and does not cite that tag as a replacement for them. Read the chapter, unit, main-20261015 dual-weight blueprint statement and current parent realization proof; this is realization infrastructure for that route, not a replacement of the unit's weight-negation argument.
+
+Ran the prescribed msearch command for the item with LeanFinder (two distinct phrasings), Loogle, grep and LeanSearch. All services returned answers. The precise queries and actual returned declaration names are appended to `mathlib_searches`; the command's records are in `searches.jsonl`. Read `Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean:118` (sheafification comparison), :139 (identity), :167 (composition), :193 (associativity), and `PullbackFree.lean:110` (free-sheaf pullback), :118 and :127 (generator and naturality equations). These supply ordinary pullback facts, not the specified completion inverse or its compatibility with the constructible raw rationalization. Other search hits concern Kähler differentials, algebraic adic completion, and condensed modules. Thus the whole item is not a Mathlib leaf. No new lemma was declared absent based on these searches.
+
+## Review by Q16
+
+I checked each proof use against the current statement of the cited node, rather than its proof or title. The citations file includes the full verbatim statements so the precise scope remains inspectable. There is no Lean audit declaration to split off or attach for this newly created item.
+
+Step 1 first checks geometry using `def-weil-finite-type-morphism`, `pqf-lem-locnoeth-lft` (Stacks Tag 01T6, `morphisms.tex`, `lemma-finite-type-noetherian`), `lem-weil-pbc-locally-noetherian-quasi-separated` (Stacks Tag 01OY, `properties.tex`, `lemma-locally-Noetherian-quasi-separated`) and `lem-kun-dimension-finite-type` (the current blueprint dimension statement). I read both Stacks statements and the dimension node. The local-Noetherian node gives local Noetherianity; quasi-compactness comes separately from finite type by definition. No separatedness is needed for quasi-separatedness here. Step 1 then uses `lem-weil-integral-scalar-extension-well-defined` for its actual same-index coefficient maps and valuation restriction assertion, `lem-weil-l-adic-extension-integers-dvr` for factorization into a unit times a uniformizer power, and `lem-tw-completed-coefficient-ringed-coherence` for the geometric structural maps and their inverse-image compositors. The completed scalar maps commute at each finite projection by functoriality of the same coefficient inclusions. Joint monicity is used only for an ordinary sheaf inverse limit, not a derived limit. Positive valuation implies exponent at least one; it gives equality of the two localizations without requiring the same uniformizers in different fields.
+
+Step 2 uses the specified isomorphism, naturality and actual quotient augmentation of `lem-weil-finite-free-completed-scalar-comparison`, ordinary K-flat scalar extension of `lem-pur-derived-change-of-rings`, and the normalized ordinary scalar associators in `lem-sfb-ringed-derived-monoidal-comparisons`. The input belongs to the integral constructible category and is therefore derived complete. All tensor associators have source and target in the stated ordinary module-derived categories. Step 3 uses that same comparison's naturality and the explicit Hom-tensor formula and arrow action in `def-weil-rationalization-karoubi`; the balancing and additivity calculation is elementary and does not require Hom groups to be torsion-free.
+
+Step 4 uses the exact finite rank asserted by `lem-weil-completed-integral-finite-free`, the exact localization, slice identifications and lisse degree-zero image in `lem-tw-lisse-localization-restriction`, and the normalization of the actual comparison in `lem-weil-finite-free-completed-scalar-comparison`. Localizing the finite free decomposition gives an exact finite direct-sum scalar functor; this argument does not infer flatness from the definition of a flat module. `def-real-lisse-field-normalization` is cited only to identify which recorded normalization has just been verified, not as a theorem proving it. Rank zero and unequal finite ranks on different components require no common globally constant rank.
+
+Step 5 uses the complete strong-monoidal, identity and composition assertions in `lem-sfb-ringed-derived-monoidal-comparisons`, and the simultaneous K-flat formulas, scalar-square equation and successive-change equations in `lem-pur-finite-derived-comparison-normalization`. Their structural ring maps need not be flat, and both results allow unbounded complexes. Thus this step does not use a theorem about finite perfect complexes as though it applied to arbitrary integral representatives.
+
+Step 6 uses `lem-pur-completed-operation-tower-substitution` for substitution of whole expressions and the normalization of the completed associators, unitors, symmetry and compositors. `lem-pur-completed-comparison-quotient-realization` states that the finite comparison diagrams are strict-system equations and that their limits are the prescribed completed maps. The actual ordinary-to-completed augmentations are the ones specified in `lem-fix-constructible-tensor-completion` and `lem-tw-ordinary-completed-integral-pullback`; `lem-pur-quotient-scalar-comparison-descent` supplies the scalar cone map with zero shifted coordinate and canonical derived descent. I checked the cone equations at both coordinates; no inference from just cohomology or isolated projections is substituted. The example formulas include the Koszul sign. This is the potentially hidden comparison argument, written out using existing smaller statements rather than creating a node restating this item's coherence clause.
+
+Step 7 invokes `lem-tw-lisse-tensor-pullback-realization` only for its specified inverse-completion definitions and ordinary comparison formulas, not for coherence (which its statement does not assert). The tensor-completion and ordinary-completed-pullback theorems supply invertibility, and the substitution theorem fixes the completed structural maps. Inserting inverse isomorphisms into the commuting diagrams cancels adjacent factors. Raw rationalization then preserves the equations. No separatedness or linearity of the scheme morphism is used. The hypotheses of the pullback theorem (noetherian and finite dimensional) hold for finite-type schemes over a field, explicitly checked in step 1; for the explicit augmentation calculation itself no further geometry is needed.
+
+Step 8 uses the displayed normalization equation, cofinal-choice independence, unit equations and pentagon stated in `lem-fix-scalar-completion-associator`. The finite-free comparison states completeness of ordinary scalar extension and its identity normalization. Thus the associator theorem is applied to complete objects, including the intermediate scalar extension. The displayed equation is inverted in the derived category in its stated order; repeated fields retain the completeness unitor rather than a false strict equality of functors.
+
+Step 9 uses the scalar quotient representatives, ramified-case allowance, whole-system equation and mixed equation in `lem-pur-completed-comparison-quotient-realization`; the ordinary scalar square in `lem-pur-finite-derived-comparison-normalization`; and the successive scalar normalization in `lem-fix-scalar-completion-associator`. The two realization statements fix which completion inverses are cancelled. I verified the two tensor-generator routes and their product scalar, not merely claimed that comparison 'transports'. This includes compatibility with the quotient transitions. The extension maps of residue rings are not assumed flat.
+
+Step 10 uses `lem-tw-lisse-localization-restriction` for the slice and degree-zero sheaf identifications, `lem-tw-lisse-tensor-pullback-realization` for the actual local tensor and pulled-back generator formulas, and `def-real-lisse-field-normalization` to identify the degree-zero normalization. The preceding scalar construction fixes the field comparison formula. Matrix multiplication with coefficient images proves independence of basis and naturality with respect to sheaf maps. These are ordinary degree-zero sheaf morphisms, so checking them on a common cover is legitimate. Tested empty schemes, zero objects, rank-zero factors, rank-one units, identity scheme maps, repeated fields and ramified towers. Symmetry is positive in degree zero and retains the signed rule on arbitrary cochain representatives.
+
+All ten steps are shorter than 2000 characters. Checked delivery-errors B–E: no new unsplit node with a hidden proof, no duplicate or clause-restatement nodes, no SGA source, all uses occur in the dependency union, no statement change, no invented Mathlib search, and all introduced notions remain covered by the unchanged statement dependencies. Cross-unit citations are declared in `split_report.tool_uses`: they are generic coefficient/derived-operation tools absent from the weight unit, not a different route to the unit's conclusion. Checked the proposed dependencies have no path back to this item.
+
+Validation: initial required `deliver.py --no-push` completed with OK at 9ed347c7017. After that check I made the geometric hypotheses explicit in step 1 using existing nodes; final preflight is rerun on those exact files.

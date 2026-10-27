@@ -39,78 +39,30 @@ public import Sheaf.AlgebraicGeometry.ProEtaleIntrinsicExtensionByZeroExact
 public import Sheaf.AlgebraicGeometry.SfFullCohomologicalDimension
 public import WeilConjectures.Compactification.Refinement
 public import WeilConjectures.Compactification.RefinementCategory
-import Sheaf.Paper.PullbackTorAmplitude
-import Sheaf.Paper.FiniteCoefficientTensorCtf
-import Sheaf.Algebra.Homology.DerivedTensor
-import Sheaf.CategoryTheory.RingedSitePerfectDuality
-import Sheaf.Algebra.Homology.SitePerfectTorWindow
-import WeilConjectures.Algebra.Homology.BoundedExactTermHomQuasiIso
-import Sheaf.Algebra.Homology.DerivedInternalHomOfUniverses
-import Sheaf.Algebra.Homology.RingedInternalHomSignedCalculus
-import Sheaf.Algebra.Homology.RingedInternalHomExactRestriction
-import Sheaf.Paper.CoefficientRingedTensorHomModel
-import Sheaf.Algebra.Homology.KFlatResolutionIndependentCoefficients
-import Sheaf.Paper.CoefficientHomRepresentativeEvaluation
-import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.MonoidalClosed
-import WeilConjectures.CategoryTheory.DerivedCategory.HasMonoidalDerivedCategory
-import WeilConjectures.CategoryTheory.Monoidal.Instances.DerivedCategory
-import WeilConjectures.Algebra.Homology.HomComplex
-import Sheaf.Algebra.Homology.BoundedAboveFlatSheafKFlat
-import Sheaf.Paper.FiniteCoefficientFlatModel
-import Sheaf.CategoryTheory.LocalizedModuleExactIndependent
-import Sheaf.Paper.RingedTopoiCanonicalTensorPullbackOfUniverses
-import Sheaf.Algebra.Homology.SiteDerivedTensorDescentIndependentCoefficients
-import Sheaf.Paper.FiniteConstructibleHom
-import WeilConjectures.AlgebraicGeometry.BoundedConstructibleComplexes
-import WeilConjectures.AlgebraicGeometry.DerivedCategories
-import WeilConjectures.AlgebraicGeometry.IsConstructibleEtaleModuleSheaf
-import Sheaf.AlgebraicGeometry.ProEtaleDerivedCategory
-import WeilConjectures.Mathlib.CategoryTheory.Sites.SheafCohomology.Basic
-import WeilConjectures.SixFunctors.Etale.Derived.Coefficients
-import WeilConjectures.SixFunctors.Etale.Derived.Hom
-import WeilConjectures.SixFunctors.Etale.Derived.TorAmplitude
-import WeilConjectures.SixFunctors.Finite.Stalk
-import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.EtalePoint
-import Sheaf.AlgebraicGeometry.EtaleStalkTensorScalar
-import Sheaf.AlgebraicGeometry.FixedComparisonDirectImageMate
-import Sheaf.Paper.ComparisonTorAmplitude
-import Sheaf.Paper.StratumAmbientHom
-import Sheaf.AlgebraicGeometry.ProEtaleClosedSupportTriangle
-import Sheaf.Paper.SfLocalizationAllStages
-import Sheaf.Paper.FiniteCtfTriangulated
-import Mathlib.CategoryTheory.Triangulated.Subcategory
-import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.UpperLowerStar.ClosedImmersion
-import Sheaf.Paper.ProEtaleFiniteCoefficientDirectImage
-import Sheaf.Paper.DirectImageTorAmplitude
-import Sheaf.AlgebraicGeometry.EtaleDirectImageVanishing
-import Sheaf.Paper.OpenExtensionFiniteTor
-import WeilConjectures.Compactification.NagataCompactification
-import Sheaf.Paper.ProEtaleConstructibleOrigin
-import Sheaf.Paper.CompactificationCoherence
-import Sheaf.Paper.OpenComplementUnconditional
-import Sheaf.AlgebraicGeometry.EtaleClosedSupportTorAmplitude
-import Sheaf.Paper.SmoothExceptionalPreservation
-import Sheaf.Paper.PurityGeneralAdmissibility
-import Sheaf.Paper.IntegralResidueTor
-import Sheaf.AlgebraicGeometry.ProEtaleCohomologicalSupport
-import Sheaf.Paper.DerivedScalarExtensionRestrictionAdjunction
-import Sheaf.Paper.IntegralHomReduction
-import Sheaf.Algebra.Homology.RingedInternalHomShiftOfUniverses
-import Sheaf.AlgebraicGeometry.SfIntrinsicCompactSupport
-import Sheaf.CategoryTheory.LocalizedModuleExactForSystems
-import Sheaf.Paper.BasicOperationsCoefficientReduction
-import Sheaf.Paper.ConstructibleExceptionalAdjunctionCoefficients
-import Sheaf.Paper.FiniteCoefficientHomChange
 import Sheaf.Paper.FiniteTorAmplitudeSites
-import Sheaf.Paper.PurityAffineChartBounds
-import Sheaf.Paper.SfPreservationClass
-import Sheaf.SixFunctors.CoefQbarVerdier
-import Sheaf.SixFunctors.FiniteCoefficientVerdier
-import Sheaf.SixFunctors.IntegralVerdier
-import Sheaf.SixFunctors.RationalOperations
-import Sheaf.SixFunctors.RationalVerdier
-import WeilConjectures.SixFunctors.Etale.Derived.IntegralCoefficients
-import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.UpperLowerStar.ClosedImmersion
+import Sheaf.Paper.CompactSupportCoefficientTransition
+import Sheaf.Paper.SfDerivedCompleteLegacyComparison
+import Sheaf.Paper.IntegralResidueTor
+import all Sheaf.SixFunctors.IntegralVerdier
+import Sheaf.SixFunctors.FiniteExceptional
+import all Sheaf.AlgebraicGeometry.IsomorphismDerivedPullbackEquivalence
+import Sheaf.Paper.ProEtaleBoundedConstructibleTriangulated
+import Sheaf.Paper.PullbackTorAmplitude
+import Sheaf.Paper.ProEtaleFiniteCoefficientDirectImage
+import Sheaf.Paper.FiniteConstructibleHom
+import Sheaf.Paper.IntrinsicSitePerfectHomWindow
+import Sheaf.Paper.FiniteCoefficientTensorCtf
+import Sheaf.Algebra.Homology.RingedTensorComparisonExtension
+import Sheaf.Algebra.Homology.KFlatResolutionGeneral
+import Sheaf.Algebra.Homology.RingedDerivedClosedSymmetricMonoidal
+import Sheaf.SixFunctors.FiniteIntrinsicVerdierBounds
+import Sheaf.SixFunctors.FiniteIntrinsicVerdierBiduality
+import Sheaf.SixFunctors.IntegralVerdierSignedCalculus
+import Sheaf.Algebra.Homology.RingedInternalHomExactUniverses
+import all Sheaf.Paper.IntegralOperationsPreserveConstructible
+import Sheaf.Paper.IntegralFinitePullbackComposition
+import Sheaf.Paper.CompactSupportRepresentativeIndependence
+import Sheaf.Paper.SfIntegralConstructibleTriangulated
 
 /-! # Stability of the constructible finite-Tor domains
 
@@ -132,9 +84,11 @@ Positive coefficient exponents are written as `n + 1`.
 
 @[expose] public section
 
+
 set_option autoImplicit false
 set_option synthInstance.maxSize 2048
 set_option backward.isDefEq.respectTransparency false
+set_option backward.isDefEq.respectTransparency.types true
 
 universe u v
 
@@ -177,6 +131,86 @@ noncomputable def sfStabilityFiniteVerdier
       (NagataCompactification aX)).obj
       (finiteIntrinsicClosed l E (Spec (.of D.k)) n).monoidal.tensorUnit) ⋙
         (finiteIntrinsicDerivedInternalHom l E X n)
+
+private theorem sfStabilityTorOfIso
+    (X : Scheme.{u}) (A : Type u) [CommRing A]
+    {K L : proEtaleDerivedCategory X A} (e : K ≅ L) (a b : ℤ)
+    (ht : HasProEtaleTorAmplitude X A K a b) : HasProEtaleTorAmplitude X A L a b := by
+  refine ⟨ht.1, ?_⟩
+  intro M P hM f hf hP N i hi
+  exact ht.2 M P (hM.map (fun j ↦ j ≪≫ e.symm)) f hf hP N i hi
+
+private theorem sfStabilityFiniteTorOfIso
+    (X : Scheme.{u})
+    {K L : proEtaleDerivedCategory X (Padic.coefficientExtensionRing l E (n + 1))}
+    (e : K ≅ L) (hK : finiteTorConstructible l E (n + 1) (by omega) X K) :
+    finiteTorConstructible l E (n + 1) (by omega) X L := by
+  let : Finite (Padic.coefficientExtensionRing l E (n + 1)) :=
+    Padic.finite_coefficientExtensionRing l E (n + 1) (by omega)
+  have : ObjectProperty.IsClosedUnderIsomorphisms
+      (intrinsicFiniteTorsionConstructible l E (n + 1) (by omega) X) :=
+    (proEtale_bounded_constructible_isTriangulated X
+      (Padic.coefficientExtensionRing l E (n + 1))).1
+  refine ⟨ObjectProperty.prop_of_iso _ e hK.1, ?_⟩
+  obtain ⟨a, b, ht⟩ := hK.2
+  refine ⟨a, b, ht.1, ?_⟩
+  intro M P hM f hf hP N i hi
+  exact ht.2 M P (hM.map (fun j ↦ j ≪≫ e.symm)) f hf hP N i hi
+
+private noncomputable def sfStabilityPullbackComparison
+    {X Y : Scheme.{u}} (f : X ⟶ Y) :
+    sfFiniteDerivedPullback l E (n + 1) (by omega) f ≅ finiteDerivedPullback l E n f := by
+  let : Finite (Padic.coefficientExtensionRing l E (n + 1)) :=
+    Padic.finite_coefficientExtensionRing l E (n + 1) (by omega)
+  let : HasDerivedCategory (proEtaleRingModules X
+      (proEtaleConstantRing X (Padic.coefficientExtensionRing l E (n + 1)))) :=
+    HasDerivedCategory.standard _
+  let : HasDerivedCategory (proEtaleRingModules Y
+      (proEtaleConstantRing Y (Padic.coefficientExtensionRing l E (n + 1)))) :=
+    HasDerivedCategory.standard _
+  exact Functor.mapDerivedCategoryNatIso.{u + 2, u + 2, u + 1, u + 1, u + 2, u + 2}
+    (C := proEtaleRingModules Y
+      (proEtaleConstantRing Y (Padic.coefficientExtensionRing l E (n + 1))))
+    (D := proEtaleRingModules X
+      (proEtaleConstantRing X (Padic.coefficientExtensionRing l E (n + 1))))
+    (constantPullbackModel.{u} (Padic.coefficientExtensionRing l E (n + 1)) f)
+
+private noncomputable def sfStabilityClosedUnitIso
+    (X : Scheme.{u}) :
+    (finiteIntrinsicClosed l E X n).monoidal.tensorUnit ≅
+      (DerivedCategory.singleFunctor (scalarReductionTarget.{u, u} l E X n) 0).obj
+        (SheafOfModules.unit (integralCoefficientSheaf l E X n)) := by
+  let S := finiteIntrinsicClosed l E X n
+  let h := ringedDerived_closed_symmetric_monoidal.{u + 1, u, u, u + 2}
+    (ProEt.topology X) (integralCoefficientCommRingSheaf l E X n)
+  let S₀ := h.choose
+  let h₀ := h.choose_spec.choose_spec.choose_spec.some
+  let U := S₀.monoidal.tensorUnit
+  let e := (S.adjunction U).leftAdjointUniq (S₀.adjunction U)
+  exact (S₀.monoidal.rightUnitor S.monoidal.tensorUnit).symm ≪≫
+    (e.app S.monoidal.tensorUnit).symm ≪≫ S.monoidal.leftUnitor U ≪≫ h₀.unitIso
+
+set_option backward.isDefEq.respectTransparency.types false in
+private noncomputable def sfStabilityVerdierComparison
+    (X : Scheme.{u}) [X.Over (Spec (.of D.k))]
+    [IsSeparated (X ↘ Spec (.of D.k))]
+    [LocallyOfFiniteType (X ↘ Spec (.of D.k))] [QuasiCompact (X ↘ Spec (.of D.k))] :
+    sfStabilityFiniteVerdier D l E n X (X ↘ Spec (.of D.k)) ≅
+      FiniteExceptional.dual l E D X n := by
+  let e := (ProEtale.sfFiniteExceptional (Padic.coefficientExtensionRing l E (n + 1))
+    (NagataCompactification (X ↘ Spec (.of D.k)))).mapIso
+      (sfStabilityClosedUnitIso l E n (Spec (.of D.k)))
+  exact NatIso.ofComponents
+    (fun K ↦ (finiteIntrinsicDerivedInternalHom l E X n).mapIso (Iso.prod (Iso.refl K) e))
+    (by
+      intro K L f
+      change (finiteIntrinsicDerivedInternalHom l E X n).map _ ≫
+        (finiteIntrinsicDerivedInternalHom l E X n).map _ =
+          (finiteIntrinsicDerivedInternalHom l E X n).map _ ≫
+            (finiteIntrinsicDerivedInternalHom l E X n).map _
+      rw [← Functor.map_comp, ← Functor.map_comp]
+      congr 1
+      ext <;> simp)
 
 include hl in
 /-- Clauses (i)--(iv), including the general and the site-perfect Hom intervals.
@@ -255,7 +289,78 @@ theorem finiteTor_stability
       (finiteTorConstructible l E (n + 1) (Nat.succ_le_succ (Nat.zero_le n)) Y.left)
         ((sfIntrinsicCompactSupport c (Padic.coefficientExtensionRing l E (n + 1))).obj K))
         := by
-  sorry
+  let : X.left.Over (Spec (.of D.k)) := ⟨X.hom⟩
+  let : Y.left.Over (Spec (.of D.k)) := ⟨Y.hom⟩
+  let : f.left.IsOver (Spec (.of D.k)) := ⟨Over.w f⟩
+  have : LocallyOfFiniteType (X.left ↘ Spec (.of D.k)) := ‹LocallyOfFiniteType X.hom›
+  have : QuasiCompact (X.left ↘ Spec (.of D.k)) := ‹QuasiCompact X.hom›
+  have : IsSeparated (X.left ↘ Spec (.of D.k)) := ‹IsSeparated X.hom›
+  have : LocallyOfFiniteType (Y.left ↘ Spec (.of D.k)) := ‹LocallyOfFiniteType Y.hom›
+  have : QuasiCompact (Y.left ↘ Spec (.of D.k)) := ‹QuasiCompact Y.hom›
+  have : IsSeparated (Y.left ↘ Spec (.of D.k)) := ‹IsSeparated Y.hom›
+  refine ⟨?_, ?_, ?_, ?_, ?_⟩
+  · intro K hK
+    exact sfStabilityFiniteTorOfIso l E n X.left
+      ((sfStabilityPullbackComparison l E n f.left).app K)
+      (sf_pullback_finiteTorConstructible D l hl E (n + 1) (by omega) X Y f K hK)
+  · intro K L hK hL
+    classical
+    let A := Padic.coefficientExtensionRing l E (n + 1)
+    let R := proEtaleConstantRing X.left A
+    let C := proEtaleRingModules X.left R
+    let : HasDerivedCategory C := HasDerivedCategory.standard C
+    let Kc := (DerivedCategory.Q (C := C)).objPreimage K
+    let Lc := (DerivedCategory.Q (C := C)).objPreimage L
+    let eK := (DerivedCategory.Q (C := C)).objObjPreimageIso K
+    let eL := (DerivedCategory.Q (C := C)).objObjPreimageIso L
+    have hKc := sfStabilityFiniteTorOfIso l E n X.left eK.symm hK
+    have hLc := sfStabilityFiniteTorOfIso l E n X.left eL.symm hL
+    obtain ⟨P, g, hP, _, hg, _⟩ := CochainComplex.exists_isKFlatResolutionGeneral Kc
+    obtain ⟨t, _, _⟩ := ringedTensorComparison_extension.{u + 1, u, u, u + 2}
+      (ProEt.topology X.left) R
+      (finiteIntrinsicClosed l E X.left n) (finiteIntrinsicTensorModels.{u} l E X.left n)
+    have : IsIso (DerivedCategory.Q.map g) :=
+      (DerivedCategory.isIso_Q_map_iff_quasiIso C g).2 hg
+    let e : derivedTensor X.left A Kc Lc P g hg hP ≅
+        (finiteIntrinsicDerivedTensor l E X.left n).obj (K, L) :=
+      t P Lc (.inl hP) ≪≫
+        (finiteIntrinsicDerivedTensor l E X.left n).mapIso
+          (Iso.prod (asIso (DerivedCategory.Q.map g) ≪≫ eK) eL)
+    have ht (a b c d : ℤ) (htK : HasProEtaleTorAmplitude X.left A K a b)
+        (htL : HasProEtaleTorAmplitude X.left A L c d) :=
+      (finiteCoefficient_tensor_ctf D l hl E (n + 1) (by omega) X.left
+        Kc Lc P g hg hP a b hKc
+        (sfStabilityTorOfIso X.left A eK.symm a b htK) hLc.1).2 c d hLc
+        (sfStabilityTorOfIso X.left A eL.symm c d htL)
+    refine ⟨?_, ?_⟩
+    · obtain ⟨a, b, htK⟩ := hK.2
+      obtain ⟨c, d, htL⟩ := hL.2
+      exact sfStabilityFiniteTorOfIso l E n X.left e (ht a b c d htK htL).1
+    · intro a b c d htK htL
+      exact sfStabilityTorOfIso X.left A e (a + c) (b + d) (ht a b c d htK htL).2
+  · intro K L hK hL
+    obtain ⟨d, hd⟩ := exists_topologicalKrullDim_le X.hom
+    obtain ⟨a, b, htK⟩ := hK.2
+    obtain ⟨c, e, htL⟩ := hL.2
+    have hh := finite_constructible_derivedHom_proEtale D l hl E (n + 1) (by omega)
+      X.left d hd a b c e htK.1 htL.1 K L hK hL htK htL
+    refine ⟨hh.1, ?_, ?_⟩
+    · intro a b c e m hm htK htL
+      exact (finite_constructible_derivedHom_proEtale D l hl E (n + 1) (by omega)
+        X.left m hm a b c e htK.1 htL.1 K L hK hL htK htL).2
+    · intro hperfect
+      exact finiteIntrinsic_sitePerfect_hom_window l E X.left n K L hperfect
+  · intro K hK
+    obtain ⟨d, hd⟩ := exists_topologicalKrullDim_le X.hom
+    obtain ⟨a, b, ht⟩ := hK.2
+    have hh := ProEtale.finiteCoefficientDirectImage_boundedConstructible_torAmplitude
+      D l hl E (n + 1) (by omega) X Y f d hd a b hK ht
+    refine ⟨⟨hh.1, a, b + 2 * (d : ℤ), hh.2⟩, ?_⟩
+    intro a b d hd ht
+    exact (ProEtale.finiteCoefficientDirectImage_boundedConstructible_torAmplitude
+      D l hl E (n + 1) (by omega) X Y f d hd a b hK ht).2
+  · intro c K hK
+    exact (FiniteExceptional.operations_preserve l E D hl f.left c n).1 ⟨K, hK⟩
 
 include hl in
 /-- Clauses (v)--(vi): the specified exceptional image preserves the constructible
@@ -296,8 +401,52 @@ theorem finiteTor_stability_exceptional_verdier
       (Nat.succ_le_succ (Nat.zero_le n)) X.left X.hom ∧
     FiniteProEtaleVerdierBiduality l E (n + 1)
       (Nat.succ_le_succ (Nat.zero_le n)) Y.left Y.hom := by
-  sorry
+  let : X.left.Over (Spec (.of D.k)) := ⟨X.hom⟩
+  let : Y.left.Over (Spec (.of D.k)) := ⟨Y.hom⟩
+  let : f.left.IsOver (Spec (.of D.k)) := ⟨Over.w f⟩
+  have : LocallyOfFiniteType (X.left ↘ Spec (.of D.k)) := ‹LocallyOfFiniteType X.hom›
+  have : QuasiCompact (X.left ↘ Spec (.of D.k)) := ‹QuasiCompact X.hom›
+  have : IsSeparated (X.left ↘ Spec (.of D.k)) := ‹IsSeparated X.hom›
+  have : LocallyOfFiniteType (Y.left ↘ Spec (.of D.k)) := ‹LocallyOfFiniteType Y.hom›
+  have : QuasiCompact (Y.left ↘ Spec (.of D.k)) := ‹QuasiCompact Y.hom›
+  have : IsSeparated (Y.left ↘ Spec (.of D.k)) := ‹IsSeparated Y.hom›
+  refine ⟨?_, (finite_stage_verdier_biduality D l hl E (n + 1) (Nat.succ_pos n)
+    X.left X.hom).2, (finite_stage_verdier_biduality D l hl E (n + 1) (Nat.succ_pos n)
+      Y.left Y.hom).2⟩
+  intro c K hK
+  let VY := sfStabilityVerdierComparison D l E n Y.left
+  let VX := sfStabilityVerdierComparison D l E n X.left
+  let P := finiteDerivedPullback l E n f.left
+  let e := (FiniteExceptional.dualFormulaIso l E D hl f.left c n).app ⟨K, hK⟩
+  let e' := (FiniteExceptional.dual l E D X.left n).mapIso
+    ((P.mapIso (VY.app (op K))).op) ≪≫
+      (VX.app (op (P.obj ((sfStabilityFiniteVerdier D l E n Y.left Y.hom).obj (op K))))).symm
+  refine ⟨(FiniteExceptional.operations_preserve l E D hl f.left c n).2 ⟨K, hK⟩,
+    ⟨e ≪≫ e'⟩, ?_⟩
+  intro a b dX dY hdX hdY ht
+  have hY := IntegralVerdier.finiteIntrinsicVerdier_bounds D l hl E Y.left n K hK.1
+    dY hdY a b ht
+  have hP := sf_pullback_torAmplitude D l hl E (n + 1) (Nat.succ_pos n) X Y f
+    ((FiniteExceptional.dual l E D Y.left n).obj (op K)) hY.1
+      (-b - 2 * (dY : ℤ)) (-a) hY.2.1
+  let ep := (sfStabilityPullbackComparison l E n f.left).app
+    ((FiniteExceptional.dual l E D Y.left n).obj (op K))
+  have hpctf := sfStabilityFiniteTorOfIso l E n X.left ep
+    ⟨hP.1, -b - 2 * (dY : ℤ), -a, hP.2⟩
+  have hptor := sfStabilityTorOfIso X.left _ ep _ _ hP.2
+  have hX := IntegralVerdier.finiteIntrinsicVerdier_bounds D l hl E X.left n _ hpctf.1
+    dX hdX (-b - 2 * (dY : ℤ)) (-a) hptor
+  have htor := sfStabilityTorOfIso X.left _ e.symm _ _ hX.2.1
+  have ha : - -a - 2 * (dX : ℤ) = a - 2 * (dX : ℤ) := by omega
+  have hb : -(-b - 2 * (dY : ℤ)) = b + 2 * (dY : ℤ) := by omega
+  change HasProEtaleTorAmplitude X.left _
+    ((ProEtale.sfFiniteExceptional (Padic.coefficientExtensionRing l E (n + 1)) c).obj K)
+      (- -a - 2 * (dX : ℤ)) (-(-b - 2 * (dY : ℤ))) at htor
+  simpa only [ha, hb] using htor
 
+
+open CategoryTheory.Pretriangulated.Opposite in
+set_option backward.isDefEq.respectTransparency.types false in
 include hl in
 /-- Intrinsic form of the exact Verdier anti-equivalence, for the same canonical
 realization as the fixed-scalar biduality statement above.
@@ -310,7 +459,66 @@ theorem finiteTor_stability_verdier_intrinsic
     [IsSeparated X.hom] [LocallyOfFiniteType X.hom] [QuasiCompact X.hom] :
     IsExactAntiEquivalenceOn ((finiteTorConstructible l E (n + 1) (Nat.succ_le_succ (Nat.zero_le
       n)) X.left)) (sfStabilityFiniteVerdier D l E n X.left X.hom) := by
-  sorry
+  let : X.left.Over (Spec (.of D.k)) := ⟨X.hom⟩
+  have : LocallyOfFiniteType (X.left ↘ Spec (.of D.k)) := ‹LocallyOfFiniteType X.hom›
+  have : QuasiCompact (X.left ↘ Spec (.of D.k)) := ‹QuasiCompact X.hom›
+  have : IsSeparated (X.left ↘ Spec (.of D.k)) := ‹IsSeparated X.hom›
+  let P := finiteTorConstructible l E (n + 1) (Nat.succ_pos n) X.left
+  let V : (proEtaleDerivedCategory X.left
+      (Padic.coefficientExtensionRing l E (n + 1)))ᵒᵖ ⥤
+      proEtaleDerivedCategory X.left (Padic.coefficientExtensionRing l E (n + 1)) :=
+    FiniteExceptional.dual l E D X.left n
+  let eV : sfStabilityFiniteVerdier D l E n X.left X.hom ≅ V :=
+    sfStabilityVerdierComparison D l E n X.left
+  have hp (K : proEtaleDerivedCategory X.left
+      (Padic.coefficientExtensionRing l E (n + 1))) (hK : P K) : P (V.obj (op K)) := by
+    obtain ⟨d, hd⟩ := exists_topologicalKrullDim_le X.hom
+    obtain ⟨a, b, ht⟩ := hK.2
+    have h := IntegralVerdier.finiteIntrinsicVerdier_bounds D l hl E X.left n K hK.1
+      d hd a b ht
+    exact ⟨h.1, -b - 2 * (d : ℤ), -a, h.2.1⟩
+  let Vc := P.lift (P.ι.op ⋙ V) (fun K ↦ hp K.unop.obj K.unop.property)
+  obtain ⟨tensor, signed, reduction, finiteSigned, hswap, heval, hfswap, hfeval⟩ :=
+    IntegralVerdier.signedCalculus D l hl E X.left
+  let ω := integralDualizingFiniteTerm l E D X.left n
+  have hδ (K : P.FullSubcategory) :
+      IsIso (ObjectProperty.homMk
+        (IntegralVerdier.delta X.left (reduction n).target (finiteSigned n) ω K.obj) :
+          K ⟶ (Vc.rightOp ⋙ Vc).obj K) := by
+    apply (ObjectProperty.isIso_hom_iff _).mp
+    obtain ⟨a, b, ht⟩ := K.property.2
+    exact IntegralVerdier.finiteIntrinsicVerdier_biduality D l hl E X.left n
+      (reduction n).target (finiteSigned n) (hfswap n) (hfeval n) K.obj K.property.1 a b ht
+  let δ : 𝟭 P.FullSubcategory ≅ Vc.rightOp ⋙ Vc :=
+    NatIso.ofComponents (fun K ↦ @asIso _ _ _ _
+      (ObjectProperty.homMk (IntegralVerdier.delta X.left (reduction n).target
+        (finiteSigned n) ω K.obj)) (hδ K)) (by
+          intro K L f
+          apply ObjectProperty.hom_ext
+          exact signed_delta_natural X.left (reduction n).target (finiteSigned n)
+            (hfswap n) (hfeval n) ω K.obj L.obj f.hom)
+  have : Vc.IsEquivalence := dual_equivalence Vc δ
+  refine ⟨?_, ⟨Vc.asEquivalence, ⟨Functor.isoWhiskerLeft P.ι.op eV.symm⟩⟩, ?_⟩
+  · intro K hK
+    exact sfStabilityFiniteTorOfIso l E n X.left (eV.symm.app (op K)) (hp K hK)
+  · obtain ⟨s, hs⟩ :=
+      (@CategoryTheory.RingedHomUniverses.ringedInternalHom_exact.{u + 1, u, u, u + 2}
+        X.left.ProEt inferInstance (ProEt.topology X.left) inferInstance inferInstance
+        (integralCoefficientCommRingSheaf l E X.left n) (HasDerivedCategory.standard _)).1 ω
+    let : V.CommShift ℤ := s
+    let : (sfStabilityFiniteVerdier D l E n X.left X.hom).CommShift ℤ :=
+      Functor.CommShift.ofIso eV.symm ℤ
+    have : NatTrans.CommShift eV.symm.hom ℤ :=
+      Functor.CommShift.ofIso_compatibility eV.symm ℤ
+    refine ⟨inferInstance, ?_⟩
+    intro T _ _ _ hT
+    have hVT : V.mapTriangle.obj T ∈ distTriang
+        (proEtaleDerivedCategory X.left (Padic.coefficientExtensionRing l E (n + 1))) :=
+      hs.map_distinguished T hT
+    exact CategoryTheory.Pretriangulated.isomorphic_distinguished (V.mapTriangle.obj T) hVT
+      ((sfStabilityFiniteVerdier D l E n X.left X.hom).mapTriangle.obj T)
+      ((Functor.mapTriangleIso eV.symm).app T).symm
+
 
 section Morphism
 
@@ -387,7 +595,41 @@ theorem finiteTor_stability_constructible_adjunction
       (sfStabilityFiniteDual D l hl E n Y).rightOp ⋙
         (sfStabilityFinitePullback (D := D) (l := l) (hl := hl) (E := E) (n := n) X Y f).op ⋙
           sfStabilityFiniteDual D l hl E n X) := by
-  sorry
+  let : X.left.Over (Spec (.of D.k)) := ⟨X.hom⟩
+  let : Y.left.Over (Spec (.of D.k)) := ⟨Y.hom⟩
+  let : f.left.IsOver (Spec (.of D.k)) := ⟨Over.w f⟩
+  have : LocallyOfFiniteType (X.left ↘ Spec (.of D.k)) := ‹LocallyOfFiniteType X.hom›
+  have : QuasiCompact (X.left ↘ Spec (.of D.k)) := ‹QuasiCompact X.hom›
+  have : IsSeparated (X.left ↘ Spec (.of D.k)) := ‹IsSeparated X.hom›
+  have : LocallyOfFiniteType (Y.left ↘ Spec (.of D.k)) := ‹LocallyOfFiniteType Y.hom›
+  have : QuasiCompact (Y.left ↘ Spec (.of D.k)) := ‹QuasiCompact Y.hom›
+  have : IsSeparated (Y.left ↘ Spec (.of D.k)) := ‹IsSeparated Y.hom›
+  refine ⟨⟨FiniteExceptional.adjunction l E D hl f.left c n⟩, ?_⟩
+  let VX := sfStabilityVerdierComparison D l E n X.left
+  let VY := sfStabilityVerdierComparison D l E n Y.left
+  let ey : (FiniteExceptional.dual l E D Y.left n).rightOp ≅
+      (sfStabilityFiniteVerdier D l E n Y.left Y.hom).rightOp :=
+    { hom := VY.hom.rightOp
+      inv := VY.inv.rightOp
+      hom_inv_id := by
+        ext K
+        dsimp
+        simp only [← op_comp, VY.inv_hom_id_app, op_id]
+      inv_hom_id := by
+        ext K
+        dsimp
+        simp only [← op_comp, VY.hom_inv_id_app, op_id]
+        rfl }
+  let P := finiteDerivedPullback l E n f.left
+  let eH := Functor.isoWhiskerRight ey (P.op ⋙ FiniteExceptional.dual l E D X.left n) ≪≫
+    Functor.isoWhiskerLeft
+      (sfStabilityFiniteVerdier D l E n Y.left Y.hom).rightOp
+      (Functor.isoWhiskerLeft P.op VX.symm)
+  refine ⟨Functor.fullyFaithfulCancelRight
+    (finiteTorConstructible l E (n + 1) (Nat.succ_pos n) X.left).ι ?_⟩
+  exact FiniteExceptional.dualFormulaIso l E D hl f.left c n ≪≫
+    Functor.isoWhiskerLeft (finiteTorConstructible l E (n + 1) (Nat.succ_pos n) Y.left).ι eH
+
 
 /-- The origin example in clause (ii). Both inputs have Tor interval [0,0], but
 internal Hom is the supported minus-one twist shifted by -2 and has nonzero H².
@@ -468,7 +710,9 @@ theorem sfStabilityQuotientRestrictionEquality
     normalizedDVRRes l E W h =
       (proEtaleCoefficientRestrictScalars W
         (compactSupportLevelQuotient l E m n h)).mapDerivedCategory := by
-  sorry
+  dsimp only [normalizedDVRRes]
+  congr 1
+  exact compactSupportModuleRes_eq l E W h
 
 /-- Canonical finite-quotient compact-support comparison, obtained by scalar
 adjunction from the normalized restriction square. This definition includes all
@@ -677,6 +921,21 @@ noncomputable def sfStabilityIntegralVerdier
   Prod.sectL _ (sfStabilityIntegralDualizing D l hl E X).obj ⋙
     integralDerivedInternalHom l E X
 
+private theorem sfStabilityConstructible_iff_legacy
+    (X : Scheme.{u})
+    (K : DerivedCategory (scalarReductionSource.{u, u} l E X)) :
+    sfIntegralConstructible l E X K ↔
+      boundedConstructibleDerivedCompleteIntegral D l hl E X K := by
+  constructor
+  · rintro ⟨hc, a, b, hab, h⟩
+    refine ⟨(sfDerivedComplete_iff_legacy l E X D hl K).mp hc, a, b, hab, ?_⟩
+    intro n
+    exact ⟨(h n).1, fun i hi ↦ (h n).2 hi⟩
+  · rintro ⟨hc, a, b, hab, h⟩
+    refine ⟨(sfDerivedComplete_iff_legacy l E X D hl K).mpr hc, a, b, hab, ?_⟩
+    intro n
+    exact ⟨(h n).1, fun i hi ↦ (h n).2 i hi⟩
+
 include hl in
 /-- Integral constructibility equals the uniform finite-Tor constructibility
 condition, and general ambient internal Hom preserves it with its canonical reductions.
@@ -698,7 +957,14 @@ theorem finiteTor_stability_integral_hom
       sfIntegralConstructible l E X K → sfIntegralConstructible l E X L →
       sfIntegralConstructible l E X ((integralDerivedInternalHom l E X).obj (op K, L)) ∧
       ∀ n : ℕ, IsIso (integralHomReductionComparison D l hl E X n K L) := by
-  sorry
+  let : ∀ x : X, Invertible (l : X.residueField x) :=
+    sfStabilityResidueInvertible D l hl X
+  refine ⟨(integral_residue_tor D l hl E X).2, ?_⟩
+  intro K L hK hL
+  have h := integral_constructible_internalHom D l hl E X K L
+    ((sfStabilityConstructible_iff_legacy D l hl E X K).mp hK)
+    ((sfStabilityConstructible_iff_legacy D l hl E X L).mp hL)
+  exact ⟨(sfStabilityConstructible_iff_legacy D l hl E X _).mpr h.1, h.2.1⟩
 
 /-- Integral geometric Verdier duality is an exact anti-equivalence.
 Source: blueprint (vii) (blueprint: thm-sf-ctf-stability).
@@ -715,7 +981,32 @@ theorem finiteTor_stability_integral_verdier
     [LocallyOfFiniteType (X ↘ Spec (.of D.k))] [QuasiCompact (X ↘ Spec (.of D.k))] :
     IsExactAntiEquivalenceOn (sfIntegralConstructible l E X)
       (sfStabilityIntegralVerdier D l hl E X) := by
-  sorry
+  classical
+  let hd := exists_topologicalKrullDim_le (X ↘ Spec (.of D.k))
+  let h := prop_coef_integral_dualizing D l hl E X hd.choose hd.choose_spec
+  let T := h.choose_spec.choose
+  let hT := h.choose_spec.choose_spec
+  let e := hT.2.1.choose
+  let : HasCountableProducts (completedIntegralDerivedCategory l E X D hl) :=
+    integralOperationsDerivedCountableProducts l E X
+  let p := hT.2.2.2.1.choose
+  have hp := hT.2.2.2.1.choose_spec.choose_spec.2.1
+  let r (n : ℕ) :
+      (scalarReductionDerivedExtension l E X n).obj h.choose.obj ≅
+        integralDualizingFiniteTerm l E D X n :=
+    @asIso _ _ _ _ (normalizedDVRCounitComparison l E X D hl T h.choose.obj p n)
+      (hp n) ≪≫ e n
+  obtain ⟨tensor, symmetry, reduction, finiteSymmetry, heq, preservation, hanti, hexact,
+      hrest⟩ := integral_verdier_biduality D l hl E X h.choose r
+  let := hanti
+  change IsExactAntiEquivalenceOn (sfIntegralConstructible l E X)
+    (IntegralVerdier.dual l E X h.choose.obj)
+  refine ⟨?_, ?_, ?_⟩
+  · intro K hK
+    exact preservation ⟨K, hK⟩
+  · exact ⟨(IntegralVerdier.restrictedDual l E X h.choose.obj preservation).asEquivalence,
+      ⟨Iso.refl _⟩⟩
+  · exact hexact
 
 /-- Literal constructible integral Verdier functor, with the existing map action.
 Source: blueprint (vii) (blueprint: thm-sf-ctf-stability). -/
@@ -767,6 +1058,17 @@ noncomputable def sfStabilityIntegralVerdierReduction
     (finiteIntrinsicDerivedInternalHom l E X n).map
       (Prod.mkHom (𝟙 _) (sfStabilityIntegralDualizingReduction D l hl E X n))
 
+private theorem sfStabilityIsIsoHomComposite
+    {C₁ C₂ C₃ : Type*} [Category C₁] [Category C₂] [Category C₃]
+    (F : C₁ × C₂ ⥤ C₃) {Z : C₁} {A B : C₂} {P : C₃}
+    (r : A ⟶ B) (h : P ⟶ F.obj (Z, A)) (hr : IsIso r) (hh : IsIso h) :
+    IsIso (h ≫ F.map (Prod.mkHom (𝟙 Z) r)) := by
+  let := hr
+  let := hh
+  have : IsIso (Prod.mkHom (𝟙 Z) r) :=
+    (isIso_prod_iff C₁ C₂).mpr ⟨inferInstance, hr⟩
+  exact IsIso.comp_isIso
+
 /-- Every canonical finite reduction of integral Verdier duality is invertible.
 Source: blueprint (vii) (blueprint: thm-sf-ctf-stability).
 Proof: the normalized DVR counit for the dualizing tower and its finite exceptional
@@ -779,7 +1081,80 @@ theorem finiteTor_stability_integral_verdier_reduction
     (K : DerivedCategory (scalarReductionSource.{u, u} l E X))
     (hK : sfIntegralConstructible l E X K) (n : ℕ) :
     IsIso (sfStabilityIntegralVerdierReduction D l hl E X n K) := by
-  sorry
+  classical
+  let hd := exists_topologicalKrullDim_le (X ↘ Spec (.of D.k))
+  let h := prop_coef_integral_dualizing D l hl E X hd.choose hd.choose_spec
+  let T := h.choose_spec.choose
+  let hT := h.choose_spec.choose_spec
+  let e := hT.2.1.choose
+  let : HasCountableProducts (completedIntegralDerivedCategory l E X D hl) :=
+    integralOperationsDerivedCountableProducts l E X
+  let p := hT.2.2.2.1.choose
+  have hp := hT.2.2.2.1.choose_spec.choose_spec.2.1
+  have : IsIso (normalizedDVRCounitComparison l E X D hl T h.choose.obj p n) := hp n
+  have hred : IsIso (sfStabilityIntegralDualizingReduction D l hl E X n) := by
+    change IsIso (normalizedDVRCounitComparison l E X D hl T h.choose.obj p n ≫
+      (e n).hom)
+    exact IsIso.comp_isIso
+  have hhom := (finiteTor_stability_integral_hom D l hl E X).2 K
+    (sfStabilityIntegralDualizing D l hl E X).obj hK
+    (sfStabilityIntegralDualizing D l hl E X).property |>.2 n
+  exact sfStabilityIsIsoHomComposite
+    (finiteIntrinsicDerivedInternalHom l E X n) _ _ hred hhom
+
+-- Keep the completed operations and their chosen localization models folded in proofs.
+attribute [local irreducible] integralDerivedPullback integralDerivedInternalHom
+  scalarReductionExistence scalarReductionDerivedExistence sfStabilityIntegralVerdier
+  sfIntegralCompactSupportValue sfRationalCompactSupportValue
+
+private theorem sfStabilityIntegralVerdierTor
+    (X : Scheme.{u}) [X.Over (Spec (.of D.k))]
+    [IsSeparated (X ↘ Spec (.of D.k))]
+    [LocallyOfFiniteType (X ↘ Spec (.of D.k))] [QuasiCompact (X ↘ Spec (.of D.k))]
+    (K : DerivedCategory (scalarReductionSource.{u, u} l E X))
+    (hK : sfIntegralConstructible l E X K) (n d : ℕ)
+    (hd : topologicalKrullDim X ≤ (d : WithBot ℕ∞)) (a b : ℤ)
+    (hTor : HasProEtaleTorAmplitude X (Padic.coefficientExtensionRing l E (n + 1))
+      ((scalarReductionDerivedExtension.{u, u} l E X n).obj K) a b) :
+    HasProEtaleTorAmplitude X (Padic.coefficientExtensionRing l E (n + 1))
+      ((scalarReductionDerivedExtension.{u, u} l E X n).obj
+        ((sfStabilityIntegralVerdier D l hl E X).obj (op K)))
+      (-b - 2 * (d : ℤ)) (-a) := by
+  obtain ⟨c, e, hce, hred⟩ := hK.2
+  have hfinite := IntegralVerdier.finiteIntrinsicVerdier_bounds D l hl E X n _
+    (hred n).1 d hd a b hTor
+  have := finiteTor_stability_integral_verdier_reduction D l hl E X K hK n
+  exact sfStabilityTorOfIso X _
+    (asIso (sfStabilityIntegralVerdierReduction D l hl E X n K)).symm _ _ hfinite.2.1
+
+private noncomputable def sfStabilityIntegralPullbackReduction
+    {X Y : Scheme.{u}} (f : X ⟶ Y)
+    [∀ x : X, Invertible (l : X.residueField x)]
+    [∀ y : Y, Invertible (l : Y.residueField y)]
+    (K : DerivedCategory (scalarReductionSource.{u, u} l E Y))
+    (hK : sfIntegralConstructible l E Y K) (n : ℕ) :
+    (scalarReductionDerivedExtension.{u, u} l E X n).obj
+        ((integralDerivedPullback l E f).obj K) ≅
+      (sfFiniteDerivedPullback l E (n + 1) (Nat.succ_pos n) f).obj
+        ((scalarReductionDerivedExtension.{u, u} l E Y n).obj K) := by
+  let h := goodRepresentative l E Y K
+  let P := h.choose
+  let e := h.choose_spec.some
+  haveI := (integralOperations_preserve_constructible l E f).1 K hK |>.2 P e n
+  let A := Padic.coefficientExtensionRing l E (n + 1)
+  let : HasDerivedCategory (proEtaleRingModules X (proEtaleConstantRing X A)) :=
+    HasDerivedCategory.standard _
+  let : HasDerivedCategory (proEtaleRingModules Y (proEtaleConstantRing Y A)) :=
+    HasDerivedCategory.standard _
+  let F := proEtaleConstantRingPullback A f
+  exact asIso (integralPullbackFiniteComparison l E f K P e n) ≪≫
+    DerivedCategory.Q.mapIso
+      ((NatIso.mapHomologicalComplex (integralFinitePullbackModel l E f n)
+        (.up ℤ)).app ((unrestrictedIntegralFiniteComplex l E Y n).obj P.obj)) ≪≫
+    (F.mapDerivedCategoryFactors.{u + 2, u + 2, u + 1, u + 1, u + 2, u + 2}.app
+      ((unrestrictedIntegralFiniteComplex l E Y n).obj P.obj)).symm ≪≫
+    F.mapDerivedCategory.{u + 2, u + 2, u + 1, u + 1, u + 2, u + 2}.mapIso
+      (finiteReductionIso l E Y K P e n).symm
 
 section Morphism
 
@@ -815,6 +1190,28 @@ noncomputable def sfStabilityIntegralExceptionalAmbient :
   (sfStabilityIntegralVerdier D l hl E Y).rightOp ⋙
     (integralDerivedPullback l E f).op ⋙ sfStabilityIntegralVerdier D l hl E X
 
+omit [IsSeparated (X ↘ Spec (.of D.k))] [IsSeparated (Y ↘ Spec (.of D.k))] in
+private theorem sfStabilityIntegralSupportConstructible (c : Compactification f)
+    (K : DerivedCategory (scalarReductionSource.{u, u} l E X))
+    (hK : sfIntegralConstructible l E X K) :
+    sfIntegralConstructible l E Y
+      ((sfStabilityIntegralSupportAmbient D l hl E X Y f c).obj K) := by
+  classical
+  have h := exists_compactSupportRepresentativeComparison l E D.k
+    (finiteFieldDatumPrimeUnit D l hl) X Y f c
+  have hT := h.choose_spec.choose_spec
+  have hR := hT.2.2.choose_spec.choose_spec
+  have hF := hR.2.2.choose_spec.2
+  let F := hF.choose
+  let γ := hF.choose_spec.2.2.2.1.choose
+  let ε : hT.2.2.choose ≅ integralDualizingLimit l E Y := eqToIso hR.1
+  let δ := γ.app ⟨K, hK⟩ ≪≫ ε.app (h.choose.obj K) ≪≫
+    (integralDualizingLimit l E Y).mapIso (eqToIso (Functor.congr_obj hT.1 K))
+  exact ObjectProperty.prop_of_iso (sfIntegralConstructible l E Y) δ
+    (F.obj ⟨K, hK⟩).property
+
+attribute [local irreducible] sfStabilityIntegralSupportAmbient
+
 /-- Integral support and the duality-defined exceptional adjoint preserve bounded
 constructibility and derived completeness. The exceptional reductions have a common
 finite Tor interval for every supplied pair of nonnegative dimension bounds.
@@ -842,7 +1239,44 @@ theorem finiteTor_stability_integral_images (c : Compactification f) :
           ((scalarReductionDerivedExtension.{u, u} l E X n).obj
             ((sfStabilityIntegralExceptionalAmbient D l hl E X Y f).obj L))
           (a - 2 * (dX : ℤ)) (b + 2 * (dY : ℤ))) := by
-  sorry
+  let : ∀ x : X, Invertible (l : X.residueField x) :=
+    sfStabilityResidueInvertible D l hl X
+  let : ∀ y : Y, Invertible (l : Y.residueField y) :=
+    sfStabilityResidueInvertible D l hl Y
+  have : LocallyOfFiniteType (X.asOver (Spec (.of D.k))).hom := ‹_›
+  have : LocallyOfFiniteType (Y.asOver (Spec (.of D.k))).hom := ‹_›
+  have : QuasiCompact (X.asOver (Spec (.of D.k))).hom := ‹_›
+  have : QuasiCompact (Y.asOver (Spec (.of D.k))).hom := ‹_›
+  have : IsSeparated (f.asOver (Spec (.of D.k))).left := ‹IsSeparated f›
+  have : LocallyOfFiniteType (f.asOver (Spec (.of D.k))).left := ‹LocallyOfFiniteType f›
+  have : QuasiCompact (f.asOver (Spec (.of D.k))).left := ‹QuasiCompact f›
+  refine ⟨sfStabilityIntegralSupportConstructible D l hl E X Y f c, ?_⟩
+  intro L hL
+  let M := (sfStabilityIntegralVerdier D l hl E Y).obj (op L)
+  have hM : sfIntegralConstructible l E Y M :=
+    (finiteTor_stability_integral_verdier D l hl E Y).1 L hL
+  let P := (integralDerivedPullback l E f).obj M
+  have hP : sfIntegralConstructible l E X P :=
+    ((integralOperations_preserve_constructible l E f).1 M hM).1
+  refine ⟨(finiteTor_stability_integral_verdier D l hl E X).1 P hP, ?_⟩
+  intro a b dX dY hdX hdY ht n
+  have hMtor := sfStabilityIntegralVerdierTor D l hl E Y L hL n dY hdY a b (ht n)
+  obtain ⟨c₀, d₀, hcd, hMred⟩ := hM.2
+  have hfinite := sf_pullback_torAmplitude D l hl E (n + 1) (Nat.succ_pos n)
+    (X.asOver (Spec (.of D.k))) (Y.asOver (Spec (.of D.k)))
+    (f.asOver (Spec (.of D.k))) _ (hMred n).1
+    (-b - 2 * (dY : ℤ)) (-a) hMtor
+  let ep := sfStabilityIntegralPullbackReduction l E f M hM n
+  have hPtor := sfStabilityTorOfIso X _ ep.symm _ _ hfinite.2
+  have hX := sfStabilityIntegralVerdierTor D l hl E X P hP n dX hdX
+    (-b - 2 * (dY : ℤ)) (-a) hPtor
+  have ha : - -a - 2 * (dX : ℤ) = a - 2 * (dX : ℤ) := by omega
+  have hb : -(-b - 2 * (dY : ℤ)) = b + 2 * (dY : ℤ) := by omega
+  change HasProEtaleTorAmplitude X _
+    ((scalarReductionDerivedExtension.{u, u} l E X n).obj
+      ((sfStabilityIntegralVerdier D l hl E X).obj (op P)))
+    (a - 2 * (dX : ℤ)) (b + 2 * (dY : ℤ))
+  simpa only [ha, hb] using hX
 
 /-- Restrict the actual coherent-limit support functor to its proved domain.
 Source: blueprint (vii) (blueprint: thm-sf-ctf-stability). -/

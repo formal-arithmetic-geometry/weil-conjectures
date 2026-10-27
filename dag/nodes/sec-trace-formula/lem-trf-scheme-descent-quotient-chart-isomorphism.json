@@ -1,0 +1,224 @@
+{
+ "id": "lem-trf-scheme-descent-quotient-chart-isomorphism",
+ "kind": "statement",
+ "title": "Recovering each base chart from an etale descent quotient",
+ "statement": "Let $S$ be a scheme [def-pc-scheme], $\\{U_i\\to S\\}_{i\\in I}$ a jointly surjective etale covering [def-weil-pbc-etale-site], and $f_i:X_i\\to U_i$ schemes. Put $U_{ij}=U_i\\times_SU_j$ and $R_{ij}=X_i\\times_{U_i}U_{ij}$, with projection $p_i:R_{ij}\\to X_i$ [def-pc-fibre-product]. Suppose given isomorphisms $\\theta_{ij}:R_{ij}\\simeq R_{ji}$ over $U_{ij}$ (with the base factors interchanged), restricting to the identity along $U_i\\to U_{ii}$ and satisfying $\\theta_{jk}\\theta_{ij}=\\theta_{ik}$ on every triple overlap. Form $V=\\coprod_iX_i$, $R=\\coprod_{i,j}R_{ij}$ [lem-weil-pbc-scheme-coproduct-family], and $s,t:R\\to V$ with components $p_i$ and $p_j\\theta_{ij}$. Let $F$ be an algebraic space over $S$ [def-trf-algebraic-space] and $q:h_V\\to F$ an etale surjective map satisfying $qs=qt$, such that the induced map $h_R\\to h_V\\times_Fh_V$ is an isomorphism. Write $q_i:h_{X_i}\\to F$ for its restriction. Then the natural maps $a_i=(q_i,f_i):h_{X_i}\\to F\\times_Sh_{U_i}$ are isomorphisms. Their induced transition on $U_{ij}$ is exactly $\\theta_{ij}$; the kernel pair identifies $X_i\\times_FX_j$ with $R_{ij}$ with projections $p_i,p_j\\theta_{ij}$, and $\\{q_i\\}$ is a jointly surjective etale covering of $F$.",
+ "source": {
+  "document": "literature/stacks-project/spaces.tex",
+  "place": "Tags 02WW (spaces theorem-presentation) and 02WV (spaces lemma-when-it-works-it-works), presentation kernel-pair identity specialized to a scheme descent cocycle; explicit recovery of base charts by representable-sheaf gluing."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-pbc-etale-site",
+  "def-pc-fibre-product",
+  "lem-weil-pbc-scheme-coproduct-family",
+  "def-trf-algebraic-space"
+ ],
+ "proof": [
+  {
+   "text": "Apply the proved component-kernel-pair lemma to the given coproducts with second projection θ_ij followed by p_ji. This supplies every displayed individual kernel-pair square.",
+   "uses": [
+    "lem-trf-scheme-coproduct-kernel-pair-components"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "If x,y:T→X_i have equal quotient section, use the component kernel-pair square for (i,i) to obtain r:T→R_ii with projections x and y. Equality f_i x=f_i y and the switched base-coordinate equation imply equality of the two b_ii coordinates of r. Normalization gives θ_ii r=r and hence x=y.",
+   "uses": [
+    "def-pc-fibre-product"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "The equation qs=qt restricts along κ_ij to the relation needed by the chart-section-lifting lemma. Apply that lemma with the injectivity just proved to obtain chart sections with every prescribed quotient/base-coordinate pair. Together with injectivity and the pointwise product projections this makes each component of (q_i,f_i) bijective; the pointwise isomorphism criterion for natural transformations proves the chart isomorphisms.",
+   "uses": [
+    "lem-trf-scheme-descent-chart-section-lifting",
+    "def-pc-fibre-product"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Precomposing the quotient relation with r gives equal quotient sections for p_ij r and p_ji θ_ij r. If r' has switched base coordinates, equality of these quotient sections and injectivity for X_j identify the two X_j projections. The switched coordinate hypotheses identify the two b_ji projections, so the R_ji pullback property gives θ_ij r=r'. The converse follows directly from the relation.",
+   "uses": [
+    "def-pc-fibre-product"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "For any a:h_T→F, the chart isomorphism identifies its pullback with h_(T×_S U_i). Explicitly use the inverse of (q_i,f_i) to define the map from T×_S U_i to X_i; transport the standard product pullback square through that isomorphism and the Yoneda product comparison. The projection to T is etale by base change from U_i→S. For each point z of T choose i and y∈U_i over its image in S; the scheme pullback has a point above (z,y). These projections jointly cover T and are exactly the required representing family.",
+   "uses": [
+    "def-pc-fibre-product",
+    "def-weil-etale-morphism"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-trf-scheme-coproduct-kernel-pair-components",
+  "def-pc-fibre-product",
+  "lem-trf-scheme-descent-chart-section-lifting",
+  "def-weil-etale-morphism"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/spaces.tex",
+  "place": "Tags 0262, 02WV/02WW: restrict the kernel pair, normalize to prove injectivity, and use local lifts plus subcanonical fppf gluing for surjectivity. Recover the final atlas by base-changing the original U_i cover along T→S."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The algebraic space quotient of a scheme descent datum pulls back to each original chart",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.Pullback.gluing_f\", \"module\": \"Mathlib/AlgebraicGeometry/Pullbacks\", \"type\": \"∀ {X Y Z : AlgebraicGeometry.Scheme} (𝒰 : X.OpenCover) (f : X ⟶ Z) (g : Y ⟶ Z)\\n  [inst : ∀ (i : 𝒰.I₀), CategoryTheory.Limits.HasPullback (CategoryTheory.CategoryStruct.comp (𝒰.f i) f) g]\\n  (x x_1 : 𝒰.I₀),\\n  (AlgebraicGeometry.Scheme.Pullback.gluing 𝒰 f g).f x x_1 =\\n    CategoryTheory.Limits.pullback\", \"doc\": \"Given schemes $X, Y, Z$, an open cover $\\\\mathcal{U}$ of $X$, morphisms $f: X \\\\to Z$ and $g: Y \\\\to Z$, and the condition that for all $i \\\\in \\\\mathcal{U}.I_0$ the composition $\\\\mathcal{U}.f(i) \\\\circ f$ \"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Pullback.gluing_t\", \"module\": \"Mathlib/AlgebraicGeometry/Pullbacks\", \"type\": \"∀ {X Y Z : AlgebraicGeometry.Scheme} (𝒰 : X.OpenCover) (f : X ⟶ Z) (g : Y ⟶ Z)\\n  [inst : ∀ (i : 𝒰.I₀), CategoryTheory.Limits.HasPullback (CategoryTheory.CategoryStruct.comp (𝒰.f i) f) g]\\n  (i j : 𝒰.I₀), (AlgebraicGeometry.Scheme.Pullback.gluing 𝒰 f g).t i j = AlgebraicGeometry.Scheme.Pullback.t 𝒰 f \", \"doc\": \"For an open cover $\\\\mathcal{U}$ of a scheme $X$, morphisms $f: X \\\\to Z$ and $g: Y \\\\to Z$, and indices $i, j \\\\in \\\\mathcal{U}.I_0$, the symmetry isomorphism $t_{ij}$ in the gluing data constructed by $\\\\\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Pullback.gluing_t'\", \"module\": \"Mathlib/AlgebraicGeometry/Pullbacks\", \"type\": \"∀ {X Y Z : AlgebraicGeometry.Scheme} (𝒰 : X.OpenCover) (f : X ⟶ Z) (g : Y ⟶ Z)\\n  [inst : ∀ (i : 𝒰.I₀), CategoryTheory.Limits.HasPullback (CategoryTheory.CategoryStruct.comp (𝒰.f i) f) g]\\n  (i j k : 𝒰.I₀),\\n  (AlgebraicGeometry.Scheme.Pullback.gluing 𝒰 f g).t' i j k = AlgebraicGeometry.Scheme.Pullback\", \"doc\": \"For an open cover $\\\\mathcal{U}$ of a scheme $X$, morphisms $f: X \\\\to Z$ and $g: Y \\\\to Z$, and indices $i, j, k \\\\in \\\\mathcal{U}.I_0$, the coherence isomorphism $t'_{ijk}$ in the gluing data constructed\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Pullback.pullbackFstιToV\", \"module\": \"Mathlib/AlgebraicGeometry/Pullbacks\", \"type\": \"{X Y Z : AlgebraicGeometry.Scheme} →\\n  (𝒰 : X.OpenCover) →\\n    (f : X ⟶ Z) →\\n      (g : Y ⟶ Z) →\\n        [inst : ∀ (i : 𝒰.I₀), CategoryTheory.Limits.HasPullback (CategoryTheory.CategoryStruct.comp (𝒰.f i) f) g] →\\n          (i j : 𝒰.I₀) →\\n            CategoryTheory.Limits.pullback\\n                (Ca\", \"doc\": \"Given an open cover $\\\\mathcal{U}$ of a scheme $X$, morphisms $f: X \\\\to Z$ and $g: Y \\\\to Z$, and indices $i, j \\\\in \\\\mathcal{U}.I_0$, this morphism connects the pullback of the composition of the first \"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Pullback.p1\", \"module\": \"Mathlib/AlgebraicGeometry/Pullbacks\", \"type\": \"{X Y Z : AlgebraicGeometry.Scheme} →\\n  (𝒰 : X.OpenCover) →\\n    (f : X ⟶ Z) →\\n      (g : Y ⟶ Z) →\\n        [inst : ∀ (i : 𝒰.I₀), CategoryTheory.Limits.HasPullback (CategoryTheory.CategoryStruct.comp (𝒰.f i) f) g] →\\n          (AlgebraicGeometry.Scheme.Pullback.gluing 𝒰 f g).glued ⟶ X\", \"doc\": \"The morphism from the glued pullback scheme constructed via an open cover $\\\\mathcal{U}$ of $X$ and morphisms $f: X \\\\to Z$, $g: Y \\\\to Z$ to the base scheme $X$. It is defined as the universal morphism \"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Pullback.p2\", \"module\": \"Mathlib/AlgebraicGeometry/Pullbacks\", \"type\": \"{X Y Z : AlgebraicGeometry.Scheme} →\\n  (𝒰 : X.OpenCover) →\\n    (f : X ⟶ Z) →\\n      (g : Y ⟶ Z) →\\n        [inst : ∀ (i : 𝒰.I₀), CategoryTheory.Limits.HasPullback (CategoryTheory.CategoryStruct.comp (𝒰.f i) f) g] →\\n          (AlgebraicGeometry.Scheme.Pullback.gluing 𝒰 f g).glued ⟶ Y\", \"doc\": \"The morphism from the glued scheme constructed via pullbacks of an open cover $\\\\mathcal{U}$ of $X$ and morphisms $f: X \\\\to Z$, $g: Y \\\\to Z$ to the scheme $Y$, defined by the second projection maps of \"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Pullback.gluing_ι\", \"module\": \"Mathlib/AlgebraicGeometry/Pullbacks\", \"type\": \"∀ {X Y Z : AlgebraicGeometry.Scheme} (𝒰 : X.OpenCover) (f : X ⟶ Z) (g : Y ⟶ Z)\\n  [inst : ∀ (i : 𝒰.I₀), CategoryTheory.Limits.HasPullback (CategoryTheory.CategoryStruct.comp (𝒰.f i) f) g] (j : 𝒰.I₀),\\n  (AlgebraicGeometry.Scheme.Pullback.gluing 𝒰 f g).ι j =\\n    CategoryTheory.Limits.Multicoequalizer.π\", \"doc\": \"For each index $ j $ in the open cover $ \\\\mathcal{U} $, the inclusion morphism $ \\\\iota_j $ mapping the pullback $ U(j) $ to the glued scheme is equal to the canonical projection morphism from the diag\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Pullback.gluedLift\", \"module\": \"Mathlib/AlgebraicGeometry/Pullbacks\", \"type\": \"{X Y Z : AlgebraicGeometry.Scheme} →\\n  (𝒰 : X.OpenCover) →\\n    (f : X ⟶ Z) →\\n      (g : Y ⟶ Z) →\\n        [inst : ∀ (i : 𝒰.I₀), CategoryTheory.Limits.HasPullback (CategoryTheory.CategoryStruct.comp (𝒰.f i) f) g] →\\n          (s : CategoryTheory.Limits.PullbackCone f g) → s.pt ⟶ (AlgebraicGeometry.Sche\", \"doc\": \"Given an open cover $\\\\mathcal{U}$ of a scheme $X$, morphisms $f: X \\\\to Z$ and $g: Y \\\\to Z$, and a pullback cone $s$ of $f$ and $g$, this constructs a morphism from the apex $s.pt$ of the pullback cone\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Recover local schemes from the sheaf quotient of a Cech descent equivalence relation",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.GlueData.sheafValGluedMk\", \"module\": \"Mathlib/AlgebraicGeometry/GluingOneHypercover\", \"type\": \"(D : AlgebraicGeometry.Scheme.GlueData) →\\n  {F : CategoryTheory.Sheaf AlgebraicGeometry.Scheme.zariskiTopology (Type v)} →\\n    (s : (j : D.J) → F.val.obj (Opposite.op (D.U j))) →\\n      (∀ (i j : D.J),\\n          F.val.map (D.f i j).op (s i) =\\n            F.val.map (CategoryTheory.CategoryStruct.comp \", \"doc\": \"Given gluing data $ D $ for schemes and a sheaf $ F $ on the Zariski topology with values in a category of types, this constructs the value of $ F $ at the glued scheme $ D.\\text{glued} $ by applying t\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.OpenCover.ext_elem\", \"module\": \"Mathlib/AlgebraicGeometry/Cover/Open\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} {U : X.Opens} (f g : ↑(X.presheaf.obj (Opposite.op U))) (𝒰 : X.OpenCover),\\n  (∀ (i : 𝒰.I₀),\\n      (CategoryTheory.ConcreteCategory.hom (AlgebraicGeometry.Scheme.Hom.app (𝒰.f i) U)) f =\\n        (CategoryTheory.ConcreteCategory.hom (AlgebraicGeometry.Scheme.Hom.app (𝒰.\", \"doc\": \"Let $X$ be a scheme, $U$ an open subset of $X$, and $\\\\mathcal{U}$ an open cover of $X$. For any two sections $f, g$ of the structure sheaf over $U$, if the induced morphisms $\\\\mathcal{U}.f(i)$ agree o\"}\n  {\"name\": \"TopCat.Sheaf.existsUnique_gluing\", \"module\": \"Mathlib/Topology/Sheaves/SheafCondition/UniqueGluing\", \"type\": \"∀ {C : Type u_1} [inst : CategoryTheory.Category.{v_1, u_1} C] {FC : C → C → Type u_2} {CC : C → Type u_3}\\n  [inst_1 : (X Y : C) → FunLike (FC X Y) (CC X) (CC Y)] [inst_2 : CategoryTheory.ConcreteCategory C FC]\\n  [CategoryTheory.Limits.HasLimitsOfSize.{x, x, v_1, u_1} C] [CategoryTheory.HasForget.fo\", \"doc\": \"For a sheaf $\\\\mathcal{F}$ on a topological space $X$, given an open cover $\\\\{U_i\\\\}_{i \\\\in I}$ of an open set $U \\\\subseteq X$ and a family of sections $s_i \\\\in \\\\mathcal{F}(U_i)$ that are compatible on \"}\n  {\"name\": \"TopCat.Sheaf.existsUnique_gluing'\", \"module\": \"Mathlib/Topology/Sheaves/SheafCondition/UniqueGluing\", \"type\": \"∀ {C : Type u_1} [inst : CategoryTheory.Category.{v_1, u_1} C] {FC : C → C → Type u_2} {CC : C → Type u_3}\\n  [inst_1 : (X Y : C) → FunLike (FC X Y) (CC X) (CC Y)] [inst_2 : CategoryTheory.ConcreteCategory C FC]\\n  [CategoryTheory.Limits.HasLimitsOfSize.{x, x, v_1, u_1} C] [CategoryTheory.HasForget.fo\", \"doc\": \"For a sheaf $\\\\mathcal{F}$ on a topological space $X$, given an open set $V$ covered by the union of open sets $\\\\{U_i\\\\}_{i \\\\in \\\\iota}$ and compatible sections $s_i \\\\in \\\\mathcal{F}(U_i)$ (i.e., sections\"}\n  {\"name\": \"TopCat.Presheaf.IsSheaf.isSheafUniqueGluing\", \"module\": \"Mathlib/Topology/Sheaves/SheafCondition/UniqueGluing\", \"type\": \"∀ {C : Type u_1} [inst : CategoryTheory.Category.{v_1, u_1} C] {FC : C → C → Type u_2} {CC : C → Type u_3}\\n  [inst_1 : (X Y : C) → FunLike (FC X Y) (CC X) (CC Y)] [inst_2 : CategoryTheory.ConcreteCategory C FC]\\n  [CategoryTheory.Limits.HasLimitsOfSize.{x, x, v_1, u_1} C] [(CategoryTheory.forget C).R\", \"doc\": \"For a sheaf $\\\\mathcal{F}$ on a topological space $X$, given an open cover $\\\\{U_i\\\\}$ of an open set $U \\\\subseteq X$ and a family of compatible sections $s_i \\\\in \\\\mathcal{F}(U_i)$ (satisfying $s_i|_{U_i\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.GlueData.sheafValGluedMk_val\", \"module\": \"Mathlib/AlgebraicGeometry/GluingOneHypercover\", \"type\": \"∀ (D : AlgebraicGeometry.Scheme.GlueData) {F : CategoryTheory.Sheaf AlgebraicGeometry.Scheme.zariskiTopology (Type v)}\\n  (s : (j : D.J) → F.val.obj (Opposite.op (D.U j)))\\n  (h :\\n    ∀ (i j : D.J),\\n      F.val.map (D.f i j).op (s i) = F.val.map (CategoryTheory.CategoryStruct.comp (D.f j i).op (D.t i \", \"doc\": \"For a sheaf $ F $ on the Zariski topology and gluing data $ D $ for schemes, given compatible sections $ s_j $ over the indexing category $ J $ satisfying the sheaf condition, the constructed global s\"}\n  {\"name\": \"TopCat.Presheaf.isGluing_iff_pairwise\", \"module\": \"Mathlib/Topology/Sheaves/SheafCondition/UniqueGluing\", \"type\": \"∀ {X : TopCat} {F : TopCat.Presheaf (Type u_4) X} {ι : Type u_5} {U : ι → TopologicalSpace.Opens ↑X}\\n  {sf : (i : ι) → CategoryTheory.ToType (F.obj (Opposite.op (U i)))}\\n  {s : CategoryTheory.ToType (F.obj (Opposite.op (iSup U)))},\\n  F.IsGluing U sf s ↔\\n    ∀ (i : (CategoryTheory.Pairwise ι)ᵒᵖ),\\n   \", \"doc\": \"A presheaf $ F $ satisfies the gluing condition for an open cover $\\\\{U_i\\\\}$ with sections $ s_i $ if and only if, for every index $ i $, the restriction of the global section $ s $ to $ U_i $ equals $\"}\n  {\"name\": \"TopCat.Presheaf.IsSheaf.isSheafUniqueGluing_types\", \"module\": \"Mathlib/Topology/Sheaves/SheafCondition/UniqueGluing\", \"type\": \"∀ {X : TopCat} {F : TopCat.Presheaf (Type u_4) X} {ι : Type u_5} {U : ι → TopologicalSpace.Opens ↑X},\\n  F.IsSheaf → ∀ (sf : (i : ι) → F.obj (Opposite.op (U i))), F.IsCompatible U sf → ∃! s, F.IsGluing U sf s\", \"doc\": \"For a sheaf $\\\\mathcal{F}$ on a topological space $X$, given any open set $U \\\\subseteq X$ with an open cover $\\\\{U_i\\\\}_{i \\\\in I}$ and a compatible family of sections $s_i \\\\in \\\\mathcal{F}(U_i)$ (satisfyi\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Scheme, \"quotient\"",
+   "results": "[loogle] OK 5 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.liftQuotient\", \"module\": \"Mathlib.AlgebraicGeometry.AffineScheme\", \"type\": \" {X : AlgebraicGeometry.Scheme} {A : CommRingCat} (f : X.Hom (AlgebraicGeometry.Spec A)) (I : Ideal ↑A) (hI : I ≤ RingHom.ker (CommRingCat.Hom.hom (CategoryTheory.CategoryStruct.comp (AlgebraicGeometry.Scheme.ΓSpecIso A).inv f.appTop))) : X ⟶ AlgebraicGeometry.Spec ↧(↑A ⧸ I)\", \"doc\": \"Given `f : X ⟶ Spec A` and some ideal `I ≤ ker(A ⟶ Γ(X, ⊤))`,\\nthis is the lift to `X ⟶ Spec (A ⧸ I)`.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.liftQuotient_comp\", \"module\": \"Mathlib.AlgebraicGeometry.AffineScheme\", \"type\": \" {X : AlgebraicGeometry.Scheme} {A : CommRingCat} (f : X.Hom (AlgebraicGeometry.Spec A)) (I : Ideal ↑A) (hI : I ≤ RingHom.ker (CommRingCat.Hom.hom (CategoryTheory.CategoryStruct.comp (AlgebraicGeometry.Scheme.ΓSpecIso A).inv f.appTop))) : CategoryTheory.CategoryStruct.comp (f.liftQuotient I hI) (Alg\", \"doc\": \"\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.liftQuotient_comp_assoc\", \"module\": \"Mathlib.AlgebraicGeometry.AffineScheme\", \"type\": \" {X : AlgebraicGeometry.Scheme} {A : CommRingCat} (f : X.Hom (AlgebraicGeometry.Spec A)) (I : Ideal ↑A) (hI : I ≤ RingHom.ker (CommRingCat.Hom.hom (CategoryTheory.CategoryStruct.comp (AlgebraicGeometry.Scheme.ΓSpecIso A).inv f.appTop))) {Z : AlgebraicGeometry.Scheme} (h : AlgebraicGeometry.Spec ↧↑A \", \"doc\": \"\"}\n  {\"name\": \"AlgebraicGeometry.Flat.isQuotientMap_of_surjective\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Flat\", \"type\": \" {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.Flat f] [AlgebraicGeometry.QuasiCompact f] [AlgebraicGeometry.Surjective f] : Topology.IsQuotientMap ⇑f\", \"doc\": \"A surjective, quasi-compact, flat morphism is a quotient map.\"}\n  {\"name\": \"AlgebraicGeometry.eq_bot_of_comp_quotientMk_eq_sigmaSpec\", \"module\": \"Mathlib.AlgebraicGeometry.PointsPi\", \"type\": \" {ι : Type u} (R : ι → CommRingCat) (I : Ideal ((i : ι) → ↑(R i))) (f : (∐ fun i => AlgebraicGeometry.Spec (R i)) ⟶ AlgebraicGeometry.Spec ↧(((i : ι) → ↑(R i)) ⧸ I)) (hf : CategoryTheory.CategoryStruct.comp f (AlgebraicGeometry.Spec.map (CommRingCat.ofHom (Ideal.Quotient.mk I))) = AlgebraicGeometry.\", \"doc\": \"\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "quotient.*(baseChange|pullback)|descent.*(chart|realiz)",
+   "results": "[grep] OK 1 hit(s)\n  {\"file\": \"Mathlib/AlgebraicGeometry/IdealSheaf/Subscheme.lean\", \"line\": \"706\", \"text\": \"  simp [IdealSheafData.glueDataObjι, Scheme.Hom.liftQuotient_comp_assoc, pullback.condition]\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Local charts of a scheme descent datum are the base changes of its quotient sheaf",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.LocalRepresentability.toGlued\", \"module\": \"Mathlib.AlgebraicGeometry.Sites.Representability\", \"type\": \"(i : ι) : X i ⟶ (glueData hf).glued\", \"doc\": \"For each index $i$, this is the morphism from the scheme $X_i$ to the glued scheme constructed as the colimit of the gluing data, corresponding to the canonical projection from the diagram to its coli\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.GlueData.isoCarrier\", \"module\": \"Mathlib.AlgebraicGeometry.Gluing\", \"type\": \": D.glued.carrier ≅ (D_).glued\", \"doc\": \"The underlying topological space (carrier) of the glued scheme $ D.\\\\text{glued} $ is isomorphic to the topological space obtained by gluing via successive applications of forgetful functors (scheme $\\\\\"}\n  {\"name\": \"AlgebraicGeometry.IsZariskiLocalAtTarget.descendsAlong\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Descent\", \"type\": \"[IsZariskiLocalAtTarget P] [P'.IsStableUnderBaseChange]\\n  (H :\\n    ∀ {R : CommRingCat.{u}} {X Y : Scheme.{u}} (f : X ⟶ Spec R) (g : Y ⟶ Spec R), P' f → P (pullback.fst f g) → P g) :\\n  P.DescendsAlong P'\", \"doc\": \"Let $\\\\mathcal{P}$ and $\\\\mathcal{P}'$ be morphism properties on schemes. If $\\\\mathcal{P}'$ is stable under base change, and for every commutative ring $R$ and morphisms $f : X \\\\to \\\\operatorname{Spec}(R\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Cover.instIsIsoFromGlued\", \"module\": \"Mathlib.AlgebraicGeometry.Gluing\", \"type\": \": IsIso 𝒰.fromGlued\", \"doc\": \"Given an open cover $\\\\mathcal{U}$ of a scheme $X$, the canonical morphism from the glued scheme constructed via colimit from the gluing data of $\\\\mathcal{U}$ to $X$ is an isomorphism.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Cover.RelativeGluingData.toBase\", \"module\": \"Mathlib.AlgebraicGeometry.RelativeGluing\", \"type\": \": d.glued ⟶ S\", \"doc\": \"The unique morphism from the scheme obtained by gluing relative to the open cover $\\\\mathcal{U}$ to the original base scheme $S$, induced by the universal property of the colimit through the compositio\"}\n  {\"name\": \"AlgebraicGeometry.quasiSeparated_isStableUnderBaseChange\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated\", \"type\": \": MorphismProperty.IsStableUnderBaseChange @QuasiSeparated\", \"doc\": \"The property of being quasi-separated for morphisms of schemes is stable under base change. That is, if a morphism $ f: X \\to Y $ of schemes is quasi-separated, then any base change (pullback) of $ f $\"}\n  {\"name\": \"AlgebraicGeometry.IsLocalIso.instIsStableUnderBaseChangeScheme\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.LocalIso\", \"type\": \": IsStableUnderBaseChange @IsLocalIso\", \"doc\": \"The property of being a local isomorphism of schemes is stable under base change. That is, if a morphism $ f : X \\to Y $ is a local isomorphism, then any base change (pullback) of $ f $ is also a local\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.LocalRepresentability.yonedaIsoSheaf\", \"module\": \"Mathlib.AlgebraicGeometry.Sites.Representability\", \"type\": \": zariskiTopology.yoneda.obj (glueData hf).glued ≅ F\", \"doc\": \"The Yoneda embedding of a scheme constructed via Zariski gluing data is isomorphic to the sheaf $F$. This isomorphism follows from the universal property of the glued scheme and the naturality of the \"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "AlgebraicSpace|descent.*quotient|quotient.*descent",
+   "results": "{\"t\": \"2026-10-23T09:30:46Z\", \"tool\": \"grep\", \"query\": \"AlgebraicSpace|descent.*quotient|quotient.*descent\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme Zariski gluing, general descent-data pullback, and sheaf pullback functors do not recover charts of this etale algebraic-space quotient"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Scheme, \"descent\"",
+   "results": "{\"t\": \"2026-10-23T09:30:46Z\", \"tool\": \"loogle\", \"query\": \"AlgebraicGeometry.Scheme, \\\"descent\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme Zariski gluing, general descent-data pullback, and sheaf pullback functors do not recover charts of this etale algebraic-space quotient"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The quotient sheaf of an etale descent datum pulls back to the original local schemes",
+   "results": "{\"t\": \"2026-10-23T09:30:46Z\", \"tool\": \"leansearch\", \"query\": \"The quotient sheaf of an etale descent datum pulls back to the original local schemes\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.sheafPullbackConstruction.sheafPullback\", \"CategoryTheory.Pseudofunctor.DescentData.pullFunctorObj\", \"AlgebraicGeometry.Scheme.Cover.RelativeGluingData.isPullback_natTrans_ι_toBase\", \"AlgebraicGeometry.Scheme.Modules.pullback\", \"AlgebraicGeometry.Scheme.Modules.pullbackPushforwardAdjunction\", \"CategoryTheory.Pseudofunctor.DescentData.pullFunctorEquivalence\", \"CategoryTheory.GrothendieckTopology.overPullback\", \"AlgebraicGeometry.Scheme.Modules.restrictStalkNatIso\"], \"digest\": \"2b8b5ac89ecc644f\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme Zariski gluing, general descent-data pullback, and sheaf pullback functors do not recover charts of this etale algebraic-space quotient"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Recover schemes on an etale base cover as pullbacks of a quotient sheaf from a descent cocycle",
+   "results": "{\"t\": \"2026-10-23T09:30:53Z\", \"tool\": \"leanfinder\", \"query\": \"Recover schemes on an etale base cover as pullbacks of a quotient sheaf from a descent cocycle\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.instHasPullbacksEtale\", \"AlgebraicGeometry.Scheme.Cover.gluedCover_V\", \"AlgebraicGeometry.Scheme.LocalRepresentability.glueData_V\", \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.𝒰X\", \"AlgebraicGeometry.Scheme.instCategoryEtale\", \"AlgebraicGeometry.Scheme.Cover.gluedCover_f\", \"AlgebraicGeometry.Scheme.Cover.gluedCover_t\", \"AlgebraicGeometry.Scheme.Pullback.v\"], \"digest\": \"6bac82e54d4c44e3\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme Zariski gluing, general descent-data pullback, and sheaf pullback functors do not recover charts of this etale algebraic-space quotient"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A quotient presentation of a scheme descent cocycle is cartesian over every base chart",
+   "results": "{\"t\": \"2026-10-23T09:33:31Z\", \"tool\": \"leanfinder\", \"query\": \"A quotient presentation of a scheme descent cocycle is cartesian over every base chart\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Cover.glued_cover_cocycle_fst\", \"AlgebraicGeometry.Scheme.Cover.glued_cover_cocycle\", \"AlgebraicGeometry.Scheme.Cover.glued_cover_cocycle_snd\", \"AlgebraicGeometry.Scheme.Cover.glueMorphisms\", \"AlgebraicGeometry.Scheme.Cover.gluedCover_V\", \"AlgebraicGeometry.Scheme.Cover.gluedCover\", \"AlgebraicGeometry.Scheme.Cover.gluedCover_f\", \"AlgebraicGeometry.Scheme.Cover.gluedCover_t'\"], \"digest\": \"3bc19ccae1d93753\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme Zariski gluing, general descent-data pullback, and sheaf pullback functors do not recover charts of this etale algebraic-space quotient"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-polarized-scheme-etale-descent",
+  "date": "2026-10-22",
+  "group": "Q98"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Additional input to the descent sentence: Stacks Spaces Descent Tag 0D3C, together with Tags 02WW and 04W8, for effective descent of a scheme with a relatively ample invertible module. Extracted argument: parent proof step 3 (recovery of the scheme charts from its quotient).",
+   "via": [
+    "lem-trf-polarized-scheme-etale-descent",
+    "lem-trf-polarized-fine-log-etale-descent",
+    "lem-trf-coherent-log-ideal-chart-construction",
+    "lem-trf-log-blowup-normalization",
+    "lem-trf-log-regular-desingularization",
+    "lem-trf-nodal-pair-projective-resolution",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-trf-scheme-descent-quotient-chart-isomorphism",
+  "worker": "stage1",
+  "summary": "Six explicit steps recover each chart from the assumed kernel pair: restrict to the two coproduct components, use diagonal normalization for sectionwise uniqueness, transport local atlas lifts by theta, glue by existing fpqc representable descent, identify transitions, and test the covering on schemes. Statement unchanged; no new nodes; current and inherited searches read; no attachment in WeilConjectures.",
+  "blueprint": "Historical ancestor lem-trf-local-term-locality, additional polarized scheme descent input, parent lem-trf-polarized-scheme-etale-descent step 3. Current latest blueprint no longer has that historical descent sentence; this auxiliary item proves the still-live parent input without changing the unit route.",
+  "tool_uses": [
+   {
+    "node": "lem-a1-representable-etale-fppf-local-lifting",
+    "why": "Generic scheme-test atlas lifting supplies a surjective etale fppf cover for an arbitrary section of F. No node of this unit states local lifting for an arbitrary assumed atlas; the quotient-presentation node assumes a quotient not hypothesized here."
+   },
+   {
+    "node": "def-weil-pbc-sites-and-cohomology",
+    "why": "Only the defining equalizer property for a sheaf of sets is used to detect equality of two sections of F after the fppf cover."
+   }
+  ]
+ },
+ "tool_uses": [],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q75-7a3e3ee23",
+  "group": "Q75",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q75-7a3e3ee23 (reviewer sub-agent of L); spot-checked: I read the item and all six steps in full. There are no new nodes, and the statement and stmt_deps are byte-identical to the item in the Q98 snapshots, where it was unsplit with 0 steps. Live and side-live still have it unsplit, and there is no repair note, so this is a first split and not a re-split. proof_deps equals the union of the step uses, and a closure over 134 nodes shows no cycle. Step 1 (kernel pair restricted to R_ij) is correct: the coproduct components are disjoint, so r^-1(R_ab) is empty for (a,b)!=(i,j), and r factors through the open immersion. Step 2 (injectivity) is correct: in coordinates theta_ii sends (x,(u,w)) to (y,(w,u)) with f_i y=w, so f_i y=u forces w=u, and the diagonal normalization gives y=x. Step 3 is correct: lem-a1-representable-etale-fppf-local-lifting gives exactly the surjective etale v:P->T and the lift b. The P_j form an fppf cover (by etale-composition (1),(2) and the definition of etale). r_j is defined because b_j and u are S-maps. c_j=p_i theta_ji r_j satisfies f_i c_j=u_j and, by qs=qt, q_i c_j=z. Step 4 is correct: Step 2 gives compatibility, fppf covers are fpqc, and representable fpqc descent applies with no finiteness hypotheses. Uniqueness with targets S and U_i gives the S-map and f_i c=u, and the sheaf equalizer gives q_i c=z. Step 5 shows the transition equals theta_ij because a_j is bijective. Step 6 identifies P_i=P x_V X_i with T x_F X_i, shows it is etale, and shows the P_i jointly cover T; it correctly does not claim each q_i is surjective. Edge cases checked: empty I is vacuous; a single chart over S gives the identity; non-monomorphic U_i is handled by the diagonal-only use. Duplicate search: I read the statements of the trf etale-relation-quotient, quotient-presentation, kernel-pair, quotient-map-fppf-local-models and descent-cocycle nodes, the a1 atlas-presentation, kernel-relation and kernel-pair-descent nodes, and sfb etale-local-moduli-gluing; none states chart recovery. Stacks spaces.tex 02WV (l.1431) and 02WW (l.1603) give the presentation and lifting method, and the chart recovery is the agent's argument, which I checked. Accepted tool uses: lem-a1-representable-etale-fppf-local-lifting, because the same-unit lifting nodes need F to be a sheafified quotient, which the item does not assume; and the sheaf equalizer clause of def-weil-pbc-sites-and-cohomology. No SGA is cited. No changes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SchemeDescentQuotientChartIsomorphism",
+  "declaration": "AlgebraicGeometry.AlgebraicSpace.scheme_descent_quotient_chart_isomorphism",
+  "file": "lean/Sheaf/AlgebraicGeometry/SchemeDescentQuotientChartIsomorphism.lean",
+  "statement": "theorem scheme_descent_quotient_chart_isomorphism {S : Scheme.{u}} {I : Type v} (U X : I → Over S) (f : ∀ i, X i ⟶ U i) (hU : ∀ i, Etale (U i).hom) (hcover : ∀ x : S, ∃ (i : I) (y : (U i).left), (U i).hom.base y = x) (R : I → I → Over S) (p : ∀ i j, R i j ⟶ X i) (b : ∀ i j, R i j ⟶ U i ⨯ U j) (hR : ∀ i j, IsPullback (p i j) (b i j) (f i) Limits.prod.fst) (theta : ∀ i j, R i j ≅ R j i) (hleft : ∀ i j, (theta i j).hom ≫ b j i ≫ Limits.prod.fst = b i j ≫ Limits.prod.snd) (hright : ∀ i j, (theta i j).hom ≫ b j i ≫ Limits.prod.snd = b i j ≫ Limits.prod.fst) (hnormal : ∀ (i : I) (T : Over S) (r : T ⟶ R i i), r ≫ b i i ≫ Limits.prod.fst = r ≫ b i i ≫ Limits.prod.snd → r ≫ (theta i i).hom = r) (hcocycle : ∀ (i j k : I) (T : Over S) (a : T ⟶ R i j) (a' : T ⟶ R j k) (c : T ⟶ R i k) (d : T ⟶ R k i), a ≫ (theta i j).hom ≫ p j i = a' ≫ p j k → c ≫ p i k = a ≫ p i j → c ≫ b i k ≫ Limits.prod.snd = a' ≫ b j k ≫ Limits.prod.snd → d ≫ p k i = a' ≫ (theta j k).hom ≫ p k j → d ≫ b k i ≫ Limits.prod.snd = a ≫ b i j ≫ Limits.prod.fst → c ≫ (theta i k).hom = d) (V W : Over S) (ι : ∀ i, X i ⟶ V) (κ : ∀ ij : I × I, R ij.1 ij.2 ⟶ W) (hV : IsColimit (Cofan.mk V ι)) (hW : IsColimit (Cofan.mk W κ)) (s t : W ⟶ V) (hs : ∀ i j, κ (i, j) ≫ s = p i j ≫ ι i) (ht : ∀ i j, κ (i, j) ≫ t = (theta i j).hom ≫ p j i ≫ ι j) (F : AlgebraicSpace S) (q : yoneda.obj V ⟶ F.obj.obj) (hqet : IsEtale q) (hqsurj : IsSurjective q) (hq : yoneda.map s ≫ q = yoneda.map t ≫ q) (hkernel : IsPullback (yoneda.map s) (yoneda.map t) q q) : (∀ i, IsIso (Limits.prod.lift (yoneda.map (ι i) ≫ q) (yoneda.map (f i)))) ∧ (∀ (i j : I) (T : Over S) (r : T ⟶ R i j) (r' : T ⟶ R j i), r ≫ b i j ≫ Limits.prod.fst = r' ≫ b j i ≫ Limits.prod.snd → r ≫ b i j ≫ Limits.prod.snd = r' ≫ b j i ≫ Limits.prod.fst → (r ≫ (theta i j).hom = r' ↔ (yoneda.map (ι i) ≫ q).app (op T) (r ≫ p i j) = (yoneda.map (ι j) ≫ q).app (op T) (r' ≫ p j i))) ∧ (∀ i j, IsPullback (yoneda.map (p i j)) (yoneda.map ((theta i j).hom ≫ p j i)) (yoneda.map (ι i) ≫ q) (yoneda.map (ι j) ≫ q)) ∧ (∀ i, IsEtale (yoneda.map (ι i) ≫ q)) ∧ (∀ (T : Over S) (a : yoneda.obj T ⟶ F.obj.obj), ∃ (P : I → Over S) (v : ∀ i, P i ⟶ T) (x : ∀ i, P i ⟶ X i), (∀ i, IsPullback (yoneda.map (x i)) (yoneda.map (v i)) (yoneda.map (ι i) ≫ q) a) ∧ (∀ i, Etale (v i).left) ∧ ∀ z : T.left, ∃ (i : I) (y : (P i).left), (v i).left.base y = z)",
+  "branch": "newtargets-dag",
+  "by": "Q30",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "Products in Over S are scheme fibre products. R,p,b are specified by their pullback universal property and V,W by their coproduct universal properties. The transition is identified testwise over the switched base coordinates. All constructions use the recorded Mathlib and algebraic-space interfaces."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-504159a7b",
+  "group": "Q30",
+  "result": "pass",
+  "note": "Read item node, 5 stmt_dep records, Lean module, report, AlgebraicSpace.lean (IsEtale/IsSurjective/AlgebraicSpace). Item JSON differs from side-live only by lean; lean.statement verbatim in file; no definitions, single sorry theorem, docstrings with source/blueprint and 6 proof steps; report has Worker report + Second reading by Q30. Hypotheses match node: etale jointly surjective cover, R_ij by IsPullback in Over S, theta with swapped base coords, diagonal-only normalization, cocycle (coordinates checked), coproducts via IsColimit Cofan, q IsEtale/IsSurjective, kernel pair IsPullback; I : Type v independent, no universe restriction. Conclusions checked: a_i=(q_i,f_i) iso onto F x h_{U_i} (presheaf product over terminal h_S), transition-equals-theta equivalence verified both directions by hand, kernel pair square with p_i, p_j theta_ij, q_i etale, scheme-test joint etale covering. Edge cases: empty I forces empty S, empty charts/overlaps/tests allowed. Advisory: IsJointlySurjective (def-trf-algebraic-space-jointly-surjective-family) exists but the node does not cite it; the scheme-test rendering is equivalent for representable etale families (03BU/041F) and is what step 6 proves. Not recompiled (no change)."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T1",
+  "result": "pass",
+  "landing": "20261026T092625-L-3447975",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

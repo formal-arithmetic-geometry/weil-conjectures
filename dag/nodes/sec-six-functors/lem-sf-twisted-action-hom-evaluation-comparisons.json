@@ -1,0 +1,132 @@
+{
+ "id": "lem-sf-twisted-action-hom-evaluation-comparisons",
+ "kind": "statement",
+ "title": "Evaluation-preserving local-Hom comparisons for twisted action-site restriction",
+ "statement": "Let $(C,J)$ be a small site with pullbacks, $s:C\\simeq C$ continuous in both directions, $R$ a sheaf of commutative rings, $a:(s^{-1})^*R\\simeq R$, and $P$ a RestrictionPresentation [def-sf-twisted-action-presentation-data]. Write $D$, $A$, $U$, and $\\sigma$ for its action site, coefficient ring, underlying module restriction and scalar-transported inverse translation. Fix normalized TensorComparisons $T$ [lem-sf-twisted-action-tensor-comparisons]. There exist isomorphisms $h_{M,N}:U\\mathcal Hom_A(M,N)\\simeq\\mathcal Hom_R(UM,UN)$ and $c_{L,K}:\\sigma\\mathcal Hom_R(L,K)\\simeq\\mathcal Hom_R(\\sigma L,\\sigma K)$, for all module sheaves on $D$ and $C$ respectively. They preserve evaluation with the tensor comparisons of $T$: $U(\\mathrm{ev}_{M,N})=t_{M,\\mathcal Hom(M,N)}(1\\otimes h_{M,N})\\mathrm{ev}_{UM,UN}$ and $\\sigma(\\mathrm{ev}_{L,K})=b_{L,\\mathcal Hom(L,K)}(1\\otimes c_{L,K})\\mathrm{ev}_{\\sigma L,\\sigma K}$, in diagrammatic order. These data form HomEvaluationComparisons. No action equation or naturality equation for $h$ is assumed.",
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Original closed-comparisons proof steps 3--4 and evaluation portion of step 5 (original action-site steps 11--13); sites-modules.tex, section-internal-hom, lemma-internal-hom-restriction and lemma-internal-hom-adjoint-tensor. Agent-formulated twisted variant of Stacks 00W0; Tag 00W0 is motivation only."
+ },
+ "stmt_deps": [
+  "def-sf-twisted-action-presentation-data",
+  "lem-sf-twisted-action-tensor-comparisons",
+  "def-pur-sheaf-hom"
+ ],
+ "proof": [
+  {
+   "text": "Construct the restriction Hom map explicitly as the transpose of inverse tensor comparison followed by restricted evaluation. The restriction-only canonical comparison theorem makes this map invertible; use asIso. It assumes no translation Hom data.",
+   "uses": [
+    "lem-sf-twisted-action-restriction-hom-comparison-iso",
+    "def-pur-sheaf-hom"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Construct the translation Hom map in the same way. P.translation_eq makes sigma an equivalence. For every Q, full faithfulness, the source tensor-Hom adjunction, full faithfulness again, the inverse sigmaTensor comparison, and the target tensor-Hom adjunction give a bijection from maps sigma Q to sigma Hom(M,N) to maps sigma Q to Hom(sigma M,sigma N). Naturality of sigmaTensor in the second factor identifies this bijection with postcomposition by the constructed map. Essential surjectivity extends bijectivity to every test object. The Yoneda isomorphism criterion proves the translation comparison invertible.",
+   "uses": [
+    "def-pur-sheaf-hom",
+    "lem-sf-twisted-action-tensor-comparisons"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "The inverse tensor-Hom equivalence sends f to (identity tensor f) followed by evaluation, by naturality in the tensor variable. Apply this to each canonical comparison. The inverse-equivalence identity and tensor comparison hom-inverse cancellation prove both evaluation equations. Package the two asIso isomorphisms with these equations. This proof keeps the original statement, including all universes and edge cases.",
+   "uses": [
+    "def-pur-sheaf-hom",
+    "lem-sf-twisted-action-tensor-comparisons"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-sf-twisted-action-restriction-hom-comparison-iso",
+  "def-pur-sheaf-hom",
+  "lem-sf-twisted-action-tensor-comparisons"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "lemma-internal-hom-adjoint-tensor; canonical evaluation mates, full faithfulness of translation, and the Mathlib isIso_of_yoneda_map_bijective argument. Restriction invertibility is isolated as a strictly smaller obligation."
+ },
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "An equivalence of localized action sites identifies sheaf internal Hom and preserves tensor Hom evaluation",
+   "results": "Localization.homEquiv and Equivalence.sheafCongr.functor_map_val_app; no module sheaf Hom comparison on an action site.",
+   "date": "2026-10-27",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "HomEvaluationComparisons internal Hom restriction to integer action site slice equivalence evaluation",
+   "results": "LightCondensed.ihomPoints and its application lemmas, Action.functorCategoryEquivalenceCompEvaluation, ModuleCat.ExtendRestrictScalarsAdj.HomEquiv.evalAt_apply, Functor.IsCoverDense.restrictHomEquivHom. These concern fixed condensed coefficients, ordinary monoid actions or a supplied dense site functor, not the slice-Hom comparison for this action-site presentation.",
+   "date": "2026-10-27",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "TwistedActionTensorComparisons|tensorComparisons|HomEvaluationComparisons|homEvaluationComparisons in lean/Sheaf, lean/WeilConjectures and Mathlib; pushforward.*homObj|homObj.*pushforward|pushforward.*tensor|tensor.*pushforward in Mathlib module and site APIs",
+   "results": "Only unrelated affine tensorComparisons names; no match in Mathlib for the normalized action-site interfaces. Read PushforwardContinuous, MonoidalClosed, RingedCocontinuousMonoidal and RingedSiteEquivalenceTensor.",
+   "date": "2026-10-27",
+   "verdict": "no exact match"
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.CategoryTheory.TwistedActionClosedComparisons",
+  "date": "2026-10-27",
+  "group": "C9"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "The parent obligation has no created.item blueprint ancestor. Its recorded provenance is lem-a1-local-boundary-duality and the evaluation/biduality sentence of thm-coef-qbar-verdier. This site realization supplies the abelian-category foundation for the internal-Hom and evaluation argument of cor-coef-verdier-weil-equivariance, without replacing the native derived category by fixed pairs in a derived category. Original twisted-site proof steps 9--13; sheafification and localized-site Hom calculation. Substep: Original closed-comparisons proof steps 3--4 and evaluation portion of step 5 (original action-site steps 11--13); sites-modules.tex, section-internal-hom, lemma-internal-hom-restriction and lemma-internal-hom-adjoint-tensor.",
+   "via": [
+    "lem-sf-twisted-action-closed-comparisons",
+    "lem-sf-twisted-action-ringed-site",
+    "lem-sf-weil-native-closed-forgetful",
+    "lem-sf-weil-verdier-biduality"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.TwistedActionHomEvaluationComparisons",
+  "file": "lean/Sheaf/CategoryTheory/TwistedActionHomEvaluationComparisons.lean",
+  "declaration": "CategoryTheory.TwistedActionRingedSite.homEvaluationComparisons",
+  "declarations": [
+   "CategoryTheory.TwistedActionRingedSite.HomEvaluationComparisons",
+   "CategoryTheory.TwistedActionRingedSite.homEvaluationComparisons"
+  ],
+  "statement": "theorem homEvaluationComparisons [HasPullbacks C] (P : RestrictionPresentation J s R a)\n    (T : TensorComparisons J s R a P) :\n    Nonempty (HomEvaluationComparisons J s R a P T)",
+  "branch": "sheaf-dag",
+  "by": "C9",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C9",
+  "result": "pass",
+  "landing": "20261027T054554-L-963286",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J4",
+  "result": "pass",
+  "landing": "20261027T070608-L-2637090",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

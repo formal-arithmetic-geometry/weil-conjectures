@@ -1,0 +1,170 @@
+{
+ "id": "def-trf-naive-cotangent-comparison-data",
+ "kind": "definition",
+ "title": "Naive conormal complex and normalized comparison data",
+ "status": "split",
+ "statement": "Fix standard polynomial cotangent coherence data $C$ [def-trf-cotangent-resolution-data]. For a ring map $f:A\\to B$, a presentation is a surjective factorization $A\\to P\\twoheadrightarrow B$. It is localized polynomial if $P$ is a localization of $A[E]$ on any set $E$ [def-weil-pbc-mv-polynomial-ring], compatibly with $A\\to P$. Set $J=\\ker(P\\to B)$ and define the actual cochain complex $N(P)=[J/J^2\\xrightarrow{d}B\\otimes_P\\Omega^1_{P/A}]$ in degrees $-1,0$, zero elsewhere, with $d([h])=1\\otimes dh$ [def-weil-pbc-kahler-differentials]. Use the canonical identifications of those terms; write $[h]$ for a kernel class and $b\\otimes dx$ for a differential generator. A presentation map over a ring square $(\\alpha,\\beta)$ is a map $a:P\\to P'$ commuting with base maps and augmentations. A naive map is a semilinear chain map $N(P)\\to N(P')$ sending $[h]$ to $[a(h)]$ and $b\\otimes dx$ to $\\beta(b)\\otimes d(a(x))$. The standard presentation is the degree-zero presentation of $C$. A comparison datum $\\kappa$ over $C$ consists of these naive maps; existence of a lift from the standard presentation to every localized polynomial presentation; a chain projection $K(P^{\\rm std})\\to N(P)$ for every such lift $a$, given in degree zero by $b\\otimes dx\\mapsto b\\otimes d(a(x))$ and in degree minus one by $b\\otimes dx\\mapsto b[a(d_0x-d_1x)]$; a derived comparison $L_{B/A}\\to QN(P)$ equal to the image of every lifted projection; and an isomorphism $Q(\\tau_{\\geq-1}K(P^{\\rm std}))\\simeq QN(P)$ whose composite with the good-truncation projection is that comparison [def-weil-abstract-derived-category]. Here good truncation replaces degree minus one by the cokernel of its incoming differential and discards lower degrees. Require the derived comparisons to be natural for all localized polynomial presentation maps over arbitrary ring squares, restricting target coefficients along $\\beta$. This defines comparison data and their normalization; it does not assert that such data exist or assert vanishing below degree minus one.",
+ "stmt_deps": [
+  "def-trf-cotangent-resolution-data",
+  "def-weil-abstract-derived-category",
+  "def-weil-pbc-kahler-differentials",
+  "def-weil-pbc-mv-polynomial-ring"
+ ],
+ "source": {
+  "document": "literature/stacks-project/cotangent.tex",
+  "place": "Tags 08RB (lemma-relation-with-naive-cotangent-complex), 08UP (remark-explicit-comparison-map); arbitrary polynomial presentations: algebra.tex Tag 00S1 (lemma-NL-homotopy) and equation-functoriality-NL; localization: Tag 00S7 (lemma-localize-NL) and cotangent.tex Tag 08SF (lemma-localize)."
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "naive cotangent complex presentation conormal differential comparison projection",
+   "results": {
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "Algebra.PreSubmersivePresentation.cotangentComplexAux",
+     "Algebra.Extension.Cotangent.val",
+     "Algebra.Generators.CotangentSpace.fst_compEquiv",
+     "Algebra.Presentation.differentials.hom₁",
+     "Algebra.Extension.cotangentComplex",
+     "Ideal.toCotangent_to_quotient_square",
+     "KaehlerDifferential.fromIdeal",
+     "Algebra.SubmersivePresentation.cotangentEquiv"
+    ],
+    "digest": "5cf894a86646af0e"
+   },
+   "date": "2026-10-22",
+   "verdict": "No exact Mathlib interface. Reuse the existing project definition; no new Lean declaration."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "naive cotangent complex presentation conormal differential comparison projection",
+   "results": {
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "Algebra.Presentation.differentials.comm₂₃",
+     "Algebra.Presentation.differentials.comm₁₂",
+     "Algebra.PreSubmersivePresentation.cotangentComplexAux",
+     "Algebra.Generators.H1Cotangent.δ_eq_δAux",
+     "Algebra.Presentation.differentials.hom₁",
+     "Algebra.Presentation.differentials.comm₁₂_single",
+     "Algebra.Generators.H1Cotangent.δ_eq",
+     "Algebra.Extension.cotangentComplex"
+    ],
+    "digest": "db831f2a207e2940"
+   },
+   "date": "2026-10-22",
+   "verdict": "No exact Mathlib interface. Reuse the existing project definition; no new Lean declaration."
+  },
+  {
+   "tool": "grep",
+   "query": "Naive.*Comparison|conormalIso|standardPresentation",
+   "results": {
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-22",
+   "verdict": "No exact Mathlib interface. Reuse the existing project definition; no new Lean declaration."
+  },
+  {
+   "tool": "grep",
+   "query": "rg -n CotangentResolution|Naive.Comparison|standardPresentation|conormalIso lean/WeilConjectures lean/Sheaf/RingTheory; rg -n CotangentResolution.Coherence|Naive.Comparison|CotangentResolutionCoherence|NaiveCotangentComparison dag/nodes; python3 tools/blueprint_refs.py search cotangent",
+   "results": "No upstream WeilConjectures declaration or existing definition node. Project definitions are in Sheaf.RingTheory.CotangentResolutionCoherence and Sheaf.RingTheory.NaiveCotangentComparison, currently recorded only by the existence-theorem nodes. Blueprint search: two matches, neither owns these definitions.",
+   "date": "2026-10-22",
+   "verdict": "Register existing project data under a definition node, as requested by the H2 return."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-lci-cotangent-presentation",
+  "date": "2026-10-22",
+  "group": "Q41"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Intrinsic cotangent construction: the standard section differential complex and its normalized naive conormal comparison, used in the lci presentation.",
+   "via": [
+    "lem-trf-lci-cotangent-presentation",
+    "lem-trf-flat-lci-canonical-adjunction",
+    "lem-trf-marked-nodal-dualizing-degrees",
+    "lem-trf-temkin-stable-modification",
+    "lem-trf-stable-modification-flat-curve-pair",
+    "lem-trf-dejong-relative-marked-semistable",
+    "lem-trf-relative-marked-nodal-reduction",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "lean": {
+  "module": "Sheaf.RingTheory.NaiveCotangentComparison",
+  "declaration": "Algebra.CotangentResolution.Naive.Comparison",
+  "declarations": [
+   "Algebra.CotangentResolution.Naive.Presentation",
+   "Algebra.CotangentResolution.Naive.extension",
+   "Algebra.CotangentResolution.Naive.conormal",
+   "Algebra.CotangentResolution.Naive.kernelClass",
+   "Algebra.CotangentResolution.Naive.differentials",
+   "Algebra.CotangentResolution.Naive.tensorGenerator",
+   "Algebra.CotangentResolution.Naive.differential",
+   "Algebra.CotangentResolution.Naive.term",
+   "Algebra.CotangentResolution.Naive.boundary",
+   "Algebra.CotangentResolution.Naive.complex",
+   "Algebra.CotangentResolution.Naive.conormalIso",
+   "Algebra.CotangentResolution.Naive.differentialsIso",
+   "Algebra.CotangentResolution.Naive.IsLocalizedPolynomial",
+   "Algebra.CotangentResolution.Naive.PresentationMap",
+   "Algebra.CotangentResolution.Naive.standardPresentation",
+   "Algebra.CotangentResolution.Naive.NaiveMap",
+   "Algebra.CotangentResolution.Naive.Comparison",
+   "Algebra.CotangentResolution.Naive.Comparison.projection"
+  ],
+  "statement": "structure Comparison\n    [∀ B : CommRingCat.{u}, HasDerivedCategory.{u + 1} (ModuleCat.{u} B)]\n    (C : Coherence.{u})",
+  "branch": "newtargets-dag",
+  "by": "Q41",
+  "date": "2026-10-22",
+  "existing": true,
+  "note": "Registers the existing definition interface used directly by the intrinsic cotangent statement. Its existence theorem remains a proof dependency; no theorem choice is used to form these data."
+ },
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-64c957a13",
+  "group": "Q41",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-64c957a13",
+  "group": "Q41",
+  "result": "pass",
+  "note": "H3/H6 return of 5b643677a408 fixed by option (b): a specified existential family E : LciIdentifications (one identification per LciPresentation); lci, Tor-amplitude and conormal_baseChange refer only to E, with no free N N' binders, so the non-affine V(z^2) counterexample no longer applies and the canonical NL-based family satisfies all clauses. Rest of the Lean diff is definitional (SystemLaws split into 5 Prop defs, simpler tildeComplexFunctor). Item statement, proof and stmt_deps unchanged; the two new def nodes are byte-identical to 5b64 (accepted), and the owned modules are unchanged live since 10-19. Mechanical finding: recordedDerivedPullbackComposition is asIso via the lem-pc-recorded-pullback-composition instance, a genuine dependency, PASS. Advisory: no compatibility of E with restriction to non-affine open sub-immersions (affine charts already fixed by normalization; not separately in the node). Gates OK: one sorry, docstrings, statement verbatim, lines <=100. No compile (no fix); worker reports clean 47.6/49.1 s."
+ }
+}

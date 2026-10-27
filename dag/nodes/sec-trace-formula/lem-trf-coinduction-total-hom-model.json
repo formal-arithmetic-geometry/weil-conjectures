@@ -1,0 +1,280 @@
+{
+ "id": "lem-trf-coinduction-total-hom-model",
+ "kind": "statement",
+ "title": "Coinduced total Hom complexes and K-injective targets",
+ "statement": "Let $P\\to A$ be a homomorphism of commutative rings. Work with unbounded cochain complexes, the product total Hom complex of [def-sc-module-total-hom-complex], and K-injectivity of [def-pur-kinjective-complex] on the one-object identity-cover ringed site. Let $U$ be termwise restriction of scalars. For any $P$-complex $I$, set $J(I)=\\operatorname{Hom}_P^\\bullet(A[0],I)$, with $(a h)(b)=h(ba)$ and differential induced by $I$. For every $A$-complex $E$ there is a natural isomorphism of $P$-complexes\n$$T_{E,I}:U\\operatorname{Hom}_A^\\bullet(E,J(I))\\xrightarrow{\\sim}\\operatorname{Hom}_P^\\bullet(UE,I),\\qquad T(f)(x)=f(x)(1),$$\nwhose inverse on homogeneous cochains of every integer degree is $S(g)(x)(a)=g(ax)$. These maps commute with the Hom differential $d(f)=d_I f-(-1)^{\\deg f}f d_E$, are natural under precomposition in $E$ and postcomposition in $I$, and carry chain homotopies to chain homotopies. If $I$ is K-injective over $P$, then $J(I)$ is K-injective over $A$. For a K-injective $I$ representing $Y\\in D(P)$, its restricted complex $UJ(I)$ represents $R\\operatorname{Hom}_P(A[0],Y)$ of [def-pur-derived-internal-hom], with the displayed $A$-action on $J(I)$. No boundedness, flatness, finiteness or Noetherian hypothesis is imposed.",
+ "source": {
+  "document": "literature/stacks-project/dualizing.tex",
+  "place": "Tags 0A70 (lemma-right-adjoint) and 0A71 (lemma-RHom-ext): K-injective coinduction model; explicit total-Hom transposition and null-homotopy argument expanded from these, with derived.tex Tag 070H (definition-K-injective)."
+ },
+ "stmt_deps": [
+  "def-sc-module-total-hom-complex",
+  "def-pur-kinjective-complex",
+  "def-weil-abstract-derived-category",
+  "def-pur-derived-internal-hom"
+ ],
+ "proof": [
+  {
+   "text": "By [def-sc-module-total-hom-complex], since $A[0]$ has just one nonzero term, $J(I)^q=\\operatorname{Hom}_P(A,I^q)$ and $d_J(h)=d_I\\circ h$. The formula $(a h)(b)=h(ba)$ gives an $A$-module: $(a(ch))(b)=h((ba)c)=((ac)h)(b)$ and $1h=h$, and distributivity follows from additivity. The $P$-action agrees with restriction since $h(b\\varphi(p))=p h(b)$, where $\\varphi:P\\to A$. Also $d_J(ah)(b)=d_I(h(ba))=(a d_Jh)(b)$ and $d_J^2h=d_I^2h=0$. Thus this is an $A$-complex.",
+   "uses": [
+    "def-sc-module-total-hom-complex"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/dualizing.tex",
+    "place": "Tags 0A70 (lemma-right-adjoint), 0A71 (lemma-RHom-ext): the coinduced complex; action and differential expanded."
+   }
+  },
+  {
+   "text": "For each integer $n$, define $T^n(f)^p(x)=f^p(x)(1)$ and $S^n(g)^p(x)(a)=g^p(ax)$ on the product factors of [def-sc-module-total-hom-complex]. These formulas are additive and $P$-linear. For $S$, the inner map is $P$-linear since $g^p(\\varphi(p)ax)=p g^p(ax)$, and the outer map is $A$-linear since $g^p(acx)=(c S^n(g)^p(x))(a)$. Evaluation gives $T^nS^n(g)(x)=g(x)$ and $S^nT^n(f)(x)(a)=f(ax)(1)=(a f(x))(1)=f(x)(a)$. Hence $T^n,S^n$ are inverse $P$-linear maps for every $n$; the products over all $p$ impose no finite-support condition.",
+   "uses": [
+    "def-sc-module-total-hom-complex"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/dualizing.tex",
+    "place": "Tags 0A70 and 0A71: explicit homogeneous transposition formulas."
+   }
+  },
+  {
+   "text": "Use the differential of [def-sc-module-total-hom-complex]. For $x\\in E^p$ and homogeneous $f$ of degree $n$, $T^{n+1}(df)^p(x)=d_I(f^p(x)(1))-(-1)^n f^{p+1}(d_E x)(1)=(dT^n(f))^p(x)$. Conversely, $(dS^n(g))^p(x)(a)=d_I(g^p(ax))-(-1)^n g^{p+1}(a d_E x)=S^{n+1}(dg)^p(x)(a)$ because $d_E(ax)=a d_Ex$. Thus the inverse maps are chain maps with exactly the asserted sign, for negative as well as positive $n$.",
+   "uses": [
+    "def-sc-module-total-hom-complex"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/dualizing.tex",
+    "place": "Tags 0A70 and 0A71: total-Hom transposition, differential calculation expanded."
+   }
+  },
+  {
+   "text": "For chain maps $\\alpha:E\\to E_1$ and $\\beta:I\\to I_1$, define $J(\\beta)(h)=\\beta\\circ h$; it is $A$-linear and commutes with the differentials. If $f$ has source $E_1$, evaluating on $x\\in E$ gives $T_{E,I_1}(J(\\beta)\\circ f\\circ\\alpha)(x)=\\beta(f(\\alpha x)(1))=(\\beta\\circ T_{E_1,I}(f)\\circ U\\alpha)(x)$. The inverse identity follows either by applying the inverse $S$, or directly from $\\alpha(ax)=a\\alpha(x)$. These are the precomposition and postcomposition naturality identities in every degree of the product total Hom [def-sc-module-total-hom-complex].",
+   "uses": [
+    "def-sc-module-total-hom-complex"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/dualizing.tex",
+    "place": "Tag 0A70 (lemma-right-adjoint): naturality of the displayed transposition, expanded."
+   }
+  },
+  {
+   "text": "By [def-pur-kinjective-complex], a homotopy between chain maps $f,f_1:E\\to J(I)$ is a degree $-1$ cochain $h$ with $f-f_1=d_Jh+h d_E$. The differential calculation gives $T(f)-T(f_1)=d_I T(h)+T(h)d_E$, so $T(h)$ is the transposed homotopy; the identical calculation with $S$ gives the converse. A homotopy $k$ between maps $I\\to I_1$ is also carried by $J$ to $J(k)^q(h)=k^q\\circ h$: postcomposing $\\beta-\\beta_1=d k+k d$ with $h$ gives $J(\\beta)-J(\\beta_1)=d J(k)+J(k)d$.",
+   "uses": [
+    "def-pur-kinjective-complex",
+    "def-sc-module-total-hom-complex"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 070H (definition-K-injective), with the transposition of Tags 0A70 and 0A71; explicit homotopy equations."
+   }
+  },
+  {
+   "text": "Let $N$ be an acyclic $A$-complex. Restriction $U$ leaves the underlying groups and differentials unchanged, so its kernels, images, and their quotient are unchanged as groups: $H^q(UN)=U H^q(N)=0$ for every $q$. This uses precisely $H^q=\\ker d^q/\\operatorname{im}d^{q-1}$ from [def-weil-abstract-derived-category]; in particular $UN$ is acyclic without any flatness assumption.",
+   "uses": [
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/dualizing.tex",
+    "place": "Tag 0A70 (lemma-right-adjoint): exactness of restriction; kernel/image argument expanded."
+   }
+  },
+  {
+   "text": "Assume $I$ is K-injective and let $f:N\\to J(I)$ be a chain map with $N$ acyclic. The preceding acyclicity argument and [def-pur-kinjective-complex] give a $P$-linear homotopy $k$ with $T(f)=d_I k+k d_N$. Set $h=S^{(-1)}(k)$, where the superscript $(-1)$ denotes the cochain degree (so $h^p(x)(a)=k^p(ax)$). The differential identity for $S$ gives $d_J h+h d_N=S^0(T(f))=f$. This $h$ is $A$-linear by the formula already checked. Every map from an acyclic complex is therefore null-homotopic, which is exactly K-injectivity of $J(I)$.",
+   "uses": [
+    "def-pur-kinjective-complex"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 070H (definition-K-injective), applied to the adjunction of Tag 0A70; null-homotopy argument expanded."
+   }
+  },
+  {
+   "text": "Let I be K-injective and QI isomorphic to Y. First identify UJ(I) with moduleHomComplex(A[0],I) by evaluation at the degree-zero source factor, with inverse insertion into that factor. Compare this total Hom complex with the existing monoidal internalHomObj(A[0],I) by its product projections. The differentials agree: the source differential vanishes and its nonzero source factor is p=0, where the signed comparison is the identity. The right-derived internal-Hom unit is invertible on I, by the K-injective derivability structure used to construct [def-pur-derived-internal-hom]. Uniqueness of right adjoints compares that right-derived functor with ihom(Q(A[0])). Compose these isomorphisms and transport the second variable along QI ≅ Y. This proves the desired arbitrary-representative clause for the recorded ordinaryModuleDerivedInternalHom abbreviation. No boundedness, flatness, finiteness or Noetherian hypothesis enters.",
+   "uses": [
+    "def-pur-derived-internal-hom"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/dualizing.tex",
+    "place": "Tag 0A71 (lemma-RHom-ext), proof: choose a K-injective representative; also sites-cohomology.tex Tag 08J7 (section-internal-hom)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pur-derived-internal-hom",
+  "def-pur-kinjective-complex",
+  "def-sc-module-total-hom-complex",
+  "def-weil-abstract-derived-category"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/dualizing.tex",
+  "place": "Tags 0A70 and 0A71, with derived.tex Tag 070H; Q8 realizes the original eight-step route by explicit module cochain maps, and expands the final comparison using the existing K-injective derived tensor-Hom adjunction (2026-10-23)."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For complexes over a commutative ring map restriction and coinduction give an isomorphism of total Hom complexes, and coinduction preserves K-injective complexes",
+   "results": "{\"t\": \"2026-10-22T06:45:28Z\", \"tool\": \"leanfinder\", \"query\": \"For complexes over a commutative ring map restriction and coinduction give an isomorphism of total Hom complexes, and coinduction preserves K-injective complexes\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CochainComplex.isKInjective_iff_of_iso\", \"CochainComplex.isKInjective_of_iso\", \"CategoryTheory.instIsIsoAppToRightDerivedZeroOfInjective\", \"groupCohomology.linearYonedaObjResProjectiveResolutionIso\", \"CategoryTheory.InjectiveResolution.instIsIsoToRightDerivedZero'Self\", \"Rep.standardComplex.quasiIso_forget₂_εToSingle₀\", \"CochainComplex.ConnectData.restrictionGEIso\", \"CochainComplex.cm5b.I_X\"], \"digest\": \"6830a5afe0f151f1\"} Read Mathlib/Algebra/Category/ModuleCat/ChangeOfRings.lean:550-690: ordinary module adjunction and its formulas, not an isomorphism of product total Hom complexes together with K-injective preservation. KInjective.lean:80-105 concerns shifts and bounded-below injective complexes, not this coinduction model.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "coextendScalars|restrictCoextendScalarsAdj|IsKInjective",
+   "results": "{\"t\": \"2026-10-22T06:45:33Z\", \"tool\": \"grep\", \"query\": \"coextendScalars|restrictCoextendScalarsAdj|IsKInjective\", \"sub\": \"Algebra/Category/ModuleCat\", \"ok\": true, \"n_hits\": 7, \"note\": \"\", \"top\": [\"Mathlib/Algebra/Category/ModuleCat/EnoughInjectives.lean\", \"Mathlib/Algebra/Category/ModuleCat/EnoughInjectives.lean\", \"Mathlib/Algebra/Category/ModuleCat/ChangeOfRings.lean\", \"Mathlib/Algebra/Category/ModuleCat/ChangeOfRings.lean\", \"Mathlib/Algebra/Category/ModuleCat/ChangeOfRings.lean\", \"Mathlib/Algebra/Category/ModuleCat/ChangeOfRings.lean\", \"Mathlib/Algebra/Category/ModuleCat/ChangeOfRings.lean\"], \"digest\": \"8a042622d6b5ae6d\"} Read Mathlib/Algebra/Category/ModuleCat/ChangeOfRings.lean:550-690: ordinary module adjunction and its formulas, not an isomorphism of product total Hom complexes together with K-injective preservation. KInjective.lean:80-105 concerns shifts and bounded-below injective complexes, not this coinduction model.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "ModuleCat.restrictScalars, ModuleCat.coextendScalars",
+   "results": "{\"t\": \"2026-10-22T06:45:33Z\", \"tool\": \"loogle\", \"query\": \"ModuleCat.restrictScalars, ModuleCat.coextendScalars\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"ModuleCat.restrictCoextendScalarsAdj\", \"ModuleCat.RestrictionCoextensionAdj.HomEquiv.fromRestriction\", \"ModuleCat.RestrictionCoextensionAdj.HomEquiv.toRestriction\", \"ModuleCat.RestrictionCoextensionAdj.counit'\", \"ModuleCat.RestrictionCoextensionAdj.unit'\", \"ModuleCat.RestrictionCoextensionAdj.app'\", \"ModuleCat.CoextendScalars.equiv\", \"ModuleCat.RestrictionCoextensionAdj.unit'_app\"], \"digest\": \"4c8ff5183cdb8d04\"} Read Mathlib/Algebra/Category/ModuleCat/ChangeOfRings.lean:550-690: ordinary module adjunction and its formulas, not an isomorphism of product total Hom complexes together with K-injective preservation. KInjective.lean:80-105 concerns shifts and bounded-below injective complexes, not this coinduction model.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Restriction and coinduction of cochain complexes have inverse total Hom complex maps evaluation at one, and coinduction preserves K-injectivity",
+   "results": "{\"t\": \"2026-10-22T06:45:50Z\", \"tool\": \"leansearch\", \"query\": \"Restriction and coinduction of cochain complexes have inverse total Hom complex maps evaluation at one, and coinduction preserves K-injectivity\", \"sub\": \"\", \"ok\": false, \"n_hits\": 0, \"note\": \"service unavailable: {\\\"error\\\":\\\"Rate limit exceeded: 60 per 1 minute\\\"}\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Hom complex adjunction for restriction of scalars and coextension, transpose null homotopies to prove coinduced complex is K-injective",
+   "results": "{\"t\": \"2026-10-22T06:46:02Z\", \"tool\": \"leanfinder\", \"query\": \"Hom complex adjunction for restriction of scalars and coextension, transpose null homotopies to prove coinduced complex is K-injective\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CochainComplex.isKInjective_of_injective\", \"CochainComplex.cm5b.instInjectiveXIntI\", \"CochainComplex.cm5b.I_X\", \"CochainComplex.cm5b.I\", \"CategoryTheory.InjectiveResolution.instIsKInjectiveCochainComplex\", \"CochainComplex.IsKInjective\", \"CochainComplex.isKInjective_iff_rightOrthogonal\", \"CochainComplex.isKInjective_of_injective_aux\"], \"digest\": \"93907cbaef9c27df\"} Read Mathlib/Algebra/Category/ModuleCat/ChangeOfRings.lean:550-690: ordinary module adjunction and its formulas, not an isomorphism of product total Hom complexes together with K-injective preservation. KInjective.lean:80-105 concerns shifts and bounded-below injective complexes, not this coinduction model.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "KInjective.*[Aa]dj|[Aa]dj.*KInjective|coextend|coinduc",
+   "results": "{\"t\": \"2026-10-22T06:46:28Z\", \"tool\": \"grep\", \"query\": \"KInjective.*[Aa]dj|[Aa]dj.*KInjective|coextend|coinduc\", \"sub\": \"Algebra/Homology\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"Mathlib/Algebra/Homology/Homotopy.lean\", \"Mathlib/Algebra/Homology/Homotopy.lean\", \"Mathlib/Algebra/Homology/Homotopy.lean\", \"Mathlib/Algebra/Homology/Homotopy.lean\", \"Mathlib/Algebra/Homology/Homotopy.lean\"], \"digest\": \"570425de44a8c831\"} Read Mathlib/Algebra/Category/ModuleCat/ChangeOfRings.lean:550-690: ordinary module adjunction and its formulas, not an isomorphism of product total Hom complexes together with K-injective preservation. KInjective.lean:80-105 concerns shifts and bounded-below injective complexes, not this coinduction model.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "coextendScalars|restrictCoextendScalarsAdj|IsKInjective",
+   "results": "{\"t\": \"2026-10-22T13:47:31Z\", \"tool\": \"grep\", \"query\": \"coextendScalars|restrictCoextendScalarsAdj|IsKInjective\", \"sub\": \"Algebra/Category/ModuleCat\", \"ok\": true, \"n_hits\": 7, \"note\": \"\", \"top\": [\"Mathlib/Algebra/Category/ModuleCat/EnoughInjectives.lean\", \"Mathlib/Algebra/Category/ModuleCat/EnoughInjectives.lean\", \"Mathlib/Algebra/Category/ModuleCat/ChangeOfRings.lean\", \"Mathlib/Algebra/Category/ModuleCat/ChangeOfRings.lean\", \"Mathlib/Algebra/Category/ModuleCat/ChangeOfRings.lean\", \"Mathlib/Algebra/Category/ModuleCat/ChangeOfRings.lean\", \"Mathlib/Algebra/Category/ModuleCat/ChangeOfRings.lean\"], \"digest\": \"8a042622d6b5ae6d\"} Read ChangeOfRings.lean:550-690 (module adjunction only) and HomotopyCategory/KInjective.lean:39-105 (definition, homotopy equivalences and shifts). No hit states every clause of the complex comparison and coinduced K-injective model.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Coinduction along a ring homomorphism preserves K-injective complexes and is adjoint to restriction on total Hom complexes",
+   "results": "{\"t\": \"2026-10-22T13:47:32Z\", \"tool\": \"leansearch\", \"query\": \"Coinduction along a ring homomorphism preserves K-injective complexes and is adjoint to restriction on total Hom complexes\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Rep.coindFunctor\", \"Rep.instIsRightAdjointCoindFunctor\", \"Rep.resCoindAdjunction\", \"Rep.coindResAdjunction\", \"HomotopyEquiv.isKInjective\", \"CochainComplex.isKInjective_of_iso\", \"Rep.coindVEquiv\", \"Rep.coindFunctor'\"], \"digest\": \"ba7138879b3f2394\"} Read ChangeOfRings.lean:550-690 (module adjunction only) and HomotopyCategory/KInjective.lean:39-105 (definition, homotopy equivalences and shifts). No hit states every clause of the complex comparison and coinduced K-injective model.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "ModuleCat.restrictScalars, ModuleCat.coextendScalars",
+   "results": "{\"t\": \"2026-10-22T13:47:32Z\", \"tool\": \"loogle\", \"query\": \"ModuleCat.restrictScalars, ModuleCat.coextendScalars\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"ModuleCat.restrictCoextendScalarsAdj\", \"ModuleCat.RestrictionCoextensionAdj.HomEquiv.fromRestriction\", \"ModuleCat.RestrictionCoextensionAdj.HomEquiv.toRestriction\", \"ModuleCat.RestrictionCoextensionAdj.counit'\", \"ModuleCat.RestrictionCoextensionAdj.unit'\", \"ModuleCat.RestrictionCoextensionAdj.app'\", \"ModuleCat.CoextendScalars.equiv\", \"ModuleCat.RestrictionCoextensionAdj.unit'_app\"], \"digest\": \"4c8ff5183cdb8d04\"} Read ChangeOfRings.lean:550-690 (module adjunction only) and HomotopyCategory/KInjective.lean:39-105 (definition, homotopy equivalences and shifts). No hit states every clause of the complex comparison and coinduced K-injective model.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Restriction of scalars and coinduction give an isomorphism of total Hom complexes and preserve K-injective targets",
+   "results": "{\"t\": \"2026-10-22T13:47:33Z\", \"tool\": \"leanfinder\", \"query\": \"Restriction of scalars and coinduction give an isomorphism of total Hom complexes and preserve K-injective targets\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"groupCohomology.linearYonedaObjResProjectiveResolutionIso\", \"CochainComplex.isKInjective_of_iso\", \"CochainComplex.isKInjective_iff_of_iso\", \"CochainComplex.ConnectData.restrictionLEIso\", \"CochainComplex.ConnectData.restrictionGEIso\", \"CochainComplex.ConnectData.restrictionLEIso_hom_f\", \"CochainComplex.ConnectData.restrictionGEIso_hom_f\", \"groupCohomology.coindIso\"], \"digest\": \"34e6f75e03943f20\"} Read ChangeOfRings.lean:550-690 (module adjunction only) and HomotopyCategory/KInjective.lean:39-105 (definition, homotopy equivalences and shifts). No hit states every clause of the complex comparison and coinduced K-injective model.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "KInjective.*[Aa]dj|[Aa]dj.*KInjective|coextend|coinduc",
+   "results": "{\"t\": \"2026-10-22T13:48:31Z\", \"tool\": \"grep\", \"query\": \"KInjective.*[Aa]dj|[Aa]dj.*KInjective|coextend|coinduc\", \"sub\": \"Algebra/Homology\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"Mathlib/Algebra/Homology/Homotopy.lean\", \"Mathlib/Algebra/Homology/Homotopy.lean\", \"Mathlib/Algebra/Homology/Homotopy.lean\", \"Mathlib/Algebra/Homology/Homotopy.lean\", \"Mathlib/Algebra/Homology/Homotopy.lean\"], \"digest\": \"570425de44a8c831\"} Read ChangeOfRings.lean:550-690 (module adjunction only) and HomotopyCategory/KInjective.lean:39-105 (definition, homotopy equivalences and shifts). No hit states every clause of the complex comparison and coinduced K-injective model.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Adjunction of differential graded Hom complexes for change of rings with evaluation at one and null homotopies",
+   "results": "{\"t\": \"2026-10-22T13:48:42Z\", \"tool\": \"leanfinder\", \"query\": \"Adjunction of differential graded Hom complexes for change of rings with evaluation at one and null homotopies\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Rep.standardComplex.εToSingle₀_comp_eq\", \"Rep.standardComplex.forget₂ToModuleCatHomotopyEquiv\", \"Rep.standardComplex.forget₂ToModuleCatHomotopyEquiv_f_0_eq\", \"HomologicalComplex.dgoEquivHomologicalComplex_counitIso\", \"HomologicalComplex.dgoEquivHomologicalComplexCounitIso\", \"HomologicalComplex.dgoEquivHomologicalComplexCounitIso_hom_app_f\", \"Rep.standardComplex.quasiIso_forget₂_εToSingle₀\", \"ChainComplex.alternatingConstHomotopyEquiv\"], \"digest\": \"03d02f36e62c14b7\"} Read ChangeOfRings.lean:550-690 (module adjunction only) and HomotopyCategory/KInjective.lean:39-105 (definition, homotopy equivalences and shifts). No hit states every clause of the complex comparison and coinduced K-injective model.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-algebraic-shriek-derived-hom-adjunction",
+  "date": "2026-10-22",
+  "group": "Q41"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Proof (1)--(2), semistable-alteration input in the nearby-cycle branch: the A-linear/P-linear derived-Hom comparison used in the scalar biduality calculation. Extracted argument: coinduced total Hom and K-injectivity (returned proof steps 1-3).",
+   "via": [
+    "lem-trf-algebraic-shriek-derived-hom-adjunction",
+    "lem-trf-algebraic-shriek-relative-perfect",
+    "lem-trf-relative-duality-polynomial-chart",
+    "lem-trf-flat-lci-canonical-adjunction",
+    "lem-trf-marked-nodal-dualizing-degrees",
+    "lem-trf-temkin-stable-modification",
+    "lem-trf-stable-modification-flat-curve-pair",
+    "lem-trf-dejong-relative-marked-semistable",
+    "lem-trf-relative-marked-nodal-reduction",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-trf-coinduction-total-hom-model",
+  "worker": "stage1",
+  "summary": "Checked Stacks 0A70, 0A71, 070H and 08J7; supplied eight explicit steps for the coinduced action, inverse graded maps, differential, naturality, homotopies, acyclicity under restriction, K-injectivity and the derived model. Statement unchanged. No new nodes: all calculations are elementary consequences of existing definitions; the arbitrary K-injective representative clause is explicitly in def-pur-derived-internal-hom. Retained inherited searches and added the logged Q22 searches.",
+  "blueprint": "Nearest ancestor lem-trf-local-term-locality, proof (1)--(2), specialization/semistable-alteration branch, via the recorded algebraic-shriek chain: these steps expand the coinduced total-Hom and K-injectivity argument extracted from the parent derived-Hom adjunction (its former steps 1--3)."
+ },
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q22-08ac9edf6",
+  "group": "Q22",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q22-08ac9edf6 (reviewer sub-agent of L); spot-checked: Read Stacks 0A70 (dualizing-lemma-right-adjoint) and 0A71 (lemma-RHom-ext); the item's statement is both lemmas with rings renamed P→A, made explicit at chain level. Statement unchanged from base, no hypotheses dropped. Live item is unsplit and has no repair note. No new nodes; proof_deps are 4 definitions equal to the union of step uses; no cycle, no route issue, no SGA. Rechecked every step: (1) J(I)^q=Hom_P(A,I^q) is an A-complex compatible with restriction; (2) T and S are P-linear inverses on full products, S(g) inner P-linear and outer A-linear; (3) differential sign (-1)^n matches the Π_p Hom(L^p,M^{p+n}) convention; (4) pre/postcomposition naturality; (5) degree -1 homotopy dh+hd matches def-pur-kinjective-complex, and J carries homotopies; (6) restriction preserves acyclicity; (7) J(I) is K-injective via h=S(k), elementary; (8) def-pur-derived-internal-hom's statement grants any K-injective representative, and on the one-object site UJ(I)=Hom_P(A[0],I). Duplicate search: def-trf-derived-coinduction and lem-trf-derived-coinduction-adjunction depend on this item through the parent, so citing them would make a cycle; lem-weil-pbc-right-adjoint-preserves-kinjective (unsplit, sk-def-exchange) covers only the step-7 clause, which the item proves in place. Edge cases: P=A, A=0, Z→Z/2 (nonflat), signs in degrees -1, 0, 1. Advisory: step 6 cites the H^q formula of def-weil-abstract-derived-category, while K-injectivity uses def-pc-acyclic-complex-modules; on the one-object site the two agree."
+ },
+ "lean": {
+  "module": "Sheaf.Algebra.Homology.CoinductionTotalHomModel",
+  "declaration": "ModuleCat.coinduction_total_hom_model",
+  "file": "lean/Sheaf/Algebra/Homology/CoinductionTotalHomModel.lean",
+  "statement": "theorem coinduction_total_hom_model {P A : Type u} [CommRing P] [CommRing A] (φ : P →+* A) : (∀ (I : CochainComplex (ModuleCat.{u} P) ℤ) (q : ℤ) (h : (((coextendScalars.{u, u, u} φ).mapHomologicalComplex (.up ℤ)).obj I).X q) (a b : A), CoextendScalars.equiv φ (I.X q) (a • h) b = CoextendScalars.equiv φ (I.X q) h (b * a)) ∧ (∀ (I : CochainComplex (ModuleCat.{u} P) ℤ) (p q : ℤ) (h : (((coextendScalars.{u, u, u} φ).mapHomologicalComplex (.up ℤ)).obj I).X p) (a : A), CoextendScalars.equiv φ (I.X q) ((((coextendScalars φ).mapHomologicalComplex (.up ℤ)).obj I).d p q h) a = I.d p q (CoextendScalars.equiv φ (I.X p) h a)) ∧ (∀ I : CochainComplex (ModuleCat.{u} P) ℤ, Nonempty ((((restrictScalars φ).mapHomologicalComplex (.up ℤ)).obj (((coextendScalars φ).mapHomologicalComplex (.up ℤ)).obj I)) ≅ moduleHomComplex ((CochainComplex.singleFunctor (ModuleCat.{u} P) 0).obj ((restrictScalars φ).obj (ModuleCat.of A A))) I)) ∧ (∃ T : ∀ (E : CochainComplex (ModuleCat.{u} A) ℤ) (I : CochainComplex (ModuleCat.{u} P) ℤ), ((restrictScalars φ).mapHomologicalComplex (.up ℤ)).obj (moduleHomComplex E (((coextendScalars φ).mapHomologicalComplex (.up ℤ)).obj I)) ≅ moduleHomComplex (((restrictScalars φ).mapHomologicalComplex (.up ℤ)).obj E) I, (∀ (E : CochainComplex (ModuleCat.{u} A) ℤ) (I : CochainComplex (ModuleCat.{u} P) ℤ) (n p q : ℤ) (hpq : p + n = q) (z : Cochain E (((coextendScalars φ).mapHomologicalComplex (.up ℤ)).obj I) n) (x : E.X p), (((T E I).hom.f n z).v p q hpq) x = CoextendScalars.equiv φ (I.X q) (z.v p q hpq x) (1 : A)) ∧ (∀ (E : CochainComplex (ModuleCat.{u} A) ℤ) (I : CochainComplex (ModuleCat.{u} P) ℤ) (n p q : ℤ) (hpq : p + n = q) (z : Cochain (((restrictScalars φ).mapHomologicalComplex (.up ℤ)).obj E) I n) (x : E.X p) (a : A), CoextendScalars.equiv φ (I.X q) (((T E I).inv.f n z).v p q hpq x) a = (z.v p q hpq) (a • x)) ∧ (∀ (E : CochainComplex (ModuleCat.{u} A) ℤ) (I : CochainComplex (ModuleCat.{u} P) ℤ) (n m : ℤ) (z : Cochain E (((coextendScalars φ).mapHomologicalComplex (.up ℤ)).obj I) n), (T E I).hom.f m (δ n m z) = δ n m ((T E I).hom.f n z)) ∧ (∀ (E : CochainComplex (ModuleCat.{u} A) ℤ) (I : CochainComplex (ModuleCat.{u} P) ℤ) (n m : ℤ) (z : Cochain (((restrictScalars φ).mapHomologicalComplex (.up ℤ)).obj E) I n), (T E I).inv.f m (δ n m z) = δ n m ((T E I).inv.f n z)) ∧ (∀ (E E' : CochainComplex (ModuleCat.{u} A) ℤ) (I I' : CochainComplex (ModuleCat.{u} P) ℤ) (α : E ⟶ E') (β : I ⟶ I') (n : ℤ) (z : Cochain E' (((coextendScalars φ).mapHomologicalComplex (.up ℤ)).obj I) n), (T E I').hom.f n ((Cochain.ofHom α).comp (z.comp (Cochain.ofHom (((coextendScalars φ).mapHomologicalComplex (.up ℤ)).map β)) (add_zero n)) (zero_add n)) = ((Cochain.ofHom (((restrictScalars φ).mapHomologicalComplex (.up ℤ)).map α)).comp ((T E' I).hom.f n z) (zero_add n)).comp (Cochain.ofHom β) (add_zero n)) ∧ (∀ (E : CochainComplex (ModuleCat.{u} A) ℤ) (I : CochainComplex (ModuleCat.{u} P) ℤ) (f g : E ⟶ (((coextendScalars φ).mapHomologicalComplex (.up ℤ)).obj I)) (h : Homotopy f g), δ (-1) 0 ((T E I).hom.f (-1) (Cochain.ofHomotopy h)) = (T E I).hom.f 0 (Cochain.ofHom f) - (T E I).hom.f 0 (Cochain.ofHom g)) ∧ (∀ (E : CochainComplex (ModuleCat.{u} A) ℤ) (I : CochainComplex (ModuleCat.{u} P) ℤ) (f g : (((restrictScalars φ).mapHomologicalComplex (.up ℤ)).obj E) ⟶ I) (h : Homotopy f g), δ (-1) 0 ((T E I).inv.f (-1) (Cochain.ofHomotopy h)) = (T E I).inv.f 0 (Cochain.ofHom f) - (T E I).inv.f 0 (Cochain.ofHom g))) ∧ (∀ (I I' : CochainComplex (ModuleCat.{u} P) ℤ) (β β' : I ⟶ I') (k : Homotopy β β'), ∃ H : Homotopy (((coextendScalars φ).mapHomologicalComplex (.up ℤ)).map β) (((coextendScalars φ).mapHomologicalComplex (.up ℤ)).map β'), ∀ (p q : ℤ) (h : (((coextendScalars φ).mapHomologicalComplex (.up ℤ)).obj I).X p) (a : A), CoextendScalars.equiv φ (I'.X q) (H.hom p q h) a = k.hom p q (CoextendScalars.equiv φ (I.X p) h a)) ∧ (∀ (I : CochainComplex (ModuleCat.{u} P) ℤ), I.IsKInjective → CochainComplex.IsKInjective (((coextendScalars φ).mapHomologicalComplex (.up ℤ)).obj I)) ∧ (∀ (I : CochainComplex (ModuleCat.{u} P) ℤ) [I.IsKInjective] (Y : DerivedCategory (ModuleCat.{u} P)) (_ : DerivedCategory.Q.obj I ≅ Y), Nonempty (DerivedCategory.Q.obj (((restrictScalars φ).mapHomologicalComplex (.up ℤ)).obj (((coextendScalars φ).mapHomologicalComplex (.up ℤ)).obj I)) ≅ (ordinaryModuleDerivedInternalHom P).obj (op (DerivedCategory.Q.obj ((CochainComplex.singleFunctor (ModuleCat.{u} P) 0).obj ((restrictScalars φ).obj (ModuleCat.of A A)))), Y)))",
+  "branch": "sheaf-dag",
+  "by": "Q115",
+  "date": "2026-10-23",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-0bfc41aa0",
+  "group": "Q115",
+  "result": "pass",
+  "note": "Every node clause is rendered. J = termwise Mathlib coextendScalars, whose action (a•h)(b)=h(ba) and postcomposition differential are stated explicitly. T: U Hom_A(E,J I) ≅ Hom_P(UE,I) is pinned completely by the hom formula z(x)(1) and the inverse formula g(ax) in every degree, with δ compatibility, joint α/β naturality and homotopy transport both ways (δ_ofHomotopy form). J carries homotopies with a pinned formula. K-injective preservation holds; the derived clause uses the recorded ordinaryModuleDerivedInternalHom for any K-injective representative. No extra hypotheses; common universe u only. Edge cases P=A, A=0, Z→Z/2, degrees -1/0/1 checked. Records: only the lean field changed vs live; statement verbatim; single file with only the theorem's sorry; docstrings and blueprint tag present; no duplicate (downstream coinductionComplexFunctor is the same term, cycle otherwise). Advisory: Nonempty model iso and Nonempty derived iso are unnormalized but match the node's 'represents' (no canonical map exists to normalize against); unused representing-iso binder; second reading was by the same worker. Not compiled (no change)."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q8",
+  "result": "pass",
+  "landing": "20261023T124203-L-1343315",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

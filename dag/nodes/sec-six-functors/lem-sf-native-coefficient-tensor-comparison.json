@@ -1,0 +1,129 @@
+{
+ "id": "lem-sf-native-coefficient-tensor-comparison",
+ "kind": "statement",
+ "title": "Coefficient equivalence transports the ordinary relative derived tensor",
+ "statement": "Let l be prime and Y any scheme in the project universes. Let A be the native coefficient-module category AdicSheaf l Y and B the condensed coefficient-module category over condensedRingObj(padicAlgClRingObj l,Y), as in [lem-sf-weil-verdier-module-constructibility-comparison]. Let H be a bifunctor D(A)^op times D(A) to D(A), let R be its ordinary product-total Hom representative model, and let S be a closed monoidal structure for H with symmetry beta. Assume NativeOrdinaryTensorModels l Y H R S beta from [def-sf-native-weil-closed-models]: S tensor is computed by the actual ordinary relative total tensor on K-flat representatives with the specified componentwise adjunction and Koszul symmetry. Put F=(AdicSheaf.forgetAb l Y followed by comap along nativeModuleCoefficientIso l Y).mapDerivedCategory. For every P in D(A), the functors tensorRight_S(P) followed by F and F followed by CondensedRing.derivedTensor(padicAlgClRingObj l,Y).obj(FP) are naturally isomorphic. The latter fixes FP on the left. No Frobenius structure, derived-Hom comparison, boundedness or constructibility hypothesis is asserted.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-rem-sf-pf-done/lem-fix-weil-operations.proof.md",
+  "place": "Internal-Hom paragraph; coefficient realization in step 1 and forgotten derived Hom in step 3 of lem-sf-weil-verdier-dual-preserves-weil-complexes."
+ },
+ "stmt_deps": [
+  "def-sf-native-weil-closed-models",
+  "lem-sf-weil-verdier-module-constructibility-comparison",
+  "sk-def-sfb-derived-tensor-hom"
+ ],
+ "proof": [
+  {
+   "text": "Apply [lem-sf-native-ordinary-tensor-identification] to identify tensorRight_S(P) with the standard native derived tensorRight(P). Its proof compares the natural Hom representatives and uses uniqueness of adjoints; no arbitrary extra tensor data are chosen.",
+   "uses": [
+    "lem-sf-native-ordinary-tensor-identification"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use the ordinary monoidal structure of [lem-sf-native-scalar-forgetting-monoidal] on ambient scalar forgetting. Restriction along the coefficient isomorphism [lem-sf-locally-finite-coefficient-ring-realization] is strong monoidal by [def-sfb-comap-iso-strong-monoidal]. Both functors are equivalences, using [lem-sf-native-scalar-forgetting-equivalence] for forgetting. Their composite E is an exact additive monoidal equivalence and preserves flat objects.",
+   "uses": [
+    "lem-sf-native-scalar-forgetting-monoidal",
+    "lem-sf-locally-finite-coefficient-ring-realization",
+    "def-sfb-comap-iso-strong-monoidal",
+    "lem-sf-native-scalar-forgetting-equivalence"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The existing proved generic Functor.mapDerivedCategoryTensorComparison for an additive monoidal flat-preserving exact functor is invertible. Its construction compares the total tensors on K-flat resolutions and localizes, for the standard derived tensors [sk-def-sfb-derived-tensor-hom]. Evaluate it at P and compose with the native tensor identification. First use the canonical derived braiding to change tensorRight(P) to tensorLeft(P), matching the target functor which fixes F(P) on the left.",
+   "uses": [
+    "sk-def-sfb-derived-tensor-hom"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sf-native-ordinary-tensor-identification",
+  "lem-sf-native-scalar-forgetting-monoidal",
+  "lem-sf-locally-finite-coefficient-ring-realization",
+  "def-sfb-comap-iso-strong-monoidal",
+  "lem-sf-native-scalar-forgetting-equivalence",
+  "sk-def-sfb-derived-tensor-hom"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-rem-sf-pf-done/lem-fix-weil-operations.proof.md",
+  "place": "Internal-Hom paragraph, steps 1--2 of this node; H2 identifies the native tensor by ordinary Hom representatives and applies the existing generic derived monoidal functor comparison after the underived scalar-forgetting comparison."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "An exact equivalence between sheaves of modules induced by forgetting ambient scalars preserves the relative derived tensor product",
+   "results": "Eight hits, including SheafOfModules.forgetToSheafModuleCat, SheafOfModules.forget and its limit preservation. No relative derived tensor transport for this coefficient equivalence.",
+   "date": "2026-10-26",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Exact change of coefficient equivalence for relative derived tensor products of sheaves, computed on K-flat complexes",
+   "results": "Eight hits about Module.Flat.lTensor/rTensor exactness for ordinary modules. None identifies these two sheaf coefficient presentations or their derived tensors.",
+   "date": "2026-10-26",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "mapDerivedCategory.*tensorComparison|nativeCoefficient_tensorComparison|forgetAb.*[Tt]ensor",
+   "results": "msearch grep: OK, zero hits. Local source search finds mapModCoreMonoidal, requiring the ambient functor to be strong monoidal; native scalar forgetting is only lax monoidal. No coefficient tensor comparison. Blueprint search coefficient tensor found def-pur-section-invariant, lem-coef-integral-residue-tor-residue-amplitude and lem-exc-constant-tensor, none the present assertion.",
+   "date": "2026-10-26",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.NativeGeometricHomComparison",
+  "date": "2026-10-26",
+  "group": "K2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "The nearest imported ancestor is null (blueprint_refs.py ancestor). Serves the internal-Hom paragraph of latest lem-fix-weil-operations.proof.md: coefficient tensor transport in steps 2--3 of lem-sf-native-geometric-hom-comparison.",
+   "via": [
+    "lem-sf-native-geometric-hom-comparison",
+    "lem-sf-weil-verdier-dual-preserves-weil-complexes"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.NativeCoefficientTensorComparison",
+  "file": "lean/Sheaf/Paper/NativeCoefficientTensorComparison.lean",
+  "declaration": "AlgebraicGeometry.ProEtaleWeilSheaf.nativeCoefficient_tensorComparison",
+  "statement": "theorem nativeCoefficient_tensorComparison (l : ℕ) [Fact l.Prime] (Y : Scheme.{u})\n    (H : (DerivedCategory (ProEtale.AdicSheaf l Y))ᵒᵖ ×\n      DerivedCategory (ProEtale.AdicSheaf l Y) ⥤\n        DerivedCategory (ProEtale.AdicSheaf l Y))\n    (R : NativeHomRepresentatives (ordinaryIhomBifunctor l Y) H)\n    (S : CoefficientClosedStructure H)\n    (β : @SymmetricCategory _ _ S.monoidal)\n    (_hModels : NativeOrdinaryTensorModels l Y H R S β) :\n    let F := (ProEtale.AdicSheaf.forgetAb l Y ⋙\n      Mod.comap (ProEtale.nativeModuleCoefficientIso l Y).hom).mapDerivedCategory\n    ∀ P : DerivedCategory (ProEtale.AdicSheaf l Y),\n      Nonempty (@MonoidalCategory.tensorRight _ _ S.monoidal P ⋙ F ≅\n        F ⋙ (ProEtale.CondensedRing.derivedTensor\n          (Profinite.padicAlgClRingObj l) Y).obj (F.obj P))",
+  "branch": "sheaf-dag",
+  "by": "K2",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K2",
+  "result": "pass",
+  "landing": "20261026T023424-L-564452",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H2",
+  "result": "pass",
+  "landing": "20261026T065852-L-3274992",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

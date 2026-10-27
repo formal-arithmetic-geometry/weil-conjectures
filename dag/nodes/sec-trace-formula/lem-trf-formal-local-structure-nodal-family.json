@@ -22,208 +22,72 @@
  ],
  "proof": [
   {
-   "text": "Put $A_0=\\mathcal O_{S,s}$ and $B_0=\\mathcal O_{T,t}$. The local map $A_0\\to B_0$ is flat by the definition of flatness at $t$. To check Noetherianity of $B_0$ without assuming $S$ locally Noetherian, choose affine neighbourhoods $\\operatorname{Spec}R_0$ of $s$ and $\\operatorname{Spec}D$ of $t$ with $D$ finite type over $R_0$. The affine-stalk localization identifications give $A_0=(R_0)_{\\mathfrak p}$ and $B_0=D_{\\mathfrak q}$, with $\\mathfrak q\\cap R_0=\\mathfrak p$. Inverting $R_0\\setminus\\mathfrak p$ first does not change $D_{\\mathfrak q}$: each such denominator is already a unit there. Thus $B_0$ is a localization of the finite type $A_0$-algebra $D\\otimes_{R_0}A_0$. This algebra, and then its localization $B_0$, are Noetherian by the two cited permanence statements.",
+   "text": "Set $A_0=\\mathcal O_{S,s}$, $B_0=\\mathcal O_{T,t}$, $A=\\widehat{A_0}$ and $B=\\widehat{B_0}$. Apply the completed-stalk reduction lemma: the hypotheses are precisely local finite type, flatness at $t$, Noetherian $A_0$, and the assumed residue-field isomorphism. It gives complete Noetherian local $A,B$, a flat local map $A\\to B$, maximal ideals $\\mathfrak m=\\mathfrak m_sA$ and $\\mathfrak n$, and $B/\\mathfrak mB\\cong\\widehat{\\mathcal O}_{T_s,t}$. Compose its inverse with the assumed split-node isomorphism, inverting that isomorphism if necessary, to fix $\\theta:k[[x,y]]/(xy)\\xrightarrow{\\sim}B/\\mathfrak mB$, where $k=\\kappa(s)$.",
    "uses": [
-    "def-weil-flat-morphism",
-    "def-weil-finite-type-morphism",
-    "lem-weil-pbc-affine-open-stalk-localization",
-    "lem-weil-pbc-finite-type-algebra-noetherian",
-    "lem-weil-pbc-localization-noetherian"
+    "lem-trf-nodal-stalk-completion-reduction"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/curves.tex",
-    "place": "Tag 0CBX, lemma-formal-local-structure-nodal-family, first paragraph; Tag 00FN, algebra-lemma-Noetherian-permanence; Tag 01HV, schemes-lemma-spec-sheaves"
+    "place": "Tag 0CBX, lemma-formal-local-structure-nodal-family, first paragraph: local Noetherianity, flatness of completed stalks, and completion of the fibre quotient."
    }
   },
   {
-   "text": "Set $A=\\widehat {A_0}$, $B=\\widehat {B_0}$, $\\mathfrak m=\\mathfrak m_{A_0}A$, and $\\mathfrak n=\\mathfrak m_{B_0}B$. The completion-local-ring statement identifies these as the maximal ideals and identifies both residue fields with $k=\\kappa(s)=\\kappa(t)$. The completion-Noetherian statement makes $A,B$ Noetherian. Their maximal ideals are finitely generated, and the adic-completion-mod-ideal statement makes them complete for these maximal ideals. The flat-completion statement applies to the flat local map of Noetherian local rings $A_0\\to B_0$, so $A\\to B$ is flat.",
+   "text": "Apply split-node coordinate lifting to $A\\to B$ and this $\\theta$. It gives $h\\in\\mathfrak m$ and $u,v\\in\\mathfrak n$ reducing to $\\theta(x),\\theta(y)$ with $uv=h$ in $B$. No flatness is needed for this lifting step; completeness and Noetherianity are supplied by step 1.",
    "uses": [
-    "lem-weil-pbc-local-completion-local-ring",
-    "lem-weil-pbc-adic-completion-noetherian",
-    "lem-weil-pbc-adic-completion-mod-ideal",
-    "lem-weil-pbc-flat-completion"
+    "lem-trf-split-node-coordinate-lifting"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/curves.tex",
-    "place": "Tag 0CBX, first paragraph; Tags 05GI (algebra-lemma-radical-completion), 05GG (algebra-lemma-hathat-finitely-generated), 0316 (algebra-lemma-completion-Noetherian-Noetherian), 0C4G (more-algebra-lemma-flat-completion)"
+    "place": "Tag 0CBX, lemma-formal-local-structure-nodal-family, second paragraph and the induction and limits in the third paragraph."
    }
   },
   {
-   "text": "The fibre-stalk quotient statement gives $B_0/\\mathfrak m_{A_0}B_0\\cong\\mathcal O_{T_s,t}$. Apply the local-completion-quotient statement to this surjection, whose source $B_0$ is Noetherian local. Its completed kernel is $\\mathfrak m_{A_0}B=\\mathfrak mB$, and the quotient has the induced local maximal ideal. Hence the assumed split-fibre isomorphism supplies a $k$-algebra isomorphism $B/\\mathfrak mB\\cong k[[x,y]]/(xy)$. Denote by $\\bar u,\\bar v$ the classes of $x,y$ in $B/\\mathfrak mB$.",
+   "text": "Put $C=A[[x,y]]/(xy-h)$. The substitution lemma, with the $h,u,v,\\theta$ just obtained, gives a complete Noetherian local $C$ and a local $A$-algebra homomorphism $\\phi:C\\to B$ whose closed-fibre map is $\\theta$ after coefficient reduction, hence an isomorphism.",
    "uses": [
-    "lem-sbc-scheme-fibre-stalk-quotient",
-    "lem-weil-pbc-local-completion-quotient"
+    "lem-trf-nodal-substitution-closed-fibre"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/curves.tex",
-    "place": "Tag 0CBX, first paragraph; Tag 0CBW, curves-lemma-split-node; local completion of a quotient via Tags 00MA (algebra-lemma-completion-tensor), 00MB (algebra-lemma-completion-flat)"
+    "place": "Tag 0CBX, lemma-formal-local-structure-nodal-family, third paragraph: adic substitution and the asserted isomorphism after dividing by the base maximal ideal."
    }
   },
   {
-   "text": "Choose lifts $u_1,v_1\\in B$ of $\\bar u,\\bar v$ and put $h_1=0$. They lie in $\\mathfrak n$, and $u_1v_1-h_1\\in\\mathfrak mB$. More generally, every $b\\in B$ can be written $b=a+u_1p+v_1q+\\epsilon$ with $a\\in A$, $p,q\\in B$, $\\epsilon\\in\\mathfrak mB$: reduce $b$ in $k[[x,y]]/(xy)$, subtract its constant coefficient (lifted from $k$ to $A$), and factor the remaining series into $x$ times a series plus $y$ times a series. Lift these two series classes to $B$. The same decomposition works with any $u,v$ lifting $\\bar u,\\bar v$.",
-   "uses": [],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/curves.tex",
-    "place": "Tag 0CBX, first and second paragraphs: lifts and the decomposition of each coefficient b_i"
-   }
-  },
-  {
-   "text": "For the induction step suppose $n\\ge1$, $h\\in\\mathfrak m$, and $uv-h=\\delta\\in\\mathfrak m^nB$, with $u,v$ lifting $\\bar u,\\bar v$. Write a finite sum $\\delta=\\sum_i f_ib_i$, $f_i\\in\\mathfrak m^n$, and use the preceding decomposition to write $b_i=a_i+up_i+vq_i+\\epsilon_i$ with $a_i\\in A$, $\\epsilon_i\\in\\mathfrak mB$. Define $u'=u-\\sum_i f_iq_i$, $v'=v-\\sum_i f_ip_i$, and $h'=h+\\sum_i f_ia_i$. Direct multiplication gives\n$$u'v'-h'=\\sum_i f_i\\epsilon_i+(\\sum_i f_iq_i)(\\sum_j f_jp_j)\\in\\mathfrak m^{n+1}B,$$\nsince $2n\\ge n+1$. Also $u'-u,v'-v\\in\\mathfrak m^nB$, $h'-h\\in\\mathfrak m^n$, and $h'\\in\\mathfrak m$. This proves the inductive improvement and preserves the chosen reductions.",
-   "uses": [],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/curves.tex",
-    "place": "Tag 0CBX, second paragraph, the displayed coordinate corrections and their product"
-   }
-  },
-  {
-   "text": "Starting from $(u_1,v_1,h_1)$, repeat the preceding improvement to obtain $u_n,v_n\\in B$, $h_n\\in\\mathfrak m$ with consecutive differences in $\\mathfrak m^nB,\\mathfrak m^nB,\\mathfrak m^n$ respectively and $u_nv_n-h_n\\in\\mathfrak m^nB$. Because $\\mathfrak mB\\subseteq\\mathfrak n$, their reductions modulo any fixed power of $\\mathfrak n$ (and of $\\mathfrak m$ for $h_n$) eventually stabilize. Completeness, in the inverse-limit definition, supplies $u_\\infty,v_\\infty\\in B$, $h\\in A$ with those stabilized coordinates. The identities $u_nv_n-h_n\\in\\mathfrak n^n$ imply $u_\\infty v_\\infty=h$ by separatedness. The classes $u_\\infty,v_\\infty$ still lift $\\bar u,\\bar v$: the ideal $\\mathfrak mB$ is closed for the $\\mathfrak n$-adic topology, since $B/\\mathfrak mB$ is a complete local quotient and hence separated for its induced maximal ideal. Likewise $\\mathfrak m$ is closed in $A$, so $h\\in\\mathfrak m$. Only maximal-ideal completeness of $B$ is needed; no assertion of $\\mathfrak mB$-adic completeness is made here.",
+   "text": "Apply the complete-flat-fibre isomorphism criterion to $A\\to C$, $A\\to B$ and $\\phi$. Step 3 supplies the local maps, complete Noetherian rings and closed-fibre isomorphism; step 1 supplies $A$-flatness of $B$. Thus $\\phi$ is an $A$-algebra isomorphism. Its inverse is the required $B\\cong A[[x,y]]/(xy-h)$, with $h\\in\\mathfrak m_sA$.",
    "uses": [
-    "def-weil-pbc-adically-complete-ring",
-    "lem-weil-pbc-complete-local-quotient"
+    "lem-trf-complete-flat-fibre-isomorphism"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/curves.tex",
-    "place": "Tag 0CBX, third paragraph, the induction and passage to limits; Tag 0325, algebra-lemma-quotient-complete-local"
+    "place": "Tag 0CBX, lemma-formal-local-structure-nodal-family, final paragraph: the complete-local algebra criterion extracted from its injectivity and surjectivity arguments."
    }
   },
   {
-   "text": "Let $R=A[[x,y]]$ and $\\mathfrak a=\\mathfrak mR+(x,y)$. The power-series Noetherian and local-ring statements show that $R$ is Noetherian local with maximal ideal $\\mathfrak a$: a series with zero constant term is $xF+yG$, so the constant-term description of that maximal ideal is exactly this sum. The complete-over-complete-base statement makes $R$ $\\mathfrak a$-adically complete. Put $C=R/(xy-h)$. Since $h\\in\\mathfrak m$, the equation belongs to $\\mathfrak a$; the complete-local-quotient statement shows that $C$ is Noetherian local and complete, with maximal ideal the image $\\mathfrak a_C$ of $\\mathfrak a$.",
+   "text": "Apply the polynomial-model completion lemma to the complete Noetherian local ring $A$ and $h\\in\\mathfrak m$. It gives the specified point $o$ of $M_h$, its residue field $A/\\mathfrak m$, and $\\widehat{\\mathcal O}_{M_h,o}\\cong A[[x,y]]/(xy-h)$ over $A$. Compose this with step 4. The residue-field identification in step 1 identifies $A/\\mathfrak m$ with $A_0/\\mathfrak m_{A_0}$, as required.",
    "uses": [
-    "lem-weil-pbc-power-series-noetherian",
-    "lem-weil-pbc-power-series-local-ring",
-    "lem-weil-pbc-power-series-complete-over-complete-base",
-    "lem-weil-pbc-complete-local-quotient"
+    "lem-trf-nodal-polynomial-model-completion"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/curves.tex",
-    "place": "Tag 0CBX, third paragraph, construction of the source algebra; Tags 0306 (algebra-lemma-Noetherian-power-series), 032C (algebra-remark-Noetherian-complete-local-ring-universally-catenary), 0325 (algebra-lemma-quotient-complete-local)"
-   }
-  },
-  {
-   "text": "Apply the adic-evaluation statement with coefficient map $A\\to B$, ideal $\\mathfrak n$, and the elements $u_\\infty,v_\\infty\\in\\mathfrak n$. It supplies an $A$-algebra homomorphism $R\\to B$ sending $x,y$ to these elements. The identity $u_\\infty v_\\infty=h$ makes it factor through an $A$-algebra homomorphism $\\phi:C\\to B$. It is local: each generator of $\\mathfrak a_C$, namely an element of $\\mathfrak m$ or one of $x,y$, maps into $\\mathfrak n$.",
-   "uses": [
-    "lem-weil-pbc-power-series-adic-evaluation"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/curves.tex",
-    "place": "Tag 0CBX, third paragraph, the displayed homomorphism; universal property as used in Tag 07NL, more-algebra-lemma-power-series-ring-over-Cohen-fs"
-   }
-  },
-  {
-   "text": "The coefficient-reduction kernel statement applies to the finitely generated ideal $\\mathfrak m$ of $A$ and gives kernel $\\mathfrak mR$ for $R\\to k[[x,y]]$. This map is surjective: choose in $A$ a lift of each coefficient of a given series. Since $h\\in\\mathfrak m$, it identifies $C/\\mathfrak mC$ with $k[[x,y]]/(xy)$. The reduction of $\\phi$ sends $x,y$ to $\\bar u,\\bar v$ and agrees with the chosen isomorphism of step 3. Indeed, modulo the $N$-th power of the maximal ideal of $B/\\mathfrak mB$ both maps send a series to the image of its truncation below total degree $N$: for the reduction of $\\phi$ by the explicit formula of the adic-evaluation statement, and for the chosen isomorphism because it is a $k$-algebra isomorphism of local rings, hence maps $(x,y)^N$ into the $N$-th power of the maximal ideal. Both send $x,y$ to $\\bar u,\\bar v$ and constants to constants, so the two maps agree at every finite truncation and then agree by separatedness of the complete local quotient $B/\\mathfrak mB$. Thus $\\bar\\phi:C/\\mathfrak mC\\to B/\\mathfrak mB$ is an isomorphism.",
-   "uses": [
-    "lem-sbc-mv-power-series-quotient-kernel",
-    "lem-weil-pbc-complete-local-quotient"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/curves.tex",
-    "place": "Tag 0CBX, last paragraph: isomorphism after dividing by the base maximal ideal; coefficient reduction used in Tag 0EYB, pione-lemma-purity-smooth-over-depth2"
-   }
-  },
-  {
-   "text": "Apply the flat-mod-injective statement with its $R=A$, $S=C$, $N=C$, $M=B$, and $u=\\phi$. The map $A\\to C$ is local, $C$ is Noetherian, $C$ is a finite module over itself, and $B$ is flat over $A$ by step 2. Step 9 supplies the required injectivity modulo $\\mathfrak m$. The statement therefore implies that $\\phi$ is injective. In particular this use needs no separate flatness assertion for the hypersurface $C$.",
-   "uses": [
-    "lem-weil-pbc-flat-mod-injective"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/curves.tex",
-    "place": "Tag 0CBX, last sentence; Tag 00ME, algebra-lemma-mod-injective"
-   }
-  },
-  {
-   "text": "In the closed fibre $B/\\mathfrak mB\\cong k[[x,y]]/(xy)$ the maximal ideal is $(\\bar u,\\bar v)$, by the local-ring and quotient-local-structure statements. Taking its inverse image in $B$ gives $\\mathfrak n=\\mathfrak mB+(u_\\infty,v_\\infty)B=\\mathfrak a_CB$. Consequently $B/\\mathfrak a_CB=k$, a one-dimensional vector space over $C/\\mathfrak a_C=k$. Apply the finite-after-completion statement to the local map $C\\to B$. Both maximal ideals are finitely generated since these rings are Noetherian. Because both rings are already complete for their maximal ideals, its finite completed-module conclusion identifies $B$ as a finite $C$-module via $\\phi$; the completed action agrees with $\\phi$ on elements by its coordinatewise definition.",
-   "uses": [
-    "lem-weil-pbc-power-series-local-ring",
-    "lem-weil-pbc-quotient-local-structure",
-    "lem-weil-pbc-finite-after-completion"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/curves.tex",
-    "place": "Tag 0CBX, last paragraph, surjectivity by completeness; Tag 0394, algebra-lemma-finite-after-completion, applied with source C and target B"
-   }
-  },
-  {
-   "text": "The element $1\\in B$ generates $B/\\mathfrak a_CB=k$. Nakayama's local-generators statement for the finite $C$-module $B$ now implies that $1$ generates $B$ over $C$. Thus $\\phi$ is surjective. Together with step 10 this gives the required $A$-algebra isomorphism $B\\cong A[[x,y]]/(xy-h)$. This implements the source's completeness/surjectivity argument through the existing finite-after-completion and Nakayama interfaces.",
-   "uses": [
-    "lem-weil-pbc-nakayama-local-generators"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/curves.tex",
-    "place": "Tag 0CBX, final paragraph; Tag 00DV, algebra-lemma-NAK, and Tag 0394, algebra-lemma-finite-after-completion"
-   }
-  },
-  {
-   "text": "For the equivalent polynomial-model formulation put $P=A[x,y]$, $\\mathfrak q=\\mathfrak mP+(x,y)$ and $D=P_{\\mathfrak q}$. Here $P/\\mathfrak q=k$, so $\\mathfrak q$ is maximal. The map $P\\to R=A[[x,y]]$ identifies $P/\\mathfrak q^r$ with $R/\\mathfrak a^r$ for every $r\\ge1$: truncate above total degree $r-1$, and use the combined-ideal coefficient criterion to check that the kernel on polynomials consists exactly of those whose coefficient of $x^iy^j$ lies in $\\mathfrak m^{r-i-j}$ whenever $i+j<r$. Such polynomials belong to $\\mathfrak q^r$ term by term. Every denominator outside $\\mathfrak q$ is already a unit in this quotient: it has an invertible constant coefficient in $A$, and its remaining part is nilpotent modulo $\\mathfrak q^r$, so a finite geometric sum gives its inverse. Therefore $D/(\\mathfrak qD)^r\\cong R/\\mathfrak a^r$, compatibly with the transition maps, constants and variables. Taking compatible sequences and using the completeness of $R$ gives $\\widehat D\\cong R$ as $A$-algebras.",
-   "uses": [
-    "lem-weil-pbc-power-series-combined-ideal-coefficients",
-    "lem-weil-pbc-power-series-complete-over-complete-base",
-    "def-weil-pbc-localization-at-prime",
-    "def-weil-pbc-adic-completion"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/curves.tex",
-    "place": "Tag 0CBY, curves-lemma-etale-local-structure-nodal-family, first proof, third paragraph, the completed-model identification; coefficient calculation for Tag 032C"
-   }
-  },
-  {
-   "text": "Let $M_h=\\operatorname{Spec}(P/(xy-h))$ and let $o$ be its point with ideal $\\mathfrak q/(xy-h)$. Its residue field is $k$ since evaluation $x=y=0$ gives $P/(xy-h,\\mathfrak m,x,y)=k$. The affine-stalk localization statement identifies $\\mathcal O_{M_h,o}$ with $(P/(xy-h))_{\\mathfrak q/(xy-h)}$. The fraction map identifies this ring with $D/(xy-h)D$: the denominators on both sides are exactly the images of $P\\setminus\\mathfrak q$, and $a/s$ is in the kernel precisely when some denominator outside $\\mathfrak q$ times $a$ belongs to $(xy-h)$. The ring $D$ is Noetherian by finite-type and localization permanence over the Noetherian ring $A$. Apply local-completion-quotient to $D\\to D/(xy-h)D$, and use the constant-and-variable preserving identification of step 13. It gives $\\widehat{\\mathcal O}_{M_h,o}\\cong\\widehat D/(xy-h)\\widehat D\\cong A[[x,y]]/(xy-h)$. Composing with step 12 proves the equivalent formulation, with its specified residue field.",
-   "uses": [
-    "lem-weil-pbc-affine-open-stalk-localization",
-    "lem-weil-pbc-finite-type-algebra-noetherian",
-    "lem-weil-pbc-localization-noetherian",
-    "lem-weil-pbc-local-completion-quotient"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/curves.tex",
-    "place": "Tag 0CBY, first proof, third paragraph; Tags 01HV (schemes-lemma-spec-sheaves), 00FN (algebra-lemma-Noetherian-permanence), 00MA (algebra-lemma-completion-tensor)"
+    "place": "Tag 0CBY, lemma-etale-local-structure-nodal-family, first proof using Artin approximation, third paragraph: the identification with the completed local ring of the polynomial model Y_sigma."
    }
   }
  ],
  "proof_deps": [
-  "def-weil-finite-type-morphism",
-  "def-weil-flat-morphism",
-  "def-weil-pbc-adic-completion",
-  "def-weil-pbc-adically-complete-ring",
-  "def-weil-pbc-localization-at-prime",
-  "lem-sbc-mv-power-series-quotient-kernel",
-  "lem-sbc-scheme-fibre-stalk-quotient",
-  "lem-weil-pbc-adic-completion-mod-ideal",
-  "lem-weil-pbc-adic-completion-noetherian",
-  "lem-weil-pbc-affine-open-stalk-localization",
-  "lem-weil-pbc-complete-local-quotient",
-  "lem-weil-pbc-finite-after-completion",
-  "lem-weil-pbc-finite-type-algebra-noetherian",
-  "lem-weil-pbc-flat-completion",
-  "lem-weil-pbc-flat-mod-injective",
-  "lem-weil-pbc-local-completion-local-ring",
-  "lem-weil-pbc-local-completion-quotient",
-  "lem-weil-pbc-localization-noetherian",
-  "lem-weil-pbc-nakayama-local-generators",
-  "lem-weil-pbc-power-series-adic-evaluation",
-  "lem-weil-pbc-power-series-combined-ideal-coefficients",
-  "lem-weil-pbc-power-series-complete-over-complete-base",
-  "lem-weil-pbc-power-series-local-ring",
-  "lem-weil-pbc-power-series-noetherian",
-  "lem-weil-pbc-quotient-local-structure"
+  "lem-trf-nodal-stalk-completion-reduction",
+  "lem-trf-split-node-coordinate-lifting",
+  "lem-trf-nodal-substitution-closed-fibre",
+  "lem-trf-complete-flat-fibre-isomorphism",
+  "lem-trf-nodal-polynomial-model-completion"
  ],
  "proof_origin": {
-  "by": "document",
+  "by": "agent",
   "document": "literature/stacks-project/curves.tex",
-  "place": "Tag 0CBX, lemma-formal-local-structure-nodal-family, entire proof; Tag 0CBY, first proof, third paragraph. Surjectivity is expanded using Tags 0394 and 00DV instead of appealing opaquely to completeness."
+  "place": "Tags 0CBX and 0CBY, assembly of the five extracted subarguments; original argument retained in the N8 report."
  },
  "mathlib_searches": [
   {
@@ -354,53 +218,12 @@
   "is": null
  },
  "split_report": {
-  "date": "2026-10-18",
+  "date": "2026-10-22",
   "item": "lem-trf-formal-local-structure-nodal-family",
   "worker": "stage1",
-  "summary": "Read Stacks 0CBX and 0CBY against the full existing statement. Kept every hypothesis and clause, wrote the coordinate-correction induction and limiting argument, and reused existing algebra nodes. Expanded the final isomorphism through finite-after-completion, Nakayama and flat-mod-injective, and the polynomial-model clause through finite quotient coordinates and local completion of a quotient. No new nodes; no project attachment exists.",
+  "summary": "Repair of the human re-split return: extracted five independent statement-only unsplit nodes, covering all fourteen returned steps; kept the statement byte-identical and retained the old argument verbatim with its dependency audit in report.md. The item is now a short assembly.",
   "blueprint": "Historical local-equation input beneath lem-trf-local-term-locality, through lem-trf-nodal-family-etale-local-model: realizes the completed split-node model in the third paragraph of the first proof of Stacks 0CBY. This does not replace the current contracting-correspondence route of the ancestor or alter the unit record.",
-  "tool_uses": [
-   {
-    "node": "lem-sbc-mv-power-series-quotient-kernel",
-    "why": "Generic algebra/scheme-stalk tool used only for the property explicitly stated in proof steps 9; the historical nodal local-equation chain in sk-i-curve-zero has no separate replacement for this interface."
-   },
-   {
-    "node": "lem-sbc-scheme-fibre-stalk-quotient",
-    "why": "Generic algebra/scheme-stalk tool used only for the property explicitly stated in proof steps 3; the historical nodal local-equation chain in sk-i-curve-zero has no separate replacement for this interface."
-   },
-   {
-    "node": "lem-weil-pbc-complete-local-quotient",
-    "why": "Generic algebra/scheme-stalk tool used only for the property explicitly stated in proof steps 6, 7, 9; the historical nodal local-equation chain in sk-i-curve-zero has no separate replacement for this interface."
-   },
-   {
-    "node": "lem-weil-pbc-finite-after-completion",
-    "why": "Generic algebra/scheme-stalk tool used only for the property explicitly stated in proof steps 11; the historical nodal local-equation chain in sk-i-curve-zero has no separate replacement for this interface."
-   },
-   {
-    "node": "lem-weil-pbc-flat-completion",
-    "why": "Generic algebra/scheme-stalk tool used only for the property explicitly stated in proof steps 2; the historical nodal local-equation chain in sk-i-curve-zero has no separate replacement for this interface."
-   },
-   {
-    "node": "lem-weil-pbc-flat-mod-injective",
-    "why": "Generic algebra/scheme-stalk tool used only for the property explicitly stated in proof steps 10; the historical nodal local-equation chain in sk-i-curve-zero has no separate replacement for this interface."
-   },
-   {
-    "node": "lem-weil-pbc-local-completion-quotient",
-    "why": "Generic algebra/scheme-stalk tool used only for the property explicitly stated in proof steps 3, 14; the historical nodal local-equation chain in sk-i-curve-zero has no separate replacement for this interface."
-   },
-   {
-    "node": "lem-weil-pbc-power-series-adic-evaluation",
-    "why": "Generic algebra/scheme-stalk tool used only for the property explicitly stated in proof steps 8; the historical nodal local-equation chain in sk-i-curve-zero has no separate replacement for this interface."
-   },
-   {
-    "node": "lem-weil-pbc-power-series-combined-ideal-coefficients",
-    "why": "Generic algebra/scheme-stalk tool used only for the property explicitly stated in proof steps 13; the historical nodal local-equation chain in sk-i-curve-zero has no separate replacement for this interface."
-   },
-   {
-    "node": "lem-weil-pbc-power-series-complete-over-complete-base",
-    "why": "Generic algebra/scheme-stalk tool used only for the property explicitly stated in proof steps 7, 13; the historical nodal local-equation chain in sk-i-curve-zero has no separate replacement for this interface."
-   }
-  ]
+  "tool_uses": []
  },
  "tool_uses": [
   "lem-sbc-mv-power-series-quotient-kernel",
@@ -415,12 +238,12 @@
   "lem-weil-pbc-power-series-complete-over-complete-base"
  ],
  "reviewed": {
-  "date": "2026-10-17",
+  "date": "2026-10-22",
   "by": "L",
-  "reviewer": "NT-cc-Q61-027d29561",
-  "group": "Q61",
+  "reviewer": "NT-cc-N8-5fc0391c9",
+  "group": "N8",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q61-027d29561 (reviewer sub-agent of L); spot-checked: I read the full item and its 14 steps against curves.tex Tag 0CBX (statement and full proof), definition-split-node and lemma-split-node (0CBW), and the third paragraph of the first proof of 0CBY (the Y_sigma completed-model clause). The statement is byte-identical to the side DAG copy. Its spelled-out split-node hypothesis (closed point, kappa(t)=kappa(s), completed fibre ring isomorphic to k[[u,v]]/(uv)) drops the source's 1-dimensional fibre assumption, so it is at least as general as the source, never weaker. The source display prints 'x -> v-bar' where 'y -> v-bar' is meant; this is a typo that the worker noted. I checked the statement of each of the 25 cited nodes against each use and every hypothesis in force. Flat-completion and complete-local-quotient get Noetherian complete local inputs. Flat-mod-injective is applied with R=A, S=N=C and M=B, which is A-flat. Finite-after-completion gets finitely generated maximal ideals and B/a_C B=k. I recomputed the induction step (u'v'-h' = sum f_i eps_i + product, which lies in m^{n+1}B because n>=1). The lifts survive the limit because mB is closed: B/mB is a separated complete local quotient. Step 13's polynomial-to-power-series comparison holds through the combined-ideal criterion plus the fact that denominators become units mod q^r. Edge cases checked: A0=k, the family xy=t over k[[t]], characteristic 2, h zero or nilpotent, S not locally Noetherian, mixed characteristic. There are no new nodes and no duplicates: only the two citers mention 0CBX or uv-h. All 10 declared tool_uses are accepted as generic commutative-algebra black boxes, and they are exactly the split, non-closed off-unit dependencies. No SGA source is used, and this is not a target node. Fixes, in fixes/dag/nodes/sec-trace-formula/lem-trf-formal-local-structure-nodal-family.json: (1) step 9 now says why the chosen step-3 isomorphism agrees with the reduction of phi at every truncation (it is a local k-algebra isomorphism, so it sends (x,y)^N into the N-th power of the maximal ideal); (2) step 13 'elementary' changed from true to false (C2), since it cites two lemmas and is a multi-line comparison. Citations and proof_deps are unchanged.; 1 file(s) fixed by the reviewer"
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-N8-5fc0391c9 (reviewer sub-agent of L); spot-checked: Re-split delivery that meets the released re-split note of 2026-10-22. Shape: the item statement, stmt_deps and all non-proof fields are byte-identical to the live and side-live copies. The new proof is 5 steps and 1892 characters, each step citing one of 5 new statement-only unsplit nodes. The new nodes are 900-1350 characters each and carry old steps 1-3, 4-6, 7-9, 10-12 and 13-14; the old argument is kept verbatim in the report. Nothing was shortened, and no new node restates the item. The item is not superseded in live, not in the dropped list, and cites no SGA. Source checks: curves.tex 0CBX statement and full proof; 0CBY first proof, third paragraph; algebra.tex 00ME and 0394 at the statement. Maths checks: (1) stalk-completion-reduction: B_0 Noetherian from locally finite type and Noetherian A_0, completed rings Noetherian local and complete, flatness by 0C4G, B/mB = completed fibre stalk. (2) coordinate-lifting: I recomputed u'v'-h' in m^{r+1}B (needs 2r>=r+1, r>=1); the sequences are Cauchy; uv=alpha(h) by separatedness; u,v still lift because mB and m are closed in the Noetherian rings. Tested over a field, over k[eps]/(eps^2), and in characteristic 2. (3) substitution: xy-h in a; phi comes from the existing adic-evaluation node and factors through C; the kernel mR uses m finitely generated; phi-bar = theta∘rho by agreement on truncations plus separatedness. (4) criterion: 00ME with R=A, S=C, N=C, M=B needs no Noetherian A and no flat C; the fibre ring isomorphism gives cB=n and equal residue fields; 0394 gives finiteness and Nakayama with 1 gives surjectivity. The flatness hypothesis is needed, since A=C=k[[t]], B=k fails without it. (5) polynomial model: the coefficient criterion gives P/q^r = R/a^r, elements outside q are units mod q^r, the completion of D is R, and completion commutes with the quotient by xy-h. Every hypothesis of each item step is supplied by the earlier steps. Duplicate search found none: flat-local-completion-iso, complete-source-surjective-mod-ideal, flat-iso-mod-ideal-powers, smooth-augmentation-completion, per-trait-formal-ambient-system and the power-series tools all differ in content. Advisory only: the new nodes lack a lean_audit field, which the preflight accepted. The item's old tool_uses are now only reachable through the new nodes' future proofs, which must declare them again."
  },
  "lean": {
   "module": "Sheaf.TraceFormula.FormalLocalStructureNodalFamily",
@@ -452,5 +275,16 @@
   "result": "pass",
   "note": "Immutable delivery matches the node and source; helpers are canonical and documented; dependencies and edge cases checked; scompile.py sandbox and library compiles passed; no route-pivot or pro-etale issues."
  },
- "lean_audit": {}
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ }
 }

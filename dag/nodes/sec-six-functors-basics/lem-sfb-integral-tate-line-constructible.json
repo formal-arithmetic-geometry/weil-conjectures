@@ -1,0 +1,130 @@
+{
+ "id": "lem-sfb-integral-tate-line-constructible",
+ "kind": "statement",
+ "title": "Constructibility of the transported signed integral Tate line",
+ "statement": "Fix a prime ell, a finite intermediate extension E of Q_ell in its algebraic closure, and a scheme X on which ell is invertible in every residue field. For every signed integer d, the internal module tateLine(X,d) of [def-sfb-integral-restriction-functors], placed in degree zero in the ordinary unbounded derived category, is bounded constructible over the pulled-back condensed integral coefficient ring [sk-def-sfb-constructible].",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-int-restriction/sk-thm-int-restriction-line.proof.md",
+  "place": "Paragraph (3), the locally free Tate line and constructibility in degree zero"
+ },
+ "stmt_deps": [
+  "def-sfb-integral-restriction-functors",
+  "sk-def-sfb-constructible"
+ ],
+ "proof": [
+  {
+   "text": "Take the compatible-root pro-etale cover from spTwists_commonCover. Apply the signed-power local-unit isomorphism to its degree-one integral trivializations; this covers nonnegative powers, zero, and negative dual powers without using a separate local-freeness assertion.",
+   "uses": [
+    "sk-def-sp-tate-twist",
+    "lem-weil-signed-line-tensor-equivalence"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Evaluate the trivialization on the equivalence from the small pro-etale site of each cover member to its slice. The section-module equivalence retains the underlying abelian sheaf. Its section action is the internal action precomposed with the tensor-generator map. The sheaf-pushforward tensorator respects that generator, so the linear sectionwise isomorphism is an isomorphism of restricted internal modules. Compare literal restriction with geometric pullback by the monoidal localization isomorphism. Identify the sectionwise regular internal module with the unit by identity component maps and their scalar linearity.",
+   "uses": [
+    "lem-weil-proetale-weakly-etale-localization",
+    "lem-sfb-internal-module-operations-transport"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Shrink the cover index to the scheme universe. Each restricted line is a one-term biproduct of the regular module. The zero-relations presentation makes it finitely presented. The single identity stratum of X, valid also when X is empty, therefore witnesses constructibility. The single complex is bounded in degree zero, and its other cohomology objects are zero and hence constructible.",
+   "uses": [
+    "sk-def-sfb-constructible"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "sk-def-sp-tate-twist",
+  "lem-weil-signed-line-tensor-equivalence",
+  "lem-weil-proetale-weakly-etale-localization",
+  "lem-sfb-internal-module-operations-transport",
+  "sk-def-sfb-constructible",
+  "lem-route-sp-twists-common-cover"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-int-restriction/sk-thm-int-restriction-line.proof.md",
+  "place": "Paragraph (3); explicit restriction of sectionwise trivializations and rank-one finite presentations (K6)"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A locally free rank one sheaf transported through the equivalence with internal modules is constructible in degree zero",
+   "results": "8 hits; SheafOfModules.freeHomEquiv, SheafOfModules.free, SheafOfModules.freeFunctorCompPullbackIso, SheafOfModules.pullbackObjFreeIso_hom_naturality_assoc, SheafOfModules.pullbackObjFreeIso_hom_naturality, SheafOfModules.ιFree, SheafOfModules.pullbackObjFreeIso.congr_simp, SheafOfModules.mapFree",
+   "date": "2026-10-24",
+   "verdict": "No exact match: the hits supply general categorical or sheaf tools, but not this integral condensed-module assertion.",
+   "subdirectory": ""
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsFiniteLocallyFreeOfRank\"",
+   "results": "0 hits; ",
+   "date": "2026-10-24",
+   "verdict": "No exact match: the hits supply general categorical or sheaf tools, but not this integral condensed-module assertion.",
+   "subdirectory": ""
+  },
+  {
+   "tool": "grep",
+   "query": "\\bTate\\b|purity|exceptionalInverse|compactSupportAdjunction",
+   "results": "0 hits; ",
+   "date": "2026-10-24",
+   "verdict": "No exact match: the hits supply general categorical or sheaf tools, but not this integral condensed-module assertion.",
+   "subdirectory": "--sub"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.SixFunctors.IntegralRestrictionLine",
+  "date": "2026-10-24",
+  "group": "G2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-thm-int-restriction-line",
+   "place": "Paragraph (3), the locally free Tate line and constructibility in degree zero",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-int-restriction",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.SixFunctors.IntegralTateLineConstructible",
+  "file": "lean/Sheaf/SixFunctors/IntegralTateLineConstructible.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.CondensedRing.IntegralRestriction.integralTateLine_constructible",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.CondensedRing.IntegralRestriction.integralTateLine_constructible"
+  ],
+  "statement": "theorem integralTateLine_constructible (X : Scheme.{u})\n    [∀ x : X, Invertible (ℓ : X.residueField x)] (d : ℤ) :\n    boundedConstructible (condensedRingObj (Profinite.padicIntegersRingObj ℓ E.val) X)\n      ((DerivedCategory.singleFunctor _ 0).obj (tateLine ℓ E X d))",
+  "branch": "sheaf-dag",
+  "by": "G2",
+  "date": "2026-10-24"
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "C-d6edb",
+  "group": "G2",
+  "result": "fix",
+  "landing": "20261024T204607-L-3799780",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K6",
+  "result": "pass",
+  "landing": "20261025T022523-L-1714743",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

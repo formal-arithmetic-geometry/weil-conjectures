@@ -1,0 +1,177 @@
+{
+ "id": "lem-sfb-integral-reduction-underlying-direct-image",
+ "kind": "statement",
+ "title": "Positive reduction and ordinary direct image after forgetting coefficients",
+ "statement": "Fix a prime l, a finite extension E of Q_l with continuous condensed integer ring O_E, a quasi-compact quasi-separated scheme morphism p:X→Y, and a bounded integral internal-module derived complex K. Use the ordinary uncompleted internal module direct image [sk-def-sfb-module-derived-pushpull] and positive reductions followed by exact integral restriction [sk-def-pe-derived-completion]. For every n≥0, forgetting coefficients identifies integralLevel_n(Rp_*K) with the ordinary abelian pro-etale derived direct image of the underlying abelian complex of integralLevel_n(K). No constructibility, properness, completeness, or base-field hypothesis is required.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-int-compactness/sk-prop-int-compactness-direct-sums.proof.md",
+  "place": "Proof (1), finite reductions and their ordinary direct images; perfect quotient projection and exact scalar forgetting"
+ },
+ "stmt_deps": [
+  "sk-def-sfb-module-derived-pushpull",
+  "sk-def-pe-derived-completion"
+ ],
+ "proof": [
+  {
+   "text": "Apply integral_reduction_pullback_normalization at every positive exponent. Its unit equation and the adjunction hom-bijection identify the specified inverse mate with the supplied isomorphism. Thus integralReductionPullbackMap is invertible.",
+   "uses": [
+    "lem-sfb-integral-reduction-pullback-normalization"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "The reduction-cone theorem supplies two distinguished triangles with identical first two objects and arrows. Its last two equations make the identity maps and the restricted integralFiniteProjection a morphism of triangles. The triangle five lemma makes the third component invertible. Exact faithful scalar restriction reflects this isomorphism, since homology commutes with exact restriction and faithful exact functors reflect isomorphisms in abelian categories.",
+   "uses": [
+    "lem-sfb-integral-direct-image-reduction-cone"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Apply integral_direct_image_reduction_tower with the scalar mate and projection isomorphisms just established. Its level n isomorphism identifies integral direct image of integralLevel_n K with integralLevel_n of integral direct image. No transition or completeness assertion is needed here.",
+   "uses": [
+    "lem-sfb-integral-direct-image-reduction-tower"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "On the point, nonzero integer multiplication is injective on every continuous O_E-valued function, by evaluation in the characteristic-zero domain O_E. Hence it is a monomorphism of condensed abelian sheaves. The exact inverse image from the point preserves it, and additivity identifies its image with integer multiplication on the actual coefficient object R_X.",
+   "uses": [
+    "det-pe-derived-nakayama-resolution",
+    "sk-def-sfb-module-derived-pushpull"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Evaluation of abelian sheaves preserves monomorphisms. Thus every section group R_X(U) is torsion-free over the integers, including the section over an empty object. A torsion-free module over the Dedekind domain Z is flat. Tensoring abelian groups is ordinary tensor over Z, so tensoring with each section group preserves finite limits.",
+   "uses": [
+    "lem-sfb-dedekind-torsionfree-module-flat",
+    "sk-def-sfb-sheaf-tensor"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "By the sheafified tensor formula, tensoring a sheaf with R_X is sheafification of its sectionwise tensor with R_X(U). Inclusion into presheaves, this sectionwise tensor, and sheafification all preserve finite limits. The sheafification counit identifies the sheafification of the underlying presheaf of R_X with R_X itself. Consequently R_X is flat as an abelian sheaf.",
+   "uses": [
+    "sk-def-sfb-sheaf-tensor",
+    "lem-weil-pbc-sheaf-tensor-closed"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "The free R_X-module functor followed by the exact faithful forgetful functor is tensoring with R_X. It therefore preserves monomorphisms. As a left adjoint it preserves cokernels, and hence is exact. Its right adjoint, forgetting the integral action, preserves K-injective complexes by the exact-adjoint criterion.",
+   "uses": [
+    "lem-weil-pbc-right-adjoint-preserves-kinjective"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Underived integral direct image commutes literally with forgetting the action. Derive this equality: exact postcomposition identifies R(F followed by forget_Y) with RF followed by D(forget_Y). K-injective preservation identifies R(forget_X followed by abelian direct image) with R(forget_X) followed by R(abelian direct image); exactness identifies R(forget_X) with D(forget_X). These isomorphisms give the underlying abelian comparison for every integral complex.",
+   "uses": [
+    "lem-pbc-right-derived-exact-postcomposition",
+    "lem-fin-kinjective-derived-composition"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Apply the last comparison to integralLevel_n K, and compose it with the forgetful image of the inverse level isomorphism in step 3. This is exactly the stated Nonempty isomorphism. All exponents are n+1, so n=0 is included. Boundedness and quasi-compact/quasi-separated assumptions are retained in the statement, although this argument does not need them.",
+   "uses": [
+    "sk-def-pe-derived-completion",
+    "sk-def-sfb-module-derived-pushpull"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-integral-reduction-pullback-normalization",
+  "lem-sfb-integral-direct-image-reduction-cone",
+  "lem-sfb-integral-direct-image-reduction-tower",
+  "det-pe-derived-nakayama-resolution",
+  "sk-def-sfb-module-derived-pushpull",
+  "lem-sfb-dedekind-torsionfree-module-flat",
+  "sk-def-sfb-sheaf-tensor",
+  "lem-weil-pbc-sheaf-tensor-closed",
+  "lem-weil-pbc-right-adjoint-preserves-kinjective",
+  "lem-pbc-right-derived-exact-postcomposition",
+  "lem-fin-kinjective-derived-composition",
+  "sk-def-pe-derived-completion"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-int-compactness/sk-prop-int-compactness-direct-sums.proof.md",
+  "place": "Proof (1), positive finite reductions and ordinary direct images; C4 uses the existing normalized scalar-cone and reduction-tower comparisons, and proves integral forgetting preserves K-injectives by sectionwise Z-flatness."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Derived reduction of a bounded constructible integral sheaf complex modulo a positive uniformizer power remains bounded constructible and commutes with ordinary direct image",
+   "results": "8 unrelated hits: BDeRhamPlus, BDeRham, localCohomology.diagram, localCohomology, localCohomology.ofSelfLERadical, localCohomology.ofDiagram, AdicCompletion.transitionMap_comp_reduceModIdeal, localCohomology.ringModIdeals",
+   "date": "2026-10-25",
+   "verdict": "No matching sheaf or derived comparison theorem."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"mapDerivedCategory\", \"rightDerivedFunctor\"",
+   "results": "0 hits",
+   "date": "2026-10-25",
+   "verdict": "No matching reduction and direct-image comparison."
+  },
+  {
+   "tool": "grep",
+   "query": "uniformizer.*construct|reduction.*directImage|projectionFormula",
+   "results": "0 hits",
+   "date": "2026-10-25",
+   "verdict": "No Mathlib declaration provides the geometric argument."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.IntegralProperReductionModel",
+  "date": "2026-10-25",
+  "group": "Z7"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-prop-int-compactness-direct-sums",
+   "place": "Proof (1), finite reductions and their ordinary direct images; perfect quotient projection and exact scalar forgetting",
+   "via": [
+    "lem-sfb-integral-proper-reduction-model"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-prop-int-compactness",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.IntegralReductionUnderlyingDirectImage",
+  "file": "lean/Sheaf/Paper/IntegralReductionUnderlyingDirectImage.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.integralReduction_underlying_directImage",
+  "statement": "theorem integralReduction_underlying_directImage\n    (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]\n    [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]\n    {X Y : Scheme.{u}} (p : X ⟶ Y) [QuasiCompact p] [QuasiSeparated p]\n    (K : DerivedCategory (AdicCompletion.Modules l E X))\n    (hK : DerivedCategory.TStructure.t.bounded K) (n : ℕ) :\n    Nonempty ((Mod.forget (AdicCompletion.ring l E Y)).mapDerivedCategory.obj\n      (AdicCompletion.integralLevel l E Y\n        ((CondensedRing.moduleObjectDerivedPushforward\n          (DerivedNakayama.integerRing l E) p).obj K) n) ≅\n      (ProEtale.lowerStar Ab.{u + 1} p).rightDerivedFunctor.obj\n        ((Mod.forget (AdicCompletion.ring l E X)).mapDerivedCategory.obj\n          (AdicCompletion.integralLevel l E X K n)))",
+  "branch": "sheaf-dag",
+  "by": "Z7",
+  "date": "2026-10-25"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Z7",
+  "result": "pass",
+  "landing": "20261025T102047-L-3771843",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C4",
+  "result": "pass",
+  "landing": "20261025T142935-L-861880",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

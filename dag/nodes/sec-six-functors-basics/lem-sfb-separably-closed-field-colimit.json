@@ -1,0 +1,212 @@
+{
+ "id": "lem-sfb-separably-closed-field-colimit",
+ "kind": "statement",
+ "title": "Directed ring colimits of separably closed fields",
+ "statement": "Let $I$ be a nonempty small directed poset and $(k_i,v_{ij})_{i\\le j}$ a direct system of fields and unital field homomorphisms. Suppose that each $k_i$ is separably closed [def-pc-separably-closed]. Let $k$ be a field and $(\\rho_i:k_i\\to k)$ a compatible family exhibiting $k$ as the colimit of this diagram in commutative rings [def-weil-pbc-category-colimit]. Then $k$ is separably closed: every nonconstant separable polynomial $p\\in k[T]$ [def-pc-separable-polynomial] has a root in $k$. The extensions between stages need not be algebraic.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tag 04GI, lemma-colimit-henselian, proof: sentence that the colimit of separably algebraically closed residue fields is separably algebraically closed."
+ },
+ "stmt_deps": [
+  "def-pc-separably-closed",
+  "def-pc-separable-polynomial",
+  "def-weil-pbc-category-colimit"
+ ],
+ "proof": [
+  {
+   "text": "Let p be a separable polynomial over k. The directed nonempty poset I is filtered, and the forgetful functor from commutative rings preserves filtered colimits. By clause (1) of [lem-pc-filtered-colimit-commrings-elementwise], choose a stage representative of each coefficient indexed by the finite support of p, using Concrete.isColimit_exists_rep for the supplied colimit cocone.",
+   "uses": [
+    "lem-pc-filtered-colimit-commrings-elementwise"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "By directedness a finite set of stage indices has a common upper bound i (Finset.exists_le, also for empty support since I is nonempty). Transport the coefficient representatives to stage i. Cocone naturality identifies their images with the coefficients of p; outside the support use the zero element. Polynomial.mem_map_range now gives q over the stage with q.map(rho_i) = p. This uses only finite-element descent, not descent of any equations.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Give the stage its field structure from hF i. By [def-pc-separable-polynomial] and Polynomial.separable_map, separability of q.map(rho_i) = p implies separability of q. Reflection of separability along a field map is valid even for transcendental extensions; no Bezout identity needs to descend.",
+   "uses": [
+    "def-pc-separable-polynomial"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "By [def-pc-separably-closed], the separable stage polynomial q splits. Map its splitting along rho_i using Polynomial.Splits.map. Its image is p, so every separable polynomial over k splits. This is precisely the Mathlib class IsSepClosed k, equivalent to the root formulation of the statement. Zero and constant polynomials are included automatically.",
+   "uses": [
+    "def-pc-separably-closed"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-pc-separable-polynomial",
+  "def-pc-separably-closed",
+  "lem-pc-filtered-colimit-commrings-elementwise"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tag 04GI, lemma-colimit-henselian, separably closed residue-field colimit assertion; shorter finite-coefficient proof using Mathlib Polynomial.separable_map and Polynomial.Splits.map, formalized by F4 on 2026-10-26."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A field which is a directed ring colimit of separably closed fields is separably closed",
+   "results": "8 hits: IsSepClosure.sep_closed, IsSepClosed, SeparableClosure.isSepClosed, IsSepClosed.of_isAlgClosed, IsSepClosed.casesOn, IsSepClosed.mk, separableClosure, IsSepClosure",
+   "date": "2026-10-22",
+   "verdict": "no match: the algebraic-extension theorem requires algebraicity over one fixed stage, which this directed system does not assume; separable closures and separable suprema do not give this colimit theorem"
+  },
+  {
+   "tool": "loogle",
+   "query": "IsSepClosed, DirectLimit",
+   "results": "0 hits: ",
+   "date": "2026-10-22",
+   "verdict": "no match: the algebraic-extension theorem requires algebraicity over one fixed stage, which this directed system does not assume; separable closures and separable suprema do not give this colimit theorem"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A filtered colimit of separably closed fields is separably closed by descending separable polynomial coefficients and a Bezout identity",
+   "results": "8 hits: Algebra.IsAlgebraic.isSepClosed, SeparableClosure.isSepClosed, IsSepClosure.sep_closed, IsSepClosed, isSepClosure_iff, separableClosure.isSepClosure, SeparableClosure, IsSepClosure.isSeparable",
+   "date": "2026-10-22",
+   "verdict": "no match: the algebraic-extension theorem requires algebraicity over one fixed stage, which this directed system does not assume; separable closures and separable suprema do not give this colimit theorem"
+  },
+  {
+   "tool": "grep",
+   "query": "(IsSepClosed|[Ss]eparably[Cc]losed|[Ss]eparably.closed).*(colimit|DirectLimit|directLimit)|(colimit|DirectLimit|directLimit).*(IsSepClosed|[Ss]eparably[Cc]losed|[Ss]eparably.closed)",
+   "results": "0 hits: ",
+   "date": "2026-10-22",
+   "verdict": "no match: the algebraic-extension theorem requires algebraicity over one fixed stage, which this directed system does not assume; separable closures and separable suprema do not give this colimit theorem"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A directed union of separably algebraically closed subfields is separably algebraically closed",
+   "results": "8 hits: IntermediateField.isSeparable_iSup, IntermediateField.isSeparable_sup, SeparableClosure.isSepClosed, SeparableClosure, Algebra.IsAlgebraic.isSepClosed, IsSepClosure, separableClosure.adjoin_eq_of_isAlgebraic_of_isSeparable, le_separableClosure",
+   "date": "2026-10-22",
+   "verdict": "no match: the algebraic-extension theorem requires algebraicity over one fixed stage, which this directed system does not assume; separable closures and separable suprema do not give this colimit theorem"
+  },
+  {
+   "tool": "grep",
+   "query": "isSepClosed",
+   "results": "5 hits: 9, 148, 150, 152, 558; source subdirectory FieldTheory/PurelyInseparable/Basic.lean",
+   "date": "2026-10-22",
+   "verdict": "no match: the algebraic-extension theorem requires algebraicity over one fixed stage, which this directed system does not assume; separable closures and separable suprema do not give this colimit theorem"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A field which is a directed colimit of separably closed fields is separably closed",
+   "results": "8 hits: SeparableClosure.isSepClosed, IsSepClosure.sep_closed, separableClosure.isSepClosure, IsSepClosure.self_of_isSepClosed, Algebra.IsAlgebraic.isSepClosed, IntermediateField.isSeparable_iSup, IsSepClosure.isSeparable, IsSepClosed",
+   "date": "2026-10-23",
+   "verdict": "no match: none of these declarations states the ring-colimit assertion; Algebra.IsAlgebraic.isSepClosed additionally requires algebraicity over a fixed stage"
+  },
+  {
+   "tool": "loogle",
+   "query": "Polynomial.Separable, Polynomial.map",
+   "results": "12 hits: Polynomial.Separable.map, Polynomial.separable_map, Polynomial.card_rootSet_eq_natDegree, Polynomial.nodup_aroots_iff_of_splits, Polynomial.card_rootSet_eq_natDegree_iff_of_splits, Polynomial.exists_finset_of_splits, Polynomial.eq_X_sub_C_of_separable_of_root_eq, IsSepClosed.splits_codomain",
+   "date": "2026-10-23",
+   "verdict": "no match for the item: Polynomial.separable_map reflects separability for a single field map, but does not establish separable closedness of the colimit; the proof instead descends a finite Bezout identity"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A field which is a directed ring colimit of separably closed fields is separably closed",
+   "results": "8 hits: IsSepClosure.sep_closed, IsSepClosed, SeparableClosure.isSepClosed, IsSepClosed.of_isAlgClosed, IsSepClosed.casesOn, IsSepClosed.mk, separableClosure, IsSepClosure",
+   "date": "2026-10-23",
+   "verdict": "no match: none of these declarations states the ring-colimit assertion; Algebra.IsAlgebraic.isSepClosed additionally requires algebraicity over a fixed stage"
+  },
+  {
+   "tool": "grep",
+   "query": "(IsSepClosed|[Ss]eparably.closed).*(colimit|DirectLimit)|(colimit|DirectLimit).*(IsSepClosed|[Ss]eparably.closed)",
+   "results": "0 hits: ",
+   "date": "2026-10-23",
+   "verdict": "no match: none of these declarations states the ring-colimit assertion; Algebra.IsAlgebraic.isSepClosed additionally requires algebraicity over a fixed stage"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A directed union of separably closed subfields is separably closed",
+   "results": "8 hits: IntermediateField.isSeparable_iSup, SeparableClosure.isSepClosed, IsSepClosure.sep_closed, Algebra.IsAlgebraic.isSepClosed, IntermediateField.isSeparable_sup, separableClosure.isSepClosure, IsSepClosure.self_of_isSepClosed, le_separableClosure",
+   "date": "2026-10-23",
+   "verdict": "no match: none of these declarations states the ring-colimit assertion; Algebra.IsAlgebraic.isSepClosed additionally requires algebraicity over a fixed stage"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-filtered-colimit-strictly-henselian-local",
+  "date": "2026-10-22",
+  "group": "Q83"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "Paragraph (3), open direct image: the unpunctured one-term root-tower calculation underlying coordinate-face restriction in the tame-boundary expansion. Local-ring permanence input at a compatible family of closed points: Stacks Tag 04GI. Tag 04GI, lemma-colimit-henselian, proof: sentence that the colimit of separably algebraically closed residue fields is separably algebraically closed.",
+   "via": [
+    "lem-sfb-filtered-colimit-strictly-henselian-local",
+    "lem-sfb-indfinite-contractible-base-wstrict",
+    "lem-sfb-root-tower-coordinate-face",
+    "lem-sfb-root-tower-inner-support",
+    "lem-sfb-partial-kummer-boundary-unit-model",
+    "lem-sfb-transverse-tame-open-shriek-exchange",
+    "lem-sfb-continuous-algcl-tame-boundary-comparison",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-separably-closed-field-colimit",
+  "worker": "stage1",
+  "summary": "Kept the statement and expanded the omitted residue-field assertion of Stacks 04GI. Descended the coefficients of a separable polynomial and its Bezout certificate using the existing finite-data lemma, verified its top coefficient remains nonzero, and mapped a stage root to the colimit by the explicit finite-sum evaluation formula. No new nodes and no algebraicity hypothesis. Rechecked project attachments and Mathlib; no match for the whole item.",
+  "blueprint": "Preserves the inherited ancestor-null provenance and its full via chain. Realizes the Tag 04GI residue-field permanence input to the root-tower coordinate-face route described in blueprint.from.place; no change to the chapter or unit route.",
+  "tool_uses": [
+   {
+    "node": "lemma-nagata-filtered-colimit-finite-data",
+    "why": "Generic finite-element and finite-equation descent in a directed ring colimit, used to descend a polynomial and its Bezout identity; it is the exact algebraic bookkeeping needed here and does not replace a geometric unit step."
+   }
+  ]
+ },
+ "tool_uses": [],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q92-d104e6531",
+  "group": "Q92",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q92-d104e6531 (reviewer sub-agent of L); spot-checked: Read in full: the item's 4 steps; the statements of all 5 cited nodes; Stacks algebra.tex Tag 04GI lemma-colimit-henselian lines 42926-42940, whose proof omits the claim that a colimit of separably closed residue fields is separably closed (the item states exactly that). The statement and stmt_deps are unchanged from the base and match the parent lem-sfb-filtered-colimit-strictly-henselian-local, its only citer; there is no cycle. Step 1 takes the Bezout pair U,V with Up+Vp'=1 from def-pc-separable-polynomial. Step 2 descends the coefficients of p, U and V and the explicit coefficient equations of Up+Vp'=1 (the integer factors r are ring expressions, so characteristic p is fine; the bound N covers every coefficient). It cites lemma-nagata-filtered-colimit-finite-data, whose hypotheses (nonempty directed index, colimit in commutative rings) hold. This cross-unit use is declared in tool_uses and accepted as generic bookkeeping. Step 3 gets Aq+Bq'=1 at the stage, so q is separable; the leading lift is nonzero because rho_i(c~_n)=c_n≠0, so q is nonconstant. Step 4 takes a root a of q in k_i and maps it by the evaluation formula of def-weil-polynomial-root to a root rho_i(a) of p in k. It rightly avoids the integer-coefficient root lemma. proof_deps equals the union of uses. Edge cases tested: a single stage, transcendental transitions (no algebraicity needed), linear p, and T^p-T+c in characteristic p. The rg -L duplicate search over the snapshot DAG found no node stating this field-colimit fact. The Mathlib searches cover all three kinds and find no match. Clones live and side-live both have the item unsplit, and there is no earlier run or repair note. No SGA is cited. There are no new nodes and no changes."
+ },
+ "lean": {
+  "module": "Sheaf.FieldTheory.SeparablyClosedFieldColimit",
+  "declaration": "CommRingCat.isSepClosed_of_isColimit",
+  "file": "lean/Sheaf/FieldTheory/SeparablyClosedFieldColimit.lean",
+  "statement": "theorem isSepClosed_of_isColimit {I : Type u} [PartialOrder I] [Nonempty I] [IsDirected I (· ≤ ·)] (F : I ⥤ CommRingCat.{u}) (hF : ∀ i : I, IsField (F.obj i)) (hsep : ∀ i : I, @IsSepClosed (F.obj i) (hF i).toField) (k : Type u) [Field k] (ρ : F ⟶ (Functor.const I).obj (CommRingCat.of k)) (hcolim : IsColimit (Cocone.mk (CommRingCat.of k) ρ)) : IsSepClosed k",
+  "branch": "sheaf-dag",
+  "by": "Q21",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-d0c08db7c",
+  "group": "Q21",
+  "result": "pass",
+  "note": "Clause-by-clause match: directed nonempty poset I:Type u, F : I ⥤ CommRingCat.{u} with IsField stages, hsep via @IsSepClosed with IsField.toField (given ring ops; only inverses added), given cocone ρ with IsColimit in CommRingCat, conclusion IsSepClosed k. No algebraicity, characteristic or finiteness assumptions. Edge cases (empty I excluded, singleton, char p, transcendental transitions) fine. Only the lean field changed vs live/side-live; lean.statement verbatim in file; name absent from Mathlib; proof is sorry only; docstrings cite Tag 04GI and the blueprint and give the 4-step proof; the stage-3 finite-data lemma CommRingCat.exists_finite_data_stage exists with a matching shape; report has Worker report and Second reading sections. No compile run (no file changed). No findings."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F4",
+  "result": "pass",
+  "landing": "20261026T091507-L-3347272",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

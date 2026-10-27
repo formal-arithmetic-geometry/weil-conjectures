@@ -1,0 +1,333 @@
+{
+ "id": "lem-sfb-exact-monoidal-equivalence-total-kflat",
+ "kind": "statement",
+ "title": "Signed total tensor and both K-flat tests under an exact monoidal equivalence",
+ "statement": "Let $\\mathcal M,\\mathcal A$ be abelian categories [def-sp-abelian] with symmetric monoidal structures [def-sfb-monoidal-category], each with a symmetry $\\beta_{X,Y}:X\\otimes Y\\xrightarrow{\\sim}Y\\otimes X$ natural in both variables, with $\\beta_{Y,X}\\circ\\beta_{X,Y}=\\mathrm{id}$ and the hexagon identity $\\alpha_{Y,Z,X}\\circ\\beta_{X,Y\\otimes Z}\\circ\\alpha_{X,Y,Z}=(\\mathrm{id}_Y\\otimes\\beta_{X,Z})\\circ\\alpha_{Y,X,Z}\\circ(\\beta_{X,Y}\\otimes\\mathrm{id}_Z)$, whose tensors are additive in each variable and preserve countable coproducts in each variable. Let $F:\\mathcal M\\to\\mathcal A$ be an additive exact equivalence, with additive exact quasi-inverse $G$, and a specified strong monoidal structure [def-sfb-strong-monoidal-functor]. Write its inverse tensorator as $c_{X,Y}:F(X\\otimes Y)\\cong FX\\otimes FY$, and assume it is symmetric: $c_{Y,X}\\circ F(\\beta_{X,Y})=\\beta_{FX,FY}\\circ c_{X,Y}$ for all $X,Y$. Use integer cochain complexes, cohomology and quasi-isomorphisms [def-weil-abstract-derived-category], and the signed direct-sum total tensor [def-sfb-preserves-kflat-quasi-iso]: $(P\\otimes Q)^n=\\bigoplus_{p+q=n}P^p\\otimes Q^q$, with differential $d_P\\otimes1+(-1)^p1\\otimes d_Q$. Assume these countable coproducts exist in both categories. Flat means that tensor with the object is exact; acyclic means that every cohomology object is zero; the acyclic-test K-flat condition means that total tensor with every acyclic complex is acyclic.\nThe termwise functors $F_{\\rm Ch},G_{\\rm Ch}$ preserve and reflect acyclicity and quasi-isomorphisms. There is a natural chain isomorphism\n$$\\tau_{P,Q}:F_{\\rm Ch}\\operatorname{Tot}(P\\otimes Q)\\xrightarrow{\\sim}\\operatorname{Tot}(F_{\\rm Ch}P\\otimes F_{\\rm Ch}Q),$$\nwhose component on each $(p,q)$ summand is $c_{P^p,Q^q}$ followed by that summand's coproduct injection, using the canonical coproduct comparison for $F$. It respects the signed differential, associators, both unitors and the Koszul symmetry $(-1)^{pq}\\beta$ on homogeneous bidegree $(p,q)$, and $G_{\\rm Ch}$ has the inverse comparison. For every object $M$ and complex $P$,\n$$M\\text{ is flat}\\ \\Longleftrightarrow\\ FM\\text{ is flat},\\qquad P\\text{ is acyclic-test K-flat}\\ \\Longleftrightarrow\\ F_{\\rm Ch}P\\text{ is acyclic-test K-flat}.$$\nIn each category this K-flat condition is equivalent to requiring both total tensor functors with $P$ to preserve every quasi-isomorphism, with arbitrary endpoints. Thus $F_{\\rm Ch}$ and $G_{\\rm Ch}$ also preserve and reflect the two-sided quasi-isomorphism-test K-flat condition of [def-sfb-preserves-kflat-quasi-iso].",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 06YP, lemma-K-flat-quasi-isomorphism; agent-written abstract exact-equivalence and signed-total version of the cone argument."
+ },
+ "stmt_deps": [
+  "def-sp-abelian",
+  "def-sfb-monoidal-category",
+  "def-sfb-strong-monoidal-functor",
+  "def-weil-abstract-derived-category",
+  "def-sfb-preserves-kflat-quasi-iso",
+  "def-sfb-countable-tensor-structures"
+ ],
+ "proof": [
+  {
+   "text": "Apply [lem-weil-pbc-exact-functor-complex-cohomology] to $F$ and $G$. It gives natural isomorphisms $H^n(F_{\\rm Ch}P)\\cong F(H^nP)$ and $H^n(G_{\\rm Ch}K)\\cong G(H^nK)$. An additive equivalence reflects zero objects: if $FT=0$, then $\\mathrm{id}_T$ maps to zero and hence is zero by faithfulness, so $T$ is a zero object. It also reflects invertibility: apply the quasi-inverse and conjugate with the unit. Thus both termwise functors preserve and reflect acyclicity and quasi-isomorphisms, in every integer degree.",
+   "uses": [
+    "lem-weil-pbc-exact-functor-complex-cohomology",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/homology.tex",
+    "place": "Tag 010N, lemma-exact-functor; natural cohomology comparison of the cited node"
+   }
+  },
+  {
+   "text": "Choose the adjoint-equivalence unit $\\eta:\\mathrm{id}\\cong GF$ and counit $\\epsilon:FG\\cong\\mathrm{id}$ (an equivalence may be expressed as an adjoint equivalence). By [lem-galois-equivalence-preserves-limits], $F$ and $G$ preserve all existing coproducts, in particular those indexed by $\\{(p,q):p+q=n\\}\\cong\\mathbf Z$. Give $G$ the strong monoidal structure of [lem-sfb-monoidal-equivalence-inverse-structure], and write $c^G=(\\mu^G)^{-1}$. Its four equations specify the inverse comparison relative to $\\eta,\\epsilon$. This uses only the given monoidal structures, not a transported replacement for either category.",
+   "uses": [
+    "lem-galois-equivalence-preserves-limits",
+    "lem-sfb-monoidal-equivalence-inverse-structure"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Tag 0FFL, definition-functor-monoidal-categories; agent-written signed-total calculation"
+   }
+  },
+  {
+   "text": "Write $\\iota_{p,q}$ for the degree-$n$ coprojections of $P\\otimes Q$ and $\\iota'_{p,q}$ for those of $FP\\otimes FQ$. Since $(F\\operatorname{Tot}^n,F\\iota_{p,q})$ is a coproduct, its universal property [def-weil-pbc-category-colimit] defines the unique map $\\tau^n$ with $\\tau^n F(\\iota_{p,q})=\\iota'_{p,q}c_{P^p,Q^q}$. The reverse coproduct map is specified by $F(\\iota_{p,q})c_{P^p,Q^q}^{-1}$. Each composite is identity on every coprojection, hence is identity. These are precisely the canonical coproduct comparison composed with the coproduct of the inverse tensorators. All these indexing sets are countable.",
+   "uses": [
+    "def-weil-pbc-category-colimit",
+    "def-sfb-strong-monoidal-functor"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Tag 0FFL, definition-functor-monoidal-categories; agent-written signed-total calculation"
+   }
+  },
+  {
+   "text": "The chain-map identity is checked after $F(\\iota_{p,q})$. Additivity of $F$ and naturality of $c$ give on both sides the same map\n$$\\iota'_{p+1,q}(F(d_P^p)\\otimes1)c_{P^p,Q^q}+(-1)^p\\iota'_{p,q+1}(1\\otimes F(d_Q^q))c_{P^p,Q^q}.$$\nHere $F((-1)^pa)=(-1)^pF(a)$, also for negative $p$. Thus the degreewise inverse maps assemble to a chain isomorphism. For chain maps $a:P\\to P'$, $b:Q\\to Q'$, naturality is the equation $c_{P'^p,Q'^q}F(a^p\\otimes b^q)=(Fa^p\\otimes Fb^q)c_{P^p,Q^q}$ on each coprojection. This proves naturality of $\\tau$ in both arguments.",
+   "uses": [
+    "def-sfb-preserves-kflat-quasi-iso",
+    "def-sfb-strong-monoidal-functor",
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Tag 0FFL, definition-functor-monoidal-categories; agent-written signed-total calculation"
+   }
+  },
+  {
+   "text": "The ordinary total-complex associator is induced on a triple summand by $\\alpha_{P^p,Q^q,R^r}$, reindexing the two nested sums over $p+q+r=n$. Tensor preserves these countable coproducts. It is a chain map since either parenthesization has differential with the three coefficients $1,(-1)^p,(-1)^{p+q}$. Its inverse is induced by $\\alpha^{-1}$. The pentagon and triangle reduce on quadruple and triple summands to their defining equations in [def-sfb-monoidal-category]; all the relevant finite powers of $\\mathbf Z$ are countable. Unit objects are $\\mathbf1[0]$, and the unitors are induced by $\\lambda,\\rho$ on the sole potentially nonzero summands $(0,n),(n,0)$; tensor with a zero object is zero since an additive functor sends its identity to zero.",
+   "uses": [
+    "def-sfb-monoidal-category",
+    "def-sfb-preserves-kflat-quasi-iso",
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Tag 0FFL, definition-functor-monoidal-categories; agent-written signed-total calculation"
+   }
+  },
+  {
+   "text": "Test the two associativity composites for $\\tau$ on each nested triple coprojection. By naturality past the inner coprojection their equality becomes exactly\n$$(1\\otimes c_{Y,Z})c_{X,Y\\otimes Z}F(\\alpha_{X,Y,Z})=\\alpha_{FX,FY,FZ}(c_{X,Y}\\otimes1)c_{X\\otimes Y,Z},$$\nwhich is the inverse-tensorator form of the associativity equation in [def-sfb-strong-monoidal-functor]. For the unit comparison take $j:F(\\mathbf1)[0]\\cong\\mathbf1[0]$ to be $e_F^{-1}$ in degree zero and the zero-object isomorphisms elsewhere. On $(0,n)$ and $(n,0)$ the two unitor equalities reduce respectively to\n$$F(\\lambda_X)=\\lambda_{FX}(e_F^{-1}\\otimes1)c_{\\mathbf1,X},\\quad F(\\rho_X)=\\rho_{FX}(1\\otimes e_F^{-1})c_{X,\\mathbf1}.$$\nThese are the two unit axioms in the cited definition, with the structure maps inverted. Coproduct uniqueness proves the required equalities of complexes.",
+   "uses": [
+    "def-sfb-strong-monoidal-functor",
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Tag 0FFL, definition-functor-monoidal-categories; agent-written signed-total calculation"
+   }
+  },
+  {
+   "text": "The signed symmetry $b_{P,Q}$ has summand map $(-1)^{pq}\\beta_{P^p,Q^q}$ into $(q,p)$. It commutes with differentials: for the $d_P$ term the two exponents are $pq+q=(p+1)q$, and for the $d_Q$ term they are $pq$ and $p+p(q+1)$, equal modulo $2$. The reverse signed swap is its inverse since $pq+qp$ is even and $\\beta_{Y,X}\\beta_{X,Y}=1$. Its hexagon follows on triple summands from $p(q+r)=pq+pr$ and the assumed hexagon for $\\beta$. On each $(p,q)$ summand the symmetry compatibility of $\\tau$ reduces to\n$$(-1)^{pq}c_{Q^q,P^p}F(\\beta_{P^p,Q^q})=(-1)^{pq}\\beta_{FP^p,FQ^q}c_{P^p,Q^q},$$\nwhich is the stated symmetric-functor hypothesis; additivity allows the sign to pass through $F$. Thus $\\tau$ respects the Koszul symmetry as well as the constraints already checked.",
+   "uses": [
+    "def-sfb-preserves-kflat-quasi-iso",
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Tag 0FFL, definition-functor-monoidal-categories; agent-written signed-total calculation"
+   }
+  },
+  {
+   "text": "The forward tensor and unit comparisons of steps 3-7 define a strong monoidal structure on the termwise functor of the equivalence of cochain complexes. Apply [lem-sfb-monoidal-equivalence-inverse-structure] directly to this equivalence of complexes, with the existing signed-total monoidal structures on both categories. Its canonical inverse structure supplies the inverse tensor and unit comparisons, their naturality, associativity and unitor equations, and the four required equations for the termwise unit and counit. Its braiding compatibility follows by faithfulness of the forward functor: postcompose its image with the forward tensor comparison and the tensor product of the counit components. The counit tensor equation reduces both sides to counit naturality and the forward braiding equation proved in step 7. Cancel these isomorphisms. This avoids repeating the summand construction for the inverse, while using the specified termwise unit and counit unchanged.",
+   "uses": [
+    "lem-sfb-monoidal-equivalence-inverse-structure",
+    "def-sfb-strong-monoidal-functor",
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Tag 0FFL, definition-functor-monoidal-categories; agent-written signed-total calculation"
+   }
+  },
+  {
+   "text": "For an object $M$ the functor $FM\\otimes-$ is naturally isomorphic to $F\\circ(M\\otimes-)\\circ G$: the comparison at $N$ is $F(M\\otimes GN)\\xrightarrow{c}FM\\otimes FGN\\xrightarrow{1\\otimes\\epsilon_N}FM\\otimes N$. The right tensor has the analogous comparison using $\\epsilon_N\\otimes1$. Consequently if tensor with $M$ is exact, so is tensor with $FM$, since composites of functors preserving finite limits and finite colimits preserve them, and preservation is invariant under natural isomorphism. Conversely apply the same argument to $G$ and use $GFM\\cong M$ from the unit. This proves the flat-object equivalence, with both tensor orders agreeing through symmetry.",
+   "uses": [
+    "def-sfb-strong-monoidal-functor",
+    "lem-sfb-monoidal-equivalence-inverse-structure"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Tag 0FFL, definition-functor-monoidal-categories; agent-written signed-total calculation"
+   }
+  },
+  {
+   "text": "Suppose $P$ passes the acyclic tensor test in $\\mathcal M$, and let $N$ be any acyclic complex of $\\mathcal A$. Step 1 makes $G_{\\rm Ch}N$ acyclic. There is a chain isomorphism\n$$F_{\\rm Ch}(P\\otimes G_{\\rm Ch}N)\\xrightarrow{\\tau}F_{\\rm Ch}P\\otimes F_{\\rm Ch}G_{\\rm Ch}N\\xrightarrow{1\\otimes\\epsilon_N}F_{\\rm Ch}P\\otimes N.$$\nIts source is acyclic by the test and step 1, so its target is acyclic. Conversely if $F_{\\rm Ch}P$ passes the test, apply it to $F_{\\rm Ch}A$ for any acyclic $A$ of $\\mathcal M$. Step 4 identifies its tensor with $F_{\\rm Ch}(P\\otimes A)$, and step 1 reflects acyclicity. Thus $P\\otimes A$ is acyclic for every such $A$. The signed swap of step 7 identifies the two tensor orders, so either acyclic-test convention gives the same condition. Apply this equivalence also to $G$, or use $FG\\cong\\mathrm{id}$, to get preservation and reflection for both functors.",
+   "uses": [
+    "def-sfb-preserves-kflat-quasi-iso",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 06YP, lemma-K-flat-quasi-isomorphism; agent-written exact-equivalence application"
+   }
+  },
+  {
+   "text": "In either category let $P$ pass the acyclic test and let $u:X\\to Y$ be any quasi-isomorphism, without conditions on $X,Y$. By [lem-pur-quasi-iso-cone-acyclic], $C(u)$ is acyclic, hence $P\\otimes C(u)$ is acyclic. The chain isomorphism supplied by [lem-sfb-additive-total-tensor-cone-comparison] identifies this tensor with $C(1_P\\otimes u)$. Acyclicity is invariant under chain isomorphisms, so the same cone criterion shows that $1_P\\otimes u$ is a quasi-isomorphism. Naturality of the Koszul braiding conjugates $u\\otimes1_P$ to this map, so it is a quasi-isomorphism too. This proves both tests for arbitrary endpoints; no exactness of countable sums and no resolution theorem is used.",
+   "uses": [
+    "lem-pur-quasi-iso-cone-acyclic",
+    "lem-sfb-additive-total-tensor-cone-comparison",
+    "def-weil-abstract-derived-category",
+    "def-sfb-preserves-kflat-quasi-iso"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 06YP, lemma-K-flat-quasi-isomorphism, cone proof; general cone comparison from derived.tex Tag 0G6E"
+   }
+  },
+  {
+   "text": "Conversely let both tensor functors with $P$ preserve every quasi-isomorphism as in [def-sfb-preserves-kflat-quasi-iso]. For every acyclic $A$, the map $0\\to A$ is a quasi-isomorphism by the definition of cohomology and quasi-isomorphism. Tensoring it gives $0\\to P\\otimes A$, since an additive tensor sends zero objects to zero objects. It is a quasi-isomorphism, so $P\\otimes A$ is acyclic. Hence the two-sided quasi-isomorphism test and the acyclic test are equivalent in each category. Combining this with step 10 proves preservation and reflection of the two-sided test for $F_{\\rm Ch}$ and $G_{\\rm Ch}$, completing every asserted clause.",
+   "uses": [
+    "def-sfb-preserves-kflat-quasi-iso",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 06YP, lemma-K-flat-quasi-isomorphism, with the elementary converse via 0 to A"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sfb-monoidal-category",
+  "def-sfb-preserves-kflat-quasi-iso",
+  "def-sfb-strong-monoidal-functor",
+  "def-weil-abstract-derived-category",
+  "def-weil-pbc-category-colimit",
+  "lem-galois-equivalence-preserves-limits",
+  "lem-pur-quasi-iso-cone-acyclic",
+  "lem-sfb-additive-total-tensor-cone-comparison",
+  "lem-sfb-monoidal-equivalence-inverse-structure",
+  "lem-weil-pbc-exact-functor-complex-cohomology"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 06YP, lemma-K-flat-quasi-isomorphism, and derived.tex Tag 0G6E for the cone route; the exact-equivalence, countable-coproduct and coherence calculations are written here by ND, rather than claimed to be a verbatim Stacks theorem. F2 implements the proof using the existing signed-total comparison, applies inverseMonoidal directly at the complex level in step 8, and uses the chain-level cone isomorphism in step 11."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "(IsEquivalence.*[Kk]Flat|[Kk]Flat.*IsEquivalence|mapCochainComplex.*[Mm]onoidal|[Kk]Flat.*quasiIso)",
+   "results": "{\"t\": \"2026-10-22T05:55:01Z\", \"tool\": \"grep\", \"query\": \"(IsEquivalence.*[Kk]Flat|[Kk]Flat.*IsEquivalence|mapCochainComplex.*[Mm]onoidal|[Kk]Flat.*quasiIso)\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary module flatness tests, monoidal transport and good-tensor conditions do not identify the signed total comparison and both K-flat tests under a general exact symmetric monoidal equivalence"
+  },
+  {
+   "tool": "leansearch",
+   "query": "An exact strong monoidal equivalence preserves flat objects and K flat cochain complexes and commutes with total tensor products",
+   "results": "{\"t\": \"2026-10-22T05:55:02Z\", \"tool\": \"leansearch\", \"query\": \"An exact strong monoidal equivalence preserves flat objects and K flat cochain complexes and commutes with total tensor products\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Module.Flat.lTensor_shortComplex_exact\", \"Module.Flat.iff_rTensor_preserves_shortComplex_exact\", \"CategoryTheory.instIsMonoidalFunctorCongrLeft\", \"Module.Flat.iff_lTensor_preserves_shortComplex_exact\", \"CategoryTheory.Monoidal.transportStruct_tensorObj\", \"CategoryTheory.instMonoidalFunctorFunctorCongrLeft\", \"CategoryTheory.Monoidal.transportStruct\", \"CommRingCat.Under.instPreservesFiniteLimitsUnderTensorProdOfFlatCarrier\"], \"digest\": \"10dd00140163dd3c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary module flatness tests, monoidal transport and good-tensor conditions do not identify the signed total comparison and both K-flat tests under a general exact symmetric monoidal equivalence"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"mapHomologicalComplex\", \"tensor\"",
+   "results": "{\"t\": \"2026-10-22T05:55:02Z\", \"tool\": \"loogle\", \"query\": \"\\\"mapHomologicalComplex\\\", \\\"tensor\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary module flatness tests, monoidal transport and good-tensor conditions do not identify the signed total comparison and both K-flat tests under a general exact symmetric monoidal equivalence"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An additive exact symmetric monoidal equivalence identifies signed total tensor complexes preserves and reflects flat objects K flat complexes and the acyclic tensor and quasi isomorphism tests",
+   "results": "{\"t\": \"2026-10-22T05:55:12Z\", \"tool\": \"leanfinder\", \"query\": \"An additive exact symmetric monoidal equivalence identifies signed total tensor complexes preserves and reflects flat objects K flat complexes and the acyclic tensor and quasi isomorphism tests\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HomologicalComplex.HasGoodTensor₁₂\", \"HomologicalComplex.HasGoodTensor₂₃\", \"Module.Flat.iff_lTensor_preserves_shortComplex_exact\", \"Module.Flat.iff_rTensor_preserves_shortComplex_exact\", \"HomologicalComplex.instHasGoodTensor₁₂OfHasGoodTensor₁₂TensorX\", \"Module.Flat.lTensor_shortComplex_exact\", \"Module.Flat.iff_rTensor_exact'\", \"Module.Flat.iff_rTensor_exact\"], \"digest\": \"bb3e56d3fdc0b370\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary module flatness tests, monoidal transport and good-tensor conditions do not identify the signed total comparison and both K-flat tests under a general exact symmetric monoidal equivalence"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Strong monoidal additive equivalence of abelian categories lifts to cochain complexes with Koszul signs and identifies acyclic tensor tests for K flatness",
+   "results": "{\"t\": \"2026-10-22T05:55:46Z\", \"tool\": \"leanfinder\", \"query\": \"Strong monoidal additive equivalence of abelian categories lifts to cochain complexes with Koszul signs and identifies acyclic tensor tests for K flatness\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Module.Flat.iff_lTensor_preserves_shortComplex_exact\", \"Module.Flat.iff_rTensor_preserves_shortComplex_exact\", \"CategoryTheory.Tor_obj\", \"CategoryTheory.Tor'\", \"CategoryTheory.Tor\", \"CategoryTheory.isZero_Tor_succ_of_projective\", \"CategoryTheory.Tor'_obj_obj\", \"CategoryTheory.isZero_Tor'_succ_of_projective\"], \"digest\": \"72049b459829d603\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary module flatness tests, monoidal transport and good-tensor conditions do not identify the signed total comparison and both K-flat tests under a general exact symmetric monoidal equivalence"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A strong monoidal equivalence of abelian categories identifies total tensor products of unbounded complexes and preserves and reflects acyclic test K flatness",
+   "results": "{\"t\": \"2026-10-22T06:55:14Z\", \"tool\": \"leanfinder\", \"query\": \"A strong monoidal equivalence of abelian categories identifies total tensor products of unbounded complexes and preserves and reflects acyclic test K flatness\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HomologicalComplex.instHasGoodTensor₁₂OfHasGoodTensor₁₂TensorX\", \"CategoryTheory.Tor'\", \"CategoryTheory.Tor\", \"CategoryTheory.Tor'_obj_obj\", \"CategoryTheory.Tor_obj\", \"HomologicalComplex.monoidalCategory\", \"Module.Flat.iff_lTensor_preserves_shortComplex_exact\", \"Module.Flat.iff_rTensor_preserves_shortComplex_exact\"], \"digest\": \"b969a13f4ad2446c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match for the conjunction under the stated countable-coproduct hypotheses: Tor and module flatness lemmas are different results; monoidalCategory concerns the structure on complexes and not the exact-equivalence K-flat equivalences. Existing project comparisons cover only clauses, with some stronger hypotheses."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Equivalence of additive symmetric monoidal categories induces a tensor equivalence on integer cochain complexes and identifies acyclic tensor tests with preservation of all quasi isomorphisms",
+   "results": "{\"t\": \"2026-10-22T06:59:06Z\", \"tool\": \"leanfinder\", \"query\": \"Equivalence of additive symmetric monoidal categories induces a tensor equivalence on integer cochain complexes and identifies acyclic tensor tests with preservation of all quasi isomorphisms\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CochainComplex.isKProjective_iff_of_iso\", \"ChainComplex.cochainComplexEquivalence\", \"CochainComplex.isKProjective_of_iso\", \"HomologicalComplex.monoidalCategory\", \"CochainComplex.instIsCompatibleWithShiftHomologicalComplexIntUpQuasiIso\", \"CategoryTheory.Functor.instCommShiftHomologicalComplexIntUpFunctorQuasiIsoMapHomologicalComplexUpToQuasiIsoLocalizerMorphism\", \"HomologicalComplex.monoidalCategoryStruct\", \"HomologicalComplex.instHasTensorXTensorUnit\"], \"digest\": \"48b476567dc59a84\"}",
+   "date": "2026-10-22",
+   "verdict": "no match for the conjunction under the stated countable-coproduct hypotheses: Tor and module flatness lemmas are different results; monoidalCategory concerns the structure on complexes and not the exact-equivalence K-flat equivalences. Existing project comparisons cover only clauses, with some stronger hypotheses."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Exact symmetric monoidal equivalence preserves and reflects flat objects and K flat complexes with signed direct sum total tensor",
+   "results": "{\"t\": \"2026-10-22T06:55:07Z\", \"tool\": \"leansearch\", \"query\": \"Exact symmetric monoidal equivalence preserves and reflects flat objects and K flat complexes with signed direct sum total tensor\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Module.Flat.iff_rTensor_preserves_shortComplex_exact\", \"CategoryTheory.Monoidal.Transported.instSymmetricCategory\", \"Module.Flat.iff_lTensor_preserves_shortComplex_exact\", \"CategoryTheory.hasRightDualOfEquivalence\", \"CategoryTheory.Equivalence.isMonoidal_refl\", \"Module.Flat.iff_preservesFiniteLimits_tensorLeft\", \"CommRingCat.Under.instPreservesFiniteLimitsUnderTensorProdOfFlatCarrier\", \"CategoryTheory.Equivalence.IsTriangulated.symm\"], \"digest\": \"27dec9b524f39e40\"}",
+   "date": "2026-10-22",
+   "verdict": "no match for the conjunction under the stated countable-coproduct hypotheses: Tor and module flatness lemmas are different results; monoidalCategory concerns the structure on complexes and not the exact-equivalence K-flat equivalences. Existing project comparisons cover only clauses, with some stronger hypotheses."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"kFlat\", \"mapHomologicalComplex\"",
+   "results": "{\"t\": \"2026-10-22T06:55:07Z\", \"tool\": \"loogle\", \"query\": \"\\\"kFlat\\\", \\\"mapHomologicalComplex\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match for the conjunction under the stated countable-coproduct hypotheses: Tor and module flatness lemmas are different results; monoidalCategory concerns the structure on complexes and not the exact-equivalence K-flat equivalences. Existing project comparisons cover only clauses, with some stronger hypotheses."
+  },
+  {
+   "tool": "grep",
+   "query": "(kFlat.*[Ee]quivalence|[Ee]quivalence.*kFlat|[Aa]cyclic.*[Tt]ensor|[Tt]ensor.*[Aa]cyclic)",
+   "results": "{\"t\": \"2026-10-22T06:55:07Z\", \"tool\": \"grep\", \"query\": \"(kFlat.*[Ee]quivalence|[Ee]quivalence.*kFlat|[Aa]cyclic.*[Tt]ensor|[Tt]ensor.*[Aa]cyclic)\", \"sub\": \"Algebra/Homology\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match for the conjunction under the stated countable-coproduct hypotheses: Tor and module flatness lemmas are different results; monoidalCategory concerns the structure on complexes and not the exact-equivalence K-flat equivalences. Existing project comparisons cover only clauses, with some stronger hypotheses."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-constant-scalar-restriction-tensor",
+  "date": "2026-10-22",
+  "group": "N9"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-prop-sf-rf-shriek-preservation",
+ "blueprint": {
+  "from": {
+   "node": "sk-prop-sf-rf-shriek-preservation",
+   "place": "Auxiliary coefficient equivalence serving the fourth blueprint proof paragraph (restriction of the adjunction); retained constant-scalar comparison proof steps 4-6, with the termwise cohomology observation from step 1.",
+   "via": [
+    "lem-sfb-constant-scalar-restriction-tensor",
+    "lem-sf-module-object-ordinary-coefficient-equivalence"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sfb-exact-monoidal-equivalence-total-kflat",
+  "worker": "stage1",
+  "summary": "Kept the statement unchanged; gave the signed coproduct construction and all constraint equations under countable coproducts only, the inverse-functor structure, exact conjugation proof of flatness, the quantified acyclic-test transfer, and the cone proof of equivalence with arbitrary-endpoint quasi-isomorphism tests. Reused exact cohomology, equivalence-colimit preservation and cone detection; added one Mathlib inverse-structure leaf and one general derived tensor-cone comparison with its project source candidate.",
+  "blueprint": "Fourth paragraph of sk-prop-sf-rf-shriek-preservation, restricting the adjunction, through the auxiliary coefficient equivalence; constant-scalar-restriction-tensor steps 4-6 and termwise cohomology step 1. No change to chapter/unit routes.",
+  "tool_uses": [
+   {
+    "node": "lem-pur-quasi-iso-cone-acyclic",
+    "why": "Generic cone criterion for integer complexes in any abelian category; used only as a black-box homological algebra tool, not a purity argument."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pur-quasi-iso-cone-acyclic"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-ND-53723a603",
+  "group": "ND",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-ND-53723a603 (reviewer sub-agent of L); spot-checked: I read the item, both new nodes and every cited statement in full. Item: all 12 steps checked, each sign recomputed. Step 4: the differential coefficient (-1)^p. Step 5: the associator coefficients 1,(-1)^p,(-1)^{p+q}. Step 6: the inverted associativity and unit axioms of def-sfb-strong-monoidal-functor, α(c⊗1)c=(1⊗c)cF(α) and F(λ)=λ(e^{-1}⊗1)c. Step 7: the Koszul swap exponents (p+1)q and pq vs p+p(q+1). Step 8: G's symmetry, from the counit equation, naturality of ε and β, and faithfulness of F. Steps 9-12: flatness via FM⊗−≅F(M⊗G−), transfer of the acyclic test, the cone route of 06YP (lem-pur-quasi-iso-cone-acyclic plus the new cone node plus H^r∘Q≅H^r), and the converse via 0→A. Sources: Stacks 06YP (proof: 06YM plus cone characterization) and 0G6E (countable direct sums, bilinear ⊗, Tot exact on K). New node lem-sfb-monoidal-equivalence-inverse-structure: Mathlib Functor.lean lines 1163/1185/1190/1196/1201 match the four equations literally (e_F=εF, c^F=δF, e_G=εG, μ^G=μG); existence only, so an exact leaf. New node lem-sfb-additive-total-tensor-cone-comparison: true via the (-1)^p twist on the P^p⊗X^q summands, identity on Y; checked on u=0, u=id, P=1[0]. It is a genuine generalization of the sheaf-specific cone nodes (lem-pc-tensor-mapping-cone-iso etc.), not a restatement of the item. lem-sfb-termwise-strong-monoidal and lem-sfb-total-tensor-homotopy cannot be cited because they assume all small colimits, so the elementary coproduct steps are justified. Route: the cone criterion is in sk-def-sf-operations, which the unit cites; the declared tool_use is accepted. The item is still unsplit in live and side-live, and there is no re-split note. No changes."
+ },
+ "lean": {
+  "module": "Sheaf.Algebra.Homology.ExactMonoidalEquivalenceTotalKFlat",
+  "declaration": "CategoryTheory.Equivalence.exactMonoidal_totalTensor_kFlat",
+  "file": "lean/Sheaf/Algebra/Homology/ExactMonoidalEquivalenceTotalKFlat.lean",
+  "statement": "theorem exactMonoidal_totalTensor_kFlat (E : M ≌ A) [E.functor.Additive] [E.inverse.Additive] [E.functor.Monoidal] (hβ : ∀ X Y : M, E.functor.map (β_ X Y).hom ≫ Functor.OplaxMonoidal.δ E.functor Y X = Functor.OplaxMonoidal.δ E.functor X Y ≫ (β_ (E.functor.obj X) (E.functor.obj Y)).hom) : ∃ (τ : ∀ P Q : CochainComplex M ℤ, (E.functor.mapHomologicalComplex (.up ℤ)).obj (P ⊗ Q) ≅ (E.functor.mapHomologicalComplex (.up ℤ)).obj P ⊗ (E.functor.mapHomologicalComplex (.up ℤ)).obj Q) (j : (E.functor.mapHomologicalComplex (.up ℤ)).obj (𝟙_ (CochainComplex M ℤ)) ≅ 𝟙_ (CochainComplex A ℤ)) (υ : ∀ P Q : CochainComplex A ℤ, (E.inverse.mapHomologicalComplex (.up ℤ)).obj (P ⊗ Q) ≅ (E.inverse.mapHomologicalComplex (.up ℤ)).obj P ⊗ (E.inverse.mapHomologicalComplex (.up ℤ)).obj Q) (k : (E.inverse.mapHomologicalComplex (.up ℤ)).obj (𝟙_ (CochainComplex A ℤ)) ≅ 𝟙_ (CochainComplex M ℤ)), (∀ (P Q : CochainComplex M ℤ) (p q n : ℤ) (h : p + q = n), E.functor.map (HomologicalComplex.ιTensorObj P Q p q n h) ≫ (τ P Q).hom.f n = Functor.OplaxMonoidal.δ E.functor (P.X p) (Q.X q) ≫ HomologicalComplex.ιTensorObj ((E.functor.mapHomologicalComplex (.up ℤ)).obj P) ((E.functor.mapHomologicalComplex (.up ℤ)).obj Q) p q n h) ∧ (E.functor.map (HomologicalComplex.singleObjXSelf (.up ℤ) 0 (𝟙_ M)).hom ≫ (Functor.Monoidal.εIso E.functor).inv = j.hom.f 0 ≫ (HomologicalComplex.singleObjXSelf (.up ℤ) 0 (𝟙_ A)).hom) ∧ (∀ (P Q P' Q' : CochainComplex M ℤ) (a : P ⟶ P') (b : Q ⟶ Q'), (E.functor.mapHomologicalComplex (.up ℤ)).map (a ⊗ₘ b) ≫ (τ P' Q').hom = (τ P Q).hom ≫ ((E.functor.mapHomologicalComplex (.up ℤ)).map a ⊗ₘ (E.functor.mapHomologicalComplex (.up ℤ)).map b)) ∧ (∀ P Q R : CochainComplex M ℤ, (E.functor.mapHomologicalComplex (.up ℤ)).map (α_ P Q R).hom ≫ (τ P (Q ⊗ R)).hom ≫ (E.functor.mapHomologicalComplex (.up ℤ)).obj P ◁ (τ Q R).hom = (τ (P ⊗ Q) R).hom ≫ (τ P Q).hom ▷ (E.functor.mapHomologicalComplex (.up ℤ)).obj R ≫ (α_ ((E.functor.mapHomologicalComplex (.up ℤ)).obj P) ((E.functor.mapHomologicalComplex (.up ℤ)).obj Q) ((E.functor.mapHomologicalComplex (.up ℤ)).obj R)).hom) ∧ (∀ P : CochainComplex M ℤ, (E.functor.mapHomologicalComplex (.up ℤ)).map (λ_ P).hom = (τ (𝟙_ (CochainComplex M ℤ)) P).hom ≫ j.hom ▷ (E.functor.mapHomologicalComplex (.up ℤ)).obj P ≫ (λ_ ((E.functor.mapHomologicalComplex (.up ℤ)).obj P)).hom) ∧ (∀ P : CochainComplex M ℤ, (E.functor.mapHomologicalComplex (.up ℤ)).map (ρ_ P).hom = (τ P (𝟙_ (CochainComplex M ℤ))).hom ≫ (E.functor.mapHomologicalComplex (.up ℤ)).obj P ◁ j.hom ≫ (ρ_ ((E.functor.mapHomologicalComplex (.up ℤ)).obj P)).hom) ∧ (∀ P Q : CochainComplex M ℤ, (E.functor.mapHomologicalComplex (.up ℤ)).map (CochainComplex.Monoidal.braiding P Q).hom ≫ (τ Q P).hom = (τ P Q).hom ≫ (CochainComplex.Monoidal.braiding ((E.functor.mapHomologicalComplex (.up ℤ)).obj P) ((E.functor.mapHomologicalComplex (.up ℤ)).obj Q)).hom) ∧ (∀ (P Q P' Q' : CochainComplex A ℤ) (a : P ⟶ P') (b : Q ⟶ Q'), (E.inverse.mapHomologicalComplex (.up ℤ)).map (a ⊗ₘ b) ≫ (υ P' Q').hom = (υ P Q).hom ≫ ((E.inverse.mapHomologicalComplex (.up ℤ)).map a ⊗ₘ (E.inverse.mapHomologicalComplex (.up ℤ)).map b)) ∧ (∀ P Q R : CochainComplex A ℤ, (E.inverse.mapHomologicalComplex (.up ℤ)).map (α_ P Q R).hom ≫ (υ P (Q ⊗ R)).hom ≫ (E.inverse.mapHomologicalComplex (.up ℤ)).obj P ◁ (υ Q R).hom = (υ (P ⊗ Q) R).hom ≫ (υ P Q).hom ▷ (E.inverse.mapHomologicalComplex (.up ℤ)).obj R ≫ (α_ ((E.inverse.mapHomologicalComplex (.up ℤ)).obj P) ((E.inverse.mapHomologicalComplex (.up ℤ)).obj Q) ((E.inverse.mapHomologicalComplex (.up ℤ)).obj R)).hom) ∧ (∀ P : CochainComplex A ℤ, (E.inverse.mapHomologicalComplex (.up ℤ)).map (λ_ P).hom = (υ (𝟙_ (CochainComplex A ℤ)) P).hom ≫ k.hom ▷ (E.inverse.mapHomologicalComplex (.up ℤ)).obj P ≫ (λ_ ((E.inverse.mapHomologicalComplex (.up ℤ)).obj P)).hom) ∧ (∀ P : CochainComplex A ℤ, (E.inverse.mapHomologicalComplex (.up ℤ)).map (ρ_ P).hom = (υ P (𝟙_ (CochainComplex A ℤ))).hom ≫ (E.inverse.mapHomologicalComplex (.up ℤ)).obj P ◁ k.hom ≫ (ρ_ ((E.inverse.mapHomologicalComplex (.up ℤ)).obj P)).hom) ∧ (∀ P Q : CochainComplex A ℤ, (E.inverse.mapHomologicalComplex (.up ℤ)).map (CochainComplex.Monoidal.braiding P Q).hom ≫ (υ Q P).hom = (υ P Q).hom ≫ (CochainComplex.Monoidal.braiding ((E.inverse.mapHomologicalComplex (.up ℤ)).obj P) ((E.inverse.mapHomologicalComplex (.up ℤ)).obj Q)).hom) ∧ (∀ P Q : CochainComplex M ℤ, (E.mapHomologicalComplex (.up ℤ)).unitIso.hom.app (P ⊗ Q) ≫ (E.inverse.mapHomologicalComplex (.up ℤ)).map (τ P Q).hom ≫ (υ ((E.functor.mapHomologicalComplex (.up ℤ)).obj P) ((E.functor.mapHomologicalComplex (.up ℤ)).obj Q)).hom = (E.mapHomologicalComplex (.up ℤ)).unitIso.hom.app P ⊗ₘ (E.mapHomologicalComplex (.up ℤ)).unitIso.hom.app Q) ∧ (∀ P Q : CochainComplex A ℤ, (E.functor.mapHomologicalComplex (.up ℤ)).map (υ P Q).hom ≫ (τ ((E.inverse.mapHomologicalComplex (.up ℤ)).obj P) ((E.inverse.mapHomologicalComplex (.up ℤ)).obj Q)).hom ≫ ((E.mapHomologicalComplex (.up ℤ)).counitIso.hom.app P ⊗ₘ (E.mapHomologicalComplex (.up ℤ)).counitIso.hom.app Q) = (E.mapHomologicalComplex (.up ℤ)).counitIso.hom.app (P ⊗ Q)) ∧ ((E.mapHomologicalComplex (.up ℤ)).unitIso.hom.app (𝟙_ (CochainComplex M ℤ)) ≫ (E.inverse.mapHomologicalComplex (.up ℤ)).map j.hom ≫ k.hom = 𝟙 (𝟙_ (CochainComplex M ℤ))) ∧ ((E.functor.mapHomologicalComplex (.up ℤ)).map k.hom ≫ j.hom = (E.mapHomologicalComplex (.up ℤ)).counitIso.hom.app (𝟙_ (CochainComplex A ℤ))) ∧ (∀ P : CochainComplex M ℤ, P.Acyclic ↔ ((E.functor.mapHomologicalComplex (.up ℤ)).obj P).Acyclic) ∧ (∀ (P Q : CochainComplex M ℤ) (s : P ⟶ Q), QuasiIso s ↔ QuasiIso ((E.functor.mapHomologicalComplex (.up ℤ)).map s)) ∧ (∀ X : M, ObjectProperty.flat X ↔ ObjectProperty.flat (E.functor.obj X)) ∧ (∀ P : CochainComplex M ℤ, (∀ N : CochainComplex M ℤ, N.Acyclic → (P ⊗ N).Acyclic) ↔ (∀ N : CochainComplex A ℤ, N.Acyclic → ((E.functor.mapHomologicalComplex (.up ℤ)).obj P ⊗ N).Acyclic)) ∧ (∀ P : CochainComplex M ℤ, CochainComplex.IsKFlatForTotalTensor P ↔ CochainComplex.IsKFlatForTotalTensor ((E.functor.mapHomologicalComplex (.up ℤ)).obj P)) ∧ (∀ P : CochainComplex A ℤ, P.Acyclic ↔ ((E.inverse.mapHomologicalComplex (.up ℤ)).obj P).Acyclic) ∧ (∀ (P Q : CochainComplex A ℤ) (s : P ⟶ Q), QuasiIso s ↔ QuasiIso ((E.inverse.mapHomologicalComplex (.up ℤ)).map s)) ∧ (∀ X : A, ObjectProperty.flat X ↔ ObjectProperty.flat (E.inverse.obj X)) ∧ (∀ P : CochainComplex A ℤ, (∀ N : CochainComplex A ℤ, N.Acyclic → (P ⊗ N).Acyclic) ↔ (∀ N : CochainComplex M ℤ, N.Acyclic → ((E.inverse.mapHomologicalComplex (.up ℤ)).obj P ⊗ N).Acyclic)) ∧ (∀ P : CochainComplex A ℤ, CochainComplex.IsKFlatForTotalTensor P ↔ CochainComplex.IsKFlatForTotalTensor ((E.inverse.mapHomologicalComplex (.up ℤ)).obj P)) ∧ (∀ P : CochainComplex M ℤ, (∀ N : CochainComplex M ℤ, N.Acyclic → (P ⊗ N).Acyclic) ↔ P.IsKFlatForTotalTensor) ∧ (∀ P : CochainComplex M ℤ, (∀ N : CochainComplex M ℤ, N.Acyclic → (P ⊗ N).Acyclic) ↔ (∀ N : CochainComplex M ℤ, N.Acyclic → (N ⊗ P).Acyclic)) ∧ (∀ P : CochainComplex A ℤ, (∀ N : CochainComplex A ℤ, N.Acyclic → (P ⊗ N).Acyclic) ↔ P.IsKFlatForTotalTensor) ∧ (∀ P : CochainComplex A ℤ, (∀ N : CochainComplex A ℤ, N.Acyclic → (P ⊗ N).Acyclic) ↔ (∀ N : CochainComplex A ℤ, N.Acyclic → (N ⊗ P).Acyclic))",
+  "branch": "newtargets-dag",
+  "by": "NI",
+  "date": "2026-10-22",
+  "existing": false,
+  "note": "Exactness of both additive functors follows from their being equivalences; no additional finite-limit or finite-colimit hypotheses are needed. The comparison and its inverse are specified by summands and the four termwise unit/counit equations."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-60f0e1544",
+  "group": "NI",
+  "result": "pass",
+  "note": "Read item, new def node def-sfb-countable-tensor-structures, all stmt_dep records and the declarations used (IsKFlatForTotalTensor two-sided arbitrary endpoints; ObjectProperty.flat two-sided; CochainComplex.Monoidal.braiding (-1)^{pq}β; HomologicalComplex.monoidalCategory instance hypotheses; Equivalence.inverseMonoidal unit/counit lemmas). Hypotheses match the node: Abelian, MonoidalPreadditive, SymmetricCategory, HasCountableCoproducts, new TensorPreservesCountableCoproducts (Type-indexed countable, empty case included), additive E with Monoidal functor, hβ in correct δ orientation; exactness automatic for an equivalence. Conclusions: τ uniquely pinned by its summand equation (F preserves the coproducts), j by degree 0, υ,k by the four unit/counit equations plus naturality, all four checked termwise against Mathlib; naturality/associator/unitor/Koszul clauses recomputed; acyclicity and qis preserved and reflected for F and G; flat equivalence; acyclic-test transfer quantified over all acyclic N; acyclic test ⇔ IsKFlatForTotalTensor and left/right tests equivalent (cone route and 0→A converse true under countable preservation). Edge cases: negative degrees, unit complex, empty coproducts, unbounded complexes. New def node not a duplicate (DAG/Lean search; termwise-strong-monoidal needs all colimits); real data, docstrings OK. Both lean.statement fields verbatim; item statement unchanged from live; no supersession or module collision; 12-step docstring; sorry only. No recompile (no file changed). Advisory: existing mapHomologicalComplexδNatTrans can be τ's witness."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F2",
+  "result": "pass",
+  "landing": "20261023T123510-L-1199406",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

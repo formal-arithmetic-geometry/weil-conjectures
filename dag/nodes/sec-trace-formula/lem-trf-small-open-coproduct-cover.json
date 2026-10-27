@@ -1,0 +1,178 @@
+{
+ "id": "lem-trf-small-open-coproduct-cover",
+ "kind": "statement",
+ "title": "A small covering subfamily of an open sheaf coproduct with an atlas",
+ "statement": "Let S be a scheme [def-pc-scheme]. On its big fppf site [def-pc-fppf-site, def-weil-pbc-sheafification], let F and F_i (i in an arbitrary Type w) be Type-u-valued sheaves, and let H with injections j_i be their given categorical coproduct [def-weil-pbc-category-colimit]. Let q:H to F be epimorphic and let iota_i=j_i q be monomorphisms representable by open immersions [def-pc-subfunctor, def-weil-open-immersion, def-trf-algebraic-space]. Suppose H is an algebraic space [def-trf-algebraic-space], but impose no diagonal or atlas hypothesis on the F_i. Then there are a type J in Type u and k:J to I such that H with the retained injections j_(k r) is still a coproduct, and every section of F over every scheme T has a u-small fppf covering on each member of which it lifts to one of the retained F_(k r). The label may vary with the covering member; empty schemes and empty index types are allowed.",
+ "source": {
+  "document": "literature/stacks-project/spaces.tex",
+  "place": "Tag 02WR, first and third proof paragraphs: local covering by summands and the set-theoretic atlas condition; the large-index reduction is expanded by the discrete two-point detector argument."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-fppf-site",
+  "def-weil-pbc-sheafification",
+  "def-trf-algebraic-space",
+  "def-pc-subfunctor",
+  "def-weil-open-immersion",
+  "def-weil-pbc-category-colimit"
+ ],
+ "proof": [
+  {
+   "text": "Choose an etale surjective scheme atlas a:h_U to H using [def-trf-algebraic-space]. This is an epimorphism of sheaves: for any scheme test h_T to H, its representable surjective etale pullback W to T is a singleton fppf cover, and the two sheaf maps being compared agree locally after this lift, hence agree by separatedness [def-weil-pbc-sites-and-cohomology]. Let K be the indices i such that F_i has a section over some nonempty scheme. If i is not in K, F_i has no sections on nonempty schemes and exactly one on empty schemes by the empty-cover axiom. There is a unique natural map from F_i to every sheaf, so F_i is initial.",
+   "uses": [
+    "def-trf-algebraic-space",
+    "def-pc-fppf-site",
+    "def-weil-pbc-sites-and-cohomology"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces.tex",
+    "place": "Tag 02WR, first and third proof paragraphs: local covering by summands and the set-theoretic atlas condition; the large-index reduction is expanded by the discrete two-point detector argument."
+   }
+  },
+  {
+   "text": "Let B be the sheaf of continuous maps to the discrete two-point space, supplied by [lem-sfb-set-continuous-functions-fpqc-sheaf], restricted to the fppf site over S. For every i in K, assign the constant-one map F_i to B and the constant-zero map on every other summand. The coproduct universal property produces chi_i:H to B. If chi_i and chi_j agree after the atlas, they agree on H by Step 1. Evaluation on a section of F_i over a nonempty scheme distinguishes one and zero when i differs from j. Thus i maps injectively to chi_i composed with a in Hom(h_U,B). Yoneda identifies this set with C(|U|,{0,1}), which is u-small. Choose an equivalence of K with J:Type u and let k:J to I be its inclusion. Each omitted summand is initial, so extending a family of maps on the retained summands by the unique maps on initial summands proves that the retained injections into H are still a colimit. This argument precedes every use of a small-index partition theorem and does not require preservation of large coproducts by coefficient lifts.",
+   "uses": [
+    "def-weil-pbc-category-colimit",
+    "lem-sfb-set-continuous-functions-fpqc-sheaf"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces.tex",
+    "place": "Tag 02WR, first and third proof paragraphs: local covering by summands and the set-theoretic atlas condition; the large-index reduction is expanded by the discrete two-point detector argument."
+   }
+  },
+  {
+   "text": "For a section t of F over T let V_i(t) be the open representing h_T times_F F_i. Its open subset is uniquely determined by the pullback property, so inverse image along g:W to T gives V_i(g*t)=g^{-1}V_i(t). Define V(t) as the union of V_(k r)(t) over r in J. Inverse image commutes with unions, so the characteristic maps of these opens give a natural morphism chi:F to O, where O(T) is the sheaf of continuous maps |T| to the Sierpinski space. It is an fppf sheaf by [lem-sfb-set-continuous-functions-fpqc-sheaf]. On F_(k r) its own pullback open is all of T, since the map lifts through itself. Therefore chi equals the constant full-open map on every retained summand. Their colimit property gives equality after q; Epi q gives equality on F. Thus V(t)=T for every test section.",
+   "uses": [
+    "def-trf-algebraic-space",
+    "def-weil-open-immersion",
+    "def-weil-pbc-category-colimit",
+    "lem-sfb-set-continuous-functions-fpqc-sheaf"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces.tex",
+    "place": "Tag 02WR, first and third proof paragraphs: local covering by summands and the set-theoretic atlas condition; the large-index reduction is expanded by the discrete two-point detector argument."
+   }
+  },
+  {
+   "text": "For each point x of T, choose r with x in V_(k r)(t). The corresponding open neighbourhoods, indexed by the u-small underlying set of T, cover T. They are a Zariski cover, hence an fppf cover by [lem-pc-zariski-coverings-are-fppf]. The universal section of each represented pullback gives the required section in F_(k r) whose image is t restricted to that neighbourhood. When T is empty, take the empty cover; when J is empty Step 3 forces T empty. Empty summands have already been omitted, and repeated nonempty summands are distinguished by the detector maps before their images in F are considered.",
+   "uses": [
+    "lem-pc-zariski-coverings-are-fppf",
+    "def-weil-open-immersion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces.tex",
+    "place": "Tag 02WR, first and third proof paragraphs: local covering by summands and the set-theoretic atlas condition; the large-index reduction is expanded by the discrete two-point detector argument."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-fppf-site",
+  "def-trf-algebraic-space",
+  "def-weil-open-immersion",
+  "def-weil-pbc-category-colimit",
+  "def-weil-pbc-sites-and-cohomology",
+  "lem-pc-zariski-coverings-are-fppf",
+  "lem-sfb-set-continuous-functions-fpqc-sheaf"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/spaces.tex",
+  "place": "Tag 02WR local-cover and atlas arguments; the explicit universe reduction and open-image cancellation argument are expanded by R5."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A coproduct of sheaves with a surjective scheme atlas has a small set of nonempty summands",
+   "results": "; AlgebraicGeometry.LocallyRingedSpace.coproduct, CategoryTheory.Sheaf.instHasFiniteCoproducts, AlgebraicGeometry.instHasFiniteCoproductsScheme, CategoryTheory.Sheaf.instHasFiniteColimits, AlgebraicGeometry.instHasCoproductsOfShapeOverSchemeTopMorphismPropertyOfSmall, AlgebraicGeometry.Surjective.sigmaDesc_of_union_range_eq_univ, AlgebraicGeometry.LocallyRingedSpace.instHasColimitsOfShapeDiscrete, CategoryTheory.Sheaf.instHasColimitsOfSize",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits do not assert a small covering subfamily for this large-index coproduct"
+  },
+  {
+   "tool": "loogle",
+   "query": "IsColimit, Small",
+   "results": "loogle: unknown identifier 'IsColimit'; ",
+   "date": "2026-10-23",
+   "verdict": "query rejected (unknown identifier); not evidence of absence"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An open sheaf coproduct with a small scheme atlas has a small covering subfamily of nonempty summands",
+   "results": "; AlgebraicGeometry.sigmaOpenCover, AlgebraicGeometry.sigmaOpenCover_I₀, AlgebraicGeometry.sigmaOpenCover_X, AlgebraicGeometry.coprodOpenCover, AlgebraicGeometry.Scheme.instSmallPrecoverage, AlgebraicGeometry.Scheme.IsLocallyDirected.openCover, AlgebraicGeometry.Scheme.Cover.sigma, AlgebraicGeometry.sigmaOpenCover_f",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits do not assert a small covering subfamily for this large-index coproduct"
+  },
+  {
+   "tool": "grep",
+   "query": "small.*coproduct|coproduct.*small",
+   "results": "; Mathlib/CategoryTheory/Subobject/Lattice.lean, Mathlib/CategoryTheory/Subobject/Lattice.lean, Mathlib/CategoryTheory/Subobject/Lattice.lean, Mathlib/CategoryTheory/Subobject/Lattice.lean, Mathlib/CategoryTheory/Subobject/Lattice.lean, Mathlib/CategoryTheory/Presentable/OrthogonalReflection.lean, Mathlib/CategoryTheory/Presentable/OrthogonalReflection.lean, Mathlib/CategoryTheory/Presentable/Presheaf.lean",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits do not assert a small covering subfamily for this large-index coproduct"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.AlgebraicSpaceOpenGluing",
+  "date": "2026-10-23",
+  "group": "R5"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Tag 02WR local covering and the atlas size condition in the auxiliary open-gluing step of the quotient-by-etale-relation branch of lem-trf-local-term-locality; preserves the recorded ancestry and unit route.",
+   "via": [
+    "lem-trf-algebraic-space-open-gluing",
+    "lem-trf-etale-relation-quotient",
+    "lem-trf-polarized-scheme-etale-descent",
+    "lem-trf-polarized-fine-log-etale-descent",
+    "lem-trf-coherent-log-ideal-chart-construction",
+    "lem-trf-log-blowup-normalization",
+    "lem-trf-log-regular-desingularization",
+    "lem-trf-nodal-pair-projective-resolution",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.SmallOpenCoproductCover",
+  "file": "lean/Sheaf/AlgebraicGeometry/SmallOpenCoproductCover.lean",
+  "declaration": "AlgebraicGeometry.small_open_coproduct_cover",
+  "statement": "theorem small_open_coproduct_cover {S : Scheme.{u}}\n    (F : Sheaf (Scheme.fppfTopology.over S) (Type u)) (I : Type w)\n    (Fi : I → Sheaf (Scheme.fppfTopology.over S) (Type u))\n    (H : Sheaf (Scheme.fppfTopology.over S) (Type u))\n    (j : ∀ i : I, Fi i ⟶ H) (hcol : IsColimit (Cofan.mk H j))\n    (ι : ∀ i : I, Fi i ⟶ F) (q : H ⟶ F)\n    (hfac : ∀ i : I, j i ≫ q = ι i) (hmono : ∀ i : I, Mono (ι i))\n    (hopen : ∀ i : I, AlgebraicSpace.IsRepresentableWith\n      (fun _ _ p ↦ IsOpenImmersion p.left) (ι i).hom)\n    (hq : Epi q) (hcop : AlgebraicSpace.IsAlgebraicSpace H) :\n    ∃ (J : Type u) (k : J → I),\n      Nonempty (IsColimit (Cofan.mk H (fun r ↦ j (k r)))) ∧\n      ∀ (T : Over S) (a : F.obj.obj (op T)),\n        ∃ (𝒰 : Scheme.Cover.{u} Scheme.fppfPrecoverage T.left) (l : 𝒰.I₀ → J),\n          ∀ r : 𝒰.I₀,\n            F.obj.map (Over.homMk (𝒰.f r) rfl : Over.mk (𝒰.f r ≫ T.hom) ⟶ T).op a ∈\n              Set.range ((ι (k (l r))).hom.app (op (Over.mk (𝒰.f r ≫ T.hom))))",
+  "branch": "sheaf-dag",
+  "by": "R5",
+  "date": "2026-10-23"
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R5",
+  "result": "pass",
+  "landing": "20261023T151952-L-428064",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R5",
+  "result": "pass",
+  "landing": "20261023T151952-L-428064",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

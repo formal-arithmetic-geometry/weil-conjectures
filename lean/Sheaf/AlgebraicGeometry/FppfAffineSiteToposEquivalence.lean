@@ -7,7 +7,7 @@ module
 public import Mathlib.AlgebraicGeometry.Sites.Fpqc
 public import Mathlib.CategoryTheory.Sites.Over
 public import Mathlib.CategoryTheory.Sites.DenseSubsite.SheafEquiv
-import Sheaf.AlgebraicGeometry.FppfAffineRefinement
+import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.Fpqc
 
 /-!
 # Equivalence of the affine and big fppf sites

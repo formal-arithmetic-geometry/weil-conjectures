@@ -1,0 +1,125 @@
+{
+ "id": "def-fd-integral-scalar-shift-structures",
+ "kind": "definition",
+ "title": "Canonical ambient and integral scalar shift comparisons",
+ "status": "split",
+ "import_flags": [],
+ "statement": "Fix a prime $\\ell$, an algebraic closure $\\Omega$ of $\\mathbf Q_\\ell$, a Noetherian scheme $T$ of finite dimension on which $\\ell$ is invertible, and finite coefficient fields $E\\subseteq F\\subset\\Omega$. Use the ambient completed-coefficient scalar extension of [def-weil-pbc-finite-completed-coefficient-map], its integral bounded constructible complete full subcategory of [def-weil-pbc-bounded-constructible-complete], and the fixed integer shifts of [def-per-common-stage-shift-structures]. Define the scalar-restriction shift comparison by the degreewise restriction functor on complexes. Define the ambient scalar-extension shift comparison as its left-adjoint mate under derived scalar extension and restriction. Define the shift comparison on the integral scalar-extension restriction by lifting the ambient comparison through the fully faithful integral inclusion; its composite with that inclusion is the ambient comparison. These are the existing normalized data, with independent scheme and algebraic-closure universes.",
+ "stmt_deps": [
+  "def-weil-pbc-finite-completed-coefficient-map",
+  "def-weil-pbc-bounded-constructible-complete",
+  "def-per-common-stage-shift-structures"
+ ],
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-fourier-transform/sk-cor-plancherel/def-fd-trace-function.md",
+  "place": "Finite-dimensional algebraically closed coefficient stalks: the integral scalar shift data required by the raw coefficient comparison, extracted in lem-fd-raw-localization-scalar-coherence; published implementation CommonStageCalculus, blueprint order 1307."
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Canonical shift on derived scalar extension and its restriction to a full subcategory",
+   "results": "8 hits: ModuleCat.ExtendRestrictScalarsAdj.unit; DerivedCategory.instLinearShiftFunctorInt; DerivedCategory.instHasShiftInt; ModuleCat.RestrictionCoextensionAdj.HomEquiv.toRestriction; DerivedCategory.instAdditiveShiftFunctorInt; CategoryTheory.Functor.CommShift.ofHasShiftOfFullyFaithful; CategoryTheory.HasShift.induced; ModuleCat.RestrictionCoextensionAdj.app'.",
+   "date": "2026-10-24",
+   "verdict": "Reuse the exact existing project constructors; attach definition ownership without creating any second implementation."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Canonical shift comparison of derived extension of scalars restricted to constructible full subcategories",
+   "results": "8 hits: CategoryTheory.Functor.instCommShiftDerivedCategoryMapDerivedCategoryInt; CategoryTheory.Functor.instLinearDerivedCategoryMapDerivedCategory; CategoryTheory.Functor.mapExactFunctor_smul; CategoryTheory.Functor.mapDerivedCategorySingleFunctor; CategoryTheory.Shift.linear_of_localization; CategoryTheory.Functor.instCommShiftCochainComplexIntDerivedCategoryHomMapDerivedCategoryFactors; CategoryTheory.Functor.instCommShiftHomologicalComplexIntUpFunctorQuasiIsoMapHomologicalComplexUpToQuasiIsoLocalizerMorphism; CategoryTheory.Functor.mapExtLinearMap_apply.",
+   "date": "2026-10-24",
+   "verdict": "Reuse the exact existing project constructors; attach definition ownership without creating any second implementation."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.CommShift, CategoryTheory.Functor.CommShift.ofComp",
+   "results": "2 hits: CategoryTheory.Functor.CommShift.ofComp; CategoryTheory.Functor.CommShift.ofComp_compatibility.",
+   "date": "2026-10-24",
+   "verdict": "Reuse the exact existing project constructors; attach definition ownership without creating any second implementation."
+  },
+  {
+   "tool": "grep",
+   "query": "leftAdjointCommShift|CommShift.ofComp (Mathlib/CategoryTheory)",
+   "results": "8 hits in CategoryTheory/ObjectProperty/Shift.lean:211,215; CategoryTheory/Shift/CommShift.lean:531; CategoryTheory/Shift/Adjunction.lean:413,453,459,468,470. Generic constructions only.",
+   "date": "2026-10-24",
+   "verdict": "Reuse the exact existing project constructors; attach definition ownership without creating any second implementation."
+  },
+  {
+   "tool": "grep",
+   "query": "rg -l pbcIntegralScalarCommShift|pbcAmbientScalarCommShift dag/nodes; blueprint_refs.py search integral scalar shift",
+   "results": "Only prop-weil-pbc-common-stage-calculus lists these declarations; no definition-node owner. Blueprint search: 0 nodes match.",
+   "date": "2026-10-24",
+   "verdict": "Reuse the exact existing project constructors; attach definition ownership without creating any second implementation."
+  },
+  {
+   "tool": "grep",
+   "query": "rg -n pbcIntegralScalarCommShift|pbcAmbientScalarCommShift lean/WeilConjectures lean/Sheaf",
+   "results": "No hits in WeilConjectures. CommonStageCalculus.lean:645,651 defines the exact instances; PbcDirectImageFamilyShiftCompatible.lean:151 uses the ambient instance.",
+   "date": "2026-10-24",
+   "verdict": "Reuse the exact existing project constructors; attach definition ownership without creating any second implementation."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-fd-raw-localization-scalar-coherence",
+  "date": "2026-10-24",
+  "group": "Q63"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "def-fd-trace-function",
+   "place": "Final coefficient-category sentence; specified integral scalar shifts in the inverse completion comparison before raw localization.",
+   "via": [
+    "lem-fd-raw-localization-scalar-coherence",
+    "lem-fd-completion-inverse-scalar-coherence",
+    "lem-fd-rational-coefficient-category-comparison"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-fourier-transform",
+ "unit": "sk-def-trace",
+ "lean": {
+  "module": "Sheaf.Paper.CommonStageCalculus",
+  "declaration": "AlgebraicGeometry.Scheme.pbcIntegralScalarCommShift",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.pbcScalarRestrictCommShift",
+   "AlgebraicGeometry.Scheme.pbcAmbientScalarCommShift",
+   "AlgebraicGeometry.Scheme.pbcIntegralScalarCommShift"
+  ],
+  "statement": "instance pbcIntegralScalarCommShift (h : E ≤ F) :\n    (pbcIntegralScalarExtension l Ω T hdim hl h).CommShift ℤ",
+  "branch": "newtargets-dag",
+  "by": "Q63",
+  "date": "2026-10-24",
+  "existing": true,
+  "note": "Definition attachment requested by H2 of the independent return on c57e5c6c62bd. These are real-data instances already implemented in CommonStageCalculus: restriction on complexes, its adjunction mate, and Functor.CommShift.ofComp through the integral inclusion. The theorem prop-weil-pbc-common-stage-calculus is not needed as a statement dependency for these data."
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-21917c121",
+  "group": "Q63",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-21917c121",
+  "group": "Q63",
+  "result": "pass",
+  "note": "Re-delivery after the c57e RETURN; all three findings are repaired. F1: prop-weil-pbc-common-stage-calculus is dropped from stmt_deps; the item cites def-per-common-stage-shift-structures and the new existing:true def-fd-integral-scalar-shift-structures, which owns pbcScalarRestrictCommShift/pbcAmbientScalarCommShift/pbcIntegralScalarCommShift (real data at CommonStageCalculus:636-656, statement verbatim; its stmt_deps and source file exist; no competing owner has landed). F2: def-weil-algebraically-closed-coefficients and def-fd-coefficient-comparison-datum are cited. F3: scalar/assoc/unit/scalarCommShift are abbrevs of the owner's transition/associator/unitor/transitionCommShift and the duplicate ∃! theorem is deleted; RationalFamily is unique, satisfiable HEq presentation transport as in the landed parent. Checked every clause against the node: b direction, hlift = the parent's chi, the cocycle types, hunit = completeness after multiplication, j = Q_L(b⁻¹) ≫ pbcScalarIntegralComparison.inv (the inverse of the parent's scalar_lift), the unit value, the three-field equation, both unit squares, D and both contractions, and their equality. All quantifiers use ≤, so repeated fields are covered; universes are independent. lean.statement is verbatim and lean.declarations matches the file; the only sorry is the item theorem; docstrings are fine. No file changed, no compile. Advisories: def-weil-pbc-finite-stage-pair-category is reached only transitively (same as the landed siblings); four theorem stmt_deps are named in the node text; U/uCommShift are definitionally integralTransition/integralTransitionCommShift; the new node cites its source from a different blueprint folder than the item."
+ }
+}

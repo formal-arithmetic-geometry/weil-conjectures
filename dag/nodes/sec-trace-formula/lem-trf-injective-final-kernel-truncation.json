@@ -1,0 +1,249 @@
+{
+ "id": "lem-trf-injective-final-kernel-truncation",
+ "kind": "statement",
+ "title": "Bounded augmented truncation at an injective final kernel",
+ "statement": "Let $R$ be a commutative ring and $N$ an $R$-module, in a common universe. Let $I^\\bullet$ be an integer-indexed cochain complex, zero in negative degrees, with injective terms, and let $\\varepsilon:N\\to I^0$ make $0\\to N\\xrightarrow{\\varepsilon}I^0\\xrightarrow{\\partial^0}I^1\\to\\cdots$ exact [def-sp-injective-resolutions, def-weil-abstract-derived-category]. Fix an integer $d\\geq0$ and suppose that $J=\\ker(\\partial^d:I^d\\to I^{d+1})$ is injective. Define the graded modules $L^j=I^j$ for $0\\leq j<d$, $L^d=J$, and $L^j=0$ otherwise. There are differentials making $L^\\bullet$ a cochain complex, equal to $\\partial^j$ for $0\\leq j<d-1$ and equal to the corestriction $I^{d-1}\\to J$ of $\\partial^{d-1}$ when $d>0$, all remaining differentials being zero. There is a chain map $\\lambda:L^\\bullet\\to I^\\bullet$ which is the identity in degrees $0\\leq j<d$, the inclusion $J\\hookrightarrow I^d$ in degree $d$, and zero in other degrees, and an augmentation $e:N[0]\\to L^\\bullet$ satisfying $\\lambda e=\\varepsilon$. Here $e^0=\\varepsilon$ if $d>0$, while for $d=0$ it is the induced isomorphism $N\\xrightarrow{\\sim}J$. The augmentation $e$ is a quasi-isomorphism, every term of $L^\\bullet$ is injective, and $L^j=0$ outside $[0,d]$. In particular $e$ induces an isomorphism $N[0]\\cong L^\\bullet$ in the derived category $D(R)$ [def-weil-abstract-derived-category].",
+ "source": {
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tag 0A5T, lemma-injective-amplitude, proof of (3) implies (1), final-kernel injectivity and truncation."
+ },
+ "stmt_deps": [
+  "def-sp-injective-resolutions",
+  "def-weil-abstract-derived-category"
+ ],
+ "proof": [
+  {
+   "text": "For $d>0$, define $\\delta^{d-1}(x)=\\partial^{d-1}(x)$ regarded as an element of $J$. This is well-defined since $\\partial^d\\partial^{d-1}(x)=0$, and is $R$-linear because $J$ is a submodule. Use the prescribed retained differentials and zero elsewhere. Consecutive retained maps compose to zero; at $j=d-2$ the composite is $\\partial^{d-1}\\partial^{d-2}=0$ with codomain restricted to $J$. Every other composite involving a zero map is zero. For $d=0$ all maps are zero. Thus $\\delta^2=0$ in every case.",
+   "uses": [
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0A5T, lemma-injective-amplitude, proof of (3) implies (1): the complex ending in J; explicit module-level verification of that truncation."
+   }
+  },
+  {
+   "text": "Define $\\lambda^j$ by the stated identities, inclusion, and zero maps. For $0\\le j<d-1$ its chain-map equation is an identity. At $j=d-1$ it is the defining equation for the corestriction. At $j=d$ it says $\\partial^d|_J=0$, true by the definition of $J$. At every other $j$ both sides vanish. When $d=0$, the same kernel identity handles degree zero and the other equations are zero. Hence $\\lambda$ is a chain map.",
+   "uses": [
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0A5T, lemma-injective-amplitude, proof of (3) implies (1): the complex ending in J; explicit module-level verification of that truncation."
+   }
+  },
+  {
+   "text": "Exactness of the given augmented sequence says that $\\varepsilon$ is injective and $\\operatorname{im}\\varepsilon=\\ker\\partial^0$. If $d>0$, set $e^0=\\varepsilon$ and $e^j=0$ for $j\\ne0$. For $d>1$ the equation $\\delta^0e^0=0$ is $\\partial^0\\varepsilon=0$; for $d=1$ it is the same equation corestricted to $J$. Thus $e:N[0]\\to L$ is a chain map. If $d=0$, corestrict $\\varepsilon$ to $J=\\ker\\partial^0$: it is injective and surjective by the preceding equalities, so is the asserted $R$-linear isomorphism. It also defines a chain map. Degreewise, $\\lambda e=\\varepsilon$.",
+   "uses": [
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0A5T, lemma-injective-amplitude, proof of (3) implies (1): the complex ending in J; explicit module-level verification of that truncation."
+   }
+  },
+  {
+   "text": "Assume $d>0$. For $0<j<d-1$, $\\ker\\delta^j=\\ker\\partial^j$ and $\\operatorname{im}\\delta^{j-1}=\\operatorname{im}\\partial^{j-1}$, so $H^j(L)=0$ by exactness of the given sequence. If $d>1$, the same holds at $j=d-1$, since corestricting a map to a submodule of its codomain does not change its kernel: an element maps to zero there exactly when its image in the original codomain is zero. At $j=d$, $\\ker\\delta^d=J$ and $\\operatorname{im}\\delta^{d-1}=J$ by exactness at $I^d$, so $H^d(L)=J/J=0$.",
+   "uses": [
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0A5T, lemma-injective-amplitude, proof of (3) implies (1): the complex ending in J; explicit module-level verification of that truncation."
+   }
+  },
+  {
+   "text": "For $d>0$, the degree-zero incoming differential is zero and $\\ker\\delta^0=\\ker\\partial^0=\\operatorname{im}\\varepsilon$; when $d=1$, the kernel equality again uses the inclusion $J\\hookrightarrow I^1$. Hence $H^0(e)$ is an isomorphism, using injectivity of $\\varepsilon$. Outside $[0,d]$ the terms, and therefore cohomology, vanish. Together with the preceding step this proves $e$ is a quasi-isomorphism. For $d=0$, $L=J[0]$ and the isomorphism $e^0$ already gives this conclusion.",
+   "uses": [
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0A5T, lemma-injective-amplitude, proof of (3) implies (1): the complex ending in J; explicit module-level verification of that truncation."
+   }
+  },
+  {
+   "text": "For $0\\le j<d$, $L^j=I^j$ is injective by hypothesis; $L^d=J$ is injective by hypothesis. Every remaining term is zero. The zero module is injective directly from the extension definition: a map $M\\to0$ is zero and extends along any monomorphism $M\\hookrightarrow P$ by the zero map $P\\to0$. Thus all terms are injective and the stated support is $[0,d]$, also when $d=0$.",
+   "uses": [
+    "def-sp-injective-resolutions"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0A5T, lemma-injective-amplitude, proof of (3) implies (1): the complex ending in J; explicit module-level verification of that truncation."
+   }
+  },
+  {
+   "text": "By the localization definition of $D(R)$, the quasi-isomorphism $e$ is inverted by $Q$, so $Q(e):N[0]\\to Q(L)$ is an isomorphism. This is the claimed derived-category isomorphism induced by the prescribed augmentation.",
+   "uses": [
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0A5T, lemma-injective-amplitude, proof of (3) implies (1): the complex ending in J; explicit module-level verification of that truncation."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-abstract-derived-category",
+  "def-sp-injective-resolutions"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tag 0A5T, lemma-injective-amplitude, proof of (3) implies (1): the complex ending in J; explicit module-level verification of that truncation."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "truncLE|quasiIso.*trunc|trunc.*injective",
+   "results": "25 hits; top=['Mathlib/Algebra/Homology/Factorizations/CM5a.lean', 'Mathlib/Algebra/Homology/Factorizations/CM5a.lean', 'Mathlib/Algebra/Homology/Factorizations/CM5a.lean', 'Mathlib/Algebra/Homology/Factorizations/CM5a.lean', 'Mathlib/Algebra/Homology/Factorizations/CM5a.lean', 'Mathlib/Algebra/Homology/Augment.lean', 'Mathlib/Algebra/Homology/Embedding/CochainComplex.lean', 'Mathlib/Algebra/Homology/Embedding/CochainComplex.lean']; subdirectory=Algebra/Homology; note=; digest=81abbba24e4e48eb",
+   "date": "2026-10-22",
+   "verdict": "no match: truncLE and its homology and term isomorphisms provide a candidate implementation, but no single result or one-line specialization gives the prescribed augmented truncation, its factorization through the given augmentation, support, and injectivity of every term."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Smart truncation of an injective resolution at an injective cycle is a bounded complex of injectives quasi-isomorphic to the module",
+   "results": "8 hits; top=['CategoryTheory.InjectiveResolution.self', 'CategoryTheory.InjectiveResolution.of_def', 'CategoryTheory.InjectiveResolution.ofCocomplex', 'HomologicalComplex.instMonoFιTruncLE', \"HomologicalComplex.truncGE'.quasiIsoAt_restrictionToTruncGE'\", 'HomologicalComplex.instMonoιTruncLE', 'HomologicalComplex.instQuasiIsoAtιTruncLEF', 'CochainComplex.instQuasiIsoIntιTruncLEOfIsLE']; subdirectory=; note=; digest=3189c54050dc83dd",
+   "date": "2026-10-22",
+   "verdict": "no match: truncLE and its homology and term isomorphisms provide a candidate implementation, but no single result or one-line specialization gives the prescribed augmented truncation, its factorization through the given augmentation, support, and injectivity of every term."
+  },
+  {
+   "tool": "loogle",
+   "query": "CochainComplex.truncLE",
+   "results": "12 hits; top=['CochainComplex.truncLE', 'CochainComplex.acyclic_truncLE_iff', 'CochainComplex.instIsIsoIntιTruncLEOfIsStrictlyLE', 'CochainComplex.isIso_ιTruncLE_iff', 'CochainComplex.truncLEXIsoCycles', 'CochainComplex.truncLEXIso', 'CochainComplex.instQuasiIsoAtIntιTruncLE', 'CochainComplex.ιTruncLE']; subdirectory=; note=; digest=21f6674124c25394",
+   "date": "2026-10-22",
+   "verdict": "no match: truncLE and its homology and term isomorphisms provide a candidate implementation, but no single result or one-line specialization gives the prescribed augmented truncation, its factorization through the given augmentation, support, and injectivity of every term."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An injective resolution with an injective kernel in degree n can be truncated at that kernel to give a bounded injective resolution",
+   "results": "8 hits; top=['CategoryTheory.InjectiveResolution.instInjectiveXIntCochainComplex', 'CategoryTheory.InjectiveResolution.injective', 'CategoryTheory.InjectiveResolution.instIsKInjectiveCochainComplex', 'CategoryTheory.InjectiveResolution.instInjectiveXNatOfCocomplex', 'CategoryTheory.InjectiveResolution.ofCocomplex', 'CategoryTheory.InjectiveResolution.instHasInjectiveResolution', 'CategoryTheory.InjectiveResolution.of', 'CochainComplex.cm5b.instInjectiveXIntI']; subdirectory=; note=; digest=d3e7e1b2eee12e28",
+   "date": "2026-10-22",
+   "verdict": "no match: truncLE and its homology and term isomorphisms provide a candidate implementation, but no single result or one-line specialization gives the prescribed augmented truncation, its factorization through the given augmentation, support, and injectivity of every term."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The smart truncation of an exact augmented injective resolution at an injective final kernel admits an augmentation quasi-isomorphism and vanishes outside degrees zero through d",
+   "results": "8 hits; top=['DerivedCategory.to_singleFunctor_obj_eq_zero_of_injective', \"CategoryTheory.InjectiveResolution.instQuasiIsoIntι'\", 'CochainComplex.isKInjective_of_injective', 'CategoryTheory.InjectiveResolution.ofCocomplex_exactAt_succ', 'CategoryTheory.InjectiveResolution.exact₀', 'CategoryTheory.Functor.isZero_rightDerived_obj_injective_succ', 'CategoryTheory.InjectiveResolution.quasiIso', 'CochainComplex.truncateAugment']; subdirectory=; note=; digest=5945c38164f083ad",
+   "date": "2026-10-22",
+   "verdict": "no match: truncLE and its homology and term isomorphisms provide a candidate implementation, but no single result or one-line specialization gives the prescribed augmented truncation, its factorization through the given augmentation, support, and injectivity of every term."
+  },
+  {
+   "tool": "grep",
+   "query": "truncLE|truncateAugment",
+   "results": "25 hits; top=['Mathlib/Algebra/Homology/Augment.lean', 'Mathlib/Algebra/Homology/Augment.lean', 'Mathlib/Algebra/Homology/Augment.lean', 'Mathlib/Algebra/Homology/Augment.lean', 'Mathlib/Algebra/Homology/Augment.lean', 'Mathlib/Algebra/Homology/DerivedCategory/TStructure.lean', 'Mathlib/Algebra/Homology/DerivedCategory/TStructure.lean', 'Mathlib/Algebra/Homology/DerivedCategory/TStructure.lean']; subdirectory=Algebra/Homology; note=; digest=4d007db87d5d3e54",
+   "date": "2026-10-23",
+   "verdict": "no match: upper truncation, cycle-term and quasi-isomorphism APIs are partial candidates; no exact result supplies the specified augmented construction with factorization, injectivity and support. InjectiveResolution.self only concerns an injective module, not the arbitrary given resolution."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Smart truncation of an injective resolution at an injective final kernel gives a bounded injective resolution with the same augmentation",
+   "results": "8 hits; top=['CategoryTheory.InjectiveResolution.self', 'CategoryTheory.InjectiveResolution.of', 'CategoryTheory.InjectiveResolution.ofCocomplex', 'CategoryTheory.InjectiveResolution.of_def', 'ChainComplex.truncateAugment', 'CategoryTheory.InjectiveResolution.instHasInjectiveResolutions', 'HomologicalComplex.instMonoFιTruncLE', 'HomologicalComplex.stupidTruncMap']; subdirectory=; note=; digest=c85193347b78a186",
+   "date": "2026-10-23",
+   "verdict": "no match: upper truncation, cycle-term and quasi-isomorphism APIs are partial candidates; no exact result supplies the specified augmented construction with factorization, injectivity and support. InjectiveResolution.self only concerns an injective module, not the arbitrary given resolution."
+  },
+  {
+   "tool": "loogle",
+   "query": "CochainComplex.truncLE",
+   "results": "12 hits; top=['CochainComplex.truncLE', 'CochainComplex.acyclic_truncLE_iff', 'CochainComplex.instIsIsoIntιTruncLEOfIsStrictlyLE', 'CochainComplex.isIso_ιTruncLE_iff', 'CochainComplex.truncLEXIsoCycles', 'CochainComplex.truncLEXIso', 'CochainComplex.instQuasiIsoAtIntιTruncLE', 'CochainComplex.ιTruncLE']; subdirectory=; note=; digest=21f6674124c25394",
+   "date": "2026-10-23",
+   "verdict": "no match: upper truncation, cycle-term and quasi-isomorphism APIs are partial candidates; no exact result supplies the specified augmented construction with factorization, injectivity and support. InjectiveResolution.self only concerns an injective module, not the arbitrary given resolution."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Truncate an augmented injective resolution at an injective cycle kernel to obtain a bounded injective complex with a quasi-isomorphic augmentation",
+   "results": "8 hits; top=['CochainComplex.cm5b.I', 'CategoryTheory.InjectiveResolution.ofCocomplex', 'CategoryTheory.InjectiveResolution.of_def', 'CategoryTheory.HasInjectiveResolutions.out', 'CategoryTheory.InjectiveResolution.of', 'CategoryTheory.injectiveResolution', 'CategoryTheory.InjectiveResolution.self', 'CategoryTheory.InjectiveResolution.instHasInjectiveResolution']; subdirectory=; note=; digest=1925f0c6b10e1baa",
+   "date": "2026-10-23",
+   "verdict": "no match: upper truncation, cycle-term and quasi-isomorphism APIs are partial candidates; no exact result supplies the specified augmented construction with factorization, injectivity and support. InjectiveResolution.self only concerns an injective module, not the arbitrary given resolution."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Canonical upper truncation of a cochain complex at degree d preserves homology in degrees at most d and has the cycle module as its last term",
+   "results": "8 hits; top=['CochainComplex.truncLE', 'CochainComplex.truncGE', 'CochainComplex.shortComplexTruncLE', 'CochainComplex.πTruncGE', 'CochainComplex.ιTruncLE', 'CochainComplex.instQuasiIsoIntιTruncLEOfIsLE', \"HomologicalComplex.truncGE'.homologyData\", 'CochainComplex.instQuasiIsoIntπTruncGEOfIsGE']; subdirectory=; note=; digest=cdab7d648cce7ee9",
+   "date": "2026-10-23",
+   "verdict": "no match: upper truncation, cycle-term and quasi-isomorphism APIs are partial candidates; no exact result supplies the specified augmented construction with factorization, injectivity and support. InjectiveResolution.self only concerns an injective module, not the arbitrary given resolution."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-regular-local-bounded-injective-resolution",
+  "date": "2026-10-22",
+  "group": "Q119"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "mathlib_candidate": {
+  "declaration": "CochainComplex.truncLE; CochainComplex.truncLEXIsoCycles; CochainComplex.instQuasiIsoIntιTruncLEOfIsLE",
+  "file": "Mathlib/Algebra/Homology/Embedding/CochainComplex.lean",
+  "note": "Partial API for the truncation and quasi-isomorphism of its inclusion; still requires constructing the specified augmentation, proving its quasi-isomorphism, transporting term injectivity, and checking both support bounds."
+ },
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Proof (1)--(2), semistable-alteration input in the nearby-cycle branch: ILO Exposé X, Theorem 3.4, Step 3, invoking Temkin 2010, Theorems 1.5 and 1.1 for a semistable multipointed modification. Temkin proof component: Marked dualizing line bundle and contracted-component degrees. Auxiliary input: Local complete-intersection determinant adjunction underlying the marked dualizing construction, before the marking is inserted. More precisely: coherent relative-duality polynomial-chart input; Rigidity of already given coherent relative dualizing pairs. Affine reduction and rigidity: Unnormalized isomorphism of algebraic relative dualizing objects. Repair of its affine uniqueness input: Derived Hom from a semidualizing complex detects bounded coherent isomorphisms. Auxiliary algebraic input: Coherent biduality over a complete Noetherian local ring. Supporting input: Existence over a regular local Cohen presentation, in the proof of dualizing.tex Tag 0BFR case (2). Re-split of its regular-local algebra input: old proof step 6: explicit last differential, augmentation, cohomology calculation including d=0, injectivity of all terms, and derived localization.",
+   "via": [
+    "lem-trf-regular-local-bounded-injective-resolution",
+    "lem-trf-complete-local-coherent-duality",
+    "lem-trf-semidualizing-rhom-conservative",
+    "lem-trf-algebraic-relative-dualizing-isomorphism",
+    "lem-trf-relative-dualizing-pair-rigidity",
+    "lem-trf-relative-duality-polynomial-chart",
+    "lem-trf-flat-lci-canonical-adjunction",
+    "lem-trf-marked-nodal-dualizing-degrees",
+    "lem-trf-temkin-stable-modification",
+    "lem-trf-stable-modification-flat-curve-pair",
+    "lem-trf-dejong-relative-marked-semistable",
+    "lem-trf-relative-marked-nodal-reduction",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-trf-injective-final-kernel-truncation",
+  "worker": "stage1",
+  "summary": "Expanded the final-kernel truncation of Stacks Tag 0A5T into explicit differentials, componentwise chain-map and augmentation equations, cohomology in all degrees including d=0 and d=1, termwise injectivity, and localization. Every step is elementary from the two existing definition nodes; no new lemma nodes are needed. Searched the live project for an exact attachment and recorded fresh semantic, Loogle and Mathlib grep searches; no result covers the whole specified augmented construction. Statement unchanged.",
+  "blueprint": "Proof (1)--(2), semistable-alteration input in the nearby-cycle branch: ILO Exposé X, Theorem 3.4, Step 3, invoking Temkin 2010, Theorems 1.5 and 1.1 for a semistable multipointed modification. Temkin proof component: Marked dualizing line bundle and contracted-component degrees. Auxiliary input: Local complete-intersection determinant adjunction underlying the marked dualizing construction, before the marking is inserted. More precisely: coherent relative-duality polynomial-chart input; Rigidity of already given coherent relative dualizing pairs. Affine reduction and rigidity: Unnormalized isomorphism of algebraic relative dualizing objects. Repair of its affine uniqueness input: Derived Hom from a semidualizing complex detects bounded coherent isomorphisms. Auxiliary algebraic input: Coherent biduality over a complete Noetherian local ring. Supporting input: Existence over a regular local Cohen presentation, in the proof of dualizing.tex Tag 0BFR case (2). Re-split of its regular-local algebra input: old proof step 6: explicit last differential, augmentation, cohomology calculation including d=0, injectivity of all terms, and derived localization. The seven steps supply the final-kernel truncation assembly in that supporting algebra input; they do not change the contracting-correspondence route.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q132-69bf04918",
+  "group": "Q132",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q132-69bf04918 (reviewer sub-agent of L); spot-checked: I read the item, both cited definitions and the source, and the split is sound with no fixes. Source: Stacks more-algebra.tex, lemma-injective-amplitude (Tag 0A5T), proof of (3)⇒(1), the sentence 'K is quasi-isomorphic to … I^{b-1}→J→0'. The item states this with a=0 and K=N[0], and takes injectivity of J as a hypothesis; the existing node lem-trf-injective-resolution-final-kernel proves that injectivity. The delivery is one commit with the item and a report that has its Review section. It adds no new nodes and leaves the statement unchanged. Mathlib searches cover LeanSearch, LeanFinder/Loogle and grep; truncLE is recorded as a partial candidate and is correctly not a leaf. I read def-sp-injective-resolutions (injective object by extension) and def-weil-abstract-derived-category (complexes, H=ker/im, quasi-isomorphism, D as localisation) in full; they give exactly what the 7 elementary steps use. Step checks: (1) the corestriction is well defined since ∂^d∂^{d-1}=0, and δ^{d-1}δ^{d-2}=0 holds in J. (2) λ is a chain map at j=d-1 by the corestriction and at j=d by ∂^d ι=0. (3) e is a chain map for d≥2 and for d=1 (corestricted), and for d=0 ε:N→J is a bijection by exactness; λe=ε. (4) H^j=0 for 0<j<d (corestriction keeps the kernel), and H^d=J/J by exactness at I^d (d≥1). (5) H^0(L)=ker∂^0=im ε. (6) the zero module is injective. (7) Q inverts quasi-isomorphisms. Small cases d=0,1,2, N=0, and ℤ→(ℚ→ℚ/ℤ) are consistent. Parent step 5 (regular-local bounded injective resolution) uses exactly these clauses, including d=0. Duplicate search (0A5T, final kernel, bounded injective, def-kun-truncations, lem-sf-degree-zero-complex-replacement): none found. No SGA citation, and the proof uses definition nodes only, so there is no route issue. No re-split note applies to this item."
+ },
+ "lean": {
+  "module": "Sheaf.Algebra.Homology.InjectiveFinalKernelTruncation",
+  "declaration": "CochainComplex.exists_injective_final_kernel_truncation",
+  "file": "lean/Sheaf/Algebra/Homology/InjectiveFinalKernelTruncation.lean",
+  "statement": "theorem exists_injective_final_kernel_truncation {R : Type u} [CommRing R] (N : ModuleCat.{u} R) (I : CochainComplex (ModuleCat.{u} R) ℤ) (hneg : ∀ j : ℤ, j < 0 → IsZero (I.X j)) (hinj : ∀ j : ℤ, Injective (I.X j)) (ε : (single (ModuleCat.{u} R) (ComplexShape.up ℤ) 0).obj N ⟶ I) [QuasiIso ε] (d : ℤ) (hd : 0 ≤ d) (hJ : Injective (kernel (I.d d (d + 1)))) [HasDerivedCategory.{w} (ModuleCat.{u} R)] : ∃ (L : CochainComplex (ModuleCat.{u} R) ℤ) (ι : L ⟶ I) (e : (single (ModuleCat.{u} R) (ComplexShape.up ℤ) 0).obj N ⟶ L) (a : ∀ (j : ℤ), 0 ≤ j → j < d → (L.X j ≅ I.X j)) (b : L.X d ≅ kernel (I.d d (d + 1))), (∀ (j : ℤ) (hj : 0 ≤ j) (hjd : j < d), ι.f j = (a j hj hjd).hom) ∧ ι.f d = b.hom ≫ kernel.ι (I.d d (d + 1)) ∧ (∀ j : ℤ, j < 0 ∨ d < j → IsZero (L.X j) ∧ ι.f j = 0) ∧ (∀ (i j : ℤ) (hi : 0 ≤ i) (hid : i < d) (hj : 0 ≤ j) (hjd : j < d), j = i + 1 → L.d i j ≫ (a j hj hjd).hom = (a i hi hid).hom ≫ I.d i j) ∧ (∀ (i : ℤ) (hi : 0 ≤ i) (hid : i < d), i + 1 = d → L.d i d ≫ b.hom ≫ kernel.ι (I.d d (d + 1)) = (a i hi hid).hom ≫ I.d i d) ∧ (∀ j : ℤ, ¬ (0 ≤ j ∧ j < d) → L.d j (j + 1) = 0) ∧ e ≫ ι = ε ∧ (∀ hpos : 0 < d, e.f 0 ≫ (a 0 (le_refl 0) hpos).hom = ε.f 0) ∧ (d = 0 → IsIso (e.f 0)) ∧ QuasiIso e ∧ (∀ j : ℤ, Injective (L.X j)) ∧ ∃ η : DerivedCategory.Q.obj ((single (ModuleCat.{u} R) (ComplexShape.up ℤ) 0).obj N) ≅ DerivedCategory.Q.obj L, η.hom = DerivedCategory.Q.map e",
+  "branch": "newtargets-dag",
+  "by": "Q74",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-68befb077",
+  "group": "Q74",
+  "result": "pass",
+  "note": "Read node, both stmt_deps (Injective; DerivedCategory/Q), Stacks 0A5T proof (3)=>(1) (I^{b-1}->J truncation, a=0,b=d), module and report. Hypotheses: ε : N[0] ⟶ I with QuasiIso plus hneg is equivalent to the exact augmented sequence; hinj on all degrees adds nothing (zero is injective); J = categorical kernel of I.d d (d+1). Conclusion: L with isos a (0≤j<d) and b (L^d≅J), zero outside [0,d]; retained differentials, corestriction at d-1 (pinned via mono kernel.ι), all other differentials zero; λ identity/inclusion/zero; e≫ι=ε; e^0=ε for d>0; IsIso e^0 for d=0 (induced corestriction via e≫ι=ε); QuasiIso e; all terms injective; derived iso η with η.hom = Q.map e. Edge cases d=0,1,2, N=0, zero ring covered; universes u/w correct, none auto-bound. lean.statement verbatim in file; node differs from live only in lean; no defs, sorry only, docstrings with source/blueprint and 7 proof steps; no name clash in Mathlib/live lean; parent citer's use matches. No findings; no compile needed (no change)."
+ }
+}

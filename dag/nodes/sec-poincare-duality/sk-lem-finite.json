@@ -205,7 +205,18 @@
  "blueprint_snapshot": "main-20261015",
  "chapter": "sec-poincare-duality",
  "unit": "sk-lem-finite",
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
  "split_report": {
   "date": "2026-10-17",
   "item": "sk-lem-finite",
@@ -260,5 +271,46 @@
   "existing": false,
   "note": "Four coefficient-specific statements give the complete node. The nested two-element sets enumerate ordinary/compact sections and each of their point duals. Integral reductions use the existing pointReductionModuleTensor at positive exponent n+1. Instance aliases expose the existing native small-Hom module localization and the model/base-change properties; their data are existing constructions.",
   "fixed_by": "NT-stage2-cc-cea3b9e55"
+ },
+ "blueprint_update": {
+  "snapshot": "main-20261023",
+  "commit": "c9b5f3ad18a6654dbbee6f7d7b4b4af85e01463f",
+  "changed": [
+   "statement",
+   "proof"
+  ],
+  "statement": "Let $\\Lambda$ be an admissible coefficient ring, and for a scheme $X$ let\n$a_X\\colon X\\to s=\\operatorname{Spec}k$ be its structure morphism.\n\nSuppose $k$ is algebraically closed. The category\n$\\Dctf(s,\\Lambda)$ identifies with\n$\\operatorname{Perf}(\\Lambda)$, the category of bounded complexes of\nfinite projective $\\Lambda$-modules up to quasi-isomorphism. For\n$K\\in\\Dctf(X,\\Lambda)$, both\n\n$$\n \\RGammac(X,K)=Ra_{X!}K,\\qquad \\RGamma(X,K)=Ra_{X*}K\n$$\n\nare perfect complexes. Their duals $R\\operatorname{Hom}_\\Lambda(-,\\Lambda)$ are perfect, and\nthe evaluation map $P\\to R\\operatorname{Hom}_\\Lambda(R\\operatorname{Hom}_\\Lambda(P,\\Lambda),\n\\Lambda)$ is an isomorphism for each of them.\n\n*Complement.* If the cohomology sheaves of $K$ lie in degrees $[a,b]$, then\n$\\RGammac(X,K)$ and $\\RGamma(X,K)$ have cohomology only in degrees\n$[a,b+2\\dim X]$. For $\\Lambda=\\Oe$ both lie in $D^b_{\\mathrm{fg}}(\\Oe)$, and\ntheir reductions modulo $\\pi_E^n$ are perfect of one common Tor amplitude,\nindependent of $n$. For $\\Lambda=E,\\Qlb$ they are bounded with\nfinite-dimensional cohomology.",
+  "proof": [
+   {
+    "text": "At a geometric point a constructible finite-coefficient complex has\nbounded finite cohomology; its finite Tor amplitude makes it perfect.\nExplicitly, take a bounded-above resolution by finite free modules and\ntruncate below the Tor bound. The remaining last syzygy is finitely\npresented and flat, hence projective. With integral coefficients the\nconstructible complexes on the point are those with bounded finitely\ngenerated $\\Oe$-cohomology; a discrete valuation ring has\nglobal dimension one, so these complexes are perfect. With field\ncoefficients bounded finite-dimensional complexes are perfect. These\ndescriptions also follow from the comparisons of the subsection on the\ngeometric point and continuous cohomology.",
+    "uses": [],
+    "elementary": null
+   },
+   {
+    "text": "Proposition [sk-thm-sf-ctf-stability] applies to the two direct images of\n$a_X$, so both lie in $\\Dctf(s,\\Lambda)$. A bounded\nfinite-projective representative has a bounded finite-projective\ntermwise dual. Termwise double evaluation is an isomorphism, with\nthe usual signs for complexes. This proves all the assertions.",
+    "uses": [],
+    "elementary": null
+   },
+   {
+    "text": "*Complement.* Let first $\\Lambda=A_{E,n}$ and let $K$ be a\nbounded constructible complex of finite Tor amplitude. The structure\nmorphism $a_X$ is separated of finite type over the field $k$, so the\nfiniteness theorems for constructible sheaves apply: the sheaves $R^qa_{X,*}K$ and\n$R^qa_{X,!}K$ are constructible and, if the cohomology sheaves of $K$\nlie in degrees $[a,b]$, both vanish for $q\\notin[a,b+2\\dim X]$: the\ncompact-support ones by the finiteness theorem for $Ra_{X!}$ and its\ncomparison with the proper case, the ordinary ones by the\nfibrewise cohomological-dimension bound, each applied to the\ncohomology sheaves of $K$ through the spectral sequence of the truncations\n(for $K=\\Lambda[-1]$ on a point the bound is $1$, not $2\\dim X=0$).",
+    "uses": [],
+    "elementary": null
+   },
+   {
+    "text": "Now let $\\Lambda=\\Oe$ and $K\\in\\Dbc(X,\\Oe)$ with cohomology sheaves in\n$[a,b]$, and put $K_n=K\\otimes^{\\mathbf L}_{\\mathcal O_{E,X}}\\AEn$. Reduction\nmodulo $\\pi_E^n$ commutes with $Ra_{X*}$ and $Ra_{X!}$ ([sk-prop-scalar-six]),\nso $\\RGammac(X,K)\\otimes^{\\mathbf L}_{\\Oe}\\AEn\\simeq\\RGammac(X,K_n)$, and\nlikewise for $\\RGamma$. By the main part both are perfect over $\\Oe$, hence\nlie in $D^b_{\\mathrm{fg}}(\\Oe)$. Their lower bound is $a$, because $Ra_{X*}$\nand $Ra_{X!}=R\\bar a_*j_!$ are left t-exact. For the upper bound, $K_1$ has\ncohomology sheaves in $[a-1,b]$ (the sequence\n$0\\to\\mathcal H^q(K)/\\pi_E\\to\\mathcal H^q(K_1)\\to\\mathcal H^{q+1}(K)[\\pi_E]\\to0$),\nso by the torsion case $\\RGammac(X,K_1)$ has cohomology in degrees\n$\\le b+2\\dim X$. If $C$ is a perfect $\\Oe$-complex and $i$ is the largest\ndegree with $H^i(C)\\neq0$, then $H^i(C\\otimes^{\\mathbf L}_{\\Oe}A_{E,1})=\nH^i(C)/\\pi_E\\neq0$ by Nakayama, so $i\\le b+2\\dim X$. Thus both complexes have\ncohomology in $[a,b+2\\dim X]$. A perfect complex over $\\Oe$ is represented by\na bounded complex of finite free modules, and its reductions are perfect of\none Tor amplitude independent of $n$.",
+    "uses": [],
+    "elementary": null
+   },
+   {
+    "text": "For $\\Lambda=E$, $K$ is obtained by finitely many cones and shifts from objects\n$(a_!L_0)[1/\\ell]$ with $L_0$ lisse over $\\mathcal O_{E,S}$ and placed in the\ndegrees of the cohomology sheaves of $K$, by dévissage along the truncation\ntriangles, [sk-lem-coefficient-heart] and [sk-lem-integral-models]. Since\n$\\RGammac$ and $\\RGamma$ commute with $-\\otimes_{\\Oe}E$\n([sk-prop-scalar-six]), which is exact, the integral case gives the degree\nbound and finite-dimensionality. For $\\Lambda=\\Qlb$, $K$ descends to some\n$K'\\in\\Dbc(X,E')$ with the same cohomological range\n([sk-thm-sfb-qlbar-two-colimit]; extension of scalars along $E'_X\\to\\Qlb_X$\nis exact and faithful, $\\Qlb_X$ being a filtered colimit of the finite free\n$E'_X$-modules $F_X$ in which $E'_X$ is a direct summand), and flat extension of scalars gives the claim.\nThe dual of a bounded complex of finite projective modules\nis again one, termwise.",
+    "uses": [
+     "sk-lem-coefficient-heart",
+     "sk-lem-integral-models",
+     "sk-thm-sfb-qlbar-two-colimit"
+    ],
+    "elementary": false
+   }
+  ],
+  "note": "the current blueprint (main-20261023, weil-conjectures-blueprint c9b5f3ad18) states or proves this differently; a worker who touches the node follows it"
  }
 }

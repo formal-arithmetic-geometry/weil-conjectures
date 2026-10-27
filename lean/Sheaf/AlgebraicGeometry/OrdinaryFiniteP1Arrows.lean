@@ -6,6 +6,8 @@ Authors: SHEAF group Q43
 module
 
 public import Sheaf.AlgebraicGeometry.OrdinaryFiniteP1Kummer
+public import Sheaf.AlgebraicGeometry.RelativeKummerExchangeGenerators
+public import Sheaf.AlgebraicGeometry.EtaleSinglePullbackComparisons
 public import Sheaf.AlgebraicGeometry.EtaleFiniteTwistPullback
 public import Sheaf.Paper.RingedTopoiDerivedTensorPullback
 public import Sheaf.AlgebraicGeometry.ProperProjectionFormula
@@ -46,6 +48,13 @@ open CategoryTheory CategoryTheory.Abelian CategoryTheory.Limits MonoidalCategor
 open scoped CategoryTheory.Functor ChangeOfRings
 
 namespace AlgebraicGeometry.Etale
+
+attribute [local implicit_reducible] ordinaryFiniteSingleFunctor
+
+-- Reuse the proposition instances already stored in the ordinary derived category.
+-- This keeps the canonical localization data identical before taking object maps.
+set_option linter.auxLemma false in
+attribute [local instance 100000] DerivedCategoryModule._proof_1 DerivedCategoryModule._proof_2
 
 /-- Reuse the existing colimits of module sheaves once when elaborating unbounded
 derived inverse images. This is the library's colimit structure, with no new assumption.
@@ -109,6 +118,35 @@ structure OrdinaryFiniteTwistTransport (A : Type (u + 1)) [CommRing A] (N : ℕ)
       (((upperStarLowerStarAdjunction AddCommGrpCat.{u + 1} f).homEquiv _ _
         (roots f hY).hom).hom.app W z)
 
+/-- The exact derived single-degree comparison, with the same cached embeddings.
+Source: the exact inverse-image comparison with degree zero
+(blueprint: def-asd-ordinary-finite-p1-arrows). -/
+def ordinaryFiniteSingleExactPullbackIso (A : Type (u + 1)) [CommRing A]
+    {X Y : Scheme.{u}} (f : X ⟶ Y) :
+    ordinaryFiniteSingleFunctor A Y ⋙
+        (upperStar (ModuleCat.{u + 1} A) f).mapDerivedCategory ≅
+      upperStar (ModuleCat.{u + 1} A) f ⋙ ordinaryFiniteSingleFunctor A X :=
+  (upperStar (ModuleCat.{u + 1} A) f).mapDerivedCategorySingleFunctor 0
+
+/-- The cached comparison is the canonical exact-derived single-degree comparison.
+Source: the exact inverse-image comparison, blueprint thm-amb-p1-adjunction
+(blueprint: def-asd-ordinary-finite-p1-arrows). -/
+theorem ordinaryFiniteSingleExactPullbackIso_eq (A : Type (u + 1)) [CommRing A]
+    {X Y : Scheme.{u}} (f : X ⟶ Y) :
+    ordinaryFiniteSingleExactPullbackIso A f =
+      (upperStar (ModuleCat.{u + 1} A) f).mapDerivedCategorySingleFunctor 0 := rfl
+
+/-- The canonical single-degree comparison, transported along the cached embeddings.
+Source: the exact inverse-image comparison with degree zero
+(blueprint: def-asd-ordinary-finite-p1-arrows). -/
+def ordinaryFiniteSinglePullbackIso (A : Type (u + 1)) [CommRing A]
+    {X Y : Scheme.{u}} (f : X ⟶ Y) :
+    ordinaryFiniteSingleFunctor A Y ⋙ ordinaryFinitePullback A f ≅
+      upperStar (ModuleCat.{u + 1} A) f ⋙ ordinaryFiniteSingleFunctor A X :=
+  Functor.isoWhiskerLeft (ordinaryFiniteSingleFunctor A Y)
+      (leftDerivedUpperStarIsoMapDerivedCategory (ModuleCat.{u + 1} A) f) ≪≫
+    ordinaryFiniteSingleExactPullbackIso A f
+
 /-- The canonical derived comparison on the shifted twist.
 Source: blueprint thm-amb-p1-decomposition
 (blueprint: def-asd-ordinary-finite-p1-arrows). -/
@@ -118,12 +156,11 @@ def ordinaryFiniteShiftedLinePullback (A : Type (u + 1)) [CommRing A] (N : ℕ)
     (ordinaryFinitePullback A f).obj
         ((ordinaryFiniteLine A N hA Y)⟦(2 : ℤ)⟧) ≅
       (ordinaryFiniteLine A N hA X)⟦(2 : ℤ)⟧ :=
-  letI : (ordinaryFinitePullback A f).CommShift ℤ :=
-    commShiftLeftDerivedUpperStar (ModuleCat.{u + 1} A) f
-  ((ordinaryFinitePullback A f).commShiftIso (2 : ℤ)).app _ ≪≫
-    (shiftFunctor _ (2 : ℤ)).mapIso
-      ((singleFunctorCompLeftDerivedUpperStarIso (ModuleCat.{u + 1} A) f).app _ ≪≫
-        (DerivedCategory.singleFunctor _ 0).mapIso (t.line f hY))
+  shiftedSinglePullbackIsoWith (ModuleCat.{u + 1} A) f
+    (ordinaryFiniteSingleFunctor A Y) (ordinaryFiniteSingleFunctor A X)
+    (ordinaryFiniteSinglePullbackIso A f)
+    (Scheme.finiteEtaleTateLine Y N A hA) (Scheme.finiteEtaleTateLine X N A hA)
+    (t.line f hY) 2
 
 /-- The canonical comparison on the constant complex, with no chosen orientation.
 Source: blueprint thm-amb-p1-adjunction
@@ -132,9 +169,36 @@ def ordinaryFiniteUnitPullback (A : Type (u + 1)) [CommRing A]
     {X Y : Scheme.{u}} (f : X ⟶ Y) :
     (ordinaryFinitePullback A f).obj (ordinaryFiniteUnit A Y) ≅
       ordinaryFiniteUnit A X :=
-  (singleFunctorCompLeftDerivedUpperStarIso (ModuleCat.{u + 1} A) f).app _ ≪≫
-    (DerivedCategory.singleFunctor _ 0).mapIso
+  (ordinaryFiniteSinglePullbackIso A f).app _ ≪≫
+    (ordinaryFiniteSingleFunctor A X).mapIso
       ((Scheme.upperStarConstantSheafIso (ModuleCat.{u + 1} A) f).app (ModuleCat.of A A))
+
+/-- The unit comparison factors through the cached single-degree comparison.
+Source: the canonical inverse-image comparison, blueprint thm-amb-p1-adjunction
+(blueprint: def-asd-ordinary-finite-p1-arrows). -/
+theorem ordinaryFiniteUnitPullback_eq (A : Type (u + 1)) [CommRing A]
+    {X Y : Scheme.{u}} (f : X ⟶ Y) :
+    ordinaryFiniteUnitPullback A f =
+      (ordinaryFiniteSinglePullbackIso A f).app (ordinaryFiniteConstant A Y) ≪≫
+        (ordinaryFiniteSingleFunctor A X).mapIso
+          ((Scheme.upperStarConstantSheafIso (ModuleCat.{u + 1} A) f).app
+            (ModuleCat.of A A)) := rfl
+
+/-- The shifted-line comparison uses the cached single-degree comparison and shift.
+Source: the canonical shifted inverse-image comparison, blueprint thm-amb-p1-decomposition
+(blueprint: def-asd-ordinary-finite-p1-arrows). -/
+theorem ordinaryFiniteShiftedLinePullback_eq
+    (A : Type (u + 1)) [CommRing A] (N : ℕ) (hA : (N : A) = 0)
+    (t : OrdinaryFiniteTwistTransport A N hA) {X Y : Scheme.{u}}
+    (f : X ⟶ Y) (hY : IsUnit (N : Γ(Y, ⊤))) :
+    letI : (ordinaryFinitePullback A f).CommShift ℤ :=
+      commShiftLeftDerivedUpperStar (ModuleCat.{u + 1} A) f
+    ordinaryFiniteShiftedLinePullback A N hA t f hY =
+      ((ordinaryFinitePullback A f).commShiftIso (2 : ℤ)).app
+          ((ordinaryFiniteSingleFunctor A Y).obj (Scheme.finiteEtaleTateLine Y N A hA)) ≪≫
+        (shiftFunctor (DerivedCategoryModule A X) (2 : ℤ)).mapIso
+          ((ordinaryFiniteSinglePullbackIso A f).app (Scheme.finiteEtaleTateLine Y N A hA) ≪≫
+            (ordinaryFiniteSingleFunctor A X).mapIso (t.line f hY)) := rfl
 
 /-- The shifted twisted unit, the first component of the projective-line decomposition.
 Source: blueprint thm-amb-p1-decomposition

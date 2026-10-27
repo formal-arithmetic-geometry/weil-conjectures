@@ -1,0 +1,270 @@
+{
+ "id": "lem-sfb-space-qc-open-finite-presentation",
+ "kind": "statement",
+ "title": "Quasi-compact open immersions of algebraic spaces are finitely presented",
+ "statement": "Let $S$ be a scheme [def-pc-scheme]. Work with algebraic spaces over $S$ [def-trf-algebraic-space] in the universes of [def-weil-size-convention], with sheaf fibre products [lem-trf-space-fibre-products-etale-covers]. A space is quasi-compact if it admits a surjective etale atlas from a quasi-compact scheme, and quasi-separated if its absolute diagonal over $\\operatorname{Spec}\\mathbf Z$ is quasi-compact. A morphism is quasi-compact if its pullback along every affine scheme test has quasi-compact source, and quasi-separated if its relative diagonal is quasi-compact. An affine morphism is representable by schemes and has affine scheme source after every affine scheme test. Local finite type and local finite presentation are tested on compatible etale scheme charts [def-weil-finite-type-morphism, def-sbc-locally-finite-presentation]. Finite presentation means quasi-compact, quasi-separated and locally of finite presentation. An open immersion is a representable morphism that is an open immersion on every scheme test [def-a1-space-open-subspace]. Let $j:U\\hookrightarrow X$ be a quasi-compact open immersion of algebraic spaces. Then $j$ is of finite presentation. No quasi-compactness, separation or Noetherian hypothesis on $X$ is imposed.",
+ "source": {
+  "document": "literature/stacks-project/spaces-morphisms.tex",
+  "place": "Tag 06CN (lemma-open-immersion-locally-finite-presentation); quasi-separatedness follows from the identity diagonal of an open immersion"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-trf-algebraic-space",
+  "def-weil-size-convention",
+  "lem-trf-space-fibre-products-etale-covers",
+  "def-weil-finite-type-morphism",
+  "def-sbc-locally-finite-presentation",
+  "def-a1-space-open-subspace",
+  "def-sfb-space-quasi-compact-presheaf-map",
+  "def-sfb-space-morphism-properties"
+ ],
+ "proof": [
+  {
+   "text": "Choose a scheme atlas $p:V\\to X$, representable surjective etale, by [def-trf-algebraic-space]. Set $W=V\\times_XU$. By [def-a1-space-open-subspace], $W$ is a scheme and $j_V:W\\to V$ identifies it with an open subscheme of $V$. By [lem-trf-space-fibre-products-etale-covers], $W\\to U$ is representable surjective etale. Consequently $W\\to V$ is a compatible scheme-chart presentation of $j$, so local finite presentation of this scheme map proves local finite presentation of $j$, by the chart convention in the statement.",
+   "uses": [
+    "def-trf-algebraic-space",
+    "def-a1-space-open-subspace",
+    "lem-trf-space-fibre-products-etale-covers"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-morphisms.tex",
+    "place": "Tag 06CN (lemma-open-immersion-locally-finite-presentation), reduction to scheme tests; spaces.tex Tag 02YO (lemma-representable-transformations-property-implication)"
+   }
+  },
+  {
+   "text": "Fix $w\\in W$. Apply [lem-weil-pbc-affine-opens-basis] in $V$ to its open subset $j_V(W)$: there is an affine open $D=\\operatorname{Spec}A\\subseteq j_V(W)$ containing $j_V(w)$. By [def-weil-open-immersion], $j_V^{-1}(D)\\to D$ is an isomorphism of open subschemes. In these affine coordinates its ring map is $A\\to A$, which is a finite presentation with zero generators and zero relations. Thus the affine neighbourhoods $j_V^{-1}(D)$ and $D$ satisfy [def-sbc-locally-finite-presentation] at $w$. Every point has such neighbourhoods, so $j_V$, and hence $j$, is locally of finite presentation. This writes out the local-isomorphism argument; it invokes no finiteness hypothesis on $V$ or $X$.",
+   "uses": [
+    "lem-weil-pbc-affine-opens-basis",
+    "def-weil-open-immersion",
+    "def-sbc-locally-finite-presentation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 01TT (lemma-open-immersion-locally-finite-presentation), proof: an open immersion is a local isomorphism"
+   }
+  },
+  {
+   "text": "For any $S$-scheme $T$ and $a,b\\in U(T)$ with $j(a)=j(b)=c$, both give sections of the scheme projection $T\\times_XU\\to T$. This projection is an open immersion by [def-a1-space-open-subspace]. It identifies its source with an open subscheme of $T$ by [def-weil-open-immersion], so it has at most one section: a section forces that open subset to be all of $T$, and is the inverse of the resulting isomorphism. Hence $a=b$. The diagonal $\\Delta_j:U\\to U\\times_XU$ is therefore an isomorphism: on every test $T$ its inverse sends $(a,b)$ with $j(a)=j(b)$ to $a=b$; the inverse and diagonal commute with restriction maps. The sheaf fibre product here is the fibre product of [lem-trf-space-fibre-products-etale-covers].",
+   "uses": [
+    "def-a1-space-open-subspace",
+    "def-weil-open-immersion",
+    "lem-trf-space-fibre-products-etale-covers"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Tag 01L7 (lemma-immersions-monomorphisms), open-immersion argument, written on sheaf sections"
+   }
+  },
+  {
+   "text": "For every affine scheme $T\\to U\\times_XU$, the pullback of the isomorphism $\\Delta_j$ is isomorphic to $T$. The scheme $T$ is quasi-compact by [lem-weil-pbc-affine-scheme-qcqs]. Its identity atlas is surjective etale, so it is also quasi-compact with the space convention of the statement. Thus every affine test of $\\Delta_j$ has quasi-compact source: $\\Delta_j$ is quasi-compact and $j$ is quasi-separated. Together with local finite presentation from step 2 and the given quasi-compactness of $j$, these are exactly the three conditions defining finite presentation in the statement. The same arguments apply when $U$ is empty, with the pointwise assertion of step 2 vacuous.",
+   "uses": [
+    "lem-weil-pbc-affine-scheme-qcqs"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-morphisms.tex",
+    "place": "Tag 06CN, together with definition-finite-presentation; diagonal argument as in morphisms.tex Tag 01TU (lemma-quasi-compact-open-immersion-finite-presentation)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-trf-algebraic-space",
+  "def-a1-space-open-subspace",
+  "lem-trf-space-fibre-products-etale-covers",
+  "lem-weil-pbc-affine-opens-basis",
+  "def-weil-open-immersion",
+  "def-sbc-locally-finite-presentation",
+  "lem-weil-pbc-affine-scheme-qcqs"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/spaces-morphisms.tex",
+  "place": "Tag 06CN (lemma-open-immersion-locally-finite-presentation), with the local-isomorphism proof of morphisms.tex Tag 01TT and the diagonal argument of Tag 01TU expanded on sheaf tests"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Every quasi compact open immersion of algebraic spaces is of finite presentation",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.locallyOfFinitePresentation_of_isOpenImmersion\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.IsOpenImmersion f],\\n  AlgebraicGeometry.LocallyOfFinitePresentation f\", \"doc\": \"Every open immersion of schemes is locally of finite presentation.\"}\n  {\"name\": \"AlgebraicGeometry.LocallyOfFinitePresentation\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"A morphism $ f: X \\\\to Y $ of schemes is locally of finite presentation, meaning that for every point in $ X $, there exists an open neighborhood such that the restriction of $ f $ to this neighborhood\"}\n  {\"name\": \"AlgebraicGeometry.instQuasiCompactOfIsLocallyNoetherianOfIsOpenImmersion\", \"module\": \"Mathlib/AlgebraicGeometry/Noetherian\", \"type\": \"∀ {X Z : AlgebraicGeometry.Scheme} [AlgebraicGeometry.IsLocallyNoetherian X] {f : Z ⟶ X}\\n  [AlgebraicGeometry.IsOpenImmersion f], AlgebraicGeometry.QuasiCompact f\", \"doc\": \"Every open immersion $ f: Z \\to X $ into a locally Noetherian scheme $ X $ is a quasi-compact morphism. That is, if $ X $ admits an open cover by Noetherian schemes and $ f $ is an open immersion (a mo\"}\n  {\"name\": \"AlgebraicGeometry.instHasRingHomPropertyLocallyOfFinitePresentationFinitePresentation\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation\", \"type\": \"AlgebraicGeometry.HasRingHomProperty @AlgebraicGeometry.LocallyOfFinitePresentation\\n  fun {R S} [CommRing R] [CommRing S] => RingHom.FinitePresentation\", \"doc\": \"A morphism of schemes is locally of finite presentation if and only if the corresponding ring homomorphism is finitely presented. This instance establishes that the scheme-theoretic property of being \"}\n  {\"name\": \"AlgebraicGeometry.locallyOfFiniteType_of_isOpenImmersion\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FiniteType\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.IsOpenImmersion f],\\n  AlgebraicGeometry.LocallyOfFiniteType f\", \"doc\": \"Any open immersion between schemes is locally of finite type.\"}\n  {\"name\": \"AlgebraicGeometry.instLocallyQuasiFiniteOfIsImmersion\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiFinite\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.IsImmersion f], AlgebraicGeometry.LocallyQuasiFinite f\", \"doc\": \"Every immersion of schemes is a quasi-finite morphism.\"}\n  {\"name\": \"AlgebraicGeometry.instLocallyOfFiniteTypeOfLocallyOfFinitePresentation\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [hf : AlgebraicGeometry.LocallyOfFinitePresentation f],\\n  AlgebraicGeometry.LocallyOfFiniteType f\", \"doc\": \"Every morphism of schemes that is locally of finite presentation is also locally of finite type.\"}\n  {\"name\": \"AlgebraicGeometry.IsImmersion.instLocallyOfFiniteType\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Immersion\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.IsImmersion f],\\n  AlgebraicGeometry.LocallyOfFiniteType f\", \"doc\": \"Any immersion of schemes is a morphism that is locally of finite type. Specifically, for a morphism $ f: X \\to Y $ between schemes that is an immersion, every point in $ Y $ has an open neighborhood su\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: retrieved declarations concern schemes or general categorical limits, not the asserted morphisms of algebraic spaces. In particular Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation.lean:40-64 has Scheme variables; the open-immersion instance at line 62 is scheme-only."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A quasi compact open subspace of an algebraic space is finitely presented over that algebraic space",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.LocallyOfFinitePresentation\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"A morphism $ f: X \\\\to Y $ of schemes is locally of finite presentation, meaning that for every point in $ X $, there exists an open neighborhood such that the restriction of $ f $ to this neighborhood\"}\n  {\"name\": \"AlgebraicGeometry.instHasAffinePropertyQuasiCompactCompactSpaceCarrierCarrierCommRingCat\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiCompact\", \"type\": \"AlgebraicGeometry.HasAffineProperty @AlgebraicGeometry.QuasiCompact fun X x x_1 x_2 => CompactSpace ↥X\", \"doc\": \"For any quasi-compact morphism of schemes $ f: X \\to Y $ where the target $ Y $ is affine, the underlying topological space of $ Y $ is compact. This instance establishes that the quasi-compactness pro\"}\n  {\"name\": \"AlgebraicGeometry.instLocallyOfFiniteTypeOfLocallyOfFinitePresentation\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [hf : AlgebraicGeometry.LocallyOfFinitePresentation f],\\n  AlgebraicGeometry.LocallyOfFiniteType f\", \"doc\": \"Every morphism of schemes that is locally of finite presentation is also locally of finite type.\"}\n  {\"name\": \"AlgebraicGeometry.LocallyOfFinitePresentation.finitePresentation_of_affine_subset\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [self : AlgebraicGeometry.LocallyOfFinitePresentation f] {U : Y.Opens},\\n  AlgebraicGeometry.IsAffineOpen U →\\n    ∀ {V : X.Opens},\\n      AlgebraicGeometry.IsAffineOpen V →\\n        ∀ (e : V ≤ (TopologicalSpace.Opens.map f.base).obj U),\\n          (CommRing\", \"doc\": \"Let $f: X \\\\to Y$ be a morphism of schemes which is locally of finite presentation. If $U \\\\subseteq Y$ and $V \\\\subseteq X$ are affine open subsets such that $f(V) \\\\subseteq U$, then the ring homomorphi\"}\n  {\"name\": \"AlgebraicGeometry.LocallyOfFinitePresentation.finitePresentation_appLE\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [self : AlgebraicGeometry.LocallyOfFinitePresentation f] {U : Y.Opens},\\n  AlgebraicGeometry.IsAffineOpen U →\\n    ∀ {V : X.Opens},\\n      AlgebraicGeometry.IsAffineOpen V →\\n        ∀ (e : V ≤ (TopologicalSpace.Opens.map f.base).obj U),\\n          (CommRing\", \"doc\": \"For a morphism $ f: X \\\\to Y $ of schemes that is locally of finite presentation, if $ U \\\\subseteq Y $ is an affine open subset and $ V \\\\subseteq X $ is an affine open subset contained in $ f^{-1}(U) $\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.finitePresentation_appLE\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [self : AlgebraicGeometry.LocallyOfFinitePresentation f] {U : Y.Opens},\\n  AlgebraicGeometry.IsAffineOpen U →\\n    ∀ {V : X.Opens},\\n      AlgebraicGeometry.IsAffineOpen V →\\n        ∀ (e : V ≤ (TopologicalSpace.Opens.map f.base).obj U),\\n          (CommRing\", \"doc\": \"Let $f: X \\\\to Y$ be a morphism of schemes that is locally of finite presentation. Let $U$ be an affine open subset of $Y$ and $V$ be an affine open subset of $X$ such that $V$ is contained in the prei\"}\n  {\"name\": \"AlgebraicGeometry.LocallyOfFiniteType\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FiniteType\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"The morphism $ f: X \\\\to Y $ is locally of finite type, meaning that for every point in $ Y $, there exists an open neighborhood whose preimage under $ f $ is covered by affine open subsets such that t\"}\n  {\"name\": \"AlgebraicGeometry.locallyOfFinitePresentation_of_isOpenImmersion\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.IsOpenImmersion f],\\n  AlgebraicGeometry.LocallyOfFinitePresentation f\", \"doc\": \"Every open immersion of schemes is locally of finite presentation.\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: retrieved declarations concern schemes or general categorical limits, not the asserted morphisms of algebraic spaces. In particular Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation.lean:40-64 has Scheme variables; the open-immersion instance at line 62 is scheme-only."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsOpenImmersion\", \"LocallyOfFinitePresentation\"",
+   "results": "[loogle] OK 1 hit(s)\n  {\"name\": \"AlgebraicGeometry.locallyOfFinitePresentation_of_isOpenImmersion\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation\", \"type\": \" {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.IsOpenImmersion f] : AlgebraicGeometry.LocallyOfFinitePresentation f\", \"doc\": \"\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: retrieved declarations concern schemes or general categorical limits, not the asserted morphisms of algebraic spaces. In particular Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation.lean:40-64 has Scheme variables; the open-immersion instance at line 62 is scheme-only."
+  },
+  {
+   "tool": "grep",
+   "query": "AlgebraicSpace|[Ii]sOpenImmersion.*[Ff]initePresentation|[Ff]initePresentation.*[Ii]sOpenImmersion",
+   "results": "[grep] OK 3 hit(s)\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/FlatMono.lean\", \"line\": \"39\", \"text\": \"    [LocallyOfFinitePresentation f] [Mono f] : IsOpenImmersion f := by\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation.lean\", \"line\": \"62\", \"text\": \"instance (priority := 900) locallyOfFinitePresentation_of_isOpenImmersion [IsOpenImmersion f] :\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth.lean\", \"line\": \"339\", \"text\": \"    (f : U ⟶ X) (g : X ⟶ Y) [IsOpenImmersion f] [LocallyOfFinitePresentation g] :\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: retrieved declarations concern schemes or general categorical limits, not the asserted morphisms of algebraic spaces. In particular Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation.lean:40-64 has Scheme variables; the open-immersion instance at line 62 is scheme-only."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Quasi compact open immersions of algebraic spaces are morphisms of finite presentation",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.locallyOfFinitePresentation_of_isOpenImmersion\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation\", \"type\": \"[IsOpenImmersion f] : LocallyOfFinitePresentation f\", \"doc\": \"Every open immersion of schemes is locally of finite presentation.\"}\n  {\"name\": \"AlgebraicGeometry.locallyOfFiniteType_of_isOpenImmersion\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.FiniteType\", \"type\": \"[IsOpenImmersion f] : LocallyOfFiniteType f\", \"doc\": \"Any open immersion between schemes is locally of finite type.\"}\n  {\"name\": \"AlgebraicGeometry.instQuasiCompactOfIsLocallyNoetherianOfIsOpenImmersion\", \"module\": \"Mathlib.AlgebraicGeometry.Noetherian\", \"type\": \"{Z : Scheme} [IsLocallyNoetherian X] {f : Z ⟶ X} [IsOpenImmersion f] : QuasiCompact f\", \"doc\": \"Every open immersion $ f: Z \\to X $ into a locally Noetherian scheme $ X $ is a quasi-compact morphism. That is, if $ X $ admits an open cover by Noetherian schemes and $ f $ is an open immersion (a mo\"}\n  {\"name\": \"AlgebraicGeometry.QuasiCompact.mk\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.QuasiCompact\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y},\\n  (∀ (U : Set ↥Y), IsOpen U → IsCompact U → IsCompact (⇑(CategoryTheory.ConcreteCategory.hom f.base) ⁻¹' U)) →\\n    AlgebraicGeometry.QuasiCompact f\", \"doc\": \"Given a morphism $ f: X \\\\to Y $ of schemes, if for every open subset $ U \\\\subseteq Y $ that is quasi-compact, the preimage $ f^{-1}(U) $ is quasi-compact in $ X $, then $ f $ is a quasi-compact morphi\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.isCompact_preimage\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.QuasiCompact\", \"type\": \"[QuasiCompact f] {U : Opens Y} (hU : IsCompact (U : Set Y)) : IsCompact (f ⁻¹ᵁ U : Set X)\", \"doc\": \"A morphism $ f: X \\\\to Y $ of schemes is quasi-compact if for every compact open subset $ U $ of $ Y $, the preimage $ f^{-1}(U) $ is a compact subset of $ X $.\"}\n  {\"name\": \"AlgebraicGeometry.QuasiCompact\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.QuasiCompact\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"A morphism $ f: X \\\\to Y $ of schemes is quasi-compact.\"}\n  {\"name\": \"AlgebraicGeometry.IsOpenImmersion\", \"module\": \"Mathlib.AlgebraicGeometry.OpenImmersion\", \"type\": \": MorphismProperty (Scheme.{u})\", \"doc\": \"A morphism $ f: X \\\\to Y $ between schemes is an open immersion if its underlying morphism of locally ringed spaces satisfies the open immersion condition: the continuous map is a topological open embe\"}\n  {\"name\": \"AlgebraicGeometry.IsPreimmersion.instOfIsOpenImmersion\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Preimmersion\", \"type\": \"{X Y : Scheme} (f : X ⟶ Y) [IsOpenImmersion f] : IsPreimmersion f\", \"doc\": \"Every open immersion between schemes is a preimmersion. Specifically, if $ f: X \\to Y $ is an open immersion of schemes (i.e., a morphism whose underlying continuous map is a topological open embedding\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: retrieved declarations concern schemes or general categorical limits, not the asserted morphisms of algebraic spaces. In particular Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation.lean:40-64 has Scheme variables; the open-immersion instance at line 62 is scheme-only."
+  },
+  {
+   "tool": "grep",
+   "query": "AlgebraicSpace|locallyOfFinitePresentation_of_isOpenImmersion",
+   "results": "Actual msearch output: Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation.lean; 1 hits. Read Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation.lean:40-65: variables X,Y are schemes, and the open-immersion instance is at line 62.",
+   "date": "2026-10-24",
+   "verdict": "no match: scheme-only local finite presentation and related scheme morphism results; none states finite presentation of an open immersion of algebraic spaces."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Quasi compact open immersions of algebraic spaces are morphisms of finite presentation",
+   "results": "Actual msearch output: AlgebraicGeometry.locallyOfFinitePresentation_of_isOpenImmersion, AlgebraicGeometry.locallyOfFiniteType_of_isOpenImmersion, AlgebraicGeometry.instQuasiCompactOfIsLocallyNoetherianOfIsOpenImmersion, AlgebraicGeometry.QuasiCompact.mk, AlgebraicGeometry.Scheme.Hom.isCompact_preimage, AlgebraicGeometry.QuasiCompact, AlgebraicGeometry.IsOpenImmersion, AlgebraicGeometry.IsPreimmersion.instOfIsOpenImmersion; 8 hits. Read Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation.lean:40-65: variables X,Y are schemes, and the open-immersion instance is at line 62.",
+   "date": "2026-10-24",
+   "verdict": "no match: scheme-only local finite presentation and related scheme morphism results; none states finite presentation of an open immersion of algebraic spaces."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsOpenImmersion\", \"LocallyOfFinitePresentation\"",
+   "results": "Actual msearch output: AlgebraicGeometry.locallyOfFinitePresentation_of_isOpenImmersion; 1 hits. Read Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation.lean:40-65: variables X,Y are schemes, and the open-immersion instance is at line 62.",
+   "date": "2026-10-24",
+   "verdict": "no match: scheme-only local finite presentation and related scheme morphism results; none states finite presentation of an open immersion of algebraic spaces."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Every quasi compact open immersion of algebraic spaces is of finite presentation",
+   "results": "Actual msearch output: AlgebraicGeometry.locallyOfFinitePresentation_of_isOpenImmersion, AlgebraicGeometry.LocallyOfFinitePresentation, AlgebraicGeometry.instQuasiCompactOfIsLocallyNoetherianOfIsOpenImmersion, AlgebraicGeometry.instHasRingHomPropertyLocallyOfFinitePresentationFinitePresentation, AlgebraicGeometry.locallyOfFiniteType_of_isOpenImmersion, AlgebraicGeometry.instLocallyQuasiFiniteOfIsImmersion, AlgebraicGeometry.instLocallyOfFiniteTypeOfLocallyOfFinitePresentation, AlgebraicGeometry.IsImmersion.instLocallyOfFiniteType; 8 hits. Read Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation.lean:40-65: variables X,Y are schemes, and the open-immersion instance is at line 62.",
+   "date": "2026-10-24",
+   "verdict": "no match: scheme-only local finite presentation and related scheme morphism results; none states finite presentation of an open immersion of algebraic spaces."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An open subspace of an algebraic space is a morphism locally of finite presentation with identity relative diagonal",
+   "results": "Actual msearch output: AlgebraicGeometry.locallyOfFinitePresentation_of_isOpenImmersion, AlgebraicGeometry.instLocallyOfFinitePresentationMorphismRestrict, AlgebraicGeometry.LocallyOfFinitePresentation, AlgebraicGeometry.instLocallyOfFinitePresentationResLE, AlgebraicGeometry.FormallyUnramified.isOpenImmersion_diagonal, AlgebraicGeometry.locallyOfFiniteType_of_isOpenImmersion, AlgebraicGeometry.locallyOfFinitePresentation_iff, AlgebraicGeometry.isOpenMap_of_generalizingMap; 8 hits. Read Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation.lean:40-65: variables X,Y are schemes, and the open-immersion instance is at line 62.",
+   "date": "2026-10-24",
+   "verdict": "no match: scheme-only local finite presentation and related scheme morphism results; none states finite presentation of an open immersion of algebraic spaces."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-space-quasiaffine-fp-envelope",
+  "date": "2026-10-23",
+  "group": "Q36"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Stable genus and smooth-family open loci in curve families. Supporting input: 0E76 proof, openness and base-change compatibility of canonical ampleness, including representability by a scheme over that open. Supporting input: 0A0X: replace the proper family over an affine open by a proper finite-presentation inverse system. Supporting input to 0A0X: Tag 0A0W (lemma-proper-limit-of-proper-finite-presentation), specialized to a scheme base; 0A0W proof, first sentence: choose a separated finite-presentation closed envelope; 0873 proof, first sentence: the finite-presentation envelope before enforcing separatedness; supporting input: 0872 proof: apply the quasi-affine envelope lemma to the chosen finite-stage map; 0871 proof, last sentence: the chosen quasi-compact open of a finite-presentation affine stage is finitely presented over that stage",
+   "via": [
+    "lem-sfb-space-quasiaffine-fp-envelope",
+    "lem-sfb-space-finite-type-fp-envelope",
+    "lem-sfb-space-separated-finite-type-fp-envelope",
+    "lem-sfb-proper-space-fixed-base-fp-limit",
+    "lem-sfb-space-proper-noetherian-approximation",
+    "lem-sfb-space-relative-ample-locus",
+    "lem-sfb-stable-and-smooth-family-open-loci",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-space-qc-open-finite-presentation",
+  "worker": "stage1",
+  "summary": "Q21: expanded the scheme-chart/local-isomorphism proof of local finite presentation and proved the diagonal isomorphism on sections. The quasi-compactness hypothesis and the quasi-compactness of affine tests then give finite presentation without assumptions on the target. Reused existing atlas, affine-basis and affine-quasi-compactness nodes; no new nodes. Scheme-only Mathlib hits do not finish the algebraic-space statement.",
+  "blueprint": "Supporting input below det-thm-sf-ctf-stability-direct-images (3), as recorded in the inherited from.place chain: Stacks 0871, final sentence, that the chosen quasi-compact open of a finite-presentation affine stage is finitely presented over that stage. All four steps supply precisely that prerequisite; the latest blueprint direct-image proof (3) is retained.",
+  "tool_uses": [
+   {
+    "node": "def-trf-algebraic-space",
+    "why": "Definition supplies a surjective etale scheme atlas; the unit has no replacement definition."
+   },
+   {
+    "node": "def-a1-space-open-subspace",
+    "why": "Definition supplies the open scheme after every scheme test; this is a generic notion."
+   },
+   {
+    "node": "lem-trf-space-fibre-products-etale-covers",
+    "why": "Generic fibre-product and etale-cover base-change theorem supplies the source atlas."
+   },
+   {
+    "node": "def-weil-open-immersion",
+    "why": "Scheme open-immersion definition identifies the source with the open subscheme."
+   },
+   {
+    "node": "def-sbc-locally-finite-presentation",
+    "why": "Scheme definition supplies the finite-presentation-at-a-point criterion used on charts."
+   },
+   {
+    "node": "lem-weil-pbc-affine-opens-basis",
+    "why": "Generic affine neighbourhood theorem supplies an affine inside the open image."
+   },
+   {
+    "node": "lem-weil-pbc-affine-scheme-qcqs",
+    "why": "Generic quasi-compactness theorem supplies quasi-compactness of each affine diagonal test."
+   }
+  ]
+ },
+ "tool_uses": [
+  "def-trf-algebraic-space",
+  "def-a1-space-open-subspace",
+  "lem-trf-space-fibre-products-etale-covers",
+  "def-weil-open-immersion",
+  "def-sbc-locally-finite-presentation",
+  "lem-weil-pbc-affine-opens-basis",
+  "lem-weil-pbc-affine-scheme-qcqs"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q21-8e7ef4f58",
+  "group": "Q21",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q21-8e7ef4f58 (reviewer sub-agent of L); spot-checked: I read the item in full: 4 steps, no new nodes. Its statement and stmt_deps are byte-identical to the live node, which is still unsplit with an empty proof, so the target is not weakened and no other group has split this item. Sources checked: spaces-morphisms.tex l.5651 Tag 06CN, morphisms.tex l.4184 Tag 01TT (local isomorphism) and l.4193 Tag 01TU (finite presentation iff quasi-compact, via monomorphism ⇒ quasi-separated). The proof follows this route and writes out the representable principle and the monomorphism argument on sheaf tests. Step 1: the atlas V→X comes from def-trf; W=V×_XU is an open subscheme of V by def-a1; W→U is surjective étale by the base-change clause of lem-trf-space-fibre-products-etale-covers. Step 2: the 01IT affine D⊆j_V(W) and the identity A→A with zero generators and zero relations satisfy def-sbc at each point. Step 3 (elementary, accepted): a section of an open immersion is unique, so j is a monomorphism and Δ_j is an iso. Step 4: an affine test of Δ_j is ≅T, quasi-compact by 00E8, so j is quasi-separated; with the given quasi-compactness this is finite presentation as the item defines it. Edge cases checked: U empty, X not quasi-separated, a non-quasi-compact open (only quasi-compactness fails), non-Noetherian X. No algebraic-space duplicate in the DAG: the hits are the scheme Nagata node, the stack LFP node and the parent's step 5, which uses exactly this statement. Mathlib has no algebraic spaces, so the item is correctly not a leaf. No SGA. Accepted tool_use: lem-trf-space-fibre-products-etale-covers as a generic tool (unit sk-i-curve-zero). The worker wrote tool_uses itself (C8), which I note only. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SpaceQcOpenFinitePresentation",
+  "declaration": "AlgebraicGeometry.AlgebraicSpace.finitePresentation_of_quasiCompact_openImmersion",
+  "file": "lean/Sheaf/AlgebraicGeometry/SpaceQcOpenFinitePresentation.lean",
+  "statement": "theorem finitePresentation_of_quasiCompact_openImmersion {S : Scheme.{u}} (U X : AlgebraicSpace S) (j : U ⟶ X) (hj : IsRepresentableWith (fun _ _ p ↦ IsOpenImmersion p.left) j.hom.hom) (hqc : IsQuasiCompactPresheafMap j.hom.hom) : IsQuasiCompactPresheafMap j.hom.hom ∧ IsQuasiCompactPresheafMap (pullback.diagonal j.hom.hom) ∧ MapIsLocallyOfFinitePresentation j",
+  "branch": "newtargets-dag",
+  "by": "Q55",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-3b5d8ffc3",
+  "group": "Q55",
+  "result": "pass",
+  "note": "Read the item, all 9 stmt_deps and the declarations they use (IsRepresentableWith, OpenSubspace, IsQuasiCompactPresheafMap, MapIsLocally/MapIsLocallyOfFinitePresentation), the module, the report and Stacks 06CN (spaces-morphisms.tex l.5651). hj = representable by open immersions (same idiom as the OpenSubspace owner); hqc = affine-test atlas quasi-compactness, as the node words it; conclusion = qc ∧ qc of the relative pullback.diagonal (relative, not absolute) ∧ local finite presentation on étale charts, exactly the node's definition of finite presentation; no hypotheses on X, universes are the standard u interface. Edge cases checked: empty U/X, target not qc/qs, identity j. Diff vs live: only lean plus two appended stmt_deps on already landed owner def nodes (def-sfb-space-quasi-compact-presheaf-map, def-sfb-space-morphism-properties), both in the snapshot; statement/proof/source unchanged; lean.statement verbatim; no name collision; sorry only, no defs, docstrings carry source, blueprint and the 4 proof steps. Advisory: MapIsQuasiSeparated (def-sfb-stack-qcqs-morphism) also exists, built on the point-compactness MapIsQuasiCompact; the item consistently uses the atlas predicate instead, and the two predicates predate this delivery. No files changed, no compile run."
+ }
+}

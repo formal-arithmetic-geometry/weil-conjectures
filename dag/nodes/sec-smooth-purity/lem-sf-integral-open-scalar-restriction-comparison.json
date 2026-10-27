@@ -1,0 +1,118 @@
+{
+ "id": "lem-sf-integral-open-scalar-restriction-comparison",
+ "kind": "statement",
+ "title": "Generator-normalized consecutive open scalar restriction",
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-def-sf-operations",
+ "statement": "Fix a prime ell, a finite extension E of Q_ell in an independent coefficient universe, an open immersion j:X -> V, and the coefficient-system transports and open operations o [lem-sf-integral-open-reduction-comparison]. Write B_(W,k)=(O_E/varpi^(k+1))_W and S_n^W=Res_(B_(W,n+1)->B_(W,n)) [def-coef-normalized-dvr-tower], and J_k for the finite open extension. For each n >= 0 there is an ordinary natural isomorphism S_n^X followed by J_(n+1) isomorphic to J_n followed by S_n^V. On every extension summand it sends a section to the generator with that same underlying section. The assertion is expressed as HEq of the two functions on the native section carriers.",
+ "stmt_deps": [
+  "lem-sf-integral-open-reduction-comparison",
+  "def-coef-normalized-dvr-tower"
+ ],
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tags 03DI, 03DA and 0E8I; parent Steps 1 and 2."
+ },
+ "proof": [
+  {
+   "text": "Apply naturality of the recorded system ring map to the horizontal arrow (n+1,W) to (n,W). Its component normalization identifies this equation with the square of the two finite ring maps and their coefficient quotients. The concrete pushforward composition and congruence isomorphisms give S_n^X followed by the (n+1)-slice transport isomorphic to the n-slice transport followed by slice scalar restriction; all maps retain the underlying sections.",
+   "uses": [
+    "lem-sf-integral-open-reduction-comparison"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Apply [lem-cbc-ringed-open-scalar-adjunction] to the consecutive ring quotient on the ambient site. Invert its extension/scalar comparison and compose with the transport square from Step 1. This constructs e_n. The comparison generator formula and sectionwise identity transport prove exactly [x]_a maps to [x]_a. The generator formula also uniquely specifies this ordinary comparison.",
+   "uses": [
+    "lem-cbc-ringed-open-scalar-adjunction"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sf-integral-open-reduction-comparison",
+  "lem-cbc-ringed-open-scalar-adjunction"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tags 03DI and 03DA. Explicit continuous pushforward comparison and scalar/open inverse comparison, M7 2026-10-27."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Extension by zero of sheaves of modules commutes with tensor products and quotient coefficient restriction",
+   "results": "Eight hits: AlgebraicGeometry.RingedSpace.res_zero; TensorProduct.tmul_zero, zero_tmul; KaehlerDifferential.mulActionBaseChange_smul_zero; PiTensorProduct.zero_tprodCoeff, lifts_zero; ModuleCat.tildeInModuleCat; PresheafOfModules.Sheafify.map_smul_eq. None states the ordinary open tensor quotient square.",
+   "date": "2026-10-27",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Extension by zero of sheaves of modules commutes with restriction of scalars and quotient transitions",
+   "results": "Eight results about free sheaves and extension of scalars; no comparison of the open quotient models.",
+   "date": "2026-10-27",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"restrictScalars\", \"pushforward\"",
+   "results": "No hits.",
+   "date": "2026-10-27",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "pushforwardComp|pushforwardCongr₂",
+   "results": "The concrete module pushforward composition/congruence APIs construct the ordinary restriction comparison. Local searches in both project roots find no theorem asserting either the scalar K-flat quotient-model equation or the ordinary open tensor quotient square.",
+   "date": "2026-10-27",
+   "verdict": "partial match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.SixFunctors.IntegralOpenTensorQuotientModel",
+  "date": "2026-10-27",
+  "group": "M7"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sf-integral-open-tensor-quotient-model",
+   "place": "The ordinary comparison construction, parent Steps 1 and 2.",
+   "via": []
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.SixFunctors.IntegralOpenScalarRestrictionComparison",
+  "file": "lean/Sheaf/SixFunctors/IntegralOpenScalarRestrictionComparison.lean",
+  "declaration": "WeilConjectures.integralOpenScalarRestrictionComparison",
+  "statement": "theorem integralOpenScalarRestrictionComparison (n : ℕ) :\n    ∃ ordinary : normalizedDVRModuleRes l E X (Nat.le_succ n) ⋙\n          IntegralOpenReduction.finiteExtension l E j o (n + 1) ≅\n        IntegralOpenReduction.finiteExtension l E j o n ⋙\n          normalizedDVRModuleRes l E V (Nat.le_succ n),\n      ∀ (M : normalizedDVRModules l E X n) (W : V.ProEt)\n        (a : W ⟶ IntegralOpenReduction.openObject j),\n        HEq (fun x : ((normalizedDVRModuleRes l E X (Nat.le_succ n)).obj M).val.obj\n            (op ((IntegralOpenReduction.sliceSite j).obj (Over.mk a))) ↦\n          (ordinary.hom.app M).val.app (op W)\n            (IntegralOpenReduction.finiteExtensionSection l E j o (n + 1)\n              ((normalizedDVRModuleRes l E X (Nat.le_succ n)).obj M) W a x))\n          (fun x : M.val.obj (op ((IntegralOpenReduction.sliceSite j).obj (Over.mk a))) ↦\n            IntegralOpenReduction.finiteExtensionSection l E j o n M W a x)",
+  "branch": "sheaf-dag",
+  "by": "M7",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M7",
+  "result": "pass",
+  "landing": "20261027T050623-L-245985",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M7",
+  "result": "pass",
+  "landing": "20261027T050623-L-245985",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

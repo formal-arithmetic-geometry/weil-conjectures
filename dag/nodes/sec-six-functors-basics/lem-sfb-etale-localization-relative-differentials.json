@@ -1,0 +1,272 @@
+{
+ "id": "lem-sfb-etale-localization-relative-differentials",
+ "kind": "statement",
+ "title": "Relative differentials are invariant under etale localization",
+ "statement": "Let\n$$\n\\begin{array}{ccc}\nX_2 & \\xrightarrow{a} & X_1\\\\\n\\downarrow && \\downarrow\\\\\nS_2 & \\xrightarrow{b} & S_1\n\\end{array}\n$$\nbe a commutative square of schemes [def-pc-scheme], with both $a:X_2\\to X_1$ and $b:S_2\\to S_1$ etale [def-weil-etale-morphism]. Let $f:X_1\\to S_1$ and $f_2:X_2\\to S_2$ be the vertical morphisms, and let $\\Omega^1_{X_1/S_1}$ and $\\Omega^1_{X_2/S_2}$ be their relative differential sheaves with universal derivations [def-sc-relative-differential-sheaf]. The canonical $\\mathcal O_{X_2}$-linear map\n$$a^*\\Omega^1_{X_1/S_1}\\longrightarrow\\Omega^1_{X_2/S_2},\\qquad 1\\otimes da_1\\longmapsto d(a^\\sharp a_1),$$\ninduced by functoriality of Kähler differentials and ordinary module pullback [def-pc-module-pullback], is an isomorphism. It carries the pulled-back universal derivation to the universal derivation on $X_2/S_2$ and is compatible with restriction to open subschemes.",
+ "source": {
+  "document": "literature/stacks-project/more-morphisms.tex",
+  "place": "Tag 04BX, lemma-sheaf-differentials-etale-localization, statement and proof"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-etale-morphism",
+  "def-sc-relative-differential-sheaf",
+  "def-pc-module-pullback"
+ ],
+ "proof": [
+  {
+   "text": "Mathlib already supplies SmoothOfRelativeDimension 0 for an etale morphism. Apply [lem-sc-smooth-omega-finite-locally-free] at rank zero to a and b. The rank-zero consequence of [def-amb-finite-locally-free-module], implemented by the proved source-library theorem Modules.isZero_of_isFiniteLocallyFreeOfRank_zero, gives IsZero for both relative differential sheaves. The explicit fibre-dimension assertion is not needed.",
+   "uses": [
+    "lem-sc-smooth-omega-finite-locally-free",
+    "def-amb-finite-locally-free-module"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 04BX, proof, opening recall; rank-zero justification: morphisms.tex Tag 02G1"
+   }
+  },
+  {
+   "text": "Apply [lem-a1-differential-sheaf-transitivity-exact] to X2 -> S2 -> S1, retaining its second arrow q and its formula on differentials. The adjunction [def-pc-module-pullback] identifies maps from f2^* Omega(S2/S1) with maps from the zero sheaf Omega(S2/S1), so its first arrow is zero. Exactness therefore makes q mono, and its recorded epimorphism makes q an isomorphism in the abelian module category.",
+   "uses": [
+    "lem-a1-differential-sheaf-transitivity-exact",
+    "def-pc-module-pullback"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 04BX, proof, application of Tag 01UX"
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-smooth-differential-transitivity-short-exact] to X2 -> X1 -> S1, using the Mathlib smooth instance for the etale map a. Its last term Omega(X2/X1) is zero by step 1. ShortExact.isIso_f_iff gives that p = f1.relativeDifferentialsPullbackMap a is an isomorphism.",
+   "uses": [
+    "lem-sfb-smooth-differential-transitivity-short-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 04BX, proof, application of Tag 02K4"
+   }
+  },
+  {
+   "text": "Compose p, relativeDifferentialsCongr for the square equation, and q. The defining formula of p [def-a1-relative-differentials-pullback-map] and the formula of q prove the displayed differential formula. For any source open O, compose the section-normalized tensor-pullback adjunction with the open-restriction adjunction [def-pc-module-pullback], and use left-adjoint uniqueness to get an isomorphism e from the restricted pullback to the pullback along O.ι followed by a. The unit identity proves its normalization on every module section. Define cO as e.inv followed by the restriction of c and the differential restriction isomorphism [def-sc-relative-differential-sheaf]. The isomorphism identities give the commuting diagram. Naturality of c, its differential formula, and the unit identity for the differential restriction adjunction give the cO differential formula. No Cartesian hypothesis is used.",
+   "uses": [
+    "def-a1-relative-differentials-pullback-map",
+    "def-pc-module-pullback",
+    "def-sc-relative-differential-sheaf"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 04BX, final conclusion; canonical characterization: morphisms.tex Tag 01UV"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sc-smooth-omega-finite-locally-free",
+  "def-amb-finite-locally-free-module",
+  "lem-a1-differential-sheaf-transitivity-exact",
+  "def-pc-module-pullback",
+  "lem-sfb-smooth-differential-transitivity-short-exact",
+  "def-a1-relative-differentials-pullback-map",
+  "def-sc-relative-differential-sheaf"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "U1",
+  "date": "2026-10-26",
+  "document": "literature/stacks-project/more-morphisms.tex",
+  "place": "Tag 04BX, proof; restriction normalization proved by the unit identities of the tensor and open-restriction adjunctions (Tags 0096, 0097 and 01US)."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "In a commutative square of schemes with etale horizontal arrows the canonical pullback map on relative Kahler differential sheaves is an isomorphism compatible with universal derivations",
+   "sub": "",
+   "results": "{\"t\": \"2026-10-23T14:54:05Z\", \"tool\": \"leanfinder\", \"query\": \"In a commutative square of schemes with etale horizontal arrows the canonical pullback map on relative Kahler differential sheaves is an isomorphism compatible with universal derivations\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"KaehlerDifferential.isBaseChange_of_formallyEtale\", \"KaehlerDifferential.tensorKaehlerEquivOfFormallyEtale_apply\", \"KaehlerDifferential.tensorKaehlerEquivOfFormallyEtale\", \"KaehlerDifferential.tensorKaehlerEquivOfFormallyEtale_symm_D_algebraMap\", \"KaehlerDifferential.tensorKaehlerEquiv\", \"AlgebraicGeometry.IsEtale.instFormallyUnramified\", \"AlgebraicGeometry.IsEtale.instIsStableUnderBaseChangeScheme\", \"KaehlerDifferential.tensorKaehlerEquivBase\"], \"digest\": \"acd036f7ec2cbdd0\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: read Mathlib/RingTheory/Etale/Kaehler.lean:38-52 (ring-level tensor differential isomorphism) and Algebra/Category/ModuleCat/Differentials/Presheaf.lean:193-239 (sectionwise presheaf construction). Neither states the Zariski scheme-sheaf localization theorem, and passing from affine rings and gluing scheme sheaves is more than one-line specialization."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a commutative square of schemes whose source and base changes are etale, pullback of the relative differential sheaf is canonically isomorphic to the new relative differential sheaf and carries universal differentials",
+   "sub": "",
+   "results": "{\"t\": \"2026-10-23T15:48:36Z\", \"tool\": \"leanfinder\", \"query\": \"For a commutative square of schemes whose source and base changes are etale, pullback of the relative differential sheaf is canonically isomorphic to the new relative differential sheaf and carries universal differentials\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"KaehlerDifferential.isBaseChange_of_formallyEtale\", \"KaehlerDifferential.tensorKaehlerEquivOfFormallyEtale_apply\", \"AlgebraicGeometry.IsEtale.instIsStableUnderBaseChangeScheme\", \"AlgebraicGeometry.Scheme.instHasPullbacksEtale\", \"KaehlerDifferential.tensorKaehlerEquivOfFormallyEtale\", \"KaehlerDifferential.isBaseChange\", \"KaehlerDifferential.tensorKaehlerEquivOfFormallyEtale_symm_D_algebraMap\", \"KaehlerDifferential.tensorKaehlerEquiv\"], \"digest\": \"3adca6e713ab34dc\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: read Mathlib/RingTheory/Etale/Kaehler.lean:38-52 (ring-level tensor differential isomorphism) and Algebra/Category/ModuleCat/Differentials/Presheaf.lean:193-239 (sectionwise presheaf construction). Neither states the Zariski scheme-sheaf localization theorem, and passing from affine rings and gluing scheme sheaves is more than one-line specialization."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Etale localization of schemes preserves relative Kahler differential sheaves by canonical pullback isomorphism",
+   "sub": "",
+   "results": "{\"t\": \"2026-10-23T15:48:35Z\", \"tool\": \"leansearch\", \"query\": \"Etale localization of schemes preserves relative Kahler differential sheaves by canonical pullback isomorphism\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"KaehlerDifferential.isLocalizedModule_map\", \"PresheafOfModules.DifferentialsConstruction.relativeDifferentials'\", \"KaehlerDifferential.isLocalizedModule\", \"KaehlerDifferential.tensorKaehlerEquivOfFormallyEtale\", \"KaehlerDifferential.tensorKaehlerEquivOfFormallyEtale_apply\", \"KaehlerDifferential.tensorKaehlerEquiv\", \"KaehlerDifferential.isBaseChange_of_formallyEtale\", \"KaehlerDifferential.tensorKaehlerEquivOfFormallyEtale.congr_simp\"], \"digest\": \"0218c58786a77575\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: read Mathlib/RingTheory/Etale/Kaehler.lean:38-52 (ring-level tensor differential isomorphism) and Algebra/Category/ModuleCat/Differentials/Presheaf.lean:193-239 (sectionwise presheaf construction). Neither states the Zariski scheme-sheaf localization theorem, and passing from affine rings and gluing scheme sheaves is more than one-line specialization."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"KaehlerDifferential\", \"map\", \"IsEtale\"",
+   "sub": "",
+   "results": "{\"t\": \"2026-10-23T15:48:35Z\", \"tool\": \"loogle\", \"query\": \"\\\"KaehlerDifferential\\\", \\\"map\\\", \\\"IsEtale\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: read Mathlib/RingTheory/Etale/Kaehler.lean:38-52 (ring-level tensor differential isomorphism) and Algebra/Category/ModuleCat/Differentials/Presheaf.lean:193-239 (sectionwise presheaf construction). Neither states the Zariski scheme-sheaf localization theorem, and passing from affine rings and gluing scheme sheaves is more than one-line specialization."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"KaehlerDifferential\", \"FormallyEtale\"",
+   "sub": "",
+   "results": "{\"t\": \"2026-10-23T14:51:36Z\", \"tool\": \"loogle\", \"query\": \"\\\"KaehlerDifferential\\\", \\\"FormallyEtale\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"Algebra.FormallyEtale.subsingleton_kaehlerDifferential\", \"KaehlerDifferential.tensorKaehlerEquivOfFormallyEtale\", \"KaehlerDifferential.isBaseChange_of_formallyEtale\", \"KaehlerDifferential.tensorKaehlerEquivOfFormallyEtale_apply\", \"KaehlerDifferential.tensorKaehlerEquivOfFormallyEtale_symm_D_algebraMap\"], \"digest\": \"29c4cb60d87f5b73\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: read Mathlib/RingTheory/Etale/Kaehler.lean:38-52 (ring-level tensor differential isomorphism) and Algebra/Category/ModuleCat/Differentials/Presheaf.lean:193-239 (sectionwise presheaf construction). Neither states the Zariski scheme-sheaf localization theorem, and passing from affine rings and gluing scheme sheaves is more than one-line specialization."
+  },
+  {
+   "tool": "grep",
+   "query": "relativeDifferentials|etale.*differential|differential.*etale",
+   "sub": "AlgebraicGeometry",
+   "results": "{\"t\": \"2026-10-23T14:51:35Z\", \"tool\": \"grep\", \"query\": \"relativeDifferentials|etale.*differential|differential.*etale\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: read Mathlib/RingTheory/Etale/Kaehler.lean:38-52 (ring-level tensor differential isomorphism) and Algebra/Category/ModuleCat/Differentials/Presheaf.lean:193-239 (sectionwise presheaf construction). Neither states the Zariski scheme-sheaf localization theorem, and passing from affine rings and gluing scheme sheaves is more than one-line specialization."
+  },
+  {
+   "tool": "grep",
+   "query": "tensorKaehlerEquivOfFormallyEtale|isBaseChange_of_formallyEtale",
+   "sub": "RingTheory/Etale",
+   "results": "{\"t\": \"2026-10-23T14:56:00Z\", \"tool\": \"grep\", \"query\": \"tensorKaehlerEquivOfFormallyEtale|isBaseChange_of_formallyEtale\", \"sub\": \"RingTheory/Etale\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/Etale/Kaehler.lean\", \"Mathlib/RingTheory/Etale/Kaehler.lean\", \"Mathlib/RingTheory/Etale/Kaehler.lean\", \"Mathlib/RingTheory/Etale/Kaehler.lean\", \"Mathlib/RingTheory/Etale/Kaehler.lean\"], \"digest\": \"8c419ef3405e122d\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: read Mathlib/RingTheory/Etale/Kaehler.lean:38-52 (ring-level tensor differential isomorphism) and Algebra/Category/ModuleCat/Differentials/Presheaf.lean:193-239 (sectionwise presheaf construction). Neither states the Zariski scheme-sheaf localization theorem, and passing from affine rings and gluing scheme sheaves is more than one-line specialization."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Kahler differential sheaves of schemes are invariant under etale localization of source and base",
+   "sub": "",
+   "results": "{\"t\": \"2026-10-23T18:55:13Z\", \"tool\": \"leanfinder\", \"query\": \"Kahler differential sheaves of schemes are invariant under etale localization of source and base\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"KaehlerDifferential.isBaseChange_of_formallyEtale\", \"KaehlerDifferential.tensorKaehlerEquivOfFormallyEtale_apply\", \"KaehlerDifferential.tensorKaehlerEquivOfFormallyEtale\", \"KaehlerDifferential.tensorKaehlerEquivOfFormallyEtale_symm_D_algebraMap\", \"AlgebraicGeometry.IsEtale.instFormallyUnramified\", \"KaehlerDifferential.isLocalizedModule_map\", \"Algebra.etaleLocus_eq_compl_support\", \"Algebra.FormallyEtale.localization_base\"], \"digest\": \"2d8eb8a58bee6595\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the ring-level formally-etale tensor equivalence and presheaf construction do not state the arbitrary square of scheme differential sheaves; affine comparison and gluing remain. Candidates read at Mathlib/RingTheory/Etale/Kaehler.lean:38-52 and Algebra/Category/ModuleCat/Differentials/Presheaf.lean:193-239."
+  },
+  {
+   "tool": "grep",
+   "query": "relativeDifferentials|[Ee]tale.*[Dd]ifferential|[Dd]ifferential.*[Ee]tale",
+   "sub": "AlgebraicGeometry",
+   "results": "{\"t\": \"2026-10-23T18:56:16Z\", \"tool\": \"grep\", \"query\": \"relativeDifferentials|[Ee]tale.*[Dd]ifferential|[Dd]ifferential.*[Ee]tale\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the ring-level formally-etale tensor equivalence and presheaf construction do not state the arbitrary square of scheme differential sheaves; affine comparison and gluing remain. Candidates read at Mathlib/RingTheory/Etale/Kaehler.lean:38-52 and Algebra/Category/ModuleCat/Differentials/Presheaf.lean:193-239."
+  },
+  {
+   "tool": "leansearch",
+   "query": "For an etale commutative square of schemes pullback of relative differential sheaves is an isomorphism",
+   "sub": "",
+   "results": "{\"t\": \"2026-10-23T18:56:16Z\", \"tool\": \"leansearch\", \"query\": \"For an etale commutative square of schemes pullback of relative differential sheaves is an isomorphism\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"KaehlerDifferential.tensorKaehlerEquivOfFormallyEtale.congr_simp\", \"KaehlerDifferential.tensorKaehlerEquivOfFormallyEtale_apply\", \"KaehlerDifferential.tensorKaehlerEquivOfFormallyEtale\", \"KaehlerDifferential.isBaseChange_of_formallyEtale\", \"KaehlerDifferential.tensorKaehlerEquivOfFormallyEtale_symm_D_algebraMap\", \"AlgebraicGeometry.Scheme.Modules.pullbackCongr\", \"AlgebraicGeometry.IsEtale.instIsStableUnderBaseChangeScheme\", \"AlgebraicGeometry.pullbackRestrictIsoRestrict\"], \"digest\": \"09d9b084ba3db0a3\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the ring-level formally-etale tensor equivalence and presheaf construction do not state the arbitrary square of scheme differential sheaves; affine comparison and gluing remain. Candidates read at Mathlib/RingTheory/Etale/Kaehler.lean:38-52 and Algebra/Category/ModuleCat/Differentials/Presheaf.lean:193-239."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"relativeDifferentials\"",
+   "sub": "",
+   "results": "{\"t\": \"2026-10-23T18:56:16Z\", \"tool\": \"loogle\", \"query\": \"\\\"relativeDifferentials\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 4, \"note\": \"\", \"top\": [\"PresheafOfModulesOfCommRing.DifferentialsConstruction.relativeDifferentials'\", \"PresheafOfModulesOfCommRing.DifferentialsConstruction.relativeDifferentials'_obj\", \"PresheafOfModulesOfCommRing.DifferentialsConstruction.relativeDifferentials'_map\", \"PresheafOfModulesOfCommRing.DifferentialsConstruction.relativeDifferentials'_map_d\"], \"digest\": \"087a3d986bff6784\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the ring-level formally-etale tensor equivalence and presheaf construction do not state the arbitrary square of scheme differential sheaves; affine comparison and gluing remain. Candidates read at Mathlib/RingTheory/Etale/Kaehler.lean:38-52 and Algebra/Category/ModuleCat/Differentials/Presheaf.lean:193-239."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-scheme-etale-relative-differentials-comparison",
+  "date": "2026-10-24",
+  "group": "Q29"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Algebraicity and smoothness of the stack of all nodal curves. Supporting input: Tag 0D59 (lemma-curves-defo-thy), over Spec Z; artin.tex definition-versal and definition-openness-versality. Supporting input: Tag 0CXU (lemma-SGE-implies-openness-versality), specialized to Spec Z; remark-strong-effectiveness; definitions definition-RS-star, definition-limit-preserving, definition-versal and definition-openness-versality. Supporting input: Tag 0CXU, penultimate paragraph: lift i across the affine first order thickening U into U prime using smooth formal smoothness. Translation-module prerequisite: the sheaf of lifts and the simply transitive derivation action in Tags 061A, 061C, 061D, with quasi-coherence for locally finitely presented space morphisms. Supporting input: Tags 04CU, 05ZF, finite presentation of the relative differential sheaf on compatible etale charts. Supporting input for this split: Scheme relative differentials agree with differentials on the small etale ringed topos. Stacks Tag 04CS, first proof paragraph: the canonical isomorphism under etale localization, supplied by Tag 04BX.",
+   "via": [
+    "lem-sfb-scheme-etale-relative-differentials-comparison",
+    "lem-sfb-space-relative-differentials-finite-presentation",
+    "lem-sfb-space-infinitesimal-lift-pseudotorsor",
+    "lem-sfb-smooth-space-affine-infinitesimal-lift",
+    "lem-sfb-artin-square-zero-effectivity-openness",
+    "lem-sfb-curve-openness-versality",
+    "lem-sfb-nodal-curve-stack-smooth",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-etale-localization-relative-differentials",
+  "worker": "stage1",
+  "summary": "Followed Tag 04BX: rank-zero etale vanishing from existing nodes, ordinary base transitivity, smooth source transitivity, and the composite formula on generators. Created only the general smooth transitivity short exact sequence; preserved the statement and all hypotheses.",
+  "blueprint": "Current latest blueprint det-thm-sf-ctf-stability-direct-images proof (3), supporting differential-localization prerequisite inherited through the scheme/etale comparison chain. This below-unit split follows Tag 04BX; it changes no unit route.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-etale-smooth-zero-dimensional-fibres",
+    "why": "Generic etale implies relative-dimension-zero smoothness, used for the two horizontal maps; no node of the unit states it."
+   },
+   {
+    "node": "lem-sc-smooth-omega-finite-locally-free",
+    "why": "Generic smooth differential-rank theorem at rank zero; no node of the unit gives the rank statement."
+   },
+   {
+    "node": "lem-a1-differential-sheaf-transitivity-exact",
+    "why": "Generic ordinary transitivity for arbitrary scheme morphisms, used for the base tower; no node of the unit states it."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sc-smooth-omega-finite-locally-free",
+  "lem-a1-differential-sheaf-transitivity-exact"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q17-a17389d54",
+  "group": "Q17",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q17-a17389d54 (reviewer sub-agent of L); spot-checked: I read Stacks 04BX (more-morphisms.tex, lemma-sheaf-differentials-etale-localization), statement and proof, and 02K4 (morphisms.tex:7406-7426) in full. The item statement is unchanged and is 04BX with its canonical map; no Cartesian hypothesis is added. Step 1: lem-weil-pbc-etale-smooth-zero-dimensional-fibres makes a and b smooth of relative dimension 0. lem-sc-smooth-omega-finite-locally-free with d=0 and def-amb-finite-locally-free-module then give Omega_{X2/X1}=Omega_{S2/S1}=0. Step 2: right exact transitivity (lem-a1) for X2->S2->S1 with f2^*0=0 makes q an isomorphism. Step 3: the new 02K4 node for X2->X1->S1 with a smooth makes p an isomorphism. Both steps use the same Omega_{X2/S1} because f∘a=b∘f2; this is implicit, as in the source, and elementary. Step 4 is elementary: q∘p and the canonical map agree on the local generators 1⊗du, which gives the derivation and restriction clauses. The new node lem-sfb-smooth-differential-transitivity-short-exact matches 02K4 exactly: h smooth, nothing on g. It is statement-only (B1) and its notions all cite nodes. Small cases checked: the identity, A^1, and the non-smooth Spec k -> A^1 counterexample for injectivity. It has no DAG, blueprint or Lean duplicate: lem-a1 is right exact only, the trf/pbc results are ring-level, and lem-per-strict-smooth-log is an unsplit log generalization in another unit. It is not a restatement of the item. Accepted tool_uses: lem-weil-pbc-etale-smooth-zero-dimensional-fibres, lem-sc-smooth-omega-finite-locally-free, lem-a1-differential-sheaf-transitivity-exact. They were written by the worker, which is a C8 form point only. Advisory: the report mentions citations.json, which is not in the commit. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.EtaleLocalizationRelativeDifferentials",
+  "declaration": "AlgebraicGeometry.Scheme.Hom.etale_localization_relativeDifferentials",
+  "file": "lean/Sheaf/AlgebraicGeometry/EtaleLocalizationRelativeDifferentials.lean",
+  "statement": "theorem etale_localization_relativeDifferentials {X₁ X₂ S₁ S₂ : Scheme.{u}} (a : X₂ ⟶ X₁) (b : S₂ ⟶ S₁) (f₁ : X₁ ⟶ S₁) (f₂ : X₂ ⟶ S₂) [Etale a] [Etale b] (h : a ≫ f₁ = f₂ ≫ b) : ∃ c : (Modules.tensorPullback a).obj f₁.relativeDifferentials ⟶ f₂.relativeDifferentials, IsIso c ∧ (∀ (W : X₁.Opens) (r : Γ(X₁, W)), c.app (a ⁻¹ᵁ W) (Modules.tensorPullbackSection a f₁.relativeDifferentials W (f₁.relativeDifferentialsDerivation.d (X := op W) r)) = f₂.relativeDifferentialsDerivation.d (X := op (a ⁻¹ᵁ W)) (a.app W r)) ∧ (∀ O : X₂.Opens, ∃ (e : ((Modules.tensorPullback a).obj f₁.relativeDifferentials).restrict O.ι ≅ (Modules.tensorPullback (O.ι ≫ a)).obj f₁.relativeDifferentials) (cO : (Modules.tensorPullback (O.ι ≫ a)).obj f₁.relativeDifferentials ⟶ (O.ι ≫ f₂).relativeDifferentials), (∀ (W : X₁.Opens) (m : Γ(f₁.relativeDifferentials, W)), e.hom.app (O.ι ⁻¹ᵁ (a ⁻¹ᵁ W)) (((Modules.tensorPullback a).obj f₁.relativeDifferentials).presheaf.map (homOfLE (O.ι.image_preimage_le (a ⁻¹ᵁ W))).op (Modules.tensorPullbackSection a f₁.relativeDifferentials W m)) = Modules.tensorPullbackSection (O.ι ≫ a) f₁.relativeDifferentials W m) ∧ (∀ (W : X₁.Opens) (r : Γ(X₁, W)), cO.app ((O.ι ≫ a) ⁻¹ᵁ W) (Modules.tensorPullbackSection (O.ι ≫ a) f₁.relativeDifferentials W (f₁.relativeDifferentialsDerivation.d (X := op W) r)) = (O.ι ≫ f₂).relativeDifferentialsDerivation.d (X := op ((O.ι ≫ a) ⁻¹ᵁ W)) ((O.ι ≫ a).app W r)) ∧ (Modules.restrictFunctor O.ι).map c ≫ (f₂.relativeDifferentialsRestrictIso O.ι).hom = e.hom ≫ cO)",
+  "branch": "newtargets-dag",
+  "by": "NB",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-566d44e73",
+  "group": "NB",
+  "result": "pass",
+  "note": "Snapshot node changes only `lean`; lean.statement verbatim. All stmt_dep records match the declarations used (Scheme, AlgebraicGeometry.Etale, Hom.relativeDifferentials/Derivation, tensorPullback/tensorPullbackSection). Hypotheses are exactly 04BX: arbitrary commutative square, a and b Etale, no Cartesian or vertical assumption, single universe from the APIs. Conclusion: ∃ c with IsIso and c(1⊗dr)=d(a♯r) on the actual tensorPullbackSection; the generators pin c uniquely (same argument as existsUnique_relativeDifferentialsPullbackMap), so c is the canonical 01UV map. Restriction clause over every O : X₂.Opens has e pinned on all tensor units, cO pinned by the formula, and a real commuting equation with relativeDifferentialsRestrictIso. Edge cases (empty, ⊥, identity) covered. No new definitions or duplicates; docstrings carry source, blueprint and the 4 proof steps; sorry-only; lines ≤100; report sections present. Not recompiled (no file changed). Advisory only: restriction compatibility is rendered for opens of X₂."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U1",
+  "result": "pass",
+  "landing": "20261026T083118-L-2273262",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

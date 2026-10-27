@@ -1,0 +1,129 @@
+{
+ "id": "lem-sf-p1-exchange-iso-transport",
+ "kind": "statement",
+ "title": "Coefficient-independent exchange pasting over a projective-line isomorphism",
+ "statement": "Let A be a finite commutative ring, f:X -> S proper and i:X ≅ P=ProjectiveLine(S) over S, with q:P -> S. Put V=X times_S X, W=P times_S P and w=i times_S i, using the maps of [def-sf-p1-integral-transport-data]. For every M in D(P_et,A), the following two maps from R(p1_X)! L(p2_X)^* Li^* M to Li^* Lq^* Rq_* M agree. The first is R(p1_X)! of the pullback-square comparison for p2, then projectionComparison for p1, then Li^* of inverse ordinary exchange on W [lem-sf-p1-chart-exchange]. The second is inverse compact-support exchange on V, then Lf^* of proper forget-supports, inverse direct-image composition for i;q=f, and Rq_* of pushPull(i), then the pullback compositor Lf^* -> Li^* Lq^*. There are no Tate twists, normalized line maps, trace arrows or constant-object unit comparisons in this statement.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-geo-p1-adjunction/thm-amb-p1-adjunction.proof.md",
+  "place": "The first-coordinate calculation: the composition isomorphism for derived direct images and the same canonical pullback counits."
+ },
+ "stmt_deps": [
+  "def-sf-p1-integral-transport-data",
+  "lem-sf-p1-chart-exchange"
+ ],
+ "proof": [
+  {
+   "text": "Expand projectionComparison into proper forget-supports and inverse ordinary exchange. Naturality moves the first-projection forget-supports hom past the pullback-square hom. The inverse equation of proper_self_exchange_forget_supports identifies inverse supported self-exchange followed by pullback of proper forget-supports with the first-projection proper comparison followed by inverse ordinary self-exchange.",
+   "uses": [
+    "def-sf-p1-integral-transport-data",
+    "lem-sf-proper-self-exchange-forget-supports"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Prove the source-change exchange equation by transposing under the first-projection derived adjunction. The defining mate-counit equation, the conjugate-compositor counit formula, naturality, and the presentation adjunction triangle reduce it to pullback-compositor associativity. Independently apply the proved source-library derivedBaseChangeMap_paste to the projective self-product square and the first-projection presentation square. Both calculations give the exchange of the same outer rectangle. Cancel the common final pullback compositor; the remaining pair of compositors is exactly the second-projection derivedSquareUpperStarIso.",
+   "uses": [
+    "def-kun-unbounded-exchange",
+    "lem-weil-pbc-mate-pasting",
+    "def-sf-p1-integral-transport-data"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The normalization unit_comp_pushPull identifies the actual presentation adjunction unit with pushPull.inv. Hence the coefficient comparison in the preceding source-change calculation is the isomorphism Rq_*(pushPull.inv) followed by rightDerivedLowerStarCompOfEq.hom; its inverse is exactly the direct-image-composition inverse followed by Rq_*(pushPull.hom) appearing in the statement. Isomorphism cancellation turns the forward pasting equation into the desired inverse ordinary-exchange equation. Combine with step 1 to recover the supported equation, without changing coefficients or adding hypotheses.",
+   "uses": [
+    "lem-sf-iso-pushpull-unit-normalization",
+    "def-sf-p1-integral-transport-data",
+    "lem-weil-pbc-mate-pasting"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-sf-p1-integral-transport-data",
+  "lem-sf-proper-self-exchange-forget-supports",
+  "def-kun-unbounded-exchange",
+  "lem-weil-pbc-mate-pasting",
+  "lem-sf-iso-pushpull-unit-normalization"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-geo-p1-adjunction/thm-amb-p1-adjunction.proof.md",
+  "place": "T2: explicit derived mate transposition, source-change and stacked-square pasting, and cancellation by the proved unit_comp_pushPull; first-coordinate calculation with the specified canonical maps."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Derived base change conjugation under isomorphism of Cartesian squares and counit of composite adjunction",
+   "results": "Generic derived counit factorization and derived unit/counit lemmas; no comparison for these chosen proper forget-supports maps and pushPull.",
+   "date": "2026-10-27",
+   "verdict": "No direct specialization."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.comp_counit_app",
+   "results": "Found CategoryTheory.Adjunction.comp_counit_app in Mathlib.CategoryTheory.Adjunction.Basic. It expands a composite adjunction counit, but does not identify the concrete proper exchange and chosen pushPull.",
+   "date": "2026-10-27",
+   "verdict": "Generic ingredients only."
+  },
+  {
+   "tool": "grep",
+   "query": "baseChange.*comp|comp.*baseChange",
+   "results": "Mathlib search returned algebraic base-change composition and ordinary category lemmas. Local inspection found DerivedUnbounded, CompactificationLowerStarBaseChange, UpperLowerStarAdjunctionCompat and the private presentation-pasting calculations of ProjectiveLinePresentedTraceExchange; none states this formula with the explicitly constructed pushPull. Blueprint search for exchange isomorphism found no duplicate.",
+   "date": "2026-10-27",
+   "verdict": "Residual coefficient-independent pasting equation."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.SfP1ProjectionTraceFalseTail",
+  "date": "2026-10-27",
+  "group": "N2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sf-p1-projection-trace-transport-false",
+   "place": "Canonical pullback counits and derived direct-image composition in the first triangle, before trace and constant-unit normalization.",
+   "via": [
+    "lem-sf-p1-projection-trace-transport-false-tail",
+    "lem-sf-p1-projection-trace-transport-false"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-prop-sf-rf-shriek-preservation",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.SfP1ExchangeIsoTransport",
+  "file": "lean/Sheaf/AlgebraicGeometry/SfP1ExchangeIsoTransport.lean",
+  "declaration": "AlgebraicGeometry.Etale.SfP1Transport.exchangeIsoTransport",
+  "statement": "theorem exchangeIsoTransport\n    (A : Type (u + 1)) [CommRing A] [Finite A]\n    {S X : Scheme.{u}} (f : X ⟶ S) [IsProper f]\n    (i : X ≅ ProjectiveLine S) (hi : i.hom ≫ (ProjectiveLine S ↘ S) = f)\n    (M : DerivedCategoryModule A (ProjectiveLine S)) :\n    (rightDerivedLowerShriek (ModuleCat.{u + 1} A) (projection f false)).map\n        ((derivedSquareUpperStarIso (ModuleCat.{u + 1} A)\n          (projectionSquare f i hi true).toCommSq).hom.app M) ≫\n      (projectionComparison A f i hi false).hom.app\n        ((ordinaryFinitePullback A\n          (projectiveLineDiagonalProjection S true)).obj M) ≫\n      (ordinaryFinitePullback A i.hom).map\n        ((properExchange A (projectiveProjectionSquare S false)).inv.app M) =\n    (SfDiagonalKernel.exchangeFirst A f).inv.app\n        ((ordinaryFinitePullback A i.hom).obj M) ≫\n      (ordinaryFinitePullback A f).map\n        ((rightDerivedLowerShriekIsoRightDerivedLowerStar (ModuleCat.{u + 1} A) f).hom.app\n            ((ordinaryFinitePullback A i.hom).obj M) ≫\n          (rightDerivedLowerStarCompOfEq (ModuleCat.{u + 1} A) i.hom\n            (ProjectiveLine S ↘ S) f hi).inv.app\n              ((ordinaryFinitePullback A i.hom).obj M) ≫\n          (ordinaryFinitePushforward A (ProjectiveLine S ↘ S)).map\n            ((pushPull A i).hom.app M)) ≫\n      (leftDerivedUpperStarComp (ModuleCat.{u + 1} A) i.hom\n        (ProjectiveLine S ↘ S) f hi.symm).hom.app\n          ((ordinaryFinitePushforward A (ProjectiveLine S ↘ S)).obj M)",
+  "branch": "sheaf-dag",
+  "by": "N2",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "N2",
+  "result": "pass",
+  "landing": "20261027T034715-L-3677373",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T2",
+  "result": "pass",
+  "landing": "20261027T064510-L-2190992",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

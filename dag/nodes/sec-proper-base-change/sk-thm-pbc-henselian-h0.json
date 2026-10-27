@@ -3,7 +3,7 @@
  "blueprint": {
   "is": "sk-thm-pbc-henselian-h0",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Henselian-pair comparison in degree zero",
@@ -28,24 +28,160 @@
  },
  "stmt_deps": [
   "sk-def-conv",
-  "sk-def-pbc-conventions"
+  "sk-def-pbc-conventions",
+  "def-weil-pbc-henselian-terminology",
+  "def-pc-fibre-product",
+  "def-weil-pbc-etale-sheaf-of-sets",
+  "lem-weil-pbc-sets-etale-inverse-image-exact",
+  "def-weil-pbc-finite-section-pullback"
  ],
  "proof": [
   {
-   "text": "The geometric content is a connectedness statement: every irreducible closed\nsubset of a scheme proper over a henselian pair meets the closed fibre in a\nnonempty connected subset. Stein factorization and henselian connectedness\nprove this (Stacks Project, Tag 0A0B), and spectral-space restriction then\ngives equality of sections for Zariski sheaves. The connectedness statement\nalso holds after every finite cover, since that cover remains proper over\n$A$. A finite surjection whose Zariski-local pieces factor through the étale\ncovering, followed by descent on its self-intersection, upgrades the Zariski\ncomparison to étale sheaves (Stacks Project, Tag 09ZF). Over a general affine\nbase the integral form of Stein factorization, whose algebra need not be\nfinite, suffices for this argument.",
+   "text": "Construct the quotient-spectrum map q and its pullback i. Surjectivity of the quotient homomorphism makes q a closed immersion, and base change makes i a closed immersion. Properness of f over the affine spectrum gives CompactSpace Z and QuasiSeparatedSpace Z. The pullback range formula and the range of the quotient-spectrum map identify range i with the inverse image of V(J).",
+   "uses": [
+    "lem-weil-pbc-spec-quotient-closed-immersion",
+    "lem-weil-pbc-closed-immersion-base-change",
+    "def-weil-proper-morphism",
+    "lem-weil-pbc-qcqs-over-affine",
+    "def-pc-fibre-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 0A0C, setup and closed-fibre construction"
+   }
+  },
+  {
+   "text": "For every finite h : X′ to Z the composite h followed by f is proper. Apply Scheme.Hom.isConnected_inter_preimage_zeroLocus, the connectedness clause of thm-weil-pbc-stein-inputs, to every irreducible closed subset C of X′. Using the range identity of step 1, this says C intersected with the inverse image of range i is nonempty and connected. This is the unit’s integral Stein-connectedness input, uniformly on all finite covers.",
+   "uses": [
+    "lem-weil-pbc-finite-morphism-permanence",
+    "thm-weil-pbc-stein-inputs"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 0A0B, integral Stein connectedness; Tag 0A0C, finite covers"
+   }
+  },
+  {
+   "text": "Apply zariski_closed_immersion_connected_restriction to i and to pullback.snd i h for every finite h. In each case use the connectedness of the closure of a singleton from step 2; pullback range_snd identifies the latter range with the inverse image of range i. Finite morphisms over Z have qcqs source. This gives exactly the Type (u+1)-valued Zariski unit hypotheses of Gabber’s criterion, avoiding the smaller-universe interface of zariski_h0_proper_henselian_pair.",
+   "uses": [
+    "lem-weil-pbc-zariski-closed-immersion-connected-restriction",
+    "lem-weil-pbc-finite-morphism-permanence",
+    "lem-weil-pbc-qcqs-over-affine",
+    "def-pc-fibre-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 09ZG, spectral closed restriction; universe-compatible library specialization"
+   }
+  },
+  {
+   "text": "Apply gabber_h0_etale_criterion with these two Zariski unit hypotheses. Its conclusion is bijectivity of the set inverse-image unit evaluated at the identity etale object. The second factor in henselianPairH0SetRestriction is the presheaf image of an isomorphism, hence is an isomorphism of sets and a bijection. Compose the two bijections.",
+   "uses": [
+    "lem-weil-pbc-gabber-h0-etale-criterion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 09ZF, Gabber criterion; Tag 0A0C, application"
+   }
+  },
+  {
+   "text": "Evaluate naturality of the set inverse-image adjunction unit at the identity etale object. Compose this equation with the terminal-object transport in henselianPairH0SetRestriction. Naturality of the inverse-image sheaf morphism along that transport identifies the resulting composite with the displayed naturality equality. The Lean proof uses only congrArg, associativity, and NatTrans.naturality.",
    "uses": [],
-   "elementary": null
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Adjunction unit naturality and presheaf morphism naturality"
+   }
+  },
+  {
+   "text": "Reuse the existing abelian and constant-coefficient module specializations in DegreeZero: isIso_globalSectionsUpperStarMap_addCommGrpCat_of_henselianRing and isIso_globalSectionsUpperStarMap_of_henselianRing. Supply the canonical pullback square of f and the quotient-spectrum map, with its two projections. These are precisely the final two conjuncts, without any change of their restriction maps or sheaf encodings.",
+   "uses": [
+    "lemma-weil-pbc-etale-degree-zero",
+    "def-pc-fibre-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 0A0C; existing DegreeZero abelian and module specializations"
+   }
   }
  ],
- "proof_deps": [],
+ "proof_deps": [
+  "lem-weil-pbc-spec-quotient-closed-immersion",
+  "lem-weil-pbc-closed-immersion-base-change",
+  "def-weil-proper-morphism",
+  "lem-weil-pbc-qcqs-over-affine",
+  "def-pc-fibre-product",
+  "lem-weil-pbc-finite-morphism-permanence",
+  "thm-weil-pbc-stein-inputs",
+  "lem-weil-pbc-zariski-closed-immersion-connected-restriction",
+  "lem-weil-pbc-gabber-h0-etale-criterion",
+  "lemma-weil-pbc-etale-degree-zero"
+ ],
  "proof_origin": {
-  "by": "agent",
-  "document": "literature/blueprint/main-20261015/blueprint/sec-proper-base-change/sk-thm-pbc-henselian-h0/_section.md",
-  "place": "## Proof"
+  "by": "worker",
+  "group": "K7",
+  "date": "2026-10-22",
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tag 0A0C via integral Stein connectedness (Tag 0A0B), the universe-compatible Zariski criterion (Tag 09ZG), and Gabber (Tag 09ZF); existing DegreeZero coefficient specializations reused; naturality proved directly from the unit"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "henselian.*(section|sheaf)|((section|sheaf).*henselian)",
+   "results": "No hits",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Proper scheme over a henselian pair restriction of etale sheaves of sets global sections to closed fibre is bijective",
+   "results": "AlgebraicGeometry.Scheme.germ_stalkClosedPointTo_Spec; AlgebraicGeometry.Scheme.Etale.forgetFullyFaithful; AlgebraicGeometry.IsProper.instMorphismRestrict; AlgebraicGeometry.Scheme.ΓSpecIso_inv; AlgebraicGeometry.Scheme.etalePretopology; AlgebraicGeometry.Scheme.ΓSpecIso; AlgebraicGeometry.IsEtale.instIsStableUnderBaseChangeScheme; AlgebraicGeometry.Scheme.instHasPullbacksEtale",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "HenselianRing, Sheaf",
+   "results": "No hits; loogle: unknown identifier 'Sheaf'",
+   "date": "2026-10-22",
+   "verdict": "invalid query: repeated with fully qualified CategoryTheory.Sheaf"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Sections of any sheaf of sets on the small etale site of a proper scheme over a henselian pair are in bijection with sections on the closed fibre",
+   "results": "AlgebraicGeometry.Scheme.Etale.forgetFullyFaithful; AlgebraicGeometry.Scheme.instFullEtaleOverForget; AlgebraicGeometry.Scheme.Etale; StandardEtalePair.homEquiv; AlgebraicGeometry.Scheme.Etale.forget; AlgebraicGeometry.Scheme.instCategoryEtale; AlgebraicGeometry.SpecToEquivOfLocalRing_apply_fst; AlgebraicGeometry.Scheme.SpecToEquivOfField",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Gabber degree zero comparison: Zariski global section invariance under all finite covers implies etale global section invariance",
+   "results": "Algebra.etaleLocus_eq_univ_iff_etale; RingHom.Etale.propertyIsLocal; Algebra.mem_etaleLocus_iff; AlgebraicGeometry.Scheme.Etale; AlgebraicGeometry.IsEtale; Algebra.etaleLocus_eq_univ_iff; Algebra.isOpen_etaleLocus; Algebra.basicOpen_subset_etaleLocus_iff_etale",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "henselian|gabber",
+   "results": "No hits",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "HenselianRing, CategoryTheory.Sheaf",
+   "results": "No hits",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [
   "proof_cites_literature",
@@ -68,5 +204,126 @@
  "blueprint_snapshot": "main-20261015",
  "chapter": "sec-proper-base-change",
  "unit": "sk-thm-pbc-henselian-h0",
- "lean_audit": {}
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "sk-thm-pbc-henselian-h0",
+  "worker": "stage1",
+  "summary": "Q57 checked Stacks 0A0C and its inputs 0A0B and 09ZF, ruled out attachment because the project theorem covers abelian sheaves only, and reused all lower-level facts already in the DAG. Six steps check the criterion hypotheses, compare all finite covers, apply it for arbitrary set-valued sheaves, and prove naturality and the structured consequences. No new nodes or mathematical statement changes.",
+  "blueprint": "Realizes the unit's sole paragraph: integral Stein connectedness and Zariski comparison through the existing 0A0B node; stability on every finite cover in step 3; the 09ZF etale upgrade in step 4; the statement's naturality and coefficient consequences in steps 5--6.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-spec-quotient-closed-immersion",
+    "why": "Generic quotient-spectrum closed immersion used to check the etale criterion; the unit gives no such statement."
+   },
+   {
+    "node": "lem-weil-pbc-closed-immersion-base-change",
+    "why": "Generic stability of closed immersions under base change, used to check the criterion."
+   },
+   {
+    "node": "lem-weil-pbc-qcqs-over-affine",
+    "why": "Generic qcqs-over-affine lemma checks the hypothesis of the etale criterion."
+   },
+   {
+    "node": "lem-weil-pbc-zariski-h0-proper-henselian-pair",
+    "why": "The existing Tag 0A0B Zariski lemma implements exactly the unit proof's Stein-connectedness and Zariski comparison, both on Z and on finite covers."
+   },
+   {
+    "node": "lem-weil-pbc-finite-morphism-permanence",
+    "why": "Clause (c) supplies the finite-cover properness explicitly required by the unit proof."
+   },
+   {
+    "node": "lem-weil-pbc-gabber-h0-etale-criterion",
+    "why": "The existing Tag 09ZF criterion is the etale upgrade explicitly named in the unit proof."
+   },
+   {
+    "node": "lem-weil-pbc-sets-etale-inverse-image-composition-units",
+    "why": "Units clause (0) gives naturality in the sheaf, for the item's naturality clause."
+   },
+   {
+    "node": "lem-weil-pbc-etale-inverse-image-algebraic-structures",
+    "why": "Forgetting abelian structure commutes with inverse image and its unit; needed for the abelian consequence."
+   },
+   {
+    "node": "prop-weil-pbc-inverse-image-modules-exact",
+    "why": "Constant-ring module inverse image agrees with abelian inverse image and its unit; needed for the module consequence."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-spec-quotient-closed-immersion",
+  "lem-weil-pbc-closed-immersion-base-change",
+  "lem-weil-pbc-qcqs-over-affine",
+  "lem-weil-pbc-finite-morphism-permanence",
+  "lem-weil-pbc-gabber-h0-etale-criterion"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q57-9b3205b1c",
+  "group": "Q57",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q57-9b3205b1c (reviewer sub-agent of L); spot-checked: Read the item, the unit, every cited statement and Stacks etale-cohomology.tex Tag 0A0C (line 18200), Tag 0A0B (18168) and Tag 09ZF (14975). The statement is unchanged from main-20261015, and the item has 0 new nodes. The six steps are exactly the 0A0C proof (09ZF + 0A0B + finite over Z is proper over A) with every hypothesis checked. Step 1: qcqs via lem-weil-pbc-qcqs-over-affine, whose statement includes finite type implies qc and separated implies qs; the sk-def-conv notion of proper is identified with def-weil-proper-morphism in its own statement. Step 2: the 0A0B Zariski node is stated for set-valued sheaves under the same henselian-pair and proper hypotheses. Step 3: finite-morphism-permanence clause (c) with roles matched, plus the explicit fibre-product identification Z_0 x_Z Z' = Z' x_S S_0; this covers every finite h, as 09ZF hypothesis (2) requires. Step 4: the 09ZF criterion node gives the conclusion for set-valued sheaves. Step 5: naturality from units clause (0). Step 6: the abelian and module consequences via algebraic-structures clause (3) and modules-exact clauses (1)-(3). proof_deps equals the union of the steps' uses, and the closure is acyclic. Searches: LeanSearch, LeanFinder, Loogle (rerun with the qualified name) and grep. Not attaching the AddCommGrpCat-only Lean declaration is correct, because the item covers sheaves of sets. Edge cases checked: J=A forces A=0 (both sides singletons); J=0 gives the identity; P^1 over a complete DVR with a constant sheaf works; Z_(5)[i] over the non-henselian Z_(5) fails, so the henselian hypothesis is used. No duplicate: the existing abelian lemma-weil-pbc-etale-degree-zero and the strictly henselian local h0 node are special cases. Maintainer note: the abelian degree-zero lemma could later cite this item. All nine tool_uses are accepted: generic scheme facts, the 0A0B and 09ZF nodes the unit names, and the inverse-image structure nodes. The live item is still imported and there is no repair note."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.HenselianPairH0",
+  "declaration": "AlgebraicGeometry.henselian_pair_h0",
+  "declarations": [
+   "AlgebraicGeometry.henselianPairClosedFibreι",
+   "AlgebraicGeometry.henselianPairH0SetRestriction",
+   "AlgebraicGeometry.henselian_pair_h0"
+  ],
+  "file": "lean/Sheaf/Paper/HenselianPairH0.lean",
+  "statement": "theorem henselian_pair_h0 (A : Type u) [CommRing A] (J : Ideal A) [HenselianRing A J] (Z : Scheme.{u}) (f : Z ⟶ Spec (.of A)) [IsProper f] : (∀ F : Sheaf Z.smallEtaleTopology (Type (u + 1)), Function.Bijective (henselianPairH0SetRestriction A J f F)) ∧ (∀ (F G : Sheaf Z.smallEtaleTopology (Type (u + 1))) (α : F ⟶ G), α.hom.app (op (Scheme.Etale.mk (𝟙 Z))) ≫ henselianPairH0SetRestriction A J f G = henselianPairH0SetRestriction A J f F ≫ ((Scheme.etaleSetPullback (henselianPairClosedFibreι A J f)).map α).hom.app (op (Scheme.Etale.mk (𝟙 (pullback f (Scheme.Spec.map (CommRingCat.ofHom (Ideal.Quotient.mk J)).op)))))) ∧ (∀ G : Sheaf Z.smallEtaleTopology AddCommGrpCat.{u + 1}, IsIso (Etale.globalSectionsUpperStarMap AddCommGrpCat.{u + 1} (henselianPairClosedFibreι A J f) G)) ∧ (∀ (R : Type (u + 1)) [CommRing R] (M : Sheaf Z.smallEtaleTopology (ModuleCat.{u + 1} R)), IsIso (Etale.globalSectionsUpperStarMap (ModuleCat.{u + 1} R) (henselianPairClosedFibreι A J f) M))",
+  "branch": "sheaf-dag",
+  "by": "NU",
+  "date": "2026-10-22",
+  "existing": false,
+  "note": "Set-valued comparison and explicit naturality, with abelian and constant-coefficient module isomorphism consequences. The two helper definitions construct the chosen closed-fibre inclusion and the canonical unit map transported to the identity object over that fibre; their data contain no sorry."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-de17b27a8",
+  "group": "NU",
+  "result": "pass",
+  "note": "Re-delivery after RETURN of bc6eaab6e482 (H2, spurious theorem stmt_dep). diff -r vs the returned snapshot: the Lean file only drops the public import of EtaleConstantRingModuleEquivalence (that module imports only Mathlib and supplies no HasSmallSiteSheafify, so elaboration is unaffected); theorem and helpers byte-identical; stmt_deps = 6 base deps + def-weil-pbc-finite-section-pullback (globalSectionsUpperStarMap used in conjuncts 3-4). lean.statement matches the file verbatim. Live side node still split, no lean, no file, so not superseded. Mathematics re-checked: HenselianRing pair, IsProper, pullback.fst closed-fibre inclusion, canonical unit + terminal transport, bijectivity, naturality, abelian/module IsIso; one universe u, all bound. Edge cases A=0, J=0, empty Z, R=0 fine. Gates: no hollow defs, single sorry, docstrings with source/blueprint and six proof steps. Report has Worker report + Second reading by NU. No compile (no file changed). Advisories only: terminalSectionPullback reuse, [Ring R]."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K7",
+  "result": "pass",
+  "landing": "20261022T143923-L-1444669",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ },
+ "blueprint_update": {
+  "snapshot": "main-20261025",
+  "commit": "b767183f5ce5f281d407f582da76ab91d6176fe0",
+  "changed": [
+   "statement"
+  ],
+  "statement": "Let $(A,J)$ be a henselian pair, let $Z\\to\\operatorname{Spec}A$ be proper,\nand let $i:Z_0=Z\\times_A\\operatorname{Spec}(A/J)\\hookrightarrow Z$. For every\nsheaf $F$ of abelian groups, or of $\\Lambda$-modules, on $Z_{\\Et}$, restriction\nis a bijection\n\n$$\n\\Gamma(Z,F)\\xrightarrow{\\ \\sim\\ }\\Gamma(Z_0,i^{-1}F).\n$$\n\nThe comparison is natural in $F$.",
+  "proof": [
+   {
+    "text": "The geometric content is a connectedness statement: every irreducible closed\nsubset of a scheme proper over a henselian pair meets the closed fibre in a\nnonempty connected subset. Stein factorization and henselian connectedness\nprove this (Stacks Project, Tag 0A0B), and spectral-space restriction then\ngives equality of sections for Zariski sheaves. The connectedness statement\nalso holds after every finite cover, since that cover remains proper over\n$A$. A finite surjection whose Zariski-local pieces factor through the étale\ncovering, followed by descent on its self-intersection, upgrades the Zariski\ncomparison to étale sheaves (Stacks Project, Tag 09ZF). Over a general affine\nbase the integral form of Stein factorization, whose algebra need not be\nfinite, suffices for this argument.",
+    "uses": [],
+    "elementary": null
+   }
+  ],
+  "note": "the current blueprint (main-20261025, weil-conjectures-blueprint b767183f5c) states or proves this differently; the node is proved in Lean: recorded 2026-10-25, not reopened"
+ }
 }

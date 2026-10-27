@@ -1,0 +1,84 @@
+# Q11 stage-1 report: lem-sfb-solvable-homogeneous-proper-subschemes
+
+## Files written
+
+- `dag/nodes/sec-six-functors-basics/lem-sfb-solvable-homogeneous-proper-subschemes.json`: statement; retained the exact statement, replaced the empty proof by an eleven-step dimension induction; no Mathlib match.
+- `dag/nodes/sec-six-functors-basics/lem-sfb-nested-homogeneous-quotient-geometry.json`: one new statement-only unsplit node; nested quotient morphism, its translated fibres, and finiteness for equal-dimensional subgroups; no Mathlib match.
+- `citations.json`: 32 step/node entries, with verbatim statement quotations.
+- This report. `searches.jsonl` is the genuine msearch command log; `prepare.py` is sandbox preparation material, not a library change.
+
+## Attachments
+
+None. I searched the project source in `lean/WeilConjectures/` for the exact blueprint tag and for solvable, homogeneous, complete homogeneous, and quotient terminology. There is no project declaration proving all the scheme-theoretic clauses. Abstract group and Lie-algebra solvability declarations do not state this result. I also checked the source for the proposed nested quotient node. I wrote no Lean and ran no compiler, Lake or build.
+
+## WANTED
+
+None. The required Milne text and the Stacks source for the generic scheme tools are locally available.
+
+## What was wrong or incomplete
+
+The item had no proof. Its statement, including arbitrary nonreduced and disconnected K and scheme-theoretic equality K=G, is correct and is unchanged. No released stage-1 repair note exists for it. The current blueprint's direct-image route is unchanged: this is a supporting algebraic-group input along the inherited minimum-orbit/Borel prerequisite, not a substitute proof of the unit. The item is not the unit's key node, so no unit realization fields are delivered.
+
+The source proof needs an additional connected-subgroup reduction, described below. The original step from a proper subset to a point also requires reducing that proper scheme before using global functions; the proof now does so explicitly. The final conclusion is obtained by pulling back the entire kernel pair, not by comparing k-points of the groups.
+
+## Source error
+
+Milne, `literature/milne-algebraic-groups_iAG2017.pdf`, Theorem 17.1, printed p.352 (PDF p.364), reduces to H smooth and then says that N=G' H in the second case is connected. Smoothness of H does not imply its connectedness. Over an algebraically closed field of characteristic different from 2 take G=G_m and H=mu_2. Then G'=1 and N=mu_2 is smooth and disconnected. The proof's invocation of induction for a connected N is unsupported in that form. This is a source-proof error, not a false item statement. I repair it by taking H=(K^0)_red at the outset; the finite faithfully flat map G/H -> G/K permits lifting each proper closed subscheme without changing its dimension. Then H, I and N in the actual induction are all connected.
+
+There is also a direction typo in the second sentence of Milne Proposition 7.15 (printed pp.142--143): the smooth/finite morphism is G/H -> G/H', consistently with the displayed Cartesian square and Remark 7.16(b). The new node follows the square and the remark, not the reversed arrow. Its conclusion is also independently checked by descent: after pulling back along G -> G/J, the morphism is G x (J/H) -> G. The fibre J/H is flat over the field; when dim H=dim J it is zero dimensional and finite over k. This explains the intended direction; this paragraph is report material, not a proof embedded in the new statement.
+
+## Unfinished work
+
+No unfinished part of the item's split. The new quotient lemma is intentionally statement-only and remains unsplit for its own worker. There are zero Mathlib leaves. Delivery is subject to the required server dry run and direct push.
+
+## Searches and blueprint alignment
+
+Before making the new node I searched the entire DAG by homogeneous quotient, quotient tower, nested quotient, identity component, finite component quotient, subgroup product, inverse image and the Milne source places. I ran `tools/blueprint_refs.py search` for solvable, homogeneous and the quotient/component terminology, and inspected the current `literature/blueprint/latest/` direct-image proof, chapter and unit. No blueprint statement duplicates the new lemma. The ancestor command reports no blueprint-id ancestor; the item is a created support node. The new node therefore inherits the item's null ancestor and records the full inherited via chain with the item first; its precise from.place describes the two quotient operations in Theorem 17.1. Both same_as lists are empty.
+
+For the item, the recorded command searches include LeanFinder's 'A connected solvable algebraic group homogeneous quotient contains no positive dimensional proper closed subscheme', LeanSearch's 'A complete homogeneous space for a connected solvable affine algebraic group is a point', Loogle's `"IsSolvable", "AlgebraicGeometry"`, the regex `solvable.*(homogeneous|proper)|homogeneous.*solvable|Borel.*fixed`, and the second wording about a solvable linear algebraic group and complete subvarieties. The results contain abstract solvability and generic scheme/topological facts, not this scheme quotient theorem.
+
+For the new node, the five actual command searches are recorded verbatim with their returned JSON in its mathlib_searches: nested homogeneous quotient fibres and equal-dimension finiteness (LeanFinder), finite component subgroup quotient (LeanSearch), `AlgebraicGeometry.IsFinite, AlgebraicGeometry.Scheme` (Loogle), `finite.*quotient|quotient.*finite|component.*group` in AlgebraicGeometry (grep), and 'Finite quotient of homogeneous spaces by a finite component group of an algebraic subgroup' (LeanFinder). None was unavailable. I read the returned candidates: quotientToQuotientOfLE and related finite action quotients are abstract action/set results, connectedComponentOfOne is topological, and the IsFinite hits are general scheme finiteness instances. The finite implies universally closed declarations in Mathlib/AlgebraicGeometry/Morphisms/Proper.lean and the abstract group solvability declarations do not construct this homogeneous scheme map or its fibres. There is no exact match or one-line specialization. No unexecuted query is claimed.
+
+## Not duplicates
+
+lem-sfb-nested-homogeneous-quotient-geometry vs lem-sfb-algebraic-group-homogeneous-quotient: the existing node constructs each individual quotient for arbitrary finite-type separated groups; it does not state the comparison map for H subset J, its Cartesian trivialization, or the finite equal-dimension criterion.
+
+lem-sfb-nested-homogeneous-quotient-geometry vs lem-sfb-homogeneous-orbit-quotient-geometry: the existing node constructs G/H and identifies individual orbits and rational points; it has no nested quotient morphism, J/H fibre comparison or finiteness criterion.
+
+lem-sfb-nested-homogeneous-quotient-geometry vs lem-sfb-affine-normal-quotient-geometry: the existing node is for normal subgroup quotients and preimages of subgroup schemes; H and J here are arbitrary, and G/J need not be affine or a group.
+
+lem-sfb-nested-homogeneous-quotient-geometry vs lem-sfb-locally-algebraic-group-identity-component: the existing node describes the identity component and its reduction, not the finite map between homogeneous spaces which this split needs.
+
+lem-sfb-nested-homogeneous-quotient-geometry vs lem-sfb-solvable-homogeneous-proper-subschemes: the new node has no solvability hypothesis and no proper-subscheme conclusion; its geometry applies equally to nonsolvable G. It neither restates the item nor moves the dimension induction elsewhere. Its two uses are the finite change of subgroup in step 3 and the fibre comparison in step 9.
+
+The new source is Milne, with no Stacks tag asserted for a theorem absent from Stacks. There are no same-Stacks-tag pairs to resolve. Products of nonnormal subgroups and the elementary second-isomorphism comparison were kept as explicit steps rather than proliferating nodes.
+
+## Review by Q11
+
+I read delivery-errors B through E in full, and checked the actual node statements, sources and the resulting proof rather than treating the original dependencies as accepted. For the item I read Milne Theorem 17.1 on printed p.352, together with the quotient material in Propositions 5.20--5.29, Section 5(f), the derived/solvable material in Section 6, and the orbit/quotient material in 7.11--7.18. For the new node I read Proposition 7.15's entire square and proof, Remark 7.16, and the dimension statement 5.23. The source error above is the reason for the strengthened intermediate reduction, while the item statement is unchanged. I used no SGA source.
+
+1. Step 1 uses the actual homogeneous-quotient kernel-pair assertion, finite-type cancellation to the separated finite-type targets (so the flat surjections are quasi-compact fpqc covers), representable fpqc descent for the two compatible maps, and fpqc base-change stability for the cover over G x (G/K). The kernel-pair formulas give compatibility and uniqueness gives inverse maps. Changing a representative g to gh leaves the left multiplication coset unchanged; this is the short gluing argument for the action. No assertion about a quotient's underlying points alone is used to deduce an isomorphism.
+
+2. Step 2 uses the orbit-quotient statement's precise clause identifying the reduced orbit with G/G_x; the computed stabilizer is K as a functor, so Q is that reduced orbit. I corrected an earlier draft which would have inferred reducedness from surjectivity alone. The smooth-orbit theorem supplies smoothness. The identity-component theorem supplies irreducibility of connected G and hence irreducibility of its surjective image. The generic dimension clause of solvable-normal-subgroup-products supplies finite nonnegative dimensions, not its product clause. The zero-dimensional integral-point theorem gives G=Spec k in the base case. A subgroup of this point is the point because its identity section forces its ideal to be zero. The induction ranges over arbitrary closed subgroups, so later intersections need not be smooth.
+
+3. Step 3 takes exactly the finite faithfully flat identity-component comparison from the new node. The closed-immersion base-change node makes W closed. Finite-morphism permanence gives finite W -> Z and proper W, and surjectivity follows by base change of the faithfully flat map. Finite-surjective dimension applies to nonempty finite-type schemes over the same field. Thus neither reducedness of K nor reducedness of Z was smuggled into the induction.
+
+4. Step 4 uses the reduction universal-homeomorphism and closed-proper statements to preserve dimension and properness on reduction. The proper reduced algebraically closed global-functions node explicitly supplies the finite clopen connected components and their rings k. Its hypotheses hold only after this reduction, which is why the order matters. The dimension of the finite disjoint union is handled by chains of irreducible subsets, written out in the step. I checked Stacks varieties.tex Tag 0BUG for precisely this reduced/proper assertion, not an unrestricted claim that global functions of every connected proper scheme equal k.
+
+5. Step 5 uses the smooth-connected derived-subgroup theorem, including its smallest-closed-subgroup property, and only the strict-dimension clause of the solvable-normal-products node. The normal series with commutative factors forces the successive derived groups to lie in its terms. Thus D=G would contradict termination unless G=1. The identical commutator containment proves solvability for smooth connected subgroups. Both short derived-series arguments are written in the step rather than citing a definition as if it were an unstated inheritance theorem.
+
+6. Step 6 uses two statements which I opened in full: affine-normal-quotient-geometry supplies G/D, quotients by normal kernels, and the exact smooth-connected inverse-image clause; homomorphism-factorization supplies the scheme kernel and the faithfully flat map to the closed image I. L=H intersect D is normal in H because D is normal in G. H is now smooth and connected, so H/L is smooth connected, as the cited quotient statement expressly says. Pulling I back along G -> G/D gives the smooth connected N. H is not assumed normal in G. The existing product theorem requires normal factors, so I deliberately do not use its product clause here.
+
+7. Step 7 uses that same factorization for local lifts H -> I, the normal-quotient statement for local lifts G -> A and for preimage normality, and the derived-subgroup statement for vanishing commutators in A. The displayed n=dh proves the product description; local lifts of two sections prove A commutative. Every I is then normal in A and N is normal in G. Strict dimension is used only after N is known smooth connected and strictly smaller than G. Solvability is the containment argument already proved in step 5.
+
+8. Step 8 writes the second-isomorphism comparison on sheaves explicitly: DH=G gives local surjectivity and equality of D-cosets is exactly membership in D intersect H. The homogeneous-quotient node represents both sheaves; the representable descent node glues the compatible local inverse maps. This is an elementary assembly of those statements. The smaller group D is smooth connected solvable affine of finite type. Its subgroup D intersect H may be nonreduced, which the stated induction permits.
+
+9. Step 9 uses the affine-normal-quotient statement only after normality of N has been proved. The nested-quotient node supplies b and its translated fibre; the morphism-into-affine-scheme bijection, together with the ring k from step 4, gives a scheme-theoretic constant map. The rational-point lift is an explicit clause of homogeneous-orbit-quotient-geometry over an algebraically closed field. The resulting factorization through the fibre is a fibre-product factorization, not a set-theoretic inference. Closedness is then the closed-immersion base-change statement applied to C -> G/H. I checked schemes.tex Tag 01I1 for the affine morphism bijection.
+
+10. Step 10 applies the already-stated strong induction to N/H with all five hypotheses on N established, and dim N < dim G. This is logical assembly, not a citation of the item as a dependency. It carries dimension back through the finite cover and reduction already justified.
+
+11. Step 11 applies the first assertion to Z=Q when Q is proper, and then the zero-dimensional integral-point theorem to the original Q, whose integrality was established in step 2 for the original K. Pulling the original specified kernel pair back in the first coordinate along the identity identifies the actual closed inclusion K -> G with the whole fibre G -> G. This proves equality of schemes, not merely equality of rational points.
+
+For B1--B10 I checked that the new node is self-contained, introduces every object, includes definition references or inline meanings, has ordinary single TeX backslashes, no proof or proof sketch, no unsupported Stacks tag, and an inherited blueprint record. It is deliberately unsplit, not a purported Mathlib leaf. For C1--C8 I re-read every cited statement, made exact quotations in citations.json, checked each hypothesis above, and retained generic off-unit tools only for scheme geometry: fpqc morphism descent and base change, finite-type cancellation, finite-morphism and dimension permanence, reduction and closed-immersion properness, proper reduced global functions, the zero-dimensional point theorem, and maps into affine schemes. These are declared in split_report.tool_uses, with no maintainer-owned tool_uses edit. No same-unit node replaces these generic statements. The dependency closure was checked not to return to this item or to its Borel fixed-point parent; the proof does not cite Lie--Kolchin or Borel as a shortcut.
+
+For D1--D5 the proof really contains the induction, base case, derived subgroup, product construction, two cases and conclusion. The sole new lemma is independent quotient geometry, not a restated clause. All steps are under 2000 characters, and their short comparisons are explicit, so no long step hides a standard lemma. For E1--E7 I tested G=1, K=G, D=1, and H=1; G_a/alpha_p in characteristic p and G_m/mu_p check that neither the orbit map nor subgroup is silently assumed smooth; G_m/mu_2 checks the disconnected-source error; H=J in the new node gives the identity map, and H=1, J finite gives the expected finite quotient. Nonreduced Z is treated only through reduction for dimension, while the final equality retains scheme structure. Finally SL_2/B=P^1 confirms that solvability is an essential hypothesis of the item, whereas the new quotient geometry does not require it.

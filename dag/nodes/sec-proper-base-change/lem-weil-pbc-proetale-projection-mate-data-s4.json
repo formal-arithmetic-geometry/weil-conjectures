@@ -1,0 +1,154 @@
+{
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 06YU, 07A4, 07A6 and 0B56."
+ },
+ "stmt_deps": [
+  "def-weil-proetale-inverse-image",
+  "def-weil-pbc-proetale-operations",
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+  "def-weil-pbc-projection-formula-map"
+ ],
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.ProEtaleProjectionMateExact",
+  "date": "2026-10-27",
+  "group": "S4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lemma-weil-pbc-perfect-projection-formula",
+   "place": "Proof, first paragraph: native tensor identity, exact triangulated operations and unit normalization.",
+   "via": []
+  },
+  "same_as": []
+ },
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "native pro-etale derived tensor projection mate compatible shifts exact functors",
+   "results": "No exact native projection-mate theorem; generic derived tensor and adjunction shift APIs found.",
+   "date": "2026-10-27",
+   "verdict": "No exact match."
+  },
+  {
+   "tool": "loogle",
+   "query": "Functor.CommShift projection mate",
+   "results": "Generic CommShift and adjunction projection-map shift declarations; no native specialization.",
+   "date": "2026-10-27",
+   "verdict": "No exact match."
+  },
+  {
+   "tool": "grep",
+   "query": "proEtaleProjectionMateExact|proEtale.*Projection.*Shift",
+   "results": "Only the target module and its downstream use; no duplicate proved declaration.",
+   "date": "2026-10-27",
+   "verdict": "No exact match."
+  }
+ ],
+ "id": "lem-weil-pbc-proetale-projection-mate-data-s4",
+ "kind": "statement",
+ "title": "Native pro-etale projection-mate transformation and unit normalization",
+ "statement": "For a morphism f : X ⟶ Y of schemes, ring sheaves R,S, an identification c : f⁻¹R ≅ S and native tensor models a,b [def-weil-proetale-inverse-image], [def-weil-pbc-proetale-operations] and [lem-weil-pbc-ringed-topoi-derived-tensor-pullback], let E lie in the unbounded derived module category over S. There exist integer-shift structures on F(P) = Rf_*E ⊗_a P and G(P) = Rf_*(E ⊗_b Lf^*P) making both functors triangulated, together with a natural transformation τ : F ⟶ G whose components are the specified native counit projection mate [def-weil-pbc-projection-formula-map]. This same τ commutes with these shifts and is invertible at R[0]. The shifts are jointly constructed; no claim is made for arbitrary independently supplied shifts.",
+ "proof": [
+  {
+   "text": "Construct a normalized global model for the original small pro-etale sites and compare its fixed-factor source and target functors with the supplied native tensor models. The comparison identifies the actual counit mates, without using any shift hypothesis.",
+   "uses": [
+    "lem-weil-pbc-ringed-projection-global-model",
+    "lem-weil-pbc-proetale-projection-global-comparison"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use the normalized tensor shifts to make each fixed-factor tensor triangulated. Give the right adjoint the shift induced by the exact left adjoint, and use the triangulated-adjunction theorem for its exactness. Curry the tensor-comparison second-shift equation; whiskering it with the counit and then the unit proves that the explicit model mate commutes with shifts. Transport both shift structures, exactness and mate through the two natural isomorphisms. Cancel the target comparison to obtain precisely the native components.",
+   "uses": [
+    "lem-weil-pbc-ringed-projection-tensor-exact"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Take the coefficient complex to be the single degree-zero ring. Give it a degreewise rank-one package: the singleton-product isomorphism in degree zero, zero inclusion and retraction in every zero degree. It is bounded by 0 and 0. Choose a K-injective representative of E and apply signed projection normalization with the identity coefficient representative. Its two inverse identities exhibit an inverse of the native component at R[0].",
+   "uses": [
+    "lem-weil-pbc-signed-projection-resolution-normalization"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-ringed-projection-global-model",
+  "lem-weil-pbc-proetale-projection-global-comparison",
+  "lem-weil-pbc-ringed-projection-tensor-exact",
+  "lem-weil-pbc-signed-projection-resolution-normalization"
+ ],
+ "proof_origin": {
+  "by": "D7",
+  "group": "D7",
+  "date": "2026-10-27",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 06YU, 07A4, 07A6, 0B56: normalized model mate and the degree-zero strict-perfect case; Lean transport and rank-one package written by D7."
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.ProEtaleProjectionMateData",
+  "file": "lean/Sheaf/Paper/ProEtaleProjectionMateData.lean",
+  "declaration": "AlgebraicGeometry.Scheme.proEtaleProjectionMateData",
+  "statement": "theorem proEtaleProjectionMateData :\n    ∃ (_sF : ((Functor.curryObj a.tensor).obj\n      ((proEtaleRingDerivedDirectImage f R S c).obj E)).CommShift ℤ)\n      (_sG : (proEtaleRingDerivedPullback f R S c ⋙\n      (Functor.curryObj b.tensor).obj E ⋙\n        proEtaleRingDerivedDirectImage f R S c).CommShift ℤ),\n      ((Functor.curryObj a.tensor).obj\n        ((proEtaleRingDerivedDirectImage f R S c).obj E)).IsTriangulated ∧\n      (proEtaleRingDerivedPullback f R S c ⋙\n        (Functor.curryObj b.tensor).obj E ⋙\n          proEtaleRingDerivedDirectImage f R S c).IsTriangulated ∧\n    ∃ τ : (Functor.curryObj a.tensor).obj\n          ((proEtaleRingDerivedDirectImage f R S c).obj E) ⟶\n        proEtaleRingDerivedPullback f R S c ⋙\n          (Functor.curryObj b.tensor).obj E ⋙ proEtaleRingDerivedDirectImage f R S c,\n        (∀ P, τ.app P = proEtaleProjectionFormulaMate f R S c a b E P) ∧\n        NatTrans.CommShift τ ℤ ∧\n        IsIso (τ.app ((DerivedCategory.singleFunctor (proEtaleRingModules Y R) 0).obj\n          (SheafOfModules.unit ((sheafCompose (ProEt.topology Y)\n            (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).obj R))))",
+  "branch": "sheaf-dag",
+  "by": "S4",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S4",
+  "result": "pass",
+  "landing": "20261027T012935-L-2350146",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-b3802",
+  "group": "D7",
+  "result": "fix",
+  "landing": "20261027T034630-L-3667613",
+  "kind": "interface",
+  "note": "independent cc review: new ∃-joint-shift statement of proEtaleProjectionMateData vs parent proEtaleProjectionMateExact (verbatim) and change record; proof vs GlobalComparison/TensorExact/SignedNormalization statements; axioms scratch (sorryAx only from cited holes); 3b PerfectProjectionFormula OK"
+ },
+ "statement_change": {
+  "date": "2026-10-27",
+  "by": "D7 stage 2",
+  "old_statement": "Assuming the integer-shift structures on the two native coefficient functors supplied by the companion shift-data statement, there is a natural transformation τ from F to G whose component at every P is the specified native projection formula mate, τ commutes with integer shifts, and its component at the degree-zero coefficient unit R[0] is an isomorphism.",
+  "what": "STATEMENT-DISPUTED (repaired): the original Lean universally quantified over arbitrary independent CommShift structures. Twisting just one by n ↦ (-1)^n preserves the CommShift axioms but changes the shift equation for any nonzero unit-normalized mate over integer coefficients. The source uses canonical compatible shifts. Construct the shifts jointly with the exact functors and mate, retaining the full unchanged parent conclusion.",
+  "source": {
+   "document": "literature/stacks-project/sites-cohomology.tex",
+   "place": "Tags 06YU, 07A4, 07A6 and 0B56."
+  },
+  "citers": [
+   {
+    "id": "lem-weil-pbc-proetale-projection-mate-exact",
+    "holds": true,
+    "note": "The unchanged parent statement follows directly from the repaired jointly existential shift/exact/mate data; its proof is adapted in this delivery."
+   }
+  ],
+  "old_proof": [
+   {
+    "text": "Under the supplied shift structures, descend the normalized model mate through native localization; its component at the coefficient unit is the composite of the tensor unitors and is invertible by the adjunction triangle identity.",
+    "uses": [
+     "lem-weil-pbc-ringed-topoi-derived-tensor-pullback"
+    ],
+    "elementary": false
+   }
+  ],
+  "old_proof_deps": [
+   "lem-weil-pbc-ringed-topoi-derived-tensor-pullback"
+  ]
+ }
+}

@@ -1,0 +1,62 @@
+## Files written
+
+- `dag/nodes/sec-six-functors-basics/lem-sfb-contracted-smooth-curve-linearization.json`: item, statement unchanged, split into nine steps; no Mathlib match.
+- `dag/nodes/sec-six-functors-basics/lem-sfb-mu-n-fixed-subgroup-smooth.json`: new statement-only lemma, unsplit, no Mathlib match. It asserts smooth representability and arbitrary-base-change compatibility of the fixed subgroup for the full mu_n subgroup scheme in a G_m action on a smooth affine group over any ring.
+- `citations.json`: an entry for every cited node in every numbered step, quoting the exact statement read (including the relevant assertion).
+- `searches.jsonl`: actual command-generated Mathlib search log. Both phrasings and all three search kinds were read; LeanSearch also answered. No unavailable service was treated as absence.
+
+## Attachments
+
+None. Searched the project under `lean/WeilConjectures/` by the exact blueprint tag, contracted/contracting, linearization/linearisation, group-fixed and diagonalizable notions. No declaration there proves the item or the new relative fixed-subgroup input. Existing contracting homotopies, nil-ideal linearizations and local smooth section charts concern different assertions.
+
+## Literature wanted
+
+WANTED: Brian Conrad, *Reductive group schemes* (2014), printed pp.64–67 (Lemma 2.2.4 and Example 2.2.6), pp.116–119 (proof of Theorem 4.1.4 and Lemma 4.2.2), and p.288 (Lemma B.3.1), locally as `literature/conrad-reductive-group-schemes.pdf`, for this item and `lem-sfb-mu-n-fixed-subgroup-smooth`.
+
+The PDF is absent from the allowed local literature directory. I read those places online at the item's recorded URL, including the centralizer proof and semidirect-product reduction. The split is nevertheless marked `proof_origin.by = agent` in accordance with the missing-local-document rule. No prohibited source is used. Stacks places were checked in the local `.tex` and tag index: 01KT (section of separated morphism), 01VC/01VA (open smoothness/composition), 01VB (smooth base change), 055U and 0CFV (etale local sections), 00RO and 00RV (universal differentials and base change), and the existing fibral-criterion node's 039E/02GM/025G. These are supporting inputs, not a replacement for the orbit-map route.
+
+## Problems found and corrected
+
+There is no statement dispute. The statement is the abstraction of the hypotheses actually used in Conrad's proof, and needs neither a prechosen nonidentity section nor invertibility of n. I retained it verbatim.
+
+The important potential citation error was `lem-sfb-relative-tangent-weight-base-change`: its statement requires a nonzero Noetherian ring, so it cannot support the current item. Steps 1–2 instead give the affine derivation calculation using the finite projective cotangent module, the actual universal property of differentials, and the existing arbitrary-ring base-change theorem. I also corrected the ancillary differentials base-change tag to 00RV (00RT is localization).
+
+The existing fixed-point smoothness nodes are over fields, and the arbitrary-ring `lem-sfb-gm-fixed-square-zero-lifting` treats G_m, not the full mu_n subgroup scheme. Replacing mu_n by its rational points would fail in characteristic dividing n; the new node uses all algebra-valued points. The existing `lem-sfb-flat-geometric-fibre-open-criterion` does supply exactly the isomorphism criterion needed, so no duplicate fibral-criterion node was created. Likewise the existing etale-section node applies to the open complement of the identity, so no local-section node was created.
+
+The item inherits `blueprint.from.node = null`; `tools/blueprint_refs.py ancestor` returned None. Its long existing provenance and via list are retained. The new node prepends this item and locates the mu_n-fixed-subgroup argument on printed p.118. Whole-blueprint searches for contracted smooth, linearization, fixed subscheme/locus, fixed subgroup and roots of unity found no matching relative result. The inherited chapter/unit metadata is not changed.
+
+## Not duplicates
+
+- lem-sfb-mu-n-fixed-subgroup-smooth vs lem-sfb-semisimple-fixed-subscheme-smooth: the existing result is a fixed scheme for one semisimple point of a smooth group over an algebraically closed field; the new lemma concerns the full possibly nonreduced mu_n over an arbitrary ring.
+- lem-sfb-mu-n-fixed-subgroup-smooth vs lem-sfb-linearly-reductive-dense-fixed-smooth: the existing result assumes an algebraically closed field, a smooth acting group and a dense abstract subgroup of rational points; none covers nonreduced mu_n in mixed or dividing residue characteristic.
+- lem-sfb-mu-n-fixed-subgroup-smooth vs lem-sfb-gm-fixed-square-zero-lifting: that result gives infinitesimal lifting for G_m-fixed points; it does not assert smooth finite-presentation representability for mu_n.
+- lem-sfb-mu-n-fixed-subgroup-smooth vs lem-sfb-diagonalizable-representation-weight-grading: that is a finite-dimensional representation theorem over a field, not a relative geometric fixed-subgroup theorem.
+- lem-sfb-mu-n-fixed-subgroup-smooth vs lem-sfb-contracted-smooth-curve-linearization: the new lemma has arbitrary relative group dimension and no contraction, geometric additive fibres, tangent weight, nonidentity section or linearization conclusion. It is an independent input to the orbit-map argument, not a restatement of one of the item's conclusions.
+
+## Review by Q28
+
+I read Conrad's complete orbit-map proof of Lemma 4.2.2 on printed pp.118–119, with the nonidentity-section reduction on p.117 and the geometric weight discussion on pp.116–118. For the one new node I read Lemma 2.2.4 and Example 2.2.6 on pp.64–67. The latter explains using a semidirect product to handle an external action. In our setting H semidirect G_m is smooth and finitely presented, mu_n is a multiplicative-type subgroup of its G_m factor, and its centralizer is F times G_m. Thus the centralizer theorem applies without requiring mu_n smooth; smoothness and finite presentation of F follow after the faithfully flat cover G_m of the base. The fixed functor also gives the asserted base-change identity. This input is kept statement-only. The report records the argument for its eventual worker.
+
+For steps 1–2 I opened `lem-weil-pbc-smooth-ring-map-iff-smooth-affine`, `def-weil-pbc-smooth-ring-map`, `def-weil-pbc-kahler-differentials` and `lem-weil-pbc-kahler-differentials-base-change`. They give finite projective differentials, the derivation universal property and arbitrary-ring scalar extension, respectively. The extra work is explicitly written: the augmentation pulls the summand back to Q; dual-number coefficients are derivations; the two counit identities add tangent coefficients; a summand of a finite free module has the claimed dual base-change comparison. This proves the weight comparison for geometric fibres without a Noetherian hypothesis or an unproved identification of fibre tangent spaces. Each assertion used is quoted in citations.json.
+
+For step 3 the polynomial has an inverse over the domain k[t,t^-1]; this makes its degree one in x, and its constant term is zero because the identity is fixed. Its coefficient is a Laurent unit, the action identity fixes its constant factor, and the FULL character on the tangent space determines its integer exponent. Thus it is equality of scheme actions, not just equality on k-points. Only affine spectrum's contravariant coordinate description is cited; polynomial degree and Laurent coefficient comparisons are written out.
+
+For step 4 I read both the affine-source separation and section-closed-immersion statements. They apply to U over S and its identity section exactly as stated. `lem-pc-open-immersion-smooth-composition` gives smoothness of its open complement. The complement is surjective because every geometric additive fibre has a nonzero point. `lem-sfb-smooth-space-cover-etale-sections` is stated for smooth surjective algebraic spaces over a scheme and includes schemes, yielding the sections used here. Affine open refinement preserves the cover. `lem-pc-proper-base-change` clause (2) supplies smoothness after base change; finite presentation base changes by extending the coefficients of its finite presentation. Contraction and the full action identities already quantify over every algebra, and step 2 supplies tangent base change.
+
+Step 5 uses contraction only for the chosen nonidentity section; no global action of the multiplicative monoid is assumed. Equality of coordinate polynomials after inverting z implies equality because multiplication by z is injective over every base ring. This proves equivariance and base-change compatibility of the extended orbit map. Its geometric fibre is z^n after scaling the additive coordinate to normalize the section.
+
+For step 6 I opened the new fixed-subgroup statement and the exact statements of `lem-sfb-space-relative-lfp-permanence`, `lem-pc-smooth-flat` and `lem-sfb-flat-geometric-fibre-open-criterion`. They supply, respectively, a smooth finitely presented source with fixed-point formation compatible with base change, local finite presentation of its inclusion, flatness of that source, and the isomorphism conclusion from all geometric fibres. The target is finitely presented by hypothesis. Its entire geometric fibre is fixed by mu_n from step 3, including infinitesimal elements. These are precisely the hypotheses of the cited criterion; the proof does not infer equality from geometric fibres of an arbitrary nonsmooth closed subscheme.
+
+Step 7 explicitly compares the basis 1,v,...,v^(n-1) of R[v]/(v^n-1) to prove that the invariant polynomial has only powers divisible by n. The embedding R[w] into R[z] makes the factor a ring homomorphism and proves equivariance with exponent n; no division or averaging is concealed here. This is a short coefficient calculation, so it is a step, not a new invariant-theory node.
+
+For step 8 I reread `sbc-lem-affine-space-smooth`, which works over every scheme with n=1; smooth-flat and the lfp-permanence theorem give exactly the source and morphism assumptions of the fibral criterion. The coordinate identity z^n on the fibre makes the factored map w, not the possibly inseparable map z^n. This is why the isomorphism conclusion remains correct in characteristic dividing n.
+
+For step 9 I checked the transferred multiplication in R[x,y] using the exact identity m(t^n x,t^n y)=t^n m(x,y). Comparing integer exponents in a Laurent polynomial ring forces total degree one because n is a positive integer; n need not be a unit in R. The unit identities give x+y, and inverses then follow from uniqueness of inverses. This proves the group assertion and the requested identity after all algebra extensions.
+
+I tested the zero ring (empty base, empty family), n=1, n=p in characteristic p, R=k[epsilon]/(epsilon^2), disconnected bases and nontrivial underlying line bundles. In particular rational mu_p-points would not detect the needed action, but the stated mu_p fixed functor does; a zero-weight G_m action would escape the final coefficient comparison, and is excluded by n>0. A nontrivial line bundle requires the local cover, which the theorem allows. The new lemma also allows trivial action and H of dimension zero; its fixed subgroup is then H or the expected smooth subgroup. No reduced-base fibre argument is used.
+
+I checked delivery-errors B–E individually: self-contained TeX statements and definitions, exact search log queries with truthful no-match verdicts, no new elementary/duplicate/clause nodes, every non-elementary input cited, every citation read from its statement, no source tag used as an uncited theorem, and all hypotheses checked above. All nine steps are shorter than 2000 characters, and no long step hides a separate comparison. Off-unit uses of affine smoothness, affine-line smoothness and smooth base change are generic tools declared in split_report.tool_uses. No compiler, Lean writer, or repository mutation was used.
+
+## Unfinished work
+
+No unfinished work on the item's split. The new fixed-subgroup theorem remains an unsplit statement as required for a one-level split. Its Mathlib searches returned standard smoothness, abstract invariant-ring/Frobenius and unrelated diagonalizability results, none of which states its group-scheme assertion. The item searches returned elliptic-curve coordinate changes and abstract action equivalences, which do not state the item.

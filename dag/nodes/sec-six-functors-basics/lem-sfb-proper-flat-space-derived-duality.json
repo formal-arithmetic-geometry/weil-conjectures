@@ -1,0 +1,280 @@
+{
+ "id": "lem-sfb-proper-flat-space-derived-duality",
+ "kind": "statement",
+ "title": "Derived coherent duality for proper flat algebraic spaces",
+ "statement": "Let $T$ be a scheme [def-pc-scheme] and $f:X\\to T$ a proper, flat, finitely presented morphism of algebraic spaces [def-trf-algebraic-space]. Flatness and finite presentation are tested on etale scheme charts; proper means separated, of finite type and universally closed. Use the derived category $D(\\mathcal O_X)$ of module sheaves on the small etale site, and its full subcategory $D_{\\mathrm{QCoh}}(\\mathcal O_X)$ with quasi-coherent cohomology [def-weil-abstract-derived-category, def-weil-sheaf-of-modules-category, def-trf-space-quasi-coherent-module]. Write $Rf_*$ for pushforward computed by K-injective resolutions and $Lp^*$ for tensor pullback computed by K-flat resolutions. There exists a relative dualizing pair $(K_f,\\tau_f)$, with $K_f\\in D_{\\mathrm{QCoh}}(\\mathcal O_X)$ and $\\tau_f:Rf_*K_f\\to\\mathcal O_T$. The complex $K_f$ is locally bounded and pseudo-coherent (on etale affine charts it is represented by a bounded-above complex of finite free modules). For every affine $a:V=\\operatorname{Spec}A\\to T$, put $X_V=X\\times_TV$, $p:X_V\\to X$ and $f_V:X_V\\to V$. Composition with the pulled-back trace induces, for every $E\\in D_{\\mathrm{QCoh}}(\\mathcal O_{X_V})$, a natural isomorphism\n$$\\operatorname{Hom}_{D(\\mathcal O_{X_V})}(E,Lp^*K_f)\\simeq\\operatorname{Hom}_{D(A)}(R\\Gamma(X_V,E),A[0]).$$\nThe pair is unique up to a unique trace-preserving isomorphism. For every scheme morphism $a:T'\\to T$, $Lp^*K_f\\simeq K_{f_{T'}}$ as trace pairs; these isomorphisms respect identity and iterated base change. When $X,T$ are schemes with $T$ affine, this pair agrees, under the Zariski-etale derived quasi-coherent comparison, with $f^!\\mathcal O_T$ and its adjunction trace, where $f^!$ denotes the right adjoint of $Rf_*$ on derived quasi-coherent modules. No dimension, smoothness, Gorenstein or Noetherian hypothesis is imposed.",
+ "source": {
+  "document": "literature/stacks-project/spaces-duality.tex",
+  "place": "Tags 0E5X (definition-relative-dualizing-proper-flat) and following Hom characterization; 0E5Z (lemma-uniqueness-relative-dualizing); 0E61 (lemma-existence-relative-dualizing); 0E6C (lemma-base-change-relative-dualizing); 0E6E (lemma-compare). Relative perfectness and hence local boundedness: spaces-more-morphisms.tex Tag 0DKN (definition-relatively-perfect)."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-trf-algebraic-space",
+  "def-weil-abstract-derived-category",
+  "def-weil-sheaf-of-modules-category",
+  "def-trf-space-quasi-coherent-module",
+  "def-sfb-relative-dualizing-trace-pair",
+  "def-sfb-space-morphism-properties",
+  "def-sfb-space-pseudocoherent-complex",
+  "def-pc-derived-category",
+  "def-pc-ringed-spaces-derived-direct-image"
+ ],
+ "proof": [
+  {
+   "text": "Over an affine $V=\\operatorname{Spec}A$ mapping to $T$, the space $X_V$ is qcqs (it is proper over the affine $V$). Choose the right adjoint $a_V$ and its counit from [lem-sfb-qcqs-space-pushforward-right-adjoint], and set $W_V=a_V(\\mathcal O_V)$ with $t_V=\\epsilon_{f_V,\\mathcal O_V}$. Adjunction identifies $\\operatorname{Hom}(E,W_V)$ with $\\operatorname{Hom}(Rf_{V,*}E,\\mathcal O_V)$ by $u\\mapsto t_V\\circ Rf_{V,*}u$. To obtain the stated $D(A)$ formula, use the equivalence $a_A:D(A)\\simeq D_{\\mathrm{QCoh}}(V_{\\mathrm{et}},\\mathcal O_V)$ of [lem-sfb-affine-etale-derived-module-realization]: its quasi-inverse is $R\\Gamma(V_{\\mathrm{et}},-)$, it sends $A[0]$ to $\\mathcal O_V$ (the associated sheaf of $A$ has value $B\\otimes_AA=B$ on $\\operatorname{Spec}B$), and $R\\Gamma(V,Rf_{V,*}E)=R\\Gamma(X_V,E)$. The properties in [lem-sfb-affine-adjoint-unit-properties] give relative perfection, $Rf_{V,*}W_V\\in D^{\\le0}$ and $R\\mathcal Hom(W_V,W_V)\\simeq\\mathcal O_{X_V}$. In particular $\\operatorname{Hom}(W_V,W_V[i])=H^i(X_V,\\mathcal O_{X_V})=0$ for $i<0$.",
+   "uses": [
+    "lem-sfb-qcqs-space-pushforward-right-adjoint",
+    "lem-sfb-affine-etale-derived-module-realization",
+    "lem-sfb-affine-adjoint-unit-properties"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-duality.tex",
+    "place": "0E55, 0E5V; discussion following Definition 0E5X"
+   }
+  },
+  {
+   "text": "For any map $w:V^{\\prime}\\to V$ of affine schemes over $T$, [lem-sfb-affine-flat-proper-adjoint-base-change] supplies $Lw_X^*W_V\\simeq W_{V^{\\prime}}$ carrying the pulled-back counit trace to $t_{V^{\\prime}}$; the pulled trace uses $\\beta^{-1}$ from [lem-sfb-flat-space-derived-pushforward-base-change]. This trace-compatible isomorphism is unique: both objects represent $E\\mapsto\\operatorname{Hom}(Rf_{V^{\\prime},*}E,\\mathcal O_{V^{\\prime}})$, and compatibility with the counit makes the induced natural transformation the identity. Yoneda therefore identifies any two such maps and proves the identity and cocycle laws for successive affine maps.",
+   "uses": [
+    "lem-sfb-affine-flat-proper-adjoint-base-change",
+    "lem-sfb-flat-space-derived-pushforward-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-duality.tex",
+    "place": "0E5I, 0E5L; discussion after 0E5X, uniqueness of the representing pair"
+   }
+  },
+  {
+   "text": "Choose $V_\\bullet\\to T$ using [lem-sfb-affine-etale-hypercover-refinement] and put $U_\\bullet=X\\times_TV_\\bullet$. On each summand $X\\times_TV_{n,i}$ take the affine-base object from step 1; disjoint union gives $W_n$ on $U_n$. Step 2 gives compatible simplicial identifications. Each negative self-Ext of $W_n$ is the product of the corresponding zero groups on its summands. Part (1) of [lem-sfb-space-negative-ext-hyperdescent] thus gives $K\\in D_{\\mathrm{QCoh}}(\\mathcal O_X)$ restricting compatibly to every $W_n$. Relative perfection descends etale locally by [lem-sfb-space-relative-perfect-base-change]. Taking the module $f^{-1}\\mathcal O_T$ itself in its finite Tor-amplitude condition shows $K$ is locally cohomologically bounded; its pseudo-coherence gives the claimed local finite-free bounded-above models.",
+   "uses": [
+    "lem-sfb-affine-etale-hypercover-refinement",
+    "lem-sfb-space-negative-ext-hyperdescent",
+    "lem-sfb-space-relative-perfect-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-duality.tex",
+    "place": "0E61, first paragraph through descent of the complex; 0DLA"
+   }
+  },
+  {
+   "text": "Put $C=Rf_*K$. By [lem-sfb-flat-space-derived-pushforward-base-change], its restriction to each $V_{n,i}$ is $Rf_{n,i,*}W_{n,i}$, hence is in $D^{\\le0}$ by [lem-sfb-affine-adjoint-unit-properties]. Thus $C\\in D^{\\le0}$; quasi-coherent cohomology is supplied by the same base-change node. For $i<0$, the group $\\operatorname{Hom}(C|_{V_n},\\mathcal O_{V_n}[i])$ vanishes: its source has cohomology in degrees $\\le0$ and its target in degrees $\\ge-i>0$, so [lem-pc-derived-tstructure-orthogonality] applies with bounds $0<-i$. The local traces $t_{n,i}$ agree on $V_1$ by step 2. Part (2) of [lem-sfb-space-negative-ext-hyperdescent], applied on $T$ to $(C,\\mathcal O_T)$, gives a unique $\\tau:C\\to\\mathcal O_T$ with these restrictions. This supplies the negative-Ext hypothesis omitted at the end of the source proof.",
+   "uses": [
+    "lem-sfb-flat-space-derived-pushforward-base-change",
+    "lem-sfb-affine-adjoint-unit-properties",
+    "lem-sfb-space-negative-ext-hyperdescent",
+    "lem-pc-derived-tstructure-orthogonality"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-duality.tex",
+    "place": "0E61, last paragraph (omitted details for trace descent), using 0DL9"
+   }
+  },
+  {
+   "text": "Fix any affine $a:V\\to T$ and write $p:X_V\\to X$. By [lem-sfb-affine-etale-hypercover-refinement] choose an affine-component etale hypercover $V^{\\prime}_\\bullet\\to V$ with a simplicial refinement $V^{\\prime}_\\bullet\\to V_\\bullet\\times_TV$, so each $V^{\\prime}_{n,j}$ maps over $T$ to some $V_{n,i}$. On $X\\times_TV^{\\prime}_{n,j}$, step 2 for the affine maps $V^{\\prime}_{n,j}\\to V_{n,i}$ and $V^{\\prime}_{n,j}\\to V$, with the composition law of [lem-sfb-flat-space-derived-pushforward-base-change], identifies both $(Lp^*K,La^*\\tau\\circ\\beta_K^{-1})$ and $(W_V,t_V)$ with $(W_{V^{\\prime}_{n,j}},t_{V^{\\prime}_{n,j}})$. Hence negative Exts between $Lp^*K$ and $W_V$, in either order, vanish on every term $X\\times_TV^{\\prime}_n$, being products of the negative self-Exts killed by [lem-sfb-affine-adjoint-unit-properties]. The local trace-compatible isomorphisms on $X\\times_TV^{\\prime}_0$ have equal pullbacks to $X\\times_TV^{\\prime}_1$ by the uniqueness in step 2, so part (2) of [lem-sfb-space-negative-ext-hyperdescent] on $X_V$ glues them to $\\phi:Lp^*K\\to W_V$ and their inverses to $\\psi$; injectivity in part (2) gives $\\psi\\phi=1$, $\\phi\\psi=1$. Trace preservation follows from injectivity in part (2) on $V$ for $(Rf_{V,*}Lp^*K,\\mathcal O_V)$: on each $V^{\\prime}_n$ the source is $Rf_*W_{V^{\\prime}_n}\\in D^{\\le0}$, so negative Homs to $\\mathcal O$ vanish by [lem-pc-derived-tstructure-orthogonality] as in step 4. By step 1, $(K,\\tau)$ has the universal Hom property for every affine $V\\to T$. For two such pairs, the local representing isomorphisms over the $V_{n,i}$ are unique by Yoneda, satisfy the cocycle law, and glue on $X$ by the same negative cross-Ext argument, with traces compared by injectivity on $T$. This proves global existence and uniqueness of the trace pair.",
+   "uses": [
+    "lem-sfb-affine-etale-hypercover-refinement",
+    "lem-sfb-flat-space-derived-pushforward-base-change",
+    "lem-sfb-affine-adjoint-unit-properties",
+    "lem-sfb-space-negative-ext-hyperdescent",
+    "lem-pc-derived-tstructure-orthogonality"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-duality.tex",
+    "place": "0E61 and 0E5Z; proof of 0E60 (lemma-covering-enough), affine refinements and morphism descent"
+   }
+  },
+  {
+   "text": "For arbitrary $a:T^{\\prime}\\to T$, define the pulled trace by $Rf^{\\prime}_*Lp^*K\\xrightarrow{\\beta_K^{-1}}La^*Rf_*K\\xrightarrow{La^*\\tau}\\mathcal O_{T^{\\prime}}$, with [lem-sfb-flat-space-derived-pushforward-base-change]. Relative perfection of $Lp^*K$ follows from [lem-sfb-space-relative-perfect-base-change]. For an affine $V\\to T^{\\prime}$, its further pullback and trace are those for the composite $V\\to T$ because the base-change comparisons in [lem-sfb-flat-space-derived-pushforward-base-change] compose. Step 5 therefore shows it is a dualizing pair for $f^{\\prime}$. Uniqueness gives its trace-preserving isomorphism to $K_{f^{\\prime}}$. Both comparisons for iterated base change preserve trace and are consequently equal by uniqueness; the identity comparison is proved the same way.",
+   "uses": [
+    "lem-sfb-flat-space-derived-pushforward-base-change",
+    "lem-sfb-space-relative-perfect-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-duality.tex",
+    "place": "0E6C, lemma-base-change-relative-dualizing; uniqueness 0E5Z"
+   }
+  },
+  {
+   "text": "Finally assume $X,T$ are schemes and $T$ affine. The equivalences in [lem-sfb-scheme-derived-etale-qcoh-comparison] identify Zariski and small-etale $Rf_*$ and their structure sheaves. Transport the adjunction of step 1 across these equivalences. It is a right adjunction for Zariski $Rf_*$, and its counit is the transported trace. Any chosen right adjoint $f^!$ is uniquely isomorphic to it, preserving the counit, by the representing Hom bijections. Evaluation at $\\mathcal O_T$ gives precisely the comparison of pairs asserted in the item.",
+   "uses": [
+    "lem-sfb-scheme-derived-etale-qcoh-comparison"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-duality.tex",
+    "place": "0E6E, lemma-compare, proof by uniqueness of right adjoints"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-qcqs-space-pushforward-right-adjoint",
+  "lem-sfb-affine-etale-derived-module-realization",
+  "lem-sfb-affine-adjoint-unit-properties",
+  "lem-sfb-affine-flat-proper-adjoint-base-change",
+  "lem-sfb-flat-space-derived-pushforward-base-change",
+  "lem-sfb-affine-etale-hypercover-refinement",
+  "lem-sfb-space-negative-ext-hyperdescent",
+  "lem-sfb-space-relative-perfect-base-change",
+  "lem-pc-derived-tstructure-orthogonality",
+  "lem-sfb-scheme-derived-etale-qcoh-comparison"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/spaces-duality.tex",
+  "place": "Definition 0E5X and following remarks; Lemmas 0E5Z, 0E60, 0E61, 0E6C, 0E6E, with the trace-descent details written out."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A proper flat finitely presented morphism of algebraic spaces has a relative perfect dualizing complex with trace, derived adjunction and arbitrary derived base change",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Flat\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Flat\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"The property that a morphism $ f : X \\to Y $ of schemes is flat.\"}\n  {\"name\": \"AlgebraicGeometry.Flat.instHasRingHomPropertyFlat\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Flat\", \"type\": \"AlgebraicGeometry.HasRingHomProperty @AlgebraicGeometry.Flat fun {R S} [CommRing R] [CommRing S] => RingHom.Flat\", \"doc\": \"The property of being a flat morphism of schemes is characterized by the flatness of the corresponding ring homomorphism. Specifically, a morphism of schemes is flat if and only if the associated ring\"}\n  {\"name\": \"AlgebraicGeometry.IsSmoothOfRelativeDimension\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"ℕ → {X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"For a natural number $n$ and a morphism $f: X \\\\to Y$ of schemes, the proposition that $f$ is smooth of relative dimension $n$.\"}\n  {\"name\": \"AlgebraicGeometry.flat_iff\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Flat\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y),\\n  AlgebraicGeometry.Flat f ↔\\n    ∀ {U : Y.Opens},\\n      AlgebraicGeometry.IsAffineOpen U →\\n        ∀ {V : X.Opens},\\n          AlgebraicGeometry.IsAffineOpen V →\\n            ∀ (e : V ≤ (TopologicalSpace.Opens.map f.base).obj U),\\n              (CommRingC\", \"doc\": \"Let $f: X \\\\to Y$ be a morphism of schemes. The morphism $f$ is flat if and only if for every affine open subset $U$ of $Y$ and every affine open subset $V$ of $X$ such that the image of $V$ under the \"}\n  {\"name\": \"AlgebraicGeometry.UniversallyOpen.of_flat\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/UniversallyOpen\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.Flat f]\\n  [AlgebraicGeometry.LocallyOfFinitePresentation f], AlgebraicGeometry.UniversallyOpen f\", \"doc\": \"A morphism of schemes that is flat and locally of finite presentation is universally open. This means that for any base change $ Y' \\to Y $, the induced morphism $ X \\times_Y Y' \\to Y' $ is an open map o\"}\n  {\"name\": \"AlgebraicGeometry.Flat.instIsMultiplicativeScheme\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Flat\", \"type\": \"CategoryTheory.MorphismProperty.IsMultiplicative @AlgebraicGeometry.Flat\", \"doc\": \"The property of being a flat morphism of schemes is multiplicative. That is, if $ f : X \\\\to Y $ and $ g : Y \\\\to Z $ are flat morphisms of schemes, then their composition $ g \\\\circ f : X \\\\to Z $ is als\"}\n  {\"name\": \"AlgebraicGeometry.Flat.isIso_of_surjective_of_mono\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FlatMono\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.Flat f] [AlgebraicGeometry.QuasiCompact f]\\n  [AlgebraicGeometry.Surjective f] [CategoryTheory.Mono f], CategoryTheory.IsIso f\", \"doc\": \"If $ f : X \\to Y $ is a morphism of schemes that is flat, quasi-compact, surjective, and a monomorphism, then $ f $ is an isomorphism of schemes.\"}\n  {\"name\": \"AlgebraicGeometry.IsSmooth\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"A morphism $ f: X \\to Y $ of schemes is smooth.\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary sheaf pullback adjunctions and flat base change do not give the right adjoint coherent dualizing object or its trace"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Existence uniqueness and base change of coherent relative dualizing complexes for proper flat algebraic spaces",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.pullbackPushforwardAdjunction\", \"module\": \"Mathlib/AlgebraicGeometry/Modules/Sheaf\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} →\\n  (f : X ⟶ Y) → AlgebraicGeometry.Scheme.Modules.pullback f ⊣ AlgebraicGeometry.Scheme.Modules.pushforward f\", \"doc\": \"For any morphism $ f : X \\to Y $ of schemes, the pullback functor from the category of sheaves of modules over $ Y $'s structure sheaf to the category of sheaves of modules over $ X $'s structure sheaf\"}\n  {\"name\": \"AlgebraicGeometry.Flat\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Flat\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"The property that a morphism $ f : X \\to Y $ of schemes is flat.\"}\n  {\"name\": \"AlgebraicGeometry.Flat.isStableUnderBaseChange\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Flat\", \"type\": \"CategoryTheory.MorphismProperty.IsStableUnderBaseChange @AlgebraicGeometry.Flat\", \"doc\": \"The property of being a flat morphism of schemes is stable under base change, meaning that if a morphism of schemes is flat, then any base change (pullback) of this morphism is also flat.\"}\n  {\"name\": \"AlgebraicGeometry.of_pullback_fst_Spec_of_codescendsAlong\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Descent\", \"type\": \"∀ (P P' : CategoryTheory.MorphismProperty AlgebraicGeometry.Scheme)\\n  {Q Q' : {R S : Type u} → [inst : CommRing R] → [inst_1 : CommRing S] → (R →+* S) → Prop} [P.RespectsIso],\\n  (RingHom.CodescendsAlong (fun {R S} [CommRing R] [CommRing S] => Q) fun {R S} [CommRing R] [CommRing S] => Q') →\\n    (∀ {R\", \"doc\": \"Given a pullback diagram of schemes involving the Spec functor and a codescent condition along ring homomorphisms, if a morphism property $P$ respects isomorphisms and satisfies certain implications w\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.instIsLeftAdjointPullback\", \"module\": \"Mathlib/AlgebraicGeometry/Modules/Sheaf\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y), (AlgebraicGeometry.Scheme.Modules.pullback f).IsLeftAdjoint\", \"doc\": \"For any morphism $ f : X \\to Y $ of schemes, the pullback functor from the category of sheaves of modules over $ Y $'s structure sheaf to the category of sheaves of modules over $ X $'s structure sheaf\"}\n  {\"name\": \"RingHom.IsStableUnderBaseChange.pullback_fst_appTop\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/RingHomProperties\", \"type\": \"∀ (P : {R S : Type u} → [inst : CommRing R] → [inst_1 : CommRing S] → (R →+* S) → Prop),\\n  (RingHom.IsStableUnderBaseChange fun {R S} [CommRing R] [CommRing S] => P) →\\n    (RingHom.RespectsIso fun {R S} [CommRing R] [CommRing S] => P) →\\n      ∀ {X Y S : AlgebraicGeometry.Scheme} [AlgebraicGeometry.I\", \"doc\": \"If a property $ P $ of ring homomorphisms is stable under base change and respects isomorphisms, then for affine schemes $ X, Y, S $ with morphisms $ f: X \\\\to S $ and $ g: Y \\\\to S $, the property $ P \"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.instIsRightAdjointPushforward\", \"module\": \"Mathlib/AlgebraicGeometry/Modules/Sheaf\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y), (AlgebraicGeometry.Scheme.Modules.pushforward f).IsRightAdjoint\", \"doc\": \"For any morphism $ f : X \\to Y $ of schemes, the pushforward functor from the category of sheaves of modules over the structure sheaf of $ X $ to that over $ Y $ is a right adjoint. This means there ex\"}\n  {\"name\": \"AlgebraicGeometry.IsStableUnderBaseChange.of_pullback_fst_of_isAffine\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Descent\", \"type\": \"∀ (P P' : CategoryTheory.MorphismProperty AlgebraicGeometry.Scheme) [P'.RespectsIso] [P'.IsStableUnderComposition]\\n  [P.IsStableUnderBaseChange],\\n  (∀ {R : CommRingCat} {S X : AlgebraicGeometry.Scheme} (f : AlgebraicGeometry.Spec R ⟶ S) (g : X ⟶ S),\\n      P' f → P (CategoryTheory.Limits.pullback.fst\", \"doc\": \"Let $ P' $ be a morphism property stable under composition and respecting isomorphisms, and let $ P $ be a property stable under base change. Suppose $ T $ is an affine scheme, and consider morphisms \"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary sheaf pullback adjunctions and flat base change do not give the right adjoint coherent dualizing object or its trace"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"dualizing\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary sheaf pullback adjunctions and flat base change do not give the right adjoint coherent dualizing object or its trace"
+  },
+  {
+   "tool": "grep",
+   "query": "relativeDualizing|relative_dualizing|dualizingComplex",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary sheaf pullback adjunctions and flat base change do not give the right adjoint coherent dualizing object or its trace"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A proper flat finitely presented morphism of algebraic spaces has a relative perfect dualizing complex with trace, derived adjunction and arbitrary derived base change",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"IsBaseChange.dual\", \"module\": \"Mathlib.LinearAlgebra.Dual.BaseChange\", \"type\": \": IsBaseChange A (ibc.toDual)\", \"doc\": \"Given an $ R $-module $ V $ and its base change $ W = V \\\\otimes_R A $ along an $ R $-algebra $ A $, the base change induces an $ R $-linear map from the dual module $ \\\\text{Hom}_R(V, R) $ to the dual \"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.pullbackPushforwardAdjunction\", \"module\": \"Mathlib.AlgebraicGeometry.Modules.Sheaf\", \"type\": \": pullback f ⊣ pushforward f\", \"doc\": \"For any morphism $ f : X \\to Y $ of schemes, the pullback functor from the category of sheaves of modules over $ Y $'s structure sheaf to the category of sheaves of modules over $ X $'s structure sheaf\"}\n  {\"name\": \"AlgebraicGeometry.IsProper.instOfIsFinite\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Proper\", \"type\": \"[IsFinite f] : IsProper f\", \"doc\": \"Every finite morphism of schemes is a proper morphism.\"}\n  {\"name\": \"AlgebraicGeometry.Flat\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Flat\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"The property that a morphism $ f : X \\to Y $ of schemes is flat.\"}\n  {\"name\": \"RingHom.Flat.isStableUnderBaseChange\", \"module\": \"Mathlib.RingTheory.RingHom.Flat\", \"type\": \": IsStableUnderBaseChange Flat\", \"doc\": \"For commutative rings $ R, S, R', S' $ with compatible algebra structures and scalar tower conditions, if the ring homomorphism $ R \\to S $ is flat, then the ring homomorphism $ R' \\to S' $ obtained by \"}\n  {\"name\": \"AlgebraicGeometry.Flat.mk\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Flat\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y},\\n  (∀ {U : Y.Opens},\\n      AlgebraicGeometry.IsAffineOpen U →\\n        ∀ {V : X.Opens},\\n          AlgebraicGeometry.IsAffineOpen V →\\n            ∀ (e : V ≤ (TopologicalSpace.Opens.map f.base).obj U),\\n              (CommRingCat.Hom.hom (AlgebraicGeometry.\", \"doc\": \"Let $f: X \\\\to Y$ be a morphism of schemes. If for every affine open subset $U$ of $Y$ and every affine open subset $V$ of $X$ such that $V \\\\subseteq f^{-1}(U)$, the ring homomorphism $\\\\Gamma(U, \\\\mathc\"}\n  {\"name\": \"AlgebraicGeometry.Flat.comp\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Flat\", \"type\": \"{X Y Z : Scheme} (f : X ⟶ Y) (g : Y ⟶ Z) [hf : Flat f] [hg : Flat g] : Flat (f ≫ g)\", \"doc\": \"Flat morphisms of schemes form a category, where the objects are schemes and the morphisms are flat morphisms between them. Composition and identity morphisms are inherited from the category of scheme\"}\n  {\"name\": \"AlgebraicGeometry.UniversallyOpen.of_flat\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.UniversallyOpen\", \"type\": \"[Flat f] [LocallyOfFinitePresentation f] : UniversallyOpen f\", \"doc\": \"A morphism of schemes that is flat and locally of finite presentation is universally open. This means that for any base change $ Y' \\to Y $, the induced morphism $ X \\times_Y Y' \\to Y' $ is an open map o\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary sheaf pullback adjunctions and flat base change do not give the right adjoint coherent dualizing object or its trace"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Proper flat finitely presented algebraic spaces over arbitrary schemes admit coherent relative dualizing complexes and trace with arbitrary derived base change",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Flat\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Flat\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"The property that a morphism $ f : X \\to Y $ of schemes is flat.\"}\n  {\"name\": \"AlgebraicGeometry.Flat.instHasRingHomPropertyFlat\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Flat\", \"type\": \"AlgebraicGeometry.HasRingHomProperty @AlgebraicGeometry.Flat fun {R S} [CommRing R] [CommRing S] => RingHom.Flat\", \"doc\": \"The property of being a flat morphism of schemes is characterized by the flatness of the corresponding ring homomorphism. Specifically, a morphism of schemes is flat if and only if the associated ring\"}\n  {\"name\": \"AlgebraicGeometry.flat_iff\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Flat\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y),\\n  AlgebraicGeometry.Flat f ↔\\n    ∀ {U : Y.Opens},\\n      AlgebraicGeometry.IsAffineOpen U →\\n        ∀ {V : X.Opens},\\n          AlgebraicGeometry.IsAffineOpen V →\\n            ∀ (e : V ≤ (TopologicalSpace.Opens.map f.base).obj U),\\n              (CommRingC\", \"doc\": \"Let $f: X \\\\to Y$ be a morphism of schemes. The morphism $f$ is flat if and only if for every affine open subset $U$ of $Y$ and every affine open subset $V$ of $X$ such that the image of $V$ under the \"}\n  {\"name\": \"AlgebraicGeometry.Flat.instIsMultiplicativeScheme\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Flat\", \"type\": \"CategoryTheory.MorphismProperty.IsMultiplicative @AlgebraicGeometry.Flat\", \"doc\": \"The property of being a flat morphism of schemes is multiplicative. That is, if $ f : X \\\\to Y $ and $ g : Y \\\\to Z $ are flat morphisms of schemes, then their composition $ g \\\\circ f : X \\\\to Z $ is als\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.flat_appLE\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Flat\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [self : AlgebraicGeometry.Flat f] {U : Y.Opens},\\n  AlgebraicGeometry.IsAffineOpen U →\\n    ∀ {V : X.Opens},\\n      AlgebraicGeometry.IsAffineOpen V →\\n        ∀ (e : V ≤ (TopologicalSpace.Opens.map f.base).obj U),\\n          (CommRingCat.Hom.hom (AlgebraicG\", \"doc\": \"Let $f: X \\\\to Y$ be a flat morphism of schemes. For any affine open subset $U \\\\subseteq Y$ and any affine open subset $V \\\\subseteq f^{-1}(U)$, the corresponding ring homomorphism $\\\\mathcal{O}_Y(U) \\\\to\"}\n  {\"name\": \"AlgebraicGeometry.Flat.flat_appLE\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Flat\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [self : AlgebraicGeometry.Flat f] {U : Y.Opens},\\n  AlgebraicGeometry.IsAffineOpen U →\\n    ∀ {V : X.Opens},\\n      AlgebraicGeometry.IsAffineOpen V →\\n        ∀ (e : V ≤ (TopologicalSpace.Opens.map f.base).obj U),\\n          (CommRingCat.Hom.hom (AlgebraicG\", \"doc\": \"If $ f : X \\\\to Y $ is a flat morphism of schemes, then for every affine open subset $ U \\\\subseteq Y $ and every affine open subset $ V \\\\subseteq X $ such that $ V \\\\subseteq f^{-1}(U) $, the induced ri\"}\n  {\"name\": \"AlgebraicGeometry.Flat.flat_and_surjective_iff_faithfullyFlat_of_isAffine\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Flat\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.IsAffine X] [AlgebraicGeometry.IsAffine Y],\\n  AlgebraicGeometry.Flat f ∧ AlgebraicGeometry.Surjective f ↔\\n    (CommRingCat.Hom.hom (AlgebraicGeometry.Scheme.Hom.appTop f)).FaithfullyFlat\", \"doc\": \"For affine schemes $X$ and $Y$, a morphism $f : X \\to Y$ is flat and surjective if and only if the induced ring homomorphism on global sections $f_{\\text{appTop}}$ is faithfully flat.\"}\n  {\"name\": \"AlgebraicGeometry.Flat.isStableUnderBaseChange\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Flat\", \"type\": \"CategoryTheory.MorphismProperty.IsStableUnderBaseChange @AlgebraicGeometry.Flat\", \"doc\": \"The property of being a flat morphism of schemes is stable under base change, meaning that if a morphism of schemes is flat, then any base change (pullback) of this morphism is also flat.\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern ordinary module pullback adjunctions, scheme morphism properties or one-hypercovers; none supplies this derived quasi-coherent algebraic-space theorem"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Existence and gluing of coherent dualizing trace pairs for proper flat algebraic spaces",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Flat\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Flat\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"The property that a morphism $ f : X \\to Y $ of schemes is flat.\"}\n  {\"name\": \"AlgebraicGeometry.flat_iff\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Flat\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y),\\n  AlgebraicGeometry.Flat f ↔\\n    ∀ {U : Y.Opens},\\n      AlgebraicGeometry.IsAffineOpen U →\\n        ∀ {V : X.Opens},\\n          AlgebraicGeometry.IsAffineOpen V →\\n            ∀ (e : V ≤ (TopologicalSpace.Opens.map f.base).obj U),\\n              (CommRingC\", \"doc\": \"Let $f: X \\\\to Y$ be a morphism of schemes. The morphism $f$ is flat if and only if for every affine open subset $U$ of $Y$ and every affine open subset $V$ of $X$ such that the image of $V$ under the \"}\n  {\"name\": \"AlgebraicGeometry.Flat.instHasRingHomPropertyFlat\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Flat\", \"type\": \"AlgebraicGeometry.HasRingHomProperty @AlgebraicGeometry.Flat fun {R S} [CommRing R] [CommRing S] => RingHom.Flat\", \"doc\": \"The property of being a flat morphism of schemes is characterized by the flatness of the corresponding ring homomorphism. Specifically, a morphism of schemes is flat if and only if the associated ring\"}\n  {\"name\": \"AlgebraicGeometry.exists_app_map_eq_zero_of_isLimit\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"∀ {I : Type u} [inst : CategoryTheory.Category.{u, u} I] (D : CategoryTheory.Functor I AlgebraicGeometry.Scheme)\\n  (c : CategoryTheory.Limits.Cone D) (hc : CategoryTheory.Limits.IsLimit c) [CategoryTheory.IsCofiltered I]\\n  [∀ {i j : I} (f : i ⟶ j), AlgebraicGeometry.IsAffineHom (D.map f)] {i : I} {U\", \"doc\": \"Given a cofiltered diagram of schemes where all transition morphisms are affine, for any compact open subset $ U $ of a scheme in the diagram and a section $ s $ of the structure sheaf over $ U $ that\"}\n  {\"name\": \"AlgebraicGeometry.exists_appTop_map_eq_zero_of_isLimit\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"∀ {I : Type u} [inst : CategoryTheory.Category.{u, u} I] (D : CategoryTheory.Functor I AlgebraicGeometry.Scheme)\\n  (c : CategoryTheory.Limits.Cone D) (hc : CategoryTheory.Limits.IsLimit c) [CategoryTheory.IsCofiltered I]\\n  [∀ {i j : I} (f : i ⟶ j), AlgebraicGeometry.IsAffineHom (D.map f)] {i : I} [C\", \"doc\": \"Given a cofiltered diagram of schemes with affine transition morphisms and compact topological spaces, if a global section becomes zero under the limit cone's projection map, then there exists a morph\"}\n  {\"name\": \"AlgebraicGeometry.Flat.flat_appLE\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Flat\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [self : AlgebraicGeometry.Flat f] {U : Y.Opens},\\n  AlgebraicGeometry.IsAffineOpen U →\\n    ∀ {V : X.Opens},\\n      AlgebraicGeometry.IsAffineOpen V →\\n        ∀ (e : V ≤ (TopologicalSpace.Opens.map f.base).obj U),\\n          (CommRingCat.Hom.hom (AlgebraicG\", \"doc\": \"If $ f : X \\\\to Y $ is a flat morphism of schemes, then for every affine open subset $ U \\\\subseteq Y $ and every affine open subset $ V \\\\subseteq X $ such that $ V \\\\subseteq f^{-1}(U) $, the induced ri\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.flat_appLE\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Flat\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [self : AlgebraicGeometry.Flat f] {U : Y.Opens},\\n  AlgebraicGeometry.IsAffineOpen U →\\n    ∀ {V : X.Opens},\\n      AlgebraicGeometry.IsAffineOpen V →\\n        ∀ (e : V ≤ (TopologicalSpace.Opens.map f.base).obj U),\\n          (CommRingCat.Hom.hom (AlgebraicG\", \"doc\": \"Let $f: X \\\\to Y$ be a flat morphism of schemes. For any affine open subset $U \\\\subseteq Y$ and any affine open subset $V \\\\subseteq f^{-1}(U)$, the corresponding ring homomorphism $\\\\mathcal{O}_Y(U) \\\\to\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.instIsLocallyDirectedAffineZariskiSiteCompOppositeCommRingCatRightOpOpensOpToOpensFunctorNormalizationDiagramSpecForget\", \"module\": \"Mathlib/AlgebraicGeometry/Normalization\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.QuasiCompact f] [AlgebraicGeometry.QuasiSeparated f],\\n  ((((AlgebraicGeometry.Scheme.AffineZariskiSite.toOpensFunctor Y).op.comp\\n                (AlgebraicGeometry.Scheme.Hom.normalizationDiagram f)).rightOp.comp\\n          AlgebraicGe\", \"doc\": \"The composition of the opposite of the affine Zariski site inclusion functor for a scheme $ Y $, the normalization diagram of a morphism $ f $, the right opposite functor, the contravariant Spec funct\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern ordinary module pullback adjunctions, scheme morphism properties or one-hypercovers; none supplies this derived quasi-coherent algebraic-space theorem"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"dualizing\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern ordinary module pullback adjunctions, scheme morphism properties or one-hypercovers; none supplies this derived quasi-coherent algebraic-space theorem"
+  },
+  {
+   "tool": "grep",
+   "query": "relativeDualizing|relative_dualizing|dualizingComplex",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern ordinary module pullback adjunctions, scheme morphism properties or one-hypercovers; none supplies this derived quasi-coherent algebraic-space theorem"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Proper flat finitely presented algebraic spaces over arbitrary schemes admit coherent relative dualizing complexes and trace with arbitrary derived base change",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"RingHom.Flat.isStableUnderBaseChange\", \"module\": \"Mathlib.RingTheory.RingHom.Flat\", \"type\": \": IsStableUnderBaseChange Flat\", \"doc\": \"For commutative rings $ R, S, R', S' $ with compatible algebra structures and scalar tower conditions, if the ring homomorphism $ R \\to S $ is flat, then the ring homomorphism $ R' \\to S' $ obtained by \"}\n  {\"name\": \"AlgebraicGeometry.instLocallyOfFinitePresentationOfIsSmooth\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Smooth\", \"type\": \"[hf : IsSmooth f] : LocallyOfFinitePresentation f\", \"doc\": \"Every smooth morphism of schemes is locally of finite presentation.\"}\n  {\"name\": \"AlgebraicGeometry.Flat.flat_and_surjective_iff_faithfullyFlat_of_isAffine\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Flat\", \"type\": \"[IsAffine X] [IsAffine Y] : Flat f ∧ Surjective f ↔ f.appTop.hom.FaithfullyFlat\", \"doc\": \"For affine schemes $X$ and $Y$, a morphism $f : X \\to Y$ is flat and surjective if and only if the induced ring homomorphism on global sections $f_{\\text{appTop}}$ is faithfully flat.\"}\n  {\"name\": \"AlgebraicGeometry.flat_iff\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Flat\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y),\\n  AlgebraicGeometry.Flat f ↔\\n    ∀ {U : Y.Opens},\\n      AlgebraicGeometry.IsAffineOpen U →\\n        ∀ {V : X.Opens},\\n          AlgebraicGeometry.IsAffineOpen V →\\n            ∀ (e : V ≤ (TopologicalSpace.Opens.map f.base).obj U),\\n              (CommRingC\", \"doc\": \"Let $f: X \\\\to Y$ be a morphism of schemes. The morphism $f$ is flat if and only if for every affine open subset $U$ of $Y$ and every affine open subset $V$ of $X$ such that the image of $V$ under the \"}\n  {\"name\": \"AlgebraicGeometry.IsProper.isStableUnderBaseChange\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Proper\", \"type\": \": MorphismProperty.IsStableUnderBaseChange @IsProper\", \"doc\": \"Properness of morphisms of schemes is stable under base change. That is, if $ f: X \\to Y $ is a proper morphism of schemes and $ Y' \\to Y $ is any morphism, then the base change $ f': X \\times_Y Y' \\to Y'\"}\n  {\"name\": \"AlgebraicGeometry.Flat.isStableUnderBaseChange\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Flat\", \"type\": \": MorphismProperty.IsStableUnderBaseChange @Flat\", \"doc\": \"The property of being a flat morphism of schemes is stable under base change, meaning that if a morphism of schemes is flat, then any base change (pullback) of this morphism is also flat.\"}\n  {\"name\": \"RingHom.Flat\", \"module\": \"Mathlib.RingTheory.RingHom.Flat\", \"type\": \"{R : Type u} {S : Type v} [CommRing R] [CommRing S] (f : R →+* S) : Prop\", \"doc\": \"Given a ring homomorphism $ f : R \\to S $ between commutative rings $ R $ and $ S $, the property that $ S $ is a flat $ R $-module under the induced algebra structure defined by $ f $. This means that\"}\n  {\"name\": \"AlgebraicGeometry.UniversallyOpen.of_flat\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.UniversallyOpen\", \"type\": \"[Flat f] [LocallyOfFinitePresentation f] : UniversallyOpen f\", \"doc\": \"A morphism of schemes that is flat and locally of finite presentation is universally open. This means that for any base change $ Y' \\to Y $, the induced morphism $ X \\times_Y Y' \\to Y' $ is an open map o\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern ordinary module pullback adjunctions, scheme morphism properties or one-hypercovers; none supplies this derived quasi-coherent algebraic-space theorem"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-nodal-relative-dualizing-line",
+  "date": "2026-10-22",
+  "group": "NF"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Stable genus and smooth-family open loci in curve families. Supporting input: 0E76 proof via lemma-stable: the relative dualizing sheaf used to detect fibrewise stability by ampleness. Supporting input: Derived coherent duality for proper flat algebraic spaces.",
+   "via": [
+    "lem-sfb-nodal-relative-dualizing-line",
+    "lem-sfb-stable-and-smooth-family-open-loci",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-proper-flat-space-derived-duality",
+  "worker": "stage1",
+  "summary": "Construct affine representing objects from right adjoints, establish trace-compatible affine transition maps, glue complexes by negative-Ext hyperdescent, explicitly descend the trace using connective-source orthogonality, and verify the universal condition on arbitrary affine tests before uniqueness and coherent arbitrary base change. Eight statement-only generic construction inputs; reuse the affine derived equivalence.",
+  "blueprint": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Stable genus and smooth-family open loci in curve families. Supporting input: 0E76 proof via lemma-stable: the relative dualizing sheaf used to detect fibrewise stability by ampleness. Supporting input: Derived coherent duality for proper flat algebraic spaces.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q66-a946c2b90",
+  "group": "Q66",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q66-a946c2b90 (reviewer sub-agent of L); spot-checked: Read the item, all 8 new nodes and the sources in full: spaces-duality 0E55, 0E5I(1), 0E5L, 0E5V, 0E5X with remarks (1)-(3), 0E5Z, 0E60, 0E61, 0E6C, 0E6E; spaces-simplicial 0DL9/0DLA; hypercovering 0DAV/0DB2; spaces-more-morphisms 0DKN/0DKQ/0DKT; spaces-perfect 071Q, 08GH (Rf_* diagram), 08IR. Statement unchanged. The proof follows Stacks 0E61/0E5Z/0E6C/0E6E. The trace-descent detail that 0E61 omits is filled correctly: C=Rf_*K is in D^{<=0} étale-locally, so negative Homs into O_T vanish by the t-structure orthogonality leaf, and 0DL9 then gives a unique tau. Both source errors claimed in the report are confirmed: 0E5I prints K in D_QCoh(O_X) where it must be O_Y, and 0DLA's codomain should be K_0. The new statements match their tags with the right hypotheses: Y-perfect as in 0DKN, flat implies Tor-independent for 08IR, and the étale-Zariski comparison holds for all schemes and is needed in step 7. The hypercover refinement clause is not printed in Stacks but follows from the same skeleton construction, so it is true. Tested on f=id, finite flat f, a smooth curve, the empty space and non-quasi-compact T. No duplicates found after searching the snapshot and live. No SGA citations. Batch-5: all 15 flagged citations are of def-trf-algebraic-space and def-trf-space-quasi-coherent-module. These are general definitions, already in the item's base stmt_deps, and not part of the trace formula or Poincaré duality or their proofs, so all are accepted. FIX in fixes/dag/nodes/sec-six-functors-basics/lem-sfb-proper-flat-space-derived-duality.json: (1) C7: step 1 now takes D(A) = D_QCoh(V_et) with quasi-inverse RGamma from the same-unit lem-sfb-affine-etale-derived-module-realization instead of the other unit's lem-pc-affine-qcoh-derived-equivalence. That id is replaced in proof_deps and split_report.tool_uses is now []. The report's not-duplicate line also misdescribed that node. (2) Step 5 is rewritten to glue directly along the refined affine hypercover V'->V: inverses are glued and injectivity proves the composites are identities, and trace preservation is checked by injectivity with the orthogonality leaf, now cited. The delivered sentence about vanishing on the unrefined terms was muddled. No statement changed.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.ProperFlatSpaceDerivedDuality",
+  "declaration": "AlgebraicGeometry.AlgebraicSpace.properFlatSpaceDerivedDuality",
+  "declarations": [
+   "AlgebraicGeometry.AlgebraicSpace.properFlatSpaceDerivedDuality",
+   "AlgebraicGeometry.AlgebraicSpace.properFlatSpaceDerivedDuality_id",
+   "AlgebraicGeometry.AlgebraicSpace.properFlatSpaceDerivedDuality_comp",
+   "AlgebraicGeometry.AlgebraicSpace.SchemeDualizingTraceComparison",
+   "AlgebraicGeometry.AlgebraicSpace.schemeDualizingAdjunctionTrace",
+   "AlgebraicGeometry.AlgebraicSpace.properFlatSpaceDerivedDuality_schemeComparison"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/ProperFlatSpaceDerivedDuality.lean",
+  "statement": "theorem properFlatSpaceDerivedDuality (Y : Over S) (X : AlgebraicSpace S) (f : X ⟶ schemeSpace Y) (hproper : MapIsProper f) (hflat : MapIsFlat f) (hfp : MapIsLocallyOfFinitePresentation f) : ∃ P : RelativeDualizingTracePair Y f, IsRelativeDualizingTracePair P ∧ IsPseudoCoherent X P.complex ∧ (∀ V : X.SmallEtaleModel, ∃ R : Sieve V, R ∈ X.smallEtaleModelTopology V ∧ ∀ (U : X.SmallEtaleModel) (i : U ⟶ V), R i → ∃ a b : ℤ, ∀ n : ℤ, n < a ∨ b < n → IsZero ((SheafOfModules.overFunctor X.smallStructureRings U).obj ((DerivedCategory.homologyFunctor X.SmallModules n).obj P.complex))) ∧ (∀ Q : RelativeDualizingTracePair Y f, IsRelativeDualizingTracePair Q → ∃! e : P.complex ≅ Q.complex, TracePreserving P Q e) ∧ (∀ (Y' : Over S) (g : Y' ⟶ Y) (X' : AlgebraicSpace S) (p : X' ⟶ X) (f' : X' ⟶ schemeSpace Y') (sq : IsPullback p f' f (traceSchemeMap g)), (∃ t : (derivedDirectImage f').obj ((spaceDerivedPullback p).obj P.complex) ⟶ (schemeSpace Y').derivedStructure, IsRelativeDualizingTracePair (RelativeDualizingTracePair.mk ((spaceDerivedPullback p).obj P.complex) t) ∧ TraceBaseChangeCompatible P ⟨(spaceDerivedPullback p).obj P.complex, t⟩ g p sq.w (Iso.refl _)) ∧ ∀ Q : RelativeDualizingTracePair Y' f', IsRelativeDualizingTracePair Q → ∃! e : (spaceDerivedPullback p).obj P.complex ≅ Q.complex, TraceBaseChangeCompatible P Q g p sq.w e)",
+  "branch": "sheaf-dag",
+  "by": "Q119",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "The primary theorem states existence, pseudo-coherence, local boundedness, uniqueness and arbitrary scheme base change. The same owning module states identity and composition coherence and the scheme comparison with the actual adjunction trace. Small-model module categories are the existing equivalent small etale ringed topoi; localization sizes w and wZ are independent."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-feb851a4e",
+  "group": "Q119",
+  "result": "fix",
+  "note": "Mathematics correct: hypotheses match the node with nothing extra (proper gives qc+qs so local finite presentation = finite presentation); the Hom bijection is stated on the explicit trace-composition map (RGamma compositor and fixed A[0] comparison), and the trace on the pulled-back complex is pinned by the base-change equation because exchange is invertible for proper flat f; pseudo-coherence and local cohomological bounds, unique trace-preserving iso, arbitrary base change, identity and composition laws all correct; the scheme comparison leaves some connecting isos free but the claim for every comparison is true and includes the canonical one. No duplicate (the scheme RelativeDualizingPair is the 0E2T diagonal notion). Finding fixed (H2/H13): new node def-sfb-relative-dualizing-trace-pair cited theorem lem-sfb-space-relative-flat-closed-kernel-base-change only for the plain def relativeClosedKernelDerivedStructureMap, which no def node owns. Fixes: RelativeDualizingTracePair.lean now defines traceSmallStructureMap, traceDirectImageComparison and traceDerivedStructureMap with the landed bodies (rfl probe compiled) and drops the theorem-module import; the whole new-node json swaps the theorem stmt_dep and citation for def-sfb-space-module-structure-map, def-sfb-space-affine-hom-comparison, def-sfb-space-small-ringed-model and def-trf-space-etale-module-functors, and adds the helpers to declarations. Item unchanged. nt_compile --json on the fixed def module plus the item: clean, rc=0, 3.8 s and 5.1 s. Advisory: the item uses some owner declarations (affineIdentityChart, small-model declarations) reached only transitively through def nodes; the second reading is a self-check."
+ }
+}

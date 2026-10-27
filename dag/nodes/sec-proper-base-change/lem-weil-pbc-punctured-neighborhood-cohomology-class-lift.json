@@ -1,0 +1,122 @@
+{
+ "kind": "statement",
+ "source": {
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Tag 0A3D(2), proof by Tag 0A37, class-lifting half"
+ },
+ "stmt_deps": [
+  "def-weil-spectral-space",
+  "def-weil-pbc-punctured-neighborhood-cohomology-diagram"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "J8",
+  "date": "2026-10-25",
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Tag 0A3D(2), applying Tag 0A37 to explicitly constructed restrictions and comparison maps"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A cohomology class on an intersection of compact open neighborhoods lifts to some neighborhood",
+   "results": "Eight hits for continuous-map lifting and scheme basic opens; none for sheaf cohomology.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"colimit_exists_rep\"",
+   "results": "Concrete.colimit_exists_rep and isColimit_exists_rep provide the group-level representation step, but no topological cohomology continuity.",
+   "date": "2026-10-24",
+   "verdict": "reuse for the parent proof only"
+  },
+  {
+   "tool": "grep",
+   "query": "puncturedNeighborhood.*(lift|zero)|spectralLimit_cohomology_(class_lift|eventual_zero)",
+   "results": "No punctured-neighborhood specialization. Local source reads identify the two existing general spectral-limit cohomology declarations; their coefficient presentation must still be constructed.",
+   "date": "2026-10-24",
+   "verdict": "general spectral-limit halves are applicable after restriction setup"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Topology.PuncturedNeighborhoodCohomologyColimit",
+  "date": "2026-10-24",
+  "group": "T7"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-punctured-neighborhood-cohomology-colimit",
+   "place": "Independent class-lifting part of the continuity argument in proof step 5",
+   "via": [
+    "lem-weil-pbc-punctured-neighborhood-cohomology-colimit",
+    "lem-weil-pbc-top-degree-open-restriction-surjective",
+    "lem-weil-pbc-top-coherent-cohomology-finite"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "id": "lem-weil-pbc-punctured-neighborhood-cohomology-class-lift",
+ "title": "Lifting cohomology classes to punctured neighborhoods",
+ "statement": "Let T be a spectral space, Z a closed subset with compact open complement, A an abelian sheaf on T, and q a natural number. Let D be the punctured-neighborhood cohomology diagram and C its canonical restriction cocone [def-weil-pbc-punctured-neighborhood-cohomology-diagram]. Every class y in C.pt is the image C_N(x) of some class x in D_N for some compact open neighborhood N of Z.",
+ "proof": [
+  {
+   "text": "Use the stage-representation theorem for the explicitly constructed punctured restriction system on the inverse image of the given class under coefficientCohomologyColimitIso.",
+   "uses": [
+    "lem-weil-pbc-punctured-spectral-class-stage-lift"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The constant-colimit comparison identifies the resulting map with projection pullback and composition on coefficients. The open-subspace comparison changes the stage class into ambient object cohomology and identifies its image with the specified cocone leg. Cancel the two comparison isomorphisms.",
+   "uses": [
+    "lem-weil-pbc-open-system-colimit-cohomology-comparison",
+    "lem-weil-pbc-punctured-leg-open-subspace-comparison"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-punctured-spectral-class-stage-lift",
+  "lem-weil-pbc-open-system-colimit-cohomology-comparison",
+  "lem-weil-pbc-punctured-leg-open-subspace-comparison"
+ ],
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Topology.PuncturedNeighborhoodCohomologyClassLift",
+  "file": "lean/Sheaf/Topology/PuncturedNeighborhoodCohomologyClassLift.lean",
+  "declaration": "TopCat.puncturedNeighborhood_cohomology_class_lift",
+  "declarations": [
+   "TopCat.puncturedNeighborhood_cohomology_class_lift"
+  ],
+  "statement": "theorem puncturedNeighborhood_cohomology_class_lift {T : Type u} [TopologicalSpace T] [SpectralSpace T] (Z : Set T) (hZ : IsClosed Z) (hU : IsCompact Zᶜ) (A : CategoryTheory.Sheaf (Opens.grothendieckTopology T) AddCommGrpCat.{u}) (q : ℕ) (y : (puncturedNeighborhoodCohomologyCocone Z hZ A q).pt) : ∃ (N : (compactOpenNeighborhoods Z)ᵒᵖ) (x : (puncturedNeighborhoodCohomologyDiagram Z hZ A q).obj N), ((puncturedNeighborhoodCohomologyCocone Z hZ A q).ι.app N).hom x = y",
+  "branch": "sheaf-dag",
+  "by": "T7",
+  "date": "2026-10-24"
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T7",
+  "result": "pass",
+  "landing": "20261024T020608-L-2624606",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J8",
+  "result": "pass",
+  "landing": "20261025T163802-L-834892",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

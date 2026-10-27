@@ -1,0 +1,224 @@
+{
+ "id": "lem-sfb-p-independent-higher-power-monomials",
+ "kind": "statement",
+ "title": "Higher bounded monomials of a p-independent tuple remain independent over power subfields",
+ "statement": "Let $p$ be prime and let $k$ be a field of characteristic $p$ [def-weil-field]. Let $r\\geq0$ and $b_1,\\ldots,b_r\\in k$, and write $b^E=\\prod_{i=1}^r b_i^{E_i}$. Suppose the family $(b^E)_{E\\in\\{0,\\ldots,p-1\\}^r}$ is linearly independent over $k^p=\\{a^p:a\\in k\\}$. For every integer $n\\geq0$, the family $(b^E)_{E\\in\\{0,\\ldots,p^n-1\\}^r}$ is linearly independent over the subfield $k^{p^n}=\\{a^{p^n}:a\\in k\\}$. Explicitly, if coefficients $c_E\\in k^{p^n}$ satisfy $\\sum_E c_E b^E=0$, then every $c_E=0$. Empty products are $1$, so for $r=0$ the family is $(1)$; for $n=0$ it is also $(1)$, over $k$.",
+ "source": {
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tag 09II, proposition-epp-essentially-finite-type, proof p-base preparation paragraph; explicit higher-digit refinement of Tag 07P1, definition-p-basis, p-independent monomials."
+ },
+ "stmt_deps": [
+  "def-weil-field"
+ ],
+ "proof": [
+  {
+   "text": "Induct on $n$, for the fixed tuple in the statement, using the explicit vanishing-of-coefficients criterion. At $n=0$ the only exponent vector is $0$, its monomial is $1$, and a relation $c_0\\cdot1=0$ says $c_0=0$. This also treats the empty tuple for every $n$: there is exactly one empty exponent vector and its monomial is $1$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 07P1 (definition-p-basis), definition of p-independence; elementary higher-digit induction supplied by Q32 for the p-base preparation in Tag 09II (proposition-epp-essentially-finite-type)."
+   }
+  },
+  {
+   "text": "Assume the conclusion at $n$ and consider a relation $\\sum_E c_Eb^E=0$ with $0\\leq E_i<p^{n+1}$ and $c_E\\in k^{p^{n+1}}$. Since $p>0$, coordinatewise Euclidean division gives a unique $E=A+pB$ with $0\\leq A_i<p$ and $0\\leq B_i<p^n$; conversely each such pair gives an allowed $E$. Write $c_{A+pB}=a_{A,B}^{p^{n+1}}$ with $a_{A,B}\\in k$, and put $d_{A,B}=a_{A,B}^{p^n}\\in k^{p^n}$. Then $c_{A+pB}=d_{A,B}^{p}$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 07P1 (definition-p-basis), definition of p-independence; elementary higher-digit induction supplied by Q32 for the p-base preparation in Tag 09II (proposition-epp-essentially-finite-type)."
+   }
+  },
+  {
+   "text": "For each $A$ put $S_A=\\sum_B d_{A,B}b^B\\in k$. By [def-weil-ring-frobenius], $x\\mapsto x^p$ preserves finite sums and products. Thus $S_A^p=\\sum_B d_{A,B}^p(b^B)^p$; reindexing the original finite sum by step 2 and using $b^{A+pB}=b^A(b^B)^p$ gives $0=\\sum_A S_A^p b^A$. Each $S_A^p$ lies in $k^p$, so the assumed independence of the $p$-bounded monomials gives $S_A^p=0$ for every $A$.",
+   "uses": [
+    "def-weil-ring-frobenius"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 03SM (definition-absolute-frobenius), following paragraph: the ring Frobenius is a ring endomorphism; elementary finite-sum expansion."
+   }
+  },
+  {
+   "text": "A field has no nonzero element $z$ with $z^p=0$: if $z\\neq0$, multiplication by $(z^{-1})^p$ would give $1=0$, contradicting [def-weil-field]. Hence every $S_A=0$. For each fixed $A$ this is a relation $\\sum_B d_{A,B}b^B=0$ among the $p^n$-bounded monomials, with coefficients in $k^{p^n}$. The induction hypothesis gives every $d_{A,B}=0$, hence $c_{A+pB}=d_{A,B}^p=0$. The bijection of step 2 exhausts all $E$, completing the induction.",
+   "uses": [
+    "def-weil-field"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 07P1 (definition-p-basis), definition of p-independence; elementary higher-digit induction supplied by Q32 for the p-base preparation in Tag 09II (proposition-epp-essentially-finite-type)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-ring-frobenius",
+  "def-weil-field"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Q32 higher-digit induction from Tag 07P1, supplying the algebraic detail behind the p-base root construction in Tag 09II; ring Frobenius from varieties.tex Tag 03SM."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "loogle",
+   "query": "LinearIndependent, frobenius",
+   "results": "{\"t\": \"2026-10-24T05:07:02Z\", \"tool\": \"loogle\", \"query\": \"LinearIndependent, frobenius\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the separable-extension Frobenius basis theorems keep the scalar field fixed and assume separability; they do not give bounded monomial independence over k^(p^n) from p-independence. The grep and type-pattern searches found no such theorem."
+  },
+  {
+   "tool": "grep",
+   "query": "pIndependent|p_independent|p[Bb]asis|iterateFrobenius.*linearIndependent",
+   "results": "{\"t\": \"2026-10-24T05:07:02Z\", \"tool\": \"grep\", \"query\": \"pIndependent|p_independent|p[Bb]asis|iterateFrobenius.*linearIndependent\", \"sub\": \"FieldTheory\", \"ok\": true, \"n_hits\": 6, \"note\": \"\", \"top\": [\"Mathlib/FieldTheory/KrullTopology.lean\", \"Mathlib/FieldTheory/KrullTopology.lean\", \"Mathlib/FieldTheory/KrullTopology.lean\", \"Mathlib/FieldTheory/KrullTopology.lean\", \"Mathlib/FieldTheory/KrullTopology.lean\", \"Mathlib/FieldTheory/Galois/Infinite.lean\"], \"digest\": \"c560c46c1f8ebab5\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the separable-extension Frobenius basis theorems keep the scalar field fixed and assume separability; they do not give bounded monomial independence over k^(p^n) from p-independence. The grep and type-pattern searches found no such theorem."
+  },
+  {
+   "tool": "leansearch",
+   "query": "p independent monomials are independent over higher power subfields in characteristic p",
+   "results": "{\"t\": \"2026-10-24T05:07:03Z\", \"tool\": \"leansearch\", \"query\": \"p independent monomials are independent over higher power subfields in characteristic p\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"LinearIndependent.map_pow_expChar_pow_of_isSeparable\", \"FixedPoints.linearIndependent_smul_of_linearIndependent\", \"LinearIndependent.map_pow_expChar_pow_of_isSeparable'\", \"algebraicIndependent_of_finite\", \"Polynomial.Sequence.linearIndependent\", \"AlgebraicIndependent.mono\", \"AlgebraicIndepOn.mono\", \"MvPolynomial.instCharP\"], \"digest\": \"d21fad1238c6dc6a\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the separable-extension Frobenius basis theorems keep the scalar field fixed and assume separability; they do not give bounded monomial independence over k^(p^n) from p-independence. The grep and type-pattern searches found no such theorem."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "If elements are p independent over the pth power subfield then their monomials with exponents below p to the n are linearly independent over the p to the n power subfield",
+   "results": "{\"t\": \"2026-10-24T05:07:10Z\", \"tool\": \"leanfinder\", \"query\": \"If elements are p independent over the pth power subfield then their monomials with exponents below p to the n are linearly independent over the p to the n power subfield\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"LinearIndependent.map_pow_expChar_pow_of_isSeparable\", \"LinearIndependent.map_pow_expChar_pow_of_isSeparable'\", \"linearIndependent_pow\", \"LinearIndependent.map_of_isPurelyInseparable_of_isSeparable\", \"exists_isTranscendenceBasis_and_isSeparable_of_linearIndepOn_pow\", \"AlgebraicIndependent.linearIndependent\", \"exists_isTranscendenceBasis_and_isSeparable_of_linearIndepOn_pow_of_adjoin_eq_top\", \"IntermediateField.LinearDisjoint.linearIndependent_left\"], \"digest\": \"877a09473215ee67\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the separable-extension Frobenius basis theorems keep the scalar field fixed and assume separability; they do not give bounded monomial independence over k^(p^n) from p-independence. The grep and type-pattern searches found no such theorem."
+  },
+  {
+   "tool": "grep",
+   "query": "linearIndependent.*pow|map_pow_expChar_pow|frobenius",
+   "results": "{\"t\": \"2026-10-24T05:08:41Z\", \"tool\": \"grep\", \"query\": \"linearIndependent.*pow|map_pow_expChar_pow|frobenius\", \"sub\": \"FieldTheory/PurelyInseparable\", \"ok\": true, \"n_hits\": 14, \"note\": \"\", \"top\": [\"Mathlib/FieldTheory/PurelyInseparable/AdjoinPthRoots.lean\", \"Mathlib/FieldTheory/PurelyInseparable/AdjoinPthRoots.lean\", \"Mathlib/FieldTheory/PurelyInseparable/Tower.lean\", \"Mathlib/FieldTheory/PurelyInseparable/PerfectClosure.lean\", \"Mathlib/FieldTheory/PurelyInseparable/PerfectClosure.lean\", \"Mathlib/FieldTheory/PurelyInseparable/PerfectClosure.lean\", \"Mathlib/FieldTheory/PurelyInseparable/PerfectClosure.lean\", \"Mathlib/FieldTheory/PurelyInseparable/PerfectClosure.lean\"], \"digest\": \"156ad2144872ce88\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the separable-extension Frobenius basis theorems keep the scalar field fixed and assume separability; they do not give bounded monomial independence over k^(p^n) from p-independence. The grep and type-pattern searches found no such theorem."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Bounded monomials of a p basis give a basis over iterates of the Frobenius image subfield in a field of positive characteristic",
+   "results": "{\"t\": \"2026-10-24T05:08:43Z\", \"tool\": \"leanfinder\", \"query\": \"Bounded monomials of a p basis give a basis over iterates of the Frobenius image subfield in a field of positive characteristic\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Module.Basis.mapPowExpCharPowOfIsSeparable\", \"Field.span_map_pow_expChar_pow_eq_top_of_isSeparable\", \"PowerBasis.coe_basis\", \"IntermediateField.powerBasisAux\", \"Field.Emb.Cardinal.wellOrderedBasis\", \"PowerBasis.basis\", \"Field.powerBasisOfFiniteOfSeparable\", \"AdjoinRoot.powerBasisAux\"], \"digest\": \"d5d9a6b42bb1b514\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the separable-extension Frobenius basis theorems keep the scalar field fixed and assume separability; they do not give bounded monomial independence over k^(p^n) from p-independence. The grep and type-pattern searches found no such theorem."
+  },
+  {
+   "tool": "loogle",
+   "query": "LinearIndependent, Module.Basis, frobenius",
+   "results": "{\"t\": \"2026-10-24T05:12:00Z\", \"tool\": \"loogle\", \"query\": \"LinearIndependent, Module.Basis, frobenius\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the separable-extension Frobenius basis theorems keep the scalar field fixed and assume separability; they do not give bounded monomial independence over k^(p^n) from p-independence. The grep and type-pattern searches found no such theorem."
+  },
+  {
+   "tool": "grep",
+   "query": "map_pow_expChar_pow_of_isSeparable|mapPowExpCharPowOfIsSeparable",
+   "results": "{\"t\": \"2026-10-24T05:12:00Z\", \"tool\": \"grep\", \"query\": \"map_pow_expChar_pow_of_isSeparable|mapPowExpCharPowOfIsSeparable\", \"sub\": \"FieldTheory/PurelyInseparable/PerfectClosure.lean\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"326\", \"346\", \"362\", \"370\", \"376\"], \"digest\": \"46843c805594f486\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the separable-extension Frobenius basis theorems keep the scalar field fixed and assume separability; they do not give bounded monomial independence over k^(p^n) from p-independence. The grep and type-pattern searches found no such theorem."
+  },
+  {
+   "tool": "grep",
+   "query": "pIndependent|p_independent|linearIndependent.*[Pp]ow|map_pow_expChar",
+   "results": "{\"t\": \"2026-10-24T07:01:29Z\", \"tool\": \"grep\", \"query\": \"pIndependent|p_independent|linearIndependent.*[Pp]ow|map_pow_expChar\", \"sub\": \"FieldTheory\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Mathlib/FieldTheory/Galois/NormalBasis.lean\", \"Mathlib/FieldTheory/PurelyInseparable/Tower.lean\", \"Mathlib/FieldTheory/PurelyInseparable/PerfectClosure.lean\", \"Mathlib/FieldTheory/PurelyInseparable/PerfectClosure.lean\", \"Mathlib/FieldTheory/PurelyInseparable/PerfectClosure.lean\", \"Mathlib/FieldTheory/PurelyInseparable/PerfectClosure.lean\", \"Mathlib/FieldTheory/PurelyInseparable/PerfectClosure.lean\", \"Mathlib/FieldTheory/Finite/Basic.lean\"], \"digest\": \"978debffe42f96f8\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the read PerfectClosure.lean declarations at lines 346 and 362 require separability and preserve the scalar field; the requested higher bounded monomials over successive power-image subfields are not their specialization. Other hits concern algebraic independence, linear disjointness, or a single minimal-polynomial power basis."
+  },
+  {
+   "tool": "leansearch",
+   "query": "p independent monomials are linearly independent over iterated Frobenius image subfields",
+   "results": "{\"t\": \"2026-10-24T07:01:30Z\", \"tool\": \"leansearch\", \"query\": \"p independent monomials are linearly independent over iterated Frobenius image subfields\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicIndependent.linearIndependent\", \"FixedPoints.linearIndependent_smul_of_linearIndependent\", \"Polynomial.Sequence.linearIndependent\", \"IsPurelyInseparable.iterateFrobenius\", \"IntermediateField.LinearDisjoint.linearIndependent_left\", \"LinearIndependent.map_pow_expChar_pow_of_isSeparable'\", \"IsPurelyInseparable.iterateFrobeniusₛₗ\", \"IntermediateField.LinearDisjoint.linearIndependent_right\"], \"digest\": \"04da1e8139ebbeb8\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the read PerfectClosure.lean declarations at lines 346 and 362 require separability and preserve the scalar field; the requested higher bounded monomials over successive power-image subfields are not their specialization. Other hits concern algebraic independence, linear disjointness, or a single minimal-polynomial power basis."
+  },
+  {
+   "tool": "loogle",
+   "query": "LinearIndependent, frobenius",
+   "results": "{\"t\": \"2026-10-24T07:01:30Z\", \"tool\": \"loogle\", \"query\": \"LinearIndependent, frobenius\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the read PerfectClosure.lean declarations at lines 346 and 362 require separability and preserve the scalar field; the requested higher bounded monomials over successive power-image subfields are not their specialization. Other hits concern algebraic independence, linear disjointness, or a single minimal-polynomial power basis."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "In a field of characteristic p, independence of bounded p monomials over the pth power subfield implies independence of monomials bounded by p^n over the p^n power subfield",
+   "results": "{\"t\": \"2026-10-24T07:01:31Z\", \"tool\": \"leanfinder\", \"query\": \"In a field of characteristic p, independence of bounded p monomials over the pth power subfield implies independence of monomials bounded by p^n over the p^n power subfield\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"LinearIndependent.map_pow_expChar_pow_of_isSeparable\", \"LinearIndependent.map_pow_expChar_pow_of_isSeparable'\", \"exists_isTranscendenceBasis_and_isSeparable_of_linearIndepOn_pow'\", \"Field.span_map_pow_expChar_pow_eq_top_of_isSeparable\", \"exists_isTranscendenceBasis_and_isSeparable_of_linearIndepOn_pow\", \"exists_isTranscendenceBasis_and_isSeparable_of_linearIndepOn_pow_of_adjoin_eq_top\", \"exists_isTranscendenceBasis_and_isSeparable_of_linearIndepOn_pow_of_essFiniteType\", \"IntermediateField.adjoin_eq_adjoin_pow_expChar_pow_of_isSeparable'\"], \"digest\": \"df67f9a04bc1280a\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the read PerfectClosure.lean declarations at lines 346 and 362 require separability and preserve the scalar field; the requested higher bounded monomials over successive power-image subfields are not their specialization. Other hits concern algebraic independence, linear disjointness, or a single minimal-polynomial power basis."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A p basis of an imperfect field has monomials of exponent less than p^n independent over the subfield of p^n powers",
+   "results": "{\"t\": \"2026-10-24T07:02:15Z\", \"tool\": \"leanfinder\", \"query\": \"A p basis of an imperfect field has monomials of exponent less than p^n independent over the subfield of p^n powers\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"LinearIndependent.map_pow_expChar_pow_of_isSeparable\", \"LinearIndependent.map_pow_expChar_pow_of_isSeparable'\", \"exists_isTranscendenceBasis_and_isSeparable_of_linearIndepOn_pow\", \"exists_isTranscendenceBasis_and_isSeparable_of_linearIndepOn_pow'\", \"exists_isTranscendenceBasis_and_isSeparable_of_linearIndepOn_pow_of_adjoin_eq_top\", \"exists_isTranscendenceBasis_and_isSeparable_of_linearIndepOn_pow_of_essFiniteType\", \"Module.Basis.mapPowExpCharPowOfIsSeparable\", \"linearIndependent_pow\"], \"digest\": \"64911f86088af0a4\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the read PerfectClosure.lean declarations at lines 346 and 362 require separability and preserve the scalar field; the requested higher bounded monomials over successive power-image subfields are not their specialization. Other hits concern algebraic independence, linear disjointness, or a single minimal-polynomial power basis."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-p-independent-root-quotient-field",
+  "date": "2026-10-24",
+  "group": "Q60"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "Historical supporting input to det-thm-sf-ctf-stability-direct-images, proof (3), through the creation chain of lem-sfb-epp-essentially-finite-type-traits. Current latest direct-image proof (3) does not state this auxiliary algebra result. Perfect-residue algebraic preparation for the local Epp input. Finite-stage input: Finite root quotients of p-independent elements are fields. Higher Frobenius-height independence input before proving the finite root quotient is a field.",
+   "via": [
+    "lem-sfb-p-independent-root-quotient-field",
+    "lem-sfb-dvr-perfect-residue-algebraic-tower",
+    "lem-sfb-epp-essentially-finite-type-traits",
+    "lem-sfb-raynaud-faltings-normalized-reduction",
+    "lem-sfb-group-model-potential-smooth-normalization",
+    "lem-sfb-quasi-reductive-special-connectedness",
+    "lem-sfb-integral-chevalley-weyl-atlas",
+    "lem-sfb-chevalley-integral-root-model",
+    "lem-sfb-borel-kostant-distribution-comparison",
+    "lem-sfb-borel-simple-root-distribution-calculus",
+    "lem-sfb-restricted-induced-infinitesimal-invariants",
+    "lem-sfb-flag-frobenius-rho-pushforward",
+    "lem-sfb-dominant-flag-line-kempf-vanishing",
+    "lem-sfb-induced-weyl-dimension-formula",
+    "lem-sfb-steinberg-induced-module-irreducible",
+    "lem-sfb-rho-section-self-duality",
+    "lem-sfb-steinberg-endomorphism-detection",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-p-independent-higher-power-monomials",
+  "worker": "stage1",
+  "summary": "Q32: preserved the statement and supplied the complete base-p digit induction with coefficient roots, Frobenius expansion and coefficient vanishing. All steps are elementary given the cited ring Frobenius and field definitions. No new nodes; no exact upstream attachment or Mathlib match found.",
+  "blueprint": "Historical auxiliary input through the recorded creation chain to det-thm-sf-ctf-stability-direct-images (3). Read the latest unit and direct-images proof: the current text does not state this algebra lemma. The split realizes the higher-height independence detail used by the finite root quotient in the Tag 09II p-base preparation, without changing the unit route."
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q32-79dd97afb",
+  "group": "Q32",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q32-79dd97afb (reviewer sub-agent of L); spot-checked: I read the item in full; there are no new nodes. The statement is unchanged. Its hypothesis is Stacks 07P1 (definition-p-basis, more-algebra l.11344) p-independence with base F_p, and it supplies the higher-height detail behind the p-base root tower in the 09II proof (l.35982-35991), so marking the proof as written by an agent is correct. I tested small cases: r=0 and n=0 give the family (1); n=1 is the hypothesis itself; for perfect k with r>=1 the hypothesis fails, so the case is vacuous; for F_2(t) with n=2, {1,t,t^2,t^3} is independent over F_2(t^4). Step 1 is the base case, with the induction correctly set up for the fixed tuple. Step 2 is the Euclidean-digit bijection E=A+pB, which I checked, plus the coefficient root d=a^{p^n} with d^p=c. Step 3 uses the Frobenius ring hom from [def-weil-ring-frobenius], which needs p·1=0 and gets it from characteristic p; it gives sum_A b^A S_A^p=0 with S_A^p in k^p, and the hypothesis kills those coefficients. Step 4 gets z^p=0 => z=0 from [def-weil-field]; then the induction hypothesis on the p^n-bounded relation over k^{p^n} kills every coefficient. The steps match the parent root-quotient-field step 3, which uses exactly this conclusion. Duplicate search with rg over p-independent, p-basis and k^{p^n}: complement-monomial-linearIndependent, frobenius-image-field-tower-degree, p-independent-evaluation-kernel and pth-roots-extension-degree all state something different. Mathlib searches cover LeanSearch, LeanFinder, Loogle and grep. The blueprint record is preserved and the split_report has its blueprint entry. No SGA, no route issue, no changes."
+ }
+}

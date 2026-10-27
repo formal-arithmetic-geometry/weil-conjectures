@@ -159,7 +159,18 @@
   "latex:corollary"
  ],
  "proof_split_by": "paragraphs",
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
  "chapter": "sec-purity-real-sheaves",
  "unit": "sk-d-real-detweights",
  "split_report": {
@@ -188,5 +199,30 @@
    "AlgebraicGeometry.WeilGroup.isGreatest_detWeight_subquotient_tensorPower"
   ],
   "note": "attached by the lead's tool step2_attach.py 2026-10-18 03:19 UTC (L, propagation 2026-10-18), live declaration stated, proof open in WeilConjectures.EtaleCohomology.Purity.RealSheaves.DetWeightOperations: the blueprint item cor-mg-det-weight-finite-tensor's upstream Lean declarations as live states them; their proofs are still `sorry` in live (stage-3 route work)"
+ },
+ "blueprint_update": {
+  "snapshot": "main-20261025",
+  "commit": "b767183f5ce5f281d407f582da76ab91d6176fe0",
+  "changed": [
+   "statement",
+   "proof"
+  ],
+  "statement": "Let $\\mathcal F_0$ be a nonzero lisse Weil sheaf on a smooth\ngeometrically connected curve $X_0$, and let\n$\\alpha_1,\\ldots,\\alpha_n$ be its determinant weights, counted with\nmultiplicity in [def-mg-determinantal-weight-multiset]. For every\n$k\\ge1$, every Jordan–Holder constituent of the tensor power\n$\\mathcal F_0^{\\otimes k}$ (constituents and tensor products of Weil\nrepresentations as in [def-real-weil-representation-operations]) has\ndeterminant weight\n\n$$\n\\alpha_{i_1}+\\cdots+\\alpha_{i_k}\n$$\n\nfor some indices $i_1,\\ldots,i_k$, and every such sum occurs for at\nleast one constituent. In particular, if $\\beta=\\max_i\\alpha_i$, the\nlargest determinant weight of $\\mathcal F_0^{\\otimes k}$ is\n$k\\beta$.",
+  "proof": [
+   {
+    "text": "Choose a composition series of the Weil representation in the sense of\n[def-mg-weil-composition-series], with simple factors $A_i$. By\n[lem-mg-jordan-holder] and [def-mg-determinantal-weight-multiset], after\nreindexing, $\\alpha_i=\\dw_\\iota(A_i)$. By\n[lem-rp-determinant-weights-agree], every $A_i$ and every\nJordan–Holder constituent of $\\mathcal F_0^{\\otimes k}$ has finite\ngeometric determinant, and for each of them the determinant weight\n$\\dw_\\iota$ of [def-wf-determinantal-weight] equals\n$\\dw_{\\lambda_\\iota}$. We prove both assertions by induction on $k$,\nusing the two-factor tensor rule [prop-ag-det-weight-two-factor-tensor]\nwith $\\lambda=\\lambda_\\iota$, applied to Weil representations of lisse Weil\nsheaves on $X_0$, which are Weil representations of the degree datum\n$(W(X_0),\\deg,s)$ of [def-wf-geometric-monodromy-group]. For $k=1$ the constituents of\n$\\mathcal F_0$ are the $A_i$ by [lem-mg-jordan-holder], with\ndeterminant weights $\\alpha_i$. For $k\\ge2$ apply\n[prop-ag-det-weight-two-factor-tensor] to the Weil representations of\n$\\mathcal V_0=\\mathcal F_0^{\\otimes(k-1)}$ and\n$\\mathcal E_0=\\mathcal F_0$, both nonzero and lisse on $X_0$, with composition series whose factors are the\nconstituents of $\\mathcal F_0^{\\otimes(k-1)}$, respectively the $A_j$;\nall of these, and all constituents of $\\mathcal F_0^{\\otimes k}$, have\nfinite geometric determinant by the previous paragraph. Every\nconstituent $Q$ of $\\mathcal F_0^{\\otimes k}$ therefore has\n$\\dw(Q)=\\dw(V_i)+\\alpha_j$ for a constituent $V_i$ of\n$\\mathcal F_0^{\\otimes(k-1)}$, which by induction has weight\n$\\alpha_{i_1}+\\cdots+\\alpha_{i_{k-1}}$. Conversely, by induction every\nsum $\\alpha_{i_1}+\\cdots+\\alpha_{i_{k-1}}$ is the weight of some\nconstituent $V_i$, and the converse half of\n[prop-ag-det-weight-two-factor-tensor] gives a constituent of\n$\\mathcal F_0^{\\otimes k}$ of weight $\\dw(V_i)+\\alpha_{i_k}$. The\nstatement about $\\beta$ follows by taking all indices with\n$\\alpha_{i_r}=\\beta$.",
+    "uses": [
+     "def-mg-weil-composition-series",
+     "lem-mg-jordan-holder",
+     "def-mg-determinantal-weight-multiset",
+     "lem-rp-determinant-weights-agree",
+     "def-wf-determinantal-weight",
+     "prop-ag-det-weight-two-factor-tensor",
+     "def-wf-geometric-monodromy-group"
+    ],
+    "elementary": false
+   }
+  ],
+  "note": "the current blueprint (main-20261025, weil-conjectures-blueprint b767183f5c) states or proves this differently; a worker who touches the node follows it"
  }
 }

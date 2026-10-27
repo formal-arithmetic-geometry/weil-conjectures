@@ -1,0 +1,95 @@
+{
+ "id": "lem-pur-condensed-stage-realization",
+ "kind": "statement",
+ "title": "Condensed realization of the integral stage",
+ "statement": "The original condensed_stage declarations of integral counit realization, with their unchanged hypotheses and conclusions: for every supplied integral model m and Stage A, there is a CondensedStage for A, using the normalized encoding equivalences and the same fixed counit.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-thm-purity-transport/sk-thm-purity-transport.proof.md",
+  "place": "Purity transport Steps 1--4; relocation of the existing condensed_stage declarations"
+ },
+ "stmt_deps": [
+  "def-pur-integral-counit-realization-data",
+  "def-sp-field-extension-integral-models"
+ ],
+ "proof": [
+  {
+   "text": "The normalized integral/condensed equivalences and the actual compact-support and twisted-pullback endpoint comparisons are supplied by lem-pur-condensed-integral-endpoints. Compose the inverse X equivalence adjunction, integral_stage adjunction, and Y equivalence adjunction; transport along these endpoint isomorphisms. The equivalence-adjunction comparison gives the unit and counit equations. Counit-preserving uniqueness gives fixed_counit. This is the Lean proof of condensed_stage.",
+   "uses": [
+    "lem-pur-condensed-integral-endpoints",
+    "lem-sfb-equivalence-square-inverse-mate-coherence",
+    "det-sp-unique-right-adjoint"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-pur-condensed-integral-endpoints",
+  "lem-sfb-equivalence-square-inverse-mate-coherence",
+  "det-sp-unique-right-adjoint"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-thm-purity-transport/sk-thm-purity-transport.proof.md",
+  "place": "Existing complete Lean combination proof, relocated by J3 to keep every file below the compilation bound; no hypothesis, conclusion or public declaration name changes."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "integral_stage|coefficient_stage|condensed_stage|chart_realization|composition_realization",
+   "results": "Mathlib grep returned zero hits. The existing declarations and their proof arguments are retained from TransportIntegralCounitRealization. This node records relocation, not a new mathematical assertion.",
+   "date": "2026-10-27",
+   "verdict": "reuse existing proof"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.TransportIntegralCounitRealization",
+  "date": "2026-10-27",
+  "group": "J3"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-thm-purity-transport",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "sk-thm-purity-transport",
+   "place": "Purity transport Steps 1--4; relocation of the existing condensed_stage declarations",
+   "via": [
+    "lem-pur-transport-integral-counit-realization"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.TransportCondensedStageRealization",
+  "file": "lean/Sheaf/Paper/TransportCondensedStageRealization.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.TransportIntegralCounit.condensed_stage",
+  "statement": "theorem condensed_stage (E : FieldShriekSystem.Index P)\n    (m : FieldExtensionTowers.IntegralModel P D E j p d)\n    (A : Stage P D j p d E m) :\n    Nonempty (CondensedStage P D j p d E m A)",
+  "branch": "sheaf-dag",
+  "by": "J3",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-1ef65",
+  "group": "J3",
+  "result": "fix",
+  "landing": "20261027T034700-L-3673858",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-1ef65",
+  "group": "J3",
+  "result": "fix",
+  "landing": "20261027T034700-L-3673858",
+  "kind": "interface",
+  "note": "independent cc review: delivered item + 9 new modules against clone main (integral_counit_realization statement identical; relocated decls same names/namespaces/variable binders; item public-imports them; 0 importers); new holes against CondensedStage fields, tower_gluing and FiniteNormalization"
+ }
+}

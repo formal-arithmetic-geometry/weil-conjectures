@@ -1,0 +1,274 @@
+{
+ "id": "lem-sfb-perfect-tensor-surjective-module-limit",
+ "kind": "statement",
+ "title": "Perfect derived tensor and surjective module inverse limits",
+ "statement": "Work in the universes of [def-weil-size-convention]. Let $A$ be a commutative ring and let $D(A)$ be the unbounded derived category of $A$-modules [def-weil-abstract-derived-category]. Let $C\\in D(A)$ be perfect, meaning represented by a bounded complex of finitely generated projective $A$-modules [def-pc-perfect-ring-complex]. Let $(N_n)_{n\\ge1}$ be an inverse sequence of $A$-modules with surjective transitions and $N=\\varprojlim_nN_n$. Derived tensor is computed by projective resolutions, and $R\\varprojlim$ is computed by the homotopy fibre of $1-s$ on the product of the complexes, where $s$ is induced by the transition maps [def-weil-derived-limit]. The comparison induced by $N\\to N_n$ is a natural isomorphism in $D(A)$,\n$$C\\otimes_A^{\\mathbf L}N[0]\\xrightarrow{\\sim}R\\varprojlim_n(C\\otimes_A^{\\mathbf L}N_n[0]).$$\nHere the comparison uses the strict inverse sequence and its resolution-derived inverse limit, so it is compatible with the projections and with morphisms of strict inverse sequences.",
+ "source": {
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tag 0D2L, lemma-pseudo-coherent-tensor-limit, restricted to perfect complexes and surjective module towers; the surjectivity identifies the module derived limit with its ordinary inverse limit."
+ },
+ "stmt_deps": [
+  "def-weil-size-convention",
+  "def-weil-abstract-derived-category",
+  "def-pc-perfect-ring-complex",
+  "def-weil-derived-limit"
+ ],
+ "proof": [
+  {
+   "text": "Choose a bounded finite-projective representative $P^\\bullet$ of $C$ using [def-pc-perfect-ring-complex]. Each $P^i$ is flat by [lem-weil-pbc-projective-module-flat], so [lem-pc-module-bounded-flat-kflat] makes $P$ K-flat. The quasi-isomorphism criterion in [def-pc-module-kflat-complex] shows that tensoring $P$ with a projective resolution of any module $M$ gives a quasi-isomorphism to $P\\otimes_A M[0]$. Thus the latter complex, with degree-$i$ term $P^i\\otimes_A M$ and differential $d_P\\otimes1$, computes $C\\otimes_A^{\\mathbf L}M[0]$. Use this one representative simultaneously for $M=N$ and every $N_n$, so the transitions are exactly $1\\otimes t_n$.",
+   "uses": [
+    "def-pc-perfect-ring-complex",
+    "lem-weil-pbc-projective-module-flat",
+    "lem-pc-module-bounded-flat-kflat",
+    "def-pc-module-kflat-complex"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0CYB, lemma-pseudo-coherent-tensor, proof of (1) implies (2); Tag 064K, lemma-derived-tor-quasi-isomorphism"
+   }
+  },
+  {
+   "text": "Put $B=\\prod_nN_n$ and $v:B\\to B$, $v(x)_n=x_n-t_nx_{n+1}$. By the definition of the ordinary inverse limit, $N=\\ker v$. For every $i$, [lem-weil-pbc-finite-projective-finitely-presented] makes $P^i$ finitely presented, and [lem-trf-finite-presentation-tensor-products] identifies $P^i\\otimes_A B$ with $\\prod_n(P^i\\otimes_A N_n)$ by the map $p\\otimes(x_n)\\mapsto(p\\otimes x_n)_n$. Under this map $1\\otimes v$ is $1-s$ for the tensor tower: their $n$th coordinates on a pure tensor are both $p\\otimes x_n-p\\otimes t_nx_{n+1}$. By flatness from step 1 and [lem-weil-pbc-flat-tensor-exact], tensoring $0\\to N\\to B\\xrightarrow v B$ identifies $P^i\\otimes_A N$ with the kernel of this tensor-tower endomorphism, namely $\\lim_n(P^i\\otimes_A N_n)$. The resulting bijection $\\alpha^i$ is the canonical projection map. Its coordinates commute with $d_P\\otimes1$, so these bijections assemble to a chain isomorphism $\\alpha:P\\otimes_A N\\xrightarrow{\\sim}L:=\\lim_n(P\\otimes_A N_n)$.",
+   "uses": [
+    "lem-weil-pbc-finite-projective-finitely-presented",
+    "lem-trf-finite-presentation-tensor-products",
+    "lem-weil-pbc-flat-tensor-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tags 00NX (lemma-finite-projective), 059K (proposition-fp-tensor), 00HD (lemma-flat); kernel argument expanding Tag 0D2L"
+   }
+  },
+  {
+   "text": "Let $K_n=P\\otimes_A N_n$. The maps $K_{n+1}^i\\to K_n^i$ are surjective by [lem-weil-pbc-tensor-right-exact] applied to $N_{n+1}\\to N_n\\to0$. Apply [lem-weil-pbc-surjective-module-complex-tower-limit] with the constant ring tower $A_n=A$ and the strict complex tower $K_n$. Its hypotheses hold degree by degree; no assertion about surjectivity on cohomology is needed. It gives a distinguished Roos triangle with first object $Q(L)$ and first map the product of the actual projections $L\\to K_n$. Hence the termwise limit represents the derived limit with the required projections.",
+   "uses": [
+    "lem-weil-pbc-tensor-right-exact",
+    "lem-weil-pbc-surjective-module-complex-tower-limit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 091D, lemma-compute-Rlim-modules, (3),(5); Tag 0CQD, lemma-distinguished-triangle-Rlim-modules"
+   }
+  },
+  {
+   "text": "To specify the comparison in the strict model, put $V=\\prod_nK_n$ termwise and $v=1-s$. Use the shifted cone coordinates $F^q=V^{q-1}\\oplus V^q$, $d_F(y,x)=(-dy-vx,dx)$, from [def-weil-abstract-derived-category], and $j:L=\\ker v\\to F$, $x\\mapsto(0,x)$. This is the canonical map underlying step 3, and it is a quasi-isomorphism as the following coordinate verification also shows. Each $v:V^q\\to V^q$ is surjective: given $(b_n)$ set $a_1=0$ and recursively choose $a_{n+1}$ with $t_na_{n+1}=a_n-b_n$. For a cycle $(y,x)$ in $F^q$, choose $z\\in V^{q-1}$ with $vz=y$. Subtracting $d_F(0,-z)=(y,-dz)$ gives $(0,x+dz)$, where $v(x+dz)=0$. Thus every class comes from $L$. If $(0,x)=d_F(y,z)$, choose $w\\in V^{q-2}$ with $vw=y$. Then $v(z+dw)=vz+dy=0$ and $d(z+dw)=x$, proving injectivity on cohomology. Consequently $Q(j\\alpha)$ is the required isomorphism to the strict derived-limit model. Its projection to $K_n$ is precisely $1\\otimes(N\\to N_n)$, not merely some morphism between isomorphic cone objects.",
+   "uses": [
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 091D, lemma-compute-Rlim-modules, (2),(3),(5); explicit kernel-to-shifted-cone map"
+   }
+  },
+  {
+   "text": "For a strict tower morphism $u_n:N_n\\to N'_n$, the map on limits sends $(x_n)$ to $(u_nx_n)$, $\\alpha$ sends $p\\otimes(x_n)$ to $(p\\otimes x_n)$, and the Roos map applies $\\prod_n(1\\otimes u_n)$ to each cone coordinate. Therefore both composites send $p\\otimes(x_n)$ to $(0,(p\\otimes u_nx_n)_n)$; these formulas prove naturality and projection compatibility. They also commute with every chain map $P\\to P'$. By [lem-pc-ring-derived-map-representative], morphisms between these bounded projective representatives give all morphisms between their derived objects, modulo chain homotopy. For a homotopy $h$ between such maps the induced Roos homotopy is $(y,x)\\mapsto(-hy,hx)$; it commutes with $j$ and the ordinary tensor homotopy. Thus the same naturality identity holds in $D(A)$, is independent of the representative, and is natural in the perfect object as well. These constructions apply to the strict, resolution-derived limit stipulated in the statement; they do not choose functorial cones on arbitrary towers in a bare triangulated category.",
+   "uses": [
+    "lem-pc-ring-derived-map-representative"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0D2L, lemma-pseudo-coherent-tensor-limit; canonical comparison and strict-tower coordinate naturality"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-perfect-ring-complex",
+  "lem-weil-pbc-projective-module-flat",
+  "lem-pc-module-bounded-flat-kflat",
+  "def-pc-module-kflat-complex",
+  "lem-weil-pbc-finite-projective-finitely-presented",
+  "lem-trf-finite-presentation-tensor-products",
+  "lem-weil-pbc-flat-tensor-exact",
+  "lem-weil-pbc-tensor-right-exact",
+  "lem-weil-pbc-surjective-module-complex-tower-limit",
+  "def-weil-abstract-derived-category",
+  "lem-pc-ring-derived-map-representative"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tag 0D2L, lemma-pseudo-coherent-tensor-limit, expanded on a bounded finite-projective representative using Tags 0CYB, 091D and 0CQD"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A perfect complex of modules tensored with the inverse limit of a surjective sequence of modules is the derived inverse limit of its derived tensors",
+   "sub": "",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AdicCompletion.coe_ofTensorProductEquivOfFiniteNoetherian\", \"module\": \"Mathlib/RingTheory/AdicCompletion/AsTensorProduct\", \"type\": \"∀ {R : Type u} [inst : CommRing R] (I : Ideal R) (M : Type u) [inst_1 : AddCommGroup M] [inst_2 : Module R M]\\n  [inst_3 : IsNoetherianRing R] [inst_4 : Module.Finite R M],\\n  ↑(AdicCompletion.ofTensorProductEquivOfFiniteNoetherian I M) = AdicCompletion.ofTensorProduct I M\", \"doc\": \"For a Noetherian commutative ring $ R $, an ideal $ I $, and a finitely generated $ R $-module $ M $, the tensor product of the $ I $-adic completion of $ R $ with $ M $ is linearly equivalent to the \"}\n  {\"name\": \"AdicCompletion.ofTensorProductEquivOfFiniteNoetherian_apply\", \"module\": \"Mathlib/RingTheory/AdicCompletion/AsTensorProduct\", \"type\": \"∀ {R : Type u} [inst : CommRing R] (I : Ideal R) (M : Type u) [inst_1 : AddCommGroup M] [inst_2 : Module R M]\\n  [inst_3 : IsNoetherianRing R] [inst_4 : Module.Finite R M] (x : TensorProduct R (AdicCompletion I R) M),\\n  (AdicCompletion.ofTensorProductEquivOfFiniteNoetherian I M) x = (AdicCompletion.o\", \"doc\": \"For a Noetherian commutative ring $ R $, an ideal $ I $, and a finitely generated $ R $-module $ M $, the tensor product of the $ I $-adic completion of $ R $ with $ M $ (over $ R $) is isomorphic to \"}\n  {\"name\": \"AdicCompletion.tensor_map_id_left_eq_map\", \"module\": \"Mathlib/RingTheory/AdicCompletion/AsTensorProduct\", \"type\": \"∀ {R : Type u} [inst : CommRing R] (I : Ideal R) [inst_1 : IsNoetherianRing R] {M : Type u} [inst_2 : AddCommGroup M]\\n  [inst_3 : Module R M] {N : Type u} [inst_4 : AddCommGroup N] [inst_5 : Module R N] (f : M →ₗ[R] N)\\n  [inst_6 : Module.Finite R M] [inst_7 : Module.Finite R N],\\n  TensorProduct.Alge\", \"doc\": \"For a Noetherian commutative ring $ R $, an ideal $ I $, and a finitely generated $ R $-module $ M $, the tensor product of the $ I $-adic completion of $ R $ with $ M $ is isomorphic to the $ I $-adi\"}\n  {\"name\": \"LightCondensed.internallyProjective_iff_tensor_condition\", \"module\": \"Mathlib/Condensed/Light/InternallyProjective\", \"type\": \"∀ (R : Type u) [inst : CommRing R] (P : LightCondMod R),\\n  CategoryTheory.InternallyProjective P ↔\\n    ∀ {A B : LightCondMod R} (e : A ⟶ B) [CategoryTheory.Epi e] (S : LightProfinite)\\n      (g : CategoryTheory.MonoidalCategoryStruct.tensorObj P ((LightCondensed.free R).obj S.toCondensed) ⟶ B),\\n     \", \"doc\": \"Let $R$ be a commutative ring and $P$ be a light condensed $R$-module. $P$ is an internally projective object if and only if for every epimorphism $e: A \\\\to B$ of light condensed $R$-modules, any ligh\"}\n  {\"name\": \"AdicCompletion.ofTensorProduct_naturality\", \"module\": \"Mathlib/RingTheory/AdicCompletion/AsTensorProduct\", \"type\": \"∀ {R : Type u_1} [inst : CommRing R] (I : Ideal R) {M : Type u_2} [inst_1 : AddCommGroup M] [inst_2 : Module R M]\\n  {N : Type u_3} [inst_3 : AddCommGroup N] [inst_4 : Module R N] (f : M →ₗ[R] N),\\n  AdicCompletion.map I f ∘ₗ AdicCompletion.ofTensorProduct I M =\\n    AdicCompletion.ofTensorProduct I N \", \"doc\": \"For any $ R $-linear map $ f : M \\to N $, the diagram involving the $ I $-adic completion maps and tensor products commutes, i.e., $\\\\text{map}_I(f) \\\\circ \\\\text{ofTensorProduct}_I(M) = \\\\text{ofTensorPro\"}\n  {\"name\": \"LightCondensed.internallyProjective_iff_tensor_condition'\", \"module\": \"Mathlib/Condensed/Light/InternallyProjective\", \"type\": \"∀ (R : Type u) [inst : CommRing R] (P : LightCondMod R),\\n  CategoryTheory.InternallyProjective P ↔\\n    ∀ {A B : LightCondMod R} (e : A ⟶ B) [CategoryTheory.Epi e] (S : LightProfinite)\\n      (g : CategoryTheory.MonoidalCategoryStruct.tensorObj ((LightCondensed.free R).obj S.toCondensed) P ⟶ B),\\n     \", \"doc\": \"Let $R$ be a commutative ring. A light condensed $R$-module $P$ is internally projective if and only if for every epimorphism $e: A \\\\to B$ of light condensed $R$-modules, any light profinite space $S$\"}\n  {\"name\": \"AdicCompletion.ofTensorProductEquivOfFiniteNoetherian_symm_of\", \"module\": \"Mathlib/RingTheory/AdicCompletion/AsTensorProduct\", \"type\": \"∀ {R : Type u} [inst : CommRing R] (I : Ideal R) (M : Type u) [inst_1 : AddCommGroup M] [inst_2 : Module R M]\\n  [inst_3 : IsNoetherianRing R] [inst_4 : Module.Finite R M] (x : M),\\n  (AdicCompletion.ofTensorProductEquivOfFiniteNoetherian I M).symm ((AdicCompletion.of I M) x) = 1 ⊗ₜ[R] x\", \"doc\": \"For a Noetherian commutative ring $ R $, an ideal $ I $, and a finitely generated $ R $-module $ M $, applying the inverse of the linear equivalence between $ \\\\hat{R} \\\\otimes_R M $ and the $ I $-adic \"}\n  {\"name\": \"AdicCompletion.ofTensorProduct\", \"module\": \"Mathlib/RingTheory/AdicCompletion/AsTensorProduct\", \"type\": \"{R : Type u_1} →\\n  [inst : CommRing R] →\\n    (I : Ideal R) →\\n      (M : Type u_2) →\\n        [inst_1 : AddCommGroup M] →\\n          [inst_2 : Module R M] → TensorProduct R (AdicCompletion I R) M →ₗ[AdicCompletion I R] AdicCompletion I M\", \"doc\": \"A linear map from the tensor product of the $ I $-adic completion of a commutative ring $ R $ with an $ R $-module $ M $ to the $ I $-adic completion of $ M $, defined by scalar multiplication. This m\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits do not state this algebraic-space or unbounded derived-limit assertion; ordinary limits, flatness and direct-limit tensor formulas are insufficient"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finite projective bounded complex tensor commutes with countable derived inverse limits of surjective module towers",
+   "sub": "",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"LightCondensed.free_lightProfinite_internallyProjective_iff_tensor_condition\", \"module\": \"Mathlib/Condensed/Light/InternallyProjective\", \"type\": \"∀ (R : Type u) [inst : CommRing R] (P : LightProfinite),\\n  CategoryTheory.InternallyProjective ((LightCondensed.free R).obj P.toCondensed) ↔\\n    ∀ {A B : LightCondMod R} (e : A ⟶ B) [CategoryTheory.Epi e] (S : LightProfinite)\\n      (g : (LightCondensed.free R).obj (CategoryTheory.MonoidalCategoryStr\", \"doc\": \"For a light profinite space $ P $, the free $ R $-module $ \\\\text{Free}(P) $ is internally projective in the category of light condensed $ R $-modules if and only if for every epimorphism $ e: A \\\\to B \"}\n  {\"name\": \"LightCondensed.free_lightProfinite_internallyProjective_iff_tensor_condition'\", \"module\": \"Mathlib/Condensed/Light/InternallyProjective\", \"type\": \"∀ (R : Type u) [inst : CommRing R] (P : LightProfinite),\\n  CategoryTheory.InternallyProjective ((LightCondensed.free R).obj P.toCondensed) ↔\\n    ∀ {A B : LightCondMod R} (e : A ⟶ B) [CategoryTheory.Epi e] (S : LightProfinite)\\n      (g : (LightCondensed.free R).obj (CategoryTheory.MonoidalCategoryStr\", \"doc\": \"Let $R$ be a commutative ring and $P$ be a light profinite space. The free light condensed $R$-module on the condensed set associated with $P$, denoted $\\\\mathcal{F}(P)$, is internally projective if an\"}\n  {\"name\": \"LightCondensed.free_internallyProjective_iff_tensor_condition\", \"module\": \"Mathlib/Condensed/Light/InternallyProjective\", \"type\": \"∀ (R : Type u) [inst : CommRing R] (P : LightCondSet),\\n  CategoryTheory.InternallyProjective ((LightCondensed.free R).obj P) ↔\\n    ∀ {A B : LightCondMod R} (e : A ⟶ B) [CategoryTheory.Epi e] (S : LightProfinite)\\n      (g : (LightCondensed.free R).obj (CategoryTheory.MonoidalCategoryStruct.tensorObj \", \"doc\": \"For a light condensed set $ P $, the free $ R $-module $ \\\\text{free}_R(P) $ is internally projective in the category of light condensed $ R $-modules if and only if for every epimorphism $ e : A \\\\to B\"}\n  {\"name\": \"LightCondensed.free_internallyProjective_iff_tensor_condition'\", \"module\": \"Mathlib/Condensed/Light/InternallyProjective\", \"type\": \"∀ (R : Type u) [inst : CommRing R] (P : LightCondSet),\\n  CategoryTheory.InternallyProjective ((LightCondensed.free R).obj P) ↔\\n    ∀ {A B : LightCondMod R} (e : A ⟶ B) [CategoryTheory.Epi e] (S : LightProfinite)\\n      (g : (LightCondensed.free R).obj (CategoryTheory.MonoidalCategoryStruct.tensorObj \", \"doc\": \"For any commutative ring $ R $, the category of light condensed $ R $-modules forms a monoidal closed category. This structure arises from the adjunction between sheafification and inclusion functors,\"}\n  {\"name\": \"LightCondensed.internallyProjective_iff_tensor_condition\", \"module\": \"Mathlib/Condensed/Light/InternallyProjective\", \"type\": \"∀ (R : Type u) [inst : CommRing R] (P : LightCondMod R),\\n  CategoryTheory.InternallyProjective P ↔\\n    ∀ {A B : LightCondMod R} (e : A ⟶ B) [CategoryTheory.Epi e] (S : LightProfinite)\\n      (g : CategoryTheory.MonoidalCategoryStruct.tensorObj P ((LightCondensed.free R).obj S.toCondensed) ⟶ B),\\n     \", \"doc\": \"Let $R$ be a commutative ring and $P$ be a light condensed $R$-module. $P$ is an internally projective object if and only if for every epimorphism $e: A \\\\to B$ of light condensed $R$-modules, any ligh\"}\n  {\"name\": \"LightCondensed.internallyProjective_iff_tensor_condition'\", \"module\": \"Mathlib/Condensed/Light/InternallyProjective\", \"type\": \"∀ (R : Type u) [inst : CommRing R] (P : LightCondMod R),\\n  CategoryTheory.InternallyProjective P ↔\\n    ∀ {A B : LightCondMod R} (e : A ⟶ B) [CategoryTheory.Epi e] (S : LightProfinite)\\n      (g : CategoryTheory.MonoidalCategoryStruct.tensorObj ((LightCondensed.free R).obj S.toCondensed) P ⟶ B),\\n     \", \"doc\": \"Let $R$ be a commutative ring. A light condensed $R$-module $P$ is internally projective if and only if for every epimorphism $e: A \\\\to B$ of light condensed $R$-modules, any light profinite space $S$\"}\n  {\"name\": \"AdicCompletion.tensor_map_id_left_eq_map\", \"module\": \"Mathlib/RingTheory/AdicCompletion/AsTensorProduct\", \"type\": \"∀ {R : Type u} [inst : CommRing R] (I : Ideal R) [inst_1 : IsNoetherianRing R] {M : Type u} [inst_2 : AddCommGroup M]\\n  [inst_3 : Module R M] {N : Type u} [inst_4 : AddCommGroup N] [inst_5 : Module R N] (f : M →ₗ[R] N)\\n  [inst_6 : Module.Finite R M] [inst_7 : Module.Finite R N],\\n  TensorProduct.Alge\", \"doc\": \"For a Noetherian commutative ring $ R $, an ideal $ I $, and a finitely generated $ R $-module $ M $, the tensor product of the $ I $-adic completion of $ R $ with $ M $ is isomorphic to the $ I $-adi\"}\n  {\"name\": \"Module.Projective.tensorProduct\", \"module\": \"Mathlib/Algebra/Module/Projective\", \"type\": \"∀ {R : Type u} [inst : Semiring R] {R₀ : Type u_2} {M : Type u_1} {N : Type u_3} [inst_1 : CommSemiring R₀]\\n  [inst_2 : Algebra R₀ R] [inst_3 : AddCommMonoid M] [inst_4 : Module R₀ M] [inst_5 : Module R M]\\n  [inst_6 : IsScalarTower R₀ R M] [inst_7 : AddCommMonoid N] [inst_8 : Module R₀ N] [hM : Modu\", \"doc\": \"The tensor product of a projective module $ M $ over a semiring $ R $ and a projective module $ N $ over a commutative semiring $ R_0 $, taken over $ R_0 $, is a projective module over $ R $.\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits do not state this algebraic-space or unbounded derived-limit assertion; ordinary limits, flatness and direct-limit tensor formulas are insufficient"
+  },
+  {
+   "tool": "loogle",
+   "query": "TensorProduct, CategoryTheory.Limits.PreservesLimit",
+   "sub": "",
+   "results": "[loogle] OK 1 hit(s)\n  {\"name\": \"CommRingCat.preservesLimit_parallelPair_tensorProd_iff_tensorEqualizer_bijective\", \"module\": \"Mathlib.Algebra.Category.Ring.Under.Property\", \"type\": \" {R S : CommRingCat} [Algebra ↑R ↑S] {A B : CategoryTheory.Under R} {f g : A ⟶ B} : CategoryTheory.Limits.PreservesLimit (CategoryTheory.Limits.parallelPair f g) (R.tensorProd S) ↔ Function.Bijective ⇑(AlgHom.tensorEqualizer (↑R) (↑S) (CommRingCat.toAlgHom f) (CommRingCat.toAlgHom g))\", \"doc\": \"\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits do not state this algebraic-space or unbounded derived-limit assertion; ordinary limits, flatness and direct-limit tensor formulas are insufficient"
+  },
+  {
+   "tool": "grep",
+   "query": "tensor.*(inverseLimit|derivedLimit|lim.*surject)|perfect.*limit",
+   "sub": "RingTheory",
+   "results": "[grep] OK 1 hit(s)\n  {\"file\": \"Mathlib/RingTheory/Perfection.lean\", \"line\": \"35\", \"text\": \"/-- The perfection of a monoid `α`, defined to be the projective limit of `α` using the `p`-th\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits do not state this algebraic-space or unbounded derived-limit assertion; ordinary limits, flatness and direct-limit tensor formulas are insufficient"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Perfect derived tensor commutes with surjective module inverse limits",
+   "sub": "",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"Submodule.FG.rTensor.directLimit\", \"module\": \"Mathlib.RingTheory.TensorProduct.DirectLimitFG\", \"type\": \"[DecidableEq { P : Submodule R M // P.FG }] :\\n  Module.DirectLimit (R := R) (ι := { P : Submodule R M // P.FG }) (fun P ↦ P.val ⊗[R] N)\\n      (fun ⦃P Q⦄ (h : P ≤ Q) ↦ (Submodule.inclusion h).rTensor N) ≃ₗ[R]\\n    M ⊗[R] N\", \"doc\": \"Let $R$ be a commutative semiring, and let $M$ and $N$ be $R$-modules. This defines the canonical linear isomorphism between the direct limit of the modules $P \\\\otimes_R N$ over the directed system of\"}\n  {\"name\": \"TensorProduct.directLimitLeft_symm_of_tmul\", \"module\": \"Mathlib.LinearAlgebra.TensorProduct.DirectLimit\", \"type\": \"{i : ι} (g : G i) (m : M) : (directLimitLeft f M).symm (of _ _ _ _ _ (g ⊗ₜ m)) = of _ _ _ f _ g ⊗ₜ m\", \"doc\": \"For a direct system of $ R $-modules $ \\\\{G_i\\\\} $ indexed by a preorder $ \\\\iota $ and an $ R $-module $ M $, the inverse of the natural isomorphism $ (\\\\varinjlim G_i) \\\\otimes_R M \\\\cong \\\\varinjlim (G_i \"}\n  {\"name\": \"TensorProduct.directLimitLeft_rTensor_of\", \"module\": \"Mathlib.LinearAlgebra.TensorProduct.DirectLimit\", \"type\": \"{i : ι} (x : G i ⊗[R] M) : directLimitLeft f M (LinearMap.rTensor M (of ..) x) = of _ _ _ (f ▷ M) _ x\", \"doc\": \"For a direct system of $ R $-modules $ \\\\{G_i\\\\} $ with transition maps $ f_{ij} $, the canonical isomorphism $ (\\\\varinjlim G_i) \\\\otimes_R M \\\\cong \\\\varinjlim (G_i \\\\otimes_R M) $ satisfies $ \\\\text{direct\"}\n  {\"name\": \"Submodule.FG.lTensor.directLimit_apply\", \"module\": \"Mathlib.RingTheory.TensorProduct.DirectLimitFG\", \"type\": \"[DecidableEq { P : Submodule R N // P.FG }] (Q : { Q : Submodule R N // Q.FG }) (u : M ⊗[R] Q.val) :\\n  (Submodule.FG.lTensor.directLimit R M N)\\n      ((Module.DirectLimit.of R { Q : Submodule R N // Q.FG } (fun Q ↦ M ⊗[R] Q.val)\\n          (fun _ _ hPQ ↦ (inclusion hPQ).lTensor M) Q)\\n        u) =\\n   \", \"doc\": \"For a module $ M $ over a commutative semiring $ R $ and a direct system of finitely generated submodules $ \\\\{Q\\\\} $ of another $ R $-module $ N $, the direct limit of the tensor products $ M \\\\otimes_R\"}\n  {\"name\": \"TensorProduct.directLimitLeft\", \"module\": \"Mathlib.LinearAlgebra.TensorProduct.DirectLimit\", \"type\": \": DirectLimit G f ⊗[R] M ≃ₗ[R] DirectLimit (G · ⊗[R] M) (f ▷ M)\", \"doc\": \"The canonical $ R $-linear equivalence between the tensor product of the direct limit $ \\\\varinjlim G_i $ with an $ R $-module $ M $ and the direct limit of the tensor products $ G_i \\\\otimes_R M $, est\"}\n  {\"name\": \"TensorProduct.toDirectLimit_tmul_of\", \"module\": \"Mathlib.LinearAlgebra.TensorProduct.DirectLimit\", \"type\": \"{i : ι} (g : G i) (m : M) : (toDirectLimit f M <| (of _ _ G f i g) ⊗ₜ m) = (of _ _ _ _ i (g ⊗ₜ m))\", \"doc\": \"The canonical linear map from the tensor product of a direct limit module $\\\\varinjlim G_i$ with an $R$-module $M$ to the direct limit of tensor products $\\\\varinjlim (G_i \\\\otimes_R M)$ sends the tensor\"}\n  {\"name\": \"TensorProduct.directLimitRight\", \"module\": \"Mathlib.LinearAlgebra.TensorProduct.DirectLimit\", \"type\": \": M ⊗[R] DirectLimit G f ≃ₗ[R] DirectLimit (M ⊗[R] G ·) (M ◁ f)\", \"doc\": \"The canonical $ R $-linear equivalence between the tensor product of an $ R $-module $ M $ with the direct limit $ \\\\varinjlim G_i $ and the direct limit of the tensor products $ M \\\\otimes_R G_i $, est\"}\n  {\"name\": \"TensorProduct.toDirectLimit\", \"module\": \"Mathlib.LinearAlgebra.TensorProduct.DirectLimit\", \"type\": \": DirectLimit G f ⊗[R] M →ₗ[R] DirectLimit (G · ⊗[R] M) (f ▷ M)\", \"doc\": \"The canonical $ R $-linear map from the tensor product of the direct limit $ \\\\varinjlim G_i $ with an $ R $-module $ M $ to the direct limit of the tensor products $ G_i \\\\otimes_R M $, induced by the \"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits do not state this algebraic-space or unbounded derived-limit assertion; ordinary limits, flatness and direct-limit tensor formulas are insufficient"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A bounded finite projective complex tensored with the inverse limit of a surjective tower of modules is its derived tensor inverse limit",
+   "sub": "",
+   "results": "Hits: LightCondensed.internallyProjective_iff_tensor_condition, LightCondensed.internallyProjective_iff_tensor_condition', LightCondensed.free_lightProfinite_internallyProjective_iff_tensor_condition', LightCondensed.free_lightProfinite_internallyProjective_iff_tensor_condition, LightCondensed.free_internallyProjective_iff_tensor_condition', AdicCompletion.ofTensorProductEquivOfPiFintype, LightCondensed.free_internallyProjective_iff_tensor_condition, AdicCompletion.ofTensorProductEquivOfFiniteNoetherian. ",
+   "date": "2026-10-23",
+   "verdict": "no match: condensed internally projective criteria, adic completion under additional Noetherian hypotheses, or Tor/exact-functor declarations do not assert this comparison"
+  },
+  {
+   "tool": "grep",
+   "query": "tensor.*(inverseLimit|derivedLimit|lim.*surject)|perfect.*limit",
+   "sub": "RingTheory",
+   "results": "Hits: Mathlib/RingTheory/Perfection.lean. ",
+   "date": "2026-10-23",
+   "verdict": "no match: the perfection monoid inverse limit is unrelated"
+  },
+  {
+   "tool": "loogle",
+   "query": "TensorProduct, CategoryTheory.Limits.PreservesLimit",
+   "sub": "",
+   "results": "Hits: CommRingCat.preservesLimit_parallelPair_tensorProd_iff_tensorEqualizer_bijective. ",
+   "date": "2026-10-23",
+   "verdict": "no match: the hit is a criterion for a ring tensor functor to preserve one equalizer, not this derived comparison"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Perfect derived tensor commutes with surjective module inverse limits",
+   "sub": "",
+   "results": "Hits: Submodule.FG.rTensor.directLimit, TensorProduct.directLimitLeft_symm_of_tmul, TensorProduct.directLimitLeft_rTensor_of, Submodule.FG.lTensor.directLimit_apply, TensorProduct.directLimitLeft, TensorProduct.toDirectLimit_tmul_of, TensorProduct.directLimitRight, TensorProduct.toDirectLimit. ",
+   "date": "2026-10-23",
+   "verdict": "no match: these hits concern direct limits, whereas the item concerns derived inverse limits"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived tensor by a perfect object preserves homotopy limits of sequential diagrams of modules",
+   "sub": "",
+   "results": "Hits: CategoryTheory.Tor'_obj_obj, CategoryTheory.Tor, CategoryTheory.Tor', CategoryTheory.Functor.instLinearDerivedCategoryMapDerivedCategory, CategoryTheory.Tor_obj, CategoryTheory.Functor.instLiftingHomotopyCategoryIntUpDerivedCategoryQhQuasiIsoCompMapHomotopyCategoryMapDerivedCategory, CategoryTheory.Tor'_map_app, DerivedCategory.instLinearHomotopyCategoryIntUpQh. ",
+   "date": "2026-10-23",
+   "verdict": "no match: condensed internally projective criteria, adic completion under additional Noetherian hypotheses, or Tor/exact-functor declarations do not assert this comparison"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-proper-flat-space-pullback-limit",
+  "date": "2026-10-23",
+  "group": "O4"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Algebraicity and smoothness of the stack of all nodal curves. Supporting input: Tag 0D59 (lemma-curves-defo-thy), over Spec Z; artin.tex definition-versal and definition-openness-versality. Supporting input: Tag 0D3X (lemma-spaces-defo-thy), proof, paragraphs beginning Let (R_n) be an inverse system and Let I_n = Ker(R_n to R_1), through the final deform-property argument. Supporting input: Tag 0D3F (lemma-pullback-and-limits); the first paragraph of its proof states precisely the universal derived-Hom formulation used here. Supporting input: Tag 0D3F proof, final displayed isomorphism, only the ring-theoretic perfect tensor and surjective module limit input.",
+   "via": [
+    "lem-sfb-proper-flat-space-pullback-limit",
+    "lem-sfb-proper-space-square-zero-effectivity",
+    "lem-sfb-curve-openness-versality",
+    "lem-sfb-nodal-curve-stack-smooth",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-perfect-tensor-surjective-module-limit",
+  "worker": "stage1",
+  "summary": "Expanded the perfect/surjective specialization of Stacks 0D2L using existing ordinary-module product, exactness, K-flat and strict tower nodes. Wrote the kernel comparison and canonical shifted-cone quasi-isomorphism, and verified projections and naturality on coordinates. Statement unchanged; no new nodes.",
+  "blueprint": "Inherited supporting input to det-thm-sf-ctf-stability-direct-images proof (3): Stacks spaces-perfect Tag 0D3F, final displayed perfect tensor/limit comparison, via the existing alteration/deformation chain in blueprint.from. Current latest blueprint direct-image proof read; this is the same subordinate ring-theoretic tool, not a replacement of its geometric route.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-projective-module-flat",
+    "why": "Projective terms are flat; ordinary module tool, not a replacement for any geometric unit step."
+   },
+   {
+    "node": "lem-pc-module-bounded-flat-kflat",
+    "why": "A bounded flat module complex computes derived tensor; the unit has no ordinary-module K-flat criterion."
+   },
+   {
+    "node": "lem-weil-pbc-finite-projective-finitely-presented",
+    "why": "Finite projective terms meet the finite-presentation hypothesis of the product comparison."
+   },
+   {
+    "node": "lem-trf-finite-presentation-tensor-products",
+    "why": "The canonical tensor/product bijection for ordinary modules; this supplies the product comparison in Tag 0D2L."
+   },
+   {
+    "node": "lem-weil-pbc-flat-tensor-exact",
+    "why": "Flat tensor preserves the kernel sequence defining the inverse limit."
+   },
+   {
+    "node": "lem-weil-pbc-tensor-right-exact",
+    "why": "Tensoring the surjective module transitions remains surjective."
+   },
+   {
+    "node": "lem-weil-pbc-surjective-module-complex-tower-limit",
+    "why": "Ordinary module complexes with degreewise surjective transitions compute their derived limit termwise, with projections."
+   },
+   {
+    "node": "lem-pc-ring-derived-map-representative",
+    "why": "Maps out of bounded projective models represent derived morphisms, needed for naturality in C."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-projective-module-flat",
+  "lem-pc-module-bounded-flat-kflat",
+  "lem-weil-pbc-finite-projective-finitely-presented",
+  "lem-trf-finite-presentation-tensor-products",
+  "lem-weil-pbc-flat-tensor-exact",
+  "lem-weil-pbc-tensor-right-exact",
+  "lem-weil-pbc-surjective-module-complex-tower-limit",
+  "lem-pc-ring-derived-map-representative"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q137-29299c124",
+  "group": "Q137",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q137-29299c124 (reviewer sub-agent of L); spot-checked: Read the item's five steps, every cited statement and Stacks 0D2L (more-algebra.tex). The item is the case of 0D2L with K perfect and surjective transitions; its statement is unchanged and not weakened. Step 1: the bounded finite-projective P is flat termwise, hence K-flat (lem-pc-module-bounded-flat-kflat), and the qis clause of def-pc-module-kflat-complex gives P⊗M[0] = C⊗^L M. Step 2: P^i is finitely presented, so lem-trf-finite-presentation-tensor-products gives θ, which intertwines 1⊗v with 1−s; flat left exactness of 0→N→∏→∏ then gives the chain iso α onto lim. Step 3: right exactness makes the transitions of K_n surjective, and the strict tower lemma with constant ring A gives the Roos triangle with the actual projections. Step 4: the cone coordinates d_F(y,x)=(−dy−vx,dx) are C(v)[−1]; I re-derived the recursive surjectivity of v and the surjectivity and injectivity on cohomology of j, with all signs; the projection to K_n is 1⊗(N→N_n). Step 5: tower naturality holds on pure tensors; naturality in C follows from the bounded-projective homotopy representative lemma, and I checked that the Roos homotopy (−hy,hx) is valid. Edge cases checked: A=Z, N_n=Z/p^n, zero objects, non-flat N_n; surjectivity is used only degreewise and is needed. No new nodes. Duplicate search over 0D2L, 059K and perfect-tensor-limit statements found only more general or different-setting nodes (kflat-augmented-roos β morphism, DVR perfect-tensor-roos, rlim-perfect-complete). All off-unit tool_uses are generic module or derived tools; accepted. Batch-5: lem-trf-finite-presentation-tensor-products is Stacks 059K, and its closure is only module definitions and tensor right exactness. It is not given by, and is not a step of the proof of, the trace formula or Poincaré duality, so it is allowed. No SGA cited."
+ }
+}

@@ -1,0 +1,318 @@
+{
+ "id": "lem-sfb-epp-weak-solution-descent",
+ "kind": "statement",
+ "title": "Weak solution descent",
+ "statement": "For any injective local map $R\\to S$ of discrete valuation rings [def-sc-discrete-valuation-ring] with fraction fields $E\\subseteq Q$ and finite field extension $E'/E$ [def-pc-field-extension], let $R'$ be the integral closure of $R$ in $E'$ and $S'$ that of $S$ in $(Q\\otimes_E E')_{\\mathrm{red}}$ [def-weil-pbc-integral-closure, def-weil-pbc-module-tensor-product]. Call $E'/E$ a weak solution if, for every maximal ideal $q$ of $S'$, its contraction $n$ in $R'$ is maximal, $R'_n,S'_q$ are discrete valuation rings, and $nS'_q=qS'_q$ [def-weil-pbc-localization-at-prime]. Reduction is quotient by nilpotents; finite means finite-dimensional; local means pulling back the maximal ideal. Let $A\\to B\\to C$ be injective local maps of complete DVRs, with fraction fields $K\\subseteq L\\subseteq M$, and $M/L$ finite [def-weil-pbc-adically-complete-ring]. Let $K_1/K$ be finite. (i) If $K_1/K$ is a weak solution for $A\\to C$, it is a weak solution for $A\\to B$. (ii) If $K_1/K$ is a weak solution for $A\\to B$ and $K_2/K_1$ is finite and is a weak solution for $A_1\\to (C_1)_q$ for every maximal ideal $q$ of $C_1$, then $K_2/K$ is a weak solution for $A\\to C$. Here $A_1$ is the integral closure of $A$ in $K_1$ and $C_1$ that of $C$ in $(M\\otimes_KK_1)_{\\mathrm{red}}$. In particular these are finite products of complete DVRs (and $A_1$ is a DVR). More precisely, normalization commutes with composition of these reduced field base changes branchwise: for finite $K_2/K_1/K$, normalizing a branch of $(M\\otimes_K K_1)_{\\mathrm{red}}$ further over $K_2$ gives the corresponding branch of $(M\\otimes_K K_2)_{\\mathrm{red}}$. The same statement holds for its intermediate lower DVRs. Thus if $K_1$ solves $A\\to B$, and $K_2/K_1$ solves $A_1\\to(C_1)_q$ for just one maximal ideal $q$, every final branch lying over this $q$ has ramification index one over the integral closure of $A$ in $K_2$; no assertion about the other branches is made.",
+ "source": {
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tag 09ES, lemma-solutions-go-down, (1) and the normalized tower argument in its proof, iterated for two successive coefficient extensions."
+ },
+ "stmt_deps": [
+  "def-pc-field-extension",
+  "def-sc-discrete-valuation-ring",
+  "def-weil-pbc-integral-closure",
+  "def-weil-pbc-module-tensor-product",
+  "def-weil-pbc-localization-at-prime",
+  "def-weil-pbc-adically-complete-ring"
+ ],
+ "proof": [
+  {
+   "text": "Write $A_i$ for the integral closure of $A$ in $K_i$, $L_i=(L\\otimes_KK_i)_{\\mathrm{red}}$, $M_i=(M\\otimes_KK_i)_{\\mathrm{red}}$, and $B_i,C_i$ for the integral closures of $B,C$ in these rings. The finite case of [lem-sfb-dvr-algebraic-normalization-structure], applied to $A\\to B$ and $A\\to C$, gives the nonempty finite field decompositions and the maximal contractions and local DVR maps from $A_i$. Each field factor is finite over the original upper field: it is a quotient of a tensor algebra spanned by a finite basis of $K_i/K$. An element of a finite product is integral over the base ring exactly when each coordinate is: for the reverse implication multiply their finitely many monic annihilating polynomials. Thus the normalization is the product of the coordinate normalizations. Fix a coordinate: a complete DVR $R$ (one of $A,B,C$) with fraction field $E$, a finite extension $F/E$ (also $F=K_i$ for $R=A$), and the integral closure $N$ of $R$ in $F$. As $R$ is a principal ideal domain it is Noetherian [lem-weil-pbc-pid-noetherian-normal], so [lem-weil-pbc-complete-local-nagata] makes $R=R/(0)$ N-2: $N$ is a finite $R$-module. Being a domain, $N$ is local and complete by [lem-weil-pbc-finite-over-complete-local-product]. $R$ has dimension one: a nonzero prime contains some $ut^n$, $n\\geq1$, by [lem-weil-pbc-dvr-unit-times-uniformizer-power], hence the uniformizer $t$. So [lem-sfb-finite-normalization-local-dvr] gives a maximal $q\\subset N$ over $\\mathfrak m_R$ with $N_q$ a DVR of fraction field $F$ and $\\mathfrak m_{N_q}\\cap R=\\mathfrak m_R$; $N$ being local, $q$ is its maximal ideal, every $s\\notin q$ is a unit, and $N=N_q$. Hence $A_i$ is a finite complete DVR and $B_i,C_i$ are finite products of finite complete DVR extensions of $B,C$, local over them. Their localizations at maximal ideals are exactly these coordinate DVRs.",
+   "uses": [
+    "lem-sfb-dvr-algebraic-normalization-structure",
+    "lem-weil-pbc-pid-noetherian-normal",
+    "lem-weil-pbc-complete-local-nagata",
+    "lem-weil-pbc-finite-over-complete-local-product",
+    "lem-weil-pbc-dvr-unit-times-uniformizer-power",
+    "lem-sfb-finite-normalization-local-dvr"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 09ES, lemma-solutions-go-down, proof; Tag 09EM, remark-construction."
+   }
+  },
+  {
+   "text": "Since $M/L$ is finite, the coordinate argument of step 1 for $B\\subset M$ shows that the integral closure $C'$ of $B$ in $M$ is a DVR with fraction field $M$, finite over $B$, and $\\mathfrak m_{C'}$ is the only prime of $C'$ over $\\mathfrak m_B$ [lem-weil-pbc-complete-local-nagata, lem-weil-pbc-finite-over-complete-local-product]. As a principal ideal domain $C$ is normal [lem-weil-pbc-pid-noetherian-normal], so $C'\\subseteq C$. The prime $\\mathfrak m_C\\cap C'$ lies over $\\mathfrak m_B$ because $B\\to C$ is local; hence it is $\\mathfrak m_{C'}$. If $x\\in C\\setminus C'$, write $x=a/b$ with $a=ut'^m$, $b=vt'^n$ for a uniformizer $t'$ of $C'$ [lem-weil-pbc-dvr-unit-times-uniformizer-power]; then $m<n$ and $x^{-1}=(v/u)t'^{n-m}\\in\\mathfrak m_{C'}\\subseteq\\mathfrak m_C$, impossible for $x\\in C$. So $C=C'$; in particular $C$ is integral over $B$. The map $L\\otimes_KK_1\\to M\\otimes_KK_1$ is injective: choose an $L$-linear projection $M\\to L$ taking $1$ to $1$ and tensor it with $K_1$ to obtain a left inverse as a linear map. An injective ring map reflects nilpotence, so it induces an injection $L_1\\hookrightarrow M_1$. A monic equation over $B$ for an element of $B_1$ remains a monic equation over $C$, giving $B_1\\hookrightarrow C_1$. Every element of $C_1$ is integral over $C$, hence over $B$ by [lem-weil-pbc-integral-transitive], and therefore over $B_1$. By [lem-weil-pbc-integral-injective-lying-over] every maximal ideal $p$ of $B_1$ has a prime above it in $C_1$; [lem-weil-pbc-integral-prime-over-maximal-maximal] makes this prime maximal. Conversely [lem-weil-pbc-integral-maximal-contracts-maximal] makes the contraction of each maximal $q\\subset C_1$ maximal. Hence all the corresponding maps $(B_1)_p\\to(C_1)_q$ are injective local maps of DVRs.",
+   "uses": [
+    "lem-weil-pbc-complete-local-nagata",
+    "lem-weil-pbc-finite-over-complete-local-product",
+    "lem-weil-pbc-pid-noetherian-normal",
+    "lem-weil-pbc-dvr-unit-times-uniformizer-power",
+    "lem-weil-pbc-integral-transitive",
+    "lem-weil-pbc-integral-injective-lying-over",
+    "lem-weil-pbc-integral-prime-over-maximal-maximal",
+    "lem-weil-pbc-integral-maximal-contracts-maximal"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 09ES, lemma-solutions-go-down, proof; Tag 09EM, remark-construction."
+   }
+  },
+  {
+   "text": "Assume (i)'s weak-solution hypothesis and fix any maximal $p\\subset B_1$. Choose a maximal $q\\subset C_1$ above it by step 2 and put $D=(B_1)_p$, $T=(C_1)_q$. These fit into local injections $A_1\\to D\\to T$. Choose uniformizers $a,d,t$ of these DVRs. By [lem-weil-pbc-dvr-unit-times-uniformizer-power] write $a=ud^e$ in $D$ and $d=vt^f$ in $T$, with $u,v$ units and $e,f\\geq1$; the exponents are positive because the maps are local and injective. Thus $a=uv^e t^{ef}$ in $T$. The hypothesis says $aT=tT$. If $ef\\geq2$, expressing $t$ as a multiple of $a$ and cancelling the nonzero $t$ would put $1$ in $tT$, a contradiction. Hence $e=f=1$, so $aD=dD$. Since $p$ was arbitrary, all branches for $A\\to B$ satisfy the weak-solution condition, proving (i).",
+   "uses": [
+    "lem-weil-pbc-dvr-unit-times-uniformizer-power"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 09ES, lemma-solutions-go-down, proof, descent of weak unramifiedness in a local DVR tower; algebra.tex Tag 00PD, lemma-characterize-dvr."
+   }
+  },
+  {
+   "text": "For the successive coefficient extensions, let $Q$ denote any of the original upper fields $L,M$ and put $Q_1=(Q\\otimes_KK_1)_{\\mathrm{red}}$. There is a canonical isomorphism $$(Q_1\\otimes_{K_1}K_2)_{\\mathrm{red}}\\simeq(Q\\otimes_KK_2)_{\\mathrm{red}}.$$ Here is the argument rather than an assumption that tensor products remain reduced. Maps from either ring to a reduced commutative ring $T$ amount to compatible ring maps $Q\\to T$ and $K_2\\to T$ agreeing on $K$: on the left, first restrict the latter map to $K_1$, use the tensor universal property, and note that every nilpotent must map to zero. These constructions give inverse homomorphisms; on pure tensors they agree with $$(x\\otimes a)\\otimes b\\longmapsto x\\otimes ab.$$ These tensors generate, so both composites are identities. The same construction respects the maps induced by $L\\to M$ and the lower field maps, since each sends every pure tensor to the same product.",
+   "uses": [
+    "def-weil-pbc-module-tensor-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 09ES, lemma-solutions-go-down, proof; Tag 09EM, remark-construction."
+   }
+  },
+  {
+   "text": "Decompose $Q_1=\\prod_j F_j$ as in step 1. The finite product decomposition induces $$ (Q_1\\otimes_{K_1}K_2)_{\\mathrm{red}}\\simeq\\prod_j(F_j\\otimes_{K_1}K_2)_{\\mathrm{red}}.$$ Explicitly the inverse of the coordinate map sends a pure tensor in the $j$th factor to its tensor multiplied by the coordinate idempotent $e_j$; the identities $\\sum e_j=1$ and $e_je_h=0$ for $j\\ne h$ check the inverse and multiplication. Nilpotence is coordinatewise in a finite product, so the map passes to reductions. Each right hand factor is again a nonempty finite product of fields, by the finite case of [lem-sfb-dvr-algebraic-normalization-structure] for the complete coordinate DVR of step 1 and the coefficient extension $K_2/K_1$. Consequently the fields of the direct $K_2$-base change are exactly those obtained by base changing each $K_1$-branch, with its parent branch recorded by $e_j$.",
+   "uses": [
+    "def-weil-pbc-module-tensor-product",
+    "lem-sfb-dvr-algebraic-normalization-structure"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 09ES, lemma-solutions-go-down, proof; Tag 09EM, remark-construction."
+   }
+  },
+  {
+   "text": "Fix a field factor $F$ of $M_1$ and let $D$ be the integral closure of $C$ in $F$, namely the corresponding complete DVR $(C_1)_q$ of step 1. For any factor $H$ of $(F\\otimes_{K_1}K_2)_{\\mathrm{red}}$, an element $h\\in H$ is integral over $D$ if and only if it is integral over $C$. Indeed one direction is [lem-weil-pbc-integral-transitive], as $D$ is integral over $C$; the other follows by regarding the same monic equation over $C$ as one over $D$. Thus the normalization of $D$ in $H$ equals the normalization of $C$ in $H$. Likewise the normalization of $A_1$ in $K_2$ equals $A_2$, because $A_1$ is integral over $A$. Applied with $B$ instead of $C$, this argument gives the same compatibility for each lower branch. Together with the explicit identifications in steps 4 and 5 this proves the stated branchwise compatibility of successive normalized base changes, including all structural maps.",
+   "uses": [
+    "lem-weil-pbc-integral-transitive"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 09ES, lemma-solutions-go-down, proof; Tag 09EM, remark-construction."
+   }
+  },
+  {
+   "text": "For (ii), take any maximal ideal of $C_2$ and its coordinate field $H$. By steps 4 and 5 it has one parent $F$ in $M_1$, hence one maximal ideal $q$ of $C_1$. By step 6 its coordinate DVR is precisely the normalization in $H$ occurring in the definition of a weak solution for $A_1\\to(C_1)_q$, and the lower normalization is $A_2$. The assumed weak-solution equality for $K_2/K_1$ therefore says exactly that its maximal ideal is generated by the maximal ideal of $A_2$. Step 1 gives the required DVRs and maximal contractions. This proves (ii). If the hypothesis is imposed only at one specified $q$, the identical argument applies to exactly the final branches with that parent, proving the last assertion. No further-extension stability of weak solutions is used. In fact the weak-solution assumption for $A\\to B$ is unnecessary for (ii) once the stated assumptions on $A_1\\to(C_1)_q$ hold; keeping it gives precisely the requested implication.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 09ES, lemma-solutions-go-down, proof; Tag 09EM, remark-construction."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-dvr-algebraic-normalization-structure",
+  "lem-weil-pbc-integral-transitive",
+  "lem-weil-pbc-integral-injective-lying-over",
+  "lem-weil-pbc-integral-prime-over-maximal-maximal",
+  "lem-weil-pbc-integral-maximal-contracts-maximal",
+  "lem-weil-pbc-dvr-unit-times-uniformizer-power",
+  "def-weil-pbc-module-tensor-product",
+  "lem-weil-pbc-complete-local-nagata",
+  "lem-weil-pbc-finite-over-complete-local-product",
+  "lem-sfb-finite-normalization-local-dvr",
+  "lem-weil-pbc-pid-noetherian-normal"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tag 09ES proof for (i); explicit tensor and monic-equation argument extending that proof to the successive coefficient extensions in (ii)."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Weakly unramified normalized DVR branches descend along extensions of the upper valued field and compose in towers of finite base field extensions",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"IsUnramifiedAtInfinitePlaces.trans\", \"module\": \"Mathlib/NumberTheory/NumberField/InfinitePlace/Ramification\", \"type\": \"∀ (k : Type u_1) [inst : Field k] (K : Type u_2) [inst_1 : Field K] (F : Type u_3) [inst_2 : Field F]\\n  [inst_3 : Algebra k K] [inst_4 : Algebra k F] [inst_5 : Algebra K F] [IsScalarTower k K F]\\n  [h₁ : IsUnramifiedAtInfinitePlaces k K] [h₂ : IsUnramifiedAtInfinitePlaces K F], IsUnramifiedAtInfinite\", \"doc\": \"If the field extensions $ K/k $ and $ F/K $ are both unramified at all infinite places, then the composite extension $ F/k $ is also unramified at all infinite places. This means that the property of \"}\n  {\"name\": \"NumberField.InfinitePlace.IsUnramified.comap\", \"module\": \"Mathlib/NumberTheory/NumberField/InfinitePlace/Ramification\", \"type\": \"∀ {k : Type u_1} [inst : Field k] (K : Type u_2) [inst_1 : Field K] {F : Type u_3} [inst_2 : Field F]\\n  [inst_3 : Algebra k K] [inst_4 : Algebra k F] [inst_5 : Algebra K F] [IsScalarTower k K F]\\n  {w : NumberField.InfinitePlace F},\\n  NumberField.InfinitePlace.IsUnramified k w → NumberField.InfiniteP\", \"doc\": \"If an infinite place $ w $ of $ F $ is unramified over $ k $, then the infinite place on $ K $ obtained by composing $ w $ with the algebra map $ K \\to F $ is also unramified over $ k $. This follows b\"}\n  {\"name\": \"NumberField.InfinitePlace.IsUnramified.of_restrictScalars\", \"module\": \"Mathlib/NumberTheory/NumberField/InfinitePlace/Ramification\", \"type\": \"∀ {k : Type u_1} [inst : Field k] (K : Type u_2) [inst_1 : Field K] {F : Type u_3} [inst_2 : Field F]\\n  [inst_3 : Algebra k K] [inst_4 : Algebra k F] [inst_5 : Algebra K F] [IsScalarTower k K F]\\n  {w : NumberField.InfinitePlace F},\\n  NumberField.InfinitePlace.IsUnramified k w → NumberField.InfiniteP\", \"doc\": \"If an infinite place $ w $ of a number field $ F $ is unramified over a subfield $ k $, then it is unramified over the field $ K $.\"}\n  {\"name\": \"Algebra.IsUnramifiedAt.of_liesOver\", \"module\": \"Mathlib/NumberTheory/RamificationInertia/Unramified\", \"type\": \"∀ (R : Type u_1) {S : Type u_2} {T : Type u_3} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : CommRing T]\\n  [inst_3 : Algebra R S] [inst_4 : Algebra S T] [inst_5 : Algebra R T] [IsScalarTower R S T] (p : Ideal S) (P : Ideal T)\\n  [P.LiesOver p] [inst_8 : p.IsPrime] [inst_9 : P.IsPrime] [Algebra.\", \"doc\": \"Let $ p $ be a prime ideal in a Dedekind domain $ S $, and let $ P $ be a prime ideal in a domain $ T $ that is torsion-free as an $ S $-module. If $ T $ is of essential finite type over $ S $, which \"}\n  {\"name\": \"NumberField.InfinitePlace.IsUnramified.comap_algHom\", \"module\": \"Mathlib/NumberTheory/NumberField/InfinitePlace/Ramification\", \"type\": \"∀ {k : Type u_1} [inst : Field k] {K : Type u_2} [inst_1 : Field K] {F : Type u_3} [inst_2 : Field F]\\n  [inst_3 : Algebra k K] [inst_4 : Algebra k F] {w : NumberField.InfinitePlace F},\\n  NumberField.InfinitePlace.IsUnramified k w → ∀ (f : K →ₐ[k] F), NumberField.InfinitePlace.IsUnramified k (w.comap\", \"doc\": \"If an infinite place $ w $ of a field $ F $ is unramified over a subfield $ k $, then the infinite place obtained by composing $ w $ with an algebra homomorphism $ f : K → F $ over $ k $ is also unram\"}\n  {\"name\": \"Algebra.IsUnramifiedAt.comp\", \"module\": \"Mathlib/RingTheory/Unramified/Locus\", \"type\": \"∀ {R : Type u_1} {A : Type u_2} {B : Type u_3} [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : CommRing B]\\n  [inst_3 : Algebra R A] [inst_4 : Algebra A B] [inst_5 : Algebra R B] [IsScalarTower R A B] (p : Ideal A) (P : Ideal B)\\n  [P.LiesOver p] [inst_8 : p.IsPrime] [inst_9 : P.IsPrime] [Algebra.\", \"doc\": \"If $ A $ is unramified over $ R $ at a prime ideal $ p $, and $ B $ is unramified over $ A $ at a prime ideal $ P $ lying over $ p $, then $ B $ is unramified over $ R $ at $ P $. This holds under the\"}\n  {\"name\": \"IsUnramifiedAt.of_liesOver_of_ne_bot\", \"module\": \"Mathlib/NumberTheory/RamificationInertia/Unramified\", \"type\": \"∀ (R : Type u_1) {S : Type u_2} {T : Type u_3} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : CommRing T]\\n  [inst_3 : Algebra R S] [inst_4 : Algebra S T] [inst_5 : Algebra R T] [IsScalarTower R S T] (p : Ideal S) (P : Ideal T)\\n  [P.LiesOver p] [inst_8 : p.IsPrime] [inst_9 : P.IsPrime] [Algebra.\", \"doc\": \"Let $ p $ be a prime ideal in a commutative ring $ S $, and let $ P $ be a prime ideal in a commutative ring $ T $ lying over $ p $ (i.e., $ P \\\\cap S = p $). Suppose $ S $ and $ T $ are finitely gener\"}\n  {\"name\": \"Ideal.ramificationIdxIn_mul_ramificationIdxIn\", \"module\": \"Mathlib/NumberTheory/RamificationInertia/Galois\", \"type\": \"∀ {A : Type u_1} {B : Type u_2} [inst : CommRing A] [inst_1 : CommRing B] [inst_2 : Algebra A B] {p : Ideal A}\\n  (P : Ideal B) [hPp : P.IsPrime] [hp : P.LiesOver p] (G : Type u_3) [inst_3 : Group G] [Finite G]\\n  [inst_5 : MulSemiringAction G B] [IsGaloisGroup G A B] (C : Type u_4) [inst_7 : CommRing\", \"doc\": \"For prime ideals $\\\\mathfrak{p} \\\\subseteq A$ and $\\\\mathfrak{P} \\\\subseteq B$, with $B$ and $C$ being Dedekind domains and the images of $\\\\mathfrak{p}$ and $\\\\mathfrak{P}$ under the respective algebra map\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: ramificationIdx_tower concerns a given Dedekind tower; it does not provide all normalized reduced-tensor branches, their surjectivity, or descent of weak solutions."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Descent and transitivity of ramification index one under reduced tensor products and normalization of DVRs",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"Ideal.ramificationIdx_algebra_tower\", \"module\": \"Mathlib/NumberTheory/RamificationInertia/Basic\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} {T : Type u_3} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : CommRing T]\\n  [inst_3 : Algebra R S] [inst_4 : Algebra S T] [inst_5 : Algebra R T] [IsScalarTower R S T] [IsDedekindDomain S]\\n  [IsDedekindDomain T] {p : Ideal R} {P : Ideal S} {Q : Ideal T} [hpm : P.I\", \"doc\": \"In a tower of Dedekind domain extensions $ R \\\\subseteq S \\\\subseteq T $, if $ \\\\mathfrak{p} \\\\subseteq R $, $ \\\\mathfrak{P} \\\\subseteq S $, and $ \\\\mathfrak{Q} \\\\subseteq T $ are prime ideals with $ \\\\mathfra\"}\n  {\"name\": \"Algebra.IsUnramifiedAt.of_liesOver\", \"module\": \"Mathlib/NumberTheory/RamificationInertia/Unramified\", \"type\": \"∀ (R : Type u_1) {S : Type u_2} {T : Type u_3} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : CommRing T]\\n  [inst_3 : Algebra R S] [inst_4 : Algebra S T] [inst_5 : Algebra R T] [IsScalarTower R S T] (p : Ideal S) (P : Ideal T)\\n  [P.LiesOver p] [inst_8 : p.IsPrime] [inst_9 : P.IsPrime] [Algebra.\", \"doc\": \"Let $ p $ be a prime ideal in a Dedekind domain $ S $, and let $ P $ be a prime ideal in a domain $ T $ that is torsion-free as an $ S $-module. If $ T $ is of essential finite type over $ S $, which \"}\n  {\"name\": \"Ideal.ramificationIdxIn_mul_ramificationIdxIn\", \"module\": \"Mathlib/NumberTheory/RamificationInertia/Galois\", \"type\": \"∀ {A : Type u_1} {B : Type u_2} [inst : CommRing A] [inst_1 : CommRing B] [inst_2 : Algebra A B] {p : Ideal A}\\n  (P : Ideal B) [hPp : P.IsPrime] [hp : P.LiesOver p] (G : Type u_3) [inst_3 : Group G] [Finite G]\\n  [inst_5 : MulSemiringAction G B] [IsGaloisGroup G A B] (C : Type u_4) [inst_7 : CommRing\", \"doc\": \"For prime ideals $\\\\mathfrak{p} \\\\subseteq A$ and $\\\\mathfrak{P} \\\\subseteq B$, with $B$ and $C$ being Dedekind domains and the images of $\\\\mathfrak{p}$ and $\\\\mathfrak{P}$ under the respective algebra map\"}\n  {\"name\": \"Algebra.IsUnramifiedAt.comp\", \"module\": \"Mathlib/RingTheory/Unramified/Locus\", \"type\": \"∀ {R : Type u_1} {A : Type u_2} {B : Type u_3} [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : CommRing B]\\n  [inst_3 : Algebra R A] [inst_4 : Algebra A B] [inst_5 : Algebra R B] [IsScalarTower R A B] (p : Ideal A) (P : Ideal B)\\n  [P.LiesOver p] [inst_8 : p.IsPrime] [inst_9 : P.IsPrime] [Algebra.\", \"doc\": \"If $ A $ is unramified over $ R $ at a prime ideal $ p $, and $ B $ is unramified over $ A $ at a prime ideal $ P $ lying over $ p $, then $ B $ is unramified over $ R $ at $ P $. This holds under the\"}\n  {\"name\": \"Ideal.ramificationIdx_tower\", \"module\": \"Mathlib/NumberTheory/RamificationInertia/Basic\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} {T : Type u_3} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : CommRing T]\\n  [IsDedekindDomain S] [IsDedekindDomain T] {f : R →+* S} {g : S →+* T} {p : Ideal R} {P : Ideal S} {Q : Ideal T}\\n  [hpm : P.IsPrime] [hqm : Q.IsPrime],\\n  Ideal.map g P ≠ ⊥ →\\n    Ideal.map \", \"doc\": \"Given Dedekind domains $R, S, T$ with ring homomorphisms $f : R \\\\to S$ and $g : S \\\\to T$, prime ideals $p \\\\subseteq R$, $P \\\\subseteq S$, and $Q \\\\subseteq T$ satisfying $\\\\text{map}(g, P) \\\\subseteq Q$ a\"}\n  {\"name\": \"Ideal.ramificationIdx_eq_one_of_isUnramifiedAt\", \"module\": \"Mathlib/NumberTheory/RamificationInertia/Unramified\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S] {p : Ideal S}\\n  [inst_3 : p.IsPrime] [IsNoetherianRing S] [Algebra.IsUnramifiedAt R p],\\n  p ≠ ⊥ → ∀ [IsDomain S] [Algebra.EssFiniteType R S], Ideal.ramificationIdx (algebraMap R S) (Ideal.under R p) p = \", \"doc\": \"If $ S $ is a Noetherian domain of essential finite type over $ R $, $ p $ is a non-zero prime ideal in $ S $, and $ p $ is unramified over $ R $, then the ramification index $ e(p|R) $ is equal to 1.\"}\n  {\"name\": \"IsUnramifiedAt.of_liesOver_of_ne_bot\", \"module\": \"Mathlib/NumberTheory/RamificationInertia/Unramified\", \"type\": \"∀ (R : Type u_1) {S : Type u_2} {T : Type u_3} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : CommRing T]\\n  [inst_3 : Algebra R S] [inst_4 : Algebra S T] [inst_5 : Algebra R T] [IsScalarTower R S T] (p : Ideal S) (P : Ideal T)\\n  [P.LiesOver p] [inst_8 : p.IsPrime] [inst_9 : P.IsPrime] [Algebra.\", \"doc\": \"Let $ p $ be a prime ideal in a commutative ring $ S $, and let $ P $ be a prime ideal in a commutative ring $ T $ lying over $ p $ (i.e., $ P \\\\cap S = p $). Suppose $ S $ and $ T $ are finitely gener\"}\n  {\"name\": \"Ideal.ramificationIdx_le_finrank\", \"module\": \"Mathlib/NumberTheory/RamificationInertia/Basic\", \"type\": \"∀ {R : Type u} [inst : CommRing R] (S : Type v) [inst_1 : CommRing S] [IsDedekindDomain S] [inst_3 : Algebra R S]\\n  (K : Type u_1) (L : Type u_2) [inst_4 : Field K] [inst_5 : Field L] [IsDedekindDomain R] [inst_7 : Algebra R K]\\n  [IsFractionRing R K] [inst_9 : Algebra S L] [IsFractionRing S L] [inst\", \"doc\": \"For a ring homomorphism $ f: R \\\\to S $, let $ p $ be a maximal ideal in $ R $, and let $ P $ be a prime ideal in $ S $ lying over $ p $ (i.e., $ P \\\\cap R = p $). If there are no zero divisors in the s\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: ramificationIdx_tower concerns a given Dedekind tower; it does not provide all normalized reduced-tensor branches, their surjectivity, or descent of weak solutions."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Weakly unramified normalized DVR branches descend along extensions of the upper valued field and compose in towers of finite base field extensions",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"Ideal.ramificationIdx_tower\", \"module\": \"Mathlib.NumberTheory.RamificationInertia.Basic\", \"type\": \"[IsDedekindDomain S] [IsDedekindDomain T] {f : R →+* S} {g : S →+* T} {p : Ideal R} {P : Ideal S} {Q : Ideal T}\\n  [hpm : P.IsPrime] [hqm : Q.IsPrime] (hg0 : map g P ≠ ⊥) (hfg : map (g.comp f) p ≠ ⊥) (hg : map g P ≤ Q) :\\n  ramificationIdx (g.comp f) p Q = ramificationIdx f p P * ramificationIdx g P Q\", \"doc\": \"Given Dedekind domains $R, S, T$ with ring homomorphisms $f : R \\\\to S$ and $g : S \\\\to T$, prime ideals $p \\\\subseteq R$, $P \\\\subseteq S$, and $Q \\\\subseteq T$ satisfying $\\\\text{map}(g, P) \\\\subseteq Q$ a\"}\n  {\"name\": \"Algebra.IsUnramifiedAt.comp\", \"module\": \"Mathlib.RingTheory.Unramified.Locus\", \"type\": \"(p : Ideal A) (P : Ideal B) [P.LiesOver p] [p.IsPrime] [P.IsPrime] [IsUnramifiedAt R p] [IsUnramifiedAt A P] :\\n  IsUnramifiedAt R P\", \"doc\": \"If $ A $ is unramified over $ R $ at a prime ideal $ p $, and $ B $ is unramified over $ A $ at a prime ideal $ P $ lying over $ p $, then $ B $ is unramified over $ R $ at $ P $. This holds under the\"}\n  {\"name\": \"Valuation.HasExtension.instIsScalarTower_valuationSubring'\", \"module\": \"Mathlib.RingTheory.Valuation.Extension\", \"type\": \": IsScalarTower K₀ L₀ L\", \"doc\": \"Let $L/K$ be a field extension, and let a valuation on $L$ extend a valuation on $K$. Let $K₀$ and $L₀$ be the respective valuation subrings of $K$ and $L$. Then $K₀$, $L₀$, and $L$ form a scalar towe\"}\n  {\"name\": \"Algebra.Unramified.comp\", \"module\": \"Mathlib.RingTheory.Unramified.Basic\", \"type\": \"[Algebra A B] [IsScalarTower R A B] [Unramified R A] [Unramified A B] : Unramified R B\", \"doc\": \"Given commutative rings $R$, $A$, and $B$ with $A$ an $R$-algebra and $B$ an $A$-algebra, if the scalar actions satisfy the tower compatibility condition $R \\to A \\to B$, and $A$ is unramified over $R$ \"}\n  {\"name\": \"Ideal.ramificationIdxIn_mul_ramificationIdxIn\", \"module\": \"Mathlib.NumberTheory.RamificationInertia.Galois\", \"type\": \"[IsDedekindDomain B] [IsDedekindDomain C] (hp : map (algebraMap A C) p ≠ ⊥) (hP : map (algebraMap B C) P ≠ ⊥) :\\n  p.ramificationIdxIn B * P.ramificationIdxIn C = p.ramificationIdxIn C\", \"doc\": \"For prime ideals $\\\\mathfrak{p} \\\\subseteq A$ and $\\\\mathfrak{P} \\\\subseteq B$, with $B$ and $C$ being Dedekind domains and the images of $\\\\mathfrak{p}$ and $\\\\mathfrak{P}$ under the respective algebra map\"}\n  {\"name\": \"Algebra.IsUnramifiedAt.of_restrictScalars\", \"module\": \"Mathlib.RingTheory.Unramified.Locus\", \"type\": \"(P : Ideal B) [P.IsPrime] [IsUnramifiedAt R P] : IsUnramifiedAt A P\", \"doc\": \"Let $ R \\\\to A \\\\to B $ be ring homomorphisms, and let $ \\\\mathfrak{p} $ be a prime ideal of $ B $. If $ B $ is unramified over $ R $ at $ \\\\mathfrak{p} $, then $ B $ is also unramified over $ A $ at $ \\\\m\"}\n  {\"name\": \"Algebra.FormallyUnramified.of_comp\", \"module\": \"Mathlib.RingTheory.Unramified.Basic\", \"type\": \"∀ (R : Type u_1) [inst : CommRing R] (A : Type u_2) [inst_1 : CommRing A] [inst_2 : Algebra R A] (B : Type u_3)\\n  [inst_3 : CommRing B] [inst_4 : Algebra R B] [inst_5 : Algebra A B] [IsScalarTower R A B]\\n  [Algebra.FormallyUnramified R B], Algebra.FormallyUnramified A B\", \"doc\": \"Given commutative rings $ R $, $ A $, and $ B $ with $ A $ and $ B $ equipped with $ R $-algebra structures, and $ B $ equipped with an $ A $-algebra structure forming a scalar tower $ R \\to A \\to B $, \"}\n  {\"name\": \"NumberField.InfinitePlace.IsUnramified.comap\", \"module\": \"Mathlib.NumberTheory.NumberField.InfinitePlace.Ramification\", \"type\": \"{w : InfinitePlace F} (h : IsUnramified k w) : IsUnramified k (w.comap (algebraMap K F))\", \"doc\": \"If an infinite place $ w $ of $ F $ is unramified over $ k $, then the infinite place on $ K $ obtained by composing $ w $ with the algebra map $ K \\to F $ is also unramified over $ k $. This follows b\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: ramificationIdx_tower concerns a given Dedekind tower; it does not provide all normalized reduced-tensor branches, their surjectivity, or descent of weak solutions."
+  },
+  {
+   "tool": "loogle",
+   "query": "Ideal.ramificationIdx",
+   "results": "[loogle] OK 12 hit(s)\n  {\"name\": \"Ideal.ramificationIdx\", \"module\": \"Mathlib.RingTheory.RamificationInertia.Ramification\", \"type\": \" {S : Type u_1} [CommRing S] (q : Ideal S) (R : Type u_2) [CommRing R] [Algebra R S] : ℕ\", \"doc\": \"Let `S/R` be an extension of rings, and let `q` be a prime ideal of `S` lying over a prime ideal\\n`p` of `R`. Let `Sq` be the localization of `S` and `q`, and let `pSq` be the image of `p` in `Sq`.\\nThe\"}\n  {\"name\": \"Ideal.ramificationIdx'_of_not_isPrime\", \"module\": \"Mathlib.RingTheory.RamificationInertia.Ramification\", \"type\": \" {S : Type u_1} [CommRing S] (q : Ideal S) (R : Type u_2) [CommRing R] [Algebra R S] (hq : ¬q.IsPrime) : q.ramificationIdx R = 0\", \"doc\": \"**Alias** of `Ideal.ramificationIdx_of_not_isPrime`.\"}\n  {\"name\": \"Ideal.ramificationIdx_of_not_isPrime\", \"module\": \"Mathlib.RingTheory.RamificationInertia.Ramification\", \"type\": \" {S : Type u_1} [CommRing S] (q : Ideal S) (R : Type u_2) [CommRing R] [Algebra R S] (hq : ¬q.IsPrime) : q.ramificationIdx R = 0\", \"doc\": \"\"}\n  {\"name\": \"Ideal.ramificationIdx'_eq_one\", \"module\": \"Mathlib.RingTheory.RamificationInertia.Ramification\", \"type\": \" {S : Type u_1} [CommRing S] (q : Ideal S) (R : Type u_2) [CommRing R] [Algebra R S] [q.IsPrime] [Algebra.EssFiniteType R S] [Algebra.IsUnramifiedAt R q] : q.ramificationIdx R = 1\", \"doc\": \"**Alias** of `Ideal.ramificationIdx_eq_one`.\"}\n  {\"name\": \"Ideal.ramificationIdx_eq_one\", \"module\": \"Mathlib.RingTheory.RamificationInertia.Ramification\", \"type\": \" {S : Type u_1} [CommRing S] (q : Ideal S) (R : Type u_2) [CommRing R] [Algebra R S] [q.IsPrime] [Algebra.EssFiniteType R S] [Algebra.IsUnramifiedAt R q] : q.ramificationIdx R = 1\", \"doc\": \"\"}\n  {\"name\": \"Ideal.ramificationIdx_bot_eq_one\", \"module\": \"Mathlib.RingTheory.RamificationInertia.Ramification\", \"type\": \" {S : Type u_1} [CommRing S] (R : Type u_2) [CommRing R] [Algebra R S] [IsDomain S] : ⊥.ramificationIdx R = 1\", \"doc\": \"The ramification index of the zero ideal is `1`.\"}\n  {\"name\": \"Ideal.ramificationIdx'_eq_one_iff\", \"module\": \"Mathlib.RingTheory.RamificationInertia.Ramification\", \"type\": \" {S : Type u_1} [CommRing S] {q : Ideal S} {R : Type u_2} [CommRing R] [Algebra R S] [q.IsPrime] [Algebra.EssFiniteType R S] [Algebra.HasSeparableResidueFieldsAt R S (Ideal.under R q)] : q.ramificationIdx R = 1 ↔ Algebra.IsUnramifiedAt R q\", \"doc\": \"**Alias** of `Ideal.ramificationIdx_eq_one_iff`.\"}\n  {\"name\": \"Ideal.ramificationIdx_eq_one_iff\", \"module\": \"Mathlib.RingTheory.RamificationInertia.Ramification\", \"type\": \" {S : Type u_1} [CommRing S] {q : Ideal S} {R : Type u_2} [CommRing R] [Algebra R S] [q.IsPrime] [Algebra.EssFiniteType R S] [Algebra.HasSeparableResidueFieldsAt R S (Ideal.under R q)] : q.ramificationIdx R = 1 ↔ Algebra.IsUnramifiedAt R q\", \"doc\": \"\"}\n  {\"name\": \"Ideal.ramificationIdx'_eq_ramificationIdx\", \"module\": \"Mathlib.RingTheory.RamificationInertia.Ramification\", \"type\": \" {R : Type u_1} {S : Type u_2} [CommRing R] [CommRing S] [Algebra R S] (p : Ideal R) (q : Ideal S) [IsDomain R] [IsDedekindDomain S] [Module.IsTorsionFree R S] [q.LiesOver p] [hq : q.IsPrime] (hp : p ≠ ⊥) : p.ramificationIdx' q = q.ramificationIdx R\", \"doc\": \"\"}\n  {\"name\": \"Ideal.ramificationIdx_eq_ramificationIdx'\", \"module\": \"Mathlib.RingTheory.RamificationInertia.Ramification\", \"type\": \" {R : Type u_1} {S : Type u_2} [CommRing R] [CommRing S] [Algebra R S] (p : Ideal R) (q : Ideal S) [IsDomain R] [IsDedekindDomain S] [Module.IsTorsionFree R S] [q.LiesOver p] [hq : q.IsPrime] (hp : p ≠ ⊥) : p.ramificationIdx' q = q.ramificationIdx R\", \"doc\": \"**Alias** of `Ideal.ramificationIdx'_eq_ramificationIdx`.\"}\n  {\"name\": \"Ideal.ramificationIdx'_above_dvd\", \"module\": \"Mathlib.RingTheory.RamificationInertia.Ramification\", \"type\": \" {R : Type u_1} {S : Type u_2} {T : Type u_3} [CommRing R] [CommRing S] [CommRing T] [Algebra R S] [Algebra R T] [Algebra S T] [IsScalarTower R S T] (q : Ideal S) (r : Ideal T) [r.LiesOver q] [Module.Flat S T] : r.ramificationIdx S ∣ r.ramificationIdx R\", \"doc\": \"**Alias** of `Ideal.ramificationIdx_above_dvd`.\"}\n  {\"name\": \"Ideal.ramificationIdx'_below_dvd\", \"module\": \"Mathlib.RingTheory.RamificationInertia.Ramification\", \"type\": \" {R : Type u_1} {S : Type u_2} {T : Type u_3} [CommRing R] [CommRing S] [CommRing T] [Algebra R S] [Algebra R T] [Algebra S T] [IsScalarTower R S T] (q : Ideal S) (r : Ideal T) [r.LiesOver q] [Module.Flat S T] : q.ramificationIdx R ∣ r.ramificationIdx R\", \"doc\": \"**Alias** of `Ideal.ramificationIdx_below_dvd`.\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: ramificationIdx_tower concerns a given Dedekind tower; it does not provide all normalized reduced-tensor branches, their surjectivity, or descent of weak solutions."
+  },
+  {
+   "tool": "grep",
+   "query": "weakly.unramified|ramificationIdx.*mul|ramificationIdx.*one",
+   "results": "[grep] OK 8 hit(s)\n  {\"file\": \"Mathlib/RingTheory/RamificationInertia/Ramification.lean\", \"line\": \"30\", \"text\": \"* `ramificationIdx_tower`: Ramification index is multiplicative in towers.\"}\n  {\"file\": \"Mathlib/RingTheory/RamificationInertia/Ramification.lean\", \"line\": \"90\", \"text\": \"theorem ramificationIdx_eq_one [q.IsPrime] [Algebra.EssFiniteType R S]\"}\n  {\"file\": \"Mathlib/RingTheory/RamificationInertia/Ramification.lean\", \"line\": \"97\", \"text\": \"  rw [ramificationIdx_def, ENat.toNat_eq_iff_eq_natCast, Nat.cast_one, Module.length_eq_one_iff,\"}\n  {\"file\": \"Mathlib/RingTheory/RamificationInertia/Ramification.lean\", \"line\": \"102\", \"text\": \"@[deprecated (since := \\\"2026-07-01\\\")] alias ramificationIdx'_eq_one := ramificationIdx_eq_one\"}\n  {\"file\": \"Mathlib/RingTheory/RamificationInertia/Ramification.lean\", \"line\": \"105\", \"text\": \"theorem ramificationIdx_eq_one_iff [q.IsPrime] [Algebra.EssFiniteType R S]\"}\n  {\"file\": \"Mathlib/RingTheory/Ideal/Norm/RelNorm.lean\", \"line\": \"429\", \"text\": \"    ← Ideal.ncard_primesOver_mul_ramificationIdxIn_mul_inertiaDegIn p S G, mul_comm,\"}\n  {\"file\": \"Mathlib/RingTheory/DedekindDomain/Different.lean\", \"line\": \"940\", \"text\": \"      · rw [← Ideal.IsDedekindDomain.ramificationIdx'_eq_one_iff hPbot Ideal.map_comap_le]\"}\n  {\"file\": \"Mathlib/RingTheory/DedekindDomain/Different.lean\", \"line\": \"950\", \"text\": \"      Ideal.ramificationIdx_eq_one_of_isUnramifiedAt, pow_one] at h₂\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: ramificationIdx_tower concerns a given Dedekind tower; it does not provide all normalized reduced-tensor branches, their surjectivity, or descent of weak solutions."
+  },
+  {
+   "tool": "grep",
+   "query": "ramificationIdx_tower|weak.?solution|weakly.?unramified",
+   "results": "8 hits: Mathlib/NumberTheory/RamificationInertia/HilbertTheory.lean, Mathlib/NumberTheory/RamificationInertia/Galois.lean, Mathlib/RingTheory/RamificationInertia/Ramification.lean, Mathlib/RingTheory/RamificationInertia/Ramification.lean, Mathlib/RingTheory/RamificationInertia/Ramification.lean, Mathlib/RingTheory/RamificationInertia/Ramification.lean, Mathlib/RingTheory/RamificationInertia/Ramification.lean, Mathlib/Analysis/Distribution/TestFunction.lean",
+   "date": "2026-10-24",
+   "verdict": "no match: none supplies descent with coverage of all reduced-tensor normalized branches and successive coefficient-extension compatibility. The tower ramification formula assumes an already given ring tower, and toIntegralClosure_bijective_of_tower assumes the two base-change bijections."
+  },
+  {
+   "tool": "loogle",
+   "query": "Ideal.ramificationIdx_tower",
+   "results": "1 hits: Ideal.ramificationIdx_tower",
+   "date": "2026-10-24",
+   "verdict": "no match: none supplies descent with coverage of all reduced-tensor normalized branches and successive coefficient-extension compatibility. The tower ramification formula assumes an already given ring tower, and toIntegralClosure_bijective_of_tower assumes the two base-change bijections."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Descent of ramification index one for normalized reduced tensor products of complete discrete valuation rings",
+   "results": "8 hits: Ideal.ramificationIdx_eq_one_of_isUnramifiedAt, Algebra.isUnramifiedAt_iff_of_isDedekindDomain, Ideal.ramificationIdx_map_self_eq_one, Ideal.ramificationIdx_tower, Algebra.Unramified.baseChange, Ideal.ramificationIdx_eq_one_of_map_localization, Ideal.ramificationIdxIn_mul_ramificationIdxIn, Ideal.ramificationIdx_le_finrank",
+   "date": "2026-10-24",
+   "verdict": "no match: none supplies descent with coverage of all reduced-tensor normalized branches and successive coefficient-extension compatibility. The tower ramification formula assumes an already given ring tower, and toIntegralClosure_bijective_of_tower assumes the two base-change bijections."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Weak solutions for extensions of complete discrete valuation rings descend along a finite upper field extension and compose under finite coefficient extensions",
+   "results": "8 hits: galLift_comp, galLift, Valuation.HasExtension, Valuation.HasExtension.ofComapInteger, IsDedekindDomain.HeightOneSpectrum.valuedAdicCompletion_def, Valued.extension_extends, Valuation.HasExtension.instAlgebraInteger, Valuation.HasExtension.instAlgebra_valuationSubring",
+   "date": "2026-10-24",
+   "verdict": "no match: none supplies descent with coverage of all reduced-tensor normalized branches and successive coefficient-extension compatibility. The tower ramification formula assumes an already given ring tower, and toIntegralClosure_bijective_of_tower assumes the two base-change bijections."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Integral closures of complete DVRs in reduced tensor products of fields and transitivity after successive finite field extensions",
+   "results": "8 hits: TensorProduct.toIntegralClosure_bijective_of_tower, TensorProduct.toIntegralClosure, IsIntegralClosure.isFractionRing_of_finite_extension, Algebra.IsGeometricallyReduced.isReduced_algebraicClosure_tensorProduct, integralClosure.isFractionRing_of_finite_extension, Algebra.instIsReducedTensorProductOfIsAlgebraicOfIsGeometricallyReduced, TensorProduct.toIntegralClosure_bijective_of_isLocalizationAway, Ring.DimensionLEOne.isIntegralClosure",
+   "date": "2026-10-24",
+   "verdict": "no match: none supplies descent with coverage of all reduced-tensor normalized branches and successive coefficient-extension compatibility. The tower ramification formula assumes an already given ring tower, and toIntegralClosure_bijective_of_tower assumes the two base-change bijections."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-epp-finite-coefficient-triple",
+  "date": "2026-10-24",
+  "group": "Q62"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "Historical supporting input to det-thm-sf-ctf-stability-direct-images, proof (3), through the creation chain of lem-sfb-epp-essentially-finite-type-traits. Current latest direct-image proof (3) does not state this auxiliary algebra result. Weak Epp at each normalized branch over the perfect-residue algebraic preparation. Supporting Finite coefficient triple in Epp elimination. Source subargument: Tag 09ES, lemma-solutions-go-down, (1) and the normalized tower argument in its proof, iterated for two successive coefficient extensions.",
+   "via": [
+    "lem-sfb-epp-finite-coefficient-triple",
+    "lem-sfb-epp-weak-perfect-residue",
+    "lem-sfb-epp-essentially-finite-type-traits",
+    "lem-sfb-raynaud-faltings-normalized-reduction",
+    "lem-sfb-group-model-potential-smooth-normalization",
+    "lem-sfb-quasi-reductive-special-connectedness",
+    "lem-sfb-integral-chevalley-weyl-atlas",
+    "lem-sfb-chevalley-integral-root-model",
+    "lem-sfb-borel-kostant-distribution-comparison",
+    "lem-sfb-borel-simple-root-distribution-calculus",
+    "lem-sfb-restricted-induced-infinitesimal-invariants",
+    "lem-sfb-flag-frobenius-rho-pushforward",
+    "lem-sfb-dominant-flag-line-kempf-vanishing",
+    "lem-sfb-induced-weyl-dimension-formula",
+    "lem-sfb-steinberg-induced-module-irreducible",
+    "lem-sfb-rho-section-self-duality",
+    "lem-sfb-steinberg-endomorphism-detection",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-epp-weak-solution-descent",
+  "worker": "stage1",
+  "summary": "Proved descent using surjectivity on normalized branches and an explicit uniformizer calculation. Proved the successive-coefficient and single-parent assertions using tensor universal properties and transitivity of integrality. Reused existing normalization nodes; no new nodes and no statement change. The additional B hypothesis in (ii) is redundant but harmless.",
+  "blueprint": "Historical supporting algebra for det-thm-sf-ctf-stability-direct-images proof (3), through lem-sfb-epp-finite-coefficient-triple; current latest proof (3) does not state this Epp subargument. The inherited nearest blueprint ancestor is null; retained that provenance unchanged. Searches found no blueprint weak-solution node.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-complete-local-nagata",
+    "why": "Generic commutative algebra (Stacks 032W): a complete DVR is Nagata, so its integral closure in a finite, possibly inseparable, extension is finite; replaces the dropped complete-DVR normalization node of the 2026-10-19 route pivot. No node of this unit states it."
+   },
+   {
+    "node": "lem-weil-pbc-finite-over-complete-local-product",
+    "why": "Generic commutative algebra (Stacks 0325): a domain finite over a complete Noetherian local ring is local and complete with a unique prime over the maximal ideal; replaces the dropped complete-DVR normalization node of the 2026-10-19 route pivot. No node of this unit states it."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-complete-local-nagata",
+  "lem-weil-pbc-finite-over-complete-local-product"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q67-dd2b0c961",
+  "group": "Q67",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q67-dd2b0c961 (reviewer sub-agent of L); spot-checked: Mechanical finding confirmed and repaired. Steps 1 and 2 (plus proof_deps and tool_uses) cited lem-per-complete-dvr-finite-normalization, a node dropped on 2026-10-19 (on route-pivot-dropped.txt). It is the only dropped id in the item's closure, and no step justified it. FIX: step 1 now proves the finite complete DVR normalization from existing nodes: PID ⇒ Noetherian (pid-noetherian-normal), complete DVR ⇒ N-2 (032W complete-local-nagata), a domain finite over a complete local ring is local and complete (0325 finite-over-complete-local-product), dimension 1 via unit-times-uniformizer-power, and then lem-sfb-finite-normalization-local-dvr with N local ⇒ N=N_q. Step 2 replaces the old uniqueness clause with a written argument: C' DVR, C PID ⇒ normal ⇒ C'⊆C, 0325 unique prime over m_B ⇒ m_C∩C'=m_{C'}, and x∈C∖C' ⇒ x^{-1}∈m_{C'}⊆m_C, a contradiction; hence C is integral over B. proof_deps updated; tool_uses now 032W and 0325 (off-unit, generic). All replacements are on the base, their closures contain no dropped ids, and there is no cycle. Steps are at most 1860 characters. Statement is byte-identical to the base and is not weakened. Read Stacks 09EM remark-construction (1)-(9), definition-solution and 09ES lemma-solutions-go-down with its proof. Steps 3-7 checked: (i) via surjectivity and the uniformizer ef=1 calculation; reduced-tensor universal property; idempotent product decomposition; normalization transitivity; (ii) and the single-parent clause, where the A→B hypothesis is redundant but harmless. Small cases checked: trivial extensions, A=B=C, purely inseparable, split. No duplicate (searched the DAG for 09ES and weak solution; only the epp family, none stating this). No SGA; not a re-split; no new nodes.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.EppWeakSolutionDescent",
+  "declaration": "IsDiscreteValuationRing.epp_weak_solution_descent",
+  "declarations": [
+   "IsDiscreteValuationRing.eppWeakReducedTensor",
+   "IsDiscreteValuationRing.eppWeakUpperClosure",
+   "IsDiscreteValuationRing.eppWeakNormalizationMap",
+   "IsDiscreteValuationRing.eppWeakBranch",
+   "IsDiscreteValuationRing.eppIsWeakSolution",
+   "IsDiscreteValuationRing.eppReducedCoefficientMap",
+   "IsDiscreteValuationRing.eppUpperCoefficientMap",
+   "IsDiscreteValuationRing.eppNormalizationLocalizationAlgebra",
+   "IsDiscreteValuationRing.eppBranchContinuation",
+   "IsDiscreteValuationRing.eppIsCompleteDVR",
+   "IsDiscreteValuationRing.eppIsProductCompleteDVR",
+   "IsDiscreteValuationRing.eppReducedRightAlgebra",
+   "IsDiscreteValuationRing.eppIteratedReducedTensor",
+   "IsDiscreteValuationRing.eppIteratedTmul",
+   "IsDiscreteValuationRing.epp_reduced_tensor_assoc",
+   "IsDiscreteValuationRing.epp_normalization_branchwise",
+   "IsDiscreteValuationRing.epp_weak_solution_descent"
+  ],
+  "file": "lean/Sheaf/RingTheory/EppWeakSolutionDescent.lean",
+  "statement": "theorem epp_weak_solution_descent (A : Type u) (B : Type v) (C : Type w) [CommRing A] [IsDomain A] [IsDiscreteValuationRing A] [CommRing B] [IsDomain B] [IsDiscreteValuationRing B] [CommRing C] [IsDomain C] [IsDiscreteValuationRing C] [IsAdicComplete (IsLocalRing.maximalIdeal A) A] [IsAdicComplete (IsLocalRing.maximalIdeal B) B] [IsAdicComplete (IsLocalRing.maximalIdeal C) C] [Algebra A B] [Algebra B C] [Algebra A C] [IsScalarTower A B C] [IsLocalHom (algebraMap A B)] [IsLocalHom (algebraMap B C)] (hAB : Function.Injective (algebraMap A B)) (hBC : Function.Injective (algebraMap B C)) (K : Type x) (L : Type y) (M : Type z) [Field K] [Field L] [Field M] [Algebra A K] [IsFractionRing A K] [Algebra B L] [IsFractionRing B L] [Algebra C M] [IsFractionRing C M] [Algebra A L] [Algebra A M] [Algebra B M] [Algebra K L] [Algebra L M] [Algebra K M] [IsScalarTower A B L] [IsScalarTower A K L] [IsScalarTower A C M] [IsScalarTower A K M] [IsScalarTower B C M] [IsScalarTower B L M] [IsScalarTower K L M] [Module.Finite L M] (K₁ : Type t) [Field K₁] [Algebra K K₁] [Module.Finite K K₁] [Algebra A K₁] [IsScalarTower A K K₁] : eppIsCompleteDVR (integralClosure A K₁) ∧ eppIsProductCompleteDVR (eppWeakUpperClosure C K M K₁) ∧ (eppIsWeakSolution A C K M K₁ → eppIsWeakSolution A B K L K₁) ∧ (∀ (K₂ : Type s) [Field K₂] [Algebra K₁ K₂] [Module.Finite K₁ K₂] [Algebra K K₂] [IsScalarTower K K₁ K₂] [Algebra A K₂] [IsScalarTower A K K₂], (integralClosure (integralClosure A K₁) K₂).toSubring = (integralClosure A K₂).toSubring ∧ (eppIsWeakSolution A B K L K₁ → (∀ (q : Ideal (eppWeakUpperClosure C K M K₁)) [q.IsMaximal], eppBranchContinuation.{u, w, x, z, t, s, 0} A C K M K₁ K₂ q) → eppIsWeakSolution A C K M K₂) ∧ (eppIsWeakSolution A B K L K₁ → ∀ (q : Ideal (eppWeakUpperClosure C K M K₁)) [q.IsMaximal], eppBranchContinuation.{u, w, x, z, t, s, 0} A C K M K₁ K₂ q → ∀ (r : Ideal (eppWeakUpperClosure C K M K₂)) [r.IsMaximal], r.comap (eppUpperCoefficientMap C K M K₁ K₂) = q → eppWeakBranch (eppWeakNormalizationMap A C K M K₂) r))",
+  "branch": "newtargets-dag",
+  "by": "Q87",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "The two further theorem declarations state the reduced-tensor associativity and branchwise normalization clauses of this same node. All other declarations are concrete canonical maps or predicates used by its statement. eppWeakReducedTensor, eppWeakUpperClosure and eppWeakNormalizationMap are the same terms (checked by rfl) as eppReducedTensor, eppUpperClosure and eppNormalizationMap of Sheaf.RingTheory.EppEssentiallyFiniteTypeTraits, restated here because that theorem node (lem-sfb-epp-essentially-finite-type-traits) lies downstream of this node through lem-sfb-epp-weak-perfect-residue and lem-sfb-epp-finite-coefficient-triple, so importing it would create a stage-3 import cycle (maintainer review fix, 2026-10-24).",
+  "fixed_by": "NT-stage2-cc-393c4a2b3"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-393c4a2b3",
+  "group": "Q87",
+  "result": "fix",
+  "note": "Read node, 6 Mathlib stmt_deps, Stacks 09EM/09EN/09ES, module, report. Weak-solution definition (finite + all maximal q: maximal contraction, both localizations DVRs, nS'_q=qS'_q via canonical 1⊗- normalization map), the setting (complete DVRs, injective local maps, fraction-field towers, M/L and K1/K finite), A1 complete DVR / C1 finite product, (i), (ii) with all-q continuation (forall over fraction-field presentations; isomorphism-invariant, satisfiable in the universe used), single-parent clause along the canonical coefficient map, tensor associativity pinned on (x⊗a)⊗b and branchwise normalization equality all match the node; edge cases checked; no hollow defs, only sorry, docstrings OK. Finding: public import of Sheaf.RingTheory.EppEssentiallyFiniteTypeTraits (theorem node ess-finite-type-traits, downstream via weak-perfect-residue → finite-coefficient-triple → this item) gives a stage-3 import cycle. FIX (as Q119/Q01): Mathlib imports; eppReducedTensor/eppUpperClosure/eppNormalizationMap restated as eppWeakReducedTensor/eppWeakUpperClosure/eppWeakNormalizationMap; fixes/EppWeakSolutionDescent.lean, lean-record.json (statement, declarations, note), report.md. nt_compile --json: module 5.4 s plus rfl check file 1.0 s, exit 0; broken-copy control fails. stmt_deps unchanged. Maintainer note: unify with Q142 def-sfb-epp-weak-solution IsEppWeakSolution once it lands."
+ }
+}

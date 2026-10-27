@@ -1,0 +1,249 @@
+{
+ "id": "lem-sfb-nodal-special-clifford-subcurve",
+ "kind": "statement",
+ "title": "A special very ample line has a Clifford support subcurve",
+ "statement": "Let $k$ be algebraically closed and $D$ a nonempty connected projective reduced curve of pure dimension one. Assume all its singular points have completed local ring $k[[u,v]]/(uv)$ [def-weil-pbc-adic-completion] [def-weil-pbc-multivariate-power-series]. Let $L$ be a very ample invertible module: the pullback of the hyperplane line by some closed immersion $D\\hookrightarrow\\mathbf P^n_k$ [def-sc-invertible-module] [def-weil-closed-immersion]. If $H^1(D,L)\\ne0$, there is a nonempty connected reduced union $Y$ of irreducible components, possibly $Y=D$, such that, with $e=\\deg_YL$ measured on normalized components,\n$$e\\ge2,\\qquad h^0(Y,L|_Y)\\le\\tfrac e2+1.$$\nHere cohomology is Zariski module-sheaf cohomology [def-sc-ringed-space-module-cohomology], and degree and normalization are [def-pc-degree-line-bundle] [def-sc-normalization]. No GIT hypothesis, fixed Hilbert polynomial or condition on rational tails is assumed.",
+ "source": {
+  "document": "literature/morrison-git-stable-curves-arXiv-0810.2340.pdf",
+  "place": "Section 3.2 proof step (7), printed p.14; support-of-dualizing-section argument and Clifford inequality, as in Gieseker Proposition 1.0.8, printed pp.61--62, referring to Theorem 0.2.3. Agent statement of the precise auxiliary support claim; not an assertion of nonspeciality. Local PDFs WANTED."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-pc-scheme",
+  "def-weil-closed-immersion",
+  "def-pc-projective-space-twist",
+  "def-sc-ringed-space-module-cohomology",
+  "def-pc-degree-line-bundle",
+  "def-sc-invertible-module",
+  "def-sc-normalization",
+  "def-weil-pbc-adic-completion",
+  "def-weil-pbc-multivariate-power-series",
+  "def-kun-projective",
+  "def-weil-irreducible-components",
+  "def-weil-algebraic-closure",
+  "def-pc-reduced-scheme",
+  "def-weil-pure-dimension",
+  "def-weil-connected-scheme",
+  "def-pc-module-pullback",
+  "def-sc-ample"
+ ],
+ "proof": [
+  {
+   "text": "Apply [lem-sfb-nodal-line-serre-riemann-roch] to $D$: since $H^1(D,L)\\ne0$, there is a nonzero map $\\phi:L\\to\\omega_D$. Among all such maps choose one for which the number of components with nonzero generic map is least. By [lem-pc-projective-proper], $D$ is proper and hence of finite type. The base $\\operatorname{Spec}k$ is Noetherian (a field has only the ideals $0,k$); [lem-weil-pbc-finite-type-over-noetherian] makes $D$ Noetherian, and [lem-weil-pbc-noetherian-finitely-many-components] gives finitely many components. Let $Y$ be their reduced union. It is nonempty: in a trivialization a section of an invertible module on a reduced affine scheme vanishing at all minimal primes is zero, since their intersection is the nilradical $0$. The same argument shows $I_Y\\phi=0$: its product is zero at every component generic point, either because the ideal is zero there or because $\\phi$ is zero there. By [lem-sfb-nodal-subcurve-dualizing-annihilator], $\\phi$ therefore comes from a nonzero map $L|_Y\\to\\omega_Y$.",
+   "uses": [
+    "lem-sfb-nodal-line-serre-riemann-roch",
+    "lem-sfb-nodal-subcurve-dualizing-annihilator",
+    "lem-pc-projective-proper",
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "lem-weil-pbc-noetherian-finitely-many-components"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/curves.tex",
+    "place": "Tags 0BS2, 0BS4, 0BS6 and 0E33, combined by the agent minimal-support argument for Morrison Section 3.2 step (7), printed p.14."
+   }
+  },
+  {
+   "text": "The connected components of $Y$ are open and closed: grouping its finitely many irreducible components by chains of intersections expresses each group and its complement as finite unions of closed components. $Y$ is connected. Otherwise take a connected component $Y_0$ on which this map is nonzero, retain its restriction and set it to zero on the other connected components of $Y$. These components are open and closed in $Y$, so this defines a map on $Y$. The injection in [lem-sfb-nodal-subcurve-dualizing-annihilator] extends it to a nonzero map on $D$ supported on fewer components, a contradiction. Set $M=L|_Y$, $N=\\omega_Y\\otimes M^{-1}$ and $W=H^0(Y,N)$. For every nonzero $w\\in W$, the corresponding map $M\\to\\omega_Y$ extends by the same injection to $D$. Minimality forces it to be nonzero at every component generic point of $Y$.",
+   "uses": [
+    "lem-sfb-nodal-subcurve-dualizing-annihilator"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/curves.tex",
+    "place": "Tags 0BS2, 0BS4, 0BS6 and 0E33, combined by the agent minimal-support argument for Morrison Section 3.2 step (7), printed p.14."
+   }
+  },
+  {
+   "text": "Put $V=H^0(Y,M)$ and $g=h^1(Y,\\mathcal O_Y)$. By [lem-sfb-nodal-line-serre-riemann-roch], all section spaces are finite-dimensional, $\\dim W=h^1(Y,M)>0$, $h^0(Y,\\omega_Y)=g$, and $\\dim V-\\dim W=e+1-g$, with exactly the normalized-component degree $e$ in the statement. For $v\\ne0$ some generic value of $v$ is nonzero, by reducedness and a local line trivialization. Every $w\\ne0$ is nonzero on that component by step 2, so the section product $vw\\in H^0(Y,\\omega_Y)$ is nonzero. Thus [lem-sfb-hopf-bilinear-image-dimension] applied to multiplication gives $\\dim V+\\dim W-1\\leq g$. Eliminating $\\dim W$ gives $2\\dim V\\leq e+2$.",
+   "uses": [
+    "lem-sfb-nodal-line-serre-riemann-roch",
+    "lem-sfb-hopf-bilinear-image-dimension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/curves.tex",
+    "place": "Tags 0BS2, 0BS4, 0BS6 and 0E33, combined by the agent minimal-support argument for Morrison Section 3.2 step (7), printed p.14."
+   }
+  },
+  {
+   "text": "By [lem-weil-pbc-closed-immersion-comp], the restriction $M$ is the hyperplane line for the closed immersion of $Y$ obtained by restricting the given immersion of $D$. Hence $\\dim V\\geq2$: if $V=0$ the coordinate sections cannot generate $M$; if $V$ is one-dimensional, they are all scalar multiples of one generator, which must be nowhere zero, and the immersion is the constant map to the point with those scalar coordinates. Such a map cannot be a closed immersion of a pure one-dimensional nonempty scheme. The inequality of step 3 therefore gives $e\\geq2$ and $h^0(Y,M)\\leq e/2+1$, as required.",
+   "uses": [
+    "lem-weil-pbc-closed-immersion-comp"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/curves.tex",
+    "place": "Tags 0BS2, 0BS4, 0BS6 and 0E33, combined by the agent minimal-support argument for Morrison Section 3.2 step (7), printed p.14."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-nodal-line-serre-riemann-roch",
+  "lem-sfb-nodal-subcurve-dualizing-annihilator",
+  "lem-pc-projective-proper",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-weil-pbc-noetherian-finitely-many-components",
+  "lem-sfb-hopf-bilinear-image-dimension",
+  "lem-weil-pbc-closed-immersion-comp"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/curves.tex",
+  "place": "Minimal support and section-product reconstruction from Tags 0BS2/0BS4/0BS6/0E33 for the support assertion needed at Morrison Section 3.2 step (7)."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Clifford inequality on a connected support subcurve detected by a nonzero dualizing section on a nodal curve",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"WeierstrassCurve.Affine.CoordinateRing.mk_XYIdeal'_mul_mk_XYIdeal'\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Affine/Point\", \"type\": \"∀ {F : Type u} [inst : Field F] {W : WeierstrassCurve.Affine F} [inst_1 : DecidableEq F] {x₁ x₂ y₁ y₂ : F}\\n  (h₁ : W.Nonsingular x₁ y₁) (h₂ : W.Nonsingular x₂ y₂) (hxy : ¬(x₁ = x₂ ∧ y₁ = W.negY x₂ y₂)),\\n  ClassGroup.mk (WeierstrassCurve.Affine.CoordinateRing.XYIdeal' h₁) *\\n      ClassGroup.mk (Weier\", \"doc\": \"For an affine Weierstrass curve $ W $ over a field $ F $, if $ (x_1, y_1) $ and $ (x_2, y_2) $ are nonsingular points on $ W $ that are not inverses (i.e., $ x_1 \\neq x_2 $ or $ y_1 \\neq -y_2 - a_1 x_2 \"}\n  {\"name\": \"WeierstrassCurve.Affine.CoordinateRing.XYIdeal_eq₂\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Affine/Point\", \"type\": \"∀ {F : Type u} [inst : Field F] {W : WeierstrassCurve.Affine F} [inst_1 : DecidableEq F] {x₁ x₂ y₁ y₂ : F},\\n  W.Equation x₁ y₁ →\\n    W.Equation x₂ y₂ →\\n      ¬(x₁ = x₂ ∧ y₁ = W.negY x₂ y₂) →\\n        WeierstrassCurve.Affine.CoordinateRing.XYIdeal W x₂ (Polynomial.C y₂) =\\n          WeierstrassCurve.Af\", \"doc\": \"For two distinct points $(x_1, y_1)$ and $(x_2, y_2)$ on an affine Weierstrass curve $W$ over a field $F$ that are not symmetric with respect to the curve's group law (i.e., $y_1 \\neq -y_2 - a_1 x_2 - \"}\n  {\"name\": \"WeierstrassCurve.Affine.nonsingular_negAdd_of_eval_derivative_ne_zero\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Affine/Formula\", \"type\": \"∀ {R : Type r} [inst : CommRing R] {W' : WeierstrassCurve.Affine R} {x₁ x₂ y₁ ℓ : R},\\n  W'.Equation (W'.addX x₁ x₂ ℓ) (W'.negAddY x₁ x₂ y₁ ℓ) →\\n    Polynomial.eval (W'.addX x₁ x₂ ℓ) (Polynomial.derivative (W'.addPolynomial x₁ y₁ ℓ)) ≠ 0 →\\n      W'.Nonsingular (W'.addX x₁ x₂ ℓ) (W'.negAddY x₁ x₂ y₁ ℓ\", \"doc\": \"Let $ W $ be an affine Weierstrass curve over a ring $ R $. If the point $ (x_3, y_3) = (\\\\ell^2 + a_1 \\\\ell - a_2 - x_1 - x_2, \\\\ell(x_3 - x_1) - y_1) $ satisfies the Weierstrass equation and the deriva\"}\n  {\"name\": \"WeierstrassCurve.Affine.CoordinateRing.XYIdeal_mul_XYIdeal\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Affine/Point\", \"type\": \"∀ {F : Type u} [inst : Field F] {W : WeierstrassCurve.Affine F} [inst_1 : DecidableEq F] {x₁ x₂ y₁ y₂ : F},\\n  W.Equation x₁ y₁ →\\n    W.Equation x₂ y₂ →\\n      ¬(x₁ = x₂ ∧ y₁ = W.negY x₂ y₂) →\\n        WeierstrassCurve.Affine.CoordinateRing.XIdeal W (W.addX x₁ x₂ (W.slope x₁ x₂ y₁ y₂)) *\\n            (W\", \"doc\": \"For two points $(x_1, y_1)$ and $(x_2, y_2)$ on an affine Weierstrass curve $W$ over a field $F$ satisfying $x_1 \\neq x_2$ or $y_1 \\neq -y_2 - a_1 x_2 - a_3$, the product of the ideal generated by $X - \"}\n  {\"name\": \"WeierstrassCurve.Affine.CoordinateRing.XYIdeal_neg_mul\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Affine/Point\", \"type\": \"∀ {F : Type u} [inst : Field F] {W : WeierstrassCurve.Affine F} {x y : F},\\n  W.Nonsingular x y →\\n    WeierstrassCurve.Affine.CoordinateRing.XYIdeal W x (Polynomial.C (W.negY x y)) *\\n        WeierstrassCurve.Affine.CoordinateRing.XYIdeal W x (Polynomial.C y) =\\n      WeierstrassCurve.Affine.Coordinate\", \"doc\": \"For a nonsingular point $(x, y)$ on an affine Weierstrass curve $W$ over a ring $R$, the product of the ideals generated by $(X - x, Y - (-y - a_1 x - a_3))$ and $(X - x, Y - y)$ in the coordinate rin\"}\n  {\"name\": \"WeierstrassCurve.Affine.CoordinateRing.degree_norm_ne_one\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Affine/Point\", \"type\": \"∀ {R : Type r} [inst : CommRing R] {W' : WeierstrassCurve.Affine R} [IsDomain R] (x : W'.CoordinateRing),\\n  ((Algebra.norm (Polynomial R)) x).degree ≠ 1\", \"doc\": \"For any element $ x $ in the coordinate ring of an affine Weierstrass curve over a domain $ R $, the degree of the norm of $ x $ as an element of $ R[X] $ is not equal to 1. This norm arises from the \"}\n  {\"name\": \"WeierstrassCurve.Affine.CoordinateRing.natDegree_norm_ne_one\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Affine/Point\", \"type\": \"∀ {R : Type r} [inst : CommRing R] {W' : WeierstrassCurve.Affine R} [IsDomain R] (x : W'.CoordinateRing),\\n  ((Algebra.norm (Polynomial R)) x).natDegree ≠ 1\", \"doc\": \"For any element $x$ in the coordinate ring of an affine Weierstrass curve over a domain $R$, the natural degree of the norm of $x$ in the polynomial ring $R[X]$ is not equal to 1.\"}\n  {\"name\": \"WeierstrassCurve.Affine.CoordinateRing.YClass_ne_zero\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Affine/Point\", \"type\": \"∀ {R : Type r} [inst : CommRing R] {W' : WeierstrassCurve.Affine R} [Nontrivial R] (y : Polynomial R),\\n  WeierstrassCurve.Affine.CoordinateRing.YClass W' y ≠ 0\", \"doc\": \"For a non-trivial base ring $ R $, the element $ Y - y $ in the coordinate ring of an affine Weierstrass curve (defined as the quotient ring $ R[X,Y] $ modulo the Weierstrass polynomial ideal) is not \"}\n",
+   "date": "2026-10-22",
+   "verdict": "No match: Clifford algebras and elliptic coordinate-ideal formulas do not state Clifford inequality on nodal support subcurves."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A very ample line bundle with nonzero first cohomology on a nodal curve has a connected subcurve of degree e at least two with h0 at most e divided by two plus one",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"ChevalleyThm.degBound\", \"module\": \"Mathlib/RingTheory/Spectrum/Prime/ChevalleyComplexity\", \"type\": \"ℕ → (m : ℕ) → ℕ → Multiset (Fin m) → ℕ\", \"doc\": \"The function computes a degree bound for Chevalley's theorem by taking $k + n$ and a function that adds 1 to the count of each natural number obtained from mapping $\\\\text{Fin.val}$ over the multiset $\"}\n  {\"name\": \"WeierstrassCurve.Affine.CoordinateRing.degree_norm_ne_one\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Affine/Point\", \"type\": \"∀ {R : Type r} [inst : CommRing R] {W' : WeierstrassCurve.Affine R} [IsDomain R] (x : W'.CoordinateRing),\\n  ((Algebra.norm (Polynomial R)) x).degree ≠ 1\", \"doc\": \"For any element $ x $ in the coordinate ring of an affine Weierstrass curve over a domain $ R $, the degree of the norm of $ x $ as an element of $ R[X] $ is not equal to 1. This norm arises from the \"}\n  {\"name\": \"WeierstrassCurve.Affine.CoordinateRing.natDegree_norm_ne_one\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Affine/Point\", \"type\": \"∀ {R : Type r} [inst : CommRing R] {W' : WeierstrassCurve.Affine R} [IsDomain R] (x : W'.CoordinateRing),\\n  ((Algebra.norm (Polynomial R)) x).natDegree ≠ 1\", \"doc\": \"For any element $x$ in the coordinate ring of an affine Weierstrass curve over a domain $R$, the natural degree of the norm of $x$ in the polynomial ring $R[X]$ is not equal to 1.\"}\n  {\"name\": \"WeierstrassCurve.natDegree_preΨ'_le\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/DivisionPolynomial/Degree\", \"type\": \"∀ {R : Type u} [inst : CommRing R] (W : WeierstrassCurve R) (n : ℕ),\\n  (W.preΨ' n).natDegree ≤ (n ^ 2 - if Even n then 4 else 1) / 2\", \"doc\": \"For any natural number $ n $, the natural degree of the $ n $-th pre-normalized division polynomial $ \\\\Psi'_n $ associated with a Weierstrass curve satisfies $ \\\\deg(\\\\Psi'_n) \\\\leq \\\\frac{n^2 - 4}{2} $ i\"}\n  {\"name\": \"ChevalleyThm.MvPolynomialC.degBound_pos\", \"module\": \"Mathlib/RingTheory/Spectrum/Prime/ChevalleyComplexity\", \"type\": \"∀ (k : ℕ) (D : ℕ → ℕ) (n : ℕ), 0 < ChevalleyThm.MvPolynomialC.degBound k D n\", \"doc\": \"For any natural number $k$ and function $D : \\\\mathbb{N} \\\\to \\\\mathbb{N}$, the degree bound $\\\\text{degBound}\\\\,k\\\\,D\\\\,n$ satisfies $0 < \\\\text{degBound}\\\\,k\\\\,D\\\\,n$ for all $n \\\\in \\\\mathbb{N}$.\"}\n  {\"name\": \"WeierstrassCurve.natDegree_preΨ_le\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/DivisionPolynomial/Degree\", \"type\": \"∀ {R : Type u} [inst : CommRing R] (W : WeierstrassCurve R) (n : ℤ),\\n  (W.preΨ n).natDegree ≤ (n.natAbs ^ 2 - if Even n then 4 else 1) / 2\", \"doc\": \"For any integer $ n $, the natural degree of the pre-division polynomial $ \\\\Psi_n $ for a Weierstrass curve satisfies $ \\\\deg(\\\\Psi_n) \\\\leq \\\\frac{|n|^2 - 4}{2} $ if $ n $ is even, and $ \\\\deg(\\\\Psi_n) \\\\le\"}\n  {\"name\": \"WeierstrassCurve.natDegree_preΨ'_pos\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/DivisionPolynomial/Degree\", \"type\": \"∀ {R : Type u} [inst : CommRing R] (W : WeierstrassCurve R) {n : ℕ}, 2 < n → ↑n ≠ 0 → 0 < (W.preΨ' n).natDegree\", \"doc\": \"For a Weierstrass curve $ W $ over a commutative ring $ R $, if $ n $ is a natural number satisfying $ 2 < n $ and $ n \\neq 0 $ in $ R $, then the natural degree of the pre-normalized division polynomi\"}\n  {\"name\": \"AlgebraicGeometry.AffineSpace.not_isIntegralHom\", \"module\": \"Mathlib/AlgebraicGeometry/AffineSpace\", \"type\": \"∀ {n : Type v} (S : AlgebraicGeometry.Scheme) [Nonempty ↥S] [Nonempty n],\\n  ¬AlgebraicGeometry.IsIntegralHom (AlgebraicGeometry.AffineSpace n S ↘ S)\", \"doc\": \"For any nonempty scheme $ S $ and nonempty type $ n $, the canonical morphism from the affine $ n $-space $ \\\\mathbb{A}^n_S $ to $ S $ is not an integral morphism of schemes.\"}\n",
+   "date": "2026-10-22",
+   "verdict": "No match: Clifford algebras and elliptic coordinate-ideal formulas do not state Clifford inequality on nodal support subcurves."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Clifford\", \"degree\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-22",
+   "verdict": "No match: Clifford algebras and elliptic coordinate-ideal formulas do not state Clifford inequality on nodal support subcurves."
+  },
+  {
+   "tool": "grep",
+   "query": "Clifford|special.*divisor|dualizing.*section",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-22",
+   "verdict": "No match: Clifford algebras and elliptic coordinate-ideal formulas do not state Clifford inequality on nodal support subcurves."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Clifford theorem for special invertible sheaves on nodal reducible curves",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"CliffordAlgebra.instAlgebra'\", \"module\": \"Mathlib.LinearAlgebra.CliffordAlgebra.Basic\", \"type\": \"{R A M} [CommSemiring R] [AddCommGroup M] [CommRing A] [Algebra R A] [Module R M] [Module A M] (Q : QuadraticForm A M)\\n  [IsScalarTower R A M] : Algebra R (CliffordAlgebra Q)\", \"doc\": \"Given a commutative ring $ R $, an additive commutative group $ M $ equipped with an $ R $-module structure, and a quadratic form $ Q $ on $ M $, the Clifford algebra $ \\\\mathrm{Cl}(R, M, Q) $ inherits\"}\n  {\"name\": \"instInhabitedCliffordAlgebra\", \"module\": \"Mathlib.LinearAlgebra.CliffordAlgebra.Basic\", \"type\": \"{R : Type u_1} →\\n  [inst : CommRing R] →\\n    {M : Type u_2} →\\n      [inst_1 : AddCommGroup M] → [inst_2 : Module R M] → (Q : QuadraticForm R M) → Inhabited (CliffordAlgebra Q)\", \"doc\": \"The Clifford algebra $ \\\\mathrm{Cl}(R, M, Q) $ over a commutative ring $ R $, for an $ R $-module $ M $ equipped with a quadratic form $ Q $, is defined as the quotient of the tensor algebra $ \\\\mathrm{\"}\n  {\"name\": \"CliffordAlgebra.ι_range_comap_involute\", \"module\": \"Mathlib.LinearAlgebra.CliffordAlgebra.Conjugation\", \"type\": \":\\n  (LinearMap.range (ι Q)).comap (involute : CliffordAlgebra Q →ₐ[R] CliffordAlgebra Q).toLinearMap =\\n    LinearMap.range (ι Q)\", \"doc\": \"The preimage of the image of the module under the Clifford algebra involution is equal to the image of the module itself, i.e., $\\\\mathrm{Cl}(R, M, Q)\\\\text{-}\\\\mathrm{involute}^{-1}(\\\\mathrm{range}(\\\\iota\"}\n  {\"name\": \"CliffordAlgebra.instNontrivialOfInvertibleOfNat\", \"module\": \"Mathlib.LinearAlgebra.CliffordAlgebra.Contraction\", \"type\": \"[Nontrivial R] [Invertible (2 : R)] : Nontrivial (CliffordAlgebra Q)\", \"doc\": \"If $ R $ is a nontrivial commutative ring and $ 2 $ is invertible in $ R $, then the Clifford algebra $ \\\\mathrm{Cl}(R, M, Q) $ associated with a quadratic form $ Q $ on an $ R $-module $ M $ is also n\"}\n  {\"name\": \"CliffordAlgebra.invOf_ι_mul_ι_mul_ι\", \"module\": \"Mathlib.LinearAlgebra.CliffordAlgebra.Inversion\", \"type\": \"(a b : M) [Invertible (ι Q a)] [Invertible (Q a)] :\\n  ⅟(ι Q a) * ι Q b * ι Q a = ι Q ((⅟(Q a) * QuadraticMap.polar Q a b) • a - b)\", \"doc\": \"For invertible elements $ a, b $ in a module $ M $ over a commutative ring $ R $ with quadratic form $ Q $, the Clifford algebra satisfies the identity $ (\\\\iota(a))^{-1} \\\\iota(b) \\\\iota(a) = \\\\iota\\\\left\"}\n  {\"name\": \"CliffordAlgebra.involuteEquiv_symm_apply\", \"module\": \"Mathlib.LinearAlgebra.CliffordAlgebra.Conjugation\", \"type\": \"∀ {R : Type u_1} [inst : CommRing R] {M : Type u_2} [inst_1 : AddCommGroup M] [inst_2 : Module R M]\\n  {Q : QuadraticForm R M} (a : CliffordAlgebra Q), CliffordAlgebra.involuteEquiv.symm a = CliffordAlgebra.involute a\", \"doc\": \"The inverse of the Clifford algebra involution automorphism is equal to the involution itself, i.e., for any element $ a $ in the Clifford algebra $ \\\\mathrm{Cl}(R, M, Q) $, we have $ \\\\iota^{-1}(a) = \\\\\"}\n  {\"name\": \"CliffordAlgebra.involute_involute\", \"module\": \"Mathlib.LinearAlgebra.CliffordAlgebra.Conjugation\", \"type\": \": ∀ a : CliffordAlgebra Q, involute (involute a) = a\", \"doc\": \"For any element $ a $ in the Clifford algebra $ \\\\mathrm{Cl}(Q) $, applying the involution twice yields $ a $, i.e., $ \\\\iota(\\\\iota(a)) = a $.\"}\n  {\"name\": \"CliffordAlgebra.iSup_ι_range_eq_top\", \"module\": \"Mathlib.LinearAlgebra.CliffordAlgebra.Grading\", \"type\": \": ⨆ i : ℕ, LinearMap.range (ι Q) ^ i = ⊤\", \"doc\": \"For a Clifford algebra $\\\\mathrm{Cl}(R, M, Q)$ over a commutative ring $R$ with module $M$ and quadratic form $Q$, the supremum (in the lattice of submodules) of the $i$-th powers of the image of the c\"}\n",
+   "date": "2026-10-22",
+   "verdict": "No match: Clifford algebras and elliptic coordinate-ideal formulas do not state Clifford inequality on nodal support subcurves."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A special very ample line bundle on a connected projective nodal curve has a connected component union of degree e at least two and h0 at most e divided by two plus one",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"ChevalleyThm.degBound\", \"module\": \"Mathlib/RingTheory/Spectrum/Prime/ChevalleyComplexity\", \"type\": \"ℕ → (m : ℕ) → ℕ → Multiset (Fin m) → ℕ\", \"doc\": \"The function computes a degree bound for Chevalley's theorem by taking $k + n$ and a function that adds 1 to the count of each natural number obtained from mapping $\\\\text{Fin.val}$ over the multiset $\"}\n  {\"name\": \"WeierstrassCurve.natDegree_preΨ'_le\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/DivisionPolynomial/Degree\", \"type\": \"∀ {R : Type u} [inst : CommRing R] (W : WeierstrassCurve R) (n : ℕ),\\n  (W.preΨ' n).natDegree ≤ (n ^ 2 - if Even n then 4 else 1) / 2\", \"doc\": \"For any natural number $ n $, the natural degree of the $ n $-th pre-normalized division polynomial $ \\\\Psi'_n $ associated with a Weierstrass curve satisfies $ \\\\deg(\\\\Psi'_n) \\\\leq \\\\frac{n^2 - 4}{2} $ i\"}\n  {\"name\": \"ChevalleyThm.numBound\", \"module\": \"Mathlib/RingTheory/Spectrum/Prime/ChevalleyComplexity\", \"type\": \"ℕ → (m : ℕ) → ℕ → Multiset (Fin m) → ℕ\", \"doc\": \"A function that computes a numerical bound used in the context of Chevalley's theorem for multivariate polynomials. It takes natural numbers $k$, $m$, $n$ and a multiset $d$ of elements of type $\\\\text\"}\n  {\"name\": \"WeierstrassCurve.natDegree_preΨ_le\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/DivisionPolynomial/Degree\", \"type\": \"∀ {R : Type u} [inst : CommRing R] (W : WeierstrassCurve R) (n : ℤ),\\n  (W.preΨ n).natDegree ≤ (n.natAbs ^ 2 - if Even n then 4 else 1) / 2\", \"doc\": \"For any integer $ n $, the natural degree of the pre-division polynomial $ \\\\Psi_n $ for a Weierstrass curve satisfies $ \\\\deg(\\\\Psi_n) \\\\leq \\\\frac{|n|^2 - 4}{2} $ if $ n $ is even, and $ \\\\deg(\\\\Psi_n) \\\\le\"}\n  {\"name\": \"WeierstrassCurve.Affine.CoordinateRing.degree_norm_ne_one\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Affine/Point\", \"type\": \"∀ {R : Type r} [inst : CommRing R] {W' : WeierstrassCurve.Affine R} [IsDomain R] (x : W'.CoordinateRing),\\n  ((Algebra.norm (Polynomial R)) x).degree ≠ 1\", \"doc\": \"For any element $ x $ in the coordinate ring of an affine Weierstrass curve over a domain $ R $, the degree of the norm of $ x $ as an element of $ R[X] $ is not equal to 1. This norm arises from the \"}\n  {\"name\": \"WeierstrassCurve.natDegree_preΨ'_pos\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/DivisionPolynomial/Degree\", \"type\": \"∀ {R : Type u} [inst : CommRing R] (W : WeierstrassCurve R) {n : ℕ}, 2 < n → ↑n ≠ 0 → 0 < (W.preΨ' n).natDegree\", \"doc\": \"For a Weierstrass curve $ W $ over a commutative ring $ R $, if $ n $ is a natural number satisfying $ 2 < n $ and $ n \\neq 0 $ in $ R $, then the natural degree of the pre-normalized division polynomi\"}\n  {\"name\": \"WeierstrassCurve.Affine.CoordinateRing.natDegree_norm_ne_one\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Affine/Point\", \"type\": \"∀ {R : Type r} [inst : CommRing R] {W' : WeierstrassCurve.Affine R} [IsDomain R] (x : W'.CoordinateRing),\\n  ((Algebra.norm (Polynomial R)) x).natDegree ≠ 1\", \"doc\": \"For any element $x$ in the coordinate ring of an affine Weierstrass curve over a domain $R$, the natural degree of the norm of $x$ in the polynomial ring $R[X]$ is not equal to 1.\"}\n  {\"name\": \"Polynomial.cardPowDegreeIsAdmissible\", \"module\": \"Mathlib/NumberTheory/ClassNumber/AdmissibleCardPowDegree\", \"type\": \"{Fq : Type u_1} → [inst : Fintype Fq] → [inst_1 : Field Fq] → Polynomial.cardPowDegree.IsAdmissible\", \"doc\": \"The absolute value on the polynomial ring $\\\\mathbb{F}_q[X]$ defined by $|f| = q^{\\\\deg(f)}$ is admissible, satisfying the required density condition for Euclidean domains. Specifically, for any $\\\\varep\"}\n",
+   "date": "2026-10-23",
+   "verdict": "No match: no nodal-curve Clifford-support theorem; the hits concern other notions."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Minimal supporting subcurve of a nonzero map from a line bundle to the dualizing sheaf satisfies Clifford inequality",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"ChevalleyThm.degBound\", \"module\": \"Mathlib/RingTheory/Spectrum/Prime/ChevalleyComplexity\", \"type\": \"ℕ → (m : ℕ) → ℕ → Multiset (Fin m) → ℕ\", \"doc\": \"The function computes a degree bound for Chevalley's theorem by taking $k + n$ and a function that adds 1 to the count of each natural number obtained from mapping $\\\\text{Fin.val}$ over the multiset $\"}\n  {\"name\": \"AlgebraicGeometry.exists_of_res_zero_of_qcqs_of_top\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiSeparated\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} [CompactSpace ↥X] [QuasiSeparatedSpace ↥X] {f s : ↑(X.presheaf.obj (Opposite.op ⊤))},\\n  TopCat.Presheaf.restrictOpen f (X.basicOpen s) ⋯ = 0 → ∃ n, s ^ n * f = 0\", \"doc\": \"Let $X$ be a quasi-compact and quasi-separated scheme, and let $f$ and $s$ be global sections of the structure sheaf $\\\\mathcal{O}_X$. If the restriction of $f$ to the basic open subset $D(s)$ defined \"}\n  {\"name\": \"AlgebraicGeometry.Scheme.IdealSheafData.range_glueDataObjι_ι_eq_support_inter\", \"module\": \"Mathlib/AlgebraicGeometry/IdealSheaf/Subscheme\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} (I : X.IdealSheafData) (U : ↑X.affineOpens),\\n  Set.range ⇑(CategoryTheory.ConcreteCategory.hom (CategoryTheory.CategoryStruct.comp (I.glueDataObjι U) (↑U).ι).base) =\\n    ↑I.support ∩ ↑↑U\", \"doc\": \"For a scheme $X$ with an ideal sheaf $\\\\mathcal{I}$ and an affine open subset $U \\\\subseteq X$, the image of the composition of the gluing morphism $\\\\mathcal{I}.\\\\text{glueDataObj}\\\\iota(U)$ with the incl\"}\n  {\"name\": \"AlgebraicGeometry.exists_of_res_zero_of_qcqs\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiSeparated\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} {U : TopologicalSpace.Opens ↥X},\\n  IsCompact U.carrier →\\n    IsQuasiSeparated U.carrier →\\n      ∀ {f s : ↑(X.presheaf.obj (Opposite.op U))},\\n        TopCat.Presheaf.restrictOpen f (X.basicOpen s) ⋯ = 0 → ∃ n, s ^ n * f = 0\", \"doc\": \"Let $ X $ be a scheme and $ U $ an open subset of $ X $ that is both quasi-compact and quasi-separated. Suppose $ f $ and $ s $ are sections of the structure sheaf $ \\\\mathcal{O}_X $ over $ U $, and th\"}\n  {\"name\": \"AlgebraicGeometry.exists_pow_mul_eq_zero_of_res_basicOpen_eq_zero_of_isCompact\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiCompact\", \"type\": \"∀ (X : AlgebraicGeometry.Scheme) {U : X.Opens},\\n  IsCompact U.carrier →\\n    ∀ (x f : ↑(X.presheaf.obj (Opposite.op U))),\\n      TopCat.Presheaf.restrictOpen x (X.basicOpen f) ⋯ = 0 → ∃ n, f ^ n * x = 0\", \"doc\": \"Let $X$ be a scheme and $U$ be a compact open subset of $X$. For any sections $f, x \\\\in \\\\mathcal{O}_X(U)$ of the structure sheaf, if $x$ vanishes on the basic open subset $D(f) \\\\subseteq U$ (the locus\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.range_subset_ker_support\", \"module\": \"Mathlib/AlgebraicGeometry/IdealSheaf/Basic\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y),\\n  Set.range ⇑(CategoryTheory.ConcreteCategory.hom f.base) ⊆ ↑(AlgebraicGeometry.Scheme.Hom.ker f).support\", \"doc\": \"For a morphism $ f: X \\to Y $ of schemes, the image of $ f $ (as a subset of $ Y $) is contained within the support of the kernel ideal sheaf associated with $ f $. This means every point in the image \"}\n  {\"name\": \"AlgebraicGeometry.exists_pow_mul_eq_zero_of_res_basicOpen_eq_zero_of_isAffineOpen\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiCompact\", \"type\": \"∀ (X : AlgebraicGeometry.Scheme) {U : X.Opens},\\n  AlgebraicGeometry.IsAffineOpen U →\\n    ∀ (x f : ↑(X.presheaf.obj (Opposite.op U))),\\n      TopCat.Presheaf.restrictOpen x (X.basicOpen f) ⋯ = 0 → ∃ n, f ^ n * x = 0\", \"doc\": \"For an affine open subset $ U $ of a scheme $ X $, if a section $ x $ of the structure sheaf $ \\\\mathcal{O}_X $ over $ U $ vanishes on the basic open set $ D(f) $ defined by a section $ f \\\\in \\\\Gamma(U,\"}\n  {\"name\": \"RootPairing.Base.exists_mem_support_pos_pairingIn_ne_zero\", \"module\": \"Mathlib/LinearAlgebra/RootSystem/Base\", \"type\": \"∀ {ι : Type u_1} {R : Type u_2} {M : Type u_3} {N : Type u_4} [inst : CommRing R] [inst_1 : AddCommGroup M]\\n  [inst_2 : Module R M] [inst_3 : AddCommGroup N] [inst_4 : Module R N] {P : RootPairing ι R M N} {b : P.Base}\\n  [CharZero R] [inst_6 : P.IsCrystallographic] (i : ι), ∃ j ∈ b.support, P.pairin\", \"doc\": \"For any crystallographic root pairing $ P $ and index $ i $, there exists an index $ j $ in the finite support set $ b.\\\\text{support} $ such that the integer-valued pairing $ P.\\\\text{pairingIn}_\\\\mathb\"}\n",
+   "date": "2026-10-23",
+   "verdict": "No match: no nodal-curve Clifford-support theorem; the hits concern other notions."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Clifford\", \"degree\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-23",
+   "verdict": "No match: no nodal-curve Clifford-support theorem; the hits concern other notions."
+  },
+  {
+   "tool": "grep",
+   "query": "Clifford|special.*divisor|dualizing.*section",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-23",
+   "verdict": "No match: no nodal-curve Clifford-support theorem; the hits concern other notions."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Clifford theorem on a subcurve of a projective nodal curve for a very ample special line bundle",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"CliffordAlgebra.instAlgebra'\", \"module\": \"Mathlib.LinearAlgebra.CliffordAlgebra.Basic\", \"type\": \"{R A M} [CommSemiring R] [AddCommGroup M] [CommRing A] [Algebra R A] [Module R M] [Module A M] (Q : QuadraticForm A M)\\n  [IsScalarTower R A M] : Algebra R (CliffordAlgebra Q)\", \"doc\": \"Given a commutative ring $ R $, an additive commutative group $ M $ equipped with an $ R $-module structure, and a quadratic form $ Q $ on $ M $, the Clifford algebra $ \\\\mathrm{Cl}(R, M, Q) $ inherits\"}\n  {\"name\": \"instInhabitedCliffordAlgebra\", \"module\": \"Mathlib.LinearAlgebra.CliffordAlgebra.Basic\", \"type\": \"{R : Type u_1} →\\n  [inst : CommRing R] →\\n    {M : Type u_2} →\\n      [inst_1 : AddCommGroup M] → [inst_2 : Module R M] → (Q : QuadraticForm R M) → Inhabited (CliffordAlgebra Q)\", \"doc\": \"The Clifford algebra $ \\\\mathrm{Cl}(R, M, Q) $ over a commutative ring $ R $, for an $ R $-module $ M $ equipped with a quadratic form $ Q $, is defined as the quotient of the tensor algebra $ \\\\mathrm{\"}\n  {\"name\": \"CliffordAlgebra\", \"module\": \"Mathlib.LinearAlgebra.CliffordAlgebra.Basic\", \"type\": \"{R : Type u_1} →\\n  [inst : CommRing R] →\\n    {M : Type u_2} → [inst_1 : AddCommGroup M] → [inst_2 : Module R M] → QuadraticForm R M → Type (max u_2 u_1)\", \"doc\": \"The Clifford algebra $ \\\\mathrm{Cl}(R, M, Q) $ over a commutative ring $ R $, for an $ R $-module $ M $ equipped with a quadratic form $ Q $, is defined as the quotient of the tensor algebra $ \\\\mathrm{\"}\n  {\"name\": \"CliffordAlgebra.range_ι_le_evenOdd_one\", \"module\": \"Mathlib.LinearAlgebra.CliffordAlgebra.Grading\", \"type\": \": LinearMap.range (ι Q) ≤ evenOdd Q 1\", \"doc\": \"The image of the canonical $ R $-linear inclusion map $ \\\\iota: M \\\\to \\\\mathrm{Cl}(R, M, Q) $ is contained within the odd-graded component of the Clifford algebra $ \\\\mathrm{Cl}(R, M, Q) $.\"}\n  {\"name\": \"WeierstrassCurve.natDegree_preΨ₄_pos\", \"module\": \"Mathlib.AlgebraicGeometry.EllipticCurve.DivisionPolynomial.Degree\", \"type\": \"(h : (2 : R) ≠ 0) : 0 < W.preΨ₄.natDegree\", \"doc\": \"If $2 \\\\neq 0$ in the ring $R$, then the natural degree of the fourth pre-division polynomial $\\\\Psi_4$ associated with a Weierstrass curve over $R$ is positive.\"}\n  {\"name\": \"CliffordAlgebra.evenOdd_comap_involute\", \"module\": \"Mathlib.LinearAlgebra.CliffordAlgebra.Conjugation\", \"type\": \"(n : ZMod 2) : (evenOdd Q n).comap (involute : CliffordAlgebra Q →ₐ[R] CliffordAlgebra Q).toLinearMap = evenOdd Q n\", \"doc\": \"The involution on the Clifford algebra preserves the even and odd subspaces of its $\\\\mathbb{Z}/2\\\\mathbb{Z}$-grading, meaning that applying the involution to elements of the even (resp. odd) subspace r\"}\n  {\"name\": \"CliffordAlgebra.evenOdd_mul_le\", \"module\": \"Mathlib.LinearAlgebra.CliffordAlgebra.Grading\", \"type\": \"(i j : ZMod 2) : evenOdd Q i * evenOdd Q j ≤ evenOdd Q (i + j)\", \"doc\": \"In a Clifford algebra $\\\\mathrm{Cl}(R, M, Q)$ over a commutative ring $R$ with quadratic form $Q$ on an $R$-module $M$, the product of elements from the $i$-th and $j$-th graded submodules (indexed by \"}\n  {\"name\": \"WeierstrassCurve.c₄_of_isShortNF_of_char_three\", \"module\": \"Mathlib.AlgebraicGeometry.EllipticCurve.NormalForms\", \"type\": \": W.c₄ = 0\", \"doc\": \"For a Weierstrass curve in short normal form over a commutative ring of characteristic three, the $ c_4 $ invariant is zero, i.e., $ c_4 = 0 $.\"}\n",
+   "date": "2026-10-23",
+   "verdict": "No match: no nodal-curve Clifford-support theorem; the hits concern other notions."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-gieseker-potential-stability",
+  "date": "2026-10-22",
+  "group": "Q92"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Gieseker stability and closedness of the ten-canonical locus. This input serves Section 3.2, Definition 7 and Theorem 8, printed pp.13--15, and equation (6) in Section 3.3. Local PDF WANTED; read online. Supporting estimate: Section 3.2 proof step (7), printed p.14; support-of-dualizing-section argument and Clifford inequality, as in Gieseker Proposition 1.0.8, printed pp.61--62, referring to Theorem 0.2.3. Agent statement of the precise auxiliary support claim; not an assertion of nonspeciality. Local PDFs WANTED.",
+   "via": [
+    "lem-sfb-gieseker-potential-stability",
+    "lem-sfb-gieseker-ten-canonical-hilbert-stability",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-nodal-special-clifford-subcurve",
+  "worker": "stage1",
+  "group": "Q04",
+  "summary": "Statement unchanged. Minimal support of a nonzero map from L to the dualizing line is connected; every nonzero residual section has full generic support. Section multiplication is therefore without zero products; Hopf plus nodal Riemann--Roch gives the Clifford bound, and very ampleness gives h0 at least two. Three statement-only auxiliary nodes; no attachment and no Mathlib leaf. All cited statements read and verbatim citation witnesses written.",
+  "blueprint": "The inherited det-thm-sf-ctf-stability-direct-images proof (3) alteration route, via Gieseker potential stability: the precise support/Clifford auxiliary for Morrison Section 3.2 step (7), printed p.14. Current latest unit and direct-image proof read; no unit/chapter route changed. Its created.item chain has no blueprint_kind ancestor, so tools/blueprint_refs.py ancestor prints no id and from.node remains null, matching the live item.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-closed-immersion-comp",
+    "why": "Composition of the given projective embedding with the reduced subcurve closed immersion, a general scheme tool; no alteration or unit route is replaced."
+   },
+   {
+    "node": "lem-pc-projective-proper",
+    "why": "Projective-to-proper implication supplies finite type, used only for finiteness of irreducible components; a generic scheme tool, not a replacement alteration route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-closed-immersion-comp",
+  "lem-pc-projective-proper"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q04-542ee5410",
+  "group": "Q04",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q04-542ee5410 (reviewer sub-agent of L); spot-checked: I read the whole split; the mathematics is correct. The statement differs from live only in citation brackets ([a, b] became [a] [b]), so it is unchanged in substance. The item is still unsplit on live and has no repair note. Step 1 takes the nonzero map L→ω_D from H^1(D,L)≠0 by Stacks 0BS2(5). The component count is finite by the projective-proper, finite-type-over-Noetherian and finitely-many-components nodes. Reducedness gives a nonempty support and shows that I_Y kills the map, so the annihilator node (Stacks 0E33(2), checked in curves.tex) moves it down to L|_Y→ω_Y. Step 2: minimal support forces Y to be connected, and every nonzero w in Hom(M,ω_Y) is generically nonzero on all of Y. Step 3: section multiplication has no zero products. Hopf gives dim V+dim W−1≤g, and nodal Riemann–Roch gives dim V−dim W=e+1−g, so 2dim V≤e+2. Step 4: the composite of closed immersions plus generation by the coordinate sections gives h^0≥2, hence e≥2. The three new nodes are true. Riemann–Roch matches 0BS2, 0BS6 (Gorenstein) and 0AYU. The annihilator node is 0E33; nodality of Y holds branch by branch. Hopf is classical; I tested polynomial multiplication (equality) and ℂ over ℝ (shows algebraic closedness is needed). No new node is a duplicate. I read the nearest existing nodes in full: gorenstein-relative-dualizing, proper-nodal-dualizing-base-change, curve-ideal-h1-subcurve-obstruction, residue-valuation-product-dimension (needs a single field with a valuation ring), trf-degree-weighted-irreducible-components and trf-nodal-subcurve-boundary. Each covers at most one clause. Accepted tool uses: lem-pc-projective-proper and lem-weil-pbc-closed-immersion-comp. The null from.node is inherited from the live item. FIX for B3: the item's stmt_deps gain def-weil-algebraic-closure, def-pc-reduced-scheme, def-weil-pure-dimension and def-weil-connected-scheme, with the statement text unchanged. lem-sfb-nodal-line-serre-riemann-roch gains [def-weil-irreducible-components] inline and in stmt_deps.; 2 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.NodalSpecialCliffordSubcurve",
+  "declaration": "AlgebraicGeometry.exists_nodal_special_clifford_subcurve",
+  "file": "lean/Sheaf/AlgebraicGeometry/NodalSpecialCliffordSubcurve.lean",
+  "statement": "theorem exists_nodal_special_clifford_subcurve (k : Type u) [Field k] [IsAlgClosed k] (D : Scheme.{u}) (f : D ⟶ Spec (.of k)) [IsHProjective f] [ConnectedSpace D] [IsReduced D] (hpure : D.IsPureDimension 1) (hnodal : ∀ x : D, x ∉ f.smoothLocus → Nonempty (AdicCompletion (IsLocalRing.maximalIdeal (D.presheaf.stalk x)) (D.presheaf.stalk x) ≃+* (MvPowerSeries (Fin 2) k ⧸ Ideal.span {(MvPowerSeries.X 0 : MvPowerSeries (Fin 2) k) * (MvPowerSeries.X 1 : MvPowerSeries (Fin 2) k)}))) (L : D.Modules) [L.IsInvertible] (hvery : IsVeryAmple f L) (hspecial : Nontrivial ((RingedSpace.moduleCohomology D.toRingedSpace 1).obj L)) : ∃ (Y : Scheme.{u}) (i : Y ⟶ D), IsClosedImmersion i ∧ IsReduced Y ∧ ConnectedSpace Y ∧ (∃ S : Set (Set D), S ⊆ irreducibleComponents D ∧ Set.range i = ⋃₀ S) ∧ ∃ (m : ℕ) (Z : Fin m → Scheme.{u}) (hZ : ∀ a, IsIntegral (Z a)) (j : ∀ a, Z a ⟶ Y), (∀ a, IsClosedImmersion (j a)) ∧ Function.Injective (fun a ↦ Set.range (j a)) ∧ (∀ C : Set Y, C ∈ irreducibleComponents Y ↔ ∃ a, Set.range (j a) = C) ∧ ∃ e : ℤ, e = ∑ a : Fin m, @Scheme.Modules.degree k _ (@Scheme.normalization (Z a) (hZ a)) ⟨@Scheme.fromNormalization (Z a) (hZ a) ≫ j a ≫ i ≫ f⟩ ((Scheme.Modules.tensorPullback (@Scheme.fromNormalization (Z a) (hZ a) ≫ j a ≫ i)).obj L) ∧ 2 ≤ e ∧ 2 * (Module.finrank k ((RingedSpace.moduleCohomology Y.toRingedSpace 0 ⋙ ModuleCat.restrictScalars ((Scheme.ΓSpecIso (.of k)).inv ≫ (i ≫ f).appTop).hom).obj ((Scheme.Modules.tensorPullback i).obj L)) : ℤ) ≤ e + 2",
+  "branch": "newtargets-dag",
+  "by": "Q29",
+  "date": "2026-10-23",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-b48cfb65d",
+  "group": "Q29",
+  "result": "pass",
+  "note": "Statement field is verbatim. The record differs from live only in the new lean record and two used stmt_deps (def-pc-module-pullback for tensorPullback; def-sc-ample for IsVeryAmple in its module). Every clause matches the node: alg-closed k; IsHProjective plus ConnectedSpace, IsReduced and IsPureDimension 1; nodal completion iso at the non-smooth points (= the singular points over alg-closed k); IsVeryAmple = O(1) pullback along some closed immersion, as the node says; H^1 nontrivial via the recorded moduleCohomology. Conclusion: reduced connected closed Y with image a union of D-components; integral component family covering each component exactly once; e = sum of canonical Modules.degree on normalizations; 2 ≤ e; 2·h0 ≤ e+2 over ℤ with the canonical k-structure. Edge cases (empty D, n=0, m=0, Y=D, smooth D, char 2, universes) are fine. No definitions; sorry is the only proof; source and blueprint docstrings and the 4-step proof plan are present; no line over 100 chars; no existing duplicate found. Advisory: redundant proof imports. No compile run (no file changed)."
+ }
+}

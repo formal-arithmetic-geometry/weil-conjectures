@@ -1,0 +1,343 @@
+{
+ "id": "lem-sfb-coherent-regular-hyperplane-restriction",
+ "kind": "statement",
+ "title": "A common regular hyperplane and twisted cohomology restriction sequences",
+ "statement": "Let $k$ be an infinite field [def-weil-field], $n\\geq1$, and $E_1,\\ldots,E_v$ a finite collection of coherent modules [pqf-def-coherent] on $X=\\mathbf P^n_k$. Use twists $E(d)=E\\otimes\\mathcal O_X(d)$ from [def-pc-projective-space-twist] and module sheaf cohomology [pqf-def-cohomology]. There is a nonzero linear form $s=\\sum_{j=0}^n a_jT_j\\in H^0(X,\\mathcal O_X(1))$ such that, for the closed immersion $i:H=V(s)\\hookrightarrow X$ [def-weil-closed-immersion], the following hold. There is an isomorphism $H\\cong\\mathbf P^{n-1}_k$ identifying $i^*\\mathcal O_X(d)$ with $\\mathcal O_H(d)$ for every integer $d$, with pullback as in [def-pc-module-pullback]. For each $\\alpha$ put $G_\\alpha=i^*E_\\alpha$, which is coherent. For every integer $d$ multiplication by $s$ and restriction give a short exact sequence\n$$0\\longrightarrow E_\\alpha(d-1)\\xrightarrow{s}E_\\alpha(d)\\longrightarrow i_*(G_\\alpha(d))\\longrightarrow0.$$\nHere $(i_*M)(U)=M(i^{-1}U)$ with its induced $\\mathcal O_X(U)$-action. For every $q\\geq0$ there is a natural identification\n$$H^q(X,i_*(G_\\alpha(d)))\\cong H^q(H,G_\\alpha(d));$$\nin particular the associated cohomology sequence has consecutive terms\n$$H^q(X,E_\\alpha(d-1))\\xrightarrow{s}H^q(X,E_\\alpha(d))\\longrightarrow H^q(H,G_\\alpha(d))\\longrightarrow H^{q+1}(X,E_\\alpha(d-1)).$$\nThe short exact sequences and the restriction maps are natural in morphisms between the chosen modules, and restriction commutes with multiplying sections by linear forms.",
+ "source": {
+  "document": "literature/stacks-project/varieties.tex",
+  "place": "Tag 08A0 (lemma-exact-sequence-induction), the following remark (remark-exact-sequence-induction) on finitely many modules, Tag 089Z (lemma-hyperplane), and Tag 0EGK (remark-exact-sequence-induction-cohomology). Naturality is for the multiplication and restriction arrows in those sequences."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "pqf-def-coherent",
+  "def-pc-projective-space-twist",
+  "pqf-def-cohomology",
+  "def-pc-module-pullback",
+  "def-weil-closed-immersion",
+  "def-pc-zero-scheme",
+  "def-weil-pbc-module-cohomology-fmap",
+  "def-sc-module-cohomology-boundary",
+  "def-sc-tensor-pullback-power-comparison"
+ ],
+ "proof": [
+  {
+   "text": "Write $U_j=D_+(T_j)=\\operatorname{Spec}A_j$, where $A_j=k[x_\\ell\\mid\\ell\\ne j]$ and $x_\\ell=T_\\ell/T_j$. These opens cover $X$: a homogeneous prime containing all $T_j$ would contain the irrelevant ideal. Each $A_j$ is a finitely generated $k$-algebra, so [lem-wf-affine-noetherian-components] makes it Noetherian. Thus $X$ is locally Noetherian and [pqf-lem-coherent-ft-locnoeth] makes each $E_\\alpha$ quasi-coherent. Put $M_{\\alpha j}=\\Gamma(U_j,E_\\alpha)$; [lem-weil-pbc-coherent-affine-sections-finite] makes it finite, and the counit in [lem-weil-pbc-affine-tilde-gamma-adjunction] identifies $E_\\alpha|_{U_j}$ with $\\widetilde M_{\\alpha j}$. The frames in [def-pc-projective-space-twist] trivialize every twist on $U_j$; multiplication by $s=\\sum a_\\ell T_\\ell$ is consequently multiplication by $f_j=a_j+\\sum_{\\ell\\ne j}a_\\ell x_\\ell$ on $M_{\\alpha j}$, independently of the twist degree.",
+   "uses": [
+    "def-pc-proj",
+    "def-pc-projective-space-twist",
+    "lem-wf-affine-noetherian-components",
+    "pqf-lem-coherent-ft-locnoeth",
+    "lem-weil-pbc-coherent-affine-sections-finite",
+    "lem-weil-pbc-affine-tilde-gamma-adjunction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 08A0 (lemma-exact-sequence-induction), first two paragraphs: standard affine charts and multiplication by the affine linear polynomial."
+   }
+  },
+  {
+   "text": "Use the coefficient space $V=k^{n+1}$. For every $\\alpha,j$ the set $\\operatorname{Ass}_{A_j}(M_{\\alpha j})$ is finite by [lem-weil-pbc-noetherian-associated-primes-finite]. For a prime $\\mathfrak p$ in this set, let $W_{\\alpha j\\mathfrak p}$ be the inverse image of $\\mathfrak p$ under the $k$-linear map $V\\to A_j$, $(a_\\ell)\\mapsto f_j$. It is a linear subspace, and it is proper: the coefficient vector with $a_j=1$ and all other entries zero maps to $1\\notin\\mathfrak p$. There are finitely many such subspaces, since both the module collection and the chart collection are finite. Include $\\{0\\}\\subset V$, which is proper since $n+1>0$. Apply [lem-pc-finite-linear-avoidance], using the infinite-field hypothesis, to choose a vector outside their union. It gives a nonzero linear form $s$ and $f_j\\notin\\mathfrak p$ for every listed prime. Including $\\{0\\}$ also handles an empty module collection or zero modules without requiring their associated-prime sets to be nonempty.",
+   "uses": [
+    "lem-weil-pbc-noetherian-associated-primes-finite",
+    "lem-pc-finite-linear-avoidance"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 08A0 (lemma-exact-sequence-induction), associated-prime avoidance paragraph, and remark-exact-sequence-induction: apply avoidance simultaneously to all modules and all charts."
+   }
+  },
+  {
+   "text": "By [lem-weil-pbc-noetherian-module-zerodivisors-union-associated-primes], each chosen $f_j$ is a nonzerodivisor on every $M_{\\alpha j}$: $f_jm=0$ implies $m=0$. This remains injective on every localization $(M_{\\alpha j})_r$. Indeed, if $f_j(m/r^b)=0$, then $r^c f_jm=0$ for some $c$, hence $r^cm=0$ by injectivity on $M_{\\alpha j}$, so $m/r^b=0$. Under the principal-open descriptions of [lem-weil-pbc-spec-module-tilde-sections] and the counit of [lem-weil-pbc-affine-tilde-gamma-adjunction], these are exactly the multiplication maps on a basis of opens of each $U_j$. Therefore their sheaf kernels vanish. Since the $U_j$ cover $X$, multiplication $E_\\alpha(-1)\\xrightarrow{s}E_\\alpha$ is injective for every $\\alpha$. The same local calculation proves injectivity $E_\\alpha(d-1)\\xrightarrow{s}E_\\alpha(d)$ for every integer $d$.",
+   "uses": [
+    "lem-weil-pbc-noetherian-module-zerodivisors-union-associated-primes",
+    "lem-weil-pbc-spec-module-tilde-sections",
+    "lem-weil-pbc-affine-tilde-gamma-adjunction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 08A0 (lemma-exact-sequence-induction), injectivity using Algebra Tag 00LD (lemma-ass-zero-divisors); localization argument written out."
+   }
+  },
+  {
+   "text": "Let $S=k[T_0,\\ldots,T_n]$ with its usual grading. The graded quotient $S\\twoheadrightarrow S/(s)$ gives a closed immersion $\\operatorname{Proj}(S/(s))\\to X$ by [prop-nagata-relative-proj-functoriality]. On $U_j$ its ring map is the quotient $A_j\\to A_j/(f_j)$: taking degree-zero fractions after inverting $T_j$ makes $s$ equal to $T_j f_j$. Thus this closed immersion is exactly the zero subscheme $i:H=V(s)\\hookrightarrow X$, with the local quotient description of [def-weil-closed-immersion]. Reindex coordinates so that $a_n\\ne0$. The maps\n$$k[S_0,\\ldots,S_{n-1}]\\longrightarrow S/(s),\\quad S_j\\longmapsto\\overline T_j,$$\nand the map in the other direction with $\\overline T_j\\mapsto S_j$ for $j<n$ and $\\overline T_n\\mapsto-a_n^{-1}\\sum_{j<n}a_jS_j$ are inverse graded maps. The graded-isomorphism clause of [prop-nagata-relative-proj-functoriality] therefore identifies $H$ with $\\mathbf P^{n-1}_k$. On its standard chart indexed by $j<n$, this identification sends $S_\\ell/S_j$ to $T_\\ell/T_j$.",
+   "uses": [
+    "def-pc-proj",
+    "def-weil-closed-immersion",
+    "prop-nagata-relative-proj-functoriality"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 089Z (lemma-hyperplane), proof: quotient by the linear form, elimination of a variable, and functoriality of Proj."
+   }
+  },
+  {
+   "text": "The charts with $j<n$ cover $H$: in $S/(s)$ the relation expresses $T_n$ as a linear combination of $T_0,\\ldots,T_{n-1}$, so these elements generate the irrelevant ideal. On their intersections, the pulled-back frames of $\\mathcal O_X(d)$ have transition $(T_j/T_\\ell)^d=(S_j/S_\\ell)^d$. The definition [def-pc-projective-space-twist] identifies this glued invertible module with $\\mathcal O_H(d)$ for every $d\\in\\mathbf Z$, including negative degrees. Put $G_\\alpha=i^*E_\\alpha$. It is quasi-coherent by [lem-weil-pbc-module-pullback-quasi-coherent]. The natural affine pullback isomorphism [lem-weil-pbc-module-pullback-affine-sections] describes it on $H\\cap U_j=\\operatorname{Spec}(A_j/(f_j))$ by $M_{\\alpha j}\\otimes_{A_j}A_j/(f_j)$. If $m_1,\\ldots,m_b$ generate $M_{\\alpha j}$, the elements $m_t\\otimes1$ generate this tensor product over $A_j/(f_j)$, since $m\\otimes c=\\sum_t(m_t\\otimes1)c_t c$ when $m=\\sum_t c_t m_t$. Hence $G_\\alpha$ is of finite type. The projective-space charts of $H$ are Noetherian by [lem-wf-affine-noetherian-components], so [pqf-lem-coherent-ft-locnoeth] proves coherence. The twist $G_\\alpha(d)$ is coherent as well, since it is locally isomorphic to $G_\\alpha$.",
+   "uses": [
+    "def-pc-projective-space-twist",
+    "lem-weil-pbc-module-pullback-quasi-coherent",
+    "lem-weil-pbc-module-pullback-affine-sections",
+    "lem-wf-affine-noetherian-components",
+    "pqf-lem-coherent-ft-locnoeth"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 089Z (lemma-hyperplane), final assertion on twists; Tag 0EGK (remark-exact-sequence-induction-cohomology); the affine pullback computation supplies coherence of the restricted module."
+   }
+  },
+  {
+   "text": "Fix $\\alpha$ and $d\\in\\mathbf Z$. On $U_j$, trivialize both twists by powers of $T_j$. The multiplication map is $M_{\\alpha j}\\xrightarrow{f_j}M_{\\alpha j}$, with cokernel $M_{\\alpha j}/f_jM_{\\alpha j}$. The canonical isomorphism\n$$M_{\\alpha j}/f_jM_{\\alpha j}\\cong M_{\\alpha j}\\otimes_{A_j}A_j/(f_j)$$\nsends $\\overline m$ to $m\\otimes1$; its inverse sends $m\\otimes\\overline a$ to $\\overline{am}$, so both maps are well-defined and inverse. By [lem-weil-pbc-module-pullback-affine-sections], this is the affine model of $G_\\alpha(d)$, using the restricted twist frame. Its pushforward on a principal open $D(r)\\subset U_j$ has sections $(M_{\\alpha j}/f_jM_{\\alpha j})_r$, by [lem-weil-pbc-spec-module-tilde-sections] on $\\operatorname{Spec}(A_j/(f_j))$ and the definition of $i_*$. The associated-sheaf functor preserves cokernels by [lem-weil-pbc-affine-tilde-gamma-adjunction]; its quotient arrow here is $m\\mapsto m\\otimes1$, which is precisely restriction. These identifications commute with localization, and the twist transition units agree by Step 5. They consequently identify the global cokernel with $i_*(G_\\alpha(d))$ and its arrow with restriction. Combine this with Step 3 to obtain the asserted short exact sequence for every $\\alpha,d$.",
+   "uses": [
+    "lem-weil-pbc-module-pullback-affine-sections",
+    "lem-weil-pbc-spec-module-tilde-sections",
+    "lem-weil-pbc-affine-tilde-gamma-adjunction",
+    "def-pc-module-pullback",
+    "def-pc-projective-space-twist"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 08A0 (lemma-exact-sequence-induction), cokernel paragraph, and Tag 0EGK (remark-exact-sequence-induction-cohomology): direct affine quotient calculation for all twists."
+   }
+  },
+  {
+   "text": "Apply [lem-sc-module-abelian-zariski-cohomology] on $X$ and on $H$: cohomology of any module sheaf agrees canonically and naturally with that of its underlying abelian sheaf. By [def-sc-topological-abelian-cohomology], the latter Zariski cohomology is the cohomology of the underlying topological space. The underlying map of the closed immersion $i$ is a homeomorphism onto a closed subset, by [def-weil-closed-immersion]. Hence [lem-sc-cohomology-closed-immersion-pushforward] applies to the underlying abelian sheaf of $G_\\alpha(d)$. Forgetting the module action commutes with $i_*$ directly on every open, because in both cases its sections are $G_\\alpha(d)(i^{-1}U)$. Composing the two module-to-abelian comparisons with the inverse of the closed-pushforward comparison gives\n$$H^q(X,i_*G_\\alpha(d))\\cong H^q(H,G_\\alpha(d))\\qquad(q\\ge0).$$\nAll three comparisons are natural in the coefficient sheaf by their cited statements; the sectionwise forgetting identification is an identity. Thus the resulting comparison is natural, also in degree zero.",
+   "uses": [
+    "lem-sc-module-abelian-zariski-cohomology",
+    "def-sc-topological-abelian-cohomology",
+    "def-weil-closed-immersion",
+    "lem-sc-cohomology-closed-immersion-pushforward"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 0EGK (remark-exact-sequence-induction-cohomology), cohomology identification, using the more general closed-topological-immersion comparison of Tag 02UV (lemma-cohomology-and-closed-immersions) and Tag 03FD (lemma-cohomology-modules-abelian-agree)."
+   }
+  },
+  {
+   "text": "The category of $\\mathcal O_X$-modules is abelian with enough injectives by [lem-sc-ringed-space-module-sheaves-enough-injectives], and $\\Gamma(X,-)$ is additive and left exact by [lem-sc-global-sections-left-exact]. Therefore [lem-weil-pbc-derived-functor-long-exact] applies to each short exact sequence of Step 6. Its right derived functors are exactly the module cohomology functors of [pqf-def-cohomology]. For every $q\\ge0$, take the four consecutive terms beginning in $H^q(X,E_\\alpha(d-1))$ and use the natural isomorphism of Step 7 on the third term. This gives\n$$H^q(X,E_\\alpha(d-1))\\xrightarrow{s}H^q(X,E_\\alpha(d))\\longrightarrow H^q(H,G_\\alpha(d))\\longrightarrow H^{q+1}(X,E_\\alpha(d-1)).$$\nThe second map is the map induced by restriction followed by the comparison of Step 7, as asserted.",
+   "uses": [
+    "lem-sc-ringed-space-module-sheaves-enough-injectives",
+    "lem-sc-global-sections-left-exact",
+    "lem-weil-pbc-derived-functor-long-exact",
+    "pqf-def-cohomology"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 0EGK (remark-exact-sequence-induction-cohomology), displayed long exact cohomology sequence; derived-functor exact sequence Tag 015B (lemma-higher-derived-functors)."
+   }
+  },
+  {
+   "text": "For a morphism $u:E_\\alpha\\to E_\\beta$, the natural affine pullback identifications of [lem-weil-pbc-module-pullback-affine-sections] turn its restriction into $u\\otimes1$. On $U_j$ the squares for the short exact sequences commute because $u(f_jm)=f_ju(m)$ and $\\overline{u(m)}=(u\\otimes1)(\\overline m)$. These equations respect the twist frames of [def-pc-projective-space-twist] and localization, so give the global morphism of short exact sequences. For any other linear form $t=\\sum b_\\ell T_\\ell$, multiplication in these frames is by $g_j=b_j+\\sum_{\\ell\\ne j}b_\\ell x_\\ell$. The restriction identity is $\\overline{g_jm}=\\overline g_j\\,\\overline m$ in $M_{\\alpha j}/f_jM_{\\alpha j}$; this also holds after localization and therefore on all sections. It proves that restriction commutes with multiplication by linear forms, between the appropriate consecutive twists. Thus both naturality clauses hold for the single $s$ chosen in Step 2.",
+   "uses": [
+    "lem-weil-pbc-module-pullback-affine-sections",
+    "def-pc-projective-space-twist"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tags 08A0 and 0EGK, multiplication and quotient arrows; their functoriality and section multiplication verified by the displayed local equations."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-proj",
+  "def-pc-projective-space-twist",
+  "lem-wf-affine-noetherian-components",
+  "pqf-lem-coherent-ft-locnoeth",
+  "lem-weil-pbc-coherent-affine-sections-finite",
+  "lem-weil-pbc-affine-tilde-gamma-adjunction",
+  "lem-weil-pbc-noetherian-associated-primes-finite",
+  "lem-pc-finite-linear-avoidance",
+  "lem-weil-pbc-noetherian-module-zerodivisors-union-associated-primes",
+  "lem-weil-pbc-spec-module-tilde-sections",
+  "def-weil-closed-immersion",
+  "prop-nagata-relative-proj-functoriality",
+  "lem-weil-pbc-module-pullback-quasi-coherent",
+  "lem-weil-pbc-module-pullback-affine-sections",
+  "def-pc-module-pullback",
+  "lem-sc-module-abelian-zariski-cohomology",
+  "def-sc-topological-abelian-cohomology",
+  "lem-sc-cohomology-closed-immersion-pushforward",
+  "lem-sc-ringed-space-module-sheaves-enough-injectives",
+  "lem-sc-global-sections-left-exact",
+  "lem-weil-pbc-derived-functor-long-exact",
+  "pqf-def-cohomology"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/varieties.tex",
+  "place": "Tag 08A0 (lemma-exact-sequence-induction), remark-exact-sequence-induction, Tag 089Z (lemma-hyperplane), and Tag 0EGK (remark-exact-sequence-induction-cohomology); affine quotient computation expands the twisted sequences; Tags 02UV and 03FD supply the natural cohomology identification."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "hyperplane|exactSequenceInduction",
+   "results": "{\"t\": \"2026-10-22T04:43:46Z\", \"tool\": \"grep\", \"query\": \"hyperplane|exactSequenceInduction\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern Proj construction, ordinary projectivization, convex hyperplanes or linear duals; none supplies a regular hyperplane for coherent module sheaves or its twisted restriction sequences."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A nonzero linear form is a nonzerodivisor on a coherent sheaf on projective space over an infinite field and gives the hyperplane restriction exact sequence",
+   "results": "{\"t\": \"2026-10-22T04:43:46Z\", \"tool\": \"leansearch\", \"query\": \"A nonzero linear form is a nonzerodivisor on a coherent sheaf on projective space over an infinite field and gives the hyperplane restriction exact sequence\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Module.Projective.exists_dual_eq_one\", \"LinearEquiv.map_ne_zero_iff\", \"Module.Projective.exists_dual_ne_zero\", \"LinearMap.BilinForm.Nondegenerate\", \"AlgebraicGeometry.Proj.fromOfGlobalSections_resLE\", \"Projectivization.Independent.casesOn\", \"Module.Dual.range_eq_top_of_ne_zero\", \"Submodule.exists_dual_map_eq_bot_of_lt_top\"], \"digest\": \"8bbad23ef02de93a\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern Proj construction, ordinary projectivization, convex hyperplanes or linear duals; none supplies a regular hyperplane for coherent module sheaves or its twisted restriction sequences."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"hyperplane\"",
+   "results": "{\"t\": \"2026-10-22T04:43:46Z\", \"tool\": \"loogle\", \"query\": \"\\\"hyperplane\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"convex_hyperplane\", \"MeasureTheory.Measure.pi_hyperplane\", \"ProperCone.hyperplane_separation_point\", \"ProperCone.hyperplane_separation\", \"ProperCone.hyperplane_separation'\", \"ProperCone.relative_hyperplane_separation\", \"ProperCone.hyperplane_separation_of_notMem\", \"onePointHyperplaneHomeoUnitSphere\"], \"digest\": \"5bd6ee5de782cf8f\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern Proj construction, ordinary projectivization, convex hyperplanes or linear duals; none supplies a regular hyperplane for coherent module sheaves or its twisted restriction sequences."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Over an infinite field a coherent sheaf on projective space has a hyperplane section acting injectively and a restriction exact sequence compatible with twists and cohomology",
+   "results": "{\"t\": \"2026-10-22T04:43:48Z\", \"tool\": \"leanfinder\", \"query\": \"Over an infinite field a coherent sheaf on projective space has a hyperplane section acting injectively and a restriction exact sequence compatible with twists and cohomology\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Proj.fromOfGlobalSections_morphismRestrict\", \"AlgebraicGeometry.Proj.fromOfGlobalSections_resLE\", \"AlgebraicGeometry.Proj.awayMap_awayToSection\", \"AlgebraicGeometry.Proj.awayMap_awayToSection_assoc\", \"AlgebraicGeometry.Proj.ext\", \"AlgebraicGeometry.Proj.res_apply\", \"AlgebraicGeometry.ProjectiveSpectrum.Proj.structureSheaf\", \"AlgebraicGeometry.sectionInBasicOpen\"], \"digest\": \"9761b6904ccd5c15\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern Proj construction, ordinary projectivization, convex hyperplanes or linear duals; none supplies a regular hyperplane for coherent module sheaves or its twisted restriction sequences."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Generic linear form avoids associated points of finitely many coherent modules on projective n space giving exact multiplication and restriction sequences on projective n minus one space",
+   "results": "{\"t\": \"2026-10-22T04:43:49Z\", \"tool\": \"leanfinder\", \"query\": \"Generic linear form avoids associated points of finitely many coherent modules on projective n space giving exact multiplication and restriction sequences on projective n minus one space\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Projectivization.Independent\", \"AlgebraicGeometry.Proj.openCoverOfISupEqTop\", \"AlgebraicGeometry.ProjIsoSpecTopComponent.FromSpec.carrier.relevant\", \"AlgebraicGeometry.Proj.affineOpenCoverOfIrrelevantLESpan\", \"Profinite.NobelingProof.succ_exact\", \"Projectivization.Dependent\", \"AlgebraicGeometry.Proj.openCoverOfMapIrrelevantEqTop\", \"AlgebraicGeometry.Proj.fromOfGlobalSections\"], \"digest\": \"7d006eea8071e533\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern Proj construction, ordinary projectivization, convex hyperplanes or linear duals; none supplies a regular hyperplane for coherent module sheaves or its twisted restriction sequences."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A common nonzero linear form on projective space acts injectively on finitely many coherent sheaves and yields twisted hyperplane restriction exact sequences",
+   "results": "{\"t\": \"2026-10-22T05:06:23Z\", \"tool\": \"leanfinder\", \"query\": \"A common nonzero linear form on projective space acts injectively on finitely many coherent sheaves and yields twisted hyperplane restriction exact sequences\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.ProjIsoSpecTopComponent.toSpec_injective\", \"Projectivization.map_injective\", \"Profinite.NobelingProof.succ_exact\", \"AlgebraicGeometry.Proj.ext\", \"Module.eval_apply_injective\", \"Module.map_eval_injective\", \"Projectivization.map_mk\", \"Projectivization.map\"], \"digest\": \"767034df9c6a9e6e\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: returned declarations concern the construction and charts of Proj, vector-space projectivization, ordinary sections, or convex/measure hyperplanes; none states the common regular coherent-sheaf hyperplane and twisted restriction sequences."
+  },
+  {
+   "tool": "grep",
+   "query": "hyperplane|exactSequenceInduction|regularHyperplane",
+   "results": "{\"t\": \"2026-10-22T05:06:23Z\", \"tool\": \"grep\", \"query\": \"hyperplane|exactSequenceInduction|regularHyperplane\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: returned declarations concern the construction and charts of Proj, vector-space projectivization, ordinary sections, or convex/measure hyperplanes; none states the common regular coherent-sheaf hyperplane and twisted restriction sequences."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A nonzerodivisor linear section of O(1) on a coherent sheaf on projective space gives a short exact restriction sequence",
+   "results": "{\"t\": \"2026-10-22T05:06:24Z\", \"tool\": \"leansearch\", \"query\": \"A nonzerodivisor linear section of O(1) on a coherent sheaf on projective space gives a short exact restriction sequence\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Proj.res_apply\", \"ModuleCat.Tilde.toOpen\", \"CategoryTheory.Sheaf.ΓRes\", \"AlgebraicGeometry.Proj.fromOfGlobalSections_resLE\", \"AlgebraicGeometry.RingedSpace.res_zero\", \"AlgebraicGeometry.StructureSheaf.res_const'\", \"AlgebraicGeometry.ProjectiveSpectrum.StructureSheaf.SectionSubring.add_mem'\", \"AlgebraicGeometry.ProjectiveSpectrum.StructureSheaf.IsFraction\"], \"digest\": \"49efe51223e9021a\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: returned declarations concern the construction and charts of Proj, vector-space projectivization, ordinary sections, or convex/measure hyperplanes; none states the common regular coherent-sheaf hyperplane and twisted restriction sequences."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For coherent modules on projective n space over an infinite field choose a linear polynomial avoiding their associated primes on every affine chart",
+   "results": "{\"t\": \"2026-10-22T05:06:45Z\", \"tool\": \"leanfinder\", \"query\": \"For coherent modules on projective n space over an infinite field choose a linear polynomial avoiding their associated primes on every affine chart\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Proj.affineOpenCover\", \"AlgebraicGeometry.Proj.affineOpenCoverOfIrrelevantLESpan\", \"AlgebraicGeometry.Proj.openCoverOfISupEqTop\", \"AlgebraicGeometry.Proj.basicOpen\", \"AlgebraicGeometry.Proj.openCoverOfMapIrrelevantEqTop\", \"AlgebraicGeometry.ProjIsoSpecTopComponent.FromSpec.carrier.relevant\", \"AlgebraicGeometry.Proj.openCoverOfMapIrreleventEqTop\", \"AlgebraicGeometry.Proj\"], \"digest\": \"5db56f430919a173\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: returned declarations concern the construction and charts of Proj, vector-space projectivization, ordinary sections, or convex/measure hyperplanes; none states the common regular coherent-sheaf hyperplane and twisted restriction sequences."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-free-quotient-kernel-regularity-bound",
+  "date": "2026-10-22",
+  "group": "Q25"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong §§3.9--3.12, Claim 3.10 and Lemma 3.13, printed p.609. Agent-formulated version: the proof of Lemma 3.13 uses only that rational exceptional curves have constant image in each target fibre; this property replaces its genus-at-least-two and pure-curve target hypotheses. This statement does not assert existence of a semistable source.; de Jong 3.9, projective Hilbert schemes underlying the relative morphism scheme; Hilbert construction prerequisite: Uniform generation and section bounds for projective ideals with fixed Hilbert polynomial; Hilbert construction prerequisite, field boundedness input: Stacks 08AG before passage to families; Stacks 08AG, first paragraph: choose a hyperplane regular on the coherent quotient; 08A0 and 0EGK give the restriction sequences used in dimension induction.",
+   "via": [
+    "lem-sfb-free-quotient-kernel-regularity-bound",
+    "lem-sfb-hilbert-uniform-section-bound",
+    "lem-sfb-projective-hilbert-polynomial-representability",
+    "lem-sfb-high-genus-hom-closure",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sfb-coherent-regular-hyperplane-restriction",
+  "worker": "stage1",
+  "summary": "Read the Stacks proof and split the common regular section construction, linear quotient geometry, all integral twists, coherent pullback, natural closed-pushforward cohomology comparison, long exact sequence, and the two naturality assertions. All non-elementary inputs are existing DAG nodes. Added no nodes; checked empty collections, zero modules, n=1, and negative twists. The item statement is unchanged.",
+  "blueprint": "This created auxiliary item has blueprint.from.node=null (confirmed by blueprint_refs.py ancestor). Its inherited provenance is the Stacks 08AG/08A0 hyperplane restriction input to lem-sfb-free-quotient-kernel-regularity-bound in the recorded Hilbert/alteration chain; steps 1--3 realize common regular-section choice, steps 4--6 the hyperplane and all twist sequences, steps 7--8 the cohomology sequence, and step 9 the multiplication and restriction compatibility. Whole-blueprint searches found no duplicate statement.",
+  "tool_uses": [
+   {
+    "node": "lem-sc-cohomology-closed-immersion-pushforward",
+    "why": "Generic cohomology invariance for a closed topological embedding identifies the third cohomology term; it replaces no step of the alteration unit."
+   },
+   {
+    "node": "lem-sc-global-sections-left-exact",
+    "why": "Generic left exactness of global sections checks the derived-functor theorem hypothesis."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sc-cohomology-closed-immersion-pushforward",
+  "lem-sc-global-sections-left-exact"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q13-988bc13ec",
+  "group": "Q13",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q13-988bc13ec (reviewer sub-agent of L); spot-checked: PASS with no changes. Stacks varieties.tex was read at lemma-hyperplane (089Z, l.6455), lemma-exact-sequence-induction (08A0, l.6496), remark-exact-sequence-induction (l.6553) and remark-exact-sequence-induction-cohomology (0EGK, l.6563). The item statement is unchanged and matches the sources: infinite k, n>=1, finitely many coherent modules, all d in Z, all q>=0. The delivery creates no new nodes and no repair note names the item, so relabelling cannot occur. All 22 cited statements were read. Steps 1-3: Noetherian charts, finite affine sections, and the tilde counit give the finite module M. The map a -> f_j=a_j+sum a_l x_l is k-linear, so the preimage of each associated prime is a subspace, proper because e_j maps to 1. Avoiding finitely many of them plus {0} uses the infinite field, and the module zerodivisor union statement then gives injectivity on every chart, localized, for every d. Step 4: relative-Proj clauses 3 and 2 over Spec k give the closed immersion and the isomorphism with P^{n-1}. I checked (S/(s))_(T_j)=A_j/(f_j) and the inverse graded maps; for n=1, H=P^0. Step 5: the transitions (T_j/T_l)^d agree with the P^{n-1} twists for all integer d; G is quasi-coherent with model M (x) A/(f), of finite type, hence coherent. Step 6: M/fM is isomorphic to M (x) A/(f), sections of i_* on D(r) are the localization, and tilde preserves cokernels by adjunction clause 4; the restriction arrow is given in frames and glues by Step 5. Step 7: the natural module-to-abelian comparison, the Zariski-equals-topological definition and the closed-pushforward invariance compose to the cohomology identification, including q=0. Step 8: the hypotheses of the derived-functor long exact sequence lemma are checked. Step 9 is elementary naturality. Edge cases tested: O_X, a skyscraper at [1:0:...:0], the empty collection, n=1 and negative d. The DAG has no duplicate under rg -L for 08A0/089Z/0EGK/08AG or the keywords. No SGA is cited. I accept the two tool_uses (closed-immersion pushforward cohomology, global sections left exact); the other off-unit tools are Mathlib leaves or slopmaster2-closed."
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.CoherentRegularHyperplaneRestriction",
+  "declaration": "AlgebraicGeometry.ProjectiveSpace.exists_coherent_regular_hyperplane",
+  "declarations": [
+   "AlgebraicGeometry.ProjectiveSpace.regularHyperplaneLinearSection",
+   "AlgebraicGeometry.ProjectiveSpace.regularHyperplaneMultiplication",
+   "AlgebraicGeometry.ProjectiveSpace.regularHyperplaneRestriction",
+   "AlgebraicGeometry.ProjectiveSpace.regularHyperplaneRestrictedMultiplication",
+   "AlgebraicGeometry.ProjectiveSpace.regularHyperplaneConnecting",
+   "AlgebraicGeometry.ProjectiveSpace.exists_coherent_regular_hyperplane"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/CoherentRegularHyperplaneRestriction.lean",
+  "statement": "theorem exists_coherent_regular_hyperplane (k : Type u) [Field k] [Infinite k] (n : ℕ) (hn : 1 ≤ n) (v : ℕ) (E : Fin v → (ℙ(ULift.{u} (Fin (n + 1)); Spec (.of k))).Modules) (hE : ∀ α, RingedSpace.IsCoherent (ℙ(ULift.{u} (Fin (n + 1)); Spec (.of k))).toRingedSpace (E α)) : ∃ a : Fin (n + 1) → k, a ≠ 0 ∧ regularHyperplaneLinearSection k n a ≠ 0 ∧ ∃ (H : Scheme.{u}) (i : H ⟶ ℙ(ULift.{u} (Fin (n + 1)); Spec (.of k))), IsClosedImmersion i ∧ i.ker = Scheme.Modules.Hom.zeroLocus (Scheme.Modules.homOfGlobalSection _ (regularHyperplaneLinearSection k n a)) ∧ ∃ e : H ≅ ℙ(ULift.{u} (Fin ((n - 1) + 1)); Spec (.of k)), e.hom ≫ (ℙ(ULift.{u} (Fin ((n - 1) + 1)); Spec (.of k)) ↘ Spec (.of k)) = i ≫ (ℙ(ULift.{u} (Fin (n + 1)); Spec (.of k)) ↘ Spec (.of k)) ∧ (∀ d : ℤ, Nonempty ((Scheme.Modules.tensorPullback i).obj (twist (ULift.{u} (Fin (n + 1))) (Spec (.of k)) d) ≅ (Scheme.Modules.tensorPullback e.hom).obj (twist (ULift.{u} (Fin ((n - 1) + 1))) (Spec (.of k)) d))) ∧ (∀ α, RingedSpace.IsCoherent H.toRingedSpace ((Scheme.Modules.tensorPullback i).obj (E α))) ∧ (∀ (α : Fin v) (d : ℤ), ∃ w : regularHyperplaneMultiplication k n (E α) d (regularHyperplaneLinearSection k n a) ≫ regularHyperplaneRestriction i (E α) (twist (ULift.{u} (Fin (n + 1))) (Spec (.of k)) (1 + d)) = 0, ∃ hS : (ShortComplex.mk (regularHyperplaneMultiplication k n (E α) d (regularHyperplaneLinearSection k n a)) (regularHyperplaneRestriction i (E α) (twist (ULift.{u} (Fin (n + 1))) (Spec (.of k)) (1 + d))) w).ShortExact, ∀ q : ℕ, ∃ h : IsIso (Scheme.Modules.moduleCohomologyEdgeMap i (MonoidalCategoryStruct.tensorObj (C := H.Modules) ((Scheme.Modules.tensorPullback i).obj (E α)) ((Scheme.Modules.tensorPullback i).obj (twist (ULift.{u} (Fin (n + 1))) (Spec (.of k)) (1 + d)))) q), Function.Exact ((forget₂ _ AddCommGrpCat.{u}).map ((RingedSpace.moduleCohomology (ℙ(ULift.{u} (Fin (n + 1)); Spec (.of k))).toRingedSpace q).map (regularHyperplaneMultiplication k n (E α) d (regularHyperplaneLinearSection k n a)))) (Scheme.Modules.moduleCohomologyFMap i (regularHyperplaneRestriction i (E α) (twist (ULift.{u} (Fin (n + 1))) (Spec (.of k)) (1 + d))) q) ∧ Function.Exact (Scheme.Modules.moduleCohomologyFMap i (regularHyperplaneRestriction i (E α) (twist (ULift.{u} (Fin (n + 1))) (Spec (.of k)) (1 + d))) q) (regularHyperplaneConnecting i (regularHyperplaneMultiplication k n (E α) d (regularHyperplaneLinearSection k n a)) (regularHyperplaneRestriction i (E α) (twist (ULift.{u} (Fin (n + 1))) (Spec (.of k)) (1 + d))) w hS q h)) ∧ (∀ (α β : Fin v) (u : E α ⟶ E β) (d : ℤ), regularHyperplaneMultiplication k n (E α) d (regularHyperplaneLinearSection k n a) ≫ (u ▷ twist (ULift.{u} (Fin (n + 1))) (Spec (.of k)) (1 + d)) = (u ▷ twist (ULift.{u} (Fin (n + 1))) (Spec (.of k)) d) ≫ regularHyperplaneMultiplication k n (E β) d (regularHyperplaneLinearSection k n a) ∧ regularHyperplaneRestriction i (E α) (twist (ULift.{u} (Fin (n + 1))) (Spec (.of k)) d) ≫ (Scheme.Modules.pushforward i).map ((Scheme.Modules.tensorPullback i).map u ▷ (Scheme.Modules.tensorPullback i).obj (twist (ULift.{u} (Fin (n + 1))) (Spec (.of k)) d)) = (u ▷ twist (ULift.{u} (Fin (n + 1))) (Spec (.of k)) d) ≫ regularHyperplaneRestriction i (E β) (twist (ULift.{u} (Fin (n + 1))) (Spec (.of k)) d)) ∧ (∀ (α : Fin v) (d : ℤ) (t : Γ(twist (ULift.{u} (Fin (n + 1))) (Spec (.of k)) 1, ⊤)), regularHyperplaneMultiplication k n (E α) d t ≫ regularHyperplaneRestriction i (E α) (twist (ULift.{u} (Fin (n + 1))) (Spec (.of k)) (1 + d)) = regularHyperplaneRestriction i (E α) (twist (ULift.{u} (Fin (n + 1))) (Spec (.of k)) d) ≫ (Scheme.Modules.pushforward i).map (regularHyperplaneRestrictedMultiplication k n i (E α) d t)) ∧ (∀ (α β : Fin v) (u : E α ⟶ E β) (d : ℤ) (q : ℕ), (forget₂ _ AddCommGrpCat.{u}).map ((RingedSpace.moduleCohomology (ℙ(ULift.{u} (Fin (n + 1)); Spec (.of k))).toRingedSpace q).map ((Scheme.Modules.pushforward i).map ((Scheme.Modules.tensorPullback i).map u ▷ (Scheme.Modules.tensorPullback i).obj (twist (ULift.{u} (Fin (n + 1))) (Spec (.of k)) d)))) ≫ Scheme.Modules.moduleCohomologyEdgeMap i (MonoidalCategoryStruct.tensorObj (C := H.Modules) ((Scheme.Modules.tensorPullback i).obj (E β)) ((Scheme.Modules.tensorPullback i).obj (twist (ULift.{u} (Fin (n + 1))) (Spec (.of k)) d))) q = Scheme.Modules.moduleCohomologyEdgeMap i (MonoidalCategoryStruct.tensorObj (C := H.Modules) ((Scheme.Modules.tensorPullback i).obj (E α)) ((Scheme.Modules.tensorPullback i).obj (twist (ULift.{u} (Fin (n + 1))) (Spec (.of k)) d))) q ≫ (forget₂ _ AddCommGrpCat.{u}).map ((RingedSpace.moduleCohomology H.toRingedSpace q).map ((Scheme.Modules.tensorPullback i).map u ▷ (Scheme.Modules.tensorPullback i).obj (twist (ULift.{u} (Fin (n + 1))) (Spec (.of k)) d))))",
+  "branch": "newtargets-dag",
+  "by": "NR",
+  "date": "2026-10-22",
+  "existing": false,
+  "note": "The pair of degrees d, 1+d parametrizes all pairs D-1,D. Hyperplane twists are i^* O(d), identified via the displayed isomorphism with standard twists. All arrows are fixed by section multiplication, the normalized tensor adjunction, the canonical tensor comparison, and the canonical cohomology edge map. Helpers belong to this node; no independent notion or arbitrary map is introduced. Coherence is the full RingedSpace.IsCoherent definition (finite type with finite-type kernels) from WeilConjectures.AlgebraicGeometry.Coherent, as required by the node and Stacks 01BV. The landed pqf-def-coherent record IsQuasiCoherentFiniteType is retained: on these locally Noetherian projective spaces its predicate is equivalent by pqf-lem-coherent-ft-locnoeth; this item uses IsCoherent directly without rebinding that shared node. boundaryPullbackTensorIso is used through its owner definition node def-sc-tensor-pullback-power-comparison; no square-zero-unit theorem is needed for the statement."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-b9985fc7e",
+  "group": "NR",
+  "result": "pass",
+  "note": "Re-delivery of RETURNed fc530587e70d; Lean module sha256-identical. H13 repaired: pqf-def-coherent record is the live Q25 IsQuasiCoherentFiniteType (only lean_audit drift), item keeps RingedSpace.IsCoherent with lean.note. H2 repaired: lem-sc-square-zero-ideal-tensor-unit replaced by owner def node def-sc-tensor-pullback-power-comparison (boundaryPullbackTensorIso); square_zero_ideal_tensor_unit_isIso unused. H11: real Second reading by NR table present. Maths re-checked vs node and Stacks 089Z/08A0/0EGK: infinite k, n>=1, Fin v coherent family, a≠0 linear section, closed immersion with ker=zeroLocus(s), H≅P^{n-1} over k, ∀d i^*O(d)≅e^*O(d), G coherent, ShortExact (d,1+d) with twistMulHom/normalized-unit restriction, IsIso canonical edge map ∀q, two exactness clauses, naturality and linear-form commutation; edge cases v=0, n=1, negative d, q=0. Helpers canonical, sorry only, docstrings ok. Item differs from live only in lean/stmt_deps; no live binding by another group. No compile (no file changed)."
+ }
+}

@@ -1,0 +1,271 @@
+{
+ "id": "lem-zl-relative-algebraic-closure-polynomial-quotient-field",
+ "kind": "statement",
+ "title": "Polynomial quotient fields over a relatively algebraically closed subfield",
+ "statement": "Let $K/k$ be a field extension [def-pc-field-extension] such that every $x\\in K$ algebraic over $k$ [def-weil-algebraic-element] is the image of an element of $k$. Let $P\\in k[T]$ [def-weil-polynomial-ring] be monic and irreducible, where monic means leading coefficient $1$ and irreducible means nonzero, not a unit, with a unit factor in every factorization. Let $P_K\\in K[T]$ be its coefficientwise image [def-weil-coefficientwise-ring-hom-map]. Then $P_K$ is irreducible, and $K[T]/(P_K)$ is a nonzero field; here $(P_K)$ is the ideal of all multiples of $P_K$. Consequently $\\operatorname{Spec}(K[T]/(P_K))$ [def-weil-affine-spectrum] has exactly one point and is irreducible [def-weil-irreducible-components]. No separability assumption on $P$ and no finite-generation assumption on $K/k$ is made.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tag 037P (lemma-field-extension-geometrically-irreducible), proof, monic factor normalization, coefficient descent and the quotient-field argument (old steps 4 and 5)"
+ },
+ "stmt_deps": [
+  "def-pc-field-extension",
+  "def-weil-algebraic-element",
+  "def-weil-polynomial-ring",
+  "def-weil-coefficientwise-ring-hom-map",
+  "def-weil-affine-spectrum",
+  "def-weil-irreducible-components"
+ ],
+ "proof": [
+  {
+   "text": "Identify $k$ with its image in $K$ using [def-pc-field-extension]. The coefficient formula in [def-weil-polynomial-ring] shows that for nonzero polynomials the highest nonzero product coefficient is the product of their leading coefficients. Thus degrees add over a field, and the units are exactly the nonzero constants. Since $P$ is monic and not a unit, its coefficientwise image $P_K$ is monic of the same positive degree [def-weil-coefficientwise-ring-hom-map], hence nonzero and not a unit. For an arbitrary factorization $P_K=AB$, both factors are nonzero. Put $a=\\operatorname{lc}(A)$, $b=\\operatorname{lc}(B)$; then $ab=1$. Set $Q=a^{-1}A$ and $R=aB$. Their leading coefficients are $1$, and $QR=P_K$.",
+   "uses": [
+    "def-pc-field-extension",
+    "def-weil-polynomial-ring",
+    "def-weil-coefficientwise-ring-hom-map"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 037P (lemma-field-extension-geometrically-irreducible), proof: normalize a hypothetical factorization to monic factors"
+   }
+  },
+  {
+   "text": "Apply [lem-zl-monic-divisor-algebraic-coefficients] separately to the monic divisors $Q$ and $R$ of $P_K$. Every coefficient is algebraic over $k$, hence lies in $k$ by the assumption that every element of $K$ algebraic over $k$ is the image of an element of $k$. Choose its unique preimage under $k\\hookrightarrow K$; zero has preimage zero, so these coefficient lists still have finite support. They define monic polynomials $Q_0,R_0\\in k[T]$ whose images are $Q,R$. The coefficientwise map is injective because $k\\to K$ is injective [def-pc-field-extension], and is multiplicative [def-weil-coefficientwise-ring-hom-map]. Applying this to $QR=P_K$ gives $P=Q_0R_0$.",
+   "uses": [
+    "lem-zl-monic-divisor-algebraic-coefficients",
+    "def-pc-field-extension",
+    "def-weil-coefficientwise-ring-hom-map"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 037P proof, coefficient descent by Tag 00H6 (lemma-polynomials-divide), clause (1)"
+   }
+  },
+  {
+   "text": "Irreducibility of $P$ implies that $Q_0$ or $R_0$ is a unit. Mapping its inverse along the ring homomorphism of [def-weil-coefficientwise-ring-hom-map] shows that $Q$ or $R$ is a unit. Multiplication by the nonzero constant $a$ or $a^{-1}$ preserves being a unit, so $A$ or $B$ is a unit. Together with the nonzero, nonunit assertions in Step 1, this proves irreducibility of $P_K$ for every factorization.",
+   "uses": [
+    "def-weil-coefficientwise-ring-hom-map"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 037P proof, contradiction with irreducibility over k"
+   }
+  },
+  {
+   "text": "Put $F=P_K$ and $I=(F)$. The ideal $I$ is proper: $1=FH$ would make $F$ a unit. By [lem-pur-polynomial-field-pid], every ideal $J$ of $K[T]$ containing $I$ is principal, say $J=(G)$. Since $F\\in J$, write $F=GH$. Irreducibility gives that $G$ or $H$ is a unit. In the first case $J=K[T]$; in the second $G=FH^{-1}$, so $J=I$. Thus $I$ is maximal. Apply [lem-weil-common-extension-fields-quotient-field] to the commutative ring $K[T]$ and this maximal ideal to conclude that $K[T]/I$ is a field, in particular a nonzero ring.",
+   "uses": [
+    "lem-pur-polynomial-field-pid",
+    "lem-weil-common-extension-fields-quotient-field"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 037P proof, quotient-field justification for the spectrum conclusion; polynomial PID input from Tag 030A (lemma-polynomial-domain-normal), proof opening"
+   }
+  },
+  {
+   "text": "By [def-weil-affine-spectrum], the spectrum of the field $K[T]/I$ has exactly one point. It is nonempty, and in any closed cover of this singleton one of the two closed subsets contains its point and hence is the whole space. This is irreducibility by [def-weil-irreducible-components]. None of the preceding steps used separability of $P$ or finite generation of $K/k$.",
+   "uses": [
+    "def-weil-affine-spectrum",
+    "def-weil-irreducible-components"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 037P proof, irreducibility of the polynomial quotient spectrum"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-field-extension",
+  "def-weil-polynomial-ring",
+  "def-weil-coefficientwise-ring-hom-map",
+  "lem-zl-monic-divisor-algebraic-coefficients",
+  "lem-pur-polynomial-field-pid",
+  "lem-weil-common-extension-fields-quotient-field",
+  "def-weil-affine-spectrum",
+  "def-weil-irreducible-components"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tag 037P (lemma-field-extension-geometrically-irreducible), proof, monic factor normalization and descent using Tag 00H6; quotient field via the polynomial PID in Tag 030A"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "An irreducible polynomial over a relatively algebraically closed subfield remains irreducible over the larger field",
+   "results": "Hits: Polynomial.Separable.map_irreducible_of_isPurelyInseparable, Polynomial.Monic.irreducible_iff_irreducible_map_fraction_map, Polynomial.irreducible_comp, IsAlgClosed.degree_eq_one_of_irreducible, Polynomial.IsPrimitive.irreducible_of_irreducible_map_of_injective, MvPolynomial.irreducible_toPolynomialAdjoinImageCompl, Polynomial.IsPrimitive.irreducible_iff_irreducible_map_fraction_map, IsAlgClosed.of_exists_root.  Gauss lemma requires K to be the fraction field of the coefficient ring; the purely-inseparable theorem requires a purely inseparable extension and a separable polynomial. Neither applies to arbitrary relatively algebraically closed K/k. The coefficient-integrality and AdjoinRoot field results are ingredients, not a theorem performing coefficient descent. Read the cited signatures.",
+   "date": "2026-10-22",
+   "verdict": "no match",
+   "digest": "21e9b90818ad2f38"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Irreducible polynomial remains irreducible over field extension with no new algebraic elements",
+   "results": "Hits: Polynomial.Separable.map_irreducible_of_isPurelyInseparable, MvPolynomial.irreducible_toPolynomialAdjoinImageCompl, Polynomial.irreducible_comp, X_pow_mul_sub_C_irreducible, irreducible_X_pow_sub_C_of_root_adjoin_eq_top, Polynomial.Monic.irreducible_iff_irreducible_map_fraction_map, Polynomial.IsPrimitive.irreducible_iff_irreducible_map_fraction_map, minpoly.irreducible.  Gauss lemma requires K to be the fraction field of the coefficient ring; the purely-inseparable theorem requires a purely inseparable extension and a separable polynomial. Neither applies to arbitrary relatively algebraically closed K/k. The coefficient-integrality and AdjoinRoot field results are ingredients, not a theorem performing coefficient descent. Read the cited signatures.",
+   "date": "2026-10-22",
+   "verdict": "no match",
+   "digest": "a9db3a3ca0bb17ec"
+  },
+  {
+   "tool": "loogle",
+   "query": "Polynomial.map, Irreducible",
+   "results": "Hits: Polynomial.generalizedEisenstein, Irreducible.exists_dvd_monic_irreducible_of_isIntegral, AdjoinRoot.mul_div_root_cancel, Polynomial.Irreducible.natDegree_dvd_finrank, Polynomial.irreducible_comp, Polynomial.irreducible_comp_iff, IsAlgClosure.of_splits, Polynomial.Monic.irreducible_of_irreducible_map.  Gauss lemma requires K to be the fraction field of the coefficient ring; the purely-inseparable theorem requires a purely inseparable extension and a separable polynomial. Neither applies to arbitrary relatively algebraically closed K/k. The coefficient-integrality and AdjoinRoot field results are ingredients, not a theorem performing coefficient descent. Read the cited signatures.",
+   "date": "2026-10-22",
+   "verdict": "no match",
+   "digest": "cda7383407f89755"
+  },
+  {
+   "tool": "grep",
+   "query": "[Ii]rreducible.*([Aa]lgebr|[Cc]losed)|([Aa]lgebr|[Cc]losed).*irreducible",
+   "results": "Hits: Mathlib/FieldTheory/Differential/Basic.lean, Mathlib/FieldTheory/Differential/Basic.lean, Mathlib/FieldTheory/Differential/Basic.lean, Mathlib/FieldTheory/IsAlgClosed/Basic.lean, Mathlib/FieldTheory/IsAlgClosed/Basic.lean, Mathlib/FieldTheory/IsAlgClosed/Basic.lean, Mathlib/FieldTheory/IsAlgClosed/Basic.lean, Mathlib/FieldTheory/IsAlgClosed/Basic.lean.  Gauss lemma requires K to be the fraction field of the coefficient ring; the purely-inseparable theorem requires a purely inseparable extension and a separable polynomial. Neither applies to arbitrary relatively algebraically closed K/k. The coefficient-integrality and AdjoinRoot field results are ingredients, not a theorem performing coefficient descent. Read the cited signatures.",
+   "date": "2026-10-22",
+   "verdict": "no match",
+   "digest": "ade7934576b0ed01"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Over a relatively algebraically closed field extension K over k a monic irreducible polynomial P over k remains irreducible and K[X]/(P) is a nonzero field with one point spectrum",
+   "results": "Hits: IsAlgClosure.of_exist_roots, IsAlgClosure.of_splits, IsAlgClosed.of_exists_root, Polynomial.Monic.irreducible_iff_irreducible_map_fraction_map, IsAlgClosed.degree_eq_one_of_irreducible, IsAlgClosed, irreducible_X_pow_sub_C_of_root_adjoin_eq_top, AlgebraicClosure.Monics.map_eq_prod.  Gauss lemma requires K to be the fraction field of the coefficient ring; the purely-inseparable theorem requires a purely inseparable extension and a separable polynomial. Neither applies to arbitrary relatively algebraically closed K/k. The coefficient-integrality and AdjoinRoot field results are ingredients, not a theorem performing coefficient descent. Read the cited signatures.",
+   "date": "2026-10-22",
+   "verdict": "no match",
+   "digest": "741d9cba3b6d0224"
+  },
+  {
+   "tool": "leansearch",
+   "query": "If all algebraic elements of K over k lie in k then every monic irreducible polynomial in k[X] stays irreducible in K[X] and its quotient is a field",
+   "results": "Hits: AdjoinRoot.instField.congr_simp, IsAlgClosed.of_exists_root, IsAlgClosure.of_splits, Polynomial.Monic.irreducible_iff_irreducible_map_fraction_map, IsPurelyInseparable.mk, Irreducible.exists_dvd_monic_irreducible_of_isIntegral, Polynomial.irreducible_comp, IntermediateField.adjoin_root_eq_top.  Gauss lemma requires K to be the fraction field of the coefficient ring; the purely-inseparable theorem requires a purely inseparable extension and a separable polynomial. Neither applies to arbitrary relatively algebraically closed K/k. The coefficient-integrality and AdjoinRoot field results are ingredients, not a theorem performing coefficient descent. Read the cited signatures.",
+   "date": "2026-10-22",
+   "verdict": "no match",
+   "digest": "b2d433ccc98733ce"
+  },
+  {
+   "tool": "grep",
+   "query": "isIntegrallyClosed_iff|irreducible_iff_irreducible_map_fraction_map|isIntegral_coeff_of_dvd|map_irreducible_of_isPurelyInseparable",
+   "results": "Hits: Mathlib/FieldTheory/SeparablyGenerated.lean, Mathlib/FieldTheory/PurelyInseparable/Tower.lean, Mathlib/FieldTheory/PurelyInseparable/Tower.lean, Mathlib/FieldTheory/Minpoly/IsIntegrallyClosed.lean, Mathlib/FieldTheory/RatFunc/IntermediateField.lean, Mathlib/Algebra/GCDMonoid/IntegrallyClosed.lean, Mathlib/RingTheory/LocalProperties/IntegrallyClosed.lean, Mathlib/RingTheory/LocalProperties/IntegrallyClosed.lean.  Gauss lemma requires K to be the fraction field of the coefficient ring; the purely-inseparable theorem requires a purely inseparable extension and a separable polynomial. Neither applies to arbitrary relatively algebraically closed K/k. The coefficient-integrality and AdjoinRoot field results are ingredients, not a theorem performing coefficient descent. Read the cited signatures.",
+   "date": "2026-10-22",
+   "verdict": "no match",
+   "digest": "b7a5b9b5ec57f643"
+  },
+  {
+   "tool": "grep",
+   "query": "irreducible.*(algebraic|algebraically)|IsRelativelyAlgebraicallyClosed|isRelativelyAlgebraicallyClosed",
+   "results": "Hits: Mathlib/FieldTheory/Differential/Basic.lean, Mathlib/FieldTheory/Differential/Basic.lean, Mathlib/RepresentationTheory/AlgebraRepresentation/Basic.lean. No full item match. Fraction-field Gauss lemmas require IsFractionRing; the purely inseparable theorem requires separability and a purely inseparable extension. The reverse map-irreducibility lemma descends irreducibility rather than preserving it in this direction. None has exactly the relative algebraic closure hypothesis and all conclusions.",
+   "date": "2026-10-23",
+   "verdict": "no match",
+   "digest": "e928b6f27779450b"
+  },
+  {
+   "tool": "leansearch",
+   "query": "If every algebraic element of K over k belongs to k then an irreducible polynomial over k stays irreducible over K",
+   "results": "Hits: IsPurelyInseparable.mk, Polynomial.Separable.map_irreducible_of_isPurelyInseparable, MvPolynomial.irreducible_toPolynomialAdjoinImageCompl, IsAlgClosure.of_splits, Normal, Polynomial.Monic.irreducible_iff_irreducible_map_fraction_map, IsPurelyInseparable.isAlgebraic, IsPurelyInseparable. No full item match. Fraction-field Gauss lemmas require IsFractionRing; the purely inseparable theorem requires separability and a purely inseparable extension. The reverse map-irreducibility lemma descends irreducibility rather than preserving it in this direction. None has exactly the relative algebraic closure hypothesis and all conclusions.",
+   "date": "2026-10-23",
+   "verdict": "no match",
+   "digest": "edd05b1ab1a1e2b2"
+  },
+  {
+   "tool": "loogle",
+   "query": "Polynomial.map, Irreducible",
+   "results": "Hits: Polynomial.generalizedEisenstein, Irreducible.exists_dvd_monic_irreducible_of_isIntegral, AdjoinRoot.mul_div_root_cancel, Polynomial.Irreducible.natDegree_dvd_finrank, Polynomial.irreducible_comp, Polynomial.irreducible_comp_iff, IsAlgClosure.of_splits, Polynomial.Monic.irreducible_of_irreducible_map. No full item match. Fraction-field Gauss lemmas require IsFractionRing; the purely inseparable theorem requires separability and a purely inseparable extension. The reverse map-irreducibility lemma descends irreducibility rather than preserving it in this direction. None has exactly the relative algebraic closure hypothesis and all conclusions.",
+   "date": "2026-10-23",
+   "verdict": "no match",
+   "digest": "cda7383407f89755"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An irreducible polynomial over a relatively algebraically closed subfield remains irreducible over the larger field",
+   "results": "Hits: Polynomial.irreducible_comp, Polynomial.Monic.irreducible_iff_irreducible_map_fraction_map, Polynomial.IsPrimitive.irreducible_iff_irreducible_map_fraction_map, Polynomial.Separable.map_irreducible_of_isPurelyInseparable, irreducible_X_pow_sub_C_of_root_adjoin_eq_top, MvPolynomial.irreducible_toPolynomialAdjoinImageCompl, Polynomial.irreducible_factor, Polynomial.Monic.irreducible_of_irreducible_map. No full item match. Fraction-field Gauss lemmas require IsFractionRing; the purely inseparable theorem requires separability and a purely inseparable extension. The reverse map-irreducibility lemma descends irreducibility rather than preserving it in this direction. None has exactly the relative algebraic closure hypothesis and all conclusions.",
+   "date": "2026-10-23",
+   "verdict": "no match",
+   "digest": "caa15351514806b0"
+  },
+  {
+   "tool": "grep",
+   "query": "isIntegrallyClosed_iff|irreducible_iff_irreducible_map_fraction_map|isIntegral_coeff_of_dvd|map_irreducible_of_isPurelyInseparable",
+   "results": "Hits: Mathlib/FieldTheory/PurelyInseparable/Tower.lean, Mathlib/FieldTheory/PurelyInseparable/Tower.lean, Mathlib/FieldTheory/Minpoly/IsIntegrallyClosed.lean, Mathlib/FieldTheory/RatFunc/IntermediateField.lean, Mathlib/FieldTheory/SeparablyGenerated.lean, Mathlib/Algebra/GCDMonoid/IntegrallyClosed.lean, Mathlib/RingTheory/LocalProperties/IntegrallyClosed.lean, Mathlib/RingTheory/LocalProperties/IntegrallyClosed.lean. Read Polynomial.isIntegral_coeff_of_dvd at Mathlib/RingTheory/Polynomial/IsIntegral.lean:62-73: this is the existing coefficient-algebraicity leaf. GaussLemma.lean:149 requires IsFractionRing; PurelyInseparable/Tower.lean:284 requires a separable polynomial and a purely inseparable extension. Neither proves this item.",
+   "date": "2026-10-23",
+   "verdict": "no match",
+   "digest": "766b4defcab6a431"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Every monic factor of a polynomial over a relatively algebraically closed subfield has coefficients in that subfield",
+   "results": "Hits: IsAlgClosure.of_splits, AlgebraicClosure.Monics.map_eq_prod, IsAlgClosed.factors, integralClosure.mem_lifts_of_monic_of_dvd_map, AlgebraicClosure.subProdXSubC, IsAlgClosed.splits_domain, IsAlgClosure.of_exist_roots, AlgebraicClosure.Monics. integralClosure.mem_lifts_of_monic_of_dvd_map (GaussLemma.lean:54-58) descends to integralClosure, not directly to the base field; it is related to the existing coefficient leaf. The other hits concern splitting or algebraic closures and do not state this item.",
+   "date": "2026-10-23",
+   "verdict": "no match",
+   "digest": "e397d9aa08862e9e"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-zl-field-extension-algebraically-closed-geometric",
+  "date": "2026-10-22",
+  "group": "Q150"
+ },
+ "chapter": "sec-deligne-laumon-general",
+ "unit": "sk-i-dl-general-real",
+ "blueprint": {
+  "from": {
+   "node": "lem-zl-bertini-finite-cover-curve",
+   "place": "Proof paragraph 3, geometric irreducibility input for Tag 0G4F; through lem-zl-geometric-irreducibility-separable, Tag 0G33 converse, and its Tag 037P input: monic factor normalization, coefficient descent and the quotient-field argument (old steps 4 and 5)",
+   "via": [
+    "lem-zl-field-extension-algebraically-closed-geometric",
+    "lem-zl-geometric-irreducibility-separable"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-zl-relative-algebraic-closure-polynomial-quotient-field",
+  "worker": "stage1",
+  "summary": "Proved the unchanged statement by monic normalization, the existing 00H6 coefficient-algebraicity leaf, explicit coefficient descent and irreducibility, the existing polynomial-PID and maximal-ideal-quotient leaves, and the one-point spectrum definition. No new nodes. Searched the full DAG, blueprint and project Lean, and ran logged Mathlib searches with two semantic phrasings; no exact project attachment or full Mathlib match. Checked inseparable and linear cases.",
+  "blueprint": "Supports the geometric irreducibility input below lem-zl-bertini-finite-cover-curve, through lem-zl-geometric-irreducibility-separable and Tag 0G33 converse to Tag 037P: realizes the monic normalization, coefficient descent and quotient-field portion extracted as old steps 4 and 5 of lem-zl-field-extension-algebraically-closed-geometric. Main-20261015 ancestor states the Bertini result without a proof; inherited from.place/via and the source route are retained."
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q56-c285de658",
+  "group": "Q56",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q56-c285de658 (reviewer sub-agent of L); spot-checked: Ordinary one-level split with no new nodes. The statement is unchanged and identical to live, where the item is still unsplit. There is no repair note. The proof matches Stacks 037P (algebra.tex:11297): every monic factor of P_K has coefficients algebraic over k by 00H6(1) (line 8433), here the leaf lem-zl-monic-divisor-algebraic-coefficients. By the hypothesis those coefficients lie in k, so the factorization descends and contradicts irreducibility over k. Step 1 is the elementary monic normalization (degree additivity, units are nonzero constants, Q=a^-1A and R=aB). Step 2 checks the leaf's hypotheses (P monic in k[T], Q and R monic and dividing P_K) and descends through the injective, multiplicative coefficientwise map. Step 3 maps the inverse back and rescales. Step 4 proves (P_K) maximal using only principality of ideals in K[T] (lem-pur-polynomial-field-pid), then applies Ideal.Quotient.field. Step 5 uses the one-point clause of def-weil-affine-spectrum and the closed-cover definition of irreducibility. All cited nodes are Mathlib leaves, so there is no route issue and no tool_uses. proof_deps equals the union of the step uses. Edge cases checked: K=k with P linear; F_p(s) in F_p(s)(t) with P=T^p-s, which needs no separability; T^2+1 over R in R(t); Q in Q(i) shows the hypothesis is necessary. Duplicate search over the snapshot DAG (algebraically closed in, relative algebraic closure, remains irreducible, 037P, 00H6) found no duplicate. A Mathlib grep found only the fraction-field Gauss lemma, which does not apply. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.FieldTheory.RelativeAlgebraicClosurePolynomialQuotientField",
+  "declaration": "Polynomial.irreducible_map_and_isField_quotient_of_isAlgebraic_mem",
+  "file": "lean/Sheaf/FieldTheory/RelativeAlgebraicClosurePolynomialQuotientField.lean",
+  "statement": "theorem irreducible_map_and_isField_quotient_of_isAlgebraic_mem {k : Type u} {K : Type v} [Field k] [Field K] [Algebra k K] (h : ∀ x : K, IsAlgebraic k x → ∃ y : k, algebraMap k K y = x) (P : Polynomial k) (hP : P.Monic) (hPirr : Irreducible P) : Irreducible (P.map (algebraMap k K)) ∧ IsField (Polynomial K ⧸ Ideal.span {P.map (algebraMap k K)}) ∧ Nonempty (Unique (AlgebraicGeometry.Spec (CommRingCat.of (Polynomial K ⧸ Ideal.span {P.map (algebraMap k K)})))) ∧ IrreducibleSpace (AlgebraicGeometry.Spec (CommRingCat.of (Polynomial K ⧸ Ideal.span {P.map (algebraMap k K)})))",
+  "branch": "newtargets-dag",
+  "by": "NZ",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-b2b475470",
+  "group": "NZ",
+  "result": "pass",
+  "note": "Statement matches node and Stacks 037P clause by clause: Algebra k K with independent universes; h: algebraic elements come from k (same form as parent geometricallyIrreducible_of_isAlgebraic_mem); P.Monic, Irreducible P; conclusions Irreducible (P.map algebraMap), IsField (K[X]/span{P_K}) incl. nonzero, Nonempty (Unique Spec), IrreducibleSpace Spec. No extra assumptions; inseparable and linear edge cases covered. lean.statement verbatim in file; node record identical to side-live apart from the new lean field; no new nodes; sorry only; source/blueprint docstrings and 5-step proof plan present; Worker report and Second reading sections present (second reading done by the author but correct). No H4 duplicate in Mathlib or project. No file changed, so no compile; worker reports clean scompile."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "AUTO",
+  "group": "Y3",
+  "result": "pass",
+  "landing": "20261025T205053-L-3116384",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)",
+  "sorry_before": [
+   "Polynomial.irreducible_map_and_isField_quotient_of_isAlgebraic_mem"
+  ],
+  "sorry_after": []
+ }
+}

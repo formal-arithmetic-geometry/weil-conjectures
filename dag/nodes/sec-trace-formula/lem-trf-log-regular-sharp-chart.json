@@ -16,68 +16,60 @@
  ],
  "proof": [
   {
-   "text": "By the fs-chart definition, choose an etale-local chart $Q\\to M$ through $\\bar x$ with $Q$ fine saturated. Put $A=\\mathcal O_{X,\\bar x}$ and let $F\\subseteq Q$ be the inverse image of $A^\\times$. It is a face: in a commutative ring a product is a unit exactly when both factors are units, since an inverse to $ab$ gives inverses $b(ab)^{-1}$ and $a(ab)^{-1}$ to $a$ and $b$. The chart definition gives $M_{\\bar x}=Q\\oplus_F A^\\times$. Inverting $F$ changes nothing in this pushout, since every element of $F$ already maps to a unit. Thus $M_{\\bar x}=Q_F\\oplus_{F^{\\rm gp}}A^\\times$. Quotienting this presentation by $A^\\times$ identifies the given characteristic $P$ with $Q_F/F^{\\rm gp}$, with the map induced by the original chart.",
+   "text": "Choose a pointed etale-local fs chart $Q\\to M$ at $\\bar x$ using the fs definition. Apply the face-localized chart lemma to this chart and its marked geometric stalk. With $F$ the inverse image of local units it identifies $M_{\\bar x}$ with $Q_F\\oplus_{F^{\\rm gp}}A^\\times$ and identifies the specified characteristic $P$ with $Q_F/F^{\\rm gp}$, compatibly with the original chart. These canonical identifications fix which characteristic map the eventual chart must induce.",
    "uses": [
-    "def-trf-fs-log-blowup"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
-    "place": "Expose VI, 1.1 and 1.6, printed pp. 69--70; explicit stalk pushout calculation."
-   }
-  },
-  {
-   "text": "Apply the face-sharpening lemma to $Q,F$. It gives that $P=Q_F/F^{\\rm gp}$ is finitely generated, integral, saturated and sharp, and that $P^{\\rm gp}=Q^{\\rm gp}/F^{\\rm gp}$ is free of finite rank. It also gives $(Q_F)^\\times=F^{\\rm gp}$. These conclusions require saturation of $Q$; no ordinary regularity of $X$ is used.",
-   "uses": [
-    "lem-trf-fs-face-sharpening"
+    "def-trf-fs-log-blowup",
+    "lem-trf-chart-face-localization-logification"
    ],
    "elementary": false,
    "source": {
     "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
-    "place": "Expose VI, 1.6 and 3.7(a), printed pp. 70 and 75; Expose VIII, 3.1.1--3.1.5."
+    "place": "Expose VI, 1.1 and 1.6, pp. 69--70; localized chart presentation."
    }
   },
   {
-   "text": "Choose a finite basis $e_1,\\ldots,e_r$ of $P^{\\rm gp}$ and, for each $e_i$, choose a lift $a_i\\in Q^{\\rm gp}$ through the quotient. Define $s(\\sum_i n_ie_i)=\\sum_i n_ia_i$ for integers $n_i$. Uniqueness of the basis expression makes $s$ a group homomorphism and the quotient composed with $s$ is the identity. For $p\\in P$ choose $q\\in Q_F$ representing $p$. Then $s(p)-q\\in F^{\\rm gp}$, which is the unit group of $Q_F$. Hence $s(p)\\in Q_F$. This constructs a monoid section $s|_P:P\\to Q_F$. In fact $(p,f)\\mapsto s(p)+f$ is an isomorphism $P\\oplus F^{\\rm gp}\\to Q_F$: its inverse sends $q$ to $(\\bar q,q-s(\\bar q))$, whose second component belongs to $F^{\\rm gp}$. Both composites are identities by these formulas.",
+   "text": "Apply face_sharpening to Q and F. Its canonical injective map from Associates(R), R=Q_F, to Q^gp/F^gp has the same representative formula as chartFaceQuotientCon. Hence that congruence is exactly equality of Associates classes, giving a canonical equivalence eA:(R/F^gp)≃Associates(R). Compose its inverse with the characteristic equivalence of step 1; transport finite generation, integrality and saturation along this monoid equivalence. Transport saturation using the induced equivalence of Grothendieck groups. The actual characteristic is sharp because it is Associates of the log stalk. Apply integral_monoid_free_sharpening_splitting to R, using the finite integer basis from face_sharpening. It gives j:Associates(R)→R, a section of the sharpening map, and an equivalence Associates(R)×Rˣ≃R with formula (b,u)↦j(b)u. The units inclusion Rˣ→Q^gp has image precisely F^gp: one inclusion is the units characterization, and the other follows because its subgroup image contains every face generator. Thus Rˣ≃F^gp. Together with eA this gives the required splitting (R/F^gp)×F^gp≃R and a section s with its specified representative formula.",
    "uses": [
-    "lem-trf-fs-face-sharpening"
+    "lem-trf-fs-face-sharpening",
+    "lem-trf-integral-monoid-free-sharpening-splitting"
    ],
-   "elementary": true,
+   "elementary": false,
    "source": {
     "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
-    "place": "Expose VI, 3.7(a), printed p. 75: choose a splitting of (3.a); explicit nonequivariant basis construction."
+    "place": "Expose VI, 1.6 and 3.7(a), pp. 70,75; VIII, 3.1.1--3.1.5, pp. 98--99."
    }
   },
   {
-   "text": "Push this isomorphism out along $F^{\\rm gp}\\to A^\\times$. The formulas give an isomorphism $P\\oplus A^\\times\\to M_{\\bar x}$ sending $(p,u)$ to $h(p)u$, where $h$ is $s|_P$ followed by $Q_F\\to M_{\\bar x}$. On the quotient by units the map induced by $h$ is the identity of the specified $P$. Its inverse image of $A^\\times$ is therefore $\\{0\\}$: a germ mapping to a ring unit lies in the unit subgroup of the log structure, and $P$ is sharp. Consequently the log structure associated to the prelog map $P\\to A$ is exactly $P\\oplus A^\\times$, and the displayed map is the stalk logification isomorphism required for chart spreading.",
+   "text": "Apply the conditional logification conclusion of chart_face_localization_logification to the section and product splitting of step 2. This gives the sharp stalk map ell∘s, the criterion that its structural image is a unit exactly at 1, a product equivalence with strict-local units, and the specified characteristic map. Precompose with the inverse of the canonical characteristic equivalence to obtain h from the actual characteristic monoid P. Check IsStalkChart directly: the product map h.coprod unitsIn is the product equivalence, hence bijective. Every generator of the divisorial chart congruence equates (p,1) with (1,a) where the structural image of p equals a unit; the unit criterion forces p=1 and then a=1. Thus the congruence and the kernel are both bottom. Fineness follows by forgetting saturation of the fs local charts. Apply exists_affine_chart_of_isStalkChart to h, using finite generation and integrality from step 2. Its germ equality and the characteristic identity from logification give Associates.mk(germ(β(p)))=p for every p.",
    "uses": [
-    "def-trf-fs-log-blowup",
-    "lem-trf-fs-face-sharpening"
+    "lem-trf-chart-face-localization-logification",
+    "lem-trf-fine-log-stalk-chart-spreading"
    ],
-   "elementary": true,
+   "elementary": false,
    "source": {
     "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
-    "place": "Expose VI, 1.1 and 3.7(a), printed pp. 69 and 75; explicit associated-log-stalk calculation."
+    "place": "Expose VI, 1.1 and 3.7(a), pp. 69,75; prescribed-germ spreading."
    }
   },
   {
-   "text": "Apply the fine-log stalk-chart spreading lemma to $h$. The source monoid is fine by step 2 and the required logification isomorphism was proved in step 4. It produces an affine pointed etale neighbourhood $W$ and a chart with precisely this germ. Its characteristic map at $\\bar w$ is consequently the chosen identification with $P$, not an unspecified automorphism. Finally $W\\to X$ is locally of finite presentation by the etale definition. Its affine algebra presentations have finitely many generators, so it is locally of finite type. As $X$ is locally Noetherian, apply the locally-Noetherian finite-type lemma (Stacks Tag 01T6, morphisms-lemma-finite-type-noetherian) to conclude that $W$ is locally Noetherian.",
+   "text": "The obtained $W\\to X$ is etale, hence locally of finite presentation. In the affine presentations defining this property, the finitely many polynomial variables generate the coordinate algebra, so the map is locally of finite type. Since $X$ is locally Noetherian, the locally-Noetherian finite-type lemma gives that $W$ is locally Noetherian. Together with step 2 and the affine chart of step 3 this is every clause of the statement.",
    "uses": [
-    "lem-trf-fine-log-stalk-chart-spreading",
     "def-weil-etale-morphism",
     "def-sbc-locally-finite-presentation",
     "pqf-lem-locnoeth-lft"
    ],
    "elementary": false,
    "source": {
-    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
-    "place": "Expose VI, 3.7(a), printed p. 75, final sentence; Stacks Project, Tag 01T6, morphisms-lemma-finite-type-noetherian for local Noetherianity."
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Stacks Project, Tag 01T6, morphisms-lemma-finite-type-noetherian."
    }
   }
  ],
  "proof_deps": [
   "def-trf-fs-log-blowup",
+  "lem-trf-chart-face-localization-logification",
   "lem-trf-fs-face-sharpening",
+  "lem-trf-integral-monoid-free-sharpening-splitting",
   "lem-trf-fine-log-stalk-chart-spreading",
   "def-weil-etale-morphism",
   "def-sbc-locally-finite-presentation",
@@ -86,7 +78,7 @@
  "proof_origin": {
   "by": "agent",
   "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
-  "place": "Expose VI, 1.6 and 3.7(a), printed pp. 70 and 75: explicit nonequivariant splitting argument with its monoid and chart-spreading inputs isolated."
+  "place": "Expose VI 1.1, 1.6 and 3.7(a), pp. 69,70,75; VIII 3.1.1--3.1.5, pp. 98--99. Lean assembly by J2 of the existing localized-logification, face-sharpening, integral splitting and prescribed-germ spreading declarations; quotient, unit, fine-saturation and stalk-chart conversions are proved private helpers."
  },
  "mathlib_searches": [
   {
@@ -188,11 +180,11 @@
   "is": null
  },
  "split_report": {
-  "date": "2026-10-18",
+  "date": "2026-10-22",
   "item": "lem-trf-log-regular-sharp-chart",
   "worker": "stage1",
-  "summary": "Preserved the statement. Constructed a section using a basis of the sharp characteristic group, computed the stalk logification explicitly, and spread that specified germ. Created two statement-only inputs for fs face sharpening and fine-log chart spreading; reused Stacks 01T6 for the affine etale neighbourhood being locally Noetherian.",
-  "blueprint": "Realizes the sharp-chart substep of the monoidal-resolution ancestry of lem-trf-local-term-locality proof (1)--(2), through lem-trf-free-characteristic-regular-boundary; the chapter and unit route are unchanged.",
+  "summary": "Repair of batch5 re-split return: statement unchanged. Extracted two independent, statement-only arguments of comparable size: localized chart pushout plus split logification (old steps 1 and 4), and the general integral-monoid splitting allowing torsion units (old step 3). Retained face sharpening and prescribed-germ spreading, and explicit local Noetherianity assembly. Full original proof and argument-to-node inventory retained in report.md.",
+  "blueprint": "Realizes the sharp-chart substep of the monoidal-resolution ancestry of lem-trf-local-term-locality proof (1)--(2), through lem-trf-free-characteristic-regular-boundary; the chapter and unit route are unchanged. The new nodes realize respectively the chart-stalk presentation/logification and the nonequivariant group-section subarguments in ILO VI 3.7(a).",
   "tool_uses": [
    {
     "node": "pqf-lem-locnoeth-lft",
@@ -204,12 +196,12 @@
   "pqf-lem-locnoeth-lft"
  ],
  "reviewed": {
-  "date": "2026-10-17",
+  "date": "2026-10-22",
   "by": "L",
-  "reviewer": "NT-cc-N8-06bdd5392",
-  "group": "N8",
+  "reviewer": "NT-cc-NU-432b800ae",
+  "group": "NU",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-N8-06bdd5392 (reviewer sub-agent of L); spot-checked: I read all of the item and both new nodes, and checked them against ILO Exposé VI 1.6 (p.70), VI 3.7(a) (p.75) and VIII 3.1.1-3.1.5 (pp.98-99). Step 1: the fs chart Q, F = preimage of A^x is a face, M_x = Q_F (+)_{F^gp} A^x, so P = Q_F/F^gp; this matches the chart formula in def-trf-fs-log-blowup. Step 2: the face-sharpening lemma applies with these hypotheses. Step 3: the basis-lift section lands in Q_F because F^gp is the unit group of Q_F, and Q_F = P (+) F^gp. Step 4: the composite to the characteristic is the identity, so E = {0} and the stalk iso is exactly the spreading node's hypothesis. Step 5: spreading gives an affine W with germ h; etale implies lfp, then lft, then 01T6 (Mathlib leaf; tool_use accepted). I proved every clause of lem-trf-fs-face-sharpening by hand: Q_F finitely generated and saturated, units = F^gp, R sharp, fs and embedded, R^gp torsion-free hence free. Small cases N^r, Z/n and N+Z/n all behave correctly. lem-trf-fine-log-stalk-chart-spreading is the standard Kato/Ogus fine-chart spreading fact; it is true and strictly smaller than the item because the germ is given. Neither new node restates a clause of the item. No duplicate in the DAG or in blueprint main-20261015; no Mathlib match. Log regularity is unused but retained. No SGA. Three repairs, all in fixes: (1) define 'sharp' in face-sharpening; (2) define 'integral' in chart-spreading; (3) cite def-weil-pbc-geometric-stalks for 'pointed etale neighbourhood' in the item statement and add it to stmt_deps.; 3 file(s) fixed by the reviewer"
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NU-432b800ae (reviewer sub-agent of L); spot-checked: Re-split matches the human note (released 2026-10-22). Old steps 1 and 4 became lem-trf-chart-face-localization-logification and old step 3 became lem-trf-integral-monoid-free-sharpening-splitting. Old steps 2 and 5 stay as assembly citing the existing face-sharpening, chart-spreading and 01T6 nodes. The item statement is byte-identical to live, the proof is now 1906 characters, and all 5 base step texts appear unchanged in the report. I proved both new statements by hand. Node 1: F is a face; λ is well defined because Q is integral; Q⊕_F A^×≅Q_F⊕_{F^gp}A^×; R/U≅M̄; the conditional part gives (αh)^{-1}(A^×)={0} from injectivity of ι, and P⊕A^×≅L by pushout. Node 2: B is cancellative; π:G→B^gp is onto with kernel U; a basis lift lands in R; both inverse formulas check. Small cases tested: trivial log structure, N^r, N⊕Z/2 with torsion units, R a group, rank 0. Node 2 is not a duplicate of lem-trf-fine-monoid-unit-splitting, which needs torsion-free P^gp, while an fs chart Q_F can have torsion (N⊕Z/2). Other candidates read, none a duplicate: associated-log-universal-stalks, per-integral-monoid-unit-pushout, the per/sfb chart-logification-thickening nodes, very-tame-equivariant-sharp-chart, log-chart-face-tor-comparison (cites the item, so circular), fs-chart-free-factorization. Every step's hypotheses match the cited statements: face from node 1; node 2's hypotheses from face sharpening; the node-1 splitting hypothesis holds since j(0)=0; spreading gets fine from fs, P fg integral, E={0}. Sources: ILO VI 1.1 p.69, 1.6 p.70 and 3.7(a) p.75 read in the local PDF. No SGA. Batch-5 flags on both new trf nodes accepted: they are generic monoid and log-stalk algebra whose closure has only def-trf-fs-log-blowup and def-trf-log-regular-pair, and the item is in the batch-5 closure only through generic per/sfb log citers. Inherited tool_use pqf-lem-locnoeth-lft (01T6) accepted."
  },
  "lean": {
   "module": "Sheaf.AlgebraicGeometry.LogRegularSharpChart",
@@ -229,5 +221,26 @@
   "result": "pass",
   "note": "Statement matches the node and source; dependencies and canonical definitions checked; edge cases, universes, docstrings, no hollow definitions, route-pivot constraints, and compile evidence reviewed."
  },
- "lean_audit": {}
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J2",
+  "result": "pass",
+  "landing": "20261026T091805-L-3376454",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
 }

@@ -1,0 +1,323 @@
+{
+ "id": "lem-sfb-semilinear-quotient-projective-geometry",
+ "kind": "statement",
+ "title": "Constants descent and projectivity for a supplied semilinear quotient",
+ "statement": "Let $e$ be a field [def-weil-field], $K/e$ a finite field extension [def-pc-field-extension], and $H$ a finite group [def-sfb-finite-infinite-set] acting on $K$ by $e$-automorphisms. Put $F=K^H$, the subfield fixed by every element of $H$. Let $Y$ be a smooth projective $K$-scheme [def-sbc-smooth-morphisms] [def-kun-projective] with an action of $H$ by $e$-scheme automorphisms such that $Y\\to\\operatorname{Spec}K$ is equivariant. Suppose a scheme $Q$ [def-pc-scheme] and an invariant finite surjective morphism $q:Y\\to Q$ [def-weil-finite-integral-morphism] [def-weil-surjective-morphism] are given. Assume that for every algebraically closed field $\\Omega$ the map $Y(\\Omega)\\to Q(\\Omega)$ is onto with fibres precisely the $H$-orbits, that $\\mathcal O_Q=(q_*\\mathcal O_Y)^H$, and that every invariant morphism $Y\\to T$ to a scheme factors uniquely through $q$. Then there is a unique structure morphism $s_F:Q\\to\\operatorname{Spec}F$ satisfying $s_Fq=(Y\\to\\operatorname{Spec}K\\to\\operatorname{Spec}F)$. Its induced $e$-structure is the descent of the given $e$-structure of $Y$, and $q$ is a morphism over both $F$ and $e$. The scheme $Y$ is normal and Noetherian and is a finite disjoint union of open and closed normal integral schemes [def-pc-integral-scheme] [def-weil-irreducible-components]; $Y$ is projective over $F$ and $e$. The scheme $Q$ is normal and Noetherian, projective over $F$ in the finite-projective-space convention, and proper of finite type over both $F$ and $e$ [def-weil-proper-morphism] [def-weil-finite-type-morphism]. Here normal means that each local ring is an integrally closed domain [def-weil-pbc-normal-ring], and Noetherian means admitting a finite affine cover by spectra of Noetherian rings [def-weil-pbc-noetherian-ring]. Empty and disconnected schemes and nonfaithful actions are allowed. No quotient-existence assertion is made.",
+ "source": {
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "ILO Expose X 2.3 Step 2, printed p.151, the supplied semilinear intermediate quotient in diagram (2.c); agent-extracted geometry argument of returned item steps 3--6. The projectivity argument uses Stacks divisors.tex Tag 0BD4 (proposition-push-down-ample), case (2), on normal integral components of the supplied quotient; it does not construct a quotient or invoke a linearization."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-pc-field-extension",
+  "def-sfb-finite-infinite-set",
+  "def-sbc-smooth-morphisms",
+  "def-kun-projective",
+  "def-pc-scheme",
+  "def-weil-finite-integral-morphism",
+  "def-weil-surjective-morphism",
+  "def-pc-integral-scheme",
+  "def-weil-irreducible-components",
+  "def-weil-proper-morphism",
+  "def-weil-finite-type-morphism",
+  "def-weil-pbc-normal-ring",
+  "def-weil-pbc-noetherian-ring"
+ ],
+ "proof": [
+  {
+   "text": "Write $a:Y\\to\\operatorname{Spec}K$ and $a_F:Y\\to\\operatorname{Spec}F$ for the given structure map and its composite. The fixed elements form a subfield $e\\subseteq F\\subseteq K$: sums, products and inverses of fixed elements are fixed. Both $F/e$ and $K/F$ are finite: $F$ is an $e$-linear subspace of the finite-dimensional space $K$, and any finite $e$-spanning set of $K$ also spans it over $F$. Equivariance and fixedness of $F$ give $a_Fh=a_F$ for every $h\\in H$. Apply the assumed categorical property to this invariant map to obtain the unique $s_F:Q\\to\\operatorname{Spec}F$ with $s_Fq=a_F$. Composing with $\\operatorname{Spec}F\\to\\operatorname{Spec}e$ gives $s_e$ and $s_eq=a_e$. Any other such $e$-structure equals $s_e$ by the same categorical uniqueness. Thus $q$ is over $F$ and $e$, with the asserted descended $e$-structure.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose X 2.3 Step 2, printed p.151, constants S1/L in diagram (2.c); elementary use of the supplied categorical universal property."
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-finite-constant-projective-graph] with extension $K/F$, source $R=Y$, target $S=\\operatorname{Spec}F$, and $c=a_F$. The target is separated over $F$ (its relative diagonal is the identity). Taking $S'=S$ gives projectivity of $Y$ over $F$ in the finite-projective-space convention and properness of $a_F$. Apply the same statement with $K/e$ and $S=\\operatorname{Spec}e$ to get projectivity and properness over $e$. Properness includes finite type by [def-weil-proper-morphism]. These uses require no separability of the constant extensions.",
+   "uses": [
+    "lem-sfb-finite-constant-projective-graph",
+    "def-weil-proper-morphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tags 0B3I (lemma-finite-projective), 087S(1) (lemma-projective-over-quasi-projective-is-H-projective), 01WE (lemma-H-projective-composition); finite-constant graph node supplies the complete specialization."
+   }
+  },
+  {
+   "text": "The field $F$ is Noetherian, since its only ideals are zero and the unit ideal, so $\\operatorname{Spec}F$ is Noetherian with its single affine chart. Since $a_F$ is of finite type, [lem-weil-pbc-finite-type-over-noetherian] makes $Y$ Noetherian. Independently, smoothness over $K$ gives regularity of $Y$ by [lem-weil-pbc-smooth-scheme-over-field-regular]. Clause (1) of [rem-pc-regular-normal] gives normality, and clause (2) gives the required finite disjoint union of open and closed normal integral components of $Y$. No connectedness or nonemptiness assumption is used.",
+   "uses": [
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "lem-weil-pbc-smooth-scheme-over-field-regular",
+    "rem-pc-regular-normal"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 056S (lemma-smooth-regular), with morphisms.tex Tag 01T6 (lemma-finite-type-noetherian) and properties.tex Tags 0569 and 033M (regular-normal and normal Noetherian decomposition)."
+   }
+  },
+  {
+   "text": "The $H$-action is by $F$-automorphisms of $Y$, because $a_Fh=a_F$, and it is by $e$-automorphisms by hypothesis. The supplied categorical property also holds in $F$-schemes: for an invariant $F$-map $b:Y\\to T$ with structure $t:T\\to\\operatorname{Spec}F$, let $\\bar b:Q\\to T$ be its unique factor as a scheme map. Then $(t\\bar b)q=tb=a_F=s_Fq$, and categorical uniqueness for the map $a_F$ gives $t\\bar b=s_F$. Thus the factor is an $F$-map, uniquely. The identical argument with $e$ shows the categorical property over $e$. Now apply [lem-sfb-finite-quotient-normal-proper] over $F$, and again over $e$: the source is normal proper finite type by steps 2--3; the finite surjection, invariant structure sheaf and geometric-orbit hypotheses are exactly those supplied. It follows that $Q$ is normal and Noetherian, and proper of finite type over both $F$ and $e$.",
+   "uses": [
+    "lem-sfb-finite-quotient-normal-proper"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose X 2.3 Step 2, diagram (2.c), p.151; the general supplied-quotient theorem uses Stacks Tags 00IS, 09MQ(4), 03GN, and the normal affine invariant-ring calculation."
+   }
+  },
+  {
+   "text": "Apply clause (2) of [rem-pc-regular-normal] to $Q$: write it as a finite disjoint union $Q=\\coprod_{i\\in I}Q_i$ of open and closed normal integral schemes. Choose a closed projective-space embedding of $Y$ over $F$ from step 2. By [lem-weil-pbc-projective-ample-invertible] its pullback of $\\mathcal O(1)$ is an ample invertible module $M$ on $Y$.",
+   "uses": [
+    "rem-pc-regular-normal",
+    "lem-weil-pbc-projective-ample-invertible"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/properties.tex",
+    "place": "Tags 033M (lemma-normal-Noetherian), 0357 (lemma-normal-locally-finite-nr-irreducibles), 01PS (definition-ample), and 01PU (lemma-ample-on-closed); the projective-ample node includes the projective-space input."
+   }
+  },
+  {
+   "text": "For $i\\in I$ let $W_i=q^{-1}(Q_i)$, with its open subscheme structure. This is open and closed in $Y$. Its inclusion $j_i:W_i\\to Y$ is a closed immersion: it is a homeomorphism onto a closed subset and $\\mathcal O_Y\\to(j_i)_*\\mathcal O_{W_i}$ is surjective, with identity stalk maps on $W_i$ and zero target stalks off $W_i$ [def-weil-closed-immersion]. The restricted map $q_i:W_i\\to Q_i$ is finite: every affine open $V\\subseteq Q_i$ is an affine open in $Q$, and its inverse image and ring map under $q_i$ are those under $q$, so [def-weil-finite-integral-morphism] applies. It is surjective because $q$ is surjective. The restriction $j_i^*M$ is ample by [lem-trf-ample-restrict-closed-immersion]. Apply [lem-sfb-finite-normal-ample-descent] to the finite surjection $q_i$, whose target $Q_i$ is normal integral, obtaining an ample invertible module $L_i$ on $Q_i$. No assertion of descent of the particular module $M$ is needed.",
+   "uses": [
+    "def-weil-closed-immersion",
+    "def-weil-finite-integral-morphism",
+    "lem-trf-ample-restrict-closed-immersion",
+    "lem-sfb-finite-normal-ample-descent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/divisors.tex",
+    "place": "Tag 0BD4 (proposition-push-down-ample), case (2), applied separately to normal integral quotient components; properties.tex Tag 01PU for restrictions."
+   }
+  },
+  {
+   "text": "Define a sheaf of modules $L$ on $Q$ by $L(U)=\\prod_{i\\in I}\\Gamma(U\\cap Q_i,L_i)$, with componentwise restrictions and the action of $\\mathcal O_Q(U)$ by restriction. The sheaf axiom holds componentwise. Its restriction to $Q_i$ is $L_i$, so it is locally free of rank one, hence invertible by [def-sc-invertible-module]. It is ample by [def-weil-pbc-ample-invertible-module]: $Q$ is quasi-compact by step 4, and for $x\\in Q_i$ choose $n\\geq1$ and a global section $u$ of $L_i^{\\otimes n}$ whose nonvanishing locus is affine and contains $x$. Extend $u$ to a section of $L^{\\otimes n}$ by zero on the other disjoint open components. Its nonvanishing locus is exactly $(Q_i)_u$, an affine open of $Q$. This proves the required affine-locus condition. If $I$ is empty, the construction gives the unique module on the empty scheme; local rank one and the affine-locus condition are vacuous, and the empty scheme is quasi-compact.",
+   "uses": [
+    "def-sc-invertible-module",
+    "def-weil-pbc-ample-invertible-module"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/properties.tex",
+    "place": "Tag 01PS (definition-ample), verified explicitly for a finite disjoint clopen union; elementary componentwise sheaf construction."
+   }
+  },
+  {
+   "text": "Put $S=\\operatorname{Spec}F$. It is quasi-compact and quasi-separated: its only opens are $S$ and the empty set, both quasi-compact, and intersections of affine opens are among these. The proper map $s_F$ is quasi-compact, and $L$ is $s_F$-relatively ample: its restriction over the whole affine base is ample by step 7, and the empty restriction satisfies the same definition vacuously. Apply [lem-sfb-proper-relative-ample-projective-bundle] to obtain projectivity of $s_F$ in the projective-bundle sense. The trivial invertible module $\\mathcal O_S$ is ample: the section $1$ in tensor degree one has affine nonvanishing locus all of $S$, and $S$ is quasi-compact [def-weil-pbc-ample-invertible-module]. Therefore [lem-trf-projective-bundle-to-h-projective] makes $s_F$ projective in precisely the finite-projective-space convention [def-kun-projective]. The normality, Noetherianity, properness and finite-type clauses were already obtained in steps 3--4, and the constants and compatibility clauses in step 1.",
+   "uses": [
+    "lem-sfb-proper-relative-ample-projective-bundle",
+    "def-weil-pbc-ample-invertible-module",
+    "lem-trf-projective-bundle-to-h-projective",
+    "def-kun-projective"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 0BCL(1) (lemma-projective-is-quasi-projective-proper), with Definition 01VH (definition-relatively-ample), and Tag 087S(1) (lemma-projective-over-quasi-projective-is-H-projective)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-finite-constant-projective-graph",
+  "def-weil-proper-morphism",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-weil-pbc-smooth-scheme-over-field-regular",
+  "rem-pc-regular-normal",
+  "lem-sfb-finite-quotient-normal-proper",
+  "lem-weil-pbc-projective-ample-invertible",
+  "def-weil-closed-immersion",
+  "def-weil-finite-integral-morphism",
+  "lem-trf-ample-restrict-closed-immersion",
+  "lem-sfb-finite-normal-ample-descent",
+  "def-sc-invertible-module",
+  "def-weil-pbc-ample-invertible-module",
+  "lem-sfb-proper-relative-ample-projective-bundle",
+  "lem-trf-projective-bundle-to-h-projective",
+  "def-kun-projective"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "Expose X 2.3 Step 2, diagram (2.c), p.151; explicit supplied-quotient assembly following Stacks 0BD4(2), 0BCL(1) and 087S(1)."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A given finite geometric categorical quotient of a smooth projective scheme with semilinear finite group action is normal and projective over its fixed field",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"CategoryTheory.PreGaloisCategory.exists_lift_of_quotient_openSubgroup\", \"module\": \"Mathlib/CategoryTheory/Galois/EssSurj\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{u₂, u₁} C] {F : CategoryTheory.Functor C FintypeCat}\\n  [inst_1 : CategoryTheory.GaloisCategory C] [CategoryTheory.PreGaloisCategory.FiberFunctor F]\\n  (V : OpenSubgroup (CategoryTheory.Aut F)),\\n  ∃ X,\\n    Nonempty\\n      ((CategoryTheory.PreGaloisCatego\", \"doc\": \"For any open subgroup $V$ of the automorphism group $\\\\mathrm{Aut}(F)$ of a functor $F : \\\\mathcal{C} \\\\to \\\\text{FintypeCat}$, there exists an object $X \\\\in \\\\mathcal{C}$ such that the action of $\\\\mathrm{\"}\n  {\"name\": \"AlgebraicGeometry.Proj.instIsProperToSpecZeroOfFiniteTypeSubtypeMemOfNatNat\", \"module\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Proper\", \"type\": \"∀ {σ : Type u_1} {A : Type u_2} [inst : CommRing A] [inst_1 : SetLike σ A] [inst_2 : AddSubgroupClass σ A] (𝒜 : ℕ → σ)\\n  [inst_3 : GradedRing 𝒜] [Algebra.FiniteType (↥(𝒜 0)) A],\\n  AlgebraicGeometry.IsProper (AlgebraicGeometry.Proj.toSpecZero 𝒜)\", \"doc\": \"If the zero-graded component $ \\\\mathcal{A}_0 $ of a graded ring $ \\\\mathcal{A} $ is a finitely generated $ A $-algebra, then the canonical morphism from the projective spectrum $ \\\\operatorname{Proj}(\\\\m\"}\n  {\"name\": \"FDRep.instProjectiveOfNeZeroCastCard\", \"module\": \"Mathlib/RepresentationTheory/FinGroupCharZero\", \"type\": \"∀ {k : Type u} [inst : Field k] {G : Type u} [inst_1 : Fintype G] [inst_2 : Group G] [NeZero ↑(Fintype.card G)]\\n  (V : FDRep k G), CategoryTheory.Projective V\", \"doc\": \"Every finitely generated representation of a finite group $ G $ over a field $ k $ is projective in the category of finitely generated representations, provided that the cardinality of $ G $ (interpre\"}\n  {\"name\": \"instMulSemiringActionQuotientSubgroupSubtypeMemSubalgebraSubalgebra\", \"module\": \"Mathlib/RingTheory/Invariant/Basic\", \"type\": \"{A : Type u_1} →\\n  {B : Type u_2} →\\n    [inst : CommRing A] →\\n      [inst_1 : CommRing B] →\\n        [inst_2 : Algebra A B] →\\n          {G : Type u_3} →\\n            [inst_3 : Group G] →\\n              [inst_4 : MulSemiringAction G B] →\\n                [inst_5 : SMulCommClass G A B] →\\n                 \", \"doc\": \"Given a group $ G $ acting on a commutative ring $ B $ via a multiplicative semiring action, and a normal subgroup $ H \\trianglelefteq G $, the quotient group $ G/H $ acts on the subalgebra $ B^H $ of \"}\n  {\"name\": \"instMulSemiringActionQuotientSubgroupSubtypeMemSubringSubring\", \"module\": \"Mathlib/RingTheory/Invariant/Basic\", \"type\": \"{B : Type u_2} →\\n  [inst : CommRing B] →\\n    {G : Type u_3} →\\n      [inst_1 : Group G] →\\n        [inst_2 : MulSemiringAction G B] →\\n          (H : Subgroup G) → [inst_3 : H.Normal] → MulSemiringAction (G ⧸ H) ↥(FixedPoints.subring B ↥H)\", \"doc\": \"Given a group $ G $ acting on a commutative ring $ B $ via a multiplicative semiring action, and a normal subgroup $ H \\trianglelefteq G $, the quotient group $ G/H $ acts on the subring $ B^H $ of ele\"}\n  {\"name\": \"AlgebraicGeometry.Proj.instUniversallyClosedToSpecZeroOfFiniteTypeSubtypeMemOfNatNat\", \"module\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Proper\", \"type\": \"∀ {σ : Type u_1} {A : Type u_2} [inst : CommRing A] [inst_1 : SetLike σ A] [inst_2 : AddSubgroupClass σ A] (𝒜 : ℕ → σ)\\n  [inst_3 : GradedRing 𝒜] [Algebra.FiniteType (↥(𝒜 0)) A],\\n  AlgebraicGeometry.UniversallyClosed (AlgebraicGeometry.Proj.toSpecZero 𝒜)\", \"doc\": \"For a graded ring $\\\\mathcal{A}$ whose zero-graded component $\\\\mathcal{A}_0$ is a finite type algebra over a base ring $A$, the canonical morphism $\\\\operatorname{Proj}(\\\\mathcal{A}) \\\\to \\\\operatorname{Sp\"}\n  {\"name\": \"AlgebraicGeometry.Proj.instLocallyOfFiniteTypeToSpecZeroOfFiniteTypeSubtypeMemOfNatNat\", \"module\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Proper\", \"type\": \"∀ {σ : Type u_1} {A : Type u_2} [inst : CommRing A] [inst_1 : SetLike σ A] [inst_2 : AddSubgroupClass σ A] (𝒜 : ℕ → σ)\\n  [inst_3 : GradedRing 𝒜] [Algebra.FiniteType (↥(𝒜 0)) A],\\n  AlgebraicGeometry.LocallyOfFiniteType (AlgebraicGeometry.Proj.toSpecZero 𝒜)\", \"doc\": \"Given a graded ring $\\\\mathcal{A}$ whose zero-graded component $\\\\mathcal{A}_0$ is a finitely generated algebra over a base ring $A$, the canonical morphism from the projective spectrum $\\\\operatorname{P\"}\n  {\"name\": \"AlgebraicGeometry.AffineSpace.instLocallyOfFinitePresentationOverSchemeInferInstanceOverClassOfFinite\", \"module\": \"Mathlib/AlgebraicGeometry/AffineSpace\", \"type\": \"∀ {n : Type v} (S : AlgebraicGeometry.Scheme) [Finite n],\\n  AlgebraicGeometry.LocallyOfFinitePresentation (AlgebraicGeometry.AffineSpace n S ↘ S)\", \"doc\": \"If $ n $ is a finite type, then the affine space $ \\\\mathbb{A}^n_S $ over a scheme $ S $ is locally of finite presentation as a morphism over $ S $. This means that for every point in $ \\\\mathbb{A}^n_S \"}",
+   "date": "2026-10-22",
+   "verdict": "no match: returned facts do not state this lemma or give it by a one-line specialization"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.IsHProjective, AlgebraicGeometry.IsFinite",
+   "results": "[loogle] OK 0 hit(s) | loogle: unknown identifier 'AlgebraicGeometry.IsHProjective'",
+   "date": "2026-10-22",
+   "verdict": "invalid identifier in initial pattern; the additional valid Loogle query is recorded below"
+  },
+  {
+   "tool": "grep",
+   "query": "quotient.*projectiv|projectiv.*quotient|invariant.*ample|ample.*invariant",
+   "results": "[grep] OK 0 hit(s)",
+   "date": "2026-10-22",
+   "verdict": "no match: returned facts do not state this lemma or give it by a one-line specialization"
+  },
+  {
+   "tool": "leansearch",
+   "query": "An existing finite group quotient of a smooth projective scheme over a finite extension is normal projective over the invariant constants field",
+   "results": "[leansearch] UNAVAILABLE 0 hit(s) | service unavailable: {\"error\":\"Rate limit exceeded: 60 per 1 minute\"}\n  This kind of search is not available now. It is recorded as unavailable; use the other kinds and grep, and do not write a verdict for it.",
+   "date": "2026-10-22",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finite surjective image of a projective scheme onto a normal proper scheme admits an ample invertible sheaf and a closed projective embedding",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Proj.instIsProperToSpecZeroOfFiniteTypeSubtypeMemOfNatNat\", \"module\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Proper\", \"type\": \"∀ {σ : Type u_1} {A : Type u_2} [inst : CommRing A] [inst_1 : SetLike σ A] [inst_2 : AddSubgroupClass σ A] (𝒜 : ℕ → σ)\\n  [inst_3 : GradedRing 𝒜] [Algebra.FiniteType (↥(𝒜 0)) A],\\n  AlgebraicGeometry.IsProper (AlgebraicGeometry.Proj.toSpecZero 𝒜)\", \"doc\": \"If the zero-graded component $ \\\\mathcal{A}_0 $ of a graded ring $ \\\\mathcal{A} $ is a finitely generated $ A $-algebra, then the canonical morphism from the projective spectrum $ \\\\operatorname{Proj}(\\\\m\"}\n  {\"name\": \"AlgebraicGeometry.Proj.instUniversallyClosedToSpecZeroOfFiniteTypeSubtypeMemOfNatNat\", \"module\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Proper\", \"type\": \"∀ {σ : Type u_1} {A : Type u_2} [inst : CommRing A] [inst_1 : SetLike σ A] [inst_2 : AddSubgroupClass σ A] (𝒜 : ℕ → σ)\\n  [inst_3 : GradedRing 𝒜] [Algebra.FiniteType (↥(𝒜 0)) A],\\n  AlgebraicGeometry.UniversallyClosed (AlgebraicGeometry.Proj.toSpecZero 𝒜)\", \"doc\": \"For a graded ring $\\\\mathcal{A}$ whose zero-graded component $\\\\mathcal{A}_0$ is a finite type algebra over a base ring $A$, the canonical morphism $\\\\operatorname{Proj}(\\\\mathcal{A}) \\\\to \\\\operatorname{Sp\"}\n  {\"name\": \"AlgebraicGeometry.AffineSpace.instSurjectiveOverSchemeInferInstanceOverClass\", \"module\": \"Mathlib/AlgebraicGeometry/AffineSpace\", \"type\": \"∀ {n : Type v} (S : AlgebraicGeometry.Scheme), AlgebraicGeometry.Surjective (AlgebraicGeometry.AffineSpace n S ↘ S)\", \"doc\": \"The canonical morphism from the affine space $\\\\mathbb{A}^n_S$ to the base scheme $S$ is surjective, meaning its underlying continuous map on topological spaces is surjective.\"}\n  {\"name\": \"AlgebraicGeometry.Proj.instLocallyOfFiniteTypeToSpecZeroOfFiniteTypeSubtypeMemOfNatNat\", \"module\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Proper\", \"type\": \"∀ {σ : Type u_1} {A : Type u_2} [inst : CommRing A] [inst_1 : SetLike σ A] [inst_2 : AddSubgroupClass σ A] (𝒜 : ℕ → σ)\\n  [inst_3 : GradedRing 𝒜] [Algebra.FiniteType (↥(𝒜 0)) A],\\n  AlgebraicGeometry.LocallyOfFiniteType (AlgebraicGeometry.Proj.toSpecZero 𝒜)\", \"doc\": \"Given a graded ring $\\\\mathcal{A}$ whose zero-graded component $\\\\mathcal{A}_0$ is a finitely generated algebra over a base ring $A$, the canonical morphism from the projective spectrum $\\\\operatorname{P\"}\n  {\"name\": \"AlgebraicGeometry.IsFinite.iff_isProper_and_isAffineHom\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Proper\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y},\\n  AlgebraicGeometry.IsFinite f ↔ AlgebraicGeometry.IsProper f ∧ AlgebraicGeometry.IsAffineHom f\", \"doc\": \"A morphism $ f: X \\\\to Y $ of schemes is finite if and only if it is proper and affine, i.e., $ \\\\text{IsFinite}(f) \\\\leftrightarrow \\\\text{IsProper}(f) \\\\land \\\\text{IsAffineHom}(f) $.\"}\n  {\"name\": \"AlgebraicGeometry.Proj.instQuasiCompactToSpecZeroOfFiniteTypeSubtypeMemOfNatNat\", \"module\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Proper\", \"type\": \"∀ {σ : Type u_1} {A : Type u_2} [inst : CommRing A] [inst_1 : SetLike σ A] [inst_2 : AddSubgroupClass σ A] (𝒜 : ℕ → σ)\\n  [inst_3 : GradedRing 𝒜] [Algebra.FiniteType (↥(𝒜 0)) A],\\n  AlgebraicGeometry.QuasiCompact (AlgebraicGeometry.Proj.toSpecZero 𝒜)\", \"doc\": \"If a graded ring $\\\\mathcal{A}$ is finitely generated as an algebra over its zero-graded component $\\\\mathcal{A}_0$, then the canonical morphism from the projective spectrum $\\\\operatorname{Proj}(\\\\mathca\"}\n  {\"name\": \"AlgebraicGeometry.instIsProperOfIsFinite\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Proper\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.IsFinite f], AlgebraicGeometry.IsProper f\", \"doc\": \"Every finite morphism of schemes is proper.\"}\n  {\"name\": \"AlgebraicGeometry.IsProper.instOfIsFinite\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Proper\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.IsFinite f], AlgebraicGeometry.IsProper f\", \"doc\": \"Every finite morphism of schemes is a proper morphism.\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: returned facts do not state this lemma or give it by a one-line specialization"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.IsProper, \"quotient\"",
+   "results": "[loogle] OK 0 hit(s)",
+   "date": "2026-10-22",
+   "verdict": "no match: returned facts do not state this lemma or give it by a one-line specialization"
+  },
+  {
+   "tool": "grep",
+   "query": "quotient.*normal|invariant.*normal|finite.*projective",
+   "results": "0 hits: ",
+   "date": "2026-10-23",
+   "verdict": "no match: field-theoretic, module-theoretic or projective-spectrum facts do not assert the supplied semilinear scheme-quotient theorem"
+  },
+  {
+   "tool": "leansearch",
+   "query": "finite group quotient normal projective scheme fixed field",
+   "results": "8 hits: IsGalois.normalAutEquivQuotient, IsGalois.normalAutEquivQuotient_apply, IntermediateField.fixedField.algebra, InfiniteGalois.normalAutEquivQuotient, InfiniteGalois.normalAutEquivQuotient_apply, FixedPoints.finrank_le_card, QuotientGroup.finite, InfiniteGalois.restrict_fixedField",
+   "date": "2026-10-23",
+   "verdict": "no match: field-theoretic, module-theoretic or projective-spectrum facts do not assert the supplied semilinear scheme-quotient theorem"
+  },
+  {
+   "tool": "loogle",
+   "query": "IsNormal, IsNoetherian, finite quotient, invariant",
+   "results": "0 hits: ; loogle: unknown identifier 'IsNormal'",
+   "date": "2026-10-23",
+   "verdict": "invalid pattern: loogle: unknown identifier 'IsNormal'"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "finite quotient of normal Noetherian scheme by finite group is normal Noetherian and projective over fixed field",
+   "results": "8 hits: Ideal.Quotient.normal, AlgebraicGeometry.finite_appTop_of_universallyClosed, instFiniteObjOpenNormalSubgroupStabilizerHomSurjectiveAuxFunctor, AlgebraicGeometry.instFiniteCarrierCarrierCommRingCatFiberOfIsFinite, AlgHom.IsArithFrobAt.finite_quotient, CategoryTheory.PreGaloisCategory.exists_lift_of_quotient_openSubgroup, Ideal.Quotient.exists_algEquiv_fixedPoint_quotient_under, AlgebraicGeometry.Scheme.Hom.instIsIntegralNormalization",
+   "date": "2026-10-23",
+   "verdict": "no match: field-theoretic, module-theoretic or projective-spectrum facts do not assert the supplied semilinear scheme-quotient theorem"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.IsProper, \"quotient\"",
+   "results": "0 hits: ",
+   "date": "2026-10-23",
+   "verdict": "no match: field-theoretic, module-theoretic or projective-spectrum facts do not assert the supplied semilinear scheme-quotient theorem"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A supplied geometric categorical quotient of a smooth projective variety by a finite semilinear group action is projective normal over invariant constants",
+   "results": "8 hits: AlgebraicGeometry.Proj, Module.Grassmannian.projective_quotient, Projectivization.finite_of_finite, Projectivization.smul_mk, Projectivization.smul_def, FDRep.instProjectiveOfNeZeroCastCard, AlgebraicGeometry.Proj.instIsSeparated, AlgebraicGeometry.Proj.instIsProperToSpecZeroOfFiniteTypeSubtypeMemOfNatNat",
+   "date": "2026-10-23",
+   "verdict": "no match: field-theoretic, module-theoretic or projective-spectrum facts do not assert the supplied semilinear scheme-quotient theorem"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-semilinear-sylow-good-components",
+  "date": "2026-10-22",
+  "group": "Q13"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration/tame-boundary reduction, through the global alteration input; ILO X 2.3: Expose X 2.3 Step 2, diagram (2.c), printed p.151, with explicit selection of components for the every-generic-point degree convention. The selection uses Sylow conjugacy in each decomposition group and invariant-field degrees, rather than interpreting a total degree as each residue degree. Re-split input: ILO Expose X 2.3 Step 2, printed p.151, the supplied semilinear intermediate quotient in diagram (2.c); agent-extracted geometry argument of returned item steps 3--6. The projectivity argument uses Stacks divisors.tex Tag 0BD4 (proposition-push-down-ample), case (2), on normal integral components of the supplied quotient; it does not construct a quotient or invoke a linearization.",
+   "via": [
+    "lem-sfb-semilinear-sylow-good-components",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-semilinear-quotient-projective-geometry",
+  "worker": "stage1",
+  "summary": "Reused existing finite-constant projectivity, supplied-quotient normal/proper geometry and finite normal ample descent nodes. Wrote categorical descent of the fixed constants and of the relative universal property explicitly; applied ample descent on integral clopen components and glued the resulting modules by an explicit product. Converted projective-bundle projectivity to the required finite-projective-space convention. No statement change, new node, or attachment.",
+  "blueprint": "Realizes the supplied semilinear intermediate quotient in ILO X 2.3 Step 2, diagram (2.c), p.151, the geometry input beneath det-thm-sf-ctf-stability-direct-images clause (3). Inherited blueprint.from.node is null; blueprint_refs.py ancestor confirms no imported ancestor through the created chain. Existing provenance is retained.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-smooth-scheme-over-field-regular",
+    "why": "Smoothness over a field gives regularity, without dimension or connectedness assumptions; the unit supplies no different regularity theorem."
+   },
+   {
+    "node": "rem-pc-regular-normal",
+    "why": "Regularity implies normality and normal Noetherian schemes have finitely many clopen normal integral components; this is a generic scheme tool below the alteration route."
+   },
+   {
+    "node": "lem-weil-pbc-projective-ample-invertible",
+    "why": "A finite projective-space embedding over an affine base supplies an ample invertible module; this generic input precedes the prescribed 0BD4 norm route."
+   },
+   {
+    "node": "lem-trf-ample-restrict-closed-immersion",
+    "why": "Restriction of an ample module to a closed component is ample, needed before applying 0BD4(2); the unit does not replace this generic restriction theorem."
+   },
+   {
+    "node": "lem-trf-projective-bundle-to-h-projective",
+    "why": "Converts the bundle convention to the exact finite-projective-space convention over the ample affine field base; it is a generic projectivity comparison, not a replacement of the unit route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-smooth-scheme-over-field-regular",
+  "rem-pc-regular-normal",
+  "lem-weil-pbc-projective-ample-invertible",
+  "lem-trf-ample-restrict-closed-immersion",
+  "lem-trf-projective-bundle-to-h-projective"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q81-13b9409d5",
+  "group": "Q81",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q81-13b9409d5 (reviewer sub-agent of L); spot-checked: This is the first split (live is unsplit; there is no repair note). The statement and stmt_deps are identical to live, with no new nodes. proof_deps equals the union of the step uses, there is no cycle, and there is no SGA reference. Source: ILO X 2.3 Step 2 (pp.150-151, (2.c)). Q=X2/L is the supplied quotient, the item claims normality but not smoothness, and Stacks 0BD4(2) needs a normal integral target, which step 6 respects by working on each component. Step-by-step checks: step 1 descends the constants via the universal property (e⊆F, finiteness, a_F∘h=a_F). Step 2 specializes finite-constant-projective-graph to (F,K,Y,Spec F) and to (e,K,Y,Spec e); Spec F is separated because its diagonal is the identity. Step 3: finite type over a Noetherian base, then smooth⇒regular⇒normal, then the clopen integral decomposition. Step 4: every hypothesis of finite-quotient-normal-proper checked, including the relative universal property, which is proved explicitly. Step 5: O(1) is ample. Step 6: W_i=q^{-1}(Q_i) is clopen with a closed-immersion inclusion; q_i is finite and surjective; 01PU restriction, then 0BD4(2) descent on the normal integral Q_i. Step 7: the product sheaf, extension by zero and the I=∅ case are correctly elementary. Step 8: Spec F is qcqs and L is relatively ample over its only nonempty affine open, giving bundle projectivity, then 087S conversion to the def-kun-projective convention. Edge cases tested: empty Y, disconnected Y, nonfaithful action, inseparable K/F. No duplicate found (coset-scheme, equivariant-normal-projective-model and semilinear-finite-normalization-model differ). The five declared tool_uses are generic scheme lemmas and are accepted. Batch 5: lem-trf-ample-restrict-closed-immersion (01PU) and lem-trf-projective-bundle-to-h-projective (087S), plus the closures reaching def-trf-projective-bundle-morphism (a definition) or the 01PU lemma, are generic algebraic geometry. None is a step of the trace formula or Poincaré duality, so all are accepted."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SemilinearQuotientProjectiveGeometry",
+  "declaration": "AlgebraicGeometry.semilinear_quotient_projective_geometry",
+  "file": "lean/Sheaf/AlgebraicGeometry/SemilinearQuotientProjectiveGeometry.lean",
+  "statement": "theorem semilinear_quotient_projective_geometry (e K : Type u) [Field e] [Field K] [Algebra e K] [Module.Finite e K] (H : Type v) [Group H] [Finite H] (ρ : H →* (K ≃ₐ[e] K)) (Y Q : Scheme.{u}) (a : Y ⟶ Spec (CommRingCat.of K)) [Smooth a] [IsHProjective a] (α : H →* Aut Y) (hαe : ∀ h : H, (α h).hom ≫ a ≫ Spec.map (CommRingCat.ofHom (algebraMap e K)) = a ≫ Spec.map (CommRingCat.ofHom (algebraMap e K))) (hαK : ∀ h : H, (α h).hom ≫ a = a ≫ Spec.map (CommRingCat.ofHom (ρ h⁻¹).toRingHom)) (q : Y ⟶ Q) [IsFinite q] [Surjective q] (hinv : ∀ h : H, (α h).hom ≫ q = q) (honto : ∀ (Ω : Type u) [Field Ω] [IsAlgClosed Ω], Function.Surjective (fun x : Spec (CommRingCat.of Ω) ⟶ Y ↦ x ≫ q)) (horbits : ∀ (Ω : Type u) [Field Ω] [IsAlgClosed Ω] (x y : Spec (CommRingCat.of Ω) ⟶ Y), x ≫ q = y ≫ q ↔ ∃ h : H, x ≫ (α h).hom = y) (hsections : ∀ U : Q.Opens, Function.Injective (q.app U) ∧ ∀ s : Γ(Y, q ⁻¹ᵁ U), (∃ t : Γ(Q, U), q.app U t = s) ↔ ∀ (h : H) (hU : q ⁻¹ᵁ U ≤ (α h).hom ⁻¹ᵁ (q ⁻¹ᵁ U)), (α h).hom.appLE (q ⁻¹ᵁ U) (q ⁻¹ᵁ U) hU s = s) (hcategorical : ∀ (T : Scheme.{u}) (f : Y ⟶ T), (∀ h : H, (α h).hom ≫ f = f) → ∃! g : Q ⟶ T, q ≫ g = f) : ∃ sF : Q ⟶ Spec (CommRingCat.of (IntermediateField.fixedField ρ.range)), q ≫ sF = a ≫ Spec.map (CommRingCat.ofHom (algebraMap (IntermediateField.fixedField ρ.range) K)) ∧ (∀ t : Q ⟶ Spec (CommRingCat.of (IntermediateField.fixedField ρ.range)), q ≫ t = a ≫ Spec.map (CommRingCat.ofHom (algebraMap (IntermediateField.fixedField ρ.range) K)) → t = sF) ∧ q ≫ sF ≫ Spec.map (CommRingCat.ofHom (algebraMap e (IntermediateField.fixedField ρ.range))) = a ≫ Spec.map (CommRingCat.ofHom (algebraMap e K)) ∧ (∀ se : Q ⟶ Spec (CommRingCat.of e), q ≫ se = a ≫ Spec.map (CommRingCat.ofHom (algebraMap e K)) → se = sF ≫ Spec.map (CommRingCat.ofHom (algebraMap e (IntermediateField.fixedField ρ.range)))) ∧ (∀ y : Y, IsDomain (Y.presheaf.stalk y) ∧ IsIntegrallyClosed (Y.presheaf.stalk y)) ∧ IsNoetherian Y ∧ (∃ (n : ℕ) (U : Fin n → Y.Opens), Set.range (fun i : Fin n ↦ (U i : Set Y)) = irreducibleComponents Y ∧ (∀ i : Fin n, IsClosed (U i : Set Y)) ∧ (∀ i j : Fin n, i ≠ j → Disjoint (U i) (U j)) ∧ (⨆ i : Fin n, U i) = ⊤ ∧ (∀ i : Fin n, IsIntegral (U i).toScheme ∧ ∀ y : (U i).toScheme, IsDomain ((U i).toScheme.presheaf.stalk y) ∧ IsIntegrallyClosed ((U i).toScheme.presheaf.stalk y)) ∧ Nonempty (IsColimit (Cofan.mk Y (fun i : Fin n ↦ (U i).ι)))) ∧ IsHProjective (a ≫ Spec.map (CommRingCat.ofHom (algebraMap (IntermediateField.fixedField ρ.range) K))) ∧ IsHProjective (a ≫ Spec.map (CommRingCat.ofHom (algebraMap e K))) ∧ (∀ z : Q, IsDomain (Q.presheaf.stalk z) ∧ IsIntegrallyClosed (Q.presheaf.stalk z)) ∧ IsNoetherian Q ∧ IsHProjective sF ∧ IsProper sF ∧ (LocallyOfFiniteType sF ∧ QuasiCompact sF) ∧ IsProper (sF ≫ Spec.map (CommRingCat.ofHom (algebraMap e (IntermediateField.fixedField ρ.range)))) ∧ (LocallyOfFiniteType (sF ≫ Spec.map (CommRingCat.ofHom (algebraMap e (IntermediateField.fixedField ρ.range)))) ∧ QuasiCompact (sF ≫ Spec.map (CommRingCat.ofHom (algebraMap e (IntermediateField.fixedField ρ.range)))))",
+  "branch": "sheaf-dag",
+  "by": "NX",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-a626f2d97",
+  "group": "NX",
+  "result": "pass",
+  "note": "Node differs from live only in lean; statement verbatim in file; one sorry theorem, no defs, source/blueprint docstrings with all 8 steps; all imported proof-dep modules exist in side-live. Clause check: e,K finite ext (no separability); H finite, ρ : H →* (K ≃ₐ[e] K); F = fixedField ρ.range (nonfaithful ok); Smooth+IsHProjective a (def-kun record); α : H →* Aut Y with hαK using ρ h⁻¹ — variance checked via Aut_mul_def and AlgEquiv.mul_apply, consistent; hαe redundant, not stronger; q IsFinite+Surjective+invariant; Ω-points onto with fibres = orbits (absolute points); hsections/hcategorical match finiteQuotient_normal_proper interface. Conclusions: unique sF descending a_F; descended e-structure plus uniqueness; Y normal, Noetherian, finite clopen integral normal decomposition enumerating irreducibleComponents with coproduct cofan (not stronger for normal Noetherian); Y H-projective over F and e; Q normal, Noetherian, H-projective/proper/finite type over F, proper/finite type over e; no quotient existence. Edge cases: empty Y (n=0, Q empty), disconnected Y, trivial/nonfaithful action, inseparable K/e, universes (u common as in the dependency, H in v). No duplicate found. No compile run (no change)."
+ }
+}

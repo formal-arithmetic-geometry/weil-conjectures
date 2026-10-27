@@ -1,0 +1,229 @@
+{
+ "id": "lem-trf-complete-flat-integral-fibres-projective",
+ "kind": "statement",
+ "title": "Complete-base projectivity from integral fibres and projective reduction",
+ "statement": "Let $A$ be a Noetherian commutative ring, $I\\subseteq A$ an ideal, and assume $A$ is $I$-adically complete. Let $A\\to B$ be a finite type flat homomorphism of commutative rings. For every prime $\\mathfrak p\\subset A$, suppose the fibre $F_{\\mathfrak p}=B\\otimes_A\\kappa(\\mathfrak p)$ is a nonzero integral domain (that is, $1\\ne0$ and $xy=0$ implies $x=0$ or $y=0$). If $B/IB$ is projective over $A/I$, then $B$ is projective over $A$. The notions of Noetherian, completeness, finite type, flatness, tensor product, residue field and projectivity are as in [def-weil-pbc-noetherian-ring], [def-weil-pbc-adically-complete-ring], [def-weil-pbc-finite-type-algebra], [def-weil-pbc-flat-ring-map], [def-weil-pbc-module-tensor-product], [def-weil-residue-field] and [def-weil-pbc-projective-module].",
+ "source": {
+  "document": "literature/stacks-project/flat.tex",
+  "place": "Tag 05FS, lemma-fibres-irreducible-flat-projective, last proof paragraph: associated primes of integral fibres, properness over the complete base, and application of Tag 05DP (lemma-flat-pure-over-complete-projective)"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-noetherian-ring",
+  "def-weil-pbc-adically-complete-ring",
+  "def-weil-pbc-finite-type-algebra",
+  "def-weil-pbc-flat-ring-map",
+  "def-weil-pbc-module-tensor-product",
+  "def-weil-residue-field",
+  "def-weil-pbc-projective-module",
+  "def-weil-pbc-localization-at-prime"
+ ],
+ "proof": [
+  {
+   "text": "Fix a prime $\\mathfrak p\\subset A$ and write $j_{\\mathfrak p}:B\\to F_{\\mathfrak p}$, $b\\mapsto b\\otimes1$. By [def-weil-pbc-localization-at-prime], $A/\\mathfrak p\\to\\kappa(\\mathfrak p)$ is injective: an element $a/1$ in $\\mathfrak pA_{\\mathfrak p}$ has $sa\\in\\mathfrak p$ for some $s\\notin\\mathfrak p$, after taking common denominators, so $a\\in\\mathfrak p$. Tensor this injection with the flat $A$-module $B$, using exactly the injection-preserving definition [def-weil-pbc-flat-ring-map]. The tensor relations [def-weil-pbc-module-tensor-product] give inverse maps $(A/\\mathfrak p)\\otimes_AB\\rightleftarrows B/\\mathfrak pB$, $\\bar a\\otimes b\\mapsto ab\\bmod\\mathfrak pB$ and $\\bar b\\mapsto\\bar1\\otimes b$: the second kills $\\mathfrak pB$ since $\\bar1\\otimes ab=\\bar a\\otimes b=0$ for $a\\in\\mathfrak p$, and the composites fix generators. Likewise the tensor flip sends $\\lambda\\otimes b$ to $b\\otimes\\lambda$, with itself as inverse. Under these maps the tensor injection is $B/\\mathfrak pB\\to F_{\\mathfrak p}$ induced by $j_{\\mathfrak p}$. Hence $\\ker j_{\\mathfrak p}=\\mathfrak pB$.",
+   "uses": [
+    "def-weil-pbc-localization-at-prime",
+    "def-weil-pbc-flat-ring-map",
+    "def-weil-pbc-module-tensor-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/flat.tex",
+    "place": "Tag 05FS, lemma-fibres-irreducible-flat-projective, final paragraph, specialized to the already complete base; elementary tensor and annihilator calculations expanded."
+   }
+  },
+  {
+   "text": "Let $\\mathfrak q$ be an associated prime of $F_{\\mathfrak p}$ as a $B$-module. By [def-weil-pbc-annihilator-associated-primes], there is $z\\in F_{\\mathfrak p}$ with $\\mathfrak q=\\{b:j_{\\mathfrak p}(b)z=0\\}$. Since $\\mathfrak q$ is proper, $z\\ne0$. The assumed domain property of $F_{\\mathfrak p}$ gives $j_{\\mathfrak p}(b)z=0$ if and only if $j_{\\mathfrak p}(b)=0$. Step 1 therefore gives $\\mathfrak q=\\mathfrak pB$. This computes the associated primes as $B$-module annihilators directly; no change-of-ring assertion for associated primes is being assumed.",
+   "uses": [
+    "def-weil-pbc-annihilator-associated-primes"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/flat.tex",
+    "place": "Tag 05FS, lemma-fibres-irreducible-flat-projective, final paragraph, specialized to the already complete base; elementary tensor and annihilator calculations expanded."
+   }
+  },
+  {
+   "text": "Completeness and [lem-weil-pbc-adic-complete-jacobson-radical] imply that the nonempty closed set $V(\\mathfrak p)$ meets $V(I)$; it is nonempty since it contains $\\mathfrak p$. Thus choose a prime $\\mathfrak r\\supseteq\\mathfrak p+I$. The canonical unital map $j_{\\mathfrak r}:B\\to B\\otimes_A\\kappa(\\mathfrak r)$ kills both $\\mathfrak pB$ and $IB$: for $a\\in\\mathfrak r$ and $b\\in B$, $j_{\\mathfrak r}(ab)=b\\otimes\\bar a=0$, by the residue-field and tensor descriptions [def-weil-pbc-localization-at-prime, def-weil-pbc-module-tensor-product]. The target is nonzero by hypothesis. Consequently $IB+\\mathfrak pB\\ne B$, since otherwise this map would kill $1$. By step 2 this proves $IB+\\mathfrak q\\ne B$ for every associated prime required by the complete-base projectivity criterion.",
+   "uses": [
+    "lem-weil-pbc-adic-complete-jacobson-radical",
+    "def-weil-pbc-localization-at-prime",
+    "def-weil-pbc-module-tensor-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/flat.tex",
+    "place": "Tag 05FS, final two sentences, with Algebra Tag 05GI, lemma-radical-completion (4). The nonempty-fibre argument is expanded by the canonical unital map."
+   }
+  },
+  {
+   "text": "Apply [lem-trf-local-flat-pure-complete-projective] with its $(A,I,B,M)$ equal to $(A,I,B,B)$. The module $B$ is finite over itself, generated by $1$. Its flatness over $A$, finite type of $A\\to B$, Noetherianity and completeness of $A$, and projectivity of $B/IB$ over $A/I$ are the stated hypotheses. Steps 2--3 give its associated-prime condition for every $\\mathfrak p$ and every associated $\\mathfrak q$ contracting to $\\mathfrak p$. The criterion concludes that $B$ is projective over $A$.",
+   "uses": [
+    "lem-trf-local-flat-pure-complete-projective"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/flat.tex",
+    "place": "Tag 05FS, application of Tag 05DP (lemma-flat-pure-over-complete-projective) in the final proof paragraph."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-localization-at-prime",
+  "def-weil-pbc-flat-ring-map",
+  "def-weil-pbc-module-tensor-product",
+  "def-weil-pbc-annihilator-associated-primes",
+  "lem-weil-pbc-adic-complete-jacobson-radical",
+  "lem-trf-local-flat-pure-complete-projective"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/flat.tex",
+  "place": "Tag 05FS, lemma-fibres-irreducible-flat-projective, final paragraph, specialized to the already complete base; elementary tensor and annihilator calculations expanded."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "[Pp]rojective.*[Ff]iber|[Ff]iber.*[Pp]rojective|[Pp]rojective.*[Gg]eometrically|[Gg]eometrically.*[Pp]rojective",
+   "results": "2 hits: Mathlib/AlgebraicGeometry/ProjectiveSpectrum/StructureSheaf.lean, Mathlib/AlgebraicGeometry/ProjectiveSpectrum/StructureSheaf.lean; read returned types: finite-presentation module projectivity needs an unavailable finite-base-module hypothesis; smooth flatness and completion flatness prove only individual inputs; no match for this statement.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A finite type flat algebra with integral nonempty fibres over a complete Noetherian ring is projective if its reduction is projective",
+   "results": "service unavailable: {\"error\":\"Rate limit exceeded: 60 per 1 minute\"}",
+   "date": "2026-10-22",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "loogle",
+   "query": "Module.Projective, IsAdicComplete",
+   "results": "0 hits: none",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Complete Noetherian base finite type flat algebra integral nonempty fibres projective modulo ideal implies projective",
+   "results": "8 hits: Module.Flat.projective_of_finitePresentation, Module.projective_of_localization_maximal, Algebra.Smooth.flat_of_isNoetherianRing, AlgebraicGeometry.Proj.instIsProperToSpecZeroOfFiniteTypeSubtypeMemOfNatNat, Algebra.FormallySmooth.flat_of_algHom_of_isNoetherianRing, AlgebraicGeometry.Proj.instUniversallyClosedToSpecZeroOfFiniteTypeSubtypeMemOfNatNat, AlgebraicGeometry.Proj.instLocallyOfFiniteTypeToSpecZeroOfFiniteTypeSubtypeMemOfNatNat, AdicCompletion.flat_of_isNoetherian; read returned types: finite-presentation module projectivity needs an unavailable finite-base-module hypothesis; smooth flatness and completion flatness prove only individual inputs; no match for this statement.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Flat algebra with domain fibres over an adically complete Noetherian ring satisfies associated primes criterion for projectivity",
+   "results": "8 hits: AdicCompletion.flat_of_isNoetherian, Algebra.FormallySmooth.flat_of_algHom_of_isNoetherianRing, Module.FaithfullyFlat.iff_flat_and_proper_ideal, Algebra.Smooth.flat_of_isNoetherianRing, Module.freeLocus_eq_univ, AdicCompletion.ofTensorProduct_bijective_of_finite_of_isNoetherian, Module.faithfullyFlat_iff, Algebra.HasGoingDown.of_flat; read returned types: finite-presentation module projectivity needs an unavailable finite-base-module hypothesis; smooth flatness and completion flatness prove only individual inputs; no match for this statement.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "projective.*(fiber|fibre|IsAdicComplete)|((fiber|fibre|IsAdicComplete).*projective)",
+   "results": "2 hits: Mathlib/AlgebraicGeometry/ProjectiveSpectrum/StructureSheaf.lean, Mathlib/AlgebraicGeometry/ProjectiveSpectrum/StructureSheaf.lean; digest=8eda3ce1349e6969. No item match: the projectivity criteria require finite presentation as an A-module, which finite type as an A-algebra does not supply (e.g. A[t]); completion flatness and going-down prove different conclusions.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Finite type flat algebra integral fibres projective over complete Noetherian ring from projective reduction",
+   "results": "8 hits: Module.Flat.of_projective, Module.Flat.projective_of_finitePresentation, Algebra.Smooth.flat_of_isNoetherianRing, AlgebraicGeometry.IsFinite.iff_isIntegralHom_and_locallyOfFiniteType, Algebra.finite_iff_isIntegral_and_finiteType, Algebra.Smooth.flat, AlgHom.FinitePresentation.of_finiteType, Algebra.QuasiFinite.casesOn; digest=31c2b2cb192ce348. No item match: the projectivity criteria require finite presentation as an A-module, which finite type as an A-algebra does not supply (e.g. A[t]); completion flatness and going-down prove different conclusions.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "Module.Projective, IsAdicComplete",
+   "results": "0 hits: ; digest=4f53cda18c2baa0c. No item match: the projectivity criteria require finite presentation as an A-module, which finite type as an A-algebra does not supply (e.g. A[t]); completion flatness and going-down prove different conclusions.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A finite type flat algebra over an adically complete Noetherian ring with nonzero integral domain fibres is projective if its reduction is projective",
+   "results": "8 hits: Algebra.FormallyUnramified.projective_of_restrictScalars, Module.Flat.projective_of_finitePresentation, Module.projective_of_localization_maximal', AdicCompletion.flat_of_isNoetherian, Module.projective_of_localization_maximal, Algebra.FormallySmooth.projective_kaehlerDifferential, AdicCompletion.ofTensorProduct_bijective_of_finite_of_isNoetherian, Module.free_of_flat_of_finrank_eq; digest=a2e6a9595afff13e. No item match: the projectivity criteria require finite presentation as an A-module, which finite type as an A-algebra does not supply (e.g. A[t]); completion flatness and going-down prove different conclusions.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Projectivity criterion for a flat algebra with integral domain fibres using associated primes and projectivity modulo an ideal of definition",
+   "results": "8 hits: Algebra.HasGoingDown.of_flat, Module.Flat.projective_of_finitePresentation, Module.projective_of_localization_maximal', Algebra.FormallyUnramified.projective_of_restrictScalars, Module.projective_of_localization_maximal, Module.free_of_flat_of_isLocalRing, Module.flat_of_isLocalized_maximal, Module.FaithfullyFlat.of_comap_surjective; digest=fd83cbc21cf534bf. No item match: the projectivity criteria require finite presentation as an A-module, which finite type as an A-algebra does not supply (e.g. A[t]); completion flatness and going-down prove different conclusions.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "projective_of_finitePresentation|projective_of_localization_maximal",
+   "results": "10 hits: Mathlib/RingTheory/Flat/EquationalCriterion.lean, Mathlib/RingTheory/Flat/EquationalCriterion.lean, Mathlib/RingTheory/LocalProperties/Projective.lean, Mathlib/RingTheory/LocalProperties/Projective.lean, Mathlib/RingTheory/LocalProperties/Projective.lean, Mathlib/RingTheory/LocalProperties/Projective.lean, Mathlib/RingTheory/LocalProperties/Projective.lean, Mathlib/RingTheory/LocalProperties/ProjectiveDimension.lean; digest=7f75bf862fc4a006. No item match: the projectivity criteria require finite presentation as an A-module, which finite type as an A-algebra does not supply (e.g. A[t]); completion flatness and going-down prove different conclusions.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-local-noetherian-fibres-projective",
+  "date": "2026-10-22",
+  "group": "Q89"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Proof (1)--(2), semistable-alteration input: the projectivity of S over R (Tag 05FT) used with Tag 05FQ. Subsidiary Noetherian projectivity proof: Tag 05FS, lemma-fibres-irreducible-flat-projective, last proof paragraph: associated primes of integral fibres, properness over the complete base, and application of Tag 05DP (lemma-flat-pure-over-complete-projective).",
+   "via": [
+    "lem-trf-local-noetherian-fibres-projective",
+    "lem-trf-local-fibres-integral-projective",
+    "lem-trf-local-generic-basis-universal-injective",
+    "lem-trf-free-subtraction-flatness",
+    "lem-trf-flattening-module-by-admissible-blowup",
+    "lem-trf-flattening-by-admissible-blowup",
+    "lem-trf-flatification-horizontal-curve-pair",
+    "lem-trf-dejong-relative-marked-semistable",
+    "lem-trf-relative-marked-nodal-reduction",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-trf-complete-flat-integral-fibres-projective",
+  "worker": "stage1",
+  "summary": "Preserved the complete-base statement. Expanded the final paragraph of Stacks 05FS into the flat tensor injection, the direct domain-annihilator calculation, the Jacobson-radical closed-set argument and an application of the existing general module criterion 05DP. All supporting nodes already exist; no new nodes are needed. Refreshed item searches with logged commands and read candidate types.",
+  "blueprint": "Historical ancestor lem-trf-local-term-locality, proof (1)--(2), semistable-alteration input, through the 05FT/05FS projectivity branch recorded in blueprint.from. This item realizes only the complete-base last-paragraph subargument of 05FS; the current latest blueprint uses contracting correspondences, and neither its unit nor its chapter is changed.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q96-0c73cf365",
+  "group": "Q96",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q96-0c73cf365 (reviewer sub-agent of L); spot-checked: I read Stacks 05FS (flat.tex 2178-2244, last paragraph) and 05DP (2144-2176, all six hypotheses). The item is the 05FS last paragraph over the already complete base. Its statement is unchanged and true, and it is exactly what its only citer uses: lem-trf-local-noetherian-fibres-projective step 3, with base C, ideal fC and algebra D. Step 1 shows ker(B->B⊗κ(p)) = pB. It is elementary: A/p->κ(p) is injective by clearing the fraction relation, flatness preserves arbitrary injections, and the (A/p)⊗B ≅ B/pB identification and the flip are written out; the composite is b↦b⊗1. Step 2: the fibre is a nonzero domain, so every associated q = Ann_B(z) with z≠0 equals ker j = pB. Step 3 is non-elementary: the Mathlib leaf lem-weil-pbc-adic-complete-jacobson-radical says every nonempty closed set meets V(I), giving a prime r ⊇ p+I. Then j_r kills pB+IB, and B⊗κ(r)≠0 by hypothesis, so IB+q≠B. Step 4 applies lem-trf-local-flat-pure-complete-projective (05DP, same unit) with M=B; I checked each hypothesis against that node's statement. No new nodes. No cycle (89 transitive deps checked). The 05FS grep finds only the parent and its siblings, none stating the complete-base case. No SGA, no tool_uses needed. The blueprint fields are filled. The report's mention of a citations.json is a harmless inaccuracy: no such file is in the commit. review_split's 'no such node' messages are an artifact of the chapter symlinks; I opened every cited node directly."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.CompleteFlatIntegralFibresProjective",
+  "declaration": "Algebra.projective_of_complete_of_integral_fibres",
+  "file": "lean/Sheaf/RingTheory/CompleteFlatIntegralFibresProjective.lean",
+  "statement": "theorem projective_of_complete_of_integral_fibres (A : Type u) (B : Type v) [CommRing A] [CommRing B] [Algebra A B] (I : Ideal A) [IsNoetherianRing A] [IsAdicComplete I A] (hfinite : RingHom.FiniteType (algebraMap A B)) (hflat : RingHom.Flat (algebraMap A B)) (hfibres : ∀ (p : Ideal A) [p.IsPrime], IsDomain (p.Fiber B)) (hproj : Module.Projective (A ⧸ I) (TensorProduct A (A ⧸ I) B)) : Module.Projective A B",
+  "branch": "newtargets-dag",
+  "by": "Q17",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-80a62b7c1",
+  "group": "Q17",
+  "result": "pass",
+  "note": "Read node, all 8 stmt_dep records, the 05DP criterion local_flat_pure_complete_projective and the Lean module. Hypotheses match clause by clause: IsNoetherianRing, IsAdicComplete I A, RingHom.FiniteType/Flat of algebraMap, ∀ p prime IsDomain (p.Fiber B) (nonzero + domain), hproj in the exact (A⧸I)⊗[A]B form 05DP consumes; conclusion Module.Projective A B; no extra instances; universes u,v independent and bound. The added stmt_dep def-weil-pbc-localization-at-prime (landed, records Ideal.ResidueField/Ideal.Fiber, already a proof_dep) is justified. Edge cases A=0, I=0, I=⊤, polynomial algebras OK. Steps 1-4 verified; citer lem-trf-local-noetherian-fibres-projective uses a consistent Ideal.Fiber interface. No name collision; docstrings give source place and blueprint; sorry only; statement verbatim. Not recompiled (no change). Minor: unused public import Mathlib.AlgebraicGeometry.ResidueField, harmless."
+ }
+}

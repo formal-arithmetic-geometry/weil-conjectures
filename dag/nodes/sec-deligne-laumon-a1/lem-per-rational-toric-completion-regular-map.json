@@ -1,0 +1,393 @@
+{
+ "id": "lem-per-rational-toric-completion-regular-map",
+ "kind": "statement",
+ "title": "Regular rational toric models of completed log charts",
+ "statement": "Let $P$ be a fine saturated sharp commutative monoid [def-trf-fs-log-blowup], let $k$ be any field of characteristic zero, and let $n\\geq0$. Sharp means that $0$ is the only unit. Write $k[P][t_1,\\ldots,t_n]$ for the finite-sum monoid polynomial ring, with $z^pz^q=z^{p+q}$, and let\n$$A=B_k(P,n)=\\left(k[P][t_1,\\ldots,t_n]\\right)^\\wedge_{(z^p\\ (p\\ne0),t_1,\\ldots,t_n)}$$\nbe its completion [def-weil-pbc-adic-completion]. The ring $A$ is a reduced Noetherian excellent local ring [def-pc-reduced-scheme], [def-exc-excellent-ring], and its natural monomial map\n$$\\mathbf Q[P][t_1,\\ldots,t_n]\\longrightarrow A$$\nis regular, meaning flat with geometrically regular fibres. With the log structures associated to $P\\to\\mathbf Q[P][t]$ and $P\\to A$, the corresponding scheme morphism is strict and both log schemes are fs log regular [def-trf-fs-log-blowup]. In particular these maps, and finite disjoint unions of them, are morphisms to which a regular-functorial characteristic-zero resolution algorithm applies. The case $P=\\{0\\}$ and $n=0$ is included; no finite-generation hypothesis on $k/\\mathbf Q$ is imposed.",
+ "source": {
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "VI 1.6(i), printed p.70, and VIII proof of Theorem 3.4.15, third paragraph, printed p.114 (the regular rational toric model and complete qe input) No Stacks tag states this combined result; the cited place is in the archived ILO volume."
+ },
+ "stmt_deps": [
+  "def-trf-fs-log-blowup",
+  "def-weil-pbc-adic-completion",
+  "def-pc-reduced-scheme",
+  "def-exc-excellent-ring",
+  "def-per-strict-log-morphism",
+  "def-per-associated-log-presentation",
+  "def-weil-pbc-g-ring"
+ ],
+ "proof": [
+  {
+   "text": "Put $R_F=F[P][t_1,\\ldots,t_n]$ for $F=\\mathbf Q,k$, $\\mathfrak m=(z^p\\ (p\\ne0),t_1,\\ldots,t_n)\\subset R_k$, and $L=(R_k)_{\\mathfrak m}$. The displayed ideal is maximal since $R_k/\\mathfrak m=k$. Finite generators of $P$ together with the $t_i$ generate $R_F$ as an $F$-algebra. Hence [lem-exc-fields-excellent] and [lem-exc-finite-type-localization-excellent] make $R_{\\mathbf Q},R_k,L$ excellent. To identify the completion of $L$ with $A$, take $s\\notin\\mathfrak m$. Its residue is a nonzero scalar $c\\in k$ and $s=c+u$, $u\\in\\mathfrak m$. Modulo $\\mathfrak m^j$, its inverse is $c^{-1}\\sum_{a=0}^{j-1}(-u/c)^a$. Thus $R_k/\\mathfrak m^j\\to L/(\\mathfrak mL)^j$ is an isomorphism for every $j$, compatibly with transition maps; their inverse limits identify $\\widehat L=A$ with the same monomial map.",
+   "uses": [
+    "lem-exc-fields-excellent",
+    "lem-exc-finite-type-localization-excellent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tags 07QW (proposition-ubiquity-excellent, fields) and 07QU (lemma-finite-type-over-excellent); the completion identification is the written finite geometric-series argument."
+   }
+  },
+  {
+   "text": "The monoid $T=P\\oplus\\mathbf N^n$ is fs and sharp by checking finite generation, cancellation, saturation and units componentwise. Its monoid algebra $k[T]$ is $R_k$, and its nonconstant monomial ideal is $\\mathfrak m$. The field $k$ is a complete regular Noetherian local ring: [lem-weil-pbc-field-regular-ring] gives regularity and its zero maximal ideal has constant quotient system $k$. Apply [lem-trf-formal-monoid-ring-dimension] with $D=k$ and monoid $T$. It gives that $A$ is a Noetherian local integral domain, hence reduced. By [lem-weil-pbc-adic-completion-mod-ideal], $A$ is complete for $\\mathfrak mA$. The same dimension node gives $A/\\mathfrak mA=k$, so $\\mathfrak mA$ is its maximal ideal. Now [lem-per-complete-local-excellence] makes $A$ excellent.",
+   "uses": [
+    "lem-weil-pbc-field-regular-ring",
+    "lem-trf-formal-monoid-ring-dimension",
+    "lem-weil-pbc-adic-completion-mod-ideal",
+    "lem-per-complete-local-excellence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "VI 1.6(i), p.70, completed monoid model; excellence is Stacks 07QW (proposition-ubiquity-excellent, complete local rings)."
+   }
+  },
+  {
+   "text": "The coefficient map $\\mathbf Q\\to k$ is flat by [lem-weil-pbc-module-over-field-flat]. Its only fibre is $k$. In characteristic zero every finite purely inseparable extension of $\\mathbf Q$ is trivial by [def-weil-pbc-finite-purely-inseparable-extension]; therefore [lem-weil-pbc-field-regular-ring] makes this fibre geometrically regular. Thus $\\mathbf Q\\to k$ is regular by [def-weil-pbc-g-ring]. Apply [lem-weil-pbc-regular-base-change] along the finite-type map $\\mathbf Q\\to R_{\\mathbf Q}$. The monomial-basis identification $k\\otimes_{\\mathbf Q}R_{\\mathbf Q}\\cong R_k$, $c\\otimes z^pt^e\\mapsto cz^pt^e$, identifies its base change with $R_{\\mathbf Q}\\to R_k$. This use of finite-type base change assumes finite generation of $R_{\\mathbf Q}/\\mathbf Q$, already proved in step 1, and imposes none on $k/\\mathbf Q$.",
+   "uses": [
+    "lem-weil-pbc-module-over-field-flat",
+    "def-weil-pbc-finite-purely-inseparable-extension",
+    "lem-weil-pbc-field-regular-ring",
+    "def-weil-pbc-g-ring",
+    "lem-weil-pbc-regular-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tags 07BZ (definition-regular) and 07C1 (lemma-regular-base-change); characteristic-zero purely inseparable convention: fields.tex Tag 09HE."
+   }
+  },
+  {
+   "text": "The localization $R_k\\to L$ is flat by [lem-weil-pbc-localization-flat]. At a prime $\\mathfrak p$ of $R_k$ its fibre is $\\kappa(\\mathfrak p)$ if $\\mathfrak p\\subseteq\\mathfrak m$ and is the zero ring otherwise: localizing the field $\\kappa(\\mathfrak p)$ either inverts only nonzero elements or inverts zero. These fibres are geometrically regular, since any field extension of the first fibre is a field by [lem-weil-pbc-field-regular-ring], while the zero ring has no prime local rings. Hence $R_k\\to L$ is regular. Since $L$ is excellent, it is a G-ring by [def-exc-excellent-ring], and the definition [def-weil-pbc-g-ring] at its maximal prime gives the regular map $L\\to\\widehat L=A$. Apply [lem-weil-pbc-regular-composition] to the chain $R_{\\mathbf Q}\\to R_k\\to L\\to A$, using step 3. At each application its fibre-Noetherianity hypothesis holds: a fibre of a map to a Noetherian ring $C$ is a quotient of a localization of $C$; [lem-weil-pbc-localization-noetherian] and [lem-weil-pbc-finite-type-algebra-noetherian] (for the quotient map) give Noetherianity. The targets $R_k,L,A$ are Noetherian by steps 1--2. We have proved the asserted regularity of $R_{\\mathbf Q}\\to A$.",
+   "uses": [
+    "lem-weil-pbc-localization-flat",
+    "lem-weil-pbc-field-regular-ring",
+    "def-exc-excellent-ring",
+    "def-weil-pbc-g-ring",
+    "lem-weil-pbc-regular-composition",
+    "lem-weil-pbc-localization-noetherian",
+    "lem-weil-pbc-finite-type-algebra-noetherian"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tags 07BZ (definition-regular), 07GH (definition-G-ring) and 07QI (lemma-regular-composition); localization flatness: algebra.tex Tag 00HT."
+   }
+  },
+  {
+   "text": "Write $Y=\\operatorname{Spec}R_{\\mathbf Q}$ and $X=\\operatorname{Spec}A$, with the associated $P$-chart log structures. They are fs by [def-trf-fs-log-blowup]. The chart-compatible monomial map defines a log morphism $f:X\\to Y$. It is strict: the pullback log structure is the logification of the same composite $P\\to R_{\\mathbf Q}\\to A$. Indeed, for any log structure $K$ on $X$, both this pullback and the associated $P$-chart represent compatible maps $P\\to K(X)$ with this structural map. The universal property in [lem-per-integral-chart-logification-thickening] identifies them, with identity on $P$ and on units. This proves strictness, rather than assuming it from regularity.",
+   "uses": [
+    "def-trf-fs-log-blowup",
+    "lem-per-integral-chart-logification-thickening"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "VI 1.1, p.69, associated-chart conventions; VIII proof of Theorem 3.4.15, p.114, the obvious strict morphism to the rational monoid polynomial model."
+   }
+  },
+  {
+   "text": "Give $\\operatorname{Spec}\\mathbf Q$ the trivial log structure. It is log regular, since its nonunit log ideal and characteristic rank are zero and the field is regular by [lem-weil-pbc-field-regular-ring]. Taking the face $\\{0\\}$ of the sharp monoid $P$, [lem-trf-fs-face-sharpening] gives that $P^{\\rm gp}$ is finite free. For $Y\\to\\operatorname{Spec}\\mathbf Q$, use the compatible charts $0\\to P$. The group map is injective with torsion-free cokernel $P^{\\rm gp}$. The comparison scheme is $\\operatorname{Spec}\\mathbf Q[P]$, and the comparison map is the polynomial projection $Y\\to\\operatorname{Spec}\\mathbf Q[P]$, smooth by [lem-weil-pbc-polynomial-ring-smooth], using the affine-locally smooth-ring-map characterization in [def-sbc-smooth-morphisms]. The hypotheses of [lem-per-log-smooth-invertible-torsion-log-regular] hold (torsion subgroup has order one). It follows that $Y$ is log regular.",
+   "uses": [
+    "lem-weil-pbc-field-regular-ring",
+    "lem-trf-fs-face-sharpening",
+    "lem-weil-pbc-polynomial-ring-smooth",
+    "def-sbc-smooth-morphisms",
+    "lem-per-log-smooth-invertible-torsion-log-regular"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "VI 1.5(ii) and 1.8, p.70, toric log regularity and log-smooth preservation; polynomial smoothness: Stacks algebra.tex Tags 00T6 and 00T7."
+   }
+  },
+  {
+   "text": "We check the defining log-regularity criterion at a geometric point $\\bar x$ of $X$ over $\\bar y$ of $Y$. Both schemes are Noetherian excellent: use steps 1--2 and [lem-trf-excellent-scheme-affine-cover] with their single affine covers. By [lem-per-regular-strict-local-model], the map of strict local rings $C=\\mathcal O_{Y,\\bar y}\\to B=\\mathcal O_{X,\\bar x}$ is regular. Strictness from step 5 identifies their characteristic monoids and identifies the nonunit log ideal of $B$ with $IB$, where $I\\subset C$ is that of $Y$. Explicitly its stalk logification is $M_{Y,\\bar y}\\oplus_{C^\\times}B^\\times$; a local ring map reflects units, so the same monoid elements are nonunits, with their structural images extended to $B$. Put $r=\\operatorname{rank}\\overline M_{Y,\\bar y}^{\\rm gp}$ and $E=B/\\mathfrak m_CB$. The cited strict-local-model node, applied to the closed subscheme $\\operatorname{Spec}(C/I)$, gives a regular map $C/I\\to B/IB$ with closed fibre $E$. Since $C/I$ is regular by step 6, [lem-weil-pbc-regular-map-ascent] makes $B/IB$ regular. Apply [lem-weil-pbc-flat-height-formula] to the two flat local maps $C\\to B$ and $C/I\\to B/IB$. Their common closed fibre gives\n$$\\dim B=\\dim C+\\dim E=\\dim(C/I)+r+\\dim E=\\dim(B/IB)+r.$$\nThis is precisely [def-trf-fs-log-blowup]'s criterion for log regularity of $X$ at $\\bar x$. No finite-presentation assertion about the completion morphism is used.",
+   "uses": [
+    "lem-trf-excellent-scheme-affine-cover",
+    "lem-per-regular-strict-local-model",
+    "lem-weil-pbc-regular-map-ascent",
+    "lem-weil-pbc-flat-height-formula",
+    "def-trf-fs-log-blowup"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "VI 1.2, p.69, stratum and dimension criterion; agent expansion for this strict regular map, using Stacks Tags 031E and 00ON through the cited ascent and height-formula nodes."
+   }
+  },
+  {
+   "text": "The domain property of $A$ already makes $X$ reduced. Log regularity of $Y$ and [lem-trf-log-regular-divisorial-structure] make its local rings normal domains, hence reduced. Both $X,Y$ are excellent by steps 1--2 and the affine-cover lemma used in step 7; in particular they are quasi-excellent. They are schemes over $\\mathbf Q$, and step 4 proves that $f$ is regular. Thus they satisfy the input and morphism hypotheses of [lem-per-qe-ordinary-regular-resolution]. For a finite disjoint union use the finitely many affine component covers: they give Noetherian quasi-excellent reduced rational schemes, and each fibre and each local map of the union morphism is a fibre or local map of one component. Hence the union morphism is regular and the same resolution node applies. The empty union is covered by its explicit empty-input clause.",
+   "uses": [
+    "lem-trf-log-regular-divisorial-structure",
+    "lem-per-qe-ordinary-regular-resolution"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "VIII Theorem 2.3.10, pp.91--93, and proof of Theorem 3.4.15, p.114; VI 1.4 and VIII 3.4.1, normality of fs log regular schemes."
+   }
+  },
+  {
+   "text": "If $P=\\{0\\}$ and $n=0$, then $R_{\\mathbf Q}=\\mathbf Q$, $R_k=L=A=k$, $\\mathfrak m=0$, and both log structures are trivial. Step 3 is exactly regularity of $\\mathbf Q\\to k$; all subsequent constructions reduce to these same maps. The componentwise argument for $P\\oplus\\mathbf N^n$ also covers just $P=0$ or just $n=0$. No step restricts the transcendence degree or algebraic degree of $k/\\mathbf Q$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "VI 1.6(i), p.70, and VIII proof of Theorem 3.4.15, p.114: zero monoid and zero parameter specialization."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-exc-fields-excellent",
+  "lem-exc-finite-type-localization-excellent",
+  "lem-weil-pbc-field-regular-ring",
+  "lem-trf-formal-monoid-ring-dimension",
+  "lem-weil-pbc-adic-completion-mod-ideal",
+  "lem-per-complete-local-excellence",
+  "lem-weil-pbc-module-over-field-flat",
+  "def-weil-pbc-finite-purely-inseparable-extension",
+  "def-weil-pbc-g-ring",
+  "lem-weil-pbc-regular-base-change",
+  "lem-weil-pbc-localization-flat",
+  "def-exc-excellent-ring",
+  "lem-weil-pbc-regular-composition",
+  "lem-weil-pbc-localization-noetherian",
+  "lem-weil-pbc-finite-type-algebra-noetherian",
+  "def-trf-fs-log-blowup",
+  "lem-per-integral-chart-logification-thickening",
+  "lem-trf-fs-face-sharpening",
+  "lem-weil-pbc-polynomial-ring-smooth",
+  "def-sbc-smooth-morphisms",
+  "lem-per-log-smooth-invertible-torsion-log-regular",
+  "lem-trf-excellent-scheme-affine-cover",
+  "lem-per-regular-strict-local-model",
+  "lem-weil-pbc-regular-map-ascent",
+  "lem-weil-pbc-flat-height-formula",
+  "lem-trf-log-regular-divisorial-structure",
+  "lem-per-qe-ordinary-regular-resolution"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "VI 1.1--1.8, pp.69--70, and VIII proof of Theorem 3.4.15, p.114; explicit commutative-algebra and strict-local dimension verification supplied by Q35."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "lem-per-rational-toric-completion-regular-map: For a sharp fs monoid P and characteristic zero field k the map Q[P][t] to the completed local monoid ring k[[P]][[t]] is regular",
+   "results": "{\"t\": \"2026-10-24T01:30:30Z\", \"tool\": \"leanfinder\", \"query\": \"lem-per-rational-toric-completion-regular-map: For a sharp fs monoid P and characteristic zero field k the map Q[P][t] to the completed local monoid ring k[[P]][[t]] is regular\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"LaurentSeries.RatFuncAdicCompl\", \"LaurentSeries.ratfuncAdicComplPkg\", \"LaurentSeries.instAlgebraRatFuncAdicCompl\", \"LaurentSeries.algebraMap_C_mem_adicCompletionIntegers\", \"LaurentSeries.instAlgebraSubtypeAdicCompletionPolynomialRatFuncIdealXMemValuationSubringAdicCompletionIntegers\", \"LaurentSeries.powerSeriesRingEquiv\", \"LaurentSeries.powerSeriesAlgEquiv\", \"RingTheory.Sequence.IsWeaklyRegular.of_isLocalization\"], \"digest\": \"9d2c4215fb92bd9e\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected hits; none states the asserted resolution, log geometry, or regular base-change theorem"
+  },
+  {
+   "tool": "leansearch",
+   "query": "lem-per-rational-toric-completion-regular-map: Polynomial monoid algebra over rationals maps regularly to the completed monoid ring over any characteristic zero residue field",
+   "results": "{\"t\": \"2026-10-24T01:30:30Z\", \"tool\": \"leansearch\", \"query\": \"lem-per-rational-toric-completion-regular-map: Polynomial monoid algebra over rationals maps regularly to the completed monoid ring over any characteristic zero residue field\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"LaurentSeries.LaurentSeriesAlgEquiv\", \"IsLocalization.injective_iff_isRegular\", \"UniformSpace.Completion.coeRingHom\", \"AddMonoidAlgebra.singleZeroRingHom\", \"EqualCharZero.algebraRat\", \"LaurentSeries.instAlgebraRatFuncAdicCompl\", \"RatFunc.coe_mapAlgHom_eq_coe_map\", \"RatFunc.algebraMap_apply\"], \"digest\": \"a4875844e1ef60a7\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected hits; none states the asserted resolution, log geometry, or regular base-change theorem"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsRegular\"",
+   "results": "{\"t\": \"2026-10-24T01:30:31Z\", \"tool\": \"loogle\", \"query\": \"\\\"IsRegular\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"Lean.ReducibilityHints.isRegular\", \"Lean.PrettyPrinter.Delaborator.ParamKind.isRegularExplicit\", \"IsRegular\", \"IsRegular.left\", \"IsRegular.right\", \"IsRegular.mk\", \"isRegular_iff\", \"IsRegular.all\"], \"digest\": \"c3fa31260b4cc960\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected hits; none states the asserted resolution, log geometry, or regular base-change theorem"
+  },
+  {
+   "tool": "grep",
+   "query": "GeometricallyRegular|regular.*completion|completion.*regular",
+   "results": "{\"t\": \"2026-10-24T01:30:32Z\", \"tool\": \"grep\", \"query\": \"GeometricallyRegular|regular.*completion|completion.*regular\", \"sub\": \"\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"Mathlib/Topology/Algebra/Nonarchimedean/Completion.lean\", \"Mathlib/MeasureTheory/Measure/Haar/Unique.lean\", \"Mathlib/MeasureTheory/Measure/EverywherePos.lean\", \"Mathlib/MeasureTheory/Measure/EverywherePos.lean\", \"Mathlib/MeasureTheory/Measure/EverywherePos.lean\"], \"digest\": \"dde4abd4944d8e0e\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected hits; none states the asserted resolution, log geometry, or regular base-change theorem"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "lem-per-rational-toric-completion-regular-map: Polynomial monoid algebra over rationals maps regularly to the completed monoid ring over any characteristic zero residue field",
+   "results": "{\"t\": \"2026-10-24T01:30:41Z\", \"tool\": \"leanfinder\", \"query\": \"lem-per-rational-toric-completion-regular-map: Polynomial monoid algebra over rationals maps regularly to the completed monoid ring over any characteristic zero residue field\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"EqualCharZero.algebraRat\", \"LaurentSeries.instAlgebraRatFuncAdicCompl\", \"LaurentSeries.instAlgebraSubtypeAdicCompletionPolynomialRatFuncIdealXMemValuationSubringAdicCompletionIntegers\", \"FunctionField.ringOfIntegers.algebraMap_injective\", \"LaurentSeries.algebraMap_C_mem_adicCompletionIntegers\", \"RatFunc.coe_coe\", \"RatFunc.liftRingHom\", \"RatFunc.liftMonoidWithZeroHom_injective\"], \"digest\": \"8eff26671fec17e8\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected hits; none states the asserted resolution, log geometry, or regular base-change theorem"
+  },
+  {
+   "tool": "leansearch",
+   "query": "lem-per-rational-toric-completion-regular-map: Completed sharp saturated monoid rings are excellent and log regular and the rational coefficient map is regular",
+   "results": "{\"t\": \"2026-10-24T02:14:37Z\", \"tool\": \"leansearch\", \"query\": \"lem-per-rational-toric-completion-regular-map: Completed sharp saturated monoid rings are excellent and log regular and the rational coefficient map is regular\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"IsRegular.monomial\", \"IsLocalization.injectiveₛ\", \"IsLocalization.injective_iff_isRegular\", \"IsSMulRegular.of_isLocalizedModule\", \"Algebra.FormallyEtale.of_isLocalization\", \"Submonoid.LocalizationMap.injective_iff\", \"Submonoid.LocalizationMap.map_isRegular\", \"Localization.epi'\"], \"digest\": \"b9f00ac77c7860a8\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: read hits; Laurent-series completions, regular elements, regular sequences and ordinary scheme smoothness do not state this monoid-completion/log-regularity theorem."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "lem-per-rational-toric-completion-regular-map: The rational monoid polynomial algebra maps regularly to its completed local monoid algebra over a characteristic zero field",
+   "results": "{\"t\": \"2026-10-24T02:14:40Z\", \"tool\": \"leanfinder\", \"query\": \"lem-per-rational-toric-completion-regular-map: The rational monoid polynomial algebra maps regularly to its completed local monoid algebra over a characteristic zero field\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"LaurentSeries.instAlgebraRatFuncAdicCompl\", \"LaurentSeries.instAlgebraSubtypeAdicCompletionPolynomialRatFuncIdealXMemValuationSubringAdicCompletionIntegers\", \"LaurentSeries.ratfuncAdicComplPkg\", \"LaurentSeries.powerSeriesAlgEquiv\", \"RatFunc.coe_coe\", \"LaurentSeries.LaurentSeries_coe\", \"RatFunc.algebraMap_injective\", \"RatFunc.algebraMap_apply_div\"], \"digest\": \"144f61d0fb2e1600\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: read hits; Laurent-series completions, regular elements, regular sequences and ordinary scheme smoothness do not state this monoid-completion/log-regularity theorem."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "lem-per-rational-toric-completion-regular-map: Regularity of completion maps for affine toric rings and extension of the coefficient field",
+   "results": "{\"t\": \"2026-10-24T02:14:41Z\", \"tool\": \"leanfinder\", \"query\": \"lem-per-rational-toric-completion-regular-map: Regularity of completion maps for affine toric rings and extension of the coefficient field\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Proj.valuativeCriterion_existence_aux\", \"AlgebraicGeometry.Proj.valuativeCriterion_existence\", \"LaurentSeries.comparePkg_eq_extension\", \"AlgebraicGeometry.Scheme.RationalMap.fromFunctionField\", \"RatFunc.liftRingHom\", \"LaurentSeries.extensionAsRingHom\", \"AlgebraicGeometry.Scheme.RationalMap.fromFunctionField_ofFunctionField\", \"LaurentSeries.instAlgebraSubtypeAdicCompletionPolynomialRatFuncIdealXMemValuationSubringAdicCompletionIntegers\"], \"digest\": \"0c80bc529678306e\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: read hits; Laurent-series completions, regular elements, regular sequences and ordinary scheme smoothness do not state this monoid-completion/log-regularity theorem."
+  },
+  {
+   "tool": "grep",
+   "query": "\\bLogRegular\\b|\\bLogScheme\\b|log_regular|GeometricallyRegular",
+   "results": "{\"t\": \"2026-10-24T02:25:06Z\", \"tool\": \"grep\", \"query\": \"\\\\bLogRegular\\\\b|\\\\bLogScheme\\\\b|log_regular|GeometricallyRegular\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: read hits; Laurent-series completions, regular elements, regular sequences and ordinary scheme smoothness do not state this monoid-completion/log-regularity theorem."
+  },
+  {
+   "tool": "grep",
+   "query": "\\bLogRegular\\b|\\bLogScheme\\b|log_regular|GeometricallyRegular",
+   "results": "{\"t\": \"2026-10-24T02:25:06Z\", \"tool\": \"grep\", \"query\": \"\\\\bLogRegular\\\\b|\\\\bLogScheme\\\\b|log_regular|GeometricallyRegular\", \"sub\": \"RingTheory\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: read hits; Laurent-series completions, regular elements, regular sequences and ordinary scheme smoothness do not state this monoid-completion/log-regularity theorem."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-per-characteristic-zero-log-resolution-independence",
+  "date": "2026-10-24",
+  "group": "Q129"
+ },
+ "chapter": "sec-deligne-laumon-a1",
+ "unit": "sk-p-dl-a1-perverse",
+ "blueprint": {
+  "from": {
+   "node": "lem-per-artin-gabber-affine-curve",
+   "place": "Ancestor proof Step 3 (regular finite-torsion local model and purity), geometric equivariant-modification input through XVI 3.7: VIII Lemma 5.5.2 and proof, printed pp.127--128; characteristic-zero independence used there is Theorem 3.4.15, printed pp.113--114. VIII Theorem 2.3.10 and Remarks 2.3.11--2.3.12, pp.93--94 (existence and normalized regular functoriality); 3.2.19 and Theorem 3.4.15 with its proof and Remark 3.4.16(i), pp.106,113--114 (induced rule, independence, and synchronization). Supporting input: VI 1.6(i), printed p.70, and VIII proof of Theorem 3.4.15, third paragraph, printed p.114 (the regular rational toric model and complete qe input)",
+   "via": [
+    "lem-per-characteristic-zero-log-resolution-independence",
+    "lem-per-complete-local-rigidification-comparison",
+    "lem-per-gabber-absolute-equivariant-modification",
+    "lem-per-gabber-log-smooth-equivariant-modification",
+    "lem-per-trait-prime-to-ell-log-alteration",
+    "lem-per-gabber-regular-pair-purity",
+    "lem-per-absolute-gysin-purity",
+    "lem-per-potential-dualizing-regular-unit",
+    "lem-per-finite-regular-reduction-dualizing",
+    "lem-per-qbar-generic-duality-model",
+    "lem-per-qbar-middle-tstructure"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-per-rational-toric-completion-regular-map",
+  "worker": "stage1",
+  "summary": "Q35 verified the rational toric completion assertion against ILO VI and VIII. All needed inputs already exist: the proof writes the localization-completion identification and the finite-type base-change direction, then checks log regularity by log-smooth charts and the strict-local quotient/dimension criterion. No new nodes, no statement change, no Lean edits or compiles.",
+  "blueprint": "Nearest ancestor lem-per-artin-gabber-affine-curve, proof Step 3 geometric local-model ancestry through the characteristic-zero log-resolution-independence node: ILO VIII proof of 3.4.15, p.114, strict completed model over Q[P][t]. The current latest blueprint ancestor is read; the local algebra expands the intervening DAG proof route rather than claiming it appears verbatim in that ancestor.",
+  "tool_uses": [
+   {
+    "node": "lem-exc-fields-excellent",
+    "why": "Generic fields are excellent used as stated for the completed rational toric chart; the unit has no replacement for this local algebra/log-chart tool, and its geometric resolution route is unchanged."
+   },
+   {
+    "node": "lem-exc-finite-type-localization-excellent",
+    "why": "Generic excellence is preserved by finite type algebras and localization used as stated for the completed rational toric chart; the unit has no replacement for this local algebra/log-chart tool, and its geometric resolution route is unchanged."
+   },
+   {
+    "node": "lem-trf-formal-monoid-ring-dimension",
+    "why": "Generic dimension of a formal monoid ring and a parameter hypersurface used as stated for the completed rational toric chart; the unit has no replacement for this local algebra/log-chart tool, and its geometric resolution route is unchanged."
+   },
+   {
+    "node": "def-weil-pbc-g-ring",
+    "why": "Generic g-ring used as stated for the completed rational toric chart; the unit has no replacement for this local algebra/log-chart tool, and its geometric resolution route is unchanged."
+   },
+   {
+    "node": "lem-weil-pbc-regular-base-change",
+    "why": "Generic regular ring maps are stable under finite type base change used as stated for the completed rational toric chart; the unit has no replacement for this local algebra/log-chart tool, and its geometric resolution route is unchanged."
+   },
+   {
+    "node": "def-exc-excellent-ring",
+    "why": "Generic excellent and quasi-excellent commutative rings used as stated for the completed rational toric chart; the unit has no replacement for this local algebra/log-chart tool, and its geometric resolution route is unchanged."
+   },
+   {
+    "node": "lem-weil-pbc-regular-composition",
+    "why": "Generic composition of regular ring maps used as stated for the completed rational toric chart; the unit has no replacement for this local algebra/log-chart tool, and its geometric resolution route is unchanged."
+   },
+   {
+    "node": "def-trf-fs-log-blowup",
+    "why": "Generic fine saturated log schemes, log regularity and saturated log blowups used as stated for the completed rational toric chart; the unit has no replacement for this local algebra/log-chart tool, and its geometric resolution route is unchanged."
+   },
+   {
+    "node": "lem-trf-fs-face-sharpening",
+    "why": "Generic localization at a face and sharpening of an fs monoid used as stated for the completed rational toric chart; the unit has no replacement for this local algebra/log-chart tool, and its geometric resolution route is unchanged."
+   },
+   {
+    "node": "def-sbc-smooth-morphisms",
+    "why": "Generic smooth morphisms used as stated for the completed rational toric chart; the unit has no replacement for this local algebra/log-chart tool, and its geometric resolution route is unchanged."
+   },
+   {
+    "node": "lem-trf-excellent-scheme-affine-cover",
+    "why": "Generic excellence of a scheme is detected on an affine open cover used as stated for the completed rational toric chart; the unit has no replacement for this local algebra/log-chart tool, and its geometric resolution route is unchanged."
+   },
+   {
+    "node": "lem-weil-pbc-regular-map-ascent",
+    "why": "Generic regularity ascends along flat maps with regular fibres used as stated for the completed rational toric chart; the unit has no replacement for this local algebra/log-chart tool, and its geometric resolution route is unchanged."
+   },
+   {
+    "node": "lem-trf-log-regular-divisorial-structure",
+    "why": "Generic normality and divisorial description of a log regular structure used as stated for the completed rational toric chart; the unit has no replacement for this local algebra/log-chart tool, and its geometric resolution route is unchanged."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-exc-fields-excellent",
+  "lem-exc-finite-type-localization-excellent",
+  "lem-trf-formal-monoid-ring-dimension",
+  "def-weil-pbc-g-ring",
+  "lem-weil-pbc-regular-base-change",
+  "def-exc-excellent-ring",
+  "lem-weil-pbc-regular-composition",
+  "def-trf-fs-log-blowup",
+  "lem-trf-fs-face-sharpening",
+  "def-sbc-smooth-morphisms",
+  "lem-trf-excellent-scheme-affine-cover",
+  "lem-weil-pbc-regular-map-ascent",
+  "lem-trf-log-regular-divisorial-structure"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q35-115bef780",
+  "group": "Q35",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q35-115bef780 (reviewer sub-agent of L); spot-checked: I read all 9 steps against the statements of all 27 cited nodes, and the source ILO VI 1.6(i), 1.8 and VIII proof of 3.4.15 (strict X̂→Spec Q[P][t]). Step 1: R_k/𝔪=k because P is sharp, and the geometric-series argument gives L̂=A. Step 2: formal-monoid-dimension with D=k gives a Noetherian local domain with L=𝔪A maximal; complete-local excellence follows. Step 3: Q→k is regular (char 0 purely inseparable is trivial), and regular base change is applied along the finite-type map Q→R_Q, not Q→k. Step 4: the localization fibres are κ(𝔭) or 0; the step's wording here is loose but correct, since κ(𝔭) has char 0. G-ring at the maximal prime, and composition fibres are localizations of quotients, hence Noetherian. Step 5: strictness via the arbitrary-map universal property of the logification node and Yoneda. Step 6: {0} is a face, P^gp is free, polynomial projection is smooth, then the log-smooth to log-regular node applies. Step 7: strict-local-model closed-subscheme clause plus regular ascent; two flat height formulas sharing the fibre B/𝔪_C B give dim B=dim B/IB+r. Step 8: hypotheses of the resolution node hold. Edge cases checked: P=0 and n=0, P=N, singular cone, k of infinite transcendence degree. No duplicate found. Batch-5 flags: all are generic excellence, monoid and log-chart algebra on the Gabber/finiteness route (finiteness of the six operations is a hypothesis of the trace formula), not trace-formula or Poincaré-duality steps; accepted. Artin–Gabber flag: the item is not in the reverse closure of lem-per-artin-gabber-affine-curve (computed), so the restriction does not apply; the inherited blueprint.via metadata is noted for the maintainer. The worker's 13 tool_uses are accepted. No changes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.RationalToricCompletionRegularMap",
+  "declaration": "AlgebraicGeometry.rationalToricCompletion_regular",
+  "declarations": [
+   "AlgebraicGeometry.toricPolynomialRing",
+   "AlgebraicGeometry.toricPolynomialChart",
+   "AlgebraicGeometry.toricCompletionIdeal",
+   "AlgebraicGeometry.toricCompletedRing",
+   "AlgebraicGeometry.rationalToricCompletionMap",
+   "AlgebraicGeometry.toricCompletedChart",
+   "AlgebraicGeometry.rationalToricGlobalChart",
+   "AlgebraicGeometry.completedToricGlobalChart",
+   "AlgebraicGeometry.rationalToricCompletionUnionMap",
+   "AlgebraicGeometry.rationalToricCompletion_regular"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/RationalToricCompletionRegularMap.lean",
+  "statement": "theorem rationalToricCompletion_regular (P k : Type u) [AddCommMonoid P] [Field k] [CharZero k] (hfs : IsFineSaturatedMonoid (Multiplicative P)) (hsharp : ∀ p : P, IsUnit (Multiplicative.ofAdd p) → p = 0) (n : ℕ) : _root_.IsReduced (toricCompletedRing k P n) ∧ IsNoetherianRing (toricCompletedRing k P n) ∧ IsExcellent (toricCompletedRing k P n) ∧ IsLocalRing (toricCompletedRing k P n) ∧ (rationalToricCompletionMap k P n).IsRegular ∧ (∃ (hX : IsLocallyNoetherian (Spec (.of (toricCompletedRing k P n)))) (hY : IsLocallyNoetherian (Spec (.of (toricPolynomialRing ℚ P n)))) (LX : EtaleLogStructure (Spec (.of (toricCompletedRing k P n)))) (LY : EtaleLogStructure (Spec (.of (toricPolynomialRing ℚ P n)))) (fsX : LX.IsFineSaturated) (fsY : LY.IsFineSaturated) (ηX : associatedLogPresheaf (completedToricGlobalChart k P n) ⟶ LX.monoidSheaf.obj) (ηY : associatedLogPresheaf (rationalToricGlobalChart P n) ⟶ LY.monoidSheaf.obj) (f : EtaleLogHom ⟨_, hX, LX, fsX⟩ ⟨_, hY, LY, fsY⟩), IsAssociatedLogPresentation (completedToricGlobalChart k P n) LX ηX ∧ IsAssociatedLogPresentation (rationalToricGlobalChart P n) LY ηY ∧ f.base = Spec.map (CommRingCat.ofHom (rationalToricCompletionMap k P n)) ∧ (∀ p : ULift.{u} (Multiplicative P), f.sectionMap (Scheme.Etale.mk (𝟙 _)) (Scheme.Etale.mk (𝟙 _)) f.base ((Category.comp_id f.base).trans (Category.id_comp f.base).symm) (associatedLogIota (rationalToricGlobalChart P n) LY ηY p) = associatedLogIota (completedToricGlobalChart k P n) LX ηX p) ∧ f.IsStrict ∧ (FineSaturatedLogScheme.mk _ hX LX fsX).IsLogRegular ∧ (FineSaturatedLogScheme.mk _ hY LY fsY).IsLogRegular) ∧ (∀ (I : Type u) [Finite I] (K Q : I → Type u) [∀ i, Field (K i)] [∀ i, CharZero (K i)] [∀ i, AddCommMonoid (Q i)] (m : I → ℕ), (∀ i, IsFineSaturatedMonoid (Multiplicative (Q i))) → (∀ i, ∀ p : Q i, IsUnit (Multiplicative.ofAdd p) → p = 0) → _root_.IsReduced (∀ i, toricCompletedRing (K i) (Q i) (m i)) ∧ IsNoetherianRing (∀ i, toricCompletedRing (K i) (Q i) (m i)) ∧ IsExcellent (∀ i, toricCompletedRing (K i) (Q i) (m i)) ∧ _root_.IsReduced (∀ i, toricPolynomialRing ℚ (Q i) (m i)) ∧ IsNoetherianRing (∀ i, toricPolynomialRing ℚ (Q i) (m i)) ∧ IsExcellent (∀ i, toricPolynomialRing ℚ (Q i) (m i)) ∧ (rationalToricCompletionUnionMap K Q m).IsRegular)",
+  "branch": "newtargets-dag",
+  "by": "Q35",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-bbf3ee774",
+  "group": "Q35",
+  "result": "pass",
+  "note": "Read node, report (Worker report + Second reading present), module, and dep decls (IsAssociatedLogPresentation/associatedLogIota, EtaleLogHom, IsStrict, IsLogRegular, IsFineSaturatedMonoid, IsExcellent, RingHom.IsRegular) plus the resolution node's input hypotheses. All clauses match: fs+sharp P, any char-0 k, n:ℕ, monomial ring, span ideal, AdicCompletion, reduced/Noetherian/excellent/local, regular monomial map. Log structures pinned by IsAssociatedLogPresentation; f pinned by its scheme map, chart equation and unit compatibility; IsStrict and both IsLogRegular use the same structures. Finite-union clause (empty I included) gives the resolution inputs and a regular union map. Edge cases P=0/n=0 covered; common universe u, universe-polymorphic, no silent restriction. stmt_deps adds only 3 definition nodes; lean.statement verbatim; 10 declarations present; no hollow defs; sorry only in the theorem; docstrings carry source and blueprint. No changes, no compile needed."
+ }
+}

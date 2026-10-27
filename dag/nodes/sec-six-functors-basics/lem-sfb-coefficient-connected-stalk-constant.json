@@ -1,0 +1,164 @@
+{
+ "id": "lem-sfb-coefficient-connected-stalk-constant",
+ "kind": "statement",
+ "title": "Single-complex connected-component stalk constancy",
+ "statement": "Let X be Noetherian, B a commutative Noetherian coefficient ring in max(v,u+1), z a point of X, and U an affine coefficient-sized pro-etale object with slice weak contractibility and image inside the connected component of z. Let K be a bounded standard-derived constant-B module complex on the coefficient-sized etale site, with locally constant finite-type cohomology and Tor amplitude [a,b]. Its explicit geometric stalk at the algebraic closure of the residue field of z is perfect. The exact constant realization of that specified stalk, restricted to the actual slice U, is isomorphic to the restriction of adicFinitePullback X B K. The generic coefficientSliceConstant functor is commutativeSiteDerivedConstantModuleFunctor followed by adicResidueRestriction. This involves one complex over one ring, without an adic tower. The stalk, slice, and realization functors are those of [def-sfb-coefficient-etale-derived-stalk], [def-sfb-adic-residue-lift-comparisons], and [def-sfb-site-derived-constant-module-functor].",
+ "stmt_deps": [
+  "def-sfb-coefficient-etale-derived-stalk",
+  "def-sfb-adic-residue-lift-comparisons",
+  "def-sfb-site-derived-constant-module-functor"
+ ],
+ "source": {
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Tag 09C6, first paragraph; etale-cohomology.tex Tag 09BI; sites.tex Tag 090K"
+ },
+ "proof": [
+  {
+   "text": "For each cohomology sheaf, fixed_lisse transports its finite constant charts to fixed-coefficient module-valued sheaves. Lift the geometric point into a chart, transport the chart through the equivalence of sliced sites, and take its fiber. The fiber of a constant sheaf is the model module, so the stalk is finite. Exactness of coefficientEtaleModuleStalk identifies these finite modules with the cohomology of the derived stalk.",
+   "uses": [
+    "lem-sfb-lisse-coefficient-constructible",
+    "lem-weil-pbc-etale-section-germ-iso",
+    "prop-weil-pbc-geometric-stalks-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 09C6, first paragraph; etale-cohomology.tex Tag 09BI; sites.tex Tag 090K"
+   }
+  },
+  {
+   "text": "Apply the existing coefficient Tor-amplitude/flat-model equivalence to K and [a,b]. Apply the exact coefficient stalk termwise to this bounded flat model. Its terms are flat by coefficientEtaleModuleStalk_flat, and exact derived functor factorization supplies the isomorphism with the specified stalk of K.",
+   "uses": [
+    "lem-pe-coefficient-tor-flat-model",
+    "lem-sfb-coefficient-etale-stalk-flat"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 09C6, first paragraph; etale-cohomology.tex Tag 09BI; sites.tex Tag 090K"
+   }
+  },
+  {
+   "text": "The bounded flat stalk model and the finite cohomology just proved satisfy the Noetherian bounded-flat-complex perfectness criterion, giving the first conjunct.",
+   "uses": [
+    "lem-pc-noetherian-flat-complex-perfect"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 09C6, first paragraph; etale-cohomology.tex Tag 09BI; sites.tex Tag 090K"
+   }
+  },
+  {
+   "text": "The common-local-stalk-model theorem supplies a covering sieve of U on whose domains the constant realization of the specified stalk and the comparison pullback of K have isomorphic actual-slice restrictions. This local step uses hbounded, hlisse and the connected-component image condition but no weak contractibility or Tor hypothesis.",
+   "uses": [
+    "lem-sfb-coefficient-connected-local-stalk-models"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 09C6, first paragraph; etale-cohomology.tex Tag 09BI; sites.tex Tag 090K"
+   }
+  },
+  {
+   "text": "Apply coefficient_weaklyContractible_local_iso to those two global complexes and the covering sieve. The affine and weak-contractibility hypotheses give their isomorphism on the actual slice over U. By the unchanged definition of coefficientSliceConstant this is precisely the second conjunct.",
+   "uses": [
+    "lem-sfb-coefficient-weakly-contractible-local-iso"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 09C6, first paragraph; etale-cohomology.tex Tag 09BI; sites.tex Tag 090K"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-lisse-coefficient-constructible",
+  "lem-weil-pbc-etale-section-germ-iso",
+  "prop-weil-pbc-geometric-stalks-exact",
+  "lem-pe-coefficient-tor-flat-model",
+  "lem-sfb-coefficient-etale-stalk-flat",
+  "lem-pc-noetherian-flat-complex-perfect",
+  "lem-sfb-coefficient-connected-local-stalk-models",
+  "lem-sfb-coefficient-weakly-contractible-local-iso"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Tag 09C6, single-complex step; 09BI local models; 05VB stalk flatness; bounded-flat Noetherian perfectness criterion"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A bounded etale complex with finite locally constant cohomology and finite Tor amplitude has perfect geometric stalks and becomes constant on affine weakly contractible proetale objects",
+   "results": "8 hits concerning etale ring homomorphisms; no derived constancy theorem.",
+   "date": "2026-10-26",
+   "verdict": "No exact Mathlib declaration; use the project interfaces and the stated source argument."
+  },
+  {
+   "tool": "loogle",
+   "query": "IsPerfect, DerivedCategory",
+   "results": "0 hits: IsPerfect not indexed.",
+   "date": "2026-10-26",
+   "verdict": "No exact Mathlib declaration; use the project interfaces and the stated source argument."
+  },
+  {
+   "tool": "grep",
+   "query": "perfect.*stalk|stalk.*perfect|connected.*constant",
+   "results": "25 hits, only unrelated topology and connected category constants.",
+   "date": "2026-10-26",
+   "verdict": "No exact Mathlib declaration; use the project interfaces and the stated source argument."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.AdicEtaleStalkLevels",
+  "date": "2026-10-26",
+  "group": "X8"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sfb-adic-etale-stalk-levels",
+   "place": "Tag 09C6, first paragraph; etale-cohomology.tex Tag 09BI; sites.tex Tag 090K",
+   "via": [
+    "lem-sfb-adic-etale-stalk-levels"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-lem-integral-models",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.CoefficientConnectedStalkConstant",
+  "file": "lean/Sheaf/Paper/CoefficientConnectedStalkConstant.lean",
+  "declaration": "AlgebraicGeometry.Scheme.coefficient_connected_stalk_constant",
+  "statement": "theorem coefficient_connected_stalk_constant\n    (X : Scheme.{u}) [IsNoetherian X]\n    (B : Type (max v (u + 1))) [CommRing B] [IsNoetherianRing B]\n    (z : X) (U : coefficientProEtaleSiteModel.{u, v} X)\n    (hU : IsAffine ((AsSmall.down : coefficientProEtaleSiteModel.{u, v} X ⥤ X.ProEt).obj\n      U).left)\n    (hweak : AdicResidueSliceWeaklyContractible.{u, v} X U)\n    (himage : Set.range\n      (((AsSmall.down : coefficientProEtaleSiteModel.{u, v} X ⥤ X.ProEt).obj U).hom.base) ⊆\n        connectedComponent z)\n    (K : ConstantCompletion.D\n      (ConstantCompletion.constant (smallModelComparisonEtaleTopology.{u, v} X) B))\n    (hbounded : ∃ c d : ℤ, ∀ q : ℤ, q < c ∨ d < q →\n      IsZero ((coefficientModelCohomology _ q).obj K))\n    (hlisse : ∀ q : ℤ, SheafOfModules.IsLocallyConstantFiniteTypeModules\n      (smallModelComparisonEtaleTopology.{u, v} X) B\n      ((coefficientModelCohomology _ q).obj K))\n    (a b : ℤ)\n    (hTor : HasCoefficientModelTorAmplitude\n      (ConstantCompletion.constant (smallModelComparisonEtaleTopology.{u, v} X) B) K a b) :\n    DerivedCategory.IsPerfect\n      ((coefficientEtaleDerivedStalk X B (X.algClosurePoint z)).obj K) ∧\n    Nonempty\n      ((coefficientSliceConstant X B U).obj\n          ((coefficientEtaleDerivedStalk X B (X.algClosurePoint z)).obj K) ≅\n        (adicResidueRestriction\n          (ConstantCompletion.constant (coefficientProEtaleModelTopology.{u, v} X) B) U).obj\n            ((adicFinitePullback.{u, v} X B).obj K))",
+  "branch": "sheaf-dag",
+  "by": "X8",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "X8",
+  "result": "pass",
+  "landing": "20261026T071501-L-3939999",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M3",
+  "result": "pass",
+  "landing": "20261026T100320-L-4180768",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

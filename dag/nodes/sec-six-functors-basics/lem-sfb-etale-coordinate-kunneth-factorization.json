@@ -1,0 +1,117 @@
+{
+ "kind": "statement",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-geo-p1-adjunction/thm-amb-p1-adjunction.proof.md",
+  "place": "First triangle, the paragraph interchanging the two coordinates, before applying t_p1."
+ },
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.EtaleCoordinateTraceContractions",
+  "date": "2026-10-25",
+  "group": "G5"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-prop-sf-rf-shriek-preservation",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "The two triangle computations before the diagonal integrals, coordinate interchange and extraction of the common coefficient.",
+   "via": [
+    "lem-sfb-etale-coordinate-trace-contractions",
+    "lem-sf-affine-base-p1-trace-adjunction",
+    "lem-sf-affine-line-canonical-duality",
+    "lem-sf-smooth-dualizing-complex-invertible"
+   ]
+  },
+  "same_as": []
+ },
+ "mathlib_match": null,
+ "id": "lem-sfb-etale-coordinate-kunneth-factorization",
+ "title": "Two etale coordinate Kunneth routes before a trace",
+ "statement": "Let A be a finite commutative ring, f:X→Y proper, W=X×_Y X with projections p1,p2, and L∈D(Y_et,A), M∈D(X_et,A). Use the ordinary unbounded module derived categories and specified maps of [def-sfb-etale-coordinate-trace-data]. Write F=Rf*. The composite orderedProjection(f,FM,f*L), then F(comparison(L,M) inverse), then directComparison equals the composite ordinaryProjection(f,M,Ff*L), then F of identity tensor exchange1(f*L), then F of orderedProjection(p1,M,p2*f*L). No trace or rank-one hypothesis is assumed.",
+ "stmt_deps": [
+  "def-sfb-etale-coordinate-trace-data"
+ ],
+ "proof": [
+  {
+   "text": "present the constant-ring small etale topoi as ringed tensor corners using\nlem-sfb-ringed-derived-monoidal-comparisons. Transport along the equivalence between\nconstant-ring modules and ModuleCat-valued sheaves. The tensor comparison is fixed on\nflat K-flat representatives, the adjunction comparison by the ordinary module adjunction,\nand the direct-image compositor by its composite counit equation. Thus the projection\nmates are the existing rightDerivedLowerStarProjectionMap, the square mates are exchange1\nand exchange2, and the direct path comparison is directComparison. Apply the first\nconjunct of lem-sfb-ringed-kunneth-factorizations with q=f, a=p1, b=p2, and N=f*L.\nIts first route is the ordered projection followed by the inverse of comparison;\nits second is the ordinary projection, tensor exchange1, and ordered p1 projection.\nCancel the canonical symmetries. The equality of right-adjoint path comparisons follows\nfrom the equality of their pullback mates, so it uses the specified directComparison.\nNo trace, line hypothesis, shift or diagonal class is involved.",
+   "uses": [
+    "lem-sfb-ringed-kunneth-factorizations",
+    "lem-sfb-ringed-derived-monoidal-comparisons",
+    "def-kun-unbounded-exchange",
+    "def-kun-projection-formula-map"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-geo-p1-adjunction/thm-amb-p1-adjunction.proof.md",
+    "place": "First triangle, the paragraph interchanging the two coordinates, before applying t_p1."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-ringed-kunneth-factorizations",
+  "lem-sfb-ringed-derived-monoidal-comparisons",
+  "def-kun-unbounded-exchange",
+  "def-kun-projection-formula-map"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-geo-p1-adjunction/thm-amb-p1-adjunction.proof.md",
+  "place": "The two triangle computations before the diagonal integrals, coordinate interchange and extraction of the common coefficient. Expanded from the recorded parent proof with the stated ringed coherence inputs."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "The Kunneth map on a self fibre product has two factorizations by projection formula and proper base change",
+   "results": "IsProperMap.prodMap, HomologicalComplex.biprodXIso_hom_fst, Prod.comul_comp_fst, IsTensorProduct.map_mul, AddHom.prodMap_def, Pi.comul_comp_proj, CochainComplex.cm5b.fac, ContinuousAffineMap.prodMap_toAffineMap",
+   "date": "2026-10-25",
+   "verdict": "No matching projection/exchange identity on unbounded etale module derived categories."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Projection exchange trace contraction for an object whose tensor self braiding is the identity",
+   "results": "MonoidalCategory.tensorμ_tensorδ, tensorδ_tensorμ, BraidedCategory.tensorLeftIsoTensorRight, Dial.symmetry, SymmetricCategory.symmetry, CartesianMonoidalCategory.tensorδ_snd, MonoidalCategory.externalProductSwap, BraidedCategory.exactPairing_swap",
+   "date": "2026-10-25",
+   "verdict": "Generic symmetric tensor constraints only; no canonical etale projection/exchange contraction."
+  },
+  {
+   "tool": "grep",
+   "query": "projection.*(trace|kunneth)|exchange.*(tensor|trace)",
+   "results": "Mathlib hits concern monoidal whisker exchange and tactic projection diagnostics; no derived sheaf comparison theorem. Local library has ringedKunnethFactorizations and ringedExchangeTensorCoherence on SheafOfModules, requiring transport to the ModuleCat-valued etale interface.",
+   "date": "2026-10-25",
+   "verdict": "No duplicate of these specialized canonical-map equations."
+  }
+ ],
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.EtaleCoordinateKunnethFactorization",
+  "file": "lean/Sheaf/AlgebraicGeometry/EtaleCoordinateKunnethFactorization.lean",
+  "declaration": "AlgebraicGeometry.Etale.CoordinateTrace.coordinateKunnethFactorization",
+  "statement": "theorem coordinateKunnethFactorization [Finite A] {X Y : Scheme.{u}}\n    (f : X ⟶ Y) [IsProper f] (L : DerivedCategoryModule A Y)\n    (M : DerivedCategoryModule A X) :\n    (orderedProjectionIso A f ((push A f).obj M) ((pull A f).obj L)).hom ≫\n        (push A f).map (comparison A f L M).inv ≫\n        (directComparison A f).hom.app _ =\n      ((rightDerivedLowerStarProjectionMap (ModuleCat.{u + 1} A) f).app M).app\n          ((push A f).obj ((pull A f).obj L)) ≫\n        (push A f).map\n          (((derivedTensor (ModuleCat.{u + 1} A) X).obj M).map\n              (exchange1 A f ((pull A f).obj L)).hom ≫\n            (orderedProjectionIso A (pullback.fst f f) M\n              ((pull A (pullback.snd f f)).obj ((pull A f).obj L))).hom)",
+  "branch": "sheaf-dag",
+  "by": "G5",
+  "date": "2026-10-25"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-c7a53",
+  "group": "G5",
+  "result": "pass",
+  "landing": "20261025T123006-L-1822645",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-c7a53",
+  "group": "G5",
+  "result": "pass",
+  "landing": "20261025T123006-L-1822645",
+  "kind": "interface",
+  "note": "independent cc review: contractions signature and node lean.statement vs clone (identical); 14 extracted defs vs clone item module (verbatim apart from blueprint tags, item re-exports Data); three new sorried statements vs parent node steps 1-6 (true, needed, not restatements); projectionTraceNormalization axioms (propext/choice/Quot.sound)"
+ }
+}

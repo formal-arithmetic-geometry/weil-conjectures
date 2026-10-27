@@ -1,0 +1,255 @@
+{
+ "id": "lem-sfb-affine-open-boundary-codimension-one",
+ "kind": "statement",
+ "title": "The boundary of a dense affine open has pure codimension one",
+ "statement": "Let $X$ be a separated locally Noetherian scheme [def-pc-scheme, pqf-def-locnoeth]; separated means that its diagonal is a closed immersion. Let $U\\subseteq X$ be a dense affine open subscheme [def-weil-open-immersion]. For every irreducible component $Z$ of the closed subset $|X|\\setminus|U|$ [def-weil-irreducible-components] and every generic point $\\xi$ of $Z$ [def-sc-generic-point], the local ring of $X$ at $\\xi$ satisfies $\\dim\\mathcal O_{X,\\xi}=1$ [def-weil-pbc-krull-dimension-ring]. Here dense means $\\overline{|U|}=|X|$. If $U=X$, there are no such components and the assertion is vacuous.",
+ "source": {
+  "document": "literature/stacks-project/divisors.tex",
+  "place": "Tag 0BCV, divisors-lemma-complement-affine-open; the dense-open clause. Used in the proof of Tag 0BCW, divisors-lemma-complement-open-affine-effective-cartier-divisor."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "pqf-def-locnoeth",
+  "def-weil-open-immersion",
+  "def-weil-irreducible-components",
+  "def-sc-generic-point",
+  "def-weil-pbc-krull-dimension-ring"
+ ],
+ "proof": [
+  {
+   "text": "Fix a boundary component $Z$ and its generic point $\\xi$. Write $F=|X|\\setminus|U|$. The open immersion $j:U\\to X$ is affine by [lem-weil-pbc-affine-source-separated-target-affine-morphism]: its source is affine and its target is separated. Choose an affine neighbourhood $V=\\operatorname{Spec}R$ of $\\xi$ from the scheme charts [def-pc-scheme]. The ring $R$ is Noetherian by [pqf-lem-affine-open-locnoeth]. Set $A=\\mathcal O_{X,\\xi}$ and let $\\mathfrak p$ be the prime of $R$ corresponding to $\\xi$. By [lem-weil-pbc-affine-open-stalk-localization], $A\\cong R_{\\mathfrak p}$; hence $A$ is Noetherian by [lem-weil-pbc-localization-noetherian]. It is a nonzero local ring with maximal ideal $\\mathfrak m$.",
+   "uses": [
+    "lem-weil-pbc-affine-source-separated-target-affine-morphism",
+    "def-pc-scheme",
+    "pqf-lem-affine-open-locnoeth",
+    "lem-weil-pbc-affine-open-stalk-localization",
+    "lem-weil-pbc-localization-noetherian"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/divisors.tex",
+    "place": "Tag 0BCV, lemma-complement-affine-open; Tag 0BCU, lemma-complement-affine-open-immersion, local reduction; Tag 01SG, affine permanence"
+   }
+  },
+  {
+   "text": "Let $c:\\operatorname{Spec}A\\to X$ be the canonical local-spectrum morphism of [lem-weil-pbc-spec-local-ring-canonical-morphism]. Its image is the generalizations of $\\xi$, and $c(\\mathfrak m)=\\xi$. On $V$ it is the localization map $\\operatorname{Spec}R_{\\mathfrak p}\\to\\operatorname{Spec}R$, which is a topological embedding by [lem-weil-pbc-localization-spectrum-embedding]. If $y$ generalizes $\\xi$ and $y\\in F$, then $\\overline{\\{y\\}}$ is an irreducible closed subset of $F$ containing $\\overline{\\{\\xi\\}}=Z$. Maximality of the component $Z$ forces equality. Uniqueness of its generic point [lem-sc-scheme-sober] then gives $y=\\xi$. Conversely $\\xi\\in F$. Injectivity of $c$ therefore proves $c^{-1}(F)=\\{\\mathfrak m\\}$. Thus the open pullback $U\\times_X\\operatorname{Spec}A=c^{-1}(U)$ is exactly the punctured open subscheme $P=\\operatorname{Spec}A\\setminus\\{\\mathfrak m\\}$; both have the restricted structure sheaf [def-weil-open-immersion].",
+   "uses": [
+    "lem-weil-pbc-spec-local-ring-canonical-morphism",
+    "lem-weil-pbc-localization-spectrum-embedding",
+    "lem-sc-scheme-sober",
+    "def-weil-open-immersion"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/divisors.tex",
+    "place": "Tag 0BCU, lemma-complement-affine-open-immersion, first paragraph; Tag 01J7, lemma-specialize-points"
+   }
+  },
+  {
+   "text": "The projection $P=U\\times_X\\operatorname{Spec}A\\to\\operatorname{Spec}A$ is affine by base change of $j$, using clause (1) of [lem-weil-pbc-affine-morphism-permanence]. Its target is affine, so clause (2) makes $P$ affine. The local ring $A$ is Noetherian by Step 1; applying [lem-sfb-affine-punctured-local-dimension] now gives $\\dim A\\leq1$.",
+   "uses": [
+    "lem-weil-pbc-affine-morphism-permanence",
+    "lem-sfb-affine-punctured-local-dimension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/divisors.tex",
+    "place": "Tags 0BCU and 0BCR; Tag 01SD, base change of affine morphisms"
+   }
+  },
+  {
+   "text": "It remains to rule out dimension zero. The affine neighbourhood $V$ is locally Noetherian by [pqf-def-locnoeth] and quasi-compact by [lem-weil-pbc-affine-scheme-qcqs], hence Noetherian, so [lem-weil-pbc-noetherian-finitely-many-components] gives finitely many irreducible components $C_1,\\ldots,C_r$ covering it; [lem-sc-scheme-sober] gives their generic points $\\eta_i$. Each $C_i$ meets the dense open $U\\cap V$: indeed $W_i=V\\setminus\\bigcup_{h\\ne i}C_h$ is a nonempty open subset contained in $C_i$. It is nonempty because otherwise irreducibility and the finite union would put $C_i$ inside some other component, contrary to maximality. Density makes $W_i\\cap U$ nonempty. Since every nonempty relatively open subset of $C_i=\\overline{\\{\\eta_i\\}}$ contains $\\eta_i$, it follows that $\\eta_i\\in U$. Choose a component containing $\\xi$. Its generic point $\\eta_i$ strictly generalizes $\\xi$, since $\\xi\\notin U$. By [lem-sc-scheme-stalk-dimension-generalization-chains] this length-one chain implies $1\\leq\\dim\\mathcal O_{X,\\xi}$. Combined with Step 3 this gives the required equality. If the boundary is empty, there is no choice of $Z$ and the assertion is vacuous.",
+   "uses": [
+    "pqf-def-locnoeth",
+    "lem-weil-pbc-affine-scheme-qcqs",
+    "lem-weil-pbc-noetherian-finitely-many-components",
+    "lem-sc-scheme-sober",
+    "lem-sc-scheme-stalk-dimension-generalization-chains"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/divisors.tex",
+    "place": "Tag 0BCU, lemma-complement-affine-open-immersion, last paragraph; Tag 0BA8, finite components; Tag 02IZ, local-ring dimension"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-affine-source-separated-target-affine-morphism",
+  "def-pc-scheme",
+  "pqf-lem-affine-open-locnoeth",
+  "lem-weil-pbc-affine-open-stalk-localization",
+  "lem-weil-pbc-localization-noetherian",
+  "lem-weil-pbc-spec-local-ring-canonical-morphism",
+  "lem-weil-pbc-localization-spectrum-embedding",
+  "lem-sc-scheme-sober",
+  "def-weil-open-immersion",
+  "lem-weil-pbc-affine-morphism-permanence",
+  "lem-sfb-affine-punctured-local-dimension",
+  "pqf-def-locnoeth",
+  "lem-weil-pbc-affine-scheme-qcqs",
+  "lem-weil-pbc-noetherian-finitely-many-components",
+  "lem-sc-scheme-stalk-dimension-generalization-chains"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/divisors.tex",
+  "place": "Tags 0BCV and 0BCU, lemma-complement-affine-open and lemma-complement-affine-open-immersion; local algebra Tag 0BCR"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "complement.*affine|affine.*complement|codimension|ringKrullDim",
+   "results": "Read nine hits. Properties.lean:376-389 identifies ringKrullDim of a stalk with coheight; the other hits concern Artinian schemes, cycles, or unrelated linear codimension. No affine-boundary codimension theorem.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "For a dense affine open in a separated locally Noetherian scheme every boundary component has codimension one",
+   "results": "Read all eight hits: IsLocallyNoetherian.component_noetherian, IsAffineOpen.isQuasiSeparated, IsLocallyNoetherian.quasiSeparatedSpace, finite_irreducibleComponents_of_isNoetherian, IsAffineOpen.isCompact, Scheme.isAffine_affineCover, and two dominant-open-immersion lemmas. None is the affine-boundary dimension theorem.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.IsAffineOpen, ringKrullDim",
+   "results": "No hits for IsAffineOpen together with ringKrullDim.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The generic points of the irreducible components of the complement of a dense affine open in a separated locally Noetherian scheme have local rings of dimension one",
+   "results": "Read the returned hits: generic points, function fields, dominant open immersions, basic affine opens and locally Artinian schemes. None gives the dimension of boundary generic local rings.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "punctured.*[Ss]pec|[Ss]pec.*punctured|complement.*codim|codim.*complement",
+   "results": "Read nine hits. Properties.lean:376-389 identifies ringKrullDim of a stalk with coheight; the other hits concern Artinian schemes, cycles, or unrelated linear codimension. No affine-boundary codimension theorem.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An affine open subset of a separated locally noetherian scheme has complement of pure codimension one when it is dense",
+   "results": "Read the returned hits: generic points, function fields, dominant open immersions, basic affine opens and locally Artinian schemes. None gives the dimension of boundary generic local rings.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "complement.*affine|affine.*complement|codimension.*one",
+   "results": "Read returned hits: . No hits in AlgebraicGeometry.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The complement of a dense affine open in a separated locally Noetherian scheme has pure codimension one",
+   "results": "Read returned hits: AlgebraicGeometry.IsLocallyNoetherian.quasiSeparatedSpace, AlgebraicGeometry.IsLocallyNoetherian.component_noetherian, AlgebraicGeometry.Scheme.PartialMap.Opens.isDominant_homOfLE, AlgebraicGeometry.IsAffineOpen.isQuasiSeparated, AlgebraicGeometry.IsAffineOpen.isCompact, AlgebraicGeometry.Scheme.zeroLocus_univ, AlgebraicGeometry.Scheme.instIsSeparatedOfIsAffine, AlgebraicGeometry.quasiSeparatedSpace_iff_forall_affineOpens. Hits concern Noetherian affine charts, separation and density, not boundary dimension.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.IsAffineOpen, ringKrullDim",
+   "results": "Read returned hits: . No hits.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A boundary irreducible component of a dense affine open subscheme has generic local ring of dimension one",
+   "results": "Read returned hits: AlgebraicGeometry.genericPoint_eq_bot_of_affine, AlgebraicGeometry.IsAffineOpen.primeIdealOf_genericPoint, AlgebraicGeometry.instQuasiSoberCarrierCarrierCommRingCat, AlgebraicGeometry.isIntegral_of_irreducibleSpace_of_isReduced, AlgebraicGeometry.Scheme.functionField, AlgebraicGeometry.irreducibleSpace_of_isIntegral, AlgebraicGeometry.instIrreducibleSpaceCarrierCarrierCommRingCatSpecOfIsDomainCarrier, AlgebraicGeometry.genericPoint_eq_of_isOpenImmersion. Hits concern generic points and integrality, not the boundary dimension theorem.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-smooth-affine-cartier-boundary",
+  "date": "2026-10-24",
+  "group": "Q141"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Scheme representability of the stable abelian-level normalization. Supporting input: freeness at normalized boundary branches. Comparison of the full cohomology frame in the item with Deligne 3.3--3.5 Picard torsion frames; relative Picard existence for the pulled-back stable family. Supporting input for the present split: A relatively ample line module on the stable-curve multidegree-zero Picard space. Supporting input: Generic ampleness criterion for smooth connected group schemes. Raynaud input: existence, locally on a normal base, of an ample extension of a positive power of a symmetric line on the dense abelian open; comparison with the supplied line is a separate proof step. Cubical proof input: extension of cubical objects and isomorphisms, without positivity; supporting input: Local prolongation of a tensor power of a symmetric line; Moret-Bailly II 3.3.3, printed p.53, opening parenthesis: the generic line is a difference of two ample lines; Stacks supplies this for all finite-type algebraic groups, not only abelian varieties. Supporting input for the present split: existence of one ample invertible module on a finite-type group scheme, before choosing a high twist of the supplied line. Smooth irreducible geometric construction in Groupoids Tag 0BF7, before Picard rigidity. Supporting input: Affine-complement step: choose a nonempty affine open U of the smooth integral group; its boundary is an effective Cartier divisor D. Supporting input for this split: the codimension-one assertion for irreducible components of an affine-open complement, used before making those components Cartier.",
+   "via": [
+    "lem-sfb-smooth-affine-cartier-boundary",
+    "lem-sfb-translated-cartier-parameter-family",
+    "lem-sfb-finite-type-group-ample-line",
+    "lem-sfb-algebraic-group-ample-difference",
+    "lem-sfb-symmetric-line-power-prolongation",
+    "lem-sfb-normal-symmetric-cubical-extension",
+    "lem-sfb-symmetric-ample-power-extension",
+    "lem-sfb-regular-group-generic-ampleness",
+    "lem-sfb-stable-picard-theta-ampleness",
+    "lem-sfb-stable-relative-picard-kummer",
+    "lem-sfb-stable-level-versal-branch-freeness",
+    "lem-sfb-stable-abelian-level-normalization",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-affine-open-boundary-codimension-one",
+  "worker": "stage1",
+  "summary": "Followed Stacks 0BCV through the local-spectrum argument of 0BCU. Reused the existing affine/permanence/localization/generic-point nodes, wrote the punctured-spectrum identification and the dense-open generic-point argument, and introduced only the local algebra bound 0BCR as an unsplit statement. Statement unchanged.",
+  "blueprint": "The inherited supporting clause of det-thm-sf-ctf-stability-direct-images: codimension-one affine boundary prerequisite to the Cartier-boundary construction. The latest blueprint direct-image proof (3) was read; the detailed inherited alteration/moduli provenance is retained.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-spec-local-ring-canonical-morphism",
+    "why": "Generic local-spectrum morphism and its image; the unit has no such scheme-theoretic tool and no unit step is replaced."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-spec-local-ring-canonical-morphism"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-NI-57fbf5838",
+  "group": "NI",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NI-57fbf5838 (reviewer sub-agent of L); spot-checked: Read Stacks divisors.tex 0BCR/0BCU/0BCV (lines 3340-3500); every tag/label checked in tags/tags (01J7, 01SD, 01SG, 02IZ, 0BA8). The item's statement is byte-identical to live and side-live, both still unsplit, and it is exactly the dense clause of 0BCV. There is no repair note. Step 1: U->X is affine via affine-source-separated-target; A=O_{X,xi}=R_p is Noetherian via affine-open-locnoeth, affine-open-stalk-localization (c) and localization-noetherian. Step 2: c^{-1}(F)={m}, via the image/injectivity of the canonical local-spectrum morphism plus a written-out maximality and generic-point uniqueness argument (correct); U x_X Spec A = c^{-1}(U) is elementary (01JR), and no node exists to cite instead. Step 3: affine-morphism-permanence (1),(2) make the puncture affine; the new 0BCR node then gives dim A<=1. Step 4: V Noetherian, finitely many components; W_i is a nonempty open inside C_i, and density puts eta_i in U, giving a length-1 chain and dim>=1 via generalization-chains. New node lem-sfb-affine-punctured-local-dimension: the only-if direction of 0BCR, statement-only, self-contained, 6 searches recorded. Tested on dim 0, a DVR, k[x,y]_(x,y) and non-reduced rings. No duplicate in the DAG or blueprint; it is not a clause of the item. Accepted tool_use: lem-weil-pbc-spec-local-ring-canonical-morphism (generic local-spectrum morphism, replaces no unit step). proof_deps = union of uses; no SGA cited."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.AffineOpenBoundaryCodimensionOne",
+  "declaration": "AlgebraicGeometry.affine_open_boundary_codimension_one",
+  "file": "lean/Sheaf/AlgebraicGeometry/AffineOpenBoundaryCodimensionOne.lean",
+  "statement": "theorem affine_open_boundary_codimension_one (X : Scheme.{u}) [X.IsSeparated] [IsLocallyNoetherian X] (U : X.Opens) (hU : IsAffineOpen U) (hDense : Dense (U : Set X)) (Z : Set {x : X // x ∉ U}) (hZ : Z ∈ irreducibleComponents {x : X // x ∉ U}) (xi : X) (hxi : IsGenericPoint xi (Subtype.val '' Z)) : ringKrullDim (X.presheaf.stalk xi) = 1",
+  "branch": "sheaf-dag",
+  "by": "Q75",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-e3a08e1ba",
+  "group": "Q75",
+  "result": "pass",
+  "note": "Statement matches node = Stacks 0BCV dense clause (divisors.tex:3484): Scheme.{u} free, [X.IsSeparated] (= diagonal closed immersion via isSeparated_iff_isClosedImmersion_prod_lift), [IsLocallyNoetherian X], U : X.Opens with IsAffineOpen and Dense, Z ∈ irreducibleComponents of subtype {x // x ∉ U} (boundary components, not X's), IsGenericPoint xi (val '' Z), ringKrullDim stalk = 1; no extra hypotheses; U=X / X=∅ / U=∅ vacuous, DVR and P² chart checked. Snapshot node differs from side-live/live only by the lean record; lean.statement verbatim in file; stmt_dep records usable, no (B) repair or new nodes; not superseded. sorry-only, docstrings carry source + blueprint id + 4 proof steps; report has Worker report and Second reading sections. Advisory H9: proof-only plain imports unused by the statement. No compile (no file changed)."
+ }
+}

@@ -13,23 +13,22 @@ public import Mathlib.Algebra.MvPolynomial.Basic
 public import Mathlib.RingTheory.Ideal.Quotient.Operations
 public import Mathlib.AlgebraicGeometry.Limits
 
-import WeilConjectures.RingTheory.FiniteOverHenselianLocalProduct
 import WeilConjectures.Mathlib.RingTheory.RegularLocalRing.Defs
-import WeilConjectures.RingTheory.RegularLocalGeneratorsRegularSequence
-import WeilConjectures.RingTheory.RegularPrincipalPrimeLocalizationDvr
-import WeilConjectures.AlgebraicGeometry.Morphisms.GaloisCoverBaseChange
-import WeilConjectures.AlgebraicGeometry.Morphisms.FieldTorsorGaloisComponents
 import WeilConjectures.RingTheory.RegularLocalLocalization
 import WeilConjectures.RingTheory.RegularRingNormal
-import WeilConjectures.AlgebraicGeometry.Morphisms.FiniteEtaleOpenGenericAlgebra
-import WeilConjectures.RingTheory.EtaleNormalRing
-import WeilConjectures.RingTheory.NormalRingIntegrallyClosedTotal
-import WeilConjectures.RingTheory.DvrGaloisNormalizationRamificationDvd
-import WeilConjectures.RingTheory.DvrTameTensorFactorUnramified
-import Sheaf.AlgebraicGeometry.EtaleAtPrimeFlatUnramifiedCriterion
-import WeilConjectures.AlgebraicGeometry.Morphisms.RegularCodimensionTwoEtaleExtension
 import WeilConjectures.AlgebraicGeometry.Morphisms.FiniteStrictHenselianAlgebraEtaleSection
 import Mathlib.AlgebraicGeometry.Morphisms.Proper
+
+import Sheaf.RingTheory.HenselianParameterRootRegularity
+import Sheaf.RingTheory.ParameterRootBoundaryDvrs
+import Sheaf.RingTheory.KummerNormalizationBoundaryEtale
+import Sheaf.AlgebraicGeometry.Morphisms.PulledTorsorNormalizationModel
+import Sheaf.AlgebraicGeometry.Morphisms.CodimensionOneNeighbourhoodEtaleExtension
+import Sheaf.AlgebraicGeometry.Morphisms.FiniteEtaleTorsorSectionTrivialization
+import Mathlib.Data.List.Perm.Subperm
+import Mathlib.Data.List.FinRange
+import Mathlib.RingTheory.LocalProperties.IntegrallyClosed
+import Mathlib.Algebra.CharP.Invertible
 
 /-! # Strict-local prime-to-p torsors split on a finite parameter-root cover
 
@@ -85,6 +84,387 @@ noncomputable def strictLocalParameterRootMap {R : Type u} [CommRing R] {r : ℕ
     (Localization.Away (∏ i, t i))
     (Localization.Away (algebraMap R (strictLocalParameterRootRing t n) (∏ i, t i)))
     (algebraMap R (strictLocalParameterRootRing t n)) (∏ i, t i)))
+
+@[irreducible] private noncomputable def away_to_field {D F : Type u} [CommRing D] [Field F]
+    (φ : D →+* F) (f : D) (hf : φ f ≠ 0) : Localization.Away f →+* F :=
+  IsLocalization.Away.lift (S := Localization.Away f) (g := φ) f
+    (isUnit_iff_ne_zero.mpr hf)
+
+private theorem away_to_field_eq {D F : Type u} [CommRing D] [Field F]
+    (φ : D →+* F) (f : D) (hf : φ f ≠ 0) (x : D) :
+    away_to_field φ f hf (algebraMap D (Localization.Away f) x) = φ x := by
+  unfold away_to_field
+  exact IsLocalization.Away.lift_eq _ _ _
+
+private theorem field_image_ne_zero {D F : Type u} [CommRing D] [CommRing F]
+    [Algebra D F] [IsFractionRing D F] {x : D} (hx : x ≠ 0) :
+    algebraMap D F x ≠ 0 := (IsFractionRing.to_map_eq_zero_iff).not.mpr hx
+
+private noncomputable def localization_map {D C : Type u} [CommRing D] [CommRing C]
+    (φ : D →+* C) (f : D) :
+    Localization.Away f →+* Localization.Away (φ f) :=
+  IsLocalization.Away.map _ _ φ f
+
+private theorem localization_map_eq {D C : Type u} [CommRing D] [CommRing C]
+    (φ : D →+* C) (f x : D) :
+    localization_map φ f (algebraMap D (Localization.Away f) x) =
+      algebraMap C (Localization.Away (φ f)) (φ x) := by
+  unfold localization_map IsLocalization.Away.map
+  exact IsLocalization.map_eq _ x
+
+private theorem localization_map_tower {D C : Type u} [CommRing D] [CommRing C]
+    [Algebra D C] (f : D) :
+    let _ := (localization_map (algebraMap D C) f).toAlgebra
+    IsScalarTower D (Localization.Away f) (Localization.Away (algebraMap D C f)) := by
+  let _ := (localization_map (algebraMap D C) f).toAlgebra
+  apply IsScalarTower.of_algebraMap_eq (R := D) (S := Localization.Away f)
+  intro x
+  exact (localization_map_eq (algebraMap D C) f x).symm
+
+private theorem away_to_field_tower {D F : Type u} [CommRing D] [Field F]
+    [Algebra D F] (f : D) (hf : algebraMap D F f ≠ 0) :
+    let _ := (away_to_field (algebraMap D F) f hf).toAlgebra
+    IsScalarTower D (Localization.Away f) F := by
+  let _ := (away_to_field (algebraMap D F) f hf).toAlgebra
+  apply IsScalarTower.of_algebraMap_eq (R := D) (S := Localization.Away f)
+  intro x
+  exact (away_to_field_eq (algebraMap D F) f hf x).symm
+
+private theorem localization_comp_tower {D C F : Type u}
+    [CommRing D] [CommRing C] [Field F] [Algebra D C] [Algebra C F]
+    [Algebra D F] [IsScalarTower D C F] (f : D)
+    (hf : algebraMap C F (algebraMap D C f) ≠ 0) :
+    let _ := (localization_map (algebraMap D C) f).toAlgebra
+    let _ := (away_to_field (algebraMap C F) (algebraMap D C f) hf).toAlgebra
+    let _ := ((algebraMap (Localization.Away (algebraMap D C f)) F).comp
+      (algebraMap (Localization.Away f) (Localization.Away (algebraMap D C f)))).toAlgebra
+    IsScalarTower D (Localization.Away f) F := by
+  let _ := (localization_map (algebraMap D C) f).toAlgebra
+  let _ := (away_to_field (algebraMap C F) (algebraMap D C f) hf).toAlgebra
+  let _ := ((algebraMap (Localization.Away (algebraMap D C f)) F).comp
+    (algebraMap (Localization.Away f) (Localization.Away (algebraMap D C f)))).toAlgebra
+  apply IsScalarTower.of_algebraMap_eq (R := D) (S := Localization.Away f) (A := F)
+  intro x
+  simp only [RingHom.algebraMap_toAlgebra, RingHom.comp_apply]
+  rw [localization_map_eq, away_to_field_eq]
+  exact IsScalarTower.algebraMap_apply D C F x
+
+private theorem localization_tower_compatible {D A K E : Type u}
+    [CommRing D] [CommRing A] [CommRing K] [CommRing E]
+    [Algebra D A] [Algebra D K] [Algebra D E] [Algebra A K]
+    [Algebra A E] [Algebra K E] [IsScalarTower D A K] [IsScalarTower D K E]
+    [IsScalarTower D A E] (f : D) [IsLocalization.Away f A] : IsScalarTower A K E := by
+  apply IsScalarTower.of_algebraMap_eq (R := A) (S := K) (A := E)
+  intro x
+  have hmaps : (algebraMap K E).comp (algebraMap A K) = algebraMap A E := by
+    apply IsLocalization.ringHom_ext (Submonoid.powers f)
+    ext y
+    simp only [RingHom.comp_apply, ← IsScalarTower.algebraMap_apply D A K,
+      ← IsScalarTower.algebraMap_apply D K E, ← IsScalarTower.algebraMap_apply D A E]
+  exact (RingHom.congr_fun hmaps x).symm
+
+private theorem parameters_first {R : Type u} [CommRing R] [IsRegularLocalRing R]
+    {r : ℕ} (t : Fin r → R) (ht : Function.Injective t)
+    (hparams : ∃ s : List R, IsLocalRing.IsRegularSystemOfParameters s ∧
+      ∀ i : Fin r, t i ∈ s) :
+    ∃ tail : List R, IsLocalRing.IsRegularSystemOfParameters (List.ofFn t ++ tail) := by
+  classical
+  obtain ⟨s, hs, hts⟩ := hparams
+  have hsub : List.Subperm (List.ofFn t) s := (List.nodup_ofFn.mpr ht).subperm (by
+    intro x hx
+    obtain ⟨i, rfl⟩ := List.mem_ofFn.mp hx
+    exact hts i)
+  obtain ⟨l, hl, hsl⟩ := List.subperm_iff.mp hsub
+  obtain ⟨tail, htail⟩ := hsl.exists_perm_append
+  have hperm : s.Perm (List.ofFn t ++ tail) := hl.symm.trans htail
+  refine ⟨tail, ?_, ?_⟩
+  · rw [← hs.1]
+    exact congrArg Ideal.span (Set.ext fun x ↦ hperm.mem_iff.symm)
+  · rw [← hperm.length_eq]
+    exact hs.2
+
+private theorem root_regularity {R : Type u} [CommRing R] [IsRegularLocalRing R]
+    [IsStrictlyHenselianLocalRing R] {r : ℕ} (t : Fin r → R) (tail : List R)
+    (ht : IsLocalRing.IsRegularSystemOfParameters (List.ofFn t ++ tail))
+    (n : ℕ) (hn : 0 < n) :
+    ∃ (_ : IsRegularLocalRing (strictLocalParameterRootRing t n)),
+      IsStrictlyHenselianLocalRing (strictLocalParameterRootRing t n) ∧
+      Function.Injective (algebraMap R (strictLocalParameterRootRing t n)) := by
+  let s := List.ofFn t ++ tail
+  let d := s.length
+  let a : Fin d → R := s.get
+  have ha : IsLocalRing.IsRegularSystemOfParameters (List.ofFn a) := by
+    simpa only [a, List.ofFn_get] using ht
+  have hr : r ≤ d := by simp [d, s]
+  have hfront : a ∘ Fin.castLE hr = t := by
+    funext i
+    simp [a, s, List.get_eq_getElem, List.getElem_append_left, i.isLt]
+  obtain ⟨b, hb, hfin, hinj, hint, hreg, hhen, hdom, hdim, hmax, hpar,
+    hfib, hres, hstrict, hzero⟩ :=
+    Algebra.henselian_parameter_root_regularity R d a ha r hr n hn
+  rw [hfront] at hreg hstrict hinj
+  exact ⟨hreg, hstrict inferInstance, hinj⟩
+
+private theorem regular_integrallyClosed (R : Type u) [CommRing R] [IsDomain R]
+    [IsRegularRing R] : IsIntegrallyClosed R := by
+  apply IsIntegrallyClosed.of_localization_maximal
+  intro q hq hmax
+  exact (IsRegularRing.isNormalRing R q).2
+
+private theorem change_base_iso {X Y Y' Z : Scheme.{u}}
+    (p : X ⟶ Z) (j : Y ⟶ Z) (j' : Y' ⟶ Z) (e : Y ≅ Y')
+    (he : e.hom ≫ j' = j) :
+    ∃ e' : pullback p j ≅ pullback p j',
+      e'.hom ≫ pullback.snd p j' = pullback.snd p j ≫ e.hom ∧
+      e'.inv ≫ pullback.snd p j = pullback.snd p j' ≫ e.inv := by
+  have hei : e.inv ≫ j = j' := by rw [← he]; simp
+  let h := pullback.lift (f := p) (g := j') (pullback.fst p j) (pullback.snd p j ≫ e.hom)
+    (by simp only [Category.assoc, he, pullback.condition])
+  let k := pullback.lift (f := p) (g := j) (pullback.fst p j') (pullback.snd p j' ≫ e.inv)
+    (by simp only [Category.assoc, hei, pullback.condition])
+  refine ⟨⟨h, k, ?_, ?_⟩, ?_, ?_⟩
+  · apply pullback.hom_ext <;> simp [h, k]
+  · apply pullback.hom_ext <;> simp [h, k]
+  · simp [h]
+  · simp [k]
+
+private theorem section_of_finite_etale_model
+    (B A : Type u) [CommRing B] [IsDomain B] [IsStrictlyHenselianLocalRing B]
+    [CommRing A] [Algebra B A] (f : B) (hf : f ≠ 0) [IsLocalization.Away f A]
+    {H Z : Scheme.{u}} (p : H ⟶ Spec (.of B)) [IsFinite p] [Etale p]
+    (π : Z ⟶ Spec (.of A)) [Surjective π]
+    (e : pullback p (Spec.map (CommRingCat.ofHom (algebraMap B A))) ≅ Z)
+    (he : e.hom ≫ π = pullback.snd p
+      (Spec.map (CommRingCat.ofHom (algebraMap B A)))) :
+    ∃ s : Spec (.of A) ⟶ Z, s ≫ π = 𝟙 _ := by
+  let j := Spec.map (CommRingCat.ofHom (algebraMap B A))
+  have hinj : Function.Injective (algebraMap B A) :=
+    IsLocalization.injective A (Submonoid.powers_le.mpr
+      (mem_nonZeroDivisors_iff_ne_zero.mpr hf))
+  have : IsDominant j := ⟨by
+    apply (PrimeSpectrum.denseRange_comap_iff_ker_le_nilRadical (algebraMap B A)).mpr
+    rw [(RingHom.injective_iff_ker_eq_bot _).mp hinj]
+    exact bot_le⟩
+  have : Surjective (pullback.snd p j) := by
+    rw [← he]
+    infer_instance
+  have : IsDominant (pullback.fst p j ≫ p) := by
+    rw [pullback.condition]
+    infer_instance
+  have : IsDominant p := IsDominant.of_comp (pullback.fst p j) p
+  have : Surjective p := surjective_of_isDominant_of_isClosed_range p
+    (p.isClosedMap.isClosed_range)
+  obtain ⟨σ, hσ⟩ := Scheme.finite_strict_henselian_algebra_etale_section B B p p.surjective
+  refine ⟨pullback.lift (j ≫ σ) (𝟙 _) (by simp [hσ, j]) ≫ e.hom, ?_⟩
+  simp [Category.assoc, he, j]
+
+open scoped TensorProduct in
+private theorem split_from_boundary_index
+    (R B : Type u) [CommRing R] [IsDomain R] [IsNoetherianRing R] [IsIntegrallyClosed R]
+    [CommRing B] [IsDomain B] [IsRegularRing B] [IsStrictlyHenselianLocalRing B]
+    [IsIntegrallyClosed B] [Algebra R B] (hRB : Function.Injective (algebraMap R B))
+    (f : R) (hf : f ≠ 0) (hfb : algebraMap R B f ≠ 0)
+    (n : ℕ) (hn : 0 < n) (hunit : IsUnit (n : R))
+    (G : Type v) [Group G] [Finite G]
+    (hboundary : ∀ (q : Ideal B) (_ : q.IsPrime),
+      q.height = 1 ∧ algebraMap R B f ∈ q →
+      ∃ (p : Ideal R) (_ : p.IsPrime) (hc : p = q.comap (algebraMap R B))
+        (_ : IsDiscreteValuationRing (Localization.AtPrime p))
+        (_ : IsDiscreteValuationRing (Localization.AtPrime q)),
+        RingHom.Finite (Localization.localRingHom p q (algebraMap R B) hc) ∧
+        Function.Injective (Localization.localRingHom p q (algebraMap R B) hc) ∧
+        (IsLocalRing.maximalIdeal (Localization.AtPrime p)).map
+          (Localization.localRingHom p q (algebraMap R B) hc) =
+          IsLocalRing.maximalIdeal (Localization.AtPrime q) ^ n ∧ Nat.card G ∣ n)
+    (P : Scheme.GaloisCoverAction G (Spec (.of (Localization.Away f)))) :
+    ∃ e : (∐ fun _ : G ↦ Spec (.of (Localization.Away (algebraMap R B f)))) ≅
+        pullback P.π (Spec.map (CommRingCat.ofHom (localization_map (algebraMap R B) f))),
+      e.hom ≫ pullback.snd P.π
+        (Spec.map (CommRingCat.ofHom (localization_map (algebraMap R B) f))) =
+          Sigma.desc (fun _ : G ↦ 𝟙 _) ∧
+      ∀ g h : G,
+        Sigma.ι (fun _ : G ↦ Spec (.of (Localization.Away (algebraMap R B f)))) g ≫
+          e.hom ≫ pullback.fst P.π
+            (Spec.map (CommRingCat.ofHom (localization_map (algebraMap R B) f))) ≫ P.smul h =
+        Sigma.ι (fun _ : G ↦ Spec (.of (Localization.Away (algebraMap R B f)))) (h * g) ≫
+          e.hom ≫ pullback.fst P.π
+            (Spec.map (CommRingCat.ofHom (localization_map (algebraMap R B) f))) := by
+  classical
+  let A := Localization.Away f
+  let A' := Localization.Away (algebraMap R B f)
+  let K := FractionRing R
+  let E := FractionRing B
+  let : Field K := inferInstance
+  let : Field E := inferInstance
+  let : CommRing A := inferInstance
+  let : CommRing A' := inferInstance
+  let : Algebra R A := inferInstance
+  let : Algebra B A' := inferInstance
+  let : Algebra R A' := inferInstance
+  let : Algebra R K := inferInstance
+  let : Algebra B E := inferInstance
+  let : Algebra R E := inferInstance
+  have : IsFractionRing R K := inferInstance
+  have : IsFractionRing B E := inferInstance
+  have : IsScalarTower R B E := inferInstance
+  have : IsScalarTower R B A' := inferInstance
+  have hBEf : algebraMap B E (algebraMap R B f) ≠ 0 :=
+    @field_image_ne_zero B E _ _ _ _ _ hfb
+  let φBE : A' →+* E := away_to_field (algebraMap B E) (algebraMap R B f) hBEf
+  let : Algebra A' E := φBE.toAlgebra
+  have : IsScalarTower B A' E := away_to_field_tower (F := E) _ hBEf
+  let : Algebra A A' := (localization_map (algebraMap R B) f).toAlgebra
+  have : IsScalarTower R A A' := localization_map_tower (C := B) f
+  let φRK : A →+* K := away_to_field (algebraMap R K) f
+    (field_image_ne_zero hf)
+  let : Algebra A K := φRK.toAlgebra
+  have : IsScalarTower R A K := away_to_field_tower (F := K) _ _
+  have hRE : Function.Injective (algebraMap R E) :=
+    (IsFractionRing.injective B E).comp hRB
+  let : Algebra K E := (IsFractionRing.lift hRE).toAlgebra
+  have : IsScalarTower R K E := IsScalarTower.of_algebraMap_eq (R := R) (S := K) (A := E) fun x ↦ by
+    change algebraMap R E x = IsFractionRing.lift (K := K) hRE (algebraMap R K x)
+    exact (IsFractionRing.lift_algebraMap (K := K) hRE x).symm
+  let : Algebra A E := ((algebraMap A' E).comp (algebraMap A A')).toAlgebra
+  have : IsScalarTower A A' E :=
+    IsScalarTower.of_algebraMap_eq (R := A) (S := A') (A := E) fun _ ↦ rfl
+  have : IsScalarTower R A E := localization_comp_tower (F := E) f hBEf
+  have : IsScalarTower A K E := localization_tower_compatible (D := R) (E := E) f
+  obtain ⟨S, hSring, hAS, eS, heS, rest⟩ :=
+    Scheme.pulled_torsor_normalization_model R B A A' K E hRB f hf G P
+  let := hSring
+  let := hAS
+  obtain ⟨W, ι, hι, hact, rest⟩ := rest
+  obtain ⟨eT, eK, heT, heTS, heK, heKS, rest⟩ := rest
+  obtain ⟨jcount, acount, hjpos, hapos, L, hLfield, hKL, rest⟩ := rest
+  let := hLfield
+  let := hKL
+  obtain ⟨F, hFfield, hEF, hBF, hBEF, rest⟩ := rest
+  let := hFfield
+  let := hEF
+  let := hBF
+  let := hBEF
+  obtain ⟨dK, base, prod, fields, hL, hF, hbase, hprod, hfactor, hinjT,
+    htotal, hnormalT, hclosedT, hfiniteCa, hfiniteC, hclosure, model, hmodel⟩ := rest
+  let : Nonempty (Fin jcount) := ⟨⟨0, hjpos⟩⟩
+  let : ∀ j, FiniteDimensional K (L j) := fun j ↦ (hL j).1
+  let : ∀ j, IsGalois K (L j) := fun j ↦ (hL j).2.1
+  let : ∀ a, FiniteDimensional E (F a) := fun a ↦ (hF a).1
+  let : ∀ a, IsGalois E (F a) := fun a ↦ (hF a).2
+  let C := ∀ a, integralClosure B (F a)
+  let : Module.Finite B C := hfiniteC
+  let qmap := Spec.map (CommRingCat.ofHom (algebraMap B C))
+  let j := Spec.map (CommRingCat.ofHom (algebraMap B A'))
+  let U : (Spec (.of B)).Opens := PrimeSpectrum.basicOpen (algebraMap R B f)
+  let eU : Spec (.of A') ≅ U.toScheme := IsOpenImmersion.isoOfRangeEq j U.ι (by
+    rw [← Scheme.Hom.coe_opensRange]
+    exact (congrArg SetLike.coe
+      (Scheme.Hom.opensRange_localizationAway (R := .of B) (algebraMap R B f))).trans
+        U.range_ι.symm)
+  have heU : eU.hom ≫ U.ι = j := IsOpenImmersion.isoOfRangeEq_hom_fac _ _ _
+  have : Etale W.π := W.etale
+  have : IsFinite W.π := W.isFinite
+  have : Surjective W.π := W.surjective
+  let eTW := eT ≪≫ ι.symm
+  have heTW : eTW.hom ≫ W.π = Spec.map
+      (CommRingCat.ofHom (algebraMap A' (A' ⊗[A] S))) := by
+    simp only [eTW, Iso.trans_hom]
+    rw [← hι]
+    simpa only [Category.assoc, Iso.symm_hom, Iso.inv_hom_id_assoc] using heT
+  let eCW := model ≪≫ eTW
+  have heCW : eCW.hom ≫ W.π = pullback.snd qmap j := by
+    simp only [eCW, Iso.trans_hom, Category.assoc, heTW, hmodel]
+    rfl
+  have : Etale (pullback.snd qmap j) := by
+    rw [← heCW]
+    infer_instance
+  obtain ⟨ecU, hecU, hecUi⟩ := change_base_iso qmap j U.ι eU heU
+  have : Etale (pullback.snd qmap U.ι) := by
+    have hh : ecU.inv ≫ pullback.snd qmap j ≫ eU.hom = pullback.snd qmap U.ι := by
+      rw [reassoc_of% hecUi]
+      simp
+    rw [← hh]
+    infer_instance
+  have hU : Etale (qmap ∣_ U) := by
+    change Etale ((pullbackRestrictIsoRestrict qmap U).inv ≫ _)
+    infer_instance
+  have hneighbourhood (z : Spec (.of C))
+      (hz : (qmap z).asIdeal.height = 1 ∧ algebraMap R B f ∈ (qmap z).asIdeal) :
+      ∃ V : (Spec (.of C)).Opens, z ∈ V ∧ Etale (V.ι ≫ qmap) := by
+    obtain ⟨p, hp, hc, hVdvr, hAdvr, hfinite', hinjective', hindex, hcard⟩ :=
+      hboundary (qmap z).asIdeal (qmap z).isPrime hz
+    subst p
+    let := hVdvr
+    let := hAdvr
+    have hdegree : ∀ j, Module.finrank K (L j) ∣ n :=
+      fun j ↦ dvd_trans (hL j).2.2 hcard
+    have hboundaryEtale : ∃ g : C, g ∉ z.asIdeal ∧ Algebra.Etale B (Localization.Away g) := by
+      have hheight' : (qmap z).asIdeal ≠ ⊥ ∧
+          ∀ q : Ideal B, q.IsPrime → q < (qmap z).asIdeal → q = ⊥ := by
+        refine ⟨Ideal.ne_bot_of_height_eq_one hz.1, ?_⟩
+        intro q hq hlt
+        have hlt' := Ideal.height_strict_mono_of_isPrime hlt
+        rw [hz.1] at hlt'
+        exact Ideal.height_eq_zero_iff_eq_bot.mp (Order.lt_one_iff.mp hlt')
+      let : ∀ j, Algebra E (L j ⊗[K] E) := fun _ ↦ Algebra.TensorProduct.rightAlgebra
+      let dec := (AlgEquiv.piCongrRight fun j ↦
+        (Algebra.TensorProduct.commRight K E (L j)).symm).trans fields
+      have hh := RingTheory.kummer_normalization_boundary_etale R B hRB K E
+        (by ext x; exact (IsScalarTower.algebraMap_apply R K E x).symm) n hn hunit
+        (Fin jcount) L hdegree (Fin acount) F
+        (fun a ↦ by ext x; exact IsScalarTower.algebraMap_apply B E (F a) x)
+        dec (qmap z).asIdeal hheight' hfinite' hinjective' hindex
+      exact (hh.2.2.2 z.asIdeal rfl).2.2
+    obtain ⟨g, hg, het⟩ := hboundaryEtale
+    let V : (Spec (.of C)).Opens := PrimeSpectrum.basicOpen g
+    let loc := Spec.map (CommRingCat.ofHom (algebraMap C (Localization.Away g)))
+    have : Etale (loc ≫ qmap) := by
+      rw [← Spec.map_comp]
+      apply HasRingHomProperty.Spec_iff.mpr
+      exact RingHom.etale_algebraMap.mpr het
+    let eV : Spec (.of (Localization.Away g)) ≅ V.toScheme :=
+      IsOpenImmersion.isoOfRangeEq loc V.ι (by
+        rw [← Scheme.Hom.coe_opensRange]
+        exact (congrArg SetLike.coe
+          (Scheme.Hom.opensRange_localizationAway (R := .of C) g)).trans V.range_ι.symm)
+    have heV : eV.hom ≫ V.ι = loc := IsOpenImmersion.isoOfRangeEq_hom_fac _ _ _
+    refine ⟨V, hg, ?_⟩
+    have hh : eV.inv ≫ loc ≫ qmap = V.ι ≫ qmap := by rw [← heV]; simp
+    rw [← hh]
+    infer_instance
+  choose V hV hVet using hneighbourhood
+  let O := qmap ⁻¹ᵁ U ⊔ ⨆ (z : Spec (.of C)) (hz), V z hz
+  obtain ⟨Wopen, hWset, hUW, hWheight, hWfinite, hWet, ⟨H, πH, hHfinite,
+    hHet, ⟨eHW, heHW⟩, eHU, heHU⟩, hWcodim⟩ :=
+    Scheme.exists_finite_etale_model_of_codimension_one_neighbourhoods B C
+      (algebraMap R B f) hfb hU V hV hVet O rfl
+  change eHU.hom ≫ pullback.snd qmap U.ι = pullback.snd πH U.ι at heHU
+  have := hHfinite
+  have := hHet
+  obtain ⟨ehU, hehU, hehUi⟩ := change_base_iso πH j U.ι eU heU
+  let eHW' := ehU ≪≫ eHU ≪≫ ecU.symm ≪≫ eCW
+  have heHW' : eHW'.hom ≫ W.π = pullback.snd πH j := by
+    simp only [eHW', Iso.trans_hom, Iso.symm_hom, Category.assoc, heCW]
+    rw [hecUi, reassoc_of% heHU, reassoc_of% hehU]
+    simp
+  obtain ⟨s, hs⟩ := section_of_finite_etale_model B A' (algebraMap R B f) hfb
+    πH W.π eHW' heHW'
+  obtain ⟨Q, eQ, hcl, heQ, heQi, hdisj, hcover, θ, hθ, hθπ, hθinv,
+    hθlocal, hθmul, hθequiv, hθinvequiv⟩ :=
+    finite_etale_torsor_section_trivialization G W.π W.smul W.smul_π
+      W.one_smul W.mul_smul W.simply_transitive s hs
+  change ∃ e : (∐ fun _ : G ↦ Spec (.of A')) ≅
+      pullback P.π (Spec.map (CommRingCat.ofHom (algebraMap A A'))), _
+  refine ⟨θ ≪≫ ι, ?_, ?_⟩
+  · have hh := congrArg (fun k ↦ θ.hom ≫ k) hι
+    simp only [RingHom.algebraMap_toAlgebra] at hh
+    simpa only [Iso.trans_hom, Category.assoc, hθπ] using hh
+  · intro g h
+    have hh := congrArg (fun k ↦ k ≫ ι.hom ≫ pullback.fst P.π
+      (Spec.map (CommRingCat.ofHom (algebraMap A A')))) (hθequiv h g)
+    simp only [RingHom.algebraMap_toAlgebra] at hact hh
+    simp only [Category.assoc, hact] at hh
+    simpa only [Iso.trans_hom, Category.assoc] using hh
 
 /-- A prime-to-characteristic finite group torsor on a strict-local parameter puncture
 has an equivariant trivialization on a finite simultaneous root cover. No connectedness
@@ -309,6 +689,54 @@ theorem strictLocalPrimeToPKummerSplitting
               pullback.fst P.π (strictLocalParameterRootMap t n) ≫ P.smul h =
             Sigma.ι (fun _ : G ↦ strictLocalParameterRootPuncture t n) (h * g) ≫
               e.hom ≫ pullback.fst P.π (strictLocalParameterRootMap t n) := by
-  sorry
+  classical
+  obtain ⟨tail, htail⟩ := parameters_first t ht hparams
+  let n := if r = 0 then 1 else Nat.card G
+  have hn : 0 < n := by
+    dsimp [n]
+    split_ifs <;> simp [Nat.card_pos]
+  have hcop : Nat.Coprime n p := by
+    dsimp [n]
+    split_ifs
+    · exact Nat.coprime_one_left p
+    · exact (hp.coprime_iff_not_dvd.mpr hG).symm
+  have hunit : IsUnit (n : R) := by
+    let := invertibleOfCoprime (R := R) hcop
+    exact isUnit_of_invertible _
+  refine ⟨n, hn, hcop, by intro hr; simp [n, hr], ?_⟩
+  let B := strictLocalParameterRootRing t n
+  obtain ⟨hBreg, hBstrict, hRB⟩ := root_regularity t tail htail n hn
+  let := hBreg
+  let := hBstrict
+  have : IsDomain R := inferInstance
+  have : IsDomain B := inferInstance
+  have : IsRegularRing R :=
+    (IsRegularLocalRing.localization_at_prime_and_isRegularRing
+      (IsLocalRing.maximalIdeal R)).2
+  have : IsRegularRing B :=
+    (IsRegularLocalRing.localization_at_prime_and_isRegularRing
+      (IsLocalRing.maximalIdeal B)).2
+  have : IsIntegrallyClosed R := regular_integrallyClosed R
+  have : IsIntegrallyClosed B := regular_integrallyClosed B
+  let f := ∏ i, t i
+  have hf : f ≠ 0 := by
+    apply Finset.prod_ne_zero_iff.mpr
+    intro i hi hzero
+    have hsmul := (Algebra.parameter_root_boundary_quotients t tail htail n hn i).2.2.2.2.1
+    have heq : (1 : R) = 0 := hsmul (by simp [hzero])
+    exact one_ne_zero heq
+  have hfb : algebraMap R B f ≠ 0 := fun h ↦ hf (hRB (h.trans (map_zero _).symm))
+  apply split_from_boundary_index R B hRB f hf hfb n hn hunit G ?_ P
+  intro q hq hz
+  obtain ⟨hdomB, hRB', hboundary, hdvrs⟩ :=
+    Algebra.parameter_root_boundary_dvrs t tail htail n hn
+  obtain ⟨i, hi⟩ := (hboundary q hq).mp hz
+  obtain ⟨hpi, hqi, hc, hVdvr, hAdvr, hheight, hVm, hAm, hequiv,
+    hinjective, hfinite, hfrac, hindex1, hindex2, hindex3⟩ := hdvrs i
+  subst q
+  refine ⟨Algebra.parameterBaseBoundaryIdeal t i, hpi, hc, hVdvr, hAdvr,
+    hfinite, hinjective, hindex1.trans (hindex2.trans hindex3), ?_⟩
+  have hrne : r ≠ 0 := by intro hr; exact Fin.elim0 (hr ▸ i)
+  simp [n, hrne]
 
 end AlgebraicGeometry

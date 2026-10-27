@@ -1,0 +1,214 @@
+{
+ "id": "lem-trf-space-closed-immersion-cover-descent",
+ "kind": "statement",
+ "title": "Descent of a representable closed immersion along an auxiliary etale cover",
+ "statement": "Let $S$ be a scheme [def-pc-scheme], let $E,B,Y$ be algebraic spaces over $S$ [def-trf-algebraic-space], let $a:E\\to B$ be representable, and let $b:B\\to Y$ be any morphism. Let $(p_i:Y_i\\to Y)_{i\\in I}$ be a jointly surjective family [def-trf-algebraic-space-jointly-surjective-family] of representable etale maps from schemes. Put $B_i=B\\times_YY_i$, $E_i=E\\times_YY_i$, where $E\\to Y$ is $b\\circ a$, and let $a_i:E_i\\to B_i$ be the base changes [def-pc-fibre-product]. Assume that, for every $i$ and every scheme $T_i\\to B_i$, the represented scheme morphism $E_i\\times_{B_i}T_i\\to T_i$ is a closed immersion [def-weil-closed-immersion]. Then for every scheme $T\\to B$ the represented scheme morphism $E\\times_BT\\to T$ is a closed immersion. Thus $a$ is a representable closed immersion; neither $E$ nor $B$ is required to be a scheme, and no finiteness condition on $I$ is imposed.",
+ "source": {
+  "document": "literature/stacks-project/spaces.tex",
+  "place": "Tag 03KD (lemma-descent-representable-transformations-property), closed-immersion specialization with cover pulled back from Y; scheme-test implementation uses descent.tex Tag 02L6 (lemma-descending-property-closed-immersion) and topologies.tex Tag 022C (lemma-zariski-etale-smooth-syntomic-fppf-fpqc)."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-trf-algebraic-space",
+  "def-trf-algebraic-space-jointly-surjective-family",
+  "def-pc-fibre-product",
+  "def-weil-closed-immersion"
+ ],
+ "proof": [
+  {
+   "text": "Fix a scheme $T$ and a map $t:T\\to B$. Representability of $a$ gives a scheme $Z=E\\times_BT$ and its projection $f:Z\\to T$. Apply [lem-trf-space-fibre-products-etale-covers] to the cover $(Y_i\\to Y)$ and the composite $b\\circ t:T\\to Y$. It gives schemes $U_i=T\\times_YY_i$ and a jointly surjective etale family $q_i:U_i\\to T$. Each $U_i$ has its canonical map $r_i:U_i\\to B_i$, induced by $t$ and $U_i\\to Y_i$.",
+   "uses": [
+    "def-trf-algebraic-space",
+    "lem-trf-space-fibre-products-etale-covers"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-topologies.tex",
+    "place": "Tag 041F (lemma-etale), part (3); scheme-test setup of spaces.tex Tag 03KD"
+   }
+  },
+  {
+   "text": "The universal properties of the fibre products identify $Z\\times_TU_i$ with $E_i\\times_{B_i}U_i$ over $U_i$. Explicitly, on any test scheme $V$ both sides consist of triples $(e,u,y_i)$ with $a(e)=t(u)$ and $b(t(u))=p_i(y_i)$; the two inverse maps retain these three entries. The projections to $U_i$ agree. The hypothesis applied to the scheme map $r_i:U_i\\to B_i$ therefore says exactly that $f_i:Z\\times_TU_i\\to U_i$ is a closed immersion. Changing between these representing schemes does not change this property: a scheme isomorphism is a homeomorphism with isomorphisms on structure sheaves, so closed image and the defining surjections are preserved.",
+   "uses": [
+    "def-pc-fibre-product",
+    "lem-trf-space-fibre-products-etale-covers",
+    "def-weil-closed-immersion"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces.tex",
+    "place": "Tag 03KD (lemma-descent-representable-transformations-property), displayed scheme-test fibre square"
+   }
+  },
+  {
+   "text": "Regard $(q_i:U_i\\to T)$ as a covering of the final object of the small etale site of $T$ [def-weil-pbc-etale-site]. By [lem-weil-pbc-fpqc-finer-than-etale], this same family is an fpqc covering of the scheme $T$. The statement applies to arbitrary covering families, so neither finiteness of $I$ nor quasi-compactness of the individual $q_i$ is required.",
+   "uses": [
+    "def-weil-pbc-etale-site",
+    "lem-weil-pbc-fpqc-finer-than-etale"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/topologies.tex",
+    "place": "Tag 022C (lemma-zariski-etale-smooth-syntomic-fppf-fpqc), etale-covering assertion"
+   }
+  },
+  {
+   "text": "Apply [lem-pc-fpqc-descend-closed-immersion] to the scheme morphism $f:Z\\to T$, its fpqc cover $(q_i)$, and the closed immersions $f_i$ proved above. It follows that $f$ is a closed immersion. Since $T\\to B$ was arbitrary, every scheme test of $a$ is a closed immersion, which is the asserted representable closed-immersion property. If $I$ is empty, the pulled-back jointly surjective family forces $T$ to be empty; the same argument and the cited descent statement still apply.",
+   "uses": [
+    "lem-pc-fpqc-descend-closed-immersion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/descent.tex",
+    "place": "Tag 02L6 (lemma-descending-property-closed-immersion), descent direction"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-trf-algebraic-space",
+  "lem-trf-space-fibre-products-etale-covers",
+  "def-pc-fibre-product",
+  "def-weil-closed-immersion",
+  "def-weil-pbc-etale-site",
+  "lem-weil-pbc-fpqc-finer-than-etale",
+  "lem-pc-fpqc-descend-closed-immersion"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/spaces.tex",
+  "place": "Tag 03KD (lemma-descent-representable-transformations-property), scheme-test proof, using Tags 041F, 022C and 02L6"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A representable morphism of algebraic spaces is a closed immersion if it becomes a closed immersion after a jointly surjective etale scheme cover of an auxiliary base",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.instUniversallyClosedOfIsClosedImmersion\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/UniversallyClosed\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.IsClosedImmersion f],\\n  AlgebraicGeometry.UniversallyClosed f\", \"doc\": \"Every closed immersion of schemes is a universally closed morphism. Specifically, if $ f: X \\to Y $ is a closed immersion (i.e., it induces a homeomorphism of $ X $ onto a closed subset of $ Y $ with s\"}\n  {\"name\": \"AlgebraicGeometry.isClosedImmersion_iff\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/ClosedImmersion\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y),\\n  AlgebraicGeometry.IsClosedImmersion f ↔\\n    AlgebraicGeometry.SurjectiveOnStalks f ∧ Topology.IsClosedEmbedding ⇑(CategoryTheory.ConcreteCategory.hom f.base)\", \"doc\": \"A morphism $ f: X \\to Y $ of schemes is a closed immersion if and only if the induced maps on stalks are surjective and the underlying continuous map is a closed embedding.\"}\n  {\"name\": \"AlgebraicGeometry.IsClosedImmersion.iff_isPreimmersion\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/ClosedImmersion\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y},\\n  AlgebraicGeometry.IsClosedImmersion f ↔\\n    AlgebraicGeometry.IsPreimmersion f ∧ IsClosed (Set.range ⇑(CategoryTheory.ConcreteCategory.hom f.base))\", \"doc\": \"A morphism $ f : X \\to Y $ of schemes is a closed immersion if and only if it is a preimmersion and the image of $ f $ is a closed subset of $ Y $.\"}\n  {\"name\": \"AlgebraicGeometry.IsClosedImmersion.of_isPreimmersion\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/ClosedImmersion\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.IsPreimmersion f],\\n  IsClosed (Set.range ⇑(CategoryTheory.ConcreteCategory.hom f.base)) → AlgebraicGeometry.IsClosedImmersion f\", \"doc\": \"If a morphism of schemes is a preimmersion and its image is a closed subset of the target scheme, then it is a closed immersion.\"}\n  {\"name\": \"AlgebraicGeometry.IsClosedImmersion\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/ClosedImmersion\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"A morphism $ f: X \\\\to Y $ of schemes is a closed immersion if it induces a homeomorphism of the underlying topological space of $ X $ onto a closed subset of $ Y $ and the induced map on structure she\"}\n  {\"name\": \"AlgebraicGeometry.IsClosedImmersion.instIsPreimmersion\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/ClosedImmersion\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.IsClosedImmersion f],\\n  AlgebraicGeometry.IsPreimmersion f\", \"doc\": \"Every closed immersion of schemes is a preimmersion.\"}\n  {\"name\": \"AlgebraicGeometry.IsClosedImmersion.of_surjective_of_isAffine\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/ClosedImmersion\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} [AlgebraicGeometry.IsAffine X] [AlgebraicGeometry.IsAffine Y] (f : X ⟶ Y),\\n  Function.Surjective ⇑(CategoryTheory.ConcreteCategory.hom (AlgebraicGeometry.Scheme.Hom.appTop f)) →\\n    AlgebraicGeometry.IsClosedImmersion f\", \"doc\": \"If $ X $ and $ Y $ are affine schemes and the morphism $ f : X \\to Y $ induces a surjective map on global sections, then $ f $ is a closed immersion.\"}\n  {\"name\": \"AlgebraicGeometry.IsClosedImmersion.of_comp\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Separated\", \"type\": \"∀ {X Y Z : AlgebraicGeometry.Scheme} (f : X ⟶ Y) (g : Y ⟶ Z)\\n  [AlgebraicGeometry.IsClosedImmersion (CategoryTheory.CategoryStruct.comp f g)] [AlgebraicGeometry.IsSeparated g],\\n  AlgebraicGeometry.IsClosedImmersion f\", \"doc\": \"If the composition $ f \\\\circ g $ is a closed immersion and $ g $ is a separated morphism of schemes, then $ f $ is a closed immersion.\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern schemes or Zariski representability, not this algebraic-space assertion"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Closed immersions of algebraic spaces descend along an etale covering after testing the representable morphism on schemes",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.IsClosedImmersion.instIsPreimmersion\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion\", \"type\": \"{X Y : Scheme} (f : X ⟶ Y) [IsClosedImmersion f] : IsPreimmersion f\", \"doc\": \"Every closed immersion of schemes is a preimmersion.\"}\n  {\"name\": \"AlgebraicGeometry.IsClosedImmersion\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"A morphism $ f: X \\\\to Y $ of schemes is a closed immersion if it induces a homeomorphism of the underlying topological space of $ X $ onto a closed subset of $ Y $ and the induced map on structure she\"}\n  {\"name\": \"AlgebraicGeometry.isClosedImmersion_iff_isAffineHom\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion\", \"type\": \"{f : X ⟶ Y} : IsClosedImmersion f ↔ IsAffineHom f ∧ ∀ U : Y.Opens, IsAffineOpen U → Function.Surjective (f.app U)\", \"doc\": \"A morphism of schemes $f: X \\\\to Y$ is a closed immersion if and only if it is an affine morphism and for every affine open subset $U$ of $Y$, the induced ring homomorphism on sections $\\\\mathcal{O}_Y(U\"}\n  {\"name\": \"AlgebraicGeometry.IsClosedImmersion.isStableUnderBaseChange\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion\", \"type\": \": MorphismProperty.IsStableUnderBaseChange @IsClosedImmersion\", \"doc\": \"The property of being a closed immersion of schemes is stable under base change. That is, if $ f: X \\to Y $ is a closed immersion of schemes, then for any base change $ Y' \\to Y $, the induced morphism \"}\n  {\"name\": \"AlgebraicGeometry.IsClosedImmersion.of_isPreimmersion\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion\", \"type\": \"{X Y : Scheme} (f : X ⟶ Y) [IsPreimmersion f] (hf : IsClosed (Set.range f)) : IsClosedImmersion f\", \"doc\": \"If a morphism of schemes is a preimmersion and its image is a closed subset of the target scheme, then it is a closed immersion.\"}\n  {\"name\": \"AlgebraicGeometry.IsClosedImmersion.mk\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y} [toSurjectiveOnStalks : AlgebraicGeometry.SurjectiveOnStalks f],\\n  Topology.IsClosedEmbedding ⇑(CategoryTheory.ConcreteCategory.hom f.base) → AlgebraicGeometry.IsClosedImmersion f\", \"doc\": \"A morphism of schemes $ f: X \\to Y $ is a closed immersion if the underlying continuous map is a closed embedding and the induced maps on stalks are surjective.\"}\n  {\"name\": \"AlgebraicGeometry.IsImmersion\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Immersion\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"A morphism between schemes $ X $ and $ Y $ is an immersion.\"}\n  {\"name\": \"AlgebraicGeometry.IsClosedImmersion.iff_isPreimmersion\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion\", \"type\": \"{X Y : Scheme} {f : X ⟶ Y} : IsClosedImmersion f ↔ IsPreimmersion f ∧ IsClosed (Set.range f)\", \"doc\": \"A morphism $ f : X \\to Y $ of schemes is a closed immersion if and only if it is a preimmersion and the image of $ f $ is a closed subset of $ Y $.\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern schemes or Zariski representability, not this algebraic-space assertion"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicSpace\", \"ClosedImmersion\"",
+   "results": "[loogle] OK 0 hit(s)",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern schemes or Zariski representability, not this algebraic-space assertion"
+  },
+  {
+   "tool": "grep",
+   "query": "AlgebraicSpace|representable.*closed.?immersion|closed.?immersion.*representable",
+   "results": "[grep] OK 0 hit(s)",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern schemes or Zariski representability, not this algebraic-space assertion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Representable natural transformations of sheaves have the closed immersion property locally for the etale topology on the target",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.LocalRepresentability.isRepresentable\", \"module\": \"Mathlib/AlgebraicGeometry/Sites/Representability\", \"type\": \"∀ {F : CategoryTheory.Sheaf AlgebraicGeometry.Scheme.zariskiTopology (Type u)} {ι : Type u}\\n  {X : ι → AlgebraicGeometry.Scheme} {f : (i : ι) → CategoryTheory.yoneda.obj (X i) ⟶ F.val},\\n  (∀ (i : ι), AlgebraicGeometry.IsOpenImmersion.presheaf (f i)) →\\n    ∀\\n      [CategoryTheory.Presheaf.IsLocallySu\", \"doc\": \"The functor $ F $ is representable, meaning there exists an object $ X $ in the category of schemes such that $ F $ is naturally isomorphic to the Hom functor $ \\\\mathrm{Hom}(-, X) $.\"}\n  {\"name\": \"AlgebraicGeometry.IsClosedImmersion.isZariskiLocalAtTarget\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/ClosedImmersion\", \"type\": \"AlgebraicGeometry.IsZariskiLocalAtTarget @AlgebraicGeometry.IsClosedImmersion\", \"doc\": \"The property of being a closed immersion is Zariski local at the target. This means that if a morphism of schemes is a closed immersion, then for any Zariski covering of the target (generated by open \"}\n  {\"name\": \"AlgebraicGeometry.IsClosedImmersion\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/ClosedImmersion\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"A morphism $ f: X \\\\to Y $ of schemes is a closed immersion if it induces a homeomorphism of the underlying topological space of $ X $ onto a closed subset of $ Y $ and the induced map on structure she\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.LocalRepresentability.representableBy\", \"module\": \"Mathlib/AlgebraicGeometry/Sites/Representability\", \"type\": \"{F : CategoryTheory.Sheaf AlgebraicGeometry.Scheme.zariskiTopology (Type u)} →\\n  {ι : Type u} →\\n    {X : ι → AlgebraicGeometry.Scheme} →\\n      {f : (i : ι) → CategoryTheory.yoneda.obj (X i) ⟶ F.val} →\\n        (hf : ∀ (i : ι), AlgebraicGeometry.IsOpenImmersion.presheaf (f i)) →\\n          [CategoryThe\", \"doc\": \"The functor $ F $ is representable by the scheme constructed from Zariski gluing data $ \\\\text{glueData} $ and condition $ hf $, establishing a natural isomorphism between $ F $ and the Yoneda embeddin\"}\n  {\"name\": \"AlgebraicGeometry.IsImmersion.instIsZariskiLocalAtTarget\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Immersion\", \"type\": \"AlgebraicGeometry.IsZariskiLocalAtTarget @AlgebraicGeometry.IsImmersion\", \"doc\": \"The property of being an immersion between schemes is Zariski local at the target. Specifically, if a morphism $ f: X \\\\to Y $ is an immersion and $ \\\\{Y_i \\\\to Y\\\\} $ is a Zariski covering (generated by \"}\n  {\"name\": \"AlgebraicGeometry.IsImmersion.isImmersion_iff_exists\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Immersion\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y},\\n  AlgebraicGeometry.IsImmersion f ↔\\n    ∃ Z g₁ g₂,\\n      AlgebraicGeometry.IsClosedImmersion g₁ ∧\\n        AlgebraicGeometry.IsOpenImmersion g₂ ∧ CategoryTheory.CategoryStruct.comp g₁ g₂ = f\", \"doc\": \"A morphism $ f: X \\\\to Y $ of schemes is an immersion if and only if there exists a scheme $ Z $ and morphisms $ g₁: X \\\\to Z $ and $ g₂: Z \\\\to Y $ such that $ g₁ $ is a closed immersion, $ g₂ $ is an o\"}\n  {\"name\": \"AlgebraicGeometry.isImmersion_iff\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Immersion\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y),\\n  AlgebraicGeometry.IsImmersion f ↔\\n    AlgebraicGeometry.IsPreimmersion f ∧ IsLocallyClosed (Set.range ⇑(CategoryTheory.ConcreteCategory.hom f.base))\", \"doc\": \"A morphism $ f : X \\to Y $ of schemes is an immersion if and only if $ f $ is a preimmersion and the image of the underlying continuous map $ f : |X| \\to |Y| $ is a locally closed subset of $ |Y| $.\"}\n  {\"name\": \"AlgebraicGeometry.isImmersion_eq_inf\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Immersion\", \"type\": \"@AlgebraicGeometry.IsImmersion =\\n  @AlgebraicGeometry.IsPreimmersion ⊓\\n    AlgebraicGeometry.topologically fun {x x_1} x_2 x_3 f => IsLocallyClosed (Set.range f)\", \"doc\": \"A morphism of schemes is an immersion if and only if it is a preimmersion and its image is a locally closed subset of the target scheme. This equality identifies the property of being an immersion wit\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern schemes or Zariski representability, not this algebraic-space assertion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Representable morphisms of algebraic spaces are closed immersions if this holds after a surjective etale base change",
+   "results": "{\"t\": \"2026-10-23T09:46:17Z\", \"tool\": \"leanfinder\", \"query\": \"Representable morphisms of algebraic spaces are closed immersions if this holds after a surjective etale base change\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsClosedImmersion.of_isPreimmersion\", \"AlgebraicGeometry.IsClosedImmersion.isStableUnderBaseChange\", \"AlgebraicGeometry.IsClosedImmersion\", \"AlgebraicGeometry.IsClosedImmersion.spec_of_surjective\", \"AlgebraicGeometry.instHasOfPostcompPropertySchemeIsClosedImmersionIsSeparated\", \"AlgebraicGeometry.isClosedImmersion_iff\", \"AlgebraicGeometry.IsClosedImmersion.instIsPreimmersion\", \"AlgebraicGeometry.IsClosedImmersion.iff_isPreimmersion\"], \"digest\": \"29b48c913fdd8b23\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: returned declarations concern scheme closed immersions, base-change stability or Zariski locality; none states representable algebraic-space etale-cover descent"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsClosedImmersion\", \"Etale\"",
+   "results": "{\"t\": \"2026-10-23T09:46:17Z\", \"tool\": \"loogle\", \"query\": \"\\\"IsClosedImmersion\\\", \\\"Etale\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: returned declarations concern scheme closed immersions, base-change stability or Zariski locality; none states representable algebraic-space etale-cover descent"
+  },
+  {
+   "tool": "grep",
+   "query": "AlgebraicSpace|representable.*closed.?immersion|IsClosedImmersion.*[Dd]escent",
+   "results": "{\"t\": \"2026-10-23T09:46:51Z\", \"tool\": \"grep\", \"query\": \"AlgebraicSpace|representable.*closed.?immersion|IsClosedImmersion.*[Dd]escent\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: returned declarations concern scheme closed immersions, base-change stability or Zariski locality; none states representable algebraic-space etale-cover descent"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Closed immersions of representable sheaves descend along an etale covering of algebraic spaces",
+   "results": "{\"t\": \"2026-10-23T09:46:51Z\", \"tool\": \"leansearch\", \"query\": \"Closed immersions of representable sheaves descend along an etale covering of algebraic spaces\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsClosedImmersion.of_isPreimmersion\", \"AlgebraicGeometry.IsClosedImmersion\", \"AlgebraicGeometry.IsClosedImmersion.mk\", \"AlgebraicGeometry.IsClosedImmersion.iff_isPreimmersion\", \"AlgebraicGeometry.IsClosedImmersion.isStableUnderBaseChange\", \"AlgebraicGeometry.isClosedImmersion_iff\", \"AlgebraicGeometry.IsClosedImmersion.casesOn\", \"AlgebraicGeometry.IsClosedImmersion.instIsPreimmersion\"], \"digest\": \"1525222aa5eaf106\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: returned declarations concern scheme closed immersions, base-change stability or Zariski locality; none states representable algebraic-space etale-cover descent"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A scheme morphism is a closed immersion if its pullbacks to an etale cover are closed immersions",
+   "results": "{\"t\": \"2026-10-23T09:46:57Z\", \"tool\": \"leanfinder\", \"query\": \"A scheme morphism is a closed immersion if its pullbacks to an etale cover are closed immersions\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsClosedImmersion.instIsPreimmersion\", \"AlgebraicGeometry.IsClosedImmersion.of_isPreimmersion\", \"AlgebraicGeometry.IsClosedImmersion.isZariskiLocalAtTarget\", \"AlgebraicGeometry.IsClosedImmersion\", \"AlgebraicGeometry.instUniversallyClosedOfIsClosedImmersion\", \"AlgebraicGeometry.IsClosedImmersion.iff_isPreimmersion\", \"AlgebraicGeometry.IsSeparated.instIsClosedImmersionMapDescScheme\", \"AlgebraicGeometry.IsClosedImmersion.isStableUnderBaseChange\"], \"digest\": \"4b58d2724a4794de\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: returned declarations concern scheme closed immersions, base-change stability or Zariski locality; none states representable algebraic-space etale-cover descent"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-space-qc-separated-etale-local",
+  "date": "2026-10-22",
+  "group": "Q110"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Auxiliary polarized-descent locality input in the ancestry of lem-trf-local-term-locality: returned proof of lem-trf-space-qc-separated-etale-local, step 2, scheme-test descent of the representable diagonal.",
+   "via": [
+    "lem-trf-space-qc-separated-etale-local",
+    "lem-trf-algebraic-space-ample-local",
+    "lem-trf-polarized-scheme-etale-descent",
+    "lem-trf-polarized-fine-log-etale-descent",
+    "lem-trf-coherent-log-ideal-chart-construction",
+    "lem-trf-log-blowup-normalization",
+    "lem-trf-log-regular-desingularization",
+    "lem-trf-nodal-pair-projective-resolution",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-trf-space-closed-immersion-cover-descent",
+  "worker": "stage1",
+  "summary": "Scheme-test proof using existing cover base-change and fpqc closed-immersion descent nodes; explicit fibre-product identification, arbitrary index sets and empty tests checked. No new nodes and no statement change.",
+  "blueprint": "Auxiliary polarized-descent input below lem-trf-local-term-locality: supplies the diagonal descent used in lem-trf-space-qc-separated-etale-local, preserving the inherited ancestry and the current blueprint contracting-correspondence route.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-fpqc-finer-than-etale",
+    "why": "Converts the pulled-back etale scheme cover to an fpqc cover for arbitrary index sets; this general topology comparison is a tool, with no replacement for it in the unit."
+   },
+   {
+    "node": "lem-pc-fpqc-descend-closed-immersion",
+    "why": "Descends a scheme closed immersion from an fpqc covering family after representability has produced the scheme test. This generic scheme descent theorem is the needed tool, rather than a new algebraic-space version of the item."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-fpqc-finer-than-etale",
+  "lem-pc-fpqc-descend-closed-immersion"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q114-7df846237",
+  "group": "Q114",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q114-7df846237 (reviewer sub-agent of L); spot-checked: Read in full: the item, and the statements of all 7 proof_deps and 5 stmt_deps. Sources read: Stacks spaces.tex 03KD (line 602) and descent.tex 02L6 (line 5968). The statement is unchanged from live and side-live, where the item is still unsplit with an empty proof. There are no new nodes and no repair note. Step 1: representability gives the scheme Z=E×_B T. The base-change and scheme clauses of lem-trf-space-fibre-products-etale-covers give schemes U_i=T×_Y Y_i that form a jointly surjective étale family. r_i=(t∘pr, pr) is well defined. Step 2 is elementary, and I verified the triple identification Z×_T U_i ≅ E_i×_{B_i} U_i on test schemes. The hypothesis is applied to the scheme map U_i→B_i, and a closed immersion stays one under composition with an isomorphism. Step 3: the q_i form an étale covering of T, and lem-weil-pbc-fpqc-finer-than-etale (arbitrary families) makes it an fpqc covering. Step 4: lem-pc-fpqc-descend-closed-immersion applies exactly, with no qc or finiteness hypothesis. Edge cases checked: empty I gives an empty T; the identity cover; B not a scheme; infinite I. There is no cycle among the 140 transitive dependencies. A duplicate search over about 58 nodes (representable, closed immersion, étale cover) found nothing that states this item. The tool_uses on lem-weil-pbc-fpqc-finer-than-etale and lem-pc-fpqc-descend-closed-immersion are accepted as generic tools. Minor and inherited, not a fault: the statement cites def-pc-fibre-product for base changes of algebraic spaces."
+ }
+}

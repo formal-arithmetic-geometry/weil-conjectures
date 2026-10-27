@@ -120,7 +120,18 @@
   "item": "lemma-weil-pbc-cancellation",
   "date": "2026-10-09"
  },
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
  "chapter": "sec-proper-base-change",
  "unit": "sk-thm-reduction",
  "split_report": {
@@ -169,5 +180,32 @@
    "AlgebraicGeometry.Scheme.etaleModule_enoughInjectives"
   ],
   "sorry_after": []
+ },
+ "blueprint_update": {
+  "snapshot": "main-20261023-1620",
+  "commit": "7284bb09daf97437d544c51882b325f9c52cd345",
+  "changed": [
+   "statement"
+  ],
+  "statement": "Let $T$ be a scheme [def-pc-scheme], $T_{\\Et}$ its small etale site [def-weil-pbc-etale-site], $R$ a ring, $R_T$ the constant sheaf of rings with value $R$ on $T_{\\Et}$ [def-weil-pbc-constant-sheaf], and $\\Mod(T_{\\Et},R)=\\Mod(R_T)$ the abelian category of sheaves of $R_T$-modules on $T_{\\Et}$ [def-weil-sheaf-of-modules-category]. Then $\\Mod(T_{\\Et},R)$ has enough injectives: for every object $F$ there are an injective object $J$ of $\\Mod(T_{\\Et},R)$ [def-sp-injective-resolutions] and a monomorphism $F\\hookrightarrow J$ in $\\Mod(T_{\\Et},R)$. In particular the category $\\Ab(T_{\\Et})$ of abelian sheaves on $T_{\\Et}$ [def-weil-pbc-abelian-etale-sheaves] has enough injectives.",
+  "proof": [
+   {
+    "text": "**Step 1.** *$\\Mod(T_{\\Et},R)$ and $\\Ab(T_{\\Et})$ are Grothendieck abelian.* By [lem-weil-pbc-module-sheaves-grothendieck-abelian] with $\\Lambda=R$, the category $\\Mod(T_{\\Et},R)$ of sheaves of $R_T$-modules is a Grothendieck abelian category [def-sp-grothendieck-abelian]: it is abelian, has all small colimits, filtered colimits in it are exact, and it has a generator ($\\bigoplus_U j_{U!}R_U$ over a set of representatives $U$ of an essentially small dense subcategory of $T_{\\Et}$). The same lemma (its case $\\Lambda=\\mathbf Z$) says that $\\Ab(T_{\\Et})$ is Grothendieck abelian.",
+    "uses": [
+     "lem-weil-pbc-module-sheaves-grothendieck-abelian",
+     "def-sp-grothendieck-abelian"
+    ],
+    "elementary": false
+   },
+   {
+    "text": "**Step 2.** *Enough injectives.* A Grothendieck abelian category has enough injectives [lem-sp-grothendieck-enough-injectives] (Stacks 079H: it even has a functorial injective embedding, i.e. a functor $M\\mapsto I(M)$ with $I(M)$ injective and a natural monomorphism $i_M:M\\to I(M)$; taking $J=I(F)$ and $F\\hookrightarrow J$ the map $i_F$ gives the statement for each $F$). Applied to the two Grothendieck abelian categories of step 1, $\\Mod(T_{\\Et},R)$ and $\\Ab(T_{\\Et})$ have enough injectives, with injectivity in the sense of [def-sp-injective-resolutions] taken inside the respective category.\n\n*Source: Stacks project, injectives.tex, Theorem 079H (theorem-injective-embedding-grothendieck), applied to Mod(O) as in Cohomology on Sites, proof of Lemma 07AC.*",
+    "uses": [
+     "lem-sp-grothendieck-enough-injectives",
+     "def-sp-injective-resolutions"
+    ],
+    "elementary": false
+   }
+  ],
+  "note": "the current blueprint (main-20261023-1620, weil-conjectures-blueprint 7284bb09da) states or proves this differently; the node is proved in Lean: recorded 2026-10-23, not reopened"
  }
 }

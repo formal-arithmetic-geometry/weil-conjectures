@@ -1,0 +1,281 @@
+{
+ "id": "lem-weil-pbc-ringed-space-algebra-image",
+ "kind": "statement",
+ "title": "Algebra-sheaf image factorization agrees with the underlying module image",
+ "statement": "Let $X$ be a topological space, $\\mathcal O$ a sheaf of commutative rings, and $\\psi:\\mathcal B\\to\\mathcal A$ a morphism of commutative $\\mathcal O$-algebra sheaves [def-weil-pbc-ringed-space-algebra-module]. For an open $U$, let $\\mathcal D(U)$ consist of those $a\\in\\mathcal A(U)$ such that every $x\\in U$ has an open neighbourhood $V\\subseteq U$ and $b\\in\\mathcal B(V)$ with $a|_V=\\psi_V(b)$. With restrictions and operations inherited from $\\mathcal A$, $\\mathcal D$ is a sheaf of commutative $\\mathcal O$-algebras. There are canonical algebra maps $p:\\mathcal B\\to\\mathcal D$ and $i:\\mathcal D\\to\\mathcal A$ with $ip=\\psi$, where $i$ is sectionwise injective and $p$ is locally surjective (every section of $\\mathcal D$ lifts through $p$ on an open covering). The underlying module of $\\mathcal D$, with this inclusion into $\\mathcal A$, is canonically the categorical image of the underlying $\\mathcal O$-linear map [def-weil-sheaf-of-modules-category]. Moreover, for every factorization $\\psi=jf$ through an algebra sheaf $\\mathcal H$ with $j:\\mathcal H\\to\\mathcal A$ sectionwise injective, there is a unique algebra map $k:\\mathcal D\\to\\mathcal H$ with $jk=i$ and $kp=f$.",
+ "source": {
+  "document": "literature/stacks-project/sheaves.tex",
+  "place": "Tag 0087, lemma-sheafify-presheaf-structures, together with Modules Tag 01AG, lemma-abelian and the image/coimage construction preceding it: algebraic-structure image compared with module image"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-ringed-space-algebra-module",
+  "def-weil-sheaf-of-modules-category"
+ ],
+ "proof": [
+  {
+   "text": "Construct the local image as the sheafification of the set-valued range subfunctor of A using Mathlib Subfunctor.sheafify. Its sections form subrings: intersect covering sieves of lifts for addition and multiplication; use negatives of lifts and the images of zero and one for the remaining operations. Restriction is inherited from A. This is exactly the local-image construction of Stacks Sheaves 0087.",
+   "uses": [
+    "def-weil-pbc-ringed-space-algebra-module"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sheaves.tex",
+    "place": "Tag 0087, lemma-sheafify-presheaf-structures: local algebraic operations, written out for the local image"
+   }
+  },
+  {
+   "text": "Use Mathlib Subfunctor.sheafify_isSheaf and Presheaf.isSheaf_iff_isSheaf_comp for the commutative-ring forgetful functor to obtain a ring sheaf D. Its structure map is O to B followed by range restriction. Inclusion i and range restriction p give p followed by i equal to psi; inclusion is sectionwise injective.",
+   "uses": [
+    "def-weil-pbc-ringed-space-algebra-module"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sheaves.tex",
+    "place": "Tag 0087, lemma-sheafify-presheaf-structures: sheaf gluing in the underlying sheaf of sets"
+   }
+  },
+  {
+   "text": "On underlying sheaves of sets, p and i are the Mathlib Sheaf.toImage and Sheaf.imageι maps. Mathlib proves local surjectivity of toImage. Translate a covering sieve into a neighborhood of each point; choose these neighborhoods indexed by the points of U to obtain the stated cover. Membership in the sheafified range is precisely the neighborhood local-lift condition. The point-indexed cover is empty when U is empty.",
+   "uses": [
+    "def-weil-pbc-ringed-space-algebra-module"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sheaves.tex",
+    "place": "Tag 0087, lemma-sheafify-presheaf-structures: canonical algebra maps in the local-image construction"
+   }
+  },
+  {
+   "text": "Apply the underlying-module functor and then SheafOfModules.toSheaf to the underlying abelian sheaves. The inclusion has injective section maps, so its underlying sheaf map is monic by Sheaf.mono_of_injective. The projection is locally surjective because local surjectivity is unchanged by forgetting algebraic structure (Presheaf.isLocallySurjective_iff_whisker_forget), so its underlying abelian sheaf map is epic by Sheaf.epi_of_isLocallySurjective. The faithful underlying-sheaf functor reflects these mono and epi properties.",
+   "uses": [
+    "def-weil-pbc-ringed-space-algebra-module",
+    "def-weil-sheaf-of-modules-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/modules.tex",
+    "place": "Tag 01AG, lemma-abelian, and Section 01AF, section-kernels: module epimorphisms are local surjections"
+   }
+  },
+  {
+   "text": "The module category is abelian by Mathlib SheafOfModules.instAbelian, since the site of opens and section modules lie in the same universe. Its epimorphisms are strong (strongEpi_of_epi). Apply image.isoStrongEpiMono to the module factorization to obtain the desired canonical image isomorphism. Its inclusion equation is image.isoStrongEpiMono_hom_comp_ι; cancel the monic image inclusion to prove the equation for p.",
+   "uses": [
+    "def-weil-sheaf-of-modules-category",
+    "def-sp-abelian"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/homology.tex",
+    "place": "Tag 0106, definition-kernel (image is kernel of cokernel); abelian-category kernel property as stated in def-sp-abelian"
+   }
+  },
+  {
+   "text": "For any algebra factorization through a sectionwise injective j, pass to sheaves of sets. The monic factorization is a MonoFactorisation, so Mathlib imageFactorization.isImage.lift supplies a map k from the set image sheaf to H, with j composed with k equal to inclusion. Since j is injective on sections and preserves ring operations, this equation implies preservation of zero, one, sums and products by k. Its inherited naturality makes k a ring-sheaf morphism.",
+   "uses": [
+    "def-weil-pbc-ringed-space-algebra-module"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sheaves.tex",
+    "place": "Tag 0087, lemma-sheafify-presheaf-structures: local lifts and unique gluing for the factorization"
+   }
+  },
+  {
+   "text": "Cancel j to show the map from the preceding step respects O, giving an algebra-sheaf morphism. Cancellation proves compatibility with p from the original factorization equality, and proves uniqueness from k followed by j equal to i.",
+   "uses": [
+    "def-weil-pbc-ringed-space-algebra-module"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sheaves.tex",
+    "place": "Tag 0087, lemma-sheafify-presheaf-structures: algebra compatibility and uniqueness of the induced map"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-ringed-space-algebra-module",
+  "def-weil-sheaf-of-modules-category",
+  "def-sp-abelian"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sheaves.tex",
+  "place": "J4 Lean proof, 2026-10-23: local-image subrings and inherited sheaf structure (0087); Mathlib sheaf-of-sets image universal property and local surjectivity; underlying abelian-sheaf functor and strong epi/mono image comparison (Modules 01AG)."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "image|range|factorThruImage",
+   "results": " (source subdirectory: CategoryTheory/Sites/SheafOfAlgebras)",
+   "date": "2026-10-22",
+   "verdict": "no match in this search scope; broader semantic and source queries also run"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Image factorization of a morphism of sheaves of algebras agrees with the image of the underlying module sheaf",
+   "results": "CategoryTheory.imageFactorization; ModuleCat.isImage; CategoryTheory.Sheaf.toImage_ι; CategoryTheory.Abelian.OfCoimageImageComparisonIsIso.imageFactorisation; CategoryTheory.Limits.ImageFactorisation; ModuleCat.monoFactorisation; CategoryTheory.Sheaf.toImage_val; CategoryTheory.Abelian.OfCoimageImageComparisonIsIso.imageMonoFactorisation",
+   "date": "2026-10-22",
+   "verdict": "no match: the retrieved declarations do not state this algebra-sheaf/module comparison"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Sheaf.image",
+   "results": "CategoryTheory.Sheaf.image; CategoryTheory.instEpiSheafTypeToImage; CategoryTheory.instMonoSheafTypeImageι; CategoryTheory.Sheaf.imageι; CategoryTheory.Sheaf.toImage; CategoryTheory.Sheaf.toImage_ι; CategoryTheory.Sheaf.image_obj; CategoryTheory.Sheaf.toImage_ι_assoc",
+   "date": "2026-10-22",
+   "verdict": "no match: the retrieved declarations do not state this algebra-sheaf/module comparison"
+  },
+  {
+   "tool": "grep",
+   "query": "CommRingCat|RingCat|image|range",
+   "results": "12; 30; 31; 32; 195 (source subdirectory: CategoryTheory/Sites/Subsheaf.lean)",
+   "date": "2026-10-22",
+   "verdict": "no match: the retrieved declarations do not state this algebra-sheaf/module comparison"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The categorical image of a morphism of sheaves of commutative algebras on a ringed topological space inherits an algebra structure and its underlying module is the module sheaf image",
+   "results": "AlgebraicGeometry.Scheme.Modules.isSheaf; CategoryTheory.Sheaf.image; CategoryTheory.Sheaf.toImage; CategoryTheory.Sheaf.toImage_val; CategoryTheory.Sheaf.image_val; CategoryTheory.Sheaf.imageι; ModuleCat.tilde; CategoryTheory.instHasImagesSheafType",
+   "date": "2026-10-22",
+   "verdict": "no match: the retrieved declarations do not state this algebra-sheaf/module comparison"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A sheaf algebra homomorphism factors as a locally surjective homomorphism onto a subalgebra sheaf whose module image is the categorical image",
+   "results": "CategoryTheory.Sheaf.instIsLocallySurjectiveHomObjForgetTypeToImage; PresheafOfModules.instIsLocallySurjectiveToSheafify; CategoryTheory.Presheaf.instIsLocallySurjectiveHomObjForgetTypeToRangeSheafify; CategoryTheory.Presheaf.isLocallySurjective_iff_range_sheafify_eq_top; CategoryTheory.Presheaf.isLocallySurjective_iff_range_sheafify_eq_top'; CategoryTheory.Sheaf.isLocallySurjective_iff_isIso; CategoryTheory.Sheaf.instIsLocallySurjectiveAppArrowILocallySurjectiveLocallyInjectiveFunctorialLocallySurjectiveInjectiveFactorization; PresheafOfModules.IsLocallySurjective",
+   "date": "2026-10-22",
+   "verdict": "no match: the retrieved declarations do not state this algebra-sheaf/module comparison"
+  },
+  {
+   "tool": "grep",
+   "query": "image|range|IsImage",
+   "results": "{\"t\": \"2026-10-22T06:50:00Z\", \"tool\": \"grep\", \"query\": \"image|range|IsImage\", \"sub\": \"Algebra/Category/ModuleCat/Sheaf\", \"ok\": true, \"n_hits\": 15, \"note\": \"\", \"top\": [\"Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean\", \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean\", \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Localization.lean\", \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Localization.lean\", \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Localization.lean\", \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Localization.lean\", \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Localization.lean\", \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Generators.lean\"], \"digest\": \"92f2b13df657ee9b\"}",
+   "date": "2026-10-22",
+   "verdict": "no match for the item: module and generic category-theory ingredients only"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Image of a morphism of sheaves of commutative algebras is the sheaf of locally liftable sections",
+   "results": "{\"t\": \"2026-10-22T06:50:00Z\", \"tool\": \"leansearch\", \"query\": \"Image of a morphism of sheaves of commutative algebras is the sheaf of locally liftable sections\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Sheaf.image\", \"CategoryTheory.imageFactorization\", \"CategoryTheory.Sheaf.toImage_val\", \"CategoryTheory.Sheaf.imageι\", \"CategoryTheory.Sheaf.image_val\", \"CategoryTheory.Sheaf.toImage\", \"CategoryTheory.Sheaf.imageι_val\", \"CategoryTheory.Sheaf.instIsLocallyInjectiveHomObjForgetTypeImageι\"], \"digest\": \"88067cc770e4c475\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: these are sheaves of sets or generic categorical ingredients, not the complete algebra-sheaf/module image comparison"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Sheaf.image",
+   "results": "{\"t\": \"2026-10-22T06:50:00Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.Sheaf.image\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"CategoryTheory.Sheaf.image\", \"CategoryTheory.instEpiSheafTypeToImage\", \"CategoryTheory.instMonoSheafTypeImageι\", \"CategoryTheory.Sheaf.imageι\", \"CategoryTheory.Sheaf.toImage\", \"CategoryTheory.Sheaf.toImage_ι\", \"CategoryTheory.Sheaf.image_obj\", \"CategoryTheory.Sheaf.toImage_ι_assoc\"], \"digest\": \"0e86e47ddcdd8438\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: these are sheaves of sets or generic categorical ingredients, not the complete algebra-sheaf/module image comparison"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The categorical image of a map of sheaves of commutative algebras has underlying module equal to the module sheaf image",
+   "results": "{\"t\": \"2026-10-22T06:50:11Z\", \"tool\": \"leanfinder\", \"query\": \"The categorical image of a map of sheaves of commutative algebras has underlying module equal to the module sheaf image\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Sheaf.toImage_val\", \"CategoryTheory.Sheaf.image_val\", \"CategoryTheory.Sheaf.toImage\", \"CategoryTheory.Sheaf.image\", \"CategoryTheory.Sheaf.imageι\", \"SheafOfModules.toSheaf_map_val\", \"SheafOfModules.forgetToSheafModuleCat\", \"CategoryTheory.instHasImagesSheafType\"], \"digest\": \"b303d0b8baeb7e8e\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: these are sheaves of sets or generic categorical ingredients, not the complete algebra-sheaf/module image comparison"
+  },
+  {
+   "tool": "grep",
+   "query": "isImage.*[Ee]pi|[Ee]pi.*[Ii]mage|imageIso",
+   "results": "{\"t\": \"2026-10-22T06:50:27Z\", \"tool\": \"grep\", \"query\": \"isImage.*[Ee]pi|[Ee]pi.*[Ii]mage|imageIso\", \"sub\": \"CategoryTheory/Abelian\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Abelian/NonPreadditive.lean\", \"Mathlib/CategoryTheory/Abelian/NonPreadditive.lean\", \"Mathlib/CategoryTheory/Abelian/NonPreadditive.lean\", \"Mathlib/CategoryTheory/Abelian/Opposite.lean\", \"Mathlib/CategoryTheory/Abelian/Opposite.lean\", \"Mathlib/CategoryTheory/Abelian/Opposite.lean\", \"Mathlib/CategoryTheory/Abelian/Opposite.lean\", \"Mathlib/CategoryTheory/Abelian/Opposite.lean\"], \"digest\": \"143efe82e0e7a7d5\"}",
+   "date": "2026-10-22",
+   "verdict": "no match for the item: module and generic category-theory ingredients only"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "In an abelian category a factorization as an epimorphism followed by a monomorphism is an image factorization",
+   "results": "{\"t\": \"2026-10-22T06:50:39Z\", \"tool\": \"leanfinder\", \"query\": \"In an abelian category a factorization as an epimorphism followed by a monomorphism is an image factorization\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Abelian.imageStrongEpiMonoFactorisation\", \"CategoryTheory.Abelian.imageStrongEpiMonoFactorisation_I\", \"CategoryTheory.Abelian.imageStrongEpiMonoFactorisation_e\", \"CategoryTheory.Abelian.imageStrongEpiMonoFactorisation_m\", \"CategoryTheory.Abelian.OfCoimageImageComparisonIsIso.imageMonoFactorisation\", \"CategoryTheory.Abelian.OfCoimageImageComparisonIsIso.imageFactorisation\", \"CategoryTheory.Abelian.factorThruImage\", \"CategoryTheory.Abelian.instHasStrongEpiMonoFactorisations\"], \"digest\": \"297828c99437a43e\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: these are sheaves of sets or generic categorical ingredients, not the complete algebra-sheaf/module image comparison"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Abelian.isImage",
+   "results": "{\"t\": \"2026-10-22T06:51:13Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.Abelian.isImage\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"loogle: unknown identifier 'CategoryTheory.Abelian.isImage'\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match in this query: identifier not recognized; not used as evidence of mathematical absence"
+  },
+  {
+   "tool": "grep",
+   "query": "isImage|IsImage|ofEpi",
+   "results": "{\"t\": \"2026-10-22T06:51:31Z\", \"tool\": \"grep\", \"query\": \"isImage|IsImage|ofEpi\", \"sub\": \"CategoryTheory/Limits/Shapes/ImagesAndEqualizers.lean\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match for the item: module and generic category-theory ingredients only"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A sheaf algebra homomorphism factors through its locally liftable image subalgebra, and forgetting to module sheaves preserves this image",
+   "results": "{\"t\": \"2026-10-22T06:52:13Z\", \"tool\": \"leanfinder\", \"query\": \"A sheaf algebra homomorphism factors through its locally liftable image subalgebra, and forgetting to module sheaves preserves this image\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Sheaf.toImage_val\", \"CategoryTheory.Sheaf.toImage\", \"CategoryTheory.Sheaf.imageι\", \"CategoryTheory.Sheaf.image_val\", \"CategoryTheory.Sheaf.imageι_val\", \"CategoryTheory.Sheaf.toImage_ι\", \"ModuleCat.Tilde.toOpen\", \"ModuleCat.Tilde.exists_const\"], \"digest\": \"de7e49ee984f3097\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: these are sheaves of sets or generic categorical ingredients, not the complete algebra-sheaf/module image comparison"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-quasi-coherent-algebra-kernel-image-ideal",
+  "date": "2026-10-22",
+  "group": "Q44"
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "blueprint": {
+  "from": {
+   "node": "lemma-weil-pbc-h1-constructible-representation",
+   "place": "Finite-pushforward representation in lemma-weil-pbc-h1-constructible-representation, current blueprint proof paragraph 2: finite finitely presented h_i; the integral-algebra finite approximation used below that step (Stacks 0817, proof (2): J_i = ker(Sym(F_i) → A) and Sym(F_i)/(E_ik)). General algebra-sheaf image factorization agrees with the underlying module image.",
+   "via": [
+    "lem-weil-pbc-quasi-coherent-algebra-kernel-image-ideal",
+    "lem-weil-pbc-integral-algebra-directed-colimit-finite",
+    "lem-weil-pbc-integral-morphism-limit-of-finite",
+    "lem-weil-pbc-constructible-module-finite-pushforward-noetherian",
+    "lem-weil-pbc-constructible-module-finite-pushforward-embedding"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-weil-pbc-ringed-space-algebra-image",
+  "worker": "stage1",
+  "summary": "Kept every hypothesis and conclusion. Constructed the local-image algebra by inherited operations and gluing, proved local surjectivity, used the existing ringed-space local-lifting theorem for module epimorphy, and proved the image comparison directly from the normal-monomorphism axiom of an abelian category. Wrote out the algebra universal map and its compatibility and uniqueness. No new nodes or Mathlib leaves; inherited search records retained and actual Q143 searches appended. Repair of the returned delivery: compared the retained split with the current unsplit DAG item, re-read all four dependency statements and their present source declarations, and made the open-site universe/smallness verification explicit before applying abelianness.",
+  "blueprint": "Finite-pushforward representation in lemma-weil-pbc-h1-constructible-representation, current blueprint proof paragraph 2: finite finitely presented h_i; the integral-algebra finite approximation used below that step (Stacks 0817, proof (2): J_i = ker(Sym(F_i) → A) and Sym(F_i)/(E_ik)). General algebra-sheaf image factorization agrees with the underlying module image.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q143-889666dda",
+  "group": "Q143",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q143-889666dda (reviewer sub-agent of L); spot-checked: Promotion re-delivery of 502756bd (0 new nodes, 7 steps). Diff vs the 502756bd snapshot: only step 5 gains one correct sentence (the open-set site of X is small in a universe holding it and the section modules, so the abelianness condition of def-weil-sheaf-of-modules-category holds), plus split_report text. Statement, stmt_deps, source, unit and blueprint fields equal the live node; live and side-live are still unsplit; there is no repair note. Read in full: step 1 is the subring with σ_A=ψσ_B; step 2 is gluing in A, local lifts and the empty cover; step 3 gives ip=ψ and point-indexed covering lifts; step 4 gets p epic from clause (1) of lem-weil-pbc-ringed-space-module-exactness-local-lifting (arbitrary ringed space) and i monic by sectionwise cancellation; step 5 shows i=ker(coker ψ) from def-sp-abelian, with each equation checked (ci=0 since p is epic, t=uc, v factors uniquely through i); steps 6-7 glue f(b_α) via injectivity of j on overlaps, separation in A, an algebra map, jk=i, kp=f, uniqueness. Sources: Stacks sheaves.tex lemma-sheafify-presheaf-structures (0087), modules.tex lemma-abelian (01AG), 0106; no SGA. Edge cases: a point (ordinary ring image), ψ=id, a zero target, the empty open. Duplicate search: lem-weil-pbc-sheaf-cokernel-local-image is a module-level overlap with step 5, advisory only; the only citer (quasi-coherent-algebra-kernel-image-ideal) uses exactly the stated clauses. No fixes and no tool_uses."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.CommAlgebraSheafImage",
+  "declaration": "CategoryTheory.commAlgebraSheaf_image_factorization",
+  "file": "lean/Sheaf/CategoryTheory/CommAlgebraSheafImage.lean",
+  "statement": "theorem commAlgebraSheaf_image_factorization {X : Type u} [TopologicalSpace X] (O : Sheaf (Opens.grothendieckTopology X) CommRingCat.{u}) {B A : Under O} (ψ : B ⟶ A) : ∃ (D : Under O) (p : B ⟶ D) (i : D ⟶ A), p ≫ i = ψ ∧ (∀ U : Opens X, Function.Injective (i.right.hom.app (op U))) ∧ (∀ (U : Opens X) (a : A.right.obj.obj (op U)), (∃ d : D.right.obj.obj (op U), i.right.hom.app (op U) d = a) ↔ ∀ x : U, ∃ (V : Opens X) (hV : V ≤ U), (x : X) ∈ V ∧ ∃ b : B.right.obj.obj (op V), A.right.obj.map (homOfLE hV).op a = ψ.right.hom.app (op V) b) ∧ (∀ (U : Opens X) (d : D.right.obj.obj (op U)), ∃ (I : Type u) (V : I → Opens X) (hV : ∀ t, V t ≤ U) (b : ∀ t, B.right.obj.obj (op (V t))), (⨆ t, V t) = U ∧ ∀ t, p.right.hom.app (op (V t)) (b t) = D.right.obj.map (homOfLE (hV t)).op d) ∧ (∃ e : (commAlgebraSheafModuleFunctor O).obj D ≅ image ((commAlgebraSheafModuleFunctor O).map ψ), e.hom ≫ image.ι ((commAlgebraSheafModuleFunctor O).map ψ) = (commAlgebraSheafModuleFunctor O).map i ∧ (commAlgebraSheafModuleFunctor O).map p ≫ e.hom = factorThruImage ((commAlgebraSheafModuleFunctor O).map ψ)) ∧ (∀ (H : Under O) (f : B ⟶ H) (j : H ⟶ A), (∀ U : Opens X, Function.Injective (j.right.hom.app (op U))) → f ≫ j = ψ → ∃! k : D ⟶ H, k ≫ j = i ∧ p ≫ k = f)",
+  "branch": "newtargets-dag",
+  "by": "Q143",
+  "date": "2026-10-22",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-29afc99f9",
+  "group": "Q143",
+  "result": "pass",
+  "note": "Only the item node's lean field changed vs side-live; dependency node copies unchanged; lean.statement is the file signature verbatim; Worker report and Second reading sections present. Clauses match the node: X : Type u with O a CommRingCat sheaf on the open-set site; B A : Under O (the recorded algebra-sheaf category); D is fixed by its sectionwise-injective inclusion i, whose image at every U is exactly the locally liftable sections (iff clause); p ≫ i = ψ; p locally surjective with I : Type u covers, empty covers allowed; the image iso e of commAlgebraSheafModuleFunctor values with e.hom ≫ image.ι = F i and F p ≫ e.hom = factorThruImage, canonical since image.ι is monic; universal property ∀ H f j, j injective, f ≫ j = ψ gives ∃! k with k ≫ j = i and p ≫ k = f. No added hypotheses: the abelian/HasImage instances come from Mathlib SheafOfModules.instAbelian via imports, and the universe matches the dependency (small open-set site). Edge cases: empty space/open, a point, ψ = id, zero or non-injective target. Read commAlgebraSheafModule/Functor (real definitions), ringedSiteModules (abbrev of SheafOfModules) and the local-lifting module (stated proof dependency, plain import as brief-stage2 requires). Duplicate grep in side-live: only the étale-site GrothendieckEtaleLocalImage* family, a different notion. Docstrings carry Stacks 0087/01AG/0106, the blueprint id and steps 1-7; proof is sorry; no definitions; no SGA; no pro-étale substitute. Not recompiled (no file changed). Advisory: the Abelian.Basic public import is likely redundant."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J4",
+  "result": "pass",
+  "landing": "20261023T123609-L-1218907",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

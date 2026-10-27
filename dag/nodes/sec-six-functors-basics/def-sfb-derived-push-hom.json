@@ -176,7 +176,46 @@
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NP-eec7f906d (reviewer sub-agent of L); spot-checked: I read all of the mathematics. The item statement is byte-identical to main-20261015 def-sfb-derived-push-hom.md (order 1742), and stmt_deps equals the blueprint uses. The hypothesis (Ext_{a_X} preserves finite limits for every X) is the same as in def-sfb-derived-comap-lower-star-iso and equivalent to the unit's flatness assumption, since Ext is right exact. The coefficient categories are the unbounded D(Mod) of module objects over the pulled-back condensed rings, with nothing bounded or constructible substituted. I substituted into the def-sfb-conjugate-pull-iso setting: A=D(Mod_{Λ_X}), B=D(Mod_{Λ'_X}), A'=D(Mod_{Λ_Y}), B'=D(Mod_{Λ'_Y}), E_i=T^X/T^Y, Res_i=D(Res_{a_X})/D(Res_{a_Y}), L_1/L_2=Rf_* over Λ/Λ'. Under it the iso D(Res_{a_Y})Rf_*≅Rf_*D(Res_{a_X}) is exactly Res_2L_2≅L_1Res_1 : B→A', and the mate of e^{-1} is T^Y Rf_*→Rf_* T^X : A→B', matching the item's arrow. The adjunctions T⊣D(Res) are stated directly by sk-def-sfb-coefficient-change. Small cases hold: for a=id and for f=id the comparison is the identity by the triangle identities, and empty schemes and zero complexes cause no problem. The node realizes unit step 3. All cited nodes are definitions, so no tool_uses are needed. A rg over the DAG found no duplicate: def-sfb-push-hom is the underived version, and the pbc comparison nodes restrict this construction. A slopmaster2 grep found no declaration, and the upstream ChangeOfCoefficients.lean is not archived here (reference only). No new nodes, no fixes."
  },
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": [
+    "AlgebraicGeometry.ProEtale.CondensedRing.derivedPushHom"
+   ]
+  },
+  "slopmaster2": {
+   "state": "rests_on_sorry",
+   "decls": [
+    {
+     "name": "AlgebraicGeometry.ProEtale.CondensedRing.derivedPushHom",
+     "module": "WeilConjectures.SixFunctors.ProEtale.ModuleObject.ChangeOfCoefficients",
+     "lines": [
+      245,
+      253
+     ],
+     "kind": "def",
+     "sorry": false
+    }
+   ],
+   "missing": [],
+   "open": [
+    {
+     "name": "AlgebraicGeometry.ProEtale.CondensedRing.preservesKFlatComplexes_mapMod_upperStar",
+     "module": "WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.UpperLowerStar",
+     "lines": [
+      174,
+      177
+     ],
+     "kind": "theorem",
+     "nodes": [
+      "lem-sfb-module-mapmod-pullback-kflat"
+     ],
+     "below": false
+    }
+   ]
+  }
+ },
  "lean": {
   "branch": "master",
   "existing": true,
@@ -186,5 +225,15 @@
    "AlgebraicGeometry.ProEtale.CondensedRing.derivedPushHom"
   ],
   "note": "attached by the lead's tool step2_attach.py 2026-10-18 03:07 UTC (L, propagation 2026-10-18), live declaration proved in WeilConjectures.SixFunctors.ProEtale.ModuleObject.ChangeOfCoefficients: the blueprint item def-sfb-derived-push-hom's upstream Lean declarations, proved in live (sweep of the propagation)"
+ },
+ "blueprint_update": {
+  "snapshot": "main-20261023-1620",
+  "commit": "7284bb09daf97437d544c51882b325f9c52cd345",
+  "changed": [
+   "statement"
+  ],
+  "statement": "Let $a\\colon\\Lambda\\to\\Lambda'$ be a morphism of commutative condensed rings such that for every\nscheme $X$ the extension of scalars $\\operatorname{Ext}_{a_X}$ preserves finite limits, with\nderived extensions of scalars $T^X$ ([sk-def-sfb-coefficient-change]), and let\n$f\\colon X\\to Y$ be a morphism of schemes. The comparison *(Push)* is the natural transformation\n\n$$\nT^Y\\circ Rf_*\\longrightarrow Rf_*\\circ T^X\\colon D(\\Mod_{\\Lambda_X})\\longrightarrow\nD(\\Mod_{\\Lambda'_Y}),\n$$\n\nwith $Rf_*$ the derived pushforward of module objects ([sk-def-sfb-module-derived-pushpull]):\nthe mate ([def-sfb-mate-push-hom]) of the isomorphism of [def-sfb-derived-comap-lower-star-iso]\nalong the adjunctions $T^X\\dashv D(\\operatorname{Res}_{a_X})$ and\n$T^Y\\dashv D(\\operatorname{Res}_{a_Y})$ ([det-def-sfb-derived-extension-of-scalars]). It is not\nan isomorphism in general.",
+  "proof": [],
+  "note": "the current blueprint (main-20261023-1620, weil-conjectures-blueprint 7284bb09da) states or proves this differently; the node is proved in Lean: recorded 2026-10-23, not reopened"
  }
 }

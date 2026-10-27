@@ -1,0 +1,561 @@
+{
+ "id": "lem-sfb-supported-common-field-scalar-models",
+ "kind": "statement",
+ "title": "Normalized common finite-field models for supported lisse scalar extensions",
+ "statement": "Fix a prime $\\ell$, a field $k$ of characteristic $p>0$ with $p\\ne\\ell$, a separated finite-type $k$-scheme $X$ [sk-def-sfb-dc-setting], and an algebraic closure $\\Omega/\\mathbf Q_\\ell$ with the extended norm topology. On profinite sets with finite jointly surjective covers put\n$$C(P)=\\{f\\in C(P,\\Omega):f(P)\\subset E'\\text{ for some finite }\\mathbf Q_\\ell\\subset E'\\subset\\Omega\\},\\qquad B(P)=C(P,\\Omega)$$\n[sk-def-sfb-qlbar-condensed, def-sfb-continuous-map-condensed-ring]. Let $c:C\\to B$ be inclusion. For a scheme $V$ over $X$ set $C_V=p_V^*C$, $B_V=p_V^*B$ [sk-def-sfb-pulled-back-coefficients], and for a finite intermediate field $D\\subset\\Omega$ put $A_{D,V}=p_V^*C(-,D)$, with its restricted norm topology [sk-def-sfb-condensed-ring]. Work on small pro-etale sites [def-weil-pbc-proetale-site] in ordinary unbounded derived categories of internal modules [sk-def-sfb-module-objects, sk-def-sfb-derived-categories], with K-flat derived scalar extension and unit $v\\mapsto1\\otimes v$ [sk-def-sfb-derived-extension-of-scalars].\n\nLet $a:S\\hookrightarrow X$, $b:T\\hookrightarrow X$ be constructible locally closed immersions [def-constructible-stratification, def-weil-open-immersion, def-weil-closed-immersion], and define $h_!=i_*j_!$ for each such immersion $h=i\\circ j$, with $j$ open into its closure and $i$ closed, using the exact module functors [lem-weil-pbc-condensed-open-closed-recollement]. Fix finite intermediate fields $E,F\\subset\\Omega$ and lisse $A_{E,S}$- and $A_{F,T}$-modules $L,M$ [def-sfb-lisse-coefficient-module]. Let $E_0=EF$ denote the smallest subfield of $\\Omega$ containing $E,F$, and set $A_V=A_{E_0,V}$.\n\nThen $X$ and the closures used in these factorizations are Noetherian, and their open subsets are quasi-compact. The field $E_0$ is finite over $\\mathbf Q_\\ell$. The ordinary scalar extensions $L_0=A_S\\otimes_{A_{E,S}}L$ and $M_0=A_T\\otimes_{A_{F,T}}M$ represent the corresponding derived extensions of $L[0],M[0]$ and are lisse. Put $K=(a_!L_0)[0]$ and $N=(b_!M_0)[0]$. The objects $K,N$ are bounded constructible in the finite constant local model sense [sk-def-sfb-constructible].\n\nFor $R=C,B$ write $S_R(V)=R_X\\otimes^L_{A_X}V$, and define\n$$G=a_!(C_S\\otimes^L_{A_{E,S}}L[0]),\\qquad H=b_!(C_T\\otimes^L_{A_{F,T}}M[0]),\\qquad J=B_X\\otimes^L_{C_X}(-).$$\nThere are natural isomorphisms $\\alpha:G\\simeq S_CK$, $\\beta:H\\simeq S_CN$, $\\alpha_B:JG\\simeq S_BK$, $\\beta_B:JH\\simeq S_BN$. They are the K-flat scalar reassociations and the normalized support comparisons, linear over the destination ring. For an open support factor the comparison restricts to the identity under the open unit. For a closed support factor its open restriction is zero and its closed restriction is scalar pullback comparison followed by the original closed counit, under the new closed counit. These specifications apply on the full unbounded categories.\n\nWith $U=\\operatorname{Res}_c$, $\\eta:1\\to UJ$ its scalar unit, and $m_V:\\operatorname{Res}_{A_X\\to C_X}S_CV\\to\\operatorname{Res}_{A_X\\to B_X}S_BV$ the map induced by $c_X$, the identifications satisfy\n$$U(\\alpha_B)\\circ\\eta_G\\circ\\alpha^{-1}=m_K,\\qquad U(\\beta_B)\\circ\\eta_H\\circ\\beta^{-1}=m_N$$\nafter restriction to $A_X$. Successive units are identified with the direct unit by $(v\\otimes z)\\otimes w\\mapsto v\\otimes c_X(z)w$. These comparisons hold equally in the section-ring module model, under the equivalence preserving underlying abelian sheaves, derived tensors, internal Homs, support extension and the specified scalar adjunctions. Both supports and finite fields are independent; empty supports and rank zero are allowed. No flatness of $c_X$ or boundedness of the scalar extensions is assumed.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+  "place": "Paragraph (3), agent-created obligation absent from the blueprint; extracted from the reviewed proof of lem-sfb-supported-finite-stage-topology-defect, steps 1,2,3,4. Exact literature proof WANTED."
+ },
+ "stmt_deps": [
+  "sk-def-sfb-dc-setting",
+  "sk-def-sfb-qlbar-condensed",
+  "def-sfb-continuous-map-condensed-ring",
+  "sk-def-sfb-pulled-back-coefficients",
+  "sk-def-sfb-condensed-ring",
+  "def-weil-pbc-proetale-site",
+  "sk-def-sfb-module-objects",
+  "sk-def-sfb-derived-categories",
+  "sk-def-sfb-derived-extension-of-scalars",
+  "def-constructible-stratification",
+  "def-weil-open-immersion",
+  "def-weil-closed-immersion",
+  "lem-weil-pbc-condensed-open-closed-recollement",
+  "def-sfb-lisse-coefficient-module",
+  "sk-def-sfb-constructible",
+  "def-weil-pbc-internal-abelian-sheaf-module-equivalence",
+  "sk-def-sfb-derived-tensor-hom",
+  "def-sfb-normalized-internal-support-scalars",
+  "def-sfb-supported-common-field-scalar-data"
+ ],
+ "proof": [
+  {
+   "text": "A field is Noetherian: its only ideals are zero and the whole field. Thus $\\operatorname{Spec}k$ is Noetherian, and [lem-weil-pbc-finite-type-over-noetherian] applied to $X\\to\\operatorname{Spec}k$ makes $X$ Noetherian. Apply [lem-sfb-coefficient-heart-locally-closed-extension] to both immersions: their scheme-theoretic closures, the supports, and all open/closed subschemes used below are Noetherian, every open immersion in them is quasi-compact, and $h_!=i_*j_!$ is exact on modules and termwise on unbounded derived categories. In particular a sheaf extended in degree zero stays in degree zero.",
+   "uses": [
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "lem-sfb-coefficient-heart-locally-closed-extension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), finite-type setting and exact support models"
+   }
+  },
+  {
+   "text": "Apply [lem-weil-pbc-compositum-degree-bound] with base $\\mathbf Q_\\ell$, $K=E$ and $M=F$. It makes $EF/F$ finite. If $(e_i)$ spans $EF$ over $F$ and $(f_j)$ spans $F$ over $\\mathbf Q_\\ell$, the finitely many products $f_je_i$ span $EF$ over $\\mathbf Q_\\ell$: expand each coefficient of $\\sum_i a_ie_i$ in the $f_j$. Thus $E_0=EF$ is finite over $\\mathbf Q_\\ell$. Its inclusions from $E,F$ and into $\\Omega$ have the restricted norm topology, hence are continuous and induce the displayed coefficient maps.",
+   "uses": [
+    "lem-weil-pbc-compositum-degree-bound"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), choose a common finite coefficient field"
+   }
+  },
+  {
+   "text": "For $L$ apply [lem-sfb-locally-free-derived-scalars] on $S_{\\mathrm{proet}}$ to $A_{E,S}\\to A_S$, and for $M$ apply it on $T_{\\mathrm{proet}}$ to $A_{F,T}\\to A_T$. The lisse hypothesis is precisely its local finite-free hypothesis [def-sfb-lisse-coefficient-module]. It gives canonical natural identifications of the derived extensions with $L_0[0],M_0[0]$, and says $L_0,M_0$ are locally finite free with the same ranks. In particular both are lisse, including rank zero. These internal-module assertions follow from their sectionwise versions through the exact tensor comparison [lem-pe-internal-section-tensor-comparison] and the scalar-adjunction comparison [lem-sfb-internal-section-scalar-adjunction].",
+   "uses": [
+    "lem-sfb-locally-free-derived-scalars",
+    "def-sfb-lisse-coefficient-module",
+    "lem-pe-internal-section-tensor-comparison",
+    "lem-sfb-internal-section-scalar-adjunction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-scalar-six/det-prop-scalar-six-pullback.proof.md",
+    "place": "(1), K-flat realization of locally free scalar extensions"
+   }
+  },
+  {
+   "text": "Fix $h:S\\hookrightarrow X$, $P=L_0$ (and repeat for $b,M_0$). Write $h=i\\circ j$ through $Z=\\overline S$. The ringed open/closed identities [lem-weil-pbc-proetale-ringed-open-closed], transported by [lem-sfb-internal-module-operations-transport], give $(i_*j_!P)|_S\\cong P$, zero restriction on $Z\\setminus S$ by $i_{Z\\setminus S}^*j_!=0$, and zero restriction on $X\\setminus Z$ by $j_{X\\setminus Z}^*i_*=0$. The three nonempty members among $S,Z\\setminus S,X\\setminus Z$ form a finite constructible locally closed stratification: $S$ is open in the closed $Z$, and $Z\\setminus S$ is closed in $X$. On $S$ the local model is $A_S\\otimes_{E_0}E_0^{r}$, and on the other strata it is $A\\otimes_{E_0}0$. The modules $E_0^{r}$ and zero are finitely presented. This verifies exactly [sk-def-sfb-constructible], so $K,N$ are bounded constructible, with cohomology only in degree zero.",
+   "uses": [
+    "lem-weil-pbc-proetale-ringed-open-closed",
+    "lem-sfb-internal-module-operations-transport",
+    "sk-def-sfb-constructible"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), supported finite constant models"
+   }
+  },
+  {
+   "text": "For every coefficient map used here, [lem-weil-pbc-proetale-ringed-open-closed] supplies the exact abelian adjunctions, mixed zero restrictions and actual localization short exact sequence. The restrictions $j^{-1},i^{-1}$ are the exact inverse images $a^*$ of [lem-sfb-locally-closed-extension-coherence] for the immersions $a=j,i$. Apply [lem-sfb-exact-open-closed-unbounded-calculus] to obtain these same adjunction maps and their triangle identities on the full unbounded derived categories. The scalar inverse-image comparison is the invertible mate $\\theta$ of [lem-sfb-kflat-scalar-comparison-normalization]. For an open factor take the comparison $T_Xj_!\\cong j_!T_S$ of [lem-sfb-open-scalar-conjugate-normalization]; its displayed equation says its restriction is the identity under the open units and inverse-image tensor comparison. For a closed factor take $\\delta:T_Xi_*\\cong i_*T_Z$ of [lem-sfb-closed-supported-scalar-comparison]; it has zero open restriction and its closed restriction is $T_Z(\\varepsilon_A)\\theta_i^{-1}$ under $\\varepsilon_B$. Thus each factor has exactly the required destination-linear normalization, without imposing flatness or a cohomological bound.",
+   "uses": [
+    "lem-weil-pbc-proetale-ringed-open-closed",
+    "lem-sfb-exact-open-closed-unbounded-calculus",
+    "lem-sfb-kflat-scalar-comparison-normalization",
+    "lem-sfb-open-scalar-conjugate-normalization",
+    "lem-sfb-closed-supported-scalar-comparison",
+    "lem-sfb-locally-closed-extension-coherence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-scalar-six/det-prop-scalar-six-pullback.proof.md",
+    "place": "(1)-(2), normalized open and closed scalar comparisons"
+   }
+  },
+  {
+   "text": "Denote by $d_h^{D,R}:S_Rh_{!,D}\\xrightarrow{\\sim}h_{!,R}S_R$ the composite through the fixed closed and open factors of step 5. The exact extension and restriction comparisons are those of [lem-sfb-locally-closed-extension-coherence]. Their hypotheses hold by step 1 and the cartesian pulled-back coefficients. The conditional coherence lemma [lem-sfb-normalized-immersion-comparison-coherence] therefore identifies these composites with the normalized locally closed comparisons. To verify its scalar-tower premise, use the balanced inverse-image square [lem-sfb-scalar-inverse-image-tower-diagram] on flat-term K-flat representatives; these stay flat-term K-flat under inverse image and under each scalar extension by [lem-weil-pbc-ringed-pullback-preserves-kflat] (identity coefficient map, resp. identity topos), so every comparison in the square is evaluated on such representatives. The square's two arrows both send $t\\otimes(s\\otimes x)$ to $t\\,b(s)\\otimes h^{-1}x$. Localizing gives the required square, with associator [lem-sfb-successive-derived-quotient-normalization]; the K-flat comparison is precisely the specified one by [lem-sfb-kflat-scalar-comparison-normalization]. Thus the support comparisons commute with scalar reassociation, for all the coefficient towers $E\\to E_0\\to C\\to B$ and $F\\to E_0\\to C\\to B$.",
+   "uses": [
+    "lem-sfb-locally-closed-extension-coherence",
+    "lem-sfb-normalized-immersion-comparison-coherence",
+    "lem-sfb-scalar-inverse-image-tower-diagram",
+    "lem-sfb-successive-derived-quotient-normalization",
+    "lem-sfb-kflat-scalar-comparison-normalization",
+    "lem-weil-pbc-ringed-pullback-preserves-kflat"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-scalar-six/det-prop-scalar-six-pullback.proof.md",
+    "place": "(2)-(3), assembly and tower compatibility of support comparisons"
+   }
+  },
+  {
+   "text": "Write $q_E:S_{E\\to E_0}L[0]\\xrightarrow{\\sim}L_0[0]$ for step 3. Reassociation gives $r_E:C_S\\otimes^L_{A_{E,S}}L[0]\\xrightarrow{\\sim}C_S\\otimes^L_{A_S}L_0[0]$ by first inserting the inverse associator and then $S_Cq_E$ [lem-sfb-successive-derived-quotient-normalization]. Define $\\alpha=(d_a^{E_0,C})^{-1}\\circ a_!(r_E):G\\xrightarrow{\\sim}S_CK$. Repeat with $F,M,b$ to define $\\beta$. Let $t_V:JS_CV\\xrightarrow{\\sim}S_BV$ be the same normalized associator for $A_X\\to C_X\\to B_X$, and set $\\alpha_B=t_K\\circ J\\alpha$, $\\beta_B=t_N\\circ J\\beta$. These are natural destination-linear isomorphisms. By the tower identity in step 6 these formulas equal the direct $B$-support comparisons after reassociation from $E$ or $F$; hence their open and closed restrictions have the normalizations in step 5.",
+   "uses": [
+    "lem-sfb-successive-derived-quotient-normalization"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-scalar-six/det-prop-scalar-six-pullback.proof.md",
+    "place": "(3), construct the four comparison isomorphisms from the normalized factors"
+   }
+  },
+  {
+   "text": "Naturality of the actual scalar unit for the $C_X$-linear map $\\alpha$ gives $U(J\\alpha)\\eta_G=\\eta_{S_CK}\\alpha$. Consequently $U(\\alpha_B)\\eta_G\\alpha^{-1}=U(t_K)\\eta_{S_CK}$. The latter equals $m_K$: choose a flat-term K-flat resolution $P$ of $K$ [lem-pc-kflat-resolution]; scalar extension preserves this class [lem-weil-pbc-ringed-pullback-preserves-kflat]. On $C_X\\otimes_{A_X}P$, the unit followed by reassociation sends $z\\otimes v$ first to $1\\otimes(z\\otimes v)$ and then to $c_X(z)\\otimes v$, which is exactly the map induced by $c_X$. These are maps of the same representative complexes, so their localizations agree. The units and associator have precisely these representative formulas [lem-sfb-successive-derived-quotient-normalization, lem-sfb-internal-section-scalar-adjunction]. The calculation for $\\beta$ is identical with $N$ in place of $K$. With module-first tensor notation, the same associator is $(v\\otimes z)\\otimes w\\mapsto v\\otimes c_X(z)w$, so inserting $z=w=1$ identifies successive units with the direct unit, as asserted.",
+   "uses": [
+    "lem-pc-kflat-resolution",
+    "lem-weil-pbc-ringed-pullback-preserves-kflat",
+    "lem-sfb-successive-derived-quotient-normalization",
+    "lem-sfb-internal-section-scalar-adjunction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-scalar-six/det-prop-scalar-six-pullback.proof.md",
+    "place": "(3), unit equation on K-flat representatives"
+   }
+  },
+  {
+   "text": "Finally [lem-pe-internal-section-tensor-comparison] preserves underlying sheaves, tensors, flatness and K-flat representatives; [lem-sfb-internal-section-scalar-adjunction] identifies the scalar adjunctions and their actual units. The support functors and their units/counits are preserved by [lem-sfb-internal-module-operations-transport], and the derived internal Homs, including evaluation, by [lem-sfb-module-object-ringed-site-derived-comparison]. Thus all the displayed constructions and equations carry to the section-ring model. Each argument was made separately for $(a,E,L)$ and $(b,F,M)$ using only their common compositum; neither supports nor original fields were identified. Empty strata may be omitted and rank-zero local models are zero, so the same construction covers empty supports and zero modules. The unbounded calculus and K-flat comparisons used above impose no flatness of $c_X$ and no bound on $S_CK$ or $S_BK$.",
+   "uses": [
+    "lem-pe-internal-section-tensor-comparison",
+    "lem-sfb-internal-section-scalar-adjunction",
+    "lem-sfb-internal-module-operations-transport",
+    "lem-sfb-module-object-ringed-site-derived-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-scalar-six/det-prop-scalar-six-pullback.proof.md",
+    "place": "(1)-(3), internal/sectionwise transport and degenerate cases"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-sfb-coefficient-heart-locally-closed-extension",
+  "lem-weil-pbc-compositum-degree-bound",
+  "lem-sfb-locally-free-derived-scalars",
+  "def-sfb-lisse-coefficient-module",
+  "lem-pe-internal-section-tensor-comparison",
+  "lem-sfb-internal-section-scalar-adjunction",
+  "lem-weil-pbc-proetale-ringed-open-closed",
+  "lem-sfb-internal-module-operations-transport",
+  "sk-def-sfb-constructible",
+  "lem-sfb-exact-open-closed-unbounded-calculus",
+  "lem-sfb-kflat-scalar-comparison-normalization",
+  "lem-sfb-open-scalar-conjugate-normalization",
+  "lem-sfb-closed-supported-scalar-comparison",
+  "lem-sfb-locally-closed-extension-coherence",
+  "lem-sfb-normalized-immersion-comparison-coherence",
+  "lem-sfb-scalar-inverse-image-tower-diagram",
+  "lem-sfb-successive-derived-quotient-normalization",
+  "lem-pc-kflat-resolution",
+  "lem-weil-pbc-ringed-pullback-preserves-kflat",
+  "lem-sfb-module-object-ringed-site-derived-comparison"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+  "place": "Paragraph (3), agent-created common finite-model obligation; normalized support/scalar route expanded using det-prop-scalar-six-pullback (1)-(3) and the cited Stacks inputs"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "loogle",
+   "query": "\"Sheaf\", \"extendScalars\"",
+   "results": {
+    "t": "2026-10-22T06:01:07Z",
+    "tool": "loogle",
+    "query": "\"Sheaf\", \"extendScalars\"",
+    "sub": "",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: no hits"
+  },
+  {
+   "tool": "grep",
+   "query": "(locallyClosed|locally_closed|extensionByZero|extension_by_zero).*(scalar|Scalar)|(scalar|Scalar).*(locallyClosed|locally_closed|extensionByZero|extension_by_zero)",
+   "results": {
+    "t": "2026-10-22T06:01:07Z",
+    "tool": "grep",
+    "query": "(locallyClosed|locally_closed|extensionByZero|extension_by_zero).*(scalar|Scalar)|(scalar|Scalar).*(locallyClosed|locally_closed|extensionByZero|extension_by_zero)",
+    "sub": "",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: no hits"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Locally closed supported lisse sheaves over two finite p-adic coefficient fields admit common compositum models compatible with derived scalar extension, support extension and the scalar adjunction units",
+   "results": {
+    "t": "2026-10-22T06:01:21Z",
+    "tool": "leanfinder",
+    "query": "Locally closed supported lisse sheaves over two finite p-adic coefficient fields admit common compositum models compatible with derived scalar extension, support extension and the scalar adjunction units",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "LightCondMod.LocallyConstant.instHasSheafifyLightProfiniteCoherentTopologyModuleCat",
+     "CondensedMod.IsSolid",
+     "LightCondMod.ofSheafLightProfinite",
+     "CondensedMod.ofSheafProfinite",
+     "AlgebraicGeometry.exists_app_map_eq_zero_of_isLimit",
+     "AlgebraicGeometry.exists_appTop_map_eq_zero_of_isLimit",
+     "LightCondensed.instMonoidalClosedSheafLightProfiniteCoherentTopologyModuleCat",
+     "AlgebraicGeometry.exists_eq_pow_mul_of_is_compact_of_quasi_separated_space_aux_aux"
+    ],
+    "digest": "012a0bd982d4bf14"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary module/sheaf adjunctions, light condensed closed structure, and affine-limit vanishing do not give supported common-field derived models with normalized comparisons."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Common finite coefficient field models of locally closed supported lisse p-adic sheaves with normalized derived scalar extension",
+   "results": {
+    "t": "2026-10-22T06:01:53Z",
+    "tool": "leansearch",
+    "query": "Common finite coefficient field models of locally closed supported lisse p-adic sheaves with normalized derived scalar extension",
+    "sub": "",
+    "ok": false,
+    "n_hits": 0,
+    "note": "service unavailable: {\"error\":\"Rate limit exceeded: 60 per 1 minute\"}",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-22",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived extension of scalars commutes with extension by zero along a locally closed immersion, with a common finite coefficient field for lisse modules and compatibility with adjunction units",
+   "results": {
+    "t": "2026-10-22T06:02:06Z",
+    "tool": "leanfinder",
+    "query": "Derived extension of scalars commutes with extension by zero along a locally closed immersion, with a common finite coefficient field for lisse modules and compatibility with adjunction units",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "AlgebraicGeometry.Scheme.Modules.restrictFunctorAdjCounitIso",
+     "AlgebraicGeometry.Scheme.Modules.restrictAdjunction",
+     "SheafOfModules.pushforwardSections_unitHomEquiv",
+     "AlgebraicGeometry.Scheme.Modules.pullbackPushforwardAdjunction",
+     "LightCondensed.instMonoidalClosedSheafLightProfiniteCoherentTopologyModuleCat",
+     "ModuleCat.homEquiv_extendScalarsComp",
+     "SheafOfModules.pullbackPushforwardAdjunction_homEquiv_symm_unitToPushforwardObjUnit",
+     "SheafOfModules.pushforwardPushforwardAdj"
+    ],
+    "digest": "73397c0230aa23c1"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary module/sheaf adjunctions, light condensed closed structure, and affine-limit vanishing do not give supported common-field derived models with normalized comparisons."
+  },
+  {
+   "tool": "grep",
+   "query": "(extensionByZero|extension_by_zero|locallyClosed).*(scalar|Scalar)|(scalar|Scalar).*(extensionByZero|extension_by_zero|locallyClosed)",
+   "results": {
+    "t": "2026-10-22T07:11:43Z",
+    "tool": "grep",
+    "query": "(extensionByZero|extension_by_zero|locallyClosed).*(scalar|Scalar)|(scalar|Scalar).*(extensionByZero|extension_by_zero|locallyClosed)",
+    "sub": "",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern free sheaves, presentations, condensed categories or affine limits; none states the supported common finite-field derived models and normalized scalar-unit equations."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Sheaf\", \"extendScalars\"",
+   "results": {
+    "t": "2026-10-22T07:11:43Z",
+    "tool": "loogle",
+    "query": "\"Sheaf\", \"extendScalars\"",
+    "sub": "",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern free sheaves, presentations, condensed categories or affine limits; none states the supported common finite-field derived models and normalized scalar-unit equations."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Common finite field models for two lisse sheaves supported on locally closed subschemes with derived scalar extension and adjunction unit compatibility",
+   "results": {
+    "t": "2026-10-22T07:11:49Z",
+    "tool": "leanfinder",
+    "query": "Common finite field models for two lisse sheaves supported on locally closed subschemes with derived scalar extension and adjunction unit compatibility",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "AlgebraicGeometry.Scheme.exists_hom_comp_eq_comp_of_locallyOfFiniteType",
+     "AlgebraicGeometry.Scheme.Modules.instCategory",
+     "AlgebraicGeometry.exists_eq_pow_mul_of_is_compact_of_quasi_separated_space_aux",
+     "AlgebraicGeometry.exists_appTop_map_eq_zero_of_isLimit",
+     "AlgebraicGeometry.exists_app_map_eq_zero_of_isLimit",
+     "AlgebraicGeometry.exists_appTop_map_eq_zero_of_isAffine_of_isLimit",
+     "AlgebraicGeometry.exists_of_res_eq_of_qcqs_of_top",
+     "AlgebraicGeometry.Scheme.Modules.instAbelian"
+    ],
+    "digest": "d1a35a66e5f66586"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern free sheaves, presentations, condensed categories or affine limits; none states the supported common finite-field derived models and normalized scalar-unit equations."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Common finite coefficient field models of locally closed supported lisse sheaves compatible with derived tensor associativity",
+   "results": {
+    "t": "2026-10-22T07:12:07Z",
+    "tool": "leansearch",
+    "query": "Common finite coefficient field models of locally closed supported lisse sheaves compatible with derived tensor associativity",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "LightCondensed",
+     "Condensed.lanSheafProfinite",
+     "IsLocalRing.finite_residueField_of_compactSpace",
+     "FirstOrder.Field.fieldOfModelACF",
+     "SheafOfModules.QuasicoherentData.IsFinitePresentation.isFinite_presentation",
+     "SheafOfModules.QuasicoherentData.IsFinitePresentation",
+     "SheafOfModules.LocalGeneratorsData.IsFiniteType",
+     "SheafOfModules.Presentation.IsFinite"
+    ],
+    "digest": "91bb669ee65fad53"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern free sheaves, presentations, condensed categories or affine limits; none states the supported common finite-field derived models and normalized scalar-unit equations."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived tensor associativity and extension by zero compatibility for locally free sheaves on a ringed site",
+   "results": {
+    "t": "2026-10-22T07:12:15Z",
+    "tool": "leanfinder",
+    "query": "Derived tensor associativity and extension by zero compatibility for locally free sheaves on a ringed site",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "SheafOfModules.map_ιFree_mapFree_hom_assoc",
+     "SheafOfModules.ιFree_mapFree_inv_assoc",
+     "SheafOfModules.ιFree_freeMap_assoc",
+     "SheafOfModules.map_ιFree_mapFree_hom",
+     "SheafOfModules.ιFree_mapFree_inv",
+     "SheafOfModules.mapFree",
+     "SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom_assoc",
+     "SheafOfModules.Presentation.mapRelations_mapGenerators_assoc"
+    ],
+    "digest": "7646fc88d0347c30"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern free sheaves, presentations, condensed categories or affine limits; none states the supported common finite-field derived models and normalized scalar-unit equations."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-supported-finite-stage-topology-defect",
+  "date": "2026-10-22",
+  "group": "NQ"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "Paragraph (3), agent topology-comparison obligation: common finite-field and support/scalar/unit normalization (returned item steps 1–4).",
+   "via": [
+    "lem-sfb-supported-finite-stage-topology-defect",
+    "lem-sfb-constructible-algcl-topology-comparison",
+    "lem-sfb-continuous-algcl-proper-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sfb-supported-common-field-scalar-models",
+  "worker": "stage1",
+  "summary": "Expanded the common compositum, locally free derived models, three-stratum constructibility, unbounded normalized support comparisons and the actual scalar-unit equation in nine steps. Reused existing nodes throughout; no new nodes or statement changes. Searched project declarations, blueprint and Mathlib; preserved imported evidence.",
+  "blueprint": "Agent-created obligation for paragraph (3) of det-thm-sf-ctf-stability-direct-images, extracted parent steps 1–4; no nearest imported blueprint ancestor (ancestor tool returns None). The support and scalar mechanics follow det-prop-scalar-six-pullback (1)–(3).",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-finite-type-over-noetherian",
+    "why": "Generic tool for Noetherianity of the finite-type scheme; the direct-image stability unit has no statement supplying this structural input."
+   },
+   {
+    "node": "lem-sfb-coefficient-heart-locally-closed-extension",
+    "why": "Generic tool for normalized coefficient and support calculus; the direct-image stability unit has no statement supplying this structural input."
+   },
+   {
+    "node": "lem-weil-pbc-compositum-degree-bound",
+    "why": "Generic tool for finite compositum degree; the direct-image stability unit has no statement supplying this structural input."
+   },
+   {
+    "node": "lem-sfb-locally-free-derived-scalars",
+    "why": "Generic tool for locally free scalar models; the direct-image stability unit has no statement supplying this structural input."
+   },
+   {
+    "node": "lem-pe-internal-section-tensor-comparison",
+    "why": "Generic tool for normalized coefficient and support calculus; the direct-image stability unit has no statement supplying this structural input."
+   },
+   {
+    "node": "lem-sfb-internal-section-scalar-adjunction",
+    "why": "Generic tool for normalized coefficient and support calculus; the direct-image stability unit has no statement supplying this structural input."
+   },
+   {
+    "node": "lem-weil-pbc-proetale-ringed-open-closed",
+    "why": "Generic tool for normalized coefficient and support calculus; the direct-image stability unit has no statement supplying this structural input."
+   },
+   {
+    "node": "lem-sfb-internal-module-operations-transport",
+    "why": "Generic tool for normalized coefficient and support calculus; the direct-image stability unit has no statement supplying this structural input."
+   },
+   {
+    "node": "lem-sfb-exact-open-closed-unbounded-calculus",
+    "why": "Generic tool for normalized coefficient and support calculus; the direct-image stability unit has no statement supplying this structural input."
+   },
+   {
+    "node": "lem-sfb-kflat-scalar-comparison-normalization",
+    "why": "Generic tool for normalized coefficient and support calculus; the direct-image stability unit has no statement supplying this structural input."
+   },
+   {
+    "node": "lem-sfb-open-scalar-conjugate-normalization",
+    "why": "Generic tool for normalized coefficient and support calculus; the direct-image stability unit has no statement supplying this structural input."
+   },
+   {
+    "node": "lem-sfb-closed-supported-scalar-comparison",
+    "why": "Generic tool for normalized coefficient and support calculus; the direct-image stability unit has no statement supplying this structural input."
+   },
+   {
+    "node": "lem-sfb-locally-closed-extension-coherence",
+    "why": "Generic tool for normalized coefficient and support calculus; the direct-image stability unit has no statement supplying this structural input."
+   },
+   {
+    "node": "lem-sfb-normalized-immersion-comparison-coherence",
+    "why": "Generic tool for normalized coefficient and support calculus; the direct-image stability unit has no statement supplying this structural input."
+   },
+   {
+    "node": "lem-sfb-scalar-inverse-image-tower-diagram",
+    "why": "Generic tool for normalized coefficient and support calculus; the direct-image stability unit has no statement supplying this structural input."
+   },
+   {
+    "node": "lem-sfb-successive-derived-quotient-normalization",
+    "why": "Generic tool for normalized coefficient and support calculus; the direct-image stability unit has no statement supplying this structural input."
+   },
+   {
+    "node": "lem-pc-kflat-resolution",
+    "why": "Generic tool for normalized coefficient and support calculus; the direct-image stability unit has no statement supplying this structural input."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-pullback-preserves-kflat",
+    "why": "Generic tool for normalized coefficient and support calculus; the direct-image stability unit has no statement supplying this structural input."
+   },
+   {
+    "node": "lem-sfb-module-object-ringed-site-derived-comparison",
+    "why": "Generic tool for derived internal-Hom transport; the direct-image stability unit has no statement supplying this structural input."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-sfb-coefficient-heart-locally-closed-extension",
+  "lem-weil-pbc-compositum-degree-bound",
+  "lem-sfb-locally-free-derived-scalars",
+  "lem-pe-internal-section-tensor-comparison",
+  "lem-sfb-internal-section-scalar-adjunction",
+  "lem-weil-pbc-proetale-ringed-open-closed",
+  "lem-sfb-internal-module-operations-transport",
+  "lem-sfb-exact-open-closed-unbounded-calculus",
+  "lem-sfb-kflat-scalar-comparison-normalization",
+  "lem-sfb-open-scalar-conjugate-normalization",
+  "lem-sfb-closed-supported-scalar-comparison",
+  "lem-sfb-locally-closed-extension-coherence",
+  "lem-sfb-normalized-immersion-comparison-coherence",
+  "lem-sfb-scalar-inverse-image-tower-diagram",
+  "lem-sfb-successive-derived-quotient-normalization",
+  "lem-pc-kflat-resolution",
+  "lem-weil-pbc-ringed-pullback-preserves-kflat",
+  "lem-sfb-module-object-ringed-site-derived-comparison"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q15-fd689150a",
+  "group": "Q15",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q15-fd689150a (reviewer sub-agent of L); spot-checked: First split of an NQ-created agent obligation. The node is unsplit on live and side-live with no repair note, and it is not in the drop list. The statement and stmt_deps are unchanged; there are 9 steps and no new nodes. Sources read: direct-images proof paragraph (3) and det-prop-scalar-six-pullback (1)-(3). No SGA source is used. Small cases checked: E=F, E inside F, empty supports, rank 0, S=X. Unit equation checked on representatives: z⊗v ↦ 1⊗(z⊗v) ↦ c(z)⊗v. Step checks: (1) 01T6 Noetherianity and the coefficient-heart closure factorization. (2) The compositum tower is elementary. (3) Locally-free scalars: lisse local freeness over every object follows by pullback of the cover. (4) The three strata S, Z∖S, X∖Z with models E_0^r and 0 meet sk-def-sfb-constructible. (5) Open restriction β_j and closed δ normalizations match the item exactly. (6) Hypotheses of the normalized-coherence lemma hold, with q=θ^{-1}; the closed restriction goes through ε. (7)-(9) Elementary assembly, the naturality and unit computation, and transport. FIX (C1, two citations): step 5 used exactness of j^{-1} and i^{-1} for the unbounded calculus, but the ringed open/closed node does not state it; I cited the exact a^* of lem-sfb-locally-closed-extension-coherence. Step 6's tower verification needs inverse images and scalar extensions to keep flat-term K-flat representatives; I cited lem-weil-pbc-ringed-pullback-preserves-kflat. Both ids were already in proof_deps. I accept all 19 tool_uses as generic structural inputs. Batch-5: the three flagged citations (kflat-scalar-comparison-normalization, open-scalar-conjugate-normalization, closed-supported-scalar-comparison) reach only lem-pod-derived-exact-square-composition. That node is general abelian/derived homological algebra about exact functors, not given by either assumption and not part of the trace-formula or Poincaré-duality proofs, so I accept it, as in Q120. Not a duplicate of lem-sfb-common-field-lattice-generators, which is the integral lattice version without the support normalization.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.Paper.SupportedCommonFieldScalarModels",
+  "declaration": "AlgebraicGeometry.ProEtale.SupportedCommonField.supported_common_field_scalar_models",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.SupportedCommonField.supported_common_field_scalar_models"
+  ],
+  "file": "lean/Sheaf/Paper/SupportedCommonFieldScalarModels.lean",
+  "statement": "theorem supported_common_field_scalar_models (ℓ p : ℕ) [Fact ℓ.Prime] (k : Type u) [Field k] [CharP k p] (hp : 0 < p) (hpℓ : p ≠ ℓ) (X : Over (Spec (.of k))) [LocallyOfFiniteType X.hom] [QuasiCompact X.hom] [IsSeparated X.hom] (S T : Scheme.{u}) (a : S ⟶ X.left) [IsImmersion a] (haCons : Topology.IsConstructible (Set.range a)) (b : T ⟶ X.left) [IsImmersion b] (hbCons : Topology.IsConstructible (Set.range b)) (E F : PadicAlgCl.FiniteIntermediateField ℓ) (L : Modules (Profinite.continuousMapRingObj E) S) (hL : IsLisseCoefficientModule (Profinite.continuousMapRingObj E) L) (M : Modules (Profinite.continuousMapRingObj F) T) (hM : IsLisseCoefficientModule (Profinite.continuousMapRingObj F) M) : Exists fun [_hX : IsNoetherian X.left] ↦ Exists fun [_hS : IsNoetherian S] ↦ Exists fun [_hT : IsNoetherian T] ↦ IsNoetherian a.image ∧ IsNoetherian b.image ∧ (∀ U : X.left.Opens, IsCompact (U : Set X.left)) ∧ (∀ U : a.image.Opens, IsCompact (U : Set a.image)) ∧ (∀ U : b.image.Opens, IsCompact (U : Set b.image)) ∧ ModelAssertions ℓ (E := E) (A := commonField ℓ E F) (le_sup_left (a := E.1)) a L ∧ ModelAssertions ℓ (E := F) (A := commonField ℓ E F) (le_sup_right (a := E.1)) b M",
+  "branch": "newtargets-dag",
+  "by": "NR",
+  "date": "2026-10-22",
+  "existing": false,
+  "note": "Real canonical scalar/support maps and explicit section-alpha, section-alpha_B and actual section-unit transport through the localized canonical lower/open support comparison. No definition uses sorry; no statement correction."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-08d9d318d",
+  "group": "NR",
+  "result": "pass",
+  "note": "Re-delivery of returned 50fcdd0e86ee; both findings repaired. Section-ring clause (H3): copied SectionScalarTransport/SectionTensorHom and bare Nonempty support iso removed. sectionSupportComparison localizes the canonical lowerComparison(imageι)/openComparison(toImage), both ∃!-pinned; SectionScalarComparison = OpenInternalScalar.ScalarTransport (landed ScalarDerivedPair, restriction identity on sections, extension fixed by the mate equation); SectionUnitEquation uses the actual section unit and the image of inducedMap. Owners (H12/H2): cited def-sfb-locally-closed-coefficient-extension, internal-section-total/derived-tensor comparisons, coef tensor-hom model, koszul braiding, derived open-shriek/comap-upper-star isos, qlbar subextension maps. Six new existing:true owner nodes (mate, closedScalarMap, section module operations, InternalSectionScalarAdjunction, algClTopologyInclusion, ScalarTransport) read from the commit in side-live: statements verbatim in source, all listed declarations present. Identifier scan: no declaration without an owner. Rest re-verified: hypotheses exact, commonField = E⊔F, SupportComparison pinned, alpha/alphaB/directB real composites, UnitEquation/UnitTower stated, edge cases (E=F, S=X, empty supports, rank 0) and universes fine, lean.statement verbatim, only the main theorem is sorry. Advisories: section alpha/alphaB equalities hold by naturality (sectionSupportScalar conjugates the internal comparison) and the docstring overstates section-side normalizations; no section-side UnitTower; data node cites three tensor/Hom def nodes the module no longer uses; section-operations owner holds .choose defs without citing their theorem node. No FIX, nothing compiled; worker reports clean compiles 32.4/37.1/2.1 s and dry run OK."
+ }
+}

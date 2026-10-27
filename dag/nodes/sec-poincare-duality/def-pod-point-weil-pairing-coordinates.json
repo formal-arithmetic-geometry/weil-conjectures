@@ -1,0 +1,188 @@
+{
+ "id": "def-pod-point-weil-pairing-coordinates",
+ "kind": "definition",
+ "title": "Canonical point coordinates for shifted tensor pairings",
+ "statement": "Fix D,l,E and the canonical geometric point category, its coefficient unit U and fibre F [def-weil-finite-field-fiber, def-weil-finite-coefficient-point]. Use rational pullback P, rational tensor T, coefficient comparison c and point transport iota [def-weil-derived-pullback-tensor-hom, def-weil-frobenius-coefficient-twists, def-weil-frobenius-point-transport]. The pullback shift pShift is the canonical rational pull shift [def-zl-field-weil-shriek-shift-data], and mu is the canonical rational pullback tensor comparison [def-pur-completed-pullback-tensor-comparison]. The canonical point-Hom coordinates consist of the shift descended from integral localization, the unit identified by constant sections, and the tensor comparison fixed by its full canonical normalization [def-pod-point-fibre-tensor-canonical, def-pod-point-coefficient-unit-coordinates, def-pod-point-tate-fibre-size-coordinates]. Define the ordered vector associated to x:U→A[i], y:U→D[n-i] by first applying the inverse unit constraint j:U→T(U,U), tensoring x and y (identify D[n-i] with D[n][-i]), then the canonical signed tensor-shift comparison, shift addition i+(-i)=0 and the zero-shift constraint. It is a map U→T(A,D[n]). Composing it with B gives the existing pairingEnd; evaluating its scalar on the inverse point-Hom realizations gives the existing cohomological pairing. All previous coordinate definitions retain their names and defining expressions.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-poincare-duality/sk-thm-frobenius/prop-weil-operations.proof.md",
+  "place": "Final smooth-pairing clause; retained rational point-pairing argument, Steps 1--7."
+ },
+ "stmt_deps": [
+  "def-weil-finite-field-fiber",
+  "def-weil-finite-coefficient-point",
+  "def-weil-derived-pullback-tensor-hom",
+  "def-weil-frobenius-coefficient-twists",
+  "def-weil-frobenius-point-transport",
+  "def-pod-point-fibre-tensor-canonical",
+  "def-pod-point-coefficient-unit-coordinates",
+  "def-pod-point-tate-fibre-size-coordinates",
+  "def-zl-field-weil-shriek-shift-data",
+  "def-pur-completed-pullback-tensor-comparison"
+ ],
+ "proof": [
+  {
+   "text": "Write U for the coefficient unit and F for the ambient point fibre. Shift stability is the existing pointFd_shift_mem lemma. The coefficient-one square for Q followed by F is a natural isomorphism to the integral-rational functor H: the defining pure-tensor formula at scalar 1 gives naturality. Mathlib commShiftOfLocalization descends hShift through rawLocalization; cancellation of the two shift comparisons and the localizeObj isomorphism proves its normalization. Every rational object retains its integral object representative, so the normalization determines the shift structure uniquely. For the unit, factor the small carrier lift through pointFibreSizeLift, the full-subcategory inclusion and coefficient restriction; the recorded lift/down isomorphism identifies this composite with the carrier lift. The first functor is an equivalence and coefficient restriction is an equivalence, hence this composite is fully faithful. Both the fibre of U and E[0] belong to the finite-dimensional subcategory. Reflect unitLarge through this composite; faithfulness proves its specified normalization and uniqueness. Use the existing pointRationalFibre_equivalence proof, for arbitrary finite extensions E, to obtain fullness and faithfulness of F. For realize_bijective compose the Hom equivalence of F, unit/shift Hom congruence, the existing proved homSingleEquivOfProjective for the projective regular module, the homology-shift Hom congruence, and evaluation at 1 (ringLmapEquivSelf). For scalar_bijective use the same chain with unit on both sides and the single/homology comparison in degree zero. No field-complex splitting is needed for these Hom calculations. The original point ringed-evaluation dependency is retained for the coefficient-unit transport calculation in Step 2.",
+   "uses": [
+    "def-weil-finite-coefficient-point",
+    "lem-weil-point-fibre-equivalence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-poincare-duality/sk-thm-frobenius/prop-weil-operations.proof.md",
+    "place": "Final two sentences: formal duality exchange and its smooth pairing form; explicit point realization of the retained rational proof Step 10"
+   }
+  },
+  {
+   "text": "For existence of the normalized tensor comparison take a canonical point tensor system over the algebraic closure of E (which is algebraic over Q_l). Its rational comparison has the required endpoints. Comparison independence identifies it with every canonically normalized system. Conversely, any comparison satisfying this requirement agrees with that system; Iso.ext gives uniqueness. The tensor definition therefore still chooses a uniquely determined object.",
+   "uses": [
+    "lem-sf-point-fibre-derived-tensor",
+    "lem-pod-point-tensor-normalization-independent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-poincare-duality/sk-thm-frobenius/prop-weil-operations.proof.md",
+    "place": "Final smooth-pairing clause; retained rational point-pairing argument, Steps 1--7."
+   }
+  },
+  {
+   "text": "Define the remaining shift, unit, tensor, Frobenius and scalar coordinates by exactly the existing composites; iota uses the recorded pullback object identification of the transport naturality node. pairingVector is the prefix of pairingEnd before composing with B; no data is selected from an existence-only theorem.",
+   "uses": [
+    "lem-weil-frobenius-point-transport-natural"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-poincare-duality/sk-thm-frobenius/prop-weil-operations.proof.md",
+    "place": "Final smooth-pairing clause; retained rational point-pairing argument, Steps 1--7."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-finite-coefficient-point",
+  "lem-weil-point-fibre-equivalence",
+  "lem-sf-point-fibre-derived-tensor",
+  "lem-pod-point-tensor-normalization-independent",
+  "lem-weil-frobenius-point-transport-natural"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "C3",
+  "date": "2026-10-25",
+  "document": "literature/blueprint/latest/blueprint/sec-poincare-duality/sk-thm-frobenius/prop-weil-operations.proof.md",
+  "place": "Final smooth-pairing clause; retained rational point-pairing argument, Steps 1--7."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Canonical rational geometric point tensor comparison is independent of the algebraic closure under pure tensor and completion normalization",
+   "results": "{\"t\": \"2026-10-25T13:43:34Z\", \"tool\": \"leansearch\", \"query\": \"Canonical rational geometric point tensor comparison is independent of the algebraic closure under pure tensor and completion normalization\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.TensorProduct.ext'\", \"AdicCompletion.ofTensorProductEquivOfFiniteNoetherian\", \"IsLocalization.algebraTensorEquiv\", \"Algebra.isGeometricallyReduced_iff\", \"AdicCompletion.ofTensorProductEquivOfFiniteNoetherian_symm_of\", \"Algebra.TensorProduct.mapOfCompatibleSMul_tmul\", \"AdicCompletion.ofTensorProductEquivOfFiniteNoetherian_apply\", \"Algebra.IsGeometricallyReduced.casesOn\"], \"digest\": \"724c677df0547816\"}",
+   "date": "2026-10-25",
+   "verdict": "No exact Mathlib theorem for these project-specific normalized geometric-point coordinates; reuse project definitions and split only the indicated step."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Frobenius point transport unit shift scalar tensor representative equivariance derived cohomology",
+   "results": "{\"t\": \"2026-10-25T13:43:35Z\", \"tool\": \"leanfinder\", \"query\": \"Frobenius point transport unit shift scalar tensor representative equivariance derived cohomology\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"groupCohomology.cochainsMap_f_1_comp_cochainsIso₁_apply\", \"groupCohomology.cochainsMap_f_1_comp_cochainsIso₁\", \"groupCohomology.cochainsMap_f_2_comp_cochainsIso₂_apply\", \"groupCohomology.cochainsMap_f_3_comp_cochainsIso₃_apply\", \"groupCohomology.cochainsMap_f_1_comp_cochainsIso₁_assoc\", \"groupCohomology.cochainsMap_f_0_comp_cochainsIso₀_apply\", \"groupCohomology.cochainsMap_f_0_comp_cochainsIso₀\", \"groupCohomology.cochainsMap_f_2_comp_cochainsIso₂\"], \"digest\": \"52fcd302e4b1d0a4\"}",
+   "date": "2026-10-25",
+   "verdict": "No exact Mathlib theorem for these project-specific normalized geometric-point coordinates; reuse project definitions and split only the indicated step."
+  },
+  {
+   "tool": "grep",
+   "query": "point.*tensor|Frobenius.*pairing|transportRep|pairingVector",
+   "results": "{\"t\": \"2026-10-25T13:43:35Z\", \"tool\": \"grep\", \"query\": \"point.*tensor|Frobenius.*pairing|transportRep|pairingVector\", \"sub\": \"\", \"ok\": true, \"n_hits\": 18, \"note\": \"\", \"top\": [\"Mathlib/Geometry/Convex/Cone/TensorProduct.lean\", \"Mathlib/Geometry/Manifold/VectorBundle/Tensoriality.lean\", \"Mathlib/AlgebraicGeometry/PullbackCarrier.lean\", \"Mathlib/AlgebraicGeometry/PullbackCarrier.lean\", \"Mathlib/AlgebraicGeometry/PullbackCarrier.lean\", \"Mathlib/AlgebraicGeometry/PullbackCarrier.lean\", \"Mathlib/AlgebraicGeometry/PullbackCarrier.lean\", \"Mathlib/RingTheory/RingHom/FiniteType.lean\"], \"digest\": \"4836efa070813a6a\"}",
+   "date": "2026-10-25",
+   "verdict": "No exact Mathlib theorem for these project-specific normalized geometric-point coordinates; reuse project definitions and split only the indicated step."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.PointWeilPairingRealization",
+  "date": "2026-10-25",
+  "group": "C3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-weil-operations",
+   "place": "Canonical point coordinates for shifted tensor pairings in the final smooth-pairing clause, retained point-pairing proof.",
+   "via": [
+    "lem-pod-point-weil-pairing-realization",
+    "lem-pod-rational-purity-pairing"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-poincare-duality",
+ "unit": "sk-lem-finite",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.PointWeilPairingCoordinates",
+  "file": "lean/Sheaf/Paper/PointWeilPairingCoordinates.lean",
+  "declaration": "WeilConjectures.PointWeilPairing.pairingVector",
+  "declarations": [
+   "WeilConjectures.PointWeilPairing.C",
+   "WeilConjectures.PointWeilPairing.I",
+   "WeilConjectures.PointWeilPairing.F",
+   "WeilConjectures.PointWeilPairing.Q",
+   "WeilConjectures.PointWeilPairing.P",
+   "WeilConjectures.PointWeilPairing.T",
+   "WeilConjectures.PointWeilPairing.U",
+   "WeilConjectures.PointWeilPairing.c",
+   "WeilConjectures.PointWeilPairing.iota",
+   "WeilConjectures.PointWeilPairing.pShift",
+   "WeilConjectures.PointWeilPairing.unitLarge",
+   "WeilConjectures.PointWeilPairing.fdShift",
+   "WeilConjectures.PointWeilPairing.H",
+   "WeilConjectures.PointWeilPairing.hShift",
+   "WeilConjectures.PointWeilPairing.localizeObj",
+   "WeilConjectures.PointWeilPairing.fShift_existsUnique",
+   "WeilConjectures.PointWeilPairing.fShift",
+   "WeilConjectures.PointWeilPairing.unit_existsUnique",
+   "WeilConjectures.PointWeilPairing.unit",
+   "WeilConjectures.PointWeilPairing.realize",
+   "WeilConjectures.PointWeilPairing.full",
+   "WeilConjectures.PointWeilPairing.faithful",
+   "WeilConjectures.PointWeilPairing.realize_bijective",
+   "WeilConjectures.PointWeilPairing.realization",
+   "WeilConjectures.PointWeilPairing.tensor_existsUnique",
+   "WeilConjectures.PointWeilPairing.tensor",
+   "WeilConjectures.PointWeilPairing.tensorShift",
+   "WeilConjectures.PointWeilPairing.j",
+   "WeilConjectures.PointWeilPairing.mu",
+   "WeilConjectures.PointWeilPairing.frobenius",
+   "WeilConjectures.PointWeilPairing.transportRep",
+   "WeilConjectures.PointWeilPairing.frobeniusRep",
+   "WeilConjectures.PointWeilPairing.shiftedTheta",
+   "WeilConjectures.PointWeilPairing.pairingEnd",
+   "WeilConjectures.PointWeilPairing.pairingVector",
+   "WeilConjectures.PointWeilPairing.scalar",
+   "WeilConjectures.PointWeilPairing.scalar_bijective",
+   "WeilConjectures.PointWeilPairing.pairing"
+  ],
+  "statement": "def pairingVector (A D₁ : C D l E) (n i : ℤ) (x : U D l hl E ⟶ A⟦i⟧) (y : U D l hl E ⟶ D₁⟦n - i⟧) : U D l hl E ⟶ (T D l hl E).obj (A, D₁⟦n⟧)",
+  "branch": "sheaf-dag",
+  "by": "C3",
+  "date": "2026-10-25"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-9897c",
+  "group": "C3",
+  "result": "fix",
+  "landing": "20261025T162040-L-226754",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-9897c",
+  "group": "C3",
+  "result": "fix",
+  "landing": "20261025T162040-L-226754",
+  "kind": "interface",
+  "note": "independent cc review: item Sheaf.Paper.PointWeilPairingRealization (relocated coordinates diffed verbatim vs clone; main theorem statement unchanged; 3 new sorry statements read against old conjuncts and blueprint steps 2-6, PointFibreDerivedTensorCanonical normalizations)"
+ }
+}

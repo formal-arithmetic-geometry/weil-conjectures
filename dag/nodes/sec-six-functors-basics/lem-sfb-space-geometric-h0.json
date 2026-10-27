@@ -1,0 +1,212 @@
+{
+ "id": "lem-sfb-space-geometric-h0",
+ "kind": "statement",
+ "title": "Universal degree-zero structure-sheaf pushforward for reduced connected proper flat spaces",
+ "statement": "Let $S$ be a scheme [def-pc-scheme] and $f:X\\to Y$ a proper flat finitely presented morphism of algebraic spaces over $S$ [def-trf-algebraic-space]. Proper means separated, of finite type and universally closed; flatness and local finite presentation are tested on etale scheme charts, and finite presentation also includes quasi-compactness and quasi-separatedness. A geometric fibre is a base change to the spectrum of an algebraically closed field; integral means nonempty, reduced and irreducible. Suppose every geometric fibre is reduced and connected, where connected includes nonemptiness. Then the canonical map $\\mathcal O_Y\\to f_*\\mathcal O_X$ on the small etale sites is an isomorphism, and for every algebraic space $T\\to Y$ the canonical map $\\mathcal O_T\\to(f_T)_*\\mathcal O_{X\\times_YT}$ is an isomorphism. Direct image and tensor pullback are the canonical functors on small etale module sheaves [def-trf-space-etale-module-functors].",
+ "source": {
+  "document": "literature/stacks-project/spaces-perfect.tex",
+  "place": "Tag 0E0S, lemma-proper-flat-geom-red-connected"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-trf-algebraic-space",
+  "def-trf-space-etale-module-functors",
+  "def-sfb-space-morphism-properties",
+  "def-sfb-space-module-structure-map",
+  "def-a1-space-point-topology",
+  "def-sfb-space-sheaf-fibre-product"
+ ],
+ "proof": [
+  {
+   "text": "Fix an arbitrary field-valued morphism $u:\\operatorname{Spec}k\\to Y$. By [lem-trf-space-fibre-products-etale-covers], $X_u=X\\times_Y\\operatorname{Spec}k$ is an algebraic space. The base-change assertion of [lem-sfb-space-flat-proper-fp-locality] makes $X_u\\to\\operatorname{Spec}k$ proper (also flat and finitely presented). Thus the properness hypothesis of the field calculation applies to the actual field fibre, without assuming it is a scheme.",
+   "uses": [
+    "lem-trf-space-fibre-products-etale-covers",
+    "lem-sfb-space-flat-proper-fp-locality"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-perfect.tex",
+    "place": "Tag 0E0S, lemma-proper-flat-geom-red-connected, proof"
+   }
+  },
+  {
+   "text": "For any algebraically closed extension $\\Omega/k$, the iterated fibre $(X_u)_\\Omega$ is $X\\times_Y\\operatorname{Spec}\\Omega$: both represent a point of $X$ and a point of $\\operatorname{Spec}\\Omega$ with equal image in $Y$. The composite $\\operatorname{Spec}\\Omega\\to\\operatorname{Spec}k\\to Y$ is a geometric point, so the hypothesis on $f$ makes this space reduced, nonempty and connected. Apply [lem-sfb-space-proper-field-global-functions] to $X_u/k$. It proves that the canonical map $k\\to\\Gamma(X_u,\\mathcal O_{X_u})$ is an isomorphism. No conversion from geometric fibres to a scheme-only definition of geometric connectedness is used.",
+   "uses": [
+    "lem-sfb-space-proper-field-global-functions"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-perfect.tex",
+    "place": "Tag 0E0S, lemma-proper-flat-geom-red-connected, proof"
+   }
+  },
+  {
+   "text": "The preceding field-valued morphism was arbitrary, so the field-map hypothesis of [lem-sfb-space-proper-flat-h0-criterion] holds for every $u$. Its remaining proper, flat and finite-presentation hypotheses are exactly those on $f$. The criterion gives the canonical isomorphism $\\mathcal O_Y\\to f_*\\mathcal O_X$ together with the same canonical isomorphism after every algebraic-space base change $T\\to Y$. This proves both assertions, including parameters $T$ which are not schemes.",
+   "uses": [
+    "lem-sfb-space-proper-flat-h0-criterion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-perfect.tex",
+    "place": "Tag 0E0S, lemma-proper-flat-geom-red-connected, proof"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-trf-space-fibre-products-etale-covers",
+  "lem-sfb-space-flat-proper-fp-locality",
+  "lem-sfb-space-proper-field-global-functions",
+  "lem-sfb-space-proper-flat-h0-criterion"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/spaces-perfect.tex",
+  "place": "Tag 0E0S, lemma-proper-flat-geom-red-connected, proof"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For a proper flat finitely presented morphism of algebraic spaces with geometrically reduced connected fibres the structure sheaf pushforward is the base structure sheaf universally",
+   "results": "8 hits; top: AlgebraicGeometry.Flat.instHasRingHomPropertyFlat, AlgebraicGeometry.FormallyUnramified.instHasRingHomPropertyFormallyUnramified, AlgebraicGeometry.UniversallyOpen.of_flat, AlgebraicGeometry.Flat.generalizingMap, AlgebraicGeometry.Flat, AlgebraicGeometry.FormallyUnramified, Algebra.FormallyUnramified.isOpenImmersion_SpecMap_lmul, AlgebraicGeometry.Flat.flat_appLE",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern schemes, ring modules or other notions; none states this result for algebraic spaces"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Cohomological flatness in degree zero for proper flat algebraic spaces with reduced connected geometric fibres gives universally constant regular functions",
+   "results": "8 hits; top: Module.isLocallyConstant_rankAtStalk, Module.Flat.of_forall_isTrivialRelation, RingHom.Flat, AlgebraicGeometry.flat_iff, AlgebraicGeometry.Flat.iff_flat_stalkMap, AlgebraicGeometry.Flat.casesOn, AlgebraicGeometry.Flat.mk, AlgebraicGeometry.Flat.instIsMultiplicativeScheme",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern schemes, ring modules or other notions; none states this result for algebraic spaces"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"pushforward\", \"proper\"",
+   "results": "0 hits; top: ",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern schemes, ring modules or other notions; none states this result for algebraic spaces"
+  },
+  {
+   "tool": "grep",
+   "query": "geometrically.*(connected|reduced)|proper.*flat.*(sections|pushforward)",
+   "results": "25 hits; top: Mathlib/FieldTheory/SeparablyGenerated.lean, Mathlib/AlgebraicGeometry/EllipticCurve/Weierstrass.lean, Mathlib/AlgebraicGeometry/AffineSpace.lean, Mathlib/AlgebraicGeometry/AffineSpace.lean, Mathlib/AlgebraicGeometry/AffineSpace.lean, Mathlib/AlgebraicGeometry/Geometrically/Integral.lean, Mathlib/AlgebraicGeometry/Geometrically/Integral.lean, Mathlib/AlgebraicGeometry/Geometrically/Integral.lean",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern schemes, ring modules or other notions; none states this result for algebraic spaces"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Proper flat finitely presented algebraic spaces with reduced connected geometric fibres have universally trivial structure sheaf pushforward",
+   "results": "8 hits; top: AlgebraicGeometry.Flat.instHasRingHomPropertyFlat, AlgebraicGeometry.UniversallyOpen.of_flat, AlgebraicGeometry.Flat, AlgebraicGeometry.FormallyUnramified.instHasRingHomPropertyFormallyUnramified, AlgebraicGeometry.IsIntegral, AlgebraicGeometry.isField_of_universallyClosed, AlgebraicGeometry.FormallyUnramified, AlgebraicGeometry.AffineSpace.not_isIntegralHom",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits are scheme or ring results, not the stated theorem for algebraic spaces"
+  },
+  {
+   "tool": "leansearch",
+   "query": "For a proper flat morphism of algebraic spaces with geometrically reduced connected fibres the unit O_Y to f_* O_X is an isomorphism after arbitrary base change",
+   "results": "8 hits; top: AlgebraicGeometry.Scheme.Modules.restrictFunctorAdjCounitIso, AlgebraicGeometry.IsProper.isStableUnderBaseChange, AlgebraicGeometry.instIsIsoSchemeAppUnitOppositeCommRingCatAdjunctionOfIsAffine, AlgebraicGeometry.Flat.flat_of_affine_subset, AlgebraicGeometry.Flat.isIso_of_surjective_of_mono, AlgebraicGeometry.Flat.flat_appLE, AlgebraicGeometry.Flat.isStableUnderBaseChange, AlgebraicGeometry.Flat.stalkMap",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits are scheme or ring results, not the stated theorem for algebraic spaces"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"pushforward\", \"IsProper\"",
+   "results": "0 hits; top: ",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits are scheme or ring results, not the stated theorem for algebraic spaces"
+  },
+  {
+   "tool": "grep",
+   "query": "geometrically.*(connected|reduced)|proper.*flat.*(sections|pushforward)",
+   "results": "25 hits; top: Mathlib/AlgebraicGeometry/EllipticCurve/Weierstrass.lean, Mathlib/AlgebraicGeometry/AffineSpace.lean, Mathlib/AlgebraicGeometry/AffineSpace.lean, Mathlib/AlgebraicGeometry/AffineSpace.lean, Mathlib/AlgebraicGeometry/Geometrically/Integral.lean, Mathlib/AlgebraicGeometry/Geometrically/Integral.lean, Mathlib/AlgebraicGeometry/Geometrically/Integral.lean, Mathlib/AlgebraicGeometry/Geometrically/Integral.lean",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits are scheme or ring results, not the stated theorem for algebraic spaces"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Universal degree zero cohomological flatness and base change of global functions for proper algebraic spaces with geometrically connected reduced fibres",
+   "results": "8 hits; top: AlgebraicGeometry.Flat.isStableUnderBaseChange, AlgebraicGeometry.Flat.instHasRingHomPropertyFlat, AlgebraicGeometry.Flat, AlgebraicGeometry.Flat.instIsMultiplicativeScheme, AlgebraicGeometry.Flat.generalizingMap, AlgebraicGeometry.Flat.instIsStableUnderCompositionScheme, AlgebraicGeometry.flat_iff, AlgebraicGeometry.UniversallyOpen.of_flat",
+   "date": "2026-10-24",
+   "verdict": "no match: only scheme flatness and global-sections results, not the algebraic-space theorem"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-rigidified-space-picard",
+  "date": "2026-10-23",
+  "group": "Q141"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Scheme representability of the stable abelian-level normalization. Supporting input: freeness at normalized boundary branches. Comparison of the full cohomology frame in the item with Deligne 3.3--3.5 Picard torsion frames; relative Picard existence for the pulled-back stable family. Supporting input for the present split: A relatively ample line module on the stable-curve multidegree-zero Picard space. Supporting input: Canonical rigidified ample line module on smooth relative Jacobians. Prerequisite for the diagonal construction: Relative dual abelian spaces and normalized Poincare identities. Auxiliary for this split: Rigidified Picard representability for proper geometrically integral algebraic-space families. Supporting input: Universal functions on the proper geometrically integral family, before normalizing line modules.",
+   "via": [
+    "lem-sfb-rigidified-space-picard",
+    "lem-sfb-abelian-space-poincare-calculus",
+    "lem-sfb-smooth-jacobian-canonical-line",
+    "lem-sfb-stable-picard-theta-ampleness",
+    "lem-sfb-stable-relative-picard-kummer",
+    "lem-sfb-stable-level-versal-branch-freeness",
+    "lem-sfb-stable-abelian-level-normalization",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-space-geometric-h0",
+  "worker": "stage1",
+  "summary": "Read Stacks 0E0S, its preceding field-fibre criterion 0E6B and the field calculation 0DMY. Kept the statement unchanged, established every field-valued fibre hypothesis explicitly, and extracted the two genuine space-level inputs as unsplit statement-only nodes. Scheme-only global-sections nodes and declarations do not attach or replace these inputs.",
+  "blueprint": "Supports the recorded ancestor chain through rigidified Picard representability: universal functions before normalizing line modules; realizes both sentences of the proof of Tag 0E0S. Current blueprint det-thm-sf-ctf-stability-direct-images proof (3) is the upstream direct-image preservation context. The ancestor tool returns None for this inherited chain, retained verbatim.",
+  "tool_uses": [
+   {
+    "node": "lem-trf-space-fibre-products-etale-covers",
+    "why": "Generic algebraic-space fibre-product existence needed to form field fibres; no replacement for a unit proof step."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-trf-space-fibre-products-etale-covers"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q22-fe0684fdf",
+  "group": "Q22",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q22-fe0684fdf (reviewer sub-agent of L); spot-checked: Read Stacks 0E0S (proof: 0E6B criterion plus 0DMY), 0E6B (statement and full proof) and 0DMY clauses (1)-(8) with the proof. The item's statement and stmt_deps are unchanged against live and side-live, and the item is still unsplit there, so no parallel group got to it first. Steps 1-3 match the two sentences of the 0E0S proof. Step 1: fibre-product existence (lem-trf-space-fibre-products-etale-covers) plus base-change stability of proper/flat/f.p. (lem-sfb-space-flat-proper-fp-locality). Step 2: elementary pasting (X_u)_Ω = X×_Y Spec Ω, then the new 0DMY(7) node. Step 3: the new 0E6B(a) criterion, quantified over every field-valued u, which gives both conclusions including every algebraic space T. The 0DMY node correctly states geometric connectedness. Read with ordinary connectedness, 0DMY(7) is false: Spec k' with k'/k finite separable is a counterexample. Test cases: empty, k[ε], separable and inseparable extensions, two points, and the non-flat Spec k→Spec k[ε] (shows flatness is needed). The scheme-only 0BUG/0E62 nodes are not duplicates, and there is no cycle. Accepted tool_use: lem-trf-space-fibre-products-etale-covers (generic). Batch-5: every listed trf citation is an algebraic-space foundation or definition (fibre products, def-trf-algebraic-space, def-trf-space-etale-module-functors, def-a1-space-point-topology, fp-locality closure). None is trace-formula or Poincaré content, so OK. FIX (B3): both new nodes now cite def-sfb-space-morphism-properties for proper/flat/f.p. and def-sfb-space-module-structure-map for the canonical f^♯ / structure map. Both are base nodes in the same unit, and the citations are added to the statements and stmt_deps; no mathematical content changed.; 2 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SpaceGeometricH0",
+  "declaration": "AlgebraicGeometry.AlgebraicSpace.isIso_moduleStructureMap_of_geometricFibres_reduced_connected",
+  "file": "lean/Sheaf/AlgebraicGeometry/SpaceGeometricH0.lean",
+  "statement": "theorem isIso_moduleStructureMap_of_geometricFibres_reduced_connected {S : Scheme.{u}} {X Y : AlgebraicSpace S} (f : X ⟶ Y) (hp : MapIsProper f) (hf : MapIsFlat f) (hfp : MapIsLocallyOfFinitePresentation f ∧ MapIsQuasiCompact f.hom.hom ∧ MapIsQuasiCompact (pullback.diagonal f.hom.hom)) (hgeom : ∀ (Ω : Type u) [Field Ω] [IsAlgClosed Ω] (b : Spec (CommRingCat.of Ω) ⟶ S) (y : yoneda.obj (Over.mk b) ⟶ Y.obj.obj), (∀ T : CostructuredArrow yoneda (Limits.pullback f.hom.hom y), IsEtale T.hom → AlgebraicGeometry.IsReduced T.left.left) ∧ ConnectedSpace (Point (Limits.pullback f.hom.hom y))) : IsIso (moduleStructureMap f) ∧ ∀ (T : AlgebraicSpace S) (g : T ⟶ Y), IsIso (moduleStructureMap (ObjectProperty.homMk (Limits.pullback.snd f.hom g.hom) : enlargedFibreProduct f g ⟶ T))",
+  "branch": "sheaf-dag",
+  "by": "O4",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "Repair of returned head 3bf88cc3f734 (H2/H4): reuse enlargedFibreProduct f g, owned by the landed definition node def-sfb-space-sheaf-fibre-product, and its actual second sheaf projection. The fibre-product theorem stays a proof dependency only. All geometric hypotheses and both canonical moduleStructureMap conclusions are unchanged; no inline copy of the bundled fibre product remains."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-00b2e0bea",
+  "group": "O4",
+  "result": "pass",
+  "note": "Read Stacks 0E0S (spaces-perfect.tex l.6679-6698), the item node, all 7 stmt_deps and their side-live declarations (MapIsProper/Flat/LFP, MapIsQuasiCompact, moduleStructureMap uniquely characterized, Point and pointTopologicalSpace, enlargedFibreProduct = actual Limits.pullback, owned by the landed def-sfb-space-sheaf-fibre-product). Clause check: proper/flat/fp (lfp+qc+qs) exact; every geometric point Ω:Type u alg. closed, any b, any y; fibre = actual presheaf pullback; reduced on all étale charts; ConnectedSpace including nonempty; both conclusions IsIso moduleStructureMap, the base change via pullback.snd from enlargedFibreProduct f g for every algebraic space T. No added hypotheses. Edge cases: empty Y, empty fibre excluded, k[ε], reducible fibres, universes, non-schematic T. Node diff vs side-live: lean plus 4 landed def stmt_deps only. The H2 of returned head 3bf88cc3f734 is repaired. lean.statement verbatim; lines ≤90; sorry only; docstrings with source and proof steps; both report sections present; no compile (no file changed; delivery reports a clean compile). Advisories: the inline reducedness test equals the AlgebraicSpace.IsReduced body (def-sfb-reduced-algebraic-space), the same form as the landed SpaceProperFieldGlobalFunctions; MapIsQuasiCompact and Point owners are reached only transitively (N8/Q157 precedent)."
+ }
+}

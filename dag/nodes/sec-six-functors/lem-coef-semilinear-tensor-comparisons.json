@@ -1,0 +1,120 @@
+{
+ "kind": "statement",
+ "status": "split",
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "mathlib_match": null,
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-coef-integral-exceptional-adjoint",
+   "place": "Construction 4.1 tensor part of the proof of lem-coef-semilinear-system-existence.",
+   "via": [
+    "lem-coef-semilinear-system-existence"
+   ]
+  },
+  "same_as": []
+ },
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.SemilinearTensorCoherence",
+  "date": "2026-10-26",
+  "group": "P5"
+ },
+ "proof_origin": {
+  "by": "agent H4",
+  "document": "literature/zheng-six-operations-lefschetz-verdier-DM-stacks_arXiv-1006.3810.pdf",
+  "place": "Construction 4.1; Lean assembly from the existing normalized evaluation and scalar tensor comparison theorems, 2026-10-26."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "derived tensor closed monoidal sheaf models",
+   "results": "No exact theorem for the full normalized system package.",
+   "date": "2026-10-26",
+   "verdict": "split component remains."
+  },
+  {
+   "tool": "grep",
+   "query": "SystemTensorBase|SystemTensorComparisons|systemTensorReduction",
+   "results": "No existing declarations before this delivery.",
+   "date": "2026-10-26",
+   "verdict": "new component."
+  },
+  {
+   "tool": "leansearch",
+   "query": "tensor reduction compatibility derived systems",
+   "results": "Generic tensor and adjunction APIs only.",
+   "date": "2026-10-26",
+   "verdict": "split component remains."
+  }
+ ],
+ "id": "lem-coef-semilinear-tensor-comparisons",
+ "title": "Evaluation and scalar tensor comparisons for semilinear systems",
+ "statement": "Given the base tensor models and a SystemScalarCoherence, there are the normalized evaluation isomorphisms and TensorComparisonModels, and the normalized scalar/tensor isomorphisms and ScalarTensorComparisonModels.",
+ "source": {
+  "document": "literature/zheng-six-operations-lefschetz-verdier-DM-stacks_arXiv-1006.3810.pdf",
+  "place": "Construction 4.1, sectionwise tensor comparison and derived scalar extension."
+ },
+ "stmt_deps": [
+  "def-coef-semilinear-derived-calculus",
+  "def-coef-semilinear-system-models"
+ ],
+ "proof": [
+  {
+   "text": "For each level n apply semilinearTensorEvaluation to A.closed, A.tensorModels, A.levelClosed n and A.levelTensorModels n. Its existential witnesses give the evaluation isomorphism and the dependent TensorComparisonModel, with exactly the ordinaryEvaluationTensor normalization required by the third field.",
+   "uses": [
+    "lem-coef-semilinear-tensor-evaluation"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For each n <= m, apply semilinearScalarTensor to the composite coefficientMap, the given S.scalar h, and the given closed structures and tensor models at m and n. This gives the scalar tensor isomorphism and a nonempty ScalarTensorComparisonModel for those precise choices. No new scalar data or coherence theorem is needed.",
+   "uses": [
+    "lem-coef-semilinear-scalar-coherence",
+    "lem-coef-semilinear-scalar-tensor"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Choose the isomorphisms together with their dependent models from these two existing existence theorems. Retain the evaluation normalization by choose_spec. Assemble the five fields of SystemTensorComparisons and introduce Nonempty. All choices are within the proof of a proposition; no definition or new data construction is introduced.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-coef-semilinear-tensor-evaluation",
+  "lem-coef-semilinear-scalar-coherence",
+  "lem-coef-semilinear-scalar-tensor"
+ ],
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.SemilinearTensorComparisons",
+  "file": "lean/Sheaf/Paper/SemilinearTensorComparisons.lean",
+  "declaration": "WeilConjectures.SemilinearSections.systemTensorComparisons_nonempty",
+  "statement": "theorem systemTensorComparisons_nonempty (A : SystemTensorBase.{c, v, r} J B τ) :\n    Nonempty (SystemTensorComparisons.{c, v, r} J B τ S A)",
+  "branch": "sheaf-dag",
+  "by": "P5",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P5",
+  "result": "pass",
+  "landing": "20261026T092234-L-3416155",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H4",
+  "result": "pass",
+  "landing": "20261026T102406-L-350868",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

@@ -1,0 +1,115 @@
+{
+ "id": "lem-sf-canonical-pull-tensor",
+ "kind": "statement",
+ "title": "Canonical tensor comparison for a supplied pullback",
+ "statement": "For either Mode and any scheme map f:X→Y, take ring sheaves R on Y and S on X and any ring map c:R→f_*S. Let p be any Pullback R S (direct m f R S c) of [lem-sf-open-tensor-normalization], and let a,b be any of its resolving tensor models. There exists a PullTensor m f R S c p a b of [def-sf-clopen-comparison-tensor-data]. Thus the supplied ordinary adjoint admits the canonical pure-unit normalized tensor isomorphism, preserves flat-term K-flat complexes, and its supplied universal left derived functor admits the corresponding tensor comparison with the exact signed-total representative equation. The precise hypotheses and formulas are: theorem canonical_pull_tensor (m : Mode) {X Y : Scheme.{u}} (f : X ⟶ Y)\n    (R : Sheaf (topology m Y) CommRingCat.{u + 1})\n    (S : Sheaf (topology m X) CommRingCat.{u + 1})\n    (c : R ⟶ ((baseChange m f).sheafPushforwardContinuous CommRingCat.{u + 1}\n      (topology m Y) (topology m X)).obj S)\n    (p : Pullback R S (direct m f R S c)) (a : TensorModel R) (b : TensorModel S) :\n    Nonempty (PullTensor m f R S c p a b)",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 07A4 (lemma-pullback-tensor-product) and 0G7E, with Modules on Sites Tag 03EL. Transport the canonical normalized theorem along uniqueness of ordinary adjoints and left derived functors. Original clopen tensor refinement, step 1."
+ },
+ "stmt_deps": [
+  "def-sf-clopen-comparison-tensor-data",
+  "lem-sf-open-tensor-normalization"
+ ],
+ "proof": [
+  {
+   "text": "present the module inverse image as algebraic inverse image followed by\nextension of scalars. Uniqueness of the adjunction to the specified sectionwise\ndirect image gives its comparison with p.ordinary. Transport the canonical\nordinary tensor isomorphism along that comparison. Its pure-unit formula follows\nfrom the adjunction unit formula and the canonical pure-tensor formula. Pullback\npreserves flat terms and K-flat complexes. Apply the canonical unbounded tensor\npullback theorem to the supplied tensor models and transport along the unique\nleft-derived comparison to p.derived. The signed total comparison commutes with\nthe differential degreewise, and the theorem's representative square gives the\ndisplayed normalization after cancelling the target representative isomorphism.\nThis argument applies directly to the vertical ringed site, without evaluating\nsystems or assuming any flatness of coefficient transitions.",
+   "uses": [
+    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+    "lem-sf-open-operation-models"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+  "lem-sf-open-operation-models"
+ ],
+ "proof_origin": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 07A4 (lemma-pullback-tensor-product) and 0GL1 (lemma-j-shriek-and-tensor); agent open-unit and clopen tensor refinement",
+  "by": "agent"
+ },
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.SixFunctors.ClopenComparisonTensorSquare",
+  "date": "2026-10-24",
+  "group": "D6"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-rem-sf-pf-done",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "fix-prop-projection-formula",
+   "place": "Proof sentence: The composition, refinement, exchange and proper-coincidence identities are [prop-sf-pf-coherence]; clopen comparison tensor compatibility, original seven-step refinement.",
+   "via": [
+    "lem-sf-clopen-comparison-tensor-square",
+    "lem-sf-proper-open-projection-mate"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.SixFunctors.CanonicalPullTensor",
+  "file": "lean/Sheaf/SixFunctors/CanonicalPullTensor.lean",
+  "declaration": "SheafOfModules.ClopenComparisonTensorSquare.canonical_pull_tensor",
+  "statement": "theorem canonical_pull_tensor (m : Mode) {X Y : Scheme.{u}} (f : X ⟶ Y)\n    (R : Sheaf (topology m Y) CommRingCat.{u + 1})\n    (S : Sheaf (topology m X) CommRingCat.{u + 1})\n    (c : R ⟶ ((baseChange m f).sheafPushforwardContinuous CommRingCat.{u + 1}\n      (topology m Y) (topology m X)).obj S)\n    (p : Pullback R S (direct m f R S c)) (a : TensorModel R) (b : TensorModel S) :\n    Nonempty (PullTensor m f R S c p a b)",
+  "branch": "sheaf-dag",
+  "by": "D6",
+  "date": "2026-10-24"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "canonical derived tensor pullback comparison and clopen restriction extension adjunction",
+   "results": "8 hits; SheafOfModules.PullbackConstruction.adjunction, TopCat.Sheaf.pullbackPushforwardAdjunction, AlgebraicGeometry.Scheme.Modules.restrictFunctorIsoPullback, SheafOfModules.pullbackIso, SheafOfModules.pullbackObjUnitToUnit, PresheafOfModules.pullbackComp, SheafOfModules.freeFunctorCompPullbackIso, SheafOfModules.pullbackPushforwardAdjunction_homEquiv_pullbackObjUnitToUnit",
+   "date": "2026-10-24",
+   "verdict": "No exact match: ordinary pullback adjunctions and module formulas do not give normalized derived tensor compatibility or the clopen reverse module adjunction."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.homEquiv",
+   "results": "12 hits; CategoryTheory.Adjunction.homEquiv, CategoryTheory.Adjunction.mk'_homEquiv, CategoryTheory.Adjunction.mkOfHomEquiv_homEquiv, CategoryTheory.Adjunction.corepresentableBy_homEquiv, CategoryTheory.Adjunction.representableBy_homEquiv, CategoryTheory.Adjunction.comp_homEquiv, CategoryTheory.Adjunction.homEquiv_apply, CategoryTheory.Adjunction.homEquiv_unit",
+   "date": "2026-10-24",
+   "verdict": "Useful formal adjunction API; no geometric tensor comparison theorem."
+  },
+  {
+   "tool": "grep",
+   "query": "clopen.*[Aa]dj|tensor.*[Bb]ase[Cc]hange",
+   "results": "25 hits; Mathlib/Algebra/Lie/Nilpotent.lean, Mathlib/Algebra/Category/ModuleCat/Monoidal/Adjunction.lean, Mathlib/Algebra/Category/ModuleCat/Monoidal/Adjunction.lean, Mathlib/Algebra/Category/ModuleCat/Monoidal/Adjunction.lean, Mathlib/Algebra/Category/ModuleCat/Monoidal/Adjunction.lean, Mathlib/Algebra/Category/ModuleCat/Monoidal/Adjunction.lean, Mathlib/Algebra/Module/LinearMap/Polynomial.lean, Mathlib/Algebra/Module/LinearMap/Polynomial.lean",
+   "date": "2026-10-24",
+   "verdict": "Ordinary scalar tensor calculations only; the required derived ringed-site statements remain separate."
+  },
+  {
+   "tool": "leansearch",
+   "query": "clopen restriction adjunction tensor pullback comparison on derived sheaves",
+   "results": "8 hits; SheafOfModules.PullbackConstruction.adjunction, TopCat.Sheaf.pullback, TopCat.Sheaf.instIsLeftAdjointPullback, CategoryTheory.Functor.sheafPullback, CategoryTheory.Functor.sheafPullbackConstruction.sheafAdjunctionContinuous, TopCat.Presheaf.pushforwardPullbackAdjunction, AlgebraicGeometry.Scheme.Modules.restrictAdjunction, AlgebraicGeometry.Scheme.Modules.pullbackPushforwardAdjunction",
+   "date": "2026-10-24",
+   "verdict": "No match: ordinary adjunctions, no canonical derived tensor compatibility or reverse clopen adjunction on these ringed sites."
+  }
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "C-2871b",
+  "group": "D6",
+  "result": "pass",
+  "landing": "20261024T214331-L-589450",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "C-2871b",
+  "group": "D6",
+  "result": "pass",
+  "landing": "20261024T214331-L-589450",
+  "kind": "interface",
+  "note": "independent cc review: item theorem, moved Data block and 3 new sorry leaves vs clone ClopenComparisonTensorSquare.lean, OpenTensorNormalizationData (Operations/Assertion/Pullback/OpenExtension) and node files"
+ }
+}

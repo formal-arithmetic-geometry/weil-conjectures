@@ -1,0 +1,149 @@
+{
+ "id": "lem-sf-system-identity-open-evaluation",
+ "kind": "lemma",
+ "title": "Finite evaluation of canonical identity-open cancellation",
+ "statement": "Fix a finite-field datum $D$, a coefficient datum $C$ with prime $\\ell$, and a finite extension $E/\\mathbf Q_\\ell$ as in [def-fix-six-functor-datum]. Let $o$ be the simultaneous coefficient-system operations of [def-sf-integral-system-operations], and $z$ their realization data with canonical section-normalized bridge [def-sf-integral-system-canonical-bridge]. For every scheme $W$, integer $m\\ge0$, and arbitrary derived coefficient system $M$ on $W$, let $e_W:J_{\\mathrm{id}_W}\\simeq\\mathrm{id}$ be openIdentity of [def-sf-integral-proper-projection-coordinates], let $\\operatorname{ev}_m$ be finite evaluation, let $\\epsilon_{J,m}$ be the specified open-evaluation comparison, and let $e_{W,m}:j_{\\mathrm{id}_W,!}\\simeq\\mathrm{id}$ be the intrinsic finite identity-open comparison normalized by its open-adjunction unit. Then $\\operatorname{ev}_m(e_W(M))=\\epsilon_{J,m}(M)\\mathbin{\\gg} e_{W,m}(\\operatorname{ev}_m M)$, where the displayed composite is in diagrammatic order. There is no integral object, support construction, or six-functor operation datum in this identity.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-rem-sf-pf-done/fix-prop-projection-formula.proof.md",
+  "place": "Compatibility under successive coefficient reductions; identity-open unit in proper coincidence"
+ },
+ "stmt_deps": [
+  "def-fix-six-functor-datum",
+  "def-sf-integral-system-operations",
+  "def-sf-integral-system-canonical-bridge",
+  "def-sf-integral-proper-projection-coordinates"
+ ],
+ "proof": [
+  {
+   "text": "Use systemPushIdentityPullUnit to obtain the normalized system pullback identity e, with its two-identity compositor unit equation. Its conjugate identifies e with the canonical bridge pull comparison followed by SemilinearProperOpen.pId. Adjoint uniqueness, applied after transport of the right adjoint, therefore identifies the system identity-open cancellation with leftAdjointIdIso for e.",
+   "uses": [
+    "lem-sf-system-push-identity-pair-pull-unit",
+    "def-sf-integral-system-canonical-bridge",
+    "lem-sf-semilinear-proper-open-mate-pasting"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-rem-sf-pf-done/fix-prop-projection-formula.proof.md",
+    "place": "Compatibility under successive coefficient reductions; identity-open unit in proper coincidence"
+   }
+  },
+  {
+   "text": "Transport the ordinary upperStarComp_id_left law through the intrinsic module realization equivalence, using its unit and counit triangle identity. Localize the resulting identity with descend_left_unit to obtain the unit law for the finite intrinsic derived pullback compositor. Apply systemPullbackCompositorEvaluation to the pair of identity scheme maps. For any functors P,Q isomorphic to identities and comparison q:P V -> V Q, composition compatibility forces q followed by the Q identity comparison to equal V of the P identity comparison: substitute the two compositor unit laws, use naturality of q on the P identity comparison, cancel q at P(M), and use faithfulness of Q, which is isomorphic to the identity. This uses no faithfulness of finite evaluation.",
+   "uses": [
+    "lem-pur-system-pullback-compositor-evaluation",
+    "lem-cbc-strict-tower-direct-image-coherence",
+    "lem-trf-open-square-exchange"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-rem-sf-pf-done/fix-prop-projection-formula.proof.md",
+    "place": "Compatibility under successive coefficient reductions; identity-open unit in proper coincidence"
+   }
+  },
+  {
+   "text": "The unit equation for the inverse mate specified by OpenEvaluation.transpose gives V(eta) followed by q equal to the finite open unit followed by finite pullback of inverse open evaluation. Postcompose with the finite pullback identity comparison and use Step 2. Naturality of that identity comparison identifies the result with inverse finite identity-open cancellation followed by inverse open evaluation. The leftAdjointIdIso inverse formula identifies the other side with evaluation of inverse system cancellation. Invert this equality. The proved generic exact_left_id_localized lemma identifies the finite leftAdjointIdIso with mapDerivedCategoryNatIso(sfIntrinsicOpenId) followed by mapDerivedCategoryIdIso, giving exactly the required equality at M.",
+   "uses": [
+    "def-sf-integral-system-operations",
+    "lem-sf-ordinary-ambient-alpha-units",
+    "lem-trf-open-square-exchange"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-rem-sf-pf-done/fix-prop-projection-formula.proof.md",
+    "place": "Compatibility under successive coefficient reductions; identity-open unit in proper coincidence"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sf-system-push-identity-pair-pull-unit",
+  "def-sf-integral-system-canonical-bridge",
+  "lem-sf-semilinear-proper-open-mate-pasting",
+  "lem-pur-system-pullback-compositor-evaluation",
+  "lem-cbc-strict-tower-direct-image-coherence",
+  "lem-trf-open-square-exchange",
+  "def-sf-integral-system-operations",
+  "lem-sf-ordinary-ambient-alpha-units"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-rem-sf-pf-done/fix-prop-projection-formula.proof.md",
+  "place": "Compatibility under successive coefficient reductions; identity-open unit in proper coincidence",
+  "note": "Y8: proved categorical identity normalization from the existing pullback-compositor evaluation theorem, then applied the specified open mate equation. No new statement or hole."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Evaluation of extension by zero for the identity open immersion agrees with the canonical identity functor isomorphism",
+   "results": "8 hits, concerning scheme and topological open identity maps; no coefficient-system open evaluation normalization.",
+   "date": "2026-10-27",
+   "verdict": "No replacement for the specific canonical coefficient-system identity."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.leftAdjointUniq",
+   "results": "12 hits, including leftAdjointUniq_trans_app, unit_leftAdjointUniq_hom_app and leftAdjointUniq_hom_app_counit.",
+   "date": "2026-10-27",
+   "verdict": "Use uniqueness of adjunction comparisons to compare the normalized open units."
+  },
+  {
+   "tool": "grep",
+   "query": "leftAdjointIdIso|leftAdjointUniq.*comp|conjugateEquiv.*unit",
+   "results": "20 Mathlib hits, including leftAdjointIdIso and conjugateEquiv_leftAdjointIdIso_hom in Adjunction/CompositionIso.lean. Local searches found the component definitions but no existing finite identity-open evaluation theorem. Blueprint search returned no match.",
+   "date": "2026-10-27",
+   "verdict": "Retain the section-normalized project comparisons; the generic identity adjunction API supplies the categorical argument."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.IntegralProperSupportReductionIdentity",
+  "date": "2026-10-27",
+  "group": "P7"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "fix-prop-projection-formula",
+   "place": "Compatibility under successive coefficient reductions; identity-open unit in proper coincidence",
+   "via": [
+    "lem-sf-integral-proper-support-reduction-identity",
+    "lem-sf-integral-proper-projection-system-normalization",
+    "lem-sf-integral-projection-reduction-coordinates"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-rem-sf-pf-done",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.SystemIdentityOpenEvaluation",
+  "file": "lean/Sheaf/Paper/SystemIdentityOpenEvaluation.lean",
+  "declaration": "WeilConjectures.IntegralProjectionReduction.systemIdentityOpenEvaluation",
+  "statement": "theorem systemIdentityOpenEvaluation\n    {D : FiniteFieldDatum.{u}} {C : D.CoefficientDatum}\n    {E : Type u} [Field E] [Algebra (Padic C.l) E]\n    [FiniteDimensional (Padic C.l) E]\n    (o : Operations C.l E) (z : Realizations C.l E D o)\n    (W : Scheme.{u}) (m : ℕ) (M : System C.l E W) :\n    (coefficientSequenceDerivedEvaluation C.l E W m).map\n        ((openIdentity o z W).hom.app M) =\n      ((o.openEvaluation (𝟙 W)).evaluation m).hom.app M ≫\n        (Functor.mapDerivedCategoryNatIso\n          (@sfIntrinsicOpenId (Padic.coefficientExtensionRing C.l E (m + 1)) _\n            (Padic.finite_coefficientExtensionRing C.l E (m + 1)\n              (Nat.le_add_left 1 m)) W) ≪≫\n          Functor.mapDerivedCategoryIdIso _).hom.app\n            ((coefficientSequenceDerivedEvaluation C.l E W m).obj M)",
+  "branch": "sheaf-dag",
+  "by": "P7",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P7",
+  "result": "pass",
+  "landing": "20261027T050632-L-247548",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Y8",
+  "result": "pass",
+  "landing": "20261027T094548-L-242982",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

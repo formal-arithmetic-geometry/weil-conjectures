@@ -1,0 +1,296 @@
+{
+ "id": "lem-sf-semilinear-evaluation-ordinary-adjunction",
+ "kind": "statement",
+ "title": "Section-normalized ordinary evaluation and its inverse pullback mate",
+ "statement": "Let $C_n$ be commutative rings with arbitrary inverse transition homomorphisms, and let $f:X\\to Y$ be a scheme morphism. On the small pro-etale sites let $\\mathscr S_T$ be the strict semilinear module-system category and $\\mathcal T_T(C_n)=\\operatorname{Fun}(\\mathbf N^{op},\\operatorname{Mod}(\\underline{C_n}_T))$ the constant-coefficient strict-tower category, with the specified ordinary adjunctions of [def-sp-semilinear-constant-ring-operations]. Write $e_{n,T}:\\mathscr S_T\\to\\operatorname{Mod}(\\underline{C_n}_T)$ for evaluation, $\\Delta_T$ for the constant-diagram functor, and $E^0_{n,T}=\\Delta_Te_{n,T}$. There is a unique isomorphism\n$$D_{f,n}:E^0_{n,Y}f_{*,\\bullet}\\xrightarrow{\\sim}f_{*,n}^{\\mathcal T}E^0_{n,X}$$\nwhose component at every tower index $m$, section object $H$ and system $M$ is the identity on $M_n(H\\times_YX)$. Its inverse has the same normalization. The inverse adjunction mate\n$$a_{f,n}:f_n^{*,\\mathcal T}E^0_{n,Y}\\longrightarrow E^0_{n,X}f_\\bullet^*$$\nof $D_{f,n}$ is invertible. More precisely it is the constant-diagram lift, with the canonical constant-diagram compositors, of the single-level inverse-image evaluation comparison uniquely fixed by the unit equation. If $\\eta_f$ and $\\eta_f^{\\mathcal T}$ are the specified ordinary units, this equation is\n$$f_{*,n}^{\\mathcal T}(a_{f,n,M})\\circ\\eta^{\\mathcal T}_{f,E^0_{n,Y}M}=D_{f,n,f_\\bullet^*M}\\circ E^0_{n,Y}(\\eta_{f,M}).$$\nThe comparisons consequently identify the specified counits as well. They are natural transformations on the entire ordinary system category, for arbitrary coefficient transitions.",
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tag 03D7 (lemma-adjoint-pullback-pushforward-modules); agent-formulated constant-diagram lift and normalization of the ordinary system adjunction. Reference argument: Sheaf.SixFunctors.SemilinearProperOpenMatePasting, evalPushOrdinary_existsUnique and eval_pull_mate_isIso, lines 1798-1911."
+ },
+ "stmt_deps": [
+  "def-sp-semilinear-constant-ring-operations",
+  "def-coef-semilinear-system-models",
+  "def-cbc-strict-constant-tower-operations",
+  "def-weil-pbc-adjunction-mate",
+  "def-pc-scheme"
+ ],
+ "proof": [
+  {
+   "text": "Take the normalized single-level comparison d from evaluationPush_existsUnique in [lem-sf-semilinear-evaluation-ring-square]. Lift its components to constant diagrams, using the termwise tower direct image of [def-cbc-strict-constant-tower-operations], to obtain D. Both directions retain their identity-on-sections normalization. Extensionality on sections, tower components and natural-transformation components proves uniqueness of D. The same normalization and evalPushOrdinary_existsUnique identify its chosen comparison with D inverse.",
+   "uses": [
+    "lem-sf-semilinear-evaluation-ring-square",
+    "def-cbc-strict-constant-tower-operations",
+    "def-sp-semilinear-constant-ring-operations"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Unfold the specified evalPullInv of [def-sp-semilinear-constant-ring-operations] and substitute the chosen comparison identified in Step 1. This is exactly the inverse mate of D hom. Apply the already proved evalPullInv_isIso, owned by the same definition node: its existing proof constructs the single-level inverse-image comparison and lifts the unit-normalized mate to constant diagrams. Thus invertibility is reused from a complete proof, not inferred from invertibility of D. Apply unit_mateEquiv_symm of [def-weil-pbc-adjunction-mate] to obtain the stated tower unit equation.",
+   "uses": [
+    "def-sp-semilinear-constant-ring-operations",
+    "def-weil-pbc-adjunction-mate"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Evaluate the isomorphism asIso(evalPullInv) at tower index zero, obtaining the actual level isomorphism b. Evaluate the tower unit equation at zero to obtain its level unit equation. Naturality of evalPullInv along the opposite of 0 <= m identifies its component at m with that at zero: source and target towers are constant, so both structure maps are identities. To prove uniqueness, apply injectivity of the level adjunction Hom equivalence to each component of any proposed b. Its Hom image is the level unit followed by direct image of b; the two unit equations therefore identify these images. Isomorphism and natural-transformation extensionality finish. This also proves that every normalized b agrees with all tower components.",
+   "uses": [
+    "def-cbc-strict-constant-tower-operations",
+    "def-sp-semilinear-constant-ring-operations"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Apply mateEquiv_counit_symm of [def-weil-pbc-adjunction-mate] to D hom and reverse the equality. Substituting the inverse-mate identity from Step 2 yields exactly the required counit equation for the specified adjunctions. No coefficient, transition or morphism restrictions were introduced.",
+   "uses": [
+    "def-weil-pbc-adjunction-mate"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-cbc-strict-constant-tower-operations",
+  "def-sp-semilinear-constant-ring-operations",
+  "def-weil-pbc-adjunction-mate",
+  "lem-sf-semilinear-evaluation-ring-square"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tag 03D7 (lemma-adjoint-pullback-pushforward-modules); reuses the proved evalPullInv_isIso and evalPushOrdinary_existsUnique of Sheaf.SixFunctors.SemilinearProperOpenMatePasting, then evaluates constant diagrams and applies Mathlib inverse-mate unit/counit identities. Lean proof by J1, 2026-10-23."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Evaluation of semilinear module sheaf systems followed by a constant tower commutes with ordinary pullback and direct image preserving their adjunction units",
+   "results": "SheafOfModules.pullbackObjUnitToUnit; SheafOfModules.pullbackPushforwardAdjunction_homEquiv_pullbackObjUnitToUnit; SheafOfModules.pullbackPushforwardAdjunction_homEquiv_symm_unitToPushforwardObjUnit; SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom; SheafOfModules.pullbackObjFreeIso_hom_naturality_assoc; SheafOfModules.pullbackObjFreeIso_hom_naturality; SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom_assoc; SheafOfModules.pushforwardSections_unitHomEquiv",
+   "date": "2026-10-22",
+   "verdict": "no match: retrieved declarations do not state this specified ringed-sequence/derived-adjunction normalization"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Evaluation and constant diagram functor preserve adjunction mates for semilinear sheaves of modules",
+   "results": "CategoryTheory.constantPresheafAdj; CategoryTheory.constantSheafAdj; CategoryTheory.constantSheafΓAdj; AlgebraicGeometry.Scheme.Modules.pullbackPushforwardAdjunction; SheafOfModules.pushforwardPushforwardAdj; SheafOfModules.PullbackConstruction.adjunction; SheafOfModules.evaluation; CompHausLike.LocallyConstant.adjunction",
+   "date": "2026-10-22",
+   "verdict": "no match: retrieved declarations do not state this specified ringed-sequence/derived-adjunction normalization"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.whiskerRight",
+   "results": "CategoryTheory.Adjunction.whiskerRight; CategoryTheory.Adjunction.whiskerRight_counit_app_app; CategoryTheory.Adjunction.whiskerRight_unit_app_app; CategoryTheory.Sheaf.adjunction_counit_app_hom; CategoryTheory.Sheaf.adjunction_unit_app_hom",
+   "date": "2026-10-22",
+   "verdict": "no match: retrieved declarations do not state this specified ringed-sequence/derived-adjunction normalization"
+  },
+  {
+   "tool": "grep",
+   "query": "moduleEvalG|moduleEvalP|compConstIso|const_mate",
+   "results": "Mathlib/CategoryTheory/Localization/FiniteProducts.lean; Mathlib/CategoryTheory/Localization/FiniteProducts.lean; Mathlib/CategoryTheory/Functor/Const.lean; Mathlib/CategoryTheory/Sites/ConstantSheaf.lean",
+   "date": "2026-10-22",
+   "verdict": "no match: retrieved declarations do not state this specified ringed-sequence/derived-adjunction normalization"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Section normalized ordinary evaluation direct image comparison has invertible inverse image adjunction mate for varying coefficient rings",
+   "results": "AlgebraicGeometry.AffineSpace.SpecIso_hom_appTop; AlgebraicGeometry.AffineSpace.toSpecMvPolyIntEquiv_symm_apply; AlgebraicGeometry.AffineSpace.isoOfIsAffine_hom_appTop; AlgebraicGeometry.ΓSpecIso_inv_ΓSpec_adjunction_homEquiv; AlgebraicGeometry.AffineSpace.toSpecMvPolyIntEquiv; CommRingCat.HomTopology.mvPolynomialHomeomorph_symm_apply_hom; AlgebraicGeometry.AffineSpace.homOfVector_toSpecMvPoly; StandardEtalePresentation.aeval_val_equivMvPolynomial",
+   "date": "2026-10-22",
+   "verdict": "no match: retrieved declarations do not state this specified ringed-sequence/derived-adjunction normalization"
+  },
+  {
+   "tool": "grep",
+   "query": "moduleEvalG|moduleEvalP|constant_diagram_mate",
+   "results": {
+    "n_hits": 0,
+    "note": "",
+    "top": []
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: generic sheaf evaluation, module adjunction and whiskered-adjunction results do not give the varying-ring system comparison with its specified units"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Inverse image of sheaves of modules on a vertical sequence site commutes with evaluation at one coefficient ring",
+   "results": {
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "SheafOfModules.evaluation",
+     "PresheafOfModules.sections.eval",
+     "SheafOfModules.evaluationPreservesLimit",
+     "SheafOfModules.evaluationPreservesLimitsOfShape",
+     "SheafOfModules.instIsLeftAdjointPullback",
+     "AlgebraicGeometry.Scheme.Modules.inv_app",
+     "PresheafOfModules.evaluation_preservesFiniteLimits",
+     "SheafOfModules.hasLimit"
+    ]
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: generic sheaf evaluation, module adjunction and whiskered-adjunction results do not give the varying-ring system comparison with its specified units"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.whiskerRight",
+   "results": {
+    "n_hits": 5,
+    "note": "",
+    "top": [
+     "CategoryTheory.Adjunction.whiskerRight",
+     "CategoryTheory.Adjunction.whiskerRight_counit_app_app",
+     "CategoryTheory.Adjunction.whiskerRight_unit_app_app",
+     "CategoryTheory.Sheaf.adjunction_counit_app_hom",
+     "CategoryTheory.Sheaf.adjunction_unit_app_hom"
+    ]
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: generic sheaf evaluation, module adjunction and whiskered-adjunction results do not give the varying-ring system comparison with its specified units"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Evaluation of strict semilinear sheaf module systems commutes with ordinary pullback and direct image and preserves the specified adjunction unit",
+   "results": {
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "SheafOfModules.pullbackObjUnitToUnit",
+     "SheafOfModules.pullbackPushforwardAdjunction_homEquiv_pullbackObjUnitToUnit",
+     "SheafOfModules.pullbackPushforwardAdjunction_homEquiv_symm_unitToPushforwardObjUnit",
+     "SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom",
+     "SheafOfModules.pullbackObjFreeIso_hom_naturality_assoc",
+     "SheafOfModules.pullbackObjFreeIso_hom_naturality",
+     "SheafOfModules.pushforwardSections_unitHomEquiv",
+     "SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom_assoc"
+    ]
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: generic sheaf evaluation, module adjunction and whiskered-adjunction results do not give the varying-ring system comparison with its specified units"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A pullback pushforward adjunction on modules over varying ring inverse systems is computed componentwise and constant diagrams preserve its unit and counit",
+   "results": {
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "PresheafOfModules.pullbackPushforwardAdjunction",
+     "PresheafOfModules.pullback",
+     "PresheafOfModules.pullbackComp",
+     "SheafOfModules.pullbackPushforwardAdjunction_homEquiv_pullbackObjUnitToUnit",
+     "PresheafOfModules.instIsRightAdjointPushforwardCompFunctorOppositeRingCatWhiskerLeftOp",
+     "SheafOfModules.pullbackPushforwardAdjunction_homEquiv_symm_unitToPushforwardObjUnit",
+     "PresheafOfModules.instIsRightAdjointPushforward",
+     "PresheafOfModules.instIsRightAdjointPushforwardIdFunctorOppositeRingCat"
+    ]
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: generic sheaf evaluation, module adjunction and whiskered-adjunction results do not give the varying-ring system comparison with its specified units"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sf-semilinear-proper-open-mate-pasting",
+  "date": "2026-10-22",
+  "group": "NW"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-thm-sf-compatibility",
+ "blueprint": {
+  "from": {
+   "node": "fix-prop-coherence",
+   "place": "Proof sentence: \"The maps used here are tensor reassociation, evaluation, and adjunction units and counits\"; intrinsic semilinear proper/open realization, returned proof step 5: Section-normalized ordinary evaluation and its inverse pullback mate",
+   "via": [
+    "lem-sf-semilinear-proper-open-mate-pasting",
+    "lem-sf-integral-compactification-system-realization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sf-semilinear-evaluation-ordinary-adjunction",
+  "worker": "stage1",
+  "summary": "Constructed the system pullback componentwise, checked both directions of transition compatibility under the level Hom bijections, compared the specified ordinary left adjoint by explicit inverse transposes, and lifted the normalized comparison to constant towers. Reused existing nodes throughout; no new nodes or statement changes. The malformed display-only evaluation-existence nodes were not used as mathematical citations. Returned-delivery repair: revalidated the current ring-square equation and its unchanged d clause, and explicitly sourced the arbitrary-ring constant-coefficient isomorphism from lem-pe-constant-left-module-inverse-image instead of attributing it to the corrected ring-square statement.",
+  "blueprint": "fix-prop-coherence proof sentence: The maps used here are tensor reassociation, evaluation, and adjunction units and counits; realizes ordinary evaluation/adjunction normalization in the parent semilinear proper/open realization.",
+  "tool_uses": [
+   {
+    "node": "def-cbc-strict-constant-tower-operations",
+    "why": "Generic constant-tower termwise adjunction, required to lift the comparison; no local replacement is needed."
+   },
+   {
+    "node": "def-sp-semilinear-constant-ring-operations",
+    "why": "The actual ordinary operations and specified adjunctions named in the item."
+   },
+   {
+    "node": "def-weil-pbc-constant-sheaf",
+    "why": "Universal property of the constant ring sheaves, used to check coefficient-transition naturality."
+   },
+   {
+    "node": "def-weil-pbc-proetale-operations",
+    "why": "Generic identified-coefficient ordinary module inverse-image construction and its underlying adjunction; not a replacement of the unit route."
+   },
+   {
+    "node": "lem-weil-pbc-adjunction-lifts-group-ring-objects",
+    "why": "Generic finite-product-preserving inverse image and its underlying abelian-sheaf adjunction, needed to check transition equations."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-topoi-module-adjunction",
+    "why": "Generic module pullback/direct-image Hom bijections at each level; the item supplies the system compatibility argument."
+   },
+   {
+    "node": "def-weil-pbc-adjunction-mate",
+    "why": "Definition of the inverse mate, its bijection and unit/counit formulas."
+   },
+   {
+    "node": "lem-pe-constant-left-module-inverse-image",
+    "why": "Generic constant-ring inverse-image isomorphism and underlying abelian module transport for arbitrary rings; supplies the coefficient invertibility that the corrected ring-square statement does not claim."
+   },
+   {
+    "node": "def-weil-proetale-inverse-image",
+    "why": "Specifies the actual constant-section structural ring map and its ring-adjunction normalization, used to identify the arbitrary-ring isomorphism with the coefficient map of this item."
+   }
+  ]
+ },
+ "tool_uses": [
+  "def-cbc-strict-constant-tower-operations",
+  "def-sp-semilinear-constant-ring-operations",
+  "def-weil-pbc-adjunction-mate"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q41-ad58b4185",
+  "group": "Q41",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q41-ad58b4185 (reviewer sub-agent of L); spot-checked: I read all six steps in full. In live and side-live the item is still unsplit, and there is no repair note. There are no new nodes, and the statement and stmt_deps are unchanged from 84936f56. This is a re-delivery because the landing was refused after the statement of lem-sf-semilinear-evaluation-ring-square changed: it no longer says c^f is an isomorphism. Its current statement is identical in the snapshot, live and side-live. Step 1 now quotes the coefficient-square equation ι*(Φ_f)∘a_Y=F_*(a_X)∘φ_{f,n} and uses d, which that statement still gives (identity on sections, specified action). Step 2 now takes the invertibility of c_i from lem-pe-constant-left-module-inverse-image, which holds for any unital ring and any geometric morphism with left-exact f^{-1}. Its source is Stacks 00YV, sites.tex proposition-functoriality-algebraic-structures-topoi l.10473, plus 0H7J. Step 2 identifies c_i with c^f=ε∘f^{-1}(ρ) of def-weil-proetale-inverse-image, because their adjuncts agree on constant generators and the constant-sheaf universal property then makes the maps equal. This fixes a latent C4 of the earlier text, which had attributed c_i to def-sp. Steps 3–6 are unchanged apart from wording. I re-checked them: the transposition identities, q/b inverse by injectivity, a=Δb_n as the inverse mate, and the counit transpose; the orientation matches def-sp's a_{f,n}. Edge cases: f=id, n=0, empty X, C_i=0, nonflat ℤ→ℤ/2. No cycle (closure of 515 nodes), no SGA. The new tool uses lem-pe (sk-prop-sf-comparison) and def-weil-proetale-inverse-image are generic and accepted. FIX (C3): the delivered Step 3 had lost my 84936f56 fix, which cites lem-sf-semilinear-evaluation-ring-square for the identification of level i of f_{*,•}N with f_*N_i and transition f_*(t^N). I re-applied that sentence and the uses entry; proof_deps already contains it. Maintainer note: the display-only lem-sp-varying-ring-module-eval-g-existence/-uniqueness still need real NL statements.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.SixFunctors.SemilinearEvaluationOrdinaryAdjunction",
+  "declaration": "AlgebraicGeometry.ProEtale.SemilinearProperOpen.semilinearEvaluationOrdinaryAdjunction",
+  "file": "lean/Sheaf/SixFunctors/SemilinearEvaluationOrdinaryAdjunction.lean",
+  "statement": "theorem semilinearEvaluationOrdinaryAdjunction (C : ℕ → CommRingCat.{u + 1}) (τ : ∀ n : ℕ, C (n + 1) ⟶ C n) {X Y : Scheme.{u}} (f : X ⟶ Y) (n : ℕ) : ∃ D : push C τ f ⋙ levelTower C τ n Y ≅ levelTower C τ n X ⋙ StrictTower.towerDirectImage (C n) f, (∀ (M : Modules C τ X) (m : ℕ) (H : Y.ProEt), HEq (fun x ↦ ((D.hom.app M).app (op m)).val.app (op H) x) (fun x : M.val.obj (op (n, (proEtaleBaseChange f).obj H)) ↦ x)) ∧ (∀ (M : Modules C τ X) (m : ℕ) (H : Y.ProEt), HEq (fun x ↦ ((D.inv.app M).app (op m)).val.app (op H) x) (fun x : M.val.obj (op (n, (proEtaleBaseChange f).obj H)) ↦ x)) ∧ (∀ D' : push C τ f ⋙ levelTower C τ n Y ≅ levelTower C τ n X ⋙ StrictTower.towerDirectImage (C n) f, (∀ (M : Modules C τ X) (m : ℕ) (H : Y.ProEt), HEq (fun x ↦ ((D'.hom.app M).app (op m)).val.app (op H) x) (fun x : M.val.obj (op (n, (proEtaleBaseChange f).obj H)) ↦ x)) → D' = D) ∧ evalPullInv C τ n f = ((mateEquiv (ordinaryAdj C τ f) ((proEtaleRingModuleAdjunction f (StrictTower.coefficients (C n) Y) (StrictTower.coefficients (C n) X) (StrictTower.constantRingIso (C n) f)).whiskerRight ℕᵒᵖ)).symm (TwoSquare.mk _ _ _ _ D.hom)).natTrans ∧ IsIso (evalPullInv C τ n f) ∧ (∃! b : SemilinearSections.evaluation (ProEt.topology Y) (coefficients C Y) (transition C τ Y) n ⋙ StrictTower.modulePullback (C n) f ≅ pull C τ f ⋙ SemilinearSections.evaluation (ProEt.topology X) (coefficients C X) (transition C τ X) n, ∀ M : Modules C τ Y, (proEtaleRingModuleAdjunction f (StrictTower.coefficients (C n) Y) (StrictTower.coefficients (C n) X) (StrictTower.constantRingIso (C n) f)).unit.app ((SemilinearSections.evaluation (ProEt.topology Y) (coefficients C Y) (transition C τ Y) n).obj M) ≫ (StrictTower.moduleDirectImage (C n) f).map (b.hom.app M) = (SemilinearSections.evaluation (ProEt.topology Y) (coefficients C Y) (transition C τ Y) n).map ((ordinaryAdj C τ f).unit.app M) ≫ (D.hom.app ((pull C τ f).obj M)).app (op 0)) ∧ (∀ b : SemilinearSections.evaluation (ProEt.topology Y) (coefficients C Y) (transition C τ Y) n ⋙ StrictTower.modulePullback (C n) f ≅ pull C τ f ⋙ SemilinearSections.evaluation (ProEt.topology X) (coefficients C X) (transition C τ X) n, (∀ M : Modules C τ Y, (proEtaleRingModuleAdjunction f (StrictTower.coefficients (C n) Y) (StrictTower.coefficients (C n) X) (StrictTower.constantRingIso (C n) f)).unit.app ((SemilinearSections.evaluation (ProEt.topology Y) (coefficients C Y) (transition C τ Y) n).obj M) ≫ (StrictTower.moduleDirectImage (C n) f).map (b.hom.app M) = (SemilinearSections.evaluation (ProEt.topology Y) (coefficients C Y) (transition C τ Y) n).map ((ordinaryAdj C τ f).unit.app M) ≫ (D.hom.app ((pull C τ f).obj M)).app (op 0)) → ∀ (M : Modules C τ Y) (m : ℕ), ((evalPullInv C τ n f).app M).app (op m) = b.hom.app M) ∧ (∀ M : Modules C τ Y, ((proEtaleRingModuleAdjunction f (StrictTower.coefficients (C n) Y) (StrictTower.coefficients (C n) X) (StrictTower.constantRingIso (C n) f)).whiskerRight ℕᵒᵖ).unit.app ((levelTower C τ n Y).obj M) ≫ (StrictTower.towerDirectImage (C n) f).map ((evalPullInv C τ n f).app M) = (levelTower C τ n Y).map ((ordinaryAdj C τ f).unit.app M) ≫ D.hom.app ((pull C τ f).obj M)) ∧ (∀ N : Modules C τ X, (evalPullInv C τ n f).app ((push C τ f).obj N) ≫ (levelTower C τ n X).map ((ordinaryAdj C τ f).counit.app N) = (StrictTower.towerPullback (C n) f).map (D.hom.app N) ≫ ((proEtaleRingModuleAdjunction f (StrictTower.coefficients (C n) Y) (StrictTower.coefficients (C n) X) (StrictTower.constantRingIso (C n) f)).whiskerRight ℕᵒᵖ).counit.app ((levelTower C τ n X).obj N))",
+  "branch": "newtargets-dag",
+  "by": "Q19",
+  "date": "2026-10-22",
+  "existing": false,
+  "note": "Uses the recorded system operations and evalPullInv verbatim. Adds the combined section-normalization, single-level uniqueness and constant-lift, and specified unit/counit compatibility statement; no construction is redefined."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-50e9f4243",
+  "group": "Q19",
+  "result": "pass",
+  "note": "Node diff vs side-live: only lean added; statement verbatim in the file, proof sorry, no defs. Clauses matched: D (push⋙levelTower Y ≅ levelTower X⋙towerDirectImage) with HEq identity-on-sections for hom and inv and uniqueness from the hom normalization (same form as landed evalPushOrdinary_existsUnique); evalPullInv = mateEquiv.symm of D.hom under ordinaryAdj and the whiskered normalized proEtaleRingModuleAdjunction (orientation checked); IsIso; ∃! single-level b fixed by the actual unit equation with D at index 0; componentwise constant lift; tower unit and counit equations exact. All declarations reused from def-sp/def-coef/def-cbc/Mathlib; no existing full package. Advisory: owners of proEtaleRingModuleAdjunction (def-weil-pbc-proetale-operations) and proEtaleBaseChange (def-weil-proetale-inverse-image) are proof_deps only but lie in the stmt_dep closure. Universes u/u+1 as def-sp; no extra hypotheses; edge cases n=0, C_i=0, nonflat transitions, empty X, f=id fine. Docstrings have source, blueprint tag and proof steps; report sections present; no SGA. Not recompiled, per instructions."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J1",
+  "result": "pass",
+  "landing": "20261023T131555-L-2123411",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

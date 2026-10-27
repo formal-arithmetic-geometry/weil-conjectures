@@ -1,0 +1,173 @@
+{
+ "id": "lem-sfb-adic-coefficient-filtration-triangle",
+ "kind": "statement",
+ "title": "The derived graded coefficient-filtration triangle",
+ "statement": "Let X be a scheme [def-pc-scheme], A a commutative ring in the independent coefficient universe, J an ideal, and N an object of the actual constant-A pro-etale derived category [lem-sfb-adic-finite-reduction-data]. For n >= 0 put B=A/J^(n+2), C=A/J^(n+1), and I=ker(B -> C), regarded as a B-module. Let I[0] be its exact constant module realization in degree zero [def-sfb-site-derived-constant-module-functor]. Let L_n=(N tensor_A^L B) tensor_B^L I[0], using the existing K-flat derived tensor [lem-weil-pbc-kflat-fixed-tensor-triangulated]. There exist morphisms making L_n -> N tensor_A^L B -> Res_B^C(N tensor_A^L C) -> L_n[1] a distinguished triangle. No constructibility, Noetherianity or boundedness assumption is made.",
+ "source": {
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Tag 09BR, lemma-compare-truncations-constructible, first displayed triangle; exact constant realization and K-flat balancing."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-pbc-constant-sheaf",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-abstract-derived-category",
+  "lem-sfb-adic-finite-reduction-data",
+  "def-sfb-site-derived-constant-module-functor",
+  "lem-weil-pbc-kflat-fixed-tensor-triangulated"
+ ],
+ "proof": [
+  {
+   "text": "For B=A/J^(n+2), C=A/J^(n+1), let p:B -> C be the actual quotient factor. Ideal.Quotient.factor_surjective proves surjectivity. Construct the short complex ker(p) -> B -> Res_p(C), with the ideal subtype and the linear quotient map. ModuleCat mono/epi criteria and elementwise exactness prove it short exact. Apply the exact commutativeSiteConstantModuleFunctor and Mathlib ShortComplex.ShortExact.singleTriangle_distinguished.",
+   "uses": [
+    "def-sfb-site-derived-constant-module-functor",
+    "lem-sfb-adic-finite-reduction-data"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Identify the constant realization of the regular C-module restricted to B with the restriction of the regular constant-C ring sheaf. Its comparison is induced by the constant-ring sheafification unit: naturality makes it B-linear. The seed is locally injective and locally surjective, as is the module-sheafification unit. Cancellation of these local properties and reflection of isomorphisms by the underlying additive-sheaf functor prove the comparison invertible. For p=id this also identifies the constant regular B-module with the tensor unit.",
+   "uses": [
+    "def-sfb-site-derived-constant-module-functor",
+    "lem-weil-pbc-constant-completion-equivalence"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For any derived object M, choose a flat-term K-flat resolution of a representative. Convert termwise tensor-flatness to IsFlatOnSite using siteSheafTensorRightIso. The published coherent kFlat_fixed_tensor_triangulated theorem gives triangulatedness for the resolving object. Its bifunctor shift compatibility makes the isomorphism from that object to M shift-compatible, so Functor.isTriangulated_of_iso gives exactness of tensoring by M. Tensor the coefficient triangle by M=N tensor_A^L B.",
+   "uses": [
+    "lem-pc-kflat-resolution",
+    "lem-weil-pbc-independent-sheaf-tensor-colimits",
+    "lem-weil-pbc-kflat-fixed-tensor-triangulated"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use ringed_kFlat_single_tensor_comparison on a K-flat representative to compute tensoring M with a module in degree zero. For the regular B-module, the ordinary right unitor identifies the result with M. For the restricted regular C-module, the ordinary extensionTensorIso (the natural form of exists_extensionTensorComparison, preceded by braiding) identifies the termwise tensor with restricted scalar extension. The exact restriction comparison resFactors and the invertible K-flat extendComparison identify its localization with dres(p)(extend(p)(M)). The constant-module isomorphisms in step 2 give the endpoints actually used in the coefficient triangle.",
+   "uses": [
+    "lem-pc-kflat-resolution",
+    "lem-sf-ringed-kflat-single-tensor-comparison",
+    "lem-weil-pbc-extension-tensor-comparison",
+    "lem-weil-pbc-constant-completion-equivalence",
+    "lem-pur-derived-change-of-rings"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The canonical adicFiniteRho identifies extend(p)(N tensor_A^L B) with N tensor_A^L C. The first endpoint is definitionally adicFiniteGradedLayer. Compose the endpoint isomorphisms, conjugate the three triangle arrows, and apply Triangle.isoMk and isomorphic_distinguished. This proves the unchanged existential triangle statement. No flatness, boundedness, completeness or constructibility hypothesis is introduced; zero ideals, unit ideals, zero rings and empty schemes use the same constructions.",
+   "uses": [
+    "lem-sfb-adic-finite-reduction-data"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-sfb-site-derived-constant-module-functor",
+  "lem-sfb-adic-finite-reduction-data",
+  "lem-weil-pbc-constant-completion-equivalence",
+  "lem-pc-kflat-resolution",
+  "lem-weil-pbc-independent-sheaf-tensor-colimits",
+  "lem-weil-pbc-kflat-fixed-tensor-triangulated",
+  "lem-sf-ringed-kflat-single-tensor-comparison",
+  "lem-weil-pbc-extension-tensor-comparison",
+  "lem-pur-derived-change-of-rings"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Tag 09BR, lemma-compare-truncations-constructible, first displayed triangle; exact constant realization and K-flat balancing."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "distinguished triangle derived tensor short exact sequence ideal powers quotient rings",
+   "results": "8 hits, including localCohomology, AdicCompletion.map_exact and Module.Flat.rTensor_shortComplex_exact; no derived sheaf coefficient-filtration triangle.",
+   "date": "2026-10-26",
+   "verdict": "No match for this sheaf statement."
+  },
+  {
+   "tool": "loogle",
+   "query": "DerivedCategory, ShortComplex.ShortExact",
+   "results": "0 hits: Loogle unknown identifier ShortComplex.ShortExact.",
+   "date": "2026-10-26",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "grep",
+   "query": "restrictScalars.*[Cc]onstructible|[Cc]onstructible.*restrictScalars|triangle.*[Qq]uotient",
+   "results": "6 unrelated hits, including DerivedCategory.Basic transport of distinguished triangles; no quotient-power sheaf tensor statement.",
+   "date": "2026-10-26",
+   "verdict": "No match for this sheaf statement."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A distinguished triangle is obtained by derived tensor from an exact sequence of coefficient modules.",
+   "results": "8 hits, including ShortComplex.ShortExact.singleTriangle_distinguished and DerivedCategory.triangleOfSES_distinguished. These supply the formal exact-sequence triangle, but not the K-flat tensor and scalar-balancing identifications of its named endpoints.",
+   "date": "2026-10-26",
+   "verdict": "The formal component exists, but there is no exact match for the sheaf statement."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.AdicFiniteReductionConstructibility",
+  "date": "2026-10-26",
+  "group": "K1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-lem-integral-models-stacks",
+   "place": "Tag 09BR, lemma-compare-truncations-constructible, first displayed triangle; exact constant realization and K-flat balancing.",
+   "via": [
+    "lem-sfb-adic-finite-reduction-constructibility",
+    "lem-sfb-adic-finite-etale-origins",
+    "lem-sfb-adic-constructible-finite-reductions",
+    "lem-sfb-adic-residue-lisse-perfect-lift",
+    "lem-sfb-adic-stratified-perfect",
+    "lem-sfb-integral-cohomological-adic-criterion"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-lem-integral-models",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.AdicCoefficientFiltration",
+  "file": "lean/Sheaf/Paper/AdicCoefficientFiltration.lean",
+  "declaration": "AlgebraicGeometry.Scheme.adicFiniteGradedLayer_triangle",
+  "statement": "theorem adicFiniteGradedLayer_triangle (X : Scheme.{u})\n    {A : Type (max v (u + 1))} [CommRing A] (J : Ideal A)\n    (N : adicFiniteAmbient.{u, v} X A) (n : ℕ) :\n    ∃ (f : adicFiniteGradedLayer.{u, v} X J N n ⟶\n        adicFiniteReduction.{u, v} X J N (n + 1))\n      (g : adicFiniteReduction.{u, v} X J N (n + 1) ⟶\n        adicFiniteRestrictedReduction.{u, v} X J N n)\n      (δ : adicFiniteRestrictedReduction.{u, v} X J N n ⟶\n        (adicFiniteGradedLayer.{u, v} X J N n)⟦(1 : ℤ)⟧),\n      Pretriangulated.Triangle.mk f g δ ∈ distTriang _",
+  "branch": "sheaf-dag",
+  "by": "K1",
+  "date": "2026-10-26",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.adicFiniteGradedModule",
+   "AlgebraicGeometry.Scheme.adicFiniteGradedSingle",
+   "AlgebraicGeometry.Scheme.adicFiniteGradedLayer",
+   "AlgebraicGeometry.Scheme.adicFiniteRestrictedReduction",
+   "AlgebraicGeometry.Scheme.adicFiniteGradedLayer_triangle"
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K1",
+  "result": "pass",
+  "landing": "20261026T130508-L-3467958",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E2",
+  "result": "pass",
+  "landing": "20261026T152259-L-1093665",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

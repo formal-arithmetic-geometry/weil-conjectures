@@ -1,0 +1,236 @@
+{
+ "id": "lem-sfb-graded-square-zero-smooth-lifting",
+ "kind": "statement",
+ "title": "Graded square-zero lifting for a smooth affine algebra",
+ "statement": "Let $R$ be a commutative ring and $C=\\bigoplus_{n\\in\\mathbf Z}C_n$ a commutative unital $R$-algebra with an integer grading: each $C_n$ is an $R$-submodule, every element has a unique finite homogeneous expansion, $1\\in C_0$, the image of $R$ lies in $C_0$, and $C_nC_m\\subseteq C_{n+m}$. Suppose $\\operatorname{Spec}C\\to\\operatorname{Spec}R$ is smooth [def-weil-affine-spectrum] [def-sbc-smooth-morphisms] and $C$ is finitely presented over $R$, meaning it is a quotient of a polynomial ring in finitely many variables by a finitely generated ideal. Let $D=\\bigoplus_{n\\in\\mathbf Z}D_n$ be any commutative unital graded $R$-algebra in the same sense. Let $J\\subseteq D$ be a homogeneous square-zero ideal: $J=\\bigoplus_n(J\\cap D_n)$ and $xy=0$ for all $x,y\\in J$. Give $D/J$ the quotient grading. Every degree-preserving $R$-algebra homomorphism $h:C\\to D/J$ admits a degree-preserving $R$-algebra homomorphism $\\widetilde h:C\\to D$ with $q\\widetilde h=h$, where $q:D\\to D/J$ is the quotient homomorphism. Neither $R$ nor $D$ is required to be Noetherian, reduced, or nonzero, and neither grading is required to have only nonnegative degrees.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tags 00TI (definition-formally-smooth) and 00TN (proposition-smooth-formally-smooth), graded refinement written by the agent, not a statement asserted verbatim by Stacks. This is the equivariant infinitesimal ingredient for Conrad, Theorem 4.1.7(4), proof pp.113-114."
+ },
+ "stmt_deps": [
+  "def-weil-affine-spectrum",
+  "def-sbc-smooth-morphisms"
+ ],
+ "proof": [
+  {
+   "text": "Forget the gradings temporarily. By [def-sbc-smooth-morphisms], the given smooth morphism $\\operatorname{Spec}C\\to\\operatorname{Spec}R$ is formally smooth. Apply [lem-weil-pbc-affine-formally-smooth-iff-ring-lifting] with $S=C$, $D=D$, $N=J$ and $g=h$. Its hypotheses hold since $D$ is a commutative $R$-algebra and $J^2=0$. Obtain an ordinary $R$-algebra homomorphism $f:C\\to D$ with $qf=h$. No grading condition is asserted for $f$.",
+   "uses": [
+    "def-sbc-smooth-morphisms",
+    "lem-weil-pbc-affine-formally-smooth-iff-ring-lifting"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 02H4 (lemma-affine-formally-smooth), with Tag 02H0 (definition-formally-smooth)."
+   }
+  },
+  {
+   "text": "Let $\\pi_i:D\\to D_i\\subset D$ be homogeneous projection. The direct-sum decomposition into $R$-submodules makes each $\\pi_i$ $R$-linear. Because $J$ is homogeneous, $q$ commutes with homogeneous projections: decompose any element into its finitely many homogeneous components and apply $q$, using uniqueness of the quotient grading. For $x\\in C_n$ write $f(x)=\\sum_i f(x)_i$. Since $qf(x)=h(x)$ has degree $n$, we have $f(x)_i\\in J$ for $i\\ne n$ and $q(f(x)_n)=h(x)$. Define $\\widetilde h(\\sum_n x_n)=\\sum_n\\pi_n(f(x_n))$. These finite sums define an $R$-linear map, since each restricted map $\\pi_n f|_{C_n}$ is $R$-linear and homogeneous expansions are unique. It preserves degrees and satisfies $q\\widetilde h=h$. Moreover $1$ and the image of $R$ have degree zero and $f$ fixes them, so $\\widetilde h(1)=1$ and $\\widetilde h(r)=r$ for $r\\in R$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00TI (definition-formally-smooth); homogeneous-component refinement written by Q129."
+   }
+  },
+  {
+   "text": "For $x\\in C_n$ and $y\\in C_m$, use multiplicativity of $f$ and take degree $n+m$: $\\widetilde h(xy)=\\pi_{n+m}(f(x)f(y))=\\sum_{i+j=n+m}f(x)_i f(y)_j$. The sum is finite. The pair $(i,j)=(n,m)$ contributes $\\widetilde h(x)\\widetilde h(y)$. For every other pair, cancellation in $\\mathbf Z$ implies both $i\\ne n$ and $j\\ne m$, so both factors belong to $J$ by step 2 and their product is zero. Therefore $\\widetilde h(xy)=\\widetilde h(x)\\widetilde h(y)$ on homogeneous elements. For arbitrary finite expansions $x=\\sum_n x_n$ and $y=\\sum_m y_m$, distribute their product and use the $R$-linearity from step 2 to get the same identity. Thus $\\widetilde h$ is the required graded unital $R$-algebra lift.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00TI (definition-formally-smooth); homogeneous-component refinement written by Q129."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sbc-smooth-morphisms",
+  "lem-weil-pbc-affine-formally-smooth-iff-ring-lifting"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tags 00TI (definition-formally-smooth) and 00TN (proposition-smooth-formally-smooth) supply ordinary lifting; graded refinement by finite homogeneous-component calculation, Q129."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A graded smooth commutative algebra lifts graded algebra maps across square zero homogeneous ideals",
+   "results": "[leanfinder] OK 8 hit(s). ; Algebra.FormallySmooth.lift, DualNumber.lift_apply_inl, Algebra.FormallySmooth.exists_lift, Algebra.FormallySmooth.comp_lift, Algebra.FormallySmooth.mk_lift, ExteriorAlgebra.GradedAlgebra.liftι, CliffordAlgebra.GradedAlgebra.lift_ι_eq, GradedTensorProduct.lift_tmul",
+   "date": "2026-10-24",
+   "verdict": "no match: ordinary FormallySmooth lifts do not impose preservation of the integer grading; the other hits concern unrelated graded algebras or polynomial degree calculations."
+  },
+  {
+   "tool": "grep",
+   "query": "graded|equivariant|homogeneous",
+   "results": "[grep] OK 5 hit(s). ; Mathlib/RingTheory/Smooth/NoetherianDescent.lean, Mathlib/RingTheory/Smooth/NoetherianDescent.lean, Mathlib/RingTheory/Smooth/NoetherianDescent.lean, Mathlib/RingTheory/Smooth/NoetherianDescent.lean, Mathlib/RingTheory/Smooth/NoetherianDescent.lean",
+   "date": "2026-10-24",
+   "verdict": "no match: ordinary FormallySmooth lifts do not impose preservation of the integer grading; the other hits concern unrelated graded algebras or polynomial degree calculations."
+  },
+  {
+   "tool": "loogle",
+   "query": "Algebra.FormallySmooth, GradedAlgebra",
+   "results": "[loogle] OK 0 hit(s). ; ",
+   "date": "2026-10-24",
+   "verdict": "no match: ordinary FormallySmooth lifts do not impose preservation of the integer grading; the other hits concern unrelated graded algebras or polynomial degree calculations."
+  },
+  {
+   "tool": "leansearch",
+   "query": "An equivariant map from a smooth affine scheme with a multiplicative group action lifts through an equivariant square zero thickening of affine schemes",
+   "results": "[leansearch] OK 8 hit(s). ; DualNumber.lift, TrivSqZeroExt.liftEquiv_apply, TrivSqZeroExt.liftEquivOfComm_apply, TrivSqZeroExt.lift, liftOfDerivationToSquareZero, AlgebraicGeometry.Scheme.Hom.liftQuotient, Algebra.FormallySmooth.liftOfSurjective, TrivSqZeroExt.liftEquiv_symm_apply_coe",
+   "date": "2026-10-24",
+   "verdict": "no match: ordinary FormallySmooth lifts do not impose preservation of the integer grading; the other hits concern unrelated graded algebras or polynomial degree calculations."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Formal smoothness of an integer graded algebra implies formal smoothness for degree preserving homomorphisms through a square zero graded quotient",
+   "results": "[leanfinder] OK 8 hit(s). ; Algebra.FormallySmooth.of_split, Algebra.Smooth.formallySmooth, Algebra.FormallySmooth.lift, Algebra.FormallySmooth.of_pi, Algebra.FormallySmooth.exists_lift, Algebra.FormallySmooth.comp_lift, RingHom.FormallySmooth.toAlgebra, Algebra.FormallySmooth.of_restrictScalars",
+   "date": "2026-10-24",
+   "verdict": "no match: ordinary FormallySmooth lifts do not impose preservation of the integer grading; the other hits concern unrelated graded algebras or polynomial degree calculations."
+  },
+  {
+   "tool": "grep",
+   "query": "graded|equivariant|homogeneous",
+   "results": "5 hits; Mathlib/RingTheory/Smooth/NoetherianDescent.lean, Mathlib/RingTheory/Smooth/NoetherianDescent.lean, Mathlib/RingTheory/Smooth/NoetherianDescent.lean, Mathlib/RingTheory/Smooth/NoetherianDescent.lean, Mathlib/RingTheory/Smooth/NoetherianDescent.lean",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern exterior/Clifford/tensor or trivial square-zero algebras, or ordinary smoothness; none states the graded lifting theorem."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Projecting an algebra lift to its homogeneous degree components gives a graded lift modulo a square zero ideal",
+   "results": "8 hits; GradedRing.proj, GradedRing.proj_apply, GradedAlgebra.proj, GradedAlgebra.proj_apply, liftOfDerivationToSquareZero, ExteriorAlgebra.GradedAlgebra.liftι, GradedRing.projZeroRingHom_apply, TensorAlgebra.gradedAlgebra",
+   "date": "2026-10-24",
+   "verdict": "no match: GradedAlgebra.proj gives linear projections and liftOfDerivationToSquareZero gives a derivation construction, neither asserts the required graded lift."
+  },
+  {
+   "tool": "loogle",
+   "query": "Algebra.FormallySmooth, GradedAlgebra",
+   "results": "0 hits; ",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern exterior/Clifford/tensor or trivial square-zero algebras, or ordinary smoothness; none states the graded lifting theorem."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A smooth integer graded commutative algebra admits degree preserving lifts through homogeneous square zero ideals",
+   "results": "8 hits; ExteriorAlgebra.GradedAlgebra.liftι, CliffordAlgebra.GradedAlgebra.lift_ι_eq, ExteriorAlgebra.GradedAlgebra.liftι_eq, ExteriorAlgebra.gradedAlgebra, CliffordAlgebra.gradedAlgebra, ExteriorAlgebra.GradedAlgebra.ι, ExteriorAlgebra.toTrivSqZeroExt, ExteriorAlgebra.GradedAlgebra.ι_apply",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern exterior/Clifford/tensor or trivial square-zero algebras, or ordinary smoothness; none states the graded lifting theorem."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Taking the homogeneous degree zero part of a lift of a graded algebra homomorphism modulo a homogeneous square zero ideal preserves multiplication",
+   "results": "8 hits; DualNumber.lift_comp_inlHom, TrivSqZeroExt.lift_comp_inlHom, GradedTensorProduct.lift_tmul, ExteriorAlgebra.GradedAlgebra.liftι, TrivSqZeroExt.lift_apply_inl, TrivSqZeroExt.lift_comp_inrHom, TrivSqZeroExt.lift_apply_inr, CliffordAlgebra.GradedAlgebra.lift_ι_eq",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern exterior/Clifford/tensor or trivial square-zero algebras, or ordinary smoothness; none states the graded lifting theorem."
+  },
+  {
+   "tool": "grep",
+   "query": "projZeroRingHom|def proj|theorem proj",
+   "results": "5 hits; 259, 289, 290, 293, 294",
+   "date": "2026-10-24",
+   "verdict": "no match: GradedRing.projZeroRingHom (Basic.lean:259) requires a canonically ordered grading monoid and projects the target to degree zero; it does not give an integer-graded lift."
+  },
+  {
+   "tool": "grep",
+   "query": "comp_surjective|class FormallySmooth|class Smooth",
+   "results": "5 hits; 36, 67, 70, 80, 133",
+   "date": "2026-10-24",
+   "verdict": "no match: ordinary lifting exists and is already represented by lem-weil-pbc-smooth-ring-map-square-zero-lifting; this does not state the graded refinement."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-relative-dynamic-subgroups",
+  "date": "2026-10-24",
+  "group": "Q122"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Haboush symmetric-power lifting for a trivial quotient representation. Supporting representation-theoretic input: Steinberg endomorphisms detect a nonzero fixed vector. Supporting Self-duality of rho section modules at characteristic-dependent weights. Supporting input: Positive-characteristic simplicity step, using irreducibility of the Steinberg induced module rather than assuming self-duality. Numerical input to the dimension comparison: Weyl dimension of the induced module. Supporting Kempf vanishing for dominant flag line bundles. Positive-characteristic Andersen–Haboush argument: trivial pushforward of M_((p^r-1)rho), before the Serre twisting calculation. Supporting input: Lemma 2.3, second assertion, and Lemma 2.1, printed pp.153--155: H^0(u,V(lambda))=K v_lambda for p-restricted dominant lambda. With roots positive in Lie(B), V(lambda)=Gamma(M_{-w0 lambda}). Supporting input: Simple-root distributions and infinitesimal subalgebra calculus. Supporting input: pinning-compatible integral-to-geometric distribution comparison, with all positive root divided powers, before simple-root generation. Integral-root-model prerequisite before the comparison: integral Chevalley construction and a positive-root coordinate chart; integral matrix-closure construction: the big cell and its Weyl translates, before identifying the special fibre. Supporting input: Integral closure atlas, exhaustion of each special fibre: exclude extra components using the generic and special identity-component big-cell dimensions. Supporting input: Lemma 3.7 (first assertion, the Iwahori--Matsumoto maximal-boundedness statement) and its application in Proposition 4.3, second paragraph, printed pp.7-8; Cartan double-coset input used to prove the maximal-boundedness prerequisite, before the torus-powers argument. Supporting input: Theorem 4.1, proof, printed p.7: Bruhat cells and approximation by integral root-group coordinates. Agent strengthening of that approximation input to all split reductive points over a local quotient; proof plan retained in report.md, with no proof stored in this unsplit node. Supporting relative structural input: a finite open atlas by affine-space times split-torus charts, before quotient-coordinate lifting. Relative structural prerequisite: the ordered root products and multiplication open cell, before proving that Weyl translates cover. Supporting input in the repaired proof: Conrad Theorem 5.1.13, proof, first paragraph: construction of U, P and Z using Theorem 4.1.7 before any ordered root products. Supporting algebraic input: degree-preserving square-zero lifts used to prove smoothness of the dynamic fixed and attracting loci (Conrad Theorem 4.1.7(4)).",
+   "via": [
+    "lem-sfb-relative-dynamic-subgroups",
+    "lem-sfb-relative-root-product-open-cell",
+    "lem-sfb-split-reductive-local-gauss-atlas",
+    "lem-sfb-split-reductive-local-quotient-points",
+    "lem-sfb-split-reductive-dvr-cartan-decomposition",
+    "lem-sfb-split-reductive-integral-maximal-bounded",
+    "lem-sfb-quasi-reductive-special-connectedness",
+    "lem-sfb-integral-chevalley-weyl-atlas",
+    "lem-sfb-chevalley-integral-root-model",
+    "lem-sfb-borel-kostant-distribution-comparison",
+    "lem-sfb-borel-simple-root-distribution-calculus",
+    "lem-sfb-restricted-induced-infinitesimal-invariants",
+    "lem-sfb-flag-frobenius-rho-pushforward",
+    "lem-sfb-dominant-flag-line-kempf-vanishing",
+    "lem-sfb-induced-weyl-dimension-formula",
+    "lem-sfb-steinberg-induced-module-irreducible",
+    "lem-sfb-rho-section-self-duality",
+    "lem-sfb-steinberg-endomorphism-detection",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-graded-square-zero-smooth-lifting",
+  "worker": "stage1",
+  "summary": "Statement unchanged. Reused the existing affine formal-smoothness/ring-lifting equivalence for an ordinary lift and wrote out the elementary homogeneous diagonal projection argument; square-zero kills every off-diagonal product. No new nodes or Mathlib leaves. Checked zero rings, J=0, degree-zero gradings, negative degrees and arbitrary bases. No finished upstream declaration or exact Mathlib result found.",
+  "blueprint": "Inherited supporting place for det-thm-sf-ctf-stability-direct-images, proof (3), through the relative-dynamic-subgroups branch: graded infinitesimal lifting used for fixed and attracting loci in Conrad Theorem 4.1.7(4). Step 1 supplies ordinary lifting and steps 2-3 supply the grading refinement. The current latest blueprint direct-image route is retained; its unit realization is not changed. blueprint_refs.py ancestor returns None, as in the inherited from.node.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-affine-formally-smooth-iff-ring-lifting",
+    "why": "General affine scheme/ring infinitesimal-lifting dictionary; used only to obtain an ordinary lift of the given smooth algebra. This is a generic commutative algebra tool and does not replace any six-functor unit step."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-affine-formally-smooth-iff-ring-lifting"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q129-d417fcdbc",
+  "group": "Q129",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q129-d417fcdbc (reviewer sub-agent of L); spot-checked: I read all of the mathematics. The statement is byte-identical to the base (side-live, where the node was unsplit and statement-only), the stmt_deps are unchanged, and there are no new nodes and no fixes. Step 1: def-sbc-smooth-morphisms makes the smooth morphism formally smooth, and lem-weil-pbc-affine-formally-smooth-iff-ring-lifting (Stacks 02H4, checked at more-morphisms.tex l.3164; 00TI checked at algebra.tex l.37805) gives an ordinary lift f with qf=h, using S=C, N=J and J^2=0. That lemma is a generic tool outside unit sk-thm-sf-ctf-stability (sk-thm-p1), and I accept its tool_uses entry. Step 2: J homogeneous means q commutes with the projections pi_i, so the wrong-degree components of f(x) lie in J; h~ = sum over n of pi_n f on C_n is R-linear, preserves degree, satisfies qh~=h, and is unital and R-compatible because f(1) and f(r) lie in D_0. Step 3: if i+j=n+m and (i,j) is not (n,m), then i is not n and j is not m, so both factors lie in J and their product vanishes because J^2=0; this needs only cancellation in Z, and bilinearity extends it to all elements. Both elementary marks are justified. Tests: J=0, D=0, C=0 (which forces D=0), degree-0 gradings, negative degrees, and k[x,y] with degrees +1/-1 over C[eps]/eps^2. The finite-presentation hypothesis is unused but harmless. The duplicate search with rg -L over dag/nodes found only the item and its parent, and lem-weil-pbc-smooth-ring-map-square-zero-lifting is ungraded. The Mathlib searches cover three kinds of search with plausible verdicts."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.GradedSquareZeroSmoothLifting",
+  "declaration": "GradedAlgebra.exists_graded_squareZero_lift",
+  "file": "lean/Sheaf/RingTheory/GradedSquareZeroSmoothLifting.lean",
+  "statement": "theorem exists_graded_squareZero_lift {R C : Type u} {D : Type v} [CommRing R] [CommRing C] [CommRing D] [Algebra R C] [Algebra R D] (𝒞 : ℤ → Submodule R C) [GradedAlgebra 𝒞] (𝒟 : ℤ → Submodule R D) [GradedAlgebra 𝒟] [AlgebraicGeometry.Smooth (AlgebraicGeometry.Spec.map (CommRingCat.ofHom (algebraMap R C)))] [Algebra.FinitePresentation R C] (J : Ideal D) (hJ : J.IsHomogeneous 𝒟) (hJ_sq : ∀ x ∈ J, ∀ y ∈ J, x * y = 0) (h : C →ₐ[R] D ⧸ J) (hh : ∀ (n : ℤ) (x : C), x ∈ 𝒞 n → h x ∈ (𝒟 n).map (Ideal.Quotient.mkₐ R J).toLinearMap) : ∃ h' : C →ₐ[R] D, (∀ (n : ℤ) (x : C), x ∈ 𝒞 n → h' x ∈ 𝒟 n) ∧ (Ideal.Quotient.mkₐ R J).comp h' = h",
+  "branch": "newtargets-dag",
+  "by": "Q154",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-6b3c03317",
+  "group": "Q154",
+  "result": "pass",
+  "note": "Node diff vs live: only lean field added. Lean matches every clause: CommRing R; commutative R-algebras C,D; Z-gradings via GradedAlgebra on Submodule R (unique finite expansions, 1 in degree 0, multiplicative, R in degree 0); Smooth (Spec.map (algebraMap R C)) from the recorded deps def-weil-affine-spectrum and def-sbc-smooth-morphisms, correct direction; FinitePresentation (redundant but in node); J.IsHomogeneous 𝒟 (Mathlib Ideal.lean:62); elementwise square-zero; hh puts h(C_n) in q(𝒟 n), which is the quotient grading because J is homogeneous; conclusion: an AlgHom h' preserving degree with mkₐ∘h' = h, with no extra uniqueness. No Noetherian/Nontrivial/nonnegative-degree assumptions. Edge cases J=0, D=0, C=0, J=⊤, R=0, degree-0-only gradings and negative degrees all hold by the node proof (cancellation in ℤ). R and C share a universe because Spec.map requires it, which is inherent to the node's Spec phrasing (note only). rg over Sheaf/dag found no duplicate. No defs; one theorem with whole-proof sorry; docstrings carry source place, blueprint id and all three proof steps; statement verbatim; proof-only import exists live; report has Worker report and Second reading sections. No file changed, so no compile."
+ }
+}

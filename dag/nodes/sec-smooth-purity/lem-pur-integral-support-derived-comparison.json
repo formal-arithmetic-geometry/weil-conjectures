@@ -1,0 +1,131 @@
+{
+ "id": "lem-pur-integral-support-derived-comparison",
+ "kind": "statement",
+ "title": "Unique derived extension of ordinary support comparison",
+ "status": "split",
+ "statement": "In the setting of [def-pur-integral-support-comparison-data], let B be any fixed Ordinary normalized comparison record. There exists exactly one Derived record over B, with the termwise open and proper comparison maps, exact open localization equation and universal proper right-derived-unit equation prescribed by B. The Ordinary record is a parameter; this statement makes no assertion of its existence.",
+ "stmt_deps": [
+  "def-pur-integral-support-comparison-data"
+ ],
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-integral-adjunction/sk-prop-sp-integral-adjunction.proof.md",
+  "place": "Outer Hom comparisons and final unit/counit paragraph; canonical comparison specified by Zheng Constructions 4.1 and 5.15, Lemma 4.10, and the universal-unit characterization in integralExceptionalComparison_characterization."
+ },
+ "proof": [
+  {
+   "text": "For the given Ordinary record B, apply B.openExtension.hom and B.properPush.inv termwise. Their naturality with respect to differentials makes chain maps with exactly the components specified in Derived.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Combine the exact-coordinate and open-extension localization factorizations and the termwise open comparison. Fully faithful precomposition by Q lifts the resulting isomorphism uniquely to derivedOpen and yields derivedOpen_factors.",
+   "uses": [
+    "def-pur-adic-exceptional-system-realization",
+    "def-pur-semilinear-compact-support-coefficient-transport"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The exact coordinate equivalences preserve K-injectives and transport universal right-derived pairs. Compare the two resulting right-derived pairs using the inverse ordinary properPush comparison. Universal uniqueness gives derivedProper and exactly the specified derivedProper_unit equation.",
+   "uses": [
+    "def-pur-adic-exceptional-system-realization",
+    "lem-pur-coefficient-system-derived-comparison",
+    "def-pur-semilinear-compact-support-coefficient-transport"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Chain-map extensionality fixes openComplex and properComplex. Localization extensionality fixes derivedOpen; right-derived extensionality against its universal unit fixes derivedProper. Proof irrelevance identifies the remaining fields and the Derived records.",
+   "uses": [
+    "def-pur-integral-support-comparison-data"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pur-adic-exceptional-system-realization",
+  "def-pur-semilinear-compact-support-coefficient-transport",
+  "lem-pur-coefficient-system-derived-comparison",
+  "def-pur-integral-support-comparison-data"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-integral-adjunction/sk-prop-sp-integral-adjunction.proof.md",
+  "place": "Outer Hom comparisons and final unit/counit paragraph; canonical comparison specified by Zheng Constructions 4.1 and 5.15, Lemma 4.10, and the universal-unit characterization in integralExceptionalComparison_characterization."
+ },
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Exact equivalences transport adjunctions and uniquely identify left adjoints from an isomorphism of right adjoints",
+   "results": "Adjunction.leftAdjointUniq_trans, leftAdjointUniq_trans_assoc; rightAdjointUniq and unit normalization lemmas.",
+   "date": "2026-10-25",
+   "verdict": "General adjoint uniqueness tools, not the section-normalized geometric comparison."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Uniqueness of natural isomorphisms of right derived functors determined by the universal unit",
+   "results": "CategoryTheory.Functor.rightDerivedUnique; rightDerived_ext; rightDerivedNatIso; isRightDerivedFunctor_iff_of_iso; rightDerivedNatTrans_fac.",
+   "date": "2026-10-25",
+   "verdict": "No complete ordinary or derived geometric package; use universal-derived APIs in the derived step."
+  },
+  {
+   "tool": "grep",
+   "query": "rightDerived_ext|natTrans_ext",
+   "results": "Mathlib/CategoryTheory/Functor/Derived/RightDerived.lean:94; Mathlib/CategoryTheory/Localization/Predicate.lean:286. Local source search: no separate owner of Ordinary or Derived.",
+   "date": "2026-10-25",
+   "verdict": "Extensionality tools exist; the geometric section and unit comparison is not a Mathlib leaf."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.PurIntegralSupportComparison",
+  "date": "2026-10-25",
+  "group": "Q4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "Outer Hom display, comparison of compact support through strict quotient coordinates: Unique derived extension of ordinary support comparison",
+   "via": [
+    "def-pur-integral-support-coordinate-comparison",
+    "lem-pur-integral-reconstructed-representing-pair",
+    "nt-target-smooth-purity-qbar"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-thm-purity-transport",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.PurIntegralSupportDerivedComparison",
+  "file": "lean/Sheaf/Paper/PurIntegralSupportDerivedComparison.lean",
+  "declaration": "WeilConjectures.PurIntegralSupportComparison.derived_existsUnique",
+  "statement": "theorem derived_existsUnique (B : Ordinary l E S G H D) :\n    ∃! R : Derived l E S G H D B, True",
+  "branch": "sheaf-dag",
+  "by": "Q4",
+  "date": "2026-10-25"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-e1a67",
+  "group": "Q4",
+  "result": "pass",
+  "landing": "20261025T101306-L-3680017",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-e1a67",
+  "group": "Q4",
+  "result": "pass",
+  "landing": "20261025T101306-L-3680017",
+  "kind": "interface",
+  "note": "independent cc review: published PurIntegralSupportComparison records vs delivered Data module (byte-identical but for blueprint tags); new ordinary/derived ∃! statements vs their nodes and the published normalized_existsUnique; item node vs sheaf-dag (only lean/proof fields); importer PurIntegralRepresentingPair compiled on delivered modules"
+ }
+}

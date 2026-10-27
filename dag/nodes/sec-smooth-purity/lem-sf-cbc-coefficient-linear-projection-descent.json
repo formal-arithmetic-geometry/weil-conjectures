@@ -1,0 +1,327 @@
+{
+  "id": "lem-sf-cbc-coefficient-linear-projection-descent",
+  "kind": "statement",
+  "title": "Coefficient-linear derived projection from a specified ordinary slice comparison",
+  "statement": "Let $\\mathcal C$ be a small Grothendieck site, $R$ a sheaf of commutative rings, $V\\in\\mathcal C$, and $R\\to S$ a unital map of commutative ring sheaves. Use the slice rings $R_V=R|_V$, $S_V=S|_V$, module sheaves, sheaf tensor, and ordinary unbounded derived categories with localizations $Q$ [def-pur-localized-ringed-site, def-weil-sheaf-of-modules-category, def-pur-sheaf-tensor-product, def-weil-abstract-derived-category]. Let $j_{R!},j_{S!}$ be the exact slice extensions [lem-pur-site-restriction-module-adjunction-exact]. Use derived extension of scalars as pullback for the identity underlying topos, with its canonical K-flat computation counits [lem-weil-pbc-ringed-topoi-derived-pullback], and exact scalar restriction [def-pc-sheaf-restrict-scalars, lem-weil-pbc-restriction-derived-products]. Suppose given natural isomorphisms\n$$\\kappa_N:\\operatorname{Res}j_{S!}N\\xrightarrow{\\sim}j_{R!}\\operatorname{Res}N,\\qquad \\eta_M:j_{R!}M\\otimes_RS\\xrightarrow{\\sim}j_{S!}(M\\otimes_{R_V}S_V),$$\nwith $\\eta_M$ $S$-linear and $\\kappa$ the identity on the direct-sum extension generators [def-weil-extension-by-zero-presheaf]. Write $r_P$ for the underlying $R$-linear cochain isomorphism obtained by applying $\\kappa\\eta$ to each term of a complex $P$.\nThere is a unique natural $S$-linear derived isomorphism\n$$\\beta_K:(j_{R!}K)\\otimes_R^LS\\xrightarrow{\\sim}j_{S!}(K\\otimes_{R_V}^LS_V),\\qquad K\\in D(R_V),$$\nwhose value on every flat-term K-flat complex $P$ [def-pc-kflat-complex, def-pc-flat-sheaf-modules] is localization of the degreewise $\\eta_P$ conjugated by the specified scalar-extension counits and exact-extension comparisons. Its scalar restriction, followed by derived $\\kappa$, is precisely the unique natural $R$-linear comparison normalized by $Q(r_P)$ and the one-sided tensor comparisons [lem-trf-site-one-sided-tensor-normalization]. In particular any natural $R$-linear comparison with that same representative equation equals the scalar restriction of $\\beta$; this applies to evaluation of a derived strict-tower comparison whenever its computation comparisons have the indicated normalization. The statement holds without flatness of $R\\to S$, boundedness or completeness.",
+  "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0GL1, lemma-j-shriek-and-tensor; Tag 06YU, definition-derived-tor; agent coefficient-linear identity-topos pullback and normalized scalar-restriction refinement, returned proof Step 8."
+  },
+  "stmt_deps": [
+    "def-weil-sheaf-of-modules-category",
+    "def-weil-abstract-derived-category",
+    "def-pc-kflat-complex",
+    "def-pc-flat-sheaf-modules",
+    "def-pc-tensor-complex-sheaves",
+    "def-pur-localized-ringed-site",
+    "def-pur-sheaf-tensor-product",
+    "lem-pur-site-restriction-module-adjunction-exact",
+    "lem-weil-pbc-ringed-topoi-derived-pullback",
+    "def-pc-sheaf-restrict-scalars",
+    "lem-weil-pbc-restriction-derived-products",
+    "def-weil-extension-by-zero-presheaf",
+    "lem-trf-site-one-sided-tensor-normalization",
+    "def-sf-localized-strict-tensor-comparison-data",
+    "def-sfb-derived-change-of-rings-cochain-model"
+  ],
+  "proof": [
+    {
+      "text": "Work in homotopy categories and put $\\mathcal P=\\mathcal P_{R_V}$, the full subcategory of flat-term K-flat complexes. By [lem-weil-pbc-site-derived-tensor-descent] its localization at quasi-isomorphisms is equivalent to $D(R_V)$. Write $J_R,J_S$ for the derived exact extensions and $E,E_V$ for the specified derived changes of rings on the ambient and slice sites. Exactness in [lem-pur-site-restriction-module-adjunction-exact] and [lem-weil-pbc-exact-functor-derived-factorization] gives natural comparisons $\\phi^R_C:J_RQ_{R_V}C\\cong Q_Rj_{R!}C$ and $\\phi^S_D:J_SQ_{S_V}D\\cong Q_Sj_{S!}D$ for arbitrary complexes. By [lem-cbc-ringed-open-flat-resolution], $j_{R!}P$ is K-flat with flat terms for every $P\\in\\mathcal P$. Thus [lem-weil-pbc-ringed-topoi-derived-pullback] makes both $\\epsilon_{j_{R!}P}$ and $\\epsilon^V_P$ invertible. All four sites here are the original small site or its small slice; every coefficient category is the ordinary module-sheaf category.",
+      "uses": [
+        "lem-weil-pbc-site-derived-tensor-descent",
+        "lem-pur-site-restriction-module-adjunction-exact",
+        "lem-weil-pbc-exact-functor-derived-factorization",
+        "lem-cbc-ringed-open-flat-resolution",
+        "lem-weil-pbc-ringed-topoi-derived-pullback"
+      ],
+      "elementary": false,
+      "source": {
+        "document": "literature/stacks-project/sites-cohomology.tex",
+        "place": "Tags 06YS (lemma-K-flat-resolution), 06YY (lemma-derived-base-change), 0GL1 (lemma-j-shriek-and-tensor); exact localization: derived.tex Tag 015F"
+      }
+    },
+    {
+      "text": "Apply the given natural $S$-linear $\\eta$ degreewise to $P$. It gives a chain isomorphism $h_P:j_{R!}P\\otimes_RS\\cong j_{S!}(P\\otimes_{R_V}S_V)$. Indeed the differential square is exactly naturality of $\\eta$ for $d^i:P^i\\to P^{i+1}$. For a chain map $f:P\\to P'$ the same naturality gives $h_{P'}(j_{R!}f\\otimes1)=j_{S!}(f\\otimes1)h_P$. This equation also holds for a chain homotopy, degree by degree: the two functors are additive, and applying them to $f-g=dh+hd$ gives that same identity after applying either functor. Hence $Q_Sh_P$ is natural on the full homotopy subcategory $\\mathcal P$. This is a use of the specified $\\eta$, not a replacement by an unspecified projection isomorphism.",
+      "uses": [],
+      "elementary": true,
+      "source": {
+        "document": "literature/stacks-project/sites-cohomology.tex",
+        "place": "Degreewise application of the supplied ordinary comparison; elementary naturality calculation"
+      }
+    },
+    {
+      "text": "Set $F=EJ_R$ and $G=J_SE_V$. For $P\\in\\mathcal P$ define the following isomorphisms, with composition written right to left:\n$$a_P=\\epsilon_{j_{R!}P}\\,E(\\phi^R_P):F(Q_{R_V}P)\\longrightarrow Q_S(j_{R!}P\\otimes_RS),$$\n$$b_P=\\phi^S_{P\\otimes S_V}\\,J_S(\\epsilon^V_P):G(Q_{R_V}P)\\longrightarrow Q_Sj_{S!}(P\\otimes_{R_V}S_V).$$\nHere the counit $\\epsilon$ of [lem-weil-pbc-ringed-topoi-derived-pullback] has target $Q_S(S\\otimes_R j_{R!}P)$, and its target is written $Q_S(j_{R!}P\\otimes_RS)$ through the degreewise symmetry of the sheaf tensor with a degree-zero factor (no sign), the order in which $\\eta$ is given; likewise on the slice. Their naturality on $\\mathcal P$ follows from the natural transformations in [lem-weil-pbc-ringed-topoi-derived-pullback] and [lem-weil-pbc-exact-functor-derived-factorization]. Consequently $t_P=b_P^{-1}Q_S(h_P)a_P$ is a natural isomorphism between the restrictions of $F$ and $G$ to $\\mathcal P$. These are morphisms in $D(S)$ throughout; in particular the coefficient action is retained before any scalar restriction.",
+      "uses": [
+        "lem-weil-pbc-ringed-topoi-derived-pullback",
+        "lem-weil-pbc-exact-functor-derived-factorization"
+      ],
+      "elementary": false,
+      "source": {
+        "document": "literature/stacks-project/sites-cohomology.tex",
+        "place": "Tag 06YY (lemma-derived-base-change), its K-flat computation; derived.tex Tag 015F, exact-functor localization"
+      }
+    },
+    {
+      "text": "Use the equivalence $W^{-1}\\mathcal P\\simeq D(R_V)$ of [lem-weil-pbc-site-derived-tensor-descent] and the transformation part of [lem-weil-pbc-localization-universal-property]. The functors $FQ|_{\\mathcal P}$ and $GQ|_{\\mathcal P}$ invert $W$ because $Q$ does. Their natural isomorphism $t$ therefore extends uniquely to $\\beta:F\\cong G$ with $\\beta_{QP}=t_P$. To see the independence and naturality explicitly, naturality for $w:P\\to P'$ in $W$ also gives naturality for $(Qw)^{-1}$ by multiplying its naturality equation by the two inverse isomorphisms; composition gives it for every localized morphism. Transport across the displayed equivalence gives naturality for every morphism of $D(R_V)$. The same procedure applied to $t^{-1}$ gives the inverse of $\\beta$. Any competing normalized transformation restricts to $t$ and hence equals $\\beta$.",
+      "uses": [
+        "lem-weil-pbc-site-derived-tensor-descent",
+        "lem-weil-pbc-localization-universal-property"
+      ],
+      "elementary": false,
+      "source": {
+        "document": "literature/stacks-project/sites-cohomology.tex",
+        "place": "Tags 06YS, 0G7D, 06YU: resolving localization; categories.tex Tags 04VG and 04VK: localization universal property"
+      }
+    },
+    {
+      "text": "Write $U:D(S)\\to D(R)$ and $U_V:D(S_V)\\to D(R_V)$ for exact scalar restriction, using [lem-weil-pbc-restriction-derived-products]. Applying [lem-weil-pbc-exact-functor-derived-factorization] and [lem-weil-pbc-localization-universal-property] to the given $\\kappa$ gives a natural isomorphism $k:UJ_S\\cong J_RU_V$ whose representative is $Q_R\\kappa$. Let $A(K)=J_RK\\otimes_R^{\\mathbf L}S[0]$ and $B(K)=J_R(K\\otimes_{R_V}^{\\mathbf L}S_V[0])$, with rings on the tensor right regarded as restricted modules. The right-sided comparisons of [lem-trf-site-one-sided-tensor-normalization] give\n$$A_P:A(QP)\\cong Q_R(j_{R!}P\\otimes_RS),\\qquad B_P:B(QP)\\cong Q_Rj_{R!}(P\\otimes_{R_V}S_V).$$\nFor $A_P$ insert $\\phi^R_P$ then the comparison with K-flat left factor $j_{R!}P$; for $B_P$ apply $J_R$ to the comparison with K-flat left factor $P$ then insert $\\phi^R_{P\\otimes S_V}$. They are natural on $\\mathcal P$ even though $S[0]$ and $S_V[0]$ can be nonflat. The underlying ordinary scalar-extension tensors are the same tensors in these formulas, by [lem-cbc-extension-tensor-comparison-independent] (using the symmetry to put $S$ on the right).",
+      "uses": [
+        "lem-weil-pbc-restriction-derived-products",
+        "lem-weil-pbc-exact-functor-derived-factorization",
+        "lem-weil-pbc-localization-universal-property",
+        "lem-trf-site-one-sided-tensor-normalization",
+        "lem-cbc-extension-tensor-comparison-independent"
+      ],
+      "elementary": false,
+      "source": {
+        "document": "literature/stacks-project/sites-cohomology.tex",
+        "place": "Tag 06YU (definition-derived-tor and preceding construction), Tag 06YY (lemma-derived-base-change); exact scalar restriction and ordinary scalar tensor identification"
+      }
+    },
+    {
+      "text": "On $\\mathcal P$ the identity of the preceding ordinary tensor models defines isomorphisms $x_P:UF(QP)\\to A(QP)$ by $A_P^{-1}U(a_P)$ and $y_P:J_RU_VE_V(QP)\\to B(QP)$ by\n$$B_P^{-1}Q_R(\\kappa_{P\\otimes S_V})\\,U(b_P)\\,k_{E_V(QP)}^{-1}.$$\nThe exact-restriction comparisons are inserted in these formulas. Each is natural, so [lem-weil-pbc-site-derived-tensor-descent] and [lem-weil-pbc-localization-universal-property] extend them uniquely to natural isomorphisms $x:UF\\cong A$ and $y:J_RU_VE_V\\cong B$. These are precisely the scalar-to-tensor identifications normalized by the specified counits and the one-sided comparisons. For $y$ this is not built in by the factors $\\kappa$ and $k^{-1}$: naturality of $k$ along $\\epsilon^V_P:E_V(QP)\\cong Q_{S_V}(P\\otimes S_V)$ and the representative $Q_R\\kappa$ of $k$ (Step 5) give $Q_R(\\kappa_{P\\otimes S_V})U(b_P)k^{-1}_{E_V(QP)}=\\phi^R_{P\\otimes S_V}J_R(U_V\\epsilon^V_P)$, the exact-restriction comparisons inserted, so $y$ is $J_R$ of the slice identification $U_VE_V\\cong-\\otimes^{\\mathbf L}_{R_V}S_V[0]$ defined like $x$; hence $\\rho$ below is not normalized by its own definition. Substitute the formulas for $x,y$ and $\\beta_{QP}=b_P^{-1}Q_Sh_Pa_P$ in $\\rho=y\\,k_{E_V}\\,U(\\beta)\\,x^{-1}$. Adjacent inverse factors cancel, leaving\n$$B_P\\,\\rho_{QP}=Q_R(\\kappa_{P\\otimes S_V}h_P)A_P=Q_R(r_P)A_P.$$\nThe final equality is the definition of $r_P$ in the item. This checks the claimed representative equation without using faithfulness of derived scalar restriction.",
+      "uses": [
+        "lem-weil-pbc-site-derived-tensor-descent",
+        "lem-weil-pbc-localization-universal-property"
+      ],
+      "elementary": false,
+      "source": {
+        "document": "literature/stacks-project/sites-cohomology.tex",
+        "place": "Tags 06YU and 06YY: representative-normalized scalar restriction; categories.tex Tags 04VG and 04VK: natural transformation descent"
+      }
+    },
+    {
+      "text": "If $\\rho':A\\to B$ is any natural $R$-linear comparison with $B_P\\rho'_{QP}=Q_R(r_P)A_P$, Step 6 gives $\\rho'_{QP}=\\rho_{QP}$ for all $P\\in\\mathcal P$. The same resolving localization and its fully faithful restriction on transformations [lem-weil-pbc-site-derived-tensor-descent, lem-weil-pbc-localization-universal-property] imply $\\rho'=\\rho$. In particular, once a strict-tower evaluation has the stated source and target computations and representative equation, this uniqueness applies to it directly. No statement about evaluation computing a derived functor is assumed without that normalization hypothesis. The argument used only flatness of the chosen resolving terms, never flatness of $R\\to S$, boundedness of a complex, or completion.",
+      "uses": [
+        "lem-weil-pbc-site-derived-tensor-descent",
+        "lem-weil-pbc-localization-universal-property"
+      ],
+      "elementary": false,
+      "source": {
+        "document": "literature/stacks-project/sites-cohomology.tex",
+        "place": "Resolving localization in Tags 06YS, 0G7D, 06YU; uniqueness of transformations in categories.tex Tags 04VG and 04VK"
+      }
+    }
+  ],
+  "proof_deps": [
+    "lem-cbc-extension-tensor-comparison-independent",
+    "lem-cbc-ringed-open-flat-resolution",
+    "lem-pur-site-restriction-module-adjunction-exact",
+    "lem-trf-site-one-sided-tensor-normalization",
+    "lem-weil-pbc-exact-functor-derived-factorization",
+    "lem-weil-pbc-localization-universal-property",
+    "lem-weil-pbc-restriction-derived-products",
+    "lem-weil-pbc-ringed-topoi-derived-pullback",
+    "lem-weil-pbc-site-derived-tensor-descent"
+  ],
+  "proof_origin": {
+    "by": "agent",
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 0GL1, 06YU, 06YY; coefficient-linear refinement with the supplied ordinary eta and kappa, realizing fix-lem-exchanges Steps 1–2"
+  },
+  "mathlib_searches": [
+    {
+      "tool": "grep",
+      "query": "(KFlat|K.flat).*(NatIso|descen|linear)|(descen|linear).*(KFlat|K.flat)",
+      "results": "No hits",
+      "date": "2026-10-22",
+      "verdict": "no match: generic localization lifts and ordinary scalar restriction omit the sheaf-ring derived change-of-rings computation and the normalized scalar-restriction identification"
+    },
+    {
+      "tool": "loogle",
+      "query": "\"Localization\", \"NatIso\"",
+      "results": "CategoryTheory.Localization.liftNatIso; CategoryTheory.Localization.liftNatIso_hom; CategoryTheory.Localization.liftNatIso_inv; CategoryTheory.Localization.lift₂NatIso; CategoryTheory.Localization.lift₂NatIso_hom; CategoryTheory.Localization.lift₂NatIso_inv; CategoryTheory.Localization.lift₃NatIso; CategoryTheory.Localization.lift₃NatIso_hom",
+      "date": "2026-10-22",
+      "verdict": "no match: generic localization lifts and ordinary scalar restriction omit the sheaf-ring derived change-of-rings computation and the normalized scalar-restriction identification"
+    },
+    {
+      "tool": "leansearch",
+      "query": "Natural comparisons on flat K-flat models descend uniquely to derived functors and retain coefficient-linear evaluation",
+      "results": "CategoryTheory.Functor.leftDerivedUnique; CategoryTheory.Functor.rightDerivedUnique; CategoryTheory.Functor.mapDerivedCategorySingleFunctor; CategoryTheory.Functor.rightDerivedDesc; CategoryTheory.LocalizerMorphism.rightDerivedFunctorComparison.congr_simp; CategoryTheory.Functor.instLinearDerivedCategoryMapDerivedCategory; CategoryTheory.LocalizerMorphism.rightDerivedFunctorComparison_fac_app; CategoryTheory.PreservesFiniteLimitsOfFlat.uniq",
+      "date": "2026-10-22",
+      "verdict": "no match: generic localization lifts and ordinary scalar restriction omit the sheaf-ring derived change-of-rings computation and the normalized scalar-restriction identification"
+    },
+    {
+      "tool": "grep",
+      "query": "(derived|Derived).*(extendScalars|restrictScalars)|(extendScalars|restrictScalars).*(derived|Derived)",
+      "results": "No hits",
+      "date": "2026-10-22",
+      "verdict": "no match: generic localization lifts and ordinary scalar restriction omit the sheaf-ring derived change-of-rings computation and the normalized scalar-restriction identification"
+    },
+    {
+      "tool": "leansearch",
+      "query": "A coefficient-linear ordinary slice projection comparison induces the normalized derived projection comparison",
+      "results": "service unavailable: {\"error\":\"Rate limit exceeded: 60 per 1 minute\"}",
+      "date": "2026-10-22",
+      "verdict": "unavailable"
+    },
+    {
+      "tool": "loogle",
+      "query": "\"SheafOfModules\", \"restrictScalars\"",
+      "results": "PresheafOfModules.instHasColimitModuleCatCarrierObjOppositeRingCatCompEvaluationRestrictScalarsHomMap; PresheafOfModules.instHasLimitModuleCatCarrierObjOppositeRingCatCompEvaluationRestrictScalarsHomMap; PresheafOfModules.instFullRestrictScalarsIdFunctorOppositeRingCat; PresheafOfModules.restrictScalarsObj; PresheafOfModules.restrictScalars; PresheafOfModules.instFaithfulRestrictScalars; PresheafOfModules.instAdditiveRestrictScalars; PresheafOfModules.restrictScalars_obj",
+      "date": "2026-10-22",
+      "verdict": "no match: generic localization lifts and ordinary scalar restriction omit the sheaf-ring derived change-of-rings computation and the normalized scalar-restriction identification"
+    },
+    {
+      "tool": "leanfinder",
+      "query": "Descent of a natural chain isomorphism on K-flat resolving complexes to derived strict towers with coefficient linear evaluation",
+      "results": "CategoryTheory.Abelian.LeftResolution.chainComplexXIso; CategoryTheory.Abelian.LeftResolution.chainComplexMap_f_succ_succ; CategoryTheory.Abelian.LeftResolution.map_chainComplex_d; CategoryTheory.ProjectiveResolution.fromLeftDerivedZero_eq; CategoryTheory.ProjectiveResolution.isoLeftDerivedObj_hom_naturality; CategoryTheory.InjectiveResolution.isoRightDerivedObj_hom_naturality; CategoryTheory.Abelian.LeftResolution.map_chainComplex_d_1_0; CategoryTheory.InjectiveResolution.isoRightDerivedObj_hom_naturality_assoc",
+      "date": "2026-10-22",
+      "verdict": "no match: generic localization lifts and ordinary scalar restriction omit the sheaf-ring derived change-of-rings computation and the normalized scalar-restriction identification"
+    },
+    {
+      "tool": "leanfinder",
+      "query": "Tensor projection formula for extension by zero after derived change of rings with coefficient linearity and canonical K-flat normalization",
+      "results": "Finsupp.linearCombination_one_tmul; Algebra.Presentation.tensorModelOfHasCoeffsHom_tmul; Algebra.Presentation.tensorModelOfHasCoeffsEquiv_tmul; Algebra.Presentation.tensorModelOfHasCoeffsInv_aeval_val; TensorProduct.exists_finsupp_right; TensorProduct.exists_finsupp_left; TensorProduct.finsuppScalarRight_apply; Module.Presentation.tensor_var",
+      "date": "2026-10-22",
+      "verdict": "no match: generic localization lifts and ordinary scalar restriction omit the sheaf-ring derived change-of-rings computation and the normalized scalar-restriction identification"
+    },
+    {
+      "tool": "leanfinder",
+      "query": "Derived extension of scalars commutes with extension by zero on a slice site with normalized coefficient linear comparison",
+      "results": "CategoryTheory.Functor.mapExtLinearMap_coe; CategoryTheory.Functor.mapExtLinearMap_apply; CategoryTheory.Functor.mapExactFunctor_smul; CategoryTheory.Abelian.Ext.singleFunctor_map_comp_hom; CategoryTheory.Functor.mapExtLinearMap; CategoryTheory.Abelian.Ext.smul_eq_comp_mk₀; CategoryTheory.Abelian.Ext.precompOfLinear; CategoryTheory.Functor.instLinearDerivedCategoryMapDerivedCategory",
+      "date": "2026-10-22",
+      "verdict": "no match: generic localization and ordinary scalar-extension results do not state the coefficient-linear derived slice comparison with both normalizations"
+    },
+    {
+      "tool": "grep",
+      "query": "(derived|Derived).*(extendScalars|restrictScalars)|(extendScalars|restrictScalars).*(derived|Derived)",
+      "results": "No hits",
+      "date": "2026-10-22",
+      "verdict": "no match: generic localization and ordinary scalar-extension results do not state the coefficient-linear derived slice comparison with both normalizations"
+    },
+    {
+      "tool": "leansearch",
+      "query": "Derived scalar extension commutes with extension by zero of module sheaves on a slice site",
+      "results": "ModuleCat.ExtendScalars.obj'; TrivSqZeroExt.isScalarTower; ModuleCat.extendRestrictScalarsAdj; LinearEquiv.extendScalarsOfIsLocalizationEquiv; PresheafOfModules.Sheafify.map_smul_eq; PresheafOfModules.Sheafify.SMulCandidate.h; comonadicExtendScalars; PresheafOfModules.Sheafify.SMulCandidate.ctorIdx",
+      "date": "2026-10-22",
+      "verdict": "no match: generic localization and ordinary scalar-extension results do not state the coefficient-linear derived slice comparison with both normalizations"
+    },
+    {
+      "tool": "loogle",
+      "query": "\"Localization\", \"liftNatIso\"",
+      "results": "CategoryTheory.Localization.liftNatIso; CategoryTheory.Localization.liftNatIso_hom; CategoryTheory.Localization.liftNatIso_inv",
+      "date": "2026-10-22",
+      "verdict": "no match: generic localization and ordinary scalar-extension results do not state the coefficient-linear derived slice comparison with both normalizations"
+    },
+    {
+      "tool": "leanfinder",
+      "query": "Natural isomorphisms on flat K-flat sheaf complexes descend uniquely through localization to the unbounded derived category",
+      "results": "CategoryTheory.Functor.instLiftingCochainComplexIntDerivedCategoryQQuasiIsoUpCompHomologicalComplexMapHomologicalComplexMapDerivedCategory; CategoryTheory.Functor.mapDerivedCategoryFactorsh; CategoryTheory.Functor.mapDerivedCategoryFactors; DerivedCategory.instIsLocalizationCochainComplexIntQQuasiIsoUp; DerivedCategory.singleFunctorIsoCompQ; CategoryTheory.Functor.mapHomologicalComplexUpToQuasiIsoFactorsh_hom_app; CategoryTheory.Functor.mapDerivedCategoryFactorsh_hom_app; DerivedCategory.singleFunctorsPostcompQIso",
+      "date": "2026-10-22",
+      "verdict": "no match: generic localization and ordinary scalar-extension results do not state the coefficient-linear derived slice comparison with both normalizations"
+    }
+  ],
+  "mathlib_match": null,
+  "status": "split",
+  "created": {
+    "by": "worker",
+    "item": "lem-sf-cbc-localized-strict-tensor-descent",
+    "date": "2026-10-22",
+    "group": "NG"
+  },
+  "chapter": "sec-smooth-purity",
+  "unit": "sk-prop-sf-cbc",
+  "blueprint": {
+    "from": {
+      "node": "fix-lem-exchanges",
+      "place": "Proof Steps 1–2: extension-by-zero identification and coefficient naturality; localized strict-tensor refinement, returned descent proof Steps 8",
+      "via": [
+        "lem-sf-cbc-localized-strict-tensor-descent",
+        "lem-sf-cbc-extension-zero-completion"
+      ]
+    },
+    "same_as": [],
+    "is": null
+  },
+  "split_report": {
+    "date": "2026-10-22",
+    "item": "lem-sf-cbc-coefficient-linear-projection-descent",
+    "worker": "stage1",
+    "summary": "Retained the statement and supplied eta/kappa; constructed the S-coefficient comparison by resolving localization, and computed its scalar restriction via an explicit cancellation equation. Reused all needed existing nodes; no new nodes.",
+    "blueprint": "fix-lem-exchanges Proof Steps 1–2: extension-by-zero identification and coefficient naturality, refined at the coefficient-linear descent step of lem-sf-cbc-localized-strict-tensor-descent.",
+    "tool_uses": [
+      {
+        "node": "lem-pur-site-restriction-module-adjunction-exact",
+        "why": "Exact slice extension on any ringed site supplies the underlying j! functors used by the unit."
+      },
+      {
+        "node": "lem-trf-site-one-sided-tensor-normalization",
+        "why": "Generic normalized one-sided tensor calculation allows a nonflat scalar sheaf in degree zero."
+      },
+      {
+        "node": "lem-weil-pbc-exact-functor-derived-factorization",
+        "why": "Generic exact-functor localization supplies the specified representative comparisons for j! and restriction."
+      },
+      {
+        "node": "lem-weil-pbc-localization-universal-property",
+        "why": "Generic localization of natural transformations supplies extension and uniqueness, without changing the unit route."
+      },
+      {
+        "node": "lem-weil-pbc-restriction-derived-products",
+        "why": "Exact restriction along a map of arbitrary ring sheaves identifies its derived functor with termwise restriction; no product assertion is used."
+      },
+      {
+        "node": "lem-weil-pbc-ringed-topoi-derived-pullback",
+        "why": "Generic ringed-topos pullback computation at the identity topos supplies the S-valued scalar-extension counits."
+      },
+      {
+        "node": "lem-weil-pbc-site-derived-tensor-descent",
+        "why": "Flat-term K-flat localization equivalence for arbitrary small ringed sites supplies descent and uniqueness; the unit has no replacement localization theorem."
+      }
+    ]
+  },
+  "tool_uses": [
+    "lem-pur-site-restriction-module-adjunction-exact",
+    "lem-trf-site-one-sided-tensor-normalization",
+    "lem-weil-pbc-exact-functor-derived-factorization",
+    "lem-weil-pbc-localization-universal-property",
+    "lem-weil-pbc-restriction-derived-products",
+    "lem-weil-pbc-ringed-topoi-derived-pullback",
+    "lem-weil-pbc-site-derived-tensor-descent"
+  ],
+  "reviewed": {
+    "date": "2026-10-22",
+    "by": "L",
+    "reviewer": "NT-cc-NZ-538db2816",
+    "group": "NZ",
+    "result": "pass",
+    "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NZ-538db2816 (reviewer sub-agent of L); spot-checked: Item-only delivery (0 new nodes). Statement and stmt_deps are identical to side-live, so nothing is weakened; the item is still unsplit live and has no repair note. I read all 9 cited statements: derived-tensor-descent, slice-adjunction-exact, exact-functor-factorization, ringed-open-flat-resolution, ringed-topoi-derived-pullback, localization-universal-property (2)/(3), restriction-derived-products, one-sided-tensor-normalization, extension-tensor-comparison-independent. Each supports the clause its step uses. Sources checked: Stacks 0GL1 (sites-cohomology l.4578) and 06YY (l.3585); no SGA. I checked the orientations of a_P, b_P, t_P and the cancellation in Step 6, B_P rho_QP = Q(kappa h_P) A_P. Small cases: point site with terminal V, R=S, S=0, Z->Z/2 with [Z-2->Z]. No duplicate found (slice-tensor-generator-coherence and ringed-slice-extension-tensor are ordinary, not derived). The parent localized-strict-tensor-descent Step 5 uses exactly this clause, and there is no cycle. The generic tool_uses are accepted. Two justification faults are fixed in fixes/dag/nodes/sec-smooth-purity/<id>.json. (1) Step 3: the counit target S (x)_R j!P is silently written j!P (x)_R S; added the degree-zero symmetry, which has no sign. (2) Step 6: y_P is defined with Q_R kappa and k^{-1} inside it, so the normalization looked true by definition. Added that naturality of k along eps^V_P and the representative Q_R kappa of k give y = J_R of the slice scalar-to-tensor identification. Statement, uses and proof_deps are unchanged.; 1 file(s) fixed by the reviewer"
+  },
+  "lean": {
+    "module": "Sheaf.Algebra.Homology.CoefficientLinearProjectionDescent",
+    "declaration": "SheafOfModules.CoefficientProjection.coefficient_linear_projection_descent",
+    "declarations": [
+      "SheafOfModules.CoefficientProjection.LinearNormalized",
+      "SheafOfModules.CoefficientProjection.underlyingComparison",
+      "SheafOfModules.CoefficientProjection.ordinaryUnderlying",
+      "SheafOfModules.CoefficientProjection.UnderlyingNormalized",
+      "SheafOfModules.CoefficientProjection.coefficient_linear_projection_descent"
+    ],
+    "file": "lean/Sheaf/Algebra/Homology/CoefficientLinearProjectionDescent.lean",
+    "statement": "theorem coefficient_linear_projection_descent (S : Under R) (e : ScalarModel.{c, v, r} R S) (eV : ScalarModel.{max c v, v, r} (R.over V) ((sliceAlgebras.{c, v, r} R V).obj S)) (θ : scalars.{max c v, v, r} (R.over V) ((sliceAlgebras.{c, v, r} R V).obj S) ⋙ localizedSystemExtension.{c, v, r} R V ≅ localizedSystemExtension.{c, v, r} S.right V ⋙ scalars.{c, v, r} R S) (hθ : ScalarExtensionNormalized.{c, v, r} R V S θ) (η : localizedSystemExtension.{c, v, r} R V ⋙ e.E ≅ eV.E ⋙ localizedSystemExtension.{c, v, r} S.right V) (A : D.{c, v, r} R ⥤ D.{c, v, r} R) (AV : D.{max c v, v, r} (R.over V) ⥤ D.{max c v, v, r} (R.over V)) (a : DerivedCategory.Q ⋙ A ⟶ (e.E ⋙ scalars.{c, v, r} R S).mapHomologicalComplex (.up ℤ) ⋙ DerivedCategory.Q) (aV : DerivedCategory.Q ⋙ AV ⟶ (eV.E ⋙ scalars.{max c v, v, r} (R.over V) ((sliceAlgebras.{c, v, r} R V).obj S)).mapHomologicalComplex (.up ℤ) ⋙ DerivedCategory.Q) (ha : A.IsLeftDerivedFunctor a (HomologicalComplex.quasiIso _ (.up ℤ))) (haV : AV.IsLeftDerivedFunctor aV (HomologicalComplex.quasiIso _ (.up ℤ))) : ∃ (β : (localizedSystemExtension.{c, v, r} R V).mapDerivedCategory ⋙ e.T ≅ eV.T ⋙ (localizedSystemExtension.{c, v, r} S.right V).mapDerivedCategory), LinearNormalized.{c, v, r} R V S e eV η β ∧ (∀ β', LinearNormalized.{c, v, r} R V S e eV η β' → β' = β) ∧ ∃ (x : e.T ⋙ (scalars.{c, v, r} R S).mapDerivedCategory ≅ A) (y : eV.T ⋙ (scalars.{max c v, v, r} (R.over V) ((sliceAlgebras.{c, v, r} R V).obj S)).mapDerivedCategory ≅ AV), (∀ P : CochainComplex (Modules.{c, v, r} R) ℤ, x.hom.app (DerivedCategory.Q.obj P) ≫ a.app P = (scalars.{c, v, r} R S).mapDerivedCategory.map (e.ε.app P) ≫ (scalars.{c, v, r} R S).mapDerivedCategoryFactors.hom.app ((e.E.mapHomologicalComplex (.up ℤ)).obj P)) ∧ (∀ P : CochainComplex (Modules.{max c v, v, r} (R.over V)) ℤ, y.hom.app (DerivedCategory.Q.obj P) ≫ aV.app P = (scalars.{max c v, v, r} (R.over V) ((sliceAlgebras.{c, v, r} R V).obj S)).mapDerivedCategory.map (eV.ε.app P) ≫ (scalars.{max c v, v, r} (R.over V) ((sliceAlgebras.{c, v, r} R V).obj S)).mapDerivedCategoryFactors.hom.app ((eV.E.mapHomologicalComplex (.up ℤ)).obj P)) ∧ UnderlyingNormalized.{c, v, r} R V S e eV θ η A AV a aV (underlyingComparison.{c, v, r} R V S e eV θ A AV x y β).hom ∧ (∀ ρ' : (localizedSystemExtension.{c, v, r} R V).mapDerivedCategory ⋙ A ⟶ AV ⋙ (localizedSystemExtension.{c, v, r} R V).mapDerivedCategory, UnderlyingNormalized.{c, v, r} R V S e eV θ η A AV a aV ρ' → ρ' = (underlyingComparison.{c, v, r} R V S e eV θ A AV x y β).hom)",
+    "branch": "sheaf-dag",
+    "by": "Q59",
+    "date": "2026-10-22",
+    "existing": false,
+    "note": "Uses the landed scalar cochain model and localized comparison helpers. The R-linear tensor functors A and AV are specified by their universal left-derived pairs for ordinary scalar extension followed by exact scalar restriction; this is the equivalent one-sided tensor presentation. Its counits a and aV fix the normalization independently of beta. theta is kappa inverse. Only lean and the addition of two already landed presentation nodes to stmt_deps are changed."
+  },
+  "reviewed_lean": {
+    "date": "2026-10-22",
+    "by": "L",
+    "reviewer": "NT-stage2-cc-16cbff25d",
+    "group": "Q59",
+    "result": "pass",
+    "note": "Item node changes only in lean plus two landed def stmt_deps (comparison-data, cochain-model); statement verbatim; other node files byte-identical to side-live; single new module. All 12 node clauses match the Lean: theta = kappa inverse with ScalarExtensionNormalized generator pin; eta an S-linear iso of functors; r_P = kappa after Res eta via ordinaryUnderlying; beta exists and is unique with LinearNormalized on Resolving (flat-term K-flat) P; underlying tensors given as universal left-derived pairs (A,a),(AV,aV) of e.E then scalars, equivalent to the one-sided derived tensor; x,y fixed by their counit equations; underlyingComparison = y k U(beta) x^-1; uniqueness over all NatTrans rho'. Diagram chase confirms UnderlyingNormalized follows from LinearNormalized plus the counit equations (node Step 6), not by definition. No flatness, bounds, completeness or universe collapse. localizedSystemExtension theorem stmt_dep genuine (exactness instances). No duplicate (LinearEvaluation is data only). Only sorry; source and blueprint docstrings present; Worker report and Second reading by Q59 present. Advisory: unused public imports. No compile (no file changed)."
+  }
+}

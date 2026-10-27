@@ -1,0 +1,442 @@
+{
+ "id": "lem-sfb-universal-finite-parts-groupoid",
+ "kind": "statement",
+ "title": "Translation groupoid on the universal finite source parts",
+ "statement": "Let $S$ be a scheme [def-pc-scheme] and $(U,R,s,t,e,i,c)$ a groupoid scheme over $S$ [def-a1-groupoid-scheme], with $s,t$ separated [def-weil-proper-morphism] and locally of finite type [def-weil-finite-type-morphism]. Suppose an $S$-scheme $M$ represents the following functor: on an $S$-scheme $T$ its elements are pairs $(a,Z)$, where $a:T\\to U$ and $Z\\subseteq R\\times_{s,U,a}T$ is an open subscheme finite over $T$ containing the section $(ea,\\mathrm{id}_T)$ [def-pc-fibre-product, def-weil-open-immersion, def-weil-finite-integral-morphism]. Assume the forgetful morphism $g:M\\to U$ is etale [def-weil-etale-morphism], and denote its universal open subscheme by $Q\\subseteq R\\times_{s,U,g}M$. Then $Q$ and $M$ carry a groupoid scheme structure over $S$, with a morphism of groupoids $(M,Q)\\to(U,R)$ whose object map is $g$ and arrow map $Q\\to R$ is the universal projection. On test schemes a point of $Q$ is a triple $(a,Z,z)$ with $z:T\\to R$, $sz=a$ and $(z,\\mathrm{id}_T)$ factoring through $Z$. The structure maps are\n$$s_Q(a,Z,z)=(a,Z),\\qquad t_Q(a,Z,z)=(tz,c(Z,iz)),$$\n$$e_Q(a,Z)=(a,Z,ea),\\qquad i_Q(a,Z,z)=(tz,c(Z,iz),iz),$$\nand\n$$c_Q\\big((a_1,Z_1,z_1),(a_2,Z_2,z_2)\\big)=(a_2,Z_2,c(z_1,z_2))$$\nfor composable triples. Here $c(Z,iz)$ is the image of $Z$ under the isomorphism $r\\mapsto c(r,iz)$ between the two source fibres, with inverse $r\\mapsto c(r,z)$. These formulas define morphisms and satisfy all groupoid axioms. Both $s_Q,t_Q:Q\\to M$ are finite; $Q\\subseteq R\\times_UM$ is open and closed. No affineness or quasi-finiteness of $U,R$ is assumed.",
+ "source": {
+  "document": "literature/stacks-project/spaces-more-groupoids.tex",
+  "place": "Tag 04RU (lemma-finite-part-groupoid), together with the explicit structure maps in Section section-finite-part-groupoid. Finiteness of target follows from source finiteness and the inverse involution."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-a1-groupoid-scheme",
+  "def-weil-proper-morphism",
+  "def-weil-finite-type-morphism",
+  "def-pc-fibre-product",
+  "def-weil-open-immersion",
+  "def-weil-finite-integral-morphism",
+  "def-weil-etale-morphism"
+ ],
+ "proof": [
+  {
+   "text": "For an $S$-scheme $T$ put $R_a=R\\times_{s,U,a}T$. By the fibre-product universal property [def-pc-fibre-product], a map $T\\to Q$ is exactly $(a,Z,z)$ as in the statement: its map to $M$ classifies $(a,Z)$, and its map to $R$ is $z$, with the pair factoring through the universal open. Write $rz=c(r,z)$, and define $\\tau_z:R_a\\to R_{tz}$ by $r\\mapsto rz^{-1}$. This is a morphism of $T$-schemes, using $c,i$ and the fibre-product property. Its inverse is $r\\mapsto rz$, since $(rz^{-1})z=r$ and $(rz)z^{-1}=r$ by [def-a1-groupoid-scheme]. These equations hold on every test scheme over $T$, including nonreduced ones, so are equalities of morphisms by [lem-galois-yoneda-fully-faithful].",
+   "uses": [
+    "def-pc-fibre-product",
+    "def-a1-groupoid-scheme",
+    "lem-galois-yoneda-fully-faithful"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-more-groupoids.tex",
+    "place": "Tag 04RU (lemma-finite-part-groupoid), preceding explicit construction in section-finite-part-groupoid; verification omitted there and supplied here."
+   }
+  },
+  {
+   "text": "The image $Z'=\\tau_z(Z)$ is an open subscheme of $R_{tz}$ by [def-weil-open-immersion]. The restriction $Z\\to Z'$ is an isomorphism over $T$; hence $Z'\\to T$ is finite, directly from [def-weil-finite-integral-morphism] on affine opens. Moreover $\\tau_z(z)=e(tz)$ and $\\tau_z(e(a))=z^{-1}$. Thus $Z'$ contains both the unit at $tz$ and the section $z^{-1}$, proving that the proposed target and inverse have values in $M(T)$ and $Q(T)$. The source and unit formulas are well defined because $Z$ contains $e(a)$. For a base change $T'\\to T$, openness and finiteness persist by [lem-weil-pbc-open-immersion-base-change] and [lem-weil-pbc-finite-morphism-permanence](a); the pulled-back translation has the same two components $c(-,i(z|_{T'}))$ and the projection to $T'$. Uniqueness in [def-pc-fibre-product] identifies it with $\\tau_{z|_{T'}}$. Therefore pulling back $Z'$ gives the translated pullback of $Z$, and all four rules commute with base change.",
+   "uses": [
+    "def-weil-open-immersion",
+    "def-weil-finite-integral-morphism",
+    "def-a1-groupoid-scheme",
+    "lem-weil-pbc-open-immersion-base-change",
+    "lem-weil-pbc-finite-morphism-permanence",
+    "def-pc-fibre-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-more-groupoids.tex",
+    "place": "Tag 04RU (lemma-finite-part-groupoid), preceding explicit construction in section-finite-part-groupoid; verification omitted there and supplied here."
+   }
+  },
+  {
+   "text": "For composable triples $q_j=(a_j,Z_j,z_j)$ the equality $s_Q(q_1)=t_Q(q_2)$ says $a_1=tz_2$ and $Z_1=\\tau_{z_2}(Z_2)$. Since $z_1$ factors through $Z_1$, its inverse image under $\\tau_{z_2}$, namely $z_1z_2$, factors through $Z_2$ as a section of schemes. Also $s(z_1z_2)=a_2$ by [def-a1-groupoid-scheme]. Hence the displayed composition formula is well defined. It commutes with base change because $c$ does and the second triple's pair pulls back to its classifying pair. The domain of composable pairs is the fibre product $Q\\times_{s_Q,M,t_Q}Q$ by [def-pc-fibre-product]. Apply [lem-galois-yoneda-fully-faithful] in the category of $S$-schemes to the natural rules of steps 1–3: they give actual $S$-morphisms $s_Q,t_Q,e_Q,i_Q,c_Q$.",
+   "uses": [
+    "def-a1-groupoid-scheme",
+    "def-pc-fibre-product",
+    "lem-galois-yoneda-fully-faithful"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-more-groupoids.tex",
+    "place": "Tag 04RU (lemma-finite-part-groupoid), preceding explicit construction in section-finite-part-groupoid; verification omitted there and supplied here."
+   }
+  },
+  {
+   "text": "For composable $z_1,z_2$, associativity and inversion in [def-a1-groupoid-scheme] give $\\tau_{z_1z_2}(r)=r(z_1z_2)^{-1}=(rz_2^{-1})z_1^{-1}$, so $\\tau_{z_1z_2}=\\tau_{z_1}\\tau_{z_2}$. This is an identity of $T$-scheme isomorphisms by [lem-galois-yoneda-fully-faithful]; thus it also identifies their images of open subschemes. Consequently the composite triple has source $(a_2,Z_2)$ and target $(tz_1,\\tau_{z_1}(Z_1))$, exactly the source of $q_2$ and target of $q_1$. The formulas also give $s_Qe_Q=t_Qe_Q=1_M$ and $s_Qi_Q=t_Q$, $t_Qi_Q=s_Q$, using $\\tau_{e(a)}=1$ and $\\tau_{z^{-1}}\\tau_z=1$.",
+   "uses": [
+    "def-a1-groupoid-scheme",
+    "lem-galois-yoneda-fully-faithful"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-more-groupoids.tex",
+    "place": "Tag 04RU (lemma-finite-part-groupoid), preceding explicit construction in section-finite-part-groupoid; verification omitted there and supplied here."
+   }
+  },
+  {
+   "text": "Both bracketings of three composable triples have the same source pair $(a_3,Z_3)$ and arrow $(z_1z_2)z_3=z_1(z_2z_3)$ by [def-a1-groupoid-scheme]; step 4 verifies their composability. The left unit at $t_Q(q)$ and right unit at $s_Q(q)$ both compose with $q=(a,Z,z)$ to give source pair $(a,Z)$ and arrow $e(tz)z=z=ze(a)$. The composites $i_Q(q)q$ and $qi_Q(q)$ have source pairs $(a,Z)$ and $(tz,\\tau_z Z)$ and arrows $z^{-1}z=e(a)$ and $zz^{-1}=e(tz)$, respectively. They are exactly the two required identity triples. Thus on every test $S$-scheme the operations form a groupoid, naturally in that scheme, which is the groupoid-scheme criterion of [def-a1-groupoid-scheme] with all maps over $S$. Equality of triples here is equality of pairs and actual scheme morphisms, not just geometric-point equality.",
+   "uses": [
+    "def-a1-groupoid-scheme"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-more-groupoids.tex",
+    "place": "Tag 04RU (lemma-finite-part-groupoid), preceding explicit construction in section-finite-part-groupoid; verification omitted there and supplied here."
+   }
+  },
+  {
+   "text": "The maps $(g,Q\\to R)$ preserve source and target since the source and target of the arrow coordinate $z$ are $a$ and $tz$. They preserve the identity, inverse and composition since their arrow coordinates are exactly $e(a)$, $i(z)$ and $c(z_1,z_2)$. These equalities, checked on arbitrary test schemes, are equalities of morphisms by [lem-galois-yoneda-fully-faithful]. This proves the asserted morphism of groupoids. Applying the inverse formula twice gives $(a,\\tau_{z^{-1}}\\tau_z Z,z)=(a,Z,z)$ by step 4, so $i_Q^2=1_Q$. Thus $i_Q$ is an isomorphism and $t_Q=s_Q\\circ i_Q$.",
+   "uses": [
+    "def-a1-groupoid-scheme",
+    "lem-galois-yoneda-fully-faithful"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-more-groupoids.tex",
+    "place": "Tag 04RU (lemma-finite-part-groupoid), preceding explicit construction in section-finite-part-groupoid; verification omitted there and supplied here."
+   }
+  },
+  {
+   "text": "The source $s_Q:Q\\to M$ is the universal finite family, so is finite by hypothesis. Since $i_Q$ is an isomorphism, $t_Q=s_Q\\circ i_Q$ is finite too: on an affine open of $M$ its inverse image is isomorphic over that open to the corresponding inverse image for $s_Q$, hence has the same finite coordinate algebra [def-weil-finite-integral-morphism]. No affineness of $R$ or $U$ enters this affine-local check.",
+   "uses": [
+    "def-weil-finite-integral-morphism"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-more-groupoids.tex",
+    "place": "Tag 04RU (lemma-finite-part-groupoid), preceding explicit construction in section-finite-part-groupoid; verification omitted there and supplied here."
+   }
+  },
+  {
+   "text": "Set $X=R\\times_{s,U,g}M$ and let $j:Q\\hookrightarrow X$ be the universal open. The morphism $X\\to M$ is separated by [lem-weil-pbc-separated-base-change], since $s$ is separated. The finite $Q\\to M$ is proper by [lem-weil-pbc-finite-proper]. Apply [lemma-nagata-proper-to-separated-target] to $Q\\xrightarrow{j}X\\to M$: $j$ is proper. In particular its image is closed by the definition of universally closed in [def-weil-proper-morphism]. Since $j$ already identifies $Q$ with an open subscheme [def-weil-open-immersion], this proves that $Q$ is open and closed in $X$. This uses no flatness or quasi-finiteness of $s,t$.",
+   "uses": [
+    "def-pc-fibre-product",
+    "lem-weil-pbc-separated-base-change",
+    "lem-weil-pbc-finite-proper",
+    "lemma-nagata-proper-to-separated-target",
+    "def-weil-proper-morphism",
+    "def-weil-open-immersion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-more-groupoids.tex",
+    "place": "Tag 04PH (lemma-finite-separated), scheme specialization of its proper-to-separated-target proof, as used immediately before Tag 04RU."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-fibre-product",
+  "def-a1-groupoid-scheme",
+  "lem-galois-yoneda-fully-faithful",
+  "def-weil-open-immersion",
+  "def-weil-finite-integral-morphism",
+  "lem-weil-pbc-open-immersion-base-change",
+  "lem-weil-pbc-finite-morphism-permanence",
+  "lem-weil-pbc-separated-base-change",
+  "lem-weil-pbc-finite-proper",
+  "lemma-nagata-proper-to-separated-target",
+  "def-weil-proper-morphism"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/spaces-more-groupoids.tex",
+  "place": "Tag 04RU and section-finite-part-groupoid; explicit completion of the omitted groupoid verification, with Tag 04PH for closedness."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Finite collections of arrows containing the unit in a separated groupoid form a new groupoid with finite source and target over the etale scheme of finite parts",
+   "results": {
+    "t": "2026-10-23T13:11:50Z",
+    "tool": "leanfinder",
+    "query": "Finite collections of arrows containing the unit in a separated groupoid form a new groupoid with finite source and target over the etale scheme of finite parts",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "AlgebraicGeometry.Scheme.smallEtalePretopology",
+     "AlgebraicGeometry.Scheme.smallEtaleTopology",
+     "AlgebraicGeometry.Scheme.Etale",
+     "AlgebraicGeometry.Scheme.etaleTopology",
+     "AlgebraicGeometry.Scheme.Etale.forget",
+     "AlgebraicGeometry.Scheme.etalePretopology",
+     "AlgebraicGeometry.Scheme.instCategoryEtale",
+     "AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified"
+    ],
+    "digest": "e8fc6a74773dbe3c"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern etale sites or groupoids in types/manifold structure groupoids, not internal groupoids in schemes and their universal finite open source parts. CategoryTheory/Groupoid/Subgroupoid.lean read; its wide-subgroupoid assertion is not this construction."
+  },
+  {
+   "tool": "grep",
+   "query": "Groupoid|groupoid",
+   "results": {
+    "t": "2026-10-23T13:12:29Z",
+    "tool": "grep",
+    "query": "Groupoid|groupoid",
+    "sub": "AlgebraicGeometry",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern etale sites or groupoids in types/manifold structure groupoids, not internal groupoids in schemes and their universal finite open source parts. CategoryTheory/Groupoid/Subgroupoid.lean read; its wide-subgroupoid assertion is not this construction."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Universal finite open part of the source of an internal groupoid scheme forms a groupoid with finite source and target and etale objects",
+   "results": {
+    "t": "2026-10-23T13:12:29Z",
+    "tool": "leansearch",
+    "query": "Universal finite open part of the source of an internal groupoid scheme forms a groupoid with finite source and target and etale objects",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "idGroupoid",
+     "continuousGroupoid",
+     "TopologicalSpace.Opens.instHasGroupoid",
+     "Pregroupoid.groupoid",
+     "closedUnderRestriction'",
+     "CategoryTheory.Subgroupoid.isWide_iff_objs_eq_univ",
+     "Topology.IsOpenEmbedding.singleton_hasGroupoid",
+     "idRestrGroupoid"
+    ],
+    "digest": "ca5c3311f30537d0"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern etale sites or groupoids in types/manifold structure groupoids, not internal groupoids in schemes and their universal finite open source parts. CategoryTheory/Groupoid/Subgroupoid.lean read; its wide-subgroupoid assertion is not this construction."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Groupoid\", \"finite\"",
+   "results": {
+    "t": "2026-10-23T13:12:29Z",
+    "tool": "loogle",
+    "query": "\"Groupoid\", \"finite\"",
+    "sub": "",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern etale sites or groupoids in types/manifold structure groupoids, not internal groupoids in schemes and their universal finite open source parts. CategoryTheory/Groupoid/Subgroupoid.lean read; its wide-subgroupoid assertion is not this construction."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Internal groupoid on pairs consisting of an object and finite open source fiber containing its identity, with arrows given by translation of the chosen finite part",
+   "results": {
+    "t": "2026-10-23T13:25:45Z",
+    "tool": "leanfinder",
+    "query": "Internal groupoid on pairs consisting of an object and finite open source fiber containing its identity, with arrows given by translation of the chosen finite part",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "idGroupoid",
+     "idRestrGroupoid",
+     "Pregroupoid.groupoid",
+     "hasGroupoid_model_space",
+     "instInfSetStructureGroupoid",
+     "instInhabitedStructureGroupoid",
+     "instMinStructureGroupoid",
+     "StructureGroupoid"
+    ],
+    "digest": "e25d13c5dec2f444"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern etale sites or groupoids in types/manifold structure groupoids, not internal groupoids in schemes and their universal finite open source parts. CategoryTheory/Groupoid/Subgroupoid.lean read; its wide-subgroupoid assertion is not this construction."
+  },
+  {
+   "tool": "grep",
+   "query": "groupoid|finitePart|finite_part",
+   "results": {
+    "t": "2026-10-23T14:41:03Z",
+    "tool": "grep",
+    "query": "groupoid|finitePart|finite_part",
+    "sub": "AlgebraicGeometry",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: manifold StructureGroupoid and the category-of-elements Groupoid apply to types, not the representability and scheme morphisms in this item; AlgebraicGeometry grep has no internal-groupoid construction."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Universal finite open source parts of a groupoid scheme with translation composition form an internal groupoid",
+   "results": {
+    "t": "2026-10-23T14:41:04Z",
+    "tool": "leansearch",
+    "query": "Universal finite open source parts of a groupoid scheme with translation composition form an internal groupoid",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "StructureGroupoid.mk",
+     "idGroupoid",
+     "StructureGroupoid.trans'",
+     "TopologicalSpace.Opens.instHasGroupoid",
+     "continuousGroupoid",
+     "Pregroupoid.groupoid",
+     "StructureGroupoid",
+     "StructureGroupoid.trans"
+    ],
+    "digest": "418843caf6f22f75"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: manifold StructureGroupoid and the category-of-elements Groupoid apply to types, not the representability and scheme morphisms in this item; AlgebraicGeometry grep has no internal-groupoid construction."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Groupoid\", \"finite\"",
+   "results": {
+    "t": "2026-10-23T14:41:04Z",
+    "tool": "loogle",
+    "query": "\"Groupoid\", \"finite\"",
+    "sub": "",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: manifold StructureGroupoid and the category-of-elements Groupoid apply to types, not the representability and scheme morphisms in this item; AlgebraicGeometry grep has no internal-groupoid construction."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A groupoid scheme induces a groupoid on the scheme parametrizing finite open source fibres containing the identity by right translation",
+   "results": {
+    "t": "2026-10-23T14:41:04Z",
+    "tool": "leanfinder",
+    "query": "A groupoid scheme induces a groupoid on the scheme parametrizing finite open source fibres containing the identity by right translation",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "hasGroupoid_model_space",
+     "Pregroupoid.groupoid",
+     "idRestrGroupoid",
+     "idGroupoid",
+     "CategoryTheory.groupoidOfElements",
+     "OpenPartialHomeomorph.singleton_hasGroupoid",
+     "CategoryTheory.InducedCategory.groupoid",
+     "CategoryTheory.Grpd.instGroupoidαCategoryObjCatForgetToCat"
+    ],
+    "digest": "9c272df2a85093f1"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: manifold StructureGroupoid and the category-of-elements Groupoid apply to types, not the representability and scheme morphisms in this item; AlgebraicGeometry grep has no internal-groupoid construction."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Internal groupoids in schemes and natural translation of finite open subschemes containing the identity arrow",
+   "results": {
+    "t": "2026-10-23T14:42:34Z",
+    "tool": "leanfinder",
+    "query": "Internal groupoids in schemes and natural translation of finite open subschemes containing the identity arrow",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "AlgebraicGeometry.Scheme.IsLocallyDirected.t_id",
+     "AlgebraicGeometry.Scheme.Opens",
+     "AlgebraicGeometry.Scheme.restrictFunctor",
+     "AlgebraicGeometry.Scheme.Opens.toScheme",
+     "AlgebraicGeometry.Scheme.Opens.instCoeOut",
+     "AlgebraicGeometry.Scheme.Opens.instCanonicallyOverToScheme",
+     "AlgebraicGeometry.Scheme.Hom.id_image",
+     "AlgebraicGeometry.Scheme.Opens.over_def"
+    ],
+    "digest": "6fdc170db1cb01ea"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: manifold StructureGroupoid and the category-of-elements Groupoid apply to types, not the representability and scheme morphisms in this item; AlgebraicGeometry grep has no internal-groupoid construction."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-affine-groupoid-pointed-quasisplitting",
+  "date": "2026-10-23",
+  "group": "Q58"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Algebraicity and smoothness of the stack of all nodal curves. Supporting input: Tags 0D52 (lemma-curves-stack) and 0D53 (lemma-curves-diagonal), with situation-curves. Supporting input: Effectivity step in quot-lemma-curves-stack via quot-lemma-spaces-stack; finite-type part (2) of bootstrap-lemma-descend-algebraic-space. Supporting input: theorem-final-bootstrap (3), applied after constructing a representable fppf cover of the descended sheaf. Subdivision of the final bootstrap: affine locally quasi-finite relation; finite etale quasi-splitting charts and quotient by the open finite locally free subrelation (Tags 04S0, 04S4). Supporting input: Pointed affine etale quasi-splitting of a flat locally quasi-finite groupoid. Supporting input: translation operations on the universal finite source part used before the invariant affine shrinking.",
+   "via": [
+    "lem-sfb-affine-groupoid-pointed-quasisplitting",
+    "lem-sfb-fppf-relation-etale-replacement",
+    "lem-sfb-fppf-space-atlas-bootstrap",
+    "lem-sfb-space-finite-type-fppf-effectivity",
+    "lem-sfb-curve-descent-isom-spaces",
+    "lem-sfb-nodal-curve-stack-smooth",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-universal-finite-parts-groupoid",
+  "worker": "stage1",
+  "summary": "Kept the statement and completed the functorial translation construction in eight steps. Verified membership, base-change naturality, composition, every groupoid identity and functor compatibility on arbitrary test schemes. Reused existing Mathlib-leaf nodes for Yoneda, base change, finiteness and properness; no new nodes.",
+  "blueprint": "Supporting translation prerequisite recorded in blueprint.from.place for det-thm-sf-ctf-stability-direct-images; current latest direct-images proof (3) was read and its compactification route is unchanged. The local argument follows Stacks 04RU.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q99-2edb55c37",
+  "group": "Q99",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q99-2edb55c37 (reviewer sub-agent of L); spot-checked: Read Stacks spaces-more-groupoids.tex section-finite-set-arrows, section-finite-part-groupoid (s',t',e',i',c' rules), Tag 04RU (lemma-finite-part-groupoid; verification omitted there) and Tag 04PH (lemma-finite-separated). The item's statement and stmt_deps are unchanged against side-live (unsplit, empty proof, no repair note, no other group's split). The delivery adds only an 8-step proof. There are no new nodes and no unit edits; proof_deps equals the union of the step uses; no SGA. Every step was checked against the c(a,b)=a∘b convention of def-a1-groupoid-scheme (s(a)=t(b), sc=s pr1, tc=t pr0). Step 1: τ_z(r)=c(r,iz) is well typed (s(iz)=tz, t(iz)=a); its inverse is c(-,z); Yoneda (lem-galois-yoneda-fully-faithful, the Mor(A,B)≅Hom(h_A,h_B) bijection) turns the equalities into equalities of morphisms. Step 2: τ_z(z)=e(tz) and τ_z(e(a))=iz, so the target and inverse are well defined; base change uses open-immersion base change and clause (a) of finite permanence. Step 3: from z1 ∈ Z2 z2^{-1}, z1z2 ∈ Z2. Step 4: τ_{z1z2}=τ_{z1}τ_{z2}. Step 5: associativity, both unit laws and both inverse laws were rechecked, including composability. Step 6: the morphism of groupoids holds; i_Q^2=1 uses i∘i=id, an elementary consequence of the laws. Step 7: t_Q=s_Q∘i_Q is finite. Step 8: the 04PH route for schemes (separated base change, finite⇒proper, proper over a separated target ⇒ j proper ⇒ closed); all off-unit statements are Mathlib leaves, so no tool_uses are needed. Edge cases checked: a finite constant group ({1,h} in C3 maps to {h^-1,1}, not a subgroup), the trivial groupoid, and empty or non-reduced T. Duplicate check: lem-sfb-scheme-groupoid-universal-finite-part has stronger flat/lfp hypotheses plus representability and finite local freeness; it is a different, stronger node and not a duplicate. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.UniversalFinitePartsGroupoid",
+  "declaration": "AlgebraicGeometry.universal_finite_parts_groupoid",
+  "file": "lean/Sheaf/AlgebraicGeometry/UniversalFinitePartsGroupoid.lean",
+  "statement": "theorem universal_finite_parts_groupoid {S : Scheme.{u}} (U R M : Over S) (s t : R ⟶ U) (e : U ⟶ R) (i : R ⟶ R) (c : pullback s.left t.left ⟶ R.left) (hG : IsGroupoidScheme s.left t.left e.left i.left c) [IsSeparated s.left] [IsSeparated t.left] [LocallyOfFiniteType s.left] [LocallyOfFiniteType t.left] (g : M ⟶ U) [Etale g.left] (Q : (pullback s.left g.left).Opens) (E : ∀ T : Over S, (T ⟶ M) ≃ (Σ a : T ⟶ U, {Z : (pullback s.left a.left).Opens // IsFinite (Z.ι ≫ pullback.snd s.left a.left) ∧ ∃ v : T.left ⟶ Z.toScheme, v ≫ Z.ι ≫ pullback.fst s.left a.left = a.left ≫ e.left ∧ v ≫ Z.ι ≫ pullback.snd s.left a.left = 𝟙 T.left})) (hforget : ∀ (T : Over S) (m : T ⟶ M), (E T m).1 = m ≫ g) (huniv : ∀ (T : Over S) (m : T ⟶ M), ∃ b : pullback s.left (E T m).1.left ⟶ pullback s.left g.left, b ≫ pullback.fst s.left g.left = pullback.fst s.left (E T m).1.left ∧ b ≫ pullback.snd s.left g.left = pullback.snd s.left (E T m).1.left ≫ m.left ∧ (E T m).2.val = b ⁻¹ᵁ Q) : ∃ (sQ tQ : Q.toScheme ⟶ M.left) (eQ : M.left ⟶ Q.toScheme) (iQ : Q.toScheme ⟶ Q.toScheme) (cQ : pullback sQ tQ ⟶ Q.toScheme), sQ = Q.ι ≫ pullback.snd s.left g.left ∧ tQ ≫ M.hom = sQ ≫ M.hom ∧ IsGroupoidScheme sQ tQ eQ iQ cQ ∧ IsFinite sQ ∧ IsFinite tQ ∧ IsClosed (Q : Set ↥(pullback s.left g.left)) ∧ (Q.ι ≫ pullback.fst s.left g.left) ≫ s.left = sQ ≫ g.left ∧ (Q.ι ≫ pullback.fst s.left g.left) ≫ t.left = tQ ≫ g.left ∧ eQ ≫ Q.ι ≫ pullback.fst s.left g.left = g.left ≫ e.left ∧ iQ ≫ Q.ι ≫ pullback.fst s.left g.left = (Q.ι ≫ pullback.fst s.left g.left) ≫ i.left ∧ (∀ (H : Scheme.{u}) (p : H ⟶ pullback sQ tQ) (d : H ⟶ pullback s.left t.left), d ≫ pullback.fst s.left t.left = p ≫ pullback.fst sQ tQ ≫ Q.ι ≫ pullback.fst s.left g.left → d ≫ pullback.snd s.left t.left = p ≫ pullback.snd sQ tQ ≫ Q.ι ≫ pullback.fst s.left g.left → p ≫ cQ ≫ Q.ι ≫ pullback.fst s.left g.left = d ≫ c) ∧ (∀ (T : Over S) (m n : T ⟶ M) (q : T.left ⟶ Q.toScheme), q ≫ sQ = m.left → q ≫ tQ = n.left → ∃ (τ : pullback s.left (E T m).1.left ≅ pullback s.left (E T n).1.left) (k : pullback s.left (E T m).1.left ⟶ pullback s.left t.left) (l : pullback s.left (E T n).1.left ⟶ pullback s.left t.left), τ.hom ≫ pullback.snd s.left (E T n).1.left = pullback.snd s.left (E T m).1.left ∧ k ≫ pullback.fst s.left t.left = pullback.fst s.left (E T m).1.left ∧ k ≫ pullback.snd s.left t.left = pullback.snd s.left (E T m).1.left ≫ q ≫ Q.ι ≫ pullback.fst s.left g.left ≫ i.left ∧ τ.hom ≫ pullback.fst s.left (E T n).1.left = k ≫ c ∧ l ≫ pullback.fst s.left t.left = pullback.fst s.left (E T n).1.left ∧ l ≫ pullback.snd s.left t.left = pullback.snd s.left (E T n).1.left ≫ q ≫ Q.ι ≫ pullback.fst s.left g.left ∧ τ.inv ≫ pullback.fst s.left (E T m).1.left = l ≫ c ∧ (E T n).2.val = τ.inv ⁻¹ᵁ (E T m).2.val)",
+  "branch": "newtargets-dag",
+  "by": "Q13",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-82780b048",
+  "group": "Q13",
+  "result": "pass",
+  "note": "Node unchanged except its lean field; lean.statement verbatim; proof is sorry only; no definitions or new nodes; docstrings carry the source place, blueprint tag and all 8 steps. Clause by clause: groupoid over S via the recorded IsGroupoidScheme with Stacks' c(a,b)=a∘b order; separated/LFT/étale hypotheses with nothing stronger; E+hforget+huniv are exactly representability with universal open Q (b pinned by both projections, unit as an actual lift); sQ=ι≫snd; tQ pinned by the arrow≫t compatibility and τ(Z)=Z·z⁻¹ with τ.hom=c(−,iz), which is Stacks' direction; eQ/iQ/cQ pinned by endpoint laws plus arrow coordinates; all five groupoid-morphism compatibilities; IsFinite sQ and tQ; Q open (Opens) and closed. Edge cases (empty schemes, trivial groupoid, empty M) and one universe u checked. No duplicate notion. Report has both required sections; the second reading is the author's self-check (minor). No compile needed, since no file changed."
+ }
+}

@@ -1,0 +1,345 @@
+{
+ "id": "lem-sfb-derived-adjoint-ses-mates",
+ "kind": "statement",
+ "title": "Derived adjunction mates of a short exact sequence of exact functors",
+ "statement": "Let $\\mathcal A,\\mathcal B$ be Grothendieck abelian categories [def-sp-grothendieck-abelian] with unbounded cochain derived categories and localization $Q$ [def-weil-abstract-derived-category]. Assume K-injective resolutions with injective terms exist; K-injective means that every chain map from an acyclic complex is null-homotopic. Let $E_0=\\mathrm{id},E_1,E_2:\\mathcal A\\to\\mathcal A$ be exact additive functors [def-galois-exact-functor, def-weil-pbc-additive-functor], with specified right adjoints $H_i$ ($H_0=\\mathrm{id}$), and a natural objectwise short exact sequence $0\\to E_2\\xrightarrow{d}E_1\\xrightarrow{e}E_0\\to0$. Let $P:\\mathcal B\\to\\mathcal A$ be an additive left adjoint of $F:\\mathcal A\\to\\mathcal B$, with a specified class of resolving complexes on which $LP$ is computed by $P$. Assume the total derived functors in what follows exist. All derived adjunctions are those induced from the ordinary adjunctions, normalized on chain maps; shifts have the standard cochain signs.\nThe ordinary right mates $e^r:H_0\\to H_1$ and $d^r:H_1\\to H_2$ give, for every injective $I\\in\\mathcal A$, a split short exact sequence\n$$0\\to H_0I\\xrightarrow{e^r}H_1I\\xrightarrow{d^r}H_2I\\to0.$$\nFor a K-injective complex $I$ with injective terms representing $K$, all $H_iI$ are K-injective. The degreewise split sequence\n$$0\\to FH_0I\\to FH_1I\\to FH_2I\\to0$$\ngives a natural distinguished triangle $R_0K\\to R_1K\\to R_2K\\xrightarrow{\\delta_K}R_0K[1]$, where $R_i=R(FH_i)$, with its canonical short-exact-sequence boundary. It is independent of the representing resolution under the normalized derived comparisons. The functor $L_i=D(E_i)LP$ is left adjoint to $R_i$. The connecting map in this right triangle is adjoint to the connecting map in the left triangle $L_2M\\to L_1M\\to L_0M\\to L_2M[1]$ induced by $0\\to E_2PM\\to E_1PM\\to E_0PM\\to0$ on resolving representatives, with the contravariant cochain Hom sign convention.\nSuppose a second system $\\mathcal A',\\mathcal B',E_i',H_i',P',F',L_i',R_i'$ has these same properties. Let $S:D(\\mathcal A)\\to D(\\mathcal A')$ and $T:D(\\mathcal B)\\to D(\\mathcal B')$ be exact total left derived functors of additive functors on the abelian categories. Suppose specified natural isomorphisms $\\theta_i:L_i'T\\xrightarrow{\\sim}SL_i$ are induced on resolving complexes by a map of the preceding three-term short-exact-sequence diagrams, allowing quasi-isomorphisms of such diagrams inverted objectwise. In particular this is a comparison of the whole resolution diagrams, not merely their three separate objects. For any $\\phi:SK\\to K'$ define $\\beta_i:TR_iK\\to R_i'K'$ as the $L_i'\\dashv R_i'$ transpose of\n$$L_i'TR_iK\\xrightarrow{\\theta_i}SL_iR_iK\\xrightarrow{S\\varepsilon_i}SK\\xrightarrow{\\phi}K',$$\nwhere $\\varepsilon_i$ is the normalized derived counit. Then $\\beta_0,\\beta_1,\\beta_2$ form a morphism from $T$ of the specified right triangle for $K$ to the specified right triangle for $K'$, including\n$$\\beta_0[1]\\circ\\delta_{T,K}=\\delta_{K'}\\circ\\beta_2,$$\nwhere $\\delta_{T,K}$ includes the canonical shift comparison for $T$. No $\\beta_i$ is required to be invertible. The assertion uses the canonical resolution boundaries, not an arbitrary completion of the first two right arrows.",
+ "source": {
+  "document": "literature/stacks-project/derived.tex",
+  "place": "Tag 0152 (lemma-derived-canonical-delta-functor), its functorial cone formula; Tag 09T5 (lemma-derived-adjoint-functors), with normalization by the chain adjunction; Tag 0A8D (lemma-adjoint-is-exact). The combined adjoint-sequence and comparison assertion is agent-written, using the signed cochain Hom and cone models, not a verbatim Stacks lemma."
+ },
+ "stmt_deps": [
+  "def-sp-grothendieck-abelian",
+  "def-weil-abstract-derived-category",
+  "def-galois-exact-functor",
+  "def-weil-pbc-additive-functor",
+  "def-weil-triangulated-category"
+ ],
+ "proof": [
+  {
+   "text": "Fix an injective object $J$. For every $X$, ordinary adjunction identifies the mate sequence after $\\operatorname{Hom}(X,-)$ with\n$$0\\to\\operatorname{Hom}(E_0X,J)\\to\\operatorname{Hom}(E_1X,J)\\to\\operatorname{Hom}(E_2X,J)\\to0.$$\nIt is exact: factor a map annihilating $E_2X$ uniquely across the cokernel $E_1X\\to E_0X$; extend a map on $E_2X$ across its monomorphism into $E_1X$ by the definition of injectivity. Thus $e^r_J$ is the kernel of $d^r_J$, by precisely this universal factorization for all $X$. Taking $X=H_2J$, surjectivity lifts $1_{H_2J}$ to a section of $d^r_J$. The kernel and this section give $H_1J\\cong H_0J\\oplus H_2J$ with the stated arrows. No natural choice of splitting is asserted. The right adjoints are additive: for $a,b:J\\to J\\prime$, the maps induced by $H_i(a+b)$ and by $H_i(a)+H_i(b)$ on $\\operatorname{Hom}(X,H_iJ)$ both transpose to postcomposition by $a+b$ on $\\operatorname{Hom}(E_iX,J)$. Taking $X=H_iJ$ and evaluating at its identity proves equality; the zero case is identical.",
+   "uses": [
+    "def-sp-injective-resolutions"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tags 0152 (lemma-derived-canonical-delta-functor), 09T5 (lemma-derived-adjoint-functors) and 070I (lemma-K-injective); signed product Hom: more-algebra.tex Tag 0A5X. The combined argument is agent-written."
+   }
+  },
+  {
+   "text": "Apply [lem-weil-pbc-right-adjoint-preserves-kinjective] to $E_i\\dashv H_i$: $H_i$ is the right adjoint of the exact $E_i$. Hence every $H_iI$ is K-injective. Step 1 in each degree gives a split short exact sequence of complexes $0\\to H_0I\\to H_1I\\to H_2I\\to0$; the mate maps commute with the differential by naturality. Any additive $F$ preserves each splitting, so $Y_i=FH_iI$ form a degreewise split SES. For each additive composite $FH_i$, [lem-weil-pbc-kinjective-total-derived] applied to its exact homotopy-complex functor $QF H_i$ identifies $QY_i$ with $R_iK$. Additive termwise functors preserve shifts and cones by applying the biproduct matrix defining a cone, so that functor is exact. This computation requires no exactness of $P$ or preservation of K-injectives by $F$.",
+   "uses": [
+    "lem-weil-pbc-right-adjoint-preserves-kinjective",
+    "lem-weil-pbc-kinjective-total-derived"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tags 0152 (lemma-derived-canonical-delta-functor), 09T5 (lemma-derived-adjoint-functors) and 070I (lemma-K-injective); signed product Hom: more-algebra.tex Tag 0A5X. The combined argument is agent-written."
+   }
+  },
+  {
+   "text": "The SES-triangle lemma gives the distinguished triangle of the $QY_i$, with the canonical SES boundary; the split-triangle formula identifies that boundary with $Q(\\pi^{n+1}d_{Y_1}^ns^n)$ for any graded splitting. A morphism between K-injective representatives of $K$ induces a map of all three complexes by $FH_i$, hence a morphism of these particular triangles by SES naturality. Localization is fully faithful on K-injectives; a quasi-isomorphism between them is a homotopy equivalence, preserved by every additive $FH_i$. Therefore these triangle comparisons are invertible, independent of the representing chain map up to homotopy, and compose as the normalized derived comparisons. This proves both naturality in $K$ and independence of its resolution without choosing a triangle completion.",
+   "uses": [
+    "lem-weil-pbc-complex-ses-triangle",
+    "lem-weil-pbc-degreewise-split-derived-triangle",
+    "lem-weil-pbc-kinjective-hom-derived"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tags 0152 (lemma-derived-canonical-delta-functor), 09T5 (lemma-derived-adjoint-functors) and 070I (lemma-K-injective); signed product Hom: more-algebra.tex Tag 0A5X. The combined argument is agent-written."
+   }
+  },
+  {
+   "text": "The ordinary composite adjunction is $E_iP\\dashv FH_i$. Its left derived functor is $L_i=D(E_i)LP$: on the stipulated resolving representatives it is $E_iP$, since exact $E_i$ preserves quasi-isomorphisms. Apply the resolving-derived-adjunction normalization lemma to this composite adjunction and this resolving class. Its right derived pair is $R_i$. This gives $L_i\\dashv R_i$, normalized by ordinary transposition of every chain map $E_iPM\\to I$. Termwise adjunction also identifies the product Hom complexes\n$$\\mathsf H(M,FH_iI)\\cong\\mathsf H(E_iPM,I).$$\nIndeed each component is the ordinary additive Hom bijection; naturality in both variables carries $d_I f-(-1)^n f d$ to the same expression on the other side. For resolving $M$, the induced $H^0$ bijection is the derived adjunction, because maps into $I$ are computed up to chain homotopy. The same applies after every shift of $I$.",
+   "uses": [
+    "lem-sfb-resolving-derived-adjunction-normalization",
+    "lem-weil-pbc-termwise-adjunction-homotopy",
+    "lem-weil-pbc-kinjective-hom-derived"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tags 0152 (lemma-derived-canonical-delta-functor), 09T5 (lemma-derived-adjoint-functors) and 070I (lemma-K-injective); signed product Hom: more-algebra.tex Tag 0A5X. The combined argument is agent-written."
+   }
+  },
+  {
+   "text": "Write $b_M:L_0M\\to L_2M[1]$ for the canonical boundary of $0\\to E_2PM\\to E_1PM\\to E_0PM\\to0$. Apply [lem-sfb-product-hom-ses-boundary] to this left sequence and $I$. It says that the boundary of its reversed product-Hom sequence, on a chain map $f:E_2PM\\to I$, is exactly $-Q(f)[1]b_M$. Through the componentwise isomorphisms of step 4, this is the boundary of\n$$0\\to\\mathsf H(M,Y_0)\\to\\mathsf H(M,Y_1)\\to\\mathsf H(M,Y_2)\\to0.$$\nFor a cocycle $u:M\\to Y_2$, a graded lift is $su$, and its differential, projected to $Y_0$, is $\\pi d_{Y_1}su-\\pi su d_M=\\pi d_{Y_1}su$. By the split-boundary formula of step 3 its localized class is $\\delta_K Q(u)$. Consequently, denoting normalized transposition by $\\sharp$, for every $u:M\\to R_2K$ one has\n$$(\\delta_Ku)^\\sharp=-u^\\sharp[1]b_M.\\tag{*}$$\nInitially $M$ is resolving; its quasi-isomorphic representative and the normalized comparisons extend the identity to every derived $M$. This is the contravariant cochain Hom sign convention in the statement. The two earlier right arrows transpose to precomposition by the corresponding left arrows, directly by ordinary mates and step 4.",
+   "uses": [
+    "lem-sfb-product-hom-ses-boundary",
+    "lem-weil-pbc-degreewise-split-derived-triangle"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tags 0152 (lemma-derived-canonical-delta-functor), 09T5 (lemma-derived-adjoint-functors) and 070I (lemma-K-injective); signed product Hom: more-algebra.tex Tag 0A5X. The combined argument is agent-written."
+   }
+  },
+  {
+   "text": "For the second system write $b'_M:L'_0M\\to L'_2M[1]$. By hypothesis, for a resolving representative $M$ of $N\\in D(\\mathcal B)$ and one $M'$ of $TN$, $\\theta_i$ is $Q$ of a map $(u_2,u_1,u_0)$ of short exact diagrams from $0\\to E'_2P'M'\\to E'_1P'M'\\to E'_0P'M'\\to0$ to the termwise image $0\\to sE_2PM\\xrightarrow{s(i)}sE_1PM\\to sE_0PM\\to0$ under the additive functor $s$ underlying $S$, on which $S$ is computed. First, $S(b_N)$ is the canonical boundary $b''$ of this image row: $b_N=-Q(\\mathrm{pr})Q(q)^{-1}$ with $q:\\operatorname{Cone}(i)\\to E_0PM$ [def-weil-abstract-derived-category]; applying $s$ to the cone matrix gives $s\\operatorname{Cone}(i)=\\operatorname{Cone}(s(i))$ and $s(X[1])=(sX)[1]$ (both differentials are $-s(d)$), carrying $\\mathrm{pr},q$ to the projection and the map $q''$ of the image row, a quasi-isomorphism since that row is degreewise exact. As $S$ is computed by $s$ on these complexes and their cone, with the termwise shift comparison, $S(b_N)=-Q(\\mathrm{pr})Q(q'')^{-1}=b''$. The third square of the SES-triangle lemma for $(u_2,u_1,u_0)$ now gives\n$$\\theta_2[1]b'_{TN}=S(b_N)\\theta_0\\qquad(N\\in D(\\mathcal B)).\\tag{**}$$\nFor an objectwise quasi-isomorphism of diagrams the squares persist after inverting the three comparisons, isomorphisms under localization; compose along the allowed zigzag. The first two squares give $\\theta_i\\lambda'_{T(-)}=S(\\lambda)\\theta_j$ for the left arrows. Naturality and shift compatibility of the $\\theta_i$ follow from the same diagram construction and cochain signs. The whole-diagram hypothesis is essential: three unrelated object isomorphisms, or an arbitrary completion of $S$ of the left triangle, would not imply (**).",
+   "uses": [
+    "lem-weil-pbc-complex-ses-triangle",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tags 0152 (lemma-derived-canonical-delta-functor), 09T5 (lemma-derived-adjoint-functors) and 070I (lemma-K-injective); signed product Hom: more-algebra.tex Tag 0A5X. The combined argument is agent-written."
+   }
+  },
+  {
+   "text": "Put $N=R_2K$, and let $a_i: L_i'TR_iK\\to K'$ denote $\\phi\\,S(\\varepsilon_i)\\,\\theta_i$, so $a_i=\\beta_i^\\sharp$. Apply (*) in the primed system, then (**), to obtain\n$$(\\delta_{K'}\\beta_2)^\\sharp=-a_2[1]b'_{TN}=-\\phi[1]S(\\varepsilon_2[1]b_N)\\theta_0.$$\nApplying (*) in the unprimed system to $1_N$ says\n$$\\varepsilon_0[1]L_0(\\delta_K)=-\\varepsilon_2[1]b_N.$$\nSubstitution changes the previous expression into\n$$\\phi[1]S(\\varepsilon_0[1]L_0(\\delta_K))\\theta_0.$$\nNaturality of $\\theta_0$ at $\\delta_K$, and the shift compatibility of the normalized adjunctions, identify this last expression with $(\\beta_0[1]\\delta_{T,K})^\\sharp$. Adjunction bijectivity proves the required connecting square. This calculation only composes $\\phi$ and the counits; it never inverts a $\\beta_i$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tags 0152 (lemma-derived-canonical-delta-functor), 09T5 (lemma-derived-adjoint-functors) and 070I (lemma-K-injective); signed product Hom: more-algebra.tex Tag 0A5X. The combined argument is agent-written."
+   }
+  },
+  {
+   "text": "For either left arrow $\\lambda:L_j\\to L_i$ ($j,i$ equal to $2,1$ or $1,0$), let $r:R_i\\to R_j$ be its right mate and use primes for the other system. Its counit equation is\n$$\\varepsilon_j L_j(r)=\\varepsilon_i\\lambda_{R_i}.$$\nThe first two diagram squares of step 6 say $\\theta_i\\lambda'_{T(-)}=S(\\lambda)\\theta_j$. Thus the transpose of $r'\\beta_i$ is $a_i\\lambda'_{TR_iK}=\\phi S(\\varepsilon_i\\lambda_{R_iK})\\theta_j$. Replace the middle composite by $\\varepsilon_jL_j(r)$ using the counit equation; naturality of $\\theta_j$ makes this the transpose of $\\beta_jT(r)$. Hence both earlier squares commute by adjunction bijectivity. Together with step 7 these are exactly the three squares of the claimed morphism of the specified right triangles. All equalities respect the canonical finite sum and shift comparisons already fixed by the resolution diagrams.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tags 0152 (lemma-derived-canonical-delta-functor), 09T5 (lemma-derived-adjoint-functors) and 070I (lemma-K-injective); signed product Hom: more-algebra.tex Tag 0A5X. The combined argument is agent-written."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sp-injective-resolutions",
+  "lem-weil-pbc-right-adjoint-preserves-kinjective",
+  "lem-weil-pbc-kinjective-total-derived",
+  "lem-weil-pbc-complex-ses-triangle",
+  "lem-weil-pbc-degreewise-split-derived-triangle",
+  "lem-weil-pbc-kinjective-hom-derived",
+  "lem-sfb-resolving-derived-adjunction-normalization",
+  "lem-weil-pbc-termwise-adjunction-homotopy",
+  "lem-sfb-product-hom-ses-boundary",
+  "def-weil-abstract-derived-category"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/derived.tex",
+  "place": "Combination of Tags 0152, 09T5, 070I and more-algebra.tex 0A5X; the signed mate calculation is written out."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A short exact sequence of exact left adjoint functors induces a distinguished triangle of their derived right adjoints natural under adjunction mates",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"CategoryTheory.Adjunction.isTriangulated_rightAdjoint\", \"module\": \"Mathlib/CategoryTheory/Triangulated/Adjunction\", \"type\": \"∀ {C : Type u_1} {D : Type u_2} [inst : CategoryTheory.Category.{v_1, u_1} C]\\n  [inst_1 : CategoryTheory.Category.{v_2, u_2} D] [inst_2 : CategoryTheory.Limits.HasZeroObject C]\\n  [inst_3 : CategoryTheory.Limits.HasZeroObject D] [inst_4 : CategoryTheory.Preadditive C]\\n  [inst_5 : CategoryTheory.Pread\", \"doc\": \"If $ F : \\\\mathcal{C} \\\\to \\\\mathcal{D} $ is a triangulated functor between pretriangulated categories (commuting with integer-parameterized shifts, preserving preadditive structure, and respecting zero \"}\n  {\"name\": \"CategoryTheory.Adjunction.isTriangulated_leftAdjoint\", \"module\": \"Mathlib/CategoryTheory/Triangulated/Adjunction\", \"type\": \"∀ {C : Type u_1} {D : Type u_2} [inst : CategoryTheory.Category.{v_1, u_1} C]\\n  [inst_1 : CategoryTheory.Category.{v_2, u_2} D] [inst_2 : CategoryTheory.Limits.HasZeroObject C]\\n  [inst_3 : CategoryTheory.Limits.HasZeroObject D] [inst_4 : CategoryTheory.Preadditive C]\\n  [inst_5 : CategoryTheory.Pread\", \"doc\": \"In an adjunction between pretriangulated categories, if the right adjoint is a triangulated functor (i.e., commutes with the integer-parameterized shift operation, preserves the preadditive structure,\"}\n  {\"name\": \"CategoryTheory.Adjunction.IsTriangulated.rightAdjoint_isTriangulated\", \"module\": \"Mathlib/CategoryTheory/Triangulated/Adjunction\", \"type\": \"∀ {C : Type u_1} {D : Type u_2} {inst : CategoryTheory.Category.{v_1, u_1} C}\\n  {inst_1 : CategoryTheory.Category.{v_2, u_2} D} {inst_2 : CategoryTheory.Limits.HasZeroObject C}\\n  {inst_3 : CategoryTheory.Limits.HasZeroObject D} {inst_4 : CategoryTheory.Preadditive C}\\n  {inst_5 : CategoryTheory.Pread\", \"doc\": \"Given pretriangulated categories $\\\\mathcal{C}$ and $\\\\mathcal{D}$ with integer-parameterized shift operations, if functors $F: \\\\mathcal{C} \\\\to \\\\mathcal{D}$ and $G: \\\\mathcal{D} \\\\to \\\\mathcal{C}$ form a t\"}\n  {\"name\": \"CategoryTheory.Adjunction.IsTriangulated.leftAdjoint_isTriangulated\", \"module\": \"Mathlib/CategoryTheory/Triangulated/Adjunction\", \"type\": \"∀ {C : Type u_1} {D : Type u_2} {inst : CategoryTheory.Category.{v_1, u_1} C}\\n  {inst_1 : CategoryTheory.Category.{v_2, u_2} D} {inst_2 : CategoryTheory.Limits.HasZeroObject C}\\n  {inst_3 : CategoryTheory.Limits.HasZeroObject D} {inst_4 : CategoryTheory.Preadditive C}\\n  {inst_5 : CategoryTheory.Pread\", \"doc\": \"If $ F : C \\to D $ and $ G : D \\to C $ form an adjunction between pretriangulated categories $ C $ and $ D $, where both functors commute with integer-parameterized shift operations and the adjunction r\"}\n  {\"name\": \"CategoryTheory.Functor.map_distinguished_exact\", \"module\": \"Mathlib/CategoryTheory/Triangulated/HomologicalFunctor\", \"type\": \"∀ {C : Type u_1} {A : Type u_3} [inst : CategoryTheory.Category.{v_1, u_1} C] [inst_1 : CategoryTheory.HasShift C ℤ]\\n  [inst_2 : CategoryTheory.Category.{v_3, u_3} A] (F : CategoryTheory.Functor C A)\\n  [inst_3 : CategoryTheory.Limits.HasZeroObject C] [inst_4 : CategoryTheory.Preadditive C]\\n  [inst_5\", \"doc\": \"For a homological functor $ F : C \\\\to A $ from a pretriangulated category $ C $ (with integer-indexed shifts, zero object, and preadditive structure) to an abelian category $ A $, and for any distingu\"}\n  {\"name\": \"CategoryTheory.ShortComplex.ShortExact.singleTriangleIso\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/SingleTriangle\", \"type\": \"{C : Type u} →\\n  [inst : CategoryTheory.Category.{v, u} C] →\\n    [inst_1 : CategoryTheory.Abelian C] →\\n      [inst_2 : HasDerivedCategory C] →\\n        {S : CategoryTheory.ShortComplex C} → (hS : S.ShortExact) → hS.singleTriangle ≅ DerivedCategory.triangleOfSES ⋯\", \"doc\": \"An isomorphism establishing that the triangle constructed directly from a short exact sequence $ 0 \\\\to X_1 \\\\to X_2 \\\\to X_3 \\\\to 0 $ in an abelian category $ \\\\mathcal{C} $ (via single-term complex funct\"}\n  {\"name\": \"CategoryTheory.Adjunction.derivedε_fac_app\", \"module\": \"Mathlib/CategoryTheory/Functor/Derived/Adjunction\", \"type\": \"∀ {C₁ : Type u_1} {C₂ : Type u_2} {D₁ : Type u_3} {D₂ : Type u_4} [inst : CategoryTheory.Category.{v_1, u_1} C₁]\\n  [inst_1 : CategoryTheory.Category.{v_2, u_2} C₂] [inst_2 : CategoryTheory.Category.{v_3, u_3} D₁]\\n  [inst_3 : CategoryTheory.Category.{v_4, u_4} D₂] {G : CategoryTheory.Functor C₁ C₂} {\", \"doc\": \"For any object $X_2$ in category $\\\\mathcal{C}_2$, the composition of $G'$ applied to $\\\\beta_{X_2}$ with the derived counit $\\\\varepsilon'$ evaluated at $L_2(X_2)$ equals the composition of $\\\\alpha_{F(X\"}\n  {\"name\": \"CategoryTheory.Adjunction.IsTriangulated.mk''\", \"module\": \"Mathlib/CategoryTheory/Triangulated/Adjunction\", \"type\": \"∀ {C : Type u_1} {D : Type u_2} [inst : CategoryTheory.Category.{v_1, u_1} C]\\n  [inst_1 : CategoryTheory.Category.{v_2, u_2} D] [inst_2 : CategoryTheory.Limits.HasZeroObject C]\\n  [inst_3 : CategoryTheory.Limits.HasZeroObject D] [inst_4 : CategoryTheory.Preadditive C]\\n  [inst_5 : CategoryTheory.Pread\", \"doc\": \"An adjunction between functors $ F: C \\\\to D $ and $ G: D \\\\to C $ where both functors commute with the integer-parameterized shift operations in their respective pretriangulated categories $ C $ and $ \"}",
+   "date": "2026-10-23",
+   "verdict": "no match: exactness of a single adjoint, SES triangles, and adjunction triangle identities do not supply the adjoint sequence and its specified-boundary comparison"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Functorial right adjoint triangle dual to a natural cone triangle of left adjoints including boundary map and mate compatibility",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"CategoryTheory.Adjunction.functorialityCounit'\", \"module\": \"Mathlib/CategoryTheory/Adjunction/Limits\", \"type\": \"{C : Type u₁} →\\n  [inst : CategoryTheory.Category.{v₁, u₁} C] →\\n    {D : Type u₂} →\\n      [inst_1 : CategoryTheory.Category.{v₂, u₂} D] →\\n        {F : CategoryTheory.Functor C D} →\\n          {G : CategoryTheory.Functor D C} →\\n            (adj : F ⊣ G) →\\n              {J : Type u} →\\n                [\", \"doc\": \"A natural transformation from the composition of the functoriality functors $ \\\\text{Cones.functoriality}_G \\\\circ \\\\text{functorialityLeftAdjoint} $ to the identity functor on cones, defined by applying\"}\n  {\"name\": \"CategoryTheory.Adjunction.functorialityAdjunction'\", \"module\": \"Mathlib/CategoryTheory/Adjunction/Limits\", \"type\": \"{C : Type u₁} →\\n  [inst : CategoryTheory.Category.{v₁, u₁} C] →\\n    {D : Type u₂} →\\n      [inst_1 : CategoryTheory.Category.{v₂, u₂} D] →\\n        {F : CategoryTheory.Functor C D} →\\n          {G : CategoryTheory.Functor D C} →\\n            (adj : F ⊣ G) →\\n              {J : Type u} →\\n                [\", \"doc\": \"An adjunction between the functor $\\\\text{functorialityLeftAdjoint}(adj, K)$ (mapping cones over $K \\\\circ G$ to cones over $K$) and the functor $\\\\text{Cones.functoriality}(K, G)$ (mapping cones over $K\"}\n  {\"name\": \"CategoryTheory.Adjunction.functorialityLeftAdjoint\", \"module\": \"Mathlib/CategoryTheory/Adjunction/Limits\", \"type\": \"{C : Type u₁} →\\n  [inst : CategoryTheory.Category.{v₁, u₁} C] →\\n    {D : Type u₂} →\\n      [inst_1 : CategoryTheory.Category.{v₂, u₂} D] →\\n        {F : CategoryTheory.Functor C D} →\\n          {G : CategoryTheory.Functor D C} →\\n            (F ⊣ G) →\\n              {J : Type u} →\\n                [inst_2\", \"doc\": \"Given an adjunction between functors $F$ and $G$, this defines a functor from the category of cones over $K \\\\circ G$ to the category of cones over $K$. The construction uses the counit of the adjuncti\"}\n  {\"name\": \"CategoryTheory.Adjunction.functorialityUnit'\", \"module\": \"Mathlib/CategoryTheory/Adjunction/Limits\", \"type\": \"{C : Type u₁} →\\n  [inst : CategoryTheory.Category.{v₁, u₁} C] →\\n    {D : Type u₂} →\\n      [inst_1 : CategoryTheory.Category.{v₂, u₂} D] →\\n        {F : CategoryTheory.Functor C D} →\\n          {G : CategoryTheory.Functor D C} →\\n            (adj : F ⊣ G) →\\n              {J : Type u} →\\n                [\", \"doc\": \"Given categories $\\\\mathcal{C}$ and $\\\\mathcal{D}$, an adjunction $F \\\\dashv G$ between functors $F: \\\\mathcal{C} \\\\to \\\\mathcal{D}$ and $G: \\\\mathcal{D} \\\\to \\\\mathcal{C}$, and a functor $K: \\\\mathcal{J} \\\\to \\\\\"}\n  {\"name\": \"CategoryTheory.Adjunction.isTriangulated_rightAdjoint\", \"module\": \"Mathlib/CategoryTheory/Triangulated/Adjunction\", \"type\": \"∀ {C : Type u_1} {D : Type u_2} [inst : CategoryTheory.Category.{v_1, u_1} C]\\n  [inst_1 : CategoryTheory.Category.{v_2, u_2} D] [inst_2 : CategoryTheory.Limits.HasZeroObject C]\\n  [inst_3 : CategoryTheory.Limits.HasZeroObject D] [inst_4 : CategoryTheory.Preadditive C]\\n  [inst_5 : CategoryTheory.Pread\", \"doc\": \"If $ F : \\\\mathcal{C} \\\\to \\\\mathcal{D} $ is a triangulated functor between pretriangulated categories (commuting with integer-parameterized shifts, preserving preadditive structure, and respecting zero \"}\n  {\"name\": \"CategoryTheory.Adjunction.conesIsoComponentHom\", \"module\": \"Mathlib/CategoryTheory/Adjunction/Limits\", \"type\": \"{C : Type u₁} →\\n  [inst : CategoryTheory.Category.{v₁, u₁} C] →\\n    {D : Type u₂} →\\n      [inst_1 : CategoryTheory.Category.{v₂, u₂} D] →\\n        {F : CategoryTheory.Functor C D} →\\n          {G : CategoryTheory.Functor D C} →\\n            (F ⊣ G) →\\n              {J : Type u} →\\n                [inst_2\", \"doc\": \"Given adjoint functors $ F : \\\\mathcal{C} \\\\to \\\\mathcal{D} $ and $ G : \\\\mathcal{D} \\\\to \\\\mathcal{C} $, a diagram $ K : \\\\mathcal{J} \\\\to \\\\mathcal{D} $, and an object $ X \\\\in \\\\mathcal{C}^{\\\\text{op}} $, this\"}\n  {\"name\": \"CategoryTheory.Adjunction.IsTriangulated.rightAdjoint_isTriangulated\", \"module\": \"Mathlib/CategoryTheory/Triangulated/Adjunction\", \"type\": \"∀ {C : Type u_1} {D : Type u_2} {inst : CategoryTheory.Category.{v_1, u_1} C}\\n  {inst_1 : CategoryTheory.Category.{v_2, u_2} D} {inst_2 : CategoryTheory.Limits.HasZeroObject C}\\n  {inst_3 : CategoryTheory.Limits.HasZeroObject D} {inst_4 : CategoryTheory.Preadditive C}\\n  {inst_5 : CategoryTheory.Pread\", \"doc\": \"Given pretriangulated categories $\\\\mathcal{C}$ and $\\\\mathcal{D}$ with integer-parameterized shift operations, if functors $F: \\\\mathcal{C} \\\\to \\\\mathcal{D}$ and $G: \\\\mathcal{D} \\\\to \\\\mathcal{C}$ form a t\"}\n  {\"name\": \"CategoryTheory.Adjunction.conesIsoComponentInv\", \"module\": \"Mathlib/CategoryTheory/Adjunction/Limits\", \"type\": \"{C : Type u₁} →\\n  [inst : CategoryTheory.Category.{v₁, u₁} C] →\\n    {D : Type u₂} →\\n      [inst_1 : CategoryTheory.Category.{v₂, u₂} D] →\\n        {F : CategoryTheory.Functor C D} →\\n          {G : CategoryTheory.Functor D C} →\\n            (F ⊣ G) →\\n              {J : Type u} →\\n                [inst_2\", \"doc\": \"Given adjoint functors $ F : \\\\mathcal{C} \\\\to \\\\mathcal{D} $ and $ G : \\\\mathcal{D} \\\\to \\\\mathcal{C} $, a diagram $ K : \\\\mathcal{J} \\\\to \\\\mathcal{D} $, and an object $ X \\\\in \\\\mathcal{C}^{\\\\text{op}} $, this\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: exactness of a single adjoint, SES triangles, and adjunction triangle identities do not supply the adjoint sequence and its specified-boundary comparison"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Right adjoint triangle to a short exact sequence of exact functors canonical connecting map",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"CategoryTheory.ShortComplex.ShortExact.δ\", \"module\": \"Mathlib.Algebra.Homology.HomologySequence\", \"type\": \": S.X₃.homology i ⟶ S.X₁.homology j\", \"doc\": \"Given a short exact sequence $ S $ of homological complexes in an abelian category $ \\\\mathcal{C} $, indices $ i, j $ with a relation $ i \\\\to j $ in the complex shape, this morphism $ \\\\delta $ maps the\"}\n  {\"name\": \"CategoryTheory.ShortComplex.ShortExact.singleδ\", \"module\": \"Mathlib.Algebra.Homology.DerivedCategory.SingleTriangle\", \"type\": \": (singleFunctor C 0).obj S.X₃ ⟶ ((singleFunctor C 0).obj S.X₁)⟦(1 : ℤ)⟧\", \"doc\": \"The morphism $ \\\\delta: Q(X_3) \\\\to Q(X_1)[1] $ in the derived category, constructed from a short exact sequence $ 0 \\\\to X_1 \\\\to X_2 \\\\to X_3 \\\\to 0 $, using the localization functor $ Q $ and the mapping\"}\n  {\"name\": \"DerivedCategory.triangleOfSESδ\", \"module\": \"Mathlib.Algebra.Homology.DerivedCategory.ShortExact\", \"type\": \": Q.obj (S.X₃) ⟶ (Q.obj S.X₁)⟦(1 : ℤ)⟧\", \"doc\": \"The morphism $ \\\\delta: Q(X_3) \\\\to Q(X_1)[1] $ in the derived category, constructed from a short exact sequence $ 0 \\\\to X_1 \\\\to X_2 \\\\to X_3 \\\\to 0 $, using the localization functor $ Q $ and the mapping\"}\n  {\"name\": \"CategoryTheory.ShortComplex.ShortExact.singleδ.congr_simp\", \"module\": \"Mathlib.Algebra.Homology.DerivedCategory.SingleTriangle\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Abelian C]\\n  [inst_2 : HasDerivedCategory C] {S : CategoryTheory.ShortComplex C} (hS : S.ShortExact), hS.singleδ = hS.singleδ\", \"doc\": \"For any abelian category $\\\\mathcal{C}$ and short exact sequence $0 \\\\to X_1 \\\\to X_2 \\\\to X_3 \\\\to 0$, the connecting morphism $\\\\delta: Q(X_3) \\\\to Q(X_1)[1]$ in the derived category forms the distinguishe\"}\n  {\"name\": \"CategoryTheory.ShortComplex.ShortExact.singleTriangle\", \"module\": \"Mathlib.Algebra.Homology.DerivedCategory.SingleTriangle\", \"type\": \": Triangle (DerivedCategory C)\", \"doc\": \"The distinguished triangle in the derived category $ \\\\mathcal{D}(\\\\mathcal{C}) $ associated to a short exact sequence $ 0 \\\\to X_1 \\\\to X_2 \\\\to X_3 \\\\to 0 $ in an abelian category $ \\\\mathcal{C} $. It is c\"}\n  {\"name\": \"DerivedCategory.triangleOfSES_mor₃\", \"module\": \"Mathlib.Algebra.Homology.DerivedCategory.ShortExact\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Abelian C]\\n  [inst_2 : HasDerivedCategory C] {S : CategoryTheory.ShortComplex (CochainComplex C ℤ)} (hS : S.ShortExact),\\n  (DerivedCategory.triangleOfSES hS).mor₃ = DerivedCategory.triangleOfSESδ hS\", \"doc\": \"In the derived category, for any short exact sequence $0 \\\\to X_1 \\\\to X_2 \\\\to X_3 \\\\to 0$ in an abelian category, the third morphism of the distinguished triangle $Q(X_1) \\\\to Q(X_2) \\\\to Q(X_3) \\\\xrightar\"}\n  {\"name\": \"CategoryTheory.ShortComplex.ShortExact.δ.congr_simp\", \"module\": \"Mathlib.Algebra.Homology.HomologySequence\", \"type\": \"∀ {C : Type u_1} {ι : Type u_2} [inst : CategoryTheory.Category.{v_1, u_1} C] [inst_1 : CategoryTheory.Abelian C]\\n  {c : ComplexShape ι} {S : CategoryTheory.ShortComplex (HomologicalComplex C c)} (hS : S.ShortExact) (i j : ι)\\n  (hij : c.Rel i j), hS.δ i j hij = hS.δ i j hij\", \"doc\": \"Given a short exact sequence $ S $ of homological complexes in an abelian category $ \\\\mathcal{C} $, indices $ i, j $ with a relation $ i \\\\to j $ in the complex shape, the connecting homomorphism $ \\\\de\"}\n  {\"name\": \"CategoryTheory.ShortComplex.ShortExact.singleTriangle_mor₃\", \"module\": \"Mathlib.Algebra.Homology.DerivedCategory.SingleTriangle\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Abelian C]\\n  [inst_2 : HasDerivedCategory C] {S : CategoryTheory.ShortComplex C} (hS : S.ShortExact),\\n  hS.singleTriangle.mor₃ = hS.singleδ\", \"doc\": \"In the derived category of an abelian category, for any short exact sequence $0 \\\\to X_1 \\\\to X_2 \\\\to X_3 \\\\to 0$, the third morphism $\\\\delta: Q(X_3) \\\\to Q(X_1)[1]$ of the distinguished triangle $Q(X_1) \"}",
+   "date": "2026-10-23",
+   "verdict": "no match: exactness of a single adjoint, SES triangles, and adjunction triangle identities do not supply the adjoint sequence and its specified-boundary comparison"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Adjunction\", \"triangle\"",
+   "results": "[loogle] OK 12 hit(s)\n  {\"name\": \"CategoryTheory.Adjunction.left_triangle_components\", \"module\": \"Mathlib.CategoryTheory.Adjunction.Basic\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [CategoryTheory.Category.{v₂, u₂} D] {F : CategoryTheory.Functor C D} {G : CategoryTheory.Functor D C} (self : F ⊣ G) (X : C) : CategoryTheory.CategoryStruct.comp (F.map (self.unit.app X)) (self.counit.app (F.obj X)) = CategoryTheory.\", \"doc\": \"Equality of the composition of the unit and counit with the identity `F ⟶ FGF ⟶ F = 𝟙`\"}\n  {\"name\": \"CategoryTheory.Adjunction.right_triangle_components\", \"module\": \"Mathlib.CategoryTheory.Adjunction.Basic\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [CategoryTheory.Category.{v₂, u₂} D] {F : CategoryTheory.Functor C D} {G : CategoryTheory.Functor D C} (self : F ⊣ G) (Y : D) : CategoryTheory.CategoryStruct.comp (self.unit.app (G.obj Y)) (G.map (self.counit.app Y)) = CategoryTheory.\", \"doc\": \"Equality of the composition of the unit and counit with the identity `G ⟶ GFG ⟶ G = 𝟙`\"}\n  {\"name\": \"CategoryTheory.Adjunction.left_triangle_components_assoc\", \"module\": \"Mathlib.CategoryTheory.Adjunction.Basic\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [CategoryTheory.Category.{v₂, u₂} D] {F : CategoryTheory.Functor C D} {G : CategoryTheory.Functor D C} (self : F ⊣ G) (X : C) {Z : D} (h : F.obj X ⟶ Z) : CategoryTheory.CategoryStruct.comp (F.map (self.unit.app X)) (CategoryTheory.Cat\", \"doc\": \"Equality of the composition of the unit and counit with the identity `F ⟶ FGF ⟶ F = 𝟙`\"}\n  {\"name\": \"CategoryTheory.Adjunction.right_triangle_components_assoc\", \"module\": \"Mathlib.CategoryTheory.Adjunction.Basic\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [CategoryTheory.Category.{v₂, u₂} D] {F : CategoryTheory.Functor C D} {G : CategoryTheory.Functor D C} (self : F ⊣ G) (Y : D) {Z : C} (h : G.obj Y ⟶ Z) : CategoryTheory.CategoryStruct.comp (self.unit.app (G.obj Y)) (CategoryTheory.Cat\", \"doc\": \"Equality of the composition of the unit and counit with the identity `G ⟶ GFG ⟶ G = 𝟙`\"}\n  {\"name\": \"CategoryTheory.Adjunction.CoreUnitCounit.left_triangle\", \"module\": \"Mathlib.CategoryTheory.Adjunction.Basic\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [CategoryTheory.Category.{v₂, u₂} D] {F : CategoryTheory.Functor C D} {G : CategoryTheory.Functor D C} (self : CategoryTheory.Adjunction.CoreUnitCounit F G) : CategoryTheory.CategoryStruct.comp (CategoryTheory.Functor.whiskerRight sel\", \"doc\": \"Equality of the composition of the unit, associator, and counit with the identity\\n`F ⟶ (F G) F ⟶ F (G F) ⟶ F = NatTrans.id F`\"}\n  {\"name\": \"CategoryTheory.Adjunction.CoreUnitCounit.right_triangle\", \"module\": \"Mathlib.CategoryTheory.Adjunction.Basic\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [CategoryTheory.Category.{v₂, u₂} D] {F : CategoryTheory.Functor C D} {G : CategoryTheory.Functor D C} (self : CategoryTheory.Adjunction.CoreUnitCounit F G) : CategoryTheory.CategoryStruct.comp (G.whiskerLeft self.unit) (CategoryTheor\", \"doc\": \"Equality of the composition of the unit, associator, and counit with the identity\\n`G ⟶ G (F G) ⟶ (F G) F ⟶ G = NatTrans.id G`\"}\n  {\"name\": \"CategoryTheory.Adjunction.left_triangle\", \"module\": \"Mathlib.CategoryTheory.Adjunction.Basic\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [CategoryTheory.Category.{v₂, u₂} D] {F : CategoryTheory.Functor C D} {G : CategoryTheory.Functor D C} (adj : F ⊣ G) : CategoryTheory.CategoryStruct.comp (CategoryTheory.Functor.whiskerRight adj.unit F) (CategoryTheory.CategoryStruct.\", \"doc\": \"\"}\n  {\"name\": \"CategoryTheory.Adjunction.right_triangle\", \"module\": \"Mathlib.CategoryTheory.Adjunction.Basic\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [CategoryTheory.Category.{v₂, u₂} D] {F : CategoryTheory.Functor C D} {G : CategoryTheory.Functor D C} (adj : F ⊣ G) : CategoryTheory.CategoryStruct.comp (G.whiskerLeft adj.unit) (CategoryTheory.CategoryStruct.comp (G.associator F G).\", \"doc\": \"\"}\n  {\"name\": \"CategoryTheory.Bicategory.Adjunction.left_triangle\", \"module\": \"Mathlib.CategoryTheory.Bicategory.Adjunction.Basic\", \"type\": \" {B : Type u₁} [CategoryTheory.Bicategory B] {a b : B} {f : a ⟶ b} {g : b ⟶ a} (self : CategoryTheory.Bicategory.Adjunction f g) : CategoryTheory.Bicategory.leftZigzag self.unit self.counit = CategoryTheory.CategoryStruct.comp (CategoryTheory.Bicategory.leftUnitor f).hom (CategoryTheory.Bicategory.r\", \"doc\": \"The composition of the unit and the counit is equal to the identity up to unitors.\"}\n  {\"name\": \"CategoryTheory.Bicategory.Adjunction.right_triangle\", \"module\": \"Mathlib.CategoryTheory.Bicategory.Adjunction.Basic\", \"type\": \" {B : Type u₁} [CategoryTheory.Bicategory B] {a b : B} {f : a ⟶ b} {g : b ⟶ a} (self : CategoryTheory.Bicategory.Adjunction f g) : CategoryTheory.Bicategory.rightZigzag self.unit self.counit = CategoryTheory.CategoryStruct.comp (CategoryTheory.Bicategory.rightUnitor g).hom (CategoryTheory.Bicategory\", \"doc\": \"The composition of the unit and the counit is equal to the identity up to unitors.\"}\n  {\"name\": \"CategoryTheory.Bicategory.Adjunction.comp_left_triangle_aux\", \"module\": \"Mathlib.CategoryTheory.Bicategory.Adjunction.Basic\", \"type\": \" {B : Type u₁} [CategoryTheory.Bicategory B] {a b c : B} {f₁ : a ⟶ b} {g₁ : b ⟶ a} {f₂ : b ⟶ c} {g₂ : c ⟶ b} (adj₁ : CategoryTheory.Bicategory.Adjunction f₁ g₁) (adj₂ : CategoryTheory.Bicategory.Adjunction f₂ g₂) : CategoryTheory.Bicategory.leftZigzag (adj₁.compUnit adj₂) (adj₁.compCounit adj₂) = Ca\", \"doc\": \"\"}\n  {\"name\": \"CategoryTheory.Bicategory.Adjunction.comp_right_triangle_aux\", \"module\": \"Mathlib.CategoryTheory.Bicategory.Adjunction.Basic\", \"type\": \" {B : Type u₁} [CategoryTheory.Bicategory B] {a b c : B} {f₁ : a ⟶ b} {g₁ : b ⟶ a} {f₂ : b ⟶ c} {g₂ : c ⟶ b} (adj₁ : CategoryTheory.Bicategory.Adjunction f₁ g₁) (adj₂ : CategoryTheory.Bicategory.Adjunction f₂ g₂) : CategoryTheory.Bicategory.rightZigzag (adj₁.compUnit adj₂) (adj₁.compCounit adj₂) = C\", \"doc\": \"\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: exactness of a single adjoint, SES triangles, and adjunction triangle identities do not supply the adjoint sequence and its specified-boundary comparison"
+  },
+  {
+   "tool": "grep",
+   "query": "adjoint.*[Tt]riangle|[Tt]riangle.*adjoint",
+   "results": "[grep] OK 12 hit(s)\n  {\"file\": \"Mathlib/CategoryTheory/Adjunction/Lifting/Right.lean\", \"line\": \"14\", \"text\": \"This file gives two constructions for building right adjoints: the adjoint triangle theorem and the\"}\n  {\"file\": \"Mathlib/CategoryTheory/Adjunction/Lifting/Right.lean\", \"line\": \"17\", \"text\": \"The adjoint triangle theorem concerns a functor `F : B ⥤ A` with a right adjoint `U` such\"}\n  {\"file\": \"Mathlib/CategoryTheory/Adjunction/Lifting/Right.lean\", \"line\": \"21\", \"text\": \"a comonadic functor, giving the corollary: `isLeftAdjoint_triangle_lift_comonadic`, i.e. if `F` is\"}\n  {\"file\": \"Mathlib/CategoryTheory/Adjunction/Lifting/Right.lean\", \"line\": \"55\", \"text\": \"* https://ncatlab.org/nlab/show/adjoint+triangle+theorem\"}\n  {\"file\": \"Mathlib/CategoryTheory/Adjunction/Lifting/Right.lean\", \"line\": \"174\", \"text\": \"/-- The adjoint triangle theorem: Suppose `U : A ⥤ B` has a left adjoint `F` such that each unit\"}\n  {\"file\": \"Mathlib/CategoryTheory/Adjunction/Lifting/Left.lean\", \"line\": \"14\", \"text\": \"This file gives two constructions for building left adjoints: the adjoint triangle theorem and the\"}\n  {\"file\": \"Mathlib/CategoryTheory/Adjunction/Lifting/Left.lean\", \"line\": \"17\", \"text\": \"The adjoint triangle theorem concerns a functor `U : B ⥤ C` with a left adjoint `F` such\"}\n  {\"file\": \"Mathlib/CategoryTheory/Adjunction/Lifting/Left.lean\", \"line\": \"21\", \"text\": \"a monadic functor, giving the corollary: `isRightAdjoint_triangle_lift_monadic`, i.e. if `U` is\"}\n  {\"file\": \"Mathlib/CategoryTheory/Adjunction/Lifting/Left.lean\", \"line\": \"54\", \"text\": \"* https://ncatlab.org/nlab/show/adjoint+triangle+theorem\"}\n  {\"file\": \"Mathlib/CategoryTheory/Adjunction/Lifting/Left.lean\", \"line\": \"184\", \"text\": \"/-- The adjoint triangle theorem: Suppose `U : B ⥤ C` has a left adjoint `F` such that each counit\"}\n  {\"file\": \"Mathlib/CategoryTheory/Bicategory/Adjunction/Basic.lean\", \"line\": \"226\", \"text\": \"theorem adjointifyCounit_left_triangle (η : 𝟙 a ≅ f ≫ g) (ε : g ≫ f ≅ 𝟙 b) :\"}\n  {\"file\": \"Mathlib/CategoryTheory/Bicategory/Adjunction/Basic.lean\", \"line\": \"283\", \"text\": \"  left_triangle := adjointifyCounit_left_triangle η ε\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: exactness of a single adjoint, SES triangles, and adjunction triangle identities do not supply the adjoint sequence and its specified-boundary comparison"
+  },
+  {
+   "tool": "grep",
+   "query": "triangleOfSES|isTriangulated_rightAdjoint",
+   "results": "[grep] OK 4 hit(s)\n  {\"file\": \"Mathlib/CategoryTheory/Triangulated/Adjunction.lean\", \"line\": \"60\", \"text\": \"lemma isTriangulated_rightAdjoint [F.IsTriangulated] : G.IsTriangulated where\"}\n  {\"file\": \"Mathlib/CategoryTheory/Triangulated/Adjunction.lean\", \"line\": \"139\", \"text\": \"  have := isTriangulated_rightAdjoint adj.op\"}\n  {\"file\": \"Mathlib/CategoryTheory/Triangulated/Adjunction.lean\", \"line\": \"159\", \"text\": \"  rightAdjoint_isTriangulated := adj.isTriangulated_rightAdjoint\"}\n  {\"file\": \"Mathlib/CategoryTheory/Triangulated/Adjunction.lean\", \"line\": \"203\", \"text\": \"  rightAdjoint_isTriangulated := E.toAdjunction.isTriangulated_rightAdjoint\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: exactness of a single adjoint, SES triangles, and adjunction triangle identities do not supply the adjoint sequence and its specified-boundary comparison"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A resolution short exact sequence of exact left adjoint functors dualizes to a triangle of right derived functors and canonical base change mates preserve its SES boundary",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"CategoryTheory.Adjunction.derivedε\", \"module\": \"Mathlib/CategoryTheory/Functor/Derived/Adjunction\", \"type\": \"{C₁ : Type u_1} →\\n  {C₂ : Type u_2} →\\n    {D₁ : Type u_3} →\\n      {D₂ : Type u_4} →\\n        [inst : CategoryTheory.Category.{v_1, u_1} C₁] →\\n          [inst_1 : CategoryTheory.Category.{v_2, u_2} C₂] →\\n            [inst_2 : CategoryTheory.Category.{v_3, u_3} D₁] →\\n              [inst_3 : CategoryThe\", \"doc\": \"The natural transformation $\\\\varepsilon': F' \\\\circ G' \\\\Rightarrow \\\\text{id}_{\\\\mathcal{D}_2}$ constructed as the right derived functor description, combining whiskered natural transformations $\\\\beta$, \"}\n  {\"name\": \"CategoryTheory.Adjunction.derivedε_fac_app\", \"module\": \"Mathlib/CategoryTheory/Functor/Derived/Adjunction\", \"type\": \"∀ {C₁ : Type u_1} {C₂ : Type u_2} {D₁ : Type u_3} {D₂ : Type u_4} [inst : CategoryTheory.Category.{v_1, u_1} C₁]\\n  [inst_1 : CategoryTheory.Category.{v_2, u_2} C₂] [inst_2 : CategoryTheory.Category.{v_3, u_3} D₁]\\n  [inst_3 : CategoryTheory.Category.{v_4, u_4} D₂] {G : CategoryTheory.Functor C₁ C₂} {\", \"doc\": \"For any object $X_2$ in category $\\\\mathcal{C}_2$, the composition of $G'$ applied to $\\\\beta_{X_2}$ with the derived counit $\\\\varepsilon'$ evaluated at $L_2(X_2)$ equals the composition of $\\\\alpha_{F(X\"}\n  {\"name\": \"CategoryTheory.Adjunction.derived\", \"module\": \"Mathlib/CategoryTheory/Functor/Derived/Adjunction\", \"type\": \"{C₁ : Type u_1} →\\n  {C₂ : Type u_2} →\\n    {D₁ : Type u_3} →\\n      {D₂ : Type u_4} →\\n        [inst : CategoryTheory.Category.{v_1, u_1} C₁] →\\n          [inst_1 : CategoryTheory.Category.{v_2, u_2} C₂] →\\n            [inst_2 : CategoryTheory.Category.{v_3, u_3} D₁] →\\n              [inst_3 : CategoryThe\", \"doc\": \"Given categories $\\\\mathcal{C}_1, \\\\mathcal{C}_2, \\\\mathcal{D}_1, \\\\mathcal{D}_2$ with an adjunction $G \\\\dashv F$ between $\\\\mathcal{C}_1$ and $\\\\mathcal{C}_2$, and localization functors $L_1: \\\\mathcal{C}_1\"}\n  {\"name\": \"CategoryTheory.Adjunction.derived'_counit\", \"module\": \"Mathlib/CategoryTheory/Functor/Derived/Adjunction\", \"type\": \"∀ {C₁ : Type u_1} {C₂ : Type u_2} {D₁ : Type u_3} {D₂ : Type u_4} [inst : CategoryTheory.Category.{v_1, u_1} C₁]\\n  [inst_1 : CategoryTheory.Category.{v_2, u_2} C₂] [inst_2 : CategoryTheory.Category.{v_3, u_3} D₁]\\n  [inst_3 : CategoryTheory.Category.{v_4, u_4} D₂] {G : CategoryTheory.Functor C₁ C₂} {\", \"doc\": \"Given categories $\\\\mathcal{C}_1, \\\\mathcal{C}_2, \\\\mathcal{D}_1, \\\\mathcal{D}_2$ with an adjunction $G \\\\dashv F$ between $\\\\mathcal{C}_1$ and $\\\\mathcal{C}_2$, and localization functors $L_1: \\\\mathcal{C}_1\"}\n  {\"name\": \"CategoryTheory.Adjunction.derived_counit\", \"module\": \"Mathlib/CategoryTheory/Functor/Derived/Adjunction\", \"type\": \"∀ {C₁ : Type u_1} {C₂ : Type u_2} {D₁ : Type u_3} {D₂ : Type u_4} [inst : CategoryTheory.Category.{v_1, u_1} C₁]\\n  [inst_1 : CategoryTheory.Category.{v_2, u_2} C₂] [inst_2 : CategoryTheory.Category.{v_3, u_3} D₁]\\n  [inst_3 : CategoryTheory.Category.{v_4, u_4} D₂] {G : CategoryTheory.Functor C₁ C₂} {\", \"doc\": \"Given categories $\\\\mathcal{C}_1, \\\\mathcal{C}_2, \\\\mathcal{D}_1, \\\\mathcal{D}_2$ with an adjunction $G \\\\dashv F$ between $\\\\mathcal{C}_1$ and $\\\\mathcal{C}_2$, localization functors $L_1: \\\\mathcal{C}_1 \\\\to\"}\n  {\"name\": \"CategoryTheory.Adjunction.derivedη\", \"module\": \"Mathlib/CategoryTheory/Functor/Derived/Adjunction\", \"type\": \"{C₁ : Type u_1} →\\n  {C₂ : Type u_2} →\\n    {D₁ : Type u_3} →\\n      {D₂ : Type u_4} →\\n        [inst : CategoryTheory.Category.{v_1, u_1} C₁] →\\n          [inst_1 : CategoryTheory.Category.{v_2, u_2} C₂] →\\n            [inst_2 : CategoryTheory.Category.{v_3, u_3} D₁] →\\n              [inst_3 : CategoryThe\", \"doc\": \"The natural transformation from the identity functor on $\\\\mathcal{D}_1$ to the composition $G' \\\\circ F'$, constructed via the left-derived lift involving associators, whiskering operations, and the un\"}\n  {\"name\": \"CategoryTheory.Adjunction.derived'_unit\", \"module\": \"Mathlib/CategoryTheory/Functor/Derived/Adjunction\", \"type\": \"∀ {C₁ : Type u_1} {C₂ : Type u_2} {D₁ : Type u_3} {D₂ : Type u_4} [inst : CategoryTheory.Category.{v_1, u_1} C₁]\\n  [inst_1 : CategoryTheory.Category.{v_2, u_2} C₂] [inst_2 : CategoryTheory.Category.{v_3, u_3} D₁]\\n  [inst_3 : CategoryTheory.Category.{v_4, u_4} D₂] {G : CategoryTheory.Functor C₁ C₂} {\", \"doc\": \"Given categories $\\\\mathcal{C}_1, \\\\mathcal{C}_2, \\\\mathcal{D}_1, \\\\mathcal{D}_2$ with an adjunction $G \\\\dashv F$ between $\\\\mathcal{C}_1$ and $\\\\mathcal{C}_2$, and localization functors $L_1: \\\\mathcal{C}_1\"}\n  {\"name\": \"CategoryTheory.Adjunction.derivedε_fac_app_assoc\", \"module\": \"Mathlib/CategoryTheory/Functor/Derived/Adjunction\", \"type\": \"∀ {C₁ : Type u_1} {C₂ : Type u_2} {D₁ : Type u_3} {D₂ : Type u_4} [inst : CategoryTheory.Category.{v_1, u_1} C₁]\\n  [inst_1 : CategoryTheory.Category.{v_2, u_2} C₂] [inst_2 : CategoryTheory.Category.{v_3, u_3} D₁]\\n  [inst_3 : CategoryTheory.Category.{v_4, u_4} D₂] {G : CategoryTheory.Functor C₁ C₂} {\", \"doc\": \"Given categories $\\\\mathcal{C}_1, \\\\mathcal{C}_2, \\\\mathcal{D}_1, \\\\mathcal{D}_2$ and functors $G, F$ forming an adjunction $G \\\\dashv F$, with localizations $L_1, L_2$ respecting a morphism property $W_2$\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: derived adjunction and its counit normalization do not assert the adjoint SES triangle with its boundary comparison"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A short exact sequence of exact left adjoint functors induces a distinguished triangle of their derived right adjoints natural under adjunction mates",
+   "results": "Search returned 8 hits: CategoryTheory.Adjunction.isTriangulated_rightAdjoint, CategoryTheory.Adjunction.isTriangulated_leftAdjoint, CategoryTheory.Adjunction.IsTriangulated.rightAdjoint_isTriangulated, CategoryTheory.Adjunction.IsTriangulated.leftAdjoint_isTriangulated, CategoryTheory.Functor.map_distinguished_exact, CategoryTheory.ShortComplex.ShortExact.singleTriangleIso, CategoryTheory.Adjunction.derivedε_fac_app, CategoryTheory.Adjunction.IsTriangulated.mk''. ",
+   "date": "2026-10-23",
+   "verdict": "no match: exactness of individual adjoints and ordinary SES triangles do not give the combined mate-boundary assertion"
+  },
+  {
+   "tool": "grep",
+   "query": "adjoint.*[Ss]hort[Ee]xact|[Ss]hort[Ee]xact.*adjoint|mate.*triangle",
+   "results": "Search returned 0 hits: . ",
+   "date": "2026-10-23",
+   "verdict": "no match: exactness of individual adjoints and ordinary SES triangles do not give the combined mate-boundary assertion"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Right adjoint triangle to a short exact sequence of exact functors canonical connecting map",
+   "results": "Search returned 8 hits: CategoryTheory.ShortComplex.ShortExact.δ, CategoryTheory.ShortComplex.ShortExact.singleδ, DerivedCategory.triangleOfSESδ, CategoryTheory.ShortComplex.ShortExact.singleδ.congr_simp, CategoryTheory.ShortComplex.ShortExact.singleTriangle, DerivedCategory.triangleOfSES_mor₃, CategoryTheory.ShortComplex.ShortExact.δ.congr_simp, CategoryTheory.ShortComplex.ShortExact.singleTriangle_mor₃. ",
+   "date": "2026-10-23",
+   "verdict": "no match: exactness of individual adjoints and ordinary SES triangles do not give the combined mate-boundary assertion"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction, DerivedCategory.triangleOfSES",
+   "results": "Search returned 0 hits: . ",
+   "date": "2026-10-23",
+   "verdict": "no match: exactness of individual adjoints and ordinary SES triangles do not give the combined mate-boundary assertion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Functorial right adjoint triangle dual to a natural cone triangle of left adjoints including boundary map and mate compatibility",
+   "results": "Search returned 8 hits: CategoryTheory.Adjunction.functorialityCounit', CategoryTheory.Adjunction.functorialityAdjunction', CategoryTheory.Adjunction.functorialityLeftAdjoint, CategoryTheory.Adjunction.functorialityUnit', CategoryTheory.Adjunction.isTriangulated_rightAdjoint, CategoryTheory.Adjunction.conesIsoComponentHom, CategoryTheory.Adjunction.IsTriangulated.rightAdjoint_isTriangulated, CategoryTheory.Adjunction.conesIsoComponentInv. ",
+   "date": "2026-10-23",
+   "verdict": "no match: exactness of individual adjoints and ordinary SES triangles do not give the combined mate-boundary assertion"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-space-relative-mv-exchange-triangles",
+  "date": "2026-10-23",
+  "group": "Q116"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Stable genus and smooth-family open loci in curve families. Supporting input: 0E76 proof, reduction to prestable curves, and 0E78 proof, decomposition by genus before imposing stability. Supporting input: 0E1J proof, perfectness and arbitrary derived base change before extracting the positive-degree perfect summand. Supporting input to this derived direct-image specialization: Tag 0A1K (lemma-base-change-tensor), statement and precise canonical map in the proof; sites-cohomology.tex Tags 07A6 (lemma-adjoint) and 07A7 (remark-base-change). Supporting input to 0A1K: Tag 0DKH (lemma-single-complex-base-change), with condition (1) of Tag 0DKG (lemma-single-complex-base-change-condition) and equation-bc immediately before it; the canonical exchange is the map specified there and explicitly defined in the statement. Supporting input: Tag 0DKH induction step: canonical commutative relative Mayer–Vietoris triangle diagram, before applying third-isomorphism-triangle. Supporting input: Homological comparison of the canonical resolution sequences behind the connecting square in Tag 0DKH.",
+   "via": [
+    "lem-sfb-space-relative-mv-exchange-triangles",
+    "lem-sfb-space-single-complex-base-change",
+    "lem-sfb-space-flat-complex-base-change",
+    "lem-sfb-proper-flat-space-derived-base-change",
+    "lem-sfb-curve-h0-genus-strata",
+    "lem-sfb-stable-and-smooth-family-open-loci",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-derived-adjoint-ses-mates",
+  "worker": "stage1",
+  "summary": "Q22: proved injective-level splitting by the Hom universal property, reused K-injective and normalized-adjunction tools, isolated the strictly smaller product-Hom SES boundary computation, and wrote the counit transpose calculation for all three comparison squares with the contravariant minus sign explicit. Statement unchanged.",
+  "blueprint": "The inherited ancestry is null (blueprint_refs.py ancestor reports None). The split supplies the homological compatibility needed by lem-sfb-space-relative-mv-exchange-triangles in the recorded ctf-stability direct-image route, especially its canonical boundary comparison. Latest blueprint unit and direct-image route read; no alternative geometric route is introduced.",
+  "tool_uses": [
+   {
+    "node": "def-sp-injective-resolutions",
+    "why": "Generic homological algebra: Injective objects and injective resolutions. Used with its stated hypotheses; the geometric ctf-stability unit supplies no replacement for this categorical tool."
+   },
+   {
+    "node": "lem-weil-pbc-right-adjoint-preserves-kinjective",
+    "why": "Generic homological algebra: A right adjoint of an exact functor preserves K-injective complexes. Used with its stated hypotheses; the geometric ctf-stability unit supplies no replacement for this categorical tool."
+   },
+   {
+    "node": "lem-weil-pbc-kinjective-total-derived",
+    "why": "Generic homological algebra: Enough K-injectives compute total right derived functors. Used with its stated hypotheses; the geometric ctf-stability unit supplies no replacement for this categorical tool."
+   },
+   {
+    "node": "lem-weil-pbc-complex-ses-triangle",
+    "why": "Generic homological algebra: A short exact sequence of complexes gives a distinguished triangle in D(A), functorially. Used with its stated hypotheses; the geometric ctf-stability unit supplies no replacement for this categorical tool."
+   },
+   {
+    "node": "lem-weil-pbc-degreewise-split-derived-triangle",
+    "why": "Generic homological algebra: A degreewise split short exact sequence of complexes gives the cone triangle. Used with its stated hypotheses; the geometric ctf-stability unit supplies no replacement for this categorical tool."
+   },
+   {
+    "node": "lem-weil-pbc-kinjective-hom-derived",
+    "why": "Generic homological algebra: Morphisms into a K-injective complex are computed in the homotopy category. Used with its stated hypotheses; the geometric ctf-stability unit supplies no replacement for this categorical tool."
+   },
+   {
+    "node": "lem-sfb-resolving-derived-adjunction-normalization",
+    "why": "Generic homological algebra: Derived adjunction normalized by a left resolving class and K-injectives. Used with its stated hypotheses; the geometric ctf-stability unit supplies no replacement for this categorical tool."
+   },
+   {
+    "node": "lem-weil-pbc-termwise-adjunction-homotopy",
+    "why": "Generic homological algebra: An adjunction of additive functors induces an adjunction on the homotopy categories of complexes, termwise. Used with its stated hypotheses; the geometric ctf-stability unit supplies no replacement for this categorical tool."
+   }
+  ]
+ },
+ "tool_uses": [
+  "def-sp-injective-resolutions",
+  "lem-weil-pbc-right-adjoint-preserves-kinjective",
+  "lem-weil-pbc-kinjective-total-derived",
+  "lem-weil-pbc-complex-ses-triangle",
+  "lem-weil-pbc-degreewise-split-derived-triangle",
+  "lem-weil-pbc-kinjective-hom-derived",
+  "lem-sfb-resolving-derived-adjunction-normalization",
+  "lem-weil-pbc-termwise-adjunction-homotopy"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q22-b9a59babd",
+  "group": "Q22",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q22-b9a59babd (reviewer sub-agent of L); spot-checked: Read in full: the item (8 steps), new node lem-sfb-product-hom-ses-boundary, every cited statement, Stacks 0152 (δ=−p∘q⁻¹), 09T5, 070I and more-algebra 0A5X (d(f)=d_M f−(−1)^n f d_L), and the parent lem-sfb-space-relative-mv-exchange-triangles steps 2, 4 and 5. Item is unsplit on live and side-live with an unchanged statement, and there is no repair note, so this is a first split and not superseded. Step checks: step 1 Hom-exactness by injectivity and Yoneda gives the split right mate SES and additivity of H_i. Step 2 right-adjoint-preserves-K-injective plus the total-derived node gives R_iK=QY_i, with no exactness of P needed. Step 3: I checked π d s = −pr∘φ for the chain map φ(c)=(sc,−πdsc), so the split formula agrees with the canonical boundary. Step 4: the normalization node applies to E_iP ⊣ FH_i with the categories swapped, and the componentwise Hom isomorphism preserves D. Step 5: the new node's hypotheses match exactly; D(su) projects to π d s u, giving (*). Steps 7 and 8: I re-derived the connecting square and the two mate squares from (*), (**), ε_j L_j(r)=ε_i λ and θ-naturality; no β is inverted. New node: true. I verified the homotopy H=−g, which gives hq−f[1]pr = dH+Hd and hence ∂[f]=−Q(f)[1]b. The H^j identification needs no sign. The report's k[−1]→(k→k)→k example gives ∂=−1 against b=+1. It is not a duplicate: I compared it with lem-pur-derived-injective-cone-comparison, trf bounded-injective total Hom, sc module-Hom quotient and pc termwise-split triangle. It is strictly smaller than an item clause, and its B-form and 3 search kinds are present. I accept all 8 tool_uses as generic homological tools. No SGA. FIX (E5): step 6 claimed (**) θ₂[1]b'=S(b_N)θ₀ from 'whole-diagram comparison + SES naturality', but naturality only gives the boundary b'' of the termwise s-image row. S(b_N)=b'' needs the cone computation, which I added: b_N=−Q(pr)Q(q)⁻¹, s Cone(i)=Cone(s i), s(X[1])=(sX)[1], and q'' is a quasi-isomorphism because the image row is exact. This is the structure the parent's step 4 supplies with flat-term K-flat rows exact after g'^*. I added def-weil-abstract-derived-category to step 6 uses and proof_deps. Corrected file: fixes/dag/nodes/sec-six-functors-basics/lem-sfb-derived-adjoint-ses-mates.json. Note for the maintainer: blueprint.from.node=null is inherited from the base chain.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.DerivedAdjointSESMates",
+  "declaration": "CategoryTheory.derivedAdjointSESMates",
+  "declarations": [
+   "CategoryTheory.DerivedAdjointSESData",
+   "CategoryTheory.DerivedAdjointSESData.L",
+   "CategoryTheory.DerivedAdjointSESData.L_commShift",
+   "CategoryTheory.DerivedAdjointSESData.εL",
+   "CategoryTheory.DerivedAdjointSESData.er",
+   "CategoryTheory.DerivedAdjointSESData.dr",
+   "CategoryTheory.DerivedAdjointSESData.mates_zero",
+   "CategoryTheory.DerivedAdjointSESData.leftRow",
+   "CategoryTheory.DerivedAdjointSESData.rightRow",
+   "CategoryTheory.DerivedAdjointSESResult",
+   "CategoryTheory.DerivedAdjointSESDiagramPath",
+   "CategoryTheory.DerivedAdjointSESComparison",
+   "CategoryTheory.derivedAdjointSESComparisonMate",
+   "CategoryTheory.derivedAdjointSESMates"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/DerivedAdjointSESMates.lean",
+  "statement": "theorem derivedAdjointSESMates [IsGrothendieckAbelian.{vA} A] [IsGrothendieckAbelian.{vB} B] (D : DerivedAdjointSESData A B) : ∃ O : DerivedAdjointSESResult D, ∀ {A' : Type uA'} {B' : Type uB'} [Category.{vA'} A'] [Category.{vB'} B'] [Abelian A'] [Abelian B'] [HasDerivedCategory.{wA'} A'] [HasDerivedCategory.{wB'} B'] [IsGrothendieckAbelian.{vA'} A'] [IsGrothendieckAbelian.{vB'} B'] (D' : DerivedAdjointSESData A' B') (O' : DerivedAdjointSESResult D') (C : DerivedAdjointSESComparison D D') (K : DerivedCategory A) (K' : DerivedCategory A') (φ : C.S.obj K ⟶ K'), C.T.map (O.r01.app K) ≫ derivedAdjointSESComparisonMate O O' C 1 K K' φ = derivedAdjointSESComparisonMate O O' C 0 K K' φ ≫ O'.r01.app K' ∧ C.T.map (O.r12.app K) ≫ derivedAdjointSESComparisonMate O O' C 2 K K' φ = derivedAdjointSESComparisonMate O O' C 1 K K' φ ≫ O'.r12.app K' ∧ C.T.map (O.δ.app K) ≫ (C.T.commShiftIso (1 : ℤ)).hom.app ((D.R 0).obj K) ≫ (derivedAdjointSESComparisonMate O O' C 0 K K' φ)⟦(1 : ℤ)⟧' = derivedAdjointSESComparisonMate O O' C 2 K K' φ ≫ O'.δ.app K'",
+  "branch": "sheaf-dag",
+  "by": "N6",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "Owning-node helper structures package precisely the ordinary/derived resolution data, canonical-triangle conclusions and whole-diagram comparison hypothesis. Every object is explicit; the only postponed proofs are the mates zero composite and the combined theorem."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-5818fa060",
+  "group": "N6",
+  "result": "pass",
+  "note": "Read the node, the 5 stmt_dep records, the delivered module DerivedAdjointSESMates.lean, the report, and the imported side modules ResolvingDerivedAdjunction (its normalization holds for all M, I, f), KInjectiveTotalDerived and HomotopyCategory.Adjunction, plus Mathlib IsKInjective and triangleOfSESδ. Every hypothesis matches: Grothendieck A and B, exact additive E_i with E0=id, specified H_i with H0=id, the natural SES, additive P⊣F, resolving class with LP a Mathlib IsLeftDerivedFunctor computed by P, R_i right derived of H_i⋙F, shifts pinned by shiftεP and shiftηR. Conclusions are pinned and not arbitrary: right triangle compared with triangleOfSESδ through invertible ηR for every K-injective I with injective terms; left triangle pinned on resolving M; adjunction pinned by chain-map normalization; boundary_mate equals node step 5 (*) and does not depend on the sign convention; first_mate and second_mate are conjugateEquiv in the correct direction. The comparison keeps maps of whole SES diagrams with only quasi-iso inversion (DiagramPath), with S computed by s on the row and the row exact as node step 6 states; β is exactly transpose(θ≫Sε≫φ); the three squares include T.commShiftIso. ∃O/∀O' is sound because every Result data field is uniquely determined. lean.statement is verbatim; the node record differs from live only by the added lean field; docstrings and the 8-step proof docstring are present; only mates_zero and the main theorem use sorry; Worker report and Second reading sections present. Non-blocking notes: kInjective and computesR hold for every K-injective I (stronger than the node wording, true by the cited lemmas); shiftθ, εS iso on the cone, addH and injectiveResolvesB are redundant hypotheses implied by the node. No compile run since no file was changed."
+ }
+}

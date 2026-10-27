@@ -1,0 +1,237 @@
+{
+ "id": "lem-sfb-condensed-unipotent-boundary-naturality",
+ "kind": "statement",
+ "title": "Positive unipotent boundaries and their restriction/scalar naturality",
+ "statement": "Fix the small coherent profinite site and a coefficient universe containing its objects, morphisms and all section sets below [def-weil-size-convention]. Let $R$ be a commutative condensed ring [sk-def-sfb-condensed-ring], let $\\mathcal M_R$ be its internal module category [sk-def-sfb-module-objects], and let $J,H$ be topological groups. Write $\\underline J(S)=C(S,J)$ and $\\mathcal A_R(J)$ for internal $R$-modules with a natural $\\underline J$-action by linear automorphisms [def-sfb-condensed-action-module].\n\nUse the ordinary unbounded derived categories [def-weil-abstract-derived-category] and the normalized functors of [def-sfb-condensed-derived-invariants]: $T_J$ is trivial inflation, $\\Gamma_{R,J}$ is the invariant subsheaf with its specified inclusion, $L_J=D(T_J)$, $F_J=R\\Gamma_{R,J}$ with its canonical computation unit $\\alpha_J$, and $L_J\\dashv F_J$ is the canonical derived adjunction, with unit $\\eta_J$ and counit $\\varepsilon_J$. For a continuous homomorphism $u:H\\to J$ put $U=D(u^*)$.\n\nUse the normalized cup unit $e_J:R[0]\\to F_JR[0]$ and the unipotent connecting-class convention of [def-sfb-condensed-derived-cup, def-sfb-condensed-unipotent-class]. For every additive condensed-group map $a:\\underline J\\to(R,+)$, the formula $j(x,y)=(x+a(j)y,y)$ gives a natural linear group action on $E_a=R\\oplus R$. The first inclusion $i(x)=(x,0)$ and second projection $p(x,y)=y$ form a short exact sequence in $\\mathcal A_R(J)$ with trivial regular modules as endpoints. With its canonical short-exact-sequence boundary $\\partial_a:R[0]\\to R[1]$, the arrow\n$$\\xi_a=(F_J(\\partial_a)\\circ e_J)[-1]:R[-1]\\longrightarrow F_JR[0]$$\nuses the canonical shift comparison and is the positive connecting class $[a]$. Its sectionwise equivariance defect under the underlying splitting $t(y)=(0,y)$ is $jt(1)-t(1)=(a(j),0)$, so its normalized degree-one inhomogeneous cocycle is $+a$.\n\nRestriction by $u:H\\to J$ identifies the full short exact sequence, including $i,p,t$, with that for $E_{a\\circ u}$, and identifies their canonical boundaries under the localized restriction and shift comparisons. A condensed ring map $\\varphi:R\\to R'$ gives a morphism from this sequence to the scalar restriction of the sequence for $E_{\\varphi\\circ a}$: its middle map is $(x,y)\\mapsto(\\varphi(x),\\varphi(y))$ and both endpoint maps are $\\varphi$. Its connecting square commutes with the normalized coefficient comparison. Consequently\n$$b_u\\circ\\xi_a=\\xi_{a\\circ u},\\qquad\nc_J(\\varphi)\\circ\\xi_a=s_0(\\xi_{\\varphi\\circ a})\\circ\\varphi[-1],$$\nwith the canonical scalar shift comparison in the second formula. These are equalities in the ordinary derived category of internal modules. For $a=0$ the class is zero; all conclusions include the trivial group and the zero ring. They assert no acyclicity of underived continuous cochains.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+  "place": "Paragraph (3), dense-lattice input; returned restriction-calculus proof steps 11, 12; agent-formulated Positive unipotent boundaries and their restriction/scalar naturality. Exact external reference WANTED."
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "stmt_deps": [
+  "def-weil-size-convention",
+  "sk-def-sfb-condensed-ring",
+  "sk-def-sfb-module-objects",
+  "def-sfb-condensed-action-module",
+  "def-weil-abstract-derived-category",
+  "def-sfb-condensed-derived-invariants",
+  "def-sfb-condensed-derived-cup",
+  "def-sfb-condensed-unipotent-class"
+ ],
+ "proof": [
+  {
+   "text": "On each profinite test object $S$, write $A_j(x,y)=(x+a_S(j)y,y)$. Additivity of $a_S$ gives $A_jA_k(x,y)=(x+(a_S(j)+a_S(k))y,y)=A_{jk}(x,y)$ and $A_1=1$; $A_{j^{-1}}$ is the inverse. Commutativity of $R(S)$ makes $A_j$ $R(S)$-linear. The naturality of $a$ and of ring multiplication makes these maps commute with every restriction in $S$, hence gives the required internal action. Direct calculation gives $A_ji=i$ and $pA_j=p$. The underlying sequence is split exact: $pt=1$, and $ker p$ consists exactly of the pairs $(x,0)$, the image of $i$. Forgetting action detects exactness by [lem-sfb-condensed-action-injective-infrastructure], so this is a short exact sequence in the action category. The splitting $t$ here is only an underlying-module splitting.",
+   "uses": [
+    "def-sfb-condensed-action-module",
+    "lem-sfb-condensed-action-injective-infrastructure"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), dense-lattice input; agent-written unipotent extension calculation below the returned restriction-calculus steps 11–12"
+   }
+  },
+  {
+   "text": "Apply [lem-weil-pbc-complex-ses-triangle] to this short exact sequence concentrated in degree zero, obtaining its canonical boundary $\\partial_a:R[0]\\to R[1]$ in the action-derived category. The derived invariants functor is additive and triangulated by [lem-sfb-condensed-action-injective-infrastructure], with the specified signed shift comparison. Consequently $F_J(\\partial_a)e_J$ is an arrow $R[0]\\to(F_JR[0])[1]$, and shifting down gives the displayed arrow $\\xi_a$. This is exactly the construction of $[a]$ in [def-sfb-condensed-unipotent-class], using the cup unit of [def-sfb-condensed-derived-cup]; no independent choice of a boundary or of its negative is being made.",
+   "uses": [
+    "lem-weil-pbc-complex-ses-triangle",
+    "lem-sfb-condensed-action-injective-infrastructure",
+    "def-sfb-condensed-unipotent-class",
+    "def-sfb-condensed-derived-cup"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 0152, lemma-derived-canonical-delta-functor; application to the explicit extension, and the normalized unipotent-class definition"
+   }
+  },
+  {
+   "text": "For the positive normalization, compute the equivariance defect of the fixed underlying lift: $A_jt(y)-t(y)=(a_S(j)y,0)=i(a_S(j)y)$, and in particular $i^{-1}(A_jt(1)-t(1))=a_S(j)$. Thus the normalized inhomogeneous one-cocycle of [def-sfb-condensed-unipotent-class] is $+a_S$, not its negative. It is normalized since $a_S(1)=0$, and satisfies the cocycle equation $a_S(jk)=a_S(j)+a_S(k)$ for the trivial endpoint action. All these equalities commute with base change in $S$. This calculation uses the stated connecting-class convention; it does not identify a continuous-cochain complex with the total derived functor.",
+   "uses": [
+    "def-sfb-condensed-unipotent-class"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), dense-lattice input; agent-written unipotent extension calculation below the returned restriction-calculus steps 11–12"
+   }
+  },
+  {
+   "text": "Under restriction along $u$, the formula becomes $A_{u(h)}(x,y)=(x+(a\\circ u)_S(h)y,y)$; the underlying $R\\oplus R$, $i$, $p$ and $t$ are literally unchanged. Thus the restricted sequence is the sequence for $a\\circ u$. The given $u$ is a continuous group homomorphism, exactly as required by the current statement of [lem-sfb-condensed-action-injective-infrastructure]; its restriction is therefore additive and exact. Apply [lem-weil-pbc-exact-functor-ses-triangle-image] with this exact restriction functor: its termwise localization takes $\\partial_a$ to $\\partial_{a\\circ u}$, including the canonical single-object and shift comparisons. This proves the assertion about the full restricted short exact sequence and its canonical boundary.",
+   "uses": [
+    "lem-sfb-condensed-action-injective-infrastructure",
+    "lem-weil-pbc-exact-functor-ses-triangle-image"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tags 0151 (lemma-exact-compose-delta-functor) and 0152 (lemma-derived-canonical-delta-functor); exact restriction applied to the canonical cone boundary"
+   }
+  },
+  {
+   "text": "By [lem-sfb-condensed-restriction-mate-normalization], the last-arrow square for this triangle is $b_{u,R}[1]F_J(\\partial_a)=F_H(U\\partial_a)b_{u,R}$. By the unit clause of [lem-sfb-condensed-cup-mate-coherence], $b_{u,R}e_J=e_H$ under the regular-unit identification. Composing the first equality with $e_J$ and using step 4 therefore gives\n$$b_{u,R}[1]F_J(\\partial_a)e_J=F_H(\\partial_{a\\circ u})e_H.$$\nShift down by one with the fixed comparisons. Its left side is $b_u\\xi_a$ and its right side is $\\xi_{a\\circ u}$, as claimed. The same comparison that identifies the image triangles identifies their last arrows; there is no appeal to equality of cohomology classes alone.",
+   "uses": [
+    "lem-sfb-condensed-restriction-mate-normalization",
+    "lem-sfb-condensed-cup-mate-coherence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), dense-lattice input; agent-written unipotent extension calculation below the returned restriction-calculus steps 11–12"
+   }
+  },
+  {
+   "text": "Put $a'=\\varphi\\circ a$ and $v=\\varphi\\oplus\\varphi:R\\oplus R\\to s_J(R'\\oplus R')$. Sectionwise,\n$$v(A_j(x,y))=(\\varphi(x)+\\varphi(a(j))\\varphi(y),\\varphi(y))=A'_j(v(x,y)).$$\nIt is $R$-linear, commutes with restrictions, and satisfies $vi=i'\\varphi$, $p'v=\\varphi p$ and $vt=t'\\varphi$. Thus $(\\varphi,v,\\varphi)$ is the claimed morphism of short exact sequences with bottom row scalar-restricted from $R'$. The arbitrary condensed ring map $\\varphi$ meets the scalar-restriction clause of [lem-sfb-condensed-action-injective-infrastructure], which supplies additivity and exactness without flatness. The exact-functor boundary comparison of [lem-weil-pbc-exact-functor-ses-triangle-image] identifies the bottom boundary with $s_J\\partial_{a'}$. The morphism naturality of [lem-weil-pbc-complex-ses-triangle] then gives\n$$(s_J\\partial_{a'})\\varphi=\\varphi[1]\\partial_a$$\nunder the canonical scalar single and shift comparisons. No extension of scalars or flatness assertion is used.",
+   "uses": [
+    "lem-sfb-condensed-action-injective-infrastructure",
+    "lem-weil-pbc-exact-functor-ses-triangle-image",
+    "lem-weil-pbc-complex-ses-triangle"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 0152, lemma-derived-canonical-delta-functor, functoriality under a morphism of short exact sequences; Tag 0151 for exact scalar restriction"
+   }
+  },
+  {
+   "text": "Write $c=c_J(\\varphi)=d_{J,R'}F_J^R(\\varphi)$, as specified by [def-sfb-condensed-scalar-tensor]. Apply $F_J^R$ to the boundary square of step 6. Naturality of $d_J$ and its shift compatibility in [lem-sfb-condensed-scalar-restriction-interchange] give\n$$c[1]F_J^R(\\partial_a)=s_0(F_J^{R'}(\\partial_{a'}))c.$$\nThe algebra-map unit clause of [lem-sfb-condensed-cup-mate-coherence], with scalar lax unit $\\varphi$ from [def-sfb-condensed-scalar-tensor], is $ce_J^R=s_0(e_J^{R'})\\varphi$. Composing yields\n$$c[1]F_J^R(\\partial_a)e_J^R=s_0(F_J^{R'}(\\partial_{a'})e_J^{R'})\\varphi.$$\nAfter shifting down with the canonical scalar comparison this is precisely $c_J(\\varphi)\\xi_a=s_0(\\xi_{\\varphi\\circ a})\\varphi[-1]$. This proves the normalized coefficient connecting square and the asserted derived equality for arbitrary $\\varphi$.",
+   "uses": [
+    "def-sfb-condensed-scalar-tensor",
+    "lem-sfb-condensed-scalar-restriction-interchange",
+    "lem-sfb-condensed-cup-mate-coherence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), dense-lattice input; agent-written unipotent extension calculation below the returned restriction-calculus steps 11–12"
+   }
+  },
+  {
+   "text": "If $a=0$, $t$ is equivariant. There is then a morphism of short exact sequences from $0\\to0\\to R\\xrightarrow{1}R\\to0$ to the extension for $a=0$, with endpoint maps $0:0\\to R$ and $1:R\\to R$, and middle map $t$. The source boundary has zero target; naturality in [lem-weil-pbc-complex-ses-triangle] gives $\\partial_0=0$. Additivity of $F_J$ from [lem-sfb-condensed-action-injective-infrastructure] gives $\\xi_0=0$. For the trivial group, the character law forces $a=0$ on every test object. For the zero ring, all section pairs, actions and arrows above are the unique zero ones. Every argument remains valid in both cases, uses ordinary derived arrows, and makes no acyclicity claim for underived continuous cochains.",
+   "uses": [
+    "lem-weil-pbc-complex-ses-triangle",
+    "lem-sfb-condensed-action-injective-infrastructure"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 0152, lemma-derived-canonical-delta-functor, naturality applied to an equivariantly split extension; elementary zero cases"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sfb-condensed-action-module",
+  "lem-sfb-condensed-action-injective-infrastructure",
+  "lem-weil-pbc-complex-ses-triangle",
+  "def-sfb-condensed-unipotent-class",
+  "def-sfb-condensed-derived-cup",
+  "lem-weil-pbc-exact-functor-ses-triangle-image",
+  "lem-sfb-condensed-restriction-mate-normalization",
+  "lem-sfb-condensed-cup-mate-coherence",
+  "def-sfb-condensed-scalar-tensor",
+  "lem-sfb-condensed-scalar-restriction-interchange"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+  "place": "Paragraph (3), dense-lattice input, and the returned restriction-calculus steps 11–12; explicit agent calculation using the existing canonical-boundary and normalized-mate nodes. General boundary source: Stacks derived.tex, Tags 0151 and 0152."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Connecting class of the unipotent extension of internal condensed representations has positive cocycle and is natural under group restriction and scalar change",
+   "results": "[leanfinder] OK 8 hit(s)\ngroupCohomology.H1InfRes_g\ngroupCohomology.H1InfRes_X₂\nContinuousCohomology.MultiInd.complex\ngroupCohomology.infNatTrans\nContinuousCohomology.homogeneousCochains\ngroupCohomology.infNatTrans_app\ngroupCohomology.resNatTrans_app\ngroupCohomology.isoCocycles₁_hom_comp_i_apply",
+   "date": "2026-10-22",
+   "verdict": "no match: the returned group-cohomology declarations use ordinary Rep k G or topological modules, not internal condensed-action modules or the normalized derived connecting arrows here. The general exact-triangle tools already exist as DAG Mathlib leaves."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"ShortComplex\", \"connecting\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-22",
+   "verdict": "no match: the returned group-cohomology declarations use ordinary Rep k G or topological modules, not internal condensed-action modules or the normalized derived connecting arrows here. The general exact-triangle tools already exist as DAG Mathlib leaves."
+  },
+  {
+   "tool": "grep",
+   "query": "(unipotent|characterClass|extensionClass).*(condensed|Condensed)|(condensed|Condensed).*(unipotent|characterClass|extensionClass)",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-22",
+   "verdict": "no match: the returned group-cohomology declarations use ordinary Rep k G or topological modules, not internal condensed-action modules or the normalized derived connecting arrows here. The general exact-triangle tools already exist as DAG Mathlib leaves."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The two by two triangular action associated to an additive group sheaf character gives an extension class natural for coefficient maps and restriction",
+   "results": "[leansearch] OK 8 hit(s)\ngroupCohomology.instFunLikeSubtypeForallProdCarrierVModuleCatMemSubmoduleCocycles₂\ngroupCohomology.IsCoboundary₂\ngroupCohomology.cochainsMap_f_2_comp_cochainsIso₂\ngroupCohomology.d₁₂\ngroupCohomology.shortComplexH2\ngroupCohomology.resNatTrans\nLieAlgebra.Extension.twoCocycleOf\ngroupCohomology.mapShortComplexH2_τ₂",
+   "date": "2026-10-22",
+   "verdict": "no match: the returned group-cohomology declarations use ordinary Rep k G or topological modules, not internal condensed-action modules or the normalized derived connecting arrows here. The general exact-triangle tools already exist as DAG Mathlib leaves."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-condensed-derived-restriction-calculus",
+  "date": "2026-10-22",
+  "group": "NZ"
+ },
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "Paragraph (3), dense-lattice input; returned restriction-calculus steps 11–12: explicit unipotent extension, positive defect and restriction/scalar connecting squares.",
+   "via": [
+    "lem-sfb-condensed-derived-restriction-calculus",
+    "lem-sfb-dense-lattice-derived-invariants-comparison",
+    "lem-sfb-tame-inertia-continuous-koszul",
+    "lem-sfb-continuous-algcl-tame-boundary-comparison",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-condensed-unipotent-boundary-naturality",
+  "worker": "stage1",
+  "summary": "N6: explicit sectionwise triangular action and exactness; positive defect calculation under the fixed connecting-class convention; exact restriction/scalar image boundaries and the two complete derived naturality equations. Reused existing general triangle and mate statements; no new nodes and no statement change. Repair of the returned delivery: re-read the current infrastructure statement, checked the continuous-group-homomorphism hypothesis in step 4 and the arbitrary-ring-map clause in step 6, and refreshed the verbatim infrastructure quotations for steps 1, 4 and 6. Retained the statement, proof route, original searches and all other citations.",
+  "blueprint": "Current main-20261015 direct-images proof paragraph (3), dense-lattice input via the existing created-item chain; realizes the returned restriction-calculus steps 11–12. The inherited nearest blueprint ancestor is null, as confirmed by blueprint_refs.py ancestor; same_as remains empty after full-blueprint unipotent/connecting searches."
+ },
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-N6-636055f1f",
+  "group": "N6",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-N6-636055f1f (reviewer sub-agent of L); spot-checked: I read all eight steps of the item in full against the current statements of every cited node. The delivery adds no new nodes, so there is no relabelling or duplicate risk from new nodes. Compared with a95c4173 only the wording of steps 4 and 6 and the split_report changed, now naming the current infrastructure clauses ('continuous group homomorphism', 'any condensed ring map'). Step 1: the action laws, linearity and naturality of A_j hold, A_j i = i and p A_j = p, and the sequence is exact because forgetting the action detects exactness. Step 2: xi_a is literally the construction in def-sfb-condensed-unipotent-class. Step 3: the defect is +a, normalized and a cocycle. Step 4: the restriction along u of E_a is E_{a∘u}, and the exact-functor leaf identifies the two boundaries. Step 5: the restriction-mate last-arrow square plus the cup-mate unit clause gives b_u xi_a = xi_{a∘u}. Step 6: (phi, phi⊕phi, phi) is a morphism of short exact sequences, so (s_J ∂_{a'}) phi = phi[1] ∂_a. Step 7: naturality and shift compatibility of d_J plus the algebra-map unit c e_J = s_0(e'_J) phi give c_J(phi) xi_a = s_0(xi_{phi∘a}) phi[-1]; I checked this line by line. Step 8: the morphism (0, t, 1) of short exact sequences forces ∂_0 = 0. In Mathlib, SingleTriangle.lean:45 defines singleδ as triangleOfSESδ conjugated by the single-functor iso, so the complex-SES leaf and the exact-functor leaf (Ext/Map.lean:109) use the same boundary. Stacks Tags 0151 and 0152 are at the cited labels of derived.tex. All non-leaf statements cited are in unit sk-thm-sf-ctf-stability, so no tool_uses are needed. There is no cycle; the only citer is restriction-calculus step 5. proof_deps equals the union of the step uses, four kinds of search are recorded, and no SGA source is cited. The trivial group, the zero ring, non-profinite J and nonflat phi are all covered. Advisory only: stmt_deps omits def-sfb-condensed-scalar-tensor, which is reached through the unipotent-class definition."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.CondensedUnipotentBoundaryNaturality",
+  "declaration": "CategoryTheory.CondensedDerivedRestriction.unipotentBoundary_naturality",
+  "declarations": [
+   "CategoryTheory.CondensedDerivedRestriction.unipotentBoundary_positive",
+   "CategoryTheory.CondensedDerivedRestriction.unipotentBoundary_restriction",
+   "CategoryTheory.CondensedDerivedRestriction.unipotentBoundary_scalarSequence",
+   "CategoryTheory.CondensedDerivedRestriction.unipotentBoundary_scalarBoundary",
+   "CategoryTheory.CondensedDerivedRestriction.unipotentBoundary_coefficientConnecting",
+   "CategoryTheory.CondensedDerivedRestriction.unipotentBoundary_naturality",
+   "CategoryTheory.CondensedDerivedRestriction.unipotentBoundary_zero"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/CondensedUnipotentBoundaryNaturality.lean",
+  "statement": "theorem unipotentBoundary_naturality (v : H →ₜ* G) (φ : A ⟶ A') (a : Character A G) : characterClass a ≫ groupCupMap (A := A) v = characterClass (a.restrict v) ∧ characterClass a ≫ coefficientCupMap (G := G) φ = (baseRingArrow φ)⟦(-1 : ℤ)⟧' ≫ ((scalarBase φ).commShiftIso (-1 : ℤ)).inv.app ((DerivedCategory.singleFunctor (Modules A') 0).obj (Mod.regular A'.X)) ≫ (scalarBase φ).map (characterClass (a.coefficients φ))",
+  "branch": "sheaf-dag",
+  "by": "Q144",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-0b4b75d82",
+  "group": "Q144",
+  "result": "pass",
+  "note": "Only the lean record is added; the node is otherwise unchanged and lean.statement is verbatim in the file. Checked all 7 theorems against the node and the dependency declarations (CondensedUnipotentClass, DerivedCup, DerivedInvariants, ScalarTensor). Positivity: characterClass from singleδ gives cocycle +a. Restriction: iso pinned by e.hom.val = 𝟙, keeps i/p/t, boundary square via mapDerivedCategory single+commShift. Scalar change: morphism pinned as biprod.desc (φ,φ) with regularScalarAction at both ends, no flatness; boundary square; coefficient connecting square holds because scalarComparison is unique and normalized with NatTrans.CommShift. Final equalities match the node in Lean composition order. Zero clause gives δ = 0 and class = 0. Trivial group and zero ring covered; only topological-group hypotheses; universes fixed by Character. No definitions, proofs sorry only, source/blueprint docstrings carry the proof steps, no module/declaration clash. Advisories: self-check second reading (H11 accepted); stmt_deps omits def-sfb-condensed-scalar-tensor, reached via the unipotent-class node; downstream restrictionClass/coefficientClass state the same two equalities (theorem overlap in the citing node, not a duplicate notion). No compile run because nothing was changed."
+ }
+}

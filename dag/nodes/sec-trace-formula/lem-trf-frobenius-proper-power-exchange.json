@@ -1,0 +1,274 @@
+{
+ "id": "lem-trf-frobenius-proper-power-exchange",
+ "kind": "statement",
+ "title": "Canonical proper Frobenius power squares and their mate pasting",
+ "statement": "Fix the finite-field datum $p,a,q,k_0,k$ of [def-weil-finite-field-fiber], with $p$ prime, $a\\geq1$, $q=p^a$, $k_0=\\mathbf F_q$ and $k=\\overline{k_0}$. Fix a prime $\\ell\\ne p$, a finite extension $E/\\mathbf Q_\\ell$, its valuation ring $\\mathcal O_E$, a uniformizer $\\varpi_E$ and $n\\geq1$, and set $A=\\mathcal O_E/\\varpi_E^n$ [def-weil-l-adic-coefficient-extension]. Put $s=\\operatorname{Spec}k$, $\\gamma=(z\\mapsto z^q)^{-1}$ and $h=\\operatorname{Spec}(\\gamma)$ [def-trf-scheme-frobenius]. Use ordinary unbounded derived categories of constant-$A$ modules on the small pro-etale sites and their adjoint operations $Lf^*\\dashv Rf_*$ [def-weil-pbc-proetale-operations]. All composition comparisons below are the canonical ones of [lem-weil-pbc-proetale-derived-pullback-composition]; composition is written with the rightmost map first.\n\nLet $p_0:W_0\\to\\operatorname{Spec}k_0$ be proper [def-weil-proper-morphism] with $W_0$ of finite type over $k_0$, and let $p:W=W_0\\times_{k_0}k\\to s$ be its base change. Put $b=\\operatorname{id}_{W_0}\\times\\operatorname{Spec}(\\gamma)$, $B_r=L(b^r)^*$, $Q_r=L(h^r)^*$, $L=Lp^*$ and $R=Rp_*$. For $m\\geq1$ write $t_m:Q_1Q_m\\xrightarrow{\\sim}Q_{m+1}$ and $d_m:B_1B_m\\xrightarrow{\\sim}B_{m+1}$ for the inverse composition comparisons. The square with vertical edges $p,p$ and horizontal edges $b^r,h^r$ commutes and is Cartesian [def-weil-pbc-cartesian-square] for each $r\\geq1$, with its canonical lift $(b^r,p)$. Let $\\theta_r:LQ_r\\xrightarrow{\\sim}B_rL$ be its square comparison and $u_r:Q_rR\\to RB_r$ its ambient exchange, the unit--square--counit mate specified in [def-weil-pbc-ambient-ringed-exchange], equivalently the finite direct-image recipe of [def-weil-frobenius-square-exchange] (1) for power $r$.\n\nThen these specified transformations satisfy\n$$\\theta_{m+1}\\circ L(t_m)=(d_mL)\\circ(B_1\\theta_m)\\circ(\\theta_1Q_m),$$\nand, for every $K\\in D(W_{\\mathrm{proet}},A)$ and $m\\geq1$,\n$$u_{m+1,K}\\circ t_{m,RK}=R(d_{m,K})\\circ u_{1,B_mK}\\circ Q_1(u_{m,K}).$$\nThe latter equality is natural in $K$ in the ambient derived categories. The horizontal arrows are scheme isomorphisms; no $k$-linearity of those arrows is assumed.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 0E47, remark-compose-base-change-horizontal, specialized to powers of a fixed Frobenius square. Agent refinement: the canonical left-comparison equation and its mate, with the explicit power-square lift; Deligne Weil II (1.1.10)-(1.1.11) fixes geometric Frobenius."
+ },
+ "stmt_deps": [
+  "def-weil-finite-field-fiber",
+  "def-weil-l-adic-coefficient-extension",
+  "def-trf-scheme-frobenius",
+  "def-weil-pbc-proetale-operations",
+  "lem-weil-pbc-proetale-derived-pullback-composition",
+  "def-weil-frobenius-square-exchange",
+  "def-weil-pbc-ambient-ringed-exchange",
+  "def-weil-proper-morphism",
+  "def-weil-pbc-cartesian-square",
+  "def-weil-frobenius-point-transport"
+ ],
+ "proof": [
+  {
+   "text": "Apply [lem-weil-frobenius-square-cartesian] to $p_0$. It gives scheme isomorphisms $b,h$ and $pb=hp$. Induction gives $pb^r=h^rp$; the inverses of $b^r,h^r$ are the corresponding powers of their inverses. For the power square let $P=W\\times_{p,s,h^r}s$, with projections $\\pi_W,\\pi_s$. Its specified lift is $a_r=(b^r,p):W\\to P$. Define $v_r=b^{-r}\\pi_W:P\\to W$. The pullback relation and commutation imply $pv_r=h^{-r}p\\pi_W=\\pi_s$. Consequently $v_ra_r=1_W$, while the two projections of $a_rv_r$ are $\\pi_W,\\pi_s$, so $a_rv_r=1_P$ by the universal property [def-pc-fibre-product]. This proves the Cartesian assertion with exactly the specified lift. This argument takes place in schemes; it uses no $k$-linearity.",
+   "uses": [
+    "lem-weil-frobenius-square-cartesian",
+    "def-pc-fibre-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0E47, remark-compose-base-change-horizontal; Tag 0D6D, lemma-derived-pullback-composition. Agent specialization to the specified Frobenius powers."
+   }
+  },
+  {
+   "text": "The coefficient ring $A$ is a finite commutative ring: the extended absolute value is nonarchimedean by [lem-weil-l-adic-extension-absolute-value], its valuation ring is a DVR with finite residue field by [lem-weil-l-adic-extension-integers-dvr], and [lem-weil-valued-dvr-finite-quotients] applies to the given uniformizer and $n\\geq1$. The canonical constant coefficient identifications compose by [lem-trf-constant-coefficient-composition]. Thus the coefficient and category hypotheses of the next step hold on the ordinary unbounded derived categories in the statement.",
+   "uses": [
+    "lem-weil-l-adic-extension-absolute-value",
+    "lem-weil-l-adic-extension-integers-dvr",
+    "lem-weil-valued-dvr-finite-quotients",
+    "lem-trf-constant-coefficient-composition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0E47, remark-compose-base-change-horizontal; Tag 0D6D, lemma-derived-pullback-composition. Agent specialization to the specified Frobenius powers."
+   }
+  },
+  {
+   "text": "Use [lem-pur-factorized-pullback-square-pasting] with $u=p$, $(r_X,r_Y)=(b,h)$ and $(s_X,s_Y)=(b^m,h^m)$. The commuting relations are step 1. Its $P_u$ is $L$, its $C_r,C_s,C_t$ are $\\theta_1,\\theta_m,\\theta_{m+1}$ by the explicit compositor formula in [def-weil-pbc-ambient-ringed-exchange], and its $d_Y,d_X$ are $t_m^{-1},d_m^{-1}$. Indeed $s_Tr_T$ is the $(m+1)$-st power; the cited pasting statement includes the transports along these equalities. Its equation therefore reads $S_m\\circ L(t_m^{-1})=(d_m^{-1}L)\\circ\\theta_{m+1}$, where $S_m=(B_1\\theta_m)\\circ(\\theta_1Q_m)$. Precompose by $L(t_m)$ and postcompose by $d_mL$. The inverse pairs cancel, giving $\\theta_{m+1}\\circ L(t_m)=(d_mL)\\circ S_m$, exactly the first required identity. All functors and comparisons here are the specified ones, not independently chosen isomorphisms.",
+   "uses": [
+    "lem-pur-factorized-pullback-square-pasting",
+    "def-weil-pbc-ambient-ringed-exchange"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0E47, remark-compose-base-change-horizontal; Tag 0D6D, lemma-derived-pullback-composition. Agent specialization to the specified Frobenius powers."
+   }
+  },
+  {
+   "text": "By [def-weil-pbc-ambient-ringed-exchange], the mate of each $\\theta_r$ under the specified adjunction $L\\dashv R$ at both vertical sides is $u_r$. Apply clause 1 of [lem-weil-pbc-mate-pasting] with all three vertical adjunctions equal to $L\\dashv R$, $\\alpha=\\theta_m$, $\\beta=\\theta_1$, $G=Q_m$, $H=B_m$, $G_2=Q_1$, $H_2=B_1$. It gives $S_m^\\flat=(u_1B_m)\\circ Q_1(u_m):Q_1Q_mR\\to RB_1B_m$. This fixes the order of the two exchanges without replacing the ambient mate by an abstractly isomorphic base-change map.",
+   "uses": [
+    "def-weil-pbc-ambient-ringed-exchange",
+    "lem-weil-pbc-mate-pasting"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0E47, remark-compose-base-change-horizontal; Tag 0D6D, lemma-derived-pullback-composition. Agent specialization to the specified Frobenius powers."
+   }
+  },
+  {
+   "text": "Take mates of the equality in step 3. Apply [lem-weil-pbc-mate-whisker] on the left with $\\alpha=\\theta_{m+1}$, $\\sigma=t_m:Q_1Q_m\\to Q_{m+1}$ and $\\tau=1_{B_{m+1}}$: its mate is $u_{m+1}\\circ(t_mR)$. Apply it on the right with $\\alpha=S_m$, $\\sigma=1_{Q_1Q_m}$ and $\\tau=d_m:B_1B_m\\to B_{m+1}$: its mate is $(Rd_m)\\circ S_m^\\flat$. Equality is preserved because taking mates is a function on natural transformations. Substitute step 4 and evaluate at $K$ to obtain\n$$u_{m+1,K}\\circ t_{m,RK}=R(d_{m,K})\\circ u_{1,B_mK}\\circ Q_1(u_{m,K}).$$\nThe calculation is an equality of natural transformations before evaluation, so it also proves naturality in $K$ on the whole ambient derived category. No boundedness or constructibility hypothesis has been introduced.",
+   "uses": [
+    "lem-weil-pbc-mate-whisker"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0E47, remark-compose-base-change-horizontal; Tag 0D6D, lemma-derived-pullback-composition. Agent specialization to the specified Frobenius powers."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-frobenius-square-cartesian",
+  "def-pc-fibre-product",
+  "lem-weil-l-adic-extension-absolute-value",
+  "lem-weil-l-adic-extension-integers-dvr",
+  "lem-weil-valued-dvr-finite-quotients",
+  "lem-trf-constant-coefficient-composition",
+  "lem-pur-factorized-pullback-square-pasting",
+  "def-weil-pbc-ambient-ringed-exchange",
+  "lem-weil-pbc-mate-pasting",
+  "lem-weil-pbc-mate-whisker"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 0E47, remark-compose-base-change-horizontal; Tag 0D6D, lemma-derived-pullback-composition. Agent specialization to the specified Frobenius powers."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Derived direct image exchange for powers of commuting scheme automorphisms satisfies the pullback composition law by taking adjunction mates",
+   "results": "service unavailable: {\"error\":\"Rate limit exceeded: 60 per 1 minute\"}; 0 hits:",
+   "date": "2026-10-22",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Proper direct image base change mates for successive powers of geometric Frobenius compose with canonical derived inverse image compositors",
+   "results": "8 hits: AlgebraicGeometry.Scheme.Modules.conjugateEquiv_pullbackComp_inv, AlgebraicGeometry.Scheme.Modules.pushforwardComp, CategoryTheory.ExponentiableMorphism.pushforwardComp, CategoryTheory.ExponentiableMorphism.comp_pushforward, SheafOfModules.pullbackComp, AlgebraicGeometry.Scheme.Modules.pushforwardComp_hom_app_app, CategoryTheory.ExponentiableMorphism.pushforwardComp_hom_counit, CategoryTheory.ExponentiableMorphism.comp",
+   "date": "2026-10-22",
+   "verdict": "no match: abstract ingredients or different objects; not the full stated identity"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.mateEquiv_vcomp",
+   "results": "1 hits: CategoryTheory.mateEquiv_vcomp",
+   "date": "2026-10-22",
+   "verdict": "no match: abstract ingredients or different objects; not the full stated identity"
+  },
+  {
+   "tool": "grep",
+   "query": "mateEquiv_vcomp|frobenius.*exchange|exchange.*pow",
+   "results": "11 hits: Mathlib/CategoryTheory/Adjunction/Mates.lean, Mathlib/CategoryTheory/Adjunction/Mates.lean, Mathlib/CategoryTheory/Adjunction/Mates.lean, Mathlib/CategoryTheory/Adjunction/Mates.lean, Mathlib/CategoryTheory/Adjunction/Mates.lean, Mathlib/CategoryTheory/Monoidal/Closed/Functor.lean, Mathlib/CategoryTheory/Bicategory/Adjunction/Mate.lean, Mathlib/CategoryTheory/Bicategory/Adjunction/Mate.lean",
+   "date": "2026-10-22",
+   "verdict": "no match: abstract ingredients or different objects; not the full stated identity"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Pasting two commuting inverse image squares and taking right adjoint mates gives the outer direct image square with the specified composition isomorphisms",
+   "results": "8 hits: CategoryTheory.CommSq.left_adjoint, CategoryTheory.CommSq.right_adjoint, CategoryTheory.mateEquiv_square, CategoryTheory.Adjunction.leftAdjointCompIso, CategoryTheory.mateEquiv_vcomp, CategoryTheory.Adjunction.leftAdjointCompIso_assoc, CategoryTheory.Adjunction.comp, CategoryTheory.Adjunction.leftAdjointCompIso_hom",
+   "date": "2026-10-22",
+   "verdict": "no match: abstract ingredients or different objects; not the full stated identity"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Canonical pullback square comparisons for powers of geometric Frobenius and their derived direct image mates satisfy horizontal pasting",
+   "results": "; 8 hits: AlgebraicGeometry.Scheme.Modules.conjugateEquiv_pullbackComp_inv, PresheafOfModules.pullbackComp, AlgebraicGeometry.Scheme.Modules.pullbackComp, CategoryTheory.ExponentiableMorphism.comp, SheafOfModules.pullbackComp, CategoryTheory.ExponentiableMorphism.pushforwardComp, CategoryTheory.ExponentiableMorphism.comp_pushforward, AlgebraicGeometry.Scheme.Modules.pseudofunctor_associativity",
+   "date": "2026-10-22",
+   "verdict": "no match: abstract mates or underived pullbacks; not the canonical pro-etale Frobenius power-square statement"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived direct image base change for iterated geometric Frobenius satisfies the composition law for unit square counit mates",
+   "results": "; 8 hits: CategoryTheory.ExponentiableMorphism.pushforwardComp_hom_counit_assoc, CategoryTheory.mateEquiv, CategoryTheory.frobeniusMorphism, CategoryTheory.frobeniusMorphism_mate, CategoryTheory.mateEquiv_square, CategoryTheory.TwoSquare.isIso_lanBaseChange_app_iff, CategoryTheory.TwoSquare.lanBaseChange_app, CategoryTheory.TwoSquare.lanBaseChange",
+   "date": "2026-10-22",
+   "verdict": "no match: abstract mates or underived pullbacks; not the canonical pro-etale Frobenius power-square statement"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Pasting two commuting inverse image squares and taking right adjoint mates gives the outer direct image square with canonical composition isomorphisms",
+   "results": "; 8 hits: CategoryTheory.CommSq.right_adjoint, CategoryTheory.isRightAdjoint_square_lift, CategoryTheory.mateEquiv_square, CategoryTheory.CommSq.left_adjoint, CategoryTheory.mateEquiv_apply, CategoryTheory.Adjunction.leftAdjointCompIso, CategoryTheory.Bicategory.mateEquiv_square, CategoryTheory.mateEquiv_vcomp",
+   "date": "2026-10-22",
+   "verdict": "no match: abstract mates or underived pullbacks; not the canonical pro-etale Frobenius power-square statement"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-compact-frobenius-transport-composition",
+  "date": "2026-10-22",
+  "group": "N0"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-d-weil",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-frobenius-operator-compact-description",
+   "place": "m-th-iterate transport along g_gamma^m: proper factor of the fixed compactification; former item steps 1 (proper square), 2 and 4",
+   "via": [
+    "lem-trf-compact-frobenius-transport-composition"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-trf-frobenius-proper-power-exchange",
+  "worker": "stage1",
+  "summary": "Checked the power-square lift explicitly, specialized existing canonical pro-etale pullback pasting, and applied existing mate pasting and boundary-whiskering. No new nodes or change of statement.",
+  "blueprint": "Realizes the m-th-iterate transport along g_gamma^m in the proof of lem-trf-frobenius-operator-compact-description, specifically the proper factor of the compactification isolated by lem-trf-compact-frobenius-transport-composition.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-frobenius-square-cartesian",
+    "why": "Generic scheme geometry: supplies the one-step geometric Frobenius isomorphisms and commutation, then the power-square lift is checked explicitly."
+   },
+   {
+    "node": "lem-weil-l-adic-extension-absolute-value",
+    "why": "Coefficient hypothesis check: nonarchimedean absolute value on E for the finite-quotient theorem."
+   },
+   {
+    "node": "lem-weil-l-adic-extension-integers-dvr",
+    "why": "Coefficient hypothesis check: valuation DVR and finite residue field for the finite-quotient theorem."
+   },
+   {
+    "node": "lem-weil-valued-dvr-finite-quotients",
+    "why": "Coefficient hypothesis check: A is finite, required by the generic pullback-pasting theorem."
+   },
+   {
+    "node": "lem-trf-constant-coefficient-composition",
+    "why": "Canonical constant-coefficient identifications, including the composite identification required by the pullback theorem."
+   },
+   {
+    "node": "lem-pur-factorized-pullback-square-pasting",
+    "why": "Generic canonical pro-etale pullback-square pasting; applies to arbitrary endomorphisms and proves the specified left comparison identity. No statement of the Frobenius unit supplies this general compositor calculation."
+   },
+   {
+    "node": "lem-weil-pbc-mate-whisker",
+    "why": "Generic adjunction lemma for the specified t_m and d_m boundary transformations; the Frobenius unit does not supply this naturality rule."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-frobenius-square-cartesian",
+  "lem-weil-l-adic-extension-absolute-value",
+  "lem-weil-l-adic-extension-integers-dvr",
+  "lem-weil-valued-dvr-finite-quotients",
+  "lem-trf-constant-coefficient-composition",
+  "lem-pur-factorized-pullback-square-pasting",
+  "lem-weil-pbc-mate-whisker"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q112-7ddeb9ceb",
+  "group": "Q112",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q112-7ddeb9ceb (reviewer sub-agent of L); spot-checked: I read the item in full: 5 steps, no new nodes, statement unchanged from live. Side-live still has it unsplit, so it is not superseded; it is not on the drop list, its closure has no dropped or batch-5-assumed node, and there is no cycle. It is a statement-only child of N0's re-split of compact-frobenius-transport-composition and carries that parent's old steps 1, 2 and 4 in full. Step 1: I re-derived the power-square lift. From pb^r=h^rp, v_r=b^{-r}π_W satisfies p v_r=π_s, v_r a_r=1, and a_r v_r=1_P by fibre-product uniqueness; this is exactly α of def-weil-pbc-cartesian-square. Step 2: A=O_E/ϖ^n is finite commutative by the absolute-value, DVR and finite-quotient nodes, as the pasting lemma requires. The constant-coefficient composition lemma gives the agreeing corner identifications that the ambient-exchange definition requires. Step 3: lem-pur-factorized-pullback-square-pasting with u=p, r=(b,h), s=(b^m,h^m). Here C_v is literally θ_v of the ambient-exchange definition, d_Y=t_m^{-1} and d_X=d_m^{-1}. Cancelling the inverses gives θ_{m+1}L(t_m)=(d_mL)(B_1θ_m)(θ_1Q_m), and I checked the types. Step 4: clause 1 of lem-weil-pbc-mate-pasting with α=θ_m and β=θ_1 gives S_m^♭=(u_1B_m)Q_1(u_m); the mate conventions match. Step 5: lem-weil-pbc-mate-whisker with σ=t_m on the left and τ=d_m on the right gives the second identity, natural in K. Source: Stacks 0E47 remark-compose-base-change-horizontal (whose verification it omits) with h'=h and h=h^m; the composition order matches, and 0D6D is the compositor. Edge cases checked: m=1, W empty, p=id, K=0; no k-linearity or boundedness is used. No duplicates: weil-shriek-iterates is about Φ and f_!, and the system mate-pasting node is about systems. I accept the 7 declared tool_uses (generic geometry, coefficient, compositor and mate tools). No SGA source is used. No changes."
+ },
+ "lean": {
+  "module": "Sheaf.TraceFormula.FrobeniusProperPowerExchange",
+  "declaration": "WeilConjectures.FrobeniusProperPower.pasting",
+  "declarations": [
+   "WeilConjectures.FrobeniusProperPower.middle",
+   "WeilConjectures.FrobeniusProperPower.base",
+   "WeilConjectures.FrobeniusProperPower.geometry",
+   "WeilConjectures.FrobeniusProperPower.square",
+   "WeilConjectures.FrobeniusProperPower.B",
+   "WeilConjectures.FrobeniusProperPower.Q",
+   "WeilConjectures.FrobeniusProperPower.L",
+   "WeilConjectures.FrobeniusProperPower.R",
+   "WeilConjectures.FrobeniusProperPower.powerStep",
+   "WeilConjectures.FrobeniusProperPower.t",
+   "WeilConjectures.FrobeniusProperPower.d",
+   "WeilConjectures.FrobeniusProperPower.theta",
+   "WeilConjectures.FrobeniusProperPower.exchange",
+   "WeilConjectures.FrobeniusProperPower.squareLeft",
+   "WeilConjectures.FrobeniusProperPower.squareRight",
+   "WeilConjectures.FrobeniusProperPower.mateLeft",
+   "WeilConjectures.FrobeniusProperPower.mateRight",
+   "WeilConjectures.FrobeniusProperPower.pasting"
+  ],
+  "file": "lean/Sheaf/TraceFormula/FrobeniusProperPowerExchange.lean",
+  "statement": "theorem pasting (D : FiniteFieldDatum.{u}) (W₀ : Over (Spec (.of D.k₀))) [IsProper W₀.hom] (l : ℕ) [Fact l.Prime] (_hl : l ≠ D.p) (E : Type u) [Field E] [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E] (n : ℕ) (_hn : 1 ≤ n) (m : ℕ) (hm : 1 ≤ m) : squareLeft D W₀ (Padic.coefficientExtensionRing l E n) m = squareRight D W₀ (Padic.coefficientExtensionRing l E n) m hm ∧ mateLeft D W₀ (Padic.coefficientExtensionRing l E n) m = mateRight D W₀ (Padic.coefficientExtensionRing l E n) m hm",
+  "branch": "newtargets-dag",
+  "by": "NJ",
+  "date": "2026-10-22",
+  "existing": false,
+  "note": "Canonical positive power geometry and the specified Cartesian lift; the left comparison and its ambient unit-square-counit mate; both pasting identities as equalities of natural transformations. Helpers name the powers, canonical inverse compositors and the two sides of each identity. The added landed dependency supplies the existing Spec(geometric Frobenius) isomorphism. No statement correction or re-split."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-5f226a2c2",
+  "group": "NJ",
+  "result": "pass",
+  "note": "Matches the node clause by clause. b=id×Specγ and h=Specγ use the same inverse q-power AlgEquiv; powers are End powers. IsPullback(b^r,p,p,h^r) plus IsIso; ChosenCartesianSquare hom = (b^r,p), relying on the sorry theorem only through proof fields. theta = comp(p,h^r)≫eq(w)≫comp(b^r,p)⁻¹ = θ_□ of the ambient-exchange node and = proEtalePastingDerivedSquare of the step-3 tool. exchange = mateEquiv over proEtaleRingDerivedAdjunction. t_m/d_m: powerStep with the correct orientation. squareLeft/Right and mateLeft/Right have the displayed component order (Stacks 0E47); NatTrans equalities cover all K and naturality. m≥1 kept; no stronger hypotheses (IsProper gives finite type); E : Type u is the library convention. lean.statement verbatim; stmt_deps only adds the landed def-weil-frobenius-point-transport (no cycle); docstrings and proof steps present; only the two theorems are sorry; both report sections present. Advisories: identity 1 is a special case of lem-trf-pullback-coefficient-iterate-coherence clause 1 (trfPullbackSquareComparison ≡ theta), a stage-1 overlap; exchange rebuilds the mate instead of calling proEtaleAmbientRingedExchange, using the compositor the item prescribes. No compile (no file changed)."
+ }
+}

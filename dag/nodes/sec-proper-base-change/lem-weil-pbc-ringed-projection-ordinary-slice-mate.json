@@ -1,0 +1,109 @@
+{
+ "id": "lem-weil-pbc-ringed-projection-ordinary-slice-mate",
+ "kind": "statement",
+ "title": "Ordinary localized projection inverse mate is invertible",
+ "statement": "Let X,Y be schemes, f:X → Y a morphism, R_Y,R_X pro-étale coefficient ring sheaves in the containing universe, c:f*R_Y ≅ R_X, and g a Global operation package [def-weil-pbc-ringed-projection-restriction-data]. Fix V in Y.ProEt and a LocalBaseData package b [lem-weil-pbc-ringed-projection-local-base-data]. For any ordinary direct-image comparison g.pushforward followed by restriction to V ≅ restriction to f*V followed by b.pushforward whose maps are identity on every section, its inverse mate under the specified ordinary module adjunctions is invertible.",
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tag 04J0, lemma-localize-morphism-ringed-sites; canonical inverse-image comparison and its unit normalization."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-ringed-projection-restriction-data",
+  "lem-weil-pbc-ringed-projection-local-base-data"
+ ],
+ "proof": [
+  {
+   "text": "The coefficient_sections field identifies the local coefficient morphism with locMap of the global morphism. The pro-étale base-change functor preserves finite limits. Apply the containing-universe localization theorem: product comparison identifies the composite right adjoints and uniqueness of their left adjoints makes localComparison invertible.",
+   "uses": [
+    "lem-pur-ringed-site-pullback-localization-universes"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For each module, apply the local adjunction hom-equivalence to the inverse mate and to localComparison. The unit mate equation identifies the first adjunct with the restricted global unit followed by the specified direct-image comparison. Its section identity removes that last comparison. The adjunct of localComparison is exactly the restricted global unit. Injectivity identifies the components; hence all components of the inverse mate are invertible. This uses no derived-category or shift assertion and includes zero modules and zero coefficient rings.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-pur-ringed-site-pullback-localization-universes"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tag 04J0; specialization of the existing containing-universe localization comparison and the adjunction unit mate formula."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The ordinary pullback of a sheaf of modules commutes with restriction to a localized site, as the inverse mate of the sectionwise direct image identity",
+   "results": "8 hits: pullbackComp, conjugateEquiv_pullbackComp_inv, pullback_comp_id, pullbackIso, pullback_id_comp, pullback_assoc, pullbackObjFreeIso, pullbackObjUnitToUnit. No exact normalized slice comparison.",
+   "date": "2026-10-27",
+   "verdict": "No exact Mathlib match; the project has a proved containing-universe comparison."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"SheafOfModules.pullback\", \"SheafOfModules.overFunctor\"",
+   "results": "0 hits.",
+   "date": "2026-10-27",
+   "verdict": "No match."
+  },
+  {
+   "tool": "grep",
+   "query": "sliceModulePullbackMap_isIso|localOrdinaryInverseMate",
+   "results": "0 Mathlib hits. Project rg subsequently found RingedSitePullback.localComparison_isIso in Sheaf.Algebra.Category.ModuleCat.Sheaf.PullbackLocalizationOfUniverses.",
+   "date": "2026-10-27",
+   "verdict": "Reuse the existing project theorem and prove normalization glue."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.RingedProjectionLocalDerivedData",
+  "date": "2026-10-27",
+  "group": "J3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-ringed-projection-local-derived-data",
+   "place": "Ordinary inverse mate, before localization to the derived category.",
+   "via": [
+    "lem-weil-pbc-ringed-projection-local-derived-data"
+   ]
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.RingedProjectionOrdinarySliceMate",
+  "file": "lean/Sheaf/Paper/RingedProjectionOrdinarySliceMate.lean",
+  "declaration": "AlgebraicGeometry.Scheme.ProjectionRestriction.localOrdinaryInverseMate_isIso",
+  "statement": "theorem localOrdinaryInverseMate_isIso\n    {X Y : Scheme.{u}} {f : X ⟶ Y}\n    {R_Y : Sheaf (ProEt.topology Y) CommRingCat.{u + 1}}\n    {R_X : Sheaf (ProEt.topology X) CommRingCat.{u + 1}}\n    {c : (proEtaleSheafInverseImage f CommRingCat.{u + 1}).obj R_Y ≅ R_X}\n    (g : Global f R_Y R_X c) (V : Y.ProEt) (b : LocalBaseData g V)\n    (ordinary : g.operation.pushforward ⋙\n      SheafOfModules.overFunctor.{u + 1}\n        ((sheafCompose (ProEt.topology Y)\n          (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).obj R_Y) V ≅\n      SheafOfModules.overFunctor.{u + 1}\n        ((sheafCompose (ProEt.topology X)\n          (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).obj R_X)\n        ((proEtaleBaseChange f).obj V) ⋙ b.operation.pushforward)\n    (sections : ∀ (M : Mod R_X) (T : (Over V)ᵒᵖ)\n      (x : M.val.obj (op ((proEtaleBaseChange f).obj T.unop.left))),\n      ((ordinary.hom.app M).val.app T) x = x) :\n    IsIso (((mateEquiv g.operation.moduleAdjunction b.operation.moduleAdjunction).symm\n      (TwoSquare.mk _ _ _ _ ordinary.hom)).natTrans)",
+  "branch": "sheaf-dag",
+  "by": "J3",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J3",
+  "result": "pass",
+  "landing": "20261027T053007-L-503582",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J3",
+  "result": "pass",
+  "landing": "20261027T053007-L-503582",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

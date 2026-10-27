@@ -23,69 +23,58 @@
  ],
  "proof": [
   {
-   "text": "Put $H_K=i^!K$ and $S_K=R\\underline\\Gamma_ZK$. The field-coefficient equality $\\Dctf=\\Dbc$ in [sk-lem-coefficient-heart] identifies the localizing categories in the statement with those in [sk-prop-sf-existence]. The generating-subcategory containment in [sk-def-localizing-closure] gives $K\\in\\mathcal C_X$, so the adjoint is defined on $K$ and $H_K\\in\\mathcal C_Z$. By [det-prop-closed-adjoint-constructible-support], $S_K\\in\\Dbc(Z,\\Lambda)$, hence $S_K\\in\\mathcal C_Z$. By [sk-def-localizing-closure], the categories $\\mathcal C_Z,\\mathcal C_X$ are full subcategories of the ambient unbounded module-object derived categories. In particular all the Hom sets involving their objects below are the ambient Hom sets.",
+   "text": "Use localizingClosure_ctf_equals_bc on X and Z, with the given coefficient isomorphism. Its Dctf=Dbc equality and the defining intersection of localizingClosureProEtale put every bounded constructible object in the localizing closure. Apply rationalClosedSupportConstructible for the finite constant model notion to put the support value in Dbc(Z). For a coefficient isomorphism, restriction of scalars is an exact equivalence preserving and reflecting finite constant models and bounded cohomology. The closed-direct-image coefficient square conjugates the two left adjoints; uniqueness of right adjoints identifies the corresponding derived support functors. This transports support constructibility to the stated arbitrary isomorphic coefficient ring. Use the general finite-constant-model coefficient transport lemmas from lem-sfb-condensed-coefficient-iso-constructible: forward restriction preserves constructibility, while restriction along the inverse and the comap composition isomorphism reflect it. The exact homology comparison then gives bounded constructibility in both directions. No integral heart-closure assertion is used.",
    "uses": [
-    "sk-lem-coefficient-heart",
-    "sk-prop-sf-existence",
-    "det-prop-closed-adjoint-constructible-support",
-    "sk-def-localizing-closure"
+    "det-def-localizing-closure-ctf-equals-bc",
+    "sk-def-localizing-closure",
+    "lem-sfb-rational-closed-support-constructible",
+    "sk-def-sfb-constructible",
+    "sk-lem-formal-closed-support",
+    "lem-sfb-condensed-coefficient-iso-constructible"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-closed-adjoint-constructible/sk-prop-closed-adjoint-constructible-yoneda.proof.md",
-    "place": "First sentence and the sentence identifying the full localizing subcategories."
-   }
+   "elementary": false
   },
   {
-   "text": "For $A\\in\\mathcal C_Z$, use the stipulated adjunction $i_*\\dashv i^!$ of [sk-prop-sf-existence] and the ambient adjunction $i_*\\dashv R\\underline\\Gamma_Z$ of [sk-lem-formal-closed-support](1). With their counits denoted by $\\varepsilon^!_K$ and $\\varepsilon^S_K$, respectively, these give bijections\n$$\\alpha_{A,K}:\\Hom_{\\mathcal C_Z}(A,H_K)\\xrightarrow{\\sim}\\Hom_{D(X)}(i_*A,K),\\quad a\\longmapsto\\varepsilon^!_K\\circ i_*(a),$$\n$$\\beta_{A,K}:\\Hom_{\\mathcal C_Z}(A,S_K)\\xrightarrow{\\sim}\\Hom_{D(X)}(i_*A,K),\\quad b\\longmapsto\\varepsilon^S_K\\circ i_*(b).$$\nThe first uses $i_*A\\in\\mathcal C_X$, supplied by the lower-shriek functor on the localizing categories; the second is valid for every ambient $A$, so in particular for this one. Fullness from step 1 identifies the indicated groups exactly. Both bijections are natural in $A$ and in bounded constructible $K$, because they are adjunction bijections. Consequently $\\tau_{A,K}=\\beta_{A,K}^{-1}\\alpha_{A,K}$ and its inverse form mutually inverse natural transformations $h_{H_K}\\leftrightarrows h_{S_K}$ on $\\mathcal C_Z$.",
+   "text": "Derive the finite-colimit-preservation instance for the closed direct image from closedSupport_lowerStarExact, using the open complement. For a localizing object A and bounded constructible K, form alpha by the exceptional adjunction inverse Hom equivalence, fullness of the inclusion on X, and precomposition with closed.inv.app A. Form beta by fullness of the inclusion on Z and the support adjunction inverse Hom equivalence. Both are bijections to Hom(i_*A,K). Naturality in A follows from the adjunction Hom equivalences and naturality of closed.inv.",
+   "uses": [
+    "sk-prop-sf-existence",
+    "sk-lem-formal-closed-support",
+    "det-lem-formal-closed-support-adjunction",
+    "sk-def-localizing-closure"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply Mathlib Yoneda.ext to beta inverse composed with alpha and its inverse. The inverse identities are the equivalence inverse identities, and naturality in A was checked in the preceding step. This constructs theta_K as an isomorphism in the full localizing subcategory. Evaluate the composite Hom equivalence at the identity: beta(theta_K)=alpha(identity). Expanding the Hom equivalences yields exactly i_*(theta_K) followed by the support counit equal to closed.inv followed by the exceptional counit.",
+   "uses": [
+    "lem-galois-yoneda-fully-faithful"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For q:K→K′ prove that alpha and beta commute with postcomposition by q, using adjunction naturality in the right variable. Apply injectivity of beta to the two candidate naturality composites. The identity beta(theta)=alpha(identity), naturality in A, and postcomposition naturality make their images equal. NatIso.ofComponents packages theta into the required natural isomorphism; the identity just proved gives its stated counit compatibility.",
    "uses": [
     "sk-prop-sf-existence",
     "sk-lem-formal-closed-support"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-closed-adjoint-constructible/sk-prop-closed-adjoint-constructible-yoneda.proof.md",
-    "place": "The two adjunction Hom bijections and their identification using fullness."
-   }
-  },
-  {
-   "text": "Apply [lem-galois-yoneda-fully-faithful] in $\\mathcal C_Z$ to $\\tau_{-,K}$ and its inverse. It gives unique maps $\\theta_K:H_K\\to S_K$ and $\\rho_K:S_K\\to H_K$ whose postcomposition transformations are these two transformations; explicitly $\\theta_K=\\tau_{H_K,K}(1_{H_K})$. Since the transformations are mutually inverse, the injectivity in that same Yoneda statement gives $\\rho_K\\theta_K=1_{H_K}$ and $\\theta_K\\rho_K=1_{S_K}$. Thus $\\theta_K$ is an isomorphism in $\\mathcal C_Z$. Evaluating $\\beta\\tau=\\alpha$ at $A=H_K$ and $1_{H_K}$ gives\n$$\\varepsilon^S_K\\circ i_*(\\theta_K)=\\varepsilon^!_K.$$\nAny map satisfying this equality has the same image under the bijection $\\beta_{H_K,K}$, hence equals $\\theta_K$. This proves the asserted counit compatibility, including uniqueness for the specified adjunctions.",
-   "uses": [
-    "lem-galois-yoneda-fully-faithful"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/categories.tex",
-    "place": "Tag 001P, lemma-yoneda: full faithfulness and evaluation at the identity; applied to the two representations in the blueprint proof."
-   }
-  },
-  {
-   "text": "Let $q:K\\to K'$ be a morphism of bounded constructible complexes. The two maps $S(q)\\circ\\theta_K$ and $\\theta_{K'}\\circ i^!(q)$ from $H_K$ to $S_{K'}$ have the same image under $\\beta_{H_K,K'}$: by naturality of the support counit in [sk-lem-formal-closed-support](1), the first has image $q\\circ\\varepsilon^S_K\\circ i_*\\theta_K=q\\circ\\varepsilon^!_K$; by naturality of the exceptional counit in [sk-prop-sf-existence], the second has image $\\varepsilon^!_{K'}\\circ i_*i^!(q)=q\\circ\\varepsilon^!_K$. Injectivity of $\\beta_{H_K,K'}$ makes these maps equal. Hence the isomorphism is natural in $K$. For the final constructibility consequence, [sk-def-sfb-constructible] defines $\\Dbc$ by bounded constructible cohomology. Each $H^n(\\theta_K)$ is an isomorphism, so $H^n(i^!K)$ vanishes whenever $H^n(S_K)$ does and is constructible whenever $H^n(S_K)$ is. Since $S_K\\in\\Dbc(Z,\\Lambda)$ by step 1, this gives $i^!K\\in\\Dbc(Z,\\Lambda)$.",
-   "uses": [
-    "sk-lem-formal-closed-support",
-    "sk-prop-sf-existence",
-    "sk-def-sfb-constructible"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-closed-adjoint-constructible/sk-prop-closed-adjoint-constructible-yoneda.proof.md",
-    "place": "Final sentence: uniqueness makes the comparison natural in K; the two transposes are written out."
-   }
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "sk-lem-coefficient-heart",
-  "sk-prop-sf-existence",
-  "det-prop-closed-adjoint-constructible-support",
+  "det-def-localizing-closure-ctf-equals-bc",
   "sk-def-localizing-closure",
+  "lem-sfb-rational-closed-support-constructible",
+  "sk-def-sfb-constructible",
   "sk-lem-formal-closed-support",
-  "lem-galois-yoneda-fully-faithful",
-  "sk-def-sfb-constructible"
+  "lem-sfb-condensed-coefficient-iso-constructible",
+  "sk-prop-sf-existence",
+  "det-lem-formal-closed-support-adjunction",
+  "lem-galois-yoneda-fully-faithful"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-closed-adjoint-constructible/sk-prop-closed-adjoint-constructible-yoneda.proof.md",
-  "place": "Entire proof, expanded into the object-membership check, two counit-induced Hom bijections, Yoneda comparison, and naturality computation."
+  "place": "Entire Yoneda proof, implemented by E2 with exact coefficient-isomorphism transport and the existing finite-constant-model support theorem. Repair of return 1362f3092: use the general coefficient transport proof instead of the private integral heart-closure interface; public theorem signature unchanged from the current library."
  },
  "mathlib_searches": [
   {
@@ -348,7 +337,6 @@
   ]
  },
  "tool_uses": [
-  "sk-lem-coefficient-heart",
   "sk-def-localizing-closure"
  ],
  "reviewed": {
@@ -359,7 +347,18 @@
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q25-41ef89bbc (reviewer sub-agent of L); spot-checked: Read the full mathematics and wrote review.md. All four steps, cited statements and source locations check out: same-layer coefficient equality, support membership, counit-induced Hom bijections, Yoneda inverses, and naturality. Closed normalization is explicitly stipulated in the source statement. No new nodes, duplicate split, item dependency cycle, or repairs; declared tool uses accepted."
  },
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
  "reviewed_lean": {
   "date": "2026-10-18",
   "by": "L",
@@ -372,10 +371,20 @@
   "module": "Sheaf.Paper.ClosedAdjointConstructibleYoneda",
   "declaration": "AlgebraicGeometry.ProEtale.CondensedRing.closedAdjointConstructibleYoneda",
   "file": "lean/Sheaf/Paper/ClosedAdjointConstructibleYoneda.lean",
-  "statement": "theorem closedAdjointConstructibleYoneda (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ] [IsCommMonObj Λ] (ℓ : ℕ) [Fact ℓ.Prime] (k : Type u) [Field k] (p : ℕ) [Fact p.Prime] [CharP k p] (hpℓ : p ≠ ℓ) {X Z U : Scheme.{u}} [X.Over (Spec (.of k))] [Z.Over (Spec (.of k))] [LocallyOfFiniteType (X ↘ Spec (.of k))] [QuasiCompact (X ↘ Spec (.of k))] [IsSeparated (X ↘ Spec (.of k))] [LocallyOfFiniteType (Z ↘ Spec (.of k))] [QuasiCompact (Z ↘ Spec (.of k))] [IsSeparated (Z ↘ Spec (.of k))] (i : Z ⟶ X) [IsClosedImmersion i] [i.IsOver (Spec (.of k))] (j : U ⟶ X) [IsOpenImmersion j] [QuasiCompact j] (hij : Set.range i.base = (Set.range j.base)ᶜ) (E : PadicAlgCl.FiniteIntermediateField ℓ) (_hΛ : Nonempty (Mon.mk Λ ≅ Mon.mk (Profinite.continuousMapRingObj E)) ∨ Nonempty (Mon.mk Λ ≅ Mon.mk (Profinite.continuousMapRingObj (PadicAlgCl ℓ)))) (c : Compactification.BoundaryCompactification i) (h : ∀ K, localizingClosureProEtale Λ Z K → localizingClosureProEtale Λ X ((rightDerivedLowerShriekOfCompactification Λ c.obj.obj).obj K)) (G : (localizingClosureProEtale Λ X).FullSubcategory ⥤ (localizingClosureProEtale Λ Z).FullSubcategory) (adj : localizingLowerShriek Λ c.obj.obj h ⊣ G) (closed : localizingLowerShriek Λ c.obj.obj h ⋙ (localizingClosureProEtale Λ X).ι ≅ (localizingClosureProEtale Λ Z).ι ⋙ (lowerStar Λ i).mapDerivedCategory) (support : FormalClosedSupportAssertions Λ i j hij) : ∃ (hK : ∀ K : ConstantModelBoundedConstructible Λ X, localizingClosureProEtale Λ X K.obj) (hS : ∀ K : ConstantModelBoundedConstructible Λ X, localizingClosureProEtale Λ Z ((formalClosedSupport Λ i j).rightDerivedFunctor.obj K.obj)), ∃ e : ((localizingClosureProEtale Λ X).lift (constantModelBoundedConstructible Λ X).ι hK) ⋙ G ≅ (localizingClosureProEtale Λ Z).lift ((constantModelBoundedConstructible Λ X).ι ⋙ (formalClosedSupport Λ i j).rightDerivedFunctor) hS, ∀ K : ConstantModelBoundedConstructible Λ X, (lowerStar Λ i).mapDerivedCategory.map ((localizingClosureProEtale Λ Z).ι.map (e.hom.app K)) ≫ support.rightAdjoint.counit.app K.obj = closed.inv.app (G.obj (((localizingClosureProEtale Λ X).lift (constantModelBoundedConstructible Λ X).ι hK).obj K)) ≫ (localizingClosureProEtale Λ X).ι.map (adj.counit.app (((localizingClosureProEtale Λ X).lift (constantModelBoundedConstructible Λ X).ι hK).obj K))",
+  "statement": "theorem closedAdjointConstructibleYoneda\n    (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})\n    [MonObj Λ] [IsCommMonObj Λ]\n    (ℓ : ℕ) [Fact ℓ.Prime] (k : Type u) [Field k]\n    (p : ℕ) [Fact p.Prime] [CharP k p] (hpℓ : p ≠ ℓ)\n    {X Z U : Scheme.{u}} [X.Over (Spec (.of k))] [Z.Over (Spec (.of k))]\n    [LocallyOfFiniteType (X ↘ Spec (.of k))] [QuasiCompact (X ↘ Spec (.of k))]\n    [IsSeparated (X ↘ Spec (.of k))]\n    [LocallyOfFiniteType (Z ↘ Spec (.of k))] [QuasiCompact (Z ↘ Spec (.of k))]\n    [IsSeparated (Z ↘ Spec (.of k))]\n    (i : Z ⟶ X) [IsClosedImmersion i] [i.IsOver (Spec (.of k))]\n    (j : U ⟶ X) [IsOpenImmersion j] [QuasiCompact j]\n    (hij : Set.range i.base = (Set.range j.base)ᶜ)\n    (E : PadicAlgCl.FiniteIntermediateField ℓ)\n    (_hΛ : Nonempty (Mon.mk Λ ≅ Mon.mk (Profinite.continuousMapRingObj E)) ∨\n      Nonempty (Mon.mk Λ ≅ Mon.mk (Profinite.padicAlgClRingObj ℓ)))\n    (c : Compactification.BoundaryCompactification i)\n    (h : ∀ K, localizingClosureProEtale Λ Z K → localizingClosureProEtale Λ X\n      ((rightDerivedLowerShriekOfCompactification Λ c.obj.obj).obj K))\n    (G : (localizingClosureProEtale Λ X).FullSubcategory ⥤\n      (localizingClosureProEtale Λ Z).FullSubcategory)\n    (adj : localizingLowerShriek Λ c.obj.obj h ⊣ G) :\n    letI := closedSupport_lowerStarExact Λ i j hij\n    ∀ (closed : localizingLowerShriek Λ c.obj.obj h ⋙ (localizingClosureProEtale Λ X).ι ≅\n      (localizingClosureProEtale Λ Z).ι ⋙ (lowerStar Λ i).mapDerivedCategory)\n      (support : FormalClosedSupportAssertions Λ i j hij),\n    ∃ (hK : ∀ K : ConstantModelBoundedConstructible Λ X,\n        localizingClosureProEtale Λ X K.obj)\n      (hS : ∀ K : ConstantModelBoundedConstructible Λ X,\n        localizingClosureProEtale Λ Z\n          ((formalClosedSupport Λ i j).rightDerivedFunctor.obj K.obj)),\n      ∃ e :\n        ((localizingClosureProEtale Λ X).lift\n          (constantModelBoundedConstructible Λ X).ι hK) ⋙ G ≅\n        (localizingClosureProEtale Λ Z).lift\n          ((constantModelBoundedConstructible Λ X).ι ⋙\n            (formalClosedSupport Λ i j).rightDerivedFunctor) hS,\n        ∀ K : ConstantModelBoundedConstructible Λ X,\n          (lowerStar Λ i).mapDerivedCategory.map\n              ((localizingClosureProEtale Λ Z).ι.map (e.hom.app K)) ≫\n            support.rightAdjoint.counit.app K.obj =\n          closed.inv.app (G.obj (((localizingClosureProEtale Λ X).lift\n            (constantModelBoundedConstructible Λ X).ι hK).obj K)) ≫\n            (localizingClosureProEtale Λ X).ι.map\n              (adj.counit.app (((localizingClosureProEtale Λ X).lift\n                (constantModelBoundedConstructible Λ X).ι hK).obj K))",
   "branch": "newtargets-dag",
   "by": "Q41",
   "date": "2026-10-18",
   "existing": false
+ },
+ "reviewed_proof": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E2",
+  "result": "pass",
+  "landing": "20261022T143134-L-972067",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

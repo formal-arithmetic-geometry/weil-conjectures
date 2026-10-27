@@ -1,0 +1,284 @@
+{
+ "id": "lem-trf-synchronized-resolution-zariski-descent",
+ "kind": "statement",
+ "title": "Zariski descent and cover independence of synchronized ordinary resolution towers",
+ "statement": "Fix a totally ordered set $L$. Over $\\mathbf Q$, let $\\mathcal C$ be the reduced finite-type schemes admitting a closed embedding into a smooth separated finite-type scheme, including finite disjoint unions of such inputs [def-pc-reduced-scheme, def-weil-finite-type-morphism, def-weil-closed-immersion, def-sbc-smooth-morphisms, def-weil-proper-morphism]. Suppose $A$ assigns to every $X\\in\\mathcal C$ a finite ordinary blowup tower $A(X)$, with distinct labels in increasing order in $L$, coherent ideal centers whose zero schemes are nonempty nowhere dense and regular, and regular final scheme [def-trf-ordinary-resolution-rule, def-nagata-global-blowup, pqf-def-coherent, def-weil-regular-scheme]. Nowhere dense means empty interior of the underlying closed set. Suppose $A(\\varnothing)$ is trivial. For every open immersion $j:X'\\to X$ in $\\mathcal C$ [def-weil-open-immersion], assume $A(X')$ is canonically the contraction of $j^*A(X)$, preserving labels and extended ideals [def-nagata-extended-ideal]; precisely the unit-ideal stages are deleted. Comparisons are the canonical ordinary blowup comparisons.\n\nThen $A$ extends, uniquely up to canonical isomorphisms preserving labels and center ideals, to an assignment $R$ of such regular ordinary resolution towers on every reduced finite-type $\\mathbf Q$-scheme $S$, without a separatedness assumption. For every finite affine open cover $\\{U_a\\}$ of $S$, put $U=\\coprod_a U_a$. The tower $R(S)$ has exactly the label list of $A(U)$, and its cartesian pullback to $U$ is $A(U)$ without any contraction [def-pc-fibre-product]. More precisely, on an affine open $W\\subset U_a\\cap U_b$ the two restrictions of $A(U)$ agree as towers with centers after restoring the unit-ideal identity stages at the missing labels of $A(W)$. These agreements hold also on triple overlaps. At each label the ideals on the corresponding lifted open cover descend to one coherent ideal on the current level of $S$, and the next level is its ordinary blowup. Every resulting center is nonempty, nowhere dense and regular, the final scheme is regular, and all levels remain of finite type over $\\mathbf Q$.\n\nFor two finite affine covers, the towers obtained using them are canonically identified, preserving their labels and all level ideals, by the comparison with their combined covering family; neither original covering family loses a label of the combined tower. These identifications are transitive for three covers. The restriction of $R$ to $\\mathcal C$ is canonically $A$, and $R(\\varnothing)$ is trivial. No intersection of affine opens is assumed affine.",
+ "source": {
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "VIII 2.1.9, 2.3.1 and Remark 2.3.5(ii), printed pp.88,91--92. Conditional synchronized Zariski gluing and independence of the affine cover; retained old proof Steps 4--5. Agent expansion of the disjoint-union synchronization argument, not a Stacks theorem on normalized towers."
+ },
+ "stmt_deps": [
+  "def-pc-reduced-scheme",
+  "def-weil-finite-type-morphism",
+  "def-trf-ordinary-resolution-rule",
+  "def-nagata-global-blowup",
+  "def-weil-regular-scheme",
+  "pqf-def-coherent",
+  "def-nagata-extended-ideal",
+  "def-weil-open-immersion",
+  "def-pc-fibre-product",
+  "def-weil-closed-immersion",
+  "def-sbc-smooth-morphisms",
+  "def-weil-proper-morphism",
+  "def-trf-labeled-ordinary-zariski-resolution-data",
+  "def-per-ordinary-tower-cartesian-map",
+  "def-trf-labeled-embedded-resolution"
+ ],
+ "proof": [
+  {
+   "text": "Obtain padded affine overlap compatibility from [lem-trf-ordinary-resolution-padded-overlaps]. Apply [lem-trf-affine-resolution-descent-existence] separately to every input and choose a family R of the resulting regular affine descents. This is choice inside the proof of an existential theorem, not a definition or a choice of unconstructed data for a public object.",
+   "uses": [
+    "lem-trf-ordinary-resolution-padded-overlaps",
+    "lem-trf-affine-resolution-descent-existence"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Prove uniqueness of cartesian ordinary tower maps over any fixed base map directly by induction on levels. At zero cancel the initial isomorphism in the commuting pullback square. At a successor the source center becomes invertible after its blowup by [thm-nagata-blowup-principalizes-center]; its blowup isomorphism is flat. The center equality identifies this with the target center pulled back along the common lower map. Apply uniqueness of lifts in [thm-nagata-blowup-universal-property] to identify the two successor maps, then cancel the target blowup isomorphism. Proof irrelevance identifies all remaining structure fields. No regularity or cover assumption is needed.",
+   "uses": [
+    "thm-nagata-blowup-principalizes-center",
+    "thm-nagata-blowup-universal-property"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply [lem-trf-affine-resolution-descent-comparison] to each chosen R(S). Its first part gives existence of the full map on every cover with DescendsIdeals; the preceding uniqueness promotes this to the required unique map. Its second part gives comparison existence with every affine descent, again promoted to Unique. By [lem-trf-embedded-resolution-affine-descent], A(S) on an embeddable input is such an affine descent, giving the embedded-input comparison.",
+   "uses": [
+    "lem-trf-affine-resolution-descent-comparison",
+    "lem-trf-embedded-resolution-affine-descent"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "For empty S, unpack the affine-descent witness T to R(S). The morphism T to S makes T empty, so A.empty gives its length zero. The full comparison identifies this length with that of R(S). For two covers, their full comparisons to R(S) identify each label range with the label range of R(S), since finite-index casts are bijective and the maps preserve labels. Transitivity of equality gives the required label-range equality.",
+   "uses": [
+    "def-trf-labeled-ordinary-zariski-resolution-data"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "For three arbitrary labeled cartesian maps over the identity, identify their equal lengths and compare the levelwise composite with the direct map. Both have the same zero map by the commuting base squares. Compose their adjacent-arrow equalities using associativity, and compose their center equalities using functoriality of extended ideals. The same blowup-lift induction already used for uniqueness now identifies these level maps. This proves the required IsComposite equation without a further descent or cocycle assumption.",
+   "uses": [
+    "thm-nagata-blowup-principalizes-center",
+    "thm-nagata-blowup-universal-property",
+    "def-nagata-extended-ideal"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-trf-ordinary-resolution-padded-overlaps",
+  "lem-trf-affine-resolution-descent-existence",
+  "thm-nagata-blowup-principalizes-center",
+  "thm-nagata-blowup-universal-property",
+  "lem-trf-affine-resolution-descent-comparison",
+  "lem-trf-embedded-resolution-affine-descent",
+  "def-trf-labeled-ordinary-zariski-resolution-data",
+  "def-nagata-extended-ideal"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "VIII 2.1.4--2.1.9, 2.2.11, 2.3.1 and Remark 2.3.5(ii), printed pp.87--88,91--92; explicit labeled Zariski-descent expansion. F5 formal reduction: four geometric sublemmas; tower-map rigidity, cocycle, empty-input triviality and label-range comparison proved directly in Lean."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "blowup.*(glue|descent)|synchroniz.*blow|label.*blowup",
+   "results": "[grep] OK 0 hit(s).  Returned: ",
+   "date": "2026-10-22",
+   "verdict": "no match: the returned smoothness, gluing, open-cover and base-change declarations do not state this conditional theorem for finite synchronized ordinary blowup towers with their ideal centers and ordered contractions."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "lem-trf-synchronized-resolution-zariski-descent: Finite labeled blowup towers compatible with open restriction descend from a disjoint union of affine charts to a cover independent resolution of a scheme",
+   "results": "[leanfinder] OK 8 hit(s).  Returned: AlgebraicGeometry.ExistsHomHomCompEqCompAux.𝒰D, AlgebraicGeometry.ExistsHomHomCompEqCompAux.h𝒰S, AlgebraicGeometry.ExistsHomHomCompEqCompAux.𝒰D₀, AlgebraicGeometry.Scheme.Hom.normalizationOpenCover, AlgebraicGeometry.Scheme.OpenCover.fromAffineRefinement, AlgebraicGeometry.ExistsHomHomCompEqCompAux.𝒰S, AlgebraicGeometry.Scheme.exists_isOpenCover_and_isAffine, AlgebraicGeometry.ExistsHomHomCompEqCompAux.h𝒰X",
+   "date": "2026-10-22",
+   "verdict": "no match: the returned smoothness, gluing, open-cover and base-change declarations do not state this conditional theorem for finite synchronized ordinary blowup towers with their ideal centers and ordered contractions."
+  },
+  {
+   "tool": "leansearch",
+   "query": "lem-trf-synchronized-resolution-zariski-descent: Glue synchronized finite sequences of blowups in coherent regular centers from affine open covers independently of the chosen cover",
+   "results": "[leansearch] OK 8 hit(s).  Returned: AlgebraicGeometry.Scheme.Cover.gluedCover, AlgebraicGeometry.Scheme.Cover.instIsIsoFromGlued, AlgebraicGeometry.Scheme.Pullback.gluing, AlgebraicGeometry.Scheme.Cover.RelativeGluingData.toBase, AlgebraicGeometry.Scheme.LocalRepresentability.glueData, AlgebraicGeometry.IsLocalAtSource.of_iSup_eq_top, AlgebraicGeometry.IsZariskiLocalAtTarget.of_iSup_eq_top, AlgebraicGeometry.Scheme.Cover.glueMorphisms",
+   "date": "2026-10-22",
+   "verdict": "no match: the returned smoothness, gluing, open-cover and base-change declarations do not state this conditional theorem for finite synchronized ordinary blowup towers with their ideal centers and ordered contractions."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Blowup\"",
+   "results": "[loogle] OK 0 hit(s).  Returned: ",
+   "date": "2026-10-22",
+   "verdict": "no match: the returned smoothness, gluing, open-cover and base-change declarations do not state this conditional theorem for finite synchronized ordinary blowup towers with their ideal centers and ordered contractions."
+  },
+  {
+   "tool": "grep",
+   "query": "blowup.*(glue|descent)|synchroniz.*blow|label.*blowup",
+   "results": "OK 0 hits: ",
+   "date": "2026-10-23",
+   "verdict": "no match: cover and limit constructions do not assert synchronized labeled ordinary blowup tower descent with coherent center ideals, nondeletion and cover independence."
+  },
+  {
+   "tool": "leansearch",
+   "query": "lem-trf-synchronized-resolution-zariski-descent: glue finite sequences of blowups with coherent regular centers from affine charts independently of the affine covering",
+   "results": "OK 8 hits: AlgebraicGeometry.Scheme.LocalRepresentability.glueData, AlgebraicGeometry.Scheme.OpenCover.glueMorphismsOverOfLocallyDirected, AlgebraicGeometry.Scheme.Pullback.gluing, AlgebraicGeometry.IsZariskiLocalAtTarget.descendsAlong_inf_quasiCompact, AlgebraicGeometry.IsZariskiLocalAtTarget.of_iSup_eq_top, AlgebraicGeometry.Scheme.AffineZariskiSite.isColimitCocone, AlgebraicGeometry.Scheme.GlueData.oneHypercover, AlgebraicGeometry.Scheme.Cover.gluedCover_t'",
+   "date": "2026-10-23",
+   "verdict": "no match: cover and limit constructions do not assert synchronized labeled ordinary blowup tower descent with coherent center ideals, nondeletion and cover independence."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Blowup\"",
+   "results": "OK 0 hits: ",
+   "date": "2026-10-23",
+   "verdict": "no match: cover and limit constructions do not assert synchronized labeled ordinary blowup tower descent with coherent center ideals, nondeletion and cover independence."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "lem-trf-synchronized-resolution-zariski-descent: Zariski descent of finite labeled ordinary blowup sequences compatible with restriction to open subschemes, using disjoint unions to synchronize stages",
+   "results": "OK 8 hits: AlgebraicGeometry.ExistsHomHomCompEqCompAux.𝒰D₀, AlgebraicGeometry.ExistsHomHomCompEqCompAux.𝒰D, AlgebraicGeometry.ExistsHomHomCompEqCompAux.hii', AlgebraicGeometry.Scheme.exists_hom_hom_comp_eq_comp_of_locallyOfFiniteType, AlgebraicGeometry.Scheme.exists_hom_comp_eq_comp_of_locallyOfFiniteType, AlgebraicGeometry.Scheme.IsLocallyDirected.tAux, AlgebraicGeometry.ExistsHomHomCompEqCompAux.𝒰S, AlgebraicGeometry.HasRingHomProperty.descendsAlong",
+   "date": "2026-10-23",
+   "verdict": "no match: cover and limit constructions do not assert synchronized labeled ordinary blowup tower descent with coherent center ideals, nondeletion and cover independence."
+  },
+  {
+   "tool": "grep",
+   "query": "desingulari[sz]|resolutionTower|blow.?up",
+   "results": "OK 0 hits: . Mathlib/AlgebraicGeometry",
+   "date": "2026-10-23",
+   "verdict": "no match: cover and limit constructions do not assert synchronized labeled ordinary blowup tower descent with coherent center ideals, nondeletion and cover independence."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "lem-trf-synchronized-resolution-zariski-descent: effective descent of ordered towers of blowups along an open cover with unit ideal stages retained and comparison on refinements",
+   "results": "OK 8 hits: AlgebraicGeometry.ExistsHomHomCompEqCompAux.𝒰D, AlgebraicGeometry.ExistsHomHomCompEqCompAux.𝒰S, AlgebraicGeometry.ExistsHomHomCompEqCompAux.𝒰D₀, AlgebraicGeometry.HasRingHomProperty.descendsAlong, AlgebraicGeometry.Scheme.Cover.exists_of_f_eq_f, AlgebraicGeometry.Scheme.Cover.exists_of_trans_eq_trans, AlgebraicGeometry.Scheme.Cover.RelativeGluingData, AlgebraicGeometry.Scheme.AffineZariskiSite.instLocallyDirectedIsOpenImmersionDirectedCover",
+   "date": "2026-10-23",
+   "verdict": "no match: cover and limit constructions do not assert synchronized labeled ordinary blowup tower descent with coherent center ideals, nondeletion and cover independence."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-smooth-functorial-ordinary-resolution",
+  "date": "2026-10-22",
+  "group": "Q27"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Historical nearby-duality/alteration branch of lem-trf-local-term-locality, proof (1)--(2), through lem-trf-log-regular-desingularization: monoidal resolution used for the regular modification of nodal pairs; ILO VIII 3.3.15, pp.109--110. Expose VIII, Theorems 3.1.27 and 3.2.20, and Remark 3.2.21, pp.102,106; construction in 3.2.19 over k=Q. Supporting source: Expose VIII, Theorem 2.3.10, normalized restriction in 2.3.9 and Remark 2.3.12(i), equivariance in Corollary 2.3.17, printed pp.93--95; application in 3.2.19, p.106. Refinement in this split: Expose VIII, Theorem 2.3.10 restricted to finite-type Q-schemes, with tower conventions 2.1.4, 2.3.1, 2.3.4 and Remark 2.3.5(i), printed pp.87,91--93. This is ordinary resolution, not the normalized toric conclusion; no Stacks tag states this characteristic-zero resolution theorem. Re-split task: VIII 2.1.9, 2.3.1 and Remark 2.3.5(ii), printed pp.88,91--92. Conditional synchronized Zariski gluing and independence of the affine cover; retained old proof Steps 4--5. Agent expansion of the disjoint-union synchronization argument, not a Stacks theorem on normalized towers.",
+   "via": [
+    "lem-trf-smooth-functorial-ordinary-resolution",
+    "lem-trf-toric-normalized-desingularization",
+    "lem-trf-functorial-fan-desingularization",
+    "lem-trf-monoidal-resolution-tower",
+    "lem-trf-log-regular-desingularization",
+    "lem-trf-nodal-pair-projective-resolution",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-trf-synchronized-resolution-zariski-descent",
+  "worker": "stage1",
+  "summary": "Expanded conditional ordinary-tower synchronization into open pullback and padding, affine-overlap comparisons, explicit sectionwise descent of coherent ideals, induction by ordinary blowups, regularity and finite-type checks, nondeletion on combined covers, and canonical independence and recovery. No new nodes or statement changes.",
+  "blueprint": "Retains the historical alteration/resolution support branch recorded in blueprint.from through lem-trf-smooth-functorial-ordinary-resolution; realizes its retained old proof Steps 4--5 via ILO VIII Remark 2.3.5(ii). Latest blueprint ancestor now gives the contracting-correspondence proof; no chapter or unit route was changed.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-finite-type-over-noetherian",
+    "why": "Generic a scheme of finite type over a noetherian scheme is noetherian (stacks 01t6) used in the conditional Zariski construction; no ordinary-scheme replacement in this unit supplies this interface. This does not replace any resolution or trace-theorem route."
+   },
+   {
+    "node": "lem-weil-pbc-noetherian-open-subscheme-noetherian",
+    "why": "Generic an open subscheme of a noetherian scheme is noetherian used in the conditional Zariski construction; no ordinary-scheme replacement in this unit supplies this interface. This does not replace any resolution or trace-theorem route."
+   },
+   {
+    "node": "lem-weil-pbc-qc-open-immersion-finite-type",
+    "why": "Generic a quasi-compact open immersion is of finite type used in the conditional Zariski construction; no ordinary-scheme replacement in this unit supplies this interface. This does not replace any resolution or trace-theorem route."
+   },
+   {
+    "node": "lem-sfb-finite-type-composition-base-change",
+    "why": "Generic finite-type morphisms are stable under composition and base change used in the conditional Zariski construction; no ordinary-scheme replacement in this unit supplies this interface. This does not replace any resolution or trace-theorem route."
+   },
+   {
+    "node": "lem-pqf-finite-affine-cover-qc-open",
+    "why": "Generic finite affine cover of a quasi-compact open used in the conditional Zariski construction; no ordinary-scheme replacement in this unit supplies this interface. This does not replace any resolution or trace-theorem route."
+   },
+   {
+    "node": "lem-pc-affine-finite-type-algebra",
+    "why": "Generic an affine finite-type scheme over a field has a finitely generated coordinate algebra used in the conditional Zariski construction; no ordinary-scheme replacement in this unit supplies this interface. This does not replace any resolution or trace-theorem route."
+   },
+   {
+    "node": "sbc-lem-affine-space-smooth",
+    "why": "Generic affine space is smooth used in the conditional Zariski construction; no ordinary-scheme replacement in this unit supplies this interface. This does not replace any resolution or trace-theorem route."
+   },
+   {
+    "node": "lem-weil-pbc-affine-source-morphism-separated",
+    "why": "Generic a morphism with affine source is separated used in the conditional Zariski construction; no ordinary-scheme replacement in this unit supplies this interface. This does not replace any resolution or trace-theorem route."
+   },
+   {
+    "node": "thm-nagata-blowup-flat-base-change",
+    "why": "Generic flat base change of blow-ups used in the conditional Zariski construction; no ordinary-scheme replacement in this unit supplies this interface. This does not replace any resolution or trace-theorem route."
+   },
+   {
+    "node": "thm-nagata-global-blowup-complement",
+    "why": "Generic complement of the center used in the conditional Zariski construction; no ordinary-scheme replacement in this unit supplies this interface. This does not replace any resolution or trace-theorem route."
+   },
+   {
+    "node": "lem-weil-pbc-affine-opens-basis",
+    "why": "Generic the affine opens of a scheme form a basis of its topology (stacks 01it) used in the conditional Zariski construction; no ordinary-scheme replacement in this unit supplies this interface. This does not replace any resolution or trace-theorem route."
+   },
+   {
+    "node": "prop-nagata-global-blowup-cover-independent",
+    "why": "Generic the global blow-up map, its affine restrictions, and independence of the affine cover used in the conditional Zariski construction; no ordinary-scheme replacement in this unit supplies this interface. This does not replace any resolution or trace-theorem route."
+   },
+   {
+    "node": "thm-nagata-global-blowup-proper",
+    "why": "Generic properness of the global blow-up used in the conditional Zariski construction; no ordinary-scheme replacement in this unit supplies this interface. This does not replace any resolution or trace-theorem route."
+   }
+  ]
+ },
+ "tool_uses": [],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q31-30f01fbcd",
+  "group": "Q31",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q31-30f01fbcd (reviewer sub-agent of L); spot-checked: Read the item's full statement, all 10 steps and the statements of all 22 cited nodes, including the blueprint_update text of the nagata blowup nodes. There are no new nodes. The statement is unchanged and byte-identical to live; live is still unsplit, so there is no supersession, and there is no repair note. Source checked: ILO VIII Remark 2.3.5(ii), PDF pp.97-98, the disjoint-union synchronization with empty blowups inserted; proof_origin agent is correct. Steps 1-3, 5-8 and 10 are correct. They check Noetherianity and open finite type, membership of the affine charts in C via a closed embedding in A^r, open flat base change, unit-ideal padding through the complement theorem, the sectionwise ideal descent (elementary), properness and finite type, nonemptiness, nowhere density and regularity, the label-exclusion argument on the uncontracted combined tower, and recovery of A on C. Edge cases tested: empty S and empty cover, a nonseparated line with doubled origin, labels deleted on single charts. C4 fixed in Steps 4 and 9: uniqueness of the overlap and composite blowup comparisons was attributed to prop-nagata-global-blowup-cover-independent, which only compares two cover constructions of Bl_I(X) for one (X,I). It now cites thm-nagata-blowup-principalizes-center and the uniqueness clause of thm-nagata-blowup-universal-property, both Lean-closed; proof_deps updated. The 13 declared generic tool_uses are accepted. No SGA citation; no duplicate found in the DAG.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SynchronizedResolutionZariskiDescent",
+  "declaration": "AlgebraicGeometry.exists_synchronized_resolution_zariski_descent",
+  "file": "lean/Sheaf/AlgebraicGeometry/SynchronizedResolutionZariskiDescent.lean",
+  "statement": "theorem exists_synchronized_resolution_zariski_descent (L : Type w) [LinearOrder L] (A : OrdinaryZariskiResolutionRule.{u, w} L) : ∃ R : ∀ S : RationalResolutionInput.{u}, LabeledOrdinaryTower L S.scheme, (∀ S, (R S).IsResolution) ∧ (∀ S, IsEmpty S.scheme → (R S).tower.length = 0) ∧ (∀ (S : RationalResolutionInput.{u}) (hS : S.IsEmbeddable), Nonempty (Unique (LabeledOrdinaryCartesianMap (𝟙 S.scheme) (R S) (A.tower S hS)))) ∧ (∀ S, A.IsSynchronizedDescent S (R S)) ∧ A.HasPaddedOverlaps ∧ (∀ (S T V : RationalResolutionInput.{u}) (q : T.scheme ⟶ S.scheme) (r : V.scheme ⟶ S.scheme), ResolutionAffineCover S T q → ResolutionAffineCover S V r → ∃ (hT : T.IsEmbeddable) (hV : V.IsEmbeddable), Set.range (A.tower T hT).label = Set.range (A.tower V hV).label) ∧ (∀ (S : RationalResolutionInput.{u}) (B : LabeledOrdinaryTower L S.scheme), A.IsAffineDescent S B → Nonempty (Unique (LabeledOrdinaryCartesianMap (𝟙 S.scheme) (R S) B))) ∧ (∀ (S : RationalResolutionInput.{u}) (B C D : LabeledOrdinaryTower L S.scheme), A.IsAffineDescent S B → A.IsAffineDescent S C → A.IsAffineDescent S D → ∀ (bc : LabeledOrdinaryCartesianMap (𝟙 S.scheme) B C) (cd : LabeledOrdinaryCartesianMap (𝟙 S.scheme) C D) (bd : LabeledOrdinaryCartesianMap (𝟙 S.scheme) B D), bc.IsComposite cd bd)",
+  "branch": "newtargets-dag",
+  "by": "Q05",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-d7349875e",
+  "group": "Q05",
+  "result": "pass",
+  "note": "Item JSON differs from live only in lean+stmt_deps (added the new def node, def-per-ordinary-tower-cartesian-map, def-trf-labeled-embedded-resolution); statement/proof/proof_deps unchanged; lean.statement verbatim. New def node def-trf-labeled-ordinary-zariski-resolution-data: real structures/predicates, no duplicate in Mathlib/live, TeX matches Lean. Hypotheses match node: L LinearOrder in independent universe w, RationalResolutionInput (reduced, finite type, no separatedness), IsEmbeddable via EmbeddedResolutionPair (closed embedding in smooth separated finite-type ambient, not chosen), A with IsRegularResolution + IsCoherent centers, empty -> length 0, open-immersion-only label-preserving contraction comparisons (deleted_iff_unit, retained extended ideals). Conclusions checked true: IsResolution incl. finite type of levels; R(empty) trivial; Unique cartesian map over identity to A on C (forced by initial iso and unique blowup lifts); IsSynchronizedDescent over every finite affine cover (actual coproduct, size 0 allowed, no affine-intersection hypothesis) with full labels/ideals and DescendsIdeals; HasPaddedOverlaps true (retained stages fixed by injective labels, padding with unit ideals via Bl(top) iso); label ranges equal for any two covers; unique comparison with every affine descent; IsComposite transitivity. Edge cases: empty S/cover/charts, unit-on-one-chart, iso-blowup proper ideal, doubled-origin line, empty L, universes. Docstrings carry source place, blueprint id and the 10 proof steps; only proof is sorry. Second-reading section is a same-worker second pass (noted). No file changed, no compile run."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F5",
+  "result": "pass",
+  "landing": "20261026T091512-L-3348508",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

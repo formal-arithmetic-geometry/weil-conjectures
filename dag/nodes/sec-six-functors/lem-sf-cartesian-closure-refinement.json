@@ -1,0 +1,276 @@
+{
+ "id": "lem-sf-cartesian-closure-refinement",
+ "kind": "statement",
+ "title": "Schematic closure gives a Cartesian refining compactification triangle",
+ "statement": "Let $k$ be a field and let $X,V,\\overline X,Y,\\overline Y$ be finite-type $k$-schemes [def-pc-scheme, def-weil-finite-type-morphism]. Let $j:X\\hookrightarrow V$, $b:V\\hookrightarrow\\overline X$, $i:Y\\hookrightarrow\\overline Y$ be open immersions and let $q:V\\to Y$, $p:\\overline X\\to\\overline Y$ be proper with $pb=iq$ [def-weil-open-immersion, def-weil-proper-morphism]. Do not assume this square Cartesian. Let $a:W\\hookrightarrow\\overline X$ be the scheme-theoretic closure of the open $bj(X)$, namely its smallest closed subscheme containing $X$ [sk-lem-nagata-sketch-closure], and let $W_Y=W\\times_{\\overline Y}Y$ with projections $b':W_Y\\hookrightarrow W$, $q':W_Y\\to Y$ [def-pc-fibre-product]. There are a quasi-compact open immersion $j':X\\hookrightarrow W_Y$ and a closed immersion $v:W_Y\\hookrightarrow V$ such that\n$$vj'=j,\\qquad bv=ab',\\qquad qv=q',\\qquad (pa)b'=iq'.$$\nThe map $X\\to W$ is open and scheme-theoretically dense. The maps $a,v$ are proper, $pa:W\\to\\overline Y$ and $q':W_Y\\to Y$ are proper, and the square with horizontal maps $b',i$ and vertical maps $q',pa$ is Cartesian. Thus these maps are a Cartesian refining triangle over the supplied triangle, restricting to the identity on $X$ and $Y$ [def-weil-compactifications-refinements]. No separatedness of any structure map to $k$ is required. This includes $X=\\varnothing$, when $W=W_Y=\\varnothing$.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-nagata-compactification/sk-lem-nagata-sketch-closure/_section.md",
+  "place": "schematic closure and scheme-theoretic density; agent clopen-complement application to returned item step 9"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-finite-type-morphism",
+  "def-weil-open-immersion",
+  "def-weil-proper-morphism",
+  "sk-lem-nagata-sketch-closure",
+  "def-pc-fibre-product",
+  "def-weil-compactifications-refinements",
+  "def-weil-closed-immersion"
+ ],
+ "proof": [
+  {
+   "text": "The field spectrum is Noetherian. The finite-type structure map sX gives a locally Noetherian and compact X, hence a Noetherian space. Thus every morphism out of X is quasi-compact, in particular h = j ≫ b and all the lifts used below. The finite-type map sXbar gives locally Noetherian Xbar and therefore quasi-separatedness.",
+   "uses": [
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "lem-weil-pbc-noetherian-open-subscheme-noetherian",
+    "lem-weil-pbc-locally-noetherian-quasi-separated"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Set a = h.imageι, u = h.toImage and f = a ≫ p. Use the canonical image factorization u ≫ a = h. The quasi-compact immersion h has closed image inclusion a and open, topologically dense factor u. Apply nagata_sketch_closure.1 to obtain sectionwise injectivity, retaining the full scheme-theoretic image.",
+   "uses": [
+    "sk-lem-nagata-sketch-closure",
+    "lemma-nagata-immersion-open-in-scheme-image"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Let P = pullback a b with projections m to h.image and n to V, and W = pullback f i with projections w to h.image and r to Y. The projections m and w are open by base change. Lift u and j ≫ q to j' : X → W using the given commutativity and the image factorization. Since j' ≫ w = u and w is open, j' is open and topologically dense. Its quasi-compactness follows from Noetherian X.",
+   "uses": [
+    "def-pc-fibre-product",
+    "lem-weil-pbc-open-immersion-base-change",
+    "lemma-nagata-immersion-open-in-scheme-image",
+    "lem-weil-pbc-noetherian-open-subscheme-noetherian",
+    "def-weil-open-immersion"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The equality m ≫ f = (n ≫ q) ≫ i gives a canonical lift e : P → W. Its composite with w is m, so e is open. Since n is the base change of the closed immersion a, n is closed and proper. The composite e ≫ r = n ≫ q is proper. The projection r is proper by base change of the proper f = a ≫ p, hence separated. Therefore IsProper.of_comp makes e proper. The canonical lift t : X → P satisfies t ≫ e = j', by equality on both pullback projections. Since j' is dominant, e is dominant. Its range is closed because e is proper, hence it is surjective. A surjective open immersion is an isomorphism. This is the clopen-complement argument expressed through the canonical comparison of the two pullbacks.",
+   "uses": [
+    "def-pc-fibre-product",
+    "lem-pc-closed-imm-base-change",
+    "lem-weil-pbc-closed-immersion-proper",
+    "lem-weil-pbc-proper-base-change",
+    "lemma-nagata-proper-to-separated-target",
+    "def-weil-proper-morphism",
+    "def-weil-open-immersion"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Define v = inv e ≫ n. It is a closed immersion and proper, by transport of the closed immersion n along an isomorphism. The inverse identities give v ≫ b = w ≫ a and v ≫ q = r. Composing j' ≫ v with the monomorphism b and using j' ≫ w = u proves j' ≫ v = j. The pullback gives w ≫ f = r ≫ i, and j' has the specified two projections. These comparison maps retain the specified identity on X and Y.",
+   "uses": [
+    "lem-pc-closed-imm-base-change",
+    "lem-weil-pbc-closed-immersion-proper",
+    "def-pc-fibre-product",
+    "def-weil-compactifications-refinements"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Assemble properness of a and f, openness of w, properness of r, and the canonical IsPullback witness. If X is empty, the range of the dense u is empty, whose closure is empty, so h.image is empty. The projection w then forces W to be empty as well. This proves the empty case without changing the construction.",
+   "uses": [
+    "lemma-nagata-immersion-open-in-scheme-image",
+    "lem-weil-pbc-closed-immersion-proper",
+    "lem-weil-pbc-open-immersion-base-change",
+    "lem-weil-pbc-proper-base-change",
+    "def-pc-fibre-product"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-weil-pbc-noetherian-open-subscheme-noetherian",
+  "lem-weil-pbc-locally-noetherian-quasi-separated",
+  "sk-lem-nagata-sketch-closure",
+  "lemma-nagata-immersion-open-in-scheme-image",
+  "def-pc-fibre-product",
+  "lem-weil-pbc-open-immersion-base-change",
+  "def-weil-open-immersion",
+  "lem-pc-closed-imm-base-change",
+  "lem-weil-pbc-closed-immersion-proper",
+  "lem-weil-pbc-proper-base-change",
+  "lemma-nagata-proper-to-separated-target",
+  "def-weil-proper-morphism",
+  "def-weil-compactifications-refinements"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-nagata-compactification/sk-lem-nagata-sketch-closure/_section.md",
+  "place": "M6 Lean proof: scheme-theoretic closure (01R8, 01RG), relative properness (01W4, 01W6), and the dense proper open comparison between pullbacks; equivalent to the clopen-complement argument."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "schematic closure of an open subscheme refines a proper open compactification triangle to a cartesian square",
+   "results": "8 hits: AlgebraicGeometry.IsImmersion.isPullback_toImage_liftCoborder, AlgebraicGeometry.ExistsHomHomCompEqCompAux.𝒰D, AlgebraicGeometry.ValuativeCommSq, AlgebraicGeometry.Scheme.instHasPullbacksIsOpenImmersion, AlgebraicGeometry.Scheme.Hom.isProperMap, AlgebraicGeometry.isCompact_iff_exists, AlgebraicGeometry.IsProper.instMorphismRestrict, AlgebraicGeometry.Scheme.Opens.ι",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits do not state the specified ambient geometric/system comparison"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A commutative proper vertical open horizontal square refines to a Cartesian square by taking the scheme theoretic closure of its dense source open",
+   "results": "8 hits: AlgebraicGeometry.IsOpenImmersion.isPullback, AlgebraicGeometry.Scheme.IsLocallyDirected.exists_of_pullback_V_V, AlgebraicGeometry.Scheme.isPullback_of_openCover, AlgebraicGeometry.ValuativeCommSq, AlgebraicGeometry.ExistsHomHomCompEqCompAux.g, AlgebraicGeometry.IsOpenImmersion.isPullback_lift_id, AlgebraicGeometry.ExistsHomHomCompEqCompAux.hii', AlgebraicGeometry.IsImmersion.isPullback_toImage_liftCoborder",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits do not state the specified ambient geometric/system comparison"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Compactification, AlgebraicGeometry.IsClosedImmersion",
+   "results": "0 hits: . loogle: unknown identifier 'AlgebraicGeometry.Compactification'",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits do not state the specified ambient geometric/system comparison"
+  },
+  {
+   "tool": "grep",
+   "query": "denseRefinement|schematicClosure|schemeTheoreticImage|ofIsImmersion",
+   "results": "0 hits: ",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits do not state the specified ambient geometric/system comparison"
+  },
+  {
+   "tool": "grep",
+   "query": "IsPullback.*toImage|image.*[Cc]los|schematic.*image|Compactification",
+   "results": "25 hits: Mathlib/AlgebraicGeometry/Geometrically/Connected.lean, Mathlib/AlgebraicGeometry/AffineScheme.lean, Mathlib/AlgebraicGeometry/Properties.lean, Mathlib/AlgebraicGeometry/Stalk.lean, Mathlib/AlgebraicGeometry/Stalk.lean, Mathlib/AlgebraicGeometry/Stalk.lean, Mathlib/AlgebraicGeometry/Group/Abelian.lean, Mathlib/AlgebraicGeometry/Group/Abelian.lean",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits do not state the specified ambient geometric/system comparison"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Taking the closure of X inside an ambient proper scheme removes the extra clopen component over an open base",
+   "results": "8 hits: AlgebraicGeometry.Scheme.Hom.coborderRange, AlgebraicGeometry.Scheme.Opens.toScheme_carrier, AlgebraicGeometry.instIsClosedImmersionLiftCoborder, AlgebraicGeometry.instQuasiSoberCarrierCarrierCommRingCat, AlgebraicGeometry.Scheme.IdealSheafData.subscheme, AlgebraicGeometry.Scheme.Opens.toScheme, AlgebraicGeometry.Scheme.zeroLocus_univ, AlgebraicGeometry.Scheme.Opens.instCoeOut",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits do not state the specified ambient geometric/system comparison"
+  },
+  {
+   "tool": "grep",
+   "query": "isPullback_toImage_liftCoborder",
+   "results": "2 hits: 246, 260",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits do not state the specified ambient geometric/system comparison"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Schematic closure of an open subscheme in a proper compactification makes the triangle Cartesian over the open base",
+   "results": "8 hits: AlgebraicGeometry.IsImmersion.isPullback_toImage_liftCoborder, AlgebraicGeometry.Scheme.Hom.liftCoborder_ι_assoc, AlgebraicGeometry.Scheme.Hom.liftCoborder, AlgebraicGeometry.Scheme.Hom.liftCoborder_ι, AlgebraicGeometry.instIsClosedImmersionLiftCoborder, AlgebraicGeometry.ExistsHomHomCompEqCompAux.range_g_subset, AlgebraicGeometry.specTargetImageFactorization, AlgebraicGeometry.Scheme.IdealSheafData.subSchemeCover_map_inclusion_assoc",
+   "date": "2026-10-22",
+   "verdict": "no match: component geometry only; none states the entire refining triangle with these hypotheses and all identities"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.IsProper, AlgebraicGeometry.IsOpenImmersion",
+   "results": "0 hits: ",
+   "date": "2026-10-22",
+   "verdict": "no match: component geometry only; none states the entire refining triangle with these hypotheses and all identities"
+  },
+  {
+   "tool": "grep",
+   "query": "toImage|isClopen_range|IsProper.*of_comp",
+   "results": "25 hits: Mathlib/AlgebraicGeometry/Group/Abelian.lean, Mathlib/AlgebraicGeometry/IdealSheaf/Functorial.lean, Mathlib/AlgebraicGeometry/IdealSheaf/Functorial.lean, Mathlib/AlgebraicGeometry/IdealSheaf/Functorial.lean, Mathlib/AlgebraicGeometry/IdealSheaf/Functorial.lean, Mathlib/AlgebraicGeometry/QuasiAffine.lean, Mathlib/AlgebraicGeometry/ZariskisMainTheorem.lean, Mathlib/AlgebraicGeometry/ZariskisMainTheorem.lean",
+   "date": "2026-10-22",
+   "verdict": "no match: component geometry only; none states the entire refining triangle with these hypotheses and all identities"
+  },
+  {
+   "tool": "leansearch",
+   "query": "schematic closure of an open subscheme refines a proper open triangle to a Cartesian square",
+   "results": "8 hits: AlgebraicGeometry.IsOpenImmersion.isPullback, AlgebraicGeometry.isPullback_opens_inf, AlgebraicGeometry.IsProper.toUniversallyClosed, AlgebraicGeometry.isPullback_opens_inf_le, AlgebraicGeometry.isPullback_morphismRestrict, AlgebraicGeometry.isPullback_of_isClosedImmersion, AlgebraicGeometry.Scheme.isPullback_of_openCover, AlgebraicGeometry.Scheme.Opens.toScheme",
+   "date": "2026-10-22",
+   "verdict": "no match: component geometry only; none states the entire refining triangle with these hypotheses and all identities"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An open immersion over a base with proper source and separated target has open and closed image",
+   "results": "8 hits: AlgebraicGeometry.IsImmersion.isLocallyClosed_range, AlgebraicGeometry.Scheme.Hom.isLocallyClosed_range, AlgebraicGeometry.instHasOfPostcompPropertySchemeIsClosedImmersionIsSeparated, AlgebraicGeometry.isImmersion_eq_inf, AlgebraicGeometry.isImmersion_iff, AlgebraicGeometry.IsClosedImmersion, AlgebraicGeometry.IsClosedImmersion.of_comp, AlgebraicGeometry.IsImmersion.isImmersion_iff_exists_of_quasiCompact",
+   "date": "2026-10-22",
+   "verdict": "no match: component geometry only; none states the entire refining triangle with these hypotheses and all identities"
+  },
+  {
+   "tool": "grep",
+   "query": "isClopen_range|of_comp|isPullback",
+   "results": "5 hits: 111, 121, 124, 129, 144",
+   "date": "2026-10-22",
+   "verdict": "no match: component geometry only; none states the entire refining triangle with these hypotheses and all identities"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sf-composition-projection-mate",
+  "date": "2026-10-22",
+  "group": "Q135"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-rem-sf-pf-done",
+ "blueprint": {
+  "from": {
+   "node": "fix-prop-projection-formula",
+   "place": "composition/refinement sentence: returned composition-projection-mate step 9 (remove the extra clopen component by schematic closure)",
+   "via": [
+    "lem-sf-composition-projection-mate"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sf-cartesian-closure-refinement",
+  "worker": "stage1",
+  "summary": "Preserved the statement, proved the clopen-complement argument over Y without separatedness over k, and verified the scheme structures, all four identities, properness, and the empty case. Reused existing nodes throughout; no new nodes. Added the missing closed-immersion notion dependency. No exact complete project attachment or Mathlib match found.",
+  "blueprint": "fix-prop-projection-formula composition/refinement compatibility, via lem-sf-composition-projection-mate step 9: schematic closure removes the extra clopen component and supplies the Cartesian triangle. This is a generic scheme-geometric tool below the fixed unit.",
+  "tool_uses": [
+   {
+    "node": "sk-lem-nagata-sketch-closure",
+    "why": "Generic scheme-geometric input for the indicated closure/refinement argument; the projection-formula unit supplies no scheme-geometric substitute."
+   },
+   {
+    "node": "lem-pc-closed-imm-base-change",
+    "why": "Generic scheme-geometric input for the indicated closure/refinement argument; the projection-formula unit supplies no scheme-geometric substitute."
+   }
+  ]
+ },
+ "tool_uses": [
+  "sk-lem-nagata-sketch-closure",
+  "lem-pc-closed-imm-base-change"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-NW-612192d54",
+  "group": "NW",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NW-612192d54 (reviewer sub-agent of L); spot-checked: The statement is true and the split is correct. The live node is unsplit and its statement is identical to the delivered one; no new nodes, no SGA. I checked the math directly: T=p^{-1}(Y) is proper over Y; V→T is proper (proper-to-separated-target) and open, so V is clopen in T; T∖V is open in X̄ and misses the topologically dense X (01RG), so W∩T⊂V, closed in V by base change of a along b. Edge cases checked: a non-Cartesian square with an extra P^1 component, X=∅, nonreduced X. Every hypothesis holds where used: Spec k Noetherian, X Noetherian so h is qc, X̄ quasi-separated, r separated. Step 4 factors through an OPEN subscheme, so there is no E3 trap. The parent composition-projection-mate step 4 uses exactly these maps (v is a proper Y-refinement with vj'=j). No duplicate found: lem-nagata-dense-refinement-cartesian and lem-trf-proper-diagram-compactification are different statements. Accepted tool uses: sk-lem-nagata-sketch-closure and lem-pc-closed-imm-base-change, generic geometry with no substitute in unit sk-rem-sf-pf-done. One fault (C1): step 5 uses that b' is an open immersion but cites lem-weil-pbc-open-immersion-base-change only in step 6. FIX adds it to step 5 uses; proof_deps is unchanged. Corrected file: fixes/dag/nodes/sec-six-functors/lem-sf-cartesian-closure-refinement.json.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.Compactification.CartesianClosureRefinement",
+  "declaration": "AlgebraicGeometry.cartesian_closure_refinement",
+  "file": "lean/Sheaf/Compactification/CartesianClosureRefinement.lean",
+  "statement": "theorem cartesian_closure_refinement (k : Type u) [Field k] (X V Xbar Y Ybar : Scheme.{u}) (sX : X ⟶ Spec (.of k)) (sV : V ⟶ Spec (.of k)) (sXbar : Xbar ⟶ Spec (.of k)) (sY : Y ⟶ Spec (.of k)) (sYbar : Ybar ⟶ Spec (.of k)) [LocallyOfFiniteType sX] [QuasiCompact sX] [LocallyOfFiniteType sV] [QuasiCompact sV] [LocallyOfFiniteType sXbar] [QuasiCompact sXbar] [LocallyOfFiniteType sY] [QuasiCompact sY] [LocallyOfFiniteType sYbar] [QuasiCompact sYbar] (j : X ⟶ V) (b : V ⟶ Xbar) (i : Y ⟶ Ybar) [IsOpenImmersion j] [IsOpenImmersion b] [IsOpenImmersion i] (q : V ⟶ Y) (p : Xbar ⟶ Ybar) [IsProper q] [IsProper p] (_hcomm : b ≫ p = q ≫ i) : IsClosedImmersion (j ≫ b).imageι ∧ IsOpenImmersion (j ≫ b).toImage ∧ (∀ U : (j ≫ b).image.Opens, Function.Injective ((j ≫ b).toImage.app U)) ∧ IsProper (j ≫ b).imageι ∧ IsProper ((j ≫ b).imageι ≫ p) ∧ IsOpenImmersion (pullback.fst ((j ≫ b).imageι ≫ p) i) ∧ IsProper (pullback.snd ((j ≫ b).imageι ≫ p) i) ∧ IsPullback (pullback.fst ((j ≫ b).imageι ≫ p) i) (pullback.snd ((j ≫ b).imageι ≫ p) i) ((j ≫ b).imageι ≫ p) i ∧ (IsEmpty X → IsEmpty (j ≫ b).image ∧ IsEmpty (pullback ((j ≫ b).imageι ≫ p) i : Scheme.{u})) ∧ ∃ (j' : X ⟶ pullback ((j ≫ b).imageι ≫ p) i) (v : pullback ((j ≫ b).imageι ≫ p) i ⟶ V), IsOpenImmersion j' ∧ QuasiCompact j' ∧ IsClosedImmersion v ∧ IsProper v ∧ j' ≫ v = j ∧ v ≫ b = pullback.fst ((j ≫ b).imageι ≫ p) i ≫ (j ≫ b).imageι ∧ v ≫ q = pullback.snd ((j ≫ b).imageι ≫ p) i ∧ pullback.fst ((j ≫ b).imageι ≫ p) i ≫ ((j ≫ b).imageι ≫ p) = pullback.snd ((j ≫ b).imageι ≫ p) i ≫ i ∧ j' ≫ pullback.fst ((j ≫ b).imageι ≫ p) i = (j ≫ b).toImage ∧ j' ≫ pullback.snd ((j ≫ b).imageι ≫ p) i = j ≫ q",
+  "branch": "sheaf-dag",
+  "by": "Q75",
+  "date": "2026-10-23",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-de1732df6",
+  "group": "Q75",
+  "result": "pass",
+  "note": "Statement Sheaf.Compactification.CartesianClosureRefinement matches the node clause by clause: canonical (j≫b).image/imageι/toImage closure, the same object as sk-lem-nagata-sketch-closure with its sectionwise density convention; W_Y = pullback (imageι≫p) i; ∃ j' v with qc open immersion, closed immersion, proper, all four identities plus j' pinned by both projections (Refinement data for (j',q')→(j,q), unbundled to avoid separatedness hypotheses the node excludes); IsPullback in correct order; empty case explicit. Hypotheses: finite type = LocallyOfFiniteType ∧ QuasiCompact on explicit structure maps, no separatedness, maps need not commute with structure maps (a weakening; the result stays true since only X and X̄ Noetherian are used). Math re-checked (e proper via IsProper.of_comp so V clopen in p⁻¹Y; complement misses dense X; v closed by base change). lean.statement verbatim; single sorry; docstrings with source and blueprint, six steps; universes bound; no defs, no pro-étale, no existing decl found (rg side-live Sheaf/WeilConjectures, Mathlib Immersion). Not recompiled per instructions; worker reports a clean compile. Advisory: RefinementCategory import unreferenced in the signature; fourth identity and IsPullback hold by definition but the node requests them."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M6",
+  "result": "pass",
+  "landing": "20261023T105208-L-3524191",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

@@ -1,0 +1,226 @@
+{
+ "id": "lem-sfb-etale-pseudocoherence-descent",
+ "kind": "statement",
+ "title": "Etale descent of pseudo-coherence",
+ "statement": "Let $X$ be any scheme [def-pc-scheme] and $\\epsilon_X:(X_{\\mathrm{et}},\\mathcal O_{X,\\mathrm{et}})\\to(X_{\\mathrm{Zar}},\\mathcal O_X)$ the canonical morphism of ringed sites, with tensor module pullback $\\epsilon_X^*$ [lem-trf-zariski-etale-functor-comparison-square]. Let $E\\in D(\\mathcal O_X)$ be arbitrary. Use unbounded derived categories of sheaves of modules [def-weil-abstract-derived-category, def-weil-sheaf-of-modules-category]. A strictly perfect complex is a bounded complex whose terms are direct summands of finite free structure modules. On a ringed site, an object $K$ is $m$-pseudo-coherent if locally on every object of the site there are a strictly perfect complex $P^\\bullet$ and a map $P^\\bullet\\to K$ in the derived category inducing isomorphisms on $H^j$ for $j>m$ and a surjection on $H^m$; it is pseudo-coherent if this holds for every integer $m$. For every $m\\in\\mathbf Z$, $E$ is $m$-pseudo-coherent on $X_{\\mathrm{Zar}}$ if and only if $\\epsilon_X^*E$ is $m$-pseudo-coherent on $X_{\\mathrm{et}}$. In particular $E$ is pseudo-coherent if and only if $\\epsilon_X^*E$ is pseudo-coherent. No quasi-coherence or global boundedness is assumed.",
+ "source": {
+  "document": "literature/stacks-project/spaces-perfect.tex",
+  "place": "Tag 08HE (lemma-descend-pseudo-coherent), with the convention of sites-cohomology.tex Tag 08FT (definition-pseudo-coherent) and its lemma-pseudo-coherent-independent-representative."
+ },
+ "stmt_deps": [
+  "def-weil-abstract-derived-category",
+  "def-weil-sheaf-of-modules-category",
+  "def-pc-scheme",
+  "lem-trf-zariski-etale-functor-comparison-square"
+ ],
+ "proof": [
+  {
+   "text": "For every open subscheme $U\\subseteq X$, the module functor $\\epsilon_U^*$ is exact and faithful on all modules, not just quasi-coherent ones. Its termwise extension defines a triangulated functor on unbounded derived categories. Exactness gives $H^j(\\epsilon_U^*K)=\\epsilon_U^*H^j(K)$: kernels, images and their quotient are preserved. Thus it detects cohomology vanishing. We use these identifications on each open below.",
+   "uses": [
+    "lem-sfb-derived-etale-zariski-equivalence",
+    "lem-weil-pbc-exact-functor-derived-factorization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-perfect.tex",
+    "place": "Tag 08HE (lemma-descend-pseudo-coherent), first paragraph, exactness and the cohomology identity; Tag 08H8."
+   }
+  },
+  {
+   "text": "For the forward implication take the local strictly perfect approximations on a Zariski open cover. Their pullbacks are strictly perfect: tensor pullback sends $\\mathcal O$ to the target structure module, preserves finite sums and sends a retraction $pi=1$ to the same retraction identity. The cohomology identity in step 1 preserves the required isomorphisms and surjection. The same open cover is an etale cover, and its base changes cover every etale object. Hence these are the required approximations to $\\epsilon_X^*E$.",
+   "uses": [
+    "lem-sfb-derived-etale-zariski-equivalence"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-perfect.tex",
+    "place": "Tag 08HE (lemma-descend-pseudo-coherent), first paragraph, implication (1) to (2); flat pullback of the defining approximations."
+   }
+  },
+  {
+   "text": "For the converse work on an affine open $U\\subseteq X$; the property to prove is local by its definition. Choose an etale cover of $U$ carrying the strictly perfect approximations to $\\epsilon_U^*(E|_U)$. Their cohomology vanishes above their respective finite upper bounds and above $m$. Etale maps have open images, so quasi-compactness of the affine $U$ selects finitely many of these images covering $U$. Take $N$ to be the maximum of $m-1$ and those finitely many bounds. Cohomology sheaves of the pullback vanish above $N$, since they vanish on this cover. By step 1 the same holds for $E|_U$. If $U$ is empty the assertion is vacuous. This obtains only a bound on the chosen open, without imposing a global bound.",
+   "uses": [
+    "lem-weil-pbc-etale-morphism-open-map",
+    "lem-sfb-derived-etale-zariski-equivalence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-perfect.tex",
+    "place": "Tag 08HE (lemma-descend-pseudo-coherent), second paragraph, local quasi-compact reduction and boundedness above."
+   }
+  },
+  {
+   "text": "Fix $m$. Prove, simultaneously for all schemes and all complexes with a chosen upper cohomology bound $N$, that an $m$-pseudo-coherent etale pullback implies $m$-pseudo-coherence on the Zariski site. Induct on $\\max(0,N-m+1)$. When $N<m$, the map $0\\to E$ is a strictly perfect approximation: the cohomology above $m$ and in degree $m$ is zero. The same argument handles the zero complex without choosing a largest nonzero degree. In the remaining case $N\\geq m$, put $n=N$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-perfect.tex",
+    "place": "Tag 08HE (lemma-descend-pseudo-coherent), third paragraph, induction, with an upper bound instead of a largest nonzero degree."
+   }
+  },
+  {
+   "text": "The pullback is also $n$-pseudo-coherent: its $m$-approximation is an isomorphism in degrees $>n$ and is surjective in degree $n$ (an isomorphism there if $n>m$). Its cohomology vanishes above $n$. The ringed-site top-cohomology lemma therefore makes $H^n(\\epsilon_X^*E)$ finite type. Step 1 identifies this with $\\epsilon_X^*H^n(E)$; finite-type detection gives finite type of $H^n(E)$ on $X$. After a Zariski open cover choose a surjection $q:\\mathcal O_X^{\\oplus t}\\twoheadrightarrow H^n(E)$ with finite $t$; we continue on each such open.",
+   "uses": [
+    "lem-sfb-ringed-site-pseudocoherent-top-finite-type",
+    "lem-sfb-etale-finite-type-module-detection"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-perfect.tex",
+    "place": "Tag 08HE (lemma-descend-pseudo-coherent), third paragraph, finite type of the highest cohomology and a finite set of generators."
+   }
+  },
+  {
+   "text": "Represent $E$ by a complex $A^\\bullet$. Apply local lifting from a finite free module to the epimorphism $Z^n(A)\\twoheadrightarrow H^n(A)$ and to $q$. The Zariski site and all its slices have the required module sheafification and local-bijectivity descriptions. On a further open cover obtain $b:\\mathcal O_X^{\\oplus t}\\to Z^n(A)$ inducing $q$. Composing with $Z^n(A)\\hookrightarrow A^n$ gives a chain map $\\alpha:\\mathcal O_X^{\\oplus t}[-n]\\to A^\\bullet$, since $d^nb=0$. Complete it to a distinguished triangle $P\\to E\\to C\\to P[1]$, where $P=\\mathcal O_X^{\\oplus t}[-n]$. In its long exact cohomology sequence, for $j>n$ the neighbours of $H^j(C)$ vanish, while for $j=n$ the surjection $H^n(P)\\twoheadrightarrow H^n(E)$ has next term $H^{n+1}(P)=0$. Hence $H^j(C)=0$ for every $j\\geq n$.",
+   "uses": [
+    "lem-sf-site-finite-projective-lift",
+    "lem-sf-derived-homology-long-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-perfect.tex",
+    "place": "Tag 08HE (lemma-descend-pseudo-coherent), third paragraph, the omitted local lift, and the cohomology of its cone."
+   }
+  },
+  {
+   "text": "The one-term complex $P$ is strictly perfect, so its identity makes it $a$-pseudo-coherent for every integer $a$. Its etale pullback has the same property. Pull back the distinguished triangle using step 1. Part (1) of the ringed-site triangle lemma, with $K=\\epsilon_X^*P$, $L=\\epsilon_X^*E$, gives that $\\epsilon_X^*C$ is $m$-pseudo-coherent. The bound for $C$ is $n-1$, so the induction measure drops by one; apply the induction hypothesis on every current open to deduce that $C$ is $m$-pseudo-coherent. Part (2) of the triangle lemma on the Zariski site, with $K=P$, $L=E$, $M=C$, now gives that $E$ is $m$-pseudo-coherent there. The defining local approximations combine over the successive open covers, proving the converse for the original $X$.",
+   "uses": [
+    "lem-sfb-ringed-site-m-pseudocoherent-triangle"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-perfect.tex",
+    "place": "Tag 08HE (lemma-descend-pseudo-coherent), final paragraph, cone pseudo-coherence, induction, and reconstruction of E."
+   }
+  },
+  {
+   "text": "The argument applies separately to every $m\\in\\mathbf Z$. Taking the conjunction over all integers gives the claimed equivalence for pseudo-coherence, by its definition. The affine reduction and its upper bound were chosen locally; none of the steps assumed quasi-coherence or a global boundedness hypothesis.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-perfect.tex",
+    "place": "Tag 08HE (lemma-descend-pseudo-coherent), consequence for pseudo-coherence in all degrees."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-derived-etale-zariski-equivalence",
+  "lem-weil-pbc-exact-functor-derived-factorization",
+  "lem-weil-pbc-etale-morphism-open-map",
+  "lem-sfb-ringed-site-pseudocoherent-top-finite-type",
+  "lem-sfb-etale-finite-type-module-detection",
+  "lem-sf-site-finite-projective-lift",
+  "lem-sf-derived-homology-long-exact",
+  "lem-sfb-ringed-site-m-pseudocoherent-triangle"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/spaces-perfect.tex",
+  "place": "Tag 08HE (lemma-descend-pseudo-coherent); local cycle lift supplied explicitly for the sentence marked details omitted."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A complex on a scheme is m pseudo coherent if and only if its pullback to the small etale site is m pseudo coherent",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.smallEtaleTopology\", \"module\": \"Mathlib/AlgebraicGeometry/Sites/Etale\", \"type\": \"(X : AlgebraicGeometry.Scheme) → CategoryTheory.GrothendieckTopology X.Etale\", \"doc\": \"For a scheme $X$, the Grothendieck topology on the category of étale morphisms to $X$, constructed by inducing the standard Grothendieck topology on the over category via the forgetful functor. Coveri\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.instHasPullbacksEtale\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"∀ (X : AlgebraicGeometry.Scheme), CategoryTheory.Limits.HasPullbacks X.Etale\", \"doc\": \"For any scheme $ X $, the category of étale morphisms to $ X $ has all pullbacks. This means that for any pair of étale morphisms $ Y \\to X $ and $ Z \\to X $, and any morphism $ Y \\to Z $, the fiber prod\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.etaleTopology\", \"module\": \"Mathlib/AlgebraicGeometry/Sites/Etale\", \"type\": \"CategoryTheory.GrothendieckTopology AlgebraicGeometry.Scheme\", \"doc\": \"The Grothendieck topology on the category of schemes generated by the étale pretopology, which uses étale morphisms (smooth morphisms of relative dimension 0) as covering families. This topology is co\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.smallEtalePretopology\", \"module\": \"Mathlib/AlgebraicGeometry/Sites/Etale\", \"type\": \"(X : AlgebraicGeometry.Scheme) → CategoryTheory.Pretopology X.Etale\", \"doc\": \"The Grothendieck pretopology on the category of schemes over a base scheme $ X $, defined by covering families consisting of jointly surjective étale morphisms. This pretopology uses the étale propert\"}\n  {\"name\": \"AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"CategoryTheory.MorphismProperty.HasOfPostcompProperty (@AlgebraicGeometry.IsEtale)\\n  (@AlgebraicGeometry.LocallyOfFiniteType ⊓ @AlgebraicGeometry.FormallyUnramified)\", \"doc\": \"For any category of schemes, the composition of a morphism that is locally of finite type and a morphism that is formally unramified results in an étale morphism. This instance asserts that the proper\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.pseudofunctor_associativity\", \"module\": \"Mathlib/AlgebraicGeometry/Modules/Sheaf\", \"type\": \"∀ {X Y Z T : AlgebraicGeometry.Scheme} (f : X ⟶ Y) (g : Y ⟶ Z) (h : Z ⟶ T),\\n  CategoryTheory.CategoryStruct.comp\\n      (AlgebraicGeometry.Scheme.Modules.pullbackComp f (CategoryTheory.CategoryStruct.comp g h)).inv\\n      (CategoryTheory.CategoryStruct.comp\\n        (CategoryTheory.Functor.whiskerRight\", \"doc\": \"For any schemes $X, Y, Z, T$ and morphisms $f : X \\\\to Y$, $g : Y \\\\to Z$, $h : Z \\\\to T$, the pullback functors associated to the compositions $f \\\\circ (g \\\\circ h)$ and $(f \\\\circ g) \\\\circ h$ are equal. \"}\n  {\"name\": \"AlgebraicGeometry.Scheme.etalePretopology\", \"module\": \"Mathlib/AlgebraicGeometry/Sites/Etale\", \"type\": \"CategoryTheory.Pretopology AlgebraicGeometry.Scheme\", \"doc\": \"The Grothendieck pretopology on the category of schemes generated by étale morphisms (smooth morphisms of relative dimension 0). This pretopology is constructed by intersecting the jointly surjective \"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.pseudofunctor_map_l\", \"module\": \"Mathlib/AlgebraicGeometry/Modules/Sheaf\", \"type\": \"∀ {X Y : CategoryTheory.LocallyDiscrete AlgebraicGeometry.Schemeᵒᵖ} (f : X ⟶ Y),\\n  (AlgebraicGeometry.Scheme.Modules.pseudofunctor.map f).l =\\n    (AlgebraicGeometry.Scheme.Modules.pullback f.as.unop).toCatHom\", \"doc\": \"For any morphism $f: X \\to Y$ between schemes, the left component of the pseudofunctor map applied to $f$ in the bicategory of module adjunctions equals the categorical morphism induced by the pullback\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern morphism properties, cohomological bounds, or module presentations, not this assertion about perfect or pseudo-coherent complexes and Tor amplitude"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Pseudo coherent complexes descend along the change from the Zariski to the etale topology",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.IsLocalAtTarget.descendsAlong\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Descent\", \"type\": \"∀ (P P' : CategoryTheory.MorphismProperty AlgebraicGeometry.Scheme) [AlgebraicGeometry.IsZariskiLocalAtTarget P]\\n  [P'.IsStableUnderBaseChange],\\n  (∀ {R : CommRingCat} {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ AlgebraicGeometry.Spec R)\\n      (g : Y ⟶ AlgebraicGeometry.Spec R), P' f → P (CategoryTheo\", \"doc\": \"Let $\\\\mathcal{P}$ and $\\\\mathcal{P}'$ be morphism properties in the category of schemes. If $\\\\mathcal{P}$ is Zariski local at the target and $\\\\mathcal{P}'$ is stable under base change, then for any com\"}\n  {\"name\": \"AlgebraicGeometry.IsZariskiLocalAtTarget.descendsAlong_inf_quasiCompact\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Descent\", \"type\": \"[IsZariskiLocalAtTarget P]\\n  (H :\\n    ∀ {R S : CommRingCat.{u}} {Y : Scheme.{u}} (φ : R ⟶ S) (g : Y ⟶ Spec R),\\n      P' (Spec.map φ) → P (pullback.fst (Spec.map φ) g) → P g) :\\n  P.DescendsAlong (P' ⊓ @QuasiCompact)\", \"doc\": \"If $ P $ is a morphism property that is Zariski local at the target, and for any ring homomorphism $ \\\\phi : R \\\\to S $ and morphism $ g : Y \\\\to \\\\operatorname{Spec}(R) $, the conditions $ P'(\\\\operatorna\"}\n  {\"name\": \"AlgebraicGeometry.IsZariskiLocalAtTarget.descendsAlong\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Descent\", \"type\": \"[IsZariskiLocalAtTarget P] [P'.IsStableUnderBaseChange]\\n  (H :\\n    ∀ {R : CommRingCat.{u}} {X Y : Scheme.{u}} (f : X ⟶ Spec R) (g : Y ⟶ Spec R), P' f → P (pullback.fst f g) → P g) :\\n  P.DescendsAlong P'\", \"doc\": \"Let $\\\\mathcal{P}$ and $\\\\mathcal{P}'$ be morphism properties on schemes. If $\\\\mathcal{P}'$ is stable under base change, and for every commutative ring $R$ and morphisms $f : X \\\\to \\\\operatorname{Spec}(R\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.zariskiTopology_le_etaleTopology\", \"module\": \"Mathlib.AlgebraicGeometry.Sites.Etale\", \"type\": \": zariskiTopology ≤ etaleTopology\", \"doc\": \"The Zariski topology on the category of schemes is less than or equal to the étale topology in the partial order of Grothendieck topologies, meaning that every covering sieve in the Zariski topology i\"}\n  {\"name\": \"AlgebraicGeometry.IsLocalAtTarget.descendsAlong_inf_quasiCompact\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Descent\", \"type\": \"∀ (P P' : CategoryTheory.MorphismProperty AlgebraicGeometry.Scheme) [P'.IsStableUnderBaseChange]\\n  [P'.IsStableUnderComposition] [P.IsStableUnderBaseChange],\\n  @AlgebraicGeometry.IsLocalIso ⊓ @AlgebraicGeometry.Surjective ≤ P' →\\n    ∀ [AlgebraicGeometry.IsZariskiLocalAtTarget P],\\n      (∀ {R S : Com\", \"doc\": \"Let $\\\\mathcal{P}$ and $\\\\mathcal{P}'$ be morphism properties of schemes where $\\\\mathcal{P}'$ is stable under base change and composition, and $\\\\mathcal{P}$ is stable under base change. If the intersect\"}\n  {\"name\": \"AlgebraicGeometry.HasAffineProperty.descendsAlong_of_affineAnd\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Descent\", \"type\": \"(hP : HasAffineProperty P (affineAnd Q)) [MorphismProperty.DescendsAlong (@IsAffineHom) P']\\n  (hQ : RingHom.RespectsIso Q) (hQQ' : RingHom.CodescendsAlong Q Q') : P.DescendsAlong (P' ⊓ @QuasiCompact)\", \"doc\": \"If a morphism property $ P $ is defined by requiring the source scheme to be affine and satisfying a ring-theoretic condition $ Q $, and if $ Q $ is invariant under ring isomorphisms and satisfies a c\"}\n  {\"name\": \"AlgebraicGeometry.HasRingHomProperty.descendsAlong\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Descent\", \"type\": \"[HasRingHomProperty P Q] (hQQ' : RingHom.CodescendsAlong Q Q') : P.DescendsAlong (P' ⊓ @QuasiCompact)\", \"doc\": \"If a ring homomorphism property $ Q $ codescends along another property $ Q' $, then any property $ P $ descends along the intersection of $ P' $ and quasi-compact morphisms.\"}\n  {\"name\": \"AlgebraicGeometry.instDescendsAlongSchemeMinMorphismPropertySurjectiveFlatLocallyOfFinitePresentationOfQuasiCompactOfIsZariskiLocalAtTarget\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.FlatDescent\", \"type\": \"(P : MorphismProperty Scheme) [P.DescendsAlong (@Surjective ⊓ @Flat ⊓ @QuasiCompact)] [IsZariskiLocalAtTarget P] :\\n  P.DescendsAlong (@Surjective ⊓ @Flat ⊓ @LocallyOfFinitePresentation)\", \"doc\": \"If a morphism property $ P $ is Zariski local at the target and descends along morphisms that are surjective, flat, and quasi-compact, then $ P $ also descends along morphisms that are surjective, fla\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern morphism properties, cohomological bounds, or module presentations, not this assertion about perfect or pseudo-coherent complexes and Tor amplitude"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"PseudoCoherent\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern morphism properties, cohomological bounds, or module presentations, not this assertion about perfect or pseudo-coherent complexes and Tor amplitude"
+  },
+  {
+   "tool": "grep",
+   "query": "pseudo.?coherent.*etale|etale.*pseudo.?coherent",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern morphism properties, cohomological bounds, or module presentations, not this assertion about perfect or pseudo-coherent complexes and Tor amplitude"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-etale-detects-perfect",
+  "date": "2026-10-23",
+  "group": "N8"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Stable genus and smooth-family open loci in curve families. Supporting input: 0E76 proof, reduction to prestable curves, and 0E78 proof, decomposition by genus before imposing stability. Supporting input: 0E1J proof, perfectness and arbitrary derived base change before extracting the positive-degree perfect summand. Supporting input to this derived direct-image specialization: Tag 08HG (lemma-descend-perfect), with the ringed-site perfectness convention of sites-cohomology.tex Tag 08G5 (definition-perfect). Supporting input for 08HG: Tag 08HE (lemma-descend-pseudo-coherent), with the convention of sites-cohomology.tex Tag 08FT (definition-pseudo-coherent) and its lemma-pseudo-coherent-independent-representative.",
+   "via": [
+    "lem-sfb-etale-detects-perfect",
+    "lem-sfb-proper-flat-space-derived-base-change",
+    "lem-sfb-curve-h0-genus-strata",
+    "lem-sfb-stable-and-smooth-family-open-loci",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-etale-pseudocoherence-descent",
+  "worker": "stage1",
+  "summary": "Followed Stacks 08HE with an upper-bound induction that includes the zero complex. Reused exact faithful change of topology, exact-functor derived factorization, local finite-free lifting and the derived cohomology sequence. Added three statement-only support nodes for arbitrary-module finite-type detection and genuinely ringed-site top-cohomology and triangle lemmas; the existing ring and quasi-coherent variants do not suffice. Wrote out the omitted cycle lift and kept all steps below 2000 characters.",
+  "blueprint": "The inherited blueprint ancestor is null (confirmed by blueprint_refs ancestor). The inherited place traces det-thm-sf-ctf-stability-direct-images proof (3) through the stable-curve perfect direct image input. This split realizes its supporting 08HE prerequisite to 08HG: forward pullback, local boundedness, descending finite generators, cone induction, and the all-m consequence. The current latest blueprint and whole blueprint-node search contain no equivalent node.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-exact-functor-derived-factorization",
+    "why": "Generic exact-functor passage to the unbounded derived category; needed to pull back cone triangles, independently of quasi-coherence. No statement in this unit supplies this general tool."
+   },
+   {
+    "node": "lem-weil-pbc-etale-morphism-open-map",
+    "why": "Etale covers have open images, allowing a finite subcover on the chosen affine open; used only for the local cohomology bound. No statement in this unit supplies this general tool."
+   },
+   {
+    "node": "lem-sf-site-finite-projective-lift",
+    "why": "Local lifting across an epimorphism from a finite free module supplies the omitted cycle representatives, with no quasi-coherence. No statement in this unit supplies this general tool."
+   },
+   {
+    "node": "lem-sf-derived-homology-long-exact",
+    "why": "Generic long exact cohomology sequence computes the upper bound of the cone. No statement in this unit supplies this general tool."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-exact-functor-derived-factorization",
+  "lem-weil-pbc-etale-morphism-open-map",
+  "lem-sf-site-finite-projective-lift",
+  "lem-sf-derived-homology-long-exact"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q125-72f6eccc7",
+  "group": "Q125",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q125-72f6eccc7 (reviewer sub-agent of L); spot-checked: I read Stacks 08HE, 08HD and 08H8 in spaces-perfect.tex, and 08FT, 08FU, 08FV, 08FX and lemma-local-lift-map in sites-cohomology.tex, in full. The item statement is byte-identical to the base and matches 08HE: any scheme, arbitrary E, fixed m, no quasi-coherence. The base had no proof, so this is a first split, not a re-split. Step 1 uses only the 'exact and faithful on all module sheaves' sentence of lem-sfb-derived-etale-zariski-equivalence, together with the exact-functor derived factorization. Step 2 writes out the forward direction without 08H4, using pullback of strictly perfect complexes and Zariski covers being étale covers. Step 3 gets a local bound on an affine open from étale-open images and quasi-compactness. Step 4 sets up an explicit induction on max(0,N-m+1) whose base case N<m covers E=0; this correctly repairs Stacks' 'largest n'. Step 5 applies 08FX(1) with index n (I checked that m-pc implies n-pc) and then 08HD for arbitrary modules; it correctly avoids the quasi-coherent fpqc descent node. Step 6 fills in the 'details omitted' cycle lift via lem-sf-site-finite-projective-lift (M=Z^n, N=H^n, g=q), and I checked the long exact sequence argument that H^j(C)=0 for j>=n. Step 7 uses 08FV(1) on the étale side and 08FV(2) on the Zariski side, with the shifts verified; the induction measure drops. The three new nodes are 08HD (arbitrary modules), 08FX(1) and 08FV(1-3) for a general ringed site. They are statement-only, self-contained and true; I tested them on zero objects, one-term free complexes and non-coherent quotients. I grepped the DAG and found only ring or scheme variants (064R, 064S, 08CD, 08DN(2)), so none is a duplicate and none restates the item. Route: finite-projective-lift is in the cited unit sk-thm-sf-hom-ctf; the other tools are Mathlib leaves. Batch-5 finding: lem-trf-zariski-etale-functor-comparison-square is the generic Descent 03FH/03LC change-of-topology square, used only to name ε and ε^*. The item and lem-sfb-derived-etale-zariski-equivalence already cite it the same way, it is not part of the trace formula or Poincaré duality, and so I did not return for it. No SGA. Advisory only: the generic ringed-site nodes omit def-weil-size-convention."
+ }
+}

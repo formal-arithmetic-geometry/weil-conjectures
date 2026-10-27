@@ -1,0 +1,139 @@
+{
+ "id": "lem-sf-native-ordinary-tensor-representatives",
+ "kind": "statement",
+ "title": "Natural native total tensor models and signed symmetry without Hom",
+ "statement": "Let l be prime and Y any scheme. In the native module category A of [def-sf-native-weil-closed-models], use the canonical derived monoidal structure on D(A). There exist a symmetric structure beta, isomorphisms model(P,Q): Q(Q) tensor Q(P) ≅ Q(ordinaryTensorTotal(P,Q)) whenever P is NativeOrdinaryKFlat, and complex isomorphisms swap(P,Q): ordinaryTensorTotal(P,Q) ≅ ordinaryTensorTotal(Q,P) for all P,Q. The model is natural on complex maps f:P→P' and g:Q→Q' whenever P and P' are K-flat. The swap satisfies NativeOrdinarySignedSwap, and for K-flat P,Q, beta(Q(Q),Q(P)) followed by model(Q,P) equals model(P,Q) followed by Q(swap(P,Q)). This statement mentions no internal Hom or adjunction.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 06YS and 06YT, K-flat representatives and tensor preservation; Tag 0FPT, derived tensor and symmetry; native tensor transport step 1. Labels lemma-K-flat-resolution, lemma-derived-tor-quasi-isomorphism-other-side, lemma-symmetric-monoidal-derived."
+ },
+ "stmt_deps": [
+  "def-sf-native-weil-closed-models"
+ ],
+ "proof": [
+  {
+   "text": "Use the balanced tensor comparison NativeAux.tensorComponent and its two naturality equations, including OrdinaryModuleHom.tensorRightIso_naturality, to identify the ordinary tensor bicomplex with the flipped canonical tensor bicomplex. Totalize and compose with mapBifunctorFlipIso to construct kappa(P,Q): ordinaryTensorTotal(P,Q) ≅ Q tensor P. On the (p,q) summand kappa is (-1)^(pq) times the underived comparison. Testing on summands proves naturality.",
+   "uses": [
+    "lem-sf-native-hom-precomposition-quasi-iso",
+    "lem-sf-native-ordinary-tensor-identification"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Transport the acyclic-test K-flat hypothesis across kappa and apply RingedDerivedNative.kFlat_of_acyclic. Its localization_isIso_mu makes the canonical tensorator invertible when P is K-flat. Compose that isomorphism with Q(kappa inverse) to obtain model; tensorator naturality and kappa naturality prove its naturality square.",
+   "uses": [
+    "lem-sf-ringed-derived-native-tensor"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Set swap=kappa(P,Q) followed by the standard complex braiding followed by kappa(Q,P) inverse. The three bidegree signs multiply to (-1)^(pq); the balanced tensor quotient equation identifies the underlying map with the ambient signed swap. Take RingedDerivedNative.derivedSymmetric on the canonical derived monoidal structure. The localizationLaxBraided equation, after cancelling kappa inverse followed by kappa, is precisely the desired braiding square.",
+   "uses": [
+    "lem-sf-ringed-derived-native-tensor",
+    "lem-sf-native-hom-precomposition-quasi-iso"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sf-native-hom-precomposition-quasi-iso",
+  "lem-sf-native-ordinary-tensor-identification",
+  "lem-sf-ringed-derived-native-tensor"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 06YS, 06YT, 0FPT. F3 direct native proof: balanced tensor bicomplex comparison, signed total interchange, canonical localization tensorator and its lax braided square."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "The derived tensor product of sheaves of modules is adjoint to product total internal Hom, with natural currying on K-flat and K-injective representatives",
+   "results": "Eight hits including ihom.adjunction, internalHomAdjunction₂ and ModuleCat.monoidalClosedHomEquiv. These give underived closedness, not the prescribed native product-total normalization.",
+   "date": "2026-10-27",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Transport a closed monoidal adjunction from natural Hom equivalences on K-flat representatives through localization",
+   "results": "Adjunction.localization and generic monoidal localization found; they do not supply the native total tensor comparison or the row-sign Hom normalization.",
+   "date": "2026-10-27",
+   "verdict": "generic localization tools only"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"mkOfHomEquiv\"",
+   "results": "Adjunction.mkOfHomEquiv and its homEquiv/counit formulas found; these are used in the proved parent assembly, after the analytic bijections are supplied.",
+   "date": "2026-10-27",
+   "verdict": "assembly tool found"
+  },
+  {
+   "tool": "grep",
+   "query": "NativeOrdinaryTensorModels|NativeAdjunctionNormalization|ordinaryTensorTotal|mapBifunctorFlipIso",
+   "results": "msearch grep returned nine Mathlib occurrences of mapBifunctorFlipIso and its component/naturality formulas. Local rg over WeilConjectures and Sheaf found the existing right-adjoint identification, ringed adjunction and tensor models, but no exact native representative conclusion. The later source read found the generic RingedDerivedNative.kFlat_of_acyclic, localization_isIso_mu, derivedSymmetric and localizationLaxBraided; these are used directly, without scalar forgetting.",
+   "date": "2026-10-27",
+   "verdict": "generic source-library native localization used"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.NativeOrdinaryClosedTensorModels",
+  "date": "2026-10-27",
+  "group": "F3"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "Internal-Hom comparison and transposition paragraph of cor-coef-verdier-weil-equivariance; ordinary construction in the native tensor transport refinement. ancestor returns None for the parent. Natural native total tensor models and signed symmetry without Hom.",
+   "via": [
+    "lem-sf-native-ordinary-closed-tensor-models",
+    "lem-sf-weil-native-tensor-transport",
+    "lem-sf-weil-native-closed-forgetful"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.NativeOrdinaryTensorRepresentatives",
+  "file": "lean/Sheaf/Paper/NativeOrdinaryTensorRepresentatives.lean",
+  "declaration": "AlgebraicGeometry.ProEtaleWeilSheaf.native_ordinary_tensor_representatives",
+  "statement": "theorem native_ordinary_tensor_representatives (l : ℕ) [Fact l.Prime] (Y : Scheme.{u}) :\n    ∃ β : SymmetricCategory (DerivedCategory (ProEtale.AdicSheaf l Y)),\n    ∃ model : ∀ P Q : CochainComplex (ProEtale.AdicSheaf l Y) ℤ,\n      NativeOrdinaryKFlat l Y P →\n        (DerivedCategory.Q.obj Q ⊗ DerivedCategory.Q.obj P ≅\n          DerivedCategory.Q.obj (ordinaryTensorTotal l Y P Q)),\n    ∃ swap : ∀ P Q : CochainComplex (ProEtale.AdicSheaf l Y) ℤ,\n      ordinaryTensorTotal l Y P Q ≅ ordinaryTensorTotal l Y Q P,\n      (∀ (P Q P' Q' : CochainComplex (ProEtale.AdicSheaf l Y) ℤ)\n        (hP : NativeOrdinaryKFlat l Y P) (hP' : NativeOrdinaryKFlat l Y P')\n        (f : P ⟶ P') (g : Q ⟶ Q'),\n        (DerivedCategory.Q.map g ⊗ₘ DerivedCategory.Q.map f) ≫ (model P' Q' hP').hom =\n          (model P Q hP).hom ≫ DerivedCategory.Q.map\n            (HomologicalComplex.mapBifunctorMap f g (ordinaryTensorBifunctor l Y) (.up ℤ))) ∧\n      NativeOrdinarySignedSwap l Y swap ∧\n      (∀ (P Q : CochainComplex (ProEtale.AdicSheaf l Y) ℤ)\n        (hP : NativeOrdinaryKFlat l Y P) (hQ : NativeOrdinaryKFlat l Y Q),\n        (β.toBraidedCategory.braiding (DerivedCategory.Q.obj Q)\n            (DerivedCategory.Q.obj P)).hom ≫ (model Q P hQ).hom =\n          (model P Q hP).hom ≫ DerivedCategory.Q.map (swap P Q).hom)",
+  "branch": "sheaf-dag",
+  "by": "F3",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F3",
+  "result": "pass",
+  "landing": "20261026T195108-L-2733322",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F3",
+  "result": "pass",
+  "landing": "20261026T195108-L-2733322",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

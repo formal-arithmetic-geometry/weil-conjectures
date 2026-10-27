@@ -1,0 +1,487 @@
+{
+ "id": "lem-sfb-connected-action-orbit-section-ampleness",
+ "kind": "statement",
+ "title": "Affine section orbit criterion for arbitrary lines on smooth schemes over a normal affine base",
+ "statement": "Let $A$ be a Noetherian normal domain [def-weil-pbc-noetherian-ring, def-weil-pbc-normal-ring] and put $S=\\operatorname{Spec}A$ [def-weil-affine-spectrum]. Let $H\\to S$ be a smooth separated group scheme of finite type with geometrically connected fibres (for every field $\\Omega$ and every morphism $\\operatorname{Spec}\\Omega\\to S$ the fibre $H_\\Omega=H\\times_S\\operatorname{Spec}\\Omega$ is connected) [def-pc-scheme, def-sbc-smooth-morphisms, def-weil-finite-type-morphism, def-weil-connected-scheme]. Here a group scheme has multiplication, identity and inverse satisfying the group identities; separated means that its diagonal is a closed immersion [def-weil-closed-immersion]. Let $X\\to S$ be smooth, separated and of finite type, with an action $a:H\\times_SX\\to X$ satisfying unit and associativity [def-pc-fibre-product]. Let $L$ be any invertible $\\mathcal O_X$-module [def-sc-invertible-module]. Form the open $V\\subseteq X$ which is the union of all affine nonvanishing opens $X_s$, for all $n\\geq1$ and all global sections $s\\in\\Gamma(X,L^{\\otimes n})$, using [def-weil-pbc-ample-invertible-module]. If $a(H\\times_SV)=X$ on underlying points, then $L$ is ample in the absolute sense. No square condition on $L$, generic-fibre connectedness of $X$, section of $X\\to S$, transitivity, commutativity or properness is assumed. Empty $X$ is allowed.",
+ "source": {
+  "document": "literature/guo-divisors-coherent-schemes-homogeneous-spaces.pdf",
+  "url": "https://ningguomath.com/wp-content/uploads/2026/03/amplenew-1.pdf",
+  "place": "Proposition 6.4(b), sufficient direction, printed p.15, smooth Noetherian specialization and affine rather than quasi-affine section loci. The proof includes reduction by normal components and fpqc descent, not a square-condition hypothesis. Online primary text read; local PDF WANTED."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-affine-spectrum",
+  "def-weil-pbc-noetherian-ring",
+  "def-weil-pbc-normal-ring",
+  "def-sbc-smooth-morphisms",
+  "def-weil-finite-type-morphism",
+  "def-weil-connected-scheme",
+  "def-weil-closed-immersion",
+  "def-pc-fibre-product",
+  "def-sc-invertible-module",
+  "def-weil-pbc-ample-invertible-module"
+ ],
+ "proof": [
+  {
+   "text": "First work with any normal integral Noetherian affine base $S$. The original $S=\\operatorname{Spec}A$ is such a base: [lem-weil-pbc-affine-scheme-qcqs] gives quasi-compactness, and the one affine chart with Noetherian ring $A$ gives local Noetherianity. Its stalks are the prime localizations of $A$ by [lem-weil-pbc-affine-open-stalk-localization]. A monic equation for $z\\in\\operatorname{Frac}(A)$ over $A_{\\mathfrak p}$ has a common denominator $t\\notin\\mathfrak p$; multiplying by $t^{\\deg P}$ makes $tz$ integral over $A$, hence $tz\\in A$ and $z\\in A_{\\mathfrak p}$. Thus those stalks are normal domains. A smooth finite-type $Y\\to S$ is normal by [lem-sfb-smooth-normal-ascent] and Noetherian by [lem-weil-pbc-finite-type-over-noetherian]. Smoothness gives local finite presentation by [lem-pc-smooth-flat]; finite type gives quasi-compactness, and separatedness gives quasi-separatedness. These are the finite-presentation hypotheses needed below.",
+   "uses": [
+    "lem-weil-pbc-affine-scheme-qcqs",
+    "pqf-def-locnoeth",
+    "lem-weil-pbc-affine-open-stalk-localization",
+    "def-weil-pbc-normal-ring",
+    "lem-sfb-smooth-normal-ascent",
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "lem-pc-smooth-flat",
+    "def-sbc-locally-finite-presentation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/guo-divisors-coherent-schemes-homogeneous-spaces.pdf",
+    "place": "Normality preparation: Stacks 034F; finite-type Noetherian ascent 01T6; affine stalks 01HV. Guo Proposition 6.4, first paragraph."
+   }
+  },
+  {
+   "text": "Here is the elementary invariance observation used throughout. On a normal Noetherian $Y$, [rem-pc-regular-normal](2) gives finitely many disjoint integral clopen components. Label them by a finite discrete set. For any $y\\in Y$, the orbit map $H_{\\kappa(y)}\\to Y$ lands in a single label: its source is connected by the geometric connectedness hypothesis, and the inverse images of labels form a finite disjoint clopen partition. The identity maps to $y$, so that label is the component of $y$. This proves that every component is stable under the action. The same argument works after any base change for which the target is normal Noetherian. Applying inversion also shows $a^{-1}(C)=H\\times_SC$ for any such component $C$. The equality is scheme-theoretic because these are open subschemes. In particular, a surjective orbit map restricts to a surjective orbit map on each component.",
+   "uses": [
+    "rem-pc-regular-normal",
+    "def-weil-connected-scheme"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/guo-divisors-coherent-schemes-homogeneous-spaces.pdf",
+    "place": "Proposition 6.4, reduction to normal components; connected-to-discrete label argument written out."
+   }
+  },
+  {
+   "text": "The orbit-cover hypothesis is preserved by affine base change and restriction to a clopen invariant component. Indeed, for affine $B\\to S$, pull back each supplied section $s$ to $Y_B$. Its nonvanishing locus is $(Y_s)_B$: in the fibre it is $s(y)\\otimes1$, nonzero exactly when $s(y)$ is, by [lem-weil-pbc-invertible-pullback-tensor](3). If $Y_s$ is affine, this locus is affine by [lem-weil-pbc-fibre-product-affine-spectra]. Its intersection with a clopen component $C$ is affine by [lem-weil-pbc-closed-immersion-affine-cover-criterion](1). These intersections are exactly the loci of the restricted sections. The given surjection $H\\times_SV\\to Y$ remains surjective by [lem-weil-pbc-surjective-base-change]. The inverse-image equality of Step 2 then restricts it to a surjection onto $C$. Thus the affine section loci for the restricted line meet every orbit. We need only these pulled-back sections, not an assertion that all sections descend.",
+   "uses": [
+    "lem-weil-pbc-invertible-pullback-tensor",
+    "lem-weil-pbc-fibre-product-affine-spectra",
+    "lem-weil-pbc-closed-immersion-affine-cover-criterion",
+    "lem-weil-pbc-surjective-base-change"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/guo-divisors-coherent-schemes-homogeneous-spaces.pdf",
+    "place": "Proposition 6.4, preservation of the hypothesis in component/base reductions; Stacks affine fibre product and closed affine criterion 01QO."
+   }
+  },
+  {
+   "text": "Prove first the pointed case: $Y$ is integral, has an $S$-section, and $Y_\\eta$ is geometrically integral. Apply [lem-sfb-pointed-generic-integral-action-square-power] to obtain $r\\geq1$ such that $M=L^{\\otimes r}$ satisfies the square condition. For every affine locus $Y_s$ with $s\\in\\Gamma(Y,L^{\\otimes n})$, the section $s^{\\otimes r}$ of $M^{\\otimes n}$ has the same locus: in a local frame its coefficient is $f^r$, which is nonzero in a residue field exactly when $f$ is. Hence the affine loci of $M$ still meet all orbits. Apply [lem-sfb-square-action-affine-orbit-criterion], using the finite-presentation hypotheses from Step 1, to obtain ampleness of $M$. An affine locus of a section of $M^{\\otimes k}$ is also the same affine locus of a section of $L^{\\otimes rk}$, with $rk\\geq1$. Quasi-compactness is unchanged, so [def-weil-pbc-ample-invertible-module] gives ampleness of $L$.",
+   "uses": [
+    "lem-sfb-pointed-generic-integral-action-square-power",
+    "lem-sfb-square-action-affine-orbit-criterion",
+    "def-weil-pbc-ample-invertible-module"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/guo-divisors-coherent-schemes-homogeneous-spaces.pdf",
+    "place": "Proposition 6.4, preliminary pointed geometrically integral generic-fibre case; Proposition 5.9(1), followed by Corollary 6.5."
+   }
+  },
+  {
+   "text": "Now prove the result for integral $Y$ by strong induction on $N=\\rho_{Y/S}(Y)$, the number of geometric irreducible components of its generic fibre. The induction assertion quantifies over every normal integral Noetherian affine base, every smooth separated finite-type integral $Y$ over it, every group and line in the statement, and the orbit-cover hypothesis. Finiteness and positivity of $N$ are part of [lem-sfb-smooth-self-product-component-rank]. Thus the $N=0$ assertion is vacuous; empty schemes are dealt with at the end. For $N\\geq1$ assume the assertion for every smaller count, and form $W=Y\\times_SY$ with projection $\\pi$ to its first factor and pulled-back line $L_W=\\operatorname{pr}_2^*L$. The same cited node gives $W=\\coprod_{i=0}^m C_i$, with the diagonal in $C_0$, a section of $C_0\\to Y$, and geometric generic counts $1$ for $C_0$ and strictly less than $N$ for all $C_i$, $i>0$. This use does not assume that $Y\\to S$ is surjective.",
+   "uses": [
+    "lem-sfb-smooth-self-product-component-rank"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/guo-divisors-coherent-schemes-homogeneous-spaces.pdf",
+    "place": "Proposition 6.4, final paragraph; strong induction made explicit using Lemma 4.3 for the self-product."
+   }
+  },
+  {
+   "text": "Let $H_Y$ act on $W$ through the second factor: $h\\cdot(y,z)=(y,hz)$. Its identity, inverse and associative laws are the original action laws. The group $H_Y\\to Y$ remains smooth by [lem-pc-proper-base-change](2), and separated of finite type by [lem-pod-separated-finite-type-base-change]. Its fibres are geometrically connected directly by the original field-extension quantifier. The normal Noetherian component decomposition of $W$ is supplied by Step 5, so Step 2 makes each $C_i$ invariant for this action. For any nonempty affine open $B\\subset Y$, restrict to $W_B=B\\times_SY$ and $C_{i,B}$. The component lemma says that each $C_{i,B}$ is nonempty normal integral, smooth separated of finite type over the normal integral Noetherian affine $B$, with the same generic component count; $C_{0,B}$ has the restricted diagonal section and geometrically integral generic fibre. Step 3 supplies its orbit-cover hypothesis.",
+   "uses": [
+    "lem-sfb-smooth-self-product-component-rank",
+    "lem-pc-proper-base-change",
+    "lem-pod-separated-finite-type-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/guo-divisors-coherent-schemes-homogeneous-spaces.pdf",
+    "place": "Proposition 6.4, self-base-change over affine opens of Y; Stacks smooth and separated finite-type base change."
+   }
+  },
+  {
+   "text": "For each nonempty affine open $B\\subset Y$, apply Step 4 to $C_{0,B}\\to B$ and $L_W|_{C_{0,B}}$: all its pointed-case hypotheses were verified in Step 6. For $i>0$, apply the strong induction hypothesis to $C_{i,B}\\to B$, whose positive count is strictly smaller than $N$. This gives ampleness of the pulled-back line on every $C_{i,B}$. They are finitely many disjoint clopen pieces covering $W_B$. A section of a positive tensor power on one piece extends by zero to the other pieces, by the sheaf gluing axiom; its nonvanishing locus in $W_B$ is exactly the given affine locus in that piece. Their finite union is quasi-compact since each piece is quasi-compact. Thus [def-weil-pbc-ample-invertible-module] gives ampleness of $L_W|_{W_B}$. Empty affine opens give the empty scheme, satisfying the same definition. Consequently $L_W$ is relatively ample for $\\pi:W\\to Y$, meaning ample over every affine open of $Y$.",
+   "uses": [
+    "def-weil-pbc-ample-invertible-module"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/guo-divisors-coherent-schemes-homogeneous-spaces.pdf",
+    "place": "Proposition 6.4, induction step and disjoint-component assembly; the two calls are to earlier proved cases, not to a node containing the desired conclusion."
+   }
+  },
+  {
+   "text": "Put $U=f(Y)\\subseteq S$, where $f:Y\\to S$. By [lem-pc-smooth-flat] and [lem-weil-pbc-flat-lfp-open], this is open. It is quasi-compact as the continuous image of the quasi-compact $Y$; hence it is a quasi-compact open of an affine scheme. The induced map $Y\\to U$ is smooth by [lem-weil-pbc-smooth-restrict-open-subschemes](a) and is surjective by the definition of $U$. Choose a finite affine open covering $\\{B_j\\}$ of $Y$ by [lem-weil-pbc-qcqs-finite-affine-open-cover]. The family $\\{B_j\\to U\\}$ is fpqc in [def-weil-pbc-fpqc-covering]: the maps are flat by smoothness, and for an affine open $T\\subset U$ cover the opens $B_j\\cap f^{-1}(T)$ by affine opens; their images are open and cover $T$, so quasi-compactness of $T$ gives the required finite subfamily. This construction handles a proper open image $U\\ne S$.",
+   "uses": [
+    "lem-pc-smooth-flat",
+    "lem-weil-pbc-flat-lfp-open",
+    "lem-weil-pbc-smooth-restrict-open-subschemes",
+    "lem-weil-pbc-qcqs-finite-affine-open-cover",
+    "def-weil-pbc-fpqc-covering",
+    "lem-weil-pbc-affine-opens-basis",
+    "lem-weil-pbc-affine-scheme-qcqs"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/guo-divisors-coherent-schemes-homogeneous-spaces.pdf",
+    "place": "Proposition 6.4, replacement of the base by the image and fpqc descent; definition of an fpqc covering, Stacks 01UA."
+   }
+  },
+  {
+   "text": "The base change of $Y\\to U$ along $B_j\\to U$ is $Y\\times_U B_j\\simeq B_j\\times_SY=W_{B_j}$ (with the factors interchanged). The equality of fibre products holds because $U\\to S$ is an open immersion and both structure maps factor through it. The line is the pullback from the second $Y$ factor, exactly the line of Step 7. That step was proved for every affine open $B\\subset Y$, so the same assertion on affine opens of $B_j$ says that the line is relatively ample over $B_j$. Apply the scheme case of [lem-sfb-space-relative-ampleness-fpqc-descent] to this fpqc covering and this supplied invertible module. It gives that $L$ is relatively ample for $Y\\to U$. No descent of an arbitrarily chosen line or of an action is being asserted: the line and scheme were supplied from the start.",
+   "uses": [
+    "lem-sfb-space-relative-ampleness-fpqc-descent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/guo-divisors-coherent-schemes-homogeneous-spaces.pdf",
+    "place": "Proposition 6.4, last sentence; Stacks 0D3C (scheme case of 0D2P)."
+   }
+  },
+  {
+   "text": "Because $U$ is a quasi-compact open subscheme of affine $S$, it is quasi-affine. By [lem-sfb-quasiaffine-affine-basic-open-criterion], each point of $U$ has an affine principal neighborhood $U_b$ for some $b\\in\\Gamma(U,\\mathcal O_U)$. These functions, viewed as sections of the first power of $\\mathcal O_U$, and quasi-compactness give ampleness of $\\mathcal O_U$ by [def-weil-pbc-ample-invertible-module]. The map $Y\\to U$ is quasi-compact: $Y$ and $U$ are Noetherian, so its inverse images of affine opens are quasi-compact; equivalently use [lem-weil-pbc-qcqs-morphism-permanence](1). Now [lem-sfb-relative-ample-absolute-twist], with relatively ample $L$ and ample $M=\\mathcal O_U$, gives an ample $L\\otimes f^*\\mathcal O_U^{\\otimes a}$ for some $a\\geq0$. The canonical unit identifications turn this into $L$, so [lem-sc-ample-iso] gives absolute ampleness of $L$. This completes the induction, including $N=1$, where there are no components of smaller positive count.",
+   "uses": [
+    "lem-sfb-quasiaffine-affine-basic-open-criterion",
+    "def-weil-pbc-ample-invertible-module",
+    "lem-weil-pbc-qcqs-morphism-permanence",
+    "lem-sfb-relative-ample-absolute-twist",
+    "lem-sc-ample-iso"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/guo-divisors-coherent-schemes-homogeneous-spaces.pdf",
+    "place": "Agent expansion of Guo Proposition 6.4 after replacing the affine base by its open image; Stacks 01QE and 0892."
+   }
+  },
+  {
+   "text": "Return to arbitrary $X$ in the statement. Step 1 makes $X$ normal Noetherian; [rem-pc-regular-normal](2) gives a finite disjoint decomposition into nonempty normal integral clopen $X_j$. Each restriction $X_j\\to S$ is smooth by [lem-weil-pbc-smooth-restrict-open-subschemes] and separated of finite type: its diagonal is the pullback of the closed diagonal of $X$, and local finite type is local on the source and hence restricts to this open subscheme; quasi-compactness follows from its Noetherian source. Step 2 gives invariance, and restriction of each original section to $X_j$ gives an affine locus by [lem-weil-pbc-closed-immersion-affine-cover-criterion](1); the orbit cover restricts as in Step 2. The integral assertion just proved therefore makes $L|_{X_j}$ ample. Extend its witnessing sections by zero on the other clopen pieces, exactly as in Step 7. Quasi-compactness and the affine loci in [def-weil-pbc-ample-invertible-module] prove that $L$ is ample on $X$. If $X$ is empty, quasi-compactness holds and the pointwise condition is vacuous, so the conclusion holds without an induction parameter.",
+   "uses": [
+    "rem-pc-regular-normal",
+    "lem-weil-pbc-smooth-restrict-open-subschemes",
+    "lem-weil-pbc-closed-immersion-affine-cover-criterion",
+    "def-weil-pbc-ample-invertible-module"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/guo-divisors-coherent-schemes-homogeneous-spaces.pdf",
+    "place": "Proposition 6.4, first paragraph and componentwise conclusion; empty-scheme case explicitly checked."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-affine-scheme-qcqs",
+  "pqf-def-locnoeth",
+  "lem-weil-pbc-affine-open-stalk-localization",
+  "def-weil-pbc-normal-ring",
+  "lem-sfb-smooth-normal-ascent",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-pc-smooth-flat",
+  "def-sbc-locally-finite-presentation",
+  "rem-pc-regular-normal",
+  "def-weil-connected-scheme",
+  "lem-weil-pbc-invertible-pullback-tensor",
+  "lem-weil-pbc-fibre-product-affine-spectra",
+  "lem-weil-pbc-closed-immersion-affine-cover-criterion",
+  "lem-weil-pbc-surjective-base-change",
+  "lem-sfb-pointed-generic-integral-action-square-power",
+  "lem-sfb-square-action-affine-orbit-criterion",
+  "def-weil-pbc-ample-invertible-module",
+  "lem-sfb-smooth-self-product-component-rank",
+  "lem-pc-proper-base-change",
+  "lem-pod-separated-finite-type-base-change",
+  "lem-weil-pbc-flat-lfp-open",
+  "lem-weil-pbc-smooth-restrict-open-subschemes",
+  "lem-weil-pbc-qcqs-finite-affine-open-cover",
+  "def-weil-pbc-fpqc-covering",
+  "lem-weil-pbc-affine-opens-basis",
+  "lem-sfb-space-relative-ampleness-fpqc-descent",
+  "lem-sfb-quasiaffine-affine-basic-open-criterion",
+  "lem-weil-pbc-qcqs-morphism-permanence",
+  "lem-sfb-relative-ample-absolute-twist",
+  "lem-sc-ample-iso"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/guo-divisors-coherent-schemes-homogeneous-spaces.pdf",
+  "place": "Guo Proposition 6.4(b), smooth Noetherian affine-locus specialization; full induction and proper-open-image descent supplied by Q15; primary PDF read online, local archive WANTED."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "On a smooth scheme over a normal Noetherian affine base a line bundle is ample if translates of affine nonvanishing loci under a smooth connected group cover the scheme",
+   "results": "{\"t\": \"2026-10-24T13:34:51Z\", \"tool\": \"leanfinder\", \"query\": \"On a smooth scheme over a normal Noetherian affine base a line bundle is ample if translates of affine nonvanishing loci under a smooth connected group cover the scheme\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Proj.affineOpenCoverOfIrrelevantLESpan\", \"AlgebraicGeometry.of_affine_open_cover\", \"AlgebraicGeometry.Proj.affineOpenCover\", \"AlgebraicGeometry.exists_eq_pow_mul_of_isAffineOpen\", \"AlgebraicGeometry.Scheme.IsQuasiAffine.of_forall_exists_mem_basicOpen\", \"AlgebraicGeometry.IsAffineOpen.basicOpen\", \"AlgebraicGeometry.exists_pow_mul_eq_zero_of_res_basicOpen_eq_zero_of_isAffineOpen\", \"AlgebraicGeometry.isAffine_of_isAffineOpen_basicOpen\"], \"digest\": \"b2e9643046840705\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: read returned types; affine covers, structure-sheaf localization and quasi-affineness do not give this theorem about invertible modules and connected scheme group actions."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsAmple\", \"Smooth\"",
+   "results": "{\"t\": \"2026-10-24T13:36:11Z\", \"tool\": \"loogle\", \"query\": \"\\\"IsAmple\\\", \\\"Smooth\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: read returned types; affine covers, structure-sheaf localization and quasi-affineness do not give this theorem about invertible modules and connected scheme group actions."
+  },
+  {
+   "tool": "grep",
+   "query": "Picard.admiss|orbit.*ample|ample.*orbit|square.*ample",
+   "results": "{\"t\": \"2026-10-24T13:36:11Z\", \"tool\": \"grep\", \"query\": \"Picard.admiss|orbit.*ample|ample.*orbit|square.*ample\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: read returned types; affine covers, structure-sheaf localization and quasi-affineness do not give this theorem about invertible modules and connected scheme group actions."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Ampleness of a line bundle on a smooth scheme over a normal affine base is detected by affine section loci meeting every connected group orbit",
+   "results": "{\"t\": \"2026-10-24T13:36:11Z\", \"tool\": \"leansearch\", \"query\": \"Ampleness of a line bundle on a smooth scheme over a normal affine base is detected by affine section loci meeting every connected group orbit\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsAffine.mk\", \"AlgebraicGeometry.IsAffine.casesOn\", \"AlgebraicGeometry.IsAffine.recOn\", \"AlgebraicGeometry.isAffineOpen_of_isAffineOpen_basicOpen\", \"AlgebraicGeometry.Scheme.IsQuasiAffine.of_forall_exists_mem_basicOpen\", \"AlgebraicGeometry.sourceAffineLocally\", \"AlgebraicGeometry.Scheme.affineOpens\", \"AlgebraicGeometry.IsAffineOpen\"], \"digest\": \"0a9722d7d30ef8fa\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: read returned types; affine covers, structure-sheaf localization and quasi-affineness do not give this theorem about invertible modules and connected scheme group actions."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A line bundle is ample when each orbit of a connected smooth group on a smooth scheme over a normal affine Noetherian domain meets an affine nonvanishing open of a positive tensor power",
+   "results": "{\"t\": \"2026-10-24T13:39:47Z\", \"tool\": \"leanfinder\", \"query\": \"A line bundle is ample when each orbit of a connected smooth group on a smooth scheme over a normal affine Noetherian domain meets an affine nonvanishing open of a positive tensor power\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.exists_pow_mul_eq_zero_of_res_basicOpen_eq_zero_of_isAffineOpen\", \"AlgebraicGeometry.exists_eq_pow_mul_of_isAffineOpen\", \"AlgebraicGeometry.Proj.affineOpenCoverOfIrrelevantLESpan\", \"AlgebraicGeometry.Proj.isAffineOpen_basicOpen\", \"AlgebraicGeometry.exists_pow_mul_eq_zero_of_res_basicOpen_eq_zero_of_isCompact\", \"AlgebraicGeometry.exists_of_res_zero_of_qcqs_of_top\", \"AlgebraicGeometry.exists_of_res_eq_of_qcqs_of_top\", \"AlgebraicGeometry.Proj.affineOpenCover\"], \"digest\": \"f319793404256ea8\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: read returned types; affine covers, structure-sheaf localization and quasi-affineness do not give this theorem about invertible modules and connected scheme group actions."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A line bundle on a smooth scheme over a normal affine base is ample when the connected group translates of its affine section loci cover the scheme",
+   "results": "{\"t\": \"2026-10-24T14:19:21Z\", \"tool\": \"leanfinder\", \"query\": \"A line bundle on a smooth scheme over a normal affine base is ample when the connected group translates of its affine section loci cover the scheme\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Proj.affineOpenCoverOfIrrelevantLESpan\", \"AlgebraicGeometry.Proj.affineOpenCover\", \"AlgebraicGeometry.of_affine_open_cover\", \"AlgebraicGeometry.Scheme.affineOpenCoverOfSpanRangeEqTop_idx\", \"AlgebraicGeometry.Proj.isAffineOpen_basicOpen\", \"AlgebraicGeometry.exists_eq_pow_mul_of_isAffineOpen\", \"AlgebraicGeometry.isAffine_of_isAffineOpen_basicOpen\", \"AlgebraicGeometry.exists_pow_mul_eq_zero_of_res_basicOpen_eq_zero_of_isAffineOpen\"], \"digest\": \"c6fa25e7fa3b3423\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: signatures give affine/Proj covers and structure-sheaf localization, not the action criterion for arbitrary invertible modules."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsAmple\", \"Smooth\"",
+   "results": "{\"t\": \"2026-10-24T14:21:12Z\", \"tool\": \"loogle\", \"query\": \"\\\"IsAmple\\\", \\\"Smooth\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: signatures give affine/Proj covers and structure-sheaf localization, not the action criterion for arbitrary invertible modules."
+  },
+  {
+   "tool": "grep",
+   "query": "ample.*orbit|orbit.*ample|Picard.admiss",
+   "results": "{\"t\": \"2026-10-24T14:21:12Z\", \"tool\": \"grep\", \"query\": \"ample.*orbit|orbit.*ample|Picard.admiss\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: signatures give affine/Proj covers and structure-sheaf localization, not the action criterion for arbitrary invertible modules."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Ample line bundle criterion using affine nonvanishing opens and a connected group action",
+   "results": "{\"t\": \"2026-10-24T14:21:12Z\", \"tool\": \"leansearch\", \"query\": \"Ample line bundle criterion using affine nonvanishing opens and a connected group action\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.affineOpens\", \"AlgebraicGeometry.isAffineOpen_of_isAffineOpen_basicOpen\", \"AlgebraicGeometry.IsAffineOpen\", \"AlgebraicGeometry.isAffineHom_of_forall_exists_isAffineOpen\", \"AlgebraicGeometry.Proj.affineOpenCover\", \"AlgebraicGeometry.isBasis_affine_open\", \"AlgebraicGeometry.exists_pow_mul_eq_zero_of_res_basicOpen_eq_zero_of_isAffineOpen\", \"AlgebraicGeometry.Scheme.AffineZariskiSite\"], \"digest\": \"380c8ab61b87808b\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: signatures give affine/Proj covers and structure-sheaf localization, not the action criterion for arbitrary invertible modules."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A positive power of an invertible sheaf has affine section loci covering a smooth scheme if those loci meet every orbit of a smooth connected group",
+   "results": "{\"t\": \"2026-10-24T14:21:56Z\", \"tool\": \"leanfinder\", \"query\": \"A positive power of an invertible sheaf has affine section loci covering a smooth scheme if those loci meet every orbit of a smooth connected group\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.exists_eq_pow_mul_of_isAffineOpen\", \"AlgebraicGeometry.exists_pow_mul_eq_zero_of_res_basicOpen_eq_zero_of_isAffineOpen\", \"AlgebraicGeometry.Proj.affineOpenCoverOfIrrelevantLESpan\", \"AlgebraicGeometry.exists_of_res_zero_of_qcqs_of_top\", \"AlgebraicGeometry.Scheme.basicOpen_pow\", \"AlgebraicGeometry.of_affine_open_cover\", \"AlgebraicGeometry.exists_pow_mul_eq_zero_of_res_basicOpen_eq_zero_of_isCompact\", \"AlgebraicGeometry.Scheme.affineOpenCoverOfSpanRangeEqTop_idx\"], \"digest\": \"8920829229c4434d\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: signatures give affine/Proj covers and structure-sheaf localization, not the action criterion for arbitrary invertible modules."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-connected-action-affine-saturation-ample",
+  "date": "2026-10-24",
+  "group": "Q03"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "Auxiliary to inherited direct-image proof (3), normal-base ampleness chain; Guo Proposition 6.4(b): pointed square-power case, diagonal-component induction, and fpqc descent over the open image. Latest blueprint det-thm-sf-ctf-stability-direct-images proof (3) is the inherited ancestor context, not a verbatim source of this criterion.",
+   "via": [
+    "lem-sfb-connected-action-affine-saturation-ample",
+    "lem-sfb-semitrait-almost-homogeneous-affine-neighbourhoods",
+    "lem-sfb-trait-flat-group-fpqc-effectivity",
+    "lem-sfb-trait-group-space-schematicity",
+    "lem-sfb-strict-henselian-lft-group-datum-effectivity",
+    "lem-sfb-neron-strict-local-descent-base-change",
+    "lem-sfb-split-torus-translate-hull",
+    "lem-sfb-split-torus-extension-neron-lft",
+    "lem-sfb-semiabelian-neron-lft-existence",
+    "lem-sfb-trait-semiabelian-hom-extension",
+    "lem-sfb-semiabelian-generic-graph-proper",
+    "lem-sfb-normal-semiabelian-hom-extension",
+    "lem-sfb-symmetric-line-power-prolongation",
+    "lem-sfb-normal-symmetric-cubical-extension",
+    "lem-sfb-symmetric-ample-power-extension",
+    "lem-sfb-regular-group-generic-ampleness",
+    "lem-sfb-stable-picard-theta-ampleness",
+    "lem-sfb-stable-relative-picard-kummer",
+    "lem-sfb-stable-level-versal-branch-freeness",
+    "lem-sfb-stable-abelian-level-normalization",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-connected-action-orbit-section-ampleness",
+  "worker": "stage1",
+  "summary": "Q15: complete eleven-step proof of the unchanged orbit criterion. Two statement-only inputs isolate the pointed square-power theorem and the strict generic component-count decrease. Explicit strong induction, invariance of normal components, preservation of affine section loci, fpqc descent over the possibly proper open image, and the absolute-ampleness conversion. Logged searches find no Mathlib match. No Lean or compiler use.",
+  "blueprint": "Inherited auxiliary to direct-image proof (3) in det-thm-sf-ctf-stability-direct-images; latest blueprint main-20261024 read. Steps 1-4 carry the component and pointed square-power reductions, 5-7 the geometric-component induction, 8-10 open-image descent, and 11 the original component assembly. The imported ancestor is null and is preserved; all-blueprint search found no same statement.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-affine-scheme-qcqs",
+    "why": "Quasi-compactness of affine schemes, needed for Noetherianity and the finite affine fpqc subcover argument. This is a background tool, not a replacement for a step of the unit route."
+   },
+   {
+    "node": "pqf-def-locnoeth",
+    "why": "The affine-chart characterization of local Noetherianity, applied to the given Noetherian ring. This is a background tool, not a replacement for a step of the unit route."
+   },
+   {
+    "node": "lem-weil-pbc-affine-open-stalk-localization",
+    "why": "Identification of stalks with prime localizations, used in the explicit normality argument. This is a background tool, not a replacement for a step of the unit route."
+   },
+   {
+    "node": "def-weil-pbc-normal-ring",
+    "why": "The integrally closed domain criterion used in the denominator-clearing proof of normality of localizations. This is a background tool, not a replacement for a step of the unit route."
+   },
+   {
+    "node": "lem-weil-pbc-finite-type-over-noetherian",
+    "why": "Noetherianity of a finite-type total space over the Noetherian base. This is a background tool, not a replacement for a step of the unit route."
+   },
+   {
+    "node": "lem-pc-smooth-flat",
+    "why": "Flatness and local finite presentation of smooth maps, for openness, fpqc covering, and finite presentation. This is a background tool, not a replacement for a step of the unit route."
+   },
+   {
+    "node": "def-sbc-locally-finite-presentation",
+    "why": "Finite presentation as local finite presentation plus quasi-compactness and quasi-separatedness. This is a background tool, not a replacement for a step of the unit route."
+   },
+   {
+    "node": "rem-pc-regular-normal",
+    "why": "Clause (2), the finite integral clopen decomposition of normal Noetherian schemes; regularity is not needed for this clause. This is a background tool, not a replacement for a step of the unit route."
+   },
+   {
+    "node": "def-weil-connected-scheme",
+    "why": "Connectedness rules out a nontrivial clopen partition of a group fibre, proving invariance of components. This is a background tool, not a replacement for a step of the unit route."
+   },
+   {
+    "node": "lem-weil-pbc-invertible-pullback-tensor",
+    "why": "Clause (3), the fibre formula for a pulled-back section and preservation of its nonvanishing locus. This is a background tool, not a replacement for a step of the unit route."
+   },
+   {
+    "node": "lem-weil-pbc-fibre-product-affine-spectra",
+    "why": "Affineness of a product of affine schemes over an affine base. This is a background tool, not a replacement for a step of the unit route."
+   },
+   {
+    "node": "lem-weil-pbc-closed-immersion-affine-cover-criterion",
+    "why": "Clause (1), an inverse image of an affine under a closed immersion is affine, for clopen component intersections. This is a background tool, not a replacement for a step of the unit route."
+   },
+   {
+    "node": "lem-weil-pbc-surjective-base-change",
+    "why": "Surjectivity of the orbit map survives the affine base changes in the induction. This is a background tool, not a replacement for a step of the unit route."
+   },
+   {
+    "node": "def-weil-pbc-ample-invertible-module",
+    "why": "The affine positive-power section-locus characterization, for taking roots and gluing on clopen pieces. This is a background tool, not a replacement for a step of the unit route."
+   },
+   {
+    "node": "lem-pc-proper-base-change",
+    "why": "Clause (2), smoothness under base change, applied to the acting group over Y. This is a background tool, not a replacement for a step of the unit route."
+   },
+   {
+    "node": "lem-pod-separated-finite-type-base-change",
+    "why": "Separatedness and finite type of the acting group survive base change. This is a background tool, not a replacement for a step of the unit route."
+   },
+   {
+    "node": "lem-weil-pbc-flat-lfp-open",
+    "why": "Openness of smooth maps through flatness and local finite presentation; the image may be a proper open. This is a background tool, not a replacement for a step of the unit route."
+   },
+   {
+    "node": "lem-weil-pbc-smooth-restrict-open-subschemes",
+    "why": "Smoothness after restricting source or target to the open image or a clopen component. This is a background tool, not a replacement for a step of the unit route."
+   },
+   {
+    "node": "lem-weil-pbc-qcqs-finite-affine-open-cover",
+    "why": "Existence of a finite affine covering of the quasi-compact scheme Y. This is a background tool, not a replacement for a step of the unit route."
+   },
+   {
+    "node": "def-weil-pbc-fpqc-covering",
+    "why": "The flat-family covering criterion, checked on every affine open of the target. This is a background tool, not a replacement for a step of the unit route."
+   },
+   {
+    "node": "lem-weil-pbc-affine-opens-basis",
+    "why": "Affine neighborhoods inside the inverse images of affine target opens, in the fpqc-family verification. This is a background tool, not a replacement for a step of the unit route."
+   },
+   {
+    "node": "lem-weil-pbc-qcqs-morphism-permanence",
+    "why": "Clause (1), the quasi-compact map criterion; alternatively the proof explicitly uses Noetherianity. This is a background tool, not a replacement for a step of the unit route."
+   },
+   {
+    "node": "lem-sc-ample-iso",
+    "why": "Transport of ampleness along the tensor-unit isomorphism after the relative-to-absolute twist. This is a background tool, not a replacement for a step of the unit route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-affine-scheme-qcqs",
+  "pqf-def-locnoeth",
+  "lem-weil-pbc-affine-open-stalk-localization",
+  "def-weil-pbc-normal-ring",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-pc-smooth-flat",
+  "def-sbc-locally-finite-presentation",
+  "rem-pc-regular-normal",
+  "def-weil-connected-scheme",
+  "lem-weil-pbc-invertible-pullback-tensor",
+  "lem-weil-pbc-fibre-product-affine-spectra",
+  "lem-weil-pbc-closed-immersion-affine-cover-criterion",
+  "lem-weil-pbc-surjective-base-change",
+  "def-weil-pbc-ample-invertible-module",
+  "lem-pc-proper-base-change",
+  "lem-pod-separated-finite-type-base-change",
+  "lem-weil-pbc-flat-lfp-open",
+  "lem-weil-pbc-smooth-restrict-open-subschemes",
+  "lem-weil-pbc-qcqs-finite-affine-open-cover",
+  "def-weil-pbc-fpqc-covering",
+  "lem-weil-pbc-affine-opens-basis",
+  "lem-weil-pbc-qcqs-morphism-permanence",
+  "lem-sc-ample-iso"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q15-7e515371c",
+  "group": "Q15",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q15-7e515371c (reviewer sub-agent of L); spot-checked: Read in full: the item (statement unchanged, 11 steps), both new nodes, and every cited node's statement. The local Guo PDF is absent and the review service blocks network access, so I could not open Prop 6.4(b), Prop 5.9 or Lemma 4.3. Every step was checked on its own mathematics, and the proof is correctly marked agent-written. Steps: (1) the normality-of-localizations argument and the finite-presentation hypotheses are sound. (2) Clopen components are invariant because the residue-field orbit maps have connected sources, which gives a^{-1}(C)=H×C. (3) Affine loci survive base change and restriction to a component: affine fibre product, then closed-immersion preimage. (4) The pointed case meets all hypotheses of square-action-affine-orbit-criterion (affine base, finite presentation, connected fibres, square condition), and L^r ample implies L ample. (5-7) The strong induction on the geometric generic component count is set up over all normal Noetherian affine bases. C_0 is handled by the pointed case, the components with i>0 have count below N, N=1 gives W=C_0, and there is no circularity. (8) The open image U is handled with a correct fpqc subcover argument and is not assumed equal to S. (9) Y×_U B_j = B_j×_S Y and the scheme case of descent apply. (10) U quasi-affine makes O_U ample, and the twist lemma with ample-iso gives L ample. (11) Clopen assembly and the empty case are fine. New nodes: the self-product component node checks out (smooth hence open, so each C_i dominates; the counts sum to N; the diagonal's rational point makes the C_0 generic fibre geometrically integral, so the counts for i>0 are below N; affine restrictions keep the generic point). The pointed square-power node fits the theorem-of-the-square-up-to-a-power line (Raynaud, Faisceaux amples), has r chosen before B,g,h, and its trivial-action and Poincaré-bundle edge cases are consistent. Neither duplicates normal-group-square-power, dedekind-action-square-power, field-square-after-finite-extension, rem-pc-regular-normal or galois-splitting, and neither restates the item. Both are statement-only, with logged searches and correct created/blueprint fields. Batch-5 check: lem-trf-proj-canonical-map-twist-comparison is a general Proj comparison and def-trf-algebraic-space is a general definition; neither is part of the trace formula or Poincaré duality, so both citations are accepted. Generic tool uses accepted: pbc/pc lemmas, rem-pc-regular-normal(2), lem-sc-ample-iso. No changes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.ConnectedActionOrbitSectionAmpleness",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.isAmple_of_connected_action_orbit_section_cover",
+  "file": "lean/Sheaf/AlgebraicGeometry/ConnectedActionOrbitSectionAmpleness.lean",
+  "statement": "theorem isAmple_of_connected_action_orbit_section_cover (A : Type u) [CommRing A] [IsNoetherianRing A] [IsDomain A] [IsIntegrallyClosed A] (H X : Over (Spec (.of A))) [GrpObj H] [ModObj H X] [Smooth H.hom] [IsSeparated H.hom] [LocallyOfFiniteType H.hom] [QuasiCompact H.hom] (hconnected : ∀ (Ω : Type u) [Field Ω] (s : Spec (.of Ω) ⟶ Spec (.of A)), ConnectedSpace (Limits.pullback (C := Scheme.{u}) H.hom s)) [Smooth X.hom] [IsSeparated X.hom] [LocallyOfFiniteType X.hom] [QuasiCompact X.hom] (L : X.left.Modules) [L.IsInvertible] (V : X.left.Opens) (hV : V = sSup {U : X.left.Opens | ∃ n : ℕ, 0 < n ∧ ∃ s : (L.tensorPow n).val.presheaf.obj (Opposite.op ⊤), IsAffineOpen U ∧ (U : Set X.left) = nonvanishingLocus (L.tensorPow n) s}) (horbit : (γ[H,X]).left '' ((snd H X).left ⁻¹' (V : Set X.left)) = Set.univ) : IsAmple X.left L",
+  "branch": "newtargets-dag",
+  "by": "NK",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-201f2d2b8",
+  "group": "NK",
+  "result": "pass",
+  "note": "Every node clause matches the Lean. Noetherian normal domain = IsNoetherianRing+IsDomain+IsIntegrallyClosed. H X : Over (Spec A) with GrpObj and ModObj under the global cartesian Over instance from AlgebraicGeometry/Pullbacks.lean:712, so H⊗X is pullback H.hom X.hom and snd is the X-projection. Smooth, IsSeparated, LocallyOfFiniteType and QuasiCompact are on both structure maps. hconnected is ∀ Ω:Type u field, ∀ Spec Ω→Spec A, ConnectedSpace(pullback H.hom s): this is Mathlib's geometrically ConnectedSpace with its usual Type u fields, and ConnectedSpace includes nonemptiness as def-weil-connected-scheme requires. V is the sSup of all affine opens equal to nonvanishingLocus(L.tensorPow n) s with 0<n, which matches the recorded Ample.lean IsAmple/nonvanishingLocus. horbit says γ.left '' (snd.left⁻¹ V) = univ. The conclusion is IsAmple X.left L. Empty X, trivial group, n=0, universes and characteristic all checked. lean.statement is verbatim in the file, only the node's lean field changed, docstrings carry the source place, blueprint tag and all 11 steps, the proof is sorry, there are no new definitions, and the report has both required sections. Advisory only: hconnected could be written [GeometricallyConnected H.hom]; the docstring says p.16 where the node says p.15. I compiled nothing because I changed no file."
+ }
+}

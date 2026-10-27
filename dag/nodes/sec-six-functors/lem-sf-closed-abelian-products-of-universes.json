@@ -1,0 +1,143 @@
+{
+ "id": "lem-sf-closed-abelian-products-of-universes",
+ "kind": "statement",
+ "title": "Countable abelian closed inverse-image products with independent universes",
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-pf-coherence",
+ "statement": "Let X and Z be schemes in universe t and i:Z -> X a closed immersion [def-pc-scheme, def-weil-closed-immersion]. Set v=max(u,t+1). The inverse image of abelian sheaves [def-weil-proetale-inverse-image, def-weil-pbc-sites-and-cohomology], constructed as left Kan extension along the opposite pro-etale base-change functor followed by abelian sheafification, preserves limits of shape Discrete N with all abelian groups in universe v. In particular it commutes with countable products. There is no quasi-compactness or separation assumption on X or Z, and no relation between u and t.",
+ "source": {
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Tag 09AA (lemma-closed-immersion), assertion (1); affine extra-left-adjoint input Tag 09BL."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-closed-immersion",
+  "def-weil-proetale-inverse-image",
+  "def-weil-pbc-sites-and-cohomology"
+ ],
+ "proof": [
+  {
+   "text": "Instantiate the canonical left-Kan-extension/sheafification inverse image for RingCat and AddCommGrpCat in max u (t+1). For RingCat, supply the pointwise left Kan extensions by essential smallness of X.ProEt, local smallness of Z.ProEt, and cocompleteness of RingCat in that universe; supply sheafification via the essentially small site. Use the canonical sheaf adjunctions, with no change to the additive pullback in the conclusion.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Apply proEtale_immersion_algebraicInverse_limits to these two canonical adjunctions. A closed immersion is an immersion, so its abelian clause gives preservation of all limits indexed by categories with objects and arrows in universe zero. This existing coefficient-universe-independent theorem proves the affine henselian evaluation, Zariski-local restriction and transfer to algebraic structures needed by the original plan.",
+   "uses": [
+    "lem-fix-proetale-immersion-algebraic-limits-universes"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Specialize PreservesLimitsOfSize.{0,0} to Discrete Nat using preservesLimitsOfShape. This is precisely the required countable product preservation. Empty schemes and identity immersions are covered by the imported theorem without extra hypotheses.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-fix-proetale-immersion-algebraic-limits-universes"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Tags 09AA and 09BL; specialization of the existing independent-universe immersion theorem, written by U1 on 2026-10-27."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "proEtale.*[Cc]losed.*[Pp]roduct|[Oo]pen[Cc]losed.*[Ss]upport",
+   "date": "2026-10-27",
+   "results": {
+    "ok": true,
+    "n_hits": 0,
+    "top": []
+   },
+   "verdict": "No geometric pro-etale preservation or support theorem found. The pullback hits supply only the general construction and adjunction."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.sheafPullbackConstruction.sheafPullback",
+   "date": "2026-10-27",
+   "results": {
+    "ok": true,
+    "n_hits": 4,
+    "top": [
+     "CategoryTheory.Functor.sheafPullbackConstruction.sheafPullback",
+     "CategoryTheory.Functor.sheafPullbackConstruction.sheafAdjunctionContinuous",
+     "CategoryTheory.Functor.sheafPullbackConstruction.instPreservesFiniteLimitsSheafSheafPullback",
+     "CategoryTheory.Functor.sheafPullbackConstruction.sheafPullbackIso"
+    ]
+   },
+   "verdict": "No geometric pro-etale preservation or support theorem found. The pullback hits supply only the general construction and adjunction."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Closed immersion inverse image of proetale abelian sheaves preserves countable products, and complementary open closed restrictions detect isomorphisms in arbitrary universes",
+   "date": "2026-10-27",
+   "results": {
+    "ok": true,
+    "n_hits": 8,
+    "top": [
+     "Condensed.instPreservesFiniteProductsOppositeProfiniteVal",
+     "Condensed.ofSheafForgetProfinite",
+     "CondensedSet.ofSheafProfinite",
+     "LightCondensed.instPreservesFiniteProductsOppositeLightProfiniteVal",
+     "Condensed.ofSheafProfinite",
+     "CondensedMod.ofSheafProfinite",
+     "LightCondensed.ofSheafLightProfinite",
+     "LightProfinite.instWEqualsLocallyBijectiveCoherentTopology"
+    ]
+   },
+   "verdict": "No geometric pro-etale preservation or support theorem found. The pullback hits supply only the general construction and adjunction."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.ProEtaleRingedOpenExtensionProductsOfUniverses",
+  "date": "2026-10-27",
+  "group": "F5"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-sf-pf-coherence",
+   "place": "Open-factor paragraph; independent-universe open extension products, proof steps 1 and 2.",
+   "via": [
+    "lem-sf-ringed-open-extension-products-of-universes"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.ProEtaleClosedAbelianProductsOfUniverses",
+  "file": "lean/Sheaf/AlgebraicGeometry/ProEtaleClosedAbelianProductsOfUniverses.lean",
+  "declaration": "AlgebraicGeometry.Scheme.proEtaleClosedAbelianProductsOfUniverses",
+  "statement": "theorem proEtaleClosedAbelianProductsOfUniverses\n    {X Z : Scheme.{t}} (i : Z ⟶ X) [IsClosedImmersion i] :\n    PreservesLimitsOfShape (Discrete ℕ)\n      (Functor.sheafPullbackConstruction.sheafPullback (proEtaleBaseChange i)\n        AddCommGrpCat.{max u (t + 1)} (ProEt.topology X) (ProEt.topology Z))",
+  "branch": "sheaf-dag",
+  "by": "F5",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F5",
+  "result": "pass",
+  "landing": "20261027T050555-L-239161",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U1",
+  "result": "pass",
+  "landing": "20261027T053011-L-505587",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

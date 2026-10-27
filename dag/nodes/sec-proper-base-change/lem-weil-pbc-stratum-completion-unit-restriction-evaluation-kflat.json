@@ -1,0 +1,90 @@
+{
+ "id": "lem-weil-pbc-stratum-completion-unit-restriction-evaluation-kflat",
+ "kind": "statement",
+ "title": "Evaluation of the normalized strict comparison on K-flat representatives",
+ "statement": "For a scheme morphism f, an adic coefficient datum d, a level n, and a K-flat independent-coefficients complex P with flat terms, the evaluation of the normalized strict reduction comparison on Q.obj P equals the specified finite coefficient pullback comparison.",
+ "source": {
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Lemma 6.5.8(1), Tags 03EL, 06YY and 015F; representative step of the evaluation proof"
+ },
+ "stmt_deps": [
+  "lem-weil-pbc-stratum-completion-unit-restriction"
+ ],
+ "proof": [
+  {
+   "text": "Evaluate the counit-normalized representative comparison and use the defining counit equation for completedReductionEvaluation. The ordinary scalar mate at level n is the chosen chi comparison, and the restriction/pullback mate supplies the displayed finite map. Tensor balancing identifies the two composites.",
+   "uses": [
+    "lem-weil-pbc-stratum-completion-unit-restriction"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-stratum-completion-unit-restriction"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "Bhatt--Scholze, Lemma 6.5.8(1); Stacks Tags 03EL, 06YY and 015F",
+  "place": "K-flat representative step in the proof of the evaluation clause"
+ },
+ "mathlib_searches": [],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.StratumCompletionUnitRestriction",
+  "date": "2026-10-27",
+  "group": "C3"
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-stratum-completion-unit-restriction",
+   "place": "Proof step: finite evaluation on K-flat representatives",
+   "via": []
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.StratumCompletionUnitRestriction",
+  "file": "lean/Sheaf/Paper/StratumCompletionUnitRestriction.lean",
+  "declaration": "AlgebraicGeometry.Scheme.stratumReduction_evaluation_on_KFlat",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.stratumReduction_evaluation_on_KFlat"
+  ],
+  "branch": "sheaf-dag",
+  "by": "C3",
+  "date": "2026-10-27",
+  "statement": "theorem stratumReduction_evaluation_on_KFlat\n    (n : ℕ) (P : CochainComplex (reductionModules X (d.completedRing X)) ℤ)\n    (hP : P.IsKFlatIndependentCoefficients)\n    (hflat : ∀ i, SheafOfModules.IsFlatOnSite (J := ProEt.topology X)\n      (R := d.completedRing X) (P.X i)) :\n    (reductionTowerDerivedEvaluation Y (reductionModuleRing Y (d.completedRing Y)) n).map\n        ((stratumReductionIso d f).hom.app (DerivedCategory.Q.obj P)) ≫\n        (completedReductionEvaluation Y d n).app ((d.pull f).obj (DerivedCategory.Q.obj P)) =\n      (stratumTowerEvaluationIso d f n).hom.app ((completedReductionTower X d).obj\n        (DerivedCategory.Q.obj P)) ≫\n        (d.pull f).map ((completedReductionEvaluation X d n).app (DerivedCategory.Q.obj P)) ≫\n        (proEtaleRingRestrictionDerivedPullback f\n          (d.completedRing X) (d.finiteRing X n) (d.completedRing Y) (d.finiteRing Y n)\n          (d.projection X n) (d.projection Y n) (d.integralRingIso f) (d.finiteRingIso f n)\n          (d.projection_comm f n)).inv.app ((d.reduction X n).obj (DerivedCategory.Q.obj P)) ≫\n        (reductionDerivedRestrict Y (d.projection Y n)).map\n          ((d.chi f n).hom.app (DerivedCategory.Q.obj P))"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C3",
+  "result": "pass",
+  "landing": "20261027T050542-L-236559",
+  "kind": "proof",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "AUTO",
+  "group": "C1",
+  "result": "pass",
+  "landing": "20261027T053006-L-503091",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)",
+  "sorry_before": [
+   "AlgebraicGeometry.Scheme.stratumReduction_evaluation",
+   "AlgebraicGeometry.Scheme.stratumReduction_evaluation_on_KFlat"
+  ],
+  "sorry_after": [
+   "AlgebraicGeometry.Scheme.stratumReduction_evaluation_on_KFlat"
+  ]
+ }
+}

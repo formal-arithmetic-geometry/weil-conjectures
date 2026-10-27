@@ -36,13 +36,15 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
 
 /-- The existing principal Koszul tower, assembled degreewise.
 Source: Stacks 099M (blueprint: def-a1-principal-intrinsic-completion). -/
-abbrev tower (P : CochainComplex (Modules l E W) ℤ) :=
+abbrev tower (P : CochainComplex (Modules l E W) ℤ) :
+    CochainComplex (ℕᵒᵖ ⥤ Modules l E W) ℤ :=
   koszulTowerComplex (completedIntegralCommRingSheafUnrestricted l E W) (sourceTower l E W P)
 
 /-- The explicit intrinsic fiber, with coordinates (x,y) and differential (dx,(1-s)x-dy).
 Source: Stacks 0A0E; blueprint order 1247
 (blueprint: def-a1-principal-intrinsic-completion). -/
-def fiber (P : CochainComplex (Modules l E W) ℤ) :=
+def fiber (P : CochainComplex (Modules l E W) ℤ) :
+    CochainComplex (Modules l E W) ℤ :=
   CochainComplex.mappingCocone (-roosU (tower l E W P))
 
 /-- The total-tensor unit is the standard right unitor, without any choice of a map.

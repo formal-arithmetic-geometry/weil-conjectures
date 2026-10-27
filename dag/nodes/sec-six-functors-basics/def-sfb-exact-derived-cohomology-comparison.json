@@ -1,0 +1,131 @@
+{
+ "id": "def-sfb-exact-derived-cohomology-comparison",
+ "kind": "definition",
+ "title": "Normalized cohomology comparison for an exact derived functor",
+ "status": "split",
+ "statement": "Let $\\mathcal A,\\mathcal B$ be abelian categories [def-sp-abelian] with chosen ordinary unbounded derived-category localizations $Q_{\\mathcal A}$ and $Q_{\\mathcal B}$ [def-weil-abstract-derived-category]. Let $F:\\mathcal A\\to\\mathcal B$ be additive and preserve finite limits and finite colimits, and write $D(F)$ for its functor on derived categories induced by termwise application to cochain complexes. For each $n\\in\\mathbf Z$, define $\\theta^n_F:F\\circ H^n_{\\mathcal A}\\simeq H^n_{\\mathcal B}\\circ D(F)$, with component $(\\theta^n_F)_K:F(H^nK)\\simeq H^n(D(F)K)$. This is the canonical natural isomorphism obtained by lifting through the localization the inverse of the exact-functor comparison $H^n(C(F)P)\\simeq F(H^nP)$ on cochain complexes $P$, transported by $H^n_{\\mathcal A}\\circ Q_{\\mathcal A}\\simeq H^n$, $D(F)\\circ Q_{\\mathcal A}\\simeq Q_{\\mathcal B}\\circ C(F)$, and the corresponding $\\mathcal B$ cohomology factorization. Here $C(F)$ applies $F$ termwise, and the complex comparison is induced by preservation of kernels, images and their quotient. This defines a specific comparison on all unbounded derived objects, rather than choosing an arbitrary natural isomorphism.",
+ "stmt_deps": [
+  "def-sp-abelian",
+  "def-weil-abstract-derived-category"
+ ],
+ "source": {
+  "document": "literature/stacks-project/derived.tex",
+  "place": "Tag 015F, lemma-right-derived-exact-functor; normalized exact-functor cohomology comparison constructed by localization of the inverse complex homology comparison."
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "mapDerivedCategoryHomologyFunctorIso|mapDerivedCategorySingleFunctor",
+   "results": "OK 10 hit(s): Mathlib/Algebra/Homology/DerivedCategory/ExactFunctor.lean, Mathlib/Algebra/Homology/DerivedCategory/ExactFunctor.lean, Mathlib/Algebra/Homology/DerivedCategory/ExactFunctor.lean, Mathlib/Algebra/Homology/DerivedCategory/ExactFunctor.lean, Mathlib/Algebra/Homology/DerivedCategory/ExactFunctor.lean, Mathlib/Algebra/Homology/DerivedCategory/Ext/Map.lean, Mathlib/Algebra/Homology/DerivedCategory/Ext/Map.lean, Mathlib/Algebra/Homology/DerivedCategory/Ext/Map.lean. Digest 581186236800f3aa; ",
+   "date": "2026-10-24",
+   "verdict": "Search locates exact-functor localization and single comparison APIs. The exact homology comparison is the existing upstream definition, reused without a new Lean declaration."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Canonical natural isomorphism commuting exact functors with homology on the derived category",
+   "results": "OK 8 hit(s): CategoryTheory.Functor.mapHomologicalComplexUpToQuasiIsoFactorsh_hom_app, CategoryTheory.InjectiveResolution.isoRightDerivedObj_hom_naturality_assoc, CategoryTheory.ProjectiveResolution.isoLeftDerivedObj_hom_naturality, CategoryTheory.Functor.mapHomologicalComplexUpToQuasiIsoFactorsh.congr_simp, CategoryTheory.InjectiveResolution.isoRightDerivedObj_hom_naturality, CategoryTheory.Functor.mapHomologicalComplexUpToQuasiIsoFactorsh_hom_app_assoc, CategoryTheory.ShortComplex.mapHomologyIso'_hom_naturality, CategoryTheory.Functor.leftDerivedNatIso. Digest 57d693d4294c6916; ",
+   "date": "2026-10-24",
+   "verdict": "Search locates exact-functor localization and single comparison APIs. The exact homology comparison is the existing upstream definition, reused without a new Lean declaration."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An exact additive functor commutes with cohomology in the derived category",
+   "results": "OK 8 hit(s): CategoryTheory.Abelian.Ext.mapExactFunctor_hom, CategoryTheory.Abelian.Ext.mapExactFunctor, CategoryTheory.Functor.mapDerivedCategoryFactorsh, CategoryTheory.Functor.instLiftingCochainComplexIntDerivedCategoryQQuasiIsoUpCompHomologicalComplexMapHomologicalComplexMapDerivedCategory, CategoryTheory.Functor.instCommShiftDerivedCategoryMapDerivedCategoryInt, CategoryTheory.Functor.mapDerivedCategorySingleFunctor, CategoryTheory.Abelian.Ext.mapExactFunctor_zero, CategoryTheory.Functor.instLinearDerivedCategoryMapDerivedCategory. Digest 9c2c963dd8617399; ",
+   "date": "2026-10-24",
+   "verdict": "Search locates exact-functor localization and single comparison APIs. The exact homology comparison is the existing upstream definition, reused without a new Lean declaration."
+  },
+  {
+   "tool": "grep",
+   "query": "rg -n mapDerivedCategoryHomologyFunctorIso lean/WeilConjectures/Mathlib/Algebra/Homology/DerivedCategory/ExactFunctor.lean; rg -n mapDerivedCategoryHomologyFunctorIso lean/Sheaf/CategoryTheory/ExactDerivedCohomologyCoherence.lean; scan dag/nodes lean.declaration and lean.declarations for mapDerivedCategoryHomologyFunctorIso",
+   "results": "Upstream ExactFunctor.lean:263 defines mapDerivedCategoryHomologyFunctorIso by Localization.liftNatIso from mapHomologicalComplexHomologyIso and the localization factorizations. Sheaf ExactDerivedCohomologyCoherence imports that definition and states exactDerivedCohomologyCoherence. Only lem-weil-pbc-exact-functor-bounded-below records the comparison; it is a statement node, not a definition node. No existing definition node owns this construction.",
+   "date": "2026-10-24",
+   "verdict": "Use existing:true upstream definition, with no duplicate Lean module. This is the ownership correction explicitly requested by the independent return."
+  },
+  {
+   "tool": "grep",
+   "query": "python3 tools/blueprint_refs.py search \"exact functor\"; python3 tools/blueprint_refs.py ancestor lem-sfb-equivariant-coherent-proper-pushforward; rg -l def-sfb-exact-derived-cohomology-comparison dag/nodes",
+   "results": "54 blueprint nodes match exact functor, including the derived-factorization and bounded-below statements; none is a definition of the normalized exact-derived cohomology comparison. Ancestor is None. Proposed definition id has no matches.",
+   "date": "2026-10-24",
+   "verdict": "New supporting definition node carrying an existing upstream definition; no new mathematical theorem or duplicated construction."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-equivariant-coherent-proper-pushforward",
+  "date": "2026-10-24",
+  "group": "Q54"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "Normalized exact-pullback cohomology comparison in the canonical higher direct-image exchange for proper equivariant pushforward.",
+   "via": [
+    "lem-sfb-equivariant-coherent-proper-pushforward",
+    "lem-sfb-torus-coherent-fixed-point-formula",
+    "lem-sfb-flag-line-euler-alternant",
+    "lem-sfb-induced-weyl-dimension-formula",
+    "lem-sfb-steinberg-induced-module-irreducible",
+    "lem-sfb-rho-section-self-duality",
+    "lem-sfb-steinberg-endomorphism-detection",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "lean": {
+  "module": "WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor",
+  "declaration": "CategoryTheory.Functor.mapDerivedCategoryHomologyFunctorIso",
+  "statement": "noncomputable def mapDerivedCategoryHomologyFunctorIso (F : C ⥤ D) [F.Additive]\n    [PreservesFiniteLimits F] [PreservesFiniteColimits F] (n : ℤ) :\n    DerivedCategory.homologyFunctor C n ⋙ F ≅\n      F.mapDerivedCategory ⋙ DerivedCategory.homologyFunctor D n",
+  "branch": "slopmaster2",
+  "by": "Q54",
+  "date": "2026-10-24",
+  "existing": true,
+  "note": "Existing definition, read with its ambient arbitrary abelian categories and independent HasDerivedCategory instances. Its Localization.liftNatIso body fixes the normalization on every representing complex. The statement node lem-weil-pbc-exact-functor-bounded-below records its mathematical properties but no definition node previously owned the construction. Added as requested by the H2 return of a80488f13a38."
+ },
+ "import_flags": [],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-30b901a28",
+  "group": "Q54",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-30b901a28",
+  "group": "Q54",
+  "result": "pass",
+  "note": "H4 repair correct: groups module reduced to the missing interfaces (Group, Space, FiniteSpace, ProperMap, ClosedSubgroup, RestrictedSpace/IsRestriction, point, IsPointEquivalence, higher, cohomologyVector) in the disjoint namespace ProperPushforwardData. The item uses Q60 Coherent/GZero/classOf/linearization and RationalModule/RepresentationGZero/IsRepresentationRing/IsAssociated/IsRepresentationAction, citing both Q60 nodes; no name clash in side-live (the only exactPullbackComparison is in CategoryTheory.ConstantPerfectProjection). All dependency records equal side-live; the exact-cohomology existing:true node is unchanged from the 69ec push. Clause-by-clause: actionIso = linearization.symm is p^*->a^* (y to gy); IsHigherPushforward pins every degree via schemeDerivedBaseChangeMap with ha/hp matching higherBaseChange, made non-vacuous by pullbackExact; tensor_class basis-matrix twist uses the same convention as IsAssociated, and moduleAction_spec agrees; point equivalence pinned and non-vacuous; restriction, composition, linearity, closed-immersion and Spec k cohomology clauses checked; edge cases and universes OK. Mechanical finding: the theorem stmt_dep lem-pc-ringed-spaces-derived-pullback-composition is genuine (Classical.choose counit epsilon and IsLeftDerivedFunctor proof of exists_derivedPullbackComposition), so PASS on that point. Single sorry; lean.statement verbatim; docstrings present; report has Worker report and Second reading by Q54. Advisory: Scheme.Modules.H and smulHom come from modules no stmt_dep node owns. No compile (no file changed)."
+ }
+}

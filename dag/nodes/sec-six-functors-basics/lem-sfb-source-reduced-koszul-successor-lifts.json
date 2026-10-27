@@ -1,0 +1,105 @@
+{
+ "id": "lem-sfb-source-reduced-koszul-successor-lifts",
+ "kind": "statement",
+ "title": "Source successor lifts for the twice-reduced principal tower",
+ "statement": "Let J be an essentially small site, R a commutative ring, r a nonzerodivisor generating I, and K a derived R-module sheaf. Tensor the derived principal-power quotient tower of K and its constant-source augmentation by R/r. For every n there is a backward map from level n+1 of the reduced quotient tower to level n of the reduced constant tower. Its composite with the augmentation at n is the quotient-tower successor transition, and the augmentation at n+1 followed by the backward map is the constant-tower successor transition.",
+ "source": {
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Tag 099M, lemma-naive-completion; existing source WeilConjectures.CategoryTheory.DerivedCategory.Complete.Principal: DerivedCategory.exists_lift_whiskerRight_derivedCompletionCone"
+ },
+ "stmt_deps": [],
+ "proof": [
+  {
+   "text": "The two principal coefficient triangles at consecutive powers form a commutative square with source map r and target map identity. Tensor by K and then R/r. Multiplication by r is zero after the first reduction. The lifting lemma for two distinguished triangles with zero first arrows gives the backward maps and both required equations. Compose with the tensor-unit comparison to put the backward map in the constant-source tower. This is the complete existing source proof.",
+   "uses": [],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Tag 099M, lemma-naive-completion; existing source WeilConjectures.CategoryTheory.DerivedCategory.Complete.Principal: DerivedCategory.exists_lift_whiskerRight_derivedCompletionCone"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Derived inverse limit of ordinary prime power quotients of a complex with torsion free terms has its canonical augmentation invertible modulo the prime",
+   "results": "Eight hits for ordinary profinite inverse limits and module direct limits; none for the derived sheaf augmentation.",
+   "date": "2026-10-27",
+   "verdict": "No direct Mathlib theorem; use the universal derived construction and principal Koszul calculation."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The canonical augmentation from a regular complex of abelian sheaves to the right derived inverse limit of its ordinary prime power quotients is an isomorphism after derived reduction modulo the prime",
+   "results": "Eight hits for local cohomology, ordinary zeroth derived functors, solidification and representation resolutions; none for this augmentation calculation.",
+   "date": "2026-10-27",
+   "verdict": "No direct Mathlib match. Use the principal Koszul and Roos argument of Stacks 099M."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.leftDerivedLift",
+   "results": "Six hits in Mathlib.CategoryTheory.Functor.Derived.LeftDerived, including leftDerivedLift, leftDerived_fac and leftDerived_fac_app.",
+   "date": "2026-10-27",
+   "verdict": "Use the universal lift and its factorization equation to construct and normalize the natural augmentation."
+  },
+  {
+   "tool": "grep",
+   "query": "reductionModIdeal|integralStrictAugmentation",
+   "results": "No search-service hits. Local rg finds the source reductionModIdeal and isIso_smul_id_of_isZero_reductionModIdeal; there is no existing integralStrictAugmentation.",
+   "date": "2026-10-27",
+   "verdict": "Use the proved source cone criterion; explicitly construct the augmentation and isolate only its ordinary regular-complex computation."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.IntegralStrictLimitAugmentationTriangle",
+  "date": "2026-10-27",
+  "group": "E4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-prop-diagonal-tower-system",
+   "place": "Proof step 4: strict integral prime-power completion; Source successor lifts for the twice-reduced principal tower",
+   "via": [
+    "lem-sfb-integral-strict-limit-augmentation-triangle"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-prop-diagonal-tower",
+ "lean": {
+  "existing": true,
+  "module": "WeilConjectures.CategoryTheory.DerivedCategory.Complete.Principal",
+  "file": "lean/WeilConjectures/CategoryTheory/DerivedCategory/Complete/Principal.lean",
+  "declaration": "DerivedCategory.exists_lift_whiskerRight_derivedCompletionCone",
+  "statement": "lemma exists_lift_whiskerRight_derivedCompletionCone\n    (K : DerivedCategory (Sheaf J (ModuleCat.{u + 1} R))) (n : ℕ) :\n    ∃ b : (derivedCompletionDiagram J I K ⋙ ⊗ᴸR/ϖ).obj (op (n + 1)) ⟶\n        ((Functor.const ℕᵒᵖ).obj K ⋙ ⊗ᴸR/ϖ).obj (op n),\n      b ≫ (Functor.whiskerRight (derivedCompletionCone J I K).π ⊗ᴸR/ϖ).app (op n) =\n          (derivedCompletionDiagram J I K ⋙ ⊗ᴸR/ϖ).map (homOfLE n.le_succ).op ∧\n        (Functor.whiskerRight (derivedCompletionCone J I K).π ⊗ᴸR/ϖ).app (op (n + 1)) ≫ b =\n          ((Functor.const ℕᵒᵖ).obj K ⋙ ⊗ᴸR/ϖ).map (homOfLE n.le_succ).op",
+  "branch": "sheaf-dag",
+  "by": "E4",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E4",
+  "result": "pass",
+  "landing": "20261026T222628-L-675480",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E4",
+  "result": "pass",
+  "landing": "20261026T222628-L-675480",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

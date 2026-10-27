@@ -1,0 +1,131 @@
+{
+ "id": "lem-trf-fan-center-tensor-chart-comparison",
+ "kind": "statement",
+ "title": "Normalized comparison on one supplied saturated tensor chart",
+ "statement": "Let V,F,c,J be an fs log scheme with a characteristic fan chart and fan ideal. Let b:V' -> V be a saturated log blowup of c.pullbackIdeal J and assume its log structure is Zariski. Fix an affine-center input D [def-trf-fan-center-tensor-chart-data], a proof h of the prescribed stalkwise ideal generation equality, and a saturated LogIdealTensorCover C of D.idealChart h. For any saturated fan blowup beta:F' -> F along J and any a in D.generators, there exist an open K:S(R_a) -> F', a local map f from the actual restricted sharp space of the a tensor chart to S(R_a), and the normalized sharp-space map g induced by b. The map f followed by K has bijective stalk maps and its composite with beta equals the restricted g followed by c. At every geometric tensor-chart point, the fan stalk and the log characteristic are isomorphic to Associates(R_a localized at the face of monomials mapping to ring units). There is an ordinary-sharp-stalk/geometric-characteristic isomorphism e normalized on all ambient Zariski log sections. The two face-localization isomorphisms eF,eN take each canonical numerator q to its class represented by q, and e after the fan stalk map equals eN after eF on every stalk element. This is the single-chart comparison, conditional on b,h,C, and asserts none of their existence or the coherence of the center.",
+ "source": {
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "VIII 3.1.19--3.1.25, 3.3.12--3.3.13(i),(iii); parent proof steps 4--5 on one tensor chart."
+ },
+ "stmt_deps": [
+  "def-trf-fan-center-tensor-chart-data",
+  "def-trf-fs-log-blowup",
+  "def-trf-fine-fan-blowup"
+ ],
+ "proof": [
+  {
+   "text": "Apply [lem-trf-monoid-chart-characteristic-fan] to the selected R_a tensor chart; C.isChart and C.chartAlpha identify its associated log structure with the ambient restriction. Transfer the sharp-space morphism and all normalized geometric stalk identifications across this open restriction. The ring-unit face is exactly logChartUnitFace(C.ringChart a).",
+   "uses": [
+    "lem-trf-monoid-chart-characteristic-fan"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "By the saturated fan-blowup construction [def-trf-fine-fan-blowup], the corresponding open chart of $F'$ is $S(R_a)$. Compose $c_{R_a}$ with its open inclusion into $F'$. Its composite to $S(P)\\subset F$ and $c\\circ b$ pull every canonical section $p\\in P$ to the same characteristic section, namely the image of $h(p)$. The bijection of [lem-trf-affine-fan-hom-universal], applied to the sharp monoid $P$, proves equality of these two local morphisms, including their underlying continuous maps. Thus the constructed map is over $F$. At $w$, [lem-trf-monoid-chart-characteristic-fan] identifies its fan stalk and the geometric characteristic stalk with $(R_a)_{H_w}/H_w^{\\mathrm{gp}}$, and already asserts the inverse-image sheaf isomorphism. Here $H_w$ is a face: a product in a local ring is a unit if and only if both factors are units. This gives exactly the stipulated $H_w$ and completes every local comparison. For any presentation of the supplied fan blowup, the a-chart is the locus where a generates the pulled-back ideal; the common localizations in P^gp identify these loci and their sheaves. The canonical map g is obtained from b.sectionMap by quotienting units and sheafifying. Transport the numerator formulas from the characteristic-fan theorem across K to obtain eF and eN; their equality with e on all fan-stalk elements follows because numerator classes generate the face localization modulo units.",
+   "uses": [
+    "def-trf-fine-fan-blowup",
+    "lem-trf-affine-fan-hom-universal",
+    "lem-trf-monoid-chart-characteristic-fan"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-trf-monoid-chart-characteristic-fan",
+  "def-trf-fine-fan-blowup",
+  "lem-trf-affine-fan-hom-universal"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "ILO VIII 3.1.18--3.1.25, 3.3.4--3.3.13; formal decomposition of the supplied chart argument."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "pullbackIdeal|IsZariski|IsGeometricComparison",
+   "results": "{\"t\": \"2026-10-26T08:01:38Z\", \"tool\": \"grep\", \"query\": \"pullbackIdeal|IsZariski|IsGeometricComparison\", \"sub\": \"\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Proper.lean\", \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Proper.lean\", \"Mathlib/AlgebraicGeometry/Geometrically/Basic.lean\", \"Mathlib/AlgebraicGeometry/Geometrically/Basic.lean\", \"Mathlib/AlgebraicGeometry/LimitsOver.lean\", \"Mathlib/AlgebraicGeometry/LimitsOver.lean\", \"Mathlib/AlgebraicGeometry/LimitsOver.lean\", \"Mathlib/AlgebraicGeometry/LimitsOver.lean\"], \"digest\": \"c98292244683f138\"}",
+   "date": "2026-10-26",
+   "verdict": "no match: ordinary scheme ideals and monoid localizations do not state the logarithmic fan-center calculation"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"LogFanChart\"",
+   "results": "{\"t\": \"2026-10-26T08:01:38Z\", \"tool\": \"loogle\", \"query\": \"\\\"LogFanChart\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-26",
+   "verdict": "no match: ordinary scheme ideals and monoid localizations do not state the logarithmic fan-center calculation"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A coherent ideal on a fan pulls back along a logarithmic characteristic chart to a coherent logarithmic ideal with saturated blowup tensor charts",
+   "results": "{\"t\": \"2026-10-26T08:01:39Z\", \"tool\": \"leanfinder\", \"query\": \"A coherent ideal on a fan pulls back along a logarithmic characteristic chart to a coherent logarithmic ideal with saturated blowup tensor charts\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.IdealSheafData.comap\", \"AlgebraicGeometry.Scheme.IdealSheafData.glueDataObjHom\", \"AlgebraicGeometry.Scheme.IdealSheafData.glueDataObj\", \"AlgebraicGeometry.Scheme.IdealSheafData.glueDataObjMap\", \"AlgebraicGeometry.specTargetImage\", \"AlgebraicGeometry.Scheme.IdealSheafData.ideal_map\", \"AlgebraicGeometry.Scheme.IdealSheafData.ideal_le_ker_glueDataObjι\", \"AlgebraicGeometry.Scheme.IdealSheafData.ideal_comap_of_isOpenImmersion\"], \"digest\": \"a81446fbf03768e3\"}",
+   "date": "2026-10-26",
+   "verdict": "no match: ordinary scheme ideals and monoid localizations do not state the logarithmic fan-center calculation"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A saturated logarithmic blowup of a Zariski log scheme has a Zariski log structure and characteristic monoids given by unit-face localizations",
+   "results": "{\"t\": \"2026-10-26T08:03:28Z\", \"tool\": \"leansearch\", \"query\": \"A saturated logarithmic blowup of a Zariski log scheme has a Zariski log structure and characteristic monoids given by unit-face localizations\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Subalgebra.saturation\", \"AddLocalization\", \"IsLocalization.of_le\", \"Algebra.EssFiniteType.isLocalization\", \"Algebra.FormallyEtale.of_isLocalization\", \"Algebra.zariskisMainProperty_iff_exists_saturation_eq_top\", \"localizationAlgebra\", \"instTopologicalSpaceLocalization\"], \"digest\": \"8c1cb0e296cde6bd\"}",
+   "date": "2026-10-26",
+   "verdict": "no match: ordinary scheme ideals and monoid localizations do not state the logarithmic fan-center calculation"
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.FanCenterLocalBlowupCharts",
+  "date": "2026-10-26",
+  "group": "M1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Historical nearby-duality/alteration branch of lem-trf-local-term-locality, proof (1)--(2), through lem-trf-log-regular-desingularization: monoidal resolution used for the regular modification of nodal pairs; ILO VIII 3.3.15, pp.109--110. Expose VIII, 3.3.2--3.3.13, pp.106--109, especially 3.3.4(ii), 3.3.8--3.3.11, 3.3.13(i),(iii); finite cover as in proof of 3.3.15. Subargument: returned log-fan-chart-blowup proof step(s) 6,7; Expose VIII 3.1.19--3.1.25, pp.101--102; 3.3.7--3.3.9, pp.107--108; 3.3.13(i),(iii), pp.108--109: inverse-image center and the common saturated fraction charts. Subargument of lem-trf-fan-center-local-blowup-charts: VIII 3.1.19--3.1.25, 3.3.12--3.3.13(i),(iii); parent proof steps 4--5 on one tensor chart.",
+   "via": [
+    "lem-trf-fan-center-local-blowup-charts",
+    "lem-trf-log-fan-chart-blowup",
+    "lem-trf-monoidal-resolution-tower",
+    "lem-trf-log-regular-desingularization",
+    "lem-trf-nodal-pair-projective-resolution",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.FanCenterTensorChartComparison",
+  "file": "lean/Sheaf/AlgebraicGeometry/FanCenterTensorChartComparison.lean",
+  "declaration": "AlgebraicGeometry.fan_center_tensor_chart_comparison",
+  "statement": "theorem fan_center_tensor_chart_comparison (V : FineSaturatedLogScheme.{u}) (F : FineFan.Fan.{u}) (c : LogFanChart V F) (J : FineFan.IdealFamily F) (V' : FineSaturatedLogScheme.{u}) (b : EtaleLogHom V' V) (hb : IsSaturatedLogBlowup b (c.pullbackIdeal J)) (hz : V'.logStructure.IsZariski) (D : c.AffineCenterInput J) (h : ∀ (Ω : Type u) [Field Ω] [IsAlgClosed Ω] (t : Spec (.of Ω) ⟶ V.scheme) (w : (Scheme.pointSmallEtale t).fiber.obj ((logOpenEtale V.scheme).obj D.U)), V.logStructure.idealStalk (c.pullbackIdeal J) t = {m | ∃ p ∈ D.generators, ∃ n : V.logStructure.toEtalePrelogStructure.stalk t, V.logStructure.toEtalePrelogStructure.germ t ((logOpenEtale V.scheme).obj D.U) w (D.chart p) * n = m}) (C : LogIdealTensorCover (D.idealChart h) b.toLogMap (fun a ↦ logIdealSaturatedChartMonoid D.generators a.val) (fun a ↦ logIdealSaturatedChartInclusion D.generators a.val)) (F' : FineFan.Fan.{u}) (β : FineFan.Hom F' F) (hβ : FineFan.IsSaturatedBlowup β J) (a : {a : D.P // a ∈ D.generators}) : ∃ (K : FineFan.AffineOpen F'.space (logIdealSaturatedChartMonoid D.generators a.val)) (f : C.sharpChart (inferInstance : IsOpenImmersion ((logOpenEtale V.scheme).obj D.U).hom) a ⟶ FineFan.affine (logIdealSaturatedChartMonoid D.generators a.val)) (g : b.SharpSpaceMap), FineFan.IsLocalMorphism f ∧ (∀ x, Function.Bijective (FineFan.stalkMap (f ≫ K.inclusion) x)) ∧ (f ≫ K.inclusion) ≫ β.map = C.sharpChartInclusion (inferInstance : IsOpenImmersion ((logOpenEtale V.scheme).obj D.U).hom) a ≫ g.map ≫ c.map ∧ ∀ (Ω : Type u) [Field Ω] [IsAlgClosed Ω] (t : Spec (.of Ω) ⟶ Spec (.of (logIdealTensorRing D.A (D.idealChart h).alpha (logIdealSaturatedChartInclusion D.generators a.val)))), ∃ (eF : FineFan.stalk F'.space.presheaf (K.inclusion.hom.base (f.hom.base (t default))) ≃* Associates (Algebra.faceLocalization (logIdealSaturatedChartMonoid D.generators a.val) (logChartUnitFace (C.ringChart a) (t default)))) (eN : Associates (Algebra.faceLocalization (logIdealSaturatedChartMonoid D.generators a.val) (logChartUnitFace (C.ringChart a) (t default))) ≃* V'.logStructure.characteristic (t ≫ C.toPullback a ≫ pullback.fst b.base ((logOpenEtale V.scheme).obj D.U).hom)) (e : FineFan.stalk (C.sharpChart (inferInstance : IsOpenImmersion ((logOpenEtale V.scheme).obj D.U).hom) a).presheaf (t default) ≃* V'.logStructure.characteristic (t ≫ C.toPullback a ≫ pullback.fst b.base ((logOpenEtale V.scheme).obj D.U).hom)), C.IsGeometricComparison (inferInstance : IsOpenImmersion ((logOpenEtale V.scheme).obj D.U).hom) a t e ∧ (∀ q : logIdealSaturatedChartMonoid D.generators a.val, ∃ (r : Algebra.faceLocalization (logIdealSaturatedChartMonoid D.generators a.val) (logChartUnitFace (C.ringChart a) (t default))) (s : FineFan.stalk F'.space.presheaf (K.inclusion.hom.base (f.hom.base (t default)))), r.val = Algebra.GrothendieckGroup.of q ∧ FineFan.stalkMap K.inclusion (f.hom.base (t default)) s = FineFan.affineGerm (f.hom.base (t default)) q ∧ eF s = Associates.mk r ∧ eN (Associates.mk r) = Associates.mk (V'.logStructure.toEtalePrelogStructure.germ (t ≫ C.toPullback a ≫ pullback.fst b.base ((logOpenEtale V.scheme).obj D.U).hom) (@Scheme.Etale.mk _ _ (C.toPullback a ≫ pullback.fst b.base ((logOpenEtale V.scheme).obj D.U).hom) (C.etale a)) (Over.homMk t) (C.chart a q))) ∧ ∀ s, e (FineFan.stalkMap (f ≫ K.inclusion) (t default) s) = eN (eF s)",
+  "branch": "sheaf-dag",
+  "by": "M1",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-e1843",
+  "group": "M1",
+  "result": "fix",
+  "landing": "20261026T091953-L-3390847",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-e1843",
+  "group": "M1",
+  "result": "fix",
+  "landing": "20261026T091953-L-3390847",
+  "kind": "interface",
+  "note": "independent cc review: item proof/statement vs published FanCenterLocalBlowupCharts (signature byte-identical); 8 moved data declarations vs published bodies (verbatim); 3 new sorry statements vs the item and ILO VIII 3.3.7-3.3.13; node proof_deps vs the Lean assembly"
+ }
+}

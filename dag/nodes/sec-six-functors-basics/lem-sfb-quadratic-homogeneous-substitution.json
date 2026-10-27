@@ -1,0 +1,258 @@
+{
+ "id": "lem-sfb-quadratic-homogeneous-substitution",
+ "kind": "statement",
+ "title": "Kernel and image of homogeneous substitution for a quadratic formal cone",
+ "statement": "Let $F$ be a field, let $a,b,c\\in F$ with $a\\ne0$, and put $\\beta=b/a$, $\\gamma=c/a$, $p(Z)=Z^2+\\beta Z+\\gamma$, $q=aX^2+bXY+cY^2$, and\n$$L=F[Z]/(aZ^2+bZ+c)=F[Z]/(p),\\qquad B=L[[t]].$$\nHere the equality of quotients uses the equality of the two principal ideals. Write $z\\in L$ for the class of $Z$. Polynomial rings, formal power series, and algebra quotients are [def-weil-polynomial-ring], [def-weil-pbc-multivariate-power-series], and [def-weil-pbc-algebra-hom-quotient]. The scalar map $F\\to L$ is injective, $1,z$ form an $F$-basis of $L$, and $z^2=-\\beta z-\\gamma$.\nFor $H=\\sum_{n\\ge0}H_n\\in F[[X,Y]]$, where $H_n=\\sum_{i=0}^n h_{i,n-i}X^iY^{n-i}$ is its homogeneous polynomial of degree $n$, the formula\n$$\\phi(H)=\\sum_{n\\ge0}H_n(z,1)t^n$$\ndefines an $F$-algebra homomorphism with $\\phi(X)=zt$, $\\phi(Y)=t$,\n$$\\ker\\phi=(q),\\qquad \\operatorname{im}\\phi=A:=F+tB.$$\nIn particular it induces an injective $F$-algebra map $j:F[[X,Y]]/(q)\\to B$ with image $A$, and $F[[t]]\\subseteq A$, $tB\\subseteq A$. More explicitly, if\n$$h=\\alpha_0+\\sum_{n\\ge1}(\\alpha_n+\\delta_nz)t^n,\\qquad \\alpha_n,\\delta_n\\in F,$$\nthen\n$$\\phi\\!\\left(\\alpha_0+\\sum_{n\\ge1}\\alpha_nY^n+\\sum_{n\\ge1}\\delta_nXY^{n-1}\\right)=h.$$\nNo discriminant hypothesis is required.",
+ "source": {
+  "document": "literature/stacks-project/curves.tex",
+  "place": "Tag 0C4A (lemma-2-branches-delta-1), proof of (1) implies (2), Cases I and II, with coordinates interchanged in Case II: the homogeneous coefficient calculation underlying the displayed normalization maps. Extracted from the returned item steps 1-4."
+ },
+ "stmt_deps": [
+  "def-weil-polynomial-ring",
+  "def-weil-pbc-multivariate-power-series",
+  "def-weil-pbc-algebra-hom-quotient",
+  "def-weil-pbc-free-module"
+ ],
+ "proof": [
+  {
+   "text": "Since $a$ is invertible, $aZ^2+bZ+c=ap$ generates the same ideal as $p$. Thus the two displayed quotient algebras agree [def-weil-pbc-algebra-hom-quotient]. The polynomial $p$ is monic of degree $2$, so [lem-weil-pbc-monic-quotient-free] gives the basis $1,z$. Its linear independence implies that the scalar map is injective: a scalar $u$ maps to zero only if the coefficient $u$ of $1$ is zero [def-weil-pbc-free-module]. The image of $p$ in the quotient is zero, hence $z^2=-\\beta z-\\gamma$. Put $Q=X^2+\\beta XY+\\gamma Y^2=a^{-1}q$.",
+   "uses": [
+    "def-weil-polynomial-ring",
+    "def-weil-pbc-algebra-hom-quotient",
+    "lem-weil-pbc-monic-quotient-free",
+    "def-weil-pbc-free-module"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/curves.tex",
+    "place": "Tag 0C4A (lemma-2-branches-delta-1), proof of (1) implies (2), Cases I and II, and final displayed scalar-constant description; explicit homogeneous coefficient argument supplied by N9, valid also for degenerate quadratics."
+   }
+  },
+  {
+   "text": "Grouping coefficients by $i+j=n$ defines $H_n$ with finitely many terms [def-weil-pbc-multivariate-power-series]. Each coefficient of the proposed $\\phi(H)$ is therefore defined by a finite sum. Addition and scalar multiplication commute with these sums. For $H,K$, the degree-$n$ part of their product is $\\sum_{r+s=n}H_rK_s$, directly by the finite convolution defining multiplication. Polynomial evaluation at $(z,1)$ is multiplicative by the same distributive calculation [def-weil-polynomial-ring]. Consequently $[t^n]\\phi(HK)=\\sum_{r+s=n}H_r(z,1)K_s(z,1)=[t^n](\\phi(H)\\phi(K))$. Constants map to their scalar images, and $\\phi(X)=zt$, $\\phi(Y)=t$. This proves the asserted $F$-algebra homomorphism without any interchange of infinite sums.",
+   "uses": [
+    "def-weil-pbc-multivariate-power-series",
+    "def-weil-polynomial-ring",
+    "def-weil-pbc-algebra-hom-quotient"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/curves.tex",
+    "place": "Tag 0C4A (lemma-2-branches-delta-1), proof of (1) implies (2), Cases I and II, and final displayed scalar-constant description; explicit homogeneous coefficient argument supplied by N9, valid also for degenerate quadratics."
+   }
+  },
+  {
+   "text": "Here is finite homogeneous division, explicitly. For $n\\ge2$, start with the polynomial $H_n$ and a zero accumulator $G_{n-2}$. Whenever the current coefficient of $X^jY^{n-j}$ is $d$ with $j\\ge2$, subtract $dX^{j-2}Y^{n-j}Q$ and add $dX^{j-2}Y^{n-j}$ to the accumulator. The subtracted polynomial is $dX^jY^{n-j}+d\\beta X^{j-1}Y^{n-j+1}+d\\gamma X^{j-2}Y^{n-j+2}$, so it kills that coefficient and creates only smaller $X$ exponents. Processing $j=n,n-1,\\ldots,2$ terminates with an identity $H_n=QG_{n-2}+u_nY^n+v_nXY^{n-1}$, with $G_{n-2}$ homogeneous of degree $n-2$. This is a finite sequence of polynomial identities [def-weil-polynomial-ring]. For $n=1$ write $H_1=u_1Y+v_1X$; for $n=0$ write $H_0=u_0$.",
+   "uses": [
+    "def-weil-polynomial-ring"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/curves.tex",
+    "place": "Tag 0C4A (lemma-2-branches-delta-1), proof of (1) implies (2), Cases I and II, and final displayed scalar-constant description; explicit homogeneous coefficient argument supplied by N9, valid also for degenerate quadratics."
+   }
+  },
+  {
+   "text": "Suppose $\\phi(H)=0$. Equality of formal-series coefficients gives $H_n(z,1)=0$ for every $n$ [def-weil-pbc-multivariate-power-series]. Evaluating the preceding division identities and using $Q(z,1)=0$ gives $u_n+v_nz=0$ for $n\\ge1$, and $u_0=0$. The basis in [lem-weil-pbc-monic-quotient-free], interpreted by [def-weil-pbc-free-module], forces $u_n=v_n=0$. In particular $H_0=H_1=0$, and $H_n=QG_{n-2}$ for $n\\ge2$. Define $G$ coefficientwise by taking its homogeneous part of degree $m$ to be the finite polynomial $G_m$ obtained in degree $m+2$; this is an element of $F[[X,Y]]$ by its definition. The degree-$n$ coefficients of $QG$ are $QG_{n-2}$ for $n\\ge2$ and zero in degrees $0,1$, because $Q$ is homogeneous of degree $2$. Thus $H=QG=q(a^{-1}G)$, so $\\ker\\phi\\subseteq(q)$. Conversely $\\phi(q)=a(z^2+\\beta z+\\gamma)t^2=0$, and multiplicativity gives $(q)\\subseteq\\ker\\phi$.",
+   "uses": [
+    "def-weil-pbc-multivariate-power-series",
+    "lem-weil-pbc-monic-quotient-free",
+    "def-weil-pbc-free-module"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/curves.tex",
+    "place": "Tag 0C4A (lemma-2-branches-delta-1), proof of (1) implies (2), Cases I and II, and final displayed scalar-constant description; explicit homogeneous coefficient argument supplied by N9, valid also for degenerate quadratics."
+   }
+  },
+  {
+   "text": "The constant coefficient of $\\phi(H)$ is the scalar $H_0$, so its image lies in $F+tB$ [def-weil-pbc-multivariate-power-series]. Conversely every coefficient of any $h\\in F+tB$ has a unique form $\\alpha_n+\\delta_nz$ by [lem-weil-pbc-monic-quotient-free] and [def-weil-pbc-free-module], with $\\delta_0=0$. The series $S=\\alpha_0+\\sum_{n\\ge1}\\alpha_nY^n+\\sum_{n\\ge1}\\delta_nXY^{n-1}$ is defined coefficientwise: for each $n\\ge1$ its homogeneous part has exactly the two indicated possible monomials. Hence $[t^0]\\phi(S)=\\alpha_0$ and $[t^n]\\phi(S)=\\alpha_n+\\delta_nz$ for $n\\ge1$. This proves the explicit formula and $\\operatorname{im}\\phi=F+tB$.",
+   "uses": [
+    "def-weil-pbc-multivariate-power-series",
+    "lem-weil-pbc-monic-quotient-free",
+    "def-weil-pbc-free-module"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/curves.tex",
+    "place": "Tag 0C4A (lemma-2-branches-delta-1), proof of (1) implies (2), Cases I and II, and final displayed scalar-constant description; explicit homogeneous coefficient argument supplied by N9, valid also for degenerate quadratics."
+   }
+  },
+  {
+   "text": "Define $j([H])=\\phi(H)$. If $[H]=[K]$ then $H-K\\in(q)=\\ker\\phi$, so this is well-defined; its algebra identities descend from those of $\\phi$ [def-weil-pbc-algebra-hom-quotient]. If $j([H])=0$ then $H\\in\\ker\\phi=(q)$, so $[H]=0$; thus $j$ is injective. Surjectivity of the quotient map implies that $j$ has the same image as $\\phi$, namely $A$. Any series in $F[[t]]$ has scalar constant coefficient, and every series in $tB$ has zero constant coefficient, so both lie in $A$. No step used separability, a root of $p$ in $F$, or a nonzero discriminant.",
+   "uses": [
+    "def-weil-pbc-algebra-hom-quotient",
+    "def-weil-pbc-multivariate-power-series"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/curves.tex",
+    "place": "Tag 0C4A (lemma-2-branches-delta-1), proof of (1) implies (2), Cases I and II, and final displayed scalar-constant description; explicit homogeneous coefficient argument supplied by N9, valid also for degenerate quadratics."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-polynomial-ring",
+  "def-weil-pbc-algebra-hom-quotient",
+  "lem-weil-pbc-monic-quotient-free",
+  "def-weil-pbc-free-module",
+  "def-weil-pbc-multivariate-power-series"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/curves.tex",
+  "place": "Tag 0C4A (lemma-2-branches-delta-1), proof of (1) implies (2), Cases I and II, and final displayed scalar-constant description; explicit homogeneous coefficient argument supplied by N9, valid also for degenerate quadratics."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For a monic quadratic p over a field, substitution x=z*t and y=t on bivariate formal power series has kernel generated by the homogenization of p and image F+t*(F[z]/p)[[t]]",
+   "results": "{\"t\": \"2026-10-22T06:09:24Z\", \"tool\": \"leanfinder\", \"query\": \"For a monic quadratic p over a field, substitution x=z*t and y=t on bivariate formal power series has kernel generated by the homogenization of p and image F+t*(F[z]/p)[[t]]\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Polynomial.ker_modByMonicHom\", \"AlgebraicClosure.spanCoeffs\", \"WeierstrassCurve.Affine.CoordinateRing.exists_smul_basis_eq\", \"PowerSeries.weierstrassMod\", \"PowerSeries.IsWeierstrassFactorizationAt.algEquivQuotient_apply\", \"Algebra.Generators.kerCompPreimage\", \"WeierstrassCurve.Affine.CoordinateRing.mk_φ\", \"WeierstrassCurve.Affine.CoordinateRing.mk\"], \"digest\": \"1cadbf42f39d7330\"}",
+   "date": "2026-10-22",
+   "verdict": "no exact match: coefficient-map kernels, general substitution and homogeneous components, monic polynomial remainders, and Weierstrass quotient equivalences do not state this diagonal substitution kernel and scalar-constant image"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"MvPowerSeries\", \"ker\"",
+   "results": "{\"t\": \"2026-10-22T06:09:15Z\", \"tool\": \"loogle\", \"query\": \"\\\"MvPowerSeries\\\", \\\"ker\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 2, \"note\": \"\", \"top\": [\"MvPowerSeries.ker_map_of_fg\", \"MvPowerSeries.ker_mapAlgHom_of_fg\"], \"digest\": \"ff6c4497353eb8ef\"}",
+   "date": "2026-10-22",
+   "verdict": "no exact match: coefficient-map kernels, general substitution and homogeneous components, monic polynomial remainders, and Weierstrass quotient equivalences do not state this diagonal substitution kernel and scalar-constant image"
+  },
+  {
+   "tool": "grep",
+   "query": "(ker|range|homogeneousComponent).*(eval|subst|quadratic)|quadratic.*(PowerSeries|MvPowerSeries)",
+   "results": "{\"t\": \"2026-10-22T06:09:14Z\", \"tool\": \"grep\", \"query\": \"(ker|range|homogeneousComponent).*(eval|subst|quadratic)|quadratic.*(PowerSeries|MvPowerSeries)\", \"sub\": \"RingTheory\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/Spectrum/Prime/ConstructibleSet.lean\", \"Mathlib/RingTheory/Spectrum/Prime/Topology.lean\", \"Mathlib/RingTheory/Spectrum/Prime/Topology.lean\", \"Mathlib/RingTheory/Spectrum/Prime/RingHom.lean\", \"Mathlib/RingTheory/Spectrum/Prime/RingHom.lean\", \"Mathlib/RingTheory/Spectrum/Prime/RingHom.lean\", \"Mathlib/RingTheory/TotallySplit.lean\", \"Mathlib/RingTheory/AdicCompletion/Completeness.lean\"], \"digest\": \"86c09f62ab643c19\"}",
+   "date": "2026-10-22",
+   "verdict": "no exact match: coefficient-map kernels, general substitution and homogeneous components, monic polynomial remainders, and Weierstrass quotient equivalences do not state this diagonal substitution kernel and scalar-constant image"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The blowup chart x=z*y identifies the formal quadratic cone F[[x,y]]/(x^2+beta*x*y+gamma*y^2) with power series over F[z]/(z^2+beta*z+gamma) whose constant coefficient is in F",
+   "results": "{\"t\": \"2026-10-22T06:10:05Z\", \"tool\": \"leanfinder\", \"query\": \"The blowup chart x=z*y identifies the formal quadratic cone F[[x,y]]/(x^2+beta*x*y+gamma*y^2) with power series over F[z]/(z^2+beta*z+gamma) whose constant coefficient is in F\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"PowerSeries.IsWeierstrassFactorizationAt.algEquivQuotient_symm_apply\", \"PowerSeries.IsWeierstrassFactorizationAt.algEquivQuotient_apply\", \"PowerSeries.algEquivQuotientWeierstrassDistinguished\", \"PowerSeries.IsWeierstrassFactorizationAt.algEquivQuotient\", \"PowerSeries.IsWeierstrassDivisorAt.seq_one\", \"Polynomial.IsDistinguishedAt.algEquivQuotient\", \"PowerSeries.IsWeierstrassDivisorAt.mk_mod'_eq_self\", \"PowerSeries.IsWeierstrassDivisorAt.mod'\"], \"digest\": \"b61ecda0cf8f3e2b\"}",
+   "date": "2026-10-22",
+   "verdict": "no exact match: coefficient-map kernels, general substitution and homogeneous components, monic polynomial remainders, and Weierstrass quotient equivalences do not state this diagonal substitution kernel and scalar-constant image"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The homogeneous substitution x=z*t y=t has kernel the quadratic relation and image the power series with scalar constant coefficient",
+   "results": "{\"t\": \"2026-10-22T06:09:54Z\", \"tool\": \"leansearch\", \"query\": \"The homogeneous substitution x=z*t y=t has kernel the quadratic relation and image the power series with scalar constant coefficient\", \"sub\": \"\", \"ok\": false, \"n_hits\": 0, \"note\": \"service unavailable: {\\\"error\\\":\\\"Rate limit exceeded: 60 per 1 minute\\\"}\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "unavailable: service unavailable: {\"error\":\"Rate limit exceeded: 60 per 1 minute\"}"
+  },
+  {
+   "tool": "grep",
+   "query": "quadratic|homogen|ker.*subst|range.*subst",
+   "results": "{\"t\": \"2026-10-22T06:09:54Z\", \"tool\": \"grep\", \"query\": \"quadratic|homogen|ker.*subst|range.*subst\", \"sub\": \"RingTheory/MvPowerSeries\", \"ok\": true, \"n_hits\": 17, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/MvPowerSeries/NoZeroDivisors.lean\", \"Mathlib/RingTheory/MvPowerSeries/NoZeroDivisors.lean\", \"Mathlib/RingTheory/MvPowerSeries/NoZeroDivisors.lean\", \"Mathlib/RingTheory/MvPowerSeries/NoZeroDivisors.lean\", \"Mathlib/RingTheory/MvPowerSeries/Substitution.lean\", \"Mathlib/RingTheory/MvPowerSeries/Substitution.lean\", \"Mathlib/RingTheory/MvPowerSeries/Substitution.lean\", \"Mathlib/RingTheory/MvPowerSeries/Substitution.lean\"], \"digest\": \"311cf1ee3256288a\"}",
+   "date": "2026-10-22",
+   "verdict": "no exact match: coefficient-map kernels, general substitution and homogeneous components, monic polynomial remainders, and Weierstrass quotient equivalences do not state this diagonal substitution kernel and scalar-constant image"
+  },
+  {
+   "tool": "grep",
+   "query": "ker_map|substAlgHom|homogeneousComponent_mul",
+   "results": "{\"t\": \"2026-10-22T06:12:09Z\", \"tool\": \"grep\", \"query\": \"ker_map|substAlgHom|homogeneousComponent_mul\", \"sub\": \"RingTheory/MvPowerSeries\", \"ok\": true, \"n_hits\": 14, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/MvPowerSeries/NoZeroDivisors.lean\", \"Mathlib/RingTheory/MvPowerSeries/Substitution.lean\", \"Mathlib/RingTheory/MvPowerSeries/Substitution.lean\", \"Mathlib/RingTheory/MvPowerSeries/Substitution.lean\", \"Mathlib/RingTheory/MvPowerSeries/Substitution.lean\", \"Mathlib/RingTheory/MvPowerSeries/Substitution.lean\", \"Mathlib/RingTheory/MvPowerSeries/Order.lean\", \"Mathlib/RingTheory/MvPowerSeries/Order.lean\"], \"digest\": \"e68f44dd61cdc88b\"}",
+   "date": "2026-10-22",
+   "verdict": "no exact match: coefficient-map kernels, general substitution and homogeneous components, monic polynomial remainders, and Weierstrass quotient equivalences do not state this diagonal substitution kernel and scalar-constant image"
+  },
+  {
+   "tool": "grep",
+   "query": "quadratic|homogeneousComponent_mul|ker.*subst|range.*subst",
+   "results": "{\"t\": \"2026-10-23T09:25:33Z\", \"tool\": \"grep\", \"query\": \"quadratic|homogeneousComponent_mul|ker.*subst|range.*subst\", \"sub\": \"RingTheory/MvPowerSeries\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/MvPowerSeries/NoZeroDivisors.lean\", \"Mathlib/RingTheory/MvPowerSeries/Substitution.lean\", \"Mathlib/RingTheory/MvPowerSeries/Substitution.lean\", \"Mathlib/RingTheory/MvPowerSeries/Substitution.lean\", \"Mathlib/RingTheory/MvPowerSeries/Substitution.lean\", \"Mathlib/RingTheory/MvPowerSeries/Order.lean\", \"Mathlib/RingTheory/MvPowerSeries/Order.lean\", \"Mathlib/RingTheory/MvPowerSeries/Order.lean\"], \"digest\": \"e524e3da1408cb19\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: general substitution homomorphisms and truncation formulas, elliptic-curve quotients, or scalar embeddings into QuadraticAlgebra do not give the homogeneous kernel and scalar-constant image together"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Formal power series substitution into the quadratic algebra has kernel the homogeneous quadratic ideal",
+   "results": "{\"t\": \"2026-10-23T09:25:33Z\", \"tool\": \"leansearch\", \"query\": \"Formal power series substitution into the quadratic algebra has kernel the homogeneous quadratic ideal\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"PowerSeries.subst\", \"MvPowerSeries.subst\", \"MvPowerSeries.HasSubst.comp\", \"MvPowerSeries.subst_eq_eval₂\", \"MvPowerSeries.coe_substAlgHom\", \"MvPowerSeries.substAlgHom\", \"MvPowerSeries.substAlgHom_coe\", \"PowerSeries.subst_X\"], \"digest\": \"2243cbd52850450e\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: general substitution homomorphisms and truncation formulas, elliptic-curve quotients, or scalar embeddings into QuadraticAlgebra do not give the homogeneous kernel and scalar-constant image together"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"MvPowerSeries\", \"subst\"",
+   "results": "{\"t\": \"2026-10-23T09:25:34Z\", \"tool\": \"loogle\", \"query\": \"\\\"MvPowerSeries\\\", \\\"subst\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"MvPowerSeries.HasSubst\", \"MvPowerSeries.HasSubst.X\", \"MvPowerSeries.hasSubstIdeal\", \"MvPowerSeries.subst\", \"MvPowerSeries.HasSubst.hasEval\", \"MvPowerSeries.HasSubst.zero\", \"MvPowerSeries.hasSubst_iff_hasEval_of_discreteTopology\", \"MvPowerSeries.subst_self\"], \"digest\": \"c64d90546d06c0d5\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: general substitution homomorphisms and truncation formulas, elliptic-curve quotients, or scalar embeddings into QuadraticAlgebra do not give the homogeneous kernel and scalar-constant image together"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Homogeneous substitution X=z*t and Y=t from F[[X,Y]] to (F[Z]/(Z^2+beta*Z+gamma))[[t]] has kernel the quadratic homogeneous relation and image F+tB",
+   "results": "{\"t\": \"2026-10-23T09:25:34Z\", \"tool\": \"leanfinder\", \"query\": \"Homogeneous substitution X=z*t and Y=t from F[[X,Y]] to (F[Z]/(Z^2+beta*Z+gamma))[[t]] has kernel the quadratic homogeneous relation and image F+tB\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"WeierstrassCurve.VariableChange.t\", \"WeierstrassCurve.Affine.CoordinateRing.mk\", \"WeierstrassCurve.Affine.CoordinateRing.XClass\", \"WeierstrassCurve.Affine.CoordinateRing.mk_φ\", \"WeierstrassCurve.Affine.CoordinateRing.YClass\", \"WeierstrassCurve.Affine.CoordinateRing.mk_ψ\", \"WeierstrassCurve.VariableChange.s\", \"WeierstrassCurve.VariableChange\"], \"digest\": \"8be163d75108abcd\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: general substitution homomorphisms and truncation formulas, elliptic-curve quotients, or scalar embeddings into QuadraticAlgebra do not give the homogeneous kernel and scalar-constant image together"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The formal cone on a quadratic algebra embeds in its power series ring by x=z*t y=t and consists exactly of series with constant coefficient in the base field",
+   "results": "{\"t\": \"2026-10-23T09:26:05Z\", \"tool\": \"leanfinder\", \"query\": \"The formal cone on a quadratic algebra embeds in its power series ring by x=z*t y=t and consists exactly of series with constant coefficient in the base field\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"QuadraticAlgebra.coe\", \"QuadraticAlgebra.C\", \"QuadraticAlgebra.coe_algebraMap\", \"QuadraticAlgebra.coe_pow\", \"QuadraticAlgebra.C_eq_algebraMap\", \"QuadraticAlgebra.lift_apply_apply\", \"QuadraticAlgebra.algebraMap_eq\", \"QuadraticAlgebra.coe_mul\"], \"digest\": \"282de62fc4e64ad6\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: general substitution homomorphisms and truncation formulas, elliptic-curve quotients, or scalar embeddings into QuadraticAlgebra do not give the homogeneous kernel and scalar-constant image together"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-quadratic-series-integral-closure",
+  "date": "2026-10-22",
+  "group": "Q127"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images proof (3), ILO X Lemma 2.2 alteration reduction; de Jong Lemma 5.7 proof, first paragraph: the inverse image of the singular points under fibrewise normalization; also the quasi-splitting preservation used on printed p.617. Local tangent-cone construction for the two branch choices. Quadratic completed local-ring calculation filling the tangent-Proj/normalization comparison omitted in Stacks 0CBT. Tag 0C4A (lemma-2-branches-delta-1), proof of (1) implies (2), Cases I and II, with coordinates interchanged in Case II: the homogeneous coefficient calculation underlying the displayed normalization maps. Extracted from the returned item steps 1-4.",
+   "via": [
+    "lem-sfb-quadratic-series-integral-closure",
+    "lem-sfb-nodal-local-tangent-normalization",
+    "lem-sfb-nodal-branch-double-cover",
+    "lem-sfb-nodal-finite-quasi-splitting",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-quadratic-homogeneous-substitution",
+  "worker": "stage1 N9",
+  "summary": "Statement unchanged. Reuses the monic quotient power-basis Mathlib leaf; supplies finite homogeneous elimination, coefficientwise multiplicativity and assembly of the kernel, explicit scalar-constant lifts, and quotient injectivity. No new nodes, no Lean or compiles. Adds the definition of basis to statement dependencies.",
+  "blueprint": "Supports the inherited alteration/nodal-local-calculation branch recorded in blueprint.from.place, via lem-sfb-quadratic-series-integral-closure. Read current latest sk-thm-sf-ctf-stability direct-images proof (3); the quadratic calculation is below that unit, not a replacement route. blueprint_refs.py ancestor returns None; retain inherited null ancestor and exact place/via. Whole-blueprint searches homogeneous substitution, monic division, quadratic and direct text searches found no equivalent item."
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-N9-cf6310900",
+  "group": "N9",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-N9-cf6310900 (reviewer sub-agent of L); spot-checked: Shape: one commit on base 67a9312, touching only the item and the N9 report. No new nodes and no repair note for this item, so the 2026-10-21 re-split rule does not apply. The statement is byte-identical to the live and side-live item, which is unsplit on both. stmt_deps adds def-weil-pbc-free-module; the statement uses 'F-basis', so that is justified. The cited nodes are mathlib-status definitions plus the Mathlib leaf lem-weil-pbc-monic-quotient-free (AdjoinRoot.powerBasis'). No tool_uses and no SGA. Source: Stacks curves.tex Tag 0C4A lemma-2-branches-delta-1, proof of (1)=>(2), Cases I and II (y -> tx). The item is the coordinate-swapped homogeneous calculation behind those maps and holds for every q with a != 0. Step checks: (1) the monic quotient leaf gives the basis 1,z; uniqueness of coefficients makes F->L injective, and p(z)=0 gives z^2=-beta z-gamma. (2) Each t^n coefficient H_n(z,1) is a finite sum; (HK)_n is the convolution and evaluation at (z,1) is multiplicative, so phi is an F-algebra map. (3) I checked the X-monic homogeneous division term by term; it ends in H_n=QG_{n-2}+u_nY^n+v_nXY^{n-1}. (4) Q(z,1)=0 and the basis force u_n=v_n=0, with u_0=0 from scalar injectivity; G=sum G_m and (QG)_n=QG_{n-2} because Q is homogeneous of degree 2, which gives real ideal membership, and phi(q)=a p(z) t^2=0. (5) The constant term lies in F; for the converse, the explicit lift S has degree-n part alpha_nY^n+delta_nXY^{n-1}, which evaluates to alpha_n+delta_n z. (6) j is well-defined and injective by ker=(q), its image is A by surjectivity of the quotient map, and F[[t]] and tB lie in A. Small cases: p=Z^2 (q=X^2): the images z^i t^{i+j} for i<=1 are independent and the image is F+t(F+Fz)[[t]], as stated. Also checked Z^2+Z and Z^2+1 over F_2 (repeated root, nilpotents) and c=0. No discriminant condition and no division by 2 are used, and a!=0 is used where it is needed. Duplicates: rg over the DAG finds only the parent and two nodes that use this item (quadratic-series-field-factors, separable-node-quadratic-completion), none of which restates it. Minor point accepted: step 2 uses two-variable polynomial evaluation, which is elementary, while citing the one-variable polynomial node. No changes."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.QuadraticHomogeneousSubstitution",
+  "declaration": "QuadraticSeries.homogeneous_substitution",
+  "file": "lean/Sheaf/RingTheory/QuadraticHomogeneousSubstitution.lean",
+  "statement": "theorem homogeneous_substitution (F : Type u) [Field F] (a b c : F) (ha : a ≠ 0) (r : Polynomial F) (hr : r = Polynomial.C a * Polynomial.X ^ 2 + Polynomial.C b * Polynomial.X + Polynomial.C c) (q : MvPowerSeries (Fin 2) F) (hq : q = MvPowerSeries.C a * MvPowerSeries.X 0 ^ 2 + MvPowerSeries.C b * MvPowerSeries.X 0 * MvPowerSeries.X 1 + MvPowerSeries.C c * MvPowerSeries.X 1 ^ 2) : Ideal.span {r} = Ideal.span {Polynomial.X ^ 2 + Polynomial.C (b / a) * Polynomial.X + Polynomial.C (c / a)} ∧ Function.Injective (algebraMap F (AdjoinRoot r)) ∧ (∃ e : Module.Basis (Fin 2) F (AdjoinRoot r), e 0 = 1 ∧ e 1 = AdjoinRoot.root r) ∧ AdjoinRoot.root r ^ 2 = -algebraMap F (AdjoinRoot r) (b / a) * AdjoinRoot.root r - algebraMap F (AdjoinRoot r) (c / a) ∧ ∃ φ : MvPowerSeries (Fin 2) F →ₐ[F] PowerSeries (AdjoinRoot r), (∀ (H : MvPowerSeries (Fin 2) F) (n : ℕ), PowerSeries.coeff n (φ H) = ∑ i ∈ Finset.range (n + 1), algebraMap F (AdjoinRoot r) (MvPowerSeries.coeff (Finsupp.single 0 i + Finsupp.single 1 (n - i)) H) * AdjoinRoot.root r ^ i) ∧ φ (MvPowerSeries.X 0) = PowerSeries.C (AdjoinRoot.root r) * PowerSeries.X ∧ φ (MvPowerSeries.X 1) = PowerSeries.X ∧ RingHom.ker φ.toRingHom = Ideal.span {q} ∧ (∀ h : PowerSeries (AdjoinRoot r), (∃ H, φ H = h) ↔ ∃ d : F, ∃ g : PowerSeries (AdjoinRoot r), h = PowerSeries.C (algebraMap F (AdjoinRoot r) d) + PowerSeries.X * g) ∧ (∃ j : (MvPowerSeries (Fin 2) F ⧸ Ideal.span {q}) →ₐ[F] PowerSeries (AdjoinRoot r), (∀ H : MvPowerSeries (Fin 2) F, j (Ideal.Quotient.mk (Ideal.span {q}) H) = φ H) ∧ Function.Injective j ∧ (∀ h : PowerSeries (AdjoinRoot r), (∃ v, j v = h) ↔ ∃ H, φ H = h)) ∧ (∀ f : PowerSeries F, ∃ H, φ H = PowerSeries.map (algebraMap F (AdjoinRoot r)) f) ∧ (∀ g : PowerSeries (AdjoinRoot r), ∃ H, φ H = PowerSeries.X * g) ∧ (∀ α δ : ℕ → F, φ (fun d : Fin 2 →₀ ℕ ↦ if d 0 = 0 then α (d 1) else if d 0 = 1 then δ (d 1 + 1) else 0) = PowerSeries.mk (fun n : ℕ ↦ if n = 0 then algebraMap F (AdjoinRoot r) (α 0) else algebraMap F (AdjoinRoot r) (α n) + algebraMap F (AdjoinRoot r) (δ n) * AdjoinRoot.root r))",
+  "branch": "newtargets-dag",
+  "by": "NE",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-c90b35814",
+  "group": "NE",
+  "result": "pass",
+  "note": "Only the node's lean record and a new one-theorem module (proof sorry) are delivered; lean.statement matches the file signature exactly. Every node clause matches the Lean: span{r}=span{monic p}, scalar map injective, basis 1,z (Module.Basis), z^2=-βz-γ, φ unique via the H_n(z,1) coefficient formula, φ(X)=zt, φ(Y)=t, ker=(q), image F+tB as an iff, injective induced j with the same image, F[[t]]⊆A, tB⊆A; explicit-lift coefficients checked for n=0 and n≥1. Only hypothesis besides the field is a≠0, one free universe. Parent's theorem-owned abbrevs have identical bodies; no name clash; dep records match. Docstrings carry source and blueprint tags and the proof steps. No findings."
+ }
+}

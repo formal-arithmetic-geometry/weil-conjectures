@@ -52,5 +52,64 @@
  "blueprint_snapshot": "main-20261015",
  "chapter": "sec-deligne-laumon-general",
  "unit": "sk-l-dl-general-normalization",
- "lean_audit": {}
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": [
+    "AlgebraicGeometry.exists_dense_isFinite_toIteratedAffineLine"
+   ]
+  },
+  "slopmaster2": {
+   "state": "closed",
+   "decls": [
+    {
+     "name": "AlgebraicGeometry.exists_dense_isFinite_toIteratedAffineLine",
+     "module": "WeilConjectures.AlgebraicGeometry.NoetherNormalization",
+     "lines": [
+      237,
+      285
+     ],
+     "kind": "theorem",
+     "sorry": false
+    }
+   ],
+   "missing": [],
+   "open": []
+  }
+ },
+ "blueprint_update": {
+  "snapshot": "main-20261023-1620",
+  "commit": "7284bb09daf97437d544c51882b325f9c52cd345",
+  "changed": [
+   "statement",
+   "proof"
+  ],
+  "statement": "Let $f:X_0\\to Y_0$ be a morphism of finite type. There are finite\npartitions of $X_0$ and of $Y_0$ into locally closed pieces such that\neach piece of $X_0$ lies over a piece $V$ of $Y_0$, and its map to $V$\nfactors through a finite morphism to $\\mathbf A^d_V$ for some $d$.\n\n*Complement (generic step).* If $f_0:X_0\\to Y_0$ is a dominant affine\nmorphism of finite type between integral schemes whose generic fibre\nhas dimension $r$, there are a dense open $V_0\\subseteq Y_0$ and a\nfinite surjective morphism $\\nu_0$ factoring the restriction of $f_0$\nover $V_0$ as\n\n$$\nf_0^{-1}(V_0)\\xrightarrow{\\nu_0}\\mathbf A^r_{V_0}\n\\xrightarrow{\\pi_0}V_0,\n$$\n\nwhere $\\pi_0$ is the projection of the $r$-fold relative affine line,\na composition of $r$ affine-line projections.",
+  "proof": [
+   {
+    "text": "First recall Noether normalization over a field $K$. For a nonzero\nalgebra $B=K[b_1,\\ldots,b_m]$, we induct on $m$. If the generators are\nalgebraically independent, there is nothing to prove. Otherwise choose\na nonzero polynomial relation, and choose positive integers $N_i$ such\nthat the finitely many monomials of the relation have distinct weights\nfor the weighting $(N_1,\\ldots,N_{m-1},1)$. Substituting\n$b_i=y_i+b_m^{N_i}$ and dividing by the leading nonzero scalar makes\nthe relation monic in $b_m$. Hence $B$ is finite over\n$K[y_1,\\ldots,y_{m-1}]$, and induction proves normalization. This\nargument works over a finite field as well.",
+    "uses": [],
+    "elementary": null
+   },
+   {
+    "text": "Now let $A$ be an integral domain with fraction field $K$, let\n$\\operatorname{Spec}A$ be an affine open of the target, and let $B$ be\na finitely generated $A$-algebra. If $B\\otimes_AK=0$, then $B_s=0$ for\nsome nonzero $s\\in A$. Otherwise the result over $K$ gives elements\n$t_1,\\ldots,t_d$ and monic equations for each of a fixed set of algebra\ngenerators of $B$ over $K[t_1,\\ldots,t_d]$. We invert one product\n$s\\in A\\setminus\\{0\\}$ containing all denominators of the $t_i$ and of\nthese equations, and enlarge it so as to kill the finitely many\ndifferences that vanish over $K$. Then the equations hold in $B_s$.\nHence bounded powers of the generators span $B_s$ over\n$A_s[t_1,\\ldots,t_d]$, and the resulting map to $\\mathbf A^d_{A_s}$ is\nfinite.",
+    "uses": [],
+    "elementary": null
+   },
+   {
+    "text": "To obtain the partitions, choose disjoint integral affine opens\ncontaining the generic points of the reduced target. Partition their\ninverse images into finitely many reduced affine locally closed pieces\nand apply the preceding construction to each piece. On each target\nopen, a single product of the finitely many denominators works, and\nthe complement of the resulting open has smaller dimension. Induction\non this complement gives finite partitions of the whole source and\ntarget, and all choices are made over $k_0$. A further locally closed\nrefinement of a source piece restricts its finite map to a separated\nquasi-finite map, to which [sk-l-dl-general-quasifinite] applies.\nFinally, the projection $\\mathbf A^d_V\\to V$ is a composition of $d$\nprojections of relative affine lines.",
+    "uses": [
+     "sk-l-dl-general-quasifinite"
+    ],
+    "elementary": false
+   },
+   {
+    "text": "For the complement: in the generic step $d=r$, since the generic fibre\nhas dimension $r$, so the $t_i$ are algebraically independent and the\npolynomial ring injects into the coordinate algebra; the map of\ncoordinate rings over $V_0$ is injective because its composite with the\npassage to the generic fibre is, and an injective integral extension\nsatisfies lying over, so $\\nu_0$ is surjective.",
+    "uses": [],
+    "elementary": null
+   }
+  ],
+  "note": "the current blueprint (main-20261023-1620, weil-conjectures-blueprint 7284bb09da) states or proves this differently; the node is proved in Lean: recorded 2026-10-23, not reopened"
+ }
 }

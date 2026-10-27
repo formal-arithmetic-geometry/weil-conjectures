@@ -1,0 +1,173 @@
+{
+ "id": "lem-pur-graph-proper-support-unit",
+ "kind": "statement",
+ "title": "Proper-support composition normalized by the right-derived unit",
+ "statement": "Let A be a finite commutative ring and let (b,q,p,v) be a commuting square of Noetherian schemes with q,p proper and b,v separated quasi-compact etale. Assume compactifications of b,v,qv,bp. Write S_b,S_v for sum extension [def-weil-pbc-etale-sum-extension], and c_b,c_v for its canonical maps to direct image [def-weil-pbc-etale-shriek-to-star-map]. Suppose a natural transformation theta:q_* S_v -> S_b p_* satisfies theta_F followed by p_*(c_b,F) and the b,p direct-image compositor equals c_v,q_*F followed by the q,v compositor to (bp)_*F, for every F. Transport the chosen compact-support compositor from F_q F_v to F_b F_p by the chosen proper and graph comparisons [def-pur-graph-chosen-proper-comparison, def-pur-graph-chosen-etale-comparison]. After precomposing with the canonical unit of Rq_* followed by D(S_v), this word equals Q_h of the degreewise theta followed by the canonical unit of D(S_b) followed by Rp_* [def-weil-pbc-derived-categories, lem-amb-unbounded-compact-support-comparisons, lem-asd-compact-support-graph-derived-isomorphism, def-weil-compactifications-refinements]. The precise unit factors are in the Lean statement. No Cartesian hypothesis and no mate appears.",
+ "source": {
+  "document": "literature/stacks-project/more-etale.tex",
+  "place": "Tags 0F7B (construction on K-injective complexes and equality of support subsheaves), 0F7F, 0F7I and 0F7J (tower comparison). Graph inclusion: etale-cohomology.tex Tag 0F4L."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-derived-categories",
+  "def-weil-compactifications-refinements",
+  "lem-amb-unbounded-compact-support-comparisons",
+  "lem-asd-compact-support-graph-derived-isomorphism",
+  "def-pur-graph-chosen-proper-comparison",
+  "def-pur-graph-chosen-etale-comparison",
+  "def-weil-pbc-etale-shriek-to-star-map",
+  "def-weil-pbc-etale-sum-extension"
+ ],
+ "proof": [
+  {
+   "text": "Take the chosen compactification c of b and its proper postcomposition c.postcomp p. Form tau from theta, the sheaf graph map for b, and the ordinary c.g,p direct-image compositor. Naturality and associativity of direct-image composition and graph sheaf normalization show that tau followed by the compactification inclusion equals the normalized v-sum inclusion on q_*; substitute htheta. This is postcomp_sheaf_normalization in Lean.",
+   "uses": [
+    "lem-asd-compact-support-graph-sheaf-normalization",
+    "def-weil-pbc-etale-shriek-to-star-map",
+    "def-pur-graph-chosen-etale-comparison"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply graph_proper_precomposition_unit to the proper map q, the etale map v, and the single compactification c.postcomp p with the preceding tau. This handles only the proper-first path; its remaining geometric argument has no second factorization.",
+   "uses": [
+    "lem-pur-graph-proper-precomposition-unit"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For the etale-first path use graph_proper_postcomposition. Expand the inverse graph comparison by its homotopy component formula. Expand the composite right-derived unit, cancel the exact-functor factor, use naturality of the proper unit and of the proper derived compositor, and apply its unit factorization. These are the complete private proofs proper_comp_unit, postcomposition_unit and postcomp_word. Choosing c to be the already chosen compactification makes the graph comparison expansion definitional, so no extra graph-refinement theorem is required.",
+   "uses": [
+    "lem-pur-graph-proper-postcomposition",
+    "lem-asd-compact-support-graph-derived-isomorphism",
+    "lem-amb-unbounded-compact-support-comparisons",
+    "def-pur-graph-chosen-proper-comparison",
+    "def-pur-graph-chosen-etale-comparison",
+    "def-weil-pbc-derived-categories",
+    "lem-pur-graph-compactification-unit"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Postcompose the desired unit equality with the inverse of its etale-first terminal word followed by the inverse model-to-chosen comparison. Cancel the adjacent isomorphisms in the source word. The proper-first equation and the proved etale-first unit equation now agree by functoriality of degreewise theta followed by the sheaf graph map. Cancel the invertible postcomposition. This proves the stated equality of natural transformations unchanged.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-asd-compact-support-graph-sheaf-normalization",
+  "def-weil-pbc-etale-shriek-to-star-map",
+  "def-pur-graph-chosen-etale-comparison",
+  "lem-pur-graph-proper-precomposition-unit",
+  "lem-pur-graph-proper-postcomposition",
+  "lem-asd-compact-support-graph-derived-isomorphism",
+  "lem-amb-unbounded-compact-support-comparisons",
+  "def-pur-graph-chosen-proper-comparison",
+  "def-weil-pbc-derived-categories",
+  "lem-pur-graph-compactification-unit"
+ ],
+ "proof_origin": {
+  "document": "literature/stacks-project/more-etale.tex",
+  "place": "Tags 0F7B, 0F7I and 0F7J. D4 reduction to the proper-first normalization in one compactification; etale-first path and unit pasting proved in Lean.",
+  "by": "agent"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "For a Cartesian square of schemes with separated etale horizontal arrows, the sheaf mate of sum base change agrees with the canonical inclusion into the common direct image",
+   "results": "Eight hits: pullbackPushforwardAdjunction, mateEquiv_square, relative gluing, pullback carriers, separatedness under base change, coproduct pullback, MayerVietorisSquare. No sheaf support normalization.",
+   "date": "2026-10-27",
+   "verdict": "No exact match."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "proper direct image etale sum extension commute Cartesian square derived mate compact support",
+   "results": "Eight general etale and scheme-limit matches; none identifies the chosen compact-support comparison.",
+   "date": "2026-10-27",
+   "verdict": "No exact match."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.mateEquiv",
+   "results": "Twelve generic adjunction-mate identities; useful for categorical calculations only.",
+   "date": "2026-10-27",
+   "verdict": "Use abstract mate identities, not a replacement for geometric normalization."
+  },
+  {
+   "tool": "grep",
+   "query": "etaleLowerShriekToLowerStar.*baseChange|baseChange.*etaleLowerShriekToLowerStar",
+   "results": "No Mathlib hits. Project searches found the graph normalization and nested-etale-summand theorem, but no normalization of the Cartesian sheaf mate.",
+   "date": "2026-10-27",
+   "verdict": "The geometric steps need statements; existing derived-mate lemmas handle the categorical part."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A derived mate square between exact functors and right derived direct images satisfies the same unit equation as the ordinary sheaf mate",
+   "results": "Eight generic derived adjunction unit facts. The local library already proves derivedExact_mateEquiv_app_fac and exact_localization_inverse_mate, which are used in the new complete categorical proof.",
+   "date": "2026-10-27",
+   "verdict": "Use existing project categorical lemmas."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A proper support composition comparison for a commuting square of schemes is normalized by the sheaf inclusion into the common direct image and the unbounded right derived functor unit",
+   "results": "Eight generic scheme and sheaf pushforward-composition matches. No compact-support tower normalization against the right-derived unit.",
+   "date": "2026-10-27",
+   "verdict": "No exact normalization theorem."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.EtaleGraphProperInterchange",
+  "date": "2026-10-27",
+  "group": "P1"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-thm-smooth-purity",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-pur-composition-coherence",
+   "place": "Tags 0F7B (lemma-shriek-proper-and-open), 0F7F (lemma-shriek-proper-and-open-base-change), 0F7J (lemma-shriek-composition), and item (3) in the final paragraph of Tag 0F7L; parent steps 3, 4 and 5. The common-support identification is the sheaf composition used explicitly in the proof of 0F7B.",
+   "via": [
+    "lem-pur-etale-horizontal-support-tower",
+    "lem-pur-finite-etale-dualizing-normalization",
+    "lem-pur-diagonal-section-pasting",
+    "lem-pur-etale-horizontal-support-mate",
+    "lem-pur-etale-graph-proper-tower",
+    "lem-pur-graph-proper-interchange"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.EtaleGraphProperSupportUnit",
+  "file": "lean/Sheaf/AlgebraicGeometry/EtaleGraphProperSupportUnit.lean",
+  "declaration": "AlgebraicGeometry.Etale.graph_proper_support_unit",
+  "statement": "theorem graph_proper_support_unit\n    (A : Type (u + 1)) [CommRing A] [Finite A]\n    {W Y' Z Y : Scheme.{u}}\n    [IsNoetherian W] [IsNoetherian Y'] [IsNoetherian Z] [IsNoetherian Y]\n    (q : W ⟶ Y') [IsProper q] (p : Z ⟶ Y) [IsProper p]\n    (b : W ⟶ Z) [Etale b] [IsSeparated b] [QuasiCompact b]\n    (v : Y' ⟶ Y) [Etale v] [IsSeparated v] [QuasiCompact v]\n    (sq : CommSq b q p v)\n    [HasCompactification b] [HasCompactification v]\n    [HasCompactification (q ≫ v)] [HasCompactification (b ≫ p)]\n    (θ : lowerStar (ModuleCat.{u + 1} A) q ⋙\n        etaleLowerShriek (ModuleCat.{u + 1} A) v inferInstance ⟶\n      etaleLowerShriek (ModuleCat.{u + 1} A) b inferInstance ⋙\n        lowerStar (ModuleCat.{u + 1} A) p)\n    (hθ : (∀ F : Sheaf W.smallEtaleTopology (ModuleCat.{u + 1} A),\n      θ.app F ≫\n          (lowerStar (ModuleCat.{u + 1} A) p).map\n            (etaleLowerShriekToLowerStar (ModuleCat.{u + 1} A) b F) ≫\n          (lowerStarComp (ModuleCat.{u + 1} A) b p).hom.app F =\n        etaleLowerShriekToLowerStar (ModuleCat.{u + 1} A) v\n            ((lowerStar (ModuleCat.{u + 1} A) q).obj F) ≫\n          (lowerStarComp (ModuleCat.{u + 1} A) q v (b ≫ p) sq.w).hom.app F)) :\n    (Functor.rightDerivedFunctorCompMapDerivedCategoryUnit\n      (lowerStar (ModuleCat.{u + 1} A) q)\n      (etaleLowerShriek (ModuleCat.{u + 1} A) v inferInstance)) ≫\n      Functor.whiskerLeft DerivedCategory.Qh\n    (Functor.isoWhiskerRight (graphChosenProperComparison A q).symm\n        (etaleLowerShriek (ModuleCat.{u + 1} A) v inferInstance).mapDerivedCategory ≪≫\n      Functor.isoWhiskerLeft (rightDerivedLowerShriek (ModuleCat.{u + 1} A) q)\n        (graphChosenEtaleComparison A v).symm ≪≫\n      unboundedEtaleLowerShriekCompIso A q v ≪≫\n      unboundedEtaleLowerShriekCongr A sq.w.symm ≪≫\n      (unboundedEtaleLowerShriekCompIso A b p).symm ≪≫\n      Functor.isoWhiskerRight (graphChosenEtaleComparison A b)\n        (rightDerivedLowerShriek (ModuleCat.{u + 1} A) p) ≪≫\n      Functor.isoWhiskerLeft\n        (etaleLowerShriek (ModuleCat.{u + 1} A) b inferInstance).mapDerivedCategory\n        (graphChosenProperComparison A p)).hom =\n    Functor.whiskerRight (NatTrans.mapHomotopyCategory θ (.up ℤ)) DerivedCategory.Qh ≫\n      Functor.mapDerivedCategoryCompRightDerivedFunctorUnit\n        (etaleLowerShriek (ModuleCat.{u + 1} A) b inferInstance)\n        (lowerStar (ModuleCat.{u + 1} A) p)",
+  "branch": "sheaf-dag",
+  "by": "P1",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P1",
+  "result": "pass",
+  "landing": "20261027T065854-L-2484616",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D4",
+  "result": "pass",
+  "landing": "20261027T094341-L-217201",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

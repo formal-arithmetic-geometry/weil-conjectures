@@ -1,0 +1,253 @@
+{
+ "id": "lem-sfb-geometrically-diagonal-coalgebra-separable-basis",
+ "kind": "statement",
+ "title": "Separable splitting of a geometrically diagonal coalgebra",
+ "statement": "Let $k$ be a field [def-weil-field], let $k^s\\subset\\bar k$ be a separable closure inside an algebraic closure [def-pd-separable-closure, def-weil-algebraic-closure], and let $C$ be a $k$-coalgebra. This means a $k$-vector space with linear maps $\\Delta:C\\to C\\otimes_k C$ and $\\epsilon:C\\to k$ satisfying coassociativity and the two counit identities. Tensor products have the meaning in [def-weil-pbc-module-tensor-product]. An element $c$ is group-like when $\\Delta(c)=c\\otimes c$ and $\\epsilon(c)=1$. For a field extension $F/k$ [def-pc-field-extension], write $C_F=F\\otimes_k C$ with its scalar-extended coalgebra structure. If $C_{\\bar k}$ has a $\\bar k$-basis consisting of group-like elements, then the set of all group-like elements of $C_{k^s}$ is a $k^s$-basis of $C_{k^s}$. No finite-dimensionality assumption on $C$ is imposed.",
+ "source": {
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Theorem 12.18(c)–(d), printed pp.237–238: the coalgebra argument that geometrically diagonal coalgebras are coétale and split over a separably closed field; Corollary 12.19, p.238."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-pd-separable-closure",
+  "def-weil-algebraic-closure",
+  "def-weil-pbc-module-tensor-product",
+  "def-pc-field-extension"
+ ],
+ "proof": [
+  {
+   "text": "Put $K=k^s$, $L=\\bar k$, and $V=K\\otimes_kC$. Here $K$ is separably closed by [def-pd-separable-closure], and $L$ is an algebraic closure also of $K$: every element is algebraic already over $k$, and $L$ is algebraically closed. The maps $a\\otimes(b\\otimes c)\\mapsto ab\\otimes c$ and $a\\otimes c\\mapsto a\\otimes(1\\otimes c)$ identify $L\\otimes_KV$ with $C_L$ and respect the coalgebra maps on pure tensors [def-weil-pbc-module-tensor-product]. Denote its given group-like basis by $(g_i)_{i\\in I}$. Fix any $v\\in V$. By [lem-sfb-coalgebra-finite-subcoalgebra] choose a finite-dimensional subcoalgebra $D\\subset V$ containing $v$.",
+   "uses": [
+    "def-pd-separable-closure",
+    "def-weil-algebraic-closure",
+    "def-weil-pbc-module-tensor-product",
+    "lem-sfb-coalgebra-finite-subcoalgebra"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Theorem 12.18(c)⇒(d), printed p.238, with the finite-coalgebra argument of pp.174–175 and 237; explicit geometric-subcoalgebra reduction"
+   }
+  },
+  {
+   "text": "The inclusions $D\\subset V$ and $D\\otimes_KD\\subset V\\otimes_KV$ stay injective after tensoring by $L$: use [lem-weil-pbc-module-over-field-flat] and [lem-weil-pbc-flat-tensor-exact] for each inclusion. Thus $W=L\\otimes_KD$ is a finite-dimensional subcoalgebra of $C_L$. For a finite basis of $D$, each of its images has finite support in $(g_i)$; their union is a finite set $S_0$, and $W\\subset\\operatorname{span}_L\\{g_i:i\\in S_0\\}$. These tensor inclusions may also be checked by extending a vector-space basis of $D$ to one of $V$.",
+   "uses": [
+    "lem-weil-pbc-module-over-field-flat",
+    "lem-weil-pbc-flat-tensor-exact",
+    "def-weil-pbc-module-tensor-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Theorem 12.18(c)⇒(d), printed p.238, with the finite-coalgebra argument of pp.174–175 and 237; explicit geometric-subcoalgebra reduction"
+   }
+  },
+  {
+   "text": "Let $\\lambda_i:C_L\\to L$ be the $i$th basis coordinate. For $w=\\sum_i a_ig_i\\in W$, the subcoalgebra condition gives $(1\\otimes\\lambda_i)(\\Delta w)\\in W$, whereas the group-like formula gives $(1\\otimes\\lambda_i)(\\Delta w)=a_ig_i$. If $a_i\\ne0$, this implies $g_i\\in W$. Consequently $W$ has basis exactly $(g_i)_{i\\in S}$, where $S=\\{i\\in S_0:g_i\\in W\\}$. No finite generation assumption on $C$ or $V$ was used. This is a coordinate calculation using tensor bilinearity [def-weil-pbc-module-tensor-product].",
+   "uses": [
+    "def-weil-pbc-module-tensor-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Theorem 12.18(c)⇒(d), printed p.238, with the finite-coalgebra argument of pp.174–175 and 237; explicit geometric-subcoalgebra reduction"
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-finite-coalgebra-dual-base-change] to $D$ over $K$, and put $A=D^*$. Its scalar comparison identifies $L\\otimes_KA$ with $W^*$. Evaluation on the basis from step 3 identifies $W^*$ with $L^S$ as algebras: $(fh)(g_i)=f(g_i)h(g_i)$ and the convolution unit evaluates to $\\epsilon(g_i)=1$. The inverse sends $(a_i)$ to $\\sum_i b_ig_i\\mapsto\\sum_i a_ib_i$. Thus $L\\otimes_KA$ is commutative and reduced. The map $A\\to L\\otimes_KA$, $a\\mapsto1\\otimes a$, is injective: choose a $K$-linear functional $\\ell:L\\to K$ with $\\ell(1)=1$ by extending $\\{1\\}$ to a basis; $\\ell\\otimes1_A$ is a linear retraction. Therefore commutators and nilpotents in $A$ vanish, and $A$ is a commutative reduced finite-dimensional $K$-algebra.",
+   "uses": [
+    "lem-sfb-finite-coalgebra-dual-base-change",
+    "def-weil-pbc-module-tensor-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Theorem 12.18(c)⇒(d), printed p.238, with the finite-coalgebra argument of pp.174–175 and 237; explicit geometric-subcoalgebra reduction"
+   }
+  },
+  {
+   "text": "By [lem-weil-pbc-finite-dim-algebra-artinian], $A$ is Artinian. Apply [lem-sfb-reduced-artinian-residue-product]: the maximal-ideal set $M$ is finite and the canonical quotient map is $A\\cong\\prod_{m\\in M}E_m$, with $E_m=A/m$ a field. This is also a $K$-algebra isomorphism, since each component has the quotient scalar structure. Each $E_m$ is finite-dimensional over $K$: the images of a finite basis of $A$ span it. If $A=0$, the set $M$ is empty, as permitted by the cited statement.",
+   "uses": [
+    "lem-weil-pbc-finite-dim-algebra-artinian",
+    "lem-sfb-reduced-artinian-residue-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Theorem 12.18(c)⇒(d), printed p.238, with the finite-coalgebra argument of pp.174–175 and 237; explicit geometric-subcoalgebra reduction"
+   }
+  },
+  {
+   "text": "The finite-product tensor isomorphism [lem-weil-pbc-tensor-finite-product], together with swapping tensor factors, identifies $A\\otimes_KL$ with $\\prod_{m\\in M}(E_m\\otimes_KL)$. The swap is given by $a\\otimes b\\mapsto b\\otimes a$, with the same formula as inverse, by tensor bilinearity. The product comparison is multiplicative on pure tensors and preserves $1$, hence is an algebra isomorphism. Each factor $E_m\\otimes_KL$ is reduced: embed it additively into the product by zero in all other coordinates; this insertion preserves multiplication, so a nonzero nilpotent in a factor would give one in the product, contradicting step 4. By [lem-pc-finite-extension-tensor-algebraic-closure-reduced-separable], applied to the finite extension $E_m/K$ and the algebraic closure $L/K$, each $E_m/K$ is separable. Since $K$ is separably closed, [lem-pc-sepclosed-finite-sep-trivial] identifies each $E_m$ with $K$. Thus $A\\cong K^M$ as $K$-algebras.",
+   "uses": [
+    "lem-weil-pbc-tensor-finite-product",
+    "def-weil-pbc-module-tensor-product",
+    "lem-pc-finite-extension-tensor-algebraic-closure-reduced-separable",
+    "lem-pc-sepclosed-finite-sep-trivial"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Theorem 12.18(c)⇒(d), printed p.238, with the finite-coalgebra argument of pp.174–175 and 237; explicit geometric-subcoalgebra reduction"
+   }
+  },
+  {
+   "text": "For each $m\\in M$, the $m$th coordinate of $A\\cong K^M$ is an algebra homomorphism $p_m:A\\to K$. By [lem-sfb-finite-coalgebra-dual-base-change], it is evaluation at a unique group-like $d_m\\in D$. The functionals $p_m$ form a basis of $A^*$: for $\\alpha\\in A^*$, write $\\alpha=\\sum_m\\alpha(e_m)p_m$, where $e_m$ are the coordinate idempotents transported to $A$. The evaluation isomorphism $D\\cong A^*$ therefore says $(d_m)$ is a basis of $D$. Under the coalgebra inclusion $D\\subset V$ these remain group-like. In particular the arbitrary $v$ of step 1 lies in their span; hence all group-like elements of $V$ span $V$. If $D=0$, both coordinate families are empty and this argument is vacuous.",
+   "uses": [
+    "lem-sfb-finite-coalgebra-dual-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Theorem 12.18(c)⇒(d), printed p.238, with the finite-coalgebra argument of pp.174–175 and 237; explicit geometric-subcoalgebra reduction"
+   }
+  },
+  {
+   "text": "Finally every group-like $h\\in V$ maps to one of the geometric basis elements $g_i$. Indeed write its image as a finite sum $\\sum_i a_ig_i$ in $C_L$. Comparing the $(i,j)$ coordinates of $\\Delta h=h\\otimes h$ gives $a_i^2=a_i$ and $a_ia_j=0$ for $i\\ne j$, while $\\epsilon(h)=1$ gives $\\sum_i a_i=1$. Over the field $L$, exactly one coefficient is $1$ and all others are $0$. The scalar map $V\\to L\\otimes_KV$ is injective by the same retraction $\\ell\\otimes1_V$ used in step 4, so distinct group-like elements have distinct images $g_i$. A finite $K$-linear relation between them becomes a relation between distinct elements of the $L$-basis $(g_i)$ and has all coefficients zero. Thus they are independent as well as spanning, which proves the required basis statement, including $C=0$.",
+   "uses": [
+    "def-weil-pbc-module-tensor-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Theorem 12.18(c)⇒(d), printed p.238, with the finite-coalgebra argument of pp.174–175 and 237; explicit geometric-subcoalgebra reduction"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pd-separable-closure",
+  "def-weil-algebraic-closure",
+  "def-weil-pbc-module-tensor-product",
+  "lem-sfb-coalgebra-finite-subcoalgebra",
+  "lem-weil-pbc-module-over-field-flat",
+  "lem-weil-pbc-flat-tensor-exact",
+  "lem-sfb-finite-coalgebra-dual-base-change",
+  "lem-weil-pbc-finite-dim-algebra-artinian",
+  "lem-sfb-reduced-artinian-residue-product",
+  "lem-weil-pbc-tensor-finite-product",
+  "lem-pc-finite-extension-tensor-algebraic-closure-reduced-separable",
+  "lem-pc-sepclosed-finite-sep-trivial"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Theorem 12.18(c)⇒(d), printed p.238, with the finite-coalgebra argument of pp.174–175 and 237; explicit geometric-subcoalgebra reduction"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Commutative coalgebra that is geometrically spanned by group-like elements has a group-like basis over the separable closure",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"linearIndepOn_isGroupLikeElem\", \"module\": \"Mathlib/RingTheory/Coalgebra/GroupLike\", \"type\": \"∀ {R : Type u_2} {A : Type u_3} [inst : CommRing R] [IsDomain R] [inst_2 : AddCommGroup A] [inst_3 : Module R A]\\n  [inst_4 : Coalgebra R A] [Module.IsTorsionFree R A], LinearIndepOn R id {a | IsGroupLikeElem R a}\", \"doc\": \"The set of group-like elements in a coalgebra over a commutative semiring $ R $ is linearly independent over $ R $. That is, no non-trivial finite linear combination of these elements with coefficient\"}\n  {\"name\": \"GroupLike.isGroupLikeElem_val\", \"module\": \"Mathlib/RingTheory/Coalgebra/GroupLike\", \"type\": \"∀ {R : Type u_2} {A : Type u_3} [inst : CommSemiring R] [inst_1 : AddCommMonoid A] [inst_2 : Module R A]\\n  [inst_3 : Coalgebra R A] (self : GroupLike R A), IsGroupLikeElem R ↑self\", \"doc\": \"For any commutative semiring $ R $, coalgebra $ A $ over $ R $, and group-like structure $ \\\\text{self} $ on $ A $, the underlying element $ \\\\text{self} $ in $ A $ satisfies the group-like element cond\"}\n  {\"name\": \"linearIndep_groupLikeVal\", \"module\": \"Mathlib/RingTheory/Coalgebra/GroupLike\", \"type\": \"∀ {R : Type u_2} {A : Type u_3} [inst : CommRing R] [IsDomain R] [inst_2 : AddCommGroup A] [inst_3 : Module R A]\\n  [inst_4 : Coalgebra R A] [Module.IsTorsionFree R A], LinearIndependent R GroupLike.val\", \"doc\": \"The family of elements obtained from the group-like structure on a coalgebra over a commutative semiring $ R $ is linearly independent in the $ R $-module $ A $. Specifically, the linear combination m\"}\n  {\"name\": \"GroupLike.val\", \"module\": \"Mathlib/RingTheory/Coalgebra/GroupLike\", \"type\": \"{R : Type u_2} →\\n  {A : Type u_3} →\\n    [inst : CommSemiring R] →\\n      [inst_1 : AddCommMonoid A] → [inst_2 : Module R A] → [inst_3 : Coalgebra R A] → GroupLike R A → A\", \"doc\": \"The function that extracts the underlying element of a group-like structure on a coalgebra over a commutative semiring $ R $, returning an element of the additive commutative monoid $ A $.\"}\n  {\"name\": \"GroupLike.valEquiv\", \"module\": \"Mathlib/RingTheory/Coalgebra/GroupLike\", \"type\": \"{R : Type u_2} →\\n  {A : Type u_3} →\\n    [inst : CommSemiring R] →\\n      [inst_1 : AddCommMonoid A] →\\n        [inst_2 : Module R A] → [inst_3 : Coalgebra R A] → GroupLike R A ≃ Subtype (IsGroupLikeElem R)\", \"doc\": \"The canonical equivalence between the type of group-like structures on a coalgebra over a commutative semiring $ R $ and the subtype of elements in the coalgebra satisfying the group-like property. Th\"}\n  {\"name\": \"GroupLike\", \"module\": \"Mathlib/RingTheory/Coalgebra/GroupLike\", \"type\": \"(R : Type u_2) →\\n  (A : Type u_3) →\\n    [inst : CommSemiring R] → [inst_1 : AddCommMonoid A] → [inst_2 : Module R A] → [Coalgebra R A] → Type u_3\", \"doc\": \"A structure for a commutative semiring $ R $ and an additive commutative monoid $ A $ equipped with an $ R $-module structure and coalgebra structure, extending these with group-like properties.\"}\n  {\"name\": \"isGroupLikeElem_iff\", \"module\": \"Mathlib/RingTheory/Coalgebra/GroupLike\", \"type\": \"∀ (R : Type u_2) {A : Type u_3} [inst : CommSemiring R] [inst_1 : AddCommMonoid A] [inst_2 : Module R A]\\n  [inst_3 : Coalgebra R A] (a : A),\\n  IsGroupLikeElem R a ↔ CoalgebraStruct.counit a = 1 ∧ CoalgebraStruct.comul a = a ⊗ₜ[R] a\", \"doc\": \"An element $ a $ in a coalgebra $ A $ over a commutative semiring $ R $ is group-like if and only if the counit $ \\\\epsilon(a) $ equals 1 and the comultiplication $ \\\\Delta(a) $ equals $ a \\\\otimes a $.\"}\n  {\"name\": \"IsGroupLikeElem\", \"module\": \"Mathlib/RingTheory/Coalgebra/GroupLike\", \"type\": \"(R : Type u_2) →\\n  {A : Type u_3} →\\n    [inst : CommSemiring R] → [inst_1 : AddCommMonoid A] → [inst_2 : Module R A] → [Coalgebra R A] → A → Prop\", \"doc\": \"An element $ a $ in a coalgebra $ A $ over a commutative semiring $ R $ is group-like if it satisfies the condition defining group-like elements in this context.\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: group-like independence and separable polynomial splitting do not assert descent of a geometrically diagonal coalgebra to a group-like basis over a separable closure"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A coalgebra that splits as a sum of one dimensional coalgebras over an algebraic closure already splits over the separable closure",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"IsSepClosed.splits_of_separable\", \"module\": \"Mathlib/FieldTheory/IsSepClosed\", \"type\": \"∀ {k : Type u} {inst : Field k} [self : IsSepClosed k] (p : Polynomial k), p.Separable → p.Splits\", \"doc\": \"In a separably closed field $k$, every separable polynomial $p \\\\in k[X]$ splits into a product of linear factors. That is, if $p$ is separable (coprime with its derivative), then $p$ can be expressed \"}\n  {\"name\": \"IsGalois.is_separable_splitting_field\", \"module\": \"Mathlib/FieldTheory/Galois/Basic\", \"type\": \"∀ (F : Type u_1) [inst : Field F] (E : Type u_2) [inst_1 : Field E] [inst_2 : Algebra F E] [FiniteDimensional F E]\\n  [IsGalois F E], ∃ p, p.Separable ∧ Polynomial.IsSplittingField F E p\", \"doc\": \"Every finite-dimensional Galois field extension $ E/F $ is the splitting field of some separable polynomial $ p \\\\in F[X] $.\"}\n  {\"name\": \"Splits.algebraicClosure\", \"module\": \"Mathlib/FieldTheory/AlgebraicClosure\", \"type\": \"∀ {F : Type u_1} (E : Type u_2) [inst : Field F] [inst_1 : Field E] [inst_2 : Algebra F E] {p : Polynomial F},\\n  (Polynomial.map (algebraMap F E) p).Splits → (Polynomial.map (algebraMap F ↥(algebraicClosure F E)) p).Splits\", \"doc\": \"Let $ F $ and $ E $ be fields with $ F \\\\subseteq E $. If a polynomial $ p \\\\in F[X] $ splits in $ E $, then it also splits in the algebraic closure of $ F $ in $ E $.\"}\n  {\"name\": \"IsSepClosed.splits_codomain\", \"module\": \"Mathlib/FieldTheory/IsSepClosed\", \"type\": \"∀ {k : Type u} [inst : Field k] {K : Type v} [inst_1 : Field K] [IsSepClosed K] {f : k →+* K} (p : Polynomial k),\\n  p.Separable → (Polynomial.map f p).Splits\", \"doc\": \"If $ K $ is a separably closed field and $ p $ is a separable polynomial over a field $ k $, then the polynomial obtained by applying the ring homomorphism $ f : k \\\\to K $ to the coefficients of $ p $\"}\n  {\"name\": \"IsSepClosed.splits_domain\", \"module\": \"Mathlib/FieldTheory/IsSepClosed\", \"type\": \"∀ {k : Type u} [inst : Field k] {K : Type v} [inst_1 : Field K] [IsSepClosed k] {f : k →+* K} (p : Polynomial k),\\n  p.Separable → (Polynomial.map f p).Splits\", \"doc\": \"If $ k $ is a separably closed field, then for any separable polynomial $ p $ over $ k $ and any ring homomorphism $ f : k \\\\to K $ to a field $ K $, the polynomial obtained by applying $ f $ to the co\"}\n  {\"name\": \"Polynomial.IsSplittingField.IsScalarTower.splits\", \"module\": \"Mathlib/FieldTheory/SplittingField/IsSplittingField\", \"type\": \"∀ {F : Type u} {K : Type v} (L : Type w) [inst : Field K] [inst_1 : Field L] [inst_2 : Field F] [inst_3 : Algebra K L]\\n  [inst_4 : Algebra F K] [inst_5 : Algebra F L] [IsScalarTower F K L] (f : Polynomial F)\\n  [Polynomial.IsSplittingField K L ((Polynomial.mapAlg F K) f)], ((Polynomial.mapAlg F L) f)\", \"doc\": \"If a polynomial $ f $ splits in an intermediate algebra $ K $ (under the scalar tower $ F \\\\to K \\\\to S $), then $ f $ also splits in the larger algebra $ S $. This holds when $ K $ is a splitting field\"}\n  {\"name\": \"IsSepClosed.factors_of_separable\", \"module\": \"Mathlib/FieldTheory/IsSepClosed\", \"type\": \"∀ {k : Type u} {inst : Field k} [self : IsSepClosed k] (p : Polynomial k), p.Separable → p.Splits\", \"doc\": \"In a separably closed field $ k $, every separable polynomial $ p \\\\in k[X] $ splits completely into linear factors, i.e., can be expressed as a product of degree-1 polynomials.\"}\n  {\"name\": \"Algebra.IsAlgebraic.isSepClosed\", \"module\": \"Mathlib/FieldTheory/PurelyInseparable/Basic\", \"type\": \"∀ {F : Type u} {E : Type v} [inst : Field F] [inst_1 : Field E] [inst_2 : Algebra F E] [Algebra.IsAlgebraic F E]\\n  [IsSepClosed F], IsSepClosed E\", \"doc\": \"If $ E $ is an algebraic field extension of a separably closed field $ F $, then $ E $ is also separably closed. In other words, given a field extension $ E/F $ where every element of $ E $ is algebra\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: group-like independence and separable polynomial splitting do not assert descent of a geometrically diagonal coalgebra to a group-like basis over a separable closure"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Coalgebra\", \"IsSepClosed\"",
+   "results": "[loogle] OK 0 hit(s)",
+   "date": "2026-10-23",
+   "verdict": "no match: group-like independence and separable polynomial splitting do not assert descent of a geometrically diagonal coalgebra to a group-like basis over a separable closure"
+  },
+  {
+   "tool": "grep",
+   "query": "(coalgebra.*separab|separab.*coalgebra|cosemisimple|coetale|coétale)",
+   "results": "[grep] OK 0 hit(s)",
+   "date": "2026-10-23",
+   "verdict": "no match: group-like independence and separable polynomial splitting do not assert descent of a geometrically diagonal coalgebra to a group-like basis over a separable closure"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Geometrically diagonal coalgebra has a basis of group like elements over a separable closure",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"linearIndep_groupLikeVal\", \"module\": \"Mathlib.RingTheory.Coalgebra.GroupLike\", \"type\": \": LinearIndependent R (GroupLike.val (R := R) (A := A))\", \"doc\": \"The family of elements obtained from the group-like structure on a coalgebra over a commutative semiring $ R $ is linearly independent in the $ R $-module $ A $. Specifically, the linear combination m\"}\n  {\"name\": \"linearIndepOn_isGroupLikeElem\", \"module\": \"Mathlib.RingTheory.Coalgebra.GroupLike\", \"type\": \": LinearIndepOn R id {a : A | IsGroupLikeElem R a}\", \"doc\": \"The set of group-like elements in a coalgebra over a commutative semiring $ R $ is linearly independent over $ R $. That is, no non-trivial finite linear combination of these elements with coefficient\"}\n  {\"name\": \"IsGroupLikeElem.mk\", \"module\": \"Mathlib.RingTheory.Coalgebra.GroupLike\", \"type\": \"∀ {R : Type u_2} {A : Type u_3} [inst : CommSemiring R] [inst_1 : AddCommMonoid A] [inst_2 : Module R A]\\n  [inst_3 : Coalgebra R A] {a : A},\\n  CoalgebraStruct.counit a = 1 → CoalgebraStruct.comul a = a ⊗ₜ[R] a → IsGroupLikeElem R a\", \"doc\": \"An element $ a $ in a coalgebra $ A $ over a commutative semiring $ R $ is group-like if the counit $ \\\\epsilon(a) = 1 $ and the comultiplication $ \\\\Delta(a) = a \\\\otimes a $.\"}\n  {\"name\": \"GroupLike.mk\", \"module\": \"Mathlib.RingTheory.Coalgebra.GroupLike\", \"type\": \"{R : Type u_2} →\\n  {A : Type u_3} →\\n    [inst : CommSemiring R] →\\n      [inst_1 : AddCommMonoid A] →\\n        [inst_2 : Module R A] → [inst_3 : Coalgebra R A] → (val : A) → IsGroupLikeElem R val → GroupLike R A\", \"doc\": \"Constructs a group-like structure on an element $ a $ of a coalgebra $ A $ over a commutative semiring $ R $, given that $ a $ satisfies the group-like condition.\"}\n  {\"name\": \"IsGroupLikeElem\", \"module\": \"Mathlib.RingTheory.Coalgebra.GroupLike\", \"type\": \"(R : Type u_2) →\\n  {A : Type u_3} →\\n    [inst : CommSemiring R] → [inst_1 : AddCommMonoid A] → [inst_2 : Module R A] → [Coalgebra R A] → A → Prop\", \"doc\": \"An element $ a $ in a coalgebra $ A $ over a commutative semiring $ R $ is group-like if it satisfies the condition defining group-like elements in this context.\"}\n  {\"name\": \"GroupLike.isGroupLikeElem_val\", \"module\": \"Mathlib.RingTheory.Coalgebra.GroupLike\", \"type\": \"∀ {R : Type u_2} {A : Type u_3} [inst : CommSemiring R] [inst_1 : AddCommMonoid A] [inst_2 : Module R A]\\n  [inst_3 : Coalgebra R A] (self : GroupLike R A), IsGroupLikeElem R ↑self\", \"doc\": \"For any commutative semiring $ R $, coalgebra $ A $ over $ R $, and group-like structure $ \\\\text{self} $ on $ A $, the underlying element $ \\\\text{self} $ in $ A $ satisfies the group-like element cond\"}\n  {\"name\": \"GroupLike.ctorIdx\", \"module\": \"Mathlib.RingTheory.Coalgebra.GroupLike\", \"type\": \"{R : Type u_2} →\\n  {A : Type u_3} →\\n    {inst : CommSemiring R} →\\n      {inst_1 : AddCommMonoid A} → {inst_2 : Module R A} → {inst_3 : Coalgebra R A} → GroupLike R A → ℕ\", \"doc\": \"A structure for a commutative semiring $ R $ and an additive commutative monoid $ A $ equipped with an $ R $-module structure and coalgebra structure, extending these with group-like properties where \"}\n  {\"name\": \"IsGroupLikeElem.map\", \"module\": \"Mathlib.RingTheory.Coalgebra.GroupLike\", \"type\": \"[FunLike F A B] [CoalgHomClass F R A B] (f : F) (ha : IsGroupLikeElem R a) : IsGroupLikeElem R (f a)\", \"doc\": \"If $ f : A \\\\to B $ is a coalgebra homomorphism over a commutative semiring $ R $, and $ a \\\\in A $ is a group-like element, then $ f(a) \\\\in B $ is also a group-like element.\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: group-like independence and separable polynomial splitting do not assert descent of a geometrically diagonal coalgebra to a group-like basis over a separable closure"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-multiplicative-character-antiduality",
+  "date": "2026-10-23",
+  "group": "Q108"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Reductive group-scheme structure of PGL. Supporting input: Corollary 17.62(b)--(d), printed pp.372--373; Sections 6.44--6.46, printed p.135, and Chapter 19(a)--(b), printed pp.397--400. The quotient is by the smooth central torus, with the usual algebraic-group quotient of Theorem 5.28 and Propositions 5.24--5.27. Supporting lemma: Largest subtorus and smooth connected subgroups of groups of multiplicative type. Supporting input: Milne Theorem 12.23: character description needed before forming the torsion quotient in Notation 12.29. Supporting input for the character construction: separable splitting via the geometrically diagonal coordinate coalgebra.",
+   "via": [
+    "lem-sfb-multiplicative-character-antiduality",
+    "lem-sfb-multiplicative-type-largest-subtorus",
+    "lem-sfb-reductive-radical-quotient",
+    "lem-sfb-pgl-reductive-structure",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-geometrically-diagonal-coalgebra-separable-basis",
+  "worker": "stage1",
+  "summary": "Reduced arbitrary-dimensional coalgebra splitting to finite subcoalgebras, checked geometric basis support by coordinate contractions, and used finite duality and existing Artinian/separability nodes to recover group-like bases over the separable closure. No statement change.",
+  "blueprint": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Reductive group-scheme structure of PGL. Supporting input: Corollary 17.62(b)--(d), printed pp.372--373; Sections 6.44--6.46, printed p.135, and Chapter 19(a)--(b), printed pp.397--400. The quotient is by the smooth central torus, with the usual algebraic-group quotient of Theorem 5.28 and Propositions 5.24--5.27. Supporting lemma: Largest subtorus and smooth connected subgroups of groups of multiplicative type. Supporting input: Milne Theorem 12.23: character description needed before forming the torsion quotient in Notation 12.29. Supporting input for the character construction: separable splitting via the geometrically diagonal coordinate coalgebra.",
+  "tool_uses": [
+   {
+    "node": "lem-pc-finite-extension-tensor-algebraic-closure-reduced-separable",
+    "why": "Generic finite-field-extension reduced-tensor criterion, needed for the residue fields of a finite coalgebra dual; no result of this unit replaces it."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pc-finite-extension-tensor-algebraic-closure-reduced-separable"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q133-8f7b4f613",
+  "group": "Q133",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q133-8f7b4f613 (reviewer sub-agent of L); spot-checked: Read the item's 8 steps, both new unsplit nodes, every cited statement, and Milne iAG2017 Thm 12.18 (b)-(d) pp.237-238, Prop 4.7 p.86 and C_V p.175. The item statement is true and does not assume finite dimension. Steps 1-3 reduce to a finite subcoalgebra D of C_{k^s}, and show by the coordinate contraction (1⊗λ_i)Δw=a_i g_i that W=L⊗D has a group-like basis. Step 4 replaces Milne's antipode argument (b)⇒(c), which an arbitrary coalgebra cannot use: θ_L and evaluation give L⊗A≅L^S as algebras, and the retraction ℓ⊗1 makes A commutative and reduced. Steps 5-6 use the Artinian, reduced-Artinian product, finite tensor-product, reduced-tensor separability and sepclosed-trivial nodes, with every hypothesis checked: commutativity from step 4, L is an algebraic closure of K, factors are reduced via the multiplicative insertion. Step 7 follows Milne (c)⇒(d) through the character/group-like bijection of the duality node. Step 8 is a correct coefficient comparison for independence; the existing leaf lem-sfb-coalgebra-group-like-independent would also do (advisory). The new nodes are true (fundamental theorem of coalgebras; finite duality with base change). Small cases checked: D=0 gives A=0 with no characters and no group-likes; a noncommutative A is allowed. Neither node is a clause of the item or a duplicate: rg -L over dag/nodes found no such node, and Mathlib Coalgebra/Convolution and GroupLike are no leaf for either. Accepted tool_use: lem-pc-finite-extension-tensor-algebraic-closure-reduced-separable (generic field criterion). No SGA, no route change, no fixes."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.GeometricallyDiagonalCoalgebraSeparableBasis",
+  "declaration": "Coalgebra.geometricallyDiagonal_separableClosure_basis",
+  "file": "lean/Sheaf/RingTheory/GeometricallyDiagonalCoalgebraSeparableBasis.lean",
+  "statement": "theorem geometricallyDiagonal_separableClosure_basis {k : Type u} [Field k] {ks : Type v} [Field ks] {kbar : Type w} [Field kbar] [Algebra k ks] [IsSepClosure k ks] [Algebra k kbar] [IsAlgClosure k kbar] [Algebra ks kbar] [IsScalarTower k ks kbar] {C : Type t} [AddCommGroup C] [Module k C] [Coalgebra k C] (hgeom : ∃ (ι : Type (max w t)) (b : Module.Basis ι kbar (kbar ⊗[k] C)), ∀ i : ι, IsGroupLikeElem kbar (b i)) : ∃ b : Module.Basis {c : ks ⊗[k] C // IsGroupLikeElem ks c} ks (ks ⊗[k] C), ∀ c : {c : ks ⊗[k] C // IsGroupLikeElem ks c}, b c = c.val",
+  "branch": "newtargets-dag",
+  "by": "Q77",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-6bf3284c2",
+  "group": "Q77",
+  "result": "fix",
+  "note": "Lean statement exact: IsSepClosure/IsAlgClosure with scalar tower, plain Coalgebra k C, TensorProduct.instCoalgebra scalar extension, hypothesis ∃ basis (ι : Type (max w t)) of IsGroupLikeElem vectors, conclusion Basis indexed by the full group-like subtype with b c = c.val; no finiteness, universes independent, C=0 and closed-field cases covered; only the lean field added, statement verbatim, docstrings/source/blueprint/8 proof steps present, no defs, sorry only, no duplicate found. Sole fault H11: second reading was a worker self-check → fixes/lem-sfb-geometrically-diagonal-coalgebra-separable-basis.report.md (worker report verbatim + independent clause-by-clause reading). No Lean changed, no compile."
+ }
+}

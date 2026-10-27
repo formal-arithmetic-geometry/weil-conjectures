@@ -1,0 +1,126 @@
+{
+ "id": "lem-qcqs-compact-support-normalized-lift",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "def-weil-integral-rational-qbar-compact-support",
+   "place": "Proof of the qcqs proper/open realization, construction and finite comparison",
+   "via": []
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Normalized morphism into recorded qcqs compact support",
+ "statement": "Under the field, coefficient, finite-type and compactification hypotheses of [def-weil-scheme-morphism-properties, def-weil-l-adic-coefficient-extension, def-weil-completed-integral-coefficients, def-weil-derived-complete-integral-detailed, def-weil-integral-derived-reduction, def-weil-compactifications-refinements, def-compact-support-direct-image-detailed], there is a unique natural morphism from the actual completed proper/open compact-support functor on integral constructible inputs to the recorded integral action [def-weil-compact-support-finite-action]. Its positive finite scalar reduction, followed by the recorded chosen projection adjunct, is the actual proper/open coefficient mate, in the canonical finiteReductionIso and finiteImageIso coordinates. No invertibility of this natural morphism is asserted. This is the simultaneous normalization of all objects and all levels.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-tower/sk-prop-scalar-six-compact-support.proof.md",
+  "place": "Proof of sk-prop-scalar-six-compact-support; Bhatt--Scholze 6.7.6, 6.7.7 and 6.1.13; Stacks 0941 and 0F7J",
+  "note": "Agent-stated proper/open realization prerequisite; proof details in module docstring."
+ },
+ "stmt_deps": [
+  "def-weil-scheme-morphism-properties",
+  "def-weil-l-adic-coefficient-extension",
+  "def-weil-completed-integral-coefficients",
+  "def-weil-derived-complete-integral-detailed",
+  "def-weil-integral-derived-reduction",
+  "def-weil-compactifications-refinements",
+  "def-compact-support-direct-image-detailed",
+  "def-weil-compact-support-finite-action",
+  "def-sf-open-reduction-coefficient-mate",
+  "def-pur-finite-compact-support-scalar-data"
+ ],
+ "proof": [
+  {
+   "text": "Take the hom of the normalized natural isomorphism supplied by lem-qcqs-compact-support-normalized-iso-existence. Its projection equations are exactly SfQcqsCompactSupportMorphismSpec. This separates existence and invertibility from the disputed rigidity assertion.",
+   "uses": [
+    "lem-qcqs-compact-support-normalized-iso-existence"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For any other normalized transformation, cancel the invertible recorded finite reduction isomorphism from the two normalization equations. All actual finite scalar reductions agree. Apply natural-transformation reduction rigidity, obtaining equality with tau and hence unique existence.",
+   "uses": [
+    "lem-qcqs-compact-support-reduction-rigidity"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-qcqs-compact-support-normalized-iso-existence",
+  "lem-qcqs-compact-support-reduction-rigidity"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "Q7",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-tower/sk-prop-scalar-six-compact-support.proof.md",
+  "place": "Existence portion of normalized lift; uniqueness remains the previous rigidity argument."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "natural compact support functor integral completed coefficients derived inverse limit reduction tower canonical realization",
+   "results": "['Condensed.profiniteSolid', 'CompactlySupportedContinuousMap.integralLinearMap_apply', \"Profinite.NobelingProof.Linear_CC'₀\", \"Profinite.NobelingProof.Linear_CC'₁\", 'ContinuousMapZero.integral_apply', 'CompactlySupportedContinuousMap.integralLinearMap', 'PadicInt.mahlerEquiv', 'CompactlySupportedContinuousMap.integralPositiveLinearMap_toFun']",
+   "date": "2026-10-24",
+   "verdict": "no matching compact-support theorem"
+  },
+  {
+   "tool": "loogle",
+   "query": "NatIso.ofComponents",
+   "results": "[]",
+   "date": "2026-10-24",
+   "verdict": "no matching compact-support theorem"
+  },
+  {
+   "tool": "grep",
+   "query": "recordedIdentification|compactSupport.*[Rr]ealization",
+   "results": "[]",
+   "date": "2026-10-24",
+   "verdict": "no matching compact-support theorem"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.QcqsCompactSupportRealization",
+  "date": "2026-10-25",
+  "group": "K2"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-def-sf-operations",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.QcqsCompactSupportNormalizedLift",
+  "file": "lean/Sheaf/Paper/QcqsCompactSupportNormalizedLift.lean",
+  "declaration": "WeilConjectures.sfQcqsCompactSupport_normalizedLift_existsUnique",
+  "declarations": [
+   "WeilConjectures.sfQcqsCompactSupport_normalizedLift_existsUnique",
+   "WeilConjectures.SfQcqsCompactSupportMorphismSpec"
+  ],
+  "statement": "theorem sfQcqsCompactSupport_normalizedLift_existsUnique :\n    ∃! τ : (sfIntegralConstructible l E X).ι ⋙ image (completed l E) c ⟶\n      sfCompactSupportFiniteIntegralFunctor l K₀ hl c E ⋙\n        (sfIntegralConstructible l E Y).ι,\n      SfQcqsCompactSupportMorphismSpec l E K₀ hl c τ",
+  "branch": "sheaf-dag",
+  "by": "K2",
+  "date": "2026-10-25"
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K2",
+  "result": "pass",
+  "landing": "20261024T224931-L-1831923",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-15aa3",
+  "group": "Q7",
+  "result": "pass",
+  "landing": "20261027T034729-L-3679934",
+  "kind": "interface",
+  "note": "independent cc review: item statement, parent signature and new node statement against the published clone, DAG nodes and the 3b importer compile (QcqsCompactSupportRealization OK); new module's helpers and IsIso argument against the published QcqsCompactSupportRealization (verbatim apart from let/have)"
+ },
+ "lead_note": "2026-10-25 Q2 maintenance, dependency ownership correction: The statement uses finiteReductionIso and finiteImageIso, already attached to def-pur-finite-compact-support-scalar-data, and reduction, already attached to def-sf-open-reduction-coefficient-mate. It does not use the later coefficient comparison theorem or its shift/coherence conclusions."
+}

@@ -18,137 +18,69 @@
  ],
  "proof": [
   {
-   "text": "An fppf covering $\\{W_a\\to W\\}$ is an fpqc covering in the sense of [def-weil-pbc-fpqc-covering]: flatness is part of [def-pc-fppf-site]. For every affine open $V\\subset W$, restrict the covering to $V$ using the base-change axiom in [def-weil-pbc-sites-and-cohomology]. Apply [lem-pc-fppf-affine-refinement] to obtain finitely many affine opens of the inverse images $W_a\\times_WV$ whose images cover $V$. These are also affine opens of $W_a$, since $W_a\\times_WV$ is the inverse-image open subscheme. They are precisely the finite affine opens required in the fpqc definition. This applies on the big fppf site over any of the bases occurring below.",
+   "text": "Use Mathlib’s subcanonicity of the fppf topology and its induced slice topology: representable functors of points, with the required universe lift, are sheaves. Generate the covering sieve from the fppf precoverage. The fully faithful part of [lem-pe-set-sheaf-cover-descent] says restriction of global sheaves to this covering is fully faithful.",
    "uses": [
-    "def-weil-pbc-fpqc-covering",
     "def-pc-fppf-site",
-    "def-weil-pbc-sites-and-cohomology",
-    "lem-pc-fppf-affine-refinement"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/topologies.tex",
-    "place": "Tag 022C, lemma-zariski-etale-smooth-syntomic-fppf-fpqc, deduced using Tag 021P, lemma-fppf-affine"
-   }
-  },
-  {
-   "text": "For any $B$-scheme $Z$, the presheaf $h_Z^B(W)=\\operatorname{Mor}_B(W,Z)$ is an fppf sheaf. Indeed, step 1 and [lem-weil-pbc-fpqc-representable-descent] glue any compatible family of maps $W_a\\to Z$ uniquely as scheme maps. The glued map is over $B$: its composite to $B$ equals $W\\to B$ because the two maps have equal restrictions, and the uniqueness clause of the same node applies with target $B$. Thus the equalizer sheaf condition in [def-weil-pbc-sites-and-cohomology] holds. In particular this applies to $h_{T_i}$ and to each $h_{X_i}^{T_i}$.",
-   "uses": [
-    "lem-weil-pbc-fpqc-representable-descent",
-    "def-weil-pbc-sites-and-cohomology"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/descent.tex",
-    "place": "Tag 02W5, lemma-descent-data-sheaves"
-   }
-  },
-  {
-   "text": "Let $H$ be a sheaf as in the statement and choose $\\alpha_i:h_{X_i}\\xrightarrow{\\sim}h_{T_i}\\times H$. By [lem-pc-yoneda] the first projection of $\\alpha_i$ is induced by a unique map $p_i:X_i\\to T_i$. For a fixed $a:W\\to T_i$, taking fibres over $a$ gives $\\operatorname{Mor}_{T_i}(W,X_i)\\simeq H(W)$. Conversely, any such isomorphism on the slice gives $\\operatorname{Mor}_T(W,X_i)\\simeq\\coprod_{a\\in\\operatorname{Mor}_T(W,T_i)}H(W)=h_{T_i}(W)\\times H(W)$ by separating maps according to their composite with $p_i$. All maps commute with restriction, since precomposition sends the fibre over $a$ to the fibre over $a\\circ b$. Here slice restriction has the sectionwise meaning of [def-pur-localized-ringed-site].",
-   "uses": [
-    "lem-pc-yoneda",
-    "def-pur-localized-ringed-site"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/descent.tex",
-    "place": "Tag 02W5, lemma-descent-data-sheaves"
-   }
-  },
-  {
-   "text": "Write $T_{ij}=T_i\\times_TT_j$. By the fibre-product universal property [def-pc-fibre-product], both $X_i\\times_TT_j$ and $T_i\\times_TX_j$ represent $h_{T_i}\\times H\\times h_{T_j}$. Apply [lem-pc-representable-unique] to the identification through this same functor to define $\\phi_{ij}$. Its two projections to $T_i,T_j$ are unchanged, so it is over $T_{ij}$ by [lem-pc-yoneda]. On a triple overlap, both $\\phi_{ik}$ and $\\phi_{jk}\\circ\\phi_{ij}$ preserve the three base coordinates and the $H$ coordinate; hence their induced transformations are equal, and Yoneda gives the cocycle. If $v:H\\to K$ is a sheaf map, $\\mathrm{id}_{h_{T_i}}\\times v$ gives a unique map between their representing schemes by Yoneda, over $T_i$. The same coordinate calculation shows compatibility with $\\phi_{ij}$. Yoneda's injectivity shows that these maps preserve identities and composition. This defines the functor $R$ from sheaves to scheme descent data.",
-   "uses": [
-    "def-pc-fibre-product",
-    "lem-pc-representable-unique",
-    "lem-pc-yoneda"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/descent.tex",
-    "place": "Tag 02W5, lemma-descent-data-sheaves"
-   }
-  },
-  {
-   "text": "Conversely, let $D=(X_i,\\phi_{ij})$ be a scheme descent datum. On the slice over $T_i$ put $F_i(W\\to T_i)=\\operatorname{Mor}_{T_i}(W,X_i)$, a sheaf by step 2. For $W\\to T_{ij}$, the map $\\phi_{ij}$ takes a map $W\\to X_i$ together with the prescribed $W\\to T_j$ to a unique map $W\\to X_j$ over $T_j$; its inverse gives the inverse transformation. Thus it defines an isomorphism $\\theta_{ij}:F_i|_{T_{ij}}\\to F_j|_{T_{ij}}$, and the scheme cocycle gives $\\theta_{ik}=\\theta_{jk}\\theta_{ij}$. Apply [lem-pe-set-sheaf-cover-descent] to obtain $H_D$ and $e_i:H_D|_{T_i}\\xrightarrow{\\sim}F_i$ with $e_j=\\theta_{ij}e_i$. The hypotheses of that node hold: use the universe-small big fppf site from [def-weil-size-convention], its fibre products [def-pc-fibre-product], its terminal object $T$, and the given set-indexed covering. Localization over that terminal object is the original site, with the slice restrictions of [def-pur-localized-ringed-site].",
-   "uses": [
-    "lem-pe-set-sheaf-cover-descent",
-    "def-weil-size-convention",
-    "def-pc-fibre-product",
-    "def-pur-localized-ringed-site"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites.tex",
-    "place": "Tags 04TR, lemma-glue-sheaves, and 04TQ, lemma-glue-maps, applied to the big fppf site"
-   }
-  },
-  {
-   "text": "For every $W/T$, the inverse of $e_i$ on the slice fibres gives the natural bijection $\\operatorname{Mor}_T(W,X_i)=\\coprod_{a:W\\to T_i}\\operatorname{Mor}_{T_i}((W,a),X_i)\\xrightarrow{\\sim}\\coprod_{a:W\\to T_i}H_D(W)=h_{T_i}(W)\\times H_D(W)$. Therefore $h_{T_i}\\times H_D$ is represented by $X_i$. On $W\\to T_{ij}$ the equality $e_j=\\theta_{ij}e_i$ says that the resulting comparison sends a map to $X_i$ to exactly its image under $\\phi_{ij}$. By [lem-pc-yoneda], $R(H_D)$ is isomorphic to $D$, including its specified overlap maps, rather than just its local schemes.",
-   "uses": [
-    "lem-pc-yoneda"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/descent.tex",
-    "place": "Tag 02W5, lemma-descent-data-sheaves"
-   }
-  },
-  {
-   "text": "A morphism $f:D\\to D'$ is a family $f_i:X_i\\to X'_i$ over $T_i$ satisfying $\\phi'_{ij}(f_i\\times\\mathrm{id})=(\\mathrm{id}\\times f_j)\\phi_{ij}$. Postcomposition yields $F_i\\to F'_i$ compatible with $\\theta_{ij}$. Conjugating by $e_i,e'_i$ gives maps $H_D|_{T_i}\\to H_{D'}|_{T_i}$ agreeing on double slices. The morphism clause of [lem-pe-set-sheaf-cover-descent] gives a unique global map $G(f):H_D\\to H_{D'}$. Its uniqueness gives $G(\\mathrm{id})=\\mathrm{id}$ and $G(gf)=G(g)G(f)$. Hence $G:D\\mapsto H_D$ is a functor. The local representing isomorphisms of step 6 commute with $f_i$ by their construction, so [lem-pc-yoneda] makes $RG\\cong\\mathrm{id}$ natural.",
-   "uses": [
-    "lem-pe-set-sheaf-cover-descent",
-    "lem-pc-yoneda"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites.tex",
-    "place": "Tag 04TQ, lemma-glue-maps; Tag 04TR, lemma-glue-sheaves"
-   }
-  },
-  {
-   "text": "Starting instead with $H$, the local identifications in step 3 and the gluing isomorphisms for $G(R(H))$ give isomorphisms $G(R(H))|_{T_i}\\to H|_{T_i}$. They agree on double overlaps because both transitions preserve the $H$ coordinate, as in step 4. By the morphism clause of [lem-pe-set-sheaf-cover-descent], these isomorphisms and their inverses glue to global maps. Their composites restrict to identities, so uniqueness in that clause makes them identities globally. The resulting isomorphism $GR(H)\\cong H$ is natural: for a map $H\\to K$ the two maps in the naturality square agree on each slice by the definition of $R$ and $G$, and hence agree globally by uniqueness. Together with step 7, this proves the asserted equivalence of categories and the identification of its local representing objects.",
-   "uses": [
     "lem-pe-set-sheaf-cover-descent"
    ],
    "elementary": false,
    "source": {
-    "document": "literature/stacks-project/sites.tex",
-    "place": "Tag 04TQ, lemma-glue-maps; details omitted at the end of Descent Tag 02W5"
+    "document": "literature/stacks-project/descent.tex",
+    "place": "Tag 02W5, lemma-descent-data-sheaves and following remark; categorical quasi-inverse and effectivity checks."
    }
   },
   {
-   "text": "If $H\\simeq h_X$ for a $T$-scheme $X$, the universal property [def-pc-fibre-product] gives $h_{T_i}\\times H\\simeq h_{T_i\\times_TX}$. By [lem-pc-representable-unique] the representing schemes $X_i$ are isomorphic to $X\\times_TT_i$, and the isomorphisms induce exactly $\\phi_{ij}$ since both comparisons preserve the $X$ coordinate. Thus $R(H)$ is effective. Conversely, suppose a $T$-scheme $X$ and isomorphisms $X\\times_TT_i\\simeq X_i$ realize the datum $R(H)$. They give local isomorphisms $h_X|_{T_i}\\simeq H|_{T_i}$ by step 3. Effectivity says precisely that they agree on double overlaps. Step 2 makes $h_X$ a sheaf; apply [lem-pe-set-sheaf-cover-descent] to glue these local maps and their inverses. Uniqueness makes their composites identities. Hence $h_X\\simeq H$, proving representability. Effectivity here is exactly the covering-family definition in the statement, consistent with [def-pd-descent-datum].",
+   "text": "Take G and its natural descent-datum comparison from [lem-trf-fppf-scheme-data-sheaf-gluing]. The forgetful functor from [def-trf-scheme-cover-descent-datum] is fully faithful by the induced-category definition. Hence G is fully faithful, since its composite with restriction is isomorphic to that forgetful functor. For a locally representable sheaf H, choose its representing object on each slice and package these with the canonical sheaf descent datum as R(H). The comparison for R(H) lifts uniquely through fully faithful restriction to an isomorphism G(R(H)) ≅ H. Thus G is essentially surjective and gives the required equivalence. Its local product representations and natural comparison are exactly those supplied by the gluing theorem.",
    "uses": [
-    "def-pc-fibre-product",
-    "lem-pc-representable-unique",
-    "lem-pe-set-sheaf-cover-descent",
-    "def-pd-descent-datum"
+    "lem-trf-fppf-scheme-data-sheaf-gluing",
+    "def-trf-scheme-cover-descent-datum",
+    "lem-pe-set-sheaf-cover-descent"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/descent.tex",
-    "place": "Tag 02W5, lemma-descent-data-sheaves"
+    "place": "Tag 02W5, lemma-descent-data-sheaves and following remark; categorical quasi-inverse and effectivity checks."
+   }
+  },
+  {
+   "text": "If H is represented by X, the map/pullback adjunction on slices represents its restriction by X ×_T U_i [def-pc-fibre-product]. Uniqueness of representing objects [lem-pc-representable-unique] identifies each specified local scheme with this pullback. Compose this identification with the first projection to obtain q_i and its Cartesian square. Naturality of inverse representing bijections and the given descent-datum comparison show that all transition maps preserve q_i. This is exactly geometric effectivity in [def-trf-scheme-cover-descent-datum].",
+   "uses": [
+    "def-pc-fibre-product",
+    "lem-pc-representable-unique",
+    "def-trf-scheme-cover-descent-datum"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/descent.tex",
+    "place": "Tag 02W5, lemma-descent-data-sheaves and following remark; categorical quasi-inverse and effectivity checks."
+   }
+  },
+  {
+   "text": "Conversely, a geometric realization X and Cartesian maps q_i represent the restriction of h_X on each slice by the specified local schemes. Compose representing isomorphisms to obtain local isomorphisms from the given datum to the restriction of h_X. The transition invariance in [def-trf-scheme-cover-descent-datum] initially tests identity objects; pullback compatibility of descent transitions and naturality extend it to every object of every overlap slice. Thus these local isomorphisms form an isomorphism of descent data. Since h_X is a sheaf, the fully faithful restriction of [lem-pe-set-sheaf-cover-descent] lifts it to an isomorphism H ≅ h_X. Therefore H is representable.",
+   "uses": [
+    "def-pc-fibre-product",
+    "def-trf-scheme-cover-descent-datum",
+    "lem-pe-set-sheaf-cover-descent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/descent.tex",
+    "place": "Tag 02W5, lemma-descent-data-sheaves and following remark; categorical quasi-inverse and effectivity checks."
    }
   }
  ],
  "proof_deps": [
-  "def-weil-pbc-fpqc-covering",
   "def-pc-fppf-site",
-  "def-weil-pbc-sites-and-cohomology",
-  "lem-pc-fppf-affine-refinement",
-  "lem-weil-pbc-fpqc-representable-descent",
-  "lem-pc-yoneda",
-  "def-pur-localized-ringed-site",
-  "def-pc-fibre-product",
-  "lem-pc-representable-unique",
   "lem-pe-set-sheaf-cover-descent",
-  "def-weil-size-convention",
-  "def-pd-descent-datum"
+  "lem-trf-fppf-scheme-data-sheaf-gluing",
+  "def-trf-scheme-cover-descent-datum",
+  "def-pc-fibre-product",
+  "lem-pc-representable-unique"
  ],
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/descent.tex",
-  "place": "Tag 02W5, lemma-descent-data-sheaves; the sheaf gluing construction and omitted quasi-inverse checks are implemented by Sites Tags 04TR and 04TQ."
+  "place": "Tag 02W5, lemma-descent-data-sheaves and following remark; categorical quasi-inverse and effectivity checks."
  },
  "mathlib_searches": [
   {
@@ -369,10 +301,10 @@
   "is": null
  },
  "split_report": {
-  "date": "2026-10-18",
+  "date": "2026-10-22",
   "item": "lem-trf-fppf-sheaf-representability-descent-data",
   "worker": "stage1",
-  "summary": "Read Stacks 02W5 and its sheaf gluing and subcanonical inputs. Expanded both functors, overlap compatibility, their natural quasi-inverse isomorphisms and the representability/effectivity criterion using existing nodes only. No statement correction or new node. Searched the project and Mathlib; no exact closed declaration or one-line Mathlib specialization states this equivalence.",
+  "summary": "Repair of the human re-split return: retains the statement and full topology/effectivity arguments, extracts two comparable statement-only tasks for the forward fully faithful local-representation construction and the inverse sheaf gluing construction with natural datum comparison. The parent is a short assembly. The report retains all original arguments and maps each to its destination.",
   "blueprint": "Preserves the existing ancestry through lem-trf-local-term-locality: the quotient-presentation support in Tag 0265, the first and third representability steps, uses the local schemes and effectivity criterion of Tag 02W5. This split supplies the two functors and the omitted equivalence checks at that support node.",
   "tool_uses": [
    {
@@ -386,16 +318,15 @@
   ]
  },
  "tool_uses": [
-  "lem-pc-fppf-affine-refinement",
   "lem-pe-set-sheaf-cover-descent"
  ],
  "reviewed": {
-  "date": "2026-10-17",
+  "date": "2026-10-22",
   "by": "L",
-  "reviewer": "NT-Codex-Q03-65c9f1ad3",
-  "group": "Q03",
+  "reviewer": "NT-cc-Q159-d3b459a5e",
+  "group": "Q159",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q03-65c9f1ad3 (reviewer sub-agent of L); spot-checked: Reviewed the item, all cited DAG statements, Stacks Tags 02W5, 04TR, 04TQ, 022C, and 021P, plus unit/chapter context. All nine proof steps are mathematically supported; edge cases and hypotheses checked. No new nodes, repairs, SGA citations, route-pivot machinery, or coefficient/base-change issues. Review written to review.md."
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q159-d3b459a5e (reviewer sub-agent of L); spot-checked: Re-split checked against the base item in the live clone (9 steps, 6749 characters); every base step occurs verbatim in the report. Old steps 3, 4 and the local gluing and naturality argument of old step 8 became lem-trf-fppf-local-representations-fully-faithful: R, the slice bijections, the coordinate-preserving phi_ij, R(v) as id x v, and full faithfulness. Full faithfulness holds: compatible f_i give slice maps that glue by the morphism clause of lem-pe-set-sheaf-cover-descent, and Yoneda gives R(v)=f. Old steps 5-7 became lem-trf-fppf-scheme-data-sheaf-gluing: G, e_j=theta_ij e_i with the orientation checked against 04TR and lem-pe-set-sheaf-cover-descent, the morphism naturality, beta with overlap comparison equal to phi_ij, and RG=id. Parent step 3 derives the equivalence formally (fullness lifts eps and its inverse, faithfulness gives the identities and naturality), which I verified. Old steps 1, 2 and 9 are kept in the parent essentially verbatim, step 9 now citing the forward node's slice bijections. The parent proof is 2690 characters. No argument was dropped or blurred; the two new nodes are of comparable size and neither restates the item, the inverse node lacking full faithfulness and both lacking effectivity. The item statement is unchanged and matches Stacks 02W5 (descent.tex) with tau=fppf and plain fibre products over T; there is no coefficient category. Edge cases: empty cover, singleton cover, repeated indices, no separation or finiteness. B1-B9 hold: both nodes unsplit with statements only, LeanSearch recorded unavailable plus Loogle, LeanFinder and grep, created and blueprint fields present, no SGA. A DAG grep on 02W5 and representability keywords found no duplicate (pbc small-etale local-model nodes, galois-flc-representable, etale-representable-descent-glue and def-trf-scheme-cover-descent-datum differ). The tool_uses are the same as the base and accepted. Batch-5 flags: both cited trf nodes are this split's own general fppf descent sub-lemmas, neither given by the trace formula or Poincare duality nor part of their proofs; the item was already in the closure as a representability tool (also cited from sec-purity-real-sheaves). Accepted. Advisory: the fact that h_Z is an fppf sheaf (old steps 1-2) stays in the parent; the proof writer of the gluing node can cite the same nodes. No fixes written."
  },
  "reviewed_lean": {
   "date": "2026-10-17",
@@ -415,5 +346,26 @@
   "date": "2026-10-17",
   "existing": false
  },
- "lean_audit": {}
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "reviewed_proof": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F7",
+  "result": "pass",
+  "landing": "20261024T214349-L-598454",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
 }

@@ -1,0 +1,51 @@
+## Worker report
+
+Files written: `dag/nodes/sec-six-functors/lem-sf-adic-exceptional-compositor-coefficients.json` (statement, split, no Mathlib match). The statement is unchanged. Added nine proof steps, exact dependency union, blueprint reference assessment and logged Mathlib searches. `citations.json` records a verbatim statement quotation for every citation in every step.
+
+## New nodes
+
+None. Zero new nodes and zero new Mathlib leaves. The supporting assertions already exist in the live DAG.
+
+## Attachments
+
+None. Searched the project source by the exact blueprint tag and by exceptional/shriek/composition and adic keywords. Read `WeilConjectures/SixFunctors/ProEtale/FiniteCoefficient/Derived/UpperShriekComposition.lean`: its finite comparison and existential left compositor do not give the prescribed system compositor, integral realization or coefficient equation. `ProEtale/Adic/ExchangeMate.lean` concerns Frobenius pullback/pushforward mates, not this statement. Neither is an attachment.
+
+## WANTED
+
+None. The supplied sources and existing DAG statements suffice for this one-level split.
+
+## Findings and corrections
+
+The imported item had no proof. Its mathematical statement is retained. The previous `blueprint.same_as` entries `det-sfb-coefficient-comparisons-exceptional` and `det-prop-scalar-six-exceptional` were read: neither states the actual-system compositor and its total-limit realization. The former states individual coefficient mates and unspecified composition compatibility; the latter additionally assumes exceptional adjoints on localizing ambient categories. They are related statements, not the same statement in another form, so `same_as` is now empty. Blueprint searches covered exceptional composition, coefficient comparisons exceptional, adjoint mates, exceptional, coefficient-comparisons-exceptional and scalar-six-exceptional. The ancestor is `sk-thm-sf-verdier-exchange`.
+
+No assertion is left unfinished at this split level. The cited nodes remain independent stage-1 obligations where not already finished. No Lean was written, compiled or built; the read clone and launcher were not modified.
+
+## Mathlib searches
+
+Read and reused all five results in this sandbox's `searches.jsonl`. Two LeanFinder phrasings, LeanSearch, Loogle and grep were executed through the prescribed `msearch.py`, with literal queries copied into the item. Results were available. Semantic hits concern ordinary module pullbacks, exact functors on derived categories, local cohomology diagrams and adjunctions; the grep hits concern algebraic adic completion, compacta and perfect closure. They do not state this geometric strict-system/coefficient comparison. The older search records of the original item were preserved. No new node is being declared absent from Mathlib.
+
+## Not duplicates
+
+No new-node pairs. The useful existing statements are `lem-coef-finite-free-compact-composition`, `lem-coef-finite-scalar-mate-realization`, `lem-sf-integral-compactification-comparison-bridge` and `lem-pur-normalized-reconstruction-adjunction-calculus`; these are cited rather than recreated. None alone restates the item: they provide respectively the left system square, scalar mates, the left realization identification and generic adjunction transport.
+
+## Review by Q10
+
+I read the unit and chapter records and the current `main-20261015` Verdier-exchange proof, specifically Step 1 and the final sentence asserting compatibility. The blueprint supplies the route, not the missing system proof. I also read the exceptional-inverse-image definition in that snapshot and the current DAG version, whose system construction and raw rational/common-stage action are more explicit. For the underlying ordinary prototypes I read Stacks `more-etale.tex`, Tag 0F7J, `lemma-shriek-composition`, including the compatible compactification diagram and proper/open interchange; Tag 0GL6, `remark-Rf-lower-shriek-change-of-rings`; and `sites-cohomology.tex`, Tag 07A7, `remark-base-change`, and Tag 0941, `lemma-derived-limit-is-ok`. None of those tags alone asserts the coherent exceptional-system result, and the proof is honestly marked agent-written. No forbidden SGA route is used. There are no new-node source statements to review.
+
+For Step 1 I opened the statements of the reconstruction-adjunction calculus, cartesian-section adjoint mates, integral compactification realization and integral exceptional adjoint. The first really supplies an adjoint equivalence and actual unit/counit; the second supplies the system adjunction and finite counits. The integral exceptional theorem states a uniform Tor interval and finite reduction identification, so its use to verify that the restricted adjunctions stay in the common-bound domain is legitimate. Schemes here are separated and finite type, as that theorem requires. Empty schemes use nonnegative dimension bound zero.
+
+For Step 2 the realization theorem states actual intrinsic semilinear proper/open maps, their pasting and refinement identities, and nested composition compatibility. I use that construction for the system compositor, rather than assuming that evaluated arrows lift. The finite composition theorem really gives a canonical invertible map on bounded-below etale-origin objects. The normalized inputs have the stipulated compatible witnesses. The evaluation-calculus statement says explicitly that evaluations detect isomorphisms, sufficient for invertibility of an already constructed map.
+
+For Step 3 the mate-pasting statement's clause (2) gives exactly the composite counit, and the conjugate definition states bijectivity and preservation of inverse isomorphisms. The cartesian-section statement explicitly says that actual-system geometric composition mates and their evaluations are respected. Thus this step does not use the proof of a cited node to obtain missing data.
+
+For Step 4 I checked the actual formula in reconstruction-adjunction calculus for transport of a transpose and for a nested composite. The realization theorem alone promises nested compatibility; the separate compactification comparison bridge explicitly compares the specified constant-tower normalization with the semilinear formula inserting the reconstruction counit. This prevents a hidden choice of the integral left compositor. The integral exceptional theorem identifies the right operation and its counit. Applying the transported adjunction bijection therefore identifies the realized mate with exactly the prescribed integral mate.
+
+Step 5 is the explicit algebraic argument. I checked the domains: both arrows start at $C_XG_fG_gL$ and end at $G'_xC_ZL$; the common transpose starts at $F'_xC_XG_fG_gL$ and ends at $C_ZL$. The inverse of the left square is used in the order $C(\alpha^{-1})q_x^{-1}=q_{g,f}^{-1}\alpha'^{-1}$. The coefficient-adjunction statement supplies the counit equation for each $b_h$, not merely invertibility. Mate-pasting (2) gives the composite coefficient mate; the adjunct-counit statement supplies uniqueness of the transpose. This calculation works in ordinary system categories and does not infer system equality from finite evaluations.
+
+For Step 6 the evaluation identifications are counit-preserving by the cartesian-section node, and reduction is related to the actual reconstruction counit by the reconstruction theorem. Naturality of this one system counit gives the equality before total limit. This is an actual map identity, rather than a claim of faithfulness of the family of evaluations.
+
+For Step 7 I read the entire statements of finite-free compact composition, finite scalar mate realization and completed scalar comparison. The first explicitly asserts its equation before total limit; the second explicitly constructs coherent transposes and identifies their realized integral counit transpose. The third identifies ordinary finite-free scalar tensor with the specified completed scalar functor naturally on arrows. The coefficient-adjunction theorem supplies $(\varpi^n)=(\varpi'^{en})$, including ramified extensions and positive further quotients. The hypotheses require a finite extension, not an unramified one. A fixed basis is reduced throughout. No quotient-flatness premise is introduced.
+
+For Steps 8 and 9 I read both coefficient category definitions, the current exceptional operation definition, the rational-transport theorem and the full coefficient-coherence statement. In particular I checked its added rational and common-stage MORPHISM normalizations: they state how the actual left functor acts on localized arrows and on common-field representatives. The exceptional definition independently specifies its map action. Hence transport concerns the published maps, not merely objects. Rationalization keeps the same objects; arbitrary localized arrows are linear combinations of integral representatives. Common-stage arrows and equalities are represented after a common finite extension by the category definition. These facts justify the written naturality and representative-independence arguments, with no faithful-localization assumption and no field-to-finite reduction functor.
+
+I checked B1-B10: no new unsplit proof sketches or data nodes, no new duplicate or elementary node, genuine TeX, literal executed searches, and an honest blueprint assessment. C1-C8: every substantive input is cited, each cited statement was opened, exact quotes are in `citations.json`, the dependency union is exact, and the candidate dependency closures have no path back to this item. Off-unit statements are declared as generic tools in `split_report.tool_uses`, for maintainer adjudication, never in the maintainer-owned `tool_uses`. D1-D5: the proof carries the conjugation and common-transpose argument; no new node takes over a clause of the item. E1-E7: checked separatedness/finite type, bounded constructible etale origin, uniform Tor bounds, nonflat quotients, ramification, actual nested maps and field morphism action. Identity morphisms, the identity field extension, empty schemes and $n=1$ reduce to the corresponding unit/counit or zero-category formulas. All nine steps are below 2000 characters; none hides a new comparison lemma beyond the cited statement. The corrected issue was the misleading `same_as` metadata, not the mathematical statement.

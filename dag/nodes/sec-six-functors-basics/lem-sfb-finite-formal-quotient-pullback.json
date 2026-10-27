@@ -1,0 +1,261 @@
+{
+ "id": "lem-sfb-finite-formal-quotient-pullback",
+ "kind": "statement",
+ "title": "Finite representable pullbacks of a formal quotient chart",
+ "statement": "Let $\\Omega$ be an algebraically closed field [def-weil-field, def-weil-algebraic-closure], $\\mathcal X$ a locally Noetherian Deligne--Mumford stack over $\\Omega$, and $x\\in\\mathcal X(\\Omega)$. Use stacks and 2-fibre products as in [def-sfb-stable-pointed-moduli-groupoids]. Write $\\mathcal G_x$ for the residual gerbe, the full substack of objects locally isomorphic to $x$. Let $H$ be a finite group and $(R,\\mathfrak m)$ a complete Noetherian local $\\Omega$-algebra with residue field $\\Omega$ and a continuous $\\Omega$-linear action of $H$. Suppose $f:\\operatorname{Spec}R\\to\\mathcal X$ restricts on the closed point to $x$ and induces a specified equivalence $\\widehat{\\mathcal X}_{\\mathcal G_x}\\simeq[\\operatorname{Spf}R/H]$ under which its formal restriction is the canonical atlas. For every morphism of stacks $p:\\mathcal Y\\to\\mathcal X$ representable by finite schemes, meaning that for every scheme $T\\to\\mathcal X$ its 2-pullback is a scheme finite over $T$ [def-weil-finite-integral-morphism], put $\\operatorname{Spec}C=\\mathcal Y\\times_{\\mathcal X}\\operatorname{Spec}R$. Then $C$ is a finite $R$-algebra, complete for $\\mathfrak m C$, and the descent arrows on the formal chart induce a continuous semilinear $H$-action on $C$ extending that on $R$. There is a canonical equivalence over $[\\operatorname{Spf}R/H]$,\n$$\\widehat{\\mathcal Y}_{p^{-1}\\mathcal G_x}\\simeq[\\operatorname{Spf}C/H].$$\nFormal completion along a closed substack means the compatible system of its infinitesimal neighbourhoods, and $\\operatorname{Spf}C$ uses $\\operatorname{Spec}(C/\\mathfrak m^n C)$. Quotients mean groupoids of $H$-torsors with equivariant maps. No normality, dense open or normalization hypothesis is imposed on $\\mathcal Y$. Noetherian, completion and finite algebra use [def-weil-pbc-noetherian-ring], [def-weil-pbc-adic-completion] and [def-weil-finitely-generated-module]. Affine spectra and their contravariant maps use [def-weil-affine-spectrum].",
+ "source": {
+  "document": "literature/stacks-project/spaces-groupoids.tex",
+  "place": "Tags 04M9 (lemma-quotient-stack-2-cartesian) and 044W (lemma-quotient-stack-isom), applied to each infinitesimal neighbourhood; algebra.tex Tags 00MA (lemma-completion-tensor), 07N9 (lemma-completion-finite-extension). Agent-formulated formal finite-pullback consequence; Pikaart--de Jong Proposition 2.3.6, printed p.11, explicitly invokes this formal argument (local PDF WANTED)."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-weil-algebraic-closure",
+  "def-sfb-stable-pointed-moduli-groupoids",
+  "def-weil-finite-integral-morphism",
+  "def-weil-pbc-noetherian-ring",
+  "def-weil-pbc-adic-completion",
+  "def-weil-finitely-generated-module",
+  "def-weil-affine-spectrum",
+  "def-sfb-formal-moduli-quotient",
+  "def-sfb-finite-stack-scheme-tests",
+  "def-sfb-moduli-chart-normalization",
+  "def-sfb-affine-action-quotient-stack"
+ ],
+ "proof": [
+  {
+   "text": "Apply the scheme-test definition of $p$ to $\\operatorname{Spec}R$. Its pullback is an affine scheme $\\operatorname{Spec}C$ finite over $\\operatorname{Spec}R$, so $C$ is a finite $R$-module by [def-weil-finite-integral-morphism]. Apply [lem-weil-pbc-finite-module-complete-over-complete-noetherian] with $J=\\mathfrak m$ and $N=C$: $R$ is Noetherian and $\\mathfrak m$-adically complete by hypothesis. Thus the canonical map $C\\to\\varprojlim_{n\\geq1}C/\\mathfrak m^nC$ is bijective. It is a ring homomorphism because operations on the limit are componentwise; consequently it is a ring isomorphism.",
+   "uses": [
+    "def-weil-finite-integral-morphism",
+    "lem-weil-pbc-finite-module-complete-over-complete-noetherian"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00MA (lemma-completion-tensor), part (3); completeness specialization."
+   }
+  },
+  {
+   "text": "Write $R_n=R/\\mathfrak m^n$, $C_n=C/\\mathfrak m^nC$, $U_n=\\operatorname{Spec}R_n$, and let $\\mathcal X_n$ be the $n$th neighbourhood of the gerbe. The specified formal chart identifies $\\mathcal X_n$ with $[U_n/H]$ and its atlas with the restriction of $f$. Put $\\mathcal Y_n=\\mathcal Y\\times_{\\mathcal X}\\mathcal X_n$. Associating the triples in a 2-fibre product gives\n$$\\mathcal Y_n\\times_{\\mathcal X_n}U_n\\simeq\\mathcal Y\\times_{\\mathcal X}U_n\\simeq\\operatorname{Spec}C_n=:V_n.$$\nFor the last identification, a homomorphism $C\\to A$ whose restricted map $R\\to A$ kills $\\mathfrak m^n$ factors uniquely through $C_n$; this proves the affine pullback assertion directly. All these identifications commute with reduction from $n+1$ to $n$.",
+   "uses": [
+    "def-sfb-stable-pointed-moduli-groupoids",
+    "def-weil-affine-spectrum"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-groupoids.tex",
+    "place": "Tag 04M9 (lemma-quotient-stack-2-cartesian), applied to the specified chart; affine quotient universal property."
+   }
+  },
+  {
+   "text": "For a test scheme $T$, represent a point of $V_n$ by $(u,y,\\beta)$, with $u:T\\to U_n$, $y\\in\\mathcal Y_n(T)$ and $\\beta:p(y)\\simeq a_n(u)$. An arrow from $u$ to $hu$ in $[U_n/H]$ is the corresponding equivariant isomorphism of trivial torsors; its composites are given by multiplication in $H$. Compose $\\beta$ with that arrow, leaving $y$ fixed. This defines an automorphism $\\widetilde h_n$ of $V_n$ covering $h$ on $U_n$. Although triples are taken up to isomorphism, $V_n$ is a scheme, so natural isomorphisms give equal maps on its represented sheaf. Hence $\\widetilde g_n\\widetilde h_n=\\widetilde{gh}_n$ and $\\widetilde1_n=1$. These maps commute with reduction, since composition of the same arrows commutes with restriction.",
+   "uses": [
+    "def-sfb-stable-pointed-moduli-groupoids",
+    "def-weil-affine-spectrum"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-groupoids.tex",
+    "place": "Tag 04M9, action-groupoid case: compute arrows between trivial torsors."
+   }
+  },
+  {
+   "text": "Use contravariance of affine spectra to put $\\rho_{h,n}=(\\widetilde {h^{-1}}_n)^*:C_n\\to C_n$. These are compatible ring automorphisms, satisfy $\\rho_{gh,n}=\\rho_{g,n}\\rho_{h,n}$, and are semilinear for the given ring action on $R_n$ (the scheme action associated to a ring action uses inverse pullback). Via the canonical ring isomorphism of step 1 define\n$$\\rho_h((c_n)_n)=(\\rho_{h,n}(c_n))_n.$$\nThe identities $\\rho_{gh}=\\rho_g\\rho_h$, $\\rho_1=1$ and $\\rho_h(rc)=h(r)\\rho_h(c)$ hold in every coordinate, hence in $C$. Each $\\rho_h$ preserves $\\mathfrak m^nC$: its quotient at level $n$ is $\\rho_{h,n}$. It is therefore continuous for the $\\mathfrak m C$-adic topology, as is its inverse $\\rho_{h^{-1}}$. This is the required continuous semilinear action extending the action on $R$.",
+   "uses": [
+    "def-weil-affine-spectrum",
+    "lem-weil-pbc-finite-module-complete-over-complete-noetherian"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00MA, part (3), together with componentwise operations on the completion."
+   }
+  },
+  {
+   "text": "Check the presentation criterion [lem-sfb-action-groupoid-quotient-criterion] over $S=\\operatorname{Spec}\\Omega$ for $b:V_n\\to\\mathcal Y_n$, $(u,y,\\beta)\\mapsto y$. Every $y\\in\\mathcal Y_n(T)$ lifts etale locally to $V_n$: under $\\mathcal X_n\\simeq[U_n/H]$, $p(y)$ is an $H_T$-torsor $P\\to T$ with an equivariant map $e:P\\to U_n$, and $P$ is trivial on a jointly surjective etale family $T_i\\to T$ (torsors as in [lem-sfb-action-groupoid-quotient-criterion]). The identity section of $P|_{T_i}\\simeq H_{T_i}$ composed with $e$ gives $u_i:T_i\\to U_n$ and $\\beta_i:p(y)|_{T_i}\\simeq a_n(u_i)$; then $(u_i,y|_{T_i},\\beta_i)\\in V_n(T_i)$ lifts $y|_{T_i}$. The structure isomorphisms are $\\alpha_{h,v}=1_y$, since $\\widetilde h_n$ leaves $y$ fixed; their cocycle identities are trivial. Its arrow space is\n$$V_n\\times_{\\mathcal Y_n}V_n\\simeq H_\\Omega\\times_\\Omega V_n$$\non $T$-valued points. For $v=(u,y,\\beta)$ and $v'=(u',y',\\beta')$ an arrow over $\\mathcal Y_n$ is $\\gamma:y\\simeq y'$; put $\\alpha=\\beta'p(\\gamma)\\beta^{-1}:a_n(u)\\simeq a_n(u')$, so $\\alpha\\beta=\\beta'p(\\gamma)$. An equivariant isomorphism of the trivial left torsors is right translation by $h^{-1}$ for a unique locally constant $h:T\\to H$, with $u'=hu$. The displayed equation then identifies $v'$ with $\\widetilde h_n(v)$ via $\\gamma$. Conversely $(h,v)$ gives $(v,\\widetilde h_n(v),1_y)$. These constructions are inverse, functorial in $T$, and identify composition with multiplication, including when points have nontrivial stabilizers. The criterion gives the equivalence $F_n:[V_n/H]\\to\\mathcal Y_n$ whose atlas map is $b$ and whose arrows are the ones just computed.",
+   "uses": [
+    "lem-sfb-action-groupoid-quotient-criterion",
+    "def-sfb-stable-pointed-moduli-groupoids"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebraic.tex",
+    "place": "Tags 04T4 and 04T5, action-groupoid criterion; examples-stacks.tex Tag 04WM."
+   }
+  },
+  {
+   "text": "The equivalences in step 5 use exactly the object map $V_n\\to\\mathcal Y_n$ and the arrows computed in step 3. Restricting these maps to level $n$ from level $n+1$ gives those same maps at level $n$. The uniqueness clause of [lem-sfb-action-groupoid-quotient-criterion] supplies the compatible 2-isomorphisms of the equivalences; their cocycle holds by the same uniqueness. The level-$n$ identification of step 5 lies over $[U_n/H]\\simeq\\mathcal X_n$: on the atlas the two composites $V_n\\to\\mathcal X_n$ send $v=(u,y,\\beta)$ to $p(y)$ and to $a_n(u)$, and $\\beta$ is an isomorphism between them compatible with the arrows, because $\\widetilde h_n$ composes $\\beta$ with the arrow $u\\to hu$ (the equation $\\alpha\\beta=\\beta'p(\\gamma)$ of step 5). Since every object of $[V_n/H]$ comes etale locally from $V_n$ and isomorphisms in $\\mathcal X_n$ form etale sheaves [def-sfb-stable-pointed-moduli-groupoids], these $\\beta$ glue uniquely to a 2-isomorphism of the two composites $[V_n/H]\\to\\mathcal X_n$; it is compatible with reduction in $n$ because the triple components $\\beta$ restrict unchanged, so the 2-isomorphisms of the equivalences also respect the maps to $[U_n/H]$. The ideal defining $\\mathcal Y_n$ is the extension to $\\mathcal Y$ of the $n$th power of the gerbe ideal, which equals the $n$th power of its extended ideal: both are generated by products of $n$ local generators. Thus $(\\mathcal Y_n)_n$ is precisely the completion along $p^{-1}\\mathcal G_x$. On its atlas the ideals are $\\mathfrak m^nC=(\\mathfrak m C)^n$, so $(V_n)_n$ is $\\operatorname{Spf}C$. Taking the compatible system gives the asserted canonical equivalence over $[\\operatorname{Spf}R/H]$.",
+   "uses": [
+    "lem-sfb-action-groupoid-quotient-criterion",
+    "def-weil-pbc-adic-completion",
+    "def-sfb-stable-pointed-moduli-groupoids"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebraic.tex",
+    "place": "Tag 04T5, canonical presentation maps; passage to the compatible system of thickenings."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-finite-integral-morphism",
+  "lem-weil-pbc-finite-module-complete-over-complete-noetherian",
+  "def-sfb-stable-pointed-moduli-groupoids",
+  "def-weil-affine-spectrum",
+  "lem-sfb-action-groupoid-quotient-criterion",
+  "def-weil-pbc-adic-completion"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/algebraic.tex",
+  "place": "Levelwise action-groupoid proof from Tags 04T4, 04T5 and 04WM and completeness from algebra.tex Tag 00MA; supplies the formal finite-pullback argument mentioned in the item source."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Representable finite morphisms over a formal quotient by a finite group are equivariant finite algebras and their relative spectra are quotient stacks",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"CategoryTheory.PreGaloisCategory.FiberFunctor.preservesQuotientsByFiniteGroups\", \"module\": \"Mathlib/CategoryTheory/Galois/Basic\", \"type\": \"∀ {C : Type u₁} {inst : CategoryTheory.Category.{u₂, u₁} C} {inst_1 : CategoryTheory.PreGaloisCategory C}\\n  {F : CategoryTheory.Functor C FintypeCat} [self : CategoryTheory.PreGaloisCategory.FiberFunctor F] (G : Type u₂)\\n  [inst_2 : Group G] [Finite G], CategoryTheory.Limits.PreservesColimitsOfShape\", \"doc\": \"For any finite group $G$, a fiber functor $F$ from a pre-Galois category $\\\\mathcal{C}$ to the category of finite types preserves colimits of shape $\\\\mathcal{J} = \\\\text{SingleObj}(G)$, where $\\\\mathcal{\"}\n  {\"name\": \"CategoryTheory.PreGaloisCategory.hasQuotientsByFiniteGroups\", \"module\": \"Mathlib/CategoryTheory/Galois/Basic\", \"type\": \"∀ {C : Type u₁} {inst : CategoryTheory.Category.{u₂, u₁} C} [self : CategoryTheory.PreGaloisCategory C] (G : Type u₂)\\n  [inst_1 : Group G] [Finite G], CategoryTheory.Limits.HasColimitsOfShape (CategoryTheory.SingleObj G) C\", \"doc\": \"In a pre-Galois category $\\\\mathcal{C}$, for every finite group $G$, the category $\\\\mathcal{C}$ admits all colimits of diagrams shaped like the single-object category associated to $G$. This means that\"}\n  {\"name\": \"CategoryTheory.FintypeCat.instPreGaloisCategoryActionFintypeCat\", \"module\": \"Mathlib/CategoryTheory/Galois/Examples\", \"type\": \"∀ (G : Type u) [inst : Group G], CategoryTheory.PreGaloisCategory (Action FintypeCat G)\", \"doc\": \"The category of actions of a group $ G $ on the category of finite types is equipped with a pre-Galois category structure. This means that for any group $ G $, the category whose objects are $ G $-act\"}\n  {\"name\": \"AlgebraicGeometry.instFiniteCarrierCarrierCommRingCatFiberOfIsFinite\", \"module\": \"Mathlib/AlgebraicGeometry/Fiber\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) (y : ↥Y) [AlgebraicGeometry.IsFinite f],\\n  Finite ↥(AlgebraicGeometry.Scheme.Hom.fiber f y)\", \"doc\": \"Given a finite morphism of schemes $f: X \\\\to Y$, the fiber over any point $y \\\\in Y$ has a finite underlying set of points.\"}\n  {\"name\": \"CategoryTheory.FintypeCat.instFiberFunctorActionFintypeCatForget\", \"module\": \"Mathlib/CategoryTheory/Galois/Examples\", \"type\": \"∀ (G : Type u) [inst : Group G], CategoryTheory.PreGaloisCategory.FiberFunctor (Action.forget FintypeCat G)\", \"doc\": \"The forgetful functor from the category of $G$-actions on finite types to the category of finite types is a fiber functor. This means it satisfies the defining properties of a fiber functor: it is fai\"}\n  {\"name\": \"AlgebraicGeometry.IsFinite.instHasAffinePropertyAndIsAffineFiniteCarrierObjOppositeOpensCarrierCarrierCommRingCatPresheafOpOpensTopHomAppTop\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Finite\", \"type\": \"AlgebraicGeometry.HasAffineProperty @AlgebraicGeometry.IsFinite fun X x f x_1 =>\\n  AlgebraicGeometry.IsAffine X ∧ (CommRingCat.Hom.hom (AlgebraicGeometry.Scheme.Hom.appTop f)).Finite\", \"doc\": \"A morphism of schemes with affine target is finite if and only if the source is affine and the induced ring homomorphism on global sections is finite (i.e., the target ring is finitely generated as a \"}\n  {\"name\": \"AlgebraicGeometry.AffineSpace.instLocallyOfFinitePresentationOverSchemeInferInstanceOverClassOfFinite\", \"module\": \"Mathlib/AlgebraicGeometry/AffineSpace\", \"type\": \"∀ {n : Type v} (S : AlgebraicGeometry.Scheme) [Finite n],\\n  AlgebraicGeometry.LocallyOfFinitePresentation (AlgebraicGeometry.AffineSpace n S ↘ S)\", \"doc\": \"If $ n $ is a finite type, then the affine space $ \\\\mathbb{A}^n_S $ over a scheme $ S $ is locally of finite presentation as a morphism over $ S $. This means that for every point in $ \\\\mathbb{A}^n_S \"}\n  {\"name\": \"FDRep.instHasFiniteLimits\", \"module\": \"Mathlib/RepresentationTheory/FDRep\", \"type\": \"∀ {k G : Type u} [inst : Field k] [inst_1 : Monoid G], CategoryTheory.Limits.HasFiniteLimits (FDRep k G)\", \"doc\": \"For any field $ k $ and monoid $ G $, the category $ \\\\text{FDRep}_k(G) $ of finitely generated left $ k $-modules equipped with a monoid action of $ G $ has all finite limits.\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern schemes, abstract descent, unrelated group quotients or completion ingredients; none states this assertion or a one-line generalization",
+   "digest": "677fc7d98df5657e"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"QuotientStack\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern schemes, abstract descent, unrelated group quotients or completion ingredients; none states this assertion or a one-line generalization",
+   "digest": "4f53cda18c2baa0c"
+  },
+  {
+   "tool": "grep",
+   "query": "[Qq]uotientStack|formal.*[Qq]uotient|[Ss]pf",
+   "results": "[grep] OK 25 hit(s)\n  {\"file\": \"Mathlib/Order/PFilter.lean\", \"line\": \"20\", \"text\": \"- `Order.IsPFilter P`: a predicate for when a `Set P` is a filter.\"}\n  {\"file\": \"Mathlib/Order/PFilter.lean\", \"line\": \"51\", \"text\": \"def IsPFilter [Preorder P] (F : Set P) : Prop :=\"}\n  {\"file\": \"Mathlib/Order/PFilter.lean\", \"line\": \"54\", \"text\": \"theorem IsPFilter.of_def [Preorder P] {F : Set P} (nonempty : F.Nonempty)\"}\n  {\"file\": \"Mathlib/Order/PFilter.lean\", \"line\": \"56\", \"text\": \"    IsPFilter F :=\"}\n  {\"file\": \"Mathlib/Order/PFilter.lean\", \"line\": \"60\", \"text\": \"`Order.IsPFilter`. -/\"}\n  {\"file\": \"Mathlib/NumberTheory/ModularForms/SlashInvariantForms.lean\", \"line\": \"15\", \"text\": \"defining `ModularForm` and `CuspForm`. We prove several instances for such spaces, in particular\"}\n  {\"file\": \"Mathlib/NumberTheory/ModularForms/LevelOne/Basic.lean\", \"line\": \"74\", \"text\": \"private theorem cuspFunction_eqOn_const_of_nonpos_wt (hk : k ≤ 0) (f : F) :\"}\n  {\"file\": \"Mathlib/NumberTheory/ModularForms/LevelOne/Basic.lean\", \"line\": \"75\", \"text\": \"    Set.EqOn (cuspFunction 1 f) (const ℂ (cuspFunction 1 f 0)) (Metric.ball 0 1) := by\"}\n  {\"file\": \"Mathlib/NumberTheory/ModularForms/LevelOne/Basic.lean\", \"line\": \"77\", \"text\": \"  · exact (ModularFormClass.differentiableAt_cuspFunction f one_pos one_mem_strictPeriods_SL\"}\n  {\"file\": \"Mathlib/NumberTheory/ModularForms/LevelOne/Basic.lean\", \"line\": \"86\", \"text\": \"        by simpa [← SlashInvariantFormClass.eq_cuspFunction f _ one_mem_strictPeriods_SL\"}\n  {\"file\": \"Mathlib/NumberTheory/ModularForms/LevelOne/Basic.lean\", \"line\": \"90\", \"text\": \"    f = Function.const ℍ (cuspFunction 1 f 0) := by\"}\n  {\"file\": \"Mathlib/NumberTheory/ModularForms/LevelOne/DimensionFormula.lean\", \"line\": \"8\", \"text\": \"public import Mathlib.NumberTheory.ModularForms.CuspFormSubmodule\"}\n  {\"file\": \"Mathlib/NumberTheory/ModularForms/LevelOne/DimensionFormula.lean\", \"line\": \"21\", \"text\": \"* `CuspForm.discriminantEquiv`: `CuspForm 𝒮ℒ k ≃ₗ[ℂ] ModularForm 𝒮ℒ (k - 12)`.\"}\n  {\"file\": \"Mathlib/NumberTheory/ModularForms/LevelOne/DimensionFormula.lean\", \"line\": \"22\", \"text\": \"* `ModularForm.rank_eq_one_add_rank_cuspForm`: `rank M_k = 1 + rank S_k` for even `k ≥ 3`.\"}\n  {\"file\": \"Mathlib/NumberTheory/ModularForms/LevelOne/DimensionFormula.lean\", \"line\": \"34\", \"text\": \"  CuspFormClass MatrixGroups OnePoint Filter EisensteinSeries Asymptotics\"}\n  {\"file\": \"Mathlib/NumberTheory/ModularForms/LevelOne/DimensionFormula.lean\", \"line\": \"44\", \"text\": \"namespace CuspForm\"}\n  {\"file\": \"Mathlib/NumberTheory/ModularForms/LevelOne/GradedRing.lean\", \"line\": \"46\", \"text\": \"private lemma E₄CubeSubE₆SqForm_isCuspForm : IsCuspForm E₄CubeSubE₆SqForm := by\"}\n  {\"file\": \"Mathlib/NumberTheory/ModularForms/LevelOne/GradedRing.lean\", \"line\": \"47\", \"text\": \"  simp [isCuspForm_iff_coeffZero_eq_zero, E₄CubeSubE₆SqForm_qExpansion_eq,\"}\n  {\"file\": \"Mathlib/NumberTheory/ModularForms/LevelOne/GradedRing.lean\", \"line\": \"61\", \"text\": \"  obtain ⟨g, hg⟩ := E₄CubeSubE₆SqForm_isCuspForm\"}\n  {\"file\": \"Mathlib/NumberTheory/ModularForms/LevelOne/GradedRing.lean\", \"line\": \"62\", \"text\": \"  obtain ⟨c, hc⟩ := CuspForm.exists_smul_discriminant_of_weight_eq_twelve g\"}\n  {\"file\": \"Mathlib/NumberTheory/ModularForms/LevelOne/GradedRing.lean\", \"line\": \"65\", \"text\": \"    have hcΔ : (c • CuspForm.discriminant : ℍ → ℂ) = g := congrArg DFunLike.coe hc\"}\n  {\"file\": \"Mathlib/NumberTheory/ModularForms/CuspFormSubmodule.lean\", \"line\": \"13\", \"text\": \"# Cusp form submodule and IsCuspForm predicate\"}\n  {\"file\": \"Mathlib/NumberTheory/ModularForms/CuspFormSubmodule.lean\", \"line\": \"16\", \"text\": \"submodule of modular forms, and the `IsCuspForm` predicate. It also provides a direct constructor\"}\n  {\"file\": \"Mathlib/NumberTheory/ModularForms/CuspFormSubmodule.lean\", \"line\": \"17\", \"text\": \"`ModularForm.toCuspForm` for building cusp forms from modular forms with vanishing constant\"}\n  {\"file\": \"Mathlib/NumberTheory/ModularForms/CuspFormSubmodule.lean\", \"line\": \"22\", \"text\": \"* `CuspForm.toModularFormₗ`: the inclusion `CuspForm Γ k →ₗ[ℂ] ModularForm Γ k`.\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern schemes, abstract descent, unrelated group quotients or completion ingredients; none states this assertion or a one-line generalization",
+   "digest": "c6eac4af943316b8"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Completion of a finite representable morphism to a formal quotient stack is the quotient of the finite algebra on the formal atlas",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.IsFinite.recOn\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Finite\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} →\\n  {f : X ⟶ Y} →\\n    {motive : AlgebraicGeometry.IsFinite f → Sort u} →\\n      (t : AlgebraicGeometry.IsFinite f) →\\n        ([toIsAffineHom : AlgebraicGeometry.IsAffineHom f] →\\n            (finite_app :\\n                ∀ (U : Y.Opens),\\n                  AlgebraicGeom\", \"doc\": \"A morphism $ f : X \\\\to Y $ of schemes is finite if it is affine and for every affine open subset $ U \\\\subseteq Y $, the induced ring homomorphism $ \\\\Gamma(Y, U) \\\\to \\\\Gamma(X, f^{-1}(U)) $ is finite, m\"}\n  {\"name\": \"Module.Finite.reprₛ\", \"module\": \"Mathlib.RingTheory.Finiteness.Cardinality\", \"type\": \": Type u\", \"doc\": \"The quotient of $ R^n $ by the kernel congruence relation associated with the surjective $ R $-linear map $ R^n \\to M $, representing the finitely generated module $ M $ as this quotient.\"}\n  {\"name\": \"AlgebraicGeometry.IsFinite.casesOn\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Finite\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} →\\n  {f : X ⟶ Y} →\\n    {motive : AlgebraicGeometry.IsFinite f → Sort u} →\\n      (t : AlgebraicGeometry.IsFinite f) →\\n        ([toIsAffineHom : AlgebraicGeometry.IsAffineHom f] →\\n            (finite_app :\\n                ∀ (U : Y.Opens),\\n                  AlgebraicGeom\", \"doc\": \"Let $f: X \\\\to Y$ be a morphism of schemes. This is the elimination principle for the property of $f$ being a finite morphism. It states that to prove a property of $f$ from the assumption that $f$ is \"}\n  {\"name\": \"Algebra.QuasiFinite.casesOn\", \"module\": \"Mathlib.RingTheory.QuasiFinite.Basic\", \"type\": \"{R : Type u_1} →\\n  {S : Type u_2} →\\n    [inst : CommRing R] →\\n      [inst_1 : CommRing S] →\\n        [inst_2 : Algebra R S] →\\n          {motive : Algebra.QuasiFinite R S → Sort u} →\\n            (t : Algebra.QuasiFinite R S) →\\n              ((finite_fiber : ∀ (P : Ideal R) [inst_3 : P.IsPrime], Module\", \"doc\": \"A quasi-finite algebra over a commutative ring $ R $ is a commutative ring $ S $ equipped with an $ R $-algebra structure such that for every prime ideal $ P $ in $ R $, the tensor product of the resi\"}\n  {\"name\": \"RingHom.FinitePresentation\", \"module\": \"Mathlib.RingTheory.FinitePresentation\", \"type\": \"(f : A →+* B) : Prop\", \"doc\": \"Given a ring homomorphism $ f : A \\\\to B $ between commutative semirings, this proposition asserts that the algebra structure on $ B $ over $ A $ induced by $ f $ is finitely presented. An algebra is f\"}\n  {\"name\": \"AlgHom.FinitePresentation\", \"module\": \"Mathlib.RingTheory.FinitePresentation\", \"type\": \"(f : A →ₐ[R] B) : Prop\", \"doc\": \"The proposition asserts that the algebra structure on $ B $ over $ A $ induced by the algebra homomorphism $ f : A →ₐ[R] B $ is finitely presented. An algebra is finitely presented over $ A $ if it is\"}\n  {\"name\": \"algebra_finiteType_of_liesOver\", \"module\": \"Mathlib.RingTheory.Finiteness.Quotient\", \"type\": \"[Algebra.FiniteType A B] : Algebra.FiniteType (A ⧸ p) (B ⧸ P)\", \"doc\": \"If $ B $ is a finitely generated $ A $-algebra and $ P $ is an ideal in $ B $ lying over an ideal $ p $ in $ A $, then the quotient ring $ B/P $ is a finitely generated algebra over the quotient ring \"}\n  {\"name\": \"AlgebraicGeometry.IsFinite.toIsAffineHom\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Finite\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y} [self : AlgebraicGeometry.IsFinite f], AlgebraicGeometry.IsAffineHom f\", \"doc\": \"If a morphism of schemes is finite, then it is affine.\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern schemes, abstract descent, unrelated group quotients or completion ingredients; none states this assertion or a one-line generalization",
+   "digest": "bd7bfe732a196380"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finite algebra descent over an adic formal quotient stack via action groupoid",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"instFiniteObjOpenNormalSubgroupStabilizerHomSurjectiveAuxFunctor\", \"module\": \"Mathlib/RingTheory/Invariant/Profinite\", \"type\": \"∀ {A : Type u_1} {B : Type u_2} [inst : CommRing A] [inst_1 : CommRing B] [inst_2 : Algebra A B] {G : Type u_3}\\n  [inst_3 : Group G] [inst_4 : MulSemiringAction G B] [inst_5 : SMulCommClass G A B] [inst_6 : TopologicalSpace G]\\n  [CompactSpace G] [IsTopologicalGroup G] (P : Ideal A) (Q : Ideal B) [in\", \"doc\": \"For any commutative ring $ R $ and ideal $ I $ of $ R $, the quotient ring $ R/I $ has a canonical commutative semiring structure inherited from $ R $. This structure includes commutative addition and\"}\n  {\"name\": \"Ideal.Quotient.stabilizerHomSurjectiveAuxFunctor\", \"module\": \"Mathlib/RingTheory/Invariant/Profinite\", \"type\": \"{A : Type u_1} →\\n  {B : Type u_2} →\\n    [inst : CommRing A] →\\n      [inst_1 : CommRing B] →\\n        [inst_2 : Algebra A B] →\\n          {G : Type u_3} →\\n            [inst_3 : Group G] →\\n              [inst_4 : MulSemiringAction G B] →\\n                [SMulCommClass G A B] →\\n                  [inst_6 \", \"doc\": \"A functor from the category of open normal subgroups of a topological group $ G $ to types, where for each open normal subgroup $ N $, it constructs a type involving the fixed subalgebra of $ B $ unde\"}\n  {\"name\": \"Algebra.FormallySmooth.exists_mkₐ_comp_eq_of_isAdicComplete\", \"module\": \"Mathlib/RingTheory/Smooth/AdicCompletion\", \"type\": \"∀ {R : Type u_1} {A : Type u_2} [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A] {S : Type u_3}\\n  [inst_3 : CommRing S] [inst_4 : Algebra R S] [Algebra.FormallySmooth R A] {I : Ideal S} [IsAdicComplete I S]\\n  (f : A →ₐ[R] S ⧸ I), ∃ g, (Ideal.Quotient.mkₐ R I).comp g = f\", \"doc\": \"Let $ R $ be a commutative ring, $ A $ an $ R $-algebra, and $ S $ a commutative ring with an ideal $ I $. If $ S $ is adic complete with respect to $ I $, then for any $ R $-algebra homomorphism $ f \"}\n  {\"name\": \"Algebra.instEssFiniteTypeQuotientIdeal\", \"module\": \"Mathlib/RingTheory/EssentialFiniteness\", \"type\": \"∀ (R : Type u_1) (S : Type u_2) [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S]\\n  [Algebra.EssFiniteType R S] (I : Ideal S), Algebra.EssFiniteType R (S ⧸ I)\", \"doc\": \"If $ S $ is an $ R $-algebra of essential finite type, then for any ideal $ I $ of $ S $, the quotient ring $ S/I $ is also an $ R $-algebra of essential finite type. This means that the property of b\"}\n  {\"name\": \"Algebra.QuasiFinite.instQuotientIdeal\", \"module\": \"Mathlib/RingTheory/QuasiFinite/Basic\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S] (I : Ideal S)\\n  [Algebra.QuasiFinite R S], Algebra.QuasiFinite R (S ⧸ I)\", \"doc\": \"Given a commutative ring $ S $ with a quasi-finite $ R $-algebra structure (i.e., $ S $ is finitely generated as an $ R $-module) and an ideal $ I $ of $ S $, the quotient ring $ S/I $ inherits a cano\"}\n  {\"name\": \"Algebra.FiniteType.quotient\", \"module\": \"Mathlib/RingTheory/FiniteType\", \"type\": \"∀ (R : Type u_1) {S : Type u_2} [inst : CommSemiring R] [inst_1 : CommRing S] [inst_2 : Algebra R S] (I : Ideal S)\\n  [h : Algebra.FiniteType R S], Algebra.FiniteType R (S ⧸ I)\", \"doc\": \"If $ S $ is a finitely generated $ R $-algebra over a commutative semiring $ R $, and $ I $ is an ideal of $ S $, then the quotient ring $ S/I $ is also a finitely generated $ R $-algebra.\"}\n  {\"name\": \"Algebra.FormallySmooth.exists_adicCompletionEvalOneₐ_comp_eq\", \"module\": \"Mathlib/RingTheory/Smooth/AdicCompletion\", \"type\": \"∀ {R : Type u_1} {A : Type u_2} [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A] {S : Type u_3}\\n  [inst_3 : CommRing S] [inst_4 : Algebra R S] [Algebra.FormallySmooth R A] {I : Ideal S} (f : A →ₐ[R] S ⧸ I),\\n  ∃ g, (AlgHom.restrictScalars R (AdicCompletion.evalOneₐ I)).comp g = f\", \"doc\": \"For any commutative rings $R$ and $S$, an ideal $I$ of $S$, and a formally smooth $R$-algebra $A$, given an $R$-algebra homomorphism $f : A \\\\to S/I$, there exists an $R$-algebra homomorphism $g : A \\\\t\"}\n  {\"name\": \"instNonemptyObjOpenNormalSubgroupStabilizerHomSurjectiveAuxFunctor\", \"module\": \"Mathlib/RingTheory/Invariant/Profinite\", \"type\": \"∀ {A : Type u_1} {B : Type u_2} [inst : CommRing A] [inst_1 : CommRing B] [inst_2 : Algebra A B] {G : Type u_3}\\n  [inst_3 : Group G] [inst_4 : MulSemiringAction G B] [inst_5 : SMulCommClass G A B] [inst_6 : TopologicalSpace G]\\n  [CompactSpace G] [IsTopologicalGroup G] (P : Ideal A) (Q : Ideal B) [Q.\", \"doc\": \"For any commutative ring $ R $ and ideal $ I $ of $ R $, the quotient ring $ R/I $ has a canonical commutative semiring structure inherited from the commutative ring operations on $ R $. This structur\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern schemes, abstract descent, unrelated group quotients or completion ingredients; none states this assertion or a one-line generalization",
+   "digest": "70f66f73c71bda02"
+  },
+  {
+   "tool": "grep",
+   "query": "QuotientStack|formal.{0,30}quotient|Spf",
+   "results": "OK; 0 hits: ",
+   "date": "2026-10-22",
+   "verdict": "no match: no formal quotient-stack finite-pullback statement",
+   "digest": "4f53cda18c2baa0c"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Equivariant finite algebras over a complete local ring describe finite morphisms over its formal quotient stack",
+   "results": "OK; 8 hits: Finite.algEquiv, Algebra.QuasiFinite.recOn, Algebra.QuasiFinite.casesOn, Algebra.FormallyEtale.iff_comp_bijective, Algebra.QuasiFinite, Algebra.Etale.formallyEtale, Algebra.FormallyEtale, RingHom.quasiFinite_algebraMap",
+   "date": "2026-10-22",
+   "verdict": "no match: no formal quotient-stack finite-pullback statement",
+   "digest": "df3881c8afcc8f64"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finite representable pullback over a quotient formal stack is the quotient of the adically complete finite algebra by the induced group action",
+   "results": "OK; 8 hits: instFiniteObjOpenNormalSubgroupStabilizerHomSurjectiveAuxFunctor, Algebra.FormallySmooth.exists_mkₐ_comp_eq_of_isAdicComplete, Ideal.Quotient.stabilizerHomSurjectiveAuxFunctor, AdicCompletion.mk_ofAlgEquiv_symm, AdicCompletion.mk_smul_top_ofAlgEquiv_symm, AlgHom.IsArithFrobAt.finite_quotient, Algebra.FinitePresentation.quotient, AdicCompletion.exists_smodEq_pow_smul_top_and_mkQ_eq",
+   "date": "2026-10-22",
+   "verdict": "no match: no formal quotient-stack finite-pullback statement",
+   "digest": "e5905962e86150e9"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-dm-finite-normalization-charts",
+  "date": "2026-10-22",
+  "group": "Q61"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Scheme representability of the stable abelian-level normalization. Supporting input: finite normalization and its etale/formal charts. Prerequisite: Finite representable pullbacks of a formal quotient chart.",
+   "via": [
+    "lem-sfb-dm-finite-normalization-charts",
+    "lem-sfb-stable-abelian-level-normalization",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-finite-formal-quotient-pullback",
+  "worker": "stage1",
+  "summary": "Computed the finite-level action from triples, lifted it through the complete finite algebra, and recovered each level by the generic action-groupoid criterion. Reused the existing finite-module completeness lemma. Clarified representable finite on scheme tests; corrected use of 044W (isomorphism sheaves only) by the 04T4/04T5 presentation criterion. No normality or invertibility of the group order is needed. Repair of the promotion return: rebased the retained split onto the current unsplit live item, reread every current cited statement, and made the atlas-level base comparison and its reduction compatibility explicit in steps 5 and 6. Rechecked against the current live DAG on 2026-10-23 and wrote the triple-arrow equation and right-translation convention explicitly in step 5. Reviewer FIX (re-applied from the 4101636a/a7d5b6bf/4a949b95 reviews, lost on re-delivery): step 5 writes out the etale-local lift through the etale-locally trivial torsor and the structure isomorphisms alpha=1_y, keeping the head's equation alpha beta=beta' p(gamma); step 6 glues the atlas comparison beta to a 2-isomorphism over [U_n/H]; the new criterion uses etale-locally trivial torsors and states the arrow-space hypothesis on T-points.",
+  "blueprint": "Serves the formal-chart clause of lem-sfb-dm-finite-normalization-charts, ultimately det-thm-sf-ctf-stability-direct-images proof (3): normalization of the stable level parameter, without using its normality or generic-field hypotheses. Blueprint search for quotient stack, action groupoid and stack presentation found no imported equivalent.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-finite-module-complete-over-complete-noetherian",
+    "why": "Generic finite-module completeness over a complete Noetherian ring is needed to lift the compatible action to C; the moduli unit supplies no different completeness argument."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-finite-module-complete-over-complete-noetherian"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q81-3b1e87671",
+  "group": "Q81",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q81-3b1e87671 (reviewer sub-agent of L); spot-checked: This is the fourth delivery of this split. The new node lem-sfb-action-groupoid-quotient-criterion is byte-identical to heads 4101636a, a7d5b6bf and 4a949b95, and the earlier FIX is lost again; the only change is a reworded step 5, which I checked and kept. Live: the item is still unsplit, the criterion node does not exist, and there is no repair note. The statement differs from the base only by a clarification: representable finite now means every scheme test has a finite scheme pullback (03ZP); this is not a weakening, and the citer dm-finite-normalization-charts step 8 still gets what it uses. Sources read: 044W (spaces-groupoids l.2625) only gives Isom-sheaf representability, so the delivery is right to replace it. Also read: 04M9 (arrow space), 04T5 (algebraic.tex l.2277; needs an algebraic stack and a smooth atlas, so the node is a true agent-formulated étale-local-lifting variant), 04WM, and 00MA; 07N9 is not needed. No SGA source is used. Steps: step 1 (finite + completeness lemma, all hypotheses present) is correct. Step 2 (V_n=Spec C/m^nC by the universal property of the quotient) is correct. Step 3 (h̃_n composes β with α_{h,u}; V_n is a setoid, so the cocycle holds) is correct. Step 4 (ρ_h=(h̃⁻¹)^* is a left action, semilinear and continuous) is correct. Step 5: the torsor convention checks out (g↦gk with u′=k⁻¹u, so k=h⁻¹ and u′=hu), and so does αβ=β′p(γ). Gaps fixed: (1) step 5's 'local lift' needs étale-local triviality of torsors, which the criterion's fppf torsor definition does not give; I rewrote the lift through the étale-trivial torsor and wrote α_{h,v}=1_y; (2) step 6 glues β into a 2-isomorphism over [U_n/H] by étale descent of Isom in X_n, and uses now cites def-sfb-stable-pointed-moduli-groupoids; (3) the criterion's hypothesis 'isomorphism of algebraic spaces' assumed U×_Z U is an algebraic space; it is now stated on T-points as an equivalence onto a discrete groupoid, torsors are étale-local, and def-pc-fppf-site is dropped. The fix files have the same content as the earlier FIX. The new node is true (small cases: H=1, U=Spec k, empty cover). It is not a duplicate: the affine-action-quotient-stack, affine-action-stack-presentation and pgl-finite-stabilizer nodes, def-sfb-formal-moduli-quotient (a definition only) and the zariski-torsor coarse-descent node are all different. It does not restate a clause of the item. Batch 5: def-trf-algebraic-space is a general definition and is accepted; def-sfb-stable-pointed-moduli-groupoids is a definition already cited by the base item, its closure reaches only the definition def-trf-projective-bundle-morphism, and it is not part of either assumption, so it is accepted. tool_uses: the completeness lemma is accepted as a generic tool. Maintainer: this FIX has been lost three times; the next delivery should start from the fixed files.; 2 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.FiniteFormalQuotientPullback",
+  "declaration": "CategoryTheory.finite_formal_quotient_pullback",
+  "declarations": [
+   "CategoryTheory.finite_formal_quotient_pullback",
+   "CategoryTheory.formalAffineMap",
+   "CategoryTheory.formalResidueMap",
+   "CategoryTheory.FormalQuotientPullbackArrows",
+   "CategoryTheory.SupportedModuliAtlasAction",
+   "CategoryTheory.IsSupportedFormalModuliQuotient"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/FiniteFormalQuotientPullback.lean",
+  "statement": "theorem finite_formal_quotient_pullback (Ω R : Type u) [Field Ω] [IsAlgClosed Ω] [CommRing R] [Algebra Ω R] [IsLocalRing R] [IsNoetherianRing R] [IsAdicComplete (IsLocalRing.maximalIdeal R) R] (res : IsLocalRing.ResidueField R ≃ₐ[Ω] Ω) (X : BasedCategory.{v₁, w₁} (Over (Spec (.of Ω)))) (hX : IsDeligneMumfordModuliStack X) (hnoeth : ∃ (U : Over (Spec (.of Ω))) (a : BasedFunctor (discreteModuli (yoneda.obj U)) X), IsLocallyNoetherian U.left ∧ ∀ (T : Over (Spec (.of Ω))) (t : BasedFunctor (discreteModuli (yoneda.obj T)) X), ∃ (Z : AlgebraicSpace (Spec (.of Ω))) (q : Z.obj.obj ⟶ yoneda.obj T), HasSpaceBaseChange a T t Z q ∧ SpaceMapIsEtale Z T q ∧ SpaceMapIsSurjective Z T q) (x : BasedFunctor (discreteModuli (yoneda.obj (Over.mk (𝟙 (Spec (.of Ω)))))) X) (H : Type u) [Group H] [Finite H] (α : H →* (R ≃ₐ[Ω] R)) (ρ : H →* Aut (affineActionScheme Ω R)) (hρ : ∀ h : H, (ρ h).hom.left = Spec.map (CommRingCat.ofHom (α h).symm.toRingHom)) (hcont : ∀ h : H, @Continuous R R (IsLocalRing.maximalIdeal R).adicTopology (IsLocalRing.maximalIdeal R).adicTopology (α h)) (f : BasedFunctor (discreteModuli (yoneda.obj (affineActionScheme Ω R))) X) (hx : Nonempty (ModuliTwoIso (moduliChartMap (formalResidueMap res) f) x)) (θ : SupportedModuliAtlasAction ρ f (PrimeSpectrum.zeroLocus (IsLocalRing.maximalIdeal R))) (hchart : IsSupportedFormalModuliQuotient ρ f (PrimeSpectrum.zeroLocus (IsLocalRing.maximalIdeal R)) θ (fun _ t ↦ ModuliCompletionAt x t)) (Y : BasedCategory.{v₂, w₂} (Over (Spec (.of Ω)))) (hY : IsModuliStack Y) (p : BasedFunctor Y X) (hp : IsRepresentableFiniteModuliMap p) : ∃ (C : Type u) (_ : CommRing C) (_ : Algebra Ω C) (φ : R →ₐ[Ω] C), @Module.Finite R C _ _ φ.toRingHom.toAlgebra.toModule ∧ @IsAdicComplete R _ (IsLocalRing.maximalIdeal R) C _ φ.toRingHom.toAlgebra.toModule ∧ ∃ (σ : H →* (C ≃ₐ[Ω] C)), (∀ (h : H) (r : R), σ h (φ r) = φ (α h r)) ∧ (∀ h : H, @Continuous C C ((IsLocalRing.maximalIdeal R).map φ.toRingHom).adicTopology ((IsLocalRing.maximalIdeal R).map φ.toRingHom).adicTopology (σ h)) ∧ ∃ (ρC : H →* Aut (affineActionScheme Ω C)) (g : BasedFunctor (discreteModuli (yoneda.obj (affineActionScheme Ω C))) Y) (η : g.comp p ≅ (discreteModuliMap (yoneda.map (formalAffineMap φ))).comp f), (∀ h : H, (ρC h).hom.left = Spec.map (CommRingCat.ofHom (σ h).symm.toRingHom)) ∧ (moduliTwoFiberLift (discreteModuliMap (yoneda.map (formalAffineMap φ))) g η.symm).toFunctor.IsEquivalence ∧ ∃ ψ : SupportedModuliAtlasAction ρC g (PrimeSpectrum.zeroLocus (↑(Ideal.map φ.toRingHom (IsLocalRing.maximalIdeal R)) : Set C)), IsSupportedFormalModuliQuotient ρC g (PrimeSpectrum.zeroLocus (↑(Ideal.map φ.toRingHom (IsLocalRing.maximalIdeal R)) : Set C)) ψ (fun _ t ↦ ModuliCompletionAt x (t.comp p)) ∧ FormalQuotientPullbackArrows φ p ρ ρC f g η θ ψ",
+  "branch": "newtargets-dag",
+  "by": "NB",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-2abea2e86",
+  "group": "NB",
+  "result": "pass",
+  "note": "Re-delivery after the H13 RETURN of 408894de; the fix is exactly what was asked. def-sfb-formal-moduli-quotient record and all other dep node files are byte-identical to side-live. SupportedFormalModuliQuotient.lean is removed; SupportedModuliAtlasAction and IsSupportedFormalModuliQuotient moved unchanged (diff) into FiniteFormalQuotientPullback.lean with item blueprint docstrings and added to the item lean.declarations. Theorem signature, lean.statement and the 6-step docstring are identical to the previous head, which was reviewed correct clause by clause; rechecked here (DM + locally Noetherian atlas, res, rho pinned by h-rho, theta/hchart on V(m) = Spf R, finite representable p, C finite and m-adically complete, Spec C = Y x_X Spec R via moduliTwoFiberLift, sigma semilinear and continuous for mC, psi = completion along p^-1 G_x, arrows over [Spf R/H]). Edge cases H=1, C=0 and empty tests are fine, and universes are bound. No name clashes in live lean. The 4 added stmt_deps are landed defs with used declarations. sorry only in the proof. No compile (no file changed)."
+ }
+}

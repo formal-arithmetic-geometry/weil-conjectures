@@ -1,0 +1,259 @@
+{
+ "id": "lem-sfb-stack-flat-scalar-sections",
+ "kind": "statement",
+ "title": "Flat scalar extension for sections on an algebraic stack",
+ "statement": "Let $k$ be a field [def-weil-field], let $R$ be a commutative $k$-algebra, let $p:\\mathcal X\\to\\operatorname{Spec}R$ be a quasi-compact, quasi-separated morphism from an algebraic stack over $k$ [def-sfb-algebraic-moduli-stack, def-sfb-stack-qcqs-morphism, def-weil-affine-spectrum], and let $R\\to S$ be a flat homomorphism of commutative $k$-algebras [def-weil-pbc-flat-ring-map]. Put $\\mathcal X_S=\\mathcal X\\times_{\\operatorname{Spec}R}\\operatorname{Spec}S$ with projection $q$ [def-sfb-stable-pointed-moduli-groupoids]. For a sheaf $\\mathcal A$ on the big fppf site of $\\mathcal X$, write $\\mathcal A_S$ for precomposition with $q$, using the restriction convention of [def-sfb-stack-quasi-coherent-algebra]. If $\\mathcal A$ is a quasi-coherent commutative $\\mathcal O_{\\mathcal X}$-algebra, then $\\mathcal A_S$ is quasi-coherent, and restriction takes any surjection $\\mathcal A\\twoheadrightarrow\\mathcal B$ of such algebras to a surjection $\\mathcal A_S\\twoheadrightarrow\\mathcal B_S$. The canonical map of $S$-algebras $$\\Gamma(\\mathcal X,\\mathcal A)\\otimes_R S\\longrightarrow\\Gamma(\\mathcal X_S,\\mathcal A_S),\\qquad a\\otimes s\\longmapsto q^*a\\cdot p_S^*s,$$ is an isomorphism, natural in $\\mathcal A$; here $p_S:\\mathcal X_S\\to\\operatorname{Spec}S$ is the second projection, and tensor extension uses [def-weil-module-base-change]. For $\\mathcal A=\\mathcal O_{\\mathcal X}$ the comparison sends $1\\otimes s$ to the structural section $p_S^*s$. There are no finite-generation or Noetherian hypotheses.",
+ "source": {
+  "document": "literature/stacks-project/stacks-cohomology.tex",
+  "place": "Tag 0765 (lemma-flat-comparison), degree zero, and Tag 0771 (proposition-loc-qcoh-flat-base-change), (4), applied over affine schemes to a quasi-coherent algebra. Quasi-coherent objects have the comparison property by stacks-sheaves.tex Tag 06WK (lemma-quasi-coherent). Pullback preservation and flat exactness: stacks-sheaves.tex Tag 06WH (lemma-pullback-quasi-coherent) and stacks-cohomology.tex Tag 076X (lemma-flat-pullback-quasi-coherent). On the big site these tensor pullbacks agree with the precomposition restriction by the cartesian comparison in 06WK; multiplication and the structural unit are preserved by their displayed pure-tensor formulas."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-sfb-algebraic-moduli-stack",
+  "def-sfb-stack-qcqs-morphism",
+  "def-weil-affine-spectrum",
+  "def-weil-pbc-flat-ring-map",
+  "def-sfb-stable-pointed-moduli-groupoids",
+  "def-sfb-stack-quasi-coherent-algebra",
+  "def-weil-module-base-change",
+  "def-sfb-stack-scalar-algebra",
+  "def-sfb-open-moduli-substack"
+ ],
+ "proof": [
+  {
+   "text": "Apply scheme-test restriction to the underlying module of $\\mathcal A$. It gives quasi-coherent scheme modules $A_x$ and canonical isomorphisms $u^*A_y\\simeq A_x$ for every arrow $x\\to y$ over $u$. Precomposition along $q$ is therefore quasi-coherent and retains the algebra operations. If $\\mathcal A\\twoheadrightarrow\\mathcal B$, the scheme-test maps $A_x\\to B_x$ are surjective. On a test $z$ of $\\mathcal X_S$ the restricted map is precisely $A_{qz}\\to B_{qz}$; the converse surjection criterion proves it is a sheaf surjection. This proves both restriction assertions, without a flatness assumption on $q$.",
+   "uses": [
+    "lem-sfb-stack-quasi-coherent-scheme-restriction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/stacks-sheaves.tex",
+    "place": "Tags 06WK (lemma-quasi-coherent), 06WH (lemma-pullback-quasi-coherent), and 06WI (lemma-characterize-quasi-coherent); scheme-test surjection and restriction formulation."
+   }
+  },
+  {
+   "text": "The same scheme-test isomorphisms show that $\\mathcal A$ is locally quasi-coherent and has flat comparison maps in the terminology of the higher-image theorem. Apply that theorem to the given qcqs morphism $p$, in degree zero. The resulting module sheaf $G=p_*\\mathcal A$ on the big site of $\\operatorname{Spec}R$ is locally quasi-coherent and has invertible comparison along $\\operatorname{Spec}S\\to\\operatorname{Spec}R$, since $R\\to S$ is flat. Its scheme restrictions $G_R,G_S$ satisfy $c:g^*G_R\\xrightarrow{\\sim}G_S$. By the displayed degree-zero direct-image formula, their sections on the whole schemes are $\\Gamma(\\mathcal X,\\mathcal A)$ and $\\Gamma(\\mathcal X_S,\\mathcal A_S)$; the section restriction is $q^*$.",
+   "uses": [
+    "lem-sfb-stack-quasi-coherent-scheme-restriction",
+    "lem-sfb-stack-higher-images-flat-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/stacks-cohomology.tex",
+    "place": "Tags 0765 (lemma-flat-comparison), 0771 (proposition-loc-qcoh-flat-base-change)(4), degree zero; stacks-sheaves.tex Tag 06WK (lemma-quasi-coherent)."
+   }
+  },
+  {
+   "text": "Apply the affine pullback-sections isomorphism to the quasi-coherent scheme module $G_R$ and $g:\\operatorname{Spec}S\\to\\operatorname{Spec}R$, taking both affine opens to be the whole schemes. Compose it with the section map of $c$. This gives an isomorphism $\\Gamma(\\mathcal X,\\mathcal A)\\otimes_RS\\simeq\\Gamma(\\mathcal X_S,\\mathcal A_S)$ sending $a\\otimes s$ to $s\\cdot q^*a$. The scalar action is the structural action, so this is exactly $q^*a\\,p_S^*s$. Both the affine comparison and $c$ are defined by section restriction and scalar multiplication.",
+   "uses": [
+    "lem-weil-pbc-module-pullback-affine-sections",
+    "def-weil-affine-spectrum",
+    "lem-sfb-stack-higher-images-flat-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/stacks-cohomology.tex",
+    "place": "Tags 0765 (lemma-flat-comparison), 0771 (proposition-loc-qcoh-flat-base-change)(4), degree zero; stacks-sheaves.tex Tag 06WK (lemma-quasi-coherent)."
+   }
+  },
+  {
+   "text": "Write this map as $\\theta$. For pure tensors, $\\theta((a\\otimes s)(b\\otimes t))=q^*(ab)p_S^*(st)=(q^*a\\,p_S^*s)(q^*b\\,p_S^*t)$, and $\\theta(1\\otimes1)=1$. Additivity extends this identity to sums of pure tensors; also $\\theta(1\\otimes s)=p_S^*s$. For an algebra map $h:\\mathcal A\\to\\mathcal B$, restriction commutes with $h$, so $h_S(\\theta(a\\otimes s))=q^*h(a)p_S^*s=\\theta(h(a)\\otimes s)$. These formulas give the $S$-algebra structure and naturality; the bijective module comparison in step 3 is consequently an algebra isomorphism. Taking $\\mathcal A=\\mathcal O_{\\mathcal X}$ gives the required structural-section normalization.",
+   "uses": [
+    "def-sfb-stack-quasi-coherent-algebra",
+    "def-weil-module-base-change"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/stacks-cohomology.tex",
+    "place": "Tags 0765 (lemma-flat-comparison), 0771 (proposition-loc-qcoh-flat-base-change)(4), degree zero; stacks-sheaves.tex Tag 06WK (lemma-quasi-coherent)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-stack-quasi-coherent-scheme-restriction",
+  "lem-sfb-stack-higher-images-flat-comparison",
+  "lem-weil-pbc-module-pullback-affine-sections",
+  "def-weil-affine-spectrum",
+  "def-sfb-stack-quasi-coherent-algebra",
+  "def-weil-module-base-change"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/stacks-cohomology.tex",
+  "place": "Tags 0765 (lemma-flat-comparison), 0771 (proposition-loc-qcoh-flat-base-change)(4), degree zero; stacks-sheaves.tex Tag 06WK (lemma-quasi-coherent)."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "AlgebraicStack|algebraic.stack|flat.*base.change",
+   "results": "OK: 1 hits: Mathlib/AlgebraicGeometry/Morphisms/SchemeTheoreticallyDominant.lean",
+   "date": "2026-10-23",
+   "verdict": "no match: the inspected hits are scheme morphisms or module tensor operations, not a theorem for algebraic stacks"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Quasi compact quasi separated algebraic stack global sections flat base change",
+   "results": "OK: 8 hits: AlgebraicGeometry.Flat.isStableUnderBaseChange, RingHom.Flat.isStableUnderBaseChange, AlgebraicGeometry.quasiSeparated_isStableUnderBaseChange, AlgebraicGeometry.IsSeparated.isStableUnderBaseChange, AlgebraicGeometry.affineAnd_isStableUnderBaseChange, AlgebraicGeometry.quasiCompact_isStableUnderBaseChange, AlgebraicGeometry.instPreservesLimitSchemeOppositeCommRingCatRightOpΓOfIsAffineHomMapOfCompactSpaceOfQuasiSeparatedSpaceCarrierCarrierObj, AlgebraicGeometry.HasAffineProperty.affineAnd_isStableUnderBaseChange",
+   "date": "2026-10-23",
+   "verdict": "no match: the inspected hits are scheme morphisms or module tensor operations, not a theorem for algebraic stacks"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"baseChange\"",
+   "results": "OK: 12 hits: Lean.RecordedDeps.baseChangeLogPos, Submodule.baseChange, LinearMap.baseChange, LinearEquiv.baseChange, LinearMap.baseChange_id, Submodule.baseChange_bot, Submodule.baseChange_top, Submodule.tmul_mem_baseChange_of_mem",
+   "date": "2026-10-23",
+   "verdict": "no match: the inspected hits are scheme morphisms or module tensor operations, not a theorem for algebraic stacks"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Global sections of a quasi coherent module on a quasi compact quasi separated algebraic stack commute with flat extension of an affine base",
+   "results": "OK: 8 hits: AlgebraicGeometry.Flat.flat_appLE, AlgebraicGeometry.Scheme.Hom.flat_appLE, AlgebraicGeometry.Spec_Γ_naturality_assoc, AlgebraicGeometry.Flat.flat_of_affine_subset, AlgebraicGeometry.exists_eq_pow_mul_of_is_compact_of_quasi_separated_space_aux, AlgebraicGeometry.exists_app_map_eq_map_of_isLimit, AlgebraicGeometry.exists_app_map_eq_zero_of_isLimit, AlgebraicGeometry.flat_iff",
+   "date": "2026-10-23",
+   "verdict": "no match: the inspected hits are scheme morphisms or module tensor operations, not a theorem for algebraic stacks"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a qcqs algebraic stack over Spec R the natural tensor comparison S tensor_R H0 of a quasi coherent sheaf to H0 after extension to a flat R algebra S is an isomorphism",
+   "results": "OK: 8 hits: AlgebraicGeometry.Scheme.Pullback.Triplet.tensorCongr_refl, AlgebraicGeometry.Scheme.Pullback.tensorCongr_SpecTensorTo, AlgebraicGeometry.pullbackSpecIso_hom_snd_assoc, AlgebraicGeometry.pullbackSpecIso_hom_fst_assoc, AlgebraicGeometry.pullbackSpecIso_hom_base, AlgebraicGeometry.pullbackSpecIso_hom_base_assoc, AlgebraicGeometry.pullbackSpecIso_hom_fst'_assoc, AlgebraicGeometry.isIso_ΓSpec_adjunction_unit_app_basicOpen",
+   "date": "2026-10-23",
+   "verdict": "no match: the inspected hits are scheme morphisms or module tensor operations, not a theorem for algebraic stacks"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Flat extension of an affine base preserves quasi coherent algebras and surjections on algebraic stacks, and on a qcqs stack global sections tensor the flat algebra give global sections after extension",
+   "results": "OK: 8 hits: AlgebraicGeometry.Flat.instHasRingHomPropertyFlat, AlgebraicGeometry.Flat.flat_appLE, AlgebraicGeometry.Flat.isStableUnderBaseChange, AlgebraicGeometry.Flat.flat_of_affine_subset, AlgebraicGeometry.Flat.flat_and_surjective_iff_faithfullyFlat_of_isAffine, AlgebraicGeometry.Scheme.Hom.flat_appLE, AlgebraicGeometry.Flat.surjective_descendsAlong_surjective_inf_flat_inf_quasicompact, AlgebraicGeometry.Flat",
+   "date": "2026-10-23",
+   "verdict": "no match: the inspected hits are scheme morphisms or module tensor operations, not a theorem for algebraic stacks"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Flat scalar extension commutes with global sections of quasi coherent algebras on a quasi compact quasi separated algebraic stack",
+   "results": "{\"t\": \"2026-10-23T12:11:00Z\", \"tool\": \"leanfinder\", \"query\": \"Flat scalar extension commutes with global sections of quasi coherent algebras on a quasi compact quasi separated algebraic stack\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Flat.instHasRingHomPropertyFlat\", \"AlgebraicGeometry.Flat.flat_appLE\", \"AlgebraicGeometry.Spec_Γ_naturality_assoc\", \"AlgebraicGeometry.Flat.instIsMultiplicativeScheme\", \"AlgebraicGeometry.Scheme.Hom.flat_appLE\", \"AlgebraicGeometry.Flat.instIsStableUnderCompositionScheme\", \"AlgebraicGeometry.StructureSheaf.toOpen_comp_comap\", \"AlgebraicGeometry.Flat.flat_of_affine_subset\"], \"digest\": \"12357785234398c3\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: inspected stored search hits concern schemes, ring flatness or abstract tensor functors, not this algebraic-stack section theorem."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Flat scalar extension commutes with global sections of quasi coherent algebras on a quasi compact quasi separated algebraic stack",
+   "results": "{\"t\": \"2026-10-23T12:11:01Z\", \"tool\": \"leansearch\", \"query\": \"Flat scalar extension commutes with global sections of quasi coherent algebras on a quasi compact quasi separated algebraic stack\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.FormallyUnramified.flat_of_restrictScalars\", \"AlgHom.extendScalars\", \"IsSMulRegular.of_flat_of_isBaseChange\", \"ModuleCat.preservesFiniteLimits_extendScalars_of_flat\", \"RingHom.Flat.isStableUnderBaseChange\", \"RingHom.Flat\", \"LinearEquiv.extendScalarsOfIsLocalizationEquiv\", \"comonadicExtendScalars\"], \"digest\": \"9ef3cd2f7fecd430\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: inspected stored search hits concern schemes, ring flatness or abstract tensor functors, not this algebraic-stack section theorem."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicStack\"",
+   "results": "{\"t\": \"2026-10-23T12:11:01Z\", \"tool\": \"loogle\", \"query\": \"\\\"AlgebraicStack\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: inspected stored search hits concern schemes, ring flatness or abstract tensor functors, not this algebraic-stack section theorem."
+  },
+  {
+   "tool": "grep",
+   "query": "AlgebraicStack|flat.*base.change.*stack",
+   "results": "{\"t\": \"2026-10-23T12:11:01Z\", \"tool\": \"grep\", \"query\": \"AlgebraicStack|flat.*base.change.*stack\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: inspected stored search hits concern schemes, ring flatness or abstract tensor functors, not this algebraic-stack section theorem."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Global sections on qcqs algebraic stacks commute with flat base change, naturally as algebras",
+   "results": "{\"t\": \"2026-10-23T12:11:10Z\", \"tool\": \"leanfinder\", \"query\": \"Global sections on qcqs algebraic stacks commute with flat base change, naturally as algebras\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Flat.isStableUnderBaseChange\", \"AlgebraicGeometry.Spec_Γ_naturality_assoc\", \"AlgebraicGeometry.Spec_Γ_naturality\", \"AlgebraicGeometry.Flat.instHasRingHomPropertyFlat\", \"AlgebraicGeometry.Scheme.Hom.flat_appLE\", \"AlgebraicGeometry.Flat.flat_appLE\", \"AlgebraicGeometry.Scheme.ΓSpecIso_naturality_assoc\", \"AlgebraicGeometry.Scheme.toSpecΓ_naturality\"], \"digest\": \"04643e2a89e39612\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: inspected stored search hits concern schemes, ring flatness or abstract tensor functors, not this algebraic-stack section theorem."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-adequate-moduli-etale-locality",
+  "date": "2026-10-23",
+  "group": "Q150"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Affine PGL quotients with closed orbits and zero-dimensional stabilizers. Supporting affine-quotient step: Finite inertia gives an adequate coarse moduli space. Supporting input to the finite-inertia coarse-space construction: Passage from invariant global power liftings on the affine rank charts to adequate moduli spaces, then etale descent to the glued map. Flat scalar-section comparison needed in the descent of a power lying in the image of a global algebra map; this does not assert adequate-moduli locality.",
+   "via": [
+    "lem-sfb-adequate-moduli-etale-locality",
+    "lem-sfb-finite-inertia-adequate-coarse-space",
+    "lem-sfb-affine-pgl-finite-stabilizer-quotient",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-stack-flat-scalar-sections",
+  "worker": "stage1",
+  "summary": "Retained the statement. Reused the existing scheme-test restriction theorem instead of creating a duplicate cartesian-criterion node. Split the section comparison through one new general higher-direct-image/flat-comparison theorem, the existing affine pullback-sections theorem, and explicit pure-tensor multiplication, unit and naturality checks. Read Stacks 06WK, 06WH, 0765 and 0771. No Lean writing or compilation.",
+  "blueprint": "Read latest/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/_section.md and sk-thm-sf-ctf-stability-direct-images.proof.md, clause (3). This node supports the inherited alteration/adequate-moduli prerequisite chain; it changes no unit route. blueprint_refs.py ancestor reports null, retained with the full inherited from.place and via; searches for 06WK, 0771, 0765, flat comparison and algebraic stack found no equivalent blueprint node.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-module-pullback-affine-sections",
+    "why": "Generic affine tensor-pullback section formula, used after stack flat comparison; the unit has no replacement for this scheme algebra calculation."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-module-pullback-affine-sections"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q106-a567ef004",
+  "group": "Q106",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q106-a567ef004 (reviewer sub-agent of L); spot-checked: I read the item, the new node and every cited statement in full. Sources read: stacks-cohomology.tex section-locally-quasi-coherent through proposition-loc-qcoh-flat-base-change, including definition-flat-base-change, lemma-pushforward-locally-quasi-coherent, 0765 lemma-flat-comparison and 0771 parts (1), (4a) and (4b). The new node lem-sfb-stack-higher-images-flat-comparison states those results faithfully and self-contained: qcqs f between algebraic stacks; local quasi-coherence written as étale sheaves associated to quasi-coherent Zariski models; flat comparison maps c_a; conclusions that F is an fppf sheaf, that R^if_*F is locally quasi-coherent with flat comparison maps, that étale and fppf computations agree, and the degree-zero direct-image formula. It has no proof sketch and was tested on f=id, F=0, empty X and the affine case. It is not a duplicate: rg -L for 0765, 0771 and flat-comparison terms found nothing, and lem-sfb-stack-qcqs-algebra-direct-image states only a QCoh-algebra adjoint and composition. It is not a clause of the item. Step 1: the scheme-restriction lemma gives quasi-coherence of the precomposition and, through the two directions of its surjection criterion, (A_S)_z=A_{qz}, with no flatness. Step 2: the new node is applied in degree 0 to p, with Spec R a discrete algebraic stack (the qcqs definition allows a space target); flatness of R->S makes c invertible and its section map is q^*. Step 3: the affine pullback-sections formula with V=Spec R, U=Spec S gives a⊗s->s·q^*a, and the S-action is the O_Y-module action p_S^*. Step 4: multiplicativity, unit and naturality on pure tensors, genuinely elementary. proof_deps equals the union of uses; there is no cycle. Accepted tool use: lem-weil-pbc-module-pullback-affine-sections, a generic affine formula. Batch-5 check: def-sfb-algebraic-moduli-stack, def-sfb-stack-qcqs-morphism and def-sfb-stack-quasi-coherent-algebra reach def-trf-algebraic-space and def-trf-space-quasi-coherent-module only as general definitions, not as trace-formula or Poincaré-duality steps; accepted. No SGA source is cited. The null blueprint.from.node is inherited from the ancestor chain. No fixes were needed."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.StackFlatScalarSections",
+  "declaration": "CategoryTheory.stack_flat_scalar_sections",
+  "declarations": [
+   "CategoryTheory.flatScalarSpecMap",
+   "CategoryTheory.flatScalarStack",
+   "CategoryTheory.flatScalarProjection",
+   "CategoryTheory.flatScalarBaseProjection",
+   "CategoryTheory.flatScalarStack_isFibred",
+   "CategoryTheory.flatScalarRestriction_isSheaf",
+   "CategoryTheory.flatScalarStructure_eq",
+   "CategoryTheory.flatScalarRestriction",
+   "CategoryTheory.moduliAlgebraSectionsMap",
+   "CategoryTheory.moduliStructuralSectionsAlgebra",
+   "CategoryTheory.moduliSectionsAlgebra",
+   "CategoryTheory.flatScalarSectionRestriction",
+   "CategoryTheory.flatScalarRestrictionMap",
+   "CategoryTheory.stack_flat_scalar_sections"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/StackFlatScalarSections.lean",
+  "statement": "theorem stack_flat_scalar_sections (hF : IsAlgebraicModuliStack F) (_hpqc : IsQuasiCompactAlgebraicModuliMap.{u, v, w, u, u + 1, 0, 0} p) (_hpqs : IsQuasiSeparatedAlgebraicModuliMap p) (_hflat : (algebraMap R S).Flat) : (∀ (A : ModuliAlgebraSheaf F hF.1.1), IsQuasicoherentModuliAlgebra A → IsQuasicoherentModuliAlgebra (flatScalarRestriction (S := S) p hF.1.1 A)) ∧ (∀ (A B : ModuliAlgebraSheaf F hF.1.1) (f : A ⟶ B), IsQuasicoherentModuliAlgebra A → IsQuasicoherentModuliAlgebra B → IsSurjectiveModuliAlgebra f → IsSurjectiveModuliAlgebra (flatScalarRestrictionMap (S := S) p f)) ∧ ∃ e : ∀ (A : ModuliAlgebraSheaf F hF.1.1) (_ : IsQuasicoherentModuliAlgebra A), (S ⊗[R] moduliSectionsAlgebra p A) ≃ₐ[S] moduliSectionsAlgebra (flatScalarBaseProjection p) (flatScalarRestriction (S := S) p hF.1.1 A), (∀ (A : ModuliAlgebraSheaf F hF.1.1) (hA : IsQuasicoherentModuliAlgebra A) (a : moduliSectionsAlgebra p A) (s : S), e A hA (s ⊗ₜ[R] a) = flatScalarSectionRestriction p A a * algebraMap S (moduliSectionsAlgebra (flatScalarBaseProjection p) (flatScalarRestriction (S := S) p hF.1.1 A)) s) ∧ (∀ (A B : ModuliAlgebraSheaf F hF.1.1) (hA : IsQuasicoherentModuliAlgebra A) (hB : IsQuasicoherentModuliAlgebra B) (f : A ⟶ B) (s : S) (a : moduliSectionsAlgebra p A), moduliAlgebraSectionsMap (flatScalarRestrictionMap p f) (e A hA (s ⊗ₜ[R] a)) = e B hB (s ⊗ₜ[R] moduliAlgebraSectionsMap f a)) ∧ (∀ (hO : IsQuasicoherentModuliAlgebra (Under.mk (𝟙 (moduliStructureSheaf F hF.1.1)))) (s : S), e (Under.mk (𝟙 (moduliStructureSheaf F hF.1.1))) hO (s ⊗ₜ[R] 1) = algebraMap S (moduliSectionsAlgebra (flatScalarBaseProjection p) (flatScalarRestriction (S := S) p hF.1.1 (Under.mk (𝟙 (moduliStructureSheaf F hF.1.1))))) s)",
+  "branch": "sheaf-dag",
+  "by": "NL",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "Uses the existing scalar pullback moduliScalarMap and the existing second 2-fibre projection moduliTwoFiberSnd, adding their landed owning nodes to stmt_deps. The standard S tensor_R Gamma order is the canonical tensor flip of the displayed Gamma tensor_R S; the pure-tensor equation specifies precisely the requested canonical comparison. The bundled section algebra retains the specified structural scalar action without introducing an arbitrary algebra instance."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-7a3371b4d",
+  "group": "NL",
+  "result": "pass",
+  "note": "Item differs from side-live only in lean plus 2 added stmt_deps (def-sfb-stack-scalar-algebra for moduliScalarMap, def-sfb-open-moduli-substack for moduliTwoFiberSnd), both landed and reviewed. Statement verbatim; 14 declarations match the file; no name clashes. Clauses match the node and Stacks 0765/0771(4)/06WK/06WH: k field, R and S k-algebras, RingHom.Flat, IsAlgebraicModuliStack, qc .{u,v,w,u,u+1,0,0} as in landed items, qs; X_S is the actual moduliTwoFiberProduct with fst q and snd p_S; A_S is literal precomposition, mirroring the étale-only moduliBaseChangeAlgebra; quasi-coherence and local-surjection clauses; ∃ e S⊗[R]Γ ≃ₐ[S] Γ(X_S,A_S) pinned by e(s⊗a)=q^*a·p_S^*s (TensorProduct.comm order allowed by def-weil-module-base-change); naturality for all f; O_X normalisation. 3 sorried Prop helpers are true and mirror the landed StackQuasiCoherentAlgebra helpers; no hollow data; docstrings carry source, blueprint and the 4 proof steps. Edge cases S=0, empty X, R=S, zero algebra fine. No file changed, so no compile; worker reports a clean compile. Advisories: moduliBaseIdealScalarMap duplicate formula is theorem-owned; a generic restriction along 2-fibre projections could later move into the def module."
+ }
+}

@@ -1,0 +1,279 @@
+{
+ "id": "lem-sfb-space-separated-fp-composition",
+ "kind": "statement",
+ "title": "Composition and base change for separation and finite presentation of algebraic spaces",
+ "statement": "Let $S$ be a scheme [def-pc-scheme], and work with algebraic spaces over $S$ [def-trf-algebraic-space] in the universes of [def-weil-size-convention], with sheaf fibre products [lem-trf-space-fibre-products-etale-covers]. A morphism is separated when its diagonal is a representable closed immersion, meaning all scheme tests of the diagonal are closed immersions [def-weil-closed-immersion]. Local finite presentation is tested on etale scheme charts [def-sbc-locally-finite-presentation]. Finite presentation additionally requires quasi-compactness and quasi-separatedness. A space is quasi-compact if it admits a surjective etale scheme atlas with quasi-compact source [def-weil-pbc-quasi-compact-scheme]. A morphism $A\\to B$ is quasi-compact if $A\\times_BT$ is a quasi-compact space for every quasi-compact algebraic space $T$ mapping to $B$ [lem-sfb-space-quasicompact-fppf-local]. Quasi-separated means that the diagonal is quasi-compact. Let $f:X\\to Y$ and $g:Y\\to Z$ be morphisms of algebraic spaces over $S$. If both are separated, then $g\\circ f$ is separated. If both are of finite presentation, then $g\\circ f$ is of finite presentation. If both are locally of finite presentation, then $g\\circ f$ is locally of finite presentation. For every morphism $Y'\\to Y$, if $f$ is separated then $X\\times_YY'\\to Y'$ is separated. These assertions do not require that any of the morphisms be representable.",
+ "source": {
+  "document": "literature/stacks-project/spaces-morphisms.tex",
+  "place": "Tags 03KL (spaces-morphisms-lemma-base-change-separated), 03KQ (spaces-morphisms-lemma-composition-separated), and 03XQ (spaces-morphisms-lemma-composition-finite-presentation), including the locally finite presentation clause."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-trf-algebraic-space",
+  "def-weil-size-convention",
+  "lem-trf-space-fibre-products-etale-covers",
+  "def-weil-closed-immersion",
+  "def-sbc-locally-finite-presentation",
+  "def-weil-pbc-quasi-compact-scheme",
+  "lem-sfb-space-quasicompact-fppf-local",
+  "def-sfb-space-morphism-properties",
+  "def-sfb-space-quasi-compact-presheaf-map",
+  "def-sfb-presheaf-map-separated-diagonal"
+ ],
+ "proof": [
+  {
+   "text": "Put $D=X\\times_YX$ and $E=X\\times_ZX$. Their sheaf fibre-product universal properties give $\\Delta_{X/Z}=j\\circ\\Delta_{X/Y}$, where $j:D\\to E$ is the pullback of $\\Delta_{Y/Z}:Y\\to Y\\times_ZY$ along $(f,f):E\\to Y\\times_ZY$. Indeed, a section of the pullback is a pair $(x_1,x_2)$ together with a common value $y=f(x_1)=f(x_2)$, exactly a section of $D$. For $X\\prime=X\\times_YY\\prime$ the same section calculation identifies $\\Delta_{X\\prime/Y\\prime}$ with the pullback of $\\Delta_{X/Y}$ along $X\\prime\\times_{Y\\prime}X\\prime\\to D$. These identifications are natural in every test scheme, so they are identities of the indicated sheaf fibre products.",
+   "uses": [
+    "lem-trf-space-fibre-products-etale-covers"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-morphisms.tex",
+    "place": "Tags 03KL (lemma-base-change-separated) and 03KQ (lemma-composition-separated): diagonal pullback and factorization"
+   }
+  },
+  {
+   "text": "A pullback of a representable closed immersion $i:A\\to B$ along any algebraic space $C\\to B$ is again a representable closed immersion: for a scheme $T\\to C$, its test is $T\\times_BA\\to T$, one of the scheme tests in the hypothesis on $i$. Two representable closed immersions $A\\to B\\to C$ compose: for a scheme $T\\to C$, first $B_T\\to T$ is a closed immersion of schemes and then $A_T\\to B_T$ is one, so their composite is a closed immersion by the cited scheme composition lemma. Apply these two observations to the diagonal identities of step 1. If $f,g$ are separated, both factors of $\\Delta_{X/Z}$ are representable closed immersions. If $f$ is separated, the base-changed diagonal is one as well. This proves both separatedness assertions without representability of $f$ or $g$.",
+   "uses": [
+    "def-trf-algebraic-space",
+    "def-weil-closed-immersion",
+    "lem-weil-pbc-closed-immersion-comp"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-morphisms.tex",
+    "place": "Tags 03KL and 03KQ, using representable scheme tests; scheme composition: morphisms.tex Tag 01QS (lemma-composition-closed-immersion)"
+   }
+  },
+  {
+   "text": "Use the stated all-test definition of quasi-compactness. If $a:A\\to B$ and $b:B\\to C$ are quasi-compact and $T\\to C$ is a quasi-compact space, then $B_T$ is quasi-compact and $A\\times_BB_T\\cong A\\times_CT$ is quasi-compact. Thus quasi-compact morphisms compose. A base change is quasi-compact by the cited base-change statement. Consequently, when $f,g$ are quasi-separated, $\\Delta_f$ and $\\Delta_g$ are quasi-compact, the map $j$ of step 1 is quasi-compact as a pullback of $\\Delta_g$, and $j\\Delta_f=\\Delta_{gf}$ is quasi-compact by the just-proved composition argument. Thus $gf$ is quasi-separated.",
+   "uses": [
+    "lem-sfb-space-quasicompact-fppf-local",
+    "lem-trf-space-fibre-products-etale-covers"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-morphisms.tex",
+    "place": "Tag 03HG (lemma-composition-quasi-compact), omitted transitivity argument written out; Tag 03KQ, quasi-separated clause"
+   }
+  },
+  {
+   "text": "Let $P$ be local finite presentation of scheme morphisms. The scheme etale-locality node says that $P$ is etale local on source-and-target. Apply the presentation criterion to $g$: choose schemes $V,W$, representable etale maps $b:V\\to Y$ (surjective), $c:W\\to Z$, and a map $k:V\\to W$ with $gb=ck$. If $g$ is locally of finite presentation, $k$ has $P$. Form the algebraic space $X_V=X\\times_YV$ and choose a representable surjective etale scheme atlas $a:U\\to X_V$. The composite $d:U\\to X$ is representable surjective etale: on a scheme test $T\\to X$ its intermediate scheme is $T\\times_YV$, etale and surjective over $T$ by the definition of $b$; the pullback of $a$ is etale and surjective over this scheme. The cited scheme covering-composition lemma proves the assertion for the composite test. Let $h:U\\to V$ be the other projection. The square $fd=bh$ is a presentation diagram for $f$, so if $f$ is locally of finite presentation, $h$ has $P$.",
+   "uses": [
+    "lem-sfb-scheme-etale-source-target-properties",
+    "lem-sfb-space-etale-presentation-property-criterion",
+    "lem-trf-space-fibre-products-etale-covers",
+    "def-trf-algebraic-space",
+    "lem-weil-pbc-etale-covering-composition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-morphisms.tex",
+    "place": "Tag 03XQ (lemma-composition-finite-presentation), expanded remark-composition-P using Tag 03MJ (lemma-local-source-target); topologies.tex Tag 0217 for composite scheme covers"
+   }
+  },
+  {
+   "text": "Under the locally finite presentation hypotheses on $f,g$, step 4 gives scheme maps $U\\xrightarrow{h}V\\xrightarrow{k}W$ locally of finite presentation. Their composite $kh$ is locally of finite presentation by the scheme composition lemma. The equality $(gf)d=c(kh)$, with $d$ surjective etale and $c$ etale, is a presentation diagram for $gf$. The presentation criterion, applicable by scheme etale locality of local finite presentation, therefore proves that $gf$ is locally of finite presentation.",
+   "uses": [
+    "lem-sbc-locally-finite-presentation-composition",
+    "lem-sfb-space-etale-presentation-property-criterion",
+    "lem-sfb-scheme-etale-source-target-properties"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-morphisms.tex",
+    "place": "Tag 03XQ, locally finite presentation clause; morphisms.tex Tag 01TR (lemma-composition-finite-presentation)"
+   }
+  },
+  {
+   "text": "If $f,g$ are of finite presentation, each is locally of finite presentation, quasi-compact and quasi-separated by the stated definition. Step 5 gives local finite presentation of $gf$; step 3 gives its quasi-compactness and quasi-separatedness. These three properties are exactly finite presentation. All chart refinements above were representable etale maps from schemes, while $f,g$ and the base-change map were arbitrary morphisms of algebraic spaces.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-morphisms.tex",
+    "place": "Tag 03XP (definition-locally-finite-presentation) and Tag 03XQ (lemma-composition-finite-presentation)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-trf-space-fibre-products-etale-covers",
+  "def-trf-algebraic-space",
+  "def-weil-closed-immersion",
+  "lem-weil-pbc-closed-immersion-comp",
+  "lem-sfb-space-quasicompact-fppf-local",
+  "lem-sfb-scheme-etale-source-target-properties",
+  "lem-sfb-space-etale-presentation-property-criterion",
+  "lem-weil-pbc-etale-covering-composition",
+  "lem-sbc-locally-finite-presentation-composition"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/spaces-morphisms.tex",
+  "place": "Tags 03KL, 03KQ and 03XQ, including the expanded diagonal scheme tests, remark-composition-P and the omitted transitivity argument of Tag 03HG."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Composition of separated morphisms and of finitely presented morphisms of algebraic spaces; separatedness is stable under base change",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.IsFinite.instHasOfPostcompPropertySchemeIsSeparated\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Finite\", \"type\": \"CategoryTheory.MorphismProperty.HasOfPostcompProperty @AlgebraicGeometry.IsFinite @AlgebraicGeometry.IsSeparated\", \"doc\": \"The composition of a finite morphism with a separated morphism is finite.\"}\n  {\"name\": \"AlgebraicGeometry.IsSeparated.instCompScheme\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Separated\", \"type\": \"∀ {X Y Z : AlgebraicGeometry.Scheme} (f : X ⟶ Y) (g : Y ⟶ Z) [AlgebraicGeometry.IsSeparated f]\\n  [AlgebraicGeometry.IsSeparated g], AlgebraicGeometry.IsSeparated (CategoryTheory.CategoryStruct.comp f g)\", \"doc\": \"The composition of two separated morphisms of schemes is itself a separated morphism.\"}\n  {\"name\": \"AlgebraicGeometry.IsFinite.of_comp\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Finite\", \"type\": \"∀ {X Y Z : AlgebraicGeometry.Scheme} (f : X ⟶ Y) (g : Y ⟶ Z)\\n  [AlgebraicGeometry.IsFinite (CategoryTheory.CategoryStruct.comp f g)] [AlgebraicGeometry.IsSeparated g],\\n  AlgebraicGeometry.IsFinite f\", \"doc\": \"If the composition of morphisms $ f: X \\\\to Y $ and $ g: Y \\\\to Z $ is a finite morphism, and $ g $ is separated, then $ f $ is a finite morphism.\"}\n  {\"name\": \"AlgebraicGeometry.IsSeparated.comp_iff\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Separated\", \"type\": \"∀ {X Y Z : AlgebraicGeometry.Scheme} {f : X ⟶ Y} {g : Y ⟶ Z} [AlgebraicGeometry.IsSeparated g],\\n  AlgebraicGeometry.IsSeparated (CategoryTheory.CategoryStruct.comp f g) ↔ AlgebraicGeometry.IsSeparated f\", \"doc\": \"If $ g $ is a separated morphism of schemes, then the composition $ f \\\\circ g $ is separated if and only if $ f $ is separated.\"}\n  {\"name\": \"AlgebraicGeometry.IsSeparated.of_comp\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Separated\", \"type\": \"∀ {X Y Z : AlgebraicGeometry.Scheme} (f : X ⟶ Y) (g : Y ⟶ Z)\\n  [AlgebraicGeometry.IsSeparated (CategoryTheory.CategoryStruct.comp f g)], AlgebraicGeometry.IsSeparated f\", \"doc\": \"If the composition of two morphisms of schemes is separated, then the first morphism is separated.\"}\n  {\"name\": \"AlgebraicGeometry.IsSeparated.stableUnderComposition\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Separated\", \"type\": \"CategoryTheory.MorphismProperty.IsStableUnderComposition @AlgebraicGeometry.IsSeparated\", \"doc\": \"The property of being a separated morphism of schemes is stable under composition. That is, if $ f: X \\\\to Y $ and $ g: Y \\\\to Z $ are separated morphisms of schemes, then their composition $ g \\\\circ f:\"}\n  {\"name\": \"AlgebraicGeometry.instHasOfPostcompPropertySchemeIsSeparatedTopMorphismProperty\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Separated\", \"type\": \"CategoryTheory.MorphismProperty.HasOfPostcompProperty @AlgebraicGeometry.IsSeparated ⊤\", \"doc\": \"A predicate indicating that a morphism $ f: X \\to Y $ of schemes is separated.\"}\n  {\"name\": \"AlgebraicGeometry.IsSeparated.instIsMultiplicativeScheme\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Separated\", \"type\": \"CategoryTheory.MorphismProperty.IsMultiplicative @AlgebraicGeometry.IsSeparated\", \"doc\": \"The property of being a separated morphism of schemes is multiplicative; that is, the composition of two separated morphisms is again a separated morphism.\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: IsSeparated.instCompScheme and locallyOfFinitePresentation_comp concern scheme morphisms; no general algebraic-space version was found"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finite presentation local finite presentation and separation of algebraic space morphisms are stable under composition",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.locallyOfFinitePresentation_comp\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation\", \"type\": \"∀ {X Y Z : AlgebraicGeometry.Scheme} (f : X ⟶ Y) (g : Y ⟶ Z) [hf : AlgebraicGeometry.LocallyOfFinitePresentation f]\\n  [hg : AlgebraicGeometry.LocallyOfFinitePresentation g],\\n  AlgebraicGeometry.LocallyOfFinitePresentation (CategoryTheory.CategoryStruct.comp f g)\", \"doc\": \"The composition of two morphisms of schemes that are locally of finite presentation is itself a morphism that is locally of finite presentation. This follows from the fact that the property of being l\"}\n  {\"name\": \"AlgebraicGeometry.instIsStableUnderCompositionSchemeLocallyOfFinitePresentation\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation\", \"type\": \"CategoryTheory.MorphismProperty.IsStableUnderComposition @AlgebraicGeometry.LocallyOfFinitePresentation\", \"doc\": \"The property of being locally of finite presentation for morphisms of schemes is stable under composition. That is, if $ f: X \\\\to Y $ and $ g: Y \\\\to Z $ are morphisms of schemes that are locally of fi\"}\n  {\"name\": \"AlgebraicGeometry.instIsStableUnderCompositionSchemeLocallyOfFiniteType\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FiniteType\", \"type\": \"CategoryTheory.MorphismProperty.IsStableUnderComposition @AlgebraicGeometry.LocallyOfFiniteType\", \"doc\": \"In the category of schemes, the property of being locally of finite type is stable under composition. That is, if $ f: X \\\\to Y $ and $ g: Y \\\\to Z $ are morphisms of schemes that are locally of finite \"}\n  {\"name\": \"AlgebraicGeometry.IsFinite.of_comp\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Finite\", \"type\": \"∀ {X Y Z : AlgebraicGeometry.Scheme} (f : X ⟶ Y) (g : Y ⟶ Z)\\n  [AlgebraicGeometry.IsFinite (CategoryTheory.CategoryStruct.comp f g)] [AlgebraicGeometry.IsSeparated g],\\n  AlgebraicGeometry.IsFinite f\", \"doc\": \"If the composition of morphisms $ f: X \\\\to Y $ and $ g: Y \\\\to Z $ is a finite morphism, and $ g $ is separated, then $ f $ is a finite morphism.\"}\n  {\"name\": \"AlgebraicGeometry.locallyOfFiniteType_of_comp\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FiniteType\", \"type\": \"∀ {X Y Z : AlgebraicGeometry.Scheme} (f : X ⟶ Y) (g : Y ⟶ Z)\\n  [AlgebraicGeometry.LocallyOfFiniteType (CategoryTheory.CategoryStruct.comp f g)],\\n  AlgebraicGeometry.LocallyOfFiniteType f\", \"doc\": \"Let $ f: X \\\\to Y $ and $ g: Y \\\\to Z $ be morphisms of schemes. If the composition $ f \\\\circ g $ is locally of finite type, then the morphism $ f $ is locally of finite type. A morphism is locally of f\"}\n  {\"name\": \"AlgebraicGeometry.locallyOfFiniteType_comp\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FiniteType\", \"type\": \"∀ {X Y Z : AlgebraicGeometry.Scheme} (f : X ⟶ Y) (g : Y ⟶ Z) [hf : AlgebraicGeometry.LocallyOfFiniteType f]\\n  [hg : AlgebraicGeometry.LocallyOfFiniteType g],\\n  AlgebraicGeometry.LocallyOfFiniteType (CategoryTheory.CategoryStruct.comp f g)\", \"doc\": \"The composition of two morphisms of schemes that are locally of finite type is again locally of finite type.\"}\n  {\"name\": \"AlgebraicGeometry.IsFinite.instHasOfPostcompPropertySchemeIsSeparated\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Finite\", \"type\": \"CategoryTheory.MorphismProperty.HasOfPostcompProperty @AlgebraicGeometry.IsFinite @AlgebraicGeometry.IsSeparated\", \"doc\": \"The composition of a finite morphism with a separated morphism is finite.\"}\n  {\"name\": \"AlgebraicGeometry.IsFinite.instIsStableUnderCompositionScheme\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Finite\", \"type\": \"CategoryTheory.MorphismProperty.IsStableUnderComposition @AlgebraicGeometry.IsFinite\", \"doc\": \"The composition of two finite morphisms of schemes is again a finite morphism.\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: IsSeparated.instCompScheme and locallyOfFinitePresentation_comp concern scheme morphisms; no general algebraic-space version was found"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.LocallyOfFinitePresentation, AlgebraicGeometry.IsSeparated",
+   "results": "[loogle] OK 0 hit(s)",
+   "date": "2026-10-22",
+   "verdict": "no match: IsSeparated.instCompScheme and locallyOfFinitePresentation_comp concern scheme morphisms; no general algebraic-space version was found"
+  },
+  {
+   "tool": "grep",
+   "query": "AlgebraicSpace|composition.*finite.presentation|separated.*comp",
+   "results": "[grep] OK 14 hit(s)\n  {\"file\": \"Mathlib/AlgebraicGeometry/Normalization.lean\", \"line\": \"500\", \"text\": \"    [QuasiCompact iU] [QuasiSeparated iU] [QuasiCompact iV] [QuasiSeparated iV]\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/ZariskisMainTheorem.lean\", \"line\": \"120\", \"text\": \"    [LocallyOfFiniteType f] [IsSeparated f] [QuasiCompact f]\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/ZariskisMainTheorem.lean\", \"line\": \"207\", \"text\": \"    [LocallyOfFiniteType f] [IsSeparated f] [QuasiCompact f] :\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/ZariskisMainTheorem.lean\", \"line\": \"324\", \"text\": \"instance [LocallyOfFiniteType f] [IsSeparated f] [QuasiCompact f] :\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/ZariskisMainTheorem.lean\", \"line\": \"358\", \"text\": \"instance [LocallyQuasiFinite f] [LocallyOfFiniteType f] [IsSeparated f] [QuasiCompact f] :\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiSeparated.lean\", \"line\": \"20\", \"text\": \"A scheme is quasi-separated if the intersections of any two affine open sets is quasi-compact.\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiSeparated.lean\", \"line\": \"48\", \"text\": \"/-- A morphism is `QuasiSeparated` if diagonal map is quasi-compact. -/\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiSeparated.lean\", \"line\": \"51\", \"text\": \"  /-- A morphism is `QuasiSeparated` if diagonal map is quasi-compact. -/\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiSeparated.lean\", \"line\": \"54\", \"text\": \"attribute [instance] QuasiSeparated.quasiCompact_diagonal\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiSeparated.lean\", \"line\": \"57\", \"text\": \"    QuasiSeparatedSpace X ↔ ∀ U V : X.affineOpens, IsCompact (U ∩ V : Set X) := by\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/Separated.lean\", \"line\": \"256\", \"text\": \"lemma IsSeparated.of_comp [IsSeparated (f ≫ g)] : IsSeparated f := by\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/Separated.lean\", \"line\": \"262\", \"text\": \"lemma IsSeparated.comp_iff [IsSeparated g] : IsSeparated (f ≫ g) ↔ IsSeparated f :=\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/Separated.lean\", \"line\": \"360\", \"text\": \"  apply +allowSynthFailures @IsSeparated.of_comp (g := terminal.from Y)\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/Separated.lean\", \"line\": \"373\", \"text\": \"  rw [Scheme.isSeparated_iff, ← terminal.comp_from f, IsSeparated.comp_iff]\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: IsSeparated.instCompScheme and locallyOfFinitePresentation_comp concern scheme morphisms; no general algebraic-space version was found"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Separated morphisms of algebraic spaces compose and base change; finitely presented morphisms of algebraic spaces compose",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.IsSeparated.instCompScheme\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Separated\", \"type\": \"[IsSeparated f] [IsSeparated g] : IsSeparated (f ≫ g)\", \"doc\": \"The composition of two separated morphisms of schemes is itself a separated morphism.\"}\n  {\"name\": \"AlgebraicGeometry.IsSeparated.stableUnderComposition\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Separated\", \"type\": \": MorphismProperty.IsStableUnderComposition @IsSeparated\", \"doc\": \"The property of being a separated morphism of schemes is stable under composition. That is, if $ f: X \\\\to Y $ and $ g: Y \\\\to Z $ are separated morphisms of schemes, then their composition $ g \\\\circ f:\"}\n  {\"name\": \"AlgebraicGeometry.instHasOfPostcompPropertySchemeIsSeparatedTopMorphismProperty\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Separated\", \"type\": \": MorphismProperty.HasOfPostcompProperty @IsSeparated ⊤\", \"doc\": \"A predicate indicating that a morphism $ f: X \\to Y $ of schemes is separated.\"}\n  {\"name\": \"AlgebraicGeometry.IsSeparated.comp_iff\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Separated\", \"type\": \"[IsSeparated g] : IsSeparated (f ≫ g) ↔ IsSeparated f\", \"doc\": \"If $ g $ is a separated morphism of schemes, then the composition $ f \\\\circ g $ is separated if and only if $ f $ is separated.\"}\n  {\"name\": \"AlgebraicGeometry.IsSeparated.isStableUnderBaseChange\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Separated\", \"type\": \": MorphismProperty.IsStableUnderBaseChange @IsSeparated\", \"doc\": \"The property of being a separated morphism of schemes is stable under base change. That is, if $ f: X \\to Y $ is a separated morphism of schemes and $ Y' \\to Y $ is any morphism, then the base change $ \"}\n  {\"name\": \"AlgebraicGeometry.IsSeparated.instIsMultiplicativeScheme\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Separated\", \"type\": \": MorphismProperty.IsMultiplicative @IsSeparated\", \"doc\": \"The property of being a separated morphism of schemes is multiplicative; that is, the composition of two separated morphisms is again a separated morphism.\"}\n  {\"name\": \"AlgebraicGeometry.instHasOfPostcompPropertySchemeQuasiSeparatedTopMorphismProperty\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated\", \"type\": \": MorphismProperty.HasOfPostcompProperty @QuasiSeparated ⊤\", \"doc\": \"The property of being quasi-separated is closed under post-composition. That is, if a morphism $ f $ is quasi-separated and a morphism $ g $ is arbitrary, then the composition $ f \\\\circ g $ is also qu\"}\n  {\"name\": \"AlgebraicGeometry.QuasiSeparated.of_comp\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated\", \"type\": \"(f : X ⟶ Y) (g : Y ⟶ Z) [QuasiSeparated (f ≫ g)] : QuasiSeparated f\", \"doc\": \"If the composition of two morphisms $ f: X \\\\to Y $ and $ g: Y \\\\to Z $ is quasi-separated, then the first morphism $ f $ is quasi-separated. This means that the diagonal morphism $ X \\\\to X \\\\times_Y X $\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: IsSeparated.instCompScheme and locallyOfFinitePresentation_comp concern scheme morphisms; no general algebraic-space version was found"
+  },
+  {
+   "tool": "grep",
+   "query": "AlgebraicSpace|locallyOfFinitePresentation_comp|IsSeparated.*[Cc]omp",
+   "results": "Logged hits: Mathlib/AlgebraicGeometry/ZariskisMainTheorem.lean, Mathlib/AlgebraicGeometry/ZariskisMainTheorem.lean, Mathlib/AlgebraicGeometry/ZariskisMainTheorem.lean, Mathlib/AlgebraicGeometry/ZariskisMainTheorem.lean, Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation.lean, Mathlib/AlgebraicGeometry/Morphisms/Separated.lean, Mathlib/AlgebraicGeometry/Morphisms/Separated.lean, Mathlib/AlgebraicGeometry/Morphisms/Separated.lean",
+   "date": "2026-10-23",
+   "verdict": "no match: returned declarations concern scheme morphisms, not arbitrary algebraic-space morphisms"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Algebraic space morphisms finite presentation composition separated base change",
+   "results": "Logged hits: AlgebraicGeometry.IsFinite.of_comp, AlgebraicGeometry.IsSeparated.of_comp, AlgebraicGeometry.IsSeparated.isStableUnderBaseChange, AlgebraicGeometry.IsFinite.instHasOfPostcompPropertySchemeIsSeparated, AlgebraicGeometry.IsSeparated.stableUnderComposition, AlgebraicGeometry.QuasiSeparated.of_comp, AlgebraicGeometry.IsSeparated.instCompScheme, AlgebraicGeometry.PresheafedSpace.comp",
+   "date": "2026-10-23",
+   "verdict": "no match: returned declarations concern scheme morphisms, not arbitrary algebraic-space morphisms"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.LocallyOfFinitePresentation, AlgebraicGeometry.IsSeparated",
+   "results": "Logged hits: ",
+   "date": "2026-10-23",
+   "verdict": "no match: returned declarations concern scheme morphisms, not arbitrary algebraic-space morphisms"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Composition of separated morphisms and locally finitely presented morphisms of algebraic spaces and base change of separated morphisms",
+   "results": "Logged hits: AlgebraicGeometry.IsSeparated.stableUnderComposition, AlgebraicGeometry.instIsStableUnderCompositionSchemeLocallyOfFinitePresentation, AlgebraicGeometry.IsSeparated.isStableUnderBaseChange, AlgebraicGeometry.IsSeparated.instIsMultiplicativeScheme, AlgebraicGeometry.IsFinite.instHasOfPostcompPropertySchemeIsSeparated, AlgebraicGeometry.locallyOfFinitePresentation_isStableUnderBaseChange, AlgebraicGeometry.instHasOfPostcompPropertySchemeIsSeparatedTopMorphismProperty, AlgebraicGeometry.locallyOfFinitePresentation_comp",
+   "date": "2026-10-23",
+   "verdict": "no match: returned declarations concern scheme morphisms, not arbitrary algebraic-space morphisms"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Separation axioms for general algebraic spaces and local finite presentation of composites detected on etale scheme charts",
+   "results": "Logged hits: AlgebraicGeometry.LocallyOfFinitePresentation, AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified, AlgebraicGeometry.locallyOfFinitePresentation_iff, AlgebraicGeometry.IsEtale.of_comp, AlgebraicGeometry.IsEtale, AlgebraicGeometry.instLocallyOfFinitePresentationOfIsSmooth, AlgebraicGeometry.IsEtale.instHasOfPostcompPropertyScheme, AlgebraicGeometry.instHasRingHomPropertyLocallyOfFinitePresentationFinitePresentation",
+   "date": "2026-10-23",
+   "verdict": "no match: returned declarations concern scheme morphisms, not arbitrary algebraic-space morphisms"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-space-hom-representability",
+  "date": "2026-10-22",
+  "group": "Q51"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Algebraicity and smoothness of the stack of all nodal curves. Supporting input: Tags 0D52 (lemma-curves-stack) and 0D53 (lemma-curves-diagonal), with situation-curves. Supporting input: The four Mor functors in the fibre-product argument of quot-lemma-spaces-diagonal, used by quot-lemma-curves-diagonal. Supporting input: Separation and finite-presentation calculus needed for the ambient product in Tag 0D1C and for the final open restriction.",
+   "via": [
+    "lem-sfb-space-hom-representability",
+    "lem-sfb-curve-descent-isom-spaces",
+    "lem-sfb-nodal-curve-stack-smooth",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-space-separated-fp-composition",
+  "worker": "stage1",
+  "summary": "Read the Stacks diagonal proofs and finite-presentation proof, expanded the compatible chart construction and the omitted quasi-compactness argument, reused all existing inputs, and corrected doubled TeX escapes. Replaced the abbreviated topological quasi-compactness gloss by the exact Stacks all-test definition. All four conclusion clauses are retained; no new node or Mathlib leaf is required.",
+  "blueprint": "Supports the inherited algebraic-space Hom-representability / nodal-curve-moduli prerequisite of det-thm-sf-ctf-stability-direct-images (3), at the precise place already recorded in blueprint.from.place. The latest blueprint no longer spells out that old alteration subargument; this split retains its helper role and does not alter the unit or chapter route. Steps 1-2 give separation calculus, step 3 quasi-compact and diagonal calculus, and steps 4-6 finite-presentation composition.",
+  "tool_uses": [
+   {
+    "node": "lem-trf-space-fibre-products-etale-covers",
+    "why": "Sheaf fibre products of algebraic spaces and their universal property, used for diagonal identities and atlas pullbacks; a general construction, not a trace-formula conclusion. No node of this unit gives this scheme/construction input."
+   },
+   {
+    "node": "lem-weil-pbc-closed-immersion-comp",
+    "why": "Composition of closed immersions of schemes, applied only to two represented scheme tests of a composite diagonal. No node of this unit gives this scheme/construction input."
+   },
+   {
+    "node": "lem-weil-pbc-etale-covering-composition",
+    "why": "Composition of surjective etale scheme maps, applied only on scheme tests of the atlas refinement. No node of this unit gives this scheme/construction input."
+   },
+   {
+    "node": "lem-sbc-locally-finite-presentation-composition",
+    "why": "Composition of locally finitely presented scheme morphisms, applied to the two scheme maps in compatible charts. No node of this unit gives this scheme/construction input."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-trf-space-fibre-products-etale-covers",
+  "lem-weil-pbc-closed-immersion-comp",
+  "lem-weil-pbc-etale-covering-composition",
+  "lem-sbc-locally-finite-presentation-composition"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q154-5a1c52612",
+  "group": "Q154",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q154-5a1c52612 (reviewer sub-agent of L); spot-checked: Read in full: the item at 5a1c5261, every cited statement, and in spaces-morphisms.tex 03KL, 03KQ with the magic diagram, 03HE, 03HG and 03XQ. Live still has the item unsplit and there is no repair note, so this is a first split with no new nodes. Statement: the four conclusions are unchanged. Only the quasi-compactness gloss changed, to the exact Stacks 03HE base-change definition (cited through lem-sfb-space-quasicompact-fppf-local). By lemma-quasi-compact-is-quasi-compact the new notion implies the old topological one, so nothing is weakened. No citer relies on the old wording (proper-composition, hom-representability, finite-fibre-quasifinite-criterion and graphs-open-in-hilbert use only the separated and fp clauses). Proof: step 1 gives Δ_{X/Z}=jΔ_{X/Y}, with j the pullback of Δ_{Y/Z} along (f,f), and gives the base-changed diagonal; both match 03KQ/03KL. Step 2: pullbacks and composites of representable closed immersions, checked on scheme tests with 01QS, give both separated clauses. Step 3 writes out the transitivity proof that 03HG omits (B_T qc, then A×_C T qc); j is qc as a base change of Δ_g, so gf is quasi-separated. Step 4 builds compatible charts: b surjective by the criterion, the atlas U→X×_Y V, and d representable surjective étale via the covering-composition leaf. Step 5: (gf)d=c(kh), the scheme lfp composition and the criterion's clause (2) give lfp of gf. Step 6 assembles. Hypotheses checked; nothing assumes f or g representable; empty and scheme cases tested. DAG grep for 03KL/03KQ/03XQ/03HG/03HE finds no duplicate. Accepted tool use: lem-trf-space-fibre-products-etale-covers, a generic construction; the other cited off-unit nodes are Mathlib leaves. Inherited blueprint.from.node null left untouched. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.AlgebraicSpaceSeparatedFpComposition",
+  "declaration": "AlgebraicGeometry.AlgebraicSpace.separated_finitePresentation_composition_and_separated_baseChange",
+  "file": "lean/Sheaf/AlgebraicGeometry/AlgebraicSpaceSeparatedFpComposition.lean",
+  "statement": "theorem separated_finitePresentation_composition_and_separated_baseChange {S : Scheme.{u}} {X Y Z : AlgebraicSpace S} (f : X ⟶ Y) (g : Y ⟶ Z) : (IsSeparatedPresheafMap f.hom.hom → IsSeparatedPresheafMap g.hom.hom → IsSeparatedPresheafMap (f ≫ g).hom.hom) ∧ ((MapIsLocallyOfFinitePresentation f ∧ IsQuasiCompactPresheafMap f.hom.hom ∧ IsQuasiCompactPresheafMap (diagonalPresheafMap f.hom.hom)) → (MapIsLocallyOfFinitePresentation g ∧ IsQuasiCompactPresheafMap g.hom.hom ∧ IsQuasiCompactPresheafMap (diagonalPresheafMap g.hom.hom)) → (MapIsLocallyOfFinitePresentation (f ≫ g) ∧ IsQuasiCompactPresheafMap (f ≫ g).hom.hom ∧ IsQuasiCompactPresheafMap (diagonalPresheafMap (f ≫ g).hom.hom))) ∧ (MapIsLocallyOfFinitePresentation f → MapIsLocallyOfFinitePresentation g → MapIsLocallyOfFinitePresentation (f ≫ g)) ∧ (∀ (Y' : AlgebraicSpace S) (h : Y' ⟶ Y), IsSeparatedPresheafMap f.hom.hom → IsSeparatedPresheafMap (Limits.pullback.snd f.hom.hom h.hom.hom))",
+  "branch": "sheaf-dag",
+  "by": "NP",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "The conjunction renders the four independent implications. Finite presentation is expanded as the existing chartwise local finite presentation and atlas quasi-compactness predicates for the map and its diagonal. No representability hypothesis on f, g or the base change is imposed."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-4ef698390",
+  "group": "NP",
+  "result": "pass",
+  "note": "Re-delivery of H2-returned 4113: stmt_deps now cite the landed definition owners def-sfb-space-quasi-compact-presheaf-map, def-sfb-presheaf-map-separated-diagonal and def-sfb-space-morphism-properties instead of the theorem node. Four implications match Stacks 03KL/03KQ/03XQ/03XP: separated via closed-immersion scheme tests of the canonical diagonal; finite presentation = lfp (all étale charts) + atlas qc (equivalent to all-space tests by lem-sfb-space-quasicompact-fppf-local) + qc diagonal, for inputs and output; separated base change over all Y', h via canonical pullback.snd. No representability or extra assumptions; universe u only. lean.statement verbatim; one theorem proved by sorry; docstrings carry source, blueprint and six proof steps; only lean and stmt_deps differ from live. Not recompiled (no file changed). Advisory: MapIsSeparated and IsSeparatedPresheafMap are duplicate landed predicates, pre-existing upstream."
+ }
+}

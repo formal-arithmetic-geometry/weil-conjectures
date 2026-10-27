@@ -1,0 +1,105 @@
+{
+ "id": "lem-amb-ordinary-finite-unit-pullback-hom",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "def-amb-vector-integration",
+   "place": "Restriction compatibility for the prescribed local trace",
+   "via": [
+    "lem-amb-vector-integration-local-trace-compatibility"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "The factors of the constant-object pullback comparison",
+ "statement": "For a commutative coefficient ring A and any morphism f:X→Y of schemes, ordinaryFiniteUnitPullback A f from [def-asd-ordinary-finite-p1-arrows] is the degree-zero derived pullback comparison followed by singleFunctor applied to the constant-sheaf comparison. The displayed hom equation identifies its two actual factors; it makes no claim about traces.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-an/def-amb-vector-integration.proof.md",
+  "place": "Overlap calculation: inverse image and the degree-zero Hom correspondence commute with restriction"
+ },
+ "stmt_deps": [
+  "def-asd-ordinary-finite-p1-arrows"
+ ],
+ "proof": [
+  {
+   "text": "Unfold ordinaryFiniteUnitPullback. Project the hom of the composite isomorphism and then the hom of mapIso and of the natural isomorphism evaluated at the constant sheaf. This is the defining equation, proved by reflexivity. Packaging it as a theorem avoids repeated kernel unfolding in the compositor calculation.",
+   "uses": [
+    "def-asd-ordinary-finite-p1-arrows"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-asd-ordinary-finite-p1-arrows"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-an/def-amb-vector-integration.proof.md",
+  "place": "Categorical restriction subcalculation, implemented from the proved source APIs"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Derived pullback composition on a constant sheaf in degree zero agrees with the constant object pullback isomorphism",
+   "results": "8 hits: SheafOfModules.pullbackComp and pullbackObjFreeIso lemmas, plus topological sheaf pullbackIso. None is the derived etale constant-object comparison. Source LeftDerivedUpperStarSingle supplies its degree-zero compositor formula.",
+   "date": "2026-10-26",
+   "verdict": "reuse the source compositor and generic naturality"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"upperStarConstantSheafIso\"",
+   "results": "0 Mathlib hits; source UpperStarConstantSheafComp supplies constant-sheaf composition.",
+   "date": "2026-10-26",
+   "verdict": "use the source result"
+  },
+  {
+   "tool": "grep",
+   "query": "singleFunctorCompLeftDerived|upperStarConstantSheafIso|localizationRestrictionComp",
+   "results": "0 Mathlib hits. Repository search finds LeftDerivedUpperStarSingle, UpperStarConstantSheafComp, and EtaleMorphismDescent.",
+   "date": "2026-10-26",
+   "verdict": "reuse the proved source declarations; this module supplies only wrapper composition"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.VectorIntegrationLocalTraceCompatibility",
+  "date": "2026-10-26",
+  "group": "U2"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-an",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.OrdinaryFiniteUnitPullbackHom",
+  "file": "lean/Sheaf/AlgebraicGeometry/OrdinaryFiniteUnitPullbackHom.lean",
+  "declaration": "AlgebraicGeometry.Etale.ordinaryFiniteUnitPullback_hom",
+  "statement": "theorem ordinaryFiniteUnitPullback_hom (A : Type (u + 1)) [CommRing A]\n    {X Y : Scheme.{u}} (f : X ⟶ Y) :\n    (ordinaryFiniteUnitPullback A f).hom =\n      (singleFunctorCompLeftDerivedUpperStarIso (ModuleCat.{u + 1} A) f).hom.app\n        (ordinaryFiniteConstant A Y) ≫\n      (_root_.DerivedCategory.singleFunctor _ 0).map\n        ((Scheme.upperStarConstantSheafIso (ModuleCat.{u + 1} A) f).hom.app\n          (ModuleCat.of A A))",
+  "branch": "sheaf-dag",
+  "by": "U2",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U2",
+  "result": "pass",
+  "landing": "20261026T100422-L-21726",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U2",
+  "result": "pass",
+  "landing": "20261026T100422-L-21726",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

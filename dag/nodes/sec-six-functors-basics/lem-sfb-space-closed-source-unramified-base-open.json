@@ -1,0 +1,234 @@
+{
+ "id": "lem-sfb-space-closed-source-unramified-base-open",
+ "kind": "statement",
+ "title": "Universal unramified parameter open for algebraic-space diagrams",
+ "statement": "Let $S$ be a scheme [def-pc-scheme], with universes as in [def-weil-size-convention], and let $A,C,B$ be algebraic spaces over $S$ [def-trf-algebraic-space]. Let $p:A\\to B$, $q:C\\to B$ and $u:A\\to C$ satisfy $q\\circ u=p$. Fibre products use [lem-trf-space-fibre-products-etale-covers]. Local finite type and unramifiedness of space maps are tested on compatible etale scheme charts by [def-weil-finite-type-morphism, def-weil-unramified-morphism]. Assume $p$ is locally of finite type and its underlying map $|p|:|A|\\to|B|$ is closed, meaning it sends every closed subset to a closed subset, in the point topology [def-a1-space-point-topology]. There exists an open subspace $W_{\\mathrm{ur}}\\subseteq B$ [def-a1-space-open-subspace] such that for every algebraic space $B^\\prime$ and morphism $g:B^\\prime\\to B$, the morphism $g$ factors through $W_{\\mathrm{ur}}$ if and only if the induced map $u_{B^\\prime}:A\\times_BB^\\prime\\to C\\times_BB^\\prime$ is unramified. In particular, when $B$ is a scheme, $W_{\\mathrm{ur}}$ is an open subscheme of $B$ [def-weil-open-immersion]. No flatness or algebraicity-of-stacks assumption is made.",
+ "source": {
+  "document": "literature/stacks-project/spaces-more-morphisms.tex",
+  "place": "Tag 05X8 (lemma-where-unramified), statement."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-size-convention",
+  "def-trf-algebraic-space",
+  "lem-trf-space-fibre-products-etale-covers",
+  "def-weil-finite-type-morphism",
+  "def-weil-unramified-morphism",
+  "def-a1-space-point-topology",
+  "def-a1-space-open-subspace",
+  "def-weil-open-immersion",
+  "def-sfb-space-morphism-properties"
+ ],
+ "proof": [
+  {
+   "text": "Apply [lem-sfb-space-lft-cancellation] to $A\\xrightarrow{u}C\\xrightarrow{q}B$: since $q u=p$ is locally of finite type, $u$ is locally of finite type. Thus [lem-sfb-space-unramified-locus-base-change] supplies its maximal unramified open $U\\subseteq A$, whose points are precisely the unramified points of $u$.",
+   "uses": [
+    "lem-sfb-space-lft-cancellation",
+    "lem-sfb-space-unramified-locus-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-morphisms.tex",
+    "place": "Tags 0462 (lemma-permanence-finite-type) and 05W2 (lemma-where-unramified), applied to u."
+   }
+  },
+  {
+   "text": "Put $D=|A|\\setminus|U|$ and $E=|p|(D)$. The open-subspace topology of [lem-a1-space-point-open-calculus] makes $D$ closed. The assumed closedness of $|p|$ makes $E$ closed. The open-subspace correspondence of [lem-a1-space-etale-open-image] therefore gives an open subspace $W_{\\mathrm{ur}}\\subseteq B$ with $|W_{\\mathrm{ur}}|=|B|\\setminus E$. This uses only closedness of the original map $p$, not universal closedness.",
+   "uses": [
+    "lem-a1-space-point-open-calculus",
+    "lem-a1-space-etale-open-image"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-more-morphisms.tex",
+    "place": "Tag 05X8 (lemma-where-unramified), construction of W; spaces-properties.tex Tag 03BZ (lemma-open-subspaces)."
+   }
+  },
+  {
+   "text": "Fix any $g:B^\\prime\\to B$. Set $A^\\prime=A\\times_BB^\\prime$, $C^\\prime=C\\times_BB^\\prime$, and let $r:A^\\prime\\to A$ and $p^\\prime:A^\\prime\\to B^\\prime$ be the projections. These are algebraic spaces by [lem-trf-space-fibre-products-etale-covers]. The fibre-product universal property identifies $A^\\prime$ with $A\\times_C C^\\prime$, compatibly with $u_{B^\\prime}$: on each scheme test both sides consist of pairs $(a,b^\\prime)$ with $p(a)=g(b^\\prime)$, and the associated point of $C^\\prime$ is $(u(a),b^\\prime)$. Hence [lem-sfb-space-unramified-locus-base-change], applied to $C^\\prime\\to C$, gives $U(u_{B^\\prime})=A^\\prime\\times_AU$. By [lem-a1-space-open-factor-scheme-tests], its point subset is $|r|^{-1}(|U|)$, so its complement is $D^\\prime=|r|^{-1}(D)$.",
+   "uses": [
+    "lem-trf-space-fibre-products-etale-covers",
+    "lem-sfb-space-unramified-locus-base-change",
+    "lem-a1-space-open-factor-scheme-tests"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-more-morphisms.tex",
+    "place": "Tag 05X8 (lemma-where-unramified), base-change argument; spaces-morphisms.tex Tag 05W2; spaces-properties.tex Tag 03IE."
+   }
+  },
+  {
+   "text": "We have $|p^\\prime|(D^\\prime)=|g|^{-1}(E)$. One inclusion follows from $g p^\\prime=p r$. Conversely, if $b^\\prime$ maps to $p(a)$ for some $a\\in D$, the surjectivity $|A\\times_BB^\\prime|\\to|A|\\times_{|B|}|B^\\prime|$ in [lem-a1-space-point-open-calculus] supplies a point $a^\\prime$ over $(a,b^\\prime)$. It lies in $D^\\prime$ and maps to $b^\\prime$, giving the reverse inclusion. Consequently $D^\\prime=\\varnothing$ if and only if $\\operatorname{im}|g|\\subseteq|W_{\\mathrm{ur}}|$.",
+   "uses": [
+    "lem-a1-space-point-open-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-properties.tex",
+    "place": "Tag 03H4 (lemma-points-cartesian), used to spell out the final base-change inference of Tag 05X8."
+   }
+  },
+  {
+   "text": "By the maximal-locus assertion of [lem-sfb-space-unramified-locus-base-change], $u_{B^\\prime}$ is unramified if and only if $U(u_{B^\\prime})=A^\\prime$. Indeed an unramified map is unramified on the whole source, while restriction to its maximal locus is unramified by the cited statement. The full-point-image criterion in [lem-a1-space-point-open-calculus] identifies this with $D^\\prime=\\varnothing$. By step 4 this is equivalent to $\\operatorname{im}|g|\\subseteq|W_{\\mathrm{ur}}|$, and [lem-a1-space-open-factor-scheme-tests] identifies that condition with factorization of $g$ through $W_{\\mathrm{ur}}$; the converse follows simply by taking point images of a factorization. Finally, if $B$ is a scheme, the identity scheme test in [def-a1-space-open-subspace] says that $W_{\\mathrm{ur}}=B\\times_BW_{\\mathrm{ur}}$ is represented by an open subscheme of $B$.",
+   "uses": [
+    "lem-sfb-space-unramified-locus-base-change",
+    "lem-a1-space-point-open-calculus",
+    "lem-a1-space-open-factor-scheme-tests",
+    "def-a1-space-open-subspace"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-more-morphisms.tex",
+    "place": "Tag 05X8 (lemma-where-unramified), universal property; spaces-properties.tex Tags 03BZ and 03IE; spaces.tex Tag 02YU."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-a1-space-open-subspace",
+  "lem-a1-space-etale-open-image",
+  "lem-a1-space-open-factor-scheme-tests",
+  "lem-a1-space-point-open-calculus",
+  "lem-sfb-space-lft-cancellation",
+  "lem-sfb-space-unramified-locus-base-change",
+  "lem-trf-space-fibre-products-etale-covers"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/spaces-more-morphisms.tex",
+  "place": "Tag 05X8 (lemma-where-unramified), proof, with the fibre-product point-lifting argument made explicit (Tag 03H4)."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For a map X to Y over Z with X to Z closed and locally of finite type the universal base locus where X to Y is unramified is open",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"Algebra.isOpen_unramifiedLocus\", \"module\": \"Mathlib/RingTheory/Unramified/Locus\", \"type\": \"∀ {R : Type u_1} {A : Type u_2} [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A]\\n  [Algebra.EssFiniteType R A], IsOpen (Algebra.unramifiedLocus R A)\", \"doc\": \"If $ A $ is a commutative ring of essential finite type over a commutative ring $ R $, then the set of prime ideals $ \\\\mathfrak{p} \\\\in \\\\operatorname{Spec}(A) $ where $ A $ is unramified over $ R $ for\"}\n  {\"name\": \"AlgebraicGeometry.FormallyUnramified.isOpenImmersion_diagonal\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FormallyUnramified\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.FormallyUnramified f]\\n  [AlgebraicGeometry.LocallyOfFiniteType f],\\n  AlgebraicGeometry.IsOpenImmersion (CategoryTheory.Limits.pullback.diagonal f)\", \"doc\": \"If a morphism of schemes is formally unramified and locally of finite type, then its diagonal morphism in the pullback is an open immersion.\"}\n  {\"name\": \"Algebra.unramifiedLocus\", \"module\": \"Mathlib/RingTheory/Unramified/Locus\", \"type\": \"(R : Type u_1) → (A : Type u_2) → [inst : CommRing R] → [inst_1 : CommRing A] → [Algebra R A] → Set (PrimeSpectrum A)\", \"doc\": \"The set of prime ideals in the prime spectrum of a commutative ring $ A $ where the algebra $ A $ is unramified over the base commutative ring $ R $. Formally, this consists of all prime ideals $ \\\\mat\"}\n  {\"name\": \"Algebra.isOpen_etaleLocus\", \"module\": \"Mathlib/RingTheory/Etale/Locus\", \"type\": \"∀ {R : Type u_1} {A : Type u_2} [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A]\\n  [Algebra.FinitePresentation R A], IsOpen (Algebra.etaleLocus R A)\", \"doc\": \"The set of prime ideals $\\\\mathfrak{p} \\\\in \\\\operatorname{Spec}(A)$ where the algebra $A$ over the commutative ring $R$ is étale forms an open subset of the prime spectrum $\\\\operatorname{Spec}(A)$ under\"}\n  {\"name\": \"Algebra.isOpen_smoothLocus\", \"module\": \"Mathlib/RingTheory/Smooth/Locus\", \"type\": \"∀ {R : Type u_1} {A : Type u_2} [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A]\\n  [Algebra.FinitePresentation R A], IsOpen (Algebra.smoothLocus R A)\", \"doc\": \"If $ A $ is a finitely presented algebra over a commutative ring $ R $, then the smooth locus of $ A $ over $ R $ is an open subset of the prime spectrum $ \\\\operatorname{Spec}(A) $ equipped with the Z\"}\n  {\"name\": \"Algebra.FormallyUnramified.isOpenImmersion_SpecMap_lmul\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FormallyUnramified\", \"type\": \"∀ {R S : Type u} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S] [Algebra.FormallyUnramified R S]\\n  [Algebra.EssFiniteType R S],\\n  AlgebraicGeometry.IsOpenImmersion\\n    (AlgebraicGeometry.Spec.map (CommRingCat.ofHom (Algebra.TensorProduct.lmul' R).toRingHom))\", \"doc\": \"For a commutative ring $ R $ and an $ R $-algebra $ S $ that is formally unramified and of essential finite type, the morphism $ \\\\operatorname{Spec}(S) \\\\to \\\\operatorname{Spec}(S \\\\otimes_R S) $ induced\"}\n  {\"name\": \"Algebra.basicOpen_subset_unramifiedLocus_iff\", \"module\": \"Mathlib/RingTheory/Unramified/Locus\", \"type\": \"∀ {R : Type u_1} {A : Type u_2} [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A] {f : A},\\n  ↑(PrimeSpectrum.basicOpen f) ⊆ Algebra.unramifiedLocus R A ↔ Algebra.FormallyUnramified R (Localization.Away f)\", \"doc\": \"The basic open set $ D(f) $ in the prime spectrum of $ A $ is contained within the unramified locus of the $ R $-algebra $ A $ if and only if the localization $ A_f $ (localization of $ A $ at the sub\"}\n  {\"name\": \"Algebra.unramifiedLocus_eq_univ_iff\", \"module\": \"Mathlib/RingTheory/Unramified/Locus\", \"type\": \"∀ {R : Type u_1} {A : Type u_2} [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A],\\n  Algebra.unramifiedLocus R A = Set.univ ↔ Algebra.FormallyUnramified R A\", \"doc\": \"The unramified locus of an algebra $ A $ over a commutative ring $ R $ is equal to the universal set of prime ideals in $ A $ if and only if $ A $ is formally unramified over $ R $.\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: the ring-theoretic source unramified locus is not the universal parameter open for an entire algebraic-space family"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The locus on the base where every point in a closed family is unramified is represented by an open subspace of an algebraic space",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"Algebra.isOpen_unramifiedLocus\", \"module\": \"Mathlib/RingTheory/Unramified/Locus\", \"type\": \"∀ {R : Type u_1} {A : Type u_2} [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A]\\n  [Algebra.EssFiniteType R A], IsOpen (Algebra.unramifiedLocus R A)\", \"doc\": \"If $ A $ is a commutative ring of essential finite type over a commutative ring $ R $, then the set of prime ideals $ \\\\mathfrak{p} \\\\in \\\\operatorname{Spec}(A) $ where $ A $ is unramified over $ R $ for\"}\n  {\"name\": \"Algebra.unramifiedLocus\", \"module\": \"Mathlib/RingTheory/Unramified/Locus\", \"type\": \"(R : Type u_1) → (A : Type u_2) → [inst : CommRing R] → [inst_1 : CommRing A] → [Algebra R A] → Set (PrimeSpectrum A)\", \"doc\": \"The set of prime ideals in the prime spectrum of a commutative ring $ A $ where the algebra $ A $ is unramified over the base commutative ring $ R $. Formally, this consists of all prime ideals $ \\\\mat\"}\n  {\"name\": \"Algebra.basicOpen_subset_unramifiedLocus_iff\", \"module\": \"Mathlib/RingTheory/Unramified/Locus\", \"type\": \"∀ {R : Type u_1} {A : Type u_2} [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A] {f : A},\\n  ↑(PrimeSpectrum.basicOpen f) ⊆ Algebra.unramifiedLocus R A ↔ Algebra.FormallyUnramified R (Localization.Away f)\", \"doc\": \"The basic open set $ D(f) $ in the prime spectrum of $ A $ is contained within the unramified locus of the $ R $-algebra $ A $ if and only if the localization $ A_f $ (localization of $ A $ at the sub\"}\n  {\"name\": \"Algebra.unramifiedLocus_eq_univ_iff\", \"module\": \"Mathlib/RingTheory/Unramified/Locus\", \"type\": \"∀ {R : Type u_1} {A : Type u_2} [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A],\\n  Algebra.unramifiedLocus R A = Set.univ ↔ Algebra.FormallyUnramified R A\", \"doc\": \"The unramified locus of an algebra $ A $ over a commutative ring $ R $ is equal to the universal set of prime ideals in $ A $ if and only if $ A $ is formally unramified over $ R $.\"}\n  {\"name\": \"AlgebraicGeometry.FormallyUnramified\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FormallyUnramified\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"A morphism $ f: X \\\\to Y $ of schemes is formally unramified if it satisfies the infinitesimal lifting property characterizing formal unramification, meaning there are no nontrivial deformations of $ f\"}\n  {\"name\": \"Algebra.isOpen_etaleLocus\", \"module\": \"Mathlib/RingTheory/Etale/Locus\", \"type\": \"∀ {R : Type u_1} {A : Type u_2} [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A]\\n  [Algebra.FinitePresentation R A], IsOpen (Algebra.etaleLocus R A)\", \"doc\": \"The set of prime ideals $\\\\mathfrak{p} \\\\in \\\\operatorname{Spec}(A)$ where the algebra $A$ over the commutative ring $R$ is étale forms an open subset of the prime spectrum $\\\\operatorname{Spec}(A)$ under\"}\n  {\"name\": \"AlgebraicGeometry.formallyUnramified_iff\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FormallyUnramified\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y),\\n  AlgebraicGeometry.FormallyUnramified f ↔\\n    ∀ {U : Y.Opens},\\n      AlgebraicGeometry.IsAffineOpen U →\\n        ∀ {V : X.Opens},\\n          AlgebraicGeometry.IsAffineOpen V →\\n            ∀ (e : V ≤ (TopologicalSpace.Opens.map f.base).obj U),\\n          \", \"doc\": \"A morphism $ f: X \\\\to Y $ of schemes is formally unramified if and only if for every affine open subset $ U \\\\subseteq Y $ and every affine open subset $ V \\\\subseteq X $ such that $ V $ maps into $ U $\"}\n  {\"name\": \"Algebra.etaleLocus_eq_unramfiedLocus_inter_smoothLocus\", \"module\": \"Mathlib/RingTheory/Etale/Locus\", \"type\": \"∀ {R : Type u_1} {A : Type u_2} [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A],\\n  Algebra.etaleLocus R A = Algebra.unramifiedLocus R A ∩ Algebra.smoothLocus R A\", \"doc\": \"For a commutative ring $ R $ and an $ R $-algebra $ A $, the étale locus of $ A $ over $ R $ coincides with the intersection of the unramified locus and the smooth locus of $ A $ over $ R $. Formally,\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: the ring-theoretic source unramified locus is not the universal parameter open for an entire algebraic-space family"
+  },
+  {
+   "tool": "leansearch",
+   "query": "For a map X to Y over Z with X to Z closed and locally of finite type the universal base locus where X to Y is unramified is open",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"Algebra.isOpen_unramifiedLocus\", \"module\": \"Mathlib.RingTheory.Unramified.Locus\", \"type\": \"[EssFiniteType R A] : IsOpen (unramifiedLocus R A)\", \"doc\": \"If $ A $ is a commutative ring of essential finite type over a commutative ring $ R $, then the set of prime ideals $ \\\\mathfrak{p} \\\\in \\\\operatorname{Spec}(A) $ where $ A $ is unramified over $ R $ for\"}\n  {\"name\": \"Algebra.unramifiedLocus\", \"module\": \"Mathlib.RingTheory.Unramified.Locus\", \"type\": \": Set (PrimeSpectrum A)\", \"doc\": \"The set of prime ideals in the prime spectrum of a commutative ring $ A $ where the algebra $ A $ is unramified over the base commutative ring $ R $. Formally, this consists of all prime ideals $ \\\\mat\"}\n  {\"name\": \"AlgebraicGeometry.FormallyUnramified.recOn\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.FormallyUnramified\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} →\\n  {f : X ⟶ Y} →\\n    {motive : AlgebraicGeometry.FormallyUnramified f → Sort u_1} →\\n      (t : AlgebraicGeometry.FormallyUnramified f) →\\n        ((formallyUnramified_appLE :\\n              ∀ {U : Y.Opens},\\n                AlgebraicGeometry.IsAffineOpen U →\\n          \", \"doc\": \"A morphism $ f: X \\to Y $ of schemes is formally unramified if it satisfies the infinitesimal lifting property characterizing formal unramification, meaning there are no nontrivial deformations of $ f \"}\n  {\"name\": \"AlgebraicGeometry.FormallyUnramified.casesOn\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.FormallyUnramified\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} →\\n  {f : X ⟶ Y} →\\n    {motive : AlgebraicGeometry.FormallyUnramified f → Sort u_1} →\\n      (t : AlgebraicGeometry.FormallyUnramified f) →\\n        ((formallyUnramified_appLE :\\n              ∀ {U : Y.Opens},\\n                AlgebraicGeometry.IsAffineOpen U →\\n          \", \"doc\": \"A morphism $ f: X \\to Y $ of schemes is formally unramified if it satisfies the infinitesimal lifting property characterizing formal unramification, meaning there are no nontrivial deformations of $ f \"}\n  {\"name\": \"AlgebraicGeometry.isOpenMap_of_generalizingMap\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.UniversallyOpen\", \"type\": \"[LocallyOfFinitePresentation f] (hf : GeneralizingMap f) : IsOpenMap f\", \"doc\": \"If a morphism of schemes is locally of finite presentation and a generalizing map, then it is an open map.\"}\n  {\"name\": \"Algebra.unramifiedLocus_eq_univ_iff\", \"module\": \"Mathlib.RingTheory.Unramified.Locus\", \"type\": \": unramifiedLocus R A = Set.univ ↔ Algebra.FormallyUnramified R A\", \"doc\": \"The unramified locus of an algebra $ A $ over a commutative ring $ R $ is equal to the universal set of prime ideals in $ A $ if and only if $ A $ is formally unramified over $ R $.\"}\n  {\"name\": \"AlgebraicGeometry.FormallyUnramified\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.FormallyUnramified\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"A morphism $ f: X \\\\to Y $ of schemes is formally unramified if it satisfies the infinitesimal lifting property characterizing formal unramification, meaning there are no nontrivial deformations of $ f\"}\n  {\"name\": \"Algebra.basicOpen_subset_unramifiedLocus_iff\", \"module\": \"Mathlib.RingTheory.Unramified.Locus\", \"type\": \"{f : A} : ↑(PrimeSpectrum.basicOpen f) ⊆ unramifiedLocus R A ↔ Algebra.FormallyUnramified R (Localization.Away f)\", \"doc\": \"The basic open set $ D(f) $ in the prime spectrum of $ A $ is contained within the unramified locus of the $ R $-algebra $ A $ if and only if the localization $ A_f $ (localization of $ A $ at the sub\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: the ring-theoretic source unramified locus is not the universal parameter open for an entire algebraic-space family"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"unramifiedLocus\"",
+   "results": "[loogle] OK 6 hit(s)\n  {\"name\": \"Algebra.unramifiedLocus\", \"module\": \"Mathlib.RingTheory.Unramified.Locus\", \"type\": \" (R : Type u_1) (A : Type u_2) [CommRing R] [CommRing A] [Algebra R A] : Set (PrimeSpectrum A)\", \"doc\": \"`Algebra.unramifiedLocus R A` is the set of primes `p` of `A` that are unramified.\"}\n  {\"name\": \"Algebra.isOpen_unramifiedLocus\", \"module\": \"Mathlib.RingTheory.Unramified.Locus\", \"type\": \" {R : Type u_1} {A : Type u_2} [CommRing R] [CommRing A] [Algebra R A] [Algebra.EssFiniteType R A] : IsOpen (Algebra.unramifiedLocus R A)\", \"doc\": \"\"}\n  {\"name\": \"Algebra.unramifiedLocus_eq_univ_iff\", \"module\": \"Mathlib.RingTheory.Unramified.Locus\", \"type\": \" {R : Type u_1} {A : Type u_2} [CommRing R] [CommRing A] [Algebra R A] : Algebra.unramifiedLocus R A = Set.univ ↔ Algebra.FormallyUnramified R A\", \"doc\": \"\"}\n  {\"name\": \"Algebra.unramifiedLocus_eq_compl_support\", \"module\": \"Mathlib.RingTheory.Unramified.Locus\", \"type\": \" {R : Type u_1} {A : Type u_2} [CommRing R] [CommRing A] [Algebra R A] : Algebra.unramifiedLocus R A = (Module.support A Ω[A⁄R])ᶜ\", \"doc\": \"\"}\n  {\"name\": \"Algebra.basicOpen_subset_unramifiedLocus_iff\", \"module\": \"Mathlib.RingTheory.Unramified.Locus\", \"type\": \" {R : Type u_1} {A : Type u_2} [CommRing R] [CommRing A] [Algebra R A] {f : A} : ↑(PrimeSpectrum.basicOpen f) ⊆ Algebra.unramifiedLocus R A ↔ Algebra.FormallyUnramified R (Localization.Away f)\", \"doc\": \"\"}\n  {\"name\": \"Algebra.etaleLocus_eq_unramifiedLocus_inter_smoothLocus\", \"module\": \"Mathlib.RingTheory.Etale.Locus\", \"type\": \" {R : Type u_1} {A : Type u_2} [CommRing R] [CommRing A] [Algebra R A] : Algebra.etaleLocus R A = Algebra.unramifiedLocus R A ∩ Algebra.smoothLocus R A\", \"doc\": \"\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: the ring-theoretic source unramified locus is not the universal parameter open for an entire algebraic-space family"
+  },
+  {
+   "tool": "grep",
+   "query": "where.*unramified|unramifiedLocus|Unramified.*[Ll]ocus",
+   "results": "[grep] OK 14 hit(s)\n  {\"file\": \"Mathlib/RingTheory/Frobenius.lean\", \"line\": \"11\", \"text\": \"public import Mathlib.RingTheory.Unramified.Locus\"}\n  {\"file\": \"Mathlib/RingTheory/RingHom/Unramified.lean\", \"line\": \"8\", \"text\": \"public import Mathlib.RingTheory.Unramified.Locus\"}\n  {\"file\": \"Mathlib/RingTheory/RingHom/Unramified.lean\", \"line\": \"103\", \"text\": \"  refine Algebra.basicOpen_subset_unramifiedLocus_iff.mpr ?_ hrx\"}\n  {\"file\": \"Mathlib/RingTheory/Unramified/LocalStructure.lean\", \"line\": \"359\", \"text\": \"    rw [← basicOpen_subset_unramifiedLocus_iff] at this\"}\n  {\"file\": \"Mathlib/RingTheory/Unramified/Field.lean\", \"line\": \"11\", \"text\": \"public import Mathlib.RingTheory.Unramified.Locus\"}\n  {\"file\": \"Mathlib/RingTheory/Unramified/LocalRing.lean\", \"line\": \"11\", \"text\": \"public import Mathlib.RingTheory.Unramified.Locus\"}\n  {\"file\": \"Mathlib/RingTheory/Etale/Locus.lean\", \"line\": \"9\", \"text\": \"public import Mathlib.RingTheory.Unramified.Locus\"}\n  {\"file\": \"Mathlib/RingTheory/Etale/Locus.lean\", \"line\": \"55\", \"text\": \"    etaleLocus R A = unramifiedLocus R A ∩ smoothLocus R A :=\"}\n  {\"file\": \"Mathlib/RingTheory/Etale/Locus.lean\", \"line\": \"91\", \"text\": \"  exact isOpen_unramifiedLocus.inter isOpen_smoothLocus\"}\n  {\"file\": \"Mathlib/RingTheory/Unramified/Locus.lean\", \"line\": \"15\", \"text\": \"# Unramified locus of an algebra\"}\n  {\"file\": \"Mathlib/RingTheory/Unramified/Locus.lean\", \"line\": \"18\", \"text\": \"- `Algebra.unramifiedLocus` : The set of primes that is unramified over the base.\"}\n  {\"file\": \"Mathlib/RingTheory/Unramified/Locus.lean\", \"line\": \"19\", \"text\": \"- `Algebra.basicOpen_subset_unramifiedLocus_iff` :\"}\n  {\"file\": \"Mathlib/RingTheory/Unramified/Locus.lean\", \"line\": \"20\", \"text\": \"  `D(f)` is contained in the unramified locus if and only if `A_f` is unramified over `R`.\"}\n  {\"file\": \"Mathlib/RingTheory/Unramified/Locus.lean\", \"line\": \"21\", \"text\": \"- `Algebra.unramifiedLocus_eq_univ_iff` :\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: the ring-theoretic source unramified locus is not the universal parameter open for an entire algebraic-space family"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-relative-finite-hilbert-lci-open",
+  "date": "2026-10-23",
+  "group": "O3"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Power lifting implies universal submersiveness of an affine invariant quotient. Fppf presentation used after the affine invariant quotient construction. Supporting input: Apply the flat-groupoid algebraicity theorem to the action groupoid; unlike the smooth-groupoid theorem this does not require H smooth. Algebraicity step: criteria.tex Tag 06FI applies the general bootstrap theorem Tag 06DC to the flat locally finitely presented quotient presentation. Supporting input: Tag 06CL (lemma-lci-locus-stack-in-groupoids); examples-stacks.tex Tag 05WB (lemma-hilbert-d-stack). Proof input: 06CL application of spaces-more-morphisms lemma-where-unramified to Z -> X_y over T.",
+   "via": [
+    "lem-sfb-relative-finite-hilbert-lci-open",
+    "lem-sfb-fppf-stack-algebraicity-bootstrap",
+    "lem-sfb-flat-groupoid-algebraic-quotient",
+    "lem-sfb-flat-affine-action-stack-presentation",
+    "lem-sfb-power-lifting-quotient-submersive",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-space-closed-source-unramified-base-open",
+  "worker": "stage1",
+  "summary": "Statement unchanged. Five-step proof of Stacks 05X8: cancel local finite type, construct the complement of the closed bad image, identify the base-changed locus, prove equality of bad images by point lifting, and verify factorization. All inputs reuse existing nodes; no new nodes.",
+  "blueprint": "The inherited precise from.place is retained: det-thm-sf-ctf-stability-direct-images proof (3), through the alteration/moduli and Hilbert-lci prerequisites, finally 06CL applying 05X8. The latest blueprint direct-images proof (3) supplies the ambient compactification/direct-image route. blueprint_refs.py ancestor returns None for this inherited creation chain, so from.node remains null and via is retained. Searches for 05X8, 05W2, unramified and open subspace found no imported blueprint node stating this parameter-open assertion.",
+  "tool_uses": [
+   {
+    "node": "lem-a1-space-point-open-calculus",
+    "why": "Generic point topology and Cartesian point-lifting for spaces, needed in steps 2, 4 and 5; no unit-local node gives this calculus."
+   },
+   {
+    "node": "lem-a1-space-etale-open-image",
+    "why": "Only its open-subspace/open-subset correspondence is used in step 2; this generic space-topology tool supplies the 03BZ input and replaces no unit route."
+   },
+   {
+    "node": "lem-a1-space-open-factor-scheme-tests",
+    "why": "Generic pullback and point-image factorization through an open (03IE), needed in steps 3 and 5; no unit-local node states it."
+   },
+   {
+    "node": "lem-trf-space-fibre-products-etale-covers",
+    "why": "Only existence and the universal property of algebraic-space fibre products are used in step 3; this is a generic geometric tool, not a trace-formula argument."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-a1-space-point-open-calculus",
+  "lem-a1-space-etale-open-image",
+  "lem-a1-space-open-factor-scheme-tests",
+  "lem-trf-space-fibre-products-etale-covers"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q38-93b0c05ac",
+  "group": "Q38",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q38-93b0c05ac (reviewer sub-agent of L); spot-checked: Read Stacks 05X8 (spaces-more-morphisms.tex 11528-11563) against the item. The hypotheses match exactly: p locally of finite type and |p| closed, nothing more. The statement is unchanged and nothing was weakened. There are no new nodes and no repair note applies. Step 1 proves u is locally of finite type by cancellation (lem-sfb-space-lft-cancellation), which the source assumes silently; this makes the locus node lem-sfb-space-unramified-locus-base-change applicable. Step 2: D is closed because the point map of the open U is an open embedding; E=|p|(D) is closed because |p| is closed; W comes from the first clause of lem-a1-space-etale-open-image (03BZ). Step 3 identifies A×_B B' with A×_C C' on scheme-valued points, then uses the locus node's base-change clause and the 03IE point-image clause, giving D'=|r|^{-1}D. Step 4 proves |p'|(D')=|g|^{-1}(E) by point lifting (03H4 in lem-a1-space-point-open-calculus); closedness of p' is never used. Step 5: u_{B'} is unramified iff U(u_{B'})=A' iff D'=∅ iff g factors through W (03IE); the scheme case follows from the identity scheme test in def-a1-space-open-subspace. Small cases tested: dual numbers over k give W empty and agree; empty A, an isomorphism u, and empty fibres all behave correctly. Duplicate search on 05X8: the scheme version lem-sfb-closed-source-unramified-parameter-open is a special case, not a duplicate; lem-sfb-space-unramified-radicial-parameter-open (05X9) cites this item. Accepted the four declared tool_uses (a1 03BZ, 03IE and 03H4 nodes; trf fibre products) as generic algebraic-space foundations named in 05X8's own proof. Batch-5 flags: all five cited nodes reach sec-trace-formula only through the definition def-trf-algebraic-space, which was already a stmt_dep. None is part of the proof of the trace formula or of Poincaré duality, so all are accepted. No SGA source."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.AlgebraicSpaceClosedSourceUnramifiedBaseOpen",
+  "declaration": "AlgebraicGeometry.AlgebraicSpace.exists_openSubspace_universal_unramified_of_closed_source",
+  "file": "lean/Sheaf/AlgebraicGeometry/AlgebraicSpaceClosedSourceUnramifiedBaseOpen.lean",
+  "statement": "theorem exists_openSubspace_universal_unramified_of_closed_source {S : Scheme.{u}} (A C B : AlgebraicSpace S) (p : A ⟶ B) (q : C ⟶ B) (u : A ⟶ C) (w : u ≫ q = p) (hp_lft : MapIsLocally (@LocallyOfFiniteType) p) (hp_closed : IsClosedMap (mapPoint p.hom.hom)) : ∃ W : OpenSubspace B, (∀ (B' : AlgebraicSpace S) (g : B' ⟶ B), (∃ l : B'.obj.obj ⟶ W.val.toFunctor, l ≫ W.val.ι = g.hom.hom) ↔ MapIsLocally (@AlgebraicGeometry.IsUnramified) (X := ⟨Limits.pullback p.hom g.hom, (fibreProduct_isAlgebraicSpace A B' B p g).1⟩) (Y := ⟨Limits.pullback q.hom g.hom, (fibreProduct_isAlgebraicSpace C B' B q g).1⟩) (ObjectProperty.homMk (pullback.map p.hom g.hom q.hom g.hom u.hom (𝟙 B'.obj) (𝟙 B.obj) (by simpa using (congrArg (fun k : A ⟶ B ↦ k.hom) w).symm) (by simp)))) ∧ (∀ (T : Over S) (e : B.obj.obj ≅ yoneda.obj T), ∃ (V : Over S) (j : V ⟶ T), IsOpenImmersion j.left ∧ ∃ eW : W.val.toFunctor ≅ yoneda.obj V, W.val.ι ≫ e.hom = eW.hom ≫ yoneda.map j)",
+  "branch": "sheaf-dag",
+  "by": "Q14",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "Uses the landed generic chart test MapIsLocally with the recorded scheme IsUnramified conjunction. Added the already landed def-sfb-space-morphism-properties statement dependency for this shared chart test; no definition is duplicated. The two sheaf fibre products are bundled using fibreProduct_isAlgebraicSpace and their induced map is the canonical pullback.map."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-7be700821",
+  "group": "Q14",
+  "result": "pass",
+  "note": "Read item, 10 stmt_deps, module, report (Worker report + Second reading by Q14), Stacks 05X8 (spaces-more-morphisms.tex 11529-11563). Clauses match: MapIsLocally LocallyOfFiniteType p; IsClosedMap (mapPoint p) (closed, not universally closed); ∃ W : OpenSubspace B; ∀ B' g, factorization through W ↔ MapIsLocally IsUnramified of pullback.map p g q g u 𝟙 𝟙 (checked square order, map (a,b')↦(u a,b')); scheme clause over every representing iso with open immersion and compatible inclusion. No extra hypotheses; universe u bound; edge cases (empty A/B/B', g=id, u iso) covered. H4: SpaceChartwiseUnramified is theorem-owned, item correctly uses def-node MapIsLocally and adds landed def-sfb-space-morphism-properties as stmt_dep (only node change vs live; live has no lean yet). mapPoint owner def-sfb-proper-curve-moduli reached transitively (note). Sorry-only theorem, docstrings with Tag 05X8 + blueprint + proof steps, lean.statement verbatim, proof imports exist. No recompile (no change)."
+ }
+}

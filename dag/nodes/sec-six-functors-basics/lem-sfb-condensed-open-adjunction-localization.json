@@ -1,0 +1,309 @@
+{
+ "id": "lem-sfb-condensed-open-adjunction-localization",
+ "kind": "statement",
+ "title": "Normalized unbounded derived open adjunction for condensed modules",
+ "statement": "Fix a prime $\\ell$ and a field $k$ of positive characteristic different from $\\ell$. All schemes are separated of finite type over $k$ and all maps are $k$-morphisms [sk-def-sfb-dc-setting]. Let $\\Lambda$ be admissible [sk-def-localizing-closure], using [sk-def-sfb-qlbar-condensed] for $\\overline{\\mathbf Q}_\\ell$. On a small representative of each small pro-etale site [def-weil-pbc-proetale-site], put $\\mathcal C_T=\\Mod_{\\Lambda_T}(\\Sh(T_{\\mathrm{proet}},\\Ab))$, where $\\Lambda_T=p_T^*\\Lambda$ [sk-def-sfb-pulled-back-coefficients; sk-def-sfb-module-objects]. Let $h:V\\hookrightarrow X$ be a quasi-compact open immersion [def-weil-open-immersion]. Use the specified module pullback and extension by zero [sk-def-sfb-module-pushforward-pullback; sk-def-sfb-module-lower-shriek] and the specified adjunction $h_!\\dashv h^*$ [def-sfb-module-open-lower-shriek-adjunction], with unit $u$ and counit $v$. Both functors are exact and additive, and the actual unit $u:1\\to h^*h_!$ is invertible. Use ordinary unbounded derived categories $D(\\mathcal C_T)$ with localization $Q_T$ [sk-def-sfb-derived-categories]. Write $C(F)$ for termwise application of an additive functor and $a_{F,K}:D(F)QK\\xrightarrow{\\sim}QC(F)K$ for the canonical exact-functor factorization [lem-weil-pbc-exact-functor-derived-factorization]. The specified termwise adjunction descends to $D(h_!)\\dashv D(h^*)$ with unit $u_D$ and counit $v_D$ equal, under the $a_F$ comparisons, to $Q(C(u))$ and $Q(C(v))$. In particular, for every complex $K$ in $\\mathcal C_V$,\n$$a_{h^*,C(h_!)K}\\circ D(h^*)(a_{h_!,K})\\circ (u_D)_{Q_VK}=Q_V(C(u)_K).$$\nThe unit $u_D$ is invertible. With the canonical integer-shift identifications of these exact functors, $u_D$, $v_D$ and the derived adjunction Hom bijections commute with simultaneous shift of both variables by every integer. These assertions hold on all unbounded complexes without constructibility assumptions.",
+ "source": {
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Tag 09BN, label lemma-open-immersion; exact open unit. Derived normalization: categories.tex Tag 04VG, label lemma-properties-left-localization, expanded for the specified module adjunction in det-sf-comp-composition-interchange Proof (2). The shift and localization refinements are agent arguments preserved in report.md."
+ },
+ "stmt_deps": [
+  "sk-def-sfb-dc-setting",
+  "sk-def-localizing-closure",
+  "sk-def-sfb-qlbar-condensed",
+  "def-weil-pbc-proetale-site",
+  "sk-def-sfb-pulled-back-coefficients",
+  "sk-def-sfb-module-objects",
+  "def-weil-open-immersion",
+  "sk-def-sfb-module-pushforward-pullback",
+  "sk-def-sfb-module-lower-shriek",
+  "sk-def-sfb-derived-categories",
+  "def-sfb-module-open-lower-shriek-adjunction",
+  "lem-weil-pbc-exact-functor-derived-factorization"
+ ],
+ "proof": [
+  {
+   "text": "The source library supplies additivity and preservation of finite limits and colimits for both actual module functors. Its module-object abelian and Grothendieck sheaf instances provide the abelian categories used by mapDerivedCategory. Assemble these instances directly; no resolution or constructibility argument is required.",
+   "uses": [
+    "def-sfb-module-open-lower-shriek",
+    "det-prop-sfb-module-pullback-exact-main",
+    "lem-sfb-modobj-abelian",
+    "lem-sfb-proetale-sheaves-grothendieck"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "The abelian open extension is fully faithful. The proved source-library Adjunction.fullyFaithfulMapModLeft lifts this full faithfulness through the projection-formula linearization. Restriction along the coefficient isomorphism is the equivalence Mod.comapEquivalenceOfIsIso. Compose these two fully faithful functors, which definitionally gives the specified module extension by zero. Mathlib Adjunction.unit_isIso_of_L_fully_faithful then makes the unit of the actual specified adjunction invertible.",
+   "uses": [
+    "lem-sfb-finite-extension-by-zero-fully-faithful",
+    "def-sfb-finite-extension-by-zero-adjunction",
+    "def-sfb-modobj-linearization-transport-adjunction",
+    "def-sfb-module-linear-open-lower-shriek",
+    "lem-sfb-alpha-iso",
+    "def-sfb-modobj-restriction-equivalence",
+    "def-sfb-module-open-lower-shriek-adjunction"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Apply the existing Adjunction.mapHomologicalComplex to the specified adjunction. Supply CatCommSq structures using the inverses of the two canonical mapDerivedCategoryFactors isomorphisms. Adjunction.localization gives an adjunction on the full unbounded derived categories. Its localization_unit_app and localization_counit_app formulas give the two required normalizations, cancelling the inverse comparison maps for the displayed unit equation.",
+   "uses": [
+    "lem-weil-pbc-termwise-adjunction-homotopy",
+    "lem-weil-pbc-exact-functor-derived-factorization",
+    "lem-sfb-adjunction-localization"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Each component of the cochain unit is an isomorphism because its degree i component is the original invertible unit. HomologicalComplex.Hom.isIso_of_components and functoriality of Q make its localized image invertible. The unit formula expresses every component over Q as a composite of three isomorphisms. Precomposition with Q is fully faithful, hence reflects isomorphisms, so the entire descended unit is invertible.",
+   "uses": [
+    "lem-weil-pbc-localization-universal-property"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "For each integer n, compute the cochain unit shift square in degree i: all shift comparison components are identities, leaving the same unit on K.X(i+n). Express whiskerLeft Q of the derived unit as the whiskered cochain unit followed by the inverse right and left factorization comparisons, with associators and unitors. Each factor commutes with integer shifts. The proved source lemma NatTrans.CommShift.of_whiskerLeft transfers this property from Q to the whole derived category, using essential surjectivity of Q. Adjunction.CommShift.mk' gives the counit compatibility from the unit compatibility.",
+   "uses": [
+    "lem-weil-pbc-exact-functor-derived-factorization",
+    "lem-weil-pbc-localization-universal-property"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Write the Hom equivalence as unit followed by R of the given morphism. Postcompose both sides of the required equation with the invertible right shift comparison. Naturality of that comparison and the proved unit shift square identify the left side with the shift of the unit followed by the shift of R(f). Functorial preservation of composition proves the equality, for every integer n.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-sfb-module-open-lower-shriek",
+  "det-prop-sfb-module-pullback-exact-main",
+  "lem-sfb-modobj-abelian",
+  "lem-sfb-proetale-sheaves-grothendieck",
+  "lem-sfb-finite-extension-by-zero-fully-faithful",
+  "def-sfb-finite-extension-by-zero-adjunction",
+  "def-sfb-modobj-linearization-transport-adjunction",
+  "def-sfb-module-linear-open-lower-shriek",
+  "lem-sfb-alpha-iso",
+  "def-sfb-modobj-restriction-equivalence",
+  "def-sfb-module-open-lower-shriek-adjunction",
+  "lem-weil-pbc-termwise-adjunction-homotopy",
+  "lem-weil-pbc-exact-functor-derived-factorization",
+  "lem-sfb-adjunction-localization",
+  "lem-weil-pbc-localization-universal-property"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Tag 09BN; categories.tex Tag 04VG. Q5 Lean implementation uses existing projection-formula full faithfulness, termwise adjunction, Mathlib localization component formulas, degreewise shift calculation and fully faithful precomposition; preserves the blueprint composition unit route."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "mapDerivedCategory.*[Aa]djunction|[Aa]djunction.*mapDerivedCategory",
+   "results": "0 hits; ; source grep under Mathlib/CategoryTheory",
+   "date": "2026-10-22",
+   "verdict": "no match: generic derived/exact functor results do not prove invertibility of the actual condensed-module open unit or its normalized localized adjunction"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.mapDerivedCategory, CategoryTheory.NatTrans.CommShift",
+   "results": "0 hits; ; loogle: unknown identifier 'CategoryTheory.Adjunction.mapDerivedCategory'",
+   "date": "2026-10-22",
+   "verdict": "no match: generic derived/exact functor results do not prove invertibility of the actual condensed-module open unit or its normalized localized adjunction"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For an open immersion of schemes and a commutative condensed ring, exact extension by zero on internal module sheaves has fully faithful shift-compatible adjunction after unbounded derived localization",
+   "results": "8 hits; AlgebraicGeometry.Scheme.Modules.instIsLeftAdjointRestrictFunctor, AlgebraicGeometry.Scheme.Modules.restrictAdjunction, SheafOfModules.instIsRightAdjointPushforwardCompSheafRingCatMapSheafPushforwardContinuous, SheafOfModules.pushforwardPushforwardAdj, CategoryTheory.Abelian.Ext.mapExactFunctor_hom, CategoryTheory.Abelian.isLocalization_isoModSerre_kernel_of_leftAdjoint, LightCondensed.instIsGrothendieckAbelianLightCondMod, CategoryTheory.Functor.sheafAdjunctionCocontinuous",
+   "date": "2026-10-22",
+   "verdict": "no match: generic derived/exact functor results do not prove invertibility of the actual condensed-module open unit or its normalized localized adjunction"
+  },
+  {
+   "tool": "grep",
+   "query": "[Ee]xtension[Bb]y[Zz]ero|mapDerivedCategory|mapHomologicalComplex.*[Aa]djunction",
+   "results": "10 hits; Mathlib/Algebra/Homology/DerivedCategory/ExactFunctor.lean, Mathlib/Algebra/Homology/DerivedCategory/ExactFunctor.lean, Mathlib/Algebra/Homology/DerivedCategory/ExactFunctor.lean, Mathlib/Algebra/Homology/DerivedCategory/ExactFunctor.lean, Mathlib/Algebra/Homology/DerivedCategory/ExactFunctor.lean, Mathlib/Algebra/Homology/DerivedCategory/Ext/Map.lean, Mathlib/Algebra/Homology/DerivedCategory/Ext/Map.lean, Mathlib/Algebra/Homology/DerivedCategory/Ext/Map.lean; source grep under Mathlib/Algebra/Homology",
+   "date": "2026-10-22",
+   "verdict": "no match: generic derived/exact functor results do not prove invertibility of the actual condensed-module open unit or its normalized localized adjunction"
+  },
+  {
+   "tool": "leansearch",
+   "query": "An exact open extension by zero adjunction on internal modules over a condensed ring descends to unbounded derived categories with invertible units and shift-compatible Hom bijections",
+   "results": "8 hits; CategoryTheory.Adjunction.IsTriangulated.mk'', CategoryTheory.Adjunction.derived, CategoryTheory.Adjunction.derived', ModuleCat.extendRestrictScalarsAdj, CategoryTheory.Abelian.Ext.zero_hom, CategoryTheory.Adjunction.CommShift.compatibilityUnit_isoZero, CategoryTheory.Abelian.Ext.mk₀, CategoryTheory.Adjunction.homAddEquiv_symm_zero",
+   "date": "2026-10-22",
+   "verdict": "no match: generic derived/exact functor results do not prove invertibility of the actual condensed-module open unit or its normalized localized adjunction"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction, CategoryTheory.Functor.mapHomologicalComplex",
+   "results": "0 hits; ",
+   "date": "2026-10-22",
+   "verdict": "no match: generic derived/exact functor results do not prove invertibility of the actual condensed-module open unit or its normalized localized adjunction"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A fully faithful exact left adjoint between abelian categories induces an adjunction on unbounded derived categories whose termwise unit is invertible and commutes with integer shifts",
+   "results": "8 hits; CategoryTheory.Adjunction.derived, CategoryTheory.Adjunction.derived_unit, CategoryTheory.Adjunction.derived'_unit, CategoryTheory.Adjunction.derived', CategoryTheory.Adjunction.derivedη, CategoryTheory.Functor.mapDerivedCategoryFactorsh, CategoryTheory.Functor.mapDerivedCategoryFactors, CategoryTheory.Adjunction.derivedε_fac_app",
+   "date": "2026-10-22",
+   "verdict": "no match: generic derived/exact functor results do not prove invertibility of the actual condensed-module open unit or its normalized localized adjunction"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Exact additive adjoint functors induce a termwise adjunction on unbounded cochain complexes and a shift compatible adjunction on derived categories",
+   "results": "8 hits: CategoryTheory.Adjunction.IsTriangulated.mk'', HomotopyCategory.instIsTriangulatedIntUpMapHomotopyCategory, CategoryTheory.Adjunction.IsTriangulated.mk', CategoryTheory.Adjunction.IsTriangulated, CategoryTheory.Adjunction.IsTriangulated.leftAdjoint_isTriangulated, CategoryTheory.Adjunction.derived', CategoryTheory.Adjunction.IsTriangulated.mk, CategoryTheory.Adjunction.derived",
+   "date": "2026-10-22",
+   "verdict": "no match for the complete condensed-module statement; generic localization and derived functor hits are already cited through existing DAG nodes"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.localization, CategoryTheory.Adjunction.mapHomologicalComplex",
+   "results": "0 hits: . loogle: unknown identifier 'CategoryTheory.Adjunction.mapHomologicalComplex'",
+   "date": "2026-10-22",
+   "verdict": "no match for the complete condensed-module statement; generic localization and derived functor hits are already cited through existing DAG nodes"
+  },
+  {
+   "tool": "grep",
+   "query": "mapHomologicalComplex|localization_unit_app|commShift",
+   "results": "0 hits: ",
+   "date": "2026-10-22",
+   "verdict": "no match for the complete condensed-module statement; generic localization and derived functor hits are already cited through existing DAG nodes"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Open immersion extension by zero on condensed internal module sheaves has invertible adjunction unit and exact pullback",
+   "results": "8 hits: AlgebraicGeometry.Scheme.Modules.restrictFunctorAdjCounitIso, AlgebraicGeometry.Scheme.Modules.restrictAdjunction, SheafOfModules.instIsIsoPullbackObjUnitToUnitOfFinal, AlgebraicGeometry.Scheme.Modules.instIsLeftAdjointRestrictFunctor, SheafOfModules.pullbackPushforwardAdjunction_homEquiv_symm_unitToPushforwardObjUnit, AlgebraicGeometry.Scheme.Modules.restrictFunctorIsoPullback, AlgebraicGeometry.Scheme.Modules.restrictAdjunction_unit_app_app, AlgebraicGeometry.Scheme.Modules.instIsIsoFunctorCounitRestrictAdjunction",
+   "date": "2026-10-22",
+   "verdict": "no match for the complete condensed-module statement; generic localization and derived functor hits are already cited through existing DAG nodes"
+  },
+  {
+   "tool": "grep",
+   "query": "extensionByZero|extendByZero|mapModLeft|localization_unit_app",
+   "results": "6 hits: Mathlib/CategoryTheory/Localization/Adjunction.lean, Mathlib/Algebra/Group/Pi/Lemmas.lean, Mathlib/LinearAlgebra/InvariantBasisNumber.lean, Mathlib/LinearAlgebra/Dimension/StrongRankCondition.lean, Mathlib/LinearAlgebra/Pi.lean, Mathlib/LinearAlgebra/Pi.lean",
+   "date": "2026-10-22",
+   "verdict": "no match for the complete condensed-module statement; generic localization and derived functor hits are already cited through existing DAG nodes"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An exact fully faithful left adjoint induces an unbounded derived adjunction with invertible unit and integer shift compatible Hom equivalence",
+   "results": "8 hits: CategoryTheory.Adjunction.derived, CategoryTheory.Adjunction.derived', CategoryTheory.Adjunction.derived'_unit, CategoryTheory.Adjunction.derived_unit, CategoryTheory.Adjunction.derivedε, CategoryTheory.Adjunction.derivedη, CategoryTheory.Adjunction.derived'_counit, CategoryTheory.Adjunction.derived_counit",
+   "date": "2026-10-22",
+   "verdict": "no match for the complete condensed-module statement; generic localization and derived functor hits are already cited through existing DAG nodes"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.localization",
+   "results": "3 hits: CategoryTheory.Adjunction.localization, CategoryTheory.Adjunction.localization_counit_app, CategoryTheory.Adjunction.localization_unit_app",
+   "date": "2026-10-22",
+   "verdict": "no match for the complete condensed-module statement; generic localization and derived functor hits are already cited through existing DAG nodes"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-derived-open-square-restriction",
+  "date": "2026-10-22",
+  "group": "Q128"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-comp-composition",
+ "blueprint": {
+  "from": {
+   "node": "det-sf-comp-composition-interchange",
+   "place": "Proof (2), first sentence: the exact open left adjoint, its invertible specified unit, and its normalized unbounded derived adjunction and shifts.",
+   "via": [
+    "lem-sfb-derived-open-square-restriction"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sfb-condensed-open-adjunction-localization",
+  "worker": "stage1",
+  "summary": "Preserved the statement; gave a nine-step proof using existing nodes only. Checked exactness, the actual unit through linear and scalar adjunctions, localization formulas, inversion and simultaneous integer shifts. No new nodes or Mathlib leaves needed.",
+  "blueprint": "det-sf-comp-composition-interchange Proof (2), first sentence: exact left adjoint i_!, with its canonical fully faithful open adjunction made explicit.",
+  "tool_uses": [
+   {
+    "node": "det-prop-sfb-module-pullback-exact-main",
+    "why": "Exactness of the specified condensed-module pullback, not a replacement of the compactification route."
+   },
+   {
+    "node": "def-sfb-modobj-linearization-transport-adjunction",
+    "why": "Underlying linear-adjunction Hom bijection; generic module linearization tool."
+   },
+   {
+    "node": "sk-def-sfb-change-of-scalars",
+    "why": "The specified restriction/coextension adjunction and equivalence for an invertible coefficient map."
+   },
+   {
+    "node": "lem-sfb-alpha-iso",
+    "why": "Cartesian coefficient identification needed by the specified module open adjunction."
+   },
+   {
+    "node": "def-weil-pbc-composite-adjunction",
+    "why": "Explicit composite unit formula; generic categorical tool."
+   },
+   {
+    "node": "lem-weil-pbc-termwise-adjunction-homotopy",
+    "why": "Part (a), the generic additive adjunction on all cochain complexes."
+   },
+   {
+    "node": "lem-sfb-proetale-sheaves-grothendieck",
+    "why": "Abelianness of pro-etale abelian sheaves, needed for the module categories to be abelian (added by the maintainer review)."
+   },
+   {
+    "node": "lem-sfb-modobj-abelian",
+    "why": "Module objects over a ring object form an abelian category; generic module-category tool (added by the maintainer review)."
+   }
+  ]
+ },
+ "tool_uses": [
+  "det-prop-sfb-module-pullback-exact-main",
+  "def-sfb-modobj-linearization-transport-adjunction",
+  "sk-def-sfb-change-of-scalars",
+  "lem-sfb-alpha-iso",
+  "def-weil-pbc-composite-adjunction",
+  "lem-weil-pbc-termwise-adjunction-homotopy",
+  "lem-sfb-proetale-sheaves-grothendieck",
+  "lem-sfb-modobj-abelian"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q88-aefb201fa",
+  "group": "Q88",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q88-aefb201fa (reviewer sub-agent of L); spot-checked: Read the item and all 9 steps in full. No new nodes. The statement and stmt_deps are byte-equal to the live unsplit item, so nothing is weakened. Sources checked: Stacks 09BN (proetale.tex l.5117, id≅j^{-1}j_! and j_! fully faithful), 04VG (functor factorization only; the worker correctly gets adjunction descent from the Mathlib leaf lem-sfb-adjunction-localization, not from 04VG), and blueprint det-sf-comp-composition-interchange proof (2), the exact left adjoint i_!. Step checks: Step 2's fully-faithful-left-adjoint ⇒ invertible unit argument is correct (t e_M=1 by faithfulness, e_M t=1 by the other triangle identity). Step 3's inverse-linearity calculation is correct. In Step 4, Res_α is the left adjoint and fully faithful because α is iso (sk-def-sfb-change-of-scalars 5, lem-sfb-alpha-iso); the composite unit orientation matches def-weil-pbc-composite-adjunction, and transport along Coext≅Ext composes with an iso. In Step 6 I checked the type of each piece of the Adjunction.localization unit formula; left-composing with a_{h*}∘D(h*)(a_{h!}) gives exactly the displayed equation. Steps 7–9 are elementary uses of localization clauses (2)/(3) and of φ's shift compatibility with τ the identity in each degree. Edge cases checked: h=id, U=∅, Λ=Q̄_ℓ, unbounded complexes, shifts ±1. Two repairs, both in fixes/dag/nodes/sec-six-functors-basics/lem-sfb-condensed-open-adjunction-localization.json. (1) C1: nothing cited said the module categories are abelian, though Step 5 needs it. Step 1 now cites lem-sfb-modobj-abelian, lem-sfb-proetale-sheaves-grothendieck and sk-def-sfb-sheaf-tensor (2). (2) C4: Step 3 never cited the node saying h^lin_! is the linearization of h^Ab_! with its mapMod adjunction. Step 3 now cites def-sfb-module-linear-open-lower-shriek. proof_deps and split_report.tool_uses are updated to match. Advisory: lem-sfb-condensed-support-derived-localization asserts derived open-unit invertibility for the transported j!⊣upperStar adjunction. It has no a_F normalization or shifts, so it is not a duplicate. lem-sfb-exact-open-closed-unbounded-calculus needs the full closed data, so it is not applicable as stated. No SGA cited; no cycle.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.CondensedOpenAdjunctionLocalization",
+  "declaration": "AlgebraicGeometry.ProEtale.CondensedRing.condensed_open_adjunction_localization",
+  "file": "lean/Sheaf/AlgebraicGeometry/CondensedOpenAdjunctionLocalization.lean",
+  "statement": "theorem condensed_open_adjunction_localization (Λ : Sheaf (coherentTopology Profinite.{u}) AddCommGrpCat.{u + 1}) [MonObj Λ] [IsCommMonObj Λ] (ℓ : ℕ) [Fact ℓ.Prime] (hΛ : IsLocalizingAdmissibleCoefficient ℓ Λ) (k : Type u) [Field k] (p : ℕ) [CharP k p] (hp : 0 < p) (hpℓ : p ≠ ℓ) {V X : Scheme.{u}} [V.Over (Spec (.of k))] [X.Over (Spec (.of k))] [IsSeparated (V ↘ Spec (.of k))] [LocallyOfFiniteType (V ↘ Spec (.of k))] [QuasiCompact (V ↘ Spec (.of k))] [IsSeparated (X ↘ Spec (.of k))] [LocallyOfFiniteType (X ↘ Spec (.of k))] [QuasiCompact (X ↘ Spec (.of k))] (h : V ⟶ X) [h.IsOver (Spec (.of k))] [IsOpenImmersion h] [QuasiCompact h] : (openImmersionLowerShriek Λ h).Additive ∧ PreservesFiniteLimits (openImmersionLowerShriek Λ h) ∧ PreservesFiniteColimits (openImmersionLowerShriek Λ h) ∧ (upperStar Λ h).Additive ∧ PreservesFiniteLimits (upperStar Λ h) ∧ PreservesFiniteColimits (upperStar Λ h) ∧ IsIso (openImmersionLowerShriekUpperStarAdjunction Λ h).unit ∧ ∃ adj : (openImmersionLowerShriek Λ h).mapDerivedCategory ⊣ (upperStar Λ h).mapDerivedCategory, (∀ K : CochainComplex (Mod (Sheaf (Scheme.ProEt.topology V) AddCommGrpCat.{u + 1}) (condensedRingObj Λ V)) ℤ, adj.unit.app (DerivedCategory.Q.obj K) ≫ (upperStar Λ h).mapDerivedCategory.map ((openImmersionLowerShriek Λ h).mapDerivedCategoryFactors.hom.app K) ≫ (upperStar Λ h).mapDerivedCategoryFactors.hom.app (((openImmersionLowerShriek Λ h).mapHomologicalComplex (.up ℤ)).obj K) = DerivedCategory.Q.map (((openImmersionLowerShriekUpperStarAdjunction Λ h).mapHomologicalComplex (.up ℤ)).unit.app K)) ∧ (∀ M : CochainComplex (Mod (Sheaf (Scheme.ProEt.topology X) AddCommGrpCat.{u + 1}) (condensedRingObj Λ X)) ℤ, adj.counit.app (DerivedCategory.Q.obj M) = (openImmersionLowerShriek Λ h).mapDerivedCategory.map ((upperStar Λ h).mapDerivedCategoryFactors.hom.app M) ≫ (openImmersionLowerShriek Λ h).mapDerivedCategoryFactors.hom.app (((upperStar Λ h).mapHomologicalComplex (.up ℤ)).obj M) ≫ DerivedCategory.Q.map (((openImmersionLowerShriekUpperStarAdjunction Λ h).mapHomologicalComplex (.up ℤ)).counit.app M)) ∧ IsIso adj.unit ∧ NatTrans.CommShift adj.unit ℤ ∧ NatTrans.CommShift adj.counit ℤ ∧ (∀ (A : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology V) AddCommGrpCat.{u + 1}) (condensedRingObj Λ V))) (B : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology X) AddCommGrpCat.{u + 1}) (condensedRingObj Λ X))) (f : (openImmersionLowerShriek Λ h).mapDerivedCategory.obj A ⟶ B) (n : ℤ), adj.homEquiv (A⟦n⟧) (B⟦n⟧) (((openImmersionLowerShriek Λ h).mapDerivedCategory.commShiftIso n).hom.app A ≫ f⟦n⟧') = (shiftFunctor _ n).map (adj.homEquiv A B f) ≫ ((upperStar Λ h).mapDerivedCategory.commShiftIso n).inv.app B)",
+  "branch": "newtargets-dag",
+  "by": "Q67",
+  "date": "2026-10-22",
+  "existing": false,
+  "note": "The existential adjunction is normalized against both termwise unit and counit of the specified module adjunction. All shift structures are the canonical mapDerivedCategory structures. The explicit Hom square determines the compatibility of the bijection and, equivalently, its inverse. No bounded or constructible subcategory is used."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-2969a3609",
+  "group": "Q67",
+  "result": "pass",
+  "note": "Node unchanged except the new lean field; lean.statement matches the file verbatim; first S2 delivery. Hypotheses match the node exactly (prime ℓ; CharP k p with 0<p and p≠ℓ; V, X separated finite type over k; h a k-morphism and a quasi-compact open immersion; Λ commutative condensed and IsLocalizingAdmissibleCoefficient), universes match the dependency records. Objects are the recorded openImmersionLowerShriek/upperStar/openImmersionLowerShriekUpperStarAdjunction and Mod over condensedRingObj on ProEt.topology. Unit equation type-checked by hand: it is the node's display with a_F = mapDerivedCategoryFactors.hom in the node's orientation; Q is essentially surjective, so the existential adjunction is fixed by its unit; the upstream mapDerivedCategoryAdjunction satisfies the unit equation (unit_app_fac lemma). Counit equation, IsIso of the derived unit, CommShift of unit and counit, and the shifted Hom square for all n all type-check. Edge cases: h = id, empty schemes, zero ring, Q̄_ℓ, n = 0 and negative n. Source 09BN verified at proetale.tex l.5117. Docstrings carry source, blueprint and the 9-step plan; proof is sorry only; imports in order; both report sections present. Advisory: could name the upstream derivedOpenImmersionLowerShriekUpperStarAdjunction instead of the existential; the second reading was a second pass by the same worker. Not recompiled: the human's 2026-10-21 rule, and no FIX made."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q5",
+  "result": "pass",
+  "landing": "20261023T151924-L-423495",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

@@ -1,0 +1,375 @@
+{
+ "id": "lem-sfb-fpqc-representation-limit-spreading",
+ "kind": "statement",
+ "title": "Scheme representations of finitely presented fpqc forms spread along affine limits",
+ "statement": "Let $S$ be an affine scheme [def-pc-scheme], let $p:A\\to S$ be flat, surjective and quasi-compact with $A$ affine [def-weil-pbc-fpqc-covering], and let $F$ be a contravariant set-valued functor on $S$-schemes satisfying the fpqc covering equalizer condition. Assume $F_A$ is represented by a separated $A$-scheme $P$ of finite presentation [def-pc-representable-functor, def-sbc-locally-finite-presentation]. Here separated means that the diagonal is a closed immersion [def-weil-closed-immersion], and finite presentation means locally of finite presentation, quasi-compact and quasi-separated [def-weil-quasi-separated-morphism]. Let $I$ be a small nonempty directed set, let $(T_i)$ be an inverse system of affine $S$-schemes, and let $T=\\varprojlim_iT_i$ with its specified projections [def-weil-pbc-category-colimit]. Suppose given a representation $h_Y\\simeq F_T$ by a separated $T$-scheme $Y$ of finite presentation. Then there are $i\\in I$, a separated $T_i$-scheme $Y_i$ of finite presentation, and a representation $h_{Y_i}\\simeq F_{T_i}$ whose base change is the specified representation: there is an isomorphism $Y_i\\times_{T_i}T\\simeq Y$ making these maps to $F_T$ equal. No flatness or surjectivity is required of $T\\to T_i$ or of the transition morphisms.",
+ "source": {
+  "document": "literature/raynaud-critere-effectivite-descente.pdf",
+  "place": "Raynaud, Un critere d effectivite de descente, Theorem 4.1 proof, reductions 3 and 4, printed pp.5-19--5-20. Primary scan read at https://www.numdam.org/item/SAC_1967-1968__2__A5_0.pdf; local archival copy WANTED."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-pbc-fpqc-covering",
+  "def-pc-representable-functor",
+  "def-sbc-locally-finite-presentation",
+  "def-pc-fibre-product",
+  "def-weil-quasi-separated-morphism",
+  "def-weil-closed-immersion",
+  "def-weil-pbc-category-colimit"
+ ],
+ "proof": [
+  {
+   "text": "Put $B_i=A\\times_ST_i$ and $C_i=A\\times_SA\\times_ST_i$, and put $B=A\\times_ST$ and $C=A\\times_SA\\times_ST$. All $T_i,B_i,C_i$ are affine, hence qcqs, and every transition is affine. The fibre-product universal property identifies $B=\\varprojlim B_i$ and $C=\\varprojlim C_i$: a compatible family of maps to $B_i$ is exactly a map to $A$ and a compatible family to $T_i$ over $S$; the same argument uses two maps to $A$ for $C_i$. The affine-limit theorem supplies these scheme limits. Thus all three systems satisfy the base hypotheses of finite-presentation continuity. Write $P_{B_i}=P\\times_A B_i$; over $C_i$ distinguish $P_{1,C_i}$ and $P_{2,C_i}$ using its first and second maps to $A$. These schemes are finitely presented over their indicated bases by base-change permanence.",
+   "uses": [
+    "def-pc-fibre-product",
+    "lem-weil-pbc-fibre-product-affine-spectra",
+    "lem-weil-pbc-morphism-affine-schemes-affine",
+    "lem-weil-pbc-affine-scheme-qcqs",
+    "lem-weil-pbc-limit-affine-transition",
+    "lem-weil-pbc-qcqs-morphism-permanence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/limits.tex",
+    "place": "Tags 01YW, 01YX (affine inverse limits); Tag 01ZM (lemma-descend-finite-presentation), preparation; Tags 01I4, 01TS for affine products and base change"
+   }
+  },
+  {
+   "text": "Apply clause (1) of finite-presentation continuity to $Y/T$. Obtain $i_0$, a finitely presented $T_{i_0}$-scheme $V_{i_0}$, and a specified isomorphism $\\lambda:V_{i_0}\\times_{T_{i_0}}T\\simeq Y$. For $i\\ge i_0$ set $V_i=V_{i_0}\\times_{T_{i_0}}T_i$. These are finitely presented, and qcqs since the bases are affine and finite presentation includes quasi-compactness and quasi-separatedness. The given representations and $\\lambda$ induce an isomorphism of representable functors over $B$, hence a scheme isomorphism $\\alpha:V_{i_0}\\times_{T_{i_0}}B\\simeq P\\times_AB$. Explicitly, Yoneda sends a natural map to its value at the identity; applying this to the map and its inverse makes their composites identities. Choose the orientation so the representation of $P_B$ composed with $h_\\alpha$ equals the specified representation of $Y$ composed with $h_{\\lambda_B}$.",
+   "uses": [
+    "thm-pd-spreading-out",
+    "lem-weil-pbc-qcqs-morphism-permanence",
+    "lem-galois-yoneda-fully-faithful"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/limits.tex",
+    "place": "Tag 01ZM(1) (lemma-descend-finite-presentation); Categories Tag 001P (lemma-yoneda)"
+   }
+  },
+  {
+   "text": "Apply clause (2) of finite-presentation continuity over the affine system $(B_i)$ to $\\alpha$ and $\\alpha^{-1}$. Directedness gives one common stage for both arrows. The two composites agree with the respective identities over $B$; clause (3), applied twice and then at a common later stage, makes both inverse equations hold there. We obtain a scheme isomorphism $\\alpha_i:V_i\\times_{T_i}B_i\\simeq P_{B_i}$ whose base change is exactly $\\alpha$. All models here are finitely presented over $B_i$, not merely over $T_i$, by step 1 and base change of $V_i$. Thus neither the existence of the arrows nor their inverse equations requires the map $B\\to B_i$ to be flat or surjective.",
+   "uses": [
+    "thm-pd-spreading-out",
+    "lem-weil-pbc-qcqs-morphism-permanence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/limits.tex",
+    "place": "Tag 01ZM(2),(3) (lemma-descend-finite-presentation), applied to an isomorphism and its inverse"
+   }
+  },
+  {
+   "text": "Let $\\rho:h_P\\simeq F_A$ be the chosen local representation. Over $A\\times_SA$, its two pullbacks give a natural isomorphism $\\rho_2^{-1}\\rho_1:h_{P_1}\\simeq h_{P_2}$; Yoneda gives the corresponding scheme isomorphism $\\delta:P_1\\simeq P_2$. Over $C_i$ consider the two arrows from $V_i\\times_{T_i}C_i$ to $P_{2,C_i}$: $\\delta_{C_i}\\circ\\alpha_{i,1}$ and $\\alpha_{i,2}$. Their base changes to $C$ agree because $\\alpha$ was defined using the single representation of $Y/T$; composing with $\\rho_2$ makes both maps the restriction of that representation composed with $h_\\lambda$. Apply clause (3) of continuity to the system $(C_j)_{j\\ge i}$ and these two arrows. Its source and target models are finitely presented over $C_i$ by base change. After enlarging $i$, we therefore have the actual overlap equation $\\delta_{C_i}\\alpha_{i,1}=\\alpha_{i,2}$.",
+   "uses": [
+    "lem-galois-yoneda-fully-faithful",
+    "thm-pd-spreading-out",
+    "lem-weil-pbc-qcqs-morphism-permanence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/limits.tex",
+    "place": "Tag 01ZM(3) (lemma-descend-finite-presentation); Categories Tag 001P; the compatibility equation needed in Raynaud Theorem 4.1 proof, reduction 4"
+   }
+  },
+  {
+   "text": "Set $Y_i=V_i$. For every $H\\to T_i$, the map $H_A=H\\times_SA\\to H$ is an fpqc cover by base-change stability. The isomorphism $\\alpha_i$ and $\\rho$ give a natural bijection $\\operatorname{Hom}_{T_i}(H_A,V_i)\\simeq F(H_A)$. Step 4 says that this bijection intertwines the two restriction maps to $H_A\\times_HH_A$: indeed $\\rho_1=\\rho_2h_\\delta$ and $\\delta\\alpha_{i,1}=\\alpha_{i,2}$. On one side, scheme fpqc morphism descent identifies the equalizer with $\\operatorname{Hom}_{T_i}(H,V_i)$; the descended map is over $T_i$ since its structure-map equality holds on the cover and scheme descent gives uniqueness. On the other side, the assumed fpqc equalizer condition identifies the equalizer with $F(H)$. Consequently we have a bijection $\\theta_{i,H}:\\operatorname{Hom}_{T_i}(H,V_i)\\simeq F(H)$. Its inverse takes an element of $F(H)$, uses $\\alpha_i^{-1}$ locally to obtain a compatible map $H_A\\to V_i$, and descends that map uniquely. Restrictions commute with both constructions, since they do so on $H_A$ and both descents are unique. Thus $\\theta_i:h_{V_i}\\simeq F_{T_i}$ is a representation, constructed without assuming that $F_{T_i}$ was already a scheme.",
+   "uses": [
+    "lem-weil-pbc-fpqc-covering-axioms",
+    "lem-weil-pbc-fpqc-representable-descent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/descent.tex",
+    "place": "Tags 022D (topologies-lemma-fpqc) and 023Q (descent-lemma-fpqc-universal-effective-epimorphisms); covering equalizer assumption on F"
+   }
+  },
+  {
+   "text": "The cover $B_i\\to T_i$ is the base change of $A\\to S$, so $\\{B_i\\to T_i\\}$ is an fpqc covering by clause (3) of the covering axioms; by the definition of fpqc coverings $B_i\\to T_i$ is flat, and it is surjective since its image contains every affine open of $T_i$. It is quasi-compact because $B_i$ is affine, hence quasi-compact, and $T_i$ is affine, hence quasi-separated. Under $\\alpha_i$, the base change of $V_i\\to T_i$ is $P_{B_i}\\to B_i$, which is separated by separated base-change permanence. Fpqc descent of separatedness therefore makes $V_i\\to T_i$ separated; finite presentation was preserved throughout steps 2--4. Finally base change of $\\theta_i$ to $T$ equals the specified representation of $Y$ composed with $h_\\lambda$: their restrictions over $B$ agree by the defining equation for $\\alpha$, and for each test scheme their values are equal because the fpqc equalizer map for $F$ is injective. Hence the already specified $\\lambda:V_i\\times_{T_i}T\\simeq Y$ has exactly the compatibility demanded in the statement. All uses of fpqc descent were along base changes of $A\\to S$; the transition maps and limit projections needed only to be affine.",
+   "uses": [
+    "lem-weil-pbc-fpqc-covering-axioms",
+    "def-weil-pbc-fpqc-covering",
+    "lem-weil-pbc-affine-scheme-qcqs",
+    "lem-weil-pbc-qcqs-morphism-permanence",
+    "lem-weil-pbc-separated-base-change",
+    "lem-weil-pbc-fpqc-descend-separated"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/descent.tex",
+    "place": "Tags 01KU (schemes-lemma-separated-permanence), 02KU (descent-lemma-descending-property-separated), and 022D; final equalizer uniqueness"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-fibre-product",
+  "lem-weil-pbc-fibre-product-affine-spectra",
+  "lem-weil-pbc-morphism-affine-schemes-affine",
+  "lem-weil-pbc-affine-scheme-qcqs",
+  "lem-weil-pbc-limit-affine-transition",
+  "lem-weil-pbc-qcqs-morphism-permanence",
+  "thm-pd-spreading-out",
+  "lem-galois-yoneda-fully-faithful",
+  "lem-weil-pbc-fpqc-covering-axioms",
+  "lem-weil-pbc-fpqc-representable-descent",
+  "lem-weil-pbc-separated-base-change",
+  "lem-weil-pbc-fpqc-descend-separated",
+  "def-weil-pbc-fpqc-covering"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/limits.tex",
+  "place": "Tag 01ZM(1)--(3) plus fpqc equalizers (023Q); explicit filling of the analogous limit argument invoked by Raynaud Theorem 4.1 proof, reduction 4, printed p.5-20."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "An fpqc sheaf represented locally by a locally finitely presented scheme commutes with filtered colimits of rings",
+   "results": "{\"t\": \"2026-10-24T14:40:38Z\", \"tool\": \"leanfinder\", \"query\": \"An fpqc sheaf represented locally by a locally finitely presented scheme commutes with filtered colimits of rings\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"preservesFilteredColimits_coyoneda\", \"SheafOfModules.QuasicoherentData.IsFinitePresentation.isFinite_presentation\", \"SheafOfModules.instIsQuasicoherentOfIsFinitePresentation\", \"SheafOfModules.IsFinitePresentation\", \"SheafOfModules.isFinitePresentation\", \"CommRingCat.preservesFilteredColimits_coyoneda\", \"SheafOfModules.QuasicoherentData.IsFinitePresentation\", \"SheafOfModules.quasicoherentDataOfIsFinitePresentation\"], \"digest\": \"ff6c03c46bbb462c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: affine-limit and scheme map theorems do not assert eventual scheme representability of a given fpqc form."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For an fpqc sheaf of sets locally represented by a locally finitely presented scheme, quasi-compact open scheme charts descend along affine inverse limits",
+   "results": "{\"t\": \"2026-10-24T14:47:52Z\", \"tool\": \"leanfinder\", \"query\": \"For an fpqc sheaf of sets locally represented by a locally finitely presented scheme, quasi-compact open scheme charts descend along affine inverse limits\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.exists_app_map_eq_map_of_isLimit\", \"AlgebraicGeometry.exists_appTop_π_eq_of_isLimit\", \"AlgebraicGeometry.Scheme.exists_hom_hom_comp_eq_comp_of_locallyOfFiniteType\", \"AlgebraicGeometry.Scheme.exists_hom_comp_eq_comp_of_locallyOfFiniteType\", \"AlgebraicGeometry.exists_map_preimage_le_map_preimage\", \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.𝒰D\", \"AlgebraicGeometry.exists_app_map_eq_zero_of_isLimit\", \"AlgebraicGeometry.exists_map_preimage_eq_map_preimage\"], \"digest\": \"90d3f9e764ec983d\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: affine-limit and scheme map theorems do not assert eventual scheme representability of a given fpqc form."
+  },
+  {
+   "tool": "grep",
+   "query": "fpqc.*limit|limit.*fpqc|descent.*limit|limit.*descent",
+   "results": "{\"t\": \"2026-10-24T14:50:32Z\", \"tool\": \"grep\", \"query\": \"fpqc.*limit|limit.*fpqc|descent.*limit|limit.*descent\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: affine-limit and scheme map theorems do not assert eventual scheme representability of a given fpqc form."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A separated fpqc scheme form of finite presentation which is a scheme after an affine inverse limit is represented by a scheme at some finite stage",
+   "results": "{\"t\": \"2026-10-24T14:50:35Z\", \"tool\": \"leanfinder\", \"query\": \"A separated fpqc scheme form of finite presentation which is a scheme after an affine inverse limit is represented by a scheme at some finite stage\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.LocallyOfFinitePresentation\", \"AlgebraicGeometry.IsFinite\", \"AlgebraicGeometry.LocallyOfFiniteType\", \"AlgebraicGeometry.Scheme.exists_hom_hom_comp_eq_comp_of_locallyOfFiniteType\", \"AlgebraicGeometry.Scheme.exists_hom_comp_eq_comp_of_locallyOfFiniteType\", \"AlgebraicGeometry.LocallyQuasiFinite\", \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.h𝒰S\", \"AlgebraicGeometry.Scheme.exists_isAffine_of_isLimit\"], \"digest\": \"d1c3de430e53b0a8\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: affine-limit and scheme map theorems do not assert eventual scheme representability of a given fpqc form."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A quasi-compact open immersion from a finitely presented scheme into an fpqc sheaf locally represented by a locally finitely presented scheme descends to a finite stage of an affine inverse limit",
+   "results": "{\"t\": \"2026-10-24T14:57:17Z\", \"tool\": \"leanfinder\", \"query\": \"A quasi-compact open immersion from a finitely presented scheme into an fpqc sheaf locally represented by a locally finitely presented scheme descends to a finite stage of an affine inverse limit\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.exists_hom_hom_comp_eq_comp_of_locallyOfFiniteType\", \"AlgebraicGeometry.exists_appTop_π_eq_of_isLimit\", \"AlgebraicGeometry.Scheme.exists_hom_comp_eq_comp_of_locallyOfFiniteType\", \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.𝒰D\", \"AlgebraicGeometry.LocallyOfFinitePresentation\", \"AlgebraicGeometry.exists_map_preimage_eq_map_preimage\", \"AlgebraicGeometry.exists_preimage_eq\", \"AlgebraicGeometry.exists_map_eq_top\"], \"digest\": \"023ed34d10229134\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: affine-limit and scheme map theorems do not assert eventual scheme representability of a given fpqc form."
+  },
+  {
+   "tool": "grep",
+   "query": "represent.*limit|limit.*represent",
+   "results": "{\"t\": \"2026-10-24T14:58:13Z\", \"tool\": \"grep\", \"query\": \"represent.*limit|limit.*represent\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: affine-limit and scheme map theorems do not assert eventual scheme representability of a given fpqc form."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A scheme representation of an fpqc locally finitely presented sheaf descends from a limit of affine base schemes to some stage",
+   "results": "{\"t\": \"2026-10-24T14:58:13Z\", \"tool\": \"leansearch\", \"query\": \"A scheme representation of an fpqc locally finitely presented sheaf descends from a limit of affine base schemes to some stage\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.isAffine_of_isLimit\", \"AlgebraicGeometry.AffineScheme.hasLimits\", \"AlgebraicGeometry.AffineScheme.hasColimits\", \"SheafOfModules.isFinitePresentation\", \"AlgebraicGeometry.exists_appTop_π_eq_of_isLimit\", \"AlgebraicGeometry.exists_isAffineOpen_preimage_eq\", \"AlgebraicGeometry.AffineScheme.createsLimitsForgetToScheme\", \"AlgebraicGeometry.AffineScheme.forgetToScheme_preservesLimits\"], \"digest\": \"f508c7704d872910\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: affine-limit and scheme map theorems do not assert eventual scheme representability of a given fpqc form."
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.LocallyOfFinitePresentation, AlgebraicGeometry.IsAffineHom",
+   "results": "{\"t\": \"2026-10-24T14:58:13Z\", \"tool\": \"loogle\", \"query\": \"AlgebraicGeometry.LocallyOfFinitePresentation, AlgebraicGeometry.IsAffineHom\", \"sub\": \"\", \"ok\": true, \"n_hits\": 2, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.preservesColimit_yoneda\", \"AlgebraicGeometry.Scheme.exists_π_app_comp_eq_of_locallyOfFinitePresentation\"], \"digest\": \"52d6242fe4437032\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: affine-limit and scheme map theorems do not assert eventual scheme representability of a given fpqc form."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Spreading out an fpqc locally finitely presented sheaf representation by a separated finitely presented scheme over an affine inverse limit",
+   "results": "{\"t\": \"2026-10-24T14:58:14Z\", \"tool\": \"leanfinder\", \"query\": \"Spreading out an fpqc locally finitely presented sheaf representation by a separated finitely presented scheme over an affine inverse limit\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.LocallyOfFinitePresentation\", \"SheafOfModules.IsFinitePresentation.exists_quasicoherentData\", \"SheafOfModules.quasicoherentDataOfIsFinitePresentation\", \"AlgebraicGeometry.Scheme.exists_hom_hom_comp_eq_comp_of_locallyOfFiniteType\", \"SheafOfModules.IsFinitePresentation\", \"SheafOfModules.QuasicoherentData.IsFinitePresentation.isFinite_presentation\", \"SheafOfModules.isFinitePresentation\", \"SheafOfModules.QuasicoherentData.instIsFiniteTypeLocalGeneratorsDataOfIsFinitePresentation\"], \"digest\": \"c6ec1d5490bf0758\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: affine-limit and scheme map theorems do not assert eventual scheme representability of a given fpqc form."
+  },
+  {
+   "tool": "grep",
+   "query": "fpqc.*limit|limit.*fpqc|represent.*limit|limit.*represent",
+   "results": "{\"t\": \"2026-10-24T15:45:26Z\", \"tool\": \"grep\", \"query\": \"fpqc.*limit|limit.*fpqc|represent.*limit|limit.*represent\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected scheme Hom continuity and Zariski open-chart representability; neither states eventual fpqc-form representation with the specified isomorphism."
+  },
+  {
+   "tool": "leansearch",
+   "query": "An fpqc form represented by a finitely presented scheme over an affine limit is represented at a finite stage",
+   "results": "{\"t\": \"2026-10-24T15:45:27Z\", \"tool\": \"leansearch\", \"query\": \"An fpqc form represented by a finitely presented scheme over an affine limit is represented at a finite stage\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.LocalRepresentability.isRepresentable\", \"AlgebraicGeometry.instLocallyOfFinitePresentationOfIsSmooth\", \"AlgebraicGeometry.LocallyOfFinitePresentation\", \"SheafOfModules.QuasicoherentData.IsFinitePresentation.isFinite_presentation\", \"AlgebraicGeometry.LocallyOfFinitePresentation.casesOn\", \"AlgebraicGeometry.Scheme.Hom.finitePresentation_appLE\", \"AlgebraicGeometry.instLocallyOfFiniteTypeOfLocallyOfFinitePresentation\", \"AlgebraicGeometry.LocallyOfFinitePresentation.recOn\"], \"digest\": \"bacee76ef5e1caa5\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected scheme Hom continuity and Zariski open-chart representability; neither states eventual fpqc-form representation with the specified isomorphism."
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.LocallyOfFinitePresentation, AlgebraicGeometry.IsAffineHom",
+   "results": "{\"t\": \"2026-10-24T15:45:27Z\", \"tool\": \"loogle\", \"query\": \"AlgebraicGeometry.LocallyOfFinitePresentation, AlgebraicGeometry.IsAffineHom\", \"sub\": \"\", \"ok\": true, \"n_hits\": 2, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.preservesColimit_yoneda\", \"AlgebraicGeometry.Scheme.exists_π_app_comp_eq_of_locallyOfFinitePresentation\"], \"digest\": \"52d6242fe4437032\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected scheme Hom continuity and Zariski open-chart representability; neither states eventual fpqc-form representation with the specified isomorphism."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A scheme representation of an fpqc locally finitely presented sheaf descends from an affine inverse limit to a finite stage",
+   "results": "{\"t\": \"2026-10-24T15:45:28Z\", \"tool\": \"leanfinder\", \"query\": \"A scheme representation of an fpqc locally finitely presented sheaf descends from an affine inverse limit to a finite stage\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.exists_hom_hom_comp_eq_comp_of_locallyOfFiniteType\", \"AlgebraicGeometry.Scheme.exists_hom_comp_eq_comp_of_locallyOfFiniteType\", \"AlgebraicGeometry.exists_appTop_π_eq_of_isAffine_of_isLimit\", \"AlgebraicGeometry.exists_appTop_π_eq_of_isLimit\", \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.𝒰D\", \"AlgebraicGeometry.exists_appTop_map_eq_zero_of_isAffine_of_isLimit\", \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.h𝒰S\", \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.i'\"], \"digest\": \"f4e649f48e6a2df2\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected scheme Hom continuity and Zariski open-chart representability; neither states eventual fpqc-form representation with the specified isomorphism."
+  },
+  {
+   "tool": "grep",
+   "query": "LocalRepresentability|preservesColimit_yoneda|exists_π_app_comp_eq",
+   "results": "{\"t\": \"2026-10-24T15:45:51Z\", \"tool\": \"grep\", \"query\": \"LocalRepresentability|preservesColimit_yoneda|exists_π_app_comp_eq\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/AffineTransitionLimit.lean\", \"Mathlib/AlgebraicGeometry/AffineTransitionLimit.lean\", \"Mathlib/AlgebraicGeometry/AffineTransitionLimit.lean\", \"Mathlib/AlgebraicGeometry/AffineTransitionLimit.lean\", \"Mathlib/AlgebraicGeometry/AffineTransitionLimit.lean\", \"Mathlib/AlgebraicGeometry/Sites/Representability.lean\", \"Mathlib/AlgebraicGeometry/Sites/Representability.lean\", \"Mathlib/AlgebraicGeometry/Sites/Representability.lean\"], \"digest\": \"4a18b3befc04d007\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected scheme Hom continuity and Zariski open-chart representability; neither states eventual fpqc-form representation with the specified isomorphism."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Spread a specified isomorphism between a finite presentation scheme and an fpqc local model along inverse limits of affine schemes",
+   "results": "{\"t\": \"2026-10-24T15:45:52Z\", \"tool\": \"leanfinder\", \"query\": \"Spread a specified isomorphism between a finite presentation scheme and an fpqc local model along inverse limits of affine schemes\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.ExistsHomHomCompEqCompAux.hii'\", \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.𝒰D\", \"AlgebraicGeometry.Scheme.exists_hom_hom_comp_eq_comp_of_locallyOfFiniteType\", \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.𝒰D₀\", \"AlgebraicGeometry.Scheme.exists_hom_comp_eq_comp_of_locallyOfFiniteType\", \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.i'\", \"AlgebraicGeometry.LocallyOfFinitePresentation\", \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.exists_eq\"], \"digest\": \"f1da6b5bde83f80c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected scheme Hom continuity and Zariski open-chart representability; neither states eventual fpqc-form representation with the specified isomorphism."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-integral-orbit-finite-diagram-approximation",
+  "date": "2026-10-24",
+  "group": "Q66"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images proof (3), inherited strict-local trait descent branch; Raynaud Theorem 4.1 finite-diagram reductions, below lem-sfb-integral-descent-invariant-quasiaffine-charts. Reduction 4: spreading the whole separated finite-presentation representation, not only its underlying scheme.",
+   "via": [
+    "lem-sfb-integral-orbit-finite-diagram-approximation",
+    "lem-sfb-integral-descent-invariant-quasiaffine-charts",
+    "lem-sfb-integral-finite-fibre-fpqc-affine-descent",
+    "lem-sfb-trait-flat-group-fpqc-effectivity",
+    "lem-sfb-trait-group-space-schematicity",
+    "lem-sfb-strict-henselian-lft-group-datum-effectivity",
+    "lem-sfb-neron-strict-local-descent-base-change",
+    "lem-sfb-split-torus-translate-hull",
+    "lem-sfb-split-torus-extension-neron-lft",
+    "lem-sfb-semiabelian-neron-lft-existence",
+    "lem-sfb-trait-semiabelian-hom-extension",
+    "lem-sfb-semiabelian-generic-graph-proper",
+    "lem-sfb-normal-semiabelian-hom-extension",
+    "lem-sfb-symmetric-line-power-prolongation",
+    "lem-sfb-normal-symmetric-cubical-extension",
+    "lem-sfb-symmetric-ample-power-extension",
+    "lem-sfb-regular-group-generic-ampleness",
+    "lem-sfb-stable-picard-theta-ampleness",
+    "lem-sfb-stable-relative-picard-kummer",
+    "lem-sfb-stable-level-versal-branch-freeness",
+    "lem-sfb-stable-abelian-level-normalization",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-fpqc-representation-limit-spreading",
+  "worker": "stage1",
+  "summary": "Unchanged statement. Spread Y, its specified fpqc-local comparison and inverse, and the overlap equation by 01ZM; assemble the representation by the two covering equalizers and descend separatedness. No new nodes.",
+  "blueprint": "Inherited from.node=null retained: blueprint_refs.py ancestor reports None. The inherited chain serves det-thm-sf-ctf-stability-direct-images proof (3); latest sk-thm-sf-ctf-stability-direct-images.proof.md (3) is compactification/proper/open preservation. This resolves only the Raynaud reduction-4 prerequisite already on that branch. Whole-blueprint fpqc/spreading/limit searches found no equivalent node.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-fibre-product-affine-spectra",
+    "why": "Generic scheme finite-presentation continuity, fpqc descent, Yoneda, or affine/base-change infrastructure used in the explicit Raynaud reduction-4 argument; no six-functor step is replaced."
+   },
+   {
+    "node": "lem-weil-pbc-morphism-affine-schemes-affine",
+    "why": "Generic scheme finite-presentation continuity, fpqc descent, Yoneda, or affine/base-change infrastructure used in the explicit Raynaud reduction-4 argument; no six-functor step is replaced."
+   },
+   {
+    "node": "lem-weil-pbc-affine-scheme-qcqs",
+    "why": "Generic scheme finite-presentation continuity, fpqc descent, Yoneda, or affine/base-change infrastructure used in the explicit Raynaud reduction-4 argument; no six-functor step is replaced."
+   },
+   {
+    "node": "lem-weil-pbc-limit-affine-transition",
+    "why": "Generic scheme finite-presentation continuity, fpqc descent, Yoneda, or affine/base-change infrastructure used in the explicit Raynaud reduction-4 argument; no six-functor step is replaced."
+   },
+   {
+    "node": "lem-weil-pbc-qcqs-morphism-permanence",
+    "why": "Generic scheme finite-presentation continuity, fpqc descent, Yoneda, or affine/base-change infrastructure used in the explicit Raynaud reduction-4 argument; no six-functor step is replaced."
+   },
+   {
+    "node": "thm-pd-spreading-out",
+    "why": "Generic scheme finite-presentation continuity, fpqc descent, Yoneda, or affine/base-change infrastructure used in the explicit Raynaud reduction-4 argument; no six-functor step is replaced."
+   },
+   {
+    "node": "lem-galois-yoneda-fully-faithful",
+    "why": "Generic scheme finite-presentation continuity, fpqc descent, Yoneda, or affine/base-change infrastructure used in the explicit Raynaud reduction-4 argument; no six-functor step is replaced."
+   },
+   {
+    "node": "lem-weil-pbc-fpqc-covering-axioms",
+    "why": "Generic scheme finite-presentation continuity, fpqc descent, Yoneda, or affine/base-change infrastructure used in the explicit Raynaud reduction-4 argument; no six-functor step is replaced."
+   },
+   {
+    "node": "lem-weil-pbc-fpqc-representable-descent",
+    "why": "Generic scheme finite-presentation continuity, fpqc descent, Yoneda, or affine/base-change infrastructure used in the explicit Raynaud reduction-4 argument; no six-functor step is replaced."
+   },
+   {
+    "node": "lem-weil-pbc-separated-base-change",
+    "why": "Generic scheme finite-presentation continuity, fpqc descent, Yoneda, or affine/base-change infrastructure used in the explicit Raynaud reduction-4 argument; no six-functor step is replaced."
+   },
+   {
+    "node": "lem-weil-pbc-fpqc-descend-separated",
+    "why": "Generic scheme finite-presentation continuity, fpqc descent, Yoneda, or affine/base-change infrastructure used in the explicit Raynaud reduction-4 argument; no six-functor step is replaced."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-fibre-product-affine-spectra",
+  "lem-weil-pbc-morphism-affine-schemes-affine",
+  "lem-weil-pbc-affine-scheme-qcqs",
+  "lem-weil-pbc-limit-affine-transition",
+  "lem-weil-pbc-qcqs-morphism-permanence",
+  "thm-pd-spreading-out",
+  "lem-galois-yoneda-fully-faithful",
+  "lem-weil-pbc-fpqc-covering-axioms",
+  "lem-weil-pbc-fpqc-representable-descent",
+  "lem-weil-pbc-separated-base-change",
+  "lem-weil-pbc-fpqc-descend-separated"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q106-b90918855",
+  "group": "Q106",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q106-b90918855 (reviewer sub-agent of L); spot-checked: Read the unchanged item, all 6 steps, every cited node's statement and the parent citer (integral-orbit-finite-diagram-approximation), which uses exactly this conclusion. No new nodes. No duplicate: fpqc-chart-limit-spreading spreads only an open chart; space-affine-limits-schematic-stages assumes an algebraic space. Raynaud is not stored locally (WANTED). The proof is agent-written from Stacks 01ZM (limits.tex:2370 = thm-pd-spreading-out) and 023Q (descent.tex:4131 = fpqc-representable-descent); no SGA. Step 1: B_i and C_i are affine and qcqs with affine transitions, and B=lim B_i, C=lim C_i by the universal property. Correct. Step 2: 01ZM(1) gives V and λ; Yoneda gives α with ρ∘h_α = rep_Y∘h_λ. Correct. Step 3: 01ZM(2) spreads α and α^{-1}, 01ZM(3) the inverse equations; all models are fp over B_i. Correct. Step 4: δ=ρ2^{-1}ρ1; I checked that both arrows equal rep_Y∘h_λ on C, and 01ZM(3) gives the overlap equation. Correct. Step 5: Hom_{T_i}(H_A,V_i) ≅ Hom_A(H_A,P) ≅ F(H_A), intertwined on H_A×_H H_A. Both equalizers are identified, by representable fpqc descent (arbitrary target) and by the sheaf hypothesis. Correct; no effectivity of a general descent datum is assumed. Step 6: separatedness and the compatibility with λ follow from base change, descent and injectivity of the equalizer map. Correct. Edge cases checked: empty T_i, constant system, non-flat transitions. FIX (C1/E1): fpqc-descend-separated needs B_i→T_i flat, surjective and quasi-compact, and step 6 cited nothing for quasi-compactness. The corrected item adds covering axiom (3), def-weil-pbc-fpqc-covering for flatness and surjectivity, and affine-scheme-qcqs with qcqs-morphism-permanence (1) for quasi-compactness. def-weil-pbc-fpqc-covering was added to proof_deps, which is still the union of the uses. I accept the listed generic scheme tool_uses (plus the added definition).; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.FpqcRepresentationLimitSpreading",
+  "declaration": "AlgebraicGeometry.exists_fpqc_representation_at_affine_limit_stage",
+  "file": "lean/Sheaf/AlgebraicGeometry/FpqcRepresentationLimitSpreading.lean",
+  "statement": "theorem exists_fpqc_representation_at_affine_limit_stage {S A : Scheme.{u}} [IsAffine S] [IsAffine A] (p : A ⟶ S) [Flat p] [Surjective p] [QuasiCompact p] (F : (Over S)ᵒᵖ ⥤ Type v) (hF : Presheaf.IsSheaf (Scheme.fpqcTopology.over S) F) (P : Over A) (rP : ((Over.map p).op ⋙ F).RepresentableBy P) [IsSeparated P.hom] [LocallyOfFinitePresentation P.hom] [QuasiCompact P.hom] [QuasiSeparated P.hom] {I : Type u} [Preorder I] [IsDirected I (· ≤ ·)] [Nonempty I] (D : Iᵒᵖ ⥤ Over S) [∀ i : Iᵒᵖ, IsAffine (D.obj i).left] (c : Cone D) (hc : IsLimit c) (Y : Over c.pt.left) (rY : ((Over.map c.pt.hom).op ⋙ F).RepresentableBy Y) [IsSeparated Y.hom] [LocallyOfFinitePresentation Y.hom] [QuasiCompact Y.hom] [QuasiSeparated Y.hom] : ∃ (i : Iᵒᵖ) (Yi : Over (D.obj i).left), IsSeparated Yi.hom ∧ LocallyOfFinitePresentation Yi.hom ∧ QuasiCompact Yi.hom ∧ QuasiSeparated Yi.hom ∧ ∃ rYi : ((Over.map (D.obj i).hom).op ⋙ F).RepresentableBy Yi, ∃ e : (Over.pullback (c.π.app i).left).obj Yi ≅ Y, ∀ (H : Over c.pt.left) (g : H ⟶ (Over.pullback (c.π.app i).left).obj Yi), rY.homEquiv (g ≫ e.hom) = F.map (((Over.mapComp (c.π.app i).left (D.obj i).hom).symm ≪≫ Over.mapCongr ((c.π.app i).left ≫ (D.obj i).hom) c.pt.hom (Over.w (c.π.app i))).app H).inv.op (rYi.homEquiv (((Over.mapPullbackAdj (c.π.app i).left).homEquiv H Yi).symm g))",
+  "branch": "newtargets-dag",
+  "by": "Q42",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-5a4bf0e56",
+  "group": "Q42",
+  "result": "pass",
+  "note": "Read the item node (only the lean field differs from side-live; no statement change), all 8 stmt_dep records, the module, report and Mathlib declarations (fpqcTopology, GrothendieckTopology.over, Over.mapComp/mapCongr, Over.mapPullbackAdj). lean.statement matches the file verbatim. Hypotheses: affine S and A; p flat, surjective, quasi-compact; F a sheaf for fpqcTopology.over S with independent set universe v; P and Y carry data-bearing RepresentableBy plus separated and LFP+QC+QS; I a small nonempty directed preorder; D : Iᵒᵖ ⥤ Over S with affine stages; c and hc a limit in Over S, the same as the scheme limit since the index is nonempty and cofiltered. Conclusion: ∃ i, Yi separated and fp over Ti, rYi, and e : Yi×T ≅ Y over T, with the equation typed by hand: it is the full base-change compatibility through canonical identity-component isos. No transition flatness assumed; no hollow defs; body is sorry only; docstrings carry the source, blueprint id and 6-step proof; report sections present; no duplicate found. Not recompiled and no file changed. No findings."
+ }
+}

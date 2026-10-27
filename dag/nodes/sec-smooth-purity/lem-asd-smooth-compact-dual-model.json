@@ -1,0 +1,187 @@
+{
+ "id": "lem-asd-smooth-compact-dual-model",
+ "kind": "statement",
+ "title": "A constructible compact dual model for smooth direct images",
+ "statement": "Let $k$ be a field, $S$ a finite-type $k$-scheme, $\\ell$ a prime different from $\\operatorname{char}k$, $f:X\\to S$ a separated smooth finite-type morphism, and $L$ a finite locally constant $\\mathbf F_\\ell$-sheaf. There exists a compact dual model [def-asd-smooth-compact-dual-model] for $(f,L)$. Explicitly it consists of a bounded constructible complex $C$ on $S$, isomorphisms $e_U:Rf_{U,*}L|_{X_U}\\simeq R\\mathcal Hom(C|_U,\\mathbf F_\\ell)$ for every open $U$ and Cartesian presentation $X_U$, and isomorphisms $e_T:Rf_{T,*}L|_{X_T}\\simeq R\\mathcal Hom(v^*(C|_U),\\mathbf F_\\ell)$ for every further Cartesian presentation over a Noetherian $v:T\\to U$. These obey $v^*e_U\\,a_v=\\mathrm{BC}_v\\,e_T$ in Lean's left-to-right composition order, where $a_v$ is the canonical coefficient-dual pullback comparison [lem-fin-lisse-field-dual] and $\\mathrm{BC}_v$ is ordinary exchange [sbc-def-base-change-map]. No generic open or invertibility of either comparison is asserted.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-lem-geo-smooth-generic/lem-asd-smooth-generic-direct-image.proof.md",
+  "place": "First and second paragraphs (relative dual construction), last paragraph (pairing compatibility); expanded pairing argument in parent DAG steps 5-9"
+ },
+ "stmt_deps": [
+  "def-sbc-smooth-morphisms",
+  "def-weil-pbc-derived-categories",
+  "sbc-def-base-change-map",
+  "def-weil-pbc-constructible-complexes",
+  "def-weil-pbc-scheme-conventions",
+  "lem-fin-lisse-field-dual",
+  "def-pur-derived-internal-hom",
+  "def-constructible-finite-locally-constant",
+  "def-asd-smooth-compact-dual-model"
+ ],
+ "proof": [
+  {
+   "text": "First work at a generic finite coefficient ring Lambda with IsField supplied explicitly and with invertible exponent on Spec k. Make S and X Noetherian from their finite-type maps to the field. Define K to be L placed in degree zero. At the final call specialize this proved construction to ULift(ZMod ell), using ell different from the characteristic to supply the exponent condition.",
+   "uses": [
+    "pqf-lem-locnoeth-lft"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-lem-geo-smooth-generic/lem-asd-smooth-generic-direct-image.proof.md",
+    "place": "First and second paragraphs (relative dual construction), last paragraph (pairing compatibility); expanded pairing argument in parent DAG steps 5-9"
+   }
+  },
+  {
+   "text": "Use smooth open charts of constant relative dimension. On each chart the existing smooth dualizing theorem identifies omega with a shifted rank-one local system, which is invertible and bounded constructible of finite Tor amplitude. Exceptional composition for open immersions identifies restriction of the global omega with the chart omega. Invertibility is local; a finite subcover supplies common cohomological and Tor bounds, and constructibility glues by open/closed recollement. Thus global omega is invertible and bounded constructible of finite Tor amplitude. The shifted rank-one sheaf criterion proves invertibility directly; the higher CohomologicalSmoothness module is not imported.",
+   "uses": [
+    "thm-asd-smooth-tensor"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-lem-geo-smooth-generic/lem-asd-smooth-generic-direct-image.proof.md",
+    "place": "First and second paragraphs (relative dual construction), last paragraph (pairing compatibility); expanded pairing argument in parent DAG steps 5-9"
+   }
+  },
+  {
+   "text": "Construct N=RHom(K,omega). Apply finite-lisse relative duality at the generic finite field Lambda and the explicit invertible coefficient omega. It proves dualizability, bounded constructibility of finite Tor amplitude, and invertibility of the canonical map K -> RHom(N,omega). Construct C as the actual compact image Rf_!N and apply the existing source compact-image finiteness theorem for generic finite coefficients.",
+   "uses": [
+    "lem-asd-finite-lisse-relative-dual",
+    "lem-asd-finite-coefficient-compact-image",
+    "thm-nagata-compactification"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-lem-geo-smooth-generic/lem-asd-smooth-generic-direct-image.proof.md",
+    "place": "First and second paragraphs (relative dual construction), last paragraph (pairing compatibility); expanded pairing argument in parent DAG steps 5-9"
+   }
+  },
+  {
+   "text": "For each Cartesian open restriction, pull N and the relative-dual presentation back. Smooth exceptional base change holds locally on the source charts and glues; hence it identifies pulled-back omega with the new omega. Dualizability makes internal Hom commute with pullback. The compact projection formula conjugated through tensor-Hom, ordinary, and exceptional adjunctions gives a presentation Rf_*K=RHom(Rf_!N,lambda). Compose it with the dual of compact exchange to obtain the open presentation, and repeat for each further Noetherian test scheme. Apply the existing etale/affine-line chart reduction to the separate affine-line exchange statement; no import of the cyclic higher smooth base-change module is made.",
+   "uses": [
+    "lem-asd-compact-model-affine-line-exchange",
+    "prop-asd-internal-adjunction",
+    "lem-asd-finite-coefficient-compact-image"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-lem-geo-smooth-generic/lem-asd-smooth-generic-direct-image.proof.md",
+    "place": "First and second paragraphs (relative dual construction), last paragraph (pairing compatibility); expanded pairing argument in parent DAG steps 5-9"
+   }
+  },
+  {
+   "text": "Use Cartesian compatibility of canonical internal compact adjunction. Naturality in the coefficient unit and in the compact-exchange isomorphism transports this identity to the constructed open/test presentations. Package these explicit isomorphisms with C and its bounded constructibility.",
+   "uses": [
+    "lem-asd-compact-internal-exchange",
+    "sbc-def-base-change-map"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-lem-geo-smooth-generic/lem-asd-smooth-generic-direct-image.proof.md",
+    "place": "First and second paragraphs (relative dual construction), last paragraph (pairing compatibility); expanded pairing argument in parent DAG steps 5-9"
+   }
+  }
+ ],
+ "proof_deps": [
+  "pqf-lem-locnoeth-lft",
+  "thm-asd-smooth-tensor",
+  "lem-asd-finite-lisse-relative-dual",
+  "lem-asd-finite-coefficient-compact-image",
+  "thm-nagata-compactification",
+  "lem-asd-compact-model-affine-line-exchange",
+  "prop-asd-internal-adjunction",
+  "lem-asd-compact-internal-exchange",
+  "sbc-def-base-change-map"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-lem-geo-smooth-generic/lem-asd-smooth-generic-direct-image.proof.md",
+  "place": "Explicit global relative dual; finite-lisse relative duality proved from the coefficient-dual and tensor APIs; compact-adjunction compatibility and finite-field affine-line exceptional exchange isolated as strictly smaller steps."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Compactly supported relative Verdier dual of a finite local system on a smooth scheme, compatibly with ordinary base change",
+   "results": "8 hits: Scheme.Modules pseudofunctor and ordinary module pushforward/pullback adjunction; condensed locally constant modules. No etale compact duality result.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction, CategoryTheory.IsIso",
+   "results": "12 hits on equivalences from adjunctions and full faithfulness. They do not construct the relative compact dual or identify its base-change pairing.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "Verdier|compact.*dual|dual.*exchange",
+   "results": "Mathlib returns general triangulated-category theory (Verdier citations) and Pontryagin duality, not etale compact-support duality. Local source search finds TensorHom, SmoothDuality, SmoothBaseChange, SectionInvariantCtf, and CompactProjectionExchange: these are ingredients, not the combined model.",
+   "date": "2026-10-23",
+   "verdict": "no combined statement"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A compact dual model for smooth direct images with bounded constructible compact support and canonical exchange compatibility",
+   "results": "8 hits: HasCompactSupport.toSchwartzMap, HasCompactSupport.toSchwartzMap_toFun, DomAddAct.instCompactSpace, WeakDual.isCompact_of_bounded_of_closed, SmoothBumpFunction.hasCompactSupport, ContDiffMapSupportedInClass.mk, AlgebraicGeometry.instCompactSpaceCarrierCarrierCommRingCatPullbackSchemeOfQuasiCompact_1, AlgebraicGeometry.quasiCompact_isStableUnderBaseChange.",
+   "date": "2026-10-24",
+   "verdict": "no match: compactly supported smooth functions and quasi-compact scheme spaces, not derived etale compact duality"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.SmoothGenericDirectImage",
+  "date": "2026-10-23",
+  "group": "B7"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-asd-smooth-generic-direct-image",
+   "place": "Relative compact dual construction and pairing comparison, separate from generic constancy",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sf-cbc",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.SmoothCompactDualModel",
+  "file": "lean/Sheaf/AlgebraicGeometry/SmoothCompactDualModel.lean",
+  "declaration": "AlgebraicGeometry.Etale.exists_smooth_compact_dual_model",
+  "statement": "theorem exists_smooth_compact_dual_model\n    (k : Type u) [Field k] (S : Scheme.{u})\n    (aS : S ⟶ Spec (.of k)) [LocallyOfFiniteType aS] [QuasiCompact aS]\n    (ℓ : ℕ) [Fact ℓ.Prime] (hℓ : ℓ ≠ ringChar k)\n    (X : Scheme.{u}) (f : X ⟶ S) [IsSeparated f] [Smooth f]\n    [LocallyOfFiniteType f] [QuasiCompact f]\n    (L : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} (ULift.{u + 1} (ZMod ℓ))))\n    (hL : Scheme.IsFiniteLocallyConstantSheaf L) :\n    Nonempty (SmoothCompactDualModel (ULift.{u + 1} (ZMod ℓ)) f L)",
+  "branch": "sheaf-dag",
+  "by": "B7",
+  "date": "2026-10-23"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B7",
+  "result": "pass",
+  "landing": "20261023T165904-L-2041893",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-e3e16",
+  "group": "B3",
+  "result": "fix",
+  "landing": "20261026T065155-L-2731829",
+  "kind": "interface",
+  "note": "independent cc review: item SmoothCompactDualModel + 4 modules and 8 nodes against the packet, the clone (signatures, SmoothBaseChange import cycle, canonical-map definitions) and a sandbox compile of all delivered modules with the unchanged importer SmoothGenericDirectImage (exit 0) and #print axioms"
+ }
+}

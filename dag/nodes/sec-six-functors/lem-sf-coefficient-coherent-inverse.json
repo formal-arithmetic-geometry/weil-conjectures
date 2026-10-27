@@ -1,0 +1,124 @@
+{
+ "id": "lem-sf-coefficient-coherent-inverse",
+ "kind": "statement",
+ "title": "Coherent exact inverse of the finite coefficient comparison",
+ "statement": "Let ℓ be a prime, Ω an algebraic closure of Q_ℓ, and T a noetherian finite-dimensional scheme on which ℓ is invertible. Let J be a coefficient comparison datum [def-fd-coefficient-comparison-datum] between the actual raw rational systems [def-weil-algebraically-closed-coefficients, def-weil-pbc-rational-category, prop-weil-pbc-scalar-extension]. Each J.family.Φ_E is exact for the given finite_shift. There are finite equivalences HT_E from the framework E-stage to the PBC E-stage whose forward functors equal J.family.Φ_E. Their inverses form a coherent exact stage-system morphism H [def-weil-pbc-descent-interfaces] from the PBC system back to the framework system, with H.Φ_E = HT_E.inverse. There is a compatible transformation ν from J.family followed by H to the identity framework family, with each ν_E invertible and each component ν_E,K equal, under these endpoint identifications, to HT_E.unitIso.inv.app K. This assertion contains no two-scheme functor, no descended exactness assertion, and no retract-completeness assertion.",
+ "chapter": "sec-six-functors",
+ "unit": "sk-thm-sf-package",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-package/prop-functor-package.proof.md",
+  "place": "Clause (1), the inverse coefficient comparison calculation expanded as step 2 of lem-sf-package-common-stage-transport"
+ },
+ "stmt_deps": [
+  "def-fd-coefficient-comparison-datum",
+  "def-weil-algebraically-closed-coefficients",
+  "def-weil-pbc-rational-category",
+  "prop-weil-pbc-scalar-extension",
+  "def-weil-pbc-descent-interfaces"
+ ],
+ "proof": [
+  {
+   "text": "Transport finite-stage rational exactness along J.finite_functor E. Equality of the shift isomorphisms given by finite_shift_normalization identifies the mapTriangle functors, proving J.family.Φ E exact with its prescribed shift. For each finite coefficient field E, change the functor of J.stage E.rational along J.finite_functor E to obtain HT E with forward functor exactly J.family.Φ E. Use the adjunction-induced inverse shift. The finite shift normalization identifies it with the specified exact equivalence shift, so the inverse functors are additive and preserve distinguished triangles.",
+   "uses": [
+    "def-fd-coefficient-comparison-datum"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "For E ≤ L define the inverse-family scalar comparison from S_L/E followed by HT E inverse to HT L inverse followed by P_L/E by full faithfulness of HT L. At K in the PBC E-stage its image is the inverse forward comparison j at HT E inverse K, then P_L/E applied to the counit at E and K, then the inverse counit at L and P_L/E K. This determines the map and its inverse uniquely. To check a tower E ≤ L ≤ M, apply the faithful forward functor at M. Substitute this formula, move the counit components past the scalar comparison by naturality, and cancel the adjacent counit inverse/counit factors. The remaining equation is J.family.coh. Repeated fields give its unit specialization. Thus these functors and comparisons form a stage-system morphism H.",
+   "uses": [
+    "def-fd-coefficient-comparison-datum"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Equip H at every E with the inverse exact shift of HT E. Apply the forward faithful functor to its scalar comparison shift square. The adjunction unit and counit commute with these shifts; cancel their factors, leaving J.scalar_shift. Hence H is CoherentExactMorphism. Set ν E to the inverse unit of HT E, regarded using the equality of its forward and inverse functors with the corresponding stages of J and H. For its mixed scalar square, apply the faithful forward functor and substitute the mate formula: the triangle identity cancels the counit, and the remaining square is naturality of the forward comparison. The inverse-unit components give IsIso of ν E. Identity extensions and the zero object satisfy the same equations; scalar transitions are never assumed faithful.",
+   "uses": [
+    "def-fd-coefficient-comparison-datum",
+    "def-weil-pbc-descent-interfaces"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-fd-coefficient-comparison-datum",
+  "def-weil-pbc-descent-interfaces"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-package/prop-functor-package.proof.md",
+  "place": "Clause (1), the inverse coefficient comparison calculation expanded as step 2 of lem-sf-package-common-stage-transport"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Pointwise equivalence of coherent stage systems has an inverse coherent family with compatible unit and counit",
+   "results": "msearch: 8 hits, including CategoryTheory.Equivalence.symm and Functor.adjunction; no coherent StageSystem inverse or exact scalar mate result.",
+   "date": "2026-10-25",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Conjugate coherent functors on filtered stage systems by pointwise equivalences and descend triangulated functors",
+   "results": "msearch: 8 hits, including Functor.isTriangulated_of_precomp_iso, Functor.isTriangulated_iff_comp_right and equivalence exactness composition. None constructs a coherent inverse stage family.",
+   "date": "2026-10-25",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "StageSystem.*(inverse|conjug)|isIdempotentComplete_of.*equiv",
+   "results": "msearch: 0 hits. rg in WeilConjectures/CategoryTheory/StageSystem and Sheaf: no coherent exact inverse family. The existing inverse-comparison-counit transport concerns one square and does not supply the stage cocycle and exact inverse family.",
+   "date": "2026-10-25",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.SfPackageCommonStageTransport",
+  "group": "X8",
+  "date": "2026-10-25"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-functor-package",
+   "place": "Clause (1), the inverse coefficient comparison calculation expanded as step 2 of lem-sf-package-common-stage-transport",
+   "via": [
+    "lem-sf-package-common-stage-transport"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.SfCoefficientCoherentInverse",
+  "file": "lean/Sheaf/Paper/SfCoefficientCoherentInverse.lean",
+  "declaration": "WeilConjectures.sfCoefficientCoherentInverse",
+  "statement": "theorem sfCoefficientCoherentInverse\n    (l : ℕ) [Fact l.Prime]\n    (Ω : Type w) [Field Ω] [Algebra (Padic l) Ω] [IsAlgClosure (Padic l) Ω]\n    (T : Scheme.{u}) [IsNoetherian T]\n    [dT : Fact (∃ m : ℕ, topologicalKrullDim T ≤ (m : WithBot ℕ∞))]\n    [iT : Fact (∀ t : T, IsUnit (l : T.presheaf.stalk t))]\n    (J : FdCoefficientComparison l Ω T) :\n    (∀ E : Padic.FiniteCoefficientFields l Ω, (J.family.Φ E).IsTriangulated) ∧\n    ∃ HT : ∀ E : Padic.FiniteCoefficientFields l Ω,\n        GeneralAlgebraicallyClosedCoefficients.Stage l Ω T E ≌ pbcStageCategory l Ω T E,\n      (∀ E, (HT E).functor = J.family.Φ E) ∧\n      ∃ H : StageSystem.CoherentExactMorphism\n          (pbcScalarSystem l Ω T dT.out iT.out)\n          (GeneralAlgebraicallyClosedCoefficients.stageSystem l Ω T),\n        (∀ E, H.base.Φ E = (HT E).inverse) ∧\n        ∃ ν : StageSystem.Morphism.Hom (J.family.comp H.base)\n            (StageSystem.Morphism.id\n              (GeneralAlgebraicallyClosedCoefficients.stageSystem l Ω T)),\n          (∀ E, IsIso (ν.τ E)) ∧\n          ∀ (E : Padic.FiniteCoefficientFields l Ω)\n            (K : GeneralAlgebraicallyClosedCoefficients.Stage l Ω T E),\n            HEq ((ν.τ E).app K) ((HT E).unitIso.inv.app K)",
+  "branch": "sheaf-dag",
+  "by": "X8",
+  "date": "2026-10-25"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "X8",
+  "result": "pass",
+  "landing": "20261025T101905-L-3748653",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "X8",
+  "result": "pass",
+  "landing": "20261025T101905-L-3748653",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

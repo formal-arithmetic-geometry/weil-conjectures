@@ -23,10 +23,15 @@
    "elementary": false
   },
   {
-   "text": "Descend each constructible fixed-ring cohomology sheaf and apply the existing boundedConstructible_of_homology theorem. Convert the etale predicate with isConstructibleEtaleModuleSheaf_iff_isConstructibleSheaf, and use the minimum and maximum of its bounds. Realize the source, compose the derived functor comparison isomorphisms, and extract a cochain representative by essential surjectivity of Q.",
+   "text": "Prove the bounded-cohomology origin criterion locally: exact comparison is fully faithful on bounded-below targets, so lift an arrow between two etale origins, take its etale cone, and compare image cones. This makes the bounded-constructible essential image triangulated; shifts and zero are preserved. Finite truncation devissage (DerivedCategory.prop_of_bounded) now places J in that image since every homology sheaf descends. Convert the etale constructibility predicate, realize the source, compose the comparison isomorphisms, and extract a cochain representative by essential surjectivity of Q. These private proved helpers avoid importing the unrelated perfect-duality and smooth-trace theory.",
    "uses": [
     "lem-weil-pbc-fixed-module-constructible-origin",
-    "lem-weil-pbc-fixed-module-bounded-constructible-origin",
+    "lem-weil-pbc-fixed-module-derived-hom-bijection",
+    "lem-sf-exact-functor-derived-triangulated",
+    "lem-sf-triangle-morphism-iso",
+    "lem-sf-derived-truncation-triangle",
+    "lem-sf-derived-homology-long-exact",
+    "lem-sf-derived-concentrated-single",
     "def-weil-pbc-proetale-modules"
    ],
    "elementary": false
@@ -36,12 +41,17 @@
   "lem-weil-pbc-finite-coefficient-intrinsic-constructibility",
   "def-weil-pbc-proetale-modules",
   "lem-weil-pbc-fixed-module-constructible-origin",
-  "lem-weil-pbc-fixed-module-bounded-constructible-origin"
+  "lem-weil-pbc-fixed-module-derived-hom-bijection",
+  "lem-sf-exact-functor-derived-triangulated",
+  "lem-sf-triangle-morphism-iso",
+  "lem-sf-derived-truncation-triangle",
+  "lem-sf-derived-homology-long-exact",
+  "lem-sf-derived-concentrated-single"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/proetale.tex",
-  "place": "Tag 09AL: exact coefficient realization, single-sheaf intrinsic comparison, and existing fixed-module bounded cohomology descent; no small-ring universe transport."
+  "place": "Tag 09AL, lemma-compare-constructible-derived; the bounded-cohomology finite-truncation argument is proved by private helpers using exact comparison and its bounded-below Hom bijection. The source Perfect module is not imported."
  },
  "mathlib_searches": [
   {
@@ -108,14 +118,25 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-20",
+  "date": "2026-10-27",
   "by": "L",
-  "reviewer": "C-77ef7",
-  "group": "M7",
+  "reviewer": "C-a52d7",
+  "group": "J2",
   "result": "pass",
-  "landing": "20261020T051519-L-1699457",
+  "landing": "20261027T131456-L-2941093",
   "kind": "interface",
-  "note": "independent cc review: diff vs returned head 2e50e3069563: only the ordered H9 deletion of the two imports in FiniteCoefficientDerivedOriginPresentation plus report text; 5 modules and the 6 direct importers of the item compiled; axioms rechecked; unit route still via LisseNormalizedTowerLocalModels/prop-weil-pbc-site-comparison-finite-level"
+  "note": "independent cc review: item diff vs clone (one private import dropped) and companion FiniteCoefficientDerivedOriginPresentation helpers vs upstream Perfect.lean:386/416; node proof fields vs the Lean; sandbox compiles of both delivered modules with the import-all importers (SingleDegreeUniformReconstruction, IntegralOpenPullTensorReduction) and NormalizedConstructibleTowerLocalEffectivity, all OK; FalseTail and Perfect gone from the item's import closure"
  },
- "lean_audit": {}
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ }
 }

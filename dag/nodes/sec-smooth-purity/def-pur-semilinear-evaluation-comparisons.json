@@ -1,0 +1,128 @@
+{
+ "id": "def-pur-semilinear-evaluation-comparisons",
+ "kind": "definition",
+ "title": "Canonical semilinear-system evaluation comparisons for open extension and proper/open source and target",
+ "status": "split",
+ "statement": "Fix a universe $u$, schemes in universe $u$, a sequence $C:\\mathbb N\\to\\operatorname{CommRing}$ with rings in universe $u+1$, and arbitrary ring homomorphisms $\\tau_n:C_{n+1}\\to C_n$. Use the actual derived semilinear-system categories $\\mathcal D_X$, their functors $P_f,R_f,J_j$, evaluation $E_{n,X}$ into the constant strict tower on $C_n$, and the normalized evaluation comparisons of [def-sp-semilinear-constant-ring-operations]. Use the derived open adjunction $J_j\\dashv P_j$ of [def-sf-semilinear-proper-open-comparisons] and the constant-tower open adjunction $J^{(n)}_j\\dashv G^{(n)}_j$ of [def-cbc-strict-tower-open-extension]. Fix $n\\in\\mathbb N$. For an open immersion $j:U\\hookrightarrow X$, let $a_{j,n}:E_{n,U}P_j\\cong G^{(n)}_jE_{n,X}$ be the specified inverse-image evaluation isomorphism. Define $b_{j,n}:J^{(n)}_jE_{n,U}\\to E_{n,X}J_j$ to be the inverse mate of $a_{j,n}$ under these two open adjunctions, using [def-weil-pbc-adjunction-mate]. Define the open-unit-normalized evaluation comparison $e^J_{j,n}:E_{n,X}J_j\\cong J^{(n)}_jE_{n,U}$ as the inverse of this invertible mate. The retained invertibility certificate is the existing one identifying localized extension by zero after evaluation with the same extension on the open and zero on its complement.\n\nWrite $e^R_{f,n}:E_{n,Y}R_f\\cong R^{(n)}_fE_{n,X}$ for the isomorphism attached to the specified direct-image evaluation mate for $f:X\\to Y$ from [def-sp-semilinear-constant-ring-operations]. For scheme maps $r:V\\to S$, $i:S\\hookrightarrow T$ with $i$ open, and $M\\in\\mathcal D_V$, define the source comparison by the composite\n$$E_{n,T}(J_iR_rM)\\xrightarrow{e^J_{i,n}(R_rM)}J^{(n)}_iE_{n,S}(R_rM)\\xrightarrow{J^{(n)}_i(e^R_{r,n}(M))}J^{(n)}_iR^{(n)}_r(E_{n,V}M).$$\nFor maps $k:V\\hookrightarrow W$, $p:W\\to T$ with $k$ open, define the target comparison by\n$$E_{n,T}(R_pJ_kM)\\xrightarrow{e^R_{p,n}(J_kM)}R^{(n)}_pE_{n,W}(J_kM)\\xrightarrow{R^{(n)}_p(e^J_{k,n}(M))}R^{(n)}_pJ^{(n)}_k(E_{n,V}M).$$\nThese are the specified composites, not arbitrary isomorphisms. The definitions require no properness, quasi-compactness, finite coefficients, flat transitions, bounded complexes, Cartesian square or chosen etale origin. They assert no proper/open invertibility or pasting theorem.",
+ "stmt_deps": [
+  "def-sp-semilinear-constant-ring-operations",
+  "def-sf-semilinear-proper-open-comparisons",
+  "def-cbc-strict-tower-open-extension",
+  "def-weil-pbc-adjunction-mate"
+ ],
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tag 03DI (lemma-extension-by-zero), open-adjunction normalization; system evaluation comparison data used in literature/stacks-project/more-etale.tex Tag 0F7B (lemma-shriek-proper-and-open), open case, as assembled in prop-pur-adic-reconstruction-trace-coherence Steps 3–4"
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "canonical evaluation comparison extension by zero derived semilinear coefficient systems proper direct image",
+   "results": "8 hits: Function.ExtendByZero.linearMap; Function.ExtendByZero.linearMap_apply; DFinsupp.lmk; MvPolynomial.eval_zero'; ContinuousLinearMap.extend_zero; ContinuousMapZero.instContinuousEval; Polynomial.eval_zero_map; ContinuousMapZero.evalCLM",
+   "date": "2026-10-24",
+   "verdict": "No exact Mathlib match. These concern functions, polynomials or continuous maps, not canonical derived system evaluation comparisons."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "adjunction mate evaluation extension by zero semilinear derived systems canonical source target comparison",
+   "results": "8 hits: LinearEquiv.extend_eq; LinearEquiv.extend_apply; LinearEquiv.extend; Module.Baer.ExtensionOfMaxAdjoin.extensionToFun; Module.Baer.ExtensionOfMaxAdjoin.snd; Function.ExtendByZero.linearMap_apply; Function.ExtendByZero.linearMap; Module.Baer.ExtensionOf.toLinearPMap",
+   "date": "2026-10-24",
+   "verdict": "No exact Mathlib match. Bind the existing project definitions instead of defining them again."
+  },
+  {
+   "tool": "grep",
+   "query": "evalJInv|evalSource|evalTarget",
+   "results": "0 hits: ; subdirectory CategoryTheory",
+   "date": "2026-10-24",
+   "verdict": "No Mathlib declaration of these project-specific comparisons."
+  },
+  {
+   "tool": "grep",
+   "query": "rg -n evalJInv|evalSource|evalTarget lean/WeilConjectures lean/Sheaf; rg -l evalJInv|SemilinearProperOpen.evalSource|SemilinearProperOpen.evalTarget|semilinear-evaluation-comparisons dag/nodes; blueprint_refs.py search semilinear evaluation comparisons",
+   "results": "No upstream WeilConjectures hits. Sheaf.SixFunctors.SemilinearProperOpenMatePasting defines evalJInv at 2416, evalJInv_isIso at 2425, evalJ at 2442, evalSource at 2536, evalTarget at 2548. Other Sheaf hits use these or concern VaryingRing, a different namespace. Full definition-owner scan finds no owner of these five SemilinearProperOpen declarations. DAG text hits concern the existing operations/mate or theorem nodes. 0 blueprint nodes match semilinear evaluation comparisons.",
+   "date": "2026-10-24",
+   "verdict": "Existing published plain comparison data have no definition owner. Add only an existing:true definition node; no Lean module or declaration is copied."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-pur-system-proper-open-invertibility",
+  "date": "2026-10-24",
+  "group": "Q78"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-pur-adic-reconstruction-trace-coherence",
+   "place": "Old Steps 3–4: the specified finite-level evaluation normalization of the intrinsic varying-ring proper/open mate, through its canonical source and target comparisons",
+   "via": [
+    "lem-pur-system-proper-open-invertibility",
+    "lem-pur-system-level-projection-formula-coherence"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-thm-sf-compatibility",
+ "lean": {
+  "module": "Sheaf.SixFunctors.SemilinearProperOpenMatePasting",
+  "declaration": "AlgebraicGeometry.ProEtale.SemilinearProperOpen.evalJ",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.SemilinearProperOpen.evalJInv",
+   "AlgebraicGeometry.ProEtale.SemilinearProperOpen.evalJInv_isIso",
+   "AlgebraicGeometry.ProEtale.SemilinearProperOpen.evalJ",
+   "AlgebraicGeometry.ProEtale.SemilinearProperOpen.evalSource",
+   "AlgebraicGeometry.ProEtale.SemilinearProperOpen.evalTarget"
+  ],
+  "statement": "def evalJ {U X : Scheme.{u}} (j : U ⟶ X) [IsOpenImmersion j] :\n    J C τ j ⋙ E C τ n X ≅ E C τ n U ⋙ StrictTower.J (C n) j",
+  "branch": "sheaf-dag",
+  "by": "Q78",
+  "date": "2026-10-24",
+  "existing": true,
+  "note": "Definition ownership requested by L H2 at immutable head 13c4f0cf25dc. All five published declarations are reused verbatim, including the existing invertibility certificate needed to construct evalJ. The source and target are concrete composites of evalJ and the specified evalR isomorphism. StrictTower.J and StrictTower.jAdj are supplied by def-cbc-strict-tower-open-extension. No new Lean data, theorem, or module is added; the proper/open theorem in the same source module is not a statement dependency."
+ },
+ "import_flags": [],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-a68241eb0",
+  "group": "Q78",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-a68241eb0",
+  "group": "Q78",
+  "result": "pass",
+  "note": "Re-delivery after H2 RETURN of 13c4f0cf25dc. Lean byte-identical (sha256 2e7288f3 matches); maths re-read against node and sound: hypotheses, per-n constructibility and bounds, e.hom = gamma.app H, inverse naturality, finite normalization for every same-ring identity-scalar witness, edge cases. Item record differs from live only in lean and stmt_deps: both theorem stmt_deps removed, all added stmt_deps are live definition nodes (incl. def-pur-proetale-module-scalar-restriction), none removed, proof_deps equal live, lean.statement verbatim. New existing:true def-pur-semilinear-evaluation-comparisons: evalJ signature verbatim at live line 2442; five declarations exist, unowned by any live definition node; statement matches the bodies (evalJInv inverse mate of evalP, evalJ its inverse, source/target composites in stated order); cites def-cbc-strict-tower-open-extension; no cycle. Item not landed live, so not superseded. Advisories: finite clause restates gamma_finite; StrictTower finite* via inherited theorem stmt_dep lem-cbc; owned decls' docstrings name the theorem node. No file changed, no compile."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "N2",
+  "result": "pass",
+  "landing": "20261027T094452-L-231147",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)",
+  "sorry_before": [
+   "AlgebraicGeometry.ProEtale.SemilinearProperOpen.gamma_evaluation",
+   "AlgebraicGeometry.ProEtale.SemilinearProperOpen.gamma_scalarRestriction"
+  ],
+  "sorry_after": []
+ }
+}

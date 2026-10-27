@@ -1,0 +1,313 @@
+{
+ "id": "lem-sfb-scheme-proper-set-sheaf-base-change",
+ "kind": "statement",
+ "title": "Proper base change for arbitrary set sheaves on schemes",
+ "statement": "Let $S$ be a scheme [def-pc-scheme]. Use algebraic spaces over $S$ [def-trf-algebraic-space], the universes of [def-weil-size-convention], sheaves of sets on small etale sites [def-weil-pbc-sites-and-cohomology], and the canonical sheaf adjunctions and composition comparisons of [lem-trf-space-enlarged-etale-ringed-site-model, lem-trf-space-enlarged-chart-ringed-morphism]. Fibre products are [lem-trf-space-fibre-products-etale-covers], and properness is [def-sfb-space-morphism-properties]. Let $X,Y,Y_1$ be schemes over $S$, let $p:X\\to Y$ be proper, let $v:Y_1\\to Y$ be arbitrary, and set $X_1=X\\times_Y Y_1$ with projections $p_1:X_1\\to Y_1$ and $w:X_1\\to X$. For every sheaf of sets $A$ on $X_{\\mathrm{et}}$, the map $v^{-1}p_*A\\to p_{1,*}w^{-1}A$ adjoint to $p_1^{-1}v^{-1}p_*A\\simeq w^{-1}p^{-1}p_*A\\xrightarrow{w^{-1}\\epsilon_p}w^{-1}A$ is an isomorphism, natural in $A$. No group structure, torsion, Noetherianity, finite presentation, or surjectivity is assumed.",
+ "source": {
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tag 0A3U (lemma-proper-base-change-f-star), full statement; canonical arrows normalized by the sheaf adjunction units and counits."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-trf-algebraic-space",
+  "def-weil-size-convention",
+  "def-weil-pbc-sites-and-cohomology",
+  "lem-trf-space-enlarged-etale-ringed-site-model",
+  "lem-trf-space-enlarged-chart-ringed-morphism",
+  "lem-trf-space-fibre-products-etale-covers",
+  "def-sfb-space-morphism-properties",
+  "sbc-def-base-change-map",
+  "def-weil-pbc-cartesian-square"
+ ],
+ "proof": [
+  {
+   "text": "Write $\\beta_A$ for the counit mate in the statement and $\\eta_e$ for the unit of $e^{-1}\\dashv e_*$. Under $v_*p_{1,*}=p_*w_*$, its other transpose is $p_*\\eta_{w,A}:p_*A\\to p_*w_*w^{-1}A$. Indeed transpose this arrow first across $v$, then across $p_1$; expand the unit of a composite as $\\eta_{ab}=\\eta_a;a_*\\eta_ba^{-1}$. Naturality moves the units past the counit, and $\\epsilon_p p^{-1}\\circ p^{-1}\\eta_p=1$ leaves exactly $w^{-1}\\epsilon_p$ after the square's inverse-image comparison. These are the adjunctions of [lem-trf-space-enlarged-chart-ringed-morphism] and the composition-unit comparisons of [lem-weil-pbc-sets-etale-inverse-image-composition-units]. Consequently\n$$v_*\\beta_A\\circ\\eta_{v,p_*A}=p_*\\eta_{w,A}.$$\nOn an etale $V\\to Y$ and $s\\in(p_*A)(V)=A(X\\times_YV)$, this says that $\\beta_A$ sends the unit pullback $v^*s$ on $V_1=V\\times_YY_1$ to the unit pullback of $s$ on $X_1\\times_{Y_1}V_1$. The objects on the two sides are identified by their two projections, using [lem-trf-space-fibre-products-etale-covers].",
+   "uses": [
+    "lem-trf-space-enlarged-chart-ringed-morphism",
+    "lem-weil-pbc-sets-etale-inverse-image-composition-units",
+    "lem-trf-space-fibre-products-etale-covers"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 0A3U (lemma-proper-base-change-f-star), first paragraph; equality of the two adjoint descriptions and its section formula written out"
+   }
+  },
+  {
+   "text": "By [def-sfb-space-morphism-properties] properness agrees with scheme properness. By [lem-weil-pbc-proper-base-change] $p_1$ is proper. For either $f:Z\\to B$ equal to $p$ or $p_1$, and a geometric point $\\bar b:\\operatorname{Spec}\\Omega\\to B$, put $C=\\mathcal O^{\\mathrm{sh}}_{B,\\bar b}$ and $Z^{\\mathrm{sh}}=Z\\times_B\\operatorname{Spec}C$. Properness makes $f$ quasi-compact and separated; [lem-pc-separated-quasi-separated] makes it quasi-separated. Hence for any set sheaf $H$ on $Z_{\\mathrm{et}}$, [lem-weil-pbc-sets-pushforward-stalk-strict-henselization] gives a bijection\n$$(f_*H)_{\\bar b}\\xrightarrow{\\Theta}\\Gamma(Z^{\\mathrm{sh}},H|_{Z^{\\mathrm{sh}}}).$$\nEvery source element has an affine pointed representative $(V,\\bar u,s)$, and $\\Theta$ is pullback of $s$ along the map from $Z^{\\mathrm{sh}}$ to $Z\\times_BV$ specified by the pointed-neighbourhood projection. There is no coefficient or torsion hypothesis in this cited continuity theorem.",
+   "uses": [
+    "def-sfb-space-morphism-properties",
+    "lem-weil-pbc-proper-base-change",
+    "lem-pc-separated-quasi-separated",
+    "lem-weil-pbc-sets-pushforward-stalk-strict-henselization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 0A3T (lemma-proper-pushforward-stalk), first paragraph of proof, using Tag 03Q9 (theorem-higher-direct-images), degree zero for sets"
+   }
+  },
+  {
+   "text": "By clause (1) of [lem-weil-pbc-strict-henselization-functoriality], $C$ is strictly henselian, its residue field $k$ is separably closed and embedded in $\\Omega$, and the closed geometric lift through $\\operatorname{Spec}C$ factors each pointed projection. The morphism $Z^{\\mathrm{sh}}\\to\\operatorname{Spec}C$ is proper by [lem-weil-pbc-proper-base-change]. Apply [lemma-weil-pbc-proper-strict-henselian-h0], using its residue-field-fibre formulation: restriction to $Z_k=Z^{\\mathrm{sh}}\\times_{\\operatorname{Spec}C}\\operatorname{Spec}k$ is bijective for every etale sheaf, in particular $H|_{Z^{\\mathrm{sh}}}$. Apply [lem-weil-pbc-sections-base-field-extension] to the $k$-scheme $Z_k$, the extension $\\Omega/k$, and that restricted set sheaf. Restriction from $Z_k$ to $Z_{\\bar b}=Z\\times_B\\operatorname{Spec}\\Omega$ is bijective. Composing with $\\Theta$ gives a bijection $\\rho_{f,H,\\bar b}:(f_*H)_{\\bar b}\\to\\Gamma(Z_{\\bar b},H|_{Z_{\\bar b}})$. On $(V,\\bar u,s)$ it restricts $s$ along $(\\operatorname{pr}_Z,\\bar u\\operatorname{pr}_{\\Omega}):Z_{\\bar b}\\to Z\\times_BV$: the factorizations in clause (1) identify this composite of projections, and the unit-composition formula of [lem-weil-pbc-sets-etale-inverse-image-composition-units] identifies the pullbacks of $s$.",
+   "uses": [
+    "lem-weil-pbc-strict-henselization-functoriality",
+    "lem-weil-pbc-proper-base-change",
+    "lemma-weil-pbc-proper-strict-henselian-h0",
+    "lem-weil-pbc-sections-base-field-extension",
+    "lem-weil-pbc-sets-etale-inverse-image-composition-units"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 0A3T (lemma-proper-pushforward-stalk), final paragraph, using Tag 0A3S (lemma-h0-proper-over-henselian-local) and Tag 0A3I (lemma-sections-base-field-extension); restriction formula expanded"
+   }
+  },
+  {
+   "text": "Fix $\\bar y_1:\\operatorname{Spec}\\Omega\\to Y_1$ and put $\\bar y=v\\bar y_1$. The bijection of [lem-weil-pbc-sets-etale-inverse-image-stalk-germ] identifies $(v^{-1}p_*A)_{\\bar y_1}$ with $(p_*A)_{\\bar y}$. Combine it with the two bijections $\\rho$ from steps 2-3. The fibre-product universal property [lem-trf-space-fibre-products-etale-covers] identifies $T=X_1\\times_{Y_1}\\operatorname{Spec}\\Omega$ with $X\\times_Y\\operatorname{Spec}\\Omega$, preserving the projection to $X$. The pulled-back sheaves on $T$ agree by [lem-weil-pbc-sets-etale-inverse-image-composition-units]. To compute $\\beta_A$ on a stalk, represent any element of $(p_*A)_{\\bar y}$ by $s\\in A(X\\times_YV)$ at $(V,\\bar u)$. The inverse of the cited stalk comparison represents its inverse-image germ by $v^*s$ at $(V\\times_YY_1,(\\bar u,\\bar y_1))$. Step 1 sends this to the germ of the pullback of $s$ on $X_1\\times_YV$. Both maps $\\rho$ then restrict along the same map $T\\to X\\times_YV$, with components $T\\to X$ and $\\bar u\\operatorname{pr}_{\\Omega}$. Thus\n$$\\rho_{p_1,w^{-1}A,\\bar y_1}\\circ(\\beta_A)_{\\bar y_1}=\\rho_{p,A,\\bar y}\\circ c_{v,\\bar y_1,p_*A}.$$\nThis proves bijectivity of the actual exchange stalk, not only the existence of a bijection between its source and target.",
+   "uses": [
+    "lem-weil-pbc-sets-etale-inverse-image-stalk-germ",
+    "lem-trf-space-fibre-products-etale-covers",
+    "lem-weil-pbc-sets-etale-inverse-image-composition-units"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 0A3U (lemma-proper-base-change-f-star), stalk argument; the omitted compatibility with the canonical map is checked on every represented germ"
+   }
+  },
+  {
+   "text": "Choose one algebraically closed geometric point over each point of $Y_1$, in the fixed universe bound. Step 4 proves bijectivity at each of these stalks, so [lem-weil-pbc-sets-etale-iso-on-geometric-stalks] proves that $\\beta_A$ is an isomorphism. For a map $a:A\\to A'$, the unit naturality in [lem-weil-pbc-sets-etale-inverse-image-composition-units] gives $p_*w_*w^{-1}a\\circ p_*\\eta_{w,A}=p_*\\eta_{w,A'}\\circ p_*a$. Transposing across $v$ gives the naturality square for $\\beta$. Its inverse is natural as well, by composing that square with the two inverses. If $X$ or a geometric fibre is empty, the displayed restriction maps take values in the singleton of sections on the empty scheme, and the same argument applies. If $Y_1$ is empty, the stalk criterion uses the empty covering family. No section was required to exist on a nonempty object; no group law, torsion, Noetherian, finite-presentation, or surjectivity hypothesis was used.",
+   "uses": [
+    "lem-weil-pbc-sets-etale-iso-on-geometric-stalks",
+    "lem-weil-pbc-sets-etale-inverse-image-composition-units"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 0A3U (lemma-proper-base-change-f-star), conclusion; Tag 03PU (theorem-exactness-stalks), and naturality of the defining adjunction units"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sfb-space-morphism-properties",
+  "lem-pc-separated-quasi-separated",
+  "lem-trf-space-enlarged-chart-ringed-morphism",
+  "lem-trf-space-fibre-products-etale-covers",
+  "lem-weil-pbc-proper-base-change",
+  "lem-weil-pbc-sections-base-field-extension",
+  "lem-weil-pbc-sets-etale-inverse-image-composition-units",
+  "lem-weil-pbc-sets-etale-inverse-image-stalk-germ",
+  "lem-weil-pbc-sets-etale-iso-on-geometric-stalks",
+  "lem-weil-pbc-sets-pushforward-stalk-strict-henselization",
+  "lem-weil-pbc-strict-henselization-functoriality",
+  "lemma-weil-pbc-proper-strict-henselian-h0"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tags 0A3U and 0A3T (lemma-proper-base-change-f-star and lemma-proper-pushforward-stalk); the omitted canonical-map compatibility is supplied by the explicit unit and representative calculation in steps 1 and 4."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For proper morphisms of schemes inverse image commutes with direct image for arbitrary sheaves of sets on the small etale site",
+   "results": "{\"t\": \"2026-10-23T22:41:51Z\", \"tool\": \"leanfinder\", \"query\": \"For proper morphisms of schemes inverse image commutes with direct image for arbitrary sheaves of sets on the small etale site\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Hom.map_appLE\", \"AlgebraicGeometry.Scheme.Hom.appLE_map\", \"AlgebraicGeometry.LocallyRingedSpace.IsOpenImmersion.invApp_app_assoc\", \"AlgebraicGeometry.SheafedSpace.IsOpenImmersion.invApp_app_assoc\", \"AlgebraicGeometry.Scheme.Hom.map_appLE_assoc\", \"AlgebraicGeometry.Scheme.Hom.appIso_inv_app_assoc\", \"AlgebraicGeometry.Scheme.Modules.pushforwardComp_inv_app_app\", \"AlgebraicGeometry.Scheme.Hom.app_appIso_inv_assoc\"], \"digest\": \"1482ceeab950b7d9\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: scheme-property stability, ordinary adjunction/composition, and abstract sheaf conditions do not supply this proper etale set-sheaf assertion."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"baseChange\", \"Sheaf\"",
+   "results": "{\"t\": \"2026-10-23T22:41:47Z\", \"tool\": \"loogle\", \"query\": \"\\\"baseChange\\\", \\\"Sheaf\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 2, \"note\": \"\", \"top\": [\"CategoryTheory.Precoverage.isSheaf_toGrothendieck_iff_of_isStableUnderBaseChange_of_small\", \"CategoryTheory.Precoverage.isSheaf_toGrothendieck_iff_of_isStableUnderBaseChange\"], \"digest\": \"b16df769ac229669\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: scheme-property stability, ordinary adjunction/composition, and abstract sheaf conditions do not supply this proper etale set-sheaf assertion."
+  },
+  {
+   "tool": "grep",
+   "query": "proper.*(sheaf|baseChange)|baseChange.*proper",
+   "results": "{\"t\": \"2026-10-23T22:41:47Z\", \"tool\": \"grep\", \"query\": \"proper.*(sheaf|baseChange)|baseChange.*proper\", \"sub\": \"AlgebraicGeometry/Sites\", \"ok\": true, \"n_hits\": 4, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/Sites/Pretopology.lean\", \"Mathlib/AlgebraicGeometry/Sites/SheafQuasiCompact.lean\", \"Mathlib/AlgebraicGeometry/Sites/Small.lean\", \"Mathlib/AlgebraicGeometry/Sites/Affine.lean\"], \"digest\": \"551d7af0434e509a\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: scheme-property stability, ordinary adjunction/composition, and abstract sheaf conditions do not supply this proper etale set-sheaf assertion."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Proper base change for arbitrary set valued etale sheaves on schemes without torsion assumptions",
+   "results": "{\"t\": \"2026-10-23T22:41:47Z\", \"tool\": \"leansearch\", \"query\": \"Proper base change for arbitrary set valued etale sheaves on schemes without torsion assumptions\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsProper.isStableUnderBaseChange\", \"Algebra.Etale.baseChange\", \"AlgebraicGeometry.IsEtale.instIsStableUnderBaseChangeScheme\", \"RingHom.Etale.isStableUnderBaseChange\", \"AlgebraicGeometry.isSmooth_isStableUnderBaseChange\", \"AlgebraicGeometry.HasAffineProperty.isStableUnderBaseChange\", \"CategoryTheory.GrothendieckTopology.instIsStableUnderBaseChangeToPrecoverage\", \"AlgebraicGeometry.AffineTargetMorphismProperty.IsStableUnderBaseChange.mk\"], \"digest\": \"4376ca1022d47032\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: scheme-property stability, ordinary adjunction/composition, and abstract sheaf conditions do not supply this proper etale set-sheaf assertion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Degree zero etale proper base change for sheaves of types on schemes",
+   "results": "{\"t\": \"2026-10-23T22:41:53Z\", \"tool\": \"leanfinder\", \"query\": \"Degree zero etale proper base change for sheaves of types on schemes\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsEtale.instIsStableUnderBaseChangeScheme\", \"AlgebraicGeometry.IsEtale.instHasOfPostcompPropertyScheme\", \"AlgebraicGeometry.Scheme.instHasPullbacksEtale\", \"AlgebraicGeometry.Scheme.Etale\", \"AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified\", \"AlgebraicGeometry.Scheme.instCategoryEtale\", \"AlgebraicGeometry.IsEtale\", \"AlgebraicGeometry.IsEtale.instFormallyUnramified\"], \"digest\": \"9a6570705792b25b\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: scheme-property stability, ordinary adjunction/composition, and abstract sheaf conditions do not supply this proper etale set-sheaf assertion."
+  },
+  {
+   "tool": "grep",
+   "query": "proper.*(sheaf|baseChange)|baseChange.*proper",
+   "results": "{\"t\": \"2026-10-23T23:34:18Z\", \"tool\": \"grep\", \"query\": \"proper.*(sheaf|baseChange)|baseChange.*proper\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/Cover/Directed.lean\", \"Mathlib/AlgebraicGeometry/Cover/Over.lean\", \"Mathlib/AlgebraicGeometry/LimitsOver.lean\", \"Mathlib/AlgebraicGeometry/Sites/Pretopology.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/Integral.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/Immersion.lean\", \"Mathlib/AlgebraicGeometry/ColimitsOver.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/AffineAnd.lean\"], \"digest\": \"1304e77b6b76d9c3\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits give morphism-property stability, site sheaf conditions, Zariski pushforwards or general adjunction/composition, not proper etale base change for arbitrary set sheaves."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Inverse image commutes with pushforward along a proper morphism for etale sheaves of sets",
+   "results": "{\"t\": \"2026-10-23T23:34:19Z\", \"tool\": \"leansearch\", \"query\": \"Inverse image commutes with pushforward along a proper morphism for etale sheaves of sets\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"TopCat.Sheaf.pushforward\", \"CategoryTheory.Functor.sheafPushforwardContinuousComp'_inv_app_val_app\", \"TopCat.Presheaf.pushforward_map_app\", \"AlgebraicGeometry.Scheme.Modules.pushforward_obj_obj\", \"AlgebraicGeometry.Scheme.Modules.pushforward_map_app\", \"AlgebraicGeometry.Scheme.Modules.pullbackPushforwardAdjunction\", \"TopCat.Sheaf.pushforward_forget\", \"TopCat.Presheaf.pushforward_map_app'\"], \"digest\": \"eb99850e3748c63a\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits give morphism-property stability, site sheaf conditions, Zariski pushforwards or general adjunction/composition, not proper etale base change for arbitrary set sheaves."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"baseChange\", \"Sheaf\"",
+   "results": "{\"t\": \"2026-10-23T23:34:19Z\", \"tool\": \"loogle\", \"query\": \"\\\"baseChange\\\", \\\"Sheaf\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 2, \"note\": \"\", \"top\": [\"CategoryTheory.Precoverage.isSheaf_toGrothendieck_iff_of_isStableUnderBaseChange_of_small\", \"CategoryTheory.Precoverage.isSheaf_toGrothendieck_iff_of_isStableUnderBaseChange\"], \"digest\": \"b16df769ac229669\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits give morphism-property stability, site sheaf conditions, Zariski pushforwards or general adjunction/composition, not proper etale base change for arbitrary set sheaves."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Proper base change for arbitrary sheaves of sets on small etale sites of schemes",
+   "results": "{\"t\": \"2026-10-23T23:34:22Z\", \"tool\": \"leanfinder\", \"query\": \"Proper base change for arbitrary sheaves of sets on small etale sites of schemes\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsProper.isStableUnderBaseChange\", \"AlgebraicGeometry.IsEtale.instIsStableUnderBaseChangeScheme\", \"AlgebraicGeometry.Scheme.instHasPullbacksEtale\", \"AlgebraicGeometry.IsEtale.instHasOfPostcompPropertyScheme\", \"AlgebraicGeometry.IsLocalIso.instIsStableUnderBaseChangeScheme\", \"AlgebraicGeometry.Scheme.smallEtaleTopology\", \"AlgebraicGeometry.locallyOfFiniteType_isStableUnderBaseChange\", \"AlgebraicGeometry.Scheme.instCategoryEtale\"], \"digest\": \"7915f46087a6eda1\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits give morphism-property stability, site sheaf conditions, Zariski pushforwards or general adjunction/composition, not proper etale base change for arbitrary set sheaves."
+  },
+  {
+   "tool": "grep",
+   "query": "isIso.*baseChange|proper.*pushforward|proper.*stalk",
+   "results": "{\"t\": \"2026-10-23T23:34:57Z\", \"tool\": \"grep\", \"query\": \"isIso.*baseChange|proper.*pushforward|proper.*stalk\", \"sub\": \"AlgebraicGeometry/Sites\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits give morphism-property stability, site sheaf conditions, Zariski pushforwards or general adjunction/composition, not proper etale base change for arbitrary set sheaves."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Degree zero etale cohomology proper pushforward of a set valued sheaf commutes with arbitrary base change",
+   "results": "{\"t\": \"2026-10-23T23:34:58Z\", \"tool\": \"leanfinder\", \"query\": \"Degree zero etale cohomology proper pushforward of a set valued sheaf commutes with arbitrary base change\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SheafOfModules.pushforwardCongr\", \"AlgebraicGeometry.Scheme.Modules.pushforwardComp_hom_app_app\", \"AlgebraicGeometry.Scheme.Modules.pullbackPushforwardAdjunction\", \"AlgebraicGeometry.Scheme.Modules.pushforwardComp\", \"AlgebraicGeometry.Scheme.Modules.pushforwardCongr\", \"AlgebraicGeometry.Scheme.Modules.pushforwardComp_inv_app_app\", \"SheafOfModules.pushforwardComp_hom_app_val_app\", \"SheafOfModules.pushforwardComp_inv_app_val_app\"], \"digest\": \"6a9442ac008ea478\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits give morphism-property stability, site sheaf conditions, Zariski pushforwards or general adjunction/composition, not proper etale base change for arbitrary set sheaves."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-space-proper-set-sheaf-base-change",
+  "date": "2026-10-24",
+  "group": "Q30"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "Inherited det-thm-sf-ctf-stability-direct-images alteration/moduli route, through Alper Proposition 7.1.1 Hom exactness and Rydh (5.19)(i); supporting Rydh (5.17) proof, printed p.22: Corollary (5.16), proper-surjective input after the refinement (3.10); proper-surjection input, equalizer descent construction: proper base change for sheaves of sets (Stacks 0DG0).; Tag 0DG0 proof: supporting 0A3U (lemma-proper-base-change-f-star).",
+   "via": [
+    "lem-sfb-space-proper-set-sheaf-base-change",
+    "lem-sfb-proper-surjection-etale-space-effectivity",
+    "lem-sfb-space-qc-subtrusive-etale-descent",
+    "lem-sfb-space-open-surjection-etale-descent",
+    "lem-sfb-homeomorphism-separated-etale-equivalence",
+    "lem-sfb-separated-space-homeomorphism-affine",
+    "lem-sfb-stein-submersive-reduced-descent",
+    "lem-sfb-adequate-locally-separated-universality",
+    "lem-sfb-affine-pgl-finite-stabilizer-quotient",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-scheme-proper-set-sheaf-base-change",
+  "worker": "stage1",
+  "summary": "Statement unchanged. Expanded Stacks 0A3U through the existing set-valued strict-local continuity theorem, strict-local residue-field geometry, henselian proper H^0, field-extension invariance, and geometric-stalk conservativity. Computed the canonical counit mate on unit sections and on represented germs, repairing the source compatibility omission. No new nodes; no Lean writing or builds.",
+  "blueprint": "Inherited det-thm-sf-ctf-stability-direct-images alteration/moduli route, through Alper Proposition 7.1.1 Hom exactness and Rydh (5.19)(i); supporting Rydh (5.17) proof, printed p.22: Corollary (5.16), proper-surjective input after the refinement (3.10); proper-surjection input, equalizer descent construction: proper base change for sheaves of sets (Stacks 0DG0).; Tag 0DG0 proof: supporting 0A3U (lemma-proper-base-change-f-star). Current latest sec-six-functors-basics/sk-thm-sf-ctf-stability/_section.md and direct-images proof were read. The null blueprint anchor and inherited via chain are retained as in the reviewed parent; this is a generic set-sheaf tool below its alteration/descent route.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-sets-etale-inverse-image-composition-units",
+    "why": "Generic set-valued etale adjunction and composition-unit formulas; no cohomological or coefficient restriction."
+   },
+   {
+    "node": "lem-weil-pbc-proper-base-change",
+    "why": "Generic scheme permanence of properness for p_1 and strict-local base changes."
+   },
+   {
+    "node": "lem-weil-pbc-sets-pushforward-stalk-strict-henselization",
+    "why": "Generic qcqs set-valued continuity and its representative formula; the unit has no replacement for this stalk computation."
+   },
+   {
+    "node": "lem-weil-pbc-strict-henselization-functoriality",
+    "why": "Only clause (1), the strict-local ring, residue field, and pointed factorizations, is used as local geometry."
+   },
+   {
+    "node": "lemma-weil-pbc-proper-strict-henselian-h0",
+    "why": "Generic proper henselian H^0 restriction, whose statement applies to every etale sheaf without an abelian hypothesis."
+   },
+   {
+    "node": "lem-weil-pbc-sections-base-field-extension",
+    "why": "Generic invariance of sections for a separably closed ground field, applied to its arbitrary extension Omega."
+   },
+   {
+    "node": "lem-weil-pbc-sets-etale-inverse-image-stalk-germ",
+    "why": "Generic inverse-image comparison for sets with its unit-germ normalization."
+   },
+   {
+    "node": "lem-weil-pbc-sets-etale-iso-on-geometric-stalks",
+    "why": "Generic geometric-stalk conservativity for set sheaves."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-sets-etale-inverse-image-composition-units",
+  "lem-weil-pbc-proper-base-change",
+  "lem-weil-pbc-sets-pushforward-stalk-strict-henselization",
+  "lem-weil-pbc-strict-henselization-functoriality",
+  "lemma-weil-pbc-proper-strict-henselian-h0",
+  "lem-weil-pbc-sections-base-field-extension",
+  "lem-weil-pbc-sets-etale-inverse-image-stalk-germ",
+  "lem-weil-pbc-sets-etale-iso-on-geometric-stalks"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q56-c1e4aebbc",
+  "group": "Q56",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q56-c1e4aebbc (reviewer sub-agent of L); spot-checked: Read the item's five steps against Stacks etale-cohomology 0A3U, 0A3T, 0A3S and 0A3I (labels checked in tags/tags), and every cited statement in full. Statement and stmt_deps are unchanged. The map is the counit mate, which equals the 0A3U adjoint of p_*(unit) by step 1's mate and unit calculation. Coefficients are arbitrary set sheaves, the trf adjunctions restrict to the small etale topos, and no target is weakened. Step 2: space-proper implies scheme-proper, qs comes from separated, and the cited continuity node is stated for SET sheaves with Θ given by restriction along σ_V. Step 3 uses only clause (1) of the strict-henselization node: residue field kappa(b-bar) is a separably closed subfield of Omega, with the factorizations. It then uses the h0 node, whose proof step 3 says explicitly 'every etale sheaf of sets', in its Z_0 form, and then 0A3I with Omega/k possibly transcendental, with no identification of k with Omega. Step 4 writes out the compatibility that 0A3U omits on represented germs, using the unique unit-germ bijection of the stalk-germ node. Step 5 uses the set-valued geometric-stalk conservativity leaf; naturality comes from unit naturality. Edge cases tested: p=id, X empty, Y_1 empty, transcendental Omega on a point, open immersion (properness needed). No new nodes; the only existing 0A3U-type nodes are torsion or Lambda-module versions; the space parent depends on this item, so no duplicate and no cycle. No SGA. Tool uses: the 8 declared ones are accepted as generic set-valued etale foundations. Steps 1 and 4 also cite two undeclared sk-i-curve-zero nodes (chart-ringed-morphism, fibre-products), which are already stmt_deps and accepted on the parent; accepted, and review_split only records such cases. Batch-5: lemma-weil-pbc-proper-strict-henselian-h0 reaches sec-trace-formula only through the plain definition def-trf-schematically-dense-open, via the Nagata/Chow/Stein foundations. It is degree-zero proper H^0, neither an assumption nor a step of the trace-formula or Poincare-duality proofs, so it is accepted. Maintainer notes: (1) the h0 node's Lean attachment (isIso_globalSectionsUpperStarMap_geometricFibre) and its siblings are AddCommGrp/ModuleCat only, so stages 2 and 3 will need a Type-valued version. (2) Its pending blueprint_update narrows it to Lambda-modules; keep the set clause, which this item and its parent use. Its G_m remark contradicts 0A3I."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SchemeProperSetSheafBaseChange",
+  "declaration": "AlgebraicGeometry.scheme_proper_setSheaf_baseChange",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.setSheafBaseChangeSquare",
+   "AlgebraicGeometry.scheme_proper_setSheaf_baseChange"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/SchemeProperSetSheafBaseChange.lean",
+  "statement": "theorem scheme_proper_setSheaf_baseChange (S : Scheme.{u}) (X Y Y₁ : Over S) (p : X ⟶ Y) [IsProper p.left] (v : Y₁ ⟶ Y) : (∀ A : Sheaf X.left.smallEtaleTopology (Type (u + 1)), IsIso (Etale.setBaseChangeArrow (Scheme.setSheafBaseChangeSquare p.left v.left) A)) ∧ (∀ (A B : Sheaf X.left.smallEtaleTopology (Type (u + 1))) (a : A ⟶ B), (Scheme.etaleSetPullback v.left).map ((Etale.lowerStar (Type (u + 1)) p.left).map a) ≫ Etale.setBaseChangeArrow (Scheme.setSheafBaseChangeSquare p.left v.left) B = Etale.setBaseChangeArrow (Scheme.setSheafBaseChangeSquare p.left v.left) A ≫ (Etale.lowerStar (Type (u + 1)) (pullback.snd p.left v.left)).map ((Scheme.etaleSetPullback (pullback.fst p.left v.left)).map a))",
+  "branch": "newtargets-dag",
+  "by": "Q30",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "Repairs H2 at returned head 4367c6ae6228: the helper directly constructs ChosenCartesianSquare (pullback.snd p v) (pullback.fst p v) v p with pullbackSymmetry and its projection equations. The statement depends only on the exchange definition and square definition, not exchangeTranspose or any sectionwise theorem. The sectionwise module is imported non-publicly for the counit-transpose identification; proof_deps is retained exactly as on sheaf-dag, following the corrected review at returned head 2fcea2bb8d77. Over S bundling, properness, arbitrary base change, all set sheaves and naturality are retained."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-cb2680c22",
+  "group": "Q30",
+  "result": "pass",
+  "note": "Checked the node, the Stacks 0A3U source, the module and every statement dependency. Compared with current main, the node differs only in lean and the two added landed definition stmt_deps (sbc-def-base-change-map owns setBaseChangeArrow; def-weil-pbc-cartesian-square owns ChosenCartesianSquare). proof, proof_deps and statement are unchanged, so the earlier H2/H7 returns are repaired. The helper square (snd, fst, v, p) via pullbackSymmetry has both projection equations and is real data. setBaseChangeArrow with (h,e,f,g)=(p1,w,v,p) is v^-1 p_* A -> p1_* w^-1 A, the v-transpose of p_* eta_w, which is the canonical exchange. IsProper p.left is scheme properness and v is arbitrary. The statement covers all Type (u+1) set sheaves, with no algebraic or finiteness hypotheses. The naturality square is oriented correctly. Edge cases are covered: empty X, empty fibres, empty Y1, identity maps, non-surjective p. Docstrings carry the source, the blueprint tag and the five proof steps; the proof is only sorry; proof-only imports are non-public; lean.statement is verbatim. I made no change and ran no compile."
+ }
+}

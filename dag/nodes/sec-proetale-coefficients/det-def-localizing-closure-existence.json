@@ -238,7 +238,18 @@
  },
  "chapter": "sec-proetale-coefficients",
  "unit": "sk-def-localizing-closure",
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
  "reviewed_lean": {
   "date": "2026-10-18",
   "by": "L",
@@ -269,5 +280,32 @@
   "landing": "20261018T145108-L-3642742",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ },
+ "blueprint_update": {
+  "snapshot": "main-20261023-1620",
+  "commit": "7284bb09daf97437d544c51882b325f9c52cd345",
+  "changed": [
+   "statement",
+   "proof"
+  ],
+  "statement": "Let $\\Lambda$ be a condensed ring, $X$ a scheme and $\\mathcal S$ a class of objects of\n$D(X_{\\mathrm{proét}},\\Lambda)$ (for instance $\\mathcal S=\\Dctf(X,\\Lambda)$,\n[def-weil-finite-tor-amplitude]).\n\n1. $D(X_{\\mathrm{proét}},\\Lambda)$ has arbitrary (small) direct sums.\n2. The intersection of all full triangulated subcategories of $D(X_{\\mathrm{proét}},\\Lambda)$\n   that contain $\\mathcal S$, are closed under isomorphisms, and are closed under arbitrary\n   direct sums, is again such a subcategory. It is denoted $\\Loc(\\mathcal S)$; it is the\n   smallest localizing subcategory containing $\\mathcal S$.\n3. $\\Loc(\\mathcal S)$ is closed under direct summands, hence thick; and\n   $\\mathcal S\\subseteq\\mathcal S'\\subseteq\\Loc(\\mathcal S)$ implies\n   $\\Loc(\\mathcal S')=\\Loc(\\mathcal S)$.",
+  "proof": [
+   {
+    "text": "(1) The category of $\\Lambda_X$-modules is Grothendieck abelian\n([det-prop-sfb-module-category]), so direct sums exist and are exact. In the homotopy\ncategory $K(\\Lambda_X)$ the termwise direct sum of complexes is the coproduct, and the\ntermwise direct sum of mapping-cone triangles is the mapping-cone triangle of the direct\nsum. By exactness of direct sums, the acyclic complexes form a localizing subcategory of\n$K(\\Lambda_X)$; for a Verdier quotient by a subcategory closed under coproducts, the quotient\nfunctor preserves coproducts (Neeman, *Triangulated categories*, Lemma 3.2.10). So\n$D(X_{\\mathrm{proét}},\\Lambda)$ has direct sums, computed termwise; in particular direct sums of\ndistinguished triangles are distinguished, which is used in (2).",
+    "uses": [],
+    "elementary": null
+   },
+   {
+    "text": "(2) Each condition (containing $0$ and $\\mathcal S$, closure under isomorphisms, under shifts\nin both directions, under cones of morphisms between members, and under direct sums of\nfamilies of members) is preserved by arbitrary intersections. The whole category is one\nsuch subcategory, so the intersection is over a non-empty collection.",
+    "uses": [],
+    "elementary": null
+   },
+   {
+    "text": "(3) Eilenberg swindle: let $K=K_1\\oplus K_2\\in\\Loc(\\mathcal S)$ and\n$K^{(\\mathbf N)}=\\bigoplus_{\\mathbf N}K\\in\\Loc(\\mathcal S)$. Regrouping summands gives\n$K_1\\oplus K^{(\\mathbf N)}=K_1\\oplus(K_2\\oplus K_1)^{(\\mathbf N)}\\cong(K_1\\oplus K_2)^{(\\mathbf N)}=K^{(\\mathbf N)}$.\nThe split triangle $K^{(\\mathbf N)}\\to K_1\\oplus K^{(\\mathbf N)}\\to K_1\\xrightarrow{0}K^{(\\mathbf N)}[1]$\nexhibits $K_1$ as a cone of a morphism between members, so $K_1\\in\\Loc(\\mathcal S)$. For the\nlast assertion: $\\Loc(\\mathcal S')$ is localizing and contains $\\mathcal S$, so it contains\n$\\Loc(\\mathcal S)$; conversely $\\Loc(\\mathcal S)$ is localizing and contains $\\mathcal S'$.",
+    "uses": [],
+    "elementary": null
+   }
+  ],
+  "note": "the current blueprint (main-20261023-1620, weil-conjectures-blueprint 7284bb09da) states or proves this differently; the node is proved in Lean: recorded 2026-10-23, not reopened"
  }
 }

@@ -80,7 +80,60 @@
   "def-sc-ample"
  ],
  "proof_split_by": "paragraphs",
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": [
+    "AlgebraicGeometry.IsAbelianScheme.isAmple_symmetrisation",
+    "AlgebraicGeometry.IsAbelianScheme.nonempty_iso_overPullback_inv_symmetrisation",
+    "AlgebraicGeometry.IsAmple.tensorObj",
+    "AlgebraicGeometry.IsAbelianVariety.isAmple_symmetrisation",
+    "AlgebraicGeometry.IsAbelianVariety.nonempty_iso_overPullback_inv_symmetrisation"
+   ]
+  },
+  "slopmaster2": {
+   "state": "closed",
+   "decls": [
+    {
+     "name": "AlgebraicGeometry.IsAmple.tensorObj",
+     "module": "WeilConjectures.AlgebraicGeometry.Modules.VeryAmple",
+     "lines": [
+      169,
+      182
+     ],
+     "kind": "theorem",
+     "sorry": false
+    },
+    {
+     "name": "AlgebraicGeometry.IsAbelianVariety.isAmple_symmetrisation",
+     "module": "WeilConjectures.AlgebraicGeometry.AbelianVariety.Projective",
+     "lines": [
+      106,
+      120
+     ],
+     "kind": "theorem",
+     "sorry": false
+    },
+    {
+     "name": "AlgebraicGeometry.IsAbelianVariety.nonempty_iso_overPullback_inv_symmetrisation",
+     "module": "WeilConjectures.AlgebraicGeometry.AbelianVariety.Projective",
+     "lines": [
+      122,
+      136
+     ],
+     "kind": "theorem",
+     "sorry": false
+    }
+   ],
+   "missing": [],
+   "superseded": [
+    "AlgebraicGeometry.IsAbelianScheme.isAmple_symmetrisation",
+    "AlgebraicGeometry.IsAbelianScheme.nonempty_iso_overPullback_inv_symmetrisation"
+   ],
+   "open": []
+  }
+ },
  "chapter": "sec-abelian-varieties",
  "unit": "sk-prop-av-symmetric-ample",
  "lean": {
@@ -97,17 +150,36 @@
   "note": "recorded by L at 04:46 UTC from lean_audit (stage 2, rule 2 of the human: one definition per notion; a node whose notion has a declaration in the source repository is not stated again; audit state closed); Lean refresh 7d675a26 (L): moved from WeilConjectures.AlgebraicGeometry.Modules.Ample:427"
  },
  "blueprint_update": {
-  "snapshot": "main-20261015",
+  "snapshot": "main-20261023",
+  "commit": "c9b5f3ad18a6654dbbee6f7d7b4b4af85e01463f",
+  "changed": [
+   "proof"
+  ],
   "statement": "Let $X$ be a scheme over a field $k$ and let $\\mathcal L$ and\n$\\mathcal M$ be ample invertible\n$\\mathcal O_X$-modules. Then $\\mathcal L\\otimes\\mathcal M$ is\nample. In particular, for an\nabelian variety $A$ and an\ninvertible module $\\mathcal L$ on $A$, the module\n$\\mathcal L\\otimes[-1]^*\\mathcal L$ satisfies\n$[-1]^*(\\mathcal L\\otimes[-1]^*\\mathcal L)\\cong\\mathcal L\\otimes [-1]^*\\mathcal L$,\nand it is ample if $\\mathcal L$ is ample.",
   "proof": [
    {
-    "text": "*Reference: Stacks Project, Properties of Schemes, Lemma\n28.27.5, [Tag 0890](https://stacks.math.columbia.edu/tag/0890).*\nChoose $a,b\\geq1$ with $\\mathcal L^{\\otimes a}$ and\n$\\mathcal M^{\\otimes b}$ very ample. The tensor product of two very\nample modules is very ample: if $\\mathcal V\\cong i^*\\mathcal O(1)$ and\n$\\mathcal W\\cong j^*\\mathcal O(1)$ for closed immersions $i,j$ into\nprojective spaces over $k$, then $(i,j)$ is a closed immersion into\ntheir product (it is the graph-type morphism\n$X\\to X\\times_kX\\to\\mathbf P^N_k\\times_k\\mathbf P^M_k$, the diagonal\nbeing a closed immersion because $X$, admitting the closed immersion\n$i$ into a projective space, is separated over $k$), and $\\mathcal V\\otimes\\mathcal W$ is the\npullback of $\\mathcal O(1)\\boxtimes\\mathcal O(1)$ along it, which is\nvery ample by [lem-chow-segre]. By induction, positive tensor powers\nof a very ample module are very ample. Hence\n$\\mathcal L^{\\otimes ab}=(\\mathcal L^{\\otimes a})^{\\otimes b}$ and\n$\\mathcal M^{\\otimes ab}=(\\mathcal M^{\\otimes b})^{\\otimes a}$ are very\nample, and so is\n$(\\mathcal L\\otimes\\mathcal M)^{\\otimes ab}\\cong\\mathcal L^{\\otimes ab}\\otimes\\mathcal M^{\\otimes ab}$.\nHence $\\mathcal L\\otimes\\mathcal M$ is ample. For the second part,\n$[-1]$ is an automorphism of $A$, so $[-1]^*\\mathcal L$ is\nample and $[-1]^*[-1]^*\\mathcal L\\cong\\mathcal L$; therefore\n$[-1]^*(\\mathcal L\\otimes[-1]^*\\mathcal L)\\cong[-1]^*\\mathcal L\\otimes\\mathcal L\\cong\\mathcal L\\otimes[-1]^*\\mathcal L$.",
+    "text": "*Reference: Stacks Project, Properties of Schemes, Lemma\n28.27.5, [Tag 0890](https://stacks.math.columbia.edu/tag/0890).*",
+    "uses": [],
+    "elementary": null
+   },
+   {
+    "text": "**Very ample modules.** The tensor product of two very ample modules is very\nample: if $\\mathcal V\\cong i^*\\mathcal O(1)$ and\n$\\mathcal W\\cong j^*\\mathcal O(1)$ for closed immersions\n$i\\colon X\\to\\mathbf P^{n}_k$ and $j\\colon X\\to\\mathbf P^{m}_k$ over $k$, then\nby [lem-chow-segre] (with $S=\\Spec k$) the composite of\n$(i,j)\\colon X\\to\\mathbf P^{n}_k\\times_k\\mathbf P^{m}_k$ with the Segre\nembedding is a closed immersion $X\\to\\mathbf P^{n\\times m}_k$ over $k$ along\nwhich $\\mathcal O(1)$ pulls back to $\\mathcal V\\otimes\\mathcal W$. Hence,\nby induction ($\\mathcal V^{\\otimes1}\\cong\\mathcal V$ and\n$\\mathcal V^{\\otimes(r+2)}\\cong\\mathcal V\\otimes\\mathcal V^{\\otimes(r+1)}$),\nevery positive tensor power of a very ample module is very ample.",
     "uses": [
      "lem-chow-segre"
     ],
     "elementary": false
+   },
+   {
+    "text": "**Ample modules.** Choose $a,b\\geq1$ with $\\mathcal L^{\\otimes a}$ and\n$\\mathcal M^{\\otimes b}$ very ample. Then\n$\\mathcal L^{\\otimes ab}\\cong(\\mathcal L^{\\otimes a})^{\\otimes b}$ and\n$\\mathcal M^{\\otimes ab}\\cong(\\mathcal M^{\\otimes b})^{\\otimes a}$ are very\nample, and so is\n$(\\mathcal L\\otimes\\mathcal M)^{\\otimes ab}\\cong\\mathcal L^{\\otimes ab}\\otimes\\mathcal M^{\\otimes ab}$.\nAs $\\mathcal L\\otimes\\mathcal M$ is invertible and $ab\\geq1$, it is ample.",
+    "uses": [],
+    "elementary": null
+   },
+   {
+    "text": "**The abelian variety case.** Let $f\\colon A\\to\\Spec k$ be the structure\nmorphism. The restriction of an ample module along a closed immersion\n$g\\colon Z\\to A$ is ample with respect to $f\\circ g$: if\n$\\mathcal L^{\\otimes r}\\cong i^*\\mathcal O(1)$ for a closed immersion $i$,\nthen $(g^*\\mathcal L)^{\\otimes r}\\cong g^*(\\mathcal L^{\\otimes r})\\cong(i\\circ g)^*\\mathcal O(1)$\nand $i\\circ g$ is a closed immersion. The inversion $[-1]$ is an automorphism\nof $A$ over $k$, in particular a closed immersion with $f\\circ[-1]=f$, so\n$[-1]^*\\mathcal L$ is ample, and $\\mathcal L\\otimes[-1]^*\\mathcal L$ is ample\nby the first part. Finally, for any invertible $\\mathcal L$, since\npullback commutes with tensor products and $[-1]\\circ[-1]=\\mathrm{id}_A$,\n\n$$\n[-1]^*(\\mathcal L\\otimes[-1]^*\\mathcal L)\\cong[-1]^*\\mathcal L\\otimes[-1]^*[-1]^*\\mathcal L\n\\cong[-1]^*\\mathcal L\\otimes\\mathcal L\\cong\\mathcal L\\otimes[-1]^*\\mathcal L .\n$$",
+    "uses": [],
+    "elementary": null
    }
   ],
-  "note": "the current blueprint (aligned 2026-10-15 with the six-functors notes) states or proves this differently; a worker who touches the node follows it"
+  "note": "the current blueprint (main-20261023, weil-conjectures-blueprint c9b5f3ad18) states or proves this differently; the node is proved in Lean: recorded 2026-10-23, not reopened"
  }
 }

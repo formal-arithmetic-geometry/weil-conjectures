@@ -1,0 +1,271 @@
+{
+ "kind": "statement",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tag 00HL (lemma-flat-tor-zero) and Tag 00CS (proposition-localization-exact); schemes.tex Tags 01HV (lemma-spec-sheaves), 01I3 (lemma-standard-open-affine); constructions.tex Tag 01LN (lemma-spec-inclusion); algebra.tex Tag 00E0 (lemma-Zariski-topology), basis clause. Agent-assembled affine-cover criterion with canonical kernel identification."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "pqf-def-coherent",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-pbc-exact-sequence",
+  "def-weil-pbc-flat-ring-map"
+ ],
+ "proof": [
+  {
+   "text": "Fix a chart and omit its index. Restrict the given short exact A-module sequence to R; its maps and underlying groups are unchanged, so it remains short exact. Apply [lem-weil-pbc-flat-quotient-tensor-injective] over R, with flat last term N and arbitrary tensor factor S. Swap tensor factors by the maps s⊗l↦l⊗s (and their inverses), obtaining exactness of 0→L⊗_R S→M⊗_R S→N⊗_R S→0. The maps commute with the A⊗_R S action since p and q are A-linear. The supplied commuting section isomorphisms therefore give short exactness on Q. This uses neither flatness of S nor flatness of A.",
+   "uses": [
+    "lem-weil-pbc-flat-quotient-tensor-injective"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00HL, lemma-flat-tor-zero"
+   }
+  },
+  {
+   "text": "Put B=O_Y(Q). For c∈B, [lem-weil-pbc-affine-open-section-vanishing-prime](b) makes D(c) affine with ring B_c. Apply [lem-weil-pbc-quasi-coherent-affine-section-base-change] to D(c)⊆Q and each of F,G,H: its map t⊗b↦b(t|_{D(c)}) identifies P(D(c)) with P(Q)⊗_B B_c, and [lem-weil-pbc-localization-module-tensor] identifies P(Q)⊗_B B_c with the localized B-module P(Q)_c, t⊗(b/c^n)↦bt/c^n, carrying a⊗1 to a_c (P=F,G,H). For a sheaf morphism a, a(t|/c^n)=a(t)|/c^n by restriction compatibility and linearity. Thus both arrows are exactly the localizations of the chart tensor arrows under these isomorphisms. Apply [lem-weil-pbc-localization-module-exact] to the full exact sequence, including the pairs 0→F(Q)→G(Q) and G(Q)→H(Q)→0. Localization of the zero module is zero, so this proves all three exactness assertions on D(c), including c=0 and zero chart rings.",
+   "uses": [
+    "lem-weil-pbc-affine-open-section-vanishing-prime",
+    "lem-weil-pbc-quasi-coherent-affine-section-base-change",
+    "lem-weil-pbc-localization-module-tensor",
+    "lem-weil-pbc-localization-module-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Tags 01I3 (lemma-standard-open-affine), 01HV (lemma-spec-sheaves); constructions.tex Tag 01LN (lemma-spec-inclusion); algebra.tex Tags 00DK (lemma-tensor-localization), 00CS (proposition-localization-exact)"
+   }
+  },
+  {
+   "text": "The composite vu vanishes: for a section over any open W and x∈W, choose Q_λ containing x, then a principal D(c) with x∈D(c)⊆W∩Q_λ using [lem-weil-pbc-spec-localization-away-basic-open](i), transported to Q_λ≅Spec O_Y(Q_λ) by [lem-weil-pbc-affine-open-section-vanishing-prime](a). Step 2 gives vu=0 on sections over D(c). These D(c) cover W, so the sheaf uniqueness axiom gives zero on W. Let K=ker v, computed sectionwise as in [def-weil-sheaf-of-modules-category], and let k:F→K be u with codomain restricted to the kernel. By [lem-weil-pbc-quasi-coherent-module-kernel], K is quasi-coherent, since G and H are. On each Q_λ, k is the map F(Q_λ)→ker(v_{Q_λ}) induced by u_{Q_λ}; step 1 says it is injective and surjective. Apply [lem-weil-pbc-quasi-coherent-iso-on-affine-cover] to k on the given affine covering. Hence k is an isomorphism, and its composite with K→G is u by construction.",
+   "uses": [
+    "lem-weil-pbc-spec-localization-away-basic-open",
+    "lem-weil-pbc-affine-open-section-vanishing-prime",
+    "def-weil-sheaf-of-modules-category",
+    "lem-weil-pbc-quasi-coherent-module-kernel",
+    "lem-weil-pbc-quasi-coherent-iso-on-affine-cover"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Tags 01IC (lemma-kernel-cokernel-quasi-coherent), 01IA (lemma-quasi-coherent-affine), 01IB (lemma-equivalence-quasi-coherent); sites-modules.tex Tag 03DA (lemma-abelian); algebra.tex Tag 00E0 (lemma-Zariski-topology), basic-open basis"
+   }
+  },
+  {
+   "text": "By step 1, v is surjective on sections of every Q_λ; H is quasi-coherent. Thus [lem-weil-pbc-quasicoherent-epi-affine-cover] makes v an epimorphism. The isomorphism k in step 3 identifies u with the kernel inclusion, so u is monic and its image is ker v. Together with vu=0 these are exactly the short exactness conditions of [def-weil-pbc-exact-sequence]. The factorization k is canonical because the kernel inclusion is monic. All arguments use individual members of the cover, with no finiteness assumptions on it or the modules.",
+   "uses": [
+    "lem-weil-pbc-quasicoherent-epi-affine-cover",
+    "def-weil-pbc-exact-sequence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Tags 01IA (lemma-quasi-coherent-affine), 01HV (lemma-spec-sheaves); homology.tex Tag 010E (definition-exact)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-flat-quotient-tensor-injective",
+  "lem-weil-pbc-affine-open-section-vanishing-prime",
+  "lem-weil-pbc-quasi-coherent-affine-section-base-change",
+  "lem-weil-pbc-localization-module-tensor",
+  "lem-weil-pbc-localization-module-exact",
+  "lem-weil-pbc-spec-localization-away-basic-open",
+  "def-weil-sheaf-of-modules-category",
+  "lem-weil-pbc-quasi-coherent-module-kernel",
+  "lem-weil-pbc-quasi-coherent-iso-on-affine-cover",
+  "lem-weil-pbc-quasicoherent-epi-affine-cover",
+  "def-weil-pbc-exact-sequence"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Assembly of Tag 00HL with Tags 00CS, 01HV, 01I3, 01IA, 01IB and 01IC; affine tensor formula in constructions.tex Tag 01LN."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A sequence of quasi coherent sheaves on a scheme is short exact if on an affine open cover its section maps identify with tensor base change of short exact module sequences with flat quotient over another base ring, including canonical isomorphism to the sheaf kernel",
+   "results": "{\"t\": \"2026-10-22T07:21:46Z\", \"tool\": \"leanfinder\", \"query\": \"A sequence of quasi coherent sheaves on a scheme is short exact if on an affine open cover its section maps identify with tensor base change of short exact module sequences with flat quotient over another base ring, including canonical isomorphism to the sheaf kernel\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Module.Flat.lTensor_shortComplex_exact\", \"Module.Flat.rTensor_shortComplex_exact\", \"Module.Flat.iff_lTensor_preserves_shortComplex_exact\", \"Module.Flat.iff_rTensor_preserves_shortComplex_exact\", \"AlgebraicGeometry.Scheme.Modules.instAbelian\", \"CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex_shortExact\", \"Module.FaithfullyFlat.lTensor_exact_iff_exact\", \"Module.FaithfullyFlat.range_le_ker_of_exact_rTensor\"], \"digest\": \"2940bf8cebb77ff4\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: component flat tensor and module-category facts do not give the relative-flat quotient affine-chart sheaf criterion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Relative flat quotient tensor preserves exactness on affine charts and localization yields short exactness of quasi coherent sheaves on a scheme",
+   "results": "{\"t\": \"2026-10-22T07:26:28Z\", \"tool\": \"leanfinder\", \"query\": \"Relative flat quotient tensor preserves exactness on affine charts and localization yields short exactness of quasi coherent sheaves on a scheme\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Module.Flat.iff_rTensor_exact'\", \"Module.Flat.iff_rTensor_exact\", \"Module.FaithfullyFlat.rTensor_exact_iff_exact\", \"Module.Flat.rTensor_exact\", \"Module.FaithfullyFlat.rTensor_reflects_exact\", \"Module.FaithfullyFlat.iff_exact_iff_rTensor_exact\", \"Module.Flat.rTensor_shortComplex_exact\", \"Module.FaithfullyFlat.lTensor_exact_iff_exact\"], \"digest\": \"6200e82e2eb57c17\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: component flat tensor and module-category facts do not give the relative-flat quotient affine-chart sheaf criterion"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Scheme.Modules, ShortExact",
+   "results": "{\"t\": \"2026-10-22T07:23:14Z\", \"tool\": \"loogle\", \"query\": \"AlgebraicGeometry.Scheme.Modules, ShortExact\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"loogle: unknown identifier 'ShortExact'\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: component flat tensor and module-category facts do not give the relative-flat quotient affine-chart sheaf criterion"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Scheme.Modules.tensorPullback",
+   "results": "{\"t\": \"2026-10-22T07:23:13Z\", \"tool\": \"loogle\", \"query\": \"AlgebraicGeometry.Scheme.Modules.tensorPullback\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"loogle: unknown identifier 'AlgebraicGeometry.Scheme.Modules.tensorPullback'\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: component flat tensor and module-category facts do not give the relative-flat quotient affine-chart sheaf criterion"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Scheme.Modules, ShortExact",
+   "results": "{\"t\": \"2026-10-22T07:23:14Z\", \"tool\": \"loogle\", \"query\": \"AlgebraicGeometry.Scheme.Modules, ShortExact\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"loogle: unknown identifier 'ShortExact'\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: component flat tensor and module-category facts do not give the relative-flat quotient affine-chart sheaf criterion"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Scheme.Modules",
+   "results": "{\"t\": \"2026-10-22T07:26:23Z\", \"tool\": \"loogle\", \"query\": \"AlgebraicGeometry.Scheme.Modules\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Modules\", \"AlgebraicGeometry.Scheme.Modules.instCategory\", \"AlgebraicGeometry.Scheme.Modules.Hom\", \"AlgebraicGeometry.Scheme.Modules.instAbelian\", \"AlgebraicGeometry.Scheme.Modules.instHasColimits\", \"AlgebraicGeometry.Scheme.Modules.instHasLimits\", \"AlgebraicGeometry.Scheme.Modules.instIsGrothendieckAbelian\", \"AlgebraicGeometry.Scheme.Modules.presheaf\"], \"digest\": \"11c50676169239f9\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: component flat tensor and module-category facts do not give the relative-flat quotient affine-chart sheaf criterion"
+  },
+  {
+   "tool": "grep",
+   "query": "shortExact|short_exact|exact_iff|exact.*[Ss]talk|[Ss]talk.*exact",
+   "results": "{\"t\": \"2026-10-22T07:23:14Z\", \"tool\": \"grep\", \"query\": \"shortExact|short_exact|exact_iff|exact.*[Ss]talk|[Ss]talk.*exact\", \"sub\": \"AlgebraicGeometry/Modules\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/Modules/Tilde.lean\"], \"digest\": \"fc6bbce58a0f976b\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: component flat tensor and module-category facts do not give the relative-flat quotient affine-chart sheaf criterion"
+  },
+  {
+   "tool": "grep",
+   "query": "rTensor_exact|shortComplex_exact",
+   "results": "{\"t\": \"2026-10-22T07:29:03Z\", \"tool\": \"grep\", \"query\": \"rTensor_exact|shortComplex_exact\", \"sub\": \"RingTheory/Flat\", \"ok\": true, \"n_hits\": 17, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/Flat/Equalizer.lean\", \"Mathlib/RingTheory/Flat/Equalizer.lean\", \"Mathlib/RingTheory/Flat/FaithfullyFlat/Basic.lean\", \"Mathlib/RingTheory/Flat/FaithfullyFlat/Basic.lean\", \"Mathlib/RingTheory/Flat/FaithfullyFlat/Basic.lean\", \"Mathlib/RingTheory/Flat/FaithfullyFlat/Basic.lean\", \"Mathlib/RingTheory/Flat/FaithfullyFlat/Basic.lean\", \"Mathlib/RingTheory/Flat/Basic.lean\"], \"digest\": \"0ed5a35adb294bd2\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: component flat tensor and module-category facts do not give the relative-flat quotient affine-chart sheaf criterion"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Quasi coherent module sheaf sequence with affine section presentation as tensor base change of a short exact module sequence with relatively flat quotient is short exact and the first sheaf is canonically the kernel",
+   "results": "{\"t\": \"2026-10-22T07:27:21Z\", \"tool\": \"leansearch\", \"query\": \"Quasi coherent module sheaf sequence with affine section presentation as tensor base change of a short exact module sequence with relatively flat quotient is short exact and the first sheaf is canonically the kernel\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SheafOfModules.IsQuasicoherent.mk\", \"SheafOfModules.instIsQuasicoherentOfIsFinitePresentation\", \"SheafOfModules.isQuasicoherent\", \"SheafOfModules.IsQuasicoherent\", \"SheafOfModules.QuasicoherentData.presentation\", \"SheafOfModules.QuasicoherentData.IsFinitePresentation.mk\", \"SheafOfModules.IsQuasicoherent.rec\", \"SheafOfModules.Presentation.rec\"], \"digest\": \"445d27e925530982\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: component flat tensor and module-category facts do not give the relative-flat quotient affine-chart sheaf criterion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Quasi-coherent sheaf sequence is short exact on a scheme from affine section tensor presentations with flat quotient over a base ring",
+   "results": "{\"t\": \"2026-10-23T11:13:48Z\", \"tool\": \"leanfinder\", \"query\": \"Quasi-coherent sheaf sequence is short exact on a scheme from affine section tensor presentations with flat quotient over a base ring\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Module.Flat.lTensor_shortComplex_exact\", \"Module.Flat.rTensor_shortComplex_exact\", \"Module.FaithfullyFlat.rTensor_exact_iff_exact\", \"Module.FaithfullyFlat.lTensor_exact_iff_exact\", \"Module.FaithfullyFlat.iff_exact_iff_rTensor_exact\", \"AlgebraicGeometry.Flat.flat_appLE\", \"Module.FaithfullyFlat.iff_exact_iff_lTensor_exact\", \"Module.Flat.lTensor_exact\"], \"digest\": \"bc240dcc29b825e0\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits give component module or quasi-coherence facts, not the complete sheaf tensor-chart criterion with canonical kernel identification"
+  },
+  {
+   "tool": "loogle",
+   "query": "LinearMap.lTensor_injective_of_exact_of_flat",
+   "results": "{\"t\": \"2026-10-23T11:13:49Z\", \"tool\": \"loogle\", \"query\": \"LinearMap.lTensor_injective_of_exact_of_flat\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"LinearMap.lTensor_injective_of_exact_of_flat\"], \"digest\": \"5586a81778b0c6de\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits give component module or quasi-coherence facts, not the complete sheaf tensor-chart criterion with canonical kernel identification"
+  },
+  {
+   "tool": "grep",
+   "query": "shortExact|short_exact|exact_iff|exact.*[Ss]talk|[Ss]talk.*exact",
+   "results": "{\"t\": \"2026-10-23T11:13:49Z\", \"tool\": \"grep\", \"query\": \"shortExact|short_exact|exact_iff|exact.*[Ss]talk|[Ss]talk.*exact\", \"sub\": \"AlgebraicGeometry/Modules\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/Modules/Tilde.lean\"], \"digest\": \"fc6bbce58a0f976b\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits give component module or quasi-coherence facts, not the complete sheaf tensor-chart criterion with canonical kernel identification"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Quasi coherent sheaf exact sequence detected on affine open cover with relative flat quotient tensor product presentation",
+   "results": "{\"t\": \"2026-10-23T11:13:49Z\", \"tool\": \"leansearch\", \"query\": \"Quasi coherent sheaf exact sequence detected on affine open cover with relative flat quotient tensor product presentation\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SheafOfModules.IsQuasicoherent.mk\", \"Module.Flat.lTensor_exact\", \"SheafOfModules.QuasicoherentData.mk\", \"SheafOfModules.IsQuasicoherent\", \"SheafOfModules.isQuasicoherent\", \"Module.Flat.iff_lTensor_exact\", \"Module.Flat.iff_rTensor_exact'\", \"SheafOfModules.instIsQuasicoherentOfIsFinitePresentation\"], \"digest\": \"65536e2bfe50254c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits give component module or quasi-coherence facts, not the complete sheaf tensor-chart criterion with canonical kernel identification"
+  },
+  {
+   "tool": "grep",
+   "query": "lTensor_injective_of_exact_of_flat|map_exact|lTensor_exact",
+   "results": "{\"t\": \"2026-10-23T11:15:18Z\", \"tool\": \"grep\", \"query\": \"lTensor_injective_of_exact_of_flat|map_exact|lTensor_exact\", \"sub\": \"RingTheory/Flat\", \"ok\": true, \"n_hits\": 18, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/Flat/IsBaseChange.lean\", \"Mathlib/RingTheory/Flat/CategoryTheory.lean\", \"Mathlib/RingTheory/Flat/CategoryTheory.lean\", \"Mathlib/RingTheory/Flat/Equalizer.lean\", \"Mathlib/RingTheory/Flat/Equalizer.lean\", \"Mathlib/RingTheory/Flat/Equalizer.lean\", \"Mathlib/RingTheory/Flat/Equalizer.lean\", \"Mathlib/RingTheory/Flat/Equalizer.lean\"], \"digest\": \"88b5fefd4b516002\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits give component module or quasi-coherence facts, not the complete sheaf tensor-chart criterion with canonical kernel identification"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Exactness of sheaves of modules from localized short exact sequences with relatively flat cokernel and canonical isomorphism to kernel",
+   "results": "{\"t\": \"2026-10-23T11:15:20Z\", \"tool\": \"leanfinder\", \"query\": \"Exactness of sheaves of modules from localized short exact sequences with relatively flat cokernel and canonical isomorphism to kernel\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"ModuleCat.localizedModule_functor_map_exact\", \"LocalizedModule.map_exact\", \"IsLocalizedModule.map_exact\", \"exact_of_isLocalized_span\", \"exact_of_localized_span\", \"CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex_exact\", \"Module.FaithfullyFlat.range_le_ker_of_exact_rTensor\", \"Module.Flat.lTensor_shortComplex_exact\"], \"digest\": \"aac864f8dd01b551\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits give component module or quasi-coherence facts, not the complete sheaf tensor-chart criterion with canonical kernel identification"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-flat-closed-family-ideal-base-change",
+  "date": "2026-10-22",
+  "group": "Q148"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "id": "lem-sfb-relative-flat-tensor-charts-sheaf-exact",
+ "title": "Relative-flat tensor chart criterion for sheaf short exactness",
+ "statement": "Let $Y$ be a scheme [def-pc-scheme] and let $\\mathcal F\\xrightarrow{u}\\mathcal G\\xrightarrow{v}\\mathcal H$ be morphisms of quasi-coherent $\\mathcal O_Y$-modules [pqf-def-coherent, def-weil-sheaf-of-modules-category]. Suppose $Y$ has an affine open covering $(Q_\\lambda)_{\\lambda\\in L}$ with the following data for each $\\lambda$: commutative rings $R_\\lambda,A_\\lambda,S_\\lambda$, homomorphisms $R_\\lambda\\to A_\\lambda$ and $R_\\lambda\\to S_\\lambda$, an isomorphism $\\mathcal O_Y(Q_\\lambda)\\cong A_\\lambda\\otimes_{R_\\lambda}S_\\lambda$, and a short exact sequence of $A_\\lambda$-modules\n$$0\\longrightarrow L_\\lambda\\xrightarrow{p_\\lambda}M_\\lambda\\xrightarrow{q_\\lambda}N_\\lambda\\longrightarrow0$$\n[def-weil-pbc-exact-sequence]. Assume $N_\\lambda$ is flat as an $R_\\lambda$-module [def-weil-pbc-flat-ring-map]. Supply $A_\\lambda\\otimes_{R_\\lambda}S_\\lambda$-linear isomorphisms from the section sequence $(\\mathcal F(Q_\\lambda),u_{Q_\\lambda},\\mathcal G(Q_\\lambda),v_{Q_\\lambda},\\mathcal H(Q_\\lambda))$ to\n$$L_\\lambda\\otimes_{R_\\lambda}S_\\lambda\\xrightarrow{p_\\lambda\\otimes1}M_\\lambda\\otimes_{R_\\lambda}S_\\lambda\\xrightarrow{q_\\lambda\\otimes1}N_\\lambda\\otimes_{R_\\lambda}S_\\lambda,$$\nmeaning that both squares commute. Then this section sequence is short exact on every $Q_\\lambda$ and every principal open $D(c)\\subseteq Q_\\lambda$, $c\\in\\mathcal O_Y(Q_\\lambda)$: on $D(c)$ its maps are precisely the localizations at $\\{1,c,c^2,\\ldots\\}$ of the displayed tensor maps. The sheaf sequence\n$$0\\longrightarrow\\mathcal F\\xrightarrow{u}\\mathcal G\\xrightarrow{v}\\mathcal H\\longrightarrow0$$\nis short exact, and the canonical factorization $\\mathcal F\\to\\ker v$ is an isomorphism whose composite with the kernel inclusion is $u$. No flatness of $A_\\lambda$ or $S_\\lambda$ over $R_\\lambda$ and no finiteness of the cover or the modules is required.",
+ "blueprint": {
+  "from": {
+   "node": "det-thm-sf-ctf-stability-direct-images",
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong §§3.9--3.12, Claim 3.10 and Lemma 3.13, printed p.609. Agent-formulated version: the proof of Lemma 3.13 uses only that rational exceptional curves have constant image in each target fibre; this property replaces its genus-at-least-two and pure-curve target hypotheses. This statement does not assert existence of a semistable source.; de Jong 3.9, projective Hilbert schemes underlying the relative morphism scheme; Hilbert construction prerequisite: Uniform generation and section bounds for projective ideals with fixed Hilbert polynomial; Hilbert construction prerequisite, identifying pulled-back ideal sheaves before any fibrewise cohomology argument; returned proof Steps 6 and 8, abstracting the tensor-exactness and principal-open localization argument",
+   "via": [
+    "lem-sfb-flat-closed-family-ideal-base-change",
+    "lem-sfb-hilbert-uniform-section-bound",
+    "lem-sfb-projective-hilbert-polynomial-representability",
+    "lem-sfb-high-genus-hom-closure",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-relative-flat-tensor-charts-sheaf-exact",
+  "worker": "stage1",
+  "summary": "Reused existing flat-quotient tensor, localization, affine section, quasi-coherent kernel, affine isomorphism and local epimorphism statements. Four assembly steps prove all clauses, with canonical fraction formulas and kernel comparison. No new nodes; statement unchanged. Corrected the null blueprint ancestor to the named ancestor already recorded in from.place.",
+  "blueprint": "The live DAG prerequisite branch under det-thm-sf-ctf-stability-direct-images, clause (3), leads through the Hilbert-family ideal base-change argument. This split realizes the parent lem-sfb-flat-closed-family-ideal-base-change returned proof Steps 6 and 8, exactly the tensor-exactness and principal-open localization argument named in the inherited from.place. The current latest blueprint clause (3) states the direct-image goal; this is a lower-level tool, not a replacement of that route.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-quasicoherent-epi-affine-cover",
+    "why": "General affine-cover epimorphism criterion used only to conclude v is epi from step 1; the unit has no separate module-sheaf epimorphism criterion. It preserves the given affine-local proof route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-quasicoherent-epi-affine-cover"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-NV-4a0445b1a",
+  "group": "NV",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NV-4a0445b1a (reviewer sub-agent of L); spot-checked: Read the item, its 4 new steps (0 new nodes, statement unchanged, no re-split note) and every cited statement. Step 1: the 00HL node (algebra.tex:9037) has the right hypothesis: last term N flat, tensor factor S arbitrary. After swapping factors and using A-linearity, the sequence is exact on Q. Small cases: Z→Z²→Z⊗Z/2 stays exact; Z→Z→Z/2 tensored with Z/2 fails without flatness, so the hypothesis is the needed one. Step 2: vanishing-prime(b) (01I3/01HV) and section base change (01LN, constructions.tex:332) are correct. Gap: the step passed silently from P(Q)⊗_B B_c to the fraction module P(Q)_c, which 00CS needs. FIX: cite the Mathlib node lem-weil-pbc-localization-module-tensor (00DK, algebra.tex:2088, with naturality a⊗1↔a_c) and add it to proof_deps. Step 3: the basis 00E0(i) is about Spec B. FIX: also cite vanishing-prime(a) to carry it to Q_λ≅Spec B. The kernel is quasi-coherent (01IC) and the iso-on-affine-cover node gives k an isomorphism, so this step is correct. Step 4: the epi-on-affine-cover tool_use is accepted (quasi-coherent target H, general tool, no route step replaced); mono, im=ker and vu=0 give short exactness by def-weil-pbc-exact-sequence. Edge cases checked: empty cover, c=0, zero rings, no finiteness assumed. No duplicate found in the DAG. Filling from.node with det-thm-sf-ctf-stability-direct-images is accepted: it is a blueprint node named in from.place. Note for the maintainer: blueprint_refs ancestor still prints None. No SGA. Whole corrected item is in fixes/dag/nodes/sec-six-functors-basics/.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.RelativeFlatTensorChartsSheafExact",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.relativeFlat_tensorCharts_sheaf_shortExact",
+  "file": "lean/Sheaf/AlgebraicGeometry/RelativeFlatTensorChartsSheafExact.lean",
+  "statement": "theorem relativeFlat_tensorCharts_sheaf_shortExact {Y : Scheme.{u}} (F G H : Y.Modules) [F.IsQuasicoherent] [G.IsQuasicoherent] [H.IsQuasicoherent] (f : F ⟶ G) (g : G ⟶ H) (ι : Type w) (Q : ι → Y.Opens) (hcover : ⨆ i, Q i = ⊤) (haffine : ∀ i, IsAffineOpen (Q i)) (R : ι → Type r) (A : ι → Type a) (S : ι → Type s) [∀ i, CommRing (R i)] [∀ i, CommRing (A i)] [∀ i, CommRing (S i)] [∀ i, Algebra (R i) (A i)] [∀ i, Algebra (R i) (S i)] (e : ∀ i, Γ(Y, Q i) ≃+* (A i ⊗[R i] S i)) (L : ι → Type l) (M : ι → Type m) (N : ι → Type n) [∀ i, AddCommGroup (L i)] [∀ i, AddCommGroup (M i)] [∀ i, AddCommGroup (N i)] [∀ i, Module (A i) (L i)] [∀ i, Module (A i) (M i)] [∀ i, Module (A i) (N i)] [∀ i, Module (R i) (L i)] [∀ i, Module (R i) (M i)] [∀ i, Module (R i) (N i)] [∀ i, IsScalarTower (R i) (A i) (L i)] [∀ i, IsScalarTower (R i) (A i) (M i)] [∀ i, IsScalarTower (R i) (A i) (N i)] (p : ∀ i, L i →ₗ[A i] M i) (q : ∀ i, M i →ₗ[A i] N i) (hp : ∀ i, Function.Injective (p i)) (hpq : ∀ i, Function.Exact (p i) (q i)) (hq : ∀ i, Function.Surjective (q i)) [∀ i, Module.Flat (R i) (N i)] (eF : ∀ i, Γ(F, Q i) ≃+ (L i ⊗[R i] S i)) (eG : ∀ i, Γ(G, Q i) ≃+ (M i ⊗[R i] S i)) (eH : ∀ i, Γ(H, Q i) ≃+ (N i ⊗[R i] S i)) (heF : ∀ (i : ι) (b : A i) (c : S i) (x : Γ(F, Q i)), eF i ((e i).symm (b ⊗ₜ[R i] c) • x) = b • (TensorProduct.comm (R i) (S i) (L i)) (c • TensorProduct.comm (R i) (L i) (S i) (eF i x))) (heG : ∀ (i : ι) (b : A i) (c : S i) (x : Γ(G, Q i)), eG i ((e i).symm (b ⊗ₜ[R i] c) • x) = b • (TensorProduct.comm (R i) (S i) (M i)) (c • TensorProduct.comm (R i) (M i) (S i) (eG i x))) (heH : ∀ (i : ι) (b : A i) (c : S i) (x : Γ(H, Q i)), eH i ((e i).symm (b ⊗ₜ[R i] c) • x) = b • (TensorProduct.comm (R i) (S i) (N i)) (c • TensorProduct.comm (R i) (N i) (S i) (eH i x))) (hf : ∀ (i : ι) (x : Γ(F, Q i)), eG i (f.app (Q i) x) = ((p i).restrictScalars (R i)).rTensor (S i) (eF i x)) (hg : ∀ (i : ι) (x : Γ(G, Q i)), eH i (g.app (Q i) x) = ((q i).restrictScalars (R i)).rTensor (S i) (eG i x)) : (∀ i, Function.Injective (f.app (Q i)) ∧ Function.Exact (f.app (Q i)) (g.app (Q i)) ∧ Function.Surjective (g.app (Q i))) ∧ (∀ (i : ι) (c : Γ(Y, Q i)), (Function.Injective (f.app (Y.basicOpen c)) ∧ Function.Exact (f.app (Y.basicOpen c)) (g.app (Y.basicOpen c)) ∧ Function.Surjective (g.app (Y.basicOpen c))) ∧ ∃ dF : LocalizedModule (Submonoid.powers c) Γ(F, Q i) ≃+ Γ(F, Y.basicOpen c), ∃ dG : LocalizedModule (Submonoid.powers c) Γ(G, Q i) ≃+ Γ(G, Y.basicOpen c), ∃ dH : LocalizedModule (Submonoid.powers c) Γ(H, Q i) ≃+ Γ(H, Y.basicOpen c), (∀ x : Γ(F, Q i), dF (LocalizedModule.mkLinearMap (Submonoid.powers c) Γ(F, Q i) x) = F.presheaf.map (homOfLE (Y.basicOpen_le c)).op x) ∧ (∀ (b : Γ(Y, Q i)) (z : LocalizedModule (Submonoid.powers c) Γ(F, Q i)), dF (b • z) = Y.presheaf.map (homOfLE (Y.basicOpen_le c)).op b • dF z) ∧ (∀ x : Γ(G, Q i), dG (LocalizedModule.mkLinearMap (Submonoid.powers c) Γ(G, Q i) x) = G.presheaf.map (homOfLE (Y.basicOpen_le c)).op x) ∧ (∀ (b : Γ(Y, Q i)) (z : LocalizedModule (Submonoid.powers c) Γ(G, Q i)), dG (b • z) = Y.presheaf.map (homOfLE (Y.basicOpen_le c)).op b • dG z) ∧ (∀ x : Γ(H, Q i), dH (LocalizedModule.mkLinearMap (Submonoid.powers c) Γ(H, Q i) x) = H.presheaf.map (homOfLE (Y.basicOpen_le c)).op x) ∧ (∀ (b : Γ(Y, Q i)) (z : LocalizedModule (Submonoid.powers c) Γ(H, Q i)), dH (b • z) = Y.presheaf.map (homOfLE (Y.basicOpen_le c)).op b • dH z) ∧ (∀ (x : L i ⊗[R i] S i) (t : Submonoid.powers c), f.app (Y.basicOpen c) (dF (LocalizedModule.mk ((eF i).symm x) t)) = dG (LocalizedModule.mk ((eG i).symm (((p i).restrictScalars (R i)).rTensor (S i) x)) t)) ∧ (∀ (x : M i ⊗[R i] S i) (t : Submonoid.powers c), g.app (Y.basicOpen c) (dG (LocalizedModule.mk ((eG i).symm x) t)) = dH (LocalizedModule.mk ((eH i).symm (((q i).restrictScalars (R i)).rTensor (S i) x)) t))) ∧ ∃ hfg : f ≫ g = 0, (ShortComplex.mk f g hfg).ShortExact ∧ IsIso (kernel.lift g f hfg) ∧ kernel.lift g f hfg ≫ kernel.ι g = f",
+  "branch": "sheaf-dag",
+  "by": "Q07",
+  "date": "2026-10-23",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-f67ecf349",
+  "group": "Q07",
+  "result": "pass",
+  "note": "Read the node, the 5 stmt_dep records, the module and report.md. The node copy equals the live node apart from the new lean record. lean.statement is verbatim the file signature. Every hypothesis matches the node with nothing stronger: arbitrary cover index w; flatness only on N over R; the R-structures are forced by IsScalarTower; the eF/eG/eH pure-tensor scalar law (checked on l⊗s) is equivalent to A⊗S-linearity; hf/hg use rTensor of p and q, i.e. p⊗1 and q⊗1. Every conclusion is present: exact on Q_i; exact on each basicOpen c; the ∃ dF/dG/dH localization isos are uniquely pinned by x/1↦restriction plus semilinearity (c| is a unit), so the arrow equations are the localized tensor maps; ShortExact; IsIso of the canonical kernel.lift; the composite clause. Edge cases (empty cover, c=0, zero rings, N=0 with non-flat S, independent universes) are fine. The proof dep isIso_of_bijective_on_affine_open_cover takes its index in Type u; stage 3 can reindex by Set.range Q, so this is not a fault. No duplicate found in Sheaf/WeilConjectures. Plain imports equal the proof_deps' recorded modules. Docstrings, sorry-only proof and both report sections are OK. No findings; no compile needed."
+ }
+}

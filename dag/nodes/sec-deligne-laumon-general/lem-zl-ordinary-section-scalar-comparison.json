@@ -1,0 +1,140 @@
+{
+ "id": "lem-zl-ordinary-section-scalar-comparison",
+ "kind": "statement",
+ "title": "Ordinary scalar extension under section-action encoding",
+ "statement": "For any scheme X and any map phi:R→S of internal commutative ring objects in abelian sheaves on X_proet, the section-action equivalences carry internal scalar extension to ordinary sectionwise sheafified tensor extension. The comparison sends s times the encoded internal extension unit of m to the ordinary pure tensor s tensor m. This is Nonempty (OrdinaryScalars X R S phi) with its pure_tensors normalization, using the interfaces of [def-zl-continuous-constructible-lattice-data].",
+ "source": {
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Lemma 6.8.13 first paragraph, Proposition 6.8.4 and Remark 6.8.15; agent transport between condensed internal and continuous sectionwise modules, expanded from old item steps 4-6 and blueprint paragraph 6."
+ },
+ "stmt_deps": [
+  "def-zl-continuous-constructible-lattice-data"
+ ],
+ "proof": [
+  {
+   "text": "Apply the specified module encoding to these ring charts. By the internal-abelian-sheaf-module equivalence it retains the underlying abelian sheaf, its restrictions and its action evaluated on sections; a submodule inclusion therefore remains the same injective sheaf map. For a scalar ring map $R\\to S$, the internal relative tensor is the quotient of the tensor of abelian sheaves by the relations $(sr)\\otimes m=s\\otimes(rm)$. Under the section-action equivalence these are exactly the ordinary balanced relations. The identity on symbols $s\\otimes m$ therefore induces inverse maps after sheafification, naturally in the module and in the scalar map. In the integral-to-rational case this is the specified scalar-extension isomorphism in the cited encoding-scalar-extension lemma. For inverse image, apply the exact strong monoidal sheaf inverse image from the left-exact-site lemma (the scheme base-change site functor is specified in def-weil-proetale-inverse-image). It pulls the action and these relations to the identical pulled action and relations on both sides. Consequently the encodings commute with inverse images and ordinary scalar extension, using the coefficient charts of step 3. On two successive extensions or restrictions both composites send a generator to that same generator; thus the comparisons have the asserted composition and balanced-tensor normalizations.",
+   "uses": [
+    "def-weil-pbc-continuous-coefficient-module-encoding",
+    "def-weil-pbc-internal-abelian-sheaf-module-equivalence",
+    "def-pur-sheaf-tensor-product",
+    "lem-weil-pbc-continuous-module-encoding-scalar-extension",
+    "lem-weil-pbc-left-exact-site-inverse-image-tensor",
+    "def-weil-proetale-inverse-image",
+    "sk-def-sfb-change-of-scalars",
+    "sk-def-sfb-sheaf-tensor"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03EK (section-tensor-product), Tag 03EL (lemma-tensor-product-pullback); sites.tex Tag 00YV (proposition-functoriality-algebraic-structures-topoi)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-continuous-coefficient-module-encoding",
+  "def-weil-pbc-internal-abelian-sheaf-module-equivalence",
+  "def-pur-sheaf-tensor-product",
+  "lem-weil-pbc-continuous-module-encoding-scalar-extension",
+  "lem-weil-pbc-left-exact-site-inverse-image-tensor",
+  "def-weil-proetale-inverse-image",
+  "sk-def-sfb-change-of-scalars",
+  "sk-def-sfb-sheaf-tensor"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Lemma 6.8.13 first paragraph, Definitions 6.8.1 and 6.8.3, Lemma 6.8.2 and Remark 6.8.15; normalized internal/sectionwise assembly from existing DAG statements"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Extension of scalars under equivalence of internal modules and sheaves of modules preserves tensor generators",
+   "results": "ModuleCat.extendScalars and ModuleCat.ExtendRestrictScalarsAdj.HomEquiv.fromExtendScalars_hom_apply, Mathlib.Algebra.Category.ModuleCat.ChangeOfRings; ordinary module results only.",
+   "date": "2026-10-25",
+   "verdict": "No match for the internal sheaf encoding, normalized coefficient family, geometric coherence or reduced embedded lattice refinement."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Locally free rational pro etale sheaves admit integral lattices on reduced finite locally closed refinement of a constructible partition",
+   "results": "AlgebraicGeometry.StructureSheaf.normalize_finite_fraction_representation; AlgebraicGeometry.IsIntegral.component_integral; algebraic localizations and etale loci only.",
+   "date": "2026-10-25",
+   "verdict": "No match; these concern structure sheaves rather than the continuous coefficient rings and encoded internal modules."
+  },
+  {
+   "tool": "grep",
+   "query": "rg integralCoefficient|finiteContinuousCoefficient|stratified.*lattice Mathlib/AlgebraicGeometry Mathlib/Condensed; rg sectionModuleEquivalence|sectionModuleComapIso Mathlib/CategoryTheory Mathlib/Algebra/Category/ModuleCat",
+   "results": "No matching declarations in Mathlib. Repository search finds the existing generic coefficient, encoding and internal stratified-lattice dependencies, but no theorem with the combined normalized interfaces.",
+   "date": "2026-10-25",
+   "verdict": "No exact match; use existing DAG dependencies to prove the separate assembly steps."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.DeligneLaumon.ContinuousConstructibleStratifiedLattices",
+  "date": "2026-10-25",
+  "group": "A3"
+ },
+ "chapter": "sec-deligne-laumon-general",
+ "unit": "sk-i-dl-general-real",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-zl-real-mixed-by-curves",
+   "place": "Paragraph 6, normalized coefficient/lattice interpretation; original node proof steps 4.",
+   "via": [
+    "lem-zl-continuous-constructible-stratified-lattices",
+    "lem-zl-raw-heart-adic-lisse-stratification"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.DeligneLaumon.OrdinarySectionScalarComparison",
+  "file": "lean/Sheaf/DeligneLaumon/OrdinarySectionScalarComparison.lean",
+  "declaration": "WeilConjectures.StratifiedContinuousLattices.ordinary_section_scalar_comparison",
+  "statement": "theorem ordinary_section_scalar_comparison (X : Scheme.{u}) (R S : Sheaf (ProEt.topology X) Ab.{u + 1}) [MonObj R] [IsCommMonObj R] [MonObj S] [IsCommMonObj S] (φ : R ⟶ S) [IsMonHom φ] : Nonempty (OrdinaryScalars X R S φ)",
+  "branch": "sheaf-dag",
+  "by": "A3",
+  "date": "2026-10-25"
+ },
+ "split_report": {
+  "date": "2026-10-25",
+  "item": "lem-zl-ordinary-section-scalar-comparison",
+  "worker": "stage3",
+  "summary": "Isolated the indicated proper part of the existing argument as a named Lean theorem. No statement weakens the original Family conclusion.",
+  "blueprint": "Paragraph 6, normalized coefficient/embedded lattice interpretation.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-continuous-module-encoding-scalar-extension",
+    "why": "The same generic tool used by the original reviewed parent, below its unit route; its role remains within this component."
+   },
+   {
+    "node": "lem-weil-pbc-left-exact-site-inverse-image-tensor",
+    "why": "The same generic tool used by the original reviewed parent, below its unit route; its role remains within this component."
+   }
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-302ea",
+  "group": "A3",
+  "result": "pass",
+  "landing": "20261025T122437-L-1771548",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-302ea",
+  "group": "A3",
+  "result": "pass",
+  "landing": "20261025T122437-L-1771548",
+  "kind": "interface",
+  "note": "independent cc review: 22 interface decls in new ContinuousConstructibleLatticeData vs live item module (verbatim, re-exported publicly); item proof = Family constructor from 4 sorry components vs Family fields; item proof_deps vs the 4 new nodes; importer RawHeartAdicStrataBridge compiled rc 0 against the delivered modules"
+ }
+}

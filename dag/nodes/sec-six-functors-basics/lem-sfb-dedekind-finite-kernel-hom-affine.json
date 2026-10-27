@@ -1,0 +1,288 @@
+{
+ "id": "lem-sfb-dedekind-finite-kernel-hom-affine",
+ "kind": "statement",
+ "title": "Affineness of finite-geometric-kernel homomorphisms over a Dedekind base",
+ "statement": "Let $B$ be a Noetherian integrally closed domain of Krull dimension one and put $S=\\operatorname{Spec}B$ [def-weil-affine-spectrum]. Let $G\\to S$ and $J\\to S$ be separated flat group schemes of finite type [def-weil-flat-morphism, def-weil-finite-type-morphism]. Here a group scheme is a scheme over $S$ with multiplication, inverse and identity satisfying the group diagrams, and separated means that the diagonal is a closed immersion. Let $f:G\\to J$ be an $S$-group homomorphism of finite type. For every algebraically closed field $k$ and ring map $B\\to k$, assume that the scheme-theoretic kernel $\\ker(f_k)=G_k\\times_{J_k}\\operatorname{Spec}k$, formed using the identity section of $J_k$, is finite over $k$ [def-weil-finite-integral-morphism]. Then $f$ is an affine morphism [pqf-def-affine-morphism]. Neither $G$ nor $J$ is assumed affine, smooth or connected, and no surjectivity or flatness of $f$ is assumed.",
+ "source": {
+  "document": "https://math.stanford.edu/~conrad/papers/luminysga3smf.pdf",
+  "place": "Proof of Proposition 6.3.16, printed p.229: finite geometric kernels imply quasi-finiteness, and a quasi-finite homomorphism between separated flat finite-type groups over a Dedekind base is affine. This statement combines those two consecutive assertions for an arbitrary homomorphism. Read online; WANTED locally as literature/conrad-reductive-group-schemes.pdf. No Stacks tag states the Dedekind group-translation theorem."
+ },
+ "stmt_deps": [
+  "def-weil-affine-spectrum",
+  "def-weil-flat-morphism",
+  "def-weil-finite-type-morphism",
+  "def-weil-finite-integral-morphism",
+  "pqf-def-affine-morphism"
+ ],
+ "proof": [
+  {
+   "text": "Fix $y\\in J$ with nonempty scheme fibre $G_y$. Choose $x\\in G_y$ and an algebraic closure $L$ of $\\kappa(x)$ [def-weil-algebraic-closure]. The induced map $\\kappa(y)\\to L$ gives $y_L\\in J_L(L)$ and a point $g\\in(G_y)_L(L)$. On every $L$-scheme $T$, multiplication by $g_T$ sends $a\\in\\ker(f_L)(T)$ to $g_Ta\\in f_L^{-1}(y_L)(T)$. Its inverse is $z\\mapsto g_T^{-1}z$, since $f_L(g_T^{-1}z)=y_L^{-1}y_L=1$. These formulas are morphisms obtained by restricting multiplication and inverse, and their composites are identities by the group diagrams. Thus $(G_y)_L\\simeq\\ker(f_L)$ as $L$-schemes. The hypothesis applies to the composite $B\\to\\kappa(x)\\to L$, so this kernel is finite over $L$.",
+   "uses": [
+    "def-weil-algebraic-closure"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/groupoids.tex",
+    "place": "Group identities; explicit fibre-translation construction supplying the finite-kernel-to-quasi-finite implication in Conrad Proposition 6.3.16, p.229."
+   }
+  },
+  {
+   "text": "A finite scheme over $L$ has finitely many points by [lem-weil-pbc-finite-closed-map-finite-fibres]. The field extension $\\kappa(y)\\to L$ induces a surjective spectrum map by [lem-pc-field-extension-surjective]; its base change $(G_y)_L\\to G_y$ is surjective by [lem-weil-pbc-surjective-base-change]. Hence $|G_y|$ is finite, being the image of a finite set. Empty fibres are already finite. All fibres of $f$ are therefore finite. Since $f$ is of finite type (including quasi-compactness) by hypothesis, [pqf-lem-qf-finitefibres] proves that $f$ is quasi-finite.",
+   "uses": [
+    "lem-weil-pbc-finite-closed-map-finite-fibres",
+    "lem-pc-field-extension-surjective",
+    "lem-weil-pbc-surjective-base-change",
+    "pqf-lem-qf-finitefibres"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 02NH finite-fibre criterion, with the explicit translation in step 1."
+   }
+  },
+  {
+   "text": "The composite $G\\xrightarrow fJ\\to S$ is separated by hypothesis, so $f$ is separated by [lem-weil-pbc-separated-cancellation](b). Quasi-finiteness gives local quasi-finiteness by [pqf-lem-qf-locqf-qc], and finite type gives local finite type and quasi-compactness. Thus [lemma-nagata-quasi-affine-morphism-of-quasi-finite] applies with all four of its hypotheses and makes $f$ quasi-affine.",
+   "uses": [
+    "lem-weil-pbc-separated-cancellation",
+    "pqf-lem-qf-locqf-qc",
+    "lemma-nagata-quasi-affine-morphism-of-quasi-finite"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Separated quasi-finite Zariski-main quasi-affine factorization; existing DAG statement used in its full stated generality."
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-relative-quasiaffine-group-envelope] to this $f$. Its base hypothesis holds since $B$ has dimension one, and the given $G,J$ are separated, flat and of finite type. Obtain the actual relative spectrum $H=\\underline{\\operatorname{Spec}}_J(f_*\\mathcal O_G)$, homomorphisms $G\\xrightarrow jH\\xrightarrow qJ$, with $j$ a quasi-compact open immersion, $q$ affine and $qj=f$. Keep also its asserted isomorphism $\\mathcal O_{H_K}\\simeq(j_K)_*\\mathcal O_{G_K}$ for $K=\\operatorname{Frac}B$. In particular we have not inferred finite type for $H$.",
+   "uses": [
+    "lem-sfb-relative-quasiaffine-group-envelope"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 01SM canonical envelope, with the separately stated relative group construction."
+   }
+  },
+  {
+   "text": "For each $s\\in S$, base change preserves the group diagrams, and [lem-weil-pbc-open-immersion-base-change] preserves the open immersion, so $j_s:G_s\\to H_s$ is a group homomorphism with open point image. By [lem-sfb-field-open-group-image-closed] over $\\kappa(s)$, its image is closed. Apply this also at the generic point: $j_K(G_K)$ is open and closed in $H_K$. Its complement must be empty, because on that open complement the isomorphism $\\mathcal O_{H_K}\\simeq(j_K)_*\\mathcal O_{G_K}$ of [lem-sfb-relative-quasiaffine-group-envelope] would identify the structure sheaf with the zero sheaf. At a point of a nonempty scheme the local ring is nonzero. Thus $j_K$ has full image; as an open immersion it identifies $G_K$ with $H_K$.",
+   "uses": [
+    "lem-sfb-field-open-group-image-closed",
+    "lem-sfb-relative-quasiaffine-group-envelope",
+    "lem-weil-pbc-open-immersion-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/groupoids.tex",
+    "place": "Tag 047S over each residue field, followed by generic saturation using the canonical function comparison."
+   }
+  },
+  {
+   "text": "View $j$ as the inclusion of its image open $U\\subseteq H$. It is quasi-compact, it contains the whole generic fibre by step 5, and $U_s$ is closed in $H_s$ for every $s$ by that same step. Therefore [lem-sfb-dedekind-vertical-clopen-open-affine] applied to $X=H$ makes $j$ affine. This criterion imposes no finite-type hypothesis on $H$. Finally $q$ is affine by step 4, so [lem-weil-pbc-affine-composition] proves that $f=qj$ is affine.",
+   "uses": [
+    "lem-sfb-dedekind-vertical-clopen-open-affine",
+    "lem-weil-pbc-affine-composition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/divisors.tex",
+    "place": "Tag 07ZT principal-boundary argument, then composition of affine morphisms."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-algebraic-closure",
+  "lem-weil-pbc-finite-closed-map-finite-fibres",
+  "lem-pc-field-extension-surjective",
+  "lem-weil-pbc-surjective-base-change",
+  "pqf-lem-qf-finitefibres",
+  "lem-weil-pbc-separated-cancellation",
+  "pqf-lem-qf-locqf-qc",
+  "lemma-nagata-quasi-affine-morphism-of-quasi-finite",
+  "lem-sfb-relative-quasiaffine-group-envelope",
+  "lem-sfb-field-open-group-image-closed",
+  "lem-sfb-dedekind-vertical-clopen-open-affine",
+  "lem-weil-pbc-affine-composition",
+  "lem-weil-pbc-open-immersion-base-change"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/groupoids.tex",
+  "place": "Independent relative-affine-envelope and fibre-translation proof of the assertion read in Conrad Proposition 6.3.16, p.229; source ingredients and full smaller-node arguments recorded in report.md. No prohibited source used."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A quasi finite homomorphism between separated flat group schemes of finite type over a Dedekind domain is affine",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.IsFinite.toIsAffineHom\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Finite\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y} [self : AlgebraicGeometry.IsFinite f], AlgebraicGeometry.IsAffineHom f\", \"doc\": \"If a morphism of schemes is finite, then it is affine.\"}\n  {\"name\": \"AlgebraicGeometry.IsFinite.instHasAffinePropertyAndIsAffineFiniteCarrierObjOppositeOpensCarrierCarrierCommRingCatPresheafOpOpensTopHomAppTop\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Finite\", \"type\": \"AlgebraicGeometry.HasAffineProperty @AlgebraicGeometry.IsFinite fun X x f x_1 =>\\n  AlgebraicGeometry.IsAffine X ∧ (CommRingCat.Hom.hom (AlgebraicGeometry.Scheme.Hom.appTop f)).Finite\", \"doc\": \"A morphism of schemes with affine target is finite if and only if the source is affine and the induced ring homomorphism on global sections is finite (i.e., the target ring is finitely generated as a \"}\n  {\"name\": \"AlgebraicGeometry.instHasRingHomPropertyLocallyQuasiFiniteQuasiFinite\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiFinite\", \"type\": \"AlgebraicGeometry.HasRingHomProperty @AlgebraicGeometry.LocallyQuasiFinite fun {R S} [CommRing R] [CommRing S] =>\\n  RingHom.QuasiFinite\", \"doc\": \"A morphism of schemes is locally quasi-finite if and only if the corresponding ring homomorphism is quasi-finite, meaning the target ring is finitely generated as a module over the source ring.\"}\n  {\"name\": \"AlgebraicGeometry.isFinite_iff\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Finite\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y),\\n  AlgebraicGeometry.IsFinite f ↔\\n    AlgebraicGeometry.IsAffineHom f ∧\\n      ∀ (U : Y.Opens),\\n        AlgebraicGeometry.IsAffineOpen U → (CommRingCat.Hom.hom (AlgebraicGeometry.Scheme.Hom.app f U)).Finite\", \"doc\": \"Let $f: X \\\\to Y$ be a morphism of schemes. Then $f$ is a finite morphism if and only if $f$ is an affine morphism and for every affine open subset $U$ of $Y$, the ring of sections $\\\\mathcal{O}_X(f^{-1\"}\n  {\"name\": \"AlgebraicGeometry.IsIntegralHom.hasAffineProperty\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Integral\", \"type\": \"AlgebraicGeometry.HasAffineProperty @AlgebraicGeometry.IsIntegralHom fun X x f x_1 =>\\n  AlgebraicGeometry.IsAffine X ∧ (CommRingCat.Hom.hom (AlgebraicGeometry.Scheme.Hom.app f ⊤)).IsIntegral\", \"doc\": \"A morphism $ f: X \\to Y $ of schemes is integral if the target scheme $ Y $ is affine, the source scheme $ X $ is affine, and the induced ring homomorphism between their coordinate rings is integral (i\"}\n  {\"name\": \"AlgebraicGeometry.LocallyQuasiFinite.quasiFinite_appLE\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiFinite\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y} [self : AlgebraicGeometry.LocallyQuasiFinite f] {U : Y.Opens},\\n  AlgebraicGeometry.IsAffineOpen U →\\n    ∀ {V : X.Opens},\\n      AlgebraicGeometry.IsAffineOpen V →\\n        ∀ (e : V ≤ (TopologicalSpace.Opens.map f.base).obj U),\\n          (CommRingCat.Hom.h\", \"doc\": \"For a locally quasi-finite morphism $ f: X \\\\to Y $ of schemes, if $ U \\\\subseteq Y $ is an affine open subset and $ V \\\\subseteq X $ is an affine open subset contained in $ f^{-1}(U) $, then the induced\"}\n  {\"name\": \"AlgebraicGeometry.locallyQuasiFinite_iff\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiFinite\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y),\\n  AlgebraicGeometry.LocallyQuasiFinite f ↔\\n    ∀ {U : Y.Opens},\\n      AlgebraicGeometry.IsAffineOpen U →\\n        ∀ {V : X.Opens},\\n          AlgebraicGeometry.IsAffineOpen V →\\n            ∀ (e : V ≤ (TopologicalSpace.Opens.map f.base).obj U),\\n          \", \"doc\": \"A morphism of schemes $f: X \\\\to Y$ is locally quasi-finite if and only if for every pair of affine open subsets $U \\\\subseteq Y$ and $V \\\\subseteq X$ such that $f(V) \\\\subseteq U$, the induced ring homom\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.finite_app\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Finite\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [self : AlgebraicGeometry.IsFinite f] (U : Y.Opens),\\n  AlgebraicGeometry.IsAffineOpen U → (CommRingCat.Hom.hom (AlgebraicGeometry.Scheme.Hom.app f U)).Finite\", \"doc\": \"For any finite morphism $ f : X \\\\to Y $ of schemes and any affine open subset $ U \\\\subseteq Y $, the induced ring homomorphism $ \\\\mathcal{O}_Y(U) \\\\to \\\\mathcal{O}_X(f^{-1}(U)) $ is finite, meaning that\"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: IsFinite.toIsAffineHom assumes a finite morphism, which is not a hypothesis here; the other hits are general scheme properties or elliptic-curve formulas. None supplies affineness for a finite-geometric-kernel homomorphism of flat groups."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A homomorphism of separated flat finite type group schemes over a Dedekind domain with finite scheme theoretic kernels on all geometric fibres is an affine morphism",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.instHasAffinePropertyIsAffineHomIsAffine\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Affine\", \"type\": \"AlgebraicGeometry.HasAffineProperty @AlgebraicGeometry.IsAffineHom fun X x x_1 x_2 => AlgebraicGeometry.IsAffine X\", \"doc\": \"If a morphism from a scheme $ X $ to an affine scheme $ Y $ is affine, then $ X $ itself is an affine scheme. This instance establishes that the property of being an affine morphism, when applied to a\"}\n  {\"name\": \"AlgebraicGeometry.affineAnd\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/AffineAnd\", \"type\": \"({R S : Type u} → [inst : CommRing R] → [inst_1 : CommRing S] → (R →+* S) → Prop) →\\n  AlgebraicGeometry.AffineTargetMorphismProperty\", \"doc\": \"A morphism of schemes $ f : X \\to Y $ with affine target $ Y $ satisfies this property if the scheme $ X $ is affine and the condition $ Q $ holds for the ring homomorphism induced by $ f $ on the glob\"}\n  {\"name\": \"AlgebraicGeometry.IsFinite.toIsAffineHom\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Finite\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y} [self : AlgebraicGeometry.IsFinite f], AlgebraicGeometry.IsAffineHom f\", \"doc\": \"If a morphism of schemes is finite, then it is affine.\"}\n  {\"name\": \"AlgebraicGeometry.IsAffineHom.of_comp\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Separated\", \"type\": \"∀ {X Y Z : AlgebraicGeometry.Scheme} (f : X ⟶ Y) (g : Y ⟶ Z)\\n  [AlgebraicGeometry.IsAffineHom (CategoryTheory.CategoryStruct.comp f g)] [AlgebraicGeometry.IsSeparated g],\\n  AlgebraicGeometry.IsAffineHom f\", \"doc\": \"If the composition $ g \\\\circ f $ is an affine morphism and $ g $ is a separated morphism of schemes, then $ f $ is an affine morphism.\"}\n  {\"name\": \"AlgebraicGeometry.AffineSpace.instIsAffineHomOverSchemeInferInstanceOverClass\", \"module\": \"Mathlib/AlgebraicGeometry/AffineSpace\", \"type\": \"∀ {n : Type v} (S : AlgebraicGeometry.Scheme), AlgebraicGeometry.IsAffineHom (AlgebraicGeometry.AffineSpace n S ↘ S)\", \"doc\": \"For any scheme $ S $ and type $ n $, the canonical morphism from the affine space $ \\\\mathbb{A}^n_S $ to the base scheme $ S $ is an affine morphism of schemes. This follows from the construction of $ \"}\n  {\"name\": \"AlgebraicGeometry.isAffineHom_of_isAffine\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Affine\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.IsAffine X] [AlgebraicGeometry.IsAffine Y],\\n  AlgebraicGeometry.IsAffineHom f\", \"doc\": \"A morphism between affine schemes is an affine morphism. Specifically, if $ X $ and $ Y $ are affine schemes, then any morphism $ f : X \\to Y $ satisfies the predicate of being an affine morphism.\"}\n  {\"name\": \"AlgebraicGeometry.isFinite_iff\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Finite\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y),\\n  AlgebraicGeometry.IsFinite f ↔\\n    AlgebraicGeometry.IsAffineHom f ∧\\n      ∀ (U : Y.Opens),\\n        AlgebraicGeometry.IsAffineOpen U → (CommRingCat.Hom.hom (AlgebraicGeometry.Scheme.Hom.app f U)).Finite\", \"doc\": \"Let $f: X \\\\to Y$ be a morphism of schemes. Then $f$ is a finite morphism if and only if $f$ is an affine morphism and for every affine open subset $U$ of $Y$, the ring of sections $\\\\mathcal{O}_X(f^{-1\"}\n  {\"name\": \"AlgebraicGeometry.IsFinite.instHasAffinePropertyAndIsAffineFiniteCarrierObjOppositeOpensCarrierCarrierCommRingCatPresheafOpOpensTopHomAppTop\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Finite\", \"type\": \"AlgebraicGeometry.HasAffineProperty @AlgebraicGeometry.IsFinite fun X x f x_1 =>\\n  AlgebraicGeometry.IsAffine X ∧ (CommRingCat.Hom.hom (AlgebraicGeometry.Scheme.Hom.appTop f)).Finite\", \"doc\": \"A morphism of schemes with affine target is finite if and only if the source is affine and the induced ring homomorphism on global sections is finite (i.e., the target ring is finitely generated as a \"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: IsFinite.toIsAffineHom assumes a finite morphism, which is not a hypothesis here; the other hits are general scheme properties or elliptic-curve formulas. None supplies affineness for a finite-geometric-kernel homomorphism of flat groups."
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.LocallyQuasiFinite, AlgebraicGeometry.IsAffineHom",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-24",
+   "verdict": "no match: IsFinite.toIsAffineHom assumes a finite morphism, which is not a hypothesis here; the other hits are general scheme properties or elliptic-curve formulas. None supplies affineness for a finite-geometric-kernel homomorphism of flat groups."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Finite geometric kernel homomorphism of separated flat finite type groups over a Dedekind base is affine",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.IsFinite.toIsAffineHom\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Finite\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y} [self : AlgebraicGeometry.IsFinite f], AlgebraicGeometry.IsAffineHom f\", \"doc\": \"If a morphism of schemes is finite, then it is affine.\"}\n  {\"name\": \"AlgebraicGeometry.IsAffineHom.mk\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Affine\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y},\\n  (∀ (U : Y.Opens),\\n      AlgebraicGeometry.IsAffineOpen U → AlgebraicGeometry.IsAffineOpen ((TopologicalSpace.Opens.map f.base).obj U)) →\\n    AlgebraicGeometry.IsAffineHom f\", \"doc\": \"If for every affine open subset $ U $ of $ Y $, the preimage $ f^{-1}(U) $ under $ f $ is affine, then $ f $ is an affine morphism.\"}\n  {\"name\": \"AlgebraicGeometry.IsIntegralHom.toIsAffineHom\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Integral\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y} [self : AlgebraicGeometry.IsIntegralHom f],\\n  AlgebraicGeometry.IsAffineHom f\", \"doc\": \"Every integral morphism of schemes is affine, i.e., if $ f: X \\\\to Y $ is an integral morphism of schemes, then $ f $ is necessarily an affine morphism.\"}\n  {\"name\": \"AlgebraicGeometry.IsFinite.recOn\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Finite\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} →\\n  {f : X ⟶ Y} →\\n    {motive : AlgebraicGeometry.IsFinite f → Sort u} →\\n      (t : AlgebraicGeometry.IsFinite f) →\\n        ([toIsAffineHom : AlgebraicGeometry.IsAffineHom f] →\\n            (finite_app :\\n                ∀ (U : Y.Opens),\\n                  AlgebraicGeom\", \"doc\": \"A morphism $ f : X \\\\to Y $ of schemes is finite if it is affine and for every affine open subset $ U \\\\subseteq Y $, the induced ring homomorphism $ \\\\Gamma(Y, U) \\\\to \\\\Gamma(X, f^{-1}(U)) $ is finite, m\"}\n  {\"name\": \"AlgebraicGeometry.isAffineHom_of_isAffine\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Affine\", \"type\": \"[IsAffine X] [IsAffine Y] : IsAffineHom f\", \"doc\": \"A morphism between affine schemes is an affine morphism. Specifically, if $ X $ and $ Y $ are affine schemes, then any morphism $ f : X \\to Y $ satisfies the predicate of being an affine morphism.\"}\n  {\"name\": \"AlgebraicGeometry.IsAffineHom\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Affine\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"A predicate on morphisms of schemes, asserting that a given morphism from scheme $ X $ to scheme $ Y $ is affine.\"}\n  {\"name\": \"AlgebraicGeometry.IsAffineHom.of_comp\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Separated\", \"type\": \"[IsAffineHom (f ≫ g)] [IsSeparated g] : IsAffineHom f\", \"doc\": \"If the composition $ g \\\\circ f $ is an affine morphism and $ g $ is a separated morphism of schemes, then $ f $ is an affine morphism.\"}\n  {\"name\": \"AlgebraicGeometry.IsSeparated.of_isAffineHom\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Separated\", \"type\": \"[h : IsAffineHom f] : IsSeparated f\", \"doc\": \"Any affine morphism $ f: X \\\\to Y $ of schemes is automatically a separated morphism.\"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: IsFinite.toIsAffineHom assumes a finite morphism, which is not a hypothesis here; the other hits are general scheme properties or elliptic-curve formulas. None supplies affineness for a finite-geometric-kernel homomorphism of flat groups."
+  },
+  {
+   "tool": "grep",
+   "query": "[Qq]uasi[Ff]inite.*[Gg]roup|[Gg]roup.*[Aa]ffine|[Dd]edekind",
+   "results": "[grep] OK 11 hit(s)\n  {\"file\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Reduction.lean\", \"line\": \"210\", \"text\": \"open IsDiscreteValuationRing IsDedekindDomain.HeightOneSpectrum\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Reduction.lean\", \"line\": \"270\", \"text\": \"open IsDiscreteValuationRing IsLocalRing IsDedekindDomain.HeightOneSpectrum\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Affine/Formula.lean\", \"line\": \"34\", \"text\": \"including slopes of non-vertical lines. The actual group law on nonsingular points in affine\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Affine/Basic.lean\", \"line\": \"20\", \"text\": \"affine coordinates. The group law on the actual type of nonsingular points in affine coordinates\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Affine/Basic.lean\", \"line\": \"22\", \"text\": \"formulae for group operations in `Mathlib/AlgebraicGeometry/EllipticCurve/Affine/Formula.lean`.\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Affine/Point.lean\", \"line\": \"14\", \"text\": \"# Nonsingular points and the group law in affine coordinates\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Affine/Point.lean\", \"line\": \"23\", \"text\": \"ideal class group of the *affine coordinate ring* `F[W] := F[X, Y] / ⟨W(X, Y)⟩`. This is given by\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Affine/Point.lean\", \"line\": \"34\", \"text\": \"This file defines the group law on nonsingular points in affine coordinates.\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Affine/Point.lean\", \"line\": \"50\", \"text\": \"* `WeierstrassCurve.Affine.Point.instAddCommGroup`: the type of nonsingular points in affine\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Affine/Point.lean\", \"line\": \"608\", \"text\": \"/-! ## Group law in affine coordinates -/\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/EllipticCurve/LFunction.lean\", \"line\": \"64\", \"text\": \"open ArithmeticFunction IsDedekindDomain NumberField\"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: IsFinite.toIsAffineHom assumes a finite morphism, which is not a hypothesis here; the other hits are general scheme properties or elliptic-curve formulas. None supplies affineness for a finite-geometric-kernel homomorphism of flat groups."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A homomorphism of flat separated finite type group schemes over a Dedekind domain with finite geometric kernels is affine",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.IsFinite.toIsAffineHom\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Finite\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y} [self : AlgebraicGeometry.IsFinite f], AlgebraicGeometry.IsAffineHom f\", \"doc\": \"If a morphism of schemes is finite, then it is affine.\"}\n  {\"name\": \"AlgebraicGeometry.affineAnd\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/AffineAnd\", \"type\": \"({R S : Type u} → [inst : CommRing R] → [inst_1 : CommRing S] → (R →+* S) → Prop) →\\n  AlgebraicGeometry.AffineTargetMorphismProperty\", \"doc\": \"A morphism of schemes $ f : X \\to Y $ with affine target $ Y $ satisfies this property if the scheme $ X $ is affine and the condition $ Q $ holds for the ring homomorphism induced by $ f $ on the glob\"}\n  {\"name\": \"AlgebraicGeometry.IsFinite.instHasAffinePropertyAndIsAffineFiniteCarrierObjOppositeOpensCarrierCarrierCommRingCatPresheafOpOpensTopHomAppTop\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Finite\", \"type\": \"AlgebraicGeometry.HasAffineProperty @AlgebraicGeometry.IsFinite fun X x f x_1 =>\\n  AlgebraicGeometry.IsAffine X ∧ (CommRingCat.Hom.hom (AlgebraicGeometry.Scheme.Hom.appTop f)).Finite\", \"doc\": \"A morphism of schemes with affine target is finite if and only if the source is affine and the induced ring homomorphism on global sections is finite (i.e., the target ring is finitely generated as a \"}\n  {\"name\": \"AlgebraicGeometry.AffineSpace.instIsAffineHomOverSchemeInferInstanceOverClass\", \"module\": \"Mathlib/AlgebraicGeometry/AffineSpace\", \"type\": \"∀ {n : Type v} (S : AlgebraicGeometry.Scheme), AlgebraicGeometry.IsAffineHom (AlgebraicGeometry.AffineSpace n S ↘ S)\", \"doc\": \"For any scheme $ S $ and type $ n $, the canonical morphism from the affine space $ \\\\mathbb{A}^n_S $ to the base scheme $ S $ is an affine morphism of schemes. This follows from the construction of $ \"}\n  {\"name\": \"AlgebraicGeometry.IsAffineHom.of_comp\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Separated\", \"type\": \"∀ {X Y Z : AlgebraicGeometry.Scheme} (f : X ⟶ Y) (g : Y ⟶ Z)\\n  [AlgebraicGeometry.IsAffineHom (CategoryTheory.CategoryStruct.comp f g)] [AlgebraicGeometry.IsSeparated g],\\n  AlgebraicGeometry.IsAffineHom f\", \"doc\": \"If the composition $ g \\\\circ f $ is an affine morphism and $ g $ is a separated morphism of schemes, then $ f $ is an affine morphism.\"}\n  {\"name\": \"AlgebraicGeometry.isAffineHom_of_isAffine\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Affine\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.IsAffine X] [AlgebraicGeometry.IsAffine Y],\\n  AlgebraicGeometry.IsAffineHom f\", \"doc\": \"A morphism between affine schemes is an affine morphism. Specifically, if $ X $ and $ Y $ are affine schemes, then any morphism $ f : X \\to Y $ satisfies the predicate of being an affine morphism.\"}\n  {\"name\": \"AlgebraicGeometry.isFinite_iff\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Finite\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y),\\n  AlgebraicGeometry.IsFinite f ↔\\n    AlgebraicGeometry.IsAffineHom f ∧\\n      ∀ (U : Y.Opens),\\n        AlgebraicGeometry.IsAffineOpen U → (CommRingCat.Hom.hom (AlgebraicGeometry.Scheme.Hom.app f U)).Finite\", \"doc\": \"Let $f: X \\\\to Y$ be a morphism of schemes. Then $f$ is a finite morphism if and only if $f$ is an affine morphism and for every affine open subset $U$ of $Y$, the ring of sections $\\\\mathcal{O}_X(f^{-1\"}\n  {\"name\": \"AlgebraicGeometry.affineAnd_apply\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/AffineAnd\", \"type\": \"∀ (Q : {R S : Type u} → [inst : CommRing R] → [inst_1 : CommRing S] → (R →+* S) → Prop) {X Y : AlgebraicGeometry.Scheme}\\n  (f : X ⟶ Y) [inst : AlgebraicGeometry.IsAffine Y],\\n  AlgebraicGeometry.affineAnd (fun {R S} [CommRing R] [CommRing S] => Q) f ↔\\n    AlgebraicGeometry.IsAffine X ∧ Q (CommRingCat\", \"doc\": \"A morphism of schemes $ f: X \\to Y $ with affine target $ Y $ satisfies the affineAnd $ Q $ property if and only if the scheme $ X $ is affine and the condition $ Q $ holds for the ring homomorphism in\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: finite implies affine requires finiteness of f, not just finite geometric kernels; the other hits give scheme properties and no group-homomorphism affineness theorem."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A quasi finite morphism of group schemes over a Dedekind scheme is an affine morphism",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.IsFinite.toIsAffineHom\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Finite\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y} [self : AlgebraicGeometry.IsFinite f], AlgebraicGeometry.IsAffineHom f\", \"doc\": \"If a morphism of schemes is finite, then it is affine.\"}\n  {\"name\": \"RingHom.QuasiFinite\", \"module\": \"Mathlib.RingTheory.RingHom.QuasiFinite\", \"type\": \"{R S : Type*} [CommRing R] [CommRing S] (f : R →+* S) : Prop\", \"doc\": \"A ring homomorphism $ f : R \\to S $ between commutative rings is quasi-finite if the commutative ring $ S $, equipped with the $ R $-algebra structure induced by $ f $, is finitely generated as an $ R \"}\n  {\"name\": \"AlgebraicGeometry.IsFinite.recOn\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Finite\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} →\\n  {f : X ⟶ Y} →\\n    {motive : AlgebraicGeometry.IsFinite f → Sort u} →\\n      (t : AlgebraicGeometry.IsFinite f) →\\n        ([toIsAffineHom : AlgebraicGeometry.IsAffineHom f] →\\n            (finite_app :\\n                ∀ (U : Y.Opens),\\n                  AlgebraicGeom\", \"doc\": \"A morphism $ f : X \\\\to Y $ of schemes is finite if it is affine and for every affine open subset $ U \\\\subseteq Y $, the induced ring homomorphism $ \\\\Gamma(Y, U) \\\\to \\\\Gamma(X, f^{-1}(U)) $ is finite, m\"}\n  {\"name\": \"Algebra.QuasiFinite.recOn\", \"module\": \"Mathlib.RingTheory.QuasiFinite.Basic\", \"type\": \"{R : Type u_1} →\\n  {S : Type u_2} →\\n    [inst : CommRing R] →\\n      [inst_1 : CommRing S] →\\n        [inst_2 : Algebra R S] →\\n          {motive : Algebra.QuasiFinite R S → Sort u} →\\n            (t : Algebra.QuasiFinite R S) →\\n              ((finite_fiber : ∀ (P : Ideal R) [inst_3 : P.IsPrime], Module\", \"doc\": \"A quasi-finite algebra over a commutative ring $ R $ is a commutative ring $ S $ equipped with an $ R $-algebra structure and satisfying the quasi-finite condition, meaning $ S $ is finitely generated\"}\n  {\"name\": \"RingHom.QuasiFinite.of_finite\", \"module\": \"Mathlib.RingTheory.RingHom.QuasiFinite\", \"type\": \"{f : S →+* T} (hf : f.Finite) : f.QuasiFinite\", \"doc\": \"If a ring homomorphism $ f : R \\\\to S $ between commutative rings is finite (i.e., $ S $ is finitely generated as an $ R $-module under the algebra structure induced by $ f $), then $ f $ is quasi-fini\"}\n  {\"name\": \"AlgebraicGeometry.LocallyQuasiFinite\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.QuasiFinite\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"An inductive predicate defining when a morphism $ f: X \\\\to Y $ between schemes is quasi-finite, typically requiring it to be of finite type with finite fibers.\"}\n  {\"name\": \"AlgebraicGeometry.locallyQuasiFinite_iff\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.QuasiFinite\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y),\\n  AlgebraicGeometry.LocallyQuasiFinite f ↔\\n    ∀ {U : Y.Opens},\\n      AlgebraicGeometry.IsAffineOpen U →\\n        ∀ {V : X.Opens},\\n          AlgebraicGeometry.IsAffineOpen V →\\n            ∀ (e : V ≤ (TopologicalSpace.Opens.map f.base).obj U),\\n          \", \"doc\": \"A morphism of schemes $f: X \\\\to Y$ is locally quasi-finite if and only if for every pair of affine open subsets $U \\\\subseteq Y$ and $V \\\\subseteq X$ such that $f(V) \\\\subseteq U$, the induced ring homom\"}\n  {\"name\": \"Algebra.QuasiFinite.casesOn\", \"module\": \"Mathlib.RingTheory.QuasiFinite.Basic\", \"type\": \"{R : Type u_1} →\\n  {S : Type u_2} →\\n    [inst : CommRing R] →\\n      [inst_1 : CommRing S] →\\n        [inst_2 : Algebra R S] →\\n          {motive : Algebra.QuasiFinite R S → Sort u} →\\n            (t : Algebra.QuasiFinite R S) →\\n              ((finite_fiber : ∀ (P : Ideal R) [inst_3 : P.IsPrime], Module\", \"doc\": \"A quasi-finite algebra over a commutative ring $ R $ is a commutative ring $ S $ equipped with an $ R $-algebra structure such that for every prime ideal $ P $ in $ R $, the tensor product of the resi\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: finite implies affine requires finiteness of f, not just finite geometric kernels; the other hits give scheme properties and no group-homomorphism affineness theorem."
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.LocallyQuasiFinite, AlgebraicGeometry.IsAffineHom",
+   "results": "[loogle] OK 0 hit(s)",
+   "date": "2026-10-24",
+   "verdict": "no match: finite implies affine requires finiteness of f, not just finite geometric kernels; the other hits give scheme properties and no group-homomorphism affineness theorem."
+  },
+  {
+   "tool": "grep",
+   "query": "quasi.?finite.*group|group.*quasi.?finite|hom.*[Dd]edekind",
+   "results": "[grep] OK 0 hit(s) Search subdirectory: Mathlib/AlgebraicGeometry.",
+   "date": "2026-10-24",
+   "verdict": "no match: finite implies affine requires finiteness of f, not just finite geometric kernels; the other hits give scheme properties and no group-homomorphism affineness theorem."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-relative-semisimple-affineness",
+  "date": "2026-10-24",
+  "group": "Q149"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Haboush symmetric-power lifting for a trivial quotient representation. Supporting representation-theoretic input: Steinberg endomorphisms detect a nonzero fixed vector. Supporting Self-duality of rho section modules at characteristic-dependent weights. Supporting input: Positive-characteristic simplicity step, using irreducibility of the Steinberg induced module rather than assuming self-duality. Numerical input to the dimension comparison: Weyl dimension of the induced module. Supporting Kempf vanishing for dominant flag line bundles. Positive-characteristic Andersen–Haboush argument: trivial pushforward of M_((p^r-1)rho), before the Serre twisting calculation. Supporting input: Lemma 2.3, second assertion, and Lemma 2.1, printed pp.153--155: H^0(u,V(lambda))=K v_lambda for p-restricted dominant lambda. With roots positive in Lie(B), V(lambda)=Gamma(M_{-w0 lambda}). Supporting input: Simple-root distributions and infinitesimal subalgebra calculus. Supporting input: pinning-compatible integral-to-geometric distribution comparison, with all positive root divided powers, before simple-root generation. Integral-root-model prerequisite before the comparison: integral Chevalley construction and a positive-root coordinate chart; integral matrix-closure construction: the big cell and its Weyl translates, before identifying the special fibre. Supporting input: Integral closure atlas, exhaustion of each special fibre: exclude extra components using the generic and special identity-component big-cell dimensions. Supporting input: Lemma 3.7 (first assertion, the Iwahori--Matsumoto maximal-boundedness statement) and its application in Proposition 4.3, second paragraph, printed pp.7-8; Cartan double-coset input used to prove the maximal-boundedness prerequisite, before the torus-powers argument. Supporting input: Theorem 1.3, implication (1) to (3), printed pp.1, 6; Definition 3.4 and Lemma 3.6, printed pp.5-6. The complete-DVR cocharacter form, before the non-complete descent of Theorem 4.1. Supporting input: Section 2, Claim 2, printed p.2; Section 3, proof of Theorem 1.3, (1) implies (2), printed p.6, removes the residue-field and splitness restrictions. Supporting input: Claim 2: choose a linear embedding and use reductivity to make the homogeneous quotient affine. Supporting input: Alper, Adequate moduli spaces and geometrically reductive group schemes, Theorem 9.7.5, Proposition 9.3.1(i), Lemma 9.2.5(2),(3), printed pp.522,524,527--528. WANTED local copy; read https://content.algebraicgeometry.nl/2014-4/2014-4-022.pdf. Supporting input: Theorem 9.7.5, reductive-to-geometrically-reductive direction, reductions preceding the final determinant argument, printed p.527; use Lemma 9.2.5(2),(5), Proposition 9.3.1 (base change and descent), Proposition 9.5.1 (quotients and extensions). The result is the conditional reduction, not the geometric reductivity theorem itself; no SGA source is invoked. Supporting input: Theorem 9.7.5 reduction paragraph: etale splitting followed by descent from split groups over the integers. Supporting input: Theorem 6.1.16(2), printed p.196, and Theorem 6.1.17 (Isomorphism Theorem), p.197; pinnings as in Definition 6.1.1, p.186; supporting input for existence in Theorem 6.1.17: Integral prolongation of a given split rational reductive group Supporting input: Proof of Proposition 6.3.16, printed p.229: adjoint representation with finite geometric kernels and affineness of quasi-finite homomorphisms of separated flat finite-type groups over a Dedekind base; the argument is independent of the root-cell construction Supporting input: Affineness of finite-geometric-kernel homomorphisms over a Dedekind base.",
+   "via": [
+    "lem-sfb-relative-semisimple-affineness",
+    "lem-sfb-rational-split-integral-prolongation",
+    "lem-sfb-pinned-split-root-classification",
+    "lem-sfb-reductive-etale-integral-models",
+    "lem-sfb-reductive-symmetric-power-dvr-reduction",
+    "lem-sfb-reductive-ring-invariant-power-lifting",
+    "lem-sfb-dvr-reductive-linear-affine-quotient",
+    "lem-sfb-reductive-nodal-equivariant-torsor-extension",
+    "lem-sfb-complete-dvr-cocharacter-cartan",
+    "lem-sfb-split-reductive-dvr-cartan-decomposition",
+    "lem-sfb-split-reductive-integral-maximal-bounded",
+    "lem-sfb-quasi-reductive-special-connectedness",
+    "lem-sfb-integral-chevalley-weyl-atlas",
+    "lem-sfb-chevalley-integral-root-model",
+    "lem-sfb-borel-kostant-distribution-comparison",
+    "lem-sfb-borel-simple-root-distribution-calculus",
+    "lem-sfb-restricted-induced-infinitesimal-invariants",
+    "lem-sfb-flag-frobenius-rho-pushforward",
+    "lem-sfb-dominant-flag-line-kempf-vanishing",
+    "lem-sfb-induced-weyl-dimension-formula",
+    "lem-sfb-steinberg-induced-module-irreducible",
+    "lem-sfb-rho-section-self-duality",
+    "lem-sfb-steinberg-endomorphism-detection",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-dedekind-finite-kernel-hom-affine",
+  "worker": "stage1",
+  "summary": "Kept the complete statement. Wrote finite geometric kernel to finite fibres explicitly; used separated quasi-finite Zariski main quasi-affineness, constructed a relative group envelope through a smaller statement, proved generic saturation using open group images over fields, and used an independent vertical-boundary criterion to conclude affineness. Three new statement-only nodes; all searches actually run.",
+  "blueprint": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction and the inherited relative-semisimple-affineness prerequisite; Conrad Proposition 6.3.16, printed p.229, quasi-finite group homomorphism assertion. The item is a distant created prerequisite with no imported ancestor (blueprint_refs.py ancestor returns None); inherited via retained. Steps 1-3 realize the finite-kernel reduction, steps 4-6 the affineness assertion.",
+  "tool_uses": [
+   {
+    "node": "pqf-lem-qf-finitefibres",
+    "why": "Generic scheme-theoretic tool: Quasi-finite = finite type + quasi-compact + finite fibres. Used only for the explicit finite-fibre/quasi-affine reduction or composition, not to replace a unit step."
+   },
+   {
+    "node": "pqf-lem-qf-locqf-qc",
+    "why": "Generic scheme-theoretic tool: Quasi-finite = locally quasi-finite + quasi-compact. Used only for the explicit finite-fibre/quasi-affine reduction or composition, not to replace a unit step."
+   },
+   {
+    "node": "lemma-nagata-quasi-affine-morphism-of-quasi-finite",
+    "why": "Generic scheme-theoretic tool: A quasi-finite morphism is quasi-affine. Used only for the explicit finite-fibre/quasi-affine reduction or composition, not to replace a unit step."
+   }
+  ]
+ },
+ "tool_uses": [
+  "pqf-lem-qf-finitefibres",
+  "pqf-lem-qf-locqf-qc",
+  "lemma-nagata-quasi-affine-morphism-of-quasi-finite"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q03-f549bbb56",
+  "group": "Q03",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q03-f549bbb56 (reviewer sub-agent of L); spot-checked: Read the item, all three new nodes and every cited statement. Item statement unchanged from its import, not weakened; not a re-split delivery. Steps: (1) translation by an L-point g identifies (G_y)_L with ker(f_L) — elementary, correct; (2) finite-fibres clause of lem-weil-pbc-finite-closed-map-finite-fibres, lem-pc-field-extension-surjective, lem-weil-pbc-surjective-base-change, then pqf-lem-qf-finitefibres (f is of finite type by hypothesis); (3) separated-cancellation(b), pqf-lem-qf-locqf-qc and the Nagata quasi-affine lemma, all four hypotheses checked; (4)-(6) envelope node, then the field image node in each fibre, then the generic complement killed by O_H≅j_*O_G, then the vertical criterion plus affine composition. New nodes: field-image node is Stacks 047S verbatim (groupoids.tex l.858). Vertical criterion checked independently: on an affine chart the boundary contains t·a for nonzero a in B, so it lies over finitely many closed points; localizing makes s=(t), which is possible because B is normal of dimension at most one; removing the closed U_s leaves U=D(t), so U is affine locally on the target; edge cases (B a field, U=X, punctured plane excluded) checked. Envelope checked true: 0AUW (torsion-free implies flat) plus 02KH Künneth on qcqs flat opens give H×H=Spec of (f×f)_*O; the group law extends by the relative-Spec anti-equivalence; 01SM gives the qc open immersion; the generic sheaf iso holds. Duplicate search over all statements (open subgroup, affinization/envelope, Dedekind affine criteria, 047S/07ZT): flat-trait-group-affinization is absolute over a DVR and the trf relative-affinization nodes carry no group law, so neither duplicates. No node restates an item clause. Accepted tool_uses: pqf-lem-qf-finitefibres, pqf-lem-qf-locqf-qc, lemma-nagata-quasi-affine-morphism-of-quasi-finite (generic quasi-finite facts, not given by the unit). Conrad 6.3.16 is not local (WANTED); the statement's truth was verified through the proof. No changes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.GroupScheme.DedekindFiniteKernelAffine",
+  "declaration": "AlgebraicGeometry.isAffineHom_of_finite_geometricKernel_over_dedekind",
+  "file": "lean/Sheaf/AlgebraicGeometry/GroupScheme/DedekindFiniteKernelAffine.lean",
+  "statement": "theorem isAffineHom_of_finite_geometricKernel_over_dedekind (B : Type u) [CommRing B] [IsDomain B] [IsNoetherianRing B] [IsIntegrallyClosed B] (hB : ringKrullDim B = 1) (G J : Over (Spec (.of B))) [GrpObj G] [GrpObj J] [IsSeparated G.hom] [Flat G.hom] [LocallyOfFiniteType G.hom] [QuasiCompact G.hom] [IsSeparated J.hom] [Flat J.hom] [LocallyOfFiniteType J.hom] [QuasiCompact J.hom] (f : G ⟶ J) [IsMonHom f] [LocallyOfFiniteType f.left] [QuasiCompact f.left] (hker : ∀ (k : Type u) [Field k] [IsAlgClosed k] (φ : B →+* k), IsFinite ((Over.pullback (Spec.map (CommRingCat.ofHom φ))).obj (GrpObj.ker f)).hom) : IsAffineHom f.left",
+  "branch": "newtargets-dag",
+  "by": "Q45",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-2256dac1a",
+  "group": "Q45",
+  "result": "pass",
+  "note": "Clause-by-clause match with node and Conrad 6.3.16 p.229: Noetherian integrally closed domain with ringKrullDim B = 1; GrpObj G, J over Spec B, each separated, flat, LOFT+QC; f with IsMonHom and finite type; hker = IsFinite of the base change of GrpObj.ker f (= pullback f η) along Spec k → Spec B for algebraically closed k : Type u, which is iso to ker(f_k); conclusion IsAffineHom f.left. The Type u universe for k is harmless because the proof only uses an algebraic closure of a residue field. No extra hypotheses; lean.statement verbatim; sorry only; no defs; docstrings carry source place, blueprint id and the 6-step plan. Advisories: GrpObj/IsMonHom/GrpObj.ker are owned by def-sc-group-scheme, which is not a stmt_dep (the node defines them inline; a stage-2 fix cannot add an item stmt_dep); 7 unused proof-only private imports. No compile run; no file changed."
+ }
+}

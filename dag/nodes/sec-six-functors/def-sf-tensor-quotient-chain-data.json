@@ -1,0 +1,134 @@
+{
+ "id": "def-sf-tensor-quotient-chain-data",
+ "kind": "definition",
+ "title": "The recorded ordinary tensor with its quotient-chain augmentation",
+ "statement": "Fix a prime l, a finite extension E of Q_l, and a scheme X. On the completed integral coefficient sheaves define an ordinary ProEtaleTensorModel [def-sf-tensor-completion-comparison] by using ambientOrdinaryTensor [lem-pur-integral-ambient-operation-models] and restricting its ordinary representative comparison along the inclusion of flat-term K-flat complexes into independent-coefficient K-flat complexes [def-pc-kflat-complex]. The K-flat equivalence gives a map flat_good into the good class of the recorded integral operations. Define completionChain as the natural quotient Roos augmentation, augmentTensor by whiskering this unit and composing with the Roos image of a strict tensor-tower isomorphism, and quotientChain by applying this construction to total tensor and tensorTowerIso. Its component on (P,Q) is exactly tensorOperationUnit. All data are these specified constructions, with no arbitrary witness chosen.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-rem-sf-pf-done/fix-prop-projection-formula.proof.md",
+  "place": "Integral reconstruction through thm-sf-pf-adic: coefficient presentation of tensor and its strict quotient augmentation; Bhatt--Scholze 3.4.10, 6.5.5, Stacks 06YY, 07A4, 0941."
+ },
+ "stmt_deps": [
+  "def-sf-tensor-completion-comparison",
+  "def-pc-kflat-complex",
+  "def-pur-integral-derived-operations",
+  "lem-pur-integral-ambient-operation-models"
+ ],
+ "proof": [
+  {
+   "text": "Convert the ordinary K-flat certificate using isKFlatIndependentCoefficients_iff_isKFlat, keeping termwise flatness. This gives flat_good and the inclusion of the ordinary resolving class in the recorded K-flat class.",
+   "uses": [
+    "def-pc-kflat-complex",
+    "lem-pur-integral-operations-well-defined"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Set ordinary tensor to ambientOrdinaryTensor. Whisker ambientTensorModelComparison by the product of the two resolving-class inclusions. Its components give exactly the required signed-total-tensor representative comparison.",
+   "uses": [
+    "lem-pur-integral-ambient-operation-models",
+    "def-sf-tensor-completion-comparison"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use the already proved sliceRoosUnit_natural identity to prove completionChain_naturality, then make the unit components into completionChain. Whiskering with total tensor and with the strict tensorTowerIso produces quotientChain. Expanding the whiskering components proves quotientChain_app, identifying it with tensorOperationUnit.",
+   "uses": [
+    "def-pur-integral-derived-operations",
+    "lem-pur-integral-ambient-operation-models"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pc-kflat-complex",
+  "def-pur-integral-derived-operations",
+  "def-sf-tensor-completion-comparison",
+  "lem-pur-integral-ambient-operation-models",
+  "lem-pur-integral-operations-well-defined"
+ ],
+ "proof_origin": "S4, 2026-10-27: explicit data constructions and proved naturality/component lemmas, extracted after profiling and simplifying the original existence proof. No theorem or definition contains a new proof obligation.",
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "natural Roos quotient augmentation of total tensor complexes and restriction of tensor representative comparison to flat term K flat complexes",
+   "results": "Eight hits, chiefly HomologicalComplex tensor constructions, but no model for the specified coefficient quotient Roos augmentation.",
+   "date": "2026-10-27",
+   "verdict": "Reuse the existing project tensor and quotient constructions."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.isoWhiskerLeft",
+   "results": "Found isoWhiskerLeft and its component identities in Mathlib.CategoryTheory.Whiskering.",
+   "date": "2026-10-27",
+   "verdict": "Use isoWhiskerLeft to restrict the ordinary representative isomorphism; the coefficient data are project-specific."
+  },
+  {
+   "tool": "grep",
+   "query": "ProEtaleTensorModel|tensorOperationUnit|IsKFlatIndependentCoefficients",
+   "results": "Mathlib search returned zero hits. Project search finds the existing ordinary tensor model type and operation-unit construction. Blueprint search for Roos augmentation returned zero matching nodes.",
+   "date": "2026-10-27",
+   "verdict": "This is an explicit assembly of existing project data, not a new tensor or an additional unresolved theorem."
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.SixFunctors.TensorCompletionModelExistence",
+  "date": "2026-10-27",
+  "group": "S4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "fix-prop-projection-formula",
+   "place": "Integral reconstruction through thm-sf-pf-adic: completed-coefficient tensor presentation and its actual strict quotient-chain augmentation.",
+   "via": [
+    "lem-sf-tensor-completion-model-existence",
+    "def-sf-projection-tensor-coefficient-comparison"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-rem-sf-pf-done",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.SixFunctors.TensorQuotientChainData",
+  "file": "lean/Sheaf/SixFunctors/TensorQuotientChainData.lean",
+  "declaration": "WeilConjectures.OpenFactorCoherence.TensorCompletionConstruction.ordinaryModel",
+  "declarations": [
+   "WeilConjectures.OpenFactorCoherence.TensorCompletionConstruction.flat_good",
+   "WeilConjectures.OpenFactorCoherence.TensorCompletionConstruction.ordinaryModel",
+   "WeilConjectures.OpenFactorCoherence.TensorCompletionConstruction.completionChain_naturality",
+   "WeilConjectures.OpenFactorCoherence.TensorCompletionConstruction.completionChain",
+   "WeilConjectures.OpenFactorCoherence.TensorCompletionConstruction.augmentTensor",
+   "WeilConjectures.OpenFactorCoherence.TensorCompletionConstruction.quotientChain",
+   "WeilConjectures.OpenFactorCoherence.TensorCompletionConstruction.quotientChain_app"
+  ],
+  "statement": "def ordinaryModel :\n    ProEtaleTensorModel X ((PurCompactSupport.completed l E).ring X)",
+  "branch": "sheaf-dag",
+  "by": "S4",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S4",
+  "result": "pass",
+  "landing": "20261026T222756-L-694475",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S4",
+  "result": "pass",
+  "landing": "20261026T222756-L-694475",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

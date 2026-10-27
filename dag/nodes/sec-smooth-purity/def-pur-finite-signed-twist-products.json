@@ -1,0 +1,169 @@
+{
+ "id": "def-pur-finite-signed-twist-products",
+ "kind": "definition",
+ "title": "Canonical signed addition for the actual finite coefficient lines",
+ "status": "split",
+ "statement": "For the finite-coefficient setting [def-pur-conventions] and its actual integral-reduced signed lines in fixed-scalar coordinates [def-pur-finite-tensor-reduction-data], define a coherent local frame to consist of one basis of every signed line: the zero basis is 1, the positive bases are the prescribed ordered powers of the first basis, and each negative basis evaluates to 1 on its positive dual basis. Define signed tensor addition by the unique sheaf isomorphisms taking each product of coherent frame basis vectors to the sum-degree basis vector. Their degree-zero derived versions are the unique isomorphisms whose arrows are the canonical single-complex tensor map followed by the single of the sheaf product. Use that map from [def-pur-supported-cup]; flatness of the lines makes it invertible, including opposite-sign cancellation and zero powers. Its derived normalization is the equation of [def-pur-finite-tensor-comparison-equations].",
+ "stmt_deps": [
+  "def-pur-conventions",
+  "def-pur-finite-tensor-reduction-data",
+  "def-pur-supported-cup",
+  "def-pur-finite-tensor-comparison-equations"
+ ],
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-reduction/thm-pur-finite-reduction-of-purity.proof.md",
+  "place": "Proof Step 2: compatibility with the invertible twist by associativity of derived tensor, all signed twists and shifts; returned proof Step 1 (twist part)"
+ },
+ "proof": [
+  {
+   "text": "For each pair of integer degrees use the normalized ordinary morphism existence theorem. Choose these morphisms in the proof only. Apply the local basis-isomorphism criterion to each one, and package each actual morphism with asIso. Their normalization is the existence theorem's equation.",
+   "uses": [
+    "lem-pur-finite-tensor-product-map",
+    "lem-pur-finite-tensor-product-map-isIso"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For any other normalized family, apply function extensionality in both degrees and Iso.ext. The frame detection lemma reduces equality of their homs to their realized values on a frame tensor. Both normalizations identify those values with the same sum-degree basis, proving equality.",
+   "uses": [
+    "lem-pur-finite-tensor-product-frame-ext"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For the derived product, first prove flatness of finiteTensorFixedSheaf. Transport coefficientTwistFiniteRank across Nat.sub_add_cancel for the prescribed first line; the coefficient prime is invertible in residue fields by coefficientPrime_isUnit_stalk and the residue map. coefficientTwistLine_exact gives finite-limit preservation of intrinsic right tensor by every signed line. Identify the realization of the fixed sheaf with that line using the equivalence counit and siteSheafTensorRightIso. The intrinsic right-tensor comparison and reflection of finite limits by the equivalence give finite-limit preservation for fixed-scalar right tensor. Braiding and flat_iff_preservesFiniteLimits give flatness.",
+   "uses": [
+    "def-coefficient-twists-detailed",
+    "def-pur-conventions",
+    "lem-weil-pbc-independent-sheaf-tensor-colimits",
+    "lem-sfb-proetale-intrinsic-tensor-comparison"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply the already proved private cupSingleTensorMap_isIso from SupportedCup to this flat first input. Compose its invertible canonical tensor-to-single arrow with the single-functor image of finiteTensorSheafProducts. Take asIso of that actual composite. The normalization holds by HEq.rfl; any other normalized isomorphism has the same hom by eq_of_heq, so Iso.ext proves uniqueness.",
+   "uses": [
+    "def-pur-supported-cup",
+    "def-pur-finite-tensor-comparison-equations"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-pur-finite-tensor-product-map",
+  "lem-pur-finite-tensor-product-map-isIso",
+  "lem-pur-finite-tensor-product-frame-ext",
+  "def-coefficient-twists-detailed",
+  "def-pur-conventions",
+  "lem-weil-pbc-independent-sheaf-tensor-colimits",
+  "lem-sfb-proetale-intrinsic-tensor-comparison",
+  "def-pur-supported-cup",
+  "def-pur-finite-tensor-comparison-equations"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-reduction/thm-pur-finite-reduction-of-purity.proof.md",
+  "place": "Step 2, ordinary signed products: V4 decomposition into existence of a morphism, local invertibility, and coherent-frame detection; retain F5 derived flatness and single-complex argument, 2026-10-25."
+ },
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "canonical signed powers of an invertible coefficient sheaf tensor addition and primitive root charts",
+   "results": "8 unrelated scheme section arithmetic hits: StructureSheaf.const_add, Proj.add_apply, Proj.pow_apply, exists_eq_pow_mul_of_is_compact_of_quasi_separated_space_aux, StructureSheaf.normalize_finite_fraction_representation, exists_eq_pow_mul_of_isAffineOpen, Proj.sub_apply, exists_eq_pow_mul_of_is_compact_of_quasi_separated_space_aux_aux. No signed coefficient product or root presentation.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"tensorRight\", \"mapIso\"",
+   "results": "0 hits.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "finiteTensorProduct|finiteTensorFirstSiteLine|finiteTensorPositiveChart",
+   "results": "Mathlib msearch grep: 0 hits. rg lean/WeilConjectures, lean/Sheaf and dag/nodes: no hits. blueprint_refs.py search signed twist products: 0 nodes.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "canonical signed Tate coefficient line products finite reduction root charts derived pullback comparison",
+   "results": "8 hits: RootPairing.chainBotCoeff.congr_simp, RootPairing.chainTopCoeff.congr_simp, AlgebraicGeometry.Scheme.Pullback.residueFieldCongr_inv_residueFieldMap_ofPoint, RootPairing.chainBotCoeff_mul_chainTopCoeff, RootPairing.one_le_chainBotCoeff_of_root_add_mem, RootPairing.chainTopCoeff_sub_chainBotCoeff, AlgebraicGeometry.Scheme.Pullback.carrierEquiv, RootPairing.restrictScalars_coe_root. These concern root systems or scheme carrier/residue-field pullbacks, not finite signed coefficient products, normalized root charts or derived scalar/pullback comparisons.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-pur-finite-tensor-presentation-reduction",
+  "date": "2026-10-22",
+  "group": "NX"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-pur-finite-reduction-of-purity",
+   "place": "Proof Step 2, expanded Steps 5 and 8: actual signed products and integral-reduced/root positive presentations",
+   "via": [
+    "lem-pur-finite-tensor-presentation-reduction"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-thm-purity-transport",
+ "lean": {
+  "module": "Sheaf.Paper.FiniteSignedTwistProducts",
+  "declaration": "WeilConjectures.PurityFiniteSetting.finiteTensorProduct",
+  "declarations": [
+   "WeilConjectures.PurityFiniteSetting.existsUnique_finiteTensorSheafProducts",
+   "WeilConjectures.PurityFiniteSetting.finiteTensorSheafProducts",
+   "WeilConjectures.PurityFiniteSetting.FiniteTensorProductType",
+   "WeilConjectures.PurityFiniteSetting.existsUnique_finiteTensorProducts",
+   "WeilConjectures.PurityFiniteSetting.finiteTensorProduct"
+  ],
+  "file": "lean/Sheaf/Paper/FiniteSignedTwistProducts.lean",
+  "statement": "def finiteTensorProduct (P : PurityFiniteSetting.{u}) (T : Scheme.{u}) [T.Over (Spec (.of P.field.k))] (r t : ℤ) : P.FiniteTensorProductType T r t",
+  "branch": "newtargets-dag",
+  "by": "NX",
+  "date": "2026-10-23",
+  "existing": false
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-0f286afb2",
+  "group": "NX",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-0f286afb2",
+  "group": "NX",
+  "result": "pass",
+  "note": "Re-delivery of aa2aa128e2c9 (RETURN H2). Lean byte-identical (9 modules); item statement/proof/lean record unchanged. stmt_deps repaired in item, def-pur-finite-tensor-fixed-comparisons, def-pur-finite-tensor-reduction-data: thm-pur-composition-coherence→def-pur-composition-comparisons (owns compositionFixedPullbackComp/PullbackTensorFixed/TwistShift/ShiftedPullback); lem-sp-supported-etale-tensor-origin→def-sp-coefficient-scalar-representatives + new existing:true def-sp-finite-scalar-realization-presentations on SupportedEtaleTensorOrigin (liftedHom/fixedScalar/fixedRestriction/restrictionPresentation/scalarPresentation; scalarPresentation = leftAdjointUniq conjugate of sectionwise-identity-pinned sfRealizationRestriction; statement verbatim; no competing owner). Mechanical finding lem-amb-finite-tate-site-descent: statement uses finite_tate_site_descent(...).choose (constructed comparison) → PASS on that point. No supersession on live. Advisories: non-stmt_dep owners of sfRealizationRestriction/sfIntrinsicDerivedEquivalence; Second reading is the author's own; degree-one HEq lemma advisory unchanged. No compile (no file changed)."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-1eab1",
+  "group": "V4",
+  "result": "pass",
+  "landing": "20261025T181238-L-4122249",
+  "kind": "interface",
+  "note": "independent cc review: item node def-pur-finite-signed-twist-products + 3 new lem nodes vs delivered Lean (verbatim statements); relocated frame defs byte-identical to live lines 57-108; 4 delivered modules + 6 direct importers compiled together in /tmp sandbox, no errors; #print axioms: sorryAx only from the 3 new sorried lemmas"
+ }
+}

@@ -1,0 +1,159 @@
+{
+ "id": "lem-sf-grothendieck-torsion-proper-base-change",
+ "kind": "statement",
+ "title": "Bounded proper base change from its sheaf case",
+ "statement": "Under the same structural hypotheses on a Grothendieck abelian coefficient category A, let (g',f',f,g) be a Cartesian square of schemes with f proper. For a bounded object K of D(Sh(X_et,A)), suppose that for every integer q and every geometric point s of X a positive integer annihilates id(H^q(K)_s). Then the canonical unbounded derived base-change map Lg* Rf* K -> Rf'* Lg'* K is an isomorphism. The category, functors and exchange are as in [def-weil-abstract-derived-category, def-weil-pbc-etale-site, def-weil-pbc-derived-exchange]; properness is [def-weil-proper-morphism] and A is [def-sp-grothendieck-abelian].",
+ "source": {
+  "document": "literature/sga/SGA4-expose-17_reedition.pdf",
+  "place": "XVII 4.3.2(ii), the reduction from bounded complexes to their homology sheaves by truncation; the coefficient-independent triangulated induction is implemented in Lean."
+ },
+ "stmt_deps": [
+  "def-sp-grothendieck-abelian",
+  "def-pc-scheme",
+  "def-weil-proper-morphism",
+  "def-weil-abstract-derived-category",
+  "def-weil-pbc-etale-site",
+  "def-weil-pbc-derived-exchange"
+ ],
+ "proof": [
+  {
+   "text": "Finite exponent of all geometric stalks is invariant under a sheaf isomorphism: conjugate the annihilating multiple of the identity by the stalk isomorphism. Apply the sheaf-level proper-base-change theorem to each homology sheaf of K placed in degree zero. The canonical exchange commutes with shifts, so it is invertible on that sheaf placed in any degree.",
+   "uses": [
+    "lem-sf-grothendieck-torsion-sheaf-proper-base-change"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply the proved library Postnikov theorem DerivedCategory.exists_iteratedExtensions_of_bounded to K and the isomorphism-closed sheaf property P of finite-exponent geometric stalks. It expresses K as finitely many extensions of single objects M placed in various degrees, with P M. The theorem constructs this decomposition by canonical truncation triangles; it handles empty support as well, without requiring a termwise-torsion representative.",
+   "uses": [
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "The exchange isomorphism locus NatTrans.isoLocus is a strictly full triangulated property because both composite functors are triangulated and the exchange commutes with shifts. Each single object in the Postnikov decomposition belongs to it by the sheaf theorem and the shift isomorphism of singleFunctors. Apply the proved library closure theorem DerivedCategory.iteratedExtensions_le to put K in this locus. This is the finite truncation/five-lemma argument, with its generic induction reused from the source library.",
+   "uses": [
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-sf-grothendieck-torsion-sheaf-proper-base-change",
+  "def-weil-abstract-derived-category"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/sga/SGA4-expose-17_reedition.pdf",
+  "place": "XVII 4.3.2(ii), finite truncation of a bounded complex into its homology sheaves; Lean reuses the proved library exists_iteratedExtensions_of_bounded, iteratedExtensions_le, and the triangulated isomorphism locus instead of reproving their inductions."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "proper base change for derived etale sheaves with torsion coefficients in an abelian category",
+   "results": "8 hits: AlgebraicGeometry.IsEtale.instIsStableUnderBaseChangeScheme, AlgebraicGeometry.IsEtale.instHasOfPostcompPropertyScheme, RingHom.Etale.isStableUnderBaseChange, KaehlerDifferential.isBaseChange_of_formallyEtale, Algebra.Etale.baseChange, AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified, AlgebraicGeometry.FormallyUnramified.instIsStableUnderBaseChangeScheme, AlgebraicGeometry.IsEtale.of_comp",
+   "date": "2026-10-24",
+   "verdict": "No theorem for torsion proper base change with arbitrary Grothendieck abelian coefficients."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"derivedBaseChangeMap\"",
+   "results": "0 hits: ",
+   "date": "2026-10-24",
+   "verdict": "No theorem for torsion proper base change with arbitrary Grothendieck abelian coefficients."
+  },
+  {
+   "tool": "grep",
+   "query": "Grothendieck.*base.change|base.change.*Grothendieck",
+   "results": "7 hits: Mathlib/Algebra/Homology/HomotopyCategory/HomComplexShift.lean, Mathlib/Algebra/Homology/HomotopyCategory/HomComplexShift.lean, Mathlib/Algebra/Homology/HomotopyCategory/HomComplex.lean, Mathlib/Algebra/Homology/HomotopyCategory/HomComplex.lean, Mathlib/Algebra/Homology/HomotopyCategory/Pretriangulated.lean, Mathlib/Algebra/Homology/HomotopyCategory/Pretriangulated.lean, Mathlib/CategoryTheory/Sites/MorphismProperty.lean",
+   "date": "2026-10-24",
+   "verdict": "No theorem for torsion proper base change with arbitrary Grothendieck abelian coefficients."
+  },
+  {
+   "tool": "grep",
+   "query": "Grothendieck.*baseChange|baseChange.*Grothendieck",
+   "results": "9 hits: Mathlib/Topology/Category/TopCat/GrothendieckTopology.lean, Mathlib/AlgebraicGeometry/Sites/SheafQuasiCompact.lean, Mathlib/AlgebraicGeometry/Sites/BigZariski.lean, Mathlib/CategoryTheory/Sites/PrecoverageToGrothendieck.lean, Mathlib/CategoryTheory/Sites/Coverage.lean, Mathlib/CategoryTheory/Sites/Coverage.lean, Mathlib/CategoryTheory/Sites/Coverage.lean, Mathlib/CategoryTheory/Sites/Coverage.lean",
+   "date": "2026-10-24",
+   "verdict": "No theorem for torsion proper base change with arbitrary Grothendieck abelian coefficients."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "proper base change for bounded complexes of etale sheaves with Grothendieck abelian category coefficients and torsion homology",
+   "results": "8 hits: AlgebraicGeometry.IsEtale.instIsStableUnderBaseChangeScheme, AlgebraicGeometry.IsEtale.instHasOfPostcompPropertyScheme, RingHom.Etale.isStableUnderBaseChange, LightCondensed.instIsGrothendieckAbelianLightCondMod, AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified, KaehlerDifferential.isBaseChange_of_formallyEtale, SheafOfModules.instIsIsoPullbackObjUnitToUnitOfFinal, CategoryTheory.Functor.SmallCategories.instPreservesFiniteLimitsSheafSheafPullbackOfRepresentablyFlat",
+   "date": "2026-10-24",
+   "verdict": "No theorem for torsion proper base change with arbitrary Grothendieck abelian coefficients."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Proper base change for torsion sheaves valued in an arbitrary Grothendieck abelian coefficient category",
+   "results": "8 hits: IsBaseChange.of_comp, CategoryTheory.sheafIsAbelian, AlgebraicGeometry.IsProper.isStableUnderBaseChange, CategoryTheory.Abelian.instIsStableUnderBaseChangeEpimorphisms, IsBaseChange.comp, IsBaseChange, CategoryTheory.Sheaf.instIsGrothendieckAbelian, CategoryTheory.TwoSquare.instIsIsoFunctorLanBaseChangeOfGuitartExact",
+   "date": "2026-10-24",
+   "verdict": "No theorem for torsion proper base change with arbitrary Grothendieck abelian coefficients."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsIso\", \"singleFunctor\"",
+   "results": "1 hits: CategoryTheory.SingleFunctors.instIsIsoFunctorHom",
+   "date": "2026-10-24",
+   "verdict": "No theorem for torsion proper base change with arbitrary Grothendieck abelian coefficients."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A shift compatible morphism of triangulated functors is an isomorphism on bounded derived complexes if it is an isomorphism on sheaves in degree zero",
+   "results": "8 hits: CategoryTheory.Functor.isTriangulated_iff_of_iso, CategoryTheory.MorphismProperty.IsCompatibleWithTriangulation.toIsCompatibleWithShift, CategoryTheory.Functor.ShiftSequence.induced.isoZero, CategoryTheory.Functor.IsTriangulated, CategoryTheory.Functor.isoShiftZero, CategoryTheory.Functor.isTriangulated_of_iso, CategoryTheory.Functor.ShiftSequence.isoZero, CochainComplex.mappingCone.shiftTriangleIso",
+   "date": "2026-10-24",
+   "verdict": "Generic triangulated tools found; no torsion proper-base-change theorem for Grothendieck coefficients."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.SixFunctors.ConstructibleCompactSupportBaseChange",
+  "date": "2026-10-24",
+  "group": "B9"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "sk-thm-sf-kunneth-relative",
+   "place": "Proof step (3), compact-support exchange: proper comparison and finite truncation of its input",
+   "via": [
+    "lem-sf-constructible-compact-support-base-change"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-thm-sf-kunneth-relative",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.SixFunctors.GrothendieckTorsionProperBaseChange",
+  "file": "lean/Sheaf/SixFunctors/GrothendieckTorsionProperBaseChange.lean",
+  "declaration": "AlgebraicGeometry.Etale.isIso_derivedBaseChangeMap_of_bounded_stalkwise_finite_exponent",
+  "statement": "theorem isIso_derivedBaseChangeMap_of_bounded_stalkwise_finite_exponent\n    {X' X Y' Y : Scheme.{u}} {g' : X' ⟶ X} {f' : X' ⟶ Y'}\n    {f : X ⟶ Y} {g : Y' ⟶ Y} [IsProper f]\n    (sq : IsPullback g' f' f g)\n    (K : _root_.DerivedCategory (Sheaf X.smallEtaleTopology A))\n    (hK : _root_.DerivedCategory.TStructure.t.bounded K)\n    (hT : ∀ (n : ℤ) (Ω : Type u) [Field Ω] [IsSepClosed Ω]\n      (s : Spec (.of Ω) ⟶ X), ∃ N : ℕ, 0 < N ∧\n        N • (𝟙 ((Scheme.pointSmallEtale s).sheafFiber.obj\n          ((_root_.DerivedCategory.homologyFunctor _ n).obj K))) = 0) :\n    IsIso ((derivedBaseChangeMap A sq.toCommSq).app K)",
+  "branch": "sheaf-dag",
+  "by": "B9",
+  "date": "2026-10-24"
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B9",
+  "result": "pass",
+  "landing": "20261024T184648-L-3092898",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B9",
+  "result": "pass",
+  "landing": "20261024T184648-L-3092898",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

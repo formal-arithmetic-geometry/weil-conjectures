@@ -1,0 +1,343 @@
+{
+ "id": "lem-sfb-adapted-smooth-ambient",
+ "kind": "statement",
+ "title": "Smooth ambient coordinates adapted to a free cotangent restriction",
+ "statement": "Let $R$ be a discrete valuation ring with uniformizer $\\pi$ and residue field $k$ [def-sc-discrete-valuation-ring]. Let $X$ be an $R$-scheme locally of finite type [def-pc-scheme, def-weil-finite-type-morphism], and $Y\\hookrightarrow X_k$ a closed subscheme [def-weil-closed-immersion, def-pc-fibre-product]. Let $U\\subseteq Y$ be open and smooth over $k$ [def-sbc-smooth-morphisms]. Suppose the restriction $\\Omega^1_{X/R}|_U$ [def-sc-relative-differential-sheaf, def-pc-module-pullback] is locally isomorphic to a finite direct sum of structure sheaves. For every $u\\in U$ there is an affine open $V=\\operatorname{Spec}D\\subseteq X$ containing $u$ with $W=Y\\cap V\\subseteq U$, a smooth affine finite-type $R$-scheme $Z=\\operatorname{Spec}C$, a closed $R$-immersion $V\\hookrightarrow Z$, and functions $y_1,\\ldots,y_r,z_1,\\ldots,z_n\\in C$ such that, writing $H=\\ker(C\\to D)$ and $J=\\ker(C\\to\\mathcal O_W(W))$, one has $H\\subseteq J=(\\pi,z_1,\\ldots,z_n)$. The coordinate morphism $Z\\to\\mathbf A^{r+n}_R$ given by these functions is etale [def-weil-etale-morphism, def-sbc-affine-space]. The module $\\Omega_{C/R}$ [def-weil-pbc-kahler-differentials] is free with basis $dy_1,\\ldots,dy_r,dz_1,\\ldots,dz_n$, and the canonical map\n$$\\Omega_{C/R}\\otimes_C C/J\\longrightarrow\\Omega_{D/R}\\otimes_D C/J$$\nis an isomorphism. Moreover $C$ is Noetherian (every ideal is finitely generated). No generic smoothness, flatness of $X$, density of sections, or group structure is assumed.",
+ "source": {
+  "document": "literature/bosch-lutkebohmert-raynaud-neron-models.pdf",
+  "place": "BLR 3.3 Proposition 5 proof, first two paragraphs, printed pp.68-69 (PDF pages 74-75): construction of the adapted smooth ambient scheme before the claim H contained in J squared. Local PDF WANTED; primary-source scan read at https://www.math.stonybrook.edu/~kamenova/homepage_files/Bosch_Raynaud_Neron_Model_tc.pdf."
+ },
+ "stmt_deps": [
+  "def-sc-discrete-valuation-ring",
+  "def-pc-scheme",
+  "def-weil-finite-type-morphism",
+  "def-weil-closed-immersion",
+  "def-pc-fibre-product",
+  "def-sbc-smooth-morphisms",
+  "def-sc-relative-differential-sheaf",
+  "def-pc-module-pullback",
+  "def-weil-etale-morphism",
+  "def-sbc-affine-space",
+  "def-weil-pbc-kahler-differentials"
+ ],
+ "proof": [
+  {
+   "text": "Fix $u\\in U$. Since $Y$ is closed in $X$ and $Y\\setminus U$ is closed in $Y$, choose an affine finite-type neighbourhood $V_0=\\operatorname{Spec}D$ of $u$ disjoint from $Y\\setminus U$. Shrink it further so that, with $W_0=Y\\cap V_0=\\operatorname{Spec}E$, $\\Omega_{D/R}\\otimes_DE$ is free of constant rank $q$. This is exactly the assumed local freeness, interpreted by [def-sc-relative-differential-sheaf]. Write $E=D/I$; $\\pi\\in I$ because $W_0$ lies in the special fibre. Choose finitely many algebra generators of $D$ and the resulting surjection $P=R[T_1,\\ldots,T_N]\\twoheadrightarrow D$, with kernel $K$. Its spectrum is the initial closed embedding. Subsequent shrinking of an affine scheme will always be to a principal open containing $u$; the inverse image in $V_0$ is then a principal affine open as well.",
+   "uses": [
+    "def-weil-finite-type-morphism",
+    "def-sc-relative-differential-sheaf",
+    "def-weil-closed-immersion"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/bosch-lutkebohmert-raynaud-neron-models.pdf",
+    "place": "BLR 3.3 Proposition 5 proof, printed pp.68-69 (PDF pp.74-75), first two construction paragraphs; online primary scan https://www.math.stonybrook.edu/~kamenova/homepage_files/Bosch_Raynaud_Neron_Model_tc.pdf; local PDF WANTED."
+   }
+  },
+  {
+   "text": "Apply [lem-weil-pbc-jacobi-zariski-differential-maps] to $P\\twoheadrightarrow D$ and tensor the resulting right exact sequence with $\\kappa(u)$ using [lem-weil-pbc-tensor-right-exact]. By [lem-weil-pbc-polynomial-ring-kahler-basis], its middle term is $\\kappa(u)^N$ and its last term has dimension $q$. Therefore the vectors $dh$ for $h\\in K$ span a kernel of dimension $c=N-q$. Select $h_1,\\ldots,h_c\\in K$ whose differential vectors are a basis of this kernel. Select $c$ rows giving a nonzero square minor, and reorder the variables so they are the first $c$. Let $\\Delta=\\det(\\partial h_j/\\partial T_i)_{1\\leq i,j\\leq c}$. Then $\\Delta(u)\\ne0$. For $c=0$ use the empty list and $\\Delta=1$.",
+   "uses": [
+    "lem-weil-pbc-jacobi-zariski-differential-maps",
+    "lem-weil-pbc-tensor-right-exact",
+    "lem-weil-pbc-polynomial-ring-kahler-basis"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tags 00RU (lemma-differential-seq), 00DF (lemma-tensor-product-exact), 00RX (lemma-differentials-polynomial-ring), 00RT (lemma-differentials-localize), 00T7 (lemma-standard-smooth)."
+   }
+  },
+  {
+   "text": "Set $B=P/(h_1,\\ldots,h_c)$ and $C_0=B[1/\\Delta]$. Replace $D$ by $D[1/\\Delta]$ and $E$ by its corresponding localization. Since every $h_j$ belongs to $K$, there is still a surjection $C_0\\twoheadrightarrow D$. The presentation $C_0=R[T_1,\\ldots,T_N,t]/(h_1,\\ldots,h_c,t\\Delta-1)$ is standard smooth: use the pivot variables $T_1,\\ldots,T_c,t$. Its determinant is $\\Delta^2$, since the upper-right block is zero and the last diagonal entry is $\\Delta$. Thus [lem-weil-pbc-standard-smooth-is-smooth] and [lem-weil-pbc-smooth-ring-map-iff-smooth-affine] show that $\\operatorname{Spec}C_0$ is smooth over $R$. By [lem-weil-pbc-standard-smooth-kahler-basis], $\\Omega_{C_0/R}$ is free on the remaining $q=N-c$ variable differentials.",
+   "uses": [
+    "def-weil-pbc-standard-smooth-algebra",
+    "lem-weil-pbc-standard-smooth-is-smooth",
+    "lem-weil-pbc-smooth-ring-map-iff-smooth-affine",
+    "lem-weil-pbc-standard-smooth-kahler-basis"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tags 00RU (lemma-differential-seq), 00DF (lemma-tensor-product-exact), 00RX (lemma-differentials-polynomial-ring), 00RT (lemma-differentials-localize), 00T7 (lemma-standard-smooth)."
+   }
+  },
+  {
+   "text": "The canonical map $\\Omega_{C_0/R}\\otimes_{C_0}E\\to\\Omega_{D/R}\\otimes_DE$ is surjective by [lem-weil-pbc-jacobi-zariski-differential-maps] and [lem-weil-pbc-tensor-right-exact]. Both modules are free of rank $q$. Choose bases. At $u$ its matrix is a surjective square matrix over $\\kappa(u)$, so its determinant is nonzero. Invert a lift of that determinant from $E$ to $C_0$. The adjugate formula gives an inverse on all of the resulting $W_0$. Rename the localized rings $C_0,D,E$. Their differential modules have the claimed localizations by [lem-weil-pbc-kahler-differentials-localization]. In particular the canonical restricted differential map is now an isomorphism, not merely an isomorphism on one residue fibre.",
+   "uses": [
+    "lem-weil-pbc-jacobi-zariski-differential-maps",
+    "lem-weil-pbc-tensor-right-exact",
+    "lem-weil-pbc-kahler-differentials-localization"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tags 00RU (lemma-differential-seq), 00DF (lemma-tensor-product-exact), 00RX (lemma-differentials-polynomial-ring), 00RT (lemma-differentials-localize), 00T7 (lemma-standard-smooth)."
+   }
+  },
+  {
+   "text": "Every principal localization of our standard smooth presentation is again standard smooth: to invert an element represented by $g$, append a variable $s$ and the equation $sg-1$, and append $s$ to the pivot variables. The new determinant is the old determinant times $g$, a unit. Thus all the preceding principal shrinkings preserve standard smoothness. By [lem-weil-pbc-standard-smooth-base-change] the special fibre $Z_{0,k}=\\operatorname{Spec}(C_0/\\pi C_0)$ is standard smooth over $k$, and [lem-weil-pbc-standard-smooth-is-smooth] and [lem-weil-pbc-smooth-ring-map-iff-smooth-affine] make it smooth over $k$. The closed subscheme $W_0$ is smooth over $k$ by the hypothesis $W_0\\subset U$.",
+   "uses": [
+    "def-weil-pbc-standard-smooth-algebra",
+    "lem-weil-pbc-standard-smooth-base-change",
+    "lem-weil-pbc-standard-smooth-is-smooth",
+    "lem-weil-pbc-smooth-ring-map-iff-smooth-affine"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tags 00RU (lemma-differential-seq), 00DF (lemma-tensor-product-exact), 00RX (lemma-differentials-polynomial-ring), 00RT (lemma-differentials-localize), 00T7 (lemma-standard-smooth)."
+   }
+  },
+  {
+   "text": "Apply [lem-pur-smooth-pair-local-coordinates] to $W_0\\hookrightarrow Z_{0,k}$ over $\\operatorname{Spec}k$. It gives, near $u$, an etale chart with coordinate functions $\\bar y_1,\\ldots,\\bar y_r,\\bar z_1,\\ldots,\\bar z_n$, whose last coordinates cut out $W_0$ scheme-theoretically. Choose a principal affine neighbourhood of $u$ contained in the chart, and lift its defining denominator to $C_0$. Localize $C_0,D,E$ accordingly. The chart functions now belong to $C_0/\\pi C_0$. Lift them to functions $y_i,z_j\\in C_0$. If $J_0=\\ker(C_0\\to E)$, the coordinate-subspace assertion gives $J_0/\\pi C_0=(\\bar z_1,\\ldots,\\bar z_n)$, so $J_0=(\\pi,z_1,\\ldots,z_n)$. The chosen $z_j$ belong to $J_0$ since their images in $E$ are zero.",
+   "uses": [
+    "lem-pur-smooth-pair-local-coordinates"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 0FUE (lemma-etale-local-structure), applied over k to the closed smooth pair; affine restriction and lifting modulo pi."
+   }
+  },
+  {
+   "text": "By [lem-sfb-etale-localization-relative-differentials], applied to this etale chart and the identity of $\\operatorname{Spec}k$, and [lem-weil-pbc-polynomial-ring-kahler-basis], the differentials $d\\bar y_i,d\\bar z_j$ are a basis of $\\Omega_{(C_0/\\pi C_0)/k}$. By [lem-weil-pbc-kahler-differentials-base-change], this module is $\\Omega_{C_0/R}\\otimes_{C_0}(C_0/\\pi C_0)$ with exactly these lifted differential vectors. Since $\\Omega_{C_0/R}$ is free of rank $q$, reducing at $u$ shows $r+n=q$. The matrix of $dy_i,dz_j$ in its existing basis has determinant nonzero at $u$. Invert this determinant. Its adjugate supplies an inverse matrix, so $dy_i,dz_j$ form a basis of $\\Omega_{C_0/R}$ on the resulting affine neighbourhood.",
+   "uses": [
+    "lem-sfb-etale-localization-relative-differentials",
+    "lem-weil-pbc-polynomial-ring-kahler-basis",
+    "lem-weil-pbc-kahler-differentials-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex; literature/stacks-project/algebra.tex",
+    "place": "Tag 04BX (lemma-sheaf-differentials-etale-localization), Tags 00RX (lemma-differentials-polynomial-ring) and 00RV (lemma-differentials-base-change); determinant lifting as in BLR 3.3 Proposition 5."
+   }
+  },
+  {
+   "text": "Consider $g=(y_i,z_j):\\operatorname{Spec}C_0\\to\\mathbf A^{r+n}_R$. Its source is smooth by the standard smooth construction and its target is smooth by [sbc-lem-affine-space-smooth]. By [lem-weil-pbc-polynomial-ring-kahler-basis], the relative differential map for $g$ sends the coordinate basis to the basis $dy_i,dz_j$. Therefore [lem-sfb-smooth-morphism-cotangent-isomorphism-etale] supplies an open neighbourhood of $u$ on which $g$ is etale. Choose a principal affine neighbourhood inside it and denote its ring by $C$. Its inverse image in $\\operatorname{Spec}D$ is the final $V$, with ring again denoted $D$. Restriction preserves the coordinate differential basis and the isomorphism along $W$ by [lem-weil-pbc-kahler-differentials-localization].",
+   "uses": [
+    "sbc-lem-affine-space-smooth",
+    "lem-weil-pbc-polynomial-ring-kahler-basis",
+    "lem-sfb-smooth-morphism-cotangent-isomorphism-etale",
+    "lem-weil-pbc-kahler-differentials-localization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bosch-lutkebohmert-raynaud-neron-models.pdf",
+    "place": "BLR 3.3 Proposition 5 proof, printed pp.68-69 (PDF pp.74-75), first two construction paragraphs; online primary scan https://www.math.stonybrook.edu/~kamenova/homepage_files/Bosch_Raynaud_Neron_Model_tc.pdf; local PDF WANTED."
+   }
+  },
+  {
+   "text": "Let $E=\\mathcal O_W(W)$ for the final $W=Y\\cap V$. The final surjections $C\\twoheadrightarrow D\\twoheadrightarrow E$ give $H=\\ker(C\\to D)\\subseteq J=\\ker(C\\to E)$. The equality $J=(\\pi,z_1,\\ldots,z_n)$ persists under each localization: an element maps to zero after localization precisely when a power of the inverted element times a numerator maps to zero before localization. The isomorphism of restricted differential modules established in step 4 and preserved in steps 6--8 is the canonical map in the statement, because on every generator it is $dc\\otimes e\\mapsto d(c|_D)\\otimes e$. All localizations were made at elements nonzero at $u$, so $u\\in V$ and $W\\subset U$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/bosch-lutkebohmert-raynaud-neron-models.pdf",
+    "place": "BLR 3.3 Proposition 5 proof, printed pp.68-69 (PDF pp.74-75), first two construction paragraphs; online primary scan https://www.math.stonybrook.edu/~kamenova/homepage_files/Bosch_Raynaud_Neron_Model_tc.pdf; local PDF WANTED."
+   }
+  },
+  {
+   "text": "The ring $R$ is Noetherian: by [def-sc-discrete-valuation-ring] every ideal is principal. The ring $C$ is finite type over $R$, since it was obtained from a quotient of a polynomial ring in finitely many variables by finitely many principal localizations (each inverse is one additional algebra generator). Hence [lem-weil-pbc-finite-type-algebra-noetherian] makes $C$ Noetherian. The construction worked at the arbitrary chosen $u$ and used no flatness of $X$, smoothness of its generic fibre, density condition, or group law.",
+   "uses": [
+    "def-sc-discrete-valuation-ring",
+    "lem-weil-pbc-finite-type-algebra-noetherian"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00FN (lemma-Noetherian-permanence), and Tag 00PD (lemma-characterize-dvr). Current source variant of BLR 3.3 Proposition 5 before the density argument."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-finite-type-morphism",
+  "def-sc-relative-differential-sheaf",
+  "def-weil-closed-immersion",
+  "lem-weil-pbc-jacobi-zariski-differential-maps",
+  "lem-weil-pbc-tensor-right-exact",
+  "lem-weil-pbc-polynomial-ring-kahler-basis",
+  "def-weil-pbc-standard-smooth-algebra",
+  "lem-weil-pbc-standard-smooth-is-smooth",
+  "lem-weil-pbc-smooth-ring-map-iff-smooth-affine",
+  "lem-weil-pbc-standard-smooth-kahler-basis",
+  "lem-weil-pbc-kahler-differentials-localization",
+  "lem-weil-pbc-standard-smooth-base-change",
+  "lem-pur-smooth-pair-local-coordinates",
+  "lem-sfb-etale-localization-relative-differentials",
+  "lem-weil-pbc-kahler-differentials-base-change",
+  "sbc-lem-affine-space-smooth",
+  "lem-sfb-smooth-morphism-cotangent-isomorphism-etale",
+  "def-sc-discrete-valuation-ring",
+  "lem-weil-pbc-finite-type-algebra-noetherian"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/bosch-lutkebohmert-raynaud-neron-models.pdf",
+  "place": "BLR 3.3 Proposition 5 proof, printed pp.68-69 (PDF pp.74-75), first two construction paragraphs; online primary scan https://www.math.stonybrook.edu/~kamenova/homepage_files/Bosch_Raynaud_Neron_Model_tc.pdf; local PDF WANTED. Agent-written expansion with local Stacks sources because the BLR PDF is not archived locally."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "cotangent.*embedding|embedding.*cotangent|dilatation|smith.*length|length.*minor",
+   "results": "{\"t\": \"2026-10-24T08:16:03Z\", \"tool\": \"grep\", \"query\": \"cotangent.*embedding|embedding.*cotangent|dilatation|smith.*length|length.*minor\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/Extension/Cotangent/Basic.lean\"], \"digest\": \"cf8254d99c37ca42\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected hits; the returned general smoothness, cotangent, Smith-form and field-finrank results do not give this statement or a one-line specialization."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Local embedding of a scheme in smooth ambient scheme with minimal cotangent dimension",
+   "results": "{\"t\": \"2026-10-24T08:16:04Z\", \"tool\": \"leansearch\", \"query\": \"Local embedding of a scheme in smooth ambient scheme with minimal cotangent dimension\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsImmersion\", \"AlgebraicGeometry.IsSmooth\", \"AlgebraicGeometry.IsSmoothOfRelativeDimension\", \"AlgebraicGeometry.instLocallyOfFinitePresentationOfIsSmooth\", \"AlgebraicGeometry.IsImmersion.mk\", \"AlgebraicGeometry.instIsSmoothOfIsOpenImmersion\", \"AlgebraicGeometry.IsSmooth.recOn\", \"Manifold.IsSmoothEmbedding.mk\"], \"digest\": \"26ebf1c09f0a22e9\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected hits; the returned general smoothness, cotangent, Smith-form and field-finrank results do not give this statement or a one-line specialization."
+  },
+  {
+   "tool": "loogle",
+   "query": "KaehlerDifferential, Algebra.Smooth",
+   "results": "{\"t\": \"2026-10-24T08:16:04Z\", \"tool\": \"loogle\", \"query\": \"KaehlerDifferential, Algebra.Smooth\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected hits; the returned general smoothness, cotangent, Smith-form and field-finrank results do not give this statement or a one-line specialization."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A closed subscheme with free restricted differentials along a smooth special fibre centre embeds locally in a smooth scheme inducing an isomorphism of restricted differentials",
+   "results": "{\"t\": \"2026-10-24T08:16:04Z\", \"tool\": \"leanfinder\", \"query\": \"A closed subscheme with free restricted differentials along a smooth special fibre centre embeds locally in a smooth scheme inducing an isomorphism of restricted differentials\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsSmooth.exists_isStandardSmooth\", \"AlgebraicGeometry.instHasRingHomPropertyIsSmoothLocallyIsStandardSmooth\", \"AlgebraicGeometry.IsSmoothOfRelativeDimension.exists_isStandardSmoothOfRelativeDimension\", \"AlgebraicGeometry.IsSmooth\", \"AlgebraicGeometry.FormallyUnramified\", \"AlgebraicGeometry.IsEtale\", \"AlgebraicGeometry.IsSmoothOfRelativeDimension\", \"AlgebraicGeometry.instHasRingHomPropertyIsSmoothOfRelativeDimensionLocallyIsStandardSmoothOfRelativeDimension\"], \"digest\": \"11f19e24aa17461e\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected hits; the returned general smoothness, cotangent, Smith-form and field-finrank results do not give this statement or a one-line specialization."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Adapted smooth ambient immersion of minimal differential rank around a smooth closed subscheme",
+   "results": "{\"t\": \"2026-10-24T08:16:08Z\", \"tool\": \"leanfinder\", \"query\": \"Adapted smooth ambient immersion of minimal differential rank around a smooth closed subscheme\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Manifold.IsImmersionOfComplement\", \"Manifold.IsImmersionAtOfComplement\", \"Manifold.IsImmersionOfComplement.isImmersionAt\", \"Manifold.IsImmersionAtOfComplement.small\", \"AlgebraicGeometry.Scheme.IdealSheafData.instIsPreimmersionSubschemeι\", \"Manifold.IsImmersionAtOfComplement.isImmersionAt\", \"Manifold.IsImmersionOfComplement.isImmersion\", \"Manifold.IsImmersionAt.complement\"], \"digest\": \"1446280afbafbfa0\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected hits; the returned general smoothness, cotangent, Smith-form and field-finrank results do not give this statement or a one-line specialization."
+  },
+  {
+   "tool": "grep",
+   "query": "ambient|cotangent.*embed|embed.*cotangent",
+   "results": "{\"t\": \"2026-10-24T08:56:16Z\", \"tool\": \"grep\", \"query\": \"ambient|cotangent.*embed|embed.*cotangent\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: generic smooth/etale definitions and local standard smooth charts do not construct a minimal smooth ambient embedding with the prescribed centre."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Closed immersion into smooth ambient scheme inducing an isomorphism on restricted differentials",
+   "results": "{\"t\": \"2026-10-24T08:56:16Z\", \"tool\": \"leansearch\", \"query\": \"Closed immersion into smooth ambient scheme inducing an isomorphism on restricted differentials\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsClosedImmersion.instIsIsoSchemeToImage\", \"AlgebraicGeometry.IsClosedImmersion\", \"AlgebraicGeometry.IsClosedImmersion.isIso_of_injective_of_isAffine\", \"AlgebraicGeometry.IsImmersion.instOfIsClosedImmersion\", \"AlgebraicGeometry.IsClosedImmersion.instOfIsIsoScheme\", \"AlgebraicGeometry.IsClosedImmersion.instIsAffineHom\", \"AlgebraicGeometry.IsFinite.instOfIsClosedImmersion\", \"AlgebraicGeometry.IsClosedImmersion.instIsPreimmersion\"], \"digest\": \"d59ffd89d25771f9\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: generic smooth/etale definitions and local standard smooth charts do not construct a minimal smooth ambient embedding with the prescribed centre."
+  },
+  {
+   "tool": "loogle",
+   "query": "KaehlerDifferential, Algebra.Smooth",
+   "results": "{\"t\": \"2026-10-24T08:56:17Z\", \"tool\": \"loogle\", \"query\": \"KaehlerDifferential, Algebra.Smooth\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: generic smooth/etale definitions and local standard smooth charts do not construct a minimal smooth ambient embedding with the prescribed centre."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finite type algebra over a discrete valuation ring locally embeds in a smooth algebra inducing an isomorphism on differentials along a smooth closed special fibre subscheme",
+   "results": "{\"t\": \"2026-10-24T08:56:17Z\", \"tool\": \"leanfinder\", \"query\": \"Finite type algebra over a discrete valuation ring locally embeds in a smooth algebra inducing an isomorphism on differentials along a smooth closed special fibre subscheme\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.instHasRingHomPropertyIsSmoothLocallyIsStandardSmooth\", \"RingHom.Smooth.locally_isStandardSmooth\", \"Algebra.IsSmoothAt\", \"AlgebraicGeometry.instHasRingHomPropertyIsSmoothOfRelativeDimensionLocallyIsStandardSmoothOfRelativeDimension\", \"Algebra.Etale\", \"Algebra.IsEtaleAt\", \"Algebra.Smooth\", \"Algebra.IsSmoothAt.exists_notMem_isStandardSmooth\"], \"digest\": \"b2f9d4d373696387\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: generic smooth/etale definitions and local standard smooth charts do not construct a minimal smooth ambient embedding with the prescribed centre."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A finite presentation admits a minimal smooth ambient embedding along a smooth centre when its restricted differential module is locally free",
+   "results": "{\"t\": \"2026-10-24T08:58:46Z\", \"tool\": \"leanfinder\", \"query\": \"A finite presentation admits a minimal smooth ambient embedding along a smooth centre when its restricted differential module is locally free\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.Smooth.finitePresentation\", \"Algebra.IsStandardSmooth.finitePresentation\", \"Algebra.IsStandardSmooth.out\", \"Manifold.isSmoothEmbedding_iff\", \"Algebra.smooth_iff\", \"Manifold.IsImmersionAtOfComplement.small\", \"Manifold.IsImmersionAtOfComplement.property\", \"Manifold.IsSmoothEmbedding.isImmersion\"], \"digest\": \"badb8d780798d5ae\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: generic smooth/etale definitions and local standard smooth charts do not construct a minimal smooth ambient embedding with the prescribed centre."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-permissible-dilatation-section-estimate",
+  "date": "2026-10-24",
+  "group": "Q152"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "BLR 3.3 Proposition 5 proof, first two paragraphs, printed pp.68-69 (PDF pages 74-75): construction of the adapted smooth ambient scheme before the claim H contained in J squared.",
+   "via": [
+    "lem-sfb-permissible-dilatation-section-estimate",
+    "lem-sfb-canonical-group-dilatation-defect-drop",
+    "lem-sfb-lft-closed-subgroup-group-smoothening",
+    "lem-sfb-finite-flat-neron-lft-descent",
+    "lem-sfb-semiabelian-neron-lft-existence",
+    "lem-sfb-trait-semiabelian-hom-extension",
+    "lem-sfb-semiabelian-generic-graph-proper",
+    "lem-sfb-normal-semiabelian-hom-extension",
+    "lem-sfb-symmetric-line-power-prolongation",
+    "lem-sfb-normal-symmetric-cubical-extension",
+    "lem-sfb-symmetric-ample-power-extension",
+    "lem-sfb-regular-group-generic-ampleness",
+    "lem-sfb-stable-picard-theta-ampleness",
+    "lem-sfb-stable-relative-picard-kummer",
+    "lem-sfb-stable-level-versal-branch-freeness",
+    "lem-sfb-stable-abelian-level-normalization",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-adapted-smooth-ambient",
+  "worker": "stage1",
+  "summary": "Expanded the polynomial Jacobian construction, restricted differential determinant, and smooth-special-fibre coordinate lifting. Reused existing DAG tools and created no nodes. Preserved every hypothesis and clause; verified that no flatness or density is used.",
+  "blueprint": "Inherited BLR smooth-ambient construction beneath lem-sfb-permissible-dilatation-section-estimate, first two proof paragraphs before H contained in J squared. The ancestor tool reports null: this old created chain ends at a node without an imported blueprint id. Latest sk-thm-sf-ctf-stability source was read; no route replaced.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-smooth-ring-map-iff-smooth-affine",
+    "why": "Generic affine ring/scheme smoothness comparison used for the explicit Jacobian presentation; the unit has no replacement."
+   },
+   {
+    "node": "lem-pur-smooth-pair-local-coordinates",
+    "why": "Generic smooth closed-pair coordinate theorem applied over the residue field; it supplies a tool in the inherited BLR branch."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-smooth-ring-map-iff-smooth-affine",
+  "lem-pur-smooth-pair-local-coordinates"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q63-b48872baf",
+  "group": "Q63",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q63-b48872baf (reviewer sub-agent of L); spot-checked: I read the item in full: 10 steps, no new nodes. I read every cited node's statement and the BLR 3.3 Prop 5 construction (local PDF is WANTED). The statement matches what the parent's step 1 (lem-sfb-permissible-dilatation-section-estimate) uses: Spec D ⊂ Spec C, W ⊂ U, D=C/H, J=(π,z), N=r+n and the differential basis. I tested the statement on X=Spec k, on X=Spec R[x]/(x²) with Y={x=0}, and on a smooth X; it holds in each case. Steps 2-4: Jacobi–Zariski, right exactness and the polynomial basis give c=N−q and a Jacobian minor. The presentation R[T,t]/(h, tΔ−1) is standard smooth with det Δ², which I checked. The rank-q square-determinant argument makes the restricted map an isomorphism on all of W_0. Step 5: a principal localization appends sg−1 and stays standard smooth. Step 6: smooth-pair coordinates are applied over k, where both schemes are smooth; lifting mod π gives J=(π,z). Step 7: étale localization of differentials plus base change gives r+n=q and a basis over C_0 after inverting the determinant. Step 8: the cotangent-iso ⇒ étale criterion holds as stated. Steps 9-10 (localization of kernels, Noetherian) are elementary. No flatness is used; every shrinking is principal. Duplicate search over the snapshot DAG found no equivalent node. I accept both tool_uses. Batch-5 flag: lem-pur-smooth-pair-local-coordinates reaches lem-trf-valuation-general-mod-injective, which is Stacks 046Y, generic commutative algebra. Neither the trace-formula nor the Poincaré-duality assumption gives it, and it is not a step of either. The same holds for the smooth-pair coordinate theorem itself, so citing it is allowed. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.AdaptedSmoothAmbient",
+  "declaration": "AlgebraicGeometry.Scheme.Hom.exists_adapted_smooth_ambient",
+  "file": "lean/Sheaf/AlgebraicGeometry/AdaptedSmoothAmbient.lean",
+  "statement": "theorem Scheme.Hom.exists_adapted_smooth_ambient (R : CommRingCat.{u}) [IsDomain R] [IsDiscreteValuationRing R] (π : R) (hπ : Irreducible π) {X Y : Scheme.{u}} (p : X ⟶ Spec R) [LocallyOfFiniteType p] (i : Y ⟶ X) [IsClosedImmersion i] (q : Y ⟶ Spec (.of (IsLocalRing.ResidueField R))) (hq : i ≫ p = q ≫ Spec.map (CommRingCat.ofHom (IsLocalRing.residue R))) (U : Y.Opens) [Smooth (U.ι ≫ q)] (hfree : ((Scheme.Modules.tensorPullback (U.ι ≫ i)).obj p.relativeDifferentials).IsFiniteLocallyFree) (u₀ : U.toScheme) : ∃ (V : X.Opens) (C D E : CommRingCat.{u}) (a : R ⟶ C) (f : C ⟶ D) (g : D ⟶ E) (eD : V.toScheme ≅ Spec D) (eE : (i ⁻¹ᵁ V).toScheme ≅ Spec E) (r n : ℕ) (y : Fin r → C) (z : Fin n → C) (b : Module.Basis (Fin (r + n)) C (CommRingCat.KaehlerDifferential a)) (α : (ModuleCat.extendScalars (f ≫ g).hom).obj (CommRingCat.KaehlerDifferential a) ≅ (ModuleCat.extendScalars g.hom).obj (CommRingCat.KaehlerDifferential (a ≫ f))), i (U.ι u₀) ∈ V ∧ (i ⁻¹ᵁ V) ≤ U ∧ eD.hom ≫ Spec.map (a ≫ f) = V.ι ≫ p ∧ eE.hom ≫ Spec.map g = (i ∣_ V) ≫ eD.hom ∧ Function.Surjective f ∧ Function.Surjective g ∧ Smooth (Spec.map a) ∧ LocallyOfFiniteType (Spec.map a) ∧ QuasiCompact (Spec.map a) ∧ RingHom.ker f.hom ≤ RingHom.ker (f ≫ g).hom ∧ RingHom.ker (f ≫ g).hom = Ideal.span ({a π} ∪ Set.range z) ∧ Etale (Spec.map (CommRingCat.ofHom (MvPolynomial.eval₂Hom a.hom (fun j : ULift.{u} (Fin (r + n)) ↦ Fin.addCases y z j.down))) ≫ (AffineSpace.SpecIso (ULift.{u} (Fin (r + n))) R).inv) ∧ (∀ j : Fin (r + n), b j = CommRingCat.KaehlerDifferential.d (f := a) (Fin.addCases y z j)) ∧ IsNoetherianRing C ∧ ∀ (c : C) (e : E), α.hom (e ⊗ₜ[C, (f ≫ g).hom] CommRingCat.KaehlerDifferential.d (f := a) c) = e ⊗ₜ[D, g.hom] CommRingCat.KaehlerDifferential.d (f := a ≫ f) (f c)",
+  "branch": "newtargets-dag",
+  "by": "O3",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-51d35b20e",
+  "group": "O3",
+  "result": "pass",
+  "note": "Read node, all stmt_dep records/decls (IsDiscreteValuationRing, LocallyOfFiniteType, IsClosedImmersion, Smooth, Etale, AffineSpace/SpecIso, relativeDifferentials, tensorPullback, KaehlerDifferential, IsFiniteLocallyFree) and the module. Every clause matches: DVR+Irreducible uniformizer; Y→X_k as closed immersion i with factorization hq; Smooth(U.ι≫q); finite-locally-free tensorPullback of Ω_{X/R} to U (varying rank); V∋u affine with eD; W=i⁻¹V≤U with eE pinned by eE≫Spec g=(i∣_V)≫eD; Z=Spec C smooth/LFT/QC with closed R-immersion via surjective f; ker f≤ker(f≫g)=span({aπ}∪range z); étale eval₂ map to 𝔸 via SpecIso.inv; basis b j=d(addCases y z j); α E-linear iso pinned on e⊗dc (canonical map); IsNoetherianRing C. lean.statement verbatim; node statement unchanged from live; docstring has source, blueprint id and 10 steps; sorry only; universes u, no autoImplicit. Edge cases: empty U, r=n=0, non-flat X fine. Advisory: IsFiniteLocallyFree's owner def-sc-finite-locally-free-sheaf not in stmt_deps (notion spelled inline; S2 cannot add). Parallel Q81 delivery of same item not landed: first lander owns. No compile (no file changed); worker's compile clean."
+ }
+}

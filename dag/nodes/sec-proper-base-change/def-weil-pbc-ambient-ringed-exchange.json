@@ -52,7 +52,18 @@
  "uses_not_cited": [
   "def-weil-pbc-proetale-operations"
  ],
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
  "split_report": {
   "date": "2026-10-09",
   "item": "def-weil-pbc-ambient-ringed-exchange",
@@ -71,23 +82,25 @@
   "declaration": "AlgebraicGeometry.ProEtale.CondensedRing.condensedAmbientExchange",
   "declarations": [
    "AlgebraicGeometry.ProEtale.CondensedRing.condensedAmbientExchange",
-   "AlgebraicGeometry.ProEtale.CondensedRing.condensedAmbientPullbackComparison"
+   "AlgebraicGeometry.ProEtale.CondensedRing.condensedAmbientPullbackComparison",
+   "AlgebraicGeometry.Scheme.proEtaleAmbientRingedPullbackComparison",
+   "AlgebraicGeometry.Scheme.proEtaleAmbientRingedExchange"
   ],
-  "file": "lean/Sheaf/Paper/CondensedAmbientExchange.lean",
   "statement": "def condensedAmbientExchange (sq : ChosenCartesianSquare g' f' f g) : (lowerStar Λ f).rightDerivedFunctor ⋙ (upperStar Λ g).leftDerivedFunctor ⟶ (upperStar Λ g').leftDerivedFunctor ⋙ (lowerStar Λ f').rightDerivedFunctor",
   "branch": "newtargets-dag",
   "by": "Q97",
-  "date": "2026-10-18",
+  "date": "2026-10-22",
   "existing": false,
-  "note": "Section 1(B): the recorded ring-sheaf exchange and its completed specialization act on SheafOfModules, whereas the stated condensed coefficient derived categories are categories of internal module objects. The new module publicly retains both existing general ring-sheaf exchange interfaces and adds their ordinary condensed-module-object form, using exactly the published derived pullback composition comparisons and derived adjunctions of the full module composites. It supplies real canonical data, with no arbitrary transformation, completeness restriction, or extra hypothesis. The two routes of coefficients agree because all are pulled back from the same condensed ring on the point."
+  "note": "Section 1(B): the recorded ring-sheaf exchange and its completed specialization act on SheafOfModules, whereas the stated condensed coefficient derived categories are categories of internal module objects. The new module publicly retains both existing general ring-sheaf exchange interfaces and adds their ordinary condensed-module-object form, using exactly the published derived pullback composition comparisons and derived adjunctions of the full module composites. It supplies real canonical data, with no arbitrary transformation, completeness restriction, or extra hypothesis. The two routes of coefficients agree because all are pulled back from the same condensed ring on the point. Section 1(B), Q97: the recorded list exposed only the condensed specialization although this dependency states arbitrary ring sheaves. Add the two already-publicly-exported general ring-sheaf declarations from ProEtaleAmbientRingedExchange, via PbcActualRingedExchange. Retain the primary declaration and both condensed declarations, so existing consumers remain supported. Retain existing:false and the owned CondensedAmbientExchange.lean file; add a direct public import of ProEtaleAmbientRingedExchange to expose the two general-ring declarations directly alongside the condensed definitions. No canonical map or mathematical statement is changed.",
+  "file": "lean/Sheaf/Paper/CondensedAmbientExchange.lean"
  },
  "reviewed_lean": {
-  "date": "2026-10-18",
+  "date": "2026-10-22",
   "by": "L",
-  "reviewer": "NT-stage2-cc-dd40f4584",
+  "reviewer": "NT-stage2-cc-80940312e",
   "group": "Q97",
   "result": "pass",
-  "note": "Statement matches node/blueprint verbatim clause by clause: char p>0, p≠ℓ field k; finite E⊂ℚ̄_ℓ with padicIntegersRingObj (𝒪_E, ℓ-adic); four separated finite-type k-schemes and k-morphisms; IsProper p only; g arbitrary; ChosenCartesianSquare g' p' p g oriented as node; source localizingClosure of constantModelBoundedConstructible (Dbc, not Dctf, no completeness); two landing conjuncts in Loc(Dbc(Y')) plus IsIso of every component = iso of functors on full subcategories. §1(B) repair of def-weil-pbc-ambient-ringed-exchange is sound: old SheafOfModules record unusable for module-object D(Mod_{Λ_X}); comparison = leftDerivedUpperStarComp(f',g)^{-1} ≫ eqToIso(sq.w) ≫ leftDerivedUpperStarComp(g',f), types checked = θ_□; exchange = mateEquiv over derivedUpperStarLowerStarAdjunction, giving Rf_*⋙Lg^* ⟶ Lg'^*⋙Rf'_* (unit f', θ, counit f); old module publicly re-exported; only lean fields changed. No hollow defs, theorem sorry only, docstrings with source/blueprint and 6-step proof plan, no universe restriction, real ProEt site, statement fields verbatim, no name collisions. Edge cases K=0, empty schemes, g=id, empty coproducts covered. nt_compile --json on both files exit 0 (12.4 s, 9.4 s). Observations only: PbcActualRingedExchange no longer any node's lean.file (same accepted pattern as Q30); second-reading section is an in-thread pass by the same worker."
+  "note": "Re-delivery of f1c53ce3 (RETURN H2). All corrections made: theorem stmt_deps lem-sfb-proetale-open-restriction-counit, lem-pur-proetale-inverse-image-tensor-comparison and lem-weil-pbc-ringed-square-localization replaced by new existing:true def owners def-sf-proetale-open-restriction-data (14 plain ProEtaleOpenRestriction defs; Sectionwise signature verbatim; TeX matches the bodies) and def-sf-proetale-ring-identity-comparison (ringId = conjugateIsoEquiv of lowerStarId.symm), plus def-sfb-proetale-composite-coefficients (record identical to live); used declarations are all owned by cited def nodes and the closure contains no theorem. def-weil-pbc-ambient-ringed-exchange record is a strict superset of live (2 general declarations added, existing:false and file kept); CondensedAmbientExchange.lean adds only a transitively redundant public import (harmless, advisory). Item Lean differs from f1c5 by one import swap (the dropped module was unused); signatures and verbatim statement unchanged; f1c5's clause-by-clause maths verdict holds, spot re-check done (resolution formula, open descent incl. empty cover, identity case pinned by unique existence, no universe or extra hypotheses). No FIX, so no compile; worker reports clean compiles (21.9 s / 18.0 s)."
  },
  "blueprint_update": {
   "snapshot": "main-20261015",

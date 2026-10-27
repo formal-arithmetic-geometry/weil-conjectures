@@ -1,0 +1,371 @@
+{
+ "id": "lem-pur-cartier-pair-tensor-addition",
+ "kind": "statement",
+ "title": "Tensor addition of framed Cartier pairs before applying Kummer",
+ "statement": "Let $T$ be a scheme [def-pc-scheme], let $D_1,D_2\\hookrightarrow T$ be effective Cartier divisors with ideals $\\mathcal I_1,\\mathcal I_2$ and dual line bundles $L_a=\\mathcal I_a^\\vee=\\mathcal O_T(D_a)$ [def-pc-divisor-line-bundle], and let $s_a$ be the section of $L_a$ obtained by transposing $\\mathcal I_a\\hookrightarrow\\mathcal O_T$. Put $W_a=T-|D_a|$ and $W=W_1\\cap W_2$, and let $Z\\hookrightarrow T$ be the closed subscheme with ideal $\\mathcal I_1\\mathcal I_2$ [def-weil-closed-immersion, def-weil-open-immersion]. Then $Z$ is an effective Cartier divisor with support $|D_1|\\cup|D_2|$, and multiplication of ideals induces an isomorphism of framed pairs\n$$(\\mathcal O_T(Z),s_Z)\\cong(L_1\\otimes_{\\mathcal O_T}L_2,s_1\\otimes s_2).$$\nConsequently their frame torsors with the specified sections over $W$ [lem-sc-line-bundle-torsor, def-amb-torsor-with-section] are identified by contracted product [def-sc-contracted-product-presentation]. Write $\\alpha(P,s)\\in H^1(T,W;\\mathbf G_m)$ for the Ext-normalized relative torsor class [lem-amb-relative-torsor-cohomology, def-amb-relative-etale-cohomology]. Then\n$$\\alpha(P_Z,s_Z|_W)=r_1\\alpha(P_{D_1},s_1|_{W_1})+r_2\\alpha(P_{D_2},s_2|_{W_2}),$$\nwhere $r_a$ is the enlargement-of-support map induced by the signed-cone map $(x,y)\\mapsto(x,y|_W)$. Under the relative extension realization [lem-sp-relative-torsor-extension], this is the same equality of degree-one Yoneda classes\n$$\\beta_Z=q_1^*\\beta_{D_1}+q_2^*\\beta_{D_2}\\quad\\text{in }\\operatorname{Ext}^1_T(i_{Z,*}\\mathbf Z_Z,\\mathbf G_m),$$\nwhere $q_a:i_{Z,*}\\mathbf Z_Z\\to i_{D_a,*}\\mathbf Z_{D_a}$ is the canonical restriction of supported constant sheaves. The sum is Baer addition. Each $r_a$ commutes with relative connecting homomorphisms for every short exact sequence of abelian coefficient sheaves, with the induced map on the other terms, and with coefficient maps. No smoothness, reducedness or proper-intersection assumption on the divisors is required; the local equation of $Z$ is $f_1f_2$.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 03AJ, lemma-torsors-h1; cohomology.tex Tag 0G78, remark-support-functorial. Agent-stated relative tensor/Baer refinement of blueprint main-20261015 lem-pur-divisor-class.proof.md clause (b), with product Cartier ideal in place of its incorrect two-element frame."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-divisor-line-bundle",
+  "def-weil-closed-immersion",
+  "def-weil-open-immersion",
+  "lem-sc-line-bundle-torsor",
+  "def-amb-torsor-with-section",
+  "def-sc-contracted-product-presentation",
+  "lem-amb-relative-torsor-cohomology",
+  "def-amb-relative-etale-cohomology",
+  "lem-sp-relative-torsor-extension",
+  "def-asd-ordinary-supported-kummer-boundary",
+  "def-sp-cartier-pole-boundary",
+  "lem-amb-relative-cocycle-coordinates",
+  "def-pur-yoneda-derived-ext-comparison-data"
+ ],
+ "proof": [
+  {
+   "text": "Work on a common affine refinement using exists_affineOpens_isRegularPrincipal and the existing mul_effectiveCartier theorem. The support_mul theorem and support_ker identify the support with the union, and ideal_mul gives the principal product equation. Construct the multiplication morphism globally: the tensor-bilinear universal property and local membership in the product ideal show that multiplication into O_T is killed by the product-ideal quotient, so the kernel universal property factors it through the product ideal. On the common affine refinement it sends the tensor of the two ideal generators to their product. The existing local free-generator isomorphism criterion proves that this morphism is an isomorphism. This constructs the global multiplication isomorphism without choosing incompatible local inverses.",
+   "uses": [
+    "def-nagata-effective-cartier-ideal",
+    "def-pc-divisor-line-bundle",
+    "lem-pc-sites-sheaf-tensor-bilinear-universal"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/divisors.tex",
+    "place": "Tags 01WT and 01WU, definition-sum-effective-Cartier-divisors and lemma-sum-effective-Cartier-divisors; explicit local proof"
+   }
+  },
+  {
+   "text": "Tensor the two dual evaluation isomorphisms and reorder the factors using tensor-mu to obtain an isomorphism from (I_1 tensor I_2) tensor (I_1-dual tensor I_2-dual) to O_T. Compare this with evaluation for the product ideal after the multiplication isomorphism from step 1. Tensoring by I_1 tensor I_2 is an equivalence because it is invertible; its full faithfulness lifts this comparison to the required dual isomorphism and gives exactly the stated evaluation equation. Directly unfold the transpose section through the unit-Hom equivalence to prove its evaluation identity. Tensor the two evaluation identities and use tensor right unitality. Full faithfulness of tensoring by I_1 tensor I_2 and cancellation of the evaluation isomorphism then prove the section equation. These are global identities, valid also on the empty scheme and in the presence of nilpotents.",
+   "uses": [
+    "def-pc-divisor-line-bundle",
+    "def-sc-invertible-module"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-an/lem-pur-divisor-class.proof.md",
+    "place": "Clause (b), product local equation; explicit dual-basis verification of the framed isomorphism"
+   }
+  },
+  {
+   "text": "Construct the canonical complement frames by cartierDivisorSectionPullback_isIso. Tensor the underlying ordinary-pullback frames via tensorPullbackFrames and transport by the inverse framed ideal-dual isomorphism of step 2. Monoidal pullback composition proves naturality, and the scalar formulas prove equivariance in both inputs. The antidiagonal invariance follows by adding the two translations. The general binary torsor quotient theorem gives the requested universal property by local torsor triviality and sheaf gluing. Pullback of the section identity from step 2 proves that the restricted canonical sections map to the product section.",
+   "uses": [
+    "lem-sc-line-bundle-torsor",
+    "def-amb-torsor-with-section",
+    "lem-pur-tensor-pullback-frames",
+    "lem-pur-binary-torsor-quotient-universal",
+    "lem-sp-cartier-complement-frame"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-curve-estimates/sk-prop-hilbert90/lem-sc-line-bundle-torsor.md",
+    "place": "Proof, Tensor products paragraph, with the displayed specified-section calculation"
+   }
+  },
+  {
+   "text": "Apply relativeTorsorEquiv_add_of_equivariant to the tensor pairing and the two restricted specified sections. The theorem presents both torsors in the same injective resolution and adds their global cocycles and open lifts; the signed cone cycle (iCycles(t),-b) adds exactly. For support restriction use the cocycle-coordinate map formula: take the identity on the global complex, the section restriction on the open complex, and zero correction. Its global difference is zero and its open difference vanishes by naturality of the torsor-presentation isomorphism. Negation of the resulting raw-class equality gives the Ext-normalized formula.",
+   "uses": [
+    "lem-pur-relative-torsor-pairing-addition",
+    "lem-amb-relative-cocycle-coordinates"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 03AJ, lemma-torsors-h1, injective lifting-torsor paragraph; agent-written relative addition calculation"
+   }
+  },
+  {
+   "text": "For W contained in V, restriction from the terminal object factors through V. Presheaf functoriality and uniqueness of terminal arrows give the section restriction square degreewise; extendMap preserves it. The actual shifted-cone arrow map therefore gives precisely the specified restriction. For every coefficient-complex map f, functoriality of homotopyCofiber.mapArrowHom, identity on the global term, and naturality of f on the open term give a commuting square of relative complexes. Passing to homology proves the first naturality clause. For the remaining relative class calculation of step 4, the restriction map keeps the global cocycle and restricts the chosen open lift; the actual-cone coordinates are (iCycles(t),-b), so this is exactly the signed-cone map required there.",
+   "uses": [
+    "def-amb-relative-etale-cohomology",
+    "lem-amb-relative-cocycle-coordinates",
+    "lem-amb-relative-torsor-cohomology"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 03AJ, relative lifting refinement; explicit commuting-square and signed-cone calculation"
+   }
+  },
+  {
+   "text": "Identify a CartierPoleBoundarySpec representative with the canonical framed torsor extension. Its chosen canonical section equals the supplied section by injectivity of the frame-value map. The equivariant map to the representative extension lies over the supported section one: naturality of the constant-sheaf map identifies its restrictions, and the specified section maps to zero by the pole-boundary condition. The uniqueness clause for relativeExtension therefore identifies the pole-boundary class with the extension assigned to the framed torsor.",
+   "uses": [
+    "lem-sp-relative-torsor-extension",
+    "def-sp-cartier-pole-boundary",
+    "def-asd-ordinary-supported-kummer-boundary"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 03AJ, free torsor extension construction, relative quotient by the chosen open splitting; open-closed sequence as in Etale Cohomology Tag 095L"
+   }
+  },
+  {
+   "text": "Use relativeExtensionSupportMap_existsUnique for each containment of complements, obtaining exactly the supported constant restriction maps required by the statement. The relative_extension_enlarge theorem identifies precomposition with these maps with restriction of the specified section and with the actual signed-cone restriction map.",
+   "uses": [
+    "lem-pur-relative-extension-cohomology-normalization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/homology.tex",
+    "place": "Extensions section, pullback of an extension; sites-cohomology.tex Tag 03AJ, equivariant lifting-fibre characterization"
+   }
+  },
+  {
+   "text": "Apply the injective additive relativeExtensionComparison at the product support. The normalization theorem sends each relativeExtension to minus the raw relative torsor class. Naturality under enlargement converts the pullbacks of the input extension classes to the two restrictions in step 4. That equality proves addition in derived Ext. Finally cartierPairYonedaClass is the additive inverse Yoneda-derived comparison applied to the negative class, so neg_add and map_add give the displayed equality of Yoneda classes, with its Baer group law. This reuses the existing normalization theorem instead of reconstructing Baer representatives.",
+   "uses": [
+    "lem-pur-relative-extension-cohomology-normalization",
+    "lem-coef-yoneda-derived-ext-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/homology.tex",
+    "place": "Tag 010L, lemma-baer-sum and the immediately preceding construction; sites-cohomology.tex Tag 03AJ, fibre over one"
+   }
+  },
+  {
+   "text": "The naturality statement already supplies degreewise splittings of the coefficient complex row. Apply the existing relativeShortComplex_shortExact theorem at V and W to get the two short exact relative rows. The restriction maps on their three objects form a morphism of short complexes by the commuting coefficient-complex squares proved in step 5. Apply HomologicalComplex.HomologySequence.delta-naturality to this morphism, in every integer degree, to obtain the asserted connecting-map square. No fresh horseshoe resolution, augmentation-preserving lift, or enough-injectives choice is needed for this statement.",
+   "uses": [
+    "lem-weil-pbc-complex-ses-long-exact-naturality",
+    "def-amb-relative-etale-cohomology"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/homology.tex",
+    "place": "Tag 0117, lemma-long-exact-sequence-cochain, functoriality in the short exact sequence; injective horseshoe resolution"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-nagata-effective-cartier-ideal",
+  "def-pc-divisor-line-bundle",
+  "lem-pc-sites-sheaf-tensor-bilinear-universal",
+  "def-sc-invertible-module",
+  "lem-sc-line-bundle-torsor",
+  "def-amb-torsor-with-section",
+  "lem-pur-tensor-pullback-frames",
+  "lem-pur-binary-torsor-quotient-universal",
+  "lem-sp-cartier-complement-frame",
+  "lem-pur-relative-torsor-pairing-addition",
+  "lem-amb-relative-cocycle-coordinates",
+  "def-amb-relative-etale-cohomology",
+  "lem-amb-relative-torsor-cohomology",
+  "lem-sp-relative-torsor-extension",
+  "def-sp-cartier-pole-boundary",
+  "def-asd-ordinary-supported-kummer-boundary",
+  "lem-pur-relative-extension-cohomology-normalization",
+  "lem-coef-yoneda-derived-ext-comparison",
+  "lem-weil-pbc-complex-ses-long-exact-naturality"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-an/lem-pur-divisor-class.proof.md",
+  "place": "Clause (b); G9 proved product geometry and cone naturality. G2 proves the framed quotient, relative-class addition and extension addition using generic torsor gluing, signed-cocycle addition, and the existing relative-extension normalization."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "The frame torsor of the product Cartier ideal dual with its canonical section is the contracted product of the two frame torsors and adds relative cohomology classes",
+   "results": "{\"t\": \"2026-10-22T06:13:12Z\", \"tool\": \"leansearch\", \"query\": \"The frame torsor of the product Cartier ideal dual with its canonical section is the contracted product of the two frame torsors and adds relative cohomology classes\", \"sub\": \"\", \"ok\": false, \"n_hits\": 0, \"note\": \"service unavailable: {\\\"error\\\":\\\"Rate limit exceeded: 60 per 1 minute\\\"}\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Torsor\", \"prod\"",
+   "results": "{\"t\": \"2026-10-22T06:13:13Z\", \"tool\": \"loogle\", \"query\": \"\\\"Torsor\\\", \\\"prod\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"Prod.instAddTorsor\", \"Prod.instTorsor\", \"instIsTopologicalAddTorsorProd\", \"instIsTopologicalTorsorProd\", \"instNormedAddTorsorProd\"], \"digest\": \"d16340a6940fc139\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits do not state the framed relative sheaf or smooth-pair assertion"
+  },
+  {
+   "tool": "grep",
+   "query": "[Rr]elative.*[Tt]orsor|[Tt]orsor.*[Tt]ensor|[Cc]artier.*[Tt]ensor|[Tt]ensor.*[Cc]artier",
+   "results": "{\"t\": \"2026-10-22T06:13:13Z\", \"tool\": \"grep\", \"query\": \"[Rr]elative.*[Tt]orsor|[Tt]orsor.*[Tt]ensor|[Cc]artier.*[Tt]ensor|[Tt]ensor.*[Cc]artier\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits do not state the framed relative sheaf or smooth-pair assertion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Tensor product of line bundles with specified sections on a common open adds their canonical relative torsor extension classes in degree one",
+   "results": "{\"t\": \"2026-10-22T06:13:36Z\", \"tool\": \"leanfinder\", \"query\": \"Tensor product of line bundles with specified sections on a common open adds their canonical relative torsor extension classes in degree one\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Modules.Hom.add_app\", \"CommRing.Pic.mul_eq_tensor\", \"CommRing.Pic.mk_tensor\", \"PresheafOfModules.Monoidal.tensorObj_map_tmul\", \"PresheafOfModules.Monoidal.tensorObjMap\", \"PresheafOfModules.Monoidal.tensorObj\", \"PresheafOfModules.Monoidal.tensorObj_obj\", \"PresheafOfModules.Monoidal.tensorHom_app\"], \"digest\": \"49a90b4f07900ffa\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits do not state the framed relative sheaf or smooth-pair assertion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Relative first cohomology classifies abelian torsors trivialized on an open and contracted product corresponds to addition naturally under shrinking the open",
+   "results": "{\"t\": \"2026-10-22T06:13:38Z\", \"tool\": \"leanfinder\", \"query\": \"Relative first cohomology classifies abelian torsors trivialized on an open and contracted product corresponds to addition naturally under shrinking the open\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"groupCohomology.cocycles₁_map_mul_of_isTrivial\", \"groupCohomology.H1π_eq_iff\", \"groupCohomology.H1IsoOfIsTrivial_H1π_apply_apply\", \"groupCohomology.cocycles₁IsoOfIsTrivial_hom_hom_apply_apply\", \"CategoryTheory.PresheafOfGroups.H1\", \"CategoryTheory.PresheafOfGroups.OneCocycle.class\", \"CategoryTheory.PresheafOfGroups.OneCohomologyRelation\", \"groupCohomology.H2π_eq_iff\"], \"digest\": \"d591ce8a3d87040b\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits do not state the framed relative sheaf or smooth-pair assertion"
+  },
+  {
+   "tool": "grep",
+   "query": "relative.*torsor|torsor.*baer|cartier.*tensor|tensor.*cartier",
+   "results": "{\"t\": \"2026-10-22T07:06:25Z\", \"tool\": \"grep\", \"query\": \"relative.*torsor|torsor.*baer|cartier.*tensor|tensor.*cartier\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: retrieved declarations concern ordinary module tensor products, ordinary presheaf H1, or additive torsor typeclasses, not framed relative Cartier torsors and supported integral extensions"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The relative first cohomology class of the tensor product of two framed Cartier line bundles is the sum of their classes",
+   "results": "{\"t\": \"2026-10-22T07:06:25Z\", \"tool\": \"leansearch\", \"query\": \"The relative first cohomology class of the tensor product of two framed Cartier line bundles is the sum of their classes\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CochainComplex.HomComplex.CohomologyClass.mk_add\", \"Algebra.Extension.H1Cotangent\", \"Algebra.Extension.H1Cotangent.val_add\", \"PiTensorProduct.add_tprodCoeff'\", \"TensorProduct.add\", \"MultilinearMap.domCoprodDep_apply\", \"CategoryTheory.ProjectiveResolution.extEquivCohomologyClass_add\", \"Algebra.Extension.tensorH1Cotangent\"], \"digest\": \"ec0ed4c1737599bd\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: retrieved declarations concern ordinary module tensor products, ordinary presheaf H1, or additive torsor typeclasses, not framed relative Cartier torsors and supported integral extensions"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Torsor\", \"add\"",
+   "results": "{\"t\": \"2026-10-22T07:06:26Z\", \"tool\": \"loogle\", \"query\": \"\\\"Torsor\\\", \\\"add\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"AddTorsor\", \"addGroupIsAddTorsor\", \"AddGroup.instAddTorsor\", \"AddTorsor.nonempty\", \"AddTorsor.toVSub\", \"AddTorsor.subsingleton_iff\", \"AddTorsor.toAddAction\", \"AddTorsor.vadd_vsub'\"], \"digest\": \"cf3097ba411dc011\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: retrieved declarations concern ordinary module tensor products, ordinary presheaf H1, or additive torsor typeclasses, not framed relative Cartier torsors and supported integral extensions"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Tensor addition of Cartier line bundles with specified complement sections adds their relative torsor classes and Baer extension classes",
+   "results": "{\"t\": \"2026-10-22T07:06:35Z\", \"tool\": \"leanfinder\", \"query\": \"Tensor addition of Cartier line bundles with specified complement sections adds their relative torsor classes and Baer extension classes\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CommRing.Pic.mul_eq_tensor\", \"AlgebraicGeometry.Proj.add_apply\", \"CommRing.Pic.mk_tensor\", \"AlgebraicGeometry.Scheme.Modules.Hom.add_app\", \"AlgebraicGeometry.StructureSheaf.const_add\", \"ModuleCat.instAddCommGroupObjOppositeOpensCarrierTopValTildeInType\", \"CommRing.Pic.mapAlgebra_apply\", \"PresheafOfModules.Monoidal.tensorObj\"], \"digest\": \"9cbac724fc6945d2\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: retrieved declarations concern ordinary module tensor products, ordinary presheaf H1, or additive torsor typeclasses, not framed relative Cartier torsors and supported integral extensions"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "First cohomology of sheaves relative to an open classifies torsors with a trivialization and respects contracted products",
+   "results": "{\"t\": \"2026-10-22T07:16:16Z\", \"tool\": \"leanfinder\", \"query\": \"First cohomology of sheaves relative to an open classifies torsors with a trivialization and respects contracted products\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.PresheafOfGroups.H1\", \"CategoryTheory.PresheafOfGroups.OneCohomologyRelation\", \"CategoryTheory.PresheafOfGroups.instOneH1\", \"CategoryTheory.PresheafOfGroups.OneCocycle.class\", \"CategoryTheory.PresheafOfGroups.OneCohomologyRelation.refl\", \"CategoryTheory.PresheafOfGroups.OneCohomologyRelation.trans\", \"CategoryTheory.PresheafOfGroups.OneCochain\", \"CategoryTheory.PresheafOfGroups.OneCocycle.IsCohomologous\"], \"digest\": \"5e7c29de216bece0\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: retrieved declarations concern ordinary module tensor products, ordinary presheaf H1, or additive torsor typeclasses, not framed relative Cartier torsors and supported integral extensions"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-pur-divisor-class",
+  "date": "2026-10-22",
+  "group": "Q108"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-a1-kummer",
+ "blueprint": {
+  "from": {
+   "node": "lem-pur-divisor-class",
+   "place": "Clause (b): product ideal, tensor sections, contracted products, relative addition and enlargement of support; returned proof step 7.",
+   "via": []
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-pur-cartier-pair-tensor-addition",
+  "worker": "stage1",
+  "summary": "Q81: local product/dual-basis calculation, framed torsor tensor map, relative lifting-cocycle addition, support restriction, relative extension uniqueness and explicit Baer sum, and connecting-map naturality. No new nodes; all non-elementary ingredients reuse existing DAG statements. No statement change, Lean attachment or compiler invocation.",
+  "blueprint": "lem-pur-divisor-class.proof.md clause (b): replaces the erroneous two-element frame by the product Cartier ideal; proves the tensor and degree-one relative addition underlying the supported Kummer formula.",
+  "tool_uses": [
+   {
+    "node": "lem-sc-line-bundle-torsor",
+    "why": "Generic frame-torsor tensor correspondence for any scheme; used on the actual framed pairs, without a curve hypothesis."
+   },
+   {
+    "node": "lem-amb-relative-cocycle-coordinates",
+    "why": "Generic sheaf or homological algebra tool for the explicit relative torsor construction; no replacement of the unit purity route."
+   },
+   {
+    "node": "lem-amb-relative-torsor-forget-normalization",
+    "why": "Generic sheaf or homological algebra tool for the explicit relative torsor construction; no replacement of the unit purity route."
+   },
+   {
+    "node": "lem-amb-relative-torsor-class-naturality",
+    "why": "Generic sheaf or homological algebra tool for the explicit relative torsor construction; no replacement of the unit purity route."
+   },
+   {
+    "node": "lem-weil-pbc-open-closed-short-exact",
+    "why": "Generic integral open-closed sheaf sequence; provides the supported constant quotient for relative extension uniqueness."
+   },
+   {
+    "node": "lem-weil-pbc-extension-by-zero-adjunction",
+    "why": "Generic integral open adjunction identifies Hom from the open integer extension with sections, with its actual counit."
+   },
+   {
+    "node": "lem-sp-relative-torsor-extension",
+    "why": "Generic sheaf or homological algebra tool for the explicit relative torsor construction; no replacement of the unit purity route."
+   },
+   {
+    "node": "lem-coef-yoneda-baer-existence",
+    "why": "Generic existence of Baer sums in an abelian category; applied only to degree-one integral etale sheaf extensions."
+   },
+   {
+    "node": "lem-weil-pbc-injective-resolution-ses",
+    "why": "Generic horseshoe resolution, providing the simultaneous degreewise split coefficient sequence."
+   },
+   {
+    "node": "lem-weil-pbc-pushout-short-exact-sequence",
+    "why": "Apply the generic abelian-category pushout theorem to the opposite category to show that pulling back the integral degree-one extension remains short exact."
+   },
+   {
+    "node": "lem-weil-pbc-injective-resolution-lift-exists",
+    "why": "Generic comparison theorem lifts a coefficient morphism to the nonnegative injective resolutions used for the explicit restriction-cone maps."
+   },
+   {
+    "node": "lem-coef-yoneda-derived-ext-comparison",
+    "why": "Generic abelian-category comparison of Yoneda Ext^1 (Baer sum, pullback) with derived Ext^1; the relative extension theorem's uniqueness is in derived Ext while the item's beta equation is a Yoneda/Baer equation."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sc-line-bundle-torsor",
+  "lem-amb-relative-cocycle-coordinates",
+  "lem-sp-relative-torsor-extension",
+  "lem-coef-yoneda-derived-ext-comparison"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q81-d6a1e8b30",
+  "group": "Q81",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q81-d6a1e8b30 (reviewer sub-agent of L); spot-checked: I read every step in full. The item has 9 steps and no new nodes. It carries old step 7 of the Q108 split of lem-pur-divisor-class. Its statement and stmt_deps are unchanged from live. Sources checked: Stacks divisors.tex 01WT/01WU (product ideal; f1f2 is a non-zero-divisor); blueprint main-20261015 lem-pur-divisor-class.proof.md clause (b), whose two-element frame (f1,f2) the item rightly replaces by the product f1f2; sites-cohomology 03AJ lemma-torsors-h1; homology 010L Baer sum; 0117. Edge cases hold: D empty, D1=D2, nilpotents, V empty. No cited node is on the route-pivot drop list, there is no cycle, no SGA source is used, and there is no duplicate (searched f_1f_2, 01WT, enlargement of support, Baer; lem-pur-divisor-relative-cone and lem-sc-torsor-h1 differ). Faults repaired in fixes/dag/nodes/sec-smooth-purity/lem-pur-cartier-pair-tensor-addition.json: (1) C1 in steps 7-8: lem-sp-relative-torsor-extension gives uniqueness only in derived Ext^1, but the beta equation is Yoneda pullback and Baer addition. I added lem-coef-yoneda-derived-ext-comparison (natural additive Yoneda-to-derived isomorphism) to the uses and as a declared tool use from the same unit as the accepted Baer-existence tool. (2) Step 5 wrote the cone differential as (dx,res x-dy). In that model the cited cycle (iCycles(t),-b) of step 4 is not a cycle, since its second coordinate is 2t|_U. I rewrote it in the actual-cone convention (dx,-res x-dy); the conclusion is unchanged because R_a commutes with either differential. (3) Clarification in step 6: I wrote out the tacit identifications j^{-1}Z_T=Z_V and i^{-1}Z_T=Z_C and cited def-weil-pbc-inverse-image. proof_deps is recomputed. I accept the 11 declared generic tool uses.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.CartierPairTensorAddition",
+  "declaration": "AlgebraicGeometry.Etale.cartierPairTensor_geometry",
+  "declarations": [
+   "AlgebraicGeometry.Etale.cartierPairFrameTorsor",
+   "AlgebraicGeometry.Etale.cartierPairFrameVal",
+   "AlgebraicGeometry.Etale.cartierPairTensorFrames",
+   "AlgebraicGeometry.Etale.cartierPairOpenInclusion",
+   "AlgebraicGeometry.Etale.cartierPairRestriction_square",
+   "AlgebraicGeometry.Etale.cartierPairRestriction",
+   "AlgebraicGeometry.Etale.cartierPairTensor_geometry",
+   "AlgebraicGeometry.Etale.cartierPairTensor_frames",
+   "AlgebraicGeometry.Etale.cartierPairYonedaClass",
+   "AlgebraicGeometry.Etale.cartierPairTensor_extensions",
+   "AlgebraicGeometry.Etale.cartierPairTensor_naturality"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/CartierPairTensorAddition.lean",
+  "statement": "theorem cartierPairTensor_geometry {D₁ D₂ Z T : Scheme.{u}} (i₁ : D₁ ⟶ T) (i₂ : D₂ ⟶ T) (k : Z ⟶ T) [IsClosedImmersion i₁] [IsClosedImmersion i₂] [IsClosedImmersion k] (h₁ : i₁.ker.IsInvertible) (h₂ : i₂.ker.IsInvertible) (hk : k.ker = i₁.ker * i₂.ker) : k.ker.IsInvertible ∧ Set.range k = Set.range i₁ ∪ Set.range i₂ ∧ k.openComplement = i₁.openComplement ⊓ i₂.openComplement ∧ (∀ (U : T.affineOpens) (f₁ f₂ : Γ(T, U.1)), i₁.ker.ideal U = Ideal.span {f₁} → i₂.ker.ideal U = Ideal.span {f₂} → k.ker.ideal U = Ideal.span {f₁ * f₂}) ∧ ∃ (μ : i₁.ker.toModules ⊗ i₂.ker.toModules ≅ k.ker.toModules) (e : k.ker.toModulesᵛ ≅ i₁.ker.toModulesᵛ ⊗ i₂.ker.toModulesᵛ), μ.hom ≫ k.ker.toModulesι = (i₁.ker.toModulesι ⊗ₘ i₂.ker.toModulesι) ≫ (λ_ (Scheme.Modules.unit T)).hom ∧ (μ.hom ⊗ₘ 𝟙 k.ker.toModulesᵛ) ≫ Scheme.Modules.dualEvaluation k.ker.toModules = (𝟙 (i₁.ker.toModules ⊗ i₂.ker.toModules) ⊗ₘ e.hom) ≫ tensorμ i₁.ker.toModules i₂.ker.toModules i₁.ker.toModulesᵛ i₂.ker.toModulesᵛ ≫ (Scheme.Modules.dualEvaluation i₁.ker.toModules ⊗ₘ Scheme.Modules.dualEvaluation i₂.ker.toModules) ≫ (λ_ (Scheme.Modules.unit T)).hom ∧ supportedDivisorSection k ≫ e.hom = (λ_ (Scheme.Modules.unit T)).inv ≫ (supportedDivisorSection i₁ ⊗ₘ supportedDivisorSection i₂)",
+  "branch": "sheaf-dag",
+  "by": "Q96",
+  "date": "2026-10-23",
+  "existing": false,
+  "note": "The joint statement is recorded by cartierPairTensor_geometry, cartierPairTensor_frames, cartierPairTensor_extensions and cartierPairTensor_naturality; remaining declarations construct their canonical frame, cone and Yoneda interfaces."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-3a28cdfab",
+  "group": "Q96",
+  "result": "pass",
+  "note": "Re-delivery of 4f53 (RETURN H2, theorem-stmt_dep). Lean module byte-identical; item change is only stmt_deps lem-coef-yoneda-derived-ext-comparison → new def-pur-yoneda-derived-ext-comparison-data (existing:true on unchanged Sheaf.CategoryTheory.YonedaDerivedExtComparison, signature verbatim l.61-62, statement matches all 9 fields incl. −extClass and (−1)^n splice signs, stmt_deps all definitions, no other live owner), theorem kept in proof_deps. lem-amb-relative-cocycle-coordinates stmt_dep genuine: relativeTorsorEquiv = classEquiv.symm.trans relativeFramedLiftEquiv, Equiv.ofBijective over Quotient.lift with relativeFrameClass_eq_iff, so PASS on the mechanical point. Live item still lean:null. Substance reading of 4f53 carried over (geometry, framed iso, frames, α=−relativeTorsorEquiv, q_a, β via CartierPoleBoundarySpec, naturality, no extra hypotheses, only sorry). No compile: no file changed; worker scompile clean 43.7/30.6 s."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G2",
+  "result": "pass",
+  "landing": "20261025T003320-L-3227535",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

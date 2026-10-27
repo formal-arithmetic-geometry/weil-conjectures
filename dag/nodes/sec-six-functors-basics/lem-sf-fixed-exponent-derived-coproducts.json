@@ -1,0 +1,249 @@
+{
+ "id": "lem-sf-fixed-exponent-derived-coproducts",
+ "kind": "statement",
+ "title": "Derived direct image preserves coproducts of complexes with a fixed annihilator",
+ "statement": "Let $f:X\\to Y$ be a quasi-compact quasi-separated morphism of schemes [def-weil-pbc-scheme-conventions] with finite torsion etale cohomological dimension $\\kuncd(f)<\\infty$ [def-kun-cd]. Let $\\Lambda$ be any commutative ring and let $n\\geq1$ be an integer. Work in the ordinary unbounded derived categories of sheaves of modules over the constant ring sheaves on the small etale sites [def-weil-pbc-derived-categories, def-weil-sheaf-of-modules-category], and use the total K-injective direct image $Rf_*$ [def-weil-pbc-direct-image]. For every family $(K_i)_{i\\in I}$ indexed by a set small in the coefficient-module universe, assume $n\\cdot\\mathrm{id}_{K_i}=0$ in $D(X_{\\mathrm{et}},\\Lambda)$ for every $i$. Then the canonical comparison\n$$\\bigoplus_{i\\in I}Rf_*K_i\\longrightarrow Rf_*\\left(\\bigoplus_{i\\in I}K_i\\right),$$\nwhose composite with the $i$-th coprojection is $Rf_*(\\iota_i)$, is an isomorphism in $D(Y_{\\mathrm{et}},\\Lambda)$. The family may be empty and the complexes may be unbounded in both directions; no torsion, finiteness or Noetherianity assumption is made on $\\Lambda$.",
+ "source": {
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tag 0F11, lemma-finite-cd-mod-n-direct-sums (1), extended from Z/n coefficients to objects annihilated by n over an arbitrary coefficient ring. Agent formulation, not the literal statement of 0F11.",
+  "external": [
+   {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0D6J, lemma-modules-abelian-unbounded (3), comparison of total direct images after forgetting coefficients."
+   }
+  ]
+ },
+ "stmt_deps": [
+  "def-weil-pbc-scheme-conventions",
+  "def-kun-cd",
+  "def-weil-pbc-derived-categories",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-pbc-direct-image"
+ ],
+ "proof": [
+  {
+   "text": "For every coefficient ring B, the ordinary coefficient-forgetting functor preserves all coproducts by lem-weil-pbc-constant-module-sheaves-forget-colimits. Apply the exact-derived-coproduct theorem lem-pur-exact-derived-coproducts to obtain preservation of unbounded derived coproducts. The unbounded comparison lem-kun-unbounded-abelian-exchange-comparison, specialized to the identity vertical square, makes derived forgetting conservative and identifies U_Y Rf_B with Rf_ab U_X naturally. Additivity transports n id=0 to A_i=U_X K_i.",
+   "uses": [
+    "lem-weil-pbc-constant-module-sheaves-forget-colimits",
+    "lem-pur-exact-derived-coproducts",
+    "lem-kun-unbounded-abelian-exchange-comparison"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Represent an arbitrary abelian derived object A annihilated by n by a complex I of injective sheaves using lem-pur-kinjective-degreewise-existence. The existing adjunction forget: Mod(Z/n) -> Ab, coind=Hom_Z(Z/n,-), gives a complex L=coind(I). Its counit has, sectionwise, image exactly the kernel of multiplication by n; this is the proved source declaration forget₂CoindZModAdj_counit_shortExact in WeilConjectures.CategoryTheory.Sites.CoinduceZMod. Its injectivity is also part of that declaration. Exactness passes from presheaves to sheaves by exact sheafification. Multiplication by n on every injective term is epic by lem-trf-injective-abelian-sheaf-divisible. Thus 0 -> U(L) -> I -> I -> 0 is degreewise short exact, with second map n id.",
+   "uses": [
+    "lem-pur-kinjective-degreewise-existence",
+    "lem-trf-injective-abelian-sheaf-divisible",
+    "lem-weil-pbc-sheafification-exact"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The short exact sequence yields the distinguished triangle Q U(L) -> QI -> QI -> Q U(L)[1]. The second map is zero since QI is isomorphic to A and n id_A=0. The representable exact sequence of the triangle therefore lifts id_QI through its first map, producing a section. This is proved directly using Mathlib CategoryTheory.Pretriangulated.Triangle.coyoneda_exact₂, the representable exactness consequence of the pretriangulated axioms. The exact-functor localization comparison identifies Q U(L) with U Q(L). Transport through A isomorphic to QI to obtain a retract of U Q(L) onto A. This constructs the Z/n complex and both retract maps explicitly; no object is chosen from an unproved mere existence theorem.",
+   "uses": [
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply lem-kun-0f11 to the family Q(L_i). Step 1 with B=Z/n identifies the canonical abelian comparison on U Q(L_i) as invertible: the comparison for a composite functor is the comparison for the second functor followed by its image of the comparison for the first, and comparisons are invariant under natural isomorphism. Both equations hold on every coprojection, hence follow from the coproduct universal property.",
+   "uses": [
+    "lem-kun-0f11"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Write j_i:A_i -> C_i and r_i:C_i -> A_i for the retract in Step 3. The coproduct comparison beta is natural in the family. Consequently its inverse for A is Rf_ab(sum j_i) followed by inverse(beta_C) followed by sum Rf_ab(r_i), in Lean composition order. The two inverse identities follow from naturality for j and r and from sum j_i followed by sum r_i being identity. All these equations are proved by coproduct extensionality and functoriality.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Apply Step 1 for B=Lambda once more. The abelian coproduct property reflects through the conservative coproduct-preserving forgetful functor, proving invertibility of exactly sigmaComparison in the unchanged statement. No common cohomology bound is used. The proof covers empty families; for n=1 the coinduced complex and the annihilated input are zero. No assumption on Lambda is introduced.",
+   "uses": [
+    "lem-kun-unbounded-abelian-exchange-comparison"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-constant-module-sheaves-forget-colimits",
+  "lem-pur-exact-derived-coproducts",
+  "lem-kun-unbounded-abelian-exchange-comparison",
+  "lem-pur-kinjective-degreewise-existence",
+  "lem-trf-injective-abelian-sheaf-divisible",
+  "lem-weil-pbc-sheafification-exact",
+  "def-weil-abstract-derived-category",
+  "lem-kun-0f11"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tag 0F11(1), combined with 0D6J(3). U3 uses the dual kernel/coinduction construction: divisibility from sites-cohomology.tex Tag 0DD7 and the degreewise-injective resolution replace K-flat derived quotient cones; all assembly is proved in Lean."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "(torsion|annihilat).*(coproduct|direct.sum)|(coproduct|direct.sum).*(torsion|annihilat)",
+   "results": "; 14 hits: Mathlib/LinearAlgebra/Dual/Lemmas.lean, Mathlib/Algebra/Module/DedekindDomain.lean, Mathlib/Algebra/Module/DedekindDomain.lean, Mathlib/Algebra/Module/DedekindDomain.lean, Mathlib/Algebra/Module/DedekindDomain.lean, Mathlib/Algebra/Module/DedekindDomain.lean, Mathlib/Algebra/Module/Torsion/Basic.lean, Mathlib/Algebra/Module/Torsion/Basic.lean",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"rightDerived\", \"coproduct\"",
+   "results": "; 0 hits: ",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Etale derived direct image preserves coproducts on complexes killed by an integer",
+   "results": "; 8 hits: AlgebraicGeometry.LocallyRingedSpace.instPreservesColimitsOfShapeSheafedSpaceCommRingCatDiscreteForgetToSheafedSpace, DerivedCategory.instAdditiveCochainComplexIntQ, Algebra.FormallyEtale.instTensorProduct, CategoryTheory.Limits.PreservesFiniteCoproducts, CategoryTheory.Functor.preservesHomologyOfExact, Algebra.Etale.baseChange, AlgebraicGeometry.Scheme.Etale, CategoryTheory.Functor.instCommShiftCochainComplexIntDerivedCategoryHomMapDerivedCategoryFactors",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "preserves(Coproducts|Colimits).*rightDerived|rightDerived.*preserves(Coproducts|Colimits)|finite.*cohomological.*dimension",
+   "results": "; 0 hits: ",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An etale pushforward of complexes killed by n preserves set indexed coproducts if its torsion cohomological dimension is finite",
+   "results": "; 8 hits: DerivedCategory.isGE_Q_obj_iff, HomologicalComplex.isGrothendieckAbelian, DerivedCategory.instIsGEObjCochainComplexIntQOfIsGE, DerivedCategory.isLE_Q_obj_iff, DerivedCategory.instIsLEObjCochainComplexIntQOfIsLE, DerivedCategory.isGE_iff, DerivedCategory.isLE_iff, HomologicalComplex.ab5OfSize",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived direct image of etale sheaves preserves coproducts of complexes annihilated by a fixed integer under finite torsion cohomological dimension",
+   "results": "; 8 hits: LightCondensed.instIsGrothendieckAbelianLightCondMod, CategoryTheory.Sheaf.isGrothendieckAbelian_of_essentiallySmall, DerivedCategory.isGE_Q_obj_iff, DerivedCategory.instIsGEObjCochainComplexIntQOfIsGE, CategoryTheory.Functor.isZero_rightDerived_obj_injective_succ, CategoryTheory.Sheaf.instIsGrothendieckAbelian, DerivedCategory.instIsLEObjCochainComplexIntQOfIsLE, DerivedCategory.isLE_Q_obj_iff",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "(annihilat|torsion).*(coproduct|direct.sum)|(coproduct|direct.sum).*(annihilat|torsion)",
+   "results": "; 14 hits: Mathlib/Algebra/Module/DedekindDomain.lean, Mathlib/Algebra/Module/DedekindDomain.lean, Mathlib/Algebra/Module/DedekindDomain.lean, Mathlib/Algebra/Module/DedekindDomain.lean, Mathlib/Algebra/Module/DedekindDomain.lean, Mathlib/Algebra/Module/Torsion/Basic.lean, Mathlib/Algebra/Module/Torsion/Basic.lean, Mathlib/Algebra/Module/Torsion/Basic.lean",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"rightDerived\", \"coproduct\"",
+   "results": "; 0 hits: ",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Unbounded etale derived pushforward preserves direct sums of complexes killed by an integer",
+   "results": "; 8 hits: AlgebraicGeometry.Scheme.Modules.instAdditivePushforward, Module.Flat.directSum_iff, Algebra.FormallyEtale.instTensorProduct, DerivedCategory.instAdditiveCochainComplexIntQ, IsBaseChange.directSumPow, RingHom.Etale.isStableUnderBaseChange, RingHom.Etale.stableUnderComposition, Algebra.FormallyEtale.of_restrictScalars",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sf-projection-torsion-object-constant",
+  "date": "2026-10-22",
+  "group": "Q06"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sfb-proper-base-change",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sfb-proper-base-change-integral: integral reductions, the arbitrary-constant-coefficient projection formula used for the direct-image Tor bound. Steps 1–2 forget coefficients, Steps 3–4 realize the fixed-annihilator reduction by a split quotient cone, and Steps 5–6 apply the Z/n coproduct theorem and reflect the result. The existing created.item ancestry ends at a node with created.item null; blueprint_refs.py ancestor returns None.",
+   "via": [
+    "lem-sf-projection-torsion-object-constant",
+    "lem-sf-direct-image-tor-amplitude-noetherian"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sf-fixed-exponent-derived-coproducts",
+  "worker": "stage1",
+  "summary": "Kept the statement and split its arbitrary-ring fixed-annihilator extension by forgetting coefficients, realizing the inputs as retracts of normalized Z/n derived reductions, and writing the inverse of the canonical coproduct comparison. Reused all required tools from the DAG; no new nodes. Checked source statements, coefficient hypotheses, universes, empty family and n=1.",
+  "blueprint": "det-thm-sfb-proper-base-change-integral: integral reductions, the arbitrary-constant-coefficient projection formula used for the direct-image Tor bound. Steps 1–2 forget coefficients, Steps 3–4 realize the fixed-annihilator reduction by a split quotient cone, and Steps 5–6 apply the Z/n coproduct theorem and reflect the result. The existing created.item ancestry ends at a node with created.item null; blueprint_refs.py ancestor returns None.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-module-sheaves-grothendieck-abelian",
+    "why": "Grothendieckness for arbitrary constant coefficients, including Z and Z/n, permits the termwise coproduct theorem; this is generic sheaf-category infrastructure."
+   },
+   {
+    "node": "lem-kun-grothendieck-derived-coproducts",
+    "why": "Termwise complexes compute unbounded derived coproducts; this is generic homological algebra, with no replacement in the integral proper-image unit."
+   },
+   {
+    "node": "lem-kun-unbounded-abelian-exchange-comparison",
+    "why": "Only exact conservativity and the natural unbounded direct-image comparison are used, specialized to an identity cartesian square; no base-change theorem is used."
+   },
+   {
+    "node": "lem-pc-kflat-resolution",
+    "why": "K-flat representatives of arbitrary unbounded abelian sheaf complexes; generic ringed-site infrastructure."
+   },
+   {
+    "node": "lem-cbc-regular-quotient-cone-augmentation",
+    "why": "The normalized cone-to-derived-quotient isomorphism for the ring sheaves Z_X and (Z/n)_X; generic principal-quotient tool, not a constructible base-change input."
+   },
+   {
+    "node": "lem-pc-derived-zero-third-split",
+    "why": "Mathlib split-triangle theorem applied after rotation; no geometric hypotheses."
+   },
+   {
+    "node": "lem-kun-0f11",
+    "why": "Exactly the source theorem 0F11(1) for Z/n coefficients; this supplies the finite-coefficient direct-sum input to the fixed-annihilator extension."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-kun-unbounded-abelian-exchange-comparison",
+  "lem-kun-0f11"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q146-2e2510d7b",
+  "group": "Q146",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q146-2e2510d7b (reviewer sub-agent of L); spot-checked: I read the item in full: the statement and stmt_deps are unchanged against the live and side-live copies (both still unsplit), there are no new nodes and no repair note, and no SGA is cited. Sources read: Stacks 0F11 (1) statement and proof (Z/n coefficients, cd(f) for torsion sheaves, the same notion as def-kun-cd, unbounded inputs), and 0D6J (3), the forgetful Rf_* comparison. Step 1: the module sheafification node says the underlying sheaf is the abelian sheafification, so the forgetful functor U preserves sheaf coproducts; with the Grothendieck and termwise-derived-coproduct nodes this is correctly marked elementary. Steps 2 and 6: lem-kun-unbounded-abelian-exchange-comparison gives the natural b_f for any Λ (identity verticals make the square cartesian) and states that U is exact and conservative; I checked naturality on the coprojections. Step 3: the cone-augmentation hypotheses hold for R=Z_X, S=(Z/n)_X, r=n (constant-sheaf sequence exact for n≥1), so C(n·id_P) is quasi-isomorphic to U(P⊗Z/n), and no Λ/n model of K_i is assumed. Step 4: the rotated triangle has third map −(n·id)[1]=0, and the Mathlib split leaf gives r_i j_i=1. Step 5: 0F11(1) applies with the same hypotheses; I checked both inverse identities of the retract argument. Edge cases checked: I empty, n=1, Λ=0, Λ=Q, Λ=Z/n, unbounded families. Duplicate search: lem-exc-direct-image-coproducts (finite A) and lem-etale-qcqs-finite-dimension-derived-coproducts (cd for all Λ-modules) do not cover the item; lem-kun-0f11 is the Z/n special case and is cited. The citer lem-sf-projection-torsion-object-constant uses exactly this form. I accept the declared generic tool_uses (Grothendieck, termwise coproducts, b_u, K-flat, cone augmentation, 0F11; the split leaf is a Mathlib leaf, so declaring it is harmless). Advisory only: def-weil-pbc-direct-image writes out only the D^+ functor; the unbounded functor comes from the cited comparison node. This reference was already in the statement before the split."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.FixedExponentDerivedCoproducts",
+  "declaration": "AlgebraicGeometry.Etale.isIso_sigmaComparison_rightDerivedLowerStar_of_fixedExponent",
+  "file": "lean/Sheaf/AlgebraicGeometry/FixedExponentDerivedCoproducts.lean",
+  "statement": "theorem isIso_sigmaComparison_rightDerivedLowerStar_of_fixedExponent (Λ : Type (u + 1)) [CommRing Λ] {X Y : Scheme.{u}} (f : X ⟶ Y) [QuasiCompact f] [QuasiSeparated f] (hf : f.torsionEtaleCohomologicalDimension < ⊤) (n : ℕ) (hn : 1 ≤ n) (I : Type (u + 1)) (K : I → DerivedCategoryModule Λ X) (hK : ∀ i : I, n • 𝟙 (K i) = 0) : IsIso (@sigmaComparison _ _ _ _ _ (rightDerivedLowerStar (ModuleCat.{u + 1} Λ) f) K ((derived_hasCoproducts (C := Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)) I).has_colimit _) ((derived_hasCoproducts (C := Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ)) I).has_colimit _))",
+  "branch": "sheaf-dag",
+  "by": "Q19",
+  "date": "2026-10-22",
+  "existing": false,
+  "note": "The canonical Mathlib sigmaComparison uses the published derived_hasCoproducts theorem explicitly for both sites, so no coproduct-existence hypothesis or file-local instance is introduced. The total unbounded functor is Etale.rightDerivedLowerStar, already published alongside the recorded bounded-below functor."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-3aba6cd40",
+  "group": "Q19",
+  "result": "pass",
+  "note": "Clause-by-clause match with the node and Stacks 0F11(1) as extended: qcqs f, f.torsionEtaleCohomologicalDimension < ⊤ (def-kun-cd record, not the all-module cd), arbitrary CommRing Λ : Type (u+1), n ≥ 1, I : Type (u+1) in the module universe, hK : n • 𝟙 (K i) = 0 in the derived category; conclusion IsIso of Mathlib sigmaComparison for the total Etale.rightDerivedLowerStar (ι_comp_sigmaComparison gives the coprojection composites); HasColimit arguments are Prop proofs from derived_hasCoproducts and add no assumption. Statement field verbatim; non-lean node fields equal side-live. Edge cases: empty I, n=1, Λ=0/Q/Z/n, empty schemes admitted; n=0 excluded as required. No duplicate (lem-kun-0f11 is the Z/n case and is cited; lem-exc-direct-image-coproducts needs finite A; the Kunneth lemma needs all-module cd). No definitions, proof is sorry, docstrings carry the source place, blueprint id and six proof steps; report has both sections. Advisory: unbounded Rf_* is not among the declarations of def-weil-pbc-direct-image, but it is the project-wide convention used by lem-kun-0f11 and others. No compile run: no file changed."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U3",
+  "result": "pass",
+  "landing": "20261024T020704-L-2645657",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

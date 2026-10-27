@@ -1,0 +1,112 @@
+{
+ "id": "lem-pur-completed-primitive-counit-evaluation-existence",
+ "kind": "statement",
+ "title": "Existence of the unit-normalized evaluation comparison",
+ "statement": "theorem inverseEvaluation_exists {X Y : Scheme.{t}} (f : X ⟶ Y) (n : ℕ) : ∃ ξ : inverse l E f ⋙ coefficientSequenceEvaluation l E X n ≅ coefficientSequenceEvaluation l E Y n ⋙ integralOperationsLevelPullback l E f n, ∀ M : coefficientSequenceModules l E Y, (coefficientSequenceEvaluation l E Y n).map ((Adjunction.ofIsRightAdjoint (direct l E f)).unit.app M) ≫ (eqToIso (directEvaluation_eq l E f n)).hom.app ((inverse l E f).obj M) ≫ (Scheme.coefficientProEtaleModuleDirectImage.{t, u} f (CommRingCat.of (ULift.{t + 1} (Padic.coefficientExtensionRing l E (n + 1))))).map (ξ.hom.app M) = (Scheme.coefficientProEtaleModuleAdjunction.{t, u} f (CommRingCat.of (ULift.{t + 1} (Padic.coefficientExtensionRing l E (n + 1))))).unit.app ((coefficientSequenceEvaluation l E Y n).obj M)",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 0941 and the finite evaluation/counit assembly described in the item proof; this stage-3 decomposition isolates the existence and uniqueness/assembly subarguments."
+ },
+ "stmt_deps": [
+  "lem-coef-derived-system-evaluation-calculus",
+  "lem-coef-semilinear-derived-sections",
+  "def-trf-integral-comparison-sequence-systems"
+ ],
+ "proof": [
+  {
+   "text": "Apply the existing sequence-module inverse-image evaluation theorem to the actual base-change functor, sequence coefficient ring map, its finite ring map, the chosen system adjunction and the canonical finite adjunction. The right-adjoint evaluation isomorphism is eqToIso of directEvaluation_eq, which is a natural isomorphism. The theorem makes its inverse mate invertible. Invert that mate to obtain the required evaluation isomorphism. The identity unit_mateEquiv_symm, postcomposed with the image of the inverse mate, gives exactly the required unit normalization after functorial inverse cancellation.",
+   "uses": [
+    "lem-sf-sequence-module-pullback-evaluation",
+    "def-trf-integral-comparison-sequence-systems"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/zheng-six-operations-lefschetz-verdier-DM-stacks_arXiv-1006.3810.pdf",
+    "place": "Construction 4.1, via the proved sequenceModulePullbackEvaluation_isIso; Mathlib unit_mateEquiv_symm gives normalization."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sf-sequence-module-pullback-evaluation",
+  "def-trf-integral-comparison-sequence-systems"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/zheng-six-operations-lefschetz-verdier-DM-stacks_arXiv-1006.3810.pdf",
+  "place": "K6: Construction 4.1, via the proved sequenceModulePullbackEvaluation_isIso; Mathlib unit_mateEquiv_symm gives normalization."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "unit normalized natural isomorphism existence finite evaluation adjunction",
+   "results": "No direct declaration found; existing coefficient evaluation calculus is the closest interface.",
+   "date": "2026-10-26",
+   "verdict": "No direct match."
+  },
+  {
+   "tool": "loogle",
+   "query": "Adjunction homEquiv unit natural isomorphism uniqueness",
+   "results": "Generic adjunction hom-equivalence lemmas only; no project-specific comparison.",
+   "date": "2026-10-26",
+   "verdict": "No direct match."
+  },
+  {
+   "tool": "grep",
+   "query": "inverseEvaluation completedPrimitiveCounit RoosRealization Comparisons",
+   "results": "Only the current item declarations; no duplicate lower statement.",
+   "date": "2026-10-26",
+   "verdict": "No duplicate found."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.CompletedPrimitiveCounitComparison",
+  "date": "2026-10-26",
+  "group": "D3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pur-completed-primitive-counit-comparison",
+   "place": "Stage-3 lower statement extracted from the parent proof.",
+   "via": [
+    "lem-pur-completed-primitive-counit-comparison"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-def-purity-conv",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.PrimitiveCounitEvaluation",
+  "file": "lean/Sheaf/Paper/PrimitiveCounitEvaluation.lean",
+  "declaration": "WeilConjectures.PrimitiveCounit.inverseEvaluation_exists",
+  "statement": "theorem inverseEvaluation_exists {X Y : Scheme.{t}} (f : X ⟶ Y) (n : ℕ) : ∃ ξ : inverse l E f ⋙ coefficientSequenceEvaluation l E X n ≅ coefficientSequenceEvaluation l E Y n ⋙ integralOperationsLevelPullback l E f n, ∀ M : coefficientSequenceModules l E Y, (coefficientSequenceEvaluation l E Y n).map ((Adjunction.ofIsRightAdjoint (direct l E f)).unit.app M) ≫ (eqToIso (directEvaluation_eq l E f n)).hom.app ((inverse l E f).obj M) ≫ (Scheme.coefficientProEtaleModuleDirectImage.{t, u} f (CommRingCat.of (ULift.{t + 1} (Padic.coefficientExtensionRing l E (n + 1))))).map (ξ.hom.app M) = (Scheme.coefficientProEtaleModuleAdjunction.{t, u} f (CommRingCat.of (ULift.{t + 1} (Padic.coefficientExtensionRing l E (n + 1))))).unit.app ((coefficientSequenceEvaluation l E Y n).obj M)",
+  "branch": "sheaf-dag",
+  "by": "D3",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D3",
+  "result": "pass",
+  "landing": "20261025T211947-L-4174483",
+  "kind": "proof",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-662ac",
+  "group": "K2",
+  "result": "pass",
+  "landing": "20261027T050615-L-243965",
+  "kind": "interface",
+  "note": "independent cc review: 6 delivered modules vs clone original (verbatim relocation diffed), new sorry statements vs Comparisons fields/nodes, node lean/proof fields vs Lean; 12 direct importers compiled OK against delivered .lbuild; axioms probe (roos_exists clean, comparisons_exists sorryAx only via the two new realization holes)"
+ }
+}

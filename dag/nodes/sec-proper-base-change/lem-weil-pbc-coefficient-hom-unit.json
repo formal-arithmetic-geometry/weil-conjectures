@@ -1,0 +1,141 @@
+{
+ "id": "lem-weil-pbc-coefficient-hom-unit",
+ "kind": "statement",
+ "title": "Normalized coefficient-Hom unit for the ring in degree zero",
+ "statement": "Let C be a small site, R and B sheaves of commutative rings, and phi:R -> B a ring-sheaf map. Let r be restriction of scalars, rc its extension to cochain complexes, and sigma:R[0] -> rc(B[0]) the map induced by phi. There exists a bifunctor F:C(B)^op -> (C(R) -> C(B)), a natural isomorphism c from its uncurried restriction to the R-valued product internal Hom after restricting its first input, and a natural B-linear chain map alpha:id -> rc;F(B[0],-). For every B-complex M, rc(alpha_M);c_(B[0],rc(M));Hom_R(sigma,rc(M)) equals the inverse of the specified evaluation-at-one isomorphism Hom_R(R[0],rc(M)) -> rc(M). No arbitrary augmented complexes, comparison u, resolution endofunctor, flatness or injectivity enter this statement.",
+ "stmt_deps": [
+  "def-pc-sheaf-restrict-scalars",
+  "def-weil-sheaf-of-modules-category",
+  "def-pur-hom-complex",
+  "def-weil-pbc-ringed-completion-unit"
+ ],
+ "source": {
+  "document": "literature/stacks-project/algebraization.tex",
+  "place": "Tag 099I (lemma-restriction-derived-complete-equivalence), first arrow of the final displayed composite; sites-cohomology.tex Section 0A8X for the product Hom differential."
+ },
+ "proof": [
+  {
+   "text": "Obtain the separately additive coefficient-Hom bifunctor H with its explicit precomposition scalar action. Extend it to product Hom complexes G, using the structured product specification. Reuse the normalized private comparison retained from the existing restricted coefficient-Hom complex proof; its equation on the actual R-valued product projections is essential.",
+   "uses": [
+    "lem-weil-pbc-restricted-coefficient-hom",
+    "lem-weil-pbc-bilinear-hom-complex",
+    "lem-sc-hom-complex-projections",
+    "lem-weil-pbc-restricted-coefficient-hom-complex"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Construct the R-linear localized map m -> (b -> b*m) and transport it along the underived comparison. Its explicit scalar-action formula proves B-linearity. Set its product component to zero away from source degree zero and use the literal identity B[0]^0 = B at zero. Lift to the product, use zero internal Hom in every other source degree and the vanishing source differential to prove it is a chain map, and use localized naturality to prove naturality in M.",
+   "uses": [
+    "lem-weil-pbc-restricted-coefficient-hom",
+    "lem-weil-pbc-bilinear-hom-complex"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Compose the restricted unit with the normalized comparison and precomposition by sigma. Apply the canonical evaluation isomorphism and compute in each target degree at source degree zero. The single-complex comparison identifies the coefficient map with phi, so the local map evaluates phi(1)*m = m. Cancel the evaluation isomorphism to obtain the required normalization.",
+   "uses": [
+    "def-weil-pbc-ringed-completion-unit",
+    "lem-sc-hom-complex-projections",
+    "def-weil-pbc-extended-localization-cech"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-restricted-coefficient-hom",
+  "lem-weil-pbc-bilinear-hom-complex",
+  "lem-weil-pbc-restricted-coefficient-hom-complex",
+  "lem-sc-hom-complex-projections",
+  "def-weil-pbc-ringed-completion-unit",
+  "def-weil-pbc-extended-localization-cech"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "description": "E6: explicit localized scalar-unit construction, the existing coefficient-complex product comparison with its normalization retained, and the degree-zero evaluation calculation following Stacks Tag 099I. All helper proofs are complete; the product specification is represented by equivalent structured data. The canonical single-complex identification at literal zero is the identity. The degree-zero unit family and the normalized evaluation API therefore use the underived normalization and evaluation laws directly, without a general transport theorem. The underived and complex projections share native internal-Hom endpoints. The consuming comparison and unit proofs unpack the product specification once and pass ProductHomComplexData directly, so projection laws use the same explicit data without repeated choice."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A restriction of scalars functor on sheaves of modules has coextension Hom from the coefficient ring as right adjoint with evaluation at one counit",
+   "results": "ModuleCat.coextendScalars, ModuleCat.RestrictionCoextensionAdj.counit'_app, and PresheafOfModules.restrictScalars. The first two are for individual rings; none states a varying-ring-sheaf product Hom-complex unit or its normalized comparison.",
+   "date": "2026-10-25",
+   "verdict": "No direct match."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An augmentation induces a natural map into the internal Hom complex by evaluation and restriction of scalars",
+   "results": "CochainComplex.augment, ChainComplex.linearYonedaObj, and ModuleCat.RestrictionCoextensionAdj.counit'_app. The latter evaluates ordinary module Hom at one; no sheaf-valued product complex compatibility.",
+   "date": "2026-10-25",
+   "verdict": "No direct match."
+  },
+  {
+   "tool": "grep",
+   "query": "augment.*[Hh]om|[Hh]om.*augment|restrictScalars.*[Aa]dj; rg coefficientHom, coinduction and homComplexUnitEvaluation in lean/Sheaf, lean/WeilConjectures, and Mathlib/Algebra/Category/ModuleCat/Sheaf",
+   "results": "Existing coefficient bifunctor and product-complex extension are proved, but their public comparison theorem forgets the normalized projection equations. HomComplexUnitEvaluationNaturality handles the same-ring evaluation only. SheafCoinductionCounit has a proved scheme-specific adjunction, not the generic small-site normalized complex unit.",
+   "date": "2026-10-25",
+   "verdict": "No duplicate; the unit compatibility is the missing proper step."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.CoefficientHomAugmentation",
+  "date": "2026-10-25",
+  "group": "E1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "def-weil-pbc-completed-pullback",
+   "place": "Comparison of constant and completed coefficients, via flat ringed ideal-complete equivalence: first arrow in the final Tag 099I composite, evaluation at the coefficient ring.",
+   "via": [
+    "lem-weil-pbc-coefficient-hom-augmentation",
+    "lem-weil-pbc-flat-ringed-ideal-complete-equivalence"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.CoefficientHomUnit",
+  "file": "lean/Sheaf/Paper/CoefficientHomUnit.lean",
+  "declaration": "CategoryTheory.exists_coefficientHom_unit",
+  "statement": "theorem exists_coefficientHom_unit\n    {C : Type u} [SmallCategory C] {J : GrothendieckTopology C}\n    {R B : Sheaf J CommRingCat.{u}} (φ : R ⟶ B) :\n    let r := SheafOfModules.restrictScalars.{u}\n      ((sheafCompose J (forget₂ CommRingCat RingCat)).map φ)\n    let rc := r.mapHomologicalComplex (.up ℤ)\n    let σ : ringedSiteRingComplex R ⟶ rc.obj (ringedSiteRingComplex B) :=\n      (HomologicalComplex.single _ (.up ℤ) 0).map\n          (SheafOfModules.LocalizationCech.unitMap φ) ≫\n        (HomologicalComplex.singleMapHomologicalComplex r (.up ℤ) 0).inv.app\n          (SheafOfModules.unit ((sheafCompose J (forget₂ CommRingCat RingCat)).obj B))\n    ∃ F : (ringedSiteComplex B)ᵒᵖ ⥤ ringedSiteComplex R ⥤ ringedSiteComplex B,\n      ∃ c : Functor.uncurry.obj F ⋙ rc ≅\n          rc.op.prod (𝟭 _) ⋙ Functor.uncurry.obj (homComplexFunctor (R := R)),\n        ∃ α : 𝟭 (ringedSiteComplex B) ⟶ rc ⋙ F.obj (op (ringedSiteRingComplex B)),\n          ∀ M : ringedSiteComplex B,\n            rc.map (α.app M) ≫ c.hom.app (op (ringedSiteRingComplex B), rc.obj M) ≫\n                ((homComplexFunctor (R := R)).map σ.op).app (rc.obj M) =\n              (by\n                change rc.obj M ⟶ ((homComplexFunctor (R := R)).obj\n                  (op (ringedSiteRingComplex R))).obj (rc.obj M)\n                exact (ringedHomUnitEvaluationIso R (rc.obj M)).inv)",
+  "branch": "sheaf-dag",
+  "by": "E1",
+  "date": "2026-10-25"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E1",
+  "result": "pass",
+  "landing": "20261025T143059-L-936965",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-fe431",
+  "group": "E6",
+  "result": "pass",
+  "landing": "20261026T111828-L-1744881",
+  "kind": "interface",
+  "note": "independent cc review: re-delivered files against the fcfa9 run (files+fixes): only RingedCompletionUnit/node/change record/report differ and they carry the reviewer's T9-restore fixes; ringedHomUnitEvaluationIso signature delivered vs published (#check identical); UnitPowerCompleteness delivered vs published concurrently; 13 transitive users of the changed names compiled against the delivered set"
+ }
+}

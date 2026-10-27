@@ -107,7 +107,18 @@
   "item": "lem-weil-pbc-reduced-normal-iff-integrally-closed-total-fractions",
   "date": "2026-10-10"
  },
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
  "chapter": "sec-proper-base-change",
  "unit": "sk-thm-p1",
  "split_report": {
@@ -152,5 +163,32 @@
   "landing": "20261012T095915-L-321401",
   "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ },
+ "blueprint_update": {
+  "snapshot": "main-20261023-1620",
+  "commit": "7284bb09daf97437d544c51882b325f9c52cd345",
+  "changed": [
+   "statement",
+   "proof"
+  ],
+  "statement": "Let $R_i\\to S_i$ be homomorphisms of commutative rings for $i=1,\\dots,n$, let $R=\\prod_iR_i$ and $S=\\prod_iS_i$, and let $S_i'\\subseteq S_i$ be the subring of elements integral over $R_i$. Then the subring of $S$ consisting of elements integral over $R$ is exactly $\\prod_iS_i'$. If every $R_i\\to S_i$ is injective, so that $R\\subseteq S$, then $R$ is integrally closed in $S$ if and only if each $R_i$ is integrally closed in $S_i$.",
+  "proof": [
+   {
+    "text": "If a tuple $(s_i)\\in S$ is integral over $R$, applying the coordinate projections $R\\to R_i$, $S\\to S_i$ to a monic equation shows that each $s_i$ is integral over $R_i$.",
+    "uses": [],
+    "elementary": null
+   },
+   {
+    "text": "Conversely, suppose each $s_i$ is a root of a monic polynomial $P_i\\in R_i[X]$. Let $N$ be the maximum of the degrees and replace $P_i$ by $X^{N-\\deg P_i}P_i$, which is monic of degree $N$ and still annihilates $s_i$. Assembling the coefficients coordinatewise gives a monic polynomial of degree $N$ over $R=\\prod_iR_i$ which annihilates $(s_i)$. (For the empty product everything is zero.) This proves that the integral closure of $R$ in $S$ is $\\prod_iS_i'$.",
+    "uses": [],
+    "elementary": null
+   },
+   {
+    "text": "If every $R_i\\to S_i$ is injective, then $R$ is integrally closed in $S$ iff $\\prod_iS_i'=\\prod_iR_i$, iff $S_i'=R_i$ for every $i$ (test with tuples supported in a single coordinate), i.e. iff each $R_i$ is integrally closed in $S_i$.",
+    "uses": [],
+    "elementary": null
+   }
+  ],
+  "note": "the current blueprint (main-20261023-1620, weil-conjectures-blueprint 7284bb09da) states or proves this differently; the node is proved in Lean: recorded 2026-10-23, not reopened"
  }
 }

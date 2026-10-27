@@ -1,0 +1,244 @@
+{
+ "id": "lem-trf-zariski-etale-functor-comparison-square",
+ "kind": "statement",
+ "title": "Canonical Zariski-etale module functor square and flat-base-change section maps",
+ "statement": "Let $T$ be a scheme [def-pc-scheme], with its Zariski site [def-sc-zariski-site] and small etale site [def-weil-pbc-etale-site], and put $\\mathcal O_{T,\\mathrm{et}}(v:V\\to T)=\\Gamma(V,\\mathcal O_V)$. Write $L_T=\\epsilon_T^*$ for tensor pullback and $R_T=\\epsilon_{T,*}$ for restriction to open subschemes along the canonical morphism of ringed sites $\\epsilon_T:T_{\\mathrm{et}}\\to T_{\\mathrm{Zar}}$ [lem-trf-zariski-etale-tensor-sections]. Modules mean sheaves of modules [def-weil-sheaf-of-modules-category]; Zariski quasi-coherence is [pqf-def-coherent] and site quasi-coherence is [def-trf-space-quasi-coherent-module]. Let $a:U\\to T$ be any scheme morphism. Write $a^*$ for scheme tensor pullback [def-pc-module-pullback], and $a_{\\mathrm{et}}^*,a_{\\mathrm{et},*}$ for tensor pullback and direct image on ringed small etale topoi [def-trf-space-etale-module-functors]. For every etale module $G$ on $U$, there is a canonical natural identification $R_Ta_{\\mathrm{et},*}G\\simeq a_*R_UG$, equal on an open $W\\subseteq T$ to the identity of $G(a^{-1}W\\hookrightarrow U)$ with its prescribed scalar action. Its adjoint comparison is a natural isomorphism $L_Ua^*M\\simeq a_{\\mathrm{et}}^*L_TM$ for every Zariski module $M$, without a quasi-coherence hypothesis; the comparison is the one determined by the specified module adjunctions and their units and counits. Suppose further that $a$ is quasi-compact and separated [lem-trf-space-qc-separated-etale-local], and $H$ is a quasi-coherent Zariski module on $U$. Then $a_*H$ is quasi-coherent. For each etale $v:V\\to T$, put $U_V=U\\times_TV$, with projections $a_V:U_V\\to V$ and $v':U_V\\to U$. The canonical degree-zero flat base-change map $v^*a_*H\\to a_{V,*}v'^*H$ is an isomorphism. The resulting maps $\\Gamma(V,v^*a_*H)\\to\\Gamma(U_V,v'^*H)$ are natural in $V,H$, are the section maps of a canonical isomorphism $L_T(a_*H)\\simeq a_{\\mathrm{et},*}L_UH$, and on an open $V=W\\subseteq T$ are the identity of $\\Gamma(a^{-1}W,H)$.",
+ "source": {
+  "document": "literature/stacks-project/descent.tex",
+  "place": "Tags 03FH (remark-change-topologies-ringed-sites), part (2), and 03LC (proposition-equivalence-quasi-coherent-functorial), parts (1),(3): canonical adjunction square and degree-zero flat-base-change section comparison."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-sc-zariski-site",
+  "def-weil-pbc-etale-site",
+  "lem-trf-zariski-etale-tensor-sections",
+  "def-weil-sheaf-of-modules-category",
+  "pqf-def-coherent",
+  "def-trf-space-quasi-coherent-module",
+  "def-pc-module-pullback",
+  "def-trf-space-etale-module-functors",
+  "lem-trf-space-qc-separated-etale-local",
+  "def-sfb-module-base-change-map"
+ ],
+ "proof": [
+  {
+   "text": "Obtain c and the normalized section family e from [lem-trf-etale-extension-free-presentations-hom]. Its linearity, module naturality and open-unit clauses are exactly the first three requested equations. Ignore its additional free-presentation and localization clauses.",
+   "uses": [
+    "lem-trf-etale-extension-free-presentations-hom"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Apply [lem-trf-zariski-etale-right-adjoint-square] to a,cU,cT. It supplies hp and r with the exact open-coordinate normalization. The specified pullback comparison is already a natural isomorphism by its conjugateIsoEquiv definition, so every component is invertible.",
+   "uses": [
+    "lem-trf-zariski-etale-right-adjoint-square",
+    "lem-weil-pbc-conjugate-iso-unit-equation"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "For quasi-compact separated a, use [pqf-lem-pushforward-qcoh] (separated implies quasi-separated) to get the quasi-coherent direct image. For an etale test V choose injective resolutions of H and of its pullback to V×_T U. Both vertical etale maps are flat. The augmented lift of [lem-weil-pbc-flat-base-change-lift] gives t. The resolution comparison is invertible by [lem-weil-pbc-flat-base-change-resolution-iso]. In degree zero [lem-weil-pbc-flat-base-change-resolution-degree-zero] identifies its composite with the canonical moduleBaseChangeMap followed by the zeroth-derived-functor identification. Cancel that identification to prove the actual moduleBaseChangeMap invertible.",
+   "uses": [
+    "pqf-lem-pushforward-qcoh",
+    "def-weil-quasi-separated-morphism",
+    "def-weil-etale-morphism",
+    "lem-weil-pbc-flat-base-change-lift",
+    "lem-weil-pbc-flat-base-change-resolution-iso",
+    "lem-weil-pbc-flat-base-change-resolution-degree-zero"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply [lem-trf-zariski-etale-pushforward-section-formula] with c,e and the three normalization equations, plus hp,r and its open formula. This supplies the required equality with the actual moduleBaseChangeMap on top sections. Its right side is invertible by step 3; cancel the two e-components to make every additive section component of the small-etale pushforward comparison invertible. Objectwise invertibility makes its underlying presheaf map invertible, and the forgetful functors from sheaves and from module sheaves reflect isomorphisms. Thus the comparison itself is invertible.",
+   "uses": [
+    "lem-trf-zariski-etale-pushforward-section-formula"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Naturality holds on all modules: compose the small-etale pullback unit, the inverse pullback-comparison transformation, and extension of the scheme pullback counit, and take its naturality equation. For the final unit identity, apply unit_conjugateEquiv_symm to the composite scheme/extension and extension/small-etale adjunctions with r.inv. Expand the composite units, compose with the extension of the scheme counit, and cancel r.inv against r.hom by naturality. Naturality of the extension unit and the right triangle identity of scheme pullback/pushforward give exactly pushforward of the extension unit. No quasi-coherence is needed for either formal identity.",
+   "uses": [
+    "lem-weil-pbc-conjugate-iso-unit-equation",
+    "def-pc-module-pullback"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-trf-etale-extension-free-presentations-hom",
+  "lem-trf-zariski-etale-right-adjoint-square",
+  "lem-weil-pbc-conjugate-iso-unit-equation",
+  "pqf-lem-pushforward-qcoh",
+  "def-weil-quasi-separated-morphism",
+  "def-weil-etale-morphism",
+  "lem-weil-pbc-flat-base-change-lift",
+  "lem-weil-pbc-flat-base-change-resolution-iso",
+  "lem-weil-pbc-flat-base-change-resolution-degree-zero",
+  "lem-trf-zariski-etale-pushforward-section-formula",
+  "def-pc-module-pullback"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/descent.tex",
+  "place": "03FH (2), 03LC (3); N3 stage-3 Lean assembly using existing normalized extension and resolution-defined degree-zero flat base change, with right-square and section-formula steps isolated."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For morphisms of schemes the square comparing Zariski and small etale ringed module functors commutes with tensor pullback and with quasi compact separated pushforward via flat base change",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.pullbackPushforwardAdjunction\", \"module\": \"Mathlib/AlgebraicGeometry/Modules/Sheaf\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} →\\n  (f : X ⟶ Y) → AlgebraicGeometry.Scheme.Modules.pullback f ⊣ AlgebraicGeometry.Scheme.Modules.pushforward f\", \"doc\": \"For any morphism $ f : X \\to Y $ of schemes, the pullback functor from the category of sheaves of modules over $ Y $'s structure sheaf to the category of sheaves of modules over $ X $'s structure sheaf\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.conjugateEquiv_pullbackComp_inv\", \"module\": \"Mathlib/AlgebraicGeometry/Modules/Sheaf\", \"type\": \"∀ {X Y Z : AlgebraicGeometry.Scheme} (f : X ⟶ Y) (g : Y ⟶ Z),\\n  (CategoryTheory.conjugateEquiv\\n        ((AlgebraicGeometry.Scheme.Modules.pullbackPushforwardAdjunction g).comp\\n          (AlgebraicGeometry.Scheme.Modules.pullbackPushforwardAdjunction f))\\n        (AlgebraicGeometry.Scheme.Modules.pull\", \"doc\": \"For schemes $X, Y, Z$ and morphisms $f : X \\\\to Y$, $g : Y \\\\to Z$, the conjugate equivalence between the composition of pullback-pushforward adjunctions $ (g_\\\\ast \\\\dashv g^\\\\ast) \\\\circ (f_\\\\ast \\\\dashv f^\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.pseudofunctor_map_adj\", \"module\": \"Mathlib/AlgebraicGeometry/Modules/Sheaf\", \"type\": \"∀ {X Y : CategoryTheory.LocallyDiscrete AlgebraicGeometry.Schemeᵒᵖ} (f : X ⟶ Y),\\n  (AlgebraicGeometry.Scheme.Modules.pseudofunctor.map f).adj =\\n    (AlgebraicGeometry.Scheme.Modules.pullbackPushforwardAdjunction f.as.unop).toCat\", \"doc\": \"For any morphism $ f $ in the opposite category of schemes, the adjunction associated with the pseudofunctor's mapping of $ f $ is equal to the pullback-pushforward adjunction between the module categ\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.pullbackComp\", \"module\": \"Mathlib/AlgebraicGeometry/Modules/Sheaf\", \"type\": \"{X Y Z : AlgebraicGeometry.Scheme} →\\n  (f : X ⟶ Y) →\\n    (g : Y ⟶ Z) →\\n      (AlgebraicGeometry.Scheme.Modules.pullback g).comp (AlgebraicGeometry.Scheme.Modules.pullback f) ≅\\n        AlgebraicGeometry.Scheme.Modules.pullback (CategoryTheory.CategoryStruct.comp f g)\", \"doc\": \"For any schemes $X, Y, Z$ and morphisms $f : X \\\\to Y$, $g : Y \\\\to Z$, the composition of the pullback functors along $g$ and $f$ is naturally isomorphic to the pullback functor along the composition $\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.pseudofunctor_associativity_assoc\", \"module\": \"Mathlib/AlgebraicGeometry/Modules/Sheaf\", \"type\": \"∀ {X Y Z T : AlgebraicGeometry.Scheme} (f : X ⟶ Y) (g : Y ⟶ Z) (h : Z ⟶ T)\\n  {Z_1 : CategoryTheory.Functor T.Modules X.Modules}\\n  (h_1 :\\n    AlgebraicGeometry.Scheme.Modules.pullback\\n        (CategoryTheory.CategoryStruct.comp (CategoryTheory.CategoryStruct.comp f g) h) ⟶\\n      Z_1),\\n  CategoryTheor\", \"doc\": \"Let $X, Y, Z, T$ be schemes with morphisms $f: X \\\\to Y$, $g: Y \\\\to Z$, and $h: Z \\\\to T$. The assignment $X \\\\mapsto \\\\mathrm{Mod}(X)$ (the category of sheaves of $\\\\mathcal{O}_X$-modules) and $(f: X \\\\to \"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.pseudofunctor_right_unitality_assoc\", \"module\": \"Mathlib/AlgebraicGeometry/Modules/Sheaf\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) {Z : CategoryTheory.Functor Y.Modules X.Modules}\\n  (h : AlgebraicGeometry.Scheme.Modules.pullback f ⟶ Z),\\n  CategoryTheory.CategoryStruct.comp\\n      (AlgebraicGeometry.Scheme.Modules.pullbackComp (CategoryTheory.CategoryStruct.id X) f).inv\\n      (Catego\", \"doc\": \"For any scheme morphism $ f : X \\to Y $, the pseudofunctor structure of the pullback operation on module sheaves satisfies a right unitality associativity condition: the composition of the inverse of t\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.instIsLeftAdjointPullback\", \"module\": \"Mathlib/AlgebraicGeometry/Modules/Sheaf\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y), (AlgebraicGeometry.Scheme.Modules.pullback f).IsLeftAdjoint\", \"doc\": \"For any morphism $ f : X \\to Y $ of schemes, the pullback functor from the category of sheaves of modules over $ Y $'s structure sheaf to the category of sheaves of modules over $ X $'s structure sheaf\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.pseudofunctor_associativity\", \"module\": \"Mathlib/AlgebraicGeometry/Modules/Sheaf\", \"type\": \"∀ {X Y Z T : AlgebraicGeometry.Scheme} (f : X ⟶ Y) (g : Y ⟶ Z) (h : Z ⟶ T),\\n  CategoryTheory.CategoryStruct.comp\\n      (AlgebraicGeometry.Scheme.Modules.pullbackComp f (CategoryTheory.CategoryStruct.comp g h)).inv\\n      (CategoryTheory.CategoryStruct.comp\\n        (CategoryTheory.Functor.whiskerRight\", \"doc\": \"For any schemes $X, Y, Z, T$ and morphisms $f : X \\\\to Y$, $g : Y \\\\to Z$, $h : Z \\\\to T$, the pullback functors associated to the compositions $f \\\\circ (g \\\\circ h)$ and $(f \\\\circ g) \\\\circ h$ are equal. \"}",
+   "date": "2026-10-22",
+   "verdict": "no match: general pullback adjunctions and composition isomorphisms do not supply this mixed Zariski/small-etale square or its quasi-coherent direct-image section comparison"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Canonical pullback comparison from Zariski modules to etale modules by adjunction and identity of direct images on open sections and pushforward comparison for quasi coherent sheaves",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"SheafOfModules.PullbackConstruction.adjunction\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.PullbackContinuous\", \"type\": \": (forget S ⋙ PresheafOfModules.pullback.{v} φ.val ⋙ PresheafOfModules.sheafification (𝟙 R.val)) ⊣ pushforward.{v} φ\", \"doc\": \"Given categories $\\\\mathcal{C}$ and $\\\\mathcal{D}$ with Grothendieck topologies $J$ and $K$, a continuous functor $F : \\\\mathcal{C} \\\\to \\\\mathcal{D}$, and sheaves of rings $S$ on $\\\\mathcal{C}$ and $R$ on \"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.instIsLeftAdjointPullback\", \"module\": \"Mathlib.AlgebraicGeometry.Modules.Sheaf\", \"type\": \": (pullback f).IsLeftAdjoint\", \"doc\": \"For any morphism $ f : X \\to Y $ of schemes, the pullback functor from the category of sheaves of modules over $ Y $'s structure sheaf to the category of sheaves of modules over $ X $'s structure sheaf\"}\n  {\"name\": \"SheafOfModules.pullbackPushforwardAdjunction\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.PullbackContinuous\", \"type\": \": pullback.{v} φ ⊣ pushforward.{v} φ\", \"doc\": \"Given categories $\\\\mathcal{C}$ and $\\\\mathcal{D}$ with Grothendieck topologies $J$ and $K$, a continuous functor $F : \\\\mathcal{C} \\\\to \\\\mathcal{D}$, and a natural transformation $\\\\phi : S \\\\to F_*R$ betw\"}\n  {\"name\": \"TopCat.Presheaf.pushforwardPullbackAdjunction\", \"module\": \"Mathlib.Topology.Sheaves.Presheaf\", \"type\": \"{X Y : TopCat.{v}} (f : X ⟶ Y) : pullback C f ⊣ pushforward C f\", \"doc\": \"Given topological spaces $X$ and $Y$ with a continuous map $f: X \\to Y$, the pullback presheaf functor (defined via left Kan extension) is left adjoint to the pushforward presheaf functor. This establi\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.pullbackPushforwardAdjunction\", \"module\": \"Mathlib.AlgebraicGeometry.Modules.Sheaf\", \"type\": \": pullback f ⊣ pushforward f\", \"doc\": \"For any morphism $ f : X \\to Y $ of schemes, the pullback functor from the category of sheaves of modules over $ Y $'s structure sheaf to the category of sheaves of modules over $ X $'s structure sheaf\"}\n  {\"name\": \"SheafOfModules.pullback\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.PullbackContinuous\", \"type\": \": SheafOfModules.{v} S ⥤ SheafOfModules.{v} R\", \"doc\": \"Given categories $\\\\mathcal{C}$ and $\\\\mathcal{D}$ with Grothendieck topologies $J$ and $K$, a continuous functor $F : \\\\mathcal{C} \\\\to \\\\mathcal{D}$, and a natural transformation $\\\\phi : S \\\\to F_*R$ betw\"}\n  {\"name\": \"SheafOfModules.pushforwardPushforwardAdj\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.PushforwardContinuous\", \"type\": \": pushforward.{v} φ ⊣ pushforward.{v} ψ\", \"doc\": \"Given categories $\\\\mathcal{C}$ and $\\\\mathcal{D}$ with Grothendieck topologies $J$ and $K$, and continuous functors $F : \\\\mathcal{C} \\\\to \\\\mathcal{D}$ and $G : \\\\mathcal{D} \\\\to \\\\mathcal{C}$ forming an ad\"}\n  {\"name\": \"SheafOfModules.pullback_id_comp\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.PullbackContinuous\", \"type\": \": pullbackComp.{v} (F := 𝟭 C) (𝟙 S) φ = isoWhiskerRight (pullbackId S) (pullback φ) ≪≫ Functor.leftUnitor _\", \"doc\": \"The pullback functor induced by the identity functor on a category of sheaves of modules, along the identity natural transformation of the structure sheaf, is naturally isomorphic to the identity func\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: general pullback adjunctions and composition isomorphisms do not supply this mixed Zariski/small-etale square or its quasi-coherent direct-image section comparison"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"pullbackPushforwardAdjunction\", \"pushforward\"",
+   "results": "[loogle] OK 12 hit(s)\n  {\"name\": \"PresheafOfModules.pullbackPushforwardAdjunction\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Presheaf.Pullback\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [CategoryTheory.Category.{v₂, u₂} D] {F : CategoryTheory.Functor C D} {R : CategoryTheory.Functor Dᵒᵖ RingCat} {S : CategoryTheory.Functor Cᵒᵖ RingCat} (φ : S ⟶ F.op.comp R) [(PresheafOfModules.pushforward φ).IsRightAdjoint] : Preshea\", \"doc\": \"Given a morphism of presheaves of rings `S ⟶ F.op ⋙ R`, this is the adjunction\\nbetween associated pullback and pushforward functors on the categories\\nof presheaves of modules.\"}\n  {\"name\": \"PresheafOfModulesOfCommRing.pullbackPushforwardAdjunction\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Presheaf.OfCommRing\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [CategoryTheory.Category.{v₂, u₂} D] {F : CategoryTheory.Functor C D} {R : CategoryTheory.Functor Dᵒᵖ CommRingCat} {S : CategoryTheory.Functor Cᵒᵖ CommRingCat} (φ : S ⟶ F.op.comp R) [(PresheafOfModulesOfCommRing.pushforward φ).IsRight\", \"doc\": \"The adjunction between pullback and pushforward for modules over presheaves of\\ncommutative rings.\"}\n  {\"name\": \"SheafOfModules.pullbackPushforwardAdjunction\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.PullbackContinuous\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [CategoryTheory.Category.{v₂, u₂} D] {J : CategoryTheory.GrothendieckTopology C} {K : CategoryTheory.GrothendieckTopology D} {F : CategoryTheory.Functor C D} {S : CategoryTheory.Sheaf J RingCat} {R : CategoryTheory.Sheaf K RingCat} [F\", \"doc\": \"Given a continuous functor between sites `F`, and a morphism of sheaves of rings\\n`S ⟶ (F.sheafPushforwardContinuous RingCat.{u} J K).obj R`, this is the adjunction\\nbetween the corresponding pullback a\"}\n  {\"name\": \"SheafOfModules.pullbackPushforwardAdjunction_homEquiv_pullbackObjUnitToUnit\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.PullbackFree\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [CategoryTheory.Category.{v₂, u₂} D] {J : CategoryTheory.GrothendieckTopology C} {K : CategoryTheory.GrothendieckTopology D} {F : CategoryTheory.Functor C D} {S : CategoryTheory.Sheaf J RingCat} {R : CategoryTheory.Sheaf K RingCat} [F\", \"doc\": \"\"}\n  {\"name\": \"SheafOfModules.pullbackPushforwardAdjunction_homEquiv_symm_unitToPushforwardObjUnit\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.PullbackFree\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [CategoryTheory.Category.{v₂, u₂} D] {J : CategoryTheory.GrothendieckTopology C} {K : CategoryTheory.GrothendieckTopology D} {F : CategoryTheory.Functor C D} {S : CategoryTheory.Sheaf J RingCat} {R : CategoryTheory.Sheaf K RingCat} [F\", \"doc\": \"\"}\n  {\"name\": \"TopCat.Presheaf.pullbackPushforwardAdjunction\", \"module\": \"Mathlib.Topology.Sheaves.Presheaf\", \"type\": \" (C : Type u) [CategoryTheory.Category.{v, u} C] [CategoryTheory.Limits.HasColimits C] {X Y : TopCat} (f : X ⟶ Y) : TopCat.Presheaf.pullback C f ⊣ TopCat.Presheaf.pushforward C f\", \"doc\": \"The pullback and pushforward along a continuous map are adjoint to each other.\"}\n  {\"name\": \"TopCat.Presheaf.pullbackPushforwardAdjunction_unit_app_app_germToPullbackStalk\", \"module\": \"Mathlib.Topology.Sheaves.Stalks\", \"type\": \" (C : Type u) [CategoryTheory.Category.{v, u} C] [CategoryTheory.Limits.HasColimits C] {X Y : TopCat} (f : X ⟶ Y) (F : TopCat.Presheaf C Y) (V : (TopologicalSpace.Opens ↑Y)ᵒᵖ) (x : ↑X) (hx : (CategoryTheory.ConcreteCategory.hom f) x ∈ Opposite.unop V) : CategoryTheory.CategoryStruct.comp (((TopCat.P\", \"doc\": \"\"}\n  {\"name\": \"TopCat.Presheaf.pullbackPushforwardAdjunction_unit_app_app_germToPullbackStalk_assoc\", \"module\": \"Mathlib.Topology.Sheaves.Stalks\", \"type\": \" (C : Type u) [CategoryTheory.Category.{v, u} C] [CategoryTheory.Limits.HasColimits C] {X Y : TopCat} (f : X ⟶ Y) (F : TopCat.Presheaf C Y) (V : (TopologicalSpace.Opens ↑Y)ᵒᵖ) (x : ↑X) (hx : (CategoryTheory.ConcreteCategory.hom f) x ∈ Opposite.unop V) {Z : C} (h : F.stalk ((CategoryTheory.ConcreteCa\", \"doc\": \"\"}\n  {\"name\": \"TopCat.Presheaf.pullbackPushforwardAdjunction_unit_pullback_map_germToPullbackStalk\", \"module\": \"Mathlib.Topology.Sheaves.Stalks\", \"type\": \" (C : Type u) [CategoryTheory.Category.{v, u} C] [CategoryTheory.Limits.HasColimits C] {X Y : TopCat} (f : X ⟶ Y) (F : TopCat.Presheaf C Y) (U : TopologicalSpace.Opens ↑X) (x : ↑X) (hx : x ∈ U) (V : TopologicalSpace.Opens ↑Y) (hV : U ≤ (TopologicalSpace.Opens.map f).obj V) : CategoryTheory.CategoryS\", \"doc\": \"\"}\n  {\"name\": \"TopCat.Presheaf.pullbackPushforwardAdjunction_unit_pullback_map_germToPullbackStalk_assoc\", \"module\": \"Mathlib.Topology.Sheaves.Stalks\", \"type\": \" (C : Type u) [CategoryTheory.Category.{v, u} C] [CategoryTheory.Limits.HasColimits C] {X Y : TopCat} (f : X ⟶ Y) (F : TopCat.Presheaf C Y) (U : TopologicalSpace.Opens ↑X) (x : ↑X) (hx : x ∈ U) (V : TopologicalSpace.Opens ↑Y) (hV : U ≤ (TopologicalSpace.Opens.map f).obj V) {Z : C} (h : F.stalk ((Cat\", \"doc\": \"\"}\n  {\"name\": \"TopCat.Sheaf.pullbackPushforwardAdjunction\", \"module\": \"Mathlib.Topology.Sheaves.Functors\", \"type\": \" {X Y : TopCat} (A : Type u_1) [CategoryTheory.Category.{w, u_1} A] {FA : A → A → Type u_2} {CA : A → Type w} [(X Y : A) → FunLike (FA X Y) (CA X) (CA Y)] [CategoryTheory.ConcreteCategory A FA] [CategoryTheory.Limits.HasColimits A] [CategoryTheory.Limits.HasLimits A] [CategoryTheory.Limits.Preserves\", \"doc\": \"The adjunction between pullback and pushforward for sheaves on topological spaces.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.pullbackPushforwardAdjunction\", \"module\": \"Mathlib.AlgebraicGeometry.Modules.Sheaf\", \"type\": \" {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) : AlgebraicGeometry.Scheme.Modules.pullback f ⊣ AlgebraicGeometry.Scheme.Modules.pushforward f\", \"doc\": \"The pullback functor for categories of sheaves of modules over schemes\\nis left adjoint to the pushforward functor.\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: general pullback adjunctions and composition isomorphisms do not supply this mixed Zariski/small-etale square or its quasi-coherent direct-image section comparison"
+  },
+  {
+   "tool": "grep",
+   "query": "((zariski.*etale|etale.*zariski).*(pullback|pushforward|comparison)|(pullback|pushforward).*(zariski.*etale|etale.*zariski))",
+   "results": "[grep] OK 0 hit(s)",
+   "date": "2026-10-22",
+   "verdict": "no match: general pullback adjunctions and composition isomorphisms do not supply this mixed Zariski/small-etale square or its quasi-coherent direct-image section comparison"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Flat base change degree zero gives natural isomorphism between etale tensor sections of a direct image and direct image of the associated etale quasi coherent module",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"KaehlerDifferential.tensorKaehlerEquivOfFormallyEtale_apply\", \"module\": \"Mathlib/RingTheory/Etale/Kaehler\", \"type\": \"∀ (R : Type u_1) (S : Type u_2) (T : Type u_3) [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : CommRing T]\\n  [inst_3 : Algebra R S] [inst_4 : Algebra R T] [inst_5 : Algebra S T] [inst_6 : IsScalarTower R S T]\\n  [inst_7 : Algebra.FormallyEtale S T] (a : TensorProduct S T Ω[S⁄R]),\\n  (KaehlerDiffer\", \"doc\": \"Given commutative rings $ R $, $ S $, and $ T $ with $ S $ an $ R $-algebra, $ T $ an $ S $-algebra, and $ T $ an $ R $-algebra via the scalar tower $ R \\\\to S \\\\to T $, if the algebra $ S \\\\to T $ is fo\"}\n  {\"name\": \"KaehlerDifferential.tensorKaehlerEquivOfFormallyEtale\", \"module\": \"Mathlib/RingTheory/Etale/Kaehler\", \"type\": \"(R : Type u_1) →\\n  (S : Type u_2) →\\n    (T : Type u_3) →\\n      [inst : CommRing R] →\\n        [inst_1 : CommRing S] →\\n          [inst_2 : CommRing T] →\\n            [inst_3 : Algebra R S] →\\n              [inst_4 : Algebra R T] →\\n                [inst_5 : Algebra S T] →\\n                  [IsScalarTower\", \"doc\": \"Given commutative rings $R$, $S$, and $T$ with $S$ an $R$-algebra, $T$ an $S$-algebra, and $T$ an $R$-algebra via the scalar tower $R \\\\to S \\\\to T$, if the algebra $S \\\\to T$ is formally étale, then the\"}\n  {\"name\": \"KaehlerDifferential.isBaseChange_of_formallyEtale\", \"module\": \"Mathlib/RingTheory/Etale/Kaehler\", \"type\": \"∀ (R : Type u_1) (S : Type u_2) (T : Type u_3) [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : CommRing T]\\n  [inst_3 : Algebra R S] [inst_4 : Algebra R T] [inst_5 : Algebra S T] [inst_6 : IsScalarTower R S T]\\n  [Algebra.FormallyEtale S T], IsBaseChange T (KaehlerDifferential.map R R S T)\", \"doc\": \"If $ S $ is a formally étale $ R $-algebra and $ T $ is an $ S $-algebra, then the module of Kähler differentials $ \\\\Omega_{T/S} $ is a base change of $ \\\\Omega_{S/R} $ via the algebra homomorphism $ S\"}\n  {\"name\": \"Algebra.Etale.baseChange\", \"module\": \"Mathlib/RingTheory/Etale/Basic\", \"type\": \"∀ (R : Type u) (A : Type v) (B : Type u_1) [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A]\\n  [inst_3 : CommRing B] [inst_4 : Algebra R B] [Algebra.Etale R A], Algebra.Etale B (TensorProduct R B A)\", \"doc\": \"If $ A $ is an étale algebra over a commutative ring $ R $, and $ B $ is a commutative $ R $-algebra, then the tensor product $ B \\\\otimes_R A $ is an étale algebra over $ B $.\"}\n  {\"name\": \"Algebra.FormallyEtale.instTensorProduct\", \"module\": \"Mathlib/RingTheory/Etale/Basic\", \"type\": \"∀ {R : Type u} {A : Type v} {B : Type u_1} [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A]\\n  [inst_3 : CommRing B] [inst_4 : Algebra R B] [Algebra.FormallyEtale R A],\\n  Algebra.FormallyEtale B (TensorProduct R B A)\", \"doc\": \"If $ A $ is a formally étale $ R $-algebra, then the tensor product $ B \\\\otimes_R A $ is a formally étale $ B $-algebra.\"}\n  {\"name\": \"KaehlerDifferential.tensorKaehlerEquivOfFormallyEtale_symm_D_algebraMap\", \"module\": \"Mathlib/RingTheory/Etale/Kaehler\", \"type\": \"∀ (R : Type u_1) (S : Type u_2) (T : Type u_3) [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : CommRing T]\\n  [inst_3 : Algebra R S] [inst_4 : Algebra R T] [inst_5 : Algebra S T] [inst_6 : IsScalarTower R S T]\\n  [inst_7 : Algebra.FormallyEtale S T] (s : S),\\n  (KaehlerDifferential.tensorKaehlerEqu\", \"doc\": \"For a formally étale algebra extension $ S \\to T $ over $ R $, the inverse of the base change isomorphism $ \\\\Omega_{S/R} \\\\otimes_S T \\\\cong \\\\Omega_{T/R} $ maps the Kähler differential $ d_T(\\\\mathrm{alge\"}\n  {\"name\": \"Algebra.Extension.tensorCotangentSpace\", \"module\": \"Mathlib/RingTheory/Etale/Kaehler\", \"type\": \"{R : Type u_1} →\\n  {S : Type u_2} →\\n    {T : Type u_3} →\\n      [inst : CommRing R] →\\n        [inst_1 : CommRing S] →\\n          [inst_2 : CommRing T] →\\n            [inst_3 : Algebra R S] →\\n              [inst_4 : Algebra R T] →\\n                [inst_5 : Algebra S T] →\\n                  [IsScalarTower\", \"doc\": \"Given a formally étale ring homomorphism $ f: P \\\\to Q $ between commutative rings, this constructs a linear equivalence between the tensor product $ T \\\\otimes_S P.\\\\text{CotangentSpace} $ and $ Q.\\\\text\"}\n  {\"name\": \"Algebra.FormallyEtale.of_restrictScalars\", \"module\": \"Mathlib/RingTheory/Etale/Basic\", \"type\": \"∀ {R : Type u} {A : Type v} {B : Type u_1} [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A]\\n  [inst_3 : CommRing B] [inst_4 : Algebra R B] [inst_5 : Algebra A B] [IsScalarTower R A B]\\n  [Algebra.FormallyUnramified R A] [Algebra.FormallyEtale R B], Algebra.FormallyEtale A B\", \"doc\": \"If $ A $ is a formally unramified $ R $-algebra and $ B $ is a formally étale $ R $-algebra, then $ B $ is a formally étale $ A $-algebra.\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: general pullback adjunctions and composition isomorphisms do not supply this mixed Zariski/small-etale square or its quasi-coherent direct-image section comparison"
+  },
+  {
+   "tool": "grep",
+   "query": "(zariski.*etale|etale.*zariski).*(module|pullback|pushforward|comparison)",
+   "results": "none",
+   "date": "2026-10-23",
+   "verdict": "no match: general module pullbacks/adjunctions or flatness do not state the mixed small-etale/Zariski square and its canonical section comparisons"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The natural comparison of etale and Zariski tensor pullback and direct image of quasi coherent modules is an isomorphism",
+   "results": "SheafOfModules.pullbackObjFreeIso_hom_naturality; SheafOfModules.pullbackIso; SheafOfModules.PullbackConstruction.adjunction; AlgebraicGeometry.Scheme.Modules.restrictFunctorIsoPullback; SheafOfModules.pullbackObjFreeIso; SheafOfModules.freeFunctorCompPullbackIso; AlgebraicGeometry.Scheme.zariskiTopology_le_etaleTopology; SheafOfModules.pullbackComp",
+   "date": "2026-10-23",
+   "verdict": "no match: general module pullbacks/adjunctions or flatness do not state the mixed small-etale/Zariski square and its canonical section comparisons"
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules.pullback, SheafOfModules.pushforward",
+   "results": "SheafOfModules.pullback; SheafOfModules.instIsLeftAdjointPullback; SheafOfModules.pullbackPushforwardAdjunction; SheafOfModules.pullbackComp; SheafOfModules.pullback_comp_id; SheafOfModules.pullback_id_comp; SheafOfModules.conjugateEquiv_pullbackId_hom; SheafOfModules.pullback_assoc",
+   "date": "2026-10-23",
+   "verdict": "no match: general module pullbacks/adjunctions or flatness do not state the mixed small-etale/Zariski square and its canonical section comparisons"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a scheme morphism the Zariski to small etale module pullback square commutes and quasi compact separated pushforward commutes by flat base change",
+   "results": "AlgebraicGeometry.Scheme.Modules.pullbackPushforwardAdjunction; AlgebraicGeometry.Scheme.Modules.pullback; AlgebraicGeometry.Scheme.Modules.instIsLeftAdjointPullback; AlgebraicGeometry.Scheme.instHasPullbacksEtale; AlgebraicGeometry.Scheme.Modules.pullbackComp; AlgebraicGeometry.Scheme.Modules.instIsRightAdjointPushforward; AlgebraicGeometry.Flat; AlgebraicGeometry.Scheme.Modules.pseudofunctor_map_adj",
+   "date": "2026-10-23",
+   "verdict": "no match: general module pullbacks/adjunctions or flatness do not state the mixed small-etale/Zariski square and its canonical section comparisons"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A quasi compact separated scheme morphism has flat base change for degree zero quasi coherent direct images and the associated sheaf on the small etale site has sections Gamma of pullback",
+   "results": "AlgebraicGeometry.Flat; AlgebraicGeometry.flat_iff; AlgebraicGeometry.Scheme.Hom.flat_appLE; AlgebraicGeometry.Flat.flat_appLE; AlgebraicGeometry.Flat.instHasRingHomPropertyFlat; AlgebraicGeometry.Flat.instOfIsOpenImmersion; AlgebraicGeometry.Flat.instIsMultiplicativeScheme; AlgebraicGeometry.descendsAlong_isOpenImmersion_surjective_inf_flat_inf_quasicompact'",
+   "date": "2026-10-23",
+   "verdict": "no match: general module pullbacks/adjunctions or flatness do not state the mixed small-etale/Zariski square and its canonical section comparisons"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-scheme-zariski-etale-quasi-coherent-equivalence",
+  "date": "2026-10-22",
+  "group": "Q106"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Section-algebra and adjunction-map paragraphs of the polarized ampleness descent input (Stacks 0D3C) in the specialization chain below lem-trf-local-term-locality: Zariski and small etale quasi-coherent modules agree functorially. Historical imported ancestry retained. Re-split of lem-trf-scheme-zariski-etale-quasi-coherent-equivalence, old proof steps 8,10: Canonical Zariski-etale module functor square and flat-base-change section maps.",
+   "via": [
+    "lem-trf-scheme-zariski-etale-quasi-coherent-equivalence",
+    "lem-trf-space-section-algebra-etale-base-change",
+    "lem-trf-algebraic-space-ample-local",
+    "lem-trf-polarized-scheme-etale-descent",
+    "lem-trf-polarized-fine-log-etale-descent",
+    "lem-trf-coherent-log-ideal-chart-construction",
+    "lem-trf-log-blowup-normalization",
+    "lem-trf-log-regular-desingularization",
+    "lem-trf-nodal-pair-projective-resolution",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-trf-zariski-etale-functor-comparison-square",
+  "worker": "stage1",
+  "summary": "Checked 03FH and 03LC against their cited 01LC and 02KH inputs. No statement correction. Seven explicit assembly steps reuse existing nodes, compute the chart limit, specify the adjoint unit equation, and verify section naturality and open identities. No new nodes or Mathlib leaves.",
+  "blueprint": "Historical ancestry under lem-trf-local-term-locality retained. This item realizes old proof steps 8 and 10 of lem-trf-scheme-zariski-etale-quasi-coherent-equivalence: module functor square and qc separated pushforward comparison. The latest locality proof is about contracting correspondences and supplies no duplicate module-comparison statement.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-ringed-topoi-module-adjunction",
+    "why": "Generic tensor module adjunction on ringed topoi, needed to form the two composites; the local-term unit has no replacement."
+   },
+   {
+    "node": "lem-weil-pbc-flat-base-change-map-sections",
+    "why": "Generic canonical base-change map normalization in degree zero, used to check the actual maps and naturality; the local-term unit has no replacement."
+   }
+  ]
+ },
+ "tool_uses": [],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q29-bbdb9e8bd",
+  "group": "Q29",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q29-bbdb9e8bd (reviewer sub-agent of L); spot-checked: I read the item, 7 steps and no new nodes, against Stacks descent 03FH(2) and 03LC(3) with its proof (01LC, 02KH i=0). I also read the statement of every cited node. Step 1: (U_V→U,a_V) is a chart by 02GO and is terminal in A(a,V), so the limit is G(U_V) and on an open W both sides are G(a^{-1}W). Step 2: the composite adjunctions L_Ua^*⊣a_*R_U and a_et^*L_T⊣R_Ta_et,* plus the conjugate-iso lemma with δ:R2→R1 give c in the correct direction, with no quasi-coherence used. Steps 4, 5 and 7: I checked the degree-0 map b⊗s↦a_V^♯(b)v'^*s on generators, including naturality in a non-flat q:V1→V and the identity normalization on opens via κ(g|)=η(g). Step 6 assembles the iso from the unsplit sibling lem-trf-etale-extension-free-presentations-hom. There is no cycle (the closure of 923 nodes does not contain the item). The rg search for duplicates (03LC, 03FH, change-topologies) found none. The statement is unchanged, and the parent's steps 3 and 4 use exactly its two halves. Tool uses accepted: ringed-topoi-module-adjunction and flat-base-change-map-sections. pqf-lem-pushforward-qcoh and lem-pc-flat-base-change-cohom are Lean-closed. FIX (E1/C1, step 3): the step needed a to be quasi-compact as a scheme morphism for 01LC and 02KH, but the hypothesis is the algebraic-space notion of lem-trf-space-qc-separated-etale-local. I added the sentence that a surjective etale map from a quasi-compact scheme onto a^{-1}Z makes a^{-1}Z quasi-compact, citing the Mathlib leaves def-weil-finite-type-morphism and def-weil-pbc-quasi-compact-scheme, and added both to uses and proof_deps (fixes/dag/nodes/sec-trace-formula/lem-trf-zariski-etale-functor-comparison-square.json). Advisory: the blueprint_update of lem-pc-flat-base-change-cohom narrows it to affine bases. When it is applied, step 3 must switch to lem-pc-flat-cohomology-separated plus def-pc-flat-cohomology-comparison, locally on V.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.TraceFormula.ZariskiEtaleFunctorComparisonSquare",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.zariski_etale_functor_comparison_square",
+  "statement": "theorem zariski_etale_functor_comparison_square : ∃ c : ∀ T : Scheme.{u}, ZariskiEtaleModuleContext T, ∃ e : ∀ (T : Scheme.{u}) (F : T.Modules) [F.IsQuasicoherent], (SheafOfModules.toSheaf (smallEtaleModuleRing T)).obj ((c T).extension.obj F) ≅ etaleTensorSectionsSheaf F, (∀ (T : Scheme.{u}) (F : T.Modules) [F.IsQuasicoherent] (V : T.Etale) (b : Γ(V.left, ⊤)) (s : ((c T).extension.obj F).val.obj (op V)), (e T F).hom.hom.app (op V) (b • s) = b • (@id (Γ((tensorPullback V.hom).obj F, ⊤)) ((e T F).hom.hom.app (op V) s))) ∧ (∀ (T : Scheme.{u}) (F K : T.Modules) [F.IsQuasicoherent] [K.IsQuasicoherent] (h : F ⟶ K) (V : T.Etale), ((SheafOfModules.toSheaf (smallEtaleModuleRing T)).map ((c T).extension.map h)).hom.app (op V) ≫ (e T K).hom.hom.app (op V) = (e T F).hom.hom.app (op V) ≫ ((tensorPullback V.hom).map h).app ⊤) ∧ (∀ (T : Scheme.{u}) (F : T.Modules) [F.IsQuasicoherent] (W : T.Opens), ((c T).adjunction.unit.app F).app W ≫ (e T F).hom.hom.app (op ((AlgebraicGeometry.gabberOpenEtale T).obj W)) ≫ (tensorOpenSectionIso T F W).hom = 𝟙 _) ∧ ∀ (U T : Scheme.{u}) (a : U ⟶ T), ∃ (hp : (smallEtaleModulePushforward a).IsRightAdjoint) (r : smallEtaleModulePushforward a ⋙ (c T).restriction ≅ (c U).restriction ⋙ pushforward a), (∀ (G : SmallEtaleModules U) (W : T.Opens), (r.hom.app G).app W = G.val.presheaf.map (AlgebraicGeometry.gabberPreimageEtaleIso a W).hom.op) ∧ (∀ (M : T.Modules), IsIso ((zariskiEtalePullbackComparison a (c U) (c T) hp r).hom.app M)) ∧ ∀ (_ : QuasiCompact a) (_ : IsSeparated a), (∀ (H : U.Modules) [H.IsQuasicoherent], ∃ hqc : ((pushforward a).obj H).IsQuasicoherent, IsIso (zariskiEtalePushforwardComparison a (c U) (c T) hp r H) ∧ ∀ V : T.Etale, IsIso (moduleBaseChangeMap a (pullback.fst V.hom a) V.hom (pullback.snd V.hom a) pullback.condition.symm H) ∧ (@e T ((pushforward a).obj H) hqc).inv.hom.app (op V) ≫ ((SheafOfModules.toSheaf (smallEtaleModuleRing T)).map (zariskiEtalePushforwardComparison a (c U) (c T) hp r H)).hom.app (op V) ≫ (e U H).hom.hom.app (op (a.Etale.obj V)) = (moduleBaseChangeMap a (pullback.fst V.hom a) V.hom (pullback.snd V.hom a) pullback.condition.symm H).app ⊤) ∧ (∀ (H K : U.Modules) [H.IsQuasicoherent] [K.IsQuasicoherent] (h : H ⟶ K), (c T).extension.map ((pushforward a).map h) ≫ zariskiEtalePushforwardComparison a (c U) (c T) hp r K = zariskiEtalePushforwardComparison a (c U) (c T) hp r H ≫ (smallEtaleModulePushforward a).map ((c U).extension.map h)) ∧ ∀ (H : U.Modules) [H.IsQuasicoherent], (c T).adjunction.unit.app ((pushforward a).obj H) ≫ (c T).restriction.map (zariskiEtalePushforwardComparison a (c U) (c T) hp r H) ≫ r.hom.app ((c U).extension.obj H) = (pushforward a).map ((c U).adjunction.unit.app H)",
+  "branch": "newtargets-dag",
+  "by": "Q143",
+  "date": "2026-10-24",
+  "file": "lean/Sheaf/TraceFormula/ZariskiEtaleFunctorComparisonSquare.lean",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-58fc559f5",
+  "group": "Q143",
+  "result": "pass",
+  "note": "Node diff = lean record + landed stmt_dep def-sfb-module-base-change-map (allowed); lean.statement verbatim, one sorry; 11 dep records identical to live; live item has no lean record. Clauses checked: Prop-only ZariskiEtaleModuleContext (subsingleton); e fixed uniquely by linearity, naturality and the open-unit clause (qcoh forced by etaleTensorSectionsSheaf); r fixed on every open to the identity on G(a^{-1}W); pullback comparison = canonical conjugateIsoEquiv mate, correct direction, no qcoh; QuasiCompact/IsSeparated scope only the direct-image part; moduleBaseChangeMap arguments (f=a, f1=fst, u=V.hom, v=snd, condition.symm) correct; the section equation linking base-change sections to zariskiEtalePushforwardComparison via e and a.Etale.obj V is true (both maps agree on opens); identity on opens via the unit clause. Edge cases covered: empty, zero module, a=id, open immersions, non-flat test maps. Gates met; no recompile (no file changed). Advisories: IsIso of the pullback comparison is automatic (it is already an Iso); smallEtaleModulePushforward/Pullback, ZariskiEtaleModuleContext.adjunction and the two comparison maps are owned only by the parent theorem (citing it would be a cycle), so def-sfb-scheme-zariski-etale-module-constructions should be extended; a_et,* uses the scheme fibre-product pushforward, not the space chart-limit moduleDirectImage (equal by proof step 1, same as the parent); stage-3 import cycle through ZariskiEtaleTensorSections -> parent; proof-only plain imports; second reading is the worker's own reread."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "N3",
+  "result": "pass",
+  "landing": "20261026T082559-L-2192494",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

@@ -1,0 +1,125 @@
+{
+ "id": "def-sfb-algebraic-stack-change-base-to-integers",
+ "kind": "definition",
+ "title": "Moduli categories viewed over a smaller base and their absolute diagonal",
+ "statement": "Let $S,B$ be schemes [def-pc-scheme], in the universes of [def-weil-size-convention], and let $g:S\\to B$. Write $j_g:\\mathit{Sch}/S\\to\\mathit{Sch}/B$ for composition with $g$. For a category $p_F:F\\to\\mathit{Sch}/S$ and functors and natural transformations over $S$ [def-sfb-stable-pointed-moduli-groupoids], define $g_!F$ to have the same total category $F$ and projection $j_g\\circ p_F$. A functor $f:F\\to G$ over $S$ induces $g_!f:g_!F\\to g_!G$ with the same underlying functor. The canonical projection from $g_!F$ to the category $\\mathit{Sch}/S$ regarded over $B$ is $p_F$. For an $S$-scheme $U$, the canonical scheme-chart comparison $g_!h_U\\to h_{j_g(U)}$ sends each map $T\\to U$ and each commuting triangle to the same scheme maps, now over $B$. The category of morphisms of pairs $(g_!F,p_F)\\to(g_!G,p_G)$ is the full subcategory of functors over $B$ satisfying $p_G\\circ f=p_F$, with their natural transformations over $B$. Using the affine spectrum [def-weil-affine-spectrum], for $B=\\operatorname{Spec}\\mathbf Z$ and $g$ the unique map, define the absolute product of $F,G$ to be the existing $2$-fibre product [def-sfb-stable-pointed-moduli-groupoids] of their changed projections to the base category $\\mathit{Sch}/B$ with its identity projection. Define the absolute diagonal of $F$ using the relative diagonal [def-sfb-dm-stack-morphism-properties] of its changed structural projection; it sends $x$ to $(x,x,\\mathrm{id})$. These constructions impose no algebraicity, separation or finiteness assumption.",
+ "source": {
+  "document": "literature/stacks-project/algebraic.tex",
+  "place": "Tags 04X5--04X6, lemma-category-of-spaces-over-smaller-base-scheme and definition-viewed-as, via stacks.tex section-localize construction A; absolute product/diagonal as used in stacks-morphisms.tex Tag 050L, lemma-separated-over-separated (5)--(8)."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-size-convention",
+  "def-sfb-stable-pointed-moduli-groupoids",
+  "def-sfb-dm-stack-morphism-properties",
+  "def-weil-affine-spectrum"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Changing the base of a category fibred in groupoids by composing the projection with the functor on slice categories, underlying stack over the integers",
+   "results": "{\"t\": \"2026-10-24T13:15:17Z\", \"tool\": \"leansearch\", \"query\": \"Changing the base of a category fibred in groupoids by composing the projection with the functor on slice categories, underlying stack over the integers\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Grothendieck.base\", \"CategoryTheory.Functor.relativelyRepresentable.isStableUnderBaseChange\", \"HomotopicalAlgebra.instIsStableUnderBaseChangeFibrations\", \"CategoryTheory.Grothendieck.comp_fiber\", \"CategoryTheory.Grothendieck.pre_obj_base\", \"CategoryTheory.Pseudofunctor.Grothendieck.categoryStruct_comp_base\", \"CategoryTheory.BasedFunctor.w\", \"AlgebraicGeometry.SheafedSpace.comp_base\"], \"digest\": \"cba10f8c625603f7\"}",
+   "date": "2026-10-24",
+   "verdict": "No exact Mathlib packaged construction: hits include Grothendieck.base and BasedFunctor.w. The seven existing project definitions in AlgebraicStackChangeBaseToIntegers are reused by an existing:true Lean record on this definition node, as requested in the latest return."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Over.map",
+   "results": "{\"t\": \"2026-10-24T13:15:18Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.Over.map\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"CategoryTheory.Over.map\", \"CategoryTheory.Over.mapId_eq\", \"CategoryTheory.Over.instIsEquivalenceMapOfIsIso\", \"CategoryTheory.Over.map_obj_left\", \"CategoryTheory.Over.mapForget_eq\", \"CategoryTheory.Over.mapId\", \"CategoryTheory.Over.mapIso_functor\", \"CategoryTheory.Over.mapIso_inverse\"], \"digest\": \"d35364bca88dd76c\"}",
+   "date": "2026-10-24",
+   "verdict": "Over.map and its identity/composition laws provide the underlying slice functor; they do not package the based category, induced maps, absolute product or diagonal."
+  },
+  {
+   "tool": "grep",
+   "query": "moduliChangeBase|moduliProductOverIntegers|moduliDiagonalOverIntegers",
+   "results": "{\"t\": \"2026-10-24T13:15:17Z\", \"tool\": \"grep\", \"query\": \"moduliChangeBase|moduliProductOverIntegers|moduliDiagonalOverIntegers\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "No Mathlib hits. Direct rg in lean/WeilConjectures found none; lean/Sheaf found precisely the seven helpers in AlgebraicStackChangeBaseToIntegers.lean. DAG rg found their theorem node only, with no definition node. This node records those existing declarations without redefining them."
+  }
+ ],
+ "status": "split",
+ "import_flags": [],
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-stack-fibre-product-separated-comparison",
+  "date": "2026-10-24",
+  "group": "Q48"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration/moduli prerequisites: absolute comparison in lem-sfb-stack-fibre-product-separated-comparison, proof step 4, views the three stacks over Spec Z. This node owns construction A and its absolute product and diagonal. The created.item chain is inherited and broken; blueprint_refs.py ancestor returns None.",
+   "via": [
+    "lem-sfb-stack-fibre-product-separated-comparison",
+    "lem-sfb-stack-separated-source-separated-inertia-target",
+    "lem-sfb-finite-inertia-local-affine-covers",
+    "lem-sfb-keel-mori-finite-inertia-quotient",
+    "lem-sfb-dm-coarse-proper-locally-quasifinite",
+    "lem-sfb-inertia-free-finite-cover-coarse",
+    "lem-sfb-stable-abelian-level-normalization",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.AlgebraicStackChangeBaseToIntegers",
+  "declaration": "CategoryTheory.moduliChangeBase",
+  "declarations": [
+   "CategoryTheory.moduliChangeBase",
+   "CategoryTheory.moduliChangeBaseMap",
+   "CategoryTheory.moduliChangeBaseScheme",
+   "CategoryTheory.moduliChangeBasePairHom",
+   "CategoryTheory.moduliProductOverIntegers",
+   "CategoryTheory.moduliChangeBaseProjection",
+   "CategoryTheory.moduliDiagonalOverIntegers"
+  ],
+  "statement": "abbrev moduliChangeBase {S B : AlgebraicGeometry.Scheme.{u}} (g : S ⟶ B)\n    (F : BasedCategory.{v₁, w₁} (Over S)) : BasedCategory (Over B)",
+  "branch": "sheaf-dag",
+  "by": "Q48",
+  "date": "2026-10-24",
+  "existing": true,
+  "note": "Repair of returned head 16386997a7be: import and reuse all seven existing definitions in Sheaf.AlgebraicGeometry.AlgebraicStackChangeBaseToIntegers. This new definition node records their construction-A and absolute-product/diagonal notion separately from the algebraicity theorem; it declares nothing and delivers no definition module. Names, data and signatures are exactly those of the existing declarations. The prior extraction and theorem-module replacement are removed from this packet."
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-a050696a0",
+  "group": "Q48",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-a050696a0",
+  "group": "Q48",
+  "result": "pass",
+  "note": "Re-delivery after 1638 extraction was refused at landing for duplicate names. New def node def-sfb-algebraic-stack-change-base-to-integers is existing:true on Sheaf.AlgebraicGeometry.AlgebraicStackChangeBaseToIntegers; all 7 decls present on side-live (l.40-118), statement verbatim with moduliChangeBase l.40-41, branch sheaf-dag, NL matches each construction, no other def-node owner. Item module identical to the 1638 packet (maths PASS) except the public import of the declaring module; item node differs from live only in lean+stmt_deps (adds def-sfb-dm-stack-morphism-properties, def-sfb-relative-moduli-inertia and the new def node; no theorem node in stmt_deps); dependency nodes unchanged; lean.statement verbatim. Maths re-confirmed: canonical (id,φ) 2-cartesian equivalence, representability, scheme-test separatedness, independent absolute-diagonal hypothesis over Spec(ULift ℤ); no extra hypotheses or universe restriction. Helpers not hollow, theorems sorry, docstrings OK, report sections present. No file changed, so no compile. Advisory: specULiftZIsTerminal is reached via def-weil-affine-spectrum through the def node."
+ }
+}

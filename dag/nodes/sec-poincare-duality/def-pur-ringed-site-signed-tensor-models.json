@@ -1,0 +1,146 @@
+{
+ "id": "def-pur-ringed-site-signed-tensor-models",
+ "kind": "definition",
+ "title": "Ringed-site resolving tensor presentation and canonical signed derived symmetry",
+ "status": "split",
+ "import_flags": [],
+ "statement": "Let $(\\mathcal C,J)$ be a site small relative to the universe of its module sheaves and $R$ a sheaf of commutative rings. Use the category $\\mathcal M=\\operatorname{Mod}(R)$ of module sheaves [def-weil-sheaf-of-modules-category] and its ordinary unbounded derived category $D(\\mathcal M)$ with localization $Q$ in the chosen morphism universe [def-weil-abstract-derived-category]. Write $\\operatorname{Tot}(P\\otimes_RQ')$ for the direct-sum total tensor with differential $d_P\\otimes1+(-1)^p1\\otimes d_{Q'}$ on bidegree $(p,q)$ [def-pc-tensor-complex-sheaves]. Let $\\mathcal P_R$ be the full subcategory of K-flat complexes [def-pc-kflat-complex] all of whose terms are flat module sheaves [def-pc-flat-sheaf-modules]. A resolving tensor presentation $T$ consists of a bifunctor $T:D(\\mathcal M)\\times D(\\mathcal M)\\to D(\\mathcal M)$ and a natural representative isomorphism $\\rho_{P,Q'}:Q\\operatorname{Tot}(P\\otimes_RQ')\\xrightarrow{\\sim}T(QP,QQ')$ on $\\mathcal P_R\\times\\mathcal P_R$. This is presentation data for the specified K-flat localization, with no boundedness or completion requirement and no equality imposed on the site object and morphism universes.\n\nA signed total swap $\\chi_{P,Q'}:\\operatorname{Tot}(P\\otimes_RQ')\\xrightarrow{\\sim}\\operatorname{Tot}(Q'\\otimes_RP)$ means one whose restriction to each bidegree summand is the ordinary sheaf tensor swap multiplied by $(-1)^{pq}$. A derived symmetry $\\sigma:T\\xrightarrow{\\sim}\\mathrm{swap}\\circ T$ is canonical if on every pair of resolving complexes it satisfies $\\sigma_{QP,QQ'}\\circ\\rho_{P,Q'}=\\rho_{Q',P}\\circ Q(\\chi_{P,Q'})$ for a signed total swap. Define $\\mathrm{derivedTensorSymmetry}(R,T)$ to be this uniquely determined canonical derived symmetry, supplied by descent of the signed total swap. The existing uniqueness construction is used; no freely chosen symmetry or additional tensor functor is introduced.",
+ "stmt_deps": [
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-abstract-derived-category",
+  "def-pc-tensor-complex-sheaves",
+  "def-pc-kflat-complex",
+  "def-pc-flat-sheaf-modules"
+ ],
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 06YS, 06YU and 0FPQ: flat-term K-flat tensor representatives and signed total swap, used for the two tensor symmetries in blueprint tower-geometric-gamma proof (2)"
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "K flat derived tensor presentation on a ringed site with canonical Koszul symmetry",
+   "results": "ModuleCat.preservesFiniteLimits_tensorLeft_of_ringHomFlat; Module.Flat.iff_rTensor_preserves_shortComplex_exact; Module.Flat.rTensor_shortComplex_exact; Module.Flat.lTensor_shortComplex_exact; Module.Flat.iff_flat_tensorProduct; Module.Flat.iff_preservesFiniteLimits_tensorLeft; Module.Flat.ker_lTensor_eq; tensorKaehlerQuotKerSqEquiv_symm_tmul_D",
+   "date": "2026-10-25",
+   "verdict": "No match: module flatness and Kahler tensor results do not define a ringed-site resolving tensor presentation with signed derived symmetry."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "K flat tensor presentation and canonical derived Koszul symmetry on a ringed site",
+   "results": "PresheafOfModules.DifferentialsConstruction.instHasDifferentials; PresheafOfModules.DifferentialsConstruction.relativeDifferentials'; PresheafOfModules.HasDifferentials; KaehlerDifferential.tensorKaehlerEquivBase; PresheafOfModules.DifferentialsConstruction.isUniversal'; tensorKaehlerQuotKerSqEquiv_symm_tmul_D; PresheafOfModules.DifferentialsConstruction.relativeDifferentials'_obj; Module.Flat.ker_lTensor_eq",
+   "date": "2026-10-25",
+   "verdict": "No match: presheaf differentials and ordinary tensor/flatness results are different notions."
+  },
+  {
+   "tool": "grep",
+   "query": "DescentModels|ShiftedTensorModel|derivedTensorSymmetry|compactificationLimit (Mathlib/CategoryTheory); ShiftedTensorModel|derivedTensorSymmetry|DescentModels (Mathlib/Algebra)",
+   "results": "Both msearch.py grep calls: OK 0 hit(s).",
+   "date": "2026-10-25",
+   "verdict": "No Mathlib definition matches the simultaneous normalized compactification interface or the ringed-site signed resolving tensor presentation."
+  },
+  {
+   "tool": "grep",
+   "query": "rg -n DescentModels|ShiftedTensorModel|derivedTensorSymmetry|compactificationLimit lean/WeilConjectures; rg -n ^(structure DescentModels|structure ShiftedTensorModel|def derivedTensorSymmetry|def compactificationLimit) lean/Sheaf",
+   "results": "WeilConjectures: only unrelated finitePresentationDescentModels in NoetherianApproximation/RelativeGluingGlue.lean. Sheaf: CompleteProjectionMateDescent.lean:124 DescentModels, :217 compactificationLimit; ShiftedTensorMorphismCalculus.lean:272 ShiftedTensorModel, :488 derivedTensorSymmetry.",
+   "date": "2026-10-25",
+   "verdict": "Reuse these already published definitions; do not duplicate them."
+  },
+  {
+   "tool": "grep",
+   "query": "Definition-node lean.module ownership scan of dag/nodes for Sheaf.Paper.CompleteProjectionMateDescent and Sheaf.Paper.ShiftedTensorMorphismCalculus; blueprint_refs.py search DescentModels; blueprint_refs.py search ShiftedTensorModel",
+   "results": "No definition node owns either module. Name searches have no blueprint match; broader projection/reduction and tensor/symmetry searches find related theorem nodes and scheme-specific signed shifts.",
+   "date": "2026-10-25",
+   "verdict": "New definition ownership nodes are required by the immutable-head H2 return; the scheme-specific signed shift definition has a different notion and module."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-pur-compactification-b-projection-reduction",
+  "date": "2026-10-25",
+  "group": "NE"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-weil-operations",
+   "place": "Tags 06YS, 06YU and 0FPQ: flat-term K-flat tensor representatives and signed total swap, used for the two tensor symmetries in blueprint tower-geometric-gamma proof (2)",
+   "via": [
+    "lem-pur-compactification-b-projection-reduction",
+    "lem-pur-tower-purity-realized-transpose",
+    "lem-pur-tower-trace-purity-comparison",
+    "lem-pur-rational-weil-naturality-mate"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-poincare-duality",
+ "unit": "sk-lem-finite",
+ "lean": {
+  "module": "Sheaf.Paper.ShiftedTensorMorphismCalculus",
+  "declaration": "SheafOfModules.ShiftedTensorModel",
+  "declarations": [
+   "SheafOfModules.ShiftedModuleCategory",
+   "SheafOfModules.ShiftedDerivedCategory",
+   "SheafOfModules.shiftedTensorResolving",
+   "SheafOfModules.shiftedOrdinaryTensor",
+   "SheafOfModules.shiftedTotalTensor",
+   "SheafOfModules.ShiftedTensorModel",
+   "SheafOfModules.IsSignedComplexSwap",
+   "SheafOfModules.IsCanonicalDerivedTensorSymmetry",
+   "SheafOfModules.derivedTensorSymmetry"
+  ],
+  "statement": "structure ShiftedTensorModel",
+  "branch": "newtargets-dag",
+  "by": "NE",
+  "date": "2026-10-25",
+  "existing": true,
+  "note": "Definition ownership of existing published declarations, requested by return L on immutable head d57e733e0f90. No Lean declaration is added, moved, renamed or duplicated. This node owns the listed definitions; the theorem in this module remains a separate statement node."
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-be8a42ff7",
+  "group": "NE",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-be8a42ff7",
+  "group": "NE",
+  "result": "pass",
+  "note": "Re-delivery of d57e (RETURN H2). The Lean is unchanged except for 4 added public imports; the signature is byte-identical and lean.statement is verbatim in the file. Statement, proof and proof_deps equal live; only stmt_deps gain 6 nodes: the new existing:true def-pur-compactification-reduction-models (owns DescentModels, red, lim, adj, integralImage, systemImage, compactificationLimit, reconstruction, systemOpenInverse, systemProjection in CompleteProjectionMateDescent; all 17 decls exist and the statement matches the Lean), the new existing:true def-pur-ringed-site-signed-tensor-models (ShiftedTensorModel, shiftedTensorResolving, derivedTensorSymmetry = choose of the proved ∃! signed-swap theorem), and 4 landed def owners (projection-reduction-presentation, integral-ringed-projection-maps, integral-system-canonical-bridge, sp-normalized-towers). This follows the N6 3acf existing:true re-export precedent; no parallel owner. Maths re-read: D, K⊗̂PM, α/α^•, q, s=(1⊗b)τ, the square in diagrammatic order, the conditional inverse and naturality all match the node. b is independent of the free SpNormalizedEquivalence.adjunction (triangle identity). No unramifiedness or extra hypotheses; edge cases f=id, open-only or proper-only compactification, d=0, zero inputs, shifts, e>1 and empty schemes are fine. Advisory: uncited def owners (def-sp-varying-ring-operations, def-pur-integral-compact-support-coefficient-data, def-sfb-proetale-tensor-model, def-coef-semilinear-system-models, def-coef-ringed-sequence-site, def-pc-kflat-complex, def-weil-finite-field-fiber); Stacks 0FPQ is not in the cited-tags list. No compile, since no file was changed."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q1",
+  "result": "pass",
+  "landing": "20261026T023755-L-600959",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)",
+  "sorry_before": [
+   "SheafOfModules.derivedTensorAssociator_exists",
+   "SheafOfModules.shiftedTensorMorphismCalculus",
+   "SheafOfModules.shiftedTensorMorphismCalculus_local"
+  ],
+  "sorry_after": [
+   "SheafOfModules.shiftedTensorMorphismCalculus",
+   "SheafOfModules.shiftedTensorMorphismCalculus_local"
+  ]
+ }
+}

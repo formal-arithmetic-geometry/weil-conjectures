@@ -121,7 +121,47 @@
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-N6-238375dce (reviewer sub-agent of L); spot-checked: Read the full definition, all five dependency statements and cited blueprint sources, unit/chapter route, and master construction at ChangeOfCoefficients.lean:281–289. Verified condensed coefficient categories, conjugate orientation, and absence of flatness requirements; checked identity, empty-open and non-flat examples. No duplicate, circularity, missing citation or repair found. Detailed review written to review.md."
  },
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": [
+    "AlgebraicGeometry.ProEtale.CondensedRing.openImmersionShriekIso"
+   ]
+  },
+  "slopmaster2": {
+   "state": "rests_on_sorry",
+   "decls": [
+    {
+     "name": "AlgebraicGeometry.ProEtale.CondensedRing.openImmersionShriekIso",
+     "module": "WeilConjectures.SixFunctors.ProEtale.ModuleObject.ChangeOfCoefficients",
+     "lines": [
+      279,
+      288
+     ],
+     "kind": "def",
+     "sorry": false
+    }
+   ],
+   "missing": [],
+   "open": [
+    {
+     "name": "AlgebraicGeometry.ProEtale.CondensedRing.hasProjectionFormula_openImmersion",
+     "module": "WeilConjectures.SixFunctors.ProEtale.ModuleObject.LowerShriek.Defs",
+     "lines": [
+      79,
+      84
+     ],
+     "kind": "theorem",
+     "nodes": [
+      "lem-sfb-open-projection-formula",
+      "sk-def-sfb-module-lower-shriek"
+     ],
+     "below": true
+    }
+   ]
+  }
+ },
  "lean": {
   "module": "WeilConjectures.SixFunctors.ProEtale.ModuleObject.ChangeOfCoefficients",
   "declaration": "AlgebraicGeometry.ProEtale.CondensedRing.openImmersionShriekIso",
@@ -139,5 +179,15 @@
   "group": "Q133",
   "result": "pass",
   "note": "Existing-declaration attachment: the node differs from live only by the lean field (existing:true, AlgebraicGeometry.ProEtale.CondensedRing.openImmersionShriekIso, ChangeOfCoefficients.lean:281). The blueprint source is verbatim the node statement and its lean list names this declaration; the item is not on the dropped list. Each clause matches: arbitrary a with IsMonHom (no flatness; the PreservesFiniteLimits variable belongs only to section Derived), IsOpenImmersion j, coefficientMap a_X/a_U, j_! ⋙ Ext_X ≅ Ext_U ⋙ j_!. The body is (conjugateIsoEquiv adj1 adj2).symm (comapUpperStarIso a j) along the j_!⊣j^* and Ext⊣Res adjunctions, in the node's orientation. All used declarations are in the five stmt_dep records (conjugateIsoEquiv is the Mathlib match). No other node owns the declaration; the derived version is a separate node. Edge cases checked: identity a and j, empty U and X, non-flat a, arbitrary universe u. nt_compile --json probe (#check, #print axioms, rfl body equality) exited 0 in 10.0 s. sorryAx comes only from open upstream lemmas, as the report states. No findings."
+ },
+ "blueprint_update": {
+  "snapshot": "main-20261023-1620",
+  "commit": "7284bb09daf97437d544c51882b325f9c52cd345",
+  "changed": [
+   "statement"
+  ],
+  "statement": "Let $a\\colon\\Lambda\\to\\Lambda'$ be a morphism of commutative condensed rings\n([sk-def-sfb-coefficient-change]) and $j\\colon U\\to X$ an open immersion. The natural isomorphism\n\n$$\n\\operatorname{Ext}_{a_X}\\circ j_!\\;\\cong\\;j_!\\circ\\operatorname{Ext}_{a_U}\\colon\n\\Mod_{\\Lambda_U}\\longrightarrow\\Mod_{\\Lambda'_X}\n$$\n\nis the conjugate, in the sense of [def-sfb-conjugate-pull-iso], of the isomorphism\n$\\operatorname{Res}_{a_U}\\circ j^*\\cong j^*\\circ\\operatorname{Res}_{a_X}$ of\n[def-sfb-comap-upper-star-iso] along the adjunctions $j_!\\dashv j^*$\n([sk-def-sfb-module-lower-shriek]) and $\\operatorname{Ext}\\dashv\\operatorname{Res}$\n([det-def-sfb-change-of-scalars]).",
+  "proof": [],
+  "note": "the current blueprint (main-20261023-1620, weil-conjectures-blueprint 7284bb09da) states or proves this differently; a worker who touches the node follows it"
  }
 }

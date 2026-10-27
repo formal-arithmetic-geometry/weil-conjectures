@@ -1,0 +1,122 @@
+{
+ "id": "lem-pur-normalized-cartier-sum",
+ "kind": "statement",
+ "title": "Addition for three individually normalized Cartier Kummer representatives",
+ "statement": "Fix P, m=ell^n and A in [def-pur-conventions], n>=1. Let T be a separated finite-type k-scheme [sk-def-purity-conv]. Let i1:D1->T, i2:D2->T and s:Z->T be closed immersions with invertible kernel ideals [def-pc-divisor-line-bundle], such that ker(s)=ker(i1)*ker(i2). Fix inclusions a1:D1->Z and a2:D2->Z with a1;s=i1 and a2;s=i2. Suppose kappa1,kappa2,kappasum are degree-two module Ext representatives on their respective supports with target the finite etale root line A(1), each satisfying SupportedKummerBoundary [def-asd-ordinary-supported-kummer-boundary]. Then the canonical pro-etale comparison of kappasum equals the sum of the comparisons of kappa1 and kappa2 after functorialCupChangeSupport along a1 and a2 [lem-pur-supported-cup-functoriality]. The assertion concerns only this equality of three classes; Cartier geometry, the support inclusions, and normalization of the input representatives are hypotheses. The corresponding supported Hom representatives are supplied explicitly and identified with Ext.hom by HEq, so this is the same assertion without repeated derived-instance conversion.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-an/lem-pur-divisor-class.proof.md",
+  "place": "Local relative-class and anticommuting-boundaries computation; Cartier addition paragraph"
+ },
+ "stmt_deps": [
+  "def-pur-conventions",
+  "sk-def-purity-conv",
+  "def-pc-divisor-line-bundle",
+  "def-asd-ordinary-supported-kummer-boundary",
+  "lem-pur-supported-cup-functoriality"
+ ],
+ "proof": [
+  {
+   "text": "The Cartier tensor-pair geometry identifies O(Z), its canonical section, and complementary frame with the tensor of the two input pairs. The relative extension tensor/Baer formula gives betaZ=q1^*beta1+q2^*beta2 for the canonical supported-integer maps.",
+   "uses": [
+    "lem-pur-cartier-pair-tensor-addition"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The input boundary specifications and relative-extension uniqueness identify their integral and finite representatives with these canonical framed constructions. Apply additivity and enlargement-of-support compatibility of the normalized realization. Uniqueness of normalized constant-support maps identifies the resulting maps with functorialCupChangeSupport. The identical coefficient and site comparison preserves addition. This proves the global equation before restriction; empty, coincident and nonreduced Cartier divisors are included by the tensor formula.",
+   "uses": [
+    "lem-pur-divisor-normalized-realization",
+    "lem-pur-supported-cup-functoriality"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-pur-cartier-pair-tensor-addition",
+  "lem-pur-divisor-normalized-realization",
+  "lem-pur-supported-cup-functoriality"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-an/lem-pur-divisor-class.proof.md",
+  "place": "Local relative-class and anticommuting-boundaries computation; Cartier addition paragraph"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Kummer class of an effective Cartier divisor is additive and equals minus localization boundary on a principal chart",
+   "results": "{\"t\": \"2026-10-25T10:21:56Z\", \"tool\": \"leanfinder\", \"query\": \"Kummer class of an effective Cartier divisor is additive and equals minus localization boundary on a principal chart\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"WeierstrassCurve.Affine.Point.toClass\", \"WeierstrassCurve.Affine.Point.toClass_apply\", \"AlgebraicGeometry.StructureSheaf.const_add\", \"AlgebraicGeometry.StructureSheaf.normalize_finite_fraction_representation\", \"AlgebraicGeometry.exists_eq_pow_mul_of_isAffineOpen\", \"AlgebraicGeometry.Scheme.IdealSheafData.isLocalization_away\", \"WeierstrassCurve.Affine.CoordinateRing.XYIdeal'\", \"AlgebraicGeometry.ProjectiveSpectrum.StructureSheaf.SectionSubring.add_mem'\"], \"digest\": \"73a5517718333c87\"}",
+   "date": "2026-10-25",
+   "verdict": "no matching Cartier supported Kummer theorem"
+  },
+  {
+   "tool": "grep",
+   "query": "SupportedKummerBoundary|divisor_class|cartierPairTensor",
+   "results": "{\"t\": \"2026-10-25T10:22:48Z\", \"tool\": \"grep\", \"query\": \"SupportedKummerBoundary|divisor_class|cartierPairTensor\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-25",
+   "verdict": "no matching Cartier supported Kummer theorem"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Scheme, \"Kummer\"",
+   "results": "{\"t\": \"2026-10-25T10:22:49Z\", \"tool\": \"loogle\", \"query\": \"AlgebraicGeometry.Scheme, \\\"Kummer\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-25",
+   "verdict": "no matching Cartier supported Kummer theorem"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Kummer class of a Cartier divisor is additive in the product of two Cartier ideals and has the negative local localization boundary",
+   "results": "{\"t\": \"2026-10-25T10:39:11Z\", \"tool\": \"leansearch\", \"query\": \"Kummer class of a Cartier divisor is additive in the product of two Cartier ideals and has the negative local localization boundary\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"FractionalIdeal.count_prod\", \"FractionalIdeal.count_mul'\", \"MeromorphicOn.divisor_fun_smul\", \"FractionalIdeal.count_mul\", \"MeromorphicOn.divisor_mul\", \"MeromorphicOn.divisor_fun_mul\", \"ArchimedeanClass.mk_mul\", \"AddLocalization\"], \"digest\": \"dd6cd8e90a2ba230\"}",
+   "date": "2026-10-25",
+   "verdict": "no matching Cartier supported Kummer theorem"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.PurityDivisorClass",
+  "date": "2026-10-25",
+  "group": "C6"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pur-divisor-class",
+   "place": "Local relative-class and anticommuting-boundaries computation; Cartier addition paragraph"
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-a1-kummer",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.NormalizedCartierSum",
+  "file": "lean/Sheaf/Paper/NormalizedCartierSum.lean",
+  "declaration": "WeilConjectures.PurityFiniteSetting.normalizedCartier_sum",
+  "statement": "theorem normalizedCartier_sum (P : PurityFiniteSetting.{u})\n    {D₁ D₂ Z T : Scheme.{u}} (a : T ⟶ Spec (.of P.field.k))\n    [IsSeparated a] [LocallyOfFiniteType a] [QuasiCompact a]\n    (i₁ : D₁ ⟶ T) (i₂ : D₂ ⟶ T) (s : Z ⟶ T)\n    [IsClosedImmersion i₁] [IsClosedImmersion i₂] [IsClosedImmersion s]\n    (h₁ : i₁.ker.IsInvertible) (h₂ : i₂.ker.IsInvertible)\n    (hs : s.ker = i₁.ker * i₂.ker) (hsum : s.ker.IsInvertible)\n    (a₁ : D₁ ⟶ Z) (a₂ : D₂ ⟶ Z) (ha₁ : a₁ ≫ s = i₁) (ha₂ : a₂ ≫ s = i₂)\n    (κ₁ : Abelian.Ext\n      ((Etale.lowerStar (ModuleCat.{u + 1} P.Coefficient) i₁).obj (P.constantEtale D₁))\n      (P.frameTwistEtale T 1) 2)\n    (κ₂ : Abelian.Ext\n      ((Etale.lowerStar (ModuleCat.{u + 1} P.Coefficient) i₂).obj (P.constantEtale D₂))\n      (P.frameTwistEtale T 1) 2)\n    (κsum : Abelian.Ext\n      ((Etale.lowerStar (ModuleCat.{u + 1} P.Coefficient) s).obj (P.constantEtale Z))\n      (P.frameTwistEtale T 1) 2)\n    (α₁ : P.FunctorialCupH false i₁ 2 1)\n    (α₂ : P.FunctorialCupH false i₂ 2 1)\n    (αsum : P.FunctorialCupH false s 2 1)\n    (hα₁ : HEq κ₁.hom α₁) (hα₂ : HEq κ₂.hom α₂) (hαsum : HEq κsum.hom αsum)\n    (hκ₁ : Etale.SupportedKummerBoundary P.Coefficient P.diagonalExponent\n      P.diagonalExponent_annihilates i₁ h₁ (P.diagonalExponent_isUnit a) κ₁)\n    (hκ₂ : Etale.SupportedKummerBoundary P.Coefficient P.diagonalExponent\n      P.diagonalExponent_annihilates i₂ h₂ (P.diagonalExponent_isUnit a) κ₂)\n    (hκsum : Etale.SupportedKummerBoundary P.Coefficient P.diagonalExponent\n      P.diagonalExponent_annihilates s hsum (P.diagonalExponent_isUnit a) κsum) :\n    P.functorialCupCompare s 2 1 αsum =\n      P.functorialCupChangeSupport true s i₁ a₁ ha₁ 2 1\n          (P.functorialCupCompare i₁ 2 1 α₁) +\n        P.functorialCupChangeSupport true s i₂ a₂ ha₂ 2 1\n          (P.functorialCupCompare i₂ 2 1 α₂)",
+  "branch": "sheaf-dag",
+  "by": "C6",
+  "date": "2026-10-25"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C6",
+  "result": "pass",
+  "landing": "20261025T180532-L-4000619",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C6",
+  "result": "pass",
+  "landing": "20261025T180532-L-4000619",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

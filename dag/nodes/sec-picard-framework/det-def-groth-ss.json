@@ -1,0 +1,260 @@
+{
+ "id": "det-def-groth-ss",
+ "kind": "definition",
+ "title": "Composable pair with acyclicity; the couple of a double complex",
+ "statement": "Let $\\mathcal A\\xrightarrow{\\,F\\,}\\mathcal B\\xrightarrow{\\,G\\,}\\mathcal C$\nbe additive functors, where $\\mathcal A$ and $\\mathcal B$ are Grothendieck\nabelian categories (so they have enough injectives and the right derived\nfunctors $R^nF$, $R^nG$, $R^n(G\\circ F)$ are computed on injective\nresolutions) and $\\mathcal C$ is\nabelian. An object $B\\in\\mathcal B$ is *$G$-acyclic* if $R^qG(B)=0$ for\n$q>0$, and $(F,G)$ is a *composable pair with acyclicity* if $F(I)$\nis $G$-acyclic for every injective $I\\in\\mathcal A$.\n\nLet $E$ be a first-quadrant cohomological spectral sequence in\n$\\mathcal C$ starting at $E_2$, and put\n$E_\\infty^{p,q}:=E_{p+q+2}^{p,q}$ (from this page on the differentials\ninto and out of $(p,q)$ vanish). An *abutment* of $E$ to a family of\nobjects $(H^n)_{n\\geq0}$ of $\\mathcal C$ is a decreasing filtration of\neach $H^n$ by subobjects\n\n$$\nH^n=F^0H^n\\supseteq F^1H^n\\supseteq\\cdots\\supseteq F^{n+1}H^n=0\n$$\n\nsuch that $F^pH^n/F^{p+1}H^n\\cong E_\\infty^{p,q}$ whenever $p+q=n$.\n\nFor a first-quadrant double complex $D^{\\bullet,\\bullet}$ in $\\mathcal C$,\nlet $\\operatorname{Tot}(D)$ be its total complex. Filtering\n$\\operatorname{Tot}(D)$ by either degree gives a bigraded exact couple,\nand its derived couples give the two spectral sequences of $D$. The image\nfiltration\n$F^pH^n=\\operatorname{im}\\bigl(H^n(F^p\\operatorname{Tot}D)\\to\nH^n(\\operatorname{Tot}D)\\bigr)$ is an abutment of each of the two spectral\nsequences of $D$ to $H^\\bullet(\\operatorname{Tot}D)$; in the first quadrant\nit is finite in each degree, so convergence is automatic.",
+ "source": {
+  "document": "literature/blueprint/main-20261023-1620/blueprint/sec-picard-framework/sk-thm-picard-perfect/det-def-groth-ss.md",
+  "place": "node det-def-groth-ss, order 783"
+ },
+ "stmt_deps": [
+  "def-sp-grothendieck-abelian",
+  "def-sp-injective-resolutions",
+  "lem-weil-pbc-right-derived-plus-injective",
+  "def-weil-abstract-derived-category",
+  "def-sp-spectral-sequence",
+  "def-sp-filtration",
+  "def-sp-double-complex-total",
+  "def-sp-exact-couple"
+ ],
+ "proof": [
+  {
+   "text": "The first paragraph defines the acyclicity predicate, rather than asserting a Grothendieck spectral sequence for arbitrary additive functors. By [lem-sp-grothendieck-enough-injectives], both source categories have enough injectives. Apply [lem-weil-pbc-right-derived-plus-injective] to $F$, $G$, and $G\\circ F$: the sources have enough injectives and the targets are abelian. One obtains a resolution by embedding $X$ into an injective, then successively embedding each cokernel into an injective; the differentials are the quotient maps followed by these embeddings, so their kernels are the preceding images. With an injective resolution $X\\to I^\\bullet$ [def-sp-injective-resolutions], define $R^nv(X)=H^n(v(I^\\bullet))$. The cited derived-functor computation and uniqueness make this independent of the resolution. Thus $R^qG(B)=0$ for $q>0$ and its universal quantification over $F(I)$ are well-defined predicates. No identification $R^0v=v$ and no left exactness is used.",
+   "uses": [
+    "lem-sp-grothendieck-enough-injectives",
+    "lem-weil-pbc-right-derived-plus-injective",
+    "def-sp-injective-resolutions"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tags 05TI (lemma-enough-injectives-right-derived), 05TH (lemma-injective-acyclic), 015A (definition-higher-derived-functors); enough injectives supplied by the cited DAG node"
+   }
+  },
+  {
+   "text": "For a first-quadrant spectral sequence [def-sp-spectral-sequence], $d_r$ out of $(p,q)$ has target $(p+r,q-r+1)$ and the incoming map has source $(p-r,q+r-1)$. These are zero when $r>q+1$ and $r>p$, respectively. Both inequalities hold for every $r\\ge p+q+2$. The successor-page homology isomorphisms therefore identify all these entries with $E_{p+q+2}^{p,q}$. Defining an abutment to be the stated finite decreasing filtration [def-sp-filtration] with the displayed graded-piece isomorphisms now involves only subobjects, quotients and these stable entries.",
+   "uses": [
+    "def-sp-spectral-sequence",
+    "def-sp-filtration"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/homology.tex",
+    "place": "Tag 012K (section-filtered-complex), bidegree formula; Tag 012U (definition-filtered-complex-ss-converges); blueprint det-def-groth-ss, second paragraph"
+   }
+  },
+  {
+   "text": "Put $K=\\operatorname{Tot}(D)$ and let $F$ be either degree filtration of [def-sp-double-complex-total]. Only $0\\le i\\le n$ contributes to $K^n$, so only finite biproducts are needed in $\\mathcal C$. The two components of the total differential preserve or raise each filtered index, hence $F^pK$ is a subcomplex. In each degree the summands with filtered index exactly $p$ complement those with index $>p$. Consequently inclusion and projection give the degreewise split short exact sequence $0\\to F^{p+1}K\\to F^pK\\to\\operatorname{gr}^p_FK\\to0$. This applies to each filtration separately, without identifying the two filtrations on cohomology.",
+   "uses": [
+    "def-sp-double-complex-total"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/homology.tex",
+    "place": "Tag 012X (section-double-complex), the two displayed filtrations; Tag 012M (lemma-spectral-sequence-filtered-complex)"
+   }
+  },
+  {
+   "text": "Apply [lem-weil-pbc-complex-ses-homology-long-exact] to each short exact sequence in Step 3. Set $A^{p,q}=H^{p+q}(F^pK)$ and $T^{p,q}=H^{p+q}(\\operatorname{gr}^p_FK)$. Inclusion, quotient and boundary give $a:A^{p,q}\\to A^{p-1,q+1}$, $g:A^{p,q}\\to T^{p,q}$ and $f:T^{p,q}\\to A^{p+1,q}$. Exactness of the long sequence at these three positions says exactly $\\ker a=\\operatorname{im}f$, $\\ker f=\\operatorname{im}g$ and $\\ker g=\\operatorname{im}a$, with the indices supplied by the displayed arrows. Thus these are bigraded exact couples. Concretely, to use the convention of [def-sp-exact-couple], reindex both terms by $(P,Q)=(2p+q,-p)$, with inverse $(p,q)=(-Q,P+2Q)$. Then the bidegrees of $a,f,g$ are $(-1,1),(2,-1),(0,0)$, exactly that definition.",
+   "uses": [
+    "lem-weil-pbc-complex-ses-homology-long-exact",
+    "def-sp-exact-couple"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/homology.tex",
+    "place": "Tag 0117 (lemma-long-exact-sequence-cochain), Tag 011Q (definition-exact-couple), Tag 0AMJ (remark-shifted-exact-couple)"
+   }
+  },
+  {
+   "text": "Use [lem-sp-derived-couple-exact] on either reindexed couple. Its derived couple exists and is exact; iterating gives $T_1=T$, $T_{r+1}=H(T_r,d_r)$. Indeed after $s$ derivations the differential in $(P,Q)$ has bidegree $(s+2,-s-1)$; the inverse change of coordinates gives $(s+1,-s)$ in $(p,q)$, so this is $d_{s+1}$. This is the filtered-complex spectral sequence: its initial term is $H^{p+q}(\\operatorname{gr}^p_FK)$ and its maps are precisely the inclusion, quotient and connecting maps used in the filtered-complex exact-couple construction. Taking the first and second degree filtrations gives, by this construction, the two spectral sequences of $D$ in [thm-sp-double-complex-spectral-sequences]. They are first quadrant, since the graded complex at filtration index $p$ is zero for $p<0$ and has no terms in total degree below $p$; taking page cohomology preserves this zero region. Discard page one to obtain sequences starting at page two as in the definition.",
+   "uses": [
+    "lem-sp-derived-couple-exact",
+    "thm-sp-double-complex-spectral-sequences"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/homology.tex",
+    "place": "Tags 011R (lemma-derived-exact-couple), 011S (definition-spectral-sequence-associated-exact-couple), 0AMJ (remark-shifted-exact-couple), 012M (lemma-spectral-sequence-filtered-complex), 012X (section-double-complex)"
+   }
+  },
+  {
+   "text": "For each of the two filtrations, [thm-sp-double-complex-spectral-sequences] gives the specific image filtration $F^pH^n=\\operatorname{im}(H^n(F^pK)\\to H^n(K))$ and the isomorphisms $E_\\infty^{p,q}\\cong F^pH^{p+q}/F^{p+1}H^{p+q}$. These are the spectral sequences of Step 5 because the theorem uses these same degree filtrations. Its stabilized terms identify with the page selected in Step 2, since $p+q+2>\\max(p,q+1)$. To check the endpoints directly, $F^0K=K$ makes the first cohomology map the identity, while $F^{n+1}K^n=0$ makes $H^n(F^{n+1}K)=0$. Factorization through filtration inclusions makes the images decreasing. Hence $H^n=F^0H^n\\supseteq\\cdots\\supseteq F^{n+1}H^n=0$, and the graded-piece isomorphisms exhibit the required abutment for each sequence. The two choices of $F$ may give different subobjects of $H^n(K)$.",
+   "uses": [
+    "thm-sp-double-complex-spectral-sequences"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/homology.tex",
+    "place": "Tags 012P (definition-filtration-cohomology-filtered-complex), 012W (lemma-biregular-ss-converges), 0132 (lemma-first-quadrant-ss)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sp-grothendieck-enough-injectives",
+  "lem-weil-pbc-right-derived-plus-injective",
+  "def-sp-injective-resolutions",
+  "def-sp-spectral-sequence",
+  "def-sp-filtration",
+  "def-sp-double-complex-total",
+  "lem-weil-pbc-complex-ses-homology-long-exact",
+  "def-sp-exact-couple",
+  "lem-sp-derived-couple-exact",
+  "thm-sp-double-complex-spectral-sequences"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/homology.tex",
+  "place": "Tags 0117, 011Q, 011R, 011S, 0AMJ, 012M, 012P, 012W, 012X, 0132; acyclicity definitions additionally follow derived.tex Tags 05TI, 05TH, 015A"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "exactCouple|Abutment|columnFiltration|IsAcyclicComposablePair",
+   "results": "No hits for exactCouple/Abutment/columnFiltration/IsAcyclicComposablePair; spectral-object search finds spectralSequence machinery, which requires supplied spectral-object data and does not construct the two filtered couples or their abutments.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The spectral sequences of a first quadrant double complex abut to the cohomology of its total complex",
+   "results": "HomologicalComplex₂.total and total-differential lemmas; none supplies the two exact couples and image-filtration abutments.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.SpectralSequence",
+   "results": "CategoryTheory.SpectralSequence and its page/iso API; no exact couple, acyclicity or image-filtration abutment construction.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A first quadrant double complex in an abelian category has two exact couple spectral sequences converging to total cohomology with the image filtration",
+   "results": "First phrasing returned Ext and derived-category long exact sequences; second returned truncation exactness and homological-functor long exact sequences. None states this compound definition/construction.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "spectralSequence|spectral.sequence|exact.couple|converg",
+   "results": "No hits for exactCouple/Abutment/columnFiltration/IsAcyclicComposablePair; spectral-object search finds spectralSequence machinery, which requires supplied spectral-object data and does not construct the two filtered couples or their abutments.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Filtered cochain complexes give spectral sequences from exact couples of short exact sequences of filtration steps and graded pieces",
+   "results": "First phrasing returned Ext and derived-category long exact sequences; second returned truncation exactness and homological-functor long exact sequences. None states this compound definition/construction.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "import_flags": [
+  "lean_not_found"
+ ],
+ "blueprint_kind": "definition",
+ "blueprint_order": 783,
+ "blueprint_uses": [],
+ "blueprint_lean": [
+  "CategoryTheory.Functor.IsAcyclicComposablePair",
+  "CategoryTheory.SpectralSequence.pageInfinity",
+  "CategoryTheory.SpectralSequence.Abutment",
+  "HomologicalComplex\\u2082.columnFiltration",
+  "HomologicalComplex\\u2082.firstSpectralSequenceAbutment",
+  "HomologicalComplex\\u2082.firstSpectralSequenceAbutment_filtration",
+  "HomologicalComplex\\u2082.flipFirstSpectralSequenceAbutment",
+  "HomologicalComplex\\u2082.flipFirstSpectralSequenceAbutment_filtration"
+ ],
+ "blueprint_lean_not_found": [
+  "CategoryTheory.Functor.IsAcyclicComposablePair",
+  "CategoryTheory.SpectralSequence.pageInfinity",
+  "CategoryTheory.SpectralSequence.Abutment",
+  "HomologicalComplex\\u2082.columnFiltration",
+  "HomologicalComplex\\u2082.firstSpectralSequenceAbutment",
+  "HomologicalComplex\\u2082.firstSpectralSequenceAbutment_filtration",
+  "HomologicalComplex\\u2082.flipFirstSpectralSequenceAbutment",
+  "HomologicalComplex\\u2082.flipFirstSpectralSequenceAbutment_filtration"
+ ],
+ "blueprint_snapshot": "main-20261023-1620",
+ "blueprint": {
+  "is": "det-def-groth-ss",
+  "from": null,
+  "same_as": [
+   "sk-def-groth-ss"
+  ]
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-perfect",
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "det-def-groth-ss",
+  "worker": "stage1",
+  "summary": "Retained the complete latest blueprint statement, including arbitrary additive functors and both exact-couple/image-filtration clauses. Reused existing definitions, the additive derived-functor computation, cohomology long exact sequence, derived-couple iteration and double-complex convergence theorem. Wrote the E1-to-DAG-couple reindexing explicitly. No new nodes or Mathlib leaves; all searches are logged.",
+  "blueprint": "det-def-groth-ss.md: paragraph 1 is Step 1; the E∞ and abutment paragraphs are Step 2; final paragraph is Steps 3–6, including both exact couples and their respective image filtrations. sk-def-groth-ss is an existing duplicate recorded in same_as.",
+  "tool_uses": [
+   {
+    "node": "lem-sp-grothendieck-enough-injectives",
+    "why": "Generic existence of injectives used for the acyclicity definitions; this unit supplies no separate existence theorem."
+   },
+   {
+    "node": "lem-weil-pbc-right-derived-plus-injective",
+    "why": "General additive-functor computation on injective resolutions; unlike the left-exact-only definition it has exactly the hypotheses of this item."
+   },
+   {
+    "node": "lem-weil-pbc-complex-ses-homology-long-exact",
+    "why": "Generic long exact cohomology sequence constructs the filtration exact couples; no such general theorem is local to this unit."
+   },
+   {
+    "node": "lem-sp-derived-couple-exact",
+    "why": "Generic exact-couple derivation and iteration, applied after the explicit bidegree conversion."
+   },
+   {
+    "node": "thm-sp-double-complex-spectral-sequences",
+    "why": "Existing theorem states both spectral sequences and their exact image-filtration abutments; reusing it preserves the blueprint double-complex route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sp-grothendieck-enough-injectives",
+  "lem-weil-pbc-right-derived-plus-injective",
+  "lem-weil-pbc-complex-ses-homology-long-exact",
+  "lem-sp-derived-couple-exact",
+  "thm-sp-double-complex-spectral-sequences"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q83-2d9a39f76",
+  "group": "Q83",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q83-2d9a39f76 (reviewer sub-agent of L); spot-checked: I read the item and all 12 cited node statements in full. There are 0 new nodes, and the item is not superseded: it is still unsplit in live and side-live. Every cited statement is identical on live and none is merged. The item statement is byte-identical to blueprint main-20261023-1620 det-def-groth-ss (order 783) and is not weakened: F and G are arbitrary additive functors and C is only abelian. Step 1: lem-sp-grothendieck-enough-injectives and clause (2) of lem-weil-pbc-right-derived-plus-injective make R^n v(X)=H^n(v(I)) well defined for any injective resolution I. It needs no left exactness, which is why def-sp-acyclic and def-sp-composite-acyclicity, which require left exactness, could not be used. Step 2: the E_{p+q+2} vanishing bound is correct (r>q+1 for the outgoing map, r>p for the incoming one). Step 3: the Tot filtrations from def-sp-double-complex-total give degreewise split short exact sequences, using only finite sums. Step 4: the long exact sequence gives the three exactness conditions. I recomputed the reindexing (P,Q)=(2p+q,-p): it sends bidegrees (-1,1), (1,0), (0,0) to (-1,1), (2,-1), (0,0), matching def-sp-exact-couple. Step 5: the derived differential (s+2,-s-1) maps back to (s+1,-s)=d_{s+1}. The identification with the spectral sequences of thm-sp-double-complex-spectral-sequences matches Stacks' exact-couple construction (012M proof, 0AMJ), with the same E_1 terms and the same indexing of the second sequence. Step 6: the theorem states the image filtration, its endpoints and E_inf≅gr. Its stabilization bound r>max(p,q+1) covers r=p+q+2, matching Stacks 012P and 0132. Edge cases checked: the zero complex, a single term at (0,0), a single term at (1,0) (where the two filtrations differ), n=0, and C without countable coproducts. The 5 declared tool_uses are all generic and accepted. sk-def-groth-ss has an identical statement, is unsplit and is recorded in same_as; merging the two blueprint copies is left to the maintainer. No SGA source; every cited tag was checked against tags/tags. No changes."
+ },
+ "lean": {
+  "module": "WeilConjectures.CategoryTheory.SpectralSequence.Grothendieck",
+  "declaration": "CategoryTheory.Functor.IsAcyclicComposablePair",
+  "declarations": [
+   "CategoryTheory.Functor.IsAcyclicComposablePair",
+   "CategoryTheory.SpectralSequence.pageInfinity",
+   "CategoryTheory.SpectralSequence.Abutment"
+  ],
+  "statement": "def Functor.IsAcyclicComposablePair (F : A ⥤ B) (G : B ⥤ C) [F.Additive] [G.Additive] : Prop",
+  "branch": "slopmaster2",
+  "by": "Q132",
+  "date": "2026-10-24",
+  "existing": true,
+  "note": "Complete existing attachment, with clauses in multiple upstream modules. The primary module exposes IsAcyclicComposablePair and the two SpectralSequence definitions listed in declarations; the latter are defined in WeilConjectures.Mathlib.Algebra.Homology.SpectralSequence.Basic. The double-complex clauses are supplied by HomologicalComplex₂.columnFiltration in WeilConjectures.Algebra.Homology.ExactCouple.TotalComplexFiltration and by HomologicalComplex₂.firstSpectralSequence, HomologicalComplex₂.firstSpectralSequenceAbutment, HomologicalComplex₂.firstSpectralSequenceAbutment_filtration, HomologicalComplex₂.flipFirstSpectralSequenceAbutment, HomologicalComplex₂.flipFirstSpectralSequenceAbutment_filtration in WeilConjectures.Algebra.Homology.ExactCouple.DoubleComplex (import this module for these clauses). CategoryTheory.DecreasingFiltration.exactCouple in WeilConjectures.Algebra.Homology.ExactCouple.FilteredComplex gives the actual filtration exact couple; CategoryTheory.ExactCouple.derivedIter and spectralSequence in WeilConjectures.Algebra.Homology.ExactCouple.Basic construct its iterated derived couples and pages. columnFiltration_convergesTo and the two homologyFiltration endpoint lemmas in TotalComplexFiltration prove finite image-filtration convergence. Natural-number indexing represents first-quadrant complexes; extendNat and totalExtendNatHomologyIso identify them with the zero-extended integer-indexed complexes. In the filtered couple, coordinates (p,n) have structure degrees (-1,0),(1,1),0; the node convention (P,Q)=(p+n,-p) gives (-1,1),(2,-1),0. No left exactness is imposed on IsAcyclicComposablePair, no second filtration is identified with the first, and no definition or statement is replaced. All clauses were checked together in a module-mode server probe; report gives signatures and the clause-by-clause match."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-2612ecf3f",
+  "group": "Q132",
+  "result": "pass",
+  "note": "existing:true attachment; only the lean record changed against side-live. The recorded statement matches Grothendieck.lean:102 character for character. IsAcyclicComposablePair: A and B Grothendieck, C abelian, F and G additive, no left exactness, independent universes; the body is all injectives I and all q>0 of IsZero(G.rightDerived q (F I)). pageInfinity is page p+q+2. Abutment is a decreasing filtration with F0=top, F(n+1)=bot and Nonempty graded isos to E_inf. firstSpectralSequence is the actual column-filtration exact couple; first/flipFirstSpectralSequenceAbutment_filtration give the two separate image filtrations, never identified. The worker's reindexing to (-1,1),(2,-1),0 is correct. Edge cases checked: (0,0), zero bicomplex, (1,0)/(0,1) supports, n=0, C without infinite coproducts. Identical binding already landed on twin sk-def-groth-ss (Q87 pass). Advisories: upstream docstrings cite the sk- twin (same_as); the existing Lean uses upstream ExactCouple/columnFiltration rather than the BigradedExactCouple/firstFiltration of def-sp-exact-couple and def-sp-double-complex-total (pre-existing duplicates, none new). No compile: no change made."
+ }
+}

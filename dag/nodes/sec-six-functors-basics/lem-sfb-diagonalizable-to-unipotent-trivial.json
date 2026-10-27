@@ -1,0 +1,223 @@
+{
+ "id": "lem-sfb-diagonalizable-to-unipotent-trivial",
+ "kind": "statement",
+ "title": "Homomorphisms from diagonalizable groups to unipotent groups vanish",
+ "statement": "Let $k$ be a field [def-weil-field], and use affine group schemes and homomorphisms as in [def-sc-group-scheme] and closed subgroup schemes as in [def-sc-group-scheme-subgroup]. Let $M$ be a finitely generated abelian group, written additively. Define $D_k(M)=\\operatorname{Spec}k[M]$ [def-weil-affine-spectrum], where $k[M]$ has basis $e_m$ for $m\\in M$, multiplication $e_me_{m'}=e_{m+m'}$, comultiplication $e_m\\mapsto e_m\\otimes e_m$, counit $e_m\\mapsto1$, and antipode $e_m\\mapsto e_{-m}$. The tensor product is over $k$, as in [lem-weil-pbc-algebra-tensor-pushout-universal-property]. Let $n\\geq1$ and let $\\mathcal U_{n,k}$ be the group scheme whose $A$-points are the upper triangular $n\\times n$ matrices with entries in $A$ and all diagonal entries $1$, under matrix multiplication, for each commutative $k$-algebra $A$. Let $U\\subseteq\\mathcal U_{n,k}$ be a closed subgroup scheme. Every group-scheme homomorphism $f:D_k(M)\\to U$ is the trivial homomorphism: for every commutative $k$-algebra $A$ and $d\\in D_k(M)(A)$ one has $f_A(d)=1$. No smoothness or connectedness of $D_k(M)$ or $U$ is assumed; in particular torsion in $M$, including torsion of order divisible by $\\operatorname{char}k$, is allowed.",
+ "source": {
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Corollary 14.18(b) and its proof using Proposition 14.16, printed p.284; Theorem 12.8 and Theorem 12.9(c), printed p.233; Theorem 14.5 and Corollary 14.7, printed pp.281--282. This is the direction from multiplicative type to unipotent, not Corollary 14.18(a)."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-sc-group-scheme",
+  "def-sc-group-scheme-subgroup",
+  "def-weil-affine-spectrum",
+  "lem-weil-pbc-algebra-tensor-pushout-universal-property",
+  "def-sfb-diagonalizable-group"
+ ],
+ "proof": [
+  {
+   "text": "Put $R=k[M]$, with $1=e_0$, and let $g:D_k(M)\\to\\mathcal U_{n,k}$ be $f$ followed by the subgroup inclusion. By [def-weil-affine-spectrum], the identity algebra map of $R$ is a universal point $d\\in D_k(M)(R)$: every $A$-point is its image under a unique $k$-algebra map $h:R\\to A$. Write $g_R(d)=(a_{ij})$, with $a_{ii}=1$ and $a_{ij}=0$ for $i>j$. In $T=R\\otimes_kR$, let $d_L,d_R$ be the images of $d$ under the two algebra inclusions of [lem-weil-pbc-algebra-tensor-pushout-universal-property]. The group law on $D_k(M)$ makes $d_Ld_R$ the point with algebra map $\\Delta:R\\to T$. Naturality and the homomorphism property of $g$ therefore give, by matrix multiplication, for $i<j$,\n$$\\Delta(a_{ij})=a_{ij}\\otimes1+1\\otimes a_{ij}+\\sum_{i<l<j}a_{il}\\otimes a_{lj}.$$\nThis is an identity in $R\\otimes_kR$, obtained from actual $T$-points, without a reducedness assumption.",
+   "uses": [
+    "def-weil-affine-spectrum",
+    "def-sc-group-scheme",
+    "def-sc-group-scheme-subgroup",
+    "lem-weil-pbc-algebra-tensor-pushout-universal-property"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Theorem 14.5, proof (b) => (c), formula (92), printed p.281; group algebra from Section 12(b), printed pp.230--232. Derivation on the universal point."
+   }
+  },
+  {
+   "text": "For $u\\in M$ write $c_u:R\\to k$ for its coefficient map in the stated basis $e_m$. For $u,v\\in M$, the bilinear pairing $(x,y)\\mapsto c_u(x)c_v(y)$ induces a linear functional $C_{u,v}:R\\otimes_kR\\to k$ by [def-weil-pbc-module-tensor-product], with $C_{u,v}(e_s\\otimes e_t)=\\delta_{u,s}\\delta_{v,t}$. If $a=\\sum_m b_me_m$ satisfies $\\Delta(a)=a\\otimes1+1\\otimes a$, applying $C_{m,m}$ for $m\\ne0$ gives $b_m=0$, and applying $C_{0,0}$ gives $b_0=2b_0$, hence $b_0=0$. Thus $a=0$. The last subtraction also holds in characteristic $2$; no division, torsion-freeness of $M$, or independence of geometric points is used.",
+   "uses": [
+    "def-weil-pbc-module-tensor-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Section 12(b), printed pp.230--232, the group-algebra basis and diagonal comultiplication; Section 14(e), printed p.292, formula (95) for primitive elements. Explicit coefficient calculation by Q26, valid in every characteristic."
+   }
+  },
+  {
+   "text": "Induct on the height $h=j-i\\geq1$ to show $a_{ij}=0$ for every $i<j$. At height $1$ the sum in step 1 is empty, so step 2 applies. If all entries of height less than $h$ vanish and $j-i=h$, then each $a_{il}$ and $a_{lj}$ in that sum has smaller height, so the sum vanishes. Again step 2 gives $a_{ij}=0$. This proves $g_R(d)=I_n$. For $n=1$ there are no off-diagonal entries and this equality holds from the outset.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Theorem 14.5, formula (92), printed p.281; explicit induction on superdiagonal height by Q26."
+   }
+  },
+  {
+   "text": "For any commutative $k$-algebra $A$ and any $x\\in D_k(M)(A)$, write $x=h_*(d)$ using its algebra map $h:R\\to A$. Naturality gives $g_A(x)=h_*(g_R(d))=h_*(I_n)=I_n$. The inclusion $U(A)\\hookrightarrow\\mathcal U_{n,k}(A)$ is injective by [def-sc-group-scheme-subgroup] and sends the identity to $I_n$, so $f_A(x)=1$. This proves all the stated clauses. In particular $M=0$, $n=1$, and $M=\\mathbf Z/p\\mathbf Z$ in characteristic $p$ require no changes.",
+   "uses": [
+    "def-weil-affine-spectrum",
+    "def-sc-group-scheme-subgroup"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Corollary 14.18(b), printed p.284; explicit universal-point conclusion, replacing the image argument by the coordinate proof above."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-affine-spectrum",
+  "def-sc-group-scheme",
+  "def-sc-group-scheme-subgroup",
+  "lem-weil-pbc-algebra-tensor-pushout-universal-property",
+  "def-weil-pbc-module-tensor-product"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Explicit coordinate proof of Corollary 14.18(b), using formula (92), printed p.281, the group algebra in Section 12(b), pp.230--232, and the primitive identity (95), printed p.292. This does not follow the book's scheme-theoretic image proof."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "(diagonaliz|multiplicative).*(unipotent)|unipotent.*(diagonaliz|multiplicative)",
+   "results": "{\"t\": \"2026-10-23T20:46:01Z\", \"tool\": \"grep\", \"query\": \"(diagonaliz|multiplicative).*(unipotent)|unipotent.*(diagonaliz|multiplicative)\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits give diagonal properties of schemes, maps from an already trivial group object, or criteria saying an abstract homomorphism is trivial; none forces a morphism from a possibly nonreduced diagonalizable group scheme to a unitriangular subgroup to vanish."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Unipotent\", \"MonoidHom\"",
+   "results": "{\"t\": \"2026-10-23T20:46:02Z\", \"tool\": \"loogle\", \"query\": \"\\\"Unipotent\\\", \\\"MonoidHom\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits give diagonal properties of schemes, maps from an already trivial group object, or criteria saying an abstract homomorphism is trivial; none forces a morphism from a possibly nonreduced diagonalizable group scheme to a unitriangular subgroup to vanish."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A morphism from a diagonalizable algebraic group scheme to a unitriangular matrix group is the trivial homomorphism",
+   "results": "{\"t\": \"2026-10-23T20:46:02Z\", \"tool\": \"leansearch\", \"query\": \"A morphism from a diagonalizable algebraic group scheme to a unitriangular matrix group is the trivial homomorphism\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"MonoidHom.ker_eq_top_iff\", \"CommGrpCat.instOneHom\", \"CategoryTheory.Grp.uniqueHomFromTrivial\", \"Representation.IsTrivial.out\", \"CategoryTheory.CommGrp.uniqueHomFromTrivial\", \"MonoidHom.ker_one\", \"Matrix.diagonalAlgHom\", \"Matrix.diagonalRingHom\"], \"digest\": \"9e2bb93f4a07babe\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits give diagonal properties of schemes, maps from an already trivial group object, or criteria saying an abstract homomorphism is trivial; none forces a morphism from a possibly nonreduced diagonalizable group scheme to a unitriangular subgroup to vanish."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Every homomorphism of affine group schemes from a diagonalizable group to a unipotent group is trivial including nonreduced groups",
+   "results": "{\"t\": \"2026-10-23T20:46:04Z\", \"tool\": \"leanfinder\", \"query\": \"Every homomorphism of affine group schemes from a diagonalizable group to a unipotent group is trivial including nonreduced groups\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.HasAffineProperty.diagonal_affineProperty_isLocal\", \"AlgebraicGeometry.AffineTargetMorphismProperty.diagonal\", \"AlgebraicGeometry.AffineTargetMorphismProperty.diagonal_respectsIso\", \"AlgebraicGeometry.instHasAffinePropertyDiagonalSchemeDiagonal\", \"AlgebraicGeometry.HasAffineProperty.diagonal_iff\", \"AlgebraicGeometry.exists_appTop_map_eq_zero_of_isAffine_of_isLimit\", \"AlgebraicGeometry.HasAffineProperty.diagonal_of_openCover\", \"AlgebraicGeometry.AffineSpace.hom_ext\"], \"digest\": \"107f41f459656a32\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits give diagonal properties of schemes, maps from an already trivial group object, or criteria saying an abstract homomorphism is trivial; none forces a morphism from a possibly nonreduced diagonalizable group scheme to a unitriangular subgroup to vanish."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "There are no nontrivial morphisms of algebraic group schemes from a group of multiplicative type to a unipotent algebraic group",
+   "results": "{\"t\": \"2026-10-23T20:46:05Z\", \"tool\": \"leanfinder\", \"query\": \"There are no nontrivial morphisms of algebraic group schemes from a group of multiplicative type to a unipotent algebraic group\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Grp.uniqueHomFromTrivial\", \"CategoryTheory.CommGrp.uniqueHomFromTrivial\", \"CommGrpCat.subsingleton_of_isZero\", \"AlgebraicGeometry.instSubsingletonOverTerminalScheme\", \"GrpCat.subsingleton_of_isZero\", \"CategoryTheory.PreGaloisCategory.IsFundamentalGroup.non_trivial\", \"CategoryTheory.PreGaloisCategory.IsFundamentalGroup.non_trivial'\", \"CommGrpCat.isZero_iff_subsingleton\"], \"digest\": \"de34cb70e3b159ef\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits give diagonal properties of schemes, maps from an already trivial group object, or criteria saying an abstract homomorphism is trivial; none forces a morphism from a possibly nonreduced diagonalizable group scheme to a unitriangular subgroup to vanish."
+  },
+  {
+   "tool": "grep",
+   "query": "(diagonaliz|multiplicative).*(unipotent)|unipotent.*(diagonaliz|multiplicative)",
+   "results": "{\"t\": \"2026-10-23T21:28:09Z\", \"tool\": \"grep\", \"query\": \"(diagonaliz|multiplicative).*(unipotent)|unipotent.*(diagonaliz|multiplicative)\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: returned declarations concern diagonal morphisms, abstract trivial-source maps, group-like elements or linear independence; none proves the group-scheme statement or its primitive coefficient calculation in one specialization."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A morphism from a diagonalizable group scheme to a unipotent group scheme is the trivial homomorphism",
+   "results": "{\"t\": \"2026-10-23T21:28:09Z\", \"tool\": \"leansearch\", \"query\": \"A morphism from a diagonalizable group scheme to a unipotent group scheme is the trivial homomorphism\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"MonoidHom.ker_eq_top_iff\", \"CategoryTheory.Grp.uniqueHomFromTrivial\", \"CategoryTheory.CommGrp.uniqueHomFromTrivial\", \"CommGrpCat.instOneHom\", \"AlgebraicGeometry.IsImmersion.instLiftSchemeId\", \"AddCommGrpCat.instZeroHom_1\", \"AlgebraicGeometry.IsImmersion.instDiagonalScheme\", \"MonoidHom.ker_one\"], \"digest\": \"e7fc869d7448995d\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: returned declarations concern diagonal morphisms, abstract trivial-source maps, group-like elements or linear independence; none proves the group-scheme statement or its primitive coefficient calculation in one specialization."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Unipotent\", \"MonoidHom\"",
+   "results": "{\"t\": \"2026-10-23T21:28:09Z\", \"tool\": \"loogle\", \"query\": \"\\\"Unipotent\\\", \\\"MonoidHom\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: returned declarations concern diagonal morphisms, abstract trivial-source maps, group-like elements or linear independence; none proves the group-scheme statement or its primitive coefficient calculation in one specialization."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Every homomorphism of affine group schemes from a diagonalizable group to an upper unitriangular group is trivial, also for nonreduced groups",
+   "results": "{\"t\": \"2026-10-23T21:28:10Z\", \"tool\": \"leanfinder\", \"query\": \"Every homomorphism of affine group schemes from a diagonalizable group to an upper unitriangular group is trivial, also for nonreduced groups\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.HasAffineProperty.diagonal_affineProperty_isLocal\", \"AlgebraicGeometry.AffineTargetMorphismProperty.diagonal\", \"Rep.diagonalHomEquiv_apply\", \"AlgebraicGeometry.instHasAffinePropertyDiagonalSchemeDiagonal\", \"AlgebraicGeometry.AffineTargetMorphismProperty.diagonal_respectsIso\", \"SpecialLinearGroup.centerEquivRootsOfUnity_apply_of_finrank_le_one\", \"AlgebraicGeometry.HasAffineProperty.diagonal_iff\", \"AlgebraicGeometry.HasAffineProperty.diagonal_of_openCover\"], \"digest\": \"c90e898b845ad4cb\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: returned declarations concern diagonal morphisms, abstract trivial-source maps, group-like elements or linear independence; none proves the group-scheme statement or its primitive coefficient calculation in one specialization."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A group algebra with basis of group-like elements has no nonzero primitive elements; hence maps from diagonalizable groups to additive groups vanish",
+   "results": "{\"t\": \"2026-10-23T21:28:31Z\", \"tool\": \"leanfinder\", \"query\": \"A group algebra with basis of group-like elements has no nonzero primitive elements; hence maps from diagonalizable groups to additive groups vanish\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"linearIndepOn_isGroupLikeElem\", \"IsGroupLikeElem.ne_zero\", \"AddMonoidAlgebra.of'_modOf\", \"linearIndep_groupLikeVal\", \"GroupLike.isGroupLikeElem_val\", \"IsGroupLikeElem\", \"IsGroupLikeElem.counit_eq_one\", \"AddMonoidAlgebra.of'_mul_modOf\"], \"digest\": \"e8ee352343beeaa8\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: returned declarations concern diagonal morphisms, abstract trivial-source maps, group-like elements or linear independence; none proves the group-scheme statement or its primitive coefficient calculation in one specialization."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-reductive-centre-root-quotient",
+  "date": "2026-10-24",
+  "group": "Q46"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Haboush symmetric-power lifting for a trivial quotient representation. Supporting representation-theoretic input: Steinberg endomorphisms detect a nonzero fixed vector. Supporting Borel pairs and actual rho section modules. Supporting input: Integrality of the half sum of positive roots supporting the rho section modules in the Steinberg endomorphism detection input. Supporting lattice proof: Proposition 21.48, printed p.439; Appendix C.34--C.35, printed p.615; paragraph 22.9, printed p.465. Propositions 21.7 and 21.8, printed p.427; root weights in paragraph 21.1, printed p.425. Supporting input in the present split: Milne 21.7 proof, the vanishing of the map from ker(Ad restricted to T) to the unipotent group ker(Ad)/Z(G), using 14.16 or 14.18(b).",
+   "via": [
+    "lem-sfb-reductive-centre-root-quotient",
+    "lem-sfb-semisimple-roots-span",
+    "lem-sfb-simply-connected-character-lattice",
+    "lem-sfb-rho-section-modules",
+    "lem-sfb-steinberg-endomorphism-detection",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-diagonalizable-to-unipotent-trivial",
+  "worker": "stage1",
+  "summary": "Statement unchanged. Proved by universal algebra-valued matrix entries, diagonal-comultiplication coefficient comparison, induction on superdiagonal height, and subgroup injectivity. All four steps are elementary written calculations from the cited definitions; no new nodes and no Mathlib match. No geometric-point density, image theorem, smoothness, connectedness or torsion-free hypothesis is used.",
+  "blueprint": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Haboush symmetric-power lifting for a trivial quotient representation. Supporting representation-theoretic input: Steinberg endomorphisms detect a nonzero fixed vector. Supporting Borel pairs and actual rho section modules. Supporting input: Integrality of the half sum of positive roots supporting the rho section modules in the Steinberg endomorphism detection input. Supporting lattice proof: Proposition 21.48, printed p.439; Appendix C.34--C.35, printed p.615; paragraph 22.9, printed p.465. Propositions 21.7 and 21.8, printed p.427; root weights in paragraph 21.1, printed p.425. Supporting input in the present split: Milne 21.7 proof, the vanishing of the map from ker(Ad restricted to T) to the unipotent group ker(Ad)/Z(G), using 14.16 or 14.18(b). Latest blueprint sk-thm-sf-ctf-stability-direct-images.proof.md (3) was read; this supporting group-theoretic input is below the fixed unit route. The inherited null blueprint ancestor is retained, as blueprint_refs.py ancestor confirms."
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q26-260bc2b10",
+  "group": "Q26",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q26-260bc2b10 (reviewer sub-agent of L); spot-checked: Read the item in full. There are no new nodes. The statement and stmt_deps are unchanged, and proof_deps equals the union of the step uses. Every cited node is a definition or a Mathlib leaf (affine spectrum, group scheme, subgroup scheme with injective R-points, algebra tensor pushout, module tensor product), so there is no route use and no tool_uses or SGA citation. Source checked in Milne iAG2017: Cor 14.18(b) p.284 is the right direction; Thm 14.5 (92) p.281; (95) p.292. The agent-written coordinate proof replaces Milne's image argument. Step 1: d_L·d_R corresponds to Δ, and naturality plus the homomorphism property give (92) for the a_ij on actual T-points. Step 2: in the basis e_s⊗e_t, C_{m,m} with m≠0 gives b_m=0 and C_{0,0} gives b_0=2b_0, hence b_0=0, valid in characteristic 2. Step 3: induction on height with an empty sum at height 1. Step 4: universal point plus subgroup injectivity gives f_A=1 for every A, including non-reduced A. Tested M=0, n=1, n=2, and μ_p in characteristic p. No duplicate: multiplicative-additive-vanishing-criterion needs an algebraically closed field and G_a, and unipotent-to-multiplicative-trivial is 14.18(a). Live is still unsplit and there is no repair note. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.DiagonalizableToUnipotentTrivial",
+  "declaration": "AlgebraicGeometry.diagonalizable_to_unipotent_trivial",
+  "file": "lean/Sheaf/AlgebraicGeometry/DiagonalizableToUnipotentTrivial.lean",
+  "statement": "theorem diagonalizable_to_unipotent_trivial {k : Type u} [Field k] (M : Type u) [AddCommGroup M] [AddGroup.FG M] (n : ℕ) (hn : 0 < n) (U : Over (Spec (.of k))) [GrpObj U] (j : U ⟶ GeneralLinearGroup (ULift.{u} (Fin n)) k) (hj : IsClosedSubgroupScheme j) (hunitriangular : ∀ (A : Type u) [CommRing A] [Algebra k A] (x : (Spec (.of A)).asOver (Spec (.of k)) ⟶ U), (∀ i : Fin n, (GeneralLinearGroup.homMulEquiv (ULift.{u} (Fin n)) k A (x ≫ j)).val (ULift.up i) (ULift.up i) = 1) ∧ (∀ i l : Fin n, l < i → (GeneralLinearGroup.homMulEquiv (ULift.{u} (Fin n)) k A (x ≫ j)).val (ULift.up i) (ULift.up l) = 0)) (f : (diagonalizableGroup k M).X ⟶ U) [IsMonHom f] : ∀ (A : Type u) [CommRing A] [Algebra k A] (d : (Spec (.of A)).asOver (Spec (.of k)) ⟶ (diagonalizableGroup k M).X), d ≫ f = 1",
+  "branch": "newtargets-dag",
+  "by": "Q65",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-d45943146",
+  "group": "Q65",
+  "result": "pass",
+  "note": "Node file changes only lean plus one stmt_dep added: the landed def-sfb-diagonalizable-group (allowed: stmt_deps may gain landed nodes). New module has one theorem with sorry; lean.statement is verbatim in the file. Clauses match the node: Field k; M AddCommGroup + AddGroup.FG, no torsion-free assumption; D_k(M) = landed diagonalizableGroup (hopfSpec of AddMonoidAlgebra, the node's group-like Hopf structure); 0<n; U a GrpObj with IsClosedSubgroupScheme j into GL_(ULift (Fin n)) plus unitriangular equations on points over all algebras (equivalent to a closed subgroup of U_n; same form as landed AdjointKernelCentralQuotientUnipotent); IsMonHom f; conclusion d ≫ f = 1 in the point group for every A-point. No extra hypotheses; universe u forced by the existing interfaces and harmless. Source Milne Cor 14.18(b) is the right direction; edge cases M=0, n=1, U=1, mu_p in char p, A=0 checked. Docstrings give source and blueprint id; report has both sections; no name collision; no compile (no file changed)."
+ }
+}

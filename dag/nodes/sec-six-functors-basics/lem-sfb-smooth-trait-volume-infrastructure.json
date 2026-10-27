@@ -1,0 +1,582 @@
+{
+ "id": "lem-sfb-smooth-trait-volume-infrastructure",
+ "kind": "statement",
+ "title": "Local geometry and differential rank of smooth trait schemes",
+ "statement": "Let $R$ be a discrete valuation ring with uniformizer $\\pi$, fraction field $E$ and residue field $k$ [def-sc-discrete-valuation-ring]. Put $T=\\operatorname{Spec}R$ [def-weil-affine-spectrum]. Let $f:Z\\to T$ be a smooth finite-type morphism of schemes [def-pc-scheme, def-sbc-smooth-morphisms, def-weil-finite-type-morphism], and let $Z_E,Z_k$ denote its fibres [def-pc-base-change]. Then $Z$ is Noetherian and regular [def-weil-regular-scheme], and its local rings are integrally closed domains. The open $Z_E\\subset Z$ is quasi-compact and schematically dense: restriction $\\mathcal O_Z\\to j_*\\mathcal O_{Z_E}$ is injective. The special fibre is reduced, has finitely many irreducible components, and these components are pairwise disjoint open-and-closed subsets of $Z_k$. For the generic point $\\zeta$ of each nonempty special-fibre component, $\\mathcal O_{Z,\\zeta}$ is a discrete valuation ring with uniformizer the image of $\\pi$. If $Z_E$ is nonempty and pure of dimension $d\\geq0$, then $\\Omega^1_{Z/R}$ is locally free of constant rank $d$ and $\\Omega^d_{Z/R}=\\bigwedge^d\\Omega^1_{Z/R}$ is invertible [def-sc-relative-differential-sheaf, def-sc-sheaf-exterior-power, def-sc-invertible-module]. Here pure dimension $d$ means that all irreducible components of the finite-type $E$-scheme $Z_E$ have dimension $d$.",
+ "source": {
+  "document": "literature/bosch-lutkebohmert-raynaud-neron-models.pdf",
+  "place": "4.3 order construction, printed p.104 (PDF p.110), and 2.2 Proposition 5; agent-extracted supporting geometric facts; primary scan read at https://www.math.stonybrook.edu/~kamenova/homepage_files/Bosch_Raynaud_Neron_Model_tc.pdf; local literature copy WANTED."
+ },
+ "stmt_deps": [
+  "def-sc-discrete-valuation-ring",
+  "def-weil-affine-spectrum",
+  "def-pc-scheme",
+  "def-sbc-smooth-morphisms",
+  "def-weil-finite-type-morphism",
+  "def-pc-base-change",
+  "def-weil-regular-scheme",
+  "def-sc-relative-differential-sheaf",
+  "def-sc-sheaf-exterior-power",
+  "def-sc-invertible-module",
+  "pqf-def-locnoeth",
+  "def-weil-pbc-normal-ring",
+  "def-amb-finite-locally-free-module",
+  "def-weil-pure-dimension"
+ ],
+ "proof": [
+  {
+   "text": "Every ideal of $R$ is principal, hence finitely generated, so $R$ is Noetherian. By [lem-sc-dvr-dimension-one] its dimension is one; its maximal ideal $(\\pi)$ therefore makes it regular local by [def-weil-regular-scheme]. By [lem-weil-pbc-regular-local-localization], $R$ is a regular ring. A nonzero prime properly below $(\\pi)$ would give a prime chain of length two, so the primes of $R$ are $(0)$ and $(\\pi)$. Every nonzero denominator is a unit times a power of $\\pi$ by [lem-weil-pbc-dvr-unit-times-uniformizer-power], whence $R[1/\\pi]=E$. By [lem-weil-pbc-principal-localization-open-immersion], $\\operatorname{Spec}E=D(\\pi)\\subset T$. An open of $T$ containing its closed point is all of $T$ (a basic open containing that point is defined by a unit); thus every nonempty affine open of $T$ is either $T$ or $\\operatorname{Spec}E$. Their coordinate rings are regular, the field case following immediately from the dimension-zero definition.",
+   "uses": [
+    "lem-sc-dvr-dimension-one",
+    "def-weil-regular-scheme",
+    "lem-weil-pbc-regular-local-localization",
+    "lem-weil-pbc-dvr-unit-times-uniformizer-power",
+    "lem-weil-pbc-principal-localization-open-immersion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00PD, lemma-characterize-dvr; Tag 0AFS, lemma-localization-of-regular-local-is-regular; schemes.tex Tag 01I3, lemma-standard-open-affine"
+   }
+  },
+  {
+   "text": "The affine scheme $T$ is quasi-compact by [lem-weil-pbc-affine-scheme-qcqs] and locally Noetherian by its single Noetherian affine chart [pqf-def-locnoeth]. Apply [lem-weil-pbc-finite-type-over-noetherian] to $f$ to obtain that $Z$ is Noetherian. The affine-local description in [def-sbc-smooth-morphisms] gives a covering by $W=\\operatorname{Spec}B$ mapping to nonempty affine opens $V=\\operatorname{Spec}A$ of $T$, with $A\\to B$ smooth. Step 1 makes $A$ regular, so [lem-weil-pbc-regular-ring-smooth-ascent] makes $B$ regular. These charts prove that $Z$ is regular. By [rem-pc-regular-normal](1), every local ring of $Z$ is an integrally closed domain.",
+   "uses": [
+    "lem-weil-pbc-affine-scheme-qcqs",
+    "pqf-def-locnoeth",
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "def-sbc-smooth-morphisms",
+    "lem-weil-pbc-regular-ring-smooth-ascent",
+    "rem-pc-regular-normal"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 07NF, lemma-regular-goes-up; morphisms.tex Tag 01T6, lemma-finite-type-noetherian; properties.tex Tags 02IT and 0569"
+   }
+  },
+  {
+   "text": "By [lem-pc-smooth-flat], $f$ is flat. Step 1 and [lem-weil-pbc-open-preimage-fibre-product] identify $Z_E$ with the open $f^{-1}D(\\pi)$; on each smooth affine chart $W=\\operatorname{Spec}B$ of Step 2 it is $D(\\pi_B)$ by [lem-weil-pbc-basic-open-pullback]. If the chart maps into $\\operatorname{Spec}E$, then $\\pi_B$ is a unit. Otherwise its base ring is $R$, and $B$ is flat over $R$ by [lem-weil-pbc-smooth-ring-map-flat]. Apply [lem-trf-flat-tensor-preserves-injection] to multiplication by the nonzero $\\pi$ on $R$: after tensoring with $B$ it is multiplication by $\\pi_B$, hence this multiplication is injective. With $n=1$, [lem-trf-affine-schematic-density-criterion] now gives the sheaf injection on $W$. These injections on an open covering give $\\mathcal O_Z\\to j_*\\mathcal O_{Z_E}$ injective. Moreover [lem-pc-principal-open-dense-of-nonzerodivisor] on the same charts gives topological density of $Z_E$ in $Z$.",
+   "uses": [
+    "lem-pc-smooth-flat",
+    "lem-weil-pbc-open-preimage-fibre-product",
+    "lem-weil-pbc-basic-open-pullback",
+    "lem-weil-pbc-smooth-ring-map-flat",
+    "lem-trf-flat-tensor-preserves-injection",
+    "lem-trf-affine-schematic-density-criterion",
+    "lem-pc-principal-open-dense-of-nonzerodivisor"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 01VF, lemma-smooth-flat; algebra.tex Tag 0565, lemma-when-injective-covering; Tag 01RE, lemma-characterize-scheme-theoretically-dense; divisors.tex Tag 07ZU, lemma-complement-effective-Cartier-divisor"
+   }
+  },
+  {
+   "text": "Apply [lem-weil-pbc-noetherian-open-subscheme-noetherian] to the open $Z_E\\subset Z$ of Step 3 and the Noetherian scheme of Step 2. It makes $Z_E$ Noetherian and in particular quasi-compact. This also covers the empty open.",
+   "uses": [
+    "lem-weil-pbc-noetherian-open-subscheme-noetherian"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/properties.tex",
+    "place": "Tags 01OW and 01OZ; topology.tex Tags 0052 and 04ZA"
+   }
+  },
+  {
+   "text": "By [sbc-lem-smooth-criterion], both residue-field fibres of $f$ are smooth over their fields. They are of finite type by [lem-sfb-finite-type-composition-base-change], hence Noetherian by [lem-weil-pbc-finite-type-over-noetherian] (fields are Noetherian and their one-point spectra are quasi-compact). By [lem-trf-smooth-geometrically-normal], $Z_k$ is reduced and normal. Apply [rem-pc-regular-normal](2), whose hypothesis is Noetherianity and normality, to $Z_k$. It gives finitely many pairwise disjoint open-and-closed irreducible components, each with its open subscheme structure normal and integral. For $Z_k=\\varnothing$ the component assertions are vacuous.",
+   "uses": [
+    "sbc-lem-smooth-criterion",
+    "lem-sfb-finite-type-composition-base-change",
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "lem-trf-smooth-geometrically-normal",
+    "rem-pc-regular-normal"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 056T, lemma-smooth-geometrically-normal; morphisms.tex Tags 01T4 and 01T6; properties.tex Tag 033M, lemma-normal-Noetherian"
+   }
+  },
+  {
+   "text": "Let $C$ be one of the nonempty components from Step 5 and $\\zeta$ its generic point, which exists by [lem-sc-scheme-sober]. Since $C$ is integral and open in $Z_k$, [lem-sc-rational-functions-generic-stalks] makes $\\mathcal O_{Z_k,\\zeta}=\\mathcal O_{C,\\zeta}$ a field. Put $B=\\mathcal O_{Z,\\zeta}$. By [lem-sbc-scheme-fibre-stalk-quotient], $B/\\pi B\\cong\\mathcal O_{Z_k,\\zeta}$, so $\\pi B$ is the maximal ideal of the local ring $B$. The base stalk at the closed point is $R_{(\\pi)}=R$ by [lem-weil-pbc-affine-open-stalk-localization], since elements outside $(\\pi)$ are units. Flatness of $f$ means that $B$ is flat over this $R$ [def-weil-flat-morphism]. Tensoring the injection $R\\xrightarrow{\\pi}R$ with $B$ using [lem-trf-flat-tensor-preserves-injection] makes multiplication by $\\pi$ injective on $B$. Since $B$ is a nonzero local domain by Step 2, its element $\\pi$ is nonzero. The ring $B$ is Noetherian by regularity. Apply [lem-sc-principal-ideal-dvr]: $B$ is a DVR, and $\\pi B=\\mathfrak m_B$ says exactly that the image of $\\pi$ is its uniformizer.",
+   "uses": [
+    "lem-sc-scheme-sober",
+    "lem-sc-rational-functions-generic-stalks",
+    "lem-sbc-scheme-fibre-stalk-quotient",
+    "lem-weil-pbc-affine-open-stalk-localization",
+    "def-weil-flat-morphism",
+    "lem-trf-flat-tensor-preserves-injection",
+    "lem-sc-principal-ideal-dvr"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Tags 01IS, lemma-scheme-sober, and 0HA1, lemma-local-ring-fibre; morphisms.tex Tag 01RV; algebra.tex Tag 00PD (4)"
+   }
+  },
+  {
+   "text": "Assume now $Z_E\\ne\\varnothing$ and that all its irreducible components have dimension $d$. By [lem-sbc-equidimensional-open-local-dimension], applied over $E$ with $O=Z_E$, its local topological dimension at every point is $d$. Set $\\mathcal M=\\Omega^1_{Z/R}$. It is finite locally free by [lem-ag-smooth-relative-differentials-finite-locally-free]. Fix any $z\\in Z$ and a nonempty trivializing neighbourhood $W$ on which $\\mathcal M$ has some finite rank $r$. Density from Step 3 gives $y\\in W\\cap Z_E$. Apply [lem-weil-pbc-smooth-differentials-free-rank-fibre-dimension] to $f$ at $y$: it gives an affine neighbourhood on which the differential module is free of rank $\\dim_y Z_E=d$. By [def-sc-relative-differential-sheaf], this is a trivialization of the same sheaf $\\mathcal M$. Taking its stalk at $y$ and tensoring with $\\kappa(y)$, the two trivializations give an isomorphism $\\kappa(y)^r\\cong\\kappa(y)^d$, hence $r=d$. Thus all these neighbourhoods have rank $d$, which proves constant rank on all of $Z$, including points of the special fibre.",
+   "uses": [
+    "lem-sbc-equidimensional-open-local-dimension",
+    "lem-ag-smooth-relative-differentials-finite-locally-free",
+    "lem-weil-pbc-smooth-differentials-free-rank-fibre-dimension",
+    "def-sc-relative-differential-sheaf"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 02G1, lemma-smooth-omega-finite-locally-free; varieties.tex Tag 0A21, lemma-dimension-locally-algebraic (3),(5)"
+   }
+  },
+  {
+   "text": "Apply [lem-sc-exterior-sheaf-top-invertible] to $\\mathcal M$ of constant rank $d$ from Step 7. Its top exterior power $\\Omega^d_{Z/R}=\\bigwedge^d\\mathcal M$ is locally isomorphic to $\\mathcal O_Z$. It is quasi-coherent directly by [pqf-def-coherent]: on an affine open $\\operatorname{Spec}A$ refining such a trivialization it is the sheaf associated with the module $A$. Thus it is invertible in [def-sc-invertible-module]. For $d=0$, [def-sc-sheaf-exterior-power] identifies it with $\\mathcal O_Z$, so this case is included.",
+   "uses": [
+    "lem-sc-exterior-sheaf-top-invertible",
+    "pqf-def-coherent",
+    "def-sc-invertible-module",
+    "def-sc-sheaf-exterior-power"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00DM, section-tensor-algebra, finite-free exterior basis; modules.tex Tag 01C6; schemes.tex Tag 01IA"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sc-dvr-dimension-one",
+  "def-weil-regular-scheme",
+  "lem-weil-pbc-regular-local-localization",
+  "lem-weil-pbc-dvr-unit-times-uniformizer-power",
+  "lem-weil-pbc-principal-localization-open-immersion",
+  "lem-weil-pbc-affine-scheme-qcqs",
+  "pqf-def-locnoeth",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "def-sbc-smooth-morphisms",
+  "lem-weil-pbc-regular-ring-smooth-ascent",
+  "rem-pc-regular-normal",
+  "lem-pc-smooth-flat",
+  "lem-weil-pbc-open-preimage-fibre-product",
+  "lem-weil-pbc-basic-open-pullback",
+  "lem-weil-pbc-smooth-ring-map-flat",
+  "lem-trf-flat-tensor-preserves-injection",
+  "lem-trf-affine-schematic-density-criterion",
+  "lem-pc-principal-open-dense-of-nonzerodivisor",
+  "lem-weil-pbc-noetherian-open-subscheme-noetherian",
+  "sbc-lem-smooth-criterion",
+  "lem-sfb-finite-type-composition-base-change",
+  "lem-trf-smooth-geometrically-normal",
+  "lem-sc-scheme-sober",
+  "lem-sc-rational-functions-generic-stalks",
+  "lem-sbc-scheme-fibre-stalk-quotient",
+  "lem-weil-pbc-affine-open-stalk-localization",
+  "def-weil-flat-morphism",
+  "lem-sc-principal-ideal-dvr",
+  "lem-sbc-equidimensional-open-local-dimension",
+  "lem-ag-smooth-relative-differentials-finite-locally-free",
+  "lem-weil-pbc-smooth-differentials-free-rank-fibre-dimension",
+  "def-sc-relative-differential-sheaf",
+  "lem-sc-exterior-sheaf-top-invertible",
+  "pqf-def-coherent",
+  "def-sc-invertible-module",
+  "def-sc-sheaf-exterior-power"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Agent assembly of Tags 00PD, 0AFS, 07NF with morphisms.tex 01T6, 01RE, 01RV, 02G1, schemes.tex 0HA1, and varieties.tex 0A21, 056T. BLR local copy unavailable; see report WANTED."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A smooth scheme over a discrete valuation ring is regular and its generic fibre is dense; the stalk at a generic point of the special fibre is a discrete valuation ring with the same uniformizer",
+   "results": {
+    "hits": [
+     "AlgebraicGeometry.IsSmooth.exists_isStandardSmooth",
+     "WeierstrassCurve.IsGoodReduction",
+     "AlgebraicGeometry.instHasRingHomPropertyIsSmoothLocallyIsStandardSmooth",
+     "AlgebraicGeometry.IsSmoothOfRelativeDimension",
+     "AlgebraicGeometry.IsSmoothOfRelativeDimension.exists_isStandardSmoothOfRelativeDimension",
+     "Algebra.smoothLocus",
+     "AlgebraicGeometry.isSmooth_iff",
+     "AlgebraicGeometry.ValuativeCommSq.valuationRing"
+    ],
+    "n_hits": 8,
+    "note": "",
+    "subdirectory": "",
+    "digest": "83854bfa7f314037"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: smooth chart and algebraic rank results do not state the trait stalk, schematic-density and geometric differential-rank assertions; elliptic-curve reduction hits concern Weierstrass equations"
+  },
+  {
+   "tool": "leansearch",
+   "query": "On a smooth scheme over a DVR the local ring of a special fibre generic point is a DVR and the top differential sheaf has rank the generic relative dimension",
+   "results": {
+    "hits": [
+     "Algebra.IsStandardSmoothOfRelativeDimension.rank_kaehlerDifferential",
+     "IsLocalRing.finrank_CotangentSpace_eq_one_iff",
+     "IsLocalRing.finrank_CotangentSpace_eq_one",
+     "Algebra.IsStandardSmoothOfRelativeDimension.iff_of_isStandardSmooth",
+     "IsDiscreteValuationRing.toIsLocalRing",
+     "AlgebraicGeometry.IsSmooth.recOn",
+     "RingHom.Smooth.holdsForLocalizationAway",
+     "RingHom.IsStandardSmoothOfRelativeDimension"
+    ],
+    "n_hits": 8,
+    "note": "",
+    "subdirectory": "",
+    "digest": "0558d65ece220f54"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: smooth chart and algebraic rank results do not state the trait stalk, schematic-density and geometric differential-rank assertions; elliptic-curve reduction hits concern Weierstrass equations"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Smooth\", \"IsDiscreteValuationRing\"",
+   "results": {
+    "hits": [],
+    "n_hits": 0,
+    "note": "",
+    "subdirectory": "",
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: smooth chart and algebraic rank results do not state the trait stalk, schematic-density and geometric differential-rank assertions; elliptic-curve reduction hits concern Weierstrass equations"
+  },
+  {
+   "tool": "grep",
+   "query": "IsDiscreteValuationRing|relativeDimension|generic.*dense",
+   "results": {
+    "hits": [
+     "Mathlib/AlgebraicGeometry/EllipticCurve/LFunction.lean",
+     "Mathlib/AlgebraicGeometry/EllipticCurve/Reduction.lean",
+     "Mathlib/AlgebraicGeometry/EllipticCurve/Reduction.lean",
+     "Mathlib/AlgebraicGeometry/EllipticCurve/Reduction.lean",
+     "Mathlib/AlgebraicGeometry/EllipticCurve/Reduction.lean",
+     "Mathlib/AlgebraicGeometry/EllipticCurve/Reduction.lean",
+     "Mathlib/AlgebraicGeometry/Birational/RationalMap.lean",
+     "Mathlib/AlgebraicGeometry/OrderOfVanishing.lean"
+    ],
+    "n_hits": 18,
+    "note": "",
+    "subdirectory": "AlgebraicGeometry",
+    "digest": "159e35c3607dec88"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: smooth chart and algebraic rank results do not state the trait stalk, schematic-density and geometric differential-rank assertions; elliptic-curve reduction hits concern Weierstrass equations"
+  },
+  {
+   "tool": "grep",
+   "query": "IsDiscreteValuationRing|schematicallyDense|IsRegularScheme",
+   "results": {
+    "hits": [
+     "Mathlib/AlgebraicGeometry/EllipticCurve/Reduction.lean",
+     "Mathlib/AlgebraicGeometry/EllipticCurve/Reduction.lean",
+     "Mathlib/AlgebraicGeometry/EllipticCurve/Reduction.lean",
+     "Mathlib/AlgebraicGeometry/EllipticCurve/Reduction.lean",
+     "Mathlib/AlgebraicGeometry/EllipticCurve/Reduction.lean",
+     "Mathlib/AlgebraicGeometry/EllipticCurve/LFunction.lean",
+     "Mathlib/AlgebraicGeometry/OrderOfVanishing.lean"
+    ],
+    "n_hits": 7,
+    "note": "",
+    "subdirectory": "AlgebraicGeometry",
+    "digest": "8aff5e62da21307d"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: no hit states the complete scheme-theoretic trait geometry and differential-rank result; standard-smooth affine rank and projectivity, smooth chart definitions and elliptic-curve reduction only"
+  },
+  {
+   "tool": "leansearch",
+   "query": "For a smooth scheme over a DVR with pure dimension d generic fibre the differential sheaf is locally free of constant rank d",
+   "results": {
+    "hits": [
+     "Algebra.IsStandardSmoothOfRelativeDimension.rank_kaehlerDifferential",
+     "AlgebraicGeometry.IsSmooth.casesOn",
+     "Algebra.FormallySmooth.projective_kaehlerDifferential",
+     "IsLocalRing.finrank_CotangentSpace_eq_one_iff",
+     "AlgebraicGeometry.IsSmooth.recOn",
+     "Algebra.IsStandardSmoothOfRelationDimension.subsingleton_kaehlerDifferential",
+     "AlgebraicGeometry.instLocallyOfFinitePresentationOfIsSmooth",
+     "Algebra.SubmersivePresentation.free_kaehlerDifferential"
+    ],
+    "n_hits": 8,
+    "note": "",
+    "subdirectory": "",
+    "digest": "1acc96122200cfb3"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: no hit states the complete scheme-theoretic trait geometry and differential-rank result; standard-smooth affine rank and projectivity, smooth chart definitions and elliptic-curve reduction only"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A smooth finite type scheme over a discrete valuation ring is regular and has schematically dense generic fibre; at generic points of its closed fibre the local ring is a DVR with the base uniformizer",
+   "results": {
+    "hits": [
+     "WeierstrassCurve.IsGoodReduction",
+     "AlgebraicGeometry.IsSmooth.exists_isStandardSmooth",
+     "WeierstrassCurve.isGoodReduction_iff",
+     "AlgebraicGeometry.IsSmoothOfRelativeDimension",
+     "AlgebraicGeometry.IsSmoothOfRelativeDimension.exists_isStandardSmoothOfRelativeDimension",
+     "AlgebraicGeometry.isSmooth_iff",
+     "AlgebraicGeometry.ValuativeCommSq.domain",
+     "AlgebraicGeometry.ValuativeCommSq.valuationRing"
+    ],
+    "n_hits": 8,
+    "note": "",
+    "subdirectory": "",
+    "digest": "182be7edd70c1ba3"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: no hit states the complete scheme-theoretic trait geometry and differential-rank result; standard-smooth affine rank and projectivity, smooth chart definitions and elliptic-curve reduction only"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The generic fibre of a flat scheme over a trait is schematically dense and the differentials of a smooth morphism have constant rank on each connected component",
+   "results": {
+    "hits": [
+     "AlgebraicGeometry.IsSmoothOfRelativeDimension",
+     "AlgebraicGeometry.IsSmoothOfRelativeDimension.isSmooth",
+     "AlgebraicGeometry.IsSmooth",
+     "AlgebraicGeometry.IsSmooth.exists_isStandardSmooth",
+     "AlgebraicGeometry.instHasRingHomPropertyIsSmoothLocallyIsStandardSmooth",
+     "AlgebraicGeometry.isSmooth_iff",
+     "AlgebraicGeometry.isSmoothOfRelativeDimension_iff",
+     "AlgebraicGeometry.IsSmoothOfRelativeDimension.exists_isStandardSmoothOfRelativeDimension"
+    ],
+    "n_hits": 8,
+    "note": "",
+    "subdirectory": "",
+    "digest": "d33cbcf7ea4115ad"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: no hit states the complete scheme-theoretic trait geometry and differential-rank result; standard-smooth affine rank and projectivity, smooth chart definitions and elliptic-curve reduction only"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-smooth-model-volume-order-comparison",
+  "date": "2026-10-24",
+  "group": "NB"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "BLR 4.3 Lemma 1 proof: 4.3 order construction, printed p.104 (PDF p.110), and 2.2 Proposition 5; agent-extracted supporting geometric facts",
+   "via": [
+    "lem-sfb-smooth-model-volume-order-comparison",
+    "lem-sfb-bounded-group-translation-model",
+    "lem-sfb-bounded-group-local-neron-criterion",
+    "lem-sfb-abelian-neron-model",
+    "lem-sfb-semiabelian-neron-lft-existence",
+    "lem-sfb-trait-semiabelian-hom-extension",
+    "lem-sfb-semiabelian-generic-graph-proper",
+    "lem-sfb-normal-semiabelian-hom-extension",
+    "lem-sfb-symmetric-line-power-prolongation",
+    "lem-sfb-normal-symmetric-cubical-extension",
+    "lem-sfb-symmetric-ample-power-extension",
+    "lem-sfb-regular-group-generic-ampleness",
+    "lem-sfb-stable-picard-theta-ampleness",
+    "lem-sfb-stable-relative-picard-kummer",
+    "lem-sfb-stable-level-versal-branch-freeness",
+    "lem-sfb-stable-abelian-level-normalization",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-smooth-trait-volume-infrastructure",
+  "worker": "stage1",
+  "summary": "NG: statement unchanged; eight proof steps assemble existing algebra, scheme, smooth-fibre and differential nodes, with no new nodes. Explicitly checked flatness for the base uniformizer, the fibre-stalk quotient, empty special fibre, and propagation of generic differential rank by density. BLR local source remains WANTED; the proof is an agent assembly of locally read Stacks sources.",
+  "blueprint": "Inherited BLR 4.3 order construction (printed p.104, PDF p.110) supporting the volume-order comparison, reached through the recorded via chain below direct-image preservation. Read latest sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md (3). Steps 1--6 provide its descendant model-comparison local geometry, steps 7--8 the volume line; no unit step is replaced. The existing null blueprint ancestor and via list are retained.",
+  "tool_uses": [
+   {
+    "node": "lem-sc-dvr-dimension-one",
+    "why": "Generic tool in step(s) 1: A discrete valuation ring has dimension one. This supplies local algebra, scheme geometry or differential/exterior algebra below the model comparison; it replaces no six-functor unit step and no node of this unit supplies this statement."
+   },
+   {
+    "node": "lem-weil-pbc-regular-local-localization",
+    "why": "Generic tool in step(s) 1: A localization of a regular local ring at a prime is a regular local ring. This supplies local algebra, scheme geometry or differential/exterior algebra below the model comparison; it replaces no six-functor unit step and no node of this unit supplies this statement."
+   },
+   {
+    "node": "lem-weil-pbc-dvr-unit-times-uniformizer-power",
+    "why": "Generic tool in step(s) 1: In a DVR every nonzero element is a unit times a power of a uniformizer. This supplies local algebra, scheme geometry or differential/exterior algebra below the model comparison; it replaces no six-functor unit step and no node of this unit supplies this statement."
+   },
+   {
+    "node": "lem-weil-pbc-principal-localization-open-immersion",
+    "why": "Generic tool in step(s) 1: Spec of a principal localization is an open immersion. This supplies local algebra, scheme geometry or differential/exterior algebra below the model comparison; it replaces no six-functor unit step and no node of this unit supplies this statement."
+   },
+   {
+    "node": "lem-weil-pbc-affine-scheme-qcqs",
+    "why": "Generic tool in step(s) 2: Affine schemes are quasi-compact and quasi-separated. This supplies local algebra, scheme geometry or differential/exterior algebra below the model comparison; it replaces no six-functor unit step and no node of this unit supplies this statement."
+   },
+   {
+    "node": "lem-weil-pbc-finite-type-over-noetherian",
+    "why": "Generic tool in step(s) 2, 5: A scheme of finite type over a Noetherian scheme is Noetherian (Stacks 01T6). This supplies local algebra, scheme geometry or differential/exterior algebra below the model comparison; it replaces no six-functor unit step and no node of this unit supplies this statement."
+   },
+   {
+    "node": "lem-weil-pbc-regular-ring-smooth-ascent",
+    "why": "Generic tool in step(s) 2: Regularity ascends along smooth ring maps. This supplies local algebra, scheme geometry or differential/exterior algebra below the model comparison; it replaces no six-functor unit step and no node of this unit supplies this statement."
+   },
+   {
+    "node": "rem-pc-regular-normal",
+    "why": "Generic tool in step(s) 2, 5: Regular schemes are normal; the normal decomposition. This supplies local algebra, scheme geometry or differential/exterior algebra below the model comparison; it replaces no six-functor unit step and no node of this unit supplies this statement."
+   },
+   {
+    "node": "lem-pc-smooth-flat",
+    "why": "Generic tool in step(s) 3: Smooth morphisms are flat. This supplies local algebra, scheme geometry or differential/exterior algebra below the model comparison; it replaces no six-functor unit step and no node of this unit supplies this statement."
+   },
+   {
+    "node": "lem-weil-pbc-open-preimage-fibre-product",
+    "why": "Generic tool in step(s) 3: The preimage of an open subscheme is the fibre product. This supplies local algebra, scheme geometry or differential/exterior algebra below the model comparison; it replaces no six-functor unit step and no node of this unit supplies this statement."
+   },
+   {
+    "node": "lem-weil-pbc-basic-open-pullback",
+    "why": "Generic tool in step(s) 3: Preimage of the nonvanishing locus of a section under a morphism of schemes. This supplies local algebra, scheme geometry or differential/exterior algebra below the model comparison; it replaces no six-functor unit step and no node of this unit supplies this statement."
+   },
+   {
+    "node": "lem-weil-pbc-smooth-ring-map-flat",
+    "why": "Generic tool in step(s) 3: Smooth ring maps are flat. This supplies local algebra, scheme geometry or differential/exterior algebra below the model comparison; it replaces no six-functor unit step and no node of this unit supplies this statement."
+   },
+   {
+    "node": "lem-trf-flat-tensor-preserves-injection",
+    "why": "Generic tool in step(s) 3, 6: Tensoring with a flat module preserves injective maps. This supplies local algebra, scheme geometry or differential/exterior algebra below the model comparison; it replaces no six-functor unit step and no node of this unit supplies this statement."
+   },
+   {
+    "node": "lem-trf-affine-schematic-density-criterion",
+    "why": "Generic tool in step(s) 3: Affine criterion for schematic density of finitely many principal opens. This supplies local algebra, scheme geometry or differential/exterior algebra below the model comparison; it replaces no six-functor unit step and no node of this unit supplies this statement."
+   },
+   {
+    "node": "lem-pc-principal-open-dense-of-nonzerodivisor",
+    "why": "Generic tool in step(s) 3: A principal open defined by a nonzerodivisor is dense. This supplies local algebra, scheme geometry or differential/exterior algebra below the model comparison; it replaces no six-functor unit step and no node of this unit supplies this statement."
+   },
+   {
+    "node": "lem-weil-pbc-noetherian-open-subscheme-noetherian",
+    "why": "Generic tool in step(s) 4: An open subscheme of a Noetherian scheme is Noetherian. This supplies local algebra, scheme geometry or differential/exterior algebra below the model comparison; it replaces no six-functor unit step and no node of this unit supplies this statement."
+   },
+   {
+    "node": "sbc-lem-smooth-criterion",
+    "why": "Generic tool in step(s) 5: Smoothness by flatness and smooth fibres. This supplies local algebra, scheme geometry or differential/exterior algebra below the model comparison; it replaces no six-functor unit step and no node of this unit supplies this statement."
+   },
+   {
+    "node": "lem-sfb-finite-type-composition-base-change",
+    "why": "Generic tool in step(s) 5: Finite-type morphisms are stable under composition and base change. This supplies local algebra, scheme geometry or differential/exterior algebra below the model comparison; it replaces no six-functor unit step and no node of this unit supplies this statement."
+   },
+   {
+    "node": "lem-trf-smooth-geometrically-normal",
+    "why": "Generic tool in step(s) 5: Smooth schemes over fields are geometrically normal. This supplies local algebra, scheme geometry or differential/exterior algebra below the model comparison; it replaces no six-functor unit step and no node of this unit supplies this statement."
+   },
+   {
+    "node": "lem-sc-scheme-sober",
+    "why": "Generic tool in step(s) 6: Schemes are sober. This supplies local algebra, scheme geometry or differential/exterior algebra below the model comparison; it replaces no six-functor unit step and no node of this unit supplies this statement."
+   },
+   {
+    "node": "lem-sc-rational-functions-generic-stalks",
+    "why": "Generic tool in step(s) 6: Rational functions are the product of the generic local rings. This supplies local algebra, scheme geometry or differential/exterior algebra below the model comparison; it replaces no six-functor unit step and no node of this unit supplies this statement."
+   },
+   {
+    "node": "lem-sbc-scheme-fibre-stalk-quotient",
+    "why": "Generic tool in step(s) 6: The local ring of a scheme-theoretic fibre is a quotient of the local ring. This supplies local algebra, scheme geometry or differential/exterior algebra below the model comparison; it replaces no six-functor unit step and no node of this unit supplies this statement."
+   },
+   {
+    "node": "lem-weil-pbc-affine-open-stalk-localization",
+    "why": "Generic tool in step(s) 6: Stalk of a scheme at a point of an affine open: the canonical open immersion and the localization. This supplies local algebra, scheme geometry or differential/exterior algebra below the model comparison; it replaces no six-functor unit step and no node of this unit supplies this statement."
+   },
+   {
+    "node": "lem-sc-principal-ideal-dvr",
+    "why": "Generic tool in step(s) 6: Local domains with principal maximal ideal. This supplies local algebra, scheme geometry or differential/exterior algebra below the model comparison; it replaces no six-functor unit step and no node of this unit supplies this statement."
+   },
+   {
+    "node": "lem-sbc-equidimensional-open-local-dimension",
+    "why": "Generic tool in step(s) 7: Local dimension of a pure-dimensional locally algebraic open. This supplies local algebra, scheme geometry or differential/exterior algebra below the model comparison; it replaces no six-functor unit step and no node of this unit supplies this statement."
+   },
+   {
+    "node": "lem-ag-smooth-relative-differentials-finite-locally-free",
+    "why": "Generic tool in step(s) 7: Smooth relative differentials are finite locally free without constant rank. This supplies local algebra, scheme geometry or differential/exterior algebra below the model comparison; it replaces no six-functor unit step and no node of this unit supplies this statement."
+   },
+   {
+    "node": "lem-weil-pbc-smooth-differentials-free-rank-fibre-dimension",
+    "why": "Generic tool in step(s) 7: Differentials of a smooth morphism are free near a point, of rank the fibre dimension. This supplies local algebra, scheme geometry or differential/exterior algebra below the model comparison; it replaces no six-functor unit step and no node of this unit supplies this statement."
+   },
+   {
+    "node": "lem-sc-exterior-sheaf-top-invertible",
+    "why": "Generic tool in step(s) 8: Top exterior power is invertible. This supplies local algebra, scheme geometry or differential/exterior algebra below the model comparison; it replaces no six-functor unit step and no node of this unit supplies this statement."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sc-dvr-dimension-one",
+  "lem-weil-pbc-regular-local-localization",
+  "lem-weil-pbc-dvr-unit-times-uniformizer-power",
+  "lem-weil-pbc-principal-localization-open-immersion",
+  "lem-weil-pbc-affine-scheme-qcqs",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-weil-pbc-regular-ring-smooth-ascent",
+  "rem-pc-regular-normal",
+  "lem-pc-smooth-flat",
+  "lem-weil-pbc-open-preimage-fibre-product",
+  "lem-weil-pbc-basic-open-pullback",
+  "lem-weil-pbc-smooth-ring-map-flat",
+  "lem-trf-flat-tensor-preserves-injection",
+  "lem-trf-affine-schematic-density-criterion",
+  "lem-pc-principal-open-dense-of-nonzerodivisor",
+  "lem-weil-pbc-noetherian-open-subscheme-noetherian",
+  "sbc-lem-smooth-criterion",
+  "lem-sfb-finite-type-composition-base-change",
+  "lem-trf-smooth-geometrically-normal",
+  "lem-sc-scheme-sober",
+  "lem-sc-rational-functions-generic-stalks",
+  "lem-sbc-scheme-fibre-stalk-quotient",
+  "lem-weil-pbc-affine-open-stalk-localization",
+  "lem-sc-principal-ideal-dvr",
+  "lem-sbc-equidimensional-open-local-dimension",
+  "lem-ag-smooth-relative-differentials-finite-locally-free",
+  "lem-weil-pbc-smooth-differentials-free-rank-fibre-dimension",
+  "lem-sc-exterior-sheaf-top-invertible"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-NG-61c6185b9",
+  "group": "NG",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NG-61c6185b9 (reviewer sub-agent of L); spot-checked: I read the item and every cited node in full. Eight steps, no new nodes, statement unchanged. The three stmt_deps added (locnoeth, normal-ring, finite-locally-free-module) are the notions the statement already uses. Step-by-step check: S1: R is a PID, so Noetherian, of dim 1 (00PD), regular local, regular ring by 0AFS; its primes are (0) and (π), R[1/π]=E, Spec E=D(π) by 01I3. S2: Z is Noetherian by 01T6; smooth charts over the regular rings R and E are regular by 07NF; 0569 gives normal local domains. S3: Z_E=f^{-1}D(π)=D(π_B) on charts; B is R-flat, so the Mathlib flat-tensor leaf makes π_B a nonzerodivisor, and the 0565 criterion with n=1 gives O→j_*O injective; 07ZU gives density. S4: Z_E is quasi-compact by 01OW. S5: smooth fibres (smooth criterion), finite type and Noetherian; 056T with K=k gives reduced normal; rem-pc-regular-normal(2) gives disjoint clopen integral components. S6: the generic stalk of C is a field (01RV); 0HA1 with O_{T,s}=R (01HV) gives B/πB a field; flatness makes π a nonzerodivisor; lem-sc-principal-ideal-dvr gives a DVR with m=(π), which is the uniformizer of def-sc-discrete-valuation-ring. S7: dim_y Z_E=d everywhere (0A21; the two dim_x definitions coincide); density puts a point of Z_E in every trivialising neighbourhood, and comparing with the rank-d chart from 02G1 at that point via ⊗κ(y) gives constant rank d. S8: the top exterior power is locally O and quasi-coherent, so invertible; d=0 is covered. Small cases checked: Spec R, Spec E, empty Z, A^n_R, nonperfect residue field. Batch-5: lem-trf-flat-tensor-preserves-injection (a Mathlib leaf), lem-trf-affine-schematic-density-criterion (0565, closure is algebra only) and lem-trf-smooth-geometrically-normal (056T, closure is generic geometry; its only sec-poincare-duality node is a finite-type base-change lemma) lie outside both assumptions and are accepted. No duplicate found (rg -L over dag/nodes). I accept the generic tool_uses in split_report. Minor, no change: proof_origin files 07NF under algebra.tex (it is in more-algebra.tex), and the BLR copy is still WANTED."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SmoothTraitVolumeInfrastructure",
+  "declaration": "AlgebraicGeometry.smooth_trait_volume_infrastructure",
+  "file": "lean/Sheaf/AlgebraicGeometry/SmoothTraitVolumeInfrastructure.lean",
+  "statement": "theorem smooth_trait_volume_infrastructure (R : Type u) [CommRing R] [IsDomain R] [IsDiscreteValuationRing R] (π : R) (_hπ : IsLocalRing.maximalIdeal R = Ideal.span {π}) {Z : Scheme.{u}} (f : Z ⟶ Spec (.of R)) [Smooth f] [LocallyOfFiniteType f] [QuasiCompact f] : IsNoetherian Z ∧ IsRegularScheme Z ∧ (∀ z : Z, IsDomain (Z.presheaf.stalk z) ∧ IsIntegrallyClosed (Z.presheaf.stalk z)) ∧ IsOpenImmersion (pullback.fst f (Spec.map (CommRingCat.ofHom (algebraMap R (FractionRing R))))) ∧ CompactSpace ↥(pullback f (Spec.map (CommRingCat.ofHom (algebraMap R (FractionRing R))))) ∧ (∀ U : Z.Opens, Function.Injective ((pullback.fst f (Spec.map (CommRingCat.ofHom (algebraMap R (FractionRing R))))).app U)) ∧ IsReduced (f.fiber (IsLocalRing.closedPoint R)) ∧ (irreducibleComponents (f.fiber (IsLocalRing.closedPoint R))).Finite ∧ (∀ C : Set (f.fiber (IsLocalRing.closedPoint R)), C ∈ irreducibleComponents (f.fiber (IsLocalRing.closedPoint R)) → IsClopen C) ∧ (∀ C D : Set (f.fiber (IsLocalRing.closedPoint R)), C ∈ irreducibleComponents (f.fiber (IsLocalRing.closedPoint R)) → D ∈ irreducibleComponents (f.fiber (IsLocalRing.closedPoint R)) → C ≠ D → Disjoint C D) ∧ (∀ (C : Set (f.fiber (IsLocalRing.closedPoint R))) (ζ : f.fiber (IsLocalRing.closedPoint R)), C ∈ irreducibleComponents (f.fiber (IsLocalRing.closedPoint R)) → IsGenericPoint ζ C → ∃ hdom : IsDomain (Z.presheaf.stalk (f.fiberι (IsLocalRing.closedPoint R) ζ)), @IsDiscreteValuationRing (Z.presheaf.stalk (f.fiberι (IsLocalRing.closedPoint R) ζ)) _ hdom ∧ IsLocalRing.maximalIdeal (Z.presheaf.stalk (f.fiberι (IsLocalRing.closedPoint R) ζ)) = Ideal.span { (Z.presheaf.germ ⊤ (f.fiberι (IsLocalRing.closedPoint R) ζ) trivial).hom (f.appTop ((Scheme.ΓSpecIso (.of R)).inv π)) }) ∧ (∀ d : ℕ, Nonempty ↥(pullback f (Spec.map (CommRingCat.ofHom (algebraMap R (FractionRing R))))) → (pullback f (Spec.map (CommRingCat.ofHom (algebraMap R (FractionRing R))))).IsPureDimension d → SheafOfModules.IsFiniteLocallyFreeOfRank f.relativeDifferentials d ∧ (Scheme.Modules.exteriorSheaf f.relativeDifferentials d).IsInvertible)",
+  "branch": "sheaf-dag",
+  "by": "Q122",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-cb2bc9288",
+  "group": "Q122",
+  "result": "pass",
+  "note": "All clauses of lem-sfb-smooth-trait-volume-infrastructure match the Lean: DVR R with 𝔪=(π), E=FractionRing R, smooth+LOFT+QC f; IsNoetherian ∧ IsRegularScheme; stalks IsDomain∧IsIntegrallyClosed; Z_E open immersion, CompactSpace, ∀U injective (pullback.fst).app U (=O_Z→j_*O_{Z_E}); f.fiber(closedPoint) reduced, finitely many clopen pairwise-disjoint components; at generic points stalk is DVR with 𝔪=span of canonical germ of π; nonempty pure-dim-d Z_E ⇒ IsFiniteLocallyFreeOfRank Ω¹ d ∧ exteriorSheaf Ω¹ d invertible. Edge cases (Z=∅, Z_k=∅, d=0, disconnected Z_E) and universes fine. Only the item node changed (lean + added landed def-weil-pure-dimension stmt_dep); deps identical to base; statement verbatim; line max 98; docstrings with 8 proof steps; sorry-only; no H4 duplicate. Notes: Mathlib leaves IsReduced/IsGenericPoint/IsOpenImmersion/Hom.fiber/irreducibleComponents have existing:true owners (def-pc-reduced-scheme, def-sc-generic-point, def-weil-open-immersion, def-pc-scheme-fibre, def-weil-irreducible-components) not in stmt_deps (node TeX never cited them; not substance); IsNoetherian has no def node beyond pqf-def-locnoeth."
+ }
+}

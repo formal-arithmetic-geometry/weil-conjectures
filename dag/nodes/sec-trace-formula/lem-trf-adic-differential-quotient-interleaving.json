@@ -1,0 +1,282 @@
+{
+ "id": "lem-trf-adic-differential-quotient-interleaving",
+ "kind": "statement",
+ "title": "Interleaving maps for adic quotient differentials",
+ "statement": "Let $k\\subseteq F$ be a finite separable extension of fields [def-weil-pbc-separable-algebraic-extension], $A$ a commutative $k$-algebra, and $I\\subseteq A$ a finitely generated ideal. Put $C=\\varprojlim_{r\\ge1}A/I^r$, with canonical map $\\iota:A\\to C$, and $J=IC$. Fix a $k$-algebra map $\\sigma:F\\to C$. Put $M=\\Omega_{A/k}$ [def-weil-pbc-kahler-differentials], $N=\\varprojlim_{r\\ge1}M/I^rM$ [def-weil-pbc-adic-completion], and let $j:M\\to N$ be the canonical map. Give $N$ its componentwise $C$-module structure. Suppose $D:C\\to N$ is a $k$-derivation satisfying $D(\\iota(a))=j(\\mathrm da)$ for $a\\in A$ and $D(J^{r+1})\\subseteq I^rN$ for every $r\\ge1$. Put $B_r=C/J^r=A/I^r$, $Q_r=N/I^rN=M/I^rM$ using the canonical quotient identifications, and $E_r=\\Omega_{B_r/F}$, with $F$ acting through $\\sigma$. Write $q_r:Q_{r+1}\\to Q_r$ for reduction and $t_r:E_{r+1}\\to E_r$ for the differential map induced by $B_{r+1}\\to B_r$. Then $D\\sigma=0$, and the reduction $\\delta_r(x)=D(x)\\bmod I^rN$ descends to an $F$-derivation $B_{r+1}\\to Q_r$. There are unique $C$-linear maps $\\alpha_r:Q_r\\to E_r$ and $\\beta_r:E_{r+1}\\to Q_r$ for every $r\\ge1$, with scalar actions through the indicated quotients, characterized by $$\\alpha_r(\\mathrm da\\bmod I^rM)=\\mathrm d(\\iota(a)\\bmod J^r),\\qquad \\beta_r(\\mathrm d(x\\bmod J^{r+1}))=D(x)\\bmod I^rN$$ for all $a\\in A$ and $x\\in C$. They satisfy, with the displayed domains, $$t_r\\alpha_{r+1}=\\alpha_rq_r:Q_{r+1}\\to E_r,\\qquad q_r\\beta_{r+1}=\\beta_rt_{r+1}:E_{r+2}\\to Q_r,$$ $$\\beta_r\\alpha_{r+1}=q_r:Q_{r+1}\\to Q_r,\\qquad \\alpha_r\\beta_r=t_r:E_{r+1}\\to E_r.$$",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tag 00RO (lemma-universal-omega), universal derivation and differential symbols; agent expansion to the coefficient-field and adjacent-quotient comparisons in the returned item, old Steps 3-6."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-kahler-differentials",
+  "def-weil-pbc-adic-completion",
+  "def-weil-pbc-separable-algebraic-extension",
+  "def-trf-continuous-kahler-differentials"
+ ],
+ "proof": [
+  {
+   "text": "Apply [lem-weil-pbc-module-completion-complete] to the finitely generated ideal $I$ and to the $A$-modules $A$ and $M$. It gives surjective component projections with kernels $I^rC=J^r$ and $I^rN$, respectively. Thus the stated identifications $B_r=C/J^r=A/I^r$ and $Q_r=N/I^rN=M/I^rM$ are canonical and commute with reduction. They respect the $C$-action: for $c\\in C$, $y\\in N$, the component of $cy$ at $r$ is $c_ry_r$. The submodule $I^rN$ is $C$-stable since $c(iy)=i(cy)$; hence $J^rN=I^rN$, and the action on $Q_r$ factors through $B_r$. In particular every $x\\in C$ has a lift $a\\in A$ modulo $J^s$ for any $s\\ge1$.",
+   "uses": [
+    "lem-weil-pbc-module-completion-complete"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 05GG (lemma-hathat-finitely-generated), both conclusions, with M=A and M=Omega_{A/k}; componentwise multiplication."
+   }
+  },
+  {
+   "text": "View $N$ as an $F$-module through $\\sigma$. The composite $D\\sigma:F\\to N$ is additive, vanishes on $k$, and satisfies $D\\sigma(fg)=\\sigma(f)D\\sigma(g)+\\sigma(g)D\\sigma(f)$, so it is a $k$-derivation. By [def-weil-pbc-kahler-differentials] it factors through $\\Omega_{F/k}$, which is zero by [lem-trf-separable-field-differentials-vanish], since $F/k$ is finite separable. Therefore $D\\sigma=0$.",
+   "uses": [
+    "def-weil-pbc-kahler-differentials",
+    "lem-trf-separable-field-differentials-vanish"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 090W (lemma-characterize-separable-algebraic-field-extensions), implication (1) => (2); Tag 00RO (lemma-universal-omega)."
+   }
+  },
+  {
+   "text": "For $r\\ge1$, the map $a\\mapsto\\mathrm d(\\iota(a)\\bmod J^r)$ is a $k$-derivation $A\\to E_r$: the map $A\\to B_r$ is a $k$-algebra map because $\\sigma$ is one. Universality gives an $A$-linear map $M\\to E_r$ with these values. Since $I^r$ acts by zero on $E_r$, it kills $I^rM$, and factors uniquely through $Q_r=M/I^rM$. Call the result $\\alpha_r$. It is $B_r$-linear, hence $C$-linear, because both module actions factor through $A/I^r=B_r$ and $A\\to B_r$ is onto. The symbols $\\mathrm da$ generate $M$, so their classes generate $Q_r$ and the formula determines $\\alpha_r$ uniquely.",
+   "uses": [
+    "def-weil-pbc-kahler-differentials"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00RO (lemma-universal-omega), the symbol presentation preceding Tag 07BK (definition-differentials), and the functorial differential map following 00RO; explicit agent argument for adjacent quotients."
+   }
+  },
+  {
+   "text": "The map $x\\mapsto D(x)\\bmod I^rN$ is a derivation from $C$ into $Q_r$. By the assumed bound on $D(J^{r+1})$, its value is unchanged if $x$ is changed modulo $J^{r+1}$. Thus it descends to an additive map $\\delta_r:B_{r+1}\\to Q_r$. Its Leibniz rule descends as well, since $J^{r+1}Q_r=0$. Step 2 gives $\\delta_r(F)=0$, so it is an $F$-derivation. Universality for $B_{r+1}/F$ gives a unique $B_{r+1}$-linear map $\\beta_r:E_{r+1}\\to Q_r$ with $\\beta_r(\\mathrm d(x\\bmod J^{r+1}))=D(x)\\bmod I^rN$. This is $C$-linear. Every element of $B_{r+1}$ lifts from $C$, so its differential symbols also prove uniqueness for the stated formula.",
+   "uses": [
+    "def-weil-pbc-kahler-differentials"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00RO (lemma-universal-omega), the symbol presentation preceding Tag 07BK (definition-differentials), and the functorial differential map following 00RO; explicit agent argument for adjacent quotients."
+   }
+  },
+  {
+   "text": "It suffices to check the transition identities on the differential generators, since all maps are $C$-linear. On $\\mathrm da\\bmod I^{r+1}M$, both $t_r\\alpha_{r+1}$ and $\\alpha_rq_r$ give $\\mathrm d(\\iota(a)\\bmod J^r)$. On $\\mathrm d(x\\bmod J^{r+2})$, both $q_r\\beta_{r+1}$ and $\\beta_rt_{r+1}$ give $D(x)\\bmod I^rN$. The generator descriptions follow from the symbol presentation of differentials, and all the reduction maps act on these symbols by reducing their arguments. This proves both transition identities with the displayed domains.",
+   "uses": [
+    "def-weil-pbc-kahler-differentials"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00RO (lemma-universal-omega), the symbol presentation preceding Tag 07BK (definition-differentials), and the functorial differential map following 00RO; explicit agent argument for adjacent quotients."
+   }
+  },
+  {
+   "text": "On a generator $\\mathrm da\\bmod I^{r+1}M$ of $Q_{r+1}$, the value of $\\beta_r\\alpha_{r+1}$ is $D(\\iota(a))\\bmod I^rN=j(\\mathrm da)\\bmod I^rN=\\mathrm da\\bmod I^rM$. The last equality is precisely the canonical projection identification of Step 1. This is also its image under $q_r$. Generation and $C$-linearity give $\\beta_r\\alpha_{r+1}=q_r$.",
+   "uses": [
+    "def-weil-pbc-kahler-differentials"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00RO (lemma-universal-omega), the symbol presentation preceding Tag 07BK (definition-differentials), and the functorial differential map following 00RO; explicit agent argument for adjacent quotients."
+   }
+  },
+  {
+   "text": "For a generator $\\mathrm d(x\\bmod J^{r+1})$ of $E_{r+1}$, choose $a\\in A$ lifting $x$ modulo $J^{r+1}$ as in Step 1. The bound on $D$ gives $D(x)-D(\\iota(a))\\in I^rN$, so $\\beta_r$ sends this generator to $\\mathrm da\\bmod I^rM$. Applying $\\alpha_r$ gives $\\mathrm d(\\iota(a)\\bmod J^r)=\\mathrm d(x\\bmod J^r)$, the value of $t_r$. This checks all generators, including those coming from $C$ outside the image of $A$, and therefore proves $\\alpha_r\\beta_r=t_r$ by $C$-linearity. Together with Steps 2--6 this establishes every assertion and both uniqueness claims.",
+   "uses": [
+    "def-weil-pbc-kahler-differentials"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00RO (lemma-universal-omega), the symbol presentation preceding Tag 07BK (definition-differentials), and the functorial differential map following 00RO; explicit agent argument for adjacent quotients."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-kahler-differentials",
+  "lem-trf-separable-field-differentials-vanish",
+  "lem-weil-pbc-module-completion-complete"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tags 00RO (lemma-universal-omega), 07BK (definition-differentials), 05GG (lemma-hathat-finitely-generated), 090W (lemma-characterize-separable-algebraic-field-extensions); explicit finite-level comparison argument, not a verbatim Stacks theorem."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Kahler differential maps between successive adic quotients with inverse maps shifted by one level",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"Algebra.Presentation.differentials.comm₂₃\", \"module\": \"Mathlib/Algebra/Module/Presentation/Differentials\", \"type\": \"∀ {R : Type u} {S : Type v} {ι : Type w} {σ : Type t} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S]\\n  (pres : Algebra.Presentation R S ι σ),\\n  pres.toExtension.toKaehler ∘ₗ ↑pres.cotangentSpaceBasis.repr.symm = pres.differentialsSolution.π\", \"doc\": \"For an $R$-algebra presentation $\\\\text{pres}$, the composition of the Kähler differential map $\\\\text{pres.toExtension.toKaehler}$ with the inverse of the cotangent space basis representation $\\\\text{pr\"}\n  {\"name\": \"KaehlerDifferential.quotKerTotalEquiv_symm_comp_D\", \"module\": \"Mathlib/RingTheory/Kaehler/Basic\", \"type\": \"∀ (R : Type u) (S : Type v) [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S],\\n  (↑(KaehlerDifferential.quotKerTotalEquiv R S).symm).compDer (KaehlerDifferential.D R S) =\\n    KaehlerDifferential.derivationQuotKerTotal R S\", \"doc\": \"For an $ R $-algebra $ S $, the composition of the inverse of the linear equivalence $ \\\\text{quotKerTotalEquiv} $ with the universal derivation $ D: S \\\\to \\\\Omega_{S/R} $ yields the derivation $ \\\\text{\"}\n  {\"name\": \"Algebra.Presentation.differentials.comm₁₂\", \"module\": \"Mathlib/Algebra/Module/Presentation/Differentials\", \"type\": \"∀ {R : Type u} {S : Type v} {ι : Type w} {σ : Type t} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S]\\n  (pres : Algebra.Presentation R S ι σ),\\n  pres.toExtension.cotangentComplex ∘ₗ Algebra.Presentation.differentials.hom₁ pres =\\n    ↑pres.cotangentSpaceBasis.repr.symm ∘ₗ pres.differ\", \"doc\": \"For a commutative ring $ R $ and a type $ \\\\sigma $, the composition of the cotangent complex map $ \\\\ker(\\\\phi)/\\\\ker(\\\\phi)^2 \\\\to S \\\\otimes_R \\\\Omega_{S/R} $ with the first differential map $ \\\\mathrm{Rela\"}\n  {\"name\": \"Ideal.to_quotient_square_comp_toCotangent\", \"module\": \"Mathlib/RingTheory/Ideal/Cotangent\", \"type\": \"∀ {R : Type u} [inst : CommRing R] (I : Ideal R),\\n  I.cotangentToQuotientSquare ∘ₗ I.toCotangent = Submodule.mkQ (I ^ 2) ∘ₗ Submodule.subtype I\", \"doc\": \"The composition of the canonical linear map from an ideal $ I $ to its cotangent module $ I/I^2 $ followed by the inclusion of $ I/I^2 $ into the quotient ring $ R/I^2 $ is equal to the composition of\"}\n  {\"name\": \"KaehlerDifferential.quotKerTotalEquiv_symm_apply\", \"module\": \"Mathlib/RingTheory/Kaehler/Basic\", \"type\": \"∀ (R : Type u) (S : Type v) [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S] (a : Ω[S⁄R]),\\n  (KaehlerDifferential.quotKerTotalEquiv R S).symm a =\\n    (KaehlerDifferential.derivationQuotKerTotal R S).liftKaehlerDifferential a\", \"doc\": \"For commutative rings $ R $ and $ S $ with $ S $ an $ R $-algebra, the inverse of the quotient-kernel-total equivalence $ \\\\Omega_{S/R} \\\\to (S \\\\to_0 S)/\\\\ker(\\\\text{total}) $ maps each Kähler differentia\"}\n  {\"name\": \"KaehlerDifferential.quotientCotangentIdealRingEquiv\", \"module\": \"Mathlib/RingTheory/Kaehler/Basic\", \"type\": \"(R : Type u) →\\n  (S : Type v) →\\n    [inst : CommRing R] →\\n      [inst_1 : CommRing S] →\\n        [inst_2 : Algebra R S] →\\n          (TensorProduct R S S ⧸ KaehlerDifferential.ideal R S ^ 2) ⧸ (KaehlerDifferential.ideal R S).cotangentIdeal ≃+*\\n            S\", \"doc\": \"Let $R$ and $S$ be commutative rings, where $S$ is an $R$-algebra. Let $I$ be the kernel of the multiplication map $\\\\mu: S \\\\otimes_R S \\\\to S$. The module of Kähler differentials $\\\\Omega^1_{S/R}$ is de\"}\n  {\"name\": \"KaehlerDifferential.quotientCotangentIdeal\", \"module\": \"Mathlib/RingTheory/Kaehler/Basic\", \"type\": \"(R : Type u) →\\n  (S : Type v) →\\n    [inst : CommRing R] →\\n      [inst_1 : CommRing S] →\\n        [inst_2 : Algebra R S] →\\n          ((TensorProduct R S S ⧸ KaehlerDifferential.ideal R S ^ 2) ⧸\\n              (KaehlerDifferential.ideal R S).cotangentIdeal) ≃ₐ[S]\\n            S\", \"doc\": \"Let $R$ and $S$ be commutative rings, and let $S$ be an $R$-algebra. Let $I$ be the kernel of the multiplication map $\\\\mu: S \\\\otimes_R S \\\\to S$ given by $\\\\mu(s \\\\otimes t) = st$. The statement establis\"}\n  {\"name\": \"AdicCompletion.transitionMap_comp_reduceModIdeal\", \"module\": \"Mathlib/RingTheory/AdicCompletion/Functoriality\", \"type\": \"∀ {R : Type u_1} [inst : CommRing R] (I : Ideal R) {M : Type u_2} [inst_1 : AddCommGroup M] [inst_2 : Module R M]\\n  {N : Type u_3} [inst_3 : AddCommGroup N] [inst_4 : Module R N] (f : M →ₗ[R] N) {m n : ℕ} (hmn : m ≤ n),\\n  AdicCompletion.transitionMap I N hmn ∘ₗ ↑R (LinearMap.reduceModIdeal (I ^ n) f\", \"doc\": \"For any $ R $-linear map $ f : M \\\\to N $ between modules over a commutative ring $ R $, and for natural numbers $ m \\\\leq n $, the composition of the transition map $ M/I^nM \\\\to M/I^mM $ with the reduc\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: differential functoriality and quotient transition maps do not supply both shifted maps, coefficient annihilation and their four identities"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "finite separable coefficient field section completed differentials quotient comparison interleaving",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"Algebra.Generators.cotangentCompAwaySec\", \"module\": \"Mathlib/RingTheory/Extension/Cotangent/LocalizationAway\", \"type\": \"{R : Type u_1} →\\n  {S : Type u_2} →\\n    {T : Type u_3} →\\n      {ι : Type u_4} →\\n        [inst : CommRing R] →\\n          [inst_1 : CommRing S] →\\n            [inst_2 : Algebra R S] →\\n              [inst_3 : CommRing T] →\\n                [inst_4 : Algebra R T] →\\n                  [inst_5 : Algebra S T]\", \"doc\": \"A linear map on the cotangent module of a localized algebra extension, constructed using the basis generated by the Jacobian equivalence for the localization at an element $ r $. This map sends each b\"}\n  {\"name\": \"Algebra.Generators.cotangentCompAwaySec_apply\", \"module\": \"Mathlib/RingTheory/Extension/Cotangent/LocalizationAway\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} {T : Type u_3} {ι : Type u_4} [inst : CommRing R] [inst_1 : CommRing S]\\n  [inst_2 : Algebra R S] [inst_3 : CommRing T] [inst_4 : Algebra R T] [inst_5 : Algebra S T]\\n  [inst_6 : IsScalarTower R S T] (g : S) [inst_7 : IsLocalization.Away g T] (P : Algebra.Generators R S\", \"doc\": \"The linear map $\\\\text{cotangentCompAwaySec}$ on the cotangent module of the localization $ S_r $ sends the cotangent element represented by $ C(r)X - 1 $ (where $ C(r) $ is the constant polynomial emb\"}\n  {\"name\": \"Algebra.Generators.cotangentRestrict_mk\", \"module\": \"Mathlib/RingTheory/Extension/Cotangent/Basic\", \"type\": \"∀ {R : Type u} {S : Type v} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S] {ι : Type w}\\n  (P : Algebra.Generators R S ι) {σ : Type u_1} {u : σ → ι} (hu : Function.Injective u) (x : ↥P.ker),\\n  ⇑((P.cotangentRestrict hu) (Algebra.Extension.Cotangent.mk x)) = fun j =>\\n    (MvPolynomia\", \"doc\": \"For an injective function $ u : \\\\sigma \\\\to \\\\iota $ and an element $ x $ in the kernel ideal $ P.\\\\ker $, applying the cotangent restriction map to the quotient $ \\\\text{Cotangent.mk}(x) $ yields a funct\"}\n  {\"name\": \"Algebra.SubmersivePresentation.sectionCotangent_eq_iff\", \"module\": \"Mathlib/RingTheory/Smooth/StandardSmoothCotangent\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} {ι : Type u_3} {σ : Type u_4} [inst : CommRing R] [inst_1 : CommRing S]\\n  [inst_2 : Algebra R S] [inst_3 : Finite σ] (P : Algebra.SubmersivePresentation R S ι σ) [inst_4 : Finite σ]\\n  (x : P.toExtension.CotangentSpace) (y : P.toExtension.Cotangent),\\n  P.sectionCotange\", \"doc\": \"For a submersive presentation $ P $ with finite generating set $ \\\\sigma $, the section map $ \\\\text{sectionCotangent} $ sends an element $ x $ of the cotangent space to an element $ y $ of the cotangen\"}\n  {\"name\": \"Algebra.SubmersivePresentation.sectionCotangent\", \"module\": \"Mathlib/RingTheory/Smooth/StandardSmoothCotangent\", \"type\": \"{R : Type u_1} →\\n  {S : Type u_2} →\\n    {ι : Type u_3} →\\n      {σ : Type u_4} →\\n        [inst : CommRing R] →\\n          [inst_1 : CommRing S] →\\n            [inst_2 : Algebra R S] →\\n              [inst_3 : Finite σ] →\\n                (P : Algebra.SubmersivePresentation R S ι σ) →\\n                  P.\", \"doc\": \"A linear map from the cotangent space of the algebra extension $ P.toExtension $ to its cotangent module, constructed as the composition of: (1) the inverse of the cotangent module isomorphism $ (\\\\ker\"}\n  {\"name\": \"Algebra.SubmersivePresentation.aevalDifferentialEquiv_apply\", \"module\": \"Mathlib/RingTheory/Extension/Presentation/Submersive\", \"type\": \"∀ {R : Type u} {S : Type v} {ι : Type w} {σ : Type t} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S]\\n  [inst_3 : Finite σ] (P : Algebra.SubmersivePresentation R S ι σ) [inst_4 : Finite σ] (x : σ → S),\\n  P.aevalDifferentialEquiv x = P.aevalDifferential x\", \"doc\": \"Given a submersive presentation $ P $ of an $ R $-algebra $ S $ with finite generating set $ \\\\sigma $, the differential map $ P.\\\\text{aevalDifferential} $ induces a linear equivalence between the func\"}\n  {\"name\": \"Algebra.Presentation.differentials.comm₂₃\", \"module\": \"Mathlib/Algebra/Module/Presentation/Differentials\", \"type\": \"∀ {R : Type u} {S : Type v} {ι : Type w} {σ : Type t} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S]\\n  (pres : Algebra.Presentation R S ι σ),\\n  pres.toExtension.toKaehler ∘ₗ ↑pres.cotangentSpaceBasis.repr.symm = pres.differentialsSolution.π\", \"doc\": \"For an $R$-algebra presentation $\\\\text{pres}$, the composition of the Kähler differential map $\\\\text{pres.toExtension.toKaehler}$ with the inverse of the cotangent space basis representation $\\\\text{pr\"}\n  {\"name\": \"Algebra.PreSubmersivePresentation.cotangentComplexAux_apply\", \"module\": \"Mathlib/RingTheory/Smooth/StandardSmoothCotangent\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} {ι : Type u_3} {σ : Type u_4} [inst : CommRing R] [inst_1 : CommRing S]\\n  [inst_2 : Algebra R S] [inst_3 : Finite σ] (P : Algebra.PreSubmersivePresentation R S ι σ) (x : ↥P.ker) (i : σ),\\n  P.cotangentComplexAux (Algebra.Extension.Cotangent.mk x) i =\\n    (MvPolynomial.\", \"doc\": \"For a pre-submersive presentation $ P $ of an $ R $-algebra $ S $ with finite index type $ \\\\sigma $, the cotangent complex auxiliary linear map evaluated at a kernel element $ x $ and index $ i : \\\\sig\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: differential functoriality and quotient transition maps do not supply both shifted maps, coefficient annihilation and their four identities"
+  },
+  {
+   "tool": "loogle",
+   "query": "KaehlerDifferential, Ideal.Quotient",
+   "results": "[loogle] OK 0 hit(s) | loogle: unknown identifier 'Ideal.Quotient'\n",
+   "date": "2026-10-22",
+   "verdict": "no match: Loogle reports unknown identifier Ideal.Quotient; corrected name search recorded separately"
+  },
+  {
+   "tool": "grep",
+   "query": "[Dd]ifferential.*[Cc]ompletion|[Cc]ompletion.*[Dd]ifferential|[Dd]ifferential.*mod.*pow",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-22",
+   "verdict": "no match: differential functoriality and quotient transition maps do not supply both shifted maps, coefficient annihilation and their four identities"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Kahler differential quotient ideal powers one shifted inverse map",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"Algebra.Extension.Cotangent.ker_mk\", \"module\": \"Mathlib.RingTheory.Extension.Basic\", \"type\": \": LinearMap.ker (mk (P := P)) = P.ker • ⊤\", \"doc\": \"The kernel of the canonical quotient map from the kernel ideal $\\\\ker(\\\\phi)$ to its cotangent module $\\\\ker(\\\\phi)/\\\\ker(\\\\phi)^2$ is equal to the square of the ideal $\\\\ker(\\\\phi)^2$.\"}\n  {\"name\": \"CommRingCat.KaehlerDifferential.map\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Differentials.Basic\", \"type\": \": KaehlerDifferential f ⟶ (ModuleCat.restrictScalars g'.hom).obj (KaehlerDifferential f')\", \"doc\": \"Given compatible commutative ring homomorphisms and algebra structures, this constructs an $ A $-linear map between modules of Kähler differentials $ \\\\Omega_{A/R} $ and $ \\\\Omega_{B/S} $, induced by th\"}\n  {\"name\": \"Ideal.Quotient.factorPowSucc\", \"module\": \"Mathlib.RingTheory.Ideal.Quotient.PowTransition\", \"type\": \"(n : ℕ) : R ⧸ I ^ (n + 1) →+* R ⧸ I ^ n\", \"doc\": \"For each natural number $ n $, the canonical ring homomorphism from the quotient ring $ R/I^{n+1} $ to $ R/I^n $ induced by the inclusion $ I^{n+1} \\\\subseteq I^n $. It maps each equivalence class $ [a\"}\n  {\"name\": \"Ideal.quotientToQuotientRangePowQuotSuccAux\", \"module\": \"Mathlib.NumberTheory.RamificationInertia.Basic\", \"type\": \"{i : ℕ} {a : S} (a_mem : a ∈ P ^ i) :\\n  S ⧸ P → (P ^ i).map (Ideal.Quotient.mk (P ^ e)) ⧸ LinearMap.range (powQuotSuccInclusion p P i)\", \"doc\": \"A linear map from the quotient ring $ S/P $ to the quotient module $ (P^i/P^e)/\\\\text{range}(\\\\mathfrak{P}^{i+1} \\\\to \\\\mathfrak{P}^i) $, induced by the inclusion of $ \\\\mathfrak{P}^{i+1} $ in $ \\\\mathfrak{\"}\n  {\"name\": \"Ideal.quotientToQuotientRangePowQuotSucc\", \"module\": \"Mathlib.NumberTheory.RamificationInertia.Basic\", \"type\": \"{i : ℕ} {a : S} (a_mem : a ∈ P ^ i) :\\n  S ⧸ P →ₗ[R ⧸ p] (P ^ i).map (Ideal.Quotient.mk (P ^ e)) ⧸ LinearMap.range (powQuotSuccInclusion p P i)\", \"doc\": \"A linear map from the quotient ring $ S/\\\\mathfrak{P} $ to the quotient module $ (\\\\mathfrak{P}^i/\\\\mathfrak{P}^e)/\\\\text{range}(\\\\mathfrak{P}^{i+1} \\\\to \\\\mathfrak{P}^i) $, induced by the inclusion $ \\\\mathf\"}\n  {\"name\": \"CommRingCat.KaehlerDifferential.d\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Differentials.Basic\", \"type\": \"(b : B) : KaehlerDifferential f\", \"doc\": \"For a ring homomorphism $ f : A \\\\to B $, this function maps an element $ b \\\\in B $ to its differential $ db $ in the module of Kähler differentials $ \\\\Omega_{B/A} $. It represents the universal deriva\"}\n  {\"name\": \"KaehlerDifferential.endEquivAuxEquiv\", \"module\": \"Mathlib.RingTheory.Kaehler.Basic\", \"type\": \"(R : Type u) →\\n  (S : Type v) →\\n    [inst : CommRing R] →\\n      [inst_1 : CommRing S] →\\n        [inst_2 : Algebra R S] →\\n          { f //\\n              (Ideal.Quotient.mkₐ R (KaehlerDifferential.ideal R S).cotangentIdeal).comp f =\\n                IsScalarTower.toAlgHom R S\\n                  ((Tensor\", \"doc\": \"Let $R$ and $S$ be commutative rings, where $S$ is an $R$-algebra. Let $I$ be the kernel of the multiplication map $m: S \\\\otimes_R S \\\\to S$. This theorem establishes a bijection between two sets of $R\"}\n  {\"name\": \"Submodule.factorPowSucc\", \"module\": \"Mathlib.RingTheory.Ideal.Quotient.PowTransition\", \"type\": \"(m : ℕ) : M ⧸ (I ^ (m + 1) • ⊤ : Submodule R M) →ₗ[R] M ⧸ (I ^ m • ⊤ : Submodule R M)\", \"doc\": \"For a natural number $ m $, this linear map sends the quotient module $ M/I^{m+1}M $ to $ M/I^mM $, constructed via the canonical inclusion $ I^{m+1}M \\\\subseteq I^mM $ using the monotonicity property \"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: differential functoriality and quotient transition maps do not supply both shifted maps, coefficient annihilation and their four identities"
+  },
+  {
+   "tool": "loogle",
+   "query": "KaehlerDifferential.map",
+   "results": "[loogle] OK 12 hit(s)\n  {\"name\": \"KaehlerDifferential.map\", \"module\": \"Mathlib.RingTheory.Kaehler.Basic\", \"type\": \" (R : Type u) (S : Type v) [CommRing R] [CommRing S] [Algebra R S] (A : Type u_2) (B : Type u_3) [CommRing A] [CommRing B] [Algebra R A] [Algebra A B] [Algebra S B] [Algebra R B] [IsScalarTower R A B] [IsScalarTower R S B] [SMulCommClass S A B] : Ω[A⁄R] →ₗ[A] Ω[B⁄S]\", \"doc\": \"The map `Ω[A⁄R] →ₗ[A] Ω[B⁄S]` given a square\\n```\\nA --→ B\\n↑     ↑\\n|     |\\nR --→ S\\n```\"}\n  {\"name\": \"KaehlerDifferential.map_surjective\", \"module\": \"Mathlib.RingTheory.Kaehler.Basic\", \"type\": \" (R : Type u) (S : Type v) [CommRing R] [CommRing S] [Algebra R S] (B : Type u_3) [CommRing B] [Algebra S B] [Algebra R B] [IsScalarTower R S B] : Function.Surjective ⇑(KaehlerDifferential.map R S B B)\", \"doc\": \"\"}\n  {\"name\": \"KaehlerDifferential.map_surjective_of_surjective\", \"module\": \"Mathlib.RingTheory.Kaehler.Basic\", \"type\": \" (R : Type u) (S : Type v) [CommRing R] [CommRing S] [Algebra R S] (A : Type u_2) (B : Type u_3) [CommRing A] [CommRing B] [Algebra R A] [Algebra A B] [Algebra S B] [Algebra R B] [IsScalarTower R A B] [IsScalarTower R S B] [SMulCommClass S A B] (h : Function.Surjective ⇑(algebraMap A B)) : Function.\", \"doc\": \"\"}\n  {\"name\": \"KaehlerDifferential.range_mapBaseChange\", \"module\": \"Mathlib.RingTheory.Kaehler.Basic\", \"type\": \" (R : Type u) [CommRing R] (A : Type u_2) (B : Type u_3) [CommRing A] [CommRing B] [Algebra R A] [Algebra A B] [Algebra R B] [IsScalarTower R A B] : (KaehlerDifferential.mapBaseChange R A B).range = (KaehlerDifferential.map R A B B).ker\", \"doc\": \"\"}\n  {\"name\": \"KaehlerDifferential.map_D\", \"module\": \"Mathlib.RingTheory.Kaehler.Basic\", \"type\": \" (R : Type u) (S : Type v) [CommRing R] [CommRing S] [Algebra R S] (A : Type u_2) (B : Type u_3) [CommRing A] [CommRing B] [Algebra R A] [Algebra A B] [Algebra S B] [Algebra R B] [IsScalarTower R A B] [IsScalarTower R S B] [SMulCommClass S A B] (x : A) : (KaehlerDifferential.map R S A B) ((KaehlerDi\", \"doc\": \"\"}\n  {\"name\": \"KaehlerDifferential.exact_mapBaseChange_map\", \"module\": \"Mathlib.RingTheory.Kaehler.Basic\", \"type\": \" (R : Type u) [CommRing R] (A : Type u_2) (B : Type u_3) [CommRing A] [CommRing B] [Algebra R A] [Algebra A B] [Algebra R B] [IsScalarTower R A B] : Function.Exact ⇑(KaehlerDifferential.mapBaseChange R A B) ⇑(KaehlerDifferential.map R A B B)\", \"doc\": \"The sequence `B ⊗[A] Ω[A⁄R] → Ω[B⁄R] → Ω[B⁄A] → 0` is exact.\\nAlso see `KaehlerDifferential.map_surjective`.\"}\n  {\"name\": \"KaehlerDifferential.ker_map_of_surjective\", \"module\": \"Mathlib.RingTheory.Kaehler.Basic\", \"type\": \" (R : Type u) [CommRing R] (A : Type u_2) (B : Type u_3) [CommRing A] [CommRing B] [Algebra R A] [Algebra A B] [Algebra R B] [IsScalarTower R A B] (h : Function.Surjective ⇑(algebraMap A B)) : (KaehlerDifferential.map R R A B).ker = Submodule.map (Finsupp.linearCombination A ⇑(KaehlerDifferential.D \", \"doc\": \"\"}\n  {\"name\": \"KaehlerDifferential.mapBaseChange_tmul\", \"module\": \"Mathlib.RingTheory.Kaehler.Basic\", \"type\": \" (R : Type u) [CommRing R] (A : Type u_2) (B : Type u_3) [CommRing A] [CommRing B] [Algebra R A] [Algebra A B] [Algebra R B] [IsScalarTower R A B] (x : B) (y : Ω[A⁄R]) : (KaehlerDifferential.mapBaseChange R A B) (x ⊗ₜ[A] y) = x • (KaehlerDifferential.map R R A B) y\", \"doc\": \"\"}\n  {\"name\": \"KaehlerDifferential.ker_map\", \"module\": \"Mathlib.RingTheory.Kaehler.Basic\", \"type\": \" (R : Type u) (S : Type v) [CommRing R] [CommRing S] [Algebra R S] (A : Type u_2) (B : Type u_3) [CommRing A] [CommRing B] [Algebra R A] [Algebra A B] [Algebra S B] [Algebra R B] [IsScalarTower R A B] [IsScalarTower R S B] [SMulCommClass S A B] : (KaehlerDifferential.map R S A B).ker = Submodule.map\", \"doc\": \"\"}\n  {\"name\": \"KaehlerDifferential.map_compDer\", \"module\": \"Mathlib.RingTheory.Kaehler.Basic\", \"type\": \" (R : Type u) (S : Type v) [CommRing R] [CommRing S] [Algebra R S] (A : Type u_2) (B : Type u_3) [CommRing A] [CommRing B] [Algebra R A] [Algebra A B] [Algebra S B] [Algebra R B] [IsScalarTower R A B] [IsScalarTower R S B] [SMulCommClass S A B] : (KaehlerDifferential.map R S A B).compDer (KaehlerDif\", \"doc\": \"\"}\n  {\"name\": \"Algebra.Extension.CotangentSpace.map_tmul_eq_tmul_map\", \"module\": \"Mathlib.RingTheory.Extension.Cotangent.Basic\", \"type\": \" {R : Type u} {S : Type v} [CommRing R] [CommRing S] [Algebra R S] {P : Algebra.Extension R S} {R' : Type u'} {S' : Type v'} [CommRing R'] [CommRing S'] [Algebra R' S'] {P' : Algebra.Extension R' S'} [Algebra R R'] [Algebra S S'] [Algebra R S'] [IsScalarTower R R' S'] (f : P.Hom P') (x : S) (y : Ω[P\", \"doc\": \"\"}\n  {\"name\": \"KaehlerDifferential.isLocalizedModule_map\", \"module\": \"Mathlib.RingTheory.Etale.Kaehler\", \"type\": \" (R : Type u_1) (S : Type u_2) (T : Type u_3) [CommRing R] [CommRing S] [CommRing T] [Algebra R S] [Algebra R T] [Algebra S T] [IsScalarTower R S T] (M : Submonoid S) [IsLocalization M T] : IsLocalizedModule M (KaehlerDifferential.map R R S T)\", \"doc\": \"\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: differential functoriality and quotient transition maps do not supply both shifted maps, coefficient annihilation and their four identities"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "adic quotient Kahler differentials compatible interleaving maps derivation",
+   "results": "{\"t\": \"2026-10-23T09:49:40Z\", \"tool\": \"leanfinder\", \"query\": \"adic quotient Kahler differentials compatible interleaving maps derivation\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"derivationQuotKerSq\", \"derivationQuotKerSq_mk\", \"KaehlerDifferential.quotKerTotalEquiv_symm_comp_D\", \"KaehlerDifferential.derivationQuotKerTotal\", \"CommRingCat.KaehlerDifferential.map_d\", \"KaehlerDifferential.map_compDer\", \"Derivation.liftKaehlerDifferential_apply\", \"KaehlerDifferential.derivationQuotKerTotal_lift_comp_linearCombination\"], \"digest\": \"7bc304cec867bdbb\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits provide universal differential maps, derivation descent or quotient transitions, not this completion/coefficient-field interleaving and its four identities"
+  },
+  {
+   "tool": "loogle",
+   "query": "Derivation.liftKaehlerDifferential, KaehlerDifferential.map, Ideal.Quotient.factorPowSucc",
+   "results": "{\"t\": \"2026-10-23T09:49:41Z\", \"tool\": \"loogle\", \"query\": \"Derivation.liftKaehlerDifferential, KaehlerDifferential.map, Ideal.Quotient.factorPowSucc\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits provide universal differential maps, derivation descent or quotient transitions, not this completion/coefficient-field interleaving and its four identities"
+  },
+  {
+   "tool": "grep",
+   "query": "[Dd]erivation.*[Qq]uotient|KaehlerDifferential.*map|factorPowSucc",
+   "results": "{\"t\": \"2026-10-23T09:49:41Z\", \"tool\": \"grep\", \"query\": \"[Dd]erivation.*[Qq]uotient|KaehlerDifferential.*map|factorPowSucc\", \"sub\": \"RingTheory/\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/Derivation/ToSquareZero.lean\", \"Mathlib/RingTheory/Extension/Cotangent/Basic.lean\", \"Mathlib/RingTheory/Extension/Cotangent/Basic.lean\", \"Mathlib/RingTheory/Extension/Cotangent/Basic.lean\", \"Mathlib/RingTheory/Extension/Cotangent/BaseChange.lean\", \"Mathlib/RingTheory/Unramified/LocalRing.lean\", \"Mathlib/RingTheory/Unramified/Basic.lean\", \"Mathlib/RingTheory/Unramified/Finite.lean\"], \"digest\": \"9baf7d530380a073\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits provide universal differential maps, derivation descent or quotient transitions, not this completion/coefficient-field interleaving and its four identities"
+  },
+  {
+   "tool": "leansearch",
+   "query": "finite separable coefficient field derivations vanish and compatible maps between differentials of adjacent ideal quotients",
+   "results": "{\"t\": \"2026-10-23T09:49:42Z\", \"tool\": \"leansearch\", \"query\": \"finite separable coefficient field derivations vanish and compatible maps between differentials of adjacent ideal quotients\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CommRingCat.KaehlerDifferential.D\", \"Differential.algHom_deriv\", \"liftOfDerivationToSquareZero_mk_apply'\", \"IntermediateField.isSeparable_adjoin_pair_of_isSeparable\", \"Algebra.FormallyUnramified.of_isSeparable\", \"Polynomial.separable_iff_derivative_ne_zero\", \"ModuleCat.Derivation.desc_d\", \"algebraMap.coe_deriv\"], \"digest\": \"ad66582406cb26fb\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits provide universal differential maps, derivation descent or quotient transitions, not this completion/coefficient-field interleaving and its four identities"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "completion of module Kahler differentials quotient ideal powers shifted inverse comparison",
+   "results": "{\"t\": \"2026-10-23T09:54:48Z\", \"tool\": \"leanfinder\", \"query\": \"completion of module Kahler differentials quotient ideal powers shifted inverse comparison\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.Presentation.differentials.comm₂₃\", \"KaehlerDifferential.quotKerTotalEquiv_symm_apply\", \"Derivation.liftKaehlerDifferential_apply\", \"KaehlerDifferential.quotKerTotalEquiv_symm_comp_D\", \"KaehlerDifferential.endEquivAuxEquiv\", \"KaehlerDifferential.endEquivDerivation'\", \"KaehlerDifferential.End_equiv_aux\", \"Algebra.Extension.toKaehler\"], \"digest\": \"9a217f73df6ec5f4\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits provide universal differential maps, derivation descent or quotient transitions, not this completion/coefficient-field interleaving and its four identities"
+  },
+  {
+   "tool": "loogle",
+   "query": "KaehlerDifferential.map",
+   "results": "{\"t\": \"2026-10-23T09:54:49Z\", \"tool\": \"loogle\", \"query\": \"KaehlerDifferential.map\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"KaehlerDifferential.map\", \"KaehlerDifferential.map_surjective\", \"KaehlerDifferential.map_surjective_of_surjective\", \"KaehlerDifferential.range_mapBaseChange\", \"KaehlerDifferential.map_D\", \"KaehlerDifferential.exact_mapBaseChange_map\", \"KaehlerDifferential.ker_map_of_surjective\", \"KaehlerDifferential.mapBaseChange_tmul\"], \"digest\": \"3461a55d329cf3b1\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits provide universal differential maps, derivation descent or quotient transitions, not this completion/coefficient-field interleaving and its four identities"
+  },
+  {
+   "tool": "grep",
+   "query": "[Ii]nterleav|[Cc]omplet.*[Dd]ifferential|[Dd]ifferential.*[Cc]omplet",
+   "results": "{\"t\": \"2026-10-23T09:54:49Z\", \"tool\": \"grep\", \"query\": \"[Ii]nterleav|[Cc]omplet.*[Dd]ifferential|[Dd]ifferential.*[Cc]omplet\", \"sub\": \"RingTheory/\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits provide universal differential maps, derivation descent or quotient transitions, not this completion/coefficient-field interleaving and its four identities"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-completion-kahler-differential-comparison",
+  "date": "2026-10-22",
+  "group": "Q140"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "The Jacobian-cokernel/differential comparison in the first proof paragraph of the pointwise nodal ingredient (Curves 0C4D). Coefficient annihilation and shifted quotient differential maps (returned comparison Steps 3-6).",
+   "via": [
+    "lem-trf-completion-kahler-differential-comparison",
+    "lem-trf-completed-jacobian-differentials",
+    "lem-trf-separable-closed-point-formal-presentation",
+    "lem-trf-nodal-point-local-criterion",
+    "lem-trf-nodal-curve-lci-criterion",
+    "lem-trf-nodal-family-fitting-singular",
+    "lem-trf-projective-nodal-family-geometry",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-trf-adic-differential-quotient-interleaving",
+  "worker": "stage1",
+  "summary": "Preserved the statement. Reused the existing finite-separable differential-vanishing leaf and arbitrary-module completion-quotient theorem, then constructed both maps by the universal property and proved all four identities explicitly on differential generators. The reverse composite uses an A-lift modulo J^{r+1} and the assumed bound on D, so no unsupported continuity or finite-generation hypothesis on M is introduced. No new nodes and no Lean changes.",
+  "blueprint": "The inherited ancestor place is the Jacobian-cokernel comparison underlying the nodal ingredient of lem-trf-local-term-locality; this split realizes coefficient annihilation and the adjacent-quotient comparison (old comparison Steps 3-6). The latest ancestor and unit were read; neither states this auxiliary algebraic assertion.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-module-completion-complete",
+    "why": "Generic completion theorem for arbitrary modules over a ring with finitely generated ideal; supplies the canonical quotient identifications and surjective projections. No theorem of this trace-formula unit states this general completion input."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-module-completion-complete"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q125-60c2e38ed",
+  "group": "Q125",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q125-60c2e38ed (reviewer sub-agent of L); spot-checked: I read the delivery in full; no changes. The statement, stmt_deps, source, blueprint, created and unit are unchanged against side-live, where the item is still unsplit; there is no repair note, so no re-split order applies. I checked each of the 7 steps by hand. Step 1 cites lem-weil-pbc-module-completion-complete (Stacks 05GG, read at algebra.tex l.22645). It needs only I finitely generated and any module, and it gives ker(C→A/I^r)=I^rC=J^r and N/I^rN≅M/I^rM with p_r∘j equal to reduction. The C-action factors through B_r because J^rN⊆I^rN. Step 2: Dσ is a k-derivation of F, and Ω_{F/k}=0 by lem-trf-separable-field-differentials-vanish (Mathlib leaf), so Dσ=0. Step 3: α_r comes from the universal property (00RO, l.33856). The wording that A→B_r is a k-algebra map 'because σ is one' is slightly loose, but the substance is right. Step 4: β_r is well defined by D(J^{r+1})⊆I^rN and is an F-derivation by Step 2. Steps 5 and 6: both transition identities and β_rα_{r+1}=q_r hold on generators. Step 7: α_rβ_r=t_r holds by taking a lift modulo J^{r+1}, which is correctly needed. Edge cases checked: I=0, I=A (C=0), F=k, and A=k[t], r=1, which shows the shift in β_r is necessary. No new nodes. No duplicate: the parent lem-trf-completion-kahler-differential-comparison is the only citer and uses exactly the four identities and Dσ=0; truncation-reconstruction needs finitely generated M. No cycle, no SGA. All uses are Mathlib leaves or definitions. The declared tool_use of the generic completion theorem is accepted."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.AdicDifferentialQuotientInterleaving",
+  "declaration": "AdicDifferentialInterleaving.quotient_interleaving",
+  "declarations": [
+   "AdicDifferentialInterleaving.completionIdeal",
+   "AdicDifferentialInterleaving.quotientModule",
+   "AdicDifferentialInterleaving.moduleReduction",
+   "AdicDifferentialInterleaving.moduleSymbol",
+   "AdicDifferentialInterleaving.quotientDifferentials",
+   "AdicDifferentialInterleaving.differentialSymbol",
+   "AdicDifferentialInterleaving.differentialReduction",
+   "AdicDifferentialInterleaving.quotient_interleaving"
+  ],
+  "file": "lean/Sheaf/RingTheory/AdicDifferentialQuotientInterleaving.lean",
+  "statement": "theorem quotient_interleaving {k : Type u} {F : Type w} {A : Type v} [Field k] [Field F] [CommRing A] [Algebra k F] [Module.Finite k F] [Algebra.IsSeparable k F] [Algebra k A] (I : Ideal A) (hI : I.FG) [Algebra F (AdicCompletion I A)] [IsScalarTower k F (AdicCompletion I A)] (D : Derivation k (AdicCompletion I A) (AdicCompletion I (KaehlerDifferential k A))) (hD : ∀ a : A, D (algebraMap A (AdicCompletion I A) a) = AdicCompletion.of I (KaehlerDifferential k A) (KaehlerDifferential.D k A a)) (hbound : ∀ (n : ℕ) (x : AdicCompletion I A), x ∈ completionIdeal I ^ (n + 2) → D x ∈ completionIdeal I ^ (n + 1) • (⊤ : Submodule (AdicCompletion I A) (AdicCompletion I (KaehlerDifferential k A)))) : (∀ f : F, D (algebraMap F (AdicCompletion I A) f) = 0) ∧ (∀ n : ℕ, ∃ δ : (AdicCompletion I A ⧸ completionIdeal I ^ (n + 2)) →+ quotientModule k A I n, (∀ x : AdicCompletion I A, δ (Ideal.Quotient.mk _ x) = Submodule.Quotient.mk (D x)) ∧ (∀ f : F, δ (algebraMap F _ f) = 0) ∧ (∀ x y : AdicCompletion I A, δ (Ideal.Quotient.mk _ (x * y)) = x • δ (Ideal.Quotient.mk _ y) + y • δ (Ideal.Quotient.mk _ x))) ∧ ∃ (α : ∀ n : ℕ, quotientModule k A I n →ₗ[AdicCompletion I A] quotientDifferentials A F I n) (β : ∀ n : ℕ, quotientDifferentials A F I (n + 1) →ₗ[AdicCompletion I A] quotientModule k A I n), (∀ (n : ℕ) (a : A), α n (moduleSymbol k A I n a) = differentialSymbol A F I n (algebraMap A (AdicCompletion I A) a)) ∧ (∀ (n : ℕ) (x : AdicCompletion I A), β n (differentialSymbol A F I (n + 1) x) = Submodule.Quotient.mk (D x)) ∧ (∀ (n : ℕ) (α' : quotientModule k A I n →ₗ[AdicCompletion I A] quotientDifferentials A F I n), (∀ a : A, α' (moduleSymbol k A I n a) = differentialSymbol A F I n (algebraMap A (AdicCompletion I A) a)) → α' = α n) ∧ (∀ (n : ℕ) (β' : quotientDifferentials A F I (n + 1) →ₗ[AdicCompletion I A] quotientModule k A I n), (∀ x : AdicCompletion I A, β' (differentialSymbol A F I (n + 1) x) = Submodule.Quotient.mk (D x)) → β' = β n) ∧ (∀ n : ℕ, (differentialReduction A F I n).comp (α (n + 1)) = (α n).comp (moduleReduction k A I n)) ∧ (∀ n : ℕ, (moduleReduction k A I n).comp (β (n + 1)) = (β n).comp (differentialReduction A F I (n + 1))) ∧ (∀ n : ℕ, (β n).comp (α (n + 1)) = moduleReduction k A I n) ∧ (∀ n : ℕ, (α n).comp (β n) = differentialReduction A F I n)",
+  "branch": "newtargets-dag",
+  "by": "Q129",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-2dc937cf6",
+  "group": "Q129",
+  "result": "pass",
+  "note": "Read item node, report, module, 4 stmt_dep records, side-live ContinuousKaehlerDifferential.adicTransition and Mathlib AdicCompletion.Algebra. All hypotheses (finite separable k⊆F via Module.Finite+Algebra.IsSeparable, I.FG, σ as Algebra F C + IsScalarTower k F C, D : Derivation k C N with hD, hbound for r=n+1≥1 using J^rN=I^rN) and every conclusion (Dσ=0, δ as additive F-vanishing Leibniz map on C/J^(r+1)→Q_r, α/β existence with symbol formulas, independent uniqueness, 4 identities with correct domains via factorPowSucc and adicTransition) match the node; edge cases n=0, I=0, I=⊤, zero ring, char p, independent universes. lean.statement verbatim; 8 declarations present; added stmt_dep def-trf-continuous-kahler-differentials landed 2026-10-17 and on base, reused not copied; helpers real data; proof sorry; docstrings with Stacks tags/blueprint; report has Worker report + Second reading by Q129. No file changed, no compile run."
+ }
+}

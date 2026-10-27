@@ -1,0 +1,121 @@
+{
+ "id": "def-zl-point-heart-finite-stage-data",
+ "kind": "definition",
+ "title": "PointHeartFiniteStageData",
+ "statement": "Fix a finite-field datum D, a prime l different from D.p, a finite-dimensional coefficient field E over Q_l, and an algebraic closure Omega of Q_l, all in the scheme universe. The point-heart interface consists of the functors H^0 Fib_E and H^0 Fib_Omega on the intrinsic constructible hearts, the predicate ZlPointHeartExact specifying full faithfulness, additivity, finite-dimensional essential image and preservation/reflection of finite limits, finite colimits, zero objects and short exact sequences, and the prescribed ambient, scalar, truncation and finite-stage Weil witness structures. Each definition is precisely the existing one used in lem-zl-point-heart-finite-stage; the definitions use [def-weil-algebraically-closed-coefficients], [def-weil-constructible-heart], [def-weil-weil-sheaf-complex], [def-weil-finite-coefficient-point], [def-weil-coefficient-cohomology-modules], [def-weil-frobenius-point-transport], [lem-weil-scalar-extension-composition] and [def-weil-local-frobenius-trace].",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-deligne-laumon-general/sk-i-dl-general-real/thm-zl-real-mixed-by-curves.proof.md",
+  "place": "Paragraph 7, dimension-zero point-heart input; original shared interface definitions"
+ },
+ "stmt_deps": [
+  "def-weil-algebraically-closed-coefficients",
+  "def-weil-constructible-heart",
+  "def-weil-weil-sheaf-complex",
+  "def-weil-finite-coefficient-point",
+  "def-weil-coefficient-cohomology-modules",
+  "def-weil-frobenius-point-transport",
+  "lem-weil-scalar-extension-composition",
+  "def-weil-local-frobenius-trace"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A full faithful additive functor whose image is exactly finite dimensional modules is exact",
+   "results": "exactFunctor and exactFunctor_iff, leftExactFunctor, and general functor categories; no result for the specified point-heart realization",
+   "date": "2026-10-25",
+   "verdict": "General exactness tools apply after identifying the essential image; the specified point and Weil descent claims are absent."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A t exact equivalence induces an exact equivalence on hearts and finite diagrams descend along filtered coefficient extensions",
+   "results": "Functor.exact_tfae, Abelian.Ext.mapExactFunctor, Functor.map_distinguished_exact, and preservesFiniteLimits/Colimits_tfae",
+   "date": "2026-10-25",
+   "verdict": "Useful general exactness infrastructure, but no direct specified point-heart or finite-stage Weil descent theorem."
+  },
+  {
+   "tool": "grep",
+   "query": "point.*[Hh]eart|pointRationalFibreScalarIso; FGModuleCat finite limits, colimits, and Abelian; shortExact_map_iff",
+   "results": "PointHeartFiniteStage has the assigned theorem only; CoefficientCohomologyModules supplies changeStage; FGModuleCat.Abelian and CategoryTheory.Abelian.ShortExact supply exactness infrastructure. Local rg and msearch both used.",
+   "date": "2026-10-25",
+   "verdict": "Reuse FGModuleCat universal-property infrastructure and the existing changeStage theorem; no duplicate of the split point claims found."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.PointHeartFiniteStage",
+  "date": "2026-10-25",
+  "group": "R7"
+ },
+ "chapter": "sec-deligne-laumon-general",
+ "unit": "sk-i-dl-general-real",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-zl-real-mixed-by-curves",
+   "place": "Paragraph 7, dimension-zero point-heart and finite-stage argument",
+   "via": [
+    "lem-zl-point-weil-heart-flag",
+    "lem-zl-point-heart-finite-stage"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.PointHeartFiniteStageData",
+  "file": "lean/Sheaf/Paper/PointHeartFiniteStageData.lean",
+  "declaration": "WeilConjectures.ZlPointHeartExact",
+  "declarations": [
+   "WeilConjectures.zlPointHeartOmega",
+   "WeilConjectures.zlPointCommonHeartOmega",
+   "WeilConjectures.ZlPointHeartExact",
+   "WeilConjectures.zlPointAmbient",
+   "WeilConjectures.zlPointCommonAmbient",
+   "WeilConjectures.ZlPointTruncationComparison",
+   "WeilConjectures.zlPointHeartScalar",
+   "WeilConjectures.zlPointT",
+   "WeilConjectures.zlPointScalar",
+   "WeilConjectures.zlPointScalarAmbient",
+   "WeilConjectures.ZlPointScalarTruncationSquare",
+   "WeilConjectures.zlPointHeartBase",
+   "WeilConjectures.zlPointHeartBaseLocallyOfFiniteType",
+   "WeilConjectures.zlPointHeartBaseQuasiCompact",
+   "WeilConjectures.zlPointWeilFibreAt",
+   "WeilConjectures.zlPointCohomologyTower",
+   "WeilConjectures.zlPointStageCohomology",
+   "WeilConjectures.zlPointStageOmega",
+   "WeilConjectures.zlPointWeilStageOmega",
+   "WeilConjectures.ZlPointFiniteStageWitness"
+  ],
+  "statement": "def ZlPointHeartExact {C : Type v} [Category.{w} C] [Preadditive C] (F : Type u) [Field F] (ω : C ⥤ ModuleCat.{u} F) : Prop",
+  "branch": "sheaf-dag",
+  "by": "R7",
+  "date": "2026-10-25",
+  "note": "Existing shared definitions relocated from PointHeartFiniteStage, which publicly re-exports this module. Declaration names and signatures are preserved; only pullback implicit arguments are made explicit in zlPointWeilStageOmega."
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-3ce6d",
+  "group": "R7",
+  "result": "pass",
+  "landing": "20261025T123659-L-1889419",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-3ce6d",
+  "group": "R7",
+  "result": "pass",
+  "landing": "20261025T123659-L-1889419",
+  "kind": "interface",
+  "note": "independent cc review: delivered item theorem and 20 relocated defs (type/value hashes published vs sandbox, rfl equality of the changed zlPointWeilStageOmega body) against base 6c5fa6c0be3; 4 sorried split statements against the item's conjuncts and the ZlPointFiniteStageWitness fields; #print axioms in a full sandbox compile"
+ }
+}

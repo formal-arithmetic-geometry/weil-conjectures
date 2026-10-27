@@ -118,7 +118,32 @@
   "def-sc-divisor"
  ],
  "proof_split_by": "paragraphs",
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": [
+    "AlgebraicGeometry.isAffine_compl_of_isAmple_dual_toModules"
+   ]
+  },
+  "slopmaster2": {
+   "state": "closed",
+   "decls": [
+    {
+     "name": "AlgebraicGeometry.isAffine_compl_of_isAmple_dual_toModules",
+     "module": "WeilConjectures.AlgebraicGeometry.Modules.Ample",
+     "lines": [
+      461,
+      517
+     ],
+     "kind": "theorem",
+     "sorry": false
+    }
+   ],
+   "missing": [],
+   "open": []
+  }
+ },
  "chapter": "sec-picard-framework",
  "unit": "sk-thm-picard-rr",
  "split_report": {
@@ -145,5 +170,28 @@
   ],
   "sorry_free": true,
   "note": "recorded by L at 04:46 UTC from lean_audit (stage 2, rule 2 of the human: one definition per notion; a node whose notion has a declaration in the source repository is not stated again; audit state sorry_here); Lean refresh 7d675a26 (L): sorry-free on 7d675a263"
+ },
+ "blueprint_update": {
+  "snapshot": "main-20261023-1620",
+  "commit": "7284bb09daf97437d544c51882b325f9c52cd345",
+  "changed": [
+   "statement"
+  ],
+  "statement": "Let $X$ be a proper scheme over a field $k$, $D\\subseteq X$ an\neffective Cartier divisor ([def-nagata-invertible-ideal])\nand $\\mathcal L:=\\mathcal O_X(D)$\nample. Then $X\\setminus D$ is affine.",
+  "proof": [
+   {
+    "text": "Choose $m\\geq1$ with $\\mathcal L^{\\otimes m}$ very ample\n([def-sc-ample]) and let $i:X\\hookrightarrow\\mathbf P^N_k$ be\nthe closed immersion given by the complete linear system\n$|\\mathcal L^{\\otimes m}|$, so that\n$i^*\\mathcal O(1)\\cong\\mathcal L^{\\otimes m}$ and every global\nsection of $\\mathcal L^{\\otimes m}$ is pulled back from a linear\nform on $\\mathbf P^N$. Let $s=1_D\\in H^0(X,\\mathcal L)$ be the\ncanonical section, with $V(s)=D$; then\n$s^{\\otimes m}\\in H^0(X,\\mathcal L^{\\otimes m})$ has zero locus\n$D$, and there is a linear form $\\ell$ on $\\mathbf P^N$ with\n$i^*\\ell=s^{\\otimes m}$. For the hyperplane\n$H:=V(\\ell)\\subset\\mathbf P^N$ one has\n$i^{-1}(H)=V(s^{\\otimes m})=D$, so\n\n$$\ni(X\\setminus D)=i(X)\\cap(\\mathbf P^N\\setminus H).\n$$",
+    "uses": [
+     "def-sc-ample"
+    ],
+    "elementary": false
+   },
+   {
+    "text": "The complement of a hyperplane is affine space,\n$\\mathbf A^N_k\\cong\\mathbf P^N_k\\setminus H$, and\n$i(X)\\cap\\mathbf A^N$ is closed in $\\mathbf A^N$, hence affine\n(a closed immersion is an affine morphism: *reference:\nStacks Project, Morphisms of Schemes: closed immersions are\naffine*); therefore $X\\setminus D$ is affine.",
+    "uses": [],
+    "elementary": null
+   }
+  ],
+  "note": "the current blueprint (main-20261023-1620, weil-conjectures-blueprint 7284bb09da) states or proves this differently; the node is proved in Lean: recorded 2026-10-23, not reopened"
  }
 }

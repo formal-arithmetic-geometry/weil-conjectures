@@ -1,0 +1,128 @@
+{
+ "id": "lem-sf-integral-proper-projection-system-normalization",
+ "kind": "lemma",
+ "title": "Whole-system coefficient square for the proper counit",
+ "statement": "Fix a finite-field datum D, coefficient datum C, finite extension E, n≥1, a normalized six-functor datum d, invertibility of the coefficient prime, and realized coefficient-system operations o,z. For proper f:X→Y and constructible integral K,L with uniform finite-reduction Tor amplitude for L, let c be the identity-open compactification. Then sourceMap(c,K,L) followed by the system compactificationProjection equals system reduction of properViaSupport(d,f,K,L) followed by targetMap(c,K,L), with the explicit coordinates of [def-sf-integral-projection-finite-evaluation-data] and [def-sf-integral-projection-coordinate-data]. This is a square of whole coefficient systems; it asserts no finite tensor or finite projection identity.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-rem-sf-pf-done/fix-prop-projection-formula.proof.md",
+  "place": "Compatibility of the specified maps under successive coefficient reductions; integral reconstruction and proper counit normalization"
+ },
+ "stmt_deps": [
+  "def-sf-integral-projection-finite-evaluation-data",
+  "def-sf-integral-projection-coordinate-data"
+ ],
+ "proof": [
+  {
+   "text": "Form the actual inverse pullback reduction square and its adjunction mate direct. Use tensor-pullback reduction compatibility and the mate/counit identity in rightAdjointProjectionMap_mate to prove the direct-image projection square. Cancel the inverse pullback comparison on its target using inputReduction inverse. This argument is written completely in Lean.",
+   "uses": [
+    "def-sf-integral-proper-projection-coordinates",
+    "lem-sf-integral-proper-tensor-pullback-reduction"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Apply the one-input support/direct identity to K and to the tensor/pullback input. Tensor naturality gives the source comparison equation; naturality of openIdentity gives the target comparison equation. Apply system identity-open projection cancellation, paste the direct-image square, and cancel the target identity-open isomorphism. Expand properViaSupport and cancel properIdentity inverse against properIdentity.",
+   "uses": [
+    "lem-sf-integral-proper-support-reduction-identity",
+    "lem-sf-system-proper-identity-open-projection",
+    "def-sf-integral-projection-coordinate-data",
+    "def-sf-integral-projection-finite-evaluation-data"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-sf-integral-proper-projection-coordinates",
+  "lem-sf-integral-proper-tensor-pullback-reduction",
+  "lem-sf-integral-proper-support-reduction-identity",
+  "lem-sf-system-proper-identity-open-projection",
+  "def-sf-integral-projection-coordinate-data",
+  "def-sf-integral-projection-finite-evaluation-data"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-rem-sf-pf-done/fix-prop-projection-formula.proof.md",
+  "place": "Direct adjunction-mate square, tensor naturality and identity-open endpoint cancellation"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Derived scalar extension tensor product natural isomorphism commutes with proper direct image projection counit",
+   "results": "Eight sheaf-module counit/adjunction results; no normalized integral-to-finite projection comparison.",
+   "date": "2026-10-27",
+   "verdict": "Use the existing project system square and isolate its finite-evaluation and proper-counit steps."
+  },
+  {
+   "tool": "loogle",
+   "query": "Functor.uncurry",
+   "results": "Zero hits: unknown identifier in the search service. Local Mathlib source contains CategoryTheory.Functor.uncurry and its naturality API.",
+   "date": "2026-10-27",
+   "verdict": "Use uncurry naturality for the two input naturality clauses, rather than adding naturality obligations."
+  },
+  {
+   "tool": "grep",
+   "query": "scalarTensor|projection_scalar_square",
+   "results": "Ten tensor-algebra hits, no specialized coefficient projection square. Project rg found IntegralProjectionReductionNormalization and the explicit system coordinates.",
+   "date": "2026-10-27",
+   "verdict": "Reuse the whole-system square, with explicit finite endpoint evaluation."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A natural tensor comparison for scalar extension commutes with a projection map formed from an adjunction counit",
+   "results": "Eight hits on module scalar-extension adjunctions and tensor linearity, including ModuleCat.ExtendRestrictScalarsAdj.Counit.map_hom_apply, ModuleCat.ExtendRestrictScalarsAdj.counit_app and ModuleCat.extendRestrictScalarsAdj_homEquiv_apply. No derived integral-to-finite sheaf projection comparison.",
+   "date": "2026-10-27",
+   "verdict": "Use the existing project normalization square and isolate the finite-evaluation and proper-system normalization steps."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.IntegralProjectionReductionCoordinates",
+  "date": "2026-10-27",
+  "group": "C7"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "fix-prop-projection-formula",
+   "place": "Compatibility of the specified maps under successive coefficient reductions; integral reconstruction and proper counit normalization",
+   "via": [
+    "lem-sf-integral-projection-reduction-coordinates"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-rem-sf-pf-done",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.IntegralProperProjectionSystemNormalization",
+  "file": "lean/Sheaf/Paper/IntegralProperProjectionSystemNormalization.lean",
+  "declaration": "WeilConjectures.IntegralProjectionReduction.integralProperProjectionSystemNormalization",
+  "statement": "theorem integralProperProjectionSystemNormalization\n    {D : FiniteFieldDatum.{u}} {C : D.CoefficientDatum}\n    {E : Type u} [Field E] [Algebra (Padic C.l) E]\n    [FiniteDimensional (Padic C.l) E] {n : ℕ} {hn : 1 ≤ n}\n    (d : SixFunctorOperationDatum D C E n hn) (hl : IsUnit (C.l : D.k))\n    (o : Operations C.l E) (z : Realizations C.l E D o)\n    {X Y : SixFunctorSpace D} (f : X ⟶ Y) [IsProper f.hom.left]\n    (K : sfIntegralConstructibleCategory C.l E X.obj.left)\n    (L : sfIntegralConstructibleCategory C.l E Y.obj.left)\n    (hL : finiteTorConstructibleIntegral C.l E Y.obj.left L.obj) :\n    FixProjectionCompactification.Coordinates.sourceMap\n        D C E d.higher hl o z f (.ofIsProper f.hom.left) K L ≫\n      compactificationProjection C.l E o z.compositors z.openComparisons\n        (.ofIsProper f.hom.left)\n        ((calculus C.l E X.obj.left).reduction.obj K.obj)\n        ((calculus C.l E Y.obj.left).reduction.obj L.obj) =\n      (calculus C.l E Y.obj.left).reduction.map (properViaSupport d f K L).hom ≫\n        FixProjectionCompactification.Coordinates.targetMap\n          D C E d.higher hl o z f (.ofIsProper f.hom.left) K L",
+  "branch": "sheaf-dag",
+  "by": "C7",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C7",
+  "result": "pass",
+  "landing": "20261026T222604-L-671250",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V7",
+  "result": "pass",
+  "landing": "20261027T021414-L-2766948",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

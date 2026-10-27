@@ -1,0 +1,170 @@
+{
+ "source": {
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Proposition 6.8.14 and Remark 6.8.15; common-stage heart and fibre descent"
+ },
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Formal assembly of Proposition 6.8.14 and Remark 6.8.15, following the parent node numbered proof steps"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Descent of finite diagrams and exact geometric fibre functors to a filtered colimit of abelian categories with normalized scalar extension comparisons",
+   "results": "8 results: Condensed.hasExactColimitsOfShape, GrothendieckTopology.Point exact colimits, CondensedMod AB5/AB4/AB4Star, AddCommGrpCat filtered colimit exactness, AB4.of_AB5, AB5OfSize.ofShape. None is the specified adic construction.",
+   "date": "2026-10-25",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.PreservesHomology",
+   "results": "12 results about preservation of homology, kernels and cokernels; no normalized adic descent or finite-stage representation theorem.",
+   "date": "2026-10-25",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "CommonStageHeartExactness|CommonStageFibreDescent|common_stage_fibre",
+   "results": "0 hits from remote Mathlib search. Local project search finds only the item records and its theorem.",
+   "date": "2026-10-25",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Exact functors and zero morphism detection for filtered common-stage categories of finite coefficient sheaves",
+   "results": "8 results: ShortComplex.LeftHomologyData.exact_map_iff, RightHomologyData.exact_map_iff, Exact.map and Exact.map_of_preservesRightHomologyOf, Functor.IsHomological.toPreservesZeroMorphisms, preservesZeroMorphisms_of_additive, preservesZeroMorphisms_of_full, ExactFunctor.of. These do not give the specified common-stage descent or comparisons.",
+   "date": "2026-10-25",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.AdicNormalizedFibreCommonStage",
+  "date": "2026-10-25",
+  "group": "G6"
+ },
+ "chapter": "sec-deligne-laumon-a1",
+ "unit": "sk-p-dl-a1-perverse",
+ "id": "lem-per-common-stage-fibre-transport",
+ "kind": "statement",
+ "title": "Normalized descent of common-stage fibre transport",
+ "statement": "Let k be a field, l a prime invertible in k, R a continuous rational realization family, and Ω an algebraic closure of Q_l. Fix normalized finite fibres ω, normalized pullback comparisons α and normalized scalar comparisons β as in [lem-per-adic-normalized-fibre-pullback, lem-per-adic-normalized-fibre-scalar]. Suppose CommonStageHeartExactness [def-per-common-stage-fibre-descent-interfaces] is supplied. Then CommonStageFibreTransport for these same ω,α,β is inhabited. Its common-point functors are exact, additive and finite dimensional, with their natural finite-stage comparison. Its scalar and actual pullback comparisons retain the prescribed β, tensor associator, underlying transIso and α normalizations, and their identity and composition laws. No joint detection assertion is included.",
+ "stmt_deps": [
+  "def-per-common-stage-fibre-descent-interfaces"
+ ],
+ "proof": [
+  {
+   "text": "For a finite heart pair put $V_{\\bar x}(E,F)=\\omega_{\\bar x,E}(F)\\otimes_E\\Omega$. The finite functor is additive and finite dimensional by [lem-per-adic-normalized-fibre-exactness]. For $M\\supset E$, let $b_{M/E,F}$ be $\\beta_{M/E,F}$ tensored with $\\Omega$ followed by $(W\\otimes_E M)\\otimes_M\\Omega\\cong W\\otimes_E\\Omega$. Set\n$$V_{\\bar x}[M,u]=b_{M/L,G}(\\omega_{\\bar x,M}(u)\\otimes_M1)b_{M/E,F}^{-1}.$$\nFor $N\\supset M$, put $A_H=\\omega_{\\bar x,N}(a_{N,M,E,H})\\otimes_N1$ for an object $H$ at stage $E$. The coefficient-composition equation of [lem-per-adic-normalized-fibre-scalar] says $b_{N/E,H}A_H=b_{M/E,H}b_{N/M,T_{M/E}H}$, with the canonical tensor identifications understood. Substitute $u_N=a_{N,M,L,G}T_{N/M}(u)a_{N,M,E,F}^{-1}$ from [def-weil-pbc-finite-stage-pair-category]. Naturality of $\\beta_{N/M}$ cancels the two inner $b_{N/M}$ factors, so the displayed prescription for $[N,u_N]$ equals that for $[M,u]$. Equivalent representatives agree after one enlargement by [prop-weil-pbc-common-stage-calculus], hence give equal maps.",
+   "uses": [
+    "lem-per-adic-normalized-fibre-exactness",
+    "lem-per-adic-normalized-fibre-scalar",
+    "def-weil-pbc-finite-stage-pair-category",
+    "prop-weil-pbc-common-stage-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Proposition 6.8.14; explicit descent using the normalized scalar cocycle"
+   }
+  },
+  {
+   "text": "Represent two composable arrows at one stage using [prop-weil-pbc-common-stage-calculus]. In the product of their displayed fibre maps the target comparison of the first is the source comparison of the second, so they cancel; functoriality of $\\omega$ gives the map of the composite. The normalized identity $\\beta_{E/E}$ gives the identity map. Represent a sum at one stage; additivity of $\\omega$ gives its sum. Thus $V$ is an additive functor on heart pairs. For an object $A$ in their isomorphism closure choose $h_A:j_EF\\xrightarrow{\\sim}A$, put $V(A)=V(E,F)$, and send $f:A\\to B$ to $V(h_B^{-1}fh_A)$. Cancellation proves functoriality. A second choice $h'_A$ gives the comparison $V((h'_A)^{-1}h_A)$; these comparisons are natural and satisfy their cocycle equation by composition. Every common heart object has such a presentation by [lem-per-adic-common-stage-truncations].",
+   "uses": [
+    "prop-weil-pbc-common-stage-calculus",
+    "lem-per-adic-normalized-fibre-exactness",
+    "lem-per-adic-normalized-fibre-scalar",
+    "lem-per-adic-common-stage-truncations"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Proposition 6.8.14; identities, composition, addition and replete-heart transport"
+   }
+  },
+  {
+   "text": "At every finite stage, [lem-per-adic-normalized-fibre-exactness] sends a short exact heart sequence to a short exact sequence of finite-dimensional vector spaces. Tensoring that sequence with $\\Omega$ stays short exact by [lem-weil-field-scalar-extension-exact]. Present a common short exact sequence by the finite-stage short exact sequence just constructed. Its $V$-sequence is this tensored fibre sequence, conjugated by the prescribed $b$ and presentation isomorphisms, so it too is short exact. Thus every $V_{\\bar x}$ is exact. For an arrow $v:A\\to B$, apply this exactness to $0\\to\\ker v\\to A\\to\\operatorname{im}v\\to0$ and $0\\to\\operatorname{im}v\\to B\\to\\operatorname{coker}v\\to0$. The resulting injection of the fibre of $\\operatorname{im}v$ into that of $B$ and surjection from that of $A$ identify the kernel, image and cokernel of $V(v)$. Applying this to the image-to-kernel quotient also identifies homology.",
+   "uses": [
+    "lem-per-adic-normalized-fibre-exactness",
+    "lem-weil-field-scalar-extension-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Proposition 6.8.14; exactness from finite-stage representatives"
+   }
+  },
+  {
+   "text": "Use the actual common-stage heart pullback furnished by [lem-per-adic-stratified-pullback-texact]. For a heart pair $(E,F)$ define its fibre comparison at $\\bar y$ by $\\alpha_{g,F}\\otimes_E1$, with $\\bar x=g\\bar y$. For an arrow $[M,u]$, its actual pullback representative is $g^*u$ conjugated by the actual pullback/scalar comparisons. The mixed $\\alpha,\\beta$ equation of [lem-per-adic-normalized-fibre-scalar] identifies those conjugations, after taking fibres, with the source and target $b_{M/E}$ and $b_{M/L}$ in the prescription above. Naturality of $\\alpha$ from [lem-per-adic-normalized-fibre-pullback] then reads\n$$\\alpha_{g,G}V_{\\bar y}(g^*[M,u])=V_{\\bar x}([M,u])\\alpha_{g,F},$$\nwhere all maps are extended to $\\Omega$. The coefficient-composition equation already used in descent makes this equality independent of further enlargement. On arbitrary heart presentations conjugate by $h_A$ as above; naturality makes the resulting comparison independent of the presentation up to its specified natural isomorphisms. The identity and composite-pullback equations hold on every finite heart pair by the corresponding equations for $\\alpha$, and hence on all presentations. For the transition object $T_{L/E}F$ the definition of $b_{L/E,F}$ is exactly $\\beta_{L/E,F}$ extended to $\\Omega$ followed by the balanced-tensor associator, proving the final normalization.",
+   "uses": [
+    "lem-per-adic-stratified-pullback-texact",
+    "lem-per-adic-normalized-fibre-scalar",
+    "lem-per-adic-normalized-fibre-pullback"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Remark 6.8.15; actual pullback descent via the mixed comparison square"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-per-adic-normalized-fibre-exactness",
+  "lem-per-adic-normalized-fibre-scalar",
+  "def-weil-pbc-finite-stage-pair-category",
+  "prop-weil-pbc-common-stage-calculus",
+  "lem-per-adic-common-stage-truncations",
+  "lem-weil-field-scalar-extension-exact",
+  "lem-per-adic-stratified-pullback-texact",
+  "lem-per-adic-normalized-fibre-pullback"
+ ],
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-per-smooth-pullback-t-exact",
+   "place": "First proof paragraph, descent of finite geometric fibres and actual pullback comparisons; parent proof steps 3, 4, 7 and 10.",
+   "via": [
+    "lem-per-adic-normalized-fibre-common-stage",
+    "lem-per-adic-normalized-fibre-comparisons",
+    "lem-per-adic-heart-pullback-fibres",
+    "lem-per-smooth-pullback-support-dimension"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.AdicCommonStageFibreTransport",
+  "file": "lean/Sheaf/Paper/AdicCommonStageFibreTransport.lean",
+  "declaration": "AlgebraicGeometry.Scheme.AdicFibreComparison.common_stage_fibre_transport",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.AdicFibreComparison.common_stage_fibre_transport"
+  ],
+  "statement": "theorem common_stage_fibre_transport (ω : Fibres (k := k) l R)\n    (α : NormalizedPullback l R ω) (β : NormalizedScalar l R ω α)\n    (h : CommonStageHeartExactness.{u, v, w} l Ω (k := k)) :\n    Nonempty (CommonStageFibreTransport l R Ω ω α β)",
+  "branch": "sheaf-dag",
+  "by": "G6",
+  "date": "2026-10-25"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-522a5",
+  "group": "G6",
+  "result": "pass",
+  "landing": "20261025T162456-L-462047",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-522a5",
+  "group": "G6",
+  "result": "pass",
+  "landing": "20261025T162456-L-462047",
+  "kind": "interface",
+  "note": "independent cc review: item proof against the three new sorried lemmas; moved CommonStageHeartExactness/CommonStageFibreDescent against the published records (field bodies identical, no other users in the clone); the lemma statements against their nodes, CommonPoint and NormalizedFibre.Assertions.detects_zero_map; the item node fields against the Lean proof"
+ }
+}

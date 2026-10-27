@@ -1,0 +1,275 @@
+{
+ "id": "lem-sfb-finite-graded-proj-section-comparison",
+ "kind": "statement",
+ "title": "Coherence and the local comparison with the graded section module on Proj",
+ "statement": "Let $S=\\bigoplus_{d\\ge0}S_d$ be a nonnegatively graded commutative ring with $S_0$ Noetherian [def-weil-pbc-noetherian-ring], and let $f_1,\\ldots,f_r\\in S_1$ generate $S$ as an $S_0$-algebra, with $r\\ge0$. Let $M=\\bigoplus_{n\\in\\mathbf Z}M_n$ be a finitely generated $S$-module [def-weil-finitely-generated-module] with $S_aM_b\\subseteq M_{a+b}$. Put $X=\\operatorname{Proj}(S)$ [def-pc-proj] and $\\mathcal F=\\widetilde M$, using the associated module sheaf of [lem-weil-pbc-proj-graded-module-sheaf-exists]. For $n\\in\\mathbf Z$ put $M(n)_d=M_{n+d}$, $\\mathcal O_X(n)=\\widetilde{S(n)}$ [def-weil-pbc-proj-twisting-sheaf], and $\\mathcal F(n)=\\mathcal F\\otimes_{\\mathcal O_X}\\mathcal O_X(n)$ [def-pur-sheaf-tensor-product]. Let $\\alpha_{M,n}:\\mathcal F(n)\\xrightarrow{\\sim}\\widetilde{M(n)}$ be the canonical multiplication isomorphism of [lem-sfb-standard-proj-twist-tensor]. Equip $N=\\bigoplus_{n\\in\\mathbf Z}\\Gamma(X,\\mathcal F(n))$ with the graded $S$-action defined by multiplication by the canonical sections of $\\mathcal O_X(e)$ for $s\\in S_e$, as in [lem-sfb-proj-section-module-reconstruction]. Define $\\phi_n:M_n\\to N_n$ by composing the section map $x\\mapsto x/1$ with $\\Gamma(\\alpha_{M,n}^{-1})$. Then $S$ is Noetherian, $\\mathcal F$ is coherent [pqf-def-coherent], and $\\phi=\\bigoplus_n\\phi_n:M\\to N$ is a degree-preserving $S$-linear map. For each $i$, its induced map $\\phi_{(f_i)}:M_{(f_i)}\\to N_{(f_i)}$ on degree-zero fractions [def-sc-degree-zero-module-fractions] is an isomorphism. Its inverse, under $M_{(f_i)}=\\Gamma(D_+(f_i),\\mathcal F)$, is $t/f_i^a\\mapsto t|_{D_+(f_i)}\\otimes f_i^{-a}$ for $a\\ge0$ and $t\\in N_a$, where $f_i^{-a}$ is the inverse trivialization of $\\mathcal O_X(a)$ on that chart. The assertions allow $r=0$, empty standard opens, negative generator degrees, and $M=0$.",
+ "source": {
+  "document": "literature/stacks-project/coherent.tex",
+  "place": "Tag 0AG7, lemma-recover-tail-graded-module, proof: first half, from coherence of the associated sheaf through the unit/counit identity; original steps 1--4. Also constructions.tex Tag 01MT, lemma-apply-modules, and properties.tex Tag 0AG5, lemma-proj-quasi-coherent, with constructions.tex Tag 0B5I, lemma-comparison-proj-quasi-coherent, for the inverse chart formula."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-noetherian-ring",
+  "def-weil-finitely-generated-module",
+  "def-pc-proj",
+  "lem-weil-pbc-proj-graded-module-sheaf-exists",
+  "def-weil-pbc-proj-twisting-sheaf",
+  "def-pur-sheaf-tensor-product",
+  "lem-sfb-standard-proj-twist-tensor",
+  "lem-sfb-proj-section-module-reconstruction",
+  "pqf-def-coherent",
+  "def-sc-degree-zero-module-fractions"
+ ],
+ "proof": [
+  {
+   "text": "The map $S_0[T_1,\\ldots,T_r]\\to S$, $T_j\\mapsto f_j$, is surjective by the algebra-generation hypothesis. Thus $S$ is a finite type $S_0$-algebra, including when $r=0$. Apply [lem-weil-pbc-finite-type-algebra-noetherian] to the assumed Noetherian ring $S_0$ to conclude that $S$ is Noetherian.",
+   "uses": [
+    "lem-weil-pbc-finite-type-algebra-noetherian"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00FN, lemma-Noetherian-permanence, first assertion; the Noetherian ring used in Tag 0AG7."
+   }
+  },
+  {
+   "text": "Put $U_i=D_+(f_i)$ and $R_i=S_{(f_i)}$. For homogeneous $s\\in S_d$ with $d>0$, express $s$ as a polynomial in the $f_j$ and take its degree-$d$ part. Every remaining monomial has a factor $f_j$, so $s\\in(f_1,\\ldots,f_r)$. Conversely each $f_j$ lies in $S_+$, hence $(f_1,\\ldots,f_r)=S_+$. The cover and affine-chart assertions of [prop-nagata-proj-standard-open] give $X=\\bigcup_iU_i$ and $U_i\\cong\\operatorname{Spec}R_i$. Thus the degree-one charts cover. If $r=0$, the same positive-degree projection gives $S_+=0$ and the empty cover says $X=\\varnothing$.",
+   "uses": [
+    "prop-nagata-proj-standard-open"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/constructions.tex",
+    "place": "Tag 01M4, lemma-standard-open; Algebra Tag 00JP, lemma-topology-proj, affine charts and cover criterion."
+   }
+  },
+  {
+   "text": "For each $i$, $R_i$ is generated as an $S_0$-algebra by the finitely many ratios $f_j/f_i$. Indeed, a degree-zero fraction has form $s/f_i^a$ with $a\\ge0$ and $s\\in S_a$. Write $s$ as a polynomial in the $f_j$ and take its degree-$a$ part in the direct sum grading. Every surviving monomial has total degree $a$, so division by $f_i^a$ expresses the fraction as the same polynomial in the ratios $f_j/f_i$. This also works in a zero localization ring. Apply [lem-weil-pbc-finite-type-algebra-noetherian] again to see that every $R_i$ is Noetherian. The affine cover of step 2 therefore makes $X$ locally Noetherian, in the sense of [pqf-def-locnoeth].",
+   "uses": [
+    "lem-weil-pbc-finite-type-algebra-noetherian",
+    "pqf-def-locnoeth"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/coherent.tex",
+    "place": "Tag 0AG7, opening coherence argument, expanded using Tag 00FN and the standard degree-one affine charts."
+   }
+  },
+  {
+   "text": "Choose a finite generating family for $M$. Replace it by the union of the homogeneous components of its members; each member has finite support and is the sum of its components, so the resulting finite homogeneous family still generates $M$. Denote it by $m_1,\\ldots,m_k$, with $m_j\\in M_{d_j}$ and $d_j\\in\\mathbf Z$. For $M=0$ take the empty family.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/coherent.tex",
+    "place": "Tag 0AG7, finite graded module in the first sentence of the proof; elementary homogeneous-generator selection."
+   }
+  },
+  {
+   "text": "Fix $i$ and invert $f=f_i$. In $M_f$ put $q_j=f^{-d_j}m_j$, of degree zero. For $d_j\\ge0$ this is $m_j/f^{d_j}$; for $d_j<0$ it is $f^{|d_j|}m_j/1$, so in either case it is an allowed degree-zero fraction. If $x/f^a\\in M_{(f)}$ with $x\\in M_a$, express $x=\\sum_j s_jm_j$ and project to degree $a$ to take $s_j\\in S_{a-d_j}$ (zero when $a-d_j<0$). Then $x/f^a=\\sum_j(s_jf^{d_j-a})q_j$, with each coefficient of degree zero in $S_f$. More explicitly, when $a-d_j\\ge0$ the coefficient is the allowed fraction $s_j/f^{a-d_j}$; when $a-d_j<0$ the coefficient is zero because $s_j=0$. Thus the $q_j$ generate $M_{(f)}$ over $S_{(f)}$. All powers with negative exponents here occur after $f$ has been inverted; no lower bound on the $d_j$ is imposed.",
+   "uses": [
+    "def-sc-degree-zero-module-fractions"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/coherent.tex",
+    "place": "Tag 0AG7, first sentence: explicit finite-generation calculation for the associated sheaf on each degree-one chart."
+   }
+  },
+  {
+   "text": "By clauses (b),(c) of [lem-weil-pbc-proj-graded-module-sheaf-exists], $\\mathcal F$ is quasi-coherent and $\\mathcal F(U_i)=M_{(f_i)}$. Step 5 and the affine finite-type criterion [lem-weil-pbc-quasi-coherent-finite-type-affine](c) make $\\mathcal F$ of finite type. Step 3 supplies precisely the locally Noetherian hypothesis for [pqf-lem-coherent-ft-locnoeth]; its equivalence now makes $\\mathcal F$ coherent. On an empty $X$ the finite-type and coherence conditions are vacuous, so this argument includes $r=0$.",
+   "uses": [
+    "lem-weil-pbc-proj-graded-module-sheaf-exists",
+    "lem-weil-pbc-quasi-coherent-finite-type-affine",
+    "pqf-lem-coherent-ft-locnoeth"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/coherent.tex",
+    "place": "Tag 0AG7, first sentence; Tag 01XZ, lemma-coherent-Noetherian, equivalence (1),(2); Properties Tag 01PB, lemma-finite-type-module."
+   }
+  },
+  {
+   "text": "The degree-one cover permits [lem-sfb-standard-proj-twist-tensor]. For $x\\in M_n$, clause (d) of [lem-weil-pbc-proj-graded-module-sheaf-exists] applied to $M(n)$ gives its additive section $x/1$ of $\\widetilde{M(n)}$. On $U_i$, multiplication defining $\\alpha_{M,n}$ sends $(xf_i^{-n})\\otimes f_i^n$ to $x/1$. Consequently $\\phi_n(x)|_{U_i}=(xf_i^{-n})\\otimes f_i^n$. This formula holds for every integer $n$: when $n<0$, write $b=-n>0$, so $xf_i^{-n}=f_i^b x/1\\in M_{(f_i)}$ and $f_i^n=1/f_i^b\\in S(n)_{(f_i)}$. These are allowed representatives under [def-weil-pbc-proj-twisting-sheaf], and their product in $M(n)_{(f_i)}$ is $x/1$. For homogeneous $s\\in S_e$, its canonical twist section on $U_i$ has coefficient $s/f_i^e$ in the basis $f_i^e$. The multiplication formula and associativity in the twist lemma therefore give\n$$(s\\phi_n(x))|_{U_i}=(sxf_i^{-(e+n)})\\otimes f_i^{e+n}=\\phi_{n+e}(sx)|_{U_i}.$$\nEquality on the cover is equality of global sections. Additivity follows from the section map and the linear isomorphism $\\alpha^{-1}$. Taking direct sums, and expanding arbitrary elements into their finitely many homogeneous components, proves that $\\phi$ is a degree-preserving $S$-linear map for the action in the statement.",
+   "uses": [
+    "lem-sfb-standard-proj-twist-tensor",
+    "lem-weil-pbc-proj-graded-module-sheaf-exists",
+    "def-weil-pbc-proj-twisting-sheaf"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/constructions.tex",
+    "place": "Tag 01MT, lemma-apply-modules, maps equation-map-global-sections-degree-n-simplified and equation-global-sections-more-generally-simplified; fraction multiplication defining the maps."
+   }
+  },
+  {
+   "text": "Fix $i$. Apply [lem-sfb-proj-section-module-reconstruction] to the quasi-coherent $\\mathcal F$ from step 6 and the given finite degree-one algebra generators. On $U_i$ its isomorphism has the section map\n$$\\psi_i:N_{(f_i)}\\xrightarrow{\\sim}\\Gamma(U_i,\\mathcal F)=M_{(f_i)},\\qquad t/f_i^a\\mapsto t|_{U_i}\\otimes f_i^{-a}.$$\nThe reconstruction node states both that this is an isomorphism and this exact chart formula; it requires no additional finiteness of $N$. The ordinary fraction relation is respected explicitly: if $x/f_i^a=y/f_i^b$, some $c\\ge0$ has $f_i^c(f_i^b x-f_i^a y)=0$. Step 7 sends this equation to $f_i^c(f_i^b\\phi_a(x)-f_i^a\\phi_b(y))=0$, which identifies the image fractions. Thus the localized map $\\phi_{(f_i)}$ sends $x/f_i^a$ to $\\phi_a(x)/f_i^a$. Substitution of the formula in step 7 gives\n$$\\psi_i(\\phi_{(f_i)}(x/f_i^a))=((xf_i^{-a})\\otimes f_i^a)\\otimes f_i^{-a}=x/f_i^a.$$\nThe cancellation uses the unital associative twist multiplication of [lem-sfb-standard-proj-twist-tensor]. Every degree-zero fraction has such a representative, so $\\psi_i\\phi_{(f_i)}=1$. Since $\\psi_i$ is an isomorphism, $\\phi_{(f_i)}=\\psi_i^{-1}$, proving the required isomorphism and inverse formula. If $U_i$ is empty its section and fraction modules are zero and the same identities hold. Together with the empty-cover case and the empty generator family of step 4, this covers every edge case stated in the item.",
+   "uses": [
+    "lem-sfb-proj-section-module-reconstruction",
+    "lem-sfb-standard-proj-twist-tensor",
+    "def-sc-degree-zero-module-fractions"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/coherent.tex",
+    "place": "Tag 0AG7, first half through the unit/counit identity, evaluated on standard charts; Properties Tag 0AG5, lemma-proj-quasi-coherent, and Constructions Tag 0B5I, lemma-comparison-proj-quasi-coherent, displayed inverse formula."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-finite-type-algebra-noetherian",
+  "prop-nagata-proj-standard-open",
+  "pqf-def-locnoeth",
+  "def-sc-degree-zero-module-fractions",
+  "lem-weil-pbc-proj-graded-module-sheaf-exists",
+  "lem-weil-pbc-quasi-coherent-finite-type-affine",
+  "pqf-lem-coherent-ft-locnoeth",
+  "lem-sfb-standard-proj-twist-tensor",
+  "def-weil-pbc-proj-twisting-sheaf",
+  "lem-sfb-proj-section-module-reconstruction"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/coherent.tex",
+  "place": "Tag 0AG7, lemma-recover-tail-graded-module, first half of proof. The unit/counit identity is evaluated on charts using the explicit formula in Constructions Tag 0B5I and the isomorphism in Properties Tag 0AG5; coherence expanded with Tags 00FN, 01PB and 01XZ."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "gradedModule|[Cc]oherent|section.*[Mm]odule",
+   "results": "{\"t\": \"2026-10-22T05:54:13Z\", \"tool\": \"grep\", \"query\": \"gradedModule|[Cc]oherent|section.*[Mm]odule\", \"sub\": \"AlgebraicGeometry/ProjectiveSpectrum\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: results give structure-sheaf affine charts, not coherence of arbitrary associated modules or the graded section-unit comparison"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Proj, IsCoherent",
+   "results": "{\"t\": \"2026-10-22T05:54:13Z\", \"tool\": \"loogle\", \"query\": \"AlgebraicGeometry.Proj, IsCoherent\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"loogle: unknown identifier 'IsCoherent'\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: rejected query, loogle: unknown identifier 'IsCoherent'; valid replacement query also run"
+  },
+  {
+   "tool": "leansearch",
+   "query": "For a finite graded module the associated sheaf on a standard Noetherian Proj is coherent and the graded unit map to twisted sections induces isomorphisms on standard affine charts",
+   "results": "{\"t\": \"2026-10-22T05:54:13Z\", \"tool\": \"leansearch\", \"query\": \"For a finite graded module the associated sheaf on a standard Noetherian Proj is coherent and the graded unit map to twisted sections induces isomorphisms on standard affine charts\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.ProjectiveSpectrum.StructureSheaf.structurePresheafInCommRing\", \"AlgebraicGeometry.Proj.basicOpenIsoAway_hom\", \"AlgebraicGeometry.Proj.basicOpenToSpec_app_top\", \"AlgebraicGeometry.Proj.stalkIso'_symm_mk\", \"AlgebraicGeometry.ProjectiveSpectrum.Proj.structureSheaf\", \"AlgebraicGeometry.ProjectiveSpectrum.Proj.specStalkEquiv\", \"AlgebraicGeometry.projIsoSpec\", \"AlgebraicGeometry.Proj.fromOfGlobalSections_morphismRestrict\"], \"digest\": \"6ed1190f4619e7ab\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: results give structure-sheaf affine charts, not coherence of arbitrary associated modules or the graded section-unit comparison"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A finite graded module on Proj of a ring generated in degree one has a coherent associated sheaf and its canonical map to the graded module of twisted global sections is an isomorphism after degree zero localization",
+   "results": "{\"t\": \"2026-10-22T05:54:17Z\", \"tool\": \"leanfinder\", \"query\": \"A finite graded module on Proj of a ring generated in degree one has a coherent associated sheaf and its canonical map to the graded module of twisted global sections is an isomorphism after degree zero localization\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.ProjectiveSpectrum.Proj.isIso_toSpec\", \"AlgebraicGeometry.ProjectiveSpectrum.Proj.awayToSection\", \"AlgebraicGeometry.ProjectiveSpectrum.Proj.awayToΓ\", \"AlgebraicGeometry.projIsoSpecTopComponent\", \"AlgebraicGeometry.ProjectiveSpectrum.Proj.toSpec_base_isIso\", \"AlgebraicGeometry.ProjectiveSpectrum.Proj.structureSheaf\", \"AlgebraicGeometry.Proj.basicOpenIsoAway\", \"AlgebraicGeometry.Proj.basicOpenIsoAway_hom\"], \"digest\": \"1e053f360dbc3ebe\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: results give structure-sheaf affine charts, not coherence of arbitrary associated modules or the graded section-unit comparison"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Proj.basicOpenIsoSpec",
+   "results": "{\"t\": \"2026-10-22T05:54:31Z\", \"tool\": \"loogle\", \"query\": \"AlgebraicGeometry.Proj.basicOpenIsoSpec\", \"sub\": \"\", \"ok\": true, \"n_hits\": 4, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Proj.basicOpenIsoSpec\", \"AlgebraicGeometry.Proj.basicOpenIsoSpec_hom\", \"AlgebraicGeometry.Proj.basicOpenIsoSpec_inv_ι\", \"AlgebraicGeometry.Proj.basicOpenIsoSpec_inv_ι_assoc\"], \"digest\": \"23ef947601a4d944\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: results give structure-sheaf affine charts, not coherence of arbitrary associated modules or the graded section-unit comparison"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The unit from a finitely generated graded module to all twisted global sections sheafifies to an isomorphism on Proj and its associated sheaf is coherent",
+   "results": "{\"t\": \"2026-10-22T05:54:34Z\", \"tool\": \"leanfinder\", \"query\": \"The unit from a finitely generated graded module to all twisted global sections sheafifies to an isomorphism on Proj and its associated sheaf is coherent\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.ProjectiveSpectrum.Proj.awayToΓ\", \"AlgebraicGeometry.Proj.fromOfGlobalSections_morphismRestrict\", \"AlgebraicGeometry.projIsoSpecTopComponent\", \"AlgebraicGeometry.ProjectiveSpectrum.Proj.toOpen_toSpec_val_c_app\", \"AlgebraicGeometry.ProjectiveSpectrum.Proj.awayToSection\", \"AlgebraicGeometry.ProjectiveSpectrum.Proj.isIso_toSpec\", \"AlgebraicGeometry.projIsoSpec\", \"AlgebraicGeometry.ProjectiveSpectrum.Proj.toSpec_base_isIso\"], \"digest\": \"799886b93e5f31d3\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: results give structure-sheaf affine charts, not coherence of arbitrary associated modules or the graded section-unit comparison"
+  },
+  {
+   "tool": "grep",
+   "query": "gradedModule|[Cc]oherent|section.*[Mm]odule",
+   "results": "{\"t\": \"2026-10-22T06:45:04Z\", \"tool\": \"grep\", \"query\": \"gradedModule|[Cc]oherent|section.*[Mm]odule\", \"sub\": \"AlgebraicGeometry/ProjectiveSpectrum\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern Proj structure-sheaf charts, stalks or locally finite type structure morphisms, not finite graded module coherence and the graded section comparison"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Proj, Module.Finite",
+   "results": "{\"t\": \"2026-10-22T06:45:05Z\", \"tool\": \"loogle\", \"query\": \"AlgebraicGeometry.Proj, Module.Finite\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern Proj structure-sheaf charts, stalks or locally finite type structure morphisms, not finite graded module coherence and the graded section comparison"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The associated coherent sheaf of a finite graded module agrees on Proj charts with the degree zero localization of its module of twisted global sections",
+   "results": "{\"t\": \"2026-10-22T06:45:05Z\", \"tool\": \"leansearch\", \"query\": \"The associated coherent sheaf of a finite graded module agrees on Proj charts with the degree zero localization of its module of twisted global sections\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.ProjectiveSpectrum.Proj.toStalk_specStalkEquiv\", \"AlgebraicGeometry.ProjectiveSpectrum.StructureSheaf.structurePresheafInCommRing\", \"AlgebraicGeometry.Proj.mul_apply\", \"AlgebraicGeometry.sectionInBasicOpen\", \"AlgebraicGeometry.ProjectiveSpectrum.Proj.awayToSection_apply\", \"AlgebraicGeometry.Proj.stalkIso'_symm_mk\", \"AlgebraicGeometry.ProjectiveSpectrum.StructureSheaf.structureSheafInType\", \"AlgebraicGeometry.Proj.basicOpenIsoAway\"], \"digest\": \"1e1fc133e77cb0f0\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern Proj structure-sheaf charts, stalks or locally finite type structure morphisms, not finite graded module coherence and the graded section comparison"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A finite graded module has a coherent associated sheaf on a standard Noetherian Proj and the map to its graded module of twisted sections is a degree zero localization isomorphism",
+   "results": "{\"t\": \"2026-10-22T06:45:07Z\", \"tool\": \"leanfinder\", \"query\": \"A finite graded module has a coherent associated sheaf on a standard Noetherian Proj and the map to its graded module of twisted sections is a degree zero localization isomorphism\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Proj.instLocallyOfFiniteTypeToSpecZeroOfFiniteTypeSubtypeMemOfNatNat\", \"AlgebraicGeometry.ProjectiveSpectrum.Proj.structureSheaf\", \"AlgebraicGeometry.ProjectiveSpectrum.StructureSheaf.structureSheafInType\", \"AlgebraicGeometry.ProjectiveSpectrum.StructureSheaf.structurePresheafInCommRing_obj_carrier\", \"AlgebraicGeometry.Proj.awayToSection\", \"AlgebraicGeometry.ProjectiveSpectrum.Proj.awayToΓ\", \"AlgebraicGeometry.ProjectiveSpectrum.Proj.awayToSection\", \"AlgebraicGeometry.ProjectiveSpectrum.StructureSheaf.isLocallyFraction\"], \"digest\": \"9d8b665ba1de1a33\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern Proj structure-sheaf charts, stalks or locally finite type structure morphisms, not finite graded module coherence and the graded section comparison"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The canonical unit into all twisted global sections induces an isomorphism on homogeneous localizations and finite graded modules sheafify to coherent modules",
+   "results": "{\"t\": \"2026-10-22T06:45:17Z\", \"tool\": \"leanfinder\", \"query\": \"The canonical unit into all twisted global sections induces an isomorphism on homogeneous localizations and finite graded modules sheafify to coherent modules\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.ProjectiveSpectrum.StructureSheaf.structurePresheafCompForget\", \"AlgebraicGeometry.Proj.basicOpenToSpec_app_top\", \"AlgebraicGeometry.ProjectiveSpectrum.Proj.toOpen_toSpec_val_c_app\", \"AlgebraicGeometry.Proj.basicOpenIsoAway\", \"AlgebraicGeometry.ProjectiveSpectrum.Proj.awayToΓ\", \"AlgebraicGeometry.Proj.basicOpenIsoAway_hom\", \"AlgebraicGeometry.Proj.awayMap_awayToSection_assoc\", \"AlgebraicGeometry.Proj.awayToSection\"], \"digest\": \"7227683289822d35\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern Proj structure-sheaf charts, stalks or locally finite type structure morphisms, not finite graded module coherence and the graded section comparison"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-finite-graded-module-section-tail",
+  "date": "2026-10-22",
+  "group": "O2"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong §3.8, last paragraph, printed pp.608--609: finite unramified Isom for unordered stable marked curves, and extension over a normal base. This is rigidity of stable pointed curves themselves, independent of any modification map.; rigidity input: Isomorphism graphs of projective flat curves; numerical boundedness in Stacks 0DSQ: the graph polynomial P'=Q+P-P(0) is the Hilbert-scheme index, which requires the homogeneous-coordinate-ring polynomial to equal the Euler polynomial; comparison prerequisite: canonical sections of shifted finite graded modules recover all sufficiently large homogeneous pieces (Stacks 0AG7). Re-split prerequisite: first half, from coherence of the associated sheaf through the unit/counit identity; original steps 1--4. Also constructions.tex Tag 01MT, lemma-apply-modules, and properties.tex Tag 0AG5, lemma-proj-quasi-coherent, with constructions.tex Tag 0B5I, lemma-comparison-proj-quasi-coherent, for the inverse chart formula.",
+   "via": [
+    "lem-sfb-finite-graded-module-section-tail",
+    "lem-sfb-projective-coordinate-ring-euler-polynomial",
+    "lem-sfb-projective-curve-isom-graphs",
+    "lem-sfb-stable-pointed-isom-finite",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-finite-graded-proj-section-comparison",
+  "worker": "stage1",
+  "summary": "Expanded coherence on standard affine charts, including explicit finite homogeneous generators in arbitrary integer degrees. Checked graded linearity of the section map by multiplication of chart fractions, and computed the unit/counit identity on every degree-zero fraction to identify its inverse. Reused existing nodes throughout; no new nodes and no statement change. Repair of the returned delivery feb9d01393f: re-read the current live statement and all statement/proof dependencies, retained the source route and searches, and made the nonnegative-denominator representatives in step 5 explicit before rebuilding on the current DAG. Rebased again after the 2026-10-22 11:50 UTC return of head 157de35bc57: reread all current dependencies, retained the allowed-representative refinement in step 5, and made step 7 explicit for negative twists, citing the existing twist definition. Repair of the repeated live-DAG promotion refusal on 2026-10-23: rebuilt from the current unsplit live record, reopened all current cited statements, revalidated all fourteen verbatim quotations, and expanded step 8 with the explicit fraction-equivalence equation. The statement and source route are retained. On the latest repair resumption, rebased the retained split fields onto the current shared unsplit node, re-read all current cited statements and sources, checked all fourteen quotes, and expanded step 2 by homogeneous projection to prove the irrelevant-ideal equality, including the empty generating family.",
+  "blueprint": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong §3.8, last paragraph, printed pp.608--609: finite unramified Isom for unordered stable marked curves, and extension over a normal base. This is rigidity of stable pointed curves themselves, independent of any modification map.; rigidity input: Isomorphism graphs of projective flat curves; numerical boundedness in Stacks 0DSQ: the graph polynomial P'=Q+P-P(0) is the Hilbert-scheme index, which requires the homogeneous-coordinate-ring polynomial to equal the Euler polynomial; comparison prerequisite: canonical sections of shifted finite graded modules recover all sufficiently large homogeneous pieces (Stacks 0AG7). Re-split prerequisite: first half, from coherence of the associated sheaf through the unit/counit identity; original steps 1--4. Also constructions.tex Tag 01MT, lemma-apply-modules, and properties.tex Tag 0AG5, lemma-proj-quasi-coherent, with constructions.tex Tag 0B5I, lemma-comparison-proj-quasi-coherent, for the inverse chart formula. Steps 1--6 realize the coherence prerequisite; steps 7--8 realize the canonical section comparison and the unit/counit identity in the first half of Tag 0AG7. The inherited ancestor is null as reported by blueprint_refs.py ancestor; the existing provenance chain is retained.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-quasi-coherent-finite-type-affine",
+    "why": "Generic affine finite-type criterion, used only to convert the explicit finite generation of chart sections to local sheaf finite type; the unit has no replacement criterion."
+   },
+   {
+    "node": "pqf-lem-coherent-ft-locnoeth",
+    "why": "Generic equivalence between coherence and quasi-coherence plus finite type on locally Noetherian schemes, applied after those hypotheses are proved; it does not replace any step of the unit route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-quasi-coherent-finite-type-affine",
+  "pqf-lem-coherent-ft-locnoeth"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q44-e18045839",
+  "group": "Q44",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q44-e18045839 (reviewer sub-agent of L); spot-checked: This is the 5th delivery of the item; feb9, 157d, 8cfd and ad1d were all PASSed and then hit live-promotion refusals. The live item is still unsplit with no repair note. The delivery adds 0 new nodes and 0 Mathlib leaves. The only change from ad1d155838f5 is step 2: it now projects a polynomial expression of s∈S_d (d>0) onto degree d, which proves (f_1..f_r)=S_+ and gives S_+=0 when r=0. The argument is correct. All 15 cited files are byte-identical to the ad1d snapshot. Live differs only in the proof fields of lem-sfb-proj-section-module-reconstruction, which was re-split; its statement (canonical iso, chart formula t/f^a↦t|⊗f^{-a}, no finiteness of F) is unchanged. I read all 8 steps in full against the cited statements. Step 1: S is of finite type over S_0, so S is Noetherian by 00FN. Steps 2-3: the degree-one charts cover X and each S_(f_i) is generated by the f_j/f_i, so X is locally Noetherian. Steps 4-5: homogeneous generators q_j=f^{-d_j}m_j generate M_(f), with zero coefficients when a-d_j<0. Step 6: sheaf-exists (b),(c), then affine finite type (c), then 01XZ gives coherence. Step 7: the chart identity (x/f^n)⊗f^n↦x/1 and its n<0 analogue, and the canonical section s=(s/f^e)f^e, give S-linearity. Step 8: the fraction relation is respected; ψφ=1 by unit and associativity; ψ is an iso, so φ_(f_i)=ψ^{-1}. The item matches Stacks 0AG7 (coherent.tex 3862-3902) with 0AG5/0B5I. I tested r=0, k[T]/(T^2), M=S(1) (negative generator degree), M=S/(T) and M=0. Duplicate search over 0AG7 and Proj/coherent nodes found only the parent section-tail and the section-finiteness node, which states a different claim. No cycle and no SGA. The two generic tool_uses are accepted. No changes made."
+ }
+}

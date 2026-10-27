@@ -1,0 +1,317 @@
+{
+ "id": "lem-sfb-space-assassin-containment-constructible",
+ "kind": "statement",
+ "title": "Local constructibility of containment of fibre associated points in an open subspace",
+ "statement": "Work over $\\operatorname{Spec}\\mathbf Z$ with schemes [def-pc-scheme], algebraic spaces [def-trf-algebraic-space], the universes of [def-weil-size-convention], sheaf fibre products [lem-trf-space-fibre-products-etale-covers], quasi-coherent modules [def-trf-space-quasi-coherent-module], and tensor pullback [def-trf-space-etale-module-functors]. Use chartwise local finite type and local finite presentation [def-sfb-space-morphism-properties]. Finite presentation means locally of finite presentation, quasi-compact, with quasi-compact diagonal. A module of finite type is locally finitely generated on etale scheme charts; a finitely presented module has locally an exact presentation $\\mathcal O^r\\to\\mathcal O^s\\to M\\to0$ with $r,s$ finite. Let $f:X\\to Y$ be of finite presentation with $Y$ a scheme, let $M$ be a finitely presented quasi-coherent module, and let $W\\subseteq X$ be an open subspace such that $W\\to Y$ is quasi-compact. Use the relative assassin on spaces [def-sfb-space-universal-relative-purity]: $\\operatorname{Ass}_{X/Y}(M)$ is the union of the images of the fibrewise associated points on representable etale scheme charts, with scheme associated points as in [def-trf-relative-assassin]. Use the topology on space points [def-a1-space-point-topology] and constructible subsets [def-weil-constructible-subset]; a subset $E$ of a scheme $Y$ is locally constructible if every point of $Y$ has an affine open neighbourhood $V$ such that $E\\cap V$ is a constructible subset of the topological space $|V|$. The subset $E=\\{y\\in Y\\mid\\operatorname{Ass}_{X_y}(M_y)\\subseteq |W_y|\\}$ is locally constructible in $Y$. Consequently, if $y\\in Y$ and every generalization of $y$ belongs to $E$, there exists an open neighbourhood $V$ of $y$ such that $V\\subseteq E$. A generalization $t$ of $y$ means $y\\in\\overline{\\{t\\}}$.",
+ "source": {
+  "document": "literature/stacks-project/spaces-divisors.tex; literature/stacks-project/morphisms.tex",
+  "place": "Tag 0CVV (spaces-divisors-lemma-relative-assassin-constructible) and Tag 05LW (morphisms-lemma-constructible-containing-open)."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-trf-algebraic-space",
+  "def-weil-size-convention",
+  "lem-trf-space-fibre-products-etale-covers",
+  "def-trf-space-quasi-coherent-module",
+  "def-trf-space-etale-module-functors",
+  "def-sfb-space-morphism-properties",
+  "def-sfb-space-universal-relative-purity",
+  "def-trf-relative-assassin",
+  "def-a1-space-point-topology",
+  "def-weil-constructible-subset"
+ ],
+ "proof": [
+  {
+   "text": "Fix any affine open $B\\subseteq Y$ and replace the family by $X_B\\to B$, $M_B$ and $W_B$. Finite presentation of the morphism survives this base change, and $W_B\\to B$ remains quasi-compact. The fibres over points of $B$ are the original fibres, by the fibre-product universal property. The affine scheme $B$ is qcqs, so finite presentation gives that $X_B$ is qcqs. It therefore suffices to show constructibility on this arbitrary affine base. In the next steps rename the restricted family $X\\to B,M,W$.",
+   "uses": [
+    "lem-sfb-space-flat-proper-fp-locality",
+    "lem-sfb-space-quasicompact-affine-tests",
+    "lem-weil-pbc-affine-scheme-qcqs",
+    "lem-sfb-space-fp-qcqs-source"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-divisors.tex",
+    "place": "Tag 0CVV, first affine-base reduction; finite-presentation base change and Tag 06G5."
+   }
+  },
+  {
+   "text": "Choose a representable surjective etale map $p:T\\to X$ with $T$ affine. Both $T$ and $X$ are qcqs; hence the permanence theorem makes $p$ quasi-compact and quasi-separated. Etaleness gives local finite presentation: in any chart square $a:U\\to T$, $b:V\\to X$, $h:U\\to V$ with $pa=bh$, the composite $pa:U\\to X$ is representable etale, so the scheme map $h$ between two etale charts of $X$ is etale, hence locally of finite presentation. So $p$ is of finite presentation. Composition with $X\\to B$ now makes $g:T\\to B$ of finite presentation. Let $H=p^{-1}(W)$, an open subscheme of $T$. Since $W\\to B$ is quasi-compact and $B$ is affine, $W$ is quasi-compact. Quasi-compactness of $p$, tested on the quasi-compact space $W$, makes $H$ quasi-compact. Since $B$ is quasi-separated, permanence makes $H\\to B$ quasi-compact, which for this representable morphism of schemes is quasi-compactness in the scheme sense. These are precisely the hypotheses on the morphism and open needed for the scheme theorem.",
+   "uses": [
+    "lem-sfb-qc-space-affine-etale-atlas",
+    "lem-weil-pbc-affine-scheme-qcqs",
+    "lem-sfb-space-qcqs-permanence",
+    "def-trf-algebraic-space",
+    "def-sfb-space-morphism-properties",
+    "lem-sfb-space-separated-fp-composition",
+    "lem-sfb-space-quasicompact-fppf-local",
+    "lem-trf-space-representable-etale-scheme-tests",
+    "def-weil-etale-morphism",
+    "lem-sfb-space-quasicompact-affine-tests"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-divisors.tex",
+    "place": "Tag 0CVV, choice of affine surjective etale cover and verification for its inverse-image open; Tag 073B and Tag 03XQ."
+   }
+  },
+  {
+   "text": "Put $N=p^*M$. Tensor pullback, being the specified left adjoint, preserves cokernel presentations and takes finite free terms to finite free terms. Thus a local finite presentation of $M$ gives one of $N$; this also justifies $M_B$ in step 1. Quasi-coherence follows directly from the local-presentation definition. The affine-chart calculus says that on the affine etale chart $T$, $N$ corresponds to its section module and that this module is finitely presented. Let $F$ be its associated quasi-coherent Zariski module; its finite module presentation sheafifies to a finite presentation of $F$. The etale--Zariski equivalence identifies $F_{\\mathrm{et}}$ with $N$, and its pullback comparison identifies $(F_y)_{\\mathrm{et}}$ with $N_y$ on every fibre. Thus the scheme associated points of these corresponding modules agree, since they are computed from the same Zariski module stalks.",
+   "uses": [
+    "def-trf-space-etale-module-functors",
+    "def-trf-space-quasi-coherent-module",
+    "lem-sfb-space-qcoh-affine-chart-calculus",
+    "lem-trf-scheme-zariski-etale-quasi-coherent-equivalence",
+    "def-trf-relative-assassin"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-divisors.tex; literature/stacks-project/spaces-properties.tex; literature/stacks-project/descent.tex",
+    "place": "Tag 0CVV, module on the affine chart; Tags 03LZ, 03M0, 03M1 (characterize-quasi-coherent-small-etale, characterize-quasi-coherent, properties-quasi-coherent); Tag 06VE (lemma-equivalence-quasi-coherent-limits), comparison with the Zariski module."
+   }
+  },
+  {
+   "text": "For every $y\\in B$, the atlas comparison gives $p_y(\\operatorname{Ass}_{T_y}(N_y))=\\operatorname{Ass}_{X_y}(M_y)$. Since $H_y=p_y^{-1}(W_y)$, inclusion of the right-hand set in $|W_y|$ is equivalent to inclusion of $\\operatorname{Ass}_{T_y}(N_y)$ in $|H_y|$: each associated point upstairs maps into the displayed image, and each associated point downstairs has an associated lift. With step 3 this identifies $E\\cap B$ with $\\{y\\in B\\mid\\operatorname{Ass}_{T_y}(F_y)\\subseteq |H_y|\\}$.",
+   "uses": [
+    "lem-sfb-space-fibre-assassin-etale-atlas"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-divisors.tex",
+    "place": "Tag 0CVV, equality of the fibrewise associated-point image and reduction of the containment condition."
+   }
+  },
+  {
+   "text": "Apply the scheme constructibility theorem to $g:T\\to B$, $F$ and $H$, whose hypotheses were checked in steps 2 and 3. It makes this last set constructible in $B$. Step 4 identifies it with $E\\cap B$. As $B$ was an arbitrary affine open of $Y$, this proves the asserted local constructibility.",
+   "uses": [
+    "lem-sfb-scheme-assassin-open-constructible"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-divisors.tex",
+    "place": "Tag 0CVV, final application of More on Morphisms Tag 05KR."
+   }
+  },
+  {
+   "text": "Now fix $y\\in Y$ all of whose generalizations belong to $E$, and choose an affine open $B$ containing $y$. The set $E_B=E\\cap B$ is constructible by steps 1--5, and so is $C=B\\setminus E_B$, since constructible subsets form a Boolean algebra. The affine scheme $B$ is qcqs and hence its point space is spectral. If $y\\in\\overline C^{B}$, apply the spectral closure-specialization theorem to the singleton family with sole member $C$. It gives $c\\in C$ with $y\\in\\overline{\\{c\\}}^{B}$. The inclusion $B\\hookrightarrow Y$ is continuous, so $c$ is also a generalization of $y$ in $Y$. The hypothesis puts $c$ in $E$, contradicting $c\\in C$. Therefore $y\\notin\\overline C^{B}$.",
+   "uses": [
+    "def-weil-constructible-subset",
+    "lem-weil-pbc-affine-scheme-qcqs",
+    "lem-weil-pbc-qcqs-scheme-spectral",
+    "lem-weil-pbc-spectral-proconstructible-closure-specialization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex; literature/stacks-project/topology.tex",
+    "place": "Tag 05LW, constructible complement argument; Tag 0903 (lemma-constructible-stable-specialization-closed), part (1)."
+   }
+  },
+  {
+   "text": "Take $V=B\\setminus\\overline C^{B}$. It is open in $B$ and hence in $Y$, contains $y$, and is contained in $B\\setminus C=E_B\\subseteq E$ because $C\\subseteq\\overline C^{B}$. This proves the neighbourhood conclusion.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 05LW, complement-of-closure neighbourhood."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-space-flat-proper-fp-locality",
+  "lem-sfb-space-quasicompact-affine-tests",
+  "lem-weil-pbc-affine-scheme-qcqs",
+  "lem-sfb-space-fp-qcqs-source",
+  "lem-sfb-qc-space-affine-etale-atlas",
+  "lem-sfb-space-qcqs-permanence",
+  "def-trf-algebraic-space",
+  "def-sfb-space-morphism-properties",
+  "lem-sfb-space-separated-fp-composition",
+  "lem-sfb-space-quasicompact-fppf-local",
+  "lem-trf-space-representable-etale-scheme-tests",
+  "def-weil-etale-morphism",
+  "def-trf-space-etale-module-functors",
+  "def-trf-space-quasi-coherent-module",
+  "lem-sfb-space-qcoh-affine-chart-calculus",
+  "lem-trf-scheme-zariski-etale-quasi-coherent-equivalence",
+  "def-trf-relative-assassin",
+  "lem-sfb-space-fibre-assassin-etale-atlas",
+  "lem-sfb-scheme-assassin-open-constructible",
+  "def-weil-constructible-subset",
+  "lem-weil-pbc-qcqs-scheme-spectral",
+  "lem-weil-pbc-spectral-proconstructible-closure-specialization"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/spaces-divisors.tex; literature/stacks-project/morphisms.tex; literature/stacks-project/topology.tex",
+  "place": "Tag 0CVV; Tag 05LW, with its closure step expressed using Tag 0903."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For a finitely presented algebraic space and module the base points where the fibre associated points lie in a relatively quasi compact open form a locally constructible set",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.isLocallyConstructible_image\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [hf : AlgebraicGeometry.LocallyOfFinitePresentation f]\\n  [AlgebraicGeometry.QuasiCompact f] {s : Set ↥X},\\n  Topology.IsLocallyConstructible s →\\n    Topology.IsLocallyConstructible (⇑(CategoryTheory.ConcreteCategory.hom f.base) '' s)\", \"doc\": \"Let $f: X \\\\to Y$ be a quasi-compact and locally of finite presentation morphism of schemes. If $s$ is a locally constructible subset of $X$, then its image $f(s)$ is a locally constructible subset of \"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.isConstructible_image\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.LocallyOfFinitePresentation f]\\n  [AlgebraicGeometry.QuasiCompact f] [CompactSpace ↥Y] [QuasiSeparatedSpace ↥Y] {s : Set ↥X},\\n  Topology.IsConstructible s → Topology.IsConstructible (⇑(CategoryTheory.ConcreteCategory.hom f.base) '' s)\", \"doc\": \"Let $f: X \\\\to Y$ be a morphism of schemes. Suppose that $f$ is locally of finite presentation and quasi-compact, and the underlying topological space of $Y$ is compact and quasi-separated. Then for an\"}\n  {\"name\": \"PrimeSpectrum.isConstructible_range_comap\", \"module\": \"Mathlib/RingTheory/Spectrum/Prime/Chevalley\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} [inst : CommRing R] [inst_1 : CommRing S] {f : R →+* S},\\n  f.FinitePresentation → Topology.IsConstructible (Set.range (PrimeSpectrum.comap f))\", \"doc\": \"If $ f : R \\\\to S $ is a ring homomorphism of finite presentation between commutative semirings, then the image of the induced map $ \\\\operatorname{Spec}(S) \\\\to \\\\operatorname{Spec}(R) $, defined by taki\"}\n  {\"name\": \"PrimeSpectrum.isConstructible_comap_image\", \"module\": \"Mathlib/RingTheory/Spectrum/Prime/Chevalley\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} [inst : CommRing R] [inst_1 : CommRing S] {f : R →+* S},\\n  f.FinitePresentation →\\n    ∀ {s : Set (PrimeSpectrum S)}, Topology.IsConstructible s → Topology.IsConstructible (PrimeSpectrum.comap f '' s)\", \"doc\": \"If $ f: R \\\\to S $ is a finitely presented ring homomorphism and $ s \\\\subseteq \\\\operatorname{Spec}(S) $ is a constructible set in the Zariski topology, then the image of $ s $ under the induced map $ \\\\\"}\n  {\"name\": \"PrimeSpectrum.ConstructibleSetData\", \"module\": \"Mathlib/RingTheory/Spectrum/Prime/ConstructibleSet\", \"type\": \"Type u_1 → Type u_1\", \"doc\": \"The type representing finite sets of basic constructible subsets of the prime spectrum of a ring, generated by finite unions and intersections of open and closed sets.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.isConstructible_preimage\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) {s : Set ↥Y},\\n  Topology.IsConstructible s → Topology.IsConstructible (⇑(CategoryTheory.ConcreteCategory.hom f.base) ⁻¹' s)\", \"doc\": \"For any morphism $ f : X \\\\to Y $ of schemes and any constructible subset $ s \\\\subseteq Y $, the preimage $ f^{-1}(s) $ is a constructible subset of $ X $.\"}\n  {\"name\": \"PrimeSpectrum.BasicConstructibleSetData\", \"module\": \"Mathlib/RingTheory/Spectrum/Prime/ConstructibleSet\", \"type\": \"Type u_1 → Type u_1\", \"doc\": \"An inductive type defining the data structure for basic constructible subsets of the prime spectrum of a ring, typically generated by finite unions and intersections of open and closed sets.\"}\n  {\"name\": \"PrimeSpectrum.ConstructibleSetData.isConstructible_toSet\", \"module\": \"Mathlib/RingTheory/Spectrum/Prime/ConstructibleSet\", \"type\": \"∀ {R : Type u_1} [inst : CommSemiring R] (S : PrimeSpectrum.ConstructibleSetData R), Topology.IsConstructible S.toSet\", \"doc\": \"For any constructible set data $ S $ in the prime spectrum of a commutative semiring $ R $, the set $ S.toSet $ obtained by taking the union of basic constructible subsets defined by $ S $ is a constr\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the returned scheme/ring/module facts do not state this algebraic-space or complete-devissage assertion; no one-line specialization"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Constructibility of containment of relative assassin in an open subspace",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"Topology.IsConstructible\", \"module\": \"Mathlib.Topology.Constructible\", \"type\": \"(s : Set X) : Prop\", \"doc\": \"A set $ s $ in a topological space is constructible if it belongs to the Boolean subalgebra generated by the open retrocompact sets. This means $ s $ can be formed by taking finite unions, intersectio\"}\n  {\"name\": \"AlgebraicGeometry.RingedSpace.basicOpen_le\", \"module\": \"Mathlib.Geometry.RingedSpace.Basic\", \"type\": \"{U : Opens X} (f : X.presheaf.obj (op U)) : X.basicOpen f ≤ U\", \"doc\": \"For a ringed space $ X $, given an open subset $ U $ of $ X $ and a section $ f $ of the structure sheaf over $ U $, the basic open set $ \\\\{x \\\\in U \\\\mid \\\\text{germ of } f \\\\text{ at } x \\\\text{ is a uni\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.AffineZariskiSite.basicOpen_le\", \"module\": \"Mathlib.AlgebraicGeometry.Sites.SmallAffineZariski\", \"type\": \"(U : X.AffineZariskiSite) (f : Γ(X, U.toOpens)) : U.basicOpen f ≤ U\", \"doc\": \"For any affine open subset $U$ of a scheme $X$ and any section $f$ of the structure sheaf over $U$, the basic open subset $D(f)$ constructed from $f$ is contained within $U$, i.e., $D(f) \\\\subseteq U$.\"}\n  {\"name\": \"Topology.IsLocallyConstructible\", \"module\": \"Mathlib.Topology.Constructible\", \"type\": \"(s : Set X) : Prop\", \"doc\": \"A set $ s $ in a topological space is locally constructible if, for every point $ x $, there exists an open neighborhood $ U $ of $ x $ such that the intersection $ U \\\\cap s $ is a constructible set. \"}\n  {\"name\": \"IsRetrocompact.isConstructible\", \"module\": \"Mathlib.Topology.Constructible\", \"type\": \"(hUopen : IsOpen U) (hUcomp : IsRetrocompact U) : IsConstructible U\", \"doc\": \"If a set $ U $ in a topological space is open and retrocompact, then $ U $ is a constructible set.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Opens.ι_image_le\", \"module\": \"Mathlib.AlgebraicGeometry.Restrict\", \"type\": \"(W : U.toScheme.Opens) : U.ι ''ᵁ W ≤ U\", \"doc\": \"For any open subset $W$ of $U$, the image of $W$ under the canonical inclusion morphism $\\\\iota: U \\\\to X$ is contained in $U$, i.e., $\\\\iota(W) \\\\subseteq U$. This follows from the fact that $W$ is an op\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.basicOpen_le\", \"module\": \"Mathlib.AlgebraicGeometry.Scheme\", \"type\": \": X.basicOpen f ≤ U\", \"doc\": \"For a scheme $X$, an open subset $U$ of $X$, and a section $f$ of the structure sheaf over $U$, the basic open set $\\\\text{basicOpen}(U, f)$ consisting of points $x \\\\in U$ where the germ of $f$ at $x$ \"}\n  {\"name\": \"Topology.IsConstructible.isLocallyConstructible\", \"module\": \"Mathlib.Topology.Constructible\", \"type\": \"(hs : IsConstructible s) : IsLocallyConstructible s\", \"doc\": \"If a set $ s $ is constructible in a topological space, then it is locally constructible. That is, for every point $ x $, there exists an open neighborhood $ U $ of $ x $ such that $ U \\\\cap s $ is a c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the returned scheme/ring/module facts do not state this algebraic-space or complete-devissage assertion; no one-line specialization"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"associated\", \"constructible\"",
+   "results": "[loogle] OK 0 hit(s)",
+   "date": "2026-10-24",
+   "verdict": "no match: the returned scheme/ring/module facts do not state this algebraic-space or complete-devissage assertion; no one-line specialization"
+  },
+  {
+   "tool": "grep",
+   "query": "assassin|associated.*constructible|constructible.*associated",
+   "results": "[grep] OK 0 hit(s)",
+   "date": "2026-10-24",
+   "verdict": "no match: the returned scheme/ring/module facts do not state this algebraic-space or complete-devissage assertion; no one-line specialization"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Constructibility of containment of relative assassin in an open subspace",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"PrimeSpectrum.isConstructible_basicOpen\", \"module\": \"Mathlib/RingTheory/Spectrum/Prime/Topology\", \"type\": \"∀ {R : Type u} [inst : CommSemiring R] {f : R}, Topology.IsConstructible ↑(PrimeSpectrum.basicOpen f)\", \"doc\": \"For any element $ f $ in a commutative semiring $ R $, the basic open set $ D(f) = \\\\{ \\\\mathfrak{p} \\\\in \\\\operatorname{Spec}(R) \\\\mid f \\\\notin \\\\mathfrak{p} \\\\} $ in the Zariski topology on the prime spect\"}\n  {\"name\": \"PrimeSpectrum.isOpen_of_stableUnderGeneralization_of_isConstructible\", \"module\": \"Mathlib/RingTheory/Spectrum/Prime/ConstructibleSet\", \"type\": \"∀ {R : Type u_4} [inst : CommRing R] {s : Set (PrimeSpectrum R)},\\n  StableUnderGeneralization s → Topology.IsConstructible s → IsOpen s\", \"doc\": \"In the Zariski topology on the prime spectrum of a commutative ring, any constructible set that is stable under generalization is necessarily an open set.\"}\n  {\"name\": \"Topology.IsLocallyConstructible.isConstructible\", \"module\": \"Mathlib/Topology/Constructible\", \"type\": \"∀ {X : Type u_2} [inst : TopologicalSpace X] {s : Set X} [PrespectralSpace X] [QuasiSeparatedSpace X] [CompactSpace X],\\n  Topology.IsLocallyConstructible s → Topology.IsConstructible s\", \"doc\": \"In a compact quasi-separated prespectral space $X$, if a set $s$ is locally constructible (i.e., every point has an open neighborhood whose intersection with $s$ is constructible), then $s$ is constru\"}\n  {\"name\": \"Topology.IsLocallyConstructible\", \"module\": \"Mathlib/Topology/Constructible\", \"type\": \"{X : Type u_2} → [TopologicalSpace X] → Set X → Prop\", \"doc\": \"A set $ s $ in a topological space is locally constructible if, for every point $ x $, there exists an open neighborhood $ U $ of $ x $ such that the intersection $ U \\\\cap s $ is a constructible set. \"}\n  {\"name\": \"IsCompact.isConstructible\", \"module\": \"Mathlib/Topology/Constructible\", \"type\": \"∀ {X : Type u_2} [inst : TopologicalSpace X] {U : Set X} [QuasiSeparatedSpace X],\\n  IsCompact U → IsOpen U → Topology.IsConstructible U\", \"doc\": \"If a set $ U $ in a topological space is both open and compact, then $ U $ is a constructible set. This follows because compact open sets are retrocompact, and constructible sets are generated by fini\"}\n  {\"name\": \"PrimeSpectrum.ConstructibleSetData.isConstructible_toSet\", \"module\": \"Mathlib/RingTheory/Spectrum/Prime/ConstructibleSet\", \"type\": \"∀ {R : Type u_1} [inst : CommSemiring R] (S : PrimeSpectrum.ConstructibleSetData R), Topology.IsConstructible S.toSet\", \"doc\": \"For any constructible set data $ S $ in the prime spectrum of a commutative semiring $ R $, the set $ S.toSet $ obtained by taking the union of basic constructible subsets defined by $ S $ is a constr\"}\n  {\"name\": \"PrimeSpectrum.ConstructibleSetData\", \"module\": \"Mathlib/RingTheory/Spectrum/Prime/ConstructibleSet\", \"type\": \"Type u_1 → Type u_1\", \"doc\": \"The type representing finite sets of basic constructible subsets of the prime spectrum of a ring, generated by finite unions and intersections of open and closed sets.\"}\n  {\"name\": \"PrimeSpectrum.BasicConstructibleSetData\", \"module\": \"Mathlib/RingTheory/Spectrum/Prime/ConstructibleSet\", \"type\": \"Type u_1 → Type u_1\", \"doc\": \"An inductive type defining the data structure for basic constructible subsets of the prime spectrum of a ring, typically generated by finite unions and intersections of open and closed sets.\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the returned scheme/ring/module facts do not state this algebraic-space or complete-devissage assertion; no one-line specialization"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a finitely presented scheme morphism and finitely presented module the base locus where fibre associated points lie in an open subscheme is locally constructible",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.isLocallyConstructible_image\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [hf : AlgebraicGeometry.LocallyOfFinitePresentation f]\\n  [AlgebraicGeometry.QuasiCompact f] {s : Set ↥X},\\n  Topology.IsLocallyConstructible s →\\n    Topology.IsLocallyConstructible (⇑(CategoryTheory.ConcreteCategory.hom f.base) '' s)\", \"doc\": \"Let $f: X \\\\to Y$ be a quasi-compact and locally of finite presentation morphism of schemes. If $s$ is a locally constructible subset of $X$, then its image $f(s)$ is a locally constructible subset of \"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.isConstructible_image\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.LocallyOfFinitePresentation f]\\n  [AlgebraicGeometry.QuasiCompact f] [CompactSpace ↥Y] [QuasiSeparatedSpace ↥Y] {s : Set ↥X},\\n  Topology.IsConstructible s → Topology.IsConstructible (⇑(CategoryTheory.ConcreteCategory.hom f.base) '' s)\", \"doc\": \"Let $f: X \\\\to Y$ be a morphism of schemes. Suppose that $f$ is locally of finite presentation and quasi-compact, and the underlying topological space of $Y$ is compact and quasi-separated. Then for an\"}\n  {\"name\": \"Module.isOpen_freeLocus\", \"module\": \"Mathlib/RingTheory/Spectrum/Prime/FreeLocus\", \"type\": \"∀ {R : Type uR} {M : Type uM} [inst : CommRing R] [inst_1 : AddCommGroup M] [inst_2 : Module R M]\\n  [Module.FinitePresentation R M], IsOpen (Module.freeLocus R M)\", \"doc\": \"For a finitely presented module $ M $ over a commutative ring $ R $, the set of prime ideals $ \\\\mathfrak{p} \\\\in \\\\operatorname{Spec}(R) $ where the localization $ M_{\\\\mathfrak{p}} $ is a free module ov\"}\n  {\"name\": \"PrimeSpectrum.isConstructible_range_comap\", \"module\": \"Mathlib/RingTheory/Spectrum/Prime/Chevalley\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} [inst : CommRing R] [inst_1 : CommRing S] {f : R →+* S},\\n  f.FinitePresentation → Topology.IsConstructible (Set.range (PrimeSpectrum.comap f))\", \"doc\": \"If $ f : R \\\\to S $ is a ring homomorphism of finite presentation between commutative semirings, then the image of the induced map $ \\\\operatorname{Spec}(S) \\\\to \\\\operatorname{Spec}(R) $, defined by taki\"}\n  {\"name\": \"AlgebraicGeometry.LocallyOfFinitePresentation\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"A morphism $ f: X \\\\to Y $ of schemes is locally of finite presentation, meaning that for every point in $ X $, there exists an open neighborhood such that the restriction of $ f $ to this neighborhood\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.isConstructible_preimage\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) {s : Set ↥Y},\\n  Topology.IsConstructible s → Topology.IsConstructible (⇑(CategoryTheory.ConcreteCategory.hom f.base) ⁻¹' s)\", \"doc\": \"For any morphism $ f : X \\\\to Y $ of schemes and any constructible subset $ s \\\\subseteq Y $, the preimage $ f^{-1}(s) $ is a constructible subset of $ X $.\"}\n  {\"name\": \"PrimeSpectrum.isConstructible_comap_image\", \"module\": \"Mathlib/RingTheory/Spectrum/Prime/Chevalley\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} [inst : CommRing R] [inst_1 : CommRing S] {f : R →+* S},\\n  f.FinitePresentation →\\n    ∀ {s : Set (PrimeSpectrum S)}, Topology.IsConstructible s → Topology.IsConstructible (PrimeSpectrum.comap f '' s)\", \"doc\": \"If $ f: R \\\\to S $ is a finitely presented ring homomorphism and $ s \\\\subseteq \\\\operatorname{Spec}(S) $ is a constructible set in the Zariski topology, then the image of $ s $ under the induced map $ \\\\\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.finitePresentation_appLE\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [self : AlgebraicGeometry.LocallyOfFinitePresentation f] {U : Y.Opens},\\n  AlgebraicGeometry.IsAffineOpen U →\\n    ∀ {V : X.Opens},\\n      AlgebraicGeometry.IsAffineOpen V →\\n        ∀ (e : V ≤ (TopologicalSpace.Opens.map f.base).obj U),\\n          (CommRing\", \"doc\": \"Let $f: X \\\\to Y$ be a morphism of schemes that is locally of finite presentation. Let $U$ be an affine open subset of $Y$ and $V$ be an affine open subset of $X$ such that $V$ is contained in the prei\"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: constructible-image and etale-property hits do not state the algebraic-space fibre-assassin containment theorem"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Constructibility of containment of the relative assassin of a quasi coherent module in a relatively quasi compact open",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"Topology.IsLocallyConstructible.isConstructible\", \"module\": \"Mathlib/Topology/Constructible\", \"type\": \"∀ {X : Type u_2} [inst : TopologicalSpace X] {s : Set X} [PrespectralSpace X] [QuasiSeparatedSpace X] [CompactSpace X],\\n  Topology.IsLocallyConstructible s → Topology.IsConstructible s\", \"doc\": \"In a compact quasi-separated prespectral space $X$, if a set $s$ is locally constructible (i.e., every point has an open neighborhood whose intersection with $s$ is constructible), then $s$ is constru\"}\n  {\"name\": \"AlgebraicGeometry.exists_of_res_zero_of_qcqs\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiSeparated\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} {U : TopologicalSpace.Opens ↥X},\\n  IsCompact U.carrier →\\n    IsQuasiSeparated U.carrier →\\n      ∀ {f s : ↑(X.presheaf.obj (Opposite.op U))},\\n        TopCat.Presheaf.restrictOpen f (X.basicOpen s) ⋯ = 0 → ∃ n, s ^ n * f = 0\", \"doc\": \"Let $ X $ be a scheme and $ U $ an open subset of $ X $ that is both quasi-compact and quasi-separated. Suppose $ f $ and $ s $ are sections of the structure sheaf $ \\\\mathcal{O}_X $ over $ U $, and th\"}\n  {\"name\": \"AlgebraicGeometry.exists_of_res_zero_of_qcqs_of_top\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiSeparated\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} [CompactSpace ↥X] [QuasiSeparatedSpace ↥X] {f s : ↑(X.presheaf.obj (Opposite.op ⊤))},\\n  TopCat.Presheaf.restrictOpen f (X.basicOpen s) ⋯ = 0 → ∃ n, s ^ n * f = 0\", \"doc\": \"Let $X$ be a quasi-compact and quasi-separated scheme, and let $f$ and $s$ be global sections of the structure sheaf $\\\\mathcal{O}_X$. If the restriction of $f$ to the basic open subset $D(s)$ defined \"}\n  {\"name\": \"PrimeSpectrum.BasicConstructibleSetData\", \"module\": \"Mathlib/RingTheory/Spectrum/Prime/ConstructibleSet\", \"type\": \"Type u_1 → Type u_1\", \"doc\": \"An inductive type defining the data structure for basic constructible subsets of the prime spectrum of a ring, typically generated by finite unions and intersections of open and closed sets.\"}\n  {\"name\": \"Topology.IsLocallyConstructible.isConstructible_of_subset_of_isCompact\", \"module\": \"Mathlib/Topology/Constructible\", \"type\": \"∀ {X : Type u_2} [inst : TopologicalSpace X] {s t : Set X} [PrespectralSpace X] [QuasiSeparatedSpace X],\\n  Topology.IsLocallyConstructible s → s ⊆ t → IsCompact t → Topology.IsConstructible s\", \"doc\": \"In a prespectral and quasi-separated topological space $X$, if a set $s$ is locally constructible and is contained within a compact set $t$, then $s$ is constructible. This means that under the condit\"}\n  {\"name\": \"PrimeSpectrum.ConstructibleSetData\", \"module\": \"Mathlib/RingTheory/Spectrum/Prime/ConstructibleSet\", \"type\": \"Type u_1 → Type u_1\", \"doc\": \"The type representing finite sets of basic constructible subsets of the prime spectrum of a ring, generated by finite unions and intersections of open and closed sets.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.isConstructible_image\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.LocallyOfFinitePresentation f]\\n  [AlgebraicGeometry.QuasiCompact f] [CompactSpace ↥Y] [QuasiSeparatedSpace ↥Y] {s : Set ↥X},\\n  Topology.IsConstructible s → Topology.IsConstructible (⇑(CategoryTheory.ConcreteCategory.hom f.base) '' s)\", \"doc\": \"Let $f: X \\\\to Y$ be a morphism of schemes. Suppose that $f$ is locally of finite presentation and quasi-compact, and the underlying topological space of $Y$ is compact and quasi-separated. Then for an\"}\n  {\"name\": \"PrimeSpectrum.isConstructible_basicOpen\", \"module\": \"Mathlib/RingTheory/Spectrum/Prime/Topology\", \"type\": \"∀ {R : Type u} [inst : CommSemiring R] {f : R}, Topology.IsConstructible ↑(PrimeSpectrum.basicOpen f)\", \"doc\": \"For any element $ f $ in a commutative semiring $ R $, the basic open set $ D(f) = \\\\{ \\\\mathfrak{p} \\\\in \\\\operatorname{Spec}(R) \\\\mid f \\\\notin \\\\mathfrak{p} \\\\} $ in the Zariski topology on the prime spect\"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: constructible-image and etale-property hits do not state the algebraic-space fibre-assassin containment theorem"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The locus of fibres of a finitely presented scheme on which all associated points lie in an open subset is locally constructible",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"Topology.IsLocallyConstructible\", \"module\": \"Mathlib.Topology.Constructible\", \"type\": \"(s : Set X) : Prop\", \"doc\": \"A set $ s $ in a topological space is locally constructible if, for every point $ x $, there exists an open neighborhood $ U $ of $ x $ such that the intersection $ U \\\\cap s $ is a constructible set. \"}\n  {\"name\": \"Topology.IsConstructible.isLocallyConstructible\", \"module\": \"Mathlib.Topology.Constructible\", \"type\": \"(hs : IsConstructible s) : IsLocallyConstructible s\", \"doc\": \"If a set $ s $ is constructible in a topological space, then it is locally constructible. That is, for every point $ x $, there exists an open neighborhood $ U $ of $ x $ such that $ U \\\\cap s $ is a c\"}\n  {\"name\": \"Topology.IsLocallyConstructible.iff_of_isOpenCover\", \"module\": \"Mathlib.Topology.Constructible\", \"type\": \"(hU : IsOpenCover U) : IsLocallyConstructible s ↔ ∀ i, IsLocallyConstructible ((U i : Set X) ↓∩ s)\", \"doc\": \"Given an open cover $\\\\{U_i\\\\}$ of a topological space $X$, a set $s$ is locally constructible if and only if for every index $i$, the intersection $U_i \\\\cap s$ is locally constructible.\"}\n  {\"name\": \"Topology.IsLocallyConstructible.of_isOpenCover\", \"module\": \"Mathlib.Topology.Constructible\", \"type\": \"(hU : IsOpenCover U) (H : ∀ i, IsLocallyConstructible ((U i : Set X) ↓∩ s)) : IsLocallyConstructible s\", \"doc\": \"If a topological space $X$ has an open cover $\\\\{U_i\\\\}$ such that for each $i$, the intersection $U_i \\\\cap s$ is locally constructible, then the set $s$ is locally constructible in $X$.\"}\n  {\"name\": \"IsRetrocompact.isLocallyConstructible\", \"module\": \"Mathlib.Topology.Constructible\", \"type\": \"(hUopen : IsOpen U) (hUcomp : IsRetrocompact U) : IsLocallyConstructible U\", \"doc\": \"If a set $ U $ in a topological space is open and retrocompact, then it is locally constructible.\"}\n  {\"name\": \"Topology.IsLocallyConstructible.finsetInf\", \"module\": \"Mathlib.Topology.Constructible\", \"type\": \"{ι : Type*} {s : Finset ι} {t : ι → Set X} (ht : ∀ i ∈ s, IsLocallyConstructible (t i)) :\\n  IsLocallyConstructible (s.inf t)\", \"doc\": \"In a topological space, the intersection of a finite family of locally constructible sets is itself a locally constructible set.\"}\n  {\"name\": \"Topology.IsLocallyConstructible.iff_isConstructible_of_isOpenCover\", \"module\": \"Mathlib.Topology.Constructible\", \"type\": \"[PrespectralSpace X] [QuasiSeparatedSpace X] (hU : IsOpenCover U) (hU' : ∀ i, IsCompact (U i : Set X)) :\\n  IsLocallyConstructible s ↔ ∀ i, IsConstructible (s ∩ U i)\", \"doc\": \"In a prespectral and quasi-separated topological space $X$, a set $s$ is locally constructible if and only if, for every open cover $\\\\{U_i\\\\}$ of $X$ consisting of compact open sets, the intersection $\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.isLocallyConstructible_image\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation\", \"type\": \"(f : X ⟶ Y) [hf : LocallyOfFinitePresentation f] [QuasiCompact f] {s : Set X} (hs : IsLocallyConstructible s) :\\n  IsLocallyConstructible (f '' s)\", \"doc\": \"Let $f: X \\\\to Y$ be a quasi-compact and locally of finite presentation morphism of schemes. If $s$ is a locally constructible subset of $X$, then its image $f(s)$ is a locally constructible subset of \"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: constructible-image and etale-property hits do not state the algebraic-space fibre-assassin containment theorem"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"associated\", \"constructible\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-24",
+   "verdict": "no match: constructible-image and etale-property hits do not state the algebraic-space fibre-assassin containment theorem"
+  },
+  {
+   "tool": "grep",
+   "query": "assassin|associated.*constructible|constructible.*associated",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-24",
+   "verdict": "no match: constructible-image and etale-property hits do not state the algebraic-space fibre-assassin containment theorem"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-space-pure-dimension-flatness-representability",
+  "date": "2026-10-24",
+  "group": "Q52"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "Proof (3), compactification/direct-image preservation, inherited alteration and stable-moduli prerequisite chain; algebraicity of the coherent-family stack used by the proper-support Quot representability input. Supporting input: Tags 0CX4 (situation-existence), 0CXB (theorem-existence). Supporting input in 0CXB: Tags 0CVI (lemma-proper-pure), 0CX2 (lemma-when-universal-flattening), part (1), and 0CWX (situation-flat), defining the flat base-change functor; scheme representability: spaces-morphisms.tex Tag 03XX (proposition-locally-quasi-finite-separated-over-scheme), as invoked in 0CXB (theorem-existence). Subinput: Tag 0CX1 (theorem-flat-dimension-n-representable), specialized to a scheme base and universal purity (which implies the pure hypothesis); chart formulation of flatness in dimensions at least n: Tags 0CWS (lemma-pre-flat-dimension-n) and 0CWT (definition-flat-dimension-n). Subinput of the dimension induction: Tag 0CVV (spaces-divisors-lemma-relative-assassin-constructible) and Tag 05LW (morphisms-lemma-constructible-containing-open).",
+   "via": [
+    "lem-sfb-space-pure-dimension-flatness-representability",
+    "lem-sfb-space-proper-support-universal-flattening",
+    "lem-sfb-space-flat-proper-support-inverse-effectivity",
+    "lem-sfb-space-coherent-stack-general",
+    "lem-sfb-space-quot-representability",
+    "lem-sfb-space-hilbert-representability",
+    "lem-sfb-space-hom-representability",
+    "lem-sfb-curve-descent-isom-spaces",
+    "lem-sfb-nodal-curve-stack-smooth",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-space-assassin-containment-constructible",
+  "worker": "stage1",
+  "summary": "Followed 0CVV via an affine etale atlas, checked its finite presentation and the inverse-image open quasi-compactness, separated the scheme constructibility and fibre-assassin atlas inputs, and proved the generalization neighbourhood consequence with an existing spectral closure lemma. Statement unchanged; no Lean attachment.",
+  "blueprint": "Current latest sk-thm-sf-ctf-stability proof, proper/open direct images and compactification paragraph; supporting coherent-moduli/flattening chain inherited in blueprint.from, specifically 0CX1 dimension induction using 0CVV and 05LW. The inherited nearest blueprint ancestor is null, as confirmed by blueprint_refs.py ancestor.",
+  "tool_uses": [
+   {
+    "node": "lem-trf-scheme-zariski-etale-quasi-coherent-equivalence",
+    "why": "Identify the etale module on the scheme atlas with its quasi-coherent Zariski module and compare fibre pullbacks; the unit has no replacement for this site comparison."
+   },
+   {
+    "node": "lem-weil-pbc-spectral-proconstructible-closure-specialization",
+    "why": "For a constructible complement on an affine scheme, a closure point is a specialization of a point of that complement; a generic spectral topology tool for the final neighbourhood assertion."
+   },
+   {
+    "node": "lem-trf-space-representable-etale-scheme-tests",
+    "why": "A scheme map between two representable etale charts of a space is etale; used to see that the representable etale atlas p is locally of finite presentation in the chart-test sense. Generic foundation on algebraic spaces, no node of the unit states it."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-trf-scheme-zariski-etale-quasi-coherent-equivalence",
+  "lem-weil-pbc-spectral-proconstructible-closure-specialization",
+  "lem-trf-space-representable-etale-scheme-tests"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q112-c1744706a",
+  "group": "Q112",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q112-c1744706a (reviewer sub-agent of L); spot-checked: I read the item, both new nodes, every cited statement and the sources: 0CVV, 05KR, 0CUZ/0CUY, 05LW and 0903, plus the tags 06G5/073B/03XQ/03LZ/03M0/03M1/06VE/054C. The item's statement and stmt_deps are identical to live, where the item is still unsplit with no repair note, so this is an ordinary split. The statement is 0CVV plus the 05LW consequence, nothing weakened. Steps: 1 base-changes to an affine open (fp-locality, qc tests, fp-qcqs-source). 2 builds the affine atlas T->X (permanence, fp composition, qc test of H=p^{-1}W). 3 goes from N=p^*M to the Zariski module F (chart calculus, etale-Zariski equivalence with pullback). 4 reduces the containment using only the atlas node's image equality, both inclusions checked. 5 applies the scheme node. 6-7 are 05LW via the spectral closure lemma on the constructible complement. All correct. Fault C1 in step 2: 'etaleness gives local finite presentation' cited only definitions, but the chart-test lfp needs a scheme map between two representable etale charts to be etale. FIX: I wrote that argument out and cited lem-trf-space-representable-etale-scheme-tests and def-weil-etale-morphism. I also cited lem-sfb-space-quasicompact-affine-tests so that space-qc of H->B gives scheme-qc. proof_deps were recomputed and the trf lemma was added to split_report.tool_uses as generic space foundation. New node lem-sfb-scheme-assassin-open-constructible is 05KR over an affine base: true (054C), all hypotheses kept, strictly smaller than the item. New node lem-sfb-space-fibre-assassin-etale-atlas is true: forward by definition, reverse via U x T_y and etale invariance of Ass on locally Noetherian fibres. Its hypotheses match def-sfb-space-universal-relative-purity, and it is more than a restatement (one atlas instead of all charts). No duplicate was found by rg -L for the tags and assassin terms, and none in Q118's parallel delivery. Batch-5: every listed trf citation is a general definition, or reaches sec-trace-formula only through def-trf-algebraic-space; none is part of the trace formula or Poincare duality. Edge cases: X empty, M=0, W=X, W empty, a non-Noetherian base. No SGA.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SpaceAssassinContainmentConstructible",
+  "declaration": "AlgebraicGeometry.AlgebraicSpace.fibreAssassinContainment_locallyConstructible",
+  "declarations": [
+   "AlgebraicGeometry.AlgebraicSpace.fibreAssassinContainmentLocus",
+   "AlgebraicGeometry.AlgebraicSpace.fibreAssassinContainment_locallyConstructible"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/SpaceAssassinContainmentConstructible.lean",
+  "statement": "theorem fibreAssassinContainment_locallyConstructible {X : AlgebraicSpace (Spec (CommRingCat.of (ULift.{u} ℤ)))} (Y : Over (Spec (CommRingCat.of (ULift.{u} ℤ)))) (f : X ⟶ schemeSpace Y) (_hfp : MapIsLocallyOfFinitePresentation f ∧ MapIsQuasiCompact f.hom.hom ∧ MapIsQuasiCompact (pullback.diagonal f.hom.hom)) (M : X.QCoh) (_hM : SheafOfModules.IsFinitePresentation M.obj) (W : AlgebraicSpace (Spec (CommRingCat.of (ULift.{u} ℤ)))) (j : W ⟶ X) (_hj : IsRepresentableWith (fun _ _ p ↦ IsOpenImmersion p.left) j.hom.hom) (_hW : MapIsQuasiCompact (j.hom.hom ≫ f.hom.hom)) : (∀ y : Y.left, ∃ V : Y.left.Opens, y ∈ V ∧ IsAffineOpen V ∧ Topology.IsConstructible ((Subtype.val : V → Y.left) ⁻¹' fibreAssassinContainmentLocus Y f M.obj (pointImage j.hom.hom))) ∧ (∀ y : Y.left, (∀ t : Y.left, y ∈ closure ({t} : Set Y.left) → t ∈ fibreAssassinContainmentLocus Y f M.obj (pointImage j.hom.hom)) → ∃ V : Y.left.Opens, y ∈ V ∧ (V : Set Y.left) ⊆ fibreAssassinContainmentLocus Y f M.obj (pointImage j.hom.hom))",
+  "branch": "newtargets-dag",
+  "by": "Q67",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-54f481252",
+  "group": "Q67",
+  "result": "pass",
+  "note": "Statement matches Stacks 0CVV + 05LW clause by clause: finite presentation as lfp ∧ qc ∧ qc diagonal (MapIs* defs), M : X.QCoh with Mathlib SheafOfModules.IsFinitePresentation, open W via j with IsRepresentableWith IsOpenImmersion, MapIsQuasiCompact (j ≫ f), and E as the fibre of the existing relativeAssassin over y contained in pointImage j (0CVV proof parenthesis; same idiom as IsImpurityOverScheme). Local constructibility uses the node's affine-open-neighbourhood form; the 05LW clause has the correct generalization direction. No extra hypotheses; the free universe of IsFinitePresentation follows the dependency convention. Only the node's lean field changed; lean.statement is verbatim; all imports exist in side-live; the helper def is real data; docstrings carry source, blueprint and steps 1-7; only sorry; report has Worker report and Second reading sections. Edge cases (empty Y/X/W, M=0, W=X, non-qs Y) are fine. Note: the def-a1-space-open-subspace OpenSubspace node exists but is not cited; the open-immersion form is equivalent, used in ~10 landed modules, and S2 cannot add stmt_deps, so not a fault. No compile run: no file changed."
+ }
+}

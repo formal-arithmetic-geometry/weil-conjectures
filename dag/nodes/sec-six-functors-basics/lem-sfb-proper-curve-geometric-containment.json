@@ -1,0 +1,145 @@
+{
+ "id": "lem-sfb-proper-curve-geometric-containment",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: The Deligne--Mumford locus in the stack of proper curves. Supporting input: Geometric objects detect containment of open curve substacks.",
+   "via": [
+    "lem-sfb-curve-stack-infinitesimal-dm-locus",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "kind": "statement",
+ "title": "Geometric objects detect containment of open curve substacks",
+ "statement": "Let k be a field [def-weil-field] and C the category of proper algebraic-space curve families [def-sfb-proper-curve-moduli]. Let U,V be full open substacks of C [def-sfb-open-moduli-substack]. If every object X of V over Spec Omega, for each algebraically closed field Omega and map Spec Omega -> Spec k [def-weil-algebraic-closure], belongs to U, then V is contained in U, meaning membership implication on all objects over all k-schemes.",
+ "source": {
+  "document": "literature/stacks-project/stacks-properties.tex",
+  "place": "Lemma lemma-open-substacks (Tag 06FJ), scheme-pullback proof of inclusion detection"
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-sfb-proper-curve-moduli",
+  "def-sfb-open-moduli-substack",
+  "def-weil-algebraic-closure"
+ ],
+ "proof": [
+  {
+   "text": "For an object Y of V over T, form its fibred Yoneda functor using cartesian lifts. The definition of the open U represents its two-pullback by an open immersion W -> T. Membership of any pullback object in U is equivalent to lifting its classifying functor into this open: evaluate a factorization at the identity object; conversely use closure of U under all arrows.",
+   "uses": [
+    "def-sfb-proper-curve-moduli",
+    "def-sfb-open-moduli-substack"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/stacks-properties.tex",
+    "place": "Lemma lemma-open-substacks (Tag 06FJ), scheme-pullback proof of inclusion detection"
+   }
+  },
+  {
+   "text": "Every point t of T has a geometric lift from the spectrum of an algebraic closure of its residue field. The pullback object of Y lies in V by stability under arrows, hence in U by assumption. Thus this geometric point lifts to W and t lies in the image of W. The open immersion W -> T is surjective, hence an isomorphism. Evaluation at the identity object of T then puts Y in U. This argument applies also when T is empty.",
+   "uses": [
+    "def-sfb-open-moduli-substack",
+    "def-weil-algebraic-closure"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/stacks-properties.tex",
+    "place": "Lemma lemma-open-substacks (Tag 06FJ), scheme-pullback proof of inclusion detection"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sfb-proper-curve-moduli",
+  "def-sfb-open-moduli-substack",
+  "def-weil-algebraic-closure"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/stacks-properties.tex",
+  "place": "Lemma lemma-open-substacks (Tag 06FJ), scheme-pullback proof of inclusion detection"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Containment between open substacks of proper curves is detected on all algebraically closed field valued objects",
+   "results": "AlgebraicGeometry.exists_eq_pow_mul_of_is_compact_of_quasi_separated_space_aux; AlgebraicGeometry.Scheme.Hom.image_le_image_iff; AlgebraicGeometry.opensRestrict; AlgebraicGeometry.coe_opensRestrict_symm_apply; AlgebraicGeometry.Scheme.basicOpen_restrict; AlgebraicGeometry.IsProper.instMorphismRestrict; AlgebraicGeometry.coe_opensRestrict_apply_coe; AlgebraicGeometry.Scheme.germ_stalkClosedPointTo_assoc",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme and group-action results, not the project full-substack/curve comparison"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An open substack of an algebraic stack is algebraic and geometric points detect containment of open substacks",
+   "results": "AlgebraicGeometry.Scheme.Opens.exists_toScheme; AlgebraicGeometry.Scheme.Opens.forall_toScheme; AlgebraicGeometry.Scheme.Opens.mem_ι_image_iff; AlgebraicGeometry.opensRestrict; AlgebraicGeometry.Scheme.Opens.ι_image_le; AlgebraicGeometry.instIsOpenImmersionHomOfLE; AlgebraicGeometry.Scheme.Opens; AlgebraicGeometry.Scheme.Opens.instCoeOut",
+   "date": "2026-10-23",
+   "verdict": "no match for the project moduli interface"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Scheme.SpecToEquivOfField",
+   "results": "AlgebraicGeometry.Scheme.SpecToEquivOfField; AlgebraicGeometry.Scheme.SpecToEquivOfField_apply_fst; AlgebraicGeometry.Scheme.SpecToEquivOfField_symm_apply; AlgebraicGeometry.Scheme.SpecToEquivOfField_apply_snd; AlgebraicGeometry.Scheme.isConservativeFamilyOfPoints_pointSmallEtale'",
+   "date": "2026-10-23",
+   "verdict": "no match; general scheme/category API does not state the project moduli comparison"
+  },
+  {
+   "tool": "grep",
+   "query": "IsAlgebraicModuliStack|IsModuliAutomorphismSpace|ProperCurveFamily",
+   "results": "[grep] OK 0 hit(s). Direct rg also checked OpenModuliSubstack in Mathlib/AlgebraicGeometry and Mathlib/CategoryTheory/FiberedCategory, with no hits.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.CurveStackInfinitesimalDmLocus",
+  "date": "2026-10-23",
+  "group": "S5"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.ProperCurveGeometricContainment",
+  "file": "lean/Sheaf/AlgebraicGeometry/ProperCurveGeometricContainment.lean",
+  "declaration": "AlgebraicGeometry.ProperCurveModuli.open_containment_of_geometric_points",
+  "statement": "theorem ProperCurveModuli.open_containment_of_geometric_points\n    {k : Type u} [Field k]\n    (U V : OpenModuliSubstack (ProperCurveModuli.category (Spec (.of k))))\n    (h : ∀ (Ω : Type u) [Field Ω] [IsAlgClosed Ω]\n      (a : Spec (.of Ω) ⟶ Spec (.of k)) (X : ProperCurveFamily (Over.mk a)),\n      V.property ⟨Over.mk a, X⟩ → U.property ⟨Over.mk a, X⟩) :\n    V.IsContainedIn U",
+  "branch": "sheaf-dag",
+  "by": "S5",
+  "date": "2026-10-23",
+  "existing": false
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S5",
+  "result": "pass",
+  "landing": "20261024T020437-L-2604731",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S5",
+  "result": "pass",
+  "landing": "20261024T020437-L-2604731",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

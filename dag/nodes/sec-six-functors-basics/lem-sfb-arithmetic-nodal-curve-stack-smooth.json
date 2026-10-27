@@ -1,0 +1,345 @@
+{
+ "id": "lem-sfb-arithmetic-nodal-curve-stack-smooth",
+ "kind": "statement",
+ "title": "Smooth nodal curve stack over an arbitrary scheme",
+ "statement": "Let $S$ be a scheme [def-pc-scheme]. Let $\\mathfrak C_S$ be the fibred groupoid of proper flat finitely presented curve families of algebraic spaces and cartesian arrows in [def-sfb-proper-curve-moduli]. Let $\\mathfrak N_S$ be its full subcategory of families with nonempty nodal geometric fibres, in the precise sense of [def-sfb-curve-moduli-groupoids]. Then $\\mathfrak C_S$ is an algebraic stack, $\\mathfrak N_S$ is an open algebraic substack, and $\\mathfrak N_S$ is smooth over $S$, with algebraicity and smoothness in [def-sfb-algebraic-moduli-stack]. Equivalently, for every scheme $W$ and smooth morphism $W\\to\\mathfrak N_S$ representable by algebraic spaces, the composite $W\\to S$ is smooth; no surjectivity of this morphism is required. An open substack means a full subcategory whose pullback by every scheme-valued object is represented by an open subscheme [def-weil-open-immersion]. The full subcategory of $\\mathfrak N_S$ consisting of smooth families is also open: for every $X\\to T$ in $\\mathfrak N_S$, there is an open $T^{\\mathrm{sm}}\\subseteq T$ such that $X_{T'}\\to T'$ is smooth if and only if $T'\\to T$ factors through $T^{\\mathrm{sm}}$; formation of this open commutes with arbitrary base change. Smooth scheme morphisms use [def-sbc-smooth-morphisms], and scheme and sheaf fibre products use [def-pc-fibre-product, def-sfb-proper-curve-moduli]. No connectedness, genus, field-base, Noetherian or characteristic hypothesis is imposed.",
+ "source": {
+  "document": "literature/stacks-project/moduli-curves.tex",
+  "place": "Tags 0DSY (lemma-nodal-curves), 0E00 (lemma-nodal-curves-smooth), and 0E86 (lemma-smooth-dense, open smooth-family substack); algebraicity: quot.tex Tag 0D5A (theorem-curves-algebraic). Arbitrary S is their base change from Spec Z; chart formulation by stacks-morphisms.tex smooth composition and definition-smooth (Tags 075U, 075V)."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-sfb-proper-curve-moduli",
+  "def-sfb-curve-moduli-groupoids",
+  "def-sfb-algebraic-moduli-stack",
+  "def-weil-open-immersion",
+  "def-sbc-smooth-morphisms",
+  "def-pc-fibre-product",
+  "def-sfb-open-moduli-substack"
+ ],
+ "proof": [
+  {
+   "text": "Write $\\mathcal C$ for the absolute proper-curve groupoid over $\\operatorname{Spec}\\mathbf Z$. By [lem-sfb-curve-descent-isom-spaces] it is an fppf stack, hence an etale stack, and each Isom sheaf is an algebraic space; this is exactly representability of its diagonal. The size convention [def-weil-size-convention] supplies the size bound in Artin's criterion: a finite-type field over $\\mathbf Z$ is countable, and finite-presentation proper algebraic spaces have presentations by finitely many affine charts and finitely many overlap charts with finitely presented algebras and structure maps. These are finite lists of countable algebraic data; isomorphisms are bounded by maps between such presentations. A single infinite cardinal in the chosen larger universe bounds these presentations uniformly in the finite-type field. This checks the size premise, without asserting existence of an atlas.",
+   "uses": [
+    "lem-sfb-curve-descent-isom-spaces",
+    "def-weil-size-convention"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/quot.tex",
+    "place": "Tags 0D52 (lemma-curves-stack), 0D53 (lemma-curves-diagonal); artin.tex section-axioms [-1]."
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-artin-representable-diagonal-criterion] over $\\mathbf Z$. Step 1 gives its stack, diagonal and size premises. [lem-sfb-curve-limit-preservation] gives precisely its small directed affine-limit equivalence, including arrows and eventual equality. [lem-sfb-curve-infinitesimal-pushout] gives the pushout equivalence, in particular for its Artinian local tests. [lem-sfb-curve-tangent-finiteness] gives both required finite-dimensional spaces over every finite-type field. [lem-sfb-curve-formal-effectivity] gives effectivity over the complete Noetherian local rings in the criterion, without restricting the residue field. [lem-sfb-curve-openness-versality] gives its Artinian lifting form of openness at finite-type points. Thus $\\mathcal C$ is algebraic.",
+   "uses": [
+    "lem-sfb-artin-representable-diagonal-criterion",
+    "lem-sfb-curve-limit-preservation",
+    "lem-sfb-curve-infinitesimal-pushout",
+    "lem-sfb-curve-tangent-finiteness",
+    "lem-sfb-curve-formal-effectivity",
+    "lem-sfb-curve-openness-versality"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/quot.tex",
+    "place": "Tag 0D5A (theorem-curves-algebraic), absolute case, with Tags 0D55--0D59."
+   }
+  },
+  {
+   "text": "For any scheme $S$, an object of $\\mathcal C\\times_{\\operatorname{Spec}\\mathbf Z}S$ over $T$ is exactly a proper curve family over $T$ and a map $T\\to S$; arrows are exactly the cartesian arrows preserving that map. This identifies this 2-fibre product with $\\mathfrak C_S$ of [def-sfb-proper-curve-moduli]. Apply [lem-sfb-algebraic-stack-fibre-products] to $\\mathcal C$, $S$ and $\\operatorname{Spec}\\mathbf Z$, viewing schemes as their representable stacks. Hence $\\mathfrak C_S$ is algebraic for arbitrary $S$.",
+   "uses": [
+    "def-sfb-proper-curve-moduli",
+    "lem-sfb-algebraic-stack-fibre-products"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/quot.tex",
+    "place": "remark-curves-base-change; Tag 0D5A, relative case."
+   }
+  },
+  {
+   "text": "For a family $f:X\\to T$ let $V\\subseteq X$ be the nodal relative-dimension-one open supplied by [lem-sfb-space-nodal-locus-base-change], and put $B=|X|\\setminus|V|$. Set $T_{\\rm nod}=T\\setminus |f|(B)$. Properness makes $|f|(B)$ closed. The nodal-locus statement says precisely that every geometric fibre over $T_{\\rm nod}$ is either empty or pure one-dimensional with only smooth points and ordinary nodes, with the etale-chart interpretation in [def-sfb-curve-moduli-groupoids]. Formation of this open commutes with arbitrary base change: $V$ pulls back by the cited lemma; over a point $t'$ above $t$, the bad fibre is empty exactly when the original bad fibre is empty. Indeed a field-valued point in a nonempty bad fibre remains nonempty after a field extension, since the tensor product of two field extensions of $\\kappa(t)$ is nonzero; a prime of that tensor product supplies a point. Thus the inverse image of $|f|(B)$ is the bad-image subset for the pulled-back family. This also proves the universal factorization criterion, testing the bad locus on geometric points.",
+   "uses": [
+    "lem-sfb-space-nodal-locus-base-change",
+    "def-sfb-curve-moduli-groupoids"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/moduli-curves.tex",
+    "place": "Tag 0DSY (lemma-nodal-curves), complement of the proper image; spaces-more-morphisms.tex Tag 0DSH."
+   }
+  },
+  {
+   "text": "The nonempty-fibre locus $T_{\\ne\\varnothing}=|f|(|X|)$ is open by [lem-sfb-flat-lfp-space-universally-open] and closed by properness. It commutes with arbitrary base change by the same field-tensor-product argument as in step 4. Therefore $T_N=T_{\\rm nod}\\cap T_{\\ne\\varnothing}$ is open and compatible with every base change, and $T'\\to T$ factors through it if and only if its family has nonempty nodal geometric fibres. These compatible opens show that the full groupoid $\\mathfrak N_S\\subseteq\\mathfrak C_S$ is an open substack. Descent is the restriction of descent in $\\mathfrak C_S$ because these opens pull back. Its diagonal has the same Isom spaces, and pulling back a scheme atlas of $\\mathfrak C_S$ restricts that atlas to an open scheme. This gives a smooth surjective atlas of $\\mathfrak N_S$, hence its algebraicity. Smoothness of the atlas projection is unchanged on an open source: in the local finite-presentation and infinitesimal lifting definition [def-sbc-smooth-morphisms], localization preserves finite presentation and a nilpotent thickening has the same underlying points, so any local lift remains in that open.",
+   "uses": [
+    "lem-sfb-flat-lfp-space-universally-open",
+    "def-sbc-smooth-morphisms"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/moduli-curves.tex",
+    "place": "Tag 0DSY; nonempty-fibre refinement by spaces-morphisms.tex Tag 042S."
+   }
+  },
+  {
+   "text": "Work again over $\\operatorname{Spec}\\mathbf Z$ and let $C/\\Omega$ be a geometric fibre belonging to $\\mathfrak N_{\\mathbf Z}$, with $\\Omega$ algebraically closed. Properness gives separatedness and finite type, and the dimension is one, so [lem-sfb-separated-space-dimension-one-scheme] makes $C$ a scheme. Its identity etale chart in [def-sfb-curve-moduli-groupoids] is pure one-dimensional and every closed point is smooth or an ordinary node. [lem-trf-nodal-curve-lci-criterion] therefore gives that $C$ is a local complete intersection and that its first-Fitting singular subscheme $Z_C$ is unramified over $\\Omega$. Apply [lem-trf-dth-fitting-smooth-locus] with $d=1$: flatness holds over the field, local finite presentation holds for the family, and geometric purity is part of the nodal predicate, including its algebraically closed extensions. Thus $|Z_C|$ is exactly the nonsmooth locus.",
+   "uses": [
+    "lem-sfb-separated-space-dimension-one-scheme",
+    "def-sfb-curve-moduli-groupoids",
+    "lem-trf-nodal-curve-lci-criterion",
+    "lem-trf-dth-fitting-smooth-locus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/moduli-curves.tex",
+    "place": "Tag 0E00 (lemma-nodal-curves-smooth), inclusion in lci+; curves.tex Tag 0C4E."
+   }
+  },
+  {
+   "text": "The field $\\Omega$ is Noetherian. By [pqf-lem-locnoeth-lft], $C$ is locally Noetherian, and finite type over the field makes it quasi-compact, hence Noetherian. The closed subscheme $Z_C$ is locally of finite type over $\\Omega$, since locally its algebra is a quotient of a finite-type $\\Omega$-algebra. By [lem-trf-unramified-over-field-local-criterion], every point of $Z_C$ is closed. A closed immersion carries it to a closed point of $C$. Now [lem-sc-noetherian-closed-points-finite] applies to the closed subset $|Z_C|$ of $C$, proving finiteness. Hence $C$ is lci and smooth except at finitely many points.",
+   "uses": [
+    "pqf-lem-locnoeth-lft",
+    "lem-trf-unramified-over-field-local-criterion",
+    "lem-sc-noetherian-closed-points-finite"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/moduli-curves.tex",
+    "place": "Tag 0E00, checking the finite singular set in Tag 0DZX (lemma-big-smooth-part-curves)."
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-isolated-lci-curve-smooth-open] to the absolute algebraic stack $\\mathcal C$ proved algebraic in step 2. It gives an open $\\mathcal L\\subseteq\\mathcal C$ smooth over $\\mathbf Z$. Steps 6 and 7 verify its field-point characterization for every geometric point of $\\mathfrak N_{\\mathbf Z}$. For any family over $T$ in this nodal stack, the pullback of $\\mathcal L$ is therefore an open of $T$ containing all its geometric points, so equals $T$. Thus $\\mathfrak N_{\\mathbf Z}$ factors through $\\mathcal L$ and is an open substack of it. Restrict a smooth scheme atlas $A\\to\\mathcal L$ with smooth composite $A\\to\\operatorname{Spec}\\mathbf Z$ to this open. Its restriction remains a smooth surjective atlas and its composite remains smooth by the open-restriction lifting argument of step 5. This proves $\\mathfrak N_{\\mathbf Z}$ smooth over $\\mathbf Z$.",
+   "uses": [
+    "lem-sfb-isolated-lci-curve-smooth-open"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/moduli-curves.tex",
+    "place": "Tag 0E00, proof via Tag 0DZX."
+   }
+  },
+  {
+   "text": "The object-and-arrow identification of step 3 identifies $\\mathfrak N_S$ with $\\mathfrak N_{\\mathbf Z}\\times_{\\operatorname{Spec}\\mathbf Z}S$: the nodal predicate tests the same geometric fibres. Apply [lem-sfb-stack-smooth-atlas-base-change] to this base change, with no restriction on $S\\to\\operatorname{Spec}\\mathbf Z$. It gives smoothness over $S$. The same lemma gives exactly the asserted test by every representable smooth $W\\to\\mathfrak N_S$, including nonsurjective charts. Conversely that test applies to a smooth surjective scheme atlas, so implies smoothness in the atlas sense.",
+   "uses": [
+    "lem-sfb-stack-smooth-atlas-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/stacks-morphisms.tex",
+    "place": "Tags 06FM (lemma-local-source-target), 075U (definition-smooth), 075W (lemma-base-change-smooth)."
+   }
+  },
+  {
+   "text": "Finally, for $f:X\\to T$ in $\\mathfrak N_S$, use [lem-sfb-flat-space-smooth-locus] to form the maximal smooth open $U\\subseteq X$, which commutes with arbitrary base change because $f$ is flat and locally finitely presented. Put $T^{\\rm sm}=T\\setminus|f|(|X|\\setminus|U|)$. It is open by properness. Under $T'\\to T$, the complement $|X|\\setminus|U|$ pulls back to the nonsmooth locus, and its image pulls back by the field-tensor-product argument of step 4. Consequently $X_{T'}\\to T'$ is smooth exactly when this pulled-back complement is empty, equivalently when $T'\\to T$ factors through $T^{\\rm sm}$. This proves both the full-subcategory openness and its arbitrary-base-change clause. No genus or connectedness bound, and no field or Noetherian condition on the base, has been used.",
+   "uses": [
+    "lem-sfb-flat-space-smooth-locus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/moduli-curves.tex",
+    "place": "Tag 0DZZ (lemma-smooth-curves), first proof paragraph; morphisms.tex Tag 02V4, case (1)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sbc-smooth-morphisms",
+  "def-sfb-curve-moduli-groupoids",
+  "def-sfb-proper-curve-moduli",
+  "def-weil-size-convention",
+  "lem-sc-noetherian-closed-points-finite",
+  "lem-sfb-algebraic-stack-fibre-products",
+  "lem-sfb-artin-representable-diagonal-criterion",
+  "lem-sfb-curve-descent-isom-spaces",
+  "lem-sfb-curve-formal-effectivity",
+  "lem-sfb-curve-infinitesimal-pushout",
+  "lem-sfb-curve-limit-preservation",
+  "lem-sfb-curve-openness-versality",
+  "lem-sfb-curve-tangent-finiteness",
+  "lem-sfb-flat-lfp-space-universally-open",
+  "lem-sfb-flat-space-smooth-locus",
+  "lem-sfb-isolated-lci-curve-smooth-open",
+  "lem-sfb-separated-space-dimension-one-scheme",
+  "lem-sfb-space-nodal-locus-base-change",
+  "lem-sfb-stack-smooth-atlas-base-change",
+  "lem-trf-dth-fitting-smooth-locus",
+  "lem-trf-nodal-curve-lci-criterion",
+  "lem-trf-unramified-over-field-local-criterion",
+  "pqf-lem-locnoeth-lft"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/moduli-curves.tex",
+  "place": "Tags 0DSY, 0E00 and 0DZZ; absolute algebraicity from quot.tex Tag 0D5A, followed by its remark-curves-base-change."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The stack of proper flat families of nodal algebraic curves is algebraic and smooth over the integers",
+   "results": "{\"t\": \"2026-10-23T11:50:41Z\", \"tool\": \"leanfinder\", \"query\": \"The stack of proper flat families of nodal algebraic curves is algebraic and smooth over the integers\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.instIsMultiplicativeSchemeIsSmoothOfRelativeDimensionOfNatNat\", \"AlgebraicGeometry.IsSmooth\", \"AlgebraicGeometry.IsSmoothOfRelativeDimension\", \"AlgebraicGeometry.instIsSmoothOfRelativeDimensionOfNatNatCompScheme\", \"AlgebraicGeometry.instIsStableUnderCompositionSchemeIsSmooth\", \"AlgebraicGeometry.isSmooth_isStableUnderBaseChange\", \"AlgebraicGeometry.instLocallyOfFinitePresentationOfIsSmooth\", \"AlgebraicGeometry.isSmooth_comp\"], \"digest\": \"941a4ccd56b31509\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: read the returned hits; only scheme morphism properties, generic compactness, elliptic-curve isomorphisms or interpolation occur, not the specified moduli theorem"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Nodal curve families define a smooth algebraic moduli stack over Spec Z",
+   "results": "{\"t\": \"2026-10-23T11:50:39Z\", \"tool\": \"leansearch\", \"query\": \"Nodal curve families define a smooth algebraic moduli stack over Spec Z\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsSmooth.casesOn\", \"AlgebraicGeometry.IsSmooth.recOn\", \"AlgebraicGeometry.isSmoothOfRelativeDimension_comp\", \"AlgebraicGeometry.IsSmooth.mk\", \"Algebra.smoothLocus\", \"AlgebraicGeometry.specZIsTerminal\", \"LibraryNote.Design_choices_about_smooth_algebraic_structures\", \"AlgebraicGeometry.IsSmoothOfRelativeDimension.isSmooth\"], \"digest\": \"abe1ca8c7c7caa94\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: read the returned hits; only scheme morphism properties, generic compactness, elliptic-curve isomorphisms or interpolation occur, not the specified moduli theorem"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Scheme\", \"Smooth\"",
+   "results": "{\"t\": \"2026-10-23T11:50:39Z\", \"tool\": \"loogle\", \"query\": \"\\\"Scheme\\\", \\\"Smooth\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"AlgebraicGeometry.instIsStableUnderCompositionSchemeSmooth\", \"AlgebraicGeometry.instRespectsSchemeSmoothIsOpenImmersion\", \"AlgebraicGeometry.instIsMultiplicativeSchemeSmoothOfRelativeDimensionOfNatNat\", \"AlgebraicGeometry.Scheme.Hom.smoothLocus\", \"AlgebraicGeometry.instSmoothFstScheme\", \"AlgebraicGeometry.instSmoothSndScheme\", \"AlgebraicGeometry.instSmoothOfRelativeDimensionOfNatNatCompScheme\", \"AlgebraicGeometry.instSmoothOfRelativeDimensionFstScheme\"], \"digest\": \"b49d7266ba0060cf\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: read the returned hits; only scheme morphism properties, generic compactness, elliptic-curve isomorphisms or interpolation occur, not the specified moduli theorem"
+  },
+  {
+   "tool": "grep",
+   "query": "[Nn]odal|[Cc]urvesstack|[Mm]oduli",
+   "results": "{\"t\": \"2026-10-23T11:50:38Z\", \"tool\": \"grep\", \"query\": \"[Nn]odal|[Cc]urvesstack|[Mm]oduli\", \"sub\": \"\", \"ok\": true, \"n_hits\": 6, \"note\": \"\", \"top\": [\"Mathlib/LinearAlgebra/Lagrange.lean\", \"Mathlib/LinearAlgebra/Lagrange.lean\", \"Mathlib/LinearAlgebra/Lagrange.lean\", \"Mathlib/LinearAlgebra/Lagrange.lean\", \"Mathlib/LinearAlgebra/Lagrange.lean\", \"Mathlib/AlgebraicGeometry/EllipticCurve/Weierstrass.lean\"], \"digest\": \"a67580e450249252\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: read the returned hits; only scheme morphism properties, generic compactness, elliptic-curve isomorphisms or interpolation occur, not the specified moduli theorem"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The groupoid of stable curves of fixed genus over the integers is a smooth algebraic stack",
+   "results": "{\"t\": \"2026-10-23T11:45:55Z\", \"tool\": \"leanfinder\", \"query\": \"The groupoid of stable curves of fixed genus over the integers is a smooth algebraic stack\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.instIsStableUnderCompositionSchemeIsSmooth\", \"AlgebraicGeometry.instIsMultiplicativeSchemeIsSmoothOfRelativeDimensionOfNatNat\", \"AlgebraicGeometry.IsSmooth\", \"AlgebraicGeometry.instIsSmoothOfRelativeDimensionOfNatNatCompScheme\", \"AlgebraicGeometry.IsSmoothOfRelativeDimension\", \"AlgebraicGeometry.IsEtale.instIsSmooth\", \"AlgebraicGeometry.instIsSmoothOfRelativeDimensionOfNatNatOfIsOpenImmersion\", \"AlgebraicGeometry.instIsSmoothOfIsOpenImmersion\"], \"digest\": \"476b2d1e45b04d32\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: read the returned hits; only scheme morphism properties, generic compactness, elliptic-curve isomorphisms or interpolation occur, not the specified moduli theorem"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The moduli stack of stable nodal genus g curves is smooth over Spec Z",
+   "results": "{\"t\": \"2026-10-23T11:45:48Z\", \"tool\": \"leansearch\", \"query\": \"The moduli stack of stable nodal genus g curves is smooth over Spec Z\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsSmooth.casesOn\", \"AlgebraicGeometry.IsSmooth.recOn\", \"AlgebraicGeometry.isSmoothOfRelativeDimension_comp\", \"AlgebraicGeometry.IsSmooth.mk\", \"AlgebraicGeometry.IsSmoothOfRelativeDimension.mk\", \"AlgebraicGeometry.IsSmooth\", \"AlgebraicGeometry.instLocallyOfFinitePresentationOfIsSmooth\", \"AlgebraicGeometry.IsSmoothOfRelativeDimension\"], \"digest\": \"f32ce7a49b5628aa\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: read the returned hits; only scheme morphism properties, generic compactness, elliptic-curve isomorphisms or interpolation occur, not the specified moduli theorem"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Families of proper nodal curves form a smooth algebraic stack over the integers",
+   "results": "{\"t\": \"2026-10-23T13:39:26Z\", \"tool\": \"leansearch\", \"query\": \"Families of proper nodal curves form a smooth algebraic stack over the integers\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsSmooth.casesOn\", \"AlgebraicGeometry.IsSmooth.recOn\", \"AlgebraicGeometry.isSmoothOfRelativeDimension_comp\", \"AlgebraicGeometry.IsSmooth.mk\", \"AlgebraicGeometry.instLocallyOfFinitePresentationOfIsSmooth\", \"LibraryNote.Design_choices_about_smooth_algebraic_structures\", \"AlgebraicGeometry.IsSmoothOfRelativeDimension.isSmooth\", \"AlgebraicGeometry.IsProper.toLocallyOfFiniteType\"], \"digest\": \"3f39fbf8c9d2bbdc\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme smoothness and its permanence only; no algebraic-stack atlas or curve-moduli statement"
+  },
+  {
+   "tool": "grep",
+   "query": "[Nn]odal|[Cc]urveStack|[Mm]oduli[Ss]tack",
+   "results": "{\"t\": \"2026-10-23T13:39:26Z\", \"tool\": \"grep\", \"query\": \"[Nn]odal|[Cc]urveStack|[Mm]oduli[Ss]tack\", \"sub\": \"\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"Mathlib/LinearAlgebra/Lagrange.lean\", \"Mathlib/LinearAlgebra/Lagrange.lean\", \"Mathlib/LinearAlgebra/Lagrange.lean\", \"Mathlib/LinearAlgebra/Lagrange.lean\", \"Mathlib/LinearAlgebra/Lagrange.lean\"], \"digest\": \"bdf58c07673b6aea\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme smoothness and its permanence only; no algebraic-stack atlas or curve-moduli statement"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The moduli stack of proper flat nodal curves over an arbitrary base scheme is algebraic and smooth",
+   "results": "{\"t\": \"2026-10-23T13:39:30Z\", \"tool\": \"leanfinder\", \"query\": \"The moduli stack of proper flat nodal curves over an arbitrary base scheme is algebraic and smooth\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.instIsMultiplicativeSchemeIsSmoothOfRelativeDimensionOfNatNat\", \"AlgebraicGeometry.IsSmooth\", \"AlgebraicGeometry.IsSmoothOfRelativeDimension\", \"AlgebraicGeometry.instIsSmoothOfRelativeDimensionOfNatNatCompScheme\", \"AlgebraicGeometry.Scheme.Etale\", \"AlgebraicGeometry.instIsStableUnderCompositionSchemeIsSmooth\", \"AlgebraicGeometry.IsEtale.instIsSmooth\", \"AlgebraicGeometry.isSmooth_isStableUnderBaseChange\"], \"digest\": \"6218eb96c14243ea\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme smoothness and its permanence only; no algebraic-stack atlas or curve-moduli statement"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-stable-moduli-regular-universal-atlas",
+  "date": "2026-10-23",
+  "group": "Q51"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Scheme representability of the stable abelian-level normalization. Supporting input: freeness at normalized boundary branches. Comparison of the full cohomology frame in the item with Deligne 3.3--3.5 Picard torsion frames; relative Picard existence for the pulled-back stable family. Supporting input for the present split: A relatively ample line module on the stable-curve multidegree-zero Picard space. Supporting input: Regular universal etale presentation of the stable moduli groupoid. Geometric prerequisite: algebraicity and unobstructedness of all nodal curve families, before imposing stability or selecting an atlas.",
+   "via": [
+    "lem-sfb-stable-moduli-regular-universal-atlas",
+    "lem-sfb-stable-picard-theta-ampleness",
+    "lem-sfb-stable-relative-picard-kummer",
+    "lem-sfb-stable-level-versal-branch-freeness",
+    "lem-sfb-stable-abelian-level-normalization",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-arithmetic-nodal-curve-stack-smooth",
+  "worker": "stage1",
+  "summary": "Proved absolute algebraicity from the existing Artin inputs, formed the nodal and nonempty opens, verified inclusion in the isolated-lci smooth open, and base changed to arbitrary S. Added only a general smooth-atlas/base-change theorem for algebraic stacks; the existing comparison node is DM-only. Proved the smooth-family open directly, including arbitrary base change. No statement change.",
+  "blueprint": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Scheme representability of the stable abelian-level normalization. Supporting input: freeness at normalized boundary branches. Comparison of the full cohomology frame in the item with Deligne 3.3--3.5 Picard torsion frames; relative Picard existence for the pulled-back stable family. Supporting input for the present split: A relatively ample line module on the stable-curve multidegree-zero Picard space. Supporting input: Regular universal etale presentation of the stable moduli groupoid. Geometric prerequisite: algebraicity and unobstructedness of all nodal curve families, before imposing stability or selecting an atlas.",
+  "tool_uses": [
+   {
+    "node": "pqf-lem-locnoeth-lft",
+    "why": "Generic scheme/curve input used as stated to verify isolated nodal singularities; the unit has no arithmetic curve-moduli replacement."
+   },
+   {
+    "node": "lem-trf-nodal-curve-lci-criterion",
+    "why": "Generic scheme/curve input used as stated to verify isolated nodal singularities; the unit has no arithmetic curve-moduli replacement."
+   },
+   {
+    "node": "lem-trf-dth-fitting-smooth-locus",
+    "why": "Generic scheme/curve input used as stated to verify isolated nodal singularities; the unit has no arithmetic curve-moduli replacement."
+   },
+   {
+    "node": "lem-trf-unramified-over-field-local-criterion",
+    "why": "Generic scheme/curve input used as stated to verify isolated nodal singularities; the unit has no arithmetic curve-moduli replacement."
+   },
+   {
+    "node": "lem-sc-noetherian-closed-points-finite",
+    "why": "Generic scheme/curve input used as stated to verify isolated nodal singularities; the unit has no arithmetic curve-moduli replacement."
+   }
+  ]
+ },
+ "tool_uses": [
+  "pqf-lem-locnoeth-lft",
+  "lem-trf-nodal-curve-lci-criterion",
+  "lem-trf-dth-fitting-smooth-locus",
+  "lem-trf-unramified-over-field-local-criterion",
+  "lem-sc-noetherian-closed-points-finite"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q57-a177b9502",
+  "group": "Q57",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q57-a177b9502 (reviewer sub-agent of L); spot-checked: I read the item, the new node lem-sfb-stack-smooth-atlas-base-change, every cited statement, and Stacks 0DZX, 0DZZ, 0DSY and 0E00; I also checked tags 06FM, 075U, 075W and 04T2. The ten steps follow the Stacks route: algebraicity over Z (Artin criterion, premises (i)-(vii) checked against the curve nodes), algebraicity over arbitrary S by 2-fibre product, the nodal open as the complement of the proper image of the non-nodal locus, the nonempty-fibre open, the inclusion of the nodal stack in lci+ (lci criterion, Fitting smooth locus, finite closed singular set), base change by the new node, and the smooth-family open (0DZZ). There are no hidden hypotheses. Edge cases checked: empty S, non-reduced or non-Noetherian S, empty fibres, and genus-0 nodal fibres (no Deligne-Mumford assumption is used). The new node is true for arbitrary algebraic stacks and is not a duplicate: the existing chart-comparison node covers DM stacks only, and the existing base-change and descent nodes do not give it. Batch-5 flags: every listed citation is a general definition or a generic stack, space or scheme lemma, never trace-formula or Poincare duality content, so I accept them; I also accept the declared tool uses. Fix: the item's source.place cited 0E86 (the density lemma) for the smooth-family open, which is 0DZZ, and 075V for the chart formulation, which is 075U/075W with 06FM. The corrected file is fixes/dag/nodes/sec-six-functors-basics/lem-sfb-arithmetic-nodal-curve-stack-smooth.json.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.ArithmeticNodalCurveStackSmooth",
+  "declaration": "AlgebraicGeometry.arithmetic_nodal_curve_stack_smooth",
+  "declarations": [
+   "AlgebraicGeometry.ProperCurveModuli.nodalCategory",
+   "AlgebraicGeometry.ProperCurveFamily.IsSmoothAfterBaseChange",
+   "AlgebraicGeometry.arithmetic_nodal_curve_stack_smooth"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/ArithmeticNodalCurveStackSmooth.lean",
+  "statement": "theorem arithmetic_nodal_curve_stack_smooth (S : Scheme.{u}) : IsAlgebraicModuliStack (ProperCurveModuli.category S) ∧ (∃ N : OpenModuliSubstack (ProperCurveModuli.category S), N.property = fun X ↦ X.family.HasNonemptyNodalGeometricFibres) ∧ IsAlgebraicModuliStack (ProperCurveModuli.nodalCategory S) ∧ IsSmoothModuliStack (ProperCurveModuli.nodalCategory S) ∧ (IsSmoothModuliStack (ProperCurveModuli.nodalCategory S) ↔ ∀ (W : Over S) (p : BasedFunctor (discreteModuli (yoneda.obj W)) (ProperCurveModuli.nodalCategory S)), (∀ (T : Over S) (t : BasedFunctor (discreteModuli (yoneda.obj T)) (ProperCurveModuli.nodalCategory S)), ∃ (Z : AlgebraicSpace S) (a : Z.obj.obj ⟶ yoneda.obj T), HasSpaceBaseChange p T t Z a ∧ SpaceMapIsSmooth Z T a) → Smooth W.hom) ∧ (∃ M : OpenModuliSubstack (ProperCurveModuli.nodalCategory S), M.property = fun X ↦ AlgebraicSpace.MapToSchemeIsLocally (@Smooth) X.obj.family.space X.obj.base X.obj.family.projection) ∧ ∀ (T : Over S) (X : ProperCurveFamily T), X.HasNonemptyNodalGeometricFibres → ∃ U : T.left.Opens, (∀ (T' : Over S) (a : T' ⟶ T), X.IsSmoothAfterBaseChange a ↔ ∃ b : T'.left ⟶ U.toScheme, b ≫ U.ι = a.left) ∧ ∀ (T' : Over S) (a : T' ⟶ T), ∃ V : T'.left.Opens, V = a.left ⁻¹ᵁ U ∧ ∀ (T'' : Over S) (b : T'' ⟶ T'), X.IsSmoothAfterBaseChange (b ≫ a) ↔ ∃ c : T''.left ⟶ V.toScheme, c ≫ V.ι = b.left",
+  "branch": "sheaf-dag",
+  "by": "O2",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "Reuses the landed OpenModuliSubstack interface; its definition node is added to stmt_deps. The two data-complete helpers package precisely the nodal full subcategory and smoothness of the canonical presheaf pullback. No mathematical statement correction."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-3855a7e2e",
+  "group": "O2",
+  "result": "pass",
+  "note": "Every node clause matches the Lean: C_S algebraic (IsAlgebraicModuliStack on ProperCurveModuli.category S); the nodal stack is an OpenModuliSubstack with property = HasNonemptyNodalGeometricFibres; nodalCategory = fullModuliSubcategory on the same predicate, algebraic and smooth; the chart iff matches landed isSmoothModuliStack_iff_forall_smooth_scheme_map verbatim with no surjectivity; the smooth families are an OpenModuliSubstack of the nodal stack via MapToSchemeIsLocally Smooth; T^sm comes with the factorization criterion for every a : T' ⟶ T and the preimage clause V = a⁻¹U. Helpers are not hollow and not duplicates (no ProperCurveFamily base-change construction exists; the chart test follows the HasNonemptyNodalGeometricFibres pattern). lean.statement is verbatim; the added stmt_dep def-sfb-open-moduli-substack is landed and acyclic; all imports exist; 10-step proof docstring, sorry only; no extra hypotheses; single universe u. Maintainer note: the item source.place still cites 0E86/075V because the stage-1 Q57 correction to 0DZZ/06FM/075U/075W was lost; the module cites the correct tags, and a stage-2 fix cannot change the source field."
+ }
+}

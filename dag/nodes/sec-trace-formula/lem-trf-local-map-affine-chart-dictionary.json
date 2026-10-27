@@ -1,0 +1,364 @@
+{
+ "id": "lem-trf-local-map-affine-chart-dictionary",
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "kind": "statement",
+ "title": "Affine chart dictionary for local-map approximation",
+ "statement": "Let $S$ be a locally Noetherian scheme [def-pc-scheme, pqf-def-locnoeth], let $X\\to S$ and $Y\\to S$ be locally of finite type [def-weil-finite-type-morphism], and let $x\\in X$, $y\\in Y$ have common image $s\\in S$. Suppose $\\mathcal O_{S,s}$ is a G-ring [def-weil-pbc-g-ring]. There are affine open neighbourhoods $S_0=\\operatorname{Spec}R$ of $s$, $X_0=\\operatorname{Spec}A\\subset X$ of $x$, and $Y_0=\\operatorname{Spec}B\\subset Y$ of $y$, with both structure maps landing in $S_0$ [def-weil-affine-spectrum], having the following properties. The rings $R,A,B$ are Noetherian [def-weil-pbc-noetherian-ring], $A,B$ are finitely generated $R$-algebras, and $B=R[T_1,\\ldots,T_n]/(F_1,\\ldots,F_m)$ for finite $n,m\\geq0$, where the polynomial ring is the iterated polynomial ring of [def-weil-polynomial-ring]. If $\\mathfrak r,\\mathfrak p,\\mathfrak q$ are the primes representing $s,x,y$, then $\\mathfrak p\\cap R=\\mathfrak q\\cap R=\\mathfrak r$, and the canonical identifications $R_{\\mathfrak r}=\\mathcal O_{S,s}$, $A_{\\mathfrak p}=\\mathcal O_{X,x}$, $B_{\\mathfrak q}=\\mathcal O_{Y,y}$ respect the structure maps; $A_{\\mathfrak p}$ is a G-ring [def-weil-pbc-localization-at-prime].\n\nFor any étale ring homomorphism $h:A\\to A'$ and prime $\\mathfrak p'\\subset A'$ with $h^{-1}(\\mathfrak p')=\\mathfrak p$, the ring $A'$ is Noetherian. For every $R$-algebra homomorphism $\\phi:B\\to A'$ with $\\phi^{-1}(\\mathfrak p')=\\mathfrak q$, the maps $\\operatorname{Spec}h$, $\\operatorname{Spec}\\phi$, composed with the above open inclusions, define morphisms $p_U:U=\\operatorname{Spec}A'\\to X$ and $f_U:U\\to Y$ over $S$, with $p_U(\\mathfrak p')=x$ and $f_U(\\mathfrak p')=y$. The morphism $p_U$ is étale [def-weil-etale-morphism]; if $\\kappa(\\mathfrak p)\\to\\kappa(\\mathfrak p')$ is an isomorphism then so is $\\kappa(x)\\to\\kappa(\\mathfrak p')$ [def-weil-residue-field]. Under $\\mathcal O_{U,\\mathfrak p'}=A'_{\\mathfrak p'}$, the stalk maps are exactly the localizations $h_{\\mathfrak p}:A_{\\mathfrak p}\\to A'_{\\mathfrak p'}$ and $\\phi_{\\mathfrak q}:B_{\\mathfrak q}\\to A'_{\\mathfrak p'}$. Their induced maps on maximal-ideal completions [def-weil-pbc-adic-completion, lem-weil-pbc-fs-adic-completion-map-local] and their completion maps agree under these identifications, and $\\mathfrak m_{U,\\mathfrak p'}^N\\widehat{\\mathcal O}_{U,\\mathfrak p'}$ identifies with $(\\mathfrak p'A'_{\\mathfrak p'})^N\\widehat{A'_{\\mathfrak p'}}$ for every $N\\geq1$.",
+ "source": {
+  "document": "literature/stacks-project/more-morphisms.tex",
+  "place": "Tag 0CAU, lemma-map-approximation, proof, affine reduction in the first paragraph and passage back to spectra in the final sentence; G-ring input: More on Algebra Tag 07PV, proposition-finite-type-over-G-ring, applied over R_r without replacing the affine neighbourhoods by their localizations"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "pqf-def-locnoeth",
+  "def-weil-finite-type-morphism",
+  "def-weil-pbc-g-ring",
+  "def-weil-affine-spectrum",
+  "def-weil-pbc-noetherian-ring",
+  "def-weil-polynomial-ring",
+  "def-weil-pbc-localization-at-prime",
+  "def-weil-etale-morphism",
+  "def-weil-residue-field",
+  "def-weil-pbc-adic-completion",
+  "lem-weil-pbc-fs-adic-completion-map-local"
+ ],
+ "proof": [
+  {
+   "text": "Choose an affine open $S_0=\\operatorname{Spec}R$ containing $s$. By the definition of locally finite type, the inverse image of $S_0$ in each of $X,Y$ has an affine cover with finitely generated coordinate algebras over $R$. Choose members containing $x,y$ and call their rings $A,B$. The affine-open Noetherian lemma makes $R$ Noetherian. The finite-type algebra Noetherian lemma then makes $A,B$ Noetherian. Apply the finite-presentation lemma to $R\\to B$: a finite generating family $T_1,\\ldots,T_n$ gives a surjection $R[T_1,\\ldots,T_n]\\to B$ whose kernel has finite generators $F_1,\\ldots,F_m$. This is the required presentation, including $n=0$ or $m=0$.",
+   "uses": [
+    "def-pc-scheme",
+    "def-weil-finite-type-morphism",
+    "pqf-lem-affine-open-locnoeth",
+    "lem-weil-pbc-finite-type-algebra-noetherian",
+    "lem-weil-pbc-finite-type-noetherian-finite-presentation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 0CAU, lemma-map-approximation, first paragraph; algebra.tex Tags 00FN and 00FP (3)"
+   }
+  },
+  {
+   "text": "Use the canonical affine open immersions and their stalk identifications to write $\\mathcal O_{S,s}=R_{\\mathfrak r}$, $\\mathcal O_{X,x}=A_{\\mathfrak p}$, and $\\mathcal O_{Y,y}=B_{\\mathfrak q}$. Compatibility of a sheaf morphism with restrictions sends the germ of $r\\in R$ to the germ of its structural image. Since stalk maps are local, the inverse images of the maximal ideals are the maximal ideal of $R_{\\mathfrak r}$; pulling back further to $R$ gives $\\mathfrak p\\cap R=\\mathfrak q\\cap R=\\mathfrak r$. Every localized element is a fraction, so the stalk maps necessarily send $r/t$ to its structural image divided by that of $t$. Thus these identifications respect both structure maps.",
+   "uses": [
+    "lem-weil-pbc-affine-open-stalk-localization",
+    "def-weil-locally-ringed-space-morphism",
+    "def-weil-pbc-localization-at-prime"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Tag 01HV, lemma-spec-sheaves (6), and the definition of stalk maps of locally ringed spaces"
+   }
+  },
+  {
+   "text": "Transfer the assumed G-ring structure to $R_{\\mathfrak r}$ by the ring-equivalence lemma. Put $M=\\operatorname{im}(R\\setminus\\mathfrak r)\\subset A$ and $C=M^{-1}A$. The images of a finite set of $R$-algebra generators of $A$ generate $C$ over $R_{\\mathfrak r}$: a fraction $a/t$ is the polynomial expression for $a$ with its coefficients divided by $t$. Consequently the finite-type G-ring ascent theorem applies to $R_{\\mathfrak r}\\to C$ and makes $C$ a G-ring. The prime $P=\\mathfrak pC$ is proper since $M\\cap\\mathfrak p=\\varnothing$. The maps $C_P\\to A_{\\mathfrak p}$ and $A_{\\mathfrak p}\\to C_P$ send fractions to the same fractions and are inverse: precisely all elements of $A\\setminus\\mathfrak p$ have been inverted.",
+   "uses": [
+    "lem-weil-pbc-g-ring-ring-equiv",
+    "lem-weil-pbc-finite-type-over-g-ring",
+    "def-weil-pbc-localization-at-prime"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 07PV, proposition-finite-type-over-G-ring; applied after localizing the base at r, as needed in Tag 0CAU"
+   }
+  },
+  {
+   "text": "The localization $C_P$ is Noetherian by the localization Noetherian lemma. For a prime $Q$ of $C_P$, let $Q_0$ be its inverse image in $C$. It is contained in $P$, and the fraction maps give $(C_P)_Q\\cong C_{Q_0}$, since both invert exactly the complement of $Q_0$. These local ring identifications identify maximal ideals. The completion ring-equivalence lemma supplies compatible identifications of their completions; regular-map invariance therefore transfers regularity of $C_{Q_0}\\to\\widehat{C_{Q_0}}$ to the completion map of $(C_P)_Q$. Since $Q$ was arbitrary, the definition of a G-ring makes $C_P$ a G-ring. Transfer it along $C_P\\cong A_{\\mathfrak p}$ using G-ring invariance. This proves the local G-ring assertion without assuming $R$ itself is a G-ring.",
+   "uses": [
+    "lem-weil-pbc-localization-noetherian",
+    "def-weil-pbc-localization-at-prime",
+    "def-weil-pbc-g-ring",
+    "lem-weil-pbc-adic-completion-ring-equiv",
+    "lem-weil-pbc-regular-ring-map-ring-equiv",
+    "lem-weil-pbc-g-ring-ring-equiv"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 07PV, proof, first sentence: localization of a G-ring; Definition 07GH, with algebra.tex Tag 00FN"
+   }
+  },
+  {
+   "text": "For the given $h:A\\to A'$, form $U=\\operatorname{Spec}A'$ and $p_U=\\iota_X\\circ\\operatorname{Spec}h$, where $\\iota_X:\\operatorname{Spec}A\\to X$ is the canonical open immersion with image the chart $X_0$ chosen in Step 1. That $h$ is étale means that $\\operatorname{Spec}h$ is étale; if it is read instead as an étale ring map in the sense of Algebra 00U1, the étale ring map criterion gives the same conclusion, so both readings agree. The open-immersion clause (1) of the étale permanence lemma makes $\\iota_X$ étale, and its composition clause (2) makes $p_U=\\iota_X\\circ\\operatorname{Spec}h$ étale. Clause (1) of the étale finite-presentation lemma, applied to $A\\to A'$, gives $A'\\cong A[x_1,\\ldots,x_n]/(f_1,\\ldots,f_m)$ as $A$-algebras; in particular $A'$ is a finitely generated $A$-algebra. Since $A$ is Noetherian by Step 1, the finite-type Noetherian lemma makes $A'$ Noetherian.",
+   "uses": [
+    "def-weil-affine-spectrum",
+    "lem-weil-pbc-affine-open-spec-points",
+    "def-weil-etale-morphism",
+    "lem-weil-pbc-etale-ring-map-iff-etale-affine",
+    "lem-weil-pbc-etale-composition-cancellation",
+    "lem-weil-pbc-etale-algebra-finite-presentation-localization",
+    "lem-weil-pbc-finite-type-algebra-noetherian"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tags 02GI (definition-etale), 02GP (lemma-open-immersion-etale), 02GN (lemma-composition-etale); algebra.tex Tag 00U1 (definition-etale: an étale ring map is of finite presentation) and Tag 00FN (lemma-Noetherian-permanence)"
+   }
+  },
+  {
+   "text": "For the given $R$-algebra map $\\phi:B\\to A'$, define $f_U=\\iota_Y\\circ\\operatorname{Spec}\\phi$. Functoriality of spectra and $\\phi\\circ(R\\to B)=h\\circ(R\\to A)$ show that the two composites from $U$ to $S_0$ agree, hence that $p_U,f_U$ are over $S$. A spectrum map sends a prime to its inverse image: equivalently, its local stalk map carries a germ into the maximal ideal precisely when the image germ is in the source maximal ideal. The assumed equalities $h^{-1}(\\mathfrak p')=\\mathfrak p$ and $\\phi^{-1}(\\mathfrak p')=\\mathfrak q$ therefore give $p_U(\\mathfrak p')=x$ and $f_U(\\mathfrak p')=y$.",
+   "uses": [
+    "def-weil-affine-spectrum",
+    "def-weil-locally-ringed-space-morphism",
+    "def-weil-pbc-localization-at-prime"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 0CAU, final sentence; spectra as in schemes.tex Tag 01HV and the construction of Spec of a ring map"
+   }
+  },
+  {
+   "text": "The affine-open stalk lemma applied also to $U$ gives $\\mathcal O_{U,\\mathfrak p'}=A'_{\\mathfrak p'}$. A stalk map sends the germ of a global section to the germ of its pullback; hence the two maps send $a/1$ to $h(a)/1$ and $b/1$ to $\\phi(b)/1$. Their denominators outside $\\mathfrak p$ or $\\mathfrak q$ have images outside $\\mathfrak p'$. Preservation of inverses now gives $a/t\\mapsto h(a)/h(t)$ and $b/v\\mapsto\\phi(b)/\\phi(v)$, exactly the two localized maps in the statement. Quotienting these same maps by the maximal ideals identifies the residue-field map of $p_U$ with $\\kappa(\\mathfrak p)\\to\\kappa(\\mathfrak p')$. An isomorphism of the latter thus gives the asserted isomorphism from $\\kappa(x)$.",
+   "uses": [
+    "lem-weil-pbc-affine-open-stalk-localization",
+    "def-weil-locally-ringed-space-morphism",
+    "def-weil-pbc-localization-at-prime",
+    "def-weil-residue-field"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Tag 01HV, lemma-spec-sheaves (6); fraction description of the induced stalk map and residue field"
+   }
+  },
+  {
+   "text": "Let $e_V$ denote any of the local ring identifications above. It carries the unique maximal ideal onto the unique maximal ideal, so it induces maps $e_{V,n}$ of the quotients by their $n$-th powers. For either stalk map $g$ and its localized ring map $g_0$, Step 7 gives $e_{U,n}\\circ g_n=(g_0)_n\\circ e_{V,n}$. The completion-map lemma says that the induced map on completions is exactly $(z_n)_n\\mapsto(g_n(z_n))_n$. Consequently the displayed quotient equalities give equality of the completed maps, coordinate by coordinate. The canonical completion map sends $a$ to $(a\\bmod\\mathfrak m^n)_n$, so it commutes with the same identifications. This proves both compatibilities asserted in the item.",
+   "uses": [
+    "def-weil-pbc-adic-completion",
+    "lem-weil-pbc-fs-adic-completion-map-local"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 07ED; inverse-limit description of completion in algebra.tex Section 00M9"
+   }
+  },
+  {
+   "text": "Finally $e_U$ sends $\\mathfrak m_{U,\\mathfrak p'}$ onto $\\mathfrak p'A'_{\\mathfrak p'}$. Its induced completion isomorphism sends a product of $N$ elements of this ideal times a completed element to the corresponding product of their images times the image completed element. Such finite sums generate the extended $N$-th ideal power on both sides. Applying the inverse isomorphism gives the opposite inclusion. Thus it identifies $\\mathfrak m_{U,\\mathfrak p'}^N\\widehat{\\mathcal O}_{U,\\mathfrak p'}$ with $(\\mathfrak p'A'_{\\mathfrak p'})^N\\widehat{A'_{\\mathfrak p'}}$ for every $N\\geq1$.",
+   "uses": [
+    "def-weil-pbc-localization-at-prime",
+    "def-weil-pbc-adic-completion"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 0CAU, congruence ideal in the proof, under the affine local-ring identification"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-scheme",
+  "def-weil-finite-type-morphism",
+  "pqf-lem-affine-open-locnoeth",
+  "lem-weil-pbc-finite-type-algebra-noetherian",
+  "lem-weil-pbc-finite-type-noetherian-finite-presentation",
+  "lem-weil-pbc-affine-open-stalk-localization",
+  "def-weil-locally-ringed-space-morphism",
+  "def-weil-pbc-localization-at-prime",
+  "lem-weil-pbc-g-ring-ring-equiv",
+  "lem-weil-pbc-finite-type-over-g-ring",
+  "lem-weil-pbc-localization-noetherian",
+  "def-weil-pbc-g-ring",
+  "lem-weil-pbc-adic-completion-ring-equiv",
+  "lem-weil-pbc-regular-ring-map-ring-equiv",
+  "def-weil-affine-spectrum",
+  "lem-weil-pbc-affine-open-spec-points",
+  "def-weil-etale-morphism",
+  "lem-weil-pbc-etale-ring-map-iff-etale-affine",
+  "lem-weil-pbc-etale-composition-cancellation",
+  "lem-weil-pbc-etale-algebra-finite-presentation-localization",
+  "def-weil-residue-field",
+  "def-weil-pbc-adic-completion",
+  "lem-weil-pbc-fs-adic-completion-map-local"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/more-morphisms.tex",
+  "place": "Tag 0CAU, affine reduction and final sentence, with the omitted chart and functoriality details written out; G-ring input Tag 07PV"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "G.ring|GRing|completion.*congruen|congruen.*completion",
+   "results": "{\"t\": \"2026-10-22T06:14:26Z\", \"tool\": \"grep\", \"query\": \"G.ring|GRing|completion.*congruen|congruen.*completion\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 6, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Functor.lean\", \"Mathlib/AlgebraicGeometry/AffineScheme.lean\", \"Mathlib/AlgebraicGeometry/AffineScheme.lean\", \"Mathlib/AlgebraicGeometry/AffineScheme.lean\", \"Mathlib/AlgebraicGeometry/AffineScheme.lean\", \"Mathlib/AlgebraicGeometry/AffineScheme.lean\"], \"digest\": \"89ee97ff0a376beb\"}",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Scheme.Hom.stalkMap, AlgebraicGeometry.Etale",
+   "results": "{\"t\": \"2026-10-22T06:14:27Z\", \"tool\": \"loogle\", \"query\": \"AlgebraicGeometry.Scheme.Hom.stalkMap, AlgebraicGeometry.Etale\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Reduce a local map of scheme stalks to finitely presented affine charts and reconstruct an etale neighborhood from a ring map",
+   "results": "{\"t\": \"2026-10-22T06:14:27Z\", \"tool\": \"leansearch\", \"query\": \"Reduce a local map of scheme stalks to finitely presented affine charts and reconstruct an etale neighborhood from a ring map\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.localRingHom_comp_stalkIso_apply'\", \"AlgebraicGeometry.locallyOfFinitePresentation_iff\", \"AlgebraicGeometry.LocallyOfFiniteType.stalkMap\", \"AlgebraicGeometry.localRingHom_comp_stalkIso\", \"AlgebraicGeometry.Scheme.localRingHom_comp_stalkIso_apply\", \"AlgebraicGeometry.Scheme.arrowStalkMapSpecIso\", \"AlgebraicGeometry.LocallyOfFinitePresentation.mk\", \"AlgebraicGeometry.localRingHom_comp_stalkIso_apply\"], \"digest\": \"5193db1a90d7a6f4\"}",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Affine neighborhoods of finite type schemes over a locally Noetherian base give finitely presented coordinate algebras with a G-ring local ring and preserve etale completion congruences",
+   "results": "{\"t\": \"2026-10-22T06:14:38Z\", \"tool\": \"leanfinder\", \"query\": \"Affine neighborhoods of finite type schemes over a locally Noetherian base give finitely presented coordinate algebras with a G-ring local ring and preserve etale completion congruences\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.Etale.finitePresentation\", \"Algebra.etaleLocus_eq_univ_iff_etale\", \"Algebra.exists_etale_of_isEtaleAt\", \"Algebra.Etale.exists_subalgebra_fg\", \"Algebra.basicOpen_subset_etaleLocus_iff_etale\", \"Algebra.mem_etaleLocus_iff\", \"RingHom.Etale.propertyIsLocal\", \"Algebra.isOpen_etaleLocus\"], \"digest\": \"c9fa2b4442e11cdf\"}",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An affine etale algebra and a coordinate ring map induce a morphism of pointed schemes with the same residue fields and the same map of completed local rings",
+   "results": "{\"t\": \"2026-10-22T06:14:39Z\", \"tool\": \"leanfinder\", \"query\": \"An affine etale algebra and a coordinate ring map induce a morphism of pointed schemes with the same residue fields and the same map of completed local rings\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Etale\", \"AlgebraicGeometry.Scheme.SpecToEquivOfField\", \"AlgebraicGeometry.Scheme.instIsPreimmersionFromSpecResidueField\", \"AlgebraicGeometry.IsEtale\", \"AlgebraicGeometry.Scheme.instIsPreimmersionMapResidue\", \"AlgebraicGeometry.SpecToEquivOfLocalRing\", \"AlgebraicGeometry.Scheme.over_def\", \"AlgebraicGeometry.Scheme.descResidueField_stalkClosedPointTo_fromSpecResidueField\"], \"digest\": \"656275bf73213007\"}",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "stalkMapSpecIso|localRingHom_comp_stalkIso|LocallyOfFiniteType.stalkMap|finitePresentation_of_finiteType",
+   "results": "{\"t\": \"2026-10-22T06:15:02Z\", \"tool\": \"grep\", \"query\": \"stalkMapSpecIso|localRingHom_comp_stalkIso|LocallyOfFiniteType.stalkMap|finitePresentation_of_finiteType\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 18, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Functor.lean\", \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Functor.lean\", \"Mathlib/AlgebraicGeometry/AffineScheme.lean\", \"Mathlib/AlgebraicGeometry/AffineScheme.lean\", \"Mathlib/AlgebraicGeometry/AffineScheme.lean\", \"Mathlib/AlgebraicGeometry/AffineScheme.lean\", \"Mathlib/AlgebraicGeometry/AffineScheme.lean\", \"Mathlib/AlgebraicGeometry/Spec.lean\"], \"digest\": \"08002026034adbfa\"}",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Affine charts for finite type schemes identify stalk maps with localized ring maps and preserve induced maps on completions",
+   "results": "{\"t\": \"2026-10-23T11:37:48Z\", \"tool\": \"leanfinder\", \"query\": \"Affine charts for finite type schemes identify stalk maps with localized ring maps and preserve induced maps on completions\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsAffineOpen.fromSpecStalk_eq\", \"AlgebraicGeometry.IsAffineOpen.fromSpecStalk_eq_fromSpecStalk\", \"AlgebraicGeometry.IsAffineOpen.fromSpecStalk\", \"AlgebraicGeometry.Scheme.arrowStalkMapSpecIso\", \"AlgebraicGeometry.IsAffineOpen.isoSpec_hom_base_apply\", \"AlgebraicGeometry.IsAffineOpen.isoSpec_hom_apply\", \"AlgebraicGeometry.IsAffineOpen.isLocalization_stalk'\", \"AlgebraicGeometry.Scheme.localRingHom_comp_stalkIso_apply\"], \"digest\": \"b1821a48119b90d0\"}",
+   "date": "2026-10-23",
+   "verdict": "no match for the complete item; hits only cover individual affine or etale ingredients"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Scheme.Hom.stalkMap, AlgebraicGeometry.IsEtale",
+   "results": "{\"t\": \"2026-10-23T11:39:28Z\", \"tool\": \"loogle\", \"query\": \"AlgebraicGeometry.Scheme.Hom.stalkMap, AlgebraicGeometry.IsEtale\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"loogle: unknown identifier 'AlgebraicGeometry.IsEtale'\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: loogle: unknown identifier 'AlgebraicGeometry.IsEtale'"
+  },
+  {
+   "tool": "grep",
+   "query": "localRingHom_comp_stalkIso|isEtale_SpecMap|IsEtale.*comp",
+   "results": "{\"t\": \"2026-10-23T11:39:28Z\", \"tool\": \"grep\", \"query\": \"localRingHom_comp_stalkIso|isEtale_SpecMap|IsEtale.*comp\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 9, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Functor.lean\", \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Functor.lean\", \"Mathlib/AlgebraicGeometry/Spec.lean\", \"Mathlib/AlgebraicGeometry/Spec.lean\", \"Mathlib/AlgebraicGeometry/Spec.lean\", \"Mathlib/AlgebraicGeometry/AffineScheme.lean\", \"Mathlib/AlgebraicGeometry/AffineScheme.lean\", \"Mathlib/AlgebraicGeometry/AffineScheme.lean\"], \"digest\": \"27f381d645e08ba4\"}",
+   "date": "2026-10-23",
+   "verdict": "no match for the complete item; hits only cover individual affine or etale ingredients"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Affine neighborhoods of locally finite type schemes over a locally Noetherian base and maps of completed local rings",
+   "results": "{\"t\": \"2026-10-23T11:44:30Z\", \"tool\": \"leansearch\", \"query\": \"Affine neighborhoods of locally finite type schemes over a locally Noetherian base and maps of completed local rings\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.AffineScheme\", \"AlgebraicGeometry.LocallyOfFiniteType.mk\", \"AlgebraicGeometry.LocallyOfFiniteType\", \"AlgebraicGeometry.Scheme.mk.noConfusion\", \"AlgebraicGeometry.Scheme.local_affine\", \"AlgebraicGeometry.instHasRingHomPropertyLocallyOfFiniteTypeFiniteType\", \"AlgebraicGeometry.LocallyOfFiniteType.finiteType_of_affine_subset\", \"AlgebraicGeometry.locallyOfFiniteType_iff\"], \"digest\": \"fb075483358e6152\"}",
+   "date": "2026-10-23",
+   "verdict": "no match for the complete item; hits only cover individual affine or etale ingredients"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A local ring essentially of finite type over a G ring is a G ring and etale coordinate algebras give etale neighborhoods",
+   "results": "{\"t\": \"2026-10-23T11:44:37Z\", \"tool\": \"leanfinder\", \"query\": \"A local ring essentially of finite type over a G ring is a G ring and etale coordinate algebras give etale neighborhoods\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.exists_etale_of_isEtaleAt\", \"RingHom.Etale.ofLocalizationSpan\", \"RingHom.Etale.propertyIsLocal\", \"RingHom.Etale.ofLocalizationSpanTarget\", \"StandardEtalePair.instEtaleRing\", \"Algebra.IsEtaleAt\", \"StandardEtalePresentation\", \"Algebra.instEtaleOfIsStandardEtale\"], \"digest\": \"f9d054377a78966e\"}",
+   "date": "2026-10-23",
+   "verdict": "no match for the complete item; hits only cover individual affine or etale ingredients"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-local-map-completion-approximation",
+  "date": "2026-10-22",
+  "group": "Q156"
+ },
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Historical nodal-local-model branch of lem-trf-local-term-locality, via the Tag 0GDX / Tag 0CAV approximation input; proof, affine reduction in the first paragraph and passage back to spectra in the final sentence; G-ring input: More on Algebra Tag 07PV, proposition-finite-type-over-G-ring, applied over R_r without replacing the affine neighbourhoods by their localizations",
+   "via": [
+    "lem-trf-local-map-completion-approximation",
+    "lem-trf-isomorphism-completion-approximation",
+    "lem-trf-relative-completion-etale-approximation",
+    "lem-trf-nodal-family-etale-local-model",
+    "lem-trf-nodal-etale-chart",
+    "lem-trf-nodal-log-regularity",
+    "lem-trf-nodal-pair-projective-resolution",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-trf-local-map-affine-chart-dictionary",
+  "worker": "stage1",
+  "summary": "Retained the statement. Wrote the affine presentation, localized-base G-ring argument, spectrum construction, fraction formulas for stalk maps, and quotient-coordinate completion compatibilities. Reused existing nodes throughout; no new nodes.",
+  "blueprint": "Historical affine reduction and reconstruction input through Tag 0CAU / 0CAV in the nodal-local-model branch of lem-trf-local-term-locality. The current latest ancestor instead uses contracting correspondences; this delivery proves only the independently stated historical algebraic tool and changes no unit route.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-g-ring-ring-equiv",
+    "why": "Generic commutative-algebra tool for the affine reduction of Tag 0CAU: G-ring invariance under ring equivalence. It does not replace a step of the trace-formula unit."
+   },
+   {
+    "node": "lem-weil-pbc-finite-type-over-g-ring",
+    "why": "Generic commutative-algebra tool for the affine reduction of Tag 0CAU: Finite type algebras over G-rings are G-rings. It does not replace a step of the trace-formula unit."
+   },
+   {
+    "node": "lem-weil-pbc-adic-completion-ring-equiv",
+    "why": "Generic commutative-algebra tool for the affine reduction of Tag 0CAU: Adic completions respect ring equivalences. It does not replace a step of the trace-formula unit."
+   },
+   {
+    "node": "lem-weil-pbc-regular-ring-map-ring-equiv",
+    "why": "Generic commutative-algebra tool for the affine reduction of Tag 0CAU: Regular ring maps respect ring equivalences. It does not replace a step of the trace-formula unit."
+   },
+   {
+    "node": "lem-weil-pbc-fs-adic-completion-map-local",
+    "why": "Generic commutative-algebra tool for the affine reduction of Tag 0CAU: Compatible completion map induced by a local homomorphism. It does not replace a step of the trace-formula unit."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-g-ring-ring-equiv",
+  "lem-weil-pbc-finite-type-over-g-ring",
+  "lem-weil-pbc-adic-completion-ring-equiv",
+  "lem-weil-pbc-regular-ring-map-ring-equiv",
+  "lem-weil-pbc-fs-adic-completion-map-local"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-N5-a40a4ae6e",
+  "group": "N5",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-N5-a40a4ae6e (reviewer sub-agent of L); spot-checked: Read the item's 9 steps, all 24 cited statements, Stacks 0CAU lemma-map-approximation (full proof) and 07PV with its proof. The statement keeps the 0CAU hypotheses, with the G-ring hypothesis on O_{S,s} only; the proof applies 07PV over R_r and then localizes (Steps 3-4), which is sound. Step 4's regularity transfer goes through the actual canonical completion maps (E∘can=can∘e). Steps 2 and 6-9 hold as elementary consequences of affine-open-stalk-localization (a)-(c) and the coordinate formula of fs-adic-completion-map-local. There are no new nodes, no repair note, and live and side-live are still unsplit. The 5 sk-thm-p1 generic algebra tool_uses are accepted. One fault, C4/E5 in Step 5: it said 'Spec h is locally of finite presentation, hence locally of finite type' because variable classes generate. But the pointwise lfp charts lie over smaller affine opens, while def-weil-finite-type-morphism needs a cover of f^{-1}(Spec A) by finitely generated A-algebras; that is the 01T2 locality, which the step did not prove. The step also took 'Spec h étale' from a parenthetical remark of def-weil-etale-morphism. FIX in fixes/dag/nodes/sec-trace-formula/lem-trf-local-map-affine-chart-dictionary.json: Step 5 now cites the Mathlib leaf lem-weil-pbc-etale-ring-map-iff-etale-affine (so the 00U1 and Spec-étale readings agree), lem-weil-pbc-etale-composition-cancellation (1)(2) for p_U, and lem-weil-pbc-etale-algebra-finite-presentation-localization (1) plus lem-weil-pbc-finite-type-algebra-noetherian to make A' Noetherian. proof_deps is recomputed as the union of the step uses (23 ids). Statement and stmt_deps are unchanged.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.TraceFormula.LocalMapAffineChartDictionary",
+  "declaration": "AlgebraicGeometry.LocalMapAffineChart.exists_dictionary",
+  "declarations": [
+   "AlgebraicGeometry.LocalMapAffineChart.polynomialRing",
+   "AlgebraicGeometry.LocalMapAffineChart.coefficientMap",
+   "AlgebraicGeometry.LocalMapAffineChart.stalkEquiv",
+   "AlgebraicGeometry.LocalMapAffineChart.stalkMapAt",
+   "AlgebraicGeometry.LocalMapAffineChart.Completion",
+   "AlgebraicGeometry.LocalMapAffineChart.HasCompletionCoordinates",
+   "AlgebraicGeometry.LocalMapAffineChart.IsCompletionIdentification",
+   "AlgebraicGeometry.LocalMapAffineChart.CompletionDictionary",
+   "AlgebraicGeometry.LocalMapAffineChart.exists_dictionary"
+  ],
+  "file": "lean/Sheaf/TraceFormula/LocalMapAffineChartDictionary.lean",
+  "statement": "theorem exists_dictionary {S X Y : Scheme.{u}} (f : X ⟶ S) (g : Y ⟶ S) [IsLocallyNoetherian S] [LocallyOfFiniteType f] [LocallyOfFiniteType g] (x : X) (y : Y) (s : S) (hx : f x = s) (hy : g y = s) (hG : IsGRing (S.presheaf.stalk s)) : ∃ (R A B : CommRingCat.{u}) (a : R ⟶ A) (b : R ⟶ B) (iR : Spec R ⟶ S) (iA : Spec A ⟶ X) (iB : Spec B ⟶ Y), ∃ (_ : IsOpenImmersion iR) (_ : IsOpenImmersion iA) (_ : IsOpenImmersion iB), ∃ (r : PrimeSpectrum R) (p : PrimeSpectrum A) (q : PrimeSpectrum B) (hr : iR r = s) (hp : iA p = x) (hq : iB q = y) (ha : r.asIdeal = p.asIdeal.comap a.hom) (hb : r.asIdeal = q.asIdeal.comap b.hom), IsNoetherianRing R ∧ IsNoetherianRing A ∧ IsNoetherianRing B ∧ a.hom.FiniteType ∧ b.hom.FiniteType ∧ iA ≫ f = Spec.map a ≫ iR ∧ iB ≫ g = Spec.map b ≫ iR ∧ (∃ (n m : ℕ) (F : Fin m → polynomialRing R n) (π : polynomialRing R n →+* B), Function.Surjective π ∧ RingHom.ker π = Ideal.span (Set.range F) ∧ π.comp (coefficientMap R n) = b.hom) ∧ (stalkEquiv iA p x hp).toRingHom.comp (stalkMapAt f x s hx) = (Localization.localRingHom r.asIdeal p.asIdeal a.hom ha).comp (stalkEquiv iR r s hr).toRingHom ∧ (stalkEquiv iB q y hq).toRingHom.comp (stalkMapAt g y s hy) = (Localization.localRingHom r.asIdeal q.asIdeal b.hom hb).comp (stalkEquiv iR r s hr).toRingHom ∧ IsGRing (Localization.AtPrime p.asIdeal) ∧ ∀ (A' : CommRingCat.{u}) (h : A ⟶ A') (_ : h.hom.Etale) (p' : PrimeSpectrum A') (hh : p.asIdeal = p'.asIdeal.comap h.hom), IsNoetherianRing A' ∧ ∃ (hpx : (Spec.map h ≫ iA) p' = x), Etale (Spec.map h ≫ iA) ∧ (Function.Bijective (Ideal.ResidueField.map p.asIdeal p'.asIdeal h.hom hh) → IsIso ((Spec.map h ≫ iA).residueFieldMap p')) ∧ ∀ (φ : B ⟶ A') (_ : φ.hom.comp b.hom = h.hom.comp a.hom) (hφ : q.asIdeal = p'.asIdeal.comap φ.hom), (Spec.map h ≫ iA) ≫ f = (Spec.map φ ≫ iB) ≫ g ∧ ∃ (hpy : (Spec.map φ ≫ iB) p' = y), (Spec.stalkIso A' p').commRingCatIsoToRingEquiv.toRingHom.comp (stalkMapAt (Spec.map h ≫ iA) p' x hpx) = (Localization.localRingHom p.asIdeal p'.asIdeal h.hom hh).comp (stalkEquiv iA p x hp).toRingHom ∧ (Spec.stalkIso A' p').commRingCatIsoToRingEquiv.toRingHom.comp (stalkMapAt (Spec.map φ ≫ iB) p' y hpy) = (Localization.localRingHom q.asIdeal p'.asIdeal φ.hom hφ).comp (stalkEquiv iB q y hq).toRingHom ∧ CompletionDictionary (stalkEquiv iA p x hp) (stalkEquiv iB q y hq) (Spec.stalkIso A' p').commRingCatIsoToRingEquiv (stalkMapAt (Spec.map h ≫ iA) p' x hpx) (stalkMapAt (Spec.map φ ≫ iB) p' y hpy) (Localization.localRingHom p.asIdeal p'.asIdeal h.hom hh) (Localization.localRingHom q.asIdeal p'.asIdeal φ.hom hφ)",
+  "branch": "newtargets-dag",
+  "by": "Q60",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-b6e8c4779",
+  "group": "Q60",
+  "result": "pass",
+  "note": "Read node, all 12 stmt_dep records, module and report (both required sections present). Every clause matches: IsGRing only on the stalk O_{S,s}; open-immersion affine charts with chart equations; Noetherian and finite-type conditions; presentation with the iterated Polynomial ring (n=0 and m=0 covered) and the coefficient map compatible with b; prime contractions; canonical stalkEquiv squares with Localization.localRingHom; IsGRing A_p. For each etale h and p': A' Noetherian, p_U point, p_U etale and residue implication (bijective Ideal.ResidueField.map) all outside the forall-phi; f_U over S, f_U point, stalk maps = h_p and phi_q under Spec.stalkIso. Completion maps pinned uniquely by the verbatim coordinate formula of exists_adicCompletion_map_of_local; both squares, compatibility with the canonical completion maps, and the ideal-power clause for N>=1 stated. lean.statement verbatim; one sorry; source and blueprint docstrings present; helpers are real data; no duplicate notion, no dep records or new nodes; node otherwise identical to the unlanded live node. Note: A' in universe u is the natural typing, since Spec A' must map into X. Not recompiled; worker reports a clean scompile."
+ }
+}

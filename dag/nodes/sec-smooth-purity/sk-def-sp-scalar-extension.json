@@ -24,7 +24,10 @@
   "sk-def-sfb-condensed-ring",
   "sk-def-sfb-pullback-from-point",
   "def-weil-pbc-internal-abelian-sheaf-module-equivalence",
-  "det-prop-scalar-six-pullback"
+  "det-prop-scalar-six-pullback",
+  "def-pe-finite-discrete-presentation-encoding",
+  "def-sfb-continuous-map-condensed-ring-map",
+  "sk-def-sp-normalized-towers"
  ],
  "proof": [
   {
@@ -180,5 +183,53 @@
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q48-a10a5eb52 (reviewer sub-agent of L); spot-checked: One repairable stage-1 fault: all three proof steps lacked mandatory source document/place fields. Added precise blueprint source locations in fixes/dag/nodes/sec-smooth-purity/sk-def-sp-scalar-extension.json. Mathematics, hypotheses, routes, citations, and edge cases otherwise pass; no new nodes.; 1 file(s) fixed by the reviewer"
  },
- "lean_audit": {}
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "lean": {
+  "module": "Sheaf.Paper.SmoothPurityScalarExtension",
+  "file": "lean/Sheaf/Paper/SmoothPurityScalarExtension.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.scalarExtensionCtfFunctor",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.scalarExtensionCtf_preserved",
+   "AlgebraicGeometry.ProEtale.scalarExtensionCtfFunctor",
+   "AlgebraicGeometry.ProEtale.scalarExtensionCtfComposition_existsUnique",
+   "AlgebraicGeometry.ProEtale.scalarExtensionCtfComposition",
+   "AlgebraicGeometry.ProEtale.scalarExtensionDiscreteRing",
+   "AlgebraicGeometry.ProEtale.scalarExtensionDiscreteMap",
+   "AlgebraicGeometry.ProEtale.scalarExtensionDiscreteRestriction_existsUnique",
+   "AlgebraicGeometry.ProEtale.scalarExtensionDiscreteRestriction",
+   "AlgebraicGeometry.ProEtale.scalarExtensionDiscreteRestrictionDerived",
+   "AlgebraicGeometry.ProEtale.scalarExtensionCondensedAdjunction",
+   "AlgebraicGeometry.ProEtale.scalarExtensionDiscreteAdjunction",
+   "AlgebraicGeometry.ProEtale.scalarExtensionDiscreteComparison_existsUnique",
+   "AlgebraicGeometry.ProEtale.scalarExtensionDiscreteComparison",
+   "AlgebraicGeometry.ProEtale.scalarExtensionDiscreteMap_comp",
+   "AlgebraicGeometry.ProEtale.scalarExtensionDiscreteTower",
+   "AlgebraicGeometry.ProEtale.scalarExtensionDiscreteComparison_tower"
+  ],
+  "statement": "def scalarExtensionCtfFunctor {A B : Type u} [CommRing A] [CommRing B] [Finite A] [Finite B] (ℓ : ℕ) [Fact ℓ.Prime] (hA : ∃ n : ℕ, ∀ x : A, (ℓ ^ n) • x = 0) (hB : ∃ n : ℕ, ∀ x : B, (ℓ ^ n) • x = 0) (f : A →+* B) (T : Scheme.{u}) : spFiniteConstructibleTorCategory T A ⥤ spFiniteConstructibleTorCategory T B",
+  "branch": "sheaf-dag",
+  "by": "Q130",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "Uses the existing spFiniteConstructibleTorCategory of sk-def-sp-normalized-towers. The actual full-subcategory lift of the recorded scalarExtensionFunctor, with its uniquely restricted normalized associator. Finite discrete coefficients use the existing normalized Encoding and its section-ring isomorphism, not a newly chosen coefficient model. The derived scalar comparison is fixed uniquely by the identity-on-sections restriction comparison and its adjunction unit equation; the final tower equation identifies this associator with scalarSixTower. Every postponed theorem belongs to the clauses and justification steps of this node. No ambient tensor, constructibility, Tor amplitude or module equivalence is redefined."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-73c2b1fca",
+  "group": "Q130",
+  "result": "pass",
+  "note": "Re-delivery after 3b3e RETURN; delta fully diffed. H2 fixed: theorem stmt_dep lem-sf-finite-discrete-normalized-encoding replaced by def node def-pe-finite-discrete-presentation-encoding (existing:true owner of Encoding/Internal/Encoding.ordinaryDerived, record = live). H4 fixed: scalarExtensionCtf/ScalarExtensionCtfCategory deleted; functor, preservation theorem and associator now on landed spFiniteConstructibleTor(Category) of sk-def-sp-normalized-towers (def node, record = live; same bounded + intrinsic-constructible + finite-Tor conditions on Scheme.proEtaleDerivedCategory T A; interval bound equivalent to finite support incl. K=0; section variables l/E unused by these defs, so no extra assumption); stmt_dep and import acyclic. lean.statement verbatim; declarations list updated; all other dep records identical to live; item still split with lean null in live. Remaining module byte-identical to the 3b3e delivery (hypotheses, pinned associator, coefficient comparisons were judged sound there and on re-read). 6 sorry theorems, docstrings with source/blueprint, autoImplicit false, single universe. No file changed, no compile run."
+ }
 }

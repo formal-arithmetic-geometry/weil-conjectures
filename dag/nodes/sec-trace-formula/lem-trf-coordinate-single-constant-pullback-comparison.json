@@ -1,0 +1,106 @@
+{
+ "id": "lem-trf-coordinate-single-constant-pullback-comparison",
+ "kind": "statement",
+ "title": "The cached ordinary constant pullback is the canonical derived comparison",
+ "statement": "Let A be a finite commutative ring and v:T->S any scheme morphism. In the ordinary derived module categories and with the actual comparisons of [def-asd-ordinary-finite-p1-arrows] and the cached embedding of [def-asd-ordinary-finite-p1-kummer-class], ordinaryFiniteUnitPullback(A,v) equals leftDerivedUpperStarSingleConstantSheafIso(ModuleCat A,v,1_(ModuleCat A)) as an isomorphism. This identifies the specified isomorphisms themselves, not just their isomorphism classes. There is no Noetherian, flatness, nonempty, or invertibility hypothesis.",
+ "stmt_deps": [
+  "def-asd-ordinary-finite-p1-arrows",
+  "def-asd-ordinary-finite-p1-kummer-class",
+  "def-weil-pbc-derived-categories"
+ ],
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-thm-dnc/sk-thm-dnc.proof.md",
+  "place": "Local construction, constant-coefficient identifications underlying the affine-space adjunction; cached/canonical pullback comparison in the parent proof Step 2."
+ },
+ "proof": [
+  {
+   "text": "Apply ordinaryFiniteUnitPullback_eq to express the recorded comparison as the single-degree pullback comparison followed by the single functor applied to upperStarConstantSheafIso. Expand only ordinaryFiniteSinglePullbackIso and the canonical leftDerivedUpperStarSingleConstantSheafIso. Apply the proved ordinaryFiniteSingleExactPullbackIso_eq and ordinaryFiniteSingleFunctor_eq to replace the cached single comparison and embedding. Evaluation of a composite natural isomorphism is composition of its components (Mathlib NatIso.trans_app), and evaluation of left whiskering is evaluation at the image object (a generic private lemma proved by reflexivity). Associativity of isomorphism composition identifies the three remaining factors. They are precisely the canonical comparison. The large derived-functor comparison is kept abstract; only the small constant-coefficient and functor interfaces are compared. This argument also applies to empty schemes and the zero ring.",
+   "uses": [
+    "def-asd-ordinary-finite-p1-arrows",
+    "def-asd-ordinary-finite-p1-kummer-class"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-asd-ordinary-finite-p1-arrows",
+  "def-asd-ordinary-finite-p1-kummer-class"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-thm-dnc/sk-thm-dnc.proof.md",
+  "place": "Local construction, constant-coefficient identifications underlying the affine-space adjunction; cached/canonical pullback comparison in the parent proof Step 2."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Evaluation of a natural isomorphism preserves composition and left whiskering",
+   "results": "8 hits: CategoryTheory.NatIso.trans_app, CategoryTheory.Functor.isoWhiskerLeft, CategoryTheory.whiskeringLeftCompEvaluation, CategoryTheory.NatIso.naturality_1, CategoryTheory.NatIso.naturality_2, CategoryTheory.NatIso.naturality_2_assoc, CategoryTheory.Functor.isoWhiskerLeft_hom, CategoryTheory.NatIso.naturality_1_assoc",
+   "date": "2026-10-26",
+   "verdict": "Use the generic NatIso.trans_app and whiskering API; no complete Mathlib theorem mentions the recorded ordinary finite coefficient comparison. The remaining cached-functor equalities are proved in the source library."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.NatIso.trans_app",
+   "results": "1 hits: CategoryTheory.NatIso.trans_app",
+   "date": "2026-10-26",
+   "verdict": "Use the generic NatIso.trans_app and whiskering API; no complete Mathlib theorem mentions the recorded ordinary finite coefficient comparison. The remaining cached-functor equalities are proved in the source library."
+  },
+  {
+   "tool": "grep",
+   "query": "isoWhiskerLeft_app|ordinaryFiniteSingleFunctor_eq",
+   "results": "0 hits: ",
+   "date": "2026-10-26",
+   "verdict": "Use the generic NatIso.trans_app and whiskering API; no complete Mathlib theorem mentions the recorded ordinary finite coefficient comparison. The remaining cached-functor equalities are proved in the source library."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.SectionCoordinateCounitNormalization",
+  "date": "2026-10-27",
+  "group": "E8"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-trf-section-coordinate-counit-normalization",
+   "place": "Local construction, constant-coefficient identifications underlying the affine-space adjunction; cached/canonical pullback comparison in the parent proof Step 2.",
+   "via": []
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.CoordinateSingleConstantPullbackComparison",
+  "file": "lean/Sheaf/Paper/CoordinateSingleConstantPullbackComparison.lean",
+  "declaration": "AlgebraicGeometry.Etale.coordinateUnitPullback_eq_singleConstant",
+  "statement": "theorem coordinateUnitPullback_eq_singleConstant (A : Type (u + 1)) [CommRing A] [Finite A] {S T : Scheme.{u}} (v : T ⟶ S) : ordinaryFiniteUnitPullback A v = leftDerivedUpperStarSingleConstantSheafIso (ModuleCat.{u + 1} A) v (𝟙_ (ModuleCat.{u + 1} A))",
+  "branch": "sheaf-dag",
+  "by": "E8",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E8",
+  "result": "pass",
+  "landing": "20261026T222634-L-676271",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E8",
+  "result": "pass",
+  "landing": "20261026T222634-L-676271",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

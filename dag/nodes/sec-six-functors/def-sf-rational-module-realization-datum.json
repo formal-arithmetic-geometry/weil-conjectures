@@ -1,0 +1,135 @@
+{
+ "id": "def-sf-rational-module-realization-datum",
+ "kind": "definition",
+ "title": "Normalized raw rational module realization data",
+ "status": "split",
+ "import_flags": [],
+ "statement": "Let $\\ell$ be prime and $E/\\mathbf Q_\\ell$ a finite field extension, with valuation ring $A=\\mathcal O_E$ and chosen uniformizer $\\varpi$ [def-weil-l-adic-coefficient-extension]. Let $X$ be a noetherian finite-dimensional scheme on which $\\ell$ is invertible at every stalk. Work on its small pro-etale site [def-weil-pbc-proetale-site], with sheaves of modules [def-weil-sheaf-of-modules-category], ordinary derived categories [def-weil-abstract-derived-category], cohomology [def-weil-derived-cohomology-sheaves], and sheaf tensor products [def-pur-sheaf-tensor-product]. Put $B_X=\\varprojlim_{n\\geq1}(A/\\varpi^n)_X$ with its actual quotient projections [def-weil-pbc-adic-coefficient-datum], and let $\\mathcal C_X$ be the full bounded constructible complete integral category [def-weil-pbc-bounded-constructible-complete]. Write $Q:\\mathcal C_X\\to\\mathcal R_X=\\mathcal C_X[1/\\varpi]$ for raw rationalization [def-weil-pbc-rational-category]. Use the continuous coefficient sheaves $A_X^c(U)=C(|U|,A)$, $E_X(U)=C(|U|,E)$ and their actual coefficient inclusions and inverse images [def-sfb-continuous-coefficient-pullback-maps], with constant module models as in [def-weil-pbc-continuous-constructible-module].\n\nDefine a rational module realization datum to be the following data and equations, with no existence assertion. It contains ring isomorphisms $b:B_X\\simeq A_X^c$, $q_n:(A/\\varpi^{n+1})_X\\simeq(A/\\varpi^{n+1})_X^c$ for $n\\geq0$, and $e:A_X^c[1/\\varpi]\\simeq E_X$. Each $q_n$ sends a sheafified constant section to that same constant function. For every section $s$ of $A_X^c$ and every point $x$ of a site object, the function obtained by $b^{-1}$, the $n$th quotient projection and $q_n$ has value $s(x)\\bmod\\varpi^{n+1}$. The map $e$ is normalized on integral numerators. The datum contains the scalar inclusion $a:A_X^c\\to E_X$ with $a(s)(x)=s(x)$, and for every locally closed immersion $h:S\\to X$ coefficient isomorphisms $h^{-1}A_X^c\\simeq A_S^c$ and $h^{-1}E_X\\simeq E_S$, normalized by precomposition on functions, and an inclusion $a_S$ with the same pointwise normalization, such that the square with $a$ and $a_S$ commutes.\n\nThe module category over $E_X$ is equipped with its $E$-linear structure normalized by $(c f)_U(x)=c_U f_U(x)$, where $c_U$ is the actual constant section. For $\\alpha=b\\,;\\,a$, the ordinary extension of scalars along $\\alpha$ preserves finite limits and finite colimits; its derived extension $F_X=E_X\\otimes^L_{B_X}-$ has a specified integer shift comparison and is triangulated. For every $r\\in\\mathbf Z$ the datum includes the natural isomorphism $H^rF_X\\simeq (E_X\\otimes_{B_X}-)H^r$. For every $K\\in\\mathcal C_X$, $F_XK$ is bounded and each $H^r(F_XK)$ has a finite locally closed stratification on whose strata it is pro-etale locally finite free over $E_X$.\n\nFinally the datum contains an additive $E$-linear functor $J_X:\\mathcal R_X\\to D(\\operatorname{Mod}(E_X))$, a specified comparison with all integer shifts, and preservation of distinguished triangles, satisfying $J_X(QK)=F_XK$ on objects and $J_X(f/\\varpi^n)=\\varpi^{-n}F_X(f)$ on every fraction, with transport by the specified object equalities. For every finitely presented $A$-module $N$, it includes an isomorphism $(E_X\\otimes_{B_X}-)(B_X\\otimes_A N)\\simeq E_X\\otimes_E(E\\otimes_A N)$ of ordinary module sheaves and witnesses that $E\\otimes_A N$ is finite and free over $E$. No flatness of $N$, full faithfulness, essential surjectivity, Karoubi completion or scalar-tower coherence is part of this definition. All coefficient types use the canonical lifts to the site coefficient universe.",
+ "stmt_deps": [
+  "def-weil-l-adic-coefficient-extension",
+  "def-weil-pbc-proetale-site",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-abstract-derived-category",
+  "def-weil-derived-cohomology-sheaves",
+  "def-pur-sheaf-tensor-product",
+  "def-weil-pbc-adic-coefficient-datum",
+  "def-weil-pbc-bounded-constructible-complete",
+  "def-weil-pbc-rational-category",
+  "def-sfb-continuous-coefficient-pullback-maps",
+  "def-weil-pbc-continuous-constructible-module"
+ ],
+ "source": {
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Lemma 6.8.2, Proposition 6.8.11(3), and construction in Proposition 6.8.14(2); the existing normalized record RationalModuleRealization, including ordinary local models."
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "LeanSearch",
+   "query": "Raw rational module realization record with normalized integral quotient coefficient maps and fraction functor",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"subsingleton_rat_module\", \"module\": \"Mathlib.Algebra.Module.Rat\", \"type\": \"(E : Type*) [AddCommGroup E] : Subsingleton (Module ℚ E)\", \"doc\": \"Every additive commutative group $ E $ admits a canonical module structure over the rational numbers $ \\\\mathbb{Q} $.\"}\n  {\"name\": \"Rat.smulDivisionRing\", \"module\": \"Mathlib.Algebra.Field.Defs\", \"type\": \": SMul ℚ K\", \"doc\": \"For any division ring $ K $, there is a scalar multiplication action of the rational numbers $ \\\\mathbb{Q} $ on $ K $, defined by expressing each rational number $ q = \\\\frac{a}{b} $ (with integers $ a,\"}\n  {\"name\": \"IsScalarTower.rat\", \"module\": \"Mathlib.Algebra.Module.Rat\", \"type\": \"{R : Type u} {M : Type v} [Ring R] [AddCommGroup M] [Module R M] [Module ℚ R] [Module ℚ M] : IsScalarTower ℚ R M\", \"doc\": \"Given a ring $ R $, an additive commutative group $ M $, and module structures of $ \\\\mathbb{Q} $ on $ R $ and $ M $, as well as $ R $ on $ M $, the scalar actions of $ \\\\mathbb{Q} $, $ R $, and $ M $ s\"}\n  {\"name\": \"EqualCharZero.algebraRat\", \"module\": \"Mathlib.Algebra.CharP.MixedCharZero\", \"type\": \"(h : ∀ I : Ideal R, I ≠ ⊤ → CharZero (R ⧸ I)) : Algebra ℚ R\", \"doc\": \"Given a commutative ring $ R $ where every proper quotient $ R/I $ has characteristic zero, this constructs the canonical algebra structure of $ \\\\mathbb{Q} $ over $ R $. The embedding maps each ration\"}\n  {\"name\": \"Rat.rawCast\", \"module\": \"Mathlib.Tactic.NormNum.Result\", \"type\": \"[DivisionRing α] (n : ℤ) (d : ℕ) : α\", \"doc\": \"The function maps an integer $ n $ and a natural number $ d $ to the element $ \\\\frac{n}{d} $ in the division ring $ \\\\alpha $.\"}\n  {\"name\": \"Rat.castRec\", \"module\": \"Mathlib.Algebra.Field.Defs\", \"type\": \"[NatCast K] [IntCast K] [Div K] (q : ℚ) : K\", \"doc\": \"For any type $ K $ supporting natural number casting, integer casting, and division, this function maps a rational number $ q $ to $ K $ by computing $ q.\\text{num} / q.\\text{den} $, where $ q.\\text{num}\"}\n  {\"name\": \"Field.ratCast_def\", \"module\": \"Mathlib.Algebra.Field.Defs\", \"type\": \"∀ {K : Type u} [self : Field K] (q : ℚ), ↑q = ↑q.num / ↑q.den\", \"doc\": \"The canonical embedding of a rational number $ q $ into a field $ K $ is equal to the division of the numerator of $ q $ by the denominator of $ q $ in $ K $, i.e., $ \\\\frac{\\\\text{num}(q)}{\\\\text{den}(q\"}\n  {\"name\": \"StarAddMonoid.toStarModuleRat\", \"module\": \"Mathlib.Algebra.Star.Module\", \"type\": \"[AddCommGroup R] [Module ℚ R] [StarAddMonoid R] : StarModule ℚ R\", \"doc\": \"If $ R $ is an additive commutative group, a module over the rational numbers $ \\\\mathbb{Q} $, and a star additive monoid, then $ R $ is a star module over $ \\\\mathbb{Q} $. This structure ensures compat\"}\n",
+   "date": "2026-10-24",
+   "verdict": "No matching Mathlib record. Use the existing published project structure, without redeclaration."
+  },
+  {
+   "tool": "LeanFinder",
+   "query": "Raw rational module realization record with normalized integral quotient coefficient maps and fraction functor",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"Mathlib.Tactic.Module.qNF\", \"module\": \"Mathlib/Tactic/Module\", \"type\": \"{u v : Lean.Level} → Q(Type u) → Q(Type v) → Type\", \"doc\": \"A type abbreviation representing a list of tuples $( (R, M), n )$, where $R$ and $M$ are quoted types and $n$ is a natural number, used in the context of module tactics for quasi-normal forms.\"}\n  {\"name\": \"Mathlib.Tactic.Module.NF\", \"module\": \"Mathlib/Tactic/Module\", \"type\": \"Type u_1 → Type u_2 → Type (max u_2 u_1)\", \"doc\": \"A normal form representation of module elements as a list of pairs $(r, m)$ where $r$ is an element of the ring $R$ and $m$ is an element of the module $M$. This encodes linear combinations of module \"}\n  {\"name\": \"Mathlib.Tactic.Module.qNF.toNF\", \"module\": \"Mathlib/Tactic/Module\", \"type\": \"{u v : Lean.Level} →\\n  {M : Q(Type v)} → {R : Q(Type u)} → Mathlib.Tactic.Module.qNF R M → Q(Mathlib.Tactic.Module.NF «$R» «$M»)\", \"doc\": \"The function maps a quasi-normal form $ l $ to the normal form $ \\\\text{NF}(R, M) $ within the context $ Q $.\"}\n  {\"name\": \"Mathlib.Tactic.Module.parse\", \"module\": \"Mathlib/Tactic/Module\", \"type\": \"{v : Lean.Level} →\\n  {M : Q(Type v)} →\\n    (iM : Q(AddCommMonoid «$M»)) →\\n      (x : Q(«$M»)) →\\n        Mathlib.Tactic.AtomM\\n          ((u : Lean.Level) ×\\n            (R : Q(Type u)) ×\\n              (iR : Q(Semiring «$R»)) ×\\n                (x_1 : Q(Module «$R» «$M»)) ×\\n                  (l : Mathli\", \"doc\": \"The function takes a module element $ x $ over a quoted type $ M $ with additive commutative monoid structure, and returns a computational context containing: a semiring $ R $, a module structure of $\"}\n  {\"name\": \"Mathlib.Tactic.Module.qNF.onScalar\", \"module\": \"Mathlib/Tactic/Module\", \"type\": \"{v : Lean.Level} →\\n  {M : Q(Type v)} →\\n    {u₁ u₂ : Lean.Level} →\\n      {R₁ : Q(Type u₁)} →\\n        {R₂ : Q(Type u₂)} → Mathlib.Tactic.Module.qNF R₁ M → Q(«$R₁» → «$R₂») → Mathlib.Tactic.Module.qNF R₂ M\", \"doc\": \"A function that processes scalar terms in quantifier normal form, taking a quasi-normal form over a ring $R_1$ and a ring homomorphism from $R_1$ to $R_2$, then producing a quasi-normal form over $R_2\"}\n  {\"name\": \"FractionalOperation\", \"module\": \"Mathlib/Combinatorics/Optimization/ValuedCSP\", \"type\": \"Type u_3 → ℕ → Type u_3\", \"doc\": \"A multiset of functions from $m$-tuples of elements in $D$ to $D$, where each function takes a mapping from an $m$-element finite set to $D$ and returns an element of $D$. This represents a collection\"}\n  {\"name\": \"Mathlib.Tactic.FieldSimp.qNF\", \"module\": \"Mathlib/Tactic/FieldSimp\", \"type\": \"{v : Lean.Level} → Q(Type v) → Type\", \"doc\": \"The abbreviation `qNF` represents a list of pairs, where each pair consists of a tuple containing an integer and an element of type $Q(M)$, along with a natural number. This structure is used in the c\"}\n  {\"name\": \"Mathlib.Meta.NormNum.mkRawRatLit\", \"module\": \"Mathlib/Tactic/NormNum/Result\", \"type\": \"ℚ → Q(ℚ)\", \"doc\": \"A structure representing the result of normalizing a number, stored as a quoted term for use in tactic output.\"}\n",
+   "date": "2026-10-24",
+   "verdict": "No matching Mathlib record. Use the existing published project structure, without redeclaration."
+  },
+  {
+   "tool": "grep Mathlib",
+   "query": "RationalModuleRealization|RationalRealizationScalarComparison in Mathlib/CategoryTheory",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-24",
+   "verdict": "No Mathlib declaration with either structure name."
+  },
+  {
+   "tool": "grep",
+   "query": "rg of RationalModuleRealization|RationalRealizationScalarComparison in lean/WeilConjectures, lean/Sheaf and dag/lean_names_upstream.json; definition-owner scan of dag/nodes",
+   "results": "lean/Sheaf/Paper/RationalRealizationScalarCoherence.lean:73:structure RationalRealizationScalarComparison\nlean/Sheaf/Paper/RationalModuleRealizationFunctor.lean:93:structure RationalModuleRealization (X : Scheme.{u}) [IsNoetherian X]\nNo existing definition node owns either structure.\n",
+   "date": "2026-10-24",
+   "verdict": "The structure exists in the recorded Sheaf module, but no definition node owns it. Bind existing:true; do not create a Lean copy."
+  },
+  {
+   "tool": "blueprint_refs.py search",
+   "query": "rational module realization; scalar realization; RationalModuleRealization; RationalRealizationScalarComparison",
+   "results": "0 blueprint nodes match 'rational module realization'\n0 blueprint nodes match 'scalar realization'\n0 blueprint nodes match 'RationalModuleRealization'\n0 blueprint nodes match 'RationalRealizationScalarComparison'\n",
+   "date": "2026-10-24",
+   "verdict": "No imported blueprint node gives this normalized data record; ancestor for the item is None."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-sf-adic-finite-realization-cocone",
+  "date": "2026-10-24",
+  "group": "NP"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "Native finite-realization cocone proof steps 4–5: Normalized raw rational module realization data. The item has no imported blueprint ancestor; the native provenance is the evaluation/biduality clause of thm-coef-qbar-verdier.",
+   "via": [
+    "lem-sf-adic-finite-realization-cocone",
+    "lem-sf-adic-qbar-constructible-realization",
+    "lem-sf-weil-verdier-biduality"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "lean": {
+  "module": "Sheaf.Paper.RationalModuleRealizationFunctor",
+  "declaration": "AlgebraicGeometry.Scheme.RationalModuleRealization",
+  "statement": "structure RationalModuleRealization (X : Scheme.{u}) [IsNoetherian X]\n    [Fact (∃ n : ℕ, topologicalKrullDim X ≤ n)]\n    [Fact (∀ x : X, IsUnit (l : X.presheaf.stalk x))]",
+  "branch": "newtargets-dag",
+  "by": "NP",
+  "date": "2026-10-24",
+  "existing": true,
+  "note": "Existing plain data record, not its Nonempty existence theorem. Definition ownership added on L's H2 return of 616951560d9b; the published declaration and its module are unchanged."
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-6afe23ef3",
+  "group": "NP",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-6afe23ef3",
+  "group": "NP",
+  "result": "pass",
+  "note": "H2 repair of 616951560d9b. Lean module byte-identical (sha b66c9f6f…), so the prior full maths reading stands. Item JSON differs only in stmt_deps and lean: the theorem stmt_deps lem-fd-completion-inverse-scalar-coherence, lem-per-rational-module-realization-functor and lem-per-rational-realization-scalar-coherence are replaced by landed def-pur-inverse-scalar-coherence (owns FdCompletionInverseScalarCoherence, identical to side-live) and new existing:true def-sf-rational-module-realization-datum (RationalModuleRealization, verbatim l.93-96) and def-sf-rational-realization-scalar-comparison (RationalRealizationScalarComparison, verbatim l.73-74). Both new node statements match every field of the structures (coefficient isos and normalizations, restriction square, E-action, exactness, cohomology, constructibility, J objects/fractions, models; gamma, square, theta, two-route integral_normalization). All their stmt_deps exist; prop-weil-pbc-scalar-extension is accepted as owner of pbcScalarCoefficientMap/pbcRationalScalarExtension (in its lean.declarations, landed def precedent). No cycle. Advisory: rationalPullScalar is an abbrev in a theorem module but only a field composite. Report has Worker report and Second reading by NP (H11 accepted earlier). No compile: no file changed; worker deliver2 --no-push OK."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D7",
+  "result": "pass",
+  "landing": "20261026T235845-L-1461581",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)",
+  "sorry_before": [
+   "AlgebraicGeometry.Scheme.rationalModuleRealizationFunctor"
+  ],
+  "sorry_after": []
+ }
+}

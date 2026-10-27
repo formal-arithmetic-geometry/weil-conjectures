@@ -1,0 +1,136 @@
+{
+ "id": "lem-sp-tower-p1-kernel-finite-comparison",
+ "kind": "statement",
+ "title": "Finite commuting squares for the supported diagonal scalar",
+ "statement": "Fix a prime l, a finite extension E of Q_l, an arbitrary scheme S on which l is invertible, a Presentation p and any KernelSplittingData k [def-sp-tower-p1-kernel-scalar-data]. The diagonal is Cartier, and for every positive level n+1 there exist canonical ProjectiveCoordinates c and the ordinary finite unit/Chern splitting bP over P for which KernelFiniteNormalization holds: the specified alpha, pushed delta, trace and composite WordComparison squares, and both ordinary finite diagonal scalar identities. These are finite-level comparisons only; no tower scalar identity or tower splitting base-change square is asserted.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-tower-geometric/sk-prop-sp-tower-geometric-p1.proof.md",
+  "place": "Levelwise check, finite diagonal integrals"
+ },
+ "stmt_deps": [
+  "def-sp-tower-p1-kernel-scalar-data",
+  "def-sp-p1-projective-coordinates",
+  "def-sp-tower-p1-adjunction-data"
+ ],
+ "proof": [
+  {
+   "text": "The evaluation assertions of [det-sp-tower-classes](3),(4) send $\\delta_\\bullet$ and $t_i$ to the finite diagonal and splitting trace. The canonical evaluation/composition/mate comparisons of [lem-coef-semilinear-derived-sections] and [lem-sp-tower-p1-etale-origin-comparisons] identify their composition with $\\alpha_i$ with $\\nu_P^*(t_{P,B_n}\\circ Rp_{i*,B_n}(\\delta_{B_n})\\circ\\alpha_{i,B_n})$. In particular the source is the composition identification for $p_i\\Delta=1_P$, rather than an arbitrarily chosen isomorphism. The sign is the one in [det-sp-tower-classes](3): precomposition with the divisor unit gives $c_1(\\mathcal O_W(\\Delta))$. Thus the finite class is the supported class with the sign required in [lem-sp-tower-p1-arbitrary-base-integrals].",
+   "uses": [
+    "det-sp-tower-classes",
+    "lem-coef-semilinear-derived-sections",
+    "lem-sp-tower-p1-etale-origin-comparisons",
+    "lem-sp-tower-p1-arbitrary-base-integrals"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-tower-geometric/sk-prop-sp-tower-geometric-p1.proof.md",
+    "place": "Levelwise check: identify the specified finite composites"
+   }
+  },
+  {
+   "text": "For every $n\\geq1$ put $N=\\ell^n$ and $A=B_n$. Then $N\\geq1$, $NA=0$ and $N$ is invertible on $S$. The ring $B_n$ is finite: writing $\\ell=u\\varpi_E^e$ identifies it with $\\mathcal O_E/\\varpi_E^{en}$, a finite coefficient ring of [def-weil-l-adic-coefficient-extension]. All hypotheses of [lem-sp-tower-p1-arbitrary-base-integrals] therefore hold. That node gives both displayed finite composites equal to $1_{(B_n)_P}$ over this arbitrary base. By step 4, $e_n(c_i)=1_{(B_n)_P}$ on the pro-etale site, with the prescribed comparison, for both $i$.",
+   "uses": [
+    "def-weil-l-adic-coefficient-extension",
+    "lem-sp-tower-p1-arbitrary-base-integrals"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-tower-geometric/sk-prop-sp-tower-geometric-p1.proof.md",
+    "place": "Levelwise check: finite diagonal integrals over arbitrary bases"
+   }
+  }
+ ],
+ "proof_deps": [
+  "det-sp-tower-classes",
+  "lem-coef-semilinear-derived-sections",
+  "lem-sp-tower-p1-etale-origin-comparisons",
+  "lem-sp-tower-p1-arbitrary-base-integrals",
+  "def-weil-l-adic-coefficient-extension"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-tower-geometric/sk-prop-sp-tower-geometric-p1.proof.md",
+  "place": "Levelwise check, finite diagonal integrals"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The trace of the diagonal class of the projective line is the identity in the derived category of coefficient towers",
+   "results": "RootPairing.GeckConstruction.trace_h_eq_zero, Algebra.trace_self, Algebra.normalizedTrace_self, RootPairing.GeckConstruction.trace_toEnd_eq_zero, Algebra.traceMatrix_localizationLocalization, Algebra.normalizedTrace_algebraMap_eq_id, LinearMap.IsProj.trace, Algebra.trace_self_apply",
+   "date": "2026-10-25",
+   "verdict": "No exact match: algebraic trace and tensor-base-change results do not identify the normalized projective-line tower maps; singleFunctor full faithfulness is used only for the final algebraic assembly."
+  },
+  {
+   "tool": "loogle",
+   "query": "DerivedCategory, \"singleFunctor\"",
+   "results": "DerivedCategory.singleFunctor, DerivedCategory.singleFunctors, DerivedCategory.instAdditiveSingleFunctor, DerivedCategory.singleFunctorIsoCompQ, DerivedCategory.singleFunctorsPostcompQIso, DerivedCategory.singleFunctorIsoCompQh, DerivedCategory.singleFunctorsPostcompQhIso, DerivedCategory.singleFunctorIsoCompQ_hom_app",
+   "date": "2026-10-25",
+   "verdict": "No exact match: algebraic trace and tensor-base-change results do not identify the normalized projective-line tower maps; singleFunctor full faithfulness is used only for the final algebraic assembly."
+  },
+  {
+   "tool": "grep",
+   "query": "diagonal.*trace|trace.*diagonal|WordComparison|singleFunctor",
+   "results": "Mathlib/LinearAlgebra/Matrix/GeneralLinearGroup/FinTwo.lean, Mathlib/LinearAlgebra/Matrix/ToLin.lean, Mathlib/LinearAlgebra/Matrix/Hadamard.lean, Mathlib/LinearAlgebra/Matrix/Trace.lean, Mathlib/LinearAlgebra/Matrix/Trace.lean, Mathlib/LinearAlgebra/Matrix/Trace.lean, Mathlib/LinearAlgebra/Matrix/Trace.lean, Mathlib/LinearAlgebra/Matrix/Trace.lean",
+   "date": "2026-10-25",
+   "verdict": "No exact match: algebraic trace and tensor-base-change results do not identify the normalized projective-line tower maps; singleFunctor full faithfulness is used only for the final algebraic assembly."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The unit and first Chern class splitting of projective line cohomology commutes with base change for sheaf towers",
+   "results": "IsBaseChange.pi, KaehlerDifferential.cotangentComplexBaseChange, KaehlerDifferential.mapBaseChange, KaehlerDifferential.cotangentComplexBaseChange_tmul, IsBaseChange.of_comp, KaehlerDifferential.tensorKaehlerEquivBase, LinearMap.baseChange_baseChange, IsBaseChange.tensorEquiv",
+   "date": "2026-10-25",
+   "verdict": "No exact match: algebraic trace and tensor-base-change results do not identify the normalized projective-line tower maps; singleFunctor full faithfulness is used only for the final algebraic assembly."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.TowerP1KernelScalarNormalization",
+  "date": "2026-10-25",
+  "group": "V4"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sp-tower-geometric",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-sp-tower-p1-adjunction",
+   "place": "Levelwise check, finite diagonal integrals",
+   "via": [
+    "lem-sp-tower-p1-kernel-scalar-normalization"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.TowerP1KernelFiniteComparison",
+  "file": "lean/Sheaf/Paper/TowerP1KernelFiniteComparison.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.SpTowerP1.towerP1KernelFiniteComparison",
+  "statement": "theorem towerP1KernelFiniteComparison (S : Scheme.{u})\n    (hS : IsUnit (l : Γ(S, ⊤))) (p : Presentation l E S hS)\n    (k : KernelSplittingData l E p) :\n    ∃ hD : (diagonalImmersion S).ker.IsInvertible,\n      ∀ n : ℕ, k.finiteNormalization l E hD n",
+  "branch": "sheaf-dag",
+  "by": "V4",
+  "date": "2026-10-25"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-93df5",
+  "group": "V4",
+  "result": "pass",
+  "landing": "20261025T164600-L-1037403",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-93df5",
+  "group": "V4",
+  "result": "pass",
+  "landing": "20261025T164600-L-1037403",
+  "kind": "interface",
+  "note": "independent cc review: relocated data module vs clone item module (verbatim); item proof vs two new sorried lemmas and their nodes; item node fields vs Lean proof"
+ }
+}

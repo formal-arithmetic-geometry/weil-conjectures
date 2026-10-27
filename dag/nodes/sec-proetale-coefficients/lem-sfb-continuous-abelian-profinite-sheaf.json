@@ -1,0 +1,248 @@
+{
+ "id": "lem-sfb-continuous-abelian-profinite-sheaf",
+ "kind": "statement",
+ "title": "Continuous-function abelian sheaves on profinite sets",
+ "statement": "Work on the coherent site of profinite sets in a fixed universe, with covers the finite jointly surjective families [sk-def-sfb-condensed-ring]; take abelian groups in a universe large enough for all continuous-map groups. Let $G$ be an abelian group with a topology for which addition and negation are continuous, without any separation assumption. Set $P_G(S)=C(S,G)$, with pointwise abelian group operations and restriction $h\\mapsto h\\circ u$ along a continuous map $u:T\\to S$. Then $P_G$ is an abelian sheaf. Explicitly, every compatible family $h_i:S_i\\to G$ on a finite jointly surjective profinite cover has a unique continuous glued section $h:S\\to G$, and $P_G(\\varnothing)$ is the zero group. For a continuous additive map $f:G\\to H$, postcomposition $h\\mapsto f\\circ h$ defines a morphism $P_f:P_G\\to P_H$ of abelian sheaves. These formulas define an additive functor: $P_{\\mathrm{id}}=\\mathrm{id}$, $P_{gf}=P_gP_f$ and $P_{f+g}=P_f+P_g$.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-prop-sfb-cartesian-coefficients/lem-sfb-subfield-flat.proof.md",
+  "place": "First two sentences of lem-sfb-subfield-flat.proof.md: continuous-function abelian sheaves behind the coordinate maps; extracted original steps 1 and additive part of 4."
+ },
+ "stmt_deps": [
+  "sk-def-sfb-condensed-ring"
+ ],
+ "proof": [
+  {
+   "text": "For $a,b\\in C(S,G)$ put $(a+b)(s)=a(s)+b(s)$, $(-a)(s)=-a(s)$ and $0(s)=0$. These maps are continuous: the sum is addition composed with $s\\mapsto(a(s),b(s))$, negation is negation composed with $a$, and zero is constant. Every abelian group identity holds after evaluation at each $s$, so these operations make $C(S,G)$ an abelian group. Precomposition is continuous and satisfies $(a+b)\\circ u=a\\circ u+b\\circ u$ and $0\\circ u=0$. The identities $a\\circ\\mathrm{id}=a$ and $(a\\circ u)\\circ v=a\\circ(u\\circ v)$ give the presheaf laws.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-condensed-ring/def-sfb-continuous-map-condensed-ring.proof.md",
+    "place": "First paragraph: pointwise algebra and precomposition, with abelian groups replacing rings."
+   }
+  },
+  {
+   "text": "For a finite family of profinite sets $S_i$, restriction gives an additive bijection $C(\\coprod_i S_i,G)\\longrightarrow\\prod_i C(S_i,G)$. Its inverse assigns the function $a(i,s)=a_i(s)$ to a tuple $(a_i)$. For every open $O\\subseteq G$, its inverse image is the union of the open subsets $a_i^{-1}(O)$ inside the open coproduct components, hence is open. Both maps preserve addition and zero by evaluation, so they are inverse group homomorphisms. Thus this is also a product in abelian groups: a family of homomorphisms $B\\to C(S_i,G)$ factors uniquely through the displayed tuple map. When the family is empty there is exactly one function from the empty space to $G$, so $P_G(\\varnothing)$ is the zero group.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-condensed-ring/def-sfb-continuous-map-condensed-ring.proof.md",
+    "place": "Condition (a): continuous maps out of finite disjoint unions, including the empty union."
+   }
+  },
+  {
+   "text": "Let $q:S^{\\prime}\\to S$ be a continuous surjection of profinite sets and put $R=S^{\\prime}\\times_S S^{\\prime}=\\{(x,y):q(x)=q(y)\\}$. If $b\\in C(S^{\\prime},G)$ has equal pullbacks to $R$, then $b(x)=b(y)$ whenever $q(x)=q(y)$. Consequently there is a unique function $a:S\\to G$ with $a\\circ q=b$: define $a(s)$ to be $b(x)$ for any lift $x$ of $s$, independently of the lift by that equality. By [lem-sfb-compact-hausdorff-surjection-quotient], $q$ is a quotient map, since $S^{\\prime}$ is compact and $S$ is Hausdorff. For every open $O\\subseteq G$, $q^{-1}(a^{-1}(O))=b^{-1}(O)$ is open; the cited open-set criterion makes $a^{-1}(O)$ open. Hence $a$ is continuous. Surjectivity of $q$ gives uniqueness among continuous sections too. Hausdorffness is required only of $S$, never of $G$.",
+   "uses": [
+    "lem-sfb-compact-hausdorff-surjection-quotient"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-condensed-ring/def-sfb-continuous-map-condensed-ring.proof.md",
+    "place": "Condition (b): descent along a compact-to-Hausdorff quotient map; Stacks Tags 08YD (lemma-closed-map) and 0AAU (lemma-closed-morphism-quotient-topology, part (3))."
+   }
+  },
+  {
+   "text": "The forgetful functor from abelian groups to sets reflects finite limits. Identify the underlying type-valued presheaf of the prescribed lifted continuous-map groups with ContinuousMap.yonedaPresheaf Profinite.toTopCat G followed by uliftFunctor; the components of this natural isomorphism are identity maps. Universe lifting preserves and reflects the type-valued sheaf condition. For the unlifted presheaf, Mathlib supplies preservation of finite products and equalizerCondition_yonedaPresheaf. The latter uses [lem-sfb-compact-hausdorff-surjection-quotient] for each effective epimorphism, which is surjective by Profinite.effectiveEpi_tfae. Apply [lem-sfb-profinite-coherent-sheaf-criterion] to obtain its sheaf property. Then Presheaf.isSheaf_coherent_of_hasPullbacks_of_comp reflects the finite product and equalizer limits along the forgetful functor, proving the abelian-valued sheaf condition. This replaces the hand-written test-group equalizer calculation by the existing finite-limit-reflection API, without changing the continuous sections or imposing separation on G.",
+   "uses": [
+    "lem-sfb-compact-hausdorff-surjection-quotient",
+    "lem-sfb-profinite-coherent-sheaf-criterion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-condensed-ring/def-sfb-continuous-map-condensed-ring.proof.md",
+    "place": "Conditions (a), (b) and the coherent sheaf criterion; the abelian equalizer universal property is written explicitly."
+   }
+  },
+  {
+   "text": "For the finite jointly surjective family q_i:U_i to S, use the topological sigma type of the U_i as the finite disjoint union. The maps q(i,x)=q_i(x) and b(i,x)=h_i(x) are continuous by continuous_sigma; the sigma type is compact because the indexing type is finite. Joint surjectivity makes q surjective, and [lem-sfb-compact-hausdorff-surjection-quotient] makes q a quotient map since S is Hausdorff. Compatibility says precisely Function.FactorsThrough b q. The continuous map q.lift b therefore descends b; q.lift_comp gives the restriction identities. Evaluating any competing section at a lift of each s proves uniqueness. The same construction covers the empty family and empty spaces without any nonempty assumption.",
+   "uses": [
+    "lem-sfb-compact-hausdorff-surjection-quotient"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-condensed-ring/def-sfb-continuous-map-condensed-ring.proof.md",
+    "place": "Conditions (a), (b): combine the finite disjoint union and surjective descent calculations to obtain the stated gluing formula."
+   }
+  },
+  {
+   "text": "For a continuous additive map $f:G\\to H$, the map $P_f(S):a\\mapsto f\\circ a$ is defined on continuous sections by composition. It preserves addition and zero because $f(a(s)+b(s))=f(a(s))+f(b(s))$ and $f(0)=0$. It commutes with restriction since $f\\circ(a\\circ u)=(f\\circ a)\\circ u$, so it is a morphism of the constructed abelian sheaves. On each section, $P_{\\mathrm{id}}(a)=a$ and $P_{gf}(a)=g\\circ f\\circ a=P_g(P_f(a))$. For two continuous additive maps $f,g:G\\to H$, their pointwise sum is additive because $H$ is abelian and continuous because addition in $H$ is continuous. Evaluation gives $P_{f+g}(a)(s)=f(a(s))+g(a(s))=(P_f(a)+P_g(a))(s)$; also $P_0(a)=0$. Addition of sheaf morphisms is sectionwise addition of these homomorphisms, so the displayed equality is equality of sheaf morphisms. These formulas prove the asserted additive functor laws.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-condensed-ring/def-sfb-continuous-map-condensed-ring.proof.md",
+    "place": "First paragraph (pointwise operations and functoriality), adapted to additive postcomposition; realizes the additive coordinate maps in the first two sentences of lem-sfb-subfield-flat.proof.md."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-compact-hausdorff-surjection-quotient",
+  "lem-sfb-profinite-coherent-sheaf-criterion"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-condensed-ring/def-sfb-continuous-map-condensed-ring.proof.md",
+  "place": "Conditions (a), (b), adapted from rings to abelian groups; finite-limit reflection replaces the explicit test-group calculation. Explicit finite-cover descent uses the topological sigma type and IsQuotientMap.lift. Pointwise postcomposition realizes the first two sentences of lem-sfb-subfield-flat.proof.md. Lean proof by X7, 2026-10-25; statements and constructions unchanged."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "ContinuousMap.module|toCondensed|topCatToCondensed|isSheaf.*[Cc]ontinuous",
+   "results": "25 hits: Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean, Mathlib/Condensed/TopComparison.lean, Mathlib/Condensed/TopComparison.lean, Mathlib/Condensed/TopComparison.lean, Mathlib/Condensed/TopComparison.lean, Mathlib/Condensed/EffectiveEpi.lean, Mathlib/Condensed/EffectiveEpi.lean, Mathlib/Condensed/EffectiveEpi.lean; note: ; digest a7c6ef519d1ee427",
+   "date": "2026-10-22",
+   "verdict": "Component APIs only: TopCat.toSheafCompHausLike (Condensed/TopComparison.lean:110) constructs a Type-valued sheaf; it does not state the additive abelian-sheaf functor, including its pointwise morphisms and sums. The explicit abelian lift and additive functor remain to be proved. CondensedAb constructors require sheaf conditions as inputs."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The presheaf of continuous maps from profinite sets to a topological abelian group is a sheaf for the coherent topology even when the group is not Hausdorff",
+   "results": "8 hits: CategoryTheory.Presheaf.isSheaf_iff_preservesFiniteProducts_and_equalizerCondition, CategoryTheory.isSheaf_coherent, TopCat.toSheafCompHausLike, LightCondensed.ofSheafForgetLightProfinite, CategoryTheory.Presheaf.isSheaf_coherent_of_hasPullbacks_of_comp, Condensed.isSheafProfinite, TopCat.toSheafCompHausLike_val_map, CategoryTheory.Presheaf.isSheaf_coherent_iff_regular_and_extensive; note: ; digest 7651fa66137e5fb0",
+   "date": "2026-10-22",
+   "verdict": "Component APIs only: TopCat.toSheafCompHausLike (Condensed/TopComparison.lean:110) constructs a Type-valued sheaf; it does not state the additive abelian-sheaf functor, including its pointwise morphisms and sums. The explicit abelian lift and additive functor remain to be proved. CondensedAb constructors require sheaf conditions as inputs."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For every topological abelian group G without separation assumptions, the presheaf S maps to continuous functions C(S,G) on profinite sets is an abelian sheaf for finite jointly surjective covers",
+   "results": "8 hits: LightCondAb.ofSheafLightProfinite, LightCondAb, CondensedAb, CondensedMod.ofSheafProfinite, LightCondMod.ofSheafLightProfinite, CompHausLike.LocallyConstantModule.functor, CondensedMod.ofSheafCompHaus, CompHausLike.LocallyConstantModule.functorToPresheaves_obj_obj_isAddCommGroup; note: ; digest 915cac8fd3d639f4",
+   "date": "2026-10-22",
+   "verdict": "Component APIs only: TopCat.toSheafCompHausLike (Condensed/TopComparison.lean:110) constructs a Type-valued sheaf; it does not state the additive abelian-sheaf functor, including its pointwise morphisms and sums. The explicit abelian lift and additive functor remain to be proved. CondensedAb constructors require sheaf conditions as inputs."
+  },
+  {
+   "tool": "loogle",
+   "query": "TopCat.toSheafCompHausLike",
+   "results": "6 hits: TopCat.toSheafCompHausLike, TopCat.toSheafCompHausLike_obj_obj, topCatToSheafCompHausLike_obj, TopCat.toSheafCompHausLike_obj_map, topCatToSheafCompHausLike_map_hom_app, CompHausLike.LocallyConstant.functorToPresheavesIso; note: ; digest af21adbb73cc6d95",
+   "date": "2026-10-22",
+   "verdict": "Component APIs only: TopCat.toSheafCompHausLike (Condensed/TopComparison.lean:110) constructs a Type-valued sheaf; it does not state the additive abelian-sheaf functor, including its pointwise morphisms and sums. The explicit abelian lift and additive functor remain to be proved. CondensedAb constructors require sheaf conditions as inputs."
+  },
+  {
+   "tool": "grep",
+   "query": "toSheafCompHausLike|topCatToSheafCompHausLike",
+   "results": "5 hits: 110, 124, 128, 131, 141; note: ; digest 7262205638bece14; subdirectory Condensed/TopComparison.lean",
+   "date": "2026-10-22",
+   "verdict": "Component APIs only: TopCat.toSheafCompHausLike (Condensed/TopComparison.lean:110) constructs a Type-valued sheaf; it does not state the additive abelian-sheaf functor, including its pointwise morphisms and sums. The explicit abelian lift and additive functor remain to be proved. CondensedAb constructors require sheaf conditions as inputs."
+  },
+  {
+   "tool": "grep",
+   "query": "continuousMap.*[Aa]b|[Aa]b.*[Cc]ontinuous|topCatToSheafCompHausLike|toSheafCompHausLike",
+   "results": "25 hits: Mathlib/NumberTheory/Modular.lean, Mathlib/NumberTheory/Modular.lean, Mathlib/NumberTheory/Chebyshev.lean, Mathlib/NumberTheory/Chebyshev.lean, Mathlib/NumberTheory/Chebyshev.lean, Mathlib/Topology/Path.lean, Mathlib/NumberTheory/NumberField/CanonicalEmbedding/NormLeOne.lean, Mathlib/NumberTheory/NumberField/CanonicalEmbedding/NormLeOne.lean; digest c8a841d0de23a0dc",
+   "date": "2026-10-22",
+   "verdict": "No whole-item match in the returned hits; broad pattern produced unrelated topology hits, followed by the targeted TopComparison search."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The continuous function presheaf on profinite spaces with values in a topological abelian group is an additive sheaf functor",
+   "results": "8 hits: CategoryTheory.presheafToSheaf_additive, CategoryTheory.instPreadditiveSheaf, CompHausLike.LocallyConstantModule.functorToPresheaves_obj_obj_isAddCommGroup, CategoryTheory.Functor.IsContinuous.mk, PresheafOfModules.presheaf, SheafOfModules.instAdditiveSheafAddCommGrpCatToSheaf, SheafOfModules.instAdditivePresheafOfModulesValRingCatForget, PresheafOfModules.instAdditiveFunctorOppositeAbToPresheaf; digest ee9ee4688cf6dcd2",
+   "date": "2026-10-22",
+   "verdict": "No match for the complete item: candidate constructions give set sheaves, discrete coefficients, free abelian sheaves or sectionwise operations, rather than the full arbitrary-topological-abelian-group additive sheaf functor."
+  },
+  {
+   "tool": "loogle",
+   "query": "ContinuousMap, AddCommGrpCat",
+   "results": "0 hits: ; digest 4f53cda18c2baa0c",
+   "date": "2026-10-22",
+   "verdict": "No match for the complete item: candidate constructions give set sheaves, discrete coefficients, free abelian sheaves or sectionwise operations, rather than the full arbitrary-topological-abelian-group additive sheaf functor."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Continuous maps from profinite sets into a topological abelian group form an abelian sheaf and an additive functor in the target group",
+   "results": "8 hits: Condensed.freeAb, CondensedAb, LightCondAb.ofSheafLightProfinite, instCategoryProfiniteAddGrp, instConcreteCategoryProfiniteAddGrpContinuousAddMonoidHomCarrierToTopTotallyDisconnectedSpaceToProfinite, Condensed.profiniteFree, CompHausLike.LocallyConstantModule.functor, CompHausLike.LocallyConstantModule.functorToPresheaves_obj_obj_isAddCommGroup; digest c6079dbb8f06503a",
+   "date": "2026-10-22",
+   "verdict": "No match for the complete item: candidate constructions give set sheaves, discrete coefficients, free abelian sheaves or sectionwise operations, rather than the full arbitrary-topological-abelian-group additive sheaf functor."
+  },
+  {
+   "tool": "grep",
+   "query": "toSheafCompHausLike",
+   "results": "5 hits: 110, 124, 128, 131, 141; digest 7262205638bece14; subdirectory Condensed/TopComparison.lean",
+   "date": "2026-10-22",
+   "verdict": "No match for the complete item: candidate constructions give set sheaves, discrete coefficients, free abelian sheaves or sectionwise operations, rather than the full arbitrary-topological-abelian-group additive sheaf functor."
+  },
+  {
+   "tool": "loogle",
+   "query": "TopCat.toSheafCompHausLike",
+   "results": "6 hits: TopCat.toSheafCompHausLike, TopCat.toSheafCompHausLike_obj_obj, topCatToSheafCompHausLike_obj, TopCat.toSheafCompHausLike_obj_map, topCatToSheafCompHausLike_map_hom_app, CompHausLike.LocallyConstant.functorToPresheavesIso; digest af21adbb73cc6d95",
+   "date": "2026-10-22",
+   "verdict": "No match for the complete item: candidate constructions give set sheaves, discrete coefficients, free abelian sheaves or sectionwise operations, rather than the full arbitrary-topological-abelian-group additive sheaf functor."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Condensation of topological abelian groups by continuous functions, preserving addition of continuous homomorphisms",
+   "results": "8 hits: ProfiniteAddGrp.ofHom_comp, ProfiniteAddGrp.ofHom, ContinuousMap.add_comp, ContinuousMap.compAddMonoidHom', ContinuousMap.compAddMonoidHom'_apply, ContinuousAddMonoidHom.instAddCommGroup, instConcreteCategoryProfiniteAddGrpContinuousAddMonoidHomCarrierToTopTotallyDisconnectedSpaceToProfinite, ProfiniteAddGrp.ofHom_apply; digest 7d25f7d0c94cf40b",
+   "date": "2026-10-22",
+   "verdict": "No match for the complete item: candidate constructions give set sheaves, discrete coefficients, free abelian sheaves or sectionwise operations, rather than the full arbitrary-topological-abelian-group additive sheaf functor."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-topological-module-condensation",
+  "date": "2026-10-22",
+  "group": "N6"
+ },
+ "chapter": "sec-proetale-coefficients",
+ "unit": "sk-prop-sfb-cartesian-coefficients",
+ "blueprint": {
+  "from": {
+   "node": "lem-sfb-subfield-flat",
+   "place": "First two sentences of lem-sfb-subfield-flat.proof.md: continuous-function abelian sheaves behind the coordinate maps; extracted original steps 1 and additive part of 4.",
+   "via": [
+    "lem-sfb-topological-module-condensation",
+    "lem-sfb-condensed-subfield-basis"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sfb-continuous-abelian-profinite-sheaf",
+  "worker": "stage1",
+  "summary": "Retained the full arbitrary-topological-abelian-group statement and its universe convention. Searched the current project, full DAG, blueprint and Mathlib; no whole-item project attachment or Mathlib match. Reused the two existing Mathlib leaves for quotient maps and the coherent sheaf criterion. Wrote six steps including the abelian equalizer universal property, finite and empty covers, and additive postcomposition. No new nodes, statement changes or route changes.",
+  "blueprint": "The coordinate isomorphism in the first two sentences of lem-sfb-subfield-flat.proof.md uses continuous-function abelian sheaves and additive maps; steps 1–5 supply those sheaves and step 6 supplies the additive coordinate morphisms. The supporting coherent descent argument follows conditions (a), (b) of def-sfb-continuous-map-condensed-ring.proof.md."
+ },
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q11-b394813bc",
+  "group": "Q11",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q11-b394813bc (reviewer sub-agent of L); spot-checked: PASS, with no fixes and no new nodes. The single commit touches only the item and its report; it has a split_report with a blueprint entry, no SGA, and there is no re-split note for this item. The statement is unchanged from base and matches its use in the first two sentences of main-20261015 lem-sfb-subfield-flat.proof.md (the coordinate iso C(-,F)≅C(-,E)^n). The proof adapts conditions (a) and (b) of def-sfb-continuous-map-condensed-ring.proof.md to abelian groups, which I read in full. The site of the stmt_dep sk-def-sfb-condensed-ring is the same as the item's (finite families covering when the coproduct map is surjective). Step 1 (pointwise abelian group structure on C(S,G), additive presheaf) is correctly elementary. Step 2 gives an additive bijection with continuous inverse, using the open coproduct components, so the coproduct-to-product map is an iso in Ab; the empty family gives the zero group. Step 3 uses the stated quotient criterion of lem-sfb-compact-hausdorff-surjection-quotient (Mathlib leaf IsQuotientMap.of_surjective_continuous, Hausdorff.lean:682-684; Stacks 08YD, 0AAU(3)) with S' compact and S Hausdorff and nothing assumed of G. Step 4 proves the Ab-equalizer universal property for an arbitrary test group B, so lem-sfb-profinite-coherent-sheaf-criterion (arbitrary value category, SheafComparison.lean:236-243) applies with A=Ab, and no limit-reflection fact is hidden. Step 5 reduces finite-cover gluing to the coproduct cover, including the i=j overlaps and the empty cover (which forces S=∅). Step 6 checks postcomposition functoriality and P_{f+g}=P_f+P_g sectionwise. Edge cases tested: S=∅, empty cover, indiscrete G, G=0, singleton S, a cover with an empty member, and universes. The citer lem-sfb-topological-module-condensation (steps 0 and 2) uses only what the item states. Duplicate search over all DAG C(S,·) statements: def-sfb-continuous-map-condensed-ring is ring-only and the others are set or group objects inside larger statements, so this is no duplicate. No project Lean declaration exists; Mathlib's TopCat.toSheafCompHausLike is set-valued only. Both citations are Mathlib leaves, so no tool_uses entry is needed."
+ },
+ "lean": {
+  "module": "Sheaf.Topology.ContinuousAbelianProfiniteSheaf",
+  "declaration": "Profinite.isSheaf_continuousAbelianPresheaf",
+  "declarations": [
+   "Profinite.continuousAbelianPresheaf",
+   "Profinite.isSheaf_continuousAbelianPresheaf",
+   "Profinite.continuousAbelianSheaf",
+   "Profinite.continuousAbelianSheaf_glue",
+   "Profinite.continuousAbelianSheaf_empty",
+   "Profinite.continuousAbelianSheafMap",
+   "Profinite.continuousAbelianSheafMap_id",
+   "Profinite.continuousAbelianSheafMap_comp",
+   "Profinite.continuousAbelianSheafMap_add"
+  ],
+  "file": "lean/Sheaf/Topology/ContinuousAbelianProfiniteSheaf.lean",
+  "statement": "theorem isSheaf_continuousAbelianPresheaf (G : Type v) [AddCommGroup G] [TopologicalSpace G] [IsTopologicalAddGroup G] : Presheaf.IsSheaf (coherentTopology Profinite.{u}) (continuousAbelianPresheaf.{u, v} G)",
+  "branch": "newtargets-dag",
+  "by": "O1",
+  "date": "2026-10-22",
+  "existing": false,
+  "note": "The declarations together render the complete item: the prescribed abelian presheaf and sheaf, explicit finite-cover gluing and empty-space sections, postcomposition, and its identity, composition and addition laws. Coefficient and site universes are independent; no separation hypothesis on the coefficient group."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-d4fc8c39a",
+  "group": "O1",
+  "result": "pass",
+  "note": "All node clauses rendered exactly: coherentTopology Profinite.{u} sheaf of ULift C(S,G) in AddCommGrpCat.{max u v+1} (Ab.{u+1} when v=u, matching CondensedRing and the citer topological-module-condensation); G only IsTopologicalAddGroup, no separation; finite-cover glue with Finite I : Type w, joint surjectivity, fibre-pair compatibility including i=j, ∃! continuous glued section; empty S gives the zero group; postcomposition by G →ₜ+ H with id, comp (diagrammatic) and add laws. Real data in defs (compAddMonoidHom', compLeftContinuous), all theorems sorry, docstrings carry source and blueprint id and proof steps, statement verbatim, no stmt_deps change or new nodes. H4: only scheme pro-étale/étale continuous sheaves and ring-valued condensed versions exist. No compile needed (no changes). Second reading was by the worker itself, noted only."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "X7",
+  "result": "pass",
+  "landing": "20261025T051022-L-3919484",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

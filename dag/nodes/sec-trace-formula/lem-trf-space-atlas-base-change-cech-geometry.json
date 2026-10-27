@@ -1,0 +1,247 @@
+{
+ "id": "lem-trf-space-atlas-base-change-cech-geometry",
+ "kind": "statement",
+ "title": "Base-changed atlas covering and its canonical Cech overlap",
+ "statement": "Let $S$ be a scheme [def-pc-scheme], $f:X\\to Y$ a morphism of algebraic spaces over $S$ [def-trf-algebraic-space], $p:U\\to X$ a surjective etale map from a scheme, and $v:V\\to Y$ an etale map from a scheme. Schemes are viewed as algebraic spaces by [def-trf-scheme-algebraic-space]. Put $R=U\\times_XU$, with projections $p_1,p_2$, and $W=V\\times_YX$, $Z=V\\times_YU$, $Q=V\\times_YR$, using the fibre products of [lem-trf-space-fibre-products-etale-covers]. Then $R,Z,Q$ are schemes, $p_i:R\\to U$, $Z\\to U$, $Q\\to R$, and $W\\to X$ are etale, and the singleton $Z\\to W$ is an etale covering. The objects $W,Z,Q$ and these covering and projection maps belong to the enlarged etale site $\\mathcal C_X$ of [lem-trf-space-enlarged-etale-ringed-site-model]. There is a canonical isomorphism $Z\\times_WZ\\simeq Q$ over $W$, whose two maps to $Z$ are induced by $p_1,p_2$. On a test scheme $T$, this isomorphism takes $(v_T,u_1,u_2)$, with $p u_1=p u_2$ and $f p u_i=v v_T$, to $(v_T,(u_1,u_2))$. This isomorphism commutes with all maps of etale test schemes $V'\\to V$ over $Y$.",
+ "source": {
+  "document": "literature/stacks-project/spaces-morphisms.tex",
+  "place": "Tag 03M8 (lemma-compute-pushforward), covering and overlap sentences of the proof; the overlap base is W = V times_Y X, correcting the printed subscript X."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-trf-algebraic-space",
+  "def-trf-scheme-algebraic-space",
+  "lem-trf-space-fibre-products-etale-covers",
+  "lem-trf-space-enlarged-etale-ringed-site-model"
+ ],
+ "proof": [
+  {
+   "text": "Map the given sheaf pullback squares to presheaves. Apply representableWith_baseChange from [lem-trf-space-chartwise-etale-permanence] to p and v to prove representable etaleness of p1, p2, zU, qR, wX. The scheme-test definition in [def-trf-algebraic-space], tested against the inverse of a representation of the target, gives a representing scheme for the source: the other projection is an isomorphism. Apply this successively to R, Z, Q.",
+   "uses": [
+    "def-trf-algebraic-space",
+    "lem-trf-space-chartwise-etale-permanence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-morphisms.tex",
+    "place": "Tag 03M8 (lemma-compute-pushforward), covering and overlap sentences of the proof; the overlap base is W = V times_Y X, correcting the printed subscript X."
+   }
+  },
+  {
+   "text": "Cancel the W pullback square from Z to obtain IsPullback zU c p wX. Apply representableWith_baseChange to both the etaleness and scheme-test surjectivity of p. To turn the latter into [def-trf-algebraic-space-jointly-surjective-family], test on a field-valued section, choose a point of the surjective representing scheme, and use its residue field and residue-field morphism. Full faithfulness of Spec gives the field embedding, and the representing square gives the lifted-section equation.",
+   "uses": [
+    "def-trf-algebraic-space",
+    "def-trf-algebraic-space-jointly-surjective-family",
+    "lem-trf-space-chartwise-etale-permanence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-morphisms.tex",
+    "place": "Tag 03M8 (lemma-compute-pushforward), covering and overlap sentences of the proof; the overlap base is W = V times_Y X, correcting the printed subscript X."
+   }
+  },
+  {
+   "text": "Compose representable etale maps using isEtale_comp from [def-trf-algebraic-space]; this gives chartwise etaleness of all structure maps. Identity is chartwise etale directly from its definition. Construct the six objects and eight arrows explicitly as the full subcategory of Over X in [lem-trf-space-enlarged-etale-ringed-site-model]. The pullback equations give their triangle identities. For the singleton presieve, its membership witnesses all have the given arrow c; reindex the residue-field lifting witness to its uncurry type to prove the covering condition.",
+   "uses": [
+    "def-trf-algebraic-space",
+    "lem-trf-space-enlarged-etale-ringed-site-model"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-morphisms.tex",
+    "place": "Tag 03M8 (lemma-compute-pushforward), covering and overlap sentences of the proof; the overlap base is W = V times_Y X, correcting the printed subscript X."
+   }
+  },
+  {
+   "text": "Cancel the Z pullback square from Q to obtain IsPullback q1 qR zU p1. Paste it with R, then cancel IsPullback c zU wX p. The result is IsPullback q1 q2 c c; the commutation follows from uniqueness of maps into W and the equations for q1 and q2. Mathlib IsPullback.isoPullback.symm gives the required canonical isomorphism and both projection identities. The full-subcategory description in [def-trf-algebraic-space] identifies its morphisms with the displayed sheaf morphisms.",
+   "uses": [
+    "def-trf-algebraic-space"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-morphisms.tex",
+    "place": "Tag 03M8 (lemma-compute-pushforward), covering and overlap sentences of the proof; the overlap base is W = V times_Y X, correcting the printed subscript X."
+   }
+  },
+  {
+   "text": "For each of q1,q2, use Z pullback uniqueness and the prescribed V and U projection equations to prove aQ followed by qi equals qi-prime followed by aZ. The projection identities of e,e-prime and d now show that both composites in the naturality square agree after qi. The Q universal property reduces equality to qV and qR; for qV use q1 followed by zV, and for qR use R uniqueness with qi followed by zU. These are equalities of sheaf maps, hence of the underlying full-subcategory morphisms of [def-trf-algebraic-space].",
+   "uses": [
+    "def-trf-algebraic-space"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-morphisms.tex",
+    "place": "Tag 03M8 (lemma-compute-pushforward), covering and overlap sentences of the proof; the overlap base is W = V times_Y X, correcting the printed subscript X."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-trf-algebraic-space",
+  "def-trf-algebraic-space-jointly-surjective-family",
+  "lem-trf-space-chartwise-etale-permanence",
+  "lem-trf-space-enlarged-etale-ringed-site-model"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "B5",
+  "date": "2026-10-26",
+  "document": "literature/stacks-project/spaces-morphisms.tex",
+  "place": "Tag 03M8 (lemma-compute-pushforward), covering and overlap sentences of the proof; the overlap base is W = V times_Y X, correcting the printed subscript X.",
+  "note": "Formalized the source argument with scheme tests and categorical pullback pasting/cancellation; no new statements."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "AlgebraicSpace|atlas.*[Cc]ech|[Cc]ech.*atlas",
+   "results": "{\"top\": [], \"n_hits\": 0, \"note\": \"\", \"sub\": \"AlgebraicGeometry\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: scheme-only etale geometry does not state the algebraic-space atlas comparison"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Pullback of an etale algebraic space atlas and its Cech relation along a scheme V over Y",
+   "results": "{\"top\": [], \"n_hits\": 0, \"note\": \"service unavailable: {\\\"error\\\":\\\"Rate limit exceeded: 60 per 1 minute\\\"}\", \"sub\": \"\"}",
+   "date": "2026-10-22",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Scheme.Etale, CategoryTheory.Limits.pullback",
+   "results": "{\"top\": [], \"n_hits\": 0, \"note\": \"\", \"sub\": \"\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: scheme-only etale geometry does not state the algebraic-space atlas comparison"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Base change of a surjective etale scheme atlas of an algebraic space gives a cover whose Cech overlap is V times_Y (U times_X U)",
+   "results": "{\"top\": [\"AlgebraicGeometry.Scheme.Pullback.openCoverOfBase'_f\", \"AlgebraicGeometry.Scheme.Pullback.openCoverOfLeftRight_X\", \"AlgebraicGeometry.Scheme.Pullback.openCoverOfLeftRight_f\", \"AlgebraicGeometry.Scheme.instOverXPullbackCoverOverProp'\", \"AlgebraicGeometry.Scheme.Pullback.diagonalCover\", \"AlgebraicGeometry.Scheme.Pullback.openCoverOfBase_X\", \"AlgebraicGeometry.Scheme.instOverXPullbackCoverOverProp\", \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.𝒰D₀\"], \"n_hits\": 8, \"note\": \"\", \"sub\": \"\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: scheme-only etale geometry does not state the algebraic-space atlas comparison"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Etale presentation of an algebraic space is preserved by changing the test scheme, including the canonical isomorphism of its double overlap over the pulled back space",
+   "results": "{\"top\": [\"AlgebraicGeometry.IsEtale.of_comp\", \"AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified\", \"AlgebraicGeometry.IsEtale.instHasOfPostcompPropertyScheme\", \"StandardEtalePresentation.mapEquiv\", \"AlgebraicGeometry.Scheme.instCategoryEtale\", \"AlgebraicGeometry.IsEtale.instIsStableUnderBaseChangeScheme\", \"RingHom.Etale.respectsIso\", \"StandardEtalePresentation.toSubmersivePresentation_toPreSubmersivePresentation_toPresentation\"], \"n_hits\": 8, \"note\": \"\", \"sub\": \"\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: scheme-only etale geometry does not state the algebraic-space atlas comparison"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Base changing an etale scheme atlas U of an algebraic space X along V over Y yields a cover of V times_Y X with overlap V times_Y (U times_X U)",
+   "results": "{\"t\": \"2026-10-23T14:17:02Z\", \"tool\": \"leanfinder\", \"query\": \"Base changing an etale scheme atlas U of an algebraic space X along V over Y yields a cover of V times_Y X with overlap V times_Y (U times_X U)\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsEtale.instIsStableUnderBaseChangeScheme\", \"AlgebraicGeometry.Scheme.etalePretopology\", \"AlgebraicGeometry.Scheme.instOverXPullbackCoverOver\", \"AlgebraicGeometry.Scheme.instOverXPullbackCoverOver'\", \"AlgebraicGeometry.Scheme.smallEtalePretopology\", \"AlgebraicGeometry.Scheme.instOverXPullbackCoverOverProp'\", \"AlgebraicGeometry.IsEtale.instHasOfPostcompPropertyScheme\", \"AlgebraicGeometry.Scheme.instHasPullbacksEtale\"], \"digest\": \"16f9cebe901e663c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: returned scheme-level base-change and cover results do not state the algebraic-space atlas geometry or enlarged-site clauses"
+  },
+  {
+   "tool": "grep",
+   "query": "AlgebraicSpace|atlas.*[Cc]ech|[Cc]ech.*atlas",
+   "results": "{\"t\": \"2026-10-23T14:17:44Z\", \"tool\": \"grep\", \"query\": \"AlgebraicSpace|atlas.*[Cc]ech|[Cc]ech.*atlas\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: returned scheme-level base-change and cover results do not state the algebraic-space atlas geometry or enlarged-site clauses"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Etale cover of an algebraic space pulled back along a map of schemes has base changed Cech overlap",
+   "results": "{\"t\": \"2026-10-23T14:17:45Z\", \"tool\": \"leansearch\", \"query\": \"Etale cover of an algebraic space pulled back along a map of schemes has base changed Cech overlap\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Cover.pullbackCoverOver'_X\", \"AlgebraicGeometry.Scheme.Cover.pullbackCoverOver'_f\", \"AlgebraicGeometry.Scheme.Cover.pullbackCoverOver'_I₀\", \"AlgebraicGeometry.Scheme.Cover.pullbackCoverOver_f\", \"AlgebraicGeometry.Scheme.Cover.pullbackCoverOver_X\", \"AlgebraicGeometry.Scheme.Cover.pullbackCoverOverProp'\", \"AlgebraicGeometry.Scheme.Cover.pullbackHom\", \"AlgebraicGeometry.IsEtale.instIsStableUnderBaseChangeScheme\"], \"digest\": \"d465c4fc729061c0\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: returned scheme-level base-change and cover results do not state the algebraic-space atlas geometry or enlarged-site clauses"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The kernel pair of a base changed etale presentation of an algebraic space is the base change of its kernel pair",
+   "results": "{\"t\": \"2026-10-23T14:17:46Z\", \"tool\": \"leanfinder\", \"query\": \"The kernel pair of a base changed etale presentation of an algebraic space is the base change of its kernel pair\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsEtale.instIsStableUnderBaseChangeScheme\", \"AlgebraicGeometry.FormallyUnramified.instIsStableUnderBaseChangeScheme\", \"AlgebraicGeometry.Scheme.instHasPullbacksEtale\", \"RingHom.Etale.isStableUnderBaseChange\", \"KaehlerDifferential.isBaseChange_of_formallyEtale\", \"AlgebraicGeometry.locallyOfFinitePresentation_isStableUnderBaseChange\", \"Algebra.Etale.baseChange\", \"AlgebraicGeometry.isSmooth_isStableUnderBaseChange\"], \"digest\": \"5178c71a1775d74b\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: returned scheme-level base-change and cover results do not state the algebraic-space atlas geometry or enlarged-site clauses"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Scheme, CategoryTheory.Limits.pullback",
+   "results": "{\"t\": \"2026-10-23T14:17:47Z\", \"tool\": \"loogle\", \"query\": \"AlgebraicGeometry.Scheme, CategoryTheory.Limits.pullback\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsOpenImmersion.instFstScheme\", \"AlgebraicGeometry.IsOpenImmersion.instSndScheme\", \"AlgebraicGeometry.Scheme.Hom.opensRange_pullbackFst\", \"AlgebraicGeometry.Scheme.Hom.opensRange_pullbackSnd\", \"AlgebraicGeometry.IsOpenImmersion.range_pullbackFst\", \"AlgebraicGeometry.IsOpenImmersion.range_pullbackSnd\", \"AlgebraicGeometry.IsOpenImmersion.range_pullback_to_base_of_left\", \"AlgebraicGeometry.IsOpenImmersion.range_pullback_to_base_of_right\"], \"digest\": \"1dce1355e6a6cbe3\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: returned scheme-level base-change and cover results do not state the algebraic-space atlas geometry or enlarged-site clauses"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-space-pushforward-atlas-equalizer",
+  "date": "2026-10-22",
+  "group": "Q13"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Stacks 03M9 proof, the affine-target paragraph invoking 03M8: the direct image is computed by the equalizer from a surjective etale scheme atlas U -> X and its relation R = U x_X U. Extracted argument: Tag 03M8 (lemma-compute-pushforward), covering and overlap sentences of the proof; the overlap base is W = V times_Y X, correcting the printed subscript X.",
+   "via": [
+    "lem-trf-space-pushforward-atlas-equalizer",
+    "lem-trf-space-qc-separated-quasi-coherent-pushforward",
+    "lem-trf-space-section-algebra-etale-base-change",
+    "lem-trf-algebraic-space-ample-local",
+    "lem-trf-polarized-scheme-etale-descent",
+    "lem-trf-polarized-fine-log-etale-descent",
+    "lem-trf-coherent-log-ideal-chart-construction",
+    "lem-trf-log-blowup-normalization",
+    "lem-trf-log-regular-desingularization",
+    "lem-trf-nodal-pair-projective-resolution",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-trf-space-atlas-base-change-cech-geometry",
+  "worker": "stage1",
+  "summary": "Verified the already-corrected overlap base W against Stacks 03M8. Reused existing fibre-product, etale-permanence, and enlarged-site nodes; proved the overlap and V-naturality by explicit inverse coordinate formulas. No new nodes, no statement change, and no attachment in WeilConjectures.",
+  "blueprint": "Retains the historical ancestry through lem-trf-space-pushforward-atlas-equalizer to lem-trf-local-term-locality: realizes the covering and overlap argument of Stacks 03M8 used in the historical affine-target pushforward calculation. Does not replace the current contracting-correspondence argument of sk-i-curve-zero.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q73-2d64f1879",
+  "group": "Q73",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q73-2d64f1879 (reviewer sub-agent of L); spot-checked: Read all of Stacks 03M8 (spaces-morphisms.tex 1837-1874) and the six cited statements; all are in unit sk-i-curve-zero, so there are no tool uses. The delivery adds no new nodes and leaves the statement and stmt_deps unchanged. The statement is right. The overlap base W corrects the printed X; I checked this on the report's counterexample (X=Y=U=Spec k, V two points): Z x_X Z has 4 points, Q has 2, and Z x_W Z equals Q. The pointwise formulas, scheme-representability of R, Z, Q (via the fibre-product clause), the chartwise etaleness of the base changes and composites, the site membership and the V-naturality are all correct. I tested empty X, empty V, the identity atlas and a disconnected V. One C1 gap: step 2 used the covering clause of lem-trf-space-fibre-products-etale-covers, which needs {p} jointly surjective on field-point classes, while p is only surjective in the scheme-test sense, and the step did not show the passage. FIX: step 2 now gives the lifting argument (h_{Spec K} x_X U is nonempty; a residue-field point gives y in U(L) with p(y)=x|_L) and cites def-trf-algebraic-space-jointly-surjective-family and def-trf-algebraic-space in uses and proof_deps. No cycle. There are no duplicates in the DAG (searched for 03M8, compute-pushforward and the Cech overlap). The citer pushforward-atlas-equalizer step 1 is fully supplied by the statement. No SGA source is used.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SpaceAtlasBaseChangeCechGeometry",
+  "declaration": "AlgebraicGeometry.AlgebraicSpace.space_atlas_base_change_cech_geometry",
+  "declarations": [
+   "AlgebraicGeometry.AlgebraicSpace.space_atlas_base_change_cech_geometry",
+   "AlgebraicGeometry.AlgebraicSpace.space_atlas_base_change_cech_naturality"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/SpaceAtlasBaseChangeCechGeometry.lean",
+  "statement": "theorem space_atlas_base_change_cech_geometry {S : Scheme.{u}} (X Y : AlgebraicSpace S) (U V : Over S) (f : X ⟶ Y) (p : schemeSpace U ⟶ X) (v : schemeSpace V ⟶ Y) (hp : IsEtale p.hom.hom) (hps : IsSurjective p.hom.hom) (hv : IsEtale v.hom.hom) (R W Z Q : AlgebraicSpace S) (p₁ p₂ : R ⟶ schemeSpace U) (r : IsPullback p₁.hom p₂.hom p.hom p.hom) (wV : W ⟶ schemeSpace V) (wX : W ⟶ X) (w : IsPullback wV.hom wX.hom v.hom f.hom) (zV : Z ⟶ schemeSpace V) (zU : Z ⟶ schemeSpace U) (z : IsPullback zV.hom zU.hom v.hom (p ≫ f).hom) (qV : Q ⟶ schemeSpace V) (qR : Q ⟶ R) (q : IsPullback qV.hom qR.hom v.hom (p₁ ≫ p ≫ f).hom) (c : Z ⟶ W) (hcV : c ≫ wV = zV) (hcX : c ≫ wX = zU ≫ p) (q₁ q₂ : Q ⟶ Z) (hq₁V : q₁ ≫ zV = qV) (hq₂V : q₂ ≫ zV = qV) (hq₁U : q₁ ≫ zU = qR ≫ p₁) (hq₂U : q₂ ≫ zU = qR ≫ p₂) : (∃ T : Over S, Nonempty (R.obj.obj ≅ yoneda.obj T)) ∧ (∃ T : Over S, Nonempty (Z.obj.obj ≅ yoneda.obj T)) ∧ (∃ T : Over S, Nonempty (Q.obj.obj ≅ yoneda.obj T)) ∧ IsEtale p₁.hom.hom ∧ IsEtale p₂.hom.hom ∧ IsEtale zU.hom.hom ∧ IsEtale qR.hom.hom ∧ IsChartwiseEtale wX ∧ IsChartwiseEtale c ∧ IsJointlySurjective (fun _ : Unit ↦ c.hom.hom) ∧ (∃ (Xₓ Uₓ Rₓ Wₓ Zₓ Qₓ : X.EnlargedEtaleSite) (p₁ₓ p₂ₓ : Rₓ ⟶ Uₓ) (zUₓ : Zₓ ⟶ Uₓ) (qRₓ : Qₓ ⟶ Rₓ) (cₓ : Zₓ ⟶ Wₓ) (q₁ₓ q₂ₓ : Qₓ ⟶ Zₓ) (wXₓ : Wₓ ⟶ Xₓ), Xₓ.obj = Over.mk (𝟙 X) ∧ Uₓ.obj = Over.mk p ∧ Rₓ.obj = Over.mk (p₁ ≫ p) ∧ Wₓ.obj = Over.mk wX ∧ Zₓ.obj = Over.mk (zU ≫ p) ∧ Qₓ.obj = Over.mk (qR ≫ p₁ ≫ p) ∧ HEq p₁ₓ.hom.left p₁ ∧ HEq p₂ₓ.hom.left p₂ ∧ HEq zUₓ.hom.left zU ∧ HEq qRₓ.hom.left qR ∧ HEq cₓ.hom.left c ∧ HEq q₁ₓ.hom.left q₁ ∧ HEq q₂ₓ.hom.left q₂ ∧ HEq wXₓ.hom.left wX ∧ Presieve.ofArrows (fun _ : Unit ↦ Zₓ) (fun _ : Unit ↦ cₓ) ∈ X.enlargedEtalePrecoverage Wₓ) ∧ (∃ e : Limits.pullback c.hom c.hom ≅ Q.obj, e.hom ≫ q₁.hom = Limits.pullback.fst c.hom c.hom ∧ e.hom ≫ q₂.hom = Limits.pullback.snd c.hom c.hom)",
+  "branch": "sheaf-dag",
+  "by": "Q68",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "The two declarations jointly state all clauses. Fibre products and their induced maps are given by limiting cones and their projection equations, so the statement is independent of the chosen fibre products. The first declaration includes representability by schemes, etaleness, an actual singleton covering in the enlarged site, and the overlap isomorphism characterized by both projections. The second states naturality under every map of etale test schemes. Both projection equations fix each comparison map uniquely; no arbitrary comparison map or extra geometric hypothesis is assumed."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-b5f865d75",
+  "group": "Q68",
+  "result": "pass",
+  "note": "Clause-by-clause match of both theorems against the node and the 03M8 correction (overlap over W). Note: W→X and Z→W are stated as chartwise étale, the Stacks/project convention, which is what the citer uses."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B5",
+  "result": "pass",
+  "landing": "20261026T091146-L-3315779",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

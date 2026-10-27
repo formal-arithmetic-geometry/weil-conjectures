@@ -2,74 +2,69 @@
  "kind": "statement",
  "proof": [
   {
-   "text": "Apply the quotient-expression normalization lemma to the list P,Q,H and the given f,h. Its actual quotient transitions and their derived adjoints give normalized strict towers for every tensor/pullback expression used here, including all units and both triple parenthesizations. Its K-flat, flat-term models compute the derived operations, so subsequent chain-map equations concern these same normalized systems.",
+   "text": "Use completedOperationTowerSubstitution to obtain M and its comparison, substitution and structural laws.",
    "uses": [
-    "lem-pur-quotient-expression-kflat-normalization"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tags 0G7E and 07A2; the simultaneous strict-model construction is isolated in lem-pur-quotient-expression-kflat-normalization"
-   }
-  },
-  {
-   "text": "At each n, apply the cochain comparison to f_n and h_n. Its map and inverse have the stated insertion/multiplication formulas. Naturality and reassociation give the two equal routes on the triple tensor. Its symmetry equation is exactly the displayed equation with sign (-1)^{pq}; its two unit clauses use the action maps and f_n^*B_{Y,n}[0]≅B_{X,n}[0]. Its composition clause uses the canonical adjunction-normalized a_K and gives exactly the displayed composition equation. These are equalities of chain maps with the direct-sum total differential.",
-   "uses": [
-    "lem-pur-cochain-pullback-tensor-coherence"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 07A4, label lemma-pullback-tensor-product, explicit cochain and scalar-change refinement"
-   }
-  },
-  {
-   "text": "The coefficient-change equations of the cochain lemma make c_{f_n} commute with every quotient transition, hence also its inverse. For the other arrows, reassociation sends (x⊗y)⊗z to x⊗(y⊗z), symmetry sends x⊗y to (-1)^{pq}y⊗x, and action multiplies coefficients. Applying a quotient before or after these formulas agrees since q preserves multiplication and (-1)^{pq}. The composition comparison is inverse-image composition followed by scalar association, so the same equality q(st)=q(s)q(t) checks its transition square. Thus all arrows are strict tower maps, and Step 2 gives equalities of whole tower maps before localization.",
-   "uses": [
-    "lem-pur-cochain-pullback-tensor-coherence"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 07A4, label lemma-pullback-tensor-product, explicit cochain and scalar-change refinement"
-   }
-  },
-  {
-   "text": "Apply the strict-tower derived-limit functor to Step 3. A functor preserves equality and mutually inverse pairs, so the limit of c and the limit of its inverse are inverse. The substitution lemma identifies the limits of every tensor/pullback/unit expression and of its reassociator, action unitors, signed symmetry and composition comparison with the completed expression and its structural arrows. Conjugating the equalities by these identifications gives the integral associativity, symmetry, unit and composition equations.",
-   "uses": [
-    "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
     "lem-pur-completed-operation-tower-substitution"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 0941, label lemma-derived-limit-is-ok; coherent substitution and effectivity as cited"
+    "place": "Tags 07A4, 0941 and 0D6D; integral coherence construction, before and after localization."
    }
   },
   {
-   "text": "For each normalized expression K of Step 1, effectivity gives the coherent counit (Rlim Res K_m)⊗^L_R B_n≅K_n. Naturality conjugates the reduction of each limit arrow to its original finite arrow. The substitution identifications carry these counits to the completed-operation expressions. Consequently reduction of every integral equation is exactly its finite equation from Steps 2–3, as an equality of systems including all quotient-transition maps.",
+   "text": "Use the strict normalized pullback comparisons for all arrows, with their signed symmetry and prescribed composition law.",
    "uses": [
-    "lem-coef-normalized-dvr-effectivity",
-    "lem-pur-completed-operation-tower-substitution"
+    "stage3-pur-strict-pullback-comparisons"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 0941, label lemma-derived-limit-is-ok; coherent substitution and effectivity as cited"
+    "place": "Tags 07A4, 0941 and 0D6D; integral coherence construction, before and after localization."
+   }
+  },
+  {
+   "text": "For each flat-term K-flat completed input, goodQuotientPresentation constructs the specified simultaneous quotient presentation.",
+   "uses": [
+    "stage3-pur-good-quotient-presentation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 07A4, 0941 and 0D6D; integral coherence construction, before and after localization."
+   }
+  },
+  {
+   "text": "Normalize the given input presentations by transporting reduction_normalized across their specified isomorphisms. Apply strictExpressionRealization. Construct completed isomorphisms as the invertible completed-operation comparison followed by the inverse limit of the strict system comparison. Compose their reductions with the invertible coherent counit to construct reduction isomorphisms. The completed normalization follows by cancelling the system iso; the reduction normalization is its definition.",
+   "uses": [
+    "stage3-pur-strict-expression-realization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 07A4, 0941 and 0D6D; integral coherence construction, before and after localization."
+   }
+  },
+  {
+   "text": "For every strict chain map, counit naturality gives the whole-system reduction square after cancelling the completed iso. Each transition square is naturality of coefficientSequenceDerivedTransition. These are exactly ReductionLaw, with no inference of whole-system equality from evaluated maps.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 07A4, 0941 and 0D6D; integral coherence construction, before and after localization."
    }
   }
  ],
  "proof_deps": [
-  "lem-coef-normalized-dvr-effectivity",
-  "lem-pur-cochain-pullback-tensor-coherence",
   "lem-pur-completed-operation-tower-substitution",
-  "lem-pur-quotient-expression-kflat-normalization",
-  "lem-weil-pbc-ringed-strict-tower-homotopy-limit"
+  "stage3-pur-good-quotient-presentation",
+  "stage3-pur-strict-expression-realization",
+  "stage3-pur-strict-pullback-comparisons"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/sites-cohomology.tex",
-  "place": "Tag 07A4 (total-complex pullback comparison and coherence), Tag 0941 (strict-system derived limits); explicit simultaneous quotient-tower extraction"
+  "place": "Direct strict-to-system-to-completed assembly from recursive models and coherent-counit naturality; Stacks 07A4, 0941 and 0D6D. B5, 2026-10-25."
  },
  "mathlib_match": null,
  "status": "split",
@@ -214,22 +209,6 @@
   "module": "Sheaf.Paper.IntegralCoherenceTower",
   "declaration": "WeilConjectures.IntegralCoherence.integralCoherenceTower",
   "declarations": [
-   "WeilConjectures.IntegralCoherence.Complex",
-   "WeilConjectures.IntegralCoherence.pull",
-   "WeilConjectures.IntegralCoherence.compositor",
-   "WeilConjectures.IntegralCoherence.generator",
-   "WeilConjectures.IntegralCoherence.PullbackComparison",
-   "WeilConjectures.IntegralCoherence.PullbackComparison.tensor",
-   "WeilConjectures.IntegralCoherence.PullbackComparison.unit",
-   "WeilConjectures.IntegralCoherence.Coherent",
-   "WeilConjectures.IntegralCoherence.CompositionLaw",
-   "WeilConjectures.IntegralCoherence.value",
-   "WeilConjectures.IntegralCoherence.Good",
-   "WeilConjectures.IntegralCoherence.QuotientPresentation",
-   "WeilConjectures.IntegralCoherence.structuralValue",
-   "WeilConjectures.IntegralCoherence.Realization",
-   "WeilConjectures.IntegralCoherence.completedArrow",
-   "WeilConjectures.IntegralCoherence.ReductionLaw",
    "WeilConjectures.IntegralCoherence.integralCoherenceTower"
   ],
   "file": "lean/Sheaf/Paper/IntegralCoherenceTower.lean",
@@ -247,5 +226,26 @@
   "result": "pass",
   "note": "Checked immutable statements, dependencies, canonical constructions, source clauses, universes, edge cases, docstrings and route pivot. Statement field matches verbatim; per-file compile and confirmation passed in 56.1s and 58.2s. No substantive errors; branch unchanged."
  },
- "lean_audit": {}
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-11613",
+  "group": "B5",
+  "result": "fix",
+  "landing": "20261025T142858-L-818729",
+  "kind": "interface",
+  "note": "independent cc review: 11613abe vs reviewed c5d796 (diff -r: nodes and 6 Lean modules identical; GoodQuotientPresentation adds only private canonical instance caches); moved data vs clone item block (unchanged since 10-24); 7 delivered + Defs, RelativeProduct, Normalization, Realization (+CanonicalIdentification, ScalarLimitImage) compiled in /tmp/rv_b5ict2 on 84292a05575, all exit 0, max 27.6 s"
+ }
 }

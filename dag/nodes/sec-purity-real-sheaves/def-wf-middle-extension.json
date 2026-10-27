@@ -28,9 +28,58 @@
   "def-weil-abstract-derived-category",
   "def-weil-pbc-common-stage-cones"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "For qbarAffineArithmeticGeometry, finite-dimensional affine space is locally of finite type over the Noetherian finite field and its affine structure morphism is quasi-compact. These give local Noetherianity and compactness, hence Noetherianity. The already proved fourierBaseCharacteristic supplies characteristic p on the base field. The zero section makes global functions nontrivial; the structure map on global functions, composed with the inverse GammaSpec comparison, is a ring map from the base field. CharP.of_ringHom_of_ne_zero transfers characteristic p along it.",
+   "uses": [
+    "def-fd-transform"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For the ordinary Weil inverse-image adjunction, first restrict the geometric Frobenius pullback equivalence to the standard heart. Isomorphism field transport gives its full faithfulness and the inverse pullback; t-exactness of the inverse supplies essential surjectivity on heart objects. Identify heart-carrier fixed pairs with fixed pairs formed inside the heart by explicit fully faithful functors, with an explicit inverse. Restrict zlFrobeniusSquare to the ordinary heart inverse image. The existing ordinary geometric adjunction qbarCurveOrdinaryAdjunction then lifts by IsoAlgebra.mapOfNatIsoAdjunction, because the right-hand exchange map is the invertible mate supplied by IsoAlgebra.mateIso for the two Frobenius equivalences. Restrict this adjunction through the fully faithful pair presentations. The result has left functor exactly zlWeilPull, hence proves qbarCurveWeilPull_isLeftAdjoint.",
+   "uses": [
+    "def-zl-weil-ind-sheaf-category",
+    "lem-pod-isomorphism-field-transport",
+    "lem-a1-constructible-pullback-t-exact",
+    "lem-sf-fixed-pair-adjunction-lift"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The explicit right adjoint just constructed has carrier the ordinary geometric right adjoint, on both objects and morphisms, since fixed-pair transport uses the given right adjoint on carriers. Uniqueness of right adjoints identifies the chosen qbarCurveWeilOrdinaryPushforward with that explicit right adjoint. Whisker this isomorphism with qbarCurveWeilHeartForget and compose with the explicit carrier identity comparison. This proves qbarCurveWeilOrdinaryPushforward_forget.",
+   "uses": [
+    "lem-sf-fixed-pair-adjunction-lift"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "For qbarAffineWeilShift_forget, apply lem-wf-fourier-trivial-character-unit to the unshifted arithmetic affine line object. The normalized pullback shift comparison moves [1] outside the geometric model pullback. Functoriality sends the unshifted line isomorphism to its pullback, and the unit clause of derivedPullbackTensorIso identifies that pullback with the geometric coefficient unit. Shift this composite. Tensor functoriality gives a natural isomorphism on underlying geometric complexes, since (f tensor id) commutes with (id tensor e) by the bifunctor composition law. Compose with lem-wf-common-stage-shifted-unit-tensor at r=1 and whisker by the Weil forgetful functor. On carriers fourierWeilTensorFunctor is exactly fourierTensorUnderlying, so this is the original affine comparison. The two imported supporting theorems remain open, separately isolating the unshifted character-unit identification and the geometric shifted-unit tensor action.",
+   "uses": [
+    "lem-wf-fourier-trivial-character-unit",
+    "def-zl-field-weil-shriek-shift-data",
+    "lem-pur-derived-pullback-tensor-iso",
+    "lem-wf-common-stage-shifted-unit-tensor"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-fd-transform",
+  "def-zl-weil-ind-sheaf-category",
+  "lem-pod-isomorphism-field-transport",
+  "lem-a1-constructible-pullback-t-exact",
+  "lem-sf-fixed-pair-adjunction-lift",
+  "lem-wf-fourier-trivial-character-unit",
+  "def-zl-field-weil-shriek-shift-data",
+  "lem-pur-derived-pullback-tensor-iso",
+  "lem-wf-common-stage-shifted-unit-tensor"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-purity-real-sheaves/sk-i-real-boundary/def-wf-middle-extension.md",
+  "place": "Ordinary direct-image and cohomological-shift convention. Retain G7 arithmetic geometry and C4 ordinary Weil adjunction proofs; J6 assembles the affine shift comparison from the unshifted trivial-character unit identification, pullback shift and unit comparisons, and the geometric shifted-unit tensor action."
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -96,14 +145,29 @@
    "where": "statement"
   }
  ],
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
  "chapter": "sec-purity-real-sheaves",
  "unit": "sk-i-real-boundary",
  "blueprint_update": {
-  "snapshot": "main-20261015",
-  "statement": "Let $j:U_0\\hookrightarrow C_0$ be a dense open immersion between\nseparated finite-type\n$k_0$-schemes, with $C_0$ a smooth curve. For a lisse\n$\\Qlb$-sheaf $\\mathcal F$ on $U_0$ (in the lisse convention of\n[def-weil-pbc-constructible-complexes]), the\n*sheaf-theoretic middle extension* is $j_*\\mathcal F$, where\n$j_*$ is the ordinary direct image in the coefficient category of\n[def-weil-pbc-qbar-category]. Thus $(j_*\\mathcal F)[1]$\nmeans the ordinary sheaf direct image followed by a cohomological\nshift. The derived direct image is written $Rj_*\\mathcal F$;\nits higher cohomology sheaves must be retained in derived adjunction\nand Verdier-duality formulas.",
+  "snapshot": "main-20261023-1620",
+  "commit": "7284bb09daf97437d544c51882b325f9c52cd345",
+  "changed": [
+   "statement"
+  ],
+  "statement": "Let $j:U_0\\hookrightarrow C_0$ be a dense open immersion between\nseparated finite-type\n$k_0$-schemes, with $C_0$ a smooth curve. For a lisse\n$\\Qlb$-sheaf $\\mathcal F$ on $U_0$, i.e. a lisse $\\overline{\\mathbf Q}_{\\ell,U}$-module on\n$U_{\\mathrm{proét}}$ ([sk-lem-coefficient-heart]), the\n*sheaf-theoretic middle extension* is $j_*\\mathcal F=\\mathcal H^0(Rj_*\\mathcal F)$, where\n$j_*$ is the ordinary direct image of $\\Qlb$-modules on the pro-étale sites; it is\nconstructible, since $Rj_*$ preserves $\\Dbc(-,\\Qlb)$\n([sk-def-sfb-dc-restricted-functors], [det-def-sfb-bounded-constructible]). Thus $(j_*\\mathcal F)[1]$\nmeans the ordinary sheaf direct image followed by a cohomological\nshift. The derived direct image is written $Rj_*\\mathcal F$;\nits higher cohomology sheaves must be retained in derived adjunction\nand Verdier-duality formulas.",
   "proof": [],
-  "note": "the current blueprint (aligned 2026-10-15 with the six-functors notes) states or proves this differently; a worker who touches the node follows it"
+  "note": "the current blueprint (main-20261023-1620, weil-conjectures-blueprint 7284bb09da) states or proves this differently; a worker who touches the node follows it"
  },
  "split_report": {
   "date": "2026-10-17",
@@ -148,5 +212,15 @@
   "group": "Q14",
   "result": "pass",
   "note": "I checked every hypothesis and the conclusion against the node and the source (sk-p-dl-a1-fourier-weight, order 3121). The statement field is verbatim. Lisse uses HasCommonStageLisseLattice; irreducible is lisse Weil subobjects zero or iso (the source's wording); punctual purity uses the recorded SfIsPunctuallyPureOfWeight; the Fourier isomorphism is an iso of Frobenius pairs between the recorded commonStageFourierTransform with kernel L_Psi(b x y), r=1 (exactly def-fd-transform's L_{Psi,b}), and ordinary j_* followed by [1]. The auxiliary Psi is universally quantified and the trace coefficient b is unique, so all psi are covered. The two §1(B) modules are sound: the Weil j_* is the right adjoint of zlWeilPull (landed pattern, old module publicly imported), and the constituent exclusion runs over every a in k including 0. All postponed theorems are true and have proof docstrings. No duplicate notion was found. Edge cases (whole line, a=0, real weights, no extra assumption on M') are covered. There are no hollow definitions and no pro-etale substitute. nt_compile.py on all three modules: rc 0, no errors (38 s). No findings need a repair."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J6",
+  "result": "pass",
+  "landing": "20261025T202304-L-2702660",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

@@ -1,0 +1,130 @@
+{
+ "id": "lem-sfb-scalar-tensor-exact-representative",
+ "kind": "statement",
+ "title": "The exact representative of the scalar-unit tensor map",
+ "statement": "Let M be normalized scalar derived and tensor-Hom models and mu their normalized strong scalar tensor comparisons on a small ringed site. Let a:R -> S have ordinary scalar extension E. Suppose its recorded representative counit FQX -> QEX is invertible for every complex X. Let nu:S tensor_R - -> UE be the canonical generator-normalized isomorphism. Fix a K-flat R-complex P and an arbitrary R-complex D, and let i_X:Q(X tensor_R P) -> QX tensor_R^L QP be natural in X and agree with the fixed model on K-flat X. Write rho_X:UFQX -> QUEX for restriction of the exact representative. Then the composite i_(S tensor D), tensor(Qnu_D rho_D^-1,1), tensor(1,eta_QP), the canonical lax restriction tensor comparison, U(mu_(QD,QP)^-1), UF(i_D^-1), rho_(D tensor P), is Qk for any actual chain map k sending (s tensor x) tensor p to s tensor (x tensor p). No Hom complex or K-injective target occurs.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 07A4, 07A6 and 06YP; tensor-only subargument of steps 3--5 of lem-sfb-hom-flat-scalar-evaluation-model."
+ },
+ "stmt_deps": [
+  "def-sfb-scalar-hom-comparison-data",
+  "def-coef-ringed-tensor-hom-model",
+  "lem-sfb-hom-scalar-chain-identification"
+ ],
+ "proof": [
+  {
+   "text": "Resolve the arbitrary first complex X by a flat-term K-flat V. Naturality of the given one-factor comparison makes Q(V tensor P -> X tensor P) invertible. Apply the normalized scalar tensor square on V,P and the natural extended S-tensor comparison; cancel this invertible precomposition. This proves the scalar tensor representative normalization with only the right factor P K-flat, without resolving UEX. Naturality of the ordinary tensor comparison is checked on actual scalar-unit generators.",
+   "uses": [
+    "lem-pc-kflat-resolution",
+    "def-sfb-scalar-hom-comparison-data",
+    "lem-sfb-ringed-tensor-comparison-extension"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Let A be the literal scalar tensor D, t the ordinary adjoint of nu_D:A -> UED, and l the composite E(A tensor P) -> EA tensor EP -> ED tensor EP -> E(D tensor P). The ordinary adjunct of l sends (s tensor x) tensor p to s tensor (x tensor p). The generator condition on nu, the inverse tensor-comparison formula and sheafified tensor generation therefore identify this adjunct with k.",
+   "uses": [
+    "lem-sfb-hom-scalar-chain-identification",
+    "def-sfb-scalar-hom-comparison-data",
+    "lem-sfb-ordinary-scalar-evaluation-square"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use the scalar derived adjunction transpose comparison to identify the derived adjunct of e_A Q(t) e_D^-1 with Q(nu_D) rho_D^-1. For any strong tensor functor the tensor of a map with the scalar unit, followed by its lax restriction comparison, is the adjunct of the strong tensor comparison followed by the tensor of the adjunct. Conjugate the normalization from the first step by the invertible comparisons e_D and e_P, and use naturality of the S-tensor comparison for t. The resulting map is e_(A tensor P) Q(l) e_(D tensor P)^-1. Transpose again and cancel rho_(D tensor P); the second step gives Q(k). These arguments apply unchanged to zero rings and zero complexes.",
+   "uses": [
+    "lem-pur-sheaf-ring-derived-coefficient-adjunction",
+    "def-sfb-scalar-hom-comparison-data",
+    "lem-sfb-hom-scalar-chain-identification",
+    "lem-sfb-ringed-tensor-comparison-extension"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-kflat-resolution",
+  "def-sfb-scalar-hom-comparison-data",
+  "lem-sfb-ringed-tensor-comparison-extension",
+  "lem-sfb-hom-scalar-chain-identification",
+  "lem-sfb-ordinary-scalar-evaluation-square",
+  "lem-pur-sheaf-ring-derived-coefficient-adjunction"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 07A4, 07A6 and 06YP, R2 separation of the tensor-only representative calculation from Hom evaluation."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "scalar restriction unit tensor representative exact scalar extension complexes K flat right factor",
+   "results": "8 ordinary module flatness and scalar extension hits; no normalized derived representative identity.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "scalarHomRestrictionTensor",
+   "results": "Unknown identifier in search index; 0 matching declarations.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "restrictionTensor.*representative|scalarUnitTensor",
+   "results": "0 hits",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Algebra.Homology.FlatScalarEvaluationModel",
+  "date": "2026-10-24",
+  "group": "R2"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-def-sfb-dc-restricted-functors",
+ "blueprint": {
+  "from": {
+   "node": "lem-sfb-hom-flat-scalar-evaluation-model",
+   "place": "Steps 3--5, before postcomposition with ordinary evaluation.",
+   "via": []
+  },
+  "same_as": [],
+  "is": null
+ },
+ "lean": {
+  "module": "Sheaf.Algebra.Homology.ScalarTensorExactRepresentative",
+  "declaration": "CategoryTheory.scalarTensorExactRepresentative",
+  "file": "lean/Sheaf/Algebra/Homology/ScalarTensorExactRepresentative.lean",
+  "statement": "theorem scalarTensorExactRepresentative\n    (M : ScalarHomModels.{c, v, r, w} J)\n    (μ : ∀ {R S : Sheaf J CommRingCat.{max c v r}} (a : R ⟶ S),\n      ScalarHomTensorComparison (J := J) M a)\n    {R S : Sheaf J CommRingCat.{max c v r}} (a : R ⟶ S)\n    (q : ∀ X : CochainComplex (scalarModules J R) ℤ,\n      IsIso (scalarPairComplexComparison (M.scalar a).extension\n        (M.scalar a).extension_additive (M.scalar a).derived (M.scalar a).counit X))\n    (ν : StrictScalarHom.tensor.{c, v, r} a ≅\n      scalarComplex (M.scalar a).extension (M.scalar a).extension_additive ⋙\n        StrictScalarHom.restriction.{c, v, r} a)\n    (hν : ∀ (X : CochainComplex (scalarModules J R) ℤ) (n : ℤ) (V : Cᵒᵖ)\n      (s : S.obj.obj V) (x : (X.X n).val.obj V),\n      (((ν.hom.app X).f n).val.app V)\n          (StrictScalarHom.tensorSection.{c, v, r} a X n V s x) =\n        s • scalarHomUnitSection (J := J) M a (X.X n) V x)\n    (P D : CochainComplex (scalarModules J R) ℤ)\n    (hP : CochainComplex.IsKFlatIndependentCoefficients (J := J) (R := R) P)\n    (i : ∀ X : CochainComplex (scalarModules J R) ℤ,\n      DerivedCategory.Q.obj ((coefficientTotalTensor.{r, c, v} J R).obj (X, P)) ≅\n        (M.closed R).tensor.obj (DerivedCategory.Q.obj X, DerivedCategory.Q.obj P))\n    (hi : ∀ (X : CochainComplex (scalarModules J R) ℤ)\n      (hX : CochainComplex.IsKFlatIndependentCoefficients (J := J) (R := R) X),\n      i X = CoefficientTensorModels.iso.{r, c, v, w} J R (M.closed R) (M.model R)\n        X P hX hP)\n    (hn : ∀ (X Y : CochainComplex (scalarModules J R) ℤ) (f : X ⟶ Y),\n      DerivedCategory.Q.map ((coefficientTotalTensor.{r, c, v} J R).map\n          (Prod.mkHom f (𝟙 P))) ≫ (i Y).hom =\n        (i X).hom ≫ (M.closed R).tensor.map\n          (Prod.mkHom (DerivedCategory.Q.map f) (𝟙 (DerivedCategory.Q.obj P))))\n    (k : (coefficientTotalTensor.{r, c, v} J R).obj\n        ((StrictScalarHom.tensor.{c, v, r} a).obj D, P) ⟶\n      (StrictScalarHom.restriction.{c, v, r} a).obj\n        ((scalarComplex (M.scalar a).extension (M.scalar a).extension_additive).obj\n          ((coefficientTotalTensor.{r, c, v} J R).obj (D, P))))\n    (hk : ∀ (n j l : ℤ) (h : n + j = l) (V : Cᵒᵖ) (s : S.obj.obj V)\n      (x : (D.X n).val.obj V) (p : (P.X j).val.obj V),\n      (k.f l).val.app V\n          (coefficientTensorGenerator.{r, c, v} J R _ P n j l h V\n            (StrictScalarHom.tensorSection.{c, v, r} a D n V s x) p) =\n        s • scalarHomUnitSection (J := J) M a\n          (((coefficientTotalTensor.{r, c, v} J R).obj (D, P)).X l) V\n          (coefficientTensorGenerator.{r, c, v} J R D P n j l h V x p)) :\n    let F := (M.scalar a).derived\n    let U := scalarDerivedRestriction a\n    let E := scalarComplex (M.scalar a).extension (M.scalar a).extension_additive\n    let ρ := fun X : CochainComplex (scalarModules J R) ℤ ↦\n      letI := q X\n      U.mapIso (asIso (scalarPairComplexComparison (M.scalar a).extension\n        (M.scalar a).extension_additive F (M.scalar a).counit X)) ≪≫\n          (scalarRestrictionComparison a).app (E.obj X)\n    (i ((StrictScalarHom.tensor.{c, v, r} a).obj D)).hom ≫\n      (M.closed R).tensor.map\n        (Prod.mkHom (DerivedCategory.Q.map (ν.hom.app D) ≫ (ρ D).inv)\n          (𝟙 (DerivedCategory.Q.obj P))) ≫\n      (M.closed R).tensor.map\n        (Prod.mkHom (𝟙 _) ((M.scalar a).adjunction.unit.app (DerivedCategory.Q.obj P))) ≫\n      scalarHomRestrictionTensor (J := J) M a (μ a) (F.obj (DerivedCategory.Q.obj D))\n        (F.obj (DerivedCategory.Q.obj P)) ≫\n      U.map ((μ a).iso.inv.app (DerivedCategory.Q.obj D, DerivedCategory.Q.obj P)) ≫\n      U.map (F.map (i D).inv) ≫\n      (ρ ((coefficientTotalTensor.{r, c, v} J R).obj (D, P))).hom =\n        DerivedCategory.Q.map k",
+  "branch": "sheaf-dag",
+  "by": "R2",
+  "date": "2026-10-23",
+  "existing": false
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "C-f7762",
+  "group": "R2",
+  "result": "pass",
+  "landing": "20261024T190759-L-70230",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "C-f7762",
+  "group": "R2",
+  "result": "pass",
+  "landing": "20261024T190759-L-70230",
+  "kind": "interface",
+  "note": "independent cc review: ChainSquare/model_exists and lean.statement vs clones/live (annotation-only); node proof fields vs imports; new node lean records vs new modules; importer FlatInternalHomEvaluationRoof compiled against delivered modules (exit 0); #print axioms model_exists clean"
+ }
+}

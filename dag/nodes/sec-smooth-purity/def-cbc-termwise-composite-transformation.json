@@ -1,0 +1,94 @@
+{
+ "id": "def-cbc-termwise-composite-transformation",
+ "kind": "definition",
+ "title": "Termwise lifting with the composite functor factors retained",
+ "statement": "For categories $I,A,B,C,D$, functors $f:A\\to B$, $g:B\\to D$, $h:A\\to C$, $k:C\\to D$, and a natural transformation $t:fg\\Rightarrow hk$, define its termwise lift from postcomposition by $f$ then $g$ on $I$-diagrams to postcomposition by $h$ then $k$. It is the standard postcomposition image of $t$, conjugated by the canonical postcomposition-composition isomorphisms. Its component at a diagram $M$ and an object $n$ of $I$ is $t_{M(n)}$.",
+ "stmt_deps": [],
+ "source": {
+  "document": "literature/stacks-project/more-etale.tex",
+  "place": "Tag 0F7B, ordinary strict-tower refinement: apply the ordinary alpha transformation termwise. The elementary construction is Mathlib CategoryTheory/Whiskering.lean, Functor.whiskeringRight and Functor.whiskeringRightObjCompIso."
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Lift a natural transformation between two composite functors to a functor category with whiskeringRightObjCompIso",
+   "results": "Found whiskerRight, whiskeringRight and whiskerLeft; no named four-factor wrapper.",
+   "date": "2026-10-24",
+   "verdict": "Use the existing functor and its canonical composition isomorphisms."
+  },
+  {
+   "tool": "loogle",
+   "query": "Functor.whiskeringRightObjCompIso",
+   "results": "No result (unqualified identifier not recognized by index). Direct source search finds CategoryTheory.Functor.whiskeringRightObjCompIso.",
+   "date": "2026-10-24",
+   "verdict": "Existing composition isomorphism is reused."
+  },
+  {
+   "tool": "grep",
+   "query": "termwiseCompositeTransformation|whiskeringRightObjCompIso",
+   "results": "The Mathlib definition is in CategoryTheory/Whiskering.lean:165; no existing termwiseCompositeTransformation.",
+   "date": "2026-10-24",
+   "verdict": "The wrapper packages the existing construction to avoid repeated concrete kernel reduction."
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.StrictTowerOrdinaryProperOpenArrows",
+  "date": "2026-10-24",
+  "group": "S9"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "def-cbc-strict-tower-ordinary-proper-open-arrows",
+   "place": "The termwise towerAlpha definition.",
+   "via": []
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sf-cbc",
+ "lean": {
+  "module": "Sheaf.CategoryTheory.TermwiseCompositeTransformation",
+  "file": "lean/Sheaf/CategoryTheory/TermwiseCompositeTransformation.lean",
+  "declaration": "CategoryTheory.Functor.termwiseCompositeTransformation",
+  "statement": "def termwiseCompositeTransformation (I A B C D : Type*) [Category I] [Category A] [Category B] [Category C] [Category D] (f : A ⥤ B) (g : B ⥤ D) (h : A ⥤ C) (k : C ⥤ D) (t : f ⋙ g ⟶ h ⋙ k) : (whiskeringRight I A B).obj f ⋙ (whiskeringRight I B D).obj g ⟶ (whiskeringRight I A C).obj h ⋙ (whiskeringRight I C D).obj k",
+  "branch": "sheaf-dag",
+  "by": "S9",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S9",
+  "result": "pass",
+  "landing": "20261024T191117-L-247651",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S9",
+  "result": "pass",
+  "landing": "20261024T191117-L-247651",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

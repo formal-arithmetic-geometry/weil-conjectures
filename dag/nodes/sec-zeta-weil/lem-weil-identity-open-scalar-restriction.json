@@ -1,0 +1,143 @@
+{
+ "id": "lem-weil-identity-open-scalar-restriction",
+ "kind": "statement",
+ "title": "Identity open normalization commutes with coefficient restriction",
+ "statement": "Let $X$ be a scheme, let $A,B$ be finite commutative rings and let $\\varphi:A\\to B$ be any ring homomorphism. On the small pro-etale module derived categories [def-weil-pbc-proetale-site, def-weil-extension-by-zero], let $a_R:(\\mathrm{id}_X)_!^R\\cong\\mathrm{id}$ be the canonical adjunction-normalized identity-open identification of [def-sp-finite-intrinsic-open-square], and let $b_\\varphi:(\\mathrm{id}_X)_!^A\\operatorname{Res}_\\varphi\\cong\\operatorname{Res}_\\varphi(\\mathrm{id}_X)_!^B$ be the published exact derived open scalar comparison [lem-sf-open-extension-scalar-restriction-coherence]. Then $a_A\\operatorname{Res}_\\varphi=(\\operatorname{Res}_\\varphi a_B)\\circ b_\\varphi$ as natural transformations on the entire unbounded derived category. No proper morphism, compactification, constructibility or surjectivity hypothesis is required.",
+ "stmt_deps": [
+  "def-weil-pbc-proetale-site",
+  "def-weil-extension-by-zero",
+  "def-sp-finite-intrinsic-open-square",
+  "lem-sf-open-extension-scalar-restriction-coherence"
+ ],
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tags 03DI (lemma-extension-by-zero), 03CY (lemma-sheafification-presheaf-modules); coefficient calculation in step 4 of lem-weil-proper-finite-normalization"
+ },
+ "proof": [
+  {
+   "text": "Construct fixedRestrictionId from the identity isomorphism of the localization site functor. Its unit equation for restriction left adjoint to pushforward follows on sections. Uniqueness of adjoint conjugates then shows that upperStarIsoOpenImmersionRestriction followed by fixedRestrictionId is the published upperStarId. Transport this equation through the realization equivalence. The unit characterization of sfIntrinsicOpenId gives intrinsic_identity_unit: the open unit, intrinsic identity restriction, and sfIntrinsicOpenId compose to the identity.",
+   "uses": [
+    "def-weil-extension-by-zero",
+    "lem-weil-extension-by-zero-adjunction",
+    "def-weil-pbc-proetale-operations",
+    "def-sp-finite-intrinsic-open-square"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Prove the coefficient square for intrinsic identity restriction. The fixed-scalar identity restriction commutes with scalar restriction on sections. In arbitrary categories, naturality transports such an identity square through equivalences whenever the forward and inverse realization squares satisfy the counit equation. That counit equation follows from the definition of sfInverseRealizationRestriction, the realization counit naturality, and the equivalence triangle identity. Specializing this elementary categorical calculation gives intrinsic_restriction_square.",
+   "uses": [
+    "def-weil-extension-by-zero",
+    "lem-sf-open-extension-scalar-restriction-coherence"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Compare the sheaf-level composite sfOpenRestriction followed by scalar restriction of sfIntrinsicOpenId with sfIntrinsicOpenId at the restricted module. Apply the injective Hom equivalence of the open extension adjunction and postcompose with the invertible identity restriction component. Its naturality and intrinsic_restriction_square reduce the comparison to the published sfOpenRestriction_normalized_unique unit equation and intrinsic_identity_unit over each coefficient ring. This proves sheaf_identity for every module sheaf.",
+   "uses": [
+    "lem-weil-extension-by-zero-adjunction",
+    "lem-sf-open-extension-scalar-restriction-coherence",
+    "def-sp-finite-intrinsic-open-square"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Apply CategoryTheory.Functor.mapDerivedCategorySquareIso_hom_app_id to sfOpenRestriction at the identity morphism, with the two sfIntrinsicOpenId identifications and sheaf_identity. Extension by zero and scalar restriction are exact, so the published exact unbounded localization comparison applies. Natural-transformation extensionality and the definitions of sfIntrinsicDerivedOpenId and sfOpenRestrictionDerived give exactly the claimed equality.",
+   "uses": [
+    "lem-weil-extension-by-zero-exact",
+    "lem-weil-pbc-exact-functor-derived-factorization",
+    "lem-sf-open-extension-scalar-restriction-coherence",
+    "def-sp-finite-intrinsic-open-square"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tags 03DI and 03CY: adjunction unit normalization and uniqueness; exact localization uses the published mapDerivedCategorySquareIso_hom_app_id identity-square theorem. Formalized by E3, 2026-10-26."
+ },
+ "proof_deps": [
+  "def-weil-extension-by-zero",
+  "lem-weil-extension-by-zero-adjunction",
+  "def-weil-pbc-proetale-operations",
+  "def-sp-finite-intrinsic-open-square",
+  "lem-sf-open-extension-scalar-restriction-coherence",
+  "lem-weil-extension-by-zero-exact",
+  "lem-weil-pbc-exact-functor-derived-factorization"
+ ],
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The canonical identity extension by zero isomorphism commutes with restriction of coefficient scalars on module sheaves",
+   "results": "8 hits: ModuleCat.restrictScalarsId'App_inv_naturality, ModuleCat.homEquiv_extendScalarsId, ModuleCat.restrictScalarsId'App_inv_naturality_assoc, SheafOfModules.restrictScalars_map_val, SheafOfModules.restrictScalars_obj_val, PresheafOfModules.restrictScalarsCompToPresheaf, ModuleCat.restrictScalarsComp'App_inv_naturality, ModuleCat.ExtendRestrictScalarsAdj.HomEquiv.evalAt_apply. These give scalar-restriction and adjoint uniqueness APIs, not the prescribed identity-open derived square.",
+   "date": "2026-10-25",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.leftAdjointUniq",
+   "results": "12 hits: CategoryTheory.Adjunction.leftAdjointUniq, CategoryTheory.Adjunction.leftAdjointUniq_refl, CategoryTheory.Adjunction.leftAdjointUniq_inv_app, CategoryTheory.Adjunction.leftAdjointUniq_hom_counit, CategoryTheory.Adjunction.unit_leftAdjointUniq_hom, CategoryTheory.Adjunction.leftAdjointUniq_trans, CategoryTheory.Adjunction.leftAdjointUniq_trans_app, CategoryTheory.Adjunction.leftAdjointUniq_hom_app_counit. These give scalar-restriction and adjoint uniqueness APIs, not the prescribed identity-open derived square.",
+   "date": "2026-10-25",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "mapDerivedCategorySquareIso|leftAdjointUniq",
+   "results": "24 hits: Mathlib/Condensed/Discrete/LocallyConstant.lean, Mathlib/Condensed/Discrete/LocallyConstant.lean, Mathlib/AlgebraicGeometry/Modules/Sheaf.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean, Mathlib/Topology/Sheaves/Presheaf.lean, Mathlib/Topology/Sheaves/Presheaf.lean, Mathlib/CategoryTheory/Adjunction/Unique.lean. These give scalar-restriction and adjoint uniqueness APIs, not the prescribed identity-open derived square.",
+   "date": "2026-10-25",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.ProperFiniteNormalization",
+  "date": "2026-10-26",
+  "group": "U2"
+ },
+ "chapter": "sec-zeta-weil",
+ "unit": "sk-input-weights",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-weil-proper-compact-coincidence",
+   "place": "proof, first paragraph: identity compactification and finite-level identification; explicit coefficient normalization in lem-weil-proper-finite-normalization step 4",
+   "via": [
+    "lem-weil-proper-finite-normalization"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.ProEtaleIdentityOpenScalarRestriction",
+  "file": "lean/Sheaf/AlgebraicGeometry/ProEtaleIdentityOpenScalarRestriction.lean",
+  "declaration": "AlgebraicGeometry.Scheme.sfIdentityOpenRestriction",
+  "statement": "theorem sfIdentityOpenRestriction\n    (X : Scheme.{u}) {A B : Type u} [CommRing A] [CommRing B] [Finite A] [Finite B]\n    (φ : A →+* B) :\n    Functor.whiskerLeft (proEtaleCoefficientRestrictScalars X φ).mapDerivedCategory\n        (sfIntrinsicDerivedOpenId A X).hom =\n      (sfOpenRestrictionDerived (𝟙 X) φ).hom ≫\n        Functor.whiskerRight (sfIntrinsicDerivedOpenId B X).hom\n          (proEtaleCoefficientRestrictScalars X φ).mapDerivedCategory",
+  "branch": "sheaf-dag",
+  "by": "U2",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-e7004",
+  "group": "U2",
+  "result": "pass",
+  "landing": "20261025T203326-L-2805184",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E3",
+  "result": "pass",
+  "landing": "20261026T091417-L-3340687",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

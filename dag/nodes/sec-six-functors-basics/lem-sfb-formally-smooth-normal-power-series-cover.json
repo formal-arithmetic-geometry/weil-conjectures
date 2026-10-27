@@ -1,0 +1,337 @@
+{
+ "id": "lem-sfb-formally-smooth-normal-power-series-cover",
+ "kind": "statement",
+ "title": "Normal power-series cover of an adically formally smooth local algebra",
+ "statement": "Let $A\\to B$ be a local homomorphism of commutative Noetherian local rings [def-weil-pbc-noetherian-ring], with maximal ideals $\\mathfrak m_A,\\mathfrak m_B$. Assume $\\widehat A$ is a normal domain [def-weil-pbc-adic-completion, def-weil-pbc-normal-ring], $B$ is formally smooth over $A$ for the $\\mathfrak m_B$-adic topology [def-weil-pbc-formally-smooth-adic], $\\dim B>\\dim A$ [def-weil-pbc-krull-dimension-ring], the induced residue-field extension is finite, and $\\mathfrak p=\\mathfrak m_AB$ is prime. There exist a complete Noetherian normal local domain $(C,\\mathfrak n)$ [def-weil-pbc-adically-complete-ring], an integer $d\\ge0$, and a faithfully flat local homomorphism $\\iota:B\\to D=C[[T_1,\\ldots,T_d]]$ [def-weil-pbc-multivariate-power-series, def-weil-pbc-faithfully-flat-ring-map], such that $D$ is a Noetherian normal local domain and $\\iota^{-1}(\\mathfrak nD)=\\mathfrak p$. Local means that the inverse image of the target maximal ideal is the source maximal ideal.",
+ "source": {
+  "document": "literature/ega-iv4.pdf",
+  "place": "EGA IV4 proof of Theorem 21.14.1, first paragraph: completion, finite flat coefficient extension, a local factor D_0 and its power-series presentation; EGA 0_IV 19.3.6, 19.6.4, 19.7.1.5 and IV 7.5.1, 7.5.3, 6.5.4(ii). No Stacks tag asserts this combined cover. EGA IV4 is WANTED locally; read the online English translation.",
+  "url": "https://jcreinhold.github.io/ega/iv/34-ch4-21-divisors.html"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-noetherian-ring",
+  "def-weil-pbc-adic-completion",
+  "def-weil-pbc-normal-ring",
+  "def-weil-pbc-formally-smooth-adic",
+  "def-weil-pbc-krull-dimension-ring",
+  "def-weil-pbc-adically-complete-ring",
+  "def-weil-pbc-multivariate-power-series",
+  "def-weil-pbc-faithfully-flat-ring-map"
+ ],
+ "proof": [
+  {
+   "text": "Put $A_0=\\widehat A$ and $R=\\widehat B$. The completion-local-ring and completion-Noetherian theorems give complete Noetherian local rings, with the original residue fields $k,l$ and maximal ideals $\\mathfrak m_AA_0,\\mathfrak m_BR$; completeness is supplied by the module-completion theorem with the finite ideals $\\mathfrak m_A,\\mathfrak m_B$. The completed map $A_0\\to R$ is local: its residue map is the injective field map $k\\to l$, so membership in the maximal ideal is detected on residues. It is adically formally smooth by [lem-weil-pbc-fs-adic-complete-source-target]. Also $B\\to R$ is faithfully flat by [lem-weil-pbc-local-completion-faithfully-flat].",
+   "uses": [
+    "lem-weil-pbc-local-completion-local-ring",
+    "lem-weil-pbc-adic-completion-noetherian",
+    "lem-weil-pbc-module-completion-complete",
+    "lem-weil-pbc-fs-adic-complete-source-target",
+    "lem-weil-pbc-local-completion-faithfully-flat"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/ega-iv4.pdf",
+    "place": "21.14.1, completion paragraph; Stacks 05GI (lemma-radical-completion), 0316 (lemma-completion-Noetherian-Noetherian), 05GG (lemma-hathat-finitely-generated), 07ED (lemma-formally-smooth-completion), 00MC (lemma-completion-faithfully-flat)."
+   }
+  },
+  {
+   "text": "Apply [lem-weil-pbc-formally-smooth-complete-local-regular] to $A_0\\to R$. Its fibres are geometrically regular, hence regular by taking the trivial purely inseparable extension in [def-weil-pbc-g-ring], hence normal by [lem-weil-pbc-regular-ring-normal]. The map is flat and both rings are Noetherian. Since $A_0$ is normal by hypothesis, [lem-weil-pbc-flat-normal-fibres-noetherian-normal] gives normality of $R$. A normal local ring is a normal domain: localization at its unique maximal ideal is the ring itself, so apply [def-weil-pbc-normal-ring]. Thus we may use $C=R$ as a complete normal coefficient domain.",
+   "uses": [
+    "lem-weil-pbc-formally-smooth-complete-local-regular",
+    "def-weil-pbc-g-ring",
+    "lem-weil-pbc-regular-ring-normal",
+    "lem-weil-pbc-flat-normal-fibres-noetherian-normal",
+    "def-weil-pbc-normal-ring"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/ega-iv4.pdf",
+    "place": "21.14.1, normality of the coefficient ring: repair using C=completed B; Stacks 07PM (proposition-fs-regular), 0567 (lemma-regular-normal), 0C22 (lemma-normal-goes-up-noetherian)."
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-formally-smooth-completed-local-tensor-square] to $A_0\\to R$, whose finite residue extension and formal smoothness were checked in step 1. Obtain the explicitly constructed complete local ring $E$, maps $j_1,j_2:R\\to E$ and multiplication retraction $\\mu:E\\to R$. Regard $E$ as a $C=R$-algebra through $j_2$, with $\\mathfrak n=\\mathfrak m_R$. Both $j_i$ are faithfully flat local maps, induce the identity on $l$, and are adically formally smooth; $\\mu j_2=\\mathrm{id}_C$. This replaces the source's finite coefficient extension, whose asserted normality does not follow in the inseparable residue case (counterexample in report).",
+   "uses": [
+    "lem-sfb-formally-smooth-completed-local-tensor-square"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/ega-iv4.pdf",
+    "place": "21.14.1, tensor-product local-factor paragraph, repaired by EGA 0_I 7.7 and 0_IV 19.3.5--19.3.6 at the diagonal residue point."
+   }
+  },
+  {
+   "text": "Set $I=\\ker\\mu$. Since $E$ is Noetherian, $I$ has finitely many generators; their images span the finite-dimensional $l$-vector space $I/\\mathfrak m_EI$. Choose an $l$-basis and representatives $x_1,\\ldots,x_d\\in I$, allowing $d=0$. The retraction makes $j_2$ injective. Apply [lem-sfb-split-local-power-series-section-criterion] with coefficient ring $C$, target $E$, inclusion $j_2$ and retraction $\\mu$. It gives $S=C[[T_1,\\ldots,T_d]]$, complete Noetherian local with residue $l$, a local continuous $C$-map $\\phi:S\\to E$, and surjections $\\phi_n:S/\\mathfrak m_S^n\\twoheadrightarrow E/\\mathfrak m_E^n$ inducing the identity on $l$ for all $n\\ge1$.",
+   "uses": [
+    "lem-sfb-split-local-power-series-section-criterion",
+    "def-weil-pbc-noetherian-ring"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/ega-iv4.pdf",
+    "place": "21.14.1, power-series presentation; the split section criterion is Stacks 06SG (lemma-power-series), valid also in mixed characteristic."
+   }
+  },
+  {
+   "text": "For $n\\ge1$ put $U=S/\\mathfrak m_S^n$ and $K=\\ker\\phi_n$. Since $\\phi_n$ preserves residues, $K\\subset\\mathfrak m_SU$ and $K^n=0$. Start with the quotient $C$-map $E\\to U/K=E/\\mathfrak m_E^n$. For $t=1,\\ldots,n-1$ lift through $U/K^{t+1}\\twoheadrightarrow U/K^t$ using [def-weil-pbc-formally-smooth-adic] for $j_2$. The kernel is square zero, since $2t\\ge t+1$; continuity holds at each stage because the map is local into a ring whose maximal ideal has nilpotence exponent at most $n$. Each lift remains local, as its reduction to $l$ is the identity. The resulting $C$-map $g:E\\to U$ kills $\\mathfrak m_E^n$ by locality, so gives $\\sigma_n:E/\\mathfrak m_E^n\\to U$ with $\\phi_n\\sigma_n=\\mathrm{id}$. For $n=1$ the residue identity itself is the section. The section clause of [lem-sfb-split-local-power-series-section-criterion] now makes $\\phi$ a $C$-algebra isomorphism. Take $D=S$ and $\\iota=\\phi^{-1}j_1(B\\to R)$.",
+   "uses": [
+    "def-weil-pbc-formally-smooth-adic",
+    "lem-sfb-split-local-power-series-section-criterion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/ega-iv4.pdf",
+    "place": "21.14.1, power-series step; explicit square-zero lifts realizing EGA 0_IV 19.7.1.5 in this split situation, via Stacks 06SG."
+   }
+  },
+  {
+   "text": "The map $j_2:C\\to E$ is adically formally smooth between complete Noetherian local rings. Reapply [lem-weil-pbc-formally-smooth-complete-local-regular]. As in step 2, its geometrically regular fibres are regular and normal, and [lem-weil-pbc-flat-normal-fibres-noetherian-normal] gives normality of $E$ from that of $C$. Since $E$ is local, [def-weil-pbc-normal-ring] makes it a normal domain. Transporting through $\\phi$ proves that $D$ is a Noetherian normal local domain. The composite $\\iota$ is local. It is faithfully flat: the two maps $B\\to R$ and $j_1:R\\to E$ are faithfully flat; under $N\\otimes_B E\\cong(N\\otimes_B R)\\otimes_R E$, the two successive tensor functors preserve and reflect exactness, which is exactly [def-weil-pbc-faithfully-flat-ring-map]. Ring isomorphisms preserve this condition.",
+   "uses": [
+    "lem-weil-pbc-formally-smooth-complete-local-regular",
+    "def-weil-pbc-g-ring",
+    "lem-weil-pbc-regular-ring-normal",
+    "lem-weil-pbc-flat-normal-fibres-noetherian-normal",
+    "def-weil-pbc-normal-ring",
+    "def-weil-pbc-faithfully-flat-ring-map"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/ega-iv4.pdf",
+    "place": "21.14.1, normality and faithful-flatness conclusion; Stacks 07PM, 0567, 0C22, and definition 00HB."
+   }
+  },
+  {
+   "text": "Let $J=j_2(\\mathfrak n)E$. The last clause of [lem-sfb-formally-smooth-completed-local-tensor-square] says that $R/\\mathfrak m_{A_0}R\\to E/J$ induced by $j_1$ is faithfully flat. By [lem-weil-pbc-faithfully-flat-ideal-contraction], with ideal zero, it is injective. Thus $j_1^{-1}(J)=\\mathfrak m_{A_0}R=\\mathfrak m_AR$. Applying that same ideal-contraction theorem to $B\\to R$ and $\\mathfrak p=\\mathfrak m_AB$ gives the inverse image in $B$ equal to $\\mathfrak p$. Since $\\phi$ is a $C$-algebra isomorphism, $\\phi(\\mathfrak nD)=J$. Therefore $\\iota^{-1}(\\mathfrak nD)=\\mathfrak p$, as required. The construction actually does not need the positive dimension difference or the separately assumed primality; it proves the stated instance without changing its hypotheses.",
+   "uses": [
+    "lem-sfb-formally-smooth-completed-local-tensor-square",
+    "lem-weil-pbc-faithfully-flat-ideal-contraction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/ega-iv4.pdf",
+    "place": "21.14.1, contraction (m D_0) cap B = m B, repaired by faithful flatness of the completed closed-fibre map; Stacks 05CK (lemma-faithfully-flat-universally-injective)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-local-completion-local-ring",
+  "lem-weil-pbc-adic-completion-noetherian",
+  "lem-weil-pbc-module-completion-complete",
+  "lem-weil-pbc-fs-adic-complete-source-target",
+  "lem-weil-pbc-local-completion-faithfully-flat",
+  "lem-weil-pbc-formally-smooth-complete-local-regular",
+  "def-weil-pbc-g-ring",
+  "lem-weil-pbc-regular-ring-normal",
+  "lem-weil-pbc-flat-normal-fibres-noetherian-normal",
+  "def-weil-pbc-normal-ring",
+  "lem-sfb-formally-smooth-completed-local-tensor-square",
+  "lem-sfb-split-local-power-series-section-criterion",
+  "def-weil-pbc-noetherian-ring",
+  "def-weil-pbc-formally-smooth-adic",
+  "def-weil-pbc-faithfully-flat-ring-map",
+  "lem-weil-pbc-faithfully-flat-ideal-contraction"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/ega-iv4.pdf",
+  "place": "21.14.1, first completion/tensor/power-series paragraph, with the inseparable coefficient-normality inference repaired by a completed tensor square; EGA 0_I 7.7, 0_IV 19.3.5--19.3.6 and Stacks 06SG. See report Source error."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "formallySmooth.*(normal|powerSeries)|normal.*formallySmooth|parafactorial|Ramanujam",
+   "results": "No hits.  Lifting through complete rings and flatness of ordinary formally smooth algebras do not supply the normal coefficient ring, local power-series cover and specified contraction.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Normal power series faithfully flat cover of an adically formally smooth local algebra finite residue field extension",
+   "results": "Hits: Algebra.FormallySmooth.iff_injective_lTensor_residueField, Algebra.Smooth.flat, Algebra.FormallySmooth.exists_kerProj_comp_eq_id, Algebra.FormallySmooth.exists_adicCompletionEvalOneₐ_comp_eq, Algebra.Smooth.formallySmooth, Algebra.FormallySmooth, Algebra.FormallySmooth.iff_comp_surjective, Algebra.FormallySmooth.casesOn  Lifting through complete rings and flatness of ordinary formally smooth algebras do not supply the normal coefficient ring, local power-series cover and specified contraction.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"FormallySmooth\", \"IsAdicComplete\"",
+   "results": "Hits: Algebra.FormallySmooth.exists_mkₐ_comp_eq_of_isAdicComplete  Lifting through complete rings and flatness of ordinary formally smooth algebras do not supply the normal coefficient ring, local power-series cover and specified contraction.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A formally smooth local algebra over an analytically normal Noetherian local ring with finite residue extension admits a faithfully flat normal complete power series cover",
+   "results": "Hits: RingHom.FormallySmooth.holdsForLocalizationAway, Algebra.FormallySmooth.exists_adicCompletionEvalOneₐ_comp_eq, Algebra.FormallySmooth.exists_mkₐ_comp_eq_of_isAdicComplete, Algebra.Smooth.flat_of_isNoetherianRing, Algebra.Smooth.flat, Algebra.FormallySmooth.flat_of_algHom_of_isNoetherianRing, Algebra.FormallySmooth.localization_base, Algebra.Smooth.formallySmooth  Lifting through complete rings and flatness of ordinary formally smooth algebras do not supply the normal coefficient ring, local power-series cover and specified contraction.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A formally smooth Noetherian local ring is faithfully flat covered by formal power series over a complete normal coefficient ring",
+   "results": "Hits: Algebra.FormallySmooth.flat_of_algHom_of_isNoetherianRing, Algebra.Smooth.flat_of_isNoetherianRing, RingHom.FormallySmooth.holdsForLocalizationAway, Algebra.FormallySmooth.exists_mkₐ_comp_eq_of_isAdicComplete, Algebra.Smooth.flat, Algebra.FormallySmooth.exists_adicCompletionEvalOneₐ_comp_eq, AdicCompletion.flat_of_isNoetherian, IsAdicComplete.henselianRing  Lifting through complete rings and flatness of ordinary formally smooth algebras do not supply the normal coefficient ring, local power-series cover and specified contraction.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A complete formally smooth local homomorphism inducing the same residue field is a formal power series algebra",
+   "results": "Hits: PowerSeries.residueFieldOfPowerSeries, HenselianLocalRing, Algebra.FormallySmooth.exists_mkₐ_comp_eq_of_isAdicComplete, PowerSeries.algEquivQuotientWeierstrassDistinguished, PowerSeries.weierstrassUnit, Algebra.FormallySmooth.localization_base, Algebra.Smooth.formallySmooth, PowerSeries.weierstrassDistinguished These do not provide the normal coefficient ring with the prescribed contraction.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"FormallySmooth\", \"IsLocalRing\"",
+   "results": "No hits. These do not provide the normal coefficient ring with the prescribed contraction.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "formallySmooth.*(normal|powerSeries)|normal.*formallySmooth|FormallySmoothAdic",
+   "results": "No hits. These do not provide the normal coefficient ring with the prescribed contraction.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Faithfully flat normal complete power series cover of a formally smooth local algebra",
+   "results": "Hits: Module.FaithfullyFlat.of_flat_of_isLocalHom, RingHom.Smooth, RingHom.FormallySmooth, Algebra.Smooth.flat, Algebra.Smooth.flat_of_isNoetherianRing, Algebra.FormallyEtale.instFormallySmooth, AlgebraicGeometry.instLocallyOfFinitePresentationOfIsSmooth, Algebra.FormallyEtale.iff_formallyUnramified_and_formallySmooth These do not provide the normal coefficient ring with the prescribed contraction.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A local formally smooth algebra admits a faithfully flat extension by power series over a normal complete coefficient ring",
+   "results": "Hits: RingHom.FormallySmooth.holdsForLocalizationAway, Algebra.FormallySmooth.exists_mkₐ_comp_eq_of_isAdicComplete, Algebra.Smooth.formallySmooth, Algebra.FormallySmooth.localization_base, Algebra.Smooth.flat, Algebra.FormallySmooth.localization_map, Algebra.FormallySmooth.exists_adicCompletionEvalOneₐ_comp_eq, RingHom.FormallySmooth.localizationPreserves These do not provide the normal coefficient ring with the prescribed contraction.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-formally-smooth-ramanujam-samuel-localization",
+  "date": "2026-10-24",
+  "group": "Q87"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "EGA IV4 21.14.3(i), first assertion, used to verify the parafactoriality hypothesis in the proof of the second assertion; lower input to the inherited affine-boundary construction. Supporting input: EGA IV4 Theorem 21.14.1 and Corollary 21.14.2, with the explicit meaning of local parafactoriality in 21.13.8. No Stacks tag states this Ramanujam--Samuel theorem. Lower argument: EGA IV4 proof of Theorem 21.14.1, first paragraph: completion, finite flat coefficient extension, a local factor D_0 and its power-series presentation; EGA 0_IV 19.3.6, 19.6.4, 19.7.1.5 and IV 7.5.1, 7.5.3, 6.5.4(ii). No Stacks tag asserts this combined cover. EGA IV4 is WANTED locally; read the online English translation.",
+   "via": [
+    "lem-sfb-formally-smooth-ramanujam-samuel-localization",
+    "lem-sfb-smooth-nongeneric-punctured-line-triviality",
+    "lem-sfb-ramanujam-samuel-prime-divisor",
+    "lem-sfb-smooth-normal-affine-boundary-cartier",
+    "lem-sfb-normal-smooth-group-local-ample-line",
+    "lem-sfb-symmetric-line-power-prolongation",
+    "lem-sfb-normal-symmetric-cubical-extension",
+    "lem-sfb-symmetric-ample-power-extension",
+    "lem-sfb-regular-group-generic-ampleness",
+    "lem-sfb-stable-picard-theta-ampleness",
+    "lem-sfb-stable-relative-picard-kummer",
+    "lem-sfb-stable-level-versal-branch-freeness",
+    "lem-sfb-stable-abelian-level-normalization",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-formally-smooth-normal-power-series-cover",
+  "worker": "stage1",
+  "summary": "Statement retained verbatim. Seven steps prove normality of completed B, form its completed local tensor square, use the existing mixed-characteristic split power-series criterion with explicit square-zero lifts, and compute the prescribed contraction via faithful flatness of the closed fibre. One new statement-only construction lemma, searched with all four tools. Report records the inseparable-residue error in the source coefficient-normality inference and the corrected construction.",
+  "blueprint": "EGA IV4 21.14.3(i), first assertion, used to verify the parafactoriality hypothesis in the proof of the second assertion; lower input to the inherited affine-boundary construction. Supporting input: EGA IV4 Theorem 21.14.1 and Corollary 21.14.2, with the explicit meaning of local parafactoriality in 21.13.8. No Stacks tag states this Ramanujam--Samuel theorem. Lower argument: EGA IV4 proof of Theorem 21.14.1, first paragraph: completion, finite flat coefficient extension, a local factor D_0 and its power-series presentation; EGA 0_IV 19.3.6, 19.6.4, 19.7.1.5 and IV 7.5.1, 7.5.3, 6.5.4(ii). No Stacks tag asserts this combined cover. EGA IV4 is WANTED locally; read the online English translation. The inherited affine-boundary route is unchanged; only the coefficient extension in this lower EGA input is repaired.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-local-completion-local-ring",
+    "why": "Generic commutative-algebra input for the completion, normality or ideal-contraction argument; the six-functor unit has no replacement for this lower EGA local-ring calculation."
+   },
+   {
+    "node": "lem-weil-pbc-adic-completion-noetherian",
+    "why": "Generic commutative-algebra input for the completion, normality or ideal-contraction argument; the six-functor unit has no replacement for this lower EGA local-ring calculation."
+   },
+   {
+    "node": "lem-weil-pbc-module-completion-complete",
+    "why": "Generic commutative-algebra input for the completion, normality or ideal-contraction argument; the six-functor unit has no replacement for this lower EGA local-ring calculation."
+   },
+   {
+    "node": "lem-weil-pbc-fs-adic-complete-source-target",
+    "why": "Generic commutative-algebra input for the completion, normality or ideal-contraction argument; the six-functor unit has no replacement for this lower EGA local-ring calculation."
+   },
+   {
+    "node": "lem-weil-pbc-local-completion-faithfully-flat",
+    "why": "Generic commutative-algebra input for the completion, normality or ideal-contraction argument; the six-functor unit has no replacement for this lower EGA local-ring calculation."
+   },
+   {
+    "node": "lem-weil-pbc-formally-smooth-complete-local-regular",
+    "why": "Generic commutative-algebra input for the completion, normality or ideal-contraction argument; the six-functor unit has no replacement for this lower EGA local-ring calculation."
+   },
+   {
+    "node": "lem-weil-pbc-regular-ring-normal",
+    "why": "Generic commutative-algebra input for the completion, normality or ideal-contraction argument; the six-functor unit has no replacement for this lower EGA local-ring calculation."
+   },
+   {
+    "node": "lem-weil-pbc-flat-normal-fibres-noetherian-normal",
+    "why": "Generic commutative-algebra input for the completion, normality or ideal-contraction argument; the six-functor unit has no replacement for this lower EGA local-ring calculation."
+   },
+   {
+    "node": "lem-weil-pbc-faithfully-flat-ideal-contraction",
+    "why": "Generic commutative-algebra input for the completion, normality or ideal-contraction argument; the six-functor unit has no replacement for this lower EGA local-ring calculation."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-local-completion-local-ring",
+  "lem-weil-pbc-adic-completion-noetherian",
+  "lem-weil-pbc-module-completion-complete",
+  "lem-weil-pbc-fs-adic-complete-source-target",
+  "lem-weil-pbc-local-completion-faithfully-flat",
+  "lem-weil-pbc-formally-smooth-complete-local-regular",
+  "lem-weil-pbc-regular-ring-normal",
+  "lem-weil-pbc-flat-normal-fibres-noetherian-normal",
+  "lem-weil-pbc-faithfully-flat-ideal-contraction"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q102-3ce5e7bf4",
+  "group": "Q102",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q102-3ce5e7bf4 (reviewer sub-agent of L); spot-checked: Ordinary first split, not a re-split: the item was created 2026-10-24 by Q87 and has no repair note. Statement and stmt_deps unchanged. New node lem-sfb-formally-smooth-completed-local-tensor-square, verified true: q=ker(R⊗_A R→l) is finitely generated, so the completion E of P_q is Noetherian with E/m^n=P_q/q^n (05GG/05GH). Formal smoothness over each factor follows by lifting along the other factor and extending through the localization and the completion (q^{2N}→0). Flatness from 07NP. mu extends to E because R is complete. The closed fibre E/J is the completion of ((R/m_A R)⊗_k l)_r because all P_q/q^n have finite length (Mittag-Leffler), so R/m_A R→E/J is faithfully flat. It is not a restatement (no normality or power-series content) and no DAG duplicate was found (complete-local-smooth-power-series is over a field). Item steps 1-7 check against the full statements of the cited nodes. Stacks 07PM, 0C22, 07NP, 07EG, 07ED read in the local tex. Split criterion: all hypotheses supplied by j2 and mu. Step 5: K^n=0 and K^{2t}⊂K^{t+1}; locality gives continuity and phi_n sigma_n=id. Step 7: zero-ideal contraction plus contraction along B→R gives iota^{-1}(nD)=p. Source error: EGA IV4 is absent locally, so I could not read 21.14.1 myself; I re-derived the worker's counterexample independently (k=F2(a), y^2+ax^2+z^3 is normal; after adjoining sqrt(a) it becomes a cusp times a line). The repaired route C=B-hat is correct either way. Minor note: step 2 leaves the 'normal domain implies normal ring' step for A-hat tacit (elementary). Batch 5: lem-trf-vector-space-quotient-dimension is the Mathlib rank-nullity leaf, general linear algebra outside the trace formula and Poincare duality assumptions, so accepted. The nine declared sec-proper-base-change commutative-algebra tool_uses are accepted as black-box uses. No changes."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.FormallySmoothNormalPowerSeriesCover",
+  "declaration": "Algebra.exists_normal_powerSeries_cover_of_formallySmoothAdic",
+  "file": "lean/Sheaf/RingTheory/FormallySmoothNormalPowerSeriesCover.lean",
+  "statement": "theorem exists_normal_powerSeries_cover_of_formallySmoothAdic (A : Type u) (B : Type v) [CommRing A] [CommRing B] [IsNoetherianRing A] [IsNoetherianRing B] [IsLocalRing A] [IsLocalRing B] [Algebra A B] [IsLocalHom (algebraMap A B)] [IsDomain (AdicCompletion (IsLocalRing.maximalIdeal A) A)] [IsIntegrallyClosed (AdicCompletion (IsLocalRing.maximalIdeal A) A)] (hfs : FormallySmoothAdic A B (IsLocalRing.maximalIdeal B)) (hdim : ringKrullDim A < ringKrullDim B) [Module.Finite (IsLocalRing.ResidueField A) (IsLocalRing.ResidueField B)] (hp : ((IsLocalRing.maximalIdeal A).map (algebraMap A B)).IsPrime) : ∃ (C : Type (max u v)) (_ : CommRing C) (_ : IsLocalRing C), IsNoetherianRing C ∧ IsDomain C ∧ IsIntegrallyClosed C ∧ IsAdicComplete (IsLocalRing.maximalIdeal C) C ∧ ∃ (d : ℕ) (_ : Algebra B (MvPowerSeries (Fin d) C)), Module.FaithfullyFlat B (MvPowerSeries (Fin d) C) ∧ IsLocalHom (algebraMap B (MvPowerSeries (Fin d) C)) ∧ IsNoetherianRing (MvPowerSeries (Fin d) C) ∧ IsDomain (MvPowerSeries (Fin d) C) ∧ IsIntegrallyClosed (MvPowerSeries (Fin d) C) ∧ ((IsLocalRing.maximalIdeal C).map (MvPowerSeries.C (σ := Fin d))).comap (algebraMap B (MvPowerSeries (Fin d) C)) = (IsLocalRing.maximalIdeal A).map (algebraMap A B)",
+  "branch": "newtargets-dag",
+  "by": "Q58",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-4d48a8fff",
+  "group": "Q58",
+  "result": "pass",
+  "note": "Only the item node's lean record changed; the statement is verbatim. Each hypothesis is rendered exactly: Noetherian local A and B, IsLocalHom, completion of A as IsDomain+IsIntegrallyClosed, FormallySmoothAdic for the maximal ideal of B, strict ringKrullDim inequality, Module.Finite on the canonical residue algebra, hp prime. Conclusion: exists C : Type (max u v), complete Noetherian normal local domain, exists d and Algebra B (MvPowerSeries (Fin d) C), faithfully flat, IsLocalHom, Noetherian normal domain, and the comap of m_C extended along MvPowerSeries.C equals m_A B. Same quantifier order, nothing stronger. Edge cases d=0, zero ring, inseparable residues and universes are fine. All 8 stmt_deps are used and all imports exist. No duplicate in Sheaf, WeilConjectures or the worker's Mathlib searches. Docstrings carry the source, blueprint tag and the 7-step proof; proof is sorry only. Cosmetic: docstring step 5 range says t=1..n, node says n-1. No compile run (no file changed)."
+ }
+}

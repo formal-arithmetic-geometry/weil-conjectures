@@ -1,0 +1,207 @@
+{
+ "id": "lem-sfb-tame-inertia-scalar-mate-isomorphism",
+ "kind": "statement",
+ "title": "Unit-normalized derived scalar comparison for condensed tame-inertia invariants",
+ "statement": "Fix distinct primes $p,\\ell$, an algebraic closure $\\Omega$ of $\\mathbf Q_\\ell$ with its extended $\\ell$-adic norm topology, and a finite intermediate extension $\\mathbf Q_\\ell\\subseteq E\\subseteq\\Omega$. For $F=E,\\Omega$, put $C_F(S)=C(S,F)$ on profinite sets, using all continuous maps [def-sfb-continuous-map-condensed-ring], and let $C_E\\to C_\\Omega$ be postcomposition with the continuous inclusion [def-sfb-continuous-map-condensed-ring-map]. Use internal module objects [sk-def-sfb-module-objects], ordinary unbounded derived categories [sk-def-sfb-derived-categories], and the unit-normalized adjunction $C_\\Omega\\otimes^L_{C_E}-\\dashv\\operatorname{Res}$ [lem-pur-sheaf-ring-derived-coefficient-adjunction].\n\nLet $r\\geq0$, $G=(\\prod_{q\\ne p}\\mathbf Z_q)^r=H\\times\\mathbf Z_\\ell^r$, and $H=(\\prod_{q\\ne p,\\ell}\\mathbf Z_q)^r$, where $q$ ranges over primes and $\\mathbf Z_q=\\varprojlim_n\\mathbf Z/q^n\\mathbf Z$, with product profinite topologies. Let $M$ be a finite-dimensional norm-topological $E$-vector space with continuous $E$-linear action $\\rho$ of $G$ and finite image $Q=\\rho(H)$ of order prime to $\\ell$. Define $M_F(S)=C(S,F\\otimes_E M)$ with its finite-dimensional product norm topology and extended action. Use the internal continuous action categories and ordinary derived invariants $R\\Gamma_G$ [def-sfb-condensed-action-module, def-sfb-condensed-derived-invariants]. Let $u:R\\Gamma_G(M_E)\\to\\operatorname{Res}R\\Gamma_G(M_\\Omega)$ be induced by the actual coefficient unit $M_E\\to\\operatorname{Res}M_\\Omega$, $m\\mapsto1\\otimes m$, and the invariant/scalar-restriction comparison. Let $\\sigma_M:C_\\Omega\\otimes^L_{C_E}R\\Gamma_G(M_E)\\to R\\Gamma_G(M_\\Omega)$ be its scalar-adjunction adjunct.\n\nThen $\\sigma_M$ is an isomorphism in the derived category of condensed $C_\\Omega$-modules. More precisely, put $N=M^H=\\operatorname{im}(|Q|^{-1}\\sum_{h\\in Q}h)$, choose the standard generators $\\gamma_i$ of $\\mathbf Z_\\ell^r$, and form the Koszul complexes $K_F(M)$ with degree-$a$ term $\\bigoplus_{|I|=a}C(-,F\\otimes_E N)$ and differential $(dx)_J=\\sum_{i\\in J}(-1)^{\\#\\{j\\in J:j<i\\}}(\\rho(\\gamma_i)-1)x_{J\\setminus\\{i\\}}$. Under the normalized derived isomorphisms $\\kappa_F:K_F(M)\\simeq R\\Gamma_G(M_F)$ of [lem-sfb-tame-inertia-continuous-koszul], $\\sigma_M$ is the canonical K-flat-derived tensor map whose representative in every degree is $z\\otimes(x_I)_I\\mapsto(zx_I)_I$. This identifies the actual adjunct, including its scalar unit, not just its source and target. The statement includes $r=0$ and $N=0$.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+  "place": "Paragraph (3), tame-boundary calculation, returned steps 4-5 and the scalar-adjunct part of step 6: condensed Koszul invariants, bounded finite-free tensor calculation and its unit normalization. Agent-extracted lemma; exact all-continuous analytic input remains WANTED."
+ },
+ "stmt_deps": [
+  "def-sfb-continuous-map-condensed-ring",
+  "def-sfb-continuous-map-condensed-ring-map",
+  "sk-def-sfb-module-objects",
+  "sk-def-sfb-derived-categories",
+  "lem-pur-sheaf-ring-derived-coefficient-adjunction",
+  "def-sfb-condensed-action-module",
+  "def-sfb-condensed-derived-invariants",
+  "lem-sfb-tame-inertia-continuous-koszul"
+ ],
+ "proof": [
+  {
+   "text": "Obtain the normalized Koszul Result from continuous_koszul, taking its auxiliary characteristic-p field to be ZMod p. Install its exact restriction and derived contexts.",
+   "uses": [
+    "lem-sfb-tame-inertia-continuous-koszul"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Apply the unit-normalized derived tensor computation and the ordinary scalar tensor computation. These supply the two independent invertibility inputs on each Koszul representative.",
+   "uses": [
+    "lem-sfb-tame-inertia-derived-tensor-computation",
+    "lem-sfb-tame-inertia-scalar-tensor-computation"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Prove the pure-tensor formula from the ordinary adjunction inverse identity, linearity on sections and the recorded coordinate coefficient formula. Prove the derived transpose formula by applying the adjunction Hom bijection, cancelling the exact restriction comparison, using its naturality, and then the recorded derived unit identity.",
+   "uses": [
+    "def-sfb-tame-inertia-scalar-mate-data"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Apply naturality of the derived Hom bijection to the normalized Koszul coefficient square. Its transpose is the derived tensor comparison followed by the localized ordinary tensor map and kappa_Omega. This is a composite of isomorphisms; cancel T(kappa_E) to deduce that the actual derived mate is invertible. Retain the quotient/Qh transports and the pure tensor formula in Computes.",
+   "uses": [
+    "def-sfb-tame-inertia-scalar-mate-data",
+    "lem-sfb-tame-inertia-continuous-koszul"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-sfb-tame-inertia-scalar-mate-data",
+  "lem-sfb-tame-inertia-continuous-koszul",
+  "lem-sfb-tame-inertia-derived-tensor-computation",
+  "lem-sfb-tame-inertia-scalar-tensor-computation"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+  "place": "C6: finite ordinary and K-flat computations split off; actual scalar formula, unit-normalized transpose and isomorphism assembly proved in Lean."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For a continuous finite dimensional ell adic representation of tame inertia with finite prime to ell image the canonical extension of scalars mate on derived condensed invariants is an isomorphism",
+   "results": "8 hits: CondensedMod.IsSolid.isIso_solidification_map; CondensedMod.LocallyConstant.instIsIsoCondensedSetMapForgetAppCondensedModuleCatCounitDiscreteUnderlyingAdjObjFunctor; LightCondMod.LocallyConstant.instIsIsoLightCondSetMapForgetAppLightCondensedModuleCatCounitDiscreteUnderlyingAdjObjFunctor; CondensedMod.LocallyConstant.functorIsoDiscreteComponents; LightCondMod.LocallyConstant.functorIsoDiscreteComponents; LightCondMod.LocallyConstant.functorIsoDiscreteAux₂; CondensedMod.LocallyConstant.functorIsoDiscrete; LightCondMod.LocallyConstant.functorIsoDiscrete",
+   "date": "2026-10-22",
+   "verdict": "no match: solidification and locally constant discrete condensed modules, or adic completion tensor formulas, do not state the norm-continuous internal-ring derived-invariants scalar mate"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Condensed\", \"groupCohomology\"",
+   "results": "0 hits: ",
+   "date": "2026-10-22",
+   "verdict": "no match: solidification and locally constant discrete condensed modules, or adic completion tensor formulas, do not state the norm-continuous internal-ring derived-invariants scalar mate"
+  },
+  {
+   "tool": "grep",
+   "query": "(Koszul|invariants|groupCohomology).*(extendScalars|extensionOfScalars|Condensed)|(extendScalars|extensionOfScalars|Condensed).*(Koszul|invariants|groupCohomology)",
+   "results": "0 hits: ",
+   "date": "2026-10-22",
+   "verdict": "no match: solidification and locally constant discrete condensed modules, or adic completion tensor formulas, do not state the norm-continuous internal-ring derived-invariants scalar mate"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A finite Koszul complex of finite free condensed modules over continuous functions into an ell adic field commutes with derived scalar tensor into the norm topological algebraic closure",
+   "results": "8 hits: AdicCompletion.tensor_map_id_left_eq_map; AdicCompletion.ofTensorProductEquivOfFiniteNoetherian; AdicCompletion.ofTensorProductEquivOfFiniteNoetherian_apply; AdicCompletion.ofTensorProductEquivOfFiniteNoetherian_symm_of; AdicCompletion.coe_ofTensorProductEquivOfFiniteNoetherian; AdicCompletion.ofTensorProductEquivOfPiFintype; AdicCompletion.ofTensorProduct; AdicCompletion.ofTensorProduct_naturality",
+   "date": "2026-10-22",
+   "verdict": "no match: solidification and locally constant discrete condensed modules, or adic completion tensor formulas, do not state the norm-continuous internal-ring derived-invariants scalar mate"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The scalar extension adjunction mate on derived condensed continuous tame inertia invariants is computed by the finite free Koszul complex",
+   "results": "8 hits: ModuleCat.RestrictionCoextensionAdj.HomEquiv.toRestriction, ModuleCat.extendRestrictScalarsAdj, ModuleCat.restrictCoextendScalarsAdj, ModuleCat.ExtendRestrictScalarsAdj.counit, Condensed.freeForgetAdjunction, comonadicExtendScalars, ModuleCat.RestrictionCoextensionAdj.counit', LightCondensed.freeForgetAdjunction",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary constant-ring module adjunctions and light condensed monoidal structures do not state the internal continuous coefficient derived-invariants scalar mate"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Extension of scalars on a bounded complex of finite free sheaves computes derived tensor and its adjunct is multiplication",
+   "results": "8 hits: LightCondensed.instMonoidalClosedSheafLightProfiniteCoherentTopologyModuleCat, LightCondensed.instMonoidalLightCondSetLightCondModFree, ModuleCat.extendRestrictScalarsAdj_homEquiv_apply, ModuleCat.ExtendRestrictScalarsAdj.HomEquiv.fromExtendScalars_hom_apply, LightCondensed.instMonoidalCategorySheafLightProfiniteCoherentTopologyModuleCat, LightCondensed.instMonoidalClosedLightCondMod, ModuleCat.ExtendRestrictScalarsAdj.HomEquiv.toRestrictScalars_hom_apply, ModuleCat.ExtendRestrictScalarsAdj.Counit.map_hom_apply",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary constant-ring module adjunctions and light condensed monoidal structures do not state the internal continuous coefficient derived-invariants scalar mate"
+  },
+  {
+   "tool": "grep",
+   "query": "(Koszul|invariants|groupCohomology).*(extendScalars|extensionOfScalars|Condensed)|(extendScalars|extensionOfScalars|Condensed).*(Koszul|invariants|groupCohomology)",
+   "results": "0 hits: ",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary constant-ring module adjunctions and light condensed monoidal structures do not state the internal continuous coefficient derived-invariants scalar mate"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Condensed\", \"groupCohomology\"",
+   "results": "0 hits: ",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary constant-ring module adjunctions and light condensed monoidal structures do not state the internal continuous coefficient derived-invariants scalar mate"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-continuous-algcl-tame-boundary-comparison",
+  "date": "2026-10-22",
+  "group": "Q25"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "Paragraph (3), tame-boundary calculation, returned steps 4-5 and the scalar-adjunct part of step 6: condensed Koszul invariants, bounded finite-free tensor calculation and its unit normalization. Agent-extracted lemma; exact all-continuous analytic input remains WANTED.",
+   "via": [
+    "lem-sfb-continuous-algcl-tame-boundary-comparison",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sfb-tame-inertia-scalar-mate-isomorphism",
+  "worker": "stage1",
+  "summary": "No new nodes: finite coordinates trivialize the norm-continuous coefficient modules, an existing ringed-site K-flat theorem computes derived tensor, and the existing unit-normalized Koszul comparison and derived scalar adjunction identify the actual mate with a chain isomorphism. Statement unchanged. Correct tag for the cited bounded-flat theorem is 06YQ, not the stale 06YS in its node source.",
+  "blueprint": "Paragraph (3) of det-thm-sf-ctf-stability-direct-images: finite-free Koszul scalar comparison supporting the open-image assertion; the all-continuous analytic input stays in lem-sfb-tame-inertia-continuous-koszul. Nearest ancestor command returns None, retained as inherited.",
+  "tool_uses": [
+   {
+    "node": "lem-pc-bounded-above-flat-kflat-site",
+    "why": "Generic bounded-above flat theorem for an arbitrary ringed site, used on the profinite coherent site; it does not replace the tame-boundary route."
+   },
+   {
+    "node": "lem-pur-sheaf-ring-derived-coefficient-adjunction",
+    "why": "Generic ring-sheaf scalar adjunction with its actual K-flat unit/transpose formula; the local Koszul computation needs exactly this normalization."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pc-bounded-above-flat-kflat-site",
+  "lem-pur-sheaf-ring-derived-coefficient-adjunction"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q104-976346f08",
+  "group": "Q104",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q104-976346f08 (reviewer sub-agent of L); spot-checked: I read the item in full; there are no new nodes and the statement and stmt_deps are unchanged. The blueprint main-20261015 paragraph (3) only reduces to proper and open direct images, so this agent-extracted lemma is correctly marked by:agent. All five steps check out against the statements of lem-sfb-tame-inertia-continuous-koszul (its coefficient clause, with k=F_p unused), lem-pur-sheaf-ring-derived-coefficient-adjunction (clause (2): P is K-flat with flat terms, the site is small by the size convention, and the commutativity swap is noted), lem-pc-bounded-above-flat-kflat-site (Stacks 06YQ = lemma-bounded-flat-K-flat, checked in the tags file and at sites-cohomology.tex:3120; 06YS is lemma-K-flat-resolution, so the cited node's own source tag is stale), def-pc-flat-sheaf-modules and def-pur-sheaf-tensor-product. The product topology on F⊗N is basis-independent even though Ω is not complete. Naturality of the adjunction in both variables gives σ_M∘T(κ_E)=κ_Ω∘[t]∘c_P, so σ_M is an isomorphism with the stated representative. Edge cases: r=0, N=0, r=1 with γ=1+ℓ (both complexes acyclic) and r=1 with trivial γ. It is not a restatement of the Koszul clause, and an rg search found no duplicate. FIX (C1/C4): step 2 applied sheaf tensor, flatness and K-flatness to internal module objects without a transfer node. I added def-weil-pbc-internal-abelian-sheaf-module-equivalence to step 2's text, its uses and proof_deps. I accept the tool_uses lem-pc-bounded-above-flat-kflat-site (generic, off route) and the adjunction node (on route via sk-def-sf-operations). Maintainer note: correct the source tag of lem-pc-bounded-above-flat-kflat-site from 06YS to 06YQ.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.Paper.TameInertiaScalarMate",
+  "declaration": "Profinite.TameInertiaScalarMate.scalar_mate_isomorphism",
+  "declarations": [
+   "Profinite.TameInertiaScalarMate.Computes",
+   "Profinite.TameInertiaScalarMate.scalar_mate_isomorphism"
+  ],
+  "file": "lean/Sheaf/Paper/TameInertiaScalarMate.lean",
+  "statement": "theorem Profinite.TameInertiaScalarMate.scalar_mate_isomorphism (p ℓ : ℕ) [Fact p.Prime] [Fact ℓ.Prime] (_distinct : p ≠ ℓ) (Ω : Type u) [NormedField Ω] [NormedAlgebra ℚ_[ℓ] Ω] [IsAlgClosure ℚ_[ℓ] Ω] (E : IntermediateField ℚ_[ℓ] Ω) [FiniteDimensional ℚ_[ℓ] E] (r : ℕ) : ∃ d : Profinite.TameInertiaKoszul.Result E p ℓ r Ω continuous_subtype_val, letI := d.abelianE letI := d.abelianΩ letI := d.contextE letI := d.contextΩ letI := d.restriction letI := d.restrictionUniversal ∃ s : Profinite.TameInertiaScalarMate.DerivedTensor E Ω continuous_subtype_val, Profinite.TameInertiaScalarMate.Computes E Ω continuous_subtype_val p ℓ r d.modelE d.modelΩ d.maps s d.comparisonE d.comparisonΩ",
+  "branch": "sheaf-dag",
+  "by": "Q98",
+  "date": "2026-10-22",
+  "existing": false,
+  "note": "The recorded Koszul Result supplies the actual all-continuous modules, ordinary derived invariants, coefficient unit, normalized comparisons and their square. All scalar tensor objects use the existing Mod.extendScalars coequalizer. DerivedTensor specifies its universal total left derived pair with the actual ordinary unit; its existence is concluded. Computes states invertibility of the actual adjunct, its derived comparison equation and multiplication on every pure tensor section. No extra hypotheses on the representation, no arbitrary scalar map and no noncanonical object selected from the theorem."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-529f92a7a",
+  "group": "Q98",
+  "result": "pass",
+  "note": "Node unchanged except its new lean record; lean.statement matches the file verbatim; 7 declarations match; the main theorem is the only sorry. Every hypothesis and clause matches the node: primes, Ω NormedAlgebra/IsAlgClosure with no completion, E finite intermediate, ∀ admissible M inside Computes. The conclusion: the actual adjunct of representationCoefficient is invertible; the chain adjunct tensorMap and the derived comparison on K_E are invertible; T(κ_E)≫σ = comparison≫Q(t)≫κ_Ω; and the coordinate formula z⊗x_I ↦ z·extension(x_I) holds on extendUnit generators. The DerivedTensor adjunction is fixed uniquely by its unit equation plus the left-derived universal property, and the equation holds for all P, so the structure exists. The ∃ d / ∃ s range over data fixed up to compatible isomorphism (the Koszul dep itself concludes Nonempty Result); the asserted map is canonical. Edge cases r=0, N=0, empty Indices, empty S. Advisories: quotientCompQhIso hom/inv direction is cosmetic (identity components); unnormalized Mod.derivedExtendMapDerivedCategoryAdjunction exists; RΓ comes from the Koszul Context, inherited and not CondensedDerivedRestriction.derived; proof-only imports. No compile: no file changed."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-8ffc8",
+  "group": "C6",
+  "result": "pass",
+  "landing": "20261026T081251-L-1904281",
+  "kind": "interface",
+  "note": "independent cc review: item Lean (Computes/theorem signatures byte-identical, moved defs verbatim to publicly re-exported Data module, zero importers) and two new sorry statements against their nodes, the Realization/CoefficientMaps pinning and sheafRingDerivedCoefficientAdjunction; item node changes only proof/proof_deps/proof_origin/lean"
+ }
+}

@@ -1,0 +1,253 @@
+{
+ "id": "lem-trf-flat-affine-chart-prescribed-germ",
+ "kind": "statement",
+ "title": "A flat affine chart representing a prescribed stalk germ",
+ "statement": "Let $f:X\\to S$ be a morphism of schemes [def-pc-scheme] locally of finite presentation [def-sbc-locally-finite-presentation], let $x\\in X$, put $s=f(x)$, and suppose $f$ is flat at $x$ [def-weil-flat-morphism]. For every germ $h\\in\\mathcal O_{X,x}$ there are affine open neighbourhoods $V=\\operatorname{Spec}A\\subseteq S$ of $s$ and $U=\\operatorname{Spec}B\\subseteq X$ of $x$, with $f(U)\\subseteq V$, and $a\\in B$ whose germ at $x$ is exactly $h$, such that $A\\to B$ is flat [def-weil-pbc-flat-ring-map] and finitely presented [def-weil-pbc-finitely-presented-algebra]. Writing $\\mathfrak q\\subset B$ for $x$ and $\\mathfrak p\\subset A$ for $s$, the stalk identifications $\\mathcal O_{X,x}\\cong B_{\\mathfrak q}$ and $\\mathcal O_{S,s}\\cong A_{\\mathfrak p}$ identify $f$'s stalk map with $A_{\\mathfrak p}\\to B_{\\mathfrak q}$ [def-weil-pbc-localization-at-prime]. If $h\\in\\mathfrak m_x$, then $a\\in\\mathfrak q$.",
+ "source": {
+  "document": "literature/stacks-project/more-morphisms.tex",
+  "place": "Tag 056Y, label lemma-slice-given-element, proof, first paragraph: affine shrinking, openness of flatness and extension of the prescribed germ (old steps 1–2)."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-sbc-locally-finite-presentation",
+  "def-weil-flat-morphism",
+  "def-weil-pbc-flat-ring-map",
+  "def-weil-pbc-finitely-presented-algebra",
+  "def-weil-pbc-localization-at-prime"
+ ],
+ "proof": [
+  {
+   "text": "Apply [lem-sfb-relative-flat-affine-charts] with $p=f:X\\to S$, $Y=S$ and $q=\\mathrm{id}_S$. The identity is locally of finite type [def-weil-finite-type-morphism]: over each affine open its preimage is the same affine, and its coordinate algebra is generated over itself by the empty set. Thus the hypotheses are exactly the assumed local finite presentation of $f$ and this identity calculation. Retain the affine target neighbourhood $V$ of $s$ and affine source neighbourhood $Z\\subset f^{-1}(V)$ of $x$. The cited node gives an open subset $E\\subset Z$ consisting exactly of the points where $f$ is flat. Hence $x\\in E$. Since $Z$ is open in $X$, $E$ is also open in $X$.",
+   "uses": [
+    "lem-sfb-relative-flat-affine-charts",
+    "def-weil-finite-type-morphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 056Y, lemma-slice-given-element, proof first paragraph, the openness-of-flatness shrink; Tag 0399, theorem-openness-flatness."
+   }
+  },
+  {
+   "text": "By [lem-weil-pbc-stalk-germs-on-basis], applied to the structure presheaf and the affine-open basis of [lem-weil-pbc-affine-opens-basis], choose an affine open $T\\ni x$ and $t\\in\\mathcal O_X(T)$ with $t_x=h$. Apply the affine-open basis again to the open neighbourhood $T\\cap E$ to choose an affine open $U$ with $x\\in U\\subset T\\cap E$. Set $A=\\mathcal O_S(V)$, $B=\\mathcal O_X(U)$ and $a=t|_U$. By the definition of germs, restriction does not change the germ at $x$, so $a_x=h$. We have $f(U)\\subset V$, and every point of $U$ is a flat point of the original $f$.",
+   "uses": [
+    "lem-weil-pbc-stalk-germs-on-basis",
+    "lem-weil-pbc-affine-opens-basis"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sheaves.tex",
+    "place": "Tag 009H, section-stalks, representatives (U,s) and restriction equivalence; schemes.tex Tag 01IT, lemma-basis-affine-opens; affine germ extension in Tag 056Y, lemma-slice-given-element, first proof paragraph."
+   }
+  },
+  {
+   "text": "Apply [lem-weil-pbc-lfp-affine-opens-finite-presentation] to the original $f$ and the affine opens $U,V$. Its hypotheses hold because $f$ is locally of finite presentation and $f(U)\\subset V$. It gives that the induced section homomorphism $\\varphi:A\\to B$ is finitely presented. This application is made after the final shrinking of $U$.",
+   "uses": [
+    "lem-weil-pbc-lfp-affine-opens-finite-presentation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 01TQ, lemma-locally-finite-presentation-characterize, (1) implies (2), applied after the shrinking in Tag 056Y."
+   }
+  },
+  {
+   "text": "For any $y\\in U$, put $v=f(y)$ and let $\\mathfrak q_y\\subset B$, $\\mathfrak p_v\\subset A$ be the corresponding primes. By [lem-weil-pbc-affine-open-stalk-localization], the germ maps identify the stalks with $B_{\\mathfrak q_y}$ and $A_{\\mathfrak p_v}$. The sheaf-map definition in [def-weil-locally-ringed-space-morphism] gives $f_y^\\sharp(r_v)=\\varphi(r)_y$ for $r\\in A$: both are the germ of $f^\\sharp(r)$, restricted to $U$. Their maximal ideals are the extended primes [def-weil-pbc-localization-at-prime] and contract to the defining primes (if an element outside the prime had its fraction in that ideal, multiplying a fraction expression by a denominator outside the prime would contradict primality), and $f_y^\\sharp$ is local, so $\\varphi^{-1}(\\mathfrak q_y)=\\mathfrak p_v$. Indeed, elements in $\\mathfrak p_v$ map into the maximal ideal and elements outside it have unit germs, whose images remain units. Since every stalk element is a fraction, the same identity forces $f_y^\\sharp(r/d)=\\varphi(r)/\\varphi(d)$ for $d\\notin\\mathfrak p_v$: ring maps preserve inverses. Thus the actual stalk map is precisely $A_{\\mathfrak p_v}\\to B_{\\mathfrak q_y}$. In particular this proves the stated stalk compatibility at $x$.",
+   "uses": [
+    "lem-weil-pbc-affine-open-stalk-localization",
+    "def-weil-locally-ringed-space-morphism",
+    "def-weil-pbc-localization-at-prime"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Tag 01HV, lemma-spec-sheaves, (6), and Tag 01HB, definition-locally-ringed-space, morphisms; Tag 01HY, lemma-morphism-into-affine-where-point-goes, prime contraction under a morphism."
+   }
+  },
+  {
+   "text": "Every prime $\\mathfrak q\\subset B$ corresponds to a point $y\\in U$. By the choice $U\\subset E$, $f$ is flat at $y$, meaning that $f_y^\\sharp$ is flat [def-weil-flat-morphism]. The preceding step identifies this map with $A_{\\varphi^{-1}(\\mathfrak q)}\\to B_{\\mathfrak q}$. Consequently [lem-weil-pbc-flat-map-local-criterion] applies to $\\varphi:A\\to B$ and proves that it is flat. Together with step 3 this gives both properties of the required coordinate algebra.",
+   "uses": [
+    "def-weil-flat-morphism",
+    "lem-weil-pbc-flat-map-local-criterion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00HT, lemma-flat-localization, (6) with M equal to the target algebra, used for the affine flat morphism in Tag 056Y."
+   }
+  },
+  {
+   "text": "Finally suppose $h\\in\\mathfrak m_x$. Under the germ-compatible isomorphism $\\mathcal O_{X,x}\\cong B_{\\mathfrak q}$, we have $h=a/1$. If $a\\notin\\mathfrak q$, then $a/1$ is a unit by [lem-weil-pbc-affine-open-stalk-localization](c). Its inverse image $h$ would then be a unit of $\\mathcal O_{X,x}$, whereas an element of its maximal ideal cannot be a unit. This contradiction proves $a\\in\\mathfrak q$.",
+   "uses": [
+    "lem-weil-pbc-affine-open-stalk-localization"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Tag 01HV, lemma-spec-sheaves, (6), and localization at a prime; maximal-ideal condition on h in Tag 056Y, lemma-slice-given-element."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-relative-flat-affine-charts",
+  "def-weil-finite-type-morphism",
+  "lem-weil-pbc-stalk-germs-on-basis",
+  "lem-weil-pbc-affine-opens-basis",
+  "lem-weil-pbc-lfp-affine-opens-finite-presentation",
+  "lem-weil-pbc-affine-open-stalk-localization",
+  "def-weil-locally-ringed-space-morphism",
+  "def-weil-pbc-localization-at-prime",
+  "def-weil-flat-morphism",
+  "lem-weil-pbc-flat-map-local-criterion"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/more-morphisms.tex",
+  "place": "Tag 056Y, lemma-slice-given-element, proof first paragraph; Tag 0399, theorem-openness-flatness, specialized to the structure sheaf."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A morphism locally of finite presentation and flat at a point has an affine neighbourhood with flat finitely presented coordinate algebra representing a specified stalk germ",
+   "results": "{\"t\": \"2026-10-22T06:48:36Z\", \"tool\": \"leanfinder\", \"query\": \"A morphism locally of finite presentation and flat at a point has an affine neighbourhood with flat finitely presented coordinate algebra representing a specified stalk germ\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.locallyOfFinitePresentation_iff\", \"AlgebraicGeometry.Flat.iff_flat_stalkMap\", \"AlgebraicGeometry.Flat.of_stalkMap\", \"AlgebraicGeometry.instHasRingHomPropertyLocallyOfFinitePresentationFinitePresentation\", \"AlgebraicGeometry.LocallyOfFinitePresentation.finitePresentation_appLE\", \"AlgebraicGeometry.LocallyOfFinitePresentation.finitePresentation_of_affine_subset\", \"AlgebraicGeometry.Flat.stalkMap\", \"AlgebraicGeometry.Scheme.Hom.finitePresentation_appLE\"], \"digest\": \"e598ab588e1bc0f8\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: affine/stalk flatness criteria and existence of a germ representative do not give the pointwise-flat neighbourhood shrink; no exact declaration or one-line specialization"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Flat\", \"germ\"",
+   "results": "{\"t\": \"2026-10-22T06:48:25Z\", \"tool\": \"loogle\", \"query\": \"\\\"Flat\\\", \\\"germ\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: affine/stalk flatness criteria and existence of a germ representative do not give the pointwise-flat neighbourhood shrink; no exact declaration or one-line specialization"
+  },
+  {
+   "tool": "grep",
+   "query": "exists.*flat.*germ|germ.*flat|flat.*affine.*neigh",
+   "results": "{\"t\": \"2026-10-22T06:48:25Z\", \"tool\": \"grep\", \"query\": \"exists.*flat.*germ|germ.*flat|flat.*affine.*neigh\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: affine/stalk flatness criteria and existence of a germ representative do not give the pointwise-flat neighbourhood shrink; no exact declaration or one-line specialization"
+  },
+  {
+   "tool": "leansearch",
+   "query": "An arbitrary germ extends to a section on a flat affine neighbourhood for a locally finitely presented morphism flat at the point",
+   "results": "{\"t\": \"2026-10-22T06:48:25Z\", \"tool\": \"leansearch\", \"query\": \"An arbitrary germ extends to a section on a flat affine neighbourhood for a locally finitely presented morphism flat at the point\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"TopCat.Presheaf.germ_exist\", \"AlgebraicGeometry.instLocallyOfFinitePresentationOfIsSmooth\", \"AlgebraicGeometry.Flat.stalkMap\", \"AlgebraicGeometry.Scheme.Hom.germ_stalkMap_apply\", \"AlgebraicGeometry.StructureSheaf.germ_toOpen\", \"TopCat.Presheaf.Γgerm\", \"ModuleCat.Tilde.stalkToFiberLinearMap_germ\", \"TopCat.Presheaf.Sheafify.isGerm\"], \"digest\": \"070498b88357731f\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: affine/stalk flatness criteria and existence of a germ representative do not give the pointwise-flat neighbourhood shrink; no exact declaration or one-line specialization"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Extend an element of a stalk to an affine open chart inside the open flat locus of a scheme morphism",
+   "results": "{\"t\": \"2026-10-22T06:48:36Z\", \"tool\": \"leanfinder\", \"query\": \"Extend an element of a stalk to an affine open chart inside the open flat locus of a scheme morphism\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Flat.flat_of_affine_subset\", \"AlgebraicGeometry.Flat.flat_appLE\", \"AlgebraicGeometry.Scheme.Hom.flat_appLE\", \"AlgebraicGeometry.Flat.stalkMap\", \"AlgebraicGeometry.Flat.iff_flat_stalkMap\", \"AlgebraicGeometry.Flat.of_stalkMap\", \"AlgebraicGeometry.flat_iff\", \"AlgebraicGeometry.IsAffineOpen.isLocalization_stalk'\"], \"digest\": \"2d40eaafe2ada86a\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: affine/stalk flatness criteria and existence of a germ representative do not give the pointwise-flat neighbourhood shrink; no exact declaration or one-line specialization"
+  },
+  {
+   "tool": "grep",
+   "query": "flatLocus|isOpen.*flat|exists.*germ",
+   "results": "{\"t\": \"2026-10-22T06:48:25Z\", \"tool\": \"grep\", \"query\": \"flatLocus|isOpen.*flat|exists.*germ\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 20, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/StructureSheaf.lean\", \"Mathlib/AlgebraicGeometry/Spec.lean\", \"Mathlib/AlgebraicGeometry/SpreadingOut.lean\", \"Mathlib/AlgebraicGeometry/SpreadingOut.lean\", \"Mathlib/AlgebraicGeometry/SpreadingOut.lean\", \"Mathlib/AlgebraicGeometry/SpreadingOut.lean\", \"Mathlib/AlgebraicGeometry/SpreadingOut.lean\", \"Mathlib/AlgebraicGeometry/Properties.lean\"], \"digest\": \"48537ba53e42c8cd\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: affine/stalk flatness criteria and existence of a germ representative do not give the pointwise-flat neighbourhood shrink; no exact declaration or one-line specialization"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A morphism locally of finite presentation and flat at a point has an affine neighbourhood representing any prescribed stalk germ with flat finitely presented coordinate algebra",
+   "results": "{\"t\": \"2026-10-23T14:46:54Z\", \"tool\": \"leanfinder\", \"query\": \"A morphism locally of finite presentation and flat at a point has an affine neighbourhood representing any prescribed stalk germ with flat finitely presented coordinate algebra\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.exists_lift_of_germInjective\", \"AlgebraicGeometry.locallyOfFinitePresentation_iff\", \"AlgebraicGeometry.Scheme.Hom.finitePresentation_appLE\", \"AlgebraicGeometry.exists_lift_of_germInjective_aux\", \"AlgebraicGeometry.LocallyOfFinitePresentation.finitePresentation_appLE\", \"AlgebraicGeometry.instHasRingHomPropertyLocallyOfFinitePresentationFinitePresentation\", \"AlgebraicGeometry.LocallyOfFinitePresentation.finitePresentation_of_affine_subset\", \"AlgebraicGeometry.LocallyOfFinitePresentation\"], \"digest\": \"bc7e555e93917628\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits provide separate affine finite-presentation, germ representation, or global/stalk flatness facts; none supplies the pointwise-flat neighbourhood shrink and the prescribed germ together, nor a one-line specialization"
+  },
+  {
+   "tool": "grep",
+   "query": "flatLocus|isOpen.*flat|exists.*flat.*germ|germ.*flat",
+   "results": "{\"t\": \"2026-10-23T14:47:41Z\", \"tool\": \"grep\", \"query\": \"flatLocus|isOpen.*flat|exists.*flat.*germ|germ.*flat\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 7, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/Morphisms/Flat.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/FlatDescent.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/FlatDescent.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/FlatDescent.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/FlatMono.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/FlatMono.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/UniversallyOpen.lean\"], \"digest\": \"cb52729c9f6dfebd\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits provide separate affine finite-presentation, germ representation, or global/stalk flatness facts; none supplies the pointwise-flat neighbourhood shrink and the prescribed germ together, nor a one-line specialization"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Represent any stalk element by a regular function on an affine neighbourhood where a locally finitely presented scheme morphism flat at the point is flat",
+   "results": "{\"t\": \"2026-10-23T14:47:41Z\", \"tool\": \"leansearch\", \"query\": \"Represent any stalk element by a regular function on an affine neighbourhood where a locally finitely presented scheme morphism flat at the point is flat\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Flat.of_stalkMap\", \"AlgebraicGeometry.Flat.stalkMap\", \"AlgebraicGeometry.Flat.flat_appLE\", \"AlgebraicGeometry.Scheme.Hom.flat_appLE\", \"AlgebraicGeometry.Flat.casesOn\", \"AlgebraicGeometry.LocallyRingedSpace.isLocalHomStalkMap'\", \"AlgebraicGeometry.Flat.iff_flat_stalkMap\", \"AlgebraicGeometry.Flat.flat_of_affine_subset\"], \"digest\": \"abd665d5414a391b\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits provide separate affine finite-presentation, germ representation, or global/stalk flatness facts; none supplies the pointwise-flat neighbourhood shrink and the prescribed germ together, nor a one-line specialization"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Flat\", \"germ\"",
+   "results": "{\"t\": \"2026-10-23T14:47:42Z\", \"tool\": \"loogle\", \"query\": \"\\\"Flat\\\", \\\"germ\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: no declarations returned"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An element in a scheme stalk extends to a section after shrinking to an affine open inside the flat locus of a locally finitely presented morphism",
+   "results": "{\"t\": \"2026-10-23T14:49:00Z\", \"tool\": \"leanfinder\", \"query\": \"An element in a scheme stalk extends to a section after shrinking to an affine open inside the flat locus of a locally finitely presented morphism\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.exists_lift_of_germInjective\", \"AlgebraicGeometry.Flat.stalkMap\", \"AlgebraicGeometry.exists_lift_of_germInjective_aux\", \"AlgebraicGeometry.Flat.of_stalkMap\", \"AlgebraicGeometry.Flat.iff_flat_stalkMap\", \"AlgebraicGeometry.exists_affineOpens_le_appLE_of_appLE\", \"AlgebraicGeometry.Flat.flat_appLE\", \"AlgebraicGeometry.Flat.flat_of_affine_subset\"], \"digest\": \"b2383edd487cdff7\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits provide separate affine finite-presentation, germ representation, or global/stalk flatness facts; none supplies the pointwise-flat neighbourhood shrink and the prescribed germ together, nor a one-line specialization"
+  },
+  {
+   "tool": "grep",
+   "query": "exists_affineOpens_le_appLE_of_appLE|exists_lift_of_germInjective|exists_mem_germ_eq_of_isBasis",
+   "results": "{\"t\": \"2026-10-23T14:59:02Z\", \"tool\": \"grep\", \"query\": \"exists_affineOpens_le_appLE_of_appLE|exists_lift_of_germInjective|exists_mem_germ_eq_of_isBasis\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Mathlib/Topology/Sheaves/Stalks.lean\", \"Mathlib/Topology/Sheaves/Stalks.lean\", \"Mathlib/Topology/Sheaves/Stalks.lean\", \"Mathlib/AlgebraicGeometry/SpreadingOut.lean\", \"Mathlib/AlgebraicGeometry/SpreadingOut.lean\", \"Mathlib/AlgebraicGeometry/SpreadingOut.lean\", \"Mathlib/AlgebraicGeometry/SpreadingOut.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/RingHomProperties.lean\"], \"digest\": \"e263140ebb49a725\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits provide separate affine finite-presentation, germ representation, or global/stalk flatness facts; none supplies the pointwise-flat neighbourhood shrink and the prescribed germ together, nor a one-line specialization"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-fibre-regular-element-flat-hypersurface",
+  "date": "2026-10-22",
+  "group": "Q146"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "The elementary-etale finite-over-smooth ingredient (Stacks 057K) in the 057S flatification route for the horizontal curve reduction of lem-trf-local-term-locality: in the application of 057J to the smooth intermediate scheme, the preliminary spreading of the specified fibre open with geometrically connected fibres (055W). In the proof of 055W: the application of 0570 producing Z mapping to Y, flat locally finitely presented and locally quasi-finite over S, with singleton designated fibre. In the proof of 0570, the positive-dimensional induction step applying 056Z/056Y to a fibre nonzerodivisor. Tag 056Y, lemma-slice-given-element, first paragraph: affine shrinking, openness of flatness and extension of the prescribed germ (old steps 1–2).",
+   "via": [
+    "lem-trf-fibre-regular-element-flat-hypersurface",
+    "lem-trf-cm-closed-point-flat-quasifinite-slice",
+    "lem-trf-geometrically-connected-fibre-open-spreading",
+    "lem-trf-geometrically-integral-fibre-neighbourhood",
+    "lem-trf-etale-finite-smooth-local-structure",
+    "lem-trf-elementary-module-devissage",
+    "lem-trf-flattening-module-by-admissible-blowup",
+    "lem-trf-flattening-by-admissible-blowup",
+    "lem-trf-flatification-horizontal-curve-pair",
+    "lem-trf-dejong-relative-marked-semistable",
+    "lem-trf-relative-marked-nodal-reduction",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-trf-flat-affine-chart-prescribed-germ",
+  "worker": "stage1",
+  "summary": "Expanded the affine shrinking and germ extension in the first paragraph of Stacks 056Y into six explicit steps. Reused the existing relative affine-chart flat-locus theorem with identity base morphism, affine germ/basis leaves, affine finite-presentation leaf, stalk localization and the ring-map local flatness criterion. Proved the actual stalk-map fraction formula and maximal-ideal clause. Statement and statement dependencies unchanged; no new nodes.",
+  "blueprint": "The elementary-etale finite-over-smooth ingredient (Stacks 057K) in the 057S flatification route for the horizontal curve reduction of lem-trf-local-term-locality: in the application of 057J to the smooth intermediate scheme, the preliminary spreading of the specified fibre open with geometrically connected fibres (055W). In the proof of 055W: the application of 0570 producing Z mapping to Y, flat locally finitely presented and locally quasi-finite over S, with singleton designated fibre. In the proof of 0570, the positive-dimensional induction step applying 056Z/056Y to a fibre nonzerodivisor. Tag 056Y, lemma-slice-given-element, first paragraph: affine shrinking, openness of flatness and extension of the prescribed germ (old steps 1–2). Steps 1-2 carry out the flat-locus shrink and extension of h in Tag 056Y; steps 3-5 verify the coordinate properties and actual stalk maps; step 6 verifies the maximal-ideal consequence. The current latest blueprint proof of lem-trf-local-term-locality (1)-(2) invokes specialization to the normal cone; this existing descendant serves its established flatification/elementary-etale geometric input.",
+  "tool_uses": [
+   {
+    "node": "lem-sfb-relative-flat-affine-charts",
+    "why": "Generic compatible affine-chart and open-flat-locus tool, specialized with Y=S and q=id_S, for the openness-of-flatness shrink explicitly required in Stacks 056Y. No node in sk-i-curve-zero gives that general flat-locus theorem; this specialization does not replace any step of the unit route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sfb-relative-flat-affine-charts"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-NR-f0d32155d",
+  "group": "NR",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NR-f0d32155d (reviewer sub-agent of L); spot-checked: I read the delivery in full. The source is Stacks 056Y (more-morphisms l.6166-6192), first proof paragraph: openness-of-flatness shrink, affine charts, then extending h to a section. The item states exactly this preliminary step for arbitrary h, adds finite presentation via 01TQ and the stalk compatibility, and keeps a∈q conditional on h∈m_x. The statement is unchanged and not weakened, and the parent fibre-regular-element-flat-hypersurface step 0 gets everything it uses. The item is still unsplit on live and side-live, there is no repair note, and there are no new nodes. Step 1: lem-sfb-relative-flat-affine-charts applies with p=f, Y=S, q=id_S; id_S is locally of finite type (elementary check), E is open in Z and in X, and x∈E. I accept the declared tool use: it is a generic flat-locus theorem, it passed Q44 review on 2026-10-23, and there is no cycle back to the item. Step 2: stalk-germs-on-basis(i) for ring presheaves plus the affine basis gives T and t; the basis is used again for an affine U⊂T∩E, an intersection of affines is never assumed affine (no E1), the germ is unchanged by restriction, and f(U)⊂V. Step 3: the lfp affine-pair leaf covers every affine pair, so it applies after the shrink. Step 4: the germ formula comes from the definition of the stalk map; the contraction φ^{-1}(q_y)=p_v uses that the stalk map is local and the unit clause (c); the primality argument and the fraction formula are correct. Step 5: every prime of B is some q_y through ι_U, and flat-map-local-criterion (⇐) gives A→B flat. Step 6: correctly marked elementary, using the unit clause (c). proof_deps equals the union of uses, and every citation exists and is unmerged. Edge cases checked: f=id, h=0, h=1, empty X, nonclosed points. The duplicate grep for 0399, 056Y, prescribed germ and flat locus found nothing; no SGA. Advisory only, unchanged: the base-era stmt_deps could also cite module-stalk and affine-spectrum. Full details are in review.md."
+ }
+}

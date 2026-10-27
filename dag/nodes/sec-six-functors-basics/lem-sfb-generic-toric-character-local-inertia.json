@@ -1,0 +1,391 @@
+{
+ "id": "lem-sfb-generic-toric-character-local-inertia",
+ "kind": "statement",
+ "title": "Trivial strict local inertia on generic toric characters",
+ "statement": "Let $S$ be a normal integral locally Noetherian scheme [def-pc-scheme] [def-pc-integral-scheme] [pqf-def-locnoeth] [def-weil-pbc-normal-ring], with generic point $\\eta$ and function field $K$. Let $G\\to S$ be smooth, separated and of finite presentation [def-sbc-smooth-morphisms] [def-sbc-locally-finite-presentation] [def-weil-pbc-scheme-conventions], with a commutative group law over $S$ (multiplication $G\\times_SG\\to G$, inverse $G\\to G$ and unit $S\\to G$, satisfying the group diagrams), and with semiabelian geometric fibres [def-sfb-semiabelian-geometric-fibres]. Let $V\\hookrightarrow G_\\eta$ be a closed torus subgroup over $K$ [def-sfb-tori-multiplicative-type] [def-weil-closed-immersion], with scalar extension as in [def-pc-base-change]. Choose a separable closure $\\Omega/K$ [def-pd-separable-closure], put $\\Gamma_K=\\operatorname{Aut}_K(\\Omega)$ with its Krull topology, and give $M=\\operatorname{Hom}_{\\Omega\\text{-grp}}(V_\\Omega,\\mathbf G_{m,\\Omega})$ the conjugation action [def-sfb-multiplicative-character-data]. For each $x\\in S$, use the strict local field $K_x^{\\mathrm{sh}}=\\operatorname{Frac}(\\mathcal O_{S,x}^{\\mathrm{sh}})$ and any compatible embedding $K_x^{\\mathrm{sh}}\\hookrightarrow\\Omega$ of [lem-dl-a1-strict-local-inertia-generic-fibres], and set $J_x=\\operatorname{Aut}_{K_x^{\\mathrm{sh}}}(\\Omega)\\subseteq\\Gamma_K$. Then every $J_x$ acts trivially on $M$. This assertion concerns all points of $S$, including those of higher codimension, and any choices of the compatible embeddings.",
+ "source": {
+  "document": "literature/lan-structures-semi-abelian-schemes.pdf",
+  "place": "Lan, Proposition 3.3.1.7 and §3.1.1 (character formulation of the normal-base subtorus theorem), citing Faltings–Chai I, Proposition 2.9; Lan Theorem 3.3.1.9 for the character-sheaf perspective. Local texts WANTED; online Lan thesis revised 2021, printed pp.61 and 69 read. All-point inertia formulation by the worker."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-integral-scheme",
+  "pqf-def-locnoeth",
+  "def-weil-pbc-normal-ring",
+  "def-sbc-smooth-morphisms",
+  "def-sbc-locally-finite-presentation",
+  "def-sfb-semiabelian-geometric-fibres",
+  "def-sfb-tori-multiplicative-type",
+  "def-pc-base-change",
+  "def-weil-closed-immersion",
+  "def-pd-separable-closure",
+  "lem-dl-a1-strict-local-inertia-generic-fibres",
+  "def-sfb-multiplicative-character-data",
+  "def-weil-pbc-scheme-conventions"
+ ],
+ "proof": [
+  {
+   "text": "Fix $x\\in S$ and one of the specified embeddings, and put $A=\\mathcal O_{S,x}$, $R=A^{\\mathrm{sh}}$, $F=\\operatorname{Frac}(R)\\subseteq\\Omega$, and $k=R/\\mathfrak m_R$. Choose a Noetherian affine neighborhood of $x$. The stalk-localization statement [lem-weil-pbc-affine-open-stalk-localization] and [lem-weil-pbc-localization-noetherian] make $A$ Noetherian. It is a normal domain by the hypothesis on $S$; [lem-weil-pbc-localization-normal-domain] also makes all its prime localizations normal, as required by [lem-weil-pbc-etale-colimit-normal-local-domain]. Apply that node to the local filtered etale colimit furnished by [lem-weil-pbc-strict-henselization-triples]. Thus $R$ is a normal domain, is henselian, and has separably closed residue field $k$. By [lem-sc-strict-henselization-noetherian] it is Noetherian. The chosen compatible embedding of its fraction field is supplied by [lem-dl-a1-strict-local-inertia-generic-fibres]. In particular, $J_x=\\operatorname{Aut}_F(\\Omega)$, and $\\Omega$ is a separable closure of $F$.",
+   "uses": [
+    "lem-weil-pbc-affine-open-stalk-localization",
+    "lem-weil-pbc-localization-noetherian",
+    "lem-weil-pbc-localization-normal-domain",
+    "lem-weil-pbc-etale-colimit-normal-local-domain",
+    "lem-weil-pbc-strict-henselization-triples",
+    "lem-sc-strict-henselization-noetherian",
+    "lem-dl-a1-strict-local-inertia-generic-fibres"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tags 06DI (lemma-henselization-normal) and 06LJ (lemma-henselization-noetherian); algebra.tex 04GP and 00GY; schemes.tex 01HV."
+   }
+  },
+  {
+   "text": "Write $W=V_F$ and $i_F:W\\hookrightarrow G_F$ for the scalar extension of $V\\hookrightarrow G_\\eta$, a closed immersion by [lem-weil-pbc-closed-immersion-base-change]. After extension to an algebraic closure $\\bar F$, the torus definition gives $W_{\\bar F}\\simeq\\mathbf G_m^r$. Before applying the character theory we check that $W$ is an affine $F$-group of finite type. $G_F\\to\\operatorname{Spec}F$ is of finite type by [lem-pod-separated-finite-type-base-change], so it is covered by finitely many affine opens $\\operatorname{Spec}A_j$ with $A_j$ finitely generated over $F$; by [def-weil-closed-immersion] each $i_F^{-1}(\\operatorname{Spec}A_j)$ is $\\operatorname{Spec}(A_j/I_j)$, so $W$ is of finite type over $F$. The one-member family $\\{\\operatorname{Spec}\\bar F\\to\\operatorname{Spec}F\\}$ is an fpqc covering (a field extension is flat, and the point is the image of the affine $\\operatorname{Spec}\\bar F$), and the base change $W_{\\bar F}\\simeq\\operatorname{Spec}\\bar F[t_1^{\\pm1},\\ldots,t_r^{\\pm1}]$ is affine, so $W\\to\\operatorname{Spec}F$ is affine by [lem-weil-pbc-fpqc-descend-affine]. Thus the torus $W$ is of multiplicative type in the sense of [lem-sfb-multiplicative-character-antiduality], which gives a finite separable extension $E/F$ in $\\Omega$ and $W_E\\simeq D_E(N)$ for a finitely generated abelian group $N$. The scalar-extension character identifications in that same node and [lem-sfb-split-torus-hom-matrices], with target rank one, identify $N$ with $\\mathbf Z^r$. Consequently $W_E\\simeq\\mathbf G_{m,E}^r$. Adjoin a finite set of field generators for $E$ and apply [lem-weil-pbc-finite-set-in-finite-galois-subextension] inside $\\Omega/F$ to obtain a finite Galois extension $L/F$ containing $E$. Choose a splitting $\\beta:\\mathbf G_{m,L}^r\\xrightarrow{\\sim}W_L$ and write $u_\\eta=i_L\\beta:\\mathbf G_{m,L}^r\\to G_L$, where $i_L$ is the scalar extension of $V\\hookrightarrow G_\\eta$.",
+   "uses": [
+    "lem-sfb-multiplicative-character-antiduality",
+    "lem-sfb-split-torus-hom-matrices",
+    "lem-weil-pbc-finite-set-in-finite-galois-subextension",
+    "lem-weil-pbc-closed-immersion-base-change",
+    "lem-pod-separated-finite-type-base-change",
+    "def-weil-closed-immersion",
+    "lem-weil-pbc-fpqc-descend-affine"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Theorems 12.9(a), 12.18(d), Corollary 12.19, and Theorem 12.23, printed pp.233,237-240; finite normal closure: Stacks 09DT and 0EXM."
+   }
+  },
+  {
+   "text": "Let $C$ be the integral closure of $R$ in $L$. By [lem-weil-pbc-noetherian-normal-separable-integral-closure-finite] it is finite over $R$, and [lem-weil-pbc-integral-closure-finite-extension-normal] makes it a normal domain with fraction field $L$. It is Noetherian by [lem-weil-pbc-finite-algebra-noetherian]. The finite-algebra decomposition [lem-weil-pbc-finite-over-henselian-local-product] applies to the henselian local ring $R$. Since $C$ is a nonzero domain, its only idempotents are $0,1$, so the decomposition has exactly one nonzero factor: $C$ is a henselian local ring, and its residue field $k_C$ is finite over $k$. By [lem-kun-sep-closed-finite-extension-purely-inseparable], $k_C/k$ is purely inseparable. Each $\\sigma\\in\\operatorname{Gal}(L/F)$ preserves $C$: applying $\\sigma$ to a monic integral equation over $R$ gives another such equation. Its automorphism of this local ring preserves the unique maximal ideal and induces the identity on $k_C$. Indeed it fixes $k$, and in positive characteristic each $z\\in k_C$ has a power $z^{p^n}\\in k$, so $(\\sigma z)^{p^n}=z^{p^n}$ forces $\\sigma z=z$; in characteristic zero $k_C=k$.",
+   "uses": [
+    "lem-weil-pbc-noetherian-normal-separable-integral-closure-finite",
+    "lem-weil-pbc-integral-closure-finite-extension-normal",
+    "lem-weil-pbc-finite-algebra-noetherian",
+    "lem-weil-pbc-finite-over-henselian-local-product",
+    "lem-kun-sep-closed-finite-extension-purely-inseparable"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tags 032L (lemma-Noetherian-normal-domain-finite-separable-extension), 034L (lemma-integral-closure-in-normal), 04GH (lemma-finite-over-henselian), 00FN; purely inseparable residue calculation."
+   }
+  },
+  {
+   "text": "Put $T=\\operatorname{Spec}C$ and $P=\\mathbf G_{m,T}^r$. This split torus is separated: its diagonal is cut out by $x_i-y_i$ in $C[x_1^{\\pm1},\\ldots,x_r^{\\pm1},y_1^{\\pm1},\\ldots,y_r^{\\pm1}]$. It is smooth and of finite presentation, and has semiabelian geometric fibres: apply [lem-sfb-relative-torus-character-reconstruction] to the constant lattice $\\underline{\\mathbf Z^r}$; in each geometric fibre the abelian quotient is the trivial abelian variety. The base change $G_T$ is smooth by [lem-pc-proper-base-change], separated and of finite type by [lem-pod-separated-finite-type-base-change]. It is locally of finite presentation by the tensor-algebra base-change clause of [lem-weil-pbc-finite-presentation-base-change-composition]; together with separatedness and finite type this gives finite presentation. Its commutative group diagrams and semiabelian geometric-fibre condition are preserved: the former are equalities of composites under fibre product, and every algebraically closed geometric point of $T$ composes to one of $S$ with exactly the same fibre. Both $P$ and $G_T$ therefore meet the hypotheses of [lem-sfb-normal-semiabelian-hom-extension] over the normal integral Noetherian scheme $T$. That theorem extends $u_\\eta$ to a $T$-homomorphism $u:P\\to G_T$.",
+   "uses": [
+    "lem-sfb-relative-torus-character-reconstruction",
+    "lem-pc-proper-base-change",
+    "lem-pod-separated-finite-type-base-change",
+    "lem-weil-pbc-finite-presentation-base-change-composition",
+    "def-sfb-semiabelian-geometric-fibres",
+    "lem-sfb-normal-semiabelian-hom-extension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/lan-structures-semi-abelian-schemes.pdf",
+    "place": "Proposition 3.3.1.5, printed p.69 (PDF p.83); split torus properties: section 3.1.1; Stacks 01VB, 01KU, 01T4, 05G5."
+   }
+  },
+  {
+   "text": "For $\\sigma\\in\\operatorname{Gal}(L/F)$, use the $R$-automorphism of $C$ from step 3. Since both $P$ and $G_T$ are obtained by base change from $R$, pulling back $u$ along this automorphism and using their canonical identifications defines a conjugate $T$-homomorphism ${}^{\\sigma}u:P\\to G_T$. On the closed fibre these identifications are the identity: the induced map on $k_C$ is the identity. Hence $({}^{\\sigma}u)_{k_C}=u_{k_C}$. The pointwise quotient $v=({}^{\\sigma}u)u^{-1}:P\\to G_T$ is a group homomorphism because $G_T$ is commutative, and its closed fibre is the identity-valued homomorphism.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/lan-structures-semi-abelian-schemes.pdf",
+    "place": "Agent argument after Proposition 3.3.1.5: conjugation on a finite normalization; residue calculation of step 3."
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-split-local-special-kernel-lifting] to the homomorphism $v$ over the nonzero Noetherian local ring $C$. It supplies a subgroup $N_0\\subseteq\\mathbf Z^r$ and a closed subgroup $D_C(\\mathbf Z^r/N_0)\\hookrightarrow P$ whose closed fibre is $\\ker(v_{k_C})=P_{k_C}$ and which $v$ kills. The equality with the whole split torus forces $N_0=0$: the quotient map on closed-fibre coordinate algebras $k_C[\\mathbf Z^r]\\twoheadrightarrow k_C[\\mathbf Z^r/N_0]$ must have zero kernel, whereas for any nonzero $n\\in N_0$ it kills the nonzero element $e_n-e_0$ (the two monomials are distinct basis elements, also in characteristic two). Thus this subgroup is $P$ itself and $v$ is the identity-valued map. We have proved ${}^{\\sigma}u=u$ for every $\\sigma\\in\\operatorname{Gal}(L/F)$.",
+   "uses": [
+    "lem-sfb-split-local-special-kernel-lifting"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://math.stanford.edu/~conrad/papers/luminysga3smf.pdf",
+    "place": "Conrad, Reductive group schemes, Corollary B.2.7, printed p.287, through the cited Noetherian local special-kernel lifting statement; the N_0=0 case is the displayed group-algebra calculation."
+   }
+  },
+  {
+   "text": "Restrict the preceding equality to $L$. The subgroup inclusion $i_L:W_L\\hookrightarrow G_L$ is a closed immersion by [lem-weil-pbc-closed-immersion-base-change]. In particular it is a monomorphism: on affine neighborhoods a map through a quotient ring is determined by its composite with the quotient map, which is surjective. It is defined over $F$, so conjugating $u_\\eta=i_L\\beta$ gives ${}^{\\sigma}u_\\eta=i_L({}^{\\sigma}\\beta)$. Cancelling $i_L$ yields ${}^{\\sigma}\\beta=\\beta$. For an arbitrary $g\\in J_x=\\operatorname{Aut}_F(\\Omega)$, normality of $L/F$ gives $g(L)=L$. After extension to $\\Omega$, conjugation of the $L$-defined $\\beta$ depends only on $g|_L$. Therefore ${}^{g}\\beta_\\Omega=\\beta_\\Omega$ for every $g\\in J_x$.",
+   "uses": [
+    "lem-weil-pbc-closed-immersion-base-change"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/lan-structures-semi-abelian-schemes.pdf",
+    "place": "Agent cancellation and finite Galois restriction argument; closed immersion base change: Stacks Tag 01QR (lemma-base-change-closed-immersion)."
+   }
+  },
+  {
+   "text": "Pullback by $\\beta_\\Omega$ identifies $M$ with the characters of $\\mathbf G_{m,\\Omega}^r$, compatibly with the $J_x$-actions, by [lem-sfb-multiplicative-character-antiduality]. By [lem-sfb-split-torus-hom-matrices] these characters are precisely the Laurent monomials $t_1^{a_1}\\cdots t_r^{a_r}$, $a_i\\in\\mathbf Z$. Every such monomial is fixed by each automorphism of $\\Omega$ fixing $F$, since its coefficients are $1$ and its exponents are integers. Thus $J_x$ acts trivially on $M$. For $r=0$ this is the zero character group and the same proof applies. The chosen $x$ and compatible embedding were arbitrary, so the conclusion holds at every point, without a codimension restriction. Alternatively the conjugacy clause of [lem-dl-a1-strict-local-inertia-generic-fibres] verifies independence of the embedding directly: if $J_x$ acts trivially, then $gJ_xg^{-1}$ acts trivially, since $g h g^{-1}m=g(h(g^{-1}m))=m$.",
+   "uses": [
+    "lem-sfb-multiplicative-character-antiduality",
+    "lem-sfb-split-torus-hom-matrices",
+    "lem-dl-a1-strict-local-inertia-generic-fibres"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Theorem 12.9(a), Theorem 12.23 and scalar-extension compatibility, pp.233-234,239-240; Stacks 0BTD/0BSW for conjugacy of compatible strict local choices."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-affine-open-stalk-localization",
+  "lem-weil-pbc-localization-noetherian",
+  "lem-weil-pbc-localization-normal-domain",
+  "lem-weil-pbc-etale-colimit-normal-local-domain",
+  "lem-weil-pbc-strict-henselization-triples",
+  "lem-sc-strict-henselization-noetherian",
+  "lem-dl-a1-strict-local-inertia-generic-fibres",
+  "lem-sfb-multiplicative-character-antiduality",
+  "lem-sfb-split-torus-hom-matrices",
+  "lem-weil-pbc-finite-set-in-finite-galois-subextension",
+  "lem-weil-pbc-noetherian-normal-separable-integral-closure-finite",
+  "lem-weil-pbc-integral-closure-finite-extension-normal",
+  "lem-weil-pbc-finite-algebra-noetherian",
+  "lem-weil-pbc-finite-over-henselian-local-product",
+  "lem-kun-sep-closed-finite-extension-purely-inseparable",
+  "lem-sfb-relative-torus-character-reconstruction",
+  "lem-pc-proper-base-change",
+  "lem-pod-separated-finite-type-base-change",
+  "lem-weil-pbc-finite-presentation-base-change-composition",
+  "def-sfb-semiabelian-geometric-fibres",
+  "lem-sfb-normal-semiabelian-hom-extension",
+  "lem-sfb-split-local-special-kernel-lifting",
+  "lem-weil-pbc-closed-immersion-base-change",
+  "lem-weil-pbc-fpqc-descend-affine",
+  "def-weil-closed-immersion"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/lan-structures-semi-abelian-schemes.pdf",
+  "place": "Independent local argument from Lan Proposition 3.3.1.5 and the existing special-kernel rigidity node (Conrad Corollary B.2.7); not an invocation of Proposition 3.3.1.7 or the parent toric good-reduction theorem."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "semi.?abelian|torus.*inertia|inertia.*torus|toric.*character",
+   "results": "0 hits; ; ",
+   "date": "2026-10-24",
+   "verdict": "no match: read the returned signatures; they concern arithmetic inertia of valuations or number fields, abstract absolute Galois groups, Henselian rings, Selmer groups, or formally unramified algebras. None concerns characters of a generic torus in a semiabelian family. Both semantic phrasings were tried."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The character lattice of a generic subtorus of a semiabelian scheme is unramified at every strict localization of a normal locally Noetherian base",
+   "results": "8 hits; ; Algebra.FormallyUnramified.localization_map, Algebra.Unramified.of_isLocalization_Away, Algebra.unramifiedLocus, Algebra.IsUnramifiedAt, Algebra.FormallyUnramified.of_isLocalization, AlgebraicGeometry.FormallyUnramified.recOn, AlgebraicGeometry.FormallyUnramified.casesOn, Algebra.FormallyUnramified.localization_base",
+   "date": "2026-10-24",
+   "verdict": "no match: read the returned signatures; they concern arithmetic inertia of valuations or number fields, abstract absolute Galois groups, Henselian rings, Selmer groups, or formally unramified algebras. None concerns characters of a generic torus in a semiabelian family. Both semantic phrasings were tried."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"inertia\"",
+   "results": "0 hits; ; ",
+   "date": "2026-10-24",
+   "verdict": "no match: read the returned signatures; they concern arithmetic inertia of valuations or number fields, abstract absolute Galois groups, Henselian rings, Selmer groups, or formally unramified algebras. None concerns characters of a generic torus in a semiabelian family. Both semantic phrasings were tried."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A semiabelian family over a strictly henselian normal local Noetherian domain has split generic torus subgroups",
+   "results": "8 hits; ; HenselianLocalRing, IsDedekindDomain.selmerGroup, Field.henselian, HenselianLocalRing.TFAE, groupCohomology.exists_mul_galRestrict_of_norm_eq_one, Algebra.FormallyEtale.iff_exists_algEquiv_prod, Field.absoluteGaloisGroupAbelianization, Algebra.Etale.iff_exists_algEquiv_prod",
+   "date": "2026-10-24",
+   "verdict": "no match: read the returned signatures; they concern arithmetic inertia of valuations or number fields, abstract absolute Galois groups, Henselian rings, Selmer groups, or formally unramified algebras. None concerns characters of a generic torus in a semiabelian family. Both semantic phrasings were tried."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a torus subgroup in the generic fibre of a semiabelian scheme over a normal base, inertia from every strict local fraction field acts trivially on its character lattice",
+   "results": "8 hits; ; IsArithFrobAt.mul_inv_mem_inertia, ValuationSubring.inertiaSubgroup, Field.absoluteGaloisGroupAbelianization, groupCohomology.exists_mul_galRestrict_of_norm_eq_one, NumberField.InfinitePlace.IsUnramified.stabilizer_eq_bot, IsDedekindDomain.selmerGroup.valuation_ker_eq, NumberField.InfinitePlace.isUnramified_iff_card_stabilizer_eq_one, NumberField.InfinitePlace.card_stabilizer",
+   "date": "2026-10-24",
+   "verdict": "no match: read the returned signatures; they concern arithmetic inertia of valuations or number fields, abstract absolute Galois groups, Henselian rings, Selmer groups, or formally unramified algebras. None concerns characters of a generic torus in a semiabelian family. Both semantic phrasings were tried."
+  },
+  {
+   "tool": "grep",
+   "query": "semi.?abelian|toric.*character|torus.*inertia",
+   "results": "0 hits; ; ",
+   "date": "2026-10-24",
+   "verdict": "no match: read the returned signatures. They concern Selmer groups, field or valuation inertia, algebraic unramifiedness, etale algebras, affine space and scheme fibres, not semiabelian generic torus characters. Two semantic phrasings were checked."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The Galois action on the characters of a torus inside a semiabelian family is unramified over a normal scheme",
+   "results": "8 hits; NumberField.InfinitePlace.isUnramified_mk_iff_forall_isConj, AlgebraicGeometry.FormallyUnramified.instIsStableUnderBaseChangeScheme, Ideal.isPretransitive_of_isGalois, NumberField.InfinitePlace.isUnramified_smul_iff, Ideal.instMulActionAlgEquivElemPrimesOver, Ideal.isPretransitive_of_isGaloisGroup, NumberField.InfinitePlace.isUnramified_iff_stabilizer_eq_bot, NumberField.InfinitePlace.isUnramified_iff_card_stabilizer_eq_one; ",
+   "date": "2026-10-24",
+   "verdict": "no match: read the returned signatures. They concern Selmer groups, field or valuation inertia, algebraic unramifiedness, etale algebras, affine space and scheme fibres, not semiabelian generic torus characters. Two semantic phrasings were checked."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"torus\"",
+   "results": "0 hits; ; ",
+   "date": "2026-10-24",
+   "verdict": "no match: read the returned signatures. They concern Selmer groups, field or valuation inertia, algebraic unramifiedness, etale algebras, affine space and scheme fibres, not semiabelian generic torus characters. Two semantic phrasings were checked."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The character lattice of a generic torus subgroup of a semiabelian scheme over a normal locally Noetherian base has trivial inertia at every strict localization",
+   "results": "8 hits; IsDedekindDomain.selmerGroup.valuation_ker_eq, Field.absoluteGaloisGroupAbelianization, Algebra.etaleLocus_eq_compl_support, IsDedekindDomain.selmerGroup, Algebra.smoothLocus_eq_compl_support_inter, IsDedekindDomain.selmerGroup.fromUnit_ker, Algebra.FormallyUnramified.isField_of_isAlgClosed_of_isLocalRing, ValuationSubring.inertiaSubgroup; ",
+   "date": "2026-10-24",
+   "verdict": "no match: read the returned signatures. They concern Selmer groups, field or valuation inertia, algebraic unramifiedness, etale algebras, affine space and scheme fibres, not semiabelian generic torus characters. Two semantic phrasings were checked."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A torus contained in a semiabelian scheme over a strictly henselian normal Noetherian local ring has split generic fibre",
+   "results": "8 hits; AlgebraicGeometry.FormallyUnramified, Algebra.FormallyEtale.iff_exists_algEquiv_prod, Algebra.Etale.iff_exists_algEquiv_prod, AlgebraicGeometry.AffineSpace, Algebra.Extension.formallySmooth_iff_split_injection, Algebra.FormallySmooth.iff_split_injection, AlgebraicGeometry.pointsPi_surjective, AlgebraicGeometry.instFiniteCarrierCarrierCommRingCatFiberOfIsFinite; ",
+   "date": "2026-10-24",
+   "verdict": "no match: read the returned signatures. They concern Selmer groups, field or valuation inertia, algebraic unramifiedness, etale algebras, affine space and scheme fibres, not semiabelian generic torus characters. Two semantic phrasings were checked."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-generic-toric-abstract-good-reduction",
+  "date": "2026-10-24",
+  "group": "N7"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "Local character input below the inherited generic torus quotient: after strict localization, use finite splitting-field normalization, extend a split-torus map, and kill its conjugate differences by special-kernel rigidity.",
+   "via": [
+    "lem-sfb-generic-toric-abstract-good-reduction",
+    "lem-sfb-normal-semiabelian-generic-torus-quotient",
+    "lem-sfb-symmetric-line-power-prolongation",
+    "lem-sfb-normal-symmetric-cubical-extension",
+    "lem-sfb-symmetric-ample-power-extension",
+    "lem-sfb-regular-group-generic-ampleness",
+    "lem-sfb-stable-picard-theta-ampleness",
+    "lem-sfb-stable-relative-picard-kummer",
+    "lem-sfb-stable-level-versal-branch-freeness",
+    "lem-sfb-stable-abelian-level-normalization",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-generic-toric-character-local-inertia",
+  "worker": "stage1",
+  "summary": "Proved the unchanged all-point inertia statement by a local normalization argument using existing nodes only. Finite splitting-field conjugates of an extended split-torus map agree on the purely inseparable closed residue field; special-kernel lifting kills their differences. Cancel the generic closed immersion and read the invariant Laurent characters. No generic-torus model or closure theorem is invoked, avoiding the parent cycle. No new nodes or Mathlib leaves.",
+  "blueprint": "blueprint_refs.py ancestor prints None; retained the inherited null ancestor and via chain. Searched the entire imported blueprint and latest main-20261024 text for tori, semiabelian groups, toric characters and specialization. This proves the local input under the inherited generic torus quotient branch, leaving the unit and chapter unchanged.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-affine-open-stalk-localization",
+    "why": "Stalks of a Noetherian affine neighborhood are localizations; needed to check the Noetherian local-base hypothesis."
+   },
+   {
+    "node": "lem-weil-pbc-localization-noetherian",
+    "why": "Localization preserves Noetherianity of the chosen affine coordinate ring."
+   },
+   {
+    "node": "lem-weil-pbc-localization-normal-domain",
+    "why": "Prime localizations of a normal domain are normal, checking the normal-ring hypothesis of the strict-colimit tool."
+   },
+   {
+    "node": "lem-weil-pbc-etale-colimit-normal-local-domain",
+    "why": "Normality of the strict henselization, a general local algebra tool."
+   },
+   {
+    "node": "lem-weil-pbc-strict-henselization-triples",
+    "why": "The strict local ring is a local filtered etale colimit and is henselian with separably closed residue field."
+   },
+   {
+    "node": "lem-sc-strict-henselization-noetherian",
+    "why": "Noetherianity of the strict henselization is needed before finite normalization and kernel rigidity."
+   },
+   {
+    "node": "lem-dl-a1-strict-local-inertia-generic-fibres",
+    "why": "Compatible fraction-field embedding and conjugacy of the strict local inertia groups."
+   },
+   {
+    "node": "lem-weil-pbc-finite-set-in-finite-galois-subextension",
+    "why": "Enlarge a finite separable splitting extension to a finite Galois one in the chosen separable closure."
+   },
+   {
+    "node": "lem-weil-pbc-noetherian-normal-separable-integral-closure-finite",
+    "why": "Finite normalization in a finite separable field extension; no excellence assumption is needed."
+   },
+   {
+    "node": "lem-weil-pbc-integral-closure-finite-extension-normal",
+    "why": "Normal domain and fraction field of the splitting-field normalization."
+   },
+   {
+    "node": "lem-weil-pbc-finite-algebra-noetherian",
+    "why": "The finite normalization is Noetherian, needed by local kernel lifting."
+   },
+   {
+    "node": "lem-weil-pbc-finite-over-henselian-local-product",
+    "why": "The normalization is local and its residue extension finite because it is a finite domain over a henselian local ring."
+   },
+   {
+    "node": "lem-kun-sep-closed-finite-extension-purely-inseparable",
+    "why": "The finite normalization residue extension is purely inseparable, so all its automorphisms are trivial."
+   },
+   {
+    "node": "lem-pc-proper-base-change",
+    "why": "Only the smoothness clause is used to check the base-changed semiabelian family."
+   },
+   {
+    "node": "lem-pod-separated-finite-type-base-change",
+    "why": "Separatedness and finite type under base change, to check homomorphism extension hypotheses."
+   },
+   {
+    "node": "lem-weil-pbc-finite-presentation-base-change-composition",
+    "why": "Only its ring-level base-change clause is used on affine charts to check finite presentation."
+   },
+   {
+    "node": "lem-weil-pbc-closed-immersion-base-change",
+    "why": "The generic subtorus inclusion remains a closed immersion after extending the field, permitting cancellation."
+   },
+   {
+    "node": "lem-weil-pbc-fpqc-descend-affine",
+    "why": "Reviewer FIX: affineness of the base-changed generic torus W descends from its split form over an algebraic closure, a hypothesis of the multiplicative-type character theory."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-affine-open-stalk-localization",
+  "lem-weil-pbc-localization-noetherian",
+  "lem-weil-pbc-localization-normal-domain",
+  "lem-weil-pbc-etale-colimit-normal-local-domain",
+  "lem-weil-pbc-strict-henselization-triples",
+  "lem-sc-strict-henselization-noetherian",
+  "lem-dl-a1-strict-local-inertia-generic-fibres",
+  "lem-weil-pbc-finite-set-in-finite-galois-subextension",
+  "lem-weil-pbc-noetherian-normal-separable-integral-closure-finite",
+  "lem-weil-pbc-integral-closure-finite-extension-normal",
+  "lem-weil-pbc-finite-algebra-noetherian",
+  "lem-weil-pbc-finite-over-henselian-local-product",
+  "lem-kun-sep-closed-finite-extension-purely-inseparable",
+  "lem-pc-proper-base-change",
+  "lem-pod-separated-finite-type-base-change",
+  "lem-weil-pbc-finite-presentation-base-change-composition",
+  "lem-weil-pbc-closed-immersion-base-change",
+  "lem-weil-pbc-fpqc-descend-affine"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q125-54ca6f5ba",
+  "group": "Q125",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q125-54ca6f5ba (reviewer sub-agent of L); spot-checked: Read all 8 steps and every cited statement in full; the delivery has 0 new nodes, and the statement and stmt_deps are unchanged. The proof is correct. Step 1: the strict henselization R is a Noetherian, normal, henselian domain with separably closed residue field (stalk-localization, prime localizations normal, etale-colimit node, triples node, sc-strict-henselization-noetherian). Step 2: W=V_F splits over a finite Galois L/F (antiduality, hom-matrices, finite-Galois node). Step 3: C, the integral closure of R in L, is finite (032L), a normal Noetherian domain and henselian local; k_C/k is purely inseparable, so every sigma in Gal(L/F) acts as the identity on k_C, including when k is imperfect. Step 4: the hypotheses of normal-semiabelian-hom-extension hold over Spec C for P=G_m^r (relative-torus reconstruction) and for G_T (smooth, separated, finite type, finitely presented, semiabelian fibres), so u_eta extends to u. Step 5: the conjugate of u agrees with u on the closed fibre. Step 6: special-kernel-lifting gives a kernel D_C(Z^r/L) with L=0, so v is trivial. Step 7: cancelling the closed immersion i_L gives that beta is Galois-fixed. Step 8: Laurent monomials are fixed, so J_x acts trivially; the conjugacy clause covers any choice of embedding. FIX (C4/E1): step 2 applied the antiduality node, which is stated for affine group schemes of finite type, to W without checking either property. Added the check: W is of finite type (closed in G_F, via closed-immersion-base-change, pod-separated-finite-type-base-change and def-weil-closed-immersion) and affine by fpqc descent from W over F-bar ≅ G_m^r (lem-weil-pbc-fpqc-descend-affine, added to proof_deps and tool_uses; its closure has no trf/pod nodes). Batch-5 check: lem-trf-projective-exterior-scalar-comparisons (base change of exterior powers and determinants of projective modules) and lem-trf-smooth-composition (Mathlib leaf, 01VA) are generic facts, not statements or steps of the trace formula or Poincare duality, so both are accepted; lem-pod-separated-finite-type-base-change is generic in the same way. No SGA; no cycle (the parent good-reduction and torus-quotient nodes are not cited); the worker's tool_uses are accepted.; 1 file(s) fixed by the reviewer"
+ }
+}

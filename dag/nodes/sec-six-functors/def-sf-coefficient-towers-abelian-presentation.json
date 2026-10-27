@@ -1,0 +1,110 @@
+{
+ "id": "def-sf-coefficient-towers-abelian-presentation",
+ "kind": "definition",
+ "title": "Section-normalized abelian coefficient-tower presentation",
+ "status": "split",
+ "statement": "Fix a prime $\\ell$, a finite extension $E/\\mathbf Q_\\ell$, and a scheme $T$. Let $\\operatorname{Tow}(T,\\mathcal O_E)$ be the varying-coefficient tower category of [sk-def-sp-coefficient-towers], and $B_\\bullet$ its commutative-ring sheaf tower of [def-sp-commutative-coefficient-ring-tower]; Lean index $n$ means coefficient exponent $n+1$. Use the strict semilinear systems, their level evaluations, canonical scalar assignments and normalized tensor coherence of [def-pur-system-level-left-extension-basic]. Given an equivalence $e:\\operatorname{Tow}(T,\\mathcal O_E)\\simeq\\operatorname{StrictRingSystem}(B_\\bullet)$, define $\\operatorname{spCoefficientEvaluation}(e,n)$ to be $e$ followed by evaluation at $n$. Define $\\operatorname{SpCoefficientTowersAbelian}(\\ell,E,T)$ to be the structure with: an equivalence $e$ as above whose section modules, vertical restrictions, every iterated transition and every morphism component agree with those of the product-site presentation; additivity of $e$; Grothendieck abelianness [def-sp-grothendieck-abelian] of the tower category; preservation of finite limits and finite colimits by every evaluation and preservation of each small filtered colimit by every evaluation; an ordinary unbounded derived-category localization [def-weil-abstract-derived-category]; a canonical scalar assignment and its normalized tensor coherence; natural ordinary reduction maps $\\mathrm{ev}_n\\otimes_{B_n}B_m\\to\\mathrm{ev}_m$ for every $m\\leq n$, equal to the tensor adjuncts of the strict transitions; and derived reductions $\\mathbf L(-\\otimes_{B_n}B_m)\\circ D(\\mathrm{ev}_n)\\to D(\\mathrm{ev}_m)$. On every complex the derived reduction is the composite of the derived-evaluation comparison, the recorded scalar-model comparison, localization of the ordinary reduction, and the inverse target-evaluation comparison. Equal-index reductions are the recorded derived unitors, and successive reductions equal direct reduction under the recorded derived tensor associator. All data and equations are retained; this structure definition does not assert that it is inhabited. For $T:\\operatorname{Scheme}^{t}$ and $E:\\operatorname{Type}^{u}$ the coefficient universe is $\\max(u,t+1)$ and the derived-category universe is its successor.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-def-sp-coefficient-towers/sk-def-sp-coefficient-towers-abelian.md",
+  "place": "Clauses (1)-(3), section-normalized abelian presentation, exact evaluation and canonical reductions; Bhatt-Scholze, The pro-etale topology for schemes, Definition 3.5.3."
+ },
+ "stmt_deps": [
+  "sk-def-sp-coefficient-towers",
+  "def-sp-commutative-coefficient-ring-tower",
+  "def-pur-system-level-left-extension-basic",
+  "def-sp-grothendieck-abelian",
+  "def-weil-abstract-derived-category"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "abelian presentation of varying coefficient towers with exact evaluation and normalized derived reduction maps",
+   "results": "Eight hits: Algebra.SubmersivePresentation.instHasCoeffs, FreeAbelianGroup.coeff, FreeAbelianGroup, HasDerivedCategory.standard, Mathlib.Tactic.Module.reduceCoefficientwise, Mathlib.Tactic.Abel.eval, Mathlib.Tactic.Abel.NormalExpr.e, Mathlib.Tactic.Abel.abel.",
+   "date": "2026-10-22",
+   "verdict": "No Mathlib coefficient-tower presentation; reuse the existing project definitions."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "abelian presentation of varying coefficient towers with exact evaluation and normalized derived reduction maps",
+   "results": "Eight hits: Algebra.PreSubmersivePresentation.ofHasCoeffs, Algebra.Presentation.HasCoeffs, Algebra.PreSubmersivePresentation.toPresentation, Algebra.PreSubmersivePresentation.ofHasCoeffs_relation, Algebra.Presentation.comp, Algebra.Presentation.relationOfHasCoeffs, Algebra.Presentation.ModelOfHasCoeffs, Algebra.PreSubmersivePresentation.",
+   "date": "2026-10-22",
+   "verdict": "No Mathlib coefficient-tower presentation; reuse the existing project definitions."
+  },
+  {
+   "tool": "grep",
+   "query": "SpCoefficientTowersAbelian|spCoefficientEvaluation",
+   "results": "No Mathlib hits.",
+   "date": "2026-10-22",
+   "verdict": "No Mathlib coefficient-tower presentation; reuse the existing project definitions."
+  },
+  {
+   "tool": "grep",
+   "query": "SpCoefficientTowersAbelian|spCoefficientEvaluation in lean/WeilConjectures, lean/Sheaf and dag/nodes; tools/blueprint_refs.py search",
+   "results": "No upstream WeilConjectures definition. Existing Sheaf declarations are in the published parent theorem module. A scan of all definition-node lean records found no owner for the declarations registered by this node; blueprint search found no matching node. The commutative ring tower already has def-sp-commutative-coefficient-ring-tower as owner.",
+   "date": "2026-10-22",
+   "verdict": "Reuse existing definitions; add only missing definition ownership."
+  }
+ ],
+ "mathlib_match": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-pur-tower-operations-ground-field-retagging",
+  "date": "2026-10-22",
+  "group": "Q51"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-pur-weil-equivariance-of-purity-and-trace",
+   "place": "Proof Step 1, unchanged ordinary tower operations and signed Tate-line comparisons under ground-field retagging",
+   "via": [
+    "lem-pur-tower-operations-ground-field-retagging",
+    "lem-pur-tower-purity-ground-field-retagging"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-thm-sf-package",
+ "lean": {
+  "module": "Sheaf.Paper.SmoothPurityCoefficientTowersAbelian",
+  "declaration": "AlgebraicGeometry.ProEtale.SpCoefficientTowersAbelian",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.spCoefficientEvaluation",
+   "AlgebraicGeometry.ProEtale.SpCoefficientTowersAbelian"
+  ],
+  "statement": "structure SpCoefficientTowersAbelian",
+  "branch": "newtargets-dag",
+  "by": "Q51",
+  "date": "2026-10-22",
+  "existing": true,
+  "note": "Definition ownership only: the existing published definitions are reused unchanged. This record asserts no existence theorem and introduces no Lean module."
+ },
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-527254f06",
+  "group": "Q51",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-527254f06",
+  "group": "Q51",
+  "result": "pass",
+  "note": "Re-delivery after the 9ad95781 H2 RETURN. The Lean module is byte-identical (sha c8a72a35) and lean.statement is unchanged and verbatim. The theorem nodes det-sp-coefficient-towers-abelian and lem-pur-signed-line-scalar-tensor-tower are out of stmt_deps and remain in proof_deps. Replaced by four definition owners: def-pur-signed-line-scalar-normalization-data and def-sp-commutative-coefficient-ring-tower (both landed), plus two new existing:true nodes. def-sf-signed-line-product-normalization-data: the statement gives the four SignedLineBasisPowers conditions and the product condition, and the def signature is verbatim with the live l.111. def-sf-coefficient-towers-abelian-presentation: the statement matches every SpCoefficientTowersAbelian field (equivalence and the four HEq pins, Grothendieck, evaluation exactness, HasDerivedCategory, scalar/tensor, ordinaryReduction_eq, reduction_rep, unitor, associator); `structure X` is the live convention; all stmt_deps are definitions; no other live owner. Substance re-read: Over.map Spec σ is a_T ≫ Spec σ; all clauses match; B/μ uniqueness is pinned; edge cases σ=id, empty, d=0, n+1 index, signed m, ramified, zero transitions all hold; universes fine; docstrings and gates pass. Advisory: purTwistIntegralOne, proEtaleRootsOfUnityTower and scalarExtensionEmbedding have owners outside stmt_deps; base-era det-sp-tower-shriek-levels stmt_dep; H9 imports. No compile (no file changed); the worker's scompile is clean."
+ }
+}

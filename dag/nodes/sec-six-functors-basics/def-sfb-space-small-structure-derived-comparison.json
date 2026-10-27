@@ -1,0 +1,161 @@
+{
+ "id": "def-sfb-space-small-structure-derived-comparison",
+ "kind": "definition",
+ "title": "Small-model regular-function structure map and degree-zero derived direct-image comparison",
+ "status": "split",
+ "import_flags": [],
+ "statement": "Let B be any scheme [def-pc-scheme], X and Y algebraic spaces over B and f:X→Y [def-trf-algebraic-space], with their structure module sheaves [def-weil-sheaf-of-modules-category]. Use their fixed small module models, smallModuleDirectImage f and unbounded derivedDirectImage f [def-sfb-space-derived-module-calculus]. Define O_Y→f_* O_X on the small models by the composite of smallModuleUnitIso Y, smallModuleRestriction of the actual regular-function moduleStructureMap f [def-sfb-space-module-structure-map], and smallModuleRestriction of f_* applied to the fullModuleSection extension of id_(O_X) [def-sfb-space-affine-sections-compositors]. With HasDerivedCategory in any common localization morphism universe w [def-weil-abstract-derived-category], for every small O_X-module M define (f_* M)[0]→Rf_*(M[0]) by the singleFunctorIsoCompQ identification, localization of the canonical single-complex/direct-image identification, the universal right-derived complex unit spaceRightDerivedComplexUnit [def-sfb-space-affine-hom-comparison] at the complex concentrated in degree zero at M, and Rf_* of the inverse singleFunctorIsoCompQ identification. No closed-immersion, flatness, quasi-coherence or finiteness hypothesis, and no assertion of invertibility, is imposed.",
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-trf-algebraic-space",
+  "def-weil-sheaf-of-modules-category",
+  "def-sfb-space-derived-module-calculus",
+  "def-sfb-space-module-structure-map",
+  "def-sfb-space-affine-sections-compositors",
+  "def-weil-abstract-derived-category",
+  "def-sfb-space-affine-hom-comparison"
+ ],
+ "source": {
+  "document": "literature/stacks-project/spaces-properties.tex; literature/stacks-project/cohomology.tex",
+  "place": "Tag 03G8 (lemma-morphism-ringed-topoi): regular-function structure map; Tag 079V (section-unbounded): universal unbounded right-derived comparison. Transport to the fixed small models uses the existing restriction equivalence."
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Canonical derived scalar extension adjunction representative comparison and derived restriction composition; ordinary to derived direct image of module sheaves and structure sheaf map",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"ModuleCat.extendRestrictScalarsAdj\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.ChangeOfRings\", \"type\": \"{R : Type u₁} →\\n  {S : Type u₂} →\\n    [inst : CommRing R] →\\n      [inst_1 : CommRing S] → (f : R →+* S) → ModuleCat.extendScalars f ⊣ ModuleCat.restrictScalars f\", \"doc\": \"For commutative rings $ R $ and $ S $ with a ring homomorphism $ f : R → S $, the extension of scalars functor from $ R $-modules to $ S $-modules is left adjoint to the restriction of scalars functor\"}\n  {\"name\": \"ModuleCat.ExtendRestrictScalarsAdj.HomEquiv.fromExtendScalars\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.ChangeOfRings\", \"type\": \"{R : Type u₁} →\\n  {S : Type u₂} →\\n    [inst : CommRing R] →\\n      [inst_1 : CommRing S] →\\n        (f : R →+* S) →\\n          {X : ModuleCat R} →\\n            {Y : ModuleCat S} → (X ⟶ (ModuleCat.restrictScalars f).obj Y) → ((ModuleCat.extendScalars f).obj X ⟶ Y)\", \"doc\": \"Given commutative rings $ R $ and $ S $, a ring homomorphism $ f : R \\to S $, an $ R $-module $ X $, and an $ S $-module $ Y $, this function establishes a natural bijection between $ R $-linear maps f\"}\n  {\"name\": \"ModuleCat.ExtendRestrictScalarsAdj.HomEquiv.toRestrictScalars\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.ChangeOfRings\", \"type\": \"{R : Type u₁} →\\n  {S : Type u₂} →\\n    [inst : CommRing R] →\\n      [inst_1 : CommRing S] →\\n        (f : R →+* S) →\\n          {X : ModuleCat R} →\\n            {Y : ModuleCat S} → ((ModuleCat.extendScalars f).obj X ⟶ Y) → (X ⟶ (ModuleCat.restrictScalars f).obj Y)\", \"doc\": \"For commutative rings $ R $ and $ S $ with a ring homomorphism $ f : R → S $, there is a natural bijection between $ R $-linear maps from an $ R $-module $ X $ to the restriction of scalars of an $ S \"}\n  {\"name\": \"ModuleCat.ExtendRestrictScalarsAdj.unit\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.ChangeOfRings\", \"type\": \"{R : Type u₁} →\\n  {S : Type u₂} →\\n    [inst : CommRing R] →\\n      [inst_1 : CommRing S] →\\n        (f : R →+* S) →\\n          CategoryTheory.Functor.id (ModuleCat R) ⟶ (ModuleCat.extendScalars f).comp (ModuleCat.restrictScalars f)\", \"doc\": \"Given commutative rings $ R $ and $ S $ with a ring homomorphism $ f : R \\to S $, this natural transformation provides for each $ R $-module $ X $ a canonical $ R $-linear map from $ X $ to the module \"}\n  {\"name\": \"ModuleCat.ExtendRestrictScalarsAdj.homEquiv\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.ChangeOfRings\", \"type\": \"{R : Type u₁} →\\n  {S : Type u₂} →\\n    [inst : CommRing R] →\\n      [inst_1 : CommRing S] →\\n        (f : R →+* S) →\\n          {X : ModuleCat R} →\\n            {Y : ModuleCat S} → ((ModuleCat.extendScalars f).obj X ⟶ Y) ≃ (X ⟶ (ModuleCat.restrictScalars f).obj Y)\", \"doc\": \"For commutative rings $ R $ and $ S $ with a ring homomorphism $ f : R → S $, there is a natural bijection between $ S $-linear maps from the extension of scalars of an $ R $-module $ X $ to an $ S $-\"}\n  {\"name\": \"ModuleCat.restrictCoextendScalarsAdj\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.ChangeOfRings\", \"type\": \"{R : Type u₁} →\\n  {S : Type u₂} →\\n    [inst : Ring R] → [inst_1 : Ring S] → (f : R →+* S) → ModuleCat.restrictScalars f ⊣ ModuleCat.coextendScalars f\", \"doc\": \"Given a ring homomorphism $ f : R → S $, the restriction of scalars functor (mapping $ S $-modules to $ R $-modules) is left adjoint to the coextension of scalars functor (mapping $ R $-modules to $ S\"}\n  {\"name\": \"ModuleCat.ExtendRestrictScalarsAdj.Unit.map\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.ChangeOfRings\", \"type\": \"{R : Type u₁} →\\n  {S : Type u₂} →\\n    [inst : CommRing R] →\\n      [inst_1 : CommRing S] →\\n        (f : R →+* S) → {X : ModuleCat R} → X ⟶ ((ModuleCat.extendScalars f).comp (ModuleCat.restrictScalars f)).obj X\", \"doc\": \"Given commutative rings $ R $ and $ S $ with a ring homomorphism $ f : R \\to S $, this natural transformation provides for each $ R $-module $ X $ a canonical $ R $-linear map from $ X $ to the module \"}\n  {\"name\": \"SheafOfModules.PullbackConstruction.adjunction\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.PullbackContinuous\", \"type\": \": (forget S ⋙ PresheafOfModules.pullback.{v} φ.val ⋙ PresheafOfModules.sheafification (𝟙 R.val)) ⊣ pushforward.{v} φ\", \"doc\": \"Given categories $\\\\mathcal{C}$ and $\\\\mathcal{D}$ with Grothendieck topologies $J$ and $K$, a continuous functor $F : \\\\mathcal{C} \\\\to \\\\mathcal{D}$, and sheaves of rings $S$ on $\\\\mathcal{C}$ and $R$ on \"}\n",
+   "date": "2026-10-24",
+   "verdict": "Ordinary scalar adjunction and sheaf pullback infrastructure only; no exact Mathlib derived scalar helper or algebraic-space small-model comparison. Reuse the already landed Sheaf declarations below."
+  },
+  {
+   "tool": "loogle",
+   "query": "ModuleCat.extendRestrictScalarsAdj",
+   "results": "[loogle] OK 6 hit(s)\n  {\"name\": \"ModuleCat.extendRestrictScalarsAdj\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.ChangeOfRings\", \"type\": \" {R : Type u₁} {S : Type u₂} [CommRing R] [CommRing S] (f : R →+* S) : ModuleCat.extendScalars f ⊣ ModuleCat.restrictScalars f\", \"doc\": \"Given commutative rings `R, S` and a ring hom `f : R →+* S`, the extension and restriction of\\nscalars by `f` are adjoint to each other.\"}\n  {\"name\": \"ModuleCat.extendRestrictScalarsAdj_unit_app_apply\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.ChangeOfRings\", \"type\": \" {R : Type u₁} {S : Type u₂} [CommRing R] [CommRing S] (f : R →+* S) (M : ModuleCat R) (m : ↑M) : (CategoryTheory.ConcreteCategory.hom ((ModuleCat.extendRestrictScalarsAdj f).unit.app M)) m = 1 ⊗ₜ[R] m\", \"doc\": \"\"}\n  {\"name\": \"ModuleCat.extendRestrictScalarsAdj_counit_app_apply_one_tmul\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.ChangeOfRings\", \"type\": \" {R : Type u₁} {S : Type u₂} [CommRing R] [CommRing S] (f : R →+* S) (M : ModuleCat S) (m : ↑M) : (CategoryTheory.ConcreteCategory.hom ((ModuleCat.extendRestrictScalarsAdj f).counit.app M)) (1 ⊗ₜ[R] m) = m\", \"doc\": \"\"}\n  {\"name\": \"ModuleCat.homEquiv_extendScalarsId\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.ChangeOfRings\", \"type\": \" {R : Type u₁} [CommRing R] (M : ModuleCat R) : ((ModuleCat.extendRestrictScalarsAdj (RingHom.id R)).homEquiv M ((CategoryTheory.Functor.id (ModuleCat R)).obj M)) ((ModuleCat.extendScalarsId R).hom.app M) = (ModuleCat.restrictScalarsId R).inv.app M\", \"doc\": \"\"}\n  {\"name\": \"ModuleCat.extendRestrictScalarsAdj_homEquiv_apply\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.ChangeOfRings\", \"type\": \" {R : Type u₁} {S : Type u₂} [CommRing R] [CommRing S] {f : R →+* S} {M : ModuleCat R} {N : ModuleCat S} (φ : (ModuleCat.extendScalars f).obj M ⟶ N) (m : ↑M) : (CategoryTheory.ConcreteCategory.hom (((ModuleCat.extendRestrictScalarsAdj f).homEquiv M N) φ)) m = (CategoryTheory.ConcreteCategory.hom φ) \", \"doc\": \"\"}\n  {\"name\": \"ModuleCat.homEquiv_extendScalarsComp\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.ChangeOfRings\", \"type\": \" {R₁ R₂ R₃ : Type u₁} [CommRing R₁] [CommRing R₂] [CommRing R₃] (f₁₂ : R₁ →+* R₂) (f₂₃ : R₂ →+* R₃) (M : ModuleCat R₁) : ((ModuleCat.extendRestrictScalarsAdj (f₂₃.comp f₁₂)).homEquiv M (((ModuleCat.extendScalars f₁₂).comp (ModuleCat.extendScalars f₂₃)).obj M)) ((ModuleCat.extendScalarsComp f₁₂ f₂₃).\", \"doc\": \"\"}\n",
+   "date": "2026-10-24",
+   "verdict": "Ordinary scalar adjunction and sheaf pullback infrastructure only; no exact Mathlib derived scalar helper or algebraic-space small-model comparison. Reuse the already landed Sheaf declarations below."
+  },
+  {
+   "tool": "grep",
+   "query": "moduleDerivedAdjunction|moduleRepresentative|moduleDerivedRestrictionComposition|relativeClosedKernelSmallStructureMap|relativeClosedKernelDirectImageComparison",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-24",
+   "verdict": "Ordinary scalar adjunction and sheaf pullback infrastructure only; no exact Mathlib derived scalar helper or algebraic-space small-model comparison. Reuse the already landed Sheaf declarations below."
+  },
+  {
+   "tool": "grep",
+   "query": "rg -n moduleDerivedAdjunction|moduleRepresentative|moduleDerivedRestrictionComposition|relativeClosedKernelSmallStructureMap|relativeClosedKernelDirectImageComparison lean/WeilConjectures",
+   "results": "No matches (exit 1).",
+   "date": "2026-10-24",
+   "verdict": "Only the existing theorem records own the requested data helpers; no separate definition node. Existing declarations are reused, with no new Lean implementation."
+  },
+  {
+   "tool": "grep",
+   "query": "rg -n moduleDerivedAdjunction|moduleRepresentative|moduleDerivedRestrictionComposition|relativeClosedKernelSmallStructureMap|relativeClosedKernelDirectImageComparison lean/Sheaf",
+   "results": "lean/Sheaf/Paper/ConstantDerivedNormalizationUniversal.lean:310:  let a := ConstantScalarRealization.moduleDerivedAdjunction q\nlean/Sheaf/Paper/ConstantRealizationDerivedScalarExtension.lean:793:def moduleDerivedAdjunction {A B : Type r} [CommRing A] [CommRing B] (f : A →+* B)\nlean/Sheaf/Paper/ConstantRealizationDerivedScalarExtension.lean:833:      ((moduleDerivedAdjunction.{wR, wS, max u v} q).unit.app M) ≫\nlean/Sheaf/Paper/ConstantRealizationDerivedScalarExtension.lean:840:def moduleRepresentative {A B : Type r} [CommRing A] [CommRing B] (f : A →+* B)\nlean/Sheaf/Paper/ConstantRealizationDerivedScalarExtension.lean:845:  ((moduleDerivedAdjunction.{wR, wS, r} f).homEquiv _ _).symm\nlean/Sheaf/Paper/ConstantRealizationDerivedScalarExtension.lean:888:  rw [← (moduleDerivedAdjunction.{wR, wS, max u v} q).unit_naturality]\nlean/Sheaf/Paper/ConstantRealizationDerivedScalarExtension.lean:907:  derivedAdjunction moduleDerivedAdjunction\nlean/Sheaf/Paper/ConstantRealizationDerivedScalarExtension.lean:922:          ((moduleDerivedAdjunction.{wR, wS, max u v} q).unit.app M))  := by\nlean/Sheaf/Paper/ConstantRealizationDerivedScalarExtension.lean:929:      ((moduleDerivedAdjunction.{wR, wS, max u v} q).unit.app M) ≫\nlean/Sheaf/Paper/ConstantRealizationDerivedScalarExtension.lean:967:private theorem moduleRepresentative_isIso\nlean/Sheaf/Paper/ConstantRealizationDerivedScalarExtension.lean:972:    IsIso (moduleRepresentative.{wR, wS, r} f P) := by\nlean/Sheaf/Paper/ConstantRealizationDerivedScalarExtension.lean:981:    (moduleDerivedAdjunction.{wR, wS, r} f) P hP\nlean/Sheaf/Paper/ConstantRealizationDerivedScalarExtension.lean:1035:          (moduleRepresentative.{wR, wS, max u v} q P) ≫\nlean/Sheaf/Paper/ConstantRealizationDerivedScalarExtension.lean:1052:  let md := moduleDerivedAdjunction.{wR, wS, max u v} q\nlean/Sheaf/Paper/ConstantRealizationDerivedScalarExtension.lean:1060:      um.map (moduleRepresentative.{wR, wS, max u v} q P) =\nlean/Sheaf/Paper/ConstantRealizationDerivedScalarExtension.lean:1095:      ur.map (cs.map (moduleRepresentative.{wR, wS, max u v} q P) ≫\nlean/Sheaf/Paper/ConstantRealizationDerivedScalarExtension.lean:1102:  have hn := e.inv.naturality (moduleRepresentative.{wR, wS, max u v} q P)\nlean/Sheaf/Paper/ConstantRealizationDerivedScalarExtension.lean:1103:  change cr.map (um.map (moduleRepresentative.{wR, wS, max u v} q P)) ≫\nlean/Sheaf/Paper/ConstantRealizationDerivedScalarExtension.lean:1105:    e.inv.app _ ≫ ur.map (cs.map (moduleRepresentative.{wR, wS, max u v} q P)) at hn\nlean/Sheaf/Paper/ConstantRealizationDerivedScalarExtension.lean:1133:  have : IsIso (moduleRepresentative.{wR, wS, max u v} q L) :=\nlean/Sheaf/Paper/ConstantRealizationDerivedScalarExtension.lean:1134:    moduleRepresentative_isIso q L hL\nlean/Sheaf/Paper/ConstantRealizationDerivedScalarExtension.lean:1147:        (cs.map (moduleRepresentative.{wR, wS, max u v} q L) ≫\nlean/Sheaf/Paper/ConstantRealizationDerivedScalarExtension.lean:1153:      (cs.map (moduleRepresentative.{wR, wS, max u v} q L) ≫\nlean/Sheaf/Paper/ConstantRealizationDerivedScalarExtension.lean:1185:      IsIso (moduleRepresentative.{wR, wS, max u v} q P) ∧\nlean/Sheaf/Paper/ConstantRealizationDerivedScalarExtension.lean:1189:            (moduleRepresentative.{wR, wS, max u v} q P) ≫\nlean/Sheaf/Paper/ConstantRealizationDerivedScalarExtension.lean:1204:          ((moduleDerivedAdjunction.{wR, wS, max u v} q).unit.app M)) := by\nlean/Sheaf/Paper/ConstantRealizationDerivedScalarExtension.lean:1210:      moduleRepresentative_isIso q P hP, sheafRepresentative_isIso J q _ hc,\nlean/Sheaf/Paper/ConstantRealizationDerivedScalarExtension.lean:1337:def moduleDerivedRestrictionComposition\nlean/Sheaf/Paper/ConstantRealizationDerivedScalarExtension.lean:1356:        ((moduleDerivedRestrictionComposition.{wR, wS, wT, max u v} q b).inv.app N) ≫\nlean/Sheaf/Paper/ConstantRealizationDerivedScalarExtension.lean:1375:  simpa only [derivedRestrictionIso, moduleDerivedRestrictionComposition,\nlean/Sheaf/Paper/ConstantRealizationDerivedScalarExtension.lean:1393:  (((moduleDerivedAdjunction.{wR, wS, r} f).comp\nlean/Sheaf/Paper/ConstantRealizationDerivedScalarExtension.lean:1394:      (moduleDerivedAdjunction.{wS, wT, r} g)).ofNatIsoRight\nlean/Sheaf/Paper/ConstantRealizationDerivedScalarExtension.lean:1395:        (moduleDerivedRestrictionComposition.{wR, wS, wT, r} f g)).leftAdjointUniq\nlean/Sheaf/Paper/ConstantRealizationDerivedScalarExtension.lean:1396:    (moduleDerivedAdjunction.{wR, wT, r} (g.comp f))\nlean/Sheaf/Paper/ConstantRealizationDerivedScalarExtension.lean:1425:  let mq := moduleDerivedAdjunction.{wR, wS, max u v} q\nlean/Sheaf/Paper/ConstantRealizationDerivedScalarExtension.lean:1426:  let mb := moduleDerivedAdjunction.{wS, wT, max u v} b\nlean/Sheaf/Paper/ConstantRealizationDerivedScalarExtension.lean:1427:  let mt := moduleDerivedAdjunction.{wR, wT, max u v} (b.comp q)\nlean/Sheaf/Paper/ConstantRealizationDerivedScalarExtension.lean:1438:  let dm := moduleDerivedRestrictionComposition.{wR, wS, wT, max u v} q b\nlean/Sheaf/AlgebraicGeometry/SpaceRelativeFlatClosedKernelBaseChange.lean:47:def relativeClosedKernelSmallStructureMap {B : Scheme.{u}} {X Y : AlgebraicSpace B}\nlean/Sheaf/AlgebraicGeometry/SpaceRelativeFlatClosedKernelBaseChange.lean:61:def relativeClosedKernelDirectImageComparison\nlean/Sheaf/AlgebraicGeometry/SpaceRelativeFlatClosedKernelBaseChange.lean:87:        (relativeClosedKernelSmallStructureMap f) ≫\nlean/Sheaf/AlgebraicGeometry/SpaceRelativeFlatClosedKernelBaseChange.lean:88:      relativeClosedKernelDirectImageComparison f (SheafOfModules.unit X.smallStructureRings))\nlean/Sheaf/AlgebraicGeometry/SpaceRelativeFlatClosedKernelBaseChange.lean:149:        e0.hom = relativeClosedKernelDirectImageComparison i0\nlean/Sheaf/AlgebraicGeometry/SpaceRelativeFlatClosedKernelBaseChange.lean:151:        ei.hom = relativeClosedKernelDirectImageComparison i\nlean/Sheaf/AlgebraicGeometry/CondensedWContractibleProjectiveCalculus.lean:98:    ConstantScalarRealization.moduleDerivedAdjunction σ\nlean/Sheaf/AlgebraicGeometry/PicardModuleCechExternalPairing.lean:324:      picardExternalCech_moduleRepresentatives f g F G U V p q h hh\nlean/Sheaf/AlgebraicGeometry/PicardExternalCechModuleRepresentatives.lean:204:theorem picardExternalCech_moduleRepresentatives\n",
+   "date": "2026-10-24",
+   "verdict": "Only the existing theorem records own the requested data helpers; no separate definition node. Existing declarations are reused, with no new Lean implementation."
+  },
+  {
+   "tool": "grep",
+   "query": "rg -l moduleDerivedAdjunction|moduleRepresentative|moduleDerivedRestrictionComposition|relativeClosedKernelSmallStructureMap|relativeClosedKernelDirectImageComparison dag/nodes",
+   "results": "dag/nodes/sec-abelian-varieties/lem-sc-picard-external-cech-module-representatives.json\ndag/nodes/sec-abelian-varieties/lem-sc-picard-module-cech-external-pairing.json\ndag/nodes/sec-six-functors-basics/lem-sfb-constant-realization-derived-scalar-extension.json\ndag/nodes/sec-six-functors-basics/lem-sfb-dg-bimodule-derived-adjunction.json\ndag/nodes/sec-six-functors-basics/def-sfb-dg-bimodule-models.json\ndag/nodes/sec-six-functors-basics/lem-sfb-space-relative-flat-closed-kernel-base-change.json\n",
+   "date": "2026-10-24",
+   "verdict": "Only the existing theorem records own the requested data helpers; no separate definition node. Existing declarations are reused, with no new Lean implementation."
+  },
+  {
+   "tool": "blueprint_refs",
+   "query": "python3 tools/blueprint_refs.py search moduleDerivedAdjunction",
+   "results": "0 blueprint nodes match 'moduleDerivedAdjunction'\n",
+   "date": "2026-10-24",
+   "verdict": "Only the existing theorem records own the requested data helpers; no separate definition node. Existing declarations are reused, with no new Lean implementation."
+  },
+  {
+   "tool": "blueprint_refs",
+   "query": "python3 tools/blueprint_refs.py search relativeClosedKernelSmallStructureMap",
+   "results": "0 blueprint nodes match 'relativeClosedKernelSmallStructureMap'\n",
+   "date": "2026-10-24",
+   "verdict": "Only the existing theorem records own the requested data helpers; no separate definition node. Existing declarations are reused, with no new Lean implementation."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-flat-space-derived-external-cup",
+  "date": "2026-10-24",
+  "group": "Q18"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Scheme representability of the stable abelian-level normalization. Supporting input: freeness at normalized boundary branches. Comparison of the full cohomology frame in the item with Deligne 3.3--3.5 Picard torsion frames; relative Picard existence for the pulled-back stable family. Supporting input for the present split: A relatively ample line module on the stable-curve multidegree-zero Picard space. Supporting input: Canonical rigidified ample line module on smooth relative Jacobians. Prerequisite for the diagonal construction: Relative dual abelian spaces and normalized Poincare identities. Auxiliary for this split: Infinitesimal lifting of algebraically trivial rigidified line modules. Supporting input: Injectivity of the reduced coproduct in degree-two coherent cohomology. Supporting input: the relative exterior coherent-cohomology theorem, before the reduced-coproduct calculation; not a Picard infinitesimal-lifting assertion. Auxiliary: Derived coherent Kunneth before local freeness is known; gives the bialgebra object from the group law without assuming the conclusion. Canonical-map definitions before derived external cup: normalization by sections, adjunctions and K-flat representatives. Existing canonical helper data for the external-cup maps: Small-model regular-function structure map and degree-zero derived direct-image comparison.",
+   "via": [
+    "lem-sfb-flat-space-derived-external-cup",
+    "lem-sfb-abelian-coherent-exterior-base-change",
+    "lem-sfb-abelian-h2-reduced-coproduct-injective",
+    "lem-sfb-abelian-picard-infinitesimal-lift",
+    "lem-sfb-abelian-space-poincare-calculus",
+    "lem-sfb-smooth-jacobian-canonical-line",
+    "lem-sfb-stable-picard-theta-ampleness",
+    "lem-sfb-stable-relative-picard-kummer",
+    "lem-sfb-stable-level-versal-branch-freeness",
+    "lem-sfb-stable-abelian-level-normalization",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SpaceRelativeFlatClosedKernelBaseChange",
+  "declaration": "AlgebraicGeometry.AlgebraicSpace.relativeClosedKernelSmallStructureMap",
+  "declarations": [
+   "AlgebraicGeometry.AlgebraicSpace.relativeClosedKernelSmallStructureMap",
+   "AlgebraicGeometry.AlgebraicSpace.relativeClosedKernelDirectImageComparison"
+  ],
+  "statement": "def relativeClosedKernelSmallStructureMap {B : Scheme.{u}} {X Y : AlgebraicSpace B}\n    (f : X ⟶ Y) :\n    SheafOfModules.unit Y.smallStructureRings ⟶\n      (smallModuleDirectImage f).obj (SheafOfModules.unit X.smallStructureRings)",
+  "branch": "newtargets-dag",
+  "by": "Q18",
+  "date": "2026-10-24",
+  "existing": true,
+  "note": "Returned-delivery H2 repair: records only existing canonical data helpers, not the theorem in the same module; the implementation is reused verbatim without any new declaration or assumption."
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-8fc62bb73",
+  "group": "Q18",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-8fc62bb73",
+  "group": "Q18",
+  "result": "pass",
+  "note": "Re-delivery after RETURN 68cd0e32ff83 (H2). Lean modules and item node byte-identical to 68cd (mathematics reviewed sound there; re-read theorem module clause by clause, agree). All three H2 repairs verified against the commit (read-only git show; snapshot omits the two new existing:true nodes): (1) maps node now cites def-zl-ringed-site-duality-model (owner of RingedSiteDualityModel/ringedSiteDualityUnit) instead of theorem lem-sfb-ringed-site-duality-maps; (2) new existing:true def-sfb-module-derived-scalar-comparisons on moduleDerivedAdjunction/moduleRepresentative/moduleDerivedRestrictionComposition: text matches code (ofIsRightAdjoint; transpose of localized unit then mapDerivedCategoryFactors.inv; mapDerivedCategoryCompIso+restrictScalarsComp'), verbatim signature, general universes, no other owner; (3) new existing:true def-sfb-space-small-structure-derived-comparison on relativeClosedKernelSmallStructureMap/DirectImageComparison: text matches code step by step, no extra hypotheses, landed def stmt_deps. Item stmt_deps gain only landed definition nodes (Q72, Q104, Q74, NU) plus the new maps node, allowed by brief-stage2 §5; statement text and proof_deps unchanged; lean.statement verbatim; nothing landed yet, no race, no cycle. Note, not a condition: HasDerivedCategory.{u} small-site presentation universe, disclosed; generalising to w later is recommended. No compile (no file changed)."
+ }
+}

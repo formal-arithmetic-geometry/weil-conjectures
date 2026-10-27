@@ -1,0 +1,121 @@
+{
+ "id": "lem-sfb-integral-finite-scalar-arithmetic",
+ "kind": "statement",
+ "title": "Arithmetic and condensed resolution with rank zero for the zero ring",
+ "statement": "Fix a prime ell, a finite extension E/Q_ell and O its recorded topological integer ring. For every continuous unital map a:O→A to a finite discrete commutative ring killed by an ell-power, there exist r, continuous O-linear maps phi:O^r→O^r and q:O^r→A with q surjective, phi injective, image phi=ker q and a matrix for phi. The continuous-section module of O^r is the finite biproduct of r regular condensed O-modules; if A is zero then r=0. Postcomposition by phi and q gives specified condensed arrows F,G with a zero composite, a short exact sequence and an identity-underlying identification of the quotient with restricted regular condensed A. No derived assertion is included.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-scalar-six/det-prop-scalar-six-direct-image.proof.md",
+  "place": "Finite free and finitely presented coefficient extensions and Formal properties"
+ },
+ "stmt_deps": [
+  "def-sfb-integral-finite-scalar-model-interfaces"
+ ],
+ "proof": [
+  {
+   "text": "If A is nonzero, apply the already-proved finite_integral_condensed_resolution. If A is zero, take r=0 and zero maps. All algebraic exactness and the kernel homeomorphism follow by subsingleton elimination.",
+   "uses": [
+    "lem-sfb-finite-integral-condensed-resolution"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Coordinate projections and insertions on continuous functions give a bicone. Their composites are Kronecker identities, and their finite sum is identity sectionwise. The biproduct total-identity criterion supplies its finite-free isomorphism, including rank zero.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Apply continuousSections_finiteDiscrete_shortExact to the presentation and its kernel homeomorphism. Its section formulas are the required ones; identify the quotient with the restricted regular A-module by the identity.",
+   "uses": [
+    "lem-pe-profinite-sections-finite-quotient"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-finite-integral-condensed-resolution",
+  "lem-pe-profinite-sections-finite-quotient"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-scalar-six/det-prop-scalar-six-direct-image.proof.md",
+  "place": "Finite free and finitely presented coefficient extensions and Formal properties"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Derived tensor by a two term finite free resolution commutes with right derived pushforward",
+   "results": "Mathlib rightDerived, rightDerived_map_eq, injective-resolution comparison lemmas; no normalized internal-module unbounded comparison theorem.",
+   "date": "2026-10-26",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Pretriangulated.isIso₃_of_isIso₁₂",
+   "results": "CategoryTheory.Pretriangulated.isIso₃_of_isIso₁₂ is the triangle step, but does not identify the scalar or projection arrows. LeanFinder square PID presentation search found Submodule.smithNormalFormCoeffs_ne_zero.",
+   "date": "2026-10-26",
+   "verdict": "tool lemmas only"
+  },
+  {
+   "tool": "grep",
+   "query": "continuousSectionsModule; projection.*isIso; IntegralFiniteScalar",
+   "results": "Padic.finite_integral_condensed_resolution already proves the arithmetic resolution. ProjectionMateExact gives a general exact transformation; no declaration supplies the full specified beta comparison. Blueprint searches finite free scalar, projection, finite integral and tensor comparison found no identical standalone specialization.",
+   "date": "2026-10-26",
+   "verdict": "use existing arithmetic theorem; new specialized derived interfaces needed"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.IntegralFiniteScalarPerfectModel",
+  "date": "2026-10-26",
+  "group": "R2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-prop-scalar-six-direct-image",
+   "place": "Arithmetic and condensed resolution with rank zero for the zero ring",
+   "via": [
+    "lem-sfb-integral-finite-scalar-perfect-model"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-prop-scalar-six",
+ "lean": {
+  "module": "Sheaf.Paper.IntegralFiniteTopologicalPresentation",
+  "file": "lean/Sheaf/Paper/IntegralFiniteTopologicalPresentation.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.IntegralFiniteScalar.perfectModelArithmetic_of_finite_integral",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.IntegralFiniteScalar.PerfectModelArithmetic",
+   "AlgebraicGeometry.ProEtale.IntegralFiniteScalar.perfectModelArithmetic_of_finite_integral"
+  ],
+  "statement": "theorem perfectModelArithmetic_of_finite_integral (ell : ℕ) [Fact ell.Prime] (E : Type u) [Field E] [Algebra (Padic ell) E] [FiniteDimensional (Padic ell) E] (A : Type u) [CommRing A] [Finite A] [TopologicalSpace A] [DiscreteTopology A] (a : Padic.coefficientExtensionIntegers ell E →+* A) (ha : @Continuous _ _ (Padic.coefficientExtensionIntegersTopology ell E) inferInstance a) (_hpow : ∃ n : ℕ, (ell : A) ^ n = 0) : @PerfectModelArithmetic (Padic.coefficientExtensionIntegers ell E) A inferInstance inferInstance (Padic.coefficientExtensionIntegersTopology ell E) inferInstance (by let := spectralNorm.normedField (Padic ell) E exact inferInstanceAs (IsTopologicalRing (Padic.coefficientExtensionIntegers ell E))) inferInstance a ha",
+  "existing": false,
+  "branch": "sheaf-dag",
+  "by": "R2",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-b2512",
+  "group": "R2",
+  "result": "fix",
+  "landing": "20261025T202921-L-2766219",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-b2512",
+  "group": "R2",
+  "result": "fix",
+  "landing": "20261025T202921-L-2766219",
+  "kind": "interface",
+  "note": "independent cc review: item Lean and node lem-sfb-integral-finite-scalar-perfect-model and its 4 new nodes against the clone's sheaf-dag versions: target signature unchanged, the 27 moved defs verbatim; the overwritten K8 FiniteFreeScalarProjection checked against FiniteFreeProjectionExchange:248 and lem-pur-finite-free-scalar-projection"
+ }
+}

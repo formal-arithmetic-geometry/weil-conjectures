@@ -1,0 +1,142 @@
+{
+ "id": "lem-trf-section-coordinate-chart-restriction",
+ "kind": "statement",
+ "title": "Rees chart locality commutes with the actual fibre at one",
+ "statement": "For a finite commutative coefficient ring A and a Noetherian smooth separated quasi-compact compactifiable g:V→S with closed section s and s g=1, assume the actual extended-Rees projection is compactifiable. For each centred chart c of [def-trf-section-centred-chart-data], let sourceMap and familyMap be the orientation-free maps to the standard zero-section invariants and standardFibreMap the actual standard one-fibre mate of [def-trf-section-coordinate-chart-maps]. Then i1*(familyMap) followed by standardFibreMap equals restrictedTheta of [def-trf-section-local-comparison-data] followed by sourceMap. No Tate orientation or normalized affine adjunction occurs in this assertion.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-thm-dnc/sk-thm-dnc.proof.md",
+  "place": "Local construction, standard affine model, etale Rees maps and restriction at t=1."
+ },
+ "stmt_deps": [
+  "def-pur-noetherian-section-specialization-arrows",
+  "def-trf-section-local-comparison-data",
+  "def-trf-section-centred-chart-data",
+  "def-trf-section-coordinate-chart-maps"
+ ],
+ "proof": [
+  {
+   "text": "Use base-change transitivity on c.reesBase and the one-fibre square. The Rees upper maps agree at one, and the section compositor identifies the outer map with restrictedTheta.",
+   "uses": [
+    "lem-trf-section-exceptional-fibre-coherence",
+    "lem-trf-section-rees-base-change-etale"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-thm-dnc/sk-thm-dnc.proof.md",
+    "place": "Local construction, standard affine model, etale Rees maps and restriction at t=1."
+   }
+  },
+  {
+   "text": "Apply counit-normalized etale locality/fibre compatibility to c.reesOpen and c.reesCoordinates. At one their upper maps are c.j and c.e; the standard Rees coordinate map is identity there. The proved augmentation equations identify the centres with zero. Paste the open-locality square and the inverse coordinate-locality square with the base-change square, cancel inverse locality maps, and use inverse-image compositor coherence. The resulting equality is the stated orientation-free square.",
+   "uses": [
+    "lem-trf-section-exceptional-fibre-coherence",
+    "lem-amb-etale-adjoint-locality",
+    "def-trf-section-coordinate-chart-maps"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-thm-dnc/sk-thm-dnc.proof.md",
+    "place": "Local construction, standard affine model, etale Rees maps and restriction at t=1."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-trf-section-exceptional-fibre-coherence",
+  "lem-trf-section-rees-base-change-etale",
+  "lem-amb-etale-adjoint-locality",
+  "def-trf-section-coordinate-chart-maps"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-thm-dnc/sk-thm-dnc.proof.md",
+  "place": "Local construction, standard affine model, etale Rees maps and restriction at t=1."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Counit normalized etale locality of dualizing complexes commutes with the one fibre map in deformation to the normal cone",
+   "results": "Eight general localization counit and algebraic etale locality results; none gives the actual section comparison diagram.",
+   "date": "2026-10-27",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Pullback of a counit normalized affine space orientation commutes with restriction to fibre at one of the deformation to the normal cone",
+   "results": "AffineSpace.isPullback_map and AffineSpace.map_over give geometric ingredients. No derived section orientation square.",
+   "date": "2026-10-27",
+   "verdict": "geometric ingredients only"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.homEquiv_naturality_left",
+   "results": "The named generic adjunction naturality lemma exists; it does not supply the Rees or affine orientation diagram.",
+   "date": "2026-10-27",
+   "verdict": "generic ingredient only"
+  },
+  {
+   "tool": "grep",
+   "query": "sectionMap|sectionLocality|affineSectionIso|standardAdjoint",
+   "results": "No matches in Mathlib/AlgebraicGeometry or Mathlib/CategoryTheory/Sites. Project search finds the existing standard assertion sectionCoordinateCounit_standard in its parent module, extracted unchanged to avoid an import cycle.",
+   "date": "2026-10-27",
+   "verdict": "reuse the project standard case; no Mathlib replacement"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.SectionCoordinateOrientationSquare",
+  "date": "2026-10-27",
+  "group": "E9"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Local construction, standard affine model, etale Rees maps and restriction at t=1.",
+   "via": [
+    "lem-trf-section-coordinate-orientation-square",
+    "lem-trf-section-coordinate-counit-normalization",
+    "lem-trf-finite-ring-section-deformation",
+    "lem-trf-ambient-diagonal-purity-base-change",
+    "lem-trf-nearby-duality-operation-squares",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.SectionCoordinateChartRestriction",
+  "file": "lean/Sheaf/Paper/SectionCoordinateChartRestriction.lean",
+  "declaration": "AlgebraicGeometry.Etale.sectionCoordinateChart_restriction",
+  "statement": "theorem sectionCoordinateChart_restriction (A : Type (u + 1)) [CommRing A] [Finite A]\n    {V S : Scheme.{u}} [IsNoetherian S] (d : ℕ) (g : V ⟶ S)\n    [SmoothOfRelativeDimension d g] [IsSeparated g] [QuasiCompact g]\n    [HasCompactification g] (s : S ⟶ V) [IsClosedImmersion s]\n    (hs : s ≫ g = 𝟙 S)\n    [HasCompactification (Scheme.Hom.deformationSpaceProj g s)] (c : Chart d g s hs) :\n    (upperStar (ModuleCat.{u + 1} A)\n      (AffineSpace.oneSection (ULift.{u} (Fin 1)) c.T)).leftDerivedFunctor.map\n        (SectionCoordinateChartMaps.familyMap A d g s hs c) ≫\n      SectionCoordinateChartMaps.standardFibreMap A c.T d =\n    restrictedTheta A g s hs c.b ≫ SectionCoordinateChartMaps.sourceMap A d g s hs c",
+  "branch": "sheaf-dag",
+  "by": "E9",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-bf585",
+  "group": "E9",
+  "result": "pass",
+  "landing": "20261027T021319-L-2756451",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-bf585",
+  "group": "E9",
+  "result": "pass",
+  "landing": "20261027T021319-L-2756451",
+  "kind": "interface",
+  "note": "independent cc review: item + 3 new modules + parent extraction vs clone 7dea68d and their DAG nodes; sandbox compile of 5 delivered modules + AffineDiagonalTraceRestriction (43.3 s OK) + #print axioms"
+ }
+}

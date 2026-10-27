@@ -1,0 +1,127 @@
+{
+ "id": "lem-zl-coherent-normalized-diagram-stages",
+ "kind": "statement",
+ "title": "Coherent normalized finite stages for a fixed classical realization",
+ "statement": "For every separated finite-type Y0 and supplied normalized classical realization R, there is a family P0 assigning a ZlDiagramStage over R to every finite coefficient field E in Omega, with ZlDiagramCoefficientCoherence R P0. There is no finite diagram or chosen object in this statement.",
+ "source": {
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "BS 6.8.4(1),(4), 6.8.14(2), Remark 6.8.15; parent steps 4--6 and 8"
+ },
+ "stmt_deps": [
+  "def-zl-finite-weil-diagram-data",
+  "def-zl-normalized-classical-weil-realization"
+ ],
+ "proof": [
+  {
+   "text": "Choose the normalized Family from lisse_rational_realization. For every E start with R.pullback_pinning E. Both completion maps are determined by quotient projections; both localization maps by the localization unit. The normalized integral comparison and fraction formulas identify the two sheaf realizations naturally and linearly. Transport the witness sheaf comparison along that identification, using the chosen Family realization and Along. PullNormalized fixes the ordinary comparison on integral tensors, and the same fraction rule extends it to all rational lisse maps. Preserve the finite functor, finite_pullback, stage and pinning against the supplied R.",
+   "uses": [
+    "def-zl-normalized-classical-weil-realization",
+    "lem-tw-lisse-rational-realization",
+    "lem-zl-classical-system-raw-lisse-realization",
+    "lem-per-lisse-completed-system-comparison",
+    "def-real-lisse-pullback-normalization"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The completed rational Hom bijection, the sheaf linearity square and the lisse-heart Hom bijection give full faithfulness of finite and its additive Hom formula. The raw operation map rule and finite_unit make the classical comparison natural with components eqToHom. The normalized Family field-change comparisons supply coefficient coherence.",
+   "uses": [
+    "lem-per-lisse-completed-system-comparison",
+    "lem-tw-lisse-rational-realization",
+    "def-wf-lisse-adic-automorphism-pullback"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-real-lisse-pullback-normalization",
+  "def-wf-lisse-adic-automorphism-pullback",
+  "def-zl-normalized-classical-weil-realization",
+  "lem-per-lisse-completed-system-comparison",
+  "lem-tw-lisse-rational-realization",
+  "lem-zl-classical-system-raw-lisse-realization"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "BS 6.8.4(1),(4), 6.8.14(2), Remark 6.8.15; parent steps 4--6 and 8; explicit interface refinement of the parent proof"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "normalized.*lisse.*realization|lisse.*coefficient.*coherence",
+   "results": "No hits",
+   "date": "2026-10-25",
+   "verdict": "No exact match: generic categorical or algebraic tools do not supply this normalized classical Weil interface."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Coherent normalized lisse rational realization with finite coefficient extensions and automorphism pullback",
+   "results": "CategoryTheory.PreGaloisCategory.AutGalois; Condensed.lanSheafProfinite; InfiniteGalois.toAlgEquivAux_eq_liftNormal; IntermediateField.normal_iff_forall_map_eq; CondensedMod.LocallyConstant.instFullModuleCatSheafCompHausCoherentTopologyConstantSheaf; IntermediateField.normal_iff_forall_fieldRange_eq; IntermediateField.normal_iff_forall_map_le; IntermediateField.normal_iff_forall_map_le'",
+   "date": "2026-10-25",
+   "verdict": "No exact match: generic categorical or algebraic tools do not supply this normalized classical Weil interface."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Coherent normalized lisse rational realization with finite coefficient extensions and automorphism pullback",
+   "results": "AlgebraicGeometry.Scheme.Hom.normalizationDiagramMap; AlgebraicGeometry.Scheme.Hom.normalizationDiagram; AlgebraicGeometry.Scheme.Hom.normalization; AlgebraicGeometry.Scheme.Hom.ι_fromNormalization; AlgebraicGeometry.Scheme.Hom.preservesLocalization_normalizationDiagramMap; AlgebraicGeometry.Scheme.Hom.normalization.hom_ext; AlgebraicGeometry.Scheme.Hom.toNormalization; AlgebraicGeometry.Scheme.Hom.normalizationDesc",
+   "date": "2026-10-25",
+   "verdict": "No exact match: generic categorical or algebraic tools do not supply this normalized classical Weil interface."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.ClassicalFiniteWeilDiagramRealization",
+  "date": "2026-10-25",
+  "group": "C3"
+ },
+ "chapter": "sec-deligne-laumon-general",
+ "unit": "sk-i-dl-general-real",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-zl-real-mixed-by-curves",
+   "place": "Proof paragraph 1, finite classical Weil filtration transport; BS 6.8.4(1),(4), 6.8.14(2), Remark 6.8.15; parent steps 4--6 and 8",
+   "via": [
+    "lem-zl-classical-finite-weil-diagram-realization",
+    "lem-zl-classical-weil-filtration-heart-transport"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.ClassicalWeilCoherentDiagramStages",
+  "file": "lean/Sheaf/Paper/ClassicalWeilCoherentDiagramStages.lean",
+  "declaration": "WeilConjectures.zl_coherent_normalized_diagram_stages",
+  "declarations": [
+   "WeilConjectures.zl_coherent_normalized_diagram_stages"
+  ],
+  "statement": "theorem zl_coherent_normalized_diagram_stages (R : ZlClassicalRealization D l hl Ω Y₀) : ∃ P₀ : ∀ E : Padic.FiniteCoefficientFields l Ω, ZlDiagramStage D l hl Ω Y₀ R E, ZlDiagramCoefficientCoherence D l hl Ω Y₀ R P₀",
+  "branch": "sheaf-dag",
+  "by": "C3",
+  "date": "2026-10-25"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-ee1f2",
+  "group": "C3",
+  "result": "pass",
+  "landing": "20261025T122605-L-1788533",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-ee1f2",
+  "group": "C3",
+  "result": "pass",
+  "landing": "20261025T122605-L-1788533",
+  "kind": "interface",
+  "note": "independent cc review: item module vs clone (theorem statement byte-identical, 14 defs moved verbatim to ClassicalFiniteWeilDiagramData and publicly re-exported), three new sorry step statements vs the item conclusion and the node plan, item node fields vs clone (only proof/proof_deps/proof_origin/tool_uses/lean changed), scratch --all compile + #print axioms [propext, sorryAx, Classical.choice, Quot.sound]"
+ }
+}

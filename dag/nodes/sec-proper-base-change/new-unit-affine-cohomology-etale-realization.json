@@ -1,0 +1,133 @@
+{
+ "id": "new-unit-affine-cohomology-etale-realization",
+ "kind": "statement",
+ "title": "Structural-coordinate normalization of affine etale realization",
+ "statement": "Let f:X→S be quasi-compact and separated [def-pc-scheme], and E a quasi-coherent O_S-module [def-sc-etale-qcoherent-module]. Suppose that for every affine scheme T and g:T→S there is a Γ(T,O_T)-linear equivalence e_g:H¹(X×_S T,pr_X^*O_X)≃Γ(T,g^*E), natural for the canonical cohomology pullback and section-normalized restriction [lem-weil-pbc-coherent-affine-base-change-edge-naturality]. Then H¹(Rf_*(O_X,et[0])) is isomorphic to E_et in the common additive coefficient universe [def-pbc-canonical-coherent-etale-comparison]. This isomorphism has the following structural scalar normalization on every etale U→S: for a∈Γ(U,O_U), let μ be any endomorphism of the localized actual additive structure coefficient which on every etale test object T multiplies its structural function coordinate by (T→U)^*a. If the canonical raw restricted cohomology evaluations of z,z′ differ by H¹(μ), the images of their canonical higher-direct-image classes differ by a. No properness, smoothness, curve, Noetherian, degree-zero or local-freeness assumption is made.",
+ "source": {
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tags 03P2 and 03Q8, coherent comparison and higher direct images; sheaves.tex Tags 0096 and 0097, structural pullback and coefficient naturality"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-sc-etale-qcoherent-module",
+  "lem-weil-pbc-coherent-affine-base-change-edge-naturality",
+  "def-pbc-canonical-coherent-etale-comparison",
+  "def-sbc-raw-restricted-cohomology-comparison-map",
+  "lem-sbc-abelian-higher-direct-image-class-compatibility"
+ ],
+ "proof": [
+  {
+   "text": "Transport the ordinary affine coherent comparison family, retaining linearity and restriction naturality.",
+   "uses": [
+    "new-unit-affine-comparison-transport"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply the existing affine-cohomology etale realization theorem to the unit module, using the transported comparisons. Keep its coherent-class action and linearity equations.",
+   "uses": [
+    "lem-weil-pbc-affine-cohomology-etale-module-realization"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply structural scalar normalization to this given realization. The conclusion is the required isomorphism for actual additive structural functions with its prescribed raw scalar equation.",
+   "uses": [
+    "new-unit-realization-scalar-normalization"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "new-unit-affine-comparison-transport",
+  "lem-weil-pbc-affine-cohomology-etale-module-realization",
+  "new-unit-realization-scalar-normalization"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tags 03P2 and 03Q8, coherent comparison and higher direct images; sheaves.tex Tags 0096 and 0097, structural pullback and coefficient naturality"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Compatible affine unit cohomology equivalences realize the etale higher image with structural scalar raw class normalization",
+   "results": "8 hits: nonabelian one-cocycle relations and pullback projection/cocycle identities; none supplies the normalized cohomology or scalar-class interface.",
+   "date": "2026-10-22",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"unit\", \"cohomology\", \"IsIso\"",
+   "results": "0 hits",
+   "date": "2026-10-22",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "unit.*etale.*realization|etale.*unit.*normalization",
+   "results": "0 hits",
+   "date": "2026-10-22",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Natural affine cohomology comparisons for a split structural direct image; pullback symmetry and structural scalar normalization of etale higher images",
+   "results": "8 hits: affine-cover pullback identities, affine pullback instances, presheaf pullback adjunction, affine-space pullback identities and additive module pullback. No cohomology comparison or normalized scalar-class realization theorem.",
+   "date": "2026-10-24",
+   "verdict": "No exact matching statement; the recorded structural and cohomological interfaces are supplied by project declarations."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.SmoothCurveEtaleStructureDirectImages",
+  "date": "2026-10-24",
+  "group": "U1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-smooth-curve-etale-structure-direct-images",
+   "place": "Unit coefficient transport and scalar normalization, separately",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.UnitAffineCohomologyEtaleRealization",
+  "file": "lean/Sheaf/AlgebraicGeometry/UnitAffineCohomologyEtaleRealization.lean",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.exists_unitAffineCohomologyEtaleRealization",
+  "statement": "theorem exists_unitAffineCohomologyEtaleRealization {X S : Scheme.{u}} (f : X ⟶ S)\n    [QuasiCompact f] [IsSeparated f] (E : S.Modules) [E.IsQuasicoherent]\n    (e : ∀ (T : Scheme.{u}) (g : T ⟶ S) (_ : IsAffine T),\n      coherentEdgeH f (SheafOfModules.unit X.ringCatSheaf) g ≃ₗ[Γ(T, ⊤)]\n        (RingedSpace.globalSectionsFunctor T.toRingedSpace).obj\n          ((tensorPullback g).obj E))\n    (e_natural : ∀ (T T' : Scheme.{u}) (g : T ⟶ S) (h : T' ⟶ T)\n      (hT : IsAffine T) (hT' : IsAffine T')\n      (x : coherentEdgeH f (SheafOfModules.unit X.ringCatSheaf) g),\n      e T' (h ≫ g) hT' (coherentEdgePullback f\n        (SheafOfModules.unit X.ringCatSheaf) g h x) =\n      coherentEdgeRho g h E (e T g hT x)) :\n    ∃ Φ : unitRealizationImage f ≅\n          liftedCoherentEtaleSheaf E,\n      UnitRealizationScalar f E Φ",
+  "branch": "sheaf-dag",
+  "by": "U1",
+  "date": "2026-10-22",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.Modules.exists_unitAffineCohomologyEtaleRealization"
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U1",
+  "result": "pass",
+  "landing": "20261024T020641-L-2636577",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U1",
+  "result": "pass",
+  "landing": "20261024T020641-L-2636577",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

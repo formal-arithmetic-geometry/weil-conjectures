@@ -1,0 +1,368 @@
+{
+ "id": "lem-sfb-finite-ring-relative-scalar-comparison",
+ "kind": "statement",
+ "title": "Finite-ring scalar direct-image comparison using relative cohomological dimension",
+ "statement": "Fix a field $k$ of characteristic $p>0$ and a prime $\\ell\\ne p$. Let $X,Y$ be separated finite-type $k$-schemes and $f:X\\to Y$ a $k$-morphism [sk-def-sfb-dc-setting]. Let $a:A\\to B$ be a unital homomorphism of finite commutative rings killed by powers of $\\ell$, with their discrete topologies [sk-def-sfb-condensed-ring]. On the small etale and pro-etale sites use ordinary uncompleted derived categories of constant-ring module sheaves [def-weil-pbc-derived-categories, def-weil-pbc-proetale-site, def-weil-sheaf-of-modules-category]. Let $K\\in D^b_{\\mathrm{ctf}}(X_{\\mathrm{proet}},A)$, where pro-etale constructibility is as in [def-weil-proetale-constructible-sheaf], finite Tor amplitude is as in [sk-def-sfb-constructible], and etale constructibility is as in [def-weil-pbc-etale-constructible-sheaf]. For $Z=X,Y$ and $t=\\mathrm{et},\\mathrm{proet}$ put $T_Z^t=B_Z\\otimes^L_{A_Z}-$ [lem-pur-derived-change-of-rings]. Let $\\nu_Z:Z_{\\mathrm{proet}}\\to Z_{\\mathrm{et}}$ be the comparison morphism [def-weil-pbc-site-comparison-morphism]. There exists $J\\in D^b_{\\mathrm{ctf}}(X_{\\mathrm{et}},A)$ with $\\nu_X^*J\\cong K$; $J_B=T_X^{\\mathrm{et}}J$ and $Q=T_Y^{\\mathrm{et}}Rf_{*,A}^{\\mathrm{et}}J$ are bounded below. Define $\\gamma_L^t:T_Y^tRf_{*,A}^tL\\to Rf_{*,B}^tT_X^tL$ as the adjunct of\n$$f_B^*T_Y^tRf_{*,A}^tL\\xrightarrow{\\sim}T_X^tf_A^*Rf_{*,A}^tL\\xrightarrow{T_X^t(\\varepsilon^A_L)}T_X^tL,$$\nusing the canonical pullback/tensor comparison and module adjunctions [lem-weil-pbc-ringed-topoi-derived-tensor-pullback, def-weil-pbc-proetale-operations, def-kun-projection-formula-map]. Both $\\gamma_J^{\\mathrm{et}}$ and $\\gamma_K^{\\mathrm{proet}}$ are isomorphisms in the $B$-module derived categories. After restricting $\\gamma_J^{\\mathrm{et}}$ to $A$, using the canonical restriction/direct-image comparison [def-kun-scalar-restriction-comparison-maps] and the coefficient pullback identification [def-pur-scalar-pullback-representative-data], it is the specified relative projection map\n$$Rf_{*,A}^{\\mathrm{et}}J\\otimes_A^LB_Y\\longrightarrow Rf_{*,A}^{\\mathrm{et}}(J\\otimes_A^LB_X).$$\nUnder the canonical tensor comparisons $\\delta_Z:T_Z^{\\mathrm{proet}}\\nu_Z^*\\cong\\nu_Z^*T_Z^{\\mathrm{et}}$ and direct-image comparisons $\\beta^R:\\nu_Y^*Rf_{*,R}^{\\mathrm{et}}\\cong Rf_{*,R}^{\\mathrm{proet}}\\nu_X^*$, $R=A,B$, of [lem-sfb-etale-proetale-scalar-mate], the actual maps satisfy\n$$Rf_{*,B}^{\\mathrm{proet}}(\\delta_{X,J})\\circ\\gamma_{\\nu_X^*J}^{\\mathrm{proet}}=\\beta^B_{J_B}\\circ\\nu_Y^*(\\gamma_J^{\\mathrm{et}})\\circ\\delta_{Y,Rf_{*,A}^{\\mathrm{et}}J}\\circ T_Y^{\\mathrm{proet}}((\\beta^A_J)^{-1}).$$\nThere is no assumption that $a$ is flat, that $B$ has finite projective dimension over $A$, or that $k$ has finite absolute etale cohomological dimension.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-scalar-six/det-prop-scalar-six-direct-image.proof.md",
+  "place": "Re-split of returned proof steps 5, 6; corresponding current-blueprint paragraphs"
+ },
+ "stmt_deps": [
+  "sk-def-sfb-dc-setting",
+  "sk-def-sfb-condensed-ring",
+  "sk-def-sfb-constructible",
+  "lem-pur-derived-change-of-rings",
+  "def-weil-pbc-site-comparison-morphism",
+  "lem-sfb-etale-proetale-scalar-mate",
+  "def-weil-pbc-derived-categories",
+  "def-weil-pbc-proetale-site",
+  "def-weil-sheaf-of-modules-category",
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+  "def-weil-pbc-proetale-operations",
+  "def-kun-projection-formula-map",
+  "def-kun-scalar-restriction-comparison-maps",
+  "def-pur-scalar-pullback-representative-data",
+  "def-weil-pbc-etale-constructible-sheaf",
+  "def-weil-proetale-constructible-sheaf"
+ ],
+ "proof": [
+  {
+   "text": "On each constructible stratum of each cohomology sheaf of K, finite_models_of_fixed_lisse turns slice local constancy and finite geometric stalks into finite constant models. The fixed-module constructible-origin theorem descends each cohomology sheaf to the etale site. Bounded constructible derived descent then supplies an etale complex J, its bounds and an isomorphism nu*J to K. Convert etale constructibility with the existing finite-coefficient predicate comparison.",
+   "uses": [
+    "lem-sf-proetale-lisse-finite-models",
+    "lem-weil-pbc-fixed-module-constructible-origin",
+    "lem-weil-pbc-fixed-module-bounded-constructible-origin",
+    "lem-weil-pbc-constructible-etale-module-sheaf-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-scalar-six/det-prop-scalar-six-direct-image.proof.md",
+    "place": "Finite rings paragraph; fixed-module descent, relative finite-constant projection and canonical mate transport"
+   }
+  },
+  {
+   "text": "Transport a Tor interval for K through the origin isomorphism. The existing fixed-module torAmplitudeIn_mapDerivedCategory_iff reflects it to J. The existing scalarExtension_lowerBound helper computes restricted scalar extension as tensor with B and uses faithful exact restriction to deduce that J_B has the lower bound of this Tor interval.",
+   "uses": [
+    "lem-exc-comparison-tor-interval",
+    "lem-coef-finite-direct-image"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-scalar-six/det-prop-scalar-six-direct-image.proof.md",
+    "place": "Finite rings paragraph; fixed-module descent, relative finite-constant projection and canonical mate transport"
+   }
+  },
+  {
+   "text": "A finite ring is Noetherian and additively torsion. B, as an A-module via the given ring map, is finite and finitely presented. Apply the existing module-valued hasFiniteCohomologicalDimensionMorphism implementation of the relative 0F10 theorem to the two structure morphisms and Over.w f. Take the natural part of its integer bound. The proved finiteConstantProjectionComponent_isIso makes the projection at constant B invertible. The canonical constant-sheaf/scalar-restriction isomorphism identifies this coefficient with scalarCoefficient a Y; naturality transfers invertibility to this very projection component.",
+   "uses": [
+    "def-weil-pbc-noetherian-ring",
+    "def-sc-finitely-presented-module",
+    "lem-kun-0f10",
+    "lem-sf-projection-finite-constant",
+    "lem-coef-finite-direct-image"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-scalar-six/det-prop-scalar-six-direct-image.proof.md",
+    "place": "Finite rings paragraph; fixed-module descent, relative finite-constant projection and canonical mate transport"
+   }
+  },
+  {
+   "text": "Apply the existing proved scalarMate_isIso_of_projection helper to the lower bounds for J and J_B and the projection component. This uses the normalized mate equation, the bounded-below direct-image restriction comparison, and exact restriction reflecting isomorphisms; it assumes no absolute cohomological bound on the base field. To obtain the separate lower-bound assertion for Q, compose the scalarTensorIso, this invertible projection component and the canonical coefficient-pullback and tensor identifications. This identifies the restriction of Q with Rf_* of the restriction of J_B. Exact restriction and the left t-exactness of Rf_* give its lower bound, and faithful exact restriction reflects that bound. Apply scalarMate_restrict_eq_projection with these bounded-below witnesses to obtain the required equality of morphisms.",
+   "uses": [
+    "lem-coef-finite-direct-image",
+    "lem-pur-etale-scalar-mate-projection",
+    "lem-sbc-canonical-restrict-scalars-functor-comparisons",
+    "def-pc-sheaf-restrict-scalars",
+    "def-weil-pbc-direct-image"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-scalar-six/det-prop-scalar-six-direct-image.proof.md",
+    "place": "Finite rings paragraph; fixed-module descent, relative finite-constant projection and canonical mate transport"
+   }
+  },
+  {
+   "text": "Since f followed by Y to Spec k equals the separated quasi-compact structure morphism of X, cancellation gives that f is separated and quasi-compact, hence quasi-separated. Apply etaleProEtale_scalar_mate to J and J_B. Take eA to be directImageComparisonAmbientIso; its hom is by construction the published ambient comparison. The right side of the transport equality is invertible, since the etale scalar mate, both beta comparisons at the bounded-below inputs, and both delta comparisons are invertible. Cancel the image of delta_X to show the pro-etale scalar mate at nu*J invertible. Naturality of that natural transformation transports invertibility along nu*J isomorphic to K. Return the same transport equality, without changing any normalization.",
+   "uses": [
+    "lemma-nagata-finite-type-to-separated-target",
+    "lem-weil-pbc-separated-cancellation",
+    "def-weil-quasi-separated-morphism",
+    "lem-sfb-etale-proetale-scalar-mate",
+    "sk-thm-pe-direct-image-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-scalar-six/det-prop-scalar-six-direct-image.proof.md",
+    "place": "Finite rings paragraph; fixed-module descent, relative finite-constant projection and canonical mate transport"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sf-proetale-lisse-finite-models",
+  "lem-weil-pbc-fixed-module-constructible-origin",
+  "lem-weil-pbc-fixed-module-bounded-constructible-origin",
+  "lem-weil-pbc-constructible-etale-module-sheaf-comparison",
+  "lem-exc-comparison-tor-interval",
+  "lem-coef-finite-direct-image",
+  "def-weil-pbc-noetherian-ring",
+  "def-sc-finitely-presented-module",
+  "lem-kun-0f10",
+  "lem-sf-projection-finite-constant",
+  "lem-pur-etale-scalar-mate-projection",
+  "lem-sbc-canonical-restrict-scalars-functor-comparisons",
+  "def-pc-sheaf-restrict-scalars",
+  "def-weil-pbc-direct-image",
+  "lemma-nagata-finite-type-to-separated-target",
+  "lem-weil-pbc-separated-cancellation",
+  "def-weil-quasi-separated-morphism",
+  "lem-sfb-etale-proetale-scalar-mate",
+  "sk-thm-pe-direct-image-comparison"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-scalar-six/det-prop-scalar-six-direct-image.proof.md",
+  "place": "Finite rings paragraph; fixed-module descent, relative finite-constant projection and canonical mate transport; K9 assembles existing fixed-module descent, Tor reflection and proved projection/scalar helpers."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Extension of scalars along a map of finite rings commutes with derived direct image of finite Tor amplitude etale and proetale complexes over an arbitrary field",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"KaehlerDifferential.isBaseChange_of_formallyEtale\", \"module\": \"Mathlib/RingTheory/Etale/Kaehler\", \"type\": \"∀ (R : Type u_1) (S : Type u_2) (T : Type u_3) [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : CommRing T]\\n  [inst_3 : Algebra R S] [inst_4 : Algebra R T] [inst_5 : Algebra S T] [inst_6 : IsScalarTower R S T]\\n  [Algebra.FormallyEtale S T], IsBaseChange T (KaehlerDifferential.map R R S T)\", \"doc\": \"If $ S $ is a formally étale $ R $-algebra and $ T $ is an $ S $-algebra, then the module of Kähler differentials $ \\\\Omega_{T/S} $ is a base change of $ \\\\Omega_{S/R} $ via the algebra homomorphism $ S\"}\n  {\"name\": \"Algebra.FormallyEtale.of_restrictScalars\", \"module\": \"Mathlib/RingTheory/Etale/Basic\", \"type\": \"∀ {R : Type u} {A : Type v} {B : Type u_1} [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A]\\n  [inst_3 : CommRing B] [inst_4 : Algebra R B] [inst_5 : Algebra A B] [IsScalarTower R A B]\\n  [Algebra.FormallyUnramified R A] [Algebra.FormallyEtale R B], Algebra.FormallyEtale A B\", \"doc\": \"If $ A $ is a formally unramified $ R $-algebra and $ B $ is a formally étale $ R $-algebra, then $ B $ is a formally étale $ A $-algebra.\"}\n  {\"name\": \"Algebra.FormallyEtale.comp\", \"module\": \"Mathlib/RingTheory/Etale/Basic\", \"type\": \"∀ (R : Type u) (A : Type v) (B : Type u_1) [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A]\\n  [inst_3 : CommRing B] [inst_4 : Algebra R B] [inst_5 : Algebra A B] [IsScalarTower R A B] [Algebra.FormallyEtale R A]\\n  [Algebra.FormallyEtale A B], Algebra.FormallyEtale R B\", \"doc\": \"If $ A $ is a formally étale algebra over a commutative ring $ R $, and $ B $ is a formally étale algebra over $ A $, then $ B $ is a formally étale algebra over $ R $.\"}\n  {\"name\": \"Algebra.FormallyEtale.Algebra.FormallyEtale.of_restrictScalars\", \"module\": \"Mathlib/RingTheory/Etale/Basic\", \"type\": \"∀ {R : Type u} {A : Type v} {B : Type u_1} [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A]\\n  [inst_3 : CommRing B] [inst_4 : Algebra R B] [inst_5 : Algebra A B] [IsScalarTower R A B]\\n  [Algebra.FormallyUnramified R A] [Algebra.FormallyEtale R B], Algebra.FormallyEtale A B\", \"doc\": \"Let $ R $, $ A $, and $ B $ be commutative rings with $ A $ and $ B $ as $ R $-algebras, and $ B $ as an $ A $-algebra satisfying the scalar tower condition $ R \\to A \\to B $. If $ A $ is formally unram\"}\n  {\"name\": \"Algebra.Etale.comp\", \"module\": \"Mathlib/RingTheory/Etale/Basic\", \"type\": \"∀ (R : Type u) (A : Type v) (B : Type u_1) [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A]\\n  [inst_3 : CommRing B] [inst_4 : Algebra R B] [inst_5 : Algebra A B] [IsScalarTower R A B] [Algebra.Etale R A]\\n  [Algebra.Etale A B], Algebra.Etale R B\", \"doc\": \"Let $ R $, $ A $, and $ B $ be commutative rings. If $ R \\to A $ and $ A \\to B $ are étale algebras and the scalar actions satisfy the tower condition $ R \\to A \\to B $, then the composite algebra $ R \\to \"}\n  {\"name\": \"RingHom.Etale.isStableUnderBaseChange\", \"module\": \"Mathlib/RingTheory/RingHom/Etale\", \"type\": \"RingHom.IsStableUnderBaseChange fun {R S} [CommRing R] [CommRing S] => RingHom.Etale\", \"doc\": \"If a ring homomorphism $ f : R \\\\to S $ is étale, then for any $ R $-algebra $ R' $, the base change homomorphism $ R' \\\\to S \\\\otimes_R R' $ is also étale. This means that étale morphisms preserve their\"}\n  {\"name\": \"Algebra.IsEtaleAt.comp\", \"module\": \"Mathlib/RingTheory/Etale/Locus\", \"type\": \"∀ {R : Type u_1} {A : Type u_2} {B : Type u_3} [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : CommRing B]\\n  [inst_3 : Algebra R A] [inst_4 : Algebra A B] [inst_5 : Algebra R B] [IsScalarTower R A B] (p : Ideal A) (P : Ideal B)\\n  [P.LiesOver p] [inst_8 : p.IsPrime] [inst_9 : P.IsPrime] [Algebra.\", \"doc\": \"If $ A $ is étale over $ R $ at a prime ideal $ \\\\mathfrak{p} $, and $ B $ is étale over $ A $ at a prime ideal $ \\\\mathfrak{P} $ lying over $ \\\\mathfrak{p} $, then $ B $ is étale over $ R $ at $ \\\\mathfr\"}\n  {\"name\": \"Algebra.Etale.baseChange\", \"module\": \"Mathlib/RingTheory/Etale/Basic\", \"type\": \"∀ (R : Type u) (A : Type v) (B : Type u_1) [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A]\\n  [inst_3 : CommRing B] [inst_4 : Algebra R B] [Algebra.Etale R A], Algebra.Etale B (TensorProduct R B A)\", \"doc\": \"If $ A $ is an étale algebra over a commutative ring $ R $, and $ B $ is a commutative $ R $-algebra, then the tensor product $ B \\\\otimes_R A $ is an étale algebra over $ B $.\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the returned declarations do not state this canonical derived sheaf comparison or its full model/coherence assertions; source and types checked, including the second semantic phrasing"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Relative finite torsion cohomological dimension proves the nonflat finite coefficient change projection formula",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"Rep.isZero_Tor_succ_of_projective\", \"module\": \"Mathlib/RepresentationTheory/Homological/GroupHomology/Basic\", \"type\": \"∀ {k G : Type u} [inst : CommRing k] [inst_1 : Group G] (X Y : Rep k G) [CategoryTheory.Projective Y] (n : ℕ),\\n  CategoryTheory.Limits.IsZero (((Rep.Tor k G (n + 1)).obj X).obj Y)\", \"doc\": \"For any representations $X$ and $Y$ of a group $G$ over a commutative ring $k$, if $Y$ is a projective object in the category $\\\\text{Rep}(k, G)$, then the $(n+1)$-th Tor functor $\\\\text{Tor}_{n+1}^{kG}\"}\n  {\"name\": \"Rep.torIso\", \"module\": \"Mathlib/RepresentationTheory/Homological/GroupHomology/Basic\", \"type\": \"{k G : Type u} →\\n  [inst : CommRing k] →\\n    [inst_1 : Group G] →\\n      (A : Rep k G) →\\n        {B : Rep k G} →\\n          (P : CategoryTheory.ProjectiveResolution B) →\\n            (n : ℕ) →\\n              ((Rep.Tor k G n).obj A).obj B ≅\\n                HomologicalComplex.homology (HomologicalComplex.\", \"doc\": \"For a commutative ring $ k $ and group $ G $, given representations $ A $ and $ B $, and a projective resolution $ P $ of $ B $, the $ n $-th Tor functor $ \\\\text{Tor}_n(A, B) $ is isomorphic to the $ \"}\n  {\"name\": \"Algebra.Extension.tensorH1Cotangent\", \"module\": \"Mathlib/RingTheory/Etale/Kaehler\", \"type\": \"{R : Type u_1} →\\n  {S : Type u_2} →\\n    {T : Type u_3} →\\n      [inst : CommRing R] →\\n        [inst_1 : CommRing S] →\\n          [inst_2 : CommRing T] →\\n            [inst_3 : Algebra R S] →\\n              [inst_4 : Algebra R T] →\\n                [inst_5 : Algebra S T] →\\n                  [IsScalarTower\", \"doc\": \"Given commutative rings $ R, S, T $ with compatible algebra structures and an algebra homomorphism $ f: P \\\\to Q $, if $ f $ induces a formally étale ring homomorphism and the kernel map $ f.\\\\text{mapK\"}\n  {\"name\": \"CategoryTheory.isZero_Tor'_succ_of_projective\", \"module\": \"Mathlib/CategoryTheory/Monoidal/Tor\", \"type\": \"∀ (C : Type u_1) [inst : CategoryTheory.Category.{v_1, u_1} C] [inst_1 : CategoryTheory.MonoidalCategory C]\\n  [inst_2 : CategoryTheory.Abelian C] [inst_3 : CategoryTheory.MonoidalPreadditive C]\\n  [inst_4 : CategoryTheory.HasProjectiveResolutions C] (X Y : C) [CategoryTheory.Projective X] (n : ℕ),\\n  \", \"doc\": \"For any projective object $X$ in a monoidal abelian category $\\\\mathcal{C}$ with enough projective objects, and for any object $Y$ in $\\\\mathcal{C}$, the $(n+1)$-th Tor functor $\\\\mathrm{Tor}_{n+1}(X, Y)\"}\n  {\"name\": \"CategoryTheory.isZero_Tor_succ_of_projective\", \"module\": \"Mathlib/CategoryTheory/Monoidal/Tor\", \"type\": \"∀ (C : Type u_1) [inst : CategoryTheory.Category.{v_1, u_1} C] [inst_1 : CategoryTheory.MonoidalCategory C]\\n  [inst_2 : CategoryTheory.Abelian C] [inst_3 : CategoryTheory.MonoidalPreadditive C]\\n  [inst_4 : CategoryTheory.HasProjectiveResolutions C] (X Y : C) [CategoryTheory.Projective Y] (n : ℕ),\\n  \", \"doc\": \"In a monoidal abelian category with enough projectives, for any object $X$ and projective object $Y$, the $(n+1)$-th left-derived tensor product functor $\\\\mathrm{Tor}_{n+1}(X, Y)$ is zero.\"}\n  {\"name\": \"Rep.standardResolution.extIso\", \"module\": \"Mathlib/RepresentationTheory/Homological/Resolution\", \"type\": \"(k G : Type u) →\\n  [inst : CommRing k] →\\n    [inst_1 : Group G] →\\n      (V : Rep k G) →\\n        (n : ℕ) →\\n          ((Ext k (Rep k G) n).obj (Opposite.op (Rep.trivial k G k))).obj V ≅\\n            HomologicalComplex.homology ((Rep.standardComplex k G).linearYonedaObj k V) n\", \"doc\": \"For a commutative ring $ k $, group $ G $, representation $ V $ in $ \\\\text{Rep}(k, G) $, and natural number $ n $, there is an isomorphism between the $ n $-th Ext group $ \\\\text{Ext}^n(\\\\text{trivial }\"}\n  {\"name\": \"Module.Flat.of_forall_exists_factorization\", \"module\": \"Mathlib/RingTheory/Flat/EquationalCriterion\", \"type\": \"∀ {R : Type u_1} {M : Type u_2} [inst : CommRing R] [inst_1 : AddCommGroup M] [inst_2 : Module R M],\\n  (∀ {l : ℕ} {f : Fin l →₀ R} {x : (Fin l →₀ R) →ₗ[R] M}, x f = 0 → ∃ k a y, x = y ∘ₗ a ∧ a f = 0) → Module.Flat R M\", \"doc\": \"A module $ M $ over a commutative semiring $ R $ is flat if and only if for every finite list $ f $ of elements in the free $ R $-module $ \\\\text{Fin}(l) \\\\to_0 R $, and for every $ R $-linear map $ x: \"}\n  {\"name\": \"ModuleCat.preservesFiniteLimits_extendScalars_of_flat\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Descent\", \"type\": \"∀ {A B : Type u} [inst : CommRing A] [inst_1 : CommRing B] {f : A →+* B},\\n  f.Flat → CategoryTheory.Limits.PreservesFiniteLimits (ModuleCat.extendScalars f)\", \"doc\": \"Given a flat ring homomorphism $ f : R \\\\to S $ between commutative rings, the scalar extension functor $ \\\\text{Mod}_R \\\\to \\\\text{Mod}_S $ induced by $ f $ preserves finite limits in the category of mod\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the returned declarations do not state this canonical derived sheaf comparison or its full model/coherence assertions; source and types checked, including the second semantic phrasing"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Sheaf, \"tensor\"",
+   "results": "[loogle] OK 1 hit(s)\n  {\"name\": \"CategoryTheory.Sheaf.tensorProd_isSheaf\", \"module\": \"Mathlib.CategoryTheory.Sites.CartesianMonoidal\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] {A : Type u₂} [CategoryTheory.Category.{v₂, u₂} A] (J : CategoryTheory.GrothendieckTopology C) [CategoryTheory.CartesianMonoidalCategory A] (X Y : CategoryTheory.Sheaf J A) : CategoryTheory.Presheaf.IsSheaf J (CategoryTheory.MonoidalCategoryStruct.\", \"doc\": \"\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the returned declarations do not state this canonical derived sheaf comparison or its full model/coherence assertions; source and types checked, including the second semantic phrasing"
+  },
+  {
+   "tool": "grep",
+   "query": "projectionFormula|projection_formula|[iI]sIso.*[eE]xtendScalars|[eE]xtendScalars.*[iI]sIso",
+   "results": "[grep] OK 0 hit(s)",
+   "date": "2026-10-22",
+   "verdict": "no match: the returned declarations do not state this canonical derived sheaf comparison or its full model/coherence assertions; source and types checked, including the second semantic phrasing"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Nonflat finite ring coefficient comparison for constructible etale sheaves by finite relative cohomological dimension",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"RingHom.Flat\", \"module\": \"Mathlib.RingTheory.RingHom.Flat\", \"type\": \"{R : Type u} {S : Type v} [CommRing R] [CommRing S] (f : R →+* S) : Prop\", \"doc\": \"Given a ring homomorphism $ f : R \\to S $ between commutative rings $ R $ and $ S $, the property that $ S $ is a flat $ R $-module under the induced algebra structure defined by $ f $. This means that\"}\n  {\"name\": \"Module.Flat.finsupp\", \"module\": \"Mathlib.RingTheory.Flat.Basic\", \"type\": \"(ι : Type v) : Flat R (ι →₀ R)\", \"doc\": \"For any index type $\\\\iota$, the module of finite support functions $\\\\iota \\\\to_0 R$ is flat over the commutative semiring $R$.\"}\n  {\"name\": \"RingHom.Flat.propertyIsLocal\", \"module\": \"Mathlib.RingTheory.RingHom.Flat\", \"type\": \": PropertyIsLocal Flat\", \"doc\": \"The property of being flat for a ring homomorphism between commutative rings is local, meaning it can be checked after localization at every prime ideal.\"}\n  {\"name\": \"Algebra.Smooth.flat\", \"module\": \"Mathlib.RingTheory.Smooth.Flat\", \"type\": \"[Smooth R A] : Module.Flat R A\", \"doc\": \"If $ A $ is a smooth $ R $-algebra, then $ A $ is a flat $ R $-module.\"}\n  {\"name\": \"RingHom.Etale\", \"module\": \"Mathlib.RingTheory.RingHom.Etale\", \"type\": \"{R S : Type*} [CommRing R] [CommRing S] (f : R →+* S) : Prop\", \"doc\": \"A ring homomorphism $ f : R \\\\to S $ between commutative rings is étale if the induced algebra structure on $ S $ over $ R $ via $ f $ satisfies the étale property, meaning $ S $ is finitely presented \"}\n  {\"name\": \"AlgebraicGeometry.Flat.instHasRingHomPropertyFlat\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Flat\", \"type\": \": HasRingHomProperty (@Flat) RingHom.Flat\", \"doc\": \"The property of being a flat morphism of schemes is characterized by the flatness of the corresponding ring homomorphism. Specifically, a morphism of schemes is flat if and only if the associated ring\"}\n  {\"name\": \"Module.isLocallyConstant_rankAtStalk\", \"module\": \"Mathlib.RingTheory.Spectrum.Prime.FreeLocus\", \"type\": \"[Module.FinitePresentation R M] [Module.Flat R M] : IsLocallyConstant (rankAtStalk (R := R) M)\", \"doc\": \"If $ M $ is a finitely presented and flat module over a commutative semiring $ R $, then the function assigning to each prime ideal $ \\\\mathfrak{p} \\\\in \\\\operatorname{Spec}(R) $ the rank of the localiza\"}\n  {\"name\": \"AlgebraicGeometry.Flat.isStableUnderBaseChange\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Flat\", \"type\": \": MorphismProperty.IsStableUnderBaseChange @Flat\", \"doc\": \"The property of being a flat morphism of schemes is stable under base change, meaning that if a morphism of schemes is flat, then any base change (pullback) of this morphism is also flat.\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the returned declarations do not state this canonical derived sheaf comparison or its full model/coherence assertions; source and types checked, including the second semantic phrasing"
+  },
+  {
+   "tool": "grep",
+   "query": "projectionFormula|projection_formula|[iI]sIso.*[eE]xtendScalars|[eE]xtendScalars.*[iI]sIso",
+   "results": "0 hits: ",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern underived site functors, cartesian sheaf tensor or ring-theoretic etaleness; none states the relative derived scalar comparison and its map equality"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived direct image commutes with finite nonflat coefficient extension for etale sheaves over an arbitrary field",
+   "results": "8 hits: CategoryTheory.Functor.sheafPushforwardCocontinuous.congr_simp, CategoryTheory.Functor.sheafPushforwardCocontinuous, SheafOfModules.pushforwardComp, CategoryTheory.Functor.sheafPullbackConstruction.instPreservesFiniteLimitsSheafSheafPullback, ModuleCat.preservesFiniteLimits_extendScalars_of_flat, AlgebraicGeometry.Scheme.Modules.instFullPushforward, RingHom.Etale.isStableUnderBaseChange, Algebra.Etale.formallyEtale",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern underived site functors, cartesian sheaf tensor or ring-theoretic etaleness; none states the relative derived scalar comparison and its map equality"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Sheaf, \"tensor\"",
+   "results": "1 hits: CategoryTheory.Sheaf.tensorProd_isSheaf",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern underived site functors, cartesian sheaf tensor or ring-theoretic etaleness; none states the relative derived scalar comparison and its map equality"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A nonflat finite coefficient homomorphism commutes with higher direct images of constructible sheaves and etale proetale comparison",
+   "results": "8 hits: SheafOfModules.pushforwardComp_hom_app_val_app, SheafOfModules.pushforwardNatTrans_comp, CategoryTheory.compatiblePreservingOfFlat, CategoryTheory.Functor.sheafPushforwardContinuousComp'_hom_app_val_app, CategoryTheory.Functor.pushforwardContinuousSheafificationCompatibility_hom_app_val, CategoryTheory.RanIsSheafOfIsCocontinuous.liftAux_map', CategoryTheory.RanIsSheafOfIsCocontinuous.liftAux_map, CategoryTheory.RanIsSheafOfIsCocontinuous.fac'",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern underived site functors, cartesian sheaf tensor or ring-theoretic etaleness; none states the relative derived scalar comparison and its map equality"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finite ring extension of scalars commutes with derived etale direct image by finite relative cohomological dimension for bounded finite Tor amplitude complexes",
+   "results": "8 hits: Algebra.Etale.comp, RingHom.Etale.isStableUnderBaseChange, Algebra.Etale.baseChange, KaehlerDifferential.isBaseChange_of_formallyEtale, Algebra.Etale.exists_subalgebra_fg, Algebra.FormallyEtale.of_restrictScalars, Algebra.FormallyEtale.instForallOfFinite, Algebra.FormallyEtale.Algebra.FormallyEtale.of_restrictScalars",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern underived site functors, cartesian sheaf tensor or ring-theoretic etaleness; none states the relative derived scalar comparison and its map equality"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "det-prop-scalar-six-direct-image",
+  "date": "2026-10-22",
+  "group": "NM"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-prop-scalar-six",
+ "blueprint": {
+  "from": {
+   "node": "det-prop-scalar-six-direct-image",
+   "place": "Finite rings A to B paragraph: classical etale descent; replace the unsupported use of absolute cohomological dimension in the two RΓ formulas by the relative finite-constant projection argument; canonical map transport in the last sentences",
+   "via": []
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-finite-ring-relative-scalar-comparison",
+  "worker": "stage1",
+  "summary": "Split into coefficient and geometric prerequisites, classical finite-Tor descent, relative torsion cohomological bound, finite-constant projection, scalar restriction and independent lower-bound argument, normalized scalar mate, and canonical pro-etale transport. Statement unchanged. Reused all ingredients; no new nodes.",
+  "blueprint": "Realizes the finite-rings paragraph of det-prop-scalar-six-direct-image.proof.md: classical descent, scalar comparison, actual-map compatibility. Replaces the false standing absolute-dimension inference by the already seeded relative argument, without changing the coefficient or geometric hypotheses.",
+  "tool_uses": [
+   {
+    "node": "lemma-nagata-finite-type-to-separated-target",
+    "why": "Generic prerequisite for the classical finite-coefficient and adjunction argument; no replacement statement is supplied by this unit."
+   },
+   {
+    "node": "lem-weil-pbc-separated-cancellation",
+    "why": "Generic prerequisite for the classical finite-coefficient and adjunction argument; no replacement statement is supplied by this unit."
+   },
+   {
+    "node": "lem-weil-pbc-finite-type-over-noetherian",
+    "why": "Generic prerequisite for the classical finite-coefficient and adjunction argument; no replacement statement is supplied by this unit."
+   },
+   {
+    "node": "det-pe-finite-tor-comparison-noetherian",
+    "why": "Generic prerequisite for the classical finite-coefficient and adjunction argument; no replacement statement is supplied by this unit."
+   },
+   {
+    "node": "lem-sp-etale-scalar-flat-model",
+    "why": "Supplies a bounded model of the actual nonflat scalar extension, not just an A-linear isomorphism."
+   },
+   {
+    "node": "lem-kun-0f10",
+    "why": "Supplies exactly the missing relative dimension bound over an arbitrary field; the unit gives only an invalid absolute-dimension inference."
+   },
+   {
+    "node": "lem-sbc-higher-direct-image-forget-comparison",
+    "why": "Transfers the torsion abelian relative bound to modules for the actual finite ring."
+   },
+   {
+    "node": "lem-sf-projection-finite-constant",
+    "why": "Generic relative scalar projection formula under all-sheaf finite dimension, used in place of the invalid absolute RΓ application."
+   },
+   {
+    "node": "lem-weil-pbc-exact-functor-complex-cohomology",
+    "why": "Exact restriction commutes with cohomology, allowing reflection of lower bounds and isomorphisms."
+   },
+   {
+    "node": "lem-pc-kflat-resolution",
+    "why": "Generic prerequisite for the classical finite-coefficient and adjunction argument; no replacement statement is supplied by this unit."
+   },
+   {
+    "node": "lem-pur-derived-change-of-rings",
+    "why": "Generic prerequisite for the classical finite-coefficient and adjunction argument; no replacement statement is supplied by this unit."
+   },
+   {
+    "node": "lem-pur-change-of-rings-tensor-comparison",
+    "why": "Generic sectionwise tensor identification needed on K-flat representatives before lower bounds are known."
+   },
+   {
+    "node": "lem-pur-etale-scalar-mate-projection",
+    "why": "Normalizes the specified B-linear counit mate to the A-linear projection map, including its lower-bound hypotheses."
+   },
+   {
+    "node": "lem-sbc-canonical-restrict-scalars-functor-comparisons",
+    "why": "Supplies the canonical bounded-below restriction/direct-image isomorphism used in that normalization."
+   },
+   {
+    "node": "sk-thm-pe-direct-image-comparison",
+    "why": "Generic prerequisite for the classical finite-coefficient and adjunction argument; no replacement statement is supplied by this unit."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lemma-nagata-finite-type-to-separated-target",
+  "lem-weil-pbc-separated-cancellation",
+  "lem-kun-0f10",
+  "lem-sf-projection-finite-constant",
+  "lem-pur-etale-scalar-mate-projection",
+  "lem-sbc-canonical-restrict-scalars-functor-comparisons",
+  "sk-thm-pe-direct-image-comparison"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q18-9cfc197a5",
+  "group": "Q18",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q18-9cfc197a5 (reviewer sub-agent of L); spot-checked: PASS: I read all nine steps against the full statements of every cited node. The item statement and stmt_deps are unchanged and there are no new nodes. Source: det-prop-scalar-six-direct-image.proof.md, finite-rings paragraph (main-20261015, identical to latest). The source's 'absolute cd bound on standing schemes' is false for k=F̄_p(x_1,x_2,...) (cd_ℓ infinite, cd(id)=0). The delivery repairs it with lem-kun-0f10(1) plus lem-sbc-higher-direct-image-forget-comparison, which give a uniform bound on R^q f_* for all A-module sheaves, and then lem-sf-projection-finite-constant (Noetherian A, finitely presented B, J in D^-). Steps checked: S3 det-pe-finite-tor-comparison-noetherian gives J with ν^*J≅K and Tor amplitude [u,v], and lem-sp-etale-scalar-flat-model gives J_B in D^+ without flatness of B over A. S6: restriction of scalars is exact and conservative and commutes with cohomology; U T C≅C⊗^L B via K-flat resolution and the natural e_M. S7 proves Q in D^+ before γ is used, so there is no circularity. S8: lem-pur-etale-scalar-mate-projection's β_J has the same definition as γ^et, all three lower-bound hypotheses are verified, and U(β)=PF_f, which gives invertibility and the restriction clause. S9: lem-sfb-etale-proetale-scalar-mate's equality is verbatim the item's; β is invertible by sk-thm-pe-direct-image-comparison (f qcqs), cancellation and naturality give γ^proet_K invertible. Minor point, not a fault: S7 cites the abelian-sheaf D^+ direct image node for the A-module version. Edge cases checked: B=0, empty X, f=id, Z/ℓ²→F_ℓ. Batch-5: lem-kun-0f10 reaches sec-trace-formula only through def-trf-schematically-dense-open, a general definition. Finite cd of finite-type morphisms is given by neither assumption leaf and is not a trace-formula or duality step here, so I accept the citation. The 15 off-unit tool_uses are accepted as generic tools; the list is in review.md."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.FiniteRingRelativeScalarComparison",
+  "declaration": "AlgebraicGeometry.ProEtale.finiteRingRelativeScalarComparison",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.finiteRingScalarDirectImageMate",
+   "AlgebraicGeometry.ProEtale.finiteRingRelativeScalarComparison"
+  ],
+  "file": "lean/Sheaf/Paper/FiniteRingRelativeScalarComparison.lean",
+  "statement": "theorem finiteRingRelativeScalarComparison (k : Type u) [Field k] (p l : ℕ) [CharP k p] (_hp : p.Prime) (_hl : l.Prime) (_hlp : l ≠ p) (X Y : Over (Spec (.of k))) [LocallyOfFiniteType X.hom] [QuasiCompact X.hom] [IsSeparated X.hom] [LocallyOfFiniteType Y.hom] [QuasiCompact Y.hom] [IsSeparated Y.hom] (f : X ⟶ Y) (A B : Type (u + 1)) [CommRing A] [CommRing B] [Finite A] [Finite B] (a : A →+* B) (_hA : ∃ n : ℕ, 0 < n ∧ (l ^ n : ℕ) • (1 : A) = 0) (_hB : ∃ n : ℕ, 0 < n ∧ (l ^ n : ℕ) • (1 : B) = 0) (K : _root_.DerivedCategory.Bounded (Sheaf (Scheme.ProEt.topology X.left) (ModuleCat.{u + 1} A))) (_hK : ∀ i : ℤ, Scheme.IsConstructibleProEtaleFixedModuleSheaf X.left A ((_root_.DerivedCategory.homologyFunctor (Sheaf (Scheme.ProEt.topology X.left) (ModuleCat.{u + 1} A)) i).obj K.obj)) (_hTor : _root_.DerivedCategory.finiteTorAmplitude (Sheaf (Scheme.ProEt.topology X.left) (ModuleCat.{u + 1} A)) K.obj) : ∃ J : _root_.DerivedCategory.Bounded (Sheaf X.left.smallEtaleTopology (ModuleCat.{u + 1} A)), (∀ i : ℤ, Scheme.IsConstructibleEtaleModuleSheaf ((_root_.DerivedCategory.homologyFunctor (Sheaf X.left.smallEtaleTopology (ModuleCat.{u + 1} A)) i).obj J.obj)) ∧ _root_.DerivedCategory.finiteTorAmplitude (Sheaf X.left.smallEtaleTopology (ModuleCat.{u + 1} A)) J.obj ∧ Nonempty ((comparisonUpperStar (ModuleCat.{u + 1} A) X.left).mapDerivedCategory.obj J.obj ≅ K.obj) ∧ (∃ n : ℤ, ((pbcFixedScalarExtension X.left.smallEtaleTopology a).obj J.obj).IsGE n) ∧ (∃ n : ℤ, ((pbcFixedScalarExtension Y.left.smallEtaleTopology a).obj (R(Etale.lowerStar (ModuleCat.{u + 1} A) f.left).obj J.obj)).IsGE n) ∧ IsIso ((mateEquiv (Etale.derivedUpperStarLowerStarAdjunction (ModuleCat.{u + 1} A) f.left) (Etale.derivedUpperStarLowerStarAdjunction (ModuleCat.{u + 1} B) f.left) (TwoSquare.mk _ _ _ _ (scalarPullbackEtaleIso a f.left).hom)).natTrans.app J.obj) ∧ IsIso ((finiteRingScalarDirectImageMate a f.left).app K.obj) ∧ ((Sheaf.derivedRestrictScalars Y.left.smallEtaleTopology a).map ((mateEquiv (Etale.derivedUpperStarLowerStarAdjunction (ModuleCat.{u + 1} A) f.left) (Etale.derivedUpperStarLowerStarAdjunction (ModuleCat.{u + 1} B) f.left) (TwoSquare.mk _ _ _ _ (scalarPullbackEtaleIso a f.left).hom)).natTrans.app J.obj) ≫ (Etale.scalarRestrictionDirectImageMap a f.left).app ((Etale.scalarExtension a X.left).obj J.obj) = (Etale.scalarTensorIso a Y.left).hom.app (R(Etale.lowerStar (ModuleCat.{u + 1} A) f.left).obj J.obj) ≫ ((Etale.rightDerivedLowerStarProjectionMap (ModuleCat.{u + 1} A) f.left).app J.obj).app (Etale.scalarCoefficient a Y.left) ≫ R(Etale.lowerStar (ModuleCat.{u + 1} A) f.left).map (((Etale.derivedTensor (ModuleCat.{u + 1} A) X.left).obj J.obj).map (Etale.scalarCoefficientPullbackIso a f.left).hom ≫ (Etale.scalarTensorIso a X.left).inv.app J.obj)) ∧ ∃ eA : (comparisonUpperStar (ModuleCat.{u + 1} A) Y.left).mapDerivedCategory.obj (R(Etale.lowerStar (ModuleCat.{u + 1} A) f.left).obj J.obj) ≅ R(lowerStar (ModuleCat.{u + 1} A) f.left).obj ((comparisonUpperStar (ModuleCat.{u + 1} A) X.left).mapDerivedCategory.obj J.obj), eA.hom = (directImageComparisonAmbient A f.left).app J.obj ∧ (finiteRingScalarDirectImageMate a f.left).app ((comparisonUpperStar (ModuleCat.{u + 1} A) X.left).mapDerivedCategory.obj J.obj) ≫ R(lowerStar (ModuleCat.{u + 1} B) f.left).map ((pbcComparisonReduction X.left a).hom.app J.obj) = (pbcFixedScalarExtension (Scheme.ProEt.topology Y.left) a).map eA.inv ≫ (pbcComparisonReduction Y.left a).hom.app (R(Etale.lowerStar (ModuleCat.{u + 1} A) f.left).obj J.obj) ≫ (comparisonUpperStar (ModuleCat.{u + 1} B) Y.left).mapDerivedCategory.map ((mateEquiv (Etale.derivedUpperStarLowerStarAdjunction (ModuleCat.{u + 1} A) f.left) (Etale.derivedUpperStarLowerStarAdjunction (ModuleCat.{u + 1} B) f.left) (TwoSquare.mk _ _ _ _ (scalarPullbackEtaleIso a f.left).hom)).natTrans.app J.obj) ≫ (directImageComparisonAmbient B f.left).app ((pbcFixedScalarExtension X.left.smallEtaleTopology a).obj J.obj)",
+  "branch": "sheaf-dag",
+  "by": "Q157",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-dd90b41e6",
+  "group": "Q157",
+  "result": "pass",
+  "note": "Re-delivery after RETURN H13 (f988), taking route 1. sk-def-sfb-constructible is left byte-identical to live; every snapshot dependency node equals side-live. _hK now uses Scheme.IsConstructibleProEtaleFixedModuleSheaf X.left A, owned by def-weil-proetale-constructible-sheaf (live, existing:true). I read its definition: 0<S.n constructible stratification, locally constant upperStar restrictions, finite geometric stalks, universes u/u+1. It matches that node and, for finite A, the item's notion; empty X is allowed. The owner is in stmt_deps and publicly imported; no DAG cycle; it is on the base. The §1(C) statement_change is citations only: old_statement and old_stmt_deps equal live; the sole citer det-prop-scalar-six-direct-image holds:true. proof and proof_deps are unchanged. The Lean diff from f988 is 2 imports plus _hK; lean.statement is verbatim the signature. The earlier clause-by-clause checks still hold (mateEquiv γ^et/γ^proet, restriction/projection equality, pinned eA transport, no flat/projdim/cd(k) binders, edge cases, docstrings, sorry only). Advisory: the generic upstream finiteTorAmplitude has no DAG owner, as accepted before. No compile (no FIX).",
+  "statement_corrected": true
+ },
+ "statement_change": {
+  "date": "2026-10-24",
+  "by": "Q157 stage 2",
+  "old_statement": "Fix a field $k$ of characteristic $p>0$ and a prime $\\ell\\ne p$. Let $X,Y$ be separated finite-type $k$-schemes and $f:X\\to Y$ a $k$-morphism [sk-def-sfb-dc-setting]. Let $a:A\\to B$ be a unital homomorphism of finite commutative rings killed by powers of $\\ell$, with their discrete topologies [sk-def-sfb-condensed-ring]. On the small etale and pro-etale sites use ordinary uncompleted derived categories of constant-ring module sheaves [def-weil-pbc-derived-categories, def-weil-pbc-proetale-site, def-weil-sheaf-of-modules-category]. Let $K\\in D^b_{\\mathrm{ctf}}(X_{\\mathrm{proet}},A)$, where constructibility and finite Tor amplitude are as in [sk-def-sfb-constructible]. For $Z=X,Y$ and $t=\\mathrm{et},\\mathrm{proet}$ put $T_Z^t=B_Z\\otimes^L_{A_Z}-$ [lem-pur-derived-change-of-rings]. Let $\\nu_Z:Z_{\\mathrm{proet}}\\to Z_{\\mathrm{et}}$ be the comparison morphism [def-weil-pbc-site-comparison-morphism]. There exists $J\\in D^b_{\\mathrm{ctf}}(X_{\\mathrm{et}},A)$ with $\\nu_X^*J\\cong K$; $J_B=T_X^{\\mathrm{et}}J$ and $Q=T_Y^{\\mathrm{et}}Rf_{*,A}^{\\mathrm{et}}J$ are bounded below. Define $\\gamma_L^t:T_Y^tRf_{*,A}^tL\\to Rf_{*,B}^tT_X^tL$ as the adjunct of\n$$f_B^*T_Y^tRf_{*,A}^tL\\xrightarrow{\\sim}T_X^tf_A^*Rf_{*,A}^tL\\xrightarrow{T_X^t(\\varepsilon^A_L)}T_X^tL,$$\nusing the canonical pullback/tensor comparison and module adjunctions [lem-weil-pbc-ringed-topoi-derived-tensor-pullback, def-weil-pbc-proetale-operations, def-kun-projection-formula-map]. Both $\\gamma_J^{\\mathrm{et}}$ and $\\gamma_K^{\\mathrm{proet}}$ are isomorphisms in the $B$-module derived categories. After restricting $\\gamma_J^{\\mathrm{et}}$ to $A$, it is the specified relative projection map\n$$Rf_{*,A}^{\\mathrm{et}}J\\otimes_A^LB_Y\\longrightarrow Rf_{*,A}^{\\mathrm{et}}(J\\otimes_A^LB_X).$$\nUnder the canonical tensor comparisons $\\delta_Z:T_Z^{\\mathrm{proet}}\\nu_Z^*\\cong\\nu_Z^*T_Z^{\\mathrm{et}}$ and direct-image comparisons $\\beta^R:\\nu_Y^*Rf_{*,R}^{\\mathrm{et}}\\cong Rf_{*,R}^{\\mathrm{proet}}\\nu_X^*$, $R=A,B$, of [lem-sfb-etale-proetale-scalar-mate], the actual maps satisfy\n$$Rf_{*,B}^{\\mathrm{proet}}(\\delta_{X,J})\\circ\\gamma_{\\nu_X^*J}^{\\mathrm{proet}}=\\beta^B_{J_B}\\circ\\nu_Y^*(\\gamma_J^{\\mathrm{et}})\\circ\\delta_{Y,Rf_{*,A}^{\\mathrm{et}}J}\\circ T_Y^{\\mathrm{proet}}((\\beta^A_J)^{-1}).$$\nThere is no assumption that $a$ is flat, that $B$ has finite projective dimension over $A$, or that $k$ has finite absolute etale cohomological dimension.",
+  "what": "H2 and H13 repairs requested by the independent reviewer: the original text omitted the definition-node citations owning etale constructibility, the canonical scalar-restriction/direct-image map, the coefficient pullback identification, and finite-coefficient pro-etale constructibility. This correction adds those citations without changing any mathematical hypothesis, construction or conclusion. The pro-etale cohomology hypothesis uses the intrinsic fixed-module predicate Scheme.IsConstructibleProEtaleFixedModuleSheaf, owned by def-weil-proetale-constructible-sheaf; the general sk-def-sfb-constructible record is preserved unchanged. The etale scalar mate is written directly as mateEquiv using the already cited scalarPullbackEtaleIso.",
+  "source": {
+   "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-scalar-six/det-prop-scalar-six-direct-image.proof.md",
+   "place": "Finite rings paragraph and the preceding canonical mate and restriction-of-scalars paragraph; explicit ownership of the normalization maps and the finite-coefficient constructibility predicate."
+  },
+  "citers": [
+   {
+    "id": "det-prop-scalar-six-direct-image",
+    "holds": true,
+    "note": "Its finite-ring direct-image case uses the same canonical B-linear counit mate for bounded constructible finite-Tor complexes. The intrinsic fixed-module constructibility predicate expresses the same finite-coefficient notion on the standing finite-type schemes; making its owner and the normalization-map owners explicit changes no hypothesis, conclusion or use."
+   }
+  ],
+  "old_stmt_deps": [
+   "sk-def-sfb-dc-setting",
+   "sk-def-sfb-condensed-ring",
+   "sk-def-sfb-constructible",
+   "lem-pur-derived-change-of-rings",
+   "def-weil-pbc-site-comparison-morphism",
+   "lem-sfb-etale-proetale-scalar-mate",
+   "def-weil-pbc-derived-categories",
+   "def-weil-pbc-proetale-site",
+   "def-weil-sheaf-of-modules-category",
+   "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+   "def-weil-pbc-proetale-operations",
+   "def-kun-projection-formula-map"
+  ]
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-381e1",
+  "group": "K9",
+  "result": "pass",
+  "landing": "20261025T202532-L-2727042",
+  "kind": "interface",
+  "note": "independent cc review: delivered FiniteRingRelativeScalarComparison.lean vs clone (signature/definition byte-identical, imports+proof only), #print axioms scratch compile, node json vs clone and vs declarations used, unit sk-prop-scalar-six realized (empty) and ProEtaleSiteComparison still used transitively"
+ }
+}

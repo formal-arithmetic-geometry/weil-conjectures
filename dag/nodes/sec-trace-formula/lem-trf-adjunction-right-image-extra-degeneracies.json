@@ -1,0 +1,234 @@
+{
+ "id": "lem-trf-adjunction-right-image-extra-degeneracies",
+ "kind": "statement",
+ "title": "Unit extra degeneracies after applying the right adjoint",
+ "statement": "Let $F:\\mathcal S\\rightleftarrows\\mathcal A:U$ be an adjunction of ordinary categories, with unit $\\eta$ and counit $\\epsilon$. Put $G=FU$ and $\\delta=F\\eta U$. Let $X_\\bullet$ be a supplied standard augmented simplicial resolution of $(G,\\epsilon,\\delta)$ in endofunctors of $\\mathcal A$, with the conventions of [def-trf-comonad-standard-resolution]. For $a\\in\\mathcal A$ set $Z_n(a)=UX_n(a)=UG^{n+1}a$ for $n\\geq0$, $Z_{-1}(a)=Ua$, and let $e:Z_\\bullet(a)\\to\\operatorname{const}(Ua)$ be the right-adjoint image of the augmentation. With $G^0=\\mathrm{id}_{\\mathcal A}$ define\n$$h_{-1}(a)=\\eta_{Ua},\\qquad h_n(a)=\\eta_{UG^{n+1}a}:Z_n(a)\\to Z_{n+1}(a)\\quad(n\\geq0).$$\nThese maps satisfy all the left extra-degeneracy equations:\n$$e_0h_{-1}=1_{Ua},\\qquad d_0h_n=1_{Z_n},\\qquad d_1h_0=h_{-1}e_0,$$\n$$d_{i+1}h_{n+1}=h_nd_i\\quad(n\\geq0,\\ 0\\leq i\\leq n+1),\\qquad s_{i+1}h_n=h_{n+1}s_i\\quad(n\\geq0,\\ 0\\leq i\\leq n).$$\nHere faces and degeneracies are those of $Z$, and compositions are written in functional order. Every displayed map and equality is natural in $a$; equivalently these are extra-degeneracy data in the functor category $\\operatorname{Fun}(\\mathcal A,\\mathcal S)$.",
+ "source": {
+  "document": "literature/stacks-project/simplicial.tex",
+  "place": "Tag 08ND, lemma-standard-simplicial-homotopy, in Situation 08N9 (situation-adjoint-functors); auxiliary extra-degeneracy argument for the standard object of Tag 08NC (lemma-standard-simplicial). Returned proof step 3: the unit at each underlying term satisfies every left extra-degeneracy equation, including augmented degree -1 and parameter naturality."
+ },
+ "stmt_deps": [
+  "def-trf-comonad-standard-resolution"
+ ],
+ "proof": [
+  {
+   "text": "Write $D_i^m=U(G^i\\epsilon G^{m-i})_a:Z_m(a)\\to Z_{m-1}(a)$ for $m\\geq1$ and $S_i^m=U(G^i\\delta G^{m-i})_a$ for $m\\geq0$. These are precisely the operators prescribed by [def-trf-comonad-standard-resolution], and $e_0=U\\epsilon_a$. The maps $h_n$ have the required types since $UF(UG^{n+1}a)=UG^{n+2}a$. We use functional composition. The adjunction data include $U\\epsilon_b\\circ\\eta_{Ub}=1_{Ub}$ and naturality $UF(q)\\circ\\eta_v=\\eta_w\\circ q$ for every $q:v\\to w$ in $\\mathcal S$; these are the triangle and natural-transformation axioms, respectively.",
+   "uses": [
+    "def-trf-comonad-standard-resolution"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/simplicial.tex",
+    "place": "Tags 08N9/08NC/08ND, situation-adjoint-functors, lemma-standard-simplicial, lemma-standard-simplicial-homotopy; equation-composition and the displayed standard face/degeneracy formulas. Explicit elementary unit-naturality calculations."
+   }
+  },
+  {
+   "text": "Apply the right triangle identity at $b=a$ to obtain $e_0h_{-1}=U\\epsilon_a\\circ\\eta_{Ua}=1_{Ua}$. For every $n\\geq0$, the prescribed zeroth face in degree $n+1$ is $D_0^{n+1}=U\\epsilon_{G^{n+1}a}$. The same triangle identity at $b=G^{n+1}a$ gives $D_0^{n+1}h_n=1_{UG^{n+1}a}$, including $n=0$.",
+   "uses": [
+    "def-trf-comonad-standard-resolution"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/simplicial.tex",
+    "place": "Tags 08N9/08NC/08ND, situation-adjoint-functors, lemma-standard-simplicial, lemma-standard-simplicial-homotopy; equation-composition and the displayed standard face/degeneracy formulas. Explicit elementary unit-naturality calculations."
+   }
+  },
+  {
+   "text": "The other face out of degree one is $D_1^1=UG(\\epsilon_a)=UF(U\\epsilon_a)$. Apply unit naturality to the morphism $q=U\\epsilon_a:UGa\\to Ua$ to obtain $D_1^1h_0=UF(U\\epsilon_a)\\circ\\eta_{UGa}=\\eta_{Ua}\\circ U\\epsilon_a=h_{-1}e_0$. This separately verifies the augmented boundary equation without invoking a nonexistent face out of degree zero.",
+   "uses": [
+    "def-trf-comonad-standard-resolution"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/simplicial.tex",
+    "place": "Tags 08N9/08NC/08ND, situation-adjoint-functors, lemma-standard-simplicial, lemma-standard-simplicial-homotopy; equation-composition and the displayed standard face/degeneracy formulas. Explicit elementary unit-naturality calculations."
+   }
+  },
+  {
+   "text": "For $n\\geq0$ and $0\\leq i\\leq n+1$, the prescribed formulas give $D_{i+1}^{n+2}=UF(D_i^{n+1})$: both sides are $UG^{i+1}(\\epsilon_{G^{n+1-i}a})$. Unit naturality for $q=D_i^{n+1}:UG^{n+2}a\\to UG^{n+1}a$ therefore gives $D_{i+1}^{n+2}h_{n+1}=UF(D_i^{n+1})\\eta_{UG^{n+2}a}=\\eta_{UG^{n+1}a}D_i^{n+1}=h_nD_i^{n+1}$. The formula also holds at the extreme index $i=n+1$, where $G^0$ is the identity.",
+   "uses": [
+    "def-trf-comonad-standard-resolution"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/simplicial.tex",
+    "place": "Tags 08N9/08NC/08ND, situation-adjoint-functors, lemma-standard-simplicial, lemma-standard-simplicial-homotopy; equation-composition and the displayed standard face/degeneracy formulas. Explicit elementary unit-naturality calculations."
+   }
+  },
+  {
+   "text": "For $n\\geq0$ and $0\\leq i\\leq n$, the prescribed degeneracies give $S_{i+1}^{n+1}=UF(S_i^n)$: both sides equal $UG^{i+1}(\\delta_{G^{n-i}a})$. Unit naturality for $q=S_i^n:UG^{n+1}a\\to UG^{n+2}a$ gives $S_{i+1}^{n+1}h_n=UF(S_i^n)\\eta_{UG^{n+1}a}=\\eta_{UG^{n+2}a}S_i^n=h_{n+1}S_i^n$, also for $n=i=0$.",
+   "uses": [
+    "def-trf-comonad-standard-resolution"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/simplicial.tex",
+    "place": "Tags 08N9/08NC/08ND, situation-adjoint-functors, lemma-standard-simplicial, lemma-standard-simplicial-homotopy; equation-composition and the displayed standard face/degeneracy formulas. Explicit elementary unit-naturality calculations."
+   }
+  },
+  {
+   "text": "For a morphism $f:a\\to b$ and $n\\geq-1$, unit naturality applied to $q=UG^{n+1}(f)$ gives $UG^{n+2}(f)\\circ h_n(a)=h_n(b)\\circ UG^{n+1}(f)$ (at $n=-1$, this reads $UG(f)\\eta_{Ua}=\\eta_{Ub}U(f)$). Thus the $h_n$ are natural transformations in the parameter. The faces, degeneracies and augmentation are natural transformations by the supplied resolution and its prescribed operators. The previous pointwise equalities consequently hold as equalities of natural transformations in $\\operatorname{Fun}(\\mathcal A,\\mathcal S)$, since their components agree at every object.",
+   "uses": [
+    "def-trf-comonad-standard-resolution"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/simplicial.tex",
+    "place": "Tags 08N9/08NC/08ND, situation-adjoint-functors, lemma-standard-simplicial, lemma-standard-simplicial-homotopy; equation-composition and the displayed standard face/degeneracy formulas. Explicit elementary unit-naturality calculations."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-trf-comonad-standard-resolution"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/simplicial.tex",
+  "place": "Tags 08N9/08NC/08ND, situation-adjoint-functors, lemma-standard-simplicial, lemma-standard-simplicial-homotopy; equation-composition and the displayed standard face/degeneracy formulas. Explicit elementary unit-naturality calculations. Q91 writes out the extra-degeneracy identities; the source gives the adjunction triangle formulas and the standard resolution."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The unit of an adjunction gives left extra degeneracies on the right adjoint image of its standard simplicial comonad resolution",
+   "results": "{\"t\": \"2026-10-22T06:43:38Z\", \"tool\": \"leanfinder\", \"query\": \"The unit of an adjunction gives left extra degeneracies on the right adjoint image of its standard simplicial comonad resolution\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Adjunction.toComonad_δ\", \"CategoryTheory.CosimplicialObject.cechConerveAdjunction\", \"CategoryTheory.Comonad.adj_unit\", \"CategoryTheory.SimplicialObject.cechNerveAdjunction\", \"CategoryTheory.SimplicialObject.Augmented.ExtraDegeneracy.s'_comp_ε\", \"CategoryTheory.SimplicialObject.Augmented.ExtraDegeneracy.s'_comp_ε_assoc\", \"CategoryTheory.SimplicialObject.coskAdj\", \"classifyingSpaceUniversalCover.extraDegeneracyCompForgetAugmentedToModule\"], \"digest\": \"1c710d402426b6a2\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: Adjunction.toComonad in Mathlib/CategoryTheory/Monad/Adjunction.lean:67 supplies the comonad only. ExtraDegeneracy in Mathlib/AlgebraicTopology/ExtraDegeneracy.lean:72 assumes rather than constructs the required identities. Its map at line 96 needs an existing extra degeneracy before applying the functor; none is assumed here. The classifying-space construction in Mathlib/RepresentationTheory/Homological/Resolution.lean:141,160 is specific to groups and their universal covers, not arbitrary adjunctions."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The unit of an adjunction gives extra degeneracies of the underlying standard simplicial resolution",
+   "results": "{\"t\": \"2026-10-22T06:43:42Z\", \"tool\": \"leansearch\", \"query\": \"The unit of an adjunction gives extra degeneracies of the underlying standard simplicial resolution\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Adjunction.unit\", \"CategoryTheory.Adjunction.CoreUnitCounit.unit\", \"CategoryTheory.Adjunction.CoreHomEquivUnitCounit.unit\", \"CategoryTheory.Bicategory.Adjunction.unit\", \"CategoryTheory.Adjunction.toMonad_η\", \"CategoryTheory.Adjunction.derivedη.congr_simp\", \"CategoryTheory.Adjunction.mk'_unit\", \"CategoryTheory.LiftRightAdjoint.unitEqualises\"], \"digest\": \"2f916a892dd97dc8\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: Adjunction.toComonad in Mathlib/CategoryTheory/Monad/Adjunction.lean:67 supplies the comonad only. ExtraDegeneracy in Mathlib/AlgebraicTopology/ExtraDegeneracy.lean:72 assumes rather than constructs the required identities. Its map at line 96 needs an existing extra degeneracy before applying the functor; none is assumed here. The classifying-space construction in Mathlib/RepresentationTheory/Homological/Resolution.lean:141,160 is specific to groups and their universal covers, not arbitrary adjunctions."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"ExtraDegeneracy\"",
+   "results": "{\"t\": \"2026-10-22T06:43:42Z\", \"tool\": \"loogle\", \"query\": \"\\\"ExtraDegeneracy\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"CategoryTheory.SimplicialObject.Augmented.ExtraDegeneracy\", \"SSet.Augmented.StandardSimplex.extraDegeneracy\", \"SSet.Augmented.StandardSimplex.nonempty_extraDegeneracy_stdSimplex\", \"CategoryTheory.SimplicialObject.Augmented.ExtraDegeneracy.const\", \"CategoryTheory.SimplicialObject.Augmented.ExtraDegeneracy.ofIso\", \"CategoryTheory.SimplicialObject.Augmented.ExtraDegeneracy.map\", \"CategoryTheory.Arrow.AugmentedCechNerve.extraDegeneracy\", \"CategoryTheory.SimplicialObject.Augmented.ExtraDegeneracy.s'\"], \"digest\": \"a1b304067fef6d6b\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: Adjunction.toComonad in Mathlib/CategoryTheory/Monad/Adjunction.lean:67 supplies the comonad only. ExtraDegeneracy in Mathlib/AlgebraicTopology/ExtraDegeneracy.lean:72 assumes rather than constructs the required identities. Its map at line 96 needs an existing extra degeneracy before applying the functor; none is assumed here. The classifying-space construction in Mathlib/RepresentationTheory/Homological/Resolution.lean:141,160 is specific to groups and their universal covers, not arbitrary adjunctions."
+  },
+  {
+   "tool": "grep",
+   "query": "toComonad|extraDegeneracy|ExtraDegeneracy|reverse.*[Hh]omotopy|[Hh]omotopy.*reverse [sub=CategoryTheory]",
+   "results": "{\"t\": \"2026-10-22T06:43:41Z\", \"tool\": \"grep\", \"query\": \"toComonad|extraDegeneracy|ExtraDegeneracy|reverse.*[Hh]omotopy|[Hh]omotopy.*reverse\", \"sub\": \"CategoryTheory\", \"ok\": true, \"n_hits\": 23, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Adjunction/Lifting/Right.lean\", \"Mathlib/CategoryTheory/Adjunction/Lifting/Right.lean\", \"Mathlib/CategoryTheory/Monad/Adjunction.lean\", \"Mathlib/CategoryTheory/Monad/Adjunction.lean\", \"Mathlib/CategoryTheory/Monad/Adjunction.lean\", \"Mathlib/CategoryTheory/Monad/Adjunction.lean\", \"Mathlib/CategoryTheory/Monad/Adjunction.lean\", \"Mathlib/CategoryTheory/Monad/Comonadicity.lean\"], \"digest\": \"119cd385cd235ddd\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: Adjunction.toComonad in Mathlib/CategoryTheory/Monad/Adjunction.lean:67 supplies the comonad only. ExtraDegeneracy in Mathlib/AlgebraicTopology/ExtraDegeneracy.lean:72 assumes rather than constructs the required identities. Its map at line 96 needs an existing extra degeneracy before applying the functor; none is assumed here. The classifying-space construction in Mathlib/RepresentationTheory/Homological/Resolution.lean:141,160 is specific to groups and their universal covers, not arbitrary adjunctions."
+  },
+  {
+   "tool": "grep",
+   "query": "adjunction|comonad|barConstruction|standardResolution [sub=AlgebraicTopology/ExtraDegeneracy.lean]",
+   "results": "{\"t\": \"2026-10-22T06:44:10Z\", \"tool\": \"grep\", \"query\": \"adjunction|comonad|barConstruction|standardResolution\", \"sub\": \"AlgebraicTopology/ExtraDegeneracy.lean\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: Adjunction.toComonad in Mathlib/CategoryTheory/Monad/Adjunction.lean:67 supplies the comonad only. ExtraDegeneracy in Mathlib/AlgebraicTopology/ExtraDegeneracy.lean:72 assumes rather than constructs the required identities. Its map at line 96 needs an existing extra degeneracy before applying the functor; none is assumed here. The classifying-space construction in Mathlib/RepresentationTheory/Homological/Resolution.lean:141,160 is specific to groups and their universal covers, not arbitrary adjunctions."
+  },
+  {
+   "tool": "grep",
+   "query": "toComonad|extraDegeneracy|ExtraDegeneracy [sub=CategoryTheory]",
+   "results": "{\"t\": \"2026-10-23T12:18:31Z\", \"tool\": \"grep\", \"query\": \"toComonad|extraDegeneracy|ExtraDegeneracy\", \"sub\": \"CategoryTheory\", \"ok\": true, \"n_hits\": 23, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Adjunction/Lifting/Right.lean\", \"Mathlib/CategoryTheory/Adjunction/Lifting/Right.lean\", \"Mathlib/CategoryTheory/Monad/Comonadicity.lean\", \"Mathlib/CategoryTheory/Monad/Comonadicity.lean\", \"Mathlib/CategoryTheory/Monad/Comonadicity.lean\", \"Mathlib/CategoryTheory/Monad/Comonadicity.lean\", \"Mathlib/CategoryTheory/Monad/Comonadicity.lean\", \"Mathlib/CategoryTheory/Monad/Adjunction.lean\"], \"digest\": \"26a039df9755afa6\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: Mathlib/CategoryTheory/Monad/Adjunction.lean:67 constructs the comonad only. Mathlib/AlgebraicTopology/ExtraDegeneracy.lean:72 defines the identities as structure fields and :96 maps already supplied data; neither constructs these data for a general adjunction. The classifyingSpaceUniversalCover constructions at Mathlib/RepresentationTheory/Homological/Resolution.lean:141,160 concern monoids and their covers, not arbitrary adjunctions. Adjunction.unit and unit_naturality are the axioms used in the elementary calculation, not a single specialization giving the entire item."
+  },
+  {
+   "tool": "leansearch",
+   "query": "An adjunction unit contracts the underlying augmented bar resolution by extra degeneracy",
+   "results": "{\"t\": \"2026-10-23T12:18:32Z\", \"tool\": \"leansearch\", \"query\": \"An adjunction unit contracts the underlying augmented bar resolution by extra degeneracy\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Adjunction.CoreUnitCounit.unit\", \"CategoryTheory.Adjunction.CoreHomEquivUnitCounit.unit\", \"CategoryTheory.Adjunction.unit\", \"CategoryTheory.Adjunction.toMonad_η\", \"CategoryTheory.Adjunction.derivedη.congr_simp\", \"CategoryTheory.Bicategory.Adjunction.unit\", \"CategoryTheory.Adjunction.toCat_unit_toNatTrans\", \"CategoryTheory.Adjunction.ofCat_unit\"], \"digest\": \"48e88688a4bace5c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: Mathlib/CategoryTheory/Monad/Adjunction.lean:67 constructs the comonad only. Mathlib/AlgebraicTopology/ExtraDegeneracy.lean:72 defines the identities as structure fields and :96 maps already supplied data; neither constructs these data for a general adjunction. The classifyingSpaceUniversalCover constructions at Mathlib/RepresentationTheory/Homological/Resolution.lean:141,160 concern monoids and their covers, not arbitrary adjunctions. Adjunction.unit and unit_naturality are the axioms used in the elementary calculation, not a single specialization giving the entire item."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"ExtraDegeneracy\"",
+   "results": "{\"t\": \"2026-10-23T12:18:32Z\", \"tool\": \"loogle\", \"query\": \"\\\"ExtraDegeneracy\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"CategoryTheory.SimplicialObject.Augmented.ExtraDegeneracy\", \"SSet.Augmented.StandardSimplex.extraDegeneracy\", \"SSet.Augmented.StandardSimplex.nonempty_extraDegeneracy_stdSimplex\", \"CategoryTheory.SimplicialObject.Augmented.ExtraDegeneracy.const\", \"CategoryTheory.SimplicialObject.Augmented.ExtraDegeneracy.ofIso\", \"CategoryTheory.SimplicialObject.Augmented.ExtraDegeneracy.map\", \"CategoryTheory.Arrow.AugmentedCechNerve.extraDegeneracy\", \"CategoryTheory.SimplicialObject.Augmented.ExtraDegeneracy.s'\"], \"digest\": \"a1b304067fef6d6b\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: Mathlib/CategoryTheory/Monad/Adjunction.lean:67 constructs the comonad only. Mathlib/AlgebraicTopology/ExtraDegeneracy.lean:72 defines the identities as structure fields and :96 maps already supplied data; neither constructs these data for a general adjunction. The classifyingSpaceUniversalCover constructions at Mathlib/RepresentationTheory/Homological/Resolution.lean:141,160 concern monoids and their covers, not arbitrary adjunctions. Adjunction.unit and unit_naturality are the axioms used in the elementary calculation, not a single specialization giving the entire item."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The unit of an adjunction gives left extra degeneracies on the right adjoint image of its standard simplicial comonad resolution",
+   "results": "{\"t\": \"2026-10-23T12:18:35Z\", \"tool\": \"leanfinder\", \"query\": \"The unit of an adjunction gives left extra degeneracies on the right adjoint image of its standard simplicial comonad resolution\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Adjunction.toComonad_δ\", \"CategoryTheory.Comonad.adj_unit\", \"CategoryTheory.Comonad.comparison_obj_a\", \"CategoryTheory.Comonad.ComonadicityInternal.unitFork_π_app\", \"CategoryTheory.SimplicialObject.Augmented.ExtraDegeneracy.s'_comp_ε_assoc\", \"CategoryTheory.SimplicialObject.Augmented.ExtraDegeneracy.s'_comp_ε\", \"CategoryTheory.Comonad.ComonadicityInternal.comparisonAdjunction_unit_app\", \"classifyingSpaceUniversalCover.extraDegeneracyCompForgetAugmented\"], \"digest\": \"58268d59885ac3b5\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: Mathlib/CategoryTheory/Monad/Adjunction.lean:67 constructs the comonad only. Mathlib/AlgebraicTopology/ExtraDegeneracy.lean:72 defines the identities as structure fields and :96 maps already supplied data; neither constructs these data for a general adjunction. The classifyingSpaceUniversalCover constructions at Mathlib/RepresentationTheory/Homological/Resolution.lean:141,160 concern monoids and their covers, not arbitrary adjunctions. Adjunction.unit and unit_naturality are the axioms used in the elementary calculation, not a single specialization giving the entire item."
+  },
+  {
+   "tool": "grep",
+   "query": "adjunction|comonad|barConstruction|standardResolution [sub=AlgebraicTopology/ExtraDegeneracy.lean]",
+   "results": "{\"t\": \"2026-10-23T12:19:14Z\", \"tool\": \"grep\", \"query\": \"adjunction|comonad|barConstruction|standardResolution\", \"sub\": \"AlgebraicTopology/ExtraDegeneracy.lean\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: Mathlib/CategoryTheory/Monad/Adjunction.lean:67 constructs the comonad only. Mathlib/AlgebraicTopology/ExtraDegeneracy.lean:72 defines the identities as structure fields and :96 maps already supplied data; neither constructs these data for a general adjunction. The classifyingSpaceUniversalCover constructions at Mathlib/RepresentationTheory/Homological/Resolution.lean:141,160 concern monoids and their covers, not arbitrary adjunctions. Adjunction.unit and unit_naturality are the axioms used in the elementary calculation, not a single specialization giving the entire item."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Contracting homotopy of the augmented cotriple resolution after the forgetful right adjoint using the adjunction unit",
+   "results": "{\"t\": \"2026-10-23T12:19:17Z\", \"tool\": \"leanfinder\", \"query\": \"Contracting homotopy of the augmented cotriple resolution after the forgetful right adjoint using the adjunction unit\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.SimplicialObject.Augmented.ExtraDegeneracy.homotopyEquiv\", \"classifyingSpaceUniversalCover.extraDegeneracyCompForgetAugmentedToModule\", \"Rep.standardComplex.εToSingle₀_comp_eq\", \"CategoryTheory.ProjectiveResolution.liftIdHomotopy\", \"HomotopicalAlgebra.CofibrantObject.HoCat.ιCompResolutionNatTrans_app\", \"CategoryTheory.InjectiveResolution.descIdHomotopy\", \"AlgebraicTopology.DoldKan.homotopyEquivNormalizedMooreComplexAlternatingFaceMapComplex_homotopyInvHomId\", \"CategoryTheory.Abelian.LeftResolution.karoubi.retractArrow\"], \"digest\": \"e6d53eca12f473eb\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: Mathlib/CategoryTheory/Monad/Adjunction.lean:67 constructs the comonad only. Mathlib/AlgebraicTopology/ExtraDegeneracy.lean:72 defines the identities as structure fields and :96 maps already supplied data; neither constructs these data for a general adjunction. The classifyingSpaceUniversalCover constructions at Mathlib/RepresentationTheory/Homological/Resolution.lean:141,160 concern monoids and their covers, not arbitrary adjunctions. Adjunction.unit and unit_naturality are the axioms used in the elementary calculation, not a single specialization giving the entire item."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-adjunction-standard-simplicial-homotopy",
+  "date": "2026-10-22",
+  "group": "Q34"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Proof (1)--(2), semistable-alteration input in the nearby-cycle branch: ILO Exposé X, Theorem 3.4, Step 3, invoking Temkin 2010, Theorems 1.5 and 1.1 for a semistable multipointed modification. Temkin proof component: Marked dualizing line bundle and contracted-component degrees. Auxiliary input: Local complete-intersection determinant adjunction underlying the marked dualizing construction, before the marking is inserted. Supporting ring/sheaf input: Functorial standard resolutions and comparison with arbitrary polynomial resolutions. Generic input to lem-trf-cotangent-resolution-coherence: Standard simplicial object of an adjunction and its homotopy equivalences. Re-split auxiliary: Returned proof step 3: the unit at each underlying term satisfies every left extra-degeneracy equation, including augmented degree -1 and parameter naturality.",
+   "via": [
+    "lem-trf-adjunction-standard-simplicial-homotopy",
+    "lem-trf-cotangent-resolution-coherence",
+    "lem-trf-lci-cotangent-presentation",
+    "lem-trf-flat-lci-canonical-adjunction",
+    "lem-trf-marked-nodal-dualizing-degrees",
+    "lem-trf-temkin-stable-modification",
+    "lem-trf-stable-modification-flat-curve-pair",
+    "lem-trf-dejong-relative-marked-semistable",
+    "lem-trf-relative-marked-nodal-reduction",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-trf-adjunction-right-image-extra-degeneracies",
+  "worker": "stage1",
+  "summary": "Q91 checked all five displayed families, including augmented degree -1 and parameter naturality. Six elementary calculations from the supplied resolution and the adjunction axioms; no new nodes, no statement changes. Mathlib searches give structures assuming extra degeneracies, not this arbitrary-adjunction construction.",
+  "blueprint": "Auxiliary calculation in the existing from.place chain, supporting returned proof step 3 of lem-trf-adjunction-standard-simplicial-homotopy. The latest lem-trf-local-term-locality proof (1)--(2) remains the blueprint ancestor; no change to its route."
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q91-df4ab7dd4",
+  "group": "Q91",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q91-df4ab7dd4 (reviewer sub-agent of L); spot-checked: I read the delivery in full. It is one commit on base 48460ad with the item and its report only and no new nodes. This is the first split of a node created on 2026-10-22 by the Q34 re-split; its base proof was empty and there is no repair note. The statement and stmt_deps [def-trf-comonad-standard-resolution] are unchanged. I checked the conventions against Stacks simplicial.tex: in Situation 08N9 the item's (F,U) are Stacks' (U,V); Example 0G5M gives faces G^jεG^{n-j} counted from the left, as in the cited def; and in Lemma 08ND (l.6729–6775) h_0=η⋆1_V, which is the item's h_{-1}=η_{Ua}. I redid every step myself. Step 2: e_0h_{-1}=1 and d_0h_n=1 are the right triangle at a and at G^{n+1}a. Step 3: d_1h_0=h_{-1}e_0 is unit naturality at Uε_a. Step 4: D_{i+1}^{n+2}=UF(D_i^{n+1})=UG^{i+1}(ε_{G^{n+1-i}a}), and η-naturality gives d_{i+1}h_{n+1}=h_nd_i; the end indices i=0 and i=n+1 hold. Step 5: S_{i+1}^{n+1}=UF(S_i^n), and η-naturality gives s_{i+1}h_n=h_{n+1}s_i. Step 6: parameter naturality is η-naturality at UG^{n+1}f, and equalities in Fun(A,S) are checked componentwise. The five families match the hypotheses of lem-coef-simplicial-extra-degeneracy-prism exactly, which is how the parent's step 3 consumes them. The steps are honestly elementary, and making nodes for them would only relabel the item's clauses (D1). Small cases (the identity adjunction and the free/forgetful monoid adjunction) are consistent, and the proof needs no faithfulness and no limits. The duplicate sweep (rg -L for extra degeneracies, 08ND/08NC and the η patterns; the trf comonad face/degeneracy/counit/reversal nodes; the coef prism and contraction nodes) found no duplicate and no cycle. There are 11 recorded Mathlib searches of three kinds, and the 'no match' verdict is correct: ExtraDegeneracy only assumes these identities and toComonad only gives the comonad. No SGA is cited, no tool_uses are needed, and I made no fixes."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.AdjunctionRightImageExtraDegeneracies",
+  "declaration": "CategoryTheory.Adjunction.exists_rightImageExtraDegeneracies",
+  "file": "lean/Sheaf/CategoryTheory/AdjunctionRightImageExtraDegeneracies.lean",
+  "statement": "theorem exists_rightImageExtraDegeneracies {F : S ⥤ A} {U : A ⥤ S} (adj : F ⊣ U) (B : SimplicialObject (A ⥤ A)) (e : B ⟶ (SimplicialObject.const (A ⥤ A)).obj (𝟭 A)) (hB : Comonad.IsStandardSimplicialResolution adj.toComonad B e) : ∃ ed : SimplicialObject.Augmented.ExtraDegeneracy (((SimplicialObject.Augmented.whiskering (A ⥤ A) (A ⥤ S)).obj ((Functor.whiskeringRight A A S).obj U)).obj { left := B, right := 𝟭 A, hom := e }), HEq ed.s' (Functor.whiskerLeft U adj.unit) ∧ ∀ n : ℕ, HEq (ed.s n) (Functor.whiskerLeft (Comonad.resolutionPower adj.toComonad.toFunctor (n + 1) ⋙ U) adj.unit)",
+  "branch": "newtargets-dag",
+  "by": "Q54",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-549662240",
+  "group": "Q54",
+  "result": "pass",
+  "note": "Read node, def-trf-comonad-standard-resolution module (resolutionPower n+1 = P_n ⋙ T; HEq faces/degeneracies/ε), Mathlib ExtraDegeneracy fields, Adjunction.toComonad (U⋙F, counit, FηU) and Augmented.whiskeringObj. Hypotheses adj/B/e/hB match node, no extra assumptions, 4 free universes. ∃ ExtraDegeneracy of U-whiskered augmented B with s' HEq whiskerLeft U unit and s n HEq whiskerLeft (P_{n+1}⋙U) unit: types match via hB and P_{n+2}=P_{n+1}⋙G; five Prop fields = node's five equation families incl. i=n+1, n=i=0, augmented boundary; naturality via functor category; statement true by triangle identity/unit naturality. No duplicate defs (Mathlib whiskering equals downstream theorem-module abbrevs), docstrings with source+blueprint and proof steps, sorry only, lean.statement verbatim, report sections present. No findings."
+ }
+}

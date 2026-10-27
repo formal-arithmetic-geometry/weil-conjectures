@@ -1,0 +1,393 @@
+{
+ "id": "def-sp-finite-intrinsic-direct-adjunction",
+ "kind": "definition",
+ "title": "Finite intrinsic inverse-image direct-image adjunction",
+ "status": "split",
+ "statement": "Let $A$ be a finite commutative ring and $f:X\\to Y$ a scheme morphism. Use intrinsic inverse image [def-sp-finite-intrinsic-pullback] and the actual constant-coefficient module direct image [def-weil-proetale-inverse-image]. Transport the fixed-scalar inverse-image/direct-image adjunction through the canonical realization equivalences, then conjugate its right adjoint by the direct-image comparison uniquely fixed to be identity on constant-scalar unit sections. This defines the existing sfIntrinsicConstantModuleAdjunction. Its right-derived adjunction uses the specified K-injective direct image [def-weil-pbc-proetale-operations], and its derived realization comparison is the localization of that same section-normalized map on K-injective representatives.",
+ "stmt_deps": [
+  "def-sp-finite-intrinsic-pullback",
+  "def-weil-proetale-inverse-image",
+  "def-weil-pbc-proetale-operations"
+ ],
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sf-localization/prop-sf-open-closed-triangle-all-stages.proof.md",
+  "place": "Weil-structures paragraph: canonical exchanges, their unit/counit normalization and induced Weil structures on the two outer vertices; original detailed steps 13-15."
+ },
+ "proof": [
+  {
+   "text": "Write E_T for fixed-scalar module sheaves embedded in module presheaves, and U_T for restriction along the constant-scalar unit. The module sheafification adjunction gives E_T ≅ realization_T followed by U_T: its unit is invertible because the underlying abelian presheaf is already a sheaf. U_T is fully faithful, since the module sheafification counit is invertible. The canonical coefficient direct-image map composed with the scalar unit is the scalar unit at the base-changed object, by the defining sheafification hom-equivalence.",
+   "uses": [
+    "def-weil-presheaf-modules-sheafification",
+    "def-weil-proetale-inverse-image"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Restricting intrinsic direct image along constant scalars gives the fixed-scalar direct image of the restricted module: use the identity on every section, with linearity given by the scalar square of step 1. Compose this identity with the inverse source realization unit and the target realization unit. Full faithfulness of U_Y lifts the resulting natural isomorphism uniquely. On a source scalar-unit section, the inverse source unit cancels the source unit, giving exactly the target scalar-unit section. Conversely these source units are isomorphisms on sections, so agreement on all such sections implies equality of the components and of the natural isomorphism.",
+   "uses": [
+    "def-weil-presheaf-modules-sheafification",
+    "def-weil-proetale-inverse-image"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For the derived square, write L and R for source and target realization, H for fixed-scalar direct image and G for intrinsic direct image. The equivalence L preserves K-injectives, being right adjoint to its exact inverse. On complexes form two natural transformations from Q(LG(-)): the first is the unit of RG after L, followed by the inverse exact-localization comparison for L; the second is Q of the section-normalized comparison from step 2, followed by the inverse exact-localization comparison for R and R applied to the unit of RH. Both are isomorphisms on K-injectives. Their quotient therefore prescribes the desired isomorphism on every K-injective representative.",
+   "uses": [
+    "def-sp-finite-intrinsic-pullback",
+    "def-weil-pbc-proetale-operations",
+    "lem-weil-pbc-right-adjoint-preserves-kinjective",
+    "lem-weil-pbc-exact-functor-derived-factorization"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Every derived object is isomorphic to QI for a K-injective I. Every derived morphism between such representatives is Q of a complex morphism, after passing through the homotopy category, by the K-injective Hom bijection and surjectivity of the homotopy quotient. Naturality of the two units in step 3 therefore gives naturality on all derived morphisms between representatives. Conjugate the representative components by chosen isomorphisms X ≅ QI to extend to a natural isomorphism. Naturality proves its prescribed value on every QI independently of the choice. Cancelling the two invertible units rewrites its equation as the published normalization. That equation fixes every component on QI; naturality along X ≅ QI fixes all remaining components, proving uniqueness. The existing definitions select the uniquely specified comparisons and transport the fixed-scalar adjunction unchanged.",
+   "uses": [
+    "lem-weil-pbc-kinjective-hom-derived",
+    "def-weil-pbc-proetale-operations",
+    "lem-weil-pbc-exact-functor-derived-factorization"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-presheaf-modules-sheafification",
+  "def-weil-proetale-inverse-image",
+  "def-sp-finite-intrinsic-pullback",
+  "def-weil-pbc-proetale-operations",
+  "lem-weil-pbc-right-adjoint-preserves-kinjective",
+  "lem-weil-pbc-exact-functor-derived-factorization",
+  "lem-weil-pbc-kinjective-hom-derived"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "lean/Sheaf/AlgebraicGeometry/ProEtaleConstantDerivedDirectImage.lean",
+  "place": "The published proEtaleConstantDerivedDirectImage docstring explicitly cites def-weil-pbc-proetale-operations. J2 (2026-10-27): retain the original proof, correcting only its citation of the finite uncompleted K-injective construction."
+ },
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Canonical finite constant coefficient proetale derived pullback open adjunction and scalar change mate",
+   "results": "[leansearch] OK 8 hit(s): SheafOfModules.PullbackConstruction.adjunction; PresheafOfModules.pullbackPushforwardAdjunction; AlgebraicGeometry.Scheme.Modules.instIsLeftAdjointPullback; AlgebraicGeometry.Scheme.Modules.pullbackPushforwardAdjunction; PresheafOfModules.pullback; TopCat.Sheaf.pullbackPushforwardAdjunction; TopCat.Presheaf.pushforwardPullbackAdjunction; CategoryTheory.ExponentiableMorphism.pullbackPushforwardAdj.",
+   "date": "2026-10-22",
+   "verdict": "General adjunctions, no exact finite intrinsic proetale or completed coefficient comparisons."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "canonical finite constant coefficient proetale derived pullback open extension adjunction and pullback square",
+   "results": "[leanfinder] OK 8 hit(s): AlgebraicGeometry.Scheme.instHasPullbacksEtale; AlgebraicGeometry.ExistsHomHomCompEqCompAux.D'; AlgebraicGeometry.ExistsHomHomCompEqCompAux.c'; AlgebraicGeometry.Scheme.Modules.instIsLeftAdjointPullback; AlgebraicGeometry.ExistsHomHomCompEqCompAux.g; AlgebraicGeometry.Scheme.Pullback.openCoverOfBase_f; AlgebraicGeometry.ExistsHomHomCompEqCompAux.𝒰X; AlgebraicGeometry.AffineSpace.isPullback_map.",
+   "date": "2026-10-22",
+   "verdict": "No exact match; reuse existing Sheaf declarations."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.mateEquiv, CategoryTheory.Adjunction.leftAdjointUniq",
+   "results": "[loogle] OK 0 hit(s)",
+   "date": "2026-10-22",
+   "verdict": "The existing generic mate API is used by the published constructions."
+  },
+  {
+   "tool": "grep",
+   "query": "sfIntrinsicDerived|exceptionalOpenAdjunction|scalarPull|finiteQuotientChange (Mathlib/CategoryTheory; local WeilConjectures, Sheaf, and dag/nodes)",
+   "results": "[grep] OK 0 hit(s) in Mathlib/CategoryTheory. rg in WeilConjectures found unrelated scalarPullbackCoefficient constructions. Sheaf searches locate ProEtaleIntrinsicFiniteOperations, ProEtaleOpenSquareExchange, IntrinsicDerivedOpenAdjunction, SfIntrinsicRealizationTransport, and IntegralCompactSupportCoefficientComparison. A full lean.declaration/lean.declarations DAG scan finds sfIntrinsicDerivedPullback, sfIntrinsicDerivedOpen, sfIntrinsicDerivedSquarePullback, sfIntrinsicConstantModuleAdjunction unowned; exceptionalOpenAdjunction and the five coefficient comparison definitions are owned only by theorem nodes. blueprint_refs search: 0 blueprint nodes match intrinsic adjunction; 0 blueprint nodes match finite intrinsic mate; 0 blueprint nodes match coefficient mate data.",
+   "date": "2026-10-22",
+   "verdict": "Attach exact existing definitions, no Lean redeclaration."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-sf-open-closed-weil-mate-structures",
+  "date": "2026-10-22",
+  "group": "NN"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-sf-open-closed-triangle-all-stages",
+   "place": "Existing canonical operation and adjunction definitions needed for the explicit Weil-mate words and their coefficient transport.",
+   "via": [
+    "lem-sf-open-closed-weil-mate-structures"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sf-open-closed-triangle",
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SfIntrinsicRealizationTransport",
+  "declaration": "AlgebraicGeometry.Scheme.sfIntrinsicConstantModuleAdjunction",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.sfIntrinsicConstantModuleAdjunction",
+   "AlgebraicGeometry.Scheme.sfIntrinsicDerivedEquivalence",
+   "AlgebraicGeometry.Scheme.sfIntrinsicDirectImageComparison",
+   "AlgebraicGeometry.Scheme.sfIntrinsicDerivedDirectImageComparison",
+   "AlgebraicGeometry.Scheme.sfIntrinsicRealizationUnit",
+   "AlgebraicGeometry.Scheme.sfIntrinsicDirectImageComparison_existsUnique",
+   "AlgebraicGeometry.Scheme.sfIntrinsicDerivedDirectImageComparison_existsUnique"
+  ],
+  "statement": "def sfIntrinsicConstantModuleAdjunction\n    {X Y : Scheme.{u}} (f : X ⟶ Y) (A : Type u) [CommRing A] [Finite A] :\n    sfIntrinsicPullback A f ⊣ proEtaleConstantModuleDirectImage f A",
+  "existing": true,
+  "branch": "newtargets-dag",
+  "by": "NN",
+  "date": "2026-10-22",
+  "note": "Exact existing definitions, unchanged. Definition ownership of the canonical maps used by the returned mate statement; no theorem is promoted to a statement prerequisite."
+ },
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-6afdd5dd2",
+  "group": "NN",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-6afdd5dd2",
+  "group": "NN",
+  "result": "pass",
+  "note": "Re-delivery repairing F1′ of 82f63df1. New conjunct sfCompletionOpenClosedWeilMateAssertions: OpenClosedScalarMateLift from the tower presentation (constructibleIntegralPullback, sfConstructibleIntegralFrobeniusSquare/zlIntegralPullComp, existential J⊣j, i⊣I) to the ordinary one (PurCompactSupport.pull completed, openDerivedAdjunction, proEtaleRingDerivedAdjunction, zlAmbientFrobeniusSquare) along the sfIntegralConstructible inclusions, so finite, integral, rational and Ω α/c run through one integral mate. Adjoint comparisons are the fixed mates. sfCompletionPullbackComparisonPin quantifies over every Comparison record (γ unique via finite Hom groups/Mittag-Leffler; inhabited) and pins s.inv = rho.inv ≫ tV(pbcActualStrictCompletedPullUnit ≫ towerIso) ≫ γ⁻¹ ≫ integral.map e for every complete representative and every e. Coverage holds because tW is an equivalence and IsSfDerivedComplete/Complete are the same Roos completeness. rho0 is pinned on unit-section generators and rho on every Q P via exact-pullback counits, so it is determined and consistent. The completion unit and γ are isos, so the pin is satisfiable; this matches proof step 6. The rational scalar clause's HEq-to-published binders are equivalent (defeq types), elaboration only. Statement verbatim; 21 declarations recorded and present; one sorry; docstrings with source and blueprint; node statement, proof and stmt_deps unchanged; new import owned by the cited def-pod-integral-completed-comparison-data. Earlier-accepted clauses unchanged. Edge cases U=X, U=∅, X=∅, K=0/torsion checked. Advisory: pbcActual*, proEtaleRingModuleUnitSection and proEtaleRingDerivedPullbackFactors have no recorded owner node (framework decls; inherited precedent). No compile (no FIX)."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J2",
+  "result": "pass",
+  "landing": "20261027T103435-L-1078680",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ },
+ "statement_change": {
+  "date": "2026-10-27",
+  "by": "J2 stage 2",
+  "old_statement": "Let $A$ be a finite commutative ring and $f:X\\to Y$ a scheme morphism. Use intrinsic inverse image [def-sp-finite-intrinsic-pullback] and the actual constant-coefficient module direct image [def-weil-proetale-inverse-image]. Transport the fixed-scalar inverse-image/direct-image adjunction through the canonical realization equivalences, then conjugate its right adjoint by the direct-image comparison uniquely fixed to be identity on constant-scalar unit sections. This defines the existing sfIntrinsicConstantModuleAdjunction. Its right-derived adjunction uses the specified K-injective direct image [def-weil-derived-direct-image], and its derived realization comparison is the localization of that same section-normalized map on K-injective representatives.",
+  "what": "Citation correction only: the finite uncompleted K-injective direct image used by SfIntrinsicRealizationTransport is proEtaleConstantDerivedDirectImage, whose source explicitly cites def-weil-pbc-proetale-operations. The former citation unnecessarily depended on the integral/common-stage construction. No mathematical claim or Lean interface changes.",
+  "source": {
+   "document": "lean/Sheaf/AlgebraicGeometry/ProEtaleConstantDerivedDirectImage.lean",
+   "place": "proEtaleConstantDerivedDirectImage, its source docstring and its rightDerivedFunctor body; used by SfIntrinsicRealizationTransport.sfIntrinsicDerivedDirectImageComparison_existsUnique."
+  },
+  "citers": [
+   {
+    "id": "cor-sf-direct-image-ctf-etale-origin",
+    "holds": true,
+    "note": "All constructions, units, counits and derived normalization equations are unchanged. The corrected citation names the ordinary uncompleted K-injective direct image already used in the Lean source, so this consumer still applies verbatim."
+   },
+   {
+    "id": "def-pur-adic-proetale-realization",
+    "holds": true,
+    "note": "All constructions, units, counits and derived normalization equations are unchanged. The corrected citation names the ordinary uncompleted K-injective direct image already used in the Lean source, so this consumer still applies verbatim."
+   },
+   {
+    "id": "def-sf-finite-operation-realizations",
+    "holds": true,
+    "note": "All constructions, units, counits and derived normalization equations are unchanged. The corrected citation names the ordinary uncompleted K-injective direct image already used in the Lean source, so this consumer still applies verbatim."
+   },
+   {
+    "id": "def-sf-open-closed-weil-mate-data",
+    "holds": true,
+    "note": "All constructions, units, counits and derived normalization equations are unchanged. The corrected citation names the ordinary uncompleted K-injective direct image already used in the Lean source, so this consumer still applies verbatim."
+   },
+   {
+    "id": "def-sp-coefficient-mate-comparisons",
+    "holds": true,
+    "note": "All constructions, units, counits and derived normalization equations are unchanged. The corrected citation names the ordinary uncompleted K-injective direct image already used in the Lean source, so this consumer still applies verbatim."
+   },
+   {
+    "id": "def-sp-mixed-base-change-operations",
+    "holds": true,
+    "note": "All constructions, units, counits and derived normalization equations are unchanged. The corrected citation names the ordinary uncompleted K-injective direct image already used in the Lean source, so this consumer still applies verbatim."
+   },
+   {
+    "id": "def-trf-finite-pullback-coordinate-comparison",
+    "holds": true,
+    "note": "All constructions, units, counits and derived normalization equations are unchanged. The corrected citation names the ordinary uncompleted K-injective direct image already used in the Lean source, so this consumer still applies verbatim."
+   },
+   {
+    "id": "lem-sf-ambient-adjunction-compositor-normalization",
+    "holds": true,
+    "note": "All constructions, units, counits and derived normalization equations are unchanged. The corrected citation names the ordinary uncompleted K-injective direct image already used in the Lean source, so this consumer still applies verbatim."
+   },
+   {
+    "id": "lem-sf-exceptional-finite-operations",
+    "holds": true,
+    "note": "All constructions, units, counits and derived normalization equations are unchanged. The corrected citation names the ordinary uncompleted K-injective direct image already used in the Lean source, so this consumer still applies verbatim."
+   },
+   {
+    "id": "lem-sf-finite-exceptional-site-normalization",
+    "holds": true,
+    "note": "All constructions, units, counits and derived normalization equations are unchanged. The corrected citation names the ordinary uncompleted K-injective direct image already used in the Lean source, so this consumer still applies verbatim."
+   },
+   {
+    "id": "lem-sf-finite-intrinsic-exceptional-bounds",
+    "holds": true,
+    "note": "All constructions, units, counits and derived normalization equations are unchanged. The corrected citation names the ordinary uncompleted K-injective direct image already used in the Lean source, so this consumer still applies verbatim."
+   },
+   {
+    "id": "lem-sf-finite-kernel-constructible-localization",
+    "holds": true,
+    "note": "All constructions, units, counits and derived normalization equations are unchanged. The corrected citation names the ordinary uncompleted K-injective direct image already used in the Lean source, so this consumer still applies verbatim."
+   },
+   {
+    "id": "lem-sf-finite-restriction-normalized-adjunction",
+    "holds": true,
+    "note": "All constructions, units, counits and derived normalization equations are unchanged. The corrected citation names the ordinary uncompleted K-injective direct image already used in the Lean source, so this consumer still applies verbatim."
+   },
+   {
+    "id": "lem-sf-identity-full-cohomological-dimension",
+    "holds": true,
+    "note": "All constructions, units, counits and derived normalization equations are unchanged. The corrected citation names the ordinary uncompleted K-injective direct image already used in the Lean source, so this consumer still applies verbatim."
+   },
+   {
+    "id": "lem-sf-open-closed-weil-mate-coefficient-stage",
+    "holds": true,
+    "note": "All constructions, units, counits and derived normalization equations are unchanged. The corrected citation names the ordinary uncompleted K-injective direct image already used in the Lean source, so this consumer still applies verbatim."
+   },
+   {
+    "id": "lem-sf-open-closed-weil-mate-completion-stage",
+    "holds": true,
+    "note": "All constructions, units, counits and derived normalization equations are unchanged. The corrected citation names the ordinary uncompleted K-injective direct image already used in the Lean source, so this consumer still applies verbatim."
+   },
+   {
+    "id": "lem-sf-open-closed-weil-mate-descent-stage",
+    "holds": true,
+    "note": "All constructions, units, counits and derived normalization equations are unchanged. The corrected citation names the ordinary uncompleted K-injective direct image already used in the Lean source, so this consumer still applies verbatim."
+   },
+   {
+    "id": "lem-sf-open-closed-weil-mate-finite-stage",
+    "holds": true,
+    "note": "All constructions, units, counits and derived normalization equations are unchanged. The corrected citation names the ordinary uncompleted K-injective direct image already used in the Lean source, so this consumer still applies verbatim."
+   },
+   {
+    "id": "lem-sf-open-closed-weil-mate-integral-stage",
+    "holds": true,
+    "note": "All constructions, units, counits and derived normalization equations are unchanged. The corrected citation names the ordinary uncompleted K-injective direct image already used in the Lean source, so this consumer still applies verbatim."
+   },
+   {
+    "id": "lem-sf-open-closed-weil-mate-structures",
+    "holds": true,
+    "note": "All constructions, units, counits and derived normalization equations are unchanged. The corrected citation names the ordinary uncompleted K-injective direct image already used in the Lean source, so this consumer still applies verbatim."
+   },
+   {
+    "id": "lem-sf-open-support-normalization",
+    "holds": true,
+    "note": "All constructions, units, counits and derived normalization equations are unchanged. The corrected citation names the ordinary uncompleted K-injective direct image already used in the Lean source, so this consumer still applies verbatim."
+   },
+   {
+    "id": "lem-sf-point-identity-support-normalization",
+    "holds": true,
+    "note": "All constructions, units, counits and derived normalization equations are unchanged. The corrected citation names the ordinary uncompleted K-injective direct image already used in the Lean source, so this consumer still applies verbatim."
+   },
+   {
+    "id": "lem-sf-projection-refinement-inputs",
+    "holds": true,
+    "note": "All constructions, units, counits and derived normalization equations are unchanged. The corrected citation names the ordinary uncompleted K-injective direct image already used in the Lean source, so this consumer still applies verbatim."
+   },
+   {
+    "id": "lem-sf-proper-support-step-bounds",
+    "holds": true,
+    "note": "All constructions, units, counits and derived normalization equations are unchanged. The corrected citation names the ordinary uncompleted K-injective direct image already used in the Lean source, so this consumer still applies verbatim."
+   },
+   {
+    "id": "lem-sfb-diagonal-trace-finite-chern-comparison",
+    "holds": true,
+    "note": "All constructions, units, counits and derived normalization equations are unchanged. The corrected citation names the ordinary uncompleted K-injective direct image already used in the Lean source, so this consumer still applies verbatim."
+   },
+   {
+    "id": "lem-sfb-diagonal-trace-finite-unit-cohomology",
+    "holds": true,
+    "note": "All constructions, units, counits and derived normalization equations are unchanged. The corrected citation names the ordinary uncompleted K-injective direct image already used in the Lean source, so this consumer still applies verbatim."
+   },
+   {
+    "id": "lem-sfb-diagonal-trace-unit-arrow-comparison",
+    "holds": true,
+    "note": "All constructions, units, counits and derived normalization equations are unchanged. The corrected citation names the ordinary uncompleted K-injective direct image already used in the Lean source, so this consumer still applies verbatim."
+   },
+   {
+    "id": "lem-sfb-finite-p1-coefficient-adjunction-coordinates",
+    "holds": true,
+    "note": "All constructions, units, counits and derived normalization equations are unchanged. The corrected citation names the ordinary uncompleted K-injective direct image already used in the Lean source, so this consumer still applies verbatim."
+   },
+   {
+    "id": "lem-sfb-ordinary-proetale-direct-image-plus-comparison",
+    "holds": true,
+    "note": "All constructions, units, counits and derived normalization equations are unchanged. The corrected citation names the ordinary uncompleted K-injective direct image already used in the Lean source, so this consumer still applies verbatim."
+   },
+   {
+    "id": "lem-trf-finite-return-frobenius-cancellation",
+    "holds": true,
+    "note": "All constructions, units, counits and derived normalization equations are unchanged. The corrected citation names the ordinary uncompleted K-injective direct image already used in the Lean source, so this consumer still applies verbatim."
+   },
+   {
+    "id": "prop-weil-proper-compact-coincidence",
+    "holds": true,
+    "note": "All constructions, units, counits and derived normalization equations are unchanged. The corrected citation names the ordinary uncompleted K-injective direct image already used in the Lean source, so this consumer still applies verbatim."
+   },
+   {
+    "id": "thm-pur-finite-coefficient-smooth-purity",
+    "holds": true,
+    "note": "All constructions, units, counits and derived normalization equations are unchanged. The corrected citation names the ordinary uncompleted K-injective direct image already used in the Lean source, so this consumer still applies verbatim."
+   }
+  ],
+  "old_stmt_deps": [
+   "def-sp-finite-intrinsic-pullback",
+   "def-weil-proetale-inverse-image",
+   "def-weil-derived-direct-image"
+  ],
+  "old_proof_deps": [
+   "def-weil-presheaf-modules-sheafification",
+   "def-weil-proetale-inverse-image",
+   "def-sp-finite-intrinsic-pullback",
+   "def-weil-derived-direct-image",
+   "lem-weil-pbc-right-adjoint-preserves-kinjective",
+   "lem-weil-pbc-exact-functor-derived-factorization",
+   "lem-weil-pbc-kinjective-hom-derived"
+  ],
+  "old_proof": [
+   {
+    "text": "Write E_T for fixed-scalar module sheaves embedded in module presheaves, and U_T for restriction along the constant-scalar unit. The module sheafification adjunction gives E_T ≅ realization_T followed by U_T: its unit is invertible because the underlying abelian presheaf is already a sheaf. U_T is fully faithful, since the module sheafification counit is invertible. The canonical coefficient direct-image map composed with the scalar unit is the scalar unit at the base-changed object, by the defining sheafification hom-equivalence.",
+    "uses": [
+     "def-weil-presheaf-modules-sheafification",
+     "def-weil-proetale-inverse-image"
+    ],
+    "elementary": false
+   },
+   {
+    "text": "Restricting intrinsic direct image along constant scalars gives the fixed-scalar direct image of the restricted module: use the identity on every section, with linearity given by the scalar square of step 1. Compose this identity with the inverse source realization unit and the target realization unit. Full faithfulness of U_Y lifts the resulting natural isomorphism uniquely. On a source scalar-unit section, the inverse source unit cancels the source unit, giving exactly the target scalar-unit section. Conversely these source units are isomorphisms on sections, so agreement on all such sections implies equality of the components and of the natural isomorphism.",
+    "uses": [
+     "def-weil-presheaf-modules-sheafification",
+     "def-weil-proetale-inverse-image"
+    ],
+    "elementary": false
+   },
+   {
+    "text": "For the derived square, write L and R for source and target realization, H for fixed-scalar direct image and G for intrinsic direct image. The equivalence L preserves K-injectives, being right adjoint to its exact inverse. On complexes form two natural transformations from Q(LG(-)): the first is the unit of RG after L, followed by the inverse exact-localization comparison for L; the second is Q of the section-normalized comparison from step 2, followed by the inverse exact-localization comparison for R and R applied to the unit of RH. Both are isomorphisms on K-injectives. Their quotient therefore prescribes the desired isomorphism on every K-injective representative.",
+    "uses": [
+     "def-sp-finite-intrinsic-pullback",
+     "def-weil-derived-direct-image",
+     "lem-weil-pbc-right-adjoint-preserves-kinjective",
+     "lem-weil-pbc-exact-functor-derived-factorization"
+    ],
+    "elementary": false
+   },
+   {
+    "text": "Every derived object is isomorphic to QI for a K-injective I. Every derived morphism between such representatives is Q of a complex morphism, after passing through the homotopy category, by the K-injective Hom bijection and surjectivity of the homotopy quotient. Naturality of the two units in step 3 therefore gives naturality on all derived morphisms between representatives. Conjugate the representative components by chosen isomorphisms X ≅ QI to extend to a natural isomorphism. Naturality proves its prescribed value on every QI independently of the choice. Cancelling the two invertible units rewrites its equation as the published normalization. That equation fixes every component on QI; naturality along X ≅ QI fixes all remaining components, proving uniqueness. The existing definitions select the uniquely specified comparisons and transport the fixed-scalar adjunction unchanged.",
+    "uses": [
+     "lem-weil-pbc-kinjective-hom-derived",
+     "def-weil-derived-direct-image",
+     "lem-weil-pbc-exact-functor-derived-factorization"
+    ],
+    "elementary": false
+   }
+  ]
+ }
+}

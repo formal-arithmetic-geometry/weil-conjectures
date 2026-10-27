@@ -1,0 +1,154 @@
+{
+ "id": "lem-pur-affine-vector-trace-presentation",
+ "kind": "statement",
+ "title": "Normalized compact-support trace in an arbitrary affine vector presentation",
+ "statement": "Let P be a finite purity setting, B a Noetherian scheme of finite type over P.field.k with structure map aB, and F a finite locally free module of rank d on B [def-pur-conventions, def-asd-vector-bundle-zero-section]. Let q be the ordered affine projection A^d_B to B and pi the vector-bundle projection. For any scheme isomorphism e:E(F) to A^d_B over B, any normalized twist transport t and normalized P1 datum family D, form the normalized compact-support affine trace tau from the inverse ordered coefficient descent, inverse affineLinearCompactComparison, affineTraceCounit and singleFunctorObjUnitIso. Form tau-prime from Rpi_! of inverse coefficient pullback followed by vectorBundleIntegration and the same unit comparison [def-amb-vector-integration-charts, def-amb-affine-linear-trace-action, def-amb-vector-integration]. Compact-support exchange for the Cartesian square (e,pi,q,id_B) on A_{A^d_B}(d)[2d], followed by Rpi_! of the coefficient comparison for e and tau-prime, equals identity pullback of tau followed by the actual monoidal unit pullback comparison. No zero-preserving or linearity condition on e is imposed. This is an equality of compact-support traces; it has no adjunction mate, section restriction, DNC or site comparison.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-thm-smooth-purity/lem-pur-projection-purity-agreement.proof.md",
+  "place": "Agreement on the model: standard-pair DNC identity and zero-section restriction of normalized vector integration"
+ },
+ "stmt_deps": [
+  "def-pur-conventions",
+  "def-asd-vector-bundle-zero-section",
+  "def-amb-vector-integration-charts",
+  "def-amb-affine-linear-trace-action",
+  "def-amb-vector-integration"
+ ],
+ "proof": [
+  {
+   "text": "Construct the standard inverse free frame k:A^d_B→E(F0) explicitly from the top-open frame. Its over equation and invertibility are proved geometrically. Evaluate the one fixed standard-frame normalization.",
+   "uses": [
+    "lem-pur-affine-vector-standard-frame"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply the existing finite_trace_cartesian proof to the Cartesian isomorphism e.hom≫k from E(F) to E(F0) over id_B. That proof has no zero-preserving assumption. It derives the trace equation from independently normalized vector purity and its base-change law.",
+   "uses": [
+    "lem-pur-normalized-vector-purity-bundle",
+    "lem-pur-normalized-vector-purity-base-change",
+    "lem-pur-vector-normalized-unit-adjunct",
+    "lem-pur-ordered-tate-pullback-square"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Replace the specified twist transport by the canonical one using uniqueness. Strict composition of normalized compact-support transport factors the action of e.hom≫k. Cancel the invertible action of k against the standard-frame equation.",
+   "uses": [
+    "lem-amb-ordinary-finite-twist-transport-uniqueness",
+    "lem-pur-affine-vector-trace-action-comp"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The monoidal-unit pullback along the identity equals the identity-pullback comparison at the monoidal unit: derive this from its composition law, the identity compositor unit law, naturality and cancellation. Naturality of identity pullback then restores exactly the displayed equation.",
+   "uses": [
+    "lem-kun-derived-pullback-composition-monoidal"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-pur-affine-vector-standard-frame",
+  "lem-pur-normalized-vector-purity-bundle",
+  "lem-pur-normalized-vector-purity-base-change",
+  "lem-pur-vector-normalized-unit-adjunct",
+  "lem-pur-ordered-tate-pullback-square",
+  "lem-amb-ordinary-finite-twist-transport-uniqueness",
+  "lem-pur-affine-vector-trace-action-comp",
+  "lem-kun-derived-pullback-composition-monoidal"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-thm-smooth-purity/lem-pur-projection-purity-agreement.proof.md",
+  "place": "Agreement on the model: standard free frame, arbitrary Cartesian vector trace, and exchange cancellation; no translation step"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "restriction of affine space integration adjunct to a section equals zero section vector bundle integration",
+   "results": "8 topological vector-bundle and curve integration hits; none concerns etale compact-support integration.",
+   "date": "2026-10-27",
+   "verdict": "No match."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.homEquiv_naturality_left",
+   "results": "Found the adjunction naturality lemma used for transposition, but no normalization of geometric traces.",
+   "date": "2026-10-27",
+   "verdict": "Categorical glue only."
+  },
+  {
+   "tool": "grep",
+   "query": "vectorIntegrationBaseCoefficientPullback",
+   "results": "msearch found no Mathlib declarations. Project searches found frame normalization, affine translation trace, and zero-preserving vector normalized trace Cartesian compatibility, but no arbitrary affine presentation trace identity.",
+   "date": "2026-10-27",
+   "verdict": "Isolate the trace-level step preceding mate and section restriction."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Normalized compact support trace is invariant under an isomorphism from a vector bundle to affine space.",
+   "results": "8 hits about linear-map and field trace and differentiable vector-bundle trivializations. No etale compact-support trace normalization theorem. Blueprint search affine vector returned zero exact matches.",
+   "date": "2026-10-27",
+   "verdict": "No duplicate statement found."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.RestrictedAffineDiagonalVectorIntegration",
+  "date": "2026-10-27",
+  "group": "W6"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-pur-diagonal-dualizing-object",
+   "place": "Agreement on the model: translation and normalized vector integration, before taking mates and restricting to the section",
+   "via": [
+    "lem-pur-restricted-affine-diagonal-vector-integration",
+    "lem-pur-restricted-affine-diagonal-dnc-trace",
+    "lem-pur-diagonal-dnc-affine-model",
+    "lem-pur-diagonal-affine-counit-restriction",
+    "lem-pur-diagonal-ordinary-orientation-normalization"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-thm-smooth-purity",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.AffineVectorTracePresentation",
+  "file": "lean/Sheaf/Paper/AffineVectorTracePresentation.lean",
+  "declaration": "WeilConjectures.PurityFiniteSetting.affineVectorTracePresentation",
+  "declarations": [
+   "WeilConjectures.PurityFiniteSetting.affineVectorTracePresentation"
+  ],
+  "statement": "theorem affineVectorTracePresentation (P : PurityFiniteSetting.{u})\n    (B : Scheme.{u}) [IsNoetherian B]\n    (aB : B ⟶ Spec (.of P.field.k)) [LocallyOfFiniteType aB] [QuasiCompact aB]\n    (d : ℕ) (F : B.Modules) [F.IsFiniteLocallyFreeOfRank d]\n    (t : Etale.OrdinaryFiniteTwistTransport P.Coefficient P.diagonalExponent\n      P.diagonalExponent_annihilates)\n    (D : ∀ (T : Scheme.{u}) [IsNoetherian T]\n      (hT : IsUnit (P.diagonalExponent : Γ(T, ⊤))),\n      Etale.OrdinaryFiniteP1Datum P.Coefficient P.diagonalExponent\n        P.diagonalExponent_annihilates t T hT) :\n    letI := (Etale.vectorIntegration_geometry B d F).1\n    letI := (Etale.vectorIntegration_geometry B d F).2.1\n    let q := affineTraceProjection B d\n    let π := VectorBundleZeroSection.π B d F\n    letI := Dnc.compactifiable P q aB\n    letI := Dnc.compactifiable P π aB\n    ∀ (e : VectorBundleZeroSection.scheme B d F ≅ affineTraceTower B d)\n      (we : e.hom ≫ q = π),\n      let sq : IsPullback e.hom π q (𝟙 B) :=\n        IsPullback.of_horiz_isIso ⟨we.trans (Category.comp_id _).symm⟩\n      let c (T S : Scheme.{u}) (f : T ⟶ S) (aS : S ⟶ Spec (.of P.field.k)) :=\n        Etale.vectorIntegrationBaseCoefficientPullback P.Coefficient P.diagonalExponent\n          P.diagonalExponent_annihilates t f (P.diagonalExponent_isUnit aS) d\n      let L := Etale.rightDerivedLowerShriek (ModuleCat.{u + 1} P.Coefficient) q\n      let L' := Etale.rightDerivedLowerShriek (ModuleCat.{u + 1} P.Coefficient) π\n      let τ := L.map\n          ((Etale.affineLinearCoefficientDescent P.Coefficient P.diagonalExponent\n              P.diagonalExponent_annihilates t B (P.diagonalExponent_isUnit aB) d) ≪≫\n            c _ _ q aB).inv ≫\n        (Etale.affineLinearCompactComparison P.diagonalExponent\n          (pow_pos P.coefficients.prime.out.pos P.level) P.Coefficient\n          P.diagonalExponent_annihilates B (P.diagonalExponent_isUnit aB) d).inv ≫\n        Etale.affineTraceCounit P.Coefficient P.diagonalExponent\n          P.diagonalExponent_annihilates t D B (P.diagonalExponent_isUnit aB) d ≫\n        (Etale.singleFunctorObjUnitIso (ModuleCat.{u + 1} P.Coefficient) B).hom\n      let τ' := L'.map (c _ _ π aB).inv ≫\n        Etale.vectorBundleIntegration P.diagonalExponent\n          (pow_pos P.coefficients.prime.out.pos P.level) P.Coefficient\n          P.diagonalExponent_annihilates B (P.diagonalExponent_isUnit aB) d F ≫\n        (Etale.singleFunctorObjUnitIso (ModuleCat.{u + 1} P.Coefficient) B).hom\n      (Etale.rightDerivedLowerShriekBaseChangeMap P.Coefficient sq).app\n          (Etale.affineLinearBaseCoefficient P.Coefficient P.diagonalExponent\n            P.diagonalExponent_annihilates (affineTraceTower B d) d) ≫\n        L'.map (c _ _ e.hom (q ≫ aB)).hom ≫ τ' =\n      (Etale.ordinaryFinitePullback P.Coefficient (𝟙 B)).map τ ≫\n        (Etale.leftDerivedUpperStarUnitIso\n          (ModuleCat.{u + 1} P.Coefficient) (𝟙 B)).hom",
+  "branch": "sheaf-dag",
+  "by": "W6",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "W6",
+  "result": "pass",
+  "landing": "20261027T012959-L-2355689",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V6",
+  "result": "pass",
+  "landing": "20261027T034801-L-3686326",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

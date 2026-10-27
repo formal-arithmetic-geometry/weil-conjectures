@@ -15,9 +15,104 @@
   "def-weil-pbc-normal-ring",
   "def-weil-pbc-localization-at-prime"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "The finite-algebra lemma makes $R\\hookrightarrow A$ integral. Since $A$ is a domain, $(0)$ is prime, and $(0)\\subsetneq Q$ by hypothesis. Apply the strict-contraction assertion of the integral-incomparability lemma with $\\mathfrak q=(0)$ and $\\mathfrak q'=Q$ (its second ideal need not be prime). Injectivity gives $(0)\\cap R=(0)$, hence $Q\\cap R\\ne(0)$. Choose $0\\ne g\\in Q\\cap R$. This already proves the field case.",
+   "uses": [
+    "lem-weil-pbc-finite-algebra-is-integral",
+    "lem-weil-pbc-integral-incomparability"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tags 00GK (lemma-finite-is-integral), 00GT (lemma-integral-no-inclusion); strict-contraction form in the cited Mathlib leaf. ILO V 2.2.3(ii), printed p.65."
+   }
+  },
+  {
+   "text": "Assume now that $\\Lambda$ is a DVR. Coefficientwise reduction $\\rho:R\\to k[[t_1,\\ldots,t_r]]$, $k=\\Lambda/(\\pi)$, has kernel $\\pi R$: all coefficients of a kernel element have the form $\\pi b_E$, and $(b_E)_E$ defines a formal series. The target is a domain by the power-series-domain lemma, because $k$ is a field. Thus $\\pi R$ is a prime ideal. Also $\\pi\\ne0$ in $R$, by its constant coefficient. A DVR is Noetherian since every ideal is principal; hence $R$ is Noetherian by the power-series-Noetherian lemma. Applying the principal-ideal height bound to the prime ideal $\\pi R$, which is trivially minimal over itself, gives height at most one; the strict chain $(0)\\subsetneq\\pi R$ gives height exactly one.",
+   "uses": [
+    "def-sc-discrete-valuation-ring",
+    "def-weil-pbc-multivariate-power-series",
+    "lem-weil-pbc-power-series-domain",
+    "lem-weil-pbc-power-series-noetherian",
+    "lem-sfb-krull-principal-ideal-height-bound"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 0306 (lemma-Noetherian-power-series), Tag 00KV (lemma-minimal-over-1)(1); coefficient reduction from the series definition."
+   }
+  },
+  {
+   "text": "If $Q\\cap R$ is not contained in $\\pi R$, choose $g$ in their difference. The kernel computation in Step 2 gives $\\rho(g)\\ne0$, proving the first alternative. Otherwise put $P=\\sqrt Q$. This is a proper prime: $1\\notin\\sqrt Q$; if $ab\\in\\sqrt Q$ and $a\\notin\\sqrt Q$, then $(a b)^h\\in Q$ for some $h\\ge1$, while $a^h\\notin Q$, so primaryness gives $b^{hn}\\in Q$ for some $n\\ge1$. Thus $b\\in\\sqrt Q$. The radical is an ideal: closure under multiplication by scalars is immediate, and $x^i,y^j\\in Q$ implies $(x+y)^{i+j}\\in Q$ by the binomial expansion. Write $p=P\\cap R$. If $x\\in p$, then $x^n\\in Q\\cap R\\subseteq\\pi R$, so the primality of $\\pi R$ gives $x\\in\\pi R$. Thus $(0)\\ne Q\\cap R\\subseteq p\\subseteq\\pi R$. The height-one property from Step 2 implies $p=\\pi R$. In particular $\\pi\\in P$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "V 3.2.3(i),(ii), printed p.67; explicit radical and contraction argument replacing the dimension formulation."
+   }
+  },
+  {
+   "text": "The prime $P$ is minimal over $\\pi A$. Indeed if $T$ is prime with $\\pi A\\subseteq T\\subseteq P$, then $\\pi R\\subseteq T\\cap R\\subseteq P\\cap R=\\pi R$. The integral-incomparability lemma therefore forces $T=P$. Apply the principal-ideal height bound in the Noetherian ring $A$ to conclude that $P$ has height at most one. It contains the nonzero image of $\\pi$ (both inclusions $\\Lambda\\hookrightarrow R\\hookrightarrow A$ are injective), so $(0)\\subsetneq P$ and its height is exactly one.",
+   "uses": [
+    "lem-weil-pbc-integral-incomparability",
+    "lem-sfb-krull-principal-ideal-height-bound"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tags 00GT (lemma-integral-no-inclusion), 00KV (lemma-minimal-over-1)(1); ILO V 3.2.3(i), printed p.67."
+   }
+  },
+  {
+   "text": "Put $B=A_P$, with maximal ideal $\\mathfrak m=PB$. It is a local ring with this maximal ideal by the definition of prime localization, Noetherian by the localization-Noetherian lemma, and a normal domain by the localization-normal-domain lemma ($0\\notin A\\setminus P$). By the localization dimension lemma, $\\dim B$ is the supremum of lengths of prime chains of $A$ ending inside $P$; the chain $(0)\\subsetneq P$ has length one, and a chain $\\mathfrak p_0\\subsetneq\\mathfrak p_1\\subsetneq\\mathfrak p_2\\subseteq P$ would give $(0)\\subsetneq\\mathfrak p_1\\subsetneq P$, contradicting height one (Step 4). So $\\dim B=1$, and the one-dimensional normal local-domain lemma makes $B$ a discrete valuation ring. We check $Q=A\\cap QB$. If $a/1\\in QB$, combine a finite ideal expression into one fraction $b/s$ with $b\\in Q$ and $s\\notin P$. Equality $a/1=b/s$ gives $u(sa-b)=0$ for some $u\\notin P$; $A$ is a domain, so $sa=b\\in Q$. If $a\\notin Q$, primaryness applied to $as\\in Q$ would give $s^n\\in Q$, contradicting $s\\notin P$. Thus $a\\in Q$; the reverse inclusion is immediate. In particular $QB$ is proper, since otherwise $1\\in Q$. It is nonzero: a nonzero $a\\in Q$ remains nonzero in the domain localization, as $a/1=0$ would give $sa=0$ for some $s\\notin P$.",
+   "uses": [
+    "lem-weil-pbc-localization-noetherian",
+    "lem-weil-pbc-localization-normal-domain",
+    "lem-weil-pbc-localization-dimension-chains-below-prime",
+    "def-weil-pbc-localization-at-prime",
+    "lem-sc-normal-dim1-dvr",
+    "def-sc-discrete-valuation-ring"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "V 3.2.3(i), printed p.67; DVR input is Stacks algebra.tex Tags 031S (lemma-criterion-normal), 00PD (lemma-characterize-dvr); Noetherian localization Tag 00FN (lemma-Noetherian-permanence)."
+   }
+  },
+  {
+   "text": "Every ideal of the DVR $B$ is principal, so write $QB=bB$ with $b\\ne0$. Choose a uniformizer $\\varpi$ of $B$. The unit-times-uniformizer-power lemma gives $b=u\\varpi^n$ with $u$ a unit and $n\\ge0$. Properness of $QB$ rules out $n=0$, hence $n\\ge1$. Therefore $QB=\\varpi^nB=\\mathfrak m^n=P^nB$: the ideal generated by all products of $n$ elements of $P$ equals the $n$th power of the ideal generated by their images, by distributing finite sums. Taking inverse images under $A\\to B$ and using Step 5 yields $Q=A\\cap P^nA_P=P^{(n)}$, exactly the second alternative.",
+   "uses": [
+    "def-sc-discrete-valuation-ring",
+    "lem-weil-pbc-dvr-unit-times-uniformizer-power"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00PD (lemma-characterize-dvr), principal-ideal and uniformizer-power assertions; ILO V 3.2.3(i), printed p.67."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-finite-algebra-is-integral",
+  "lem-weil-pbc-integral-incomparability",
+  "def-sc-discrete-valuation-ring",
+  "def-weil-pbc-multivariate-power-series",
+  "lem-weil-pbc-power-series-domain",
+  "lem-weil-pbc-power-series-noetherian",
+  "lem-sfb-krull-principal-ideal-height-bound",
+  "lem-weil-pbc-localization-noetherian",
+  "lem-sc-normal-dim1-dvr",
+  "lem-weil-pbc-localization-dimension-chains-below-prime",
+  "lem-weil-pbc-localization-normal-domain",
+  "def-weil-pbc-localization-at-prime",
+  "lem-weil-pbc-dvr-unit-times-uniformizer-power"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "V 2.2.3 and V 3.2.3, printed pp.65,67; explicit contraction-based assembly using Stacks algebra inputs, rather than the source dimension argument."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -53,10 +148,45 @@
    "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"IsDedekindDomain.HeightOneSpectrum\", \"module\": \"Mathlib/RingTheory/DedekindDomain/Ideal/Lemmas\", \"type\": \"(R : Type u_1) → [CommRing R] → Type u_1\", \"doc\": \"The type of prime ideals of height one in a commutative ring $ R $, used in the context of Dedekind domains where such ideals correspond to maximal ideals.\"}\n  {\"name\": \"IsDedekindDomain.primesOverEquivPrimesOver\", \"module\": \"Mathlib/RingTheory/Localization/AtPrime/Extension\", \"type\": \"{R : Type u_1} →\\n  {S : Type u_2} →\\n    [inst : CommRing R] →\\n      [inst_1 : CommRing S] →\\n        [inst_2 : Algebra R S] →\\n          (p : Ideal R) →\\n            [inst_3 : p.IsPrime] →\\n              (Rₚ : Type u_3) →\\n                [inst_4 : CommRing Rₚ] →\\n                  [inst_5 : Algebra R Rₚ]\", \"doc\": \"In a Dedekind domain $ S $ with a nonzero prime ideal $ p $ of the base ring $ R $, there exists an order-preserving bijection between the prime ideals of $ S $ lying over $ p $ and the prime ideals o\"}\n  {\"name\": \"Rat.HeightOneSpectrum.primesEquiv\", \"module\": \"Mathlib/NumberTheory/Padics/HeightOneSpectrum\", \"type\": \"{R : Type u_2} →\\n  [inst : CommRing R] →\\n    [inst_1 : Algebra R ℚ] →\\n      [IsIntegralClosure R ℤ ℚ] → [IsDedekindDomain R] → IsDedekindDomain.HeightOneSpectrum R ≃ Nat.Primes\", \"doc\": \"The canonical bijection between the height one spectrum of the integral closure $ R $ of $ \\\\mathbb{Z} $ in $ \\\\mathbb{Q} $ and the set of prime numbers. This equivalence arises because every height one\"}\n  {\"name\": \"instFintypeElemIdealPrimesOver\", \"module\": \"Mathlib/RingTheory/DedekindDomain/Ideal/Lemmas\", \"type\": \"{A : Type u_4} →\\n  [inst : CommRing A] →\\n    (p : Ideal A) →\\n      [hpm : p.IsMaximal] →\\n        (B : Type u_5) →\\n          [inst_1 : CommRing B] →\\n            [IsDedekindDomain B] →\\n              [inst_3 : Algebra A B] →\\n                [IsDomain A] → [Module.IsTorsionFree A B] → [Algebra.IsIntegra\", \"doc\": \"The set of prime ideals in $ B $ lying over a nonzero prime ideal $ p $ of a Dedekind domain $ A $ is finite.\"}\n  {\"name\": \"Ideal.height_eq_height_add_of_liesOver_of_hasGoingDown\", \"module\": \"Mathlib/RingTheory/Ideal/KrullsHeightTheorem\", \"type\": \"∀ {R : Type u_1} [inst : CommRing R] [IsNoetherianRing R] {S : Type u_2} [inst_2 : CommRing S] [inst_3 : Algebra R S]\\n  [IsNoetherianRing S] [Algebra.HasGoingDown R S] (p : Ideal R) [p.IsPrime] (P : Ideal S) [P.IsPrime] [P.LiesOver p],\\n  P.height = p.height + (Ideal.map (Ideal.Quotient.mk (Ideal.map\", \"doc\": \"For a Noetherian ring $ S $ with the going-down property over a ring $ R $, if $ \\\\mathfrak{p} $ is a prime ideal in $ R $ and $ \\\\mathfrak{P} $ is a prime ideal in $ S $ lying over $ \\\\mathfrak{p} $, th\"}\n  {\"name\": \"primesOver_finite\", \"module\": \"Mathlib/RingTheory/DedekindDomain/Ideal/Lemmas\", \"type\": \"∀ {A : Type u_4} [inst : CommRing A] (p : Ideal A) [hpm : p.IsMaximal] (B : Type u_5) [inst_1 : CommRing B]\\n  [IsDedekindDomain B] [inst_3 : Algebra A B] [IsDomain A] [Module.IsTorsionFree A B] [Algebra.IsIntegral A B],\\n  (p.primesOver B).Finite\", \"doc\": \"In a Dedekind domain $ A $ with field of fractions $ K $, let $ L $ be a finite extension of $ K $, and let $ B $ be the integral closure of $ A $ in $ L $. For any nonzero prime ideal $ \\\\mathfrak{p} \"}\n  {\"name\": \"IsDedekindDomain.primesOverEquivPrimesOver_apply\", \"module\": \"Mathlib/RingTheory/Localization/AtPrime/Extension\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S] (p : Ideal R)\\n  [inst_3 : p.IsPrime] (Rₚ : Type u_3) [inst_4 : CommRing Rₚ] [inst_5 : Algebra R Rₚ]\\n  [inst_6 : IsLocalization.AtPrime Rₚ p] [inst_7 : IsLocalRing Rₚ] (Sₚ : Type u_4) [inst_8 : CommRing S\", \"doc\": \"In a Dedekind domain $ S $ with a nonzero prime ideal $ p $ of the base ring $ R $, the order-preserving bijection between prime ideals of $ S $ lying over $ p $ and prime ideals of the localization $\"}\n  {\"name\": \"IsDedekindDomain.primesOverEquivPrimesOver_inertiagDeg_eq\", \"module\": \"Mathlib/RingTheory/Localization/AtPrime/Extension\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S] (p : Ideal R)\\n  [inst_3 : p.IsPrime] (Rₚ : Type u_3) [inst_4 : CommRing Rₚ] [inst_5 : Algebra R Rₚ]\\n  [inst_6 : IsLocalization.AtPrime Rₚ p] [inst_7 : IsLocalRing Rₚ] (Sₚ : Type u_4) [inst_8 : CommRing S\", \"doc\": \"In a Dedekind domain $ S $, for a nonzero prime ideal $ p $ of the base ring $ R $, the order-preserving bijection between the prime ideals of $ S $ lying over $ p $ and the prime ideals of the locali\"}\n",
    "date": "2026-10-19",
    "verdict": "no match: the returned declarations concern separate completion, henselianity, valuation or primary-ideal facts, not this statement or a one-line specialization."
+  },
+  {
+   "tool": "grep",
+   "query": "symbolic[Pp]ow|symbolic_pow|IsPrimary.*height|height.*IsPrimary",
+   "results": "0 hits: ",
+   "date": "2026-10-24",
+   "verdict": "no match: hits provide separate primary, DVR or integral-extension ingredients, not the dichotomy or a one-line specialization."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Primary ideals in finite integral extensions of power series rings over discrete valuation rings are either vertical symbolic powers or contain a scalar nonzero modulo the uniformizer",
+   "results": "8 hits: Ideal.IsPrimary, exists_maximalIdeal_pow_eq_of_principal, Valuation.Integers.maximalIdeal_pow_eq_setOf_le_v_algebraMap_pow, Ideal.IsPrime.isPrimary, Ideal.primesOver.isMaximal, Irreducible.maximalIdeal_pow_eq_setOf_le_v_coe_pow, Ideal.nonempty_primesOver, IsDiscreteValuationRing.ideal_eq_span_pow_irreducible",
+   "date": "2026-10-24",
+   "verdict": "no match: hits provide separate primary, DVR or integral-extension ingredients, not the dichotomy or a one-line specialization."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsPrimary\", \"IsIntegral\"",
+   "results": "0 hits: ",
+   "date": "2026-10-24",
+   "verdict": "no match: hits provide separate primary, DVR or integral-extension ingredients, not the dichotomy or a one-line specialization."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "In a Noetherian integrally closed domain a primary ideal whose radical has height one is the contraction of a power of the maximal ideal of a discrete valuation localization",
+   "results": "8 hits: IsDedekindDomain.HeightOneSpectrum, tfae_of_isNoetherianRing_of_isLocalRing_of_isDomain, IsLocalization.AtPrime.isDiscreteValuationRing_of_dedekind_domain, IsDedekindDomain.isDedekindDomainDvr, IsDedekindDomain.HeightOneSpectrum.ofPrime, IsDedekindDomain.HeightOneSpectrum.isPrime, IsLocalization.AtPrime.isDedekindDomain, IsDedekindDomainDvr.is_dvr_at_nonzero_prime",
+   "date": "2026-10-24",
+   "verdict": "no match: hits provide separate primary, DVR or integral-extension ingredients, not the dichotomy or a one-line specialization."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A primary ideal in a finite normal domain over a power series ring over a discrete valuation ring either meets the base outside the uniformizer ideal or is a symbolic power of a height one prime",
+   "results": "8 hits: IsDiscreteValuationRing.ideal_eq_span_pow_irreducible, Valuation.pow_Uniformizer_is_pow_generator, IsDedekindDomain.HeightOneSpectrum.maxPowDividing, Irreducible.maximalIdeal_pow_eq_setOf_le_v_coe_pow, IsDedekindDomain.HeightOneSpectrum.intValuation_exists_uniformizer, PowerSeries.exist_eq_span_eq_ncard_of_X_notMem, Valuation.Integers.maximalIdeal_pow_eq_setOf_le_v_algebraMap_pow, IsDedekindDomain.HeightOneSpectrum.valuation_exists_uniformizer",
+   "date": "2026-10-24",
+   "verdict": "no match: hits provide separate primary, DVR or integral-extension ingredients, not the dichotomy or a one-line specialization."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-per-equivariant-marked-cylinder-algebraization",
@@ -85,5 +215,55 @@
   "same_as": [],
   "is": null
  },
- "lean_audit": {}
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-per-normal-finite-primary-dichotomy",
+  "worker": "stage1",
+  "summary": "Read ILO V 2.2.3 and 3.2.3, retained the contraction formulation and every hypothesis. No project attachment or Mathlib match for the whole statement. Reused existing finite-integrality, strict contraction, power-series domain/Noetherian, principal-ideal height-bound, height-one localization (normal one-dimensional local domain is a DVR) and uniformizer-factorization nodes. Wrote radical, coefficient reduction and primary saturation arguments explicitly. No new nodes.",
+  "blueprint": "lem-per-artin-gabber-affine-curve, Step 1 constructibility/finiteness input, via the recorded algebraization chain; specifically ILO V 3.2.3 separation of vertical symbolic powers and scalar-annihilated primary ideals. Latest ancestor proof read.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-NM-ead5264bb",
+  "group": "NM",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NM-ead5264bb (reviewer sub-agent of L); spot-checked: Read the item in full: 6 steps, no new nodes, statement and stmt_deps unchanged. Checked it against ILO V 2.2.3 (printed p.65) and V 3.2.3(i),(ii) (printed p.67) via pdftotext of PDF pp.71-73. The item states the source's two cases with contractions instead of dimensions; it is correct and nothing is weakened. Steps 1-6 hold under every hypothesis. Step 1 uses strict contraction with q=(0) prime and q'=Q. Step 2: ker rho = pi R is prime of height one. Step 3: sqrt Q is prime and P cap R = pi R. Step 4: P is minimal over pi A by incomparability, so it has height one. Step 5: Q = A cap QB by primaryness. Step 6: QB = varpi^n B with n >= 1 gives Q = P^(n). Small cases checked: (t_1); (pi^2); (pi,t)^2; ramified R[sqrt pi], where varpi differs from pi; and the excluded Q=0 and Q=A. Batch-5 check: the delivery newly cited lem-trf-normal-domain-principal-divisor-kernel (sec-trace-formula, split), which bundles the height-one DVR fact with trf divisor machinery. I did not accept that citation. FIX: Step 5 now derives the DVR from lem-weil-pbc-localization-normal-domain and lem-weil-pbc-localization-dimension-chains-below-prime (both Mathlib leaves), plus lem-sc-normal-dim1-dvr (imported, no proof_deps, Lean-closed on slopmaster2). proof_deps updated and split_report.tool_uses emptied. No sec-trace-formula or sec-poincare-duality citation remains. Duplicate search (vertical-symbolic-powers-completion, krull-symbolic-graded-embedding, flat-primary-fibre-recovery, sfb-symbolic-powers-flat-prime-extension) found no duplicate.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.NormalFinitePrimaryDichotomy",
+  "declaration": "MvPowerSeries.primary_dichotomy_of_finite_normal_complete_dvr",
+  "declarations": [
+   "MvPowerSeries.exists_nonzero_mem_primary_of_finite_normal_field",
+   "MvPowerSeries.primary_dichotomy_of_finite_normal_complete_dvr"
+  ],
+  "file": "lean/Sheaf/RingTheory/NormalFinitePrimaryDichotomy.lean",
+  "statement": "theorem primary_dichotomy_of_finite_normal_complete_dvr (Λ : Type u) [CommRing Λ] [IsDomain Λ] [IsDiscreteValuationRing Λ] [IsAdicComplete (IsLocalRing.maximalIdeal Λ) Λ] (r : ℕ) (hr : 1 ≤ r) (A : Type v) [CommRing A] [IsDomain A] [IsNoetherianRing A] [IsIntegrallyClosed A] [Algebra (MvPowerSeries (Fin r) Λ) A] [Module.Finite (MvPowerSeries (Fin r) Λ) A] (hinj : Function.Injective (algebraMap (MvPowerSeries (Fin r) Λ) A)) (Q : Ideal A) (hQ0 : Q ≠ ⊥) (hQ : Q.IsPrimary) (π : Λ) (hπ : IsLocalRing.maximalIdeal Λ = Ideal.span {π}) : (∃ g : MvPowerSeries (Fin r) Λ, algebraMap (MvPowerSeries (Fin r) Λ) A g ∈ Q ∧ MvPowerSeries.map (Ideal.Quotient.mk (Ideal.span {π})) g ≠ 0) ∨ ∃ P : PrimeSpectrum A, P.asIdeal = Q.radical ∧ P.asIdeal ≠ ⊥ ∧ (∀ T : Ideal A, T.IsPrime → ⊥ < T → T < P.asIdeal → False) ∧ algebraMap (MvPowerSeries (Fin r) Λ) A (MvPowerSeries.C π) ∈ P.asIdeal ∧ ∃ n : ℕ, 1 ≤ n ∧ Q = Ideal.comap (algebraMap A (Localization.AtPrime P.asIdeal)) (Ideal.map (algebraMap A (Localization.AtPrime P.asIdeal)) (P.asIdeal ^ n))",
+  "branch": "sheaf-dag",
+  "by": "Q64",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "The two declarations state respectively the field and complete-DVR cases of this single node; symbolic powers are expressed directly using Ideal.map and Ideal.comap at Localization.AtPrime."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-7a156372b",
+  "group": "Q64",
+  "result": "pass",
+  "note": "The Lean matches the node clause by clause. Field case: nonzero g in Q∩R. Complete-DVR case ([IsAdicComplete (maximalIdeal Λ) Λ], uniformizer via maximalIdeal = span{π}): g in Q∩R with MvPowerSeries.map (Quotient.mk (span{π})) g ≠ 0, OR P : PrimeSpectrum with P = Q.radical, P ≠ ⊥, no prime strictly between ⊥ and P, C π ∈ P, and Q = comap(map P^n) to Localization.AtPrime with n ≥ 1. Hypotheses: r ≥ 1, injective Module.Finite R→A, Noetherian IsIntegrallyClosed domain A, Q ≠ ⊥ and IsPrimary (includes Q ≠ ⊤; checked the Submodule.IsPrimary definition). Universes u, v independent. The node differs from live only in lean; lean.statement is verbatim in the file; stmt_deps are all Mathlib leaves. Both proofs are sorry with no defs or axioms; docstrings carry the source place, blueprint tag and all six proof steps; the report has Worker report and Second reading sections. No file changed, so no compile. Q81 delivered the same item in parallel (2755ef6810ee) and neither had landed when checked; the lead should retire one of the two claims."
+ }
 }

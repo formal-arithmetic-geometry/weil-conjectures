@@ -1,0 +1,481 @@
+{
+ "id": "lem-sfb-cm-groupoid-hypersurface-slice",
+ "kind": "statement",
+ "title": "One-step dimension-reducing Cohen--Macaulay groupoid slice",
+ "statement": "Let $S$ be a scheme [def-pc-scheme] in the universes of [def-weil-size-convention], and let $(U,R,s,t,e,i,c)$ be a groupoid scheme over $S$ [def-a1-groupoid-scheme], all structure morphisms being over $S$. A morphism $f:X\\to Y$ is Cohen--Macaulay at $x\\in X$ if it is flat at $x$ (the local ring $\\mathcal O_{X,x}$ is flat over $\\mathcal O_{Y,f(x)}$) [def-weil-flat-morphism] and the local ring at $x$ of the scheme-theoretic fibre $X_{f(x)}$ [def-pc-scheme-fibre] is Noetherian [def-weil-pbc-noetherian-ring] with depth [def-weil-pbc-depth] equal to Krull dimension [def-weil-pbc-krull-dimension-ring]. It is Cohen--Macaulay if this holds at every point. Assume $s,t$ are Cohen--Macaulay and locally of finite presentation [def-sbc-locally-finite-presentation]. Let $u\\in U$ be a finite type point, meaning that $\\operatorname{Spec}\\kappa(u)\\to U$ is of finite type [def-weil-affine-spectrum] [def-weil-residue-field] [def-weil-finite-type-morphism]. Put $F_u=R\\times_{s,U}\\operatorname{Spec}\\kappa(u)$ and $G_u=R\\times_{(s,t),U\\times_SU,(u,u)}\\operatorname{Spec}\\kappa(u)$ [def-pc-fibre-product]. Set $d_1=\\dim G_u$ and $d_2=\\dim_{e(u)}F_u$, where global dimension is the supremum of lengths of chains of irreducible closed subsets [def-kun-topological-krull-dimension] and dimension at a point is the minimum of dimensions of open neighbourhoods [def-kun-topological-dimension-at-point]. If $d_2$ is finite and $d_2>d_1$, there exist an affine scheme $B$, a locally finitely presented immersion $g:B\\to U$ [def-weil-closed-immersion], and $b\\in B$ with $g(b)=u$ and $\\kappa(u)\\to\\kappa(b)$ an isomorphism, such that the morphism $h=s\\circ\\operatorname{pr}_R:B\\times_{g,U,t}R\\to U$ is Cohen--Macaulay at $x=(b,e(u))$. For the restricted groupoid with arrow scheme $R_B=B\\times_{g,U,t}R\\times_{s,U,g}B$ and source $s_B:R_B\\to B$ the last projection, one has $\\dim_{e_B(b)}(s_B^{-1}(b))=d_2-1$, where $e_B(b)=(b,e(u),b)$.",
+ "source": {
+  "document": "literature/stacks-project/more-groupoids.tex",
+  "place": "Tag 0461 (lemma-slice), all conclusions, and Tag 04MY (situation-slice). The immersion identifies the point and its residue field; the finite-dimension hypothesis is explicit here."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-size-convention",
+  "def-a1-groupoid-scheme",
+  "def-weil-flat-morphism",
+  "def-pc-scheme-fibre",
+  "def-weil-pbc-noetherian-ring",
+  "def-weil-pbc-depth",
+  "def-weil-pbc-krull-dimension-ring",
+  "def-sbc-locally-finite-presentation",
+  "def-weil-affine-spectrum",
+  "def-weil-residue-field",
+  "def-weil-finite-type-morphism",
+  "def-pc-fibre-product",
+  "def-kun-topological-krull-dimension",
+  "def-kun-topological-dimension-at-point",
+  "def-weil-closed-immersion"
+ ],
+ "proof": [
+  {
+   "text": "Apply the field-point criterion to the canonical $\\operatorname{Spec}\\kappa(u)\\to U$. Choose an affine open $V=\\operatorname{Spec}A$ containing $u$ in which $u$ is closed, with maximal ideal $\\mathfrak m$. Write $k=A/\\mathfrak m=\\kappa(u)$. Choose an affine open $W=\\operatorname{Spec}D$ containing $e(u)$ inside $s^{-1}(V)\\cap t^{-1}(V)$, and let $\\mathfrak q$ represent $e(u)$. Both maps $s,t:A\\to D$ contract $\\mathfrak q$ to $\\mathfrak m$. Their residue maps $k\\to\\kappa(\\mathfrak q)$ are the same isomorphism: the map induced by $e$ is a common inverse, since $se=te=1$. In particular $e(u)$ is a $k$-rational point of $F_u$.",
+   "uses": [
+    "lem-sfb-finite-type-field-point-characterization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-groupoids.tex",
+    "place": "Tag 0461 (lemma-slice), proof, first paragraph; morphisms.tex Tag 01TA (lemma-point-finite-type)."
+   }
+  },
+  {
+   "text": "Put $T=\\mathcal O_{R,e(u)}=D_{\\mathfrak q}$ and $C=T/s(\\mathfrak m)T$. The fibre-stalk quotient identifies $C$ with $\\mathcal O_{F_u,e(u)}$. By hypothesis it is a nonzero Noetherian local Cohen--Macaulay ring. Its Krull dimension is $d_2$: base change of the locally finite type map $s$ gives a locally finite type $k$-scheme $F_u$; choose a finite-type affine neighbourhood of $e(u)$ in it and apply the field dimension formula. Its transcendence-degree term is zero by Step 1, and passing to an open neighbourhood leaves both the stalk and dimension at the point unchanged.",
+   "uses": [
+    "lem-sbc-scheme-fibre-stalk-quotient",
+    "lem-weil-pbc-lft-base-change",
+    "lem-kun-dimension-formula"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-groupoids.tex",
+    "place": "Tag 0461 (lemma-slice), first paragraph; morphisms.tex Tag 02FX (lemma-dimension-fibre-at-a-point); schemes.tex Tag 0HA1 (lemma-local-ring-fibre)."
+   }
+  },
+  {
+   "text": "Form the restricted groupoid on $\\operatorname{Spec}k$ with arrow scheme $H=\\operatorname{Spec}k\\times_{u,U,t}R\\times_{s,U,u}\\operatorname{Spec}k$. Its operations are obtained componentwise from those of $R$; the groupoid equations remain the same equations after pullback. Its source and target are locally of finite type. Indeed their factors are base changes of $s,t$ and of $u:\\operatorname{Spec}k\\to U$, using the cited base-change lemma. Their composites are locally of finite type: on affine charts a composite of two finitely generated algebras is generated by the union of the two finite lists of generators. Its stabilizer is $G_u$: on test schemes both specify an arrow with its two endpoints equal to the same given $k$-point. Regard these schemes as algebraic spaces by their representable sheaves. The two field-groupoid dimension statements, using the identity scheme charts, give $\\dim_{e_H}H=\\dim H=\\dim G_u=d_1$.",
+   "uses": [
+    "def-a1-groupoid-scheme",
+    "def-trf-scheme-algebraic-space",
+    "lem-weil-pbc-lft-base-change",
+    "lem-sfb-field-groupoid-stabilizer-dimension",
+    "lem-sfb-field-groupoid-constant-local-dimension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-groupoids.tex",
+    "place": "Tag 0461 (lemma-slice), second paragraph; Tags 04MP, 04ML, 04MQ, 04LU; spaces-more-groupoids.tex Tags 06FF and 06FD, specialized to schemes."
+   }
+  },
+  {
+   "text": "The point $e_H$ is $k$-rational. The part of $H$ lying over $W$ is affine and of finite type over $k$: it is a closed subscheme of the affine part of the $s$-fibre, whose coordinate algebra is finitely generated over $k$. Apply the field dimension formula on a finite-type affine neighbourhood in $H$, obtaining $\\dim\\mathcal O_{H,e_H}=d_1$. Compute its local ring by taking first the $s$-fibre and then the $t$-fibre at $u$. On the affine neighbourhood $W$, $u\\to V$ is the closed immersion defined by $\\mathfrak m$. The affine pullback formula gives the coordinate quotient $D/(s(\\mathfrak m)D+t(\\mathfrak m)D)$, and localization at the identity gives $\\mathcal O_{H,e_H}=T/(s(\\mathfrak m)T+t(\\mathfrak m)T)=C/J$, where $J$ is the ideal generated by the image of $\\mathfrak m$ under $A\\xrightarrow t T\\to C$. Thus $\\dim(C/J)=d_1<d_2$. These are two endpoint conditions, not the single stabilizer equation $s=t$ on arbitrary field-valued endpoints.",
+   "uses": [
+    "lem-kun-dimension-formula",
+    "lem-weil-pbc-fibre-product-affine-spectra"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-groupoids.tex",
+    "place": "Tag 0461 (lemma-slice), third paragraph, affine quotient for the restriction; morphisms.tex Tag 02FX; schemes.tex Tag 01I4 (lemma-fibre-product-affine-schemes)."
+   }
+  },
+  {
+   "text": "The associated primes $P_1,\\ldots,P_r$ of the self-module $C$ form a finite set. For each $P_j$, the depth bound gives $\\dim(C/P_j)\\ge\\operatorname{depth}C=d_2$. The ideal $J$ is not contained in $P_j$: otherwise $C/P_j$ is a quotient of $C/J$, and lifting prime chains along the quotient would give $\\dim(C/P_j)\\le d_1$, a contradiction. Let $Q_j$ be the inverse image of $P_j$ under $A\\xrightarrow t T\\to C$. These are prime ideals and $\\mathfrak m\\not\\subseteq Q_j$. Prime avoidance supplies $f\\in\\mathfrak m$ outside all $Q_j$. If the associated-prime list were empty the zerodivisor theorem would make $0$ a nonzerodivisor on the nonzero ring $C$, which is impossible; thus the nonempty-list version applies. Set $a=t(f)\\in T$. Its image $\\bar a\\in C$ lies in no associated prime, so the zerodivisor theorem makes multiplication by $\\bar a$ injective. Also $a$ and $\\bar a$ lie in the respective maximal ideals because $f\\in\\mathfrak m$.",
+   "uses": [
+    "lem-weil-pbc-noetherian-associated-primes-finite",
+    "lem-weil-pbc-depth-le-dim-associated-prime",
+    "lem-weil-pbc-prime-avoidance",
+    "lem-weil-pbc-noetherian-zerodivisors-union-associated-primes"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tags 00DS (lemma-silly), 0BK4 (lemma-depth-dim-associated-primes), 00LD (lemma-ass-zero-divisors), and 00LC (lemma-finite-ass); implements the prime-avoidance paragraph of Tag 0461 using associated primes directly."
+   }
+  },
+  {
+   "text": "Define $B=\\operatorname{Spec}(A/(f))$ and $g:B\\hookrightarrow V\\hookrightarrow U$. The first map is the closed immersion defined by the principal ideal $(f)$, so $g$ is an immersion. It is locally of finite presentation directly from the presentation $A/(f)$ with one relation and no algebra generators, followed by an open immersion, which is locally of finite presentation. Let $b$ be the maximal ideal $\\mathfrak m/(f)$. Then $g(b)=u$ and the induced residue map identifies $\\kappa(b)=(A/(f))/(\\mathfrak m/(f))=A/\\mathfrak m=k$.",
+   "uses": [
+    "def-weil-closed-immersion",
+    "def-sbc-locally-finite-presentation",
+    "lem-sbc-locally-finite-presentation-composition"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-groupoids.tex",
+    "place": "Tag 0461 (lemma-slice), paragraph beginning Set A prime = A/fA: conclusions (1)--(3)."
+   }
+  },
+  {
+   "text": "The affine pullback formula identifies the part of $B\\times_{g,U,t}R$ lying over $W$ with $\\operatorname{Spec}(D/(t(f)))$. Hence its local ring at $x=(b,e(u))$ is $T/aT$ and the map from $\\mathcal O_{U,u}$ is induced by $s$. To prove this map flat without a Noetherian hypothesis on $U$, apply the existing fibre-regular slicing lemma to $s:R\\to U$ at $e(u)$ and the one-element germ $a=t(f)$. Step 5 makes this singleton a regular sequence in its fibre ring $C$ (it is a nonzerodivisor in the maximal ideal). The lemma supplies a local cut, flat over $U$, by a section with this very germ. Its stalk map is exactly $\\mathcal O_{U,u}\\to T/aT$. Thus $h$ is flat at $x$, irrespective of whether the neighbourhood supplied by that lemma equals our original $W$.",
+   "uses": [
+    "lem-weil-pbc-fibre-product-affine-spectra",
+    "lem-sfb-scheme-fibre-regular-slice-flat"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-groupoids.tex",
+    "place": "Tag 0461 (lemma-slice), flatness paragraph; more-morphisms.tex Tag 06LI (lemma-slice-given-elements), r=1, whose one-element case is Tag 056Y (lemma-slice-given-element)."
+   }
+  },
+  {
+   "text": "The fibre-stalk quotient applied to $h$ gives $\\mathcal O_{h^{-1}(u),x}=(T/aT)/s(\\mathfrak m)(T/aT)=C/(\\bar a)$. The Cohen--Macaulay nonzerodivisor quotient theorem says this is Noetherian local of dimension $d_2-1$ and depth at least $d_2-1$. Its depth is also at most its dimension by the depth--support bound applied to its nonzero self-module (whose support is the whole prime spectrum). Thus depth equals dimension. Together with Step 7 this proves that $h$ is Cohen--Macaulay at $x$.",
+   "uses": [
+    "lem-sbc-scheme-fibre-stalk-quotient",
+    "lem-weil-pbc-cm-local-quotient-nonzerodivisor-cm",
+    "lem-weil-pbc-depth-le-support-dimension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-groupoids.tex",
+    "place": "Tag 0461 (lemma-slice), Cohen--Macaulay quotient paragraph; algebra.tex Tags 02JN (lemma-reformulate-CM) and 00LK (lemma-bound-depth)."
+   }
+  },
+  {
+   "text": "Finally $s_B^{-1}(b)\\cong h^{-1}(u)\\times_{\\operatorname{Spec}k}\\operatorname{Spec}\\kappa(b)$ by associating the fibre products in $R_B=B\\times_{g,U,t}R\\times_{s,U,g}B$. Step 6 makes the latter field base change the identity, and sends $e_B(b)$ to $x$. Near this point the fibre has affine equation $t(f)=0$ in the finite-type $k$-scheme $F_u$, so it has a finite-type affine neighbourhood. The field dimension formula has zero transcendence-degree term because the point has residue field $k$. Its topological dimension at the point therefore equals the local-ring dimension from Step 8, namely $d_2-1$. This is precisely the remaining assertion.",
+   "uses": [
+    "def-pc-fibre-product",
+    "lem-kun-dimension-formula"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-groupoids.tex",
+    "place": "Tag 0461 (lemma-slice), final paragraph; Situation 04MY (situation-slice), fibre identity; morphisms.tex Tag 02FX."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-finite-type-field-point-characterization",
+  "lem-sbc-scheme-fibre-stalk-quotient",
+  "lem-weil-pbc-lft-base-change",
+  "lem-kun-dimension-formula",
+  "def-a1-groupoid-scheme",
+  "def-trf-scheme-algebraic-space",
+  "lem-sfb-field-groupoid-stabilizer-dimension",
+  "lem-sfb-field-groupoid-constant-local-dimension",
+  "lem-weil-pbc-fibre-product-affine-spectra",
+  "lem-weil-pbc-noetherian-associated-primes-finite",
+  "lem-weil-pbc-depth-le-dim-associated-prime",
+  "lem-weil-pbc-prime-avoidance",
+  "lem-weil-pbc-noetherian-zerodivisors-union-associated-primes",
+  "def-weil-closed-immersion",
+  "def-sbc-locally-finite-presentation",
+  "lem-sbc-locally-finite-presentation-composition",
+  "lem-sfb-scheme-fibre-regular-slice-flat",
+  "lem-weil-pbc-cm-local-quotient-nonzerodivisor-cm",
+  "lem-weil-pbc-depth-le-support-dimension",
+  "def-pc-fibre-product"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/more-groupoids.tex",
+  "place": "Tag 0461 (lemma-slice), complete proof; associated-prime version of prime avoidance; same-unit Tag 056Y fibre-regular slicing replaces the local-ring invocation of 046Z."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "Cohen.?Macaulay|lemma.slice|groupoid.*slice",
+   "results": {
+    "t": "2026-10-23T14:43:33Z",
+    "tool": "grep",
+    "query": "Cohen.?Macaulay|lemma.slice|groupoid.*slice",
+    "sub": "AlgebraicGeometry",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: smooth relative-dimension charts and manifold groupoids do not give a slice of a groupoid of schemes with Cohen--Macaulay saturation at its identity."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A scheme groupoid has a hypersurface slice decreasing fibre dimension and preserving Cohen Macaulayness at its identity",
+   "results": {
+    "t": "2026-10-23T14:43:34Z",
+    "tool": "leansearch",
+    "query": "A scheme groupoid has a hypersurface slice decreasing fibre dimension and preserving Cohen Macaulayness at its identity",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "Topology.IsOpenEmbedding.singleton_hasGroupoid",
+     "AlgebraicGeometry.Scheme.Hom.isIso_toLRSHom",
+     "AlgebraicGeometry.isSmoothOfRelativeDimension_comp",
+     "AlgebraicGeometry.Scheme.instCategory",
+     "AlgebraicGeometry.instIsSmoothOfRelativeDimensionOfNatNatOfIsOpenImmersion",
+     "AlgebraicGeometry.isReduced_of_isIntegral",
+     "AlgebraicGeometry.Scheme.PartialMap.instIsReducedToScheme",
+     "AlgebraicGeometry.IsSmooth"
+    ],
+    "digest": "72dad54a3706fdc3"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: smooth relative-dimension charts and manifold groupoids do not give a slice of a groupoid of schemes with Cohen--Macaulay saturation at its identity."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"CohenMacaulay\"",
+   "results": {
+    "t": "2026-10-23T14:43:34Z",
+    "tool": "loogle",
+    "query": "\"AlgebraicGeometry\", \"CohenMacaulay\"",
+    "sub": "",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: smooth relative-dimension charts and manifold groupoids do not give a slice of a groupoid of schemes with Cohen--Macaulay saturation at its identity."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Cohen Macaulay groupoid schemes admit a locally finitely presented immersed hypersurface slice lowering source fibre dimension by one if larger than stabilizer dimension",
+   "results": {
+    "t": "2026-10-23T14:43:38Z",
+    "tool": "leanfinder",
+    "query": "Cohen Macaulay groupoid schemes admit a locally finitely presented immersed hypersurface slice lowering source fibre dimension by one if larger than stabilizer dimension",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "AlgebraicGeometry.IsSmoothOfRelativeDimension",
+     "AlgebraicGeometry.IsSmoothOfRelativeDimension.exists_isStandardSmoothOfRelativeDimension",
+     "Algebra.IsStandardSmoothOfRelativeDimension.out",
+     "AlgebraicGeometry.spread_out_of_isGermInjective'",
+     "AlgebraicGeometry.Scheme.Etale",
+     "Algebra.IsStandardSmoothOfRelativeDimension",
+     "AlgebraicGeometry.IsSmooth.exists_isStandardSmooth",
+     "AlgebraicGeometry.instIsSmoothOfRelativeDimensionOfNatNatOfIsOpenImmersion"
+    ],
+    "digest": "57d85d16f82ce500"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: smooth relative-dimension charts and manifold groupoids do not give a slice of a groupoid of schemes with Cohen--Macaulay saturation at its identity."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"CohenMacaulay\"",
+   "results": {
+    "t": "2026-10-23T14:46:44Z",
+    "tool": "loogle",
+    "query": "\"AlgebraicGeometry\", \"CohenMacaulay\"",
+    "sub": "",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: smooth relative-dimension charts and manifold groupoids do not give a slice of a groupoid of schemes with Cohen--Macaulay saturation at its identity."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"CohenMacaulay\"",
+   "results": {
+    "t": "2026-10-23T14:56:21Z",
+    "tool": "loogle",
+    "query": "\"AlgebraicGeometry\", \"CohenMacaulay\"",
+    "sub": "",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: smooth relative-dimension charts and manifold groupoids do not give a slice of a groupoid of schemes with Cohen--Macaulay saturation at its identity."
+  },
+  {
+   "tool": "grep",
+   "query": "Cohen.?Macaulay|groupoid.*slice",
+   "results": {
+    "t": "2026-10-23T18:57:53Z",
+    "tool": "grep",
+    "query": "Cohen.?Macaulay|groupoid.*slice",
+    "sub": "AlgebraicGeometry",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: affine smooth-chart and immersion results do not give a Cohen--Macaulay groupoid slice with the required fibre dimension."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A Cohen Macaulay groupoid of schemes has a hypersurface slice preserving flatness at the identity and decreasing fibre dimension",
+   "results": {
+    "t": "2026-10-23T18:57:54Z",
+    "tool": "leansearch",
+    "query": "A Cohen Macaulay groupoid of schemes has a hypersurface slice preserving flatness at the identity and decreasing fibre dimension",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "AlgebraicGeometry.Flat.flat_of_affine_subset",
+     "AlgebraicGeometry.Flat.flat_appLE",
+     "AlgebraicGeometry.flat_iff",
+     "AlgebraicGeometry.Flat.generalizingMap",
+     "AlgebraicGeometry.Flat",
+     "AlgebraicGeometry.Flat.instMorphismRestrict",
+     "AlgebraicGeometry.Flat.iff_flat_stalkMap",
+     "AlgebraicGeometry.Flat.of_stalkMap"
+    ],
+    "digest": "4d387ae13aaa3b3b"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: affine smooth-chart and immersion results do not give a Cohen--Macaulay groupoid slice with the required fibre dimension."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"CohenMacaulay\"",
+   "results": {
+    "t": "2026-10-23T18:57:54Z",
+    "tool": "loogle",
+    "query": "\"AlgebraicGeometry\", \"CohenMacaulay\"",
+    "sub": "",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: affine smooth-chart and immersion results do not give a Cohen--Macaulay groupoid slice with the required fibre dimension."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Cohen Macaulay groupoid schemes admit an immersed hypersurface slice decreasing source fibre dimension by one when larger than the stabilizer dimension",
+   "results": {
+    "t": "2026-10-23T18:57:56Z",
+    "tool": "leanfinder",
+    "query": "Cohen Macaulay groupoid schemes admit an immersed hypersurface slice decreasing source fibre dimension by one when larger than the stabilizer dimension",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "AlgebraicGeometry.Scheme.Hom.liftCoborder",
+     "AlgebraicGeometry.instIsClosedImmersionLiftCoborder",
+     "AlgebraicGeometry.IsSmoothOfRelativeDimension",
+     "AlgebraicGeometry.instIsPreimmersionFiberι",
+     "AlgebraicGeometry.Scheme.IdealSheafData.instIsPreimmersionSubschemeι",
+     "AlgebraicGeometry.instIsDominantιCoborderRange",
+     "AlgebraicGeometry.IsSmoothOfRelativeDimension.exists_isStandardSmoothOfRelativeDimension",
+     "AlgebraicGeometry.IsImmersion.instIsZariskiLocalAtTarget"
+    ],
+    "digest": "998aeae92eac5c7f"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: affine smooth-chart and immersion results do not give a Cohen--Macaulay groupoid slice with the required fibre dimension."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-cm-groupoid-maximal-slice",
+  "date": "2026-10-24",
+  "group": "Q101"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Algebraicity and smoothness of the stack of all nodal curves. Supporting input: Tags 0D52 (lemma-curves-stack) and 0D53 (lemma-curves-diagonal), with situation-curves. Supporting input: Effectivity step in quot-lemma-curves-stack via quot-lemma-spaces-stack; finite-type part (2) of bootstrap-lemma-descend-algebraic-space. Supporting input: theorem-final-bootstrap (3), applied after constructing a representable fppf cover of the descended sheaf. Subdivision of the final bootstrap: slicing the schematic kernel equivalence relation (Tag 0489). Supporting input in Tag 0489: Tag 04N0 (lemma-max-slice-quasi-finite), clauses (1)--(4), with Situation 04MY (situation-slice), specialized to an equivalence relation, whose stabilizer is the identity V. Only the local slice and its saturation map are asserted. Supporting input in the proof of Tag 04N0: maximal slice, before imposing any quasi-finiteness conclusion (04MZ). In the proof of Tag 04MZ, the strict-inequality case invokes Tag 0461 to reduce the source-fibre dimension by one, before globalizing the Cohen--Macaulay locus.",
+   "via": [
+    "lem-sfb-cm-groupoid-maximal-slice",
+    "lem-sfb-cm-relation-point-slice",
+    "lem-sfb-fppf-space-relation-slicing",
+    "lem-sfb-fppf-space-atlas-bootstrap",
+    "lem-sfb-space-finite-type-fppf-effectivity",
+    "lem-sfb-curve-descent-isom-spaces",
+    "lem-sfb-nodal-curve-stack-smooth",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-cm-groupoid-hypersurface-slice",
+  "worker": "stage1",
+  "summary": "Proved the affine one-equation construction from Tag 0461 in nine steps, reusing existing field-groupoid dimension, field-point, fibre-regular slice and commutative-algebra nodes. No new nodes or statement changes. Associated-prime avoidance directly supplies the fibre nonzerodivisor, and the existing geometric slicing criterion avoids adding a Noetherian base hypothesis. All uses quoted in citations.json.",
+  "blueprint": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Algebraicity and smoothness of the stack of all nodal curves. Supporting input: Tags 0D52 (lemma-curves-stack) and 0D53 (lemma-curves-diagonal), with situation-curves. Supporting input: Effectivity step in quot-lemma-curves-stack via quot-lemma-spaces-stack; finite-type part (2) of bootstrap-lemma-descend-algebraic-space. Supporting input: theorem-final-bootstrap (3), applied after constructing a representable fppf cover of the descended sheaf. Subdivision of the final bootstrap: slicing the schematic kernel equivalence relation (Tag 0489). Supporting input in Tag 0489: Tag 04N0 (lemma-max-slice-quasi-finite), clauses (1)--(4), with Situation 04MY (situation-slice), specialized to an equivalence relation, whose stabilizer is the identity V. Only the local slice and its saturation map are asserted. Supporting input in the proof of Tag 04N0: maximal slice, before imposing any quasi-finiteness conclusion (04MZ). In the proof of Tag 04MZ, the strict-inequality case invokes Tag 0461 to reduce the source-fibre dimension by one, before globalizing the Cohen--Macaulay locus.",
+  "tool_uses": [
+   {
+    "node": "lem-kun-dimension-formula",
+    "why": "Generic finite-type field dimension formula at rational fibre points; used as an algebraic/geometric tool inside the fixed 0461 route, with no same-unit statement supplying it."
+   },
+   {
+    "node": "lem-sbc-scheme-fibre-stalk-quotient",
+    "why": "Generic canonical fibre-stalk quotient; used as an algebraic/geometric tool inside the fixed 0461 route, with no same-unit statement supplying it."
+   },
+   {
+    "node": "lem-weil-pbc-depth-le-dim-associated-prime",
+    "why": "Generic associated-prime depth bound for prime avoidance; used as an algebraic/geometric tool inside the fixed 0461 route, with no same-unit statement supplying it."
+   },
+   {
+    "node": "lem-weil-pbc-cm-local-quotient-nonzerodivisor-cm",
+    "why": "Generic Cohen--Macaulay regular-element quotient; used as an algebraic/geometric tool inside the fixed 0461 route, with no same-unit statement supplying it."
+   },
+   {
+    "node": "lem-weil-pbc-depth-le-support-dimension",
+    "why": "Generic upper bound on quotient depth; used as an algebraic/geometric tool inside the fixed 0461 route, with no same-unit statement supplying it."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-kun-dimension-formula",
+  "lem-sbc-scheme-fibre-stalk-quotient",
+  "lem-weil-pbc-depth-le-dim-associated-prime",
+  "lem-weil-pbc-cm-local-quotient-nonzerodivisor-cm",
+  "lem-weil-pbc-depth-le-support-dimension"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q49-6609a00fa",
+  "group": "Q49",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q49-6609a00fa (reviewer sub-agent of L); spot-checked: I read the item, all 20 cited node statements and Stacks more-groupoids 04MY/0461 with its full proof. The statement, stmt_deps and blueprint are unchanged from Q101's creation. There are no new nodes. The nine steps follow 0461. Step 1: the 01TA/02J2 node gives an affine V in which u is closed; the residue maps agree via e. Step 2: fibre-stalk quotient plus 02FX at a rational point gives dim C = d2. Step 3: the restricted groupoid H has stabilizer G_u (04ML, checked on fibre products); the 04LU and 04MQ nodes, via the identity chart, give dim H = d1. Step 4: the affine pullback gives O_{H,e} = C/J with dim d1. Step 5: associated-prime avoidance (00LC, 0BK4, 00DS, 00LD) replaces the source's minimal primes. It is valid: J not in any P_j because dim C/P_j >= d2 > d1; the empty Ass case is excluded. Step 6: B = Spec A/(f) is an lfp immersion with kappa(b) = k. Step 7: flatness comes from the same-unit 056Y slice node applied to s with germ t(f), with no Noetherian base. Step 8: the CM quotient node plus depth <= dim. Step 9: 04MY fibre identity and 02FX give d2-1. Small cases checked: pair groupoid of A^1 and A^n, and group schemes (d1 = d2, excluded). No DAG node states 0461. The 5 declared tool_uses are generic algebra and are accepted. Batch 5: def-trf-scheme-algebraic-space is a general definition; the field-groupoid lemmas reach trf only through def-trf-algebraic-space; trf 056Y is a generic flatness criterion, not a trace-formula or Poincare step. All are OK. Maintainer note: blueprint.from.node is null, inherited from the creating delivery."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.CohenMacaulayGroupoidHypersurfaceSlice",
+  "declaration": "AlgebraicGeometry.exists_cm_groupoid_hypersurface_slice",
+  "file": "lean/Sheaf/AlgebraicGeometry/CohenMacaulayGroupoidHypersurfaceSlice.lean",
+  "statement": "theorem exists_cm_groupoid_hypersurface_slice {S U R : Scheme.{u}} (p : U ⟶ S) (q : R ⟶ S) (s t : R ⟶ U) (e : U ⟶ R) (i : R ⟶ R) (c : pullback s t ⟶ R) (hG : IsGroupoidScheme s t e i c) (hs : s ≫ p = q) (ht : t ≫ p = q) [Flat s] [Flat t] [LocallyOfFinitePresentation s] [LocallyOfFinitePresentation t] (hcm : ∀ (f : R ⟶ U), f = s ∨ f = t → ∀ r : R, IsNoetherianRing ((f.fiber (f r)).presheaf.stalk (f.asFiber r)) ∧ (IsLocalRing.depth (R := (f.fiber (f r)).presheaf.stalk (f.asFiber r)) ((f.fiber (f r)).presheaf.stalk (f.asFiber r)) : WithBot ℕ∞) = ringKrullDim ((f.fiber (f r)).presheaf.stalk (f.asFiber r))) (u : U) [LocallyOfFiniteType (U.fromSpecResidueField u)] [QuasiCompact (U.fromSpecResidueField u)] (n : ℕ) (hdim : topologicalKrullDimAt (s.asFiber (e u)) = (n : WithBot ℕ∞)) (hdrop : topologicalKrullDim (pullback (pullback.lift s t (hs.trans ht.symm)) (pullback.lift (U.fromSpecResidueField u) (U.fromSpecResidueField u) rfl) : Scheme.{u}) < (n : WithBot ℕ∞)) : ∃ (B : Scheme.{u}) (g : B ⟶ U) (b : B), IsAffine B ∧ IsImmersion g ∧ LocallyOfFinitePresentation g ∧ g b = u ∧ IsIso (g.residueFieldMap b) ∧ ∃ x : (pullback g t : Scheme.{u}), pullback.fst g t x = b ∧ pullback.snd g t x = e u ∧ ((pullback.snd g t ≫ s).stalkMap x).hom.Flat ∧ IsNoetherianRing (((pullback.snd g t ≫ s).fiber ((pullback.snd g t ≫ s) x)).presheaf.stalk ((pullback.snd g t ≫ s).asFiber x)) ∧ (IsLocalRing.depth (R := ((pullback.snd g t ≫ s).fiber ((pullback.snd g t ≫ s) x)).presheaf.stalk ((pullback.snd g t ≫ s).asFiber x)) (((pullback.snd g t ≫ s).fiber ((pullback.snd g t ≫ s) x)).presheaf.stalk ((pullback.snd g t ≫ s).asFiber x)) : WithBot ℕ∞) = ringKrullDim (((pullback.snd g t ≫ s).fiber ((pullback.snd g t ≫ s) x)).presheaf.stalk ((pullback.snd g t ≫ s).asFiber x)) ∧ ∃ z : (pullback.snd (pullback.snd g t ≫ s) g).fiber b, pullback.fst (pullback.snd g t ≫ s) g ((pullback.snd (pullback.snd g t ≫ s) g).fiberι b z) = x ∧ topologicalKrullDimAt z = ((n - 1 : ℕ) : WithBot ℕ∞)",
+  "branch": "newtargets-dag",
+  "by": "Q60",
+  "date": "2026-10-23",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-7f399047f",
+  "group": "Q60",
+  "result": "pass",
+  "note": "Checked each clause against the node and Stacks 04MY/0461: groupoid over S via p,q,hs,ht plus IsGroupoidScheme; s,t Cohen-Macaulay (Flat plus Noetherian fibre stalk with depth = ringKrullDim) and lfp; finite type point = LocallyOfFiniteType ∧ QuasiCompact of fromSpecResidueField; G_u = R over U×_S U at (u,u); d2 finite as n:ℕ at s.asFiber(e u); conclusions affine B, IsImmersion and lfp g, g b = u, IsIso residueFieldMap, h = pullback.snd g t ≫ s Cohen-Macaulay at x, R_B source fibre dimension at z = n-1. x and z are unique because base changes of immersions are injective. G_u is nonempty, so n ≥ 1 and the natural subtraction is exact. lean.statement matches the header verbatim; node equals live apart from the added lean field (not superseded); proof is sorry only; docstrings carry the source place, blueprint id and all 9 steps; imports are the recorded proof_dep modules; report sections present; no existing Lean statement or CM-morphism definition. No compile needed (no change). Advisory only: IsImmersion, IsAffine, stalkMap and RingHom.Flat are not listed in their dep records."
+ }
+}

@@ -5,7 +5,7 @@ Authors: SHEAF group H2
 -/
 module
 
-public import Sheaf.Paper.ContinuousIntegralCoefficients
+public import Sheaf.Paper.ContinuousIntegralCoefficientData
 
 import Sheaf.Paper.IntegralMatrixEntryProperties
 import Sheaf.Paper.FiniteBiproductPivot

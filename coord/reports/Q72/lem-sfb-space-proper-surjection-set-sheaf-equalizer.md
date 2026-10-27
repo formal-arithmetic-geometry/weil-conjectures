@@ -1,0 +1,52 @@
+# Worker report
+
+1. Files written:
+   - `dag/nodes/sec-six-functors-basics/lem-sfb-space-proper-surjection-set-sheaf-equalizer.json`: item, split in six steps, statement and statement dependencies preserved.
+   - `dag/nodes/sec-six-functors-basics/lem-sfb-etale-set-sections-ph-sheaf.json`: new statement-only lemma, Stacks 0DDW; no Mathlib match.
+   - `citations.json`: one verbatim statement quotation per cited node per item step.
+2. Attachments: none. Searched the live `lean/WeilConjectures/` by the blueprint tag, proper-surjective section descent and ph extension. The proper-surjection cancellation theorems concern schemes, cohomology or base-change properties and do not state this space/set assertion. No exact project declaration was found for either delivered node.
+3. WANTED: none.
+4. The imported statement is correct and was preserved. Stacks 0DFX's proof has an affine-target typo, detailed below. The existing 0DDW scheme equalizer node is abelian; silently applying it to a sheaf of sets would have been a coefficient error. No such identification is used.
+5. Nothing remains unfinished in the split. The new 0DDW theorem is deliberately unsplit, with empty proof and proof dependencies, for its own subsequent stage-1 item. No Lean was written or compiled.
+
+## Source error
+
+In `literature/stacks-project/spaces-more-cohomology.tex`, Tag 0DFX (`lemma-surjective-proper`), the proof says that by etale locality on X one may assume **Y** is affine. That locality instead permits assuming **X** affine. This is forced also by the next sentence: weak Chow is applied to Y over the affine target, producing a scheme Z proper surjective over Y, so that Z to X is a scheme morphism. Our argument uses T affine as the target and P as the possibly nonschematic source. The statement itself has no error and needs no correction. This is a source-proof typo, not a departure from the source route.
+
+## Searches and blueprint route
+
+Read AGENTS.md, the stage-1 standing brief and stage document, SETUP.md's three levels and tool-use rule, GOAL.md, the named chapter/unit records, and delivery-errors B through E. Read the current `literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/_section.md` and its direct-images proof. This item supports the inherited alteration/moduli branch through 0DG0 and 0DFX. `blueprint_refs.py ancestor` reports the existing null ancestor; that ancestry and via list are preserved and extended faithfully for the child. Searches of the entire blueprint by 0DDW, ph sheaf, ph topology, inverse image sections and proper surjection found no blueprint node stating the new result.
+
+Searched the whole DAG by 0DDW, `lemma-describe-pullback-pi-ph`, ph sheaf and proper-surjection equalizer concepts before creating the sole new node. Required Mathlib searches ran through msearch.py, and their actual metadata/results were read and retained in searches.jsonl and mathlib_searches. Two semantic ph-extension phrasings returned ordinary etale-site constructions and condensed locally constant functions, not the assertion. Loogle found no phTopology; the focused grep in AlgebraicGeometry found no ph topology/sheaf or proper-surjective etale theorem. The broad grep also found module-sheaf functors because its text pattern matched morphism; those are not relevant matches. Read the ordinary topology in Mathlib/AlgebraicGeometry/Sites/Etale.lean, the scheme separated equalizer instance in Morphisms/Separated.lean, and the CompHaus equalizer interface in Condensed/Explicit.lean: none supplies proper descent on small etale sites of algebraic spaces. The new node records no Mathlib match. Existing historical search records on the item were preserved and the Q72 item searches added.
+
+## Not duplicates
+
+lem-sfb-etale-set-sections-ph-sheaf vs lem-trf-proper-surjection-etale-section-equalizer: the existing node assumes an abelian sheaf and states its section equalizer for a scheme proper surjection; the new node asserts a big ph sheaf for any small etale sheaf of sets, with all scheme test objects and their restriction maps.
+
+lem-sfb-etale-set-sections-ph-sheaf vs lem-trf-ph-big-etale-torsion-acyclicity: the existing statement assumes torsion abelian coefficients and gives a comparison unit and higher-direct-image vanishing; it does not state the arbitrary-set presheaf assertion.
+
+lem-sfb-etale-set-sections-ph-sheaf vs lem-trf-ph-etale-torsion-comparison: the existing statement concerns a derived comparison for bounded-below torsion-cohomology abelian complexes, not arbitrary sheaves of sets or the prescribed section presheaf.
+
+lem-sfb-etale-set-sections-ph-sheaf vs lem-trf-ph-etale-comparison-hypotheses: the existing node's sheaf clause (3) applies only to its torsion abelian subcategory A'_X, not arbitrary sheaves of sets.
+
+lem-sfb-etale-set-sections-ph-sheaf vs lem-sfb-proper-surjection-etale-space-effectivity: the existing node descends quasi-compact etale algebraic spaces under proper finite-presentation surjections between quasi-separated spaces, with cocycle data; it neither states the general ph presheaf theorem nor allows the unrestricted coefficients/hypotheses needed here. It is also upstream of this item, so it is not cited.
+
+lem-sfb-etale-set-sections-ph-sheaf vs lem-sfb-space-proper-surjection-set-sheaf-equalizer: the new node is a scheme-site extension theorem with no algebraic spaces and no assertion about arbitrary proper space morphisms; the item's steps must still prove injectivity, reduce on the target, construct a Chow scheme refinement, descend there, and prove agreement on the original space. It does not move the space equalizer assertion into a new node.
+
+## Review by Q72
+
+I read 0DFX in spaces-more-cohomology.tex, 0DDW in etale-cohomology.tex (the full statement and its proof), 089J (`lemma-weak-chow`) in spaces-cohomology.tex, and 0DES (`lemma-surjective-proper-ph`) in topologies.tex. I also read the statements of every node used in the six item steps. The new lemma is exactly the sheaf assertion of 0DDW, whose F is a set sheaf, and whose test schemes are not required to be finite type. Its restriction map is the usual inverse-image section map with the composition comparison. Its universe/small-presentation convention matches the existing ph-site definition. No assertion from the proof of a cited node is being used as its interface.
+
+Step 1 uses the field-extension lift explicitly stated in def-trf-algebraic-space-jointly-surjective-family, and existence of an algebraic closure explicitly included in def-weil-algebraic-closure. The geometric-space stalk node gives both pullback stalks and conservativity. To avoid assuming a lift over the original algebraically closed field, I used a common algebraically closed extension. The cited scheme geometric-point-morphism lemma applies to G=x^{-1}F on the scheme Spec Omega, with identity and extension geometric points, and gives the required bijection of stalks. The space composition comparison identifies these stalks with F_x and F_xe. Thus the argument does not need finite type of the surjection, a rational-point theorem, or a stalk-comparison lemma that the cited node lacks. This proves section injectivity for all the surjections later used.
+
+Step 2 uses the chart-ringed-morphism statement's actual formula f_*G(V)=G(X times_Y V). Its composition/localization companion identifies etale restriction with inverse image and preserves the unit comparisons. The proper base-change node allows arbitrary space maps, and the smooth-surjective-locality node separately states arbitrary base-change stability of surjectivity (we use no smoothness assumption). An affine cover of an etale scheme object gives the elementary covering-basis reduction. Equality and unique local antecedents glue by the sheaf axiom. I checked that the source V need not be a scheme and that no improper assumption of representability enters here.
+
+Step 3 applies weak Chow only after P to T has become proper with T affine; hence its separated-finite-type hypotheses hold. Weak Chow states a scheme Z and a proper universally surjective map, not merely a birational modification. The proper-composition node supplies properness of Z to T with scheme agreement. Surjectivity of its composite follows immediately by composing point images. This is exactly where the affine-target typo was corrected.
+
+Step 4 uses the new 0DDW statement and the actual generator clause in def-trf-ph-scheme-site: q is a singleton ph cover. Its matching family condition is equality on Z times_T Z. The map (c,c) pulls the assumed equality on P times_T P to this equality, so no representability of P, abelian-group structure or torsion is needed. The big ph sheaf restriction maps are precisely the canonical inverse-image maps used in the item. The sheaf axiom provides s on T and uniqueness.
+
+Step 5 is elementary from preceding steps: both candidate sections on P pull to b_Z, and injectivity from Step 1 forces equality. The same injectivity gives uniqueness, and the commuting structure maps give the converse matching condition. No unmentioned descent theorem is hidden in this step.
+
+Step 6 uses the adjunction-compatible composition node's stated comparison, so the arrows are the units normalized in the item, including h_* and the two projection maps. Gluing the unique solutions on the affine basis proves the sheaf universal property. Pointwise uniqueness gives the monomorphism and image description. I checked that no proper base change for arbitrary space set sheaves is invoked here: that is the parent theorem, so using it would create a cycle. Every proof step is below 2000 characters.
+
+For the new statement I tested the empty base (the empty Zariski cover enforces one section), empty F on a nonempty base, terminal F, an identity proper cover, a disconnected proper surjection and a nonreduced base. The ph sheaf assertion allows all of them, and Step 4 needs no nonempty section unless a matching section b is given. For the item I checked h an isomorphism, U empty (surjectivity forces V empty), a fold map of two components, and nonrepresentable proper h. No finite presentation or Noetherianity enters weak Chow or the site arguments. A proper map without surjectivity, such as the empty map to a nonempty scheme, would not give injectivity; the proof retains the surjectivity hypothesis throughout. No SGA source or forbidden route is used.

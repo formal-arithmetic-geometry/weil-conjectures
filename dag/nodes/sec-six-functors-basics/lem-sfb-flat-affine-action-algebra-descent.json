@@ -1,0 +1,294 @@
+{
+ "id": "lem-sfb-flat-affine-action-algebra-descent",
+ "kind": "statement",
+ "title": "Quasi-coherent algebras and invariant sections on a flat affine action quotient",
+ "statement": "Let $k$ be a field [def-weil-field], $H$ an affine group scheme of finite type over $k$ [def-sc-group-scheme, def-weil-finite-type-morphism], and $E$ a finitely generated commutative $k$-algebra with a rational $H$-action. Here rational means a $k$-algebra coaction $\\rho_E:E\\to E\\otimes_k k[H]$ satisfying the counit and coassociativity identities, and $E^H=\\{e:\\rho_E(e)=e\\otimes1\\}$. Put $U=\\operatorname{Spec}E$ and $Y=\\operatorname{Spec}(E^H)$ [def-weil-affine-spectrum]. Let $\\mathcal X=[U/H]$ be the fppf quotient stack of torsors with equivariant maps to $U$, and let $\\pi:U\\to\\mathcal X$ and $\\phi:\\mathcal X\\to Y$ be its presentation and invariant morphism [lem-sfb-flat-affine-action-stack-presentation]. Pullback along $\\pi$, followed by affine sections, gives an equivalence between quasi-coherent $\\mathcal O_{\\mathcal X}$-algebras and commutative $E$-algebras $D$ endowed with a rational $H$-coaction extending that on $E$. Quasi-coherence on a stack is tested on smooth charts as in [def-sfb-adequate-moduli-space]. This equivalence identifies surjections with surjective equivariant $E$-algebra maps. For every corresponding pair $\\mathcal D,D$, there is a natural isomorphism $\\Gamma(\\mathcal X,\\mathcal D)\\cong D^H$, where $D^H=\\{d:\\rho_D(d)=d\\otimes1\\}$. For $\\mathcal D=\\mathcal O_{\\mathcal X}$ this identifies the map $E^H\\to\\Gamma(\\mathcal X,\\mathcal O_{\\mathcal X})$ induced by $\\phi$ with the identity of $E^H$. There is no finite-generation restriction on $D$.",
+ "source": {
+  "document": "literature/stacks-project/stacks-sheaves.tex",
+  "place": "Tag 06WT (proposition-quasi-coherent), applied to the affine action groupoid; groupoids.tex Section equivariant (definition-equivariant-module). Algebra objects and their sections are obtained compatibly with multiplication and the unit."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-sc-group-scheme",
+  "def-weil-affine-spectrum",
+  "lem-sfb-flat-affine-action-stack-presentation",
+  "def-sfb-adequate-moduli-space",
+  "def-weil-finite-type-morphism",
+  "def-sfb-stack-quasi-coherent-algebra",
+  "def-sfb-equivariant-coaction-algebra",
+  "def-sfb-hopf-action-module-data",
+  "def-sfb-coordinate-hopf-algebra"
+ ],
+ "proof": [
+  {
+   "text": "Use [lem-sfb-flat-affine-action-stack-presentation] for the algebraic stack $\\mathcal X$, its presentation $\\pi$ and the invariant morphism $\\phi$, with its convention: $b:U\\times_kH\\to U$ is dual to $\\rho_E$, $h\\cdot x=b(x,h^{-1})$, and torsors use left translation. Set $C=k[H]$, $L=E\\otimes_kC$, $x*h=b(x,h)$, and $R=U\\times_kH$ with $s(x,h)=x*h$, $t(x,h)=x$, $e(x)=(x,1)$, $i(x,h)=(x*h,h^{-1})$ and $c((x,h),(x*h,g))=(x,hg)$; thus $s^\\sharp=\\rho_E$, $t^\\sharp(e)=e\\otimes1$, and $e^\\sharp,c^\\sharp$ are dual to $\\epsilon,\\Delta$. Send $(x,h)\\in R(T)$ to the element $h$, an arrow $x*h\\to x$ of the action groupoid of [lem-sfb-affine-group-torsor-stackification] with $G=H$, $V=U$ and $a(h,u)=h\\cdot u$, because $h\\cdot(x*h)=x$. This is a bijection on arrows compatible with source, target, identity and inverse, and with composition: for $a=(x,h)$ and $b=(x*h,g)$ the composite $a\\circ b:x*(hg)\\to x$ is the element $hg$, since $h\\cdot(g\\cdot y)=(hg)\\cdot y$. Hence the group and action identities give the laws of [def-a1-scheme-groupoid-laws], and the fppf stackification $[U/R]$ of the prestack with objects $U(T)$ and arrows $R(T)$ is the stackification $\\mathcal A$ of that lemma. That lemma gives $\\mathcal A\\simeq\\mathcal T$, sending $x$ to the trivial torsor $(H_T,h\\mapsto h\\cdot x)$ and $(x,h)$ to right translation $g\\mapsto gh^{-1}$; check: $(gh^{-1})\\cdot x=g\\cdot(x*h)$. Here $\\mathcal T$ is literally the stack $\\mathcal X$ of the presentation lemma, and the trivial torsor over $U$ is $\\pi$. So the canonical object $a:U\\to[U/R]$ goes to $\\pi$ and restriction along $a$ is pullback along $\\pi$. No flatness of $s,t$ is needed below.",
+   "uses": [
+    "lem-sfb-flat-affine-action-stack-presentation",
+    "lem-sfb-affine-group-torsor-stackification",
+    "def-a1-scheme-groupoid-laws"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/examples-stacks.tex",
+    "place": "Tag 04WM (proposition-equal-quotient-stacks) in Situation 04WL, as stated in the cited torsor stackification; with the presentation of the cited lemma"
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-groupoid-module-descent-tensor-cokernel] with $S=\\operatorname{Spec}k$ to this groupoid; it assumes no flatness or finiteness. Its quasi-coherent modules are those of [def-sfb-stack-quasi-coherent-algebra]. It gives an equivalence, full and faithful on all compatible maps, with pairs $(\\mathcal M,\\delta:s^*\\mathcal M\\simeq t^*\\mathcal M)$, $e^*\\delta=1$, $c^*\\delta=\\mathrm{pr}_1^*\\delta\\circ\\mathrm{pr}_2^*\\delta$, sending $\\mathcal O_{\\mathcal X}$ to $\\mathcal O_U$ with its canonical datum and tensor products to tensor products with the tensor datum. As $U,R$ are affine, [lem-weil-pbc-affine-tilde-gamma-adjunction] identifies quasi-coherent $\\mathcal O_U$-modules and their maps with $E$-modules $M$ and $E$-linear maps; [lem-weil-pbc-module-pullback-affine-sections] identifies sections of $s^*\\widetilde M,t^*\\widetilde M$ naturally with $M\\otimes_{E,s^\\sharp}L$, $M\\otimes_{E,t^\\sharp}L$; [lem-weil-pbc-quasi-coherent-tensor-product-affine-sections] identifies sections of $\\widetilde M\\otimes\\widetilde N$ with $M\\otimes_EN$. So $\\delta$ is an $L$-linear isomorphism with $\\delta_e=1$, $\\delta_a\\delta_b=\\delta_{c(a,b)}$. An algebra structure on a descended module is then equivalent to compatible maps $M\\otimes_EM\\to M$ and $E\\to M$: fullness descends them, and faithfulness on their tensor-power sources verifies associativity, commutativity and the unit equations; pullback carries those equations back. Fullness and faithfulness applied to the product and unit composites of a compatible algebra map give the assertion on morphisms.",
+   "uses": [
+    "lem-sfb-groupoid-module-descent-tensor-cokernel",
+    "def-sfb-stack-quasi-coherent-algebra",
+    "lem-weil-pbc-affine-tilde-gamma-adjunction",
+    "lem-weil-pbc-module-pullback-affine-sections",
+    "lem-weil-pbc-quasi-coherent-tensor-product-affine-sections"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/stacks-sheaves.tex",
+    "place": "Tag 06WT (proposition-quasi-coherent) as stated in the cited module descent; affine coordinates schemes.tex Tags 01IB, 01I9, 01I8"
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-hopf-coaction-linearization] with $C=k[H]$ to the underlying $E$-module $D$. It identifies the identity and cocycle datum with a counital coassociative semilinear map $\\rho_D:D\\to D\\otimes_k C$. Under its tensor formula, compatibility of the multiplication map is exactly\n$\\rho_D(dd')=\\rho_D(d)\\rho_D(d')$.\nCompatibility of $j:E\\to D$ is exactly $\\rho_D(j(e))=(j\\otimes1)\\rho_E(e)$, including $\\rho_D(1)=1\\otimes1$. Thus these are precisely $k$-algebra coactions extending $\\rho_E$, in both directions. The morphism criterion in that lemma identifies algebra maps commuting with the datum with equivariant algebra maps. This proves the requested equivalence, with no smoothness assumption.",
+   "uses": [
+    "lem-sfb-hopf-coaction-linearization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/stacks-sheaves.tex",
+    "place": "Tag 06WT, affine calculation; groupoids.tex Tag 03LF (definition-equivariant-module); Hopf identities dual to the group laws"
+   }
+  },
+  {
+   "text": "An algebra map $u:\\mathcal D\\to\\mathcal D'$ is a surjection in [def-sfb-stack-quasi-coherent-algebra] exactly when every section lifts locally, i.e. when the module-sheaf cokernel of its underlying module map is zero. By the cokernel clause of [lem-sfb-groupoid-module-descent-tensor-cokernel] this cokernel corresponds to the cokernel of $\\widetilde D\\to\\widetilde{D'}$ on $U$, whose affine sections are $D'/u(D)$ by [lem-weil-pbc-quasi-coherent-module-cokernel-image](3). An equivalence sends exactly the zero objects to zero objects, and a quasi-coherent module on $U$ is zero iff its affine sections are. So $u$ is a surjection iff $D\\to D'$ is surjective, in both directions.",
+   "uses": [
+    "def-sfb-stack-quasi-coherent-algebra",
+    "lem-sfb-groupoid-module-descent-tensor-cokernel",
+    "lem-weil-pbc-quasi-coherent-module-cokernel-image"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/stacks-sheaves.tex",
+    "place": "Tag 06WV and 06WT, cokernels computed on the presentation"
+   }
+  },
+  {
+   "text": "By [def-sfb-stack-quasi-coherent-algebra], a global section $z$ gives an $\\mathcal O_{\\mathcal X}$-linear map $\\mathcal O_{\\mathcal X}\\to\\mathcal D$, $a\\mapsto az$; evaluation at $1$ is its inverse. Full faithfulness and the unit clause of [lem-sfb-groupoid-module-descent-tensor-cokernel], with [lem-weil-pbc-affine-tilde-gamma-adjunction], identify these with $E$-linear maps $f:E\\to D$ compatible with the data, where $E$ carries $\\rho_E$ by the unit clause of [lem-sfb-hopf-coaction-linearization]. Such $f$ is $e\\mapsto j(e)d$ with $d=f(1)$. By the morphism criterion of that lemma, compatibility is $\\rho_D(j(e)d)=(f\\otimes1)\\rho_E(e)$; at $e=1$ this says $\\rho_D(d)=d\\otimes1$, and that equality implies it for every $e$, since $\\rho_D(j(e)d)=\\rho_E(e)(d\\otimes1)=\\sum j(e_{(0)})d\\otimes e_{(1)}$. Thus restriction gives exactly $D^H$. Addition, multiplication and the unit are preserved because restriction of algebra sections preserves them. An equivariant algebra map sends $d$ to its image, proving naturality.",
+   "uses": [
+    "def-sfb-stack-quasi-coherent-algebra",
+    "lem-sfb-groupoid-module-descent-tensor-cokernel",
+    "lem-weil-pbc-affine-tilde-gamma-adjunction",
+    "lem-sfb-hopf-coaction-linearization"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/stacks-sheaves.tex",
+    "place": "Tag 06WT, full faithfulness applied to maps from the structure module"
+   }
+  },
+  {
+   "text": "For $\\mathcal D=\\mathcal O_{\\mathcal X}$, pullback and affine sections give $(E,\\rho_E)$, so the preceding isomorphism is restriction into $E$ with image $E^H$. By step 1 restriction to $U$ is pullback along $\\pi$, and the presentation lemma says that $\\phi\\pi$ is induced by $E^H\\hookrightarrow E$. Consequently the composite $E^H\\to\\Gamma(\\mathcal X,\\mathcal O_{\\mathcal X})\\to E^H$ sends each $e$ to $e$. The module equivalence and all displayed tensor formulas apply to arbitrary modules and algebras, so no finite generation of $D$ is required.",
+   "uses": [
+    "lem-sfb-flat-affine-action-stack-presentation"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/stacks-sheaves.tex",
+    "place": "Tag 06WT, structure algebra and restriction to the presentation"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-flat-affine-action-stack-presentation",
+  "lem-sfb-affine-group-torsor-stackification",
+  "def-a1-scheme-groupoid-laws",
+  "lem-sfb-groupoid-module-descent-tensor-cokernel",
+  "def-sfb-stack-quasi-coherent-algebra",
+  "lem-weil-pbc-affine-tilde-gamma-adjunction",
+  "lem-weil-pbc-module-pullback-affine-sections",
+  "lem-weil-pbc-quasi-coherent-tensor-product-affine-sections",
+  "lem-sfb-hopf-coaction-linearization",
+  "lem-weil-pbc-quasi-coherent-module-cokernel-image"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/stacks-sheaves.tex",
+  "place": "Tag 06WT and examples-stacks Tag 04WM; algebra-object, affine coaction and invariant-section calculations written explicitly from the cited module descent"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For an affine finite type group scheme acting on an affine scheme the fppf quotient stack is algebraic and quasi coherent algebras are equivariant algebras with invariant global sections",
+   "results": "Actual search returned 8 hits: AlgebraicGeometry.AffineSpace.instLocallyOfFinitePresentationOverSchemeInferInstanceOverClassOfFinite, AlgebraicGeometry.IsFinite.instHasAffinePropertyAndIsAffineFiniteCarrierObjOppositeOpensCarrierCarrierCommRingCatPresheafOpOpensTopHomAppTop, CategoryTheory.FintypeCat.instPreGaloisCategoryActionFintypeCat, instIsInvariantSubtypeMemSubalgebraSubalgebraSubgroupQuotient, CategoryTheory.PreGaloisCategory.exists_lift_of_quotient_openSubgroup, CategoryTheory.PreGaloisCategory.FiberFunctor.preservesQuotientsByFiniteGroups, instMulSemiringActionQuotientSubgroupSubtypeMemSubalgebraSubalgebra, instSMulCommClassQuotientSubgroupSubtypeMemSubalgebraSubalgebra",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary abstract-group invariant rings and site-theoretic quasi-coherence do not state descent or invariant sections on an algebraic quotient stack"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Faithfully flat quotient stack presentation and descent of equivariant quasi coherent modules for a flat affine group scheme",
+   "results": "Actual search returned 8 hits: SheafOfModules.quasicoherentDataOfIsFinitePresentation, SheafOfModules.IsFinitePresentation.exists_quasicoherentData, SheafOfModules.QuasicoherentData.IsFinitePresentation, SheafOfModules.instIsQuasicoherentOfIsFinitePresentation, SheafOfModules.QuasicoherentData.IsFinitePresentation.isFinite_presentation, SheafOfModules.QuasicoherentData.presentation, AlgebraicGeometry.Flat.flat_and_surjective_iff_faithfullyFlat_of_isAffine, AlgebraicGeometry.Flat.flat_appLE",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary abstract-group invariant rings and site-theoretic quasi-coherence do not state descent or invariant sections on an algebraic quotient stack"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"quotientStack\"",
+   "results": "Actual search returned 0 hits: ",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary abstract-group invariant rings and site-theoretic quasi-coherence do not state descent or invariant sections on an algebraic quotient stack"
+  },
+  {
+   "tool": "grep",
+   "query": "quotientStack|quotient_stack|classifyingStack|equivariant.*descent",
+   "results": "Actual search returned 0 hits: ",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary abstract-group invariant rings and site-theoretic quasi-coherence do not state descent or invariant sections on an algebraic quotient stack"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Quasi coherent algebras on an affine action quotient stack are equivariant algebras and their sections are invariants",
+   "results": "Actual search returned 8 hits: Algebra.IsInvariant.mk, Algebra.IsInvariant.isInvariant, Algebra.IsInvariant, SheafOfModules.QuasicoherentData.presentation, instIsInvariantSubtypeMemSubalgebraSubalgebraSubgroupQuotient, SheafOfModules.isQuasicoherent, Algebra.IsInvariant.casesOn, Algebra.IsInvariant.rec",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary abstract-group invariant rings and site-theoretic quasi-coherence do not state descent or invariant sections on an algebraic quotient stack"
+  },
+  {
+   "tool": "grep",
+   "query": "quotientStack|quotient_stack|equivariant.*descent",
+   "results": "Actual returned hits: ",
+   "date": "2026-10-23",
+   "verdict": "no match: general quasi-coherence predicates and abstract-group representations do not identify algebras on this fppf quotient stack or their coaction invariants"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"quotientStack\"",
+   "results": "Actual returned hits: ",
+   "date": "2026-10-23",
+   "verdict": "no match: general quasi-coherence predicates and abstract-group representations do not identify algebras on this fppf quotient stack or their coaction invariants"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Quasi coherent algebras on quotient stacks correspond to comodule algebras and invariant global sections",
+   "results": "Actual returned hits: SheafOfModules.IsQuasicoherent.mk, SheafOfModules.isQuasicoherent, SheafOfModules.QuasicoherentData.I, SheafOfModules.IsQuasicoherent, SheafOfModules.IsQuasicoherent.casesOn, SheafOfModules.QuasicoherentData.presentation, SheafOfModules.QuasicoherentData.ctorIdx, SheafOfModules.IsQuasicoherent.nonempty_quasicoherentData",
+   "date": "2026-10-23",
+   "verdict": "no match: general quasi-coherence predicates and abstract-group representations do not identify algebras on this fppf quotient stack or their coaction invariants"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Quasi coherent algebras on a quotient stack of an affine scheme by an affine flat group scheme are equivariant algebras with invariant sections",
+   "results": "Actual returned hits: SheafOfModules.QuasicoherentData.I, SheafOfModules.IsQuasicoherent.nonempty_quasicoherentData, AlgebraicGeometry.Scheme.Modules.instAbelian, SheafOfModules.QuasicoherentData.X, AlgebraicGeometry.Scheme.Modules.isSheaf, SheafOfModules.QuasicoherentData, AlgebraicGeometry.Scheme.Modules.instCategory, AlgebraicGeometry.Scheme.Modules",
+   "date": "2026-10-23",
+   "verdict": "no match: general quasi-coherence predicates and abstract-group representations do not identify algebras on this fppf quotient stack or their coaction invariants"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Global sections of an algebra on a group action quotient stack are invariant elements of its coaction",
+   "results": "Actual returned hits: Rep.quotientToInvariantsFunctor_obj_V, Rep.invariantsFunctor_obj_carrier, Rep.coinvariantsFunctor_obj_carrier, Rep.invariantsFunctor, Rep.quotientToInvariantsFunctor, Rep.desc, Rep.quotientToInvariantsFunctor_map_hom, Rep.coinvariantsMk",
+   "date": "2026-10-23",
+   "verdict": "no match: general quasi-coherence predicates and abstract-group representations do not identify algebras on this fppf quotient stack or their coaction invariants"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-power-lifting-quotient-submersive",
+  "date": "2026-10-22",
+  "group": "Q01"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Power lifting implies universal submersiveness of an affine invariant quotient. Translate power lifting to quasi-coherent algebras on the quotient stack.",
+   "via": [
+    "lem-sfb-power-lifting-quotient-submersive",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-flat-affine-action-algebra-descent",
+  "worker": "stage1",
+  "summary": "Quotient stack identified with the fppf stackification of the action groupoid by the existing affine-group torsor stackification (no smoothness). Module descent with tensor, unit and cokernel clauses comes from the existing lem-sfb-groupoid-module-descent-tensor-cokernel and the affine section lemmas; the semilinear Hopf-comodule dictionary is a statement-only prerequisite. The item assembles algebra objects, computes invariant sections by full faithfulness from the unit, and checks surjections and the structural map. No smoothness or finite-generation hypothesis on D was introduced. Reviewer FIX (re-applied after landing refusal, adapted to the re-split presentation): duplicate module-descent node dropped; step 1 cites lem-sfb-affine-group-torsor-stackification.",
+  "blueprint": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Power lifting implies universal submersiveness of an affine invariant quotient. Translate power lifting to quasi-coherent algebras on the quotient stack.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-module-pullback-affine-sections",
+    "why": "step 2 takes the affine sections of the pullbacks s^*M, t^*M as scalar extensions; a generic scheme lemma no node of this unit states (accepted for the sibling lem-sfb-affine-groupoid-quasicoherent-algebra-descent)"
+   },
+   {
+    "node": "lem-weil-pbc-quasi-coherent-tensor-product-affine-sections",
+    "why": "step 2 takes affine sections of a tensor of quasi-coherent modules as the module tensor product; generic scheme lemma (accepted for the sibling)"
+   },
+   {
+    "node": "lem-weil-pbc-quasi-coherent-module-cokernel-image",
+    "why": "step 4 takes affine sections of a quasi-coherent cokernel as the module cokernel; generic scheme lemma (accepted for the sibling)"
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-module-pullback-affine-sections",
+  "lem-weil-pbc-quasi-coherent-tensor-product-affine-sections",
+  "lem-weil-pbc-quasi-coherent-module-cokernel-image"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q92-3a8a6c67d",
+  "group": "Q92",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q92-3a8a6c67d (reviewer sub-agent of L); spot-checked: I read in full the item, both new nodes and every cited statement. Sources read: Stacks 06WT (stacks-sheaves l.2134, any groupoid, no flatness), 06WV, examples-stacks 04WM/04WL and groupoids 03LF. This head re-pushes the prior head 5f6a without my earlier FIX, which was lost when landing was refused. The only changes are a spelled-out left-action convention in step 1 and one summary sentence. Both earlier faults are back. Fault 1 (C5/D1): lem-sfb-flat-affine-groupoid-module-descent is a special case, with extra hypotheses, of the existing lem-sfb-groupoid-module-descent-tensor-cokernel (any groupoid, with unit, tensor and cokernel clauses). The not-duplicate sentence about that node is false. I dropped the new node. Steps 2, 4 and 5 now cite that node plus the affine section lemmas lem-weil-pbc-affine-tilde-gamma-adjunction, module-pullback-affine-sections, quasi-coherent-tensor-product-affine-sections and cokernel-image(3), as the sibling lem-sfb-affine-groupoid-quasicoherent-algebra-descent does. Fault 2 (C1/C3): step 1 asserted without a citation that [U/R] is the torsor stack. The presentation lemma's statement does not say this; only its proof does. Step 1 now cites the base node lem-sfb-affine-group-torsor-stackification (Q94; any affine G, no smoothness), which replaces my earlier reviewer-added node, plus def-a1-scheme-groupoid-laws. I checked the arrow dictionary by hand: (x,h)↦h, h·(x*h)=x, composition hg, right translation gh^{-1} with (gh^{-1})·x=g·(x*h), and the trivial torsor is π. I kept the Hopf node after checking semilinearity, counit, cocycle, both antipode inverse identities, tensor balancing and the morphism criterion. Small cases tested: trivial H, E=k, E=0, alpha_p, infinite D/M. Batch-5: def-sfb-stack-quasi-coherent-algebra (leads to def-trf-space-quasi-coherent-module) and def-sfb-algebraic-moduli-stack (leads to def-trf-algebraic-space, only via the dropped node) are general definitions outside the assumed statements and their proofs, so I accepted them. The FIX's new cites do not reach trace-formula or Poincaré-duality nodes. Accepted tool_uses: the three generic lem-weil-pbc affine section lemmas. The statement is unchanged and no SGA is cited.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.FlatAffineActionAlgebraDescent",
+  "declaration": "AlgebraicGeometry.SchemeAction.flat_affine_action_algebra_descent",
+  "declarations": [
+   "AlgebraicGeometry.SchemeAction.actionAlgebraAffineHom",
+   "AlgebraicGeometry.SchemeAction.actionAlgebraChart",
+   "AlgebraicGeometry.SchemeAction.actionAlgebraChartArrow",
+   "AlgebraicGeometry.SchemeAction.actionAlgebraRightPoint",
+   "AlgebraicGeometry.SchemeAction.actionAlgebraTransport",
+   "AlgebraicGeometry.SchemeAction.actionAlgebraFibred",
+   "AlgebraicGeometry.SchemeAction.ActionQuasiCoherentAlgebras",
+   "AlgebraicGeometry.SchemeAction.actionAlgebraRestriction",
+   "AlgebraicGeometry.SchemeAction.actionStructureAlgebra_quasiCoherent",
+   "AlgebraicGeometry.SchemeAction.actionStructureAlgebra",
+   "AlgebraicGeometry.SchemeAction.actionAlgebraCoefficient",
+   "AlgebraicGeometry.SchemeAction.IsActionAlgebraCoaction",
+   "AlgebraicGeometry.SchemeAction.actionInvariantObjectMap",
+   "AlgebraicGeometry.SchemeAction.flat_affine_action_algebra_descent"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/FlatAffineActionAlgebraDescent.lean",
+  "statement": "theorem flat_affine_action_algebra_descent : ∃ ρ : HopfAction.AlgebraCoaction k Γ(H, ⊤) E, IsActionAlgebraCoaction k H E ρ ∧ ∃ F : ActionQuasiCoherentAlgebras k H E ≌ HopfAction.EquivariantAlgebra.{u, u, u, u + 1} k Γ(H, ⊤) E ρ, ∃ j : ∀ A : ActionQuasiCoherentAlgebras k H E, (F.functor.obj A).algebra ≃+* A.obj.right.obj.obj (op (actionAlgebraChart k H E (𝟙 (affineActionScheme k E)))), (∀ (A : ActionQuasiCoherentAlgebras k H E) (e : E), j A ((F.functor.obj A).structureMap e) = A.obj.hom.hom.app (op (actionAlgebraChart k H E (𝟙 (affineActionScheme k E)))) (ULift.up ((Scheme.ΓSpecIso (.of E)).inv e))) ∧ (∀ (A B : ActionQuasiCoherentAlgebras k H E) (f : A ⟶ B) (d : (F.functor.obj A).algebra), j B ((F.functor.map f).val d) = f.hom.right.hom.app (op (actionAlgebraChart k H E (𝟙 (affineActionScheme k E)))) (j A d)) ∧ (∀ (A : ActionQuasiCoherentAlgebras k H E) (d : (F.functor.obj A).algebra) (n : ℕ) (a : Fin n → (F.functor.obj A).algebra) (c : Fin n → Γ(H, ⊤)), (F.functor.obj A).coaction.map d = ∑ i, a i ⊗ₜ[k] c i → A.obj.right.obj.map (actionAlgebraTransport k H E).op (actionAlgebraRestriction k H E A (actionAlgebraRightPoint k H E) (j A d)) = ∑ i, actionAlgebraRestriction k H E A (fst (affineActionScheme k E) (H.asOver (Spec (.of k)))) (j A (a i)) * actionAlgebraCoefficient k H E A (c i)) ∧ (∀ (A B : ActionQuasiCoherentAlgebras k H E) (f : A ⟶ B), IsSurjectiveModuliAlgebra f.hom ↔ Function.Surjective (F.functor.map f).val) ∧ ∃ r : ∀ A : ActionQuasiCoherentAlgebras k H E, moduliGlobalSectionsRing A.obj.right ≃+* HopfAction.EquivariantAlgebra.invariants (F.functor.obj A), (∀ (A : ActionQuasiCoherentAlgebras k H E) (z : moduliGlobalSectionsRing A.obj.right), j A (r A z).val = z.val (op (actionAlgebraChart k H E (𝟙 (affineActionScheme k E))))) ∧ (∀ (A B : ActionQuasiCoherentAlgebras k H E) (f : A ⟶ B) (z : moduliGlobalSectionsRing A.obj.right) (z' : moduliGlobalSectionsRing B.obj.right), (∀ x, z'.val x = f.hom.right.hom.app x (z.val x)) → (F.functor.map f).val (r A z).val = (r B z').val) ∧ ∃ φ : BasedFunctor (torsorGroupoid (H.asOver (Spec (.of k))) (affineActionScheme k E)) (discreteModuli (yoneda.obj (affineInvariantSpectrum k E (H.asOver (Spec (.of k)))))), Nonempty (ModuliTwoIso ((quotientAtlas (H.asOver (Spec (.of k))) (affineActionScheme k E)).comp φ) (discreteModuliMap (yoneda.map (affineInvariantProjection k E (H.asOver (Spec (.of k))))))) ∧ ∃ smap : affineInvariants k E (H.asOver (Spec (.of k))) →+* moduliGlobalSectionsRing (actionStructureAlgebra k H E).obj.right, (∀ (e : affineInvariants k E (H.asOver (Spec (.of k)))) (x : (torsorGroupoid (H.asOver (Spec (.of k))) (affineActionScheme k E)).obj), (smap e).val (op x) = ULift.up ((actionInvariantObjectMap k H E φ x).left.appTop ((Scheme.ΓSpecIso (.of (affineInvariants k E (H.asOver (Spec (.of k)))))).inv e))) ∧ ∀ e : affineInvariants k E (H.asOver (Spec (.of k))), j (actionStructureAlgebra k H E) (r (actionStructureAlgebra k H E) (smap e)).val = ULift.up ((Scheme.ΓSpecIso (.of E)).inv e.val)",
+  "branch": "sheaf-dag",
+  "by": "Q25",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "The scheme action is the left action of the presentation dependency; the coaction is explicitly dual to h inverse acting on x, as required by the node. The equivalence and ring isomorphisms are fixed by atlas restriction and finite-sum transport formulas. The structure map is characterized on every torsor object. The common coefficient universe is u+1, matching the existing stack-algebra convention. ActionQuasiCoherentAlgebras is defined directly as the full subcategory cut out by IsQuasicoherentModuliAlgebra from def-sfb-stack-quasi-coherent-algebra; no general groupoid algebra-descent theorem is a statement dependency."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-32ee37b00",
+  "group": "Q25",
+  "result": "pass",
+  "note": "Re-delivery after the 09dc RETURN (H2). The Lean is byte-identical to 09dc. The item's stmt_deps now include def-sfb-coordinate-hopf-algebra, which is landed existing:true for HopfAction.coordinateHopfAlgebra (HopfCoactionLinearization.lean:35, the instance used in the statement) and is on the base (blueprint index 2026-10-24 15:21 UTC). The H12 repair adds def-weil-field to def-sfb-equivariant-coaction-algebra. Mathematics re-checked: hypotheses no stronger than the node; ρ_E pinned to h⁻¹•x; F, j, r and smap pinned canonically; surjection ↔; identity of E^H; universe u+1 per the stack-algebra convention. Edge cases checked: E=0, D=0, infinite D, trivial and nonreduced H. H4: the side-live EquivariantCoherentTorCalculus.EquivariantAlgebra is a different notion, a Prop on coherent sheaves. No hollow defs; only the two documented sorrys. Nothing compiled because no file changed."
+ }
+}

@@ -371,5 +371,53 @@
   "existing": false,
   "note": "Uses the existing fixed-coefficient Sheaf (ModuleCat Λ) encoding and unrestricted upstream comparison inverse image; no finiteness or commutativity restriction. The maps are built from the strict diagram of section complexes of any bounded-below injective representative, adjunction units, sheaf restrictions, and derived evaluation units. Invertibility of the two arrows with common colimit source is the canonical two-arrow assertion; the second displayed arrow is uniquely determined by their factorization. The final clause records that each stage complex computes its specified derived sections."
  },
- "lean_audit": {}
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "blueprint_update": {
+  "snapshot": "main-20261023-1620",
+  "commit": "7284bb09daf97437d544c51882b325f9c52cd345",
+  "changed": [
+   "statement",
+   "proof"
+  ],
+  "statement": "Let $X$ be a scheme, $K\\in D^+(X_{\\mathrm{ét}})$ a bounded-below complex of\nabelian sheaves, and let\n$U=\\varprojlim_{i\\in I}U_i$ be a pro-étale affine over $X$, the limit being\ncofiltered with affine transition maps and each $U_i$ affine and étale over\n$X$. Write $K_i=K|_{U_i}\\in D^+((U_i)_{\\mathrm{ét}})$ and $K_U$ for the\ninverse image of $K$ on $U_{\\mathrm{ét}}$. Then for every $n\\in\\mathbf Z$ the\ncanonical maps\n\n$$\n\\varinjlim_iH^n((U_i)_{\\mathrm{ét}},K_i)\\xrightarrow{\\ \\sim\\ }\nH^n(U_{\\mathrm{ét}},K_U)\\xrightarrow{\\ \\sim\\ }\nH^n(U_{\\mathrm{proét}},(\\nu_X^*K)|_U)\n$$\n\nare isomorphisms; equivalently\n$R\\Gamma(U_{\\mathrm{proét}},(\\nu_X^*K)|_U)\\simeq\\varinjlim_iR\\Gamma((U_i)_{\\mathrm{ét}},K_i)$\nas a filtered derived colimit.",
+  "proof": [
+   {
+    "text": "*Step 1: restriction to $U$.* The pro-étale site of $U$ is the localization\n$X_{\\mathrm{proét}}/U$, and restriction to a localized site commutes with the\ncomparison morphisms: $(\\nu_X^*K)|_U=\\nu_U^*(K_U)$, where $K_U$ is the\ninverse image of $K$ along the (weakly étale) morphism $U\\to X$ on small\nétale sites. Both sides are computed termwise on a bounded-below complex\nrepresenting $K$, since $\\nu^*$ and restriction are exact on sheaves.",
+    "uses": [],
+    "elementary": null
+   },
+   {
+    "text": "*Step 2: global sections on $U$.* Apply the global-sections comparison\n[lem-weil-pbc-comparison-global-cohomology] (which is the global-sections\nform of the unit isomorphism [thm-weil-pbc-site-comparison]) on the scheme\n$U$: the derived unit $K_U\\to R\\nu_{U,*}\\nu_U^*K_U$ is an isomorphism, and\napplying $R\\Gamma(U_{\\mathrm{ét}},-)$ gives\n$R\\Gamma(U_{\\mathrm{ét}},K_U)\\simeq R\\Gamma(U_{\\mathrm{proét}},\\nu_U^*K_U)$, because\n$R\\Gamma(U_{\\mathrm{ét}},-)\\circ R\\nu_{U,*}=R\\Gamma(U_{\\mathrm{proét}},-)$ (composition\nof derived right adjoints; $\\nu_{U,*}$ preserves injectives since its left\nadjoint $\\nu_U^*$ is exact).",
+    "uses": [
+     "lem-weil-pbc-comparison-global-cohomology",
+     "thm-weil-pbc-site-comparison"
+    ],
+    "elementary": false
+   },
+   {
+    "text": "*Step 3: continuity.* $U$ is the limit of the qcqs schemes $U_i$ along\naffine transition maps, and $K_U$ is the inverse image of $K_{i_0}$ for any\n$i_0$. For a sheaf $F$ on $(U_{i_0})_{\\mathrm{ét}}$ the restriction maps induce\n$\\varinjlim_iH^n((U_i)_{\\mathrm{ét}},F|_{U_i})\\simeq H^n(U_{\\mathrm{ét}},F|_U)$\n(Stacks, Tag 03Q6). For a bounded-below complex this is\n[lem-weil-pbc-derived-cohomology-continuity]: in the hypercohomology spectral\nsequence $E_2^{p,q}=H^p(-,\\mathcal H^q)$ only finitely many terms contribute\nto each total degree because $K$ is bounded below, filtered colimits are\nexact, and so the sheaf case propagates to complexes by the five lemma\napplied to the truncation triangles\n$\\tau^{\\le m}K\\to K\\to\\tau^{>m}K$.",
+    "uses": [
+     "lem-weil-pbc-derived-cohomology-continuity"
+    ],
+    "elementary": false
+   },
+   {
+    "text": "*Step 4: conclusion.* Composing Steps 1–3 gives the two displayed\nisomorphisms, natural in $K$. Since filtered colimits of complexes of\nabelian groups are exact, the filtered colimit of the complexes\n$R\\Gamma((U_i)_{\\mathrm{ét}},K_i)$ represents the derived colimit and has the\ncolimit of the cohomology groups as its cohomology, which is the derived form.",
+    "uses": [],
+    "elementary": null
+   }
+  ],
+  "note": "the current blueprint (main-20261023-1620, weil-conjectures-blueprint 7284bb09da) states or proves this differently; a worker who touches the node follows it"
+ }
 }

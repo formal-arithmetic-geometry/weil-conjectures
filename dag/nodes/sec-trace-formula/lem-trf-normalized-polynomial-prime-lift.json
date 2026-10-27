@@ -1,0 +1,281 @@
+{
+ "id": "lem-trf-normalized-polynomial-prime-lift",
+ "kind": "statement",
+ "title": "Lift normalized polynomial coordinates and compute the image prime",
+ "statement": "Let $R$ be a commutative ring, $n\\ge0$, $E=R[t_1,\\ldots,t_n]$ [def-weil-pbc-mv-polynomial-ring], and $\\mathfrak q'\\subset E$ a prime with $\\mathfrak p=\\mathfrak q'\\cap R$. Put $k=\\kappa(\\mathfrak p)$ and $Q=\\ker(E\\otimes_R k\\to\\kappa(\\mathfrak q'))$, viewed as a prime of $k[t_1,\\ldots,t_n]$ via coefficient scalar extension [def-weil-pbc-localization-at-prime, def-weil-residue-field]. Let $r=\\operatorname{trdeg}_k\\kappa(Q)$ [def-kun-transcendence-degree]. Then $r$ is a nonnegative integer with $r\\le n$, and there exist $f\\in R\\setminus\\mathfrak p$ and an $R_f$-algebra homomorphism $\\psi:C=R_f[x_1,\\ldots,x_n]\\to D=R_f[t_1,\\ldots,t_n]$ [def-weil-ring-localization-away] such that $D$ is of finite type over $C$ [def-weil-pbc-finite-type-algebra], its scalar extension $\\bar\\psi:k[x_1,\\ldots,x_n]\\to k[t_1,\\ldots,t_n]$ is finite (the target is finitely generated as a module over the source [def-weil-finitely-generated-module]), and $\\bar\\psi^{-1}(Q)=I=(x_{r+1},\\ldots,x_n)$. For $\\mathfrak q_D=\\mathfrak q'D$ and $P=\\psi^{-1}(\\mathfrak q_D)$ one has $P=(\\mathfrak pR_f,x_{r+1},\\ldots,x_n)$, and the prime of $C\\otimes_{R_f}k=k[x_1,\\ldots,x_n]$ corresponding to $P$ is exactly $I$.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tag 0520 (lemma-refined-quasi-finite-over-polynomial-algebra), proof, from the image prime through lifting the coordinates; Tag 051P (lemma-refined-Noether-normalization). The prescribed inverse-image ideal is computed coefficientwise."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-mv-polynomial-ring",
+  "def-weil-pbc-localization-at-prime",
+  "def-weil-residue-field",
+  "def-kun-transcendence-degree",
+  "def-weil-ring-localization-away",
+  "def-weil-pbc-finite-type-algebra",
+  "def-weil-finitely-generated-module"
+ ],
+ "proof": [
+  {
+   "text": "Apply [lem-weil-pbc-fibre-ring-primes-residue-fields] to $R\\to E$ at $\\mathfrak p,\\mathfrak q'$, and identify the fibre with $k[t_1,\\ldots,t_n]$ by [lem-weil-pbc-polynomial-scalar-extension]. Thus $Q$ is prime and the coefficient map $j:E\\to k[t_1,\\ldots,t_n]$ has $j^{-1}(Q)=\\mathfrak q'$. Put $B=k[t_1,\\ldots,t_n]/Q$. By the fraction description of [def-weil-pbc-localization-at-prime], $\\kappa(Q)=\\operatorname{Frac}(B)$: a fraction in the local ring modulo its maximal ideal is exactly $\\bar a/\\bar b$, with $b\\notin Q$. Let $s$ be the set of the $n$ variable images in this field. Its generated $k$-subalgebra is $B$. Every element $a/b$ of the field satisfies the nonzero polynomial $bT-a\\in B[T]$, since $b\\ne0$. The hypotheses of [lem-sfb-algebraic-adjoin-transcendence-bound] therefore hold, so $r\\le |s|\\le n$. A cardinal bounded by the finite integer $n$ is a nonnegative integer.",
+   "uses": [
+    "lem-weil-pbc-fibre-ring-primes-residue-fields",
+    "lem-weil-pbc-polynomial-scalar-extension",
+    "def-weil-pbc-localization-at-prime",
+    "lem-sfb-algebraic-adjoin-transcendence-bound"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 0520, lemma-refined-quasi-finite-over-polynomial-algebra, image fibre prime; Tag 051P, lemma-refined-Noether-normalization, parameter r. The explicit bound uses the existing Mathlib algebraic-adjoin lemma."
+   }
+  },
+  {
+   "text": "Use [lem-trf-refined-noether-normalization-prime] with the field $k$, the integer $n$ and the prime $Q$. It gives a finite $k$-algebra map $\\varphi:k[x_1,\\ldots,x_n]\\to k[t_1,\\ldots,t_n]$ with $\\varphi^{-1}(Q)=I=(x_{r+1},\\ldots,x_n)$. Write $\\bar h_i=\\varphi(x_i)$. Finiteness here is exactly finite generation of the target module, as required in the statement.",
+   "uses": [
+    "lem-trf-refined-noether-normalization-prime"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 051P, lemma-refined-Noether-normalization; its application in Tag 0520."
+   }
+  },
+  {
+   "text": "There are finitely many nonzero coefficients in the $n$ polynomials $\\bar h_i$. By [def-weil-pbc-localization-at-prime], each coefficient of $k=R_{\\mathfrak p}/\\mathfrak pR_{\\mathfrak p}$ is represented by some $a/b$ with $a\\in R$ and $b\\notin\\mathfrak p$. Choose such representatives, and let $f$ be the product of all these denominators (the empty product is $1$). Primality gives $f\\notin\\mathfrak p$. For each chosen denominator $b$, write $f=bc$ using the other factors; its chosen coefficient lifts to $ac/f\\in R_f$. Keeping the same monomials defines $h_i\\in D=R_f[t_1,\\ldots,t_n]$ reducing to $\\bar h_i$. These fractions are legitimate by [def-weil-ring-localization-away].",
+   "uses": [
+    "def-weil-pbc-localization-at-prime",
+    "def-weil-ring-localization-away",
+    "def-weil-pbc-mv-polynomial-ring"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 0520, sentence choosing f and the lifts h_i; expanded coefficient by coefficient."
+   }
+  },
+  {
+   "text": "The universal property in [def-weil-pbc-mv-polynomial-ring] gives the $R_f$-algebra map $\\psi:C=R_f[x_1,\\ldots,x_n]\\to D$ sending $x_i$ to $h_i$. The $n$ elements $t_i$ generate $D$ as a $C$-algebra: a polynomial in the $t_i$ already has coefficients in $R_f$, which is in the image of $C$. This proves finite type by [def-weil-pbc-finite-type-algebra]. Via [lem-weil-pbc-polynomial-scalar-extension], tensoring with $k$ sends $x_i$ to $\\bar h_i$, so uniqueness in the same universal property gives $\\bar\\psi=\\varphi$. It is finite and has inverse-image ideal $I$ by Step 2.",
+   "uses": [
+    "def-weil-pbc-mv-polynomial-ring",
+    "def-weil-pbc-finite-type-algebra",
+    "lem-weil-pbc-polynomial-scalar-extension"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 0520, lifted polynomial map and its scalar extension."
+   }
+  },
+  {
+   "text": "Let $\\delta:D\\to k[t_1,\\ldots,t_n]$ and $\\rho:C\\to k[x_1,\\ldots,x_n]$ be coefficient maps. The ring $D$ is the localization $E_f$: multiplying the finitely many coefficient denominators in a polynomial writes every element as $G/f^m$, and the fraction equality relation is coefficientwise. By [lem-weil-pbc-localization-prime-residue-field-iso], $\\mathfrak q_D=\\mathfrak q'D$ is prime, since $f\\notin\\mathfrak q'$. For $G/f^m\\in D$, $\\delta(G/f^m)\\in Q$ iff $j(G)\\in Q$, because $j(f)$ is a nonzero scalar; by Step 1 this is equivalent to $G\\in\\mathfrak q'$, hence to $G/f^m\\in\\mathfrak q_D$. Thus $\\delta^{-1}(Q)=\\mathfrak q_D$. On coefficients and variables, $\\delta\\psi=\\varphi\\rho$, so $P=\\psi^{-1}(\\mathfrak q_D)=\\rho^{-1}(I)$.",
+   "uses": [
+    "def-weil-ring-localization-away",
+    "def-weil-pbc-mv-polynomial-ring",
+    "lem-weil-pbc-localization-prime-residue-field-iso"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 0520, image prime after lifting; Tag 00E3, lemma-spec-localization, in the cited localization lemma."
+   }
+  },
+  {
+   "text": "The coefficient map $R_f\\to k$ has kernel $\\mathfrak pR_f$: for $a/f^m$, its image is zero iff some $b\\notin\\mathfrak p$ has $ba\\in\\mathfrak p$, which by primality is equivalent to $a\\in\\mathfrak p$. A polynomial $H\\in C$ belongs to $\\rho^{-1}(I)$ iff setting $x_{r+1},\\ldots,x_n$ to zero in $\\rho(H)$ gives zero. By coefficient uniqueness, this says precisely that every coefficient of $H$ on a monomial involving only $x_1,\\ldots,x_r$ lies in $\\mathfrak pR_f$. Those terms belong to $\\mathfrak pC$; each remaining monomial is divisible by one of $x_{r+1},\\ldots,x_n$. Conversely each generator of $(\\mathfrak pR_f,x_{r+1},\\ldots,x_n)$ maps into $I$. Therefore $P=(\\mathfrak pR_f,x_{r+1},\\ldots,x_n)$. Its contraction to $R_f$ is $\\mathfrak pR_f$. By [lem-weil-pbc-localization-prime-residue-field-iso], this prime has residue field canonically $k$. By the bijection in [lem-weil-pbc-fibre-ring-primes-residue-fields] and the polynomial scalar-extension isomorphism, $I$ is exactly the prime corresponding to $P$, since its inverse image is $P$.",
+   "uses": [
+    "def-weil-pbc-localization-at-prime",
+    "def-weil-pbc-mv-polynomial-ring",
+    "lem-weil-pbc-localization-prime-residue-field-iso",
+    "lem-weil-pbc-fibre-ring-primes-residue-fields",
+    "lem-weil-pbc-polynomial-scalar-extension"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 0520, prescribed inverse-image ideal, computed coefficientwise; fibre prime correspondence in the cited node."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-fibre-ring-primes-residue-fields",
+  "lem-weil-pbc-polynomial-scalar-extension",
+  "def-weil-pbc-localization-at-prime",
+  "lem-sfb-algebraic-adjoin-transcendence-bound",
+  "lem-trf-refined-noether-normalization-prime",
+  "def-weil-ring-localization-away",
+  "def-weil-pbc-mv-polynomial-ring",
+  "def-weil-pbc-finite-type-algebra",
+  "lem-weil-pbc-localization-prime-residue-field-iso"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tags 0520 (lemma-refined-quasi-finite-over-polynomial-algebra) and 051P (lemma-refined-Noether-normalization); denominator lifting and the inverse-image ideal calculation expanded explicitly."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Lift refined Noether normalization of a prime in a polynomial ring over a residue field to a localized base ring with coordinate inverse image prime",
+   "results": "{\"t\": \"2026-10-22T06:46:37Z\", \"tool\": \"leanfinder\", \"query\": \"Lift refined Noether normalization of a prime in a polynomial ring over a residue field to a localized base ring with coordinate inverse image prime\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"IsLocalization.AtPrime.liesOver_map_of_liesOver\", \"Algebra.exists_etale_bijective_residueFieldMap_and_map_eq_mul_and_isCoprime\", \"Polynomial.UniversalCoprimeFactorizationRing.exists_liesOver_residueFieldMap_bijective\", \"Ideal.ResidueField.liftₐ\", \"Algebra.ZariskisMainProperty.of_isIntegral\", \"Algebra.ZariskisMainProperty\", \"IsLocalization.AtPrime.exists_algebraMap_quot_eq_of_mem_quot\", \"Algebra.instFiniteResidueFieldOfQuasiFiniteAt\"], \"digest\": \"692c9836e217ed89\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the Noether normalization theorem in Mathlib/RingTheory/NoetherNormalization.lean:236 is over a field and targets a quotient; it neither prescribes the inverse-image prime in a full polynomial ring nor lifts coordinates over a localized arbitrary base. FiniteType polynomial instances and localization residue-field maps supply only ingredients."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"MvPolynomial\", \"FiniteType\"",
+   "results": "{\"t\": \"2026-10-22T06:46:27Z\", \"tool\": \"loogle\", \"query\": \"\\\"MvPolynomial\\\", \\\"FiniteType\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 4, \"note\": \"\", \"top\": [\"Algebra.FiniteType.instMvPolynomialOfFinite\", \"Algebra.FiniteType.iff_quotient_mvPolynomial'\", \"Algebra.FiniteType.iff_quotient_mvPolynomial''\", \"Algebra.FiniteType.iff_quotient_mvPolynomial\"], \"digest\": \"2388d6f19a9ac4f6\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the Noether normalization theorem in Mathlib/RingTheory/NoetherNormalization.lean:236 is over a field and targets a quotient; it neither prescribes the inverse-image prime in a full polynomial ring nor lifts coordinates over a localized arbitrary base. FiniteType polynomial instances and localization residue-field maps supply only ingredients."
+  },
+  {
+   "tool": "grep",
+   "query": "refined.*[Nn]ormal|[Nn]ormal.*[Pp]rime|[Ll]ift.*[Nn]ormal|exists.*finite.*[Mm]vPolynomial",
+   "results": "{\"t\": \"2026-10-22T06:46:26Z\", \"tool\": \"grep\", \"query\": \"refined.*[Nn]ormal|[Nn]ormal.*[Pp]rime|[Ll]ift.*[Nn]ormal|exists.*finite.*[Mm]vPolynomial\", \"sub\": \"RingTheory\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/ChainOfDivisors.lean\", \"Mathlib/RingTheory/LaurentSeries.lean\", \"Mathlib/RingTheory/LaurentSeries.lean\", \"Mathlib/RingTheory/UniqueFactorizationDomain/NormalizedFactors.lean\", \"Mathlib/RingTheory/UniqueFactorizationDomain/NormalizedFactors.lean\", \"Mathlib/RingTheory/UniqueFactorizationDomain/NormalizedFactors.lean\", \"Mathlib/RingTheory/UniqueFactorizationDomain/NormalizedFactors.lean\", \"Mathlib/RingTheory/UniqueFactorizationDomain/NormalizedFactors.lean\"], \"digest\": \"fde137d0a710d234\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the Noether normalization theorem in Mathlib/RingTheory/NoetherNormalization.lean:236 is over a field and targets a quotient; it neither prescribes the inverse-image prime in a full polynomial ring nor lifts coordinates over a localized arbitrary base. FiniteType polynomial instances and localization residue-field maps supply only ingredients."
+  },
+  {
+   "tool": "leansearch",
+   "query": "refined Noether normalization at a prime lifts polynomial coordinates after localizing the base",
+   "results": "{\"t\": \"2026-10-22T06:46:50Z\", \"tool\": \"leansearch\", \"query\": \"refined Noether normalization at a prime lifts polynomial coordinates after localizing the base\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"IsLocalization.OverPrime.mem_normalizedFactors_of_isPrime\", \"LocalSubring.ofPrime\", \"AlgebraicGeometry.StructureSheaf.Localizations\", \"Polynomial.not_quasiFiniteAt\", \"IsLocalization.integerNormalization_map_to_map\", \"IsLocalization.integerNormalization\", \"LocalSubring.instAtPrimeSubtypeMemSubringToSubringOfPrime\", \"Localization.AtPrime.isLocalRing\"], \"digest\": \"6167a381874f69b2\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the Noether normalization theorem in Mathlib/RingTheory/NoetherNormalization.lean:236 is over a field and targets a quotient; it neither prescribes the inverse-image prime in a full polynomial ring nor lifts coordinates over a localized arbitrary base. FiniteType polynomial instances and localization residue-field maps supply only ingredients."
+  },
+  {
+   "tool": "grep",
+   "query": "NoetherNormalization|noether.*normal|normalization.*prime",
+   "results": "{\"t\": \"2026-10-22T06:48:20Z\", \"tool\": \"grep\", \"query\": \"NoetherNormalization|noether.*normal|normalization.*prime\", \"sub\": \"RingTheory\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/NoetherNormalization.lean\", \"Mathlib/RingTheory/NoetherNormalization.lean\", \"Mathlib/RingTheory/NoetherNormalization.lean\", \"Mathlib/RingTheory/NoetherNormalization.lean\", \"Mathlib/RingTheory/NoetherNormalization.lean\"], \"digest\": \"8677914a0f6201cb\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the Noether normalization theorem in Mathlib/RingTheory/NoetherNormalization.lean:236 is over a field and targets a quotient; it neither prescribes the inverse-image prime in a full polynomial ring nor lifts coordinates over a localized arbitrary base. FiniteType polynomial instances and localization residue-field maps supply only ingredients."
+  },
+  {
+   "tool": "grep",
+   "query": "refined.*[Nn]ormal|lift.*[Mm]vPolynomial|[Mm]vPolynomial.*lift|trdeg.*(card|le)",
+   "results": "{\"t\": \"2026-10-23T12:18:38Z\", \"tool\": \"grep\", \"query\": \"refined.*[Nn]ormal|lift.*[Mm]vPolynomial|[Mm]vPolynomial.*lift|trdeg.*(card|le)\", \"sub\": \"RingTheory\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/DividedPowerAlgebra/Init.lean\", \"Mathlib/RingTheory/DividedPowerAlgebra/Init.lean\", \"Mathlib/RingTheory/MvPolynomial.lean\", \"Mathlib/RingTheory/Kaehler/Polynomial.lean\", \"Mathlib/RingTheory/FreeCommRing.lean\", \"Mathlib/RingTheory/PolynomialLaw/Basic.lean\", \"Mathlib/RingTheory/PolynomialLaw/Basic.lean\", \"Mathlib/RingTheory/PolynomialLaw/Basic.lean\"], \"digest\": \"4dbb9aac037a0273\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: polynomial residue-field lifts and ordinary Noether normalization do not give a finite map between full polynomial rings with prescribed contracted prime and localized base lifts. The algebraic-adjoin bound and polynomial scalar extension are already existing DAG Mathlib leaves and are cited as ingredients."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Refined Noether normalization at a polynomial prime with coordinates lifted to a localization of the base ring",
+   "results": "{\"t\": \"2026-10-23T12:18:39Z\", \"tool\": \"leansearch\", \"query\": \"Refined Noether normalization at a polynomial prime with coordinates lifted to a localization of the base ring\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"exists_integral_inj_algHom_of_fg\", \"exists_finite_inj_algHom_of_fg\", \"IsLocalization.OverPrime.mem_normalizedFactors_of_isPrime\", \"IsLocalization.integerNormalization_map_to_map\", \"IsLocalization.integerNormalization_eval₂_eq_zero\", \"IsLocalization.integerNormalization_aeval_eq_zero\", \"Polynomial.isIntegral_isLocalization_polynomial_quotient\", \"IsLocalization.coeffIntegerNormalization\"], \"digest\": \"4f7d2b52ebe28816\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: polynomial residue-field lifts and ordinary Noether normalization do not give a finite map between full polynomial rings with prescribed contracted prime and localized base lifts. The algebraic-adjoin bound and polynomial scalar extension are already existing DAG Mathlib leaves and are cited as ingredients."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"MvPolynomial\", \"FiniteType\"",
+   "results": "{\"t\": \"2026-10-23T12:18:39Z\", \"tool\": \"loogle\", \"query\": \"\\\"MvPolynomial\\\", \\\"FiniteType\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 4, \"note\": \"\", \"top\": [\"Algebra.FiniteType.instMvPolynomialOfFinite\", \"Algebra.FiniteType.iff_quotient_mvPolynomial'\", \"Algebra.FiniteType.iff_quotient_mvPolynomial''\", \"Algebra.FiniteType.iff_quotient_mvPolynomial\"], \"digest\": \"2388d6f19a9ac4f6\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: polynomial residue-field lifts and ordinary Noether normalization do not give a finite map between full polynomial rings with prescribed contracted prime and localized base lifts. The algebraic-adjoin bound and polynomial scalar extension are already existing DAG Mathlib leaves and are cited as ingredients."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Lift a finite polynomial algebra map over the residue field of a prime to a principal localization of the base ring and compute the contracted coordinate prime",
+   "results": "{\"t\": \"2026-10-23T12:18:47Z\", \"tool\": \"leanfinder\", \"query\": \"Lift a finite polynomial algebra map over the residue field of a prime to a principal localization of the base ring and compute the contracted coordinate prime\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Polynomial.UniversalCoprimeFactorizationRing.exists_liesOver_residueFieldMap_bijective\", \"Polynomial.residueFieldMapCAlgEquiv_algebraMap\", \"Algebra.exists_etale_bijective_residueFieldMap_and_map_eq_mul_and_isCoprime\", \"Ideal.ResidueField.liftₐ_algebraMap\", \"Ideal.ResidueField.liftₐ\", \"Polynomial.residueFieldMapCAlgEquiv_symm_X\", \"Polynomial.residueFieldMapCAlgEquiv\", \"Ideal.ResidueField.lift\"], \"digest\": \"3f069724b29eae37\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: polynomial residue-field lifts and ordinary Noether normalization do not give a finite map between full polynomial rings with prescribed contracted prime and localized base lifts. The algebraic-adjoin bound and polynomial scalar extension are already existing DAG Mathlib leaves and are cited as ingredients."
+  },
+  {
+   "tool": "grep",
+   "query": "trdeg.*(adjoin|closure|le_card)|trdeg.*(finset|finite)|trdeg.*span|trdeg_le",
+   "results": "{\"t\": \"2026-10-23T12:19:21Z\", \"tool\": \"grep\", \"query\": \"trdeg.*(adjoin|closure|le_card)|trdeg.*(finset|finite)|trdeg.*span|trdeg_le\", \"sub\": \"FieldTheory\", \"ok\": true, \"n_hits\": 2, \"note\": \"\", \"top\": [\"Mathlib/FieldTheory/FinTrdeg.lean\", \"Mathlib/FieldTheory/FinTrdeg.lean\"], \"digest\": \"1791f80c5a9c1fb1\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: polynomial residue-field lifts and ordinary Noether normalization do not give a finite map between full polynomial rings with prescribed contracted prime and localized base lifts. The algebraic-adjoin bound and polynomial scalar extension are already existing DAG Mathlib leaves and are cited as ingredients."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a prime ideal in a polynomial ring in n variables over a field, the residue field has transcendence degree at most n",
+   "results": "{\"t\": \"2026-10-23T12:19:22Z\", \"tool\": \"leanfinder\", \"query\": \"For a prime ideal in a polynomial ring in n variables over a field, the residue field has transcendence degree at most n\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"MvPolynomial.trdeg_of_isDomain\", \"trdeg_lt_aleph0\", \"Polynomial.trdeg_of_isDomain\", \"instIsAlgebraicQuotientIdealResidueField\", \"Algebra.IsAlgebraic.trdeg_le_cardinalMk\", \"isStronglyTranscendental_mk_of_mem_minimalPrimes\", \"instIsAlgebraicResidueFieldOfIsIntegral\", \"trdeg_pos\"], \"digest\": \"908041cdf63aa153\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: polynomial residue-field lifts and ordinary Noether normalization do not give a finite map between full polynomial rings with prescribed contracted prime and localized base lifts. The algebraic-adjoin bound and polynomial scalar extension are already existing DAG Mathlib leaves and are cited as ingredients."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-refined-quasi-finite-polynomial-pure-transcendental",
+  "date": "2026-10-22",
+  "group": "Q74"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "the refined quasi-finite affine-space chart with purely transcendental image residue field in the affine elementary-etale finite-over-smooth ingredient (Stacks 0520 and 052E); 0520 image-prime normalization and lifted coordinates (returned proof steps 2, 3, 6; the bound from step 8)",
+   "via": [
+    "lem-trf-refined-quasi-finite-polynomial-pure-transcendental",
+    "lem-trf-etale-finite-smooth-local-structure",
+    "lem-trf-elementary-module-devissage",
+    "lem-trf-flattening-module-by-admissible-blowup",
+    "lem-trf-flattening-by-admissible-blowup",
+    "lem-trf-flatification-horizontal-curve-pair",
+    "lem-trf-dejong-relative-marked-semistable",
+    "lem-trf-relative-marked-nodal-reduction",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-trf-normalized-polynomial-prime-lift",
+  "worker": "stage1",
+  "summary": "Split the unchanged statement in six steps using the existing refined Noether normalization and algebraic-adjoin transcendence bound. Wrote out all coefficient lifts, finite-type generation, localization and contraction computations. No new nodes: the remaining arguments are explicit polynomial and fraction calculations. Read every cited statement and Stacks 051P/0520; checked empty and extreme coordinate ranges. No exact project declaration found.",
+  "blueprint": "The inherited affine elementary-etale finite-over-smooth prerequisite of lem-trf-local-term-locality: the 0520 image-prime normalization and lifted coordinates. This item realizes the normalized-coordinate and prime computation clause of lem-trf-refined-quasi-finite-polynomial-pure-transcendental; it does not change the unit route.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-fibre-ring-primes-residue-fields",
+    "why": "Uses the general fibre prime bijection to identify Q and the final prime I; it is not specific to the contracting-correspondence route."
+   },
+   {
+    "node": "lem-weil-pbc-localization-prime-residue-field-iso",
+    "why": "Uses localization prime correspondence and its compatible residue-field isomorphism for E_f and R_f; no node of this unit supplies that general tool."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-fibre-ring-primes-residue-fields",
+  "lem-weil-pbc-localization-prime-residue-field-iso"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-O1-92d440843",
+  "group": "O1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-O1-92d440843 (reviewer sub-agent of L); spot-checked: I read the item in full: an unchanged statement, a six-step proof and no new nodes. I read every cited statement and Stacks algebra.tex Tag 0520 (whole proof) and Tag 051P (statement). The item is the middle of the 0520 proof: the fibre prime q̄', refined normalization, the lifts over R_f and the image prime. Step 1: the fibre lemma gives Q with j^{-1}(Q)=q', κ(Q)=Frac(k[t]/Q), and the trdeg_le_cardinalMk leaf (s = images of the variables, bT−a) gives r ≤ n, a finite integer. Step 2: the 051P node applies exactly. Step 3: the common-denominator lift ac/f is correct. Step 4: finite type, and ψ̄=φ by the universal property. Step 5: D=E_f, f∉q', λ^{-1}(q'D)=q', and j(f)≠0 give δ^{-1}(Q)=q'D, so P=ρ^{-1}(I). Step 6: ker(R_f→k)=pR_f gives P=(pR_f,x_{r+1..n}), and the localization residue-field lemma (3) plus the fibre bijection make I the prime corresponding to P. Edge cases n=0, r=0, r=n hold. It supplies exactly what parent step 2 uses. No duplicate (rg -L for 0520, refined-quasi-finite and x_{r+1}); no repair note; live and side-live still have the item unsplit with the same statement; only the proof fields and split_report changed. I accept the two declared sk-thm-p1 tool uses (the fibre-prime bijection and the localization prime/residue-field lemma), which are already accepted on the parent. No SGA. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.NormalizedPolynomialPrimeLift",
+  "declaration": "Algebra.normalizedPolynomialPrimeLift",
+  "declarations": [
+   "Algebra.polynomialFibrePrime",
+   "Algebra.polynomialAwayResidueMap",
+   "Algebra.polynomialMapResidueReduction",
+   "Algebra.normalizedPolynomialPrimeLift"
+  ],
+  "file": "lean/Sheaf/RingTheory/NormalizedPolynomialPrimeLift.lean",
+  "statement": "theorem normalizedPolynomialPrimeLift (R : Type u) [CommRing R] (n : ℕ) (p : PrimeSpectrum R) (q : PrimeSpectrum (MvPolynomial (Fin n) R)) (hp : p.asIdeal = q.asIdeal.under R) : ∃ r : ℕ, Algebra.trdeg p.asIdeal.ResidueField (polynomialFibrePrime R n p q hp).asIdeal.ResidueField = (r : Cardinal) ∧ r ≤ n ∧ ∃ (f : R) (hf : f ∉ p.asIdeal) (ψ : MvPolynomial (Fin n) (Localization.Away f) →ₐ[Localization.Away f] MvPolynomial (Fin n) (Localization.Away f)), ψ.toRingHom.FiniteType ∧ (polynomialMapResidueReduction R n p f hf ψ).toRingHom.Finite ∧ Ideal.comap (polynomialMapResidueReduction R n p f hf ψ).toRingHom (polynomialFibrePrime R n p q hp).asIdeal = Ideal.span (Set.range (fun i : Fin n ↦ if r ≤ i.val then MvPolynomial.X i else 0)) ∧ Ideal.comap ψ.toRingHom (q.asIdeal.map (MvPolynomial.map (algebraMap R (Localization.Away f)))) = p.asIdeal.map (MvPolynomial.C.comp (algebraMap R (Localization.Away f))) ⊔ Ideal.span (Set.range (fun i : Fin n ↦ if r ≤ i.val then MvPolynomial.X i else 0)) ∧ Ideal.comap (MvPolynomial.map (polynomialAwayResidueMap R p f hf)) (Ideal.span (Set.range (fun i : Fin n ↦ if r ≤ i.val then MvPolynomial.X i else 0))) = Ideal.comap ψ.toRingHom (q.asIdeal.map (MvPolynomial.map (algebraMap R (Localization.Away f))))",
+  "branch": "newtargets-dag",
+  "by": "Q76",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "The three auxiliary definitions give the canonical fibre prime, localization coefficient map, and reduced polynomial algebra map used in the theorem. The final contraction equality specifies the fibre prime corresponding to P."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-62c1467d7",
+  "group": "Q76",
+  "result": "pass",
+  "note": "Read the item node, 7 stmt_deps, the module, the report, Stacks 0520 and the side-live refinedNoetherNormalizationPrime (same r/index convention). Every clause matches. Q = ker eval₂Hom(ResidueField.map, t_i images); ∃ r:ℕ, trdeg = r ∧ r ≤ n; ∃ f ∉ p and an R_f-AlgHom ψ with FiniteType; ψ̄ = aeval of the coefficientwise reductions via awayLift (this is the scalar extension, since ψ is R_f-linear) and it is Finite; comap ψ̄ Q = span{X_i : i ≥ r} (0-based = x_{r+1..n}); comap ψ (q'D) = pR_f·C ⊔ I; comap(map red) I = P (fibre correspondence; I prime). No extra hypotheses; one bound universe; lean.statement verbatim; node otherwise identical to side-live. The helpers are concrete, listed, and have source and blueprint docstrings; proof sorry; no name clash or copy. Edge cases n=0, r=0, r=n, f=1 and the zero ring hold. No file changed, so no compile. No findings."
+ }
+}

@@ -1,0 +1,294 @@
+{
+ "id": "lem-sfb-henselian-flat-group-split-fibre-model",
+ "kind": "statement",
+ "title": "A henselian G-ring model retaining a flat group and its split residue fibre",
+ "statement": "Let $(C,\\mathfrak m_C)$ be a commutative henselian local ring [def-weil-pbc-henselian-terminology], put $k=C/\\mathfrak m_C$ [def-weil-residue-field], and let $H\\to\\operatorname{Spec}C$ be an affine flat group scheme of finite presentation [pqf-def-affine-morphism, def-weil-flat-morphism, def-sbc-locally-finite-presentation, def-weil-pbc-scheme-conventions]. A group scheme is a group object in schemes over its base, and homomorphisms preserve multiplication, identity and inverse. Let $M$ be a finitely generated additive abelian group and suppose an isomorphism $a:D_k(M)\\xrightarrow{\\sim}H_k$ is given, where $D_R(M)=\\operatorname{Spec}R[M]$ has the Hopf operations of [def-sfb-ring-diagonalizable-group] and subscripts denote fibre-product scalar extension [def-pc-fibre-product]. Then there exist a henselian local Noetherian G-ring $(A,\\mathfrak m_A)$ [def-weil-pbc-g-ring], a local ring map $u:A\\to C$ (meaning $u^{-1}(\\mathfrak m_C)=\\mathfrak m_A$), a commutative finitely presented $A$-algebra $B$ flat as an $A$-module [def-weil-pbc-finitely-presented-algebra, def-weil-pbc-flat-ring-map], a group scheme structure on $H_A=\\operatorname{Spec}B$, and a $C$-group isomorphism $b:(H_A)_C\\xrightarrow{\\sim}H$. Writing $k_A=A/\\mathfrak m_A$, there is a $k_A$-group isomorphism $a_A:D_{k_A}(M)\\xrightarrow{\\sim}(H_A)_{k_A}$ whose scalar extension along the residue embedding $k_A\\hookrightarrow k$ followed by $b_k$ is exactly $a$. No injectivity of $u$ and no conditions on fibres of $H_A$ away from its closed point are asserted.",
+ "source": {
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Agent finite-Hopf-diagram and residue-isomorphism refinement of Tag 0A41 (lemma-henselian-local-limit-G-rings); flatness descent is Tag 04AI (limits.tex, lemma-descend-flat-finite-presentation). The finite Hopf data and specified inverse residue maps are retained by finite-presentation limit descent. This is a model theorem, not a lifting theorem."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-henselian-terminology",
+  "def-weil-residue-field",
+  "pqf-def-affine-morphism",
+  "def-weil-flat-morphism",
+  "def-sbc-locally-finite-presentation",
+  "def-weil-pbc-scheme-conventions",
+  "def-sfb-ring-diagonalizable-group",
+  "def-pc-fibre-product",
+  "def-weil-pbc-g-ring",
+  "def-weil-pbc-finitely-presented-algebra",
+  "def-weil-pbc-flat-ring-map"
+ ],
+ "proof": [
+  {
+   "text": "Apply [lem-sfb-henselian-local-g-ring-colimit] to write $C=\\varinjlim_i A_i$ with local transition and cocone maps, each $A_i$ henselian local Noetherian and a G-ring. Write $k_i=A_i/\\mathfrak m_i$. The induced maps $k_i\\to k_j$ and $k_i\\to k$ are injective: their kernels are zero because the original maps contract the maximal ideals exactly. Moreover $k=\\varinjlim_i k_i$. Indeed every residue class has a representative in $C$, hence in some $A_i$; two such representatives can be moved to a common stage, and equality of their residues means their difference maps into $\\mathfrak m_C$, so is in that stage maximal ideal by locality. Compatible ring maps from the $k_i$ therefore define a unique ring map from $k$, by sending a represented residue class to its stage value. This proves the ring-colimit universal property, not just an equality of sets.",
+   "uses": [
+    "lem-sfb-henselian-local-g-ring-colimit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0A41, lemma-henselian-local-limit-G-rings; residue-field colimit argument supplied here from locality."
+   }
+  },
+  {
+   "text": "Since $H$ is affine over $\\operatorname{Spec}C$, write $H=\\operatorname{Spec}E$. By [lem-weil-pbc-lfp-affine-opens-finite-presentation], $E$ is finitely presented over $C$; by [lem-weil-pbc-flat-morphism-affine-criterion], it is flat over $C$. Apply [lem-kun-fp-algebra-descent] to obtain $i$ and a finitely presented $A_i$-algebra $B_i$ with a specified identification $C\\otimes_{A_i}B_i\\simeq E$. The affine-spectrum correspondence [def-weil-affine-spectrum] and [lem-weil-pbc-fibre-product-affine-spectra] turn the group operations into algebra maps $\\Delta:E\\to E\\otimes_C E$, $\\epsilon:E\\to C$, and $s:E\\to E$, satisfying the duals of the group diagrams. These statements use the correspondence over the ring $C$, with no field hypothesis.",
+   "uses": [
+    "lem-weil-pbc-lfp-affine-opens-finite-presentation",
+    "lem-weil-pbc-flat-morphism-affine-criterion",
+    "lem-kun-fp-algebra-descent",
+    "def-weil-affine-spectrum",
+    "lem-weil-pbc-fibre-product-affine-spectra"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 05N9 (lemma-colimit-category-fp-algebras), (1); affine translation: Schemes 01I4 and Morphisms 01TQ, 01U5."
+   }
+  },
+  {
+   "text": "For a presentation $B_i=A_i[x]/(f)$, its tensor square and cube have presentations $A_i[x,y]/(f(x),f(y))$ and $A_i[x,y,z]/(f(x),f(y),f(z))$; these follow by the algebra-tensor universal property [lem-weil-pbc-algebra-tensor-pushout-universal-property]. Their scalar extensions have the same presentations over $C$. Use [lem-weil-pbc-colimit-category-fp-algebras], (2), for the three operation maps, and move to a common stage. Use (3) for the finitely many equations: $(\\Delta\\otimes1)\\Delta=(1\\otimes\\Delta)\\Delta$, $(\\epsilon\\otimes1)\\Delta=1=(1\\otimes\\epsilon)\\Delta$, and $\\mu(s\\otimes1)\\Delta=u\\epsilon=\\mu(1\\otimes s)\\Delta$, with the canonical tensor unit and associativity identifications. Each is an equality of maps from the finitely presented $B_i$ into its tensor cube, itself, or its tensor square; the maps agree after extension to $C$. A common later stage enforces all equations. By the affine-spectrum correspondence and affine fibre-product description, their spectra give a group structure on $\\operatorname{Spec}B_i$ and the chosen identification with $E$ gives a $C$-group isomorphism $b_i$.",
+   "uses": [
+    "lem-weil-pbc-algebra-tensor-pushout-universal-property",
+    "lem-weil-pbc-colimit-category-fp-algebras",
+    "def-weil-affine-spectrum",
+    "lem-weil-pbc-fibre-product-affine-spectra"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 05N9, lemma-colimit-category-fp-algebras, (2),(3), applied to the finite group diagrams; tensor presentations written explicitly."
+   }
+  },
+  {
+   "text": "Apply [lem-weil-pbc-colimit-flat-ring-map] on the tail above the current $i$, with its $B_0=A_i$, $C_0=B_i$ and $\\varphi_0$ the structure map. Its limit map is $C\\to E$, flat by step 2, and its finite-presentation hypothesis is exactly the chosen presentation of $B_i$. Thus all sufficiently late $A_j\\to B_j=A_j\\otimes_{A_i}B_i$ are flat. Replace $i$ by such a stage, carrying along the operations and $b_i$ by scalar extension. The equations remain equations after applying a ring map. No flatness of $A_i\\to C$ is required.",
+   "uses": [
+    "lem-weil-pbc-colimit-flat-ring-map"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 02JO, lemma-flat-finite-presentation-limit-flat, (3); affine algebra form used in Limits Tag 04AI."
+   }
+  },
+  {
+   "text": "By [lem-sfb-subgroup-algebra-coset-presentation] with $L=0$, every $R[M]$ is finitely presented over $R$; its scalar-extension identification sends $e_m$ to $e_m$. In particular the two $k_i$-algebras $k_i[M]$ and $B_i\\otimes_{A_i}k_i$ are finitely presented, the latter by reducing its polynomial presentation. Their extensions to $k=\\varinjlim k_j$ are $k[M]$ and $E\\otimes_C k$. Translate the specified $a$ and $a^{-1}$ contravariantly using [def-weil-affine-spectrum] and [lem-weil-pbc-fibre-product-affine-spectra]. Apply [lem-weil-pbc-colimit-category-fp-algebras], (2), to descend both maps to some $k_j$. Apply (3) to their two inverse equations and to compatibility with coproduct, counit and antipode, for both maps. All targets are finitely presented: their tensor presentations are as in step 3. A common later $j$ makes these equations hold together. The resulting spectra are inverse group maps $a_j:D_{k_j}(M)\\simeq (H_j)_{k_j}$. The factorization equations in (2) say precisely that $(b_j)_k\\circ(a_j)_k=a$, including this particular supplied isomorphism.",
+   "uses": [
+    "lem-sfb-subgroup-algebra-coset-presentation",
+    "def-weil-affine-spectrum",
+    "lem-weil-pbc-fibre-product-affine-spectra",
+    "lem-weil-pbc-colimit-category-fp-algebras"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 05N9, lemma-colimit-category-fp-algebras, (2),(3), now for the residue-field system; finite presentation of the group algebra from the cited subgroup presentation at L=0."
+   }
+  },
+  {
+   "text": "Take $A=A_j$, $u=u_j$, $B=B_j$, $H_A=\\operatorname{Spec}B_j$, $b=b_j$ and $a_A=a_j$. Step 1 supplies henselianity, Noetherianity, the G-ring property and locality; steps 2--4 supply the finitely presented flat algebra and group structure; step 5 supplies the residue-fibre isomorphism with the required equality. The embedding $k_A\\hookrightarrow k$ is the one induced by $u$, already checked in step 1.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Assembly of the finite-stage choices; Tag 0A41 and the finite-data descent argument above."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-henselian-local-g-ring-colimit",
+  "lem-weil-pbc-lfp-affine-opens-finite-presentation",
+  "lem-weil-pbc-flat-morphism-affine-criterion",
+  "lem-kun-fp-algebra-descent",
+  "def-weil-affine-spectrum",
+  "lem-weil-pbc-fibre-product-affine-spectra",
+  "lem-weil-pbc-algebra-tensor-pushout-universal-property",
+  "lem-weil-pbc-colimit-category-fp-algebras",
+  "lem-weil-pbc-colimit-flat-ring-map",
+  "lem-sfb-subgroup-algebra-coset-presentation"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tag 0A41 with finite group-diagram descent by Algebra Tag 05N9 and flatness descent by Tag 02JO (3) / Limits 04AI. The specified residue-isomorphism refinement is written by Q32."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "G.?ring|strict.*hensel|hensel.*model|HopfAlgebra",
+   "results": "{\"t\": \"2026-10-24T12:12:15Z\", \"tool\": \"grep\", \"query\": \"G.?ring|strict.*hensel|hensel.*model|HopfAlgebra\", \"sub\": \"AlgebraicGeometry/Group\", \"ok\": true, \"n_hits\": 4, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/Group/Affine.lean\", \"Mathlib/AlgebraicGeometry/Group/Affine.lean\", \"Mathlib/AlgebraicGeometry/Group/Affine.lean\", \"Mathlib/AlgebraicGeometry/Group/Affine.lean\"], \"digest\": \"776676081ffd6e9d\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected hits concern general field theory, affine morphisms, Henselian rings, smooth lifting or Hopf spectrum construction; no declaration states this group-scheme assertion or a one-line generalization."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A finitely presented flat affine group over a strictly henselian local ring has a Noetherian henselian G-ring model preserving its split special fibre",
+   "results": "{\"t\": \"2026-10-24T12:12:16Z\", \"tool\": \"leansearch\", \"query\": \"A finitely presented flat affine group over a strictly henselian local ring has a Noetherian henselian G-ring model preserving its split special fibre\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Module.Flat.projective_of_finitePresentation\", \"Module.free_of_flat_of_isLocalRing\", \"Module.finitePresentation_iff_finite\", \"HenselianLocalRing.toIsLocalRing\", \"AlgHom.FinitePresentation.of_finiteType\", \"Module.finitePresentation_of_split_exact\", \"RingHom.finitePresentation_localizationPreserves\", \"instHenselianRingMaximalIdeal\"], \"digest\": \"398dc9dfdeed6f93\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected hits concern general field theory, affine morphisms, Henselian rings, smooth lifting or Hopf spectrum construction; no declaration states this group-scheme assertion or a one-line generalization."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Algebra.FinitePresentation\", \"Henselian\"",
+   "results": "{\"t\": \"2026-10-24T12:12:17Z\", \"tool\": \"loogle\", \"query\": \"\\\"Algebra.FinitePresentation\\\", \\\"Henselian\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected hits concern general field theory, affine morphisms, Henselian rings, smooth lifting or Hopf spectrum construction; no declaration states this group-scheme assertion or a one-line generalization."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Approximation of finitely presented flat Hopf algebras and a prescribed residue Hopf isomorphism over strict henselizations of finite type integer algebras",
+   "results": "{\"t\": \"2026-10-24T12:12:19Z\", \"tool\": \"leanfinder\", \"query\": \"Approximation of finitely presented flat Hopf algebras and a prescribed residue Hopf isomorphism over strict henselizations of finite type integer algebras\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.FormallySmooth.exists_adicCompletionEvalOneₐ_comp_eq\", \"Algebra.Smooth.exists_finiteType\", \"Algebra.FormallySmooth.exists_mkₐ_comp_eq_of_isAdicComplete\", \"Algebra.FormallySmooth.exists_lift\", \"Algebra.Smooth.exists_subalgebra_finiteType\", \"Algebra.FormallySmooth.lift\", \"Algebra.FormallySmooth\", \"Algebra.Smooth.exists_subalgebra_fg\"], \"digest\": \"b53681456797e52f\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected hits concern general field theory, affine morphisms, Henselian rings, smooth lifting or Hopf spectrum construction; no declaration states this group-scheme assertion or a one-line generalization."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finite presentation descent of a flat affine group scheme with a specified split diagonalizable residue fibre to a strictly henselian Noetherian G-ring mapping locally to the original ring",
+   "results": "{\"t\": \"2026-10-24T12:12:20Z\", \"tool\": \"leanfinder\", \"query\": \"Finite presentation descent of a flat affine group scheme with a specified split diagonalizable residue fibre to a strictly henselian Noetherian G-ring mapping locally to the original ring\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.instHasRingHomPropertyLocallyOfFinitePresentationFinitePresentation\", \"AlgebraicGeometry.instDescendsAlongSchemeMinMorphismPropertySurjectiveFlatLocallyOfFinitePresentationOfQuasiCompactOfIsZariskiLocalAtTarget\", \"Algebra.FormallySmooth.flat_of_algHom_of_isNoetherianRing\", \"AlgebraicGeometry.AffineSpace.instLocallyOfFinitePresentationOverSchemeInferInstanceOverClassOfFinite\", \"AlgebraicGeometry.UniversallyOpen.of_flat\", \"AlgebraicGeometry.LocallyOfFinitePresentation\", \"AlgebraicGeometry.instLocallyOfFinitePresentationOfIsSmooth\", \"AlgebraicGeometry.Flat\"], \"digest\": \"224d6de243bc8e33\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected hits concern general field theory, affine morphisms, Henselian rings, smooth lifting or Hopf spectrum construction; no declaration states this group-scheme assertion or a one-line generalization."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Descent of a finitely presented flat affine group scheme with a specified diagonalizable residue fibre to a henselian Noetherian G-ring model",
+   "results": "{\"t\": \"2026-10-24T13:22:59Z\", \"tool\": \"leanfinder\", \"query\": \"Descent of a finitely presented flat affine group scheme with a specified diagonalizable residue fibre to a henselian Noetherian G-ring model\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.descendsAlong_isOpenImmersion_surjective_inf_flat_inf_quasicompact'\", \"AlgebraicGeometry.instDescendsAlongSchemeMinMorphismPropertySurjectiveFlatLocallyOfFinitePresentationOfQuasiCompactOfIsZariskiLocalAtTarget\", \"AlgebraicGeometry.descendsAlong_isomorphisms_surjective_inf_flat_inf_quasicompact\", \"AlgebraicGeometry.Flat.surjective_descendsAlong_surjective_inf_flat_inf_quasicompact\", \"Algebra.FormallySmooth.flat_of_algHom_of_isNoetherianRing\", \"AlgebraicGeometry.UniversallyOpen.of_flat\", \"AlgebraicGeometry.descendsAlong_universallyInjective_surjective_inf_flat_inf_quasicompact\", \"AlgebraicGeometry.Scheme.exists_hom_hom_comp_eq_comp_of_locallyOfFiniteType\"], \"digest\": \"470ea23e64141d04\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: AlgebraicGeometry.descendsAlong_isOpenImmersion_surjective_inf_flat_inf_quasicompact'; AlgebraicGeometry.instDescendsAlongSchemeMinMorphismPropertySurjectiveFlatLocallyOfFinitePresentationOfQuasiCompactOfIsZariskiLocalAtTarget; AlgebraicGeometry.descendsAlong_isomorphisms_surjective_inf_flat_inf_quasicompact; AlgebraicGeometry.Flat.surjective_descendsAlong_surjective_inf_flat_inf_quasicompact; Algebra.FormallySmooth.flat_of_algHom_of_isNoetherianRing; AlgebraicGeometry.UniversallyOpen.of_flat; AlgebraicGeometry.descendsAlong_universallyInjective_surjective_inf_flat_inf_quasicompact; AlgebraicGeometry.Scheme.exists_hom_hom_comp_eq_comp_of_locallyOfFiniteType; no filtered henselian Noetherian G-ring approximation or group model theorem."
+  },
+  {
+   "tool": "grep",
+   "query": "hensel.*(colimit|G.ring|model)|Hopf.*(descen|limit)",
+   "results": "{\"t\": \"2026-10-24T13:25:13Z\", \"tool\": \"grep\", \"query\": \"hensel.*(colimit|G.ring|model)|Hopf.*(descen|limit)\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"Mathlib/Algebra/Category/CommHopfAlgCat.lean\"], \"digest\": \"9d9497cb6b233249\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: Mathlib/Algebra/Category/CommHopfAlgCat.lean; no filtered henselian Noetherian G-ring approximation or group model theorem."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"HenselianLocalRing\", \"IsColimit\"",
+   "results": "{\"t\": \"2026-10-24T13:25:14Z\", \"tool\": \"loogle\", \"query\": \"\\\"HenselianLocalRing\\\", \\\"IsColimit\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: no hits; no filtered henselian Noetherian G-ring approximation or group model theorem."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Approximation of a flat finitely presented affine group scheme over a henselian local ring by a Noetherian henselian G-ring with specified residue field isomorphism",
+   "results": "{\"t\": \"2026-10-24T13:26:05Z\", \"tool\": \"leansearch\", \"query\": \"Approximation of a flat finitely presented affine group scheme over a henselian local ring by a Noetherian henselian G-ring with specified residue field isomorphism\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.AffineScheme\", \"HenselianLocalRing.TFAE\", \"HenselianLocalRing.toIsLocalRing\", \"instHenselianRingMaximalIdeal\", \"HenselianLocalRing\", \"Field.henselian\", \"Algebra.Smooth.flat_of_isNoetherianRing\", \"AlgebraicGeometry.LocallyOfFinitePresentation.finitePresentation_appLE\"], \"digest\": \"87e326f64a77a3d4\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: AlgebraicGeometry.AffineScheme; HenselianLocalRing.TFAE; HenselianLocalRing.toIsLocalRing; instHenselianRingMaximalIdeal; HenselianLocalRing; Field.henselian; Algebra.Smooth.flat_of_isNoetherianRing; AlgebraicGeometry.LocallyOfFinitePresentation.finitePresentation_appLE; no filtered henselian Noetherian G-ring approximation or group model theorem."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-strict-local-diagonalizable-clopen-lift",
+  "date": "2026-10-24",
+  "group": "Q46"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "Supporting input to the strict-local clopen lifting prerequisite of Conrad Theorem B.4.1, printed pp.298-299; downstream of latest blueprint det-thm-sf-ctf-stability-direct-images, proof (3). No imported blueprint ancestor exists, as confirmed by blueprint_refs.py ancestor. Specific input: A henselian G-ring model retaining a flat group and its split residue fibre.",
+   "via": [
+    "lem-sfb-strict-local-diagonalizable-clopen-lift",
+    "lem-sfb-multiplicative-type-fibral-criterion",
+    "lem-sfb-multiplicative-type-fpqc-descent",
+    "lem-sfb-relative-commutative-multiplicative-extension",
+    "lem-sfb-relative-central-multiplicative-preimage",
+    "lem-sfb-relative-central-multiplicative-quotient",
+    "lem-sfb-relative-rank-one-central-quotient",
+    "lem-sfb-relative-rank-one-local-matrix-model",
+    "lem-sfb-relative-opposite-root-reflection-map",
+    "lem-sfb-local-split-root-data-weyl-lifts",
+    "lem-sfb-split-reductive-local-gauss-atlas",
+    "lem-sfb-split-reductive-local-quotient-points",
+    "lem-sfb-split-reductive-dvr-cartan-decomposition",
+    "lem-sfb-split-reductive-integral-maximal-bounded",
+    "lem-sfb-quasi-reductive-special-connectedness",
+    "lem-sfb-integral-chevalley-weyl-atlas",
+    "lem-sfb-chevalley-integral-root-model",
+    "lem-sfb-borel-kostant-distribution-comparison",
+    "lem-sfb-borel-simple-root-distribution-calculus",
+    "lem-sfb-restricted-induced-infinitesimal-invariants",
+    "lem-sfb-flag-frobenius-rho-pushforward",
+    "lem-sfb-dominant-flag-line-kempf-vanishing",
+    "lem-sfb-induced-weyl-dimension-formula",
+    "lem-sfb-steinberg-induced-module-irreducible",
+    "lem-sfb-rho-section-self-duality",
+    "lem-sfb-steinberg-endomorphism-detection",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-henselian-flat-group-split-fibre-model",
+  "worker": "stage1",
+  "summary": "Preserved the statement. Added only the general henselian local G-ring colimit theorem 0A41. Reused algebra-model descent, descent of maps/equalities, eventual flatness, the subgroup group-algebra finite presentation theorem, affine-spectrum and affine-product interfaces. Proved the residue-field colimit directly from locality and descended the specified isomorphism together with its inverse and all group equations. No field-only Hopf lemma is applied to C.",
+  "blueprint": "No imported ancestor (ancestor returns None). This supplies the arithmetic model input in lem-sfb-strict-local-diagonalizable-clopen-lift, downstream of latest det-thm-sf-ctf-stability-direct-images, proof (3).",
+  "tool_uses": [
+   {
+    "node": "lem-kun-fp-algebra-descent",
+    "why": "Generic finite-presentation/affine algebra tool used only in the supporting arithmetic-model argument; the constructibility unit has no alternate statement of this ring or affine-scheme interface."
+   },
+   {
+    "node": "lem-weil-pbc-colimit-category-fp-algebras",
+    "why": "Generic finite-presentation/affine algebra tool used only in the supporting arithmetic-model argument; the constructibility unit has no alternate statement of this ring or affine-scheme interface."
+   },
+   {
+    "node": "lem-weil-pbc-colimit-flat-ring-map",
+    "why": "Generic finite-presentation/affine algebra tool used only in the supporting arithmetic-model argument; the constructibility unit has no alternate statement of this ring or affine-scheme interface."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-kun-fp-algebra-descent",
+  "lem-weil-pbc-colimit-category-fp-algebras",
+  "lem-weil-pbc-colimit-flat-ring-map"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q32-ae4a6576c",
+  "group": "Q32",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q32-ae4a6576c (reviewer sub-agent of L); spot-checked: I read the item, the new node lem-sfb-henselian-local-g-ring-colimit, every cited node's statement, and Stacks 0A41 (more-algebra.tex l.12674). The item statement is unchanged and true. It is used by its parent lem-sfb-strict-local-diagonalizable-clopen-lift exactly as stated. The new node is Stacks 0A41 with locality of the cocone maps added, which follows from the construction; I tested it with C a field and C=Z_p. No node in the snapshot states 0A41; I searched with rg -L for 0A41, the label, G-ring together with henselian, and 0A04/0AH3. The node is strictly smaller than the item and contains no group data. Step checks: step 1 shows k=colim k_i by locality. Step 2 uses 01TQ and 01U5 for finite presentation and flatness of E, and the Künneth fp-algebra descent for B_i. Step 3 uses 05N9 (2) to descend Δ, ε, s and 05N9 (3) for coassociativity, both counit laws and both antipode laws; every algebra involved is finitely presented. Step 4 applies 02JO(3) with B_0=A_i, C_0=B_i and limit map C→E; flatness holds at all late stages. Step 5 uses the coset presentation with L=0, and 05N9 over the residue system descends a and its inverse; the factorization clause gives exactly (b_j)_k∘(a_j)_k=a. Edge cases checked: M=0, p-torsion M, C a field, non-injective u. I accept the declared tool_uses: lem-kun-fp-algebra-descent, lem-weil-pbc-colimit-category-fp-algebras and lem-weil-pbc-colimit-flat-ring-map. No changes made."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.HenselianFlatGroupSplitFibreModel",
+  "declaration": "AlgebraicGeometry.exists_henselian_flat_group_split_fibre_model",
+  "file": "lean/Sheaf/AlgebraicGeometry/HenselianFlatGroupSplitFibreModel.lean",
+  "statement": "theorem exists_henselian_flat_group_split_fibre_model (C : Type u) [CommRing C] [HenselianLocalRing C] (H : Grp (Over (Spec (.of C)))) [IsAffineHom H.X.hom] [Flat H.X.hom] [LocallyOfFinitePresentation H.X.hom] (M : Type u) [AddCommGroup M] [AddGroup.FG M] (a : ringDiagonalizableGroup (IsLocalRing.ResidueField C) M ≅ (Over.pullback (Spec.map (CommRingCat.ofHom (IsLocalRing.residue C)))).mapGrp.obj H) : ∃ (A : CommRingCat.{u}) (_ : HenselianLocalRing A), IsGRing A ∧ ∃ (u : A →+* C) (_ : IsLocalHom u) (B : CommRingCat.{u}) (_ : Algebra A B), Algebra.FinitePresentation A B ∧ Module.Flat A B ∧ ∃ (_ : GrpObj (Over.mk (Spec.map (CommRingCat.ofHom (algebraMap A B))))), ∃ (b : (Over.pullback (Spec.map (CommRingCat.ofHom u))).mapGrp.obj (Grp.mk (Over.mk (Spec.map (CommRingCat.ofHom (algebraMap A B))))) ≅ H) (aA : ringDiagonalizableGroup (IsLocalRing.ResidueField A) M ≅ (Over.pullback (Spec.map (CommRingCat.ofHom (IsLocalRing.residue A)))).mapGrp.obj (Grp.mk (Over.mk (Spec.map (CommRingCat.ofHom (algebraMap A B)))))), a.hom.hom.hom.left ≫ pullback.fst H.X.hom (Spec.map (CommRingCat.ofHom (IsLocalRing.residue C))) ≫ b.inv.hom.hom.left ≫ pullback.fst (Spec.map (CommRingCat.ofHom (algebraMap A B))) (Spec.map (CommRingCat.ofHom u)) = Spec.map (CommRingCat.ofHom (AddMonoidAlgebra.mapRingHom M (IsLocalRing.ResidueField.map u))) ≫ aA.hom.hom.hom.left ≫ pullback.fst (Spec.map (CommRingCat.ofHom (algebraMap A B))) (Spec.map (CommRingCat.ofHom (IsLocalRing.residue A)))",
+  "branch": "sheaf-dag",
+  "by": "N0",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-017c715a9",
+  "group": "N0",
+  "result": "pass",
+  "note": "Item record differs from live only by the new lean field; nothing landed for this item yet. Clause check against node and Stacks 0A41: henselian local C; H in Grp(Over Spec C) with IsAffineHom/Flat/LocallyOfFinitePresentation (affine gives qcqs, so this is finite presentation); M f.g. abelian (torsion and 0 allowed); a is a group iso in Grp(Over Spec k). Conclusion: A in CommRingCat.{u} henselian with IsGRing (includes Noetherian); u with IsLocalHom, no injectivity; B FinitePresentation and Module.Flat; GrpObj on Spec B itself; b and aA group isos. The equation between maps D_k(M) -> Spec B (via b.inv, coefficient map along ResidueField.map u) is equivalent to b_k after (a_A)_k = a, because the other pullback components are fixed by the structure maps; it pins the given a. Edge cases M=0, p-torsion, C a field, non-injective u covered; universe u is no restriction (0A41 rings are small). All 11 stmt_deps recorded; reuses ringDiagonalizableGroup and IsGRing, no new definition. Proof sorry only; source/blueprint docstrings with 6 proof steps; imports conform; lines <= 100; report has Worker report and Second reading by N0. No file changed, so no compile run. Advisory: Q47 holds a claim lock on the same item."
+ }
+}

@@ -1,0 +1,143 @@
+{
+ "id": "lem-sfb-space-fpqc-finite-affine-test-cover",
+ "kind": "statement",
+ "title": "Finite affine refinements of algebraic-space tests over an fpqc scheme covering",
+ "statement": "Let S and T be schemes [def-pc-scheme], X an algebraic space over S [def-trf-algebraic-space], f : X → T an S-morphism, and {g_i : T_i → T} an fpqc scheme covering [def-weil-pbc-fpqc-covering]. For every affine scheme Z over S and S-morphism h : Z → T there exist an algebraic space A with a cartesian square A → X over Z → T, an integer n ≥ 0, indices i(j), affine schemes W_j over S with morphisms w_j : W_j → T_i(j), algebraic spaces B_j with cartesian squares B_j → X ×_T T_i(j) over W_j → T_i(j), and maps r_j : B_j → A such that every field-valued point class of A is in the image of some |r_j| [def-a1-space-point-topology]. No quasi-compactness assumption on f or any local base change is made, and no quasi-compactness conclusion is asserted.",
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-trf-algebraic-space",
+  "def-weil-pbc-fpqc-covering",
+  "def-a1-space-point-topology"
+ ],
+ "source": {
+  "document": "literature/stacks-project/spaces-descent.tex; literature/stacks-project/topologies.tex; literature/stacks-project/spaces-properties.tex",
+  "place": "Tag 041L (lemma-descending-property-quasi-compact), affine-test cube; Tags 022B and 022D, finite affine refinement and fpqc base change; Tag 03H4 (lemma-points-cartesian), compatible point lifting."
+ },
+ "proof": [
+  {
+   "text": "Regard T and the affine test Z as representable algebraic spaces [def-trf-scheme-algebraic-space]. Form A = X ×_T Z and Z_i = Z ×_T T_i by [lem-trf-space-fibre-products-etale-covers]. The latter projections form an fpqc covering by [lem-weil-pbc-fpqc-covering-axioms].",
+   "uses": [
+    "def-trf-scheme-algebraic-space",
+    "lem-trf-space-fibre-products-etale-covers",
+    "lem-weil-pbc-fpqc-covering-axioms"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply the defining affine refinement condition [def-weil-pbc-fpqc-covering] to all of the affine scheme Z. Obtain finitely many affine opens W_j in the Z_i whose images cover Z. Write i(j) for the member and w_j : W_j → T_i(j) for its second projection. Form B_j = (X ×_T T_i(j)) ×_{T_i(j)} W_j using [lem-trf-space-fibre-products-etale-covers]. The chosen pullback projections give the displayed cartesian squares. Associativity of pullbacks identifies B_j with A ×_Z W_j, giving r_j : B_j → A.",
+   "uses": [
+    "def-weil-pbc-fpqc-covering",
+    "lem-trf-space-fibre-products-etale-covers"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For x in |A| choose a W_j point over its image in |Z|, since these affine opens jointly cover Z. Apply compatible point lifting in [lem-a1-space-point-open-calculus] to obtain a point of A ×_Z W_j above x, and transport it to B_j. If the refinement is empty then Z and A have no points, and the covering assertion is vacuous.",
+   "uses": [
+    "lem-a1-space-point-open-calculus"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-trf-scheme-algebraic-space",
+  "def-weil-pbc-fpqc-covering",
+  "lem-a1-space-point-open-calculus",
+  "lem-trf-space-fibre-products-etale-covers",
+  "lem-weil-pbc-fpqc-covering-axioms"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/spaces-descent.tex; literature/stacks-project/topologies.tex; literature/stacks-project/spaces-properties.tex",
+  "place": "Tag 041L (lemma-descending-property-quasi-compact), affine-test cube; Tags 022B and 022D, finite affine refinement and fpqc base change; Tag 03H4 (lemma-points-cartesian), compatible point lifting."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "finite compact point covering of an affine test of an algebraic space after fpqc base change",
+   "results": "QuasiCompactCover.of_finite, Scheme.OpenCover.compactSpace, QuasiCompactCover.isCompactOpenCovered_of_isAffineOpen, Scheme.affineCover and scheme-only quasi-compact base change.",
+   "date": "2026-10-26",
+   "verdict": "No algebraic-space finite test refinement. The finite affine scheme refinement is available, but it does not construct the space cartesian squares or point lifts."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An affine test of an algebraic space admits finitely many compact source spaces jointly surjective on points after fpqc descent",
+   "results": "Scheme-cover and scheme descent declarations; no algebraic-space test refinement.",
+   "date": "2026-10-26",
+   "verdict": "No match. The final lemma removes all compactness assumptions and only constructs the finite affine tests."
+  },
+  {
+   "tool": "grep",
+   "query": "rg AlgebraicSpace|algebraic.space in Mathlib/AlgebraicGeometry; IsQuasiCompactPresheafMap|IsSeparatedPresheafMap in lean/Sheaf and lean/WeilConjectures; blueprint_refs.py search finite affine",
+   "results": "Inspected SpaceQuasiCompactAffineTests, AlgebraicSpaceQuasiCompactFppfLocal, AlgebraicSpaceFpqcQCSeparatedDescent and source Scheme.exists_finite_affine_flat_of_mem_fpqcTopology. Mathlib has no AlgebraicSpace declaration. Blueprint finite-affine search has no matching space-test construction.",
+   "date": "2026-10-26",
+   "verdict": "No duplicate. Existing fppf locality requires locally finite presentation; existing scheme refinement lacks the algebraic-space cartesian squares and point covering."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.AlgebraicSpaceFpqcQCSeparatedDescent",
+  "date": "2026-10-26",
+  "group": "K1"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "is": null,
+  "same_as": [],
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Stable genus and smooth-family open loci in curve families. Supporting input: 0E76 proof, openness and base-change compatibility of canonical ampleness, including representability by a scheme over that open. Supporting input: 0D3C: descend geometric-fibre ampleness to the residue field, and glue the relatively ample open pieces including schematicity. The existing etale-only node does not cover inseparable field extensions. Supporting input in the proof of 0D3C: quasi-compact and separated preparation before forming the section algebra; the two properties are asserted separately. Finite affine refinement of an arbitrary scheme test, before any compactness argument.",
+   "via": [
+    "lem-sfb-space-fpqc-qc-separated-descent",
+    "lem-sfb-space-relative-ampleness-fpqc-descent",
+    "lem-sfb-space-relative-ample-locus",
+    "lem-sfb-stable-and-smooth-family-open-loci",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.AlgebraicSpaceFpqcFiniteAffineTestCover",
+  "file": "lean/Sheaf/AlgebraicGeometry/AlgebraicSpaceFpqcFiniteAffineTestCover.lean",
+  "declaration": "AlgebraicGeometry.AlgebraicSpace.fpqc_finite_affine_test_cover",
+  "statement": "theorem fpqc_finite_affine_test_cover\n    {S : Scheme.{u}} (X : AlgebraicSpace S) (T : Over S)\n    (f : X.obj.obj ⟶ yoneda.obj T) {I : Type v}\n    (Tᵢ : I → Over S) (g : ∀ i, Tᵢ i ⟶ T)\n    (hg : Presieve.ofArrows (fun i ↦ (Tᵢ i).left) (fun i ↦ (g i).left) ∈\n      Scheme.fpqcPrecoverage T.left)\n    (Z : Over S) (hZ : IsAffine Z.left) (h : yoneda.obj Z ⟶ yoneda.obj T) :\n    ∃ (A : AlgebraicSpace S) (q : A.obj.obj ⟶ X.obj.obj)\n      (p : A.obj.obj ⟶ yoneda.obj Z), IsPullback q p f h ∧\n        ∃ (n : ℕ) (i : Fin n → I) (W : Fin n → Over S)\n          (w : ∀ j, W j ⟶ Tᵢ (i j)) (B : Fin n → AlgebraicSpace S)\n          (b : ∀ j, (B j).obj.obj ⟶ Limits.pullback f (yoneda.map (g (i j))))\n          (c : ∀ j, (B j).obj.obj ⟶ yoneda.obj (W j)) (r : ∀ j, B j ⟶ A),\n          (∀ j, IsAffine (W j).left) ∧\n            (∀ j, IsPullback (b j) (c j) (pullback.snd f (yoneda.map (g (i j))))\n              (yoneda.map (w j))) ∧\n            ∀ x : Point A.obj.obj, ∃ (j : Fin n) (y : Point (B j).obj.obj),\n              mapPoint (r j).hom.hom y = x",
+  "branch": "sheaf-dag",
+  "by": "K1",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K1",
+  "result": "pass",
+  "landing": "20261026T082328-L-2162332",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K1",
+  "result": "pass",
+  "landing": "20261026T082328-L-2162332",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

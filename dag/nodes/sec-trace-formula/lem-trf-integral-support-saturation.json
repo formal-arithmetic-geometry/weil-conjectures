@@ -121,20 +121,35 @@
  "lean": {
   "module": "Sheaf.RingTheory.IntegralSupportSaturation",
   "declaration": "MonoidAlgebra.support_subset_saturation_of_isIntegral",
+  "declarations": [
+   "MonoidAlgebra.support_subset_saturation_of_isIntegral"
+  ],
   "file": "lean/Sheaf/RingTheory/IntegralSupportSaturation.lean",
   "statement": "theorem support_subset_saturation_of_isIntegral {k : Type u} [Field k] {G : Type v} [CommGroup G] [IsMulTorsionFree G] (P : Submonoid G) (hP : P.FG) (x : MonoidAlgebra k G) (hx : (MonoidAlgebra.mapDomainRingHom k P.subtype).IsIntegralElem x) : ∀ g ∈ x.coeff.support, g ∈ AlgebraicGeometry.FineFan.saturation P",
-  "branch": "newtargets-dag",
-  "by": "Q54",
-  "date": "2026-10-18",
-  "existing": false
+  "branch": "sheaf-dag",
+  "by": "Q92",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "Dependency interface repair under brief-stage2 §1(B): the live source was a legacy non-module file, so a required module-mode consumer could not import it. Add module mode, expose the original declarations and mark signature imports public, keeping proof imports private. All definition bodies, theorem signatures, proof docstrings and sorry proofs are unchanged. This repair is required by the complete-local comparison through characteristic-zero independence and its toric-realization proof import."
  },
  "reviewed_lean": {
-  "date": "2026-10-18",
+  "date": "2026-10-24",
   "by": "L",
-  "reviewer": "NT-stage2-cc-0162eefef",
-  "group": "Q54",
-  "result": "pass",
-  "note": "Only the item's lean record changed; statement verbatim in the file. H3 matches clause by clause: Field k; CommGroup G + IsMulTorsionFree; P : Submonoid G with P.FG and nothing extra; integrality is IsIntegralElem along mapDomainRingHom k P.subtype, which a probe showed sends single p 1 to single p 1 (the canonical k[P] into k[G]); conclusion uses the stmt_dep's FineFan.saturation, the closure of the root set, which equals the node's set in a commutative group. Edge cases (x=0, scalars, trivial P/G, non-sharp P, non-fg G) covered; universes independent. Proof-dep imports follow rule 7 (RationalConeDualFinite, FreeModule.PID); no duplicate found; docstrings carry ILO VIII Lemma 3.2.9 p.104 (checked in the PDF) and the proof plan; sorry-only. nt_compile --json clean (3.2 s, exit 0) and a broken control errors. No findings."
+  "reviewer": "NT-stage2-cc-a21433971",
+  "group": "Q92",
+  "result": "fix",
+  "note": "Lean exact against node and ILO VIII 5.5.2 (all hypotheses: regular local + IsAdicComplete + IsSepClosed residue field; ∐ Spec A_i with m=0 allowed; Pair extras implied for affine X; sameScheme/sameAction/sameBoundary keep log structures independent; IsFanInduced D.fanRule P with D : InducedNormalizedLogResolution F). Conclusion: Nonempty UnderlyingIso = full ordered towers equal with center ideals by comap, over the identity of X, no contraction; same content as CenterIso/IsIsoOver, needed because Construction towers lack reduced. Construction is unique up to unique iso (fs-Cartesian full pullback), so the ∀ C₁ C₂ form is right. Statement verbatim; char-0 dep record lean-only; 8 header-only module-mode (B) conversions (char-0 + 7 trf algebra modules) with bodies identical to live. Only fault H11: the second reading was the worker's own self-audit → replaced in fixes/lem-per-complete-local-rigidification-comparison.report.md (worker report verbatim + real clause-by-clause reading). Advisories: base-era theorem stmt_deps carry Pair/Construction and route the induced-resolution structures, whose owner def nodes are not in stmt_deps; Q03 15fcd14a competing char-0 module re-delivery needs a rebase at landing. No compile (no Lean changed).; reverted the delivery's change of existing node(s) lem-per-characteristic-zero-log-resolution-independence (--revert-nodes; kept as on sheaf-dag)"
  },
- "lean_audit": {}
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ }
 }

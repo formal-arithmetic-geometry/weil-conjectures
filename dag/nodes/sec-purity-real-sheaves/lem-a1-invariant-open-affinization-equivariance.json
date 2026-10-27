@@ -1,0 +1,290 @@
+{
+ "id": "lem-a1-invariant-open-affinization-equivariance",
+ "kind": "statement",
+ "title": "Flat affine comparison and equivariance of the canonical open image",
+ "statement": "Let $R\\to T$ be a ring homomorphism with flat spectrum morphism [def-weil-flat-morphism, def-weil-affine-spectrum]. Let $V\\to S=\\operatorname{Spec}R$ be a scheme [def-pc-scheme] that is quasi-separated [def-weil-quasi-separated-morphism] and whose every quasi-compact open is isomorphic to a quasi-compact open subscheme of an affine scheme. Let $E\\subset |V|$ be an intersection of a nonempty set-indexed family of quasi-compact opens, put $C=\\Gamma(E,\\mathcal O_V|_E)$, and let $W\\subset V$ be any open subscheme contained in $E$ [def-weil-open-immersion, def-a1-ringed-subspace, def-a1-intersection-structure-sections]. Write $j_E:E\\to Z=\\operatorname{Spec}C$ for the unique locally ringed space morphism inducing $\\mathrm{id}_C$ on sections [def-weil-locally-ringed-space-morphism]. Then $j_E|_W$ is an open immersion with image $J$. Set $V_T=V\\times_S\\operatorname{Spec}T$, $E_T=g^{-1}(E)$ and $W_T=g^{-1}(W)$ for the projection $g$ [def-pc-fibre-product]. Identify $\\Gamma(E_T,\\mathcal O_{V_T}|_{E_T})=C\\otimes_R T$ by $c\\otimes t\\mapsto g^\\sharp(c)t$. The canonical map $j_{E_T}|_{W_T}$ equals the base change of $j_E|_W$ into $\\operatorname{Spec}(C\\otimes_R T)$, and its image is exactly $J\\times_S\\operatorname{Spec}T$. More explicitly, for every affine open $L\\subset W$, with $D=\\Gamma(L,\\mathcal O_L)$, the corresponding restriction map is $C\\otimes_R T\\to D\\otimes_R T$, $c\\otimes t\\mapsto(c|_L)\\otimes t$, and its square with $C\\to D$ is a pushout of rings.\nIn particular let $T=A$, let $X=\\operatorname{Spec}A\\to S$ be also surjective, suppose $V\\to S$ factors through $X$, and give $V\\to X$ a descent datum $\\varphi:V\\times_S X\\cong X\\times_S V$ [def-pd-descent-datum]. Suppose $E$ and $W$ are invariant under $\\varphi$. Let $\\psi:A\\otimes_R C\\to C\\otimes_R A$ be the comorphism on the section rings of the inverse images of $E$, and set $\\theta=\\operatorname{Spec}\\psi$. Under the preceding comparisons on the two sides, $\\theta\\circ(j_E|_W\\times\\mathrm{id}_X)=(\\mathrm{id}_X\\times j_E|_W)\\circ\\varphi|_{W\\times_S X}$. Consequently $\\theta(J\\times_S X)=X\\times_S J$ as open subschemes, and $W\\cong J$ intertwines their restricted descent data.",
+ "source": {
+  "document": "literature/stacks-project/more-groupoids.tex",
+  "place": "Tag 0APK, lemma-ind-quasi-affine, canonical embedding j, final diagram, and invariant open-image comparison"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-affine-spectrum",
+  "def-weil-flat-morphism",
+  "def-pc-fibre-product",
+  "def-pd-descent-datum",
+  "def-weil-quasi-separated-morphism",
+  "def-a1-ringed-subspace",
+  "def-a1-intersection-structure-sections",
+  "def-weil-open-immersion",
+  "def-weil-locally-ringed-space-morphism",
+  "def-weil-surjective-morphism",
+  "def-a1-intersection-section-tensor-comparison",
+  "def-a1-invariant-intersection-affine-coordinates"
+ ],
+ "proof": [
+  {
+   "text": "Construct the actual sheafed-space maps W to E and E_T to E by inverse-image adjunction, using [def-a1-ringed-subspace] and [def-weil-pbc-topological-inverse-image]. The ambient inclusion of E is a monomorphism of sheafed spaces: its base is injective, and [lem-weil-pbc-topological-inverse-image-stalk] identifies its stalk maps with isomorphisms. The adjunction unit equations show that both ways of restricting the ambient scheme map agree after this monomorphism, hence agree. Applying global sections gives naturality of the restriction homomorphism. The unit equation also identifies restriction of the ambient structural ring map with the actual structural map on W. The Gamma-Spec adjunction translates these ring equations into naturality and the structural-map equation for the canonical open affinization.",
+   "uses": [
+    "lem-weil-pbc-topological-inverse-image-stalk",
+    "def-a1-ringed-subspace",
+    "def-weil-pbc-topological-inverse-image"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-groupoids.tex",
+    "place": "Tags 0API and 0APK, restricted locally ringed spaces; stalk identification from Sheaves Tag 008H, lemma-stalk-pullback"
+   }
+  },
+  {
+   "text": "Apply [lem-a1-intersection-canonical-affine-embedding] to $V,E,W$: the assumed quasi-affineness of every quasi-compact open is exactly its hypothesis. It gives the unique $j_E$, its restriction corresponding to $C\\to\\Gamma(W,\\mathcal O_W)$, and the open immersion $h=j_E|_W$ with open image $J$. Apply [lem-a1-intersection-sections-flat-base-change] to $V\\to\\operatorname{Spec}R$, $R\\to T$, and the given nonempty family defining $E$. Quasi-separatedness and flatness are hypotheses here. Its canonical isomorphism $\\alpha:C\\otimes_RT\\simeq\\Gamma(E_T,\\mathcal O|_{E_T})$ sends $c\\otimes t$ to $g^\\sharp(c)t$. By [lem-a1-locally-ringed-space-affine-adjunction], this isomorphism specifies the canonical $j_{E_T}:E_T\\to\\operatorname{Spec}(C\\otimes_RT)$ (the identity-on-sections map after the indicated identification).",
+   "uses": [
+    "lem-a1-intersection-canonical-affine-embedding",
+    "lem-a1-intersection-sections-flat-base-change",
+    "lem-a1-locally-ringed-space-affine-adjunction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-groupoids.tex",
+    "place": "Tags 0API, lemma-sits-in-functions, and 0APJ, lemma-affine-base-change, used in Tag 0APK"
+   }
+  },
+  {
+   "text": "The canonical map h:W to Spec C is over Spec R: naturality of the Gamma-Spec adjunction identifies its composite with the structural map with W inclusion followed by f. The tensor pushout over R identifies Spec(C tensor T) with the affine fibre product. Restrict the ambient pullback square to W. The two projections of the canonical map from W_T agree with this restricted square: the first follows by restriction naturality on C, the second by the scalar formula on T. Cancelling the affine tensor pullback square gives the asserted IsPullback square. Mathlib Scheme.Pullback.range_fst then identifies its range with the inverse image of the range of h; an extra open-immersion base-change lemma is not needed.",
+   "uses": [
+    "lem-a1-locally-ringed-space-affine-adjunction",
+    "lem-weil-pbc-algebra-tensor-pushout-universal-property",
+    "def-pc-fibre-product",
+    "def-weil-open-immersion"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-groupoids.tex",
+    "place": "Tag 0APK final diagram; affine tensor-product and open base-change universal properties written out"
+   }
+  },
+  {
+   "text": "Both $\\beta$ and $j_{E_T}|_{W_T}$ correspond to $C\\otimes_RT\\to\\Gamma(W_T,\\mathcal O_{W_T})$, $c\\otimes t\\mapsto(g^\\sharp(c))|_{W_T}\\,t$. For $\\beta$ this follows from its two projections in Step 3; for the canonical map it follows by restricting the formula for $\\alpha$ in Step 2. The restrictions here are those of the same sheaf comorphism, so pullback of $c$ followed by restriction is restriction followed by pullback. Uniqueness in [lem-weil-pbc-algebra-tensor-pushout-universal-property](3) gives equality of the ring maps, and the bijection [lem-a1-locally-ringed-space-affine-adjunction] gives equality of the morphisms. Thus the canonical restricted map has the asserted open image, without needing any quasi-compactness of $W$.",
+   "uses": [
+    "lem-weil-pbc-algebra-tensor-pushout-universal-property",
+    "lem-a1-locally-ringed-space-affine-adjunction"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-groupoids.tex",
+    "place": "Tag 0APK final diagram: canonical maps compared on sections using Tag 01I1, lemma-morphism-into-affine"
+   }
+  },
+  {
+   "text": "Let $L\\subset W$ be affine and set $D=\\Gamma(L,\\mathcal O_L)$. The same affine universal-property argument of Step 3 gives $L_T=\\operatorname{Spec}(D\\otimes_RT)$. The map of Step 4 on this chart is therefore $C\\otimes_RT\\to D\\otimes_RT$, $c\\otimes t\\mapsto(c|_L)\\otimes t$. Its square with $C\\to D$ and the maps $c\\mapsto c\\otimes1$, $d\\mapsto d\\otimes1$ is a pushout: for compatible homomorphisms $u:D\\to B$ and $v:C\\otimes_RT\\to B$, give $B$ its $R$-algebra structure through $u$. Put $w(t)=v(1\\otimes t)$. Compatibility makes $w$ an $R$-algebra map. Clauses (2),(3) of [lem-weil-pbc-algebra-tensor-pushout-universal-property] give the unique map $D\\otimes_RT\\to B$, $d\\otimes t\\mapsto u(d)w(t)$; its composite with the top map is $v$, by equality on pure tensors. This proves the pushout claim for arbitrary commutative rings $B$.",
+   "uses": [
+    "lem-weil-pbc-algebra-tensor-pushout-universal-property",
+    "lem-a1-locally-ringed-space-affine-adjunction"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-groupoids.tex",
+    "place": "Tag 0APK canonical flat affine pullback square, with the affine-chart ring pushout explicitly verified"
+   }
+  },
+  {
+   "text": "Now take $T=A$. Write $F_1=E\\times_SX$, $F_2=X\\times_SE$, and let $a:F_1\\to\\operatorname{Spec}(C\\otimes_RA)$, $b:F_2\\to\\operatorname{Spec}(A\\otimes_RC)$ be the canonical maps. The left and right comparisons are the comparison of Step 2 and its factor-switched version. By definition of the comorphism in the statement, $\\varphi_E^\\sharp=\\psi:A\\otimes_RC\\to C\\otimes_RA$ in these coordinates. Both $b\\circ\\varphi_E$ and $\\operatorname{Spec}(\\psi)\\circ a$ induce exactly this map on sections: $a$ and $b$ induce the identity in their section coordinates, and composition reverses comorphisms. Naturality and injectivity of [lem-a1-locally-ringed-space-affine-adjunction] imply their equality. Restrict to the open $W\\times_SX$; invariance gives its image under $\\varphi$ as $X\\times_SW$. Step 4 identifies the restricted $a,b$ with the two base changes of $h$, giving precisely the displayed equivariance equation. Since $\\psi$ is an isomorphism, taking open images gives $\\theta(J\\times_SX)=X\\times_SJ$, with their restricted structure sheaves [def-weil-open-immersion]. Finally $h:W\\simeq J$ intertwines the restricted maps by this same equation. The cocycle identity of [def-pd-descent-datum] transfers under this isomorphism: substituting the conjugate of $\\varphi$ in each of the three pullbacks cancels the adjacent $h^{-1}h$. Hence these are their restricted descent data. In Lean, obtain the two canonical section comparisons, psi and F from [lem-a1-invariant-intersection-affine-descent]. Naturality of restriction and the Gamma-Spec adjunction proves equivariance. The overlap is invertible by transport_transport and transport_self. For an arbitrary test-scheme point, factor its transported map through W using hWinv; cancel the tensor-swap and affine-pullback coordinate isomorphisms in F's overlap equation to identify its affine transport.",
+   "uses": [
+    "lem-a1-locally-ringed-space-affine-adjunction",
+    "def-weil-open-immersion",
+    "def-pd-descent-datum",
+    "lem-a1-invariant-intersection-affine-descent"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-groupoids.tex",
+    "place": "Tag 0APK, lemma-ind-quasi-affine, final canonical diagram and invariant open-image comparison"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-topological-inverse-image-stalk",
+  "def-a1-ringed-subspace",
+  "def-weil-pbc-topological-inverse-image",
+  "lem-a1-intersection-canonical-affine-embedding",
+  "lem-a1-intersection-sections-flat-base-change",
+  "lem-a1-locally-ringed-space-affine-adjunction",
+  "lem-weil-pbc-algebra-tensor-pushout-universal-property",
+  "def-pc-fibre-product",
+  "def-weil-open-immersion",
+  "def-pd-descent-datum",
+  "lem-a1-invariant-intersection-affine-descent"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/more-groupoids.tex",
+  "place": "Tags 0API, 0APJ, and 0APK (lemma-ind-quasi-affine), final canonical diagram; universal-property and equivariance details written out by Q19; C8 Lean realization uses Mathlib GammaSpec adjunction, tensor pushouts and affine pullback coordinates, with the existing invariant-intersection affine-descent theorem"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Under faithfully flat affine descent the canonical embedding of an invariant open inside an invariant intersection of quasi-compact opens into its spectrum of sections is equivariant",
+   "results": "8 hits; AlgebraicGeometry.Scheme.IdealSheafData.glueDataObjι_ι, AlgebraicGeometry.IsAffineOpen.Spec_map_appLE_fromSpec_assoc, AlgebraicGeometry.IsAffineOpen.SpecMap_appLE_fromSpec_assoc, AlgebraicGeometry.IsAffineOpen.toSpecΓ_fromSpec_assoc, AlgebraicGeometry.IsAffineOpen.fromSpec_toSpecΓ, AlgebraicGeometry.IsAffineOpen.Spec_map_appLE_fromSpec, AlgebraicGeometry.IsAffineOpen.fromSpec_toSpecΓ_assoc, AlgebraicGeometry.exists_eq_pow_mul_of_is_compact_of_quasi_separated_space_aux; ",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "toSpecΓ|toSpecGamma|IsQuasiAffine|affinization",
+   "results": "25 hits; Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Basic.lean, Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Basic.lean, Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Basic.lean, Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Basic.lean, Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Basic.lean, Mathlib/AlgebraicGeometry/Stalk.lean, Mathlib/AlgebraicGeometry/Stalk.lean, Mathlib/AlgebraicGeometry/Stalk.lean; ",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Naturality under flat affine base change of the canonical map from an open subscheme to the spectrum of sections on an intersection of quasi compact opens",
+   "results": "8 hits; AlgebraicGeometry.IsAffineOpen.isoSpec, AlgebraicGeometry.Scheme.Opens.toSpecΓ_SpecMap_appLE_assoc, AlgebraicGeometry.IsAffineOpen.ΓSpecIso_hom_fromSpec_app, AlgebraicGeometry.IsAffineOpen.isoSpec_hom_appTop, AlgebraicGeometry.LocallyRingedSpace.toΓSpecCBasicOpens, AlgebraicGeometry.isAffineHom_isStableUnderBaseChange, AlgebraicGeometry.Flat.isStableUnderBaseChange, AlgebraicGeometry.IsAffineOpen.isoSpec_hom_base_apply; ",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Scheme, \"toSpecΓ\"",
+   "results": "12 hits; AlgebraicGeometry.Scheme.toSpecΓ, AlgebraicGeometry.toSpecΓ_SpecMap_ΓSpecIso_inv, AlgebraicGeometry.toSpecΓ_SpecMap_ΓSpecIso_inv_assoc, AlgebraicGeometry.Scheme.toSpecΓ_naturality, AlgebraicGeometry.SpecMap_ΓSpecIso_inv_toSpecΓ_assoc, AlgebraicGeometry.Scheme.toSpecΓ_naturality_assoc, AlgebraicGeometry.SpecMap_ΓSpecIso_inv_toSpecΓ, AlgebraicGeometry.Scheme.toSpecΓ_preimage_basicOpen; ",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Canonical map from an open inside an intersection of quasi compact opens to the spectrum of sections commutes with flat affine base change and descent isomorphisms",
+   "subdirectory": "",
+   "results": "8 hits: AlgebraicGeometry.IsAffineOpen.Spec_map_appLE_fromSpec_assoc; AlgebraicGeometry.Scheme.Opens.toSpecΓ_SpecMap_map; AlgebraicGeometry.toOpen_toSpecΓ_app_assoc; AlgebraicGeometry.Scheme.Opens.toSpecΓ_SpecMap_presheaf_map; AlgebraicGeometry.Scheme.Opens.toSpecΓ_SpecMap_appLE; AlgebraicGeometry.Scheme.Opens.toSpecΓ_SpecMap_appLE_assoc; AlgebraicGeometry.Scheme.Opens.toSpecΓ_SpecMap_map_assoc; AlgebraicGeometry.IsAffineOpen.Spec_map_appLE_fromSpec",
+   "date": "2026-10-22",
+   "verdict": "no match for the entire item: affine adjunction, chart naturality and tensor-spectrum fibre products are ingredients already provided by cited DAG nodes."
+  },
+  {
+   "tool": "grep",
+   "query": "toSpecΓ_naturality|ΓSpec.adjunction|intersection.*baseChange",
+   "subdirectory": "AlgebraicGeometry",
+   "results": "25 hits: Mathlib/AlgebraicGeometry/AffineScheme.lean; Mathlib/AlgebraicGeometry/AffineScheme.lean; Mathlib/AlgebraicGeometry/AffineScheme.lean; Mathlib/AlgebraicGeometry/AffineScheme.lean; Mathlib/AlgebraicGeometry/AffineScheme.lean; Mathlib/AlgebraicGeometry/Group/Affine.lean; Mathlib/AlgebraicGeometry/AffineTransitionLimit.lean; Mathlib/AlgebraicGeometry/AffineTransitionLimit.lean",
+   "date": "2026-10-22",
+   "verdict": "no match for the entire item: affine adjunction, chart naturality and tensor-spectrum fibre products are ingredients already provided by cited DAG nodes."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Naturality of the locally ringed space map to spectrum of global sections under flat base change of an intersection of quasi compact open subschemes",
+   "subdirectory": "",
+   "results": "8 hits: AlgebraicGeometry.identityToΓSpec; AlgebraicGeometry.LocallyRingedSpace.toΓSpec; AlgebraicGeometry.LocallyRingedSpace.toΓSpecSheafedSpace; AlgebraicGeometry.LocallyRingedSpace.Γevaluation_naturality_assoc; AlgebraicGeometry.LocallyRingedSpace.toΓSpecBase; AlgebraicGeometry.toSpecΓ; AlgebraicGeometry.Spec.locallyRingedSpaceMap; AlgebraicGeometry.LocallyRingedSpace.toΓSpec_base",
+   "date": "2026-10-22",
+   "verdict": "no match for the entire item: affine adjunction, chart naturality and tensor-spectrum fibre products are ingredients already provided by cited DAG nodes."
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.LocallyRingedSpace, \"toSpecΓ\"",
+   "subdirectory": "",
+   "results": "4 hits: AlgebraicGeometry.isIso_toSpecΓ; AlgebraicGeometry.toSpecΓ; AlgebraicGeometry.ΓSpec.toSpecΓ_of; AlgebraicGeometry.ΓSpec.toSpecΓ_unop",
+   "date": "2026-10-22",
+   "verdict": "no match for the entire item: affine adjunction, chart naturality and tensor-spectrum fibre products are ingredients already provided by cited DAG nodes."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Spectrum of a tensor product of commutative algebras is the fibre product of their spectra with the canonical projections",
+   "subdirectory": "",
+   "results": "8 hits: AlgebraicGeometry.pullbackSpecIso; PrimeSpectrum.tensorProductTo; AlgebraicGeometry.Scheme.Pullback.Triplet.SpecTensorTo; AlgebraicGeometry.Scheme.Pullback.Triplet.isPullback_SpecMap_tensor; AlgebraicGeometry.Scheme.Pullback.SpecOfPoint; AlgebraicGeometry.Scheme.Pullback.Triplet.Spec_map_tensor_isPullback; AlgebraicGeometry.Scheme.Pullback.carrierEquiv; AlgebraicGeometry.Scheme.Pullback.SpecTensorTo_SpecOfPoint",
+   "date": "2026-10-22",
+   "verdict": "no match for the entire item: affine adjunction, chart naturality and tensor-spectrum fibre products are ingredients already provided by cited DAG nodes."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-a1-ind-quasi-affine-fpqc-effective-descent",
+  "date": "2026-10-22",
+  "group": "Q45"
+ },
+ "chapter": "sec-purity-real-sheaves",
+ "unit": "sk-p-real-rankin",
+ "blueprint": {
+  "from": {
+   "node": "lem-a1-affine-hc0",
+   "place": "Gabber fpqc descent input to the Loc_X-to-Cov_X construction in Bhatt–Scholze Lemma 7.3.9, p.67, used through lem-a1-proetale-local-system-representability and lem-a1-space-fpqc-separated-valuative-descent. Subargument of Stacks 0APK: canonical open embedding, flat affine pullback square and equivariance (old step 5).",
+   "via": [
+    "lem-a1-ind-quasi-affine-fpqc-effective-descent",
+    "lem-a1-separated-lqf-fpqc-effective-descent",
+    "lem-a1-algebraic-space-fpqc-sheaf",
+    "lem-a1-space-fpqc-separated-valuative-descent",
+    "lem-a1-proetale-local-system-representability"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-a1-invariant-open-affinization-equivariance",
+  "worker": "stage1",
+  "summary": "Reused the canonical intersection embedding, flat section comparison, locally ringed space affine adjunction, tensor universal property, inverse-image stalks and open base change. Six explicit steps prove the map equality, affine-chart pushout and descent equivariance. No new nodes or change to the statement.",
+  "blueprint": "Fills the Gabber descent input under lem-a1-affine-hc0: Tag 0APK final canonical diagram and the identification of the two inverse images of j(W), as specified in blueprint.from.place.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-topological-inverse-image-stalk",
+    "why": "Generic stalk identification for ringed subspaces; no unit-specific replacement."
+   },
+   {
+    "node": "lem-weil-pbc-algebra-tensor-pushout-universal-property",
+    "why": "Generic tensor existence and uniqueness for the explicit affine pullback, chart pushout and equality on pure tensors."
+   },
+   {
+    "node": "lem-weil-pbc-open-immersion-base-change",
+    "why": "Generic open-immersion base-change tool for the already constructed canonical open embedding."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-topological-inverse-image-stalk",
+  "lem-weil-pbc-algebra-tensor-pushout-universal-property"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q19-8e6d719f0",
+  "group": "Q19",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q19-8e6d719f0 (reviewer sub-agent of L); spot-checked: I read the whole delivery: the item's 6 steps and every cited statement. There are no new nodes, and the statement and stmt_deps are unchanged. Source: Stacks 0APK (more-groupoids.tex, lemma-ind-quasi-affine). Its final diagram and the claim that the two inverse images of j(W) are equal come with no details; the item writes them out (D5/E5). The item's psi is the comorphism phi^# : A⊗C→C⊗A, the inverse of Stacks' psi, and theta = Spec psi has the correct direction. Step 2: the hypotheses of lem-a1-intersection-canonical-affine-embedding (every quasi-compact open quasi-affine) and of lem-a1-intersection-sections-flat-base-change (quasi-separated, flat, nonempty set-indexed family) are all assumed by the item. j_{E_T} is defined through the affine adjunction, not through the embedding lemma. Steps 3-4: the base change beta and the restricted canonical map have the same section map c⊗t↦g^#(c)|t, so they are equal by tensor uniqueness and adjunction injectivity; quasi-compactness of W is not needed. Step 5: I checked the chart pushout for arbitrary B by hand. Step 6: equivariance follows from adjunction injectivity, the images give theta(J×X)=X×J, and the cocycle transfers by conjugation along h. Edge cases checked: W or E empty, T=0, T=R, E=V affine. No duplicate: the sibling lem-a1-invariant-intersection-affine-descent covers psi and its cocycle, which is complementary. The declared tool_uses (inverse-image stalk, tensor universal property, open-immersion base change) are generic and I accept them. Batch-5 flag: lem-trf-quasi-affine-canonical-affine-embedding is a Mathlib leaf stating Stacks 01P9 (a quasi-affine scheme embeds openly into Spec of its global sections). That is general scheme theory, not part of the trace formula or Poincaré duality or their proofs, so the citation is accepted. Advisory: Step 3 re-derives lem-weil-pbc-fibre-product-affine-spectra and lem-weil-pbc-open-preimage-fibre-product, both existing leaves, from cited nodes; the argument is valid, so I made no change. No SGA source is cited."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.InvariantOpenAffinizationEquivariance",
+  "declaration": "AlgebraicGeometry.invariant_open_affinization_equivariance",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.intersectionOpenRestriction",
+   "AlgebraicGeometry.Scheme.intersectionOpenAffinization",
+   "AlgebraicGeometry.Scheme.intersectionTensorLeft",
+   "AlgebraicGeometry.Scheme.intersectionOpenAlgebra",
+   "AlgebraicGeometry.Scheme.intersectionOpenRightMap",
+   "AlgebraicGeometry.Scheme.intersectionOpenLeftMap",
+   "AlgebraicGeometry.invariant_open_affinization_flat_comparison",
+   "AlgebraicGeometry.invariant_open_affinization_equivariance"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/InvariantOpenAffinizationEquivariance.lean",
+  "statement": "theorem invariant_open_affinization_equivariance {R A : CommRingCat.{u}} (r : R ⟶ A) [Flat (Spec.map r)] [Surjective (Spec.map r)] (V : Over (Spec A)) [QuasiSeparatedSpace V.left] (hV : ∀ Q : V.left.Opens, IsCompact (Q : Set V.left) → Scheme.IsQuasiAffine Q.toScheme) (D : Over.DescentDatum (Spec.map r) V) {I : Type v} (U : I → V.left.Opens) (hI : Nonempty I) (hqc : ∀ i, IsCompact (U i : Set V.left)) (W : V.left.Opens) (hW : ∀ x : W, ∀ i, x.val ∈ U i) (hEinv : ∀ x : ↥(pullback (V.hom ≫ Spec.map r) (Spec.map r) : Scheme.{u}), (∀ i, pullback.fst (V.hom ≫ Spec.map r) (Spec.map r) x ∈ U i) ↔ ∀ i, D.toHom x ∈ U i) (hWinv : pullback.fst (V.hom ≫ Spec.map r) (Spec.map r) ⁻¹ᵁ W = D.toHom ⁻¹ᵁ W) : ∃ ψ : Scheme.intersectionLeftTensor r (V.hom ≫ Spec.map r) U ≅ CommRingCat.of (Scheme.intersectionTensorSource r (V.hom ≫ Spec.map r) U), ψ.hom ≫ CommRingCat.ofHom (Scheme.intersectionBaseChangeMap r (V.hom ≫ Spec.map r) U).hom.toRingHom = Scheme.intersectionLeftComparison r (V.hom ≫ Spec.map r) U ≫ Scheme.intersectionSectionsMap (Scheme.invariantIntersectionOverlap r V D) (fun i ↦ pullback.snd (Spec.map r) (V.hom ≫ Spec.map r) ⁻¹ᵁ U i) (fun i ↦ pullback.fst (V.hom ≫ Spec.map r) (Spec.map r) ⁻¹ᵁ U i) (fun x hx i ↦ by change ((Scheme.invariantIntersectionOverlap r V D ≫ pullback.snd (Spec.map r) (V.hom ≫ Spec.map r)) x) ∈ U i simpa only [Scheme.invariantIntersectionOverlap, pullback.lift_snd, Scheme.Hom.mem_preimage] using (hEinv x).mp hx i) ∧ (∃ k : (pullback.fst (V.hom ≫ Spec.map r) (Spec.map r) ⁻¹ᵁ W).toScheme ≅ (pullback.snd (Spec.map r) (V.hom ≫ Spec.map r) ⁻¹ᵁ W).toScheme, k.hom ≫ (pullback.snd (Spec.map r) (V.hom ≫ Spec.map r) ⁻¹ᵁ W).ι = (pullback.fst (V.hom ≫ Spec.map r) (Spec.map r) ⁻¹ᵁ W).ι ≫ Scheme.invariantIntersectionOverlap r V D ∧ Scheme.intersectionOpenRightMap r (V.hom ≫ Spec.map r) U W hW ≫ Spec.map ψ.hom = k.hom ≫ Scheme.intersectionOpenLeftMap r (V.hom ≫ Spec.map r) U W hW) ∧ Spec.map ψ.hom '' Set.range (Scheme.intersectionOpenRightMap r (V.hom ≫ Spec.map r) U W hW) = Set.range (Scheme.intersectionOpenLeftMap r (V.hom ≫ Spec.map r) U W hW) ∧ ∃ F : Over.DescentDatum (Spec.map r) (Scheme.intersectionAffineModel V U), Scheme.invariantIntersectionOverlap r (Scheme.intersectionAffineModel V U) F ≫ (pullbackSymmetry (Spec.map r) ((Scheme.intersectionAffineModel V U).hom ≫ Spec.map r)).hom ≫ (Scheme.intersectionAffineOverlapIso r V U).hom ≫ Spec.map (Scheme.intersectionTensorSwap r (V.hom ≫ Spec.map r) U) = (Scheme.intersectionAffineOverlapIso r V U).hom ≫ Spec.map ψ.hom ∧ ∃ (J : (Spec (Scheme.intersectionSections V.left U)).Opens) (e : W.toScheme ≅ J.toScheme), e.hom ≫ J.ι = Scheme.intersectionOpenAffinization U W hW ∧ (J : Set (Spec (Scheme.intersectionSections V.left U))) = Set.range (Scheme.intersectionOpenAffinization U W hW) ∧ ∃ hhA : Scheme.intersectionOpenAffinization U W hW ≫ (Scheme.intersectionAffineModel V U).hom = W.ι ≫ V.hom, ∀ (H : Scheme.{u}) (a b : H ⟶ Spec A) (hab : a ≫ Spec.map r = b ≫ Spec.map r) (vW : Over.mk a ⟶ Over.mk (W.ι ≫ V.hom)), ∃ vW' : Over.mk b ⟶ Over.mk (W.ι ≫ V.hom), vW'.left ≫ W.ι = (D.transport a b hab (Over.homMk (vW.left ≫ W.ι) (by change (vW.left ≫ W.ι) ≫ V.hom = a exact (Category.assoc _ _ _).trans (Over.w vW)))).left ∧ vW'.left ≫ Scheme.intersectionOpenAffinization U W hW = (F.transport a b hab (Over.homMk (vW.left ≫ Scheme.intersectionOpenAffinization U W hW) (by rw [Category.assoc, hhA] exact Over.w vW))).left",
+  "branch": "newtargets-dag",
+  "by": "Q58",
+  "date": "2026-10-23",
+  "existing": false,
+  "note": "The two theorem declarations state respectively the general flat comparison (including every affine-chart ring pushout) and the descent-equivariance specialization. All helper definitions construct canonical maps explicitly. The added statement dependency is the already landed sibling owning the canonical overlap, tensor-swap, left-comparison, and affine-datum interfaces; it does not depend on this item. Repair of b9a2e73b3bf6: plain tensor/comparison and affine-overlap constructions are cited through their two owning definition nodes; theorem results remain proof-side only."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-33b6528d4",
+  "group": "Q58",
+  "result": "pass",
+  "note": "Re-delivery of the b9a2 H2 RETURN. Item Lean byte-identical (sha f42e5812); item node differs from live only by lean and by stmt_deps = base + 2 new def nodes, theorem lem-a1-invariant-intersection-affine-descent dropped to proof-side. New def-a1-intersection-section-tensor-comparison (IntersectionSectionsFlatBaseChange: SectionsMap…BaseChangeMap) and def-a1-invariant-intersection-affine-coordinates (InvariantIntersectionAffineDescent: overlap, left tensor/pure, swap, left comparison, affine model, overlap iso) are existing:true on unchanged landed modules. TeX matches bodies; body owners are def stmt_deps (no cycle); lean.statement verbatim, no noncomputable; check_existing ([],[]); neither id in live and no competing owner. Mathematics re-read and still correct (hyps no stronger, canonical j|W, alpha pinned, IsPullback + image, chart pushout, psi direction, equivariance, theta(JxX)=XxJ, transport intertwining, edge cases, universes). No compile: no file changed. Advisory: sorry'd intersectionScalars_map used in intersectionTensorMap stays under its theorem node."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C8",
+  "result": "pass",
+  "landing": "20261023T131408-L-2098433",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

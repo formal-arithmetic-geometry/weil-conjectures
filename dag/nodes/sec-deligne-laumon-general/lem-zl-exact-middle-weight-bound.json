@@ -1,0 +1,203 @@
+{
+ "id": "lem-zl-exact-middle-weight-bound",
+ "kind": "statement",
+ "title": "An exact middle term inherits a mixed upper weight bound",
+ "statement": "Fix a finite field $k_0=\\mathbf F_q$ of characteristic $p$, its algebraic closure $k$, a prime $\\ell\\ne p$, an algebraic closure $\\Qlb$ of $\\mathbf Q_\\ell$, and an isomorphism $\\iota:\\Qlb\\xrightarrow{\\sim}\\mathbf C$. For a separated finite-type $k_0$-scheme $S_0$ put $S=S_0\\times_{k_0}k$. Use the common-stage coefficient category $D^b_c(S,\\Qlb)$ and its constructible heart [def-weil-constructible-heart]. Weil objects and equivariant morphisms are fixed pairs as in [def-weil-weil-sheaf-complex]. Mixed upper bounds and $D_{\\le w}(S_0)$ have the meanings of [def-weil-punctual-weights; def-weil-complex-weights].\n\nLet $Y_0$ be a separated finite-type $k_0$-scheme, let $u\\in\\mathbf R$, and let\n$$A\\xrightarrow{a}B\\xrightarrow{b}C$$\nbe morphisms of constructible $\\Qlb$-Weil sheaves on $Y_0$, exact at $B$ [def-weil-pbc-exact-sequence]. If $A$ and $C$ are $\\iota$-mixed of weights at most $u$, then $B$ is $\\iota$-mixed of weights at most $u$. Neither injectivity of $a$ nor surjectivity of $b$ is assumed.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-general/sk-l-dl-general-excision/lem-zl-morphism-open-closed-reduction.proof.md",
+  "place": "Step 0: exact sequences of sheaves; old step 1."
+ },
+ "stmt_deps": [
+  "def-weil-constructible-heart",
+  "def-weil-weil-sheaf-complex",
+  "def-weil-punctual-weights",
+  "def-weil-complex-weights",
+  "def-weil-pbc-exact-sequence"
+ ],
+ "proof": [
+  {
+   "text": "Work in the abelian category of constructible $\\Qlb$-Weil sheaves specified in [lem-a1-mixed-direct-summand], with the common-stage heart of the statement. Put $B'=\\operatorname{im}(a)\\subset B$ and $Q=B/B'$. Exactness at $B$ means $B'=\\ker(b)$ by [def-weil-pbc-exact-sequence]. Thus $A\\twoheadrightarrow B'$ is a Weil quotient and $b$ induces a Weil map $\\bar b:Q\\to C$ with kernel $\\ker(b)/B'=0$, so $Q$ is a Weil subobject of $C$. The quotient projection has kernel $B'$, giving $0\\to B'\\to B\\to Q\\to0$. These are the elementary image and quotient constructions in the stated abelian category; in particular all the objects remain constructible and all arrows retain their Weil structures.",
+   "uses": [
+    "lem-a1-mixed-direct-summand",
+    "def-weil-pbc-exact-sequence"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-general/sk-l-dl-general-excision/lem-zl-morphism-open-closed-reduction.proof.md",
+    "place": "Step 0: exact sequences of sheaves; old step 1."
+   }
+  },
+  {
+   "text": "Apply clause (1) of [lem-a1-mixed-direct-summand] first to the Weil quotient $A\\twoheadrightarrow B'$ and then to the Weil subobject $Q\\hookrightarrow C$. The hypotheses on $A$ and $C$ give that both $B'$ and $Q$ are $\\iota$-mixed of weights at most the same real number $u$. Neither of these applications requires $a$ to be injective or $b$ to be surjective.",
+   "uses": [
+    "lem-a1-mixed-direct-summand"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-general/sk-l-dl-general-excision/lem-zl-morphism-open-closed-reduction.proof.md",
+    "place": "Step 0: exact sequences of sheaves; old step 1."
+   }
+  },
+  {
+   "text": "Apply clause (2) of [lem-a1-mixed-direct-summand] to the short exact sequence $0\\to B'\\to B\\to Q\\to0$ from step 1. Step 2 supplies both outer mixed upper bounds with $w=u$, and the extension clause gives that $B$ is $\\iota$-mixed of weights at most $u$, as required.",
+   "uses": [
+    "lem-a1-mixed-direct-summand"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-general/sk-l-dl-general-excision/lem-zl-morphism-open-closed-reduction.proof.md",
+    "place": "Step 0: exact sequences of sheaves; old step 1."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-a1-mixed-direct-summand",
+  "def-weil-pbc-exact-sequence"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-general/sk-l-dl-general-excision/lem-zl-morphism-open-closed-reduction.proof.md",
+  "place": "Step 0: exact sequences of sheaves (image, quotient, and the two clauses of lem-a1-mixed-direct-summand)."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "If a sequence of constructible ell adic Weil sheaves A to B to C is exact at B and A and C are mixed of weights at most w then B is mixed of weights at most w",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"CategoryTheory.ObjectProperty.prop_X₂_of_exact\", \"module\": \"Mathlib/CategoryTheory/Abelian/SerreClass/Basic\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Abelian C]\\n  (P : CategoryTheory.ObjectProperty C) [P.IsSerreClass] {S : CategoryTheory.ShortComplex C},\\n  S.Exact → P S.X₁ → P S.X₃ → P S.X₂\", \"doc\": \"In an abelian category, if $ P $ is a Serre class and there exists a short exact sequence $ 0 \\\\to X_1 \\\\to X_2 \\\\to X_3 \\\\to 0 $ with $ X_1 $ and $ X_3 $ satisfying $ P $, then the middle object $ X_2 $ \"}\n  {\"name\": \"Profinite.NobelingProof.succ_exact\", \"module\": \"Mathlib/Topology/Category/Profinite/Nobeling/Successor\", \"type\": \"∀ {I : Type u} (C : Set (I → Bool)) [inst : LinearOrder I] [inst_1 : WellFoundedLT I] {o : Ordinal.{u}},\\n  IsClosed C →\\n    ∀ (hsC : Profinite.NobelingProof.contained C (Order.succ o)) (ho : o < Ordinal.type fun x1 x2 => x1 < x2),\\n      {\\n          X₁ :=\\n            ModuleCat.of ℤ\\n              (Loc\", \"doc\": \"For a well-ordered set $ I $, a set $ C $ of Boolean-valued functions on $ I $, and an ordinal $ o $ less than the order type of $ I $, if $ C $ satisfies the containment condition with respect to $ \\\\\"}\n  {\"name\": \"SnakeLemma.exact_δ'_right\", \"module\": \"Mathlib/Algebra/Module/SnakeLemma\", \"type\": \"∀ {R : Type u_3} [inst : CommRing R] {M₁ : Type u_9} {M₂ : Type u_1} {M₃ : Type u_2} {N₁ : Type u_4} {N₂ : Type u_5}\\n  {N₃ : Type u_10} [inst_1 : AddCommGroup M₁] [inst_2 : Module R M₁] [inst_3 : AddCommGroup M₂] [inst_4 : Module R M₂]\\n  [inst_5 : AddCommGroup M₃] [inst_6 : Module R M₃] [inst_7 : Ad\", \"doc\": \"Under the conditions that $ f_2 $ is surjective and $ g_1 $ is injective, the sequence involving the connecting homomorphism $ \\\\delta' $ is exact at the corresponding position in the long exact sequen\"}\n  {\"name\": \"SnakeLemma.exact_δ'_left\", \"module\": \"Mathlib/Algebra/Module/SnakeLemma\", \"type\": \"∀ {R : Type u_3} [inst : CommRing R] {M₁ : Type u_9} {M₂ : Type u_1} {M₃ : Type u_2} {N₁ : Type u_4} {N₂ : Type u_5}\\n  {N₃ : Type u_10} [inst_1 : AddCommGroup M₁] [inst_2 : Module R M₁] [inst_3 : AddCommGroup M₂] [inst_4 : Module R M₂]\\n  [inst_5 : AddCommGroup M₃] [inst_6 : Module R M₃] [inst_7 : Ad\", \"doc\": \"Under the assumptions that $f_2$ is surjective and $g_1$ is injective, the sequence involving the connecting homomorphism $\\\\delta': \\\\ker(g_3) \\\\to \\\\coker(f_1)$ and the linear map $G: C_1 \\\\to C_2$ is ex\"}\n  {\"name\": \"SnakeLemma.exact_δ_right\", \"module\": \"Mathlib/Algebra/Module/SnakeLemma\", \"type\": \"∀ {R : Type u_1} [inst : CommRing R] {M₁ : Type u_7} {M₂ : Type u_5} {M₃ : Type u_4} {N₁ : Type u_8} {N₂ : Type u_9}\\n  {N₃ : Type u_10} [inst_1 : AddCommGroup M₁] [inst_2 : Module R M₁] [inst_3 : AddCommGroup M₂] [inst_4 : Module R M₂]\\n  [inst_5 : AddCommGroup M₃] [inst_6 : Module R M₃] [inst_7 : Ad\", \"doc\": \"Given a commutative diagram of modules over a commutative ring $ R $ with exact rows, if $ F: K_2 \\\\to K_3 $ is a module homomorphism satisfying $ f_2 \\\\circ \\\\iota_2 = \\\\iota_3 \\\\circ F $ and $ \\\\iota_3 $ \"}\n  {\"name\": \"SnakeLemma.exact_δ_left\", \"module\": \"Mathlib/Algebra/Module/SnakeLemma\", \"type\": \"∀ {R : Type u_1} [inst : CommRing R] {M₁ : Type u_7} {M₂ : Type u_8} {M₃ : Type u_9} {N₁ : Type u_4} {N₂ : Type u_5}\\n  {N₃ : Type u_10} [inst_1 : AddCommGroup M₁] [inst_2 : Module R M₁] [inst_3 : AddCommGroup M₂] [inst_4 : Module R M₂]\\n  [inst_5 : AddCommGroup M₃] [inst_6 : Module R M₃] [inst_7 : Ad\", \"doc\": \"Given a commutative diagram of modules over a commutative ring $ R $ with exact rows, the connecting homomorphism $ \\\\delta: \\\\ker(g_3) \\\\to \\\\coker(f_1) $ constructed in the Snake Lemma satisfies the exa\"}\n  {\"name\": \"CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex_exact\", \"module\": \"Mathlib/CategoryTheory/Sites/MayerVietorisSquare\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] {J : CategoryTheory.GrothendieckTopology C}\\n  [inst_1 : CategoryTheory.HasWeakSheafify J (Type v)] [inst_2 : CategoryTheory.HasSheafify J AddCommGrpCat]\\n  (S : J.MayerVietorisSquare), S.shortComplex.Exact\", \"doc\": \"Given a Mayer-Vietoris square $ S $ in a category $ \\\\mathcal{C} $ equipped with a Grothendieck topology $ J $, the associated short complex in the category of sheaves on $ \\\\mathcal{C} $ with values in\"}\n  {\"name\": \"HomologicalComplex.exact_of_degreewise_exact\", \"module\": \"Mathlib/Algebra/Homology/HomologicalComplexAbelian\", \"type\": \"∀ {C : Type u_1} {ι : Type u_2} {c : ComplexShape ι} [inst : CategoryTheory.Category.{v_1, u_1} C]\\n  [inst_1 : CategoryTheory.Abelian C] (S : CategoryTheory.ShortComplex (HomologicalComplex C c)),\\n  (∀ (i : ι), (S.map (HomologicalComplex.eval C c i)).Exact) → S.Exact\", \"doc\": \"If a short complex $ S $ in an abelian category has the property that its evaluation at every index $ i $ is an exact sequence, then $ S $ itself is an exact complex. In other words, if for all $ i $,\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: ObjectProperty.prop_X₂_of_exact requires a Serre-class instance; Mathlib does not identify the common-stage Weil mixed-weight predicate or establish its Serre property"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An upper mixed weight bound is closed under exact middle terms by subquotients and extensions of Frobenius sheaves",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"Profinite.NobelingProof.succ_exact\", \"module\": \"Mathlib/Topology/Category/Profinite/Nobeling/Successor\", \"type\": \"∀ {I : Type u} (C : Set (I → Bool)) [inst : LinearOrder I] [inst_1 : WellFoundedLT I] {o : Ordinal.{u}},\\n  IsClosed C →\\n    ∀ (hsC : Profinite.NobelingProof.contained C (Order.succ o)) (ho : o < Ordinal.type fun x1 x2 => x1 < x2),\\n      {\\n          X₁ :=\\n            ModuleCat.of ℤ\\n              (Loc\", \"doc\": \"For a well-ordered set $ I $, a set $ C $ of Boolean-valued functions on $ I $, and an ordinal $ o $ less than the order type of $ I $, if $ C $ satisfies the containment condition with respect to $ \\\\\"}\n  {\"name\": \"CategoryTheory.ObjectProperty.IsClosedUnderExtensions.prop_X₂_of_shortExact\", \"module\": \"Mathlib/CategoryTheory/ObjectProperty/Extensions\", \"type\": \"∀ {C : Type u} {inst : CategoryTheory.Category.{v, u} C} {P : CategoryTheory.ObjectProperty C}\\n  {inst_1 : CategoryTheory.Limits.HasZeroMorphisms C} [self : P.IsClosedUnderExtensions]\\n  {S : CategoryTheory.ShortComplex C}, S.ShortExact → P S.X₁ → P S.X₃ → P S.X₂\", \"doc\": \"In a category with zero morphisms, if an object property $P$ is closed under extensions and a short exact sequence has objects $X_1$ and $X_3$ satisfying $P$, then the middle object $X_2$ also satisfi\"}\n  {\"name\": \"CategoryTheory.ObjectProperty.prop_X₂_of_exact\", \"module\": \"Mathlib/CategoryTheory/Abelian/SerreClass/Basic\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Abelian C]\\n  (P : CategoryTheory.ObjectProperty C) [P.IsSerreClass] {S : CategoryTheory.ShortComplex C},\\n  S.Exact → P S.X₁ → P S.X₃ → P S.X₂\", \"doc\": \"In an abelian category, if $ P $ is a Serre class and there exists a short exact sequence $ 0 \\\\to X_1 \\\\to X_2 \\\\to X_3 \\\\to 0 $ with $ X_1 $ and $ X_3 $ satisfying $ P $, then the middle object $ X_2 $ \"}\n  {\"name\": \"CondensedMod.IsSolid\", \"module\": \"Mathlib/Condensed/Solid\", \"type\": \"(R : Type (u + 1)) → [inst : Ring R] → CondensedMod R → Prop\", \"doc\": \"A property of a condensed module $ M $ over a ring $ R $ indicating that $ M $ is solid, i.e., satisfies the defining conditions of solidity in the context of condensed mathematics.\"}\n  {\"name\": \"CategoryTheory.ObjectProperty.prop_X₂_of_shortExact\", \"module\": \"Mathlib/CategoryTheory/ObjectProperty/Extensions\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] (P : CategoryTheory.ObjectProperty C)\\n  [inst_1 : CategoryTheory.Limits.HasZeroMorphisms C] [P.IsClosedUnderExtensions] {S : CategoryTheory.ShortComplex C},\\n  S.ShortExact → P S.X₁ → P S.X₃ → P S.X₂\", \"doc\": \"If a property $P$ is closed under extensions and holds for the first and third objects $X_1$ and $X_3$ in a short exact sequence $0 \\\\to X_1 \\\\to X_2 \\\\to X_3 \\\\to 0$, then $P$ also holds for the middle o\"}\n  {\"name\": \"CategoryTheory.ObjectProperty.instHasTwoOutOfThreePropertyIsoModSerre\", \"module\": \"Mathlib/CategoryTheory/Abelian/SerreClass/MorphismProperty\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Abelian C]\\n  (P : CategoryTheory.ObjectProperty C) [inst_2 : P.IsSerreClass], P.isoModSerre.HasTwoOutOfThreeProperty\", \"doc\": \"In an abelian category, if $ \\\\mathcal{P} $ is a Serre class, then the morphism property of being an isomorphism modulo $ \\\\mathcal{P} $ (i.e., a morphism whose kernel and cokernel both satisfy $ \\\\mathc\"}\n  {\"name\": \"CategoryTheory.ObjectProperty.prop_iff_of_shortExact\", \"module\": \"Mathlib/CategoryTheory/Abelian/SerreClass/Basic\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Abelian C]\\n  (P : CategoryTheory.ObjectProperty C) [P.IsSerreClass] {S : CategoryTheory.ShortComplex C},\\n  S.ShortExact → (P S.X₂ ↔ P S.X₁ ∧ P S.X₃)\", \"doc\": \"For a Serre class $P$ in an abelian category, an object $X_2$ in a short exact sequence $0 \\to X_1 \\to X_2 \\to X_3 \\to 0$ satisfies $P(X_2)$ if and only if both $P(X_1)$ and $P(X_3)$ hold. This characteri\"}\n  {\"name\": \"CategoryTheory.ObjectProperty.instIsMultiplicativeMonoModSerre\", \"module\": \"Mathlib/CategoryTheory/Abelian/SerreClass/MorphismProperty\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Abelian C]\\n  (P : CategoryTheory.ObjectProperty C) [inst_2 : P.IsSerreClass], P.monoModSerre.IsMultiplicative\", \"doc\": \"In an abelian category, the morphism property defined by requiring that the kernel of the morphism belongs to a Serre class $ P $ is multiplicative. That is, if two composable morphisms each have this\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: ObjectProperty.prop_X₂_of_exact requires a Serre-class instance; Mathlib does not identify the common-stage Weil mixed-weight predicate or establish its Serre property"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsMixedOfWeightsAtMost\", \"Exact\"",
+   "results": "[loogle] OK 0 hit(s)",
+   "date": "2026-10-22",
+   "verdict": "no match: ObjectProperty.prop_X₂_of_exact requires a Serre-class instance; Mathlib does not identify the common-stage Weil mixed-weight predicate or establish its Serre property"
+  },
+  {
+   "tool": "grep",
+   "query": "IsMixedOfWeightsAtMost.*of_exact|mixed.*weight.*exact",
+   "results": "[grep] OK 0 hit(s)",
+   "date": "2026-10-22",
+   "verdict": "no match: ObjectProperty.prop_X₂_of_exact requires a Serre-class instance; Mathlib does not identify the common-stage Weil mixed-weight predicate or establish its Serre property"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Exact at middle weight bound for constructible Weil sheaves over finite fields",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"Fintype.exists_sum_fiber_le_of_sum_le_nsmul\", \"module\": \"Mathlib.Combinatorics.Pigeonhole\", \"type\": \"[Nonempty β] (hb : ∑ x, w x ≤ card β • b) : ∃ y, ∑ x with f x = y, w x ≤ b\", \"doc\": \"Let $\\\\beta$ be a finite non-empty type. If the total sum of weights $w(x)$ over all elements is at most $\\\\#\\\\beta \\\\cdot b$, then there exists an element $y \\\\in \\\\beta$ such that the sum of weights for a\"}\n  {\"name\": \"LieModule.Weight.instFintype.congr_simp\", \"module\": \"Mathlib.Algebra.Lie.TraceForm\", \"type\": \"∀ (R : Type u_2) (L : Type u_3) (M : Type u_4) [inst : CommRing R] [inst_1 : LieRing L] [inst_2 : LieAlgebra R L]\\n  [inst_3 : AddCommGroup M] [inst_4 : Module R M] [inst_5 : LieRingModule L M] [inst_6 : LieModule R L M]\\n  [inst_7 : LieRing.IsNilpotent L] [inst_8 : IsDomain R] [inst_9 : Module.IsTors\", \"doc\": \"If $ R $ is a commutative integral domain, $ L $ is a nilpotent Lie algebra over $ R $, and $ M $ is a Noetherian and torsion-free $ R $-module equipped with a Lie module structure over $ L $, then th\"}\n  {\"name\": \"LieModule.Weight.mk.congr_simp\", \"module\": \"Mathlib.Algebra.Lie.Weights.Basic\", \"type\": \"∀ {R : Type u_2} {L : Type u_3} {M : Type u_4} [inst : CommRing R] [inst_1 : LieRing L] [inst_2 : LieAlgebra R L]\\n  [inst_3 : AddCommGroup M] [inst_4 : Module R M] [inst_5 : LieRingModule L M] [inst_6 : LieModule R L M]\\n  [inst_7 : LieRing.IsNilpotent L] (toFun toFun_1 : L → R) (e_toFun : toFun = to\", \"doc\": \"Given a commutative ring $ R $, a nilpotent Lie algebra $ \\\\mathfrak{g} $ over $ R $, a Lie module $ M $ over $ \\\\mathfrak{g} $, and weight functions $ \\\\chi, \\\\chi' : \\\\mathfrak{g} \\\\to R $, if $ \\\\chi = \\\\c\"}\n  {\"name\": \"LieModule.Weight.mk.injEq\", \"module\": \"Mathlib.Algebra.Lie.Weights.Basic\", \"type\": \"∀ {R : Type u_2} {L : Type u_3} {M : Type u_4} [inst : CommRing R] [inst_1 : LieRing L] [inst_2 : LieAlgebra R L]\\n  [inst_3 : AddCommGroup M] [inst_4 : Module R M] [inst_5 : LieRingModule L M] [inst_6 : LieModule R L M]\\n  [inst_7 : LieRing.IsNilpotent L] (toFun : L → R) (genWeightSpace_ne_bot' : Lie\", \"doc\": \"For a commutative ring $ R $, a nilpotent Lie algebra $ \\\\mathfrak{g} $ over $ R $, and a Lie module $ M $ over $ \\\\mathfrak{g} $, two weights constructed via the `Weight.mk` constructor are equal if an\"}\n  {\"name\": \"RootPairing.coxeterWeightIn_le_four\", \"module\": \"Mathlib.LinearAlgebra.RootSystem.Finite.Lemmas\", \"type\": \"(S : Type*) [CommRing S] [LinearOrder S] [IsStrictOrderedRing S] [Algebra S R] [FaithfulSMul S R] [Module S M]\\n  [IsScalarTower S R M] [P.IsValuedIn S] (i j : ι) : P.coxeterWeightIn S i j ≤ 4\", \"doc\": \"For a root pairing $ P $ valued in a strictly ordered commutative ring $ S $ with faithful scalar multiplication and compatible algebra/module structures, the Coxeter weight $ P.coxeterWeightIn(S, i, \"}\n  {\"name\": \"BoundingSieve.mk.inj\", \"module\": \"Mathlib.NumberTheory.SelbergSieve\", \"type\": \"∀ {support : Finset ℕ} {prodPrimes : ℕ} {prodPrimes_squarefree : Squarefree prodPrimes} {weights : ℕ → ℝ}\\n  {weights_nonneg : ∀ (n : ℕ), 0 ≤ weights n} {totalMass : ℝ} {nu : ArithmeticFunction ℝ}\\n  {nu_mult : nu.IsMultiplicative} {nu_pos_of_prime : ∀ (p : ℕ), Nat.Prime p → p ∣ prodPrimes → 0 < nu p}\", \"doc\": \"If two bounding sieves constructed via the `BoundingSieve.mk` constructor are equal, then their corresponding components (support set, square-free prime product, weight functions, total mass, and mult\"}\n  {\"name\": \"Finsupp.le_weight_of_ne_zero'\", \"module\": \"Mathlib.Data.Finsupp.Weight\", \"type\": \"{s : σ} {f : σ →₀ ℕ} (hs : f s ≠ 0) : w s ≤ weight w f\", \"doc\": \"For any element $s$ in $\\\\sigma$ and finite support function $f : \\\\sigma \\\\to_0 \\\\mathbb{N}$, if $f(s) \\\\neq 0$, then the weight $w(s)$ of $s$ is less than or equal to the total weight $\\\\text{weight}_w(f)\"}\n  {\"name\": \"Mathlib.Meta.Positivity.evalBoundingSieveWeights\", \"module\": \"Mathlib.NumberTheory.SelbergSieve\", \"type\": \": PositivityExt\", \"doc\": \"A meta-programming function that verifies the non-negativity of BoundingSieve weights in the Selberg sieve. When applied to real-valued BoundingSieve weights, it returns a strictness level certifying \"}",
+   "date": "2026-10-22",
+   "verdict": "no match: ObjectProperty.prop_X₂_of_exact requires a Serre-class instance; Mathlib does not identify the common-stage Weil mixed-weight predicate or establish its Serre property"
+  },
+  {
+   "tool": "grep",
+   "query": "prop_X₂_of_exact|prop_X₂_of_shortExact",
+   "results": "[grep] OK 12 hit(s)\n  {\"file\": \"Mathlib/CategoryTheory/ObjectProperty/Extensions.lean\", \"line\": \"42\", \"text\": \"  prop_X₂_of_shortExact {S : ShortComplex C} (hS : S.ShortExact)\"}\n  {\"file\": \"Mathlib/CategoryTheory/ObjectProperty/Extensions.lean\", \"line\": \"45\", \"text\": \"lemma prop_X₂_of_shortExact [P.IsClosedUnderExtensions]\"}\n  {\"file\": \"Mathlib/CategoryTheory/ObjectProperty/Extensions.lean\", \"line\": \"48\", \"text\": \"  IsClosedUnderExtensions.prop_X₂_of_shortExact hS h₁ h₃\"}\n  {\"file\": \"Mathlib/CategoryTheory/ObjectProperty/Extensions.lean\", \"line\": \"51\", \"text\": \"  prop_X₂_of_shortExact := by simp\"}\n  {\"file\": \"Mathlib/CategoryTheory/ObjectProperty/Extensions.lean\", \"line\": \"54\", \"text\": \"  prop_X₂_of_shortExact hS h₁ h₃ :=\"}\n  {\"file\": \"Mathlib/CategoryTheory/Abelian/SerreClass/Basic.lean\", \"line\": \"62\", \"text\": \"    fun h ↦ P.prop_X₂_of_shortExact hS h.1 h.2⟩\"}\n  {\"file\": \"Mathlib/CategoryTheory/Abelian/SerreClass/Basic.lean\", \"line\": \"64\", \"text\": \"lemma prop_X₂_of_exact {S : ShortComplex C} (hS : S.Exact)\"}\n  {\"file\": \"Mathlib/CategoryTheory/Abelian/SerreClass/Basic.lean\", \"line\": \"69\", \"text\": \"  exact (P.prop_X₂_of_shortExact (hS.shortExact d)\"}\n  {\"file\": \"Mathlib/CategoryTheory/Abelian/SerreClass/MorphismProperty.lean\", \"line\": \"138\", \"text\": \"    P.prop_X₂_of_exact ((kernelCokernelCompSequence_exact f g).exact 0) hf hg\"}\n  {\"file\": \"Mathlib/CategoryTheory/Abelian/SerreClass/MorphismProperty.lean\", \"line\": \"143\", \"text\": \"    P.prop_X₂_of_exact ((kernelCokernelCompSequence_exact f g).exact 3) hf hg\"}\n  {\"file\": \"Mathlib/CategoryTheory/Abelian/SerreClass/MorphismProperty.lean\", \"line\": \"166\", \"text\": \"      P.prop_X₂_of_exact ((kernelCokernelCompSequence_exact f g).exact 2) hg.1 hfg.2⟩\"}\n  {\"file\": \"Mathlib/CategoryTheory/Abelian/SerreClass/MorphismProperty.lean\", \"line\": \"168\", \"text\": \"    ⟨P.prop_X₂_of_exact ((kernelCokernelCompSequence_exact f g).exact 1) hfg.1 hf.2,\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: read Mathlib/CategoryTheory/Abelian/SerreClass/Basic.lean:46--70; the theorem assumes a Serre class, while the Weil mixed-weight instance is not supplied by Mathlib"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsMixedOfWeightsAtMost\"",
+   "results": "OK; 0 hits. ",
+   "date": "2026-10-22",
+   "verdict": "no match: the general Serre-class exact-middle theorem requires closure of the particular Weil mixed-weight predicate, which Mathlib does not supply"
+  },
+  {
+   "tool": "grep",
+   "query": "IsMixedOfWeightsAtMost|mixed.*weight.*exact",
+   "results": "OK; 0 hits. ",
+   "date": "2026-10-22",
+   "verdict": "no match: the general Serre-class exact-middle theorem requires closure of the particular Weil mixed-weight predicate, which Mathlib does not supply"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "In an exact sequence A to B to C of constructible Weil sheaves if A and C are mixed of weights at most w so is B",
+   "results": "OK; 8 hits. Profinite.NobelingProof.succ_exact; CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex_exact; CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex_shortExact; CategoryTheory.ObjectProperty.prop_X₂_of_exact; CategoryTheory.Abelian.Ext.covariantSequence_exact; CategoryTheory.ObjectProperty.prop_iff_of_shortExact; Condensed.hasExactLimitsOfShape; Condensed.instAB4StarCondensedMod",
+   "date": "2026-10-22",
+   "verdict": "no match: the general Serre-class exact-middle theorem requires closure of the particular Weil mixed-weight predicate, which Mathlib does not supply"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Constructible Weil sheaves mixed of weights at most w closed under exact sequences",
+   "results": "OK; 8 hits. CategoryTheory.sheafIsAbelian; CategoryTheory.presheafToSheaf_additive; CategoryTheory.SheafOfTypes.adhesive; LightCondensed; Condensed; instCategoryCondensed; CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex_shortExact; instMonoidalClosedSheafOfHasSheafifyOfFunctorOpposite",
+   "date": "2026-10-22",
+   "verdict": "no match: the general Serre-class exact-middle theorem requires closure of the particular Weil mixed-weight predicate, which Mathlib does not supply"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A Serre class in an abelian category is closed under middle terms of exact sequences, and constructible Weil mixed weight bounds are stable under subquotients and extensions",
+   "results": "OK; 8 hits. CategoryTheory.ObjectProperty.IsSerreClass.toIsClosedUnderExtensions; CategoryTheory.ObjectProperty.IsSerreClass; CategoryTheory.ObjectProperty.prop_X₂_of_exact; CategoryTheory.ObjectProperty.isoModSerre; CategoryTheory.ObjectProperty.prop_iff_of_shortExact; CategoryTheory.ObjectProperty.instIsSerreClassTop; CategoryTheory.ObjectProperty.instHasTwoOutOfThreePropertyIsoModSerre; CategoryTheory.ObjectProperty.instIsMultiplicativeMonoModSerre",
+   "date": "2026-10-22",
+   "verdict": "no match: the general Serre-class exact-middle theorem requires closure of the particular Weil mixed-weight predicate, which Mathlib does not supply"
+  },
+  {
+   "tool": "grep",
+   "query": "prop_X₂_of_exact|prop_X₂_of_shortExact",
+   "results": "OK; 12 hits. Mathlib/CategoryTheory/ObjectProperty/Extensions.lean; Mathlib/CategoryTheory/ObjectProperty/Extensions.lean; Mathlib/CategoryTheory/ObjectProperty/Extensions.lean; Mathlib/CategoryTheory/ObjectProperty/Extensions.lean; Mathlib/CategoryTheory/ObjectProperty/Extensions.lean; Mathlib/CategoryTheory/Abelian/SerreClass/Basic.lean; Mathlib/CategoryTheory/Abelian/SerreClass/Basic.lean; Mathlib/CategoryTheory/Abelian/SerreClass/Basic.lean",
+   "date": "2026-10-22",
+   "verdict": "no match: the general Serre-class exact-middle theorem requires closure of the particular Weil mixed-weight predicate, which Mathlib does not supply"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-zl-morphism-open-closed-reduction",
+  "date": "2026-10-22",
+  "group": "Q15"
+ },
+ "chapter": "sec-deligne-laumon-general",
+ "unit": "sk-l-dl-general-excision",
+ "blueprint": {
+  "from": {
+   "node": "lem-zl-morphism-open-closed-reduction",
+   "place": "Step 0: exact sequences of sheaves; old step 1.",
+   "via": []
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-zl-exact-middle-weight-bound",
+  "worker": "stage1",
+  "summary": "Expanded the blueprint Step 0 into the image/quotient reduction, the existing subquotient bound, and the existing short-exact extension bound. The statement is unchanged. Reused lem-a1-mixed-direct-summand rather than creating a duplicate or moving a clause into a new node. The concrete pro-etale Lean theorem of_exact was read but not attached to the different common-stage category without a comparison. No new nodes.",
+  "blueprint": "Realizes exactly Step 0 of lem-zl-morphism-open-closed-reduction.proof.md in main-20261015: B prime is the image, its quotient embeds in C, apply lem-a1-mixed-direct-summand (1) then (2).",
+  "tool_uses": [
+   {
+    "node": "lem-a1-mixed-direct-summand",
+    "why": "The source explicitly uses clauses (1) and (2) for mixed upper bounds. This general stability tool belongs to the general-weights unit, which is cited by the excision unit; no proof route is replaced."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-a1-mixed-direct-summand"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q35-8e3c9e354",
+  "group": "Q35",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q35-8e3c9e354 (reviewer sub-agent of L); spot-checked: No new nodes; the statement is unchanged and the three steps realize blueprint main-20261015 lem-zl-morphism-open-closed-reduction.proof.md Step 0 exactly. Step 1 (elementary) takes the image B'=im(a) and the quotient Q=B/B' using def-weil-pbc-exact-sequence (Im=Ker), giving A↠B', Q↪C and 0→B'→B→Q→0 in the abelian Weil-sheaf category named by lem-a1-mixed-direct-summand. Step 2 applies clause (1) (subsheaf/quotient) of that node and step 3 applies clause (2) (extension); both clauses were checked against its statement. Edge cases A=0, C=0, both arrows zero and im(a)∈{0,B} all go through. The item's Y_0 is separated finite-type while the tool allows finite-type, which is harmless. No cycle. Duplicate search over the snapshot found only Frobenius-module analogues (lem-a1-extension-bounds, lem-a1-subquotient-extension-bounds), the parent and the tool itself. Batch-5 flag: def-weil-local-frobenius-trace is already in the item's statement closure via its base stmt_dep def-weil-punctual-weights. The new citation adds only Frobenius-module linear algebra (lem-a1-*, def-weil-frobenius-module-weights, p-linear-filtration), which is neither a trace-formula nor a Poincaré-duality step, so it is accepted. The tool_use of lem-a1-mixed-direct-summand (general-weights unit) is accepted because the source cites it verbatim; recording it is the maintainer's job (C8). No SGA source is used. The decision not to attach the Lean of_exact theorem (different concrete category) is reasonable."
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ }
+}

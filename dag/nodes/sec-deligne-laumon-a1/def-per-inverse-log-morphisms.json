@@ -1,0 +1,115 @@
+{
+ "kind": "definition",
+ "status": "split",
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-per-kummer-g-cover-fs-base-change",
+  "date": "2026-10-24",
+  "group": "Q110"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-per-artin-gabber-affine-curve",
+   "place": "Identity, composition and inverse comparison of fs base changes in ILO X 1.8, diagram (1.a).",
+   "via": [
+    "lem-per-kummer-g-cover-fs-base-change",
+    "lem-per-gabber-abelian-stage-toric-chart",
+    "lem-per-gabber-log-smooth-equivariant-modification",
+    "lem-per-trait-prime-to-ell-log-alteration",
+    "lem-per-gabber-regular-pair-purity",
+    "lem-per-absolute-gysin-purity",
+    "lem-per-potential-dualizing-regular-unit",
+    "lem-per-finite-regular-reduction-dualizing",
+    "lem-per-qbar-generic-duality-model",
+    "lem-per-qbar-middle-tstructure"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-deligne-laumon-a1",
+ "unit": "sk-p-dl-a1-perverse",
+ "import_flags": [],
+ "id": "def-per-inverse-log-morphisms",
+ "title": "Mutually inverse fs logarithmic morphisms",
+ "statement": "Let $X,Y$ be locally Noetherian fs log schemes and $f:Y\\to X$, $g:X\\to Y$ log morphisms as in [def-trf-fs-log-blowup]. They are mutually inverse if both composites equal the identity log morphisms. Explicitly, there is a log endomorphism $h_Y:Y\\to Y$ with $h_Y=g\\circ f$ on the underlying schemes and all relative etale log sections, and $h_Y$ is the identity in the sense of [def-per-strict-log-morphism]; likewise there is $h_X:X\\to X$ with $h_X=f\\circ g$ and $h_X$ the identity. Thus this tests inverse equations for full log morphisms, not only for scheme maps.",
+ "stmt_deps": [
+  "def-trf-fs-log-blowup",
+  "def-per-strict-log-morphism"
+ ],
+ "source": {
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "Expose VI 1.1, printed p.69; VIII 3.3.9, printed p.108: inverse log morphisms and saturated base change."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "composition and inverse isomorphism of fine saturated logarithmic scheme morphisms",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.hom_base_inv_base\", \"module\": \"Mathlib.AlgebraicGeometry.Scheme\", \"type\": \"{X Y : Scheme.{u}} (e : X ≅ Y) : e.hom.base ≫ e.inv.base = 𝟙 _\", \"doc\": \"For any isomorphism $ e $ between schemes $ X $ and $ Y $, the composition of the underlying continuous map of $ e $ and the underlying continuous map of its inverse $ e^{-1} $ equals the identity map\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.isoSpec_inv_naturality_assoc\", \"module\": \"Mathlib.AlgebraicGeometry.AffineScheme\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} [inst : AlgebraicGeometry.IsAffine X] [inst_1 : AlgebraicGeometry.IsAffine Y]\\n  (f : X ⟶ Y) {Z : AlgebraicGeometry.Scheme} (h : Y ⟶ Z),\\n  CategoryTheory.CategoryStruct.comp (AlgebraicGeometry.Spec.map (AlgebraicGeometry.Scheme.Hom.appTop f))\\n      (CategoryTheory.C\", \"doc\": \"For affine schemes $X$ and $Y$, and morphisms $f: X \\\\to Y$ and $h: Y \\\\to Z$, the inverse isomorphism $\\\\operatorname{Spec}(\\\\Gamma(X)) \\\\cong X$ commutes with composition: the composition of $\\\\operatorna\"}\n  {\"name\": \"CategoryTheory.Iso.compInverseIso\", \"module\": \"Mathlib.CategoryTheory.Equivalence\", \"type\": \"{H : D ≌ E} (i : F ≅ G ⋙ H.functor) : F ⋙ H.inverse ≅ G\", \"doc\": \"Given an equivalence $ H : D ≌ E $ and an isomorphism $ i : F ≅ G ⋙ H $ between functors $ F : C → E $ and $ G : C → D $, this constructs an isomorphism $ F ⋙ H^{-1} ≅ G $ by: (1) right-whiskering $ i\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.isoSpec_inv_naturality\", \"module\": \"Mathlib.AlgebraicGeometry.AffineScheme\", \"type\": \"{X Y : Scheme} [IsAffine X] [IsAffine Y] (f : X ⟶ Y) : Spec.map (f.appTop) ≫ Y.isoSpec.inv = X.isoSpec.inv ≫ f\", \"doc\": \"For any affine schemes $X$ and $Y$ and a morphism $f: X \\to Y$, the composition of the inverse isomorphism $\\\\operatorname{Spec}(\\\\Gamma(Y)) \\\\xrightarrow{\\\\cong} Y$ with the morphism $\\\\operatorname{Spec}(\"}\n  {\"name\": \"CategoryTheory.Iso.trans\", \"module\": \"Mathlib.CategoryTheory.Iso\", \"type\": \"(α : X ≅ Y) (β : Y ≅ Z) : X ≅ Z\", \"doc\": \"Given isomorphisms $\\\\alpha: X \\\\cong Y$ and $\\\\beta: Y \\\\cong Z$ in a category $\\\\mathcal{C}$, their composition $\\\\beta \\\\circ \\\\alpha$ defines an isomorphism $X \\\\cong Z$ with inverse $\\\\alpha^{-1} \\\\circ \\\\be\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.inv_app\", \"module\": \"Mathlib.AlgebraicGeometry.Scheme\", \"type\": \"{X Y : Scheme} (f : X ⟶ Y) [IsIso f] (U : X.Opens) :\\n  (inv f).app U =\\n    X.presheaf.map (eqToHom (show (f ≫ inv f) ⁻¹ᵁ U = U by rw [IsIso.hom_inv_id]; rfl)).op ≫ inv (f.app ((inv f) ⁻¹ᵁ U))\", \"doc\": \"Let $f: X \\\\to Y$ be an isomorphism of schemes, and let $f^{-1}: Y \\\\to X$ be its inverse. Associated with $f$ and $f^{-1}$ are morphisms of sheaves of rings, denoted $f^\\\\#$ and $(f^{-1})^\\\\#$ respective\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.stalkMap_hom_inv_apply\", \"module\": \"Mathlib.AlgebraicGeometry.Scheme\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (e : X ≅ Y) (y : ↥Y)\\n  (z :\\n    ↑(Y.presheaf.stalk\\n        ((CategoryTheory.ConcreteCategory.hom e.hom.base) ((CategoryTheory.ConcreteCategory.hom e.inv.base) y)))),\\n  (CategoryTheory.ConcreteCategory.hom (AlgebraicGeometry.Scheme.Hom.stalkMap e.inv y))\\n      ((Cat\", \"doc\": \"Let $e: X \\\\to Y$ be an isomorphism of schemes with inverse $e^{-1}$, and let $e_b, (e^{-1})_b$ be the underlying continuous maps. For any point $y$ in $Y$, the composition of the stalk maps $(e^{-1})_\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.iso_hom_base_inv_base\", \"module\": \"Mathlib.AlgebraicGeometry.Scheme\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (e : X ≅ Y),\\n  CategoryTheory.CategoryStruct.comp e.hom.base e.inv.base = CategoryTheory.CategoryStruct.id ↑X.toPresheafedSpace\", \"doc\": \"For any isomorphism $ e $ between schemes $ X $ and $ Y $, the composition of the underlying continuous map $ e_{\\\\text{base}} $ and its inverse $ e^{-1}_{\\\\text{base}} $ equals the identity map on the \"}\n",
+   "date": "2026-10-24",
+   "verdict": "Existing project declarations reused; Mathlib results do not define logarithmic morphism operations."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Composition of log scheme morphisms and mutually inverse log morphisms including maps of log sections",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.inv_base_hom_base\", \"module\": \"Mathlib/AlgebraicGeometry/Scheme\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (e : X ≅ Y),\\n  CategoryTheory.CategoryStruct.comp e.inv.base e.hom.base = CategoryTheory.CategoryStruct.id ↑Y.toPresheafedSpace\", \"doc\": \"For any isomorphism $ e $ between schemes $ X $ and $ Y $, the composition of the inverse morphism's underlying continuous map $ e.inv.base $ followed by the forward morphism's underlying continuous m\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.hom_base_inv_base\", \"module\": \"Mathlib/AlgebraicGeometry/Scheme\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (e : X ≅ Y),\\n  CategoryTheory.CategoryStruct.comp e.hom.base e.inv.base = CategoryTheory.CategoryStruct.id ↑X.toPresheafedSpace\", \"doc\": \"For any isomorphism $ e $ between schemes $ X $ and $ Y $, the composition of the underlying continuous map of $ e $ and the underlying continuous map of its inverse $ e^{-1} $ equals the identity map\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.iso_inv_base_hom_base\", \"module\": \"Mathlib/AlgebraicGeometry/Scheme\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (e : X ≅ Y),\\n  CategoryTheory.CategoryStruct.comp e.inv.base e.hom.base = CategoryTheory.CategoryStruct.id ↑Y.toPresheafedSpace\", \"doc\": \"For any isomorphism $ e: X \\\\cong Y $ between schemes, the composition of the inverse base map $ e^{-1}_\\\\text{base}: Y \\\\to X $ and the forward base map $ e_\\\\text{base}: X \\\\to Y $ equals the identity ma\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.inv_base_hom_base_assoc\", \"module\": \"Mathlib/AlgebraicGeometry/Scheme\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (e : X ≅ Y) {Z : TopCat} (h : ↑Y.toPresheafedSpace ⟶ Z),\\n  CategoryTheory.CategoryStruct.comp e.inv.base (CategoryTheory.CategoryStruct.comp e.hom.base h) = h\", \"doc\": \"For any isomorphism $ e: X \\\\cong Y $ between schemes and any continuous map $ h: Y \\\\to Z $, the composition of the inverse base map $ e^{-1}_\\\\text{base} $ with the composition $ e_\\\\text{base} \\\\circ h \"}\n  {\"name\": \"AlgebraicGeometry.Scheme.iso_hom_base_inv_base\", \"module\": \"Mathlib/AlgebraicGeometry/Scheme\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (e : X ≅ Y),\\n  CategoryTheory.CategoryStruct.comp e.hom.base e.inv.base = CategoryTheory.CategoryStruct.id ↑X.toPresheafedSpace\", \"doc\": \"For any isomorphism $ e $ between schemes $ X $ and $ Y $, the composition of the underlying continuous map $ e_{\\\\text{base}} $ and its inverse $ e^{-1}_{\\\\text{base}} $ equals the identity map on the \"}\n  {\"name\": \"AlgebraicGeometry.Scheme.hom_base_inv_base_assoc\", \"module\": \"Mathlib/AlgebraicGeometry/Scheme\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (e : X ≅ Y) {Z : TopCat} (h : ↑X.toPresheafedSpace ⟶ Z),\\n  CategoryTheory.CategoryStruct.comp e.hom.base (CategoryTheory.CategoryStruct.comp e.inv.base h) = h\", \"doc\": \"For any isomorphism $ e: X \\\\cong Y $ of schemes and any continuous map $ h: X \\\\to Z $ to a topological space $ Z $, the composition of the underlying continuous map of $ e $, the underlying continuous\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.inv_hom_apply\", \"module\": \"Mathlib/AlgebraicGeometry/Scheme\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (e : X ≅ Y) (y : ↥Y),\\n  (CategoryTheory.ConcreteCategory.hom e.hom.base) ((CategoryTheory.ConcreteCategory.hom e.inv.base) y) = y\", \"doc\": \"Let $e: X \\\\to Y$ be an isomorphism of schemes, with forward morphism $e_{\\\\text{hom}}: X \\\\to Y$ and inverse morphism $e_{\\\\text{inv}}: Y \\\\to X$. For any point $y$ in the scheme $Y$, we have $e_{\\\\text{ho\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.hom_inv_apply\", \"module\": \"Mathlib/AlgebraicGeometry/Scheme\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (e : X ≅ Y) (x : ↥X),\\n  (CategoryTheory.ConcreteCategory.hom e.inv.base) ((CategoryTheory.ConcreteCategory.hom e.hom.base) x) = x\", \"doc\": \"For any isomorphism $ e: X \\to Y $ of schemes, the inverse morphism $ e^{-1} $ satisfies $ e^{-1}(e(x)) = x $ for all points $ x $ in the underlying topological space of $ X $.\"}\n",
+   "date": "2026-10-24",
+   "verdict": "Existing project declarations reused; Mathlib results do not define logarithmic morphism operations."
+  },
+  {
+   "tool": "grep",
+   "query": "EtaleLogHom|EtaleLogMap|LogScheme",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-24",
+   "verdict": "Existing project declarations reused; Mathlib results do not define logarithmic morphism operations."
+  },
+  {
+   "tool": "grep",
+   "query": "rg -n EtaleLogHom.AreInverses|def EtaleLogHom.comp lean/Sheaf; rg -n EtaleLogHom|EtaleLogMap|LogScheme lean/WeilConjectures; definition-node lean.declarations scan; blueprint_refs.py search composition log morphism / inverse log morphism",
+   "results": "lean/Sheaf/AlgebraicGeometry/LogFanChartBlowup.lean:215:def EtaleLogHom.AreInverses {Y X : FineSaturatedLogScheme.{u}}\nlean/Sheaf/AlgebraicGeometry/LogMorphismOperations.lean:145:noncomputable def EtaleLogHom.comp {X Y Z : FineSaturatedLogScheme.{u}}\nNo hits in WeilConjectures. No definition-node lean record owns either declaration. Both blueprint searches: 0 blueprint nodes match. Reuse these exact project definitions; create ownership records only.",
+   "date": "2026-10-24",
+   "verdict": "exact existing project declarations; no definition node owns them"
+  }
+ ],
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.LogFanChartBlowup",
+  "declaration": "AlgebraicGeometry.EtaleLogHom.AreInverses",
+  "declarations": [
+   "AlgebraicGeometry.EtaleLogHom.AreInverses"
+  ],
+  "statement": "def EtaleLogHom.AreInverses {Y X : FineSaturatedLogScheme.{u}}\n    (f : EtaleLogHom Y X) (g : EtaleLogHom X Y) : Prop",
+  "branch": "sheaf-dag",
+  "by": "Q110",
+  "date": "2026-10-24",
+  "existing": true,
+  "note": "Existing AreInverses predicate in LogFanChartBlowup uses CompEq and IsIdentity in both directions. This definition does not assume the fan-chart blowup theorem. IsIdentity is owned by def-per-strict-log-morphism."
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-641b404f7",
+  "group": "Q110",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-641b404f7",
+  "group": "Q110",
+  "result": "pass",
+  "note": "Rebased re-delivery after 1bef FIX was refused at landing (composition node absent from 1bef base). All 3 Lean files byte-identical to a9b5/1bef (sha256); Q110's copy of def-per-log-morphism-composition removed, item and def-per-kummer-g-cover cite Q67's landed node on base b5f6feff, which (Q95 superset) owns EtaleLogHom.comp too. def-per-inverse-log-morphisms unchanged from 1bef. Cover node only rewords the composition sentence (accurate: EtaleLogHom.comp = toFSHom of EtaleLogMap.comp). Re-read vs CompEq/IsFSPullback/AreInverses: composite directions, fs diagonal, induced action, ∃! harmless, cover/quotient O_E and M_E, geometric orbits, coherence, very-tame application all correct; statements verbatim; sorry-only. No parallel clash; all dep records and modules byte-equal base vs side-live tip. Advisories: author self-check second reading; superseded report paragraph. No file changed, no compile."
+ }
+}

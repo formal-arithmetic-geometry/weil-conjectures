@@ -1,0 +1,272 @@
+{
+ "id": "lem-trf-two-sided-bar-contractible-augmentation",
+ "kind": "statement",
+ "title": "Contractible representable evaluations give the vertical bar augmentation",
+ "statement": "Fix the universes of [def-weil-size-convention]. Let $\\mathcal D$ be a small ordinary category, $R$ a commutative ring, $F:\\mathcal D\\to\\operatorname{Mod}_R$ a covariant functor, and $Q:\\Delta^{\\mathrm{op}}\\to\\mathcal D$ a simplicial object [def-weil-pbc-simplicial-object]. For $p,q\\geq0$ put\n$$A_{p,q}=\\bigoplus_{T_0\\to\\cdots\\to T_p\\xrightarrow f Q_q}F(T_0).$$\nHorizontal faces delete $T_i$, applying $F(T_0\\to T_1)$ when $i=0$ and composing with $f$ when $i=p$; vertical operators postcompose $f$ with the operators of $Q$. Let $\\partial_h,\\partial_v$ be the alternating face sums in positive respective indices, zero at index zero. Put $A_{p,q}$ in cochain bidegree $(-p,-q)$ and use finite-diagonal total differential $\\partial_h+(-1)^p\\partial_v$ [def-sp-double-complex-total]. Put $S^{-q}=F(Q_q)$ with alternating-face differential and zero positive terms. Put $B^{-p}=\\bigoplus_{T_0\\to\\cdots\\to T_p}F(T_0)$, zero in positive degrees, with alternating faces deleting $T_i$ and applying $F$ only at the first face. Complexes and their derived categories mean [def-weil-abstract-derived-category]. Assume that for every $T\\in\\mathcal D$, the simplicial set $\\operatorname{Hom}_{\\mathcal D}(T,Q_\\bullet)$ admits an inverse to its map to a singleton up to finite zigzags of simplicial cylinder homotopies, that is homotopies $X\\times\\Delta[1]\\to Y$ between the relevant maps [def-weil-pbc-simplicial-set]. For each fixed string $\\sigma=(T_0\\to\\cdots\\to T_p)$ put $X_\\sigma=\\operatorname{Hom}_{\\mathcal D}(T_p,Q_\\bullet)$ and $M_\\sigma=F(T_0)$. The summation augmentation\n$$\\bigoplus_{(X_\\sigma)_\\bullet}M_\\sigma\\longrightarrow M_\\sigma[0]$$\nis a chain homotopy equivalence for arbitrary $M_\\sigma$, with no flatness hypothesis. Under $R[(X_\\sigma)_n]\\otimes_R M_\\sigma\\cong\\bigoplus_{(X_\\sigma)_n}M_\\sigma$, it is the free-chain augmentation tensored with $M_\\sigma$. In particular the constant singleton complex, with differential $1$ in positive even degrees and $0$ in odd degrees, has identity section in degree zero and homotopy $h_n=1$ for odd $n$ and $h_n=0$ for even $n$ from section-after-augmentation to the identity. Tensoring its contraction and the chain homotopy equivalence induced by any chosen finite simplicial homotopy zigzags preserves the homotopy identities. Taking direct sums over $\\sigma$ gives a chain homotopy equivalence $A_{p,\\bullet}\\to B^{-p}[0]$ for each $p$. The chain map $e_B:\\operatorname{Tot}A\\to B$, zero on $q>0$ and forgetting $f$ on $q=0$, is a quasi-isomorphism, hence $e_B:\\operatorname{Tot}A\\xrightarrow{\\sim}B$ in $D(R)$. Both indices are at most zero, so every total diagonal is finite.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 08Q9 (lemma-compute-by-cosimplicial-resolution), free representable evaluation and double-complex comparison; Simplicial definition-homotopy-equivalent, remark-homotopy-better and lemma-homotopy-s-N; Homology Tag 0132 (lemma-first-quadrant-ss). Agent-written arbitrary-coefficient two-sided-bar variant."
+ },
+ "stmt_deps": [
+  "def-weil-size-convention",
+  "def-weil-pbc-simplicial-object",
+  "def-sp-double-complex-total",
+  "def-weil-abstract-derived-category",
+  "def-weil-pbc-simplicial-set"
+ ],
+ "proof": [
+  {
+   "text": "For a simplicial set $X$, write $C(X)_n=R[X_n]$ with alternating-face differential, zero out of degree zero. The maps $[x]\\otimes m\\mapsto\\iota_x(m)$ give $C(X)_n\\otimes_R M\\cong\\bigoplus_{x\\in X_n}M$: the inverse sends a finite-support family $(m_x)$ to $\\sum_x[x]\\otimes m_x$. These maps commute with every face, since both send the summand indexed by $x$ to that indexed by $d_i x$. Thus, for $X=X_\\sigma$ and $M=M_\\sigma$, the displayed summation augmentation is exactly the free-chain augmentation tensored with $M$. All indexing sets are small because $\\mathcal D$ is small in the fixed universes.",
+   "uses": [
+    "def-weil-pbc-simplicial-set",
+    "def-weil-size-convention"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 08Q9, label lemma-compute-by-cosimplicial-resolution, last paragraph; explicit arbitrary-coefficient identification"
+   }
+  },
+  {
+   "text": "Fix $\\sigma$, put $X=X_\\sigma$, and choose the inverse $v:*\\to X$ to $u:X\\to *$ supplied by the hypothesis. One has $uv=1_*$ strictly. Apply [lem-weil-pbc-simplicial-homotopy-free-chain-homotopy] over $R$ to each cylinder homotopy in the finite zigzag between $vu$ and $1_X$. Reverse a chain homotopy by negation and concatenate by addition. This gives a degree-one map $H$ with $1-C(v)C(u)=dH+Hd$; also $C(u)C(v)=1_{C(*)}$. The cited lemma applies to arbitrary simplicial sets and cylinder homotopies, so no Kan condition or additive inverse on simplicial sets is being assumed.",
+   "uses": [
+    "lem-weil-pbc-simplicial-homotopy-free-chain-homotopy"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/simplicial.tex",
+    "place": "Tags 019Y (lemma-functorial-homotopy) and 019S (lemma-homotopy-s-N); finite zigzags as in Tag 019M (remark-homotopy-better)"
+   }
+  },
+  {
+   "text": "Put $J=C(*)$. Its differential $d_n$ is the alternating sum of $n+1$ identity maps: it is $1$ for positive even $n$ and $0$ for odd $n$. Let $t:J\\to R[0]$ and $j:R[0]\\to J$ be identity in degree zero and zero otherwise. Put $k_n=1_R:J_n\\to J_{n+1}$ for odd $n$ and $k_n=0$ for even $n$. At degree zero, $dk+kd=0=1-jt$; at odd positive degree $d_{n+1}k_n=1$, and at even positive degree $k_{n-1}d_n=1$. Hence $1-jt=dk+kd$ and $tj=1$. Consequently $a=tC(u)$ has inverse $b=C(v)j$: $ab=1$ and $1-ba=d(H+C(v)kC(u))+(H+C(v)kC(u))d$. This proves the free-chain augmentation contraction, including its actual augmentation map.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 08Q9, last paragraph, singleton comparison; elementary explicit contraction of the unnormalized singleton complex"
+   }
+  },
+  {
+   "text": "Tensor all the maps and identities in steps 2--3 with $M=M_\\sigma$. For example $(dH+Hd)\\otimes1=(d\\otimes1)(H\\otimes1)+(H\\otimes1)(d\\otimes1)$, so the same $a,b,H+C(v)kC(u)$ tensored with $1_M$ exhibit a chain homotopy equivalence to $M[0]$. This uses additivity and composition of actual linear maps, not exactness of tensor; $M$ is arbitrary. For fixed $p$, choose these data for all strings $\\sigma$ and take their direct sums. The differential preserves $\\sigma$, and every vector has finite support, so the inverse and homotopy act summandwise and the homotopy identities remain true. The resulting augmentation is $A_{p,\\bullet}\\to B^{-p}[0]$. It induces isomorphisms on homology: for a cycle $z$, the identity $1-ba=dh+hd$ gives $z-baz=d(hz)$, and $ab=1$ supplies the inverse on classes.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 08Q9, reduction from direct sums to representable free complexes; explicit tensor and direct-sum homotopy identities"
+   }
+  },
+  {
+   "text": "Let $L^{i,0}=B^i$ for $i\\leq0$, with the bar differential horizontally, and let every other $L^{i,j}$ be zero. The bar face identities follow from composition in $\\mathcal D$ and functoriality of $F$; the vertical identities follow from those of $Q$. Horizontal deletion or composition commutes with postcomposition into $Q$, including the last face by associativity and the first by functoriality of $F$. Thus $K^{-p,-q}=A_{p,q}$ is a commuting double complex. Define $e:K\\to L$ by forgetting the final arrow at $q=0$ and zero at $q>0$. It commutes with horizontal faces, since forgetting after either composition of the final arrow gives the same string. Vertically the only nonzero check is $q=1$: forgetting $d_0f$ and $d_1f$ gives the same element of $B^{-p}$, so their difference is zero. Hence $e$ is a double-complex map. Its total map is precisely $e_B$, because $(-1)^{-p}=(-1)^p$. In degree $-n$ only $p+q=n$ contributes, giving at most $n+1$ summands; positive total degrees vanish.",
+   "uses": [
+    "def-weil-pbc-simplicial-object",
+    "def-sp-double-complex-total"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/homology.tex",
+    "place": "Tag 0132, label lemma-first-quadrant-ss, finite-diagonal setup; direct verification for the displayed bar faces"
+   }
+  },
+  {
+   "text": "Every column map $e^{i,\\bullet}$ is a quasi-isomorphism by step 4 when $i\\leq0$, and is the map between zero columns when $i>0$. Both $K$ and $L$ vanish for $i>0$ or $j>0$, and their finite-diagonal totals exist in $\\operatorname{Mod}_R$. Apply [lem-pc-bounded-above-double-complex-total-comparison] with $x_0=y_0=0$. Its conclusion is that $\\operatorname{Tot}(e)=e_B$ is a quasi-isomorphism. The canonical identification $\\operatorname{Tot}(L)=B$ has identity components and the given bar differential, since the vertical differential is zero. By [def-weil-abstract-derived-category], localization at quasi-isomorphisms sends this particular map to an isomorphism $\\operatorname{Tot}(A)\\xrightarrow{\\sim}B$ in $D(R)$. No horizontal compatibility of the chosen column contractions was required: the compared map $e$ itself is compatible by step 5.",
+   "uses": [
+    "lem-pc-bounded-above-double-complex-total-comparison",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/homology.tex",
+    "place": "Tag 0132, label lemma-first-quadrant-ss, bounded-above finite-diagonal comparison; derived.tex Definition 05RU (derived category as localization)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-simplicial-set",
+  "def-weil-size-convention",
+  "lem-weil-pbc-simplicial-homotopy-free-chain-homotopy",
+  "def-weil-pbc-simplicial-object",
+  "def-sp-double-complex-total",
+  "lem-pc-bounded-above-double-complex-total-comparison",
+  "def-weil-abstract-derived-category"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 08Q9 (lemma-compute-by-cosimplicial-resolution), last paragraph and double-complex argument; arbitrary-coefficient two-sided-bar adaptation with explicit singleton, tensor and direct-sum homotopies, using Simplicial Tags 019S/019Y and Homology Tag 0132."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For contractible simplicial representable evaluations Hom(T,Q), the two sided categorical bar total complex augments quasi isomorphically to the category bar complex with arbitrary module coefficients",
+   "results": "8 hits; top=['Rep.standardComplex.quasiIso_forget₂_εToSingle₀', 'Rep.standardComplex.instQuasiIsoNatεToSingle₀', 'Rep.standardComplex.compForgetAugmentedIso', 'Rep.barComplex.isoStandardComplex', 'AlgebraicTopology.DoldKan.Γ₀NondegComplexIso', 'Rep.standardComplex.forget₂ToModuleCatHomotopyEquiv', 'Rep.standardComplex.εToSingle₀_comp_eq', 'SimplicialObject.Splitting.toKaroubiNondegComplexIsoN₁']; note=; digest=d60a7eccd45b6cbc. Full returned types in search-vertical-0.txt.",
+   "date": "2026-10-23",
+   "verdict": "no match: group standard resolutions, alternatingConstHomotopyEquiv, generic homotopies and shape-extension quasi-isomorphisms do not state the arbitrary-category two-sided vertical augmentation with general coefficients and total comparison. Read AlternatingConst.lean and SimplicialObject/Homotopy.lean."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Tensoring a simplicial contraction of free chains with any module gives a chain homotopy equivalence without flatness and induces the vertical augmentation comparison on a bar bicomplex",
+   "results": "8 hits; top=['HomotopyEquiv.mk', 'Homotopy.noConfusionType', 'ChainComplex.alternatingConstHomotopyEquiv', 'LinearMap.tensorEqLocusEquiv', 'groupHomology.inhomogeneousChainsIso', 'AlgebraicTopology.DoldKan.homotopyEquivNormalizedMooreComplexAlternatingFaceMapComplex', 'HomologicalComplex.tensorHom', 'CategoryTheory.SimplicialObject.Augmented.ExtraDegeneracy.homotopyEquiv']; note=; digest=fc2d5109bb7870af. Full returned types in search-vertical-1.txt.",
+   "date": "2026-10-23",
+   "verdict": "no match: group standard resolutions, alternatingConstHomotopyEquiv, generic homotopies and shape-extension quasi-isomorphisms do not state the arbitrary-category two-sided vertical augmentation with general coefficients and total comparison. Read AlternatingConst.lean and SimplicialObject/Homotopy.lean."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"SimplicialObject\", \"Homotopy\"",
+   "results": "12 hits; top=['CategoryTheory.SimplicialObject.Homotopy.refl', 'CategoryTheory.SimplicialObject.Homotopy', 'CategoryTheory.SimplicialObject.Homotopy.h', 'CategoryTheory.SimplicialObject.Homotopy.postcomp', 'CategoryTheory.SimplicialObject.Homotopy.precomp', 'CategoryTheory.SimplicialObject.Homotopy.ext', 'CategoryTheory.SimplicialObject.Homotopy.ext_iff', 'CategoryTheory.SimplicialObject.Homotopy.h_last_comp_δ_last']; note=; digest=4e297e1fefc201b6. Full returned types in search-vertical-2.txt.",
+   "date": "2026-10-23",
+   "verdict": "no match: group standard resolutions, alternatingConstHomotopyEquiv, generic homotopies and shape-extension quasi-isomorphisms do not state the arbitrary-category two-sided vertical augmentation with general coefficients and total comparison. Read AlternatingConst.lean and SimplicialObject/Homotopy.lean."
+  },
+  {
+   "tool": "grep",
+   "query": "contractible|homotopyEquiv|quasiIso [sub=AlgebraicTopology/SimplicialObject]",
+   "results": "0 hits; top=[]; note=; digest=4f53cda18c2baa0c. Full returned types in search-vertical-3.txt.",
+   "date": "2026-10-23",
+   "verdict": "no match: group standard resolutions, alternatingConstHomotopyEquiv, generic homotopies and shape-extension quasi-isomorphisms do not state the arbitrary-category two-sided vertical augmentation with general coefficients and total comparison. Read AlternatingConst.lean and SimplicialObject/Homotopy.lean."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Contractible representable evaluations imply the vertical augmentation of a first quadrant double bar complex is a quasi isomorphism after totalization",
+   "results": "8 hits; top=['Rep.standardComplex.instQuasiIsoNatεToSingle₀', 'Rep.standardComplex.quasiIso_forget₂_εToSingle₀', 'CochainComplex.cm5b.instQuasiIsoIntP', 'HomologicalComplex.HomologySequence.quasiIso_τ₃', \"quasiIsoAt_iff'\", 'HomologicalComplex.quasiIsoAt_extendMap_iff', 'HomologicalComplex.quasiIsoAt_shortComplexTruncLE_g', 'HomologicalComplex.instQuasiIsoExtendMap']; note=; digest=02d5af16c4a6fb29. Full returned types in search-vertical-4.txt.",
+   "date": "2026-10-23",
+   "verdict": "no match: group standard resolutions, alternatingConstHomotopyEquiv, generic homotopies and shape-extension quasi-isomorphisms do not state the arbitrary-category two-sided vertical augmentation with general coefficients and total comparison. Read AlternatingConst.lean and SimplicialObject/Homotopy.lean."
+  },
+  {
+   "tool": "grep",
+   "query": "twoSidedBar|two.sided.bar|alternatingConstHomotopyEquiv|quasiIso_map_of_isStrictlyGE_of_isStrictlyLE",
+   "results": "1 hits; top=['Mathlib/Algebra/Homology/AlternatingConst.lean']; note=; digest=0a064494d6d8fae2.",
+   "date": "2026-10-23",
+   "verdict": "no match for the full item: free-chain homotopy invariance and the singleton contraction are constituent facts, and extra-degeneracy or monoid resolutions have different hypotheses. Read HomotopyInvariance.lean:62-120, Basic.lean:41-80 and AlternatingConst.lean:232-236. The bounded-above total comparison is supplied by an existing project node, not a one-line Mathlib specialization of the whole bar augmentation."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The augmentation of a two sided categorical bar bicomplex with contractible representable evaluations and arbitrary module coefficients induces a quasi isomorphism on the total complex",
+   "results": "8 hits; top=['quasiIso_comp', 'QuasiIso', 'HomologicalComplex₂.total', 'HomologicalComplex₂.total.mapIso', 'CategoryTheory.ShortComplex.QuasiIso.isIso', 'CategoryTheory.ShortComplex.QuasiIso.mk', 'CategoryTheory.ShortComplex.QuasiIso', 'HomologicalComplex.instHasMapProdObjGradedObjectFunctorMapBifunctorXMapBifunctorMapObjπ']; note=; digest=adee86e50b74ad7d.",
+   "date": "2026-10-23",
+   "verdict": "no match for the full item: free-chain homotopy invariance and the singleton contraction are constituent facts, and extra-degeneracy or monoid resolutions have different hypotheses. Read HomotopyInvariance.lean:62-120, Basic.lean:41-80 and AlternatingConst.lean:232-236. The bounded-above total comparison is supplied by an existing project node, not a one-line Mathlib specialization of the whole bar augmentation."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Homotopy\", \"chainComplexMap\"",
+   "results": "2 hits; top=['SSet.Homotopy.chainComplexMap', 'CategoryTheory.SimplicialObject.Homotopy.sSetChainComplexMap']; note=; digest=551a32531420fa69.",
+   "date": "2026-10-23",
+   "verdict": "no match for the full item: free-chain homotopy invariance and the singleton contraction are constituent facts, and extra-degeneracy or monoid resolutions have different hypotheses. Read HomotopyInvariance.lean:62-120, Basic.lean:41-80 and AlternatingConst.lean:232-236. The bounded-above total comparison is supplied by an existing project node, not a one-line Mathlib specialization of the whole bar augmentation."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For contractible simplicial sets X and any R module M the summation augmentation of the unnormalized chain complex direct sum over X_n of M to M is a chain homotopy equivalence and columnwise equivalences induce a quasi isomorphism of a bounded above two sided bar total complex",
+   "results": "8 hits; top=['CategoryTheory.SimplicialObject.Augmented.ExtraDegeneracy.homotopyEquiv', 'Rep.standardComplex.forget₂ToModuleCatHomotopyEquiv', 'Rep.standardComplex.instQuasiIsoNatεToSingle₀', 'AlgebraicTopology.DoldKan.homotopyEquivNormalizedMooreComplexAlternatingFaceMapComplex', 'AlgebraicTopology.DoldKan.homotopyEquivNormalizedMooreComplexAlternatingFaceMapComplex_homotopyHomInvId', 'AlgebraicTopology.DoldKan.homotopyEquivNormalizedMooreComplexAlternatingFaceMapComplex_hom', 'AlgebraicTopology.DoldKan.homotopyEquivNormalizedMooreComplexAlternatingFaceMapComplex_inv', 'AlgebraicTopology.DoldKan.homotopyEquivNormalizedMooreComplexAlternatingFaceMapComplex_homotopyInvHomId']; note=; digest=5894b432791b2e0e.",
+   "date": "2026-10-23",
+   "verdict": "no match for the full item: free-chain homotopy invariance and the singleton contraction are constituent facts, and extra-degeneracy or monoid resolutions have different hypotheses. Read HomotopyInvariance.lean:62-120, Basic.lean:41-80 and AlternatingConst.lean:232-236. The bounded-above total comparison is supplied by an existing project node, not a one-line Mathlib specialization of the whole bar augmentation."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A simplicial homotopy equivalence to a point contracts free chains after tensoring any module without assuming it flat",
+   "results": "8 hits; top=['CategoryTheory.SimplicialObject.Augmented.ExtraDegeneracy.homotopyEquiv', 'AlgebraicTopology.DoldKan.homotopyQToZero', 'Rep.standardComplex.forget₂ToModuleCatHomotopyEquiv', 'AlgebraicTopology.DoldKan.homotopyHσToZero', 'ChainComplex.alternatingConstHomotopyEquiv', 'AlgebraicTopology.DoldKan.homotopyPInftyToId', 'AlgebraicTopology.DoldKan.homotopyPToId', 'AlgebraicTopology.DoldKan.homotopyEquivNormalizedMooreComplexAlternatingFaceMapComplex_homotopyInvHomId']; note=; digest=9e9681060ce9a530.",
+   "date": "2026-10-23",
+   "verdict": "no match for the full item: free-chain homotopy invariance and the singleton contraction are constituent facts, and extra-degeneracy or monoid resolutions have different hypotheses. Read HomotopyInvariance.lean:62-120, Basic.lean:41-80 and AlternatingConst.lean:232-236. The bounded-above total comparison is supplied by an existing project node, not a one-line Mathlib specialization of the whole bar augmentation."
+  },
+  {
+   "tool": "grep",
+   "query": "def chainComplexMap|def sSetChainComplexMap|def alternatingConstHomotopyEquiv",
+   "results": "2 hits; top=['Mathlib/AlgebraicTopology/SimplicialSet/Homology/HomotopyInvariance.lean', 'Mathlib/AlgebraicTopology/SimplicialSet/Homology/HomotopyInvariance.lean']; note=; digest=d2b5ceebc6810de3. Subdirectory: AlgebraicTopology/SimplicialSet/Homology",
+   "date": "2026-10-23",
+   "verdict": "no match for the full item: free-chain homotopy invariance and the singleton contraction are constituent facts, and extra-degeneracy or monoid resolutions have different hypotheses. Read HomotopyInvariance.lean:62-120, Basic.lean:41-80 and AlternatingConst.lean:232-236. The bounded-above total comparison is supplied by an existing project node, not a one-line Mathlib specialization of the whole bar augmentation."
+  },
+  {
+   "tool": "grep",
+   "query": "alternatingConstHomotopyEquiv",
+   "results": "1 hits; top=['Mathlib/Algebra/Homology/AlternatingConst.lean']; note=; digest=0a064494d6d8fae2. Subdirectory: Algebra/Homology",
+   "date": "2026-10-23",
+   "verdict": "no match for the full item: free-chain homotopy invariance and the singleton contraction are constituent facts, and extra-degeneracy or monoid resolutions have different hypotheses. Read HomotopyInvariance.lean:62-120, Basic.lean:41-80 and AlternatingConst.lean:232-236. The bounded-above total comparison is supplied by an existing project node, not a one-line Mathlib specialization of the whole bar augmentation."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-simplicial-derived-colimit-computation",
+  "date": "2026-10-23",
+  "group": "Q23"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Proof (1)--(2), semistable-alteration input in the nearby-cycle branch: ILO Exposé X, Theorem 3.4, Step 3, invoking Temkin 2010, Theorems 1.5 and 1.1 for a semistable multipointed modification. Temkin proof component: Marked dualizing line bundle and contracted-component degrees. Auxiliary input: Local complete-intersection determinant adjunction underlying the marked dualizing construction, before the marking is inserted. Supporting ring/sheaf input: Functorial standard resolutions and comparison with arbitrary polynomial resolutions. Generic input to lem-trf-cotangent-resolution-coherence: Contractible representable evaluations compute derived colimits, with reindexing naturality. Two-sided-bar re-split: Contractible representable evaluations give the vertical bar augmentation (old proof steps 4 and vertical half of 5).",
+   "via": [
+    "lem-trf-simplicial-derived-colimit-computation",
+    "lem-trf-cotangent-resolution-coherence",
+    "lem-trf-lci-cotangent-presentation",
+    "lem-trf-flat-lci-canonical-adjunction",
+    "lem-trf-marked-nodal-dualizing-degrees",
+    "lem-trf-temkin-stable-modification",
+    "lem-trf-stable-modification-flat-curve-pair",
+    "lem-trf-dejong-relative-marked-semistable",
+    "lem-trf-relative-marked-nodal-reduction",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-trf-two-sided-bar-contractible-augmentation",
+  "worker": "stage1",
+  "summary": "Proved the vertical bar augmentation using the existing free-chain simplicial homotopy lemma and bounded-above double-complex comparison. Wrote the singleton parity contraction, the tensor identity without flatness, the direct-sum homotopy and the componentwise augmentation compatibility. Statement and statement dependencies unchanged; no new nodes.",
+  "blueprint": "The generic derived-colimit tool in the existing ancestor chain serves lem-trf-local-term-locality, proof (1)--(2); this split realizes old steps 4 and the vertical half of 5 of lem-trf-simplicial-derived-colimit-computation, exactly as recorded in blueprint.from.place. Read the current latest blueprint locality statement/proof; no change to the chapter or unit route.",
+  "tool_uses": [
+   {
+    "node": "lem-pc-bounded-above-double-complex-total-comparison",
+    "why": "Generic columnwise quasi-isomorphism comparison for integer commuting bicomplexes bounded above in both indices; apply with both bounds zero. No lemma of sk-i-curve-zero supplies this homological algebra input."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pc-bounded-above-double-complex-total-comparison"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q82-d57bf2efc",
+  "group": "Q82",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q82-d57bf2efc (reviewer sub-agent of L); spot-checked: First split of a Q23 re-split child (no new nodes; statement and stmt_deps unchanged). All of old parent steps 4 and the e_B half of step 5 are present and expanded; nothing was dropped. Steps checked: (1) R[X_n]⊗M ≅ ⊕_{X_n}M is compatible with the faces, and summation equals tC(u) tensored with M. (2) The cited free-chain lemma (arbitrary simplicial sets, cylinder X×Δ[1]→Y) applied along the zigzag, combined by negation and sum, gives 1−C(v)C(u)=dH+Hd, and uv=1 strictly. (3) Parity contraction checked by hand in degrees 0, 1, 2 and in general; ab=1 and 1−ba=d(H+C(v)kC(u))+(…)d hold. (4) Tensoring homotopy identities needs no flatness; the direct sum over σ is fine because the vertical differential preserves σ. (5) Bar/Q faces commute, and e commutes horizontally (faces 0 and p) and vertically (only q=1 is nonzero). (6) lem-pc-bounded-above-double-complex-total-comparison applies with x0=y0=0, Mod_R abelian and finite diagonals; Tot(e)=e_B is a quasi-iso, inverted by the localization in def-weil-abstract-derived-category. Source: Stacks 08Q9 (sites-cohomology.tex 10228–10296), read in full; the item is a correct arbitrary-coefficient two-sided-bar variant. Tags 0132, 019M, 019S, 019Y confirmed in tags/tags. Edge cases: empty 𝒟, F=0, Z/2 over Z, singleton X_σ. No cycle: the comparison lemma depends only on def-sp-double-complex-total. Accepted tool_use: the comparison lemma as generic homological algebra. No SGA citation; blueprint fields inherited and unchanged."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.TwoSidedBarVerticalAugmentation",
+  "declaration": "CategoryTheory.TwoSidedBar.contractible_vertical_augmentation",
+  "declarations": [
+   "CategoryTheory.TwoSidedBar.stringReindex",
+   "CategoryTheory.TwoSidedBar.coefficient",
+   "CategoryTheory.TwoSidedBar.lastMap",
+   "CategoryTheory.TwoSidedBar.evaluation",
+   "CategoryTheory.TwoSidedBar.Presentation",
+   "CategoryTheory.TwoSidedBar.CoefficientAugmentation",
+   "CategoryTheory.TwoSidedBar.tensorHomotopy",
+   "CategoryTheory.TwoSidedBar.tensorEquivalence",
+   "CategoryTheory.TwoSidedBar.contractible_vertical_augmentation"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/TwoSidedBarVerticalAugmentation.lean",
+  "statement": "theorem contractible_vertical_augmentation (F : D ⥤ ModuleCat.{u} R) (Q : SimplicialObject D) [HasDerivedCategory.{w} (ModuleCat.{u} R)] (hQ : ∀ T : D, ∃ (f : evaluation Q T ⟶ (SimplicialObject.const (Type u)).obj PUnit) (g : (SimplicialObject.const (Type u)).obj PUnit ⟶ evaluation Q T), Relation.EqvGen (fun a b ↦ Nonempty (SSet.Homotopy a b)) (f ≫ g) (𝟙 _) ∧ Relation.EqvGen (fun a b ↦ Nonempty (SSet.Homotopy a b)) (g ≫ f) (𝟙 _)) : Nonempty (Presentation F Q) ∧ (∀ P : Presentation F Q, (∀ p : ℕ, ∃ e : HomotopyEquiv (P.A.X (-↑p)) ((CochainComplex.singleFunctor _ 0).obj (P.B.X (-↑p))), e.hom = P.column p) ∧ QuasiIso P.augmentation ∧ IsIso (DerivedCategory.Q.map P.augmentation)) ∧ (∀ (p : ℕ) (c : ComposableArrows D p) (M : ModuleCat.{u} R), ∃ a : CoefficientAugmentation (evaluation Q c.right) M, (∃ e : HomotopyEquiv ((evaluation Q c.right).chainComplex M) ((ChainComplex.single₀ _).obj M), e.hom = a.augmentation) ∧ (∃ e : HomotopyEquiv ((evaluation Q c.right).chainComplex (ModuleCat.of R R)) ((ChainComplex.single₀ _).obj (ModuleCat.of R R)), e.hom = a.freeAugmentation)) ∧ (∀ M : ModuleCat.{u} R, ∃ (t : ChainComplex.alternatingConst.obj M ⟶ (ChainComplex.single₀ _).obj M) (j : (ChainComplex.single₀ _).obj M ⟶ ChainComplex.alternatingConst.obj M) (k : Homotopy (𝟙 (ChainComplex.alternatingConst.obj M)) (t ≫ j)), t.f 0 = 𝟙 M ∧ j.f 0 = 𝟙 M ∧ j ≫ t = 𝟙 _ ∧ (∀ n : ℕ, k.hom n (n + 1) = if Odd n then 𝟙 M else 0)) ∧ (∀ n : ℤ, Set.Finite {ij : ℤ × ℤ | ij.1 ≤ 0 ∧ ij.2 ≤ 0 ∧ ij.1 + ij.2 = n})",
+  "branch": "newtargets-dag",
+  "by": "Q26",
+  "date": "2026-10-23",
+  "existing": false,
+  "note": "The coproduct presentation fixes the terms by their universal properties and all differentials and augmentations by their generator formulas. The theorem asserts existence and proves the conclusions for every such presentation, without choosing any object from the postponed theorem. The tensor helpers apply the existing Mathlib additive-functor operations. Review 2026-10-24: `reindex` renamed `stringReindex` and the unused `evaluationComplex` abbrev dropped, because the landed sibling module Sheaf.CategoryTheory.TwoSidedBarSemilinearNaturality (N8) declares CategoryTheory.TwoSidedBar.reindex and .evaluationComplex; the parent lem-trf-simplicial-derived-colimit-computation will import both children at stage 3.",
+  "fixed_by": "NT-stage2-cc-2cd8459f3"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-2cd8459f3",
+  "group": "Q26",
+  "result": "fix",
+  "note": "Maths correct clause by clause: A/B pinned by coproducts and generator formulas; hQ = EqvGen of SSet.Homotopy both ways; coefficient augmentation for every M (tensorIso pinned on [x]⊗m, no flatness); alternatingConst parity homotopy checked against Mathlib orientation; column and e_B maps pinned, QuasiIso ∧ IsIso(Q.map); finite diagonals; edge cases ok; source 08Q9 read; docstrings and proof steps present; statement verbatim; only the lean field changed vs live. Mechanical H9/H4: landed sibling N8 TwoSidedBarSemilinearNaturality (00:53:52) declares CategoryTheory.TwoSidedBar.reindex and .evaluationComplex, which this delivery also declares; the parent will import both. FIX: reindex→stringReindex, unused duplicate evaluationComplex and its Embedding.Extend import dropped (fixes/TwoSidedBarVerticalAugmentation.lean + lean-record.json with verbatim statement and updated declarations); refit_record clean; nt_compile --json clean 3.7 s, control fails as expected."
+ }
+}

@@ -1,0 +1,256 @@
+{
+ "id": "lem-sfb-space-proper-field-global-functions",
+ "kind": "statement",
+ "title": "Global functions on proper geometrically reduced connected algebraic spaces over fields",
+ "statement": "Let $k$ be a field [def-weil-field] and let $p:Z\\to\\operatorname{Spec}k$ [def-weil-affine-spectrum] be a proper algebraic space over $k$ [def-trf-algebraic-space, def-sfb-space-morphism-properties]. Proper means separated, of finite type and universally closed. Suppose that for every algebraically closed field extension $\\Omega/k$ [def-pc-field-extension], the algebraic space $Z_\\Omega=Z\\times_{\\operatorname{Spec}k}\\operatorname{Spec}\\Omega$ is reduced, nonempty and connected. An algebraically closed field is one in which every nonconstant polynomial has a root; reduced means that all the rings of affine etale scheme charts have no nonzero nilpotents. Connected means that the point space has no decomposition into two disjoint nonempty open subsets, with the point space and atlas topology of [def-a1-space-point-topology]. Then the canonical structure homomorphism $k\\to\\Gamma(Z,\\mathcal O_Z)$, the global sections of $p^\\sharp$ [def-sfb-space-module-structure-map] with $\\Gamma(\\operatorname{Spec}k,\\mathcal O)=k$, is an isomorphism of $k$-algebras. Here $\\mathcal O_Z$ is the structure sheaf on the small etale site, and $\\Gamma(Z,\\mathcal O_Z)$ is its ring of global sections.",
+ "source": {
+  "document": "literature/stacks-project/spaces-over-fields.tex",
+  "place": "Tag 0DMY, lemma-proper-geometrically-reduced-global-sections, clause (7) and proof of clauses (4), (5), (7); geometric properties expressed by algebraically closed field tests"
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-weil-affine-spectrum",
+  "def-trf-algebraic-space",
+  "def-pc-field-extension",
+  "def-a1-space-point-topology",
+  "def-sfb-space-morphism-properties",
+  "def-sfb-space-module-structure-map"
+ ],
+ "proof": [
+  {
+   "text": "Choose an algebraic closure $\\Omega/k$ using [def-weil-algebraic-closure], and put $Z'=Z_\\Omega$, $A=\\Gamma(Z,\\mathcal O_Z)$ and $B=\\Gamma(Z',\\mathcal O_{Z'})$. Properness of $Z'\\to\\operatorname{Spec}\\Omega$ follows from the arbitrary-base-change clause of [lem-sfb-space-flat-proper-fp-locality]. The hypothesis on algebraically closed extensions says directly that $Z'$ is reduced, nonempty and connected. Therefore [lem-sfb-space-proper-connected-function-field], applied over $\\Omega$, makes $B$ a field finite-dimensional over $\\Omega$.",
+   "uses": [
+    "def-weil-algebraic-closure",
+    "lem-sfb-space-flat-proper-fp-locality",
+    "lem-sfb-space-proper-connected-function-field"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-over-fields.tex",
+    "place": "Tag 0DMY, lemma-proper-geometrically-reduced-global-sections, (1)--(3) applied after algebraic closure; proper base change: spaces-morphisms.tex Tag 04WP, lemma-base-change-proper"
+   }
+  },
+  {
+   "text": "The structure homomorphism $v:\\Omega\\to B$ is bijective by [lem-pc-finite-extension-alg-closed]: its target is the finite field extension just obtained. In particular $B$ is a one-dimensional $\\Omega$-vector space, with basis its unit. This applies to a reduced connected space, without any irreducibility assumption on $Z'$.",
+   "uses": [
+    "lem-pc-finite-extension-alg-closed"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-over-fields.tex",
+    "place": "Tag 0DMY, lemma-proper-geometrically-reduced-global-sections, proof of (7), applied over the algebraically closed field"
+   }
+  },
+  {
+   "text": "Put $T=\\operatorname{Spec}k$, $T'=\\operatorname{Spec}\\Omega$ and $g:T'\\to T$. The map $g$ is flat by [lem-pc-field-extension-flat]; $p$ is quasi-compact and separated by properness. The structure module is quasi-coherent: locally its presentation is $0\\to\\mathcal O_Z\\xrightarrow{1}\\mathcal O_Z\\to0$, as in [def-trf-space-quasi-coherent-module]. Thus $N=p_*\\mathcal O_Z$ is quasi-coherent by [lem-trf-space-qc-separated-quasi-coherent-pushforward], and [lem-sfb-space-flat-direct-image-base-change] gives $g^*N\\simeq p'_*\\mathcal O_{Z'}$. Here the tensor pullback of the structure module is the structure module: locally $b\\otimes a\\mapsto b\\,h^\\sharp(a)$ has inverse $b\\mapsto b\\otimes1$. The scheme Zariski/etale equivalence [lem-trf-scheme-zariski-etale-quasi-coherent-equivalence] preserves open sections and identifies tensor pullbacks. Consequently [lem-weil-pbc-module-pullback-affine-sections], on the whole affine schemes $T,T'$, identifies the global sections of $g^*N$ with $A\\otimes_k\\Omega$. Evaluating the base-change isomorphism gives a bijective $\\Omega$-linear map $\\alpha:A\\otimes_k\\Omega\\to B$. Its formula is $a\\otimes c\\mapsto h^*a\\,v(c)$: the adjoint map in the cited base-change statement evaluates the pulled-back direct-image section by the counit, then multiplies by the tensor coefficient. In particular $\\alpha(1\\otimes c)=v(c)$. This is the actual structural comparison, with no arbitrary identification of the constants.",
+   "uses": [
+    "lem-pc-field-extension-flat",
+    "def-trf-space-quasi-coherent-module",
+    "lem-trf-space-qc-separated-quasi-coherent-pushforward",
+    "lem-sfb-space-flat-direct-image-base-change",
+    "lem-trf-scheme-zariski-etale-quasi-coherent-equivalence",
+    "lem-weil-pbc-module-pullback-affine-sections"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-cohomology.tex",
+    "place": "Tag 073K, lemma-flat-base-change-cohomology, i=0 and affine-base clause (2); spaces-morphisms.tex Tag 03M9, lemma-pushforward; descent.tex Tags 03DX and 03LC; schemes.tex Tag 01I9, lemma-widetilde-pullback"
+   }
+  },
+  {
+   "text": "Since $\\alpha(1\\otimes1)=1_B\\ne0$, the unit $1_A$ is nonzero. By [lem-weil-pbc-vector-space-basis-through-vector] choose a $k$-basis of $A$ containing $1_A$. By the basis clause of [def-weil-vector-space-scalar-extension], its tensors with $1$ form an $\\Omega$-basis of $A\\otimes_k\\Omega$, hence their images under $\\alpha$ form a basis of $B$. One of those images is $1_B$. There can be no second member: every $b\\in B$ equals $v(c)1_B$ for some $c\\in\\Omega$ by step 2, giving a linear dependence with $1_B$. Thus the original basis is $\\{1_A\\}$. Every $a\\in A$ is therefore $u(c)=c1_A$ for some $c\\in k$, where $u$ is the structure map. If $u(c)=0$ and $c\\ne0$, multiplication by $u(c^{-1})$ gives $1_A=0$, a contradiction. Hence $u$ is bijective. Its inverse preserves addition and multiplication by applying the injective ring map $u$ to each identity, so $u$ is the asserted isomorphism of $k$-algebras.",
+   "uses": [
+    "lem-weil-pbc-vector-space-basis-through-vector",
+    "def-weil-vector-space-scalar-extension"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-over-fields.tex",
+    "place": "Tag 0DMY, lemma-proper-geometrically-reduced-global-sections, proof of (7), final scalar descent expanded by a basis calculation"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-algebraic-closure",
+  "lem-sfb-space-flat-proper-fp-locality",
+  "lem-sfb-space-proper-connected-function-field",
+  "lem-pc-finite-extension-alg-closed",
+  "lem-pc-field-extension-flat",
+  "def-trf-space-quasi-coherent-module",
+  "lem-trf-space-qc-separated-quasi-coherent-pushforward",
+  "lem-sfb-space-flat-direct-image-base-change",
+  "lem-trf-scheme-zariski-etale-quasi-coherent-equivalence",
+  "lem-weil-pbc-module-pullback-affine-sections",
+  "lem-weil-pbc-vector-space-basis-through-vector",
+  "def-weil-vector-space-scalar-extension"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/spaces-over-fields.tex",
+  "place": "Tag 0DMY, lemma-proper-geometrically-reduced-global-sections, proof of (1)--(7), assembled using the algebraically closed fibre and Tag 073K; the final scalar descent is written out"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For a proper algebraic space over a field whose base change to every algebraically closed extension is reduced and connected the canonical field map to global regular functions is an isomorphism",
+   "results": "8 hits; top: AlgebraicGeometry.isField_of_universallyClosed, AlgebraicGeometry.Scheme.SpecToEquivOfField, Algebra.FormallyUnramified.bijective_of_isAlgClosed_of_isLocalRing, AlgebraicGeometry.finite_appTop_of_universallyClosed, AlgebraicGeometry.Scheme.SpecToEquivOfField_eq_iff, AlgebraicGeometry.IsIntegral, AlgebraicGeometry.Scheme.Hom.instIsIsoToNormalizationOfIsIntegralHom, AlgebraicGeometry.Scheme.RationalMap.fromFunctionField_ofFunctionField",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits are scheme or ring results, not the stated theorem for algebraic spaces"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Global sections of the structure sheaf of a proper geometrically connected geometrically reduced algebraic space over a field are exactly that field",
+   "results": "8 hits; top: AlgebraicGeometry.Scheme.germ_stalkClosedPointTo_Spec, AlgebraicGeometry.Scheme.ΓSpecIso_inv, AlgebraicGeometry.StructureSheaf.to_global_factors_apply, AlgebraicGeometry.isField_of_universallyClosed, AlgebraicGeometry.Scheme.ΓSpecIso, AlgebraicGeometry.LocallyRingedSpace.Γ_obj, AlgebraicGeometry.StructureSheaf.globalSectionsIso_hom, AlgebraicGeometry.termΓ(_,_)",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits are scheme or ring results, not the stated theorem for algebraic spaces"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"GlobalSectionsBijective\"",
+   "results": "0 hits; top: ",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits are scheme or ring results, not the stated theorem for algebraic spaces"
+  },
+  {
+   "tool": "grep",
+   "query": "GlobalSectionsBijective|geometrically.*(reduced|connected).*global|global.*(geometrically|[Ii]s[Pp]roper)",
+   "results": "0 hits; top: ",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits are scheme or ring results, not the stated theorem for algebraic spaces"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A proper geometrically reduced algebraic space has finite separable constant fields and geometric connectedness makes its ring of global functions equal to the ground field",
+   "results": "8 hits; top: AlgebraicGeometry.isField_of_universallyClosed, Algebra.IsGeometricallyReduced, AlgebraicGeometry.instFieldCarrierFunctionField, AlgebraicGeometry.IsIntegral, AlgebraicGeometry.Scheme.functionField, AlgebraicGeometry.isReduced_of_isIntegral, AlgebraicGeometry.isIntegral_of_irreducibleSpace_of_isReduced, AlgebraicGeometry.Scheme.instUniqueCarrierCarrierCommRingCatSpecOf",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits are scheme or ring results, not the stated theorem for algebraic spaces"
+  },
+  {
+   "tool": "grep",
+   "query": "AlgebraicSpace|proper.*globalSections|globalSections.*proper",
+   "results": "{\"t\": \"2026-10-23T19:50:58Z\", \"tool\": \"grep\", \"query\": \"AlgebraicSpace|proper.*globalSections|globalSections.*proper\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: source inspection of Morphisms/Proper.lean:150,161 shows scheme-only statements requiring integral schemes; there is no algebraic-space match in the returned hits"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A proper geometrically reduced and geometrically connected algebraic space has no nonconstant global functions",
+   "results": "{\"t\": \"2026-10-23T19:50:58Z\", \"tool\": \"leansearch\", \"query\": \"A proper geometrically reduced and geometrically connected algebraic space has no nonconstant global functions\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.finite_appTop_of_universallyClosed\", \"Algebra.IsGeometricallyReduced.casesOn\", \"Algebra.isGeometricallyReduced_iff\", \"AlgebraicGeometry.isIntegral_of_irreducibleSpace_of_isReduced\", \"AlgebraicGeometry.isReduced_of_isReduced_stalk\", \"Algebra.isReduced_of_isGeometricallyReduced\", \"Algebra.IsGeometricallyReduced.recOn\", \"AlgebraicGeometry.Scheme.component_nontrivial\"], \"digest\": \"2b33c0e6c82beccf\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: source inspection of Morphisms/Proper.lean:150,161 shows scheme-only statements requiring integral schemes; there is no algebraic-space match in the returned hits"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"GlobalSectionsBijective\"",
+   "results": "{\"t\": \"2026-10-23T19:50:59Z\", \"tool\": \"loogle\", \"query\": \"\\\"GlobalSectionsBijective\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: source inspection of Morphisms/Proper.lean:150,161 shows scheme-only statements requiring integral schemes; there is no algebraic-space match in the returned hits"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Flat field extension commutes with global functions of algebraic spaces and the constants of a proper connected reduced space over an algebraically closed field are the ground field",
+   "results": "{\"t\": \"2026-10-23T19:50:59Z\", \"tool\": \"leanfinder\", \"query\": \"Flat field extension commutes with global functions of algebraic spaces and the constants of a proper connected reduced space over an algebraically closed field are the ground field\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Flat.instHasRingHomPropertyFlat\", \"AlgebraicGeometry.isField_of_universallyClosed\", \"AlgebraicGeometry.ValuativeCommSq.field\", \"AlgebraicGeometry.instAlgebraCarrierFunctionFieldSpec\", \"AlgebraicGeometry.Flat.generalizingMap\", \"AlgebraicGeometry.instFieldCarrierFunctionField\", \"AlgebraicGeometry.Scheme.SpecToEquivOfField\", \"AlgebraicGeometry.Flat.flat_appLE\"], \"digest\": \"7179d4b5cceef1e9\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: source inspection of Morphisms/Proper.lean:150,161 shows scheme-only statements requiring integral schemes; there is no algebraic-space match in the returned hits"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Global sections of a proper algebraic space over a field with geometrically reduced nonempty connected fibres equal the field",
+   "results": "{\"t\": \"2026-10-23T19:51:01Z\", \"tool\": \"leanfinder\", \"query\": \"Global sections of a proper algebraic space over a field with geometrically reduced nonempty connected fibres equal the field\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.isField_of_universallyClosed\", \"AlgebraicGeometry.Scheme.instUniqueCarrierCarrierCommRingCatSpecOf\", \"AlgebraicGeometry.finite_appTop_of_universallyClosed\", \"AlgebraicGeometry.instFieldCarrierFunctionField\", \"AlgebraicGeometry.Scheme.SpecToEquivOfField\", \"AlgebraicGeometry.IsIntegral\", \"AlgebraicGeometry.instIsDomainCarrierObjOppositeOpensCarrierCarrierCommRingCatPresheafOpOpensTopOfIsIntegral\", \"AlgebraicGeometry.instIsDominantToSpecΓOfCompactSpaceCarrierCarrierCommRingCat\"], \"digest\": \"6ce14b436fd11d0a\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: source inspection of Morphisms/Proper.lean:150,161 shows scheme-only statements requiring integral schemes; there is no algebraic-space match in the returned hits"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-space-geometric-h0",
+  "date": "2026-10-24",
+  "group": "Q22"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Scheme representability of the stable abelian-level normalization. Supporting input: freeness at normalized boundary branches. Comparison of the full cohomology frame in the item with Deligne 3.3--3.5 Picard torsion frames; relative Picard existence for the pulled-back stable family. Supporting input for the present split: A relatively ample line module on the stable-curve multidegree-zero Picard space. Supporting input: Canonical rigidified ample line module on smooth relative Jacobians. Prerequisite for the diagonal construction: Relative dual abelian spaces and normalized Poincare identities. Auxiliary for this split: Rigidified Picard representability for proper geometrically integral algebraic-space families. Supporting input: Universal functions on the proper geometrically integral family, before normalizing line modules. Supporting input for Tag 0E0S: global functions on the proper field fibres, Tag 0DMY, before applying Tag 0E6B.",
+   "via": [
+    "lem-sfb-space-geometric-h0",
+    "lem-sfb-rigidified-space-picard",
+    "lem-sfb-abelian-space-poincare-calculus",
+    "lem-sfb-smooth-jacobian-canonical-line",
+    "lem-sfb-stable-picard-theta-ampleness",
+    "lem-sfb-stable-relative-picard-kummer",
+    "lem-sfb-stable-level-versal-branch-freeness",
+    "lem-sfb-stable-abelian-level-normalization",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-space-proper-field-global-functions",
+  "worker": "stage1",
+  "summary": "Q36: unchanged statement; no exact project or Mathlib attachment. Reuse the existing proper reduced connected algebraic-space function-field node over an algebraic closure, finite extensions of an algebraically closed field, and canonical degree-zero flat base change. Expand affine sections and unit normalization, then descend with a basis containing the unit. No new nodes. All cited statements checked and quoted.",
+  "blueprint": "Latest blueprint sk-thm-sf-ctf-stability-direct-images.proof.md (3), proper-direct-image/alteration support chain described in inherited blueprint.from.place: proper field-fibre functions needed for universal H0 in Tag 0E0S. The ancestor tool returns None, retained as null. Whole-blueprint global sections/global functions searches find only scheme or curve versions; none states this algebraic-space theorem.",
+  "tool_uses": [
+   {
+    "node": "lem-trf-space-qc-separated-quasi-coherent-pushforward",
+    "why": "Generic quasi-coherent direct-image theorem, used to show N=p_*O_Z is quasi-coherent before applying the affine section formula; no node of this unit replaces this algebraic-space sheaf-calculus input."
+   },
+   {
+    "node": "lem-trf-scheme-zariski-etale-quasi-coherent-equivalence",
+    "why": "Generic comparison between the small-etale and Zariski quasi-coherent categories on the two scheme bases, including preservation of open sections and compatibility with pullback; it is a tool for evaluating flat base change, not a replacement of the proper-fibre route."
+   },
+   {
+    "node": "lem-weil-pbc-module-pullback-affine-sections",
+    "why": "Generic normalized affine pullback-section formula used on Spec Omega -> Spec k; no theorem of this unit supplies this scheme calculation."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-trf-space-qc-separated-quasi-coherent-pushforward",
+  "lem-trf-scheme-zariski-etale-quasi-coherent-equivalence",
+  "lem-weil-pbc-module-pullback-affine-sections"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q36-770d5dd66",
+  "group": "Q36",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q36-770d5dd66 (reviewer sub-agent of L); spot-checked: I read the delivery in full: 1 commit with the item and report, no new nodes. The statement, stmt_deps and blueprint are byte-identical to side-live, which is unsplit with no repair note, so no target is weakened and nothing supersedes the item. Source: Stacks 0DMY(1)-(8) and proof (spaces-over-fields.tex), plus 073K (spaces-cohomology.tex). The hypothesis 'every alg. closed Ω: Z_Ω reduced, nonempty, connected' is the geometric reading (7) needs. Step 1: base change preserves properness (fp-locality node); the function-field node (true, 0DMY(1)-(3) on one component) makes B a field finite over Ω. Step 2: Ω→B is bijective (Mathlib IsAlgClosed leaf). Step 3: the canonical adjoint β from the flat-direct-image node, on N=p_*O qc (03M9), evaluated through the Zariski/étale equivalence (restriction is identity on open sections) and the affine pullback-section formula, gives α: A⊗_kΩ ≅ B with α(1⊗c)=v(c). This is not an unnormalized iso. Step 4: elementary basis descent; a basis containing 1_A maps to a basis of the 1-dimensional B, so A=k·1 and u is bijective. Small cases checked: Spec k; Spec L for L/k separable or inseparable (excluded); k[ε]; ∅; reducible Z (allowed, no irreducibility used). Duplicates: only scheme versions exist (lem-pc-h0-geom-connected, lem-weil-pbc-proper-reduced-algclosed-global-sections-product, lem-sc-global-functions). No cycle. Three tool_uses (03M9 pushforward, 03DX/03LC equivalence, 01I9 affine sections) are generic and accepted. Batch-5: def-trf-space-quasi-coherent-module is a definition; the qc-pushforward and Zariski/étale equivalence nodes are general QCoh foundations; the fp-locality and flat-base-change nodes reach sec-trace-formula only through def-trf-algebraic-space and space-foundation lemmas. The computed closure contains no trace-formula or Poincaré node, so all are outside the assumptions. No SGA. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SpaceProperFieldGlobalFunctions",
+  "declaration": "AlgebraicGeometry.AlgebraicSpace.structureMap_globalSections_bijective_of_geometricallyReduced_connected",
+  "file": "lean/Sheaf/AlgebraicGeometry/SpaceProperFieldGlobalFunctions.lean",
+  "statement": "theorem structureMap_globalSections_bijective_of_geometricallyReduced_connected (k : Type u) [Field k] (Z : AlgebraicSpace (Spec (CommRingCat.of k))) (p : Z ⟶ schemeSpace (Over.mk (𝟙 (Spec (CommRingCat.of k))))) (hp : MapIsProper p) (hgeom : ∀ (Ω : Type u) [Field Ω] [Algebra k Ω] [IsAlgClosed Ω], (∀ T : CostructuredArrow yoneda (Limits.pullback p.hom ((Scheme.fppfTopology.over (Spec (CommRingCat.of k))).yoneda.map (Over.homMk (Spec.map (CommRingCat.ofHom (algebraMap k Ω))) : Over.mk (Spec.map (CommRingCat.ofHom (algebraMap k Ω))) ⟶ Over.mk (𝟙 (Spec (CommRingCat.of k)))))).obj, IsEtale T.hom → AlgebraicGeometry.IsReduced T.left.left) ∧ ConnectedSpace (Point (Limits.pullback p.hom ((Scheme.fppfTopology.over (Spec (CommRingCat.of k))).yoneda.map (Over.homMk (Spec.map (CommRingCat.ofHom (algebraMap k Ω))) : Over.mk (Spec.map (CommRingCat.ofHom (algebraMap k Ω))) ⟶ Over.mk (𝟙 (Spec (CommRingCat.of k)))))).obj)) : Function.Bijective (SheafOfModules.sectionsMap (moduleStructureMap p))",
+  "branch": "sheaf-dag",
+  "by": "NW",
+  "date": "2026-10-23",
+  "existing": false,
+  "note": "Global sections use Mathlib SheafOfModules.sections and sectionsMap of the recorded canonical moduleStructureMap. The direct-image chart-limit model identifies the target with global functions on Z; the source identifies canonically with k. Thus bijectivity is precisely that the canonical k-algebra map is an isomorphism. Geometric reducedness is the defining all-etale-chart test on the sheaf fibre product; ConnectedSpace includes nonemptiness. No change to the accepted statement or split."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-19821d6e6",
+  "group": "NW",
+  "result": "pass",
+  "note": "Read item, all 7 stmt_deps (AlgebraicSpace/IsEtale/EtaleSite, Point topology, MapIsProper=sep∧FT∧UC, moduleStructureMap ∃!-pinned by chart pullbacks), Mathlib SheafOfModules.sectionsMap, Stacks 0DMY(1)-(8)+proof. Clause match: k field, Z algebraic space over Spec k, p to terminal schemeSpace (unique), MapIsProper, ∀ alg-closed Ω:Type u (needed for Spec Ω, harmless), actual sheaf pullback Z_Ω, reducedness = unfolded AlgebraicSpace.IsReduced over all étale charts, ConnectedSpace(Point) gives nonempty+connected, conclusion Bijective(sectionsMap(moduleStructureMap p)) = Γ(p^♯) per node, canonical/unital so k-algebra iso. Edge cases Spec k, ∅, Spec L separable/inseparable, k[ε], reducible fibres OK. Only lean field changed; statement verbatim; no live collision/supersession; sorry only; docstrings source+blueprint+4 steps; lines ≤100; plain imports = proof_dep modules. No recompile (no file changed). Advisories: schemeSpace owner def-trf-scheme-algebraic-space not in stmt_deps (common landed practice); reducedness/fibre product written as unfoldings of IsReduced/enlargedFibreProduct, which the node itself spells out inline; second reading by same worker."
+ }
+}

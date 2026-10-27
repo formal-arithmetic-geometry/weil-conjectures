@@ -18,148 +18,55 @@
  ],
  "proof": [
   {
-   "text": "Fix $p\\leadsto q$ with $q\\in C$. Choose an affine open $V\\subset T$ containing $g(q)$. Continuity implies $g(p)\\in V$. Replace the family by $P_V\\to V$ and restrict the section. Finite presentation is preserved by [lem-weil-pbc-qcqs-morphism-permanence], flatness by [lem-weil-pbc-flat-morphism-base-change]. The fibre $P_{g(q)}$ is geometrically reduced; taking for $k'$ an algebraic closure of $\\kappa(g(q))$ in [def-pc-geometrically-irreducible], the geometric fibre of $g$ over $g(q)$ [def-weil-geometric-fibre] is reduced, hence by [lem-trf-geometric-reduced-fibre-locus-base-change] so is the geometric fibre of $P_V\\to V$ over $g(q)$. The cartesian component identity [lem-sbc-section-component-cartesian] identifies its locus with $C\\cap P_V$. Thus proving the assertion for this restriction proves it for the given pair. Write $V=\\operatorname{Spec}A$.",
+   "text": "Fix $p\\leadsto q$ with $q\\in C$. Apply [lem-trf-flat-pointed-noetherian-component-model] at $q$: flatness, finite presentation and the section are given, and the universal fibre hypothesis gives geometric reducedness at $g(q)$. Its affine open $V$ contains $g(q)$. Continuity gives $g(p)\\leadsto g(q)$; an open containing a specialization contains its generalizations, so $p,q\\in P_V$. The conclusion gives Noetherian $P_0,T_0$, flat finite presentation of $g_0$, $g_0\\circ\\sigma_0=\\mathrm{id}_{T_0}$, reduced geometric fibre at $g_0(q_0)$, and $\\rho^{-1}C(g_0,\\sigma_0)=C\\cap P_V$. Set $p_0=\\rho(p)$, $q_0=\\rho(q)$. The cartesian square gives $g_0(q_0)=b(g(q))$, identifying the reduced geometric fibre with the point needed for step 2. Continuity gives $p_0\\leadsto q_0$; since $q\\in C\\cap P_V$, the equality gives $q_0\\in C(g_0,\\sigma_0)$. If $p_0=q_0$, then $p_0\\in C(g_0,\\sigma_0)$; evaluating the same inverse-image equality at $p\\in P_V$ gives $p\\in C$.",
    "uses": [
-    "lem-weil-pbc-qcqs-morphism-permanence",
-    "lem-weil-pbc-flat-morphism-base-change",
-    "def-pc-geometrically-irreducible",
-    "def-weil-geometric-fibre",
-    "lem-trf-geometric-reduced-fibre-locus-base-change",
-    "lem-sbc-section-component-cartesian"
+    "lem-trf-flat-pointed-noetherian-component-model"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/more-morphisms.tex",
-    "place": "Tag 055Q, lemma-connected-along-section-open-neighbourhood, first paragraph: affine restriction; Tag 055M"
+    "place": "Tag 055Q, lemma-connected-along-section-open-neighbourhood, first paragraph: affine restriction, descent of family and section, eventual flatness, and the distinguished fibre"
    }
   },
   {
-   "text": "Apply [lemma-nagata-noetherian-inverse-system-affine] to express $V$ as the inverse limit of the affine schemes $V_i=\\operatorname{Spec}A_i$, where $A_i$ runs over the finitely generated $\\mathbf Z$-subalgebras of $A$. Use clause (1) of [thm-pd-spreading-out] to descend $P_V\\to V$ to a finitely presented $g_i:P_i\\to V_i$. Use clause (2), with domain the identity $V_i\\to V_i$ and codomain $P_i$, to descend the section to a map $\\sigma_j:V_j\\to P_j$ at a later stage. Its composite with $g_j$ becomes the identity after base change to $V$; clause (3), applied to these two maps $V_j\\to V_j$, makes that equality hold at a further stage. Hence the model has an actual section, and the comparison square, including the sections, is cartesian. All stage schemes are quasi-compact and quasi-separated: the bases are affine, and the sources are finitely presented over them, by [lem-weil-pbc-qcqs-morphism-permanence]. The stages are Noetherian by [lem-weil-pbc-finite-type-over-noetherian], first for $V_i$ over $\\operatorname{Spec}\\mathbf Z$, then for $P_i$ over $V_i$.",
+   "text": "For $p_0\\ne q_0$, apply [lem-trf-flat-reduced-specialization-trait-data] to $g_0,\\sigma_0,p_0,q_0$. Step 1 supplies Noetherian schemes, flat finite presentation, the section equation, $p_0\\leadsto q_0$, $q_0\\in C(g_0,\\sigma_0)$ and reducedness of the geometric fibre at $g_0(q_0)$. Obtain $f:X\\to S=\\operatorname{Spec}R$, projection $r$, and sections $\\sigma_R,\\tau$ with $f\\circ\\sigma_R=f\\circ\\tau=\\mathrm{id}_S$. The statement gives flat finite presentation of $f$, reduced $X_s$, $r(\\tau(s))=q_0$, $r(\\tau(\\eta))=p_0$, and $C(f,\\sigma_R)=r^{-1}C(g_0,\\sigma_0)$. Evaluating the last identity at $\\tau(s)$ gives $\\tau(s)\\in C(f,\\sigma_R)$. As $f(\\tau(s))=s$, this means $\\tau(s)$ is in the component of $\\sigma_R(s)$ in $f^{-1}(\\{s\\})$, exactly the closed-component hypothesis for step 3.",
    "uses": [
-    "lemma-nagata-noetherian-inverse-system-affine",
-    "thm-pd-spreading-out",
-    "lem-weil-pbc-qcqs-morphism-permanence",
-    "lem-weil-pbc-finite-type-over-noetherian"
+    "lem-trf-flat-reduced-specialization-trait-data"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/more-morphisms.tex",
-    "place": "Tag 055Q, first paragraph, descent with section using limits.tex Tag 01ZM (lemma-descend-finite-presentation)"
+    "place": "Tag 055Q, lemma-connected-along-section-open-neighbourhood, second paragraph: specialization trait, graph section and reduced closed fibre"
    }
   },
   {
-   "text": "Apply [lem-weil-pbc-descend-flat-finite-presentation] to the model morphism $g_i:P_i\\to V_i$ and the cofinal system of later affine stages; the limit morphism is the flat $P_V\\to V$. Its hypotheses hold because $V_i,P_i$ are quasi-compact and quasi-separated and $g_i$ is locally of finite presentation. After advancing the stage, $g_i$ is flat. The section and comparison remain valid under base change, and finite presentation persists by [lem-weil-pbc-qcqs-morphism-permanence]. Let $\\rho:P_V\\to P_i$, $p_i=\\rho(p)$ and $q_i=\\rho(q)$, and set $v_i=g_i(q_i)$. By [lem-trf-geometric-reduced-fibre-locus-base-change], applied to $g_i$ and $V\\to V_i$, the geometric fibre $(P_i)_{\\bar v_i}$ is reduced, since the geometric fibre of $P_V\\to V$ over $g(q)$ is reduced (step 1). We assert nothing about other model fibres. By [lem-sbc-section-component-cartesian], $q_i$ belongs to the model section-component locus $C_i$, and $\\rho^{-1}C_i=C\\cap P_V$. Continuity gives $p_i\\leadsto q_i$. If $p_i=q_i$ the desired membership follows immediately. Otherwise the remaining steps prove $p_i\\in C_i$, using reducedness of the geometric fibre only at $v_i$.",
+   "text": "Apply [lem-trf-flat-trait-two-section-connected-open] to $f,\\sigma_R,\\tau$: step 2 supplies the DVR, flat finite presentation, reduced closed fibre, both section equations and the common closed-fibre component. Obtain the connected nonempty generic fibre $W_\\eta$, with both generic section points. Its continuous image in $f^{-1}(\\{\\eta\\})$ is connected: a separation of the image would pull back to a separation of $W_\\eta$. This image contains $\\sigma_R(\\eta)$ and $\\tau(\\eta)$, so maximality of the component through $\\sigma_R(\\eta)$ puts $\\tau(\\eta)$ in that component. Since $f(\\tau(\\eta))=\\eta$ by the section equation, this says $\\tau(\\eta)\\in C(f,\\sigma_R)$.",
    "uses": [
-    "lem-weil-pbc-descend-flat-finite-presentation",
-    "lem-weil-pbc-qcqs-morphism-permanence",
-    "lem-trf-geometric-reduced-fibre-locus-base-change",
-    "lem-sbc-section-component-cartesian"
+    "lem-trf-flat-trait-two-section-connected-open"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/more-morphisms.tex",
-    "place": "Tag 055Q, first paragraph: limits.tex Tag 04AI (lemma-descend-flat-finite-presentation), and descent of geometric reducedness at the distinguished fibre"
+    "place": "Tag 055Q, lemma-connected-along-section-open-neighbourhood, last paragraph: remove other closed-fibre components, retain a connected open, apply the connected-generic-fibre theorem"
    }
   },
   {
-   "text": "The source $P_i$ is Noetherian. For $p_i\\ne q_i$, [lem-sbc-noetherian-specialization-trait] supplies a discrete valuation ring $R$ and $a:S=\\operatorname{Spec}R\\to P_i$ mapping the generic point $\\eta$ to $p_i$ and the closed point $s$ to $q_i$. Form $X=P_i\\times_{V_i}S$ over the composite $b=g_i\\circ a$, with structure map $f:X\\to S$ and projection $r:X\\to P_i$. It is flat by [lem-weil-pbc-flat-morphism-base-change] and finitely presented by [lem-weil-pbc-qcqs-morphism-permanence]. By [lem-trf-geometric-reduced-fibre-locus-base-change] applied to $g_i$ and $b$, the geometric fibre $X_{\\bar s}$ is reduced, because $b(s)=v_i$. The closed fibre $X_s$ is then reduced. Put $k=\\kappa(s)$, $\\bar k$ its chosen algebraic closure, so $X_{\\bar s}=X_s\\times_k\\operatorname{Spec}\\bar k$ [def-weil-geometric-fibre]. For an affine open $\\operatorname{Spec}B\\subset X_s$, its inverse image in $X_{\\bar s}$ is $\\operatorname{Spec}(B\\otimes_k\\bar k)$ by [lem-weil-pbc-open-fibre-product] and [lem-weil-pbc-fibre-product-affine-spectra]; as an open subscheme of a reduced scheme it is reduced, so $B\\otimes_k\\bar k$ is reduced by [lem-weil-pbc-affine-scheme-reduced-iff]. By [lem-weil-pbc-field-extension-base-change-faithfully-flat] and [lem-weil-pbc-faithfully-flat-universally-injective] (with $N=B$), $B\\to B\\otimes_k\\bar k$ is injective, so $B$ is reduced. Every local ring of $X_s$ is a local ring of such an affine open, so $X_s$ is reduced [def-pc-reduced-scheme], again by [lem-weil-pbc-affine-scheme-reduced-iff].",
+   "text": "By [lem-trf-flat-reduced-specialization-trait-data], $C(f,\\sigma_R)=r^{-1}C(g_0,\\sigma_0)$ and $r(\\tau(\\eta))=p_0$; hence $p_0\\in C(g_0,\\sigma_0)$. Finally [lem-trf-flat-pointed-noetherian-component-model] gives $\\rho^{-1}C(g_0,\\sigma_0)=C\\cap P_V$. Evaluating at $p\\in P_V$, with $\\rho(p)=p_0$, yields $p\\in C\\cap P_V$, hence $p\\in C$. Together with step 1's equality case, this proves generalization stability.",
    "uses": [
-    "lem-sbc-noetherian-specialization-trait",
-    "lem-weil-pbc-flat-morphism-base-change",
-    "lem-weil-pbc-qcqs-morphism-permanence",
-    "lem-trf-geometric-reduced-fibre-locus-base-change",
-    "def-weil-geometric-fibre",
-    "lem-weil-pbc-open-fibre-product",
-    "lem-weil-pbc-fibre-product-affine-spectra",
-    "lem-weil-pbc-affine-scheme-reduced-iff",
-    "lem-weil-pbc-field-extension-base-change-faithfully-flat",
-    "lem-weil-pbc-faithfully-flat-universally-injective",
-    "def-pc-reduced-scheme"
+    "lem-trf-flat-reduced-specialization-trait-data",
+    "lem-trf-flat-pointed-noetherian-component-model"
    ],
-   "elementary": false,
+   "elementary": true,
    "source": {
     "document": "literature/stacks-project/more-morphisms.tex",
-    "place": "Tag 055Q, second paragraph: properties.tex Tag 054F (lemma-locally-Noetherian-specialization-dvr) and base change to the trait"
-   }
-  },
-  {
-   "text": "The base change of $\\sigma_i$ is a section $\\sigma_R:S\\to X$. The pair $(a,\\operatorname{id}_S)$ defines a second section $\\tau:S\\to X$ with $r\\circ\\tau=a$; these equalities follow from the two pullback projections. Put $F=f^{-1}(\\{s\\})$ and let $D$ be its connected component through $\\sigma_R(s)$. By [lem-sbc-section-component-cartesian], applied to $r$, the membership $q_i\\in C_i$ gives $\\tau(s)\\in D$. The scheme fibre and $F$ have the same topology by [def-pc-scheme-fibre]. The discrete valuation ring is Noetherian by [def-sc-discrete-valuation-ring]; thus $S$ is a Noetherian scheme. Applying [lem-weil-pbc-finite-type-over-noetherian] to $f$ and to its closed fibre over the residue field shows that $X$ and $X_s$ are Noetherian. Their topologies are Noetherian by [lem-weil-pbc-noetherian-scheme-closed-subsets-minimal] (complement reverses inclusion of closed and open sets).",
-   "uses": [
-    "lem-sbc-section-component-cartesian",
-    "def-pc-scheme-fibre",
-    "def-sc-discrete-valuation-ring",
-    "lem-weil-pbc-finite-type-over-noetherian",
-    "lem-weil-pbc-noetherian-scheme-closed-subsets-minimal"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/more-morphisms.tex",
-    "place": "Tag 055Q, second and third paragraphs: the two sections and the Noetherian closed fibre"
-   }
-  },
-  {
-   "text": "By [lem-sfb-noetherian-connected-components-open], $D$ is open in $F$, and every other connected component of $F$ is open. Their union is $F\\setminus D$, so $D$ is also closed in $F$. The set $F$ is closed in $X$, being the inverse image of the closed point of $S$. Consequently $F\\setminus D$ is closed in $X$. Put $U=X\\setminus(F\\setminus D)$, an open subscheme. Its closed fibre has underlying space exactly $D$, and both closed section points lie in $U$. The topology of $U$ is Noetherian: a chain of its open subsets is a chain of open subsets of $X$, hence stabilizes. Choose the connected component $W$ of $\\sigma_R(s)$ in $U$. Again [lem-sfb-noetherian-connected-components-open] makes $W$ open in $U$, hence in $X$. Since $D$ is connected and contains $\\sigma_R(s)$, maximality of the connected component gives $D\\subseteq W$; in particular $\\tau(s)\\in W$.",
-   "uses": [
-    "lem-sfb-noetherian-connected-components-open"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/more-morphisms.tex",
-    "place": "Tag 055Q, last paragraph: remove the other closed-fibre components, then retain the connected total-space component"
-   }
-  },
-  {
-   "text": "Both sections factor through the open subscheme $W$: the inverse image of $W$ under either section is open in $S$ and contains $s$, so equals $S$, since every point of the spectrum of a local ring specializes to its closed point. The factor morphisms are obtained by restricting the section maps and their sheaf maps to this open subscheme, as in [def-weil-open-immersion]. The restriction $h:W\\to S$ is flat because its local-ring maps are exactly those of $f$, using [def-weil-flat-morphism]. Its closed fibre is the open subscheme $W_s\\subset X_s$; each of its local rings is a local ring of the reduced $X_s$, so it is reduced by [def-pc-reduced-scheme]. The scheme $W$ is connected and nonempty by construction. All hypotheses of [lem-sbc-connected-generic-fibre-trait] now hold, so the generic fibre $W_\\eta$ is connected and nonempty. No assertion that an arbitrary closed-subset image gives a scheme-theoretic factorization is used; both factorizations here are through an open subscheme.",
-   "uses": [
-    "def-weil-open-immersion",
-    "def-weil-flat-morphism",
-    "def-pc-reduced-scheme",
-    "lem-sbc-connected-generic-fibre-trait"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/more-morphisms.tex",
-    "place": "Tag 055Q, last paragraph, invoking Tag 055J (lemma-connected-flat-over-dvr)"
-   }
-  },
-  {
-   "text": "The image of the connected $W_\\eta$ in the topological fibre $f^{-1}(\\{\\eta\\})$ is connected and contains both $\\sigma_R(\\eta)$ and $\\tau(\\eta)$; the factor sections give these two points in $W_\\eta$, and [def-pc-scheme-fibre] identifies the scheme and topological fibres. Explicitly, a separation of this image into two nonempty relatively open and closed sets would pull back to a separation of $W_\\eta$, which is impossible. Maximality of the component through $\\sigma_R(\\eta)$ therefore puts $\\tau(\\eta)$ in the relative section component of $X/S$. The cartesian identity [lem-sbc-section-component-cartesian] maps this membership to $p_i=r(\\tau(\\eta))\\in C_i$. The equality $\\rho^{-1}C_i=C\\cap P_V$ from step 3 gives $p\\in C$. This proves the stated stability under generalization, including the equality case already handled in step 3.",
-   "uses": [
-    "def-pc-scheme-fibre",
-    "lem-sbc-section-component-cartesian"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/more-morphisms.tex",
-    "place": "Tag 055Q, last paragraph, and Tag 055M: return from the generic fibre of the trait to the model and the original family"
+    "place": "Tag 055Q, lemma-connected-along-section-open-neighbourhood, return from the trait and Noetherian model using the Tag 055M inverse-image identities"
    }
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-qcqs-morphism-permanence",
-  "lem-weil-pbc-flat-morphism-base-change",
-  "def-pc-geometrically-irreducible",
-  "def-weil-geometric-fibre",
-  "lem-trf-geometric-reduced-fibre-locus-base-change",
-  "lem-sbc-section-component-cartesian",
-  "lemma-nagata-noetherian-inverse-system-affine",
-  "thm-pd-spreading-out",
-  "lem-weil-pbc-finite-type-over-noetherian",
-  "lem-weil-pbc-descend-flat-finite-presentation",
-  "lem-sbc-noetherian-specialization-trait",
-  "lem-weil-pbc-open-fibre-product",
-  "lem-weil-pbc-fibre-product-affine-spectra",
-  "lem-weil-pbc-affine-scheme-reduced-iff",
-  "lem-weil-pbc-field-extension-base-change-faithfully-flat",
-  "lem-weil-pbc-faithfully-flat-universally-injective",
-  "def-pc-reduced-scheme",
-  "def-pc-scheme-fibre",
-  "def-sc-discrete-valuation-ring",
-  "lem-weil-pbc-noetherian-scheme-closed-subsets-minimal",
-  "lem-sfb-noetherian-connected-components-open",
-  "def-weil-open-immersion",
-  "def-weil-flat-morphism",
-  "lem-sbc-connected-generic-fibre-trait"
+  "lem-trf-flat-pointed-noetherian-component-model",
+  "lem-trf-flat-reduced-specialization-trait-data",
+  "lem-trf-flat-trait-two-section-connected-open"
  ],
  "proof_origin": {
   "by": "document",
@@ -293,37 +200,12 @@
   "is": null
  },
  "split_report": {
-  "date": "2026-10-18",
+  "date": "2026-10-23",
   "item": "lem-trf-flat-reduced-section-component-generalization",
   "worker": "stage1",
-  "summary": "Expanded the Tag 055Q proof into eight cited steps: affine restriction, descent of family/section/identity, eventual flatness and reduced distinguished fibre, DVR tracing, removal of other closed-fibre components, connected open restriction, and return of generic membership. Reused all existing tools and added no nodes. The affine-only upstream declaration does not attach the general scheme statement.",
-  "blueprint": "Realizes the Tag 055Q input at the inherited Tag 055R section-component-openness place beneath lem-trf-local-term-locality; the eight steps expand this auxiliary geometric reduction rather than alter the chapter or unit.",
-  "tool_uses": [
-   {
-    "node": "lemma-nagata-noetherian-inverse-system-affine",
-    "why": "Affine noetherian approximation is a generic tool for the first reduction in Stacks 055Q; the trace unit has no such approximation statement."
-   },
-   {
-    "node": "thm-pd-spreading-out",
-    "why": "The three limit-descent clauses descend the family, the section and its identity in the 055Q reduction; no trace-unit node states these clauses."
-   },
-   {
-    "node": "lem-weil-pbc-descend-flat-finite-presentation",
-    "why": "Eventual flatness of a finitely presented limit model is exactly the generic 04AI tool cited by 055Q; this does not replace the trace-unit route."
-   },
-   {
-    "node": "lem-sbc-section-component-cartesian",
-    "why": "The generic 055M equality for an arbitrary cartesian square is needed to transfer membership, and imposes no smoothness hypothesis; no trace-unit node states it."
-   },
-   {
-    "node": "lem-sbc-noetherian-specialization-trait",
-    "why": "The generic 054F specialization-to-DVR tool is the second reduction of 055Q; no trace-unit node gives it."
-   },
-   {
-    "node": "lem-sbc-connected-generic-fibre-trait",
-    "why": "The 055J connected-generic-fibre theorem for a flat DVR family with reduced closed fibre is the final tool in 055Q; its statement imposes no smoothness hypothesis."
-   }
-  ]
+  "summary": "Repair of returned head 568a4cb8ee7 (14:10 UTC, 2026-10-23). Required initial dry run passed at 47ea83b39db. Compared all retained files against the current DAG: only proof, proof_deps and split_report differ on the item, the three helper ids are absent, and all 24 archived cited statements are unchanged. Re-read each current citation and retained search result. Step 1 now explicitly identifies g_0(q_0)=b(g(q)) from the cartesian square, checking that the reduced geometric fibre belongs to the specialization point used by the trait construction. Statement, helpers, search records, blueprint and maintainer metadata are retained. The authorized delivery overlay rebases on the fetched server DAG; live promotion remains L's operation.",
+  "blueprint": "Realizes the inherited Tag 055Q/055R auxiliary section-component argument beneath lem-trf-local-term-locality. The three geometric tasks preserve the original eight source arguments. Steps 1-2 obtain the model and trait data; step 3 derives generic membership from the connected open; step 4 evaluates the component inverse-image identities. Chapter and unit statements are unchanged.",
+  "tool_uses": []
  },
  "tool_uses": [
   "lemma-nagata-noetherian-inverse-system-affine",
@@ -334,12 +216,12 @@
   "lem-sbc-connected-generic-fibre-trait"
  ],
  "reviewed": {
-  "date": "2026-10-18",
+  "date": "2026-10-23",
   "by": "L",
-  "reviewer": "NT-cc-Q62-fbba773f4",
-  "group": "Q62",
+  "reviewer": "NT-cc-Q52-37f08fc3e",
+  "group": "Q52",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q62-fbba773f4 (reviewer sub-agent of L); spot-checked: I read the whole delivery against Stacks more-morphisms.tex 055J/055M/055Q (lines 8131-8400); the tags 01ZM, 04AI, 054F and 0576 map to the cited labels. The statement is unchanged and true: in Stacks, finite presentation means locally of finite presentation plus qcqs, and 055Q makes X^0 a neighbourhood of q, so it contains every generalization p. It is not a restatement of the parent's openness clause. The only near statements in the DAG are the smooth lem-sbc-* nodes, which are special cases, so same_as=[] is right. There are no new nodes. Steps 2 and 5-8 check out: the 01ZM clauses with the section, 04AI (S_0=Y_0=V_i), 055M applied to the squares rho, r and the open restriction, 054F on the Noetherian P_i, the second section tau=(a,id), the clopen D, the open U and the open component W, 055J's hypotheses (flat, connected, reduced closed fibre), and the return through 055M. One defect, repaired: steps 1, 3 and 4 treated the 0576 node, which only says the geometric fibre X_{s-bar} is reduced, as if it gave 'geometrically reduced' in the definition's sense. Step 4 then deduced 'X_s reduced' by taking the identity extension in the definition, which was not justified. Step 1 now applies the definition with k' an algebraic closure. Step 3 concludes only that (P_i)_{v_i-bar} is reduced. Step 4 proves the descent from B tensor k-bar to B with existing Mathlib leaves (open-fibre-product, fibre-product-affine-spectra, affine-scheme-reduced-iff, field-extension-base-change-faithfully-flat, faithfully-flat-universally-injective). proof_deps is updated, and the corrected file is at fixes/dag/nodes/sec-trace-formula/. I accept the six declared tool uses (Nagata approximation, 01ZM, 04AI, 055M, 054F, 055J), which are exactly the tools of the 055Q proof. lem-sfb-noetherian-connected-components-open is Lean-closed. Edge cases checked: empty base, p=q, equal model images, and the nonreduced counterexample R[z]/(z(z-pi)).; 1 file(s) fixed by the reviewer"
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q52-37f08fc3e (reviewer sub-agent of L); spot-checked: This is the 12th delivery of the split; all 11 earlier reviews were PASS or FIX. Diffed against the previous head 568a4cb8ee76: the three new nodes are identical, and the item changed only in step 1 (one added sentence, g_0(q_0)=b(g(q)) from the cartesian square, which is correct) and in split_report. Read Stacks more-morphisms 055Q (all three paragraphs) and 055J. Model node is true: 01ZM(1-3) and 04AI descend the family, section and flatness; reducedness of the geometric fibre descends at t_0 only; rho^-1 C_0 = C ∩ P_V by 055M. Trait-data node is true: 054F gives the trait for p≠q; tau=(a,id); X_s is reduced because B→B⊗k̄ is injective; tau(s)∈C(f,sigma_R) by 055M. Connected-open node is true: D is clopen in the Noetherian closed fibre F; U = X∖(F∖D); W is the open component of sigma(s) in U with W∩F = D; both sections factor through W because their images are connected and S is local; 055J then makes W_eta connected. The assembly supplies every hypothesis of each cited node, handles p_0=q_0, and proof_deps equals the union of the uses. Re-split rule met: the live item still holds the old 8-step proof; all 8 old steps are verbatim in the report; old steps 1-3, 4-5 and 6-8 go to three nodes of comparable size; the item proof is a 4-step assembly. Edge cases: empty T, identity family, tau=sigma, two copies of Spec R, and R[z]/(z(z-pi)), which shows the reduced closed fibre is needed (it is kept). No duplicates (the lem-sbc-smooth-* nodes need smoothness), no SGA, and the maintainer tool_uses are accepted. FIX (B3), lost on re-push after 3784, ad02 and 568a and re-applied: lem-trf-flat-reduced-specialization-trait-data uses a Noetherian topological space, which no node defines; the definition is now inline ('every descending chain of closed subsets stabilizes'). File: fixes/dag/nodes/sec-trace-formula/lem-trf-flat-reduced-specialization-trait-data.json, identical to the 568a fix. Maintainer: keep this fix when promoting.; 1 file(s) fixed by the reviewer"
  },
  "lean": {
   "module": "Sheaf.AlgebraicGeometry.FlatReducedSectionComponentGeneralization",
@@ -359,5 +241,30 @@
   "result": "pass",
   "note": "Statement matches the node and Stacks 055Q clause by clause: [Flat] [LocallyOfFinitePresentation] [QuasiCompact] [QuasiSeparated] g; hred ∀ t, GeometricallyReduced (g.fiberToSpecResidueField t); section σ with σ ≫ g = 𝟙; conclusion StableUnderGeneralization {p | p ∈ connectedComponentIn (g⁻¹'{g p}) (σ (g p))}, direction checked. No extra hypotheses; single bound universe u; binders and locus identical to the landed sibling isOpen_section_component_of_flat_of_geometricallyReduced_fibers. Edge cases checked: empty T, p=q, identity family, disconnected fibres, reducedness necessary. The node differs from live only in lean; no new nodes; the 8-step proof docstring, source and blueprint docstrings and sorry-only proof are present; Worker report and Second reading sections are present. Prior RETURN (ac2ba867: re-split, missing module) fully addressed. H4: upstream SlicingFlat version needs IsAffine and side Smooth.* needs Smooth, so both are special cases. Imports cover all recorded proof-dep modules. nt_compile --json EXIT 0 in 1.9 s, clean; a broken-identifier control fails as expected. Advisory only: a few plain Mathlib imports serve proof deps that have no lean record; GeometricallyReduced is taken from def-pc-geometrically-irreducible's module, as in the landed sibling."
  },
- "lean_audit": {}
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S3",
+  "result": "pass",
+  "landing": "20261026T092549-L-3443309",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)",
+  "sorry_before": [
+   "AlgebraicGeometry.stableUnderGeneralization_section_component_of_flat_of_geometricallyReduced_fibers"
+  ],
+  "sorry_after": []
+ }
 }

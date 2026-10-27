@@ -1,0 +1,136 @@
+{
+ "id": "lem-trf-integral-scalar-counit-normalization",
+ "kind": "statement",
+ "title": "Scalar multiplication and associativity for realization counits",
+ "chapter": "sec-trace-formula",
+ "unit": "sk-thm-trace-transport",
+ "statement": "Fix a prime $\\ell$ and one normalized integral comparison system $D$ [def-trf-integral-comparison-realization-models]. Let $E\\xrightarrow\\iota L\\xrightarrow j M$ be finite coefficient extensions of $\\mathbf Q_\\ell$, and let $X$ be a scheme with $\\ell$ invertible. Write $R_F$ for the recorded reduction functor [def-trf-integral-comparison-sequence-systems], $T_{EF}$ for completed scalar extension from $E$ to $F$ [def-weil-integral-scalar-extension], $S_{EF}$ for its whole-system scalar extension, and $c_{EF,K}:R_F(T_{EF}K)\\to S_{EF}(R_EK)$ for the actual scalar realization counit. For each constructible-complete integral complex $K$ over $E$ [def-weil-derived-complete-integral-detailed], the scalar multiplication $e$ and system associator $\\alpha$ [def-trf-quotient-system-coherence-data] satisfy $c_{EE,K};e_{R_EK}=R_E(\\widehat e_K)$ and $c_{LM,T_{EL}K};S_{LM}(c_{EL,K});\\alpha_{R_EK}=R_M(\\widehat\\alpha_K);c_{EM,K}$. Here $\\widehat e$ and $\\widehat\\alpha$ are the ordinary finite-free derived tensor comparisons conjugated by the specified completion maps [lem-weil-normalized-scalar-completion, lem-weil-scalar-extension-composition]. These are equations of entire derived quotient diagrams, including identity embeddings and equal fields, with no finite Tor-amplitude bound.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "lemma-derived-base-change (06YY), lemma-derived-limit-is-ok (0941); agent-extracted scalar normalization step of lem-trf-normalized-integral-scalar-coherence"
+ },
+ "stmt_deps": [
+  "def-trf-integral-comparison-realization-models",
+  "def-trf-integral-comparison-sequence-systems",
+  "lem-weil-normalized-scalar-completion",
+  "lem-weil-scalar-extension-composition",
+  "def-trf-quotient-system-coherence-data",
+  "def-weil-derived-complete-integral-detailed",
+  "def-weil-integral-scalar-extension"
+ ],
+ "proof": [
+  {
+   "text": "Apply the proved ordinary-model coherence theorem to obtain comparison isomorphisms preserving the specified completion transformations, multiplication, and associator. The coherence theorem proves its tensor-level and localization assertions in a separate module; no new unproved obligation is introduced.",
+   "uses": [
+    "lem-trf-integral-scalar-ordinary-model-coherence"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Precompose scalarModelUnit with the ordinary model isomorphism, and substitute its completion and multiplication compatibilities from the first two steps. Cancel scalarCompletionIso at the complete input. This gives b;limit(systemUnit)=completedUnit;adjunctionUnit. Apply reduction to this equation and postcompose with the actual reduction/limit counit. Counit naturality and the left triangle reduce it to c;systemUnit=reduction(completedUnit).",
+   "uses": [
+    "lem-trf-scalar-model-unit",
+    "lem-weil-normalized-scalar-completion"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Precompose scalarModelAssociativity with the composite of the two ordinary model comparisons. Naturality and their completion identities replace the initial pair of completion maps by the specified scalarCompletion maps; the derived associator compatibility replaces its other side by the prescribed ordinary associator. Cancel the two scalarCompletionIso components at K and its first completed scalar extension. Naturality of the second realization moves the first realization through it; functoriality then combines the intermediate actual counit into scalar change of c_EL. Apply reduction and its counit to the resulting realized equation. Counit naturality gives c_LM;S_LM(c_EL);systemAssociator = reduction(completedAssociator);c_EM. All equations are of entire diagrams; the argument does not assume finite quotient maps flat and includes identities, equal fields and zero objects.",
+   "uses": [
+    "lem-trf-scalar-model-associativity",
+    "lem-weil-normalized-scalar-completion"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-trf-integral-scalar-ordinary-model-coherence",
+  "lem-trf-scalar-model-unit",
+  "lem-weil-normalized-scalar-completion",
+  "lem-trf-scalar-model-associativity"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "06YY and 0941; G1 proof from the proved pure-tensor model comparison and its unit/associator coherence, followed by the existing scalar model laws and actual adjunction counit identities"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The mate of a completed scalar realization respects the multiplication unit and the tensor associator under the finite free model",
+   "results": "8 hits, including ModuleCat.extendRestrictScalarsAdj_unit_app_apply and ModuleCat.extendRestrictScalarsAdj_homEquiv_apply; none identifies the two specified completed derived scalar models.",
+   "date": "2026-10-27",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.homEquiv_naturality_right",
+   "results": "1 hit: CategoryTheory.Adjunction.homEquiv_naturality_right. Supplies generic transposition only.",
+   "date": "2026-10-27",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "integralComparisonScalarCounit|isomorphismScalarModel_existsUnique",
+   "results": "Remote Mathlib grep: 0 hits. Local rg finds the defining counit in IntegralComparisonSystemData and a proved model identification in IsomorphismComparisonScalarExtension; the latter imports IntegralPullbackComparisonRealization and thus reaches the item, so it cannot be imported here.",
+   "date": "2026-10-27",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The mate of a scalar extension realization respects the tensor multiplication unit and associator under a finite free scalar model",
+   "results": "8 hits: ModuleCat.extendScalarsId_hom_app_one_tmul, ModuleCat.ExtendScalars.smul_tmul, ModuleCat.extendRestrictScalarsAdj_unit_app_apply, ModuleCat.ExtendScalars.obj', TensorProduct.finsuppLeft_smul', TensorProduct.CompatibleSMul.unit, TensorProduct.lidOfCompatibleSMul, IsLocalization.moduleLid. These concern ordinary modules and generic unit formulas, not the specified whole-system derived scalar realization.",
+   "date": "2026-10-27",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.NormalizedIntegralScalarCoherence",
+  "date": "2026-10-27",
+  "group": "S5"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-trf-karoubi-independence",
+   "place": "Common-stage transport: scalar model multiplication and associativity before pasting mixed squares",
+   "via": [
+    "lem-trf-normalized-integral-scalar-coherence"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.IntegralScalarCounitNormalization",
+  "file": "lean/Sheaf/Paper/IntegralScalarCounitNormalization.lean",
+  "declaration": "WeilConjectures.integralScalarCounitNormalization",
+  "statement": "theorem integralScalarCounitNormalization\n    (l : ℕ) [Fact l.Prime] (D : IntegralComparisonSystem.{u} l) :\n    (∀ (E : Type u) [Field E] [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]\n      (X : Scheme.{u}) [∀ x : X, Invertible (l : X.residueField x)]\n      (K : sfIntegralConstructibleCategory l E X),\n      (integralComparisonScalarCounit l E E (AlgHom.id ℚ_[l] E) X\n        ((D.coefficient E).system X) ((D.coefficient E).system X)\n        ((D.coefficient E).roos X) ((D.scalar E E (AlgHom.id ℚ_[l] E)).model X)).app\n          K.obj ≫\n        (integralComparisonSystemScalarUnit l E X).hom.app\n          (((D.coefficient E).system X).reduction.obj K.obj) =\n      ((D.coefficient E).system X).reduction.map\n        (integralComparisonScalarUnit l E X K).hom) ∧\n    (∀ (E L M : Type u) [Field E] [Algebra ℚ_[l] E]\n      [FiniteDimensional ℚ_[l] E] [Field L] [Algebra ℚ_[l] L]\n      [FiniteDimensional ℚ_[l] L] [Field M] [Algebra ℚ_[l] M]\n      [FiniteDimensional ℚ_[l] M] (ι : E →ₐ[ℚ_[l]] L) (j : L →ₐ[ℚ_[l]] M)\n      (X : Scheme.{u}) [∀ x : X, Invertible (l : X.residueField x)]\n      (K : sfIntegralConstructibleCategory l E X),\n      (integralComparisonScalarCounit l L M j X\n        ((D.coefficient L).system X) ((D.coefficient M).system X)\n        ((D.coefficient M).roos X) ((D.scalar L M j).model X)).app\n          ((integralScalarExtension l E L ι X).obj K.obj) ≫\n        (integralComparisonDerivedSequenceScalar l L M j X).map\n          ((integralComparisonScalarCounit l E L ι X\n            ((D.coefficient E).system X) ((D.coefficient L).system X)\n            ((D.coefficient L).roos X) ((D.scalar E L ι).model X)).app K.obj) ≫\n        (integralComparisonSystemScalarComposition l E L M ι j X).hom.app\n          (((D.coefficient E).system X).reduction.obj K.obj) =\n      ((D.coefficient M).system X).reduction.map\n          (integralComparisonScalarAssociator l E L ι M j X K).hom ≫\n        (integralComparisonScalarCounit l E M (j.comp ι) X\n          ((D.coefficient E).system X) ((D.coefficient M).system X)\n          ((D.coefficient M).roos X) ((D.scalar E M (j.comp ι)).model X)).app K.obj)",
+  "branch": "sheaf-dag",
+  "by": "S5",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S5",
+  "result": "pass",
+  "landing": "20261027T094515-L-236295",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G1",
+  "result": "pass",
+  "landing": "20261027T123440-L-2300000",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

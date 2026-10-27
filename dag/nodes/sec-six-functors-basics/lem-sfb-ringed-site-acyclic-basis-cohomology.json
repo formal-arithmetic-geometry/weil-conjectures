@@ -1,0 +1,341 @@
+{
+ "id": "lem-sfb-ringed-site-acyclic-basis-cohomology",
+ "kind": "statement",
+ "title": "Unbounded cohomology on an acyclic basis of a ringed site",
+ "statement": "Let $(\\mathcal C,\\mathcal O)$ be a ringed site, small relative to the module universe [def-weil-size-convention], with a sheaf of commutative rings $\\mathcal O$. Use sheaves of $\\mathcal O$-modules [def-weil-sheaf-of-modules-category] and their unbounded derived category $D(\\mathcal O)$ [def-weil-abstract-derived-category]. For $U\\in\\mathcal C$, evaluation means sections $M\\mapsto M(U)$, with its $\\mathcal O(U)$-module structure; $R\\Gamma(U,K)$ is evaluation on a K-injective representative of $K$ [def-pur-kinjective-complex, prop-pur-kinjective-resolutions-exist]. Write $H^q(K)$ for the cohomology module sheaf, computed as kernel modulo image in degree $q$. Let $\\mathcal B\\subseteq\\operatorname{Ob}(\\mathcal C)$ be a set such that every object has a covering with all members in $\\mathcal B$. Let $K\\in D(\\mathcal O)$ satisfy\n$$H^p(R\\Gamma(U,H^q(K)[0]))=0\\qquad(p>0,\\ q\\in\\mathbf Z,\\ U\\in\\mathcal B).$$\nThen there are canonical $\\mathcal O(U)$-linear isomorphisms\n$$H^q(R\\Gamma(U,K))\\cong\\Gamma(U,H^q(K))\\qquad(q\\in\\mathbf Z,\\ U\\in\\mathcal B).$$\nThey are natural in $K$ among objects satisfying the displayed vanishing and commute with restriction along every morphism $V\\to U$ between objects of $\\mathcal B$. They are the edge comparisons induced by the canonical cohomological truncations (bounded-below spectral-sequence comparisons and their eventually constant limit), and in degree zero for a sheaf $K=M[0]$ they are the identity on $M(U)$. No boundedness of $K$ or constancy of $\\mathcal O$ is assumed.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 0BKZ, lemma-cohomology-over-U-trivial, including the truncation-limit construction in its proof; used in spaces-perfect.tex Tag 071Q, lemma-derived-quasi-coherent-small-etale-site."
+ },
+ "stmt_deps": [
+  "def-weil-size-convention",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-abstract-derived-category",
+  "def-pur-kinjective-complex",
+  "prop-pur-kinjective-resolutions-exist"
+ ],
+ "proof": [
+  {
+   "text": "Put $\\mathcal A=\\operatorname{Mod}(\\mathcal O)$ and $v_U(M)=M(U)$, with values in $\\operatorname{Mod}(\\mathcal O(U))$. Evaluation is additive and left exact: finite sums and kernels of module sheaves are sectionwise [def-weil-sheaf-of-modules-category]. The source is Grothendieck by [prop-pur-kinjective-resolutions-exist]. So is the target: apply the same statement to the one-object, identity-only site with trivial topology and ring $\\mathcal O(U)$; its module sheaves are exactly modules over that ring. Choose the functorial, degreewise injective K-injective replacements supplied by that proposition. Termwise evaluation preserves homotopies, since it preserves sums and compositions in the homotopy equation. Thus [lem-weil-pbc-kinjective-hom-derived] makes evaluation of these models a functor on the unbounded derived category; changing models gives the same functor up to its canonical comparison. Its bounded-below restriction is the functor in [lem-sp-kinjective-computes], and that lemma identifies $H^p(Rv_U(M[0]))$ with $R^pv_U(M)$, including $R^0v_U(M)=M(U)$. Forgetting the action gives exactly the abelian-group-valued derived evaluation used in the two site-limit lemmas below: both evaluate the same module K-injective model.",
+   "uses": [
+    "def-weil-sheaf-of-modules-category",
+    "prop-pur-kinjective-resolutions-exist",
+    "lem-weil-pbc-kinjective-hom-derived",
+    "lem-sp-kinjective-computes"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "0BKZ proof, bounded-below derived-evaluation interpretation before applying the spectral sequence; 0D6K, lemma-RGamma-commutes-with-Rlim, uses the underlying abelian evaluation."
+   }
+  },
+  {
+   "text": "For $n\\geq0$ put $K_n=\\tau_{\\geq-n}K$, with maps $c_n:K\\to K_n$ and $t_n:K_{n+1}\\to K_n$. By [def-kun-truncations], $K_n$ has a bounded-below representative, $H^r(K_n)=0$ for $r<-n$ and $H^r(K_n)=H^r(K)$ canonically for $r\\geq-n$. Fix $U\\in\\mathcal B$. Apply [thm-sp-truncation-e2] with $v=v_U$, source and target as verified in step 1, and lower bound $-n$. Its convergent spectral sequence and finite abutment filtration give\n$$E_2^{p,r}(n,U)=R^pv_U(H^r(K_n))\\Longrightarrow H^{p+r}(R\\Gamma(U,K_n)).$$\nStep 1 and the hypothesis imply that all columns $p>0$ vanish; columns $p<0$ vanish by the theorem. This applies also to the zero cohomology sheaves below $-n$. No spectral sequence for an unbounded-below complex has been invoked.",
+   "uses": [
+    "def-kun-truncations",
+    "thm-sp-truncation-e2"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "0BKZ proof, bounded-below spectral-sequence sentence; derived.tex Tag 015J, lemma-two-ss-complex-functor."
+   }
+  },
+  {
+   "text": "Every differential into or out of column zero is zero: for $s\\geq2$ its other endpoint has column $-s$ or $s$. Hence $E_\\infty^{0,r}=E_2^{0,r}$. All positive graded pieces of the finite filtration on $H^r(R\\Gamma(U,K_n))$ vanish. Since $F^0$ is the whole group and the filtration ends in zero, $F^1=0$. The abutment isomorphism in [thm-sp-truncation-e2] therefore gives the column-zero edge\n$$e_{n,r,U}:H^r(R\\Gamma(U,K_n))\\xrightarrow{\\sim}H^r(K_n)(U).$$\nIt is $\\mathcal O(U)$-linear: the exact couple, its kernels, images, quotients and the abutment isomorphism are taken in $\\operatorname{Mod}(\\mathcal O(U))$. The construction is functorial for maps of bounded-below complexes: the truncation inclusions, cohomology projections and derived evaluations commute with such a map, so all maps of the exact couples, their successive kernels and quotients, and the finite filtration commute. In particular\n$$e_{n,r,U}H^r(R\\Gamma(U,t_n))=H^r(t_n)(U)e_{n+1,r,U}.$$\nThe same reasoning applies to a natural transformation of evaluations on the fixed K-injective models, since it commutes with every differential and truncation map.",
+   "uses": [
+    "thm-sp-truncation-e2"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "0BKZ proof, collapse of the bounded-below spectral sequence; functoriality of the truncation exact couple."
+   }
+  },
+  {
+   "text": "Apply [lem-kun-site-truncation-derived-limit] with $E=K$ and $d=0$. Its site is the given small ringed site; its covering subset is exactly $\\mathcal B$. Its required vanishing concerns $p>0$ and cohomology sheaves in degrees $r<0$, which is a subset of the vanishing assumed here. Step 1 identifies its abelian-valued evaluation with the underlying evaluation in our hypothesis. Consequently $P=\\prod_nK_n$ exists in $D(\\mathcal A)$ and\n$$K\\xrightarrow{(c_n)}P\\xrightarrow{1-s}P\\longrightarrow K[1],\\qquad\\operatorname{pr}_ns=t_n\\operatorname{pr}_{n+1},$$\nis a derived-limit triangle with the specified canonical projections. This uses a bound only for the cohomology sheaves of $K$, not a cohomological-dimension bound for every sheaf on the site.",
+   "uses": [
+    "lem-kun-site-truncation-derived-limit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "0BKZ proof, first sentence, applying 0D6P, lemma-is-limit-dimension, with d=0."
+   }
+  },
+  {
+   "text": "For the fixed $U$, [lem-kun-site-rgamma-derived-limit] sends the triangle of step 4 to a derived-limit triangle $R\\Gamma(U,K)\\xrightarrow{p'}\\prod_nR\\Gamma(U,K_n)\\xrightarrow{1-s}\\prod_nR\\Gamma(U,K_n)\\to R\\Gamma(U,K)[1]$ for the tower $(R\\Gamma(U,K_n),R\\Gamma(U,t_n))_n$ in $D(\\operatorname{Ab})$, with $\\operatorname{pr}_np'=R\\Gamma(U,c_n)$. Since consecutive maps of a distinguished triangle compose to zero, $(1-s)p'=0$, i.e. $R\\Gamma(U,c_n)=R\\Gamma(U,t_n)R\\Gamma(U,c_{n+1})$; hence the maps $H^r(R\\Gamma(U,c_n))$ form a cone over the tower $A^r_n=H^r(R\\Gamma(U,K_n))$ and define $\\rho:H^r(R\\Gamma(U,K))\\to\\varprojlim_nA^r_n$ with $n$th component $H^r(R\\Gamma(U,c_n))$. By [lem-pc-milnor-projection-factorization], applied to this Roos triangle, $\\rho$ is surjective. By [lem-pc-milnor-boundary-factorization] there is an injection $a:R^1\\varprojlim_nA^{r-1}_n\\to H^r(R\\Gamma(U,K))$ whose image is the kernel of $H^r(R\\Gamma(U,K))\\to\\prod_nA^r_n$, the map with components $H^r(R\\Gamma(U,c_n))$; this map is $\\rho$ followed by the injective inclusion $\\varprojlim_nA^r_n\\subseteq\\prod_nA^r_n$, so $\\ker\\rho=a(R^1\\varprojlim_nA^{r-1}_n)$. Thus $$0\\longrightarrow R^1\\varprojlim_n H^{r-1}(R\\Gamma(U,K_n))\\xrightarrow{a}H^r(R\\Gamma(U,K))\\xrightarrow{\\rho}\\varprojlim_n H^r(R\\Gamma(U,K_n))\\longrightarrow0$$ is exact, and $\\rho$ is the map induced by the projections. These statements are about an arbitrary small ringed site and abelian groups, so no constancy of $\\mathcal O$, exactness of products of module sheaves, or quasi-compactness hypothesis is inserted.",
+   "uses": [
+    "lem-kun-site-rgamma-derived-limit",
+    "lem-pc-milnor-boundary-factorization",
+    "lem-pc-milnor-projection-factorization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "0BKZ displayed exact sequence; 0BKX, equation-ses-Rlim-over-U, from 0D6K, lemma-RGamma-commutes-with-Rlim."
+   }
+  },
+  {
+   "text": "Choose $N\\geq\\max(0,1-r)$. For $n\\geq N$ and $j=r-1,r$, [def-kun-truncations] identifies $H^j(K_n)$ with $H^j(K)$, and $H^j(t_n)$ with its identity: both truncation projections from $K$ give the same quotient in this degree. Step 3 therefore identifies the tails of $A_n^j=H^j(R\\Gamma(U,K_n))$ with the constant system $H^j(K)(U)$.\nHere is the needed limit calculation, including the finite initial segment. By [lem-pc-derived-limit-roos-abelian-groups], the limit and first derived limit of $(A_n,f_n)$ are the kernel and cokernel of $(x_n)\\mapsto(x_n-f_nx_{n+1})$ on $\\prod_nA_n$. When $f_n$ is invertible for $n\\geq N$, a prescribed $(b_n)$ has a preimage: set $x_N=0$, recursively set $x_{n+1}=f_n^{-1}(x_n-b_n)$ for $n\\geq N$, and then set $x_n=b_n+f_nx_{n+1}$ backwards for $n<N$. Thus the cokernel is zero. In the kernel, $x_N$ determines all coordinates, forwards by inverse transitions and backwards by transitions. Projection to $A_N$ is therefore an isomorphism. This proves $R^1\\varprojlim A_n^{r-1}=0$ and $\\varprojlim A_n^r\\cong H^r(K)(U)$, with the latter identification given by any tail coordinate followed by its edge map.",
+   "uses": [
+    "def-kun-truncations",
+    "lem-pc-derived-limit-roos-abelian-groups"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "0BKZ proof, final two sentences; the explicit kernel/cokernel formula of more-algebra.tex Tag 07KW, lemma-compute-Rlim."
+   }
+  },
+  {
+   "text": "The exact sequence of step 5 and the calculation in step 6 show that $H^r(R\\Gamma(U,c_N))$ is a bijection. Define\n$$e_{r,U}(K)=e_{N,r,U}\\circ H^r(R\\Gamma(U,c_N)),\\qquad N\\geq\\max(0,1-r),$$\nusing the canonical $H^r(K_N)=H^r(K)$. This is an $\\mathcal O(U)$-linear isomorphism: the first map is linear by step 3, and the second is evaluation of a morphism of module complexes followed by cohomology. A bijective module homomorphism has a linear inverse, as follows by applying injectivity to $f(ax)=af(x)$. Increasing $N$ leaves this composite unchanged, because $c_N=t_Nc_{N+1}$ and the edge-transition equality of step 3 has identity on $H^r(K)$. Any two admissible choices compare through their maximum. Thus this is exactly the eventually constant limit of the canonical bounded-below truncation edges, without a choice of inverse-limit cone entering its definition.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "0BKZ proof, passage from the displayed exact sequence to the eventually constant value; explicit canonical edge comparison."
+   }
+  },
+  {
+   "text": "For a morphism $a:K\\to L$ between objects satisfying the vanishing, choose the same $N\\geq\\max(0,1-r)$. Naturality of good truncation gives $c_N^L a=(\\tau_{\\geq-N}a)c_N^K$. The exact-couple construction of step 3 gives\n$$e_{N,r,U}(L)H^r(R\\Gamma(U,\\tau_{\\geq-N}a))=H^r(a)(U)e_{N,r,U}(K).$$\nComposing with the projection from $K$ proves naturality of $e_{r,U}$. This applies to derived morphisms: [lem-weil-pbc-kinjective-hom-derived] represents them by maps between K-injective models, uniquely up to homotopy, and evaluation preserves that homotopy as in step 1.\nFor $h:V\\to U$ with $U,V\\in\\mathcal B$, use the same module K-injective model $I$ to compute both evaluations. Termwise restriction $I(U)\\to I(V)$ commutes with differentials, all module chain maps and homotopies, and satisfies $h^*(ax)=h^*(a)h^*(x)$ [def-weil-sheaf-of-modules-category]. It gives a natural transformation of the evaluated truncation diagrams. Kernels, images, quotients and induced maps in their exact couples commute with this transformation, so the bounded edge square of step 3 commutes with restriction. The square for $c_N$ also commutes, by termwise restriction of the map representing $c_N$. Compose these two squares to get\n$$e_{r,V}(K)\\,h^*=h^*\\,e_{r,U}(K).$$\nThis is the required semilinear restriction compatibility, not an assertion of $\\mathcal O(U)$-linearity over an unchanged coefficient ring.",
+   "uses": [
+    "lem-weil-pbc-kinjective-hom-derived",
+    "def-weil-sheaf-of-modules-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "0BKZ canonical truncation-limit construction; compatibility of the defining maps with complex maps and restriction maps."
+   }
+  },
+  {
+   "text": "Finally take $K=M[0]$ satisfying the hypothesis, and degree $r=0$. Its lower truncations $K_n$ are canonically $M[0]$, and the projections $c_n$ are identities. The degree-zero edge is $R^0v_U(M)=v_U(M)$ of [lem-sp-kinjective-computes]. Explicitly, for an injective resolution $0\\to M\\to I^0\\to I^1\\to\\cdots$, left exactness identifies $M(U)$ with $\\ker(I^0(U)\\to I^1(U))$ via the augmentation, and the edge is its inverse onto $M(U)$. Thus under the canonical degree-zero identification $e_{0,U}(M[0])$ is the identity on $M(U)$. All constructions above used arbitrary integer $r$, the given covering basis, and arbitrary commutative $\\mathcal O$, which proves every clause without a boundedness assumption on $K$.",
+   "uses": [
+    "lem-sp-kinjective-computes"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "0BKZ, normalization of its canonical edge for a sheaf in degree zero."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-sheaf-of-modules-category",
+  "prop-pur-kinjective-resolutions-exist",
+  "lem-weil-pbc-kinjective-hom-derived",
+  "lem-sp-kinjective-computes",
+  "def-kun-truncations",
+  "thm-sp-truncation-e2",
+  "lem-kun-site-truncation-derived-limit",
+  "lem-kun-site-rgamma-derived-limit",
+  "lem-pc-derived-limit-roos-abelian-groups",
+  "lem-pc-milnor-boundary-factorization",
+  "lem-pc-milnor-projection-factorization"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 0BKZ, lemma-cohomology-over-U-trivial, entire proof; its inputs 0D6P, 0D6K and 0BKX, with explicit naturality and degree-zero normalization of the truncation edges."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "acyclic.*basis|basis.*acyclic|hypercohomology|cohomology.*[Ss]heaf",
+   "results": "[grep] OK 14 hit(s)\n  {\"file\": \"Mathlib/CategoryTheory/Sites/NonabelianCohomology/H1.lean\", \"line\": \"10\", \"text\": \"/-! # The cohomology of a sheaf of groups in degree 1\"}\n  {\"file\": \"Mathlib/CategoryTheory/Sites/NonabelianCohomology/H1.lean\", \"line\": \"12\", \"text\": \"In this file, we shall define the cohomology in degree 1 of a sheaf\"}\n  {\"file\": \"Mathlib/CategoryTheory/Sites/NonabelianCohomology/H1.lean\", \"line\": \"195\", \"text\": \"/-- The cohomology in degree 1 of a presheaf of groups\"}\n  {\"file\": \"Mathlib/CategoryTheory/Sites/MayerVietorisSquare.lean\", \"line\": \"27\", \"text\": \"cohomology groups with values in an abelian sheaf.\"}\n  {\"file\": \"Mathlib/CategoryTheory/Sites/SheafCohomology/Basic.lean\", \"line\": \"21\", \"text\": \"We define the cohomology types `Sheaf.H F n` of an abelian\"}\n  {\"file\": \"Mathlib/CategoryTheory/Sites/SheafCohomology/Basic.lean\", \"line\": \"26\", \"text\": \"We also define `Sheaf.cohomologyPresheaf F n : Cᵒᵖ ⥤ AddCommGrpCat`\"}\n  {\"file\": \"Mathlib/CategoryTheory/Sites/SheafCohomology/Basic.lean\", \"line\": \"33\", \"text\": \"  `(F.cohomologyPresheaf n).obj (Opposite.op U) ≃+ Sheaf.H F n`.\"}\n  {\"file\": \"Mathlib/CategoryTheory/Sites/SheafCohomology/Basic.lean\", \"line\": \"35\", \"text\": \"  `(F.cohomologyPresheaf n).obj (Opposite.op U) ≃+ Sheaf.H (F.over U) n`.\"}\n  {\"file\": \"Mathlib/CategoryTheory/Sites/SheafCohomology/Basic.lean\", \"line\": \"58\", \"text\": \"/-- The cohomology of an abelian sheaf in degree `n`. -/\"}\n  {\"file\": \"Mathlib/CategoryTheory/Sites/SheafCohomology/MayerVietoris.lean\", \"line\": \"45\", \"text\": \"  biprod.lift ((F.cohomologyPresheaf n).map S.f₂₄.op)\"}\n  {\"file\": \"Mathlib/CategoryTheory/Sites/SheafCohomology/MayerVietoris.lean\", \"line\": \"46\", \"text\": \"      ((F.cohomologyPresheaf n).map S.f₃₄.op)\"}\n  {\"file\": \"Mathlib/CategoryTheory/Sites/SheafCohomology/MayerVietoris.lean\", \"line\": \"50\", \"text\": \"      ⟨(F.cohomologyPresheaf n).map S.f₂₄.op y,\"}\n  {\"file\": \"Mathlib/CategoryTheory/Sites/SheafCohomology/MayerVietoris.lean\", \"line\": \"51\", \"text\": \"        (F.cohomologyPresheaf n).map S.f₃₄.op y⟩ := by\"}\n  {\"file\": \"Mathlib/CategoryTheory/Sites/SheafCohomology/MayerVietoris.lean\", \"line\": \"69\", \"text\": \"  biprod.desc ((F.cohomologyPresheaf n).map S.f₁₂.op)\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: hits define ordinary sheaf cohomology, generic acyclicity and derived localization; none gives unbounded ringed-site acyclic-basis evaluation"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Ringed site acyclic basis computes hypercohomology of unbounded module complexes",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"HomologicalComplex.Acyclic\", \"module\": \"Mathlib.Algebra.Homology.ShortComplex.HomologicalComplex\", \"type\": \"{C : Type u_1} →\\n  [inst : CategoryTheory.Category.{v_1, u_1} C] →\\n    [inst_1 : CategoryTheory.Limits.HasZeroMorphisms C] →\\n      {ι : Type u_2} → {c : ComplexShape ι} → HomologicalComplex C c → Prop\", \"doc\": \"A homological complex $ K $ is acyclic if, for every index $ i $, the image of the differential $ d_{\\\\text{prev}(i),i} $ equals the kernel of the differential $ d_{i,\\\\text{next}(i)} $. This means the \"}\n  {\"name\": \"SheafOfModules.unit\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf\", \"type\": \": SheafOfModules R\", \"doc\": \"Given a sheaf $ R $ of rings on a category $ \\\\mathcal{C} $ with Grothendieck topology $ J $, this constructs the canonical sheaf of $ R $-modules by assigning to each object $ X $ the free $ R(X) $-mo\"}\n  {\"name\": \"HomologicalComplex.acyclic_iff\", \"module\": \"Mathlib.Algebra.Homology.ShortComplex.HomologicalComplex\", \"type\": \": K.Acyclic ↔ ∀ i, K.ExactAt i\", \"doc\": \"A homological complex $ K $ is acyclic if and only if it is exact at every index $ i $.\"}\n  {\"name\": \"SheafOfModules.IsQuasicoherent\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent\", \"type\": \"{C : Type u'} →\\n  [inst : CategoryTheory.Category.{v', u'} C] →\\n    {J : CategoryTheory.GrothendieckTopology C} →\\n      {R : CategoryTheory.Sheaf J RingCat} →\\n        [∀ (X : C), (J.over X).HasSheafCompose (CategoryTheory.forget₂ RingCat AddCommGrpCat)] →\\n          [∀ (X : C), CategoryTheory.HasWeak\", \"doc\": \"Given a category $\\\\mathcal{C}$ with a Grothendieck topology $J$ and a sheaf $\\\\mathcal{R}$ of rings on $\\\\mathcal{C}$, this property asserts that a sheaf of $\\\\mathcal{R}$-modules is quasicoherent if, fo\"}\n  {\"name\": \"HomotopyCategory.quotient_obj_mem_subcategoryAcyclic_iff_acyclic\", \"module\": \"Mathlib.Algebra.Homology.HomotopyCategory.Acyclic\", \"type\": \"(K : CochainComplex C ℤ) : subcategoryAcyclic C ((quotient _ _).obj K) ↔ K.Acyclic\", \"doc\": \"For a cochain complex $ K $ in a preadditive category $ C $ with integer indices, the image of $ K $ under the quotient functor to the homotopy category belongs to the acyclic subcategory (consisting \"}\n  {\"name\": \"HomologicalComplex.acyclic_of_isZero\", \"module\": \"Mathlib.Algebra.Homology.ShortComplex.HomologicalComplex\", \"type\": \"(hK : IsZero K) : K.Acyclic\", \"doc\": \"If $ K $ is a zero object in a category with zero morphisms, then the homological complex $ K $ is acyclic, meaning that for every index $ i $, the image of the differential $ d_{\\\\text{prev}(i),i} $ e\"}\n  {\"name\": \"HomotopyCategory.mem_subcategoryAcyclic_iff\", \"module\": \"Mathlib.Algebra.Homology.HomotopyCategory.Acyclic\", \"type\": \"(X : HomotopyCategory C (ComplexShape.up ℤ)) :\\n  subcategoryAcyclic C X ↔ ∀ (n : ℤ), IsZero ((homologyFunctor _ _ n).obj X)\", \"doc\": \"An object $ X $ in the homotopy category belongs to the acyclic subcategory if and only if, for every integer $ n $, the $ n $-th homology object of $ X $ is zero.\"}\n  {\"name\": \"SheafOfModules.instHasColimitsOfSizeOfPresheafOfModulesValRingCat\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.Colimits\", \"type\": \"[HasColimitsOfSize.{w', w} (PresheafOfModules.{v} R.val)] : HasColimitsOfSize.{w', w} (SheafOfModules.{v} R)\", \"doc\": \"If the category of presheaves of modules over a presheaf of rings has colimits of a given size, then the category of sheaves of modules over the corresponding sheaf of rings also has colimits of that \"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: hits define ordinary sheaf cohomology, generic acyclicity and derived localization; none gives unbounded ringed-site acyclic-basis evaluation"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"SheafOfModules\", \"homology\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-23",
+   "verdict": "no match: hits define ordinary sheaf cohomology, generic acyclicity and derived localization; none gives unbounded ringed-site acyclic-basis evaluation"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For an unbounded complex of modules on a ringed site whose cohomology sheaves have no higher cohomology on a covering basis, hypercohomology on each basis object equals sections of its cohomology sheaf",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"CategoryTheory.Sheaf.H\", \"module\": \"Mathlib/CategoryTheory/Sites/SheafCohomology/Basic\", \"type\": \"{C : Type u} →\\n  [inst : CategoryTheory.Category.{v, u} C] →\\n    {J : CategoryTheory.GrothendieckTopology C} →\\n      CategoryTheory.Sheaf J AddCommGrpCat →\\n        [inst_1 : CategoryTheory.HasSheafify J AddCommGrpCat] →\\n          [CategoryTheory.HasExt (CategoryTheory.Sheaf J AddCommGrpCat)] → ℕ → T\", \"doc\": \"For a sheaf $ F $ on a site with Grothendieck topology $ J $, the $ n $-th sheaf cohomology group is defined as the Ext group $ \\\\mathrm{Ext}^n $ between the constant sheaf associated to the integers $\"}\n  {\"name\": \"CategoryTheory.GrothendieckTopology.OneHypercoverFamily.IsSheafIff.fac\", \"module\": \"Mathlib/CategoryTheory/Sites/Hypercover/IsSheaf\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] {J : CategoryTheory.GrothendieckTopology C} {A : Type u'}\\n  [inst_1 : CategoryTheory.Category.{v', u'} A] {H : J.OneHypercoverFamily} {P : CategoryTheory.Functor Cᵒᵖ A}\\n  (hP : ∀ ⦃X : C⦄ (E : J.OneHypercover X), H E → Nonempty (CategoryTheory.\", \"doc\": \"Given a generating family of one-step hypercovers in a site $(\\\\mathcal{C}, J)$, a contravariant functor $P: \\\\mathcal{C}^{\\\\text{op}} \\\\to \\\\mathcal{A}$, and a covering sieve $S$ containing the zeroth sie\"}\n  {\"name\": \"CategoryTheory.GrothendieckTopology.OneHypercoverFamily.IsSheafIff.fac'\", \"module\": \"Mathlib/CategoryTheory/Sites/Hypercover/IsSheaf\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] {J : CategoryTheory.GrothendieckTopology C} {A : Type u'}\\n  [inst_1 : CategoryTheory.Category.{v', u'} A] {H : J.OneHypercoverFamily} {P : CategoryTheory.Functor Cᵒᵖ A}\\n  (hP : ∀ ⦃X : C⦄ (E : J.OneHypercover X), H E → Nonempty (CategoryTheory.\", \"doc\": \"Given a category $\\\\mathcal{C}$ with a Grothendieck topology $J$, an object $X \\\\in \\\\mathcal{C}$, a one-step hypercover $E$ of $X$, and a multifork $F$ over the diagram indexed by a covering sieve $S$ c\"}\n  {\"name\": \"CategoryTheory.Sheaf.cohomologyPresheaf\", \"module\": \"Mathlib/CategoryTheory/Sites/SheafCohomology/Basic\", \"type\": \"{C : Type u} →\\n  [inst : CategoryTheory.Category.{v, u} C] →\\n    {J : CategoryTheory.GrothendieckTopology C} →\\n      [inst_1 : CategoryTheory.HasSheafify J AddCommGrpCat] →\\n        [CategoryTheory.HasExt (CategoryTheory.Sheaf J AddCommGrpCat)] →\\n          CategoryTheory.Sheaf J AddCommGrpCat → ℕ → C\", \"doc\": \"For a fixed natural number $n$ and a sheaf $F$ on a category $\\\\mathcal{C}$ with values in abelian groups, the cohomology presheaf is a contravariant functor $\\\\mathcal{C}^\\\\text{op} \\\\to \\\\text{AddCommGrp\"}\n  {\"name\": \"CategoryTheory.Sheaf.cohomologyPresheafFunctor\", \"module\": \"Mathlib/CategoryTheory/Sites/SheafCohomology/Basic\", \"type\": \"{C : Type u} →\\n  [inst : CategoryTheory.Category.{v, u} C] →\\n    (J : CategoryTheory.GrothendieckTopology C) →\\n      [inst_1 : CategoryTheory.HasSheafify J AddCommGrpCat] →\\n        [CategoryTheory.HasExt (CategoryTheory.Sheaf J AddCommGrpCat)] →\\n          ℕ → CategoryTheory.Functor (CategoryTheory.S\", \"doc\": \"For a fixed natural number $n$, this defines a functor that maps a sheaf $F$ on a category $\\\\mathcal{C}$ with values in abelian groups to a presheaf of Ext groups. Specifically, it constructs a functo\"}\n  {\"name\": \"CategoryTheory.GrothendieckTopology.OneHypercoverFamily.IsSheafIff.hom_ext\", \"module\": \"Mathlib/CategoryTheory/Sites/Hypercover/IsSheaf\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] {J : CategoryTheory.GrothendieckTopology C} {A : Type u'}\\n  [inst_1 : CategoryTheory.Category.{v', u'} A] (H : J.OneHypercoverFamily) (P : CategoryTheory.Functor Cᵒᵖ A),\\n  (∀ ⦃X : C⦄ (E : J.OneHypercover X), H E → Nonempty (CategoryTheory.Limi\", \"doc\": \"Given a generating family of hypercovers in a site $(\\\\mathcal{C}, J)$, for any object $X$ and covering sieve $S$ on $X$, if two morphisms $x, y: T \\\\to P(X)$ satisfy $x \\\\circ P(f^{\\\\text{op}}) = y \\\\circ\"}\n  {\"name\": \"CategoryTheory.GrothendieckTopology.OneHypercover.isSheafFor_presieve₀\", \"module\": \"Mathlib/CategoryTheory/Sites/Hypercover/One\", \"type\": \"∀ {C : Type u_2} [inst : CategoryTheory.Category.{v_2, u_2} C] {K : CategoryTheory.GrothendieckTopology C}\\n  {P : CategoryTheory.Functor Cᵒᵖ (Type u_3)} {S : C} (E : K.OneHypercover S),\\n  CategoryTheory.Presieve.IsSheaf K P → CategoryTheory.Presieve.IsSheafFor P E.presieve₀\", \"doc\": \"If a presheaf $ P $ is a sheaf with respect to a Grothendieck topology $ J $ on a category $ \\\\mathcal{C} $, then for any one-step hypercover $ E $ of an object $ X \\\\in \\\\mathcal{C} $, the zeroth presie\"}\n  {\"name\": \"CochainComplex.HomComplex.leftHomologyData'_H_coe\", \"module\": \"Mathlib/Algebra/Homology/HomotopyCategory/HomComplexCohomology\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Preadditive C]\\n  (K L : CochainComplex C ℤ) (n m p : ℤ) (hm : n + 1 = m) (hp : m + 1 = p),\\n  ↑(CochainComplex.HomComplex.leftHomologyData' K L n m p hm hp).H = CochainComplex.HomComplex.CohomologyClass K L m\", \"doc\": \"The cohomology class in degree $ m $ of the homomorphism complex $ \\\\text{Hom}(K, L) $ is equal to the quotient of the cocycle subgroup $ \\\\text{Cocycle}(K, L, m) $ by the coboundary subgroup $ \\\\text{Co\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: hits define ordinary sheaf cohomology, generic acyclicity and derived localization; none gives unbounded ringed-site acyclic-basis evaluation"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Unbounded derived evaluation is t exact on complexes with acyclic cohomology sheaves on a basis of a site",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"CategoryTheory.Functor.isHomological_of_localization\", \"module\": \"Mathlib/CategoryTheory/Triangulated/HomologicalFunctor\", \"type\": \"∀ {C : Type u_1} {D : Type u_2} {A : Type u_3} [inst : CategoryTheory.Category.{v_1, u_1} C]\\n  [inst_1 : CategoryTheory.HasShift C ℤ] [inst_2 : CategoryTheory.Category.{v_2, u_2} D]\\n  [inst_3 : CategoryTheory.Limits.HasZeroObject D] [inst_4 : CategoryTheory.HasShift D ℤ]\\n  [inst_5 : CategoryTheory.P\", \"doc\": \"Let $\\\\mathcal{C}, \\\\mathcal{D}$ be pretriangulated categories and $\\\\mathcal{A}$ an abelian category. If $L : \\\\mathcal{C} \\\\to \\\\mathcal{D}$ is a triangulated functor commuting with $\\\\mathbb{Z}$-indexed s\"}\n  {\"name\": \"CategoryTheory.Functor.instLiftingCochainComplexIntDerivedCategoryQQuasiIsoUpCompHomologicalComplexMapHomologicalComplexMapDerivedCategory\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/ExactFunctor\", \"type\": \"{C₁ : Type u₁} →\\n  [inst : CategoryTheory.Category.{v₁, u₁} C₁] →\\n    [inst_1 : CategoryTheory.Abelian C₁] →\\n      [inst_2 : HasDerivedCategory C₁] →\\n        {C₂ : Type u₂} →\\n          [inst_3 : CategoryTheory.Category.{v₂, u₂} C₂] →\\n            [inst_4 : CategoryTheory.Abelian C₂] →\\n              [\", \"doc\": \"This instance provides the lifting condition for a functor $ F $ from integer-indexed cochain complexes to an abelian category, ensuring compatibility with the derived category localization at quasi-i\"}\n  {\"name\": \"DerivedCategory.instIsGEObjCochainComplexIntQOfIsGE\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/TStructure\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Abelian C]\\n  [inst_2 : HasDerivedCategory C] (K : CochainComplex C ℤ) (n : ℤ) [K.IsGE n], (DerivedCategory.Q.obj K).IsGE n\", \"doc\": \"If a cochain complex $ K $ with integer indices is in the family $ \\\\mathcal{G}_n $ of the T-structure defined by cohomological support, then its image under the localization functor $ Q $ to the deriv\"}\n  {\"name\": \"DerivedCategory.instIsLEObjCochainComplexIntQOfIsLE\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/TStructure\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Abelian C]\\n  [inst_2 : HasDerivedCategory C] (K : CochainComplex C ℤ) (n : ℤ) [K.IsLE n], (DerivedCategory.Q.obj K).IsLE n\", \"doc\": \"If a cochain complex $ K $ with integer indices is in the subcategory $ \\\\mathcal{L}_n $ (objects strictly supported in degrees $ \\\\leq n $) of the T-structure, then its image under the localization fun\"}\n  {\"name\": \"DerivedCategory.isGE_Q_obj_iff\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/TStructure\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Abelian C]\\n  [inst_2 : HasDerivedCategory C] (K : CochainComplex C ℤ) (n : ℤ), (DerivedCategory.Q.obj K).IsGE n ↔ K.IsGE n\", \"doc\": \"For a cochain complex $ K $ in an abelian category and integer $ n $, the image of $ K $ under the localization functor $ Q $ to the derived category satisfies the cohomological support condition $ \\\\t\"}\n  {\"name\": \"CategoryTheory.Functor.mapDerivedCategoryFactorsh\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/ExactFunctor\", \"type\": \"{C₁ : Type u₁} →\\n  [inst : CategoryTheory.Category.{v₁, u₁} C₁] →\\n    [inst_1 : CategoryTheory.Abelian C₁] →\\n      [inst_2 : HasDerivedCategory C₁] →\\n        {C₂ : Type u₂} →\\n          [inst_3 : CategoryTheory.Category.{v₂, u₂} C₂] →\\n            [inst_4 : CategoryTheory.Abelian C₂] →\\n              [\", \"doc\": \"A natural isomorphism asserting that composing the homotopy category functor with the derived category localization is equivalent to composing the derived category localization with the induced functo\"}\n  {\"name\": \"CategoryTheory.Functor.mapDerivedCategoryFactors\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/ExactFunctor\", \"type\": \"{C₁ : Type u₁} →\\n  [inst : CategoryTheory.Category.{v₁, u₁} C₁] →\\n    [inst_1 : CategoryTheory.Abelian C₁] →\\n      [inst_2 : HasDerivedCategory C₁] →\\n        {C₂ : Type u₂} →\\n          [inst_3 : CategoryTheory.Category.{v₂, u₂} C₂] →\\n            [inst_4 : CategoryTheory.Abelian C₂] →\\n              [\", \"doc\": \"A natural isomorphism asserting that composing the derived category localization functor with the induced derived functor is naturally isomorphic to composing the homological complex functor with the \"}\n  {\"name\": \"HomotopyCategory.quotient_obj_mem_subcategoryAcyclic_iff_exactAt\", \"module\": \"Mathlib/Algebra/Homology/HomotopyCategory/Acyclic\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Abelian C] (K : CochainComplex C ℤ),\\n  HomotopyCategory.subcategoryAcyclic C ((HomotopyCategory.quotient C (ComplexShape.up ℤ)).obj K) ↔\\n    ∀ (n : ℤ), HomologicalComplex.ExactAt K n\", \"doc\": \"A cochain complex $ K $ in the homotopy category belongs to the acyclic subcategory if and only if it is exact at every integer index $ n $, meaning the image of the differential at each degree equals\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: hits define ordinary sheaf cohomology, generic acyclicity and derived localization; none gives unbounded ringed-site acyclic-basis evaluation"
+  },
+  {
+   "tool": "grep",
+   "query": "acyclic.*basis|basis.*acyclic|hypercohomology|cohomology.*[Ss]heaf",
+   "results": "14 hits: Mathlib/CategoryTheory/Sites/MayerVietorisSquare.lean, Mathlib/CategoryTheory/Sites/SheafCohomology/Basic.lean, Mathlib/CategoryTheory/Sites/SheafCohomology/Basic.lean, Mathlib/CategoryTheory/Sites/SheafCohomology/Basic.lean, Mathlib/CategoryTheory/Sites/SheafCohomology/Basic.lean, Mathlib/CategoryTheory/Sites/SheafCohomology/Basic.lean, Mathlib/CategoryTheory/Sites/SheafCohomology/MayerVietoris.lean, Mathlib/CategoryTheory/Sites/SheafCohomology/MayerVietoris.lean",
+   "date": "2026-10-23",
+   "verdict": "no match: ordinary sheaf-cohomology definitions, general derived localization and K-injective infrastructure do not state this unbounded ringed-site comparison"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"SheafOfModules\", \"homology\"",
+   "results": "0 hits: ",
+   "date": "2026-10-23",
+   "verdict": "no match: ordinary sheaf-cohomology definitions, general derived localization and K-injective infrastructure do not state this unbounded ringed-site comparison"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Unbounded hypercohomology on an acyclic covering basis of a ringed site equals sections of the cohomology sheaf",
+   "results": "8 hits: CategoryTheory.Sheaf.H, SheafOfModules.sections, CategoryTheory.GrothendieckTopology.OneHypercover.toPreOneHypercover, CategoryTheory.GrothendieckTopology.OneHypercover, CategoryTheory.Sheaf.ΓRes, TopCat.Presheaf.IsSheafOpensLeCover, CategoryTheory.GrothendieckTopology.OneHypercover.amalgamate, SheafOfModules.Presentation",
+   "date": "2026-10-23",
+   "verdict": "no match: ordinary sheaf-cohomology definitions, general derived localization and K-injective infrastructure do not state this unbounded ringed-site comparison"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For an unbounded complex of sheaves of modules on a ringed site with acyclic cohomology sheaves on a covering basis, derived sections equal sections of its cohomology sheaves",
+   "results": "8 hits: CategoryTheory.Sheaf.H, CategoryTheory.Sheaf.cohomologyPresheaf, CategoryTheory.Sheaf.cohomologyPresheafFunctor, CategoryTheory.Sheaf.instAddCommGroupH, CategoryTheory.GrothendieckTopology.CoversTop.sections_ext, TopCat.Presheaf.section_ext, CochainComplex.IsKInjective, CategoryTheory.InjectiveResolution.extEquivCohomologyClass_symm_mk_hom",
+   "date": "2026-10-23",
+   "verdict": "no match: ordinary sheaf-cohomology definitions, general derived localization and K-injective infrastructure do not state this unbounded ringed-site comparison"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived evaluation is t exact on complexes whose cohomology sheaves are acyclic on a basis, proved by lower truncations and homotopy inverse limits",
+   "results": "8 hits: DerivedCategory.instEssSurjCochainComplexIntQ, DerivedCategory.instIsLocalizationHomotopyCategoryIntUpQhTrWSubcategoryAcyclic, DerivedCategory.Q, HomotopyCategory.quotient_obj_mem_subcategoryAcyclic_iff_exactAt, CategoryTheory.Functor.instLiftingCochainComplexIntDerivedCategoryQQuasiIsoUpCompHomologicalComplexMapHomologicalComplexMapDerivedCategory, DerivedCategory.instIsLocalizationCochainComplexIntQQuasiIsoUp, CochainComplex.IsKInjective.Qh_map_bijective, CategoryTheory.Functor.rightDerived",
+   "date": "2026-10-23",
+   "verdict": "no match: ordinary sheaf-cohomology definitions, general derived localization and K-injective infrastructure do not state this unbounded ringed-site comparison"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-derived-etale-zariski-equivalence",
+  "date": "2026-10-23",
+  "group": "NZ"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Stable genus and smooth-family open loci in curve families. Supporting input: 0E76 proof, reduction to prestable curves, and 0E78 proof, decomposition by genus before imposing stability. Supporting input: 0E1J proof, perfectness and arbitrary derived base change before extracting the positive-degree perfect summand. Supporting input to this derived direct-image specialization: Tags 08H8 (lemma-epsilon-flat), 071Q (lemma-derived-quasi-coherent-small-etale-site), including its quasi-inverse and counit proof, and 08GH (remark-match-total-direct-images); tensor normalization from descent.tex Tag 03FH (remark-change-topologies-ringed-sites). In the proof of 071Q, apply sites-cohomology 0BKZ to the affine etale basis before computing cohomology of R epsilon_*.",
+   "via": [
+    "lem-sfb-derived-etale-zariski-equivalence",
+    "lem-sfb-proper-flat-space-derived-base-change",
+    "lem-sfb-curve-h0-genus-strata",
+    "lem-sfb-stable-and-smooth-family-open-loci",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-ringed-site-acyclic-basis-cohomology",
+  "worker": "stage1",
+  "summary": "Statement unchanged. Read Stacks 0BKZ and its limit/spectral-sequence inputs. Reused the existing arbitrary-ringed-site reconstruction and derived-evaluation lemmas, the bounded-below spectral sequence, Milnor and Roos statements. Wrote the eventual-constant tower calculation, explicit linear canonical edge composite, naturality and normalization; no new nodes or Mathlib leaves.",
+  "blueprint": "Supporting input to the inherited direct-image route: 071Q uses 0BKZ on the affine etale basis. Steps 1-3 provide bounded-below comparisons, 4-6 the source truncation-limit argument, and 7-9 its canonical linear, natural, normalized assembly. Latest blueprint direct-images proof (3) and unit statement were read; no unit or chapter changes.",
+  "tool_uses": [
+   {
+    "node": "prop-pur-kinjective-resolutions-exist",
+    "why": "Generic existence and Grothendieck-category theorem for an arbitrary small ringed site; used also on the one-object ringed site for the evaluation target."
+   },
+   {
+    "node": "lem-weil-pbc-kinjective-hom-derived",
+    "why": "Generic derived localization comparison for K-injective models, used for functoriality and independence of the evaluated representatives."
+   },
+   {
+    "node": "lem-sp-kinjective-computes",
+    "why": "Generic bounded-below K-injective comparison with right derived functors, needed for the spectral-sequence input and degree-zero normalization."
+   },
+   {
+    "node": "thm-sp-truncation-e2",
+    "why": "Generic bounded-below truncation spectral sequence; used only on lower truncations, as in 0BKZ."
+   },
+   {
+    "node": "lem-kun-site-truncation-derived-limit",
+    "why": "Generic ringed-site reconstruction under local bounds on the cohomology sheaves, applied with d=0; this supplies the actual unbounded passage in 0BKZ."
+   },
+   {
+    "node": "lem-kun-site-rgamma-derived-limit",
+    "why": "Generic ringed-site derived evaluation preserving derived-limit triangles and their projections, independent of the Kunneth application."
+   },
+   {
+    "node": "lem-pc-derived-limit-roos-abelian-groups",
+    "why": "Generic kernel/cokernel formula for group-valued countable towers; the elementary eventual-constancy calculation is written in the item."
+   },
+   {
+    "node": "lem-pc-milnor-boundary-factorization",
+    "why": "Generic group-valued Milnor boundary statement: injective R^1lim term equal to the kernel of the projection-induced map out of H^r of a Roos triangle; no node of the current unit supplies it."
+   },
+   {
+    "node": "lem-pc-milnor-projection-factorization",
+    "why": "Generic surjectivity of the projection-induced map H^r(L)->lim H^r(K_n) for a Roos triangle in D(Ab); needed so that the identified map is H^r(RGamma(U,c_n)), not an unspecified natural map."
+   }
+  ]
+ },
+ "tool_uses": [
+  "prop-pur-kinjective-resolutions-exist",
+  "lem-weil-pbc-kinjective-hom-derived",
+  "lem-sp-kinjective-computes",
+  "thm-sp-truncation-e2",
+  "lem-kun-site-truncation-derived-limit",
+  "lem-kun-site-rgamma-derived-limit",
+  "lem-pc-derived-limit-roos-abelian-groups",
+  "lem-pc-milnor-boundary-factorization",
+  "lem-pc-milnor-projection-factorization"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q21-375993866",
+  "group": "Q21",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q21-375993866 (reviewer sub-agent of L); spot-checked: I read the item, all nine steps, every cited node's statement and Stacks 0BKZ (sites-cohomology.tex, lemma-cohomology-over-U-trivial, statement and proof). The statement is unchanged from the base and from live/side-live, where the item is still unsplit, so nothing supersedes this delivery. There are no new nodes. The route matches the source: R lim of the lower truncations by 0D6P with d=0 (lem-kun-site-truncation-derived-limit), RΓ(U,-) commuting with derived limits (lem-kun-site-rgamma-derived-limit), the bounded-below truncation spectral sequence (thm-sp-truncation-e2, columns p>0 vanish, F^1=0 by descending induction), and eventual constancy, worked out explicitly from the Roos formula with N >= max(0,1-r). Steps 7-9 (canonical composite independent of N, naturality, semilinear restriction, degree-zero identity) check out. The target category Mod(O(U)) is Grothendieck via the one-object site, which is valid. The declared off-unit tools are generic and accepted. One C3/C4 fault, fixed: step 5 used the right-hand map of the Milnor sequence as the projection-induced map, components H^r(RΓ(U,c_n)), but lem-pc-derived-limit-milnor-sequence only states that some natural exact sequence exists; that identification came from its proof. Step 7's bijectivity of H^r(RΓ(U,c_N)) depends on it. The corrected step 5 now cites lem-pc-milnor-projection-factorization (the projection-induced map is surjective) and lem-pc-milnor-boundary-factorization (an injective R^1lim term equal to the kernel of the projection-induced map), and builds ρ from (1-s)p'=0. proof_deps and split_report.tool_uses are updated to match; nothing else changed. Advisory: lem-pc-derived-limit-eventually-iso already gives the R^1lim=0 part of step 6, which is acceptable to re-derive as elementary.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.Sites.AcyclicBasisCohomology",
+  "declaration": "CategoryTheory.RingedSiteAcyclicBasis.exists_acyclicBasisCohomology",
+  "declarations": [
+   "CategoryTheory.RingedSiteAcyclicBasis.sectionCohomology",
+   "CategoryTheory.RingedSiteAcyclicBasis.cohomologySections",
+   "CategoryTheory.RingedSiteAcyclicBasis.sectionCyclesIso",
+   "CategoryTheory.RingedSiteAcyclicBasis.IsAcyclicOn",
+   "CategoryTheory.RingedSiteAcyclicBasis.modelEdge",
+   "CategoryTheory.RingedSiteAcyclicBasis.exists_acyclicBasisCohomology"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/Sites/AcyclicBasisCohomology.lean",
+  "statement": "theorem exists_acyclicBasisCohomology (_hcomm : ∀ (U : Cᵒᵖ) (a b : R.obj.obj U), a * b = b * a) (B : Set C) (_hB : ∀ U : C, ∃ S : Presieve U, Sieve.generate S ∈ J U ∧ ∀ (V : C) (f : V ⟶ U), S f → V ∈ B) : ∃! α : ∀ q : ℤ, sectionCohomology.{c, v, r} R q ⟶ cohomologySections.{c, v, r} R q, (∀ (I : CochainComplex (ringedSiteModules.{max c v r} R) ℤ) (q : ℤ), (sectionCyclesIso.{c, v, r} R I q).hom ≫ (((SheafOfModules.forget.{max c v r} R).mapHomologicalComplex (.up ℤ)).obj I).homologyπ q ≫ (α q).app I = (SheafOfModules.forget.{max c v r} R).map (I.homologyπ q)) ∧ (∀ (K : DerivedCategory (ringedSiteModules.{max c v r} R)), IsAcyclicOn.{c, v, r, w} R B K → ∀ (I : CochainComplex (ringedSiteModules.{max c v r} R) ℤ), I.IsKInjective → ∀ (e : DerivedCategory.Q.obj I ≅ K) (q : ℤ) (U : C), U ∈ B → IsIso ((modelEdge.{c, v, r, w} R α K I e q).app (op U))) ∧ (∀ (K L : DerivedCategory (ringedSiteModules.{max c v r} R)) (a : K ⟶ L) (I T : CochainComplex (ringedSiteModules.{max c v r} R) ℤ) (eI : DerivedCategory.Q.obj I ≅ K) (eT : DerivedCategory.Q.obj T ≅ L) (f : I ⟶ T), DerivedCategory.Q.map f ≫ eT.hom = eI.hom ≫ a → ∀ q : ℤ, (sectionCohomology.{c, v, r} R q).map f ≫ modelEdge.{c, v, r, w} R α L T eT q = modelEdge.{c, v, r, w} R α K I eI q ≫ (SheafOfModules.forget.{max c v r} R).map ((DerivedCategory.homologyFunctor _ q).map a)) ∧ (∀ (K : DerivedCategory (ringedSiteModules.{max c v r} R)), IsAcyclicOn.{c, v, r, w} R B K → ∀ (I : CochainComplex (ringedSiteModules.{max c v r} R) ℤ), I.IsKInjective → ∀ (eI : DerivedCategory.Q.obj I ≅ K) (n : ℕ) (q : ℤ), 1 - q ≤ (n : ℤ) → ∀ (T : CochainComplex (ringedSiteModules.{max c v r} R) ℤ), T.IsKInjective → ∀ (eT : DerivedCategory.Q.obj T ≅ (DerivedCategory.TStructure.t.truncGE (-(n : ℤ))).obj K) (f : I ⟶ T), DerivedCategory.Q.map f ≫ eT.hom = eI.hom ≫ (DerivedCategory.TStructure.t.truncGEπ (-(n : ℤ))).app K → ∀ (U : C), U ∈ B → IsIso (((sectionCohomology.{c, v, r} R q).map f).app (op U)) ∧ modelEdge.{c, v, r, w} R α K I eI q ≫ (SheafOfModules.forget.{max c v r} R).map ((DerivedCategory.homologyFunctor _ q).map ((DerivedCategory.TStructure.t.truncGEπ (-(n : ℤ))).app K)) = (sectionCohomology.{c, v, r} R q).map f ≫ modelEdge.{c, v, r, w} R α ((DerivedCategory.TStructure.t.truncGE (-(n : ℤ))).obj K) T eT q) ∧ (∀ (M : ringedSiteModules.{max c v r} R), (SheafOfModules.forget.{max c v r} R).map (HomologicalComplex.singleObjCyclesSelfIso (.up ℤ) 0 M).inv ≫ (sectionCyclesIso.{c, v, r} R ((CochainComplex.singleFunctor _ 0).obj M) 0).hom ≫ (((SheafOfModules.forget.{max c v r} R).mapHomologicalComplex (.up ℤ)).obj ((CochainComplex.singleFunctor _ 0).obj M)).homologyπ 0 ≫ (α 0).app ((CochainComplex.singleFunctor _ 0).obj M) ≫ (SheafOfModules.forget.{max c v r} R).map (HomologicalComplex.singleObjHomologySelfIso (.up ℤ) 0 M).hom = 𝟙 ((SheafOfModules.forget.{max c v r} R).obj M))",
+  "branch": "sheaf-dag",
+  "by": "Q24",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "The unique cycles-normalized natural transformation is valued in presheaves of modules, so it includes linearity and restriction compatibility. Its K-injective-model components are isomorphisms on the basis for every derived K satisfying IsAcyclicOn. The statement also specifies naturality for derived maps, stabilization under all sufficiently low canonical truncation projections, and the degree-zero identity. The module retains independent site universes and all recorded proof-dependency imports; helper definitions belong to the canonical comparison itself."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-07ccc7b1c",
+  "group": "Q24",
+  "result": "pass",
+  "note": "Read node, 0BKZ (sites-cohomology.tex 5466-5499), all 5 stmt_dep records, module and report (Worker report + Second reading by Q24 present). Node diff vs side-live: only new lean record; statement verbatim in file. Canonical edge α (presheaf homology → sections of sheaf homology) pinned ∃! by cycles equation; IsIso on K-injective models over B under IsAcyclicOn (all-models form of H^p(RΓ(U,H^q(K)[0]))=0); O(U)-linearity and semilinear restriction via PresheafOfModules morphism; naturality in K, truncGEπ(-n) stabilization for n≥1-q, degree-zero identity all present and true. Independent universes c v r w, presieve covering hypothesis, no boundedness/constant ring. No duplicate: lem-kun-0bkz is étale abelian specialization; siteModuleDerivedSections theorem-owned. Helpers real with source/blueprint docstrings; only main theorem sorry. No file changed, no compile run."
+ }
+}

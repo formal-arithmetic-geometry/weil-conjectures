@@ -1,0 +1,169 @@
+{
+ "id": "lem-pur-diagonal-ordinary-orientation-rigidity",
+ "kind": "statement",
+ "title": "Rigidity of coordinate-normalized ordinary orientations",
+ "statement": "In the finite coefficient setting [def-pur-conventions], let f:X→Y be separated, finite type and smooth of pure relative dimension d≥0 between Noetherian finite-type k-schemes, with compactification and structure map aY:Y→Spec k. If e,e prime:omega0_f≈A_X(d)[2d] both satisfy the coordinate normalization of [def-pur-diagonal-dualizing-data], then e=e prime. This assertion tests equality and includes neither existence nor a pro-etale comparison.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-orientation/thm-pur-diagonal-dualizing-object.proof.md",
+  "place": "Steps 1--2 and combining/canonicity paragraph"
+ },
+ "stmt_deps": [
+  "def-pur-diagonal-dualizing-data",
+  "def-pur-conventions"
+ ],
+ "proof": [
+  {
+   "text": "Construct the Tate normal form privately by induction on d: the zero tensor is the degree-zero coefficient unit and shift zero; at a successor, flatness of the finite Tate sheaf identifies derived tensor with ordinary tensor, the finite Tate product combines twists d and 1, and derivedTensorShiftIso adds the shifts. This identifies diagonalTwistEtale X d with the single finite Tate sheaf shifted by 2d. Transport the resulting upper bound and lower bound along this isomorphism and e to obtain source <= -2d and target >= -2d.",
+   "uses": [
+    "def-coefficient-twists-detailed",
+    "lem-asd-finite-etale-twist-line",
+    "lem-asd-etale-finite-twist-pullback",
+    "lem-amb-affine-trace-right-normal-form"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "At each point apply the proved Smooth.exists_etale_to_affineSpace to choose affine opens U in X and V in Y and an etale map U to affine d-space over V. Compose with AffineSpace.map of V into Y and the inverse of affineTraceAffineSpaceIso Y d. The source U is affine, hence separated absolutely, so this coordinate morphism is separated without assuming Y separated. It is quasi-compact because U is Noetherian. The projection compatibility gives q p = j f; the separated finite-type composites over the Noetherian target admit compactifications. The chosen U cover X, including empty X.",
+   "uses": [
+    "lem-sc-standard-smooth-local-relative-dimension",
+    "lem-sc-standard-smooth-etale-polynomial-chart",
+    "def-sbc-affine-space",
+    "def-weil-open-immersion",
+    "def-amb-affine-trace-tower"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Choose t,D using exists_ordinaryFiniteP1Adjunction, with the positive exponent and finite coefficient ring, and N using nonempty_etaleCompactSupportNormalization. Apply both normalization predicates to the same t,D,N,U,j,q and factorization equality. Their right sides are identical. Cancel the isomorphism diagonalEtaleLocality N j f to get equality of the pullbacks of the two inverse orientations.",
+   "uses": [
+    "lem-asd-ordinary-finite-p1-adjunction",
+    "lem-asd-etale-compact-support-normalization",
+    "lem-asd-tensor-mate-etale-precomp",
+    "def-coefficient-twists-detailed"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The private map_eq_of_cover proves the required equality test directly. DerivedCategory.homologyFunctor_map_bijective_of_isLE_of_isGE makes H^(-2d) injective on these Hom sets. The canonical left-derived/exact pullback isomorphism and mapDerivedCategoryHomologyFunctorIso transport each local equality to equality of restricted cohomology maps. Inverse image on the covering family jointly reflects sheaf isomorphisms and preserves equalizers, hence is jointly faithful. Thus the cohomology maps agree, and injectivity gives e.inv=e prime.inv. Iso.ext applied to the inverse isomorphisms and symmetry gives e=e prime. No gluing existence theorem or general faithfulness of derived restriction is used.",
+   "uses": [
+    "lem-etale-sheaf-jointly-surjective-conservative"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-coefficient-twists-detailed",
+  "lem-asd-finite-etale-twist-line",
+  "lem-asd-etale-finite-twist-pullback",
+  "lem-amb-affine-trace-right-normal-form",
+  "lem-sc-standard-smooth-local-relative-dimension",
+  "lem-sc-standard-smooth-etale-polynomial-chart",
+  "def-sbc-affine-space",
+  "def-weil-open-immersion",
+  "def-amb-affine-trace-tower",
+  "lem-asd-ordinary-finite-p1-adjunction",
+  "lem-asd-etale-compact-support-normalization",
+  "lem-asd-tensor-mate-etale-precomp",
+  "lem-etale-sheaf-jointly-surjective-conservative"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "group": "B4",
+  "date": "2026-10-25",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-orientation/thm-pur-diagonal-dualizing-object.proof.md",
+  "place": "Canonicity paragraph, with direct cohomology equality detection on smooth coordinate opens",
+  "note": "Complete Lean proof, with private proved Tate-normal-form and cover-equality helpers. The cohomology argument follows the existing proved helper map_eq_of_cover in Sheaf.AlgebraicGeometry.BundleSectionOrientationMapExt, but imports only its underlying general tools."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Compatible isomorphisms between shifted sheaves glue uniquely over a Zariski open cover",
+   "results": "8 hits: TopCat.Sheaf.existsUnique_gluing and variants, and TopCat.Sheaf.interUnionPullbackConeLift. Read signatures: gluing sections of topological sheaves, not maps of derived etale module objects or exceptional orientations. Reuse the project degree-zero derived-map gluing interface.",
+   "date": "2026-10-25",
+   "verdict": "no matching smooth-purity or normalized derived-map statement"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An isomorphism of shifted sheaves is uniquely determined by its restrictions to an etale covering",
+   "results": "8 hits: Functor.IsCoverDense.sheafIso, isoOver, sheafIso_hom_val, Types.sheafIso, Types.isoOver, Types.sheafIso_hom_val, iso_of_restrict_iso and presheafIso. Their types concern restriction along dense subsite functors, not exceptional orientations or shifted derived objects. Project search found EtaleSheafHomFamilyGluing and DegreeZeroDerivedMapGluing as the underlying tools, but no lemma for the present diagonal normalization predicate independent of its existence theorem.",
+   "date": "2026-10-25",
+   "verdict": "no match; reuse existing sheaf and degree-zero gluing tools"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Smooth, CategoryTheory.Iso",
+   "results": "0 hits. The source smooth purity Nonempty iso has no prescribed normalization and assumes absolutely separated base; it does not replace this argument.",
+   "date": "2026-10-25",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "DiagonalOrientationNormalization|diagonalOrdinaryDualizing|diagonalOrientationRefinement",
+   "results": "0 Mathlib hits. rg of both library roots finds the definitions in PurityDiagonalDualizingObject and chartOrdinaryOrientation in DiagonalDncChartNormalization. The latter is selected from the present existence theorem, hence cannot be used in its proof. Blueprint search for diagonal orientation found only det-sp-orientation-charts, det-sp-orientation-vector-bundle and composition/base-change descendants, which also depend on this orientation; degree zero gluing returned zero blueprint hits.",
+   "date": "2026-10-25",
+   "verdict": "no duplicate independent assertion"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.PurityDiagonalDualizingObject",
+  "date": "2026-10-25",
+  "group": "K3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-pur-diagonal-dualizing-object",
+   "place": "Steps 1--2 and combining/canonicity paragraph",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-thm-smooth-purity",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.DiagonalOrdinaryOrientationRigidity",
+  "file": "lean/Sheaf/Paper/DiagonalOrdinaryOrientationRigidity.lean",
+  "declaration": "WeilConjectures.PurityFiniteSetting.diagonalOrdinaryOrientationRigidity",
+  "statement": "theorem diagonalOrdinaryOrientationRigidity (P : PurityFiniteSetting.{u})\n    {X Y : Scheme.{u}} (d : ℕ) (f : X ⟶ Y)\n    [IsSeparated f] [LocallyOfFiniteType f] [QuasiCompact f]\n    [SmoothOfRelativeDimension d f]\n    [IsNoetherian X] [IsNoetherian Y] [HasCompactification f]\n    (aY : Y ⟶ Spec (.of P.field.k)) [LocallyOfFiniteType aY] [QuasiCompact aY]\n    (e e' : P.diagonalOrdinaryDualizing f ≅ P.diagonalTwistEtale X d)\n    (he : P.DiagonalOrientationNormalization d f aY e)\n    (he' : P.DiagonalOrientationNormalization d f aY e') : e = e'",
+  "branch": "sheaf-dag",
+  "by": "K3",
+  "date": "2026-10-25"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "import_flags": [],
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-2a76a",
+  "group": "K3",
+  "result": "fix",
+  "landing": "20261025T101229-L-3673535",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B4",
+  "result": "pass",
+  "landing": "20261025T142836-L-793396",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

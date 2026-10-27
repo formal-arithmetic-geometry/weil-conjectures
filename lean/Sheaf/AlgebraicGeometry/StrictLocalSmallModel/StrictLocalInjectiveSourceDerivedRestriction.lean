@@ -31,7 +31,7 @@ set_option backward.defeqAttrib.useBackward true in
 set_option backward.isDefEq.respectTransparency true in
 /-- The germ leg and derived mate agree with restriction of stage hypercohomology.
 This identity stops before replacing derived restriction by termwise restriction:
-that replacement is the separate theorem `injectiveSections_strictLocal_comparison`.
+that replacement is the separate theorem `smallModel_injectiveSections_strictLocal_comparison`.
 Source: Stacks Project, Tags 03Q8 and 03Q9, final injective-complex paragraph.
 (blueprint: lem-weil-pbc-strict-local-injective-source-derived-restriction).
 
@@ -129,7 +129,7 @@ theorem smallModel_strictLocalInjectiveSourceIso_derivedRestriction {X S : Schem
     simp only [Category.assoc]
     have hm := smallModel_strictLocalComplexSectionRestriction_mate f s K n Q J q i
     erw [hm]
-    have h := (injectiveSections_strictLocal_comparison f s K n Q J q).2.2 i
+    have h := (smallModel_injectiveSections_strictLocal_comparison f s K n Q J q).2.2 i
     rw [h]
     delta sourceLocalizedSectionsIso smallModel_strictLocalInjectiveSourceIso
     simp only [Iso.trans_hom, Iso.symm_hom, Functor.mapIso_hom, Category.assoc]

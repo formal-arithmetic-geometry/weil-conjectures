@@ -1,0 +1,228 @@
+{
+ "id": "lem-zl-finite-separable-tensor-primitive-presentation",
+ "kind": "statement",
+ "title": "Primitive-element polynomial presentation after field base change",
+ "statement": "Let $K/k$ and $E/k$ be field extensions [def-pc-field-extension], with $E/k$ finite separable algebraic [def-weil-pbc-separable-algebraic-extension]; finite means finite-dimensional as a $k$-vector space [def-weil-vector-space-dimension]. There exist $\\alpha\\in E$ and $P\\in k[T]$ [def-weil-polynomial-ring] such that $E=k(\\alpha)$, $P$ is the minimal polynomial of $\\alpha$ over $k$, $P$ is monic and irreducible, and $\\deg P\\geq1$. Write $P_K$ for its coefficientwise image in $K[T]$ [def-weil-coefficientwise-ring-hom-map]. There is a $K$-algebra isomorphism $\\Phi:K\\otimes_k E\\xrightarrow{\\sim}K[T]/(P_K)$, where the tensor algebra [def-weil-pbc-module-tensor-product] has multiplication $(a\\otimes e)(b\\otimes f)=ab\\otimes ef$, and $(P_K)$ is the ideal of multiples of $P_K$. For all $a\\in K$ and $g\\in k[T]$, $\\Phi(a\\otimes g(\\alpha))=[a g_K(T)]$, where $g_K$ is the coefficientwise image of $g$. Its inverse sends every coefficient class $[a]$ to $a\\otimes1$ and $[T]$ to $1\\otimes\\alpha$.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tag 037P (lemma-field-extension-geometrically-irreducible), proof, primitive element, minimal polynomial and displayed tensor-quotient identification (old steps 2 and 3)"
+ },
+ "stmt_deps": [
+  "def-pc-field-extension",
+  "def-weil-pbc-separable-algebraic-extension",
+  "def-weil-vector-space-dimension",
+  "def-weil-polynomial-ring",
+  "def-weil-coefficientwise-ring-hom-map",
+  "def-weil-pbc-module-tensor-product"
+ ],
+ "proof": [
+  {
+   "text": "Apply [lem-weil-pbc-finite-separable-extension-primitive-element] to the finite separable extension $E/k$, obtaining $\\alpha$ with $E=k(\\alpha)$. Every element of $E$ is algebraic by [def-weil-pbc-separable-algebraic-extension]; take $P$ to be the minimal polynomial of $\\alpha$. It is monic by the minimal-polynomial definition. Explicitly, if $P=uv$ with both factors nonunits, both have positive degree smaller than $\\deg P$; the field identity $0=P(\\alpha)=u(\\alpha)v(\\alpha)$ forces one factor to vanish at $\\alpha$, contradicting minimality. Thus $P$ is irreducible, consistently with the characterization in the cited statement. By [lem-weil-pbc-minimal-polynomial-quotient-field-iso], $\\deg P\\geq1$ and evaluation induces a $k$-algebra isomorphism $e:k[T]/(P)\\to E$, $[g]\\mapsto g(\\alpha)$. In particular every element of $E$ is $g(\\alpha)$ for some $g\\in k[T]$.",
+   "uses": [
+    "lem-weil-pbc-finite-separable-extension-primitive-element",
+    "def-weil-pbc-separable-algebraic-extension",
+    "lem-weil-pbc-minimal-polynomial-quotient-field-iso"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/fields.tex",
+    "place": "Tag 030N (lemma-primitive-element), moreover clause; Tag 09G1 (lemma-field-extension-generated-by-one-element), algebraic case; Tag 09GN (lemma-degree-minimal-polynomial), proof and preceding minimal-polynomial paragraph"
+   }
+  },
+  {
+   "text": "Put $B=K[T]/(P_K)$ and $z=[T]\\in B$, with its coefficient $K$-algebra structure. If $P=\\sum_i c_iT^i$, then $\\sum_i[c_i]z^i=[P_K]=0$, so $z$ is a root of $P$ in the $k$-algebra $B$. Apply [lem-asd-polynomial-quotient-hom-equivalence] with $R=k$, $C=B$, $f=P$ to obtain $u:k[T]/(P)\\to B$ satisfying $u([g])=[g_K]$. The composite $j=u\\circ e^{-1}:E\\to B$ is a $k$-algebra homomorphism and satisfies $j(g(\\alpha))=[g_K]$ for every $g\\in k[T]$.",
+   "uses": [
+    "lem-asd-polynomial-quotient-hom-equivalence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 037P (lemma-field-extension-geometrically-irreducible), proof, displayed tensor-quotient identification; explicit universal-property assembly by Q54"
+   }
+  },
+  {
+   "text": "By clause (1) of [lem-weil-pbc-algebra-tensor-pushout-universal-property], $A=K\\otimes_k E$ is a commutative algebra with $(a\\otimes e)(b\\otimes f)=ab\\otimes ef$, with coefficient map $a\\mapsto a\\otimes1$ and right inclusion $e\\mapsto1\\otimes e$. Apply [lem-weil-pbc-algebra-tensor-base-change-universal-property] with $R=k$, $S=K$, algebra $E$ and target $B$ to the map $j$ of step 2. It gives a $K$-algebra homomorphism $\\Phi:A\\to B$ satisfying $\\Phi(a\\otimes g(\\alpha))=[a]\\,j(g(\\alpha))=[a g_K]$. In particular $\\Phi(1\\otimes\\alpha)=z$.",
+   "uses": [
+    "lem-weil-pbc-algebra-tensor-pushout-universal-property",
+    "lem-weil-pbc-algebra-tensor-base-change-universal-property"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 037P (lemma-field-extension-geometrically-irreducible), proof, displayed tensor-quotient identification; explicit universal-property assembly by Q54"
+   }
+  },
+  {
+   "text": "Let $t=1\\otimes\\alpha\\in A$. The right inclusion $E\\to A$ is a $k$-algebra homomorphism by [lem-weil-pbc-algebra-tensor-pushout-universal-property]. For $P=\\sum_i c_iT^i$ this gives $P_K(t)=\\sum_i(c_i\\otimes1)(1\\otimes\\alpha^i)=\\sum_i1\\otimes c_i\\alpha^i=1\\otimes P(\\alpha)=0$; the middle identity uses the balancing relation defining the tensor product. Apply [lem-asd-polynomial-quotient-hom-equivalence] with $R=K$, $C=A$, $f=P_K$ and root $t$. It gives a $K$-algebra homomorphism $\\Psi:B\\to A$ with $\\Psi([\\sum_i a_iT^i])=\\sum_i(a_i\\otimes1)t^i$. Consequently $\\Psi([a])=a\\otimes1$ and $\\Psi(z)=1\\otimes\\alpha$.",
+   "uses": [
+    "lem-weil-pbc-algebra-tensor-pushout-universal-property",
+    "lem-asd-polynomial-quotient-hom-equivalence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 037P (lemma-field-extension-geometrically-irreducible), proof, displayed tensor-quotient identification; explicit universal-property assembly by Q54"
+   }
+  },
+  {
+   "text": "For every $g=\\sum_i c_iT^i\\in k[T]$, the formulas above give $\\Psi([g_K])=\\sum_i(c_i\\otimes1)t^i=1\\otimes g(\\alpha)$. Thus $\\Psi\\Phi$ and $\\mathrm{id}_A$ have the same restrictions to $E$, since step 1 represents every element as $g(\\alpha)$. Uniqueness in [lem-weil-pbc-algebra-tensor-base-change-universal-property] implies $\\Psi\\Phi=\\mathrm{id}_A$. Also $\\Phi\\Psi(z)=\\Phi(t)=z$, so uniqueness in [lem-asd-polynomial-quotient-hom-equivalence], now for $R=K$, $C=B$ and $f=P_K$, gives $\\Phi\\Psi=\\mathrm{id}_B$. Hence $\\Phi$ is the required $K$-algebra isomorphism with inverse $\\Psi$ and all the asserted formulas.",
+   "uses": [
+    "lem-weil-pbc-algebra-tensor-base-change-universal-property",
+    "lem-asd-polynomial-quotient-hom-equivalence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 037P (lemma-field-extension-geometrically-irreducible), proof, displayed tensor-quotient identification; explicit universal-property assembly by Q54"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-finite-separable-extension-primitive-element",
+  "def-weil-pbc-separable-algebraic-extension",
+  "lem-weil-pbc-minimal-polynomial-quotient-field-iso",
+  "lem-asd-polynomial-quotient-hom-equivalence",
+  "lem-weil-pbc-algebra-tensor-pushout-universal-property",
+  "lem-weil-pbc-algebra-tensor-base-change-universal-property"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tag 037P (lemma-field-extension-geometrically-irreducible), proof: expanded the tensor-quotient identification using existing universal-property Mathlib leaves"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A finite separable field extension has a monic irreducible polynomial presentation whose scalar extension to any field K is K tensor E isomorphic to K[X] modulo the mapped polynomial",
+   "results": "Hits: Algebra.Etale.iff_exists_algEquiv_prod, Algebra.IsSeparable, IsGalois.of_separable_splitting_field_aux, Field.primitive_element_iff_algHom_eq_of_eval, Polynomial.lift_of_splits, Field.primitive_element_iff_algHom_eq_of_eval', AlgebraicClosure.Monics.map_eq_prod, Polynomial.Separable.map_irreducible_of_isPurelyInseparable.  Primitive-element, polynomial scalar-extension and tensor-quotient tools give parts of this statement. The presentation, principal-ideal identification, and formulas require their composition; no single theorem or one-line specialization supplies this full assertion. Read tensorQuotientEquiv and polyEquivTensor signatures.",
+   "date": "2026-10-22",
+   "verdict": "no match",
+   "digest": "ed6fcf2558b6947a"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Every finite separable field extension E over k has a primitive element alpha with monic irreducible minimal polynomial P and an isomorphism K tensor k E to K[X] modulo P mapped to K for every field extension K",
+   "results": "Hits: Field.exists_primitive_element, Field.exists_primitive_element_of_finite_top, Field.exists_primitive_element_iff_finite_intermediateField, Field.primitive_element_iff_algHom_eq_of_eval, Field.exists_primitive_element_of_finite_intermediateField, Field.exists_primitive_element_of_finite_bot, Field.primitive_element_iff_minpoly_natDegree_eq, Field.primitive_element_iff_algHom_eq_of_eval'.  Primitive-element, polynomial scalar-extension and tensor-quotient tools give parts of this statement. The presentation, principal-ideal identification, and formulas require their composition; no single theorem or one-line specialization supplies this full assertion. Read tensorQuotientEquiv and polyEquivTensor signatures.",
+   "date": "2026-10-22",
+   "verdict": "no match",
+   "digest": "ac57a1ed332ed51c"
+  },
+  {
+   "tool": "loogle",
+   "query": "Algebra.TensorProduct, AdjoinRoot",
+   "results": "Hits: . loogle: unknown identifier 'Algebra.TensorProduct' Primitive-element, polynomial scalar-extension and tensor-quotient tools give parts of this statement. The presentation, principal-ideal identification, and formulas require their composition; no single theorem or one-line specialization supplies this full assertion. Read tensorQuotientEquiv and polyEquivTensor signatures.",
+   "date": "2026-10-22",
+   "verdict": "no match",
+   "digest": "4f53cda18c2baa0c"
+  },
+  {
+   "tool": "loogle",
+   "query": "TensorProduct, Polynomial",
+   "results": "Hits: Polynomial.X_pow_smul_rTensor_monomial, PolyEquivTensor.invFun, PolyEquivTensor.equiv, polyEquivTensor, PolyEquivTensor.toFunAlgHom, polyEquivTensor', PolyEquivTensor.toFunLinear, PolyEquivTensor.invFun_add.  Primitive-element, polynomial scalar-extension and tensor-quotient tools give parts of this statement. The presentation, principal-ideal identification, and formulas require their composition; no single theorem or one-line specialization supplies this full assertion. Read tensorQuotientEquiv and polyEquivTensor signatures.",
+   "date": "2026-10-22",
+   "verdict": "no match",
+   "digest": "4ba25400d3ae8300"
+  },
+  {
+   "tool": "grep",
+   "query": "tensor.*[Aa]djoinRoot|[Aa]djoinRoot.*[Tt]ensor|[Tt]ensor.*[Qq]uotient|[Qq]uotient.*[Tt]ensor",
+   "results": "Hits: Mathlib/RingTheory/QuotSMulTop.lean, Mathlib/RingTheory/QuotSMulTop.lean, Mathlib/RingTheory/QuotSMulTop.lean, Mathlib/RingTheory/QuotSMulTop.lean, Mathlib/RingTheory/QuotSMulTop.lean, Mathlib/RingTheory/PicardGroup.lean, Mathlib/RingTheory/Bialgebra/Quotient.lean, Mathlib/RingTheory/LocalRing/Module.lean.  Primitive-element, polynomial scalar-extension and tensor-quotient tools give parts of this statement. The presentation, principal-ideal identification, and formulas require their composition; no single theorem or one-line specialization supplies this full assertion. Read tensorQuotientEquiv and polyEquivTensor signatures.",
+   "date": "2026-10-22",
+   "verdict": "no match",
+   "digest": "53b766812d6b8d9f"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A simple algebraic field extension after base change has a polynomial quotient presentation sending a tensor g(alpha) to a times g(X)",
+   "results": "Hits: Algebra.Extension.baseChange, Algebra.SubmersivePresentation.baseChange, Algebra.Presentation.baseChange, Algebra.PreSubmersivePresentation.baseChange, Algebra.Generators.baseChange, Algebra.Presentation.baseChange_relation, Algebra.Presentation.tensorModelOfHasCoeffsInv, Algebra.IsStandardSmooth.baseChange.  Primitive-element, polynomial scalar-extension and tensor-quotient tools give parts of this statement. The presentation, principal-ideal identification, and formulas require their composition; no single theorem or one-line specialization supplies this full assertion. Read tensorQuotientEquiv and polyEquivTensor signatures.",
+   "date": "2026-10-22",
+   "verdict": "no match",
+   "digest": "0b287f3add28e4ca"
+  },
+  {
+   "tool": "grep",
+   "query": "[Aa]djoinRoot|[Tt]ensor",
+   "results": "Hits: Mathlib/RingTheory/Polynomial/Cyclotomic/Factorization.lean, Mathlib/RingTheory/Polynomial/Cyclotomic/Factorization.lean, Mathlib/RingTheory/Polynomial/Cyclotomic/Factorization.lean, Mathlib/RingTheory/Polynomial/Cyclotomic/Factorization.lean, Mathlib/RingTheory/Polynomial/Cyclotomic/Factorization.lean, Mathlib/RingTheory/Polynomial/UniversalFactorizationRing.lean, Mathlib/RingTheory/Polynomial/UniversalFactorizationRing.lean, Mathlib/RingTheory/Polynomial/UniversalFactorizationRing.lean.  Primitive-element, polynomial scalar-extension and tensor-quotient tools give parts of this statement. The presentation, principal-ideal identification, and formulas require their composition; no single theorem or one-line specialization supplies this full assertion. Read tensorQuotientEquiv and polyEquivTensor signatures.",
+   "date": "2026-10-22",
+   "verdict": "no match",
+   "digest": "41a116f6e6eab6bb"
+  },
+  {
+   "tool": "grep",
+   "query": "tensor.*[Aa]djoinRoot|[Aa]djoinRoot.*[Tt]ensor|exists_primitive_element",
+   "results": "{\"t\": \"2026-10-23T04:20:55Z\", \"tool\": \"grep\", \"query\": \"tensor.*[Aa]djoinRoot|[Aa]djoinRoot.*[Tt]ensor|exists_primitive_element\", \"sub\": \"\", \"ok\": true, \"n_hits\": 24, \"note\": \"\", \"top\": [\"Mathlib/FieldTheory/Isaacs.lean\", \"Mathlib/NumberTheory/NumberField/CanonicalEmbedding/ConvexBody.lean\", \"Mathlib/NumberTheory/NumberField/CanonicalEmbedding/ConvexBody.lean\", \"Mathlib/NumberTheory/NumberField/CanonicalEmbedding/ConvexBody.lean\", \"Mathlib/FieldTheory/IntermediateField/Adjoin/Basic.lean\", \"Mathlib/NumberTheory/NumberField/Discriminant/Basic.lean\", \"Mathlib/NumberTheory/NumberField/Discriminant/Basic.lean\", \"Mathlib/NumberTheory/NumberField/Discriminant/Basic.lean\"], \"digest\": \"22661b49d1ef95b6\"}. Read Field.exists_primitive_element (PrimitiveElement.lean:209), IntermediateField.adjoinRootEquivAdjoin (Adjoin/Basic.lean:396), AdjoinRoot.tensorAlgEquiv (AdjoinRoot.lean:1000) and formulas (:1020, :1023), quotient lifting (:307-342), and AlgHom.liftEquiv (TensorProduct/Basic.lean:775). These give separate pieces; tensorAlgEquiv has coefficient ring K tensor k rather than K. The complete assertion needs a chosen primitive element, quotient equivalence, base change and explicit comparison. No single hit or one-line specialization proves all clauses.",
+   "date": "2026-10-23",
+   "verdict": "no match",
+   "digest": "22661b49d1ef95b6"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Finite separable extension base change is isomorphic to polynomial quotient by the mapped minimal polynomial of a primitive element",
+   "results": "{\"t\": \"2026-10-23T04:20:56Z\", \"tool\": \"leansearch\", \"query\": \"Finite separable extension base change is isomorphic to polynomial quotient by the mapped minimal polynomial of a primitive element\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Field.powerBasisOfFiniteOfSeparable\", \"IntermediateField.adjoinRootEquivAdjoin\", \"Polynomial.Separable.map_irreducible_of_isPurelyInseparable\", \"Field.primitive_element_iff_algHom_eq_of_eval'\", \"IsSeparable.of_equiv_equiv\", \"minpoly.map_eq_of_isSeparable_of_isPurelyInseparable\", \"Algebra.FiniteType.baseChange\", \"IsAdjoinRoot.mkOfPrimitiveElement\"], \"digest\": \"55f41890d831fc13\"}. Read Field.exists_primitive_element (PrimitiveElement.lean:209), IntermediateField.adjoinRootEquivAdjoin (Adjoin/Basic.lean:396), AdjoinRoot.tensorAlgEquiv (AdjoinRoot.lean:1000) and formulas (:1020, :1023), quotient lifting (:307-342), and AlgHom.liftEquiv (TensorProduct/Basic.lean:775). These give separate pieces; tensorAlgEquiv has coefficient ring K tensor k rather than K. The complete assertion needs a chosen primitive element, quotient equivalence, base change and explicit comparison. No single hit or one-line specialization proves all clauses.",
+   "date": "2026-10-23",
+   "verdict": "no match",
+   "digest": "55f41890d831fc13"
+  },
+  {
+   "tool": "loogle",
+   "query": "TensorProduct, AdjoinRoot",
+   "results": "{\"t\": \"2026-10-23T04:20:56Z\", \"tool\": \"loogle\", \"query\": \"TensorProduct, AdjoinRoot\", \"sub\": \"\", \"ok\": true, \"n_hits\": 3, \"note\": \"\", \"top\": [\"AdjoinRoot.tensorAlgEquiv\", \"AdjoinRoot.tensorAlgEquiv_root\", \"AdjoinRoot.tensorAlgEquiv_of\"], \"digest\": \"34d79777917f3353\"}. Read Field.exists_primitive_element (PrimitiveElement.lean:209), IntermediateField.adjoinRootEquivAdjoin (Adjoin/Basic.lean:396), AdjoinRoot.tensorAlgEquiv (AdjoinRoot.lean:1000) and formulas (:1020, :1023), quotient lifting (:307-342), and AlgHom.liftEquiv (TensorProduct/Basic.lean:775). These give separate pieces; tensorAlgEquiv has coefficient ring K tensor k rather than K. The complete assertion needs a chosen primitive element, quotient equivalence, base change and explicit comparison. No single hit or one-line specialization proves all clauses.",
+   "date": "2026-10-23",
+   "verdict": "no match",
+   "digest": "34d79777917f3353"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A finite separable field extension has a primitive element and after any field base change its tensor product is a quotient by the mapped minimal polynomial with formulas on tensors",
+   "results": "{\"t\": \"2026-10-23T04:20:57Z\", \"tool\": \"leanfinder\", \"query\": \"A finite separable field extension has a primitive element and after any field base change its tensor product is a quotient by the mapped minimal polynomial with formulas on tensors\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Field.exists_primitive_element\", \"Field.primitive_element_iff_algHom_eq_of_eval\", \"Field.primitive_element_inf_aux\", \"Field.primitive_element_iff_algHom_eq_of_eval'\", \"IsGalois.of_separable_splitting_field_aux\", \"IsPurelyInseparable.exists_pow_mem_range_tensorProduct\", \"Algebra.IsSeparable\", \"Algebra.prod_embeddings_eq_finrank_pow\"], \"digest\": \"a75a72970ca0e0eb\"}. Read Field.exists_primitive_element (PrimitiveElement.lean:209), IntermediateField.adjoinRootEquivAdjoin (Adjoin/Basic.lean:396), AdjoinRoot.tensorAlgEquiv (AdjoinRoot.lean:1000) and formulas (:1020, :1023), quotient lifting (:307-342), and AlgHom.liftEquiv (TensorProduct/Basic.lean:775). These give separate pieces; tensorAlgEquiv has coefficient ring K tensor k rather than K. The complete assertion needs a chosen primitive element, quotient equivalence, base change and explicit comparison. No single hit or one-line specialization proves all clauses.",
+   "date": "2026-10-23",
+   "verdict": "no match",
+   "digest": "a75a72970ca0e0eb"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A simple algebraic extension E equals k alpha and K tensor E is isomorphic to K polynomial modulo the minimal polynomial with the root sent to one tensor alpha",
+   "results": "{\"t\": \"2026-10-23T04:22:12Z\", \"tool\": \"leanfinder\", \"query\": \"A simple algebraic extension E equals k alpha and K tensor E is isomorphic to K polynomial modulo the minimal polynomial with the root sent to one tensor alpha\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"IntermediateField.algHomAdjoinIntegralEquiv\", \"IntermediateField.adjoinRootEquivAdjoin\", \"IntermediateField.algHomAdjoinIntegralEquiv_symm_apply_gen\", \"IntermediateField.adjoinRootEquivAdjoin_symm_apply_gen\", \"AlgEquiv.adjoinSingletonEquivAdjoinRootMinpoly\", \"IntermediateField.adjoinRootEquivAdjoin_apply_root\", \"AlgEquiv.coe_adjoinSingletonEquivAdjoinRootMinpoly_symm\", \"IntermediateField.adjoin_minpoly_coeff_of_exists_primitive_element\"], \"digest\": \"33e3c0aa73f2c49f\"}. Read Field.exists_primitive_element (PrimitiveElement.lean:209), IntermediateField.adjoinRootEquivAdjoin (Adjoin/Basic.lean:396), AdjoinRoot.tensorAlgEquiv (AdjoinRoot.lean:1000) and formulas (:1020, :1023), quotient lifting (:307-342), and AlgHom.liftEquiv (TensorProduct/Basic.lean:775). These give separate pieces; tensorAlgEquiv has coefficient ring K tensor k rather than K. The complete assertion needs a chosen primitive element, quotient equivalence, base change and explicit comparison. No single hit or one-line specialization proves all clauses.",
+   "date": "2026-10-23",
+   "verdict": "no match",
+   "digest": "33e3c0aa73f2c49f"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-zl-field-extension-algebraically-closed-geometric",
+  "date": "2026-10-22",
+  "group": "Q150"
+ },
+ "chapter": "sec-deligne-laumon-general",
+ "unit": "sk-i-dl-general-real",
+ "blueprint": {
+  "from": {
+   "node": "lem-zl-bertini-finite-cover-curve",
+   "place": "Proof paragraph 3, geometric irreducibility input for Tag 0G4F; through lem-zl-geometric-irreducibility-separable, Tag 0G33 converse, and its Tag 037P input: primitive element, minimal polynomial and displayed tensor-quotient identification (old steps 2 and 3)",
+   "via": [
+    "lem-zl-field-extension-algebraically-closed-geometric",
+    "lem-zl-geometric-irreducibility-separable"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-zl-finite-separable-tensor-primitive-presentation",
+  "worker": "stage1",
+  "summary": "Preserved the mathematical statement. Reused six existing Mathlib leaves, with explicit construction of both algebra maps and verification of their inverse identities and all formulas. No new nodes, no new Mathlib leaves, no Lean writing or compilation. Checked the full project source for attachments, the DAG and blueprint for duplicates, and two Mathlib search phrasings.",
+  "blueprint": "Realizes the existing ancestry place: lem-zl-bertini-finite-cover-curve proof paragraph 3, geometric irreducibility input to Tag 0G4F, through lem-zl-geometric-irreducibility-separable and the Tag 037P input in lem-zl-field-extension-algebraically-closed-geometric. Specifically expands the primitive-element and tensor-quotient identification (old steps 2 and 3) without changing the unit's geometric route."
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q54-682a76293",
+  "group": "Q54",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q54-682a76293 (reviewer sub-agent of L); spot-checked: I read the item in full: 0 new nodes, and statement, stmt_deps and blueprint are byte-identical to the side-live base, where the item is unsplit. It is not superseded live and has no repair note, and no SGA is cited. The source is Stacks 037P (algebra.tex:11297-11320, label verified). The proof picks a primitive element and its minimal polynomial and asserts K⊗_k k' ≅ K[T]/(P) without argument; the delivery writes that identification out. All six cited nodes are existing Mathlib leaves (primitive element; separable/minpoly definition; F[T]/(μ) ≅ F(θ); the AdjoinRoot.liftAlgHom bijection for arbitrary commutative C; algebra tensor pushout (1)-(3); the AlgHom.liftEquiv base-change bijection), so the route is not an issue and no tool_uses are needed. Step 1: α and P are obtained correctly and irreducibility is argued. Step 2: z=[T] is a root of P, which gives u and j=u∘e⁻¹. Step 3: Φ(a⊗g(α))=[a g_K] via liftEquiv. Step 4: P_K(1⊗α)=0 is checked by coefficients, which gives Ψ([a])=a⊗1 and Ψ([T])=1⊗α. Step 5: both inverse identities follow from the injectivity halves of the two cited bijections, which are statement uniqueness, not a proof reference. Edge cases E=k, K=k, ℝ⊂ℂ with K=ℂ (non-domain quotient) and finite fields all hold. The duplicate scan found no node stating this presentation; lem-weil-pbc-finite-separable-tensor-field-reduced only proves a similar presentation inside a step. The sole citer, lem-zl-field-extension-algebraically-closed-geometric step 2, uses only stated clauses. Advisory: an inherited 2026-10-22 Loogle 'unknown identifier' search is recorded as 'no match' rather than 'unavailable' (B7); it is harmless because the corrected query ran. No changes made."
+ }
+}

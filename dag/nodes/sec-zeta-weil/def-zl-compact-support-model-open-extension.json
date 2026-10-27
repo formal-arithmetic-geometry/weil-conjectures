@@ -1,0 +1,192 @@
+{
+ "id": "def-zl-compact-support-model-open-extension",
+ "kind": "definition",
+ "title": "Ordinary open extension in the compact-support small-site module models",
+ "status": "split",
+ "import_flags": [],
+ "statement": "Let $A$ be any commutative ring in universe $t$, and let $j:U\\hookrightarrow X$ be an open immersion of schemes in universe $t$ [def-weil-open-immersion]. Use the equivalent small pro-etale models of [def-zl-compact-support-small-site-morphism]. Define sfCbcModelRing$(T,A)$ to be the constant sheaf of $\\operatorname{ULift}_{t+1}(A)$ on the model [def-weil-pbc-constant-sheaf], and write Mod for its category of sheaves of modules [def-weil-sheaf-of-modules-category]. Let sfCbcModelModules$(T,A)$ be the published exact site-transport equivalence: precomposition by AsSmall.down followed by restriction along the constant-ring isomorphism fixed by the sheafification unit on every constant section. Let sfCbcOpenExtension$(j,A)$ be ordinary module extension by zero: transport from $U$ to the localized ringed site of $X$ [def-pur-localized-ringed-site], apply the direct-sum extension presheaf [def-weil-extension-by-zero-presheaf], and apply module sheafification [def-weil-presheaf-modules-sheafification]. Define sfCbcModelExtension$(j,A)$ to be the composite of the inverse equivalence sfCbcModelModules$(U,A)^{-1}$, sfCbcOpenExtension$(j,A)$, and sfCbcModelModules$(X,A)$. This is only the specified ordinary functor; no completion, comparison isomorphism or extra adjunction choice is asserted. The definition includes the empty open and the zero ring.",
+ "stmt_deps": [
+  "def-weil-open-immersion",
+  "def-zl-compact-support-small-site-morphism",
+  "def-weil-pbc-constant-sheaf",
+  "def-weil-sheaf-of-modules-category",
+  "def-pur-localized-ringed-site",
+  "def-weil-extension-by-zero-presheaf",
+  "def-weil-presheaf-modules-sheafification"
+ ],
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-sf-cbc/fix-lem-exchanges.proof.md",
+  "place": "Step 1, extension-by-zero factor: agent-formulated ordinary small-model coordinates; Stacks 00VC, 03DI, 03DJ. Exact existing helpers in SfCbcExtensionZeroCompletion.lean:102,152,185,321, excluding the completion theorem."
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Normalized coefficient system admissibility with compatible etale origins and common cohomological and Tor bounds, and inverse of an isomorphism or zero",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"CategoryTheory.ProjectiveResolution.extEquivCohomologyClass_symm_zero\", \"module\": \"Mathlib.CategoryTheory.Abelian.Projective.Ext\", \"type\": \": (R.extEquivCohomologyClass (Y := Y) (n := n)).symm 0 = 0\", \"doc\": \"The inverse of the natural equivalence between the Ext group $\\\\operatorname{Ext}^n(X,Y)$ and the $n$-th cohomology class of the homomorphism complex maps the zero cohomology class to the zero element \"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.normalizationCoprodIso_inv_coprodDesc_fromNormalization\", \"module\": \"Mathlib.AlgebraicGeometry.Normalization\", \"type\": \":\\n  (f.normalizationCoprodIso e).inv ≫ coprod.desc (iU ≫ f).fromNormalization (iV ≫ f).fromNormalization =\\n    f.fromNormalization\", \"doc\": \"The composition of the inverse of the normalization coproduct isomorphism and the coproduct description morphism equals the canonical normalization morphism to $ Y $, i.e., $(f.\\\\text{normalizationCopr\"}\n  {\"name\": \"CategoryTheory.PreZeroHypercover.instIsIsoH₀Inv\", \"module\": \"Mathlib.CategoryTheory.Sites.Hypercover.Zero\", \"type\": \"{E F : PreZeroHypercover.{w} S} (e : E ≅ F) (i : F.I₀) : IsIso (e.inv.h₀ i)\", \"doc\": \"Given a category $\\\\mathcal{C}$, an object $S \\\\in \\\\mathcal{C}$, and an isomorphism $e: E \\\\cong F$ between pre-zero hypercovers $E$ and $F$ of $S$, the inverse of the morphism $e.h_0(i): E.X(i) \\\\to F.X(\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.inr_toNormalization_normalizationCoprodIso_inv\", \"module\": \"Mathlib.AlgebraicGeometry.Normalization\", \"type\": \": iV ≫ f.toNormalization ≫ (f.normalizationCoprodIso e).inv = (iV ≫ f).toNormalization ≫ coprod.inr\", \"doc\": \"The composition of the morphism $ i_V $ with the normalization map $ f.\\\\text{toNormalization} $ and the inverse of the normalization coproduct isomorphism equals the composition of $ i_V \\\\circ f $ wit\"}\n  {\"name\": \"CochainComplex.augmentTruncate_inv_f_zero\", \"module\": \"Mathlib.Algebra.Homology.Augment\", \"type\": \"(C : CochainComplex V ℕ) : (augmentTruncate C).inv.f 0 = 𝟙 (C.X 0)\", \"doc\": \"For any cochain complex $ C $, the inverse of the augmentation-truncation isomorphism at index $ 0 $ is the identity morphism $ \\\\text{id}_{C_0} $.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.instIsIsoToNormalizationOfIsIntegralHom\", \"module\": \"Mathlib.AlgebraicGeometry.Normalization\", \"type\": \"[IsIntegralHom f] : IsIso f.toNormalization\", \"doc\": \"For any integral morphism $ f: X \\to Y $ of schemes, the normalization morphism from $ X $ to the normalization of $ f $ is an isomorphism.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.normalizationCoprodIso_inv_coprodDesc_fromNormalization_assoc\", \"module\": \"Mathlib.AlgebraicGeometry.Normalization\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [inst : AlgebraicGeometry.QuasiCompact f]\\n  [inst_1 : AlgebraicGeometry.QuasiSeparated f] {U V : AlgebraicGeometry.Scheme} {iU : U ⟶ X} {iV : V ⟶ X}\\n  (e : CategoryTheory.Limits.IsColimit (CategoryTheory.Limits.BinaryCofan.mk iU iV))\\n  [inst_2 : Algebra\", \"doc\": \"For quasi-compact and quasi-separated morphisms of schemes, the composition of the inverse normalization coproduct isomorphism with the coproduct description from normalization is associative with res\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.inr_toNormalization_normalizationCoprodIso_inv_assoc\", \"module\": \"Mathlib.AlgebraicGeometry.Normalization\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [inst : AlgebraicGeometry.QuasiCompact f]\\n  [inst_1 : AlgebraicGeometry.QuasiSeparated f] {U V : AlgebraicGeometry.Scheme} {iU : U ⟶ X} {iV : V ⟶ X}\\n  (e : CategoryTheory.Limits.IsColimit (CategoryTheory.Limits.BinaryCofan.mk iU iV))\\n  [inst_2 : Algebra\", \"doc\": \"For quasi-compact and quasi-separated morphisms of schemes, the composition of the right inclusion into a binary coproduct with the inverse of the normalization coproduct isomorphism is associative wi\"}\n",
+   "date": "2026-10-24",
+   "verdict": "Existing specialized project declarations are reused; no Mathlib definition gives this exact recorded specialization."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Normalized derived coefficient system admissibility with finite Tor amplitude and an inverse morphism chosen as zero outside isomorphisms",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"DerivedCategory.IsLE\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/TStructure\", \"type\": \"{C : Type u} →\\n  [inst : CategoryTheory.Category.{v, u} C] →\\n    [inst_1 : CategoryTheory.Abelian C] → [inst_2 : HasDerivedCategory C] → DerivedCategory C → ℤ → Prop\", \"doc\": \"This proposition asserts that an object $ X $ in the derived category belongs to the subcategory $ \\\\mathcal{L}_n $, consisting of objects isomorphic to cochain complexes strictly supported in degrees \"}\n  {\"name\": \"DerivedCategory.left_fac_of_isStrictlyLE_of_isStrictlyGE\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/Fractions\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Abelian C]\\n  [inst_2 : HasDerivedCategory C] {X Y : CochainComplex C ℤ} (a b : ℤ) [X.IsStrictlyLE b] [Y.IsStrictlyGE a]\\n  [Y.IsStrictlyLE b] (f : DerivedCategory.Q.obj X ⟶ DerivedCategory.Q.obj Y),\\n  ∃ Y',\\n    ∃ (_ : Y\", \"doc\": \"Given cochain complexes $X$ and $Y$ with integer indices, where $X$ is strictly supported in degrees $\\\\leq b$, $Y$ is strictly supported in degrees $\\\\geq a$ and $\\\\leq b$, and a morphism $f: Q(X) \\\\to Q\"}\n  {\"name\": \"DerivedCategory.right_fac_of_isStrictlyLE_of_isStrictlyGE\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/Fractions\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Abelian C]\\n  [inst_2 : HasDerivedCategory C] {X Y : CochainComplex C ℤ} (a b : ℤ) [X.IsStrictlyGE a] [X.IsStrictlyLE b]\\n  [Y.IsStrictlyGE a] (f : DerivedCategory.Q.obj X ⟶ DerivedCategory.Q.obj Y),\\n  ∃ X',\\n    ∃ (_ : X\", \"doc\": \"Given cochain complexes $X$ and $Y$ in an abelian category $\\\\mathcal{C}$ with integer indices, where $X$ is strictly supported in degrees $\\\\geq a$ and $\\\\leq b$, and $Y$ is strictly supported in degree\"}\n  {\"name\": \"DerivedCategory.left_fac_of_isStrictlyGE\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/Fractions\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Abelian C]\\n  [inst_2 : HasDerivedCategory C] {X Y : CochainComplex C ℤ} (f : DerivedCategory.Q.obj X ⟶ DerivedCategory.Q.obj Y)\\n  (n : ℤ) [Y.IsStrictlyGE n],\\n  ∃ Y',\\n    ∃ (_ : Y'.IsStrictlyGE n),\\n      ∃ g s,\\n        \", \"doc\": \"Given cochain complexes $X$ and $Y$ in an abelian category $\\\\mathcal{C}$ with integer indices, a morphism $f: Q(X) \\\\to Q(Y)$ in the derived category, and an integer $n$ such that $Y$ is strictly suppo\"}\n  {\"name\": \"DerivedCategory.right_fac_of_isStrictlyLE\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/Fractions\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Abelian C]\\n  [inst_2 : HasDerivedCategory C] {X Y : CochainComplex C ℤ} (f : DerivedCategory.Q.obj X ⟶ DerivedCategory.Q.obj Y)\\n  (n : ℤ) [X.IsStrictlyLE n],\\n  ∃ X',\\n    ∃ (_ : X'.IsStrictlyLE n),\\n      ∃ s,\\n        ∃ \", \"doc\": \"Given cochain complexes $X$ and $Y$ in an abelian category $\\\\mathcal{C}$, and a morphism $f: Q(X) \\\\to Q(Y)$ in the derived category $D(\\\\mathcal{C})$, if $X$ is strictly supported above degree $n$ (i.e\"}\n  {\"name\": \"DerivedCategory.from_singleFunctor_obj_eq_zero_of_projective\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/Ext/EnoughProjectives\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Abelian C]\\n  [inst_2 : HasDerivedCategory C] {P : C} [CategoryTheory.Projective P] {L : CochainComplex C ℤ} {i : ℤ}\\n  (φ : DerivedCategory.Q.obj ((CochainComplex.singleFunctor C i).obj P) ⟶ DerivedCategory.Q.obj L),\\n  \", \"doc\": \"In an abelian category with enough projectives, for any projective object $ P $, cochain complex $ L $, and integer $ i $, every morphism in the derived category from the single complex concentrated a\"}\n  {\"name\": \"DerivedCategory.exists_iso_Q_obj_of_isGE_of_isLE\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/TStructure\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Abelian C]\\n  [inst_2 : HasDerivedCategory C] (X : DerivedCategory C) (a b : ℤ) [X.IsGE a] [X.IsLE b],\\n  ∃ K, ∃ (_ : K.IsStrictlyGE a) (_ : K.IsStrictlyLE b), Nonempty (X ≅ DerivedCategory.Q.obj K)\", \"doc\": \"For any object $X$ in the derived category of an abelian category $\\\\mathcal{C}$, if $X$ is cohomologically bounded below by integer $a$ and above by integer $b$ (i.e., $X \\\\in \\\\mathcal{G}_a \\\\cap \\\\mathc\"}\n  {\"name\": \"DerivedCategory.exists_iso_Q_obj_of_isLE\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/TStructure\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Abelian C]\\n  [inst_2 : HasDerivedCategory C] (X : DerivedCategory C) (n : ℤ) [hX : X.IsLE n],\\n  ∃ K, ∃ (_ : K.IsStrictlyLE n), Nonempty (X ≅ DerivedCategory.Q.obj K)\", \"doc\": \"For any object $X$ in the derived category of an abelian category $\\\\mathcal{C}$ that belongs to the left subcategory $\\\\mathcal{L}_n$ of the T-structure at degree $n$, there exists a cochain complex $K\"}\n",
+   "date": "2026-10-24",
+   "verdict": "Existing specialized project declarations are reused; no Mathlib definition gives this exact recorded specialization."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Geometric morphism and extension by zero on equivalent small models of the pro etale site",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"CategoryTheory.PreZeroHypercover.Hom.ext\", \"module\": \"Mathlib.CategoryTheory.Sites.Hypercover.Zero\", \"type\": \"∀ {C : Type u} {inst : CategoryTheory.Category.{v, u} C} {S : C} {E : CategoryTheory.PreZeroHypercover S}\\n  {F : CategoryTheory.PreZeroHypercover S} {x y : E.Hom F}, x.s₀ = y.s₀ → x.h₀ ≍ y.h₀ → x = y\", \"doc\": \"Two morphisms between pre-zero hypercovers of an object $S$ in a category $\\\\mathcal{C}$ are equal if their zeroth component maps $s_0$ coincide and their corresponding morphisms $h_0$ in $\\\\mathcal{C}$\"}\n  {\"name\": \"CategoryTheory.PreZeroHypercover.Hom.ext_iff\", \"module\": \"Mathlib.CategoryTheory.Sites.Hypercover.Zero\", \"type\": \"∀ {C : Type u} {inst : CategoryTheory.Category.{v, u} C} {S : C} {E : CategoryTheory.PreZeroHypercover S}\\n  {F : CategoryTheory.PreZeroHypercover S} {x y : E.Hom F}, x = y ↔ x.s₀ = y.s₀ ∧ x.h₀ ≍ y.h₀\", \"doc\": \"Two morphisms between pre-zero hypercovers of an object $S$ in a category $\\\\mathcal{C}$ are equal if and only if their zeroth component maps $s_0$ are equal and their corresponding zeroth component mo\"}\n  {\"name\": \"CategoryTheory.PreZeroHypercover.Hom.ext'\", \"module\": \"Mathlib.CategoryTheory.Sites.Hypercover.Zero\", \"type\": \"{E : PreZeroHypercover.{w} S} {F : PreZeroHypercover.{w'} S} {f g : E.Hom F} (hs : f.s₀ = g.s₀)\\n  (hh : ∀ i, f.h₀ i = g.h₀ i ≫ eqToHom (by rw [hs])) : f = g\", \"doc\": \"Given a category $\\\\mathcal{C}$, an object $S$, and two pre-zero hypercovers $E$ and $F$ of $S$, if two morphisms $f, g: E \\\\to F$ satisfy $f.s_0 = g.s_0$ and for every $i \\\\in I_0(E)$, the induced morph\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Etale\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Etale\", \"type\": \"(X : Scheme.{u}) : Type _\", \"doc\": \"The property of being an étale morphism to a fixed scheme $X$, defined as morphisms that are smooth of relative dimension 0, constructed via the morphism property lifting over $X$.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.smallGrothendieckTopologyOfLE_eq_toGrothendieck_smallPretopology\", \"module\": \"Mathlib.AlgebraicGeometry.Sites.Small\", \"type\": \"(hPQ : P ≤ Q) : S.smallGrothendieckTopologyOfLE hPQ = (S.smallPretopology P Q).toGrothendieck\", \"doc\": \"For morphism properties $P \\\\leq Q$ on schemes, the small Grothendieck topology on $\\\\text{Over}_Q(S)$ induced by the forgetful functor to $\\\\text{Over}_P(S)$ coincides with the Grothendieck topology gen\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.smallEtaleTopology\", \"module\": \"Mathlib.AlgebraicGeometry.Sites.Etale\", \"type\": \"(X : Scheme.{u}) : GrothendieckTopology X.Etale\", \"doc\": \"For a scheme $X$, the Grothendieck topology on the category of étale morphisms to $X$, constructed by inducing the standard Grothendieck topology on the over category via the forgetful functor. Coveri\"}\n  {\"name\": \"CategoryTheory.PreZeroHypercover.Hom.ext'_iff\", \"module\": \"Mathlib.CategoryTheory.Sites.Hypercover.Zero\", \"type\": \"{E : PreZeroHypercover.{w} S} {F : PreZeroHypercover.{w'} S} {f g : E.Hom F} :\\n  f = g ↔ ∃ (hs : f.s₀ = g.s₀), ∀ i, f.h₀ i = g.h₀ i ≫ eqToHom (by rw [hs])\", \"doc\": \"For pre-zero hypercovers $E$ and $F$ of an object $S$ in a category $\\\\mathcal{C}$, two morphisms $f, g: E \\\\to F$ are equal if and only if their zeroth component maps $f.s_0 = g.s_0$ and for every elem\"}\n  {\"name\": \"CategoryTheory.PreZeroHypercover.fromShrink\", \"module\": \"Mathlib.CategoryTheory.Sites.Hypercover.Zero\", \"type\": \"{S : C} (E : PreZeroHypercover.{w} S) : E.shrink.Hom E\", \"doc\": \"Given a pre-zero hypercover $ E $ of an object $ S $ in a category $ \\\\mathcal{C} $, this constructs a morphism from the shrunken hypercover $ E.\\text{shrink} $ to $ E $ by defining: a function $ s_0 $ \"}\n",
+   "date": "2026-10-24",
+   "verdict": "Existing specialized project declarations are reused; no Mathlib definition gives this exact recorded specialization."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "canonical geometric morphism and extension by zero on equivalent small models of the pro etale site",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"Condensed.lanPresheafExt\", \"module\": \"Mathlib/Condensed/Discrete/Colimit\", \"type\": \"{F G : CategoryTheory.Functor Profiniteᵒᵖ (Type (u + 1))} →\\n  (FintypeCat.toProfinite.op.comp F ≅ FintypeCat.toProfinite.op.comp G) →\\n    (Condensed.lanPresheaf F ≅ Condensed.lanPresheaf G)\", \"doc\": \"Given presheaves $ F, G : \\text{Profinite}^\\\\text{op} \\\\to \\\\text{Type} $ and an isomorphism $ i : \\\\text{toProfinite}^\\\\text{op} \\\\circ F \\\\cong \\\\text{toProfinite}^\\\\text{op} \\\\circ G $, the left Kan extension\"}\n  {\"name\": \"LightCondensed.lanPresheafExt\", \"module\": \"Mathlib/Condensed/Discrete/Colimit\", \"type\": \"{F G : CategoryTheory.Functor LightProfiniteᵒᵖ (Type u)} →\\n  (FintypeCat.toLightProfinite.op.comp F ≅ FintypeCat.toLightProfinite.op.comp G) →\\n    (LightCondensed.lanPresheaf F ≅ LightCondensed.lanPresheaf G)\", \"doc\": \"This definition shows that the `lanPresheaf` construction is functorial. Given two presheaves $F, G: \\\\mathbf{LightProfinite}^{\\\\text{op}} \\\\to \\\\mathbf{Type}_u$, a natural isomorphism $i: F \\\\circ \\\\texttt\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Etale.forget\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"(X : AlgebraicGeometry.Scheme) → CategoryTheory.Functor X.Etale (CategoryTheory.Over X)\", \"doc\": \"The forgetful functor from the category of étale schemes over $X$ to the over category over $X$, which sends each étale morphism to its underlying morphism into $X$ and each commutative triangle of ét\"}\n  {\"name\": \"Condensed.lanSheafProfinite\", \"module\": \"Mathlib/Condensed/Discrete/Colimit\", \"type\": \"Type (u + 1) → CategoryTheory.Sheaf (CategoryTheory.coherentTopology Profinite) (Type (u + 1))\", \"doc\": \"For a type $X$, this sheaf on the coherent Grothendieck topology of profinite spaces is constructed as the left Kan extension of the presheaf assigning locally constant functions $S \\to X$ to each prof\"}\n  {\"name\": \"Condensed.lanCondensedSet\", \"module\": \"Mathlib/Condensed/Discrete/Colimit\", \"type\": \"Type (u + 1) → CondensedSet\", \"doc\": \"For a type $X$, this constructs the condensed set obtained by applying the equivalence functor between sheaves on profinite spaces and condensed sets to the sheaf defined as the left Kan extension of \"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Etale.forgetFullyFaithful\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"(X : AlgebraicGeometry.Scheme) → (AlgebraicGeometry.Scheme.Etale.forget X).FullyFaithful\", \"doc\": \"The forgetful functor from the category of étale schemes over $X$ to the over category over $X$ is fully faithful, meaning it induces a bijection on hom-sets between any pair of objects.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.smallEtaleTopology\", \"module\": \"Mathlib/AlgebraicGeometry/Sites/Etale\", \"type\": \"(X : AlgebraicGeometry.Scheme) → CategoryTheory.GrothendieckTopology X.Etale\", \"doc\": \"For a scheme $X$, the Grothendieck topology on the category of étale morphisms to $X$, constructed by inducing the standard Grothendieck topology on the over category via the forgetful functor. Coveri\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.instCategoryEtale\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"(X : AlgebraicGeometry.Scheme) → CategoryTheory.Category.{u, u + 1} X.Etale\", \"doc\": \"For any scheme $X$, the collection of étale morphisms to $X$ forms a category, where objects are schemes equipped with an étale morphism to $X$ and morphisms are commutative triangles between such obj\"}\n",
+   "date": "2026-10-24",
+   "verdict": "Existing specialized project declarations are reused; no Mathlib definition gives this exact recorded specialization."
+  },
+  {
+   "tool": "grep",
+   "query": "SystemAdmissible|inverseOrZero|sfCbcModelExtension|sfCbcMorphism",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-24",
+   "verdict": "Existing specialized project declarations are reused; no Mathlib definition gives this exact recorded specialization."
+  },
+  {
+   "tool": "grep",
+   "query": "rg -n \"def (SystemAdmissible|Admissible|inverseOrZero)|def sfCbcMorphism|def sfCbcModelExtension\" lean/Sheaf",
+   "results": "lean/Sheaf/Paper/CoefficientGammaRepresentatives.lean:58:def Admissible (_S : SixFunctorOperationDatum D C E n hn) (s : PodCoefficientStage)\nlean/Sheaf/SixFunctors/GeneratorReductionStatement.lean:348:def inverseOrZero {C : Type v} [Category.{w} C] [HasZeroMorphisms C]\nlean/Sheaf/SixFunctors/GeneratorReductionStatement.lean:529:def SystemAdmissible (X : Scheme.{u}) (M : coefficientSequenceDerived l E X)\nlean/Sheaf/SixFunctors/GeneratorReductionStatement.lean:544:def Admissible {X : Scheme.{u}} (Syst : CoefficientDerivedSystemCalculus l E X)\nlean/Sheaf/SixFunctors/TensorHomTranspositionData.lean:277:def Admissible (s : Stage.{u} l) : Prop :=\nlean/Sheaf/Paper/SfCbcCompactSupportCompositionLimit.lean:122:def sfCbcMorphism {U V : Scheme.{t}} (u : U ⟶ V) :\nlean/Sheaf/Paper/SfCbcExtensionZeroCompletion.lean:321:def sfCbcModelExtension {U X : Scheme.{t}} (j : U ⟶ X) [IsOpenImmersion j]\nlean/Sheaf/Paper/CompletedUnitPullbackTower.lean:127:def Admissible (W : Scheme.{u}) : Prop :=\nlean/Sheaf/AlgebraicGeometry/AdmissibleCompletionPointSystem.lean:49:def AdmissibleBlowupIndex.ideal {A : Type u} [CommRing A] {I : Ideal A}\nlean/Sheaf/AlgebraicGeometry/AdmissibleCompletionPointSystem.lean:56:noncomputable def AdmissibleBlowupIndex.domination {A : Type u} [CommRing A] {I : Ideal A}\nlean/Sheaf/AlgebraicGeometry/AdmissibleModificationCohomologyPresentation.lean:171:def AdmissibleCompletionComparison.coefficientMap\nlean/Sheaf/AlgebraicGeometry/SpaceRelativeFlatModulePushout.lean:117:def AdmissibleTriple {S : Scheme.{u}} (D : Diagram S) (M : ModuleTriple D) : Prop :=\nlean/Sheaf/AlgebraicGeometry/AdmissibleModificationLimitSiteData.lean:43:def AdmissibleCentre {A : Type u} [CommRing A] (I : Ideal A) :=\nlean/Sheaf/AlgebraicGeometry/AdmissibleModificationLimitSiteData.lean:89:def AdmissibleToposCone.IsLimit {A : Type u} [CommRing A] {I : Ideal A}\nlean/Sheaf/AlgebraicGeometry/AdmissibleModificationLimitSiteData.lean:132:def AdmissibleLimitSite.inverseAb {A : Type u} [CommRing A] {I : Ideal A}\nlean/Sheaf/AlgebraicGeometry/AdmissibleModificationLimitSiteData.lean:143:def AdmissibleLimitSite.directComparison {A : Type u} [CommRing A] {I : Ideal A}\nlean/Sheaf/AlgebraicGeometry/AdmissibleModificationLimitSiteData.lean:159:def AdmissibleLimitSite.inverseComparison {A : Type u} [CommRing A] {I : Ideal A}\nlean/Sheaf/AlgebraicGeometry/AdmissibleModificationLimitSiteData.lean:176:def AdmissibleLimitSite.IsCoherent {A : Type u} [CommRing A] {I : Ideal A}\nlean/Sheaf/AlgebraicGeometry/AdmissibleModificationLimitSiteData.lean:193:def AdmissibleLimitSite.cone {A : Type u} [CommRing A] {I : Ideal A}\nlean/Sheaf/AlgebraicGeometry/AdmissibleModificationLimitSiteData.lean:212:def AdmissibleLimitSite.IsGeometricPoint {A : Type u} [CommRing A] {I : Ideal A}\n",
+   "date": "2026-10-24",
+   "verdict": "The project has the exact existing declarations, but no definition-node lean.declarations owns these helpers. Register existing declarations without copying them."
+  },
+  {
+   "tool": "grep",
+   "query": "rg -n \"SystemAdmissible|inverseOrZero|sfCbcModelExtension|sfCbcMorphism\" lean/WeilConjectures",
+   "results": "",
+   "date": "2026-10-24",
+   "verdict": "The project has the exact existing declarations, but no definition-node lean.declarations owns these helpers. Register existing declarations without copying them."
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rl \"sfCbcModelExtension|sfCbcMorphism|GeneratorReduction.Admissible\" dag/nodes (extended regexp; definition-owner records then inspected)",
+   "results": "dag/nodes/sec-six-functors/def-sf-integral-compactification-site-transport.json\ndag/nodes/sec-six-functors/lem-sf-integral-compactification-comparison-bridge.json\ndag/nodes/sec-six-functors/def-sf-integral-compactification-word-comparisons.json\ndag/nodes/sec-six-functors/lem-sf-constant-semilinear-generator-comparison.json\ndag/nodes/sec-six-functors/lem-sf-generator-reduction-coherence.json\ndag/nodes/sec-smooth-purity/lem-sf-cbc-compact-support-composition-limit.json\ndag/nodes/sec-smooth-purity/lem-sf-cbc-extension-zero-completion.json\n",
+   "date": "2026-10-24",
+   "verdict": "The project has the exact existing declarations, but no definition-node lean.declarations owns these helpers. Register existing declarations without copying them."
+  },
+  {
+   "tool": "grep",
+   "query": "tools/blueprint_refs.py search sfCbcModelExtension",
+   "results": "0 blueprint nodes match 'sfCbcModelExtension'\n",
+   "date": "2026-10-24",
+   "verdict": "The project has the exact existing declarations, but no definition-node lean.declarations owns these helpers. Register existing declarations without copying them."
+  },
+  {
+   "tool": "grep",
+   "query": "tools/blueprint_refs.py search GeneratorReduction.Admissible",
+   "results": "0 blueprint nodes match 'GeneratorReduction.Admissible'\n",
+   "date": "2026-10-24",
+   "verdict": "The project has the exact existing declarations, but no definition-node lean.declarations owns these helpers. Register existing declarations without copying them."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-zl-compact-support-realization-factor-normalization",
+  "date": "2026-10-24",
+  "group": "Q66"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "sk-thm-rationality",
+   "place": "Definition ownership for the normalized proper/open compact-support realization used in the unit's coefficient comparison.",
+   "via": [
+    "lem-zl-compact-support-realization-factor-normalization",
+    "lem-zl-proper-unit-condensed-realization",
+    "lem-zl-condensed-global-frobenius-comparison"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-zeta-weil",
+ "unit": "sk-thm-rationality",
+ "lean": {
+  "module": "Sheaf.Paper.SfCbcExtensionZeroCompletion",
+  "declaration": "AlgebraicGeometry.Scheme.sfCbcModelExtension",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.sfCbcModelRing",
+   "AlgebraicGeometry.Scheme.sfCbcModelModules",
+   "AlgebraicGeometry.Scheme.sfCbcOpenExtension",
+   "AlgebraicGeometry.Scheme.sfCbcModelExtension"
+  ],
+  "statement": "def sfCbcModelExtension {U X : Scheme.{t}} (j : U ⟶ X) [IsOpenImmersion j]\n    (A : Type t) [CommRing A] :\n    ConstantCompletion.Mod (sfCbcModelRing U A) ⥤\n      ConstantCompletion.Mod (sfCbcModelRing X A)",
+  "branch": "newtargets-dag",
+  "by": "Q66",
+  "date": "2026-10-24",
+  "existing": true,
+  "note": "Definition ownership requested in the return of immutable head 1042dcac4cf4. Registers these existing plain definitions without restating their containing theorem or duplicating Lean source."
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-9656ab4de",
+  "group": "Q66",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-9656ab4de",
+  "group": "Q66",
+  "result": "pass",
+  "note": "Re-delivery after the 1042dcac H2 RETURN. Lean diff: only owner imports and constantRing→Padic.coefficientExtensionIntegers (abbrev, defeq); main signature verbatim. stmt_deps drop theorem lem-sf-generator-reduction-coherence (kept in proof_deps) and add existing:true def owners def-zl-integral-generator-admissibility-inverse (Admissible/SystemAdmissible/inverseOrZero), def-zl-compact-support-small-site-morphism (sfCbcSite..sfCbcMorphism), def-zl-compact-support-model-open-extension (sfCbcModelRing/Modules/OpenExtension/ModelExtension), plus def-pur-completed-coefficient-presentation-transport (purCoefficientModel). New node statements match the side-live Lean bodies; signatures verbatim; all their stmt_deps exist; sources exist. Mathematics unchanged and re-checked: single ComparisonFamily normalization, q=L(b)u, both equalities, identity open, naturality, edge cases, universe u. Advisory: inverseOrZero already owned by def-sf-comparison-inverse-or-zero (Q07, on base) and def-sf-inverse-or-zero (Q58), so the new node is a third owner (no Lean dup; not fixable by S2 FIX); upstream unpinned sfCbcMorphism.algebra choice; empty Second reading section. No compile (nothing changed)."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F4",
+  "result": "pass",
+  "landing": "20261026T065626-L-3135916",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)",
+  "sorry_before": [
+   "AlgebraicGeometry.Scheme.sfCbcCompletedReductionIso_evaluation",
+   "AlgebraicGeometry.Scheme.sfCbcCompletionModelIso_existsUnique",
+   "AlgebraicGeometry.Scheme.sfCbcExtensionModel_existsUnique",
+   "AlgebraicGeometry.Scheme.sfCbcFiniteModelIso_existsUnique",
+   "AlgebraicGeometry.Scheme.sfCbcFiniteTensorHom_isIso",
+   "AlgebraicGeometry.Scheme.sfCbcFiniteUnderlyingHom_transition",
+   "AlgebraicGeometry.Scheme.sfCbcModelComplex_kflat",
+   "AlgebraicGeometry.Scheme.sfCbcOrdinaryTensorComparison_existsUnique",
+   "AlgebraicGeometry.Scheme.sfCbcRealizationExtensionIso_existsUnique",
+   "AlgebraicGeometry.Scheme.sfCbcRestrictExtensionIso_existsUnique",
+   "AlgebraicGeometry.Scheme.sfCbcTensorComparison_existsUnique"
+  ],
+  "sorry_after": [
+   "AlgebraicGeometry.Scheme.sfCbcCompletedReductionIso_evaluation",
+   "AlgebraicGeometry.Scheme.sfCbcCompletionModelIso_existsUnique",
+   "AlgebraicGeometry.Scheme.sfCbcFiniteModelIso_existsUnique",
+   "AlgebraicGeometry.Scheme.sfCbcFiniteTensorHom_isIso",
+   "AlgebraicGeometry.Scheme.sfCbcFiniteUnderlyingHom_transition",
+   "AlgebraicGeometry.Scheme.sfCbcOrdinaryTensorComparison_existsUnique",
+   "AlgebraicGeometry.Scheme.sfCbcRealizationExtensionIso_existsUnique",
+   "AlgebraicGeometry.Scheme.sfCbcRestrictExtensionIso_existsUnique",
+   "AlgebraicGeometry.Scheme.sfCbcTensorComparison_existsUnique"
+  ]
+ }
+}

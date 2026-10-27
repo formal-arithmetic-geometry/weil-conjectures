@@ -1,0 +1,254 @@
+{
+ "id": "lem-sf-tensor-square-mate-transfer",
+ "kind": "statement",
+ "title": "Mixed tensor-action squares transfer to counit-defined projection mates",
+ "statement": "Let $\\mathcal A,\\mathcal B,\\mathcal C,\\mathcal D$ be categories [def-nagata-category], each with a specified bifunctor denoted $\\otimes$. Give functors $P_r:\\mathcal C\\to\\mathcal A$, $P_p:\\mathcal D\\to\\mathcal B$ with adjunctions $P_r\\dashv R_r$, $P_p\\dashv R_p$, units $\\eta_r,\\eta_p$ and counits $\\varepsilon_r,\\varepsilon_p$; give functors $P_i:\\mathcal D\\to\\mathcal C$, $P_k:\\mathcal B\\to\\mathcal A$, $J:\\mathcal C\\to\\mathcal D$, $K:\\mathcal A\\to\\mathcal B$, and a specified natural identification $P_rP_i\\cong P_kP_p$. Supply natural tensor comparisons $\\mu_h:P_h(U\\otimes V)\\to P_hU\\otimes P_hV$ for $h=r,p$, and natural mixed action comparisons\n$$d_i(H,N):JH\\otimes N\\to J(H\\otimes P_iN),\\qquad d_k(M,V):KM\\otimes V\\to K(M\\otimes P_kV).$$\nLet $a:P_pJ\\to KP_r$ be a natural transformation satisfying, for every $H\\in\\mathcal C$, $N\\in\\mathcal D$,\n$$K(\\mu_r)a_{H\\otimes P_iN}P_p(d_i)=d_k(a_H\\otimes1_{P_pN})\\mu_p,$$\nunder the specified identification. No monoidal structure on $J,K$ is assumed: $d_i,d_k$ have the mixed domains displayed above. Define $g:JR_r\\to R_pK$ to be the proper-adjunction mate of $a$ [def-weil-pbc-adjunction-mate], namely $g=R_p(K\\varepsilon_r)R_p(aR_r)\\eta_pJR_r$. For $h=r,p$ define $\\pi_{h;M,Q}:R_hM\\otimes Q\\to R_h(M\\otimes P_hQ)$ as the $P_h\\dashv R_h$-transpose of $(\\varepsilon_{h,M}\\otimes1)\\mu_h$.\nFor every $M\\in\\mathcal A$, $N\\in\\mathcal D$, put $E=R_rM$, $X=P_iN$, $T=P_rX=P_kP_pN$, $Z=M\\otimes T$, and $c=(\\varepsilon_{r,M}\\otimes1_T)\\mu_r:P_r(E\\otimes X)\\to Z$. The two maps\n$$g_ZJ(\\pi_{r;M,X})d_i(E,N),\\qquad R_p(d_k(M,P_pN))\\pi_{p;KM,N}(g_M\\otimes1_N)$$\nfrom $JE\\otimes N$ to $R_pKZ$ have the same $P_p\\dashv R_p$-transpose, precisely\n$$K(c)a_{E\\otimes X}P_p(d_i(E,N)):P_p(JE\\otimes N)\\longrightarrow KZ.$$\nIn particular the two maps are equal, naturally in $M,N$. The assertion requires neither invertibility of $a,g,\\pi_h,\\mu_h,d_i,d_k$ nor any exactness, boundedness or Tor hypothesis. For unbounded ringed-site categories the counit-defined maps of [lem-weil-pbc-ringed-projection-mate-exact] are these $\\pi_h$.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 0B56, equation-projection-formula-map, and Tag 07A7, remark-base-change; agent mixed tensor-action mate calculation, returned lem-sf-proper-open-projection-mate steps 4–6 (not a theorem quoted verbatim from Stacks)."
+ },
+ "stmt_deps": [
+  "def-nagata-category",
+  "def-weil-pbc-adjunction-mate",
+  "lem-weil-pbc-ringed-projection-mate-exact"
+ ],
+ "proof": [
+  {
+   "text": "Write composition right to left and suppress only the specified natural identification $P_rP_i\\cong P_kP_p$. By [lem-weil-pbc-adjunction-of-natural-bijection], the inverse adjunction bijection sends $b:U\\to R_hV$ to $\\tau_h(b)=\\varepsilon_{h,V}P_h(b)$. Its naturality gives $\\tau_h(R_h(v)bu)=v\\tau_h(b)P_h(u)$. By [def-weil-pbc-adjunction-mate], $\\tau_p(g_V)=K(\\varepsilon_{r,V})a_{R_rV}$. By the stipulated definition of $\\pi_h$, $\\tau_h(\\pi_{h;V,Q})=(\\varepsilon_{h,V}\\otimes1_{P_hQ})\\mu_{h;R_hV,Q}$. These identities use only the given adjunctions, not any invertibility.",
+   "uses": [
+    "lem-weil-pbc-adjunction-of-natural-bijection",
+    "def-weil-pbc-adjunction-mate"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0B56, equation-projection-formula-map, and Tag 07A7, remark-base-change; agent mixed tensor-action mate calculation, returned lem-sf-proper-open-projection-mate steps 4–6 (not a theorem quoted verbatim from Stacks)."
+   }
+  },
+  {
+   "text": "Put $\\pi_r=\\pi_{r;M,X}$ and $d_i=d_i(E,N)$. The transpose of the first map is\n$$\\tau_p(g_ZJ(\\pi_r)d_i)=K(\\varepsilon_{r,Z})a_{R_rZ}P_pJ(\\pi_r)P_p(d_i)=K(\\varepsilon_{r,Z})K P_r(\\pi_r)a_{E\\otimes X}P_p(d_i).$$\nThe first equality is the mate transpose of Step 1 with precomposition; the second is naturality of $a$ at $\\pi_r:E\\otimes X\\to R_rZ$. The defining transpose of $\\pi_r$ says $\\varepsilon_{r,Z}P_r(\\pi_r)=c$. Functoriality of $K$ therefore makes this transpose exactly $K(c)a_{E\\otimes X}P_p(d_i)$.",
+   "uses": [
+    "lem-weil-pbc-adjunction-of-natural-bijection",
+    "def-weil-pbc-adjunction-mate"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0B56, equation-projection-formula-map, and Tag 07A7, remark-base-change; agent mixed tensor-action mate calculation, returned lem-sf-proper-open-projection-mate steps 4–6 (not a theorem quoted verbatim from Stacks)."
+   }
+  },
+  {
+   "text": "Abbreviate $V=P_pN$, $d_k=d_k(M,V)$ and $\\mu_p=\\mu_{p;JE,N}$. Taking the transpose of the second map, using [lem-weil-pbc-adjunction-of-natural-bijection] and the defining transpose of $\\pi_p$, gives\n$$\\tau_p\\bigl(R_p(d_k)\\pi_{p;KM,N}(g_M\\otimes1_N)\\bigr)=d_k(\\varepsilon_{p,KM}\\otimes1_V)\\mu_{p;R_pKM,N}P_p(g_M\\otimes1_N).$$\nNaturality of $\\mu_p$ in its first variable rewrites this as $d_k((\\varepsilon_{p,KM}P_p(g_M))\\otimes1_V)\\mu_p$. The mate identity [def-weil-pbc-adjunction-mate] at $M$ then rewrites it as\n$$d_k\\bigl((K(\\varepsilon_{r,M})a_E)\\otimes1_V\\bigr)\\mu_p.$$",
+   "uses": [
+    "lem-weil-pbc-adjunction-of-natural-bijection",
+    "def-weil-pbc-adjunction-mate"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0B56, equation-projection-formula-map, and Tag 07A7, remark-base-change; agent mixed tensor-action mate calculation, returned lem-sf-proper-open-projection-mate steps 4–6 (not a theorem quoted verbatim from Stacks)."
+   }
+  },
+  {
+   "text": "Naturality of the mixed comparison $d_k$ in its first variable, at $\\varepsilon_{r,M}:P_rE\\to M$, is precisely\n$$d_k(M,V)(K(\\varepsilon_{r,M})\\otimes1_V)=K(\\varepsilon_{r,M}\\otimes1_{P_kV})d_k(P_rE,V).$$\nSubstitute this in Step 3 and use bifunctoriality of $\\otimes$ to separate $K(\\varepsilon_{r,M})a_E$. The resulting expression is\n$$K(\\varepsilon_{r,M}\\otimes1_T)d_k(P_rE,V)(a_E\\otimes1_V)\\mu_p.$$\nThe hypothesized mixed tensor square at $H=E,N=N$ replaces its last three factors by $K(\\mu_{r;E,X})a_{E\\otimes X}P_p(d_i(E,N))$. Since $c=(\\varepsilon_{r,M}\\otimes1_T)\\mu_{r;E,X}$, functoriality of $K$ identifies the expression with $K(c)a_{E\\otimes X}P_p(d_i(E,N))$. This proves the specified common-transpose formula.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0B56, equation-projection-formula-map, and Tag 07A7, remark-base-change; agent mixed tensor-action mate calculation, returned lem-sf-proper-open-projection-mate steps 4–6 (not a theorem quoted verbatim from Stacks)."
+   }
+  },
+  {
+   "text": "The inverse hom bijection of [lem-weil-pbc-adjunction-of-natural-bijection] is injective. The two maps therefore agree by Steps 2 and 4. For completeness, the projection families used here are natural: if $m:M\\to M'$ and $q:Q\\to Q'$, naturality of the counit and $\\mu_h$ gives, writing $c_h(M,Q)=(\\varepsilon_{h,M}\\otimes1)\\mu_{h;R_hM,Q}$,\n$$c_h(M',Q')P_h(R_h(m)\\otimes q)=(m\\otimes P_h(q))c_h(M,Q).$$\nIndeed insert naturality of $\\mu_h$, then $m\\varepsilon_{h,M}=\\varepsilon_{h,M'}P_hR_h(m)$, and combine the two tensor factors by bifunctoriality. Naturality of the adjunction bijection transposes this equality to naturality of $\\pi_h$. The mate $g$ is natural by [def-weil-pbc-adjunction-mate]; all other comparisons are natural by hypothesis. Thus the equality is natural in $M,N$.",
+   "uses": [
+    "lem-weil-pbc-adjunction-of-natural-bijection",
+    "def-weil-pbc-adjunction-mate"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0B56, equation-projection-formula-map, and Tag 07A7, remark-base-change; agent mixed tensor-action mate calculation, returned lem-sf-proper-open-projection-mate steps 4–6 (not a theorem quoted verbatim from Stacks)."
+   }
+  },
+  {
+   "text": "For the unbounded ringed-site interpretation, [lem-weil-pbc-ringed-projection-mate-exact] specifies the natural transformation adjoint to $(\\varepsilon_E\\otimes1)\\mu_{RE,P}$. This is exactly the defining transpose of the present $\\pi_{h;E,P}$, so uniqueness in the bijection of [lem-weil-pbc-adjunction-of-natural-bijection] identifies the two maps. The cited statement permits arbitrary unbounded objects. Steps 1–5 only used naturality, bifunctoriality, adjunction bijections and the supplied mixed square. They neither invert any comparison nor use exactness, bounds or Tor amplitude, proving all the asserted scope clauses.",
+   "uses": [
+    "lem-weil-pbc-ringed-projection-mate-exact",
+    "lem-weil-pbc-adjunction-of-natural-bijection"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0B56, equation-projection-formula-map, and Tag 07A7, remark-base-change; agent mixed tensor-action mate calculation, returned lem-sf-proper-open-projection-mate steps 4–6 (not a theorem quoted verbatim from Stacks)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-adjunction-of-natural-bijection",
+  "def-weil-pbc-adjunction-mate",
+  "lem-weil-pbc-ringed-projection-mate-exact"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 0B56, equation-projection-formula-map, and Tag 07A7, remark-base-change; agent mixed tensor-action mate calculation, returned lem-sf-proper-open-projection-mate steps 4–6 (not a theorem quoted verbatim from Stacks)."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "a tensor compatible square of left adjoints has projection compatible adjunction mate by equal counit transposes",
+   "results": "8 hits; CategoryTheory.Adjunction.map_μ_comp_counit_app_tensor_assoc, CategoryTheory.Adjunction.map_μ_comp_counit_app_tensor, CategoryTheory.Adjunction.unit_app_tensor_comp_map_δ, CategoryTheory.mateEquiv_square, CategoryTheory.Adjunction.IsMonoidal.leftAdjoint_μ, CategoryTheory.Adjunction.unit_app_tensor_comp_map_δ_assoc, CategoryTheory.mateEquiv_apply, CategoryTheory.mateEquiv",
+   "date": "2026-10-22",
+   "verdict": "no match: candidates concern ordinary pullbacks, categorical mates or monoidal counits, not this mixed tensor-action square"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.mateEquiv_counit",
+   "results": "1 hits; CategoryTheory.mateEquiv_counit",
+   "date": "2026-10-22",
+   "verdict": "no match: candidates concern ordinary pullbacks, categorical mates or monoidal counits, not this mixed tensor-action square"
+  },
+  {
+   "tool": "grep",
+   "query": "mate.*[Pp]rojection|[Pp]rojection.*mate|frobeniusMorphism_mate",
+   "results": "3 hits; Mathlib/CategoryTheory/Monoidal/Closed/Functor.lean, Mathlib/CategoryTheory/Monoidal/Closed/Functor.lean, Mathlib/CategoryTheory/Monoidal/Closed/Functor.lean; searched Mathlib/CategoryTheory",
+   "date": "2026-10-22",
+   "verdict": "no match: candidates concern ordinary pullbacks, categorical mates or monoidal counits, not this mixed tensor-action square"
+  },
+  {
+   "tool": "leansearch",
+   "query": "mate natural transformation of monoidal pullback open extension preserves counit defined projection map",
+   "results": "8 hits; CategoryTheory.Adjunction.IsMonoidal.instIsMonoidalCounit, CategoryTheory.ChosenPullbacksAlong.cartesianMonoidalCategoryFst_mapPullbackAdj_counit_app, CategoryTheory.ChosenPullbacksAlong.cartesianMonoidalCategoryToUnit_mapPullbackAdj_counit_app, CategoryTheory.ChosenPullbacksAlong.fst', CategoryTheory.Limits.CategoricalPullback.natTrans_ext_iff, CategoryTheory.ChosenPullbacksAlong.cartesianMonoidalCategorySnd_mapPullbackAdj_counit_app, CategoryTheory.Over.η_pullback_left, CategoryTheory.Comon.Hom.hom",
+   "date": "2026-10-22",
+   "verdict": "no match: candidates concern ordinary pullbacks, categorical mates or monoidal counits, not this mixed tensor-action square"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "projection formula naturality for mates of tensor module functor transformations",
+   "results": "8 hits; CategoryTheory.tensorLeftHomEquiv_naturality, CategoryTheory.tensorRightHomEquiv_naturality, CategoryTheory.tensorLeftHomEquiv_symm_naturality, CategoryTheory.tensorRightHomEquiv_symm_naturality, CategoryTheory.frobeniusMorphism_mate, CategoryTheory.tensorRightHomEquiv_tensor, CategoryTheory.tensorLeftHomEquiv_tensor, ModuleCat.monoidalClosedHomEquiv",
+   "date": "2026-10-22",
+   "verdict": "no match: candidates concern ordinary pullbacks, categorical mates or monoidal counits, not this mixed tensor-action square"
+  },
+  {
+   "tool": "grep",
+   "query": "mate.*[Pp]rojection|[Pp]rojection.*mate|frobeniusMorphism_mate",
+   "results": "3 hits; Mathlib/CategoryTheory/Monoidal/Closed/Functor.lean, Mathlib/CategoryTheory/Monoidal/Closed/Functor.lean, Mathlib/CategoryTheory/Monoidal/Closed/Functor.lean; searched Mathlib/CategoryTheory",
+   "date": "2026-10-22",
+   "verdict": "no match: inspected generic mate, monoidal-counit and Frobenius candidates; none states the mixed-action common-transpose formula"
+  },
+  {
+   "tool": "leansearch",
+   "query": "mate natural transformation of monoidal pullback open extension preserves counit defined projection map",
+   "results": "8 hits; CategoryTheory.Adjunction.IsMonoidal.instIsMonoidalCounit, CategoryTheory.ChosenPullbacksAlong.cartesianMonoidalCategoryFst_mapPullbackAdj_counit_app, CategoryTheory.ChosenPullbacksAlong.cartesianMonoidalCategoryToUnit_mapPullbackAdj_counit_app, CategoryTheory.ChosenPullbacksAlong.fst', CategoryTheory.Limits.CategoricalPullback.natTrans_ext_iff, CategoryTheory.ChosenPullbacksAlong.cartesianMonoidalCategorySnd_mapPullbackAdj_counit_app, CategoryTheory.Over.η_pullback_left, CategoryTheory.Comon.Hom.hom",
+   "date": "2026-10-22",
+   "verdict": "no match: inspected generic mate, monoidal-counit and Frobenius candidates; none states the mixed-action common-transpose formula"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.mateEquiv_counit",
+   "results": "1 hits; CategoryTheory.mateEquiv_counit",
+   "date": "2026-10-22",
+   "verdict": "no match: inspected generic mate, monoidal-counit and Frobenius candidates; none states the mixed-action common-transpose formula"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "a tensor compatible square of left adjoints has projection compatible adjunction mate by equal counit transposes",
+   "results": "8 hits; CategoryTheory.mateEquiv_counit, CategoryTheory.mateEquiv_counit_symm, CategoryTheory.mateEquiv_apply, CategoryTheory.mateEquiv_square, CategoryTheory.Adjunction.map_μ_comp_counit_app_tensor, CategoryTheory.mateEquiv, CategoryTheory.Adjunction.map_μ_comp_counit_app_tensor_assoc, CategoryTheory.iterated_mateEquiv_conjugateEquiv",
+   "date": "2026-10-22",
+   "verdict": "no match: inspected generic mate, monoidal-counit and Frobenius candidates; none states the mixed-action common-transpose formula"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "projection formula naturality for mates of tensor module functor transformations",
+   "results": "8 hits; CategoryTheory.tensorLeftHomEquiv_naturality, CategoryTheory.tensorRightHomEquiv_naturality, CategoryTheory.tensorLeftHomEquiv_symm_naturality, CategoryTheory.tensorRightHomEquiv_symm_naturality, CategoryTheory.frobeniusMorphism_mate, CategoryTheory.tensorRightHomEquiv_tensor, CategoryTheory.tensorLeftHomEquiv_tensor, ModuleCat.monoidalClosedHomEquiv",
+   "date": "2026-10-22",
+   "verdict": "no match: inspected generic mate, monoidal-counit and Frobenius candidates; none states the mixed-action common-transpose formula"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sf-proper-open-projection-mate",
+  "date": "2026-10-22",
+  "group": "Q136"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-rem-sf-pf-done",
+ "blueprint": {
+  "from": {
+   "node": "fix-prop-projection-formula",
+   "place": "Proof sentence \"The composition, refinement, exchange and proper-coincidence identities are [prop-sf-pf-coherence]\"; returned item steps 4–6: both explicit adjoint transposes and unrestricted unbounded input domain",
+   "via": [
+    "lem-sf-proper-open-projection-mate"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sf-tensor-square-mate-transfer",
+  "worker": "stage1",
+  "summary": "Computed both proper-adjunction transposes explicitly, using the existing mate and natural-hom-bijection Mathlib leaves. Naturality of the mixed action and the supplied square identify the second transpose with the first; checked naturality and the unbounded ringed-site identification. No new nodes or strengthened hypotheses.",
+  "blueprint": "fix-prop-projection-formula proof sentence \"The composition, refinement, exchange and proper-coincidence identities are [prop-sf-pf-coherence]\"; via lem-sf-proper-open-projection-mate, its returned steps 4–6, now realized by both counit-transpose computations and the unrestricted-domain check.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-ringed-projection-mate-exact",
+    "why": "Only identifies the already specified unbounded ringed-site counit-defined maps with the abstract projection maps; the unit has no different construction for this normalization."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-ringed-projection-mate-exact"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q151-7b1892df6",
+  "group": "Q151",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q151-7b1892df6 (reviewer sub-agent of L); spot-checked: I read the item in full. The statement and stmt_deps are byte-identical to live/base, where the item is still unsplit (not superseded). There is no repair note, and the delivery has no new nodes. I re-derived all six steps by hand. Step 1 takes the formulas tau(b)=eps P(b) and its naturality from the statement of lem-weil-pbc-adjunction-of-natural-bijection (mkOfHomEquiv), and tau_p(g)=K(eps_r)aR_r from the transpose clause of def-weil-pbc-adjunction-mate (mateEquiv), with L1=P_r, L2=P_p, G=J, H=K. Step 2 uses naturality of a at pi_r and eps_{r,Z}P_r(pi_r)=c, giving K(c)aP_p(d_i). Step 3 uses mu_p naturality and the mate transpose at M. Step 4 is elementary: d_k naturality at eps_{r,M}, bifunctoriality, the stipulated mixed square at H=E, and the definition of c. Step 5 gives injectivity and naturality of pi_h. Step 6 identifies pi_h with the alpha of lem-weil-pbc-ringed-projection-mate-exact using only its clause 'adjoint to (eps tensor 1)mu'. I accept this declared tool use (off-unit, normalization only, already a stmt_dep). I type-checked every map and both composites against the stated source and target. The formulas hold in small cases: identity adjunctions with scalars s,t (including 0) and terminal categories; no invertibility is used. Stacks 0B56 (sites-cohomology l.13666) matches the counit-defined projection map, and 07A7 (l.4033) supplies only normalization; the proof is correctly marked agent-written. A DAG-wide duplicate scan found no duplicate: the pbc projection-mate-square-coherence and proetale-projection-formula-tensor-coherence nodes are vague open placeholders, and lem-sf-clopen-comparison-tensor-square only supplies the hypothesis. The parent lem-sf-proper-open-projection-mate's steps 2-3 apply this item exactly as stated. The Mathlib searches cover all three kinds. No SGA is cited. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.Adjunction.TensorSquareMateTransfer",
+  "declaration": "CategoryTheory.tensorSquare_mate_transfer",
+  "declarations": [
+   "CategoryTheory.tensorSquareProjectionMap",
+   "CategoryTheory.tensorSquareMateFirst",
+   "CategoryTheory.tensorSquareMateSecond",
+   "CategoryTheory.tensorSquareMateCommonTranspose",
+   "CategoryTheory.tensorSquare_mate_transfer",
+   "SheafOfModules.tensorSquareProjectionMap_ringed"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/Adjunction/TensorSquareMateTransfer.lean",
+  "statement": "theorem tensorSquare_mate_transfer (Pr : C ⥤ A) (Rr : A ⥤ C) (Pp : D ⥤ B) (Rp : B ⥤ D) (ar : Pr ⊣ Rr) (ap : Pp ⊣ Rp) (Pi : D ⥤ C) (Pk : B ⥤ A) (J : C ⥤ D) (K : A ⥤ B) (theta : Pi ⋙ Pr ≅ Pp ⋙ Pk) (TA : A × A ⥤ A) (TB : B × B ⥤ B) (TC : C × C ⥤ C) (TD : D × D ⥤ D) (muR : TC ⋙ Pr ⟶ (Pr.prod Pr) ⋙ TA) (muP : TD ⋙ Pp ⟶ (Pp.prod Pp) ⋙ TB) (di : (J.prod (𝟭 D)) ⋙ TD ⟶ ((𝟭 C).prod Pi) ⋙ TC ⋙ J) (dk : (K.prod (𝟭 B)) ⋙ TB ⟶ ((𝟭 A).prod Pk) ⋙ TA ⋙ K) (a : J ⋙ Pp ⟶ Pr ⋙ K) (square : ∀ (H : C) (N : D), Pp.map (di.app (H, N)) ≫ a.app (TC.obj (H, Pi.obj N)) ≫ K.map (muR.app (H, Pi.obj N)) ≫ K.map (TA.map (Prod.mkHom (𝟙 (Pr.obj H)) (theta.hom.app N))) = muP.app (J.obj H, N) ≫ TB.map (Prod.mkHom (a.app H) (𝟙 (Pp.obj N))) ≫ dk.app (Pr.obj H, Pp.obj N)) : ∃ t : ((Rr ⋙ J).prod (𝟭 D)) ⋙ TD ⟶ ((𝟭 A).prod (Pi ⋙ Pr)) ⋙ TA ⋙ K ⋙ Rp, ∀ (M : A) (N : D), t.app (M, N) = tensorSquareMateFirst Pr Rr Pp Rp ar ap Pi J K TA TC TD muR di a M N ∧ t.app (M, N) = tensorSquareMateSecond Pr Rr Pp Rp ar ap Pi Pk J K theta TA TB TD muP dk a M N ∧ (ap.homEquiv _ _).symm (tensorSquareMateFirst Pr Rr Pp Rp ar ap Pi J K TA TC TD muR di a M N) = tensorSquareMateCommonTranspose Pr Rr Pp ar Pi J K TA TC TD muR di a M N ∧ (ap.homEquiv _ _).symm (tensorSquareMateSecond Pr Rr Pp Rp ar ap Pi Pk J K theta TA TB TD muP dk a M N) = tensorSquareMateCommonTranspose Pr Rr Pp ar Pi J K TA TC TD muR di a M N",
+  "branch": "newtargets-dag",
+  "by": "Q102",
+  "date": "2026-10-22",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-d69b04917",
+  "group": "Q102",
+  "result": "pass",
+  "note": "Only the item's lean field changed; one new module, no new nodes. Q151's earlier delivery was the stage-1 split (landed 19:53), so nothing is superseded. Matched every clause against the Lean: four categories with plain bifunctors, Pr⊣Rr and Pp⊣Rp, theta iso, muR/muP plain natural transformations, mixed actions di/dk with exact domains, the square with theta.hom explicit, g = mateEquiv ar ap (TwoSquare.mk J Pr Pp K a), pi_h = rightAdjointProjectionMap (transpose (eps⊗1)mu by homEquiv_symm_rightAdjointProjectionMap_app_app), c = muR ≫ TA(eps,1), the two paths (second ends with theta.inv), two common-transpose conjuncts and ∃ t natural on A×D. Re-derived both transposes: theta⁻¹ cancels theta.hom in the square, so the statement is true and not hollow. No IsIso/exactness/bound hypotheses; 8 independent universes. The ringed clause tensorSquareProjectionMap = derivedProjectionFormulaMate holds by rfl (same body, Hom input) and renders the node's last sentence via ringedProjectionMateExact's alpha equation. lean.statement verbatim; only sorry proofs; source/blueprint docstrings; both report sections present. Not recompiled (2026-10-21 rule); worker reports a clean scompile. Advisory only: the Hom-input helper repeats derivedProjectionFormulaMate's body, justified because the node needs a non-invertible mu."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "AUTO",
+  "group": "F4",
+  "result": "pass",
+  "landing": "20261023T231038-L-3536449",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)",
+  "sorry_before": [
+   "CategoryTheory.tensorSquare_mate_transfer",
+   "SheafOfModules.tensorSquareProjectionMap_ringed"
+  ],
+  "sorry_after": []
+ }
+}

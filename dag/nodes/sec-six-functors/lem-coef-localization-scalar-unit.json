@@ -1,0 +1,264 @@
+{
+ "id": "lem-coef-localization-scalar-unit",
+ "kind": "statement",
+ "title": "Scalar transport of localization triangles and the open unit",
+ "statement": "Fix $k=\\overline{\\mathbf F}_q$ and a prime $\\ell\\ne\\operatorname{char}k$ [def-weil-finite-field-fiber]. Let $E,L/\\mathbf Q_\\ell$ be finite extensions, $m,n\\ge1$, $A=\\mathcal O_E/\\varpi_E^m$, $B=\\mathcal O_L/\\varpi_L^n$, and $\\varphi:A\\to B$ any unital map [def-weil-l-adic-coefficient-extension]. On each scheme $T$ use constant module sheaves on its small pro-etale site [def-weil-pbc-proetale-site], and write $S_T^{A,B}K=K_B=K\\otimes_A^LB$ for uncompleted derived scalar extension [lem-pur-derived-change-of-rings]. The notation $D^b_{ctf}$ means bounded constructible with finite Tor amplitude [def-weil-finite-tor-amplitude]. All schemes below are separated and finite type over $k$; all scheme maps are $k$-maps [def-weil-scheme-morphism-properties]. Use the constructible exceptional functors and their adjunctions on bounded constructible inputs of etale origin [def-weil-exceptional-inverse-image], and ordinary derived direct images [def-weil-derived-direct-image]. Let $i:Z\\hookrightarrow X$ be closed, $j:U=X\\setminus Z\\hookrightarrow X$ its complementary open, and $M\\in D^b_{ctf}(X,A)$. Put $N_A=Ri_A^!M$ and $N_B=Ri_B^!M_B$. Suppose $M_B$, $(N_A)_B$ and $N_B$ lie in their respective $D^b_{ctf}$ categories and $N_A,j_A^*M$ have bounded constructible etale origins of finite Tor amplitude. Then $U$ is Noetherian and $j$ is quasi-compact, separated and finite type. The following are distinguished triangles in $D(X_{\\mathrm{proet}},B)$ [def-weil-triangulated-category]:\n$$S_Xi_{*,A}N_A\\xrightarrow{S_X\\epsilon_{i,A,M}}M_B\\xrightarrow{S_X\\eta_{j,A,M}}S_XRj_{*,A}j_A^*M\\longrightarrow,$$\n$$i_{*,B}N_B\\xrightarrow{\\epsilon_{i,B,M_B}}M_B\\xrightarrow{\\eta_{j,B,M_B}}Rj_{*,B}j_B^*M_B\\longrightarrow.$$\nHere $\\epsilon$ is the exceptional counit and $\\eta$ the ordinary $j^*\\dashv Rj_*$ unit, with the adjoint $Ri^!$ identified with the constructible exceptional functor, and $S_T=S_T^{A,B}$. The ordinary coefficient comparisons $c_{i,N_A}:S_Xi_{*,A}N_A\\to i_{*,B}S_ZN_A$ and $c_{j,j_A^*M}:S_XRj_{*,A}j_A^*M\\to Rj_{*,B}S_Uj_A^*M$ are isomorphisms in $D(B)$, with exactly the counit-transpose normalization of [lem-coef-finite-direct-image]. Let $r_{j,M}:S_Uj_A^*M\\xrightarrow{\\sim}j_B^*S_XM$ be the canonical tensor restriction comparison, and set $d_{j,M}=Rj_{*,B}(r_{j,M})c_{j,j_A^*M}$. Then\n$$d_{j,M}\\,S_X(\\eta_{j,A,M})=\\eta_{j,B,M_B}.$$\nThis is equality of the specified morphisms in $D(B)$, without a flatness assumption.",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-biduality-general/lem-coef-finite-closed-shriek.md",
+  "place": "Proof paragraphs 1–2, tensor the localization triangle and identify the open-unit square; returned steps 3–4"
+ },
+ "stmt_deps": [
+  "def-weil-finite-field-fiber",
+  "def-weil-l-adic-coefficient-extension",
+  "def-weil-pbc-proetale-site",
+  "lem-pur-derived-change-of-rings",
+  "def-weil-finite-tor-amplitude",
+  "def-weil-scheme-morphism-properties",
+  "def-weil-exceptional-inverse-image",
+  "def-weil-derived-direct-image",
+  "def-weil-triangulated-category",
+  "lem-coef-finite-direct-image"
+ ],
+ "proof": [
+  {
+   "text": "Apply finite type over a Noetherian field directly to both X and U, using their given structure morphisms, and combine local Noetherianity with compactness. The Noetherian target makes the open immersion j quasi-compact. Open immersions are separated and locally of finite type.",
+   "uses": [
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "lem-weil-pbc-qc-open-immersion-finite-type"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tags 01T6 (lemma-finite-type-noetherian) and 01T2 (lemma-locally-finite-type-characterize); elementary diagonal argument"
+   }
+  },
+  {
+   "text": "Reuse the adopted source library implementation of the finite stage of localization, in WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.LocalizeConstructible, rather than the unfinished all-stage package. The intrinsic realization equivalence translates the constructibility hypotheses to fixed-module bounded constructibility. An exponent annihilating each coefficient ring is invertible in k: k has characteristic p by the cardinality of its finite base field, and ell differs from p. The source localization theorem gives the triangle for the ambient support adjoint. Construct the comparison to the prescribed exceptional functor from the natural Hom equivalence, using the images of identities and its inverse; naturality proves the two inverse equations. The inverse-transpose formula, followed by the proper lower-shriek/lower-star comparison, proves the exact counit equation. Transport the ambient triangle along the resulting pushed-forward isomorphism. Do this at A and B. Restriction of scalars is an exact functor induced on derived categories, hence triangulated; its left adjoint has the induced shift comparison and is triangulated by the Mathlib adjunction theorem. Apply this left adjoint to the A-triangle, including its shift comparison in the connecting arrow.",
+   "uses": [
+    "prop-sf-localization-all-stages",
+    "prop-finite-compact-support-constructibility",
+    "lem-exc-proetale-closed-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-biduality-general/lem-coef-finite-closed-shriek.md",
+    "place": "Proof paragraph 1: tensor the support triangle; use the already established finite localization theorem"
+   }
+  },
+  {
+   "text": "The ring $B$ is a finite $A$-module: its finite set of elements is a finite generating set. The hypotheses supply bounded constructible etale origins of finite Tor amplitude for $N_A$ and $j_A^*M$. The schemes are finite type over $k$, and Step 1 verifies the separated finite-type hypotheses for $i,j$. Hence the pro-etale clause of the finite direct-image theorem, applied to $(i,N_A)$ and $(j,j_A^*M)$, gives exactly $c_{i,N_A}$ and $c_{j,j_A^*M}$ as isomorphisms in the $B$-coefficient categories. Its specified transpose is the scalar-extended ordinary counit; no flatness of $A\\to B$ is used. Closed direct image is exact by [lem-exc-proetale-closed-exact], since Step 1 verifies its quasi-compact-complement hypothesis; thus its derived direct image is the termwise $i_*$ used here.",
+   "uses": [
+    "lem-coef-finite-direct-image",
+    "lem-exc-proetale-closed-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-biduality-general/lem-coef-finite-closed-shriek.md",
+    "place": "Proof paragraph 2: the third term and the ordinary coefficient comparisons"
+   }
+  },
+  {
+   "text": "Use the fixed-module scalar/pullback comparison in ProEtaleFixedScalarRestrictionDirectImage. Its reverse is an iterated mate of the restriction/pullback square. The iterated-mate/conjugate equivalence identity identifies the conjugate of this reverse with the fixed restriction/direct-image comparison. Applying the inverse equivalence and taking inverse isomorphisms identifies it with finiteClosedScalarPullIso, exactly the isomorphism in the statement. The defining finite direct-image coefficient map is the right mate of the forward comparison.",
+   "uses": [
+    "lem-weil-proetale-direct-image-restriction-of-scalars",
+    "lem-coef-finite-direct-image"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-biduality-general/lem-coef-finite-closed-shriek.md",
+    "place": "Proof paragraph 2: normalize the open restriction comparison and its direct-image mate"
+   }
+  },
+  {
+   "text": "The unit-mate identity at $M$ now reads\n$$c_{j,j_A^*M}\\circ S_X(\\eta_{j,A,M})=Rj_{*,B}(\\lambda_M)\\circ\\eta_{j,B,S_XM}.$$\nPostcompose with $Rj_{*,B}(r_{j,M})$. Functoriality gives $Rj_{*,B}(r_{j,M})Rj_{*,B}(\\lambda_M)=Rj_{*,B}(r_{j,M}\\lambda_M)=1$ since $r_j=\\lambda^{-1}$. The left side becomes $d_{j,M}S_X(\\eta_{j,A,M})$, and the right side is $\\eta_{j,B,M_B}$. This is equality of the specified morphisms in $D(B)$; the cancellation uses an isomorphism of pullback functors and does not tensor an ordinary exact sequence or assume coefficient flatness.",
+   "uses": [
+    "lem-pur-mate-unit-compatibility"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Tag 0B65 (lemma-transformation-between-functors-and-adjoints), unit form CategoryTheory.unit_mateEquiv, Mathlib/CategoryTheory/Adjunction/Mates.lean:136–138"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-weil-pbc-qc-open-immersion-finite-type",
+  "prop-sf-localization-all-stages",
+  "prop-finite-compact-support-constructibility",
+  "lem-exc-proetale-closed-exact",
+  "lem-coef-finite-direct-image",
+  "lem-weil-proetale-direct-image-restriction-of-scalars",
+  "lem-pur-mate-unit-compatibility"
+ ],
+ "proof_origin": {
+  "by": "S5",
+  "document": "lean/Sheaf/Paper/LocalizationScalarUnit.lean",
+  "place": "Complete Lean proof: adopted finite-stage support localization, counit-normalized comparison by Hom equivalence, triangulated scalar adjunction, etale-origin direct-image isomorphisms and the unit-mate identity."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For complementary closed and open immersions tensoring the exceptional localization triangle by finite coefficients identifies its third term by ordinary direct image exchange and preserves the open adjunction unit",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.restrictFunctorAdjCounitIso\", \"module\": \"Mathlib/AlgebraicGeometry/Modules/Sheaf\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} →\\n  (f : X ⟶ Y) →\\n    [inst : AlgebraicGeometry.IsOpenImmersion f] →\\n      (AlgebraicGeometry.Scheme.Modules.pushforward f).comp (AlgebraicGeometry.Scheme.Modules.restrictFunctor f) ≅\\n        CategoryTheory.Functor.id X.Modules\", \"doc\": \"For a morphism $ f : X \\to Y $ of schemes, the composition of the pushforward functor along $ f $ followed by the restriction functor induced by $ f $ is naturally isomorphic to the identity functor on\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.restrictAdjunction\", \"module\": \"Mathlib/AlgebraicGeometry/Modules/Sheaf\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} →\\n  (f : X ⟶ Y) →\\n    [inst : AlgebraicGeometry.IsOpenImmersion f] →\\n      AlgebraicGeometry.Scheme.Modules.restrictFunctor f ⊣ AlgebraicGeometry.Scheme.Modules.pushforward f\", \"doc\": \"Given an open immersion $ f: X \\to Y $ of schemes, there is an adjunction between the restriction functor (mapping sheaves of modules on $ Y $ to those on $ X $) and the pushforward functor (mapping sh\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.restrictAdjunction_unit_app_app\", \"module\": \"Mathlib/AlgebraicGeometry/Modules/Sheaf\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [inst : AlgebraicGeometry.IsOpenImmersion f] (M : Y.Modules)\\n  (U : Y.Opens),\\n  AlgebraicGeometry.Scheme.Modules.Hom.app ((AlgebraicGeometry.Scheme.Modules.restrictAdjunction f).unit.app M) U =\\n    M.presheaf.map (CategoryTheory.homOfLE ⋯).op\", \"doc\": \"Let $f: X \\\\to Y$ be an open immersion of schemes. Let $f^*: \\\\text{Mod}(Y) \\\\to \\\\text{Mod}(X)$ be the restriction functor and $f_*: \\\\text{Mod}(X) \\\\to \\\\text{Mod}(Y)$ be the pushforward functor on sheaves\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.restrictAdjunction_counit_app_app\", \"module\": \"Mathlib/AlgebraicGeometry/Modules/Sheaf\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [inst : AlgebraicGeometry.IsOpenImmersion f] (M : X.Modules)\\n  (U : X.Opens),\\n  AlgebraicGeometry.Scheme.Modules.Hom.app ((AlgebraicGeometry.Scheme.Modules.restrictAdjunction f).counit.app M) U =\\n    M.presheaf.map (CategoryTheory.eqToHom ⋯).op\", \"doc\": \"Let $f: X \\\\to Y$ be an open immersion of schemes. Let $f^*: \\\\mathbf{Mod}(\\\\mathcal{O}_Y) \\\\to \\\\mathbf{Mod}(\\\\mathcal{O}_X)$ and $f_*: \\\\mathbf{Mod}(\\\\mathcal{O}_X) \\\\to \\\\mathbf{O}_Y)$ be the restriction and\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.restrictFunctorComp\", \"module\": \"Mathlib/AlgebraicGeometry/Modules/Sheaf\", \"type\": \"{X Y Z : AlgebraicGeometry.Scheme} →\\n  (f : X ⟶ Y) →\\n    (g : Y ⟶ Z) →\\n      [inst : AlgebraicGeometry.IsOpenImmersion f] →\\n        [inst_1 : AlgebraicGeometry.IsOpenImmersion g] →\\n          AlgebraicGeometry.Scheme.Modules.restrictFunctor (CategoryTheory.CategoryStruct.comp f g) ≅\\n            (Alge\", \"doc\": \"For two open immersions $ f : X \\\\to Y $ and $ g : Y \\\\to Z $ between schemes, the restriction functor for the composition $ g \\\\circ f $ is naturally isomorphic to the composition of the restriction fun\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.restrictFunctorIsoPullback\", \"module\": \"Mathlib/AlgebraicGeometry/Modules/Sheaf\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} →\\n  (f : X ⟶ Y) →\\n    [inst : AlgebraicGeometry.IsOpenImmersion f] →\\n      AlgebraicGeometry.Scheme.Modules.restrictFunctor f ≅ AlgebraicGeometry.Scheme.Modules.pullback f\", \"doc\": \"Given an open immersion $ f : X \\\\to Y $ of schemes, the restriction functor from the category of sheaves of modules over $ Y $'s structure sheaf to those over $ X $'s structure sheaf is naturally isom\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.instIsIsoFunctorCounitRestrictAdjunction\", \"module\": \"Mathlib/AlgebraicGeometry/Modules/Sheaf\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [inst : AlgebraicGeometry.IsOpenImmersion f],\\n  CategoryTheory.IsIso (AlgebraicGeometry.Scheme.Modules.restrictAdjunction f).counit\", \"doc\": \"For any open immersion $ f: X \\to Y $ of schemes, the counit of the adjunction between the restriction functor (mapping sheaves of modules on $ Y $ to those on $ X $) and the pushforward functor (mappi\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.instIsLeftAdjointRestrictFunctor\", \"module\": \"Mathlib/AlgebraicGeometry/Modules/Sheaf\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [inst : AlgebraicGeometry.IsOpenImmersion f],\\n  (AlgebraicGeometry.Scheme.Modules.restrictFunctor f).IsLeftAdjoint\", \"doc\": \"For an open immersion $ f: X \\to Y $ between schemes, the restriction functor from the category of sheaves of modules over $ Y $ to the category of sheaves of modules over $ X $, induced by $ f $, has \"}",
+   "date": "2026-10-22",
+   "verdict": "No match: ordinary Zariski scheme-module restriction, algebraic localization and scalar units do not state this derived pro-etale localization/unit square."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived finite coefficient direct image projection comparison intertwines the unit for restriction to an open complement",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"ModuleCat.Tilde.toOpen_res\", \"module\": \"Mathlib/AlgebraicGeometry/Modules/Tilde\", \"type\": \"∀ {R : Type u} [inst : CommRing R] (M : ModuleCat R)\\n  (U V : TopologicalSpace.Opens ↑(AlgebraicGeometry.PrimeSpectrum.Top R)) (i : V ⟶ U),\\n  CategoryTheory.CategoryStruct.comp (ModuleCat.Tilde.toOpen M U) (M.tildeInModuleCat.map i.op) =\\n    ModuleCat.Tilde.toOpen M V\", \"doc\": \"For open subsets $U$ and $V$ of $\\\\operatorname{Spec}(R)$ with $V \\\\subseteq U$, the composition of the restriction map $\\\\widetilde{M}(U) \\\\to \\\\widetilde{M}(V)$ with the sheaf morphism induced by the inc\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.ofRestrict_app\", \"module\": \"Mathlib/AlgebraicGeometry/OpenImmersion\", \"type\": \"∀ {U : TopCat} (X : AlgebraicGeometry.Scheme) {f : U ⟶ { carrier := ↥X, str := X.instTopologicalSpaceCarrierCarrier }}\\n  (h : Topology.IsOpenEmbedding ⇑(CategoryTheory.ConcreteCategory.hom f)) (V : X.Opens),\\n  AlgebraicGeometry.Scheme.Hom.app (X.ofRestrict h) V = X.presheaf.map (⋯.adjunction.counit.\", \"doc\": \"For a scheme $X$, an open subset $U$ with open immersion $h: U \\to X$, and an open set $V$ in $X$, the component of the morphism $X|_U \\to X$ at $V$ is equal to the presheaf map of $X$ applied to the co\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.restrictFunctorComp_hom_app_app\", \"module\": \"Mathlib/AlgebraicGeometry/Modules/Sheaf\", \"type\": \"∀ {X Y Z : AlgebraicGeometry.Scheme} (f : X ⟶ Y) (g : Y ⟶ Z) {U : X.Opens} [inst : AlgebraicGeometry.IsOpenImmersion f]\\n  [inst_1 : AlgebraicGeometry.IsOpenImmersion g] (M : Z.Modules),\\n  AlgebraicGeometry.Scheme.Modules.Hom.app ((AlgebraicGeometry.Scheme.Modules.restrictFunctorComp f g).hom.app M) \", \"doc\": \"For schemes $X, Y, Z$ and open immersions $f: X \\\\to Y$, $g: Y \\\\to Z$, the composition of the functors induced by $g$ on open subsets of $Y$ and by $f$ on open subsets of $X$ (via opposite category ope\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.ofRestrict_toLRSHom_c_app\", \"module\": \"Mathlib/AlgebraicGeometry/OpenImmersion\", \"type\": \"∀ {U : TopCat} (X : AlgebraicGeometry.Scheme) {f : U ⟶ { carrier := ↥X, str := X.instTopologicalSpaceCarrierCarrier }}\\n  (h : Topology.IsOpenEmbedding ⇑(CategoryTheory.ConcreteCategory.hom f)) (V : (TopologicalSpace.Opens ↥X)ᵒᵖ),\\n  (AlgebraicGeometry.Scheme.Hom.toLRSHom (X.ofRestrict h)).c.app V =\\n \", \"doc\": \"For a scheme $X$, open subset $U$, open immersion $h: U \\\\to X$, and open set $V$ in $X$, the sheaf component of the morphism $X|_U \\\\to X$ at $V$ equals the map induced by the counit of the adjunction \"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.restrictFunctorComp_inv_app_app\", \"module\": \"Mathlib/AlgebraicGeometry/Modules/Sheaf\", \"type\": \"∀ {X Y Z : AlgebraicGeometry.Scheme} (f : X ⟶ Y) (g : Y ⟶ Z) {U : X.Opens} [inst : AlgebraicGeometry.IsOpenImmersion f]\\n  [inst_1 : AlgebraicGeometry.IsOpenImmersion g] (M : Z.Modules),\\n  AlgebraicGeometry.Scheme.Modules.Hom.app ((AlgebraicGeometry.Scheme.Modules.restrictFunctorComp f g).inv.app M) \", \"doc\": \"For open immersions $ f: X \\\\to Y $ and $ g: Y \\\\to Z $ between schemes, the functor induced by the composition $ g \\\\circ f $ on open subsets of $ X $ satisfies $ (g \\\\circ f)_*(U) = g_*(f_*(U)) $ for an\"}\n  {\"name\": \"AlgebraicGeometry.exists_eq_pow_mul_of_is_compact_of_quasi_separated_space_aux_aux\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiSeparated\", \"type\": \"∀ {X : TopCat} (F : TopCat.Presheaf CommRingCat X) {U₁ U₂ U₃ U₄ U₅ U₆ U₇ : TopologicalSpace.Opens ↑X} {n₁ n₂ : ℕ}\\n  {y₁ : ↑(F.obj (Opposite.op U₁))} {y₂ : ↑(F.obj (Opposite.op U₂))} {f : ↑(F.obj (Opposite.op (U₁ ⊔ U₂)))}\\n  {x : ↑(F.obj (Opposite.op U₃))} (h₄₁ : U₄ ≤ U₁) (h₄₂ : U₄ ≤ U₂) (h₅₁ : U₅ ≤ U\", \"doc\": \"Given a topological space $X$, a presheaf $F$ of commutative rings on $X$, and open subsets $U_1, U_2, U_3, U_4, U_5, U_6, U_7$ satisfying inclusion relations $U_4 \\\\subseteq U_1 \\\\cap U_2$, $U_5 \\\\subse\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.restrictFunctorComp\", \"module\": \"Mathlib/AlgebraicGeometry/Modules/Sheaf\", \"type\": \"{X Y Z : AlgebraicGeometry.Scheme} →\\n  (f : X ⟶ Y) →\\n    (g : Y ⟶ Z) →\\n      [inst : AlgebraicGeometry.IsOpenImmersion f] →\\n        [inst_1 : AlgebraicGeometry.IsOpenImmersion g] →\\n          AlgebraicGeometry.Scheme.Modules.restrictFunctor (CategoryTheory.CategoryStruct.comp f g) ≅\\n            (Alge\", \"doc\": \"For two open immersions $ f : X \\\\to Y $ and $ g : Y \\\\to Z $ between schemes, the restriction functor for the composition $ g \\\\circ f $ is naturally isomorphic to the composition of the restriction fun\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.appIso_inv_appLE\", \"module\": \"Mathlib/AlgebraicGeometry/OpenImmersion\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [inst : AlgebraicGeometry.IsOpenImmersion f] {U V : X.Opens}\\n  (e : V ≤ (TopologicalSpace.Opens.map f.base).obj ((AlgebraicGeometry.Scheme.Hom.opensFunctor f).obj U)),\\n  CategoryTheory.CategoryStruct.comp (AlgebraicGeometry.Scheme.Hom.appIso f U).inv\\n  \", \"doc\": \"For an open immersion $ f: X \\to Y $ of schemes, and open subsets $ U $ and $ V $ of $ X $, if $ V $ is contained in the preimage under $ f $ of the image of $ U $ in $ Y $, then $ V $ is contained in \"}",
+   "date": "2026-10-22",
+   "verdict": "No match: ordinary Zariski scheme-module restriction, algebraic localization and scalar units do not state this derived pro-etale localization/unit square."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"projectionFormula\"",
+   "results": "[loogle] OK 0 hit(s)",
+   "date": "2026-10-22",
+   "verdict": "No match: ordinary Zariski scheme-module restriction, algebraic localization and scalar units do not state this derived pro-etale localization/unit square."
+  },
+  {
+   "tool": "grep",
+   "query": "localization.*(tensor|coefficient)|unit.*(changeOfRing|extendScalars)",
+   "results": "[grep] OK 25 hit(s)\n  {\"file\": \"Mathlib/Algebra/Category/ModuleCat/ChangeOfRings.lean\", \"line\": \"626\", \"text\": \"protected noncomputable def unit' : 𝟭 (ModuleCat S) ⟶ restrictScalars f ⋙ coextendScalars f where\"}\n  {\"file\": \"Mathlib/Algebra/Category/ModuleCat/ChangeOfRings.lean\", \"line\": \"630\", \"text\": \"      -- Porting note (https://github.com/leanprover-community/mathlib4/issues/10745): previously simp [CoextendScalars.map_apply]\"}\n  {\"file\": \"Mathlib/Algebra/Category/ModuleCat/ChangeOfRings.lean\", \"line\": \"640\", \"text\": \"protected noncomputable def counit' : coextendScalars f ⋙ restrictScalars f ⟶ 𝟭 (ModuleCat R) where\"}\n  {\"file\": \"Mathlib/Algebra/Category/ModuleCat/ChangeOfRings.lean\", \"line\": \"798\", \"text\": \"def Unit.map {X : ModuleCat R} : X ⟶ (extendScalars f ⋙ restrictScalars f).obj X :=\"}\n  {\"file\": \"Mathlib/Algebra/Category/ModuleCat/ChangeOfRings.lean\", \"line\": \"813\", \"text\": \"def unit : 𝟭 (ModuleCat R) ⟶ extendScalars f ⋙ restrictScalars.{max v u₂, u₁, u₂} f where\"}\n  {\"file\": \"Mathlib/CategoryTheory/Localization/Monoidal/Basic.lean\", \"line\": \"154\", \"text\": \"    Localization.liftNatIso L' W (tensorLeft (𝟙_ C) ⋙ L') L'\"}\n  {\"file\": \"Mathlib/CategoryTheory/Localization/Monoidal/Basic.lean\", \"line\": \"161\", \"text\": \"    Localization.liftNatIso L' W (tensorRight (𝟙_ C) ⋙ L') L'\"}\n  {\"file\": \"Mathlib/RingTheory/Spectrum/Prime/ChevalleyComplexity.lean\", \"line\": \"68\", \"text\": \"open Function Localization MvPolynomial Polynomial TensorProduct PrimeSpectrum\"}\n  {\"file\": \"Mathlib/RingTheory/Spectrum/Prime/ChevalleyComplexity.lean\", \"line\": \"178\", \"text\": \"4. Suppose the property holds for both the localization at some leading coefficient of `eᵢ` and\"}\n  {\"file\": \"Mathlib/RingTheory/Spectrum/Prime/ChevalleyComplexity.lean\", \"line\": \"179\", \"text\": \"  the localization at the leading coefficient of `eᵢ`, then the property holds for `e`.\"}\n  {\"file\": \"Mathlib/RingTheory/Spectrum/Prime/Chevalley.lean\", \"line\": \"23\", \"text\": \"open Function Localization MvPolynomial Polynomial TensorProduct PrimeSpectrum Topology\"}\n  {\"file\": \"Mathlib/RingTheory/Spectrum/Prime/FreeLocus.lean\", \"line\": \"77\", \"text\": \"  exact mem_freeLocus_of_isLocalization p Rₚ (f := TensorProduct.mk R Rₚ M 1)\"}\n  {\"file\": \"Mathlib/RingTheory/LocalProperties/Basic.lean\", \"line\": \"228\", \"text\": \"      ((IsLocalization.Away.tensorRightEquiv S r (Localization.Away r)).symm : _ →+* _).comp\"}\n  {\"file\": \"Mathlib/RingTheory/RamificationInertia/Ramification.lean\", \"line\": \"82\", \"text\": \"    let := Localization.AtPrime.algebraOfLiesOver p (r.1.comap Algebra.TensorProduct.includeRight)\"}\n  {\"file\": \"Mathlib/RingTheory/Localization/BaseChange.lean\", \"line\": \"47\", \"text\": \"`(Localization S) × M → N, (s, m) ↦ s • f m` is the tensor product (insomuch as it is the universal\"}\n  {\"file\": \"Mathlib/RingTheory/Localization/BaseChange.lean\", \"line\": \"130\", \"text\": \"/-- If `A` is a localization of `R`, tensoring two `A`-modules over `A` is the same as\"}\n  {\"file\": \"Mathlib/RingTheory/Localization/BaseChange.lean\", \"line\": \"136\", \"text\": \"/-- If `A` is a localization of `R`, tensoring an `A`-module with `A` over `R` does nothing. -/\"}\n  {\"file\": \"Mathlib/RingTheory/Localization/BaseChange.lean\", \"line\": \"141\", \"text\": \"/-- If `A` is a localization of `R`, tensoring two `A`-algebras over `A` is the same as\"}\n  {\"file\": \"Mathlib/RingTheory/Localization/BaseChange.lean\", \"line\": \"147\", \"text\": \"/-- If `A` is a localization of `R`, tensoring an `A`-algebra with `A` over `R` does nothing. -/\"}\n  {\"file\": \"Mathlib/RingTheory/Smooth/IntegralClosure.lean\", \"line\": \"25\", \"text\": \"  If `S = Localization M`, then `TensorProduct.toIntegralClosure` is bijective.\"}\n  {\"file\": \"Mathlib/RingTheory/Smooth/IntegralClosure.lean\", \"line\": \"86\", \"text\": \"    refine IsLocalization.tensorProduct_tensorProduct _ _ (.powers r.1) _ ?_\"}\n  {\"file\": \"Mathlib/RingTheory/Smooth/IntegralClosure.lean\", \"line\": \"103\", \"text\": \"      refine IsLocalization.tensorProduct_tensorProduct _ _ (.powers r.1) _ ?_\"}\n  {\"file\": \"Mathlib/RingTheory/LocalIso.lean\", \"line\": \"181\", \"text\": \"  exact .of_algEquiv <| IsLocalization.Away.tensorProductEquivTMulRight R T g (Localization.Away g)\"}\n  {\"file\": \"Mathlib/RingTheory/RingHom/Locally.lean\", \"line\": \"304\", \"text\": \"  let e := IsLocalization.Away.tensorProductEquivTMulRight R S g (Localization.Away g)\"}\n  {\"file\": \"Mathlib/RingTheory/Polynomial/Eisenstein/Criterion.lean\", \"line\": \"44\", \"text\": \"(By localization at `P`, make these coefficients invertible.)\"}",
+   "date": "2026-10-22",
+   "verdict": "No match: ordinary Zariski scheme-module restriction, algebraic localization and scalar units do not state this derived pro-etale localization/unit square."
+  },
+  {
+   "tool": "leansearch",
+   "query": "For complementary closed and open immersions tensoring the exceptional localization triangle by finite coefficients identifies its third term by ordinary direct image exchange and preserves the open adjunction unit",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.restrictAdjunction\", \"module\": \"Mathlib.AlgebraicGeometry.Modules.Sheaf\", \"type\": \": restrictFunctor f ⊣ pushforward f\", \"doc\": \"Given an open immersion $ f: X \\to Y $ of schemes, there is an adjunction between the restriction functor (mapping sheaves of modules on $ Y $ to those on $ X $) and the pushforward functor (mapping sh\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.restrictAdjunction_counit_app_app\", \"module\": \"Mathlib.AlgebraicGeometry.Modules.Sheaf\", \"type\": \"(M : X.Modules) (U : X.Opens) :\\n  ((restrictAdjunction f).counit.app M).app U = M.presheaf.map (eqToHom (f.preimage_image_eq U).symm).op\", \"doc\": \"Let $f: X \\\\to Y$ be an open immersion of schemes. Let $f^*: \\\\mathbf{Mod}(\\\\mathcal{O}_Y) \\\\to \\\\mathbf{Mod}(\\\\mathcal{O}_X)$ and $f_*: \\\\mathbf{Mod}(\\\\mathcal{O}_X) \\\\to \\\\mathbf{O}_Y)$ be the restriction and\"}\n  {\"name\": \"AlgebraicGeometry.LocallyRingedSpace.IsOpenImmersion.invApp_app_apply\", \"module\": \"Mathlib.Geometry.RingedSpace.OpenImmersion\", \"type\": \"∀ {X Y : AlgebraicGeometry.LocallyRingedSpace} (f : X ⟶ Y) [H : AlgebraicGeometry.LocallyRingedSpace.IsOpenImmersion f]\\n  (U : TopologicalSpace.Opens ↑X.toTopCat) (x : CategoryTheory.ToType (X.presheaf.obj (Opposite.op U))),\\n  (CategoryTheory.ConcreteCategory.hom\\n        (f.c.app (Opposite.op ((Alge\", \"doc\": \"For an open immersion $ f: X \\to Y $ of locally ringed spaces, the composition of the inverse of the presheaf isomorphism component at $ f(U) $ with the sheaf morphism induced by $ f $ equals the presh\"}\n  {\"name\": \"AlgebraicGeometry.IsImmersion.isImmersion_iff_exists\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Immersion\", \"type\": \": IsImmersion f ↔ ∃ (Z : Scheme) (g₁ : X ⟶ Z) (g₂ : Z ⟶ Y), IsClosedImmersion g₁ ∧ IsOpenImmersion g₂ ∧ g₁ ≫ g₂ = f\", \"doc\": \"A morphism $ f: X \\\\to Y $ of schemes is an immersion if and only if there exists a scheme $ Z $ and morphisms $ g₁: X \\\\to Z $ and $ g₂: Z \\\\to Y $ such that $ g₁ $ is a closed immersion, $ g₂ $ is an o\"}\n  {\"name\": \"Algebra.instIsStandardOpenImmersionTensorProduct\", \"module\": \"Mathlib.RingTheory.RingHom.OpenImmersion\", \"type\": \"[IsStandardOpenImmersion R T] : IsStandardOpenImmersion S (S ⊗[R] T)\", \"doc\": \"If the ring homomorphism $ R \\\\to T $ is a standard open immersion (i.e., $ T $ is a localization of $ R $ at some element), then the canonical homomorphism $ S \\\\to S \\\\otimes_R T $ is also a standard o\"}\n  {\"name\": \"AlgebraicGeometry.IsOpenImmersion.ΓIsoTop\", \"module\": \"Mathlib.AlgebraicGeometry.OpenImmersion\", \"type\": \"{X Y : Scheme.{u}} (f : X ⟶ Y) [IsOpenImmersion f] : Γ(X, ⊤) ≅ Γ(Y, f.opensRange)\", \"doc\": \"For an open immersion $ f: X \\to Y $ of schemes, there is an isomorphism between the global sections of the structure sheaf on $ X $ and the global sections of the open subset $ f(X) $ in $ Y $. This i\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.instIsIsoFunctorCounitRestrictAdjunction\", \"module\": \"Mathlib.AlgebraicGeometry.Modules.Sheaf\", \"type\": \": IsIso (restrictAdjunction f).counit\", \"doc\": \"For any open immersion $ f: X \\to Y $ of schemes, the counit of the adjunction between the restriction functor (mapping sheaves of modules on $ Y $ to those on $ X $) and the pushforward functor (mappi\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.isOpenImmersion_SpecMap_localizationAway\", \"module\": \"Mathlib.AlgebraicGeometry.OpenImmersion\", \"type\": \"{R : CommRingCat.{u}} (f : R) : IsOpenImmersion (Spec.map (CommRingCat.ofHom (algebraMap R (Localization.Away f))))\", \"doc\": \"The morphism from the spectrum of the localization of a commutative ring $ R $ at an element $ f $ to the spectrum of $ R $ is an open immersion. This corresponds to the inclusion of the principal ope\"}",
+   "date": "2026-10-22",
+   "verdict": "No match: ordinary Zariski scheme-module restriction, algebraic localization and scalar units do not state this derived pro-etale localization/unit square."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived extension of scalars preserves a closed support localization triangle and the open restriction adjunction unit",
+   "results": "8 hits; recorded top results: CategoryTheory.Adjunction.derivedε_fac_app; CategoryTheory.Adjunction.derivedη_fac_app; CategoryTheory.Adjunction.derivedε_fac_app_assoc; CategoryTheory.Functor.isHomological_of_localization; CategoryTheory.Adjunction.derivedη_fac_app_assoc; CategoryTheory.Functor.instLinearDerivedCategoryMapDerivedCategory; CategoryTheory.Functor.mapDerivedCategoryFactorsh; CategoryTheory.Functor.mapDerivedCategoryFactors",
+   "date": "2026-10-22",
+   "verdict": "No match: the recorded eight hits concern generic derived adjunction normalization and exact-functor localization; none gives the pro-etale coefficient/localization statement."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.unit_mateEquiv",
+   "results": "1 hits; recorded top results: CategoryTheory.unit_mateEquiv",
+   "date": "2026-10-22",
+   "verdict": "Generic unit-mate clause matches the existing Mathlib leaf lem-pur-mate-unit-compatibility, not the whole item; reuse that leaf."
+  },
+  {
+   "tool": "grep",
+   "query": "unit_mateEquiv|derivedη_fac_app",
+   "results": "6 hits; recorded top results: Mathlib/CategoryTheory/Adjunction/Mates.lean; Mathlib/CategoryTheory/Adjunction/Mates.lean; Mathlib/CategoryTheory/Adjunction/Mates.lean; Mathlib/CategoryTheory/Adjunction/Mates.lean; Mathlib/CategoryTheory/Functor/Derived/Adjunction.lean; Mathlib/CategoryTheory/Monoidal/Closed/Functor.lean",
+   "date": "2026-10-22",
+   "verdict": "These generic adjunction identities do not supply the finite pro-etale projection isomorphisms or localization triangles. Reuse the existing mate leaf."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived change of coefficient rings commutes with the open closed localization distinguished triangle on pro etale sheaves",
+   "results": "8 hits; recorded top results: Algebra.tensorH1CotangentOfIsLocalization; IsLocalization.Away.tensorEquiv; RingHom.Etale.ofLocalizationSpanTarget; RingHom.IsStableUnderBaseChange.localizationPreserves; Algebra.FormallyEtale.localization_base; AlgebraicGeometry.StructureSheaf.toOpen_comp_comap_assoc; Algebra.FormallyEtale.of_isLocalization; RingHom.Etale.isStableUnderBaseChange",
+   "date": "2026-10-22",
+   "verdict": "No match: hits concern algebraic ring localization, cotangent modules and structure sheaves, not support localization of derived pro-etale module sheaves."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For finite rings derived scalar extension carries the pro etale support triangle to a distinguished triangle and its direct image mate preserves the adjunction unit",
+   "results": "8 hits; recorded top results: CategoryTheory.Adjunction.isTriangulated_leftAdjoint; CategoryTheory.Adjunction.isTriangulated_rightAdjoint; CategoryTheory.Adjunction.IsTriangulated.mk''; CategoryTheory.Adjunction.IsTriangulated.mk'; CategoryTheory.Adjunction.IsTriangulated.leftAdjoint_isTriangulated; CategoryTheory.Adjunction.IsTriangulated.rightAdjoint_isTriangulated; CategoryTheory.Pretriangulated.Triangle.coyoneda_exact₁; DerivedCategory.triangleOfSESIso",
+   "date": "2026-10-22",
+   "verdict": "No match: generic triangulated adjunction results and triangleOfSESIso do not supply this coefficient/localization statement."
+  },
+  {
+   "tool": "grep",
+   "query": "pro[Ee]tale|closedSupport|localizationTriangle",
+   "results": "10 hits; recorded top results: Mathlib/AlgebraicGeometry/Sites/Proetale.lean; Mathlib/AlgebraicGeometry/Sites/Proetale.lean; Mathlib/AlgebraicGeometry/Sites/Proetale.lean; Mathlib/AlgebraicGeometry/Sites/Proetale.lean; Mathlib/AlgebraicGeometry/Sites/Proetale.lean; Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean; Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean; Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean",
+   "date": "2026-10-22",
+   "verdict": "No match: Proetale.lean defines pro-etale topology and ElladicCohomology.lean coefficient sheaves; these hits contain no derived coefficient localization or unit comparison theorem."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-coef-finite-closed-shriek",
+  "date": "2026-10-22",
+  "group": "Q14"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "blueprint": {
+  "from": {
+   "node": "lem-coef-finite-closed-shriek",
+   "place": "Proof paragraphs 1–2, tensor the localization triangle and identify the open-unit square; returned steps 3–4",
+   "via": []
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-coef-localization-scalar-unit",
+  "worker": "stage1",
+  "group": "Q159",
+  "summary": "Kept the statement unchanged; gave the Noetherian and immersion-domain checks, applied finite localization at A and B and exact ringed derived scalar extension, applied the finite direct-image theorem with etale-origin and Tor hypotheses verified, and proved the actual open-unit equation by the unit-mate identity and explicit inverse cancellation. No new nodes: all necessary ingredients already exist.",
+  "blueprint": "lem-coef-finite-closed-shriek proof paragraphs 1–2: tensor the support triangle, identify the ordinary coefficient comparisons, and verify the open-unit square before comparing the closed fibers.",
+  "tool_uses": [
+   {
+    "node": "prop-sf-localization-all-stages",
+    "why": "Use only its finite-stage counit–unit localization triangles and identification of the adjoint; this is the localization input required by the ancestor proof, not a replacement of the biduality-unit route."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-topoi-derived-pullback",
+    "why": "General ringed-topos exact derived pullback, specialized to the identity topos and A-to-B ring map, proves scalar extension preserves the localization triangle in the B category."
+   },
+   {
+    "node": "def-sp-constant-scalar-pullback-comparison",
+    "why": "Names the general pro-etale scalar/pullback isomorphism with its actual K-flat normalization, needed to identify r inverse and the specified right mate."
+   },
+   {
+    "node": "lem-exc-proetale-closed-exact",
+    "why": "Exactness identifies ordinary closed derived direct image with the termwise i_* in the stated finite localization triangle; the quasi-compact complement was checked in Step 1."
+   }
+  ]
+ },
+ "tool_uses": [
+  "prop-sf-localization-all-stages",
+  "lem-exc-proetale-closed-exact"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q159-73799cbc1",
+  "group": "Q159",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q159-73799cbc1 (reviewer sub-agent of L); spot-checked: PASS: I read the whole delivery and found nothing to repair, so I wrote no fix files. It is a one-level split of the statement node lem-coef-localization-scalar-unit, which belongs to the parent lem-coef-finite-closed-shriek (master source, Proof paragraph 1). The statement is unchanged, there are no new nodes and no re-split note applies. I checked all five steps against the cited statements. Step 1: X is Noetherian by finite-type-over-Noetherian; applying the open-subscheme lemma to U and to each affine V∩U makes j quasi-compact; qc-open-immersion then gives finite type; immersions are separated. Step 2: clause (3) of prop-sf-localization-all-stages at the finite stages A and B gives the counit/unit triangles. They live in D^b_c ⊂ D(X_proet), a full subcategory. S_X is exact as Lu^* for the identity topos with A_X→B_X (Stacks 06YY node). Step 3: the pro-étale clause of lem-coef-finite-direct-image applies (B is finite over A, i and j are separated finite type, inputs are of étale ctf origin) and gives the actual transpose-defined c_i and c_j. lem-exc-proetale-closed-exact (quasi-compact complement) gives Ri_*=i_*. Step 4: the right mate of λ_j from def-sp-constant-scalar-pullback-comparison has transpose S_U(ε)∘λ, which is the c_j normalization, and r=λ^{-1}. Step 5: the unit_mateEquiv identity followed by Rj_*(r) cancellation gives d_j S_X(η_A)=η_B; I verified this algebra. Edge cases A=B, Z=∅, U=∅ and the nonflat Z/ℓ²→Z/ℓ all hold. Duplicate search: lem-coef-etale-locally-closed-shriek (étale only, quotients only, no unit square), lem-pur-dnc-coefficient-transport and the sibling lem-coef-localization-first-transpose do not state this. Batch-5 flag on prop-sf-localization-all-stages: accepted. The flagged path ends at lem-trf-adjoint-composition-coherence, which is pure category theory (Mathlib leftAdjointCompIso_assoc, Stacks 0B65), not a step of the trace formula or Poincaré duality. The localization triangle is a general foundation result. The base parent already cites prop-sf-localization-all-stages, so the batch-5 closure does not change. I accepted the 4 declared tool_uses. No SGA source is cited."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.LocalizationScalarUnit",
+  "declaration": "WeilConjectures.coefficientLocalizationScalarUnit",
+  "file": "lean/Sheaf/Paper/LocalizationScalarUnit.lean",
+  "statement": "theorem coefficientLocalizationScalarUnit (D : FiniteFieldDatum.{u}) (l : ℕ) [Fact l.Prime] (_hl : l ≠ D.p) (E L : Type u) [Field E] [Field L] [Algebra (Padic l) E] [FiniteDimensional (Padic l) E] [Algebra (Padic l) L] [FiniteDimensional (Padic l) L] (m n : ℕ) (φ : ULift.{u + 1, u} (finiteClosedCoefficient l E m) →+* ULift.{u + 1, u} (finiteClosedCoefficient l L n)) (X Z U : Over (Spec (CommRingCat.of D.k))) [IsSeparated X.hom] [LocallyOfFiniteType X.hom] [QuasiCompact X.hom] [IsSeparated Z.hom] [LocallyOfFiniteType Z.hom] [QuasiCompact Z.hom] [IsSeparated U.hom] [LocallyOfFiniteType U.hom] [QuasiCompact U.hom] (i : Z ⟶ X) (j : U ⟶ X) [IsClosedImmersion i.left] [IsOpenImmersion j.left] (_hij : Set.range j.left.base = (Set.range i.left.base)ᶜ) (M : finiteClosedDerived X.left (finiteClosedCoefficient l E m)) (_hM : finiteTorConstructibleProEtaleModule l E (m + 1) (Nat.succ_pos m) X.left M) (_hMB : finiteTorConstructibleProEtaleModule l L (n + 1) (Nat.succ_pos n) X.left ((finiteClosedScalar φ X.left).obj M)) (_hNAB : finiteTorConstructibleProEtaleModule l L (n + 1) (Nat.succ_pos n) Z.left ((finiteClosedScalar φ Z.left).obj ((finiteClosedExceptional (finiteClosedCoefficient l E m) i.left).obj M))) (_hNB : finiteTorConstructibleProEtaleModule l L (n + 1) (Nat.succ_pos n) Z.left ((finiteClosedExceptional (finiteClosedCoefficient l L n) i.left).obj ((finiteClosedScalar φ X.left).obj M))) (_hNA : ∃ K : Etale.DerivedCategoryModule (ULift.{u + 1, u} (finiteClosedCoefficient l E m)) Z.left, finiteTorConstructibleEtale l E (m + 1) (Nat.succ_pos m) Z.left K ∧ Nonempty (((ProEtale.comparisonUpperStar (ModuleCat.{u + 1} (ULift.{u + 1, u} (finiteClosedCoefficient l E m))) Z.left).mapDerivedCategory.obj K) ≅ (finiteClosedExceptional (finiteClosedCoefficient l E m) i.left).obj M)) (_hJM : ∃ K : Etale.DerivedCategoryModule (ULift.{u + 1, u} (finiteClosedCoefficient l E m)) U.left, finiteTorConstructibleEtale l E (m + 1) (Nat.succ_pos m) U.left K ∧ Nonempty (((ProEtale.comparisonUpperStar (ModuleCat.{u + 1} (ULift.{u + 1, u} (finiteClosedCoefficient l E m))) U.left).mapDerivedCategory.obj K) ≅ (finiteClosedPull (finiteClosedCoefficient l E m) j.left).obj M)) : IsNoetherian U.left ∧ QuasiCompact j.left ∧ IsSeparated j.left ∧ LocallyOfFiniteType j.left ∧ (∃ δ, Triangle.mk ((finiteClosedScalar φ X.left).map (finiteClosedCounit (finiteClosedCoefficient l E m) i.left M)) ((finiteClosedScalar φ X.left).map ((ProEtale.derivedUpperStarLowerStarAdjunction (ModuleCat.{u + 1} (ULift.{u + 1, u} (finiteClosedCoefficient l E m))) j.left).unit.app M)) δ ∈ distTriang (finiteClosedDerived X.left (finiteClosedCoefficient l L n))) ∧ (∃ δ, Triangle.mk (finiteClosedCounit (finiteClosedCoefficient l L n) i.left ((finiteClosedScalar φ X.left).obj M)) ((ProEtale.derivedUpperStarLowerStarAdjunction (ModuleCat.{u + 1} (ULift.{u + 1, u} (finiteClosedCoefficient l L n))) j.left).unit.app ((finiteClosedScalar φ X.left).obj M)) δ ∈ distTriang (finiteClosedDerived X.left (finiteClosedCoefficient l L n))) ∧ IsIso (ProEtale.finiteCoefficientChangeDirectImageMap φ i.left ((finiteClosedExceptional (finiteClosedCoefficient l E m) i.left).obj M)) ∧ IsIso (ProEtale.finiteCoefficientChangeDirectImageMap φ j.left ((finiteClosedPull (finiteClosedCoefficient l E m) j.left).obj M)) ∧ (finiteClosedScalar φ X.left).map ((ProEtale.derivedUpperStarLowerStarAdjunction (ModuleCat.{u + 1} (ULift.{u + 1, u} (finiteClosedCoefficient l E m))) j.left).unit.app M) ≫ ProEtale.finiteCoefficientChangeDirectImageMap φ j.left ((finiteClosedPull (finiteClosedCoefficient l E m) j.left).obj M) ≫ (finiteClosedPush (finiteClosedCoefficient l L n) j.left).map ((finiteClosedScalarPullIso φ j.left).inv.app M) = (ProEtale.derivedUpperStarLowerStarAdjunction (ModuleCat.{u + 1} (ULift.{u + 1, u} (finiteClosedCoefficient l L n))) j.left).unit.app ((finiteClosedScalar φ X.left).obj M)",
+  "branch": "sheaf-dag",
+  "by": "NI",
+  "date": "2026-10-22",
+  "existing": false,
+  "note": "Reuses the already published finiteClosed* canonical constructions, without applying any parent closed-shriek comparison theorem. Since the parent module owns these definitions, its future proof import of this module must be omitted to avoid an import cycle (stage 2 §3.7); there is no circular dependence of theorem declarations."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-920ec3652",
+  "group": "NI",
+  "result": "pass",
+  "note": "Every hypothesis and conclusion clause matches the node: the arbitrary coefficient map phi with no flatness, the complementary closed i / open j, D^b_ctf hypotheses on M_B, S_Z N_A and N_B, etale origins with finiteTorConstructibleEtale matching finiteCoefficientDirectImageMap_etaleOrigin_isIso, the Noetherian/qc/separated/finite-type conclusions, both triangles with the fixed counit and unit arrows and an existential connecting arrow, IsIso of the normalized finiteCoefficientChangeDirectImageMap for i and j, and S_X(eta_A) then c_j then Rj_*(finiteClosedScalarPullIso.inv) equal to eta_B. The statement field equals the file signature; the node statement and stmt_deps are unchanged; there are no new nodes, only sorry, and the docstrings carry the source place and blueprint id. Edge cases checked: Z or U empty, identity map, lowest level, nonflat Z/l^2 to Z/l. Advisories: (1) the public import of the parent theorem module FiniteClosedShriek closes an import cycle, which stage-2 rule 7 allows when listed and the lean.note lists it, as for the landed sibling NL locally-closed-scalar-pasting; the maintainer must move the finiteClosed* definitions into a definition module before stage 3. (2) The Second reading section is not independent (dispatcher policy); the worker report audits every clause. (3) finiteTorConstructibleProEtaleModule, pbcFixedScalarExtension and sfFiniteExceptionalFixed are not in any dependency record and enter through the parent's landed interface. (4) Several dependency modules are imported only through the parent. No compile: no change was made."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S5",
+  "result": "pass",
+  "landing": "20261022T145649-L-2037678",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

@@ -1,0 +1,233 @@
+{
+ "id": "lem-sfb-space-invertible-open-coherent",
+ "kind": "statement",
+ "title": "Invertible modules form an open substack for proper flat algebraic spaces",
+ "statement": "Let $S$ be a scheme [def-pc-scheme] and $f:X\\to S$ a flat proper finitely presented morphism of algebraic spaces [def-trf-algebraic-space, lem-sfb-space-flat-proper-fp-locality]. Let $\\mathcal C_{X/S}$ be the category fibred in groupoids of finitely presented quasi-coherent modules on $X_T=X\\times_ST$, flat over $T$ with support proper over $T$, with tensor-pullback isomorphisms as arrows, as specified in [lem-sfb-space-coherent-stack-general]. Let $\\mathcal L_{X/S}(T)$ be the full groupoid of line modules on $X_T$: modules on its small etale ringed site locally isomorphic to $\\mathcal O_{X_T}$. Its pullbacks are $u_X^*M=\\mathcal O_{X_{T'}}\\otimes_{u_X^{-1}\\mathcal O_{X_T}}u_X^{-1}M$ [lem-trf-space-enlarged-etale-ringed-site-model]. Forgetting invertibility defines a fully faithful morphism $\\mathcal L_{X/S}\\to\\mathcal C_{X/S}$ representable by open immersions [def-sfb-open-moduli-substack]. Explicitly, for every $S$-scheme $T$ and object $F\\in\\mathcal C_{X/S}(T)$ there is an open subscheme $U_F\\subseteq T$ such that, for every scheme map $v:T'\\to T$, $v_X^*F$ is a line module if and only if $v$ factors through $U_F$, and $T\\times_{\\mathcal C_{X/S}}\\mathcal L_{X/S}$ is represented by $U_F$. No Noetherian, reduced-fibre, section or cohomological-flatness hypothesis is imposed.",
+ "source": {
+  "document": "literature/stacks-project/quot.tex",
+  "place": "Tag 0D03 (lemma-picard-stack-open-in-coh), for algebraic spaces, not only schemes."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-trf-algebraic-space",
+  "lem-sfb-space-flat-proper-fp-locality",
+  "lem-sfb-space-coherent-stack-general",
+  "lem-trf-space-enlarged-etale-ringed-site-model",
+  "def-sfb-open-moduli-substack"
+ ],
+ "proof": [
+  {
+   "text": "For each $T\\to S$, put $p=f_T:X_T\\to T$. By [lem-sfb-space-flat-proper-fp-locality], $p$ is flat, proper and finitely presented. A line module $L$ has local presentation $\\mathcal O^0\\to\\mathcal O\\to L\\to0$, hence is quasi-coherent and finitely presented. On these trivializations its flatness over $T$ is that of $\\mathcal O_{X_T}$, hence follows from flatness of $p$. Its support is proper: take the closed immersion $X_T\\xrightarrow{\\mathrm{id}}X_T$ and the finite type module $L$ in the support definition of [lem-sfb-space-coherent-stack-general]. Thus it is an object of $\\mathcal C_{X/S}(T)$. Tensor pullback sends a local generator $e$ to $1\\otimes e$, with inverse $a\\otimes be\\mapsto ab$ on a trivialization. It therefore preserves line modules. On isomorphisms the forgetful functor is the inclusion of a full subgroupoid, so is fully faithful and respects cartesian pullbacks [def-trf-space-etale-module-functors].",
+   "uses": [
+    "lem-sfb-space-flat-proper-fp-locality",
+    "lem-sfb-space-coherent-stack-general",
+    "def-trf-space-etale-module-functors"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/quot.tex",
+    "place": "Tag 0D03 (lemma-picard-stack-open-in-coh), proof."
+   }
+  },
+  {
+   "text": "Fix $F\\in\\mathcal C_{X/S}(T)$. It is finitely presented, quasi-coherent and flat over $T$ by [lem-sfb-space-coherent-stack-general]. The morphism $p:X_T\\to T$ is locally of finite presentation by [lem-sfb-space-flat-proper-fp-locality]. Apply [lem-sfb-space-relative-finite-free-locus-base-change] to obtain the open subset $W=W(F)$ of $|X_T|$. For every $v:T'\\to T$, writing $q:X_{T'}\\to X_T$, its conclusion gives $W(q^*F)=|q|^{-1}(W)$, including for nonflat $v$ and nonreduced test schemes.",
+   "uses": [
+    "lem-sfb-space-coherent-stack-general",
+    "lem-sfb-space-flat-proper-fp-locality",
+    "lem-sfb-space-relative-finite-free-locus-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/quot.tex",
+    "place": "Tag 0D03 (lemma-picard-stack-open-in-coh), proof."
+   }
+  },
+  {
+   "text": "Within $W$, let $V$ be the locus of rank one. On an etale trivialization $F\\simeq\\mathcal O^{\\oplus r}$ the rank is $r$: two such trivializations have the same rank at a common geometric point because tensoring their isomorphism with its residue field gives an isomorphism of finite-dimensional vector spaces. The images of these etale trivializing charts are open by [lem-a1-space-affine-etale-cover], so every rank locus is open in $W$; $V$ is open in $|X_T|$, and $C=|X_T|\\setminus V$ is closed. For $q$ as above, step 2 identifies the free loci. At points of this inverse image, pulling back a trivialization gives $\\mathcal O^{\\oplus r}$ again; its geometric fibre has dimension $r$ after any residue-field extension. Consequently $V(q^*F)=|q|^{-1}(V)$ and $C(q^*F)=|q|^{-1}(C)$. Here $V(q^*F)$ denotes its rank-one locally free locus, not a support. A module is a line module precisely when this locus is the entire space, by the local definition of line module [def-trf-algebraic-space].",
+   "uses": [
+    "def-trf-algebraic-space",
+    "lem-sfb-space-relative-finite-free-locus-base-change",
+    "lem-a1-space-affine-etale-cover"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/quot.tex",
+    "place": "Tag 0D03 (lemma-picard-stack-open-in-coh), proof."
+   }
+  },
+  {
+   "text": "Since $p$ is proper, its map on topological spaces is closed, as explicitly stated in [lem-sfb-space-flat-proper-fp-locality]. Define the open subscheme $U_F=T\\setminus p(C)$. For any $v:T'\\to T$, the set $|q|^{-1}(C)$ is empty exactly when $v$ has image in $U_F$. Indeed a point of $X_{T'}$ over a point of $C$ gives a point of $T'$ mapping into $p(C)$. Conversely, if $t'\\in T'$ and $x\\in C$ have the same image $t\\in T$, represent $x$ by a field-valued point and combine its residue field with $\\kappa(t')$ over $\\kappa(t)$. The common-extension theorem [lem-weil-common-extension-fields], applied to these two extensions of $\\kappa(t)$, supplies a common field with embeddings agreeing on $\\kappa(t)$. The two maps from its spectrum therefore give a point of the sheaf fibre product $X_T\\times_TT'$ over both. This uses exactly the fibre-product and field-valued-point conventions of [lem-trf-space-fibre-products-etale-covers]. Step 3 now says that $v_X^*F$ is a line module exactly when $v$ has image in $U_F$, equivalently when $v$ factors uniquely through this open subscheme. The same argument allows empty spaces and empty fibres.",
+   "uses": [
+    "lem-sfb-space-flat-proper-fp-locality",
+    "lem-trf-space-fibre-products-etale-covers",
+    "lem-weil-common-extension-fields"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/quot.tex",
+    "place": "Tag 0D03 (lemma-picard-stack-open-in-coh), proof."
+   }
+  },
+  {
+   "text": "Over a map $v:T'\\to T$, an object of $T\\times_{\\mathcal C_{X/S}}\\mathcal L_{X/S}$ is a line module $L$ together with an isomorphism $\\alpha:L\\simeq v_X^*F$. Such an object exists exactly under the condition of step 4. If it exists, every two pairs $(L,\\alpha),(L',\\alpha')$ have the unique arrow $(\\alpha')^{-1}\\alpha$ respecting the isomorphisms; in particular their automorphisms are trivial. The fibre groupoid is therefore empty or equivalent to the terminal groupoid, exactly as for the discrete representable functor $h_{U_F}$. Sending a pair to the unique factorization through $U_F$ commutes with pullbacks, and its inverse assigns the pulled-back $F$ with its identity isomorphism. This gives the required representing equivalence. By [def-sfb-open-moduli-substack], the full subcategory is an open substack and its inclusion is representable by open immersions.",
+   "uses": [
+    "def-sfb-open-moduli-substack"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/quot.tex",
+    "place": "Tag 0D03 (lemma-picard-stack-open-in-coh), proof."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-space-flat-proper-fp-locality",
+  "lem-sfb-space-coherent-stack-general",
+  "def-trf-space-etale-module-functors",
+  "lem-sfb-space-relative-finite-free-locus-base-change",
+  "def-trf-algebraic-space",
+  "lem-a1-space-affine-etale-cover",
+  "lem-trf-space-fibre-products-etale-covers",
+  "lem-weil-common-extension-fields",
+  "def-sfb-open-moduli-substack"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/quot.tex",
+  "place": "Tag 0D03 (lemma-picard-stack-open-in-coh), proof."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For a flat proper finitely presented morphism of algebraic spaces the invertible modules form an open substack of the stack of coherent sheaves flat over the base",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.UniversallyOpen.of_flat\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/UniversallyOpen\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.Flat f]\\n  [AlgebraicGeometry.LocallyOfFinitePresentation f], AlgebraicGeometry.UniversallyOpen f\", \"doc\": \"A morphism of schemes that is flat and locally of finite presentation is universally open. This means that for any base change $ Y' \\to Y $, the induced morphism $ X \\times_Y Y' \\to Y' $ is an open map o\"}\n  {\"name\": \"Algebra.isOpen_smoothLocus\", \"module\": \"Mathlib/RingTheory/Smooth/Locus\", \"type\": \"∀ {R : Type u_1} {A : Type u_2} [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A]\\n  [Algebra.FinitePresentation R A], IsOpen (Algebra.smoothLocus R A)\", \"doc\": \"If $ A $ is a finitely presented algebra over a commutative ring $ R $, then the smooth locus of $ A $ over $ R $ is an open subset of the prime spectrum $ \\\\operatorname{Spec}(A) $ equipped with the Z\"}\n  {\"name\": \"AlgebraicGeometry.Flat.instOfIsOpenImmersion\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Flat\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.IsOpenImmersion f], AlgebraicGeometry.Flat f\", \"doc\": \"Every open immersion of schemes is a flat morphism.\"}\n  {\"name\": \"Module.isOpen_freeLocus\", \"module\": \"Mathlib/RingTheory/Spectrum/Prime/FreeLocus\", \"type\": \"∀ {R : Type uR} {M : Type uM} [inst : CommRing R] [inst_1 : AddCommGroup M] [inst_2 : Module R M]\\n  [Module.FinitePresentation R M], IsOpen (Module.freeLocus R M)\", \"doc\": \"For a finitely presented module $ M $ over a commutative ring $ R $, the set of prime ideals $ \\\\mathfrak{p} \\\\in \\\\operatorname{Spec}(R) $ where the localization $ M_{\\\\mathfrak{p}} $ is a free module ov\"}\n  {\"name\": \"AlgebraicGeometry.IsOpenImmersion.of_flat_of_mono\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FlatMono\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.Flat f]\\n  [AlgebraicGeometry.LocallyOfFinitePresentation f] [CategoryTheory.Mono f], AlgebraicGeometry.IsOpenImmersion f\", \"doc\": \"If a morphism $ f : X \\to Y $ of schemes is flat, locally of finite presentation, and a monomorphism, then $ f $ is an open immersion. This means the underlying continuous map is a topological open emb\"}\n  {\"name\": \"AlgebraicGeometry.Flat\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Flat\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"The property that a morphism $ f : X \\to Y $ of schemes is flat.\"}\n  {\"name\": \"AlgebraicGeometry.Flat.instIsMultiplicativeScheme\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Flat\", \"type\": \"CategoryTheory.MorphismProperty.IsMultiplicative @AlgebraicGeometry.Flat\", \"doc\": \"The property of being a flat morphism of schemes is multiplicative. That is, if $ f : X \\\\to Y $ and $ g : Y \\\\to Z $ are flat morphisms of schemes, then their composition $ g \\\\circ f : X \\\\to Z $ is als\"}\n  {\"name\": \"AlgebraicGeometry.Flat.instHasRingHomPropertyFlat\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Flat\", \"type\": \"AlgebraicGeometry.HasRingHomProperty @AlgebraicGeometry.Flat fun {R S} [CommRing R] [CommRing S] => RingHom.Flat\", \"doc\": \"The property of being a flat morphism of schemes is characterized by the flatness of the corresponding ring homomorphism. Specifically, a morphism of schemes is flat if and only if the associated ring\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme or presheaf open immersions and module free loci do not give the base-change-universal rank-one open locus in a proper algebraic-space family"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsOpenImmersion\", \"Sheaf\"",
+   "results": "[loogle] OK 12 hit(s)\n  {\"name\": \"AlgebraicGeometry.PresheafedSpace.IsOpenImmersion\", \"module\": \"Mathlib.Geometry.RingedSpace.OpenImmersion\", \"type\": \" {C : Type u} [CategoryTheory.Category.{v, u} C] {X Y : AlgebraicGeometry.PresheafedSpace C} (f : X ⟶ Y) : Prop\", \"doc\": \"An open immersion of PresheafedSpaces is an open embedding `f : X ⟶ U ⊆ Y` of the underlying\\nspaces, such that the sheaf map `Y(V) ⟶ f _* X(V)` is an iso for each `V ⊆ U`.\"}\n  {\"name\": \"AlgebraicGeometry.SheafedSpace.IsOpenImmersion\", \"module\": \"Mathlib.Geometry.RingedSpace.OpenImmersion\", \"type\": \" {C : Type u} [CategoryTheory.Category.{v, u} C] {X Y : AlgebraicGeometry.SheafedSpace C} (f : X ⟶ Y) : Prop\", \"doc\": \"A morphism of SheafedSpaces is an open immersion if it is an open immersion as a morphism\\nof PresheafedSpaces\"}\n  {\"name\": \"AlgebraicGeometry.PresheafedSpace.IsOpenImmersion.locallyRingedSpace_toLocallyRingedSpace\", \"module\": \"Mathlib.Geometry.RingedSpace.OpenImmersion\", \"type\": \" {X Y : AlgebraicGeometry.LocallyRingedSpace} (f : X ⟶ Y) [AlgebraicGeometry.LocallyRingedSpace.IsOpenImmersion f] : AlgebraicGeometry.PresheafedSpace.IsOpenImmersion.toLocallyRingedSpace Y f.toHom = X\", \"doc\": \"\"}\n  {\"name\": \"AlgebraicGeometry.PresheafedSpace.IsOpenImmersion.ofIso\", \"module\": \"Mathlib.Geometry.RingedSpace.OpenImmersion\", \"type\": \" {C : Type u} [CategoryTheory.Category.{v, u} C] {X Y : AlgebraicGeometry.PresheafedSpace C} (H : X ≅ Y) : AlgebraicGeometry.PresheafedSpace.IsOpenImmersion H.hom\", \"doc\": \"An isomorphism is an open immersion.\"}\n  {\"name\": \"AlgebraicGeometry.PresheafedSpace.IsOpenImmersion.toLocallyRingedSpace\", \"module\": \"Mathlib.Geometry.RingedSpace.OpenImmersion\", \"type\": \" {X : AlgebraicGeometry.PresheafedSpace CommRingCat} (Y : AlgebraicGeometry.LocallyRingedSpace) (f : X ⟶ Y.toPresheafedSpace) [H : AlgebraicGeometry.PresheafedSpace.IsOpenImmersion f] : AlgebraicGeometry.LocallyRingedSpace\", \"doc\": \"If `X ⟶ Y` is an open immersion, and `Y` is a LocallyRingedSpace, then so is `X`.\"}\n  {\"name\": \"AlgebraicGeometry.PresheafedSpace.IsOpenImmersion.toSheafedSpace\", \"module\": \"Mathlib.Geometry.RingedSpace.OpenImmersion\", \"type\": \" {C : Type u} [CategoryTheory.Category.{v, u} C] {X : AlgebraicGeometry.PresheafedSpace C} (Y : AlgebraicGeometry.SheafedSpace C) (f : X ⟶ Y.toPresheafedSpace) [H : AlgebraicGeometry.PresheafedSpace.IsOpenImmersion f] : AlgebraicGeometry.SheafedSpace C\", \"doc\": \"If `X ⟶ Y` is an open immersion, and `Y` is a SheafedSpace, then so is `X`.\"}\n  {\"name\": \"AlgebraicGeometry.PresheafedSpace.IsOpenImmersion.mono\", \"module\": \"Mathlib.Geometry.RingedSpace.OpenImmersion\", \"type\": \" {C : Type u} [CategoryTheory.Category.{v, u} C] {X Y : AlgebraicGeometry.PresheafedSpace C} (f : X ⟶ Y) [H : AlgebraicGeometry.PresheafedSpace.IsOpenImmersion f] : CategoryTheory.Mono f\", \"doc\": \"\"}\n  {\"name\": \"AlgebraicGeometry.PresheafedSpace.IsOpenImmersion.ofIsIso\", \"module\": \"Mathlib.Geometry.RingedSpace.OpenImmersion\", \"type\": \" {C : Type u} [CategoryTheory.Category.{v, u} C] {X Y : AlgebraicGeometry.PresheafedSpace C} (f : X ⟶ Y) [CategoryTheory.IsIso f] : AlgebraicGeometry.PresheafedSpace.IsOpenImmersion f\", \"doc\": \"\"}\n  {\"name\": \"AlgebraicGeometry.SheafedSpace.IsOpenImmersion.instMono\", \"module\": \"Mathlib.Geometry.RingedSpace.OpenImmersion\", \"type\": \" {C : Type u} [CategoryTheory.Category.{v, u} C] {X Z : AlgebraicGeometry.SheafedSpace C} (f : X ⟶ Z) [H : AlgebraicGeometry.SheafedSpace.IsOpenImmersion f] : CategoryTheory.Mono f\", \"doc\": \"\"}\n  {\"name\": \"AlgebraicGeometry.SheafedSpace.IsOpenImmersion.of_isIso\", \"module\": \"Mathlib.Geometry.RingedSpace.OpenImmersion\", \"type\": \" {C : Type u} [CategoryTheory.Category.{v, u} C] {X Y : AlgebraicGeometry.SheafedSpace C} (f : X ⟶ Y) [CategoryTheory.IsIso f] : AlgebraicGeometry.SheafedSpace.IsOpenImmersion f\", \"doc\": \"\"}\n  {\"name\": \"AlgebraicGeometry.PresheafedSpace.IsOpenImmersion.toLocallyRingedSpaceHom\", \"module\": \"Mathlib.Geometry.RingedSpace.OpenImmersion\", \"type\": \" {X : AlgebraicGeometry.PresheafedSpace CommRingCat} (Y : AlgebraicGeometry.LocallyRingedSpace) (f : X ⟶ Y.toPresheafedSpace) [H : AlgebraicGeometry.PresheafedSpace.IsOpenImmersion f] : AlgebraicGeometry.PresheafedSpace.IsOpenImmersion.toLocallyRingedSpace Y f ⟶ Y\", \"doc\": \"If `X ⟶ Y` is an open immersion of PresheafedSpaces, and `Y` is a LocallyRingedSpace, we can\\nupgrade it into a morphism of LocallyRingedSpace.\"}\n  {\"name\": \"AlgebraicGeometry.PresheafedSpace.IsOpenImmersion.toLocallyRingedSpace_isOpenImmersion\", \"module\": \"Mathlib.Geometry.RingedSpace.OpenImmersion\", \"type\": \" {X : AlgebraicGeometry.PresheafedSpace CommRingCat} (Y : AlgebraicGeometry.LocallyRingedSpace) (f : X ⟶ Y.toPresheafedSpace) [H : AlgebraicGeometry.PresheafedSpace.IsOpenImmersion f] : AlgebraicGeometry.LocallyRingedSpace.IsOpenImmersion (AlgebraicGeometry.PresheafedSpace.IsOpenImmersion.toLocallyR\", \"doc\": \"\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme or presheaf open immersions and module free loci do not give the base-change-universal rank-one open locus in a proper algebraic-space family"
+  },
+  {
+   "tool": "grep",
+   "query": "invertible.*(stack|locus)|PicardStack|picard_stack|coherent.*stack",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme or presheaf open immersions and module free loci do not give the base-change-universal rank-one open locus in a proper algebraic-space family"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The locus where a relatively flat finitely presented module on a proper algebraic space is a line bundle is represented by an open subscheme of the base",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"Algebra.isOpen_smoothLocus\", \"module\": \"Mathlib.RingTheory.Smooth.Locus\", \"type\": \"[FinitePresentation R A] : IsOpen (smoothLocus R A)\", \"doc\": \"If $ A $ is a finitely presented algebra over a commutative ring $ R $, then the smooth locus of $ A $ over $ R $ is an open subset of the prime spectrum $ \\\\operatorname{Spec}(A) $ equipped with the Z\"}\n  {\"name\": \"AlgebraicGeometry.UniversallyOpen.of_flat\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.UniversallyOpen\", \"type\": \"[Flat f] [LocallyOfFinitePresentation f] : UniversallyOpen f\", \"doc\": \"A morphism of schemes that is flat and locally of finite presentation is universally open. This means that for any base change $ Y' \\to Y $, the induced morphism $ X \\times_Y Y' \\to Y' $ is an open map o\"}\n  {\"name\": \"AlgebraicGeometry.IsOpenImmersion.of_flat_of_mono\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.FlatMono\", \"type\": \"{X Y : Scheme.{u}} (f : X ⟶ Y) [Flat f] [LocallyOfFinitePresentation f] [Mono f] : IsOpenImmersion f\", \"doc\": \"If a morphism $ f : X \\to Y $ of schemes is flat, locally of finite presentation, and a monomorphism, then $ f $ is an open immersion. This means the underlying continuous map is a topological open emb\"}\n  {\"name\": \"AlgebraicGeometry.instLocallyOfFinitePresentationOfIsSmooth\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Smooth\", \"type\": \"[hf : IsSmooth f] : LocallyOfFinitePresentation f\", \"doc\": \"Every smooth morphism of schemes is locally of finite presentation.\"}\n  {\"name\": \"Module.isLocallyConstant_rankAtStalk\", \"module\": \"Mathlib.RingTheory.Spectrum.Prime.FreeLocus\", \"type\": \"[Module.FinitePresentation R M] [Module.Flat R M] : IsLocallyConstant (rankAtStalk (R := R) M)\", \"doc\": \"If $ M $ is a finitely presented and flat module over a commutative semiring $ R $, then the function assigning to each prime ideal $ \\\\mathfrak{p} \\\\in \\\\operatorname{Spec}(R) $ the rank of the localiza\"}\n  {\"name\": \"Module.isOpen_freeLocus\", \"module\": \"Mathlib.RingTheory.Spectrum.Prime.FreeLocus\", \"type\": \"[Module.FinitePresentation R M] : IsOpen (freeLocus R M)\", \"doc\": \"For a finitely presented module $ M $ over a commutative ring $ R $, the set of prime ideals $ \\\\mathfrak{p} \\\\in \\\\operatorname{Spec}(R) $ where the localization $ M_{\\\\mathfrak{p}} $ is a free module ov\"}\n  {\"name\": \"Module.basicOpen_subset_freeLocus_iff\", \"module\": \"Mathlib.RingTheory.Spectrum.Prime.FreeLocus\", \"type\": \"[Module.FinitePresentation R M] {f : R} :\\n  (basicOpen f : Set (PrimeSpectrum R)) ⊆ freeLocus R M ↔\\n    Module.Projective (Localization.Away f) (LocalizedModule (.powers f) M)\", \"doc\": \"For a finitely presented module $ M $ over a commutative ring $ R $ and an element $ f \\\\in R $, the basic open set $ D(f) $ in the prime spectrum $ \\\\operatorname{Spec}(R) $ is contained in the free lo\"}\n  {\"name\": \"Module.freeLocus_eq_univ\", \"module\": \"Mathlib.RingTheory.Spectrum.Prime.FreeLocus\", \"type\": \"[Module.Finite R M] [Module.Flat R M] : freeLocus R M = Set.univ\", \"doc\": \"For a commutative ring $ R $ and an $ R $-module $ M $ that is finitely generated and flat, the free locus of $ M $—the set of prime ideals $ \\\\mathfrak{p} $ in the prime spectrum of $ R $ where the lo\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme or presheaf open immersions and module free loci do not give the base-change-universal rank-one open locus in a proper algebraic-space family"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Rank one locally free sheaves define a representable open immersion into the moduli stack of coherent modules on a proper flat algebraic space",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.LocalRepresentability.representableBy\", \"module\": \"Mathlib/AlgebraicGeometry/Sites/Representability\", \"type\": \"{F : CategoryTheory.Sheaf AlgebraicGeometry.Scheme.zariskiTopology (Type u)} →\\n  {ι : Type u} →\\n    {X : ι → AlgebraicGeometry.Scheme} →\\n      {f : (i : ι) → CategoryTheory.yoneda.obj (X i) ⟶ F.val} →\\n        (hf : ∀ (i : ι), AlgebraicGeometry.IsOpenImmersion.presheaf (f i)) →\\n          [CategoryThe\", \"doc\": \"The functor $ F $ is representable by the scheme constructed from Zariski gluing data $ \\\\text{glueData} $ and condition $ hf $, establishing a natural isomorphism between $ F $ and the Yoneda embeddin\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.LocalRepresentability.isRepresentable\", \"module\": \"Mathlib/AlgebraicGeometry/Sites/Representability\", \"type\": \"∀ {F : CategoryTheory.Sheaf AlgebraicGeometry.Scheme.zariskiTopology (Type u)} {ι : Type u}\\n  {X : ι → AlgebraicGeometry.Scheme} {f : (i : ι) → CategoryTheory.yoneda.obj (X i) ⟶ F.val},\\n  (∀ (i : ι), AlgebraicGeometry.IsOpenImmersion.presheaf (f i)) →\\n    ∀\\n      [CategoryTheory.Presheaf.IsLocallySu\", \"doc\": \"The functor $ F $ is representable, meaning there exists an object $ X $ in the category of schemes such that $ F $ is naturally isomorphic to the Hom functor $ \\\\mathrm{Hom}(-, X) $.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.IdealSheafData.isOpenImmersion_glueDataObjMap\", \"module\": \"Mathlib/AlgebraicGeometry/IdealSheaf/Subscheme\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} (I : X.IdealSheafData) {V : ↑X.affineOpens} (f : ↑(X.presheaf.obj (Opposite.op ↑V))),\\n  AlgebraicGeometry.IsOpenImmersion (I.glueDataObjMap ⋯)\", \"doc\": \"For a scheme $X$ with ideal sheaf data $\\\\mathcal{I}$, an affine open subset $V \\\\subseteq X$, and a section $f$ of the structure sheaf over $V$, the morphism induced by the inclusion $D(f) \\\\subseteq V$\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.LocalRepresentability.instIsOpenImmersionToGlued\", \"module\": \"Mathlib/AlgebraicGeometry/Sites/Representability\", \"type\": \"∀ {F : CategoryTheory.Sheaf AlgebraicGeometry.Scheme.zariskiTopology (Type u)} {ι : Type u}\\n  {X : ι → AlgebraicGeometry.Scheme} {f : (i : ι) → CategoryTheory.yoneda.obj (X i) ⟶ F.val}\\n  (hf : ∀ (i : ι), AlgebraicGeometry.IsOpenImmersion.presheaf (f i)) (i : ι),\\n  AlgebraicGeometry.IsOpenImmersion (\", \"doc\": \"For each index $i$, the canonical morphism from the scheme $X_i$ to the glued scheme constructed from the gluing data is an open immersion. This asserts that the inclusion of each component scheme int\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.instIsLeftAdjointRestrictFunctor\", \"module\": \"Mathlib/AlgebraicGeometry/Modules/Sheaf\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [inst : AlgebraicGeometry.IsOpenImmersion f],\\n  (AlgebraicGeometry.Scheme.Modules.restrictFunctor f).IsLeftAdjoint\", \"doc\": \"For an open immersion $ f: X \\to Y $ between schemes, the restriction functor from the category of sheaves of modules over $ Y $ to the category of sheaves of modules over $ X $, induced by $ f $, has \"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.instIsRightAdjointPresheafOfModulesToPresheafOfModules\", \"module\": \"Mathlib/AlgebraicGeometry/Modules/Sheaf\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme}, (AlgebraicGeometry.Scheme.Modules.toPresheafOfModules X).IsRightAdjoint\", \"doc\": \"The forgetful functor from the category of sheaves of modules over a scheme $ X $ to the category of presheaves of modules over $ X $ is a right adjoint.\"}\n  {\"name\": \"AlgebraicGeometry.instIsOpenImmersionMapSchemeCompOverOverTopMorphismPropertyForgetForget\", \"module\": \"Mathlib/AlgebraicGeometry/LimitsOver\", \"type\": \"∀ (P : CategoryTheory.MorphismProperty AlgebraicGeometry.Scheme) {S : AlgebraicGeometry.Scheme} {J : Type u_1}\\n  [inst : CategoryTheory.Category.{v_1, u_1} J] (F : CategoryTheory.Functor J (P.Over ⊤ S))\\n  [∀ {i j : J} (f : i ⟶ j), AlgebraicGeometry.IsOpenImmersion (F.map f).left] {i j : J} (f : i ⟶ \", \"doc\": \"For any morphism $ f $ in the appropriate category, applying the composition of the forgetful functors (first forgetting the morphism property and then forgetting the over category structure) results \"}\n  {\"name\": \"AlgebraicGeometry.Flat.instOfIsOpenImmersion\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Flat\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.IsOpenImmersion f], AlgebraicGeometry.Flat f\", \"doc\": \"Every open immersion of schemes is a flat morphism.\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme or presheaf open immersions and module free loci do not give the base-change-universal rank-one open locus in a proper algebraic-space family"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-space-picard-stack-smooth",
+  "date": "2026-10-23",
+  "group": "Q57"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Stable genus and smooth-family open loci in curve families. Supporting input: 0E76 proof via lemma-stable: the relative dualizing sheaf used to detect fibrewise stability by ampleness. Supporting input: Quasi-coherent cohomological dimension of algebraic-space curve families. Supporting cohomology input: local scheme representability of the curve family, before using scheme cohomology. Supporting input in Tag 0E6F proof, first paragraph: the smooth covering with a relatively ample invertible module obtained from Tag 0DQ0. Picard-stack input in the smoothness paragraph of Tag 0DQ0 (lemma-polarized-curves-over-curves): moduli.tex Tag 0DPJ, for an algebraic-space total space. Supporting Invertible modules form an open substack for proper flat algebraic spaces.",
+   "via": [
+    "lem-sfb-space-picard-stack-smooth",
+    "lem-sfb-curve-smooth-polarization-cover",
+    "lem-sfb-curve-etale-scheme-cover",
+    "lem-sfb-proper-space-curve-qcoh-bound",
+    "lem-sfb-nodal-relative-dualizing-line",
+    "lem-sfb-stable-and-smooth-family-open-loci",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-space-invertible-open-coherent",
+  "worker": "stage1",
+  "summary": "Followed Stacks 0D03 for algebraic spaces. Added the statement-only algebraic-space finite-free-locus theorem 0CZT; constructed the rank-one locus and its base-change rule from finite local trivializations, then removed its closed complement by properness. Wrote out the point-lifting and two-fibre-product arguments, checked arbitrary bases and empty fibres, and retained the statement and metadata. The inherited blueprint ancestor chain terminates at a missing Lean-module id; preserved its null from.node and documented it in the report.",
+  "blueprint": "The inherited provenance describes the Picard-stack smoothness input to the curve-polarization step (Tag 0DQ0), below the direct-image stability alteration route. Steps 1-5 realize precisely Tag 0D03 cited there: eligibility of line modules; relative free locus; rank one; proper image complement; representing two-fibre-product equivalence. No chapter/unit route is changed.",
+  "tool_uses": [
+   {
+    "node": "lem-trf-space-fibre-products-etale-covers",
+    "why": "Generic sheaf-fibre-product and field-valued-point conventions needed for the arbitrary-base-change scheme test; no node in this unit supplies them."
+   },
+   {
+    "node": "lem-a1-space-affine-etale-cover",
+    "why": "Generic openness of etale chart images makes the elementary rank loci open on the algebraic space; this unit supplies no separate topology theorem."
+   },
+   {
+    "node": "lem-weil-common-extension-fields",
+    "why": "Generic field amalgamation supplies a point of the fibre product over any pair of compatible points; this unit has no common-field theorem."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-trf-space-fibre-products-etale-covers",
+  "lem-a1-space-affine-etale-cover",
+  "lem-weil-common-extension-fields"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q88-3a25506c4",
+  "group": "Q88",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q88-3a25506c4 (reviewer sub-agent of L); spot-checked: Read the item, the new node and Stacks 0D03 (quot.tex lemma-picard-stack-open-in-coh) and 0CZT (spaces-more-morphisms lemma-finite-free-open) in full. This is a first delivery: the item is unsplit on live and side-live, there is no repair note, and the statement is unchanged. Steps 1-5 follow 0D03. Step 1 cites the coherent-stack node for eligibility (proper means separated, support proper via id). Step 2 cites the new 0CZT node for the free locus and its base change. Step 3 is elementary: the rank is well defined, the rank loci are open via lem-a1 étale-image openness, and V(q*F)=|q|^-1 V checked both ways. Step 4 uses the closed map from universal closedness and the common-extension-field plus fibre-product universal property for the reverse direction. Using C = complement of the open rank-one locus avoids the source's quasi-compactness remark. Step 5 shows each fibre groupoid is empty or contractible, which is the definition in def-sfb-open-moduli-substack. Edge cases X_T empty, F=0, constant rank 2 and non-flat v all check out. The new node matches 0CZT hypothesis by hypothesis, is statement-only and searched in Mathlib (5 queries), and the flatness hypothesis is needed (k[t]/(t) counterexample). It is not a duplicate of the scheme-only lem-sfb-relative-finite-free-locus-base-change (0CZR, Zariski, schemes); there are no blueprint hits, so same_as [] is right. Accepted tool_uses (all generic): lem-trf-space-fibre-products-etale-covers, lem-a1-space-affine-etale-cover, lem-weil-common-extension-fields. Batch-5: every listed trf citation is a general definition or foundation of algebraic spaces (fibre products, étale-image openness, module functors, QCoh, morphism properties), not given by the trace-formula or Poincaré-duality assumptions or part of their proofs. Maintainer note: blueprint.from.node is null because the inherited ancestor chain ends at a non-node id under lem-sfb-admissible-direct-image. This is a base provenance defect, not a fault of this delivery."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SpaceInvertibleOpenCoherent",
+  "declaration": "AlgebraicGeometry.AlgebraicSpace.invertible_open_coherent",
+  "declarations": [
+   "AlgebraicGeometry.AlgebraicSpace.CoherentModuli.isLine",
+   "AlgebraicGeometry.AlgebraicSpace.lineModuliCategory",
+   "AlgebraicGeometry.AlgebraicSpace.lineModuliInclusion",
+   "AlgebraicGeometry.AlgebraicSpace.invertible_open_coherent"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/SpaceInvertibleOpenCoherent.lean",
+  "statement": "theorem invertible_open_coherent (f : X ⟶ schemeSpace (Over.mk (𝟙 S))) (hflat : MapIsFlat f) (hproper : MapIsProper f) (hfp : ProperQuotFinitePresentation f) : (∀ (T : ProperQuotTest (schemeSpace (Over.mk (𝟙 S)))) (L : (properQuotFibre f T).Modules), (properQuotFibre f T).IsLineModule L → ∃ F : CoherentModuli f, F.base = T ∧ HEq F.module L) ∧ (lineModuliInclusion f).toFunctor.Full ∧ (lineModuliInclusion f).toFunctor.Faithful ∧ ∃ U : OpenModuliSubstack (CoherentModuli.category f), U.property = CoherentModuli.isLine f ∧ ∀ F : CoherentModuli f, ∃ W : F.base.left.left.Opens, ∀ (T' : ProperQuotTest (schemeSpace (Over.mk (𝟙 S)))) (v : T' ⟶ F.base), (properQuotFibre f T').IsLineModule ((moduleTensorPullback (properQuotFibreMap f v)).obj F.module) ↔ ∃ a : T'.left.left ⟶ W.toScheme, a ≫ W.ι = v.left.left",
+  "branch": "sheaf-dag",
+  "by": "Q119",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "Uses the existing coherent-family category, small-etale line predicate and normalized tensor pullback. Retains eligibility of every line module on every test fibre, the fully faithful full inclusion, an OpenModuliSubstack with exactly the line predicate, and the arbitrary-base-change universal open locus. No statement correction or dependency interface repair."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-250fe0ae6",
+  "group": "Q119",
+  "result": "pass",
+  "note": "Read node, Stacks 0D03 (quot.tex l.2601), all 6 stmt_dep records and their Lean (OpenModuliSubstack, CoherentModuli/category/Hom, ProperQuotTest/properQuotFibre(Map)/ProperQuotFinitePresentation, IsLineModule, MapIsFlat/MapIsProper, moduleTensorPullback). Hypotheses flat/proper/fp exactly; eligibility of every line module (base = T, HEq module), Full ∧ Faithful inclusion, OpenModuliSubstack with property = isLine, and the explicit per-F open W with line ⟺ factorization for every test map v (no flatness/reducedness). open_pullback's open equals W by Yoneda, so not weaker. Edge cases (empty X_T, F=0, rank 2, nonflat v) fine; single universe u is the dependencies' convention. Item differs from side-live only in lean; dep records byte-identical; statement verbatim; lines ≤92; helpers have real data and docstrings; theorem sorry with proof docstring; plain imports = proof_dep modules (required). No duplicate line category or theorem found. Theorem stmt_deps supplying plain defs are base stage-1 deps, not added. No compile per instructions; worker reports clean compile."
+ }
+}

@@ -1,0 +1,281 @@
+{
+ "id": "lem-sfb-stack-universal-injectivity-criteria",
+ "kind": "statement",
+ "title": "Universal injectivity, diagonal surjectivity and fullness on geometric groupoids",
+ "statement": "Let $S$ be a scheme [def-pc-scheme], with universes as in [def-weil-size-convention]. Stacks in groupoids, representability by algebraic spaces and 2-fibre products use [def-sfb-stable-pointed-moduli-groupoids], and algebraic spaces use [def-trf-algebraic-space]. An algebraic stack means a stack in groupoids with diagonal representable by algebraic spaces and a smooth surjective scheme atlas; smoothness is tested on scheme charts using [def-sbc-smooth-morphisms]. Its underlying point space consists of field-valued objects modulo isomorphism after common field extension, with topology detected by a smooth scheme atlas. Let $f:\\mathcal X\\to\\mathcal Y$ be a morphism of algebraic stacks over $S$. Say that $f$ is universally injective if for every morphism of algebraic stacks $\\mathcal Z\\to\\mathcal Y$, the map $|\\mathcal X\\times_{\\mathcal Y}\\mathcal Z|\\to|\\mathcal Z|$ is injective. The following are equivalent: (1) $f$ is universally injective; (2) its relative diagonal $\\Delta_f:\\mathcal X\\to\\mathcal X\\times_{\\mathcal Y}\\mathcal X$ is surjective on underlying points; (3) for every algebraically closed field $K$ [def-weil-field, def-weil-algebraic-closure] with $\\operatorname{Spec}K\\to S$, objects $x_1,x_2\\in\\mathcal X(K)$, and isomorphism $\\beta:f(x_1)\\xrightarrow{\\sim}f(x_2)$ in $\\mathcal Y(K)$, there is an isomorphism $\\alpha:x_1\\xrightarrow{\\sim}x_2$ with $f(\\alpha)=\\beta$.",
+ "source": {
+  "document": "literature/stacks-project/stacks-morphisms.tex",
+  "place": "Tag 0CPN (lemma-universally-injective), including its complete statement; universal injectivity is definition-universally-injective in the same section."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-size-convention",
+  "def-sfb-stable-pointed-moduli-groupoids",
+  "def-trf-algebraic-space",
+  "def-sbc-smooth-morphisms",
+  "def-weil-field",
+  "def-weil-algebraic-closure",
+  "def-sfb-algebraic-moduli-stack",
+  "def-sfb-dm-stack-morphism-properties"
+ ],
+ "proof": [
+  {
+   "text": "Set $P=\\mathcal X\\times_{\\mathcal Y}\\mathcal X$; this is algebraic by the fibre-product lemma. Its objects are $(x_1,x_2,\\beta)$, and an arrow to $(x'_1,x'_2,\\beta')$ is a pair $(u,v)$ satisfying $f(v)\\beta=\\beta'f(u)$. The diagonal sends $x$ to $(x,x,\\mathrm{id})$. Both projections composed with the diagonal are identities, and the two images of each point of $P$ in $|\\mathcal Y|$ agree, because $\\beta$ is an isomorphism. These assertions follow directly from the triple and arrow formulas.",
+   "uses": [
+    "lem-sfb-algebraic-stack-fibre-products",
+    "def-sfb-stable-pointed-moduli-groupoids",
+    "lem-sfb-stack-point-topology"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/stacks-morphisms.tex",
+    "place": "Tag 0CPN, preliminary notation and triple construction"
+   }
+  },
+  {
+   "text": "Assume (1). The first projection $p_1:P\\to\\mathcal X$ is a base change of $f$, so $|p_1|$ is injective. For $t\\in|P|$, put $a=|p_1|(t)$. Both $t$ and $|\\Delta_f|(a)$ map to $a$ under $|p_1|$. Injectivity gives $t=|\\Delta_f|(a)$, proving (2). This also covers an empty point set.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/stacks-morphisms.tex",
+    "place": "Tag 0CPN, (1) implies (2)"
+   }
+  },
+  {
+   "text": "Assume (2), and take any $\\mathcal Z\\to\\mathcal Y$. Put $W=\\mathcal X\\times_{\\mathcal Y}\\mathcal Z$ and $h:W\\to\\mathcal Z$. The diagonal $\\Delta_f$ is representable by the relative-diagonal lemma. Therefore its point-surjectivity is equivalent to surjectivity on every scheme base change. The chartwise calculus preserves this property under arbitrary base change. The map $W\\times_{\\mathcal Z}W\\to P$ forgets the $\\mathcal Z$-object and composes the comparison isomorphisms with the isomorphism between the two $\\mathcal Z$-objects. Its pullback of $\\Delta_f$ is $\\Delta_h$: the data are two $W$-objects and a compatible isomorphism of their $\\mathcal X$-components; together with the given isomorphism of their $\\mathcal Z$-components this is exactly an arrow in $W$. Thus $|\\Delta_h|$ is surjective, by the same representable-surjectivity criterion.",
+   "uses": [
+    "lem-sfb-algebraic-stack-fibre-products",
+    "lem-sfb-stack-relative-diagonal-finite-type",
+    "lem-sfb-representable-stack-point-surjectivity",
+    "lem-sfb-stack-chartwise-smooth-etale-calculus",
+    "def-sfb-stable-pointed-moduli-groupoids"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/stacks-morphisms.tex",
+    "place": "Tag 0CPN, (2) implies (1), first two sentences; explicit diagonal base-change identification"
+   }
+  },
+  {
+   "text": "If $a,b\\in|W|$ have the same image in $|\\mathcal Z|$, choose field representatives. Equality in $|\\mathcal Z|$ means that over a common extension their images become isomorphic. The two representatives and that isomorphism give an object of $W\\times_{\\mathcal Z}W$ projecting to $a,b$. Surjectivity of $|\\Delta_h|$ expresses its point as a diagonal point; its two projections are consequently equal. Hence $a=b$. Since $\\mathcal Z$ was arbitrary, (1) follows. This is the point-cartesian argument written from the definition, without assuming that point sets preserve fibre products bijectively.",
+   "uses": [
+    "def-sfb-stable-pointed-moduli-groupoids",
+    "lem-sfb-stack-point-topology"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/stacks-morphisms.tex",
+    "place": "Tag 0CPN, (2) implies (1), last sentences; stacks-properties.tex Tag 04XH (lemma-points-cartesian), explicit common-field argument"
+   }
+  },
+  {
+   "text": "Assume (3), and represent any $t\\in|P|$ over a field $L$. Extend $L$ to an algebraic closure $K$; pullback preserves its point class. Write its triple as $(x_1,x_2,\\beta)$ over $K$. By (3) choose $\\alpha:x_1\\simeq x_2$ with $f(\\alpha)=\\beta$. The pair $(\\mathrm{id}_{x_1},\\alpha)$ is an arrow from $\\Delta_f(x_1)$ to this triple, since its arrow equation is $f(\\alpha)\\mathrm{id}=\\beta f(\\mathrm{id})$. Thus $t$ is in the diagonal image, proving (2).",
+   "uses": [
+    "def-weil-algebraic-closure",
+    "def-sfb-stable-pointed-moduli-groupoids",
+    "lem-sfb-stack-point-topology"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/stacks-morphisms.tex",
+    "place": "Tag 0CPN, (3) implies (2)"
+   }
+  },
+  {
+   "text": "Assume (2), and fix the $K,x_1,x_2,\\beta$ in (3). For $t=(x_1,x_2,\\beta)$, the relative-diagonal lemma makes $T=\\mathcal X\\times_{P,t}\\operatorname{Spec}K$ an algebraic space locally of finite type over $K$. The representable point-surjectivity criterion makes $T\\to\\operatorname{Spec}K$ surjective, so $T$ is nonempty. Choose an etale surjective scheme chart $U\\to T$. The chartwise calculus makes $U\\to\\operatorname{Spec}K$ locally of finite type: etale implies smooth, hence locally finitely presented, hence locally of finite type, and such maps compose. Choose a nonempty affine finite-type open $V=\\operatorname{Spec}A$ of $U$. The ring $A$ is nonzero; the maximal-ideal leaf supplies a maximal ideal. It gives a closed point $v$ of $V$. The closed-point residue-field lemma gives $\\kappa(v)=K$ as $K$-fields, and the field-point classification gives a $K$-point of $V$, hence of $T$. Only $V$ is required to be affine or finite type; no quasi-compactness or separation of $T$ is used.",
+   "uses": [
+    "lem-sfb-stack-relative-diagonal-finite-type",
+    "lem-sfb-representable-stack-point-surjectivity",
+    "def-trf-algebraic-space",
+    "lem-sfb-stack-chartwise-smooth-etale-calculus",
+    "def-weil-finite-type-morphism",
+    "lem-weil-pbc-closed-point-residue-field-base",
+    "lem-weil-pbc-morphism-from-spec-field",
+    "lem-weil-common-extension-fields-maximal-ideal"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/stacks-morphisms.tex",
+    "place": "Tag 0CPN, (2) implies (3), through existence of a K-point of T; rational-point argument expanded on an affine etale chart"
+   }
+  },
+  {
+   "text": "A $K$-point of $T$ consists of $x\\in\\mathcal X(K)$ and an isomorphism from $\\Delta_f(x)$ to $(x_1,x_2,\\beta)$. Write its components $u:x\\simeq x_1$, $v:x\\simeq x_2$. The arrow equation is $f(v)=\\beta f(u)$. Set $\\alpha=v u^{-1}$. Then $f(\\alpha)=f(v)f(u)^{-1}=\\beta$, proving (3). The four implications prove the asserted equivalence; fullness asserts existence of a lift and does not assert uniqueness.",
+   "uses": [
+    "def-sfb-stable-pointed-moduli-groupoids"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/stacks-morphisms.tex",
+    "place": "Tag 0CPN, (2) implies (3), final sentence, explicitly unwound"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sfb-stable-pointed-moduli-groupoids",
+  "def-trf-algebraic-space",
+  "def-weil-algebraic-closure",
+  "def-weil-finite-type-morphism",
+  "lem-sfb-algebraic-stack-fibre-products",
+  "lem-sfb-representable-stack-point-surjectivity",
+  "lem-sfb-stack-chartwise-smooth-etale-calculus",
+  "lem-sfb-stack-point-topology",
+  "lem-sfb-stack-relative-diagonal-finite-type",
+  "lem-weil-common-extension-fields-maximal-ideal",
+  "lem-weil-pbc-closed-point-residue-field-base",
+  "lem-weil-pbc-morphism-from-spec-field"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/stacks-morphisms.tex",
+  "place": "Tag 0CPN (lemma-universally-injective), all four implications, with the common-field and affine-chart arguments made explicit"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "AlgebraicStack|universally.injective.*(groupoid|stack)|stack.*universally.injective",
+   "results": "[grep] OK 0 hit(s). No hits.",
+   "date": "2026-10-23",
+   "verdict": "no match: returned declarations concern schemes, not morphisms of algebraic stacks or their fibre groupoids"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Universal injectivity of an algebraic stack morphism is equivalent to fullness on geometric point groupoids",
+   "results": "[leansearch] OK 8 hit(s). AlgebraicGeometry.UniversallyInjective.mk, AlgebraicGeometry.Scheme.Hom.injective, AlgebraicGeometry.UniversallyInjective.universally_injective, AlgebraicGeometry.UniversallyInjective, AlgebraicGeometry.universallyInjective_eq, AlgebraicGeometry.universallyInjective_iff, AlgebraicGeometry.UniversallyInjective.iff_diagonal, AlgebraicGeometry.instUniversallyInjectiveOfMonoScheme",
+   "date": "2026-10-23",
+   "verdict": "no match: returned declarations concern schemes, not morphisms of algebraic stacks or their fibre groupoids"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"UniversallyInjective\", \"diagonal\"",
+   "results": "[loogle] OK 2 hit(s). AlgebraicGeometry.universallyInjective_eq_diagonal, AlgebraicGeometry.UniversallyInjective.iff_diagonal",
+   "date": "2026-10-23",
+   "verdict": "no match: returned declarations concern schemes, not morphisms of algebraic stacks or their fibre groupoids"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A morphism of algebraic stacks is universally injective if and only if its relative diagonal is surjective, equivalently the functor on algebraically closed field valued groupoids is full",
+   "results": "[leanfinder] OK 8 hit(s). AlgebraicGeometry.universallyInjective_eq_diagonal, AlgebraicGeometry.UniversallyInjective.iff_diagonal, AlgebraicGeometry.UniversallyInjective, AlgebraicGeometry.universallyInjective_iff, AlgebraicGeometry.universallyInjective_eq, AlgebraicGeometry.universallyInjective_isZariskiLocalAtTarget, AlgebraicGeometry.UniversallyInjective.universally_injective, AlgebraicGeometry.instIsMultiplicativeSchemeUniversallyInjective",
+   "date": "2026-10-23",
+   "verdict": "no match: returned declarations concern schemes, not morphisms of algebraic stacks or their fibre groupoids"
+  },
+  {
+   "tool": "grep",
+   "query": "AlgebraicStack|universally.injective.*groupoid|stack.*universally.injective",
+   "results": "OK 0 hits: ",
+   "date": "2026-10-23",
+   "verdict": "no match: schemes or ordinary categorical representability, not algebraic stacks and their relative diagonal"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Universal injectivity of algebraic stack morphisms and fullness on geometric point groupoids",
+   "results": "OK 8 hits: AlgebraicGeometry.Scheme.Hom.injective, AlgebraicGeometry.UniversallyInjective, AlgebraicGeometry.UniversallyInjective.mk, AlgebraicGeometry.instUniversallyInjectiveOfMonoScheme, AlgebraicGeometry.UniversallyInjective.iff_diagonal, AlgebraicGeometry.universallyInjective_eq, AlgebraicGeometry.universallyInjective_iff, AlgebraicGeometry.UniversallyInjective.universally_injective",
+   "date": "2026-10-23",
+   "verdict": "no match: schemes or ordinary categorical representability, not algebraic stacks and their relative diagonal"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"UniversallyInjective\", \"diagonal\"",
+   "results": "OK 2 hits: AlgebraicGeometry.universallyInjective_eq_diagonal, AlgebraicGeometry.UniversallyInjective.iff_diagonal",
+   "date": "2026-10-23",
+   "verdict": "no match: schemes or ordinary categorical representability, not algebraic stacks and their relative diagonal"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A morphism of algebraic stacks is universally injective if and only if its diagonal is surjective equivalently full on algebraically closed field points",
+   "results": "OK 8 hits: AlgebraicGeometry.universallyInjective_eq_diagonal, AlgebraicGeometry.UniversallyInjective.iff_diagonal, AlgebraicGeometry.UniversallyInjective, AlgebraicGeometry.universallyInjective_iff, AlgebraicGeometry.universallyInjective_eq, AlgebraicGeometry.universallyInjective_isZariskiLocalAtTarget, AlgebraicGeometry.UniversallyInjective.universally_injective, AlgebraicGeometry.instIsMultiplicativeSchemeUniversallyInjective",
+   "date": "2026-10-23",
+   "verdict": "no match: schemes or ordinary categorical representability, not algebraic stacks and their relative diagonal"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Full functors on geometric fibre groupoids characterize universal injectivity of morphisms of algebraic stacks",
+   "results": "OK 8 hits: AlgebraicGeometry.universallyInjective_isZariskiLocalAtTarget, AlgebraicGeometry.instIsMultiplicativeSchemeUniversallyInjective, AlgebraicGeometry.universallyInjective_eq_diagonal, AlgebraicGeometry.universallyInjective_eq, AlgebraicGeometry.UniversallyInjective, AlgebraicGeometry.universallyInjective_iff, AlgebraicGeometry.UniversallyInjective.universally_injective, AlgebraicGeometry.Scheme.Hom.injective",
+   "date": "2026-10-23",
+   "verdict": "no match: schemes or ordinary categorical representability, not algebraic stacks and their relative diagonal"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-stack-universal-homeomorphism-geometric-points",
+  "date": "2026-10-23",
+  "group": "Q28"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Scheme representability of the stable abelian-level normalization. Supporting input: passage from an inertia-free finite stack cover to a scheme finite over the coarse scheme. Coarse-morphism input to the finite inertia-free cover argument, before composing with the finite cover. Finite-inertia categorical quotient used before deriving finite type and discrete fibres. Keel--Mori construction: Geometric points of a universal homeomorphism from a stack. Supporting input: the universal-injectivity criterion, before comparing isomorphism classes of geometric objects.",
+   "via": [
+    "lem-sfb-stack-universal-homeomorphism-geometric-points",
+    "lem-sfb-keel-mori-finite-inertia-quotient",
+    "lem-sfb-dm-coarse-proper-locally-quasifinite",
+    "lem-sfb-inertia-free-finite-cover-coarse",
+    "lem-sfb-stable-abelian-level-normalization",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-stack-universal-injectivity-criteria",
+  "worker": "stage1",
+  "summary": "Kept the exact three criteria of 0CPN. Proved the four implications with explicit triple arrows, common-field point comparison, diagonal base change, and an affine-chart Nullstellensatz argument. Created only the general relative-diagonal representability/local-finite-type input 04XS; reused all other inputs. No project attachment or Mathlib stack match.",
+  "blueprint": "Current latest blueprint det-thm-sf-ctf-stability-direct-images proof (3), alteration/moduli prerequisite through the inherited universal-homeomorphism chain. Kept the mechanically computed null from.node (blueprint_refs.py ancestor returns None because the creation chain terminates in a Lean-module label rather than a DAG node); the precise semantic blueprint place remains explicit in from.place and this report.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-closed-point-residue-field-base",
+    "why": "General scheme rational-point tool for the affine chart in the geometric diagonal fibre; no result of this unit supplies it."
+   },
+   {
+    "node": "lem-weil-pbc-morphism-from-spec-field",
+    "why": "General scheme rational-point tool for the affine chart in the geometric diagonal fibre; no result of this unit supplies it."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-closed-point-residue-field-base",
+  "lem-weil-pbc-morphism-from-spec-field"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q54-9f691bc59",
+  "group": "Q54",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q54-9f691bc59 (reviewer sub-agent of L); spot-checked: PASS: the delivery is correct and I made no changes. Shape: one commit; item statement, stmt_deps and blueprint identical to the live node; live and side-live still show the item unsplit and lack the new id, so there is no supersession and no id clash; no repair note, so not a re-split; no cycle (closure checked); no SGA. Item vs Stacks 0CPN (stacks-morphisms l.2694) and definition-universally-injective (l.2663): all three conditions kept clause by clause, nothing weakened. New node lem-sfb-stack-relative-diagonal-finite-type = 04XS (1)+(2) (l.131), for any stack morphism: statement only and self-contained; checked on f=id, BG→Spec k and Spec k(t)→Spec k. Duplicate search on 04XS/lemma-properties-diagonal: lem-sfb-relative-inertia-second-diagonal-geometry states only part (1); 04XR isom-space, 03HK space diagonal and the representable/DM diagonal nodes do not give local finite type of Δ_f for a general stack morphism; accepted. Steps: step 1 matches the 2-fibre-product arrow equation G(w)φ=φ'F(v). Step 3 uses 04XI (no flat/lfp hypothesis), chartwise base change, and Δ_h as a pullback of Δ_f (arrow vu⁻¹ checked). Step 4 is elementary from the point-class definition. Step 5 uses algebraic closure and the arrow (id,α). Step 6: Δ_f fibre lft by the new node, nonempty by 04XI, étale chart, affine finite-type open, maximal-ideal leaf, closed point, 00FV leaf applied to V, 01J9 K-point. Step 7: α=vu⁻¹ with f(α)=β lifts the given β. Step 2 uses p1 where the definition gives p2; harmless by the swap. Tool uses (two scheme-point mathlib leaves of other units) accepted. Batch-5 flags: def-sfb-algebraic-moduli-stack, def-trf-algebraic-space, def-sfb-stable-pointed-moduli-groupoids and the four general stack lemmas (fibre products, 04XI point surjectivity, chartwise calculus, point topology) reach only sec-trace-formula definitions (algebraic space, projective-bundle morphism). They are generic foundations, not steps of the trace formula or Poincaré duality, so no change is needed. Inherited: from.node null is the answer of blueprint_refs ancestor."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.StackUniversalInjectivityCriteria",
+  "declaration": "CategoryTheory.stack_universalInjectivity_criteria",
+  "file": "lean/Sheaf/AlgebraicGeometry/StackUniversalInjectivityCriteria.lean",
+  "statement": "theorem stack_universalInjectivity_criteria {S : Scheme.{u}} {X Y : BasedCategory.{max u v, max (u + 1) w} (Over S)} (f : BasedFunctor X Y) (hX : IsAlgebraicModuliStack X) (hY : IsAlgebraicModuliStack Y) : ((∀ (Z : BasedCategory.{max u v, max (u + 1) w} (Over S)), IsAlgebraicModuliStack Z → ∀ g : BasedFunctor Z Y, Function.Injective (moduliPointMap (moduliTwoFiberFst g f))) ↔ Function.Surjective (moduliPointMap (moduliRelativeDiagonal f))) ∧ (Function.Surjective (moduliPointMap (moduliRelativeDiagonal f)) ↔ ∀ (K : Type u) [Field K] [IsAlgClosed K] (a : Spec (.of K) ⟶ S) (x₁ x₂ : Functor.Fiber X.p (Over.mk a)) (β : (moduliFiberMap f (Over.mk a)).obj x₁ ≅ (moduliFiberMap f (Over.mk a)).obj x₂), ∃ α : x₁ ≅ x₂, (moduliFiberMap f (Over.mk a)).mapIso α = β)",
+  "branch": "sheaf-dag",
+  "by": "O4",
+  "date": "2026-10-23",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-842b40529",
+  "group": "O4",
+  "result": "pass",
+  "note": "Single theorem module, sorry-only; lean.statement verbatim. Item changes only lean + stmt_deps gaining two landed nodes whose declarations the statement uses (IsAlgebraicModuliStack; ModuliPoints/moduliPointMap/moduliRelativeDiagonal), allowed by brief l.177, no cycle. Checked against Stacks 0CPN + definition-universally-injective: (1) injective moduliPointMap of moduliTwoFiberFst g f (Z×_Y X→Z, source order) for all algebraic Z; (2) surjective point map of the actual (x,x,id) diagonal; (3) Type-u algebraically closed K, a : Spec K → S, strict-fibre objects, lift of the given β, no uniqueness; conclusion (1↔2)∧(2↔3). Points = Quot by arrows = common-extension relation. X, Y, Z share universes {max u v, max (u+1) w} (lower bounds only), consistent with the size convention. Edge cases (empty X, id, BG↔Spec K) OK. No stack-level duplicate found; no hollow defs; docstrings carry source, blueprint and proof steps. No compile (no change)."
+ }
+}

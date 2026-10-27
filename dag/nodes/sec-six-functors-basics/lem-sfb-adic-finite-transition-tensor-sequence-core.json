@@ -1,0 +1,114 @@
+{
+ "id": "lem-sfb-adic-finite-transition-tensor-sequence-core",
+ "kind": "statement",
+ "title": "The normalized transition sequence after choosing a residue flat model",
+ "statement": "For X, A, J, N and n as in lem-sfb-adic-finite-transition-tensor-sequence, fix a K-flat independent-coefficients complex P over the residue coefficient sheaf together with an isomorphism Q(P) to the residue reduction. Then there exist a residue module M and a short exact complex sequence S over A whose last two localized terms identify with the normalized reductions at n+1 and n, whose localized quotient map agrees with adicFiniteTransition, and whose first homology in every degree is the restriction of the ordinary tensor-test homology of P with M[0].",
+ "source": {
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Tag 09C2, proof of (1), coefficient-kernel tensor sequence after fixing a K-flat residue model"
+ },
+ "stmt_deps": [
+  "lem-sfb-adic-finite-reduction-data",
+  "lem-pe-coefficient-tor-flat-model",
+  "def-weil-abstract-derived-category",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-pbc-constant-sheaf"
+ ],
+ "proof": [
+  {
+   "text": "Choose a termwise flat K-flat representative K of N. Its residue scalar extension K0 is K-flat and represents the residue reduction. Prove the strict successor g is epic degreewise: the coefficient quotient has a set-theoretic section, constant sheafification carries this to a section on underlying sets, and reductionStep_existsUnique plus restricted tensor extensionality give cancellation. Take S to be the canonical kernel sequence of g, hence short exact.",
+   "uses": [
+    "lem-pe-coefficient-tor-flat-model",
+    "lem-weil-pbc-constant-completion-equivalence"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use the inverses of the specified strict reduction level comparisons as the two endpoint isomorphisms. The existing normalized strict successor identity gives exactly the localized second-arrow square. No derived transition is replaced or redefined.",
+   "uses": [
+    "lem-sfb-adic-finite-strict-reduction-successor"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Construct M explicitly as the constant sheafification of the actual kernel of A/J^(n+2) -> A/J^(n+1), with its quotient A/J action justified by the proved annihilation lemma. The ordinary flat-tensor kernel identification gives an isomorphism from S.X1 to restriction of M tensored termwise with K.",
+   "uses": [
+    "lem-sfb-adic-finite-transition-kernel-tensor"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply the proved independent-coefficient tensor cancellation, natural in K, to pass to the residue scalar extension K0. The single-factor total tensor comparison and symmetry identify this termwise tensor with K0 tensor M[0]. Exact restriction commutes with homology. Finally coefficientModelTensorTest_iso transports the result along Q(K0) isomorphic to Q(P), using K-flatness of both representatives.",
+   "uses": [
+    "lem-pur-change-of-rings-tensor-cancellation-independent",
+    "lem-pe-coefficient-tor-flat-model",
+    "lem-weil-pbc-constant-completion-equivalence"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-pe-coefficient-tor-flat-model",
+  "lem-weil-pbc-constant-completion-equivalence",
+  "lem-sfb-adic-finite-strict-reduction-successor",
+  "lem-sfb-adic-finite-transition-kernel-tensor",
+  "lem-pur-change-of-rings-tensor-cancellation-independent"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "E4",
+  "date": "2026-10-26",
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Tag 09C2, proof of (1): explicit coefficient kernel, canonical strict kernel sequence, normalized successor, and residue tensor homology transport. Ordinary flat-tensor identification is isolated from the derived assembly."
+ },
+ "mathlib_searches": [],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.AdicFiniteTransitionTensorSequence",
+  "date": "2026-10-26",
+  "group": "D8"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sfb-adic-finite-transition-tensor-sequence",
+   "place": "coefficient-kernel construction after choosing the residue model",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-lem-integral-models",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.AdicFiniteTransitionTensorSequenceCore",
+  "file": "lean/Sheaf/Paper/AdicFiniteTransitionTensorSequenceCore.lean",
+  "declaration": "AlgebraicGeometry.Scheme.adicFiniteTransition_tensor_sequence_core",
+  "statement": "theorem adicFiniteTransition_tensor_sequence_core\n    (X : Scheme.{u}) (A : Type (max v (u + 1))) [CommRing A] (J : Ideal A)\n    (N : adicFiniteAmbient.{u, v} X A) (n : ℕ)\n    (P : Cx (constant (coefficientProEtaleModelTopology.{u, v} X)\n      (adicFiniteCoeff J 0)))\n    (_hP : P.IsKFlatIndependentCoefficients)\n    (_eP : Nonempty ((Q _).obj P ≅ adicFiniteReduction.{u, v} X J N 0)) :\n    ∃ (M : Mod (constant (coefficientProEtaleModelTopology.{u, v} X)\n        (adicFiniteCoeff J 0)))\n      (S : ShortComplex (Cx (constant (coefficientProEtaleModelTopology.{u, v} X) A))),\n      S.ShortExact ∧\n      ∃ (e₂ : (Q _).obj S.X₂ ≅ adicFiniteUnderlying.{u, v} X J N (n + 1))\n        (e₃ : (Q _).obj S.X₃ ≅ adicFiniteUnderlying.{u, v} X J N n),\n        (Q _).map S.g ≫ e₃.hom = e₂.hom ≫ adicFiniteTransition.{u, v} X J N n ∧\n        ∀ q : ℤ, Nonempty (S.X₁.homology q ≅\n          (res (quotient (coefficientProEtaleModelTopology.{u, v} X) A J 0)).obj\n            (coefficientModelTensorTest _ P M q))",
+  "branch": "sheaf-dag",
+  "by": "D8",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D8",
+  "result": "pass",
+  "landing": "20261026T130334-L-3449699",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E4",
+  "result": "pass",
+  "landing": "20261026T152426-L-1119912",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

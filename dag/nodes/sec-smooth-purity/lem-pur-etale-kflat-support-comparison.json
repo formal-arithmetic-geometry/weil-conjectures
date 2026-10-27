@@ -14,139 +14,43 @@
   "lem-pc-kflat-resolution",
   "lem-pur-kinjective-degreewise-existence",
   "lem-pur-etale-injective-support-sequence",
-  "def-pur-etale-kflat-support-data"
+  "def-pur-etale-kflat-support-data",
+  "def-pur-etale-kflat-support-rows"
  ],
  "proof": [
   {
-   "text": "All complexes in the diagram are $A_P$-module complexes. In particular $a:N\\to J$ is the functorial replacement in that category, not a replacement in $B_P$-modules. Put $S=i_*H_A(I)$, $C=j_*j^*I$, $S'=i_*H_A(J)$, and $C'=j_*j^*J$. The support-sequence lemma gives actual short exact rows $0\\to S\\xrightarrow{s}I\\xrightarrow{r_I}C\\to0$ and $0\\to S'\\xrightarrow{s'}J\\xrightarrow{r_J}C'\\to0$, with $S'=\\ker r_J$. The fixed-K-flat tensor lemma identifies $\\operatorname{Tot}(Q\\otimes I)$ with $L\\otimes_A^LB_P$, and likewise identifies $\\operatorname{Tot}(Q\\otimes C)$ with $(Rj_{*,A}j^*L)\\otimes_A^LB_P$; use the signed interchange of tensor factors when placing $B_P$ on the right. The canonical scalar/tensor identification in the scalar-mate lemma identifies the first object with $\\operatorname{Res}(T_PL)$. Identify $Q_{!D}J$ with this same object by the inverse of $Q_{!D}a$, where $Q_{!D}$ denotes localization. Thus the localized middle map is the identity under the specified identifications.",
+   "text": "The strict support comparison gives the actual short exact rows, their unique characterized morphism, its naturality, and invertibility of its localized middle map. This is independent of scalar extension.",
    "uses": [
-    "lem-pur-etale-injective-support-sequence",
-    "lem-weil-pbc-kflat-fixed-tensor-triangulated",
-    "lem-pur-etale-scalar-mate-projection"
+    "lem-pur-etale-kflat-support-strict"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tags 06YS/06YU (K-flat resolutions and derived tensor), 093X (injective support row); the blueprint locality argument, interpreted in ordinary A-module complexes"
-   }
+   "elementary": false
   },
   {
-   "text": "For each pair $(p,q)$, tensor the degree-$q$ exact row with the flat sheaf $Q^p$. Flatness means that this tensor functor is exact, so $0\\to Q^p\\otimes S^q\\to Q^p\\otimes I^q\\to Q^p\\otimes C^q\\to0$ is exact. In total degree $n$ take the sum over $p+q=n$. This sum is the filtered colimit of the finite subsums: the index consists of finite subsets of the integer-indexed set of pairs, ordered by inclusion. Each finite subsum is exact because kernels and cokernels of finite biproduct maps are computed componentwise; exactness of filtered colimits therefore proves exactness of the whole row. With the total differential $d_Q\\otimes1+(-1)^p1\\otimes d$, the inclusions and quotients commute with both differential terms. Consequently $0\\to\\operatorname{Tot}(Q\\otimes S)\\to N\\to\\operatorname{Tot}(Q\\otimes C)\\to0$ is a degreewise short exact sequence of complexes. This uses flat terms as well as K-flatness; no convergence of a double-complex spectral sequence is used.",
+   "text": "Apply the separately normalized open quotient comparison to identify its canonical third component with the restricted coefficient projection. The middle normalization follows by cancellation of the localized augmentation with its inverse in replacementIso. Combine these assertions with the strict diagram.",
    "uses": [
-    "def-pc-flat-sheaf-modules",
-    "lem-pc-module-filtered-colimits-tensor",
-    "def-pc-tensor-complex-sheaves"
+    "lem-pur-etale-kflat-support-projection"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-modules.tex",
-    "place": "Tag 03ER (sites-modules-definition-flat), item (3); Tag 03DB (sites-modules-lemma-limits-colimits); total differential of Tag 012Z"
-   }
+   "elementary": false
   },
   {
-   "text": "Let $c_j:j^*\\operatorname{Tot}(Q\\otimes C)\\xrightarrow{\\sim}\\operatorname{Tot}(j^*Q\\otimes j^*C)$ be the cochain pullback/tensor comparison. Form the chain map $h=(j^*a)\\,(1\\otimes\\varepsilon^0_{j^*I})\\,c_j:j^*\\operatorname{Tot}(Q\\otimes C)\\to j^*J$, where $\\varepsilon^0:j^*j_*\\to1$ is the ordinary counit. Define $v=j_*h\\,\\eta_{\\operatorname{Tot}(Q\\otimes C)}$. By termwise adjunction this is a chain map to $C'$. Equivalently $v$ is the displayed map in the statement: its first factor is adjoint to $(1\\otimes\\varepsilon^0_{j^*I})c_j$, and its second factor is $j_*j^*a$. On a bidegree summand $x\\otimes y$, the first factor restricts $x$ to $U$ and evaluates the restricted $j_*j^*I$ section by its counit. No assertion that $j_*$ commutes with infinite sums is needed: the map out of the total direct sum is induced by these summand maps. The cochain comparison and the degree-zero units and counits preserve bidegrees, so both differential terms, including $(-1)^p$, commute with this map.",
-   "uses": [
-    "lem-pur-cochain-pullback-tensor-coherence",
-    "prop-weil-pbc-inverse-image-modules-exact",
-    "lem-weil-pbc-termwise-adjunction-homotopy",
-    "def-pc-tensor-complex-sheaves"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tags 03EL/07A4 (cochain tensor/pullback comparison); termwise inverse-image adjunction and its unit/counit"
-   }
-  },
-  {
-   "text": "The right square commutes already as a square of complexes: $v(1\\otimes r_I)=r_Ja$. Indeed, take ordinary $j^*\\dashv j_*$ transposes. By naturality of $c_j$, the transpose of the left side is $j^*a$ composed with $1\\otimes(\\varepsilon^0_{j^*I}j^*r_I)$, after the cochain tensor comparison. The parentheses equal the identity by the adjunction triangle identity, since $r_I=\\eta_I$. The transpose of the right side is $\\varepsilon^0_{j^*J}j^*\\eta_Jj^*a=j^*a$. Injectivity of the adjunction bijection proves the equality. Thus $a$ sends the kernel of the top quotient into $\\ker r_J=S'$. By the kernel universal property there is a unique $u:\\operatorname{Tot}(Q\\otimes S)\\to S'$ with $s'u=a(1\\otimes s)$. This is a chain map: after the monomorphism $s'$ its differential equation is the chain-map equation for $a(1\\otimes s)$. These constructions are natural in chain maps of $I$: naturality gives the middle and right squares, and cancellation of $s'$ gives the first.",
-   "uses": [
-    "lem-weil-pbc-termwise-adjunction-homotopy",
-    "lem-pur-cochain-pullback-tensor-coherence",
-    "lem-pur-etale-injective-support-sequence"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "The adjunction identities; kernels in the actual support rows of Tag 093X"
-   }
-  },
-  {
-   "text": "Apply the short-exact-complex triangle lemma to the two rows and their strict morphism $(u,a,v)$. It supplies distinguished triangles and, crucially, the equation $(Q_{!D}u)[1]\\,\\delta_{\\mathrm{top}}=\\delta_{\\mathrm{bottom}}\\,Q_{!D}v$ for their connecting maps. The bottom row is the actual support triangle of $J$ by the support-sequence lemma. The top row has the tensor-model objects identified in Step 1. Thus this is a morphism of the asserted distinguished triangles, with middle component the identity. This conclusion uses the functorial boundary attached to these exact rows; it does not choose an arbitrary third map completing two triangle squares.",
+   "text": "Apply triangleOfSES to the two short exact rows and their strict map. Its distinguishedness and boundary naturality give the distinguished triangles and connecting square. The localized middle map is invertible; apply the triangle two-isomorphism lemma when the third map is invertible.",
    "uses": [
     "lem-weil-pbc-complex-ses-triangle",
-    "lem-pur-etale-injective-support-sequence"
+    "lem-sf-triangle-morphism-iso"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/derived.tex",
-    "place": "Tag 0152 (derived-lemma-derived-canonical-delta-functor), including its naturality proof"
-   }
-  },
-  {
-   "text": "We identify the localized right component, retaining its specified map. The support-sequence lemma gives the canonical computation $Q_{!D}C'=Rj_{*,A}j^*(Q_{!D}J)$. Under this computation $Q_{!D}v$ is the canonical derived comparison composed with the localized chain adjunct from Step 3. The chain-transpose lemma says its derived transpose is exactly $Q_{!D}h$. Also its counit equation identifies $Q_{!D}(\\varepsilon^0_{j^*I})$ with the derived counit at $j^*L$ under $Q_{!D}C=Rj_{*,A}j^*L$. The pullback lemma makes $j^*Q$ flat-term K-flat, so both $c_j$ and $j^*a$ represent the canonical derived tensor/pullback comparison and the identity on $j^*\\operatorname{Res}(T_PL)$. Consequently, after the signed interchange putting $B$ second, $Q_{!D}h$ is precisely $(\\varepsilon_{j,j^*L}\\otimes^L1_{B_U})\\,c_{Rj_*j^*L,B_P}$. By the definition of the projection-formula map, the adjunction bijection now identifies $Q_{!D}v$ with $\\mathrm{PF}_j(j^*L,B_P)$, with target $Rj_{*,A}(j^*L\\otimes_A^LB_U)$. The identification of maps follows from equality of transposes, not merely from an isomorphism of their source and target objects.",
-   "uses": [
-    "lem-pur-etale-injective-support-sequence",
-    "lem-sp-etale-derived-chain-transpose",
-    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
-    "lem-pur-cochain-pullback-tensor-coherence",
-    "lem-weil-pbc-kflat-fixed-tensor-triangulated",
-    "def-kun-projection-formula-map"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tags 0FPI/07A6 (derived adjunction counit square), 0G7E/07A4 (K-flat pullback and tensor models); projection map by its defining transpose"
-   }
-  },
-  {
-   "text": "Apply the scalar-mate projection lemma to $f=j$ and its input $j^*L$. Exact inverse image makes $j^*L$ and $j^*T_PL$ bounded below. The other required source bound is exactly the assumed bound on $T_PRj_{*,A}j^*L$. The canonical inverse-image/scalar comparison identifies $T_Uj^*L$ with $j^*T_PL$. The canonical direct-image/restriction isomorphism identifies $Rj_{*,A}\\operatorname{Res}(j^*T_PL)$ with $\\operatorname{Res}(Rj_{*,B}j^*T_PL)$. Under these identifications the scalar-mate lemma identifies the map of Step 6 with the restriction of the canonical coefficient projection $T_PRj_{*,A}j^*L\\to Rj_{*,B}j^*T_PL$. The assumed bounds on $T_PL$ and its open direct image ensure that this is the stated bounded-below comparison. No restricted $B$-injective complex is used as an $A$-injective resolution: the support row was built from the $A$-injective replacement $J$.",
-   "uses": [
-    "lem-pur-etale-scalar-mate-projection",
-    "lem-sbc-canonical-restrict-scalars-functor-comparisons",
-    "prop-weil-pbc-inverse-image-modules-exact"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/more-etale.tex",
-    "place": "Tag 0GL6 (more-etale-remark-Rf-lower-shriek-change-of-rings), projection/scalar identification; Tags 0D6J/03FD for canonical coefficient-restriction comparison"
-   }
-  },
-  {
-   "text": "If the right component is invertible, the middle identity and the right component are two isomorphisms in the morphism of distinguished triangles constructed in Step 5. The triangle two-isomorphisms lemma gives invertibility of its first component. Functorial replacement makes all squares above natural on chain maps; the kernel uniqueness and the functorial boundary of Step 5 give the corresponding naturality of the complete triangle diagram, including its connecting square. Every chain map used in the construction is $A$-linear; the $B$-linear projection was invoked only after passing to the derived category and restricting scalars. Therefore no step equips $Q$ with a strict $B$-module structure.",
-   "uses": [
-    "lem-sf-triangle-morphism-iso",
-    "lem-weil-pbc-complex-ses-triangle",
-    "lem-pur-kinjective-degreewise-existence"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/derived.tex",
-    "place": "Tag 014A (derived-lemma-third-isomorphism-triangle); Tag 0152 (functorial boundary); Tag 079P (functorial replacement)"
-   }
+   "elementary": false
   }
  ],
  "proof_deps": [
-  "lem-pur-etale-injective-support-sequence",
-  "lem-weil-pbc-kflat-fixed-tensor-triangulated",
-  "lem-pur-etale-scalar-mate-projection",
-  "def-pc-flat-sheaf-modules",
-  "lem-pc-module-filtered-colimits-tensor",
-  "def-pc-tensor-complex-sheaves",
-  "lem-pur-cochain-pullback-tensor-coherence",
-  "prop-weil-pbc-inverse-image-modules-exact",
-  "lem-weil-pbc-termwise-adjunction-homotopy",
+  "lem-pur-etale-kflat-support-strict",
+  "lem-pur-etale-kflat-support-projection",
   "lem-weil-pbc-complex-ses-triangle",
-  "lem-sp-etale-derived-chain-transpose",
-  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
-  "def-kun-projection-formula-map",
-  "lem-sbc-canonical-restrict-scalars-functor-comparisons",
-  "lem-sf-triangle-morphism-iso",
-  "lem-pur-kinjective-degreewise-existence"
+  "lem-sf-triangle-morphism-iso"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-reduction/sk-lem-sp-reduction-exceptional.proof.md",
-  "place": "Locality: explicit ordinary-etale K-flat support diagram expanding the finite-coefficient closed-factor comparison; primary homological inputs from Stacks Tags 03DB, 03ER, 06YU, 07A4, 0FPI, 0152 and 014A."
+  "document": "literature/stacks-project/sites-cohomology.tex; literature/stacks-project/derived.tex",
+  "place": "X9: separate strict support/triangle comparison and coefficient normalization; combine using the inverse localized augmentation."
  },
  "mathlib_searches": [
   {
@@ -251,49 +155,12 @@
   "is": null
  },
  "split_report": {
-  "date": "2026-10-21",
+  "date": "2026-10-22",
   "item": "lem-pur-etale-kflat-support-comparison",
   "worker": "stage1",
-  "summary": "Constructed the actual A-linear short-exact support diagram using flat tensor terms, exact filtered colimits of finite sums, adjunction and the kernel universal property. Used naturality of the canonical short-exact boundary, then computed the right-map transpose and identified it with restricted scalar change. All prerequisites already occur in the DAG; no new nodes, no statement changes, no strict B-action on Q, and no Lean edits or compilation.",
+  "summary": "Repair of the human re-split return: replaced the 7299-character eight-step argument by a short assembly and two independent statement-only work items. The first handles flat total tensor, the cochain adjunct, strict kernel square and naturality without any scalar-change or derived assertion. The second computes the localized open map by derived transposes and scalar comparisons, without a support sequence or triangle assertion. The original proof is retained verbatim in report.md with its allocation. Statement and statement dependencies unchanged; no Lean edits or compilation.",
   "blueprint": "Realizes the closed-factor coefficient comparison in the source Locality paragraph, as extracted in lem-pur-finite-coefficient-adjoint-comparisons Step 6, serving thm-pur-rational-and-qbar-purity finite-stage Steps 1–2 and sk-thm-purity-transport Step 1. The current main-20261015 blueprint gives the smooth chart argument; the support diagram is an explicitly agent-written homological expansion below that route.",
-  "tool_uses": [
-   {
-    "node": "lem-weil-pbc-kflat-fixed-tensor-triangulated",
-    "why": "Computes tensor by the chosen coefficient resolution on arbitrary complexes; generic homological tool, not another purity route."
-   },
-   {
-    "node": "lem-pc-module-filtered-colimits-tensor",
-    "why": "Exact filtered colimits give exactness of the countable total-degree sums of short exact sheaf rows; no local purity node supplies this abelian-category input."
-   },
-   {
-    "node": "lem-pur-cochain-pullback-tensor-coherence",
-    "why": "Supplies the canonical chain-level tensor/pullback comparison, its signs and naturality; generic ringed-topos tool."
-   },
-   {
-    "node": "prop-weil-pbc-inverse-image-modules-exact",
-    "why": "Supplies exact constant-coefficient inverse image and its ordinary adjunction, used in constructing and identifying the comparison."
-   },
-   {
-    "node": "lem-weil-pbc-termwise-adjunction-homotopy",
-    "why": "Supplies chain-level adjunction formulas and identities for the strict support diagram."
-   },
-   {
-    "node": "lem-sp-etale-derived-chain-transpose",
-    "why": "Supplies the normalized derived counit/chain-transpose equation, needed to identify the specified right map rather than just its objects."
-   },
-   {
-    "node": "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
-    "why": "Supplies K-flat preservation under inverse image and the normalized derived tensor/pullback comparison for the chosen coefficient model."
-   },
-   {
-    "node": "lem-pur-etale-scalar-mate-projection",
-    "why": "Identifies the A-linear projection with the restriction of the canonical B-linear scalar projection, with exactly the stated bounded-below hypotheses."
-   },
-   {
-    "node": "lem-sbc-canonical-restrict-scalars-functor-comparisons",
-    "why": "Supplies the canonical bounded-below direct-image/restriction isomorphism without assuming restriction preserves injectives."
-   }
-  ]
+  "tool_uses": []
  },
  "tool_uses": [
   "lem-weil-pbc-kflat-fixed-tensor-triangulated",
@@ -307,12 +174,12 @@
   "lem-sbc-canonical-restrict-scalars-functor-comparisons"
  ],
  "reviewed": {
-  "date": "2026-10-21",
+  "date": "2026-10-22",
   "by": "L",
-  "reviewer": "NT-cc-NV-77b5635f0",
-  "group": "NV",
+  "reviewer": "NT-cc-Q107-b0e66c1fa",
+  "group": "Q107",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NV-77b5635f0 (reviewer sub-agent of L); spot-checked: I read the item in full: unchanged statement and stmt_deps against the N8 base snapshots, 8 steps, no new nodes, and the full statement of every cited node. Admissibility: one commit with the report and item; no repair note for this item; not dropped; no SGA use; the closure (464 nodes) contains neither the item nor its parent, so there is no cycle. The proof expands old parent Step 10 completely and adds a real identification of the right map by transposes, where the old step only asserted it. Step checks: (1) the support-sequence lemma applies to J, which is degreewise-injective and K-injective by lem-pur-kinjective-degreewise-existence in Mod(A_P); the fixed-K-flat lemma covers both tensor orders. (2) Flat Q^p gives exact rows; total sums are exact as filtered colimits of finite biproducts (lem-pc-module-filtered-colimits-tensor). (3) v is the adjunct built from c_j, the counit and j^*a, with no j_* and sums claim. (4, elementary) The triangle identity gives v(1⊗η_I) = η_J a strictly; then the kernel map is u. (5) The naturality of δ in lem-weil-pbc-complex-ses-triangle gives the third square. (6) lem-sp-etale-derived-chain-transpose gives the Hom equation and the counit equation at j^*J and j^*I, both K-injective so α is an iso. j^*Q stays flat-term K-flat, and the step matches the projection-formula definition of PF_j(j^*L,B_P). The step does not cite lem-kun-inverse-image-monoidal for c_j being the canonical comparison; this is definitional on K-flat models and I accept it. (7) The hypotheses of the scalar-mate projection lemma hold at f=j, J=j^*L: J, T_U J and T_P Rj_*j^*L are bounded below; restriction commutes with Rj_* on bounded-below N=j^*TL. (8) Two-of-three isos with naturality from the functorial replacement. Edge cases checked: Z empty, U empty, A=B with Q=A[0], the non-flat map Z/4→Z/2, and unbounded Q. The worker-written tool_uses are all generic homological or coefficient tools and are accepted. The main-20261015 Locality and Charts paragraphs give no support diagram, so proof_origin=agent is correct."
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q107-b0e66c1fa (reviewer sub-agent of L); spot-checked: Re-split answering the released note of 2026-10-22, which asked for at least 2 new statement-only nodes of comparable size and a parent assembly of at most 3000 characters. The live item is still the 8-step base (7299 characters), so no other group superseded this delivery. The item is not dropped and nothing cites SGA. The item's statement and stmt_deps are unchanged.\n\nThe item's proof is now a 4-step assembly of 2256 characters, and both new nodes are unsplit with empty proofs (chain-diagram statement 2233 characters, projection-model statement 3004).\n\nEvery old step reappears:\n- Old Steps 2–4 and the strict naturality of Step 8 go to lem-pur-flat-support-chain-diagram.\n- The tensor models of old Step 1 and old Steps 6–7 go to lem-pur-kflat-open-projection-model.\n- Old Step 5 becomes parent Step 3.\n- The rest of old Step 8 (two-of-three isomorphisms, naturality, A-linearity) becomes parent Step 4.\n\nChain node, checked by hand:\n- The composite h type-checks.\n- The square v(1⊗r_I)=r_J a holds: both adjunction transposes equal j^*a, by naturality of the tensor/pullback comparison and the triangle identity.\n- The kernel map u exists and is unique, and is a chain map by cancelling the kernel inclusion of S(J).\n- Flat Q^p plus direct sums give exactness, claimed only when the units are epimorphisms.\n- Naturality holds for (f,g) with ga=a'(1⊗f), which the replacement's naturality supplies.\n\nModel node, checked against the statements of lem-sp-etale-derived-chain-transpose, def-kun-projection-formula-map and lem-pur-etale-scalar-mate-projection:\n- ℓ(v) transposes to (ε⊗1)c^der, so ℓ(v) is PF_j(j^*L,B_P).\n- The scalar-mate bounds hold for j^*L, j^*T_PL and T_P Rj_*j^*L, so PF_j equals the restriction of β.\n\nParent hypotheses supply every hypothesis of both new nodes:\n- The five bounds are the same in parent and model node.\n- The support-sequence lemma, applied to I and to J (injective by lem-pur-kinjective-degreewise-existence), gives the epimorphic units and the invertible canonical direct-image comparisons.\n- Q is flat-term K-flat by lem-pc-kflat-resolution.\n- The SES-triangle and two-isomorphism lemmas are mathlib leaves, and their statements give Steps 3–4.\n\nEdge cases checked: U empty, U=P, A=B with Q=A[0], j the identity, non-epimorphic units, the non-flat map Z/4→Z/2, unbounded Q.\n\nNo duplicates: I searched the live and snapshot DAGs, including nodes created 2026-10-21/22, and compared against the scalar-mate, finite-Tor direct-image, tensor-projection-adjunct, scalar-tensor-pullback and open-scalar-counit nodes. Each new node is a strict generalization carrying one old argument, not a restated parent clause.\n\nSources: Tag 093X and Tag 0FPI labels, and Tags 0152 and 014A, checked in literature/stacks-project. Searches recorded: three kinds for each new node.\n\nAdvisory only: the model node's closing naturality sentence is loose, but the parent never uses it.\n\nNo fixes written."
  },
  "lean": {
   "module": "Sheaf.AlgebraicGeometry.EtaleKFlatSupportComparison",
@@ -321,10 +188,10 @@
    "AlgebraicGeometry.Etale.KFlatSupportComparison.etale_kflat_support_comparison"
   ],
   "file": "lean/Sheaf/AlgebraicGeometry/EtaleKFlatSupportComparison.lean",
-  "statement": "theorem etale_kflat_support_comparison [Finite A] [Finite B] (φ : A →+* B) (i : Z ⟶ P) [IsClosedImmersion i] (j : U ⟶ P) [IsOpenImmersion j] (hij : Set.range i.base = (Set.range j.base)ᶜ) (L : _root_.DerivedCategory.Plus (Sheaf P.smallEtaleTopology (ModuleCat.{u + 1} A))) (_hTL : ∃ n : ℤ, ((scalarExtension φ P).obj L.obj).IsGE n) (_hRTL : ∃ n : ℤ, ((R(lowerStar (ModuleCat.{u + 1} B) j)).obj ((D(upperStar (ModuleCat.{u + 1} B) j)).obj ((scalarExtension φ P).obj L.obj))).IsGE n) (_hRL : ∃ n : ℤ, ((R(lowerStar (ModuleCat.{u + 1} A) j)).obj ((D(upperStar (ModuleCat.{u + 1} A) j)).obj L.obj)).IsGE n) (_hTRL : ∃ n : ℤ, ((scalarExtension φ P).obj ((R(lowerStar (ModuleCat.{u + 1} A) j)).obj ((D(upperStar (ModuleCat.{u + 1} A) j)).obj L.obj))).IsGE n) (I : Complex A P) [I.IsKInjective] [∀ n : ℤ, Injective (I.X n)] (e : (localize A P).obj I ≅ L.obj) (Q : Complex A P) (π : Q ⟶ (CochainComplex.singleFunctor (Sheaf P.smallEtaleTopology (ModuleCat.{u + 1} A)) 0).obj (scalarCoefficientSheaf φ P)) [QuasiIso π] (hQ : (HomologicalComplex.quasiIso (Sheaf P.smallEtaleTopology (ModuleCat.{u + 1} A)) (.up ℤ)).kFlat Q) (_hQf : ∀ n : ℤ, ObjectProperty.flat (Q.X n)) (F : Complex A P ⥤ Complex A P) (η : 𝟭 _ ⟶ F) [∀ K : Complex A P, (F.obj K).IsKInjective] [∀ (K : Complex A P) (n : ℤ), Injective ((F.obj K).X n)] [∀ K : Complex A P, QuasiIso (η.app K)] : let N := Q ⊗ I let J := F.obj N let a := η.app N let S := totalTensorSequence Q (etaleSupportSequence A i j hij I) let S' := etaleSupportSequence A i j hij J ∃ (hI : CochainComplex.IsKInjective ((pullComplex A j).obj I)) (hJ : CochainComplex.IsKInjective ((pullComplex A j).obj J)) (hTop : S.ShortExact) (hBottom : S'.ShortExact) (m : S ⟶ S'), m.τ₂ = a ∧ IsRightMap j Q I J a m.τ₃ ∧ (∀ m' : S ⟶ S', m'.τ₂ = a → IsRightMap j Q I J a m'.τ₃ → m' = m) ∧ _root_.DerivedCategory.triangleOfSES hTop ∈ distTriang _ ∧ _root_.DerivedCategory.triangleOfSES hBottom ∈ distTriang _ ∧ _root_.DerivedCategory.triangleOfSESδ hTop ≫ ((localize A P).map m.τ₁)⟦1⟧' = (localize A P).map m.τ₃ ≫ _root_.DerivedCategory.triangleOfSESδ hBottom ∧ (tensorModel φ Q π hQ I L.obj e).inv ≫ (localize A P).map m.τ₂ ≫ (replacementIso a (tensorModel φ Q π hQ I L.obj e)).hom = 𝟙 _ ∧ (localize A P).map m.τ₃ ≫ (targetThirdModel φ j J L.obj (replacementIso a (tensorModel φ Q π hQ I L.obj e)) hJ).hom = (sourceThirdModel φ j Q π hQ I L.obj e hI).hom ≫ restrictedProjection φ j L.obj ∧ (IsIso ((localize A P).map m.τ₃) → IsIso ((localize A P).map m.τ₁)) ∧ (∀ (I' : Complex A P) (f : I ⟶ I'), let N' := Q ⊗ I' let J' := F.obj N' let a' := η.app N' let S₁ := totalTensorSequence Q (etaleSupportSequence A i j hij I') let S₂ := etaleSupportSequence A i j hij J' let s : S ⟶ S₁ := totalTensorSequenceMap Q (etaleSupportSequenceMap A i j hij f) let t : S' ⟶ S₂ := etaleSupportSequenceMap A i j hij (F.map ((tensorLeft Q).map f)) ∀ m' : S₁ ⟶ S₂, m'.τ₂ = a' → IsRightMap j Q I' J' a' m'.τ₃ → s ≫ m' = m ≫ t)",
+  "statement": "theorem etale_kflat_support_comparison [Finite A] [Finite B]\n    (φ : A →+* B) (i : Z ⟶ P) [IsClosedImmersion i]\n    (j : U ⟶ P) [IsOpenImmersion j] (hij : Set.range i.base = (Set.range j.base)ᶜ)\n    (L : _root_.DerivedCategory.Plus (Sheaf P.smallEtaleTopology (ModuleCat.{u + 1} A)))\n    (_hTL : ∃ n : ℤ, ((scalarExtension φ P).obj L.obj).IsGE n)\n    (_hRTL : ∃ n : ℤ, ((R(lowerStar (ModuleCat.{u + 1} B) j)).obj\n      ((D(upperStar (ModuleCat.{u + 1} B) j)).obj\n        ((scalarExtension φ P).obj L.obj))).IsGE n)\n    (_hRL : ∃ n : ℤ, ((R(lowerStar (ModuleCat.{u + 1} A) j)).obj\n      ((D(upperStar (ModuleCat.{u + 1} A) j)).obj L.obj)).IsGE n)\n    (_hTRL : ∃ n : ℤ, ((scalarExtension φ P).obj\n      ((R(lowerStar (ModuleCat.{u + 1} A) j)).obj\n        ((D(upperStar (ModuleCat.{u + 1} A) j)).obj L.obj))).IsGE n)\n    (I : Complex A P) [I.IsKInjective] [∀ n : ℤ, Injective (I.X n)]\n    (e : (localize A P).obj I ≅ L.obj)\n    (Q : Complex A P)\n    (π : Q ⟶ (CochainComplex.singleFunctor\n      (Sheaf P.smallEtaleTopology (ModuleCat.{u + 1} A)) 0).obj (scalarCoefficientSheaf φ P))\n    [QuasiIso π] (hQ : (HomologicalComplex.quasiIso\n      (Sheaf P.smallEtaleTopology (ModuleCat.{u + 1} A)) (.up ℤ)).kFlat Q)\n    (_hQf : ∀ n : ℤ, ObjectProperty.flat (Q.X n))\n    (F : Complex A P ⥤ Complex A P) (η : 𝟭 _ ⟶ F)\n    [∀ K : Complex A P, (F.obj K).IsKInjective]\n    [∀ (K : Complex A P) (n : ℤ), Injective ((F.obj K).X n)]\n    [∀ K : Complex A P, QuasiIso (η.app K)] :\n    let S := (topSequenceFamily A i j hij Q).obj I\n    let N := Q ⊗ I\n    let _J := F.obj N\n    let a := η.app N\n    let S' := (bottomSequenceFamily A i j hij Q F).obj I\n    let v := OpenSupport.rightMap\n      (upperStarLowerStarAdjunction (ModuleCat.{u + 1} A) j)\n      Q I (F.obj (Q ⊗ I)) (η.app (Q ⊗ I))\n    ∃ (hI : CochainComplex.IsKInjective\n        ((pullComplex A j).obj I))\n      (hJ : CochainComplex.IsKInjective\n        ((pullComplex A j).obj (F.obj (Q ⊗ I))))\n      (hTop : S.ShortExact)\n      (hBottom : S'.ShortExact)\n      (m : S ⟶ S'),\n      HEq m.τ₂ a ∧\n      HEq m.τ₃ v ∧\n      (∀ m' : S ⟶ S',\n        HEq m'.τ₂ a →\n        HEq m'.τ₃ v → m' = m) ∧\n      _root_.DerivedCategory.triangleOfSES hTop ∈ distTriang _ ∧\n      _root_.DerivedCategory.triangleOfSES hBottom ∈ distTriang _ ∧\n      _root_.DerivedCategory.triangleOfSESδ hTop ≫\n          ((localize A P).map m.τ₁)⟦1⟧' =\n        (localize A P).map m.τ₃ ≫ _root_.DerivedCategory.triangleOfSESδ hBottom ∧\n      (tensorModel φ Q π hQ I L.obj e).inv ≫ (localize A P).map (η.app (Q ⊗ I)) ≫\n          (replacementIso (η.app (Q ⊗ I)) (tensorModel φ Q π hQ I L.obj e)).hom =\n        𝟙 _ ∧\n      (localize A P).map v ≫\n          (targetThirdModel φ j (F.obj (Q ⊗ I)) L.obj\n            (replacementIso (η.app (Q ⊗ I)) (tensorModel φ Q π hQ I L.obj e)) hJ).hom =\n        (sourceThirdModel φ j Q π hQ I L.obj e hI).hom ≫ restrictedProjection φ j L.obj ∧\n      (IsIso ((localize A P).map m.τ₃) → IsIso ((localize A P).map m.τ₁)) ∧\n      DiagramNatural (topSequenceFamily A i j hij Q)\n        (bottomSequenceFamily A i j hij Q F)\n        (IsComparison A i j hij Q F η) I m",
   "branch": "sheaf-dag",
-  "by": "NK",
-  "date": "2026-10-21",
+  "by": "X9",
+  "date": "2026-10-25",
   "existing": false
  },
  "reviewed_lean": {
@@ -334,5 +201,27 @@
   "group": "NK",
   "result": "pass",
   "note": "Every hypothesis and conclusion clause matches the node: five bounded-below hypotheses; degreewise-injective K-injective I; A-linear flat-term K-flat Q→B_P (kFlat = tensor preserves quasi-isos, flat = exact tensor); arbitrary functorial replacement F,η; short exact rows; m with τ₂=a and IsRightMap (bidegree-summand adjunct through the canonical Etale.monoidal_upperStar); uniqueness clause = induced kernel map; distinguished triangles plus δ-square; right-map equation against restrictedProjection (scalarMate + canonical restriction comparisons); IsIso implication; naturality in f:I⟶I'. The middle-identity conjunct holds by construction under the node's own Q(a)⁻¹ convention; content is in the right-map clause (advisory). New def node: 18 real declarations, no sorry, docstrings ok, stmt_deps cover scalarExtension/scalarTensorIso (.choose of the derived-change-of-rings ∃!)/scalarMate/restriction comparisons. Statements verbatim; one sorry; item unchanged and without a Lean record live; no collision; not dropped. Report has Worker report and Second reading by NK. Edge cases Z=∅, U=∅, A=B, zero ring, non-flat φ, unbounded Q all covered. No fix, so no compile."
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-23ebf",
+  "group": "X9",
+  "result": "fix",
+  "landing": "20261025T124418-L-2006284",
+  "kind": "interface",
+  "note": "independent cc review: new etale_kflat_support_comparison vs old statement from the change record (old proved from new + support_rightMap_iff in a scratch compile); strict/projection sorries vs their nodes, the support-sequence and chain-diagram lemmas, and the old normalization clause"
  }
 }

@@ -1,0 +1,128 @@
+{
+ "id": "lem-sfb-embedded-integral-scalar-kernel-square",
+ "kind": "lemma",
+ "title": "Embedded integral constant scalar square and residue kernel",
+ "statement": "Let $\\ell$ be prime, let $E$ be a finite intermediate field of $\\operatorname{PadicAlgCl}(\\ell)$, equip $\\operatorname{ULift} E$ with its finite-dimensional $\\mathbf Q_\\ell$-algebra structure, and let $\\pi\\in\\mathcal O_E$ generate its maximal ideal. Use the embedded constant and continuous coefficient maps [def-sfb-embedded-integral-model-coefficients] and the spectral coefficient maps [def-sfb-integral-models-stacks-data]. Let $e$ be any isomorphism from the condensed commutative ring of continuous embedded integers to the condensed spectral integer ring of $\\operatorname{ULift} E$, and let $X$ be a Noetherian scheme in universe $u$. There is an isomorphism $a$ from the pulled-back constant spectral integer ring to the pulled-back constant embedded integer ring such that $a$ followed by the embedded constant-to-continuous map equals the spectral constant-to-continuous map followed by the inverse image of $e^{-1}$. Extension along the small section-ring map of $a$ carries the spectral first residue kernel ideal [def-sfb-quotient-kernel-completeness] to the embedded first residue kernel ideal. This is an underived ring and ideal statement, independent of complexes or completeness.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-lem-integral-models/sk-lem-integral-models-stacks.md",
+  "place": "Displayed criterion: transport of the local completeness and first-residue predicates; Stacks Tag 09C1."
+ },
+ "stmt_deps": [
+  "def-sfb-embedded-integral-model-coefficients",
+  "def-sfb-integral-models-stacks-data",
+  "def-sfb-quotient-kernel-completeness"
+ ],
+ "proof": [
+  {
+   "text": "Regard the given internal monoid isomorphism as an isomorphism of ring-valued sheaves: its additive section isomorphisms preserve multiplication by the monoidal sheaf-to-presheaf functor. Evaluate its inverse on the one-point profinite set and use the constant-function identifications to obtain a ring isomorphism from spectral integers to embedded integers. Express each constant-to-continuous map as the counit of the constant-sheaf/point-sections adjunction. Naturality of this counit and of constant sheafification with respect to forgetting commutativity gives the scalar square. Apply the coefficient inverse-image functor to obtain a.",
+   "uses": [
+    "def-sfb-embedded-integral-model-coefficients",
+    "def-sfb-integral-models-stacks-data"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The DVR description identifies the spectral first quotient ideal with its maximal ideal. A ring isomorphism sends that maximal ideal to the embedded maximal ideal, identified with the span of the chosen uniformizer by the hypothesis. The induced quotient ring isomorphism gives a commuting square with the first quotient maps; apply constant sheafification, coefficient inverse image and the small section-ring functor to this square. Prove generally that a commuting square whose horizontal arrows are ring-sheaf isomorphisms transports the kernel ideal by extension: sectionwise the image kernel generates precisely the other kernel, and the local characterization uniquely specifies ideal extension. Apply this fact to the small section-ring square.",
+   "uses": [
+    "lem-weil-l-adic-extension-integers-dvr",
+    "def-sfb-quotient-kernel-completeness",
+    "def-sfb-integral-models-stacks-data"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-sfb-embedded-integral-model-coefficients",
+  "def-sfb-integral-models-stacks-data",
+  "lem-weil-l-adic-extension-integers-dvr",
+  "def-sfb-quotient-kernel-completeness"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "E1",
+  "date": "2026-10-25",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-lem-integral-models/sk-lem-integral-models-stacks.md",
+  "place": "Displayed criterion: transport of the local completeness and first-residue predicates; Stacks Tag 09C1."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Restriction along an isomorphism of ring sheaves preserves local derived completeness for the kernel of a quotient map",
+   "results": "SheafOfModules.IsFinitePresentation, AdicCompletion.congr, and scheme ideal-sheaf kernel results; no constant scalar square comparison.",
+   "date": "2026-10-25",
+   "verdict": "No exact match."
+  },
+  {
+   "tool": "loogle",
+   "query": "RingEquiv, Ideal.map",
+   "results": "Ideal.apply_mem_of_equiv_iff, Ideal.map_comap_of_equiv, Ideal.quotientEquiv and its quotient-generator formula.",
+   "date": "2026-10-25",
+   "verdict": "Useful ring-theoretic ingredients, not the sheaf scalar square."
+  },
+  {
+   "tool": "grep",
+   "query": "locallyDerivedComplete_iff|kernelIdeal_existsUnique|comapComp",
+   "results": "The project supplies siteDerivedRestrictScalars_locallyDerivedComplete_iff, kernelIdeal_existsUnique, and scalar restriction composition. IntegralCoefficientExtComparison has a private canonical integerLiftEquiv, but no bridge for arbitrary e or its residue kernel.",
+   "date": "2026-10-25",
+   "verdict": "Reuse the derived transport API; isolate only the missing underived square."
+  },
+  {
+   "tool": "leansearch",
+   "query": "An isomorphism of condensed continuous function rings preserves constant functions and carries the maximal ideal of a local ring to the maximal ideal",
+   "results": "LocallyConstant.constRingHom, Ideal.map_isMaximal_of_equiv, ContinuousMap.C, Ideal.comap_isMaximal_of_equiv, CondensedMod.LocallyConstant.functorIsoDiscrete.",
+   "date": "2026-10-25",
+   "verdict": "Maximal ideal transport and the locally constant model are ingredients; no exact scalar-kernel square."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.EmbeddedIntegralCompletenessTransport",
+  "group": "J7",
+  "date": "2026-10-25"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "sk-lem-integral-models",
+   "place": "First proof paragraph of det-lem-integral-models-stacks: comparison of complete objects through constant scalar restriction; underived coefficient presentation square.",
+   "via": [
+    "lem-sfb-embedded-integral-completeness-transport"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-lem-integral-models",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.EmbeddedIntegralScalarKernelSquare",
+  "file": "lean/Sheaf/Paper/EmbeddedIntegralScalarKernelSquare.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.embeddedIntegralScalarKernelSquare",
+  "statement": "theorem embeddedIntegralScalarKernelSquare\n    (ℓ : ℕ) [Fact ℓ.Prime] (E : PadicAlgCl.FiniteIntermediateField ℓ)\n    [FiniteDimensional ℚ_[ℓ] (ULift.{u} E.val)]\n    (π : PadicAlgCl.integers ℓ E.1)\n    (hπ : Ideal.span {π} = IsLocalRing.maximalIdeal (PadicAlgCl.integers ℓ E.1))\n    (e : Mon.mk (Profinite.padicIntegersRingObj.{u} ℓ E.val) ≅\n      sfbCondensedIntegers ℓ (ULift.{u} E.val))\n    (X : Scheme.{u}) [IsNoetherian X] :\n    ∃ a : Mon.mk (condensedRingObj\n        (IntegralModelsStacks.discreteObj\n          (Padic.coefficientExtensionIntegers ℓ (ULift.{u} E.val))) X) ≅\n      Mon.mk (condensedRingObj\n        (IntegralModelsEmbedded.discreteObj (PadicAlgCl.integers ℓ E.1)) X),\n      a.hom.hom ≫ IntegralModelsEmbedded.scalarMap ℓ E X =\n        IntegralModelsStacks.scalarMap ℓ (ULift.{u} E.val) X ≫\n          (upperStarFromPoint X).map e.inv.hom ∧\n      (ConstantCompletion.kernelIdeal (IntegralModelsStacks.smallMap X\n        (IntegralModelsStacks.residueMap ℓ (ULift.{u} E.val) X))).extension\n          (IntegralModelsStacks.smallMap X a.hom.hom) =\n        ConstantCompletion.kernelIdeal (IntegralModelsStacks.smallMap X\n          (IntegralModelsEmbedded.residueMap ℓ E π X))",
+  "branch": "sheaf-dag",
+  "by": "J7",
+  "date": "2026-10-25"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J7",
+  "result": "pass",
+  "landing": "20261025T123149-L-1839094",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E1",
+  "result": "pass",
+  "landing": "20261025T204510-L-2963963",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

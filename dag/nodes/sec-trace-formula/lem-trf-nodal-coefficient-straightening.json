@@ -1,0 +1,148 @@
+{
+ "id": "lem-trf-nodal-coefficient-straightening",
+ "kind": "statement",
+ "title": "Straightening a coefficient field in the standard split node",
+ "statement": "Let k be a field, S=k[[u,v]], I=(uv), T=S/I, and m=(u,v)T. For any unital ring map $\\alpha:k\\to T$ such that every z in T is congruent modulo m to alpha(a) for some a in k, there is a ring automorphism e of T satisfying e(alpha(a))=a for every a in k, where the right-hand side is the standard constant-series class. Power series and their ideal quotient are the actual constructions of [def-weil-pbc-multivariate-power-series].",
+ "source": {
+  "document": "literature/stacks-project/curves.tex",
+  "place": "Tags 0C4D and 0CBW, split-node coefficient-field convention; coefficient substitution argument using adic completeness."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-multivariate-power-series"
+ ],
+ "proof": [
+  {
+   "text": "The variable-adically complete Noetherian ring S has finite quotient module T. By [lem-weil-pbc-finite-module-complete-over-complete-noetherian], T is complete for m. Evaluate power series using alpha on coefficients and the images of u and v on variables by [lem-weil-pbc-power-series-universal-property-complete]. Since uv vanishes in T, this factors through an endomorphism theta:T→T.",
+   "uses": [
+    "lem-weil-pbc-finite-module-complete-over-complete-noetherian",
+    "lem-weil-pbc-power-series-universal-property-complete"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/curves.tex",
+    "place": "Tags 0C4D and 0CBW, split-node coefficient-field convention; coefficient substitution argument using adic completeness."
+   }
+  },
+  {
+   "text": "The image of the source variable ideal under evaluation is m. The residue-surjectivity assumption gives surjectivity modulo that ideal. The complete-source surjectivity criterion (Mathlib surjective_of_mk_map_comp_surjective) makes evaluation surjective, hence theta is surjective.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/curves.tex",
+    "place": "Tags 0C4D and 0CBW, split-node coefficient-field convention; coefficient substitution argument using adic completeness."
+   }
+  },
+  {
+   "text": "A surjective endomorphism of a Noetherian ring is injective: the increasing ideals ker(theta^n) stabilize; lift x in ker(theta) through theta^n and use stabilization to show x=0. Thus theta is an automorphism. Its inverse sends alpha(a)=theta(a) to the standard constant a.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/curves.tex",
+    "place": "Tags 0C4D and 0CBW, split-node coefficient-field convention; coefficient substitution argument using adic completeness."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-finite-module-complete-over-complete-noetherian",
+  "lem-weil-pbc-power-series-universal-property-complete"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "F1",
+  "document": "literature/stacks-project/curves.tex",
+  "place": "Tags 0C4D and 0CBW, split-node coefficient-field convention; coefficient substitution argument using adic completeness."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A coefficient field in the split node k formal power series in two variables modulo their product is conjugate to the standard coefficient field by a ring automorphism",
+   "results": "8 results, all power-series inverse coefficients or Weierstrass division; none gives coefficient conjugacy.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"RingHom\", \"Surjective\", \"IsNoetherianRing\"",
+   "results": "0 hits.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "coefficient.*(automorphism|straighten)|Hopfian|hopfian",
+   "results": "0 hits. Local Mathlib search found the complete-source surjectivity theorem and module kernel stabilization, used in the proof.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Any surjective ring endomorphism of a commutative Noetherian ring is injective",
+   "results": "8 hits concerning linear/module endomorphisms; a ring endomorphism need not be linear over the original ring, so the private proof stabilizes its ideal kernels directly.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.TraceFormula.NodalSubcurveBoundary",
+  "date": "2026-10-23",
+  "group": "F1"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Geometric input for the exceptional-fibre boundary: step 5 of lem-trf-nodal-subcurve-boundary must convert the abstract nodal completion into the scalar-compatible split-node condition.",
+   "via": [
+    "lem-trf-nodal-subcurve-boundary",
+    "lem-trf-nodal-contraction-euler-defect",
+    "lem-trf-smooth-target-modification-exceptional-tree",
+    "lem-trf-valuation-marking-semistable-separation",
+    "lem-trf-valuation-stable-reduction",
+    "lem-trf-temkin-stable-modification",
+    "lem-trf-stable-modification-flat-curve-pair",
+    "lem-trf-dejong-relative-marked-semistable",
+    "lem-trf-relative-marked-nodal-reduction",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.RingTheory.NodalCoefficientStraightening",
+  "file": "lean/Sheaf/RingTheory/NodalCoefficientStraightening.lean",
+  "declaration": "MvPowerSeries.nodal_coefficient_straightening",
+  "statement": "theorem nodal_coefficient_straightening (k : Type u) [Field k]\n    (α : k →+* (MvPowerSeries (Fin 2) k ⧸\n      Ideal.span {(X 0 : MvPowerSeries (Fin 2) k) * X 1}))\n    (hα : ∀ z, ∃ a : k, z - α a ∈\n      (Ideal.span (Set.range (X : Fin 2 → MvPowerSeries (Fin 2) k))).map\n        (Ideal.Quotient.mk (Ideal.span {(X 0 : MvPowerSeries (Fin 2) k) * X 1}))) :\n    ∃ e : (MvPowerSeries (Fin 2) k ⧸\n        Ideal.span {(X 0 : MvPowerSeries (Fin 2) k) * X 1}) ≃+*\n        (MvPowerSeries (Fin 2) k ⧸\n          Ideal.span {(X 0 : MvPowerSeries (Fin 2) k) * X 1}),\n      ∀ a : k, e (α a) = Ideal.Quotient.mk _ (C a)",
+  "branch": "sheaf-dag",
+  "by": "F1",
+  "date": "2026-10-23"
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F1",
+  "result": "pass",
+  "landing": "20261023T151836-L-416702",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F1",
+  "result": "pass",
+  "landing": "20261023T151836-L-416702",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

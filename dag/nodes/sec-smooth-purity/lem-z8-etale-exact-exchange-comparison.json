@@ -1,0 +1,109 @@
+{
+ "id": "lem-z8-etale-exact-exchange-comparison",
+ "kind": "statement",
+ "title": "Etale Exact Exchange Comparison",
+ "statement": "Canonical section variables and instances are those of the attached Lean module.\n\ntheorem derivedSquareUpperStarIso_eq_exact\n    {X X' Y Y' : Scheme.{u}} {f : X ⟶ Y} {f' : X' ⟶ Y'}\n    {g' : X' ⟶ X} {g : Y' ⟶ Y} (sq : CommSq g' f' f g) :\n    (derivedSquareUpperStarIso B sq).hom =\n      Functor.whiskerLeft (upperStar B g).leftDerivedFunctor\n        (leftDerivedUpperStarIsoMapDerivedCategory B f').hom ≫\n      Functor.whiskerRight (leftDerivedUpperStarIsoMapDerivedCategory B g).hom\n        (upperStar B f').mapDerivedCategory ≫\n      (exactDerivedSquareUpperStarIso B sq).hom ≫\n      Functor.whiskerLeft (upperStar B f).mapDerivedCategory\n        (leftDerivedUpperStarIsoMapDerivedCategory B g').inv ≫\n      Functor.whiskerRight (leftDerivedUpperStarIsoMapDerivedCategory B f).inv\n        (upperStar B g').leftDerivedFunctor\n\ntheorem derivedSquareUpperStarIso_inv_app\n    {X X' Y Y' : Scheme.{u}} {f : X ⟶ Y} {f' : X' ⟶ Y'}\n    {g' : X' ⟶ X} {g : Y' ⟶ Y} (sq : CommSq g' f' f g)\n    (K : DerivedCategory (Sheaf Y.smallEtaleTopology B)) :\n    (derivedSquareUpperStarIso B sq).inv.app K =\n      ((leftDerivedUpperStarComp B g' f).symm.app K ≪≫\n        (leftDerivedUpperStarComp B f' g (g' ≫ f) sq.w).app K).hom\n\ntheorem derivedBaseChangeMap_eq_exact\n    {X X' Y Y' : Scheme.{u}} {f : X ⟶ Y} {f' : X' ⟶ Y'}\n    {g' : X' ⟶ X} {g : Y' ⟶ Y} (sq : CommSq g' f' f g)\n    (M : DerivedCategory (Sheaf X.smallEtaleTopology B)) :\n    (derivedBaseChangeMap B sq).app M =\n      (leftDerivedUpperStarIsoMapDerivedCategory B g).hom.app\n          ((lowerStar B f).rightDerivedFunctor.obj M) ≫\n      (exactDerivedBaseChangeMap B sq).app M ≫\n      (lowerStar B f').rightDerivedFunctor.map\n        ((leftDerivedUpperStarIsoMapDerivedCategory B g').inv.app M)",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-geo-p1-adjunction/thm-amb-p1-adjunction.proof.md",
+  "place": "Supported diagonal kernel, section projection contractions, and counit base change"
+ },
+ "stmt_deps": [
+  "def-kun-unbounded-exchange",
+  "lem-z8-section-projection-unit"
+ ],
+ "proof": [
+  {
+   "text": "The exact and total-derived inverse-image comparisons agree under the canonical exact-to-derived isomorphism. Expand the exchange as the mate of the square comparison followed by the counit, and apply the derived adjunction compatibility. Naturality of the comparison identifies the two exchange maps.",
+   "uses": [
+    "def-kun-unbounded-exchange",
+    "lem-z8-section-projection-unit"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-kun-unbounded-exchange",
+  "lem-z8-section-projection-unit"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-geo-p1-adjunction/thm-amb-p1-adjunction.proof.md",
+  "place": "Explicit canonical-map calculation in the accompanying Lean module"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "projective line etale cohomology trace adjunction diagonal unit triangle identities",
+   "results": "Generic adjunction, mate, monoidal and isomorphism cancellation APIs; no ready-made projective-line diagonal unit.",
+   "date": "2026-10-25",
+   "verdict": "generic tools only"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.mkOfUnitCounit",
+   "results": "Generic adjunction, mate, monoidal and isomorphism cancellation APIs; no ready-made projective-line diagonal unit.",
+   "date": "2026-10-25",
+   "verdict": "generic tools only"
+  },
+  {
+   "tool": "grep",
+   "query": "diagonal.*triangle|projective.*adjunction",
+   "results": "Generic adjunction, mate, monoidal and isomorphism cancellation APIs; no ready-made projective-line diagonal unit.",
+   "date": "2026-10-25",
+   "verdict": "generic tools only"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.OrdinaryFiniteP1DiagonalUnit",
+  "date": "2026-10-26",
+  "group": "Z8"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-asd-ordinary-finite-p1-diagonal-unit",
+   "place": "Explicit proof of the supported diagonal unit and its specified counit",
+   "via": []
+  }
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sf-cbc",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.EtaleExactExchangeComparison",
+  "file": "lean/Sheaf/AlgebraicGeometry/EtaleExactExchangeComparison.lean",
+  "declaration": "AlgebraicGeometry.Etale.derivedBaseChangeMap_eq_exact",
+  "declarations": [
+   "AlgebraicGeometry.Etale.derivedSquareUpperStarIso_eq_exact",
+   "AlgebraicGeometry.Etale.derivedSquareUpperStarIso_inv_app",
+   "AlgebraicGeometry.Etale.derivedBaseChangeMap_eq_exact"
+  ],
+  "statement": "theorem derivedBaseChangeMap_eq_exact\n    {X X' Y Y' : Scheme.{u}} {f : X ⟶ Y} {f' : X' ⟶ Y'}\n    {g' : X' ⟶ X} {g : Y' ⟶ Y} (sq : CommSq g' f' f g)\n    (M : DerivedCategory (Sheaf X.smallEtaleTopology B)) :\n    (derivedBaseChangeMap B sq).app M =\n      (leftDerivedUpperStarIsoMapDerivedCategory B g).hom.app\n          ((lowerStar B f).rightDerivedFunctor.obj M) ≫\n      (exactDerivedBaseChangeMap B sq).app M ≫\n      (lowerStar B f').rightDerivedFunctor.map\n        ((leftDerivedUpperStarIsoMapDerivedCategory B g').inv.app M)",
+  "branch": "sheaf-dag",
+  "by": "Z8",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-1065e",
+  "group": "Z8",
+  "result": "fix",
+  "landing": "20261027T135451-L-3711227",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-1065e",
+  "group": "Z8",
+  "result": "fix",
+  "landing": "20261027T135451-L-3711227",
+  "kind": "interface",
+  "note": "independent cc review: 1065e8 vs fd5306 delivery (diff: duplicate square removed, TraceCoordinates reuses FiniteShiftedLineSquare) and adapted modules vs live clone; original FiniteP1TwistedUnitBaseChange compiled against delivered Arrows"
+ }
+}

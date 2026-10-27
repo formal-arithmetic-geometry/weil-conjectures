@@ -1,0 +1,238 @@
+{
+ "id": "lem-sfb-stack-reduced-locnoeth-fppf-descent",
+ "kind": "statement",
+ "title": "Reducedness and local Noetherianity from an fppf scheme cover",
+ "statement": "Let $S$ be a scheme [def-pc-scheme], in the universes of [def-weil-size-convention]. Stacks in groupoids, their morphisms and 2-fibre products use [def-sfb-stable-pointed-moduli-groupoids]; algebraic spaces use [def-trf-algebraic-space]. An algebraic stack is an fppf stack in groupoids with diagonal representable by algebraic spaces and a smooth surjective scheme atlas [def-pc-fppf-site, def-sbc-smooth-morphisms]. A morphism is representable by algebraic spaces if every scheme base change is an algebraic space. For representable maps, flatness, local finite presentation and local finite type are tested after scheme base change on etale scheme charts [def-weil-flat-morphism, def-sbc-locally-finite-presentation, def-weil-finite-type-morphism]. Surjectivity means that every field-valued target object lifts, up to isomorphism, after some field extension [def-weil-field]. Let $\\mathcal Z$ be an algebraic stack over $S$ and let $p:V\\to\\mathcal Z$ be a representable surjective flat locally finitely presented morphism from a scheme $V$. If $V$ is reduced and locally Noetherian, then $\\mathcal Z$ admits a smooth surjective scheme atlas which is reduced and locally Noetherian. Reduced for a scheme means that its local rings have no nonzero nilpotent elements; locally Noetherian means that it has an affine open cover by spectra of Noetherian rings [pqf-def-locnoeth]. No smoothness of $p$ and no Noetherian condition on $S$ are assumed.",
+ "source": {
+  "document": "literature/stacks-project/stacks-properties.tex",
+  "place": "Tag 04YF (lemma-type-property); proof of Tag 06MP (lemma-unique-point-better), (2) implies (1), generalized from a field cover to a reduced locally Noetherian scheme cover. Inputs: descent.tex Tags 034C (lemma-Noetherian-local-fppf), 034E (lemma-reduced-local-smooth); spaces-descent.tex Tags 06MI (lemma-descend-reduced), 06MJ (lemma-descend-locally-Noetherian)."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-size-convention",
+  "def-sfb-stable-pointed-moduli-groupoids",
+  "def-trf-algebraic-space",
+  "def-pc-fppf-site",
+  "def-sbc-smooth-morphisms",
+  "def-weil-flat-morphism",
+  "def-sbc-locally-finite-presentation",
+  "def-weil-finite-type-morphism",
+  "def-weil-field",
+  "pqf-def-locnoeth",
+  "def-sfb-algebraic-moduli-stack",
+  "def-sfb-fppf-stackification",
+  "def-pc-reduced-scheme"
+ ],
+ "proof": [
+  {
+   "text": "Choose a smooth surjective scheme atlas $q:W\\to\\mathcal Z$, which exists by the hypothesis that $\\mathcal Z$ is algebraic. By representability of $p$, $P=W\\times_{\\mathcal Z}V$ is an algebraic space. Choose a representable surjective etale scheme chart $e:T\\to P$ by [def-trf-algebraic-space]. The projection $P\\to V$ is the base change of $q$, and $P\\to W$ is the base change of $p$. Apply [lem-sfb-stack-chartwise-smooth-etale-calculus]: the first projection is smooth, the second is flat, locally of finite presentation and surjective, while $e$ is smooth, flat and locally of finite presentation. Composition therefore makes $a:T\\to V$ smooth and $b:T\\to W$ flat, locally of finite presentation and surjective. Here all maps whose properties are used are representable by algebraic spaces; the two final maps are maps of schemes.",
+   "uses": [
+    "def-trf-algebraic-space",
+    "lem-sfb-stack-chartwise-smooth-etale-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/stacks-properties.tex",
+    "place": "Tags 04YF (lemma-type-property), proof choosing scheme charts of a stack fibre product, and 06MP (lemma-unique-point-better), proof of (2) implies (1)."
+   }
+  },
+  {
+   "text": "Apply [lem-trf-smooth-reduced-dense-pullback] to the smooth scheme morphism $a:T\\to V$. Its base $V$ is reduced and locally Noetherian by hypothesis, so $T$ is reduced and locally Noetherian. This assertion does not require $a$ to be surjective; none of the density conclusions of that node is used.",
+   "uses": [
+    "lem-trf-smooth-reduced-dense-pullback"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/descent.tex",
+    "place": "Tag 034E (lemma-reduced-local-smooth); Tag 034C (lemma-Noetherian-local-fppf), ascent along a smooth morphism."
+   }
+  },
+  {
+   "text": "For every $w\\in W$, choose $t\\in T$ with $b(t)=w$ using surjectivity of $b$. By [def-weil-flat-morphism], $\\mathcal O_{W,w}\\to\\mathcal O_{T,t}$ is a flat local ring homomorphism. It is faithfully flat by [lem-weil-pbc-flat-local-hom-faithfully-flat], hence injective by [lem-weil-pbc-faithfully-flat-ideal-contraction] with the zero ideal. If $x^n=0$ in $\\mathcal O_{W,w}$, for $n\\geq1$, its image is nilpotent in the reduced ring $\\mathcal O_{T,t}$, so its image is zero and injectivity gives $x=0$. Every local ring of $W$ is thus reduced, which is reducedness of $W$ by [def-pc-reduced-scheme].",
+   "uses": [
+    "def-weil-flat-morphism",
+    "lem-weil-pbc-flat-local-hom-faithfully-flat",
+    "lem-weil-pbc-faithfully-flat-ideal-contraction",
+    "def-pc-reduced-scheme"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/descent.tex",
+    "place": "Tag 06QM (lemma-descend-reduced), its local-ring argument."
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-scheme-locnoeth-fppf-descent] to $b:T\\to W$: step 1 supplies flatness, local finite presentation and surjectivity, and step 2 supplies local Noetherianity of $T$. It follows that $W$ is locally Noetherian. Together with step 3, the already chosen smooth surjective atlas $W\\to\\mathcal Z$ has both required properties. No smoothness of $p$ or Noetherianity of $S$ was used.",
+   "uses": [
+    "lem-sfb-scheme-locnoeth-fppf-descent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/stacks-properties.tex",
+    "place": "Tag 06MP (lemma-unique-point-better), proof of (2) implies (1); the fppf descent step is descent.tex Tag 034C on the scheme chart."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-trf-algebraic-space",
+  "lem-sfb-stack-chartwise-smooth-etale-calculus",
+  "lem-trf-smooth-reduced-dense-pullback",
+  "def-weil-flat-morphism",
+  "lem-weil-pbc-flat-local-hom-faithfully-flat",
+  "lem-weil-pbc-faithfully-flat-ideal-contraction",
+  "def-pc-reduced-scheme",
+  "lem-sfb-scheme-locnoeth-fppf-descent"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/stacks-properties.tex",
+  "place": "Tags 04YF (lemma-type-property), proof choosing scheme charts of a stack fibre product, and 06MP (lemma-unique-point-better), proof of (2) implies (1)."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "If an algebraic stack has a reduced locally Noetherian scheme cover which is faithfully flat locally finitely presented then the stack is reduced and locally Noetherian",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.IsLocallyNoetherian\", \"module\": \"Mathlib/AlgebraicGeometry/Noetherian\", \"type\": \"AlgebraicGeometry.Scheme → Prop\", \"doc\": \"A scheme is locally Noetherian if it admits an open cover by Noetherian schemes.\"}\n  {\"name\": \"AlgebraicGeometry.IsNoetherian.toIsLocallyNoetherian\", \"module\": \"Mathlib/AlgebraicGeometry/Noetherian\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} [self : AlgebraicGeometry.IsNoetherian X], AlgebraicGeometry.IsLocallyNoetherian X\", \"doc\": \"If a scheme $X$ is Noetherian, then it is locally Noetherian, meaning it admits an open cover by Noetherian schemes.\"}\n  {\"name\": \"AlgebraicGeometry.IsLocallyArtinian.isLocallyNoetherian\", \"module\": \"Mathlib/AlgebraicGeometry/Artinian\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} [h : AlgebraicGeometry.IsLocallyArtinian X], AlgebraicGeometry.IsLocallyNoetherian X\", \"doc\": \"Every locally Artinian scheme is a locally Noetherian scheme. That is, if every point of a scheme has an open neighborhood whose coordinate ring is Artinian, then the scheme admits an open cover by No\"}\n  {\"name\": \"AlgebraicGeometry.IsReduced\", \"module\": \"Mathlib/AlgebraicGeometry/Properties\", \"type\": \"AlgebraicGeometry.Scheme → Prop\", \"doc\": \"A predicate indicating that a scheme is reduced, i.e., that all its local rings have no nonzero nilpotent elements.\"}\n  {\"name\": \"AlgebraicGeometry.LocallyOfFiniteType.isLocallyNoetherian\", \"module\": \"Mathlib/AlgebraicGeometry/Noetherian\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.LocallyOfFiniteType f]\\n  [AlgebraicGeometry.IsLocallyNoetherian Y], AlgebraicGeometry.IsLocallyNoetherian X\", \"doc\": \"If $ Y $ is a locally Noetherian scheme and $ f: X \\\\to Y $ is a morphism locally of finite type, then $ X $ is also a locally Noetherian scheme.\"}\n  {\"name\": \"AlgebraicGeometry.isReduced_of_isIntegral\", \"module\": \"Mathlib/AlgebraicGeometry/Properties\", \"type\": \"∀ (X : AlgebraicGeometry.Scheme) [AlgebraicGeometry.IsIntegral X], AlgebraicGeometry.IsReduced X\", \"doc\": \"Every integral scheme is a reduced scheme. That is, if a scheme $X$ is integral (meaning it is both irreducible and reduced), then it necessarily satisfies the condition of being reduced (all its loca\"}\n  {\"name\": \"AlgebraicGeometry.IsNoetherian\", \"module\": \"Mathlib/AlgebraicGeometry/Noetherian\", \"type\": \"AlgebraicGeometry.Scheme → Prop\", \"doc\": \"A predicate indicating that a scheme is Noetherian.\"}\n  {\"name\": \"AlgebraicGeometry.instIsLocallyNoetherianSpecOfIsNoetherianRingCarrier\", \"module\": \"Mathlib/AlgebraicGeometry/Noetherian\", \"type\": \"∀ {R : CommRingCat} [IsNoetherianRing ↑R], AlgebraicGeometry.IsLocallyNoetherian (AlgebraicGeometry.Spec R)\", \"doc\": \"If $ R $ is a Noetherian ring, then the scheme $ \\\\operatorname{Spec}(R) $ is locally Noetherian. This means the prime spectrum of $ R $, equipped with the Zariski topology and structure sheaf, admits \"}",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme, ring, ordinary-category and topological results do not assert this algebraic-space/stack result; the stack/chart comparison is not a one-line specialization"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Reducedness and local Noetherianity descend from a surjective flat locally finitely presented scheme morphism to an algebraic stack",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.instDescendsAlongSchemeMinMorphismPropertySurjectiveFlatLocallyOfFinitePresentationOfQuasiCompactOfIsZariskiLocalAtTarget\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.FlatDescent\", \"type\": \"(P : MorphismProperty Scheme) [P.DescendsAlong (@Surjective ⊓ @Flat ⊓ @QuasiCompact)] [IsZariskiLocalAtTarget P] :\\n  P.DescendsAlong (@Surjective ⊓ @Flat ⊓ @LocallyOfFinitePresentation)\", \"doc\": \"If a morphism property $ P $ is Zariski local at the target and descends along morphisms that are surjective, flat, and quasi-compact, then $ P $ also descends along morphisms that are surjective, fla\"}\n  {\"name\": \"AlgebraicGeometry.IsZariskiLocalAtTarget.descendsAlong_inf_quasiCompact\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Descent\", \"type\": \"[IsZariskiLocalAtTarget P]\\n  (H :\\n    ∀ {R S : CommRingCat.{u}} {Y : Scheme.{u}} (φ : R ⟶ S) (g : Y ⟶ Spec R),\\n      P' (Spec.map φ) → P (pullback.fst (Spec.map φ) g) → P g) :\\n  P.DescendsAlong (P' ⊓ @QuasiCompact)\", \"doc\": \"If $ P $ is a morphism property that is Zariski local at the target, and for any ring homomorphism $ \\\\phi : R \\\\to S $ and morphism $ g : Y \\\\to \\\\operatorname{Spec}(R) $, the conditions $ P'(\\\\operatorna\"}\n  {\"name\": \"AlgebraicGeometry.IsLocalAtTarget.descendsAlong\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Descent\", \"type\": \"∀ (P P' : CategoryTheory.MorphismProperty AlgebraicGeometry.Scheme) [AlgebraicGeometry.IsZariskiLocalAtTarget P]\\n  [P'.IsStableUnderBaseChange],\\n  (∀ {R : CommRingCat} {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ AlgebraicGeometry.Spec R)\\n      (g : Y ⟶ AlgebraicGeometry.Spec R), P' f → P (CategoryTheo\", \"doc\": \"Let $\\\\mathcal{P}$ and $\\\\mathcal{P}'$ be morphism properties in the category of schemes. If $\\\\mathcal{P}$ is Zariski local at the target and $\\\\mathcal{P}'$ is stable under base change, then for any com\"}\n  {\"name\": \"AlgebraicGeometry.IsLocalAtTarget.descendsAlong_inf_quasiCompact\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Descent\", \"type\": \"∀ (P P' : CategoryTheory.MorphismProperty AlgebraicGeometry.Scheme) [P'.IsStableUnderBaseChange]\\n  [P'.IsStableUnderComposition] [P.IsStableUnderBaseChange],\\n  @AlgebraicGeometry.IsLocalIso ⊓ @AlgebraicGeometry.Surjective ≤ P' →\\n    ∀ [AlgebraicGeometry.IsZariskiLocalAtTarget P],\\n      (∀ {R S : Com\", \"doc\": \"Let $\\\\mathcal{P}$ and $\\\\mathcal{P}'$ be morphism properties of schemes where $\\\\mathcal{P}'$ is stable under base change and composition, and $\\\\mathcal{P}$ is stable under base change. If the intersect\"}\n  {\"name\": \"AlgebraicGeometry.IsZariskiLocalAtTarget.descendsAlong\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Descent\", \"type\": \"[IsZariskiLocalAtTarget P] [P'.IsStableUnderBaseChange]\\n  (H :\\n    ∀ {R : CommRingCat.{u}} {X Y : Scheme.{u}} (f : X ⟶ Spec R) (g : Y ⟶ Spec R), P' f → P (pullback.fst f g) → P g) :\\n  P.DescendsAlong P'\", \"doc\": \"Let $\\\\mathcal{P}$ and $\\\\mathcal{P}'$ be morphism properties on schemes. If $\\\\mathcal{P}'$ is stable under base change, and for every commutative ring $R$ and morphisms $f : X \\\\to \\\\operatorname{Spec}(R\"}\n  {\"name\": \"AlgebraicGeometry.isReduced_of_isReduced_stalk\", \"module\": \"Mathlib.AlgebraicGeometry.Properties\", \"type\": \"[∀ x : X, _root_.IsReduced (X.presheaf.stalk x)] : IsReduced X\", \"doc\": \"If for every point $ x $ in a scheme $ X $, the stalk of the structure sheaf at $ x $ is a reduced ring (i.e., contains no nonzero nilpotent elements), then the scheme $ X $ is reduced.\"}\n  {\"name\": \"AlgebraicGeometry.instLocallyOfFinitePresentationOfIsSmooth\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Smooth\", \"type\": \"[hf : IsSmooth f] : LocallyOfFinitePresentation f\", \"doc\": \"Every smooth morphism of schemes is locally of finite presentation.\"}\n  {\"name\": \"AlgebraicGeometry.LocallyOfFiniteType.isLocallyNoetherian\", \"module\": \"Mathlib.AlgebraicGeometry.Noetherian\", \"type\": \"{X Y : Scheme} (f : X ⟶ Y) [LocallyOfFiniteType f] [IsLocallyNoetherian Y] : IsLocallyNoetherian X\", \"doc\": \"If $ Y $ is a locally Noetherian scheme and $ f: X \\\\to Y $ is a morphism locally of finite type, then $ X $ is also a locally Noetherian scheme.\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme, ring, ordinary-category and topological results do not assert this algebraic-space/stack result; the stack/chart comparison is not a one-line specialization"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"IsLocallyNoetherian\"",
+   "results": "[loogle] OK 12 hit(s)\n  {\"name\": \"AlgebraicGeometry.IsLocallyNoetherian\", \"module\": \"Mathlib.AlgebraicGeometry.Noetherian\", \"type\": \" (X : AlgebraicGeometry.Scheme) : Prop\", \"doc\": \"A scheme `X` is locally Noetherian if `𝒪ₓ(U)` is Noetherian for all affine `U`.\"}\n  {\"name\": \"AlgebraicGeometry.IsNoetherian.toIsLocallyNoetherian\", \"module\": \"Mathlib.AlgebraicGeometry.Noetherian\", \"type\": \" {X : AlgebraicGeometry.Scheme} [self : AlgebraicGeometry.IsNoetherian X] : AlgebraicGeometry.IsLocallyNoetherian X\", \"doc\": \"\"}\n  {\"name\": \"AlgebraicGeometry.instIsLocallyNoetherianToScheme\", \"module\": \"Mathlib.AlgebraicGeometry.Noetherian\", \"type\": \" {X : AlgebraicGeometry.Scheme} {U : X.Opens} [AlgebraicGeometry.IsLocallyNoetherian X] : AlgebraicGeometry.IsLocallyNoetherian ↑U\", \"doc\": \"\"}\n  {\"name\": \"AlgebraicGeometry.instIsLocallyNoetherianSpecOfIsNoetherianRingCarrier\", \"module\": \"Mathlib.AlgebraicGeometry.Noetherian\", \"type\": \" {R : CommRingCat} [IsNoetherianRing ↑R] : AlgebraicGeometry.IsLocallyNoetherian (AlgebraicGeometry.Spec R)\", \"doc\": \"\"}\n  {\"name\": \"AlgebraicGeometry.isLocallyNoetherian_Spec\", \"module\": \"Mathlib.AlgebraicGeometry.Noetherian\", \"type\": \" {R : CommRingCat} : AlgebraicGeometry.IsLocallyNoetherian (AlgebraicGeometry.Spec R) ↔ IsNoetherianRing ↑R\", \"doc\": \"\"}\n  {\"name\": \"AlgebraicGeometry.isLocallyNoetherian_of_isOpenImmersion\", \"module\": \"Mathlib.AlgebraicGeometry.Noetherian\", \"type\": \" {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.IsOpenImmersion f] [AlgebraicGeometry.IsLocallyNoetherian Y] : AlgebraicGeometry.IsLocallyNoetherian X\", \"doc\": \"\"}\n  {\"name\": \"AlgebraicGeometry.LocallyOfFiniteType.isLocallyNoetherian\", \"module\": \"Mathlib.AlgebraicGeometry.Noetherian\", \"type\": \" {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.LocallyOfFiniteType f] [AlgebraicGeometry.IsLocallyNoetherian Y] : AlgebraicGeometry.IsLocallyNoetherian X\", \"doc\": \"\"}\n  {\"name\": \"AlgebraicGeometry.IsLocallyNoetherian.quasiSeparatedSpace\", \"module\": \"Mathlib.AlgebraicGeometry.Noetherian\", \"type\": \" {X : AlgebraicGeometry.Scheme} [AlgebraicGeometry.IsLocallyNoetherian X] : QuasiSeparatedSpace ↥X\", \"doc\": \"A locally Noetherian scheme is quasi-separated.\"}\n  {\"name\": \"AlgebraicGeometry.instLocallyOfFinitePresentationOfIsLocallyNoetherianOfLocallyOfFiniteType\", \"module\": \"Mathlib.AlgebraicGeometry.Noetherian\", \"type\": \" {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.IsLocallyNoetherian Y] [AlgebraicGeometry.LocallyOfFiniteType f] : AlgebraicGeometry.LocallyOfFinitePresentation f\", \"doc\": \"\"}\n  {\"name\": \"AlgebraicGeometry.instQuasiCompactOfIsLocallyNoetherianOfIsOpenImmersion\", \"module\": \"Mathlib.AlgebraicGeometry.Noetherian\", \"type\": \" {X Z : AlgebraicGeometry.Scheme} [AlgebraicGeometry.IsLocallyNoetherian X] {f : Z ⟶ X} [AlgebraicGeometry.IsOpenImmersion f] : AlgebraicGeometry.QuasiCompact f\", \"doc\": \"Any open immersion `Z ⟶ X` with `X` locally Noetherian is quasi-compact.\"}\n  {\"name\": \"AlgebraicGeometry.instIsLocallyNoetherianXScheme\", \"module\": \"Mathlib.AlgebraicGeometry.Noetherian\", \"type\": \" {X : AlgebraicGeometry.Scheme} {U : X.OpenCover} (i : U.I₀) [AlgebraicGeometry.IsLocallyNoetherian X] : AlgebraicGeometry.IsLocallyNoetherian (U.X i)\", \"doc\": \"\"}\n  {\"name\": \"AlgebraicGeometry.isLocallyNoetherian_iff_openCover\", \"module\": \"Mathlib.AlgebraicGeometry.Noetherian\", \"type\": \" {X : AlgebraicGeometry.Scheme} (𝒰 : X.OpenCover) : AlgebraicGeometry.IsLocallyNoetherian X ↔ ∀ (i : 𝒰.I₀), AlgebraicGeometry.IsLocallyNoetherian (𝒰.X i)\", \"doc\": \"If `𝒰` is an open cover of a scheme `X`, then `X` is locally Noetherian if and only if\\n`𝒰.X i` are all locally Noetherian.\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme, ring, ordinary-category and topological results do not assert this algebraic-space/stack result; the stack/chart comparison is not a one-line specialization"
+  },
+  {
+   "tool": "grep",
+   "query": "AlgebraicStack|IsReduced.*[Ff]lat|[Nn]oetherian.*[Ss]urjective",
+   "results": "[grep] OK 25 hit(s)\n  {\"file\": \"Mathlib/Algebra/Lie/Engel.lean\", \"line\": \"254\", \"text\": \"    refine isNoetherian_of_surjective (LieHom.rangeRestrict (toEnd R L M)).toLinearMap ?_\"}\n  {\"file\": \"Mathlib/Algebra/Module/LinearMap/FiniteRange.lean\", \"line\": \"257\", \"text\": \"  refine isNoetherian_of_surjective (A.mapQ (eqLocus u v) id A_le) (by simp [range_mapQ])\"}\n  {\"file\": \"Mathlib/GroupTheory/FreeGroup/CyclicallyReduced.lean\", \"line\": \"75\", \"text\": \"    rw [isCyclicallyReduced_iff, IsReduced, List.isChain_flatten (by simp)]\"}\n  {\"file\": \"Mathlib/GroupTheory/FreeGroup/CyclicallyReduced.lean\", \"line\": \"85\", \"text\": \"theorem IsReduced.append_flatten_replicate_append (h₁ : IsCyclicallyReduced L₂)\"}\n  {\"file\": \"Mathlib/GroupTheory/FreeGroup/CyclicallyReduced.lean\", \"line\": \"87\", \"text\": \"  IsReduced (L₁ ++ (List.replicate n L₂).flatten ++ L₃) := by\"}\n  {\"file\": \"Mathlib/GroupTheory/FreeGroup/CyclicallyReduced.lean\", \"line\": \"196\", \"text\": \"    apply IsReduced.append_flatten_replicate_append (hn := by simp)\"}\n  {\"file\": \"Mathlib/Topology/NoetherianSpace.lean\", \"line\": \"109\", \"text\": \"theorem noetherianSpace_of_surjective [NoetherianSpace α] (f : α → β) (hf : Continuous f)\"}\n  {\"file\": \"Mathlib/Topology/NoetherianSpace.lean\", \"line\": \"111\", \"text\": \"  noetherianSpace_iff_isCompact.2 <| (Set.image_surjective.mpr hf').forall.2 fun s =>\"}\n  {\"file\": \"Mathlib/Topology/NoetherianSpace.lean\", \"line\": \"115\", \"text\": \"  ⟨fun _ => noetherianSpace_of_surjective f f.continuous f.surjective,\"}\n  {\"file\": \"Mathlib/Topology/NoetherianSpace.lean\", \"line\": \"116\", \"text\": \"    fun _ => noetherianSpace_of_surjective f.symm f.symm.continuous f.symm.surjective⟩\"}\n  {\"file\": \"Mathlib/Topology/NoetherianSpace.lean\", \"line\": \"120\", \"text\": \"  noetherianSpace_of_surjective (Set.rangeFactorization f) (hf.subtype_mk _)\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Noetherian.lean\", \"line\": \"156\", \"text\": \"    isNoetherianRing_of_surjective _ _ _ (f.appIso U).commRingCatIsoToRingEquiv.surjective\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Geometrically/Integral.lean\", \"line\": \"96\", \"text\": \"    GeometricallyReduced.isReduced_of_flat_of_isLocallyNoetherian f⟩\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Geometrically/Integral.lean\", \"line\": \"103\", \"text\": \"    GeometricallyReduced.isReduced_of_flat_of_isLocallyNoetherian f⟩\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Geometrically/Reduced.lean\", \"line\": \"23\", \"text\": \"- `AlgebraicGeometry.GeometricallyReduced.isReduced_of_flat_of_isLocallyNoetherian`:\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Geometrically/Reduced.lean\", \"line\": \"74\", \"text\": \"lemma GeometricallyReduced.isReduced_of_flat_of_finite_irreducibleComponents\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Geometrically/Reduced.lean\", \"line\": \"109\", \"text\": \"lemma GeometricallyReduced.isReduced_of_flat_of_isLocallyNoetherian\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Geometrically/Reduced.lean\", \"line\": \"118\", \"text\": \"  exact isReduced_of_flat_of_finite_irreducibleComponents (pullback.snd _ _)\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Geometrically/Reduced.lean\", \"line\": \"126\", \"text\": \"  GeometricallyReduced.isReduced_of_flat_of_isLocallyNoetherian (pullback.snd _ _)\"}\n  {\"file\": \"Mathlib/RingTheory/Nilpotent/GeometricallyReduced.lean\", \"line\": \"97\", \"text\": \"  exact IsReduced.tensorProduct_of_flat_of_forall_fg h\"}\n  {\"file\": \"Mathlib/RingTheory/Finiteness/Quotient.lean\", \"line\": \"40\", \"text\": \"    isNoetherian_of_surjective (Ideal.Quotient.mkₐ A _).toLinearMap <|\"}\n  {\"file\": \"Mathlib/RingTheory/GradedAlgebra/Noetherian.lean\", \"line\": \"30\", \"text\": \"  isNoetherianRing_of_surjective\"}\n  {\"file\": \"Mathlib/RingTheory/Smooth/Flat.lean\", \"line\": \"21\", \"text\": \"1. If `R` is Noetherian, let `R[X₁, ..., Xₙ] →ₐ[R] A` be surjective with kernel `I`. By\"}\n  {\"file\": \"Mathlib/RingTheory/Smooth/Flat.lean\", \"line\": \"41\", \"text\": \"lemma FormallySmooth.flat_of_algHom_of_isNoetherianRing (f : S →ₐ[R] A) (hf : Function.Surjective f)\"}\n  {\"file\": \"Mathlib/RingTheory/Flat/Basic.lean\", \"line\": \"642\", \"text\": \"theorem IsReduced.tensorProduct_of_flat_of_forall_fg {R C A : Type*}\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme, ring, ordinary-category and topological results do not assert this algebraic-space/stack result; the stack/chart comparison is not a one-line specialization"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An algebraic stack with a reduced locally Noetherian fppf scheme cover has a reduced locally Noetherian smooth atlas",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.instHasRingHomPropertyIsSmoothLocallyIsStandardSmooth\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"AlgebraicGeometry.HasRingHomProperty @AlgebraicGeometry.IsSmooth fun {R S} [CommRing R] [CommRing S] =>\\n  RingHom.Locally fun {R S} [CommRing R] [CommRing S] => RingHom.IsStandardSmooth\", \"doc\": \"A morphism of schemes is smooth if and only if it is locally standard smooth, meaning that for every point in the domain, there exists an open neighborhood where the morphism is isomorphic to a standa\"}\n  {\"name\": \"AlgebraicGeometry.IsLocallyNoetherian\", \"module\": \"Mathlib/AlgebraicGeometry/Noetherian\", \"type\": \"AlgebraicGeometry.Scheme → Prop\", \"doc\": \"A scheme is locally Noetherian if it admits an open cover by Noetherian schemes.\"}\n  {\"name\": \"AlgebraicGeometry.instLocallyOfFinitePresentationOfIsSmooth\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [hf : AlgebraicGeometry.IsSmooth f],\\n  AlgebraicGeometry.LocallyOfFinitePresentation f\", \"doc\": \"Every smooth morphism of schemes is locally of finite presentation.\"}\n  {\"name\": \"AlgebraicGeometry.IsReduced\", \"module\": \"Mathlib/AlgebraicGeometry/Properties\", \"type\": \"AlgebraicGeometry.Scheme → Prop\", \"doc\": \"A predicate indicating that a scheme is reduced, i.e., that all its local rings have no nonzero nilpotent elements.\"}\n  {\"name\": \"AlgebraicGeometry.IsSmooth.exists_isStandardSmooth\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y} [self : AlgebraicGeometry.IsSmooth f] (x : ↥X),\\n  ∃ U V,\\n    ∃ (_ : x ∈ ↑V) (e : ↑V ≤ (TopologicalSpace.Opens.map f.base).obj ↑U),\\n      (CommRingCat.Hom.hom (AlgebraicGeometry.Scheme.Hom.appLE f (↑U) (↑V) e)).IsStandardSmooth\", \"doc\": \"Let $f: X \\\\to Y$ be a smooth morphism of schemes. For any point $x \\\\in X$, there exist an open neighborhood $V$ of $x$ and an open neighborhood $U$ of $f(x)$ with $f(V) \\\\subseteq U$, such that the rin\"}\n  {\"name\": \"AlgebraicGeometry.IsSmooth\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"A morphism $ f: X \\to Y $ of schemes is smooth.\"}\n  {\"name\": \"AlgebraicGeometry.IsEtale.instIsSmooth\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.IsEtale f], AlgebraicGeometry.IsSmooth f\", \"doc\": \"Every étale morphism of schemes is a smooth morphism. Specifically, if a morphism $ f: X \\to Y $ of schemes is étale (i.e., smooth of relative dimension 0), then it satisfies the conditions of being a \"}\n  {\"name\": \"AlgebraicGeometry.instHasRingHomPropertyIsSmoothOfRelativeDimensionLocallyIsStandardSmoothOfRelativeDimension\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"∀ (n : ℕ),\\n  AlgebraicGeometry.HasRingHomProperty (@AlgebraicGeometry.IsSmoothOfRelativeDimension n)\\n    fun {R S} [CommRing R] [CommRing S] =>\\n    RingHom.Locally fun {R S} [CommRing R] [CommRing S] => RingHom.IsStandardSmoothOfRelativeDimension n\", \"doc\": \"For any natural number $ n $ and a morphism $ f: X \\to Y $ of schemes, the morphism $ f $ is smooth of relative dimension $ n $ if and only if it is locally standard smooth of relative dimension $ n $.\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme smoothness and scheme morphism-property descent results do not assert the algebraic-stack common-atlas conclusion."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Transfer reducedness and locally Noetherian property from a flat finitely presented cover to a smooth atlas of an algebraic stack",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.instLocallyOfFinitePresentationOfIsSmooth\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Smooth\", \"type\": \"[hf : IsSmooth f] : LocallyOfFinitePresentation f\", \"doc\": \"Every smooth morphism of schemes is locally of finite presentation.\"}\n  {\"name\": \"Algebra.Smooth.finitePresentation\", \"module\": \"Mathlib.RingTheory.Smooth.Basic\", \"type\": \"∀ {R : Type u_4} {inst : CommRing R} {A : Type u} {inst_1 : CommRing A} {inst_2 : Algebra R A}\\n  [self : Algebra.Smooth R A], Algebra.FinitePresentation R A\", \"doc\": \"If $ A $ is a smooth algebra over a commutative ring $ R $, then $ A $ is finitely presented over $ R $.\"}\n  {\"name\": \"Algebra.Smooth.flat_of_isNoetherianRing\", \"module\": \"Mathlib.RingTheory.Smooth.Flat\", \"type\": \"[IsNoetherianRing R] [Smooth R A] : Module.Flat R A\", \"doc\": \"Let $ R $ be a Noetherian ring and $ A $ a smooth $ R $-algebra. Then $ A $ is flat as an $ R $-module.\"}\n  {\"name\": \"Algebra.Smooth.flat\", \"module\": \"Mathlib.RingTheory.Smooth.Flat\", \"type\": \"[Smooth R A] : Module.Flat R A\", \"doc\": \"If $ A $ is a smooth $ R $-algebra, then $ A $ is a flat $ R $-module.\"}\n  {\"name\": \"AlgebraicGeometry.instDescendsAlongSchemeMinMorphismPropertySurjectiveFlatLocallyOfFinitePresentationOfQuasiCompactOfIsZariskiLocalAtTarget\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.FlatDescent\", \"type\": \"(P : MorphismProperty Scheme) [P.DescendsAlong (@Surjective ⊓ @Flat ⊓ @QuasiCompact)] [IsZariskiLocalAtTarget P] :\\n  P.DescendsAlong (@Surjective ⊓ @Flat ⊓ @LocallyOfFinitePresentation)\", \"doc\": \"If a morphism property $ P $ is Zariski local at the target and descends along morphisms that are surjective, flat, and quasi-compact, then $ P $ also descends along morphisms that are surjective, fla\"}\n  {\"name\": \"AlgebraicGeometry.IsSmooth.casesOn\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Smooth\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} →\\n  {f : X ⟶ Y} →\\n    {motive : AlgebraicGeometry.IsSmooth f → Sort u_1} →\\n      (t : AlgebraicGeometry.IsSmooth f) →\\n        ((exists_isStandardSmooth :\\n              ∀ (x : ↥X),\\n                ∃ U V,\\n                  ∃ (_ : x ∈ ↑V) (e : ↑V ≤ (TopologicalSpace.Ope\", \"doc\": \"A morphism $ f: X \\to Y $ of schemes is smooth.\"}\n  {\"name\": \"Algebra.FormallySmooth.flat_of_algHom_of_isNoetherianRing\", \"module\": \"Mathlib.RingTheory.Smooth.Flat\", \"type\": \"(f : S →ₐ[R] A) (hf : Function.Surjective f) [Module.Flat R S] [IsNoetherianRing S] [FormallySmooth R A] :\\n  Module.Flat R A\", \"doc\": \"Let $ R $ be a commutative ring, $ S $ a Noetherian $ R $-algebra that is flat over $ R $, and $ A $ a formally smooth $ R $-algebra. If there exists a surjective $ R $-algebra homomorphism $ f: S \\to \"}\n  {\"name\": \"AlgebraicGeometry.isLocallyNoetherian_iff_openCover\", \"module\": \"Mathlib.AlgebraicGeometry.Noetherian\", \"type\": \"(𝒰 : Scheme.OpenCover X) : IsLocallyNoetherian X ↔ ∀ (i : 𝒰.I₀), IsLocallyNoetherian (𝒰.X i)\", \"doc\": \"A scheme $X$ is locally Noetherian if and only if every open subscheme in an open cover $\\\\mathcal{U}$ of $X$ is locally Noetherian, i.e., $X$ is locally Noetherian $\\\\iff \\\\forall i \\\\in \\\\mathcal{U}.I_0,\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme smoothness and scheme morphism-property descent results do not assert the algebraic-stack common-atlas conclusion."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicStack\"",
+   "results": "[loogle] OK 0 hit(s)",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme smoothness and scheme morphism-property descent results do not assert the algebraic-stack common-atlas conclusion."
+  },
+  {
+   "tool": "grep",
+   "query": "AlgebraicStack|[Rr]educed.*[Dd]escen|[Nn]oetherian.*fppf",
+   "results": "[grep] OK 1 hit(s)\n  {\"file\": \"Mathlib/GroupTheory/Coxeter/Length.lean\", \"line\": \"14\", \"text\": \"# The length function, reduced words, and descents\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme smoothness and scheme morphism-property descent results do not assert the algebraic-stack common-atlas conclusion."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-finite-type-point-residual-substack",
+  "date": "2026-10-23",
+  "group": "Q84"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: The Deligne--Mumford locus in the stack of proper curves. Supporting input: Unramified diagonal yields an etale scheme atlas. Proof of the unramified-diagonal/etale-atlas criterion: Finite-type points admit field representatives with etale self-relation. Supporting input: Locally finite type residual substack at a finite-type point. Quotient construction: Reducedness and local Noetherianity from an fppf scheme cover.",
+   "via": [
+    "lem-sfb-finite-type-point-residual-substack",
+    "lem-sfb-finite-type-point-etale-self-relation",
+    "lem-sfb-unramified-diagonal-etale-atlas",
+    "lem-sfb-curve-stack-infinitesimal-dm-locus",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-stack-reduced-locnoeth-fppf-descent",
+  "worker": "stage1",
+  "summary": "Compared the unchanged statement with Stacks 04YF and the proof of 06MP, searched the project Lean tree for an attachment and the DAG/blueprint for every tool, and reduced the argument to a single common scheme chart. Reused smooth ascent and chartwise morphism calculus; wrote the stalkwise reducedness descent argument explicitly from faithful flatness and injectivity. Added only the genuinely nontrivial scheme fppf descent of local Noetherianity, searched with two semantic phrasings, LeanSearch, Loogle and grep. No Lean or repository files were written.",
+  "blueprint": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: The Deligne--Mumford locus in the stack of proper curves. Supporting input: Unramified diagonal yields an etale scheme atlas. Proof of the unramified-diagonal/etale-atlas criterion: Finite-type points admit field representatives with etale self-relation. Supporting input: Locally finite type residual substack at a finite-type point. Quotient construction: Reducedness and local Noetherianity from an fppf scheme cover. The quotient residual-substack prerequisite is realized by the common smooth/etale scheme chart and fppf descent; no change to the unit route. The current latest blueprint direct-images proof (3) supplies the upstream direct-image context; this is the existing imported supporting route, not a replacement of it.",
+  "tool_uses": [
+   {
+    "node": "lem-trf-smooth-reduced-dense-pullback",
+    "why": "Only its general scheme smooth-ascent clause is used on T to V; this unit has no scheme smooth-ascent theorem."
+   },
+   {
+    "node": "lem-weil-pbc-flat-local-hom-faithfully-flat",
+    "why": "Generic local commutative algebra: flat local ring maps are faithfully flat."
+   },
+   {
+    "node": "lem-weil-pbc-faithfully-flat-ideal-contraction",
+    "why": "Generic ideal-contraction theorem, used only for injectivity with the zero ideal."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-trf-smooth-reduced-dense-pullback",
+  "lem-weil-pbc-flat-local-hom-faithfully-flat",
+  "lem-weil-pbc-faithfully-flat-ideal-contraction"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q129-bee3a909a",
+  "group": "Q129",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q129-bee3a909a (reviewer sub-agent of L); spot-checked: Q129 lem-sfb-stack-reduced-locnoeth-fppf-descent bee3a909, first split (base unsplit, no repair note), statement unchanged and true; no changes made. Checked against Stacks 06MP (2)⇒(1), which descends along W×_𝒵 Spec k → W. The item generalizes the field cover to a reduced locally Noetherian V and refines to a scheme chart T. Step 1: the def-trf-algebraic-space chart and chartwise-calculus base change/composition give a: T→V smooth and b: T→W flat, lfp and surjective. Step 2: the first clause of lem-trf-smooth-reduced-dense-pullback gives T reduced and locally Noetherian. Step 3: flat local ⇒ faithfully flat ⇒ injective (I=0), so nilpotents vanish and W is reduced. Step 4: the new node applied to b. The new node lem-sfb-scheme-locnoeth-fppf-descent (flat + lfp + surjective, X locally Noetherian ⇒ Y locally Noetherian) is exactly descent.tex 034C, statement-only, self-contained, with 5 recorded searches, and true without quasi-compactness. It is not a duplicate: lem-trf-etale-local-noetherian-descent is étale only and lem-weil-pbc-faithfully-flat-descent-noetherian is a ring statement. It does not restate the item. Batch-5 flags: chartwise-calculus is already in the citer's closure without the item and is generic stack/space calculus; trf-smooth-reduced-dense-pullback is generic smooth ascent (034E) and has no other trf/PD node in its 132-node closure. Neither is part of the trace formula or Poincaré duality, so both are accepted. Accepted tool_uses: trf smooth ascent and the two pbc ring Mathlib leaves."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.StackReducedLocallyNoetherianFppfDescent",
+  "declaration": "AlgebraicGeometry.exists_reduced_locallyNoetherian_smoothAtlas_of_fppf_cover",
+  "file": "lean/Sheaf/AlgebraicGeometry/StackReducedLocallyNoetherianFppfDescent.lean",
+  "statement": "theorem exists_reduced_locallyNoetherian_smoothAtlas_of_fppf_cover {S : Scheme.{u}} (F : BasedCategory.{v, w} (Over S)) (hstack : IsFppfModuliStack F) (hdiag : HasAlgebraicSpaceDiagonal F) (hatlas : ∃ (W : Over S) (q : BasedFunctor (discreteModuli (yoneda.obj W)) F), IsSmoothModuliAtlas F W q) (V : Over S) (p : BasedFunctor (discreteModuli (yoneda.obj V)) F) (hp : ∀ (T : Over S) (t : BasedFunctor (discreteModuli (yoneda.obj T)) F), ∃ (Z : AlgebraicSpace S) (a : Z.obj.obj ⟶ yoneda.obj T), HasSpaceBaseChange p T t Z a ∧ SpaceMapIsSurjective Z T a ∧ ∀ (U : Over S) (b : yoneda.obj U ⟶ Z.obj.obj), AlgebraicSpace.IsEtale b → Flat (yoneda.preimage (b ≫ a)).left ∧ LocallyOfFinitePresentation (yoneda.preimage (b ≫ a)).left) [IsReduced V.left] [IsLocallyNoetherian V.left] : ∃ (W : Over S) (q : BasedFunctor (discreteModuli (yoneda.obj W)) F), IsSmoothModuliAtlas F W q ∧ IsReduced W.left ∧ IsLocallyNoetherian W.left",
+  "branch": "sheaf-dag",
+  "by": "Q60",
+  "date": "2026-10-23",
+  "existing": false,
+  "note": "Algebraicity is unpacked as fppf stack descent, an algebraic-space diagonal and existence of a smooth surjective atlas. The representable fppf cover is expressed using the recorded actual space-base-change interface and all its etale scheme charts; no new stack or morphism-property notion is defined."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-1e2d2ed6f",
+  "group": "Q60",
+  "result": "pass",
+  "note": "Every clause matches the node: fppf stack in groupoids + algebraic-space diagonal + smooth atlas; p representable via HasSpaceBaseChange, surjective (SpaceMapIsSurjective), flat and lfp on every étale chart, the same chart-test pattern as landed SpaceMapIsSmooth/HasFlatLocallyPresentedModuliInertia; V reduced and locally Noetherian; conclusion: one smooth atlas that is also reduced and locally Noetherian. No smoothness of p, no Noetherian S, no universe restriction. Statement true (06MP common chart, 034E/034C). No existing predicate or theorem duplicates it. The 14 dependency records are identical to live; the 3 added stmt_deps are landed and used; lean.statement is verbatim; proof is sorry; docstrings carry source place and blueprint id. Advisory: one private import unused by the statement, kept for the proof. No recompile (no file changed)."
+ }
+}

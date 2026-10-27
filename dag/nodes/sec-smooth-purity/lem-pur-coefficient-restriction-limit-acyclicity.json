@@ -1,0 +1,117 @@
+{
+ "id": "lem-pur-coefficient-restriction-limit-acyclicity",
+ "kind": "statement",
+ "title": "Limit acyclicity before and after coefficient restriction",
+ "statement": "Fix a prime l, finite normed extensions E,F of Q_l, an embedding i:E→F and a scheme W. Let e identify source coefficient restriction of F-systems followed by source completed-tower restriction with target completed-tower restriction followed by termwise restriction along the completed coefficient map. For every K-injective F-system complex I, the universal right-derived inverse-limit unit is invertible both on its restricted completed F-tower and on the completed E-tower of its coefficient restriction. Neither restricted tower is required to be K-injective.",
+ "stmt_deps": [
+  "def-pur-ordinary-compact-support-coefficient-transport",
+  "def-coef-ringed-sequence-site",
+  "lem-weil-finite-free-completed-scalar-comparison"
+ ],
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 0D6E and 0941; agent-formulated normalization subargument of compact-support realization Step 11."
+ },
+ "proof": [
+  {
+   "text": "For a tower X whose K-injective resolution j remains a quasi-isomorphism after ordinary limit, naturality of the actual derived-limit unit along j proves that its component at X is invertible: the other unit is invertible on a K-injective, and both localized resolution maps are invertible.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Apply the proved coefficient restriction acyclicity theorem to the underlying completed F-tower of I.",
+   "uses": [
+    "lem-trf-completion-unit-restriction-acyclicity"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use the exact sequence/strict-system equivalence. Compose the completed E→F coefficient map with the F projection cone. The generic restriction tower for this composite cone agrees with the F restriction tower followed by completed scalar restriction, by the identity on sections and the definition of the restricted action. The supplied e identifies it with the E-tower of the coefficient-restricted system. Generic restricted-system resolution acyclicity says that ordinary limit sends any K-injective resolution of this tower to a quasi-isomorphism. Apply the first step.",
+   "uses": [
+    "lem-trf-completion-unit-restriction-acyclicity",
+    "lem-coef-restricted-tower-resolution-acyclicity"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-trf-completion-unit-restriction-acyclicity",
+  "lem-coef-restricted-tower-resolution-acyclicity"
+ ],
+ "proof_origin": "G1: proved from the existing restricted-system resolution acyclicity theorem, using the exact strict-system equivalence and the composite completed coefficient cone. Naturality of the actual right-derived unit turns the resulting limit quasi-isomorphisms into invertible unit components. No new sorry.",
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A natural isomorphism of derived functors is uniquely normalized by transformations invertible on functorial resolutions",
+   "results": "Found rightDerivedUnique and the exact localization API; no direct formulation with two transformations invertible only after replacement.",
+   "date": "2026-10-27",
+   "verdict": "Use fully faithful precomposition and the existing restricted-system acyclicity theorem."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Localization.fullyFaithfulWhiskeringLeft",
+   "results": "One exact hit in Mathlib.CategoryTheory.Localization.Predicate, used to descend the normalized comparison.",
+   "date": "2026-10-27",
+   "verdict": "Reuse this Mathlib API."
+  },
+  {
+   "tool": "grep",
+   "query": "resolutionNormalizedComparison|coefficientRestrictionLimitAcyclicity|restricted_limit_acyclic",
+   "results": "No existing normalized replacement theorem. Found proved WeilConjectures.CompletionUnit.restricted_limit_acyclic and SheafOfModules.RestrictedTowerResolution.acyclicity, including the explicit strict-system equivalence and restriction characterization.",
+   "date": "2026-10-27",
+   "verdict": "Prove the new specialization from existing acyclicity; no new acyclicity assumption."
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.SemilinearCompactSupportCoefficientTransport",
+  "date": "2026-10-27",
+  "group": "G1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "sk-thm-purity-transport",
+   "place": "Step 2, whole-system derived-limit coefficient transport; normalized-limit Step 11 of the compact-support prerequisite.",
+   "via": [
+    "def-pur-semilinear-compact-support-coefficient-transport",
+    "lem-pur-compact-support-condensed-realization"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-thm-purity-transport",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.CoefficientRestrictionLimitAcyclicity",
+  "file": "lean/Sheaf/Paper/CoefficientRestrictionLimitAcyclicity.lean",
+  "declaration": "WeilConjectures.CompactSupportCondensedRealization.coefficientRestrictionLimitAcyclicity",
+  "statement": "theorem coefficientRestrictionLimitAcyclicity\n    (l : ℕ) [Fact l.Prime] (E F : Type u) [NormedField E] [NormedField F]\n    [NormedAlgebra ℚ_[l] E] [NormedAlgebra ℚ_[l] F]\n    [FiniteDimensional ℚ_[l] E] [FiniteDimensional ℚ_[l] F]\n    (i : E →ₐ[ℚ_[l]] F) (W : Scheme.{u})\n    (e : systemRestriction l E F i W ⋙ coefficientSequenceRestriction.{u, u} l E W ≅\n      coefficientSequenceRestriction.{u, u} l F W ⋙\n        (Functor.whiskeringRight ℕᵒᵖ (scalarReductionSource.{u, u} l F W)\n          (scalarReductionSource.{u, u} l E W)).obj\n          (pbcRestrict (completedCoefficientMap.{u, u} l E F i W)))\n    (I : CochainComplex (coefficientSequenceModules.{u, u} l F W) ℤ) [I.IsKInjective] :\n    IsIso ((rightUnit (lim : (ℕᵒᵖ ⥤ scalarReductionSource.{u, u} l F W) ⥤\n        scalarReductionSource.{u, u} l F W)).app\n      (((coefficientSequenceRestriction.{u, u} l F W).mapHomologicalComplex (.up ℤ)).obj I)) ∧\n    IsIso ((rightUnit (lim : (ℕᵒᵖ ⥤ scalarReductionSource.{u, u} l E W) ⥤\n        scalarReductionSource.{u, u} l E W)).app\n      (((coefficientSequenceRestriction.{u, u} l E W).mapHomologicalComplex (.up ℤ)).obj\n        (((systemRestriction l E F i W).mapHomologicalComplex (.up ℤ)).obj I)))",
+  "branch": "sheaf-dag",
+  "by": "G1",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G1",
+  "result": "pass",
+  "landing": "20261027T012834-L-2338232",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G1",
+  "result": "pass",
+  "landing": "20261027T012834-L-2338232",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

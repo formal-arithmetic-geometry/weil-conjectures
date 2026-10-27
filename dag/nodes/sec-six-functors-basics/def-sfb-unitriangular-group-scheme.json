@@ -1,0 +1,139 @@
+{
+ "id": "def-sfb-unitriangular-group-scheme",
+ "kind": "definition",
+ "title": "The upper unitriangular group scheme",
+ "status": "split",
+ "import_flags": [],
+ "statement": "Let $k$ be a field [def-weil-field] and $n\\geq0$ an integer. Index $n\\times n$ matrices [def-weil-matrix] by $I=\\{0,\\ldots,n-1\\}$, and put $J=\\{(i,j)\\in I^2:i<j\\}$ and $P=k[x_{ij}:(i,j)\\in J]$ [def-weil-pbc-mv-polynomial-ring]. Let $M$ be the matrix over $P$ with $M_{ii}=1$, $M_{ij}=x_{ij}$ for $i<j$, and $M_{ij}=0$ for $i>j$. Define algebra maps $\\Delta:P\\to P\\otimes_kP$ [lem-weil-pbc-algebra-tensor-pushout-universal-property], $\\epsilon:P\\to k$, and $S:P\\to P$ by\n$$\\Delta(x_{ij})=\\sum_{l\\in I}M_{il}\\otimes M_{lj},\\qquad\\epsilon(x_{ij})=0,\\qquad S(x_{ij})=\\left(\\sum_{r=0}^{n-1}(I_n-M)^r\\right)_{ij}.$$\nThe upper unitriangular group scheme $\\mathcal U_{n,k}$ is the affine $k$-scheme $\\operatorname{Spec}P$ [def-weil-affine-spectrum] with the multiplication, identity and inverse morphisms induced by these three maps. These specified maps uniquely determine a group-scheme structure [def-sc-group-scheme]. For every commutative $k$-algebra $A$, its points are precisely the upper triangular matrices over $A$ with diagonal entries $1$, with matrix multiplication. For $n=0$ this is the trivial group scheme $\\operatorname{Spec}k$.",
+ "stmt_deps": [
+  "def-weil-field",
+  "def-weil-matrix",
+  "def-weil-pbc-mv-polynomial-ring",
+  "lem-weil-pbc-algebra-tensor-pushout-universal-property",
+  "def-weil-affine-spectrum",
+  "def-sc-group-scheme"
+ ],
+ "source": {
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Theorem 14.5(b) implies (c), printed p.281, equation (92) and the coordinate description of U_n; matrix inverse by the finite geometric series for a strictly upper triangular matrix."
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "unitriangular|Unitriangular|Unitriang|unitriang",
+   "results": "0 hits: ",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The affine group scheme of upper unitriangular matrices with diagonal entries one",
+   "results": "8 hits: Subgroup.periods, Subgroup.strictPeriods, Matrix.specialUnitaryGroup, Matrix.mem_unitaryGroup_iff, AffineEquiv.one_def, AffineEquiv.val_equivUnitsAffineMap_apply, AffineEquiv.val_inv_equivUnitsAffineMap_apply, Matrix.instAddCommGroupWithOne",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "coordinate Hopf algebra of the upper unitriangular matrix group scheme",
+   "results": "8 hits: CommSemiring.toHopfAlgebra, LaurentPolynomial.instHopfAlgebra, MonoidAlgebra.instHopfAlgebraStruct, MonoidAlgebra.instHopfAlgebra, AddMonoidAlgebra.instHopfAlgebraStruct, AddMonoidAlgebra.instHopfAlgebra, GroupLike.instGroup, HopfAlgCat.tensorUnit_instHopfAlgebra",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "rg -l unitriangular|Unitriangular|Unitriang|unitriang lean/WeilConjectures lean/Sheaf; rg -l --glob def-*.json unitriangular|Unitriangular|unitriang|Unitriang dag/nodes; python3 tools/blueprint_refs.py search unitriangular",
+   "results": "WeilConjectures: only unrelated matrix inverse documentation. Sheaf: references in other algebraic-group proofs and block charts; none defines the group scheme. Definition-node text hits are def-pur-complete-flag-bundle and def-sfb-adjoint-kernel-points, read and unrelated. Blueprint search: 0 blueprint nodes match. The theorem nodes mentioning U_n use an inline description, with no group-scheme declaration. No existing definition node carries this construction.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-unitriangular-subgroup-rational-fixed-vector",
+  "date": "2026-10-24",
+  "group": "NK"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Reductive group-scheme structure of PGL. Supporting input: Corollary 17.62(b)--(d), printed pp.372--373; Sections 6.44--6.46, printed p.135, and Chapter 19(a)--(b), printed pp.397--400. The quotient is by the smooth central torus, with the usual algebraic-group quotient of Theorem 5.28 and Propositions 5.24--5.27. Supporting lemma: Unipotent part and torus quotient of a smooth connected solvable group over a perfect field. Supporting input in the present split: Milne Theorem 16.6 proof, first paragraph and Note 16.8: uniqueness and maximality of the diagonal kernel; present proof steps 2, 4 and 5. Supporting input in this split: Milne 14.16 and 14.18(a): the one-dimensional pullbacks of the torus coordinate characters have a rational fixed vector, using 14.5(b)⇒(a). The polynomial-coordinate construction of the upper unitriangular group used in the fixed-vector input.",
+   "via": [
+    "lem-sfb-unitriangular-subgroup-rational-fixed-vector",
+    "lem-sfb-unipotent-to-multiplicative-trivial",
+    "lem-sfb-perfect-solvable-unipotent-torus",
+    "lem-sfb-reductive-radical-quotient",
+    "lem-sfb-pgl-reductive-structure",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.GroupScheme.Unitriangular",
+  "declaration": "AlgebraicGeometry.UnitriangularGroup.scheme",
+  "file": "lean/Sheaf/AlgebraicGeometry/GroupScheme/Unitriangular.lean",
+  "statement": "def scheme : Over (Spec (.of k))",
+  "branch": "newtargets-dag",
+  "by": "NK",
+  "date": "2026-10-24",
+  "existing": false,
+  "declarations": [
+   "AlgebraicGeometry.UnitriangularGroup.Position",
+   "AlgebraicGeometry.UnitriangularGroup.CoordinateRing",
+   "AlgebraicGeometry.UnitriangularGroup.matrix",
+   "AlgebraicGeometry.UnitriangularGroup.comul",
+   "AlgebraicGeometry.UnitriangularGroup.counit",
+   "AlgebraicGeometry.UnitriangularGroup.antipode",
+   "AlgebraicGeometry.UnitriangularGroup.scheme",
+   "AlgebraicGeometry.UnitriangularGroup.multiplication",
+   "AlgebraicGeometry.UnitriangularGroup.identitySection",
+   "AlgebraicGeometry.UnitriangularGroup.inverse",
+   "AlgebraicGeometry.UnitriangularGroup.group_existsUnique",
+   "AlgebraicGeometry.UnitriangularGroup.group"
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-9f89267f6",
+  "group": "NK",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-9f89267f6",
+  "group": "NK",
+  "result": "pass",
+  "note": "Item clauses match the Lean exactly: field k; affine GrpObj U over Spec k; finite type as LocallyOfFiniteType+QuasiCompact (recorded form); closed group immersion (IsMonHom + IsClosedImmersion i.left) into the new UnitriangularGroup.scheme k n with n>=1; d>=1 and IsMonHom rho into upstream GeneralLinearGroup (Index d) k; a single nonzero v : Index d -> k fixed by toLin'(baseChange basis)(homMulEquiv(x≫rho)) on 1⊗v for every A : Type u and x : points U A. The action convention matches the landed RationalRepresentationComoduleDictionary. Item node changed only in lean and the added stmt_dep. New def node def-sfb-unitriangular-group-scheme: P = MvPolynomial over strictly upper positions; comul = matrix product (Milne eq. 92, checked n=2,3); counit sends upper entries to 0; antipode = finite geometric series (correct since N^n=0); Spec via algSpec with the monoidal comparison; GrpObj pinned by unique existence on all three data fields; no sorry data; no existing U_n in Mathlib, WeilConjectures, Sheaf or DAG def nodes; node fields follow H12. Edge cases n=0/1, d=1, char p (alpha_p, Z/p), zero algebra, universes all fine. No files changed, no compile run (worker compile evidence relied on). Advisory: two proof-only imports in the item module; no Lean declaration identifying the points with unitriangular matrices; item TeX does not cite the new node."
+ }
+}

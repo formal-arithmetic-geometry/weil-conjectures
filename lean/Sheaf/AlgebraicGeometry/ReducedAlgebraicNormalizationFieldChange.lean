@@ -35,7 +35,10 @@ open CategoryTheory CategoryTheory.Limits
 
 namespace AlgebraicGeometry
 
-private theorem finite_normalization {k : Type u} [Field k]
+/-- Componentwise normalization of a finite-type scheme over a field is finite.
+Source: Stacks Project, Tag 035S
+(blueprint: lem-weil-pbc-reduced-algebraic-normalization-field-change). -/
+theorem finite_normalization {k : Type u} [Field k]
     (X : Scheme.{u}) (q : X ⟶ Spec (.of k))
     [LocallyOfFiniteType q] [QuasiCompact q] :
     IsFinite X.fromReducedNormalization := by
@@ -75,7 +78,10 @@ private theorem surjective_normalization (X : Scheme.{u}) :
     (X.reducedNormalizationComponent Z).normalization) Z) z) = x
   rw [← Scheme.Hom.comp_apply, Sigma.ι_desc, Scheme.Hom.comp_apply]
   exact (congrArg I.subschemeι hz).trans hy
-private theorem normal_normalization (X : Scheme.{u}) (z : X.reducedNormalization) :
+/-- The stalks of the componentwise normalization are integrally closed domains.
+Source: Stacks Project, Tag 035Q
+(blueprint: lem-weil-pbc-reduced-algebraic-normalization-field-change). -/
+theorem normal_normalization (X : Scheme.{u}) (z : X.reducedNormalization) :
     IsDomain (X.reducedNormalization.presheaf.stalk z) ∧
       IsIntegrallyClosed (X.reducedNormalization.presheaf.stalk z) := by
   let C (Z : irreducibleComponents X) := (X.reducedNormalizationComponent Z).normalization
@@ -236,7 +242,10 @@ private theorem reduced_baseChange {k : Type u} [Field k]
   have : IsReduced (pullback (ν ≫ q) g) := isReduced_of_isReduced_stalk _
   exact IsSchemeTheoreticallyDominant.isReduced n
 
-private theorem component_meets_dense_open (X : Scheme.{u})
+/-- A dense open meets every irreducible component when there are finitely many.
+Source: Mathlib, `closure_sUnion_irreducibleComponents_sdiff_singleton`
+(blueprint: lem-weil-pbc-reduced-algebraic-normalization-field-change). -/
+theorem component_meets_dense_open (X : Scheme.{u})
     (hfinite : (irreducibleComponents X).Finite) (U : X.Opens) (hU : Dense (U : Set X))
     (Z : irreducibleComponents X) : (Z.1 ∩ (U : Set X)).Nonempty := by
   let V : X.Opens := ⟨(⋃₀ (irreducibleComponents X \ {Z.1}))ᶜ, by
@@ -255,7 +264,10 @@ private theorem component_meets_dense_open (X : Scheme.{u})
   exact ⟨x, hcl ▸ subset_closure hxV, hxU⟩
 
 set_option backward.isDefEq.respectTransparency false in
-private theorem dense_preimage_normalization {k : Type u} [Field k]
+/-- The inverse image of a dense open under componentwise normalization is dense.
+Source: Stacks Project, Tag 035Q, applied componentwise
+(blueprint: lem-weil-pbc-reduced-algebraic-normalization-field-change). -/
+theorem dense_preimage_normalization {k : Type u} [Field k]
     (X : Scheme.{u}) (q : X ⟶ Spec (.of k))
     [LocallyOfFiniteType q] [QuasiCompact q]
     (U : X.Opens) (hU : Dense (U : Set X)) :

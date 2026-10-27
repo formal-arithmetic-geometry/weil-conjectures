@@ -46,9 +46,51 @@
   "document": "literature/stacks-project/proetale.tex",
   "place": "Tag 09AF, lemma-jshriek-comparison, and Tag 099R, section-comparison; combined with categories.tex Tag 0B65, lemma-transformation-between-functors-and-adjoints. Agent-written comparison of the specific Kummer-normalized maps of blueprint sk-prop-sf-cbc/def-amb-p1-trace and sk-prop-an/thm-amb-vector-bundle-purity; the class comparison alone does not assert this map comparison."
  },
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "For vectorCoefficient_plus, use rightTower_plus for boundedness below of the right tower at the constant object, with the canonical normalized ordinary Tate transport. The canonical affineLinearCoefficientDescent identifies that object with pullback of the ordered base coefficient. Construct the zero section of the affine tower recursively and verify that its composite with the tower projection is the identity. Exact inverse image preserves a lower bound; pull back along this section and use leftDerivedUpperStarCompSectionIso to deduce boundedness of the base coefficient. Pulling it to the vector bundle gives boundedness of vectorIntegrationCoefficient. This includes rank zero and the empty base.",
+   "uses": [
+    "def-pur-proetale-ordered-integration",
+    "def-amb-affine-linear-trace-action",
+    "def-asd-vector-bundle-zero-section",
+    "prop-weil-pbc-inverse-image-modules-exact",
+    "def-weil-derived-pullback-tensor-hom"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For existsUniqueVectorIntegration, use orderedIntegration_comparison on every frame. Unfolding chartPrefix identifies localIntegration with comparison of the canonical ordinary local trace. Naturality of pullback comparison and its constant-unit equation identify VectorNormalization of vectorSite.hom followed by comparison(g) with ordinary VectorIntegrationNormalization(g). Tate-transport and projective-datum uniqueness extend the fixed normalized datum to the universally quantified ordinary normalization. The ordinary vectorBundleIntegration supplies existence. Any pro-etale map, after vectorSite.inv, has a unique ordinary preimage because the target constant complex is bounded below and comparison is bijective on this Hom set. Ordinary gluing uniqueness then identifies the preimage with vectorBundleIntegration. For ordinary uniqueness, express an arbitrary map using the fixed degree-zero gluing isomorphism and full faithfulness of the single functor, and apply uniqueness of the normalized gluing pair. All source comparisons and the named integration definition remain unchanged.",
+   "uses": [
+    "lem-pur-ordered-integration-comparison",
+    "def-amb-vector-integration",
+    "lem-amb-ordinary-finite-p1-datum-uniqueness",
+    "lem-amb-ordinary-finite-twist-transport-uniqueness",
+    "lem-weil-pbc-fixed-module-derived-hom-bijection",
+    "def-pur-finite-site-coordinates",
+    "def-pur-proetale-frame-integration"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pur-proetale-ordered-integration",
+  "def-amb-affine-linear-trace-action",
+  "def-asd-vector-bundle-zero-section",
+  "prop-weil-pbc-inverse-image-modules-exact",
+  "def-weil-derived-pullback-tensor-hom",
+  "lem-pur-ordered-integration-comparison",
+  "def-amb-vector-integration",
+  "lem-amb-ordinary-finite-p1-datum-uniqueness",
+  "lem-amb-ordinary-finite-twist-transport-uniqueness",
+  "lem-weil-pbc-fixed-module-derived-hom-bijection",
+  "def-pur-finite-site-coordinates",
+  "def-pur-proetale-frame-integration"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-an/thm-amb-vector-bundle-purity.proof.md",
+  "place": "Ordinary vector integration and uniqueness, transported through the specified comparison; boundedness by the affine zero-section retraction. Lean reduction by N1, 2026-10-25."
+ },
  "mathlib_match": null,
  "mathlib_searches": [
   {
@@ -92,10 +134,14 @@
  },
  "lean_audit": {
   "master": {
-   "state": "none"
+   "state": "none",
+   "decls": [],
+   "missing": []
   },
   "slopmaster2": {
-   "state": "none"
+   "state": "none",
+   "decls": [],
+   "missing": []
   }
  },
  "chapter": "sec-smooth-purity",
@@ -133,5 +179,15 @@
   "group": "NQ",
   "result": "pass",
   "note": "Re-delivery of RETURNed 7845f3f7. Only VectorTensorSiteEquations.lean changed (new ordinary_normalization field); the other 12 modules are identical. F1/F2 fixed: existing:true def nodes def-pur-open-site-comparison-arrows (openProjectionExtension/RestrictionComparison), def-pur-bounded-site-transpose-arrows (boundedSiteTranspose/Rho) and def-pur-vector-integration-adjunction-arrows (5 Etale.vectorBundlePurity* defs), signatures verbatim to the live source, node texts match the bodies; compactSupportSiteComparison cited via def-sf-compact-support-site-comparison-construction. F3 fixed: ∃ γ with VectorPurityGammaNormalized (unique: integration counit plus invertible projection) and adjunct = derivedTensorSymmetry ≫ γ.app K; the HEq sides have definitionally equal types (same letI instances, same rightDerivedUpperShriekAdjunction), so it is an Eq; the signed symmetry matches the coefficient-first projection convention. Mechanical finding: finite_tate_site_descent is used via .choose/choose_spec (twistComparison, exponent transition), constructed objects; lem-kun-tensor-sym's own recorded declaration is the def derivedTensorSymmetry; both genuine, PASS on that point. Item statement and proof equal live; not landed by another group. Advisory: boilerplate theorem stmt_deps in the retained new nodes; Nagata compactification instead of the projective completion; second readings are self-checks. No file changed, no compile."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "N1",
+  "result": "pass",
+  "landing": "20261025T095637-L-3457652",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

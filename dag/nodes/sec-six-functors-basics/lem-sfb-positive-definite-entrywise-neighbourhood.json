@@ -1,0 +1,201 @@
+{
+ "id": "lem-sfb-positive-definite-entrywise-neighbourhood",
+ "kind": "statement",
+ "title": "Positive definiteness survives small symmetric entrywise perturbations",
+ "statement": "Use the real field $\\mathbf R$ [def-weil-field]. Let $n\\geq0$ and let $G=(G_{ab})\\in\\mathbf R^{n\\times n}$ be symmetric and positive definite, meaning $G_{ab}=G_{ba}$ and $\\sum_{a,b=1}^n z_aG_{ab}z_b>0$ for every nonzero $z\\in\\mathbf R^n$. There exists $\\varepsilon>0$ such that every real symmetric matrix $H\\in\\mathbf R^{n\\times n}$ satisfying $|H_{ab}-G_{ab}|<\\varepsilon$ for all $a,b$ is positive definite. The empty matrix is included, with the positivity condition vacuous when $n=0$.",
+ "source": {
+  "document": "literature/milne-abelian-varieties_AV.pdf",
+  "place": "Agent auxiliary to the Gram-matrix argument for lem-sfb-split-real-algebra-positive-squares. Milne II §1, Lemma 1.3, printed pp.77–78 motivates the rational algebra setting only; it does not assert this linear-algebra lemma. The agent argument is recorded in report.md."
+ },
+ "stmt_deps": [
+  "def-weil-field"
+ ],
+ "proof": [
+  {
+   "text": "If $n=0$, take $\\varepsilon=1$. Every vector of $\\mathbf R^0$ is zero, so the required positivity for nonzero vectors is vacuous for the unique empty matrix. Henceforth assume $n\\geq1$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-abelian-varieties_AV.pdf",
+    "place": "Agent auxiliary to the Gram-matrix argument for lem-sfb-split-real-algebra-positive-squares. Milne II §1, Lemma 1.3, printed pp.77–78 motivates the rational algebra setting only; it does not assert this linear-algebra lemma. The agent argument is recorded in report.md."
+   }
+  },
+  {
+   "text": "Equip $V=\\mathbf R^n$ with $\\langle x,y\\rangle=\\sum_a x_ay_a$, and define $(Tx)_a=\\sum_bG_{ab}x_b$. Coordinate vectors form a basis of size $n$, so $V$ is finite-dimensional. The inner product is positive on nonzero vectors since a sum of squares with a nonzero summand is positive. Symmetry of $G$ gives $\\langle Tx,y\\rangle=\\sum_{a,b}G_{ab}x_by_a=\\sum_{a,b}x_aG_{ab}y_b=\\langle x,Ty\\rangle$ after exchanging $a,b$. Thus [lem-sfb-real-symmetric-orthonormal-eigenbasis] supplies an orthonormal basis $e_1,\\ldots,e_n$ and real eigenvalues $\\lambda_i$ with $Te_i=\\lambda_i e_i$.",
+   "uses": [
+    "lem-sfb-real-symmetric-orthonormal-eigenbasis"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-abelian-varieties_AV.pdf",
+    "place": "Agent auxiliary to the Gram-matrix argument for lem-sfb-split-real-algebra-positive-squares. Milne II §1, Lemma 1.3, printed pp.77–78 motivates the rational algebra setting only; it does not assert this linear-algebra lemma. The agent argument is recorded in report.md."
+   }
+  },
+  {
+   "text": "Write $q_A(z)=\\sum_{a,b}z_aA_{ab}z_b$ for any real matrix $A$. For every $i$, $e_i\\ne0$ and $q_G(e_i)=\\langle e_i,Te_i\\rangle=\\lambda_i$, hence $\\lambda_i>0$. The minimum $c=\\min_{1\\leq i\\leq n}\\lambda_i$ of this finite nonempty list is positive. For $z=\\sum_i t_i e_i$, bilinearity and orthonormality give $q_G(z)=\\sum_i\\lambda_i t_i^2\\geq c\\sum_i t_i^2$ and $\\sum_a z_a^2=\\langle z,z\\rangle=\\sum_i t_i^2$. Therefore $q_G(z)\\geq c\\sum_a z_a^2$ for all $z$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-abelian-varieties_AV.pdf",
+    "place": "Agent auxiliary to the Gram-matrix argument for lem-sfb-split-real-algebra-positive-squares. Milne II §1, Lemma 1.3, printed pp.77–78 motivates the rational algebra setting only; it does not assert this linear-algebra lemma. The agent argument is recorded in report.md."
+   }
+  },
+  {
+   "text": "Set $\\varepsilon=c/(2n)>0$, and let $H$ satisfy the stated hypotheses. Put $E=H-G$, $S=\\sum_a z_a^2$ and $L=\\sum_a|z_a|$. Expanding the nonnegative finite sum of squares gives $nS-L^2=\\tfrac12\\sum_{a,b}(|z_a|-|z_b|)^2\\geq0$. Since $|E_{ab}|<\\varepsilon$, the triangle inequality and distributivity give $|q_E(z)|\\leq\\sum_{a,b}|z_a||E_{ab}||z_b|\\leq\\varepsilon L^2\\leq\\varepsilon nS=(c/2)S$. Also $q_H(z)=q_G(z)+q_E(z)$ by expanding $H=G+E$. Consequently $q_H(z)\\geq cS-|q_E(z)|\\geq(c/2)S$. If $z\\ne0$ then some $z_a^2>0$, so $S>0$ and $q_H(z)>0$. Together with the assumed symmetry of $H$, this proves positive definiteness with the same $\\varepsilon$ for every $H$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-abelian-varieties_AV.pdf",
+    "place": "Agent auxiliary to the Gram-matrix argument for lem-sfb-split-real-algebra-positive-squares. Milne II §1, Lemma 1.3, printed pp.77–78 motivates the rational algebra setting only; it does not assert this linear-algebra lemma. The agent argument is recorded in report.md."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-real-symmetric-orthonormal-eigenbasis"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/milne-abelian-varieties_AV.pdf",
+  "place": "Agent finite-dimensional spectral-basis and entrywise-estimate proof of the matrix auxiliary. Milne II §1, Lemma 1.3, printed pp.77–78 motivates the surrounding setting only. The spectral theorem is the existing Mathlib leaf lem-sfb-real-symmetric-orthonormal-eigenbasis."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The positive definite real symmetric matrices form an open subset of the symmetric matrices",
+   "results": "8 hits: Matrix.PosDef.one, Matrix.PosDef.isStrictlyPositive, Matrix.PosDef.of_toQuadraticForm', Matrix.PosDef, Matrix.IsStrictlyPositive.posDef, Matrix.PosDef.posSemidef, Matrix.PosDef.toQuadraticForm', Matrix.isStrictlyPositive_iff_posDef. The hits define positive definiteness or transfer it to quadratic forms/strict positivity; IsOpen.matrix only handles entrywise membership in an open set. None supplies the uniform symmetric perturbation neighbourhood.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A positive definite quadratic form remains positive after sufficiently small entrywise symmetric perturbations",
+   "results": "8 hits: QuadraticForm.posDef_toMatrix', QuadraticForm.posDef_of_toMatrix', Matrix.PosDef.isStrictlyPositive, Matrix.PosDef.toQuadraticForm', Matrix.PosDef.of_toQuadraticForm', Matrix.PosDef.one, Matrix.IsStrictlyPositive.posDef, Matrix.PosDef.intCast. The hits define positive definiteness or transfer it to quadratic forms/strict positivity; IsOpen.matrix only handles entrywise membership in an open set. None supplies the uniform symmetric perturbation neighbourhood.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Positive definite symmetric matrices form an open subset",
+   "results": "8 hits: Matrix.PosDef, IsOpen.matrix, Matrix.PosDef.of_toQuadraticForm', Matrix.PosDef.posSemidef, Matrix.PosDef.isUnit, Matrix.IsUnit.posDef_star_left_conjugate_iff, Matrix.isStrictlyPositive_iff_posDef, Matrix.PosDef.inv. The hits define positive definiteness or transfer it to quadratic forms/strict positivity; IsOpen.matrix only handles entrywise membership in an open set. None supplies the uniform symmetric perturbation neighbourhood.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "Matrix.PosDef",
+   "results": "12 hits: Matrix.PosDef, Matrix.PosDef.of_subsingleton, Matrix.PosDef.posSemidef, Matrix.PosDef.transpose, Matrix.PosDef.transpose_iff, Matrix.PosDef.mulVec_injective, Matrix.PosDef.submatrix, Matrix.PosDef.finite_setOfPred_dotProduct_mulVec_le. The hits define positive definiteness or transfer it to quadratic forms/strict positivity; IsOpen.matrix only handles entrywise membership in an open set. None supplies the uniform symmetric perturbation neighbourhood.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "isOpen.*(posDef|PosDef)|posDef.*isOpen|PosDef.*isOpen|isOpen.*isStrictlyPositive",
+   "results": "0 hits: . The hits define positive definiteness or transfer it to quadratic forms/strict positivity; IsOpen.matrix only handles entrywise membership in an open set. None supplies the uniform symmetric perturbation neighbourhood.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "perturb|isOpen|nhds",
+   "results": "0 hits: . The hits define positive definiteness or transfer it to quadratic forms/strict positivity; IsOpen.matrix only handles entrywise membership in an open set. None supplies the uniform symmetric perturbation neighbourhood.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A positive definite quadratic form remains positive after sufficiently small entrywise symmetric perturbations",
+   "results": "{\"t\": \"2026-10-24T03:46:57Z\", \"tool\": \"leanfinder\", \"query\": \"A positive definite quadratic form remains positive after sufficiently small entrywise symmetric perturbations\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"QuadraticForm.posDef_toMatrix'\", \"QuadraticForm.posDef_of_toMatrix'\", \"Matrix.PosDef.isStrictlyPositive\", \"Matrix.PosDef.toQuadraticForm'\", \"Matrix.PosDef.of_toQuadraticForm'\", \"Matrix.PosDef.one\", \"Matrix.IsStrictlyPositive.posDef\", \"Matrix.PosDef.intCast\"], \"digest\": \"4d0fca1ad36b4e25\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: positivity comparisons and spectral criteria, without the symmetric entrywise perturbation neighbourhood"
+  },
+  {
+   "tool": "grep",
+   "query": "PosDef|isOpen|perturb",
+   "results": "{\"t\": \"2026-10-24T03:46:57Z\", \"tool\": \"grep\", \"query\": \"PosDef|isOpen|perturb\", \"sub\": \"Analysis/Matrix\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"Mathlib/Analysis/Matrix/Order.lean\", \"Mathlib/Analysis/Matrix/Order.lean\", \"Mathlib/Analysis/Matrix/Order.lean\", \"Mathlib/Analysis/Matrix/Order.lean\", \"Mathlib/Analysis/Matrix/Order.lean\", \"Mathlib/Analysis/Matrix/PosDef.lean\", \"Mathlib/Analysis/Matrix/PosDef.lean\", \"Mathlib/Analysis/Matrix/PosDef.lean\"], \"digest\": \"1af36fc6d57eb76e\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: positivity comparisons and spectral criteria, without the symmetric entrywise perturbation neighbourhood"
+  },
+  {
+   "tool": "grep",
+   "query": "posDef|PosDef|isOpen",
+   "results": "{\"t\": \"2026-10-24T03:46:57Z\", \"tool\": \"grep\", \"query\": \"posDef|PosDef|isOpen\", \"sub\": \"LinearAlgebra/Matrix/PosDef.lean\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"28\", \"36\", \"161\", \"164\", \"166\"], \"digest\": \"f82fe91dcaa23b48\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: positivity comparisons and spectral criteria, without the symmetric entrywise perturbation neighbourhood"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-rational-positive-definite-feasibility",
+  "date": "2026-10-24",
+  "group": "Q14"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "Agent rational strict-feasibility subargument of the split-real Gram construction: Positive definiteness survives small symmetric entrywise perturbations. No imported blueprint ancestor exists (ancestor command returns None).",
+   "via": [
+    "lem-sfb-rational-positive-definite-feasibility",
+    "lem-sfb-split-real-algebra-positive-squares",
+    "lem-sfb-abelian-symmetric-ample-endomorphism-span",
+    "lem-sfb-symmetric-line-power-prolongation",
+    "lem-sfb-normal-symmetric-cubical-extension",
+    "lem-sfb-symmetric-ample-power-extension",
+    "lem-sfb-regular-group-generic-ampleness",
+    "lem-sfb-stable-picard-theta-ampleness",
+    "lem-sfb-stable-relative-picard-kummer",
+    "lem-sfb-stable-level-versal-branch-freeness",
+    "lem-sfb-stable-abelian-level-normalization",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-positive-definite-entrywise-neighbourhood",
+  "worker": "stage1",
+  "summary": "Preserved the exact statement and inherited provenance. Reused the existing real symmetric orthonormal eigenbasis Mathlib leaf; positive definiteness makes every eigenvalue positive, and the minimum eigenvalue gives a lower bound. A fully expanded finite-sum-of-squares estimate bounds the entrywise perturbation. The empty matrix is handled separately. No new nodes.",
+  "blueprint": "The ancestor command returns None, as in the inherited null from.node and via chain. This realizes the entrywise-neighbourhood call in step 3 and step 5 of the parent lem-sfb-rational-positive-definite-feasibility. Whole-current-blueprint searches found no equivalent node; the fixed chapter and unit are unchanged."
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q03-604600dcc",
+  "group": "Q03",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q03-604600dcc (reviewer sub-agent of L); spot-checked: I read the item in full: its statement, which is unchanged and true (positive-definite matrices are open under entrywise perturbation, n=0 included), and its 4 steps. It cites only the Mathlib leaf lem-sfb-real-symmetric-orthonormal-eigenbasis (same unit; checked against Spectrum.lean eigenvectorBasis and apply_eigenvectorBasis). Step 2 meets every hypothesis of that leaf: R^n with the dot product, T=G· linear, symmetry from G_ab=G_ba, dim n. Step 3 gives q_G(z) >= c|z|^2 with c the smallest eigenvalue, which is positive because q_G(e_i)=λ_i. Step 4 uses L^2 <= nS via (1/2)Σ(|z_a|-|z_b|)^2, and ε=c/(2n) then gives q_H >= (c/2)S. I checked the algebra. Edge cases tested: n=0, n=1, I_2 with off-diagonal perturbation, diag(1,100), and semidefinite G=0, which fails as it should. The statement matches how the parent lem-sfb-rational-positive-definite-feasibility uses it in steps 3 and 5. There are no new nodes. A DAG search found no duplicate, and Mathlib has no isOpen/nhds result for PosDef. The Milne source is honestly marked as motivation only, the proof is marked agent-written, and the blueprint/created records are preserved. No SGA is cited. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.LinearAlgebra.PositiveDefiniteEntrywiseNeighbourhood",
+  "declaration": "Matrix.posDef_entrywise_neighbourhood",
+  "file": "lean/Sheaf/LinearAlgebra/PositiveDefiniteEntrywiseNeighbourhood.lean",
+  "statement": "theorem posDef_entrywise_neighbourhood (n : ℕ) (G : Matrix (Fin n) (Fin n) ℝ) (hG : G.PosDef) : ∃ ε : ℝ, 0 < ε ∧ ∀ H : Matrix (Fin n) (Fin n) ℝ, H.IsSymm → (∀ a b : Fin n, |H a b - G a b| < ε) → H.PosDef",
+  "branch": "newtargets-dag",
+  "by": "Q81",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-af9fc7bc2",
+  "group": "Q81",
+  "result": "pass",
+  "note": "Statement matches the node clause by clause: ℝ, n:ℕ with n=0 allowed, hG : G.PosDef (Hermitian = IsSymm over ℝ; finsupp positivity = the finite quadratic sum), ∃ ε>0 chosen before ∀ H, H.IsSymm, strict |H a b - G a b| < ε for every entry, conclusion H.PosDef. Edge cases n=0 (vacuous), n=1, G=0 excluded and non-symmetric H excluded all checked. Imports: public PosDef (brings ℝ via Data.Real.Star) and plain Spectrum for the proof dep. Docstrings carry the source place, the blueprint id and the 4 proof steps. Proof is sorry only; no definitions. Live node identical apart from lean (still None live), so no supersession; name unused in Mathlib and the project; no Mathlib openness result for PosDef. Advisory only: no copyright header (also missing in several landed LinearAlgebra modules)."
+ }
+}

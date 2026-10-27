@@ -1,0 +1,39 @@
+## Worker report
+
+Files written: dag/nodes/sec-trace-formula/lem-trf-finite-module-target-rhom.json (statement, split; not a Mathlib leaf), citations.json, and this report. The item now has three proof steps. No new nodes and no new Mathlib leaves.
+
+Attachments: none. I searched lean/WeilConjectures for the exact blueprint tag and for finite derived Hom, finite cohomology, RHom, and bounded-above coherence. The exact tag has no hit and no declaration found states both clauses under these hypotheses. Existing sheaf-geometric derived-Hom statements have different hypotheses. Project declarations with sorry were not counted as finished proofs.
+
+WANTED: none.
+
+The statement and its statement dependencies are unchanged. The imported node already correctly formulates the finite-module-target intermediate case of Stacks 0D0C. There was no statement dispute, source error, repair note, or old sandbox split. The current statement is not the whole coherent-complex-target theorem: no bound on the projective dimension of K, no bound below on K, and no injectivity of N is required.
+
+All non-elementary inputs already have nodes. The proof uses lem-trf-source-hyperext-module-target (same unit), lem-sc-ext-noetherian-finite (existing Mathlib leaf), and lem-trf-noetherian-quadrant-abutment (same unit). The latter is a generic spectral-sequence lemma, not a restatement of this item's module-derived-Hom assertion. No new off-unit tool approval is needed. The unit and chapter routes remain unchanged; this is the finite-target input to the already reviewed parent lem-trf-bounded-above-coherent-rhom. The ancestor remains lem-trf-local-term-locality, and the existing precise blueprint.from.place is retained.
+
+Mathlib searches: I read the inherited searches and their recorded results, including ModuleCat.finite_ext as a module-only result. There was no sandbox searches.jsonl to resume. For this delivery I ran the prescribed logged leanfinder, leansearch, loogle and grep commands, with a second leanfinder phrasing. LeanSearch succeeded this time, returning finite-presentation and Noetherian-module statements and existence of Ext; neither semantic phrasing found complex-source finiteness. Loogle and grep identify ModuleCat.finite_ext, whose source I read at Mathlib/Algebra/Category/ModuleCat/Ext/Finite.lean:27-35: its arguments are two modules, not a complex. This is precisely the existing leaf lem-sc-ext-noetherian-finite. The actual new search log records are appended verbatim as results; inherited unavailable results are preserved. Whole-DAG tag searches for 0D0C and keyword searches located the existing input nodes. Whole-blueprint searches for "finite module" and "coherent.*Hom" found no other node stating the item. No new node was necessary.
+
+Nothing remains unfinished within this split. Its unsplit generic quadrant input remains an existing independent DAG item; this delivery does not claim to prove it or any Lean theorem. No Lean was written and no compiler, Lake, local preflight, local check_dag or local review_split was run.
+
+## New nodes
+
+None.
+
+## Not duplicates
+
+No new node pairs to compare.
+
+## Review by Q72
+
+I read perfect.tex, Tag 0D0C, lemma-coherent-internal-hom, particularly its algebra problem and both displayed Ext spectral sequences. Its second sequence gives the finite-module-target case when H^q(L) is replaced by N. I read injectives.tex, Tag 0G20, remark-spectral-sequences-ext-variant, which gives the renumbering E2^{i,j}=Ext^i(H^{-j}(M),K), differential (s,1-s), and bounded convergence for an upper-bounded source and lower-bounded target. I also read algebra.tex, Tag 08YR, lemma-ext-noetherian, which states finiteness of Ext for two finite modules over a Noetherian ring, and its finite-free-resolution proof. The item needs exactly these hypotheses and no scheme/coherent-sheaf comparison, regularity, or finite global dimension.
+
+For step 1 I opened the full statement and proof of lem-trf-source-hyperext-module-target. Its statement explicitly uses the ordinary module category on the same one-object identity-covering site, gives the A-linear spectral sequence, page kernel/image formula, every-page support, eventual stable terms, finite exhaustive separated submodule filtrations, and vanishing when the indicated interval is empty. The step takes all these facts from its statement, not from a construction hidden in its proof. The source's K is this item's N[0], which is bounded below in degree zero. The source upper bound is exactly H^a(K)=0 for a>u. The resulting support is j>=-u, not j>=u.
+
+For step 2 I opened lem-sc-ext-noetherian-finite. Its statement asserts finite Ext for all nonnegative degrees of two finite modules. Here the first is H^{-j}(K), finite by the item's hypothesis for every integer j, and the second is N, finite by hypothesis. The commutative Noetherian ring supplies the coefficient-module structure and the Noetherian hypothesis. Terms in negative i are zero by step 1, and zero has an empty finite generating set. This last observation is elementary and does not need a separate node. The substantive Ext-finiteness input is cited rather than treated as a consequence of a definition.
+
+For step 3 I opened lem-trf-noetherian-quadrant-abutment. It is a cohomological A-linear spectral-sequence assertion with exactly the same differential and next-page convention as the source-sequence node. Its assumptions are met with a=0 and b=-u. Every E2 term is finite by step 2. The source node supplies the required filtrations and limiting terms, not merely a convergence slogan. I wrote out the elementary indexing p=t-j, the range 0<=p<=t+u, and the constant extensions outside the finite range, so the quadrant node's all-p graded-piece hypothesis is satisfied. If the range is empty, the source node itself asserts the abutment is zero and its zero filtration works. The resulting threshold a+b=-u is the item's exact bound. No convergence argument or subquotient/extension finiteness theorem is hidden inside this application: those facts belong to the separately existing generic quadrant node.
+
+I checked B1-B9 and C1-C8 against the files: there are no new unsplit nodes hiding proofs, no undefined new notion, no tag used to define a statement, no new duplicate, and no invented search. Existing definitions remain in stmt_deps. Every cited id has an exact statement quote in citations.json; I checked each quote against the node string. The proof_deps are exactly the union of uses. No cited dependency points back to this item: the source sequence and Ext leaf predate it, and the sibling quadrant lemma has no proof dependencies. The steps carry the assembly rather than moving the assertion into a new node. All three steps are under 2000 characters.
+
+For the small cases (section E), K=0 or N=0 gives the zero abutment. Over a field k, K=k[-u], N=k gives nonzero H^{-u}(RHom(K,N)), so strict vanishing t<-u is sharp; this works also for u negative. An upper-bounded but unbounded-below direct sum of k[-r] over r<=u has only one possible source index j=t in each degree (higher Ext vanishes over k), consistent with the proof's finite-diagonal argument. Over a singular Noetherian ring, positive Ext may persist indefinitely, which the statement allows: no bounded-above conclusion for RHom was inserted. The zero ring and a zero cohomology term also cause no exception. I checked that no termwise bound on a representative or finite total cohomology assumption is being used.
+
+The correction during self-review was to spell out the filtration outside 0<=p<=t+u, including the empty-range case, instead of silently identifying a list of finite successive quotients with the generic quadrant lemma's all-index formulation. No statement correction was needed. This review uses the prescribed direct-delivery procedure; the maintainer supplies the independent reading after delivery.

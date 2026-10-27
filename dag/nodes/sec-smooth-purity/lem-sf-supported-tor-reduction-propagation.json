@@ -1,0 +1,278 @@
+{
+ "id": "lem-sf-supported-tor-reduction-propagation",
+ "kind": "statement",
+ "title": "Quantitative supported Tor bounds and their uniform integral restriction",
+ "statement": "Fix a field $k$, a prime $\\ell$ invertible in $k$, a finite extension $E/\\mathbf Q_\\ell$, its valuation ring $R$, a uniformizer $\\varpi$, and $A_n=R/\\varpi^n$ for $n\\ge1$ [def-weil-l-adic-coefficient-extension]. Let $X$ be separated of finite type over $k$ with closed immersion $i:Z\\hookrightarrow X$ and complementary open immersion $j:U\\hookrightarrow X$ [def-weil-scheme-morphism-properties]. Use the actual finite and derived-complete integral categories $D^b_c(T,A_n)$ and $D^b_c(T,R)$ [def-weil-derived-complete-integral-detailed], ordinary finite derived tensor and integral derived reduction [def-weil-derived-tensor, def-weil-integral-derived-reduction].\nSuppose the specified $i_*,i^*,j^*,Rj_*,J$ preserve these constructible categories, with $i_*\\dashv J$, invertible $i^*i_*\\to1$, and supported distinguished triangles $i_*JK\\to K\\to Rj_*j^*K\\to$. Assume canonical reductions identify each integral operation with its finite counterpart, preserving both adjunction maps; for $J$ this includes $(JK)_n\\cong J_nK_n$. Let $N\\ge0$ be independent of $n$. Suppose at every finite level $i_*,i^*,j^*$ preserve Tor intervals unchanged and $Rj_*$ sends Tor interval $[a,b]$ into $[a,b+N]$, with the all-module-sheaf meaning [def-weil-finite-tor-amplitude]. Then $J_n$ sends Tor interval $[a,b]$ into $[a,b+N+1]$. More precisely, for $\\kappa=A_n/(\\varpi)$ and every $K$ of interval $[a,b]$, both $i_*J_nK\\otimes^L_{A_n}\\kappa$ and $J_nK\\otimes^L_{A_n}\\kappa$ have cohomology only in $[a,b+N+1]$.\nAt integral coefficients $i_*,i^*,j^*$ preserve the uniform Tor interval of the reductions; $Rj_*$ and $J$ send it respectively into $[a,b+N]$ and $[a,b+N+1]$. The supported triangles and adjunctions consequently restrict to the full triangulated categories $D^b_{ctf}$, and any vanishing $JRj_*=0$ and invertible unit $1\\to Ji_*$ on $D^b_c$ restrict there too. At the field stages $E$ and $\\overline{\\mathbf Q}_\\ell$ this restriction is the identity since $D^b_{ctf}=D^b_c$ by definition.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sf-localization/prop-sf-localization-all-stages.proof.md",
+  "place": "Finite Tor amplitude: clause (2 prime) and Other stages; returned steps 18–19"
+ },
+ "stmt_deps": [
+  "def-weil-l-adic-coefficient-extension",
+  "def-weil-scheme-morphism-properties",
+  "def-weil-derived-complete-integral-detailed",
+  "def-weil-derived-tensor",
+  "def-weil-integral-derived-reduction",
+  "def-weil-finite-tor-amplitude",
+  "def-weil-derived-direct-image",
+  "def-weil-derived-pullback-tensor-hom",
+  "def-weil-triangulated-category"
+ ],
+ "proof": [
+  {
+   "text": "Fix $n\\geq1$, put $A=A_n$, $F=i_*J_nK$ and $C=Rj_*j^*K$. The assumed interval preservation gives $j^*K$ interval $[a,b]$ and $C$ interval $[a,b+N]$. Both are bounded constructible by hypothesis, hence finite-Tor objects by [def-weil-finite-tor-amplitude]. By the shift formula in [lem-weil-finite-ctf-triangulated], $C[-1]$ has interval $[a+1,b+N+1]$.",
+   "uses": [
+    "def-weil-finite-tor-amplitude",
+    "lem-weil-finite-ctf-triangulated"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sf-localization/prop-sf-localization-all-stages.proof.md",
+    "place": "Finite Tor amplitude: clause (2 prime) and Other stages; returned steps 18–19"
+   }
+  },
+  {
+   "text": "Inverse rotation of the assumed distinguished triangle $F\\to K\\to C\\to F[1]$ gives a distinguished triangle $C[-1]\\to F\\to K\\to C$ by [def-weil-triangulated-category]. Enlarge the two outside Tor intervals to $[a,b+N+1]$ directly in their all-module vanishing predicates. This is allowed since $N\\geq0$. Apply the common-interval extension clause of [lem-weil-finite-ctf-triangulated]. Thus $F=i_*J_nK$ has the asserted interval, without changing site presentations or using a residue criterion.",
+   "uses": [
+    "def-weil-triangulated-category",
+    "lem-weil-finite-ctf-triangulated"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sf-localization/prop-sf-localization-all-stages.proof.md",
+    "place": "Finite Tor amplitude: clause (2 prime) and Other stages; returned steps 18–19"
+   }
+  },
+  {
+   "text": "Apply the assumed interval-preserving $i^*$ to $F$. The assumed isomorphism $i^*i_*\\cong1$ identifies $i^*F$ with $J_nK$, so $J_nK$ also has interval $[a,b+N+1]$. Tor bounds are invariant under isomorphism, since tensor and cohomology are functors. In the all-module definition [def-weil-finite-tor-amplitude], take the degree-zero constant module $\\kappa=A_n/(\\varpi)$ on $X$ and on $Z$. This gives exactly the two asserted residue-tensor cohomological bounds.",
+   "uses": [
+    "def-weil-finite-tor-amplitude"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sf-localization/prop-sf-localization-all-stages.proof.md",
+    "place": "Finite Tor amplitude: clause (2 prime) and Other stages; returned steps 18–19"
+   }
+  },
+  {
+   "text": "Let an integral object have reductions with a single Tor interval $[a,b]$. For each $n$, use the assumed canonical comparison $(TK)_n\\cong T_nK_n$ separately for $T=i_*,i^*,j^*,Rj_*,J$. The finite hypotheses and steps 1–3 give respectively $[a,b]$, $[a,b]$, $[a,b]$, $[a,b+N]$, $[a,b+N+1]$ for these reductions. These same intervals work for every $n$, because $N$ is independent of $n$. Each integral output already belongs to $D^b_c$ by hypothesis. Thus these are uniform Tor bounds in exactly the integral definition [def-weil-finite-tor-amplitude]; no inverse-limit cohomological bound is inferred.",
+   "uses": [
+    "def-weil-finite-tor-amplitude"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sf-localization/prop-sf-localization-all-stages.proof.md",
+    "place": "Finite Tor amplitude: clause (2 prime) and Other stages; returned steps 18–19"
+   }
+  },
+  {
+   "text": "At finite levels use the isomorphism-closure and triangulation clauses of [lem-weil-finite-ctf-triangulated]. For integral coefficients intersect the triangulated constructible predicate of [lem-weil-integral-constructible-triangulated] with the uniform Tor predicate of [def-weil-finite-tor-amplitude]. The scalar reduction construction [def-weil-integral-derived-reduction] supplies a shift comparison and exact triangulated structure at every level. Isomorphisms preserve intervals by composing cochain-representative isomorphisms. For zero, obtain an interval for each reduction from finite triangulation and shift its zero object until the upper bound is below any test degree; hence $[0,0]$ works at every level. Shifts have the common interval $[a-m,b-m]$ by the finite quantitative shift clause. Reduce an integral triangle, enlarge its outside intervals to their common minimum/maximum interval, and apply the finite common-interval extension clause. These closure properties give the full triangulated subcategory by [def-weil-triangulated-subcategory].",
+   "uses": [
+    "lem-weil-finite-ctf-triangulated",
+    "lem-weil-integral-constructible-triangulated",
+    "def-weil-integral-derived-reduction",
+    "def-weil-finite-tor-amplitude",
+    "def-weil-triangulated-subcategory"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sf-localization/prop-sf-localization-all-stages.proof.md",
+    "place": "Finite Tor amplitude: clause (2 prime) and Other stages; returned steps 18–19"
+   }
+  },
+  {
+   "text": "All vertices of each supported triangle on a finite-Tor input now lie in the finite-Tor subcategory, by steps 1–4; its triangle is distinguished there by the inherited-triangle description in [def-weil-triangulated-subcategory]. Fullness identifies each restricted Hom set with its ambient Hom set. The given adjunction bijections therefore restrict, naturally, to these Hom sets; the same ambient units and counits satisfy the same identities. Any assumed zero functor $JRj_*$ and isomorphism $1\\to Ji_*$ remain zero and invertible on these objects (an inverse is an arrow in the full subcategory). Finally [def-weil-finite-tor-amplitude] defines $D^b_{ctf}=D^b_c$ at $E$ and $\\overline{\\mathbf Q}_\\ell$, so at either field stage the restriction is the identity.",
+   "uses": [
+    "def-weil-triangulated-subcategory",
+    "def-weil-finite-tor-amplitude"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sf-localization/prop-sf-localization-all-stages.proof.md",
+    "place": "Finite Tor amplitude: clause (2 prime) and Other stages; returned steps 18–19"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-finite-tor-amplitude",
+  "lem-weil-finite-ctf-triangulated",
+  "def-weil-triangulated-category",
+  "lem-weil-integral-constructible-triangulated",
+  "def-weil-integral-derived-reduction",
+  "def-weil-triangulated-subcategory"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sf-localization/prop-sf-localization-all-stages.proof.md",
+  "place": "Finite Tor amplitude (2 prime) and Other stages; R4 Lean proof using the already stated intrinsic finite triangulation clauses, the exact structure in scalarReductionDerivedExistence, and explicit full-subcategory adjunction restriction."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Supported localization triangle quantitative Tor bound closed exceptional adjoint plus one uniform reductions integral finite Tor subcategory",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"DerivedCategory.IsGE\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/TStructure\", \"type\": \"{C : Type u} →\\n  [inst : CategoryTheory.Category.{v, u} C] →\\n    [inst_1 : CategoryTheory.Abelian C] → [inst_2 : HasDerivedCategory C] → DerivedCategory C → ℤ → Prop\", \"doc\": \"For an object $ X $ in the derived category of an abelian category $ \\\\mathcal{C} $ and integer $ n $, this proposition holds if $ X $ belongs to the family $ \\\\mathcal{G}_n $ of the T-structure defined\"}\n  {\"name\": \"DerivedCategory.IsLE\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/TStructure\", \"type\": \"{C : Type u} →\\n  [inst : CategoryTheory.Category.{v, u} C] →\\n    [inst_1 : CategoryTheory.Abelian C] → [inst_2 : HasDerivedCategory C] → DerivedCategory C → ℤ → Prop\", \"doc\": \"This proposition asserts that an object $ X $ in the derived category belongs to the subcategory $ \\\\mathcal{L}_n $, consisting of objects isomorphic to cochain complexes strictly supported in degrees \"}\n  {\"name\": \"DerivedCategory.exists_iso_Q_obj_of_isGE_of_isLE\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/TStructure\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Abelian C]\\n  [inst_2 : HasDerivedCategory C] (X : DerivedCategory C) (a b : ℤ) [X.IsGE a] [X.IsLE b],\\n  ∃ K, ∃ (_ : K.IsStrictlyGE a) (_ : K.IsStrictlyLE b), Nonempty (X ≅ DerivedCategory.Q.obj K)\", \"doc\": \"For any object $X$ in the derived category of an abelian category $\\\\mathcal{C}$, if $X$ is cohomologically bounded below by integer $a$ and above by integer $b$ (i.e., $X \\\\in \\\\mathcal{G}_a \\\\cap \\\\mathc\"}\n  {\"name\": \"DerivedCategory.TStructure.t\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/TStructure\", \"type\": \"{C : Type u} →\\n  [inst : CategoryTheory.Category.{v, u} C] →\\n    [inst_1 : CategoryTheory.Abelian C] →\\n      [inst_2 : HasDerivedCategory C] → CategoryTheory.Triangulated.TStructure (DerivedCategory C)\", \"doc\": \"The T-structure on the derived category of an abelian category is defined by two families of objects: $\\\\mathcal{L}_n$ consisting of objects isomorphic to cochain complexes strictly supported in degree\"}\n  {\"name\": \"DerivedCategory.exists_iso_Q_obj_of_isGE\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/TStructure\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Abelian C]\\n  [inst_2 : HasDerivedCategory C] (X : DerivedCategory C) (n : ℤ) [hX : X.IsGE n],\\n  ∃ K, ∃ (_ : K.IsStrictlyGE n), Nonempty (X ≅ DerivedCategory.Q.obj K)\", \"doc\": \"For any object $ X $ in the derived category of an abelian category $ \\\\mathcal{C} $ and integer $ n $, if $ X $ belongs to the $ \\\\mathcal{G}_n $ family of the T-structure (i.e., is isomorphic to a coc\"}\n  {\"name\": \"DerivedCategory.exists_iso_Q_obj_of_isLE\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/TStructure\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Abelian C]\\n  [inst_2 : HasDerivedCategory C] (X : DerivedCategory C) (n : ℤ) [hX : X.IsLE n],\\n  ∃ K, ∃ (_ : K.IsStrictlyLE n), Nonempty (X ≅ DerivedCategory.Q.obj K)\", \"doc\": \"For any object $X$ in the derived category of an abelian category $\\\\mathcal{C}$ that belongs to the left subcategory $\\\\mathcal{L}_n$ of the T-structure at degree $n$, there exists a cochain complex $K\"}\n  {\"name\": \"DerivedCategory.isGE_Q_obj_iff\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/TStructure\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Abelian C]\\n  [inst_2 : HasDerivedCategory C] (K : CochainComplex C ℤ) (n : ℤ), (DerivedCategory.Q.obj K).IsGE n ↔ K.IsGE n\", \"doc\": \"For a cochain complex $ K $ in an abelian category and integer $ n $, the image of $ K $ under the localization functor $ Q $ to the derived category satisfies the cohomological support condition $ \\\\t\"}\n  {\"name\": \"DerivedCategory.instIsLEObjCochainComplexIntQOfIsLE\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/TStructure\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Abelian C]\\n  [inst_2 : HasDerivedCategory C] (K : CochainComplex C ℤ) (n : ℤ) [K.IsLE n], (DerivedCategory.Q.obj K).IsLE n\", \"doc\": \"If a cochain complex $ K $ with integer indices is in the subcategory $ \\\\mathcal{L}_n $ (objects strictly supported in degrees $ \\\\leq n $) of the T-structure, then its image under the localization fun\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the returned declarations supply only component category, scheme, scalar or adjunction facts, not this coefficient-category comparison and all its specified maps"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Triangle, CategoryTheory.Pretriangulated",
+   "results": "[loogle] OK 0 hit(s) | loogle: unknown identifier 'CategoryTheory.Triangle'",
+   "date": "2026-10-22",
+   "verdict": "no match: the returned declarations supply only component category, scheme, scalar or adjunction facts, not this coefficient-category comparison and all its specified maps"
+  },
+  {
+   "tool": "grep",
+   "query": "(TorAmplitude|torAmplitude).*(triangle|reduction)|recollement.*Tor",
+   "results": "[grep] OK 0 hit(s)",
+   "date": "2026-10-22",
+   "verdict": "no match: the returned declarations supply only component category, scheme, scalar or adjunction facts, not this coefficient-category comparison and all its specified maps"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Uniform Tor intervals integral reductions closed support exceptional inverse image supported triangle",
+   "results": "[leansearch] UNAVAILABLE 0 hit(s) | service unavailable: {\"error\":\"Rate limit exceeded: 60 per 1 minute\"}\n  This kind of search is not available now. It is recorded as unavailable; use the other kinds and grep, and do not write a verdict for it.",
+   "date": "2026-10-22",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finite coefficient residue tensor supported triangle gives shriek Tor upper bound N plus one uniformly for adic reductions",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AdicCompletion.ofTensorProductEquivOfFiniteNoetherian\", \"module\": \"Mathlib/RingTheory/AdicCompletion/AsTensorProduct\", \"type\": \"{R : Type u} →\\n  [inst : CommRing R] →\\n    (I : Ideal R) →\\n      (M : Type u) →\\n        [inst_1 : AddCommGroup M] →\\n          [inst_2 : Module R M] →\\n            [IsNoetherianRing R] →\\n              [Module.Finite R M] → TensorProduct R (AdicCompletion I R) M ≃ₗ[AdicCompletion I R] AdicCompletion I \", \"doc\": \"For a Noetherian commutative ring $ R $, an ideal $ I $, and a finitely generated $ R $-module $ M $, the tensor product of the $ I $-adic completion of $ R $ with $ M $ is linearly equivalent to the \"}\n  {\"name\": \"AdicCompletion.ofTensorProductEquivOfFiniteNoetherian_apply\", \"module\": \"Mathlib/RingTheory/AdicCompletion/AsTensorProduct\", \"type\": \"∀ {R : Type u} [inst : CommRing R] (I : Ideal R) (M : Type u) [inst_1 : AddCommGroup M] [inst_2 : Module R M]\\n  [inst_3 : IsNoetherianRing R] [inst_4 : Module.Finite R M] (x : TensorProduct R (AdicCompletion I R) M),\\n  (AdicCompletion.ofTensorProductEquivOfFiniteNoetherian I M) x = (AdicCompletion.o\", \"doc\": \"For a Noetherian commutative ring $ R $, an ideal $ I $, and a finitely generated $ R $-module $ M $, the tensor product of the $ I $-adic completion of $ R $ with $ M $ (over $ R $) is isomorphic to \"}\n  {\"name\": \"AdicCompletion.ofTensorProduct_bijective_of_finite_of_isNoetherian\", \"module\": \"Mathlib/RingTheory/AdicCompletion/AsTensorProduct\", \"type\": \"∀ {R : Type u} [inst : CommRing R] (I : Ideal R) (M : Type u) [inst_1 : AddCommGroup M] [inst_2 : Module R M]\\n  [IsNoetherianRing R] [Module.Finite R M], Function.Bijective ⇑(AdicCompletion.ofTensorProduct I M)\", \"doc\": \"If $ R $ is a Noetherian ring, $ I $ is an ideal of $ R $, and $ M $ is a finitely generated $ R $-module, then the natural linear map from the tensor product of the $ I $-adic completion of $ R $ wit\"}\n  {\"name\": \"AdicCompletion.tensor_map_id_left_eq_map\", \"module\": \"Mathlib/RingTheory/AdicCompletion/AsTensorProduct\", \"type\": \"∀ {R : Type u} [inst : CommRing R] (I : Ideal R) [inst_1 : IsNoetherianRing R] {M : Type u} [inst_2 : AddCommGroup M]\\n  [inst_3 : Module R M] {N : Type u} [inst_4 : AddCommGroup N] [inst_5 : Module R N] (f : M →ₗ[R] N)\\n  [inst_6 : Module.Finite R M] [inst_7 : Module.Finite R N],\\n  TensorProduct.Alge\", \"doc\": \"For a Noetherian commutative ring $ R $, an ideal $ I $, and a finitely generated $ R $-module $ M $, the tensor product of the $ I $-adic completion of $ R $ with $ M $ is isomorphic to the $ I $-adi\"}\n  {\"name\": \"AdicCompletion.ofTensorProduct_surjective_of_finite\", \"module\": \"Mathlib/RingTheory/AdicCompletion/AsTensorProduct\", \"type\": \"∀ {R : Type u_1} [inst : CommRing R] (I : Ideal R) (M : Type u_2) [inst_1 : AddCommGroup M] [inst_2 : Module R M]\\n  [Module.Finite R M], Function.Surjective ⇑(AdicCompletion.ofTensorProduct I M)\", \"doc\": \"For a finite $ R $-module $ M $, the canonical linear map $ \\\\widehat{R}_I \\\\otimes_R M \\\\to \\\\widehat{M}_I $ from the tensor product of the $ I $-adic completion of $ R $ with $ M $ to the $ I $-adic com\"}\n  {\"name\": \"AdicCompletion.coe_ofTensorProductEquivOfFiniteNoetherian\", \"module\": \"Mathlib/RingTheory/AdicCompletion/AsTensorProduct\", \"type\": \"∀ {R : Type u} [inst : CommRing R] (I : Ideal R) (M : Type u) [inst_1 : AddCommGroup M] [inst_2 : Module R M]\\n  [inst_3 : IsNoetherianRing R] [inst_4 : Module.Finite R M],\\n  ↑(AdicCompletion.ofTensorProductEquivOfFiniteNoetherian I M) = AdicCompletion.ofTensorProduct I M\", \"doc\": \"For a Noetherian commutative ring $ R $, an ideal $ I $, and a finitely generated $ R $-module $ M $, the tensor product of the $ I $-adic completion of $ R $ with $ M $ is linearly equivalent to the \"}\n  {\"name\": \"AdicCompletion.ofTensorProduct_bijective_of_pi_of_fintype\", \"module\": \"Mathlib/RingTheory/AdicCompletion/AsTensorProduct\", \"type\": \"∀ {R : Type u_1} [inst : CommRing R] (I : Ideal R) (ι : Type u_4) [Finite ι],\\n  Function.Bijective ⇑(AdicCompletion.ofTensorProduct I (ι → R))\", \"doc\": \"Given a finite index type $\\\\iota$ and a commutative ring $R$ with ideal $I$, the canonical linear map from the tensor product of the $I$-adic completion of $R$ with the product module $\\\\iota \\\\to R$ to\"}\n  {\"name\": \"AdicCompletion.ofTensorProductEquivOfFiniteNoetherian_symm_of\", \"module\": \"Mathlib/RingTheory/AdicCompletion/AsTensorProduct\", \"type\": \"∀ {R : Type u} [inst : CommRing R] (I : Ideal R) (M : Type u) [inst_1 : AddCommGroup M] [inst_2 : Module R M]\\n  [inst_3 : IsNoetherianRing R] [inst_4 : Module.Finite R M] (x : M),\\n  (AdicCompletion.ofTensorProductEquivOfFiniteNoetherian I M).symm ((AdicCompletion.of I M) x) = 1 ⊗ₜ[R] x\", \"doc\": \"For a Noetherian commutative ring $ R $, an ideal $ I $, and a finitely generated $ R $-module $ M $, applying the inverse of the linear equivalence between $ \\\\hat{R} \\\\otimes_R M $ and the $ I $-adic \"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the returned declarations supply only component category, scheme, scalar or adjunction facts, not this coefficient-category comparison and all its specified maps"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Supported localization triangle yields exceptional inverse image Tor amplitude a to b plus N plus one and uniform integral reduction bounds",
+   "results": "{\"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"DerivedCategory.exists_iso_Q_obj_of_isGE_of_isLE\", \"CategoryTheory.Functor.isHomological_of_localization\", \"DerivedCategory.IsGE\", \"DerivedCategory.IsLE\", \"DerivedCategory.TStructure.t\", \"DerivedCategory.left_fac_of_isStrictlyLE_of_isStrictlyGE\", \"DerivedCategory.exists_iso_Q_obj_of_isGE\", \"DerivedCategory.right_fac_of_isStrictlyLE_of_isStrictlyGE\"], \"digest\": \"78da0466d5acaf16\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: returned cohomological interval, triangulated functor or scheme immersion declarations do not state the supported Tor bound together with uniform integral reduction and adjunction restriction"
+  },
+  {
+   "tool": "grep",
+   "query": "(torAmplitude|TorAmplitude|tor_amplitude).*(support|reduction)|supportedLocalization",
+   "results": "{\"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: returned cohomological interval, triangulated functor or scheme immersion declarations do not state the supported Tor bound together with uniform integral reduction and adjunction restriction"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Exceptional inverse image closed immersion Tor amplitude bound using localization triangle uniformly modulo powers of a uniformizer",
+   "results": "{\"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsClosedImmersion.instIsIsoSchemeToImage\", \"AlgebraicGeometry.IsClosedImmersion.casesOn\", \"AlgebraicGeometry.IsClosedImmersion.recOn\", \"AlgebraicGeometry.Scheme.instIsOpenImmersionMapOfHomAwayAlgebraMap\", \"AlgebraicGeometry.IsClosedImmersion.of_isPreimmersion\", \"AlgebraicGeometry.IsClosedImmersion.Spec_map_residue\", \"AlgebraicGeometry.Scheme.isOpenImmersion_SpecMap_localizationAway\", \"AlgebraicGeometry.isImmersion_eq_inf\"], \"digest\": \"fc27ef07b9f96145\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: returned cohomological interval, triangulated functor or scheme immersion declarations do not state the supported Tor bound together with uniform integral reduction and adjunction restriction"
+  },
+  {
+   "tool": "loogle",
+   "query": "DerivedCategory, CategoryTheory.Functor.IsTriangulated",
+   "results": "{\"ok\": true, \"n_hits\": 4, \"note\": \"\", \"top\": [\"DerivedCategory.instIsTriangulatedHomotopyCategoryIntUpQh\", \"DerivedCategory.Plus.instIsTriangulatedPlusQh\", \"CategoryTheory.Functor.instIsTriangulatedDerivedCategoryMapDerivedCategory\", \"CategoryTheory.Functor.instIsTriangulatedPlusRightDerivedFunctorPlus\"], \"digest\": \"5d6d6fc4e144ad8f\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: returned cohomological interval, triangulated functor or scheme immersion declarations do not state the supported Tor bound together with uniform integral reduction and adjunction restriction"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Cohomological bounds for a fiber of a distinguished triangle and finite Tor dimension preserved under derived reduction",
+   "results": "{\"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"DerivedCategory.IsGE\", \"DerivedCategory.IsLE\", \"DerivedCategory.exists_iso_Q_obj_of_isGE_of_isLE\", \"DerivedCategory.instIsGEObjCochainComplexIntQOfIsGE\", \"DerivedCategory.instIsLEObjCochainComplexIntQOfIsLE\", \"DerivedCategory.isGE_Q_obj_iff\", \"DerivedCategory.isLE_Q_obj_iff\", \"DerivedCategory.TStructure.t\"], \"digest\": \"1bebac0c6d6300f5\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: returned cohomological interval, triangulated functor or scheme immersion declarations do not state the supported Tor bound together with uniform integral reduction and adjunction restriction"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "prop-sf-localization-all-stages",
+  "date": "2026-10-22",
+  "group": "Q35"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sf-localization",
+ "blueprint": {
+  "from": {
+   "node": "prop-sf-localization-all-stages",
+   "place": "Finite Tor amplitude: clause (2 prime) and Other stages; returned steps 18–19",
+   "via": []
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sf-supported-tor-reduction-propagation",
+  "worker": "stage1",
+  "summary": "NX proves the supported Tor bound directly for all module sheaves by inverse rotation and the existing Tor-interval triangle lemma. Applies the hypothesized i^* interval preservation to recover J, then obtains the residue bounds by specialization. Uniform integral bounds use only the assumed reductions. Proves integral finite-Tor triangle closure from exact reduction without the finite-field-only integral-ctf lemma. Restricts Hom adjunctions and triangles by fullness. No new nodes and no statement change.",
+  "blueprint": "prop-sf-localization-all-stages: Finite Tor amplitude, (2 prime) at the finite stage and Other stages.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-finite-ctf-triangulated",
+    "why": "Generic finite-coefficient shift formula and finite-Tor triangle closure; no geometric localization theorem is replaced."
+   },
+   {
+    "node": "lem-weil-proetale-tor-interval-triangle",
+    "why": "Generic extension bound for all-module Tor intervals, applied to an inverse rotation of the assumed supported triangle; the unit has no other interval-calculus statement."
+   },
+   {
+    "node": "lem-weil-integral-constructible-triangulated",
+    "why": "Generic triangulation of the ambient integral constructible category, needed before checking its uniform finite-Tor subclass."
+   },
+   {
+    "node": "lem-pur-derived-change-of-rings",
+    "why": "Exactness of derived coefficient reduction for arbitrary ringed sites; no localization argument is replaced."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-finite-ctf-triangulated",
+  "lem-weil-integral-constructible-triangulated"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-NX-faedae364",
+  "group": "NX",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NX-faedae364 (reviewer sub-agent of L); spot-checked: Read the full item (6 steps, statement unchanged, no new nodes), every cited statement and the blueprint source prop-sf-localization-all-stages.proof.md l.84-158 ((2') finite stage, Other stages). This is a first split, not a 2026-10-21 re-split. Step 1: lem-weil-finite-ctf-triangulated gives the shift formula, so C[-1] has [a+1,b+N+1]. Step 2: the inverse rotation by TR2 is distinguished in D(X_proet,A_n), and lem-weil-proetale-tor-interval-triangle (any commutative A, every module sheaf) gives [a,b+N+1] since N>=0. Step 3: i^* preserves the interval and i^*i_*=1, then M=kappa gives both residue bounds. Step 4: the reduction comparisons give uniform bounds, using K_n in D^b_c from the derived-complete definition. Step 5: integral ctf is triangulated via the exact Lpi_n^* (lem-pur-derived-change-of-rings, def-weil-integral-derived-reduction) and lem-weil-integral-constructible-triangulated. Avoiding lem-weil-integral-ctf-triangulated is justified because it fixes the finite-field datum. Step 6: the restriction follows from fullness and def-weil-triangulated-subcategory, and D^b_ctf=D^b_c at E and Qlbar by definition. The all-module route replaces the source's residue criterion and is valid. Checked edge cases N=0, K=0, U or Z empty, n=1, non-flat kappa. No duplicates: the siblings immersion-residue, open-residue and open-uniform-bound only supply hypotheses. Accepted tool_uses: four generic sk-def-sf-operations nodes. No SGA source is used."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.SupportedTorReductionPropagation",
+  "declaration": "WeilConjectures.supported_tor_reduction_propagation",
+  "declarations": [
+   "WeilConjectures.SupportedTorSetup",
+   "WeilConjectures.SupportedTorInputBounds",
+   "WeilConjectures.SupportedTorRestriction",
+   "WeilConjectures.SupportedTorReduction",
+   "WeilConjectures.SupportedTorFiniteCategory",
+   "WeilConjectures.SupportedTorFiniteSetup",
+   "WeilConjectures.SupportedTorIntegralSetup",
+   "WeilConjectures.supportedTorResidue",
+   "WeilConjectures.SupportedTorResidueBound",
+   "WeilConjectures.supported_tor_reduction_propagation"
+  ],
+  "file": "lean/Sheaf/Paper/SupportedTorReductionPropagation.lean",
+  "statement": "theorem supported_tor_reduction_propagation (k : Type u) [Field k] (l : ℕ) [Fact l.Prime] (_hl : IsUnit (l : k)) (E : Type u) [Field E] [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E] {X Z U : Scheme.{u}} (t : X ⟶ Spec (.of k)) [IsSeparated t] [LocallyOfFiniteType t] [QuasiCompact t] (i : Z ⟶ X) (j : U ⟶ X) [IsClosedImmersion i] [IsOpenImmersion j] (_hij : Set.range j = (Set.range i)ᶜ) (F : ∀ n : ℕ, SupportedTorFiniteSetup l E n X Z U) (I : SupportedTorIntegralSetup l E X Z U) (_finiteOperations : ∀ n : ℕ, Nonempty ((F n).iPush ⋙ (intrinsicFiniteTorsionConstructible l E (n + 1) (Nat.succ_pos n) X).ι ≅ (intrinsicFiniteTorsionConstructible l E (n + 1) (Nat.succ_pos n) Z).ι ⋙ proEtaleConstantDerivedDirectImage i (Padic.coefficientExtensionRing l E (n + 1))) ∧ Nonempty ((F n).iPull ⋙ (intrinsicFiniteTorsionConstructible l E (n + 1) (Nat.succ_pos n) Z).ι ≅ (intrinsicFiniteTorsionConstructible l E (n + 1) (Nat.succ_pos n) X).ι ⋙ finiteDerivedPullback l E n i) ∧ Nonempty ((F n).jPull ⋙ (intrinsicFiniteTorsionConstructible l E (n + 1) (Nat.succ_pos n) U).ι ≅ (intrinsicFiniteTorsionConstructible l E (n + 1) (Nat.succ_pos n) X).ι ⋙ finiteDerivedPullback l E n j) ∧ Nonempty ((F n).jPush ⋙ (intrinsicFiniteTorsionConstructible l E (n + 1) (Nat.succ_pos n) X).ι ≅ (intrinsicFiniteTorsionConstructible l E (n + 1) (Nat.succ_pos n) U).ι ⋙ proEtaleConstantDerivedDirectImage j (Padic.coefficientExtensionRing l E (n + 1)))) (_integralOperations : Nonempty ((I).iPush ⋙ (sfIntegralConstructible l E X).ι ≅ (sfIntegralConstructible l E Z).ι ⋙ sfCompletedDerivedDirectImage l E i) ∧ Nonempty ((I).iPull ⋙ (sfIntegralConstructible l E Z).ι ≅ (sfIntegralConstructible l E X).ι ⋙ integralDerivedPullback l E i) ∧ Nonempty ((I).jPull ⋙ (sfIntegralConstructible l E U).ι ≅ (sfIntegralConstructible l E X).ι ⋙ integralDerivedPullback l E j) ∧ Nonempty ((I).jPush ⋙ (sfIntegralConstructible l E X).ι ≅ (sfIntegralConstructible l E U).ι ⋙ sfCompletedDerivedDirectImage l E j)) (_reductions : ∀ n : ℕ, Nonempty (SupportedTorReduction I (F n) ((intrinsicFiniteTorsionConstructible l E (n + 1) (Nat.succ_pos n) X).lift ((sfIntegralConstructible l E X).ι ⋙ scalarReductionDerivedExtension.{u, u} l E X n) (fun K ↦ (K.property.2.choose_spec.choose_spec.2 n).1)) ((intrinsicFiniteTorsionConstructible l E (n + 1) (Nat.succ_pos n) Z).lift ((sfIntegralConstructible l E Z).ι ⋙ scalarReductionDerivedExtension.{u, u} l E Z n) (fun K ↦ (K.property.2.choose_spec.choose_spec.2 n).1)) ((intrinsicFiniteTorsionConstructible l E (n + 1) (Nat.succ_pos n) U).lift ((sfIntegralConstructible l E U).ι ⋙ scalarReductionDerivedExtension.{u, u} l E U n) (fun K ↦ (K.property.2.choose_spec.choose_spec.2 n).1)))) (N : ℕ) (hfinite : ∀ n : ℕ, SupportedTorInputBounds (F n) (fun K ↦ HasProEtaleTorAmplitude X (Padic.coefficientExtensionRing l E (n + 1)) K.obj) (fun K ↦ HasProEtaleTorAmplitude Z (Padic.coefficientExtensionRing l E (n + 1)) K.obj) (fun K ↦ HasProEtaleTorAmplitude U (Padic.coefficientExtensionRing l E (n + 1)) K.obj) (N : ℤ)) : (∀ (n : ℕ) (K : SupportedTorFiniteCategory l E n X) (a b : ℤ), HasProEtaleTorAmplitude X (Padic.coefficientExtensionRing l E (n + 1)) K.obj a b → HasProEtaleTorAmplitude Z (Padic.coefficientExtensionRing l E (n + 1)) (((F n).exceptional.obj K).obj) a (b + N + 1) ∧ SupportedTorResidueBound l E n X (((F n).iPush.obj ((F n).exceptional.obj K)).obj) a (b + N + 1) ∧ SupportedTorResidueBound l E n Z (((F n).exceptional.obj K).obj) a (b + N + 1)) ∧ SupportedTorInputBounds I (fun K a b ↦ a ≤ b ∧ ∀ n : ℕ, HasProEtaleTorAmplitude X (Padic.coefficientExtensionRing l E (n + 1)) ((scalarReductionDerivedExtension.{u, u} l E X n).obj K.obj) a b) (fun K a b ↦ a ≤ b ∧ ∀ n : ℕ, HasProEtaleTorAmplitude Z (Padic.coefficientExtensionRing l E (n + 1)) ((scalarReductionDerivedExtension.{u, u} l E Z n).obj K.obj) a b) (fun K a b ↦ a ≤ b ∧ ∀ n : ℕ, HasProEtaleTorAmplitude U (Padic.coefficientExtensionRing l E (n + 1)) ((scalarReductionDerivedExtension.{u, u} l E U n).obj K.obj) a b) (N : ℤ) ∧ (∀ (K : sfIntegralConstructibleCategory l E X) (a b : ℤ), (∀ n : ℕ, HasProEtaleTorAmplitude X (Padic.coefficientExtensionRing l E (n + 1)) ((scalarReductionDerivedExtension.{u, u} l E X n).obj K.obj) a b) → ∀ n : ℕ, HasProEtaleTorAmplitude Z (Padic.coefficientExtensionRing l E (n + 1)) ((scalarReductionDerivedExtension.{u, u} l E Z n).obj (I.exceptional.obj K).obj) a (b + N + 1)) ∧ (∀ n : ℕ, SupportedTorRestriction (F n) (fun K ↦ finiteTorConstructible l E (n + 1) (Nat.succ_pos n) X K.obj) (fun K ↦ finiteTorConstructible l E (n + 1) (Nat.succ_pos n) Z K.obj) (fun K ↦ finiteTorConstructible l E (n + 1) (Nat.succ_pos n) U K.obj)) ∧ SupportedTorRestriction I (fun K ↦ finiteTorConstructibleIntegral l E X K.obj) (fun K ↦ finiteTorConstructibleIntegral l E Z K.obj) (fun K ↦ finiteTorConstructibleIntegral l E U K.obj) ∧ (∀ n : ℕ, ObjectProperty.IsClosedUnderIsomorphisms (finiteTorConstructible l E (n + 1) (Nat.succ_pos n) X) ∧ ObjectProperty.IsTriangulated (finiteTorConstructible l E (n + 1) (Nat.succ_pos n) X)) ∧ (ObjectProperty.IsClosedUnderIsomorphisms (finiteTorConstructibleIntegral l E X) ∧ ObjectProperty.IsTriangulated (finiteTorConstructibleIntegral l E X)) ∧ (∀ n : ℕ, ObjectProperty.IsClosedUnderIsomorphisms (finiteTorConstructible l E (n + 1) (Nat.succ_pos n) Z) ∧ ObjectProperty.IsTriangulated (finiteTorConstructible l E (n + 1) (Nat.succ_pos n) Z)) ∧ (ObjectProperty.IsClosedUnderIsomorphisms (finiteTorConstructibleIntegral l E Z) ∧ ObjectProperty.IsTriangulated (finiteTorConstructibleIntegral l E Z)) ∧ (∀ n : ℕ, ObjectProperty.IsClosedUnderIsomorphisms (finiteTorConstructible l E (n + 1) (Nat.succ_pos n) U) ∧ ObjectProperty.IsTriangulated (finiteTorConstructible l E (n + 1) (Nat.succ_pos n) U)) ∧ (ObjectProperty.IsClosedUnderIsomorphisms (finiteTorConstructibleIntegral l E U) ∧ ObjectProperty.IsTriangulated (finiteTorConstructibleIntegral l E U)) ∧ (∀ Y : Scheme.{u}, finiteTorFieldCoefficientCategory (sfRationalConstructibleCategory l E Y) = sfRationalConstructibleCategory l E Y) ∧ (∀ (Ω : Type v) [Field Ω] [Algebra ℚ_[l] Ω] [IsAlgClosure ℚ_[l] Ω] (Y : Scheme.{u}), finiteTorFieldCoefficientCategory (generalAlgebraicallyClosedConstructibleCategory l Ω Y) = generalAlgebraicallyClosedConstructibleCategory l Ω Y)",
+  "branch": "sheaf-dag",
+  "by": "Q150",
+  "date": "2026-10-22",
+  "existing": false,
+  "note": "The actual intrinsic finite and derived-complete integral categories are retained. Helper records package only the specified constructible operations, supported triangles, adjunctions, and reduction squares; all interval predicates use the recorded all-module Tor tests. No statement or dependency is changed."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-32294ff7d",
+  "group": "Q150",
+  "result": "pass",
+  "note": "Read node, 9 stmt_deps, source prop-sf-localization-all-stages.proof.md l.84-158 ((2') finite stage, Other stages), module, report. Hypotheses: actual intrinsic finite / sfIntegralConstructible categories, i^*⊣i_*, j^*⊣Rj_*, i_*⊣J, invertible closed counit, distinguished triangle i_*JK→K→Rj_*j^*K with counit/unit arrows, ops pinned by Nonempty iso to recorded finite/integral operations, SupportedTorReduction along scalarReductionDerivedExtension with 5 isos incl. (JK)_n≅J_nK_n and 6 unit/counit squares (type-checked by hand), N:ℕ, all-module finite bounds. Conclusions: J_n into [a,b+N+1] plus both κ-residue bounds (κ=A_{n+1}/(ϖ)); uniform integral bounds (extra a≤b already in HasProEtaleTorAmplitude); restriction with functor equalities, HEq of 6 adjunction maps and boundary, conditional zero/iso transfer; replete+triangulated finite/integral ctf on X,Z,U; field-stage identity rfl per def node. Statement verbatim, one sorry, docstrings + 6 proof steps, no hollow defs, report sections present. Edge cases n=0, N=0, a=b, K=0, empty Z/U, non-flat κ, universes OK. Advisory only: integralDerivedPullback (def-pur-integral-derived-operations) = ambient of recorded constructibleIntegralPullback; derivedTensorRing used inside recorded Tor predicate; sfCompletedDerivedDirectImage recorded in def-weil-derived-direct-image. No files changed, no compile."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R4",
+  "result": "pass",
+  "landing": "20261025T164219-L-972387",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

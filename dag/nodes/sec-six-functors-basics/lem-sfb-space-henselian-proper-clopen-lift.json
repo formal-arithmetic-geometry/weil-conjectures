@@ -1,0 +1,308 @@
+{
+ "id": "lem-sfb-space-henselian-proper-clopen-lift",
+ "kind": "statement",
+ "title": "Lifting a proper clopen fibre part over a henselian pair",
+ "statement": "Let $(A,I)$ be a henselian pair [def-weil-pbc-henselian-terminology], and let $X\\to\\operatorname{Spec}A$ be a separated finite-type morphism from an algebraic space [def-trf-algebraic-space, def-sfb-space-morphism-properties, def-weil-affine-spectrum]. Put $X_0=X\\times_{\\operatorname{Spec}A}\\operatorname{Spec}(A/I)$, using sheaf fibre products [lem-trf-space-fibre-products-etale-covers]. If $Z\\subseteq X_0$ is an open and closed subspace and $Z\\to\\operatorname{Spec}(A/I)$ is proper, then there is an open and closed subspace $W\\subseteq X$, proper over $\\operatorname{Spec}A$, with $W\\times_{\\operatorname{Spec}A}\\operatorname{Spec}(A/I)=Z$ as subspaces of $X_0$. An open subspace has the structure sheaf restricted from the ambient algebraic space.",
+ "source": {
+  "document": "literature/stacks-project/spaces-more-morphisms.tex",
+  "place": "Tag 0CWI, lemma-split-off-proper-part-henselian. The scheme version is more-morphisms.tex Tag 0CT9; that scheme version alone does not give the assertion for spaces."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-henselian-terminology",
+  "def-trf-algebraic-space",
+  "def-sfb-space-morphism-properties",
+  "def-weil-affine-spectrum",
+  "lem-trf-space-fibre-products-etale-covers",
+  "def-trf-scheme-algebraic-space",
+  "def-sfb-space-sheaf-fibre-product",
+  "def-weil-open-immersion",
+  "def-weil-closed-immersion"
+ ],
+ "proof": [
+  {
+   "text": "Write $S=\\operatorname{Spec}A$ and $S_0=\\operatorname{Spec}(A/I)$, and denote base change to $S_0$ by a subscript $0$. By [lem-sfb-space-weak-chow] choose a universally surjective proper map $\\varphi:X\\prime\\to X$ from a quasi-compact separated scheme admitting an immersion into a finite projective space over $S$. Properness gives separatedness and finite type for $\\varphi$ by [def-sfb-space-morphism-properties]. Thus $X\\prime\\to S$ is separated by [lem-sfb-space-separated-fp-composition] and finite type by [lem-sfb-space-finite-type-composition]. The chart convention agrees with scheme local finite type by [lem-sfb-space-local-properties-chart-test]; quasi-compactness here is already supplied by weak Chow. These are exactly the hypotheses on the scheme required below.",
+   "uses": [
+    "lem-sfb-space-weak-chow",
+    "def-sfb-space-morphism-properties",
+    "lem-sfb-space-separated-fp-composition",
+    "lem-sfb-space-finite-type-composition",
+    "lem-sfb-space-local-properties-chart-test"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-more-morphisms.tex",
+    "place": "Tag 0CWI, lemma-split-off-proper-part-henselian, proof."
+   }
+  },
+  {
+   "text": "Put $Z\\prime=X\\prime_0\\times_{X_0}Z$. Since $Z$ is open and closed, this is the open and closed subscheme of $X\\prime_0$ on its inverse image: on every scheme test this is an open subscheme, and the complementary open pulls back to its complement [def-a1-space-open-subspace, lem-a1-space-point-open-calculus]. The morphism $Z\\prime\\to Z$ is the base change of $\\varphi$, so it is proper by [lem-sfb-space-proper-base-change]. Since $Z\\to S_0$ is proper, [lem-sfb-space-proper-composition] makes $Z\\prime\\to S_0$ proper. By Step 1, $X\\prime\\to S$ is a separated finite-type morphism of schemes, and $Z\\prime\\to S_0$ is proper as a morphism of schemes [def-sfb-space-morphism-properties]. Apply [lem-sfb-scheme-henselian-proper-clopen-lift] to $X\\prime$ and $Z\\prime$ over the same pair $(A,I)$, obtaining a clopen subscheme $W\\prime\\subseteq X\\prime$, proper over $S$, with $W\\prime_0=Z\\prime$ as subschemes.",
+   "uses": [
+    "def-a1-space-open-subspace",
+    "lem-a1-space-point-open-calculus",
+    "lem-sfb-space-proper-base-change",
+    "lem-sfb-space-proper-composition",
+    "lem-sfb-scheme-henselian-proper-clopen-lift",
+    "def-sfb-space-morphism-properties"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-more-morphisms.tex",
+    "place": "Tag 0CWI, lemma-split-off-proper-part-henselian, proof."
+   }
+  },
+  {
+   "text": "Let $Q_1=|\\varphi|(|W\\prime|)$ and $Q_2=|\\varphi|(|X\\prime\\setminus W\\prime|)$. Both are closed because $\\varphi$ is proper, hence its point map is closed [def-sfb-space-morphism-properties]. Their union is $|X|$ by surjectivity. Let $D=|W\\prime|\\cap|\\varphi|^{-1}(Q_2)$; continuity from [lem-a1-space-point-open-calculus] makes $D$ closed in $|W\\prime|$. Its image $C$ in $|S|$ is closed because $W\\prime\\to S$ is proper. Set-theoretically $C$ is precisely the image of $Q_1\\cap Q_2$ in $S$: a point of the intersection has a lift in $W\\prime$, and that lift belongs to $D$. This obtains the closed image needed in 0CWI without choosing a closed structure on $Q_1$.",
+   "uses": [
+    "def-sfb-space-morphism-properties",
+    "lem-a1-space-point-open-calculus"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-more-morphisms.tex",
+    "place": "Tag 0CWI, lemma-split-off-proper-part-henselian, proof."
+   }
+  },
+  {
+   "text": "If $Q_1\\cap Q_2$ were nonempty, its image $C$ would contain a prime $\\mathfrak p$ of $A$. Since $C$ is closed, it contains $V(\\mathfrak p)$. By [lem-weil-pbc-henselian-pair-prime-connected], $V(\\mathfrak p+I)$ is nonempty; hence $C$ meets $|S_0|$. Choose $x\\in Q_1\\cap Q_2$ above such a point. The fibre-product point-image formula of [lem-a1-space-point-open-calculus] shows that $x$ is in the closed fibre and has lifts there both from $W\\prime_0$ and from $(X\\prime\\setminus W\\prime)_0$. Both lifts map to the same point of $|X_0|$: the map $|X_0|\\to|X|$ is injective, because $X_0\\to X$ is a monomorphism of sheaves (a base change of the monomorphism $\\operatorname{Spec}(A/I)\\to S$), so two field-valued points of $X_0$ whose images in $X$ agree after a common field extension already agree there [def-a1-space-point-topology]. The first lift maps to $Z$, since $W\\prime_0=\\varphi_0^{-1}(Z)$, whereas the second maps to its complementary open in $X_0$. These opens are disjoint, a contradiction. Thus $Q_1\\cap Q_2=\\varnothing$ and $Q_1=|X|\\setminus Q_2$ is clopen.",
+   "uses": [
+    "lem-weil-pbc-henselian-pair-prime-connected",
+    "lem-a1-space-point-open-calculus",
+    "def-a1-space-point-topology"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-more-morphisms.tex",
+    "place": "Tag 0CWI, lemma-split-off-proper-part-henselian, proof."
+   }
+  },
+  {
+   "text": "To realize $Q_1$ as an open subspace, choose a scheme atlas $p:U\\to X$ as in [def-trf-algebraic-space] and put $O=p^{-1}(Q_1)\\subseteq U$. This is an open subscheme by continuity [lem-a1-space-point-open-calculus]. For $R=U\\times_XU$ the two inverse images of $O$ agree: both are the inverse image of $Q_1$ under the same composite $R\\to X$. Apply [lem-trf-etale-open-chart-morphism-descent] to the map $O\\to X$ induced by $p$; its two restrictions agree. It supplies an open subspace $W\\subseteq X$ with $U\\times_XW=O$. Surjectivity of the atlas and the point-image formula identify $|W|$ with $Q_1$. The complement is also open. On any scheme test $T\\to X$, $W_T$ is the corresponding clopen open subscheme; its inclusion is a closed immersion because the structure-sheaf map is the identity on $W_T$ and maps to zero on its open complement. Thus $W\\to X$ is a closed immersion by the scheme-test definition [def-weil-closed-immersion].",
+   "uses": [
+    "def-trf-algebraic-space",
+    "lem-a1-space-point-open-calculus",
+    "lem-trf-etale-open-chart-morphism-descent",
+    "def-weil-closed-immersion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-more-morphisms.tex",
+    "place": "Tag 0CWI, lemma-split-off-proper-part-henselian, proof."
+   }
+  },
+  {
+   "text": "The equalities $\\varphi^{-1}(Q_1)=|W\\prime|$ and $\\varphi^{-1}(Q_2)=|X\\prime\\setminus W\\prime|$ follow from disjointness and surjectivity. Equality of open subspaces is detected on point images by [lem-a1-space-point-open-calculus]; hence $\\varphi^{-1}(W)=W\\prime$ and $W\\prime\\to W$ is surjective, and remains so after every base change by that same point-image formula. For any algebraic space $T\\to S$ and closed subset $F\\subseteq|W\\times_ST|$, its inverse image in $|W\\prime\\times_ST|$ is closed by continuity. The latter space is proper over $T$ by [lem-sfb-space-proper-base-change], so its image in $|T|$ is closed. Surjectivity identifies this image with the image of $F$. Thus $W\\to S$ is universally closed. Its inclusion into $X$ is proper by [lem-sfb-space-closed-subspace-proper], hence separated and finite type. Compose with $X\\to S$: [lem-sfb-space-separated-fp-composition] gives separatedness and [lem-sfb-space-finite-type-composition] gives finite type. Therefore $W\\to S$ is proper by [def-sfb-space-morphism-properties].",
+   "uses": [
+    "lem-a1-space-point-open-calculus",
+    "lem-sfb-space-proper-base-change",
+    "lem-sfb-space-closed-subspace-proper",
+    "lem-sfb-space-separated-fp-composition",
+    "lem-sfb-space-finite-type-composition",
+    "def-sfb-space-morphism-properties"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-more-morphisms.tex",
+    "place": "Tag 0CWI, lemma-split-off-proper-part-henselian, proof."
+   }
+  },
+  {
+   "text": "Finally, base changing the surjection $\\varphi$ gives a surjection $\\varphi_0$; this follows either from its stated universal surjectivity or from the point-image formula. The inverse images of the two open subspaces $W_0,Z\\subseteq X_0$ along $\\varphi_0$ are both $W\\prime_0=Z\\prime$. Surjectivity gives equality of their point images, and [lem-a1-space-point-open-calculus] gives equality of the open subfunctors. Since open subspaces carry the restricted structure sheaf, this is $W_0=Z$ as subspaces, as required.",
+   "uses": [
+    "lem-a1-space-point-open-calculus"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-more-morphisms.tex",
+    "place": "Tag 0CWI, lemma-split-off-proper-part-henselian, proof."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-space-weak-chow",
+  "def-sfb-space-morphism-properties",
+  "lem-sfb-space-separated-fp-composition",
+  "lem-sfb-space-finite-type-composition",
+  "lem-sfb-space-local-properties-chart-test",
+  "def-a1-space-open-subspace",
+  "lem-a1-space-point-open-calculus",
+  "lem-sfb-space-proper-base-change",
+  "lem-sfb-space-proper-composition",
+  "lem-sfb-scheme-henselian-proper-clopen-lift",
+  "lem-weil-pbc-henselian-pair-prime-connected",
+  "def-a1-space-point-topology",
+  "def-trf-algebraic-space",
+  "lem-trf-etale-open-chart-morphism-descent",
+  "def-weil-closed-immersion",
+  "lem-sfb-space-closed-subspace-proper"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/spaces-more-morphisms.tex",
+  "place": "Tag 0CWI, lemma-split-off-proper-part-henselian, proof."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A proper open and closed subspace of the closed fibre of a separated finite type algebraic space over a henselian pair lifts to a proper clopen subspace",
+   "results": "[leanfinder] OK 8 hit(s)\nAlgebra.QuasiFiniteAt.isClopen_singleton\nAlgebraicGeometry.exists_mem_of_isClosed_of_nonempty\nAlgebraicGeometry.instJacobsonSpaceCarrierCarrierCommRingCatFiberOfLocallyOfFiniteType\nAlgebraicGeometry.exists_mem_of_isClosed_of_nonempty'\nHenselianLocalRing\nAlgebraicGeometry.finite_appTop_of_universallyClosed\nAlgebraicGeometry.pointsPi_surjective\nAlgebra.exists_etale_isIdempotentElem_forall_liesOver_eq",
+   "date": "2026-10-23",
+   "verdict": "no match: hits do not state this algebraic-space assertion; scheme-only properness and local-ring or topology results do not specialize to it"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Henselian pair proper clopen component lifting for separated algebraic spaces of finite type",
+   "results": "[leanfinder] OK 8 hit(s)\nHenselianLocalRing\nAlgebraicGeometry.ExistsHomHomCompEqCompAux.hii'\nAlgebraicGeometry.Scheme.instIsClosedImmersionLiftIdOfIsSeparated\nAlgebraicGeometry.Scheme.exists_hom_hom_comp_eq_comp_of_locallyOfFiniteType\nHenselianRing\nAlgebraicGeometry.Scheme.exists_hom_comp_eq_comp_of_locallyOfFiniteType\nAlgebra.exists_etale_isIdempotentElem_forall_liesOver_eq\nIsAdicComplete.henselianRing",
+   "date": "2026-10-23",
+   "verdict": "no match: hits do not state this algebraic-space assertion; scheme-only properness and local-ring or topology results do not specialize to it"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Lifting a proper clopen closed fibre to a proper open and closed algebraic subspace over a henselian pair",
+   "results": "[leansearch] OK 8 hit(s)\nAlgebraicGeometry.LocallyRingedSpace.IsOpenImmersion.lift_fac\nAlgebraicGeometry.LocallyRingedSpace.IsOpenImmersion.lift_fac_assoc\nAlgebraicGeometry.IsClosedImmersion.lift_fac_assoc\nAlgebraicGeometry.IsClosedImmersion.lift_fac\nAlgebraicGeometry.LocallyRingedSpace.IsOpenImmersion.lift.congr_simp\nAlgebraicGeometry.IsClosedImmersion.lift\nTopologicalSpace.Opens.instCanLiftSetCoeIsOpen\nAlgebraicGeometry.IsClosedImmersion.lift.congr_simp",
+   "date": "2026-10-23",
+   "verdict": "no match: hits do not state this algebraic-space assertion; scheme-only properness and local-ring or topology results do not specialize to it"
+  },
+  {
+   "tool": "loogle",
+   "query": "HenselianLocalRing, AlgebraicGeometry.IsProper",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-23",
+   "verdict": "no match: hits do not state this algebraic-space assertion; scheme-only properness and local-ring or topology results do not specialize to it"
+  },
+  {
+   "tool": "grep",
+   "query": "split.off.proper|proper.*(clopen|henselian)|(clopen|henselian).*proper",
+   "results": "[grep] OK 4 hit(s)\nMathlib/Topology/ClopenBox.lean\nMathlib/Topology/MetricSpace/Polish.lean\nMathlib/Topology/Separation/Profinite.lean\nMathlib/RingTheory/Henselian.lean",
+   "date": "2026-10-23",
+   "verdict": "no match: hits do not state this algebraic-space assertion; scheme-only properness and local-ring or topology results do not specialize to it"
+  },
+  {
+   "tool": "grep",
+   "query": "henselian.*proper|proper.*henselian|proper.*clopen|clopen.*proper",
+   "results": "Logged msearch.py: OK, 4 hits: Mathlib/RingTheory/Henselian.lean, Mathlib/Topology/ClopenBox.lean, Mathlib/Topology/MetricSpace/Polish.lean, Mathlib/Topology/Separation/Profinite.lean",
+   "date": "2026-10-23",
+   "verdict": "no match: no algebraic-space proper clopen lifting declaration; returned scheme, topology and ring-theory facts do not specialize in one line"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Proper clopen fibre part lifts to an open and closed proper algebraic space over a henselian pair",
+   "results": "Logged msearch.py: OK, 8 hits: IsLocallyConstant.isClopen_fiber, AlgebraicGeometry.isProper_eq, AlgebraicGeometry.isProper_iff, AlgebraicGeometry.IsProper.instMorphismRestrict, AlgebraicGeometry.IsProper.toUniversallyClosed, AlgebraicGeometry.IsProper.instOfIsFinite, AlgebraicGeometry.LocallyRingedSpace.IsOpenImmersion.lift.congr_simp, AlgebraicGeometry.instIsProperOfIsFinite",
+   "date": "2026-10-23",
+   "verdict": "no match: no algebraic-space proper clopen lifting declaration; returned scheme, topology and ring-theory facts do not specialize in one line"
+  },
+  {
+   "tool": "loogle",
+   "query": "HenselianRing, AlgebraicGeometry.IsProper",
+   "results": "Logged msearch.py: OK, 0 hits: ",
+   "date": "2026-10-23",
+   "verdict": "no match: no algebraic-space proper clopen lifting declaration; returned scheme, topology and ring-theory facts do not specialize in one line"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A proper open and closed part of the closed fibre of an algebraic space separated of finite type over a henselian pair lifts to a proper clopen subspace",
+   "results": "Logged msearch.py: OK, 8 hits: Algebra.QuasiFiniteAt.isClopen_singleton, AlgebraicGeometry.exists_mem_of_isClosed_of_nonempty, AlgebraicGeometry.exists_mem_of_isClosed_of_nonempty', AlgebraicGeometry.instJacobsonSpaceCarrierCarrierCommRingCatFiberOfLocallyOfFiniteType, AlgebraicGeometry.finite_appTop_of_universallyClosed, HenselianLocalRing, AlgebraicGeometry.Scheme.instIsClosedImmersionLiftIdOfIsSeparated, AlgebraicGeometry.IsSeparated.instIsClosedImmersionLiftSchemeId",
+   "date": "2026-10-23",
+   "verdict": "no match: no algebraic-space proper clopen lifting declaration; returned scheme, topology and ring-theory facts do not specialize in one line"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a henselian pair a separated finite type algebraic space admits a proper clopen lift of any proper clopen subspace modulo the ideal",
+   "results": "Logged msearch.py: OK, 8 hits: HenselianRing, IsAdicComplete.henselianRing, HenselianLocalRing, instHenselianRingMaximalIdeal, Algebra.FormallySmooth.exists_lift, StandardEtalePair.existsUnique_hasMap_of_hasMap_quotient_of_sq_eq_bot, Algebra.QuasiFiniteAt.isClopen_singleton, HenselianLocalRing.TFAE",
+   "date": "2026-10-23",
+   "verdict": "no match: no algebraic-space proper clopen lifting declaration; returned scheme, topology and ring-theory facts do not specialize in one line"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-connected-proper-fibres-proper",
+  "date": "2026-10-23",
+  "group": "NQ"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Scheme representability of the stable abelian-level normalization. Supporting input: freeness at normalized boundary branches. Comparison of the full cohomology frame in the item with Deligne 3.3--3.5 Picard torsion frames; relative Picard existence for the pulled-back stable family. Supporting input for the present split: Properness of flat separated families with connected proper fibres. Present split: Lifting a proper clopen fibre part over a henselian pair.",
+   "via": [
+    "lem-sfb-connected-proper-fibres-proper",
+    "lem-sfb-stable-relative-picard-kummer",
+    "lem-sfb-stable-level-versal-branch-freeness",
+    "lem-sfb-stable-abelian-level-normalization",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-space-henselian-proper-clopen-lift",
+  "worker": "stage1",
+  "summary": "Kept the statement unchanged and followed 0CWI: weak Chow, the existing scheme lift, separation of two closed images by henselian closed-fibre intersection, and explicit descent of universal closedness. One new statement-only node for finite-type composition; existing nodes handle separated composition, open descent, and proper base change. The closed-image overlap is computed upstairs in Wprime to avoid unnecessary closed-image properness nodes.",
+  "blueprint": "Historical support for det-thm-sf-ctf-stability-direct-images proof (3) through the existing full chain: properness of connected-fibre families in the stable-relative-Picard input. The latest blueprint direct-image paragraph is read; this helper follows its inherited alteration/Picard chain without changing the unit route. Ancestor tool returns None, retained as inherited.",
+  "tool_uses": [
+   {
+    "node": "lem-a1-space-point-open-calculus",
+    "why": "Generic fibre-product point images, continuity, and detection of open-subspace equality; needed for the algebraic-space descent, with no matching same-unit statement."
+   },
+   {
+    "node": "lem-weil-pbc-henselian-pair-prime-connected",
+    "why": "Generic henselian-pair prime-ideal closed-fibre nonemptiness; only this clause is used to rule out overlap of closed images."
+   },
+   {
+    "node": "lem-trf-etale-open-chart-morphism-descent",
+    "why": "Generic construction of an open subspace from an invariant open in an etale atlas; used solely for realizing the clopen point subset, not a trace-formula result."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-a1-space-point-open-calculus",
+  "lem-weil-pbc-henselian-pair-prime-connected",
+  "lem-trf-etale-open-chart-morphism-descent"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q76-8441d063f",
+  "group": "Q76",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q76-8441d063f (reviewer sub-agent of L); spot-checked: I read Stacks 0CWI (spaces-more-morphisms.tex ll.8482-8521), 0CT9 (more-morphisms.tex l.15463 ff.) and 03XG (spaces-morphisms.tex l.4376), and the statement of every cited node. The item's statement is exactly 0CWI, and the item is live: it is not on route-pivot-dropped.txt and none of its 15 via ancestors are. Steps 1-7 follow the source. Weak Chow (089J) gives the cover. Step 3's computation of the closed image of Q1∩Q2 through D in W' is correct. 09Y6 gives a closed-fibre point. Step 5 builds the open subspace W by etale-chart descent and shows its inclusion is a closed immersion on every scheme test. Step 6 descends universal closedness along the universally surjective W'→W, and gets separated and finite type from 04XZ, 03KQ and 03XG. Step 7 identifies W_0=Z as open subfunctors through point calculus. The new node lem-sfb-space-finite-type-composition is true, self-contained and not a duplicate: the fp-composition node covers finite presentation only, the stack calculus gives LFT for representable maps with no quasi-compactness, and the other candidate is schemes only. The dropped-route finding is correct: Step 2 cited the dropped lem-per-henselian-pair-proper-clopen-lift (drop list l.1634). That node holds the generic scheme case 0CT9 and all its proof_deps are live, so this is a repairable citation fault. Fix 1: new unsplit lem-sfb-scheme-henselian-proper-clopen-lift with the 0CT9 statement and live stmt_deps, which Step 2 now cites; the step also states that the scheme hypotheses hold, citing def-sfb-space-morphism-properties. The dropped id is removed from the step, proof_deps and tool_uses. Fix 2: Step 4 silently used that |X_0|→|X| is injective. I added that X_0→X is a monomorphism, so point classes inject [def-a1-space-point-topology]. Fix 3: Step 5 now cites [def-weil-closed-immersion] in its text. After the fixes, proof_deps equals the union of uses and the closure has 10224 nodes, with no dropped id and no cycle. Batch-5 flags: every cited node is a generic algebraic-space definition or foundation (089J, 04WP, 04XY, 04XZ, 03KQ, point calculus, 02WU descent), none a step of the trace formula or Poincaré duality, so all are accepted. No SGA is cited.; 2 file(s) fixed by the reviewer; 1 statement node(s) added by the reviewer (FIX more, RETURN less)"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SpaceHenselianProperClopenLift",
+  "declaration": "AlgebraicGeometry.AlgebraicSpace.exists_proper_clopen_lift_of_henselianPair",
+  "declarations": [
+   "AlgebraicGeometry.AlgebraicSpace.henselianPairClosedFibreBaseMap",
+   "AlgebraicGeometry.AlgebraicSpace.henselianPairClosedFibreInclusion",
+   "AlgebraicGeometry.AlgebraicSpace.exists_proper_clopen_lift_of_henselianPair"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/SpaceHenselianProperClopenLift.lean",
+  "statement": "theorem exists_proper_clopen_lift_of_henselianPair {A : Type u} [CommRing A] (I : Ideal A) [HenselianRing A I] (X : AlgebraicSpace (Spec (CommRingCat.of A))) (f : X ⟶ schemeSpace (Over.mk (𝟙 (Spec (CommRingCat.of A))))) (hsep : MapIsSeparated f) (hft : MapIsFiniteType f) (Z : AlgebraicSpace (Spec (CommRingCat.of A))) (i : Z ⟶ enlargedFibreProduct (henselianPairClosedFibreBaseMap I) f) (hopen : IsRepresentableWith (fun _ _ p ↦ IsOpenImmersion p.left) i.hom.hom) (hclosed : IsRepresentableWith (fun _ _ p ↦ IsClosedImmersion p.left) i.hom.hom) (hproper : MapIsProper (i ≫ enlargedFibreProductFst (henselianPairClosedFibreBaseMap I) f)) : ∃ (W : AlgebraicSpace (Spec (CommRingCat.of A))) (w : W ⟶ X), IsRepresentableWith (fun _ _ p ↦ IsOpenImmersion p.left) w.hom.hom ∧ IsRepresentableWith (fun _ _ p ↦ IsClosedImmersion p.left) w.hom.hom ∧ MapIsProper (w ≫ f) ∧ ∃ l : Z ⟶ W, IsPullback l i w (henselianPairClosedFibreInclusion I f)",
+  "branch": "sheaf-dag",
+  "by": "Q24",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "Clopen subspaces are presented by inclusions representable by open and closed immersions; the final pullback square identifies the given subspace, including its inclusion, with the closed fibre of the lift. Two real helpers expose the actual quotient-spectrum map and the second projection of the existing sheaf fibre product. Added only already-landed statement dependencies for schemeSpace/enlargedFibreProduct and the two scheme immersion predicates."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-64c92fc65",
+  "group": "Q24",
+  "result": "pass",
+  "note": "Re-delivery after the H2/H4 RETURN of 4c24188e78da. The Lean module is byte-identical to that head. The node changes only stmt_deps: the theorem lem-trf-space-enlarged-etale-ringed-site-model is replaced by the owners def-trf-scheme-algebraic-space (schemeSpace) and def-sfb-space-sheaf-fibre-product (enlargedFibreProduct/Fst), as that review asked. Outside lean and stmt_deps the node matches live. lean.statement is verbatim. Clauses match Stacks 0CWI (l.8483-8491): HenselianRing; MapIsSeparated/MapIsFiniteType on f; i representable by open and by closed immersions; MapIsProper(i≫Fst) over Spec(A/I); existence of a clopen W with MapIsProper(w≫f) and IsPullback l i w (pullback.snd), oriented correctly. The two helpers have real data (Yoneda of Spec.map of the quotient, and pullback.snd). Proof is sorry only; docstrings carry the source, blueprint id and 7 proof steps; the report has the required sections. No compile because no file was changed."
+ }
+}

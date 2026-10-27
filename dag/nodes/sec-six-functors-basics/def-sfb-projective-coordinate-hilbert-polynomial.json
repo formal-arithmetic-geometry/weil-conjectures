@@ -1,0 +1,132 @@
+{
+ "id": "def-sfb-projective-coordinate-hilbert-polynomial",
+ "kind": "definition",
+ "title": "Coordinate Hilbert polynomial and canonical geometric-fibre embeddings",
+ "status": "split",
+ "statement": "Let $k$ be a field [def-weil-field], $n\\geq0$, and $i:X\\to\\mathbf P^n_k$ a morphism of schemes [def-pc-scheme], where projective space is the standard base-change construction [def-nagata-projective-space-base-change]. Put $S=k[x_0,\\ldots,x_n]$ [def-weil-pbc-mv-polynomial-ring] and let $S_d$ be its vector subspace of polynomials homogeneous of total degree $d\\in\\mathbf N$. On each standard chart $U_a=D_+(x_a)$ identify the dehomogenization $F/x_a^d$ with its polynomial section. Define $I_d(i)$ to be the $k$-linear span of those $F\\in S_d$ whose dehomogenization restricts to zero on $i^{-1}U_a$ for every $a=0,\\ldots,n$. Define the coordinate piece $C_d(i)=S_d/I_d(i)$ and coordinate dimension $h_i(d)=\\dim_k C_d(i)$. The coordinate Hilbert polynomial predicate on $P\\in\\mathbf Q[t]$ is $\\operatorname{IsCoordinatePolynomial}(i,P)\\iff\\exists N\\in\\mathbf N,\\ \\forall d\\geq N,\\ P(d)=h_i(d)$. This defines a predicate and does not assert existence of such a polynomial. For arbitrary schemes $T,Z,T'$, $i:Z\\to\\mathbf P^n_T$ and $g:T'\\to T$, writing $p:\\mathbf P^n_T\\to T$ for the projection, define $i_g:Z\\times_TT'\\to\\mathbf P^n_{T'}$ as the canonical morphism induced by the two projections of the fibre product [def-pc-fibre-product], namely by $Z\\times_TT'\\to Z\\xrightarrow{i}\\mathbf P^n_T$ and $Z\\times_TT'\\to T'$. For $t\\in T$, define $\\bar t:\\operatorname{Spec}\\overline{\\kappa(t)}\\to T$ as the composite induced by the inclusion of the residue field [def-weil-residue-field] in its chosen algebraic closure [def-weil-algebraic-closure] and the canonical map $\\operatorname{Spec}\\kappa(t)\\to T$ [def-weil-affine-spectrum]. Then $i_{\\bar t}$ is the specified embedding of the geometric fibre [def-weil-geometric-fibre] whenever $i$ is an embedding.",
+ "stmt_deps": [
+  "def-weil-field",
+  "def-pc-scheme",
+  "def-nagata-projective-space-base-change",
+  "def-weil-pbc-mv-polynomial-ring",
+  "def-pc-fibre-product",
+  "def-weil-residue-field",
+  "def-weil-algebraic-closure",
+  "def-weil-affine-spectrum",
+  "def-weil-geometric-fibre"
+ ],
+ "source": {
+  "document": "literature/stacks-project/varieties.tex; literature/stacks-project/constructions.tex; literature/stacks-project/etale-cohomology.tex",
+  "place": "Tags 08AC (lemma-hilbert-polynomial), 08AE (lemma-hilbert-polynomial-H0); Tag 03GL (lemma-closed-in-projective-space), its chartwise kernel ideal; definition-projective-space and Tag 01O3 (lemma-relative-proj-base-change); Tag 03PO (definition-geometric-point). These give the eventual coordinate-dimension predicate and canonical base-change and geometric-point constructions, without any existence theorem."
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "IsCoordinatePolynomial|coordinatePiece|coordinateDimension|HilbertPolynomial",
+   "results": "{\"t\": \"2026-10-22T05:07:37Z\", \"tool\": \"grep\", \"query\": \"IsCoordinatePolynomial|coordinatePiece|coordinateDimension|HilbertPolynomial\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "No exact Mathlib match. Reuse the six existing ProjectiveHilbertPolynomial definitions in Sheaf.AlgebraicGeometry.FlatProjectiveHilbertPolynomialLocality; no definition DAG node owns this coordinate predicate. The existing projective-fibre-hilbert-polynomial node defines the different Euler predicate."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Hilbert polynomial of a projective closed subscheme as eventual dimension of homogeneous coordinate quotient by chartwise equations",
+   "results": "{\"t\": \"2026-10-22T05:07:38Z\", \"tool\": \"leansearch\", \"query\": \"Hilbert polynomial of a projective closed subscheme as eventual dimension of homogeneous coordinate quotient by chartwise equations\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Polynomial.hilbertPoly\", \"Polynomial.preHilbertPoly\", \"Polynomial.hilbertPoly_zero_right\", \"Polynomial.hilbertPoly_succ\", \"Polynomial.hilbertPoly_linearMap\", \"Polynomial.hilbertPoly_mul_one_sub_succ\", \"Polynomial.hilbertPoly_zero_left\", \"Polynomial.existsUnique_hilbertPoly\"], \"digest\": \"fcb9f97d02f3266f\"}",
+   "date": "2026-10-22",
+   "verdict": "No exact Mathlib match. Reuse the six existing ProjectiveHilbertPolynomial definitions in Sheaf.AlgebraicGeometry.FlatProjectiveHilbertPolynomialLocality; no definition DAG node owns this coordinate predicate. The existing projective-fibre-hilbert-polynomial node defines the different Euler predicate."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "homogeneous coordinate Hilbert polynomial defined by eventual vector space dimensions of graded pieces of a projective scheme",
+   "results": "{\"t\": \"2026-10-22T05:07:40Z\", \"tool\": \"leanfinder\", \"query\": \"homogeneous coordinate Hilbert polynomial defined by eventual vector space dimensions of graded pieces of a projective scheme\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Polynomial.hilbertPoly\", \"Polynomial.hilbertPoly_linearMap\", \"Polynomial.hilbertPoly_X_pow_succ\", \"ProjectiveSpectrum.asHomogeneousIdeal\", \"AlgebraicGeometry.Proj\", \"Polynomial.hilbertPoly_succ\", \"ProjectiveSpectrum\", \"ProjectiveSpectrum.vanishingIdeal\"], \"digest\": \"fe061727a400095e\"}",
+   "date": "2026-10-22",
+   "verdict": "No exact Mathlib match. Reuse the six existing ProjectiveHilbertPolynomial definitions in Sheaf.AlgebraicGeometry.FlatProjectiveHilbertPolynomialLocality; no definition DAG node owns this coordinate predicate. The existing projective-fibre-hilbert-polynomial node defines the different Euler predicate."
+  },
+  {
+   "tool": "rg",
+   "query": "IsCoordinatePolynomial|coordinatePiece|coordinateDimension|def-sfb-projective-coordinate-hilbert-polynomial in dag/nodes, lean/WeilConjectures/AlgebraicGeometry and lean/Sheaf/AlgebraicGeometry; blueprint_refs.py search coordinate Hilbert polynomial",
+   "results": "Only the existing locality module and its theorem-node lean record contain these definitions; no definition node. def-sfb-projective-fibre-hilbert-polynomial uses Euler characteristics, and def-sfb-coordinate-quotient-grading defines a grading for a supplied ideal, not the chartwise equations or coordinate polynomial predicate. No upstream definition; blueprint search: 0 matches.",
+   "date": "2026-10-22",
+   "verdict": "Exact existing source definitions found; record existing:true without copying or redeclaring them."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-hilbert-uniform-section-bound",
+  "date": "2026-10-22",
+  "group": "NS"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong §§3.9--3.12, Claim 3.10 and Lemma 3.13, printed p.609. Agent-formulated version: the proof of Lemma 3.13 uses only that rational exceptional curves have constant image in each target fibre; this property replaces its genus-at-least-two and pure-curve target hypotheses. This statement does not assert existence of a semistable source.; de Jong 3.9, projective Hilbert schemes underlying the relative morphism scheme; Hilbert construction prerequisite: Uniform generation and section bounds for projective ideals with fixed Hilbert polynomial; fibre-polynomial hypothesis: actual homogeneous coordinate quotient and its canonical geometric-fibre embedding.",
+   "via": [
+    "lem-sfb-hilbert-uniform-section-bound",
+    "lem-sfb-projective-hilbert-polynomial-representability",
+    "lem-sfb-high-genus-hom-closure",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.FlatProjectiveHilbertPolynomialLocality",
+  "declaration": "AlgebraicGeometry.ProjectiveHilbertPolynomial.IsCoordinatePolynomial",
+  "declarations": [
+   "AlgebraicGeometry.ProjectiveHilbertPolynomial.equations",
+   "AlgebraicGeometry.ProjectiveHilbertPolynomial.coordinatePiece",
+   "AlgebraicGeometry.ProjectiveHilbertPolynomial.coordinateDimension",
+   "AlgebraicGeometry.ProjectiveHilbertPolynomial.IsCoordinatePolynomial",
+   "AlgebraicGeometry.ProjectiveHilbertPolynomial.baseChangeEmbedding",
+   "AlgebraicGeometry.ProjectiveHilbertPolynomial.geometricPoint"
+  ],
+  "statement": "def IsCoordinatePolynomial (k : Type u) [Field k] (n : ℕ) {X : Scheme.{u}}\n    (i : X ⟶ ℙ(ULift.{u} (Fin (n + 1)); Spec (.of k))) (P : Polynomial ℚ) : Prop",
+  "branch": "newtargets-dag",
+  "by": "NS",
+  "date": "2026-10-22",
+  "existing": true,
+  "note": "Definition-node ownership requested in return H2/H12. These six plain definitions already exist in the published locality module (lines 55--107); record them here as existing, without duplicate definitions or edits to that theorem module. IsCoordinatePolynomial is the eventual coordinate-dimension predicate, not the separate Euler predicate. No locality theorem or theorem-selected polynomial is part of this definition record."
+ },
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-637e5e7a9",
+  "group": "NS",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-637e5e7a9",
+  "group": "NS",
+  "result": "pass",
+  "note": "Re-delivery of the bce3fcaa H2/H12 RETURN. Lean byte-identical to the returned head, whose clause-by-clause check passed. The only item change: stmt_dep lem-sfb-flat-projective-hilbert-polynomial-locality replaced by new def-sfb-projective-coordinate-hilbert-polynomial (existing:true on the unchanged FlatProjectiveHilbertPolynomialLocality: equations, coordinatePiece, coordinateDimension, IsCoordinatePolynomial, baseChangeEmbedding, geometricPoint); the theorem stays in proof_deps. Each definition checked against the node text and Stacks 03GL/08AC/08AE/01O3/03PO. check_existing, check_record and check_new_node all clean; statement verbatim; 9 live def stmt_deps; no cycle. used_recorded: all project declarations owned by stmt_deps except generic Mathlib leaves and tensorPullbackObjUnitToUnit (non-stmt_dep owner, advisory). Advisory: inherited docstrings cite wrong tags 01W6/02H5. No compile needed (no file changed)."
+ }
+}

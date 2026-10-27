@@ -1,0 +1,120 @@
+{
+ "id": "lem-per-constant-matrix-cokernel-models",
+ "kind": "statement",
+ "title": "Normalized finite matrix cokernels and coordinate quotients after constant realization",
+ "statement": "Let R, (C,J), B and σ be as in [lem-per-constant-scalar-cokernel]. Let D:R^m→R^n be a finite rectangular matrix, p:R^n→V an ordinary module map, and a0:V≅coker D an isomorphism satisfying p followed by a0 equals the cokernel projection. There are dB:B^m→B^n, pB:B^n→E_B(V), and w:E_B(V)≅coker dB, with pB followed by w equal to the projection. The coordinates of dB are the constant images of the entries of D; every original vector x has its constant-coordinate lift y satisfying pB(y)=1 tensor p(x). For any r, coordinate selector t:Fin r→Fin n, P∈GL_n(R), Q∈GL_m(R), and a:coker D≅R^r whose quotient projection sends x to (Px) restricted along t, there are automorphisms p_prime of B^n and q_prime of B^m with coordinates P,Q and inverse coordinates P inverse,Q inverse, and b:coker dB≅B^r such that the new quotient projection has coordinates t of p_prime. Finite powers and normalization use [lem-sfb-constant-finite-free-presentation-extension].",
+ "source": {
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Proposition 6.8.14(2), finite-presentation calculation; Stacks, algebra.tex lemma-tensor-product-exact; sites-modules.tex section-constant and section-tensor-product."
+ },
+ "stmt_deps": [
+  "lem-per-constant-scalar-cokernel",
+  "lem-sfb-constant-finite-free-presentation-extension"
+ ],
+ "proof": [
+  {
+   "text": "Conjugate realization of D by the canonical normalized beta comparisons. Its coordinate formula is matrixMap_apply and the ordinary basis vector calculation.",
+   "uses": [
+    "lem-sfb-constant-finite-free-presentation-extension"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Realization preserves the cokernel, so transport a0 and its quotient equation to obtain w. The beta tensor formula and naturality on constant generators supply the constant-vector lift and quotient formula.",
+   "uses": [
+    "lem-per-constant-scalar-cokernel",
+    "lem-sfb-constant-finite-free-presentation-extension",
+    "lem-sfb-scalar-dual-evaluation-descent"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Realize the supplied invertible row and column matrices and their inverses. Functoriality transports the ordinary quotient equation to sheaves; matrixMap_apply for coordinate selection gives the claimed coordinate quotient.",
+   "uses": [
+    "lem-sfb-constant-finite-free-presentation-extension"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-per-constant-scalar-cokernel",
+  "lem-sfb-constant-finite-free-presentation-extension",
+  "lem-sfb-scalar-dual-evaluation-descent"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "proof steps 4 and 5: realization of normalized presentation and tail equations; explicit algebraic/categorical implementation by F8."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A constant sheaf module realization followed by scalar extension preserves a matrix cokernel and its quotient projection, and an invertible change of rows identifies the cokernel with the remaining coordinates",
+   "results": "ModuleCat.cokernelIsoRangeQuotient, ModuleCat.cokernelIsColimit, Module.Presentation.ofExact, SheafOfModules.presentationOfIsCokernelFree and related generic presentation infrastructure. No complete normalized finite-power scalar and row-operation comparison. Used categorical cokernel infrastructure.",
+   "date": "2026-10-27",
+   "verdict": "no direct match"
+  },
+  {
+   "tool": "loogle",
+   "query": "ModuleCat.isColimitCokernelCofork; CategoryTheory.Limits.PreservesCokernel.iso",
+   "results": "Found ModuleCat.isColimitCokernelCofork and PreservesCokernel.iso with its projection equation. These are used to construct the normalized comparisons; neither supplies the coefficientwise finite-power normalization or the rank-tail computation.",
+   "date": "2026-10-27",
+   "verdict": "generic tools used"
+  },
+  {
+   "tool": "grep",
+   "query": "cokernel.*(matrix|Matrix)|rank.normal.*cokernel|tail.*(cokernel|quotient)|constant.*scalar.*cokernel",
+   "results": "Read Mathlib ModuleCat/Kernels, ChangeOfRings, TensorProduct/Pi, Matrix/ToLin, Limits/Preserves/Shapes/Kernels. Project search found the parent presentationModels hole, ScalarNormalizedConstantModels (different internal-module encoding), and IntegralScalarModelCoordinates (different discrete-model setting). No duplicate of these normalized helpers.",
+   "date": "2026-10-27",
+   "verdict": "no duplicate"
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.RationalStratumFiniteFreeModel",
+  "date": "2026-10-27",
+  "group": "F8"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-per-rational-stratum-finite-free-model",
+   "place": "proof steps 4 and 5: realization of normalized presentation and tail equations",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-deligne-laumon-a1",
+ "unit": "sk-p-dl-a1-perverse",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.ConstantMatrixCokernelModels",
+  "file": "lean/Sheaf/CategoryTheory/ConstantMatrixCokernelModels.lean",
+  "declaration": "CategoryTheory.ConstantFiniteFreePresentationExtension.constantMatrixCokernelModels",
+  "statement": "theorem constantMatrixCokernelModels (V : ModuleCat.{max u v} R) (m n : ℕ) (D : Matrix (Fin n) (Fin m) R) (p : ModuleCat.of R (Fin n → R) ⟶ V) (a₀ : V ≅ cokernel (ModuleCat.ofHom (Matrix.toLin' D))) (hp : p ≫ a₀.hom = cokernel.π (ModuleCat.ofHom (Matrix.toLin' D))) : ∃ (dB : Pow m ⟶ Pow n) (pB : Pow n ⟶ Real V) (w : Real V ≅ cokernel dB), pB ≫ w.hom = cokernel.π dB ∧ (∀ (U : Cᵒᵖ) (x : (Pow m).val.obj U) (i : Fin n), commCoordinate J B n U (dB.val.app U x) i = ∑ j : Fin m, cs U (D i j) * commCoordinate J B m U x j) ∧ (∀ (U : Cᵒᵖ) (x : Fin n → R), ∃ y : (Pow n).val.obj U, (∀ i : Fin n, commCoordinate J B n U y i = cs U (x i)) ∧ pB.val.app U y = scalarConstantGenerator J R B σ V U 1 (p x)) ∧ (∀ (r : ℕ) (t : Fin r → Fin n) (P : Matrix.GeneralLinearGroup (Fin n) R) (Q : Matrix.GeneralLinearGroup (Fin m) R) (a : cokernel (ModuleCat.ofHom (Matrix.toLin' D)) ≅ ModuleCat.of R (Fin r → R)), (∀ (x : Fin n → R) (j : Fin r), a.hom (cokernel.π (ModuleCat.ofHom (Matrix.toLin' D)) x) j = (P : Matrix (Fin n) (Fin n) R).mulVec x (t j)) → ∃ (p' : Pow n ≅ Pow n) (q' : Pow m ≅ Pow m) (b : cokernel dB ≅ Pow r), (∀ (U : Cᵒᵖ) (x : (Pow n).val.obj U) (i : Fin n), commCoordinate J B n U (p'.hom.val.app U x) i = ∑ j : Fin n, cs U (P i j) * commCoordinate J B n U x j) ∧ (∀ (U : Cᵒᵖ) (x : (Pow n).val.obj U) (i : Fin n), commCoordinate J B n U (p'.inv.val.app U x) i = ∑ j : Fin n, cs U ((P⁻¹ : Matrix.GeneralLinearGroup (Fin n) R) i j) * commCoordinate J B n U x j) ∧ (∀ (U : Cᵒᵖ) (x : (Pow m).val.obj U) (i : Fin m), commCoordinate J B m U (q'.hom.val.app U x) i = ∑ j : Fin m, cs U (Q i j) * commCoordinate J B m U x j) ∧ (∀ (U : Cᵒᵖ) (x : (Pow m).val.obj U) (i : Fin m), commCoordinate J B m U (q'.inv.val.app U x) i = ∑ j : Fin m, cs U ((Q⁻¹ : Matrix.GeneralLinearGroup (Fin m) R) i j) * commCoordinate J B m U x j) ∧ (∀ (U : Cᵒᵖ) (x : (Pow n).val.obj U) (j : Fin r), commCoordinate J B r U (b.hom.val.app U ((cokernel.π dB).val.app U x)) j = commCoordinate J B n U (p'.hom.val.app U x) (t j)))",
+  "branch": "sheaf-dag",
+  "by": "F8",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F8",
+  "result": "pass",
+  "landing": "20261026T235858-L-1464850",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F8",
+  "result": "pass",
+  "landing": "20261026T235858-L-1464850",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

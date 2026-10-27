@@ -1,0 +1,112 @@
+{
+ "id": "lem-pbc-coefficient-restriction-tensor-comparison",
+ "kind": "statement",
+ "title": "Restriction along a coefficient isomorphism intertwines canonical tensor pullback",
+ "statement": "Let $f:X\\to Y$ be a morphism of schemes, let $R$ and $S$ be sheaves of commutative rings on their small pro-etale sites, and let $c:f^{-1}R\\cong S$ be an isomorphism [def-weil-pbc-proetale-operations]. Write $U:D(S)\\to D(f^{-1}R)$ for exact derived restriction along $c$ [lem-weil-pbc-ring-sheaf-change-adjunction]. Let $L_c$ and $L_i$ be geometric pullback with coefficients $c$ and the identity of the literal inverse-image ring. Let $b:L_c;U\\cong L_i$ be the canonical restriction/pullback comparison, with identity scalar restriction on the base removed by the canonical exact-derived identity comparison. Fix signed-total flat K-flat tensor models $a_Y,z,a_X$ for $R,f^{-1}R,S$ respectively [def-sfb-proetale-tensor-model], with canonical geometric tensor comparisons $\\alpha_i,\\alpha_c$ [lem-weil-pbc-ringed-topoi-derived-tensor-pullback]. There exists a natural isomorphism $\\rho:z(U(-),U(-))\\cong U(a_X(-,-))$ such that for all $F,G\\in D(R)$,\n$$b_{a_Y(F,G)};\\alpha_i(F,G)=U(\\alpha_c(F,G));\\rho^{-1}_{L_cF,L_cG};z(b_F,b_G).$$\nAll derived categories are ordinary and unbounded. The statement concerns only tensor and inverse image; it neither contains a direct image nor asserts a projection formula.",
+ "stmt_deps": [
+  "def-weil-pbc-proetale-operations",
+  "def-sfb-proetale-tensor-model",
+  "lem-weil-pbc-ring-sheaf-change-adjunction",
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+  "lem-pbc-coefficient-pullback-factorization"
+ ],
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex; literature/stacks-project/sites-modules.tex",
+  "place": "lemma-pullback-tensor-product (Tag 07A4), lemma-adjoint (Tag 07A6), and lemma-tensor-product-pullback (Tag 03EL); coefficient-isomorphism tensor subargument of equation-projection-formula-map (Tag 0B56)."
+ },
+ "proof": [
+  {
+   "text": "Apply the repaired compatibility theorem, which constructs the tensor comparison by descent of the chain square and proves its compatibility with the canonical coefficient pullback comparison. The exported identityRestriction and pullback definitions have moved verbatim to the publicly imported coefficient-pullback support module; the parent statement and all existing definition bodies are unchanged.",
+   "uses": [
+    "lem-pbc-coefficient-restriction-tensor-comparison-compatibility"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-pbc-coefficient-restriction-tensor-comparison-compatibility"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "lean/Sheaf/Paper/ProEtaleCoefficientTensorCompatibility.lean",
+  "place": "Application of the normalized constructed comparison; removes the invalid arbitrary-witness application."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Restriction of scalars along an isomorphism of sheaves of rings commutes with derived tensor product and canonical tensor pullback comparison",
+   "results": "Eight hits on ordinary presheaf/sheaf scalar restriction and ModuleCat scalar restriction functoriality. No derived tensor/pullback coherence statement.",
+   "date": "2026-10-27",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Projection formula morphism transported along an equivalence of coefficient rings and a natural tensor comparison",
+   "results": "Eight unrelated polynomial law, algebra presentation and adic completion tensor hits. No sheaf-derived coefficient tensor comparison.",
+   "date": "2026-10-27",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "restrictScalars.*(Id|id|[Ee]quiv)|mapDerivedCategory.*[Ii]d",
+   "results": "25 returned Mathlib hits on ordinary scalar restriction and unrelated algebra. Direct source searches find canonical geometric tensor pullback and adjunction normalization, but no restriction/tensor coherence for the arbitrary original-site coefficient models. blueprint_refs.py search coefficient tensor restriction finds zero blueprint nodes.",
+   "date": "2026-10-27",
+   "verdict": "no exact match; retain existing normalized pullback and restriction definitions"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.CompletedTensorProjectionCoefficientTransport",
+  "date": "2026-10-27",
+  "group": "F7"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-weil-pbc-direct-image-limits",
+   "place": "Coefficient-isomorphism identification of the tensor projection in the finite-level scalar projection comparison; specifically the tensor-model and tensor-pullback coherence parts, without the direct-image and mate equation.",
+   "via": [
+    "lem-pbc-completed-tensor-projection-coefficient-transport",
+    "lem-pbc-completed-scalar-projection-tensor-comparison"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.ProEtaleCoefficientTensorTransport",
+  "file": "lean/Sheaf/Paper/ProEtaleCoefficientTensorTransport.lean",
+  "declaration": "AlgebraicGeometry.Scheme.CoefficientTensorTransport.tensorComparison",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.CoefficientTensorTransport.tensorComparison"
+  ],
+  "statement": "theorem tensorComparison {X Y : Scheme.{u}} (f : X ⟶ Y)\n    (R : Sheaf (ProEt.topology Y) CommRingCat.{u + 1})\n    (S : Sheaf (ProEt.topology X) CommRingCat.{u + 1})\n    (c : (proEtaleSheafInverseImage f CommRingCat.{u + 1}).obj R ≅ S)\n    (aY : ProEtaleTensorModel Y R)\n    (z : ProEtaleTensorModel X\n      ((proEtaleSheafInverseImage f CommRingCat.{u + 1}).obj R))\n    (aX : ProEtaleTensorModel X S) :\n    ∃ rho : ((pbcDerivedRestrict c.hom).prod (pbcDerivedRestrict c.hom)) ⋙ z.tensor ≅\n        aX.tensor ⋙ pbcDerivedRestrict c.hom,\n      ∀ F G : DerivedCategory (proEtaleRingModules Y R),\n        (pullback f R S c).hom.app (aY.tensor.obj (F, G)) ≫\n          (proEtaleCanonicalTensorComparison f R\n            ((proEtaleSheafInverseImage f CommRingCat.{u + 1}).obj R)\n            (Iso.refl _) aY z).hom.app (F, G) =\n        (pbcDerivedRestrict c.hom).map\n            ((proEtaleCanonicalTensorComparison f R S c aY aX).hom.app (F, G)) ≫\n          rho.inv.app ((proEtaleRingDerivedPullback f R S c).obj F,\n            (proEtaleRingDerivedPullback f R S c).obj G) ≫\n          z.tensor.map (Prod.mkHom ((pullback f R S c).hom.app F)\n            ((pullback f R S c).hom.app G))",
+  "branch": "sheaf-dag",
+  "by": "F7",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F7",
+  "result": "pass",
+  "landing": "20261027T034640-L-3670088",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-dade8",
+  "group": "J1",
+  "result": "fix",
+  "landing": "20261027T072146-L-2804008",
+  "kind": "interface",
+  "note": "independent cc review: item tensorComparison_compatibility (old ∀rho,b false → ∃rho with canonical pullback) against parent tensorComparison (unchanged) and change record; moved identityRestriction/pullback diffed verbatim vs clone a9fbd52; chain-square hole read against RingIsoTensorTransport pure_hom/total_summand and unique proEtaleOrdinaryTensorPullback; stmt_deps against DAG owners; 3b importer OK"
+ }
+}

@@ -1,0 +1,250 @@
+{
+ "id": "lem-sfb-thickening-of-scheme-space",
+ "kind": "statement",
+ "title": "An algebraic-space thickening of a scheme is a scheme",
+ "statement": "Let $S$ be a scheme [def-pc-scheme], and let $i:Z\\hookrightarrow Y$ be a closed immersion of algebraic spaces over $S$ [def-trf-algebraic-space]: after every morphism $T\\to Y$ from a scheme, $Z\\times_YT\\to T$ is a closed immersion of schemes [def-weil-closed-immersion, def-pc-fibre-product]. Suppose $i$ induces a homeomorphism $|Z|\\to|Y|$ of underlying topological spaces (with the atlas topology on point classes [def-a1-space-point-topology]; thus $Y$ is a thickening of $Z$), and $Z$ is representable by a scheme. Then $Y$ is representable by a scheme. No finiteness or Noetherian hypothesis is imposed.",
+ "source": {
+  "document": "literature/stacks-project/spaces-more-morphisms.tex",
+  "place": "Tag 05ZR (lemma-thickening-scheme), full statement."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-trf-algebraic-space",
+  "def-weil-closed-immersion",
+  "def-pc-fibre-product",
+  "def-a1-space-point-topology",
+  "def-sfb-proper-curve-moduli"
+ ],
+ "proof": [
+  {
+   "text": "Choose a set-indexed affine open cover $Z=\\bigcup_aU_a$. Under the given homeomorphism, $O_a=|i|(|U_a|)$ is open in $|Y|$. The open-subspace correspondence gives an open subspace $V_a\\subseteq Y$ with $|V_a|=O_a$. The base change $Z\\times_YV_a\\to Z$ is an open subspace with underlying subset $|i|^{-1}(O_a)=|U_a|$. Since open subspaces are determined by their point subsets, it is precisely $U_a\\subseteq Z$. In particular $U_a\\to V_a$ is the base change of $i$.",
+   "uses": [
+    "def-pc-scheme",
+    "lem-a1-space-etale-open-image",
+    "lem-a1-space-open-factor-scheme-tests",
+    "lem-a1-space-point-open-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-limits.tex",
+    "place": "Tag 07VU (lemma-reduction-scheme), affine-open argument, applied directly to Z; open correspondence: spaces-properties.tex Tag 03BZ (lemma-open-subspaces)."
+   }
+  },
+  {
+   "text": "The thickening base-change lemma makes $U_a\\to V_a$ a closed immersion inducing a homeomorphism, hence a surjection on points. To check finiteness, let $T\\to V_a$ be any scheme test. By the definition of a closed immersion, $U_a\\times_{V_a}T\\to T$ is a closed immersion of schemes, hence finite by the cited scheme lemma. Thus $U_a\\to V_a$ is finite on every scheme test. This uses no finite-presentation assertion about $i$ and no nilpotence bound.",
+   "uses": [
+    "lem-sfb-space-thickening-base-change",
+    "lem-weil-pbc-closed-immersion-finite"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-limits.tex",
+    "place": "Tag 07VU (lemma-reduction-scheme), surjective integral map of the corresponding opens; here finite by morphisms.tex Tag 035C (lemma-closed-immersion-finite); base change: spaces-more-morphisms.tex Tag 09ZX (lemma-base-change-thickening)."
+   }
+  },
+  {
+   "text": "Apply finite-surjective affine-source descent to $U_a\\to V_a$. Its source is affine by construction and step 2 verified its finiteness and surjectivity. It follows that each $V_a$ is represented by an affine scheme. The open subsets $|V_a|=|i|(|U_a|)$ cover $|Y|$ because the $U_a$ cover $Z$ and $|i|$ is surjective.",
+   "uses": [
+    "lem-sfb-finite-surjective-affine-space-target"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-limits.tex",
+    "place": "Tag 07VS (lemma-affine); the local-affineness argument of Tag 07VU (lemma-reduction-scheme)."
+   }
+  },
+  {
+   "text": "Apply the scheme representability criterion to the functor $Y$ and its subfunctors $V_a$. The functor $Y$ is an fppf sheaf by the definition of algebraic space, hence a Zariski sheaf. Each $V_a$ is representable by step 3, and its inclusion is representable by open immersions. For any scheme $T\\to Y$, the pullbacks $T\\times_YV_a$ are open subschemes of $T$. Their underlying sets are the inverse images of $|V_a|$, so they cover $T$. This verifies the covering hypothesis of the criterion on every scheme test, not merely on field-valued points. The criterion gives a scheme over $S$ representing $Y$.",
+   "uses": [
+    "def-trf-algebraic-space",
+    "lem-a1-space-open-factor-scheme-tests",
+    "lem-pc-schemes-criterion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Tag 01JJ (lemma-glue-functors); spaces-limits.tex Tag 07VU (lemma-reduction-scheme), last sentence; spaces-more-morphisms.tex Tag 05ZR (lemma-thickening-scheme)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-scheme",
+  "lem-a1-space-etale-open-image",
+  "lem-a1-space-open-factor-scheme-tests",
+  "lem-a1-space-point-open-calculus",
+  "lem-sfb-space-thickening-base-change",
+  "lem-weil-pbc-closed-immersion-finite",
+  "lem-sfb-finite-surjective-affine-space-target",
+  "def-trf-algebraic-space",
+  "lem-pc-schemes-criterion"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/spaces-limits.tex",
+  "place": "Tag 07VU (lemma-reduction-scheme), its affine-open proof underlying Tag 05ZR (lemma-thickening-scheme) in spaces-more-morphisms.tex. Apply that open-cover argument directly to the surjective closed immersion Z -> Y and use Tag 07VS (lemma-affine), the finite case of Tag 07VT, instead of introducing reductions."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "An algebraic space which is a nilpotent thickening of a scheme is a scheme",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.Etale\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"AlgebraicGeometry.Scheme → Type (u + 1)\", \"doc\": \"The property of being an étale morphism to a fixed scheme $X$, defined as morphisms that are smooth of relative dimension 0, constructed via the morphism property lifting over $X$.\"}\n  {\"name\": \"AlgebraicGeometry.FormallyUnramified\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FormallyUnramified\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"A morphism $ f: X \\\\to Y $ of schemes is formally unramified if it satisfies the infinitesimal lifting property characterizing formal unramification, meaning there are no nontrivial deformations of $ f\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.IdealSheafData.instIsPreimmersionSubschemeι\", \"module\": \"Mathlib/AlgebraicGeometry/IdealSheaf/Subscheme\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} (I : X.IdealSheafData), AlgebraicGeometry.IsPreimmersion I.subschemeι\", \"doc\": \"For any scheme $ X $ and ideal sheaf $ \\\\mathcal{I} $ on $ X $, the canonical morphism from the closed subscheme defined by $ \\\\mathcal{I} $ to $ X $ satisfies the conditions of a preimmersion in algebr\"}\n  {\"name\": \"AlgebraicGeometry.LocallyRingedSpace.IsOpenImmersion.scheme\", \"module\": \"Mathlib/AlgebraicGeometry/OpenImmersion\", \"type\": \"(X : AlgebraicGeometry.LocallyRingedSpace) →\\n  (∀ (x : ↑X.toTopCat),\\n      ∃ R f,\\n        x ∈ Set.range ⇑(CategoryTheory.ConcreteCategory.hom f.base) ∧\\n          AlgebraicGeometry.LocallyRingedSpace.IsOpenImmersion f) →\\n    AlgebraicGeometry.Scheme\", \"doc\": \"A locally ringed space $ X $ is a scheme if every point $ x \\\\in X $ is contained in the image of an open immersion from the spectrum of some commutative ring $ R $. This establishes that $ X $ is loca\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.IdealSheafData.instIsPreimmersionGlueDataObjι\", \"module\": \"Mathlib/AlgebraicGeometry/IdealSheaf/Subscheme\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} (I : X.IdealSheafData) (U : ↑X.affineOpens),\\n  AlgebraicGeometry.IsPreimmersion (I.glueDataObjι U)\", \"doc\": \"For a scheme $X$ with ideal sheaf data $\\\\mathcal{I}$ and an affine open subset $U \\\\subseteq X$, the morphism associated to the gluing data of the closed subscheme defined by $\\\\mathcal{I}$ is a preimme\"}\n  {\"name\": \"AlgebraicGeometry.IsEtale\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"A morphism $ f: X \\\\to Y $ of schemes is étale if it is smooth of relative dimension 0.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme\", \"module\": \"Mathlib/AlgebraicGeometry/Scheme\", \"type\": \"Type (u_1 + 1)\", \"doc\": \"The type of schemes in algebraic geometry.\"}\n  {\"name\": \"AlgebraicGeometry.IsAffine\", \"module\": \"Mathlib/AlgebraicGeometry/AffineScheme\", \"type\": \"AlgebraicGeometry.Scheme → Prop\", \"doc\": \"A predicate indicating whether a given scheme is affine.\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: returned scheme and locally-ringed-space constructions assume scheme data; they do not prove representability of an algebraic-space thickening"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "If the reduction of an algebraic space is representable by a scheme then the algebraic space is a scheme",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme\", \"module\": \"Mathlib/AlgebraicGeometry/Scheme\", \"type\": \"Type (u_1 + 1)\", \"doc\": \"The type of schemes in algebraic geometry.\"}\n  {\"name\": \"AlgebraicGeometry.LocallyRingedSpace.IsOpenImmersion.scheme\", \"module\": \"Mathlib/AlgebraicGeometry/OpenImmersion\", \"type\": \"(X : AlgebraicGeometry.LocallyRingedSpace) →\\n  (∀ (x : ↑X.toTopCat),\\n      ∃ R f,\\n        x ∈ Set.range ⇑(CategoryTheory.ConcreteCategory.hom f.base) ∧\\n          AlgebraicGeometry.LocallyRingedSpace.IsOpenImmersion f) →\\n    AlgebraicGeometry.Scheme\", \"doc\": \"A locally ringed space $ X $ is a scheme if every point $ x \\\\in X $ is contained in the image of an open immersion from the spectrum of some commutative ring $ R $. This establishes that $ X $ is loca\"}\n  {\"name\": \"AlgebraicGeometry.IsAffine\", \"module\": \"Mathlib/AlgebraicGeometry/AffineScheme\", \"type\": \"AlgebraicGeometry.Scheme → Prop\", \"doc\": \"A predicate indicating whether a given scheme is affine.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.LocalRepresentability.isRepresentable\", \"module\": \"Mathlib/AlgebraicGeometry/Sites/Representability\", \"type\": \"∀ {F : CategoryTheory.Sheaf AlgebraicGeometry.Scheme.zariskiTopology (Type u)} {ι : Type u}\\n  {X : ι → AlgebraicGeometry.Scheme} {f : (i : ι) → CategoryTheory.yoneda.obj (X i) ⟶ F.val},\\n  (∀ (i : ι), AlgebraicGeometry.IsOpenImmersion.presheaf (f i)) →\\n    ∀\\n      [CategoryTheory.Presheaf.IsLocallySu\", \"doc\": \"The functor $ F $ is representable, meaning there exists an object $ X $ in the category of schemes such that $ F $ is naturally isomorphic to the Hom functor $ \\\\mathrm{Hom}(-, X) $.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.LocalRepresentability.representableBy\", \"module\": \"Mathlib/AlgebraicGeometry/Sites/Representability\", \"type\": \"{F : CategoryTheory.Sheaf AlgebraicGeometry.Scheme.zariskiTopology (Type u)} →\\n  {ι : Type u} →\\n    {X : ι → AlgebraicGeometry.Scheme} →\\n      {f : (i : ι) → CategoryTheory.yoneda.obj (X i) ⟶ F.val} →\\n        (hf : ∀ (i : ι), AlgebraicGeometry.IsOpenImmersion.presheaf (f i)) →\\n          [CategoryThe\", \"doc\": \"The functor $ F $ is representable by the scheme constructed from Zariski gluing data $ \\\\text{glueData} $ and condition $ hf $, establishing a natural isomorphism between $ F $ and the Yoneda embeddin\"}\n  {\"name\": \"AlgebraicGeometry.IsIntegral\", \"module\": \"Mathlib/AlgebraicGeometry/Properties\", \"type\": \"AlgebraicGeometry.Scheme → Prop\", \"doc\": \"The predicate for a scheme to be integral\"}\n  {\"name\": \"AlgebraicGeometry.PresheafedSpace.IsOpenImmersion.toScheme\", \"module\": \"Mathlib/AlgebraicGeometry/OpenImmersion\", \"type\": \"{X : AlgebraicGeometry.PresheafedSpace CommRingCat} →\\n  (Y : AlgebraicGeometry.Scheme) →\\n    (f : X ⟶ Y.toPresheafedSpace) → [H : AlgebraicGeometry.PresheafedSpace.IsOpenImmersion f] → AlgebraicGeometry.Scheme\", \"doc\": \"Given an open immersion from a presheafed space into a scheme, this constructs the scheme structure on the presheafed space by inheriting the local affine structure through the open immersion, ensurin\"}\n  {\"name\": \"AlgebraicGeometry.isAffine_affineScheme\", \"module\": \"Mathlib/AlgebraicGeometry/AffineScheme\", \"type\": \"∀ (X : AlgebraicGeometry.AffineScheme), AlgebraicGeometry.IsAffine X.obj\", \"doc\": \"The category of affine schemes is the full subcategory of the category of schemes consisting of schemes isomorphic to the prime spectrum of a commutative ring. This subcategory is the essential image \"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: returned scheme and locally-ringed-space constructions assume scheme data; they do not prove representability of an algebraic-space thickening"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicSpace\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-22",
+   "verdict": "no match: returned scheme and locally-ringed-space constructions assume scheme data; they do not prove representability of an algebraic-space thickening"
+  },
+  {
+   "tool": "grep",
+   "query": "AlgebraicSpace|thickening.*scheme|scheme.*thickening",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-22",
+   "verdict": "no match: returned scheme and locally-ringed-space constructions assume scheme data; they do not prove representability of an algebraic-space thickening"
+  },
+  {
+   "tool": "leansearch",
+   "query": "An algebraic space which is a nilpotent thickening of a scheme is a scheme",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.mk.noConfusion\", \"module\": \"Mathlib.AlgebraicGeometry.Scheme\", \"type\": \"{P : Sort u} →\\n  {toLocallyRingedSpace : AlgebraicGeometry.LocallyRingedSpace} →\\n    {local_affine :\\n        ∀ (x : ↑toLocallyRingedSpace.toTopCat),\\n          ∃ U R,\\n            Nonempty\\n              (toLocallyRingedSpace.restrict ⋯ ≅ AlgebraicGeometry.Spec.toLocallyRingedSpace.obj (Opposite.op R))\", \"doc\": \"A scheme is a locally ringed space such that every point has an open neighborhood isomorphic to the affine scheme associated to some commutative ring, constructed via the Spec functor applied to the o\"}\n  {\"name\": \"AlgebraicGeometry.Scheme\", \"module\": \"Mathlib.AlgebraicGeometry.Scheme\", \"type\": \"Type (u_1 + 1)\", \"doc\": \"The type of schemes in algebraic geometry.\"}\n  {\"name\": \"AlgebraicGeometry.FormallyUnramified.casesOn\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.FormallyUnramified\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} →\\n  {f : X ⟶ Y} →\\n    {motive : AlgebraicGeometry.FormallyUnramified f → Sort u_1} →\\n      (t : AlgebraicGeometry.FormallyUnramified f) →\\n        ((formallyUnramified_appLE :\\n              ∀ {U : Y.Opens},\\n                AlgebraicGeometry.IsAffineOpen U →\\n          \", \"doc\": \"A morphism $ f: X \\to Y $ of schemes is formally unramified if it satisfies the infinitesimal lifting property characterizing formal unramification, meaning there are no nontrivial deformations of $ f \"}\n  {\"name\": \"AlgebraicGeometry.FormallyUnramified.recOn\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.FormallyUnramified\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} →\\n  {f : X ⟶ Y} →\\n    {motive : AlgebraicGeometry.FormallyUnramified f → Sort u_1} →\\n      (t : AlgebraicGeometry.FormallyUnramified f) →\\n        ((formallyUnramified_appLE :\\n              ∀ {U : Y.Opens},\\n                AlgebraicGeometry.IsAffineOpen U →\\n          \", \"doc\": \"A morphism $ f: X \\to Y $ of schemes is formally unramified if it satisfies the infinitesimal lifting property characterizing formal unramification, meaning there are no nontrivial deformations of $ f \"}\n  {\"name\": \"AlgebraicGeometry.isIntegral_of_irreducibleSpace_of_isReduced\", \"module\": \"Mathlib.AlgebraicGeometry.Properties\", \"type\": \"[IsReduced X] [H : IrreducibleSpace X] : IsIntegral X\", \"doc\": \"If a scheme $X$ is irreducible as a topological space and has no nonzero nilpotent elements in its structure sheaf (i.e., is reduced), then $X$ is an integral scheme.\"}\n  {\"name\": \"AlgebraicGeometry.isReduced_of_isReduced_stalk\", \"module\": \"Mathlib.AlgebraicGeometry.Properties\", \"type\": \"[∀ x : X, _root_.IsReduced (X.presheaf.stalk x)] : IsReduced X\", \"doc\": \"If for every point $ x $ in a scheme $ X $, the stalk of the structure sheaf at $ x $ is a reduced ring (i.e., contains no nonzero nilpotent elements), then the scheme $ X $ is reduced.\"}\n  {\"name\": \"AlgebraicGeometry.IsReduced.mk\", \"module\": \"Mathlib.AlgebraicGeometry.Properties\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme},\\n  autoParam (∀ (U : X.Opens), IsReduced ↑(X.presheaf.obj (Opposite.op U)))\\n      AlgebraicGeometry.IsReduced.component_reduced._autoParam →\\n    AlgebraicGeometry.IsReduced X\", \"doc\": \"A scheme $ X $ is reduced if for every open subset $ U $ of $ X $, the ring of sections $ \\\\mathcal{O}_X(U) $ is reduced (i.e., contains no nonzero nilpotent elements).\"}\n  {\"name\": \"AlgebraicGeometry.isReduced_of_isAffine_isReduced\", \"module\": \"Mathlib.AlgebraicGeometry.Properties\", \"type\": \"[IsAffine X] [_root_.IsReduced Γ(X, ⊤)] : IsReduced X\", \"doc\": \"If $X$ is an affine scheme and the ring of global sections $\\\\Gamma(X, \\\\mathcal{O}_X)$ is reduced (i.e., contains no nonzero nilpotent elements), then the scheme $X$ itself is reduced (i.e., all its lo\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: returned scheme and locally-ringed-space constructions assume scheme data; they do not prove representability of an algebraic-space thickening"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An algebraic space which is a thickening of a scheme is representable by a scheme",
+   "results": "Actual logged search: 8 hits; AlgebraicGeometry.Scheme.LocalRepresentability.representableBy, AlgebraicGeometry.Scheme.LocalRepresentability.isRepresentable, AlgebraicGeometry.PresheafedSpace.IsOpenImmersion.toScheme, AlgebraicGeometry.Scheme, AlgebraicGeometry.LocallyRingedSpace.IsOpenImmersion.scheme, AlgebraicGeometry.Scheme.CanonicallyOver, AlgebraicGeometry.AffineScheme, AlgebraicGeometry.Scheme.Etale. ",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme constructors and the open-cover representability criterion do not establish that a thickening of a scheme admits a scheme open cover; there is no AlgebraicSpace hit. The representability criterion already has DAG node lem-pc-schemes-criterion."
+  },
+  {
+   "tool": "grep",
+   "query": "AlgebraicSpace|thickening.*scheme|scheme.*thickening",
+   "results": "Actual logged search: 0 hits; . Subdirectory: AlgebraicGeometry. ",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme constructors and the open-cover representability criterion do not establish that a thickening of a scheme admits a scheme open cover; there is no AlgebraicSpace hit. The representability criterion already has DAG node lem-pc-schemes-criterion."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicSpace\"",
+   "results": "Actual logged search: 0 hits; . ",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme constructors and the open-cover representability criterion do not establish that a thickening of a scheme admits a scheme open cover; there is no AlgebraicSpace hit. The representability criterion already has DAG node lem-pc-schemes-criterion."
+  },
+  {
+   "tool": "leansearch",
+   "query": "An algebraic space which is a thickening of a scheme is representable by a scheme",
+   "results": "Actual logged search: 8 hits; AlgebraicGeometry.Scheme.mk.noConfusion, AlgebraicGeometry.Scheme.LocalRepresentability.isRepresentable, AlgebraicGeometry.Scheme, AlgebraicGeometry.Scheme.LocalRepresentability.representableBy, AlgebraicGeometry.Scheme.mk, AlgebraicGeometry.Scheme.local_affine, AlgebraicGeometry.LocallyRingedSpace.IsOpenImmersion.scheme, AlgebraicGeometry.IsAffine.recOn. ",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme constructors and the open-cover representability criterion do not establish that a thickening of a scheme admits a scheme open cover; there is no AlgebraicSpace hit. The representability criterion already has DAG node lem-pc-schemes-criterion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "If the reduction of an algebraic space is a scheme then the algebraic space is a scheme",
+   "results": "Actual logged search: 8 hits; AlgebraicGeometry.IsAffine, AlgebraicGeometry.Scheme, AlgebraicGeometry.IsIntegral, AlgebraicGeometry.AffineScheme.of, AlgebraicGeometry.isAffine_affineScheme, AlgebraicGeometry.LocallyRingedSpace.IsOpenImmersion.scheme, AlgebraicGeometry.Scheme.mk.inj, AlgebraicGeometry.AffineScheme. ",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme constructors and the open-cover representability criterion do not establish that a thickening of a scheme admits a scheme open cover; there is no AlgebraicSpace hit. The representability criterion already has DAG node lem-pc-schemes-criterion."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-curve-formal-effectivity",
+  "date": "2026-10-22",
+  "group": "Q66"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Algebraicity and smoothness of the stack of all nodal curves. Supporting input: Tag 0D58 (lemma-curves-existence). Proof detail: Tag 0E7R proof, first paragraph after the first medskip: each X_n is a scheme by Tag 05ZR.",
+   "via": [
+    "lem-sfb-curve-formal-effectivity",
+    "lem-sfb-nodal-curve-stack-smooth",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-thickening-of-scheme-space",
+  "worker": "stage1",
+  "summary": "Q122: read Tag 05ZR and the general affine-open proof of 07VU; handled arbitrary thickenings via corresponding affine opens and finite-surjective descent 07VS, avoiding the finite-order-only alternative. Reused existing open-subspace, base-change, closed-immersion-finite, and scheme-gluing nodes; created only the general algebraic-space finite-surjective affine-target input. Statement unchanged; no Lean edits or builds.",
+  "blueprint": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Algebraicity and smoothness of the stack of all nodal curves. Supporting input: Tag 0D58 (lemma-curves-existence). Proof detail: Tag 0E7R proof, first paragraph after the first medskip: each X_n is a scheme by Tag 05ZR. Steps 1-4 discharge the Tag 05ZR input using its general affine-open route; newest blueprint direct-images proof (3) remains the surrounding route.",
+  "tool_uses": [
+   {
+    "node": "lem-a1-space-etale-open-image",
+    "why": "Use only the open-subspace/open-subset bijection, a general topology tool absent from this unit."
+   },
+   {
+    "node": "lem-a1-space-open-factor-scheme-tests",
+    "why": "Use arbitrary pullback of an open subspace and its point inverse image, a general algebraic-space tool."
+   },
+   {
+    "node": "lem-a1-space-point-open-calculus",
+    "why": "Use uniqueness of an open subspace from its point subset, a general topology tool."
+   },
+   {
+    "node": "lem-pc-schemes-criterion",
+    "why": "Use Zariski-local scheme representability after constructing an affine open cover, a general gluing tool; no replacement of a unit step."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-a1-space-etale-open-image",
+  "lem-a1-space-open-factor-scheme-tests",
+  "lem-a1-space-point-open-calculus",
+  "lem-pc-schemes-criterion"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q122-1e3203983",
+  "group": "Q122",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q122-1e3203983 (reviewer sub-agent of L); spot-checked: I read the item and the new node in full. The item statement is unchanged and agrees with Stacks 05ZR (spaces-more-morphisms l.1730): a thickening is a closed immersion that is a homeomorphism on |·|, with no finiteness or Noetherian hypothesis. The four steps carry out the general proof of 07VU (spaces-limits l.3482) on i:Z→Y directly. Step 1: affine opens U_a; V_a is the open subspace over the image (03BZ via lem-a1-space-etale-open-image); Z×_YV_a=U_a by the arbitrary-pullback clause of open-factor-scheme-tests and the inclusion criterion of point-open-calculus. Step 2: U_a→V_a is a thickening by the arbitrary-T clause of lem-sfb-space-thickening-base-change, and finite on scheme tests by 035C; marked elementary, rightly. Step 3: the new node gives V_a affine (V_a is an algebraic space by def-a1-space-open-subspace). Step 4: the 01JJ criterion (schemes.tex l.2893) applies, with Zariski sheaf from fppf sheaf, inclusions open immersions, and covering checked on each T through the point-image clause. The new node lem-sfb-finite-surjective-affine-space-target is Stacks 07VS (spaces-limits l.3375). Finite means representable and finite on scheme tests, surjective means |f| surjective, and there is no Noetherian hypothesis. It is statement-only and self-contained, and I tested it on X=∅ (Y=Spec 0), Spec k→Spec k[ε] and P^1. I searched the whole DAG for 07VS/07VT/07VU/05ZR and for affine-target statements on algebraic spaces and found no duplicate: lem-sfb-noetherian-space-finite-affine-descent needs a Noetherian target, and 05YU/06AD are for schemes only. Batch 5: def-trf-algebraic-space and lem-trf-space-fibre-products-etale-covers are general foundations (025Y, 02X2/041F). The four a1/sfb space nodes reach the trace-formula chapter only through that definition and are general point/open/base-change calculus. None is a result or proof step of the trace formula or Poincaré duality, so all are accepted. There is no SGA citation, and the blueprint from.node null is inherited from the existing chain. The generic tool_uses (a1 topology nodes, lem-pc-schemes-criterion, closed-immersion-finite) are accepted. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.ThickeningOfSchemeSpace",
+  "declaration": "AlgebraicGeometry.AlgebraicSpace.isRepresentable_of_thickening",
+  "file": "lean/Sheaf/AlgebraicGeometry/ThickeningOfSchemeSpace.lean",
+  "statement": "theorem isRepresentable_of_thickening {S : Scheme.{u}} (Z Y : AlgebraicSpace S) (i : Z ⟶ Y) (hi : IsRepresentableWith (fun _ _ p ↦ IsClosedImmersion p.left) i.hom.hom) (hiTop : IsHomeomorph (mapPoint i.hom.hom)) (hZ : Z.obj.obj.IsRepresentable) : Y.obj.obj.IsRepresentable",
+  "branch": "newtargets-dag",
+  "by": "Q21",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "Uses the existing canonical mapPoint from the landed def-sfb-proper-curve-moduli module; that node is added to stmt_deps solely for this helper. Arbitrary thickenings, with no finite-order, finite-type or Noetherian condition."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-49e7c10fb",
+  "group": "Q21",
+  "result": "pass",
+  "note": "Statement matches node and Stacks 05ZR (spaces-more-morphisms l.1730; def 05ZM l.1508). hi = IsRepresentableWith IsClosedImmersion on every Over S test with real IsPullback; hiTop = IsHomeomorph (mapPoint i.hom.hom) with the def-a1 final atlas topology, same convention as landed exists_affineThickeningPushout; hZ/conclusion = Mathlib Functor.IsRepresentable on (Over S)^op ⥤ Type u. No extra finiteness/Noetherian/qc hypotheses, single universe u, edge cases (empty, identity, dual numbers, non-nilpotent nil ideals) covered. Added stmt_dep def-sfb-proper-curve-moduli owns mapPoint, landed, no cycle. lean.statement verbatim; no defs; sorry only; docstrings with source, blueprint tag and 4 proof steps; report sections present; no duplicate in Mathlib/project; item not landed elsewhere. No compile needed (no file changed)."
+ }
+}

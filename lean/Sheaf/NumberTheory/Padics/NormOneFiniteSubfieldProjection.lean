@@ -10,8 +10,10 @@ public import Mathlib.FieldTheory.IsAlgClosed.AlgebraicClosure
 public import Mathlib.Topology.Algebra.IntermediateField
 public import Mathlib.Topology.Algebra.Module.ContinuousLinearMap.Basic
 import Mathlib.Analysis.Normed.Module.FiniteDimension
-import Mathlib.Topology.Compactness.Compact
-import Mathlib.Order.Zorn
+import Mathlib.Analysis.Normed.Group.Ultra
+import Mathlib.NumberTheory.Padics.ProperSpace
+import Sheaf.Analysis.Normed.Module.AdmissibleScalarBalls
+import Sheaf.Analysis.Normed.Module.ContractiveExtensionFromAdmissibleValues
 
 /-! # Norm-one projection onto a finite p-adic subfield
 
@@ -38,38 +40,58 @@ Source: Weil blueprint, main-20261015, `sec-six-functors-basics`,
 `sk-thm-sf-ctf-stability-direct-images.proof.md`, paragraph (3), scalar tame-kernel expansion
 (blueprint: lem-sfb-norm-one-finite-subfield-projection).
 
-Proof (the node's direct compact-ball and Zorn argument):
-1. The restriction of the ambient norm to F is its extending p-adic absolute value by
-   lem-weil-l-adic-extension-absolute-value (uniqueness). Every closed ball in F is compact
-   by lem-weil-l-adic-extension-proper. The identity on the subspace F is contractive.
-2. Given a contractive F-linear partial retraction g on U containing F and x outside U,
-   set R_u = ‖x-u‖ and B_u = {b in F | ‖b-g(u)‖ ≤ R_u}. Contractivity and the ultrametric
-   inequality give ‖g(u)-g(v)‖ ≤ max R_u R_v. Therefore R_u ≤ R_v implies B_u ⊆ B_v.
-   Each ball contains its center and is closed by continuity of the norm.
-3. B_0 is a nonempty compact ball. For a finite family, choose a least radius among its
-   indices and 0; the corresponding center lies in all its balls and B_0. Thus the closed
-   subsets B_0 ∩ B_u have the finite intersection property, including the empty family.
-   Apply lem-sfb-compact-closed-finite-intersection inside B_0 to find b in every B_u.
-4. Every element of U+Fx has a unique expression u+ax, since x is outside U. Set
-   G(u+ax) = g(u)+ab. Uniqueness gives linearity and extension of g. For a ≠ 0 put
-   v = -a⁻¹u. Then ‖G(u+ax)‖ = ‖a‖ * ‖b-g(v)‖ ≤ ‖a‖ * ‖x-v‖ = ‖u+ax‖.
-   For a = 0 use the bound on g. Hence G is a strictly larger partial retraction.
-5. Order the graphs of contractive partial retractions fixing F by inclusion. They form
-   a set of subsets of Ω × F. The identity graph belongs to this set. A nonempty chain
-   has its union as an upper bound: comparability gives single-valuedness, and any two
-   arguments occur together in one member, proving linearity. Fixing F and the bound
-   hold pointwise in a chain member. The empty chain is bounded by the identity graph.
-6. Apply lem-weil-pbc-zorn-lemma to obtain a maximal graph. If its domain is not all Ω,
-   step 4 strictly enlarges it, a contradiction. Its map is the desired retraction.
-7. It fixes F and satisfies the asserted bound by construction. Linearity gives
-   ‖p(x)-p(y)‖ ≤ ‖x-y‖; choosing δ = ε proves continuity. At 1 the bound is an equality,
-   so the norm is one. All compactness used above is in F, without completing Ω.
+Proof:
+1. The norm of F is the restriction of the norm of Ω by construction. By
+   FiniteDimensional.proper, its closed balls are compact. The ultrametric inequality
+   on Ω restricts to F. Identify F with the range W of its F-linear inclusion into Ω;
+   the inverse f : W →ₗ[F] F is isometric.
+2. Apply lem-sfb-admissible-scalar-balls with K = F and V = Ω. Compactness from step 1
+   supplies its closed-ball hypothesis, so every contractive partial functional admits
+   a scalar satisfying all constraints for a one-vector extension.
+3. Apply lem-sfb-contractive-extension-from-admissible-values to the nonnegative norms,
+   W, and f. The normed-field axioms give multiplicativity and scalar homogeneity;
+   step 1 gives the ultrametric inequalities and the bound on f. The resulting linear
+   h : Ω →ₗ[F] F extends f and satisfies ‖h x‖ ≤ ‖x‖. Evaluating its extension property
+   at the image of a : F gives h a = a.
+4. LinearMap.mkContinuous with bound 1 bundles h as a continuous linear map without
+   changing its values. It still fixes F and satisfies the same bound. Neither input
+   requires completeness of Ω; all compactness occurs in F.
 -/
 theorem exists_normOne_finiteSubfield_projection
     (l : ℕ) [Fact l.Prime] (Ω : Type u) [NormedField Ω]
     [NormedAlgebra (Padic l) Ω] [IsAlgClosure (Padic l) Ω] [IsUltrametricDist Ω]
     (F : IntermediateField (Padic l) Ω) [FiniteDimensional (Padic l) F] :
     ∃ p : Ω →L[F] F, (∀ a : F, p (a : Ω) = a) ∧ ∀ x : Ω, ‖p x‖ ≤ ‖x‖ := by
-  sorry
+  classical
+  let : NormedSpace F Ω :=
+    { norm_smul_le := fun a x ↦ (norm_mul (a : Ω) x).le }
+  have : ProperSpace F := FiniteDimensional.proper (Padic l) F
+  have hF : ∀ a b : F, ‖a + b‖ ≤ max ‖a‖ ‖b‖ := fun a b ↦
+    IsUltrametricDist.norm_add_le_max (a : Ω) (b : Ω)
+  have hΩ : ∀ x y : Ω, ‖x + y‖ ≤ max ‖x‖ ‖y‖ :=
+    IsUltrametricDist.norm_add_le_max
+  let i : F →ₗ[F] Ω := Algebra.linearMap F Ω
+  let e : F ≃ₗ[F] LinearMap.range i :=
+    LinearEquiv.ofInjective i (algebraMap F Ω).injective
+  have he (w : LinearMap.range i) : (e.symm w : Ω) = (w : Ω) :=
+    congrArg Subtype.val (e.apply_symm_apply w)
+  have hf (w : LinearMap.range i) : ‖e.symm w‖₊ ≤ ‖(w : Ω)‖₊ := by
+    change ‖(e.symm w : Ω)‖ ≤ ‖(w : Ω)‖
+    rw [he]
+  obtain ⟨h, hfix, hbound⟩ := LinearMap.exists_contractive_extension_of_admissible_values
+    (nnnorm : F → NNReal) (nnnorm : Ω → NNReal)
+    (fun a ↦ nnnorm_eq_zero) (nnnorm_one)
+    (fun a b ↦ nnnorm_mul a b) (fun a b ↦ hF a b)
+    (fun x ↦ nnnorm_eq_zero) (fun a x ↦ nnnorm_smul a x) (fun x y ↦ hΩ x y)
+    (fun U g hg x hx ↦
+      LinearMap.exists_admissible_scalar_of_isCompact_closedBall hF hΩ
+        (fun a r _ ↦ isCompact_closedBall a r) U g hg x hx)
+    (LinearMap.range i) e.symm.toLinearMap hf
+  have hbound' (x : Ω) : ‖h x‖ ≤ ‖x‖ := hbound x
+  refine ⟨h.mkContinuous 1 (fun x ↦ by simpa only [one_mul] using hbound' x), ?_, ?_⟩
+  · intro a
+    change h (e a : Ω) = a
+    exact (hfix (e a)).trans (e.symm_apply_apply a)
+  · exact hbound'
 
 end Padic

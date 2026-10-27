@@ -7,7 +7,7 @@
  },
  "kind": "statement",
  "title": "(Push) is an isomorphism for $E\\subseteq\\Qlb$ and $f$ proper",
- "statement": "For a finite extension $E$ of $\\mathbf Q_\\ell$ inside $\\Qlb$ and every proper morphism of\nschemes $f\\colon X\\to Y$, the comparison (Push) ([def-sfb-derived-push-hom]) for the coefficient\nchange $E\\to\\Qlb$ ([def-sfb-subfield-to-qlbar-coefficient-map]; flat by [lem-sfb-qlbar-flat]),\n\n$$\nT^Y_{E,\\Qlb}\\circ Rf_*\\longrightarrow Rf_*\\circ T^X_{E,\\Qlb},\n$$\n\nis an isomorphism of functors on the unbounded derived category $D(\\Mod_{E_X})$.",
+ "statement": "Let $\\ell$ be prime, $E$ a finite extension of $\\mathbf Q_\\ell$ inside $\\Qlb$, and $f:X\\to Y$ a proper morphism of schemes. Form the pulled-back coefficient inclusion $E_Z\\to\\overline{\\mathbf Q}_{\\ell,Z}$ of [def-sfb-subfield-to-qlbar-coefficient-map], flat by [lem-sfb-qlbar-flat]. Assume explicitly that $Rf_*:D(\\operatorname{Mod}_{E_X})\\to D(\\operatorname{Mod}_{E_Y})$ preserves all coproducts indexed by types in the coefficient universe. Then the canonical comparison (Push) of [def-sfb-derived-push-hom], $T^Y_{E,\\Qlb}\\circ Rf_*\\to Rf_*\\circ T^X_{E,\\Qlb}$, is an isomorphism of functors on the unbounded derived categories. No assertion that properness alone supplies this continuity is made.",
  "source": {
   "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sfb-finite-extension-compatibility/lem-sfb-qlbar-push-iso-proper.md",
   "place": "node lem-sfb-qlbar-push-iso-proper, order 1755"
@@ -19,29 +19,49 @@
  ],
  "proof": [
   {
-   "text": "By [sk-prop-sfb-qlbar-colimit-x], $\\overline{\\mathbf Q}_{\\ell,X}=\\operatorname{colim}_{F\\ge E}F_X$ along the\ninclusions, compatibly with the $E_X$-module structures\n([lem-sfb-subfield-coefficient-map-comp]). Since all extensions of scalars involved are exact,\n$T^X_{E,\\Qlb}K\\cong\\operatorname{colim}_FF_X\\otimes_{E_X}K$ (after restriction of scalars to\n$E_X$), a filtered colimit of the finite-stage extensions of scalars, and likewise on $Y$; the\ncomparison maps are compatible with the transition maps. At each finite stage (Push) is an\nisomorphism ([lem-sfb-subfield-push-iso]). Hence (Push) for $E\\subseteq\\Qlb$ is identified with\nthe canonical map\n\n$$\n\\operatorname{colim}_FRf_*(F_X\\otimes_{E_X}K)\\longrightarrow\nRf_*\\operatorname{colim}_F(F_X\\otimes_{E_X}K).\n$$",
+   "text": "Use [lem-weil-pbc-condensed-qbar-point-basis] to write the restricted regular condensed algebraic closure as an I-copower of the regular condensed E-module, for I in the coefficient universe. Inverse image from the point preserves coproducts. The private scheme_basis_from_point construction transports this basis, its scalar multiplication endomorphisms and the scalar-unit copower isomorphisms to every scheme.",
    "uses": [
-    "sk-prop-sfb-qlbar-colimit-x",
-    "lem-sfb-subfield-coefficient-map-comp",
-    "lem-sfb-subfield-push-iso"
+    "lem-weil-pbc-condensed-qbar-point-basis"
    ],
    "elementary": false
   },
   {
-   "text": "A countable filtered colimit in the derived category is computed from coproducts (as the cone of\nthe telescope map), so it suffices that $Rf_*$ commutes with coproducts. This is the input that\nproperness of $f$ supplies; for a non-proper $f$ the map is not an isomorphism in general.",
+   "text": "The module categories are Grothendieck abelian, so their derived categories have the required coproducts by [lem-grothendieck-derived-has-coproducts]. The exact extension and restriction functors carry the scalar-unit decomposition to unbounded derived categories, by the localization calculation of [lem-weil-pbc-condensed-qbar-derived-scalar-basis-unit-of-sections], implemented in qbar_isIso_unit. Exact restriction reflects derived isomorphisms by the homology criterion. This constructs the two derived unit copower isomorphisms used in the existing private push_of_pointCopower_iff_continuity theorem.",
+   "uses": [
+    "lem-sfb-qlbar-flat",
+    "lem-grothendieck-derived-has-coproducts",
+    "lem-weil-pbc-condensed-qbar-derived-scalar-basis-unit-of-sections",
+    "lem-weil-pbc-unbounded-derived-iso-cohomology"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The mate of the specified derivedPushHom is the inverse restriction/direct-image isomorphism. Scalar multiplication commutes with direct image, so [lem-weil-pbc-coefficient-push-copower-criterion] identifies invertibility of each component with the canonical I-copower comparison for Rf_*. The existing private push_of_pointCopower_iff_continuity theorem performs this calculation for the transported point basis, with exact restriction reflecting isomorphisms.",
+   "uses": [
+    "def-sfb-derived-push-hom",
+    "lem-weil-pbc-coefficient-push-copower-criterion"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply the reverse implication of push_of_pointCopower_iff_continuity. On each input M the explicit coproduct-preservation hypothesis makes sigmaComparison for the constant I-family at M invertible. Thus every component of the specified map, and hence the natural transformation, is invertible. Properness is retained in the interface but is not used to derive continuity. For the Qbar Shriek example, explicitly apply the corrected instance to the proper part under the same continuity hypothesis, then apply the unchanged formal Shriek theorem.",
    "uses": [],
-   "elementary": null
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "sk-prop-sfb-qlbar-colimit-x",
-  "lem-sfb-subfield-coefficient-map-comp",
-  "lem-sfb-subfield-push-iso"
+  "lem-weil-pbc-condensed-qbar-point-basis",
+  "lem-sfb-qlbar-flat",
+  "lem-grothendieck-derived-has-coproducts",
+  "lem-weil-pbc-condensed-qbar-derived-scalar-basis-unit-of-sections",
+  "lem-weil-pbc-unbounded-derived-iso-cohomology",
+  "def-sfb-derived-push-hom",
+  "lem-weil-pbc-coefficient-push-copower-criterion"
  ],
  "proof_origin": {
-  "by": "agent",
-  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sfb-finite-extension-compatibility/lem-sfb-qlbar-push-iso-proper.md",
-  "place": "## Proof"
+  "by": "B4 stage 3",
+  "document": "coord/repair-notes/B4-qlbar-continuity-assignment.md",
+  "place": "Authorized repair: explicit sufficient continuity hypothesis; scalar-basis mate proof."
  },
  "mathlib_searches": [],
  "mathlib_match": null,
@@ -69,5 +89,99 @@
  "blueprint_snapshot": "main-20261015",
  "chapter": "sec-six-functors-basics",
  "unit": "sk-prop-sfb-finite-extension-compatibility",
- "lean_audit": {}
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": [
+    "AlgebraicGeometry.ProEtale.CondensedRing.isIso_derivedPushHom_padicSubfieldRingObjToPadicAlgCl_of_isProper"
+   ]
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": [
+    "AlgebraicGeometry.ProEtale.CondensedRing.isIso_derivedPushHom_padicSubfieldRingObjToPadicAlgCl_of_isProper"
+   ]
+  }
+ },
+ "lean": {
+  "module": "WeilConjectures.SixFunctors.ProEtale.ModuleObject.Colimit.Compatibility",
+  "declaration": "AlgebraicGeometry.ProEtale.CondensedRing.isIso_derivedPushHom_padicSubfieldRingObjToPadicAlgCl_of_isProper",
+  "file": "lean/WeilConjectures/SixFunctors/ProEtale/ModuleObject/Colimit/Compatibility.lean",
+  "statement": "instance isIso_derivedPushHom_padicSubfieldRingObjToPadicAlgCl_of_isProper [IsProper f]\n    (E : FiniteIntermediateField ℓ)\n    [∀ I : Type (u + 1), PreservesColimitsOfShape (Discrete I)\n      R((f)_*⟦Profinite.continuousMapRingObj E⟧)] :\n    IsIso (derivedPushHom (Profinite.padicSubfieldRingObjToPadicAlgCl ℓ E) f)",
+  "branch": "sheaf-dag",
+  "by": "B4",
+  "date": "2026-10-22",
+  "existing": true,
+  "note": "Authorized upstream correction under the listed maintenance exception. Section variables: universe u; (ℓ : ℕ) [Fact ℓ.Prime]; {X Y : Scheme.{u}} (f : X ⟶ Y). The name, properness binder and specified canonical map are retained; coproduct preservation is an explicit hypothesis."
+ },
+ "statement_change": {
+  "date": "2026-10-22",
+  "by": "B4 stage 2",
+  "old_statement": "For a finite extension $E$ of $\\mathbf Q_\\ell$ inside $\\Qlb$ and every proper morphism of\nschemes $f\\colon X\\to Y$, the comparison (Push) ([def-sfb-derived-push-hom]) for the coefficient\nchange $E\\to\\Qlb$ ([def-sfb-subfield-to-qlbar-coefficient-map]; flat by [lem-sfb-qlbar-flat]),\n\n$$\nT^Y_{E,\\Qlb}\\circ Rf_*\\longrightarrow Rf_*\\circ T^X_{E,\\Qlb},\n$$\n\nis an isomorphism of functors on the unbounded derived category $D(\\Mod_{E_X})$.",
+  "what": "The old proof inferred ambient unbounded coproduct preservation from properness without a cited input. The listed maintenance exception authorizes an explicit sufficient coproduct-preservation hypothesis, keeping the declaration name and canonical map. This is a correction, not a proof of the original assertion.",
+  "source": {
+   "document": "coord/repair-notes/B4-qlbar-continuity-assignment.md",
+   "place": "Authorized repair, including correction of unit clause 3 and its Shriek consequence."
+  },
+  "citers": [],
+  "old_proof": [
+   {
+    "text": "By [sk-prop-sfb-qlbar-colimit-x], $\\overline{\\mathbf Q}_{\\ell,X}=\\operatorname{colim}_{F\\ge E}F_X$ along the\ninclusions, compatibly with the $E_X$-module structures\n([lem-sfb-subfield-coefficient-map-comp]). Since all extensions of scalars involved are exact,\n$T^X_{E,\\Qlb}K\\cong\\operatorname{colim}_FF_X\\otimes_{E_X}K$ (after restriction of scalars to\n$E_X$), a filtered colimit of the finite-stage extensions of scalars, and likewise on $Y$; the\ncomparison maps are compatible with the transition maps. At each finite stage (Push) is an\nisomorphism ([lem-sfb-subfield-push-iso]). Hence (Push) for $E\\subseteq\\Qlb$ is identified with\nthe canonical map\n\n$$\n\\operatorname{colim}_FRf_*(F_X\\otimes_{E_X}K)\\longrightarrow\nRf_*\\operatorname{colim}_F(F_X\\otimes_{E_X}K).\n$$",
+    "uses": [
+     "sk-prop-sfb-qlbar-colimit-x",
+     "lem-sfb-subfield-coefficient-map-comp",
+     "lem-sfb-subfield-push-iso"
+    ],
+    "elementary": false
+   },
+   {
+    "text": "A countable filtered colimit in the derived category is computed from coproducts (as the cone of\nthe telescope map), so it suffices that $Rf_*$ commutes with coproducts. This is the input that\nproperness of $f$ supplies; for a non-proper $f$ the map is not an isomorphism in general.",
+    "uses": [],
+    "elementary": null
+   }
+  ],
+  "old_proof_deps": [
+   "sk-prop-sfb-qlbar-colimit-x",
+   "lem-sfb-subfield-coefficient-map-comp",
+   "lem-sfb-subfield-push-iso"
+  ]
+ },
+ "reviewed_proof": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B4",
+  "result": "pass",
+  "landing": "20261022T040146-L-2812655",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ },
+ "blueprint_update": {
+  "snapshot": "main-20261025",
+  "commit": "b767183f5ce5f281d407f582da76ab91d6176fe0",
+  "changed": [
+   "statement",
+   "proof"
+  ],
+  "statement": "For a finite extension $E$ of $\\mathbf Q_\\ell$ inside $\\Qlb$ and every proper morphism of\nschemes $f\\colon X\\to Y$, the comparison (Push) ([def-sfb-derived-push-hom]) for the coefficient\nchange $E\\to\\Qlb$ ([def-sfb-subfield-to-qlbar-coefficient-map]; flat by [lem-sfb-qlbar-flat]),\n\n$$\nT^Y_{E,\\Qlb}\\circ Rf_*\\longrightarrow Rf_*\\circ T^X_{E,\\Qlb},\n$$\n\nis an isomorphism at every bounded-below object $K\\in D^+(\\Mod_{E_X})$.",
+  "proof": [
+   {
+    "text": "Represent $K$ by a complex $K^\\bullet$ of $E_X$-modules vanishing below some degree $a$. By\n[sk-prop-sfb-qlbar-colimit-x], $\\overline{\\mathbf Q}_{\\ell,X}=\\operatorname{colim}_{F\\ge E}F_X$ along the\ninclusions, compatibly with the $E_X$-module structures\n([lem-sfb-subfield-coefficient-map-comp]). Since all extensions of scalars involved are exact,\n$T^X_{E,\\Qlb}K$ is represented, after restriction of scalars to $E_X$ (which is conservative and\ncommutes with $Rf_*$), by the termwise filtered colimit\n$\\operatorname{colim}_F(F_X\\otimes_{E_X}K^\\bullet)$ of complexes all vanishing below $a$, and\nlikewise on $Y$ for $Rf_*K$; the comparison maps are compatible with the transition maps. At each\nfinite stage (Push) is an isomorphism ([lem-sfb-subfield-push-iso]). Since filtered colimits of\nmodules are exact, on the $q$-th cohomology sheaves (Push) for $E\\subseteq\\Qlb$ is therefore\nidentified with the canonical map\n\n$$\n\\operatorname{colim}_FR^qf_*(F_X\\otimes_{E_X}K^\\bullet)\\longrightarrow\nR^qf_*\\operatorname{colim}_F(F_X\\otimes_{E_X}K^\\bullet).\n$$",
+    "uses": [
+     "sk-prop-sfb-qlbar-colimit-x",
+     "lem-sfb-subfield-coefficient-map-comp",
+     "lem-sfb-subfield-push-iso"
+    ],
+    "elementary": false
+   },
+   {
+    "text": "As $f$ is proper, it is quasi-compact and quasi-separated, and the complexes have the common lower\nbound $a$, so this map is an isomorphism by [sk-cor-pe-bounded-continuity]. Hence (Push) at $K$\nis an isomorphism on all cohomology sheaves, so an isomorphism. The common lower bound is\nessential: for unbounded complexes $Rf_*$ need not commute with the countable direct sums that\ncompute $\\overline{\\mathbf Q}_{\\ell,X}\\otimes_{E_X}-$, even for $f$ proper.",
+    "uses": [],
+    "elementary": null
+   }
+  ],
+  "note": "the current blueprint (main-20261025, weil-conjectures-blueprint b767183f5c) states or proves this differently; a worker who touches the node follows it"
+ }
 }

@@ -1,0 +1,122 @@
+{
+ "id": "lem-sf-clopen-complete-pullback-comparison",
+ "kind": "statement",
+ "title": "Completed pullback of a complete object equals normalized clopen restriction",
+ "statement": "Fix a prime $\\ell$, a finite extension $E/\\mathbf Q_\\ell$, a scheme $S$, an open $U$ whose underlying subset is closed, and any normalized coefficient restriction datum $d$ [def-sf-clopen-restriction-data, def-weil-l-adic-coefficient-extension]. For every quotient-derived-complete complex $K$ of completed coefficient modules on $S$ [def-weil-derived-complete, def-weil-integral-reduction-tower], the specified completed derived pullback of $K$ to $U$ [def-pur-integral-derived-operations] is isomorphic to the exact derived ordinary restriction given by $d$. No affineness, weak contractibility, constructibility or Tor-amplitude hypothesis is imposed.",
+ "source": {
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Tag 09C3, restriction to the disjoint affine opens; derived.tex Tag 08TC. Comparison step 3 of lem-sf-residue-lisse-clopen-bases."
+ },
+ "stmt_deps": [
+  "def-sf-clopen-restriction-data",
+  "def-weil-l-adic-coefficient-extension",
+  "def-weil-derived-complete",
+  "def-weil-integral-reduction-tower",
+  "def-pur-integral-derived-operations"
+ ],
+ "proof": [
+  {
+   "text": "Lift the finite and completed ring comparisons of d through the fully faithful forgetful functor from commutative ring sheaves. Their normalization on constants and quotient projections yields an OpenCompletedRestriction.Coefficients datum. Uniqueness identifies it with the existing normalized datum; thus the ordinary module restrictions, and their exact derived functors, are isomorphic.",
+   "uses": [
+    "def-sf-clopen-restriction-data",
+    "lem-pur-open-completed-restriction-identification"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply clopenIntegralCompletionRestriction to express completed pullback as ordinary restriction of quotient completion. The canonical completion unit is invertible on K, so apply ordinary restriction to its inverse and compose with the preceding derived isomorphism.",
+   "uses": [
+    "lem-fix-clopen-integral-completion-restriction",
+    "lem-fix-qcqs-completion-unit-criterion"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-sf-clopen-restriction-data",
+  "lem-pur-open-completed-restriction-identification",
+  "lem-fix-clopen-integral-completion-restriction",
+  "lem-fix-qcqs-completion-unit-criterion"
+ ],
+ "proof_origin": {
+  "by": "M8",
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Tag 09C3, restriction to the disjoint affine opens; derived.tex Tag 08TC. Comparison step 3 of lem-sf-residue-lisse-clopen-bases."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Restriction of a constant finite free module sheaf to a localized site preserves its rank",
+   "results": "Eight hits about algebraic module localization and rankAtStalk; no module-sheaf restriction comparison.",
+   "verdict": "Use finite biproducts of units and the existing slice functor.",
+   "date": "2026-10-27"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"mapDerivedCategory\"",
+   "results": "Twelve hits including Functor.mapDerivedCategory, mapDerivedCategoryCompIso and NatTrans.mapDerivedCategory. Local source inspection additionally found Functor.mapDerivedCategoryNatIso and mapDerivedCategoryHomologyFunctorIso.",
+   "verdict": "Use exact derived functor comparisons rather than a new cohomology compatibility assumption.",
+   "date": "2026-10-27"
+  },
+  {
+   "tool": "grep",
+   "query": "mapFreeIso|unitToPushforwardObjUnit",
+   "results": "Sixteen hits in Mathlib module-sheaf Free, Generators, Quasicoherent and PullbackFree. Read Free and PullbackFree and the project slice and normalized coefficient APIs.",
+   "verdict": "Use the actual coefficient-unit map and finite biproducts for free sheaves; the completed pullback comparison uses the existing completion-restriction theorem.",
+   "date": "2026-10-27"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.ResidueLisseClopenBases",
+  "date": "2026-10-27",
+  "group": "M8"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-rem-sf-pf-done",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-fix-weil-operations",
+   "place": "Proof, paragraph beginning \"For an admissible exceptional adjoint\", sentence \"Evaluation is natural in the two Weil maps and their inverses, so its square commutes\": local projective models used to compare ordinary tensor evaluation with integral completed tensor. Extracted residue-local-model preparation: simultaneous clopen residue bases and completeness under the precise completed pullback, prior to interval induction. Comparison step: Completed pullback of a complete object equals normalized clopen restriction.",
+   "via": [
+    "lem-sf-residue-lisse-clopen-bases",
+    "lem-fix-residue-lisse-projective-models",
+    "lem-fix-constructible-tensor-completion"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.ClopenCompletePullbackComparison",
+  "file": "lean/Sheaf/Paper/ClopenCompletePullbackComparison.lean",
+  "declaration": "WeilConjectures.sf_clopen_complete_pullback_comparison",
+  "statement": "theorem sf_clopen_complete_pullback_comparison\n    (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]\n    [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]\n    (S : Scheme.{u}) (U : S.Opens) (hU : IsClosed (U : Set S))\n    (d : SfClopenCoefficientRestriction.{u, u} l E S U)\n    (K : IntegralOnSlice.D.{u, u} l E S none)\n    (hK : IsDerivedCompleteUnrestricted.{u, u} l E S K) :\n    Nonempty ((integralDerivedPullback.{u, u} l E U.ι).obj K ≅\n      (sfClopenDerivedRestriction.{u, u} (l := l) (E := E) d).obj K)",
+  "branch": "sheaf-dag",
+  "by": "M8",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M8",
+  "result": "pass",
+  "landing": "20261027T050624-L-246211",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M8",
+  "result": "pass",
+  "landing": "20261027T050624-L-246211",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

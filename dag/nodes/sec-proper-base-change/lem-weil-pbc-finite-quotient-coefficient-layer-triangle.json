@@ -1,0 +1,138 @@
+{
+ "id": "lem-weil-pbc-finite-quotient-coefficient-layer-triangle",
+ "kind": "statement",
+ "title": "Coefficient-layer triangle with explicit endpoints",
+ "statement": "Let $X$ be a scheme, $(A,I)$ an adic coefficient datum, $M$ any derived completed-coefficient object, and $n\\geq0$. Let $L_n,E_n$ be the explicit objects of [def-weil-pbc-finite-quotient-coefficient-layer-data] and $M_{n+1}$ the actual successor scalar reduction. There exists a distinguished triangle $T$ in $D(R_{n+1})$ with isomorphisms $T_1\\cong L_n$, $T_2\\cong M_{n+1}$ and $T_3\\cong E_n$. No local model, support bound, or cohomology finiteness hypothesis or conclusion is part of this assertion.",
+ "stmt_deps": [
+  "def-weil-pbc-finite-quotient-coefficient-layer-data",
+  "def-weil-pbc-adic-coefficient-datum",
+  "def-weil-abstract-derived-category"
+ ],
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 0942, lemma-bounded, proof (1): tensor the coefficient short exact sequence and balance the quotient term."
+ },
+ "proof": [
+  {
+   "text": "Represent M by a flat-term K-flat resolution. The quotient coefficient-module map is locally a surjection of constant finite rings, so its kernel-unit-quotient sequence is short exact. Tensor the sequence with the flat terms of the successor extension. The resulting short exact sequence of complexes gives its distinguished triangle.",
+   "uses": [
+    "def-weil-pbc-finite-quotient-coefficient-layer-data",
+    "lem-pc-kflat-resolution",
+    "def-sfb-site-derived-constant-module-functor"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use the derived tensor representative comparison for the first endpoint and the tensor unit for the middle endpoint. Associativity of scalar extension and the completed projection composition equality identify the last endpoint with restriction of the actual previous reduction. The canonical representative comparison gives precisely the explicit previous object.",
+   "uses": [
+    "def-weil-pbc-finite-quotient-coefficient-layer-data",
+    "lem-weil-pbc-site-derived-tensor-descent",
+    "def-weil-pbc-adic-coefficient-datum"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-sfb-site-derived-constant-module-functor",
+  "def-weil-pbc-adic-coefficient-datum",
+  "def-weil-pbc-finite-quotient-coefficient-layer-data",
+  "lem-pc-kflat-resolution",
+  "lem-weil-pbc-site-derived-tensor-descent"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 0942, lemma-bounded, proof (1): tensor the coefficient short exact sequence and balance the quotient term."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A bounded complex of finite modules over a finite ring has finite homology, and exact constant sheaf realization preserves its homology",
+   "results": "8 hits: Condensed.instAB4StarCondensedMod; LightCondensed.instIsGrothendieckAbelianLightCondMod; CategoryTheory.ShortComplex.Exact.ab_finite; CompHausLike.LocallyConstantModule.functor; Condensed.finFree; Condensed.instAB5CondensedMod; TopModuleCat.instCategoryWithHomology; AlgebraicTopology.singularChainComplexFunctor_exactAt_of_totallyDisconnectedSpace",
+   "date": "2026-10-27",
+   "verdict": "triangleOfSES constructs a triangle from a supplied short exact sequence. It does not identify the actual derived tensor and restricted previous scalar-extension endpoints; retain that coefficient calculation as its own obligation."
+  },
+  {
+   "tool": "grep",
+   "query": "kernel.*tensor.*triangle|tensor.*kernel.*triangle|restriction.*homology",
+   "results": "19 hits: Mathlib/Algebra/Homology/Embedding/RestrictionHomology.lean; Mathlib/Algebra/Homology/Embedding/RestrictionHomology.lean; Mathlib/Algebra/Homology/Embedding/RestrictionHomology.lean; Mathlib/Algebra/Homology/Embedding/RestrictionHomology.lean; Mathlib/Algebra/Homology/Embedding/RestrictionHomology.lean; Mathlib/Algebra/Homology/Embedding/Connect.lean; Mathlib/Algebra/Homology/Embedding/Connect.lean; Mathlib/Algebra/Homology/Embedding/Connect.lean",
+   "date": "2026-10-27",
+   "verdict": "triangleOfSES constructs a triangle from a supplied short exact sequence. It does not identify the actual derived tensor and restricted previous scalar-extension endpoints; retain that coefficient calculation as its own obligation."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"mapHomologyIso\"",
+   "results": "12 hits: CategoryTheory.ShortComplex.mapHomologyIso; CategoryTheory.ShortComplex.mapHomologyIso'; CategoryTheory.ShortComplex.mapHomologyIso'_eq_mapHomologyIso; CategoryTheory.ShortComplex.LeftHomologyData.mapHomologyIso_eq; CategoryTheory.ShortComplex.RightHomologyData.mapHomologyIso'_eq; CategoryTheory.ShortComplex.mapHomologyIso'_hom_naturality; CategoryTheory.ShortComplex.mapHomologyIso'_inv_naturality; CategoryTheory.ShortComplex.mapHomologyIso_hom_naturality",
+   "date": "2026-10-27",
+   "verdict": "triangleOfSES constructs a triangle from a supplied short exact sequence. It does not identify the actual derived tensor and restricted previous scalar-extension endpoints; retain that coefficient calculation as its own obligation."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived tensor of a complex with the kernel of a quotient of coefficient rings gives a distinguished triangle with restriction of the previous derived scalar extension",
+   "results": "8 hits: CategoryTheory.Tor'_obj_obj; CategoryTheory.Tor; CategoryTheory.Tor'; DerivedCategory.triangleOfSESδ; CategoryTheory.Tor_obj; CategoryTheory.Functor.instLinearDerivedCategoryMapDerivedCategory; CategoryTheory.Tor'_map_app; CategoryTheory.Tor'_obj_map",
+   "date": "2026-10-27",
+   "verdict": "triangleOfSES constructs a triangle from a supplied short exact sequence. It does not identify the actual derived tensor and restricted previous scalar-extension endpoints; retain that coefficient calculation as its own obligation."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A bounded complex of finite modules over a finite ring has finite homology and exact functors preserve homology",
+   "results": "8 hits: CategoryTheory.Functor.preservesHomology_of_map_exact; CategoryTheory.Functor.PreservesHomology; CategoryTheory.Functor.PreservesHomology.preservesRightHomologyOf; CategoryTheory.Functor.PreservesHomology.preservesLeftHomologyOf; CategoryTheory.Functor.exact_tfae; CategoryTheory.ShortComplex.LeftHomologyData.isPreservedBy_of_preservesHomology; CategoryTheory.Functor.preservesHomologyOfExact; CategoryTheory.ShortComplex.hasLeftHomology_of_preserves",
+   "date": "2026-10-27",
+   "verdict": "triangleOfSES constructs a triangle from a supplied short exact sequence. It does not identify the actual derived tensor and restricted previous scalar-extension endpoints; retain that coefficient calculation as its own obligation."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.FiniteQuotientCohomologyFiltrationTriangle",
+  "date": "2026-10-27",
+  "group": "K5"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "Tag 0942, lemma-bounded, proof (1): tensor the coefficient short exact sequence and balance the quotient term.",
+   "via": [
+    "lem-weil-pbc-finite-quotient-cohomology-filtration-triangle"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.FiniteQuotientCoefficientLayerTriangle",
+  "file": "lean/Sheaf/Paper/FiniteQuotientCoefficientLayerTriangle.lean",
+  "declaration": "AlgebraicGeometry.Scheme.finiteQuotient_coefficient_layer_triangle",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.finiteQuotient_coefficient_layer_triangle"
+  ],
+  "statement": "theorem finiteQuotient_coefficient_layer_triangle\n    (X : Scheme.{t}) {A : Type t} [CommRing A] (d : AdicCoefficientDatum A)\n    (M : DerivedCategory (CompletedAdicModules X d)) (n : ℕ) :\n    ∃ T : Triangle (DerivedCategory (SheafOfModules.{t + 1}\n      (completedAdicFiniteRing X d (n + 1)))),\n      T ∈ distTriang _ ∧\n      Nonempty (T.obj₁ ≅ finiteQuotientLayerObject X d M n) ∧\n      Nonempty (T.obj₂ ≅ (completedAdicQuotientReduction X d (n + 1)).obj M) ∧\n      Nonempty (T.obj₃ ≅ finiteQuotientPreviousObject X d M n)",
+  "branch": "sheaf-dag",
+  "by": "K5",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K5",
+  "result": "pass",
+  "landing": "20261027T112405-L-1578179",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K5",
+  "result": "pass",
+  "landing": "20261027T112405-L-1578179",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

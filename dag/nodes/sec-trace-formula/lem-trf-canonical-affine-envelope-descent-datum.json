@@ -1,0 +1,280 @@
+{
+ "id": "lem-trf-canonical-affine-envelope-descent-datum",
+ "kind": "statement",
+ "title": "Canonical affine envelope with its induced descent datum",
+ "statement": "Let $p:A\\to B$ be a flat surjective morphism of affine schemes [def-pc-scheme, def-weil-flat-morphism, def-weil-surjective-morphism], with $A=\\operatorname{Spec}S$. Let $f:V\\to A$ be quasi-affine [def-nagata-quasi-affine-morphism], meaning that the inverse image of each affine open is a quasi-compact open subscheme of an affine scheme. Let $\\phi$ be a descent datum on $V$ over $A/B$ [def-pd-descent-datum]. Put $C=\\Gamma(V,\\mathcal O_V)$, $W=\\operatorname{Spec}C$ [def-weil-affine-spectrum], and give $W$ the map to $A$ induced by $f^\\sharp:S\\to C$. Let $j:V\\to W$ be the canonical morphism corresponding to $\\mathrm{id}_C$ under [lem-weil-pbc-morphism-into-affine-scheme]. Then $V$ is quasi-compact and quasi-separated [def-weil-pbc-quasi-compact-scheme, def-weil-pbc-scheme-conventions], $W\\to A$ is affine [pqf-def-affine-morphism], and $j$ is an open immersion over $A$ [def-weil-open-immersion].\n\nWrite $A_2=A\\times_B A$, with projections $p_i$, and $V_i=V\\times_{A,p_i}A_2$, $W_i=W\\times_{A,p_i}A_2$ for $i=0,1$ [def-pc-fibre-product]. With $S_2=\\Gamma(A_2,\\mathcal O_{A_2})$, the maps $\\beta_i:C\\otimes_{S,p_i^\\sharp}S_2\\to\\Gamma(V_i,\\mathcal O_{V_i})$, $c\\otimes t\\mapsto c|_{V_i}\\,t|_{V_i}$, are isomorphisms. The resulting identifications $\\alpha_i:W_i\\simeq\\operatorname{Spec}\\Gamma(V_i,\\mathcal O_{V_i})$ identify the pullbacks $j_i$ of $j$ with the canonical morphisms to these spectra. The isomorphism\n$$\\psi=\\alpha_1^{-1}\\circ\\operatorname{Spec}(\\phi^\\sharp)\\circ\\alpha_0:W_0\\xrightarrow{\\sim}W_1,$$\nwhere $\\phi^\\sharp:\\Gamma(V_1,\\mathcal O)\\xrightarrow{\\sim}\\Gamma(V_0,\\mathcal O)$, is over $A_2$ and satisfies $\\psi\\circ j_0=j_1\\circ\\phi$. On $A_3=A\\times_B A\\times_B A$, its pullbacks satisfy $\\psi_{02}=\\psi_{12}\\circ\\psi_{01}$, so $\\psi$ is a descent datum on $W$ and $j$ intertwines the two data. The comparisons $\\beta_i$ are natural for the pullbacks of $\\phi$ to $A_3$ and agree with successive flat base change: under these comparisons $(c\\otimes s)\\otimes t$ corresponds to the product of the three pulled-back sections. No finite-presentation assumption is imposed.",
+ "source": {
+  "document": "literature/stacks-project/descent.tex",
+  "place": "Tag 0247, lemma-quasi-affine, proof, second paragraph: canonical affine envelope, flat-base-change display, induced algebra isomorphism and its cocycle; returned proof steps 3 (envelope part), 4, 5 and 6"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-flat-morphism",
+  "def-weil-surjective-morphism",
+  "def-nagata-quasi-affine-morphism",
+  "def-pd-descent-datum",
+  "def-weil-affine-spectrum",
+  "lem-weil-pbc-morphism-into-affine-scheme",
+  "def-weil-pbc-quasi-compact-scheme",
+  "def-weil-pbc-scheme-conventions",
+  "pqf-def-affine-morphism",
+  "def-weil-open-immersion",
+  "def-pc-fibre-product"
+ ],
+ "proof": [
+  {
+   "text": "Apply the canonical quasi-affine embedding over the affine base. The source is qcqs, the adjunction unit is open and lies over A, and its affine envelope maps affinely to A.",
+   "uses": [
+    "lem-trf-quasi-affine-canonical-affine-embedding",
+    "lem-weil-pbc-morphism-into-affine-scheme",
+    "lem-weil-pbc-morphism-affine-schemes-affine"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Specialize the qcqs flat global-sections theorem to whole opens. Identify its pushout comparison with comparison using the pushout universal property. The spectrum of the ring pushout is the affine pullback; check both projections to identify spectrumComparison. Its inverse alpha identifies the base-changed unit with the adjunction unit.",
+   "uses": [
+    "lem-weil-pbc-flat-base-change-global-sections-qcqs",
+    "lem-weil-pbc-fibre-product-affine-spectra",
+    "lem-weil-pbc-morphism-into-affine-scheme"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Prove the pure-tensor product formula by the two pushout inclusion equations. Prove naturality by pushout hom-ext and functoriality of sections. Naturality and preservation of isomorphisms by pushout show that flat affine base change preserves isomorphisms on global sections between quasi-affine sources.",
+   "uses": [
+    "def-pc-fibre-product"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "For successive base change, use the proved quasi-affine base-change theorem. Apply the flat comparison again. Both generator formulas agree by the two projections of the pullback-pasting isomorphism and associativity of multiplication.",
+   "uses": [
+    "lem-trf-quasi-affine-base-change",
+    "lem-weil-pbc-flat-base-change-global-sections-qcqs",
+    "def-pc-fibre-product"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Represent the original datum by its universal transport V times_B A to V. The map from this pullback to W times_B A induces an isomorphism on global sections by flat base change. Extend the universal transport followed by the unit uniquely to the affine W times_B A using the inverse section map and Spec. Its structure-map identity follows by uniqueness. Evaluating it on pullback lifts defines natural transport on W, intertwining the given datum on every test scheme.",
+   "uses": [
+    "def-pd-descent-datum",
+    "lem-weil-pbc-flat-morphism-base-change",
+    "lem-weil-pbc-morphism-into-affine-scheme",
+    "def-weil-affine-spectrum"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Prove identity after precomposing with the unit, whose section map is invertible. For the cocycle use the universal pair of successive pullbacks W times_B A times_B A. The corresponding map from V times_B A times_B A again has invertible section map, by naturality of the flat comparison. After precomposition the desired identity is exactly the original transport cocycle. Naturality pulls the universal equation back to arbitrary test points.",
+   "uses": [
+    "def-pd-descent-datum",
+    "lem-weil-pbc-flat-base-change-global-sections-qcqs",
+    "def-pc-fibre-product"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Evaluate transport naturality on the universal point of V times_A T to see that transitions intertwine unitBaseChange. On a flat affine overlap its section map is invertible, so affine-target uniqueness determines the envelope transition. The alpha unit identity and naturality of toSpecGamma identify this unique extension with the stated alpha conjugation.",
+   "uses": [
+    "lem-weil-pbc-morphism-into-affine-scheme",
+    "def-pd-descent-datum"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-trf-quasi-affine-canonical-affine-embedding",
+  "lem-weil-pbc-morphism-into-affine-scheme",
+  "lem-weil-pbc-morphism-affine-schemes-affine",
+  "lem-weil-pbc-flat-base-change-global-sections-qcqs",
+  "lem-weil-pbc-fibre-product-affine-spectra",
+  "def-pc-fibre-product",
+  "lem-trf-quasi-affine-base-change",
+  "def-pd-descent-datum",
+  "lem-weil-pbc-flat-morphism-base-change",
+  "def-weil-affine-spectrum"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/descent.tex",
+  "place": "Tag 0247, lemma-quasi-affine, second paragraph; the Lean proof realizes its natural affine-envelope extension and cocycle by universal transport and uniqueness of morphisms into affine schemes."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A descent datum on a quasi-affine scheme over a faithfully flat map of affine schemes extends canonically to its spectrum of global sections",
+   "results": "{\"t\": \"2026-10-22T05:59:42Z\", \"tool\": \"leanfinder\", \"query\": \"A descent datum on a quasi-affine scheme over a faithfully flat map of affine schemes extends canonically to its spectrum of global sections\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.ExistsHomHomCompEqCompAux.h𝒰S\", \"AlgebraicGeometry.descendsAlong_isOpenImmersion_surjective_inf_flat_inf_quasicompact'\", \"AlgebraicGeometry.HasAffineProperty.descendsAlong_of_affineAnd\", \"AlgebraicGeometry.descendsAlong_isomorphisms_surjective_inf_flat_inf_quasicompact\", \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.𝒰D\", \"AlgebraicGeometry.flat_iff\", \"AlgebraicGeometry.Flat.flat_and_surjective_iff_faithfullyFlat_of_isAffine\", \"AlgebraicGeometry.Flat.flat_appLE\"], \"digest\": \"b27e5f2fe142f34f\"}",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The canonical affine envelope of a quasi-affine scheme inherits a descent datum by flat base change of global sections",
+   "results": "{\"t\": \"2026-10-22T05:59:32Z\", \"tool\": \"leansearch\", \"query\": \"The canonical affine envelope of a quasi-affine scheme inherits a descent datum by flat base change of global sections\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.HasAffineProperty.descendsAlong_of_affineAnd\", \"AlgebraicGeometry.IsAffineOpen.isoSpec\", \"AlgebraicGeometry.Scheme.IsQuasiAffine.toIsImmersion\", \"AlgebraicGeometry.IsAffine.recOn\", \"AlgebraicGeometry.IsAffine.casesOn\", \"AlgebraicGeometry.Scheme.instIsOpenImmersionToSpecΓOfIsQuasiAffine\", \"AlgebraicGeometry.isAffineHom_isStableUnderBaseChange\", \"AlgebraicGeometry.Scheme.isoSpec\"], \"digest\": \"f9861ddc4beb6311\"}",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"toSpecΓ\", \"pullback\"",
+   "results": "{\"t\": \"2026-10-22T05:59:32Z\", \"tool\": \"loogle\", \"query\": \"\\\"toSpecΓ\\\", \\\"pullback\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.isPullback_toSpecΓ_toSpecΓ\"], \"digest\": \"e773ca984c2376d2\"}",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "toSpecΓ|affinization|affinis|affiniz",
+   "results": "{\"t\": \"2026-10-22T05:59:31Z\", \"tool\": \"grep\", \"query\": \"toSpecΓ|affinization|affinis|affiniz\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Basic.lean\", \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Basic.lean\", \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Basic.lean\", \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Basic.lean\", \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Basic.lean\", \"Mathlib/AlgebraicGeometry/Sites/SmallAffineZariski.lean\", \"Mathlib/AlgebraicGeometry/Normalization.lean\", \"Mathlib/AlgebraicGeometry/Normalization.lean\"], \"digest\": \"1631df7a5a664db6\"}",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Flat base change of global sections transports the cocycle of a scheme descent datum to its affine envelope",
+   "results": "{\"t\": \"2026-10-22T05:59:42Z\", \"tool\": \"leanfinder\", \"query\": \"Flat base change of global sections transports the cocycle of a scheme descent datum to its affine envelope\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Flat.flat_appLE\", \"AlgebraicGeometry.Scheme.Hom.flat_appLE\", \"AlgebraicGeometry.Scheme.Cover.glued_cover_cocycle_snd\", \"AlgebraicGeometry.Scheme.Cover.glued_cover_cocycle_fst\", \"AlgebraicGeometry.Scheme.Pullback.cocycle_snd_snd\", \"AlgebraicGeometry.Scheme.Pullback.cocycle\", \"AlgebraicGeometry.exists_appTop_map_eq_zero_of_isAffine_of_isLimit\", \"AlgebraicGeometry.Scheme.Pullback.cocycle_fst_snd\"], \"digest\": \"5a697ee2bd72ac56\"}",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The canonical spectrum of global sections of a quasi-affine scheme over a flat affine cover inherits its descent datum and cocycle by natural flat base change",
+   "results": "{\"t\": \"2026-10-22T06:56:59Z\", \"tool\": \"leanfinder\", \"query\": \"The canonical spectrum of global sections of a quasi-affine scheme over a flat affine cover inherits its descent datum and cocycle by natural flat base change\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.ExistsHomHomCompEqCompAux.h𝒰S\", \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.𝒰D\", \"AlgebraicGeometry.Flat.flat_of_affine_subset\", \"AlgebraicGeometry.Flat.flat_appLE\", \"AlgebraicGeometry.Scheme.AffineCover.obj\", \"AlgebraicGeometry.Scheme.Hom.flat_appLE\", \"AlgebraicGeometry.flat_iff\", \"AlgebraicGeometry.Scheme.exists_isOpenCover_and_isAffine\"], \"digest\": \"9b45e60732f32cfd\"} Related declarations do not state the induced affine-envelope descent datum, its equivariance and its cocycle; the QuasiAffine pullback theorem assumes an affine morphism and is not the flat global-sections comparison.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "toSpecΓ|affinization|affinis|affiniz",
+   "results": "{\"t\": \"2026-10-22T06:57:16Z\", \"tool\": \"grep\", \"query\": \"toSpecΓ|affinization|affinis|affiniz\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Basic.lean\", \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Basic.lean\", \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Basic.lean\", \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Basic.lean\", \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Basic.lean\", \"Mathlib/AlgebraicGeometry/Group/Affine.lean\", \"Mathlib/AlgebraicGeometry/Group/Affine.lean\", \"Mathlib/AlgebraicGeometry/Stalk.lean\"], \"digest\": \"47cefc1068aed96a\"} Related declarations do not state the induced affine-envelope descent datum, its equivariance and its cocycle; the QuasiAffine pullback theorem assumes an affine morphism and is not the flat global-sections comparison.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Flat base change of global sections carries a scheme descent datum and its cocycle to the canonical affine envelope",
+   "results": "{\"t\": \"2026-10-22T06:57:17Z\", \"tool\": \"leansearch\", \"query\": \"Flat base change of global sections carries a scheme descent datum and its cocycle to the canonical affine envelope\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Module.Flat.isBaseChange\", \"AlgebraicGeometry.Scheme.Hom.flat_appLE\", \"AlgebraicGeometry.isAffineHom_isStableUnderBaseChange\", \"AlgebraicGeometry.Scheme.Cover.RelativeGluingData.toBase\", \"AlgebraicGeometry.Flat.casesOn\", \"AlgebraicGeometry.Flat.flat_and_surjective_iff_faithfullyFlat_of_isAffine\", \"AlgebraicGeometry.Flat.flat_of_affine_subset\", \"AlgebraicGeometry.Flat.flat_appLE\"], \"digest\": \"5326ca735b45799c\"} Related declarations do not state the induced affine-envelope descent datum, its equivariance and its cocycle; the QuasiAffine pullback theorem assumes an affine morphism and is not the flat global-sections comparison.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"toSpecΓ\", \"pullback\"",
+   "results": "{\"t\": \"2026-10-22T06:57:17Z\", \"tool\": \"loogle\", \"query\": \"\\\"toSpecΓ\\\", \\\"pullback\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.isPullback_toSpecΓ_toSpecΓ\"], \"digest\": \"e773ca984c2376d2\"} Related declarations do not state the induced affine-envelope descent datum, its equivariance and its cocycle; the QuasiAffine pullback theorem assumes an affine morphism and is not the flat global-sections comparison.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Functoriality of affinization under flat affine base change extends descent isomorphisms and proves the cocycle on a triple fibre product",
+   "results": "{\"t\": \"2026-10-22T06:57:51Z\", \"tool\": \"leanfinder\", \"query\": \"Functoriality of affinization under flat affine base change extends descent isomorphisms and proves the cocycle on a triple fibre product\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.ExistsHomHomCompEqCompAux.g\", \"AlgebraicGeometry.Scheme.OpenCover.pullbackCoverAffineRefinementObjIso_inv_map\", \"AlgebraicGeometry.Scheme.OpenCover.pullbackCoverAffineRefinementObjIso_inv_pullbackHom_assoc\", \"AlgebraicGeometry.Scheme.OpenCover.pullbackCoverAffineRefinementObjIso_inv_map_assoc\", \"AlgebraicGeometry.Scheme.OpenCover.pullbackCoverAffineRefinementObjIso_inv_pullbackHom\", \"AlgebraicGeometry.Scheme.OpenCover.pullbackCoverAffineRefinementObjIso\", \"AlgebraicGeometry.AffineSpace.map_over_assoc\", \"AlgebraicGeometry.instIsAffineHomMapOverSchemeOpensDiagram\"], \"digest\": \"037feda0159371bc\"} Related declarations do not state the induced affine-envelope descent datum, its equivariance and its cocycle; the QuasiAffine pullback theorem assumes an affine morphism and is not the flat global-sections comparison.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "isPullback_toSpecΓ_toSpecΓ|instIsOpenImmersionToSpecΓ|IsQuasiAffine",
+   "results": "{\"t\": \"2026-10-22T06:58:28Z\", \"tool\": \"grep\", \"query\": \"isPullback_toSpecΓ_toSpecΓ|instIsOpenImmersionToSpecΓ|IsQuasiAffine\", \"sub\": \"AlgebraicGeometry/QuasiAffine.lean\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"15\", \"18\", \"34\", \"39\", \"41\"], \"digest\": \"4ca16f771809dfbb\"} Related declarations do not state the induced affine-envelope descent datum, its equivariance and its cocycle; the QuasiAffine pullback theorem assumes an affine morphism and is not the flat global-sections comparison.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-quasi-affine-fpqc-effective-descent",
+  "date": "2026-10-22",
+  "group": "Q07"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Geometric quotient-presentation support in lem-trf-local-term-locality, through Tag 0265 and Tag 02W8, via the item (Tag 0247, proof, second paragraph): the canonical affine envelope W of V, the flat-base-change identification of its pullbacks, the induced algebra isomorphism and its cocycle, i.e. the descent datum on W extending the given one.",
+   "via": [
+    "lem-trf-quasi-affine-fpqc-effective-descent",
+    "lem-trf-separated-lqf-fppf-effective-descent",
+    "lem-trf-etale-affine-quotient-representable",
+    "lem-trf-etale-relation-quotient",
+    "lem-trf-polarized-scheme-etale-descent",
+    "lem-trf-polarized-fine-log-etale-descent",
+    "lem-trf-coherent-log-ideal-chart-construction",
+    "lem-trf-log-blowup-normalization",
+    "lem-trf-log-regular-desingularization",
+    "lem-trf-nodal-pair-projective-resolution",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-trf-canonical-affine-envelope-descent-datum",
+  "worker": "stage1",
+  "summary": "Expanded the affine-envelope construction and its induced descent datum into eight steps, reusing existing nodes throughout. Verified the direction of the ring isomorphisms, tensor-section formulas, naturality on triple overlaps and successive-base-change coherence. Statement unchanged; no new nodes.",
+  "blueprint": "Geometric quotient-presentation support below lem-trf-local-term-locality, through the existing Tag 0247 quasi-affine effective-descent node: its second-paragraph envelope, flat-base-change display, induced isomorphism, equivariance and cocycle. Steps 1--3 supply the envelope comparisons; Steps 4--8 supply the extension and explicit cocycle verification."
+ },
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q26-a2253c675",
+  "group": "Q26",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q26-a2253c675 (reviewer sub-agent of L); spot-checked: Ordinary stage-1 split of an item that Q07's re-split of lem-trf-quasi-affine-fpqc-effective-descent created today. The item has no repair note of its own and is still unsplit in live and side-live, so no other delivery supersedes it. It is not in any dropped list. The statement, stmt_deps, source and blueprint are unchanged from live; the delivery adds no new nodes, and proof_deps equals the union of the step uses. I read Stacks descent.tex Tag 0247, proof paragraph 2, which gives the envelope V→W=Spec Γ(V), flat base change 02KH, the induced φ^♯ and a cocycle claimed in one sentence. Steps 1–8 follow it and make the cocycle explicit. I recomputed the directions. Under def-pd-descent-datum, φ:V_0→V_1, θ=φ^♯:E_1→E_0, α_i^♯=β_i^{-1} and j_i^♯=β_i (projection identities, so (α_i j_i)^♯=id). ψ^♯=δ=β_0^{-1}θβ_1 is S_2-linear, and β_0δ=θβ_1 gives ψj_0=j_1φ through the Hom bijection into the affine W_1. Hypotheses check out: V is qcqs by the canonical-embedding leaf applied to the affine open A. The qcqs flat global-sections node applies with g=p_i (flat as a base change of p) and later with g=h_ab (A_3≅A_2×_B A after permuting factors). V_i is qcqs via lem-trf-quasi-affine-base-change and the embedding leaf, with A_2 affine. No finite presentation is used anywhere. Steps 6–7 (naturality under h_ab and associativity of the tensor identifications) are true elementary checks on pure tensors. Step 8: contravariance turns φ_02^♯=φ_01^♯φ_12^♯ into ψ_02=ψ_12ψ_01. Edge cases V=∅ and V=A both work. All off-unit citations are Mathlib leaves or definitions; no tool_uses are needed and no SGA is cited. The duplicate search found that lem-a1-invariant-open-affinization-equivariance (unit sk-p-real-rankin, unsplit) partly overlaps Step 4 only. It is not a fault of this delivery because the item already existed. The other affinization nodes state different results. Maintainer note: the proof is 5901 characters with no new nodes, re-expanding work cut out by the parent's 7501-character re-split. That is within the stage-1 rules but may hit a later batch re-split threshold. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.CanonicalAffineEnvelopeDescentDatum",
+  "declaration": "AlgebraicGeometry.CanonicalAffineEnvelope.exists_descentDatum",
+  "declarations": [
+   "AlgebraicGeometry.CanonicalAffineEnvelope.map",
+   "AlgebraicGeometry.CanonicalAffineEnvelope.unit",
+   "AlgebraicGeometry.CanonicalAffineEnvelope.comparison",
+   "AlgebraicGeometry.CanonicalAffineEnvelope.affineTensorMap",
+   "AlgebraicGeometry.CanonicalAffineEnvelope.unitBaseChange",
+   "AlgebraicGeometry.CanonicalAffineEnvelope.spectrumComparison",
+   "AlgebraicGeometry.CanonicalAffineEnvelope.transition",
+   "AlgebraicGeometry.CanonicalAffineEnvelope.baseChange",
+   "AlgebraicGeometry.CanonicalAffineEnvelope.alpha",
+   "AlgebraicGeometry.CanonicalAffineEnvelope.extendedTransition",
+   "AlgebraicGeometry.CanonicalAffineEnvelope.comparison_apply",
+   "AlgebraicGeometry.CanonicalAffineEnvelope.alpha_properties",
+   "AlgebraicGeometry.CanonicalAffineEnvelope.spectrumComparison_eq",
+   "AlgebraicGeometry.CanonicalAffineEnvelope.tensorMap",
+   "AlgebraicGeometry.CanonicalAffineEnvelope.comparison_naturality",
+   "AlgebraicGeometry.CanonicalAffineEnvelope.comparison_successive",
+   "AlgebraicGeometry.CanonicalAffineEnvelope.exists_descentDatum"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/CanonicalAffineEnvelopeDescentDatum.lean",
+  "statement": "theorem exists_descentDatum {A B V : Scheme.{u}} [IsAffine A] [IsAffine B] (p : A ⟶ B) [Flat p] [Surjective p] (f : V ⟶ A) [IsQuasiAffineHom f] (D : Over.DescentDatum p (Over.mk f)) : CompactSpace V ∧ QuasiSeparatedSpace V ∧ IsAffineHom (map f) ∧ IsOpenImmersion V.toSpecΓ ∧ ∃ E : Over.DescentDatum p (Over.mk (map f)), (∀ (T : Scheme.{u}) (a b : T ⟶ A) (h : a ≫ p = b ≫ p) (x : Over.mk a ⟶ Over.mk f), (E.transport a b h (x ≫ unit f)).left = (D.transport a b h x).left ≫ V.toSpecΓ) ∧ (∀ (T : Scheme.{u}) [IsAffine T] (a b : T ⟶ A) [Flat a] [Flat b] (h : a ≫ p = b ≫ p), (transition p (Over.mk (map f)) E a b h).left = extendedTransition p f D a b h)",
+  "branch": "newtargets-dag",
+  "by": "NY",
+  "date": "2026-10-22",
+  "existing": false,
+  "note": "The ring tensor product is represented by its categorical pushout. Supporting declarations state each comparison, its section-product formula, its spectrum identification, naturality, and successive-base-change compatibility. The descent datum uses the recorded transport presentation; transition evaluates it on the universal point and extendedTransition fixes the alpha-conjugation formula."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-e36a3b24f",
+  "group": "NY",
+  "result": "pass",
+  "note": "Node unchanged vs side-live except lean; one new module; statement verbatim; no competing delivery. exists_descentDatum: CompactSpace/QuasiSeparatedSpace V, IsAffineHom (map f), IsOpenImmersion toSpecΓ, and ∃ E : Over.DescentDatum p (Over.mk (map f)) with j-intertwining on all T-points (ψj0=j1φ) and transition E a b = α_b⁻¹∘Spec(φ_ab♯)∘α_a on flat affine overlaps, which pins E at (pr0,pr1) on A2, so not hollow; cocycle from E.transport_transport. Clause (ii) checked consistent with (i): precompose with j_a, β_a iso, W_b affine. Supporting decls (comparison/baseChange/comparison_apply/alpha_properties/spectrumComparison_eq/comparison_naturality/comparison_successive) render β, α, naturality and successive base change; directions and both pushout-inclusion checks verified by hand. Hypotheses exactly the node's (flat, surjective, affine A,B, IsQuasiAffineHom, recorded DescentDatum), single universe u, no finite presentation; edge cases V=∅, A=∅, V=A ok. Real defs, all theorems sorry, source/blueprint docstrings and 8-step proof present. Advisory: comparison is the ⊤ specialisation of Mathlib pushoutSection (same map, convenience def); private proof-only import QuasiAffineBaseChange; second-reading section is the standard stub. No fixes, no compile run (no file changed)."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R8",
+  "result": "pass",
+  "landing": "20261024T190935-L-182858",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

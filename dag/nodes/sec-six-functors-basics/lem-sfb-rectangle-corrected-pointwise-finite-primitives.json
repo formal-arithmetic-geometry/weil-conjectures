@@ -1,0 +1,361 @@
+{
+ "id": "lem-sfb-rectangle-corrected-pointwise-finite-primitives",
+ "kind": "statement",
+ "title": "Rectangle correction makes bounded component primitives pointwise finite",
+ "statement": "Fix a prime $\\ell$, an algebraic closure $\\Omega/\\mathbf Q_\\ell$ with its extended nonarchimedean norm [def-weil-algebraic-closure], [def-weil-l-adic-numbers], a profinite space $S$ (compact Hausdorff with clopen basis), a profinite group $G$ (compact Hausdorff with open normal subgroup basis), and $n\\geq1$. All spaces use [def-weil-size-convention]. Write $C^r(P,G;V)=C(P\\times G^r,V)$ for all continuous maps, with trivial group action, $d^0=0$, and for $r\\geq1$\n$$(dc)(s;g_1,\\ldots,g_{r+1})=c(s;g_2,\\ldots,g_{r+1})+\\sum_{a=1}^r(-1)^a c(s;g_1,\\ldots,g_ag_{a+1},\\ldots,g_{r+1})+(-1)^{r+1}c(s;g_1,\\ldots,g_r).$$\nLet $F_i\\subseteq\\Omega$ be increasing intermediate fields finite over $\\mathbf Q_\\ell$ [def-weil-l-adic-coefficient-extension], and $p_i:\\Omega\\to F_i$ linear over $\\mathbf Q_\\ell$, continuous, fixing $F_i$, with norm at most one; set $p_{-1}=0$. Let $z\\in C^n(S,G;\\Omega)$ be a cocycle and $e_i=(p_i-p_{i-1})z$. Assume $\\|e_i\\|_\\infty\\to0$ and that each fixed evaluation of $e_i$ is eventually zero.\nSuppose, for $j\\geq1$, rectangles $B_j=H_ja_{j,0}\\times\\cdots\\times H_ja_{j,n}$, with $H_j$ open normal subgroups of $G$, and integers $N_j\\geq0$ are given. Suppose locally constant finite-range $k_i:S\\to\\mathbf N_{\\geq1}$ eventually stabilize at each $s$ to an index $j(s)$ for which the homogeneous function $f_z(s;g_0,\\ldots,g_n)=z(s;g_0^{-1}g_1,\\ldots,g_{n-1}^{-1}g_n)$ takes values in $F_{N_{j(s)}}$ on $B_{j(s)}$.\nFor each $j$, suppose coefficient-independent operators $T_j:C^n(*,G;V)\\to C^{n-1}(*,G;V)$ and $R_j:C^n(*,G;V)\\to C^n(*,G;V)$ are given for $V=F_i,\\Omega$, by fixed finite sums of continuous evaluations with coefficients in $\\mathbf Q_\\ell$ of norm at most one. Assume they have norm at most one, preserve coefficient subspaces and continuous parameter families, and for every cocycle $c$ satisfy $dT_jc+R_jc=c$, $dR_jc=0$, and $R_jc=0$ whenever $f_c$ vanishes on $B_j$. Suppose $F_i$-linear contractions $h_i:C^n(*,G;F_i)\\to C^{n-1}(*,G;F_i)$ send continuous profinite families to continuous families and satisfy $\\|h_i c\\|_\\infty\\leq\\|c\\|_\\infty$ for all $c$ and $dh_ic=c$ on cocycles.\nThen the fibrewise formulas\n$$r_i(s)=R_{k_i(s)}e_i(s),\\qquad b_i(s)=T_{k_i(s)}e_i(s)+h_i(r_i(s))$$\ndefine continuous $F_i$-valued cochains with $db_i=e_i$ and $\\|b_i\\|_\\infty\\leq\\|e_i\\|_\\infty\\to0$. For every fixed $(s,x)\\in S\\times G^{n-1}$, $b_i(s,x)=0$ for all sufficiently large $i$. More precisely, eventually $R_{j(s)}e_i(s)=0$ as an entire cochain, and $b_i(s,x)=(T_{j(s)}e_i(s))(x)$ is a fixed finite sum of evaluations of $e_i$. Empty $S$ is allowed.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+  "place": "Paragraph (3) is motivation only; agent-formulated analytic lemma extracted from old proof steps 8–9: rectangle-corrected finite-field primitives, continuity, bounds and pointwise eventual vanishing. WANTED: exact norm-topological reference."
+ },
+ "stmt_deps": [
+  "def-weil-l-adic-numbers",
+  "def-weil-size-convention",
+  "def-weil-algebraic-closure",
+  "def-weil-l-adic-coefficient-extension",
+  "def-sfb-continuous-inhomogeneous-cochains"
+ ],
+ "proof": [
+  {
+   "text": "For $i\\geq1$, the inclusion $F_{i-1}\\subseteq F_i$ makes $e_i=(p_i-p_{i-1})z$ a continuous $F_i$-valued cochain; for $i=0$ this is $p_0z$. All field topologies are the restricted norm topology. The displayed differential is a finite sum of evaluations with signs, so $d(p_i z)=p_i(dz)=0$ by $\\mathbf Q_\\ell$-linearity (also for $p_{-1}=0$). Hence $de_i=0$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3) supplies motivation only; agent proof of the analytic auxiliary lemma, using its explicitly assumed operators and contractions."
+   }
+  },
+  {
+   "text": "Fix $i$ and $j$. The hypotheses on $R_j,T_j$ and $h_i$ applied to the continuous family $e_i$ give continuous $F_i$-valued families $R_j e_i$, $T_j e_i$ and $T_j e_i+h_i(R_j e_i)$ on their respective products with $S$. At any $s$, local constancy of $k_i$ provides an open neighborhood on which $k_i=j=k_i(s)$. On that neighborhood the proposed $r_i,b_i$ equal these fixed-$j$ families. Continuity is local, so the formulas give continuous $F_i$-valued cochains on all of $S$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3) supplies motivation only; agent proof of the analytic auxiliary lemma, using its explicitly assumed operators and contractions."
+   }
+  },
+  {
+   "text": "For fixed $s$ put $j=k_i(s)$ and $c=e_i(s,-)$. This is a cocycle by step 1. The assumed identities give $dR_jc=0$ and $dh_i(R_jc)=R_jc$. Consequently $db_i(s,-)=dT_jc+dh_i(R_jc)=(c-R_jc)+R_jc=c$. Since $d$ never changes the parameter $s$, this proves $db_i=e_i$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3) supplies motivation only; agent proof of the analytic auxiliary lemma, using its explicitly assumed operators and contractions."
+   }
+  },
+  {
+   "text": "Put $E_i=\\|e_i\\|_\\infty$. For each $s$ and $j=k_i(s)$, the assumed norm bounds give $\\|T_j e_i(s,-)\\|_\\infty\\leq E_i$, $\\|R_j e_i(s,-)\\|_\\infty\\leq E_i$, and $\\|h_i(R_j e_i(s,-))\\|_\\infty\\leq E_i$. At every evaluation the nonarchimedean inequality bounds the norm of their sum by $E_i$. Taking the supremum yields $\\|b_i\\|_\\infty\\leq E_i$. Thus $\\|b_i\\|_\\infty\\to0$ by the assumed convergence of $E_i$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3) supplies motivation only; agent proof of the analytic auxiliary lemma, using its explicitly assumed operators and contractions."
+   }
+  },
+  {
+   "text": "Fix $s$ and put $j=j(s)$ and $N=N_j$. Choose $I_s$ so that $k_i(s)=j$ for $i\\geq I_s$. If also $i\\geq N+1$, every value $v=f_z(s;g_0,\\ldots,g_n)$ on $B_j$ lies in $F_N\\subseteq F_{i-1}\\subseteq F_i$, so $p_i(v)=p_{i-1}(v)=v$. Applying the homogeneous coordinate formula gives $f_{e_i(s,-)}=(p_i-p_{i-1})f_z(s,-)=0$ on the whole rectangle. The residual-vanishing assumption gives $R_j e_i(s,-)=0$ as an entire cochain. Coefficient independence identifies this equality for the $F_i$-valued and $\\Omega$-valued formulas. Since $h_i$ is linear, $h_i(0)=0$, and therefore $b_i(s,x)=(T_j e_i(s,-))(x)$ for these $i$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3) supplies motivation only; agent proof of the analytic auxiliary lemma, using its explicitly assumed operators and contractions."
+   }
+  },
+  {
+   "text": "Now fix also $x\\in G^{n-1}$. Write the stipulated fixed finite evaluation formula as $(T_j c)(x)=\\sum_{a=1}^{u_j}\\lambda_{j,a}c(\\psi_{j,a}(x))$. For every one of the finitely many points $(s,\\psi_{j,a}(x))$, choose a threshold beyond which $e_i$ is zero there, using the pointwise hypothesis. The maximum of these thresholds, $I_s$ and $N_j+1$ works simultaneously. Step 5 then makes $b_i(s,x)$ a sum of zeros. An empty evaluation list already gives zero. When $n=1$, $G^0$ is a singleton and the same calculation uses the stipulated $d^0=0$. When $S$ is empty all cochains are the unique empty functions, their supremum norms are zero, and all assertions hold.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3) supplies motivation only; agent proof of the analytic auxiliary lemma, using its explicitly assumed operators and contractions."
+   }
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+  "place": "Paragraph (3), scalar open-direct-image motivation; direct elementary argument from the hypotheses of this agent-formulated analytic lemma."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Finite evaluation rectangle replacement and stabilized locally constant selectors construct uniformly small pointwise eventually zero continuous primitives of finite field group cocycles",
+   "results": {
+    "t": "2026-10-22T06:04:03Z",
+    "tool": "leanfinder",
+    "query": "Finite evaluation rectangle replacement and stabilized locally constant selectors construct uniformly small pointwise eventually zero continuous primitives of finite field group cocycles",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "Profinite.NobelingProof.e",
+     "Profinite.NobelingProof.GoodProducts.eval",
+     "Profinite.NobelingProof.GoodProducts.smaller",
+     "Profinite.exists_locallyConstant_finite_aux",
+     "Profinite.NobelingProof.GoodProducts.range",
+     "Profinite.NobelingProof.spanFinBasis",
+     "Profinite.NobelingProof.factors",
+     "Profinite.NobelingProof.fin_comap_jointlySurjective"
+    ],
+    "digest": "f7e55a64102f13d0"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: Nobeling functions, complex analytic primitives and hom-complex degree induction do not give the stated rectangle correction and pointwise eventual vanishing"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"ContinuousCohomology\", \"coboundaries\"",
+   "results": {
+    "t": "2026-10-22T06:03:54Z",
+    "tool": "loogle",
+    "query": "\"ContinuousCohomology\", \"coboundaries\"",
+    "sub": "",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: Nobeling functions, complex analytic primitives and hom-complex degree induction do not give the stated rectangle correction and pointwise eventual vanishing"
+  },
+  {
+   "tool": "grep",
+   "query": "(rectang|finite.eval|pointwise.finite).*(primitive|cocycle|cochain)|(primitive|cocycle|cochain).*(rectang|finite.eval|pointwise.finite)",
+   "results": {
+    "t": "2026-10-22T06:03:53Z",
+    "tool": "grep",
+    "query": "(rectang|finite.eval|pointwise.finite).*(primitive|cocycle|cochain)|(primitive|cocycle|cochain).*(rectang|finite.eval|pointwise.finite)",
+    "sub": "",
+    "ok": true,
+    "n_hits": 3,
+    "note": "",
+    "top": [
+     "Mathlib/Analysis/Complex/HasPrimitives.lean",
+     "Mathlib/Analysis/Complex/HasPrimitives.lean",
+     "Mathlib/Analysis/Complex/HasPrimitives.lean"
+    ],
+    "digest": "e87591750d1aaf0a"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: Nobeling functions, complex analytic primitives and hom-complex degree induction do not give the stated rectangle correction and pointwise eventual vanishing"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Correct primitives using finite evaluations on a coset rectangle to make their series pointwise finite in an incomplete algebraic p adic field",
+   "results": {
+    "t": "2026-10-22T06:03:54Z",
+    "tool": "leansearch",
+    "query": "Correct primitives using finite evaluations on a coset rectangle to make their series pointwise finite in an incomplete algebraic p adic field",
+    "sub": "",
+    "ok": false,
+    "n_hits": 0,
+    "note": "service unavailable: {\"error\":\"Rate limit exceeded: 60 per 1 minute\"}",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-22",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Parametrized cochain residual vanishes on a stabilized certificate and a finite evaluation homotopy forces eventual vanishing of primitives",
+   "results": {
+    "t": "2026-10-22T06:04:05Z",
+    "tool": "leanfinder",
+    "query": "Parametrized cochain residual vanishes on a stabilized certificate and a finite evaluation homotopy forces eventual vanishing of primitives",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "CochainComplex.HomComplex.Cochain.InductionUp.limitSequence",
+     "CochainComplex.HomComplex.Cochain.EqUpTo",
+     "CochainComplex.ConnectData.shape",
+     "CochainComplex.cm5b.I_d",
+     "CochainComplex.HomComplex.Cochain.InductionUp.sequence_eqUpTo",
+     "CochainComplex.HomComplex.Cochain.InductionUp.limitSequence_eqUpTo",
+     "CochainComplex.HomComplex.Cochain.fromSingleMk_v_eq_zero",
+     "CochainComplex.HomComplex.Cochain.toSingleMk_v_eq_zero"
+    ],
+    "digest": "3e7b69ac373036b8"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: Nobeling functions, complex analytic primitives and hom-complex degree induction do not give the stated rectangle correction and pointwise eventual vanishing"
+  },
+  {
+   "tool": "grep",
+   "query": "(rectangle|pointwise|eventually).*(cocycle|cochain|primitive)|(cocycle|cochain|primitive).*(rectangle|pointwise|eventually)",
+   "results": {
+    "t": "2026-10-23T04:05:45Z",
+    "tool": "grep",
+    "query": "(rectangle|pointwise|eventually).*(cocycle|cochain|primitive)|(cocycle|cochain|primitive).*(rectangle|pointwise|eventually)",
+    "sub": "",
+    "ok": true,
+    "n_hits": 5,
+    "note": "",
+    "top": [
+     "Mathlib/Algebra/Homology/Factorizations/CM5a.lean",
+     "Mathlib/Analysis/Complex/HasPrimitives.lean",
+     "Mathlib/Analysis/Complex/HasPrimitives.lean",
+     "Mathlib/Analysis/Complex/HasPrimitives.lean",
+     "Mathlib/Computability/Ackermann.lean"
+    ],
+    "digest": "944f25bddc816d92"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: evaluation linear maps, cochain differentials and complex-analytic primitives do not state the selector-dependent rectangle correction, primitive identity, norm estimate and pointwise eventual vanishing"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Continuous group cochain primitives corrected by a finite evaluation homotopy vanish pointwise eventually",
+   "results": {
+    "t": "2026-10-23T04:05:45Z",
+    "tool": "leansearch",
+    "query": "Continuous group cochain primitives corrected by a finite evaluation homotopy vanish pointwise eventually",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "ContinuousCohomology.MultiInd.complex",
+     "ContinuousCohomology.MultiInd.d",
+     "ContinuousAlternatingMap.applyAddHom",
+     "ContinuousCohomology.MultiInd.d_comp_d",
+     "inhomogeneousCochains.d_hom_apply",
+     "continuousCohomology",
+     "groupCohomology",
+     "ContinuousCohomology.MultiInd.d_comp_d_assoc"
+    ],
+    "digest": "13831d7f1eaca85b"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: evaluation linear maps, cochain differentials and complex-analytic primitives do not state the selector-dependent rectangle correction, primitive identity, norm estimate and pointwise eventual vanishing"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"ContinuousMap\", \"eventuallyEq\"",
+   "results": {
+    "t": "2026-10-23T04:05:45Z",
+    "tool": "loogle",
+    "query": "\"ContinuousMap\", \"eventuallyEq\"",
+    "sub": "",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: evaluation linear maps, cochain differentials and complex-analytic primitives do not state the selector-dependent rectangle correction, primitive identity, norm estimate and pointwise eventual vanishing"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A finite evaluation linear operator sends a pointwise eventually zero sequence of continuous functions to a pointwise eventually zero sequence",
+   "results": {
+    "t": "2026-10-23T04:05:46Z",
+    "tool": "leanfinder",
+    "query": "A finite evaluation linear operator sends a pointwise eventually zero sequence of continuous functions to a pointwise eventually zero sequence",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "ContinuousMapZero.evalCLM",
+     "ContinuousMap.evalCLM",
+     "FunOnFinite.continuous_linearMap",
+     "PointwiseConvergenceCLM.evalCLM",
+     "LocallyConstant.evalₗ",
+     "PointwiseConvergenceCLM.evalCLM_apply",
+     "ContinuousMapZero.evalCLM_apply",
+     "MvPowerSeries.hasEval_def"
+    ],
+    "digest": "f46af26e04f370e9"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: evaluation linear maps, cochain differentials and complex-analytic primitives do not state the selector-dependent rectangle correction, primitive identity, norm estimate and pointwise eventual vanishing"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-prime-to-ell-cochain-finite-quotient-descent",
+  "date": "2026-10-22",
+  "group": "Q57"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "Paragraph (3), open-direct-image scalar input; agent analytic expansion, old proof steps 8–9: rectangle-corrected finite-field primitives, continuity, bounds and pointwise eventual vanishing",
+   "via": [
+    "lem-sfb-prime-to-ell-cochain-finite-quotient-descent",
+    "lem-sfb-prime-to-ell-condensed-acyclicity",
+    "lem-sfb-prime-to-ell-derived-invariants-reduction",
+    "lem-sfb-tame-inertia-continuous-koszul",
+    "lem-sfb-continuous-algcl-tame-boundary-comparison",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-rectangle-corrected-pointwise-finite-primitives",
+  "worker": "stage1",
+  "summary": "Kept the statement and its four definition dependencies unchanged. Supplied six direct elementary steps: component cocycles, locally constant pasting, the primitive identity, ultrametric bounds, eventual vanishing of the entire residual, and a maximum of finitely many evaluation thresholds. Checked the live Lean source for attachments and retained the original searches while adding four logged Mathlib searches. No new nodes are needed because all operators, identities and bounds are hypotheses.",
+  "blueprint": "The inherited provenance has blueprint.from.node=null. The source paragraph (3) motivates the open-direct-image scalar argument but does not assert this analytic lemma; these steps expand the parent cochain finite-quotient descent step 4 and the inherited old steps 8–9 without changing the unit route. Searches for pointwise finite primitives, rectangle correction and eventual zero found no matching blueprint statement.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-NL-328eaba4b",
+  "group": "NL",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NL-328eaba4b (reviewer sub-agent of L); spot-checked: Read the item in full, the report, the parent lem-sfb-prime-to-ell-cochain-finite-quotient-descent (its step 4 supplies exactly these hypotheses and uses exactly these conclusions), the four unchanged stmt_deps and the source main-20261015 sk-thm-sf-ctf-stability-direct-images.proof.md paragraph (3). That paragraph is only motivation, so the agent provenance and the WANTED line are honest. No repair note exists, so the re-split rule does not apply. The item is still unsplit in live and side-live, so no other group split it first. Diffed against live: the statement, stmt_deps and blueprint fields are unchanged. There are no new nodes. All six elementary steps are correct. (1) e_i is F_i-valued because the fields increase, and d commutes with additive p_i. (2) Continuity follows by local constancy of k_i from the assumed family preservation of R_j, T_j and h_i. (3) dT_j c + dh_i(R_j c) = (c - R_j c) + R_j c = c, with R_j c a cocycle. (4) The ultrametric inequality gives the bound with no factor 2. (5) Taking i >= max(I_s, N_j+1) makes both p_i and p_{i-1} fix F_N, so f_{e_i(s)} vanishes on B_j, R_j e_i(s) = 0 and h_i(0) = 0. (6) A maximum of finitely many evaluation thresholds gives pointwise eventual zero. Edge cases tested: G trivial with n=1, z=0, empty S, an empty evaluation list, and i=0. Duplicate search over dag/nodes for rectangle, pointwise, eventually and stabiliz found nothing that states this correction; checked nonarchimedean-finite-evaluation-calculus, finite-index-rectangle-primitive-operator, pointwise-finite-ultrametric-cochain-series, retracted-cochain-primitive-summation and parameter-cochain-completion-boundary-descent. Searches cover all three kinds, with LeanSearch kept honestly as unavailable on 2026-10-22. Advisory, not a fault of this delivery: the inherited statement cites def-weil-algebraic-closure for the extended norm on Omega, which that node does not define, and the finite-range hypothesis on k_i is unused. No fixes were written."
+ },
+ "lean": {
+  "module": "Sheaf.RepresentationTheory.RectangleCorrectedPointwiseFinitePrimitives",
+  "declaration": "ContinuousCohomology.exists_rectangleCorrectedPointwiseFinitePrimitives",
+  "declarations": [
+   "ContinuousCohomology.rectangleTrivialD",
+   "ContinuousCohomology.exists_rectangleCorrectedPointwiseFinitePrimitives"
+  ],
+  "file": "lean/Sheaf/RepresentationTheory/RectangleCorrectedPointwiseFinitePrimitives.lean",
+  "statement": "theorem exists_rectangleCorrectedPointwiseFinitePrimitives (l : ℕ) [Fact l.Prime] (Ω : Type u) [NontriviallyNormedField Ω] [NormedAlgebra ℚ_[l] Ω] [IsAlgClosure ℚ_[l] Ω] (hΩ : ∀ x y : Ω, ‖x + y‖ ≤ max ‖x‖ ‖y‖) (S : Profinite.{w}) (G : Type v) [Group G] [TopologicalSpace G] [IsTopologicalGroup G] [CompactSpace G] [T2Space G] [TotallyDisconnectedSpace G] (n : ℕ) (F : ℕ → IntermediateField ℚ_[l] Ω) (hF : Monotone F) [∀ i : ℕ, FiniteDimensional ℚ_[l] (F i)] (p : ℕ → Ω →L[ℚ_[l]] Ω) (hp_range : ∀ (i : ℕ) (x : Ω), p i x ∈ F i) (hp_fix : ∀ (i : ℕ) (x : F i), p i x = x) (hp_norm : ∀ (i : ℕ) (x : Ω), ‖p i x‖ ≤ ‖x‖) (z : C(S × (Fin (n + 1) → G), Ω)) (hz : ∀ s : S, rectangleTrivialD Ω G (n + 1) (z.curry s) = 0) (e : ∀ i : ℕ, C(S × (Fin (n + 1) → G), F i)) (he : ∀ (i : ℕ) (s : S) (x : Fin (n + 1) → G), (e i (s, x) : Ω) = p i (z (s, x)) - if i = 0 then 0 else p (i - 1) (z (s, x))) (he_norm : Tendsto (fun i : ℕ ↦ ‖e i‖) atTop (nhds 0)) (he_zero : ∀ (s : S) (x : Fin (n + 1) → G), ∀ᶠ i : ℕ in atTop, e i (s, x) = 0) (H : ℕ+ → OpenSubgroup G) (hH : ∀ j : ℕ+, (H j).toSubgroup.Normal) (a : ℕ+ → Fin (n + 2) → G) (N : ℕ+ → ℕ) (k : ℕ → LocallyConstant S ℕ+) (j : S → ℕ+) (hk : ∀ s : S, ∀ᶠ i : ℕ in atTop, k i s = j s) (hrectangle : ∀ (s : S) (x : Fin (n + 2) → H (j s)), z (s, fun q ↦ ((x q.castSucc : G) * a (j s) q.castSucc)⁻¹ * ((x q.succ : G) * a (j s) q.succ)) ∈ F (N (j s))) (t r : ℕ+ → ℕ) (α : ∀ j : ℕ+, Fin (t j) → ℚ_[l]) (β : ∀ j : ℕ+, Fin (r j) → ℚ_[l]) (ψ : ∀ j : ℕ+, Fin (t j) → C(Fin n → G, Fin (n + 1) → G)) (χ : ∀ j : ℕ+, Fin (r j) → C(Fin (n + 1) → G, Fin (n + 1) → G)) (hα : ∀ (j : ℕ+) (q : Fin (t j)), ‖α j q‖ ≤ 1) (hβ : ∀ (j : ℕ+) (q : Fin (r j)), ‖β j q‖ ≤ 1) (TΩ : ℕ+ → C(Fin (n + 1) → G, Ω) →ₗ[ℚ_[l]] C(Fin n → G, Ω)) (RΩ : ℕ+ → C(Fin (n + 1) → G, Ω) →ₗ[ℚ_[l]] C(Fin (n + 1) → G, Ω)) (T : ∀ i : ℕ, ℕ+ → C(Fin (n + 1) → G, F i) →ₗ[ℚ_[l]] C(Fin n → G, F i)) (R : ∀ i : ℕ, ℕ+ → C(Fin (n + 1) → G, F i) →ₗ[ℚ_[l]] C(Fin (n + 1) → G, F i)) (hTΩ : ∀ (j : ℕ+) (c : C(Fin (n + 1) → G, Ω)) (x : Fin n → G), TΩ j c x = ∑ q : Fin (t j), α j q • c (ψ j q x)) (hRΩ : ∀ (j : ℕ+) (c : C(Fin (n + 1) → G, Ω)) (x : Fin (n + 1) → G), RΩ j c x = ∑ q : Fin (r j), β j q • c (χ j q x)) (hT : ∀ (i : ℕ) (j : ℕ+) (c : C(Fin (n + 1) → G, F i)) (x : Fin n → G), T i j c x = ∑ q : Fin (t j), α j q • c (ψ j q x)) (hR : ∀ (i : ℕ) (j : ℕ+) (c : C(Fin (n + 1) → G, F i)) (x : Fin (n + 1) → G), R i j c x = ∑ q : Fin (r j), β j q • c (χ j q x)) (hopΩ : ∀ (j : ℕ+) (c : C(Fin (n + 1) → G, Ω)), ‖TΩ j c‖ ≤ ‖c‖ ∧ ‖RΩ j c‖ ≤ ‖c‖ ∧ (rectangleTrivialD Ω G (n + 1) c = 0 → rectangleTrivialD Ω G n (TΩ j c) + RΩ j c = c ∧ rectangleTrivialD Ω G (n + 1) (RΩ j c) = 0 ∧ ((∀ x : Fin (n + 2) → H j, c (fun q ↦ ((x q.castSucc : G) * a j q.castSucc)⁻¹ * ((x q.succ : G) * a j q.succ)) = 0) → RΩ j c = 0))) (hop : ∀ (i : ℕ) (j : ℕ+) (c : C(Fin (n + 1) → G, F i)), ‖T i j c‖ ≤ ‖c‖ ∧ ‖R i j c‖ ≤ ‖c‖ ∧ (rectangleTrivialD (F i) G (n + 1) c = 0 → rectangleTrivialD (F i) G n (T i j c) + R i j c = c ∧ rectangleTrivialD (F i) G (n + 1) (R i j c) = 0 ∧ ((∀ x : Fin (n + 2) → H j, c (fun q ↦ ((x q.castSucc : G) * a j q.castSucc)⁻¹ * ((x q.succ : G) * a j q.succ)) = 0) → R i j c = 0))) (h : ∀ i : ℕ, C(Fin (n + 1) → G, F i) →ₗ[F i] C(Fin n → G, F i)) (hh_norm : ∀ (i : ℕ) (c : C(Fin (n + 1) → G, F i)), ‖h i c‖ ≤ ‖c‖) (hh_d : ∀ (i : ℕ) (c : C(Fin (n + 1) → G, F i)), rectangleTrivialD (F i) G (n + 1) c = 0 → rectangleTrivialD (F i) G n (h i c) = c) (hh_family : ∀ (i : ℕ) (P : Profinite.{w}) (c : C(P × (Fin (n + 1) → G), F i)), Continuous (fun q : P × (Fin n → G) ↦ h i (c.curry q.1) q.2)) : ∃ (res : ∀ i : ℕ, C(S × (Fin (n + 1) → G), F i)) (b : ∀ i : ℕ, C(S × (Fin n → G), F i)), (∀ (i : ℕ) (s : S) (x : Fin (n + 1) → G), res i (s, x) = R i (k i s) ((e i).curry s) x) ∧ (∀ (i : ℕ) (s : S) (x : Fin n → G), b i (s, x) = T i (k i s) ((e i).curry s) x + h i ((res i).curry s) x) ∧ (∀ (i : ℕ) (s : S), rectangleTrivialD (F i) G n ((b i).curry s) = (e i).curry s) ∧ (∀ i : ℕ, ‖b i‖ ≤ ‖e i‖) ∧ Tendsto (fun i : ℕ ↦ ‖b i‖) atTop (nhds 0) ∧ (∀ (s : S) (x : Fin n → G), ∀ᶠ i : ℕ in atTop, b i (s, x) = 0) ∧ ∀ s : S, ∀ᶠ i : ℕ in atTop, R i (j s) ((e i).curry s) = 0 ∧ (∀ x : Fin (n + 1) → G, res i (s, x) = 0) ∧ (∀ x : Fin n → G, b i (s, x) = T i (j s) ((e i).curry s) x ∧ b i (s, x) = ∑ q : Fin (t (j s)), α (j s) q • e i (s, ψ (j s) q x))",
+  "branch": "newtargets-dag",
+  "by": "NI",
+  "date": "2026-10-23",
+  "existing": false,
+  "note": "The helper rectangleTrivialD is only a specialization of the published continuousInhomogeneousD to the trivial self-representation, not a second differential construction. Degree n+1 covers all positive degrees. The component cochains e are uniquely fixed by he, equivalently the projection differences specified in the node."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-803a4cf99",
+  "group": "NI",
+  "result": "pass",
+  "note": "H2 re-delivery. Item Lean module byte-identical to 9a30cad26273 (sha256 4a96c33b), which was accepted clause-by-clause; independently re-checked hypotheses, conclusion, edge cases and provability. Item node changes only one stmt_dep: theorem lem-sfb-continuous-cochain-finite-index-transfer replaced by the new def-sfb-continuous-inhomogeneous-cochains. New node matches Stacks 0DVG (signs, last face via Fin.contractNth, degree 0 gv-v, no closure) specialized to TopRep over a topological field. It is existing:true on the unchanged landed module ContinuousCochainFiniteIndexTransfer; lean.statement is verbatim l.40; both declarations exist with real data; from.node null is the blueprint_refs no-ancestor convention. No duplicate owner; live item still split/lean null. Gates OK. No compile: no file changed. Advisory: the transfer theorem node also lists these declarations (shared ownership, harmless)."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "AUTO",
+  "group": "Z7",
+  "result": "pass",
+  "landing": "20261023T132557-L-2302864",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)",
+  "sorry_before": [
+   "ContinuousCohomology.exists_rectangleCorrectedPointwiseFinitePrimitives"
+  ],
+  "sorry_after": []
+ }
+}

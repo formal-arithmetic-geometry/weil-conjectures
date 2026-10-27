@@ -1,0 +1,304 @@
+{
+ "id": "lem-sfb-qcqs-space-splitting-filtration",
+ "kind": "statement",
+ "title": "Finite splitting filtration by separated etale scheme neighborhoods",
+ "statement": "Let $S$ be a scheme [def-pc-scheme]. Work with algebraic spaces over $S$ [def-trf-algebraic-space], in the universes of [def-weil-size-convention], with sheaf fibre products [lem-trf-space-fibre-products-etale-covers] and atlas point topology [def-a1-space-point-topology]. A space is quasi-compact if every open cover of its point space has a finite subcover, and quasi-separated if its absolute diagonal over $\\operatorname{Spec}\\mathbf Z$ is quasi-compact. A morphism is quasi-compact if its pullback to every affine scheme test has quasi-compact source, and quasi-separated if its relative diagonal is quasi-compact. An affine morphism is representable by schemes and has affine source after every affine scheme test. Local finite presentation and local finite type are tested on compatible etale scheme charts [def-sfb-space-morphism-properties]; finite presentation means local finite presentation, quasi-compactness and quasi-separatedness.  An open subspace is represented on each scheme test by an open subscheme [def-a1-space-open-subspace]; a closed immersion is represented on each scheme test by a closed immersion [def-weil-closed-immersion]. Etale morphisms are tested on etale scheme charts [def-weil-etale-morphism]. Assume $S=\\operatorname{Spec}\\mathbf Z$ [def-weil-affine-spectrum] and let $X$ be quasi-compact and quasi-separated. There are an integer $n\\geq1$, quasi-compact open subspaces $\\emptyset=U_{n+1}\\subset U_n\\subset\\cdots\\subset U_1=X$, quasi-compact separated schemes $V_p$ for $1\\leq p\\leq n$, and representable surjective etale maps $f_p:V_p\\to U_p$ such that, for $T_p=U_p\\setminus U_{p+1}$ with its reduced closed subspace structure, $V_p\\times_{U_p}T_p\\to T_p$ is an isomorphism. Reduced closed structure means the closed subspace defined on etale affine charts by the radical ideal of the closed subset. In addition $f_n:V_n\\to U_n$ is an isomorphism, so $U_n$ is a quasi-compact separated scheme. Separated for a scheme means that its absolute diagonal is a closed immersion. The empty space is allowed.",
+ "source": {
+  "document": "literature/stacks-project/decent-spaces.tex",
+  "place": "Tag 07ST (lemma-filter-quasi-compact-quasi-separated); last stratum is schematic as explained in spaces-limits.tex, proposition-approximate, first proof paragraph"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-trf-algebraic-space",
+  "def-weil-size-convention",
+  "lem-trf-space-fibre-products-etale-covers",
+  "def-a1-space-point-topology",
+  "def-sfb-space-morphism-properties",
+  "def-a1-space-open-subspace",
+  "def-weil-closed-immersion",
+  "def-weil-etale-morphism",
+  "def-weil-affine-spectrum",
+  "def-sfb-space-absolute-quasi-separated",
+  "def-sfb-reduced-algebraic-space"
+ ],
+ "proof": [
+  {
+   "text": "Choose a representable surjective etale chart $a:U\\to X$ with $U$ affine by [lem-sfb-qc-space-affine-etale-atlas]. Apply [lem-sfb-space-qc-etale-fibre-bound] to this quasi-compact scheme and the quasi-separated space $X$, obtaining a uniform geometric fibre bound $d\\geq0$. Put $n=\\max(1,d)$. This also handles $X=\\varnothing$, for then $U=\\varnothing$ and all the constructions below are empty.",
+   "uses": [
+    "lem-sfb-qc-space-affine-etale-atlas",
+    "lem-sfb-space-qc-etale-fibre-bound"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/decent-spaces.tex",
+    "place": "Tag 07ST (lemma-filter-quasi-compact-quasi-separated), boundedness reduction to Tag 03JX; Tag 0BBN (lemma-filter-quasi-compact), initial affine atlas."
+   }
+  },
+  {
+   "text": "For $1\\leq p\\leq n+1$ use [lem-sfb-etale-atlas-distinct-tuple-geometry] to form the quasi-compact separated scheme $W_p$ of ordered pairwise distinct $p$-tuples in $U$ over $X$. Its comparison to the affine absolute product $U^p$ is separated and locally quasi-finite. Its restriction to the open $W_p$ stays separated and locally quasi-finite by [lem-a1-space-separated-lqf-permanence]. Thus [lem-sfb-separated-lqf-affine-finite-set] supplies an affine open containing any prescribed finite set in $W_p$. The symmetric group $S_p$ acts by permuting coordinates. This action is free on every scheme test: equality of two permuted tuples with different permutations forces equality of two distinct coordinates on any nonempty component, forbidden by the definition of $W_p$. Each point orbit is finite and hence lies in an affine open. Apply [lem-sfb-admissible-free-finite-quotient] to obtain $q_p:W_p\\to V_p=W_p/S_p$, finite etale surjective, with $V_p$ a quasi-compact separated scheme.",
+   "uses": [
+    "lem-sfb-etale-atlas-distinct-tuple-geometry",
+    "lem-sfb-separated-lqf-affine-finite-set",
+    "lem-sfb-admissible-free-finite-quotient",
+    "lem-a1-space-separated-lqf-permanence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/decent-spaces.tex",
+    "place": "Tag 0BBN (lemma-filter-quasi-compact), first paragraph, using Tag 07S0, Tag 07S6 and Tag 0BBM; quasi-compactness from Tag 07ST."
+   }
+  },
+  {
+   "text": "The map $W_p\\to X$ is invariant under $S_p$, so the quotient universal property in [lem-sfb-admissible-free-finite-quotient] gives $b_p:V_p\\to X$. The composite with $q_p$ is representable etale by Step 2. Since $q_p$ is a surjective etale scheme morphism, clause (1) of [lem-trf-space-etale-source-atlas-detection] says $b_p$ is representable etale. By [lem-a1-space-etale-open-image], its image is an open subspace $U_p$, it factors as a representable surjective etale map $f_p:V_p\\to U_p$, and $U_p$ is quasi-compact since $V_p$ is.",
+   "uses": [
+    "lem-sfb-admissible-free-finite-quotient",
+    "lem-trf-space-etale-source-atlas-detection",
+    "lem-a1-space-etale-open-image"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/decent-spaces.tex",
+    "place": "Tag 0BBN (lemma-filter-quasi-compact), end of first paragraph and beginning of second; source-local etaleness Tag 03FS."
+   }
+  },
+  {
+   "text": "For any algebraically closed field $\\Omega$ and $\\bar x:\\operatorname{Spec}\\Omega\\to X$, Step 2 identifies the fibre of $W_p(\\Omega)$ with ordered distinct $p$-tuples in the finite set $E=U(\\Omega)\\times_{X(\\Omega)}\\{\\bar x\\}$. The geometric orbit clause of [lem-sfb-admissible-free-finite-quotient] identifies the fibre of $V_p(\\Omega)$ with its $S_p$-orbits, hence with the $p$-element subsets of $E$. Thus $\\bar x$ belongs to $U_p$ exactly when $|E|\\geq p$. Membership in the image is tested after a field extension by [lem-a1-space-point-open-calculus]; a nonempty geometric fibre already has an $\\Omega$-point: [lem-trf-space-representable-etale-scheme-tests] makes it an etale scheme over $\\Omega$; [lem-weil-pbc-etale-fibre-discrete-separable-points] writes it as a disjoint union of finite separable spectra, and [lem-weil-pbc-alg-closed-finite-extension-trivial] identifies each residue extension with $\\Omega$. Therefore the same criterion holds on underlying point classes. Surjectivity of $a$ gives $U_1=X$, and $|E|\\leq d\\leq n$ gives $U_{n+1}=\\varnothing$. The criterion gives $|U_{p+1}|\\subseteq|U_p|$; the open-subspace order assertion of [lem-a1-space-point-open-calculus] gives the required inclusions of subspaces.",
+   "uses": [
+    "lem-sfb-admissible-free-finite-quotient",
+    "lem-a1-space-point-open-calculus",
+    "lem-sfb-space-qc-etale-fibre-bound",
+    "lem-trf-space-representable-etale-scheme-tests",
+    "lem-weil-pbc-etale-fibre-discrete-separable-points",
+    "lem-weil-pbc-alg-closed-finite-extension-trivial"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/decent-spaces.tex",
+    "place": "Tag 0BBN (lemma-filter-quasi-compact), second paragraph; termination as in Tag 07S9, with Tag 03JX bound from Step 1."
+   }
+  },
+  {
+   "text": "By [lem-sfb-space-reduced-closed-support] put on $|U_p|\\setminus|U_{p+1}|$ its reduced closed subspace structure $T_p\\hookrightarrow U_p$. The pullback $Z_p=V_p\\times_{U_p}T_p\\to T_p$ is representable surjective etale by [lem-trf-space-representable-etale-scheme-tests]. It is separated: on every scheme test its relative diagonal is the pullback of the absolute closed diagonal of $V_p$ along the natural map from the relative double product to the absolute double product; on scheme tests the required closedness follows from [lem-weil-pbc-closed-immersion-base-change] and [def-weil-closed-immersion]. At a geometric point of $T_p$, Step 4 gives $|E|=p$, so its fibre has exactly one point (the unique $p$-element subset of $E$). By [lem-sfb-space-separated-etale-diagonal-complement], a separated surjective etale morphism with these singleton geometric fibres is an isomorphism. This proves the splitting on each stratum.",
+   "uses": [
+    "lem-sfb-space-reduced-closed-support",
+    "lem-trf-space-representable-etale-scheme-tests",
+    "lem-sfb-space-separated-etale-diagonal-complement",
+    "def-weil-closed-immersion",
+    "lem-weil-pbc-closed-immersion-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/decent-spaces.tex",
+    "place": "Tag 0BBN (lemma-filter-quasi-compact), second paragraph, the maps Z_p to T_p, and Tag 05W5."
+   }
+  },
+  {
+   "text": "Finally $U_{n+1}=\\varnothing$, so $T_n$ has all the point classes of $U_n$. Every geometric point of $U_n$ consequently has the singleton fibre computed in Step 5: the inclusion of the reduced closed subspace does not change field-valued points, since every map from a field kills every nilpotent in each chart. The map $f_n:V_n\\to U_n$ is separated by the same absolute-diagonal pullback calculation as Step 5 and is surjective etale by Step 3. Apply [lem-sfb-space-separated-etale-diagonal-complement] once more to conclude that $f_n$ is an isomorphism. Thus $U_n$ is the quasi-compact separated scheme $V_n$. All assertions, including $n\\geq1$ and the empty case, now hold.",
+   "uses": [
+    "lem-sfb-space-separated-etale-diagonal-complement",
+    "def-weil-closed-immersion",
+    "lem-weil-pbc-closed-immersion-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/decent-spaces.tex",
+    "place": "Tag 07ST and spaces-limits.tex Tag 07SU (proposition-approximate), first proof paragraph."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-closed-immersion",
+  "lem-a1-space-etale-open-image",
+  "lem-a1-space-point-open-calculus",
+  "lem-a1-space-separated-lqf-permanence",
+  "lem-sfb-admissible-free-finite-quotient",
+  "lem-sfb-etale-atlas-distinct-tuple-geometry",
+  "lem-sfb-qc-space-affine-etale-atlas",
+  "lem-sfb-separated-lqf-affine-finite-set",
+  "lem-sfb-space-qc-etale-fibre-bound",
+  "lem-sfb-space-reduced-closed-support",
+  "lem-sfb-space-separated-etale-diagonal-complement",
+  "lem-trf-space-etale-source-atlas-detection",
+  "lem-trf-space-representable-etale-scheme-tests",
+  "lem-weil-pbc-alg-closed-finite-extension-trivial",
+  "lem-weil-pbc-closed-immersion-base-change",
+  "lem-weil-pbc-etale-fibre-discrete-separable-points"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/decent-spaces.tex",
+  "place": "Tag 07ST via the distinct-tuple construction of Tag 0BBN; final-open observation of spaces-limits.tex Tag 07SU."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "AlgebraicSpace|filter.*[Ee]tale|stratif.*[Ee]tale",
+   "results": "Actual logged search: 1 hits; Mathlib/AlgebraicGeometry/Sites/EtalePoint.lean. Mathlib/AlgebraicGeometry",
+   "date": "2026-10-23",
+   "verdict": "no match: hits are scheme quasi-separatedness, covers and ring-level etaleness, not a finite splitting filtration of an algebraic space; read Mathlib/AlgebraicGeometry/Sites/EtalePoint.lean:49-57 and AffineTransitionLimit.lean:1040-1061"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Finite etale neighborhood filtration of a quasi compact quasi separated algebraic space by separated schemes",
+   "results": "Actual logged search: 8 hits; AlgebraicGeometry.Scheme.instQuasiSeparatedSpaceCarrierCarrierCommRingCatOfIsSeparated, AlgebraicGeometry.quasiSeparated_iff_quasiSeparatedSpace, Algebra.FormallyEtale.of_isSeparable_aux, AlgebraicGeometry.IsFinite.of_comp, AlgebraicGeometry.IsSeparated.instQuasiSeparated, Algebra.FormallyEtale.iff_exists_algEquiv_prod, AlgebraicGeometry.IsEtale, AlgebraicGeometry.Scheme.smallEtaleTopology",
+   "date": "2026-10-23",
+   "verdict": "no match: hits are scheme quasi-separatedness, covers and ring-level etaleness, not a finite splitting filtration of an algebraic space; read Mathlib/AlgebraicGeometry/Sites/EtalePoint.lean:49-57 and AffineTransitionLimit.lean:1040-1061"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"IsEtale\"",
+   "results": "Actual logged search: 0 hits; ",
+   "date": "2026-10-23",
+   "verdict": "no match: hits are scheme quasi-separatedness, covers and ring-level etaleness, not a finite splitting filtration of an algebraic space; read Mathlib/AlgebraicGeometry/Sites/EtalePoint.lean:49-57 and AffineTransitionLimit.lean:1040-1061"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A qcqs algebraic space has a finite filtration by quasi-compact open subspaces and separated quasi-compact etale scheme neighborhoods isomorphic on successive reduced closed strata",
+   "results": "Actual logged search: 8 hits; AlgebraicGeometry.instPrespectralSpaceCarrierCarrierCommRingCat, AlgebraicGeometry.instHasAffinePropertyQuasiSeparatedQuasiSeparatedSpaceCarrierCarrierCommRingCat, AlgebraicGeometry.IsLocallyArtinian, AlgebraicGeometry.IsLocallyNoetherian, AlgebraicGeometry.IsLocallyNoetherian.quasiSeparatedSpace, AlgebraicGeometry.Scheme.exists_isOpenCover_and_isAffine, AlgebraicGeometry.instQuasiSeparatedToSpecΓOfQuasiSeparatedSpaceCarrierCarrierCommRingCat, AlgebraicGeometry.Scheme.quasiSeparatedSpace_of_isOpenCover",
+   "date": "2026-10-23",
+   "verdict": "no match: hits are scheme quasi-separatedness, covers and ring-level etaleness, not a finite splitting filtration of an algebraic space; read Mathlib/AlgebraicGeometry/Sites/EtalePoint.lean:49-57 and AffineTransitionLimit.lean:1040-1061"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Quasi compact quasi separated algebraic spaces admit a finite splitting sequence of etale charts with a schematic final open",
+   "results": "Actual logged search: 8 hits; AlgebraicGeometry.QuasiCompactCover, AlgebraicGeometry.Scheme.exists_isOpenCover_and_isAffine, AlgebraicGeometry.Scheme.quasiCompactCover, AlgebraicGeometry.Scheme.Hom.normalizationOpenCover, AlgebraicGeometry.Scheme.exists_isQuasiAffine_of_isLimit, AlgebraicGeometry.QuasiCompactCover.inst, AlgebraicGeometry.Scheme.Etale, AlgebraicGeometry.QuasiCompactCover.of_finite",
+   "date": "2026-10-23",
+   "verdict": "no match: hits are scheme quasi-separatedness, covers and ring-level etaleness, not a finite splitting filtration of an algebraic space; read Mathlib/AlgebraicGeometry/Sites/EtalePoint.lean:49-57 and AffineTransitionLimit.lean:1040-1061"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-space-absolute-noetherian-approximation",
+  "date": "2026-10-23",
+  "group": "N6"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Algebraicity and smoothness of the stack of all nodal curves. Supporting input: Tag 0D58 (lemma-curves-existence). Proof detail: Tag 0E7R proof, first paragraph after the first medskip: each X_n is a scheme by Tag 05ZR. Supporting input: Tag 05ZR via the affine-open argument of Tag 07VU; Tag 07VS applies to the surjective closed immersion from each affine open of Z to the corresponding open subspace of Y. Supporting input for Tag 07VS: Tag 07SU (proposition-approximate); Noetherian stages by spaces-morphisms.tex Tag 04ZK (lemma-locally-finite-type-locally-noetherian) over Spec Z, and finite type quasi-compactness. New supporting input: Tag 07ST (lemma-filter-quasi-compact-quasi-separated); last stratum is schematic as explained in spaces-limits.tex, proposition-approximate, first proof paragraph",
+   "via": [
+    "lem-sfb-space-absolute-noetherian-approximation",
+    "lem-sfb-finite-surjective-affine-space-target",
+    "lem-sfb-thickening-of-scheme-space",
+    "lem-sfb-curve-formal-effectivity",
+    "lem-sfb-nodal-curve-stack-smooth",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-qcqs-space-splitting-filtration",
+  "worker": "stage1",
+  "summary": "Expanded the referenced Tag 0BBN construction into six steps, with uniform fibre bound, free symmetric-group quotient, image opens, geometric subset count, reduced closed strata and final-open isomorphism. Two strictly smaller supporting geometry/quotient statements are new. Statement unchanged.",
+  "blueprint": "Inherited direct-image proof (3) approximation prerequisite: realizes Tag 07ST in the Tag 07SU approximation argument. Current latest blueprint sk-thm-sf-ctf-stability-direct-images proof (3) still uses the compactification route. The inherited nearest blueprint ancestor is null, as blueprint_refs.py reports.",
+  "tool_uses": [
+   {
+    "node": "lem-a1-space-etale-open-image",
+    "why": "Generic algebraic-space or scheme geometry in the Stacks 07ST distinct-tuple proof, serving the inherited approximation prerequisite; no alternative to the unit route is taken."
+   },
+   {
+    "node": "lem-a1-space-point-open-calculus",
+    "why": "Generic algebraic-space or scheme geometry in the Stacks 07ST distinct-tuple proof, serving the inherited approximation prerequisite; no alternative to the unit route is taken."
+   },
+   {
+    "node": "lem-a1-space-separated-lqf-permanence",
+    "why": "Generic algebraic-space or scheme geometry in the Stacks 07ST distinct-tuple proof, serving the inherited approximation prerequisite; no alternative to the unit route is taken."
+   },
+   {
+    "node": "lem-sfb-qc-space-affine-etale-atlas",
+    "why": "Generic algebraic-space or scheme geometry in the Stacks 07ST distinct-tuple proof, serving the inherited approximation prerequisite; no alternative to the unit route is taken."
+   },
+   {
+    "node": "lem-sfb-separated-lqf-affine-finite-set",
+    "why": "Generic algebraic-space or scheme geometry in the Stacks 07ST distinct-tuple proof, serving the inherited approximation prerequisite; no alternative to the unit route is taken."
+   },
+   {
+    "node": "lem-sfb-space-qc-etale-fibre-bound",
+    "why": "Generic algebraic-space or scheme geometry in the Stacks 07ST distinct-tuple proof, serving the inherited approximation prerequisite; no alternative to the unit route is taken."
+   },
+   {
+    "node": "lem-sfb-space-reduced-closed-support",
+    "why": "Generic algebraic-space or scheme geometry in the Stacks 07ST distinct-tuple proof, serving the inherited approximation prerequisite; no alternative to the unit route is taken."
+   },
+   {
+    "node": "lem-sfb-space-separated-etale-diagonal-complement",
+    "why": "Generic algebraic-space or scheme geometry in the Stacks 07ST distinct-tuple proof, serving the inherited approximation prerequisite; no alternative to the unit route is taken."
+   },
+   {
+    "node": "lem-trf-space-etale-source-atlas-detection",
+    "why": "Generic algebraic-space or scheme geometry in the Stacks 07ST distinct-tuple proof, serving the inherited approximation prerequisite; no alternative to the unit route is taken."
+   },
+   {
+    "node": "lem-trf-space-representable-etale-scheme-tests",
+    "why": "Generic algebraic-space or scheme geometry in the Stacks 07ST distinct-tuple proof, serving the inherited approximation prerequisite; no alternative to the unit route is taken."
+   },
+   {
+    "node": "lem-weil-pbc-etale-fibre-discrete-separable-points",
+    "why": "Generic scheme-test input in the Tag 0BBN argument: geometric etale fibres split over algebraically closed fields, or closed immersions persist under base change; does not replace the unit route."
+   },
+   {
+    "node": "lem-weil-pbc-closed-immersion-base-change",
+    "why": "Generic scheme-test input in the Tag 0BBN argument: geometric etale fibres split over algebraically closed fields, or closed immersions persist under base change; does not replace the unit route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-a1-space-etale-open-image",
+  "lem-a1-space-point-open-calculus",
+  "lem-a1-space-separated-lqf-permanence",
+  "lem-sfb-qc-space-affine-etale-atlas",
+  "lem-sfb-separated-lqf-affine-finite-set",
+  "lem-sfb-space-qc-etale-fibre-bound",
+  "lem-sfb-space-reduced-closed-support",
+  "lem-sfb-space-separated-etale-diagonal-complement",
+  "lem-trf-space-etale-source-atlas-detection",
+  "lem-trf-space-representable-etale-scheme-tests",
+  "lem-weil-pbc-etale-fibre-discrete-separable-points",
+  "lem-weil-pbc-closed-immersion-base-change"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q24-01db86eb5",
+  "group": "Q24",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q24-01db86eb5 (reviewer sub-agent of L); spot-checked: PASS with no changes. I read Stacks 0BBN, 07ST, 07S6/07S7 and 0BBM(4) in full, and the item's statement agrees with 07ST. The qc of U_p and the claim that f_n is an isomorphism are the 07SU additions, and both are true. Steps: (1) the affine atlas and the fibre bound d need only |X| qc and X quasi-separated, and n=max(1,d). (2) W_p→U^p is separated and lqf, so S_p-orbits lie in affines. Freeness holds on T-points, because the components where g≠g' fall into Δ_ij, which misses W_p. The quotient node gives V_p. (3) The universal property gives b_p, clause (1) of source-atlas-detection gives étaleness, and the open-image lemma gives U_p, f_p and qc. (4) The Ω-fibre of V_p is the set of p-subsets of E. Ω-points versus points goes through scheme-tests, the étale-fibre lemma and the alg-closed leaf, so x∈U_p iff |E|≥p. This gives U_1=X, U_{n+1}=∅ and nestedness. (5) The relative diagonal is the pullback of the absolute diagonal, which I checked, so Z_p→T_p is separated étale surjective with singleton fibres and the diagonal-complement criterion makes it an isomorphism. (6) Since U_{n+1}=∅, every point of U_n has |E|=n, so f_n is an isomorphism. Distinct-tuple geometry node: true, via 03KN (Δ_X is an unramified monomorphism) and the qc of Δ_X; cases p=1, U=∅ and X=∅ checked. Quotient node: true, since j is a finite monomorphism hence a closed immersion (0BBM); torsor Ω-points checked for trivial G, empty M and p | |G|. Neither node duplicates an existing node: lem-per-free-finite-group-affine-quotient needs an affine morphism, lem-sfb-finite-locally-free-open-affine-cover needs a source open in an affine, and lem-sfb-qc-space-schematic-strata gives only the strata. Neither restates the item. There is no cycle (my own closure check), no SGA citation, no supersession (live and side-live are unsplit) and no repair note. Batch 5: every flagged citation (def-trf-algebraic-space, trf fibre products, étale detection, scheme tests, and the a1/sfb space lemmas that reach trf only through the definition) is generic space foundation. None is a trace-formula or Poincaré step, so all are accepted. I accept the 12 tool_uses as local geometry from Stacks."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SpaceQcqsSplittingFiltration",
+  "declaration": "AlgebraicGeometry.AlgebraicSpace.exists_qcqs_splitting_filtration",
+  "file": "lean/Sheaf/AlgebraicGeometry/SpaceQcqsSplittingFiltration.lean",
+  "statement": "theorem exists_qcqs_splitting_filtration (X : AlgebraicSpace (Spec (.of (ULift.{u} ℤ)))) (hqc : CompactSpace (Point X.obj.obj)) (hqs : IsAbsolutelyQuasiSeparated X) : ∃ (m : ℕ) (U : Fin (m + 2) → OpenSubspace X) (V : Fin (m + 1) → Over (Spec (.of (ULift.{u} ℤ)))) (f : ∀ p : Fin (m + 1), yoneda.obj (V p) ⟶ (U p.castSucc).val.toFunctor) (T : Fin (m + 1) → AlgebraicSpace (Spec (.of (ULift.{u} ℤ)))) (t : ∀ p : Fin (m + 1), (T p).obj.obj ⟶ (U p.castSucc).val.toFunctor), (U 0).val = ⊤ ∧ (U (Fin.last (m + 1))).val = ⊥ ∧ (∀ p : Fin (m + 1), U p.succ ≤ U p.castSucc) ∧ (∀ p : Fin (m + 2), CompactSpace (Point (U p).val.toFunctor)) ∧ (∀ p : Fin (m + 1), CompactSpace (V p).left ∧ (V p).left.IsSeparated ∧ IsEtale (f p) ∧ IsSurjective (f p)) ∧ (∀ p : Fin (m + 1), IsRepresentableWith (fun _ _ q ↦ IsClosedImmersion q.left) (t p) ∧ IsReduced (T p) ∧ pointImage (t p) = mapPoint (U p.castSucc).val.ι ⁻¹' (pointImage (U p.succ).val.ι)ᶜ ∧ IsIso (Limits.pullback.snd (f p) (t p))) ∧ IsIso (f (Fin.last m))",
+  "branch": "sheaf-dag",
+  "by": "NZ",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "Positive length is encoded as m+1; opens have indices 0 through m+1 and charts 0 through m. Reduced closed strata are algebraic spaces with representable closed immersions, reducedness and the specified point support; the actual presheaf pullback projection is an isomorphism. Uses the existing landed absolute quasi-separatedness and reducedness definitions, added as statement dependencies."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-39686209c",
+  "group": "NZ",
+  "result": "pass",
+  "note": "Read node, Stacks 07ST + 07SU first paragraph, delivered module/report (Worker report + Second reading by NZ present), and dep declarations (IsRepresentableWith/IsEtale/IsSurjective, OpenSubspace, Point/pointImage/mapPoint, IsAbsolutelyQuasiSeparated, AlgebraicSpace.IsReduced, ClosedSubspace/exists_unique_reduced_closed_subspace). Every clause matches: Spec ℤ in arbitrary universe u, qc via CompactSpace on points, absolute qs; n=m+1≥1; opens Fin (m+2) from ⊤ to ⊥, nested and qc; V_p qc separated; f_p representable étale surjective; T_p reduced, representable closed immersion, support U_p∖U_{p+1} (unique by 03IQ); canonical pullback.snd iso; f_n iso. Empty X and n=1 work. Statement verbatim; only change is two stmt_deps on landed def nodes (Q09, 2026-10-23); imports exist; no cycle; first S2 delivery; no hollow defs, sorry only. mapPoint reached via def-sfb-space-morphism-properties. No recompile (no file changed)."
+ }
+}

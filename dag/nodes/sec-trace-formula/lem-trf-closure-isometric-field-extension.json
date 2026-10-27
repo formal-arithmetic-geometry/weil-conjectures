@@ -1,0 +1,449 @@
+{
+ "id": "lem-trf-closure-isometric-field-extension",
+ "kind": "statement",
+ "title": "An isometric field isomorphism extends to concrete subfield closures",
+ "statement": "Let $H$ be a field [def-weil-field] with a real-valued absolute value, meaning $|x|\\geq0$, $|x|=0\\iff x=0$, $|1|=1$, $|xy|=|x||y|$, and $|x+y|\\leq |x|+|y|$. Assume that $H$ is complete for $d(x,y)=|x-y|$. Let $F,G\\subseteq H$ be subfields, equipped with the restricted absolute value, and let $f:F\\xrightarrow{\\sim}G$ be a field isomorphism satisfying $|f(x)|=|x|$ for all $x\\in F$. Write $\\overline F,\\overline G$ for their metric closures inside $H$. These closures are subfields, and there exists a unique field isomorphism $\\overline f:\\overline F\\xrightarrow{\\sim}\\overline G$ extending $f$ and satisfying $|\\overline f(x)|=|x|$ for every $x\\in\\overline F$. In particular $d(\\overline f(x),\\overline f(y))=d(x,y)$ for all $x,y\\in\\overline F$.",
+ "source": {
+  "document": "lean/.lake/packages/mathlib/Mathlib/Topology/MetricSpace/Completion.lean",
+  "place": "Isometry.completion_extension, lines 193–197; Isometry.extensionHom and extensionHom_coe, lines 209–214. Concrete-closure reformulation additionally requires identifying the completion image with the closure; that argument is agent-written."
+ },
+ "stmt_deps": [
+  "def-weil-field"
+ ],
+ "proof": [
+  {
+   "text": "The absolute value gives a metric topological field: addition is continuous by $|(x+y)-(x'+y')|\\leq|x-x'|+|y-y'|$, negation is an isometry, and multiplication is continuous by $|xy-x'y'|\\leq |x|\\,|y-y'|+|y'|\\,|x-x'|$ (near a fixed point $|y'|\\leq |y|+1$). Away from zero, $|x^{-1}-y^{-1}|=|x-y|/(|x||y|)$ and $|y-x|<|x|/2$ implies $|y|>|x|/2$, so inversion is continuous there. Apply [lem-trf-subfield-topological-closure] to obtain subfields $\\overline F,\\overline G$, closed in $H$ and containing $F,G$. The inclusions $F\\to\\overline F$ and $G\\to\\overline G$ preserve distance and have dense image: a ball about a point of a closure meets the original set, by the definition of closure. Use throughout the restricted metrics and field operations.",
+   "uses": [
+    "lem-trf-subfield-topological-closure"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "Mathlib/Topology/Algebra/UniformRing.lean",
+    "place": "IsDenseInducing.extendRingHom, lines 274–293; agent assembly for concrete closures using Field.lean:60–74 and DenseEmbedding.lean:359–384."
+   }
+  },
+  {
+   "text": "For $a,b\\in F$, $|f(a)-f(b)|=|f(a-b)|=|a-b|$. Thus $f:F\\to H$ is uniformly continuous (take $\\delta=\\epsilon$); $f^{-1}:G\\to H$ is likewise an isometry because every pair in $G$ has preimages in $F$. Apply [lem-trf-dense-isometric-ring-hom-extension] with $(A,B,C)=(F,\\overline F,H)$, $i$ the inclusion, and $h=f$. It gives a uniformly continuous ring homomorphism $T:\\overline F\\to H$ extending $f$. Apply it again with $(G,\\overline G,H)$ and $f^{-1}$ to obtain a uniformly continuous ring homomorphism $S:\\overline G\\to H$ extending $f^{-1}$. Completeness is needed only for the codomain $H$, which is complete by hypothesis.",
+   "uses": [
+    "lem-trf-dense-isometric-ring-hom-extension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "Mathlib/Topology/Algebra/UniformRing.lean",
+    "place": "IsDenseInducing.extendRingHom, lines 274–293; agent assembly for concrete closures using Field.lean:60–74 and DenseEmbedding.lean:359–384."
+   }
+  },
+  {
+   "text": "The set $T^{-1}(\\overline G)$ is closed in $\\overline F$, since $T$ is continuous and $\\overline G$ is closed; it contains $F$ because $T(a)=f(a)\\in G$. The closed-predicate clause of [lem-trf-dense-closed-predicate] gives $T(\\overline F)\\subseteq\\overline G$. Similarly $S(\\overline G)\\subseteq\\overline F$. Hence corestrict to continuous ring homomorphisms $t:\\overline F\\to\\overline G$ and $s:\\overline G\\to\\overline F$. Corestriction preserves continuity because inverse images of relatively open sets are inverse images of ambient opens.",
+   "uses": [
+    "lem-trf-dense-closed-predicate"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "Mathlib/Topology/Algebra/UniformRing.lean",
+    "place": "IsDenseInducing.extendRingHom, lines 274–293; agent assembly for concrete closures using Field.lean:60–74 and DenseEmbedding.lean:359–384."
+   }
+  },
+  {
+   "text": "For each $a\\in F$, the continuous real-valued functions $y\\mapsto d(t(a),t(y))$ and $y\\mapsto d(a,y)$ on $\\overline F$ agree on $F$ by the isometry of $f$; [lem-trf-dense-closed-predicate] makes them equal everywhere. Now fix any $y\\in\\overline F$ and apply the same equality clause in the variable $x$ to $x\\mapsto d(t(x),t(y))$ and $x\\mapsto d(x,y)$, whose equality on $F$ was just proved. Thus $d(t(x),t(y))=d(x,y)$ for all $x,y$. Continuity of these distance functions follows directly from $|d(u,v)-d(u',v')|\\leq d(u,u')+d(v,v')$. Since the ring map sends $0$ to $0$, taking $y=0$ gives $|t(x)|=|x|$.",
+   "uses": [
+    "lem-trf-dense-closed-predicate"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "Mathlib/Topology/Algebra/UniformRing.lean",
+    "place": "IsDenseInducing.extendRingHom, lines 274–293; agent assembly for concrete closures using Field.lean:60–74 and DenseEmbedding.lean:359–384."
+   }
+  },
+  {
+   "text": "The continuous maps $s\\circ t$ and $\\operatorname{id}_{\\overline F}$ agree on $F$, since $S(f(a))=f^{-1}(f(a))=a$. By [lem-trf-dense-closed-predicate] they agree on $\\overline F$. Similarly $t\\circ s=\\operatorname{id}_{\\overline G}$. Therefore $t$ is a field isomorphism, with inverse $s$, extending $f$. Any other absolute-value-preserving field isomorphism $r:\\overline F\\to\\overline G$ extending $f$ satisfies $d(r(x),r(y))=|r(x-y)|=|x-y|$ and is continuous. Since $r$ and $t$ agree on dense $F$, the same equality clause gives $r=t$.",
+   "uses": [
+    "lem-trf-dense-closed-predicate"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "Mathlib/Topology/Algebra/UniformRing.lean",
+    "place": "IsDenseInducing.extendRingHom, lines 274–293; agent assembly for concrete closures using Field.lean:60–74 and DenseEmbedding.lean:359–384."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-trf-subfield-topological-closure",
+  "lem-trf-dense-isometric-ring-hom-extension",
+  "lem-trf-dense-closed-predicate"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "Mathlib/Topology/Algebra/UniformRing.lean",
+  "place": "IsDenseInducing.extendRingHom, lines 274–293; agent assembly for concrete closures using Field.lean:60–74 and DenseEmbedding.lean:359–384."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "loogle",
+   "query": "Isometry, Dense",
+   "results": {
+    "ok": true,
+    "n_hits": 1,
+    "top": [
+     "Metric.dense_iUnion_range_toInductiveLimit"
+    ],
+    "note": "",
+    "subdirectory": ""
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: completion_extension and extensionHom give maps from abstract completions; mapRingEquiv gives an abstract completion equivalence. Identifying their ranges with the concrete subfield closures and obtaining the unique field equivalence is an additional argument, not a one-line specialization."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An isometry between metric spaces extends uniquely to an isometry between their closures in complete metric spaces",
+   "results": {
+    "ok": true,
+    "n_hits": 8,
+    "top": [
+     "Isometry.completion_extension",
+     "Isometry.completion_map",
+     "Isometry.extensionHom",
+     "Isometry.extensionHom_coe",
+     "Isometry.isClosedEmbedding",
+     "UniformSpace.Completion.coe_isometry",
+     "IsometryEquiv.completeSpace",
+     "Isometry.isometryEquivOnRange_toEquiv"
+    ],
+    "note": "",
+    "subdirectory": ""
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: completion_extension and extensionHom give maps from abstract completions; mapRingEquiv gives an abstract completion equivalence. Identifying their ranges with the concrete subfield closures and obtaining the unique field equivalence is an additional argument, not a one-line specialization."
+  },
+  {
+   "tool": "grep",
+   "query": "isometry.*extend|IsometryEquiv.*(complet|extend)|isometry.*extension|Isometry.*extension",
+   "results": {
+    "ok": true,
+    "n_hits": 7,
+    "top": [
+     "Mathlib/Topology/MetricSpace/Completion.lean",
+     "Mathlib/Topology/MetricSpace/Completion.lean",
+     "Mathlib/Topology/MetricSpace/Completion.lean",
+     "Mathlib/Topology/MetricSpace/Completion.lean",
+     "Mathlib/Topology/MetricSpace/Completion.lean",
+     "Mathlib/Topology/Metrizable/Urysohn.lean",
+     "Mathlib/Topology/ContinuousMap/Bounded/Basic.lean"
+    ],
+    "note": "",
+    "subdirectory": "Topology"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: completion_extension and extensionHom give maps from abstract completions; mapRingEquiv gives an abstract completion equivalence. Identifying their ranges with the concrete subfield closures and obtaining the unique field equivalence is an additional argument, not a one-line specialization."
+  },
+  {
+   "tool": "leansearch",
+   "query": "An isometric equivalence between metric spaces extends to an isometric equivalence of their completions",
+   "results": {
+    "ok": true,
+    "n_hits": 8,
+    "top": [
+     "Isometry.completion_extension",
+     "Isometry.completion_map",
+     "IsometryEquiv.ctorIdx",
+     "AbsoluteValue.Completion.isometry_extensionEmbedding_of_comp",
+     "UniformSpace.Completion.coe_isometry",
+     "LinearEquiv.extendOfIsometry_apply",
+     "Isometry.extensionHom",
+     "IsometryEquiv.completeSpace"
+    ],
+    "note": "",
+    "subdirectory": ""
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: completion_extension and extensionHom give maps from abstract completions; mapRingEquiv gives an abstract completion equivalence. Identifying their ranges with the concrete subfield closures and obtaining the unique field equivalence is an additional argument, not a one-line specialization."
+  },
+  {
+   "tool": "grep",
+   "query": "Isometry.*(RingEquiv|closure)|RingEquiv.*(completion|closure)|def.*(extensionHom|mapRingEquiv)|theorem.*extensionHom_coe",
+   "results": {
+    "ok": true,
+    "n_hits": 7,
+    "top": [
+     "Mathlib/Topology/MetricSpace/Gluing.lean",
+     "Mathlib/Topology/Category/UniformSpace.lean",
+     "Mathlib/Topology/MetricSpace/Completion.lean",
+     "Mathlib/Topology/MetricSpace/Completion.lean",
+     "Mathlib/Topology/Algebra/UniformRing.lean",
+     "Mathlib/Topology/Algebra/UniformRing.lean",
+     "Mathlib/Topology/Algebra/UniformRing.lean"
+    ],
+    "note": "",
+    "subdirectory": "Topology"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: completion_extension and extensionHom give maps from abstract completions; mapRingEquiv gives an abstract completion equivalence. Identifying their ranges with the concrete subfield closures and obtaining the unique field equivalence is an additional argument, not a one-line specialization."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Extend an isometric field isomorphism between subfields to their topological closures",
+   "results": {
+    "ok": true,
+    "n_hits": 8,
+    "top": [
+     "LinearEquiv.extendOfIsometry_apply",
+     "Isometry.completion_extension",
+     "Isometry.extensionHom",
+     "AbsoluteValue.Completion.isometry_extensionEmbedding_of_comp",
+     "LinearEquiv.extendOfIsometry",
+     "AbsoluteValue.Completion.extensionEmbedding_of_comp_coe",
+     "LinearIsometry.extend",
+     "LinearEquiv.extendOfIsometry_eq"
+    ],
+    "note": "",
+    "subdirectory": ""
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: completion_extension and extensionHom give maps from abstract completions; mapRingEquiv gives an abstract completion equivalence. Identifying their ranges with the concrete subfield closures and obtaining the unique field equivalence is an additional argument, not a one-line specialization."
+  },
+  {
+   "tool": "loogle",
+   "query": "RingEquiv, UniformSpace.Completion",
+   "results": {
+    "ok": true,
+    "n_hits": 4,
+    "top": [
+     "UniformSpace.Completion.mapRingEquiv",
+     "UniformSpace.Completion.mapRingEquiv_apply",
+     "UniformSpace.Completion.mapRingEquiv_symm_apply",
+     "Padic.coe_withValRingEquiv_symm"
+    ],
+    "note": "",
+    "subdirectory": ""
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: completion_extension and extensionHom give maps from abstract completions; mapRingEquiv gives an abstract completion equivalence. Identifying their ranges with the concrete subfield closures and obtaining the unique field equivalence is an additional argument, not a one-line specialization."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An isometric field isomorphism between subfields of a complete valued field extends uniquely to an isometric field isomorphism between their closures",
+   "results": {
+    "ok": true,
+    "n_hits": 8,
+    "top": [
+     "AbsoluteValue.Completion.isometry_extensionEmbedding_of_comp",
+     "AbsoluteValue.Completion.isClosedEmbedding_extensionEmbedding_of_comp",
+     "AbsoluteValue.Completion.extensionEmbedding_of_comp_coe",
+     "NumberField.InfinitePlace.Completion.isometry_extensionEmbedding",
+     "LinearEquiv.extendOfIsometry_eq",
+     "LinearEquiv.extendOfIsometry_apply",
+     "Subfield.completableTopField",
+     "AbsoluteValue.Completion.extensionEmbedding_of_comp"
+    ],
+    "note": "",
+    "subdirectory": ""
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: completion_extension and extensionHom give maps from abstract completions; mapRingEquiv gives an abstract completion equivalence. Identifying their ranges with the concrete subfield closures and obtaining the unique field equivalence is an additional argument, not a one-line specialization."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An isometric field isomorphism extends uniquely to the topological closures of subfields in a complete normed field",
+   "results": {
+    "t": "2026-10-24T09:42:12Z",
+    "tool": "leanfinder",
+    "query": "An isometric field isomorphism extends uniquely to the topological closures of subfields in a complete normed field",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "AbsoluteValue.Completion.isClosedEmbedding_extensionEmbedding_of_comp",
+     "AbsoluteValue.Completion.isometry_extensionEmbedding_of_comp",
+     "LinearEquiv.extendOfIsometry_eq",
+     "LinearEquiv.extendOfIsometry_apply",
+     "AbsoluteValue.Completion.extensionEmbedding_of_comp_coe",
+     "Isometry.extensionHom_coe",
+     "Subfield.completableTopField",
+     "AbsoluteValue.Completion.extensionEmbedding_of_comp"
+    ],
+    "digest": "6d08be8ca114d1e3"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match for the whole item: the completion candidates do not identify the concrete closure field isomorphism; the dense ring extension hit supplies only the extension, not the range, isometry, inverse, or uniqueness arguments."
+  },
+  {
+   "tool": "loogle",
+   "query": "Isometry, UniformSpace.Completion",
+   "results": {
+    "t": "2026-10-24T09:42:57Z",
+    "tool": "loogle",
+    "query": "Isometry, UniformSpace.Completion",
+    "sub": "",
+    "ok": true,
+    "n_hits": 9,
+    "note": "",
+    "top": [
+     "UniformSpace.Completion.coe_isometry",
+     "Isometry.completion_extension",
+     "Isometry.completion_map",
+     "Isometry.extensionHom",
+     "Isometry.mapRingHom",
+     "Isometry.extensionHom_coe",
+     "Isometry.isometry_mapRingHom",
+     "Isometry.mapRingHom_coe"
+    ],
+    "digest": "bcc121f698061f10"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match for the whole item: the completion candidates do not identify the concrete closure field isomorphism; the dense ring extension hit supplies only the extension, not the range, isometry, inverse, or uniqueness arguments."
+  },
+  {
+   "tool": "grep",
+   "query": "def Subfield.topologicalClosure|theorem Isometry.completion_extension|def Isometry.extensionHom|theorem Isometry.extensionHom_coe",
+   "results": {
+    "t": "2026-10-24T09:42:57Z",
+    "tool": "grep",
+    "query": "def Subfield.topologicalClosure|theorem Isometry.completion_extension|def Isometry.extensionHom|theorem Isometry.extensionHom_coe",
+    "sub": "Topology",
+    "ok": true,
+    "n_hits": 4,
+    "note": "",
+    "top": [
+     "Mathlib/Topology/Algebra/Field.lean",
+     "Mathlib/Topology/MetricSpace/Completion.lean",
+     "Mathlib/Topology/MetricSpace/Completion.lean",
+     "Mathlib/Topology/MetricSpace/Completion.lean"
+    ],
+    "digest": "a55d418583331cc2"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match for the whole item: the completion candidates do not identify the concrete closure field isomorphism; the dense ring extension hit supplies only the extension, not the range, isometry, inverse, or uniqueness arguments."
+  },
+  {
+   "tool": "leansearch",
+   "query": "An isometric field isomorphism of subfields extends to their closures",
+   "results": {
+    "t": "2026-10-24T09:42:58Z",
+    "tool": "leansearch",
+    "query": "An isometric field isomorphism of subfields extends to their closures",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "LinearEquiv.extendOfIsometry_apply",
+     "LinearEquiv.extendOfIsometry",
+     "LinearIsometry.extend",
+     "AbsoluteValue.Completion.extensionEmbedding_of_comp_coe",
+     "algebraicClosure.algEquivOfAlgEquiv",
+     "LinearEquiv.extendOfIsometry_eq",
+     "separableClosure.algEquivOfAlgEquiv",
+     "AbsoluteValue.Completion.extensionEmbedding_of_comp"
+    ],
+    "digest": "21c5582311ae62e8"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match for the whole item: the completion candidates do not identify the concrete closure field isomorphism; the dense ring extension hit supplies only the extension, not the range, isometry, inverse, or uniqueness arguments."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Extend a ring homomorphism along a dense uniform embedding into a complete topological ring",
+   "results": {
+    "t": "2026-10-24T09:43:17Z",
+    "tool": "leanfinder",
+    "query": "Extend a ring homomorphism along a dense uniform embedding into a complete topological ring",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "IsDenseInducing.extendRingHom",
+     "UniformSpace.Completion.extensionHom",
+     "UniformSpace.Completion.mapRingHom",
+     "UniformSpace.Completion.extensionHom_coe",
+     "Isometry.extensionHom",
+     "UniformSpace.Completion.mapRingHom_apply",
+     "UniformSpace.Completion.coe_mapRingHom",
+     "UniformSpace.Completion.coeRingHom"
+    ],
+    "digest": "1f8824632e75d103"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match for the whole item: the completion candidates do not identify the concrete closure field isomorphism; the dense ring extension hit supplies only the extension, not the range, isometry, inverse, or uniqueness arguments."
+  },
+  {
+   "tool": "grep",
+   "query": "isometry.*extend|Isometry.*extend|range.*extension|extension.*range",
+   "results": {
+    "t": "2026-10-24T09:43:17Z",
+    "tool": "grep",
+    "query": "isometry.*extend|Isometry.*extend|range.*extension|extension.*range",
+    "sub": "Topology",
+    "ok": true,
+    "n_hits": 5,
+    "note": "",
+    "top": [
+     "Mathlib/Topology/UniformSpace/UniformEmbedding.lean",
+     "Mathlib/Topology/Algebra/Valued/ValuedField.lean",
+     "Mathlib/Topology/UniformSpace/Completion.lean",
+     "Mathlib/Topology/ContinuousMap/Bounded/Basic.lean",
+     "Mathlib/Topology/Metrizable/Urysohn.lean"
+    ],
+    "digest": "5193ec9943ed25f4"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match for the whole item: the completion candidates do not identify the concrete closure field isomorphism; the dense ring extension hit supplies only the extension, not the range, isometry, inverse, or uniqueness arguments."
+  }
+ ],
+ "mathlib_match": null,
+ "mathlib_candidate": {
+  "declaration": "Isometry.extensionHom; Isometry.completion_extension; UniformSpace.Completion.mapRingEquiv",
+  "file": "Mathlib/Topology/MetricSpace/Completion.lean; Mathlib/Topology/Algebra/UniformRing.lean",
+  "reason": "The concrete-closure range identification and closure field structures require proof."
+ },
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-nearby-parameter-isometric-substitution",
+  "date": "2026-10-24",
+  "group": "Q69"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Proof (1)--(2), semistable-alteration input in the nearby-cycle branch: ILO Exposé X, Theorem 3.4, Step 3, invoking Temkin 2010, Theorems 1.5 and 1.1 for a semistable multipointed modification. Temkin proof component: Stable reduction over finite-height separably closed valuation fields. Input: Proposition 4.3.3, pp. 29--30; applied componentwise when the smooth generic fibre is disconnected Supporting input: Theorem 2.1.8 and Lemmas 2.1.1, 2.1.2, 2.1.6, pp. 7--10; smooth-centre formulation used in the first substantive paragraph of the proof of Proposition 4.3.3, pp. 29--30. Supporting lemma: Theorem 2.1.10(i)--(iii), printed p. 10; etale form of unramifiedness by Lemma 2.1.6, same page. Supporting input: Corollary 6.3.4, printed pp. 48–49, specialized to algebraically closed ground field. Supporting input to the parameter-finiteness argument: Lemma 6.3.2 and its proof, printed p. 48, specialized to algebraically closed k; closed relative bound with c<1, including b=0. Completion-extension step after the rational substitution estimate: identify the abstract completions with the closures inside H.",
+   "via": [
+    "lem-trf-nearby-parameter-isometric-substitution",
+    "lem-trf-analytic-parameter-finiteness",
+    "lem-trf-analytic-uniformization",
+    "lem-trf-valued-curve-etale-parameter",
+    "lem-trf-valuation-strict-semistable-local-uniformization",
+    "lem-trf-valuation-stable-reduction",
+    "lem-trf-temkin-stable-modification",
+    "lem-trf-stable-modification-flat-curve-pair",
+    "lem-trf-dejong-relative-marked-semistable",
+    "lem-trf-relative-marked-nodal-reduction",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-trf-closure-isometric-field-extension",
+  "worker": "stage1",
+  "group": "O4",
+  "summary": "Statement unchanged. Construct the two closures as subfields, extend f and its inverse directly along the dense isometric inclusions using Mathlib, corestrict their ranges using closed-predicate induction, prove the distance identity by two dense equalizer applications, and prove inverse identities and uniqueness. Three generic Mathlib leaves; no completion-image identification or new unsplit lemma is needed.",
+  "blueprint": "Retains the inherited Temkin nearby-parameter branch of lem-trf-local-term-locality, specifically the concrete-closure extension input to step 6 of lem-trf-nearby-parameter-isometric-substitution. The latest blueprint local-term proof does not state this analytic supporting lemma; below that unit the completion identification is replaced by the equivalent direct dense extension construction."
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-O4-9e86c45ff",
+  "group": "O4",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-O4-9e86c45ff (reviewer sub-agent of L); spot-checked: I read the item, all three new nodes, the parent citer (lem-trf-nearby-parameter-isometric-substitution, step 6) and every cited Mathlib line. Sources checked: Field.lean 50-74; GroupWithZero.lean 81-83 (ContinuousInv₀ means inversion is continuous at nonzero points); UniformRing.lean 274-293 (extendRingHom: β a topological semiring, γ T2 and complete, IsUniformInducing plus DenseRange plus UniformContinuous); UniformEmbedding.lean 471; DenseEmbedding.lean 165-167, 359-361, 381-384; Isometry.lean 133-134. The steps are correct. Step 1: the absolute-value inequalities give the topological-field hypotheses, and closure gives density and isometric inclusions. Step 2: f is an isometry, hence uniformly continuous, and only H needs to be complete. Step 3: T^{-1}(Ḡ) is closed and contains the dense set F. Step 4: the equality clause is used twice, so density of the product is not needed, and t(0)=0 gives |t(x)|=|x|. Step 5: s∘t=id and t∘s=id by density; uniqueness holds because an isometric r agrees with t on F. Statement unchanged; the citer uses it as stated. The new nodes are generic Mathlib leaves, statements only, strictly smaller than the item, neither restating it nor circular. Small cases: trivial absolute value, ℚ⊂ℝ, ℚ(i)⊂ℂ with conjugation, A=B with i=id, empty X. No duplicates found in DAG statements or mathlib_match/mathlib_candidate fields. Same unit, no tool_uses, no SGA, not a re-split. FIX (B6): lem-trf-subfield-topological-closure mathlib_match.how gave IsTopologicalDivisionRing as lines 50-51, which is the docstring; the class is on line 52. Corrected to 50-52 in fixes/dag/nodes/sec-trace-formula/; nothing else changed.; 1 file(s) fixed by the reviewer"
+ }
+}

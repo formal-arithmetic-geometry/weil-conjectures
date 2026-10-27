@@ -1,0 +1,138 @@
+{
+ "id": "lem-pur-u2-prescribed-tensor",
+ "kind": "statement",
+ "title": "Symmetric monoidal transport to a prescribed tensor bifunctor",
+ "statement": "For a symmetric monoidal category A, a bifunctor T:A×A→A and a natural isomorphism from the original tensor bifunctor to T, there is a symmetric monoidal structure on the same category whose uncurried tensor is literally T. The identity equivalence in either direction is strong braided monoidal. Its tensor constraints are the given comparison and its inverse.",
+ "source": {
+  "document": "Mathlib.CategoryTheory.Monoidal.Transport",
+  "place": "Monoidal.induced, fromInducedMonoidal, SymmetricCategory.ofFullyFaithful; explicit conjugation of constraints"
+ },
+ "stmt_deps": [],
+ "proof": [
+  {
+   "text": "Define tensor objects and tensor maps using T; conjugate associators and unitors by the given isomorphism. Naturality of the isomorphism gives the three map compatibility equations.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "Mathlib.CategoryTheory.Monoidal.Transport",
+    "place": "Monoidal.induced, fromInducedMonoidal, SymmetricCategory.ofFullyFaithful; explicit conjugation of constraints"
+   }
+  },
+  {
+   "text": "Apply Mathlib Monoidal.induced to the identity functor with these explicit data. Functor extensionality and functoriality of T prove equality of bifunctors, including maps.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "Mathlib.CategoryTheory.Monoidal.Transport",
+    "place": "Monoidal.induced, fromInducedMonoidal, SymmetricCategory.ofFullyFaithful; explicit conjugation of constraints"
+   }
+  },
+  {
+   "text": "Pull back symmetry along the fully faithful strong identity functor. Check its braiding by applying the functor and cancelling the inverse tensorator. The monoidal inverse is braided by the counit square and faithfulness.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "Mathlib.CategoryTheory.Monoidal.Transport",
+    "place": "Monoidal.induced, fromInducedMonoidal, SymmetricCategory.ofFullyFaithful; explicit conjugation of constraints"
+   }
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "agent",
+  "document": "Mathlib.CategoryTheory.Monoidal.Transport",
+  "place": "Monoidal.induced, fromInducedMonoidal, SymmetricCategory.ofFullyFaithful; explicit conjugation of constraints"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Transport a symmetric monoidal structure to a prescribed naturally isomorphic tensor bifunctor using the identity equivalence",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"CategoryTheory.Monoidal.Transported.instSymmetricCategory\", \"module\": \"Mathlib/CategoryTheory/Monoidal/Braided/Transport\", \"type\": \"{C : Type u₁} →\\n  [inst : CategoryTheory.Category.{v₁, u₁} C] →\\n    {D : Type u₂} →\\n      [inst_1 : CategoryTheory.Category.{v₂, u₂} D] →\\n        (e : C ≌ D) →\\n          [inst_2 : CategoryTheory.MonoidalCategory C] →\\n            [CategoryTheory.SymmetricCategory C] →\\n              CategoryTheory.Sym\", \"doc\": \"Given an equivalence $ e : \\\\mathcal{C} \\\\simeq \\\\mathcal{D} $ between categories where $ \\\\mathcal{C} $ is a symmetric monoidal category, the transported category $ \\\\mathcal{D} $ inherits a symmetric mon\"}\n  {\"name\": \"CategoryTheory.Monoidal.transportStruct\", \"module\": \"Mathlib/CategoryTheory/Monoidal/Transport\", \"type\": \"{C : Type u₁} →\\n  [inst : CategoryTheory.Category.{v₁, u₁} C] →\\n    [CategoryTheory.MonoidalCategory C] →\\n      {D : Type u₂} → [inst_2 : CategoryTheory.Category.{v₂, u₂} D] → (C ≌ D) → CategoryTheory.MonoidalCategoryStruct D\", \"doc\": \"Given a monoidal category $\\\\mathcal{C}$ and a category $\\\\mathcal{D}$ equivalent to $\\\\mathcal{C}$ via an equivalence $e: \\\\mathcal{C} \\\\simeq \\\\mathcal{D}$, this definition constructs a monoidal category \"}\n  {\"name\": \"CategoryTheory.Monoidal.instIsMonoidalTransportedSymmEquivalenceTransported\", \"module\": \"Mathlib/CategoryTheory/Monoidal/Transport\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} C] [inst_1 : CategoryTheory.MonoidalCategory C] {D : Type u₂}\\n  [inst_2 : CategoryTheory.Category.{v₂, u₂} D] (e : C ≌ D),\\n  (CategoryTheory.Monoidal.equivalenceTransported e).symm.IsMonoidal\", \"doc\": \"Given a categorical equivalence $ e : \\\\mathcal{C} \\\\simeq \\\\mathcal{D} $ where $ \\\\mathcal{C} $ is a monoidal category, the inverse of the transported equivalence $ \\\\mathcal{D} \\\\to \\\\mathcal{C} $ is a mon\"}\n  {\"name\": \"CategoryTheory.Monoidal.instMonoidalTransportedFunctorSymmEquivalenceTransported\", \"module\": \"Mathlib/CategoryTheory/Monoidal/Transport\", \"type\": \"{C : Type u₁} →\\n  [inst : CategoryTheory.Category.{v₁, u₁} C] →\\n    [inst_1 : CategoryTheory.MonoidalCategory C] →\\n      {D : Type u₂} →\\n        [inst_2 : CategoryTheory.Category.{v₂, u₂} D] →\\n          (e : C ≌ D) → (CategoryTheory.Monoidal.equivalenceTransported e).symm.functor.Monoidal\", \"doc\": \"Given a categorical equivalence $ e : \\\\mathcal{C} \\\\simeq \\\\mathcal{D} $ where $ \\\\mathcal{C} $ is a monoidal category, the inverse functor $ e^{-1} : \\\\mathcal{D} \\\\to \\\\mathcal{C} $ is equipped with a mon\"}\n  {\"name\": \"CategoryTheory.Monoidal.instMonoidalTransportedInverseSymmEquivalenceTransported\", \"module\": \"Mathlib/CategoryTheory/Monoidal/Transport\", \"type\": \"{C : Type u₁} →\\n  [inst : CategoryTheory.Category.{v₁, u₁} C] →\\n    [inst_1 : CategoryTheory.MonoidalCategory C] →\\n      {D : Type u₂} →\\n        [inst_2 : CategoryTheory.Category.{v₂, u₂} D] →\\n          (e : C ≌ D) → (CategoryTheory.Monoidal.equivalenceTransported e).symm.inverse.Monoidal\", \"doc\": \"Given a categorical equivalence $ e : \\\\mathcal{C} \\\\simeq \\\\mathcal{D} $ where $ \\\\mathcal{C} $ is a monoidal category, the inverse functor of the symmetric equivalence $ \\\\mathcal{D} \\\\to \\\\mathcal{C} $ is\"}\n  {\"name\": \"CategoryTheory.Monoidal.transportStruct_tensorObj\", \"module\": \"Mathlib/CategoryTheory/Monoidal/Transport\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} C] [inst_1 : CategoryTheory.MonoidalCategory C] {D : Type u₂}\\n  [inst_2 : CategoryTheory.Category.{v₂, u₂} D] (e : C ≌ D) (X Y : D),\\n  CategoryTheory.MonoidalCategoryStruct.tensorObj X Y =\\n    e.functor.obj (CategoryTheory.MonoidalCategoryStru\", \"doc\": \"Given monoidal categories $\\\\mathcal{C}$ and $\\\\mathcal{D}$ and an equivalence $e: \\\\mathcal{C} \\\\simeq \\\\mathcal{D}$, for any objects $X, Y \\\\in \\\\mathcal{D}$, the tensor product $X \\\\otimes Y$ in $\\\\mathcal{\"}\n  {\"name\": \"CategoryTheory.Monoidal.transportStruct_tensorHom\", \"module\": \"Mathlib/CategoryTheory/Monoidal/Transport\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} C] [inst_1 : CategoryTheory.MonoidalCategory C] {D : Type u₂}\\n  [inst_2 : CategoryTheory.Category.{v₂, u₂} D] (e : C ≌ D) {X₁ Y₁ X₂ Y₂ : D} (f : X₁ ⟶ Y₁) (g : X₂ ⟶ Y₂),\\n  CategoryTheory.MonoidalCategoryStruct.tensorHom f g =\\n    e.functor.map \", \"doc\": \"Given monoidal categories $\\\\mathcal{C}$ and $\\\\mathcal{D}$ and an equivalence $e: \\\\mathcal{C} \\\\simeq \\\\mathcal{D}$, for any morphisms $f: X_1 \\\\to Y_1$ and $g: X_2 \\\\to Y_2$ in $\\\\mathcal{D}$, the tensor p\"}\n  {\"name\": \"CategoryTheory.Mon.instSymmetricCategory\", \"module\": \"Mathlib/CategoryTheory/Monoidal/Mon_\", \"type\": \"{C : Type u₁} →\\n  [inst : CategoryTheory.Category.{v₁, u₁} C] →\\n    [inst_1 : CategoryTheory.MonoidalCategory C] →\\n      [inst_2 : CategoryTheory.SymmetricCategory C] → CategoryTheory.SymmetricCategory (CategoryTheory.Mon C)\", \"doc\": \"Given a symmetric monoidal category $\\\\mathcal{C}$, the category of monoids $\\\\text{Mon}(\\\\mathcal{C})$ inherits a symmetric monoidal structure. The braiding isomorphism between any two monoids $X$ and $\"}",
+   "date": "2026-10-24",
+   "verdict": "Mathlib transport and fully faithful pullback of symmetry are used; neither states literal equality with an arbitrary prescribed bifunctor together with braided identity comparisons."
+  },
+  {
+   "tool": "loogle",
+   "query": "Monoidal.induced",
+   "results": "[loogle] OK 0 hit(s) | loogle: unknown identifier 'Monoidal.induced'",
+   "date": "2026-10-24",
+   "verdict": "Mathlib transport and fully faithful pullback of symmetry are used; neither states literal equality with an arbitrary prescribed bifunctor together with braided identity comparisons."
+  },
+  {
+   "tool": "grep",
+   "query": "Monoidal.induced|InducingFunctor",
+   "results": "[grep] OK 24 hit(s)\n  {\"file\": \"Mathlib/Algebra/Category/ModuleCat/Monoidal/Basic.lean\", \"line\": \"311\", \"text\": \"  Monoidal.induced equivalenceSemimoduleCat.functor\"}\n  {\"file\": \"Mathlib/Algebra/Category/HopfAlgCat/Monoidal.lean\", \"line\": \"45\", \"text\": \"noncomputable def MonoidalCategory.inducingFunctorData :\"}\n  {\"file\": \"Mathlib/Algebra/Category/HopfAlgCat/Monoidal.lean\", \"line\": \"46\", \"text\": \"    Monoidal.InducingFunctorData (forget₂ (HopfAlgCat R) (BialgCat R)) where\"}\n  {\"file\": \"Mathlib/Algebra/Category/HopfAlgCat/Monoidal.lean\", \"line\": \"60\", \"text\": \"  Monoidal.induced (forget₂ _ (BialgCat R)) (MonoidalCategory.inducingFunctorData R)\"}\n  {\"file\": \"Mathlib/Algebra/Category/AlgCat/Monoidal.lean\", \"line\": \"97\", \"text\": \"  Monoidal.induced\"}\n  {\"file\": \"Mathlib/Algebra/Category/CoalgCat/Monoidal.lean\", \"line\": \"23\", \"text\": \"using `Monoidal.induced`.\"}\n  {\"file\": \"Mathlib/Algebra/Category/CoalgCat/Monoidal.lean\", \"line\": \"52\", \"text\": \"noncomputable def MonoidalCategory.inducingFunctorData :\"}\n  {\"file\": \"Mathlib/Algebra/Category/CoalgCat/Monoidal.lean\", \"line\": \"53\", \"text\": \"    Monoidal.InducingFunctorData (forget₂ (CoalgCat R) (ModuleCat R)) where\"}\n  {\"file\": \"Mathlib/Algebra/Category/CoalgCat/Monoidal.lean\", \"line\": \"64\", \"text\": \"  Monoidal.induced (forget₂ _ (ModuleCat R)) (MonoidalCategory.inducingFunctorData R)\"}\n  {\"file\": \"Mathlib/Algebra/Homology/Monoidal.lean\", \"line\": \"303\", \"text\": \"noncomputable def Monoidal.inducingFunctorData :\"}\n  {\"file\": \"Mathlib/Algebra/Homology/Monoidal.lean\", \"line\": \"304\", \"text\": \"    Monoidal.InducingFunctorData (forget C c) where\"}\n  {\"file\": \"Mathlib/Algebra/Homology/Monoidal.lean\", \"line\": \"341\", \"text\": \"  Monoidal.induced _ (Monoidal.inducingFunctorData C c)\"}\n  {\"file\": \"Mathlib/Algebra/Category/BialgCat/Monoidal.lean\", \"line\": \"22\", \"text\": \"using `Monoidal.induced`.\"}\n  {\"file\": \"Mathlib/Algebra/Category/BialgCat/Monoidal.lean\", \"line\": \"50\", \"text\": \"noncomputable def MonoidalCategory.inducingFunctorData :\"}\n  {\"file\": \"Mathlib/Algebra/Category/BialgCat/Monoidal.lean\", \"line\": \"51\", \"text\": \"    Monoidal.InducingFunctorData (forget₂ (BialgCat R) (AlgCat R)) where\"}\n  {\"file\": \"Mathlib/Algebra/Category/BialgCat/Monoidal.lean\", \"line\": \"63\", \"text\": \"  Monoidal.induced (forget₂ _ (AlgCat R)) (MonoidalCategory.inducingFunctorData R)\"}\n  {\"file\": \"Mathlib/CategoryTheory/Monoidal/Widesubcategory.lean\", \"line\": \"84\", \"text\": \"  Monoidal.induced (wideSubcategoryInclusion P)\"}\n  {\"file\": \"Mathlib/CategoryTheory/Monoidal/Subcategory.lean\", \"line\": \"94\", \"text\": \"  Monoidal.induced P.ι\"}\n  {\"file\": \"Mathlib/CategoryTheory/Monoidal/Transport.lean\", \"line\": \"18\", \"text\": \"functor, as `CategoryTheory.Monoidal.induced`.\"}\n  {\"file\": \"Mathlib/CategoryTheory/Monoidal/Transport.lean\", \"line\": \"47\", \"text\": \"structure InducingFunctorData [MonoidalCategoryStruct D] (F : D ⥤ C) where\"}\n  {\"file\": \"Mathlib/CategoryTheory/Monoidal/Transport.lean\", \"line\": \"86\", \"text\": \"    (fData : InducingFunctorData F) :\"}\n  {\"file\": \"Mathlib/CategoryTheory/Monoidal/Transport.lean\", \"line\": \"113\", \"text\": \"/-- A faithful functor equipped with a `InducingFunctorData` structure is monoidal. -/\"}\n  {\"file\": \"Mathlib/CategoryTheory/Monoidal/Transport.lean\", \"line\": \"115\", \"text\": \"    (fData : InducingFunctorData F) :\"}\n  {\"file\": \"Mathlib/LinearAlgebra/QuadraticForm/QuadraticModuleCat/Monoidal.lean\", \"line\": \"122\", \"text\": \"  Monoidal.induced\"}",
+   "date": "2026-10-24",
+   "verdict": "Mathlib transport and fully faithful pullback of symmetry are used; neither states literal equality with an arbitrary prescribed bifunctor together with braided identity comparisons."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Transport a symmetric monoidal structure to a prescribed naturally isomorphic tensor bifunctor using the identity equivalence",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"CategoryTheory.Equivalence.monoidalOfPrecompFunctor\", \"module\": \"Mathlib.CategoryTheory.Monoidal.Functor\", \"type\": \"(e : C ≌ D) (F : D ⥤ E) {F' : C ⥤ E} (i : e.functor ⋙ F ≅ F') [e.inverse.Monoidal] [F'.Monoidal] : F.Monoidal\", \"doc\": \"Given categories $\\\\mathcal{C}, \\\\mathcal{D}, \\\\mathcal{E}$, an equivalence $e : \\\\mathcal{C} \\\\simeq \\\\mathcal{D}$, a functor $F : \\\\mathcal{D} \\\\to \\\\mathcal{E}$, and a natural isomorphism $i : e.\\\\text{funct\"}\n  {\"name\": \"CategoryTheory.Monoidal.transportStruct\", \"module\": \"Mathlib.CategoryTheory.Monoidal.Transport\", \"type\": \"(e : C ≌ D) : MonoidalCategoryStruct.{v₂} D\", \"doc\": \"Given a monoidal category $\\\\mathcal{C}$ and a category $\\\\mathcal{D}$ equivalent to $\\\\mathcal{C}$ via an equivalence $e: \\\\mathcal{C} \\\\simeq \\\\mathcal{D}$, this definition constructs a monoidal category \"}\n  {\"name\": \"CategoryTheory.Functor.Monoidal.coreMonoidalTransport\", \"module\": \"Mathlib.CategoryTheory.Monoidal.Functor\", \"type\": \"{F G : C ⥤ D} [F.Monoidal] (i : F ≅ G) : G.CoreMonoidal\", \"doc\": \"Given monoidal functors $F,G : \\\\mathcal{C} \\\\to \\\\mathcal{D}$ and a natural isomorphism $i : F \\\\cong G$, this constructs a monoidal structure on $G$ by transporting the monoidal structure of $F$ along $\"}\n  {\"name\": \"CategoryTheory.Equivalence.monoidalOfPostcompInverse\", \"module\": \"Mathlib.CategoryTheory.Monoidal.Functor\", \"type\": \"(e : C ≌ D) (F : E ⥤ D) {F' : E ⥤ C} (i : F ⋙ e.inverse ≅ F') [e.functor.Monoidal] [F'.Monoidal] : F.Monoidal\", \"doc\": \"Given an equivalence $ e : C ≌ D $, a functor $ F : E → D $, and an isomorphism $ i : F ∘ e^{-1} ≅ F' $ where $ F' : E → C $ is monoidal, this constructs a monoidal structure on $ F $ by transporting \"}\n  {\"name\": \"CategoryTheory.Monoidal.transport\", \"module\": \"Mathlib.CategoryTheory.Monoidal.Transport\", \"type\": \"(e : C ≌ D) : MonoidalCategory.{v₂} D\", \"doc\": \"Given an equivalence $ e : \\\\mathcal{C} \\\\simeq \\\\mathcal{D} $ between categories, this constructs a monoidal category structure on $ \\\\mathcal{D} $ by transporting the monoidal structure from $ \\\\mathcal{\"}\n  {\"name\": \"CategoryTheory.Functor.Monoidal.transport\", \"module\": \"Mathlib.CategoryTheory.Monoidal.Functor\", \"type\": \"{F G : C ⥤ D} [F.Monoidal] (i : F ≅ G) : G.Monoidal\", \"doc\": \"Given monoidal functors $F,G : \\\\mathcal{C} \\\\to \\\\mathcal{D}$ and a natural isomorphism $i : F \\\\cong G$, this constructs a monoidal structure on $G$ by transporting the monoidal structure of $F$ along $\"}\n  {\"name\": \"CategoryTheory.Monoidal.Transported.instSymmetricCategory\", \"module\": \"Mathlib.CategoryTheory.Monoidal.Braided.Transport\", \"type\": \"(e : C ≌ D) [MonoidalCategory C] [SymmetricCategory C] : SymmetricCategory (Transported e)\", \"doc\": \"Given an equivalence $ e : \\\\mathcal{C} \\\\simeq \\\\mathcal{D} $ between categories where $ \\\\mathcal{C} $ is a symmetric monoidal category, the transported category $ \\\\mathcal{D} $ inherits a symmetric mon\"}\n  {\"name\": \"CategoryTheory.Monoidal.Transported.instMonoidalCategory\", \"module\": \"Mathlib.CategoryTheory.Monoidal.Transport\", \"type\": \"(e : C ≌ D) : MonoidalCategory (Transported e)\", \"doc\": \"Given an equivalence $ e : \\\\mathcal{C} \\\\simeq \\\\mathcal{D} $ between categories, the transported category $ \\\\mathcal{D} $ is equipped with a monoidal category structure obtained by transporting the mon\"}",
+   "date": "2026-10-24",
+   "verdict": "Mathlib transport and fully faithful pullback of symmetry are used; neither states literal equality with an arbitrary prescribed bifunctor together with braided identity comparisons."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Algebra.Homology.NormalizedRingIsoDerivedTransport",
+  "date": "2026-10-24",
+  "group": "U2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pur-ring-iso-derived-transport",
+   "place": "Proof steps for normalized coefficient transport"
+  }
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-def-purity-conv",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.Monoidal.PrescribedTensor",
+  "file": "lean/Sheaf/CategoryTheory/Monoidal/PrescribedTensor.lean",
+  "declaration": "CategoryTheory.Monoidal.prescribedTensorForwardBraided",
+  "declarations": [
+   "CategoryTheory.Monoidal.tensor_naturality",
+   "CategoryTheory.Monoidal.prescribedTensorStruct",
+   "CategoryTheory.Monoidal.prescribedTensorInducing",
+   "CategoryTheory.Monoidal.prescribedTensor",
+   "CategoryTheory.Monoidal.prescribedTensor_eq",
+   "CategoryTheory.Monoidal.prescribedTensorMonoidal",
+   "CategoryTheory.Monoidal.prescribedTensorSymmetric",
+   "CategoryTheory.Monoidal.prescribedTensorEquivalence",
+   "CategoryTheory.Monoidal.prescribedTensorForward",
+   "CategoryTheory.symmetricFullyFaithfulBraided",
+   "CategoryTheory.braidedInverse",
+   "CategoryTheory.Monoidal.prescribedTensorBackwardBraided",
+   "CategoryTheory.Monoidal.prescribedTensorForwardBraided"
+  ],
+  "statement": "def prescribedTensorForwardBraided [b : SymmetricCategory A] :\n    @Functor.Braided A _ m b.toBraidedCategory A _ (prescribedTensor T e)\n      (prescribedTensorSymmetric T e).toBraidedCategory (𝟭 A)",
+  "branch": "sheaf-dag",
+  "by": "U2",
+  "date": "2026-10-24"
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U2",
+  "result": "pass",
+  "landing": "20261024T191337-L-312819",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U2",
+  "result": "pass",
+  "landing": "20261024T191337-L-312819",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

@@ -1,0 +1,322 @@
+{
+ "id": "lem-sfb-space-relative-affine-limit-criterion",
+ "kind": "statement",
+ "title": "Relative affine limit criterion for local finite presentation of algebraic spaces",
+ "statement": "Let $S$ be a scheme [def-pc-scheme] and let $f:X\\to Y$ be a morphism of algebraic spaces over $S$ [def-trf-algebraic-space], in the universes of [def-weil-size-convention]. Locally of finite presentation for $f$ means the etale chart condition: for every scheme $V$ with a surjective etale map $V\\to Y$ and every scheme $W$ with a surjective etale map $W\\to X\\times_YV$, the composite $W\\to V$ is locally of finite presentation as a scheme morphism [def-sbc-locally-finite-presentation]; the fibre product is the sheaf fibre product. Then $f$ is locally of finite presentation if and only if the following holds. For every small nonempty directed set $I$ and every inverse system of affine $S$-schemes $(T_i)_{i\\in I}$ with limit $T=\\varprojlim_iT_i$ [lem-weil-pbc-limit-affine-transition], the canonical map of sets\n$$\\operatorname{colim}_i\\operatorname{Mor}_S(T_i,X)\\longrightarrow \\operatorname{Mor}_S(T,X)\\times_{\\operatorname{Mor}_S(T,Y)}\\operatorname{colim}_i\\operatorname{Mor}_S(T_i,Y)$$\nis a bijection. The colimits are filtered colimits of sets [def-weil-pbc-category-colimit], the two maps to $\\operatorname{Mor}_S(T,Y)$ being composition with $f$ and restriction to $T$. No quasi-compactness or quasi-separatedness of $X$ or $Y$ is assumed.",
+ "source": {
+  "document": "literature/stacks-project/spaces-limits.tex",
+  "place": "Tag 04AK (proposition-characterize-locally-finite-presentation), together with Tag 06BC (lemma-characterize-relative-limit-preserving); etale chart convention: spaces-morphisms.tex Tag 03XP (definition-locally-finite-presentation)."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-trf-algebraic-space",
+  "def-weil-size-convention",
+  "def-sbc-locally-finite-presentation",
+  "lem-weil-pbc-limit-affine-transition",
+  "def-weil-pbc-category-colimit",
+  "def-sfb-space-morphism-properties"
+ ],
+ "proof": [
+  {
+   "text": "For a map $a:F\\to G$ of set-valued functors, write $\\mathrm{RP}(a)$ for the cartesian-square test in the statement, with $F,G$ in place of $X,Y$. Its fibrewise form is: for every scheme $B$ and $y\\in G(B)$, the functor $F_y(A)=\\{x\\in F(A):a(x)=y|_A\\}$ on schemes over $B$ commutes with directed affine limits. Here is the elementwise equivalence. Under the fibrewise condition, represent a pair $([y_i],x_T)$ by $y_i\\in G(T_i)$. On the tail $j\\ge i$, use the compatible maps $T_j\\to T_i$; the limit is still $T$, since any index and $i$ have a common upper bound. The fibrewise bijection over $T_i$ supplies a unique class lifting $x_T$. If another class has the same pair, [lem-weil-pbc-filtered-colimit-sets-elementwise] first makes its base representative equal to $y_i$ at a common stage, then fibrewise injectivity makes the lifts equal. Conversely, given $y\\in G(B)$ and a system over $B$, apply $\\mathrm{RP}(a)$ to the pair $([y|_{T_i}],x_T)$. Its stage lift has base equal to $y|_{T_j}$ after increasing $j$, by the same elementwise criterion. Injectivity follows by applying the injectivity of $\\mathrm{RP}(a)$ and increasing the stage once more. The affine limits and their tail identification are those of [lem-weil-pbc-limit-affine-transition].",
+   "uses": [
+    "lem-weil-pbc-filtered-colimit-sets-elementwise",
+    "lem-weil-pbc-limit-affine-transition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-limits.tex",
+    "place": "Tag 06BC, both directions, with eventual equality of base representatives written out."
+   }
+  },
+  {
+   "text": "Suppose $f$ satisfies the chart condition. Fix a scheme $B\\to Y$. Choose a surjective etale scheme atlas $V\\to Y$ and an atlas $W\\to X\\times_YV$, using [def-trf-algebraic-space]. Put $C=B\\times_YV$ and $D=C\\times_VW$. By [lem-trf-space-fibre-products-etale-covers] and [lem-trf-space-representable-etale-scheme-tests], $C$ and $D$ are schemes, $C\\to B$ is surjective etale, and $D\\to (X\\times_YB)\\times_BC$ is a surjective etale atlas. The square $D\\to W$ over $C\\to V$ is a scheme fibre product. Thus $D\\to C$ is locally of finite presentation by the hypothesis on $W\\to V$ and clause (3) of [lem-weil-pbc-qcqs-morphism-permanence]. Applying [lem-sfb-space-local-properties-chart-test] to these two atlases gives that $X\\times_YB\\to B$ is locally of finite presentation. This is the elementary chart/base-change argument behind Tag 03XR; it uses no quasi-compactness.",
+   "uses": [
+    "def-trf-algebraic-space",
+    "lem-trf-space-fibre-products-etale-covers",
+    "lem-trf-space-representable-etale-scheme-tests",
+    "lem-weil-pbc-qcqs-morphism-permanence",
+    "lem-sfb-space-local-properties-chart-test"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-limits.tex",
+    "place": "Tag 04AK, forward proof, initial base-change reduction; spaces-morphisms.tex Tag 03XR (lemma-base-change-finite-presentation), local clause."
+   }
+  },
+  {
+   "text": "We next prove the absolute assertion over an arbitrary scheme $B$, used as base scheme. Let $Z$ be an algebraic space over $B$ with $Z\\to B$ locally of finite presentation; its points are $Z(A)$ for $B$-schemes $A$. Choose a scheme atlas $U\\to Z$ by [def-trf-algebraic-space], and put $R=U\\times_ZU$. By [lem-a1-etale-atlas-presentation], $R$ is a scheme, its projections to $U$ are surjective etale, and $Z$ is the fppf sheafification of $P(A)=U(A)/R(A)$, with this relation identifying exactly the pairs of $U$-points having equal images in $Z$. By [lem-sfb-space-local-properties-chart-test], using the identity target chart $B\\to B$, the scheme map $U\\to B$ is locally of finite presentation. The scheme map $R\\to U$ is locally of finite presentation by [def-weil-etale-morphism]; hence $R\\to B$ is locally of finite presentation by [lem-sbc-locally-finite-presentation-composition]. Apply [lem-sfb-scheme-affine-limit-lfp-criterion] to both $U\\to B$ and $R\\to B$. Their functors of points commute with every directed affine inverse limit over $B$.",
+   "uses": [
+    "def-trf-algebraic-space",
+    "lem-a1-etale-atlas-presentation",
+    "lem-sfb-space-local-properties-chart-test",
+    "def-weil-etale-morphism",
+    "lem-sbc-locally-finite-presentation-composition",
+    "lem-sfb-scheme-affine-limit-lfp-criterion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-limits.tex",
+    "place": "Tag 04AK, forward proof, presentation U/R and scheme criterion Tag 01ZC."
+   }
+  },
+  {
+   "text": "For an affine system over $B$, the presheaf $P(A)=U(A)/R(A)$ from Step 3 also commutes with its limit. Indeed a class in $P(T)$ is represented by $u\\in U(T)$; continuity of $U$ descends $u$ to a stage. If $u_i$ and $v_j$ have equal images in $P(T)$, the equivalence-relation description in [lem-a1-etale-atlas-presentation] gives $r\\in R(T)$ with projections their limit images. Continuity of $R$ descends $r$ to some stage. Continuity of $U$, with [lem-weil-pbc-filtered-colimit-sets-elementwise], makes its two projections equal to the chosen representatives at a common later stage. Their classes in $P$ then agree. This proves both surjectivity and injectivity of $\\operatorname{colim}P(T_i)\\to P(T)$. Apply [lem-sfb-fppf-sheafification-affine-continuity] to $P$; since its sheafification is $Z$ by the atlas presentation, $\\operatorname{colim}Z(T_i)\\to Z(T)$ is bijective. No compactness of $U$, $R$ or $Z$ was needed.",
+   "uses": [
+    "lem-a1-etale-atlas-presentation",
+    "lem-weil-pbc-filtered-colimit-sets-elementwise",
+    "lem-sfb-fppf-sheafification-affine-continuity"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-limits.tex",
+    "place": "Tag 04AK, forward proof, presheaf quotient and Tag 049O."
+   }
+  },
+  {
+   "text": "For each scheme $B$ with $y:B\\to Y$, Step 2 makes $Z=X\\times_YB$ locally of finite presentation over $B$. By clause (2) of [lem-sfb-space-change-base-to-integers], applied to the structure map $g:B\\to S$, the pair $(Z,Z\\to B)$ is $j_!Z_B$ for an algebraic space $Z_B$ over $B$; by the formula $j_!Z_B(A)=\\coprod_{\\varphi:A\\to B}Z_B(A\\xrightarrow{\\varphi}B)$ of that node, $Z_B(A)=\\{z\\in Z(A):z\\mapsto\\varphi\\}$ for a $B$-scheme $(A,\\varphi)$. By clauses (1) and (3) the etale scheme charts of $Z_B$ are those of $Z$, the same schemes viewed over $B$, so $Z_B\\to B$ is locally of finite presentation. Steps 3--4 applied to $Z_B\\to B$ show that this functor of points over $B$ commutes with directed affine limits. By the sheaf fibre-product description [lem-trf-space-fibre-products-etale-covers], these points are precisely $\\{x\\in X(A):f(x)=y|_A\\}$. Step 1 now gives $\\mathrm{RP}(f)$, which is the required bijection.",
+   "uses": [
+    "lem-sfb-space-change-base-to-integers",
+    "lem-trf-space-fibre-products-etale-covers"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-limits.tex",
+    "place": "Tag 04AK, forward implication ('we are reduced to proving that if X is an algebraic space which is locally of finite presentation over S'), combined with Tag 06BC; change of base scheme: spaces.tex Tag 03I4 (lemma-change-base-scheme) and Tag 04SG (lemma-category-of-spaces-over-smaller-base-scheme)."
+   }
+  },
+  {
+   "text": "The fibrewise characterization in Step 1 immediately shows that $\\mathrm{RP}$ is stable under base change: for $H\\to G$ and $h\\in H(B)$, the fibre of $F\\times_GH\\to H$ over $h$ is exactly the fibre of $F\\to G$ over its image. It is also stable under composition: for $F\\to G\\to H$, the two comparison squares are cartesian; given a compatible pair in the outer rectangle, the lower square uniquely supplies its intermediate $\\operatorname{colim}G(T_i)$ element and the upper square uniquely supplies its $\\operatorname{colim}F(T_i)$ element. This proves the outer square cartesian. These are set-theoretic fibre-product identities, not an assumption that the colimit of a sheaf fibre product is computed pointwise.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-limits.tex",
+    "place": "Tag 06BC; Tag 049L (lemma-composition-locally-finite-presentation) and Tag 049M (lemma-base-change-locally-finite-presentation), formal square arguments."
+   }
+  },
+  {
+   "text": "Conversely assume the stated bijection, that is $\\mathrm{RP}(f)$. Fix arbitrary surjective etale scheme charts $V\\to Y$ and $U\\to Z=X\\times_YV$. The fibre product $Z$ is an algebraic space by [lem-trf-space-fibre-products-etale-covers], and Step 6 gives $\\mathrm{RP}(Z\\to V)$. For every scheme $B\\to Z$, the pullback $E=B\\times_ZU$ is a scheme and $E\\to B$ is etale, by [lem-trf-space-representable-etale-scheme-tests]. It is locally of finite presentation by [def-weil-etale-morphism]. Therefore [lem-sfb-scheme-affine-limit-lfp-criterion] shows that its $B$-point functor commutes with directed affine limits over $B$. These points are the fibre functor of $U\\to Z$; Step 1 gives $\\mathrm{RP}(U\\to Z)$. Composition in Step 6 gives $\\mathrm{RP}(U\\to V)$.",
+   "uses": [
+    "lem-trf-space-fibre-products-etale-covers",
+    "lem-trf-space-representable-etale-scheme-tests",
+    "def-weil-etale-morphism",
+    "lem-sfb-scheme-affine-limit-lfp-criterion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-limits.tex",
+    "place": "Tag 04AK, converse proof, atlas reduction; the representable etale leg is tested directly on scheme base changes, without using the proposition circularly."
+   }
+  },
+  {
+   "text": "Apply the fibrewise form of $\\mathrm{RP}(U\\to V)$ to the scheme $V$ and its identity point. Its fibre functor is $A\\mapsto\\operatorname{Mor}_V(A,U)$, so the reverse implication of [lem-sfb-scheme-affine-limit-lfp-criterion] proves that the scheme morphism $U\\to V$ is locally of finite presentation. Both atlases in Step 7 were arbitrary. Consequently the chart condition in the statement holds for $f$. All schemes and small directed systems used in this argument lie in the fixed universes; the scheme criterion quantifies over that same bound. No finite presentation of a source test scheme over the base, and no quasi-compactness or quasi-separatedness of $X$ or $Y$, entered the proof.",
+   "uses": [
+    "lem-sfb-scheme-affine-limit-lfp-criterion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-limits.tex",
+    "place": "Tag 04AK, final converse paragraph and its set-theoretic remark, with Tag 01ZC."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-filtered-colimit-sets-elementwise",
+  "lem-weil-pbc-limit-affine-transition",
+  "def-trf-algebraic-space",
+  "lem-trf-space-fibre-products-etale-covers",
+  "lem-trf-space-representable-etale-scheme-tests",
+  "lem-weil-pbc-qcqs-morphism-permanence",
+  "lem-sfb-space-local-properties-chart-test",
+  "lem-a1-etale-atlas-presentation",
+  "def-weil-etale-morphism",
+  "lem-sbc-locally-finite-presentation-composition",
+  "lem-sfb-scheme-affine-limit-lfp-criterion",
+  "lem-sfb-fppf-sheafification-affine-continuity",
+  "lem-sfb-space-change-base-to-integers"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/spaces-limits.tex",
+  "place": "Tags 04AK and 06BC; representable etale leg in the converse verified by its scheme tests."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicSpace\", \"LocallyOfFinitePresentation\"",
+   "results": "OK 0 hits: ",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme-level finite-presentation and affine-transition results do not state the relative affine limit criterion for algebraic spaces"
+  },
+  {
+   "tool": "leansearch",
+   "query": "An algebraic space is locally of finite presentation exactly when its functor of points preserves directed inverse limits of affine schemes",
+   "results": "OK 8 hits: AlgebraicGeometry.LocallyOfFinitePresentation, AlgebraicGeometry.instLocallyOfFinitePresentationOfIsSmooth, RingHom.FinitePresentation, AlgebraicGeometry.Scheme.AffineZariskiSite.PreservesLocalization.isLocallyDirected, AlgebraicGeometry.instLocallyOfFiniteTypeOfLocallyOfFinitePresentation, AlgebraicGeometry.instHasRingHomPropertyLocallyOfFinitePresentationFinitePresentation, AlgebraicGeometry.AffineScheme.Γ_preservesLimits, AlgebraicGeometry.AffineSpace.instLocallyOfFinitePresentationOverSchemeInferInstanceOverClassOfFinite",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme-level finite-presentation and affine-transition results do not state the relative affine limit criterion for algebraic spaces"
+  },
+  {
+   "tool": "grep",
+   "query": "AlgebraicSpace|algebraic.space|limit.preserving",
+   "results": "OK 0 hits: ",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme-level finite-presentation and affine-transition results do not state the relative affine limit criterion for algebraic spaces"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An algebraic space over a scheme is locally of finite presentation if and only if its functor of points commutes with directed limits of affine schemes",
+   "results": "OK 8 hits: AlgebraicGeometry.locallyOfFinitePresentation_iff, AlgebraicGeometry.LocallyOfFinitePresentation, AlgebraicGeometry.AffineSpace.instLocallyOfFinitePresentationOverSchemeInferInstanceOverClassOfFinite, AlgebraicGeometry.instHasRingHomPropertyLocallyOfFinitePresentationFinitePresentation, AlgebraicGeometry.instLocallyOfFiniteTypeOfLocallyOfFinitePresentation, AlgebraicGeometry.LocallyOfFinitePresentation.finitePresentation_appLE, AlgebraicGeometry.LocallyOfFinitePresentation.finitePresentation_of_affine_subset, AlgebraicGeometry.locallyOfFinitePresentation_comp",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme-level finite-presentation and affine-transition results do not state the relative affine limit criterion for algebraic spaces"
+  },
+  {
+   "tool": "grep",
+   "query": "class LocallyOfFinitePresentation|theorem locallyOfFinitePresentation_iff|exists_hom_hom_comp_eq_comp_of_locallyOfFiniteType",
+   "results": "OK 5 hits: Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation.lean, Mathlib/AlgebraicGeometry/AffineTransitionLimit.lean, Mathlib/AlgebraicGeometry/AffineTransitionLimit.lean, Mathlib/AlgebraicGeometry/AffineTransitionLimit.lean, Mathlib/AlgebraicGeometry/AffineTransitionLimit.lean",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme-level finite-presentation and affine-transition results do not state the relative affine limit criterion for algebraic spaces"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For every directed inverse system of affine S schemes with affine limit T the canonical map from the colimit of maps into an algebraic space Z to maps from T is bijective if Z is locally finitely presented",
+   "results": "OK 8 hits: AlgebraicGeometry.Scheme.exists_hom_hom_comp_eq_comp_of_locallyOfFiniteType, AlgebraicGeometry.ExistsHomHomCompEqCompAux.hii', AlgebraicGeometry.Scheme.exists_hom_comp_eq_comp_of_locallyOfFiniteType, AlgebraicGeometry.ExistsHomHomCompEqCompAux.i', AlgebraicGeometry.exists_appTop_π_eq_of_isLimit, AlgebraicGeometry.nonempty_isColimit_Γ_mapCocone, AlgebraicGeometry.exists_appTop_π_eq_of_isAffine_of_isLimit, AlgebraicGeometry.AffineSpace.instLocallyOfFinitePresentationOverSchemeInferInstanceOverClassOfFinite",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme-level finite-presentation and affine-transition results do not state the relative affine limit criterion for algebraic spaces"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A morphism X to Y of algebraic spaces is locally of finite presentation if and only if for every directed inverse limit of affine schemes T the square of colimits of maps to X and Y is cartesian",
+   "results": "OK 8 hits: AlgebraicGeometry.LocallyOfFinitePresentation, AlgebraicGeometry.locallyOfFinitePresentation_iff, AlgebraicGeometry.locallyOfFinitePresentation_comp, AlgebraicGeometry.instHasRingHomPropertyLocallyOfFinitePresentationFinitePresentation, AlgebraicGeometry.instLocallyOfFinitePresentationFstScheme, AlgebraicGeometry.instLocallyOfFinitePresentationSndScheme, AlgebraicGeometry.LocallyOfFinitePresentation.finitePresentation_appLE, AlgebraicGeometry.Scheme.Hom.finitePresentation_appLE",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme-level finite-presentation and affine-transition results do not state the relative affine limit criterion for algebraic spaces"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Locally finite presentation of a morphism of algebraic spaces is equivalent to the relative limit preserving cartesian square on affine inverse systems",
+   "results": "OK 8 hits: AlgebraicGeometry.LocallyOfFinitePresentation, AlgebraicGeometry.instLocallyOfFinitePresentationOfIsSmooth, AlgebraicGeometry.LocallyOfFinitePresentation.finitePresentation_appLE, AlgebraicGeometry.LocallyOfFinitePresentation.mk, AlgebraicGeometry.LocallyOfFiniteType, AlgebraicGeometry.Scheme.Hom.finitePresentation_appLE, AlgebraicGeometry.instLocallyOfFiniteTypeOfLocallyOfFinitePresentation, AlgebraicGeometry.locallyOfFinitePresentation_iff",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme-level finite-presentation and affine-transition results do not state the relative affine limit criterion for algebraic spaces"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A morphism of algebraic spaces is locally of finite presentation exactly when its functor of points preserves affine inverse limits relatively",
+   "results": "OK 8 hits: AlgebraicGeometry.locallyOfFinitePresentation_iff, AlgebraicGeometry.LocallyOfFinitePresentation, AlgebraicGeometry.Scheme.Hom.finitePresentation_appLE, AlgebraicGeometry.LocallyOfFinitePresentation.finitePresentation_appLE, AlgebraicGeometry.instHasRingHomPropertyLocallyOfFinitePresentationFinitePresentation, AlgebraicGeometry.instLocallyOfFiniteTypeOfLocallyOfFinitePresentation, AlgebraicGeometry.LocallyOfFinitePresentation.finitePresentation_of_affine_subset, AlgebraicGeometry.AffineSpace.instLocallyOfFinitePresentationOverSchemeInferInstanceOverClassOfFinite",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme-only finite-presentation results do not state the relative criterion for algebraic spaces."
+  },
+  {
+   "tool": "grep",
+   "query": "AlgebraicSpace|relative.*[Ll]imit[Pp]reserv|[Ll]imit[Pp]reserv.*[Ff]inite",
+   "results": "OK 0 hits: ",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme-only finite-presentation results do not state the relative criterion for algebraic spaces."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Relative finite presentation of algebraic spaces characterized by cartesian squares on affine inverse limits",
+   "results": "OK 8 hits: RingHom.FinitePresentation, AlgHom.FinitePresentation, Algebra.Presentation.finitePresentation_of_isFinite, AlgebraicGeometry.locallyOfFinitePresentation_iff, AlgebraicGeometry.instLocallyOfFinitePresentationOfIsSmooth, Module.FinitePresentation.iff_finitePresentation_of_finite, AlgebraicGeometry.LocallyOfFinitePresentation.mk, Algebra.FinitePresentation.mk",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme-only finite-presentation results do not state the relative criterion for algebraic spaces."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicSpace\", \"LocallyOfFinitePresentation\"",
+   "results": "OK 0 hits: ",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme-only finite-presentation results do not state the relative criterion for algebraic spaces."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-lfp-space-scheme-limit-test",
+  "date": "2026-10-23",
+  "group": "Q158"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Algebraicity and smoothness of the stack of all nodal curves. Supporting input: Tag 0D55 (lemma-curves-limits). Input to Tag 0D55: Tag 07SK (lemma-descend-finite-presentation), specialized to affine scheme bases; base change of finite presentation: spaces-morphisms.tex, Tag 03XR (lemma-base-change-finite-presentation). Supporting limit test used in Tag 07SK, second paragraph, on an affine atlas and on its quasi-compact quasi-separated scheme kernel pair; Tag 0CP4 supplies the nonaffine overlap case. Affine input: Tag 04AK with the cartesian-square formulation of Tag 06BC, before the qcqs gluing argument of Tag 0CP4.",
+   "via": [
+    "lem-sfb-lfp-space-scheme-limit-test",
+    "lem-sfb-fp-space-limit-category",
+    "lem-sfb-curve-limit-preservation",
+    "lem-sfb-nodal-curve-stack-smooth",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-space-relative-affine-limit-criterion",
+  "worker": "stage1",
+  "summary": "Split Tags 04AK and 06BC by the scheme presentation U/R, presheaf quotient continuity and fppf sheafification; converse is checked on arbitrary etale scheme charts. Two new statement-only nodes supply the scheme iff (01ZC) and sheafification continuity (049O). Wrote the relative/fibrewise equivalence, base-change chart argument and quotient representatives explicitly; statement unchanged.",
+  "blueprint": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Algebraicity and smoothness of the stack of all nodal curves. Supporting input: Tag 0D55 (lemma-curves-limits). Input to Tag 0D55: Tag 07SK (lemma-descend-finite-presentation), specialized to affine scheme bases; base change of finite presentation: spaces-morphisms.tex, Tag 03XR (lemma-base-change-finite-presentation). Supporting limit test used in Tag 07SK, second paragraph, on an affine atlas and on its quasi-compact quasi-separated scheme kernel pair; Tag 0CP4 supplies the nonaffine overlap case. Affine input: Tag 04AK with the cartesian-square formulation of Tag 06BC, before the qcqs gluing argument of Tag 0CP4. Steps 1--8 realize precisely this prerequisite using the current latest direct-image proof (3). The inherited null ancestor is preserved, as confirmed by blueprint_refs.py ancestor.",
+  "tool_uses": [
+   {
+    "node": "lem-a1-etale-atlas-presentation",
+    "why": "Generic quotient presentation of an algebraic space by any etale scheme atlas; this unit has no replacement presentation theorem."
+   },
+   {
+    "node": "lem-trf-space-fibre-products-etale-covers",
+    "why": "Generic algebraic-space fibre products and etale pullbacks used to form chart diagrams and fibre functors."
+   },
+   {
+    "node": "lem-trf-space-representable-etale-scheme-tests",
+    "why": "Generic representability and etale base-change facts for scheme-source maps, needed for both chart arguments."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-a1-etale-atlas-presentation",
+  "lem-trf-space-fibre-products-etale-covers",
+  "lem-trf-space-representable-etale-scheme-tests"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q55-942c1ae83",
+  "group": "Q55",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q55-942c1ae83 (reviewer sub-agent of L); spot-checked: I read the item, both new nodes and every cited statement against Stacks spaces-limits 049J–04AK (and the set-theoretic remark of 04AK), limits 01ZC and spaces.tex change of base scheme. The statement is unchanged and matches 04AK+06BC (chart lfp ⇔ cartesian affine-limit square, no qcqs). New node lem-sfb-scheme-affine-limit-lfp-criterion is exactly 01ZC (1)⇔(2). Small case: Spec k[x1,x2,...] fails the test, so the converse is not vacuous. Mathlib AffineTransitionLimit has only the forward factorization, so it is not a Mathlib leaf. New node lem-sfb-fppf-sheafification-affine-continuity is exactly 049O. Neither node duplicates an existing one (JSON scan for 01ZC/049O/04AK/06BC/00QO; 049N node is only an input) and neither restates the item. Steps 1 (06BC), 2 (chart base change via qcqs-permanence (3), chart test), 3 (U,R lfp over B), 4 (U/R continuity with a single R-witness, then 049O), 6 (049L/049M as elementary set identities), 7–8 (converse via E=B×_ZU étale, scheme criterion, composition, fibre at id_V) are correct. FIX: Steps 3–4 work over base B (049O is on (Sch/B), and continuity is Mor_B-continuity), but Z=X×_YB is an S-space with a map to B. The identification with a B-space Z_B (points are the fibre over φ, same étale charts) is Stacks 03I4/04SG and was used silently. The existing same-unit node lem-sfb-space-change-base-to-integers (1)–(3) states it, and citing it creates no cycle. I cited it in Step 5, reworded Step 3 to work over base B, and updated proof_deps; the statement is untouched. Batch-5: lem-trf-space-fibre-products-etale-covers, lem-trf-space-representable-etale-scheme-tests, and the closures of lem-sfb-space-local-properties-chart-test, lem-a1-etale-atlas-presentation and the added node contain only generic algebraic-space foundations (def-trf-algebraic-space, fibre-product and atlas tests). None of them is part of the trace formula or Poincaré duality, or of their proofs, so I accept them. I accept the three declared tool_uses as generic tools. No SGA.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SpaceRelativeAffineLimitCriterion",
+  "declaration": "AlgebraicGeometry.AlgebraicSpace.locallyOfFinitePresentation_iff_relative_affine_limit_bijective",
+  "declarations": [
+   "AlgebraicGeometry.AlgebraicSpace.relativeAffineLimitComparison",
+   "AlgebraicGeometry.AlgebraicSpace.locallyOfFinitePresentation_iff_relative_affine_limit_bijective"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/SpaceRelativeAffineLimitCriterion.lean",
+  "statement": "theorem locallyOfFinitePresentation_iff_relative_affine_limit_bijective {S : Scheme.{u}} {X Y : AlgebraicSpace S} (f : X ⟶ Y) : MapIsLocallyOfFinitePresentation f ↔ ∀ (I : Type u) [Preorder I] [IsDirected I (· ≤ ·)] [Nonempty I] (D : Iᵒᵖ ⥤ Over S), (∀ i : Iᵒᵖ, IsAffine (D.obj i).left) → ∀ c : Cone D, IsLimit c → Function.Bijective (relativeAffineLimitComparison f D c)",
+  "branch": "newtargets-dag",
+  "by": "NF",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "The helper constructs the canonical map to the set-valued fibre product from colimit.desc and colimMap. The main theorem uses the landed MapIsLocallyOfFinitePresentation predicate, equivalent to the stated surjective pullback-chart condition by local_properties_chart_test. Added only the already-landed definition node def-sfb-space-morphism-properties to stmt_deps, as permitted by brief-stage2 §5. No statement correction."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-c8b9bffa8",
+  "group": "NF",
+  "result": "pass",
+  "note": "Read node, 7 stmt_deps, Stacks 06BC/04AK, the delivered module, the live AlgebraicSpace, MapIsLocally/MapIsLocallyOfFinitePresentation and local_properties_chart_test. MapIsLocallyOfFinitePresentation is the owning def node's all-compatible-étale-chart predicate; the chart-test theorem makes it equal to the node's surjective-chart condition, so reuse is correct. Directed nonempty I : Type u, D : Iᵒᵖ ⥤ Over S with affine stages, any limit cone in Over S (= scheme limit for connected diagrams). The comparison map is canonical (pullback.lift of colimit.desc and colimMap, compatibility from naturality), into X(T) ×_{Y(T)} colim Y(T_i); conclusion is Bijective inside the iff. No qc/qs or extra hypotheses; edge cases covered. lean.statement verbatim; only node changes are the lean record and the landed stmt_dep def-sfb-space-morphism-properties; all imports exist live; sorry-only proof; docstrings carry source, blueprint and 8 proof steps. No compile run (no file changed)."
+ }
+}

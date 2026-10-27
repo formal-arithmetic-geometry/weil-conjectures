@@ -1,0 +1,155 @@
+{
+ "id": "lem-sfb-component-slice-derived-normalization",
+ "kind": "statement",
+ "title": "Derived normalization for an ordinary component slice square",
+ "statement": "Let $\\Lambda$ be a commutative condensed ring [sk-def-sfb-condensed-ring], $W$ a w-contractible affine scheme [sk-def-pe-wlocal], and $U\\to W$ a w-contractible affine pro-etale test [def-weil-pbc-proetale-site]. Fix PullbackData $d_W,d_U$, literal profinite RestrictionData $r$, and an OrdinaryComparison $e$ satisfying OrdinaryMonoidal with the fixed schemeCanonicalMonoidal [def-sfb-component-slice-comparison-data]. Then DerivedComparison for these same data and this same ordinary comparison is inhabited. Its four exact derived functors have normalized strong tensor structures; the canonical evaluation comparison obeys the slice and entire derived-section squares; the induced cohomology map is actual pullback on Hom into every integer shift. Fully faithful component pullback on the lower slice implies invertibility of the displayed entire derived-section morphism. No ordinary slice comparison, component data, or uniqueness of ordinary comparisons is constructed by this statement.",
+ "source": {
+  "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
+  "place": "Proposition 4.3(1), final sentence, using equation (4.2); Stacks Tags 07A4, 08JA, 08JB, 08J9; original slice comparison proof steps 3–7."
+ },
+ "stmt_deps": [
+  "def-sfb-component-slice-comparison-data"
+ ],
+ "proof": [
+  {
+   "text": "Exact termwise localization of the four functors gives the specified derivedIso. Compute derived tensors using flat-term K-flat complexes. On each bidegree summand use the ordinary tensor square and its coefficient-unit identity; they descend to the four DerivedMonoidalNormalization equations and the monoidal derived isomorphism.",
+   "uses": [
+    "lem-weil-pbc-exact-functor-derived-factorization",
+    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+    "lem-sfb-exact-derived-natural-iso"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Slice restriction of derived Hom is normalized by evaluation. Uncurry both composites in evaluation_square and apply the tensorator and monoidal natural-isomorphism equations. Both are the same pulled-back evaluation, so injectivity of transposition proves equality.",
+   "uses": [
+    "lem-weil-pbc-ringed-slice-evaluation-transpose",
+    "lem-sf-ringed-derived-closed-symmetric-monoidal"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Exact evaluation on the two weakly contractible final objects gives the ordinary section comparison with its coefficient-unit formula. Its exact right-derived comparison has the stated homotopy-representative formula. The K-injective Hom-complex model identifies Hom-sections in every integer degree, with the section from the unit mapped to the prescribed transpose. Transposing pulled-back sections and using the unit and shift equations gives cohomology_formula. Apply right-derived sections to evaluation_square, cancel the slice Hom isomorphism, and use naturality of the section comparison to obtain derived_sections_square.",
+   "uses": [
+    "lem-sfb-component-pullback-unbounded-evaluation",
+    "lem-sfb-derived-internal-hom-sections-model",
+    "lem-weil-pbc-ringed-slice-evaluation-transpose"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "If the lower component functor is fully faithful, all its shifted-Hom maps are bijective, so the local section map is an isomorphism on every cohomology object. Represent it by a map into a K-injective resolution; this map is a quasi-isomorphism and hence inverted by localization. The other factors of the derived section square are invertible, so cancellation gives fully_faithful_test for the displayed global comparison. All constructions are natural and use arbitrary unbounded complexes.",
+   "uses": [
+    "prop-pur-kinjective-resolutions-exist",
+    "lem-weil-pbc-kinjective-hom-derived",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-exact-functor-derived-factorization",
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+  "lem-sfb-exact-derived-natural-iso",
+  "lem-weil-pbc-ringed-slice-evaluation-transpose",
+  "lem-sf-ringed-derived-closed-symmetric-monoidal",
+  "lem-sfb-component-pullback-unbounded-evaluation",
+  "lem-sfb-derived-internal-hom-sections-model",
+  "prop-pur-kinjective-resolutions-exist",
+  "lem-weil-pbc-kinjective-hom-derived",
+  "def-weil-abstract-derived-category"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
+  "place": "Proposition 4.3(1), final sentence, using equation (4.2); Stacks Tags 07A4, 08JA, 08JB, 08J9; original slice comparison proof steps 3–7.; explicit normalization argument by K1."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Ordinary monoidal comparison of component inverse image with restriction to a scheme slice",
+   "results": "8 hits: morphismRestrict_appLE, arrowResLEAppIso, morphismRestrictRestrict, opensDiagram_map, Scheme.restrictFunctorΓ_inv_app, Scheme.Hom.resLE_appLE, Γ_map_morphismRestrict, morphismRestrictRestrictBasicOpen. None supplies the component-site module comparison or its specified normalization.",
+   "date": "2026-10-26",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"mapDerivedCategory\"",
+   "results": "10 displayed hits concerning exact-derived identity, composition, shift, and natural transformations; these provide termwise localization but no normalized component-slice tensor/Hom square.",
+   "date": "2026-10-26",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "ihomComparison|overMapPullback",
+   "results": "11 displayed hits, including Over.lean overMapPullback and its identity/composition isomorphisms; no normalized component-slice comparison.",
+   "date": "2026-10-26",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Profinite component pullback commutes with slice restriction as tensor functors and derived internal Hom sections",
+   "results": "8 hits concerning cartesian tensor in Over, LightCondensed.ihomPoints, SheafOfModules.pullbackComp, iterated slice pullback, ring base change, and profinite products. None gives the requested comparison.",
+   "date": "2026-10-26",
+   "verdict": "no match"
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.ComponentSliceHomComparison",
+  "date": "2026-10-26",
+  "group": "K1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "Paragraph (3), open direct image: unbounded derived internal functions comparison on the w-contractible affine basis; general component theorem used as a tool, not the parameter statement. HRS Proposition 4.3(1): Proposition 4.3(1), final sentence of proof using (4.2) on slices; expanded using Stacks Tags 08JA (lemma-section-RHom-over-U), 08JB (lemma-restriction-RHom-to-U), sites-cohomology.tex. The supporting slice lemma, Proposition 4.3(1), final sentence, using equation (4.2); Stacks Tags 07A4, 08JA, 08JB, 08J9; original slice comparison proof steps 3–7.",
+   "via": [
+    "lem-sfb-component-slice-hom-comparison-test",
+    "lem-sfb-wcontractible-component-derived-hom",
+    "lem-sfb-profinite-constant-derived-functions",
+    "lem-sfb-root-tower-boundary-acyclicity",
+    "lem-sfb-tame-stratum-kummer-descent",
+    "lem-sfb-continuous-algcl-tame-boundary-comparison",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.ComponentSliceDerivedNormalization",
+  "file": "lean/Sheaf/AlgebraicGeometry/ComponentSliceDerivedNormalization.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.CondensedRing.ComponentSlice.component_slice_derived_normalization",
+  "statement": "theorem component_slice_derived_normalization\n    (W : Scheme.{u}) [IsAffine W] [IsWContractibleRing Γ(W, ⊤)]\n    (U : W.ProEt) [IsAffine U.left] [IsWContractibleRing Γ(U.left, ⊤)]\n    (dW : PullbackData Λ W) (dU : PullbackData Λ U.left)\n    (r : RestrictionData Λ (componentMap W U))\n    (e : OrdinaryComparison Λ W U dW dU r)\n    (he : OrdinaryMonoidal Λ W U dW dU r (schemeCanonicalMonoidal Λ W U) e) :\n    Nonempty (DerivedComparison Λ W U dW dU r (schemeCanonicalMonoidal Λ W U) e)",
+  "branch": "sheaf-dag",
+  "by": "K1",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-400a3",
+  "group": "K1",
+  "result": "pass",
+  "landing": "20261026T082337-L-2163875",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-400a3",
+  "group": "K1",
+  "result": "pass",
+  "landing": "20261026T082337-L-2163875",
+  "kind": "interface",
+  "note": "independent cc review: published item vs new ComponentSliceComparisonData (verbatim except blueprint tags); item statement byte-identical; 2 new sorry lemmas vs item conjuncts and pinned records; sandbox axioms probe"
+ }
+}

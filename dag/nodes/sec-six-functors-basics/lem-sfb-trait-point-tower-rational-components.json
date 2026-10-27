@@ -1,0 +1,402 @@
+{
+ "id": "lem-sfb-trait-point-tower-rational-components",
+ "kind": "statement",
+ "title": "Rational geometric components through mixed nodal and regular point blowups",
+ "statement": "Let $A$ be a discrete valuation ring with fraction field $F$, residue field $k$, and $T=\\operatorname{Spec}A$ [def-sc-discrete-valuation-ring, def-weil-affine-spectrum]. Let $X_0\\to T$ be integral and H-projective [def-pc-integral-scheme, def-kun-projective]. Let $X_m\\xrightarrow{b_m}\\cdots\\xrightarrow{b_1}X_0$ be a finite tower in which every $X_i$ is integral and Noetherian (locally Noetherian and quasi-compact) [pqf-def-locnoeth], and $b_{i+1}$ is the blowup of one reduced closed point $z_i$ of the special fibre $(X_i)_k$ [def-nagata-global-blowup, def-weil-geometric-fibre, def-weil-closed-immersion]. At every centre assume one of the following two conditions: (a) $X_i\\to T$ is flat and finitely presented, with smooth generic fibre and reduced pure one-dimensional nodal geometric fibres over some open neighbourhood of $z_i$ in $X_i$, and $X_i$ is not regular at $z_i$; or (b) $\\mathcal O_{X_i,z_i}$ is a regular local ring of dimension two [def-weil-flat-morphism, def-sbc-locally-finite-presentation, def-sbc-smooth-morphisms, def-pc-reduced-scheme, def-weil-pure-dimension, def-weil-regular-scheme, def-weil-pbc-krull-dimension-ring]. In (a), nodal means that every nonsmooth closed geometric fibre point over an algebraically closed field $\\Omega$ has completed local ring $\\Omega[[u,v]]/(uv)$ [def-weil-pbc-adic-completion, def-weil-pbc-multivariate-power-series]. For $j\\leq m$, write $g_j:X_j\\to X_0$ for the composite. For every algebraically closed $\\Omega$ and geometric point $c:\\operatorname{Spec}\\Omega\\to X_0$, the reduction $B_{j,c}=(X_j\\times_{X_0}\\operatorname{Spec}\\Omega)_{\\mathrm{red}}$ is of dimension at most one, has finitely many irreducible components, and each positive-dimensional irreducible component is isomorphic over $\\Omega$ to $\\mathbf P^1_\\Omega$ [def-weil-pbc-scheme-reduction, def-weil-irreducible-components, def-sc-p1-standard]. For each such component $L\\cong\\mathbf P^1_\\Omega$ at stage $j$, its scheme-theoretic strict transform under $b_{j+1}$, computed from the morphism $L\\to X_j$, is isomorphic to $L$ over $\\Omega$ and is a closed subscheme of $B_{j+1,c}$ [def-nagata-strict-transform]. No perfectness of $k$ or separability of centre residue fields is assumed, and $m=0$ is permitted.",
+ "source": {
+  "document": "literature/stacks-project/divisors.tex",
+  "place": "Tag 080E (lemma-strict-transform), together with resolve.tex Tag 0AGQ (lemma-blowup) and Tag 0AGR (lemma-blowup-regular); nodal exceptional fibres from the xy=pi^n calculation of de Jong Lemma 3.13 proof, printed p.609. Agent-formulated induction on geometric components, carrying returned Steps 3 and 8; archival de Jong PDF WANTED, primary PDF read online."
+ },
+ "stmt_deps": [
+  "def-sc-discrete-valuation-ring",
+  "def-weil-affine-spectrum",
+  "def-pc-integral-scheme",
+  "def-kun-projective",
+  "pqf-def-locnoeth",
+  "def-nagata-global-blowup",
+  "def-weil-geometric-fibre",
+  "def-weil-closed-immersion",
+  "def-weil-flat-morphism",
+  "def-sbc-locally-finite-presentation",
+  "def-sbc-smooth-morphisms",
+  "def-pc-reduced-scheme",
+  "def-weil-pure-dimension",
+  "def-weil-regular-scheme",
+  "def-weil-pbc-krull-dimension-ring",
+  "def-weil-pbc-adic-completion",
+  "def-weil-pbc-multivariate-power-series",
+  "def-weil-pbc-scheme-reduction",
+  "def-weil-irreducible-components",
+  "def-sc-p1-standard",
+  "def-nagata-strict-transform",
+  "def-sfb-ordinary-geometric-node",
+  "def-weil-residue-field",
+  "def-sbc-closed-immersion-ideal-sheaf"
+ ],
+ "proof": [
+  {
+   "text": "Fix $c:\\operatorname{Spec}\\Omega\\to X_0$ and put $Y_j=X_j\\times_{X_0}\\operatorname{Spec}\\Omega$, $B_j=(Y_j)_{\\mathrm{red}}$. Each reduced point centre has a finite-type quasi-coherent ideal, since its ambient scheme is Noetherian. By [lemma-nagata-blowup-proper] each arrow is proper, hence finite type by [def-weil-proper-morphism]. By [lem-sfb-finite-type-composition-base-change], $Y_j$ is finite type over $\\Omega$, so [lem-weil-pbc-finite-type-over-noetherian] makes it Noetherian. Its underlying space, also that of $B_j$, has finitely many irreducible components by [lem-sc-noetherian-finite-irreducible-components]. At $j=0$, $Y_0=\\operatorname{Spec}\\Omega$, giving the induction base including the entire assertion for $m=0$.",
+   "uses": [
+    "lemma-nagata-blowup-proper",
+    "def-weil-proper-morphism",
+    "lem-sfb-finite-type-composition-base-change",
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "lem-sc-noetherian-finite-irreducible-components",
+    "def-weil-pbc-scheme-reduction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/divisors.tex",
+    "place": "Blowing up, properness; agent induction setup (finite-type ideals on Noetherian schemes)."
+   }
+  },
+  {
+   "text": "For a centre $z=z_j$, its residue field $l=\\kappa(z)$ is finite over $k$: $z$ is closed in the special fibre, which is finite type over $k$ (initially $X_0$ is H-projective and subsequent blowups are finite type); apply [lem-weil-pbc-zariski-lemma] on an affine neighbourhood in that fibre. If the image of $c$ in $T$ is not the closed point, $Z=z\\times_{X_0}\\operatorname{Spec}\\Omega$ is empty. Otherwise $Z$ is a closed subscheme of $z\\times_k\\operatorname{Spec}\\Omega$: the additional equations express equality of the two maps to the separated $k$-scheme $(X_0)_k$. Indeed [lem-pc-projective-proper] makes $X_0\\to T$ proper, so [def-weil-proper-morphism] makes its base change to $k$ separated. By [lem-weil-pbc-fibre-product-affine-spectra] the larger product has algebra $l\\otimes_k\\Omega$, spanned over $\\Omega$ by a $k$-basis of $l$. Thus $Z=\\operatorname{Spec}D$ with $D$ finite dimensional over $\\Omega$, possibly zero. It is Artinian by [lem-weil-pbc-finite-dim-algebra-artinian] and has finitely many points by [lem-sfb-artinian-spectrum-finite]. For every prime $\\mathfrak p$ of $D$, the finite-dimensional domain $D/\\mathfrak p$ is a field (multiplication by a nonzero element is injective, hence surjective), and equals $\\Omega$: the minimal polynomial of any element splits into linear factors. Thus every reduced point of $Z$ is $\\operatorname{Spec}\\Omega$. This permits nonreduced $D$ and inseparable $l/k$.",
+   "uses": [
+    "def-kun-projective",
+    "lem-pc-projective-proper",
+    "def-weil-proper-morphism",
+    "lem-sfb-finite-type-composition-base-change",
+    "lem-weil-pbc-zariski-lemma",
+    "lem-weil-pbc-fibre-product-affine-spectra",
+    "lem-weil-pbc-finite-dim-algebra-artinian",
+    "lem-sfb-artinian-spectrum-finite"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tags 00FV (theorem-nullstellensatz), 00J6 (lemma-finite-dimensional-algebra); finite centre after geometric base change."
+   }
+  },
+  {
+   "text": "In case (a), shrink to an affine open neighbourhood of $z$ contained in the stipulated nodal neighbourhood. The restricted family is flat finitely presented with smooth generic fibre and the stated nodal geometric fibres; the affine restriction is finitely presented: its coordinate algebra is finite type over the Noetherian ring $A$, hence finitely presented by [lem-weil-pbc-finite-type-noetherian-finite-presentation]. Apply [lem-sfb-nodal-trait-finite-singular-charts] to this restriction. Since $z$ is nonregular, it has the common pointed etale chart with $M_n=\\operatorname{Spec}R'[x,y]/(xy-\\pi^n)$, $n\\ge2$. The exceptional geometric fibre of its point blowup is one $\\mathbf P^1$ for $n=2$, and two $\\mathbf P^1$'s meeting in a point for $n>2$, by [lem-sfb-dvr-nodal-chart-blowup-calculus]. To use this over the specified $\\Omega$-point of $Z$, extend its residue-field map to the chart point using [lem-weil-pbc-algebraic-extension-embeds-algebraically-closed]; the chart residue extension is finite separable. By [lem-sfb-flat-pullback-blowup-chart-restrictions], shrink the etale neighbourhood to isolate that point; both pulled-back centre ideals are then the reduced point ideals. Their blowups give the same geometric fibre over this chosen lift. Hence the exceptional fibre of $b_{j+1}$ over each reduced point of $Z$ has exactly the asserted one-line or two-line description over $\\Omega$. This uses only nodality near this centre.",
+   "uses": [
+    "lem-sfb-nodal-trait-finite-singular-charts",
+    "lem-sfb-dvr-nodal-chart-blowup-calculus",
+    "lem-weil-pbc-algebraic-extension-embeds-algebraically-closed",
+    "lem-sfb-flat-pullback-blowup-chart-restrictions",
+    "lem-weil-pbc-etale-fibre-discrete-separable-points",
+    "lem-weil-pbc-finite-type-noetherian-finite-presentation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/models.tex",
+    "place": "Tags 0CDD (lemma-etale-local-at-worst-nodal), 0CDC (example-blowup); point isolation and flat base change in proof of Tag 0CDE."
+   }
+  },
+  {
+   "text": "In case (b), put $R=\\mathcal O_{X_j,z}$, a regular local ring of dimension two. Its canonical local-spectrum morphism is flat and pulls the reduced centre back to the maximal ideal by [lem-weil-pbc-spec-local-ring-canonical-morphism]. The comparison of [lem-sfb-flat-pullback-blowup-chart-restrictions] therefore identifies its exceptional fibre with that of $b_{j+1}$ over $z$. By [lem-sfb-local-surface-maximal-blowup-geometry], this fibre is $\\mathbf P^1_l$. For each reduced point of $Z$, base change along its map $l\\to\\Omega$ gives $\\mathbf P^1_\\Omega$; the base-change identification is just associativity in [def-nagata-projective-space-base-change]. Consequently the reduced inverse image of $Z$ is a finite union of closed projective lines in either case (a) or (b): every point maps to one of its finitely many reduced points, and the corresponding geometric fibres cover the underlying inverse image. Nilpotents in $Z$ do not add points.",
+   "uses": [
+    "lem-weil-pbc-spec-local-ring-canonical-morphism",
+    "lem-sfb-flat-pullback-blowup-chart-restrictions",
+    "lem-sfb-local-surface-maximal-blowup-geometry",
+    "def-nagata-projective-space-base-change",
+    "def-weil-pbc-scheme-reduction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/resolve.tex",
+    "place": "Tag 0AGQ (lemma-blowup), assertion (1), and geometric base change of the exceptional projective line."
+   }
+  },
+  {
+   "text": "Assume the dimension and component assertions at stage $j$, and let $L\\cong\\mathbf P^1_\\Omega$ be one of its positive-dimensional components, given its reduced closed subscheme structure in $Y_j$. Let $\\mathcal I$ be the centre ideal on $X_j$ and $J=\\mathcal I\\mathcal O_L$. Its vanishing set is contained in $Z$; hence it is finite and does not contain the generic point of $L$. On each of the two affine charts $\\operatorname{Spec}\\Omega[t]$ of [def-sc-p1-standard], $J$ is an ideal of $\\Omega[t]$. It is nonzero because it is the unit ideal at the generic point. By [lem-pur-polynomial-field-pid] it equals $(f)$ for a nonzero polynomial $f$. Multiplication by $f$ identifies the chart's structure sheaf with this ideal (the polynomial ring is a domain). Thus $J$ is invertible, including when the centre intersection is empty or nonreduced. By [thm-nagata-strict-transform-is-blowup] the strict transform of the morphism $L\\to X_j$ is $\\operatorname{Bl}_J L$; by [cor-nagata-blowup-cartier-iso] its projection to $L$ is an isomorphism. No separability is used in this argument.",
+   "uses": [
+    "def-sc-p1-standard",
+    "lem-pur-polynomial-field-pid",
+    "thm-nagata-strict-transform-is-blowup",
+    "cor-nagata-blowup-cartier-iso"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/divisors.tex",
+    "place": "Tag 080E (lemma-strict-transform), assertion (1); algebra.tex Tag 030A (lemma-polynomial-domain-normal), PID field case."
+   }
+  },
+  {
+   "text": "Write $L^{\\mathrm{st}}$ for that strict transform. By [def-nagata-strict-transform] it is a closed subscheme of $L\\times_{X_j}X_{j+1}$. The closed immersion $L\\hookrightarrow Y_j$, pulled back by $X_{j+1}\\to X_j$, gives a closed immersion $L\\times_{X_j}X_{j+1}\\hookrightarrow Y_{j+1}$ by [lem-weil-pbc-closed-immersion-base-change]. Hence $L^{\\mathrm{st}}$ is closed in $Y_{j+1}$. As it is isomorphic to the reduced scheme $L$, its map factors through $B_{j+1}$: affine-locally the defining surjection kills every nilpotent, since the target ring is reduced. The resulting map from the reduction ring remains surjective, so this factorization is a closed immersion. By the closure definition, its support is the closure of the inverse image of $L\\setminus Z$; this is dense in $L$ since $Z$ is finite. This proves exactly the claimed scheme-theoretic strict-transform assertion, including its specified $\\Omega$-structure.",
+   "uses": [
+    "def-nagata-strict-transform",
+    "lem-weil-pbc-closed-immersion-base-change",
+    "def-weil-pbc-scheme-reduction"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/divisors.tex",
+    "place": "Definition strict transform immediately preceding Tag 080E; schemes.tex Definition 01J4, reduction by the nilradical."
+   }
+  },
+  {
+   "text": "By [thm-nagata-global-blowup-complement], $Y_{j+1}\\to Y_j$ is an isomorphism away from $Z$. Each point outside the inverse image of $Z$ therefore lies either on the inverse image of one of the finitely many old lines, or over a zero-dimensional old component. The former points lie in the corresponding $L^{\\mathrm{st}}$ by its closure definition. Each zero-dimensional component of the finite-type $\\Omega$-scheme $B_j$ is a single closed reduced $\\Omega$-point, by [lem-weil-pbc-zariski-lemma]; if it is outside $Z$, its inverse image is again a closed point. Points over $Z$ lie on the finitely many exceptional lines in Steps 3--4. Thus the support of $B_{j+1}$ is covered by finitely many closed subschemes isomorphic to $\\mathbf P^1_\\Omega$ and finitely many closed points. An irreducible subset of a finite union of closed sets lies in one of them: otherwise its intersections with them would express it as a finite union of proper closed subsets. Consequently every irreducible component is one of these lines or one of these points. A proper irreducible closed subset of a projective line is a point, as its intersection with either standard affine chart is cut out by a nonzero polynomial, with finitely many roots. Hence the dimension is at most one, and every positive-dimensional component is a whole projective line. This completes the induction for every $j$ and every $c$.",
+   "uses": [
+    "thm-nagata-global-blowup-complement",
+    "lem-weil-pbc-zariski-lemma",
+    "def-nagata-strict-transform",
+    "def-sc-p1-standard"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/divisors.tex",
+    "place": "Blowup complement and Tag 080E; agent finite-union induction on reduced geometric components."
+   }
+  }
+ ],
+ "proof_deps": [
+  "cor-nagata-blowup-cartier-iso",
+  "def-kun-projective",
+  "def-nagata-projective-space-base-change",
+  "def-nagata-strict-transform",
+  "def-sc-p1-standard",
+  "def-weil-pbc-scheme-reduction",
+  "def-weil-proper-morphism",
+  "lem-pc-projective-proper",
+  "lem-pur-polynomial-field-pid",
+  "lem-sc-noetherian-finite-irreducible-components",
+  "lem-sfb-artinian-spectrum-finite",
+  "lem-sfb-dvr-nodal-chart-blowup-calculus",
+  "lem-sfb-finite-type-composition-base-change",
+  "lem-sfb-flat-pullback-blowup-chart-restrictions",
+  "lem-sfb-local-surface-maximal-blowup-geometry",
+  "lem-sfb-nodal-trait-finite-singular-charts",
+  "lem-weil-pbc-algebraic-extension-embeds-algebraically-closed",
+  "lem-weil-pbc-closed-immersion-base-change",
+  "lem-weil-pbc-etale-fibre-discrete-separable-points",
+  "lem-weil-pbc-fibre-product-affine-spectra",
+  "lem-weil-pbc-finite-dim-algebra-artinian",
+  "lem-weil-pbc-finite-type-noetherian-finite-presentation",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-weil-pbc-spec-local-ring-canonical-morphism",
+  "lem-weil-pbc-zariski-lemma",
+  "lemma-nagata-blowup-proper",
+  "thm-nagata-global-blowup-complement",
+  "thm-nagata-strict-transform-is-blowup"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/divisors.tex",
+  "place": "Tag 080E (lemma-strict-transform), combined with models.tex Tags 0CDC/0CDD/0CDE and resolve.tex Tag 0AGQ; agent geometric-component induction."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "strict.?transform|exceptional|rational.*(fibre|fiber)",
+   "results": "{\"t\": \"2026-10-22T06:07:46Z\", \"tool\": \"grep\", \"query\": \"strict.?transform|exceptional|rational.*(fibre|fiber)\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: geometric fibre definitions and base-change stability of closed immersions do not prove rationality of exceptional components or invariance of geometric line strict transforms."
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.ProjectiveSpace, AlgebraicGeometry.IsClosedImmersion",
+   "results": "{\"t\": \"2026-10-22T06:07:46Z\", \"tool\": \"loogle\", \"query\": \"AlgebraicGeometry.ProjectiveSpace, AlgebraicGeometry.IsClosedImmersion\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"loogle: unknown identifier 'AlgebraicGeometry.ProjectiveSpace'\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: geometric fibre definitions and base-change stability of closed immersions do not prove rationality of exceptional components or invariance of geometric line strict transforms."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A tower of blowups of nodal or regular closed surface points has geometric fibres of dimension at most one with every curve component isomorphic to the projective line",
+   "results": "{\"t\": \"2026-10-22T06:07:54Z\", \"tool\": \"leanfinder\", \"query\": \"A tower of blowups of nodal or regular closed surface points has geometric fibres of dimension at most one with every curve component isomorphic to the projective line\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsSmoothOfRelativeDimension\", \"AlgebraicGeometry.instIsPreimmersionFiberι\", \"AlgebraicGeometry.IsSmooth\", \"AlgebraicGeometry.isSmoothOfRelativeDimension_isStableUnderBaseChange\", \"AlgebraicGeometry.instIsMultiplicativeSchemeIsSmoothOfRelativeDimensionOfNatNat\", \"AlgebraicGeometry.isSmoothOfRelativeDimension_comp\", \"AlgebraicGeometry.instIsSmoothOfRelativeDimensionOfNatNatCompScheme\", \"AlgebraicGeometry.isSmooth_isStableUnderBaseChange\"], \"digest\": \"d3c4ed946217c0a2\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: geometric fibre definitions and base-change stability of closed immersions do not prove rationality of exceptional components or invariance of geometric line strict transforms."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"blowup\"",
+   "results": "{\"t\": \"2026-10-22T06:08:10Z\", \"tool\": \"loogle\", \"query\": \"\\\"blowup\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: geometric fibre definitions and base-change stability of closed immersions do not prove rationality of exceptional components or invariance of geometric line strict transforms."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Strict transforms of projective line components in geometric fibres stay projective lines under blowups at closed surface points, including inseparable residue fields",
+   "results": "{\"t\": \"2026-10-22T06:08:10Z\", \"tool\": \"leansearch\", \"query\": \"Strict transforms of projective line components in geometric fibres stay projective lines under blowups at closed surface points, including inseparable residue fields\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Hom.fiberToSpecResidueField_apply\", \"AlgebraicGeometry.Scheme.Hom.fiberOverSpecResidueField\", \"AlgebraicGeometry.instIsPreimmersionFiberι\", \"AlgebraicGeometry.IsClosedImmersion.isStableUnderBaseChange\", \"AlgebraicGeometry.sourceLocalClosure.instIsStableUnderBaseChangeScheme\", \"WeierstrassCurve.Projective.baseChange_nonsingular\", \"AlgebraicGeometry.IsProper.isStableUnderBaseChange\", \"AlgebraicGeometry.IsImmersion.isStableUnderBaseChange\"], \"digest\": \"b4d5e8fb307809d3\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: geometric fibre definitions and base-change stability of closed immersions do not prove rationality of exceptional components or invariance of geometric line strict transforms."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Rational exceptional curves in geometric fibres of iterated point blowups of an arithmetic nodal surface",
+   "results": "{\"t\": \"2026-10-22T06:08:21Z\", \"tool\": \"leanfinder\", \"query\": \"Rational exceptional curves in geometric fibres of iterated point blowups of an arithmetic nodal surface\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"WeierstrassCurve.Affine.Point.map_some\", \"WeierstrassCurve.exists_isMinimal\", \"WeierstrassCurve.Jacobian.NonsingularLift\", \"WeierstrassCurve.minimal\", \"WeierstrassCurve.Projective.Point.nonsingular\", \"WeierstrassCurve.Projective.NonsingularLift\", \"WeierstrassCurve.Jacobian.Point.nonsingular\", \"WeierstrassCurve.Jacobian.nonsingularLift_zero\"], \"digest\": \"b906622b3e65a8f7\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: geometric fibre definitions and base-change stability of closed immersions do not prove rationality of exceptional components or invariance of geometric line strict transforms."
+  },
+  {
+   "tool": "grep",
+   "query": "strict.?[Tt]ransform|exceptional.*(fibre|fiber)|rational.*component",
+   "results": "{\"t\": \"2026-10-23T04:19:22Z\", \"tool\": \"grep\", \"query\": \"strict.?[Tt]ransform|exceptional.*(fibre|fiber)|rational.*component\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern fibre constructions, properness, smoothness, rational maps or elliptic curves; none states the mixed point-blowup tower or its geometric-line strict transforms."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Geometric fibres of a composition of blowups at closed regular or nodal surface points are unions of projective lines",
+   "results": "{\"t\": \"2026-10-23T04:19:22Z\", \"tool\": \"leansearch\", \"query\": \"Geometric fibres of a composition of blowups at closed regular or nodal surface points are unions of projective lines\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Hom.fiber\", \"AlgebraicGeometry.instIsPreimmersionFiberι\", \"AlgebraicGeometry.instIsAffineFiberOfIsAffineHom\", \"AlgebraicGeometry.instCanonicallyOverFiber\", \"AlgebraicGeometry.Scheme.Hom.fiberι\", \"AlgebraicGeometry.Scheme.Hom.fiberOverSpecResidueField\", \"AlgebraicGeometry.isSmoothOfRelativeDimension_comp\", \"AlgebraicGeometry.IsProper.instCompScheme\"], \"digest\": \"9ce2d4616562add3\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern fibre constructions, properness, smoothness, rational maps or elliptic curves; none states the mixed point-blowup tower or its geometric-line strict transforms."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"blowup\"",
+   "results": "{\"t\": \"2026-10-23T04:19:23Z\", \"tool\": \"loogle\", \"query\": \"\\\"blowup\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern fibre constructions, properness, smoothness, rational maps or elliptic curves; none states the mixed point-blowup tower or its geometric-line strict transforms."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A finite tower of point blowups on a nodal arithmetic surface has geometric fibre components isomorphic to the projective line",
+   "results": "{\"t\": \"2026-10-23T04:19:24Z\", \"tool\": \"leanfinder\", \"query\": \"A finite tower of point blowups on a nodal arithmetic surface has geometric fibre components isomorphic to the projective line\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"WeierstrassCurve.Affine.Point.map_some\", \"WeierstrassCurve.Projective.NonsingularLift\", \"WeierstrassCurve.exists_isMinimal\", \"WeierstrassCurve.Projective.comp_equiv_comp\", \"WeierstrassCurve.IsGoodReduction\", \"WeierstrassCurve.Projective.baseChange_nonsingular\", \"AlgebraicGeometry.Proj.valuativeCriterion_existence\", \"AlgebraicGeometry.AffineSpace.not_isIntegralHom\"], \"digest\": \"3816316c69e263bf\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern fibre constructions, properness, smoothness, rational maps or elliptic curves; none states the mixed point-blowup tower or its geometric-line strict transforms."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Successive point blowups preserve rational geometric exceptional components and strict transforms of smooth rational curves",
+   "results": "{\"t\": \"2026-10-23T04:32:21Z\", \"tool\": \"leanfinder\", \"query\": \"Successive point blowups preserve rational geometric exceptional components and strict transforms of smooth rational curves\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.RationalMap.IsOver\", \"AlgebraicGeometry.Scheme.RationalMap.isOver_iff\", \"AlgebraicGeometry.Scheme.RationalMap.compHom\", \"AlgebraicGeometry.Scheme.RationalMap.ofFunctionField\", \"AlgebraicGeometry.Scheme.RationalMap.fromFunctionField_ofFunctionField\", \"AlgebraicGeometry.Scheme.RationalMap.exists_rep\", \"AlgebraicGeometry.Scheme.PartialMap.isOver_toRationalMap_iff_of_isSeparated\", \"AlgebraicGeometry.Scheme.RationalMap.exists_partialMap_over\"], \"digest\": \"e46e19815f19e191\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern fibre constructions, properness, smoothness, rational maps or elliptic curves; none states the mixed point-blowup tower or its geometric-line strict transforms."
+  },
+  {
+   "tool": "grep",
+   "query": "strict.?[Tt]ransform|exceptional.*(fibre|fiber)|rational.*component",
+   "results": "{\"t\": \"2026-10-23T04:19:22Z\", \"tool\": \"grep\", \"query\": \"strict.?[Tt]ransform|exceptional.*(fibre|fiber)|rational.*component\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern fibre constructions, properness, smoothness, rational maps or elliptic curves; none states the mixed point-blowup tower or its geometric-line strict transforms."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Geometric fibres of a composition of blowups at closed regular or nodal surface points are unions of projective lines",
+   "results": "{\"t\": \"2026-10-23T04:19:22Z\", \"tool\": \"leansearch\", \"query\": \"Geometric fibres of a composition of blowups at closed regular or nodal surface points are unions of projective lines\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Hom.fiber\", \"AlgebraicGeometry.instIsPreimmersionFiberι\", \"AlgebraicGeometry.instIsAffineFiberOfIsAffineHom\", \"AlgebraicGeometry.instCanonicallyOverFiber\", \"AlgebraicGeometry.Scheme.Hom.fiberι\", \"AlgebraicGeometry.Scheme.Hom.fiberOverSpecResidueField\", \"AlgebraicGeometry.isSmoothOfRelativeDimension_comp\", \"AlgebraicGeometry.IsProper.instCompScheme\"], \"digest\": \"9ce2d4616562add3\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern fibre constructions, properness, smoothness, rational maps or elliptic curves; none states the mixed point-blowup tower or its geometric-line strict transforms."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"blowup\"",
+   "results": "{\"t\": \"2026-10-23T04:19:23Z\", \"tool\": \"loogle\", \"query\": \"\\\"blowup\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern fibre constructions, properness, smoothness, rational maps or elliptic curves; none states the mixed point-blowup tower or its geometric-line strict transforms."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A finite tower of point blowups on a nodal arithmetic surface has geometric fibre components isomorphic to the projective line",
+   "results": "{\"t\": \"2026-10-23T04:19:24Z\", \"tool\": \"leanfinder\", \"query\": \"A finite tower of point blowups on a nodal arithmetic surface has geometric fibre components isomorphic to the projective line\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"WeierstrassCurve.Affine.Point.map_some\", \"WeierstrassCurve.Projective.NonsingularLift\", \"WeierstrassCurve.exists_isMinimal\", \"WeierstrassCurve.Projective.comp_equiv_comp\", \"WeierstrassCurve.IsGoodReduction\", \"WeierstrassCurve.Projective.baseChange_nonsingular\", \"AlgebraicGeometry.Proj.valuativeCriterion_existence\", \"AlgebraicGeometry.AffineSpace.not_isIntegralHom\"], \"digest\": \"3816316c69e263bf\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern fibre constructions, properness, smoothness, rational maps or elliptic curves; none states the mixed point-blowup tower or its geometric-line strict transforms."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Successive point blowups preserve rational geometric exceptional components and strict transforms of smooth rational curves",
+   "results": "{\"t\": \"2026-10-23T04:32:21Z\", \"tool\": \"leanfinder\", \"query\": \"Successive point blowups preserve rational geometric exceptional components and strict transforms of smooth rational curves\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.RationalMap.IsOver\", \"AlgebraicGeometry.Scheme.RationalMap.isOver_iff\", \"AlgebraicGeometry.Scheme.RationalMap.compHom\", \"AlgebraicGeometry.Scheme.RationalMap.ofFunctionField\", \"AlgebraicGeometry.Scheme.RationalMap.fromFunctionField_ofFunctionField\", \"AlgebraicGeometry.Scheme.RationalMap.exists_rep\", \"AlgebraicGeometry.Scheme.PartialMap.isOver_toRationalMap_iff_of_isSeparated\", \"AlgebraicGeometry.Scheme.RationalMap.exists_partialMap_over\"], \"digest\": \"e46e19815f19e191\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern fibre constructions, properness, smoothness, rational maps or elliptic curves; none states the mixed point-blowup tower or its geometric-line strict transforms."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-nodal-trait-rational-domination",
+  "date": "2026-10-22",
+  "group": "Q48"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong §§3.9--3.12, Claim 3.10 and Lemma 3.13, printed p.609. Agent-formulated version: the proof of Lemma 3.13 uses only that rational exceptional curves have constant image in each target fibre; this property replaces its genus-at-least-two and pure-curve target hypotheses. This statement does not assert existence of a semistable source.; de Jong Lemma 3.13, rational exceptional-curve geometry before contraction; returned nodal-trait-rational-domination proof Steps 3,8; geometric argument before contraction",
+   "via": [
+    "lem-sfb-nodal-trait-rational-domination",
+    "lem-sfb-high-genus-hom-closure",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-trait-point-tower-rational-components",
+  "worker": "stage1",
+  "summary": "Checked the current library and DAG; no exact attachment. Reused all local nodal, regular and strict-transform tools, without new nodes. Wrote the component induction with finite nonreduced geometric centres and explicit invertibility on the two polynomial charts of each old line. Statement and statement dependencies unchanged. Repair of the returned delivery f58fad9859d: rebased through the prescribed delivery tool onto the current origin/sheaf-dag; compared the retained item and all 36 complete-statement citation records with the current DAG. The item statement, its 21 statement dependencies, blueprint provenance and maintainer-owned metadata match the current item. All 28 proof-input statements are unchanged, so the seven-step proof and its exact citations remain valid; the report records the revalidation rather than claiming the unpromoted side completion is live.",
+  "blueprint": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2; de Jong Lemma 3.13 geometric exceptional-curve argument before contraction, inherited returned nodal-trait-rational-domination Steps 3 and 8. No unit or chapter route change.",
+  "tool_uses": [
+   {
+    "node": "cor-nagata-blowup-cartier-iso",
+    "why": "Generic blowup, strict-transform or local-spectrum tool; the unit supplies no replacement for this scheme-theoretic operation. Its exact statement is used in the indicated proof step, preserving the exceptional-curve route."
+   },
+   {
+    "node": "lem-pc-projective-proper",
+    "why": "Generic blowup, strict-transform or local-spectrum tool; the unit supplies no replacement for this scheme-theoretic operation. Its exact statement is used in the indicated proof step, preserving the exceptional-curve route."
+   },
+   {
+    "node": "lem-weil-pbc-etale-fibre-discrete-separable-points",
+    "why": "Generic blowup, strict-transform or local-spectrum tool; the unit supplies no replacement for this scheme-theoretic operation. Its exact statement is used in the indicated proof step, preserving the exceptional-curve route."
+   },
+   {
+    "node": "lem-weil-pbc-spec-local-ring-canonical-morphism",
+    "why": "Generic blowup, strict-transform or local-spectrum tool; the unit supplies no replacement for this scheme-theoretic operation. Its exact statement is used in the indicated proof step, preserving the exceptional-curve route."
+   },
+   {
+    "node": "lemma-nagata-blowup-proper",
+    "why": "Generic blowup, strict-transform or local-spectrum tool; the unit supplies no replacement for this scheme-theoretic operation. Its exact statement is used in the indicated proof step, preserving the exceptional-curve route."
+   },
+   {
+    "node": "thm-nagata-global-blowup-complement",
+    "why": "Generic blowup, strict-transform or local-spectrum tool; the unit supplies no replacement for this scheme-theoretic operation. Its exact statement is used in the indicated proof step, preserving the exceptional-curve route."
+   },
+   {
+    "node": "thm-nagata-strict-transform-is-blowup",
+    "why": "Generic blowup, strict-transform or local-spectrum tool; the unit supplies no replacement for this scheme-theoretic operation. Its exact statement is used in the indicated proof step, preserving the exceptional-curve route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "cor-nagata-blowup-cartier-iso",
+  "lem-pc-projective-proper",
+  "lem-weil-pbc-etale-fibre-discrete-separable-points",
+  "lem-weil-pbc-spec-local-ring-canonical-morphism",
+  "lemma-nagata-blowup-proper",
+  "thm-nagata-global-blowup-complement",
+  "thm-nagata-strict-transform-is-blowup"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-NC-8fc819a98",
+  "group": "NC",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NC-8fc819a98 (reviewer sub-agent of L); spot-checked: I read all 7 steps on head 8fc819a9 together with every cited statement. This re-delivery of f58fad9859d6 (a cc PASS whose landing was refused because the side completion was not yet promoted) differs from that head only in split_report.summary; the statement, stmt_deps, steps, uses and proof_deps are byte-identical, and all 49 cited statements are unchanged between the two snapshots. The item is still unsplit in clones/live and clones/side-live, so no other group has superseded it. There is no repair note, no new node and no SGA citation. Step checks: Step 1 gets properness from lemma-nagata-blowup-proper, which with finite-type base change gives a Noetherian space with finitely many components; Step 2 shows Z is closed in Spec(l⊗_kΩ), because (X_0)_k is separated (via lem-pc-projective-proper), and is Artinian with residue fields Ω, which I tested with an inseparable l; Step 3 restricts to an affine U so that the hypotheses of the nodal finite-singular-charts node hold, where nonregularity gives n≥2, and the chart calculus plus the étale flat-pullback comparison give one P1 (n=2) or two P1s (n>2) over Ω; Step 4 gets P1_l from the stalk and lem-sfb-local-surface-maximal-blowup-geometry; Step 5 shows J is principal and nonzero on each Ω[t] chart, so the strict transform Bl_J L ≅ L (Stacks 080E); Step 6 shows it is closed in Y_{j+1} and factors through the reduction; Step 7 assembles a finite closed cover off Z. Batch-5: def-trf-nodal-geometric-fibres is a definition, lem-trf-parameter-blowup-algebra-regular is commutative algebra, and lem-trf-generic-fibre-points-smooth is a generic EGA smoothness fact. None is part of the trace formula or Poincaré duality, so all three are accepted. No duplicate exists (I checked point-blowup-fibre-defects, per-surface-point-blowup-geometry and the tower nodes). No changes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.TraitPointTowerRationalComponents",
+  "declaration": "AlgebraicGeometry.traitPointTowerRationalComponents",
+  "declarations": [
+   "AlgebraicGeometry.traitTowerGeometricReduction",
+   "AlgebraicGeometry.traitTowerGeometricReductionToSource",
+   "AlgebraicGeometry.traitTowerGeometricReductionToField",
+   "AlgebraicGeometry.traitPointTowerRationalComponents"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/TraitPointTowerRationalComponents.lean",
+  "statement": "theorem traitPointTowerRationalComponents (A : Type u) [CommRing A] [IsDomain A] [IsDiscreteValuationRing A] (F : Type u) [Field F] [Algebra A F] [IsFractionRing A F] (m : ℕ) (X : Fin (m + 1) → Scheme.{u}) [hIntegral : ∀ j, IsIntegral (X j)] [hNoetherian : ∀ j, IsNoetherian (X j)] (f : X 0 ⟶ Spec (.of A)) [IsHProjective f] (b : ∀ i : Fin m, X i.succ ⟶ X i.castSucc) (g : ∀ j : Fin (m + 1), X j ⟶ X 0) (hg0 : g 0 = 𝟙 (X 0)) (hg : ∀ i : Fin m, b i ≫ g i.castSucc = g i.succ) (z : ∀ i : Fin m, X i.castSucc) (I : ∀ i : Fin m, (X i.castSucc).IdealSheafData) (hz : ∀ i : Fin m, IsClosed ({z i} : Set (X i.castSucc)) ∧ (g i.castSucc ≫ f) (z i) = IsLocalRing.closedPoint A) (hI : ∀ i : Fin m, I i = ((X i.castSucc).fromSpecResidueField (z i)).ker) (hb : ∀ i : Fin m, ∃ e : X i.succ ≅ (I i).blowup, e.hom ≫ (I i).blowupMap = b i) (hcentres : ∀ i : Fin m, (Flat (g i.castSucc ≫ f) ∧ LocallyOfFinitePresentation (g i.castSucc ≫ f) ∧ QuasiCompact (g i.castSucc ≫ f) ∧ QuasiSeparated (g i.castSucc ≫ f) ∧ Smooth (pullback.snd (g i.castSucc ≫ f) (Spec.map (CommRingCat.ofHom (algebraMap A F)))) ∧ (∃ U : (X i.castSucc).Opens, z i ∈ U ∧ ∀ (K : Type u) [Field K] [IsAlgClosed K] (a : Spec (.of K) ⟶ Spec (.of A)), IsReduced (pullback (U.ι ≫ g i.castSucc ≫ f) a) ∧ (pullback (U.ι ≫ g i.castSucc ≫ f) a).IsPureDimension 1 ∧ ∀ x : ↥(pullback (C := Scheme.{u}) (U.ι ≫ g i.castSucc ≫ f) a), IsClosed ({x} : Set _) → (∃ V : (pullback (U.ι ≫ g i.castSucc ≫ f) a).Opens, x ∈ V ∧ Smooth (V.ι ≫ pullback.snd (U.ι ≫ g i.castSucc ≫ f) a)) ∨ IsOrdinaryNode K (pullback (U.ι ≫ g i.castSucc ≫ f) a) x) ∧ ¬ IsRegularLocalRing ((X i.castSucc).presheaf.stalk (z i))) ∨ (IsRegularLocalRing ((X i.castSucc).presheaf.stalk (z i)) ∧ ringKrullDim ((X i.castSucc).presheaf.stalk (z i)) = (2 : WithBot ℕ∞))) (Ω : Type u) [Field Ω] [IsAlgClosed Ω] (c : Spec (.of Ω) ⟶ X 0) : (∀ j : Fin (m + 1), topologicalKrullDim (traitTowerGeometricReduction (g j) Ω c) ≤ 1 ∧ (irreducibleComponents (traitTowerGeometricReduction (g j) Ω c)).Finite ∧ ∀ (L : Scheme.{u}) (l : L ⟶ traitTowerGeometricReduction (g j) Ω c), IsReduced L → IsClosedImmersion l → Set.range l ∈ irreducibleComponents (traitTowerGeometricReduction (g j) Ω c) → 0 < topologicalKrullDim L → ∃ e : L ≅ ProjectiveLine (Spec (.of Ω)), e.hom ≫ ProjectiveLine (Spec (.of Ω)) ↘ Spec (.of Ω) = l ≫ traitTowerGeometricReductionToField (g j) Ω c) ∧ (∀ (i : Fin m) (L : Scheme.{u}) (l : L ⟶ traitTowerGeometricReduction (g i.castSucc) Ω c), IsReduced L → IsClosedImmersion l → Set.range l ∈ irreducibleComponents (traitTowerGeometricReduction (g i.castSucc) Ω c) → 0 < topologicalKrullDim L → IsIso (strictTransformToSource (l ≫ traitTowerGeometricReductionToSource (g i.castSucc) Ω c) (b i) (I i).support.compl) ∧ ∃ s : strictTransform (l ≫ traitTowerGeometricReductionToSource (g i.castSucc) Ω c) (b i) (I i).support.compl ⟶ traitTowerGeometricReduction (g i.succ) Ω c, IsClosedImmersion s ∧ s ≫ traitTowerGeometricReductionToSource (g i.succ) Ω c = strictTransformMap (l ≫ traitTowerGeometricReductionToSource (g i.castSucc) Ω c) (b i) (I i).support.compl ∧ s ≫ traitTowerGeometricReductionToField (g i.succ) Ω c = strictTransformToSource (l ≫ traitTowerGeometricReductionToSource (g i.castSucc) Ω c) (b i) (I i).support.compl ≫ l ≫ traitTowerGeometricReductionToField (g i.castSucc) Ω c)",
+  "branch": "newtargets-dag",
+  "by": "Q38",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-5e12e5fdc",
+  "group": "Q38",
+  "result": "pass",
+  "note": "Read item node, all 24 stmt_deps records, the new module and report. Every hypothesis matches: DVR/fraction field, IsHProjective, integral+IsNoetherian stages, g pinned by hg0/hg, reduced closed centre via ker fromSpecResidueField, b ≅ blowup over X_i, (a) flat+fp+smooth generic fibre+local reduced pure-dim-1 fibres with smooth-or-IsOrdinaryNode closed points+nonregular centre, or (b) regular local of dim 2; single universe u. Every conclusion matches: dim≤1, finitely many components, positive-dim reduced components ≅ P^1 over Ω, IsIso strictTransformToSource along actual b_i with U = centre complement, canonical closed immersion into the next reduced fibre fixed by two equations. Edge cases m=0, empty fibres, inseparable residue fields OK. The three added stmt_deps are recorded nodes (allowed). Helpers are real data naming Mathlib nilradical.subscheme. lean.statement verbatim; only item json and new module differ from side-live. No compile (no change); worker's server compile clean, dry-run failure was ENOSPC. Advisory: in (a) the smooth generic fibre is global, the natural parse and what the citer supplies; helpers are def not abbrev."
+ }
+}

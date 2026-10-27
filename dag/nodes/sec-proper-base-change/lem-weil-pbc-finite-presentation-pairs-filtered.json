@@ -1,0 +1,260 @@
+{
+ "id": "lem-weil-pbc-finite-presentation-pairs-filtered",
+ "kind": "statement",
+ "title": "Small filtered category of finitely presented module pairs over a quasi-coherent sheaf",
+ "statement": "Let $X$ be a scheme [def-pc-scheme] which is quasi-compact [def-weil-pbc-quasi-compact-scheme] and quasi-separated [def-weil-quasi-separated-morphism], and let $\\mathcal F$ be a quasi-coherent sheaf of $\\mathcal O_X$-modules [pqf-def-coherent], [def-weil-sheaf-of-modules-category]. There exist a set $I$, sheaves $\\mathcal G_i$ of finite presentation [def-weil-pbc-module-finite-type-presentation] for $i\\in I$, and $\\mathcal O_X$-linear maps $\\alpha_i:\\mathcal G_i\\to\\mathcal F$, with the following properties. For every sheaf $\\mathcal G$ of finite presentation and every $\\mathcal O_X$-linear map $\\psi:\\mathcal G\\to\\mathcal F$, there are $i\\in I$ and an isomorphism $e:\\mathcal G_i\\xrightarrow{\\sim}\\mathcal G$ such that $\\psi\\circ e=\\alpha_i$. Define $\\mathcal I$ to have object set $I$ and morphism sets $$\\operatorname{Hom}_{\\mathcal I}(i,j)=\\{u:\\mathcal G_i\\to\\mathcal G_j\\text{ $\\mathcal O_X$-linear}\\mid\\alpha_j\\circ u=\\alpha_i\\},$$ with the identities and composition of module maps. Then $\\mathcal I$ is a small filtered category [def-weil-pbc-category-colimit]: it is nonempty, every two objects map to a common object, and for all parallel arrows $a,b:i\\to j$ there are an object $k$ and an arrow $v:j\\to k$ with $v\\circ a=v\\circ b$. The assignments $M(i)=\\mathcal G_i$ and $M(u)=u$ define a functor $M:\\mathcal I\\to\\operatorname{Mod}(\\mathcal O_X)$, and the maps $\\alpha_i$ form a cocone from $M$ to $\\mathcal F$.",
+ "source": {
+  "document": "literature/stacks-project/properties.tex",
+  "place": "Stacks Properties, Tag 01PJ, lemma-directed-colimit-diagram-finite-presentation, proof from the choice of a set of pairs through the filteredness conclusion, lines 3066-3120."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-pbc-quasi-compact-scheme",
+  "def-weil-quasi-separated-morphism",
+  "pqf-def-coherent",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-pbc-module-finite-type-presentation",
+  "def-weil-pbc-category-colimit"
+ ],
+ "proof": [
+  {
+   "text": "Apply [lem-weil-pbc-module-finite-presentation-representatives] to obtain a set $J$ of finite-presentation modules $P_j$ representing all such modules. Morphisms are families of linear maps on the set of opens satisfying restriction equations [def-weil-sheaf-of-modules-category], hence each $\\operatorname{Hom}(P_j,\\mathcal F)$ is a set. Put $I=\\coprod_{j\\in J}\\operatorname{Hom}(P_j,\\mathcal F)$, $\\mathcal G_{(j,f)}=P_j$, and $\\alpha_{(j,f)}=f$. Given $(\\mathcal G,\\psi)$, choose $e:P_j\\xrightarrow{\\sim}\\mathcal G$ and take $i=(j,\\psi e)$; then $\\alpha_i=\\psi e$, as required.",
+   "uses": [
+    "lem-weil-pbc-module-finite-presentation-representatives",
+    "def-weil-sheaf-of-modules-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/properties.tex",
+    "place": "Tag 01PJ, lemma-directed-colimit-diagram-finite-presentation, proof, choice of pairs and filteredness, lines 3066-3120; the commuting-triangle equation is read in the type-correct order."
+   }
+  },
+  {
+   "text": "The displayed Hom sets are subsets of the module-morphism sets, hence sets. Identities satisfy $\\alpha_i\\mathrm{id}=\\alpha_i$, and if $\\alpha_j u=\\alpha_i$ and $\\alpha_k v=\\alpha_j$, then $\\alpha_k(vu)=\\alpha_i$; associativity and unit laws are those of module maps [def-weil-sheaf-of-modules-category]. Thus this is a small category. The zero module has the rank-zero local presentation $0\\to0\\to0$ [def-weil-pbc-module-finite-type-presentation]; representing its zero map to $\\mathcal F$ gives an object, so $I$ is nonempty.",
+   "uses": [
+    "def-weil-sheaf-of-modules-category",
+    "def-weil-pbc-module-finite-type-presentation"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/properties.tex",
+    "place": "Tag 01PJ, lemma-directed-colimit-diagram-finite-presentation, proof, choice of pairs and filteredness, lines 3066-3120; the commuting-triangle equation is read in the type-correct order."
+   }
+  },
+  {
+   "text": "For $i,j$, let $B=\\mathcal G_i\\oplus\\mathcal G_j$, which is of finite presentation by [lem-weil-pbc-module-finite-presentation-direct-sum]. Using the biproduct maps [def-weil-additive-category], set $h=\\alpha_i p_i+\\alpha_j p_j:B\\to\\mathcal F$; the biproduct identities give $h\\iota_i=\\alpha_i$ and $h\\iota_j=\\alpha_j$. Step 1 supplies $e:\\mathcal G_k\\xrightarrow{\\sim}B$ with $he=\\alpha_k$. The maps $e^{-1}\\iota_i$ and $e^{-1}\\iota_j$ therefore define arrows $i\\to k$ and $j\\to k$.",
+   "uses": [
+    "lem-weil-pbc-module-finite-presentation-direct-sum",
+    "def-weil-additive-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/properties.tex",
+    "place": "Tag 01PJ, lemma-directed-colimit-diagram-finite-presentation, proof, choice of pairs and filteredness, lines 3066-3120; the commuting-triangle equation is read in the type-correct order."
+   }
+  },
+  {
+   "text": "For parallel arrows $a,b:i\\to j$, take $q:\\mathcal G_j\\to Q=\\operatorname{Coker}(a-b)$ in the abelian module category [def-weil-sheaf-of-modules-category]. Both modules are of finite presentation, so [lem-weil-pbc-module-finite-presentation-cokernel] makes $Q$ finitely presented. Since $\\alpha_j(a-b)=\\alpha_i-\\alpha_i=0$, the cokernel universal property gives $h:Q\\to\\mathcal F$ with $hq=\\alpha_j$. Step 1 gives $e:\\mathcal G_k\\xrightarrow{\\sim}Q$ with $he=\\alpha_k$. Put $v=e^{-1}q$. Then $\\alpha_kv=\\alpha_j$ and $v(a-b)=e^{-1}q(a-b)=0$, hence $va=vb$. This is the required arrow $j\\to k$.",
+   "uses": [
+    "def-weil-sheaf-of-modules-category",
+    "lem-weil-pbc-module-finite-presentation-cokernel"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/properties.tex",
+    "place": "Tag 01PJ, lemma-directed-colimit-diagram-finite-presentation, proof, choice of pairs and filteredness, lines 3066-3120; the commuting-triangle equation is read in the type-correct order."
+   }
+  },
+  {
+   "text": "Steps 2-4 verify precisely the three filteredness conditions of [def-weil-pbc-category-colimit]. Define $M$ on objects by $i\\mapsto\\mathcal G_i$ and on arrows by their underlying module maps. The identities and composition chosen in Step 2 give the functor laws. Every arrow satisfies $\\alpha_jM(u)=\\alpha_i$ by its defining equation, so $(\\mathcal F,(\\alpha_i))$ is a cocone by [def-weil-pbc-category-colimit].",
+   "uses": [
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/properties.tex",
+    "place": "Tag 01PJ, lemma-directed-colimit-diagram-finite-presentation, proof, choice of pairs and filteredness, lines 3066-3120; the commuting-triangle equation is read in the type-correct order."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-module-finite-presentation-representatives",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-pbc-module-finite-type-presentation",
+  "lem-weil-pbc-module-finite-presentation-direct-sum",
+  "def-weil-additive-category",
+  "lem-weil-pbc-module-finite-presentation-cokernel",
+  "def-weil-pbc-category-colimit"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/properties.tex",
+  "place": "Tag 01PJ, lemma-directed-colimit-diagram-finite-presentation, proof, choice of pairs and filteredness, lines 3066-3120; the commuting-triangle equation is read in the type-correct order."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For a scheme X and a sheaf F of O_X modules, there is a small filtered category of pairs G to F with G a finitely presented sheaf, containing every such pair up to isomorphism",
+   "results": "SheafOfModules.isFinitePresentation; SheafOfModules.IsFinitePresentation; SheafOfModules.QuasicoherentData.IsFinitePresentation.isFinite_presentation; SheafOfModules.QuasicoherentData.IsFinitePresentation; SheafOfModules.IsFinitePresentation.exists_quasicoherentData; SheafOfModules.Presentation.IsFinite; SheafOfModules.instIsFiniteTypeOfIsFinitePresentation; SheafOfModules.quasicoherentDataOfIsFinitePresentation Read the hits: definitions/local presentation data and local stalk or ring-map facts do not state the global sheaf assertion.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules.IsFinitePresentation, CategoryTheory.IsFiltered",
+   "results": "0 hits. Read the hits: definitions/local presentation data and local stalk or ring-map facts do not state the global sheaf assertion.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "IsFiltered|CostructuredArrow|FinitePresentation",
+   "results": "0 hits. Read the hits: definitions/local presentation data and local stalk or ring-map facts do not state the global sheaf assertion. Searched subdirectory AlgebraicGeometry/Modules.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The category of finitely presented sheaves mapping to a fixed module sheaf is essentially small and filtered",
+   "results": "service unavailable: {\"error\":\"Rate limit exceeded: 60 per 1 minute\"}",
+   "date": "2026-10-22",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finitely presented O_X modules over a fixed sheaf form an essentially small filtered comma category, with morphisms all commuting triangles",
+   "results": "SheafOfModules.isFinitePresentation; SheafOfModules.IsFinitePresentation; SheafOfModules.QuasicoherentData.IsFinitePresentation.isFinite_presentation; SheafOfModules.QuasicoherentData.IsFinitePresentation; SheafOfModules.IsFinitePresentation.exists_quasicoherentData; SheafOfModules.instIsFiniteTypeOfIsFinitePresentation; SheafOfModules.quasicoherentDataOfIsFinitePresentation; SheafOfModules.Presentation.IsFinite Read the hits: definitions/local presentation data and local stalk or ring-map facts do not state the global sheaf assertion.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "IsFiltered|CostructuredArrow|FinitePresentation",
+   "results": "Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent.lean:236: class IsFinitePresentation {M : SheafOfModules.{u} R} (q : M.QuasicoherentData) : Prop where; Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent.lean:239: attribute [instance] IsFinitePresentation.isFinite_presentation; Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent.lean:243: instance {M : SheafOfModules.{u} R} (q : M.QuasicoherentData) [q.IsFinitePresentation] :; Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent.lean:267: class IsFinitePresentation (M : SheafOfModules.{u} R) : Prop where; Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent.lean:269:     ∃ (σ : QuasicoherentData.{u₁} M), σ.IsFinitePresentation Read the hits: definitions/local presentation data and local stalk or ring-map facts do not state the global sheaf assertion. Searched subdirectory Algebra/Category/ModuleCat/Sheaf.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules.IsFinitePresentation, CategoryTheory.IsFiltered",
+   "results": "No hits",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "IsFiltered|CostructuredArrow|EssentiallySmall",
+   "results": "No hits Subdirectory: Algebra/Category/ModuleCat/Sheaf.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Finitely presented sheaves mapping to a fixed module sheaf form an essentially small filtered category",
+   "results": "CategoryTheory.IsFiltered.instEssentiallySmallFullSubcategoryFilteredClosure; SheafOfModules.IsFinitePresentation.mk; SheafOfModules.QuasicoherentData.IsFinitePresentation.mk; SheafOfModules.Presentation.IsFinite; SheafOfModules.isFinitePresentation; SheafOfModules.IsFinitePresentation; SheafOfModules.QuasicoherentData.IsFinitePresentation.isFinite_presentation; CategoryTheory.instEssentiallySmallIsCardinalPresentableOfHasCardinalFilteredGenerator; inspected Filtered/Small.lean: filteredClosure assumes filteredness already. Presentable results require categorical presentability, not local finite presentations of sheaves.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The category of locally finitely presented module sheaves mapping to a fixed sheaf has a small filtered category of representatives",
+   "results": "SheafOfModules.isFinitePresentation; SheafOfModules.IsFinitePresentation; SheafOfModules.QuasicoherentData.IsFinitePresentation.isFinite_presentation; SheafOfModules.QuasicoherentData.IsFinitePresentation; SheafOfModules.Presentation.IsFinite; SheafOfModules.instIsFiniteTypeOfIsFinitePresentation; SheafOfModules.IsFinitePresentation.exists_quasicoherentData; SheafOfModules.quasicoherentDataOfIsFinitePresentation; inspected Quasicoherent.lean: local presentation definitions and data only, not representative sets or filteredness.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Small filtered diagram of all pairs G to F with G a finitely presented sheaf on a ringed space",
+   "results": "SheafOfModules.quasicoherentDataOfIsFinitePresentation; SheafOfModules.isFinitePresentation; SheafOfModules.IsFinitePresentation.exists_quasicoherentData; SheafOfModules.IsFinitePresentation; SheafOfModules.Presentation.IsFinite; SheafOfModules.Presentation.map; SheafOfModules.QuasicoherentData.IsFinitePresentation; SheafOfModules.Presentation.isColimit; inspected Quasicoherent.lean: local presentation definitions and data only, not representative sets or filteredness.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "IsFiltered|CostructuredArrow|[Ff]inite[Pp]resent",
+   "results": "Mathlib/CategoryTheory/Presentable/StrongGenerator.lean; Mathlib/CategoryTheory/Presentable/StrongGenerator.lean; Mathlib/CategoryTheory/Presentable/StrongGenerator.lean; Mathlib/CategoryTheory/Presentable/StrongGenerator.lean; Mathlib/CategoryTheory/Presentable/StrongGenerator.lean; Mathlib/CategoryTheory/Presentable/Dense.lean; Mathlib/CategoryTheory/Presentable/Dense.lean; Mathlib/CategoryTheory/Presentable/Dense.lean; generic cardinal-presentability and costructured-arrow results require extra inputs absent here. Subdirectory: CategoryTheory/Presentable.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-module-filtered-colimit-finite-presentation",
+  "date": "2026-10-22",
+  "group": "Q45"
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "blueprint": {
+  "from": {
+   "node": "lemma-weil-pbc-h1-constructible-representation",
+   "place": "step 4 of its split (source: Lemma 0A5H (lemma-efface-cohomology-on-fibre-by-finite-cover), etale-cohomology.tex line 16164, proof, third paragraph, 'By Lemma 09Z7 (lemma-constructible-maps-into-constant-general) and the remarks above we may assume F is of the form f_*M where M is a finite Z/lZ-module and f: Y -> X is a finite morphism of finite presentation'); the auxiliary Stacks 01PJ proof, old steps 1-3: choose finitely presented pairs over F and prove their category small and filtered (representatives, direct sum, cokernel).",
+   "via": [
+    "lem-weil-pbc-module-filtered-colimit-finite-presentation",
+    "lem-weil-pbc-module-directed-colimit-finite-presentation",
+    "lem-weil-pbc-integral-algebra-directed-colimit-finite",
+    "lem-weil-pbc-integral-morphism-limit-of-finite",
+    "lem-weil-pbc-constructible-module-finite-pushforward-noetherian",
+    "lem-weil-pbc-constructible-module-finite-pushforward-embedding"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-weil-pbc-finite-presentation-pairs-filtered",
+  "worker": "Q50",
+  "summary": "Kept the statement and constructed the small pair category from the existing representative-set node. Wrote the zero-object, direct-sum and cokernel arguments with explicit inverse-isomorphism maps and commuting equations. Reused the existing finite-presentation direct-sum and cokernel nodes; no new nodes. Read all cited statements and checked the source composition typo. Searches found no exact project attachment or Mathlib specialization.",
+  "blueprint": "Realizes the small filtered pair category in Stacks 01PJ, below the finite-pushforward lemma in paragraph 2 of the current main-20261015 proof of lemma-weil-pbc-h1-constructible-representation, through the existing approximation chain in blueprint.from.via.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q50-b87a19871",
+  "group": "Q50",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q50-b87a19871 (reviewer sub-agent of L); spot-checked: I read the item, every cited node, Stacks 01PJ (properties.tex 3040-3120) and 01BC (modules.tex 958 onward) in full. The statement is identical to the Q45 original and keeps every clause of 01PJ: the representing set of pairs, the category of pairs, the three filteredness conditions, the functor and the cocone. The item uses the type-correct alpha_j u = alpha_i where the source's display writes the composite in the wrong order. The qcqs and quasi-coherence hypotheses are kept but unused, which is harmless. Step 1 builds I as the disjoint union of Hom(P_j,F) from the representatives node and takes i = (j, psi e). Step 2 checks the category laws by hand and gets an object from the zero module, which has a rank-0 presentation, so X empty and F = 0 are covered. Step 3 uses the direct-sum node; I checked h iota_i = alpha_i and that e^{-1} iota_i is an arrow. Step 4 uses the abelian cokernel and the cokernel node's both-fp clause; I checked alpha_k e^{-1} q = alpha_j and v(a-b) = 0, including the cases a = b and zero modules. Step 5 is the cocone from the definitions. All cited statement nodes are in unit sk-thm-p1 and the rest are definitions; there are no tool_uses. proof_deps equals the union of the uses, and there is no SGA source. The duplicate search (01PJ, 01BC, filtered together with finite presentation) found only the parent chain and its siblings, none of which states the pair category. The item is not a restatement of a clause of its parent, whose content is the colimit isomorphism. There are no new nodes and no fixes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.FinitePresentationPairsFiltered",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.exists_finitePresentation_pairs_filtered",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.Modules.ModulePairIndex",
+   "AlgebraicGeometry.Scheme.Modules.modulePairDiagram",
+   "AlgebraicGeometry.Scheme.Modules.modulePairCocone",
+   "AlgebraicGeometry.Scheme.Modules.exists_finitePresentation_pairs_filtered"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/FinitePresentationPairsFiltered.lean",
+  "statement": "theorem exists_finitePresentation_pairs_filtered (X : Scheme.{u}) [CompactSpace X] [QuasiSeparatedSpace X] (F : X.Modules) [F.IsQuasicoherent] : ∃ (I : Type u) (G : I → X.Modules) (α : ∀ i : I, G i ⟶ F), (∀ i : I, (G i).IsFinitePresentation) ∧ (∀ (H : X.Modules), H.IsFinitePresentation → ∀ ψ : H ⟶ F, ∃ (i : I) (e : G i ≅ H), e.hom ≫ ψ = α i) ∧ IsFiltered (ModulePairIndex α)",
+  "branch": "newtargets-dag",
+  "by": "Q21",
+  "date": "2026-10-23",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-c85e3ca65",
+  "group": "Q21",
+  "result": "pass",
+  "note": "Read item, all 7 stmt_dep records, Stacks properties.tex 3039-3122, the delivered module and report (Worker report + Second reading present), Mathlib Quasicoherent.lean and QuasiSeparated.lean, proof-dep records and the parent lemma. Every clause matches: Scheme.{u} with CompactSpace/QuasiSeparatedSpace; F.IsQuasicoherent; ∃ I : Type u, G, α with all G i finitely presented; representing clause e.hom ≫ ψ = α i; pair category = InducedCategory (Over F), whose arrows are exactly u with u ≫ α j = α i; IsFiltered, small (Type u objects and Homs); modulePairDiagram and modulePairCocone are real Mathlib constructions. Edge cases (empty X, F = 0, zero pair gives nonemptiness, a = b) covered. Docstrings carry source, blueprint and the 5 proof steps; proof is sorry only; statement verbatim; no duplicate in side-live or Mathlib. Advisory: IsQuasicoherent/IsFinitePresentation universe left implicit, but the predicates are universe-independent (shrink), so harmless; proof deps are on moduleRings X, which stage 3 must transport to X.Modules. No fixes, no compile needed."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "AUTO",
+  "group": "Q4",
+  "result": "pass",
+  "landing": "20261023T105440-L-3561225",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)",
+  "sorry_before": [
+   "AlgebraicGeometry.Scheme.Modules.exists_finitePresentation_pairs_filtered"
+  ],
+  "sorry_after": []
+ }
+}

@@ -17,47 +17,40 @@
  ],
  "proof": [
   {
-   "text": "On every given stratum cover transport the completed finite-projective model to the equivalent small site. Apply its complete-residue calculation. It gives local completeness, finite-dimensional constant residue cohomology and bounds for the object and its residue, computed by the canonical quotient map. Restriction along immersions and slices identifies these calculations with those of K.",
+   "text": "Localize a model cover and reduce it to a finite-projective complex. The complete-model calculation and the completion-unit detection give global derived completeness.",
    "uses": [
-    "lem-sfb-adic-perfect-model-complete-reduction",
-    "lem-sfb-adic-stratum-completion-unit"
+    "lem-sfb-adic-perfect-models-completeness"
    ],
    "elementary": false
   },
   {
-   "text": "Detect completeness on the finite stratum cover. For both K and its residue choose finitely many quasi-compact pieces of the covering schemes over the finitely many Noetherian strata. Take the minimum lower and maximum upper bound and detect vanishing. Empty families use [0,0].",
+   "text": "The same local calculation supplies ordered vanishing intervals for the object and its residue. Finite Noetherian stratum refinements and local cohomological bounds globalize both intervals.",
    "uses": [
-    "lem-sfb-adic-stratum-completion-unit",
-    "lem-sfb-stratified-local-cohomological-bounds"
+    "lem-sfb-adic-perfect-models-cohomological-bounds"
    ],
    "elementary": false
   },
   {
-   "text": "The residue homology sheaves have finite-dimensional constant values on those strata. Fixed-scalar transport preserves them. Global constructibility on a Noetherian scheme and bounded constructible comparison provide an etale derived representative; choose its cochain preimage under Q and transport its homology and bounds along Q.objObjPreimageIso. The quotient-functor and comparison factors give the displayed residue isomorphism. No Tor conclusion is needed here.",
+   "text": "Each residue homology sheaf has a constructible etale antecedent. Bounded constructible etale objects form a triangulated property by Noetherian constructible extension closure, and fully faithful bounded-below derived comparison makes its essential image triangulated. Apply bounded-heart devissage to the residue, take a quotient-functor cochain preimage of the etale antecedent, and transport homology, ordered bounds and the comparison isomorphism.",
    "uses": [
-    "lem-sfb-noetherian-global-constructibility",
-    "sk-thm-pe-constructible-comparison",
-    "lem-sc-noetherian-finite-module-finite-presentation",
-    "lem-weil-proetale-weakly-etale-localization",
-    "lem-weil-pbc-proetale-immersion-limit-preservation"
+    "lem-sfb-adic-perfect-models-residue-homology",
+    "lem-sfb-discrete-noetherian-constructible-serre",
+    "lem-weil-pbc-fixed-module-derived-hom-bijection"
    ],
    "elementary": false
   }
  ],
  "proof_deps": [
-  "lem-sc-noetherian-finite-module-finite-presentation",
-  "lem-sfb-adic-perfect-model-complete-reduction",
-  "lem-sfb-adic-stratum-completion-unit",
-  "lem-sfb-noetherian-global-constructibility",
-  "lem-sfb-stratified-local-cohomological-bounds",
-  "lem-weil-pbc-proetale-immersion-limit-preservation",
-  "lem-weil-proetale-weakly-etale-localization",
-  "sk-thm-pe-constructible-comparison"
+  "lem-sfb-adic-perfect-models-cohomological-bounds",
+  "lem-sfb-adic-perfect-models-completeness",
+  "lem-sfb-adic-perfect-models-residue-homology",
+  "lem-sfb-discrete-noetherian-constructible-serre",
+  "lem-weil-pbc-fixed-module-derived-hom-bijection"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
-  "place": "Proposition 6.6.11, reverse implication, and Lemma 6.5.3; the proof records the exact coefficient and quotient-functor transports used in Lean."
+  "place": "Proposition 6.6.11, reverse implication, and Lemma 6.5.3; the Lean proof performs the bounded-heart devissage and quotient-preimage transport explicitly."
  },
  "mathlib_searches": [
   {
@@ -132,13 +125,25 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-21",
+  "date": "2026-10-25",
   "by": "L",
-  "reviewer": "C-b5163",
-  "group": "U2",
+  "reviewer": "COMPILER",
+  "group": "R1",
   "result": "pass",
-  "landing": "20261021T144006-L-34028",
+  "landing": "20261025T143828-L-1089275",
   "kind": "interface",
-  "note": "independent cc review: item stmt byte-identical to live; relocated 11 defs + 15 public imports byte-identical in AdicStratifiedPerfectData (public re-export); 2 new sorry lemmas = BS 6.6.11 forward/reverse under item hypotheses; importers IntegralCohomologicalAdicCriterion and IntegralHeartLocalModel compiled against the delivered modules; axioms checked"
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
  }
 }

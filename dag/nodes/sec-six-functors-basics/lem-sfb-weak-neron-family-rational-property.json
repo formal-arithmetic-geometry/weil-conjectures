@@ -1,0 +1,635 @@
+{
+ "id": "lem-sfb-weak-neron-family-rational-property",
+ "kind": "statement",
+ "title": "Weak Néron families, their rational mapping property and smooth trait base change",
+ "statement": "Let $R$ be a discrete valuation ring with uniformizer $\\pi$, fraction field $E$, residue field $k$, and $T=\\operatorname{Spec}R$ [def-sc-discrete-valuation-ring, def-weil-affine-spectrum]. Products and fibres are scheme-theoretic base changes [def-pc-base-change]. Smooth and finite type have the meanings of [def-sbc-smooth-morphisms, def-weil-finite-type-morphism]; separated means that the diagonal is a closed immersion [def-weil-closed-immersion]. Write $R^{\\mathrm{sh}}$ for a strict henselization at a geometric closed point and $E^{\\mathrm{sh}}=\\operatorname{Frac}(R^{\\mathrm{sh}})$ [def-weil-geometric-point, def-weil-pbc-strict-henselization-limit]. A subset $C\\subseteq X(E^{\\mathrm{sh}})$ of a finite-type $E$-scheme is bounded if some finite affine cover $U_i=\\operatorname{Spec}B_i$, finite $E$-algebra generating lists $b_{ij}$, decomposition $C=\\bigcup_i C_i$ with $C_i\\subseteq U_i(E^{\\mathrm{sh}})$, and integers $c_i$ satisfy $v(b_{ij}(x))\\geq c_i$ for $x\\in C_i$, where $v(0)=+\\infty$. An open in a scheme over a trait is base-dense if it is dense in each fibre. A rational map over that trait is a morphism on a base-dense open, modulo agreement on a base-dense common open; its domain of definition is the union of all representative domains. A birational map over the trait is an isomorphism between base-dense opens. For a smooth separated finite-type $E$-scheme $X$, a smooth model means a smooth separated finite-type $T$-scheme $M$ with a specified identification $M_E\\simeq X$. If $X(E^{\\mathrm{sh}})$ is bounded and nonempty, there is a nonempty finite family $(M_i)$ of smooth models of $X$ such that every $E^{\\mathrm{sh}}$-point of $X$ extends to an $R^{\\mathrm{sh}}$-point of some $M_i$. Such a family is called a weak Néron family. Its members can be replaced by the opens consisting of the entire generic fibre and one nonempty irreducible component of the special fibre, discarding members with empty special fibre. For any weak Néron family and any smooth finite-type $T$-scheme $Z$ with nonempty irreducible special fibre, every $E$-morphism $Z_E\\to X$ extends to a $T$-rational map $Z\\dashrightarrow M_i$ for some $i$. For any smooth finite-type $T$-scheme $Z$ and generic point $\\xi$ of $Z_k$, $A=\\mathcal O_{Z,\\xi}$ is a discrete valuation ring with uniformizer $\\pi$; writing $L=\\operatorname{Frac}(A)$, the family $(M_i\\times_R A)$ is a weak Néron family for $X_L$. Here the strict-henselian points in the definition of a weak Néron family over $A$ are taken with respect to $A$, not $R$. Conversely, existence of a finite weak Néron family implies boundedness of the strict-henselian generic points over the corresponding trait.",
+ "source": {
+  "document": "literature/bosch-lutkebohmert-raynaud-neron-models.pdf",
+  "place": "3.5 Definition 1, Theorem 2, Proposition 3 and Corollary 4, printed pp.74-75 (PDF pp.80-81); refinement by special-fibre components: 4.3 opening paragraph, p.104; converse boundedness: 1.1 Proposition 7 and finite union, pp.10-11. Primary scan read at https://www.math.stonybrook.edu/~kamenova/homepage_files/Bosch_Raynaud_Neron_Model_tc.pdf; local literature copy WANTED."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-sc-discrete-valuation-ring",
+  "def-weil-affine-spectrum",
+  "def-pc-base-change",
+  "def-sbc-smooth-morphisms",
+  "def-weil-finite-type-morphism",
+  "def-weil-closed-immersion",
+  "def-weil-geometric-point",
+  "def-weil-pbc-strict-henselization-limit"
+ ],
+ "proof": [
+  {
+   "text": "Fix $\\pi$. A DVR is Noetherian since every ideal is principal. The identity $E=R[1/\\pi]$ follows by writing a nonzero denominator as $u\\pi^n$; the principal-localization lemma therefore identifies the generic fibre of any $T$-scheme with its open $D(\\pi)$. We will use this identification when gluing models and maps. A finite-type $T$-scheme is Noetherian by [lem-weil-pbc-finite-type-over-noetherian], and has finitely many irreducible components by [lem-weil-pbc-noetherian-finitely-many-components].",
+   "uses": [
+    "def-sc-discrete-valuation-ring",
+    "lem-weil-pbc-dvr-unit-times-uniformizer-power",
+    "lem-weil-pbc-principal-localization-open-immersion",
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "lem-weil-pbc-noetherian-finitely-many-components"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bosch-lutkebohmert-raynaud-neron-models.pdf",
+    "place": "1.1 Proposition 7 and 3.5 Theorem 2; Stacks 00PD, 01I3, 01T6, 0BA8"
+   }
+  },
+  {
+   "text": "Use the finite affine cover, generating lists, subsets $C_a$, and integers $c_a$ in boundedness. Put $A_a=R[\\pi^{-c_a}b_{aj}]\\subset B_a$. It is a finite-type $R$-algebra, $A_a[1/\\pi]=B_a$, and evaluation of its displayed generators at every point of $C_a$ lies in $R^{\\mathrm{sh}}$, because $v(\\pi^{-c_a}b_{aj}(x))\\geq0$. Thus each $x\\in C_a$ defines a morphism $\\operatorname{Spec}R^{\\mathrm{sh}}\\to\\operatorname{Spec}A_a$ extending it. Here $R^{\\mathrm{sh}}$ is a DVR by [lem-sc-strict-henselization-dvr], with uniformizer $\\pi$: [lem-weil-pbc-etale-local-ring-triples] (3), for $Y=T$, $U=T$ and $\\mathfrak p=\\pi R$, identifies the neighbourhood colimit $R^{\\mathrm{sh}}$ with the triple colimit, whose maximal ideal is $\\pi R^{\\mathrm{sh}}$ by the maximal-ideal clause of [lem-weil-pbc-strict-henselization-triples]; the nonnegative-valuation criterion [lem-sc-dvr-nonnegative-valuation-in-ring] applies to each nonzero evaluation, and zero already belongs to the ring. This is simply restriction of the evaluation homomorphism $B_a\\to E^{\\mathrm{sh}}$ to $A_a$; every relation remains valid. No assertion about an unspecified model is being used.",
+   "uses": [
+    "lem-sc-dvr-nonnegative-valuation-in-ring",
+    "lem-sc-strict-henselization-dvr",
+    "lem-weil-pbc-strict-henselization-triples",
+    "lem-weil-pbc-etale-local-ring-triples"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bosch-lutkebohmert-raynaud-neron-models.pdf",
+    "place": "1.1 Proposition 7 proof: rescaling affine coordinates, printed pp.10-11"
+   }
+  },
+  {
+   "text": "For each $a$, glue $\\operatorname{Spec}A_a$ to the entire generic scheme $X$ along the open $U_a=\\operatorname{Spec}B_a$ using [lem-weil-pbc-glue-schemes]; glue the structure maps by [lem-weil-pbc-scheme-morphism-gluing]. Call the result $Y_a$. It has generic fibre $X$ and is of finite type: its cover consists of $\\operatorname{Spec}A_a$ and the finitely many generic affine charts of $X$, whose algebras are finite type over $R[1/\\pi]$, hence over $R$. It is separated: on the four product opens for this two-open cover the diagonal is the diagonal of $\\operatorname{Spec}A_a$ (closed since affine morphisms are separated by [lem-weil-pbc-affine-morphism-permanence]), the diagonal of $X$, and twice the graph of $U_a\\hookrightarrow X$. The mixed product is $U_a\\times_E X$ since its second factor lies over $E$. This graph is closed by [lem-weil-pbc-section-separated-closed-immersion], applied to its separated projection to $U_a$. Thus the diagonal is a closed immersion locally on its target, exactly the affine-local definition of a closed immersion. The affine piece remains an open subscheme, so the sections from Step 2 remain sections of $Y_a$.",
+   "uses": [
+    "lem-weil-pbc-glue-schemes",
+    "lem-weil-pbc-scheme-morphism-gluing",
+    "lem-weil-pbc-section-separated-closed-immersion",
+    "lem-weil-pbc-separated-base-change",
+    "lem-weil-pbc-affine-morphism-permanence",
+    "def-weil-closed-immersion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bosch-lutkebohmert-raynaud-neron-models.pdf",
+    "place": "1.1 Proposition 7 proof and 3.5 Theorem 2; explicit separated finite-family construction, Stacks 01JC and 01WJ"
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-generic-smooth-model-smoothening] to each $Y_a$. Its hypotheses hold: $Y_a$ is separated and finite type by Step 3, and $(Y_a)_E=X$ is smooth by hypothesis. Write $M_a=Y_a^{\\mathrm{sm}}$. Every point of $C_a$ lifts to $M_a(R^{\\mathrm{sh}})$ by the bijection on sections. The finite family $(M_a)$ consequently covers all of $X(E^{\\mathrm{sh}})$ and is a weak Néron family as defined in the statement. Nonemptiness of that point set makes the indexing family nonempty and ensures that at least one member has nonempty special fibre.",
+   "uses": [
+    "lem-sfb-generic-smooth-model-smoothening"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bosch-lutkebohmert-raynaud-neron-models.pdf",
+    "place": "3.5 Theorem 2 proof, using 3.1 Corollary 4"
+   }
+  },
+  {
+   "text": "For any smooth finite-type model $M$, its special fibre is smooth by [lem-pc-proper-base-change]. It is regular, hence normal, by [lem-trf-smooth-geometrically-normal], and its finitely many irreducible components are disjoint and open and closed by [lem-trf-normal-topologically-noetherian-components]. For each component $D\\subset M_k$, remove the other components from $M$, giving the open $M_D=M_E\\cup D$. These are smooth separated finite-type models: smoothness restricts to opens; over a Noetherian scheme these opens are quasi-compact, so finite type is preserved. A section over $R^{\\mathrm{sh}}$ has a closed-point image in exactly one $D$ and factors through $M_D$: the inverse image of this open contains the closed point of the local spectrum, hence all of it. Members with empty special fibre admit no such section. Refining every member by all its components and discarding those empty members therefore preserves coverage.",
+   "uses": [
+    "lem-pc-proper-base-change",
+    "lem-trf-smooth-geometrically-normal",
+    "lem-trf-normal-topologically-noetherian-components",
+    "lem-weil-pbc-noetherian-open-subscheme-noetherian",
+    "lem-weil-pbc-smooth-restrict-open-subschemes"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bosch-lutkebohmert-raynaud-neron-models.pdf",
+    "place": "4.3 opening paragraph, printed p.104; Stacks 056T, 0357, 01OY"
+   }
+  },
+  {
+   "text": "We record the local trait calculation for any smooth finite-type $Z/T$, independently of a weak family. The statement of [lem-sfb-smooth-trait-local-rational-spreading] gives that $A=\\mathcal O_{Z,\\xi}$ at a generic point of $Z_k$ is a DVR. Its uniformizer is specifically $\\pi$: the special fibre is reduced by [sbc-lem-smooth-geometrically-reduced]; the stalk at its minimal prime is a field by [lem-weil-pbc-minimal-prime-reduced-localization-field] and [lem-weil-pbc-affine-open-stalk-localization]; and [lem-sbc-scheme-fibre-stalk-quotient] identifies it with $A/\\pi A$. Thus $\\pi A$ is the maximal ideal. Multiplication by $\\pi$ is injective, by smooth flatness and [lem-trf-flat-module-torsionfree-domain], so $\\pi\\ne0$ in $A$. It is a uniformizer by definition. In particular $L=A[1/\\pi]$. The strict henselization $A^{\\mathrm{sh}}$ is a DVR by [lem-sc-strict-henselization-dvr]; its maximal ideal is $\\pi A^{\\mathrm{sh}}$: [lem-weil-pbc-etale-local-ring-triples] (3), for $Y=\\operatorname{Spec}A$ and $\\mathfrak p=\\pi A$, identifies $A^{\\mathrm{sh}}$ with the triple colimit, and the maximal-ideal clause of [lem-weil-pbc-strict-henselization-triples] gives $\\mathfrak m=\\pi A^{\\mathrm{sh}}$, so its fraction field is also obtained by inverting $\\pi$.",
+   "uses": [
+    "lem-sfb-smooth-trait-local-rational-spreading",
+    "sbc-lem-smooth-geometrically-reduced",
+    "lem-weil-pbc-minimal-prime-reduced-localization-field",
+    "lem-weil-pbc-affine-open-stalk-localization",
+    "lem-sbc-scheme-fibre-stalk-quotient",
+    "lem-pc-smooth-flat",
+    "def-weil-flat-morphism",
+    "lem-trf-flat-module-torsionfree-domain",
+    "lem-sc-strict-henselization-dvr",
+    "lem-weil-pbc-strict-henselization-triples",
+    "lem-weil-pbc-etale-local-ring-triples"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bosch-lutkebohmert-raynaud-neron-models.pdf",
+    "place": "3.5 Proposition 3 and Corollary 4; Stacks 00PD, 0AP3, 04GP"
+   }
+  },
+  {
+   "text": "Now fix an arbitrary weak family $(M_i)$ and a smooth finite-type $Z/T$ with nonempty irreducible special fibre, and an $E$-morphism $f_E:Z_E\\to X$. For each $i$, its graph is a closed subscheme of $(Z\\times_T M_i)_E$, since the projection to $Z_E$ is separated and the graph is a section. Let $\\Gamma_i$ be its scheme-theoretic closure in $Z\\times_T M_i$, and $p_i:\\Gamma_i\\to Z$ the projection. The closure exists by [lem-weil-pbc-scheme-image-qc-kernel]. The ambient scheme is Noetherian and finite type over $R$, so its closed subscheme and $p_i$ are finite type; the latter assertion also follows by factoring through the base change of $M_i\\to T$. By [lem-sfb-scheme-image-flat-base-change] its generic fibre is exactly the graph, so $(p_i)_E$ is an isomorphism. Define $C_i\\subset Z_k$ as the image of $(\\Gamma_i)_k\\to Z_k$. These sets are constructible by [lem-weil-pbc-chevalley-constructible-image]: the morphisms are finite type over a Noetherian base, hence quasi-compact and locally finitely presented.",
+   "uses": [
+    "lem-weil-pbc-section-separated-closed-immersion",
+    "lem-weil-pbc-separated-base-change",
+    "lem-weil-pbc-scheme-image-qc-kernel",
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "lem-sfb-finite-type-composition-base-change",
+    "lem-sfb-scheme-image-flat-base-change",
+    "lem-weil-pbc-chevalley-constructible-image",
+    "pqf-lem-lft-fp-locnoeth"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bosch-lutkebohmert-raynaud-neron-models.pdf",
+    "place": "3.5 Proposition 3 proof, graph and Chevalley paragraphs; Stacks 01R8, 081I, 054J"
+   }
+  },
+  {
+   "text": "The residue field of $R^{\\mathrm{sh}}$ is $k^{\\mathrm{sep}}$, and it is henselian by [lem-weil-pbc-strict-henselization-functoriality]. Every point of $Z_k(k^{\\mathrm{sep}})$ lifts to $Z(R^{\\mathrm{sh}})$: choose an affine open of $Z$ containing its image, smooth over $T$ by [lem-weil-pbc-smooth-restrict-open-subschemes], use [lem-weil-pbc-smooth-ring-map-iff-smooth-affine], and apply [lem-trf-henselian-smooth-algebra-lifting] to the maximal ideal of $R^{\\mathrm{sh}}$. The images in $Z_k$ of these residue points are dense by [lem-pc-dense-separable-points], since every finite separable residue field embeds in $k^{\\mathrm{sep}}$. For a lifted section $z$, the point $f_E(z_E)$ extends to some $x\\in M_i(R^{\\mathrm{sh}})$ by the weak-family property. The pair $(z,x)$ factors through $\\Gamma_i$: on any affine chart its defining ideal restricts to zero on $\\operatorname{Spec}E^{\\mathrm{sh}}$ and therefore to zero in the domain $R^{\\mathrm{sh}}$. Consequently the closed-point image of $z$ lies in $C_i$.",
+   "uses": [
+    "lem-weil-pbc-strict-henselization-functoriality",
+    "lem-weil-pbc-smooth-ring-map-iff-smooth-affine",
+    "lem-trf-henselian-smooth-algebra-lifting",
+    "lem-pc-dense-separable-points",
+    "lem-sc-strict-henselization-dvr",
+    "lem-weil-pbc-smooth-restrict-open-subschemes"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bosch-lutkebohmert-raynaud-neron-models.pdf",
+    "place": "3.5 Proposition 3 proof; 2.2 Corollary 13, 2.3; Stacks 056U, 07M7, 04HX"
+   }
+  },
+  {
+   "text": "The finite union $\\bigcup_i C_i$ is dense in the irreducible space $Z_k$ by Step 8. Thus some $C_i$ is dense: otherwise the finite union of their proper closed closures could not equal this irreducible space. A dense constructible subset contains its generic point $\\xi$. Indeed write it as a finite union of locally closed subsets. Some such subset has closure $Z_k$ by irreducibility; its closed part is then all of $Z_k$, and its nonempty open part contains $\\xi$. Hence there is a point $y\\in\\Gamma_i$ over $\\xi$. This is the constructible-image argument on $Z_k$ itself; it does not assume that irreducibility survives extension to $k^{\\mathrm{sep}}$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/bosch-lutkebohmert-raynaud-neron-models.pdf",
+    "place": "3.5 Proposition 3 proof, constructible images cover a dense set"
+   }
+  },
+  {
+   "text": "Near $\\xi$ we may work on one integral open-and-closed component $Z^0$ of $Z$. To justify this, on every affine chart of $Z$ smoothness is a smooth ring map by [lem-weil-pbc-smooth-ring-map-iff-smooth-affine]. The DVR $R$ is a regular ring (its two prime localizations are $R$ and its fraction field, with regular parameter $\\pi$). Therefore [lem-weil-pbc-regular-ring-smooth-ascent] makes $Z$ regular. By [rem-pc-regular-normal] it is a finite disjoint union of normal integral components. Exactly one contains $\\xi$. It contains the entire irreducible special fibre. Restrict $\\Gamma_i$ to this component; by [lem-sfb-scheme-image-flat-base-change] for the open (hence flat) immersion $Z^0\\times_TM_i\\subseteq Z\\times_TM_i$, the restriction is the scheme-theoretic closure of the graph of $f_E|_{(Z^0)_E}$. By [lem-trf-reduced-scheme-image] it is integral: it is the reduced closure of the integral generic graph of $(Z^0)_E$. The generic open $(Z^0)_E$ is nonempty: flatness prevents $\\pi$ from vanishing in the domain of any nonempty affine chart of $Z^0$. A nonempty open of an integral scheme is dense, so its function field is the same as that of $Z^0$, because their generic fibres are isomorphic. Thus both stalks $A=\\mathcal O_{Z,\\xi}$ and $B=\\mathcal O_{\\Gamma_i,y}$ embed in this field, and $A\\to B$ is local and induces that identification on fraction fields.",
+   "uses": [
+    "lem-weil-pbc-smooth-ring-map-iff-smooth-affine",
+    "lem-weil-pbc-regular-ring-smooth-ascent",
+    "rem-pc-regular-normal",
+    "lem-trf-reduced-scheme-image",
+    "lem-pc-smooth-flat",
+    "lem-trf-flat-module-torsionfree-domain",
+    "lem-sfb-scheme-image-flat-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bosch-lutkebohmert-raynaud-neron-models.pdf",
+    "place": "3.5 Proposition 3 proof, local-ring paragraph; Stacks 07NF, 02IT, 056B"
+   }
+  },
+  {
+   "text": "The local overring $B$ in Step 10 equals the DVR $A$. If $b\\in B\\setminus A$, the DVR valuation writes $b=u\\pi^{-n}$ with $u\\in A^\\times$ and $n>0$. Then $b^{-1}=u^{-1}\\pi^n$ lies in the maximal ideal of $A$, hence in that of $B$ since $A\\to B$ is local, while $b^{-1}$ has inverse $b\\in B$, a contradiction. The reverse inclusion is already given. By [lem-trf-finite-type-stalk-isomorphism-open-neighbourhood], applied to $p_i$ over the reduced finite-component scheme $Z^0$, there is an open neighbourhood $V$ of $y$ mapping isomorphically to an open neighbourhood $U$ of $\\xi$ in $Z^0$. Composing its inverse with $\\Gamma_i\\to M_i$ gives $f_U:U\\to M_i$. Its generic restriction is $f_E|_{U_E}$ since the generic graph was unchanged.",
+   "uses": [
+    "lem-weil-pbc-dvr-unit-times-uniformizer-power",
+    "lem-trf-finite-type-stalk-isomorphism-open-neighbourhood"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bosch-lutkebohmert-raynaud-neron-models.pdf",
+    "place": "3.5 Proposition 3 proof, DVR domination and spreading; Stacks 09NH"
+   }
+  },
+  {
+   "text": "Glue $f_U$ with the given $f_E:Z_E\\to(M_i)_E$ using [lem-weil-pbc-scheme-morphism-gluing]. They agree on the overlap $U_E$ by Step 11. The resulting morphism on $Z_E\\cup U$ represents the required $T$-rational map: its generic domain is all of $Z_E$, and its special domain contains the generic point of the nonempty irreducible $Z_k$, hence is dense. This proves the mapping clause for the original arbitrary weak family, not merely the family constructed in Steps 2--4.",
+   "uses": [
+    "lem-weil-pbc-scheme-morphism-gluing"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bosch-lutkebohmert-raynaud-neron-models.pdf",
+    "place": "3.5 Proposition 3, conclusion"
+   }
+  },
+  {
+   "text": "For the smooth-trait base-change assertion fix $\\xi\\in Z_k$, let $A=\\mathcal O_{Z,\\xi}$ and $L=\\operatorname{Frac}A$ as in Step 6, and put $Q=\\operatorname{Frac}(A^{\\mathrm{sh}})=A^{\\mathrm{sh}}[1/\\pi]$. Choose a geometric point $\\bar\\xi$ with the specified separable residue closure, and restrict throughout to affine pointed neighbourhoods over one fixed affine open of $Z$ containing $\\xi$; this is initial by the neighbourhood lemma below. By [lem-weil-pbc-etale-local-ring-triples] and [lem-weil-pbc-strict-henselization-triples], the affine pointed étale neighbourhood limit $Z_{(\\bar\\xi)}$ has coordinate ring precisely $A^{\\mathrm{sh}}$: their common triple colimit is the strict henselization of the local ring. In particular it is a limit of affine pointed étale $Z$-neighbourhoods $W$ by [def-weil-pbc-strict-henselization-limit], with closed point mapping to the marked point $w$ over $\\xi$. Inverting $\\pi$ gives the affine limit $\\operatorname{Spec}Q=\\varprojlim W_E$; localization commutes with this ring colimit since a ring map from a localization is exactly a map for which $\\pi$ becomes a unit.",
+   "uses": [
+    "lem-weil-pbc-etale-local-ring-triples",
+    "lem-weil-pbc-strict-henselization-triples",
+    "def-weil-pbc-strict-henselization-limit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bosch-lutkebohmert-raynaud-neron-models.pdf",
+    "place": "3.5 Corollary 4 proof, strict henselization as a neighbourhood limit; Stacks 04HX, 04GW"
+   }
+  },
+  {
+   "text": "Take any point $a\\in X_L(Q)$ and forget its specified $L$-structure to obtain an $E$-map $\\operatorname{Spec}Q\\to X$. Since $X/E$ is locally of finite presentation (finite type over a field), [lem-sfb-scheme-affine-limit-lfp-criterion] descends this map to an $E$-map $W_E\\to X$ for one affine pointed étale neighbourhood $W\\to Z$. The affine étale algebras of finite presentation over the fixed affine chart, with their marked separable residue embeddings, have a small skeleton. Its neighbourhood category is cofiltered by [lem-weil-pbc-etale-local-ring-triples]. Apply [lem-weil-pbc-filtered-category-directed-cofinal] to its opposite to get one small nonempty directed index preserving both the ring colimit and the inverse affine limit. This verifies exactly the index hypothesis of the finite-presentation criterion. The scheme $W$ is finite type and smooth over $T$: étale implies smooth, and smoothness composes by [lem-trf-smooth-composition]. The marked point $w$ is generic in a special-fibre component: a generalization of $w$ in $W_k$ must map to a generalization of the generic point $\\xi$, hence to $\\xi$ itself; the étale fibre over $\\xi$ is zero-dimensional, so it has no proper generalization of $w$.",
+   "uses": [
+    "lem-sfb-scheme-affine-limit-lfp-criterion",
+    "pqf-lem-lft-fp-locnoeth",
+    "lem-weil-pbc-etale-smooth-zero-dimensional-fibres",
+    "lem-trf-smooth-composition",
+    "lem-weil-pbc-etale-local-ring-triples",
+    "lem-weil-pbc-filtered-category-directed-cofinal"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bosch-lutkebohmert-raynaud-neron-models.pdf",
+    "place": "3.5 Corollary 4 proof, descent to an étale neighbourhood; Stacks 01ZC, 02G2, 01VA"
+   }
+  },
+  {
+   "text": "The special-fibre components of $W$ are disjoint and open and closed by Step 5. Delete all but the component containing $w$. This is a neighbourhood of $w$ with nonempty irreducible special fibre; it still receives the canonical map from $\\operatorname{Spec}A^{\\mathrm{sh}}$, since that local spectrum's closed point maps to $w$. Restrict the descended generic map accordingly. Apply Steps 7--12 to this smooth finite-type $T$-scheme and the given weak family over $R$. It gives some $i$ and a representative $D\\to M_i$ with $D$ base-dense. Because $w$ is the generic point of this irreducible special fibre, $w\\in D$. The map $\\operatorname{Spec}A^{\\mathrm{sh}}\\to W$ therefore factors through $D$, giving an $A^{\\mathrm{sh}}$-point of $M_i$ whose generic fibre is $a$. Pair it with the structural map to $\\operatorname{Spec}A$ to obtain a point of $M_i\\times_R A$; on $Q$ this pairing recovers the original $L$-point. This uses no claim that the strict-henselian points over $A$ came from $R^{\\mathrm{sh}}$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/bosch-lutkebohmert-raynaud-neron-models.pdf",
+    "place": "3.5 Corollary 4 proof, apply the weak rational property at the marked generic point"
+   }
+  },
+  {
+   "text": "The base-changed schemes $M_i\\times_R A$ are smooth by [lem-pc-proper-base-change], separated and finite type by [lem-pod-separated-finite-type-base-change], and have generic fibre $X_L$ by the fibre-product definition. Step 15 extends every $Q$-point of $X_L$ to an $A^{\\mathrm{sh}}$-point of at least one of them. Hence they form a weak Néron family over the new trait. Step 6 already proves the asserted DVR and uniformizer clause. If $Z_k$ is empty there is no generic point to test, so this assertion is vacuous.",
+   "uses": [
+    "lem-pc-proper-base-change",
+    "lem-pod-separated-finite-type-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bosch-lutkebohmert-raynaud-neron-models.pdf",
+    "place": "3.5 Corollary 4, assembly"
+   }
+  },
+  {
+   "text": "Finally let a finite weak family over any of these traits be given; denote the trait's ring again by $R$ and its fraction field by $E$. If the family is empty, its covering condition makes $X(E^{\\mathrm{sh}})$ empty, which is bounded using any finite affine cover of $X$. Otherwise cover every $M_i$ by finitely many affine opens $V_{ia}=\\operatorname{Spec}D_{ia}$, and choose finite $R$-algebra generating lists for $D_{ia}$. Their generic opens $(V_{ia})_E$ form a finite affine cover of $X$. Every $R^{\\mathrm{sh}}$-section of $M_i$ factors through an affine chart containing its closed-point image; in that chart all chosen coordinates lie in $R^{\\mathrm{sh}}$ and have valuation at least zero. Assign each generic point to one such chart using its extending section. This decomposes all of $X(E^{\\mathrm{sh}})$ into finitely many subsets bounded in those charts, with constants $c_{ia}=0$. This is exactly boundedness as defined in the statement. Empty subsets and the case $X(E^{\\mathrm{sh}})=\\varnothing$ cause no problem.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/bosch-lutkebohmert-raynaud-neron-models.pdf",
+    "place": "1.1 Proposition 7, reverse implication, and finite union; explicit affine-coordinate argument"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sc-discrete-valuation-ring",
+  "lem-weil-pbc-dvr-unit-times-uniformizer-power",
+  "lem-weil-pbc-principal-localization-open-immersion",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-weil-pbc-noetherian-finitely-many-components",
+  "lem-sc-dvr-nonnegative-valuation-in-ring",
+  "lem-sc-strict-henselization-dvr",
+  "lem-weil-pbc-strict-henselization-triples",
+  "lem-weil-pbc-glue-schemes",
+  "lem-weil-pbc-scheme-morphism-gluing",
+  "lem-weil-pbc-section-separated-closed-immersion",
+  "lem-weil-pbc-separated-base-change",
+  "lem-weil-pbc-affine-morphism-permanence",
+  "def-weil-closed-immersion",
+  "lem-sfb-generic-smooth-model-smoothening",
+  "lem-pc-proper-base-change",
+  "lem-trf-smooth-geometrically-normal",
+  "lem-trf-normal-topologically-noetherian-components",
+  "lem-weil-pbc-noetherian-open-subscheme-noetherian",
+  "lem-weil-pbc-smooth-restrict-open-subschemes",
+  "lem-sfb-smooth-trait-local-rational-spreading",
+  "sbc-lem-smooth-geometrically-reduced",
+  "lem-weil-pbc-minimal-prime-reduced-localization-field",
+  "lem-weil-pbc-affine-open-stalk-localization",
+  "lem-sbc-scheme-fibre-stalk-quotient",
+  "lem-pc-smooth-flat",
+  "def-weil-flat-morphism",
+  "lem-trf-flat-module-torsionfree-domain",
+  "lem-weil-pbc-scheme-image-qc-kernel",
+  "lem-sfb-finite-type-composition-base-change",
+  "lem-sfb-scheme-image-flat-base-change",
+  "lem-weil-pbc-chevalley-constructible-image",
+  "pqf-lem-lft-fp-locnoeth",
+  "lem-weil-pbc-strict-henselization-functoriality",
+  "lem-weil-pbc-smooth-ring-map-iff-smooth-affine",
+  "lem-trf-henselian-smooth-algebra-lifting",
+  "lem-pc-dense-separable-points",
+  "lem-weil-pbc-regular-ring-smooth-ascent",
+  "rem-pc-regular-normal",
+  "lem-trf-reduced-scheme-image",
+  "lem-trf-finite-type-stalk-isomorphism-open-neighbourhood",
+  "lem-weil-pbc-etale-local-ring-triples",
+  "def-weil-pbc-strict-henselization-limit",
+  "lem-sfb-scheme-affine-limit-lfp-criterion",
+  "lem-weil-pbc-etale-smooth-zero-dimensional-fibres",
+  "lem-trf-smooth-composition",
+  "lem-weil-pbc-filtered-category-directed-cofinal",
+  "lem-pod-separated-finite-type-base-change"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/bosch-lutkebohmert-raynaud-neron-models.pdf",
+  "place": "BLR 3.5 Theorem 2, Proposition 3, Corollary 4; 4.3 opening paragraph; 1.1 Proposition 7. Primary scan read, local copy WANTED; explicit affine gluing and limit details supplied from the cited DAG statements."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A smooth scheme with bounded unramified points over a discretely valued field admits weak Neron models",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"WeierstrassCurve.IsGoodReduction\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Reduction\", \"type\": \"(R : Type u_1) →\\n  [inst : CommRing R] →\\n    [inst_1 : IsDomain R] →\\n      [inst_2 : IsDiscreteValuationRing R] →\\n        {K : Type u_2} →\\n          [inst_3 : Field K] →\\n            [inst_4 : Algebra R K] →\\n              [inst_5 : IsFractionRing R K] → (W : WeierstrassCurve K) → [WeierstrassCurve.Is\", \"doc\": \"A property of a Weierstrass curve $ W $ over the fraction field $ K $ of a discrete valuation ring $ R $, asserting that $ W $ has good reduction. This means $ W $ satisfies minimality conditions with\"}\n  {\"name\": \"WeierstrassCurve.instIsMinimalMinimal\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Reduction\", \"type\": \"∀ (R : Type u_1) [inst : CommRing R] [inst_1 : IsDomain R] [inst_2 : IsDiscreteValuationRing R] {K : Type u_2}\\n  [inst_3 : Field K] [inst_4 : Algebra R K] [inst_5 : IsFractionRing R K] {W : WeierstrassCurve K},\\n  WeierstrassCurve.IsMinimal R (WeierstrassCurve.minimal R W)\", \"doc\": \"For any Weierstrass curve $ W $ over the fraction field $ K $ of a discrete valuation ring $ R $, the minimal Weierstrass curve obtained by applying the minimal transformation to $ W $ satisfies the m\"}\n  {\"name\": \"WeierstrassCurve.IsMinimal\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Reduction\", \"type\": \"(R : Type u_1) →\\n  [inst : CommRing R] →\\n    [inst_1 : IsDomain R] →\\n      [IsDiscreteValuationRing R] →\\n        {K : Type u_2} → [inst_3 : Field K] → [inst_4 : Algebra R K] → [IsFractionRing R K] → WeierstrassCurve K → Prop\", \"doc\": \"A property of a Weierstrass curve over the fraction field $ K $ of a discrete valuation ring $ R $, indicating that the curve satisfies minimality conditions with respect to the valuation induced by $\"}\n  {\"name\": \"AlgebraicGeometry.IsSmooth.exists_isStandardSmooth\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y} [self : AlgebraicGeometry.IsSmooth f] (x : ↥X),\\n  ∃ U V,\\n    ∃ (_ : x ∈ ↑V) (e : ↑V ≤ (TopologicalSpace.Opens.map f.base).obj ↑U),\\n      (CommRingCat.Hom.hom (AlgebraicGeometry.Scheme.Hom.appLE f (↑U) (↑V) e)).IsStandardSmooth\", \"doc\": \"Let $f: X \\\\to Y$ be a smooth morphism of schemes. For any point $x \\\\in X$, there exist an open neighborhood $V$ of $x$ and an open neighborhood $U$ of $f(x)$ with $f(V) \\\\subseteq U$, such that the rin\"}\n  {\"name\": \"WeierstrassCurve.minimal\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Reduction\", \"type\": \"(R : Type u_1) →\\n  [inst : CommRing R] →\\n    [inst_1 : IsDomain R] →\\n      [IsDiscreteValuationRing R] →\\n        {K : Type u_2} →\\n          [inst_3 : Field K] → [inst_4 : Algebra R K] → [IsFractionRing R K] → WeierstrassCurve K → WeierstrassCurve K\", \"doc\": \"Given a Weierstrass curve $ W $ over the fraction field $ K $ of a discrete valuation ring $ R $, this function returns the minimal Weierstrass curve equivalent to $ W $ under a variable change. The r\"}\n  {\"name\": \"WeierstrassCurve.isGoodReduction_iff\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Reduction\", \"type\": \"∀ (R : Type u_1) [inst : CommRing R] [inst_1 : IsDomain R] [inst_2 : IsDiscreteValuationRing R] {K : Type u_2}\\n  [inst_3 : Field K] [inst_4 : Algebra R K] [inst_5 : IsFractionRing R K] (W : WeierstrassCurve K)\\n  [inst_6 : WeierstrassCurve.IsMinimal R W],\\n  WeierstrassCurve.IsGoodReduction R W ↔\\n    \", \"doc\": \"For a discrete valuation ring $ R $ with fraction field $ K $, and a minimal Weierstrass curve $ W $ over $ K $, the curve $ W $ has good reduction if and only if the valuation of its discriminant $ \\\\\"}\n  {\"name\": \"AlgebraicGeometry.IsSmooth\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"A morphism $ f: X \\to Y $ of schemes is smooth.\"}\n  {\"name\": \"WeierstrassCurve.isGoodReduction_iff_isElliptic_reduction\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Reduction\", \"type\": \"∀ (R : Type u_1) [inst : CommRing R] [inst_1 : IsDomain R] [inst_2 : IsDiscreteValuationRing R] {K : Type u_2}\\n  [inst_3 : Field K] [inst_4 : Algebra R K] [inst_5 : IsFractionRing R K] {W : WeierstrassCurve K}\\n  [inst_6 : WeierstrassCurve.IsMinimal R W],\\n  WeierstrassCurve.IsGoodReduction R W ↔ (Wei\", \"doc\": \"For a minimal Weierstrass curve $ W $ over the fraction field $ K $ of a discrete valuation ring $ R $, the curve $ W $ has good reduction if and only if its reduction to the residue field of $ R $ is\"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern ordinary rational maps, gluing, local smooth presentations, analytic Haar characters or Weierstrass models; none supplies this statement about smooth trait models and fibrewise rational maps."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Weak Neron models of a bounded smooth scheme exist and extend rational maps from smooth schemes",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.RationalMap.exists_rep\", \"module\": \"Mathlib.AlgebraicGeometry.RationalMap\", \"type\": \"(f : X ⤏ Y) : ∃ g : X.PartialMap Y, g.toRationalMap = f\", \"doc\": \"For any rational map $ f \\\\colon X \\\\dashrightarrow Y $ between schemes $ X $ and $ Y $, there exists a partial map $ g \\\\colon X \\\\to Y $ such that the equivalence class of $ g $ under the rational map i\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.RationalMap.exists_partialMap_over\", \"module\": \"Mathlib.AlgebraicGeometry.RationalMap\", \"type\": \"[X.Over S] [Y.Over S] (f : X ⤏ Y) [f.IsOver S] : ∃ g : X.PartialMap Y, g.IsOver S ∧ g.toRationalMap = f\", \"doc\": \"For any rational map $ f $ from a scheme $ X $ to a scheme $ Y $ over a base scheme $ S $, there exists a partial map $ g $ from $ X $ to $ Y $ over $ S $ such that the equivalence class of $ g $ is $\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.RationalMap\", \"module\": \"Mathlib.AlgebraicGeometry.RationalMap\", \"type\": \"(X Y : Scheme.{u}) : Type u\", \"doc\": \"The quotient of partial maps between schemes $X$ and $Y$ by the equivalence relation where two partial maps are considered equivalent if they agree on an open subset of the source scheme $X$.\"}\n  {\"name\": \"AlgebraicGeometry.IsSmooth.casesOn\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Smooth\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} →\\n  {f : X ⟶ Y} →\\n    {motive : AlgebraicGeometry.IsSmooth f → Sort u_1} →\\n      (t : AlgebraicGeometry.IsSmooth f) →\\n        ((exists_isStandardSmooth :\\n              ∀ (x : ↥X),\\n                ∃ U V,\\n                  ∃ (_ : x ∈ ↑V) (e : ↑V ≤ (TopologicalSpace.Ope\", \"doc\": \"A morphism $ f: X \\to Y $ of schemes is smooth.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.RationalMap.IsOver.exists_partialMap_over\", \"module\": \"Mathlib.AlgebraicGeometry.RationalMap\", \"type\": \"∀ {X Y S : AlgebraicGeometry.Scheme} {inst : X.Over S} {inst_1 : Y.Over S} {f : X.RationalMap Y}\\n  [self : AlgebraicGeometry.Scheme.RationalMap.IsOver S f],\\n  ∃ g, AlgebraicGeometry.Scheme.PartialMap.IsOver S g ∧ g.toRationalMap = f\", \"doc\": \"For any rational map $ f \\\\colon X \\\\dashrightarrow Y $ over a base scheme $ S $, there exists a partial map $ g \\\\colon X \\\\to Y $ over $ S $ such that the rational map induced by $ g $ is equal to $ f $\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.RationalMap.ofFunctionField\", \"module\": \"Mathlib.AlgebraicGeometry.RationalMap\", \"type\": \"[IsIntegral X] [LocallyOfFiniteType sY] (f : Spec X.functionField ⟶ Y) (h : f ≫ sY = X.fromSpecStalk _ ≫ sX) : X ⤏ Y\", \"doc\": \"Given an integral scheme $X$, a scheme $Y$ with a morphism $s_Y:Y\\\\to S$ locally of finite type, and a morphism $f:\\\\operatorname{Spec}(K(X))\\\\to Y$ from the spectrum of $X$'s function field $K(X)$ satis\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.PartialMap.exists_restrict_isOver\", \"module\": \"Mathlib.AlgebraicGeometry.RationalMap\", \"type\": \"[X.Over S] [Y.Over S] (f : X.PartialMap Y) [f.toRationalMap.IsOver S] : ∃ U hU hU', (f.restrict U hU hU').IsOver S\", \"doc\": \"If a rational map from a scheme $X$ to a scheme $Y$ is compatible with a base scheme $S$, then there exists an open subset $U \\\\subseteq X$ such that the restriction of the corresponding partial map to\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.instIsOverCompHomOfIsOver\", \"module\": \"Mathlib.AlgebraicGeometry.RationalMap\", \"type\": \"[X.Over S] [Y.Over S] [Z.Over S] (f : X ⤏ Y) (g : Y ⟶ Z) [f.IsOver S] [g.IsOver S] : (f.compHom g).IsOver S\", \"doc\": \"A rational map between schemes $X$ and $Y$ is said to be over a base scheme $S$ if it is compatible with the given morphisms from $X$ and $Y$ to $S$. This means that the diagram formed by the rational\"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern ordinary rational maps, gluing, local smooth presentations, analytic Haar characters or Weierstrass models; none supplies this statement about smooth trait models and fibrewise rational maps."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Scheme\", \"Neron\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern ordinary rational maps, gluing, local smooth presentations, analytic Haar characters or Weierstrass models; none supplies this statement about smooth trait models and fibrewise rational maps."
+  },
+  {
+   "tool": "grep",
+   "query": "weak.?[Nn].ron|[Nn].ron.?model|weakNeron",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern ordinary rational maps, gluing, local smooth presentations, analytic Haar characters or Weierstrass models; none supplies this statement about smooth trait models and fibrewise rational maps."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A finite weak Neron family exists for a bounded smooth variety over a discrete valuation field and has a rational mapping property",
+   "results": "{\"t\": \"2026-10-24T08:19:54Z\", \"tool\": \"leanfinder\", \"query\": \"A finite weak Neron family exists for a bounded smooth variety over a discrete valuation field and has a rational mapping property\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"WeierstrassCurve.IsGoodReduction\", \"WeierstrassCurve.exists_isMinimal\", \"WeierstrassCurve.IsMinimal\", \"WeierstrassCurve.exists_isIntegral\", \"WeierstrassCurve.instIsMinimalMinimal\", \"WeierstrassCurve.minimal\", \"AlgebraicGeometry.Proj.valuativeCriterion_existence\", \"WeierstrassCurve.isGoodReduction_iff\"], \"digest\": \"e63d27370770ddb2\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits give ordinary scheme rational maps or Weierstrass reduction; neither supplies a fibrewise dense domain, weak Neron family, or smooth-trait base-change extension."
+  },
+  {
+   "tool": "grep",
+   "query": "weak.?[Nn].ron|weakNeron|smoothening",
+   "results": "{\"t\": \"2026-10-24T08:20:18Z\", \"tool\": \"grep\", \"query\": \"weak.?[Nn].ron|weakNeron|smoothening\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits give ordinary scheme rational maps or Weierstrass reduction; neither supplies a fibrewise dense domain, weak Neron family, or smooth-trait base-change extension."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Weak Neron models extend generic morphisms to rational maps over a discrete valuation ring",
+   "results": "{\"t\": \"2026-10-24T08:20:18Z\", \"tool\": \"leansearch\", \"query\": \"Weak Neron models extend generic morphisms to rational maps over a discrete valuation ring\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.RationalMap.ofFunctionField\", \"AlgebraicGeometry.Scheme.RationalMap.IsOver\", \"AlgebraicGeometry.Scheme.PartialMap.noConfusionType\", \"AlgebraicGeometry.Scheme.RationalMap.IsOver.exists_partialMap_over\", \"AlgebraicGeometry.Scheme.RationalMap.fromFunctionField\", \"AlgebraicGeometry.Scheme.RationalMap.IsOver.mk\", \"AlgebraicGeometry.Scheme.Hom.toRationalMap\", \"AlgebraicGeometry.Scheme.RationalMap.IsOver.recOn\"], \"digest\": \"51af24075f74d82f\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits give ordinary scheme rational maps or Weierstrass reduction; neither supplies a fibrewise dense domain, weak Neron family, or smooth-trait base-change extension."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Neron\"",
+   "results": "{\"t\": \"2026-10-24T08:20:18Z\", \"tool\": \"loogle\", \"query\": \"\\\"Neron\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits give ordinary scheme rational maps or Weierstrass reduction; neither supplies a fibrewise dense domain, weak Neron family, or smooth-trait base-change extension."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-bounded-group-translation-model",
+  "date": "2026-10-24",
+  "group": "Q54"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "BLR 1.1 Definition 2 (printed pp.8-9) and 1.3 Theorem 1, if direction (printed p.16, PDF p.22); local-existence input of 1.4 Theorem 3; supporting construction: BLR 4.3 Proposition 4(iii), printed pp.106-107 (PDF pp.112-113), using 3.5 Theorem 2 and 4.3 Propositions 2 and 4; boundedness is BLR 1.1 Definition 2. The local rings and translations here are exactly those in 4.3/4(iii). Supporting BLR result: 3.5 Definition 1, Theorem 2, Proposition 3 and Corollary 4, printed pp.74-75 (PDF pp.80-81); refinement by special-fibre components: 4.3 opening paragraph, p.104; converse boundedness: 1.1 Proposition 7 and finite union, pp.10-11.",
+   "via": [
+    "lem-sfb-bounded-group-translation-model",
+    "lem-sfb-bounded-group-local-neron-criterion",
+    "lem-sfb-abelian-neron-model",
+    "lem-sfb-semiabelian-neron-lft-existence",
+    "lem-sfb-trait-semiabelian-hom-extension",
+    "lem-sfb-semiabelian-generic-graph-proper",
+    "lem-sfb-normal-semiabelian-hom-extension",
+    "lem-sfb-symmetric-line-power-prolongation",
+    "lem-sfb-normal-symmetric-cubical-extension",
+    "lem-sfb-symmetric-ample-power-extension",
+    "lem-sfb-regular-group-generic-ampleness",
+    "lem-sfb-stable-picard-theta-ampleness",
+    "lem-sfb-stable-relative-picard-kummer",
+    "lem-sfb-stable-level-versal-branch-freeness",
+    "lem-sfb-stable-abelian-level-normalization",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-weak-neron-family-rational-property",
+  "worker": "stage1",
+  "summary": "Checked BLR 3.1/4, 3.5/1--4, 1.1/7 and 4.3 against the primary scan; constructed separated finite models explicitly, isolated the general smoothening input, wrote the graph/DVR mapping argument and strict-local descent over the new trait, and proved the component refinement and boundedness converse. Removed the unused group-scheme statement dependency. No change to the statement.",
+  "blueprint": "The item has no blueprint ancestor (blueprint_refs.py ancestor returned None); it is a BLR supporting lemma of lem-sfb-bounded-group-translation-model through the existing recorded via chain. These steps realize the cited 3.5 existence, rational-mapping and local-trait arguments, without changing the ctf unit route.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-dvr-unit-times-uniformizer-power",
+    "why": "Generic scheme, commutative algebra or limit fact used as stated in this BLR weak-model proof; the ctf stability unit has no replacement for this auxiliary geometric tool."
+   },
+   {
+    "node": "lem-weil-pbc-principal-localization-open-immersion",
+    "why": "Generic scheme, commutative algebra or limit fact used as stated in this BLR weak-model proof; the ctf stability unit has no replacement for this auxiliary geometric tool."
+   },
+   {
+    "node": "lem-weil-pbc-finite-type-over-noetherian",
+    "why": "Generic scheme, commutative algebra or limit fact used as stated in this BLR weak-model proof; the ctf stability unit has no replacement for this auxiliary geometric tool."
+   },
+   {
+    "node": "lem-weil-pbc-noetherian-finitely-many-components",
+    "why": "Generic scheme, commutative algebra or limit fact used as stated in this BLR weak-model proof; the ctf stability unit has no replacement for this auxiliary geometric tool."
+   },
+   {
+    "node": "lem-sc-dvr-nonnegative-valuation-in-ring",
+    "why": "Generic scheme, commutative algebra or limit fact used as stated in this BLR weak-model proof; the ctf stability unit has no replacement for this auxiliary geometric tool."
+   },
+   {
+    "node": "lem-sc-strict-henselization-dvr",
+    "why": "Generic scheme, commutative algebra or limit fact used as stated in this BLR weak-model proof; the ctf stability unit has no replacement for this auxiliary geometric tool."
+   },
+   {
+    "node": "lem-weil-pbc-strict-henselization-triples",
+    "why": "Generic scheme, commutative algebra or limit fact used as stated in this BLR weak-model proof; the ctf stability unit has no replacement for this auxiliary geometric tool."
+   },
+   {
+    "node": "lem-weil-pbc-glue-schemes",
+    "why": "Generic scheme, commutative algebra or limit fact used as stated in this BLR weak-model proof; the ctf stability unit has no replacement for this auxiliary geometric tool."
+   },
+   {
+    "node": "lem-weil-pbc-scheme-morphism-gluing",
+    "why": "Generic scheme, commutative algebra or limit fact used as stated in this BLR weak-model proof; the ctf stability unit has no replacement for this auxiliary geometric tool."
+   },
+   {
+    "node": "lem-weil-pbc-section-separated-closed-immersion",
+    "why": "Generic scheme, commutative algebra or limit fact used as stated in this BLR weak-model proof; the ctf stability unit has no replacement for this auxiliary geometric tool."
+   },
+   {
+    "node": "lem-weil-pbc-separated-base-change",
+    "why": "Generic scheme, commutative algebra or limit fact used as stated in this BLR weak-model proof; the ctf stability unit has no replacement for this auxiliary geometric tool."
+   },
+   {
+    "node": "lem-weil-pbc-affine-morphism-permanence",
+    "why": "Generic scheme, commutative algebra or limit fact used as stated in this BLR weak-model proof; the ctf stability unit has no replacement for this auxiliary geometric tool."
+   },
+   {
+    "node": "lem-pc-proper-base-change",
+    "why": "Generic scheme, commutative algebra or limit fact used as stated in this BLR weak-model proof; the ctf stability unit has no replacement for this auxiliary geometric tool."
+   },
+   {
+    "node": "lem-trf-smooth-geometrically-normal",
+    "why": "Generic scheme, commutative algebra or limit fact used as stated in this BLR weak-model proof; the ctf stability unit has no replacement for this auxiliary geometric tool."
+   },
+   {
+    "node": "lem-trf-normal-topologically-noetherian-components",
+    "why": "Generic scheme, commutative algebra or limit fact used as stated in this BLR weak-model proof; the ctf stability unit has no replacement for this auxiliary geometric tool."
+   },
+   {
+    "node": "lem-weil-pbc-noetherian-open-subscheme-noetherian",
+    "why": "Generic scheme, commutative algebra or limit fact used as stated in this BLR weak-model proof; the ctf stability unit has no replacement for this auxiliary geometric tool."
+   },
+   {
+    "node": "lem-weil-pbc-smooth-restrict-open-subschemes",
+    "why": "Generic scheme, commutative algebra or limit fact used as stated in this BLR weak-model proof; the ctf stability unit has no replacement for this auxiliary geometric tool."
+   },
+   {
+    "node": "sbc-lem-smooth-geometrically-reduced",
+    "why": "Generic scheme, commutative algebra or limit fact used as stated in this BLR weak-model proof; the ctf stability unit has no replacement for this auxiliary geometric tool."
+   },
+   {
+    "node": "lem-weil-pbc-minimal-prime-reduced-localization-field",
+    "why": "Generic scheme, commutative algebra or limit fact used as stated in this BLR weak-model proof; the ctf stability unit has no replacement for this auxiliary geometric tool."
+   },
+   {
+    "node": "lem-weil-pbc-affine-open-stalk-localization",
+    "why": "Generic scheme, commutative algebra or limit fact used as stated in this BLR weak-model proof; the ctf stability unit has no replacement for this auxiliary geometric tool."
+   },
+   {
+    "node": "lem-sbc-scheme-fibre-stalk-quotient",
+    "why": "Generic scheme, commutative algebra or limit fact used as stated in this BLR weak-model proof; the ctf stability unit has no replacement for this auxiliary geometric tool."
+   },
+   {
+    "node": "lem-pc-smooth-flat",
+    "why": "Generic scheme, commutative algebra or limit fact used as stated in this BLR weak-model proof; the ctf stability unit has no replacement for this auxiliary geometric tool."
+   },
+   {
+    "node": "lem-trf-flat-module-torsionfree-domain",
+    "why": "Generic scheme, commutative algebra or limit fact used as stated in this BLR weak-model proof; the ctf stability unit has no replacement for this auxiliary geometric tool."
+   },
+   {
+    "node": "lem-weil-pbc-scheme-image-qc-kernel",
+    "why": "Generic scheme, commutative algebra or limit fact used as stated in this BLR weak-model proof; the ctf stability unit has no replacement for this auxiliary geometric tool."
+   },
+   {
+    "node": "lem-sfb-finite-type-composition-base-change",
+    "why": "Generic scheme, commutative algebra or limit fact used as stated in this BLR weak-model proof; the ctf stability unit has no replacement for this auxiliary geometric tool."
+   },
+   {
+    "node": "lem-weil-pbc-chevalley-constructible-image",
+    "why": "Generic scheme, commutative algebra or limit fact used as stated in this BLR weak-model proof; the ctf stability unit has no replacement for this auxiliary geometric tool."
+   },
+   {
+    "node": "pqf-lem-lft-fp-locnoeth",
+    "why": "Generic scheme, commutative algebra or limit fact used as stated in this BLR weak-model proof; the ctf stability unit has no replacement for this auxiliary geometric tool."
+   },
+   {
+    "node": "lem-weil-pbc-strict-henselization-functoriality",
+    "why": "Generic scheme, commutative algebra or limit fact used as stated in this BLR weak-model proof; the ctf stability unit has no replacement for this auxiliary geometric tool."
+   },
+   {
+    "node": "lem-weil-pbc-smooth-ring-map-iff-smooth-affine",
+    "why": "Generic scheme, commutative algebra or limit fact used as stated in this BLR weak-model proof; the ctf stability unit has no replacement for this auxiliary geometric tool."
+   },
+   {
+    "node": "lem-trf-henselian-smooth-algebra-lifting",
+    "why": "Generic scheme, commutative algebra or limit fact used as stated in this BLR weak-model proof; the ctf stability unit has no replacement for this auxiliary geometric tool."
+   },
+   {
+    "node": "lem-pc-dense-separable-points",
+    "why": "Generic scheme, commutative algebra or limit fact used as stated in this BLR weak-model proof; the ctf stability unit has no replacement for this auxiliary geometric tool."
+   },
+   {
+    "node": "lem-weil-pbc-regular-ring-smooth-ascent",
+    "why": "Generic scheme, commutative algebra or limit fact used as stated in this BLR weak-model proof; the ctf stability unit has no replacement for this auxiliary geometric tool."
+   },
+   {
+    "node": "rem-pc-regular-normal",
+    "why": "Generic scheme, commutative algebra or limit fact used as stated in this BLR weak-model proof; the ctf stability unit has no replacement for this auxiliary geometric tool."
+   },
+   {
+    "node": "lem-trf-reduced-scheme-image",
+    "why": "Generic scheme, commutative algebra or limit fact used as stated in this BLR weak-model proof; the ctf stability unit has no replacement for this auxiliary geometric tool."
+   },
+   {
+    "node": "lem-trf-finite-type-stalk-isomorphism-open-neighbourhood",
+    "why": "Generic scheme, commutative algebra or limit fact used as stated in this BLR weak-model proof; the ctf stability unit has no replacement for this auxiliary geometric tool."
+   },
+   {
+    "node": "lem-weil-pbc-etale-local-ring-triples",
+    "why": "Generic scheme, commutative algebra or limit fact used as stated in this BLR weak-model proof; the ctf stability unit has no replacement for this auxiliary geometric tool."
+   },
+   {
+    "node": "lem-weil-pbc-etale-smooth-zero-dimensional-fibres",
+    "why": "Generic scheme, commutative algebra or limit fact used as stated in this BLR weak-model proof; the ctf stability unit has no replacement for this auxiliary geometric tool."
+   },
+   {
+    "node": "lem-trf-smooth-composition",
+    "why": "Generic scheme, commutative algebra or limit fact used as stated in this BLR weak-model proof; the ctf stability unit has no replacement for this auxiliary geometric tool."
+   },
+   {
+    "node": "lem-weil-pbc-filtered-category-directed-cofinal",
+    "why": "Generic scheme, commutative algebra or limit fact used as stated in this BLR weak-model proof; the ctf stability unit has no replacement for this auxiliary geometric tool."
+   },
+   {
+    "node": "lem-pod-separated-finite-type-base-change",
+    "why": "Generic scheme, commutative algebra or limit fact used as stated in this BLR weak-model proof; the ctf stability unit has no replacement for this auxiliary geometric tool."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-dvr-unit-times-uniformizer-power",
+  "lem-weil-pbc-principal-localization-open-immersion",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-weil-pbc-noetherian-finitely-many-components",
+  "lem-sc-dvr-nonnegative-valuation-in-ring",
+  "lem-sc-strict-henselization-dvr",
+  "lem-weil-pbc-strict-henselization-triples",
+  "lem-weil-pbc-glue-schemes",
+  "lem-weil-pbc-scheme-morphism-gluing",
+  "lem-weil-pbc-section-separated-closed-immersion",
+  "lem-weil-pbc-separated-base-change",
+  "lem-weil-pbc-affine-morphism-permanence",
+  "lem-pc-proper-base-change",
+  "lem-trf-smooth-geometrically-normal",
+  "lem-trf-normal-topologically-noetherian-components",
+  "lem-weil-pbc-noetherian-open-subscheme-noetherian",
+  "lem-weil-pbc-smooth-restrict-open-subschemes",
+  "sbc-lem-smooth-geometrically-reduced",
+  "lem-weil-pbc-minimal-prime-reduced-localization-field",
+  "lem-weil-pbc-affine-open-stalk-localization",
+  "lem-sbc-scheme-fibre-stalk-quotient",
+  "lem-pc-smooth-flat",
+  "lem-trf-flat-module-torsionfree-domain",
+  "lem-weil-pbc-scheme-image-qc-kernel",
+  "lem-sfb-finite-type-composition-base-change",
+  "lem-weil-pbc-chevalley-constructible-image",
+  "pqf-lem-lft-fp-locnoeth",
+  "lem-weil-pbc-strict-henselization-functoriality",
+  "lem-weil-pbc-smooth-ring-map-iff-smooth-affine",
+  "lem-trf-henselian-smooth-algebra-lifting",
+  "lem-pc-dense-separable-points",
+  "lem-weil-pbc-regular-ring-smooth-ascent",
+  "rem-pc-regular-normal",
+  "lem-trf-reduced-scheme-image",
+  "lem-trf-finite-type-stalk-isomorphism-open-neighbourhood",
+  "lem-weil-pbc-etale-local-ring-triples",
+  "lem-weil-pbc-etale-smooth-zero-dimensional-fibres",
+  "lem-trf-smooth-composition",
+  "lem-weil-pbc-filtered-category-directed-cofinal",
+  "lem-pod-separated-finite-type-base-change"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q08-04784a248",
+  "group": "Q08",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q08-04784a248 (reviewer sub-agent of L); spot-checked: I read the whole item (17 steps), the new node lem-sfb-generic-smooth-model-smoothening, and the statement of every cited node. There is no local BLR copy, so I checked the BLR places from my own knowledge of the book: 3.1/3-4, 3.5/1-4, 4.3 opening and 1.1/7. The item's statement is unchanged and faithful to BLR; dropping def-sc-group-scheme from stmt_deps is correct. Edge cases A1_E and G_m (unbounded, no finite family), Spec E, empty point set and empty Z_k all behave correctly. New node: a correct specialisation of BLR 3.1/3-4 (Néron smoothening by blow-ups over any DVR, restricted to the smooth locus). The R^sh-point bijection follows from properness, separatedness and Thm 3. It is not a duplicate of the existing group smoothening and dilatation nodes, does not restate a clause of the item, and its form, searches and blueprint fields are complete. Every step checks out: the integral models A_a; the separated gluing, whose mixed diagonal is the graph of U_a in X over E; smoothening; component refinement; A=O_{Z,xi} a DVR with uniformizer pi; the graph closure with the flat-base-change generic fibre and Chevalley; Hensel lifting with dense separable points; the B=A local-overring argument and the stalk-isomorphism open immersion; strict-henselian descent via the triples colimit and the directed cofinal lfp criterion; base change; and the converse. Fixes, citations only: steps 2 and 6 now cite lem-weil-pbc-etale-local-ring-triples, which identifies the neighbourhood colimit R^sh/A^sh with the triple colimit before the clause m=pC is used. Step 8 now cites lem-weil-pbc-smooth-restrict-open-subschemes for the smooth affine chart. Step 10 now cites lem-sfb-scheme-image-flat-base-change for restricting the closure to the open component. proof_deps is unchanged. Batch-5 flags: lem-trf-smooth-geometrically-normal, lem-trf-normal-topologically-noetherian-components, lem-trf-flat-module-torsionfree-domain (also reached through lem-sfb-smooth-trait-local-rational-spreading, of which only the DVR clause is used), lem-trf-henselian-smooth-algebra-lifting, lem-trf-reduced-scheme-image, lem-trf-finite-type-stalk-isomorphism-open-neighbourhood and lem-trf-smooth-composition are all generic algebra or scheme facts, not the trace formula, Poincaré duality or steps of their proofs: accepted. All 18 off-unit tool_uses are accepted as generic black boxes. No SGA source is used.; 1 file(s) fixed by the reviewer"
+ }
+}

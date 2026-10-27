@@ -1,0 +1,121 @@
+{
+ "id": "def-trf-polynomial-duality-restriction-primitives",
+ "kind": "definition",
+ "title": "Canonical restriction and coinduction exchange mates",
+ "status": "split",
+ "statement": "For scheme modules with derived categories [def-pc-ringed-spaces-derived-direct-image], define exact open restriction by the native sectionwise restriction functor and its derived adjunction. For composable ringed-space maps use the original-unit derived direct-image composition [lem-pc-ringed-spaces-derived-direct-image-composition], and for a commutative square compose these to its canonical direct-image square. Given four categories, adjunctions L \\dashv R and F \\dashv G, and a square T'R \\cong GT, define the exchange LTM \\to T'FM as the mate of T applied to the unit of F. With T \\dashv H and T' \\dashv H' and invertible exchange at HN, define coinduction restriction FH N \\to H'LN as the T'-adjunct of the inverse exchange followed by L applied to the evaluation counit. These formulas are independent of dualizing complexes or chart identifications; they use the component conventions of [def-trf-polynomial-duality-presentation-data].",
+ "stmt_deps": [
+  "def-pc-ringed-spaces-derived-direct-image",
+  "lem-pc-ringed-spaces-derived-direct-image-composition",
+  "def-trf-polynomial-duality-presentation-data"
+ ],
+ "source": {
+  "document": "literature/stacks-project/duality.tex",
+  "place": "0E2X restriction of polynomial duality models, with original-unit composition and the coinduction evaluation adjunct"
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Canonical polynomial relative duality models, derived coinduction restriction mates, exact affine tilde realization, and normalized comparison on localizations",
+   "results": "[leansearch] OK 8 hit(s): IsLocalization.integerNormalization; IsLocalization.coeffIntegerNormalization.congr_simp; Rep.coindResAdjunction; IsLocalization.integerNormalization_spec; IsLocalization.integerNormalization.congr_simp; CategoryTheory.Adjunction.derived; MvPolynomial.isLocalization; IsLocalization.integerNormalization_coeff. These concern polynomial localization denominators, representation coinduction and general derived adjunctions; none defines the polynomial-duality comparison packages.",
+   "date": "2026-10-22",
+   "verdict": "no matching package; canonical primitive maps are reused from their existing nodes"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Canonical exact derived restriction adjunction and exchange mate for coinduction; unit-normalized affine tilde realization on homotopy complexes",
+   "results": "8 hits: Scheme.Modules.restrictAdjunction, restrictFunctorAdjCounitIso, instIsLeftAdjointRestrictFunctor, restrictAdjunction_counit_app_app, restrictAdjunction_unit_app_app, LightCondensed.freeForgetAdjunction, ModuleCat.RestrictionCoextensionAdj.unit', instIsIsoFunctorCounitRestrictAdjunction. The actual restriction adjunction is reused; no derived comparison package is provided.",
+   "date": "2026-10-22",
+   "verdict": "primitive component reused, no matching package"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.tilde.adjunction",
+   "results": "2 hits: tilde.adjunction and its invertible-unit instance; the adjunction is reused. A prior combined query Functor.mapDerivedCategoryCompIso, tilde.adjunction returned unknown identifier for the unqualified Functor name.",
+   "date": "2026-10-22",
+   "verdict": "existing adjunction, no comparison package"
+  },
+  {
+   "tool": "grep",
+   "query": "msearch grep polynomialRestrictionExchange|IsPolynomialDerivedImageComparison|PolynomialAffineExactData; rg same in dag/nodes, lean/Sheaf and lean/WeilConjectures; blueprint_refs search affine realization",
+   "results": "Mathlib 0 hits; project and DAG 0 hits; blueprint search 0 nodes. These helpers were previously only in this unlanded repair packet.",
+   "date": "2026-10-22",
+   "verdict": "no existing node or declaration"
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-relative-duality-polynomial-chart",
+  "date": "2026-10-22",
+  "group": "Q42"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Canonical polynomial-chart restriction and refinement comparisons in the proof of lem-trf-relative-duality-polynomial-chart",
+   "via": [
+    "lem-trf-relative-duality-polynomial-chart",
+    "lem-trf-flat-lci-canonical-adjunction",
+    "lem-trf-marked-nodal-dualizing-degrees",
+    "lem-trf-temkin-stable-modification",
+    "lem-trf-stable-modification-flat-curve-pair",
+    "lem-trf-dejong-relative-marked-semistable",
+    "lem-trf-relative-marked-nodal-reduction",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.PolynomialDualityRestrictionPrimitives",
+  "file": "lean/Sheaf/AlgebraicGeometry/PolynomialDualityRestrictionPrimitives.lean",
+  "declaration": "AlgebraicGeometry.polynomialCoinductionRestriction",
+  "declarations": [
+   "AlgebraicGeometry.polynomialOpenRestriction",
+   "AlgebraicGeometry.polynomialOpenAdjunction",
+   "AlgebraicGeometry.polynomialImageComposition",
+   "AlgebraicGeometry.polynomialImageSquare",
+   "AlgebraicGeometry.polynomialRestrictionExchange",
+   "AlgebraicGeometry.polynomialCoinductionRestriction"
+  ],
+  "statement": "def polynomialCoinductionRestriction {A : Type u₁} {B : Type u₂} {C : Type u₃} {D : Type u₄} [Category.{v₁} A] [Category.{v₂} B] [Category.{v₃} C] [Category.{v₄} D] {T : A ⥤ B} {T' : C ⥤ D} {H : B ⥤ A} {H' : D ⥤ C} {L : B ⥤ D} {R : D ⥤ B} {F : A ⥤ C} {G : C ⥤ A} (adj : L ⊣ R) (adjF : F ⊣ G) (adjH : T ⊣ H) (adjH' : T' ⊣ H') (square : T' ⋙ R ≅ G ⋙ T) (N : B) [IsIso (polynomialRestrictionExchange adj adjF square (H.obj N))] : F.obj (H.obj N) ⟶ H'.obj (L.obj N)",
+  "branch": "newtargets-dag",
+  "by": "Q42",
+  "date": "2026-10-22"
+ },
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-d1d518f86",
+  "group": "Q42",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-d1d518f86",
+  "group": "Q42",
+  "result": "pass",
+  "note": "Re-delivery after the 2f1e RETURN. F1 fixed: PolynomialDualityChartAtlas carries an independent restriction equation (coinduction-adjunct model restriction vs native restriction of K, unit-normalized direct-image squares; b unique, q pinned on wedges, F any left adjoint used on both sides; IsIso exchange holds in the basic D.U=C.U∩P_D case, so not vacuous). IsPolynomialAffineAtlasCompatible and the localized (ht-1, h^-1 volume) variant tie e and every F.identification to atlas.identification; sigma, q and tau are each pinned uniquely (tilde/Gamma unit, global volume, right-derived units on all complexes). Checked consistency: independence of eP and of the embedding; R Noetherian. F2 fixed: free-arrow helper deleted, all new definitions referenced. F3 fixed: coinduction-adjunction node cited; relativeDualizingAffineTilde replaced by native tilde mapDerivedCategory. Mechanical theorem-stmt_dep finding: PASS on that point. Coinduction and direct-image composition are choices from pinned existentials; tilde finite-limits is an instance needed to type the statement; tilde.adjunction and pushforwardSpecMapCompΓIso are the nodes' own recorded constructions. lean.statement verbatim; 6 new definition nodes' declarations match their modules; dependency records identical to live; no live collision; single sorry; universes u,w independent; edge cases n=0, empty, zero ring, h=0/1 covered. Advisory: realization node cites the atlas node without using it; singleδ sign used uniformly. No compile by reviewer (2026-10-21 rule)."
+ }
+}

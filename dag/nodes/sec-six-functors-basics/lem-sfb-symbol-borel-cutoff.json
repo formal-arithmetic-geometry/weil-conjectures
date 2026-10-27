@@ -1,0 +1,225 @@
+{
+ "id": "lem-sfb-symbol-borel-cutoff",
+ "kind": "statement",
+ "title": "Borel summation of compactly supported matrix symbols",
+ "statement": "Use $\\mathbf R,\\mathbf C$ [def-weil-field] and the symbol estimates of [def-sfb-symbol-pseudodifferential-operators]. Fix $m\\geq1$, matrix dimensions $p,q\\geq0$, an integer $r$, and a compact set $K\\subset\\mathbf R^m$. For each $j\\geq0$ let $a_j:\\mathbf R^m\\times\\mathbf R^m\\to\\operatorname{Hom}_{\\mathbf C}(\\mathbf C^p,\\mathbf C^q)$ be smooth, vanish for $x\\notin K$, and satisfy, for all multi-indices $\\alpha,\\beta$, $$\\sup_{x,\\xi}(1+|\\xi|)^{-r+j+|\\beta|}\\|\\partial_x^\\alpha\\partial_\\xi^\\beta a_j(x,\\xi)\\|<\\infty.$$ There is a smooth symbol $b\\in S^r$ vanishing for $x\\notin K$ such that for every $L\\geq1$, $$b-\\sum_{j=0}^{L-1}a_j\\in S^{r-L}.$$ All symbol estimates here are uniform for $x\\in\\mathbf R^m$. No convergence of the original series is required.",
+ "source": {
+  "document": "literature/demailly-hodge-ams.pdf",
+  "place": "WANTED locally. Supplemental Demailly, Differential and pseudodifferential operators on manifolds, section 3, read online at https://www-fourier.univ-grenoble-alpes.fr/~demailly/analytic_geometry_2019/pseudodiff.pdf; 3.7, pp.7–8, cutoff proof of asymptotic expansions, applied entrywise with a common compact spatial support."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-sfb-symbol-pseudodifferential-operators"
+ ],
+ "proof": [
+  {
+   "text": "Apply [lem-sfb-euclidean-smooth-bump] with center $0$ and radii $1,2$, obtaining $\\beta$, and put $\\theta=1-\\beta$. The bump's stated support implies $\\beta=0$ for $|\\xi|>2$ and, by continuity, also for $|\\xi|=2$. Thus $\\theta=0$ on $|\\xi|\\leq1$ and $\\theta=1$ on $|\\xi|\\geq2$. Use $P_{s,n}$ from [lem-sfb-symbol-dilated-cutoff-estimates]. The hypotheses give $P_{r-j,n}(a_j)<\\infty$ for every $j,n$: the maximum is over finitely many multi-indices. Multiplication by a cutoff in $\\xi$ preserves vanishing for $x\\notin K$.",
+   "uses": [
+    "lem-sfb-euclidean-smooth-bump",
+    "lem-sfb-symbol-dilated-cutoff-estimates"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/demailly-hodge-ams.pdf",
+    "place": "WANTED locally: Demailly, Differential and pseudodifferential operators on manifolds, §3.7, printed pp.7–8, cutoff proof of asymptotic expansions, read online at https://www-fourier.univ-grenoble-alpes.fr/~demailly/analytic_geometry_2019/pseudodiff.pdf. The supplemental notes are distinct from the locally missing hodge-ams.pdf; this is the source actually read. §3.7 p.7, choice of the fixed cutoff; uniform matrix seminorms."
+   }
+  },
+  {
+   "text": "For each $j\\geq1$, apply [lem-sfb-symbol-dilated-cutoff-estimates] to $a_j$, with $s=r-j$, $t=r-j+1$ and $n=j$. Choose recursively $R_j\\geq\\max(1,j,R_{j-1}+1)$ (omit $R_0$ at the first stage) so large that\n$$C_j P_{r-j,j}(a_j)/(1+R_j)\\leq2^{-j}.$$\nOnly finitely many constants enter this choice. Set $c_j(x,\\xi)=\\theta(\\xi/R_j)a_j(x,\\xi)$. Then $P_{r-j+1,j}(c_j)\\leq2^{-j}$. The same cited estimate with $t=s=r-j$, for each $n$, gives $c_j\\in S^{r-j}$. No growth restriction on the seminorms of the original sequence was assumed.",
+   "uses": [
+    "lem-sfb-symbol-dilated-cutoff-estimates"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/demailly-hodge-ams.pdf",
+    "place": "WANTED locally: Demailly, Differential and pseudodifferential operators on manifolds, §3.7, printed pp.7–8, cutoff proof of asymptotic expansions, read online at https://www-fourier.univ-grenoble-alpes.fr/~demailly/analytic_geometry_2019/pseudodiff.pdf. The supplemental notes are distinct from the locally missing hodge-ams.pdf; this is the source actually read. §3.7 pp.7–8, choose inverse cutoff scales sufficiently small; diagonal choice of radii."
+   }
+  },
+  {
+   "text": "Define the actual function\n$$b(x,\\xi)=a_0(x,\\xi)+\\sum_{j\\geq1}^{\\mathrm{fin}}c_j(x,\\xi).$$\nThis sum is locally finite: around $(x_0,\\xi_0)$ choose a bounded frequency neighborhood $|\\xi|<M$; every $j>M$ has $R_j\\geq j>M$ and hence $c_j=0$ throughout it. Apply [lem-sfb-locally-finite-smooth-sum] to these smooth functions on $\\mathbf R^m\\times\\mathbf R^m$ with values in the finite-dimensional real normed space of complex matrices. It gives smoothness, and $b=0$ for $x\\notin K$ since each summand is zero there. On this same neighborhood $b$ is a finite sum, so every mixed partial derivative is the corresponding finite sum of derivatives. This is differentiation of a finite local identity, with no exchange of infinite limits.",
+   "uses": [
+    "lem-sfb-locally-finite-smooth-sum"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/demailly-hodge-ams.pdf",
+    "place": "WANTED locally: Demailly, Differential and pseudodifferential operators on manifolds, §3.7, printed pp.7–8, cutoff proof of asymptotic expansions, read online at https://www-fourier.univ-grenoble-alpes.fr/~demailly/analytic_geometry_2019/pseudodiff.pdf. The supplemental notes are distinct from the locally missing hodge-ams.pdf; this is the source actually read. §3.7 pp.7–8, definition and smoothness of the cutoff sum; local-finiteness implementation."
+   }
+  },
+  {
+   "text": "Fix $L\\geq1$. Subtracting the first $L$ original symbols from the local finite expression gives\n$$b-\\sum_{j<L}a_j=\\sum_{1\\leq j<L}(\\theta(\\xi/R_j)-1)a_j+\\sum_{j\\geq L}^{\\mathrm{fin}}c_j.$$\nEach term in the first sum is $-\\beta(\\xi/R_j)a_j$, with frequency support in $|\\xi|\\leq2R_j$. All its derivatives are bounded uniformly in $x$: the given derivative estimates for $a_j$ are bounded on this frequency ball, and the finitely many derivatives of the fixed smooth scaled bump are bounded there. For any integer $t$, $(1+|\\xi|)^{-t+|\\beta|}$ is bounded on that ball as well. Thus each such term is in every $S^t$, in particular $S^{r-L}$. When $L=1$ the first sum is empty.",
+   "uses": [
+    "def-sfb-symbol-pseudodifferential-operators",
+    "lem-sfb-euclidean-smooth-bump"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/demailly-hodge-ams.pdf",
+    "place": "WANTED locally: Demailly, Differential and pseudodifferential operators on manifolds, §3.7, printed pp.7–8, cutoff proof of asymptotic expansions, read online at https://www-fourier.univ-grenoble-alpes.fr/~demailly/analytic_geometry_2019/pseudodiff.pdf. The supplemental notes are distinct from the locally missing hodge-ams.pdf; this is the source actually read. §3.7 p.8, finite correction terms with bounded frequency support; elementary seminorm verification."
+   }
+  },
+  {
+   "text": "For the tail in step 4 fix multi-indices $\\alpha,\\beta$, put $n=\\max(|\\alpha|,|\\beta|)$ and $J=\\max(L+1,n)$. If $j\\geq J$, then $r-j+1\\leq r-L$, $n\\leq j$, and the estimate of step 2 gives\n$$(1+|\\xi|)^{-r+L+|\\beta|}\\|\\partial_x^\\alpha\\partial_\\xi^\\beta c_j(x,\\xi)\\|\\leq P_{r-j+1,j}(c_j)\\leq2^{-j}.$$\nAt any point only finitely many derivatives in the tail can be nonzero, by the neighborhood argument of step 3. The triangle inequality bounds the weighted norm of their sum by the corresponding finite sum of $2^{-j}$, hence by $2$ (the finite geometric-sum formula). The finitely many remaining indices $L\\leq j<J$ have $c_j\\in S^{r-j}\\subseteq S^{r-L}$ by step 2 and $1+|\\xi|\\geq1$. Consequently the whole tail has every defining seminorm of $S^{r-L}$ finite, uniformly for all $x,\\xi$.",
+   "uses": [
+    "def-sfb-symbol-pseudodifferential-operators"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/demailly-hodge-ams.pdf",
+    "place": "WANTED locally: Demailly, Differential and pseudodifferential operators on manifolds, §3.7, printed pp.7–8, cutoff proof of asymptotic expansions, read online at https://www-fourier.univ-grenoble-alpes.fr/~demailly/analytic_geometry_2019/pseudodiff.pdf. The supplemental notes are distinct from the locally missing hodge-ams.pdf; this is the source actually read. §3.7 p.8, tail bound for every remainder order; explicit finite geometric bound."
+   }
+  },
+  {
+   "text": "Steps 4–5 and the triangle inequality show $b-\\sum_{j<L}a_j\\in S^{r-L}$ for every $L\\geq1$. Taking $L=1$ yields $b-a_0\\in S^{r-1}\\subseteq S^r$, whence $b\\in S^r$ because $a_0\\in S^r$. Step 3 already gives smoothness and the prescribed spatial support. The one sequence of radii chosen in step 2 works for all derivative indices and all $L$; the construction never sums the unmodified series.",
+   "uses": [
+    "def-sfb-symbol-pseudodifferential-operators"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/demailly-hodge-ams.pdf",
+    "place": "WANTED locally: Demailly, Differential and pseudodifferential operators on manifolds, §3.7, printed pp.7–8, cutoff proof of asymptotic expansions, read online at https://www-fourier.univ-grenoble-alpes.fr/~demailly/analytic_geometry_2019/pseudodiff.pdf. The supplemental notes are distinct from the locally missing hodge-ams.pdf; this is the source actually read. §3.7 pp.7–8, elementary assembly of symbol order and all asymptotic remainder clauses."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-euclidean-smooth-bump",
+  "lem-sfb-symbol-dilated-cutoff-estimates",
+  "lem-sfb-locally-finite-smooth-sum",
+  "def-sfb-symbol-pseudodifferential-operators"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/demailly-hodge-ams.pdf",
+  "place": "WANTED locally: Demailly, Differential and pseudodifferential operators on manifolds, §3.7, printed pp.7–8, cutoff proof of asymptotic expansions, read online at https://www-fourier.univ-grenoble-alpes.fr/~demailly/analytic_geometry_2019/pseudodiff.pdf. The supplemental notes are distinct from the locally missing hodge-ams.pdf; this is the source actually read. Agent formulation of the one-symbol estimate and local-finiteness implementation of the same cutoff proof, with global uniform estimates and matrix values."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Borel asymptotic summation for matrix symbols of class S one zero with a fixed compact spatial support",
+   "results": "{\"t\": \"2026-10-24T04:28:05Z\", \"tool\": \"leanfinder\", \"query\": \"Borel asymptotic summation for matrix symbols of class S one zero with a fixed compact spatial support\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"WeakFEPair.hg_top\", \"tendsto_integral_exp_inner_smul_cocompact_of_continuous_compact_support\", \"WeakFEPair.hf_zero'\", \"HurwitzKernelBounds.isBigO_atTop_F_int_zero_sub\", \"WeakFEPair.hf_zero\", \"isBigO_norm_restrict_cocompact\", \"Asymptotics.IsBigO.continuousMultilinearMap_apply_eq_zero\", \"summable_mul_of_bigO_atTop\"], \"digest\": \"655f70dc90a3d51e\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern Landau notation, Taylor series, smooth algebras, or special-function estimates; none constructs a matrix symbol with prescribed decreasing-order expansion and fixed spatial support."
+  },
+  {
+   "tool": "leansearch",
+   "query": "There exists a smooth matrix symbol asymptotic to every sequence of symbols of orders r minus j",
+   "results": "{\"t\": \"2026-10-24T04:28:04Z\", \"tool\": \"leansearch\", \"query\": \"There exists a smooth matrix symbol asymptotic to every sequence of symbols of orders r minus j\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.Smooth.formallySmooth\", \"LibraryNote.Design_choices_about_smooth_algebraic_structures\", \"SchwartzMap.term𝓢(_,_)\", \"contMDiffOn_infty\", \"RingHom.Smooth\", \"Algebra.instSmoothOfIsStandardSmooth\", \"instIsContMDiffRiemannianBundleOfSomeENatTopOfLEInfty\", \"minSmoothness_def\"], \"digest\": \"73ac10e5e0103165\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern Landau notation, Taylor series, smooth algebras, or special-function estimates; none constructs a matrix symbol with prescribed decreasing-order expansion and fixed spatial support."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Every sequence of smooth matrix symbols with decreasing orders admits an asymptotic expansion with prescribed terms",
+   "results": "{\"t\": \"2026-10-24T04:29:54Z\", \"tool\": \"leansearch\", \"query\": \"Every sequence of smooth matrix symbols with decreasing orders admits an asymptotic expansion with prescribed terms\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"FormalMultilinearSeries.apply_eq_zero_of_lt_order\", \"smoothingSeminormSeq\", \"HasFTaylorSeriesUpTo\", \"Asymptotics.term_=o[_]_\", \"HasFTaylorSeriesUpToOn\", \"HasFTaylorSeriesUpTo.of_le\", \"HasFTaylorSeriesUpToOn.of_le\", \"ContinuousMultilinearMap.hasFTaylorSeriesUpTo_iteratedFDeriv\"], \"digest\": \"92d31b2f90ecbb80\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern Landau notation, Taylor series, smooth algebras, or special-function estimates; none constructs a matrix symbol with prescribed decreasing-order expansion and fixed spatial support."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"asymptotic\"",
+   "results": "{\"t\": \"2026-10-24T04:28:05Z\", \"tool\": \"loogle\", \"query\": \"\\\"asymptotic\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"Asymptotics.«term_=O[_]_»\", \"Asymptotics.«term_=o[_]_»\", \"Asymptotics.«term_=Θ[_]_»\", \"Asymptotics.IsBigO\", \"Asymptotics.IsLittleO\", \"Asymptotics.IsTheta\", \"Asymptotics.IsBigOWith\", \"Asymptotics.IsBigO.of_norm_le\"], \"digest\": \"590fb3e846d870fc\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern Landau notation, Taylor series, smooth algebras, or special-function estimates; none constructs a matrix symbol with prescribed decreasing-order expansion and fixed spatial support."
+  },
+  {
+   "tool": "grep",
+   "query": "pseudodifferential|symbol.*summation|asymptoticSummation|SymbolClass",
+   "results": "{\"t\": \"2026-10-24T04:28:03Z\", \"tool\": \"grep\", \"query\": \"pseudodifferential|symbol.*summation|asymptoticSummation|SymbolClass\", \"sub\": \"Analysis/\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern Landau notation, Taylor series, smooth algebras, or special-function estimates; none constructs a matrix symbol with prescribed decreasing-order expansion and fixed spatial support."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Borel summation of symbols of decreasing order by smooth high frequency cutoffs",
+   "results": "{\"t\": \"2026-10-24T04:57:05Z\", \"tool\": \"leanfinder\", \"query\": \"Borel summation of symbols of decreasing order by smooth high frequency cutoffs\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"summableLocallyUniformlyOn_iteratedDerivWithin_smul_cexp\", \"SchwartzMap.seminormAux\", \"Function.HasTemperateGrowth\", \"EulerProduct.norm_tsum_smoothNumbers_sub_tsum_lt\", \"contDiff_tsum_of_eventually\", \"summable_mul_of_bigO_atTop\", \"summable_mul_of_bigO_atTop'\", \"contDiff_tsum\"], \"digest\": \"ef9429ee55dc6bd0\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern smooth series under convergence hypotheses, Schwartz maps, Landau notation or analytic Taylor expansions, not an arbitrary decreasing-order symbol sequence. Read both natural-language results and grep; no exact project declaration was found either."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Borel asymptotic expansion for smooth pseudodifferential symbols of orders r minus j",
+   "results": "{\"t\": \"2026-10-24T04:59:50Z\", \"tool\": \"leansearch\", \"query\": \"Borel asymptotic expansion for smooth pseudodifferential symbols of orders r minus j\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Asymptotics.term_=O[_]_\", \"Mathlib.Tactic.Borelize.tacticBorelize___\", \"HasFPowerSeriesWithinOnBall.isBigO_image_sub_image_sub_deriv_principal\", \"HasFPowerSeriesWithinAt.isBigO_sub_partialSum_pow\", \"Asymptotics.term_~[_]_\", \"HasFPowerSeriesWithinAt.eventually\", \"HasFPowerSeriesAt\", \"Asymptotics.term_=O[_;_]_\"], \"digest\": \"1f0a389219a26ab7\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern smooth series under convergence hypotheses, Schwartz maps, Landau notation or analytic Taylor expansions, not an arbitrary decreasing-order symbol sequence. Read both natural-language results and grep; no exact project declaration was found either."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"asymptotic\"",
+   "results": "{\"t\": \"2026-10-24T05:01:19Z\", \"tool\": \"loogle\", \"query\": \"\\\"asymptotic\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"Asymptotics.«term_=O[_]_»\", \"Asymptotics.«term_=o[_]_»\", \"Asymptotics.«term_=Θ[_]_»\", \"Asymptotics.IsBigO\", \"Asymptotics.IsLittleO\", \"Asymptotics.IsTheta\", \"Asymptotics.IsBigOWith\", \"Asymptotics.IsBigO.of_norm_le\"], \"digest\": \"590fb3e846d870fc\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern smooth series under convergence hypotheses, Schwartz maps, Landau notation or analytic Taylor expansions, not an arbitrary decreasing-order symbol sequence. Read both natural-language results and grep; no exact project declaration was found either."
+  },
+  {
+   "tool": "grep",
+   "query": "pseudodifferential|asymptoticSummation|Borel.*summation|SymbolClass",
+   "results": "{\"t\": \"2026-10-24T04:57:04Z\", \"tool\": \"grep\", \"query\": \"pseudodifferential|asymptoticSummation|Borel.*summation|SymbolClass\", \"sub\": \"Analysis/\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern smooth series under convergence hypotheses, Schwartz maps, Landau notation or analytic Taylor expansions, not an arbitrary decreasing-order symbol sequence. Read both natural-language results and grep; no exact project declaration was found either."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-pseudodifferential-asymptotic-sum",
+  "date": "2026-10-24",
+  "group": "Q63"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Haboush symmetric-power lifting for a trivial quotient representation. Supporting representation-theoretic input: Steinberg endomorphisms detect a nonzero fixed vector. Supporting Self-duality of rho section modules at characteristic-dependent weights. Supporting input: Positive-characteristic simplicity step, using irreducibility of the Steinberg induced module rather than assuming self-duality. Numerical input to the dimension comparison: Weyl dimension of the induced module. Supporting Kempf vanishing for dominant flag line bundles. Characteristic-zero branch of Milne 22.51: apply Kodaira to M_(lambda+2rho). Supporting injectivity argument for Kodaira: Popa Theorem 1.6.6 used in the proof of Theorem 1.6.1. Supporting input: Popa Theorem 1.6.6 proof: Hodge-theory vanishing of the differential on structure-sheaf cohomology of the smooth projective root cover. Supporting input: Harmonic representatives on complex projective manifolds. Supporting analytic input: the decomposition of all forms underlying the representative assertion Analytic prerequisite: Kong Theorem 6.5(4), the general real elliptic-operator decomposition used on the realified type bundle. Supporting input: WANTED locally; Demailly, Complex Analytic and Differential Geometry, June 21, 2012, VI §2, Gårding inequality (2.3) and Sobolev lemma (2.1), printed p.289; smooth-right-hand-side consequence for bundle-valued systems; read online https://www-fourier.univ-grenoble-alpes.fr/~demailly/manuscripts/agbook.pdf Further analytic input: VI §2, weak Gårding inequality (2.3), printed p.289 (PDF page 289), finite-order regularity and norm estimate for an operator on one bundle. Parametrix proof of the finite-order weak estimate: Elliptic left parametrix as an identity on distributions. Supporting input: paragraph following Definition 3.8, printed pp.13–14: the instruction to choose a symbol asymptotic to the expansion; general decreasing-order operator formulation. Supporting input for asymptotic summation: 3.7, pp.7–8, cutoff proof of asymptotic expansions, applied entrywise with a common compact spatial support.",
+   "via": [
+    "lem-sfb-pseudodifferential-asymptotic-sum",
+    "lem-sfb-elliptic-distribution-parametrix",
+    "lem-sfb-weak-garding-sobolev-estimate",
+    "lem-sfb-elliptic-adjoint-regularity",
+    "lem-sfb-elliptic-smooth-fredholm-decomposition",
+    "lem-sfb-hermitian-dolbeault-orthogonal-decomposition",
+    "lem-sfb-projective-harmonic-representatives",
+    "lem-sfb-hodge-first-differential-zero",
+    "lem-sfb-kollar-smooth-divisor-injectivity",
+    "lem-sfb-kodaira-vanishing",
+    "lem-sfb-dominant-flag-line-kempf-vanishing",
+    "lem-sfb-induced-weyl-dimension-formula",
+    "lem-sfb-steinberg-induced-module-irreducible",
+    "lem-sfb-rho-section-self-duality",
+    "lem-sfb-steinberg-endomorphism-detection",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-symbol-borel-cutoff",
+  "worker": "stage1",
+  "summary": "Q36: retained the statement; read Demailly supplemental notes §3.7 online. Reused the existing Euclidean bump leaf, separated only the one-symbol dilated-cutoff seminorm estimate, and attached the generic locally finite smooth sum as a Mathlib leaf. Constructed radii controlling increasing derivative orders, proved smoothness locally by finite sums, and bounded every tail and low-frequency correction uniformly. No Lean files or builds.",
+  "blueprint": "Inherited direct-image construction route, det-thm-sf-ctf-stability-direct-images proof (3), through the recorded Hodge/parametrix prerequisites to §3.7. Steps 1–2 realize cutoff choice and diagonal scales; step 3 realizes the cutoff sum; steps 4–6 realize the p.8 asymptotic remainder calculation. blueprint_refs.py ancestor reports null for this existing created chain; inherited from.node and via are preserved, not invented."
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q36-2d5a7b767",
+  "group": "Q36",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q36-2d5a7b767 (reviewer sub-agent of L); spot-checked: I read the item, both new nodes, the cited nodes (lem-sfb-euclidean-smooth-bump, def-sfb-symbol-pseudodifferential-operators, def-weil-field) and the parent lem-sfb-pseudodifferential-asymptotic-sum. The item's statement is unchanged and this is a first split, not a re-split. Source: Demailly's notes, §3.7 pp.7–8, are not in the local literature, and the delivery records them as WANTED with proof_origin agent. I checked the cutoff argument independently instead. The source's sign error in the finite correction, noted in the report, is real: subtracting gives (theta-1). Step 4 writes it correctly. Mathlib leaf: Monoid.lean:451–454 is contMDiff_finprod with LocallyFinite mulSupport, which @[to_additive] turns into contMDiff_finsum; NormedSpace.lean:67–68 has contMDiff_iff_contDiff. It is a one-line specialization with no completeness hypothesis. lem-sfb-symbol-dilated-cutoff-estimates is true. In the Leibniz formula, positive-order derivatives of theta_R live on R<=|xi|<=2R, where R^{-|gamma|}<=3^{|gamma|}(1+|xi|)^{-|gamma|} because R>=1. On the support |xi|>=R and with t>=s the weight is at most (1+R)^{s-t}. C_n depends only on m, n and theta. I tested t=s, n=0, p or q zero and R=1. The node is statement-only, introduces every object and has no duplicate: rg -L over dag/nodes for cutoff, symbol, Leibniz and theta_R. Steps: 1. The bump gives theta, with the value on |xi|=2 by continuity. 2. The estimate is applied with t=s+1, n=j and R_j>=max(1,j); this gives P_{r-j+1,j}(c_j)<=2^{-j} and c_j in S^{r-j}. 3. The sum is locally finite because R_j>=j, and the smooth-sum leaf applies on R^{2m} with matrix values. 4. The low-frequency corrections -beta(xi/R_j)a_j are frequency-compact and so lie in every S^t; marking this elementary is justified. 5. The tail bound holds for j>=max(L+1,n), and the finitely many remaining terms lie in S^{r-L}. 6. Assembly, including b in S^r. Every hypothesis of each cited node is checked where it is used. No tool_uses, no SGA, no cycle and no changes."
+ }
+}

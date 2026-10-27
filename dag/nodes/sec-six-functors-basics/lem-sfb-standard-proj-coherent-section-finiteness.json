@@ -1,0 +1,325 @@
+{
+ "id": "lem-sfb-standard-proj-coherent-section-finiteness",
+ "kind": "statement",
+ "title": "Finite generation of coherent twisted section tails on standard Proj",
+ "statement": "Let $S=\\bigoplus_{d\\ge0}S_d$ be a nonnegatively graded commutative ring such that $S_0$ is Noetherian [def-weil-pbc-noetherian-ring] and $S$ is generated as an $S_0$-algebra by finitely many elements of $S_1$. Put $X=\\operatorname{Proj}(S)$ [def-pc-proj]. Then $X$ is a Noetherian scheme, meaning that it admits a finite affine open covering with Noetherian coordinate rings [pqf-def-locnoeth]. For every coherent $\\mathcal O_X$-module $\\mathcal F$ [pqf-def-coherent], put $\\mathcal F(n)=\\mathcal F\\otimes_{\\mathcal O_X}\\mathcal O_X(n)$, where $\\mathcal O_X(n)=\\widetilde{S(n)}$ [def-weil-pbc-proj-twisting-sheaf, def-pur-sheaf-tensor-product]. The nonnegative graded $S$-module $N_{\\ge0}=\\bigoplus_{n\\ge0}\\Gamma(X,\\mathcal F(n))$, with the action of $s\\in S_e$ given by multiplication by its canonical section of $\\mathcal O_X(e)$ through [lem-sfb-standard-proj-twist-tensor], is finitely generated as an $S$-module [def-weil-finitely-generated-module]. The assertion allows $X=\\varnothing$ and $\\mathcal F=0$.",
+ "source": {
+  "document": "literature/stacks-project/coherent.tex",
+  "place": "Tag 0AG6, lemma-coherent-on-proj, opening Noetherian assertion and part (4), specialized to k=0; the proof reduces to 01YS, lemma-coherent-projective."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-noetherian-ring",
+  "def-pc-proj",
+  "pqf-def-locnoeth",
+  "pqf-def-coherent",
+  "def-weil-pbc-proj-twisting-sheaf",
+  "def-pur-sheaf-tensor-product",
+  "def-weil-finitely-generated-module",
+  "lem-sfb-standard-proj-twist-tensor"
+ ],
+ "proof": [
+  {
+   "text": "Put $R=S_0$. Choose degree-one algebra generators $s_0,\\ldots,s_r$, padding with zeros so that $r\\ge1$. Sending $T_j$ to $s_j$ gives a surjective graded map $\\psi:C=R[T_0,\\ldots,T_r]\\twoheadrightarrow S$. The opens $D_+(s_j)$ cover $X$: a homogeneous prime containing all $s_j$ contains every positive-degree monomial, hence $S_+$, so is not a point of Proj. The empty Proj has the empty affine cover and its section module is zero; the subsequent argument also permits this case. Apply the surjective-map clause of [prop-nagata-relative-proj-functoriality] over $\\operatorname{Spec}R$ to obtain the closed immersion $i:X\\hookrightarrow P=\\mathbf P^r_R$.",
+   "uses": [
+    "def-pc-proj",
+    "prop-nagata-relative-proj-functoriality"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/coherent.tex",
+    "place": "Tag 0AG6, lemma-coherent-on-proj, reduction to projective space; Tag 01YS, lemma-coherent-projective, proof of (5)"
+   }
+  },
+  {
+   "text": "By [lem-weil-pbc-proj-polynomial-twist-chart], the finitely many standard charts of $P$ have rings $R[T_l/T_j:l\\ne j]$. By [lem-sfb-graded-proj-quotient-twist-comparison], their inverse images are the standard affine charts $D_+(s_j)$, and the maps to their coordinate rings are surjective. The chart rings of $P$ and $X$ are therefore finite type $R$-algebras, so are Noetherian by [lem-weil-pbc-finite-type-algebra-noetherian]. This proves the asserted finite Noetherian affine cover of $X$ and also that $P$ is Noetherian.",
+   "uses": [
+    "lem-weil-pbc-proj-polynomial-twist-chart",
+    "lem-sfb-graded-proj-quotient-twist-comparison",
+    "lem-weil-pbc-finite-type-algebra-noetherian"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/coherent.tex",
+    "place": "Tag 0AG6, lemma-coherent-on-proj, reduction to projective space; Tag 01YS, lemma-coherent-projective, proof of (5)"
+   }
+  },
+  {
+   "text": "Put $G=i_*\\mathcal F$. The closed-immersion theorem [lem-pc-closed-immersion-coherent-cohomology] makes $G$ coherent and gives the natural projection isomorphisms $G\\otimes\\mathcal O_P(d)\\cong i_*(\\mathcal F\\otimes i^*\\mathcal O_P(d))$. The twists here agree with the shifted-module twists: on $D_+(T_j)$, the basis $T_j^d$ of $(C_{T_j})_d$ satisfies $T_j^d=(T_j/T_l)^dT_l^d$, precisely the transition rule of [def-pc-projective-space-twist]. The comparison [lem-sfb-graded-proj-quotient-twist-comparison] identifies the pullback with $\\mathcal O_X(d)$. Taking sections therefore gives isomorphisms $H^0(P,G(d))\\cong H^0(X,\\mathcal F(d))$. They commute with multiplication by every $c\\in C_e$: the projection map takes a local tensor $g\\otimes t$ to $g\\otimes i^*t$, and the comparison takes $i^*c$ to $\\psi(c)$ and respects tensor multiplication. Thus $M=\\bigoplus_{d\\ge0}H^0(P,G(d))$ is identified with $N_{\\ge0}=\\bigoplus_{d\\ge0}\\Gamma(X,\\mathcal F(d))$ restricted from $S$ to $C$ via $\\psi$.",
+   "uses": [
+    "lem-pc-closed-immersion-coherent-cohomology",
+    "def-pc-projective-space-twist",
+    "lem-sfb-graded-proj-quotient-twist-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/coherent.tex",
+    "place": "Tag 0AG6, lemma-coherent-on-proj, reduction to projective space; Tag 01YS, lemma-coherent-projective, proof of (5)"
+   }
+  },
+  {
+   "text": "By [lem-pc-projective-space-twist-quotient] choose $m_j\\ge0$ and a short exact sequence $0\\to K\\to E=\\bigoplus_j\\mathcal O_P(-m_j)\\to G\\to0$ with $K$ coherent. Tensor with $\\mathcal O_P(d)$; exactness follows from [lem-sc-ext-tensor-exact], because this twist is locally free of rank one by [def-pc-projective-space-twist]. By [lem-pc-twist-tensor] the middle term becomes $E(d)=\\bigoplus_j\\mathcal O_P(d-m_j)$. The long exact sequence of [pqf-def-cohomology] contains $H^0(P,E(d))\\to H^0(P,G(d))\\to H^1(P,K(d))$. By [lem-pc-projective-space-serre-vanishing] choose $b\\ge0$ such that the final term is zero for every $d\\ge b$. Consequently the first map is surjective in each such degree. These maps respect multiplication by homogeneous polynomials, since they are induced by the fixed module morphism $E\\to G$ tensored with the twists and the canonical multiplication isomorphisms.",
+   "uses": [
+    "lem-pc-projective-space-twist-quotient",
+    "lem-sc-ext-tensor-exact",
+    "def-pc-projective-space-twist",
+    "lem-pc-twist-tensor",
+    "pqf-def-cohomology",
+    "lem-pc-projective-space-serre-vanishing"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/coherent.tex",
+    "place": "Tag 0AG6, lemma-coherent-on-proj, reduction to projective space; Tag 01YS, lemma-coherent-projective, proof of (5)"
+   }
+  },
+  {
+   "text": "Since $r\\ge1$, the monomial calculation [lem-pc-projective-space-twist-cohomology] identifies $H^0(P,\\mathcal O_P(d-m_j))$ with $C_{d-m_j}$, with negative polynomial degrees zero. This identification respects multiplication: on $D_+(T_l)$ a polynomial section $a$ has coefficient $a/T_l^{d-m_j}$ in the twist basis, and multiplying by $c\\in C_e$ multiplies that coefficient by $c/T_l^e$. Hence $Q=\\bigoplus_{d\\ge0}H^0(P,E(d))$ is the finite graded free module $\\bigoplus_j C(-m_j)$, generated by the unit in degree $m_j$. The ring $C$ is Noetherian by [lem-weil-pbc-finite-type-algebra-noetherian]. The tail $Q_{\\ge b}$ is a $C$-submodule (all polynomial degrees are nonnegative), and is finite by [lem-weil-pbc-noetherian-submodule-finite]. The degreewise surjections of the preceding step assemble to $Q_{\\ge b}\\twoheadrightarrow M_{\\ge b}$. Images of a finite generating set generate the image, so $M_{\\ge b}$ is finite.",
+   "uses": [
+    "lem-pc-projective-space-twist-cohomology",
+    "lem-weil-pbc-finite-type-algebra-noetherian",
+    "lem-weil-pbc-noetherian-submodule-finite"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/coherent.tex",
+    "place": "Tag 0AG6, lemma-coherent-on-proj, reduction to projective space; Tag 01YS, lemma-coherent-projective, proof of (5)"
+   }
+  },
+  {
+   "text": "For each $0\\le d<b$, the twist $G(d)$ is coherent: locally its invertible tensor factor is the structure sheaf, so it is locally isomorphic to $G$; use [def-pc-projective-space-twist] and the local definition [pqf-def-coherent]. By [lem-pc-projective-space-coherent-finiteness], $H^0(P,G(d))$ is a finite $R$-module. Choose finite $R$-generators in these finitely many degrees, viewed as homogeneous elements of $M$, and add a finite $C$-generating set of $M_{\\ge b}$. Every element of the direct sum has finitely many components: its components below $b$ are $R$-linear combinations of the chosen low generators, and its remaining part is in the high tail. This finite union therefore generates $M$ over $C$. For $b=0$ the low set is empty. Since the isomorphism of step 3 makes the $C$-action factor through $\\psi:C\\twoheadrightarrow S$, the same finite set generates $N_{\\ge0}$ over $S$: each expression $\\sum c_jv_j$ is $\\sum\\psi(c_j)v_j$. For $\\mathcal F=0$ or $X=\\varnothing$ the empty set suffices.",
+   "uses": [
+    "def-pc-projective-space-twist",
+    "pqf-def-coherent",
+    "lem-pc-projective-space-coherent-finiteness"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/coherent.tex",
+    "place": "Tag 0AG6, lemma-coherent-on-proj, reduction to projective space; Tag 01YS, lemma-coherent-projective, proof of (5)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-proj",
+  "def-pc-projective-space-twist",
+  "lem-pc-closed-immersion-coherent-cohomology",
+  "lem-pc-projective-space-coherent-finiteness",
+  "lem-pc-projective-space-serre-vanishing",
+  "lem-pc-projective-space-twist-cohomology",
+  "lem-pc-projective-space-twist-quotient",
+  "lem-pc-twist-tensor",
+  "lem-sc-ext-tensor-exact",
+  "lem-sfb-graded-proj-quotient-twist-comparison",
+  "lem-weil-pbc-finite-type-algebra-noetherian",
+  "lem-weil-pbc-noetherian-submodule-finite",
+  "lem-weil-pbc-proj-polynomial-twist-chart",
+  "pqf-def-coherent",
+  "pqf-def-cohomology",
+  "prop-nagata-relative-proj-functoriality"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/coherent.tex",
+  "place": "Tag 0AG6, lemma-coherent-on-proj, reduction to projective space; Tag 01YS, lemma-coherent-projective, proof of (5)"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "[Ss]erre|[Cc]oherent.*[Pp]roj|[Pp]roj.*[Cc]oherent|[Tt]wist",
+   "results": "{\"t\": \"2026-10-22T04:34:28Z\", \"tool\": \"grep\", \"query\": \"[Ss]erre|[Cc]oherent.*[Pp]roj|[Pp]roj.*[Cc]oherent|[Tt]wist\", \"sub\": \"AlgebraicGeometry/ProjectiveSpectrum\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: finite type of Proj and finite local generating sections do not imply the graded Serre section-module theorem; no result states finiteness of this direct sum of all nonnegative twists."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Serre finite generation of the truncated graded section module of a coherent sheaf on projective spectrum over a Noetherian ring",
+   "results": "{\"t\": \"2026-10-22T04:34:28Z\", \"tool\": \"leansearch\", \"query\": \"Serre finite generation of the truncated graded section module of a coherent sheaf on projective spectrum over a Noetherian ring\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SheafOfModules.GeneratingSections.IsFiniteType\", \"AlgebraicGeometry.ProjectiveSpectrum.Proj.structureSheaf\", \"AlgebraicGeometry.Proj.mul_apply\", \"AlgebraicGeometry.ProjectiveSpectrum.StructureSheaf.SectionSubring.add_mem'\", \"AlgebraicGeometry.ProjectiveSpectrum.StructureSheaf.structureSheafInType\", \"SheafOfModules.GeneratingSections.IsFiniteType.recOn\", \"AlgebraicGeometry.sectionInBasicOpen\", \"Module.IsNoetherian.finite\"], \"digest\": \"3e48b4471f2e8c81\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: finite type of Proj and finite local generating sections do not imply the graded Serre section-module theorem; no result states finiteness of this direct sum of all nonnegative twists."
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Proj, IsNoetherianRing",
+   "results": "{\"t\": \"2026-10-22T04:34:28Z\", \"tool\": \"loogle\", \"query\": \"AlgebraicGeometry.Proj, IsNoetherianRing\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: finite type of Proj and finite local generating sections do not imply the graded Serre section-module theorem; no result states finiteness of this direct sum of all nonnegative twists."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a coherent sheaf on Proj of a standard graded Noetherian algebra the nonnegative graded module of sections of its twists is finitely generated",
+   "results": "{\"t\": \"2026-10-22T04:34:39Z\", \"tool\": \"leanfinder\", \"query\": \"For a coherent sheaf on Proj of a standard graded Noetherian algebra the nonnegative graded module of sections of its twists is finitely generated\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Proj.instLocallyOfFiniteTypeToSpecZeroOfFiniteTypeSubtypeMemOfNatNat\", \"AlgebraicGeometry.ProjectiveSpectrum.Proj.structureSheaf\", \"AlgebraicGeometry.ProjectiveSpectrum.StructureSheaf.SectionSubring.mul_mem'\", \"SheafOfModules.GeneratingSections.IsFiniteType\", \"AlgebraicGeometry.ProjectiveSpectrum.StructureSheaf.structureSheafInType\", \"AlgebraicGeometry.ProjectiveSpectrum.StructureSheaf.sectionsSubring\", \"HomogeneousLocalization.Away.finiteType\", \"AlgebraicGeometry.ProjectiveSpectrum.StructureSheaf.isLocallyFraction\"], \"digest\": \"ff29c63605ea25f6\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: finite type of Proj and finite local generating sections do not imply the graded Serre section-module theorem; no result states finiteness of this direct sum of all nonnegative twists."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Twisted global sections in degrees at least k of a coherent sheaf on a Noetherian projective scheme form a finite graded module",
+   "results": "{\"t\": \"2026-10-22T04:35:29Z\", \"tool\": \"leanfinder\", \"query\": \"Twisted global sections in degrees at least k of a coherent sheaf on a Noetherian projective scheme form a finite graded module\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Proj.instLocallyOfFiniteTypeToSpecZeroOfFiniteTypeSubtypeMemOfNatNat\", \"SheafOfModules.GeneratingSections.IsFiniteType.finite\", \"SheafOfModules.GeneratingSections.IsFiniteType\", \"SheafOfModules.LocalGeneratorsData.IsFiniteType.isFiniteType\", \"SheafOfModules.LocalGeneratorsData.IsFiniteType\", \"SheafOfModules.IsFiniteType\", \"AlgebraicGeometry.ProjectiveSpectrum.Proj.structureSheaf\", \"SheafOfModules.isFinitePresentation\"], \"digest\": \"d2aa42d5d2f29324\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: finite type of Proj and finite local generating sections do not imply the graded Serre section-module theorem; no result states finiteness of this direct sum of all nonnegative twists."
+  },
+  {
+   "tool": "grep",
+   "query": "coherent.*Proj|Proj.*coherent|section.*twist|twist.*section",
+   "results": "{\"t\": \"2026-10-22T04:53:32Z\", \"tool\": \"grep\", \"query\": \"coherent.*Proj|Proj.*coherent|section.*twist|twist.*section\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: returned sheaf generating-section predicates, finite sums, and local finite type of Proj do not assert finite generation of the infinite graded section module; instDirectSum assumes a finite indexing type."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Serre finite generation theorem for the direct sum of nonnegative twisted global sections of a coherent sheaf on projective spectrum",
+   "results": "{\"t\": \"2026-10-22T04:53:32Z\", \"tool\": \"leansearch\", \"query\": \"Serre finite generation theorem for the direct sum of nonnegative twisted global sections of a coherent sheaf on projective spectrum\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Module.Finite.instDirectSum\", \"SheafOfModules.GeneratingSections.IsFiniteType\", \"FGModuleCat.instFiniteCarrierSigmaObjModuleCatOfFinite\", \"SheafOfModules.GeneratingSections.IsFiniteType.finite\", \"SheafOfModules.GeneratingSections.mk\", \"AlgebraicGeometry.ProjectiveSpectrum.StructureSheaf.structureSheafInType\", \"AlgebraicGeometry.Proj.add_apply\", \"SheafOfModules.Presentation.IsFinite.isFiniteType_generators\"], \"digest\": \"930024fbcf917021\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: returned sheaf generating-section predicates, finite sums, and local finite type of Proj do not assert finite generation of the infinite graded section module; instDirectSum assumes a finite indexing type."
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Proj, Module.Finite",
+   "results": "{\"t\": \"2026-10-22T04:53:32Z\", \"tool\": \"loogle\", \"query\": \"AlgebraicGeometry.Proj, Module.Finite\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: returned sheaf generating-section predicates, finite sums, and local finite type of Proj do not assert finite generation of the infinite graded section module; instDirectSum assumes a finite indexing type."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a coherent sheaf on Proj of a standard graded Noetherian algebra the nonnegative graded module of sections of all twists is finitely generated",
+   "results": "{\"t\": \"2026-10-22T04:53:33Z\", \"tool\": \"leanfinder\", \"query\": \"For a coherent sheaf on Proj of a standard graded Noetherian algebra the nonnegative graded module of sections of all twists is finitely generated\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Proj.instLocallyOfFiniteTypeToSpecZeroOfFiniteTypeSubtypeMemOfNatNat\", \"AlgebraicGeometry.ProjectiveSpectrum.Proj.structureSheaf\", \"AlgebraicGeometry.ProjectiveSpectrum.StructureSheaf.SectionSubring.mul_mem'\", \"AlgebraicGeometry.ProjectiveSpectrum.StructureSheaf.sectionsSubring\", \"SheafOfModules.GeneratingSections.IsFiniteType\", \"AlgebraicGeometry.ProjectiveSpectrum.StructureSheaf.structureSheafInType\", \"AlgebraicGeometry.ProjectiveSpectrum.StructureSheaf.isLocallyFraction\", \"SheafOfModules.GeneratingSections.IsFiniteType.finite\"], \"digest\": \"bf7d5aec5e9dca75\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: returned sheaf generating-section predicates, finite sums, and local finite type of Proj do not assert finite generation of the infinite graded section module; instDirectSum assumes a finite indexing type."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The direct sum of global sections in degrees at least zero of a coherent sheaf twisted by an ample line bundle on Proj is a finite graded module",
+   "results": "{\"t\": \"2026-10-22T04:54:01Z\", \"tool\": \"leanfinder\", \"query\": \"The direct sum of global sections in degrees at least zero of a coherent sheaf twisted by an ample line bundle on Proj is a finite graded module\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Proj.instLocallyOfFiniteTypeToSpecZeroOfFiniteTypeSubtypeMemOfNatNat\", \"AlgebraicGeometry.ProjectiveSpectrum.Proj.structureSheaf\", \"SheafOfModules.GeneratingSections.IsFiniteType.finite\", \"AlgebraicGeometry.ProjectiveSpectrum.StructureSheaf.sectionsSubring\", \"SheafOfModules.GeneratingSections.IsFiniteType\", \"AlgebraicGeometry.ProjectiveSpectrum.StructureSheaf.SectionSubring.add_mem'\", \"AlgebraicGeometry.ProjectiveSpectrum.StructureSheaf.structureSheafInType\", \"AlgebraicGeometry.ProjectiveSpectrum.StructureSheaf.commRingStructureSheafInTypeObj\"], \"digest\": \"56e614c74e52fdc7\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: returned sheaf generating-section predicates, finite sums, and local finite type of Proj do not assert finite generation of the infinite graded section module; instDirectSum assumes a finite indexing type."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-finite-graded-module-section-tail",
+  "date": "2026-10-22",
+  "group": "Q10"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong §3.8, last paragraph, printed pp.608--609: finite unramified Isom for unordered stable marked curves, and extension over a normal base. This is rigidity of stable pointed curves themselves, independent of any modification map.; rigidity input: Isomorphism graphs of projective flat curves; numerical boundedness in Stacks 0DSQ: the graph polynomial P'=Q+P-P(0) is the Hilbert-scheme index, which requires the homogeneous-coordinate-ring polynomial to equal the Euler polynomial; comparison prerequisite: canonical sections of shifted finite graded modules recover all sufficiently large homogeneous pieces (Stacks 0AG7). Prerequisite for the comparison: Stacks 0AG7 proof uses finite generation of the nonnegative section module, from 0AG6(4).",
+   "via": [
+    "lem-sfb-finite-graded-module-section-tail",
+    "lem-sfb-projective-coordinate-ring-euler-polynomial",
+    "lem-sfb-projective-curve-isom-graphs",
+    "lem-sfb-stable-pointed-isom-finite",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sfb-standard-proj-coherent-section-finiteness",
+  "worker": "stage1",
+  "summary": "Followed 0AG6 via a graded polynomial quotient and 01YS(5). Proved Noetherianity on the finite quotient charts, preserved the canonical homogeneous action through twist pullback and projection isomorphisms, then proved tail finiteness from a twist quotient, Serre vanishing, the polynomial H0 calculation, and Noetherian submodule finiteness. Added the finite low-degree generators explicitly. One new unsplit canonical twist-comparison lemma; no statement change.",
+  "blueprint": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong §3.8, last paragraph, printed pp.608--609: finite unramified Isom for unordered stable marked curves, and extension over a normal base. This is rigidity of stable pointed curves themselves, independent of any modification map.; rigidity input: Isomorphism graphs of projective flat curves; numerical boundedness in Stacks 0DSQ: the graph polynomial P'=Q+P-P(0) is the Hilbert-scheme index, which requires the homogeneous-coordinate-ring polynomial to equal the Euler polynomial; comparison prerequisite: canonical sections of shifted finite graded modules recover all sufficiently large homogeneous pieces (Stacks 0AG7). Prerequisite for the comparison: Stacks 0AG7 proof uses finite generation of the nonnegative section module, from 0AG6(4).",
+  "tool_uses": [
+   {
+    "node": "lem-pc-closed-immersion-coherent-cohomology",
+    "why": "Generic algebraic-geometric input in the 0AG6/01YS reduction and finite-generation proof; this unit has no result supplying this statement."
+   },
+   {
+    "node": "lem-pc-projective-space-coherent-finiteness",
+    "why": "Generic algebraic-geometric input in the 0AG6/01YS reduction and finite-generation proof; this unit has no result supplying this statement."
+   },
+   {
+    "node": "lem-pc-projective-space-serre-vanishing",
+    "why": "Generic algebraic-geometric input in the 0AG6/01YS reduction and finite-generation proof; this unit has no result supplying this statement."
+   },
+   {
+    "node": "lem-pc-projective-space-twist-cohomology",
+    "why": "Generic algebraic-geometric input in the 0AG6/01YS reduction and finite-generation proof; this unit has no result supplying this statement."
+   },
+   {
+    "node": "lem-pc-projective-space-twist-quotient",
+    "why": "Generic algebraic-geometric input in the 0AG6/01YS reduction and finite-generation proof; this unit has no result supplying this statement."
+   },
+   {
+    "node": "lem-pc-twist-tensor",
+    "why": "Generic algebraic-geometric input in the 0AG6/01YS reduction and finite-generation proof; this unit has no result supplying this statement."
+   },
+   {
+    "node": "lem-sc-ext-tensor-exact",
+    "why": "Generic algebraic-geometric input in the 0AG6/01YS reduction and finite-generation proof; this unit has no result supplying this statement."
+   },
+   {
+    "node": "lem-weil-pbc-proj-polynomial-twist-chart",
+    "why": "Generic algebraic-geometric input in the 0AG6/01YS reduction and finite-generation proof; this unit has no result supplying this statement."
+   },
+   {
+    "node": "prop-nagata-relative-proj-functoriality",
+    "why": "Generic algebraic-geometric input in the 0AG6/01YS reduction and finite-generation proof; this unit has no result supplying this statement."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pc-closed-immersion-coherent-cohomology",
+  "lem-pc-projective-space-coherent-finiteness",
+  "lem-pc-projective-space-serre-vanishing",
+  "lem-pc-projective-space-twist-cohomology",
+  "lem-pc-projective-space-twist-quotient",
+  "lem-pc-twist-tensor",
+  "lem-sc-ext-tensor-exact",
+  "lem-weil-pbc-proj-polynomial-twist-chart",
+  "prop-nagata-relative-proj-functoriality"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q09-b4071261b",
+  "group": "Q09",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q09-b4071261b (reviewer sub-agent of L); spot-checked: I read the item and the new node in full, with Stacks coherent.tex 0AG6 (lemma-coherent-on-proj), 01YS (lemma-coherent-projective, proof of (4)/(5)) and constructions.tex 01N1 / lemma-morphism-proj open. The statement is unchanged from base and is 0AG6 opening assertion + (4) at k=0. The six steps follow 0AG6's reduction and 01YS(5). (1) A polynomial surjection, padded to r>=1 to avoid the P^0 negative-degree trap, and the closed immersion from prop-nagata-relative-proj-functoriality clause 3. (2) Noetherian charts via the new node's surjective chart maps plus finite-type Noetherianity. (3) i_*F with the projection isomorphism from lem-pc-closed-immersion-coherent-cohomology, the comparison of the glued twist with \\widetilde{C(d)} through the bases T_j^d, theta_d, and the check of C-linearity. (4) The twist quotient, tensor exactness, the long exact sequence and Serre vanishing for the coherent kernel. (5) H^0(O(d-m_j)) = C_{d-m_j} for r>=1, so Q is finite free and Q_{>=b} is finite over Noetherian C. (6) Coherent low twists have finite H^0 over R, which gives finite generation over C and then over S through psi; b=0, F=0 and X empty are covered. The new node lem-sfb-graded-proj-quotient-twist-comparison is a faithful specialization of 01N1 plus lemma-morphism-proj. I tested it on id, T_1->0, nilpotent psi(f) (empty chart), the zero ring and n<0. It is statement-only, well-formed and searched in Mathlib. It is not a clause of the parent and not a duplicate: lem-trf-proj-canonical-map-twist-comparison (01NK) gives only r^*O(dk) for some d, and prop-nagata gives only the closed immersion; the per/nagata/sc-p1 nodes are other statements. proof_deps equals the union of the uses. There is no cycle, nothing in the 601-node closure is on the 2026-10-19 drop list, the item is still unsplit live, and there is no SGA citation. I accept the nine declared tool uses as generic Stacks AG tools. No fixes."
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.StandardProjCoherentSectionFiniteness",
+  "declaration": "AlgebraicGeometry.Proj.standardProjCoherentSectionFiniteness",
+  "file": "lean/Sheaf/AlgebraicGeometry/StandardProjCoherentSectionFiniteness.lean",
+  "statement": "theorem standardProjCoherentSectionFiniteness {S : Type u} [CommRing S] (𝒜 : ℕ → AddSubgroup S) [GradedRing 𝒜] [IsNoetherianRing (𝒜 0)] (hgen : ∃ (r : ℕ) (f : Fin r → S), (∀ i : Fin r, f i ∈ 𝒜 1) ∧ Algebra.adjoin (𝒜 0) (Set.range f) = ⊤) : IsNoetherian (Proj 𝒜) ∧ ∀ (F : (Proj 𝒜).Modules), Scheme.Modules.IsQuasiCoherentFiniteType F → ∃ m : Module S (⨁ n : ℕ, Γ(F ⊗ twist 𝒜 (n : ℤ), ⊤)), (∀ (e n : ℕ) (s : S) (hs : s ∈ 𝒜 e) (t : Γ(F ⊗ twist 𝒜 (n : ℤ), ⊤)), @SMul.smul S (⨁ k : ℕ, Γ(F ⊗ twist 𝒜 (k : ℤ), ⊤)) m.toSMul s (DirectSum.of (fun k : ℕ ↦ Γ(F ⊗ twist 𝒜 (k : ℤ), ⊤)) n t) = DirectSum.of (fun k : ℕ ↦ Γ(F ⊗ twist 𝒜 (k : ℤ), ⊤)) (n + e) (Hom.app ((F ◁ twistMul (n : ℤ) hs) ≫ eqToHom (congrArg (fun z : ℤ ↦ F ⊗ twist 𝒜 z) (Int.natCast_add n e).symm)) ⊤ t)) ∧ @Module.Finite S (⨁ n : ℕ, Γ(F ⊗ twist 𝒜 (n : ℤ), ⊤)) _ _ m",
+  "branch": "sheaf-dag",
+  "by": "Q07",
+  "date": "2026-10-22",
+  "existing": false,
+  "note": "The direct sum is the existing Mathlib direct sum of the actual tensor-twisted global-section groups. The existential Module structure is uniquely specified on every homogeneous scalar and every component by the existing twistMul; no arbitrary action is assumed. Finite generation is asserted for exactly this structure. Coherence uses the unchanged recorded IsQuasiCoherentFiniteType predicate: on the Noetherian Proj of this assertion it is equivalent to coherence by Stacks 01XZ."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-cd56765e3",
+  "group": "Q07",
+  "result": "pass",
+  "note": "Re-delivery after H13 RETURN of 0ac1ae533c85, taking the stated alternative. The pqf-def-coherent record and all 8 stmt_dep records are byte-identical to live; the item node differs from live only by the added lean record. The item now quantifies over the recorded Scheme.Modules.IsQuasiCoherentFiniteType, equivalent to coherence (clause 3) on the Noetherian Proj asserted by the first conclusion (Stacks 01XZ); this is noted in the record and docstrings and adds no hypothesis. The module diff against the returned head is that predicate, its import and the 01XZ docstring text only. All other clauses were rechecked against Stacks 0AG6 (opening + (4), k=0) and the node: GradedRing, IsNoetherianRing (𝒜 0), finite degree-one adjoin generators; IsNoetherian (Proj 𝒜); F ⊗ twist n; full ⨁ n:ℕ Γ; existential Module S uniquely pinned on homogeneous scalars by F ◁ twistMul (s/1); Module.Finite for that m. Edge cases empty Proj, F=0, r=0, n=0, e=0 and a single universe u are covered. No new definitions, sorry only, docstrings with source, blueprint id and 6 proof steps, statement verbatim, all 11 proof-dep imports exist, report sections present. The stage-1 re-split note is a separate track. No compile, since no file was changed."
+ }
+}

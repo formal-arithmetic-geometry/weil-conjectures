@@ -1,0 +1,115 @@
+{
+ "kind": "statement",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-orientation/sk-prop-sp-orientation-charts.proof.md",
+  "place": "Step 3, second paragraph"
+ },
+ "status": "split",
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "The normalized deformation isomorphism of smooth section invariants commutes with etale coordinate charts and the actual conormal differential",
+   "results": "8 hits: ContMDiffSection.ext, MDifferentiableWithinAt.change_section_trivialization, Scheme.Hom.instIsIsoToNormalizationOfIsIntegralHom, MDifferentiable.coordChangeL, ContMDiffSection.mk.injEq, Trivialization.contMDiffOn_section_iff, ContMDiffWithinAt.change_section_trivialization, Trivialization.contMDiffOn_section_baseSet_iff; none states the derived-category comparison.",
+   "date": "2026-10-25",
+   "verdict": "No exact match."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Naturality of normalized deformation to the normal cone for etale maps of smooth sections, and inverse vector bundle integration transpose under pullback",
+   "results": "8 hits, chiefly smoothSheaf evaluation identities and Scheme.Hom.normalizationDiagramMap; no exact match.",
+   "date": "2026-10-25",
+   "verdict": "No exact match."
+  },
+  {
+   "tool": "grep",
+   "query": "deformation.*normal.*etale|integration.*adjoint.*base",
+   "results": "[grep] OK 0 hit(s)",
+   "date": "2026-10-25",
+   "verdict": "No Mathlib match. Local ChartDncSquare and ChartNormalIntegrationSquare require affine U; the present steps allow non-affine U."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.ChartDncVectorFactors",
+  "date": "2026-10-25",
+  "group": "G4"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sp-orientation",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-sp-orientation-charts",
+   "via": [
+    "lem-pur-chart-dnc-vector-factors"
+   ],
+   "place": "Step 3, second paragraph"
+  },
+  "same_as": []
+ },
+ "id": "lem-pur-chart-dnc-naturality",
+ "title": "Normalized deformation naturality for a possibly non-affine chart",
+ "statement": "Fix the finite purity setting P [def-pur-conventions], an affine finite-type k-scheme Y, a separated finite-type smooth h:U→Y of pure dimension d≥0, and an etale Y-map e:U→A^d_Y. U may be non-affine or empty. Use the canonical source and actual Rees differential-normal map of [def-pur-chart-affine-comparison-data], and the site comparisons of [def-pur-section-pullback-site-comparisons]. For every normalized compact-support presentation N, the following derived-category equation holds, with its full formal signature:\n\ntheorem chart_dnc_naturality (P : PurityFiniteSetting.{u}) {U Y : Scheme.{u}} [IsAffine Y]\n    (d : ℕ) (h : U ⟶ Y) [IsSeparated h] [LocallyOfFiniteType h] [QuasiCompact h]\n    [SmoothOfRelativeDimension d h]\n    (aY : Y ⟶ Spec (.of P.field.k)) [LocallyOfFiniteType aY] [QuasiCompact aY]\n    (e : U ⟶ AffineSpace (ULift.{u} (Fin d)) Y) [Etale e]\n    (w : e ≫ (AffineSpace (ULift.{u} (Fin d)) Y ↘ Y) = h)\n    (N : Etale.EtaleCompactSupportNormalization P.Coefficient) :\n  let p := AffineSpace (ULift.{u} (Fin d)) Y ↘ Y\n  letI : SmoothOfRelativeDimension d p := by\n    simpa using AffineSpace.smoothOfRelativeDimension_over (ULift.{u} (Fin d)) Y\n  letI := P.noetherian (h ≫ aY)\n  ((Dnc.existsUnique_dncInvariance P d (pullback.fst h h) (h ≫ aY)\n      (pullback.diagonal h) (pullback.diagonal_fst h)).exists.choose).hom ≫\n      (normal P d h aY e w).hom =\n      (source P d h aY e w N).hom ≫\n        (ProEtale.upperStar (ModuleCat.{u + 1} P.Coefficient) e).leftDerivedFunctor.map\n          ((Dnc.existsUnique_dncInvariance P d (pullback.fst p p) (p ≫ aY)\n            (pullback.diagonal p) (pullback.diagonal_fst p)).exists.choose).hom",
+ "stmt_deps": [
+  "def-pur-conventions",
+  "def-pur-chart-affine-comparison-data",
+  "def-pur-section-pullback-site-comparisons",
+  "thm-pur-dnc-invariance"
+ ],
+ "proof": [
+  {
+   "text": "factor the chart through H = W_A times_A U. Restrict the full source pair\nand H to the common etale neighbourhood O of their sections. Counit-normalized\nsection restriction gives R_i and R_r, and smooth base change gives B. The source\ncomparison is B R_r R_i inverse. Apply section-restriction coherence on O at the\none and zero endpoints: R_ni delta_O = delta_U R_i and\nR_nr delta_O = delta_H R_r. Normalized base-change coherence gives\nB_N delta_H = e*delta_A B. The coefficientwise Rees composition formula identifies\nB_N R_nr R_ni inverse with the stated normal comparison, since its zero endpoint\nsends [a] to [e*a]. Substitute these three equations and cancel R_i and R_ni.\nTransport by the canonical site comparisons, using their naturality. The formulas\nfix t and x_i/t, so normalized uniqueness introduces no unit or sign. The argument\nalso applies in rank zero and to the empty source.",
+   "uses": [
+    "lem-pur-section-etale-restriction-coherence",
+    "lem-pur-finite-etale-dualizing-normalization",
+    "thm-pur-dnc-invariance",
+    "lem-pur-dnc-section-geometry",
+    "lem-pur-chart-normal-differential"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-pur-section-etale-restriction-coherence",
+  "lem-pur-finite-etale-dualizing-normalization",
+  "thm-pur-dnc-invariance",
+  "lem-pur-dnc-section-geometry",
+  "lem-pur-chart-normal-differential"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-orientation/sk-prop-sp-orientation-charts.proof.md",
+  "place": "Step 3, second paragraph"
+ },
+ "lean": {
+  "module": "Sheaf.Paper.ChartDncNaturality",
+  "file": "lean/Sheaf/Paper/ChartDncNaturality.lean",
+  "declaration": "WeilConjectures.PurityFiniteSetting.ChartFactors.chart_dnc_naturality",
+  "statement": "theorem chart_dnc_naturality (P : PurityFiniteSetting.{u}) {U Y : Scheme.{u}} [IsAffine Y] (d : ℕ) (h : U ⟶ Y) [IsSeparated h] [LocallyOfFiniteType h] [QuasiCompact h] [SmoothOfRelativeDimension d h] (aY : Y ⟶ Spec (.of P.field.k)) [LocallyOfFiniteType aY] [QuasiCompact aY] (e : U ⟶ AffineSpace (ULift.{u} (Fin d)) Y) [Etale e] (w : e ≫ (AffineSpace (ULift.{u} (Fin d)) Y ↘ Y) = h) (N : Etale.EtaleCompactSupportNormalization P.Coefficient) : let p := AffineSpace (ULift.{u} (Fin d)) Y ↘ Y letI : SmoothOfRelativeDimension d p := by simpa using AffineSpace.smoothOfRelativeDimension_over (ULift.{u} (Fin d)) Y letI := P.noetherian (h ≫ aY) ((Dnc.existsUnique_dncInvariance P d (pullback.fst h h) (h ≫ aY) (pullback.diagonal h) (pullback.diagonal_fst h)).exists.choose).hom ≫ (normal P d h aY e w).hom = (source P d h aY e w N).hom ≫ (ProEtale.upperStar (ModuleCat.{u + 1} P.Coefficient) e).leftDerivedFunctor.map ((Dnc.existsUnique_dncInvariance P d (pullback.fst p p) (p ≫ aY) (pullback.diagonal p) (pullback.diagonal_fst p)).exists.choose).hom",
+  "branch": "sheaf-dag",
+  "by": "G4",
+  "date": "2026-10-25",
+  "existing": false
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-e1755",
+  "group": "G4",
+  "result": "pass",
+  "landing": "20261025T122958-L-1821326",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-e1755",
+  "group": "G4",
+  "result": "pass",
+  "landing": "20261025T122958-L-1821326",
+  "kind": "interface",
+  "note": "independent cc review: old ChartDncVectorFactors.lean (clone) vs delivered ChartDncVectorFactorData+item (verbatim extraction, public reexport); new sorry lemmas vs Conclusion clauses 1/2; node lean.statements vs Lean signatures; importers ChartDiagonalSourceMate and GeneralChartComparisons compiled against delivered modules (exit 0)"
+ }
+}

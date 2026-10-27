@@ -128,7 +128,32 @@
   "item": "lem-weil-pbc-integral-closure-finite-fibre-quasi-finite",
   "date": "2026-10-10"
  },
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": [
+    "Algebra.IsQuasiFiniteAtPrime"
+   ]
+  },
+  "slopmaster2": {
+   "state": "closed",
+   "decls": [
+    {
+     "name": "Algebra.IsQuasiFiniteAtPrime",
+     "module": "WeilConjectures.RingTheory.QuasiFiniteAtPrime",
+     "lines": [
+      25,
+      37
+     ],
+     "kind": "def",
+     "sorry": false
+    }
+   ],
+   "missing": [],
+   "open": []
+  }
+ },
  "chapter": "sec-proper-base-change",
  "unit": "sk-thm-p1",
  "pointers": [
@@ -177,5 +202,22 @@
   "group": "J1",
   "result": "pass",
   "note": "R,S CommRing + Algebra R S = phi; [FiniteType] = finite-type setting; q : PrimeSpectrum S, p = comap; preimageHomeomorphFiber inverse is comap includeRight = j^-1, so e<q,rfl> is q-bar; IsOpen singleton in Spec(kappa(p) (x) S) = isolated point (factor order swapped, canonical iso); not Mathlib's localization-based Algebra.QuasiFiniteAt, existing:false correct"
+ },
+ "blueprint_update": {
+  "snapshot": "main-20261023-1620",
+  "commit": "7284bb09daf97437d544c51882b325f9c52cd345",
+  "changed": [
+   "statement",
+   "proof"
+  ],
+  "statement": "Let $\\varphi:R\\to S$ be a ring map of finite type, i.e. $S$ is finitely generated as an $R$-algebra. Let $\\mathfrak q\\subset S$ be a prime ideal and $\\mathfrak p=\\varphi^{-1}(\\mathfrak q)$, with residue field $\\kappa(\\mathfrak p)=R_{\\mathfrak p}/\\mathfrak pR_{\\mathfrak p}$, and let $F=S\\otimes_R\\kappa(\\mathfrak p)$ be the fibre ring of $S$ over $\\mathfrak p$, with $j:S\\to F$, $s\\mapsto s\\otimes1$. Let $\\overline{\\mathfrak q}\\subset F$ be the prime ideal of $F$ corresponding to $\\mathfrak q$, i.e. the unique prime ideal of $F$ with $j^{-1}(\\overline{\\mathfrak q})=\\mathfrak q$ ($\\operatorname{Spec}F$ is homeomorphic, via $j$, to the set of primes of $S$ lying over $\\mathfrak p$). We say that $R\\to S$ is *quasi-finite at $\\mathfrak q$* if $\\overline{\\mathfrak q}$ is an isolated point of $\\operatorname{Spec}(F)$, that is, the singleton $\\{\\overline{\\mathfrak q}\\}$ is open in the Zariski topology of $\\operatorname{Spec}(S\\otimes_R\\kappa(\\mathfrak p))$.",
+  "proof": [
+   {
+    "text": "*The definition is well formed.* $\\mathfrak p=\\varphi^{-1}(\\mathfrak q)$ is a prime ideal of $R$ (the preimage of a prime ideal under a ring map), so $R_{\\mathfrak p}$, the field $\\kappa(\\mathfrak p)$ and the fibre ring $F=S\\otimes_R\\kappa(\\mathfrak p)$ with $j$ are defined. The map $\\mathfrak Q\\mapsto j^{-1}(\\mathfrak Q)$ is a homeomorphism from $\\operatorname{Spec}F$ onto the subspace of primes of $S$ lying over $\\mathfrak p$; since $\\varphi^{-1}(\\mathfrak q)=\\mathfrak p$, there is exactly one prime $\\overline{\\mathfrak q}$ of $F$ with $j^{-1}(\\overline{\\mathfrak q})=\\mathfrak q$, and no choice is made. So 'quasi-finite at $\\mathfrak q$' is a property of the pair $(\\varphi,\\mathfrak q)$.",
+    "uses": [],
+    "elementary": null
+   }
+  ],
+  "note": "the current blueprint (main-20261023-1620, weil-conjectures-blueprint 7284bb09da) states or proves this differently; the node is proved in Lean: recorded 2026-10-23, not reopened"
  }
 }

@@ -14,58 +14,55 @@
  ],
  "proof": [
   {
-   "text": "For a simplicial abelian group $Z$, let $C(Z)_n=Z_n$ with alternating-face differential, and let $FZ$ have $(FZ)_n=\\mathbb Z[Z_n]$, with each simplicial operator sending $[z]$ to the basis vector indexed by the corresponding operator on $z$. The evaluation maps $\\epsilon_Z:FZ\\to Z$, $[z]\\mapsto z$, commute with every simplicial operator; since $f$ is additive, $f\\epsilon_X=\\epsilon_Y Ff$. Use the cited normalization convention $N(Z)_0=Z_0$, $N(Z)_n=\\bigcap_{i=1}^n\\ker d_i$ for $n>0$, with differential $d_0$ in positive degrees. For each $Z=X,Y,FX,FY$, the cited natural chain homotopy equivalence $N(Z)\\to C(Z)$ induces a natural homology isomorphism: if two chain maps differ by $dh+hd$, their values on a cycle differ by the boundary $dh(z)$, so homotopy inverse maps induce inverse homology maps. Thus all comparison squares for $f,Ff,\\epsilon_X,\\epsilon_Y$ commute on homology. In this convention an $n$-cycle for $n>0$ has all its faces zero, while every element in degree zero is a cycle. No homology isomorphism between $FZ$ and $Z$ is asserted.",
+   "text": "Apply the free normalized-homology lemma to $u=Uf$ and the supplied $v=g$. Its cylinder and finite-chain hypotheses are precisely those in the statement; neither map needs to preserve addition. It follows that $H_n(N(F(Uf)))$ is bijective for every $n\\geq0$, with inverse $H_n(N(F(g)))$. The map $F(g)$ is additive on free generators even when $g$ is not additive. Here $F(S)_m=\\mathbb Z[S_m]$, and $N(Z)_m=\\bigcap_{i=1}^m\\ker d_i$ with $N(Z)_0=Z_0$ and differential $d_0$ in positive degrees, as in the cited lemma.",
+   "uses": [
+    "lem-trf-free-simplicial-homotopy-normalized-homology"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/simplicial.tex",
+    "place": "Tag 08P2 (lemma-homotopy-equivalence), first proof paragraph"
+   }
+  },
+  {
+   "text": "Fix $n\\geq0$. The surjectivity-transfer lemma applies to the additive simplicial map $f$ and the surjectivity obtained in Step 1. Explicitly, for a target class represented by $y\\in N(Y)_n$, its supplied cycle lift $\\widetilde y=[y]-[0_n]$ evaluates to $y$. Choose $\\alpha\\in H_n(N(F(UX)))$ mapping to $[\\widetilde y]$. The supplied evaluation square gives $H_n(N(f))(H_n(N(\\epsilon_X))(\\alpha))=[y]$. Thus $H_n(N(f))$ is surjective, including $n=0$.",
+   "uses": [
+    "lem-trf-free-normalized-homology-surjectivity-transfer"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/simplicial.tex",
+    "place": "Tag 08P2 (lemma-homotopy-equivalence), second proof paragraph"
+   }
+  },
+  {
+   "text": "For the same $n$, apply the injectivity-transfer lemma using Step 1. If a normalized cycle $x$ represents a kernel class, choose $y\\in N(Y)_{n+1}$ with $d_0y=f_n(x)$. The cited lifts satisfy $\\partial\\widetilde y=[d_0y]-[0_n]=[f_n(x)]-[f_n(0_n)]=F(Uf)_n(\\widetilde x)$ and $\\epsilon_X(\\widetilde x)=x$, since $f$ is additive. Hence $[\\widetilde x]$ maps to zero in free homology; Step 1 makes $[\\widetilde x]=0$, and evaluation makes $[x]=0$. This includes $n=0$. Thus $H_n(N(f))$ is injective and therefore bijective for every $n\\geq0$.",
+   "uses": [
+    "lem-trf-free-normalized-homology-injectivity-transfer"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/simplicial.tex",
+    "place": "Tag 08P2 (lemma-homotopy-equivalence), third proof paragraph"
+   }
+  },
+  {
+   "text": "The cited natural inclusions $N(Z)\\to C(Z)$, for $Z=X,Y$, are chain homotopy equivalences, where $C(Z)_n=Z_n$ has the alternating-face differential. A chain homotopy $a-b=dh+hd$ gives equal maps on homology, since on a cycle $z$ the difference is $dh(z)$; homotopy inverses therefore induce inverse homology maps. Naturality gives $H_n(C(f))=H_n(\\iota_Y)H_n(N(f))H_n(\\iota_X)^{-1}$, so this map is bijective. Finally $s(Z)^{-n}=C(Z)_n$ with the same differential implies $H^{-n}(s(f))=H_n(C(f))$. Positive cochain degrees have zero cohomology. Thus $s(f)$ is a quasi-isomorphism.",
    "uses": [
     "lem-cbc-normalized-alternating-homotopy-equivalence"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/simplicial.tex",
-    "place": "Tag 08P2 (lemma-homotopy-equivalence), opening paragraph; normalization comparison also Tag 019C (lemma-quasi-isomorphism). We use the opposite-face convention of the cited existing node, with differential d_0."
-   }
-  },
-  {
-   "text": "Apply the cited free-chain homotopy invariance with coefficient ring $\\mathbb Z$ to each elementary homotopy in the finite chains joining $gf$ to $\\mathrm{id}_{UX}$ and $fg$ to $\\mathrm{id}_{UY}$. Each homotopy, in either direction, gives equality of the two induced maps on free-chain homology. Transitivity gives $H_n(C(Fg))H_n(C(Ff))=\\mathrm{id}$ and $H_n(C(Ff))H_n(C(Fg))=\\mathrm{id}$ for all $n\\geq0$. Here $Fg:FY\\to FX$ is defined on generators by $[y]\\mapsto[g(y)]$; it is additive regardless of whether $g$ is additive, and free abelianization preserves composition and identity on generators. Hence $H_n(C(Ff))$ is bijective. The natural comparison of Step 1 makes $H_n(N(Ff))$ bijective as well.",
-   "uses": [
-    "lem-weil-pbc-simplicial-homotopy-free-chain-homotopy"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/simplicial.tex",
-    "place": "Tag 08P2 (lemma-homotopy-equivalence), first paragraph: homology invertibility after free abelianization; extended along the finite homotopy chains in the statement."
-   }
-  },
-  {
-   "text": "Fix $n\\geq0$. To show surjectivity of $H_n(N(f))$, represent a target class $\\eta$ by a normalized cycle $y\\in N(Y)_n$. Put $\\widetilde y=[y]-[0_n]\\in(FY)_n$. If $n>0$, every face is $d_i\\widetilde y=[d_i y]-[0_{n-1}]=0$, so $\\widetilde y$ is a normalized cycle; if $n=0$, no face condition is required. Moreover $\\epsilon_Y(\\widetilde y)=y$. By Step 2 choose $\\alpha\\in H_n(N(FX))$ mapping to the class of $\\widetilde y$. The commutative evaluation square of Step 1 now gives $H_n(N(f))(H_n(N(\\epsilon_X))(\\alpha))=\\eta$. This proves surjectivity without assuming evaluation is a homology isomorphism.",
-   "uses": [],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/simplicial.tex",
-    "place": "Tag 08P2 (lemma-homotopy-equivalence), second paragraph: lift a normalized cycle by [y]-[0_n]."
-   }
-  },
-  {
-   "text": "For injectivity, represent a kernel class $\\xi\\in H_n(N(X))$ by a normalized cycle $x$. Since its image is zero, there is $y\\in N(Y)_{n+1}$ with $d_0y=f_n(x)$; all $d_i y$ for $1\\leq i\\leq n+1$ vanish. As in Step 3, $\\widetilde x=[x]-[0_n]$ is a normalized cycle lifting $x$. Put $\\widetilde y=[y]-[0_{n+1}]$. Its higher faces vanish because $d_i\\widetilde y=[0_n]-[0_n]=0$ for $i\\geq1$, so it lies in $N(FY)_{n+1}$, and its differential is $d_0\\widetilde y=[f_n(x)]-[0_n]=(Ff)_n(\\widetilde x)$, where $f_n(0_n)=0_n$ uses additivity of $f$. Thus $H_n(N(Ff))$ kills the class of $\\widetilde x$. Its injectivity from Step 2 makes this class zero; applying $H_n(N(\\epsilon_X))$ shows $\\xi=0$. This calculation also works for $n=0$, with $N(Y)_1=\\ker d_1$ and boundary $d_0$.",
-   "uses": [],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/simplicial.tex",
-    "place": "Tag 08P2 (lemma-homotopy-equivalence), third paragraph: lift both the kernel cycle and its target boundary; translated to the d_0 normalization."
-   }
-  },
-  {
-   "text": "Steps 3 and 4 prove that $H_n(N(f))$ is bijective for every $n\\geq0$. By the natural isomorphisms of Step 1 this holds for $H_n(C(f))$. The complexes in the statement satisfy $s(Z)^{-n}=C(Z)_n$, with the same differential, so $H^{-n}(s(f))=H_n(C(f))$. For $r>0$ both cohomology groups are zero because $s(X)^r=s(Y)^r=0$. Therefore $s(f)$ induces an isomorphism on every cohomology group, which is exactly the stated quasi-isomorphism.",
-   "uses": [],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/simplicial.tex",
-    "place": "Tag 08P2 (lemma-homotopy-equivalence), conclusion, with the nonpositive-cochain reindexing in the item."
+    "place": "Tag 08P2 (lemma-homotopy-equivalence), opening normalization convention and conclusion, with nonpositive cochain reindexing"
    }
   }
  ],
  "proof_deps": [
-  "lem-cbc-normalized-alternating-homotopy-equivalence",
-  "lem-weil-pbc-simplicial-homotopy-free-chain-homotopy"
+  "lem-trf-free-simplicial-homotopy-normalized-homology",
+  "lem-trf-free-normalized-homology-surjectivity-transfer",
+  "lem-trf-free-normalized-homology-injectivity-transfer",
+  "lem-cbc-normalized-alternating-homotopy-equivalence"
  ],
  "proof_origin": {
   "by": "document",
@@ -170,19 +167,15 @@
   "is": null
  },
  "split_report": {
-  "date": "2026-10-19",
+  "date": "2026-10-23",
   "item": "lem-trf-simplicial-abelian-set-homotopy-quasi-iso",
   "worker": "stage1",
-  "summary": "Repaired the retained split after its initial dry run passed: removed the invalid identification of free-abelian homology with the original abelian-group homology. Followed the actual Stacks 08P2 argument: normalize all four simplicial abelian groups; obtain homology invertibility only for the free map; prove surjectivity and injectivity for the original map by explicit lifts [z]-[0], including the lift of a target boundary. The existing normalization uses kernels of d_1,...,d_n and differential d_0, and every boundary calculation is written in that convention. No new nodes are needed.",
+  "summary": "Repair of the batch5 re-split return: keep the exact item statement and replace its 3570-character proof by assembly of three new statement-only lemmas of comparable scope. These isolate free normalized homology invariance, normalized-cycle/evaluation surjectivity transfer, and normalized-cycle/target-boundary injectivity transfer. All old arguments and their exact allocation are preserved in report.md. Normalization remains the existing Mathlib leaf; no free/original homology identification is asserted. Landing-return repair: rebased the retained split onto current sheaf-dag, reread the current statements of every existing cited input, confirmed the released stage-1 repair order and verbatim citation compatibility, and made the free inverse in assembly Step 1 explicit. No hypothesis or statement changed; the side-project completion is not used as live completion. Further current-DAG repair: checked the newly landed 08P2 source-tag collision lem-trf-polynomial-augmentation-boundary against all three new statements, recorded the three nonduplication comparisons, and expanded assembly Steps 2 and 3 to display the evaluation preimage and lifted-boundary arguments supplied by their cited statements. October 23 continuation: compared all cited-input snapshots with the current read DAG; reread the changed polynomial-augmentation-boundary statement and retained its three nonduplication comparisons. Rebuilt the item from the current record preserving maintainer fields, expanded the boundary equality to display f(0)=0, and enlarged citation quotes to cover the evaluation square and cycle/boundary formulas actually used. The current statement and all three new statements remain unchanged.",
   "blueprint": "The steps realize the ancestor proof clause identifying the direct simplicial abelian-group input: underlying simplicial-set homotopy equivalence implies quasi-isomorphism (Stacks 08P2), with the normalized/alternating comparison and free-abelian homotopy calculation made explicit.",
   "tool_uses": [
    {
     "node": "lem-cbc-normalized-alternating-homotopy-equivalence",
-    "why": "Generic normalized-to-alternating chain comparison; the trace-formula unit supplies no Dold--Kan normalization lemma."
-   },
-   {
-    "node": "lem-weil-pbc-simplicial-homotopy-free-chain-homotopy",
-    "why": "Generic free-abelian chain-homotopy invariance for simplicial-set homotopies; the trace-formula unit supplies no simplicial chain-homotopy lemma."
+    "why": "Generic normalized-to-alternating comparison, as already approved for this item; the trace-formula unit has no normalization lemma."
    }
   ]
  },
@@ -191,12 +184,12 @@
   "lem-weil-pbc-simplicial-homotopy-free-chain-homotopy"
  ],
  "reviewed": {
-  "date": "2026-10-19",
+  "date": "2026-10-23",
   "by": "L",
-  "reviewer": "NT-cc-Q58-883e2c153",
-  "group": "Q58",
+  "reviewer": "NT-cc-NF-81d1229d3",
+  "group": "NF",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q58-883e2c153 (reviewer sub-agent of L); spot-checked: I read Stacks 08P2 (simplicial.tex 5884-5961) in full, plus the two cited Mathlib-leaf statements, which are the normalization N into C with the d_0 / ker d_{i≥1} convention, and free-chain homotopy invariance with R=ℤ. The item statement matches 08P2, with the zig-zag homotopy notion written out, no additivity assumed for g, and nothing weakened. Step 1: the evaluation square commutes because f is additive, and the step proves that a homotopy equivalence gives a homology isomorphism. Step 2: each link of the zig-zag gives an equality on homology, and functoriality of F then makes H(N(Ff)) bijective. Step 3: surjectivity via the lift [y]-[0_n], with every face zero in the d_0 convention and degree 0 checked. Step 4: injectivity via the lift [y]-[0_{n+1}], using f(0)=0 and d_0ỹ=Ff(x̃). These follow Stacks paragraphs 2 and 3, correctly adapted from Stacks' opposite-face convention. Step 5: the reindexing H^{-n}=H_n is correct, and positive degrees are zero. Edge cases checked: constant zero (this case is why the old FZ≅Z transport was wrong, and the new proof avoids it), constant A, and non-additive g. Duplicate search: the only 08P2 hits are the item and its citer cotangent-resolution-coherence. The surjective-boundary-lifting node is the converse, and the model-structure node lem-cbc-simplicial-module-model is not a restatement. No new nodes, no SGA, no cycle (both proof deps are leaves), proof_deps equals the union of uses, and every step is under 2000 characters. I accept the two generic tool_uses (normalization and free homotopy invariance). The citations.json named in the report is not in the commit, which is harmless. No changes made."
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NF-81d1229d3 (reviewer sub-agent of L); spot-checked: I read the item, all three new nodes, every cited statement and Stacks simplicial.tex 5883-5961 (Tag 08P2, all three proof paragraphs). Prior state: the item is split in the live DAG and in side-live with the old 5-step proof (3570 chars) and none of the new ids exists live, so this is a genuine re-split. The three new node files are byte-identical to earlier heads ba75/414a/6a17, which were refused at landing as 'completed in this project's DAG but not promoted'; the item differs from 6a17 only in Step 3, which now writes [d_0y]-[0_n]=[f_n(x)]-[f_n(0_n)]. Re-split check: old Step 2 became free-simplicial-homotopy-normalized-homology (Stacks paragraph 1), old Step 3 became surjectivity-transfer (paragraph 2) and old Step 4 became injectivity-transfer (paragraph 3). Old Step 1 is spread over the evaluation-square clauses of the transfer nodes and assembly Step 4, and old Step 5 is Step 4's reindexing. Nothing was dropped. The three nodes are independent, of comparable size (1314/1343/1547 chars), and none restates the item. The assembly is 2082 chars. Math checks: node 1 holds by one-cylinder free chain homotopy with R=Z, a zigzag, functoriality of F and the normalized/alternating comparison; it is fine for empty sets and for chains of length zero. Node 2: in positive degrees [y]-[0_n] has all faces zero and evaluates to y, and f∘ε_X=ε_Y∘F(Uf) because f is additive; in degree 0 every element is a cycle; the statement is true. Node 3: the higher faces of [y]-[0_{n+1}] vanish and d_0 of it is [f(x)]-[0_n]=F(Uf)(x̃) since f(0)=0; injectivity then gives x=∂ε(w); n=0 works with ker d_1 and d_0. Item steps: Step 1 takes u=Uf, v=g and needs no additivity of g; Step 4 matches lem-cbc-normalized-alternating-homotopy-equivalence (higher-face kernels, differential d_0, natural homotopy inverse) and the all-degree quasi-isomorphism definition. The statement is unchanged and proof_deps equals the union of uses. No step cites SGA. Duplicates: none. lem-trf-polynomial-augmentation-boundary and cotangent-resolution-coherence are different; lem-cbc-simplicial-module-model would give an alternative route only after a separate step from cylinder homotopy equivalence to weak equivalence, and lacks node 1's inverse identities and the one-degree transfers (advisory only). tool_uses: the off-unit normalized-alternating leaf is accepted. No fixes. Maintainer note: this is the fourth push of identical new nodes after promotion refusals; this is a promotion problem, not a fault in the split."
  },
  "lean": {
   "module": "Sheaf.AlgebraicTopology.SimplicialAbelianSetHomotopyQuasiIso",
@@ -216,5 +209,16 @@
   "result": "pass",
   "note": "Statement matches Stacks 08P2 (simplicial.tex 5884-5961) and the node clause by clause: X,Y : SimplicialObject AddCommGrpCat.{u}; underlying SSets via forget; ∃ g arbitrary SSet map; gf, fg related to identities by Relation.EqvGen of Nonempty SSet.Homotopy (cylinder K⊗Δ[1], ι₀/ι₁ endpoints), which is exactly the finite two-way chain; conclusion QuasiIso of extendMap of alternatingFaceMapComplex along embeddingDownNat (n↦-n, zero in positive degrees), all r∈ℤ. No extra hypotheses or universe restriction; edge cases (n=0, r>0, zero/constant groups, chain of length 0, g not additive) covered. Only the lean field changed vs the live node; lean.statement verbatim in the file; docstrings carry source place, blueprint id and the node's proof steps; sorry only, no definitions. H4: Mathlib congr_sSetHomologyMap is only the free-chain proof dependency, and 08P2 appears only in this item and its proof-only citer. def-weil-pbc-simplicial-set has no lean record but is matched to Mathlib SSet, as other landed citers already use it. nt_compile --json clean (1.6 s, exit 0). Advisory: the NL second reading is a self-review."
  },
- "lean_audit": {}
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ }
 }

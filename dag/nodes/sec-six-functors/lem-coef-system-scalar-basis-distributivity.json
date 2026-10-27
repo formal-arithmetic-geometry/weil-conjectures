@@ -1,0 +1,147 @@
+{
+ "id": "lem-coef-system-scalar-basis-distributivity",
+ "kind": "statement",
+ "title": "Simultaneous fixed basis coordinates and summand distributivity",
+ "statement": "Fix a prime $\\ell$, finite extensions $E\\subset L$ of $\\mathbf Q_\\ell$, an inclusion $i$, a finite-field datum $k$, and the finite-free restriction assertion $s$ with one fixed integral basis [lem-coef-finite-free-system-restriction]. For separated finite-type $k$-schemes $X,Y$ and any morphism $f:X\\to Y$, use the actual coefficient towers and specified scalar comparison of [def-coef-system-scalar-projection-data]. There exist BasisCoordinates for $s$, normalized on ordinary basis sections and on complex representatives, such that for every compactification $c$ of $f$, every derived lower-coefficient system $M$, and every basis index $a$, the $a$th inclusion followed by restricted scalar comparison and compact-support restriction equals compact support of the $a$th inclusion. No normalization, boundedness or Tor condition on $M$ is required. This assertion gives summand equations, not invertibility or refinement laws.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-scalar-six/sk-prop-scalar-six.proof.md",
+  "place": "Ordinary direct image: finite free coefficient extension follows from finite sums; Compactly supported direct image: combine proper and open comparisons and commute with refinement; Construction of comparison maps: canonical conjugates and mates. Explicit coherent strict-system argument as in lem-coef-system-scalar-projection-identification."
+ },
+ "stmt_deps": [
+  "def-coef-system-scalar-projection-data",
+  "def-weil-finite-field-fiber",
+  "def-weil-l-adic-coefficient-extension",
+  "lem-coef-finite-free-extension",
+  "def-weil-pbc-proetale-site",
+  "def-weil-size-convention",
+  "def-weil-scheme-morphism-properties",
+  "lem-coef-semilinear-derived-sections",
+  "def-pc-sheaf-restrict-scalars",
+  "lem-pur-derived-change-of-rings",
+  "def-weil-compactifications-refinements",
+  "lem-coef-finite-adjunction-diagram-realization",
+  "lem-coef-finite-free-system-restriction",
+  "def-coef-normalized-dvr-tower",
+  "def-weil-finite-tor-amplitude",
+  "def-weil-pbc-constructible-complexes",
+  "def-weil-pbc-adjunction-mate",
+  "lem-sf-open-tensor-normalization",
+  "def-exchange-projection",
+  "lem-pur-system-level-projection-formula-coherence",
+  "lem-pur-finite-free-compact-composition",
+  "def-sf-refinement-comparison-isomorphism",
+  "lem-pur-system-compactification-pf-substitution"
+ ],
+ "proof": [
+  {
+   "text": "Work throughout in the ordinary derived categories of strict systems. By lem-coef-finite-free-system-restriction, $T\\dashv U$ has unit $\\eta_P:P\\to UTP$, $x\\mapsto x\\otimes1$, restriction commutes with the geometric functors and preserves their units and counits, and $B_\\bullet$ is normalized with constructible Tor-amplitude-zero levels. Fix the reduced basis $(b_i)_{i=1}^d$. Its inclusion and coordinate maps give inverse isomorphisms $UTP\\cong P^{\\oplus d}$ already on complexes of systems: $(x_i)_i\\mapsto\\sum_i x_i\\otimes b_i$. They commute with transitions because all $b_i$ are reductions of the same elements of $S$. Thus this identification holds after localization, with no bound on the complex. In subsequent formulas suppress only these specified restriction/geometry identifications.",
+   "uses": [
+    "lem-coef-finite-free-system-restriction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-scalar-six/sk-prop-scalar-six.proof.md",
+    "place": "Ordinary direct image: finite free coefficient extension follows from finite sums; Compactly supported direct image: combine proper and open comparisons and commute with refinement; Construction of comparison maps: canonical conjugates and mates. Explicit coherent strict-system argument as in lem-coef-system-scalar-projection-identification."
+   }
+  },
+  {
+   "text": "Apply the same reduced basis inclusions and coordinates degreewise to complexes. Their orthogonality and totality equations persist under localization, and the scalar model counit gives the required representative formulas. For the proper constituent, restrict its geometric transpose to one basis summand. Counit naturality and the triangle identity identify it with proper direct image of that summand inclusion. For the open constituent, the balancing map is the basis inclusion on the open and both sides are zero on the complement. Compose the two equations and the specified compact-support restriction isomorphism to obtain exactly the Distributivity equation for each summand. This statement leaves invertibility to the finite-coordinate inverse proof in the parent; no boundedness condition is needed for these finite-sum equations.",
+   "uses": [
+    "lem-coef-finite-free-system-restriction",
+    "lem-coef-semilinear-derived-sections",
+    "def-weil-pbc-adjunction-mate"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-scalar-six/sk-prop-scalar-six.proof.md",
+    "place": "Ordinary direct image: finite free coefficient extension follows from finite sums; Compactly supported direct image: combine proper and open comparisons and commute with refinement; Construction of comparison maps: canonical conjugates and mates. Explicit coherent strict-system argument as in lem-coef-system-scalar-projection-identification."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-adjunction-mate",
+  "lem-coef-finite-free-system-restriction",
+  "lem-coef-semilinear-derived-sections"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-scalar-six/sk-prop-scalar-six.proof.md",
+  "place": "Ordinary direct image: finite free coefficient extension follows from finite sums; Compactly supported direct image: combine proper and open comparisons and commute with refinement; Construction of comparison maps: canonical conjugates and mates. Explicit coherent strict-system argument as in lem-coef-system-scalar-projection-identification."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A finite free coefficient extension has basis coordinates on sheaves and its scalar comparison is finite sum distributivity",
+   "results": "8 hits: finsum_smul, Module.Free.repr, Algebra.TensorProduct.basisAux, Algebra.FormallyUnramified.finite_of_free_aux, Module.Basis.coe_sumCoords, Module.finBasis, Module.Basis.coe_sumCoords_eq_finsum, Module.Basis.constr_apply_fintype",
+   "date": "2026-10-26",
+   "verdict": "No exact whole-system normalized comparison; related general algebraic or categorical API only."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An additive functor preserves a finite biproduct decomposition and the comparison commuting with all summand inclusions is an isomorphism",
+   "results": "8 hits: CategoryTheory.Functor.ι_biproductComparison', CategoryTheory.Mat_.ι_additiveObjIsoBiproduct_inv_assoc, CategoryTheory.Functor.biprodComparison', CategoryTheory.Limits.biproduct.mapBiproduct_inv_map_desc, CategoryTheory.Functor.inl_biprodComparison', CategoryTheory.Limits.biproduct.mapBiproduct_hom_desc, CategoryTheory.Functor.biprodComparison'_comp_biprodComparison, CategoryTheory.Functor.biproductComparison",
+   "date": "2026-10-26",
+   "verdict": "No exact whole-system normalized comparison; related general algebraic or categorical API only."
+  },
+  {
+   "tool": "grep",
+   "query": "TensorNormalization|BasisCoordinates|refinementGamma|restrictionEvaluation",
+   "results": "0 hits: ",
+   "date": "2026-10-26",
+   "verdict": "No exact whole-system normalized comparison; related general algebraic or categorical API only."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.SystemScalarProjectionIdentification",
+  "date": "2026-10-26",
+  "group": "V8"
+ },
+ "blueprint": {
+  "from": {
+   "node": "lem-coef-rational-operations",
+   "place": "paragraph 8, finite-free compact-support comparison: its identification as the projection comparison and its normalization under compactification refinement (returned item Step 2, last paragraph, and Step 4); original system proof Steps 1, 5",
+   "via": [
+    "lem-coef-system-scalar-projection-identification",
+    "lem-coef-finite-free-compact-composition",
+    "lem-coef-dual-formula-scalar-transpose"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.SystemScalarBasisDistributivity",
+  "file": "lean/Sheaf/Paper/SystemScalarBasisDistributivity.lean",
+  "declaration": "WeilConjectures.SystemScalarProjection.scalar_basis_distributivity",
+  "statement": "theorem scalar_basis_distributivity (X Y : Spaces K) (f : X.val.left ⟶ Y.val.left) : ∃ z : BasisCoordinates l E L i s, ∀ (c : Compactification f) (M : Derived (A l E) (aTransition l E) X.val.left), z.Distributivity l E L i s X Y c M",
+  "branch": "sheaf-dag",
+  "by": "V8",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-813fa",
+  "group": "V8",
+  "result": "pass",
+  "landing": "20261025T205010-L-3083477",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-813fa",
+  "group": "V8",
+  "result": "pass",
+  "landing": "20261025T205010-L-3083477",
+  "kind": "interface",
+  "note": "independent cc review: item theorem signature vs clone (identical); data prefix vs clone (verbatim + local hints); three new sorry statements vs their nodes' lean.statement and the original statement/plan; item node fields vs clone (only proof/proof_deps/proof_origin/lean.declarations changed)"
+ }
+}

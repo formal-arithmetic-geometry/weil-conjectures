@@ -1,0 +1,126 @@
+{
+ "id": "def-sfb-sl2-diagonal-torus",
+ "kind": "definition",
+ "title": "The canonical diagonal torus in SL2",
+ "status": "split",
+ "import_flags": [],
+ "statement": "Let $k$ be a field [def-weil-field]. Use the special linear group scheme $S=\\mathrm{SL}_{2,k}$ of [def-sc-general-linear-group] and the multiplicative group $\\mathbf G_{m,k}=\\operatorname{Spec}k[t,t^{-1}]$ of [def-sc-gm-ga]. The diagonal torus inclusion $d:\\mathbf G_{m,k}\\to S$ is the scheme morphism dual to the $k$-algebra map $k[x_{11},x_{12},x_{21},x_{22}]/(x_{11}x_{22}-x_{12}x_{21}-1)\\to k[t,t^{-1}]$ sending the four entries to $t,0,0,t^{-1}$ respectively. The determinant relation maps to zero because $tt^{-1}=1$. Thus on every commutative $k$-algebra $R$, its image consists precisely of $\\operatorname{diag}(s,s^{-1})$ for $s\\in R^\\times$, including nonreduced $R$.",
+ "stmt_deps": [
+  "def-weil-field",
+  "def-sc-general-linear-group",
+  "def-sc-gm-ga"
+ ],
+ "source": {
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Section 20g, pp.415--418: diagonal torus T of SL2 and cocharacter t ↦ diag(t,t^{-1}); coordinate substitution in the determinant-one presentation."
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "The diagonal torus embedding Gm into the special linear group scheme SL2",
+   "results": "OK 8 hits: Matrix.SpecialLinearGroup.hasCoeToMatrix, hasCoeToGeneralLinearGroup, isEmbedding_toGL, toGL, isClosedEmbedding_toGL, isClosedEmbedding_mapGLInt, isEmbedding_mapGL, ModularGroup.coe.",
+   "date": "2026-10-24",
+   "verdict": "No existing scheme morphism Gm → SL2 with the diagonal Laurent coordinate substitution; abstract matrix groups and topological embeddings do not supply it."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The diagonal multiplicative group closed subgroup scheme of SL2 given by diag(t, inverse t)",
+   "results": "OK 8 hits: MatrixGroups.term𝒮ℒ, CongruenceSubgroup.mem_Gamma_one, CongruenceSubgroup.Gamma, CongruenceSubgroup.Gamma0, Matrix.ProjectiveSpecialLinearGroup, Subgroup.strictPeriods, Matrix.SpecialLinearGroup.center_equiv_rootsOfUnity'_apply, Matrix.SpecialLinearGroup.center_equiv_rootsOfUnity.",
+   "date": "2026-10-24",
+   "verdict": "No existing scheme morphism Gm → SL2 with the diagonal Laurent coordinate substitution; abstract matrix groups and topological embeddings do not supply it."
+  },
+  {
+   "tool": "grep",
+   "query": "diagonal.*[Tt]orus|[Tt]orus.*diagonal (Mathlib/AlgebraicGeometry); diagonalTorus|SpecialLinear|specialLinear (WeilConjectures and Sheaf); diagonal torus (DAG and blueprint_refs.py search)",
+   "results": "Mathlib msearch: OK 0 hits. No upstream diagonal torus inclusion; Sheaf LinearGroupSchemes defines specialLinear, specialPoints and inclusion into GL, but no diagonalTorus. DAG contains rank-one lemmas using the torus but no definition node; blueprint_refs.py search returned 0 blueprint nodes.",
+   "date": "2026-10-24",
+   "verdict": "No existing scheme morphism Gm → SL2 with the diagonal Laurent coordinate substitution; abstract matrix groups and topological embeddings do not supply it."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-sl2-diagonal-kernel-detection",
+  "date": "2026-10-24",
+  "group": "NN"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Haboush symmetric-power lifting for a trivial quotient representation. Supporting representation-theoretic input: Steinberg endomorphisms detect a nonzero fixed vector. Supporting Borel pairs and actual rho section modules. Supporting input: Integrality of the half sum of positive roots supporting the rho section modules in the Steinberg endomorphism detection input. Supporting lattice proof: Appendix C.35, printed p.615; Theorem 23.55 and Corollary 23.56, printed p.501; Theorem 23.9, printed p.487; Proposition 23.5, printed pp.485--486, centrality and isomorphism criteria. Theorem 23.55: realize the explicitly constructed reduced root datum on L. Supporting proof of root-datum realization: Section 23h, equation (153) and Theorem 23.72, printed pp.510--511, with the full-weight representation of Corollary 23.73; torus defined by its weight characters. Supporting Section 23h, equation (153), Theorem 23.72 proof, pp.510-511: rank-one hypotheses and simple-root generation omitted there; Section 23d and Theorem 23.71 for Weyl signs. These integral rank-one details are an agent-stated supporting lemma, not a quotation of Theorem 23.72. Supporting input: Section 20g, pp.415--418, standard matrices of SL2 and its scalar centre; Theorem 3.34, p.75, for the closed-image conclusion. Agent-formulated kernel-detection lemma supporting Theorem 23.72; no assertion here is quoted as a theorem stated verbatim by Milne. Canonical diagonal torus map needed to state the scheme-theoretic intersection and the restriction of a representation.",
+   "via": [
+    "lem-sfb-sl2-diagonal-kernel-detection",
+    "lem-sfb-chevalley-integral-rank-one",
+    "lem-sfb-chevalley-root-exponential-group",
+    "lem-sfb-root-datum-realization",
+    "lem-sfb-central-lattice-enlargement",
+    "lem-sfb-simply-connected-character-lattice",
+    "lem-sfb-rho-section-modules",
+    "lem-sfb-steinberg-endomorphism-detection",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SL2DiagonalTorus",
+  "declaration": "AlgebraicGeometry.LinearGroupSchemes.diagonalTorus",
+  "declarations": [
+   "AlgebraicGeometry.LinearGroupSchemes.diagonalTorusPolynomial",
+   "AlgebraicGeometry.LinearGroupSchemes.diagonalTorusPolynomial_relations",
+   "AlgebraicGeometry.LinearGroupSchemes.diagonalTorusCoordinates",
+   "AlgebraicGeometry.LinearGroupSchemes.diagonalTorus"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/SL2DiagonalTorus.lean",
+  "statement": "def diagonalTorus : StandardGroupSchemes.multiplicative k ⟶ specialLinear k 2",
+  "branch": "newtargets-dag",
+  "by": "NN",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "Real Laurent-polynomial substitution, quotient lift and contravariant Spec; the only postponed fact is the proof that the substitution kills the determinant relation. Reuses the published SL2 and Gm constructions without a new group scheme."
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-871be07dc",
+  "group": "NN",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-871be07dc",
+  "group": "NN",
+  "result": "pass",
+  "note": "Item clauses match: IsAlgClosed k; S = specialLinear k 2; N closed+normal via IsClosedSubgroupScheme/IsNormalSubgroupScheme (all-algebra normality); hinter tests the fibre product N×_S D on all R : Type u (i and the torus are injective on points, so this is exactly scheme-theoretic N∩D=1, excluding μ2/Frobenius kernels in char 2); IsIso N.hom = N trivial. Consequence: GL(M) = upstream GeneralLinearGroup on ChooseBasisIndex k M (M=0 vacuous), IsMonHom v, hD on diagonalTorus ≫ v, conclusion IsClosedImmersion v.left. New def-sfb-sl2-diagonal-torus has all §5 fields, real Laurent substitution (0,0)↦T1,(1,1)↦T(-1), sole sorry = true det-relation lemma; no duplicate in Sheaf/WeilConjectures/DAG. Item diff vs base: only lean + stmt_deps gaining the landed def-sc-general-linear-group and the new node (allowed by §6). lean.statement verbatim for both; docstrings carry source, blueprint tags and steps 1-8; 3 sorries, no proofs; report sections present. No files changed, no compile run."
+ }
+}

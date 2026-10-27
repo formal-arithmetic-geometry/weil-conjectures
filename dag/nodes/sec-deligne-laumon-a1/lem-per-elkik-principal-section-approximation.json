@@ -1,0 +1,334 @@
+{
+ "id": "lem-per-elkik-principal-section-approximation",
+ "kind": "statement",
+ "title": "Principal-ideal Elkik approximation along a smooth open",
+ "statement": "Let $A$ be a commutative Noetherian ring [def-weil-pbc-noetherian-ring], let $t\\in A$ with $(A,tA)$ a henselian pair [def-weil-pbc-henselian-terminology], and let $B$ be a finitely presented commutative $A$-algebra [def-weil-pbc-finitely-presented-algebra]. Put $C=\\varprojlim_{m\\geq1}A/t^mA$ [def-weil-pbc-adic-completion]. Let $W\\subseteq\\operatorname{Spec}B$ be an open subscheme such that $W\\to\\operatorname{Spec}A$ is smooth [def-weil-affine-spectrum, def-sbc-smooth-morphisms]. Suppose an $A$-algebra map $u:B\\to C$ induces a morphism whose restriction to $\\operatorname{Spec}C\\setminus V(tC)$ has image in $W$. Then for every integer $m\\geq1$ there is an $A$-algebra map $v:B\\to A$ such that $q_mv=\\pi_mu$, where $q_m:A\\to A/t^mA$ and $\\pi_m:C\\to A/t^mA$ are the quotient and coordinate projection. The parameter $t$ may be a zero-divisor or nilpotent.",
+ "source": {
+  "document": "https://www.numdam.org/item/10.24033/asens.1258.pdf",
+  "place": "Elkik, Solutions d’équations à coefficients dans un anneau hensélien (1973), II, Lemma 4, printed pp.564–566. Read online 2026-10-24; archival copy WANTED. No Stacks tag is claimed for this result."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-noetherian-ring",
+  "def-weil-pbc-henselian-terminology",
+  "def-weil-pbc-adic-completion",
+  "def-weil-pbc-finitely-presented-algebra",
+  "def-weil-affine-spectrum",
+  "def-sbc-smooth-morphisms"
+ ],
+ "proof": [
+  {
+   "text": "First $t\\in\\operatorname{Jac}(A)$. Otherwise some maximal ideal $\\mathfrak m$ misses $t$; the finite $A$-algebra $A/\\mathfrak m$ then has quotient by $t$ equal to the zero ring, whose idempotent has the two distinct lifts $0,1$, contradicting henselian uniqueness. Thus $A\\to C$ is faithfully flat, hence injective, and $A\\cap t^qC=t^qA$ for every $q\\geq1$. The projection $C\\to A/t^qA$ is surjective with kernel $t^qC$. If $t$ is nilpotent the inverse system stabilizes at $A$; then $C=A$ and $v=u$. We may henceforth assume $t$ not nilpotent.",
+   "uses": [
+    "def-weil-pbc-henselian-terminology",
+    "lem-per-jacobson-adic-completion-faithfully-flat",
+    "lem-weil-pbc-faithfully-flat-ideal-contraction",
+    "lem-weil-pbc-adic-completion-mod-power"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tags 00MC (lemma-completion-faithfully-flat), 05CK (universally injective faithfully flat maps), and completion modulo powers; nilpotent case from the inverse-limit definition"
+   }
+  },
+  {
+   "text": "Let $T=\\{x\\in A:t^e x=0\\text{ for some }e\\geq0\\}$. This is an ideal, hence has finitely many generators; taking a common bound for their annihilating exponents gives $t^eT=0$. Artin–Rees for $T\\subseteq A$, $I=tA$, gives $T\\cap t^qA\\subseteq t^{q-k}T$ for $q\\geq k$. Put $K=k+e$, so $T\\cap t^qA=0$ whenever $q\\geq K$. This bound, rather than cancellation of $t$, will remove the remaining relations.",
+   "uses": [
+    "def-weil-pbc-noetherian-ring",
+    "lem-weil-pbc-artin-rees"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00IN, lemma-Artin-Rees, applied to the finite module A and its torsion ideal"
+   }
+  },
+  {
+   "text": "Apply the conormal-chart lemma to $B,W$ to obtain $B\\xrightarrow{i}D\\xrightarrow{r}B$ and $P=A[x_1,\\ldots,x_N]\\twoheadrightarrow D$ with kernel $J$. Extend the formal section by $u_D=u\\circ r$ and write $a_k=u_D(p(x_k))\\in C$. Since $ri=1$, its image on $D(t)\\subseteq\\operatorname{Spec}C$ lies in $W_D$. Approximating $u_D$ on $D$ and restricting along $i$ will therefore approximate the original $u$.",
+   "uses": [
+    "lem-per-elkik-conormal-smooth-open-chart"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.numdam.org/item/10.24033/asens.1258.pdf",
+    "place": "Elkik II, Lemma 4, printed pp.564–566"
+   }
+  },
+  {
+   "text": "Choose an ideal $H\\subseteq P$ whose image in $D$ cuts out the complement of $W_D$. Since the punctured section lies in $W_D$, every prime of $C$ containing all $g(a)$, $g\\in H$, contains $t$. The radical characterization gives $t^\\alpha=\\sum_j\\lambda_jg_j(a)$ for finitely many $g_j\\in H$ and $\\lambda_j\\in C$, with $\\alpha\\geq0$. Lift each $\\lambda_j$ modulo $t^{\\alpha+1}C$ to $\\mu_j\\in A$ and set $h=\\sum_j\\mu_jg_j\\in H$. Then $h(a)=t^\\alpha(1+tz)$ for some $z\\in C$. The element $1+tz$ is a unit: its inverse is the compatible sequence of finite geometric sums in $A/t^qA$. Thus $D_D(p(h))\\subseteq W_D$ and the punctured formal section lies in $D_D(p(h))$.",
+   "uses": [
+    "def-weil-affine-spectrum",
+    "lem-weil-pbc-zero-locus-eq-iff-radical-eq",
+    "lem-weil-pbc-adic-completion-mod-power",
+    "def-weil-pbc-adic-completion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.numdam.org/item/10.24033/asens.1258.pdf",
+    "place": "Elkik II, Lemma 4, printed pp.564–566"
+   }
+  },
+  {
+   "text": "Apply the chart lemma to $h$, obtaining $s,f_1,\\ldots,f_c$. Write $\\Delta_1,\\ldots,\\Delta_l$ for its maximal minors. Since the punctured section lies in $D_D(p(s))$, radical containment yields $t^d=\\lambda s(a)$ in $C$ for some $d\\geq0$. Since the minors generate the unit ideal after inverting $p(s)$, evaluating in $C[1/t]$ shows $(\\Delta_\\nu(a))C[1/t]=C[1/t]$. Equivalently $V((\\Delta_\\nu(a)))\\subseteq V(t)$, so for some $g\\geq0$ there are $\\eta_\\nu\\in C$ with $t^g=\\sum_\\nu\\eta_\\nu\\Delta_\\nu(a)$. Fix these finite certificates before choosing any approximation precision.",
+   "uses": [
+    "lem-per-elkik-conormal-smooth-open-chart",
+    "lem-weil-pbc-zero-locus-eq-iff-radical-eq"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.numdam.org/item/10.24033/asens.1258.pdf",
+    "place": "Elkik II, Lemma 4, printed pp.564–566"
+   }
+  },
+  {
+   "text": "Choose $L$ with $L>2g$ and $R=L-g>\\max(d,K,m)$. Use the completion projections to choose $a^0\\in A^N$ congruent to $a$ modulo $t^LC$ and coefficients $\\eta^0_\\nu\\in A$ congruent to $\\eta_\\nu$ modulo $t^LC$. Polynomial evaluation preserves congruence, so $f_j(a^0)\\in t^LC\\cap A=t^LA$ and $t^g-\\sum_\\nu\\eta^0_\\nu\\Delta_\\nu(a^0)\\in t^LC\\cap A=t^LA$. Write the latter difference $t^Lz_0$. Then $t^g(1-t^{L-g}z_0)=\\sum_\\nu\\eta^0_\\nu\\Delta_\\nu(a^0)$. Since $t\\in\\operatorname{Jac}(A)$, the parenthesized factor is a unit. Therefore $t^gA\\subseteq\\Delta(a^0)$.",
+   "uses": [
+    "lem-weil-pbc-adic-completion-mod-power",
+    "lem-weil-pbc-faithfully-flat-ideal-contraction",
+    "lem-weil-pbc-jacobson-radical-one-plus-units"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://www.numdam.org/item/10.24033/asens.1258.pdf",
+    "place": "Elkik II, Lemma 4, printed pp.564–566"
+   }
+  },
+  {
+   "text": "The correction lemma applies over the original henselian pair $(A,tA)$ with $n=L$ and $h=g$: all $c$ equations have residual error in $t^LA$, their maximal minors contain $t^gA$, and $L>2g$. It gives $b\\in A^N$ with $f_j(b)=0$ and $b-a^0\\in(t^{L-g}A)^N$. Thus $b\\equiv a\\pmod {t^RC}$. No assertion that $A$ is complete, excellent or a G-ring has been used.",
+   "uses": [
+    "lem-per-tougeron-henselian-jacobian-correction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.numdam.org/item/10.24033/asens.1258.pdf",
+    "place": "Elkik II, Lemma 4, printed pp.564–566"
+   }
+  },
+  {
+   "text": "Lift $\\lambda$ modulo $t^RC$ to $\\lambda_0\\in A$. The certificate $t^d=\\lambda s(a)$ and $b\\equiv a\\pmod {t^RC}$ give $t^d-\\lambda_0s(b)\\in t^RC\\cap A=t^RA$. Writing this as $t^Rz_1$ gives $t^d(1-t^{R-d}z_1)=\\lambda_0s(b)$. Since $R>d$ the factor is a unit of $A$, and hence $t^d\\in s(b)A$. Now $sJ\\subseteq(f_1,\\ldots,f_c)$ implies $s(b)F(b)=0$ and thus $t^dF(b)=0$ for every $F\\in J$. Also $F(a)=0$ and polynomial congruence give $F(b)\\in t^RC\\cap A=t^RA$. Consequently $F(b)\\in T\\cap t^RA=0$, because $R\\geq K$. Evaluation at $b$ therefore factors through $D$. Restrict this homomorphism along $i:B\\to D$ to obtain $v:B\\to A$. Since $R\\geq m$, reducing evaluations modulo $t^m$ yields $q_mv=\\pi_mu$, as required.",
+   "uses": [
+    "lem-per-elkik-conormal-smooth-open-chart",
+    "lem-weil-pbc-adic-completion-mod-power",
+    "lem-weil-pbc-faithfully-flat-ideal-contraction",
+    "lem-weil-pbc-jacobson-radical-one-plus-units"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://www.numdam.org/item/10.24033/asens.1258.pdf",
+    "place": "Elkik II, Lemma 4, printed pp.564–566"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-affine-spectrum",
+  "def-weil-pbc-adic-completion",
+  "def-weil-pbc-henselian-terminology",
+  "def-weil-pbc-noetherian-ring",
+  "lem-per-elkik-conormal-smooth-open-chart",
+  "lem-per-jacobson-adic-completion-faithfully-flat",
+  "lem-per-tougeron-henselian-jacobian-correction",
+  "lem-weil-pbc-adic-completion-mod-power",
+  "lem-weil-pbc-artin-rees",
+  "lem-weil-pbc-faithfully-flat-ideal-contraction",
+  "lem-weil-pbc-jacobson-radical-one-plus-units",
+  "lem-weil-pbc-zero-locus-eq-iff-radical-eq"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://www.numdam.org/item/10.24033/asens.1258.pdf",
+  "place": "Elkik II Lemma 4, pp.564–566, with explicit coefficient certificates and zero-divisor argument; read online, archival copy WANTED"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Elkik density of sections over a noetherian henselian ring for a principal ideal with zero divisors in its adic completion",
+   "results": "{\"t\": \"2026-10-24T07:55:28Z\", \"tool\": \"leanfinder\", \"query\": \"Elkik density of sections over a noetherian henselian ring for a principal ideal with zero divisors in its adic completion\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"IsAdicComplete.henselianRing\", \"IsDedekindDomain.HeightOneSpectrum.adicCompletion.mul_nonZeroDivisor_mem_adicCompletionIntegers\", \"BDeRham\", \"BDeRhamPlus\", \"AdicCompletion.exists_smodEq_pow_add_one_smul\", \"AdicCompletion.exists_smodEq_pow_smul_top_and_mkQ_eq\", \"HenselianRing\", \"AdicCompletion.exists_smodEq_pow_smul_top_and_smodEq_pow_add_one_smul_top\"], \"digest\": \"028b723bd6d08ba1\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits define henselianity or lift along a globally formally smooth algebra into a complete target; none approximate a generically smooth formal section back to a possibly noncomplete henselian ring."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Principal henselian pair algebra smooth away from t approximating formal section modulo powers of t",
+   "results": "{\"t\": \"2026-10-24T07:55:29Z\", \"tool\": \"leansearch\", \"query\": \"Principal henselian pair algebra smooth away from t approximating formal section modulo powers of t\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.Smooth.of_isLocalization_Away\", \"HenselianLocalRing.is_henselian\", \"Algebra.IsStandardSmooth.localization_away\", \"Algebra.smoothLocus\", \"IsAdicComplete.henselianRing\", \"HenselianLocalRing.TFAE\", \"HenselianLocalRing\", \"HenselianRing.mk\"], \"digest\": \"d780617add937245\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits define henselianity or lift along a globally formally smooth algebra into a complete target; none approximate a generically smooth formal section back to a possibly noncomplete henselian ring."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"HenselianRing\", \"Smooth\"",
+   "results": "{\"t\": \"2026-10-24T07:55:29Z\", \"tool\": \"loogle\", \"query\": \"\\\"HenselianRing\\\", \\\"Smooth\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits define henselianity or lift along a globally formally smooth algebra into a complete target; none approximate a generically smooth formal section back to a possibly noncomplete henselian ring."
+  },
+  {
+   "tool": "grep",
+   "query": "Elkik|henselian.*approxim|approxim.*henselian|henselian.*[Ss]mooth",
+   "results": "{\"t\": \"2026-10-24T07:55:30Z\", \"tool\": \"grep\", \"query\": \"Elkik|henselian.*approxim|approxim.*henselian|henselian.*[Ss]mooth\", \"sub\": \"RingTheory\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits define henselianity or lift along a globally formally smooth algebra into a complete target; none approximate a generically smooth formal section back to a possibly noncomplete henselian ring.",
+   "subdirectory": "RingTheory"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A principal henselian pair with a possibly zero divisor parameter has algebraic sections dense in formal sections for algebras smooth off that parameter",
+   "results": "{\"t\": \"2026-10-24T07:56:19Z\", \"tool\": \"leanfinder\", \"query\": \"A principal henselian pair with a possibly zero divisor parameter has algebraic sections dense in formal sections for algebras smooth off that parameter\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HenselianLocalRing\", \"HenselianRing\", \"IsAdicComplete.henselianRing\", \"Polynomial.IsDistinguishedAt.isWeierstrassDivisorAt'\", \"Field.henselian\", \"StandardEtalePair\", \"Algebra.IsSmoothAt.exists_notMem_isStandardSmooth\", \"instHenselianRingMaximalIdeal\"], \"digest\": \"63388e9132acf9ae\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits define henselianity or lift along a globally formally smooth algebra into a complete target; none approximate a generically smooth formal section back to a possibly noncomplete henselian ring."
+  },
+  {
+   "tool": "grep",
+   "query": "Elkik|henselian.*approxim|approxim.*henselian",
+   "results": "{\"t\": \"2026-10-24T08:37:15Z\", \"tool\": \"grep\", \"query\": \"Elkik|henselian.*approxim|approxim.*henselian\", \"sub\": \"RingTheory\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: smooth formal lifting targets a complete ring and ordinary Hensel lifting assumes a unit derivative; neither approximates a generically smooth section back into an arbitrary henselian ring.",
+   "subdirectory": "RingTheory"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Approximation of a formal section into a smooth open away from a principal ideal in a henselian ring",
+   "results": "{\"t\": \"2026-10-24T08:37:15Z\", \"tool\": \"leansearch\", \"query\": \"Approximation of a formal section into a smooth open away from a principal ideal in a henselian ring\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HenselianLocalRing.is_henselian\", \"Algebra.IsSmoothAt\", \"Algebra.Smooth.of_isLocalization_Away\", \"Algebra.smoothLocus\", \"Algebra.IsSmoothAt.exists_notMem_smooth\", \"HenselianRing.mk\", \"Algebra.basicOpen_subset_smoothLocus_iff_smooth\", \"HenselianLocalRing.TFAE\"], \"digest\": \"872ef203f6318449\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: smooth formal lifting targets a complete ring and ordinary Hensel lifting assumes a unit derivative; neither approximates a generically smooth section back into an arbitrary henselian ring."
+  },
+  {
+   "tool": "loogle",
+   "query": "HenselianRing, AdicCompletion",
+   "results": "{\"t\": \"2026-10-24T08:37:15Z\", \"tool\": \"loogle\", \"query\": \"HenselianRing, AdicCompletion\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: smooth formal lifting targets a complete ring and ordinary Hensel lifting assumes a unit derivative; neither approximates a generically smooth section back into an arbitrary henselian ring."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Generically smooth formal section of finite presentation over a noetherian principal henselian pair is approximated by algebraic sections",
+   "results": "{\"t\": \"2026-10-24T08:37:17Z\", \"tool\": \"leanfinder\", \"query\": \"Generically smooth formal section of finite presentation over a noetherian principal henselian pair is approximated by algebraic sections\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.FormallySmooth.exists_mkₐ_comp_eq_of_isAdicComplete\", \"Algebra.IsSmoothAt.exists_notMem_isStandardSmooth\", \"Algebra.IsStandardSmooth\", \"Algebra.FormallySmooth.exists_lift\", \"Algebra.FormallySmooth.lift\", \"Algebra.Smooth.exists_span_eq_top_isStandardSmooth\", \"Algebra.FormallySmooth.exists_adicCompletionEvalOneₐ_comp_eq\", \"Algebra.IsSmoothAt.exists_notMem_smooth\"], \"digest\": \"3b29307b915ac3ee\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: smooth formal lifting targets a complete ring and ordinary Hensel lifting assumes a unit derivative; neither approximates a generically smooth section back into an arbitrary henselian ring."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Density of algebraic points in generically smooth formal points over a henselian pair without excellence",
+   "results": "{\"t\": \"2026-10-24T08:38:12Z\", \"tool\": \"leanfinder\", \"query\": \"Density of algebraic points in generically smooth formal points over a henselian pair without excellence\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.smoothLocus\", \"Algebra.isOpen_smoothLocus\", \"Algebra.IsSmoothAt.exists_notMem_isStandardSmooth\", \"Algebra.Smooth.exists_span_eq_top_isStandardSmooth\", \"Algebra.smoothLocus_eq_univ_iff\", \"HenselianLocalRing.TFAE\", \"Algebra.etaleLocus\", \"Algebra.IsSmoothAt.exists_notMem_smooth\"], \"digest\": \"b05019ccf46b18ba\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: smooth formal lifting targets a complete ring and ordinary Hensel lifting assumes a unit derivative; neither approximates a generically smooth section back into an arbitrary henselian ring."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-per-elkik-generic-smooth-section-approximation",
+  "date": "2026-10-24",
+  "group": "N8"
+ },
+ "chapter": "sec-deligne-laumon-a1",
+ "unit": "sk-p-dl-a1-perverse",
+ "blueprint": {
+  "from": {
+   "node": "lem-per-artin-gabber-affine-curve",
+   "via": [
+    "lem-per-elkik-generic-smooth-section-approximation",
+    "lem-per-gabber-ramero-henselian-section-lifting",
+    "lem-per-elkik-smooth-span-lifting",
+    "lem-per-rig-formal-resolution-intrinsic",
+    "lem-per-rig-regular-formal-resolution",
+    "lem-per-small-singular-locus-resolution",
+    "lem-per-qe-ordinary-regular-resolution",
+    "lem-per-characteristic-zero-log-resolution-independence",
+    "lem-per-complete-local-rigidification-comparison",
+    "lem-per-gabber-absolute-equivariant-modification",
+    "lem-per-gabber-log-smooth-equivariant-modification",
+    "lem-per-trait-prime-to-ell-log-alteration",
+    "lem-per-gabber-regular-pair-purity",
+    "lem-per-absolute-gysin-purity",
+    "lem-per-potential-dualizing-regular-unit",
+    "lem-per-finite-regular-reduction-dualizing",
+    "lem-per-qbar-generic-duality-model",
+    "lem-per-qbar-middle-tstructure"
+   ],
+   "place": "Inherited auxiliary formal-resolution branch of ancestor Step 3 via the recorded creation chain; the latest ancestor proof no longer contains this branch. This lemma serves the bounded-section-lifting argument: Lemma 5.4.12, printed p.151, special case U=Spec(B) minus V(IB); cited there as Elkik, Chapter II, Theorem 2 bis; Elkik II Theorem 2 bis, induction base with a principal ideal, carried by Lemma 4 (pp.564–566)."
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-per-elkik-principal-section-approximation",
+  "worker": "stage1",
+  "summary": "Unchanged statement. Two genuine auxiliary inputs isolate conormal stabilization and Tougeron correction. The item proves affine-open selection by coefficient approximation, transfers the two power certificates by faithful-flat contraction, and removes residual equations by Artin–Rees torsion separation. No regular-parameter, completeness, excellence or G-ring hypothesis added.",
+  "blueprint": "Inherited auxiliary branch of lem-per-artin-gabber-affine-curve Step 3 via existing creation chain. Latest ef6f9619 has no Elkik branch; refining this already assigned algebraic tool changes neither chapter nor unit route.",
+  "tool_uses": [
+   {
+    "node": "def-weil-affine-spectrum",
+    "why": "Generic commutative-algebra tool for completion, radical containment, units or torsion separation in Elkik approximation; the Fourier-perverse unit supplies no replacement."
+   },
+   {
+    "node": "def-weil-pbc-adic-completion",
+    "why": "Generic commutative-algebra tool for completion, radical containment, units or torsion separation in Elkik approximation; the Fourier-perverse unit supplies no replacement."
+   },
+   {
+    "node": "def-weil-pbc-henselian-terminology",
+    "why": "Generic commutative-algebra tool for completion, radical containment, units or torsion separation in Elkik approximation; the Fourier-perverse unit supplies no replacement."
+   },
+   {
+    "node": "def-weil-pbc-noetherian-ring",
+    "why": "Generic commutative-algebra tool for completion, radical containment, units or torsion separation in Elkik approximation; the Fourier-perverse unit supplies no replacement."
+   },
+   {
+    "node": "lem-weil-pbc-adic-completion-mod-power",
+    "why": "Generic commutative-algebra tool for completion, radical containment, units or torsion separation in Elkik approximation; the Fourier-perverse unit supplies no replacement."
+   },
+   {
+    "node": "lem-weil-pbc-artin-rees",
+    "why": "Generic commutative-algebra tool for completion, radical containment, units or torsion separation in Elkik approximation; the Fourier-perverse unit supplies no replacement."
+   },
+   {
+    "node": "lem-weil-pbc-faithfully-flat-ideal-contraction",
+    "why": "Generic commutative-algebra tool for completion, radical containment, units or torsion separation in Elkik approximation; the Fourier-perverse unit supplies no replacement."
+   },
+   {
+    "node": "lem-weil-pbc-jacobson-radical-one-plus-units",
+    "why": "Generic commutative-algebra tool for completion, radical containment, units or torsion separation in Elkik approximation; the Fourier-perverse unit supplies no replacement."
+   },
+   {
+    "node": "lem-weil-pbc-zero-locus-eq-iff-radical-eq",
+    "why": "Generic commutative-algebra tool for completion, radical containment, units or torsion separation in Elkik approximation; the Fourier-perverse unit supplies no replacement."
+   }
+  ]
+ },
+ "tool_uses": [
+  "def-weil-affine-spectrum",
+  "def-weil-pbc-adic-completion",
+  "def-weil-pbc-henselian-terminology",
+  "def-weil-pbc-noetherian-ring",
+  "lem-weil-pbc-adic-completion-mod-power",
+  "lem-weil-pbc-artin-rees",
+  "lem-weil-pbc-faithfully-flat-ideal-contraction",
+  "lem-weil-pbc-jacobson-radical-one-plus-units",
+  "lem-weil-pbc-zero-locus-eq-iff-radical-eq"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q03-439ac315b",
+  "group": "Q03",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q03-439ac315b (reviewer sub-agent of L); spot-checked: Read Elkik 1973 II directly from the numdam scan, printed pp.561-566: Lemme 2 (Tougeron, n>2h, J(a) in I^n, Delta(a) contains I^h, gives a' = a mod I^{n-h}), Lemme 3 (Sym of the conormal, constant relative dimension, free conormal), and Lemme 4 with its proof. Also read Stacks 07CE. The item statement is unchanged and is Lemme 4's approximation clause; the parent uses it in Steps 1 and 9 exactly as stated. Steps 1-8 checked against the cited statements and match Elkik's proof. Step 1: henselian idempotent uniqueness gives t in Jac, then faithful flatness, contraction, and the mod-power kernel. Step 2: Artin-Rees on t-power torsion, T cap t^K A = 0. Step 4: h(a)=t^alpha(1+tz). Steps 5-6: the powers t^d and t^g, transferred to A through contraction and the one-plus-units node, with L>2g and R=L-g>max(d,K,m). Step 7: Tougeron with n=L, h=g. Step 8: t^d F(b)=0 and F(b) in t^R A force F(b)=0. lem-per-tougeron-henselian-jacobian-correction is exactly Elkik II Lemme 2; I checked the precision n-h independently with a Newton step plus Nakayama. lem-per-elkik-conormal-smooth-open-chart is Lemme 3 plus the 'quitte a modifier h' step on p.565. I checked it independently: on every affine D(p(h)) in W_D the conormal is an extension of K⊗D by M⊗D, which is isomorphic to D^k, so the rank c=k is fixed and c<=N; s=(he)^M then gives sJ in (f), and the c×c minors are a unit ideal. Edge cases checked: c=0, I=0, h=0, W empty, nilpotent t, zero-divisor t. Not duplicates of the 07CE nodes (global smoothness), the stable-conormal-basis node, the complete obstruction-lifting node, the G-ring approximation node, or the adic homomorphism-lift node. Neither new node restates the item. Both are statement-only and unsplit, with correct created/blueprint fields and searches recorded. tool_uses list only generic pbc commutative-algebra tools. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.ElkikPrincipalSectionApproximation",
+  "declaration": "exists_algHom_elkik_principal_section_approximation",
+  "file": "lean/Sheaf/RingTheory/ElkikPrincipalSectionApproximation.lean",
+  "statement": "theorem exists_algHom_elkik_principal_section_approximation {A B : Type u} [CommRing A] [IsNoetherianRing A] (t : A) [HenselianRing A (Ideal.span {t})] [CommRing B] [Algebra A B] [Algebra.FinitePresentation A B] (W : (Spec (CommRingCat.of B)).Opens) (hW : Smooth (W.ι ≫ Spec.map (CommRingCat.ofHom (algebraMap A B)))) (u : B →ₐ[A] AdicCompletion (Ideal.span {t}) A) (hu : ∀ x : PrimeSpectrum (AdicCompletion (Ideal.span {t}) A), algebraMap A (AdicCompletion (Ideal.span {t}) A) t ∉ x.asIdeal → (Spec.map (CommRingCat.ofHom u.toRingHom)) x ∈ W) : ∀ m : ℕ, 1 ≤ m → ∃ v : B →ₐ[A] A, (Ideal.Quotient.mk ((Ideal.span {t}) ^ m)).comp v.toRingHom = (AdicCompletion.evalₐ (Ideal.span {t}) m).toRingHom.comp u.toRingHom",
+  "branch": "newtargets-dag",
+  "by": "Q110",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-d3d9e2bf4",
+  "group": "Q110",
+  "result": "pass",
+  "note": "The node lean.statement matches the file signature word for word; item statement unchanged. Clause-by-clause check holds: Noetherian A; HenselianRing A (span{t}) (Mathlib: I ⊆ Jac plus simple-root lifting, listed in the dep record's declarations); Algebra.FinitePresentation; AdicCompletion as C; W an open of Spec B with Smooth (W.ι ≫ Spec.map algebraMap); u : B →ₐ[A] C; punctured-image condition stated pointwise on primes of C not containing t; conclusion ∀ m ≥ 1, ∃ v : B →ₐ[A] A with mk(I^m)∘v = evalₐ m ∘ u. No extra assumptions on t (zero-divisor/nilpotent allowed); edge cases t=0, zero ring, empty W, m=1 covered. All six stmt_deps used, no new definitions, proof sorry only, docstrings carry source place and blueprint id, not a duplicate (project henselian approximation results need IsGRing). No file changed, so no recompile; worker's compile was clean."
+ }
+}

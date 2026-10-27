@@ -1,0 +1,29 @@
+## Worker report
+
+Files written: dag/nodes/sec-six-functors-basics/lem-sfb-space-affine-higher-direct-image-vanishing.json (existing statement, now split; no Mathlib match), citations.json, and this report. No new nodes and no new Mathlib leaves. searches.jsonl records the actual new searches. The imported statement, source, blueprint provenance and older search records are retained.
+
+Attachments: none. I searched WeilConjectures for the exact blueprint tag and for algebraic spaces, affine acyclicity and higher direct images. The affine scheme/module results are not this algebraic-space/additive statement. No exact project declaration was found.
+
+WANTED: none.
+
+The item was statement-only. There is no statement error to correct. Its reference to module higher direct images must not silently identify module injectives with injective underlying abelian sheaves. This split instead uses abelian object cohomology throughout. I read Tag 073H (spaces-cohomology.tex, lemma-affine-vanishing-higher-direct-images) and its representable-base-change discussion, then expanded the affine-test calculation with Tags 072W and 03F3 and the existing affine etale acyclicity node. The source of this assembled proof is marked agent, since it expands the local calculation rather than copying 073H's short module argument.
+
+Nothing remains unfinished in this one-level split.
+
+## Not duplicates
+
+No new nodes were created. Whole-DAG title/statement/source searches and blueprint_refs searches for affine vanishing, quasi-coherent groupoids, cohomology localization and higher-direct-image presheaves led to reuse of existing nodes. The item's same_as remains empty: the blueprint affine-vanishing hits are absolute affine scheme cohomology, not affine relative algebraic-space higher images. The ancestor tool returns None for this inherited chain; the existing null from.node and explicit from.place are retained. I read the current latest blueprint direct-images proof (3) and the unit/chapter records; this prerequisite does not change their route. No unit realization fields are changed because the item is not the unit's key statement.
+
+## Review by NR
+
+I read delivery-errors B through E in full and checked the four steps against the actual cited statements, not their proofs. Every citation is accompanied in citations.json by its verbatim statement. There are no new statements to test or unsplit nodes containing hidden proofs. No proof step exceeds 2000 characters; the complete assembly is under 3000 characters.
+
+Step 1 uses lem-trf-space-chartwise-etale-permanence for base changes and coverings, lem-trf-space-enlarged-etale-ringed-site-model for the canonical base-change presentation of the morphism of topoi, and lem-weil-pbc-site-higher-direct-image-sheafified-presheaf for precisely the sheafified *object* cohomology formula. Representability is essential here: W is a scheme, so base change really takes the small scheme-object site to the small scheme-object site. The general enlarged-site presentation supplies the same morphism of topoi. I checked Tag 072W in sites-cohomology.tex and the functoriality statement Tag 03G2 in spaces-properties.tex. No stalk formula or unproved module/additive pushforward comparison is used.
+
+Step 2 uses lem-trf-space-etale-module-pushforward-restriction only for its explicit etale-pullback-equals-restriction clause (03LV/03LW), lem-sfb-space-module-pullback-quasicoherent for preservation of quasi-coherence (03GA), and lem-sfb-space-qcoh-groupoid-equivalence for its explicit scheme etale/Zariski identification. I read 03M3 and its proof's convention in spaces-properties.tex. The identity atlas is surjective etale, its groupoid has identity arrows, and its underlying module M is an ordinary quasi-coherent scheme module. The final coherence/Noetherian clause of the equivalence is unused; no Noetherian hypothesis is introduced. W is affine because the item defines affineness by affine scheme base changes and V was chosen affine.
+
+Step 3 uses the full etale permanence assertion (03FV), including morphisms between etale objects over the same base. This justifies both directions of the small-site/slice identification, rather than only its object notation. Arrows and covering families are explicitly identified. lem-weil-pbc-cohomology-over-object-localization supplies injective-compatible localization, and lem-weil-pbc-etale-cohomology-invariance-under-site-equivalence supplies cohomology transport. I read Tag 03F3 in sites-cohomology.tex. The coefficient is the restricted underlying additive sheaf, already identified with M_et in step 2, so lem-sc-etale-affine-qcoherent applies with W affine and q>0. I also read descent.tex Tag 03DW and its affine-object vanishing proof. No quasi-separatedness or finiteness is needed for these affine tests.
+
+Step 4 is elementary: restrict an arbitrary map from P to a sheaf to an affine open covering of each test scheme. It is zero there by step 3, hence zero by sheaf separatedness. The universal property in def-weil-pbc-sheafification, not any assumed formula for sheafification by a plus construction, forces id=0 on P#. The sheaf axiom is exactly the cited def-weil-pbc-sites-and-cohomology. This avoids introducing a redundant locally-zero-presheaf lemma.
+
+I tested the zero module, the identity affine map, empty source/empty test schemes, disconnected affine tests, a non-affine base, and a base without quasi-compactness or Noetherian hypotheses. The empty cover handles the empty object; the claim deliberately excludes q=0, where affine pushforward need not vanish. None of the arguments requires affine intersections or a finite affine covering. The generic off-unit inputs are declared in split_report.tool_uses; they provide site/module interfaces and do not replace a unit-level route. There are no SGA citations and no Lean writes or compilation commands.

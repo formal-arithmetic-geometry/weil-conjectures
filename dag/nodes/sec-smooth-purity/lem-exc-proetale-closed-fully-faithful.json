@@ -67,7 +67,18 @@
   "def-weil-pbc-scheme-conventions"
  ],
  "proof_split_by": "paragraphs",
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
  "chapter": "sec-smooth-purity",
  "unit": "sk-prop-sf-open-closed-triangle",
  "lean": {
@@ -88,5 +99,31 @@
   "landing": "20261015T195758-L-1299658",
   "kind": "interface",
   "note": "independent Codex review: Delivered Lean statements, proofs, axioms and DAG records checked against the published originals, dependency interfaces and cited source; all delivery modules and direct importers compile."
+ },
+ "blueprint_update": {
+  "snapshot": "main-20261023-1620",
+  "commit": "7284bb09daf97437d544c51882b325f9c52cd345",
+  "changed": [
+   "statement",
+   "proof"
+  ],
+  "statement": "Let $R$ be a ring and $i:Z\\hookrightarrow X$ any closed immersion. On\npro-etale sheaves of $R$-modules the adjunction counit $i^*i_*G\\to G$ is an\nisomorphism for every $G$. Thus $i_*$ is fully faithful, without a\nconstructibility hypothesis.",
+  "proof": [
+   {
+    "text": "First let $X=\\operatorname{Spec}A$ and $Z=\\operatorname{Spec}(A/I)$. On the\naffine ind-etale bases, base change $u$ to $Z$ is right adjoint to the\nclosed-site lift $v$ with invertible unit $\\operatorname{id}\\to uv$\n([lem-exc-closed-site-adjunction]). Passing to opposite categories and\nprecomposing, precomposition with $u$ is therefore fully faithful on\npresheaves of $R$-modules: its adjoint has an invertible counit, given at a\npresheaf $F$ by $F$ applied to the unit of $v\\dashv u$. Restriction of sheaves\nto these bases is an equivalence, and on the bases the direct image $i_*$ is\nprecomposition with $u$, so $i_*$ is fully faithful. An arbitrary closed\nimmersion into an affine scheme is isomorphic to such a quotient immersion,\nand direct images compose, so $i_*$ is fully faithful whenever $X$ is affine;\nequivalently the counit is an isomorphism.",
+    "uses": [
+     "lem-exc-closed-site-adjunction"
+    ],
+    "elementary": false
+   },
+   {
+    "text": "In general, cover $X$ by affine opens $X_k$ and put $Z_k=Z\\times_XX_k$. The\nrestrictions to the $Z_k$ form a pro-etale cover of $Z$, so a map of sheaves on\n$Z$ is an isomorphism once its restrictions to all $Z_k$ are. By\n[lem-exc-closed-localization], applied to the cartesian squares formed by the\nopen immersions $X_k\\to X$, $Z_k\\to Z$ and the closed immersions, restriction\nto $Z_k$ carries the counit of $i^*\\dashv i_*$ to the counit for\n$Z_k\\hookrightarrow X_k$, up to isomorphism. These affine counits are\nisomorphisms by the first step, so the global counit is an isomorphism. An\nadjunction has fully faithful right adjoint precisely when its counit is an\nisomorphism, giving the assertion.",
+    "uses": [
+     "lem-exc-closed-localization"
+    ],
+    "elementary": false
+   }
+  ],
+  "note": "the current blueprint (main-20261023-1620, weil-conjectures-blueprint 7284bb09da) states or proves this differently; the node is proved in Lean: recorded 2026-10-23, not reopened"
  }
 }

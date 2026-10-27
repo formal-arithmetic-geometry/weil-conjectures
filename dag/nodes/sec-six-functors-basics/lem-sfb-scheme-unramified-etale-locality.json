@@ -1,0 +1,293 @@
+{
+ "id": "lem-sfb-scheme-unramified-etale-locality",
+ "kind": "statement",
+ "title": "Unramified scheme morphisms are etale local on source and target",
+ "statement": "Let $P$ be the property of a morphism of schemes [def-pc-scheme] being unramified [def-weil-unramified-morphism]. Etale morphisms mean [def-weil-etale-morphism]. Then $P$ is etale local on source-and-target in the following explicit sense: (i) if $e:U\\to X$ is etale and $f:X\\to Y$ has $P$, then $fe$ has $P$; (ii) if $f:X\\to Y$ has $P$ and $b:V\\to Y$ is etale, then $X\\times_YV\\to V$ has $P$, where the fibre product is [def-pc-fibre-product]; (iii) for every scheme morphism $f:X\\to Y$, $P(f)$ holds if and only if for every $x\\in X$ there exist schemes $U,V$, etale maps $a:U\\to X$, $b:V\\to Y$, a point $u\\in U$ with $a(u)=x$, and $h:U\\to V$ satisfying $fa=bh$ and $P(h)$. The statement includes the empty scheme and imposes no quasi-compactness, separation, or Noetherian hypothesis.",
+ "source": {
+  "document": "literature/stacks-project/descent.tex",
+  "place": "Tag 04R3 (remark-list-local-source-target), item (9), with Tag 04QZ (definition-local-source-target); source locality is Tag 03YV (lemma-unramified-etale-local-source), target locality Tag 02VM (lemma-descending-property-unramified), combined by Tag 04R2 (lemma-etale-local-source-target)."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-unramified-morphism",
+  "def-weil-etale-morphism",
+  "def-pc-fibre-product"
+ ],
+ "proof": [
+  {
+   "text": "For (i), an etale map e is locally of finite type and formally unramified by [def-weil-etale-morphism]. Convert unramifiedness to these two properties by [def-weil-unramified-morphism] and [lem-weil-pbc-unramified-formally-unramified], compose using the Mathlib instances realizing [lem-sfb-scheme-unramified-composition-cancellation], and recover the open-immersion diagonal by [lem-weil-pbc-lft-formally-unramified-unramified]. For (ii), apply the Mathlib base-change instances [lem-weil-pbc-lft-base-change] and [lem-weil-pbc-formally-unramified-base-change], then the same diagonal criterion. No hypothesis on the base-changing morphism is used.",
+   "uses": [
+    "def-weil-etale-morphism",
+    "def-weil-unramified-morphism",
+    "lem-weil-pbc-unramified-formally-unramified",
+    "lem-sfb-scheme-unramified-composition-cancellation",
+    "lem-weil-pbc-lft-base-change",
+    "lem-weil-pbc-formally-unramified-base-change",
+    "lem-weil-pbc-lft-formally-unramified-unramified"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tags 02G9 (lemma-composition-unramified), 02GA (lemma-base-change-unramified)"
+   }
+  },
+  {
+   "text": "For the forward implication of (iii), if $f$ is unramified, take $U=X$, $V=Y$, $a=1_X$, $b=1_Y$, $h=f$, and $u=x$. Identity maps are etale by the cited definitions: on affines their ring maps are flat and finitely presented with no generators or relations; their diagonals identify with the identity, which is an open immersion. Thus these are the required charts.",
+   "uses": [
+    "def-weil-etale-morphism",
+    "def-weil-unramified-morphism"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/descent.tex",
+    "place": "Tag 04QZ (definition-local-source-target), clause (3)"
+   }
+  },
+  {
+   "text": "Conversely, assume the charts in (iii) exist at every $x$. Unramifiedness of $h$ includes local finite type by [def-weil-unramified-morphism]. Apply [lem-sfb-scheme-etale-source-target-properties] to the property locally of finite type and these exact squares $fa=bh$. Its pointwise locality clause gives that $f$ is locally of finite type. Moreover $b$ is unramified because it is etale, so [lem-sfb-scheme-unramified-composition-cancellation] gives that $g:=fa=bh:U\\to Y$ is unramified for every chosen chart.",
+   "uses": [
+    "def-weil-unramified-morphism",
+    "lem-sfb-scheme-etale-source-target-properties",
+    "def-weil-etale-morphism",
+    "lem-sfb-scheme-unramified-composition-cancellation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/descent.tex",
+    "place": "Tag 04R3 (remark-list-local-source-target), local finite type entry; Tag 03YV (lemma-unramified-etale-local-source), finite-type and composition inputs"
+   }
+  },
+  {
+   "text": "Fix $x$ and one chart point $u$ above it. Put $y=f(x)$, $R=\\mathcal O_{Y,y}$, $A=\\mathcal O_{X,x}$ and $B=\\mathcal O_{U,u}$. Functoriality of stalk maps identifies the composite $R\\to A\\to B$ with the actual stalk map of $g=fa$; the equality $a(u)=x$ identifies its base ring with $R$. Since $g$ is unramified, [lem-weil-pbc-unramified-formally-unramified] makes it formally unramified, and [lem-sfb-formally-unramified-stalk-map] makes $R\\to B$ formally unramified. Hence $\\Omega_{B/R}=0$ by [lem-weil-pbc-formally-unramified-ring-iff-kahler-zero]. Also $a$ is flat by [def-weil-etale-morphism]; [def-weil-flat-morphism] says its stalk map $A\\to B$ is a flat local homomorphism, so [lem-weil-pbc-flat-local-hom-faithfully-flat] makes it faithfully flat.",
+   "uses": [
+    "def-weil-locally-ringed-space-morphism",
+    "lem-weil-pbc-unramified-formally-unramified",
+    "lem-sfb-formally-unramified-stalk-map",
+    "lem-weil-pbc-formally-unramified-ring-iff-kahler-zero",
+    "def-weil-etale-morphism",
+    "def-weil-flat-morphism",
+    "lem-weil-pbc-flat-local-hom-faithfully-flat"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/descent.tex",
+    "place": "Tag 03YV (lemma-unramified-etale-local-source), differential vanishing and faithful flatness argument; algebra.tex Tags 04E8, 00UO, 00HR"
+   }
+  },
+  {
+   "text": "The etale map a is smooth by the Mathlib Etale-to-Smooth instance (using [def-weil-etale-morphism]), so [lem-sfb-smooth-stalk-formally-smooth] makes A -> B formally smooth. The private ring helper proves [lem-weil-pbc-formally-smooth-differentials-injective] directly from Algebra.H1Cotangent.exact_δ_mapBaseChange: a kernel element comes from H1Cotangent A B, which is zero by formal smoothness. Since Omega(B/R) is zero by [lem-weil-pbc-formally-unramified-ring-iff-kahler-zero], the injection makes B tensor_A Omega(A/R) zero. Apply the exact Mathlib orientation of [lem-weil-pbc-faithfully-flat-universally-injective], TensorProduct.mk A B (KaehlerDifferential R A) 1, to inject Omega(A/R) into that zero tensor product [def-weil-pbc-module-tensor-product]. No tensor-factor interchange is needed. Thus Omega(A/R) is zero and the same differentials criterion makes the actual stalk map R -> A formally unramified.",
+   "uses": [
+    "def-weil-etale-morphism",
+    "lem-sfb-smooth-stalk-formally-smooth",
+    "lem-weil-pbc-formally-smooth-differentials-injective",
+    "lem-weil-pbc-faithfully-flat-universally-injective",
+    "lem-weil-pbc-formally-unramified-ring-iff-kahler-zero",
+    "def-weil-pbc-module-tensor-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 031K (lemma-ses-formally-smooth), applied to the stalk tower; descent.tex Tag 03YV (lemma-unramified-etale-local-source)"
+   }
+  },
+  {
+   "text": "The preceding argument applies at every $x\\in X$. Hence [lem-trf-formally-unramified-from-all-stalks] gives formal unramifiedness of $f$. Combine it with local finite type from step 3 using [lem-weil-pbc-lft-formally-unramified-unramified]: the diagonal is an open immersion, so $f$ is unramified. If $X$ is empty, the stalk condition and the pointwise local-finite-type condition are both vacuous, and the same two cited criteria still apply. Thus no point, finite subcover, quasi-compactness, separation, or Noetherian hypothesis has been added.",
+   "uses": [
+    "lem-trf-formally-unramified-from-all-stalks",
+    "lem-weil-pbc-lft-formally-unramified-unramified"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 0HAL (lemma-formally-unramified) and Tag 02HE (lemma-unramified-formally-unramified), (2) implies (1)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-etale-morphism",
+  "def-weil-unramified-morphism",
+  "lem-weil-pbc-unramified-formally-unramified",
+  "lem-sfb-scheme-unramified-composition-cancellation",
+  "lem-weil-pbc-lft-base-change",
+  "lem-weil-pbc-formally-unramified-base-change",
+  "lem-weil-pbc-lft-formally-unramified-unramified",
+  "lem-sfb-scheme-etale-source-target-properties",
+  "def-weil-locally-ringed-space-morphism",
+  "lem-sfb-formally-unramified-stalk-map",
+  "lem-weil-pbc-formally-unramified-ring-iff-kahler-zero",
+  "def-weil-flat-morphism",
+  "lem-weil-pbc-flat-local-hom-faithfully-flat",
+  "lem-sfb-smooth-stalk-formally-smooth",
+  "lem-weil-pbc-formally-smooth-differentials-injective",
+  "lem-weil-pbc-faithfully-flat-universally-injective",
+  "def-weil-pbc-module-tensor-product",
+  "lem-trf-formally-unramified-from-all-stalks"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/descent.tex",
+  "place": "Tag 03YV, the differential argument, at actual stalks; formal-smooth injection is algebra.tex Tag 031K via the Mathlib Jacobi-Zariski exact sequence. Formalized by U4 on 2026-10-26, preserving the six-step route and using direct Mathlib permanence and Etale-to-Smooth instances."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "unramified.*(etale|local)|etale.*unramified",
+   "results": "Hits read: Mathlib/AlgebraicGeometry/Morphisms/Etale.lean, Mathlib/AlgebraicGeometry/Morphisms/Etale.lean, Mathlib/AlgebraicGeometry/Morphisms/Etale.lean, Mathlib/AlgebraicGeometry/Morphisms/Etale.lean, Mathlib/AlgebraicGeometry/Morphisms/Etale.lean, Mathlib/AlgebraicGeometry/Morphisms/FormallyUnramified.lean, Mathlib/AlgebraicGeometry/Morphisms/FormallyUnramified.lean, Mathlib/AlgebraicGeometry/Morphisms/FormallyUnramified.lean. ",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme formal-unramifiedness and ring-map results do not state etale source-and-target locality of unramified scheme morphisms; local flat descent requires a target base-change square and cannot supply source locality in one line"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Unramified morphisms of schemes are etale local on source and target",
+   "results": "Hits read: AlgebraicGeometry.Scheme.Etale, AlgebraicGeometry.IsEtale, RingHom.FormallyUnramified.propertyIsLocal, AlgebraicGeometry.FormallyUnramified.recOn, AlgebraicGeometry.FormallyUnramified, AlgebraicGeometry.IsLocalAtTarget, AlgebraicGeometry.affineLocally, AlgebraicGeometry.IsLocalAtSource. ",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme formal-unramifiedness and ring-map results do not state etale source-and-target locality of unramified scheme morphisms; local flat descent requires a target base-change square and cannot supply source locality in one line"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Unramified\"",
+   "results": "Hits read: Algebra.FormallyUnramified.inst, Algebra.FormallyUnramified, Algebra.Unramified, Algebra.Unramified.formallyUnramified, Algebra.FormallyUnramified.mk, Algebra.FormallyUnramified.subsingleton_kaehlerDifferential, Algebra.formallyUnramified_iff, Algebra.Unramified.finiteType. ",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme formal-unramifiedness and ring-map results do not state etale source-and-target locality of unramified scheme morphisms; local flat descent requires a target base-change square and cannot supply source locality in one line"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Unramified morphisms of schemes are etale local on source and target: in an etale chart square unramifiedness descends if the source chart is surjective",
+   "results": "Hits read: AlgebraicGeometry.IsEtale.instFormallyUnramified, AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified, AlgebraicGeometry.IsEtale, AlgebraicGeometry.FormallyUnramified, AlgebraicGeometry.IsEtale.of_comp, AlgebraicGeometry.formallyUnramified_iff, AlgebraicGeometry.IsEtale.instIsSmooth, AlgebraicGeometry.IsEtale.instHasOfPostcompPropertyScheme. ",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme formal-unramifiedness and ring-map results do not state etale source-and-target locality of unramified scheme morphisms; local flat descent requires a target base-change square and cannot supply source locality in one line"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Unramifiedness of a scheme morphism can be checked after precomposing a surjective etale morphism, and in compatible etale charts",
+   "results": "Hits read: AlgebraicGeometry.FormallyUnramified.of_comp, AlgebraicGeometry.IsEtale.instFormallyUnramified, AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified, AlgebraicGeometry.FormallyUnramified, AlgebraicGeometry.FormallyUnramified.instIsStableUnderCompositionScheme, AlgebraicGeometry.formallyUnramified_iff, AlgebraicGeometry.FormallyUnramified.instIsStableUnderBaseChangeScheme, AlgebraicGeometry.IsEtale.of_comp. ",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme formal-unramifiedness and ring-map results do not state etale source-and-target locality of unramified scheme morphisms; local flat descent requires a target base-change square and cannot supply source locality in one line"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Unramified\"",
+   "results": "{\"t\": \"2026-10-23T11:51:47Z\", \"tool\": \"loogle\", \"query\": \"\\\"Unramified\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"Algebra.FormallyUnramified.inst\", \"Algebra.FormallyUnramified\", \"Algebra.Unramified\", \"Algebra.Unramified.formallyUnramified\", \"Algebra.FormallyUnramified.mk\", \"Algebra.FormallyUnramified.subsingleton_kaehlerDifferential\", \"Algebra.formallyUnramified_iff\", \"Algebra.Unramified.finiteType\"], \"digest\": \"dc4362d144007922\"}; no match: composition, ring-map and target base-change descent results do not state source-and-target chart locality; stalk lemmas are separate inputs",
+   "date": "2026-10-23",
+   "verdict": "no match: composition, ring-map and target base-change descent results do not state source-and-target chart locality; stalk lemmas are separate inputs"
+  },
+  {
+   "tool": "grep",
+   "query": "FormallyUnramified|unramified",
+   "results": "{\"t\": \"2026-10-23T11:51:47Z\", \"tool\": \"grep\", \"query\": \"FormallyUnramified|unramified\", \"sub\": \"AlgebraicGeometry/Morphisms\", \"ok\": true, \"n_hits\": 13, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/Morphisms/LocalFlatDescent.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/LocalFlatDescent.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/LocalFlatDescent.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/Etale.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/Etale.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/Etale.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/Etale.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/Etale.lean\"], \"digest\": \"d2ed590db33332cb\"}; no match: composition, ring-map and target base-change descent results do not state source-and-target chart locality; stalk lemmas are separate inputs",
+   "date": "2026-10-23",
+   "verdict": "no match: composition, ring-map and target base-change descent results do not state source-and-target chart locality; stalk lemmas are separate inputs"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Unramified morphisms of schemes are etale local on source and target",
+   "results": "{\"t\": \"2026-10-23T11:51:46Z\", \"tool\": \"leanfinder\", \"query\": \"Unramified morphisms of schemes are etale local on source and target\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsEtale.instFormallyUnramified\", \"AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified\", \"AlgebraicGeometry.IsEtale\", \"AlgebraicGeometry.formallyUnramified_iff\", \"AlgebraicGeometry.FormallyUnramified\", \"AlgebraicGeometry.IsEtale.of_comp\", \"AlgebraicGeometry.Scheme.Etale\", \"AlgebraicGeometry.IsEtale.instIsSmooth\"], \"digest\": \"835a26d7c6d8584c\"}; no match: composition, ring-map and target base-change descent results do not state source-and-target chart locality; stalk lemmas are separate inputs",
+   "date": "2026-10-23",
+   "verdict": "no match: composition, ring-map and target base-change descent results do not state source-and-target chart locality; stalk lemmas are separate inputs"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Unramified scheme morphisms descend along etale source covers",
+   "results": "{\"t\": \"2026-10-23T11:51:48Z\", \"tool\": \"leansearch\", \"query\": \"Unramified scheme morphisms descend along etale source covers\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.FormallyUnramified.recOn\", \"AlgebraicGeometry.Scheme.Etale\", \"AlgebraicGeometry.IsEtale\", \"AlgebraicGeometry.FormallyUnramified\", \"AlgebraicGeometry.FormallyUnramified.casesOn\", \"AlgebraicGeometry.IsEtale.instIsStableUnderBaseChangeScheme\", \"AlgebraicGeometry.IsEtale.instFormallyUnramified\", \"AlgebraicGeometry.FormallyUnramified.instIsStableUnderCompositionScheme\"], \"digest\": \"18205d433bab28c6\"}; no match: composition, ring-map and target base-change descent results do not state source-and-target chart locality; stalk lemmas are separate inputs",
+   "date": "2026-10-23",
+   "verdict": "no match: composition, ring-map and target base-change descent results do not state source-and-target chart locality; stalk lemmas are separate inputs"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Formal unramifiedness descends from the composite R to B when A to B is faithfully flat and formally etale",
+   "results": "{\"t\": \"2026-10-23T12:02:56Z\", \"tool\": \"leanfinder\", \"query\": \"Formal unramifiedness descends from the composite R to B when A to B is faithfully flat and formally etale\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.FormallyEtale.of_restrictScalars\", \"Algebra.FormallyUnramified.of_comp\", \"Algebra.FormallyUnramified.comp\", \"Algebra.FormallyEtale.Algebra.FormallyEtale.of_restrictScalars\", \"Algebra.FormallyEtale.comp\", \"Algebra.FormallyEtale.instFormallyUnramified\", \"Algebra.Unramified.comp\", \"RingHom.FormallyUnramified.isStableUnderBaseChange\"], \"digest\": \"a52f52a2792cd2c3\"}; no match: composition, ring-map and target base-change descent results do not state source-and-target chart locality; stalk lemmas are separate inputs",
+   "date": "2026-10-23",
+   "verdict": "no match: composition, ring-map and target base-change descent results do not state source-and-target chart locality; stalk lemmas are separate inputs"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-unramified-etale-compatible-charts",
+  "date": "2026-10-23",
+  "group": "Q61"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: The Deligne--Mumford locus in the stack of proper curves. Supporting input: Unramified diagonal yields an etale scheme atlas. Proof of the unramified-diagonal/etale-atlas criterion: Unramified algebraic-space morphisms: base change, composition and cancellation. Supporting input: chart recognition and existence of compatible presentations. Scheme-locality prerequisite for unramifiedness (Stacks 04R3, item (9)).",
+   "via": [
+    "lem-sfb-unramified-etale-compatible-charts",
+    "lem-sfb-space-unramified-permanence",
+    "lem-sfb-unramified-diagonal-etale-atlas",
+    "lem-sfb-curve-stack-infinitesimal-dm-locus",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-scheme-unramified-etale-locality",
+  "worker": "stage1",
+  "summary": "Preserved the exact statement; proved the three clauses by existing permanence results, local finite type descent, and a local-ring version of the Stacks 03YV differential argument. Added two exact Mathlib stalk-map leaves, with actual logged searches. All citations checked against their statements; empty schemes covered.",
+  "blueprint": "Supports the inherited det-thm-sf-ctf-stability-direct-images, proof (3), alteration/curve-moduli prerequisite branch recorded in blueprint.from.place; current latest proof (3) was read. This item supplies scheme locality for compatible unramified charts below that route.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-unramified-base-change-open",
+    "why": "Generic scheme unramified base change supplies clause (ii); it does not replace the unit route."
+   },
+   {
+    "node": "lem-weil-pbc-etale-smooth-zero-dimensional-fibres",
+    "why": "Generic implication etale implies smooth supplies the smoothness hypothesis in the stalk argument."
+   }
+  ]
+ },
+ "tool_uses": [],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-O3-0de449a97",
+  "group": "O3",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-O3-0de449a97 (reviewer sub-agent of L); spot-checked: I read the item, both new nodes, every cited statement and Stacks descent.tex 03YV (6997-7035) and 04R3(9) in full. The statement is unchanged from the live unsplit node, and live and side-live are both still unsplit. There is no cycle; the only citer is lem-sfb-unramified-etale-compatible-charts. No SGA is cited. Clauses (i) and (ii) follow from the composition-cancellation node and the arbitrary base change of lem-weil-pbc-unramified-base-change-open (1). The forward direction of (iii) uses identity charts and is genuinely elementary. The converse of (iii): local finite type comes from the pointwise clause (iii) of lem-sfb-scheme-etale-source-target-properties, and fa=bh is unramified. Then 03YV is applied at the stalks: R->B is formally unramified (new leaf), so Omega_{B/R}=0. The local homomorphism A->B is flat, hence faithfully flat, and formally smooth (etale implies smooth, then the new leaf). 031K injectivity gives B(x)_A Omega_{A/R}=0, so Omega_{A/R}=0. The all-stalks node then gives formal unramifiedness, and lft with lft-formally-unramified gives unramified. Every hypothesis matches the cited statements. Edge cases: empty X, and k[e]/k and inseparable L/K behave as the statement requires. New leaves: FormallyUnramified.stalkMap at FormallyUnramified.lean:151 is an exact match. smoothLocus_eq_top at Smooth.lean:311 works because smoothLocus is defined by stalkMap FormallySmooth. The B8 concern about the smoothness definition is settled by the existing:true lean record of def-sbc-smooth-morphisms (AlgebraicGeometry.Smooth). Neither leaf is a duplicate: the only near hit, trf-formally-unramified-from-all-stalks, is the converse direction, and the galois fpqc nodes are target descent. Neither leaf restates a clause of the item. blueprint.from.node is null because the Q61 chain is null upstream; this is a base fault. Accepted tool_uses: unramified-base-change-open and etale-smooth-zero-dimensional-fibres (both generic). Batch-5: lem-trf-smooth-composition (smooth composition) and lem-trf-formally-unramified-from-all-stalks (stalk algebra) are generic Mathlib leaves and neither is part of the trace formula or Poincare duality, so neither is a fault. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SchemeUnramifiedEtaleLocality",
+  "declaration": "AlgebraicGeometry.scheme_unramified_etale_locality",
+  "file": "lean/Sheaf/AlgebraicGeometry/SchemeUnramifiedEtaleLocality.lean",
+  "statement": "theorem scheme_unramified_etale_locality : (∀ (U X Y : Scheme.{u}) (e : U ⟶ X) (f : X ⟶ Y), Etale e → IsUnramified f → IsUnramified (e ≫ f)) ∧ (∀ (X Y V : Scheme.{u}) (f : X ⟶ Y) (b : V ⟶ Y), IsUnramified f → Etale b → IsUnramified (pullback.snd f b)) ∧ (∀ (X Y : Scheme.{u}) (f : X ⟶ Y), IsUnramified f ↔ ∀ x : X, ∃ (U V : Scheme.{u}) (a : U ⟶ X) (b : V ⟶ Y) (u : U) (h : U ⟶ V), Etale a ∧ Etale b ∧ a.base u = x ∧ a ≫ f = h ≫ b ∧ IsUnramified h)",
+  "branch": "newtargets-dag",
+  "by": "Q30",
+  "date": "2026-10-23",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-1a6d8af1f",
+  "group": "Q30",
+  "result": "pass",
+  "note": "No-op re-delivery: SchemeUnramifiedEtaleLocality.lean is byte-identical to the a67cac34 head that passed and LANDED (ae004f51, 22:28) and to side-live; the node differs only in lean.statement whitespace (verbatim multi-line vs the normalized single line that landed). Re-read: (i) e≫f, (ii) pullback.snd f b, (iii) iff over pointwise étale charts with a.base u = x and a≫f = h≫b match the node and Stacks 04QZ/04R3(9); IsUnramified (lft ∧ open-immersion diagonal) and Mathlib Etale are the recorded deps; one universe; no extra hypotheses; empty scheme covered; proof sorry; docstrings complete; both report sections present. No compile (no change). Maintainer: retire the Q30 claim, item already landed."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U4",
+  "result": "pass",
+  "landing": "20261026T092753-L-3465264",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

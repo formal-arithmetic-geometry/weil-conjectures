@@ -1,0 +1,317 @@
+{
+ "id": "lem-sfb-noetherian-complementary-stratifications",
+ "kind": "statement",
+ "title": "Complementary immersions extend finite stratifications over a Noetherian scheme",
+ "statement": "Let $T$ be a Noetherian scheme, meaning locally Noetherian [pqf-def-locnoeth] and quasi-compact [def-weil-pbc-quasi-compact-scheme]. Let $j:U\\hookrightarrow T$ be an open immersion [def-weil-open-immersion] and $i:Z\\hookrightarrow T$ a closed immersion [def-weil-closed-immersion], with $j(U)=|T|\\setminus i(Z)$. Then $T,U,Z$ are Noetherian and quasi-compact quasi-separated schemes [def-weil-pbc-scheme-conventions]; every subset of $|T|$ is quasi-compact, and $j$ is a quasi-compact morphism (the inverse image of each affine open is quasi-compact) [def-weil-finite-type-morphism].\nFor every finite stratification $(s_a:U_a\\hookrightarrow U)_{a<n}$ [def-constructible-stratification], the family consisting of $(j\\circ s_a:U_a\\hookrightarrow T)_{a<n}$ and $i:Z\\hookrightarrow T$ is a finite stratification of $T$ by constructible locally closed subschemes [def-weil-constructible-subset]. For every finite stratification $(t_b:Z_b\\hookrightarrow Z)_{b<m}$, the family consisting of $(i\\circ t_b:Z_b\\hookrightarrow T)_{b<m}$ and $j:U\\hookrightarrow T$ has the same property. In both cases the old stratum schemes and their maps into the source are unchanged; the listed maps into $T$ are the actual composites. The complementary scheme has its given scheme structure. Empty strata and an empty complementary scheme may be retained.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-integral-models/sk-lem-integral-models-operations.proof.md",
+  "place": "paragraph (3), parenthetical Noetherian quasi-compactness and the geometric preparation for immersion constructibility; original scalar-model immersion-extension proof steps 1–2"
+ },
+ "stmt_deps": [
+  "pqf-def-locnoeth",
+  "def-weil-pbc-quasi-compact-scheme",
+  "def-weil-open-immersion",
+  "def-weil-closed-immersion",
+  "def-weil-pbc-scheme-conventions",
+  "def-weil-finite-type-morphism",
+  "def-constructible-stratification",
+  "def-weil-constructible-subset"
+ ],
+ "proof": [
+  {
+   "text": "Equip T with IsNoetherian using its given locally Noetherian and compact structures. Mathlib IsNoetherian.noetherianSpace gives a Noetherian underlying space, and NoetherianSpace.isCompact makes every subset compact, including every open, as in [lem-weil-pbc-noetherian-open-subscheme-noetherian]. The open immersion j makes U locally Noetherian by isLocallyNoetherian_of_isOpenImmersion [def-weil-open-immersion]. Its inducing map transports the Noetherian-space property to U, hence compactness, so U is Noetherian.",
+   "uses": [
+    "lem-weil-pbc-noetherian-open-subscheme-noetherian",
+    "def-weil-open-immersion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/properties.tex",
+    "place": "Tags 01OW (lemma-locally-Noetherian), 01OZ (lemma-Noetherian-topology); open-subscheme consequence stated by the cited existing Mathlib leaf"
+   }
+  },
+  {
+   "text": "Use NoetherianSpace.isCompact for every subset A of T, which is the open-cover argument of Stacks Tag 04ZA. The open immersion j is quasi-compact by the Mathlib instance for open immersions into a locally Noetherian target [def-weil-finite-type-morphism], equivalently by applying compactness to its inverse images of affine opens under the open embedding [def-weil-open-immersion].",
+   "uses": [
+    "def-weil-open-immersion",
+    "def-weil-finite-type-morphism"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/topology.tex",
+    "place": "Tag 04ZA (lemma-Noetherian-quasi-compact), proof of (1) implies (2); together with properties.tex Tag 01OX (lemma-immersion-into-noetherian), open case"
+   }
+  },
+  {
+   "text": "The closed immersion i is an immersion [def-weil-closed-immersion], hence locally of finite type [lem-weil-pbc-immersion-base-change-lft]. Apply LocallyOfFiniteType.isLocallyNoetherian [pqf-lem-locnoeth-lft] to obtain locally Noetherian Z. The inducing map of its closed embedding transports the Noetherian-space property from T to Z, yielding CompactSpace Z and thus IsNoetherian Z. This uses the given Z and does not alter its structure sheaf.",
+   "uses": [
+    "def-weil-closed-immersion",
+    "lem-weil-pbc-immersion-base-change-lft",
+    "pqf-lem-locnoeth-lft"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/properties.tex",
+    "place": "Tag 02IK (lemma-locally-closed-in-Noetherian); locally finite type route: morphisms.tex Tags 01T5 and 01T6"
+   }
+  },
+  {
+   "text": "All three schemes $T,U,Z$ are locally Noetherian by the hypotheses and steps 1 and 3. Apply [lem-weil-pbc-locally-noetherian-quasi-separated] separately to each of them: each intersection of two affine opens is quasi-compact, so each scheme is quasi-separated. Their quasi-compactness is already part of their established Noetherianity. Thus all three are qcqs.",
+   "uses": [
+    "lem-weil-pbc-locally-noetherian-quasi-separated"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/properties.tex",
+    "place": "Tag 01OY (lemma-locally-Noetherian-quasi-separated)"
+   }
+  },
+  {
+   "text": "The maps $s_a$ in a stratification of $U$, and $t_b$ in a stratification of $Z$, are immersions by [def-constructible-stratification]. Both $j$ and $i$ are immersions: for $j$ use the identity closed factor, and for $i$ the identity open factor, in [def-weil-closed-immersion]. Clause (e) of [lem-weil-pbc-proper-fp-permanence] gives immersions $j\\circ s_a:U_a\\to T$ and $i\\circ t_b:Z_b\\to T$. Use these actual composites as the new stratum maps, retaining $U_a,s_a$ and $Z_b,t_b$ themselves. Use $i:Z\\to T$ or $j:U\\to T$ itself for the additional stratum.",
+   "uses": [
+    "def-constructible-stratification",
+    "def-weil-closed-immersion",
+    "lem-weil-pbc-proper-fp-permanence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Tag 02V0 (lemma-composition-immersion), immersion-composition clause; construction follows blueprint det-lem-integral-models-operations paragraph (3)"
+   }
+  },
+  {
+   "text": "Every map constructed in step 5 is an immersion, so its range is locally closed by Scheme.Hom.isLocallyClosed_range [def-weil-closed-immersion, def-weil-locally-closed-subset]. The same holds for the complementary immersion. Apply IsLocallyClosed.isConstructible_of_noetherianSpace from the proved source-library module WeilConjectures.Mathlib.Topology.Constructible [def-weil-constructible-subset]: an open is retrocompact since every subset of T is compact, and an open intersected with a closed set is constructible. Thus the ranges satisfy the local closedness and constructibility required by [def-constructible-stratification].",
+   "uses": [
+    "def-constructible-stratification",
+    "def-weil-closed-immersion",
+    "def-weil-locally-closed-subset",
+    "def-weil-constructible-subset"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/topology.tex",
+    "place": "Tag 005L (lemma-constructible-Noetherian-space), proof from Tag 04ZA; locally closed image calculation is the subspace-topology argument of schemes.tex Tag 02V0"
+   }
+  },
+  {
+   "text": "For a stratification $(s_a)_{a<n}$ of $U$, index the extended family by $\\{0,\\ldots,n-1\\}\\amalg\\{*\\}$. Give index $a$ the scheme $U_a$ and map $j\\circ s_a$, and give $*$ the scheme $Z$ and map $i$. The images are $j(s_a(U_a))$ and $i(Z)$. Since $j$ is injective on points, distinct former images are disjoint. Each is contained in $j(U)$ and is therefore disjoint from $i(Z)$. Their union is $j(U)\\cup i(Z)=|T|$, because the old images cover $U$ and the two given immersions are complementary. The $n+1$ images are locally closed and constructible by step 6 and their maps are immersions by step 5. These are exactly all requirements of [def-constructible-stratification].",
+   "uses": [
+    "def-constructible-stratification",
+    "def-weil-open-immersion"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-integral-models/sk-lem-integral-models-operations.proof.md",
+    "place": "Paragraph (3), constructibility preservation for open extension by zero; explicit geometric partition underlying that argument"
+   }
+  },
+  {
+   "text": "For a stratification $(t_b)_{b<m}$ of $Z$, use indices $\\{0,\\ldots,m-1\\}\\amalg\\{*\\}$, with scheme $Z_b$ and map $i\\circ t_b$ at $b$, and scheme $U$ and map $j$ at $*$. Injectivity of $i$ makes the former images pairwise disjoint; they cover $i(Z)$ and avoid $j(U)$. The latter image is exactly their complement, so the $m+1$ images cover $T$ and are pairwise disjoint. Steps 5 and 6 give the required immersions and constructible locally closed images, proving the other assertion by [def-constructible-stratification]. In both constructions no new structure is imposed on an old stratum or on the complement: all source schemes and maps to $U$ or $Z$ are the original ones. Empty images satisfy the same disjointness and local-closedness checks. If $n=0$ then $U=\\varnothing$ and the first family consists just of $i$; if $m=0$ then $Z=\\varnothing$ and the second consists just of $j$. If the complementary scheme is empty its given immersion is simply retained as an empty stratum.",
+   "uses": [
+    "def-constructible-stratification",
+    "def-weil-closed-immersion"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-integral-models/sk-lem-integral-models-operations.proof.md",
+    "place": "Paragraph (3), constructibility preservation for closed direct image; explicit geometric partition underlying that argument"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-noetherian-open-subscheme-noetherian",
+  "def-weil-open-immersion",
+  "def-weil-finite-type-morphism",
+  "def-weil-closed-immersion",
+  "lem-weil-pbc-immersion-base-change-lft",
+  "pqf-lem-locnoeth-lft",
+  "lem-weil-pbc-locally-noetherian-quasi-separated",
+  "def-constructible-stratification",
+  "lem-weil-pbc-proper-fp-permanence",
+  "def-weil-locally-closed-subset",
+  "def-weil-constructible-subset"
+ ],
+ "proof_origin": {
+  "by": "H8",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-integral-models/sk-lem-integral-models-operations.proof.md",
+  "place": "Paragraph (3), the same eight geometric steps, realized by the proved private append_complementary_stratum helper and existing Mathlib/source-library theorems; 2026-10-23."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A finite locally closed stratification of an open or closed subscheme of a Noetherian scheme extends by its complementary subscheme; all three schemes are qcqs and the open immersion is quasi compact",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.IsLocallyNoetherian.quasiSeparatedSpace\", \"module\": \"Mathlib/AlgebraicGeometry/Noetherian\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} [AlgebraicGeometry.IsLocallyNoetherian X], QuasiSeparatedSpace ↥X\", \"doc\": \"Every locally Noetherian scheme is quasi-separated, meaning the intersection of any two quasi-compact open subsets of the scheme is quasi-compact.\"}\n  {\"name\": \"AlgebraicGeometry.finite_irreducibleComponents_of_isNoetherian\", \"module\": \"Mathlib/AlgebraicGeometry/Noetherian\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} [AlgebraicGeometry.IsNoetherian X], (irreducibleComponents ↥X).Finite\", \"doc\": \"If $ X $ is a Noetherian scheme, then the set of its irreducible components is finite.\"}\n  {\"name\": \"AlgebraicGeometry.instIsLocallyNoetherianXScheme\", \"module\": \"Mathlib/AlgebraicGeometry/Noetherian\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} {U : X.OpenCover} (i : U.I₀) [AlgebraicGeometry.IsLocallyNoetherian X],\\n  AlgebraicGeometry.IsLocallyNoetherian (U.X i)\", \"doc\": \"If a scheme $ X $ is locally Noetherian, then each open subscheme in an open cover of $ X $ is also locally Noetherian.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.quasiSeparatedSpace_of_isOpenCover\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiSeparated\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} {I : Type u_1} (U : I → X.Opens),\\n  TopologicalSpace.IsOpenCover U →\\n    (∀ (i : I), AlgebraicGeometry.IsAffineOpen (U i)) →\\n      (∀ (i j : I), IsCompact (↑(U i) ∩ ↑(U j))) → QuasiSeparatedSpace ↥X\", \"doc\": \"If a scheme $X$ has an open cover consisting of affine open subsets such that the intersection of any two elements of the cover is quasi-compact, then $X$ is a quasi-separated space.\"}\n  {\"name\": \"AlgebraicGeometry.IsNoetherian.noetherianSpace\", \"module\": \"Mathlib/AlgebraicGeometry/Noetherian\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} [AlgebraicGeometry.IsNoetherian X], TopologicalSpace.NoetherianSpace ↥X\", \"doc\": \"Every Noetherian scheme has an underlying topological space that satisfies the Noetherian condition, meaning every descending chain of closed subsets stabilizes.\"}\n  {\"name\": \"AlgebraicGeometry.isNoetherian_iff_of_finite_iSup_eq_top\", \"module\": \"Mathlib/AlgebraicGeometry/Noetherian\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} {ι : Sort u_1} [Finite ι] {S : ι → ↑X.affineOpens},\\n  ⨆ i, ↑(S i) = ⊤ →\\n    (AlgebraicGeometry.IsNoetherian X ↔ ∀ (i : ι), IsNoetherianRing ↑(X.presheaf.obj (Opposite.op ↑(S i))))\", \"doc\": \"For a scheme $X$ and a finite family of affine open subsets $\\\\{S_i\\\\}$ whose union is $X$, $X$ is Noetherian if and only if the ring of sections $\\\\Gamma(X, S_i)$ is a Noetherian ring for every $i$.\"}\n  {\"name\": \"AlgebraicGeometry.isLocallyNoetherian_iff_openCover\", \"module\": \"Mathlib/AlgebraicGeometry/Noetherian\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} (𝒰 : X.OpenCover),\\n  AlgebraicGeometry.IsLocallyNoetherian X ↔ ∀ (i : 𝒰.I₀), AlgebraicGeometry.IsLocallyNoetherian (𝒰.X i)\", \"doc\": \"A scheme $X$ is locally Noetherian if and only if every open subscheme in an open cover $\\\\mathcal{U}$ of $X$ is locally Noetherian, i.e., $X$ is locally Noetherian $\\\\iff \\\\forall i \\\\in \\\\mathcal{U}.I_0,\"}\n  {\"name\": \"AlgebraicGeometry.isLocallyNoetherian_iff_of_iSup_eq_top\", \"module\": \"Mathlib/AlgebraicGeometry/Noetherian\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} {ι : Sort u_1} {S : ι → ↑X.affineOpens},\\n  ⨆ i, ↑(S i) = ⊤ →\\n    (AlgebraicGeometry.IsLocallyNoetherian X ↔ ∀ (i : ι), IsNoetherianRing ↑(X.presheaf.obj (Opposite.op ↑(S i))))\", \"doc\": \"For a scheme $X$, if a family of affine open subsets $\\\\{S_i\\\\}$ covers $X$ (i.e., $\\\\bigcup_i S_i = X$), then $X$ is locally Noetherian if and only if the ring of global sections $\\\\Gamma(X, S_i)$ is a N\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: Noetherian-space and immersion-composition declarations prove ingredients, not this construction of both actual scheme stratifications with all qcqs hypotheses"
+  },
+  {
+   "tool": "leansearch",
+   "query": "For a Noetherian scheme with complementary open and closed immersions, composing a finite stratification of either source and adjoining the other source gives a constructible stratification",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.IsImmersion.comp\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Immersion\", \"type\": \"{X Y Z : Scheme} (f : X ⟶ Y) (g : Y ⟶ Z) [IsImmersion f] [IsImmersion g] : IsImmersion (f ≫ g)\", \"doc\": \"The composition of two immersions between schemes is again an immersion. Specifically, if $ f : X \\\\to Y $ and $ g : Y \\\\to Z $ are immersions of schemes, then their composition $ g \\\\circ f : X \\\\to Z $ \"}\n  {\"name\": \"AlgebraicGeometry.nonempty_isColimit_binaryCofanMk_of_isCompl\", \"module\": \"Mathlib.AlgebraicGeometry.Limits\", \"type\": \"{X Y S : Scheme.{u}} (f : X ⟶ S) (g : Y ⟶ S) [IsOpenImmersion f] [IsOpenImmersion g]\\n  (hf : IsCompl f.opensRange g.opensRange) : Nonempty (IsColimit <| BinaryCofan.mk f g)\", \"doc\": \"Given schemes $X$, $Y$, and $S$ with open immersions $f : X \\to S$ and $g : Y \\to S$, if the images of $f$ and $g$ form complementary open subsets of $S$ (i.e., their union is $S$ and their intersection\"}\n  {\"name\": \"AlgebraicGeometry.isCompl_opensRange_inl_inr\", \"module\": \"Mathlib.AlgebraicGeometry.Limits\", \"type\": \": IsCompl (coprod.inl : X ⟶ X ⨿ Y).opensRange (coprod.inr : Y ⟶ X ⨿ Y).opensRange\", \"doc\": \"For schemes $X$ and $Y$, the open subsets of their coproduct $X ⨿ Y$ corresponding to the images of the left and right inclusions $X \\to X ⨿ Y$ and $Y \\to X ⨿ Y$ are complements in the lattice of open s\"}\n  {\"name\": \"AlgebraicGeometry.isOpenImmersion_isMultiplicative\", \"module\": \"Mathlib.AlgebraicGeometry.OpenImmersion\", \"type\": \": MorphismProperty.IsMultiplicative @IsOpenImmersion\", \"doc\": \"The composition of two open immersions of schemes is again an open immersion.\"}\n  {\"name\": \"AlgebraicGeometry.IsOpenImmersion.comp\", \"module\": \"Mathlib.AlgebraicGeometry.OpenImmersion\", \"type\": \"{X Y Z : Scheme.{u}} (f : X ⟶ Y) (g : Y ⟶ Z) [IsOpenImmersion f] [IsOpenImmersion g] : IsOpenImmersion (f ≫ g)\", \"doc\": \"The composition of two open immersions $ f: X \\to Y $ and $ g: Y \\to Z $ between schemes is itself an open immersion. This follows because the composition preserves the topological open embedding proper\"}\n  {\"name\": \"AlgebraicGeometry.IsClosedImmersion.comp\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion\", \"type\": \"{X Y Z : Scheme} (f : X ⟶ Y) (g : Y ⟶ Z) [IsClosedImmersion f] [IsClosedImmersion g] : IsClosedImmersion (f ≫ g)\", \"doc\": \"The composition of two closed immersions of schemes is again a closed immersion.\"}\n  {\"name\": \"AlgebraicGeometry.IsImmersion.isImmersion_iff_exists\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Immersion\", \"type\": \": IsImmersion f ↔ ∃ (Z : Scheme) (g₁ : X ⟶ Z) (g₂ : Z ⟶ Y), IsClosedImmersion g₁ ∧ IsOpenImmersion g₂ ∧ g₁ ≫ g₂ = f\", \"doc\": \"A morphism $ f: X \\\\to Y $ of schemes is an immersion if and only if there exists a scheme $ Z $ and morphisms $ g₁: X \\\\to Z $ and $ g₂: Z \\\\to Y $ such that $ g₁ $ is a closed immersion, $ g₂ $ is an o\"}\n  {\"name\": \"AlgebraicGeometry.IsClosedImmersion.of_comp\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Separated\", \"type\": \"[IsClosedImmersion (f ≫ g)] [IsSeparated g] : IsClosedImmersion f\", \"doc\": \"If the composition $ f \\\\circ g $ is a closed immersion and $ g $ is a separated morphism of schemes, then $ f $ is a closed immersion.\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: Noetherian-space and immersion-composition declarations prove ingredients, not this construction of both actual scheme stratifications with all qcqs hypotheses"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.IsNoetherian, AlgebraicGeometry.IsImmersion",
+   "results": "[loogle] OK 0 hit(s)",
+   "date": "2026-10-22",
+   "verdict": "no match: Noetherian-space and immersion-composition declarations prove ingredients, not this construction of both actual scheme stratifications with all qcqs hypotheses"
+  },
+  {
+   "tool": "grep",
+   "query": "stratification.*(complement|immersion)|complement.*stratification",
+   "results": "[grep] OK 0 hit(s)",
+   "date": "2026-10-22",
+   "verdict": "no match: Noetherian-space and immersion-composition declarations prove ingredients, not this construction of both actual scheme stratifications with all qcqs hypotheses"
+  },
+  {
+   "tool": "grep",
+   "query": "isNoetherian|quasiSeparatedSpace|noetherianSpace",
+   "results": "[grep] OK 5 hit(s)\n  {\"file\": \"24\", \"line\": \"* `AlgebraicGeometry.IsNoetherian`\", \"text\": \" A scheme is Noetherian if it is locally Noetherian\"}\n  {\"file\": \"32\", \"line\": \"* `AlgebraicGeometry.IsLocallyNoetherian.quasiSeparatedSpace`\", \"text\": \" A locally Noetherian scheme is\"}\n  {\"file\": \"35\", \"line\": \"* `AlgebraicGeometry.isNoetherian_iff_of_finite_affine_openCover`\", \"text\": \" A scheme is Noetherian\"}\n  {\"file\": \"38\", \"line\": \"* `AlgebraicGeometry.IsNoetherian.noetherianSpace`\", \"text\": \" A Noetherian scheme is\"}\n  {\"file\": \"59\", \"line\": \"    IsNoetherianRing Γ(X, U) \", \"text\": \"= by infer_instance\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: Noetherian-space and immersion-composition declarations prove ingredients, not this construction of both actual scheme stratifications with all qcqs hypotheses"
+  },
+  {
+   "tool": "grep",
+   "query": "stratification",
+   "results": "[grep] OK 0 hit(s)",
+   "date": "2026-10-22",
+   "verdict": "no match: Noetherian-space and immersion-composition declarations prove ingredients, not this construction of both actual scheme stratifications with all qcqs hypotheses"
+  },
+  {
+   "tool": "grep",
+   "query": "isImmersion.*comp|lemma comp|theorem comp",
+   "results": "[grep] OK 5 hit(s)\n  {\"file\": \"24\", \"line\": \"- `isImmersion_iff_exists_of_quasiCompact`\", \"text\": \"\"}\n  {\"file\": \"222\", \"line\": \"theorem comp_iff {X Y Z \", \"text\": \" Scheme} (f : X ⟶ Y) (g : Y ⟶ Z) [IsImmersion g] :\"}\n  {\"file\": \"238\", \"line\": \"  IsImmersion.of_comp f.toImage f.imageι\", \"text\": \"\"}\n  {\"file\": \"246\", \"line\": \"lemma isPullback_toImage_liftCoborder [IsImmersion f] [QuasiCompact f] \", \"text\": \"\"}\n  {\"file\": \"259\", \"line\": \"instance [IsImmersion f] [QuasiCompact f] \", \"text\": \" IsOpenImmersion f.toImage :=\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: Noetherian-space and immersion-composition declarations prove ingredients, not this construction of both actual scheme stratifications with all qcqs hypotheses"
+  },
+  {
+   "tool": "grep",
+   "query": "instance.*noetherianSpace|theorem quasiSeparatedSpace|instance.*quasiSeparatedSpace",
+   "results": "[grep] OK 9 hit(s)\n  {\"file\": \"Mathlib/AlgebraicGeometry/Noetherian.lean\", \"line\": \"221\", \"text\": \"instance (priority := 100) IsLocallyNoetherian.quasiSeparatedSpace [IsLocallyNoetherian X] :\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Noetherian.lean\", \"line\": \"320\", \"text\": \"instance (priority := 100) IsNoetherian.noetherianSpace [IsNoetherian X] :\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Noetherian.lean\", \"line\": \"337\", \"text\": \"instance (priority := 100) quasiCompact_of_noetherianSpace_source {X Y : Scheme}\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/Separated.lean\", \"line\": \"356\", \"text\": \"instance (priority := low) {X : Scheme.{u}} [X.IsSeparated] : QuasiSeparatedSpace X :=\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiSeparated.lean\", \"line\": \"56\", \"text\": \"theorem quasiSeparatedSpace_iff_forall_affineOpens {X : Scheme} :\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiSeparated.lean\", \"line\": \"107\", \"text\": \"instance : HasAffineProperty @QuasiSeparated (fun X _ _ _ ↦ QuasiSeparatedSpace X) where\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiSeparated.lean\", \"line\": \"133\", \"text\": \"theorem quasiSeparatedSpace_iff_quasiSeparated (X : Scheme) :\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiSeparated.lean\", \"line\": \"155\", \"text\": \"theorem quasiSeparatedSpace_of_quasiSeparated (f : X ⟶ Y)\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiSeparated.lean\", \"line\": \"167\", \"text\": \"instance quasiSeparatedSpace_of_isAffine (X : Scheme) [IsAffine X] : QuasiSeparatedSpace X :=\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: Noetherian-space and immersion-composition declarations prove ingredients, not this construction of both actual scheme stratifications with all qcqs hypotheses"
+  },
+  {
+   "tool": "grep",
+   "query": "instance.*IsImmersion.*comp|theorem comp_iff",
+   "results": "[grep] OK 3 hit(s)\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/Immersion.lean\", \"line\": \"222\", \"text\": \"theorem comp_iff {X Y Z : Scheme} (f : X ⟶ Y) (g : Y ⟶ Z) [IsImmersion g] :\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/Immersion.lean\", \"line\": \"259\", \"text\": \"instance [IsImmersion f] [QuasiCompact f] : IsOpenImmersion f.toImage :=\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/Preimmersion.lean\", \"line\": \"78\", \"text\": \"theorem comp_iff {X Y Z : Scheme} (f : X ⟶ Y) (g : Y ⟶ Z) [IsPreimmersion g] :\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: Noetherian-space and immersion-composition declarations prove ingredients, not this construction of both actual scheme stratifications with all qcqs hypotheses"
+  },
+  {
+   "tool": "grep",
+   "query": "stratification.*(complement|immersion)|complement.*stratification",
+   "results": "{\"t\": \"2026-10-22T06:56:00Z\", \"tool\": \"grep\", \"query\": \"stratification.*(complement|immersion)|complement.*stratification\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the returned declarations establish Noetherian or immersion ingredients, not the two finite scheme-stratification constructions with all clauses of this item"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Concatenating finite stratifications along complementary open and closed immersions gives a finite constructible stratification of a Noetherian scheme",
+   "results": "{\"t\": \"2026-10-22T06:56:00Z\", \"tool\": \"leansearch\", \"query\": \"Concatenating finite stratifications along complementary open and closed immersions gives a finite constructible stratification of a Noetherian scheme\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsFinite.instOfIsClosedImmersion\", \"AlgebraicGeometry.IsImmersion.instOfIsClosedImmersion\", \"AlgebraicGeometry.IsClosedImmersion.comp_iff\", \"AlgebraicGeometry.IsImmersion.isImmersion_iff_exists\", \"AlgebraicGeometry.IsClosedImmersion.of_comp\", \"AlgebraicGeometry.IsImmersion.isImmersion_iff_exists_of_quasiCompact\", \"AlgebraicGeometry.IsOpenImmersion.comp\", \"AlgebraicGeometry.IsClosedImmersion.mk\"], \"digest\": \"c290865a9611b0de\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the returned declarations establish Noetherian or immersion ingredients, not the two finite scheme-stratification constructions with all clauses of this item"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.IsNoetherian, AlgebraicGeometry.IsOpenImmersion",
+   "results": "{\"t\": \"2026-10-22T06:56:01Z\", \"tool\": \"loogle\", \"query\": \"AlgebraicGeometry.IsNoetherian, AlgebraicGeometry.IsOpenImmersion\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"AlgebraicGeometry.isNoetherian_iff_of_finite_affine_openCover\"], \"digest\": \"0e504d67834a6423\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the returned declarations establish Noetherian or immersion ingredients, not the two finite scheme-stratification constructions with all clauses of this item"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A finite stratification of an open or closed subscheme of a Noetherian scheme extends to the whole scheme by adjoining the complementary closed or open subscheme with the original stratum schemes and composite immersions",
+   "results": "{\"t\": \"2026-10-22T06:56:12Z\", \"tool\": \"leanfinder\", \"query\": \"A finite stratification of an open or closed subscheme of a Noetherian scheme extends to the whole scheme by adjoining the complementary closed or open subscheme with the original stratum schemes and composite immersions\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsNoetherian.noetherianSpace\", \"AlgebraicGeometry.finite_irreducibleComponents_of_isNoetherian\", \"AlgebraicGeometry.isNoetherian_iff_of_finite_iSup_eq_top\", \"AlgebraicGeometry.instIsLocallyNoetherianXScheme\", \"AlgebraicGeometry.isNoetherian_iff_of_finite_affine_openCover\", \"AlgebraicGeometry.isLocallyNoetherian_iff_of_iSup_eq_top\", \"AlgebraicGeometry.isLocallyNoetherian_iff_openCover\", \"AlgebraicGeometry.IsNoetherian\"], \"digest\": \"fe850ae380f04f0d\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the returned declarations establish Noetherian or immersion ingredients, not the two finite scheme-stratification constructions with all clauses of this item"
+  },
+  {
+   "tool": "grep",
+   "query": "stratification|isNoetherian_of|noetherianSpace|quasiSeparatedSpace",
+   "results": "{\"t\": \"2026-10-22T06:56:18Z\", \"tool\": \"grep\", \"query\": \"stratification|isNoetherian_of|noetherianSpace|quasiSeparatedSpace\", \"sub\": \"AlgebraicGeometry/Noetherian.lean\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"32\", \"38\", \"178\", \"179\", \"181\"], \"digest\": \"a018788c14e5dde7\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the returned declarations establish Noetherian or immersion ingredients, not the two finite scheme-stratification constructions with all clauses of this item"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Glue a finite partition into locally closed subschemes from an open subscheme and its closed complement in a Noetherian scheme",
+   "results": "{\"t\": \"2026-10-22T06:56:29Z\", \"tool\": \"leanfinder\", \"query\": \"Glue a finite partition into locally closed subschemes from an open subscheme and its closed complement in a Noetherian scheme\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.instIsLocallyNoetherianXScheme\", \"AlgebraicGeometry.isLocallyNoetherian_iff_openCover\", \"AlgebraicGeometry.finite_irreducibleComponents_of_isNoetherian\", \"AlgebraicGeometry.isNoetherian_iff_of_finite_iSup_eq_top\", \"AlgebraicGeometry.IsNoetherian.noetherianSpace\", \"AlgebraicGeometry.Scheme.OpenCover\", \"AlgebraicGeometry.Scheme.quasiSeparatedSpace_of_isOpenCover\", \"AlgebraicGeometry.IsLocallyNoetherian.quasiSeparatedSpace\"], \"digest\": \"5f87ba18cc9b1807\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the returned declarations establish Noetherian or immersion ingredients, not the two finite scheme-stratification constructions with all clauses of this item"
+  },
+  {
+   "tool": "grep",
+   "query": "IsNoetherian.noetherianSpace|IsLocallyNoetherian.quasiSeparatedSpace|instance comp.*Scheme",
+   "results": "{\"t\": \"2026-10-22T06:56:51Z\", \"tool\": \"grep\", \"query\": \"IsNoetherian.noetherianSpace|IsLocallyNoetherian.quasiSeparatedSpace|instance comp.*Scheme\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 9, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/Noetherian.lean\", \"Mathlib/AlgebraicGeometry/Noetherian.lean\", \"Mathlib/AlgebraicGeometry/Noetherian.lean\", \"Mathlib/AlgebraicGeometry/Noetherian.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/Immersion.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/ClosedImmersion.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/SurjectiveOnStalks.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/Flat.lean\"], \"digest\": \"1a8a21206fd07489\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the returned declarations establish Noetherian or immersion ingredients, not the two finite scheme-stratification constructions with all clauses of this item"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-scalar-model-immersion-extension",
+  "date": "2026-10-22",
+  "group": "NQ"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-lem-integral-models",
+ "blueprint": {
+  "from": {
+   "node": "det-lem-integral-models-operations",
+   "place": "paragraph (3), parenthetical Noetherian quasi-compactness and the geometric preparation for immersion constructibility; original scalar-model immersion-extension proof steps 1–2",
+   "via": [
+    "lem-sfb-scalar-model-immersion-extension"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sfb-noetherian-complementary-stratifications",
+  "worker": "stage1",
+  "summary": "Statement unchanged. Eight proof steps establish the Noetherian/qcqs assertions, quasi-compactness of all subsets and of the open immersion, then construct both extended stratifications using the original source schemes and actual composite maps. All non-elementary inputs are existing Mathlib leaves; no new nodes.",
+  "blueprint": "det-lem-integral-models-operations.proof.md paragraph (3), especially the sentence that all open immersions are quasi-compact since the schemes are Noetherian, and the finite-stratification geometry needed for the open and closed constructibility-preservation assertions."
+ },
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q06-0ac57bd4b",
+  "group": "Q06",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q06-0ac57bd4b (reviewer sub-agent of L); spot-checked: PASS: the delivery is correct and complete; no fixes written. I read the item, all 8 steps, every cited node statement, main-20261015 sk-lem-integral-models-operations.proof.md paragraph (3) and Stacks 04ZA. The statement and stmt_deps are byte-identical to NQ's statement-only node; there are no new nodes and no repair note, so no re-split rule applies. Every argument of the parent's old steps 1–2 (NW base snapshot) is carried by the new steps. Steps: (1) every open is quasi-compact and U is Noetherian, via noetherian-open-subscheme; (2) every subset is quasi-compact (elementary relative-cover argument) and j is quasi-compact; (3) Z is locally Noetherian via immersion-lft (2) and pqf-lem-locnoeth-lft, and quasi-compact via i(Z), keeping its nonreduced structure; (4) quasi-separated via locally-noetherian-quasi-separated; (5) the composites are immersions via proper-fp-permanence (e), with identity factors for j and i; (6) images are locally closed by the subspace-topology argument, and constructible because all opens are retrocompact (O∩C = O∖(T∖C)); (7)/(8) the strata are disjoint and cover T, checked against every clause of def-constructible-stratification. Edge cases: T, U or Z empty, n=0 or m=0, empty strata, a nonreduced complement Spec k[x,ε]/ε², a DVR. No duplicate: lem-sfb-noetherian-space-compact-subsets covers only one clause. Route: only definitions and Mathlib leaves are cited, so no tool_uses are needed. There is no SGA source and proof_deps matches the uses. All three Mathlib search kinds are recorded. Advisory: the step-2 source place wording '04ZA proof of (1) implies (2)' is loose."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.NoetherianComplementaryStratifications",
+  "declaration": "AlgebraicGeometry.Scheme.noetherian_complementary_stratifications",
+  "file": "lean/Sheaf/AlgebraicGeometry/NoetherianComplementaryStratifications.lean",
+  "statement": "theorem noetherian_complementary_stratifications {T U Z : Scheme.{u}} [IsLocallyNoetherian T] [CompactSpace T] (j : U ⟶ T) (i : Z ⟶ T) [IsOpenImmersion j] [IsClosedImmersion i] (hji : Set.range j = (Set.range i)ᶜ) : IsNoetherian T ∧ IsNoetherian U ∧ IsNoetherian Z ∧ (CompactSpace T ∧ QuasiSeparatedSpace T) ∧ (CompactSpace U ∧ QuasiSeparatedSpace U) ∧ (CompactSpace Z ∧ QuasiSeparatedSpace Z) ∧ (∀ A : Set T, IsCompact A) ∧ QuasiCompact j ∧ (∀ S : FiniteLocallyClosedStratification U, ∃ (R : FiniteLocallyClosedStratification T) (e : Fin (S.n + 1) ≃ Fin R.n), (∀ a : Fin (S.n + 1), (⟨R.domain (e a), R.immersion (e a)⟩ : Σ W : Scheme.{u}, W ⟶ T) = Fin.snoc (α := fun _ : Fin (S.n + 1) ↦ Σ W : Scheme.{u}, W ⟶ T) (fun b : Fin S.n ↦ (⟨S.domain b, S.immersion b ≫ j⟩ : Σ W : Scheme.{u}, W ⟶ T)) (⟨Z, i⟩ : Σ W : Scheme.{u}, W ⟶ T) a) ∧ (∀ a : Fin R.n, Topology.IsConstructible (R.stratum a))) ∧ (∀ S : FiniteLocallyClosedStratification Z, ∃ (R : FiniteLocallyClosedStratification T) (e : Fin (S.n + 1) ≃ Fin R.n), (∀ a : Fin (S.n + 1), (⟨R.domain (e a), R.immersion (e a)⟩ : Σ W : Scheme.{u}, W ⟶ T) = Fin.snoc (α := fun _ : Fin (S.n + 1) ↦ Σ W : Scheme.{u}, W ⟶ T) (fun b : Fin S.n ↦ (⟨S.domain b, S.immersion b ≫ i⟩ : Σ W : Scheme.{u}, W ⟶ T)) (⟨U, j⟩ : Σ W : Scheme.{u}, W ⟶ T) a) ∧ (∀ a : Fin R.n, Topology.IsConstructible (R.stratum a)))",
+  "branch": "newtargets-dag",
+  "by": "N5",
+  "date": "2026-10-22",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-1f757f739",
+  "group": "N5",
+  "result": "pass",
+  "note": "Re-delivery fixes the c33ad70c RETURN (H1/H2): the node differs from live only in the new lean record; the 8 Q06-passed proof steps are back unchanged. The lean.statement is verbatim. Clause by clause: IsLocallyNoetherian+CompactSpace T, IsOpenImmersion j, IsClosedImmersion i, range j = (range i)ᶜ; IsNoetherian T/U/Z; CompactSpace and QuasiSeparatedSpace for each; every subset compact; QuasiCompact j; both stratification clauses via the recorded FiniteLocallyClosedStratification, with e : Fin (S.n+1) ≃ Fin R.n and a pointwise Σ-equality to Fin.snoc of the actual composites plus the given complement (Z,i)/(U,j), and IsConstructible for every output stratum. No extra hypotheses; single universe; satisfiable (e = refl, Sigma eta). Edge cases: empty T, n=0, empty strata or complement, nonreduced Z. No duplicate (openClosed needs constructible input). No definitions; proof is sorry; docstrings carry source place, blueprint id and the 8 steps; all imports used. No compile: no file changed. Advisory: QuasiSeparatedSpace is equivalent to scheme quasi-separatedness via the Mathlib iff."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H8",
+  "result": "pass",
+  "landing": "20261023T102922-L-3006196",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

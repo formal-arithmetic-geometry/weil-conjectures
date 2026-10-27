@@ -1,0 +1,371 @@
+{
+ "id": "lem-sfb-coherent-group-bialgebra",
+ "kind": "statement",
+ "title": "The coherent cohomology bialgebra of a proper group",
+ "statement": "Let $k$ be a field [def-weil-field] and let $G$ be a proper geometrically integral group scheme over $k$ [def-sc-group-scheme, def-weil-proper-morphism, def-pc-geometrically-irreducible]. Write $m:G\\times_kG\\to G$ and $e:\\operatorname{Spec}k\\to G$ for multiplication and identity. Put $H^n=H^n(G,\\mathcal O_G)$, with Zariski module cohomology [pqf-def-cohomology, def-sc-field-linear-module-cohomology-operations], and $H=\\bigoplus_{n\\geq0}H^n$. Cup product and the structure map make $H$ a unital associative graded $k$-algebra, with $H^0=k\\cdot1$ and $xy=(-1)^{pq}yx$ for $x\\in H^p$, $y\\in H^q$. The external cup-product map $\\kappa:H\\otimes_kH\\to\\bigoplus_n H^n(G\\times_kG,\\mathcal O_{G\\times G})$ is an isomorphism of graded algebras, when the source has the signed multiplication $(a\\otimes b)(c\\otimes d)=(-1)^{\\deg b\\deg c}ac\\otimes bd$. The map $\\Delta=\\kappa^{-1}m^*:H\\to H\\otimes_kH$ is degree preserving, unital, multiplicative, and coassociative. Projection $\\varepsilon:H\\to H^0=k$ is its counit: $(\\varepsilon\\otimes1)\\Delta=(1\\otimes\\varepsilon)\\Delta=1_H$, under the tensor-unit identifications. In particular every $x\\in H^1$ is primitive: $\\Delta(x)=x\\otimes1+1\\otimes x$.",
+ "source": {
+  "document": "literature/stacks-project/varieties.tex",
+  "place": "Tag 0BED, lemma-kunneth (external cup-product isomorphism), together with the group-law construction immediately preceding Milne AV I Lemma 12.2, printed p.55. The latter is written for etale cohomology; here the same construction uses Zariski coherent Kunneth and the cup product. This is an agent adaptation, not a claim that Milne states the coherent version verbatim. Cup signs and associativity: cohomology.tex, the cup-product construction and its graded-commutativity calculation."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-sc-group-scheme",
+  "def-weil-proper-morphism",
+  "def-pc-geometrically-irreducible",
+  "pqf-def-cohomology",
+  "def-sc-field-linear-module-cohomology-operations",
+  "def-sc-scalar-global-sections-comparison",
+  "def-sfb-tensor-pullback-structure-sheaf-map"
+ ],
+ "proof": [
+  {
+   "text": "Geometric integrality gives geometric reducedness and connectedness: after every field extension the scheme is reduced and irreducible; a separation into two nonempty clopen sets contradicts irreducibility. Thus [lem-pc-h0-geom-connected] identifies the structure homomorphism $k\\to H^0(G,\\mathcal O_G)$ with an isomorphism. Properness gives finite type and a closed diagonal. Hence $G$ is quasi-compact over the affine base and its diagonal is affine. For $P=G\\times_kG$, the projection to $G$ is proper by base change and $P\\to\\operatorname{Spec}k$ is proper by composition. The same applies to $G^3$. They too are quasi-compact with affine diagonals: a closed immersion is affine by its affine-open quotient-ring description. These are exactly the geometric hypotheses needed for every Kunneth application below.",
+   "uses": [
+    "def-pc-geometrically-irreducible",
+    "def-pc-integral-scheme",
+    "lem-pc-h0-geom-connected",
+    "def-weil-proper-morphism",
+    "lem-weil-pbc-qcqs-over-affine",
+    "lem-pc-proper-base-change",
+    "lem-weil-pbc-proper-composition",
+    "def-weil-closed-immersion"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tags 0FD2 (lemma-geometrically-reduced-stein) and 0BED (lemma-kunneth)"
+   }
+  },
+  {
+   "text": "Write $A_X=\\bigoplus_{n\\geq0}H_k^n(X,\\mathcal O_X)$ for each of $X=G,P,G^3$. Compose the coefficient cup with $\\mathcal O_X\\otimes\\mathcal O_X\\to\\mathcal O_X$, $s\\otimes t\\mapsto st$. The associator, symmetry and unit identities of [lem-sfb-module-cup-associativity-symmetry-unit] give $(xy)z=x(yz)$, $xy=(-1)^{pq}yx$, and $1x=x1=x$. Bilinearity extends the pairings to the direct sum since every element has finite support. The scalar action is multiplication by the degree-zero constant class. Thus these are unital associative graded $k$-algebras, and step 1 gives $A_G^0=k\\cdot1$. Cup/pullback coefficient naturality, applied to the structure-sheaf coefficient maps, makes every scheme pullback used below multiplicative. It preserves $1$: the degree-zero comparison identifies pullback of its class with pullback of the section $1$, and a unital structure-sheaf ring map sends $1$ to $1$. Scalar pullback agrees with ordinary module pullback; its identity is the cohomology map of the identity coefficient morphism and hence is the identity. Composition is the recorded scalar pullback composition law, with the canonical structure-sheaf coefficient identifications.",
+   "uses": [
+    "lem-sfb-module-cup-associativity-symmetry-unit",
+    "lem-sc-scalar-cup-pullback-coefficient-naturality",
+    "lem-sc-scalar-pullback-zero-global-sections",
+    "lem-sc-scalar-module-cohomology-pullback-comparison",
+    "lem-weil-pbc-module-cohomology-fmap-basic-identity",
+    "lem-sc-scalar-cohomology-pullback-composition",
+    "lem-weil-pbc-module-pullback-structure-sheaf"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/cohomology.tex",
+    "place": "Tags 0FP4, 0FP5 and section-functoriality; coefficient cups of def-sc-field-linear-module-cohomology-operations"
+   }
+  },
+  {
+   "text": "Apply [lem-sc-picard-kunneth-qcoh] to $G,G$ with both coefficients the structure sheaf, which is quasi-coherent since on an affine chart it is the sheaf associated to its coordinate ring. Identify the external coefficient with $\\mathcal O_P$ using pullback of the structure sheaf and the tensor unit. In each degree this gives the bijection $\\kappa(a\\otimes b)=\\operatorname{pr}_1^*a\\smile\\operatorname{pr}_2^*b$. The direct-sum map is therefore bijective. For homogeneous $a,b,c,d$, associativity and swapping the middle two factors give $$\\kappa(a\\otimes b)\\kappa(c\\otimes d)=(-1)^{\\deg b\\deg c}\\kappa(ac\\otimes bd).$$ Both sides are bilinear, so this proves multiplicativity for the stated signed tensor multiplication; $\\kappa(1\\otimes1)=1$. That signed multiplication is associative because the two exponents for three pure tensors are $|b||c|+(|b|+|d|)|h|$ and $|d||h|+|b|(|c|+|h|)$ for factors $(a,b),(c,d),(h,j)$, and these are equal. Its unit is $1\\otimes1$. Thus $\\kappa$ is an isomorphism of graded algebras.",
+   "uses": [
+    "lem-sc-picard-kunneth-qcoh",
+    "lem-weil-pbc-module-pullback-structure-sheaf",
+    "lem-sfb-module-cup-associativity-symmetry-unit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 0BED, lemma-kunneth, projection-pullback definition of the canonical map; cup signs from cohomology.tex Tags 0FP4 and 0FP5"
+   }
+  },
+  {
+   "text": "Define $\\Delta=\\kappa^{-1}m^*$. Scheme cohomology pullback and $\\kappa$ preserve degrees, so $\\Delta$ does too. The algebra identities proved in steps 2 and 3 imply $\\Delta(1)=1\\otimes1$ and $\\Delta(xy)=\\Delta(x)\\Delta(y)$, with exactly the signed tensor multiplication of step 3. This is transport through the explicitly defined external-product map, rather than an unspecified vector-space isomorphism.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-abelian-varieties_AV.pdf",
+    "place": "Chapter I, printed p.55 (PDF p.61), group-law construction immediately before Lemma 12.2; agent adaptation to coherent Zariski cohomology using Tag 0BED"
+   }
+  },
+  {
+   "text": "Iterating Kunneth gives a bijection $K_3:H\\otimes H\\otimes H\\to A_{G^3}$ taking $a\\otimes b\\otimes c$ to $p_1^*a\\smile p_2^*b\\smile p_3^*c$. The two parenthesizations agree: functoriality of projection pullbacks and cup associativity give this same formula on each pure tensor; pure tensors span. External-cup pullback compatibility applied to $(m,1_G)$ gives $$K_3(\\Delta\\otimes1)=(m\\times1_G)^*\\kappa,$$ since its value on $a\\otimes b$ is the external product of $m^*a$ and $b$; expand $m^*a=\\kappa\\Delta(a)$ and use the displayed triple-product formula. Applying compatibility to $(1_G,m)$ gives $K_3(1\\otimes\\Delta)=(1_G\\times m)^*\\kappa$. Consequently the two iterated coproducts, followed by $K_3$, are respectively $(m\\circ(m\\times1_G))^*$ and $(m\\circ(1_G\\times m))^*$. The group associativity diagram identifies these maps. Cancel the bijection $K_3$ to obtain coassociativity, with the tensor associator understood.",
+   "uses": [
+    "lem-sc-picard-kunneth-qcoh",
+    "lem-sc-picard-kunneth-qcoh-functoriality",
+    "lem-sc-scalar-cohomology-pullback-composition",
+    "lem-sfb-module-cup-associativity-symmetry-unit",
+    "def-sc-group-scheme"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-abelian-varieties_AV.pdf",
+    "place": "Chapter I, printed p.55 (PDF p.61), group-law construction immediately before Lemma 12.2; agent adaptation to coherent Zariski cohomology using Tag 0BED"
+   }
+  },
+  {
+   "text": "For $s=\\operatorname{Spec}k$, affine vanishing gives $H^q(s,\\mathcal O_s)=0$ for $q>0$, and degree zero is $k$. Thus $e^*:H\\to A_s=k$ is the stated projection $\\varepsilon$: in degree zero it is the inverse of the structure map because their composite is the identity on $s$, and in positive degrees its target is zero. Put $i_R=(1_G,e\\circ\\pi)$ and $i_L=(e\\circ\\pi,1_G)$, where $\\pi:G\\to s$. On a homogeneous pure tensor, cup naturality and pullback composition give $$i_R^*\\kappa(a\\otimes b)=a\\smile\\pi^*e^*b=\\varepsilon(b)a,\\qquad i_L^*\\kappa(a\\otimes b)=\\pi^*e^*a\\smile b=\\varepsilon(a)b.$$ Here positive-degree factors pulled through $s$ vanish; degree-zero factors are constants and the two unit identities apply. By linearity these are $1\\otimes\\varepsilon$ and $\\varepsilon\\otimes1$. The group unit diagrams say $m i_R=m i_L=1_G$, so composing with $\\Delta$ gives both counit equations.",
+   "uses": [
+    "lem-pc-affine-vanishing",
+    "def-sc-group-scheme",
+    "lem-sc-scalar-cohomology-pullback-composition",
+    "lem-sc-scalar-cup-pullback-coefficient-naturality",
+    "lem-sfb-module-cup-associativity-symmetry-unit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-abelian-varieties_AV.pdf",
+    "place": "Chapter I, printed p.55 (PDF p.61), group-law construction immediately before Lemma 12.2; agent adaptation to coherent Zariski cohomology using Tag 0BED"
+   }
+  },
+  {
+   "text": "For $x\\in H^1$, degree preservation puts $\\Delta(x)$ in $(H^1\\otimes H^0)\\oplus(H^0\\otimes H^1)$. Since $H^0=k\\cdot1$, there are unique $a,b\\in H^1$ with $\\Delta(x)=a\\otimes1+1\\otimes b$. Applying $1\\otimes\\varepsilon$ gives $a=x$, because $\\varepsilon$ is zero in degree one and $\\varepsilon(1)=1$. Applying $\\varepsilon\\otimes1$ gives $b=x$. Hence $\\Delta(x)=x\\otimes1+1\\otimes x$. No restriction on the characteristic was used.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-abelian-varieties_AV.pdf",
+    "place": "Chapter I, printed p.55 (PDF p.61), group-law construction immediately before Lemma 12.2; agent adaptation to coherent Zariski cohomology using Tag 0BED"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-geometrically-irreducible",
+  "def-pc-integral-scheme",
+  "lem-pc-h0-geom-connected",
+  "def-weil-proper-morphism",
+  "lem-weil-pbc-qcqs-over-affine",
+  "lem-pc-proper-base-change",
+  "lem-weil-pbc-proper-composition",
+  "def-weil-closed-immersion",
+  "lem-sfb-module-cup-associativity-symmetry-unit",
+  "lem-sc-scalar-cup-pullback-coefficient-naturality",
+  "lem-sc-scalar-pullback-zero-global-sections",
+  "lem-sc-scalar-module-cohomology-pullback-comparison",
+  "lem-weil-pbc-module-cohomology-fmap-basic-identity",
+  "lem-sc-scalar-cohomology-pullback-composition",
+  "lem-weil-pbc-module-pullback-structure-sheaf",
+  "lem-sc-picard-kunneth-qcoh",
+  "lem-sc-picard-kunneth-qcoh-functoriality",
+  "def-sc-group-scheme",
+  "lem-pc-affine-vanishing"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/milne-abelian-varieties_AV.pdf; literature/stacks-project/varieties.tex; literature/stacks-project/cohomology.tex",
+  "place": "Milne AV I, printed p.55 before Lemma 12.2, adapted to coherent Zariski cohomology via Stacks 0BED and 0FD2; explicit triple-product and slice calculations."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "cohomology.*(bialgebra|hopf)|(bialgebra|hopf).*cohomology",
+   "results": "1 hits: Mathlib/Topology/Homotopy/HSpaces.lean",
+   "date": "2026-10-23",
+   "verdict": "no match: returned group cohomology and ordinary Hopf algebra structures do not give this signed graded structure on coherent sheaf cohomology; the HSpaces hit is a background comment only"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Coherent cohomology of a proper algebraic group has a graded Hopf algebra structure from multiplication",
+   "results": "8 hits: groupCohomology, MonoidAlgebra.instHopfAlgebra, HopfAlgCat.instHopfAlgebra, TensorProduct.instHopfAlgebra, HopfAlgebraStruct.noConfusionType, LaurentPolynomial.instHopfAlgebra, AddMonoidAlgebra.instHopfAlgebraStruct, AddMonoidAlgebra.instHopfAlgebra",
+   "date": "2026-10-23",
+   "verdict": "no match: returned group cohomology and ordinary Hopf algebra structures do not give this signed graded structure on coherent sheaf cohomology; the HSpaces hit is a background comment only"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Bialgebra\", \"GradedAlgebra\"",
+   "results": "0 hits: ",
+   "date": "2026-10-23",
+   "verdict": "no match: returned group cohomology and ordinary Hopf algebra structures do not give this signed graded structure on coherent sheaf cohomology; the HSpaces hit is a background comment only"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The coherent cohomology of a proper geometrically integral group scheme over a field is a connected graded bialgebra via cup product and the Kunneth isomorphism",
+   "results": "8 hits: groupCohomology.H1ofAutOnUnitsUnique, groupCohomology.isMulCoboundary₁_of_isMulCocycle₁_of_aut_to_units, groupCohomology, isZero_groupCohomology_succ_of_subsingleton, CategoryTheory.PreGaloisCategory.exists_hom_from_galois_of_connected, ContinuousCohomology.MultiInd.complex, continuousCohomology, CategoryTheory.PreGaloisCategory.IsGalois.toIsConnected",
+   "date": "2026-10-23",
+   "verdict": "no match: returned group cohomology and ordinary Hopf algebra structures do not give this signed graded structure on coherent sheaf cohomology; the HSpaces hit is a background comment only"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Pullback by multiplication on a proper group defines a coproduct on the cohomology ring of its structure sheaf",
+   "results": "8 hits: ContinuousCohomology.MultiInd.complex, CategoryTheory.PresheafOfGroups.OneCochain.instMul, continuousCohomology, groupCohomology, groupCohomology.H2, groupCohomology.H1InfRes_X₂, groupCohomology.cocycles₁_map_mul_of_isTrivial, CategoryTheory.PresheafOfGroups.H1",
+   "date": "2026-10-23",
+   "verdict": "no match: returned group cohomology and ordinary Hopf algebra structures do not give this signed graded structure on coherent sheaf cohomology; the HSpaces hit is a background comment only"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The coherent cohomology of a proper group scheme is a connected graded bialgebra under cup product and pullback by multiplication",
+   "results": "8 hits: groupCohomology, ContinuousCohomology.MultiInd.complex, continuousCohomology, ContinuousCohomology.homogeneousCochains, groupCohomology.functor_obj, groupCohomology.inhomogeneousCochains, Rep.FiniteCyclicGroup.moduleCatCochainComplex, GroupLike.instMul",
+   "date": "2026-10-23",
+   "verdict": "no match: group cohomology and existing ordinary coalgebra instances do not construct the coherent sheaf cohomology bialgebra"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Pullback by multiplication on an algebraic group and the Kunneth isomorphism define a coassociative coproduct on structure sheaf cohomology",
+   "results": "8 hits: TensorProduct.instCoalgebraStruct, TensorProduct.instCoalgebra, TensorProduct.comul_def, TensorProduct.comul_tmul, IsGroupLikeElem.comul_eq_tmul_self, CoalgCat.MonoidalCategoryAux.comul_tensorObj_tensorObj_left, CoalgCat.MonoidalCategoryAux.comul_tensorObj_tensorObj_right, CoalgCat.MonoidalCategoryAux.comul_tensorObj",
+   "date": "2026-10-23",
+   "verdict": "no match: group cohomology and existing ordinary coalgebra instances do not construct the coherent sheaf cohomology bialgebra"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-abelian-structure-h1-dimension",
+  "date": "2026-10-23",
+  "group": "Q144"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Smooth-curve abelian level rigidification. Geometric stabilizer input for the smooth full-level cover; restrict to geometric curves before passing to families. Auxiliary input: Curve pullback is faithful on the canonically polarized Jacobian. Supporting input: Dual abelian varieties and the line-bundle homomorphism. Auxiliary for this split: First coherent cohomology dimension of an abelian variety. Supporting input for the coherent H1 dimension argument: The coherent cohomology bialgebra of a proper group.",
+   "via": [
+    "lem-sfb-abelian-structure-h1-dimension",
+    "lem-sfb-abelian-polarization-calculus",
+    "lem-sfb-curve-polarized-jacobian-faithfulness",
+    "lem-sfb-geometric-curve-level-faithfulness",
+    "lem-sfb-smooth-curve-abelian-level-rigidification",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-coherent-group-bialgebra",
+  "worker": "stage1",
+  "group": "Q159",
+  "summary": "Seven-step coherent group-law construction, reusing existing Kunneth, constants, pullback and affine-vanishing nodes. One new coefficient-level cup-coherence lemma; all group-specific bialgebra identities are computed in the item. Checked characteristic two, zero-dimensional group and arbitrary field hypotheses. Statement unchanged.",
+  "blueprint": "Latest sk-thm-sf-ctf-stability-direct-images.proof.md paragraph (3), alteration/curve input along the recorded ancestor chain, via lem-sfb-abelian-structure-h1-dimension. Its coherent Hopf input is supplied by the Milne p.55 group-law construction with coherent Kunneth; there is no blueprint node stating this added supporting lemma. blueprint_refs ancestor prints None; retained the inherited broken-chain null ancestor and its explicit place.",
+  "tool_uses": [
+   {
+    "node": "def-pc-geometrically-irreducible",
+    "why": "Generic coherent-cohomology or scheme tool: Geometric properties. This unit has no corresponding coherent-Zariski statement; used only for the supporting coherent H1 dimension input, without changing its route."
+   },
+   {
+    "node": "def-pc-integral-scheme",
+    "why": "Generic coherent-cohomology or scheme tool: Integral scheme. This unit has no corresponding coherent-Zariski statement; used only for the supporting coherent H1 dimension input, without changing its route."
+   },
+   {
+    "node": "lem-pc-h0-geom-connected",
+    "why": "Generic coherent-cohomology or scheme tool: $H^0=k$ is equivalent to geometric connectedness. This unit has no corresponding coherent-Zariski statement; used only for the supporting coherent H1 dimension input, without changing its route."
+   },
+   {
+    "node": "def-weil-proper-morphism",
+    "why": "Generic coherent-cohomology or scheme tool: Separated, universally closed and proper morphisms. This unit has no corresponding coherent-Zariski statement; used only for the supporting coherent H1 dimension input, without changing its route."
+   },
+   {
+    "node": "lem-weil-pbc-qcqs-over-affine",
+    "why": "Generic coherent-cohomology or scheme tool: A scheme separated and of finite type over an affine scheme is quasi-compact and quasi-separated. This unit has no corresponding coherent-Zariski statement; used only for the supporting coherent H1 dimension input, without changing its route."
+   },
+   {
+    "node": "lem-pc-proper-base-change",
+    "why": "Generic coherent-cohomology or scheme tool: Proper and smooth morphisms are stable under base change. This unit has no corresponding coherent-Zariski statement; used only for the supporting coherent H1 dimension input, without changing its route."
+   },
+   {
+    "node": "lem-weil-pbc-proper-composition",
+    "why": "Generic coherent-cohomology or scheme tool: Properness is stable under composition. This unit has no corresponding coherent-Zariski statement; used only for the supporting coherent H1 dimension input, without changing its route."
+   },
+   {
+    "node": "def-weil-closed-immersion",
+    "why": "Generic coherent-cohomology or scheme tool: Closed immersion of schemes. This unit has no corresponding coherent-Zariski statement; used only for the supporting coherent H1 dimension input, without changing its route."
+   },
+   {
+    "node": "lem-sc-scalar-cup-pullback-coefficient-naturality",
+    "why": "Generic coherent-cohomology or scheme tool: Scalar cup product compatibility with pullback and coefficient maps. This unit has no corresponding coherent-Zariski statement; used only for the supporting coherent H1 dimension input, without changing its route."
+   },
+   {
+    "node": "lem-sc-scalar-pullback-zero-global-sections",
+    "why": "Generic coherent-cohomology or scheme tool: ScalarPullbackZeroGlobalSections. This unit has no corresponding coherent-Zariski statement; used only for the supporting coherent H1 dimension input, without changing its route."
+   },
+   {
+    "node": "lem-sc-scalar-module-cohomology-pullback-comparison",
+    "why": "Generic coherent-cohomology or scheme tool: Scalar and module pullback comparison. This unit has no corresponding coherent-Zariski statement; used only for the supporting coherent H1 dimension input, without changing its route."
+   },
+   {
+    "node": "lem-weil-pbc-module-cohomology-fmap-basic-identity",
+    "why": "Generic coherent-cohomology or scheme tool: Identity property of module cohomology maps. This unit has no corresponding coherent-Zariski statement; used only for the supporting coherent H1 dimension input, without changing its route."
+   },
+   {
+    "node": "lem-sc-scalar-cohomology-pullback-composition",
+    "why": "Generic coherent-cohomology or scheme tool: Scalar cohomology pullback along a composite. This unit has no corresponding coherent-Zariski statement; used only for the supporting coherent H1 dimension input, without changing its route."
+   },
+   {
+    "node": "lem-weil-pbc-module-pullback-structure-sheaf",
+    "why": "Generic coherent-cohomology or scheme tool: The pullback of the structure sheaf is the structure sheaf. This unit has no corresponding coherent-Zariski statement; used only for the supporting coherent H1 dimension input, without changing its route."
+   },
+   {
+    "node": "lem-sc-picard-kunneth-qcoh",
+    "why": "Generic coherent-cohomology or scheme tool: Kunneth isomorphism for quasi-coherent cohomology over a field. This unit has no corresponding coherent-Zariski statement; used only for the supporting coherent H1 dimension input, without changing its route."
+   },
+   {
+    "node": "lem-sc-picard-kunneth-qcoh-functoriality",
+    "why": "Generic coherent-cohomology or scheme tool: Pullback compatibility of the quasi-coherent external cup product. This unit has no corresponding coherent-Zariski statement; used only for the supporting coherent H1 dimension input, without changing its route."
+   },
+   {
+    "node": "def-sc-group-scheme",
+    "why": "Generic coherent-cohomology or scheme tool: Group schemes over a field. This unit has no corresponding coherent-Zariski statement; used only for the supporting coherent H1 dimension input, without changing its route."
+   },
+   {
+    "node": "lem-pc-affine-vanishing",
+    "why": "Generic coherent-cohomology or scheme tool: Vanishing of cohomology on affine schemes. This unit has no corresponding coherent-Zariski statement; used only for the supporting coherent H1 dimension input, without changing its route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "def-pc-geometrically-irreducible",
+  "def-pc-integral-scheme",
+  "lem-pc-h0-geom-connected",
+  "def-weil-proper-morphism",
+  "lem-weil-pbc-qcqs-over-affine",
+  "lem-pc-proper-base-change",
+  "lem-weil-pbc-proper-composition",
+  "def-weil-closed-immersion",
+  "lem-sc-scalar-cup-pullback-coefficient-naturality",
+  "lem-sc-scalar-pullback-zero-global-sections",
+  "lem-sc-scalar-module-cohomology-pullback-comparison",
+  "lem-weil-pbc-module-cohomology-fmap-basic-identity",
+  "lem-sc-scalar-cohomology-pullback-composition",
+  "lem-weil-pbc-module-pullback-structure-sheaf",
+  "lem-sc-picard-kunneth-qcoh",
+  "lem-sc-picard-kunneth-qcoh-functoriality",
+  "def-sc-group-scheme",
+  "lem-pc-affine-vanishing"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q159-8109780dd",
+  "group": "Q159",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q159-8109780dd (reviewer sub-agent of L); spot-checked: Read the item's 7 steps, the new node and every cited statement. Sources checked at the cited places: Milne AV printed p.55 before Lemma 12.2 (étale Künneth/m*/slice construction; adapted to coherent cohomology and marked by=agent; Lemma 12.2/Borel and perfect k are not used); Stacks 0BED lemma-kunneth (quasi-compact, affine diagonal, quasi-coherent, projection-pullback cup map); 0FD2; 0FP4 and 0FP5. Step 1: geometrically integral gives geometrically reduced and connected, so lem-pc-h0-geom-connected gives H^0=k; properness gives quasi-compact with affine diagonal for G, G^2, G^3 via base change and composition. Step 2: the algebra structure comes from the new node plus coefficient/pullback naturality, ε_g iso and pullback composition. Step 3: the κ sign (-1)^{|b||c|} and associativity of the signed tensor product are verified. Step 5: K_3(Δ⊗1)=(m×1)^*κ via kunneth-qcoh-functoriality (w=m×1), then the group associativity diagram. Step 6: affine vanishing on Spec k, e^* is the inverse of π^* in degree 0, i_R^*κ(a⊗b)=ε(b)a, and m i_R = m i_L = 1. Step 7 is elementary. Edge cases checked: G=Spec k, characteristic 2, imperfect k. New node lem-sfb-module-cup-associativity-symmetry-unit: statement-only, self-contained, true (0FP4/0FP5 plus the existing (-1)^{pq} scalar/module comparison, which is a symmetric cocycle: pq+(p+q)r=qr+p(q+r)). It is not a duplicate: lem-sc-scalar-cup-unit-identities covers only H^1 units with O coefficients; the naturality and sign-compatibility nodes and the pod/sf/condensed cup nodes differ. It does not restate the item (no group, Künneth or coproduct). Batch-5: every listed path reaches trf/pod only through the generic definitions def-trf-schematically-dense-open and def-pod-ring-scalar-extension. The cited facts (H^0 constants, coherent Künneth, scalar cup naturality) are neither the trace formula nor Poincaré duality nor steps of their proofs, so all are accepted. The 18 declared tool_uses are generic scheme or coherent-cohomology tools and are accepted. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.CoherentGroupBialgebra",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.coherentGroupBialgebra",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.Modules.coherentCohomologyDegree",
+   "AlgebraicGeometry.Scheme.Modules.coherentTotal",
+   "AlgebraicGeometry.Scheme.Modules.coherentInclusion",
+   "AlgebraicGeometry.Scheme.Modules.coherentOneDegree",
+   "AlgebraicGeometry.Scheme.Modules.coherentOne",
+   "AlgebraicGeometry.Scheme.Modules.coherentCup",
+   "AlgebraicGeometry.Scheme.Modules.coherentPullback",
+   "AlgebraicGeometry.Scheme.Modules.coherentTensorDegree",
+   "AlgebraicGeometry.Scheme.Modules.coherentGroupBialgebra"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/CoherentGroupBialgebra.lean",
+  "statement": "theorem coherentGroupBialgebra {k : Type u} [Field k] (G : Over (Spec (CommRingCat.of k))) [GrpObj G] [IsProper G.hom] [GeometricallyIntegral G.hom] : ∃ (mulH : coherentTotal G.hom →ₗ[k] coherentTotal G.hom →ₗ[k] coherentTotal G.hom) (mulP : coherentTotal (G ⊗ G).hom →ₗ[k] coherentTotal (G ⊗ G).hom →ₗ[k] coherentTotal (G ⊗ G).hom) (mulT : (coherentTotal G.hom ⊗[k] coherentTotal G.hom) →ₗ[k] (coherentTotal G.hom ⊗[k] coherentTotal G.hom) →ₗ[k] (coherentTotal G.hom ⊗[k] coherentTotal G.hom)) (κ : (coherentTotal G.hom ⊗[k] coherentTotal G.hom) ≃ₗ[k] coherentTotal (G ⊗ G).hom) (pullM : coherentTotal G.hom →ₗ[k] coherentTotal (G ⊗ G).hom) (Δ : coherentTotal G.hom →ₗ[k] coherentTotal G.hom ⊗[k] coherentTotal G.hom) (c : k ≃ₗ[k] coherentCohomologyDegree G.hom 0) (ε : coherentTotal G.hom →ₗ[k] k), (∀ r : k, c r = r • coherentOneDegree G.hom) ∧ ε = c.symm.toLinearMap.comp (DirectSum.component k ℕ (fun n ↦ coherentCohomologyDegree G.hom n) 0) ∧ (∀ p q (a : coherentCohomologyDegree G.hom p) (b : coherentCohomologyDegree G.hom q), mulH (coherentInclusion G.hom p a) (coherentInclusion G.hom q b) = coherentInclusion G.hom (p + q) (coherentCup G.hom p q a b)) ∧ (∀ p q (a : coherentCohomologyDegree (G ⊗ G).hom p) (b : coherentCohomologyDegree (G ⊗ G).hom q), mulP (coherentInclusion (G ⊗ G).hom p a) (coherentInclusion (G ⊗ G).hom q b) = coherentInclusion (G ⊗ G).hom (p + q) (coherentCup (G ⊗ G).hom p q a b)) ∧ (∀ x y z, mulH (mulH x y) z = mulH x (mulH y z)) ∧ (∀ x, mulH (coherentOne G.hom) x = x ∧ mulH x (coherentOne G.hom) = x) ∧ (∀ x y z, mulP (mulP x y) z = mulP x (mulP y z)) ∧ (∀ x, mulP (coherentOne (G ⊗ G).hom) x = x ∧ mulP x (coherentOne (G ⊗ G).hom) = x) ∧ (∀ p q (a : coherentCohomologyDegree G.hom p) (b : coherentCohomologyDegree G.hom q), mulH (coherentInclusion G.hom p a) (coherentInclusion G.hom q b) = (-1 : k) ^ (p * q) • mulH (coherentInclusion G.hom q b) (coherentInclusion G.hom p a)) ∧ (∀ p q r s (a : coherentCohomologyDegree G.hom p) (b : coherentCohomologyDegree G.hom q) (d : coherentCohomologyDegree G.hom r) (e : coherentCohomologyDegree G.hom s), mulT (coherentInclusion G.hom p a ⊗ₜ[k] coherentInclusion G.hom q b) (coherentInclusion G.hom r d ⊗ₜ[k] coherentInclusion G.hom s e) = (-1 : k) ^ (q * r) • (mulH (coherentInclusion G.hom p a) (coherentInclusion G.hom r d) ⊗ₜ[k] mulH (coherentInclusion G.hom q b) (coherentInclusion G.hom s e))) ∧ (∀ x y z, mulT (mulT x y) z = mulT x (mulT y z)) ∧ (∀ x, mulT (coherentOne G.hom ⊗ₜ[k] coherentOne G.hom) x = x ∧ mulT x (coherentOne G.hom ⊗ₜ[k] coherentOne G.hom) = x) ∧ (∀ p q (a : coherentCohomologyDegree G.hom p) (b : coherentCohomologyDegree G.hom q), κ (coherentInclusion G.hom p a ⊗ₜ[k] coherentInclusion G.hom q b) = coherentInclusion (G ⊗ G).hom (p + q) (coherentCup (G ⊗ G).hom p q (coherentPullback G.hom (G ⊗ G).hom (pullback.fst G.hom G.hom) rfl p a) (coherentPullback G.hom (G ⊗ G).hom (pullback.snd G.hom G.hom) pullback.condition.symm q b))) ∧ (∀ x y, κ (mulT x y) = mulP (κ x) (κ y)) ∧ κ (coherentOne G.hom ⊗ₜ[k] coherentOne G.hom) = coherentOne (G ⊗ G).hom ∧ (∀ n (x : coherentCohomologyDegree G.hom n), pullM (coherentInclusion G.hom n x) = coherentInclusion (G ⊗ G).hom n (coherentPullback G.hom (G ⊗ G).hom (MonObj.mul (X := G)).left (MonObj.mul (X := G)).w n x)) ∧ Δ = κ.symm.toLinearMap.comp pullM ∧ (∀ n (x : coherentCohomologyDegree G.hom n), Δ (coherentInclusion G.hom n x) ∈ coherentTensorDegree G.hom n) ∧ Δ (coherentOne G.hom) = coherentOne G.hom ⊗ₜ[k] coherentOne G.hom ∧ (∀ x y, Δ (mulH x y) = mulT (Δ x) (Δ y)) ∧ (∀ x, TensorProduct.assoc k _ _ _ (TensorProduct.map Δ (LinearMap.id) (Δ x)) = TensorProduct.map (LinearMap.id) Δ (Δ x)) ∧ (∀ x, TensorProduct.lid k _ (TensorProduct.map ε (LinearMap.id) (Δ x)) = x ∧ TensorProduct.rid k _ (TensorProduct.map (LinearMap.id) ε (Δ x)) = x) ∧ (∀ x : coherentCohomologyDegree G.hom 1, Δ (coherentInclusion G.hom 1 x) = coherentInclusion G.hom 1 x ⊗ₜ[k] coherentOne G.hom + coherentOne G.hom ⊗ₜ[k] coherentInclusion G.hom 1 x)",
+  "branch": "sheaf-dag",
+  "by": "Q73",
+  "date": "2026-10-23",
+  "existing": false,
+  "note": "The existential bilinear operations and linear maps are fixed on all homogeneous generators by the recorded cup, canonical structure-sheaf pullback and degree-zero section comparison; their laws express the signed graded bialgebra without confusing it with Mathlib ordinary Bialgebra. All helper definitions have actual data, and the one postponed theorem matches this node."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-eb08ac8ce",
+  "group": "Q73",
+  "result": "pass",
+  "note": "Re-delivery repairs ab460dbe H2 as prescribed: stmt_deps swap lem-weil-pbc-module-pullback-structure-sheaf -> new def node def-sfb-tensor-pullback-structure-sheaf-map (existing:true WeilConjectures.AlgebraicGeometry.TensorPullbackStructureSheaf.tensorPullbackObjUnitToUnit, statement verbatim vs side-live source, §5 fields ok, stmt_deps def-pc-scheme/def-pc-module-pullback/def-weil-sheaf-of-modules-category exist, no competing def owner). ε_g canonical since exists_tensorPullbackAdjunction pins the unit. Lean byte-identical to ab460dbe (sha bf499b5e); item node differs from live only in stmt_deps/lean. Re-read all clauses (cup algebra, H0=k·1, (-1)^{pq}, signed mulT (-1)^{qr}, κ pinned external cup, Δ=κ⁻¹m*, coassoc, counit, H1 primitive) and edge cases: correct. No compile (no file changed)."
+ }
+}

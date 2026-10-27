@@ -1,0 +1,245 @@
+{
+ "id": "lem-sfb-finite-etale-generic-normal-cover",
+ "kind": "statement",
+ "title": "A finite etale generic point on a finite normal cover",
+ "statement": "Let $k$ be a field and $S$ an integral separated scheme of finite type over $k$, with generic point $\\eta$ and function field $K=k(S)$. Let $P\\to\\operatorname{Spec}K$ be a nonempty finite etale scheme. There exist a finite separable field extension $L/K$ and a $K$-morphism $u:\\operatorname{Spec}L\\to P$ with the following properties. The normalization $q:S_L\\to S$ of $S$ in $L$ is a normal integral scheme, is finite, proper and surjective, and $S_L$ is of finite type over $k$. Its function field is identified with $L$ as a $K$-extension via the map induced by $q$. The canonical morphism $j_L:\\operatorname{Spec}L\\to S_L$ identifies its source with the generic point of $S_L$, and induces an isomorphism $\\operatorname{Spec}L\\simeq S_L\\times_S\\operatorname{Spec}K$ over $\\operatorname{Spec}K$.\n\nNormalization is the affine integral-closure construction [def-fin-normalization-extension]. Normal means that every local ring is an integrally closed domain. Separated means that the relative diagonal is a closed immersion [def-weil-closed-immersion]. The other notions use [def-weil-field], [def-pc-scheme], [def-pc-integral-scheme], [def-weil-finite-type-morphism], [def-weil-finite-integral-morphism], [def-weil-surjective-morphism], [def-weil-proper-morphism], [def-sc-function-field], [def-pc-field-extension], [def-weil-pbc-separable-algebraic-extension], [def-pc-fibre-product], [def-sc-generic-point] and [def-weil-etale-morphism].",
+ "source": {
+  "document": "literature/stacks-project/morphisms.tex",
+  "place": "Tag 0AVK, lemma-nagata-normalization-finite-general, together with Tag 035B, lemma-ubiquity-nagata; finite-etale field factor: literature/stacks-project/algebra.tex, Tag 00U3, lemma-etale-over-field. Normalization construction and normality: Tags 035H, definition-normalization-X-in-Y, and 035L, lemma-normal-normalization. Applied within de Jong (1997), Lemma 3.7, printed p.608, and de Jong (1996), Sections 4.16--4.17, pp.71--72."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-pc-scheme",
+  "def-pc-integral-scheme",
+  "def-weil-finite-type-morphism",
+  "def-weil-finite-integral-morphism",
+  "def-weil-surjective-morphism",
+  "def-weil-proper-morphism",
+  "def-sc-function-field",
+  "def-pc-field-extension",
+  "def-weil-pbc-separable-algebraic-extension",
+  "def-pc-fibre-product",
+  "def-sc-generic-point",
+  "def-fin-normalization-extension",
+  "def-weil-closed-immersion",
+  "def-weil-etale-morphism"
+ ],
+ "proof": [
+  {
+   "text": "Apply [lem-weil-pbc-etale-fibre-discrete-separable-points] to $P\\to\\operatorname{Spec}K$ and the unique point of $\\operatorname{Spec}K$. Its fibre is canonically $P$. Nonemptiness supplies a point $z\\in P$; the cited statement gives a finite separable extension $L=\\kappa(z)$ of $K$ and an isomorphism $\\operatorname{Spec}L\\simeq\\{z\\}$ over $K$. Compose with the open inclusion into $P$ to obtain $u$. This chooses one factor; no rational point over $K$ is assumed.",
+   "uses": [
+    "lem-weil-pbc-etale-fibre-discrete-separable-points",
+    "def-pc-fibre-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 02GL, lemma-etale-over-field (2), applied over a field; Tag 00U3, algebra-lemma-etale-over-field"
+   }
+  },
+  {
+   "text": "The one-point affine scheme $\\operatorname{Spec}k$ is Noetherian: its only local ring is $k$, whose only ideals are $0$ and $k$. By [lem-weil-pbc-finite-type-over-noetherian], $S$ is Noetherian, hence locally Noetherian and therefore quasi-separated by [lem-weil-pbc-locally-noetherian-quasi-separated]. Apply [lem-weil-pbc-normalization-in-residue-field-extension] with $X=S$, $x=\\eta$, $\\kappa(\\eta)=K$ and the finite extension $L/K$. Take its explicitly allowed normalization of $S$ in $h:\\operatorname{Spec}L\\to S$. By [lem-weil-pbc-relative-normalization](iii), over every affine open $U=\\operatorname{Spec}A$ it is the spectrum of the integral closure of $A$ in $\\Gamma(h^{-1}U,\\mathcal O_{\\operatorname{Spec}L})$; this ring is $L$ for $U$ nonempty, because $U$ then contains $\\eta$ and $h^{-1}U=\\operatorname{Spec}L$, and it is $0$ for $U$ empty. Hence this normalization is exactly $q:S_L\\to S$ of [def-fin-normalization-extension], and its natural factorization map is $j_L$. It supplies normality, integrality of $S_L$, and the canonical factorization $\\operatorname{Spec}L\\xrightarrow{j_L}S_L\\xrightarrow{q}S$ through $\\operatorname{Spec}K\\to S$. It also identifies $j_L$ with the generic point and its residue-field map with an isomorphism $k(S_L)\\simeq L$. The factorization makes this an identification over $K$, since both induced maps $K\\to L$ are the original extension map.",
+   "uses": [
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "lem-weil-pbc-locally-noetherian-quasi-separated",
+    "lem-weil-pbc-normalization-in-residue-field-extension",
+    "lem-weil-pbc-relative-normalization",
+    "def-fin-normalization-extension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 01T6, lemma-finite-type-noetherian; Properties Tag 01OY, lemma-locally-Noetherian-quasi-separated; Tags 035H, 035I, 035L, and Etale Cohomology Tag 09Z6 normalization paragraph"
+   }
+  },
+  {
+   "text": "By [lem-fin-normalization-extension-finite], $q$ is finite: the base is integral of finite type over a field and $L/K$ is finite. Thus $q$ is proper by [lem-weil-pbc-finite-proper], and its image is closed by [lem-weil-pbc-proper-closed-image]. This image contains $\\eta$, because $qj_L$ is the generic-point map preceded by $\\operatorname{Spec}L\\to\\operatorname{Spec}K$. A closed subset containing the generic point is all of $S$, proving surjectivity. Properness includes finite type, so composing $q$ with the finite-type structure map of $S$ gives finite type of $S_L/k$ by [lem-sfb-finite-type-composition-base-change].",
+   "uses": [
+    "lem-fin-normalization-extension-finite",
+    "lem-weil-pbc-finite-proper",
+    "lem-weil-pbc-proper-closed-image",
+    "lem-sfb-finite-type-composition-base-change",
+    "def-weil-proper-morphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tags 035B, lemma-ubiquity-nagata (1), and 0AVK, lemma-nagata-normalization-finite-general, specialize to the cited finite-normalization theorem; lemma-finite-proper; Tag 01T3, lemma-composition-finite-type"
+   }
+  },
+  {
+   "text": "Choose a nonempty affine open $U=\\operatorname{Spec}A\\subset S$. By [lem-sc-integral-function-field-affine-fraction], $\\eta\\in U$ and $K=\\operatorname{Frac}A$. Write $B\\subset L$ for the integral closure of $A$; the normalization definition identifies $q^{-1}U=\\operatorname{Spec}B$, and [lem-weil-pbc-relative-normalization](iii), applied to $h$ with $h^{-1}U=\\operatorname{Spec}L$, identifies $j_L$ on this chart with $\\operatorname{Spec}$ of the inclusion $B\\hookrightarrow L$. The affine fibre-product formula identifies the whole generic fibre with $\\operatorname{Spec}(B\\otimes_A K)$, since $\\operatorname{Spec}K\\to S$ factors through $U$. Put $T=A\\setminus\\{0\\}$. The map $B\\otimes_A K\\to T^{-1}B$, $b\\otimes(a/s)\\mapsto ab/s$, is an isomorphism with inverse $b/s\\mapsto b\\otimes(1/s)$: the fraction relations and the tensor balancing relation give the two inverse identities. By [lem-weil-pbc-integral-closure-commutes-localization], $T^{-1}B$ is the integral closure of $K$ in $T^{-1}L=L$. Every element of $L$ is integral over $K$, since $L/K$ is finite. Hence $T^{-1}B=L$. The resulting isomorphism $B\\otimes_A K\\simeq L$ is $b\\otimes c\\mapsto bc$; on spectra its first component is precisely $j_L$ and its second is the prescribed $\\operatorname{Spec}L\\to\\operatorname{Spec}K$. It therefore proves the claimed canonical isomorphism over $\\operatorname{Spec}K$, not merely an abstract isomorphism of schemes.",
+   "uses": [
+    "lem-sc-integral-function-field-affine-fraction",
+    "def-fin-normalization-extension",
+    "lem-weil-pbc-relative-normalization",
+    "lem-weil-pbc-fibre-product-affine-spectra",
+    "lem-weil-pbc-integral-closure-commutes-localization",
+    "def-pc-fibre-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 0307, lemma-integral-closure-localize; Schemes Tags 01I4 and 01JQ, lemma-fibre-product-affine-schemes and lemma-fibre-product-affines; Morphisms Tag 01RV, lemma-integral-scheme-rational-functions"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-etale-fibre-discrete-separable-points",
+  "def-pc-fibre-product",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-weil-pbc-locally-noetherian-quasi-separated",
+  "lem-weil-pbc-normalization-in-residue-field-extension",
+  "def-fin-normalization-extension",
+  "lem-weil-pbc-relative-normalization",
+  "lem-fin-normalization-extension-finite",
+  "lem-weil-pbc-finite-proper",
+  "lem-weil-pbc-proper-closed-image",
+  "lem-sfb-finite-type-composition-base-change",
+  "def-weil-proper-morphism",
+  "lem-sc-integral-function-field-affine-fraction",
+  "lem-weil-pbc-fibre-product-affine-spectra",
+  "lem-weil-pbc-integral-closure-commutes-localization"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/morphisms.tex",
+  "place": "Assembly of Tags 02GL, 035H, 035I, 035L, 035B and 0AVK, with algebra.tex Tag 0307 for the explicit generic-fibre calculation. The individual inputs are cited as existing DAG statements."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "normalization.*[Ff]inite|[Ff]inite.*normalization|exists.*[Ss]eparable",
+   "results": "{\"t\": \"2026-10-22T06:12:35Z\", \"tool\": \"grep\", \"query\": \"normalization.*[Ff]inite|[Ff]inite.*normalization|exists.*[Ss]eparable\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/ZariskisMainTheorem.lean\", \"Mathlib/AlgebraicGeometry/ZariskisMainTheorem.lean\", \"Mathlib/AlgebraicGeometry/ZariskisMainTheorem.lean\", \"Mathlib/AlgebraicGeometry/ZariskisMainTheorem.lean\", \"Mathlib/AlgebraicGeometry/ZariskisMainTheorem.lean\"], \"digest\": \"f4d475661bdb5333\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the normalization and etale-product results give separate ingredients, but none selects a separable generic point and constructs its finite normal cover with the specified generic fibre"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A finite etale generic point lifts over a finite normal integral cover with finite separable function field",
+   "results": "{\"t\": \"2026-10-22T06:12:35Z\", \"tool\": \"leansearch\", \"query\": \"A finite etale generic point lifts over a finite normal integral cover with finite separable function field\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.FormallyEtale.iff_exists_algEquiv_prod\", \"AlgebraicGeometry.Scheme.Cover.ulift\", \"Algebra.FormallyEtale.of_isSeparable_aux\", \"IsSepClosed.lift_def\", \"Algebra.FormallyEtale.of_isSeparable\", \"AlgebraicGeometry.Scheme.Etale\", \"IntermediateField.Lifts.IsExtendible\", \"Algebra.FormallyEtale.iff_isSeparable\"], \"digest\": \"284b9c9045093827\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the normalization and etale-product results give separate ingredients, but none selects a separable generic point and constructs its finite normal cover with the specified generic fibre"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry.Scheme\", \"normalization\"",
+   "results": "{\"t\": \"2026-10-22T06:12:35Z\", \"tool\": \"loogle\", \"query\": \"\\\"AlgebraicGeometry.Scheme\\\", \\\"normalization\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Hom.normalization\", \"AlgebraicGeometry.Scheme.Hom.normalizationOpenCover\", \"AlgebraicGeometry.Scheme.Hom.instIsIntegralNormalization\", \"AlgebraicGeometry.Scheme.Hom.instIsReducedNormalization\", \"AlgebraicGeometry.Scheme.Hom.fromNormalization\", \"AlgebraicGeometry.Scheme.Hom.instIsDominantToNormalization\", \"AlgebraicGeometry.Scheme.Hom.instIsIntegralHomFromNormalization\", \"AlgebraicGeometry.Scheme.Hom.instQuasiCompactToNormalization\"], \"digest\": \"d48a5d2f8710c873\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the normalization and etale-product results give separate ingredients, but none selects a separable generic point and constructs its finite normal cover with the specified generic fibre"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Choose a separable closed point of a finite etale function field scheme and extend its residue field by finite normalization of the base",
+   "results": "{\"t\": \"2026-10-22T06:13:05Z\", \"tool\": \"leanfinder\", \"query\": \"Choose a separable closed point of a finite etale function field scheme and extend its residue field by finite normalization of the base\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.exists_etale_bijective_residueFieldMap_and_map_eq_mul_and_isCoprime\", \"AlgebraicGeometry.Scheme.instFieldCarrierResidueField\", \"AlgebraicGeometry.Scheme.descResidueField\", \"instIsAlgebraicResidueFieldOfIsIntegral\", \"AlgebraicGeometry.Scheme.instCanonicallyOverSpecResidueField\", \"AlgebraicGeometry.Scheme.SpecToEquivOfField\", \"AlgebraicGeometry.Scheme.instIsOverMapResidueFieldMapOverInferInstanceOverClass\", \"AlgebraicGeometry.Scheme.instOverSpecResidueField\"], \"digest\": \"273b06867eac247b\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the normalization and etale-product results give separate ingredients, but none selects a separable generic point and constructs its finite normal cover with the specified generic fibre"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A nonempty finite etale scheme over the function field of an integral finite type scheme over a field has a point over a finite separable extension whose normalization is a finite surjective normal integral cover",
+   "results": "{\"t\": \"2026-10-22T06:13:05Z\", \"tool\": \"leanfinder\", \"query\": \"A nonempty finite etale scheme over the function field of an integral finite type scheme over a field has a point over a finite separable extension whose normalization is a finite surjective normal integral cover\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Hom.instIsIntegralNormalization\", \"AlgebraicGeometry.finite_appTop_of_universallyClosed\", \"AlgebraicGeometry.Scheme.Hom.instIsIntegralHomNormalizationDesc\", \"AlgebraicGeometry.Scheme.Hom.instIsIntegralHomFromNormalization\", \"AlgebraicGeometry.Scheme.Hom.normalizationOpenCover\", \"AlgebraicGeometry.Scheme.Hom.instIsDominantToNormalization\", \"AlgebraicGeometry.Scheme.Hom.toNormalization\", \"AlgebraicGeometry.Scheme.Hom.normalizationDesc\"], \"digest\": \"950bc21bfacbfef9\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the normalization and etale-product results give separate ingredients, but none selects a separable generic point and constructs its finite normal cover with the specified generic fibre"
+  },
+  {
+   "tool": "grep",
+   "query": "normalization.*finite|finite.*normalization|generic.*normalization",
+   "results": "{\"t\": \"2026-10-23T04:35:30Z\", \"tool\": \"grep\", \"query\": \"normalization.*finite|finite.*normalization|generic.*normalization\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/ZariskisMainTheorem.lean\", \"Mathlib/AlgebraicGeometry/ZariskisMainTheorem.lean\", \"Mathlib/AlgebraicGeometry/ZariskisMainTheorem.lean\", \"Mathlib/AlgebraicGeometry/ZariskisMainTheorem.lean\", \"Mathlib/AlgebraicGeometry/ZariskisMainTheorem.lean\"], \"digest\": \"f4d475661bdb5333\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: normalization constructors and integral/dominant instances give ingredients, not this combined separable-point selection and finite normal model with canonical generic fibre"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Finite normalization of an integral finite type scheme in a finite separable extension of its function field",
+   "results": "{\"t\": \"2026-10-23T04:35:30Z\", \"tool\": \"leansearch\", \"query\": \"Finite normalization of an integral finite type scheme in a finite separable extension of its function field\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Hom.instIsIsoToNormalizationOfIsIntegralHom\", \"AlgebraicGeometry.Scheme.Hom.instIsIntegralHomFromNormalization\", \"AlgebraicGeometry.Scheme.Hom.instIsIntegralNormalization\", \"AlgebraicGeometry.IsFinite.iff_isIntegralHom_and_locallyOfFiniteType\", \"AlgebraicGeometry.Scheme.Hom.normalization\", \"AlgebraicGeometry.Scheme.Hom.instIsIntegralHomNormalizationDesc\", \"AlgebraicGeometry.Scheme.Hom.normalizationDesc\", \"AlgebraicGeometry.Scheme.Hom.ker_toNormalization\"], \"digest\": \"f74b1556d46866c3\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: normalization constructors and integral/dominant instances give ingredients, not this combined separable-point selection and finite normal model with canonical generic fibre"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry.Scheme.Hom.normalization\"",
+   "results": "{\"t\": \"2026-10-23T04:35:30Z\", \"tool\": \"loogle\", \"query\": \"\\\"AlgebraicGeometry.Scheme.Hom.normalization\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Hom.normalization\", \"AlgebraicGeometry.Scheme.Hom.normalizationOpenCover\", \"AlgebraicGeometry.Scheme.Hom.normalizationGlueData\", \"AlgebraicGeometry.Scheme.Hom.normalizationDiagram\", \"AlgebraicGeometry.Scheme.Hom.normalizationDiagramMap\", \"AlgebraicGeometry.Scheme.Hom.normalizationDesc\", \"AlgebraicGeometry.Scheme.Hom.normalizationDesc_comp\", \"AlgebraicGeometry.Scheme.Hom.normalizationPullback\"], \"digest\": \"708f916bfe065e2f\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: normalization constructors and integral/dominant instances give ingredients, not this combined separable-point selection and finite normal model with canonical generic fibre"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A nonempty finite etale scheme over a function field admits a point over a finite separable extension whose normalization is finite normal integral and has that extension as generic fibre",
+   "results": "{\"t\": \"2026-10-23T04:35:31Z\", \"tool\": \"leanfinder\", \"query\": \"A nonempty finite etale scheme over a function field admits a point over a finite separable extension whose normalization is finite normal integral and has that extension as generic fibre\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.finite_appTop_of_universallyClosed\", \"AlgebraicGeometry.Scheme.Hom.instIsIntegralNormalization\", \"AlgebraicGeometry.Scheme.Hom.normalizationDiagram\", \"AlgebraicGeometry.Scheme.Hom.normalizationDesc\", \"AlgebraicGeometry.Scheme.Hom.normalization\", \"Algebra.exists_etale_bijective_residueFieldMap_and_map_eq_mul_and_isCoprime\", \"AlgebraicGeometry.Scheme.Hom.instIsDominantToNormalization\", \"AlgebraicGeometry.Scheme.Hom.toNormalization\"], \"digest\": \"b31aee38971c5b91\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: normalization constructors and integral/dominant instances give ingredients, not this combined separable-point selection and finite normal model with canonical generic fibre"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Select one field factor of a nonzero finite etale algebra and normalize a variety in it to obtain a finite surjective proper model with the same function field",
+   "results": "{\"t\": \"2026-10-23T04:36:24Z\", \"tool\": \"leanfinder\", \"query\": \"Select one field factor of a nonzero finite etale algebra and normalize a variety in it to obtain a finite surjective proper model with the same function field\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.PartialMap.fromFunctionField\", \"AlgebraicGeometry.Scheme.Hom.normalization\", \"Algebra.Etale.exists_subalgebra_fg\", \"AlgebraicGeometry.Scheme.Hom.normalizationDesc\", \"AlgebraicGeometry.Scheme.Hom.toNormalization\", \"AlgebraicGeometry.Scheme.Hom.instIsDominantToNormalization\", \"AlgebraicGeometry.Scheme.Hom.fromNormalization\", \"AlgebraicGeometry.Scheme.Hom.normalizationOpenCover\"], \"digest\": \"cd7f3d6c73fab2d3\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: normalization constructors and integral/dominant instances give ingredients, not this combined separable-point selection and finite normal model with canonical generic fibre"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-stable-pointed-generic-extension",
+  "date": "2026-10-22",
+  "group": "Q142"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair.; old proof steps 1--2: finite separable factor and finite normalization retaining its field",
+   "via": [
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-finite-etale-generic-normal-cover",
+  "worker": "stage1",
+  "summary": "Kept the statement unchanged. Four proof steps select a separable residue-field point, use the existing normalization-in-residue-field theorem for normality and the canonical generic field, apply finite-normalization/properness and finite-type composition, and explicitly compute the canonical generic fibre by integral-closure localization. All ingredients already have nodes; no new node or new Mathlib leaf. Read all cited statements and sources and checked the map over K.",
+  "blueprint": "Realizes the inherited det-thm-sf-ctf-stability-direct-images proof (3), dimension induction in the marked plurinodal input and de Jong Lemma 3.7, through the old proof steps 1–2 of lem-sfb-stable-pointed-generic-extension: choose a finite separable generic field and retain it under finite normalization. The ancestor command returns null for this imported detail chain, so its existing null from.node and via list are preserved.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q03-13b92e162",
+  "group": "Q03",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q03-13b92e162 (reviewer sub-agent of L); spot-checked: The item's statement is unchanged and true. I tested it on S=Spec k, L=K, a nonnormal cusp, an imperfect k and a disconnected P; P nonempty is needed. The delivery adds no new nodes, it is not a re-split item, the base proof was empty and there is no SGA. Step 1: lem-weil-pbc-etale-fibre-discrete-separable-points gives L=κ(z) finite separable and Spec L≅{z} over K (Stacks 02GL). Step 2: Noetherian, then quasi-separated, then lem-weil-pbc-normalization-in-residue-field-extension gives normal, integral and generic point with κ≅L over K (035H/035I/035L). Step 3: lem-fin-normalization-extension-finite (0AVK+035B), then finite⇒proper⇒closed image containing η, so surjective; finite type by composition. Step 4: B⊗_A K≅T^{-1}B=L by lem-weil-pbc-integral-closure-commutes-localization (algebra 0307), over K. Duplicate candidates checked (semilinear-finite-normalization-model needs projective S and a group action; finite-etale-normal-generic-components needs a normal base; finite-normal-cover-normalization goes the converse way); none states the item. FIX for C4: steps 2 and 4 used def-fin-normalization-extension both to identify the 035H normalization of S in Spec L with the integral closure of O_S in L, and to describe j_L on an affine chart as Spec(B⊂L). That definition says neither. Both steps and proof_deps now cite lem-weil-pbc-relative-normalization(iii), with Γ(h^{-1}U)=L for nonempty U. Whole corrected item at fixes/dag/nodes/sec-six-functors-basics/lem-sfb-finite-etale-generic-normal-cover.json.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.FiniteEtaleGenericNormalCover",
+  "declaration": "AlgebraicGeometry.exists_finite_etale_generic_normal_cover",
+  "file": "lean/Sheaf/AlgebraicGeometry/FiniteEtaleGenericNormalCover.lean",
+  "statement": "theorem exists_finite_etale_generic_normal_cover {k : Type u} [Field k] (S : Scheme.{u}) [IsIntegral S] (s : S ⟶ Spec (.of k)) [IsSeparated s] [LocallyOfFiniteType s] [QuasiCompact s] (P : Scheme.{u}) [Nonempty P] (p : P ⟶ Spec S.functionField) [IsFinite p] [Etale p] : ∃ (L : Type u) (_ : Field L) (_ : Algebra S.functionField L), FiniteDimensional S.functionField L ∧ Algebra.IsSeparable S.functionField L ∧ ∃ u : Spec (.of L) ⟶ P, u ≫ p = Spec.map (CommRingCat.ofHom (algebraMap S.functionField L)) ∧ IsIntegral (S.normalizationIn L) ∧ (∀ y : S.normalizationIn L, IsDomain ((S.normalizationIn L).presheaf.stalk y) ∧ IsIntegrallyClosed ((S.normalizationIn L).presheaf.stalk y)) ∧ IsFinite (S.fromNormalizationIn L) ∧ IsProper (S.fromNormalizationIn L) ∧ Surjective (S.fromNormalizationIn L) ∧ LocallyOfFiniteType (S.fromNormalizationIn L ≫ s) ∧ QuasiCompact (S.fromNormalizationIn L ≫ s) ∧ IsGenericPoint ((S.fromSpecOfAlgebraFunctionField L).toNormalization (IsLocalRing.closedPoint L)) Set.univ ∧ (∃ (e : Spec (.of L) ≅ Spec (S.normalizationIn L).functionField) (a : Spec (S.normalizationIn L).functionField ⟶ Spec S.functionField), e.hom ≫ (S.normalizationIn L).fromSpecFunctionField = (S.fromSpecOfAlgebraFunctionField L).toNormalization ∧ (S.normalizationIn L).fromSpecFunctionField ≫ S.fromNormalizationIn L = a ≫ S.fromSpecFunctionField ∧ e.hom ≫ a = Spec.map (CommRingCat.ofHom (algebraMap S.functionField L))) ∧ ∃ e : Spec (.of L) ≅ pullback (S.fromNormalizationIn L) S.fromSpecFunctionField, e.hom ≫ pullback.fst (S.fromNormalizationIn L) S.fromSpecFunctionField = (S.fromSpecOfAlgebraFunctionField L).toNormalization ∧ e.hom ≫ pullback.snd (S.fromNormalizationIn L) S.fromSpecFunctionField = Spec.map (CommRingCat.ofHom (algebraMap S.functionField L))",
+  "branch": "newtargets-dag",
+  "by": "N0",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-4d53a512e",
+  "group": "N0",
+  "result": "pass",
+  "note": "Single new module FiniteEtaleGenericNormalCover.lean; node copy changes only lean (diffed vs side-live), statement verbatim. Hypotheses match the node exactly: Field k, IsIntegral S, IsSeparated/LOFT/QC of s, Nonempty P with IsFinite/Etale p; no extra assumptions, universes forced by Spec targets. Conclusion: ∃ L finite separable with u over K; uses the recorded normalizationIn/fromNormalizationIn (def-fin-normalization-extension); integral + stalks integrally closed domains (node's inline normality); IsFinite/IsProper/Surjective q; LOFT+QC of q≫s; j_L = toNormalization hits the generic point; e, a fixed by monomorphism equations (K-identification of the function field); generic-fibre iso fixed by both projections. Edge cases L=K, non-normal S, several factors of P, dim 0 OK; empty base excluded by integrality. Note: IsNormalScheme (def-sbc-normal-dominant-galois) exists but the inline clause is the node's own definition and equivalent; adding the stmt_dep is outside a stage-2 fix. No hollow defs, sorry-only proof, docstrings carry source places, blueprint id and all 4 proof steps; report sections present. Not compiled (no file changed)."
+ }
+}

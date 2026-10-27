@@ -1,0 +1,139 @@
+{
+ "id": "lem-sf-completed-open-cartesian-identity",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "fix-prop-coherence",
+   "place": "Open-factor base-change calculation, steps 5--6 of lem-sf-pf-open-base-change-square.",
+   "via": [
+    "lem-sf-pf-open-base-change-square"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Completed open Cartesian identity on supplied constructible domains",
+ "statement": "For a coefficient datum c, finite extension E, compactified square Q, any normalized IntegralMaps d, integral derived inputs K,L with K constructible, and all the constructible domains dom : IntegralDomains, the completed open identity IntegralEquation holds. This asserts only the equality of the actual completed arrows on already supplied domains; it asserts neither domain closure nor monoidality of the proper pullback square.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-prop-sf-pf-coherence/prop-sf-pf-coherence.proof.md",
+  "place": "Base-change paragraph, open-factor restriction calculation, steps 5--6 of lem-sf-pf-open-base-change-square."
+ },
+ "stmt_deps": [
+  "def-sf-open-base-change-square-data",
+  "def-sf-operation-stages",
+  "def-weil-derived-complete-integral-detailed",
+  "def-sf-scalar-reduction-categories-restriction"
+ ],
+ "proof": [
+  {
+   "text": "Put V=K tensor JP and W=AK tensor J'HP. The supplied constructible domains allow the normalized open projection and exchange maps. Their isomorphisms identify the source with j'_!AV and target with j'_!W. Full faithfulness and the invertible open unit show that J' detects equality of the two arrows.",
+   "uses": [
+    "lem-sf-pf-open-factor-coherence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-prop-sf-pf-coherence/prop-sf-pf-coherence.proof.md",
+    "place": "Base-change paragraph, open-factor restriction calculation, steps 5--6 of lem-sf-pf-open-base-change-square."
+   }
+  },
+  {
+   "text": "Apply the beta_restriction and gamma_restriction identities of open-factor coherence. The first restriction is mu_A followed by 1 tensor sigma_P. For the second, tensor monoidality of the canonical composition square moves sigma across mu_H; its first factor cancels the inverse open unit. The restriction of gamma_j gives the remaining mu_A factor. The strict quotient augmentation normalization identifies these tensor maps with the ambient canonicalIntegralPullbackTensor arrows, so the two restrictions coincide before any finite evaluation. Restriction detection proves the equation.",
+   "uses": [
+    "lem-sf-pf-open-factor-coherence",
+    "lem-pur-derived-pullback-tensor-iso"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-prop-sf-pf-coherence/prop-sf-pf-coherence.proof.md",
+    "place": "Base-change paragraph, open-factor restriction calculation, steps 5--6 of lem-sf-pf-open-base-change-square."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-pur-derived-pullback-tensor-iso",
+  "lem-sf-pf-open-factor-coherence"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-prop-sf-pf-coherence/prop-sf-pf-coherence.proof.md",
+  "place": "Base-change paragraph, open-factor restriction calculation, steps 5--6 of lem-sf-pf-open-base-change-square."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Extension by zero projection formula compatibility with base change for derived sheaves",
+   "results": "Function.ExtendByZero.linearMap and general derived functor lemmas; none states the sheaf open Cartesian tensor identity.",
+   "date": "2026-10-25",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "base change compatibility of the projection formula of extension by zero along an open immersion in derived categories",
+   "results": "Scheme.Modules.restrictFunctorComp and open immersion section identities; no derived open tensor/base-change square.",
+   "date": "2026-10-25",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "projectionMap_mate",
+   "results": "No Mathlib identifier. The adopted source library has CategoryTheory.Adjunction.projectionMap_mate, a generic adjunct calculation requiring the normalized comparison hypotheses.",
+   "date": "2026-10-25",
+   "verdict": "no one-line specialization"
+  },
+  {
+   "tool": "grep",
+   "query": "projectionMap_mate|open.*baseChange|projection.*baseChange in Mathlib/CategoryTheory; matching DAG and current blueprint searches",
+   "results": "No Mathlib open derived identity. The project ClopenCartesianTensorSquare.cartesian_tensor proves the analogous identity on supplied site models; conversion to the canonical finite and completed models remains necessary.",
+   "date": "2026-10-25",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.SixFunctors.OpenBaseChangeSquare",
+  "date": "2026-10-25",
+  "group": "P2"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-pf-coherence",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.SixFunctors.CompletedOpenCartesianIdentity",
+  "file": "lean/Sheaf/SixFunctors/CompletedOpenCartesianIdentity.lean",
+  "declaration": "WeilConjectures.OpenProjectionBaseChange.completed_open_cartesian_identity",
+  "statement": "theorem completed_open_cartesian_identity\n    (Q : SixFunctorCompactifiedSquare D) (d : IntegralMaps D c E Q)\n    (K : DerivedCategory (scalarReductionSource.{u, u} c.l E Q.X.obj.left))\n    (L : DerivedCategory (scalarReductionSource.{u, u} c.l E Q.Y.obj.left))\n    (hK : sfIntegralConstructible c.l E Q.X.obj.left K)\n    (dom : IntegralDomains D c E Q K L) :\n    IntegralEquation D c E Q d K L hK dom",
+  "branch": "sheaf-dag",
+  "by": "P2",
+  "date": "2026-10-25"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-e3efa",
+  "group": "P2",
+  "result": "fix",
+  "landing": "20261025T163954-L-924423",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-e3efa",
+  "group": "P2",
+  "result": "fix",
+  "landing": "20261025T163954-L-924423",
+  "kind": "interface",
+  "note": "independent cc review: openBaseChangeSquare stmt byte-identical to clone; 37 decls diffed verbatim vs clone lines 1-588 into OpenBaseChangeSquareData (public re-export); sorry lemmas read against FiniteMaps/IntegralMaps pinning fields in OpenFactorCoherence(Data)/OpenFactorTensorModel; importer ProjectionFormulaCoherence compiled rc 0 in sandbox; #print axioms = propext/sorryAx/choice/Quot.sound"
+ }
+}

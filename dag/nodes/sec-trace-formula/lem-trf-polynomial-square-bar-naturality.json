@@ -1,0 +1,272 @@
+{
+ "id": "lem-trf-polynomial-square-bar-naturality",
+ "kind": "statement",
+ "title": "Explicit ring-square maps and naturality of polynomial bar comparisons",
+ "statement": "Fix universes $\\mathcal U\\in\\mathcal V$ as in [def-weil-size-convention], and a commutative square of $\\mathcal U$-small commutative rings $(\\alpha:A\\to A',\\beta:B\\to B')$ from $A\\to B$ to $A'\\to B'$. Write $P_n=(F_AU)^{n+1}B$ and $P'_n=(F_{A'}U)^{n+1}B'$, with evaluation faces, unit degeneracies and iterated evaluation augmentations, where $F_A(E)=A[E]$. Define $t_{-1}=\\beta$ and recursively $t_n:P_n=A[UP_{n-1}]\\to A'[UP'_{n-1}]=P'_n$ by sending $a$ to $\\alpha(a)$ and $[p]$ to $[t_{n-1}(p)]$ for $n\\geq0$. These are semilinear augmented simplicial maps. They preserve identity squares and composition strictly. Let $\\mathcal D_{B/A}$ and $\\mathcal D_{B'/A'}$ be the categories of all $\\mathcal U$-small polynomial algebras augmented to the respective targets, with algebra maps over those targets. Put $\\mathcal F_{B/A}(T)=\\Omega^1_{T/A}\\otimes_T B$ [def-weil-pbc-kahler-differentials], with maps $\\mathrm dx\\otimes b\\mapsto\\mathrm d(vx)\\otimes b$ for $v:T\\to T'$, and define $\\mathcal F_{B'/A'}$ similarly. The square induces the functor\n$$u(T)=(T\\otimes_A A'\\to B'),\\qquad x\\otimes a'\\mapsto\\beta(\\epsilon_T(x))a',$$\nand the natural transformation $\\theta:\\mathcal F_{B/A}\\to\\operatorname{Res}_\\beta(\\mathcal F_{B'/A'}\\circ u)$ with formula $\\mathrm dx\\otimes b\\mapsto\\mathrm d(x\\otimes1)\\otimes\\beta(b)$; $A[E]\\otimes_A A'\\cong A'[E]$. For augmented simplicial $\\mathcal U$-small polynomial algebras $Q\\to B$ and $Q'\\to B'$ (so every $Q_n$ is an object of $\\mathcal D_{B/A}$ and every $Q'_n$ one of $\\mathcal D_{B'/A'}$) whose underlying augmentations are trivial Kan fibrations [def-weil-pbc-trivial-kan-fibration], and any augmented $\\alpha$-semilinear simplicial map $h:Q\\to Q'$, there is a simplicial map $k:uQ\\to Q'$ given by $q\\otimes a'\\mapsto h(q)a'$. Put $K(Q)=s(\\mathcal F_{B/A}(Q))$, where $s(M)^{-n}=M_n$ with alternating-face differential and zero positive terms. The rule $\\mathrm dq\\otimes b\\mapsto\\mathrm d(hq)\\otimes\\beta(b)$ gives a chain map $K(h):K(Q)\\to\\operatorname{Res}_\\beta K(Q')$; for standard $h=t$ these maps preserve identities and composition strictly. In $D(B)$ [def-weil-abstract-derived-category] the canonical bar comparisons of [lem-trf-polynomial-presentation-homology] satisfy\n$$a_{Q'}K(h)=\\mathbf H(u,\\theta)a_Q.$$\nHere $\\mathbf H(u,\\theta)$ sends the bar generator $(T_0\\to\\cdots\\to T_n,x)$ to $(uT_0\\to\\cdots\\to uT_n,\\theta_{T_0}(x))$ and restriction of scalars along $\\beta$ is understood on all target objects. This formula applies to $h=t$ for standard resolutions. No assumption that $uQ\\to B'$ is a resolution and no flatness or injectivity hypothesis on $\\alpha$ or $\\beta$ is required.",
+ "source": {
+  "document": "literature/stacks-project/cotangent.tex",
+  "place": "Tag 08QL (section-functoriality), both the iterated polynomial maps and the presentation-category base-change construction; sites-cohomology.tex Tags 08PD (remark-morphism-fibred-categories) and 08Q9 (lemma-compute-by-cosimplicial-resolution), for the comparison identity omitted at the end of 08QL."
+ },
+ "stmt_deps": [
+  "def-weil-size-convention",
+  "def-weil-pbc-kahler-differentials",
+  "def-weil-pbc-trivial-kan-fibration",
+  "def-weil-abstract-derived-category",
+  "lem-trf-polynomial-presentation-homology"
+ ],
+ "proof": [
+  {
+   "text": "Put $P_{-1}=B$ and $P'_{-1}=B'$. Given $t_{n-1}$, substitution in finite polynomials defines the unique ring map $t_n:A[UP_{n-1}]\\to A'[UP'_{n-1}]$ taking coefficients through $\\alpha$ and $[p]$ to $[t_{n-1}(p)]$. It is $\\alpha$-semilinear by its value on coefficients. Starting with the ring map $t_{-1}=\\beta$ therefore constructs every $t_n$. Uniqueness follows because coefficients and variables generate the polynomial ring; this applies without a finite variable set.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/cotangent.tex",
+    "place": "Tag 08QL (section-functoriality), explicit standard polynomial maps and presentation-category base change."
+   }
+  },
+  {
+   "text": "For a semilinear algebra map $f:X\\to X'$, write $L(f):A[UX]\\to A'[UX']$ for this substitution. Evaluation satisfies $\\epsilon' L(f)=f\\epsilon$: on $[x]$ both sides are $f(x)$, and on coefficients this is semilinearity. The unit-induced map $\\delta:A[UX]\\to A[U(A[UX])]$ sends $[x]$ to $[[x]]$ and coefficients to coefficients. Thus $\\delta' L(f)=L(L(f))\\delta$, on $[x]$ by the common value $[[f(x)]]$, and on coefficients by $\\alpha$. Apply these identities at each nested polynomial level of the faces and degeneracies specified in [lem-trf-polynomial-augmentation-boundary]. They give $d'_it_n=t_{n-1}d_i$ and $s'_it_n=t_{n+1}s_i$; iterating evaluation gives augmentation compatibility, with degree $-1$ equal to the original ring square. Finally $L(1)=1$ and $L(gf)=L(g)L(f)$ on coefficients and variables. Induction starting at $t_{-1}$ proves the strict identity and composition laws for all $t_n$.",
+   "uses": [
+    "lem-trf-polynomial-augmentation-boundary"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/cotangent.tex",
+    "place": "Tag 08QL (section-functoriality), explicit standard polynomial maps and presentation-category base change."
+   }
+  },
+  {
+   "text": "For an object $T\\xrightarrow{\\epsilon_T}B$, the rule $x\\otimes a'\\mapsto\\beta(\\epsilon_T(x))a'$ is balanced over $A$, since $\\beta\\epsilon_T(a)=\\alpha(a)$ in $B'$. It is an $A'$-algebra augmentation. For an arrow $v:T\\to S$ use $u(v)(x\\otimes a')=v(x)\\otimes a'$; augmentation compatibility and the identity and composition equations follow on pure tensors. If $T=A[E]$, define $T\\otimes_A A'\\to A'[E]$ by $p\\otimes a'\\mapsto a'\\alpha_*(p)$ and its inverse by $a'\\mapsto1\\otimes a'$ and $e\\mapsto e\\otimes1$. On coefficients, variables and pure tensors the composites are identities. Hence $u(T)$ is polynomial. Finite-support polynomial expressions and the tensor quotient are $\\mathcal U$-small, so $u$ really lands in the stated presentation category, including when $E$ is empty or infinite.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/cotangent.tex",
+    "place": "Tag 08QL (section-functoriality), explicit standard polynomial maps and presentation-category base change."
+   }
+  },
+  {
+   "text": "The differential presentation in [def-weil-pbc-kahler-differentials] verifies all coefficient maps directly. For $v:T\\to S$ over $B$, $\\mathrm dx\\otimes b\\mapsto\\mathrm d(vx)\\otimes b$ preserves additivity and the Leibniz relation, and kills $\\mathrm da$ for $a\\in A$; tensor balancing holds because $\\epsilon_Sv=\\epsilon_T$. These maps are functorial on the generators. For $\\theta_T$, use the same relations with $x\\mapsto x\\otimes1$ and $b\\mapsto\\beta(b)$. Constants from $A$ land in $A'$, so their relative differentials vanish. A scalar $t\\in T$ acts on the target tensor as $\\beta\\epsilon_T(t)$, exactly the image under $\\beta$ of its action on the source tensor; this proves the balancing and $B$-linearity after restriction. For $v:T\\to S$, the two naturality composites both send $\\mathrm dx\\otimes b$ to $\\mathrm d(v(x)\\otimes1)\\otimes\\beta(b)$, proving that $\\theta$ is a natural transformation.",
+   "uses": [
+    "def-weil-pbc-kahler-differentials"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/cotangent.tex",
+    "place": "Tag 08QL (section-functoriality), explicit standard polynomial maps and presentation-category base change."
+   }
+  },
+  {
+   "text": "The formula $k_n(q\\otimes a')=h_n(q)a'$ is balanced because $h_n(aq)=\\alpha(a)h_n(q)$, is an $A'$-algebra map, and respects augmentation because $\\epsilon' h_n=\\beta\\epsilon$. Each simplicial operator is an $A'$-algebra map on the target, so its commutation with $k$ follows on $q\\otimes a'$ from its commutation with $h$. Thus $k:uQ\\to Q'$ is simplicial. Applying the differential relations of [def-weil-pbc-kahler-differentials] gives degreewise maps $\\mathrm dq\\otimes b\\mapsto\\mathrm d(h_nq)\\otimes\\beta(b)$. For each face, the two composites agree since $d'_i h_n=h_{n-1}d_i$; their alternating sums therefore commute as well. This constructs $K(h)$. For $h=t$, its identity and composition equations follow from Step 2 on every $\\mathrm dq\\otimes b$, which generates the module.",
+   "uses": [
+    "def-weil-pbc-kahler-differentials"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/cotangent.tex",
+    "place": "Tag 08QL (section-functoriality), explicit standard polynomial maps and presentation-category base change."
+   }
+  },
+  {
+   "text": "Apply [lem-trf-polynomial-presentation-homology] separately to $Q$ over $B/A$ and $Q'$ over $B'/A'$, using $R=B,F=\\mathcal F_{B/A}$ and $R'=B',F'=\\mathcal F_{B'/A'}$. It supplies small presentation categories, representable contractibility for both resolutions, and their canonical comparisons with the first-vertex bar model. Consequently [lem-trf-simplicial-derived-colimit-computation] applies with these two categories, $\\rho=\\beta$, and $u,\\theta,k$ from Steps 3--5. Its comparison maps are the $a_Q,a_{Q'}$ just specified: the presentation-homology statement explicitly uses that canonical bar comparison. On generators, $F'(k_n)\\theta_{Q_n}(\\mathrm dq\\otimes b)=\\mathrm d(k_n(q\\otimes1))\\otimes\\beta(b)=\\mathrm d(h_nq)\\otimes\\beta(b)$, so its map $s(F'(k)\\theta_Q)$ is precisely $K(h)$. Its stated naturality equality is therefore $a_{Q'}K(h)=\\mathbf H(u,\\theta)a_Q$ in $D(B)$. Its bar map sends $(T_0\\to\\cdots\\to T_n,x)$ to $(uT_0\\to\\cdots\\to uT_n,\\theta_{T_0}(x))$, exactly as required, with degreewise restriction of target scalars.",
+   "uses": [
+    "lem-trf-polynomial-presentation-homology",
+    "lem-trf-simplicial-derived-colimit-computation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 08Q9 (lemma-compute-by-cosimplicial-resolution), applied through the cited general bar-comparison statement; Tag 08PD (remark-morphism-fibred-categories), and cotangent.tex Tag 08QL, final omitted compatibility."
+   }
+  },
+  {
+   "text": "For the standard endpoints, [lem-trf-polynomial-augmentation-boundary] gives termwise polynomial algebras and trivial Kan augmentations for both $P$ and $P'$. Their terms are $\\mathcal U$-small by closure under finite-support polynomial formation, so Step 6 applies with $Q=P,Q'=P',h=t$. The general comparison statement [lem-trf-simplicial-derived-colimit-computation] requires contractibility only for the two endpoint resolutions and explicitly requires none for $uQ$. All remaining constructions were substitutions or balanced maps, with no inverses of ring maps and no exactness assertion for tensoring. Thus the argument imposes no flatness or injectivity hypothesis on either vertical map.",
+   "uses": [
+    "lem-trf-polynomial-augmentation-boundary",
+    "lem-trf-simplicial-derived-colimit-computation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/cotangent.tex",
+    "place": "Tag 08QL (section-functoriality), explicit standard polynomial maps and presentation-category base change."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-trf-polynomial-augmentation-boundary",
+  "def-weil-pbc-kahler-differentials",
+  "lem-trf-polynomial-presentation-homology",
+  "lem-trf-simplicial-derived-colimit-computation"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/cotangent.tex",
+  "place": "Tag 08QL (section-functoriality), explicit standard polynomial maps and presentation-category base change.",
+  "note": "The source omits the comparison verification. It is supplied by specialization of the existing general simplicial derived-colimit naturality statement, with the coefficient and simplicial maps checked explicitly."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "cotangent differential complexes maps of standard polynomial resolutions for squares of ring maps natural with derived colimit comparisons",
+   "results": "8 hits; top=['Algebra.Extension.CotangentSpace.map_comp_cotangentComplex', 'Algebra.Extension.CotangentSpace.map_cotangentComplex', 'Algebra.Presentation.differentials.comm₁₂', 'Algebra.Generators.H1Cotangent.δ_comp_equiv', 'Algebra.Generators.H1Cotangent.δ_eq_δAux', 'Algebra.Generators.H1Cotangent.δ_map', 'Algebra.Generators.H1Cotangent.δ_eq', 'Algebra.Generators.H1Cotangent.δAux_ofComp']; note=; digest=dce8bc18cf5d101f. Read returned candidate source declarations; see report.md for file/line and mismatch.",
+   "date": "2026-10-22",
+   "verdict": "No match: Mathlib cotangentComplex and its naturality describe a single conormal differential, not simplicial standard resolutions or their derived bar comparisons."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"KaehlerDifferential\"",
+   "results": "12 hits; top=['KaehlerDifferential', 'instAddCommGroupKaehlerDifferential', 'instInhabitedKaehlerDifferential', 'instSMulKaehlerDifferentialOfSMulCommClass', 'KaehlerDifferential.kerTotal', 'KaehlerDifferential.finite', 'KaehlerDifferential.subsingleton_of_surjective', 'KaehlerDifferential.ideal']; note=; digest=05bbf7465494b971. Read returned candidate source declarations; see report.md for file/line and mismatch.",
+   "date": "2026-10-22",
+   "verdict": "No match: Mathlib cotangentComplex and its naturality describe a single conormal differential, not simplicial standard resolutions or their derived bar comparisons."
+  },
+  {
+   "tool": "grep",
+   "query": "cotangent.*natur|cotangent.*map|cotangent.*simplicial",
+   "results": "25 hits; top=['Mathlib/RingTheory/Kaehler/JacobiZariski.lean', 'Mathlib/RingTheory/Kaehler/JacobiZariski.lean', 'Mathlib/RingTheory/Kaehler/JacobiZariski.lean', 'Mathlib/RingTheory/Kaehler/JacobiZariski.lean', 'Mathlib/RingTheory/Kaehler/JacobiZariski.lean', 'Mathlib/RingTheory/Ideal/CotangentBaseChange.lean', 'Mathlib/RingTheory/Ideal/CotangentBaseChange.lean', 'Mathlib/RingTheory/Ideal/CotangentBaseChange.lean']; note=; digest=37fca67dfa884d6e. Read returned candidate source declarations; see report.md for file/line and mismatch.",
+   "date": "2026-10-22",
+   "verdict": "No match: Mathlib cotangentComplex and its naturality describe a single conormal differential, not simplicial standard resolutions or their derived bar comparisons."
+  },
+  {
+   "tool": "leansearch",
+   "query": "semilinear functorial cotangent complex maps independent of polynomial simplicial resolutions",
+   "results": "8 hits; top=['Algebra.Extension.cotangentComplex', 'Algebra.Extension.CotangentSpace.map_cotangentComplex', 'Algebra.Extension.CotangentSpace.map_comp_cotangentComplex', 'KaehlerDifferential.cotangentComplexBaseChange', 'Algebra.PreSubmersivePresentation.cotangentComplexAux', 'Algebra.Extension.CotangentSpace.map_sub_map', 'Algebra.Extension.CotangentSpace.map.congr_simp', 'Algebra.Presentation.differentials.hom₁']; note=; digest=af073b7035009d93. Read returned candidate source declarations; see report.md for file/line and mismatch.",
+   "date": "2026-10-22",
+   "verdict": "No match: Mathlib cotangentComplex and its naturality describe a single conormal differential, not simplicial standard resolutions or their derived bar comparisons."
+  },
+  {
+   "tool": "grep",
+   "query": "cotangent.*natur|simplicial.*resolution|bar.*comparison",
+   "results": "1 hits; top=['Mathlib/RingTheory/Ideal/CotangentBaseChange.lean']; subdirectory=; digest=6313a79df63c074d; note=",
+   "date": "2026-10-23",
+   "verdict": "No match for the whole statement. Differential maps and derived-functor or Dold-Kan naturality hits cover individual ingredients, not change of polynomial presentation categories and canonical bar comparisons."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Naturality of derived colimit comparison for simplicial polynomial algebra resolutions under change of base ring",
+   "results": "8 hits; top=['CategoryTheory.ProjectiveResolution.isoLeftDerivedObj_hom_naturality', 'CategoryTheory.ProjectiveResolution.isoLeftDerivedToHomotopyCategoryObj_hom_naturality', 'CategoryTheory.ProjectiveResolution.isoLeftDerivedObj_inv_naturality_assoc', 'CategoryTheory.Functor.mapDerivedCategorySingleFunctor', 'AlgebraicTopology.DoldKan.P_f_naturality', 'CategoryTheory.ProjectiveResolution.isoLeftDerivedToHomotopyCategoryObj_hom_naturality_assoc', 'CommRingCat.Colimits.cocone_naturality_components', 'RingHom.IsStableUnderBaseChange']; subdirectory=; digest=520251edc7996027; note=",
+   "date": "2026-10-23",
+   "verdict": "No match for the whole statement. Differential maps and derived-functor or Dold-Kan naturality hits cover individual ingredients, not change of polynomial presentation categories and canonical bar comparisons."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"KaehlerDifferential\", \"map\"",
+   "results": "12 hits; top=['KaehlerDifferential.DLinearMap', 'KaehlerDifferential.map', 'KaehlerDifferential.map_surjective', 'KaehlerDifferential.mapBaseChange', 'KaehlerDifferential.map_surjective_of_surjective', 'KaehlerDifferential.linearMapEquivDerivation', 'KaehlerDifferential.range_mapBaseChange', 'KaehlerDifferential.map_D']; subdirectory=; digest=e73d53c0c3beb141; note=",
+   "date": "2026-10-23",
+   "verdict": "No match for the whole statement. Differential maps and derived-functor or Dold-Kan naturality hits cover individual ingredients, not change of polynomial presentation categories and canonical bar comparisons."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Semilinear maps of standard simplicial polynomial resolutions and naturality of their derived colimit bar comparisons",
+   "results": "8 hits; top=['AlgebraicTopology.DoldKan.PInfty_f_naturality_assoc', 'AlgebraicTopology.DoldKan.QInfty_f_naturality_assoc', 'AlgebraicTopology.DoldKan.PInfty_f_naturality', 'AlgebraicTopology.DoldKan.QInfty_f_naturality', 'AlgebraicTopology.DoldKan.P_f_naturality_assoc', 'AlgebraicTopology.DoldKan.P_f_naturality', 'AlgebraicTopology.DoldKan.natTransPInfty_f_app', 'AlgebraicTopology.DoldKan.Q_f_naturality_assoc']; subdirectory=; digest=e1fd83d05f2a627f; note=",
+   "date": "2026-10-23",
+   "verdict": "No match for the whole statement. Differential maps and derived-functor or Dold-Kan naturality hits cover individual ingredients, not change of polynomial presentation categories and canonical bar comparisons."
+  },
+  {
+   "tool": "grep",
+   "query": "isoLeftDerivedObj_hom_naturality|def map |theorem map_D",
+   "results": "25 hits; top=['Mathlib/NumberTheory/Dioph.lean', 'Mathlib/Computability/Primrec/Basic.lean', 'Mathlib/RingTheory/PowerBasis.lean', 'Mathlib/Analysis/CStarAlgebra/CStarMatrix.lean', 'Mathlib/RingTheory/FractionalIdeal/Operations.lean', 'Mathlib/RingTheory/FractionalIdeal/Operations.lean', 'Mathlib/RingTheory/Localization/FractionRing.lean', 'Mathlib/Algebra/Algebra/Operations.lean']; subdirectory=; digest=5fde05fa1c997b05; note=",
+   "date": "2026-10-23",
+   "verdict": "No match for the whole statement. Differential maps and derived-functor or Dold-Kan naturality hits cover individual ingredients, not change of polynomial presentation categories and canonical bar comparisons."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A functor between polynomial presentation categories and a natural transformation induce a map of bar complexes compatible with simplicial resolution comparisons",
+   "results": "8 hits; top=['AlgebraicTopology.DoldKan.natTransPInfty_f_app', 'AlgebraicTopology.DoldKan.Γ₂N₁.natTrans_app_f_app', 'CategoryTheory.Abelian.DoldKan.comparisonN_hom_app_f', 'AlgebraicTopology.DoldKan.N₁_map_f', 'AlgebraicTopology.DoldKan.natTransPInfty_app', 'CategoryTheory.Idempotents.DoldKan.Γ_obj_map', 'AlgebraicTopology.DoldKan.natTransP_app', 'AlgebraicTopology.DoldKan.natTransPInfty_f']; subdirectory=; digest=5ec9b7e68bf34bc1; note=",
+   "date": "2026-10-23",
+   "verdict": "No match for the whole statement. Differential maps and derived-functor or Dold-Kan naturality hits cover individual ingredients, not change of polynomial presentation categories and canonical bar comparisons."
+  },
+  {
+   "tool": "grep",
+   "query": "isoLeftDerivedObj_hom_naturality",
+   "results": "3 hits; top=['Mathlib/CategoryTheory/Abelian/LeftDerived.lean', 'Mathlib/CategoryTheory/Abelian/LeftDerived.lean', 'Mathlib/CategoryTheory/Abelian/LeftDerived.lean']; subdirectory=CategoryTheory/Abelian; digest=5dc1315e6dac42b8; note=",
+   "date": "2026-10-23",
+   "verdict": "No match for the whole statement. Differential maps and derived-functor or Dold-Kan naturality hits cover individual ingredients, not change of polynomial presentation categories and canonical bar comparisons."
+  },
+  {
+   "tool": "grep",
+   "query": "def KaehlerDifferential.map|theorem KaehlerDifferential.map_D|def map|theorem map_D",
+   "results": "3 hits; top=['Mathlib/RingTheory/Kaehler/Basic.lean', 'Mathlib/RingTheory/Kaehler/Basic.lean', 'Mathlib/RingTheory/Kaehler/Basic.lean']; subdirectory=RingTheory/Kaehler; digest=f2996dd52b0c23d2; note=",
+   "date": "2026-10-23",
+   "verdict": "No match for the whole statement. Differential maps and derived-functor or Dold-Kan naturality hits cover individual ingredients, not change of polynomial presentation categories and canonical bar comparisons."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-cotangent-resolution-coherence",
+  "date": "2026-10-22",
+  "group": "Q18"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Proof (1)--(2), semistable-alteration input in the nearby-cycle branch: ILO Exposé X, Theorem 3.4, Step 3, invoking Temkin 2010, Theorems 1.5 and 1.1 for a semistable multipointed modification. Temkin proof component: Marked dualizing line bundle and contracted-component degrees. Auxiliary input: Local complete-intersection determinant adjunction underlying the marked dualizing construction, before the marking is inserted. Supporting ring/sheaf input: Functorial standard resolutions and comparison with arbitrary polynomial resolutions. Re-split: explicit standard ring-square maps, base-change functor and comparison naturality (old Steps 7–9).",
+   "via": [
+    "lem-trf-cotangent-resolution-coherence",
+    "lem-trf-lci-cotangent-presentation",
+    "lem-trf-flat-lci-canonical-adjunction",
+    "lem-trf-marked-nodal-dualizing-degrees",
+    "lem-trf-temkin-stable-modification",
+    "lem-trf-stable-modification-flat-curve-pair",
+    "lem-trf-dejong-relative-marked-semistable",
+    "lem-trf-relative-marked-nodal-reduction",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-trf-polynomial-square-bar-naturality",
+  "worker": "Q148",
+  "summary": "Unchanged statement. Explicit recursive polynomial substitution, evaluation/unit compatibility, strict composition, polynomial tensor substitution, balanced differential maps and simplicial factorization. Reused existing general bar-comparison naturality and polynomial-presentation contractibility. No new nodes.",
+  "blueprint": "Retains the inherited local-term-locality proof (1)--(2) supporting semistable-modification / lci-adjunction / cotangent-resolution-coherence route. Realizes its explicit ring-square and bar-comparison input (old Steps 7--9) using Stacks 08QL and the existing general 08Q9 comparison; no chapter or unit route changed.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q148-704a05670",
+  "group": "Q148",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q148-704a05670 (reviewer sub-agent of L); spot-checked: I read the item in full: its unchanged landed statement (as left by the Q18 FIX) and all 7 steps. The delivery has no new nodes and no fixes. I read Stacks 08QL (cotangent.tex l.867-950) and checked that the 08PD and 08Q9 labels exist. The explicit maps t, u and θ follow 08QL, and the step 08QL omits is supplied by the general node lem-trf-simplicial-derived-colimit-computation (Q63 PASS). Its hypotheses are met: both categories are V-small; representable contractibility of Q and Q' comes from the statement of polynomial-presentation-homology; there is no requirement on uQ; ρ=β. I recomputed F'(k)θ_Q(dq⊗b)=d(hq)⊗β(b), so s(F'(k)θ)=K(h) and the item's identity is the general node's identity. Step 2's face and degeneracy compatibility re-derives from εL(f)=fε, δL(f)=L(L(f))δ and the functoriality of L. The balance and Leibniz relation checks in Steps 3-5 hold. Edge cases tested: a nonflat Z→Z/2 square, the identity square, a zero target ring, and an empty variable set. No duplicate: I compared it with cotangent-bar-diagram-compatibility, cotangent-bar-arrow-comparisons, comonad-simplicial-object and the cotangent base-change nodes. There is no cycle, all route citations are in the same unit sk-i-curve-zero, no tool_uses are needed and no SGA is cited. Dropped-machinery check: def-weil-pbc-trivial-kan-fibration is accepted. It is a statement dependency of the unchanged landed statement, used at Step 6 (hypothesis of presentation-homology) and Step 7 (supplied by augmentation-boundary). It is the plain simplicial-set lifting condition (a Mathlib leaf) from Stacks resolution theory, not the ∞/dg machinery the route pivot dropped."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.PolynomialSquareBarNaturality",
+  "declaration": "Algebra.PolynomialSquareBar.data_nonempty",
+  "declarations": [
+   "Algebra.PolynomialSquareBar.site",
+   "Algebra.PolynomialSquareBar.coefficients",
+   "Algebra.PolynomialSquareBar.generator",
+   "Algebra.PolynomialSquareBar.tensorRing",
+   "Algebra.PolynomialSquareBar.tensorElement",
+   "Algebra.PolynomialSquareBar.augmented",
+   "Algebra.PolynomialSquareBar.complexGenerator",
+   "Algebra.PolynomialSquareBar.StandardData",
+   "Algebra.PolynomialSquareBar.TensorData",
+   "Algebra.PolynomialSquareBar.Maps",
+   "Algebra.PolynomialSquareBar.Data",
+   "Algebra.PolynomialSquareBar.data_nonempty"
+  ],
+  "file": "lean/Sheaf/RingTheory/PolynomialSquareBarNaturality.lean",
+  "statement": "theorem data_nonempty (bar : CategoryColimitBarSystem.{max (u + 1) v}) (C : Computation bar) (D : ∀ f : Arrow CommRingCat.{u}, PolynomialHomology.ComputationData f.hom bar C) (F : ∀ f : Arrow CommRingCat.{u}, CotangentSheaf.SiteCoefficients f.hom) : Data bar C D F",
+  "branch": "newtargets-dag",
+  "by": "Q20",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-c3425c909",
+  "group": "Q20",
+  "result": "pass",
+  "note": "Read item node (unchanged except lean), stmt_deps, and live PolynomialPresentationHomology (Category = full AsSmall presentations; ComputationData normalized to C.comparison), SimplicialDerivedColimitComputation (derivedMap, Computation.naturality/forwardMap), CotangentResolutionCoherence (IsStandard, AugmentedMap, standardSquareMap), CotangentDifferentialPresheafSes (SiteCoefficients pinned by terms+formula). Every clause matches: t_n pinned by HEq to standardSquareMap with strict id/comp and standard trivial-Kan; u pinned by tensorIso/tensor_base/tensor_aug/tensor_map; theta, factor k, chainMap K(h) pinned on spanning generators; final equation Q(K(h))≫factors.inv≫Res(a_{Q'}) = a_Q≫derivedMap(u,θ), i.e. a_{Q'}K(h)=H(u,θ)a_Q with canonical normalized comparisons; trivial-Kan only on Q,Q'; no flatness/injectivity/uQ hypothesis; universes u, max(u+1)v unrestricted. ∃M is harmless since all components are pinned. Edge cases: identity/composite squares, Z→Z/2, zero ring, empty/infinite vars, n=0. No duplicate (CotangentSheafModel.BaseChange is on the κ-bounded coordinate site). lean.statement verbatim; only the item node and module changed; docstrings and proof steps present; only sorry. Advisories: unused private MvPolynomial tensor import; data_nonempty names a Prop."
+ }
+}

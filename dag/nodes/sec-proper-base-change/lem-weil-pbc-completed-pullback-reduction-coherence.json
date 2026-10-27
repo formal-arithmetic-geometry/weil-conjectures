@@ -1,0 +1,124 @@
+{
+ "id": "lem-weil-pbc-completed-pullback-reduction-coherence",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lemma-weil-pbc-completed-pullback-reduction",
+   "place": "Clause (1), the named finite projection and compatibility with quotient transitions.",
+   "via": []
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Quotient coherence from invertible completed reduction arrows",
+ "statement": "For any scheme morphism g:X→Y, Noetherian adic datum d, and derived input K over the completed coefficients on Y, assume each specified completedPullbackReductionArrow g d K n is invertible. Then every target quotient normalization is invertible; the actual limit-projection arrows satisfy the transition square after scalar adjunction and the normalization square before scalar adjunction. These target normalizations satisfy the three-index quotient cocycle and equal-index unit equation with exactly completedReductionQuotientAssoc and completedReductionUnit. No completeness hypothesis on K is needed.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-proper-base-change/sk-prop-pbc-complete/lemma-weil-pbc-completed-pullback-reduction.proof.md",
+  "place": "Clause (1): completion, finite quotient comparison, and compatibility with transitions; explicit scalar-adjunction refinement of Stacks Tag 099N (5)."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-adic-coefficient-datum",
+  "def-weil-pbc-completed-pullback",
+  "def-cbc-completed-reduction-finite-interfaces"
+ ],
+ "proof": [
+  {
+   "text": "Compute derived limit projections on a K-injective strict tower. The ordinary equation limit.w shows that the b projection followed by the b-to-a tower transition is the a projection. Compose with the finite-evaluation compatibility equation to obtain the square of the specified restricted finite arrows.",
+   "uses": [
+    "prop-weil-pbc-rlim-functoriality",
+    "lem-cbc-finite-quotient-transition-compatibility"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Transpose this square through the scalar adjunctions. Uniqueness of normalized composite adjunctions identifies the transpose with the specified source normalization and target normalization. The normalization square exhibits the target normalization as a composite of isomorphisms, since both finite arrows and the source normalization are invertible.",
+   "uses": [
+    "lem-sfb-successive-derived-quotient-normalization",
+    "lem-pur-normalized-adjunction-composition"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Prove associativity of source normalizations with leftAdjointCompIso_assoc and the coefficient quotient composition identity. Substitute the normalization squares, use naturality of scalar associativity, and cancel the invertible finite arrow to get the target quotient cocycle. For equal indices, express source normalization via the scalar counit and the restriction identity; counit naturality and the same cancellation prove the specified unit equation.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "prop-weil-pbc-rlim-functoriality",
+  "lem-cbc-finite-quotient-transition-compatibility",
+  "lem-sfb-successive-derived-quotient-normalization",
+  "lem-pur-normalized-adjunction-composition"
+ ],
+ "proof_origin": {
+  "document": "literature/blueprint/latest/blueprint/sec-proper-base-change/sk-prop-pbc-complete/lemma-weil-pbc-completed-pullback-reduction.proof.md",
+  "place": "Clause (1): completion, finite quotient comparison, and compatibility with transitions; explicit scalar-adjunction refinement of Stacks Tag 099N (5).",
+  "by": "K7"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "The finite projection from a derived completion induces a scalar-adjunction map to the finite quotient",
+   "results": "AdicCompletion.evalOneₐ; AdicCompletion.evalₐ; AdicCompletion.kerProj; AdicCompletion.incl; AdicCompletion.eval; Profinite.toProfiniteAdjToCompHaus; AdicCompletion.mkₐ; AdicCompletion.ofTensorProduct_surjective_of_finite",
+   "date": "2026-10-25",
+   "verdict": "No theorem with the specified derived sheaf projection and quotient normalizations; ordinary adic completion is different."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The unit of derived adic completion becomes an isomorphism after derived reduction modulo a power of the ideal",
+   "results": "AdicCompletion.eval_of; AdicCompletion.mk_smul_top_ofAlgEquiv_symm; AdicCompletion.mk_ofAlgEquiv_symm; AdicCompletion.of_apply; AdicCompletion.exists_smodEq_pow_smul_top_and_mkQ_eq; AdicCompletion.ofAlgEquiv_apply; AdicCompletion.exists_smodEq_pow_add_one_smul; AdicCompletion.mk_ofAlgEquiv_symm_eq_evalOneₐ",
+   "date": "2026-10-25",
+   "verdict": "No theorem with the specified derived sheaf projection and quotient normalizations; ordinary adic completion is different."
+  },
+  {
+   "tool": "grep",
+   "query": "completionUnit.*[Ii]so|completedPullbackReductionArrow.*[Ii]so",
+   "results": "No hits.",
+   "date": "2026-10-25",
+   "verdict": "No theorem with the specified derived sheaf projection and quotient normalizations; ordinary adic completion is different."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.CompletedPullbackReduction",
+  "date": "2026-10-25",
+  "group": "K7"
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "module": "Sheaf.Paper.CompletedPullbackReductionCoherence",
+  "declaration": "AlgebraicGeometry.Scheme.completedPullbackReduction_coherence",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.completedPullbackReduction_coherence"
+  ],
+  "file": "lean/Sheaf/Paper/CompletedPullbackReductionCoherence.lean",
+  "by": "K7",
+  "date": "2026-10-25",
+  "existing": false,
+  "branch": "sheaf-dag",
+  "statement": "theorem completedPullbackReduction_coherence (K : DerivedCategory (pbcModules Y (pbcAdicCompletion Y d))) (hiso : ∀ n : ℕ, IsIso (completedPullbackReductionArrow g d K n)) : (∀ (a b : ℕ) (h : a ≤ b), IsIso (completedReductionTargetNormalization g d K a b h) ∧ ((pbcDerivedScalarAdjunction (reductionCoefficientMap X d b a h)).homEquiv _ _ ((completedPullbackSourceNormalization d X a b h (completedPullbackObject g d K)).hom)) ≫ (pbcDerivedRestrict (reductionCoefficientMap X d b a h)).map (completedPullbackReductionArrow g d K a) = completedPullbackReductionArrow g d K b ≫ (completedReductionTargetTransition g d a b h).app K) ∧ (∀ (a b : ℕ) (h : a ≤ b), (reductionDerivedChange X (reductionCoefficientMap X d b a h)).map (completedPullbackReductionArrow g d K b) ≫ completedReductionTargetNormalization g d K a b h = (completedPullbackSourceNormalization d X a b h (completedPullbackObject g d K)).hom ≫ completedPullbackReductionArrow g d K a) ∧ (∀ (a b c : ℕ) (hab : a ≤ b) (hbc : b ≤ c), (reductionDerivedChange X (reductionCoefficientMap X d b a hab)).map (completedReductionTargetNormalization g d K b c hbc) ≫ completedReductionTargetNormalization g d K a b hab = (completedReductionQuotientAssoc d X a b c hab hbc ((completedReductionFiniteTarget g d c).obj K)).hom ≫ completedReductionTargetNormalization g d K a c (hab.trans hbc)) ∧ (∀ a : ℕ, completedReductionTargetNormalization g d K a a (le_refl a) = completedReductionUnit d X a ((completedReductionFiniteTarget g d a).obj K))"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-5f62e",
+  "group": "K7",
+  "result": "fix",
+  "landing": "20261026T070212-L-3457743",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-5f62e",
+  "group": "K7",
+  "result": "fix",
+  "landing": "20261026T070212-L-3457743",
+  "kind": "interface",
+  "note": "independent cc review: item theorem statement byte-identical to clone; Data module vs old CompletedPullbackReduction (rebuilt PulledModelMap/normalization predicates proved equivalent to the old by scratch rfl/iff); new ArrowIsIso sorry = clause 2 of item; Coherence proved (axioms: sorryAx only from published upstream holes); 16 direct importers compiled against the sandbox build"
+ }
+}

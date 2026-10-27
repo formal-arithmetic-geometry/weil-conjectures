@@ -1,0 +1,131 @@
+{
+ "id": "lem-pur-vector-chart-restricted-affine-transpose",
+ "kind": "statement",
+ "title": "The inverse-frame restriction is the ordinary affine integration adjunct",
+ "statement": "Fix a finite purity datum [def-pur-conventions], a separated finite-type k-scheme Z, a rank-d vector bundle F [def-asd-vector-bundle-zero-section], an open U of Z, and any linear trivialization e. At every positive annihilating exponent, restrictedRaw from [def-pur-vector-chart-comparison-coordinates] is HEq to affineTranspose over U, the comparison image of the ordinary ordered affine-counit adjunct defined in [lem-pur-affine-unit-transpose-coordinates]. This equation makes no reference to ordered affine purity. It includes rank zero and empty opens.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-an/thm-amb-vector-bundle-purity.proof.md",
+  "place": "Second paragraph: restriction of the global integration adjunct is the affine-space counit adjunct, before the ordered-purity identification."
+ },
+ "stmt_deps": [
+  "def-pur-conventions",
+  "def-asd-vector-bundle-zero-section",
+  "def-pur-vector-chart-comparison-coordinates",
+  "lem-pur-affine-unit-transpose-coordinates"
+ ],
+ "proof": [
+  {
+   "text": "The normalization supplied by existsUnique_vectorIntegrationGluing gives the restriction of global integration in every frame as the ordinary affine counit after inverse-frame compact-support exchange and canonical coefficient descent. Invert exchange and apply naturality of the ordinary adjunction transpose across its exceptional mate; source and target naturality move the inverse Tate pullback and unit pullback inside the adjunct.",
+   "uses": [
+    "def-amb-vector-integration",
+    "lem-pur-trace-transpose-base-change"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The chart coefficient, composed with inverse base-coefficient pullback for a;f and its pullback compositor, equals the inverse coefficientComparison for the affine projection. Verify by induction on d: at zero it is unit pullback coherence; at a successor apply the tensor pullback compositor and normalized shifted Tate-line pullback coherence, then the induction hypothesis. Substitute in the transposed normalized trace; apply comparison. HEq endpoint transport gives exactly affineTranspose. The proof uses the identity adjunction at rank zero and works for empty opens.",
+   "uses": [
+    "lem-asd-etale-finite-twist-pullback",
+    "def-pur-vector-chart-comparison-coordinates",
+    "lem-pur-affine-unit-transpose-coordinates"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-amb-vector-integration",
+  "lem-pur-trace-transpose-base-change",
+  "lem-asd-etale-finite-twist-pullback",
+  "def-pur-vector-chart-comparison-coordinates",
+  "lem-pur-affine-unit-transpose-coordinates"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-an/thm-amb-vector-bundle-purity.proof.md",
+  "place": "Second paragraph: restriction to a trivializing open is the adjunct of the affine-space counit. Expanded using the canonical definitions and stated adjunction comparison lemmas."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The adjoint transpose of vector bundle integration restricts on a linear chart to the ordered affine line purity comparison",
+   "results": "8 hits: hom_chart, inCoordinates_apply_eq₂, VectorBundleCore.inCoordinates_eq, ContinuousLinearMap.inCoordinates_eq, inTangentCoordinates_eq, ContinuousLinearMap.inCoordinates, Pretrivialization.continuousLinearMap, TangentBundle.continuousLinearMapAt_trivializationAt_eq_core",
+   "date": "2026-10-25",
+   "verdict": "No exact match: general adjunction identities or topological bundles do not state this finite-coefficient scheme comparison."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Adjunction.homEquiv_naturality_left\"",
+   "results": "5 hits: CategoryTheory.Adjunction.homEquiv_naturality_left, CategoryTheory.Adjunction.homEquiv_naturality_left_symm, CategoryTheory.Adjunction.homEquiv_naturality_left_square, CategoryTheory.Adjunction.homEquiv_naturality_left_square_iff, CategoryTheory.Adjunction.homEquiv_naturality_left_square_assoc",
+   "date": "2026-10-25",
+   "verdict": "No exact match: general adjunction identities or topological bundles do not state this finite-coefficient scheme comparison."
+  },
+  {
+   "tool": "grep",
+   "query": "vectorBundle.*(purity|integration)|affineSpace.*(trace|purity)|TateTwist",
+   "results": "0 hits: ",
+   "date": "2026-10-25",
+   "verdict": "No exact match: general adjunction identities or topological bundles do not state this finite-coefficient scheme comparison."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The ordinary affine integration adjunction transpose agrees with the bounded site transpose at the coefficient unit, and commutes with root power exponent transitions",
+   "results": "8 hits: CategoryTheory.Adjunction.shift_unit_app, TopCat.Presheaf.pushforwardToOfIso, CategoryTheory.Adjunction.toCat_unit_toNatTrans, AlgebraicGeometry.instIsIsoSchemeAppUnitOppositeCommRingCatAdjunctionOfIsAffine, CategoryTheory.Adjunction.commShift_op, CategoryTheory.Adjunction.CommShift.commShift_unit, CategoryTheory.Adjunction.RightAdjointCommShift.compatibilityUnit_iso, CategoryTheory.Adjunction.unit_app_commShiftIso_hom_app",
+   "date": "2026-10-25",
+   "verdict": "No exact match: general adjunction identities or topological bundles do not state this finite-coefficient scheme comparison."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.VectorIntegrationChartComparison",
+  "date": "2026-10-25",
+  "group": "A3"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-thm-smooth-purity",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-pur-finite-coefficient-smooth-purity",
+   "place": "Second paragraph: restriction of the global integration adjunct is the affine-space counit adjunct, before the ordered-purity identification.",
+   "via": [
+    "lem-pur-vector-integration-chart-comparison"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.VectorIntegrationChartTranspose",
+  "file": "lean/Sheaf/Paper/VectorIntegrationChartTranspose.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.VectorIntegrationChart.chartTranspose_eq_affine",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.VectorIntegrationChart.chartTranspose_eq_affine"
+  ],
+  "statement": "theorem chartTranspose_eq_affine (P : WeilConjectures.PurityFiniteSetting.{u})\n    (Z : Scheme.{u}) [IsNoetherian Z] (aZ : Z ⟶ Spec (.of P.field.k))\n    [LocallyOfFiniteType aZ] [QuasiCompact aZ] [IsSeparated aZ]\n    (d : ℕ) (F : Z.Modules) [F.IsFiniteLocallyFreeOfRank d]\n    (U : Z.Opens) (e : VectorBundleZeroSection.Trivialization Z d F U)\n    (r : ℕ) (hA : ((P.coefficients.l ^ (r + 1) : ℕ) : Ring P) = 0) :\n    letI : IsNoetherian U.toScheme := isNoetherian_of_locallyOfFiniteType (U.ι ≫ aZ)\n    HEq (restrictedRaw P Z aZ d F U e r hA)\n      (affineTranspose P U.toScheme (U.ι ≫ aZ) d r hA)",
+  "branch": "sheaf-dag",
+  "by": "A3",
+  "date": "2026-10-25"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-5e63f",
+  "group": "A3",
+  "result": "fix",
+  "landing": "20261025T122442-L-1772857",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-5e63f",
+  "group": "A3",
+  "result": "fix",
+  "landing": "20261025T122442-L-1772857",
+  "kind": "interface",
+  "note": "independent cc review: item node lem-pur-vector-integration-chart-comparison and 3 new sorry statements vs Coordinates extraction (verbatim diff vs clone), existsUnique_vectorIntegrationGluing, ordinaryTraceRaw/integrationTranspose, IntegrationAffineEquations; node stmt refs vs stmt_deps"
+ }
+}

@@ -1,0 +1,139 @@
+{
+ "id": "def-trf-filtered-operation-lift-structures",
+ "kind": "definition",
+ "title": "Structures and formulas for filtered derived operations",
+ "statement": "Let $\\mathcal A,\\mathcal B$ be abelian categories [def-sp-abelian] with derived categories [def-weil-abstract-derived-category], and use finite filtered localization [def-trf-finite-filtered-localization], decreasing filtrations [def-sp-filtration] and their complex subquotients [def-sp-filtered-complex-subquotients]. A filtered lift of an ordinary functor $D^+(\\mathcal A)\\to D^+(\\mathcal B)$ consists of functors on each optional finite interval, shift and triangulated structures, and natural total and graded comparisons. An exact termwise lift additionally records its additive action on filtered objects, the underlying-object comparison, step comparisons commuting with inclusions, and the homotopy-localization comparison. A filtered adjunction records an adjunction at each interval whose total and graded units and counits are the ordinary ones. For finite commutative coefficients on the small pro-etale sites, use the canonical ordinary inverse and direct images [def-weil-pbc-proetale-operations], extension by zero [def-weil-extension-by-zero], and compactification candidate [def-weil-compact-support-candidate]. The structures additionally record their canonical pullback identity/composition coherence, the actual functor formalisms, finite operation expressions and canonical mate expressions, evaluation comparisons, clopen adjunctions, and the vertical and refinement pasting equations for the actual compactification maps. All fields and formulas are the unchanged structures formerly declared in Sheaf.CategoryTheory.FilteredDerivedOperationLifts; none asserts existence of these records.",
+ "source": {
+  "document": "literature/stacks-project/derived.tex",
+  "place": "Tags 015Q (lemma-filtered-localization-functor), 015S (equation-filtered-derived-functor), 05U2 (equation-definition-filtered-derived-functor), and the following equations equation-commute-gr / equation-commute-forget. Canonical operation/adjunction lifts: literature/varshavsky-lefschetz-verdier-trace-formula_arXiv-math0505564.pdf, Lemma 5.1.4 and §§5.2.1–5.2.2; the pro-etale compactification-relative formulation is assembled from the same filtered-injective construction."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-proetale-operations",
+  "def-weil-extension-by-zero",
+  "def-weil-compact-support-candidate",
+  "def-sp-abelian",
+  "def-sp-filtration",
+  "def-sp-filtered-complex-subquotients",
+  "def-sp-injective-resolutions",
+  "def-sp-left-exact-additive",
+  "def-weil-abstract-derived-category",
+  "def-trf-finite-filtered-localization"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "An exact additive functor induces a functor on filtered objects and finite filtered derived categories, preserving associated graded objects.",
+   "results": "8 hits: ordinary Functor.mapDerivedCategory, exactFunctor and additive-functor APIs. None constructs the finite filtered object action or the normalized filtered operation package.",
+   "date": "2026-10-26",
+   "verdict": "no-match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An exact additive functor induces a functor on finite filtered derived categories and a left exact functor has a filtered right derived functor",
+   "results": "8 hits: ordinary mapDerivedCategory and its factorization isomorphisms; useful for localization descent, but no filtered object or operation construction.",
+   "date": "2026-10-26",
+   "verdict": "no-match"
+  },
+  {
+   "tool": "grep",
+   "query": "FilteredDerivedOperationLift|FilteredTermwiseLift|ProEtaleFilteredOperationPackage|filteredDerivedAdjunction",
+   "results": "msearch Mathlib grep: 0 hits. Direct rg of lean/Sheaf and lean/WeilConjectures finds these structures only in the assigned module, and no separate construction theorem. Existing filtered model and comparison theorems were read.",
+   "date": "2026-10-26",
+   "verdict": "no-match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.CategoryTheory.FilteredDerivedOperationLifts",
+  "date": "2026-10-26",
+  "group": "C8"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-trf-trace-additivity-open-closed",
+   "place": "Steps 3–4 of the imported proof: filtered compact cohomology, canonical operation lifts and identification of graded operators.",
+   "via": [
+    "lem-trf-filtered-derived-operation-lifts"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-global-additivity",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.FilteredDerivedOperationStructures",
+  "file": "lean/Sheaf/CategoryTheory/FilteredDerivedOperationStructures.lean",
+  "declaration": "CategoryTheory.FilteredDerivedOperationLift",
+  "statement": "structure FilteredDerivedOperationLift {A : Type uA} [Category.{vA} A] [Abelian A] [HasDerivedCategory.{wA} A] {B : Type uB} [Category.{vB} B] [Abelian B] [HasDerivedCategory.{wB} B] (ordinary : DerivedCategory.Plus A ⥤ DerivedCategory.Plus B)",
+  "branch": "sheaf-dag",
+  "by": "C8",
+  "date": "2026-10-26",
+  "declarations": [
+   "CategoryTheory.FilteredDerivedOperationLift",
+   "CategoryTheory.FilteredTermwiseLift",
+   "CategoryTheory.filteredUnitForgetTransport",
+   "CategoryTheory.filteredCounitForgetTransport",
+   "CategoryTheory.filteredUnitGradedTransport",
+   "CategoryTheory.filteredCounitGradedTransport",
+   "CategoryTheory.FilteredDerivedAdjunction",
+   "AlgebraicGeometry.FilteredOperationComparison",
+   "AlgebraicGeometry.ProEtale.FilteredOperationCoefficients",
+   "AlgebraicGeometry.ProEtale.filteredOperationPullbackComp",
+   "AlgebraicGeometry.ProEtale.filteredOperationPullbackId",
+   "AlgebraicGeometry.ProEtale.FilteredOperationOrdinaryCoherence",
+   "AlgebraicGeometry.ProEtale.filteredOperationOrdinaryFormalism",
+   "AlgebraicGeometry.ProEtale.ProEtaleFilteredOperationData",
+   "AlgebraicGeometry.ProEtale.ProEtaleFilteredOperationData.toFormalism",
+   "AlgebraicGeometry.FilteredOperation",
+   "AlgebraicGeometry.FilteredOperation.eval",
+   "AlgebraicGeometry.FilteredOperationClopen",
+   "AlgebraicGeometry.CompactSupportFormalism.filteredOperationProperOpen",
+   "AlgebraicGeometry.FilteredRefinementFactorization",
+   "AlgebraicGeometry.CompactSupportFormalism.filteredOperationRefinement",
+   "AlgebraicGeometry.CompactSupportFormalism.filteredOperationCompositionMap",
+   "AlgebraicGeometry.FilteredCanonicalMap",
+   "AlgebraicGeometry.FilteredCanonicalMap.eval",
+   "AlgebraicGeometry.FilteredOperationComparison.operation",
+   "AlgebraicGeometry.FilteredOperationComparison.RespectsCanonicalMaps",
+   "AlgebraicGeometry.CompactSupportFormalism.FilteredOperationVerticalPasting",
+   "AlgebraicGeometry.CompactSupportFormalism.FilteredOperationRefinementPasting",
+   "AlgebraicGeometry.ProEtale.ProEtaleFilteredOperationPackage"
+  ]
+ },
+ "merged_into": null,
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-41e21",
+  "group": "C8",
+  "result": "fix",
+  "landing": "20261026T081333-L-1923179",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-41e21",
+  "group": "C8",
+  "result": "fix",
+  "landing": "20261026T081333-L-1923179",
+  "kind": "interface",
+  "note": "independent cc review: item theorem + 29 moved structures (verbatim vs clone) + 3 new holes and their nodes against lem-trf-filtered-derived-operation-lifts; axioms via scratch --all compile"
+ }
+}

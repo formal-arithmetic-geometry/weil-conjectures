@@ -1,0 +1,63 @@
+# Worker report
+
+Group Q62; stage 1; item lem-trf-reduced-fibre-locus-closed-stratum-alternative. Direct delivery, with the worker's own review as instructed. Completed 2026-10-24 (Asia/Shanghai); the recorded searches ran on 2026-10-23 UTC. The launcher paused and resumed this work; no prior split or delivery existed in this sandbox. I reused the five completed searches in searches.jsonl after reading their results.
+
+## Files written
+
+- dag/nodes/sec-trace-formula/lem-trf-reduced-fibre-locus-closed-stratum-alternative.json: statement, split; not a Mathlib leaf. Five proof steps, 2090 characters altogether; no step is longer than 507 characters. The live statement, statement dependencies, source, creation record and other inherited fields are retained.
+- citations.json: nine verbatim statement extracts, one for each step-node pair in the proof.
+- report.md: this report and signed mathematical review.
+
+New nodes: 0. New Mathlib leaves: 0. No unit file is changed: this descendant item is not the unit's key statement. No Lean file was written and no compiler, Lake, build, or local preflight was run.
+
+## Attachments
+
+None. I searched lean/WeilConjectures/ by the item's blueprint tag and by geometric reducedness, generic fibres and reduced-fibre loci. The results did not contain a declaration giving this whole closed-stratum alternative under its hypotheses. In particular the generic radicial preparation and smooth-section component results have different conclusions; they are not attachments. Project sorry declarations are not evidence of finished proofs.
+
+## WANTED
+
+None. All mathematical sources used are present in literature/stacks-project/.
+
+## Audit findings and changes
+
+The item was unsplit with an empty proof. Its statement is correct and has not been changed. Stacks 0579 proves constructibility after a Noetherian approximation, but its last paragraph's generic-fibre alternative applies to every irreducible closed subscheme without using Noetherianity. This item isolates precisely that alternative, rather than claiming constructibility for an arbitrary non-Noetherian space.
+
+I found and reused lem-trf-generic-constancy-geometric-reducedness, already expressing the combination of 0577 and 0578. I read both alternative nodes, then used their existing combination, rather than making a new statement that restates a clause. Likewise I reused the existing closed-subset realization, sober-scheme, qcqs permanence, geometric-reducedness algebraic-closure-test and geometric-reduced-fibre base-change statements. The closed-subset realization is a Mathlib leaf and gives an actual closed immersion, not just a set with a putative scheme structure. There is no need to prove that an arbitrary set-theoretic map factors through a subscheme.
+
+I read the current blueprint in literature/blueprint/latest/, namely the sec-trace-formula chapter, sk-i-curve-zero unit, and lem-trf-local-term-locality statement and proof. The node's inherited ancestry points into an older semistable-alteration/flattening technical-input chain; that chain is not explicitly spelled out in the latest ancestor's contracting-correspondence proof. I have kept its recorded ancestor, via list, chapter and unit. This delivery supplies the assigned Stacks technical lemma and does not replace a chapter or unit step. No prohibited SGA source is used.
+
+## Existing-node and Mathlib searches
+
+Whole-DAG searches used Stacks tags 0576, 0577, 0578, 0579, 01J3, 01IS, 01TS and the concepts reduced induced closed subschemes, irreducible closed subsets, generic geometric reducedness and base-change permanence. These located the exact statements subsequently cited. I also inspected the finite-type base-change and affine-closure-test candidates; the existing generic-constancy and qcqs-permanence statements avoid additional finiteness lemmas or affine comparison tasks.
+
+I ran tools/blueprint_refs.py ancestor for this item, and whole-blueprint searches for "geometrically reduced", "closed stratum" and "irreducible closed". No imported blueprint statement duplicates this closed-stratum alternative. The earlier regular-expression-shaped search returned no matches and was not treated as evidence on its own. The item's same_as remains [].
+
+The five actual msearch.py calls are preserved verbatim in searches.jsonl and appended, without altering their query text, to the inherited mathlib_searches. They comprise grep in AlgebraicGeometry, Loogle, LeanSearch and two different LeanFinder phrasings. All five services returned successfully. Loogle found the globally geometrically reduced morphism predicate and base-change instances; LeanFinder and LeanSearch found ring-level reducedness tests, generic points and Jacobson fibres. I read Mathlib/AlgebraicGeometry/Geometrically/Reduced.lean:38-137: those results do not state generic constancy on irreducible closed subsets and do not specialize to this item in one line. Thus the item is not a Mathlib leaf. The original item's previous search records are retained as inherited metadata, not presented as newly run calls.
+
+## Not duplicates
+
+No new nodes are created, so there are no new/existing pairs sharing a Stacks tag. Existing generic constancy is used directly as an input, rather than duplicated. It assumes an irreducible base with its generic point; this item concerns every irreducible closed subset of an arbitrary base and uses reduced geometric fibres rather than the all-field-extension predicate. The restriction, criterion and locus comparison are explicitly supplied in the proof.
+
+## Review by Q62
+
+I read more-morphisms.tex, Tag 0579 (lemma-geometrically-reduced-constructible), including both the approximation paragraph and the entire closed-subscheme paragraph; also Tags 0577 (lemma-not-geometrically-reduced-in-neighbourhood), 0578 (lemma-geometrically-reduced-generic-fibre), and 0576 (lemma-base-change-fibres-geometrically-reduced). I checked the support construction in schemes.tex, Tag 01J3 (lemma-reduced-closed-subscheme), generic points in 01IS (lemma-scheme-sober), and quasi-compact base change in 01K5 (lemma-quasi-compact-preserved-base-change). For finite presentation I read morphisms.tex, Tag 01TS (lemma-base-change-finite-presentation). For the difference between geometric reducedness and a reduced chosen geometric fibre I read varieties.tex, Tag 035X (lemma-geometrically-reduced), especially (2) iff (6), and Tag 020I (lemma-perfect-reduced). These are the sources for the item and all substantive ingredients; there are no new nodes whose sources need review.
+
+In step 1, I opened the statement of lem-weil-pbc-closed-subset-closed-subscheme. It explicitly gives a scheme and a closed immersion with exactly the prescribed closed image, for an arbitrary scheme and arbitrary closed subset. The statement of def-weil-closed-immersion explicitly supplies the homeomorphism onto that image. Consequently the source scheme T is nonempty and irreducible, with its actual subspace topology. The statement of lem-sc-scheme-sober gives a generic point of every irreducible closed subset of any scheme, so it applies to the whole of T. This uses no integrality, reduction or Noetherian hypothesis, and it does not use an unexported construction from another proof.
+
+In step 2, I opened lem-weil-pbc-qcqs-morphism-permanence and checked clause (3), which expressly preserves local finite presentation and quasi-compactness separately under an arbitrary base change. It therefore applies to f and the closed immersion i. Neither f quasi-separated nor i finitely presented is required. I use only these two properties, not its stronger clauses about finite presentation. This is a Mathlib leaf, so it is a generic tool without an off-unit route declaration.
+
+In step 3, I compared every assumption with the statement of lem-trf-generic-constancy-geometric-reducedness: h is a scheme morphism, is quasi-compact and locally of finite presentation by step 2, and its base T is irreducible with the generic point from step 1. The cited statement gives the nonempty open W and the exact equivalence of geometric reducedness at each point with geometric reducedness of the generic fibre. The two alternatives then follow by excluded middle. Its last sentence explicitly rules out hidden flatness, reducedness, Noetherianity and fibre-nonemptiness assumptions. I read the statements of both 0577/0578 nodes behind this existing combination as a further consistency check, but the proof cites the combination's statement, not those proofs.
+
+In step 4, I opened lem-trf-geometric-reducedness-algebraic-closure-test: it says, for every scheme over a field and any chosen algebraic closure, that geometric reducedness is equivalent to reducedness after this extension, with no finiteness or nonemptiness assumption. I separately opened def-weil-geometric-fibre, whose equivalence says that the chosen geometric fibre is the base change of the scheme-theoretic fibre along the algebraic closure. These two exact statements identify the predicate of step 3 with membership in E_h; neither the name of a definition nor an uncited equivalence is standing for this theorem. The characteristic-p Stacks equivalence and characteristic-zero perfect-field argument are both covered by the cited existing node.
+
+In step 5, I opened lem-trf-geometric-reduced-fibre-locus-base-change. Its statement gives exactly E_h = i^{-1}(E_f), for arbitrary morphisms, chosen algebraic closures and empty fibres. The homeomorphism onto Z is in the cited closed-immersion definition. Thus i(W) is nonempty and relatively open in Z, and the last two membership arguments written in the proof establish the alternatives. The only additional operations are the image/preimage identities and the elementary fact that a homeomorphism takes opens to opens. No assertion about factoring a morphism from containment of its image is used.
+
+I checked the following small cases against the statement and each cited hypothesis. For X empty and arbitrary Y, every geometric fibre is empty and reduced, so the good alternative holds with V=Z. For Y empty there is no nonempty irreducible closed Z. Over the nonreduced base Spec(k[epsilon]/epsilon^2), its unique closed subset has a genuine closed subscheme structure and base change compares its fibres with the original fibres; no argument assumes the original base reduced. Over the imperfect field k=F_p(a), Spec(k[t]/(t^p-a)) has a reduced ordinary fibre but a nonreduced geometric fibre, and the algebraic-closure-test gives the bad alternative; omitting that criterion would have been a real gap. For the identity of any scheme each geometric fibre is Spec of an algebraically closed field and is reduced. None of these cases needs nonempty fibres or flatness.
+
+Against delivery-errors B--E: no unsplit new nodes or missing definition records are introduced (B1--B3); the item's TeX uses single command backslashes (B4); the source tags were checked against tags/tags and their .tex labels (B5); no new leaf or attachment is asserted (B6--B10). For every proof use I copied a literal part of the cited node's current statement into citations.json and checked substring membership (C3--C4), after searching for the existing node (C5). Every substantive input is a named citation (C1); no step is labelled elementary merely because it is short (C2). The proof assembles existing facts rather than moving a clause to a new node (D1--D3); it uses no recursive or unestablished induction (D4). All arguments are explicit, including chosen-closure comparison and the two image membership cases (D5/E5). Hypotheses and actual fibre objects were checked at the applications above (E1/E3/E4), and there is no statement dispute or source correction (E2/E6/E7). Each step is below 2000 characters and contains no hidden new lemma. Only the permitted sandbox files were written.
+
+Corrections during this self-review were at the planning level: I replaced the idea of introducing a new geometric-fibre criterion with the exact existing algebraic-closure-test node, used the existing qcqs-permanence clause rather than an inline general base-change argument, and used the closed-subset Mathlib leaf rather than unnecessarily requiring a reduced structure. This leaves no new node or unproved comparison in the assembly. I sign this review as Q62.
+
+## Unfinished work
+
+No mathematical part of this stage-1 split remains. The required server dry run exited successfully: OK (not pushed), preflight passed, at 34c0a624309. This includes the server check_dag.py and review_split.py checks. The delivery is now ready for the explicitly authorized direct push; no second worker is required by this dispatch.

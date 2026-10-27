@@ -15,141 +15,20 @@
  ],
  "proof": [
   {
-   "text": "Write $\\mathcal M_A$ for ordinary internal modules and $\\mathcal E_A$ for internal $G$-equivariant modules. Apply [lem-sfb-condensed-product-action-inflation] with the second group trivial: both categories are Grothendieck abelian, and trivial-action inflation is exact with right adjoint $\\Gamma_G$. Thus $\\Gamma_G$ is left exact. By [lem-sp-grothendieck-enough-injectives], $\\mathcal E_A$ has enough injectives. Construct a resolution $N\\to I^\\bullet$, zero in negative degrees, by embedding $N$ into an injective, then embedding each successive cokernel into an injective. This gives the exact augmented resolution in [def-sp-injective-resolutions]. All sites and parameter powers of $G$ lie in the coefficient universes fixed in the statement.",
+   "text": "Apply [lem-sfb-condensed-bar-scalar-resolution-comparison]. Its ScalarResolutionAssertion supplies the action-abelian and Grothendieck structures and the same family of normalized bar Models required by Assertion. Retain those structures and models, with the standard derived categories in both assertions. For every coefficient map, retain its ScalarModel and project ScalarResolutionComparison.computation to obtain the required ScalarComputation. The additional free-parameter and scalar-resolution clauses are not required for this implication. No models are constructed or chosen by a new definition.",
    "uses": [
-    "lem-sfb-condensed-product-action-inflation",
-    "lem-sp-grothendieck-enough-injectives",
-    "def-sp-injective-resolutions"
+    "lem-sfb-condensed-bar-scalar-resolution-comparison"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
-    "place": "Paragraph (3), open direct image: formal internal bar input to the all-continuous tame-boundary calculation."
-   }
-  },
-  {
-   "text": "For every profinite $S$, the free internal module $A[S]$ is the sheafification of $V\\mapsto\\bigoplus_{V\\to S}A(V)$: a map out of that presheaf sends $e_f$ to the restriction along $f$ of the selected section at $S$, which is precisely the free-module universal property. It is therefore $j_{S!}A_S$, flat by [lem-pc-sites-modules-j-shriek-flat]. The same statement applies to $S=G^n$. Use the tensor-Hom adjunction of [lem-pc-sheaf-modules-tensor-closed]. If $U:\\mathcal E_A\\to\\mathcal M_A$ forgets the action, its left adjoint is $L(T)=A[\\underline G]\\otimes_A T$ with translation on the first factor: an equivariant map is uniquely $[g]\\otimes t\\mapsto g f(t)$ for a map $f:T\\to UJ$. The functor $L$ is exact by the flatness just proved, because kernels and cokernels of actions are computed on underlying modules. Consequently $UI$ is injective whenever $I$ is equivariantly injective: extend a map into $UI$ across a monomorphism by transposing it to a map into $I$ across its image under the exact $L$.",
-   "uses": [
-    "lem-pc-sites-modules-j-shriek-flat",
-    "lem-pc-sheaf-modules-tensor-closed",
-    "def-sp-injective-resolutions"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/sites-modules.tex",
-    "place": "Tag 03DI (lemma-extension-by-zero), Tag 03EV (lemma-j-shriek-flat); elementary free-adjunction argument."
-   }
-  },
-  {
-   "text": "Let $P_\\bullet\\to A$ be [lem-sfb-condensed-internal-bar-resolution]. For any equivariantly injective $I$, consider the augmented complex of internal equivariant Hom objects from $P_\\bullet$ into $I$. Its sections at $S$ are $\\operatorname{Hom}_{\\mathcal E_A}(A[S]\\otimes_A P_\\bullet,I)$; in degree $-1$ they are $\\operatorname{Hom}_{\\mathcal E_A}(A[S],I)$ with trivial action on $A[S]$. The cited resolution states that the augmented tensor complex is exact. Applying $\\operatorname{Hom}_{\\mathcal E_A}(-,I)$ is exact: restriction across any image subobject is surjective by the definition of injectivity, while the kernel condition is the universal property of the quotient. Thus these augmented section complexes are exact for every $S$, hence the augmented complex of sheaves is exact. Its augmentation object is $\\underline{\\operatorname{Hom}}_G(A,I)=I^G$.",
-   "uses": [
-    "lem-sfb-condensed-internal-bar-resolution",
-    "def-sp-injective-resolutions"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
-    "place": "Paragraph (3), open direct image: formal internal bar input to the all-continuous tame-boundary calculation."
-   }
-  },
-  {
-   "text": "Identify the degree-$p$ internal equivariant Hom just used with $\\underline{\\operatorname{Hom}}_A(A[\\underline G^p],UI)$. Indeed in the induced coordinates of [lem-sfb-condensed-internal-bar-resolution], a map is determined by its value on $[1]\\otimes[g_1,\\ldots,g_p]$; equivariance gives its value on every $[g_0]\\otimes[g_1,\\ldots,g_p]$ by multiplying that value by $g_0$. This formula is valid after every profinite base change, so identifies internal objects and their maps, using the closed structure of [lem-pc-sheaf-modules-tensor-closed]. Deleting the first homogeneous coordinate contributes $g_1c(g_2,\\ldots,g_{p+1})$; deleting an interior coordinate multiplies the adjacent $g_i,g_{i+1}$, and deleting the last drops $g_{p+1}$. Thus the cochain differential is exactly the alternating inhomogeneous nerve differential in the statement. For $p=0$ it is $m\\mapsto(g\\mapsto gm-m)$ and its kernel is precisely the invariant inclusion.",
-   "uses": [
-    "lem-sfb-condensed-internal-bar-resolution",
-    "lem-pc-sheaf-modules-tensor-closed"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
-    "place": "Paragraph (3), open direct image: formal internal bar input to the all-continuous tame-boundary calculation."
-   }
-  },
-  {
-   "text": "Put $D^{p,q}=\\underline{\\operatorname{Hom}}_A(A[\\underline G^p],UI^q)$ for $p,q\\geq0$ and zero otherwise, with the inhomogeneous horizontal differential of step 4 and the resolution differential vertically. Equivariance of $d_I$ makes these commute. By step 2, $UI^\\bullet$ is an injective resolution of $UN$, so the $p$-th column represents $R\\underline{\\operatorname{Hom}}_A(A[\\underline G^p],N)$ by [lem-sp-derived-injective-resolution-naturality]. The cosimplicial maps are realized simultaneously on this one resolution; thus this is a compatible model, rather than unrelated resolutions for the individual columns. Give it the total differential $d_h+(-1)^p d_v$ and finite-diagonal sums of [def-sp-double-complex-total]. Step 3 says that every horizontal augmented row $\\Gamma_G(I^q)\\to D^{\\bullet,q}$ is a quasi-isomorphism from the row concentrated at $p=0$.",
-   "uses": [
-    "lem-sp-derived-injective-resolution-naturality",
-    "def-sp-double-complex-total"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/derived.tex",
-    "place": "Tag 0156 (section-right-derived-functor), lemma-injective-acyclic; compatible resolution model and its augmentation."
-   }
-  },
-  {
-   "text": "Let $K^{p,q}$ be $\\Gamma_G(I^q)$ for $p=0$ and zero otherwise. The invariant inclusions give a double-complex morphism $K\\to D$. Apply [lem-sc-first-quadrant-total-column-comparison] with the two indices interchanged, so its quasi-isomorphism hypothesis is exactly the row assertion of step 5. This proves $\\Gamma_G(I^\\bullet)\\to\\operatorname{Tot}D$ is a quasi-isomorphism. The transposed total convention is related to the original convention by multiplication by $(-1)^{pq}$ on $D^{p,q}$; direct substitution in the two differentials verifies this identification. Both complexes are first-quadrant, so each diagonal has only $n+1$ potentially nonzero summands. By [lem-sp-derived-injective-resolution-naturality], the source represents $R\\Gamma_G(N[0])$. Inverting the displayed quasi-isomorphism in the derived category proves the required derived-object isomorphism, with the invariant inclusion in degree zero.",
-   "uses": [
-    "lem-sc-first-quadrant-total-column-comparison",
-    "lem-sp-derived-injective-resolution-naturality"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/homology.tex",
-    "place": "Tag 0133 (lemma-double-complex-gives-resolution), index-exchanged variant; finite-diagonal comparison."
-   }
-  },
-  {
-   "text": "For a map $N\\to M$, lift it to chosen nonnegative equivariant injective resolutions by [lem-weil-pbc-injective-resolution-lift-exists]. Postcomposition gives a map of all $D^{p,q}$ commuting with faces and augmentation. The normalized comparisons of [lem-sp-derived-injective-resolution-naturality] identify this map with the appropriate derived-functor maps. Two lifts are chain-homotopic by [lem-weil-pbc-lift-to-injective-unique-up-to-homotopy]. Applying the internal Hom functors gives vertical homotopies compatible with all faces; on the total summand $D^{p,q}$ multiply that homotopy by $(-1)^p$. Then the horizontal cross terms cancel and $dH+Hd$ equals the difference of the total maps. Consequently they give the same derived map. Apply the same argument to identity maps between two resolutions: the maps in both directions compose up to homotopy to the identity. This proves resolution independence and functoriality of the total comparison, with the normalized $R\\Gamma_G$ map on the other side of the augmentation square.",
-   "uses": [
-    "lem-weil-pbc-injective-resolution-lift-exists",
-    "lem-sp-derived-injective-resolution-naturality",
-    "lem-weil-pbc-lift-to-injective-unique-up-to-homotopy"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/derived.tex",
-    "place": "Tag 0156 (section-right-derived-functor); lemma-morphisms-lift and normalized resolution comparisons."
-   }
-  },
-  {
-   "text": "Let $A\\to A'$ and let $N'$ be equivariant over $A'$. For every profinite $S$, $A[S]$ is flat by [lem-pc-sites-modules-j-shriek-flat]. Placed in degree $0$ it is K-flat [def-pc-kflat-complex]: for an acyclic complex $F^\\bullet$ the total tensor complex is $F^\\bullet\\otimes_AA[S]$ termwise, and the exact functor $-\\otimes_AA[S]$ preserves acyclicity. Hence [lem-pur-derived-change-of-rings] computes $A'\\otimes_A^{\\mathbf L}A[S]$ by the underived $A'\\otimes_AA[S]=A'[S]$: maps from the underived extension to an $A'$-module $M$ are $A$-maps $A[S]\\to\\operatorname{Res}M$, i.e. maps of condensed sets $S\\to M$. The same free properties give the underived identification $\\underline{\\operatorname{Hom}}_A(A[S],\\operatorname{Res}M)=\\operatorname{Res}\\underline{\\operatorname{Hom}}_{A'}(A'[S],M)$. Apply [lem-sfb-dc-hom-scalar-adjunction] with $K=A[S]$ to obtain\n$$R\\underline{\\operatorname{Hom}}_A(A[S],\\operatorname{Res}N')\\cong\\operatorname{Res}R\\underline{\\operatorname{Hom}}_{A'}(A'[S],N').$$\nThe cited comparison is normalized by evaluation and natural in both variables. Hence it commutes with precomposition in the parameter $S$ and with the action on $N'$, and therefore with every face and degeneracy for $S=G^p$. This gives the scalar-restriction identification of the derived bar diagrams.",
-   "uses": [
-    "lem-pc-sites-modules-j-shriek-flat",
-    "def-pc-kflat-complex",
-    "lem-pur-derived-change-of-rings",
-    "lem-sfb-dc-hom-scalar-adjunction"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
-    "place": "Paragraph (3), open direct image: formal internal bar input to the all-continuous tame-boundary calculation."
-   }
-  },
-  {
-   "text": "For scalar restriction take an equivariant $A'$-injective resolution $N'\\to J^\\bullet$ and an equivariant $A$-injective resolution $\\operatorname{Res}N'\\to K^\\bullet$, both nonnegative as in step 1. The monic quasi-isomorphism $\\alpha:(\\operatorname{Res}N')[0]\\to\\operatorname{Res}J^\\bullet$ admits a complex map $\\beta:\\operatorname{Res}J^\\bullet\\to K^\\bullet$ extending the second augmentation, by [lem-weil-pbc-lift-along-injective-quasi-iso]. It is a quasi-isomorphism since both augmentations are. Form the underived bar double complex on $\\operatorname{Res}J^\\bullet$. By the underived identification of step 8 it is the restriction of the $A'$-bar complex of $J^\\bullet$, so its augmented rows are exact by steps 3-4 over $A'$ and exactness of restriction. Columns: $UJ^\\bullet$ is an $A'$-injective resolution (step 2), so by [lem-sp-derived-injective-resolution-naturality] its $A'$-column represents $R\\underline{\\operatorname{Hom}}_{A'}(A'[G^p],N')$; composing the restriction of this comparison with the step-8 isomorphism gives a map with the same evaluation transpose as the canonical map from the $\\operatorname{Res}J$ column to $R\\underline{\\operatorname{Hom}}_A(A[G^p],\\operatorname{Res}N')$, so that canonical map is an isomorphism. By naturality of the comparison along $\\beta$, the bar map induced by $\\beta$ is a columnwise quasi-isomorphism. By [lem-sc-first-quadrant-total-column-comparison] it is a total quasi-isomorphism. The invariant-augmentation square commutes term by term and both horizontal augmentations are quasi-isomorphisms by the row argument of step 6. Therefore its map on derived invariants is exactly the scalar bar comparison in step 8. For $N\\to\\operatorname{Res}N'$, compose with step 7. The homotopy argument of step 7 makes the result independent of $\\beta$. No injectivity of $\\operatorname{Res}J^q$ over $A$ is assumed.",
-   "uses": [
-    "lem-weil-pbc-lift-along-injective-quasi-iso",
-    "lem-sp-derived-injective-resolution-naturality",
-    "lem-sc-first-quadrant-total-column-comparison"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/derived.tex",
-    "place": "Tag 013P (lemma-morphisms-lift), part (2); homology.tex Tag 0133 (lemma-double-complex-gives-resolution), for the two augmentation comparisons."
-   }
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "lem-sfb-condensed-product-action-inflation",
-  "lem-sp-grothendieck-enough-injectives",
-  "def-sp-injective-resolutions",
-  "lem-pc-sites-modules-j-shriek-flat",
-  "lem-pc-sheaf-modules-tensor-closed",
-  "lem-sfb-condensed-internal-bar-resolution",
-  "lem-sp-derived-injective-resolution-naturality",
-  "def-sp-double-complex-total",
-  "lem-sc-first-quadrant-total-column-comparison",
-  "lem-weil-pbc-injective-resolution-lift-exists",
-  "lem-weil-pbc-lift-to-injective-unique-up-to-homotopy",
-  "lem-sfb-dc-hom-scalar-adjunction",
-  "lem-weil-pbc-lift-along-injective-quasi-iso",
-  "def-pc-kflat-complex",
-  "lem-pur-derived-change-of-rings"
+  "lem-sfb-condensed-bar-scalar-resolution-comparison"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
-  "place": "Paragraph (3), open direct image: formal internal bar input to the all-continuous tame-boundary calculation. Explicit internal bar and first-quadrant argument, with Stacks 03DI/03EV/0133 as generic tools; an exact internal condensed reference remains WANTED."
+  "place": "Existing scalar-resolution statement of paragraph (3), projected to its normalized bar Model and ScalarComputation fields (Z5, 2026-10-25). The original internal-bar argument remains in the dependency."
  },
  "mathlib_searches": [
   {
@@ -375,11 +254,11 @@
   "is": null
  },
  "split_report": {
-  "date": "2026-10-21",
+  "date": "2026-10-22",
   "item": "lem-sfb-condensed-derived-invariant-bar",
   "worker": "stage1",
-  "summary": "Kept the statement. Added one strictly lower algebraic internal bar-resolution statement, reused existing Grothendieck/action, flat free sheaf, derived scalar-Hom and total-comparison nodes, and expanded the compatible equivariant injective-resolution computation, naturality and scalar restriction. No discrete/topological cohomology identification or projectivity of profinite free modules is used.",
-  "blueprint": "Paragraph (3), open direct image: formal internal bar input to the all-continuous tame-boundary calculation. This realizes the formal internal invariants input below the tame-boundary calculation, without replacing the unit's geometric route. The ancestor utility returns None for this inherited chain.",
+  "summary": "Q48 repair of the 9536-character proof: four separate statement-only work items carry old steps 3–4, 5–6, 7, and 8–9. Steps 1–2 reuse existing exact induction and injective-adjunction tools. The original nine steps and argument-to-node coverage are retained verbatim in report.md. Statement, Lean metadata, and inherited review metadata are preserved.",
+  "blueprint": "Paragraph (3), open direct image: formal internal bar input; inherited ancestor is None. Original proof steps 1–9 are covered without changing the geometric unit route.",
   "tool_uses": [
    {
     "node": "lem-pc-sites-modules-j-shriek-flat",
@@ -412,26 +291,25 @@
    {
     "node": "lem-weil-pbc-lift-to-injective-unique-up-to-homotopy",
     "why": "Generic uniqueness of lifts into a bounded-below injective complex; supplies resolution independence of the bar total map."
+   },
+   {
+    "node": "lem-sfb-condensed-split-coset-induction",
+    "why": "Exact induction for the trivial subgroup supplies the adjoint of forgetting an internal action."
+   },
+   {
+    "node": "lem-sp-right-adjoint-preserves-injectives",
+    "why": "Generic exact-adjoint injectivity theorem, applied to induction and forgetting."
    }
   ]
  },
- "tool_uses": [
-  "lem-pc-sites-modules-j-shriek-flat",
-  "lem-pc-sheaf-modules-tensor-closed",
-  "lem-sp-derived-injective-resolution-naturality",
-  "lem-sc-first-quadrant-total-column-comparison",
-  "lem-weil-pbc-injective-resolution-lift-exists",
-  "lem-sfb-dc-hom-scalar-adjunction",
-  "lem-weil-pbc-lift-along-injective-quasi-iso",
-  "lem-weil-pbc-lift-to-injective-unique-up-to-homotopy"
- ],
+ "tool_uses": [],
  "reviewed": {
-  "date": "2026-10-21",
+  "date": "2026-10-22",
   "by": "L",
-  "reviewer": "NT-cc-NI-6c7ebc499",
-  "group": "NI",
+  "reviewer": "NT-cc-Q48-25c63a5cc",
+  "group": "Q48",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NI-6c7ebc499 (reviewer sub-agent of L); spot-checked: Read the item's statement and all nine steps, the new node lem-sfb-condensed-internal-bar-resolution, all 14 cited statements, and paragraph (3) of the main-20261015 direct-images proof. That paragraph does not contain this formal internal argument, so proof_origin agent with a WANTED reference is honest. The item had no proof on the base, has no repair note and is still unsplit live, so it is not superseded. Neither the item nor any cited node is in the 2026-10-18 dropped list, and nothing cites SGA. The statement is unchanged. Small cases checked: G=1, G finite with A=Z, the degree-0 invariants, and that A[G^n]=j_{G^n!}A is representable. Steps 1-7 are correct: inflation gives Grothendieck abelian categories with left exact invariants; A[S] is flat by 03EV; induction A[G]⊗T is left adjoint to forgetting, so forgetting preserves injectives; rows are exact via Hom_E(A[S]⊗P,I); I recomputed the homogeneous-to-inhomogeneous faces; the (-1)^{pq} transpose sign and the (-1)^p total homotopy both check. The new node is true (contraction h[g]=[1,g], also after ⊗T; coordinate change gives the induced module), statement-only, self-contained and strictly smaller than the item. No duplicate: lem-sfb-bar-resolution-cochains is for abstract groups and lem-exc-* for discrete modules. FIX of two faults. Step 8 (C1/C4): flat in degree 0 implies K-flat was not written; it now cites def-pc-kflat-complex and lem-pur-derived-change-of-rings and adds the underived identification Hom_A(A[S],Res M)=Res Hom_{A'}(A'[S],M). Step 9 (E5): it claimed the columns 'compute the derived Homs by step 8', which is only an abstract isomorphism; it now proves the canonical Res J column map is an isomorphism via the evaluation normalization and lem-sp-derived-injective-resolution-naturality, then uses naturality along beta. The worker wrote its own tool_uses (C8); I accept them as generic homological and ringed-site tools.; 1 file(s) fixed by the reviewer"
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q48-25c63a5cc (reviewer sub-agent of L); spot-checked: PASS. The 2026-10-22 re-split note (>=3 nodes, <=3000 characters) is met: 4 statement-only new nodes, the statement is byte-identical to live, the lean/reviewed records are kept, and the item proof is 6 steps of 2290 characters. All 9 old steps are verbatim in the report. Mapping: old 1-2 go to existing nodes; product-action-inflation with H=1, j-shriek-flat, split-coset-induction with H=1 (exact Ind left adjoint to U) and right-adjoint-preserves-injectives. All their hypotheses hold. Old 3-4 go to injective-bar-rows, old 5-6 to bar-total-augmentation, old 7 to bar-total-naturality and old 8-9 to bar-scalar-resolution-comparison. The NI reviewer's step 8/9 FIX (K-flatness of A[S][0]; canonical Res J column map fixed by its evaluation transpose) is written into the scalar node's statement. I checked by hand: (1) sectionwise exactness of Hom_E(A[S]⊗P_•,I) from the ⊗T-exactness in internal-bar-resolution, the degree -1 term I^G(S), and the homogeneous formula with all cofaces (g1 action, products of adjacent entries, last entry dropped, gm-m in degree 0); (2) commutation of d_h with d_v, the b_I chain map, the (-1)^{pq} transpose and the column comparison giving the quasi-iso; (3) the H=(-1)^p h total homotopy (dH+Hd=f-g) and its restriction to Γ(h); (4) the β lift by lift-along-injective-quasi-iso (Res a' monic in each degree and a quasi-iso), the column quasi-isos through dc-hom-scalar-adjunction with K=A[S], the invariant map by 2-of-3, and independence of β by uniqueness up to homotopy. Small cases: G=1, A=0, S empty or a point, p=0 and q=0, nonflat Z→Z/n. Stmt_deps equal the cited ids, there is no cycle and no orphaned dropped deps, the batch-5 closure adds only generic nodes, there is no SGA and no concurrent group. Not duplicates: internal-homogeneous-functions-injective, derived-restriction-calculus (overlaps old steps 1-2 only), equivariant-resolution-bar-normalization and roof-adjunction (both cite the item). Advisory: split_report.tool_uses lists 6 nodes the item no longer cites, and step 2's flatness sentence is redundant."
  },
  "lean": {
   "module": "Sheaf.CategoryTheory.CondensedDerivedInvariantBar",
@@ -453,5 +331,27 @@
   "group": "NU",
   "result": "fix",
   "note": "Mathematics correct: every node clause matches the Lean (ring/G/universes, landed ActionModule/Invariants, ihom of the free module with a derived-unit columns clause, nerve faces and degeneracies recomputed, d_bar+(-1)^p d_res total, degree-zero augmentation, derived-category iso normalized by the augmentation, naturality over all lifts, scalar restriction via pinned bar/total isos, beta lifts and the inverted augmentation square). Edge cases n=0, G=1, zero ring, nonflat maps are covered; no hollow defs, only the item sorry, statements verbatim, nothing dropped. Fault H2: new def node def-sfb-condensed-equivariant-bar-data cited theorem lem-sfb-condensed-internal-bar-resolution only for the plain def InternalBar.free. FIX: freeParameter now writes out the defeq composite composeAndSheafify ⋙ Mod.free (fixes/CondensedEquivariantBarData.lean); whole-node JSON swaps that stmt_dep for sk-def-sfb-change-of-scalars (owner of Mod.comap) with matching TeX; check_new_node reports no failures; nt_compile clean in 26.9 s. Advisory: rightDerivedFunctor owner not cited; the second reading is a self-review."
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Z5",
+  "result": "pass",
+  "landing": "20261025T041320-L-1157066",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

@@ -1,0 +1,153 @@
+{
+ "id": "lem-weil-pbc-integer-single-adjunction-transpose",
+ "kind": "statement",
+ "title": "Pinned derived tensor adjunction on singles in any integer degree",
+ "statement": "Let $g:T\\to S$ be a morphism of schemes with the shared derived categories of structure-module sheaves [def-weil-abstract-derived-category]. Let $q\\in\\mathbf Z$, $N$ be a module on $S$, $M$ a module on $T$, and $b:g^*N\\to M$ a module morphism. Write $S_X^q$ for the single complex in degree $q$ and $c_{g,q,N}:Lg^*(S_S^qN)\\to S_T^q(g^*N)$ for the comparison defined from the pinned left-derived counit [lem-weil-pbc-derived-pullback-top-cohomology]. Define $u_{g,q,M}:S_S^q(g_*M)\\to Rg_*(S_T^qM)$ as the localization of the inverse termwise single/direct-image comparison followed by the selected right-derived unit [def-pc-ringed-spaces-derived-direct-image]. Under the pinned derived adjunction of [def-pc-derived-base-change-map], the transpose of $c_{g,q,N}\\,S_T^q(b)$ is $S_S^q(\\operatorname{adj}(b))\\,u_{g,q,M}$ in diagrammatic composition order, where $\\operatorname{adj}(b)$ is taken under the selected tensor-pullback adjunction [lem-pc-module-pullback-adjunction].",
+ "source": {
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Tag 079W (lemma-adjoint); sheaves.tex Tag 0096 (lemma-adjoint-pullback-pushforward-modules). Agent-derived normalization in arbitrary integer degree."
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "stmt_deps": [
+  "lem-weil-pbc-derived-pullback-top-cohomology",
+  "def-pc-derived-base-change-map",
+  "lem-pc-module-pullback-adjunction",
+  "def-pc-ringed-spaces-derived-direct-image",
+  "def-weil-abstract-derived-category"
+ ],
+ "proof": [
+  {
+   "text": "Extend the ordinary adjunction to complexes and compute on singles. At degree q the equation is the ordinary adjunction unit formula; at every other degree it is the unique map from the zero object. Transport through the homotopy quotient using the unit normalization of the induced homotopy adjunction.",
+   "uses": [
+    "lem-pc-module-pullback-adjunction"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Apply the defining normalized equation of exists_schemeDerivedAdjunction to the homotopy single comparison followed by the single of b. Substitute the termwise transpose equation and apply localization. The remaining right-derived unit is exactly the constructed u. Unfolding the pinned comparison and the single functors gives the displayed formula, without a separate shift argument.",
+   "uses": [
+    "def-pc-derived-base-change-map",
+    "lem-weil-pbc-derived-pullback-top-cohomology",
+    "def-pc-ringed-spaces-derived-direct-image",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-module-pullback-adjunction",
+  "def-pc-derived-base-change-map",
+  "lem-weil-pbc-derived-pullback-top-cohomology",
+  "def-pc-ringed-spaces-derived-direct-image",
+  "def-weil-abstract-derived-category"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Tag 079W (lemma-adjoint); sheaves.tex Tag 0096 (lemma-adjoint-pullback-pushforward-modules). Agent-derived normalization in arbitrary integer degree."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "On a single complex in degree q the pinned derived tensor pullback and direct image adjunction sends a module map after the pullback comparison to its ordinary transpose followed by the right derived unit",
+   "results": "SheafOfModules.pullbackPushforwardAdjunction_homEquiv_pullbackObjUnitToUnit and ordinary pullback unit formulas; no derived integer-degree single transpose. The existing degree-zero project theorem uses an ordinary pullback comparison, not the tensor comparison here.",
+   "date": "2026-10-26",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The normalized derived adjunction on single complexes in degree n transposes the pullback comparison to the right derived unit",
+   "results": "Adjunction.derivedη_fac_app and derived-unit factorization lemmas; no fixed integer-degree tensor comparison/counit equation.",
+   "date": "2026-10-26",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.homEquiv",
+   "results": "General homEquiv naturality and inverse identities, used in the proof; no normalized derived-module single equation.",
+   "date": "2026-10-26",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "homologyFunctor_map_bijective_of_isLE_of_isGE|rightDerivedFunctorUnit|topEdgeTruncatedCounit",
+   "results": "The existing top cohomology Hom-bijection and derived unit suffice for the proof; the earlier canonical single transpose is only degree zero and uses a different comparison. No duplicate of the new integer-degree equation.",
+   "date": "2026-10-26",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.DerivedAdjunctionTopEdgeLocalCalculation",
+  "date": "2026-10-26",
+  "group": "U1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-direct-image-finiteness-proper",
+   "place": "The canonical affine coherent cohomology identification in the 0GKA input to 0GKV(b), used in the classical torsion constructibility input of thm-weil-pbc-direct-image-finiteness-proper; the comparison and its restriction compatibility in steps 4 and 5 of lem-weil-pbc-smooth-curve-etale-structure-direct-images. Identification of the derived map with pullback of local cohomology classes. The top-degree normalization of the derived-to-ordinary module adjoint. Local normalization on the upper truncation of the derived direct image. Single-complex normalization of the explicit truncated counit. Integer-degree termwise adjunction normalization.",
+   "via": [
+    "lem-weil-pbc-single-truncated-counit-normalization",
+    "lem-weil-pbc-truncated-counit-local-class",
+    "lem-weil-pbc-derived-adjunction-top-edge",
+    "lem-weil-pbc-top-base-change-presheaf",
+    "lem-weil-pbc-coherent-affine-base-change-edge-naturality",
+    "lem-weil-pbc-smooth-curve-etale-structure-direct-images",
+    "lem-weil-pbc-proper-smooth-curves-prime-coefficients",
+    "lem-weil-pbc-etale-proper-smooth-curves-finite-module",
+    "lem-weil-pbc-etale-constant-shriek-rel-dim-1",
+    "lem-weil-pbc-etale-lisse-open-relative-line-constructibility",
+    "lem-weil-pbc-etale-affine-line-shriek-sheaf-constructible",
+    "lem-weil-pbc-etale-compactification-constructibility",
+    "lem-weil-pbc-etale-proper-direct-image-finiteness"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.DerivedSingleAdjunctionTranspose",
+  "file": "lean/Sheaf/AlgebraicGeometry/DerivedSingleAdjunctionTranspose.lean",
+  "declaration": "AlgebraicGeometry.topEdgeSingleAdjunctionTranspose",
+  "statement": "theorem topEdgeSingleAdjunctionTranspose {T S : Scheme.{u}} (g : T ⟶ S) (q : ℤ) (N : S.Modules) (M : T.Modules) (b : (Scheme.Modules.tensorPullback g).obj N ⟶ M) : let adj := @pinnedDerivedAdjunction.{u, w} _ (fun {_ _} f ↦ Scheme.Modules.canonicalTensorPullbackAdditive.{u, w} f) _ _ g let a := Classical.choose (Scheme.Modules.exists_tensorPullbackAdjunction g) adj.homEquiv _ _ (pinnedModulePullbackComparisonAt g q N ≫ (DerivedCategory.singleFunctor (SheafOfModules.{u} (moduleRings T.toRingedSpace)) q).map b) = (DerivedCategory.singleFunctor (SheafOfModules.{u} (moduleRings S.toRingedSpace)) q).map (a.homEquiv _ _ b) ≫ topEdgeSingleDirectImageMap g q M",
+  "branch": "sheaf-dag",
+  "by": "U1",
+  "date": "2026-10-26",
+  "declarations": [
+   "AlgebraicGeometry.topEdgeSingleDirectImageMap",
+   "AlgebraicGeometry.topEdgeSingleAdjunctionTranspose"
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U1",
+  "result": "pass",
+  "landing": "20261026T100416-L-17961",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U1",
+  "result": "pass",
+  "landing": "20261026T100416-L-17961",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

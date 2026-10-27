@@ -1,0 +1,148 @@
+{
+ "id": "lem-sfb-space-kflat-pullback-counit",
+ "kind": "statement",
+ "title": "Canonical algebraic-space tensor pullback counit on flat-term K-flat complexes",
+ "statement": "Let S be a scheme [def-pc-scheme] and f:X→Y a morphism of algebraic spaces over S [def-trf-algebraic-space]. Use the equivalent small affine étale ringed module models [def-sfb-space-small-ringed-model]. Suppose their unbounded derived categories [def-weil-abstract-derived-category] exist with common localization universe w. Let P be an unbounded complex of Y.SmallModules that is K-flat [def-pc-kflat-complex] and whose terms are flat on the small site [def-pc-flat-sheaf-modules]. For the fixed smallTensorPullbackComplex f and its total left derived functor [def-sfb-space-derived-tensor-pullback], the canonical totalLeftDerivedCounit at P is an isomorphism. There is no condition on K, K', a coefficient map, boundedness or flatness of f.",
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-trf-algebraic-space",
+  "def-sfb-space-small-ringed-model",
+  "def-weil-abstract-derived-category",
+  "def-pc-kflat-complex",
+  "def-pc-flat-sheaf-modules",
+  "def-sfb-space-derived-tensor-pullback"
+ ],
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 06YY, lemma-derived-base-change, its computation on flat-term K-flat complexes; transport along the affine-basis equivalences of Tags 03G8 and 039Z."
+ },
+ "proof": [
+  {
+   "text": "The morphism of algebraic spaces induces the morphism of ringed étale topoi of Tag 03G8. Transport it to the affine small models by the basis equivalences of Tag 039Z. Tensor pullback for this ringed geometric morphism and smallModuleTensorPullback f have the same right adjoint: transport the canonical direct-image functor, whose value on a chart is the compatible-section limit. The adjunction hom bijections give a natural isomorphism of the left adjoints, with the canonical adjunction normalization. Build the ringed inverse-image and scalar-extension presentation on these small sites; its scalar map is pullback of regular functions. The natural isomorphism just obtained identifies the presentation's ordinary pullback with the fixed small-model functor.",
+   "uses": [
+    "def-trf-space-etale-module-functors",
+    "def-sfb-space-small-ringed-model",
+    "def-sfb-space-derived-tensor-pullback"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply the existing general ringed-topos resolving-computation theorem to that presentation, P and its K-flatness and flat terms. It says the counit of the universal left derived pullback is invertible on P. Extend the ordinary natural isomorphism to complexes and localization. The uniqueness of a left derived functor with its counit gives an isomorphism with the recorded totalLeftDerived of smallTensorPullbackComplex f; its defining counit equation identifies the two computation maps up to this isomorphism. Since both the comparison and the presentation's counit at P are invertible, the recorded canonical counit at P is invertible.",
+   "uses": [
+    "lem-weil-pbc-pullback-resolving-computation"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-trf-space-etale-module-functors",
+  "def-sfb-space-small-ringed-model",
+  "def-sfb-space-derived-tensor-pullback",
+  "lem-weil-pbc-pullback-resolving-computation"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 06YY, lemma-derived-base-change, its computation on flat-term K-flat complexes; transport along the affine-basis equivalences of Tags 03G8 and 039Z."
+ },
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The canonical total left derived tensor pullback counit is an isomorphism on flat term K flat complexes of module sheaves on a ringed site",
+   "results": "8 hits: ordinary pullbackIso, freeFunctorCompPullbackIso and pullbackObjUnitToUnit lemmas for sheaves. None computes the canonical unbounded derived counit on this algebraic-space small-model pullback.",
+   "date": "2026-10-26",
+   "verdict": "No exact match; use general library resolving computation after constructing the small-model presentation comparison."
+  },
+  {
+   "tool": "loogle",
+   "query": "Functor.totalLeftDerivedCounit",
+   "results": "0 hits; unknown identifier in the public Loogle index. The declaration exists in the local pinned Mathlib.CategoryTheory.Functor.Derived.LeftDerived source.",
+   "date": "2026-10-26",
+   "verdict": "The general canonical derived-pair API exists; it does not supply its computation on the geometric resolving class."
+  },
+  {
+   "tool": "grep",
+   "query": "counit.*[Kk][Ff]lat|[Kk][Ff]lat.*counit; local rg in Mathlib/Algebra/Homology, WeilConjectures/AlgebraicGeometry, Sheaf/AlgebraicGeometry and dag/nodes",
+   "results": "msearch Mathlib grep: 0 hits. Local search finds scheme K-flat counit computations and the general ringed-topos theorem lem-weil-pbc-pullback-resolving-computation (Sheaf.Paper.PullbackTensorResolvingComputation). No algebraic-space comparison with the ringed-topos presentation is recorded.",
+   "date": "2026-10-26",
+   "verdict": "A geometric specialization is still needed; it is not a one-line application because the fixed pullback is defined by conjugating the compatible-chart adjoint, rather than a RingedPullback presentation."
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.AlgebraicSpaceDerivedPullbackModels",
+  "date": "2026-10-26",
+  "group": "P7"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Stable genus and smooth-family open loci in curve families. Supporting input: 0E76 proof, reduction to prestable curves, and 0E78 proof, decomposition by genus before imposing stability. Supporting input: 0E1J proof, perfectness and arbitrary derived base change before extracting the positive-degree perfect summand. Supporting input to this derived direct-image specialization: Tag 0A1K (lemma-base-change-tensor), statement and precise canonical map in the proof; sites-cohomology.tex Tags 07A6 (lemma-adjoint) and 07A7 (remark-base-change). Supporting input to 0A1K: Tag 0DKI (lemma-single-complex-base-change-condition-inherited), clause (1); Tag 0DKG (lemma-single-complex-base-change-condition), condition (1) and equation-bc immediately before it. Supporting input: the counit computation on the flat-term K-flat representative used in coordinate existence.",
+   "via": [
+    "def-sfb-space-derived-pullback-models",
+    "lem-sfb-space-single-complex-tensor-inheritance",
+    "lem-sfb-space-flat-complex-base-change",
+    "lem-sfb-proper-flat-space-derived-base-change",
+    "lem-sfb-curve-h0-genus-strata",
+    "lem-sfb-stable-and-smooth-family-open-loci",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "import_flags": [],
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.SpaceKFlatPullbackCounit",
+  "file": "lean/Sheaf/AlgebraicGeometry/SpaceKFlatPullbackCounit.lean",
+  "declaration": "AlgebraicGeometry.AlgebraicSpace.smallTensorPullbackComplex_counit_isIso_of_flatKFlat",
+  "statement": "theorem smallTensorPullbackComplex_counit_isIso_of_flatKFlat\n    {S : Scheme.{u}} {X Y : AlgebraicSpace S} (f : X ⟶ Y)\n    [HasDerivedCategory.{w} X.SmallModules]\n    [HasDerivedCategory.{w} Y.SmallModules]\n    (P : CochainComplex Y.SmallModules ℤ)\n    (hP : CochainComplex.IsKFlatIndependentCoefficients\n      (J := Y.smallEtaleModelTopology) (R := Y.smallStructureSheaf) P)\n    (hflat : ∀ n : ℤ, SheafOfModules.IsFlatOnSite\n      (J := Y.smallEtaleModelTopology) (R := Y.smallStructureSheaf) (P.X n)) :\n    IsIso (((smallTensorPullbackComplex f).totalLeftDerivedCounit DerivedCategory.Q\n      (HomologicalComplex.quasiIso Y.SmallModules (.up ℤ))).app P)",
+  "branch": "sheaf-dag",
+  "by": "P7",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P7",
+  "result": "pass",
+  "landing": "20261026T092250-L-3417463",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P7",
+  "result": "pass",
+  "landing": "20261026T092250-L-3417463",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

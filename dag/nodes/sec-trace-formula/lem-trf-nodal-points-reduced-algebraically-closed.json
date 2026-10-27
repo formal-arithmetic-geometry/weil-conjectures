@@ -59,7 +59,7 @@
    }
   },
   {
-   "text": "The model $R=F[[u,v]]/(uv)$ is reduced. Indeed, for the coefficientwise power series of [def-weil-pbc-multivariate-power-series], the two axis restrictions define a ring map $F[[u,v]]\\to F[[u]]\\times F[[v]]$, $f\\mapsto(f(u,0),f(0,v))$. Its kernel is exactly $(uv)$: both restrictions vanish precisely when all coefficients with $i=0$ or $j=0$ vanish, and then $f=uvg$ with $g_{ij}=f_{i+1,j+1}$. Thus the induced map from $R$ is injective. Both target factors are domains by [lem-weil-pbc-power-series-domain]. A nilpotent in $R$ maps to zero in each domain and hence is zero by injectivity.",
+   "text": "For any variable s, use the Mathlib homomorphism MvPowerSeries.killCompl for the embedding of the other variables. Its kernel consists exactly of the series divisible by X_s: X_dvd_iff identifies those series by vanishing coefficients whose s exponent is zero, and every such exponent vector comes from the embedding of the other variables. The target is a power-series domain by [lem-weil-pbc-power-series-domain], so X_s is prime. In two variables, X_1 does not divide X_0, as its coefficient at the exponent vector (1,0) is 1. If X_0*X_1 divides p squared, primality gives X_0 divides p and X_1 divides p; write p=X_0*q and use primality of X_1 again to obtain X_1 divides q. Hence X_0*X_1 divides p. The ideal (X_0*X_1) is therefore radical, and its quotient is reduced. This implements the two-axis argument using divisibility rather than constructing the product embedding.",
    "uses": [
     "def-weil-pbc-multivariate-power-series",
     "lem-weil-pbc-power-series-domain"
@@ -83,7 +83,7 @@
    }
   },
   {
-   "text": "Let $y\\in C$. By [lem-sc-lft-over-field-jacobson-space], closed points of $C$ in the nonempty closed subset $\\overline{\\{y\\}}$ are dense there. There is therefore such a closed point $x$. Choose an affine open $U=\\operatorname{Spec}B$ containing $x$; it also contains $y$, since every open neighbourhood of a specialization contains its generizations. In the Zariski topology of [def-weil-affine-spectrum], their primes satisfy $\\mathfrak q=\\mathfrak p_y\\subseteq\\mathfrak p=\\mathfrak p_x$ (the closure of $\\{\\mathfrak q\\}$ is $V(\\mathfrak q)$). By [lem-weil-pbc-affine-open-stalk-localization], the two local rings are $B_{\\mathfrak q}$ and $B_{\\mathfrak p}$. The following fraction calculation transfers reducedness, without any global finiteness assumption. If $a/b\\in B_{\\mathfrak q}$ is nilpotent, take $n\\geq1$ and $t\\notin\\mathfrak q$ with $ta^n=0$, using the zero criterion in [def-weil-pbc-localization-at-prime]. In $B_{\\mathfrak p}$ one has $(ta/1)^n=0$. This ring is reduced by steps 2 and 4, so $ta/1=0$. The same zero criterion gives $u\\notin\\mathfrak p$ with $uta=0$. Since $u\\notin\\mathfrak q$ and $t\\notin\\mathfrak q$, also $ut\\notin\\mathfrak q$; hence $a/b=0$ in $B_{\\mathfrak q}$. Thus $\\mathcal O_{C,y}$ is reduced.",
+   "text": "Use [lem-sc-lft-over-field-jacobson-space] to make C a Jacobson space. Work on any affine chart Spec B -> C from the affine cover. A maximal ideal p of B is a closed point of Spec B; since this chart is an open immersion into a Jacobson space, its image x is closed in C. By steps 2 and 4 its ambient stalk is reduced. The open-immersion stalk isomorphism and [lem-weil-pbc-affine-open-stalk-localization] identify this reduced ring with B_p. Thus every maximal localization of B is reduced. Apply Mathlib isReduced_ofLocalizationMaximal: explicitly, if b is nilpotent, b/1 is zero in each B_p, and the localization zero criterion gives an annihilator outside every maximal ideal. The annihilator ideal of b is therefore contained in no maximal ideal, so equals B; hence b=0. This uses [def-weil-pbc-localization-at-prime] and replaces the planned transfer to arbitrary stalks with the existing maximal-localization criterion.",
    "uses": [
     "lem-sc-lft-over-field-jacobson-space",
     "def-weil-affine-spectrum",
@@ -97,7 +97,7 @@
    }
   },
   {
-   "text": "Every local ring of $C$ is reduced by step 5. By [def-pc-reduced-scheme] this says exactly that $C$ is reduced. If $C$ is empty the same local-ring condition is vacuous, so the conclusion includes that case. The proof never restricts the dimension of the smooth open pieces or assumes quasi-compactness, separatedness or properness.",
+   "text": "Every affine chart is reduced by step 5, hence C is reduced by the affine-open-cover criterion IsReduced.of_openCover for [def-pc-reduced-scheme]. The empty case is vacuous, and no finite cover, dimension, separatedness or properness assumption is used.",
    "uses": [
     "def-pc-reduced-scheme"
    ],
@@ -126,7 +126,7 @@
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/curves.tex",
-  "place": "Tag 0E37 (lemma-facts-about-nodal-curves), reducedness paragraph, expanded to the exact locally finite type statement using 01T6, 0478, 00MC and 05CK. The source lemma additionally assumes pure dimension one; this proof uses only its completed-node argument, not that extra hypothesis."
+  "place": "Tag 0E37 (lemma-facts-about-nodal-curves), reducedness paragraph, expanded to the exact locally finite type statement using 01T6, 0478, 00MC and 05CK. The source lemma additionally assumes pure dimension one; this proof uses only its completed-node argument, not that extra hypothesis. Lean realization by Q3, 2026-10-23: coordinate primality via killCompl proves the nodal ideal radical; the final local-to-global step uses Mathlib isReduced_ofLocalizationMaximal on affine charts and Jacobson closed-point preservation. Every auxiliary theorem is proved privately in the item module; no new assumed statements."
  },
  "mathlib_searches": [
   {
@@ -197,7 +197,18 @@
  },
  "chapter": "sec-trace-formula",
  "unit": "sk-i-curve-zero",
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
  "split_report": {
   "date": "2026-10-19",
   "item": "lem-trf-nodal-points-reduced-algebraically-closed",
@@ -239,5 +250,15 @@
   "group": "Q102",
   "result": "pass",
   "note": "Every clause of the Lean statement matches the node and nothing extra is assumed (smooth-neighbourhood clause ¬∃U open with Smooth (U.ι≫f), AdicCompletion of the stalk at its maximal ideal, a plain ring iso ≃+* to MvPowerSeries (Fin 2) F ⧸ (X0*X1), IsReduced C). The shared universe is forced by Spec(.of F). Only the lean field differs from the live node, and lean.statement matches the file word for word. No duplicate in Sheaf, Mathlib or the DAG (lem-trf-nodal-geometric-fibres-reduced is a different statement). Docstrings have the source and blueprint id and all six proof steps; cited tags 0E37/00MC/05CK/0478 checked. nt_compile --json clean in 7.9 s. Advisory: some proof-only imports are unused while the proof is sorry."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q3",
+  "result": "pass",
+  "landing": "20261023T124145-L-1338778",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

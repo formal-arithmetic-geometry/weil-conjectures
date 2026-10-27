@@ -1,0 +1,145 @@
+{
+ "id": "def-sfb-space-cartesian-chart-family",
+ "kind": "definition",
+ "title": "Cartesian quasi-coherent module families on localized etale charts",
+ "status": "split",
+ "import_flags": [],
+ "statement": "Let $S$ be a scheme [def-pc-scheme] and $X/S$ an algebraic space with its small etale ringed site [def-trf-algebraic-space], in the universes of [def-weil-size-convention]. A cartesian module chart family consists of a module sheaf $F_V$ on the localized ringed site $X_{\\mathrm{et}}/V$ for every $V\\in X_{\\mathrm{et}}$ [def-weil-sheaf-of-modules-category], and an isomorphism $c_f:f^*F_V\\to F_W$ for every $f:W\\to V$, where $f^*$ is the existing restriction along the functor $\\mathcal C/W\\to\\mathcal C/V$. Require $c_{\\mathrm{id}}=\\mathrm{id}$ and $c_{fg}=c_g\\circ g^*c_f$ after the canonical identity and composition reindexings. A morphism $h:F\\to G$ consists of module maps $h_V:F_V\\to G_V$ satisfying $h_Wc_f^F=c_f^Gf^*h_V$ for every $f$. Identities and composition are componentwise. The category of cartesian quasi-coherent chart families is the full subcategory where each $F_V$ is quasi-coherent in the local-presentation sense [def-trf-space-quasi-coherent-module]. The iterated-slice sheafification and locally-bijective-equivalence instances used by this predicate are transported from $X_{\\mathrm{et}}/W$ along the canonical equivalence $(X_{\\mathrm{et}}/V)/(W\\to V)\\simeq X_{\\mathrm{et}}/W$.",
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-trf-algebraic-space",
+  "def-weil-size-convention",
+  "def-trf-space-quasi-coherent-module",
+  "def-weil-sheaf-of-modules-category"
+ ],
+ "source": {
+  "document": "literature/stacks-project/spaces-properties.tex",
+  "place": "Tags 03LY and 03LZ (lemma-characterize-module-small-etale; lemma-characterize-quasi-coherent-small-etale); localized-site convention of def-trf-algebraic-space"
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Compatible families of quasi coherent sheaves on slice sites and their restriction equivalence",
+   "results": "[leansearch] OK 8 hit(s): SheafOfModules.isQuasicoherent; CategoryTheory.Presieve.FamilyOfElements.Compatible.restrict; SheafOfModules.IsQuasicoherent; SheafOfModules.QuasicoherentData.I; SheafOfModules.IsQuasicoherent.mk; SheafOfModules.QuasicoherentData; SheafOfModules.QuasicoherentData.mk; CategoryTheory.Presieve.compatibleEquivGenerateSieveCompatible",
+   "date": "2026-10-24",
+   "verdict": "No cartesian module family category; the quasi-coherent predicate is used unchanged."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Quasi coherent sheaves reconstructed from cartesian families on etale slice sites",
+   "results": "[leanfinder] OK 8 hit(s): SheafOfModules.QuasicoherentData.I; SheafOfModules.QuasicoherentData.X; SheafOfModules.QuasicoherentData.presentation; SheafOfModules.IsQuasicoherent.nonempty_quasicoherentData; SheafOfModules.QuasicoherentData; SheafOfModules.QuasicoherentData.mk.inj; SheafOfModules.isQuasicoherent; SheafOfModules.IsQuasicoherent",
+   "date": "2026-10-24",
+   "verdict": "These define local presentations, not cartesian chart families."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsQuasicoherent\", \"Equivalence\"",
+   "results": "[loogle] OK 0 hit(s)",
+   "date": "2026-10-24",
+   "verdict": "No exact declaration."
+  },
+  {
+   "tool": "grep",
+   "query": "(cartesian|Cartesian).*(famil|Famil)|(famil|Famil).*(cartesian|Cartesian) [Algebra/Category/ModuleCat]",
+   "results": "[grep] OK 0 hit(s)",
+   "date": "2026-10-24",
+   "verdict": "No cartesian chart module family in Mathlib."
+  },
+  {
+   "tool": "rg",
+   "query": "cartesian.*famil|famil.*cartesian|CartesianModuleChartFamily|CartesianQCohChartFamily in lean/WeilConjectures, lean/Sheaf and dag/lean_names_upstream.json",
+   "results": "No target names. Existing CartesianChart* files concern cohomology base-change diagrams, curve moduli concern cartesian geometric families, and algebraic-space integral-closure/Fitting modules only cite the present reconstruction node in proof docstrings.",
+   "date": "2026-10-24",
+   "verdict": "No existing definition of this module family."
+  },
+  {
+   "tool": "blueprint_refs.py search; rg -l on dag/nodes",
+   "query": "cartesian families; cartesian.*chart.*famil|cartesian.*famil.*chart",
+   "results": "lem-pc-fpqc-descent\tsec-picard-framework\timported\t...\n1 blueprint nodes match 'cartesian families'. DAG hits include the present theorem, lem-sfb-space-groupoid-module-descent and lem-sfb-space-qcoh-groupoid-equivalence.",
+   "date": "2026-10-24",
+   "verdict": "The fpqc theorem is descent along a covering of schemes; the groupoid nodes use a fixed presentation. No definition node gives module sheaves on all localized etale charts."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-space-qcoh-cartesian-chart-family",
+  "date": "2026-10-24",
+  "group": "NO"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Algebraicity and smoothness of the stack of all nodal curves. Supporting input: Tag 0ADD (lemma-codim-1-point-in-schematic-locus), applied at every point; a locally finite-type space over a field is locally Noetherian and dimension at most one bounds all local dimensions. Supporting input: affineness of the finite image of W in the last sentence of the proof of Tag 0ADD. Supporting input for the proof of Tag 07VP: Quasi-coherent modules on a Noetherian algebraic space are coherent filtered unions. Supporting input to Tag 07UV: the equivalence QCoh(X) = QCoh(U,R,s,t,c) in the second paragraph, with coherence detected on U. Input to the proof of Tag 03M3: chartwise characterization in Tag 03LZ, using Tag 03LY for modules and morphisms. Definition of the cartesian families in Tags 03LY/03LZ.",
+   "via": [
+    "lem-sfb-space-qcoh-cartesian-chart-family",
+    "lem-sfb-space-qcoh-groupoid-equivalence",
+    "lem-sfb-space-coherent-filtered-union",
+    "lem-sfb-noetherian-space-finite-affine-descent",
+    "lem-sfb-separated-space-dimension-one-scheme",
+    "lem-sfb-nodal-curve-stack-smooth",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.AlgebraicSpaceCartesianChartFamily",
+  "declaration": "AlgebraicGeometry.AlgebraicSpace.CartesianQCohChartFamily",
+  "declarations": [
+   "AlgebraicGeometry.AlgebraicSpace.chartIteratedWeakSheafify",
+   "AlgebraicGeometry.AlgebraicSpace.chartIteratedWEqualsLocallyBijective",
+   "AlgebraicGeometry.AlgebraicSpace.CartesianModuleChartFamily",
+   "AlgebraicGeometry.AlgebraicSpace.CartesianModuleChartFamily.Hom",
+   "AlgebraicGeometry.AlgebraicSpace.CartesianModuleChartFamily.evaluation",
+   "AlgebraicGeometry.AlgebraicSpace.CartesianQCohChartFamily"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/AlgebraicSpaceCartesianChartFamily.lean",
+  "statement": "abbrev CartesianQCohChartFamily (X : AlgebraicSpace S)",
+  "branch": "newtargets-dag",
+  "by": "NO",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-14357085f",
+  "group": "NO",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-14357085f",
+  "group": "NO",
+  "result": "pass",
+  "note": "Read the node (Stacks 03LY/03LZ) and def-sfb-space-cartesian-chart-family against both delivered modules. F_V are SheafOfModules on X_et/V (the localized convention the node specifies), with Mathlib's IsQuasicoherent unchanged. The transitions use the recorded etalePullbackMap = overMap. I checked the identity and cocycle laws by hand: the reindexing via Over.mapId/Over.mapComp is canonical and c_g ∘ g^*c_f is in the right order. Hom.comm = h_W c_f^F = c_f^G f^*h_V. The functor is the canonical overFunctor restriction with overFunctorMap transitions. IsEquivalence covers reconstruction and existence/uniqueness of maps. No extra hypotheses or universe restrictions; the iterated-slice Prop instances are transported along iteratedSliceEquiv; theorem proofs are all sorry; lean.statement is verbatim; docstrings carry sources. The worker had no compile evidence (the disk filled on every attempt), so I compiled both files once, unchanged, via nt_compile --json: clean (38.3 s and 25.8 s, exit 0)."
+ }
+}

@@ -1,0 +1,223 @@
+{
+ "id": "lem-sfb-smooth-curve-relative-frobenius-degree",
+ "kind": "statement",
+ "title": "Relative Frobenius of a smooth proper curve has degree p to the n",
+ "statement": "Let $k$ be an algebraically closed field of characteristic $p>0$ [def-weil-field], [def-weil-algebraic-closure], [def-pc-field-characteristic], and let $C$ be a smooth proper integral $k$-curve of dimension one [def-sc-curves], [def-pc-integral-scheme]. For each integer $n\\geq0$ put\n$$C^{(p^n)}=C\\times_{\\operatorname{Spec}k,\\operatorname{Spec}(\\varphi_n)}\\operatorname{Spec}k,\\qquad \\varphi_n(a)=a^{p^n},$$\nwith $k$-structure the second projection [def-pc-base-change]. Let $F_{C/k,n}:C\\to C^{(p^n)}$ be the morphism with projections $F_C^n$ and the structure morphism of $C$, where $F_C$ is absolute Frobenius [def-weil-absolute-frobenius-scheme]. For $n=0$, use the canonical identification $C^{(1)}\\cong C$ and the identity morphism. Then $C^{(p^n)}$ is a smooth proper integral $k$-curve of dimension one, $F_{C/k,n}$ is nonconstant (it does not factor through a $k$-rational point), and its induced function-field embedding [def-sc-function-field], [def-pc-field-extension] has degree [def-pc-field-tower]\n$$[k(C):F_{C/k,n}^*k(C^{(p^n)})]=p^n.$$",
+ "source": {
+  "document": "literature/stacks-project/varieties.tex",
+  "place": "Tag 0CCF (varieties-lemma-inseparable-deg-p-smooth), degree p in dimension one; Tag 0CCG (varieties-remark-n-fold-relative-frobenius), iteration. Smoothness and properness of the twist are the base-change observation in curves.tex Tag 0CCY (curves-lemma-inseparable-deg-p-smooth), first paragraph of proof. Include n=0 by the identity convention."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-weil-algebraic-closure",
+  "def-pc-field-characteristic",
+  "def-sc-curves",
+  "def-pc-integral-scheme",
+  "def-sc-function-field",
+  "def-pc-field-extension",
+  "def-pc-field-tower",
+  "def-pc-base-change",
+  "def-weil-absolute-frobenius-scheme"
+ ],
+ "proof": [
+  {
+   "text": "Positive characteristic $p$ is prime: otherwise two nonzero smaller integer multiples of $1_k$ would multiply to zero. The binomial theorem in characteristic $p$ gives $(x+y)^p=x^p+y^p$, so $c\\mapsto c^p$ is a unital ring homomorphism; its $n$-fold iterate is $\\varphi_n(c)=c^{p^n}$. This is injective since $(x-y)^{p^n}=0$ implies $x=y$ in a field, and surjective since $T^{p^n}-c$ has a root in $k$. Thus $\\varphi_n$ is a field automorphism, including $\\varphi_0=\\operatorname{id}_k$. Put $a:C\\to\\operatorname{Spec}k$ and $K=k(C)$.",
+   "uses": [
+    "def-pc-field-characteristic",
+    "def-weil-field",
+    "def-weil-algebraic-closure"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/curves.tex",
+    "place": "Tag 0CCY (lemma-inseparable-deg-p-smooth), first paragraph: elementary scalar Frobenius automorphism calculation over an algebraically closed field."
+   }
+  },
+  {
+   "text": "Apply the automorphism-twist lift statement with $\\sigma=\\varphi_n$ and $u=F_C^n$. Its compatibility $au=\\operatorname{Spec}(\\varphi_n)a$ holds because ring homomorphisms preserve powers; $u$ is the identity on points by the definition of absolute Frobenius. The resulting twist is a smooth proper integral curve of dimension one, and the unique lift is $F_{C/k,n}$ by its two projection equations. The same statement gives nonconstancy, the injective generic-stalk pullback, and an isomorphism $\\beta=\\pi^*:K\\xrightarrow{\\sim}k(C^{(p^n)})$ with $F_{C/k,n}^*\\beta=(F_C^n)^*$. The absolute-Frobenius definition makes the right side $x\\mapsto x^{p^n}$ on generic stalks. Since $\\beta$ is surjective, $F_{C/k,n}^*k(C^{(p^n)})=K^{p^n}$.",
+   "uses": [
+    "lem-sfb-automorphism-twist-curve-lift",
+    "def-weil-absolute-frobenius-scheme"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 0CCG (remark-n-fold-relative-frobenius), definition and commuting diagram, and Tag 03SM (definition-absolute-frobenius); the generic-stalk calculation is written out."
+   }
+  },
+  {
+   "text": "The smooth-curve p-basis statement applies to $C$ and yields the $K^p$-basis $(1,t,\\ldots,t^{p-1})$ of $K$, so its degree over $K^p$ is $p$. Apply the Frobenius-image field-tower statement with $d=p$ and this basis. It gives $[K:K^{p^n}]=p^n$. Substituting the image from step 2 proves the stated degree. For $n=0$ both $\\varphi_0$ and $F_C^0$ are identities, so the identity clause of the twist-lift statement identifies $F_{C/k,0}$ with the identity of $C$ and the tower formula gives degree $1$.",
+   "uses": [
+    "lem-sfb-smooth-curve-function-field-p-basis",
+    "lem-sfb-frobenius-image-field-tower-degree",
+    "lem-sfb-automorphism-twist-curve-lift"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 0CCG (remark-n-fold-relative-frobenius), iteration, implemented on the explicitly identified Frobenius images of function fields; fields.tex Tag 09G9 (lemma-multiplicativity-degrees)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-field-characteristic",
+  "def-weil-field",
+  "def-weil-algebraic-closure",
+  "lem-sfb-automorphism-twist-curve-lift",
+  "def-weil-absolute-frobenius-scheme",
+  "lem-sfb-smooth-curve-function-field-p-basis",
+  "lem-sfb-frobenius-image-field-tower-degree"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/curves.tex",
+  "place": "Tag 0CCY (lemma-inseparable-deg-p-smooth), both paragraphs: expand the differential/p-basis degree calculation and the base-change observation; apply to the n-fold map of varieties.tex Tag 0CCG via Frobenius images and field-degree multiplicativity. This is an explicit adaptation, not a verbatim reproduction of the étale-chart proof of 0CCF."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "relativeFrobenius|relative_frobenius|frobenius.*degree|degree.*frobenius",
+   "results": "0 hits; ; Mathlib/AlgebraicGeometry/ searched",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits do not give the degree or geometric properties of relative Frobenius on arbitrary smooth proper curves"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The relative Frobenius of a smooth variety of dimension d has degree p to the power d",
+   "results": "8 hits; LinearMap.frobenius, FiniteField.Extension.frob, frobenius_def, iterateFrobenius_eq_pow, FiniteField.Extension.frob_apply, frobenius, LinearMap.frobenius_def, iterateFrobeniusEquiv_eq_pow",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits do not give the degree or geometric properties of relative Frobenius on arbitrary smooth proper curves"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"frobenius\", \"Scheme\"",
+   "results": "0 hits; ",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits do not give the degree or geometric properties of relative Frobenius on arbitrary smooth proper curves"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a smooth proper integral curve over an algebraically closed field of characteristic p, its relative Frobenius has function field degree p and its Frobenius twist is again a smooth proper integral curve",
+   "results": "8 hits; WittVector.exists_frobenius_solution_fractionRing_aux, WittVector.exists_frobenius_solution_fractionRing, WittVector.isocrystal_classification, WittVector.StandardOneDimIsocrystal.frobenius_apply, WittVector.instIsocrystalStandardOneDimIsocrystal, IsAlgClosed.perfectRing, IsPurelyInseparable.iterateFrobenius, WittVector.Isocrystal.frobenius",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits do not give the degree or geometric properties of relative Frobenius on arbitrary smooth proper curves"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A nonsingular complete curve has a relative Frobenius morphism of degree p onto its Frobenius twist",
+   "results": "8 hits; WeierstrassCurve.Affine.Point.map_some, WittVector.StandardOneDimIsocrystal.frobenius_apply, PerfectClosure.frobenius_mk, WeierstrassCurve.Projective.comp_equiv_comp, WittVector.exists_frobenius_solution_fractionRing_aux, IsPurelyInseparable.iterateFrobenius, WittVector.exists_frobenius_solution_fractionRing, FiniteField.frobeniusAlgEquiv_apply",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits do not give the degree or geometric properties of relative Frobenius on arbitrary smooth proper curves"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The relative Frobenius of a smooth proper integral curve in characteristic p has degree p to the n after n iterations",
+   "results": "8 hits; IsPurelyInseparable.iterateFrobeniusₛₗ, IsPurelyInseparable.iterateFrobeniusₛₗ_algebraMap, IsPurelyInseparable.iterateFrobeniusₛₗ_algebraMap_base, IsPurelyInseparable.algebraMap_iterateFrobeniusₛₗ, IsPurelyInseparable.iterateFrobenius, IsPurelyInseparable.iterateFrobenius_algebraMap, IsPurelyInseparable.algebraMap_iterateFrobenius, iterateFrobeniusEquiv_def",
+   "date": "2026-10-22",
+   "verdict": "no match: these hits describe ring/field Frobenius but do not state the geometric relative-Frobenius curve degree theorem"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The relative Frobenius of a smooth curve over a perfect field has function field degree p",
+   "results": "8 hits; LinearMap.frobenius, FiniteField.Extension.frob, FiniteField.Extension.frob_apply, IsPurelyInseparable.iterateFrobenius, surjective_frobenius, PerfectRing.bijective_frobenius, bijective_frobenius, frobenius",
+   "date": "2026-10-22",
+   "verdict": "no match: these hits describe ring/field Frobenius but do not state the geometric relative-Frobenius curve degree theorem"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A nonsingular complete curve has a Frobenius twist and the iterated relative Frobenius induces a field extension of degree p^n",
+   "results": "8 hits; IsPurelyInseparable.iterateFrobeniusₛₗ, IsPurelyInseparable.iterateFrobenius, IsPurelyInseparable.algebraMap_iterateFrobeniusₛₗ, IsPurelyInseparable.iterateFrobeniusₛₗ_algebraMap, IsPurelyInseparable.iterateFrobenius_algebraMap, IsPurelyInseparable.algebraMap_iterateFrobenius, FiniteField.frobenius_pow, FiniteField.Extension.frob_apply",
+   "date": "2026-10-22",
+   "verdict": "no match: these hits describe ring/field Frobenius but do not state the geometric relative-Frobenius curve degree theorem"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-purely-inseparable-curve-frobenius",
+  "date": "2026-10-22",
+  "group": "Q15"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), auxiliary high-genus-cover argument in the alteration reduction: the finite-curve genus comparison used to exclude rational curves. Separation of the inseparable part before applying Riemann--Hurwitz (Stacks 0CD2). Within this auxiliary argument, Stacks 0CD2 proof, final sentence: identify the purely inseparable curve map with iterated relative Frobenius using 0CCZ. The relative-Frobenius degree input of Stacks 0CCY, first paragraph, iterated using 0CCG.",
+   "via": [
+    "lem-sfb-purely-inseparable-curve-frobenius",
+    "lem-sfb-curve-frobenius-separable-factorization",
+    "lem-sfb-finite-curve-genus-monotonicity",
+    "lem-sfb-high-genus-equivariant-cover",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-smooth-curve-relative-frobenius-degree",
+  "worker": "Q160",
+  "summary": "Repair of the released batch5 re-split: preserve the statement and original route; distribute twist/lift geometry, generic differential singleton p-basis calculation, and Frobenius-image field tower into three independent statement-only nodes. Reuse the existing field-image node. The old six argument texts and their precise destinations are retained in report.md; parent proof is a short assembly. Returned-head repair: rechecked the current DAG and every retained external citation, replaced the redundant field-image citation by the explicit generic-stalk calculation already supplied by the twist-lift statement, and refreshed the delivery report and citation manifest. The delivery tool rebases this overlay on current sheaf-dag. Repair of return at head 84f4e857e32: re-read current dependency statements and source passages; all eight citation quotes still match. Explicitly verify that the scalar power bijection is a unital ring homomorphism before using the automorphism-twist lemma, and retain the three independent statement-only nodes. The initial resumed server dry run passed at f87e6bee055; the updated overlay is checked again before publication.",
+  "blueprint": "Preserves the inherited ancestor (null) and via chain. The new nodes refine the curve-Frobenius auxiliary argument under det-thm-sf-ctf-stability-direct-images (3), exactly the 0CCY/0CCG differential/p-basis route of the previous six steps.",
+  "tool_uses": []
+ },
+ "tool_uses": [
+  "lem-sbc-smooth-relative-dimension-permanence",
+  "lem-weil-pbc-proper-fp-permanence",
+  "lem-weil-pbc-smooth-differentials-free-rank-fibre-dimension",
+  "lem-sc-integral-function-field-affine-fraction",
+  "lem-weil-pbc-kahler-differentials-localization",
+  "lem-weil-pbc-p-basis-exists",
+  "lem-weil-pbc-p-basis-differentials-basis",
+  "lem-weil-pbc-field-degree-multiplicativity"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q160-c6ecc41bb",
+  "group": "Q160",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q160-c6ecc41bb (reviewer sub-agent of L); spot-checked: Third head of the batch-5 re-split. The previous head, 84f4e857, was PASSed by the reader, then refused at landing because the side completion was never promoted to live (clones/live/coord/returns/Q160.md, 16:43 UTC); that is not a mathematical fault. Diff against 84f4: the three new nodes (lem-sfb-automorphism-twist-curve-lift, lem-sfb-smooth-curve-function-field-p-basis, lem-sfb-frobenius-image-field-tower-degree) are byte-identical. In the item only step-1 text, the step-1 source place and split_report changed; statement, stmt_deps, proof_deps, source, blueprint and lean records are unchanged. The new step 1 proves c↦c^p is a unital ring homomorphism via (x+y)^p=x^p+y^p, then shows φ_n is injective (no nilpotents in a field) and surjective (a root of T^{p^n}-c, nonconstant even for n=0). So φ_n is a field automorphism with φ_0=id, which is exactly the twist-lift hypothesis. I re-read every cited definition in this snapshot (the old run's DAG was cleaned up), and all cited ids exist and are in stmt_deps. Twist-lift node: π is an isomorphism with inverse (id_C,s^{-1}a); v=(u,a) is unique and equals π^{-1}u, so it is a homeomorphism and nonconstant; v^*β=(πv)^*=u^*; the identity clause holds; no k-linearity is claimed. p-basis node: k⊆K^p; dim Ω_{K/k}=1; by 07P2 (a)⇔(b) (more-algebra.tex line 11363) the p-basis is a singleton and [K:K^p]=p; properness is not needed. Tower node: α_i transports the basis, then 09G9 induction gives d^n. Assembly: a∘F_C^n=Spec(φ_n)∘a; the lift is F_{C/k,n}; the image is K^{p^n} because β is surjective; the degree is p^n; n=0 matches the identity convention. Tested on P^1/k(t), p=2, perfect K (d=1) and σ≠id; Spec k is excluded by the dimension-one hypothesis. The old six steps are all placed in comparable, self-contained nodes, and the parent is a short assembly. curves.tex 0CCY was read at lines 2573-2605. There is no SGA, and the three new ids are not yet in live or side-live. rg found no duplicate; the per-* p-basis nodes concern complete local rings. The inherited tool_uses list is advisory. Minor: the report names an absent citations.json. L must promote the side completion, or this landing loop repeats."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.Curve.RelativeFrobeniusDegree",
+  "declaration": "AlgebraicGeometry.smooth_proper_curve_relative_frobenius_degree",
+  "file": "lean/Sheaf/AlgebraicGeometry/Curve/RelativeFrobeniusDegree.lean",
+  "statement": "theorem smooth_proper_curve_relative_frobenius_degree (k : Type u) [Field k] [IsAlgClosed k] (p : ℕ) (hp : p.Prime) (hk : (p : k) = 0) (C : Scheme.{u}) (sC : C ⟶ Spec (.of k)) [IsCurve sC] [Smooth sC] [IsProper sC] [IsIntegral C] (hCdim : topologicalKrullDim C = 1) (n : ℕ) : ∃ (_ : IsIntegral (pullback sC (Spec.map (CommRingCat.ofHom (iterateFrobeniusOfPrime k hp hk n))))), IsCurve (pullback.snd sC (Spec.map (CommRingCat.ofHom (iterateFrobeniusOfPrime k hp hk n)))) ∧ Smooth (pullback.snd sC (Spec.map (CommRingCat.ofHom (iterateFrobeniusOfPrime k hp hk n)))) ∧ IsProper (pullback.snd sC (Spec.map (CommRingCat.ofHom (iterateFrobeniusOfPrime k hp hk n)))) ∧ topologicalKrullDim (pullback sC (Spec.map (CommRingCat.ofHom (iterateFrobeniusOfPrime k hp hk n))) : Scheme.{u}) = 1 ∧ ∃ hC : (p : Γ(C, ⊤)) = 0, ∃! F : C ⟶ pullback sC (Spec.map (CommRingCat.ofHom (iterateFrobeniusOfPrime k hp hk n))), F ≫ pullback.fst sC (Spec.map (CommRingCat.ofHom (iterateFrobeniusOfPrime k hp hk n))) = C.iterateFrobenius hp hC n ∧ F ≫ pullback.snd sC (Spec.map (CommRingCat.ofHom (iterateFrobeniusOfPrime k hp hk n))) = sC ∧ (¬ ∃ y : Spec (.of k) ⟶ pullback sC (Spec.map (CommRingCat.ofHom (iterateFrobeniusOfPrime k hp hk n))), y ≫ pullback.snd sC (Spec.map (CommRingCat.ofHom (iterateFrobeniusOfPrime k hp hk n))) = 𝟙 _ ∧ sC ≫ y = F) ∧ ∃ hη : F (genericPoint C) = genericPoint (pullback sC (Spec.map (CommRingCat.ofHom (iterateFrobeniusOfPrime k hp hk n))) : Scheme.{u}), Function.Injective (F.functionFieldMap hη).hom ∧ @FieldExtension.degree (pullback sC (Spec.map (CommRingCat.ofHom (iterateFrobeniusOfPrime k hp hk n)))).functionField C.functionField _ _ (F.functionFieldMap hη).hom.toAlgebra = ((p ^ n : ℕ) : WithTop ℕ)",
+  "branch": "sheaf-dag",
+  "by": "Q03",
+  "date": "2026-10-22",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-e45eb615b",
+  "group": "Q03",
+  "result": "pass",
+  "note": "Only the item lean record changed (node otherwise identical to live); lean.statement verbatim in file. Hypotheses: Field+IsAlgClosed, prime p with (p:k)=0 (equiv. char p>0), IsCurve (separated, LFT, QC, dim<=1 = def-sc-curves)+Smooth+IsProper+IsIntegral, dim C = 1, all n:N. Twist = actual pullback along Spec(iterateFrobeniusOfPrime, x^(p^n)) with pullback.snd structure; conclusions: twist IsIntegral/IsCurve/Smooth/IsProper/dim 1; ∃! F with fst = C.iterateFrobenius n and snd = sC (canonical); nonconstancy = no k-rational-point factorization; actual generic-stalk functionFieldMap; FieldExtension.degree (top if infinite) of k(C) over twist = p^n via F's algebra. n=0 covered by the same equations; p=2 and universes (k:Type u, Scheme.{u}) fine. No duplicate: existing relativeFrobenius decls are FiniteFieldDatum-specific/private/finiteness only; citer purely-inseparable-curve-frobenius uses the same convention. Docstrings carry source and blueprint ids and the six proof steps; no defs, only sorry. Advisory: unused private proof-dependency imports. No recompile (no file changed); worker dry run 78671ff3fa3 compiled."
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ }
+}

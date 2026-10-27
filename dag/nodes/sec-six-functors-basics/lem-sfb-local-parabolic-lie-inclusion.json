@@ -1,0 +1,351 @@
+{
+ "id": "lem-sfb-local-parabolic-lie-inclusion",
+ "kind": "statement",
+ "title": "Local comparison of parabolics from the closed-fibre Lie algebras",
+ "statement": "Let $A$ be a nonzero commutative Noetherian local ring [def-weil-pbc-noetherian-ring] with residue field $k$, and let $G$ be a smooth affine finitely presented group scheme over $S=\\operatorname{Spec}A$ [def-sc-group-scheme, def-sbc-smooth-morphisms, pqf-def-affine-morphism, def-sbc-locally-finite-presentation, def-weil-affine-spectrum]. Suppose its geometric fibres are connected reductive groups, meaning that they have no nontrivial smooth connected normal unipotent subgroup; unipotent means that all geometric points act by unipotent matrices in a faithful representation. Let $P,Q\\subseteq G$ be smooth closed subgroup schemes whose geometric fibres are parabolic subgroups, meaning smooth connected subgroups containing a Borel subgroup; a Borel is a maximal smooth connected solvable subgroup, and solvable means that successive derived subgroups become trivial. Suppose $P$ and $Q$ contain a common split torus $T\\simeq\\mathbf G_{m,S}^r$ whose geometric fibres are maximal tori of $G$, with $\\mathbf G_m(C)=C^\\times$. Regard the tangent Lie algebras of their closed fibres as subspaces of $\\operatorname{Lie}(G_k)$; the tangent space is the kernel of reduction from dual-number points at the identity. If $\\operatorname{Lie}(Q_k)\\subseteq\\operatorname{Lie}(P_k)$, then $Q\\subseteq P$ as closed subgroup schemes of $G$. In particular equality of these Lie algebras implies $P=Q$. When P and Q are Borel subgroup schemes containing T, equality of the sets of nonzero T-weights in their closed-fibre tangent spaces implies P=Q; in this case their zero-weight tangent summands are both Lie(T_k), and each occurring nonzero root summand is the corresponding one-dimensional root space of Lie(G_k).",
+ "source": {
+  "document": "literature/conrad-reductive-group-schemes.pdf",
+  "place": "Corollary 5.2.7(2), printed pp.155--156, specialized to a local base: every open neighborhood of the closed point is the whole base. Local copy WANTED; primary source read online.",
+  "url": "https://math.stanford.edu/~conrad/papers/luminysga3smf.pdf"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-noetherian-ring",
+  "def-sc-group-scheme",
+  "def-sbc-smooth-morphisms",
+  "pqf-def-affine-morphism",
+  "def-sbc-locally-finite-presentation",
+  "def-weil-affine-spectrum",
+  "def-sfb-geometric-parabolic-subgroup",
+  "def-sfb-universal-conjugation-weight",
+  "def-sfb-reductive-torus-centralizer-terminology",
+  "def-sfb-split-torus-over-ring",
+  "def-sc-group-scheme-subgroup",
+  "sk-d-tangent"
+ ],
+ "proof": [
+  {
+   "text": "The closed subgroups $P,Q$ are affine and finitely presented over $A$: a closed subscheme of the affine $G$ is a quotient of its finitely presented coordinate algebra, and that algebra is Noetherian by [lem-weil-pbc-finite-type-algebra-noetherian], so the defining ideals are finitely generated. Choose $\\lambda:\\mathbf G_m\\to T$ describing $P$ by [lem-sfb-local-parabolic-cocharacter-description]. Its use is valid for the given split torus and the stated geometric parabolic fibres. Regard conjugation by $\\lambda$ as an action on both $G$ and $Q$; it preserves $Q$ since $T\\subseteq Q$.",
+   "uses": [
+    "lem-weil-pbc-finite-type-algebra-noetherian",
+    "lem-sfb-local-parabolic-cocharacter-description"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/conrad-reductive-group-schemes.pdf",
+    "place": "Corollary 5.2.7(2) proof, p.155; Proposition 5.2.3, p.152"
+   }
+  },
+  {
+   "text": "Write $\\mathfrak g,\\mathfrak p,\\mathfrak q$ for the tangent modules. By [lem-sfb-relative-tangent-weight-base-change] they are finite projective, have finite character-weight decompositions for the full $T$-coaction, and their weights commute with reduction to $k$. Coarsen the character grading along $\\lambda$ to integer weights: $\\mathfrak q_j=\\bigoplus_{\\langle m,\\lambda\\rangle=j}\\mathfrak q_m$, and similarly for $\\mathfrak g,\\mathfrak p$. Each is finite projective. The inclusions on tangent modules, including after reduction, are injective: a closed subgroup is a subfunctor on every dual-number algebra. These maps preserve weights because the subgroup inclusions commute with conjugation. The tangent formula in [lem-sfb-relative-dynamic-subgroups] gives $\\mathfrak p=\\bigoplus_{j\\geq0}\\mathfrak g_j$.",
+   "uses": [
+    "lem-sfb-relative-tangent-weight-base-change",
+    "lem-sfb-relative-dynamic-subgroups"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/conrad-reductive-group-schemes.pdf",
+    "place": "Corollary 5.2.7(2), p.155; Theorem 4.1.7(4), p.112"
+   }
+  },
+  {
+   "text": "The assumed inclusion on closed-fibre tangent spaces now forces $\\mathfrak q_j\\otimes_A k=0$ for every $j<0$: its image lies both in the $j$-summand of $\\operatorname{Lie}(G_k)$ and in the sum of the nonnegative summands. Every $\\mathfrak q_j$ is finite, so [lem-weil-pbc-nakayama-local-generators], with the empty generating family, gives $\\mathfrak q_j=0$. Hence $\\mathfrak q$ has only nonnegative $\\lambda$-weights over $A$, and therefore after every base change.",
+   "uses": [
+    "lem-weil-pbc-nakayama-local-generators"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/conrad-reductive-group-schemes.pdf",
+    "place": "Corollary 5.2.7(2), p.155; explicit local-module version of the root-weight comparison"
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-relative-dynamic-subgroups] to the action on $Q$, and let $R=P_Q(\\lambda)\\subseteq Q$. It is smooth, affine, finitely presented, has connected geometric fibres, and its tangent module is the nonnegative part of $\\mathfrak q$, which step 3 shows is all of $\\mathfrak q$. These properties and tangent identifications commute with arbitrary base change. Over any algebraically closed $A$-field $F$, apply [lem-sfb-smooth-subgroup-tangent-generation] to the smooth connected group $Q_F$, the singleton family $R_F$, and the closed subgroup $K=R_F$. Its tangent image spans $\\operatorname{Lie}(Q_F)$, so $R_F=Q_F$. Now [lem-sfb-flat-geometric-fibre-open-criterion] gives $R\\xrightarrow{\\sim}Q$. The schemes are smooth over $A$; the closed immersion is finitely presented because both coordinate algebras are finite type over the Noetherian ring $A$.",
+   "uses": [
+    "lem-sfb-relative-dynamic-subgroups",
+    "lem-sfb-smooth-subgroup-tangent-generation",
+    "lem-sfb-flat-geometric-fibre-open-criterion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/conrad-reductive-group-schemes.pdf",
+    "place": "Corollary 5.2.7(2), p.155: P_Q(lambda) has full Lie algebra; fibrewise step made explicit"
+   }
+  },
+  {
+   "text": "For every $A$-algebra $B$, an element of $Q(B)=P_Q(\\lambda)(B)$ has its conjugation orbit extended to $\\operatorname{Spec}B[t]\\to Q_B$. Composing this extension with $Q_B\\hookrightarrow G_B$ proves that it belongs to $P_G(\\lambda)(B)=P(B)$. This proves $Q\\subseteq P$ as subgroup functors and hence as closed subgroup schemes. If the two closed-fibre Lie algebras are equal, repeat steps 1--5 with $P,Q$ exchanged. Both subgroup inclusions hold, and thus $P=Q$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/conrad-reductive-group-schemes.pdf",
+    "place": "Corollary 5.2.7(2), p.155, final functorial inclusion and symmetric equality consequence"
+   }
+  },
+  {
+   "text": "For the additional Borel assertion, extend $k$ to an algebraic closure $F$. The tangent base-change isomorphisms of [lem-sfb-affine-group-lie-tangent-calculus] are natural for inclusions and conjugation. Weight spaces commute with this extension by [lem-sfb-relative-tangent-weight-base-change], applied over the field $k$. By [lem-sfb-regular-cocharacter-borel-description], the tangent space of each of the Borels $P_F,Q_F$ is $\\operatorname{Lie}(T_F)$ plus its positive root spaces. By [lem-sfb-reductive-rank-one-reflections], the zero-weight space of $\\operatorname{Lie}(G_F)$ is $\\operatorname{Lie}(T_F)$ and every nonzero root space is one-dimensional. Thus each occurring weight space of a Borel is the whole ambient root space. These equalities descend to $k$: for an inclusion of finite-dimensional spaces, extend a basis of the smaller space to one of the larger; a nonzero quotient basis remains nonzero after tensoring with $F$. The zero summands of both Borels are consequently $\\operatorname{Lie}(T_k)$, and each occurring nonzero summand is the same ambient one-dimensional root space. Equality of their sets of nonzero character weights gives equality of their direct-sum tangent subspaces; the equality consequence of step 5 yields $P=Q$. This uses full torus characters, not their differentials or just their values on $T(k)$.",
+   "uses": [
+    "lem-sfb-affine-group-lie-tangent-calculus",
+    "lem-sfb-relative-tangent-weight-base-change",
+    "lem-sfb-regular-cocharacter-borel-description",
+    "lem-sfb-reductive-rank-one-reflections"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/conrad-reductive-group-schemes.pdf",
+    "place": "Corollary 5.2.7(2), p.155, Borel consequence; classical tangent descriptions in Sections 1 and 4"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-finite-type-algebra-noetherian",
+  "lem-sfb-local-parabolic-cocharacter-description",
+  "lem-sfb-relative-tangent-weight-base-change",
+  "lem-sfb-relative-dynamic-subgroups",
+  "lem-weil-pbc-nakayama-local-generators",
+  "lem-sfb-smooth-subgroup-tangent-generation",
+  "lem-sfb-flat-geometric-fibre-open-criterion",
+  "lem-sfb-affine-group-lie-tangent-calculus",
+  "lem-sfb-regular-cocharacter-borel-description",
+  "lem-sfb-reductive-rank-one-reflections"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/conrad-reductive-group-schemes.pdf",
+  "place": "Corollary 5.2.7(2), p.155, with a direct Nakayama version of its local weight argument. Primary PDF read online; local copy WANTED."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "Borel|positiveSystem|positive_system|rootSubgroup",
+   "results": "Mathlib/AlgebraicGeometry: 0 hits; []",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern abstract Lie subalgebras, root pairings or discrete-group representations, not this assertion about relative reductive group schemes and regular functions"
+  },
+  {
+   "tool": "leansearch",
+   "query": "In a split reductive group scheme, a Borel containing the maximal torus is the semidirect product of the torus with its positive root subgroups",
+   "results": "8 hits; [\"GroupExtension.Splitting.semidirectProductToGroupExtensionEquiv\", \"SemidirectProduct.mk_eq_inl_mul_inr\", \"SemidirectProduct.inl_left_mul_inr_right\", \"SemidirectProduct.inr_splitting\", \"RootDatum\", \"GroupExtension.Splitting.semidirectProductMulEquiv\", \"RootPairing.weylGroup\", \"SemidirectProduct.right_splitting\"]",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern abstract Lie subalgebras, root pairings or discrete-group representations, not this assertion about relative reductive group schemes and regular functions"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"RootPairing\", \"Base\"",
+   "results": "12 hits; [\"RootPairing.Base\", \"RootPairing.Base.support\", \"RootPairing.Base.IsPos\", \"RootPairing.Base.height\", \"RootPairing.Base.flip\", \"RootPairing.Base.height_ne_zero\", \"RootPairing.Base.isPos_iff\", \"RootPairing.Base.isPos_iff'\"]",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern abstract Lie subalgebras, root pairings or discrete-group representations, not this assertion about relative reductive group schemes and regular functions"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Borel subgroups containing a split maximal torus over a local ring correspond to positive root systems and are products of the torus and the positive root subgroups",
+   "results": "8 hits; [\"RootPairing.GeckConstruction.h'\", \"RootPairing.GeckConstruction.cartanSubalgebra'\", \"RootPairing.Base.exists_eq_sum_and_forall_sum_mem_of_isPos\", \"RootPairing.baseOf_root_eq_baseOf_coroot\", \"RootPairing.GeckConstruction.h_mem_cartanSubalgebra'\", \"RootPairing.GeckConstruction.ωConjLieSubmodule_eq_top_iff\", \"LieAlgebra.cartan_sup_iSup_rootSpace_eq_top\", \"RootPairing.GeckConstruction.cartanSubalgebra_le_lieAlgebra\"]",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern abstract Lie subalgebras, root pairings or discrete-group representations, not this assertion about relative reductive group schemes and regular functions"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Relative Borel subgroup is determined by its positive roots in the adjoint torus action",
+   "results": "8 hits; [\"RootPairing.baseOf_root_eq_baseOf_coroot\", \"LieSubalgebra.root\", \"RootPairing.Base.mk.inj\", \"RootPairing.Base.apply_mem_range_root_of_cartanMatrixEq\", \"RootPairing.Base.IsPos.sub\", \"RootPairing.Base.IsPos.induction_on_reflect\", \"LieAlgebra.IsKilling.sl2SubmoduleOfRoot_eq_sup\", \"RootPairing.span_orbit_eq_top\"]",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern abstract Lie subalgebras, root pairings or discrete-group representations, not this assertion about relative reductive group schemes and regular functions"
+  },
+  {
+   "tool": "grep",
+   "query": "Parabolic|parabolic|Borel",
+   "results": "Mathlib/AlgebraicGeometry: 0 hits; []",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern abstract Lie subalgebras, root pairings or discrete-group representations, not this assertion about relative reductive group schemes and regular functions"
+  },
+  {
+   "tool": "leansearch",
+   "query": "For parabolic subgroups P and Q of a reductive group scheme containing a common maximal torus, inclusion of Lie algebras in one fibre implies subgroup inclusion near that point",
+   "results": "8 hits; [\"LieSubalgebra.ofLe\", \"LieSubalgebra.mem_ofLe\", \"LieSubalgebra.le_def\", \"LieSubalgebra.ofLe_eq_comap_incl\", \"LieSubalgebra.instPartialOrder\", \"LieSubalgebra.coe_ofLe\", \"LieSubalgebra.inclusion_apply\", \"LieSubalgebra.inclusion\"]",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern abstract Lie subalgebras, root pairings or discrete-group representations, not this assertion about relative reductive group schemes and regular functions"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Parabolic\", \"Lie\"",
+   "results": "0 hits; []",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern abstract Lie subalgebras, root pairings or discrete-group representations, not this assertion about relative reductive group schemes and regular functions"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Two parabolic subgroup schemes containing a common maximal torus over a local ring satisfy subgroup inclusion if their Lie algebras on the closed fibre satisfy inclusion",
+   "results": "8 hits; [\"LieSubalgebra.le_def\", \"LieSubalgebra.mem_ofLe\", \"LieAlgebra.le_zeroRootSubalgebra\", \"LieSubmodule.monotone_normalizer\", \"LieSubalgebra.instPartialOrder\", \"LieAlgebra.exists_engelian_lieSubalgebra_of_lt_normalizer\", \"LieSubmodule.ucs_mono\", \"LieSubmodule.normalizer_mono\"]",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern abstract Lie subalgebras, root pairings or discrete-group representations, not this assertion about relative reductive group schemes and regular functions"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Parabolic subgroups containing the same maximal torus are equal near a point where their fibre Lie algebras are equal",
+   "results": "8 hits; [\"RootPairing.GeckConstruction.ωConjLieSubmodule_eq_top_iff\", \"LieAlgebra.is_cartan_of_zeroRootSubalgebra_eq\", \"LieAlgebra.zeroRootSubalgebra_eq_of_is_cartan\", \"RootPairing.GeckConstruction.cartanSubalgebra_le_lieAlgebra\", \"LieAlgebra.zeroRootSubalgebra_eq_iff_is_cartan\", \"LieAlgebra.IsKilling.mem_sl2SubalgebraOfRoot_iff\", \"LieAlgebra.exists_isCartanSubalgebra_engel\", \"LieSubalgebra.normalizer_eq_self_of_isCartanSubalgebra\"]",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern abstract Lie subalgebras, root pairings or discrete-group representations, not this assertion about relative reductive group schemes and regular functions"
+  },
+  {
+   "tool": "grep",
+   "query": "parabolic|Parabolic|Borel",
+   "results": "0 hits; ",
+   "date": "2026-10-24",
+   "verdict": "no match: the results concern abstract Lie algebras, root pairings, or parabolic matrices, not relative parabolic subgroup schemes"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A parabolic subgroup containing a split maximal torus is the subgroup defined by nonnegative cocharacter weights",
+   "results": "8 hits; Subgroup.HasDetPlusMinusOne.isParabolic_iff_of_upperTriangular, Matrix.IsParabolic, Matrix.GeneralLinearGroup.IsParabolic, Matrix.GeneralLinearGroup.isParabolic_iff_of_upperTriangular_of_det, RootPairing.range_weylGroup_coweightHom, RootPairing.weylGroup, Matrix.GLPos, RootPairing.range_weylGroup_weightHom",
+   "date": "2026-10-24",
+   "verdict": "no match: the results concern abstract Lie algebras, root pairings, or parabolic matrices, not relative parabolic subgroup schemes"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Parabolic\", \"Lie\"",
+   "results": "0 hits; ",
+   "date": "2026-10-24",
+   "verdict": "no match: the results concern abstract Lie algebras, root pairings, or parabolic matrices, not relative parabolic subgroup schemes"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Parabolic subgroup schemes containing a common split maximal torus over a local ring are ordered by their closed fibre tangent Lie algebras",
+   "results": "8 hits; RootPairing.GeckConstruction.cartanSubalgebra_le_lieAlgebra, RootPairing.GeckConstruction.cartanSubalgebra', LieAlgebra.le_zeroRootSubalgebra, RootPairing.GeckConstruction.instIsTriangularizableSubtypeMatrixSumMemFinsetSupportLieSubalgebraLieAlgebraCartanSubalgebra'Forall, RootPairing.GeckConstruction.ωConjLieSubmodule_eq_top_iff, LieAlgebra.exists_engelian_lieSubalgebra_of_lt_normalizer, LieAlgebra.toLieSubmodule_le_rootSpace_zero, LieAlgebra.IsKilling.mem_sl2SubalgebraOfRoot_iff",
+   "date": "2026-10-24",
+   "verdict": "no match: the results concern abstract Lie algebras, root pairings, or parabolic matrices, not relative parabolic subgroup schemes"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A smooth connected subgroup of a reductive group containing a maximal torus is determined by its torus and root subgroups",
+   "results": "8 hits; MulAction.IwasawaStructure.mk.inj, RootPairing.GeckConstruction.cartanSubalgebra', RootPairing.GeckConstruction.instHasTrivialRadical, RootPairing.GeckConstruction.ωConjLieSubmodule_eq_top_iff, LieAlgebra.cartan_sup_iSup_rootSpace_eq_top, LieAlgebra.zeroRootSubalgebra_eq_iff_is_cartan, LieAlgebra.is_cartan_of_zeroRootSubalgebra_eq, LieAlgebra.zeroRootSubalgebra_eq_of_is_cartan",
+   "date": "2026-10-24",
+   "verdict": "no match: the results concern abstract Lie algebras, root pairings, or parabolic matrices, not relative parabolic subgroup schemes"
+  },
+  {
+   "tool": "grep",
+   "query": "cocharacter|Parabolic|parabolic",
+   "results": "0 hits; ",
+   "date": "2026-10-24",
+   "verdict": "no match: the results concern abstract Lie algebras, root pairings, or parabolic matrices, not relative parabolic subgroup schemes"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A parabolic subgroup scheme over a local base containing a split maximal torus is P of a cocharacter",
+   "results": "8 hits; Matrix.GeneralLinearGroup.IsParabolic, Matrix.isParabolic_conj'_iff, Matrix.isParabolic_conj_iff, Matrix.isParabolic_iff_exists, Matrix.GeneralLinearGroup.isParabolic_iff_of_upperTriangular_of_det, Matrix.IsParabolic, Subgroup.HasDetPlusMinusOne.isParabolic_iff_of_upperTriangular, Matrix.GeneralLinearGroup.isParabolic_conj_iff'",
+   "date": "2026-10-24",
+   "verdict": "no match: the results concern abstract Lie algebras, root pairings, or parabolic matrices, not relative parabolic subgroup schemes"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"cocharacter\"",
+   "results": "0 hits; ",
+   "date": "2026-10-24",
+   "verdict": "no match: the results concern abstract Lie algebras, root pairings, or parabolic matrices, not relative parabolic subgroup schemes"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Every parabolic subgroup scheme containing a split maximal torus over a local ring is the limit subgroup of a cocharacter of that torus",
+   "results": "8 hits; RootPairing.GeckConstruction.cartanSubalgebra', RootPairing.GeckConstruction.ωConjLieSubmodule_eq_top_iff, RootPairing.GeckConstruction.h_mem_cartanSubalgebra', RootPairing.GeckConstruction.cartanSubalgebra_le_lieAlgebra, LieAlgebra.IsKilling.biSup_corootSpace_eq_top, LieAlgebra.cartan_sup_iSup_rootSpace_eq_top, LieAlgebra.corootSpace, LieAlgebra.IsKilling.biSup_corootSubmodule_eq_cartan",
+   "date": "2026-10-24",
+   "verdict": "no match: the results concern abstract Lie algebras, root pairings, or parabolic matrices, not relative parabolic subgroup schemes"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Relative parabolic subgroups containing a fixed split torus have a dynamic description by some one parameter subgroup",
+   "results": "8 hits; Subgroup.IsRegularAtInfty, MulAction.IwasawaStructure.is_generator, Subgroup.widthInfty, Subgroup.strictWidthInfty_eq_one_of_T_mem, Subgroup.IsRegularAtInfty.eq, Subgroup.strictWidthInfty, Subgroup.periods, Subgroup.strictPeriods",
+   "date": "2026-10-24",
+   "verdict": "no match: the results concern abstract Lie algebras, root pairings, or parabolic matrices, not relative parabolic subgroup schemes"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-dvr-double-flag-invariant-boundary",
+  "date": "2026-10-24",
+  "group": "NI"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Haboush symmetric-power lifting for a trivial quotient representation. Supporting representation-theoretic input: Steinberg endomorphisms detect a nonzero fixed vector. Supporting Self-duality of rho section modules at characteristic-dependent weights. Supporting input: Positive-characteristic simplicity step, using irreducibility of the Steinberg induced module rather than assuming self-duality. Numerical input to the dimension comparison: Weyl dimension of the induced module. Supporting Kempf vanishing for dominant flag line bundles. Positive-characteristic Andersen–Haboush argument: trivial pushforward of M_((p^r-1)rho), before the Serre twisting calculation. Supporting input: Lemma 2.3, second assertion, and Lemma 2.1, printed pp.153--155: H^0(u,V(lambda))=K v_lambda for p-restricted dominant lambda. With roots positive in Lie(B), V(lambda)=Gamma(M_{-w0 lambda}). Supporting input: Simple-root distributions and infinitesimal subalgebra calculus. Supporting input: pinning-compatible integral-to-geometric distribution comparison, with all positive root divided powers, before simple-root generation. Integral-root-model prerequisite before the comparison: integral Chevalley construction and a positive-root coordinate chart; integral matrix-closure construction: the big cell and its Weyl translates, before identifying the special fibre. Supporting input: Integral closure atlas, exhaustion of each special fibre: exclude extra components using the generic and special identity-component big-cell dimensions. Supporting input: Lemma 3.7 (first assertion, the Iwahori--Matsumoto maximal-boundedness statement) and its application in Proposition 4.3, second paragraph, printed pp.7-8; Cartan double-coset input used to prove the maximal-boundedness prerequisite, before the torus-powers argument. Supporting input: Theorem 1.3, implication (1) to (3), printed pp.1, 6; Definition 3.4 and Lemma 3.6, printed pp.5-6. The complete-DVR cocharacter form, before the non-complete descent of Theorem 4.1. Supporting input: Section 2, Claim 2, printed p.2; Section 3, proof of Theorem 1.3, (1) implies (2), printed p.6, removes the residue-field and splitness restrictions. Supporting input: Claim 2: choose a linear embedding and use reductivity to make the homogeneous quotient affine. Supporting input: Alper, Adequate moduli spaces and geometrically reductive group schemes, Theorem 9.7.5, Proposition 9.3.1(i), Lemma 9.2.5(2),(3), printed pp.522,524,527--528. WANTED local copy; read https://content.algebraicgeometry.nl/2014-4/2014-4-022.pdf. Supporting input: Lemmas 9.7.2(1),(2), Remark 9.7.3, Lemma 9.7.4 and their combination in Theorem 9.7.5, printed pp.526--528. Use primitive v, not an arbitrary invariant vector; select arbitrarily large Steinberg weights when char(kappa)>0. Supporting integral input: Lemma 9.7.2(2), printed pp.526--527; Seshadri Property I(b), p.247. The necessary condition v not in the maximal ideal times V is explicit here: v=0 or v in mV cannot have nonzero reduction under any A-linear map. Integral double-flag proof of eventual detection: Integral opposite double flags and their invariant rho boundary. Supporting input: identify the supplied Borel with the root-product Borel before constructing the integral opposite cell; Conrad Corollary 5.2.7(2)",
+   "via": [
+    "lem-sfb-dvr-double-flag-invariant-boundary",
+    "lem-sfb-dvr-rho-tensor-square-eventual-detection",
+    "lem-sfb-dvr-primitive-endomorphism-detector",
+    "lem-sfb-reductive-ring-invariant-power-lifting",
+    "lem-sfb-dvr-reductive-linear-affine-quotient",
+    "lem-sfb-reductive-nodal-equivariant-torsor-extension",
+    "lem-sfb-complete-dvr-cocharacter-cartan",
+    "lem-sfb-split-reductive-dvr-cartan-decomposition",
+    "lem-sfb-split-reductive-integral-maximal-bounded",
+    "lem-sfb-quasi-reductive-special-connectedness",
+    "lem-sfb-integral-chevalley-weyl-atlas",
+    "lem-sfb-chevalley-integral-root-model",
+    "lem-sfb-borel-kostant-distribution-comparison",
+    "lem-sfb-borel-simple-root-distribution-calculus",
+    "lem-sfb-restricted-induced-infinitesimal-invariants",
+    "lem-sfb-flag-frobenius-rho-pushforward",
+    "lem-sfb-dominant-flag-line-kempf-vanishing",
+    "lem-sfb-induced-weyl-dimension-formula",
+    "lem-sfb-steinberg-induced-module-irreducible",
+    "lem-sfb-rho-section-self-duality",
+    "lem-sfb-steinberg-endomorphism-detection",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-local-parabolic-lie-inclusion",
+  "worker": "stage1",
+  "summary": "Preserved the statement. Isolated the single-parabolic cocharacter description, then used existing relative tangent weights, Nakayama and dynamic subgroups to prove inclusion, with explicit fibrewise isomorphism and Borel weight clauses. No Lean attachment found.",
+  "blueprint": "Current latest det-thm-sf-ctf-stability-direct-images proof (3), inherited alteration prerequisite chain: identify the supplied Borel before the integral opposite cell. The inherited null ancestor was confirmed by blueprint_refs.py; no unit or chapter route changed."
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q10-7b4e38882",
+  "group": "Q10",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q10-7b4e38882 (reviewer sub-agent of L); spot-checked: PASS. I read the item's 6 new steps, the new unsplit node lem-sfb-local-parabolic-cocharacter-description and the full statements of all 10 cited nodes. New node (Conrad Prop. 5.2.3 on a local base, i.e. a relative parabolic H ⊇ split maximal T equals P_G(λ)): the statement is true. Over the local ring the root set is constant because the weight summands are free. Field case checked in Milne iAG2017 Ch. 21. Edge cases H=G with λ=0, empty root system, nonreduced A and GL_2 all hold. It is self-contained and not a clause of the item. No duplicate: the field versions (prescribed-split-cocharacter, split-parabolic-root-sign-cone), local-borel-quotient-geometry (Borels only) and local-split-root-data-weyl-lifts (root data only) do not cover it. Steps: (1) Noetherian finite presentation; λ for P; conjugation by λ preserves Q since T ⊆ Q. (2) tangent-weight-base-change applied to G, P, Q; coarsening along λ is elementary; Lie(P) = ⊕_{j≥0} 𝔤_j from relative-dynamic-subgroups. (3) Negative weights vanish on the closed fibre, then Nakayama with N=0; correctly marked elementary. (4) P_Q(λ) is smooth with tangent module all of 𝔮; tangent-generation gives R_F=Q_F; the fibre criterion applies (smooth source, finite-type target, finitely presented closed immersion). (5) Composing the extended orbit gives Q ⊆ P; the equality clause follows by symmetry. (6) Borel clause: field extension, regular-cocharacter Borel tangent formula and rank-one reflections give Lie_0 = Lie(T) and one-dimensional root spaces; descent by dimension; uses characters, not differentials. No cycle; cited nodes are in the same unit or are Mathlib leaves. Batch-5: the four flagged citations reach only lem-trf-geometric-fibre-unramified-criterion (Stacks 02G8) and lem-trf-smooth-fpqc-base-descent (02VL Mathlib leaf). Both are generic scheme facts, not parts of the trace formula or Poincaré duality, so the citations are accepted. Note: 'P,Q contain a common split torus T' is read as a closed subgroup, as Conrad uses it; the statement is immutable here. Conrad is not available locally (WANTED recorded). No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.GroupScheme.LocalParabolicLieInclusion",
+  "declaration": "AlgebraicGeometry.LocalParabolic.local_parabolic_lie_inclusion",
+  "declarations": [
+   "AlgebraicGeometry.LocalParabolic.lieImage",
+   "AlgebraicGeometry.LocalParabolic.weightImage",
+   "AlgebraicGeometry.LocalParabolic.local_parabolic_lie_inclusion"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/GroupScheme/LocalParabolicLieInclusion.lean",
+  "statement": "theorem local_parabolic_lie_inclusion (A : Type u) [CommRing A] [IsNoetherianRing A] [IsLocalRing A] (G P Q T : Grp (Over (Spec (.of A)))) [Smooth G.X.hom] [IsAffineHom G.X.hom] [LocallyOfFinitePresentation G.X.hom] (hred : ∀ (F : Type u) [Field F] [IsAlgClosed F] (f : A →+* F), ReductiveTorusCentralizer.IsReductive ((GeometricParabolic.fibre f).obj G)) (iP : P ⟶ G) (iQ : Q ⟶ G) [IsClosedImmersion iP.hom.hom.left] [IsClosedImmersion iQ.hom.hom.left] [Smooth P.X.hom] [Smooth Q.X.hom] (hP : GeometricParabolic.HasParabolicFibres iP) (hQ : GeometricParabolic.HasParabolicFibres iQ) (iT : T ⟶ G) [IsClosedImmersion iT.hom.hom.left] (jP : T ⟶ P) (jQ : T ⟶ Q) (hjP : jP ≫ iP = iT) (hjQ : jQ ≫ iQ = iT) (r : ℕ) (eT : T ≅ RingGroupSchemes.splitTorus A r) (hmax : ∀ (F : Type u) [Field F] [IsAlgClosed F] (f : A →+* F), ReductiveTorusCentralizer.IsMaximalTorus ((GeometricParabolic.fibre f).map iT)) : (lieImage iQ ≤ lieImage iP → ∃ j : Q ⟶ P, j ≫ iP = iQ) ∧ (lieImage iP = lieImage iQ → ∃ e : P ≅ Q, e.hom ≫ iQ = iP) ∧ (GeometricParabolic.HasBorelFibres iP → GeometricParabolic.HasBorelFibres iQ → (({χ | χ.hom.hom ≠ 1 ∧ weightImage iT iP χ ≠ ⊥} = {χ | χ.hom.hom ≠ 1 ∧ weightImage iT iQ χ ≠ ⊥} → ∃ e : P ≅ Q, e.hom ≫ iQ = iP) ∧ weightImage iT iP 0 = lieImage iT ∧ weightImage iT iQ 0 = lieImage iT ∧ ∀ χ : RankOneRoots.Character ((GeometricParabolic.fibre (residue A)).obj T), χ.hom.hom ≠ 1 → (weightImage iT iP χ ≠ ⊥ → weightImage iT iP χ = UniversalConjugationWeight.weight ((GeometricParabolic.fibre (residue A)).map iT) χ ∧ Module.finrank (ResidueField A) (UniversalConjugationWeight.weight ((GeometricParabolic.fibre (residue A)).map iT) χ) = 1) ∧ (weightImage iT iQ χ ≠ ⊥ → weightImage iT iQ χ = UniversalConjugationWeight.weight ((GeometricParabolic.fibre (residue A)).map iT) χ ∧ Module.finrank (ResidueField A) (UniversalConjugationWeight.weight ((GeometricParabolic.fibre (residue A)).map iT) χ) = 1)))",
+  "branch": "newtargets-dag",
+  "by": "Q111",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-77e8f1911",
+  "group": "Q111",
+  "result": "pass",
+  "note": "Item Lean matches node clause by clause. Noetherian local A; G smooth + IsAffineHom + LocallyOfFinitePresentation; hred and hmax at every alg-closed F:Type u; iP, iQ smooth closed-immersion Grp morphisms with HasParabolicFibres; T closed, split via eT, factoring through P and Q. Conclusions: Lie(Q_k)≤Lie(P_k) → ∃ j, j≫iP=iQ; Lie equality → embedded P≅Q; Borel clause has weight-set equality → P=Q, zero summand = lieImage iT (0 = Mathlib Grp zero morphism = trivial character), and occurring nonzero summand = ambient weight χ with finrank 1, for both P and Q. New def-sfb-universal-conjugation-weight is real data (i(t)s₁(v)i(t)⁻¹ = s_{χ(t)}(v) on all B-points via DualNumber.lift); it is not a duplicate of TorusCharacterTangent.weightSpace, which tests rational points only. New GeometricParabolic.fibre is the canonical Over.pullback.mapGrp. Lie API owned by sk-d-tangent, which is cited directly. lean.statement verbatim for item and both new nodes; docstrings and 6-step proof plan present; only sorry; universes all u; no extra hypotheses; no duplicate parabolic notion found. Report has both sections; the second reading is the worker's own pass. No compile (no changes). NOTE: parallel Q96 d920 (S2 PASS 19:54, unlanded, same item file, other helper module FunctorialAdjointWeights): only one may land; the second lander must not rebind."
+ }
+}

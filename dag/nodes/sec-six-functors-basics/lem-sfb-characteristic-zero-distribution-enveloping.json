@@ -1,0 +1,248 @@
+{
+ "id": "lem-sfb-characteristic-zero-distribution-enveloping",
+ "kind": "statement",
+ "title": "Characteristic-zero enveloping algebra realization by distributions",
+ "statement": "Let $k$ be a field of characteristic zero [def-weil-field], and let $G$ be a smooth affine $k$-group scheme of finite type [def-sc-group-scheme, def-sbc-smooth-morphisms]. Write $C=k[G]$, $\\varepsilon:C\\to k$ for evaluation at the identity, $I=\\ker\\varepsilon$, and $\\Delta:C\\to C\\otimes_k C$ for the coordinate map of multiplication. Define\n$$\\operatorname{Dist}(G)=\\bigcup_{n\\geq0}\\operatorname{Hom}_k(C/I^{n+1},k),\\qquad (ab)(f)=(a\\otimes b)(\\Delta f),$$\nwith identity $\\varepsilon$. Identify $\\mathfrak l=\\operatorname{Lie}(G)$ with the linear maps $v:C\\to k$ satisfying $v(fg)=\\varepsilon(f)v(g)+v(f)\\varepsilon(g)$, with the tangent Lie bracket; equivalently it is the commutator bracket of the left-invariant derivations $D_v=(\\operatorname{id}\\otimes v)\\Delta$. A Lie algebra has the meaning of [def-wf-lie-algebra]. Let $U_k(\\mathfrak l)=T_k(\\mathfrak l)/(xy-yx-[x,y]:x,y\\in\\mathfrak l)$. There is a unital $k$-algebra isomorphism\n$$\\Theta_G:U_k(\\mathfrak l)\\xrightarrow{\\sim}\\operatorname{Dist}(G)$$\nwhose value on a generator $v$ is the same functional $v:C\\to k$. It is natural for homomorphisms of smooth affine finite-type $k$-groups: for $f:G\\to G'$ one has\n$$f_*\\Theta_G=\\Theta_{G'}U_k(df),\\qquad (f_*a)(h)=a(f^*h).$$\nHere $U_k(df)$ is the algebra homomorphism induced by $df$ on the tensor-algebra quotients. No connectedness or semisimplicity assumption on $G$ is required.",
+ "source": {
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Section 10l, printed p.208: the natural inclusion of the tangent Lie algebra into distributions extends to the characteristic-zero enveloping-algebra isomorphism. Naturality follows from its values on generators and the tensor-quotient universal property."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-sc-group-scheme",
+  "def-sbc-smooth-morphisms",
+  "def-wf-lie-algebra",
+  "def-sfb-bialgebra-distribution-algebra",
+  "def-sfb-rational-highest-weight-data"
+ ],
+ "proof": [
+  {
+   "text": "The coordinate maps satisfy the commutative Hopf algebra axioms: the group diagrams become coassociativity, counit and antipode identities on functions. Apply [lem-sfb-bialgebra-distribution-tangent-calculus] to identify the displayed union with the filtered algebra $F=\\bigcup F_n$ and to identify its tangent-functionals bracket with convolution commutator. Thus $v\\mapsto v$ is a Lie map $\\mathfrak l\\to F$ for the bracket specified in the statement.",
+   "uses": [
+    "lem-sfb-bialgebra-distribution-tangent-calculus",
+    "def-sc-group-scheme"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Section 10l, printed p.208, applying Lemma 11.27, printed p.218; Theorem 10.36, printed pp.200--204"
+   }
+  },
+  {
+   "text": "Send a tensor word $v_1\\otimes\\cdots\\otimes v_r$ to $v_1*\\cdots*v_r$, and the empty word to $\\varepsilon$, extending linearly on each tensor degree and the direct sum. Multilinearity gives a map on tensor products; concatenation becomes multiplication. Each defining relation maps to $v*w-w*v-[v,w]=0$ by Step 1. The map therefore descends to a unital algebra map $\\Theta:U_k(\\mathfrak l)\\to F$, with the required generator values. Any map with these values agrees on every tensor word, so is unique.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Section 10l, printed p.208, applying Lemma 11.27, printed p.218; Theorem 10.36, printed pp.200--204"
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-hopf-augmentation-monomial-pairing] to $C$. Choose lifts $x_1,\\ldots,x_d$ of its cotangent basis. The corresponding $v_i$ form a basis of $\\mathfrak l=(I/I^2)^*$ by [lem-sfb-bialgebra-distribution-tangent-calculus]. Characteristic zero gives $n!\\ne0$ for every $n$, so the degree-$n$ coordinate monomials form a basis of $I^n/I^{n+1}$. By [lem-sfb-field-filtered-pbw], the ordered words $E^a=j(v_1)^{a_1}\\cdots j(v_d)^{a_d}$ with $|a|\\le n$ form a basis of $U_{\\le n}$, and those of degree exactly $n$ give its successive quotient basis.",
+   "uses": [
+    "lem-sfb-hopf-augmentation-monomial-pairing",
+    "lem-sfb-bialgebra-distribution-tangent-calculus",
+    "lem-sfb-field-filtered-pbw"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Section 10l, printed p.208, applying Lemma 11.27, printed p.218; Theorem 10.36, printed pp.200--204"
+   }
+  },
+  {
+   "text": "For $n\\ge1$, restriction to $I^n$ gives a surjection $F_n\\to(I^n/I^{n+1})^*$ with kernel $F_{n-1}$: extend a functional from the subspace $I^n/I^{n+1}\\subset C/I^{n+1}$ by a vector-space basis. Since $\\mathfrak l\\subseteq F_1$ and $F_r*F_s\\subseteq F_{r+s}$ by [lem-sfb-bialgebra-distribution-tangent-calculus], $\\Theta(U_{\\le n})\\subseteq F_n$, so $\\Theta$ is filtered. The factorial pairing in [lem-sfb-hopf-augmentation-monomial-pairing] says its degree-$n$ matrix in the Step-3 bases is diagonal with nonzero entries $\\prod a_i!$. Hence each successive quotient map is bijective. At $n=0$, $C/I=k$ and $\\Theta(c)=c\\varepsilon$, so the filtration-zero map is bijective.",
+   "uses": [
+    "lem-sfb-hopf-augmentation-monomial-pairing",
+    "lem-sfb-bialgebra-distribution-tangent-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Section 10l, printed p.208, applying Lemma 11.27, printed p.218; Theorem 10.36, printed pp.200--204"
+   }
+  },
+  {
+   "text": "Induct on $n$ to prove $\\Theta:U_{\\le n}\\to F_n$ bijective. The base is Step 4. Given $b\\in F_n$, lift its quotient class by the bijective degree-$n$ map; subtract that lift's image and use surjectivity at $n-1$. If an element has zero image, its degree-$n$ class is zero by injectivity on that quotient, so it belongs to $U_{\\le n-1}$ and vanishes by induction. Every tensor quotient element and every distribution belongs to a finite filtration step. Thus $\\Theta$ is bijective on the unions and is the claimed algebra isomorphism. The same argument covers $d=0$, where the positive quotient bases are empty.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Section 10l, printed p.208, applying Lemma 11.27, printed p.218; Theorem 10.36, printed pp.200--204"
+   }
+  },
+  {
+   "text": "For a group homomorphism $f:G\\to G'$, its coordinate map $q=f^*$ satisfies $\\varepsilon q=\\varepsilon'$ and $\\Delta q=(q\\otimes q)\\Delta'$. Thus $q(I')\\subset I$, so precomposition sends $F_n(G)$ into $F_n(G')$. For $h\\in k[G']$, $(f_*(a*b))(h)=(a\\otimes b)((q\\otimes q)\\Delta'h)=((f_*a)*(f_*b))(h)$, and $f_*\\varepsilon=\\varepsilon'$. On tangent functionals this map is $df(v)=v q$, so the commutator formula of Step 1 shows it preserves brackets. The tensor-word construction of Step 2 therefore defines $U_k(df)$. Both sides of the claimed naturality equation send each generator $v$ to $vq$; they agree on every word and hence everywhere. Neither this calculation nor Steps 1--5 uses connectedness or semisimplicity.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Section 10l, printed p.208, applying Lemma 11.27, printed p.218; Theorem 10.36, printed pp.200--204"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-bialgebra-distribution-tangent-calculus",
+  "def-sc-group-scheme",
+  "lem-sfb-hopf-augmentation-monomial-pairing",
+  "lem-sfb-field-filtered-pbw"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Section 10l, printed p.208, applying Lemma 11.27, printed p.218; Theorem 10.36, printed pp.200--204"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "DistAlgebra|DistributionAlgebra|hyperalgebra|distribution.{0,30}group|primitive.{0,30}envelop",
+   "results": "{\"t\": \"2026-10-23T23:44:11Z\", \"tool\": \"grep\", \"query\": \"DistAlgebra|DistributionAlgebra|hyperalgebra|distribution.{0,30}group|primitive.{0,30}envelop\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: abstract UniversalEnvelopingAlgebra.lift does not identify the algebraic-group tangent Lie bracket with convolution or prove the distribution isomorphism; manifold GroupLieAlgebra is for a different category"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Cartier theorem identifies the enveloping algebra of an algebraic group Lie algebra with its distribution algebra in characteristic zero",
+   "results": "{\"t\": \"2026-10-23T23:44:11Z\", \"tool\": \"leansearch\", \"query\": \"Cartier theorem identifies the enveloping algebra of an algebraic group Lie algebra with its distribution algebra in characteristic zero\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"UniversalEnvelopingAlgebra\", \"UniversalEnvelopingAlgebra.lift_unique\", \"UniversalEnvelopingAlgebra.lift\", \"UniversalEnvelopingAlgebra.ι\", \"instInhabitedUniversalEnvelopingAlgebra\", \"FreeLieAlgebra.universalEnvelopingEquivFreeAlgebra\", \"instRingUniversalEnvelopingAlgebra\", \"FreeLieAlgebra.universalEnvelopingEquivFreeAlgebra_apply\"], \"digest\": \"d70b1d295ec3f625\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: abstract UniversalEnvelopingAlgebra.lift does not identify the algebraic-group tangent Lie bracket with convolution or prove the distribution isomorphism; manifold GroupLieAlgebra is for a different category"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"UniversalEnvelopingAlgebra\", \"HopfAlgebra\"",
+   "results": "{\"t\": \"2026-10-23T23:44:11Z\", \"tool\": \"loogle\", \"query\": \"\\\"UniversalEnvelopingAlgebra\\\", \\\"HopfAlgebra\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: abstract UniversalEnvelopingAlgebra.lift does not identify the algebraic-group tangent Lie bracket with convolution or prove the distribution isomorphism; manifold GroupLieAlgebra is for a different category"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The universal enveloping algebra of the Lie algebra of a smooth affine algebraic group in characteristic zero maps naturally to distributions supported at the identity",
+   "results": "{\"t\": \"2026-10-23T23:44:16Z\", \"tool\": \"leanfinder\", \"query\": \"The universal enveloping algebra of the Lie algebra of a smooth affine algebraic group in characteristic zero maps naturally to distributions supported at the identity\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"UniversalEnvelopingAlgebra.ι_apply\", \"UniversalEnvelopingAlgebra.ι\", \"UniversalEnvelopingAlgebra.lift\", \"UniversalEnvelopingAlgebra.lift_ι_apply'\", \"UniversalEnvelopingAlgebra.lift_ι_apply\", \"instInhabitedUniversalEnvelopingAlgebra\", \"instAlgebraUniversalEnvelopingAlgebra\", \"UniversalEnvelopingAlgebra.mkAlgHom\"], \"digest\": \"042ff969e05b5622\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: abstract UniversalEnvelopingAlgebra.lift does not identify the algebraic-group tangent Lie bracket with convolution or prove the distribution isomorphism; manifold GroupLieAlgebra is for a different category"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The Lie algebra embeds as primitive first order distributions in the convolution algebra dual to an algebraic group coordinate Hopf algebra",
+   "results": "{\"t\": \"2026-10-23T23:46:05Z\", \"tool\": \"leanfinder\", \"query\": \"The Lie algebra embeds as primitive first order distributions in the convolution algebra dual to an algebraic group coordinate Hopf algebra\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"GroupLieAlgebra\", \"instLieAlgebraGroupLieAlgebra\", \"LeftInvariantDerivation.instLieAlgebra\", \"instLieRingGroupLieAlgebra\", \"instBracketGroupLieAlgebra\", \"GroupLieAlgebra.bracket_def\", \"instLieAlgebraAddGroupLieAlgebra\", \"LeftInvariantDerivation.instLieRing\"], \"digest\": \"395b7319658204a1\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: abstract UniversalEnvelopingAlgebra.lift does not identify the algebraic-group tangent Lie bracket with convolution or prove the distribution isomorphism; manifold GroupLieAlgebra is for a different category"
+  },
+  {
+   "tool": "grep",
+   "query": "DistributionAlgebra|DistAlgebra|Hyperalgebra|hyperalgebra|augmentation.*monomial|HopfAlgebra",
+   "results": "{\"t\": \"2026-10-24T00:18:23Z\", \"tool\": \"grep\", \"query\": \"DistributionAlgebra|DistAlgebra|Hyperalgebra|hyperalgebra|augmentation.*monomial|HopfAlgebra\", \"sub\": \"\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/HopfAlgebra/MonoidAlgebra.lean\", \"Mathlib/RingTheory/HopfAlgebra/MonoidAlgebra.lean\", \"Mathlib/RingTheory/HopfAlgebra/MonoidAlgebra.lean\", \"Mathlib/RingTheory/HopfAlgebra/MonoidAlgebra.lean\", \"Mathlib/RingTheory/HopfAlgebra/MonoidAlgebra.lean\", \"Mathlib/RingTheory/HopfAlgebra/Quotient.lean\", \"Mathlib/RingTheory/HopfAlgebra/Quotient.lean\", \"Mathlib/RingTheory/HopfAlgebra/Quotient.lean\"], \"digest\": \"6f7837cc3e176629\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: UniversalEnvelopingAlgebra.lift and lift_unique supply only the abstract universal property; GroupLieAlgebra is for normed manifolds; group-like independence is not the distribution comparison. Read Algebra/Lie/UniversalEnveloping.lean:46--150, Geometry/Manifold/GroupLieAlgebra.lean and RingTheory/Coalgebra/GroupLike.lean."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The distribution algebra of an algebraic group in characteristic zero is the universal enveloping algebra of its tangent Lie algebra",
+   "results": "{\"t\": \"2026-10-24T00:18:24Z\", \"tool\": \"leansearch\", \"query\": \"The distribution algebra of an algebraic group in characteristic zero is the universal enveloping algebra of its tangent Lie algebra\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"UniversalEnvelopingAlgebra\", \"UniversalEnvelopingAlgebra.lift\", \"UniversalEnvelopingAlgebra.Rel\", \"instRingUniversalEnvelopingAlgebra\", \"instInhabitedUniversalEnvelopingAlgebra\", \"UniversalEnvelopingAlgebra.ι\", \"UniversalEnvelopingAlgebra.lift_unique\", \"instAlgebraUniversalEnvelopingAlgebra\"], \"digest\": \"a261020792b91c69\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: UniversalEnvelopingAlgebra.lift and lift_unique supply only the abstract universal property; GroupLieAlgebra is for normed manifolds; group-like independence is not the distribution comparison. Read Algebra/Lie/UniversalEnveloping.lean:46--150, Geometry/Manifold/GroupLieAlgebra.lean and RingTheory/Coalgebra/GroupLike.lean."
+  },
+  {
+   "tool": "loogle",
+   "query": "UniversalEnvelopingAlgebra, Bialgebra",
+   "results": "{\"t\": \"2026-10-24T00:18:24Z\", \"tool\": \"loogle\", \"query\": \"UniversalEnvelopingAlgebra, Bialgebra\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: UniversalEnvelopingAlgebra.lift and lift_unique supply only the abstract universal property; GroupLieAlgebra is for normed manifolds; group-like independence is not the distribution comparison. Read Algebra/Lie/UniversalEnveloping.lean:46--150, Geometry/Manifold/GroupLieAlgebra.lean and RingTheory/Coalgebra/GroupLike.lean."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The universal enveloping algebra of the tangent Lie algebra of a smooth affine algebraic group in characteristic zero is its convolution algebra of distributions at the identity",
+   "results": "{\"t\": \"2026-10-24T00:18:25Z\", \"tool\": \"leanfinder\", \"query\": \"The universal enveloping algebra of the tangent Lie algebra of a smooth affine algebraic group in characteristic zero is its convolution algebra of distributions at the identity\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"UniversalEnvelopingAlgebra\", \"instInhabitedUniversalEnvelopingAlgebra\", \"instAlgebraUniversalEnvelopingAlgebra\", \"GroupLieAlgebra\", \"instRingUniversalEnvelopingAlgebra\", \"UniversalEnvelopingAlgebra.ι_apply\", \"instLieAlgebraGroupLieAlgebra\", \"UniversalEnvelopingAlgebra.ι\"], \"digest\": \"cbe3d3467d509af9\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: UniversalEnvelopingAlgebra.lift and lift_unique supply only the abstract universal property; GroupLieAlgebra is for normed manifolds; group-like independence is not the distribution comparison. Read Algebra/Lie/UniversalEnveloping.lean:46--150, Geometry/Manifold/GroupLieAlgebra.lean and RingTheory/Coalgebra/GroupLike.lean."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Primitive elements of the finite dual Hopf algebra generate all identity supported distributions in characteristic zero",
+   "results": "{\"t\": \"2026-10-24T00:19:32Z\", \"tool\": \"leanfinder\", \"query\": \"Primitive elements of the finite dual Hopf algebra generate all identity supported distributions in characteristic zero\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"linearIndepOn_isGroupLikeElem\", \"MonoidAlgebra.exists_finset_adjoin_eq_top\", \"AddMonoidAlgebra.exists_finset_adjoin_eq_top\", \"linearIndep_groupLikeVal\", \"HopfAlgebra.sum_mul_antipode_eq_smul\", \"HopfAlgebra.sum_mul_antipode_eq_algebraMap_counit\", \"HopfAlgebra.sum_antipode_mul_eq_smul\", \"HopfAlgebra.sum_antipode_mul_eq_algebraMap_counit\"], \"digest\": \"6a76224737c45a7f\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: UniversalEnvelopingAlgebra.lift and lift_unique supply only the abstract universal property; GroupLieAlgebra is for normed manifolds; group-like independence is not the distribution comparison. Read Algebra/Lie/UniversalEnveloping.lean:46--150, Geometry/Manifold/GroupLieAlgebra.lean and RingTheory/Coalgebra/GroupLike.lean."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-borel-kostant-distribution-comparison",
+  "date": "2026-10-24",
+  "group": "NY"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Haboush symmetric-power lifting for a trivial quotient representation. Supporting representation-theoretic input: Steinberg endomorphisms detect a nonzero fixed vector. Supporting Self-duality of rho section modules at characteristic-dependent weights. Supporting input: Positive-characteristic simplicity step, using irreducibility of the Steinberg induced module rather than assuming self-duality. Numerical input to the dimension comparison: Weyl dimension of the induced module. Supporting Kempf vanishing for dominant flag line bundles. Positive-characteristic Andersen–Haboush argument: trivial pushforward of M_((p^r-1)rho), before the Serre twisting calculation. Supporting input: Lemma 2.3, second assertion, and Lemma 2.1, printed pp.153--155: H^0(u,V(lambda))=K v_lambda for p-restricted dominant lambda. With roots positive in Lie(B), V(lambda)=Gamma(M_{-w0 lambda}). Supporting input: Simple-root distributions and infinitesimal subalgebra calculus. Supporting input: pinning-compatible integral-to-geometric distribution comparison, with all positive root divided powers, before simple-root generation. Rational comparison prerequisite: tangent distributions realize the rational enveloping algebra before integral restriction",
+   "via": [
+    "lem-sfb-borel-kostant-distribution-comparison",
+    "lem-sfb-borel-simple-root-distribution-calculus",
+    "lem-sfb-restricted-induced-infinitesimal-invariants",
+    "lem-sfb-flag-frobenius-rho-pushforward",
+    "lem-sfb-dominant-flag-line-kempf-vanishing",
+    "lem-sfb-induced-weyl-dimension-formula",
+    "lem-sfb-steinberg-induced-module-irreducible",
+    "lem-sfb-rho-section-self-duality",
+    "lem-sfb-steinberg-endomorphism-detection",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-characteristic-zero-distribution-enveloping",
+  "worker": "stage1",
+  "summary": "Read Milne 10l and its specified input 11.27 and 10.36; retained the statement and all prior searches. Reused the existing field-filtered PBW node, isolated bialgebra distribution calculus and Hopf augmentation monomial pairing, and wrote the tensor quotient, filtration induction and naturality explicitly. No project Lean declaration states this item.",
+  "blueprint": "Current latest blueprint det-thm-sf-ctf-stability-direct-images proof (3), supporting alteration/representation-theoretic chain recorded in blueprint.from.place: rational tangent distributions before integral restriction. No change to the unit or chapter route. Whole-blueprint searches for distribution, convolution, Hopf, augmentation, enveloping and PBW found no equal blueprint statement. The recorded nearest blueprint ancestor is null, as printed by blueprint_refs.py ancestor."
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q81-9c25acfec",
+  "group": "Q81",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q81-9c25acfec (reviewer sub-agent of L); spot-checked: FIX with one citation repair. Read Milne iAG2017 §10l printed p.208 (char 0: U(g)≅Dist(G), 'apply 11.27') and Lemma 11.27 with its proof on p.218. The item statement is unchanged and matches the source. New node 1, bialgebra-distribution-tangent-calculus, is true. Checked: Δ(I)⊆I⊗C+C⊗I gives F_r*F_s⊆F_{r+s}; L≅(I/I²)^*; D_v is a left-invariant derivation with inverse εD; ε(D_vD_w)=v*w, so [v,w]=v*w−w*v. It is not a duplicate of convolution-linear-map-algebra (associativity only), restricted-rational-differentiation (char p) or char-zero-differentiation-hom (alg. closed, connected, representations). New node 2, hopf-augmentation-monomial-pairing, is Milne 11.27 in its evaluated form. Checked by hand: the k⊕I slot expansion gives V^a(x^b)=δ_ab∏a_i! and V^a kills I^{|a|+1}. Small cases checked: C=k, G_a, G_m, G_a², α_p with n<p (n=p correctly excluded). It is not a duplicate of hopf-augmentation-height, the graded bialgebra monomial nodes, cartier-reduced or restricted-pbw-top-pairing. Steps 1-3 and 5-6 check, including PBW over any field, the order of factors in E^a vs V^a, the dual exact sequence, the filtered induction, the case d=0, q(I')⊆I, multiplicativity of f_* and bracket preservation by df. Fault C3/C4: step 4 said 'the order estimate in Step 1 makes Θ filtered', but step 1 states no such estimate, and the facts used (𝔩⊆F_1, F_r*F_s⊆F_{r+s}) belong to the calculus node, which step 4 did not cite. Fixed in fixes/dag/nodes/sec-six-functors-basics/lem-sfb-characteristic-zero-distribution-enveloping.json: step 4 now cites the calculus node and derives Θ(U_{≤n})⊆F_n; proof_deps unchanged. No SGA, no repair note, route stays in unit/definitions, no tool_uses.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.GroupScheme.CharacteristicZeroDistributionEnveloping",
+  "declaration": "AlgebraicGeometry.characteristicZero_distribution_enveloping",
+  "declarations": [
+   "AlgebraicGeometry.characteristicZero_distribution_enveloping"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/GroupScheme/CharacteristicZeroDistributionEnveloping.lean",
+  "statement": "theorem characteristicZero_distribution_enveloping (k : Type u) [Field k] [CharZero k] (G : Grp (Over (Spec (.of k)))) [IsAffine G.X.left] [Smooth G.X.hom] [LocallyOfFiniteType G.X.hom] [QuasiCompact G.X.hom] : ∃ ΘG : UniversalEnvelopingAlgebra k (tangentLieAlgebra k (coordinateAlgebra G)) ≃ₐ[k] distributionAlgebra k (coordinateAlgebra G), (∀ (v : tangentLieAlgebra k (coordinateAlgebra G)) (c : coordinateAlgebra G), (ΘG (UniversalEnvelopingAlgebra.ι k v)).val c = v.val c) ∧ ∀ (H : Grp (Over (Spec (.of k)))) [IsAffine H.X.left] [Smooth H.X.hom] [LocallyOfFiniteType H.X.hom] [QuasiCompact H.X.hom], ∃ ΘH : UniversalEnvelopingAlgebra k (tangentLieAlgebra k (coordinateAlgebra H)) ≃ₐ[k] distributionAlgebra k (coordinateAlgebra H), (∀ (v : tangentLieAlgebra k (coordinateAlgebra H)) (c : coordinateAlgebra H), (ΘH (UniversalEnvelopingAlgebra.ι k v)).val c = v.val c) ∧ ∀ f : G ⟶ H, ∃ (push : distributionAlgebra k (coordinateAlgebra G) →ₐ[k] distributionAlgebra k (coordinateAlgebra H)) (df : tangentLieAlgebra k (coordinateAlgebra G) →ₗ⁅k⁆ tangentLieAlgebra k (coordinateAlgebra H)) (Udf : UniversalEnvelopingAlgebra k (tangentLieAlgebra k (coordinateAlgebra G)) →ₐ[k] UniversalEnvelopingAlgebra k (tangentLieAlgebra k (coordinateAlgebra H))), (∀ (a : distributionAlgebra k (coordinateAlgebra G)) (c : coordinateAlgebra H), (push a).val c = a.val (coordinateMap f c)) ∧ (∀ (v : tangentLieAlgebra k (coordinateAlgebra G)) (c : coordinateAlgebra H), (df v).val c = v.val (coordinateMap f c)) ∧ (∀ v : tangentLieAlgebra k (coordinateAlgebra G), Udf (UniversalEnvelopingAlgebra.ι k v) = UniversalEnvelopingAlgebra.ι k (df v)) ∧ push.comp ΘG.toAlgHom = ΘH.toAlgHom.comp Udf",
+  "branch": "sheaf-dag",
+  "by": "Q149",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "Uses def-sfb-bialgebra-distribution-algebra for the actual distribution subalgebra and tangent Lie subalgebra, and the published canonical coordinate helpers. The bialgebra calculus theorem remains a proof dependency only; its node is not changed in this delivery."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-a9d42ce47",
+  "group": "Q149",
+  "result": "pass",
+  "note": "H2 repair of 0ce41f6e is correct: new definition node def-sfb-bialgebra-distribution-algebra (Bialgebra.distributionAlgebra Subalgebra and tangentLieAlgebra LieSubalgebra of WithConv(C→k), exact carriers, closure helpers sorried and true, real data, universes u v, no antipode/char assumption, fields and verbatim statement ok) replaces the theorem node in the item's stmt_deps; proof_deps unchanged; item JSON differs from live only in lean/stmt_deps; item Lean is identical to the reviewed version except the import. All item clauses match: char 0, smooth affine LFT+QC group, coordinateAlgebra/coordinateHopf, Dist as the I^{n+1}-annihilator union, ε-Leibniz tangent with convolution commutator (sign checked via ε(D_vD_w)=v*w), U as UniversalEnvelopingAlgebra, ≃ₐ with generator law, naturality with push/df/Udf each fixed by values via coordinateMap f, no connectedness. Edge cases C=k, finite étale, d=0. No compile (no change). Notes: Q148's landed calculus theorem module has parallel theorem-owned duplicates BialgebraDistribution.* (to be rebased on the new def node later); BorelDistributions predicates are group-specialised, not a duplicate; item docstring says 'imported calculus' though it is only a proof_dep."
+ }
+}

@@ -111,7 +111,18 @@
   "item": "lem-weil-pbc-exact-free-complex-last-minors-regular-sequence",
   "date": "2026-10-10"
  },
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
  "chapter": "sec-proper-base-change",
  "unit": "sk-thm-p1",
  "split_report": {
@@ -151,5 +162,37 @@
   "landing": "20261013T002357-L-2376469",
   "kind": "interface",
   "note": "independent Codex review: Delivered module compiles; theorem declaration matches the node, proof has allowed axioms only, and the sole direct importer compiles against narrowed imports."
+ },
+ "blueprint_update": {
+  "snapshot": "main-20261023-1620",
+  "commit": "7284bb09daf97437d544c51882b325f9c52cd345",
+  "changed": [
+   "statement",
+   "proof"
+  ],
+  "statement": "Let $(R,\\mathfrak m)$ be a local ring, $e\\ge2$ an integer and $0\\to R^{\\oplus n_e}\\xrightarrow{\\varphi_e}R^{\\oplus n_{e-1}}\\xrightarrow{\\varphi_{e-1}}\\cdots\\xrightarrow{\\varphi_1}R^{\\oplus n_0}$ a complex of finite free $R$-modules ($\\varphi_i\\circ\\varphi_{i+1}=0$ for $1\\le i\\le e-1$) which is exact at $R^{\\oplus n_e},R^{\\oplus n_{e-1}},\\dots,R^{\\oplus n_1}$. Let $x\\in\\mathfrak m$ be a nonzerodivisor of $R$ ($xy=0$ implies $y=0$), $\\bar R=R/xR$, and $\\bar\\varphi_i:\\bar R^{\\oplus n_i}\\to\\bar R^{\\oplus n_{i-1}}$ the $\\bar R$-linear map whose matrix is the matrix of $\\varphi_i$ with its entries reduced modulo $x$ (equivalently $\\varphi_i\\otimes_R\\bar R$). Then the complex $0\\to\\bar R^{\\oplus n_e}\\xrightarrow{\\bar\\varphi_e}\\bar R^{\\oplus n_{e-1}}\\to\\cdots\\xrightarrow{\\bar\\varphi_2}\\bar R^{\\oplus n_1}$ is exact at $\\bar R^{\\oplus n_e},\\bar R^{\\oplus n_{e-1}},\\dots,\\bar R^{\\oplus n_2}$.",
+  "proof": [
+   {
+    "text": "(The complex as a cochain complex of $R$-modules.) The category $\\Mod(R)$ of $R$-modules is abelian, with the usual kernels, cokernels and images. Put $F_i=R^{\\oplus n_i}$ ($0\\le i\\le e$) and reindex the given complex as a cochain complex $K$ of $R$-modules indexed by $\\mathbf N$: $K^j=F_{e-j}$ for $0\\le j\\le e$, $K^j=0$ for $j>e$, with $d^j=\\varphi_{e-j}:K^j\\to K^{j+1}$ for $0\\le j\\le e-1$ and $d^j=0$ for $j\\ge e$; $d^{j+1}\\circ d^j=\\varphi_{e-j-1}\\circ\\varphi_{e-j}=0$ for $0\\le j\\le e-2$ by hypothesis, and the other composites have a zero factor. Its cohomology is $H^j(K)=\\ker d^j/\\operatorname{im}d^{j-1}$ ($d^{-1}=0$), i.e. $H^{e-i}(K)=\\ker\\varphi_i/\\operatorname{im}\\varphi_{i+1}=:H_i(F_\\bullet)$ for $1\\le i\\le e$, with $\\varphi_{e+1}=0$. By the definition of exactness (in $\\Mod(R)$: $\\operatorname{im}=\\ker$ as submodules), the complex $0\\to F_e\\to\\cdots\\to F_0$ is exact at $F_i$ iff $\\ker\\varphi_i=\\operatorname{im}\\varphi_{i+1}$ (for $i=e$: iff $\\varphi_e$ is injective, the incoming arrow being $0\\to F_e$), i.e. iff $H_i(F_\\bullet)=0$. So the hypothesis says $H_i(F_\\bullet)=0$ for $1\\le i\\le e$.",
+    "uses": [],
+    "elementary": null
+   },
+   {
+    "text": "(The short exact sequence $0\\to F_\\bullet\\xrightarrow{x}F_\\bullet\\to F_\\bullet/xF_\\bullet\\to0$.) Let $\\mu_i:F_i\\to F_i$ be multiplication by $x$. Since each $\\varphi_i$ is $R$-linear, $\\varphi_i\\circ\\mu_i=\\mu_{i-1}\\circ\\varphi_i$, so $\\mu$ is a morphism of complexes $K\\to K$. It is injective in each degree: if $x(a_1,\\dots,a_{n_i})=0$ in the free module $F_i=R^{\\oplus n_i}$ then $xa_k=0$ for each coordinate, so $a_k=0$ as $x$ is a nonzerodivisor of $R$. Let $\\pi_i:F_i\\to\\bar R^{\\oplus n_i}$ reduce each coordinate modulo $x$; it is $R$-linear and surjective, and its kernel is the set of vectors with all coordinates in $xR$, which is $xF_i=\\operatorname{im}\\mu_i$. If $A_i=(a^{(i)}_{kl})$ is the matrix of $\\varphi_i$ (so $\\varphi_i(e_l)=\\sum_k a^{(i)}_{kl}f_k$ for the standard bases), then $\\pi_{i-1}(\\varphi_i(e_l))=\\sum_k\\overline{a^{(i)}_{kl}}\\,\\bar f_k=\\bar\\varphi_i(\\pi_i(e_l))$, hence $\\pi_{i-1}\\circ\\varphi_i=\\bar\\varphi_i\\circ\\pi_i$ by linearity. Consequently $\\bar\\varphi_i\\circ\\bar\\varphi_{i+1}\\circ\\pi_{i+1}=\\pi_{i-1}\\circ\\varphi_i\\circ\\varphi_{i+1}=0$, and $\\pi_{i+1}$ being surjective, $\\bar\\varphi_i\\circ\\bar\\varphi_{i+1}=0$: the reduced sequence is a complex. Regard it as a cochain complex $\\bar K$ of $R$-modules, $\\bar K^j=\\bar R^{\\oplus n_{e-j}}$ ($0\\le j\\le e$), $\\bar K^j=0$ ($j>e$), $\\bar d^j=\\bar\\varphi_{e-j}$ ($0\\le j\\le e-1$), $\\bar d^j=0$ otherwise. Then $\\pi:K\\to\\bar K$ is a morphism of complexes, $\\pi\\circ\\mu=0$, and in every degree $0\\to K^j\\xrightarrow{\\mu}K^j\\xrightarrow{\\pi}\\bar K^j\\to0$ is a short exact sequence of $R$-modules ($\\mu$ injective, $\\ker\\pi=\\operatorname{im}\\mu$, $\\pi$ surjective; trivially in degrees $j>e$).",
+    "uses": [],
+    "elementary": null
+   },
+   {
+    "text": "(Long exact sequence.) Apply the long exact cohomology sequence in the abelian category $\\Mod(R)$ to the degreewise short exact sequence $0\\to K\\xrightarrow{\\mu}K\\xrightarrow{\\pi}\\bar K\\to0$ of Step 2: for every $j\\ge0$ the sequence $H^j(K)\\xrightarrow{H^j(\\pi)}H^j(\\bar K)\\xrightarrow{\\delta^j}H^{j+1}(K)$ is exact. Let $2\\le i\\le e$ and $j=e-i$, so $0\\le j\\le e-2$. Then $H^j(K)=H_i(F_\\bullet)=0$ and $H^{j+1}(K)=H_{i-1}(F_\\bullet)=0$ by Step 1, since $i\\ge1$ and $i-1\\ge1$. Exactness at $H^j(\\bar K)$ gives $H^j(\\bar K)=\\ker\\delta^j=\\operatorname{im}H^j(\\pi)=0$.",
+    "uses": [],
+    "elementary": null
+   },
+   {
+    "text": "(Conclusion.) For $2\\le i\\le e$, Step 3 gives $0=H^{e-i}(\\bar K)=\\ker\\bar\\varphi_i/\\operatorname{im}\\bar\\varphi_{i+1}$ (with $\\bar\\varphi_{e+1}=0$), so $\\ker\\bar\\varphi_i=\\operatorname{im}\\bar\\varphi_{i+1}$ as subsets of $\\bar R^{\\oplus n_i}$; kernels and images of the $\\bar R$-linear maps $\\bar\\varphi_i$ are the same sets whether these maps are viewed as $R$- or $\\bar R$-linear. By the definition, the complex $0\\to\\bar R^{\\oplus n_e}\\xrightarrow{\\bar\\varphi_e}\\cdots\\xrightarrow{\\bar\\varphi_2}\\bar R^{\\oplus n_1}$ is exact at $\\bar R^{\\oplus n_i}$ for $i=e,\\dots,2$ (at $\\bar R^{\\oplus n_e}$ this says $\\bar\\varphi_e$ is injective). The hypotheses that $R$ is local and $x\\in\\mathfrak m$ are not used.",
+    "uses": [],
+    "elementary": null
+   }
+  ],
+  "note": "the current blueprint (main-20261023-1620, weil-conjectures-blueprint 7284bb09da) states or proves this differently; the node is proved in Lean: recorded 2026-10-23, not reopened"
  }
 }

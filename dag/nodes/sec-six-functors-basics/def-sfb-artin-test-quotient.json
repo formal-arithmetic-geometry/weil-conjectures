@@ -1,0 +1,132 @@
+{
+ "id": "def-sfb-artin-test-quotient",
+ "kind": "definition",
+ "title": "Canonical quotient of a marked Artinian test algebra",
+ "status": "split",
+ "statement": "Let $R$ be a commutative Noetherian ring, $k$ a finite type $R$-field, and $\\mathcal C_{R,k}$ the marked Artinian test category of [def-sfb-artin-deformation-test-category]. For a morphism $f:B\\to A$ and an ideal $L\\subseteq\\ker(f)$, define the quotient test $B/L$ to have underlying $R$-algebra the literal ideal quotient and augmentation $[b]\\mapsto\\overline{f(b)}\\in k$. This augmentation makes $B/L$ an Artinian local test with the specified residue field $k$. Define the canonical morphism $B/L\\to A$ by $[b]\\mapsto f(b)$; its residue compatibility follows from the definition of the augmentation. No surjectivity of $f$ is required for these constructions.",
+ "stmt_deps": [
+  "def-sfb-artin-deformation-test-category"
+ ],
+ "source": {
+  "document": "literature/stacks-project/formal-defos.tex",
+  "place": "Tag 06SZ (lemma-largest-closed-where-lift): the marked quotients B/J and their canonical maps to A."
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Quotient of a marked Artinian local algebra with specified residue field is a marked test algebra",
+   "results": "8 hits; top results: IsLocalRing.quotient_artinian_of_mem_minimalPrimes_of_isLocalRing, Algebra.FormallyUnramified.isField_quotient_map_maximalIdeal, IsLocalRing.ResidueField, Ideal.Quotient.algebraQuotientOfLEComap, IsLocalRing.residue, IsArtinianRing.fieldOfSubtypeIsMaximal, Algebra.FiniteType.quotient, algebra_finiteType_of_liesOver",
+   "date": "2026-10-24",
+   "verdict": "Mathlib provides ordinary ring quotients and quotient algebra maps, but no marked Artinian test quotient in the recorded test category; reuse Ideal.Quotient.liftₐ."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "canonical quotient of augmented Artinian local algebra by ideal in augmentation kernel with induced residue map",
+   "results": "8 hits; top results: IsLocalRing.CotangentSpace, instAlgebraQuotientIdealResidueField, Ideal.ResidueField, Algebra.Extension.infinitesimal, IsLocalRing.ResidueField, Algebra.Extension.toInfinitesimal, Ideal.Algebra.kerSquareLift, IsLocalRing.residue",
+   "date": "2026-10-24",
+   "verdict": "Mathlib provides ordinary ring quotients and quotient algebra maps, but no marked Artinian test quotient in the recorded test category; reuse Ideal.Quotient.liftₐ."
+  },
+  {
+   "tool": "grep",
+   "query": "quotientTest|testQuotient|IsTestAlgebra",
+   "results": "0 hits; top results: ",
+   "date": "2026-10-24",
+   "verdict": "Mathlib provides ordinary ring quotients and quotient algebra maps, but no marked Artinian test quotient in the recorded test category; reuse Ideal.Quotient.liftₐ."
+  },
+  {
+   "tool": "loogle",
+   "query": "Ideal.Quotient.liftₐ",
+   "results": "3 hits; top results: Ideal.Quotient.liftₐ, Ideal.Quotient.liftₐ_comp, Ideal.Quotient.liftₐ_apply",
+   "date": "2026-10-24",
+   "verdict": "Mathlib provides ordinary ring quotients and quotient algebra maps, but no marked Artinian test quotient in the recorded test category; reuse Ideal.Quotient.liftₐ."
+  },
+  {
+   "tool": "grep",
+   "query": "quotientTest|testQuotient|quotient_isTestAlgebra|IsLiftableIdeal|exists_least_liftable in lean/Sheaf, lean/WeilConjectures, dag/lean_names_upstream.json; marked Artinian quotient in dag/nodes; blueprint_refs.py search \"quotient test\" and \"Artinian\"",
+   "results": "No existing marked test quotient construction or DAG notion. The ArtinDeformationTestCategory module defines only complete-local truncations and fibre products. Blueprint search quotient test: 0; Artinian: 2 unrelated coefficient/perfect-complex nodes.",
+   "date": "2026-10-24",
+   "verdict": "New canonical construction required."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-artin-minimal-liftable-ideal",
+  "date": "2026-10-24",
+  "group": "Q104"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Algebraicity and smoothness of the stack of all nodal curves. Supporting input: Tag 07Y4 (lemma-diagonal-representable), specialized to Spec Z; section-axioms [-1] through [3], definition-versal and definition-openness-versality. The specialization uses that Z and its localizations are G-rings. Local supporting input: first sentence of the proof of Tag 07Y4: apply lemma-get-smooth to each finite type field and object. Supporting input in Tag 07XY: first three sentences of the proof, construction of a versal formal object before effectivity; Tag 06SZ (lemma-largest-closed-where-lift); (RS) implies the (S1) hypothesis. Canonical quotients B/L and the restriction morphism B/L to A in the definition of liftable ideal.",
+   "via": [
+    "lem-sfb-artin-minimal-liftable-ideal",
+    "lem-sfb-artin-rs-versal-formal-object",
+    "lem-sfb-artin-smooth-point-neighbourhood",
+    "lem-sfb-artin-representable-diagonal-criterion",
+    "lem-sfb-nodal-curve-stack-smooth",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.ArtinDeformationTestQuotient",
+  "declaration": "AlgebraicGeometry.ArtinDeformation.testQuotient",
+  "declarations": [
+   "AlgebraicGeometry.ArtinDeformation.quotientToAlgebra",
+   "AlgebraicGeometry.ArtinDeformation.testQuotientResidue",
+   "AlgebraicGeometry.ArtinDeformation.testQuotient_isTestAlgebra",
+   "AlgebraicGeometry.ArtinDeformation.testQuotient",
+   "AlgebraicGeometry.ArtinDeformation.testQuotientTo"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/ArtinDeformationTestQuotient.lean",
+  "statement": "def testQuotient {B A : TestCategory R k} (f : B ⟶ A) (L : Ideal (ring B)) (hL : L ≤ RingHom.ker (map f).toRingHom) : TestCategory R k",
+  "branch": "newtargets-dag",
+  "by": "Q104",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "import_flags": [],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-929aaa5fa",
+  "group": "Q104",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-929aaa5fa",
+  "group": "Q104",
+  "result": "pass",
+  "note": "Item exists_isLeast_liftableIdeal matches node and Stacks 06SZ clause by clause: f surjective, hI = literal kernel killed by m_B, x : fibre F A, IsLiftableIdeal = ∃ hL ≤ ker, ∃ y over the literal quotient B/L, push along B/L→A ≅ x, IsLeast gives least + liftable. hF and hRS match the node; (RS) is stronger than (S1) as the node states. New node def-sfb-artin-test-quotient: real quotient via Ideal.Quotient.liftₐ, augmentation residue_A∘lift (= residue_B∘π), homMk triangle by rfl; helper testQuotient_isTestAlgebra is true (ker f ⊆ m_B, so the quotient is proper, local and Artinian with kernel m_B/L); no duplicate in live, DAG or Mathlib; fields complete. Item diff is only stmt_deps+new node and lean; dep record identical to live; both lean.statement fields verbatim in files. Edge cases I=0, x lifts, L=I, k[ε]→k, higher-dim socle covered; universes v,w free. Report has Worker report + Second reading; docstrings carry source and blueprint; A/(J∩K) typo noted. No file changed, so no compile."
+ }
+}

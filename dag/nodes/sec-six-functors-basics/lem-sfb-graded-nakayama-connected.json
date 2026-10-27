@@ -1,0 +1,253 @@
+{
+ "id": "lem-sfb-graded-nakayama-connected",
+ "kind": "statement",
+ "title": "Graded Nakayama for a connected graded algebra",
+ "statement": "Let $k$ be a field [def-weil-field] and let $A=\\bigoplus_{a\\geq0}A_a$ be an internal direct sum of $k$-subspaces of a commutative unital $k$-algebra, with $A_aA_c\\subseteq A_{a+c}$ and $A_0=k\\cdot1$ via the structure map. Set $I=A_+=\\bigoplus_{a>0}A_a$. Let $M=\\bigoplus_{b\\in\\mathbf Z}M_b$ be an internally graded $A$-module with $A_aM_b\\subseteq M_{a+b}$, finitely generated as an ungraded $A$-module [def-weil-finitely-generated-module]. (1) If a finite family of homogeneous elements $x_1,\\ldots,x_r$ has images spanning the $k$-vector space $M/IM$, then $x_1,\\ldots,x_r$ generate $M$ as an $A$-module. (2) If $IM=M$, then $M=0$. The empty generating family and the zero module are allowed; no Noetherian or finite-type hypothesis on $A$ is imposed.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tag 0EKB (lemma-graded-NAK), parts (4) and (1), specialized to the displayed connected graded algebra; see also section-graded for the conventions."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-weil-finitely-generated-module"
+ ],
+ "proof": [
+  {
+   "text": "The subspace $I$ is an ideal: multiplying any positive-degree component by a nonnegative-degree component still has positive degree. Choose finite ungraded generators of $M$ using [def-weil-finitely-generated-module]. Replace each by its finitely many homogeneous components. These components still generate, since their span contains every original generator. Thus choose homogeneous generators $y_1,\\ldots,y_s$, with $y_i\\in M_{d_i}$. If $s=0$, then $M=0$.",
+   "uses": [
+    "def-weil-finitely-generated-module"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 0EKB (lemma-graded-NAK), proof of (1) and reduction of (4) to (1); section-graded for internal grading and quotient conventions."
+   }
+  },
+  {
+   "text": "First suppose $IM=M$. For $s>0$ choose $j$ with $d_j=\\min_i d_i$. Since $y_j\\in IM$ and the $y_i$ generate, there are $a_i\\in I$ with $y_j=\\sum_i a_i y_i$: expand each module factor in an expression for $y_j\\in IM$ in the generators, and collect coefficients (which remain in the ideal $I$). Write $a_i=\\sum_{t>0}(a_i)_t$ using the internal grading of $A$. Every summand $(a_i)_t y_i$ lies in $M_{t+d_i}$, where $t+d_i>d_j$. Projecting the equality to $M_{d_j}$ therefore gives $y_j=0$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 0EKB (lemma-graded-NAK), proof of (1) and reduction of (4) to (1); section-graded for internal grading and quotient conventions."
+   }
+  },
+  {
+   "text": "Remove this zero generator. The remaining homogeneous family still generates $M$, and $IM=M$ is unchanged. Induction on the number $s$ now proves $M=0$: the base $s=0$ was checked in step 1, and step 2 reduces every positive $s$ to $s-1$. This proves clause (2) for every module satisfying the displayed hypotheses.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 0EKB (lemma-graded-NAK), proof of (1) and reduction of (4) to (1); section-graded for internal grading and quotient conventions."
+   }
+  },
+  {
+   "text": "For clause (1) put $Q=\\sum_{i=1}^r Ax_i$. This submodule is graded: in an expression $q=\\sum_i a_i x_i$, decompose each $a_i$ into homogeneous components; the degree-$b$ component is $q_b=\\sum_i(a_i)_{b-\\deg x_i}x_i\\in Q$, with negative coefficient degrees interpreted as zero. Let $N=M/Q$ and let $N_b$ be the image of $M_b$. These pieces span $N$. They are independent: if $\\sum_b m_b\\in Q$ with $m_b\\in M_b$, the component calculation gives $m_b\\in Q$ for each $b$. Thus $N=\\bigoplus_b N_b$ internally, with $A_aN_b\\subseteq N_{a+b}$. The images of the finite generators of $M$ generate $N$, so $N$ is finite.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 0EKB (lemma-graded-NAK), proof of (1) and reduction of (4) to (1); section-graded for internal grading and quotient conventions."
+   }
+  },
+  {
+   "text": "The spanning hypothesis modulo $IM$ says that for every $m\\in M$ there are $c_i\\in k$ with $m-\\sum_i c_i x_i\\in IM$. Since $\\sum_i c_ix_i\\in Q$, it follows that $M=Q+IM$. Under $M\\to N$, the image of $IM$ is exactly $IN$: both consist of finite sums of positive-ideal scalars times images of module elements. Hence $IN=N$. Apply clause (2), proved in steps 1--3, to the finite internally graded module $N$ of step 4 to obtain $N=0$. Therefore $Q=M$, proving clause (1). The argument includes $r=0$, $M=0$, and $A=k$; it never uses Noetherianity or finite type of $A$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 0EKB (lemma-graded-NAK), proof of (1) and reduction of (4) to (1); section-graded for internal grading and quotient conventions."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-finitely-generated-module"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tag 0EKB (lemma-graded-NAK), proof of (1) and reduction of (4) to (1); section-graded for internal grading and quotient conventions."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "finite graded module over a nonnegative graded ring with degree zero a field, homogeneous lifts of a basis modulo the positive ideal generate",
+   "results": "{\"t\": \"2026-10-24T03:01:08Z\", \"tool\": \"leanfinder\", \"query\": \"finite graded module over a nonnegative graded ring with degree zero a field, homogeneous lifts of a basis modulo the positive ideal generate\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HomogeneousLocalization.Away.span_mk_prod_pow_eq_top\", \"GradedAlgebra.exists_finset_adjoin_eq_top_and_homogeneous\", \"GradedAlgebra.exists_finset_adjoin_eq_top_and_homogeneous_ne_zero\", \"HomogeneousLocalization.Away.adjoin_mk_prod_pow_eq_top\", \"HomogeneousSubmodule.is_homogeneous'\", \"HomogeneousIdeal.irrelevant_eq_span\", \"HomogeneousLocalization.Away.mk_surjective\", \"HomogeneousIdeal.irrelevant_eq_closure\"], \"digest\": \"d8992db9299b178d\"}",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "graded Nakayama lemma positive degree ideal finite module",
+   "results": "{\"t\": \"2026-10-24T03:01:08Z\", \"tool\": \"leansearch\", \"query\": \"graded Nakayama lemma positive degree ideal finite module\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Submodule.smul_le_of_le_smul_of_le_jacobson_bot\", \"Submodule.exists_sub_one_mem_and_smul_eq_zero_of_fg_of_le_smul\", \"Submodule.le_of_le_smul_of_le_jacobson_bot\", \"Submodule.sup_eq_sup_smul_of_le_smul_of_le_jacobson\", \"Ideal.is_fg_degreeLE\", \"HomogeneousIdeal.toIdeal_irrelevant_le\", \"HomogeneousIdeal.irrelevant_eq_iSup\", \"HomogeneousIdeal.irrelevant_eq_closure\"], \"digest\": \"26157d3645066a88\"}",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"graded\", Module.Finite",
+   "results": "{\"t\": \"2026-10-24T03:01:09Z\", \"tool\": \"loogle\", \"query\": \"\\\"graded\\\", Module.Finite\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "graded.*Nakayama|irrelevant.*ideal|homogeneous.*generate",
+   "results": "{\"t\": \"2026-10-24T03:01:09Z\", \"tool\": \"grep\", \"query\": \"graded.*Nakayama|irrelevant.*ideal|homogeneous.*generate\", \"sub\": \"RingTheory\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/GradedAlgebra/Homogeneous/Ideal.lean\", \"Mathlib/RingTheory/GradedAlgebra/Homogeneous/Ideal.lean\", \"Mathlib/RingTheory/GradedAlgebra/Homogeneous/Ideal.lean\", \"Mathlib/RingTheory/GradedAlgebra/Homogeneous/Ideal.lean\", \"Mathlib/RingTheory/GradedAlgebra/Homogeneous/Ideal.lean\"], \"digest\": \"e4b31b59b7a853d7\"}",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Graded Nakayama: a finite integer graded module M over a nonnegative graded ring is zero if the positive ideal times M equals M",
+   "results": "{\"t\": \"2026-10-24T03:01:40Z\", \"tool\": \"leanfinder\", \"query\": \"Graded Nakayama: a finite integer graded module M over a nonnegative graded ring is zero if the positive ideal times M equals M\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HomogeneousIdeal.irrelevant_le\", \"HomogeneousIdeal.irrelevant_eq_span\", \"HomogeneousIdeal.mem_irrelevant_of_mem\", \"HomogeneousSubmodule.is_homogeneous'\", \"HomogeneousIdeal.irrelevant\", \"HomogeneousSubmodule.isHomogeneous\", \"HomogeneousIdeal.toIdeal_irrelevant_le\", \"HomogeneousSubmodule.ext_iff\"], \"digest\": \"021c714ebb1a9d5b\"}",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Nakayama\"",
+   "results": "{\"t\": \"2026-10-24T03:01:41Z\", \"tool\": \"loogle\", \"query\": \"\\\"Nakayama\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "graded.*[Nn]akayama|[Nn]akayama.*graded|homogeneous.*(basis|generat)|exists.*[Hh]omogeneous.*[Ff]inite",
+   "results": "{\"t\": \"2026-10-24T03:01:41Z\", \"tool\": \"grep\", \"query\": \"graded.*[Nn]akayama|[Nn]akayama.*graded|homogeneous.*(basis|generat)|exists.*[Hh]omogeneous.*[Ff]inite\", \"sub\": \"\", \"ok\": true, \"n_hits\": 2, \"note\": \"\", \"top\": [\"Mathlib/Algebra/Lie/CartanExists.lean\", \"Mathlib/ModelTheory/Fraisse.lean\"], \"digest\": \"a9892958e4086ec4\"}",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "graded.*[Nn]akayama|[Nn]akayama.*graded|irrelevant.*(finite|generat|zero)|homogeneous.*generat",
+   "results": "{\"t\": \"2026-10-24T03:17:22Z\", \"tool\": \"grep\", \"query\": \"graded.*[Nn]akayama|[Nn]akayama.*graded|irrelevant.*(finite|generat|zero)|homogeneous.*generat\", \"sub\": \"RingTheory\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "graded Nakayama lemma for a finite graded module over a nonnegatively graded ring",
+   "results": "{\"t\": \"2026-10-24T03:17:23Z\", \"tool\": \"leansearch\", \"query\": \"graded Nakayama lemma for a finite graded module over a nonnegatively graded ring\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Submodule.smul_le_of_le_smul_of_le_jacobson_bot\", \"Submodule.le_of_le_smul_of_le_jacobson_bot\", \"Submodule.exists_sub_one_mem_and_smul_eq_zero_of_fg_of_le_smul\", \"Submodule.sup_eq_sup_smul_of_le_smul_of_le_jacobson\", \"DirectSum.coe_decompose_mul_of_left_mem\", \"DirectSum.coe_decompose_mul_of_right_mem\", \"DirectSum.coe_decompose_mul_of_left_mem_of_not_le\", \"GradedAlgebra.exists_finset_adjoin_eq_top_and_homogeneous\"], \"digest\": \"f842ac0f85197c40\"}",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"graded\", Module.Finite",
+   "results": "{\"t\": \"2026-10-24T03:17:23Z\", \"tool\": \"loogle\", \"query\": \"\\\"graded\\\", Module.Finite\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Let A be a nonnegative graded algebra with A zero equal to a field. In a finite integer graded module, homogeneous lifts of generators modulo the positive degree ideal generate the module; if the positive ideal times the module is the whole module then it is zero",
+   "results": "{\"t\": \"2026-10-24T03:17:24Z\", \"tool\": \"leanfinder\", \"query\": \"Let A be a nonnegative graded algebra with A zero equal to a field. In a finite integer graded module, homogeneous lifts of generators modulo the positive degree ideal generate the module; if the positive ideal times the module is the whole module then it is zero\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HomogeneousLocalization.Away.span_mk_prod_pow_eq_top\", \"HomogeneousLocalization.Away.adjoin_mk_prod_pow_eq_top\", \"GradedAlgebra.exists_finset_adjoin_eq_top_and_homogeneous_ne_zero\", \"GradedAlgebra.exists_finset_adjoin_eq_top_and_homogeneous\", \"HomogeneousIdeal.irrelevant_eq_span\", \"HomogeneousIdeal.mem_irrelevant_of_mem\", \"HomogeneousLocalization.Away.mk_surjective\", \"HomogeneousIdeal.irrelevant\"], \"digest\": \"fb568b2af4945a33\"}",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "nakayama|irrelevant_eq_span|homogeneous.*generat",
+   "results": "{\"t\": \"2026-10-24T03:17:56Z\", \"tool\": \"grep\", \"query\": \"nakayama|irrelevant_eq_span|homogeneous.*generat\", \"sub\": \"\", \"ok\": true, \"n_hits\": 24, \"note\": \"\", \"top\": [\"Mathlib/ModelTheory/Fraisse.lean\", \"Mathlib/RingTheory/Finiteness/Nakayama.lean\", \"Mathlib/RingTheory/Finiteness/Nakayama.lean\", \"Mathlib/RingTheory/Finiteness/Nakayama.lean\", \"Mathlib/RingTheory/Ideal/IdempotentFG.lean\", \"Mathlib/RingTheory/Ideal/KrullsHeightTheorem.lean\", \"Mathlib/RingTheory/Jacobson/Radical.lean\", \"Mathlib/RingTheory/Ideal/Cotangent.lean\"], \"digest\": \"f9345cd2f7a1190f\"}",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Nakayama\"",
+   "results": "{\"t\": \"2026-10-24T03:17:57Z\", \"tool\": \"loogle\", \"query\": \"\\\"Nakayama\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A finitely generated graded module is zero when its quotient by the ideal of positive degree elements is zero. Homogeneous residue generators lift to generators by graded Nakayama.",
+   "results": "{\"t\": \"2026-10-24T03:17:58Z\", \"tool\": \"leanfinder\", \"query\": \"A finitely generated graded module is zero when its quotient by the ideal of positive degree elements is zero. Homogeneous residue generators lift to generators by graded Nakayama.\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HomogeneousLocalization.Away.span_mk_prod_pow_eq_top\", \"HomogeneousIdeal.mem_irrelevant_iff\", \"HomogeneousSubmodule.is_homogeneous'\", \"GradedAlgebra.exists_finset_adjoin_eq_top_and_homogeneous_ne_zero\", \"HomogeneousSubmodule.ext'\", \"HomogeneousIdeal.irrelevant_eq_span\", \"GradedAlgebra.exists_finset_adjoin_eq_top_and_homogeneous\", \"HomogeneousIdeal.mem_irrelevant_of_mem\"], \"digest\": \"7bc51714778b0813\"}",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-connected-graded-projective-free",
+  "date": "2026-10-24",
+  "group": "Q30"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), supporting GAGA/Kodaira prerequisite: graded algebra input for the finite twist resolution; Hilbert syzygy before sheafification. Homogeneous-basis input for the terminal projective syzygy; also applies to non-polynomial connected graded algebras. Supporting input: Tag 0EKB, parts (4) and (1), for lifting homogeneous generators and killing the finite graded kernel.",
+   "via": [
+    "lem-sfb-connected-graded-projective-free",
+    "lem-sfb-polynomial-graded-hilbert-syzygy",
+    "lem-sfb-projective-coherent-finite-twist-resolution",
+    "lem-sfb-gaga-derived-coherent-sections",
+    "lem-sfb-algebraic-dolbeault-derivative-comparison",
+    "lem-sfb-hodge-first-differential-zero",
+    "lem-sfb-kollar-smooth-divisor-injectivity",
+    "lem-sfb-kodaira-vanishing",
+    "lem-sfb-dominant-flag-line-kempf-vanishing",
+    "lem-sfb-induced-weyl-dimension-formula",
+    "lem-sfb-steinberg-induced-module-irreducible",
+    "lem-sfb-rho-section-self-duality",
+    "lem-sfb-steinberg-endomorphism-detection",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-graded-nakayama-connected",
+  "worker": "stage1",
+  "summary": "Expanded Tag 0EKB into finite homogeneous components, explicit minimum-generator-degree elimination and induction, and the internally graded quotient by the proposed lifts. All arguments are elementary calculations from the displayed gradings and finite generation; no new lemma node is needed. Checked the general connected-algebra hypotheses, including zero and empty-family cases, against the narrower existing two-variable polynomial Lean results. Kept the statement unchanged.",
+  "blueprint": "The supporting graded-Nakayama input for the terminal graded projective syzygy in the finite twist-resolution prerequisite, along the inherited det-thm-sf-ctf-stability-direct-images proof (3) ancestry; no change to the chapter or unit route. The current blueprint contains no separate node for this general graded criterion.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q21-28c0db097",
+  "group": "Q21",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q21-28c0db097 (reviewer sub-agent of L); spot-checked: I read the item and all five steps against Stacks algebra.tex lemma-graded-NAK (Tag 0EKB, tags line 18231). The statement is unchanged from live. Clause (2) is Stacks (1) and clause (1) is Stacks (4), specialized to S_0=k·1 with no Noetherian or finite-type hypothesis, so nothing is weakened. Step 1 takes homogeneous generators via def-weil-finitely-generated-module, whose statement gives the finite generators used. Steps 2-3 kill a minimum-degree generator by projecting to degree d_j, with the induction on s properly set up (base s=0). Step 4 shows Q=sum A x_i is graded through the degree-b component formula and grades N=M/Q. Step 5 gets M=Q+IM, hence IN=N, then N=0 by clause (2); this is not circular. proof_deps equals the union of the uses, and all steps are honestly elementary; the source proof cites no lemmas, so D3 does not apply. Cases checked: M=0 and r=0, A=k, negative degrees, k[t]/(t^2), non-Noetherian polynomial rings, A=0, and the excluded non-finite k[t,t^-1]. Duplicate search with rg -L for 0EKB/graded Nakayama found only the k[x0,x1] sc-p1 nodes, which are special cases. There are no new nodes, no other-unit citations, no tool_uses and no SGA. The live item is still unsplit, so the delivery is not superseded, and there is no re-split note. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.GradedNakayamaConnected",
+  "declaration": "GradedAlgebra.nakayama_connected",
+  "file": "lean/Sheaf/RingTheory/GradedNakayamaConnected.lean",
+  "statement": "theorem nakayama_connected {k : Type u} [Field k] {A : Type v} [CommRing A] [Algebra k A] (𝒜 : ℕ → Submodule k A) [GradedAlgebra 𝒜] (hzero : 𝒜 0 = LinearMap.range (Algebra.linearMap k A)) {M : Type w} [AddCommGroup M] [Module A M] [Module k M] [IsScalarTower k A M] [Module.Finite A M] (ℳ : ℤ → AddSubgroup M) (hℳ : DirectSum.IsInternal ℳ) (hsmul : ∀ (a : ℕ) (b : ℤ) (f : A) (m : M), f ∈ 𝒜 a → m ∈ ℳ b → f • m ∈ ℳ ((a : ℤ) + b)) : (∀ (r : ℕ) (x : Fin r → M), (∀ i : Fin r, SetLike.IsHomogeneousElem ℳ (x i)) → Submodule.span k (Set.range (fun i : Fin r ↦ ((HomogeneousIdeal.irrelevant 𝒜).toIdeal • (⊤ : Submodule A M)).mkQ (x i))) = ⊤ → Submodule.span A (Set.range x) = ⊤) ∧ ((HomogeneousIdeal.irrelevant 𝒜).toIdeal • (⊤ : Submodule A M) = ⊤ → Subsingleton M)",
+  "branch": "newtargets-dag",
+  "by": "Q125",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-70bdbac1f",
+  "group": "Q125",
+  "result": "pass",
+  "note": "Read item node (unchanged vs live except lean), Stacks 0EKB (1),(4) + section-graded, stmt_deps Field/Module.Finite, module and report (Worker report + Second reading present). Clause-by-clause match: Field k; CommRing A + Algebra k A; GradedAlgebra 𝒜 : ℕ → Submodule k A; hzero 𝒜 0 = range(algebraMap) without injectivity; I = Mathlib HomogeneousIdeal.irrelevant; ℤ-graded internal AddSubgroup decomposition; hsmul A_aM_b⊆M_{a+b}; Module.Finite A M; Module k M + IsScalarTower is forced restriction; (1) ∀ r, x : Fin r → M homogeneous, k-span of images in M/IM = ⊤ → A-span = ⊤; (2) I•⊤=⊤ → Subsingleton M. Edge cases r=0, M=0, zero lifts, A=k, zero algebra, negative degrees, independent universes u v w all bound. sorry-only proof, docstrings with source + blueprint + 5 steps, statement field verbatim (checked programmatically), Mathlib-only imports, no new nodes. No general duplicate (upstream only MvPolynomial (Fin 2) special cases), no name clash. Non-blocking: citer projective-free uses hzero as span k {1}, equal to this form. No fixes, no compile needed."
+ }
+}

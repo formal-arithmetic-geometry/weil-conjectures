@@ -1,0 +1,266 @@
+{
+ "id": "lem-pur-refinement-inverse-mate-comparisons",
+ "kind": "statement",
+ "title": "Inverse refinement mates give coherent common-refinement comparisons",
+ "statement": "Let $f:X\\to Y$ be a separated finite-type morphism of schemes admitting a compactification, and let $\\operatorname{Comp}(f)$ have the objects $c=(j_c:X\\hookrightarrow W_c,p_c:W_c\\to Y)$ and proper refinements of [def-weil-compactifications-refinements]. Suppose this category is cofiltered: any two objects have a common refinement, and any two parallel arrows $a,b:d\\to c$ admit $e:d'\\to d$ with $ae=be$. All categories, functors, and natural transformations below are taken in a fixed universe [def-nagata-category, def-weil-size-convention].\n\nAssign a category $\\mathcal D_W$ to each scheme involved. For each proper $u:W\\to V$ supply $R_u:\\mathcal D_W\\to\\mathcal D_V$, with natural unital associative compositors $c_{v,u}:R_{vu}\\cong R_vR_u$; in particular\n$$R_w(c_{v,u})c_{w,vu}=(c_{w,v}R_u)c_{wv,u}.$$\nFor each compactification supply $J_c:\\mathcal D_X\\to\\mathcal D_{W_c}$, and for every refinement $u:c_1\\to c_2$ a natural transformation $\\gamma_u:J_{c_2}\\to R_uJ_{c_1}$. Assume the identity normalization $\\gamma_1=1$ and the vertical-pasting equation\n$$c_{v,u,J_{c_1}}\\gamma_{vu}=R_v(\\gamma_u)\\gamma_v:J_{c_3}\\longrightarrow R_vR_uJ_{c_1}.$$\nLet $\\mathcal E\\subseteq\\mathcal D_X$ be a full subcategory on which each $\\gamma_u$ is pointwise invertible. No invertibility is assumed outside $\\mathcal E$, and no proper/open comparison for non-refinement squares is assumed. Put $F_c=R_{p_c}J_c$ and, on $\\mathcal E$, define\n$$\\theta_u=R_{p_2}(\\gamma_u^{-1})c_{p_2,u,J_{c_1}}:F_{c_1}\\xrightarrow{\\sim}F_{c_2}.$$\nThen $\\theta_1=1$ and $\\theta_{vu}=\\theta_v\\theta_u$ as natural transformations on $\\mathcal E$. More explicitly, with $p_2=p_3v$, both sides equal\n$$R_{p_3}(\\gamma_v^{-1})\\,R_{p_3}R_v(\\gamma_u^{-1})\\,c_{p_3,v,R_uJ_{c_1}}\\,c_{p_2,u,J_{c_1}}.$$\nParallel refinements $a,b:d\\to c$ induce equal transformations $\\theta_a=\\theta_b$. For every common refinement $a:d\\to c_1$, $b:d\\to c_2$, the natural isomorphism $C_{12}=\\theta_b\\theta_a^{-1}:F_{c_1}|_{\\mathcal E}\\cong F_{c_2}|_{\\mathcal E}$ is independent of $d,a,b$. For three compactifications these comparisons satisfy $C_{23}C_{12}=C_{13}$ and $C_{11}=1$. The conclusions are equations in the supplied categories; no evaluation functors or detection of equality by them are involved.",
+ "source": {
+  "document": "literature/stacks-project/more-etale.tex",
+  "place": "Tag 0F7C (lemma-shriek-proper-and-open-compose), Tag 0F7J (lemma-shriek-composition), with flat.tex Tag 0ATU (lemma-compactifications-cofiltered); agent abstract inverse-compositor and parallel-arrow cancellation argument."
+ },
+ "stmt_deps": [
+  "def-nagata-category",
+  "def-weil-compactifications-refinements",
+  "def-weil-size-convention"
+ ],
+ "proof": [
+  {
+   "text": "Work throughout on $\\mathcal E$. Write products of arrows in functional order. For a morphism $h:M\\to N$ in $\\mathcal E$, naturality of $\\gamma_u$ says $R_uJ_1(h)\\gamma_{u,M}=\\gamma_{u,N}J_2(h)$. Multiplication by the two component inverses gives $J_2(h)\\gamma_{u,M}^{-1}=\\gamma_{u,N}^{-1}R_uJ_1(h)$, so the pointwise inverses form a natural transformation on precisely $\\mathcal E$. Any functor $R$ carries inverse arrows to inverse arrows: $R(t)R(t^{-1})=R(1)=1$ and similarly in the reverse order. Hence each displayed $\\theta_u$ is a natural isomorphism, with inverse $c_{p_2,u,J_1}^{-1}R_{p_2}(\\gamma_u)$. For identity refinements, substitute $\\gamma_1=1$ and the supplied unital compositor normalization to get $\\theta_1=1$. All reassociation below uses the category identity and associativity laws of [def-nagata-category].",
+   "uses": [
+    "def-nagata-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-etale.tex",
+    "place": "Agent expansion of the supplied inverse comparisons; Tag 0F7C (lemma-shriek-proper-and-open-compose), formal identity normalization."
+   }
+  },
+  {
+   "text": "Fix $u:c_1\\to c_2$, $v:c_2\\to c_3$ and $M\\in\\mathcal E$. Temporarily put $A=J_1M$, $B=J_2M$, $D=J_3M$, $U=\\gamma_{u,M}:B\\to R_uA$, $V=\\gamma_{v,M}:D\\to R_vB$, $W=\\gamma_{vu,M}:D\\to R_{vu}A$, and $C=c_{v,u,A}$. The assumed pasting equation is $CW=R_v(U)V$. Multiplying by the inverses shows $W^{-1}=V^{-1}R_v(U^{-1})C$: composing the proposed inverse with $W$ gives $V^{-1}R_v(U^{-1})R_v(U)V=1$, and composing in the other order gives $W W^{-1}=1$ by the same equation. Thus no inverse outside $\\mathcal E$ is used.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-etale.tex",
+    "place": "Agent inverse algebra applied to the assumed vertical-pasting equation; Tag 0F7C (lemma-shriek-proper-and-open-compose) is the geometric motivation."
+   }
+  },
+  {
+   "text": "Apply $R_{p_3}$ to the inverse formula in Step 2 and substitute it in the definition of $\\theta_{vu,M}$. This gives $R_{p_3}(V^{-1})R_{p_3}R_v(U^{-1})R_{p_3}(C)c_{p_3,vu,A}$. The assumed compositor associativity, with $(w,v,u)=(p_3,v,u)$, is $R_{p_3}(C)c_{p_3,vu,A}=c_{p_3,v,R_uA}c_{p_3v,u,A}$. Since $p_3v=p_2$, substitution gives exactly the explicit four-factor expression in the statement.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-etale.tex",
+    "place": "Agent substitution of the supplied compositor equation; Tag 0F7C (lemma-shriek-proper-and-open-compose), composition identifications."
+   }
+  },
+  {
+   "text": "Expanding the other composite gives $\\theta_{v,M}\\theta_{u,M}=R_{p_3}(V^{-1})c_{p_3,v,B}R_{p_2}(U^{-1})c_{p_2,u,A}$. Naturality of $c_{p_3,v}:R_{p_2}\\to R_{p_3}R_v$ at $U^{-1}:R_uA\\to B$ reads $c_{p_3,v,B}R_{p_2}(U^{-1})=R_{p_3}R_v(U^{-1})c_{p_3,v,R_uA}$. Substituting this identity yields the expression from Step 3. Therefore $\\theta_{vu}=\\theta_v\\theta_u$; this is equality of natural transformations since their components at every $M\\in\\mathcal E$ agree.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-etale.tex",
+    "place": "Agent naturality calculation for inverse refinement comparisons; Tag 0F7C (lemma-shriek-proper-and-open-compose)."
+   }
+  },
+  {
+   "text": "For parallel refinements $a,b:d\\to c$, the explicitly assumed cofilteredness supplies $e:d'\\to d$ with $ae=be$. Refinement composition is composition of the underlying proper maps, as in [def-weil-compactifications-refinements]. Step 4 gives $\\theta_a\\theta_e=\\theta_{ae}=\\theta_{be}=\\theta_b\\theta_e$. Right multiplication by $\\theta_e^{-1}$ proves $\\theta_a=\\theta_b$. This does not assert that $a=b$, or that the refinement squares are cartesian.",
+   "uses": [
+    "def-weil-compactifications-refinements"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-etale.tex",
+    "place": "Agent cancellation using the cofilteredness assumed in the item; compare flat.tex Tag 0ATU (lemma-compactifications-cofiltered), proof (a), equalizing parallel arrows."
+   }
+  },
+  {
+   "text": "If $(a:d\\to c_1,b:d\\to c_2)$ is a common refinement and $t:e\\to d$ is any further refinement, Step 4 and inverse cancellation give $\\theta_{bt}\\theta_{at}^{-1}=(\\theta_b\\theta_t)(\\theta_a\\theta_t)^{-1}=\\theta_b\\theta_t\\theta_t^{-1}\\theta_a^{-1}=\\theta_b\\theta_a^{-1}$. Thus further refinement leaves the span comparison unchanged, as an equation of natural transformations on $\\mathcal E$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-etale.tex",
+    "place": "Agent span cancellation; Tag 0F7J (lemma-shriek-composition), proof, independence of choices via common refinements."
+   }
+  },
+  {
+   "text": "Take two spans $(d,a,b)$ and $(d',a',b')$ between $c_1,c_2$. The assumed common-refinement property gives $r:e\\to d$ and $s:e\\to d'$. The arrows $ar,a's:e\\to c_1$ are parallel, so Step 5 gives $\\theta_{ar}=\\theta_{a's}$; likewise $\\theta_{br}=\\theta_{b's}$. Step 6 now gives $\\theta_b\\theta_a^{-1}=\\theta_{br}\\theta_{ar}^{-1}=\\theta_{b's}\\theta_{a's}^{-1}=\\theta_{b'}\\theta_{a'}^{-1}$. This proves independence of all three choices $d,a,b$, including the case of different arrows from the same common-refinement object.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-etale.tex",
+    "place": "Agent common-refinement and parallel-arrow argument; Tag 0F7J (lemma-shriek-composition), independence-of-choices paragraph, and flat.tex Tag 0ATU (lemma-compactifications-cofiltered), proof (a)."
+   }
+  },
+  {
+   "text": "For $c_1,c_2,c_3$, first choose $d\\to c_1,c_2$, then choose a common refinement $e$ of $d$ and $c_3$. Composition gives arrows $t_i:e\\to c_i$ for all three indices. By Step 7 all three comparisons can be computed on these spans. Consequently $C_{23}C_{12}=(\\theta_{t_3}\\theta_{t_2}^{-1})(\\theta_{t_2}\\theta_{t_1}^{-1})=\\theta_{t_3}\\theta_{t_1}^{-1}=C_{13}$. To compute $C_{11}$ choose the span $(c_1,1,1)$; Step 1 gives $C_{11}=1$. All inverses, compositions and cancellations took place in the supplied functor categories on $\\mathcal E$; no evaluation or equality-detection hypothesis was introduced.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-etale.tex",
+    "place": "Agent cocycle cancellation completing the common-refinement argument of Tag 0F7J (lemma-shriek-composition)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-nagata-category",
+  "def-weil-compactifications-refinements"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/more-etale.tex",
+  "place": "Formal inverse-compositor/naturality and cofiltered span cancellation under the explicit hypotheses; motivated by Tags 0F7C and 0F7J and flat.tex Tag 0ATU, not an application of their geometric hypotheses."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "cofiltered.*(iso|cocycle)|refinement.*cocycle",
+   "results": "4 hits: Mathlib/CategoryTheory/Limits/Shapes/Countable.lean, Mathlib/CategoryTheory/Galois/Prorepresentability.lean, Mathlib/CategoryTheory/Abelian/GrothendieckAxioms/Basic.lean, Mathlib/CategoryTheory/Functor/Flat.lean",
+   "date": "2026-10-22",
+   "verdict": "no match: generic adjunction, cofiltered-limit, sheaf-presentation or module-isomorphism facts do not state the specified refinement-mate assertion"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Cofiltered category pointwise invertible comparison independence of span cocycle",
+   "results": "8 hits: CategoryTheory.Limits.HasCofilteredLimits, CategoryTheory.IsCofiltered, CategoryTheory.isFiltered_of_isCofiltered_op, CategoryTheory.IsCofiltered.of_equivalence, CategoryTheory.IsCofiltered.rec, CategoryTheory.IsCofiltered.cofilteredClosure.rec, CategoryTheory.IsCofilteredOrEmpty, CategoryTheory.IsCofiltered.casesOn",
+   "date": "2026-10-22",
+   "verdict": "no match: generic adjunction, cofiltered-limit, sheaf-presentation or module-isomorphism facts do not state the specified refinement-mate assertion"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.IsCofiltered, CategoryTheory.IsIso",
+   "results": "4 hits: CategoryTheory.Functor.IsEventuallyConstantTo.isIso_π_of_isLimit, CategoryTheory.Functor.IsEventuallyConstantTo.isLimitOfIsIso, CategoryTheory.Functor.IsEventuallyConstantTo.isIso_π_of_isLimit', HomologicalComplex.isIso_π_f_of_isLimit_of_isEventuallyConstantTo",
+   "date": "2026-10-22",
+   "verdict": "no match: generic adjunction, cofiltered-limit, sheaf-presentation or module-isomorphism facts do not state the specified refinement-mate assertion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Pointwise invertible proper open mates canonical direct image compositors cofiltered compactification refinement comparisons cocycle",
+   "results": "8 hits: IsCompactOpenCovered.of_comp, Profinite.exists_locallyConstant_finite_aux, CompHausLike.LocallyConstant.incl_comap, Profinite.exists_locallyConstant, CompHausLike.LocallyConstant.incl_of_counitAppApp, Profinite.exists_locallyConstant_fin_two, Profinite.exists_locallyConstant_finite_nonempty, CompHausLike.LocallyConstant.counitAppApp",
+   "date": "2026-10-22",
+   "verdict": "no match: generic adjunction, cofiltered-limit, sheaf-presentation or module-isomorphism facts do not state the specified refinement-mate assertion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Inverse of a pointwise invertible mate composed with pseudofunctor compositor defines canonical comparisons independent of common refinement",
+   "results": "8 hits: CategoryTheory.Join.pseudofunctorLeft_mapComp_inv_toNatTrans_app, CategoryTheory.Join.pseudofunctorRight_mapComp_inv_toNatTrans_app, CategoryTheory.Pseudofunctor.ObjectProperty.mapComp_inv_app, CategoryTheory.Bicategory.Pith.pseudofunctorToPith_mapComp_inv_iso_inv, CategoryTheory.Bicategory.mateEquiv_symm_apply', CategoryTheory.Bicategory.Pith.pseudofunctorToPith_mapComp_inv_iso_hom, CategoryTheory.Bicategory.iterated_mateEquiv_conjugateEquiv_symm, CategoryTheory.Pseudofunctor.ObjectProperty.mapComp",
+   "date": "2026-10-22",
+   "verdict": "no match: generic adjunction, cofiltered-limit, sheaf-presentation or module-isomorphism facts do not state the specified refinement-mate assertion"
+  },
+  {
+   "tool": "grep",
+   "query": "cofiltered.*(iso|cocycle)|refinement.*cocycle",
+   "results": "4 hits: Mathlib/CategoryTheory/Limits/Shapes/Countable.lean, Mathlib/CategoryTheory/Functor/Flat.lean, Mathlib/CategoryTheory/Galois/Prorepresentability.lean, Mathlib/CategoryTheory/Abelian/GrothendieckAxioms/Basic.lean",
+   "date": "2026-10-22",
+   "verdict": "no match for the whole item: eventual-constant cone comparisons cover only the span part after functoriality is proved; pseudofunctor/Join formulas do not prove the supplied inverse-mate formula and all its conclusions"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Cofiltered category invertible natural transformations common refinement comparison independent of span cocycle",
+   "results": "8 hits: CategoryTheory.instIsCofilteredCostructuredArrowProdDiagOfIsCofilteredOrEmpty, CategoryTheory.IsCofiltered.cofilteredClosure.rec, CategoryTheory.IsCofiltered.rec, CategoryTheory.IsCofilteredOrEmpty.mk, CategoryTheory.IsCofiltered.iff_cone_nonempty, CategoryTheory.IsCofiltered, CategoryTheory.IsCofiltered.mk, CategoryTheory.IsCofiltered.recOn",
+   "date": "2026-10-22",
+   "verdict": "no match for the whole item: eventual-constant cone comparisons cover only the span part after functoriality is proved; pseudofunctor/Join formulas do not prove the supplied inverse-mate formula and all its conclusions"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.IsCofiltered, CategoryTheory.IsIso",
+   "results": "4 hits: CategoryTheory.Functor.IsEventuallyConstantTo.isIso_π_of_isLimit, CategoryTheory.Functor.IsEventuallyConstantTo.isLimitOfIsIso, CategoryTheory.Functor.IsEventuallyConstantTo.isIso_π_of_isLimit', HomologicalComplex.isIso_π_f_of_isLimit_of_isEventuallyConstantTo",
+   "date": "2026-10-22",
+   "verdict": "no match for the whole item: eventual-constant cone comparisons cover only the span part after functoriality is proved; pseudofunctor/Join formulas do not prove the supplied inverse-mate formula and all its conclusions"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Inverse pseudofunctor compositor and invertible natural transformations give coherent comparisons independent of common refinement in a cofiltered category",
+   "results": "8 hits: CategoryTheory.Join.pseudofunctorRight_mapComp_inv_toNatTrans_app, CategoryTheory.Pseudofunctor.CoGrothendieck.mapCompIso, CategoryTheory.GrothendieckTopology.pseudofunctorOver_mapComp_inv_toNatTrans_app_val_app, CategoryTheory.Pseudofunctor.CoGrothendieck.compIso_inv_app, CategoryTheory.IsCofiltered.SmallCofilteredIntermediate.factoringCompInclusion, CategoryTheory.Pseudofunctor.ObjectProperty.mapComp_inv_app, CategoryTheory.Join.pseudofunctorLeft_mapComp_inv_toNatTrans_app, CategoryTheory.WithInitial.pseudofunctor_mapComp",
+   "date": "2026-10-22",
+   "verdict": "no match for the whole item: eventual-constant cone comparisons cover only the span part after functoriality is proved; pseudofunctor/Join formulas do not prove the supplied inverse-mate formula and all its conclusions"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Functor from a cofiltered category sending all morphisms to isomorphisms canonical isomorphism between any two values independent of choice",
+   "results": "8 hits: CategoryTheory.Functor.IsEventuallyConstantTo.isoMap, CategoryTheory.Functor.IsEventuallyConstantFrom.isoMap, CategoryTheory.IsCofiltered.IsEventuallyConstant, CategoryTheory.Functor.IsEventuallyConstantTo.coneπApp_eq, CategoryTheory.Functor.IsEventuallyConstantTo.coneπApp, CategoryTheory.Functor.IsEventuallyConstantTo.isIso_map, CategoryTheory.Functor.IsEventuallyConstantFrom.isIso_map, CategoryTheory.Functor.IsEventuallyConstantTo.isIso_π_of_isLimit'",
+   "date": "2026-10-22",
+   "verdict": "no match for the whole item: eventual-constant cone comparisons cover only the span part after functoriality is proved; pseudofunctor/Join formulas do not prove the supplied inverse-mate formula and all its conclusions"
+  },
+  {
+   "tool": "grep",
+   "query": "coneπApp_eq|def coneπApp|def IsEventuallyConstantTo",
+   "results": "5 hits: 38, 86, 89, 100, 101",
+   "date": "2026-10-22",
+   "verdict": "no match for the whole item: eventual-constant cone comparisons cover only the span part after functoriality is proved; pseudofunctor/Join formulas do not prove the supplied inverse-mate formula and all its conclusions"
+  },
+  {
+   "tool": "grep",
+   "query": "coneπApp_eq|def coneπApp|def IsEventuallyConstantTo",
+   "results": "Read Mathlib/CategoryTheory/Limits/Constructions/EventuallyConstant.lean:38,86,89,100. coneπApp_eq identifies the span comparison only for a supplied functor; it does not prove inverse-mate functoriality.",
+   "date": "2026-10-22",
+   "verdict": "no match for whole item; partial span-independence tool"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-pur-system-compactification-pf-substitution",
+  "date": "2026-10-22",
+  "group": "Q116"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-thm-sf-compatibility",
+ "blueprint": {
+  "from": {
+   "node": "prop-pur-adic-reconstruction-trace-coherence",
+   "place": "Sole proof paragraph: compatible systems of finite-level coherence statements; via system-level projection coherence Step 7, refinement identity, composition, equalizer cancellation and span cocycle (old substitution Steps 7-9).",
+   "via": [
+    "lem-pur-system-compactification-pf-substitution",
+    "lem-pur-system-level-projection-formula-coherence"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-pur-refinement-inverse-mate-comparisons",
+  "worker": "stage1",
+  "summary": "Preserved the statement and its three statement dependencies. Wrote eight elementary steps: inverse naturality and identity; inversion of pasting; compositor substitution; naturality identifying the composite; parallel-arrow cancellation; further-refinement cancellation; arbitrary-span independence; triple-span cocycle. No new nodes and no evaluation detection. Item searched in Mathlib with two semantic phrasings and exact tool logs; related eventual-constant and compact-support results do not state the full item.",
+  "blueprint": "Realizes the sole proof paragraph of prop-pur-adic-reconstruction-trace-coherence, compatible systems of finite-level coherence, via system-level projection coherence Step 7 and compactification substitution Steps 7-9. Within sk-thm-sf-compatibility clause (1), it supplies the formal common-refinement cocycle from the supplied inverse-mate pasting data; no geometric purity route is changed."
+ },
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-NG-89bfaca63",
+  "group": "NG",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NG-89bfaca63 (reviewer sub-agent of L); spot-checked: I read the item and all 8 steps in full and re-derived each one. The statement is byte-identical to the base and to the Q116 creation snapshot. The node is still unsplit on clones/live and clones/side-live, so the delivery is not superseded, and there is no repair note. Checks: (1) Step 2: from the pasting equation CW=R_v(U)V I obtained W^{-1}=V^{-1}R_v(U^{-1})C; the inverses exist because M is in ℰ and C is a compositor. (2) Step 3: the associativity hypothesis at (p_3,v,u) gives exactly the four-factor display of the statement. (3) Step 4: naturality of c_{p_3,v} at U^{-1}:R_uA→B turns θ_vθ_u into that same expression; this naturality holds on all of D_{W_2}, so no ℰ restriction is needed. (4) Step 1: θ_1=1 follows from γ_1=1 and unital compositors, and the inverses of γ are natural on the full subcategory ℰ. (5) Steps 5–8: parallel-arrow cancellation uses the assumed equalizer and the invertibility of θ_e; further refinement leaves a span comparison unchanged; span independence holds via a common refinement plus Step 5; the cocycle holds on a triple refinement, and C_11=1 via the identity span. All steps are genuinely elementary rearrangements, and proof_deps equal the union of uses. The proof covers old parent steps 7–9 of Q116 completely, with none shortened. Edge cases checked: ℰ empty, u=id, parallel unequal arrows, a single compactification; no cartesian squares, evaluation detection or boundedness are used. Not a duplicate of lem-sp-compactification-refinement-coherence, which needs γ invertible on all its categories plus tower and staircase data, nor of prop-compactification-coherence-detailed, lem-sf-package-compactified-tower-comparisons or prop-compactification-refinement. Only definition nodes are cited (def-nagata-category, def-weil-compactifications-refinements, def-weil-size-convention), so there is no route issue and there are no tool_uses. Sources checked: Stacks more-etale 0F7C l.2617, 0F7J l.3159, flat 0ATU l.9316. They are motivation only, the proof is marked by:agent, and no SGA is cited. Searches cover grep, leansearch, loogle and leanfinder. Advisory, not repaired: Step 3 uses p_3v=p_2, the Y-morphism clause of def-weil-compactifications-refinements, with uses:[]; that node is in stmt_deps and in Step 5's uses, and the statement fixes this notation."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.RefinementInverseMateComparisons",
+  "declaration": "AlgebraicGeometry.RefinementInverseMateData.refinement_inverse_mate_comparisons",
+  "declarations": [
+   "AlgebraicGeometry.RefinementInverseMateData",
+   "AlgebraicGeometry.RefinementInverseMateData.restricted",
+   "AlgebraicGeometry.RefinementInverseMateData.restrictedGamma",
+   "AlgebraicGeometry.RefinementInverseMateData.theta",
+   "AlgebraicGeometry.RefinementInverseMateData.compare",
+   "AlgebraicGeometry.RefinementInverseMateData.refinement_inverse_mate_comparisons"
+  ],
+  "file": "lean/Sheaf/Paper/RefinementInverseMateComparisons.lean",
+  "statement": "theorem refinement_inverse_mate_comparisons [IsSeparated f] [LocallyOfFiniteType f] [QuasiCompact f] [IsCofiltered (Compactification f)] : (∀ c : Compactification f, T.theta E hE (𝟙 c) = Iso.refl (T.restricted E c)) ∧ (∀ (c d e : Compactification f) (r : c ⟶ d) (s : d ⟶ e), (T.theta E hE (r ≫ s)).hom = (T.theta E hE r).hom ≫ (T.theta E hE s).hom ∧ ∀ M : E.FullSubcategory, (T.theta E hE (r ≫ s)).hom.app M = (T.comp r.hom d.g c.g r.hom_g).hom.app ((T.J c).obj M.obj) ≫ (T.comp s.hom e.g d.g s.hom_g).hom.app ((T.R r.hom).obj ((T.J c).obj M.obj)) ≫ (T.R e.g).map ((T.R s.hom).map ((T.restrictedGamma E hE r).inv.app M)) ≫ (T.R e.g).map ((T.restrictedGamma E hE s).inv.app M)) ∧ (∀ (c d : Compactification f) (a b : c ⟶ d), (T.theta E hE a).hom = (T.theta E hE b).hom) ∧ (∀ (c d a b : Compactification f) (r : a ⟶ c) (s : a ⟶ d) (r' : b ⟶ c) (s' : b ⟶ d), T.compare E hE r s = T.compare E hE r' s') ∧ (∀ (c₁ c₂ c₃ a b d : Compactification f) (r₁ : a ⟶ c₁) (r₂ : a ⟶ c₂) (s₂ : b ⟶ c₂) (s₃ : b ⟶ c₃) (t₁ : d ⟶ c₁) (t₃ : d ⟶ c₃), (T.compare E hE r₁ r₂).hom ≫ (T.compare E hE s₂ s₃).hom = (T.compare E hE t₁ t₃).hom) ∧ (∀ (c a : Compactification f) (r s : a ⟶ c), T.compare E hE r s = Iso.refl (T.restricted E c))",
+  "branch": "newtargets-dag",
+  "by": "Q11",
+  "date": "2026-10-23",
+  "existing": false,
+  "note": "The helper structure bundles exactly the supplied hypotheses; its named composite compositor makes all geometric equalities explicit. The full subcategory restriction is inverted using Mathlib NatIso.isIso_of_isIso_app. All six conclusions, including the four-factor expression, are stated in the supplied categories."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-7018731ee",
+  "group": "Q11",
+  "result": "pass",
+  "note": "Only the item module and the node's lean field changed (diff vs side-live); first S2 delivery, not superseded. Statement verbatim; declarations listed. Clause-by-clause check: separated+LocallyOfFiniteType+QuasiCompact = separated finite type; IsCofiltered(Compactification f) covers existence + common refinements + equalizers; comp direction R_{p≫q} ≅ R_p ⋙ R_q and assoc checked factor by factor against R_w(c_{v,u})c_{w,vu}=(c_{w,v}R_u)c_{wv,u}; unit laws, gammaId, gammaComp correct (upstream comp_hom/id_hom rfl); γ invertible only on E.FullSubcategory; theta = node formula; the four-factor conjunct has the correct order and types; parallel, span-independence, cocycle and C_11 conjuncts match. Re-derived truth on paper. Helpers non-hollow (asIso of the actual whiskered γ, no choice), one sorry; docstrings carry source, blueprint and 8 steps; imports used; stmt_deps correct. No duplicate (ProperOpenCalculus/CompactificationRefinementCoherence stronger, lem-cbc-cofiltered-span-comparison partial). No recompile (no change). Advisories: Compactification owned by def-nagata-compactification, reached via the stmt_dep category; the report's terminal-category extension claim is false in general, while the global R-on-all-proper-maps rendering matches the node text."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "AUTO",
+  "group": "Q9",
+  "result": "pass",
+  "landing": "20261023T105519-L-3570113",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)",
+  "sorry_before": [
+   "AlgebraicGeometry.RefinementInverseMateData.refinement_inverse_mate_comparisons"
+  ],
+  "sorry_after": []
+ }
+}

@@ -1,0 +1,139 @@
+{
+ "kind": "statement",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-diagonal-tower/sk-prop-diagonal-tower-coefficients.proof.md",
+  "place": "paragraph (1), coefficient realization of one finite reduction; sk-prop-diagonal-tower-limit.proof.md (3), finite reduction comparisons"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The quotient of the inverse limit of roots of unity modulo a power of a prime is the finite Tate line",
+   "date": "2026-10-27",
+   "results": "Eight Mathlib hits, chiefly cyclotomicCharacter and its toZModPow formula; no sheaf Tate-line scalar comparison.",
+   "verdict": "Use project root models and finite realization APIs; the normalized cyclic comparison is not in Mathlib."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Abelian.Ext.homEquiv",
+   "date": "2026-10-27",
+   "results": "Ext.homEquiv and Ext.homEquiv_chgUniv.",
+   "verdict": "Use the existing Ext-to-derived-Hom equivalence; it does not identify the coefficient realizations."
+  },
+  {
+   "tool": "grep",
+   "query": "rootTower_finite_tensor|diagonal_flat_scalar_endpoint_iso|cyclicLine",
+   "date": "2026-10-27",
+   "results": "Search index: zero hits. Local rg found RootTowerFiniteTensor, PurTwistRootLocalModels, DiagonalFlatScalarEndpoint, DiagonalSupportedScalarSource, and the cyclic frame definition.",
+   "verdict": "These give local root and flat scalar calculations. No theorem compares a cyclic frame with a completed finite evaluation."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.DiagonalCyclicCartierProjection",
+  "date": "2026-10-27",
+  "group": "R4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-prop-diagonal-tower-coefficients",
+   "place": "paragraph (1), finite cyclic reduction followed by finite coefficient extension",
+   "via": [
+    "lem-diagonal-cyclic-cartier-projection",
+    "lem-diagonal-uniformizer-cartier-reduction",
+    "lem-diagonal-uniformizer-finite-normalization",
+    "lem-diagonal-coefficient-uniformizer-reduction"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-prop-diagonal-tower",
+ "id": "lem-diagonal-cyclic-evaluation-transport",
+ "title": "Integral restriction comparison for the cyclic diagonal class",
+ "statement": "Given IsDiagonalLimit, Family, Reference and a supplied cyclic frame p, the exact-functor Ext image of p.reduce(family.zl.delta) after restriction to discrete integral coefficients equals the restricted cartierResidueReducedPro class at exponent n+1. This asserts neither existence of a frame, nor equality before restriction, nor identification with geoCartierCanonicalClass.",
+ "stmt_deps": [
+  "def-diagonal-cyclic-cartier-frame",
+  "def-sfb-diagonal-coefficient-reference",
+  "def-sfb-diagonal-limit-interface",
+  "def-sfb-diagonal-system-interface",
+  "def-sfb-diagonal-trace-limit-characterization"
+ ],
+ "proof": [
+  {
+   "text": "Unpack IsDiagonalLimit into its ordinary and derived witnesses, finite normalization, and full normalized-limit tail. Apply the last clause of ArrowCompatibility to delta and its supplied whole-limit equation at n. Obtain the finite endpoint isomorphisms, normalized quotient-unit squares and finite arrow equation.",
+   "uses": [
+    "def-sfb-diagonal-limit-interface",
+    "def-sfb-diagonal-trace-limit-characterization"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use hs0,hs and ht0,ht to identify those source and target projections with the full supported unit and actual root projection. The completed realization unit normalization and normalized condensed cyclic quotient identify the coefficient map with continuous PadicInt.toZModPow. Scalar adjunction uniqueness identifies these units with p.supported and p.line, including the finite line endpoint.",
+   "uses": [
+    "lem-pur-condensed-zl-reduction-mod-ell-power",
+    "sk-prop-sfb-qlbar-colimit-x",
+    "def-sfb-diagonal-coefficient-reference",
+    "def-diagonal-cyclic-cartier-frame",
+    "lem-diagonal-integral-root-map"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use c.hom=a.inv f b.hom, exact-single and shift naturality, and finite endpoint isomorphisms s,t. Ext.homEquiv gives equality after integral restriction. Substitute Reference.delta. Apply the n-th finite-cycle equation from IsDiagonalLimit to identify this finite evaluation with the image of cartierResidueReducedPro. The frame construction, cancellation of restriction and canonical boundary comparison are separate, proved parts of the main theorem.",
+   "uses": [
+    "def-sfb-diagonal-coefficient-finite-realization",
+    "def-sfb-diagonal-coefficient-reference"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-sfb-diagonal-limit-interface",
+  "def-sfb-diagonal-trace-limit-characterization",
+  "lem-pur-condensed-zl-reduction-mod-ell-power",
+  "sk-prop-sfb-qlbar-colimit-x",
+  "def-sfb-diagonal-coefficient-reference",
+  "def-diagonal-cyclic-cartier-frame",
+  "def-sfb-diagonal-coefficient-finite-realization",
+  "lem-diagonal-integral-root-map"
+ ],
+ "proof_origin": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-diagonal-tower/sk-prop-diagonal-tower-coefficients.proof.md",
+  "place": "paragraph (1), coefficient realization of one finite reduction; sk-prop-diagonal-tower-limit.proof.md (3), finite reduction comparisons",
+  "by": "R4",
+  "note": "A proper supplied-frame coefficient square after integral restriction; no frame construction, cancellation of restriction, or positive canonical-boundary identification is asserted."
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.DiagonalCyclicEvaluationTransport",
+  "file": "lean/Sheaf/Paper/DiagonalCyclicEvaluationTransport.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.DiagonalCoefficients.diagonalCyclicEvaluation_transport",
+  "statement": "theorem diagonalCyclicEvaluation_transport\n    (l : ℕ) [Fact l.Prime] (Y : Scheme.{u})\n    [IsNoetherian Y] [IsNoetherian (ProjectiveLine Y)] [IsNoetherian (diagonalSurface Y)]\n    (hY : IsUnit (l : Γ(Y, ⊤)))\n    [DiagonalTraceLocalizations l Y]\n    [DiagonalTraceLocalizations l (ProjectiveLine Y)]\n    [DiagonalTraceLocalizations l (diagonalSurface Y)]\n    (D : DiagonalDerivedReduction l (diagonalScalarExtension l (diagonalSurface Y)))\n    (δ : diagonalCompletedDomain l Y ⟶ diagonalCompletedCodomain l Y)\n    (family : Family l Y) (reference : Reference l Y δ family)\n    (n : ℕ)\n    (p : CyclicCartierFrame l Y n)\n    (hδ : DiagonalTrace.IsDiagonalLimit l Y hY D δ) :\n    (p.reduce l Y n family.zl.delta).mapExactFunctor\n        (diagonalFiniteToPadic l n (diagonalSurface Y)) =\n      (cartierResidueReducedPro l (Fact.out : l.Prime) (n + 1)\n        (diagonalImmersion Y) (diagonalImmersion_cartier Y)\n        (diagonalSurface_power_unit l Y hY n)).mapExactFunctor\n          (diagonalFiniteToPadic l n (diagonalSurface Y))",
+  "branch": "sheaf-dag",
+  "by": "R4",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R4",
+  "result": "pass",
+  "landing": "20261027T050641-L-249228",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R4",
+  "result": "pass",
+  "landing": "20261027T050641-L-249228",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

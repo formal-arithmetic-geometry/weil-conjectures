@@ -1,0 +1,103 @@
+{
+ "id": "lem-pur-scalar-left-unit-transport",
+ "kind": "lemma",
+ "title": "Left unitality from representative normalization",
+ "statement": "Let \\(C,D,E,H\\) be monoidal categories, \\(Q:C\\to D\\) and \\(R:E\\to H\\) lax monoidal functors, \\(F:C\\to E\\) oplax monoidal, \\(S:D\\to H\\) a functor, and \\(r:Q;S\\to F;R\\) natural. Let \\(\\delta(X,Y):S(X\\otimes Y)\\to SX\\otimes SY\\) be natural in its first variable and let \\(\\eta:S1_D\\to1_H\\). Assume \\(\\delta(QX,QY);(r_X\\otimes r_Y);\\mu_R(FX,FY)=S(\\mu_Q(X,Y));r_{X\\otimes Y};R(\\delta_F(X,Y))\\), and \\(S(\\epsilon_Q);r_{1_C};R(\\eta_F)=\\eta;\\epsilon_R\\). If \\(r_X\\) is monic, then \\(\\delta(1_D,QX);(\\eta\\mathbin{\\triangleright}S(QX));\\lambda_{S(QX)}=S(\\lambda_{QX})\\). Semicolon denotes composition in application order; \\(\\mu,\\epsilon\\) and \\(\\delta_F,\\eta_F\\) are the lax and oplax structural maps. Also define scalarLeftUnitMap to be the natural transformation whose component is the left side of this unit equation, when \\(\\delta\\) is natural in both variables.",
+ "stmt_deps": [],
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 07A4, lemma-pullback-tensor-product; agent extraction of normalized tensor and unit coherence used in more-etale.tex Tag 0GL6"
+ },
+ "proof": [
+  {
+   "text": "Tensor the representative unit equation on the left with r_X. Naturality of δ and the tensor representative equation rewrite the first path by ordinary oplax left unitality. Lax left unitality and naturality of the left unitor rewrite the second path as the proposed left-unit composite followed by r_X. Naturality of r identifies the first path with S of the left unitor followed by r_X. Cancel this monomorphism.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "worker",
+  "group": "X8",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 07A4; normalized representative descent and elementary categorical unit calculations"
+ },
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "An invertible natural transformation between strong monoidal functors that preserves tensor products also preserves the monoidal unit",
+   "results": "Functor.Monoidal.ofLaxMonoidal; CoreMonoidal.ofLaxMonoidal; Monoidal.transport_ε; NatTrans.IsMonoidal.of_cartesianMonoidalCategory; Iso.instIsMonoidalInvFunctor; Monoidal.εIso; Monoidal.ofBifunctor; Monoidal.coreMonoidalTransport",
+   "date": "2026-10-25",
+   "verdict": "No direct match for the normalized scalar comparisons or the required tensor-only implication; ordinary monoidal unit laws are used."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.OplaxMonoidal.left_unitality_hom",
+   "results": "CategoryTheory.Functor.OplaxMonoidal.left_unitality_hom in Mathlib.CategoryTheory.Monoidal.Functor",
+   "date": "2026-10-25",
+   "verdict": "Underlying ordinary unit law; representative transport and site descent remain necessary."
+  },
+  {
+   "tool": "grep",
+   "query": "left_unitality|IsMonoidal.of|unit.*tensor",
+   "results": "ModuleCat.Monoidal.Adjunction ordinary left_unitality; Monoidal.Category tensor/unit constructions; no scalar derived representative or pullback normalization square. Local source search also found ScalarRightUnitTransport and ExceptionalCoefficientUnitCoherence; their proved right-unit arguments guide the left-unit proof.",
+   "date": "2026-10-25",
+   "verdict": "No duplicate of the new normalized left-unit or scalar/pullback tensor statements."
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.EtaleCompactScalarCoherence",
+  "date": "2026-10-25",
+  "group": "X8"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "cor-pur-vector-bundle-purity",
+   "place": "proof, paragraph 2: the explicit projective-line trace commutes with coefficient reduction, and composition of its adjunctions gives the corresponding compatibilities for affine space; the scalar/projection and scalar/composition identifications needed before transposing; scalar binary tensor comparison and coefficient-unit normalization",
+   "via": [
+    "lem-pur-etale-compact-scalar-coherence"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-an",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.ScalarLeftUnitTransport",
+  "file": "lean/Sheaf/CategoryTheory/ScalarLeftUnitTransport.lean",
+  "declaration": "CategoryTheory.leftUnit_on_representative",
+  "statement": "theorem leftUnit_on_representative\n    {C D E H : Type*} [Category C] [Category D] [Category E] [Category H]\n    [MonoidalCategory C] [MonoidalCategory D] [MonoidalCategory E] [MonoidalCategory H]\n    (Q : C ⥤ D) [Q.LaxMonoidal] (R : E ⥤ H) [R.LaxMonoidal]\n    (F : C ⥤ E) [F.OplaxMonoidal] (S : D ⥤ H)\n    (r : Q ⋙ S ⟶ F ⋙ R)\n    (δ : ∀ X Y : D, S.obj (X ⊗ Y) ⟶ S.obj X ⊗ S.obj Y)\n    (η : S.obj (𝟙_ D) ⟶ 𝟙_ H)\n    (hδ : ∀ X {Y Z : D} (f : Y ⟶ Z),\n      S.map (f ▷ X) ≫ δ Z X = δ Y X ≫ (S.map f ▷ S.obj X))\n    (ht : ∀ X Y : C,\n      δ (Q.obj X) (Q.obj Y) ≫ (r.app X ⊗ₘ r.app Y) ≫\n        Functor.LaxMonoidal.μ R (F.obj X) (F.obj Y) =\n      S.map (Functor.LaxMonoidal.μ Q X Y) ≫ r.app (X ⊗ Y) ≫\n        R.map (Functor.OplaxMonoidal.δ F X Y))\n    (hu : S.map (Functor.LaxMonoidal.ε Q) ≫ r.app (𝟙_ C) ≫\n      R.map (Functor.OplaxMonoidal.η F) = η ≫ Functor.LaxMonoidal.ε R)\n    (X : C) [Mono (r.app X)] :\n    δ (𝟙_ D) (Q.obj X) ≫ (η ▷ S.obj (Q.obj X)) ≫ (λ_ (S.obj (Q.obj X))).hom =\n      S.map (λ_ (Q.obj X)).hom",
+  "branch": "sheaf-dag",
+  "by": "X8",
+  "date": "2026-10-25",
+  "declarations": [
+   "CategoryTheory.leftUnit_on_representative",
+   "CategoryTheory.scalarLeftUnitMap"
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "X8",
+  "result": "pass",
+  "landing": "20261025T203723-L-2845980",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "X8",
+  "result": "pass",
+  "landing": "20261025T203723-L-2845980",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

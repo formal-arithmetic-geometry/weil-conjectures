@@ -1,0 +1,684 @@
+{
+ "id": "lem-coef-system-adjunction-transpose-coherence",
+ "kind": "statement",
+ "title": "Resolution-normalized tensor transposes and mates of system adjunctions",
+ "statement": "Fix $k=\\overline{\\mathbf F}_q$ [def-weil-finite-field-fiber], a prime $\\ell\\ne\\operatorname{char}k$, a finite extension $E/\\mathbf Q_\\ell$, its valuation ring $R$, a uniformizer $\\varpi$ and $A_n=R/\\varpi^n$ for $n\\ge1$ [def-weil-l-adic-coefficient-extension]. Let $f:X\\to Y$ be separated finite type between separated finite-type $k$-schemes [def-weil-scheme-morphism-properties], with compactification $X\\xrightarrow{j}\\overline X\\xrightarrow{p}Y$ [def-weil-compactifications-refinements]. For $W=X,Y,\\overline X$ and $\\tau=\\mathrm{et},\\mathrm{proet}$ [def-weil-pbc-etale-site, def-weil-pbc-proetale-site], let $\\mathscr S_W^\\tau$ be the category of strict systems of $(A_n)_W$-module sheaves with semilinear quotient transitions and componentwise morphisms [lem-pur-coefficient-system-derived-comparison]; use its ordinary unbounded derived category [def-weil-abstract-derived-category], exact evaluations $e_n$ and, for $m\\ge n\\ge1$, derived quotient functors $T^W_{m,n}=-\\otimes^L_{A_m}A_n$ [def-weil-derived-tensor]. Write $t^M_{m,n}:T^W_{m,n}M_m\\to M_n$ for the scalar-extension adjunct of the actual transition. \nUse the closed derived tensor/internal-Hom structures [def-pur-derived-internal-hom] on the ringed sequence sites. Let $\\mathcal C_W$ be full subcategories of derived systems, closed under the operations used below, and let $F:\\mathcal C_X\\rightleftarrows\\mathcal C_Y:G$ be an actual adjunction with unit $\\eta$ and counit $\\epsilon$. Assume specified evaluations identify its unit and counit with those of finite adjunctions $F_n\\dashv G_n$. On normalized inputs [def-coef-normalized-dvr-tower] assume the evaluation of the system internal Hom is identified with the finite internal Hom, preserving tensor evaluation.\nGiven a specified transformation $\\alpha:F\\to F'$ between such actual left adjoints with right adjoints $G,G'$, its ordinary mate $\\alpha^R:G'\\to G$ [def-weil-pbc-adjunction-mate] is an actual derived-system transformation; its finite evaluation is the ordinary mate of the evaluated transformation. For composable geometric functors with specified actual composition comparisons, these mate comparisons satisfy horizontal and vertical pasting as system equations, and are unchanged by counit-compatible uniqueness identifications of right adjoints.\nMoreover system tensors computed on simultaneous flat-term K-flat resolutions [def-pc-kflat-complex, def-pc-flat-sheaf-modules], their tensor-evaluation maps, and their closed tensor-Hom transposes are independent of representatives. Composing these maps with $\\eta,\\epsilon$ produces actual system morphisms; their evaluated maps and evaluated closed transposes are exactly the corresponding finite constructions. This applies whenever the inputs lie in the stated full subcategories and the tensors in question have normalized first input where the internal-Hom evaluation is used. Compatibility with quotient transitions and inverse identities is asserted in the ordinary derived-system category, before any total inverse limit. No lifting assertion is made for transformations given only at finite levels.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+  "place": "Final proof paragraph: units, counits and transposes before taking the derived limit, with ordinary composition mates; returned steps 16-17. Agent-formulated ordinary-system refinement; argument allocation and the complete retained argument are in the worker report."
+ },
+ "stmt_deps": [
+  "def-weil-finite-field-fiber",
+  "def-weil-l-adic-coefficient-extension",
+  "def-weil-scheme-morphism-properties",
+  "def-weil-compactifications-refinements",
+  "lem-pur-coefficient-system-derived-comparison",
+  "def-weil-abstract-derived-category",
+  "def-weil-derived-tensor",
+  "def-coef-normalized-dvr-tower",
+  "def-weil-pbc-adjunction-mate",
+  "def-pur-derived-internal-hom",
+  "def-pc-kflat-complex",
+  "def-pc-flat-sheaf-modules",
+  "def-weil-pbc-etale-site",
+  "def-weil-pbc-proetale-site",
+  "def-coef-semilinear-system-models",
+  "def-coef-semilinear-derived-calculus",
+  "def-coef-adjunction-evaluation"
+ ],
+ "proof": [
+  {
+   "text": "The statement quantifies over the already supplied SemilinearSections.Data on each actual site. Use its closed adjunctions, tensorModels.comparison, tensorEvaluation and homEvaluation_evaluation directly. No existence or choice of resolutions or closed structures is needed here. Naturality of tensorModels.comparison on the full subcategory of K-flat pairs is exactly the asserted representative-independence equation; the extra flat-term hypotheses need not be used.",
+   "uses": [
+    "def-coef-semilinear-system-models",
+    "def-coef-semilinear-derived-calculus"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "For u the system transpose of h, apply the inverse finite closed Hom equivalence. Its counit formula is tensor(u,1) followed by evaluation. Factor tensor(e(u) followed by homEvaluation,1), substitute Data.homEvaluation_evaluation, and move tensor(e(u),1) past the inverse tensorEvaluation by naturality. Functoriality leaves inverse tensorEvaluation followed by e(uncurry(u)); the system Hom-equivalence inverse identity identifies uncurry(u) with h. Both inverse identities in the statement are the identities of these equivalences.",
+   "uses": [
+    "def-coef-semilinear-system-models",
+    "def-coef-semilinear-derived-calculus"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Apply the scalar adjunction Hom equivalence to the proposed reduction naturality equation. Its left and right naturality identities, and the definition of reduction as the inverse transpose of derivedTransition, reduce this to derivedTransition.naturality. For two-variable transpose naturality, apply the inverse closed equivalence, substitute evaluation_naturality in the Hom input, commute the tensor maps by bifunctoriality, and cancel the transpose/inverse-transpose pair. This proves actual system equations without detecting equality through finite evaluations.",
+   "uses": [
+    "def-coef-semilinear-system-models",
+    "def-coef-semilinear-derived-calculus"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Specialize SemilinearSections.evaluation_mate to identity horizontal functors and identity evaluation comparisons. Express alpha and its finite version as TwoSquares using left and right unitors. The supplied alpha compatibility is precisely the square hypothesis after unitors simplify. The conclusion simplifies, by the definition of conjugateEquiv, to the displayed finite mate evaluation equation. The two inverse mate equations are the two identities of conjugateEquiv.",
+   "uses": [
+    "lem-coef-semilinear-derived-sections",
+    "def-weil-pbc-adjunction-mate"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "The composition clause is conjugateEquiv_comp with the equality reversed. For right-adjoint uniqueness, expand rightAdjointUniq as the conjugate of the identity; conjugateEquiv_comp combines each side to the same mate, since composing alpha with an identity leaves alpha.",
+   "uses": [
+    "def-weil-pbc-adjunction-mate",
+    "det-sp-unique-right-adjoint",
+    "lem-weil-pbc-mate-pasting"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Instantiate mateEquiv_vcomp and mateEquiv_hcomp on the actual six full subcategories and their supplied adjunctions. These give the two pasting clauses verbatim, including the composite adjunctions. Combine the tensor, mate and pasting clauses for all the indicated schemes and site selectors.",
+   "uses": [
+    "lem-weil-pbc-mate-pasting"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-coef-semilinear-derived-calculus",
+  "def-coef-semilinear-system-models",
+  "def-weil-pbc-adjunction-mate",
+  "det-sp-unique-right-adjoint",
+  "lem-coef-semilinear-derived-sections",
+  "lem-weil-pbc-mate-pasting"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+  "place": "Final ordinary-system refinement, categorical uncurrying and mate calculations from the already supplied Data; H2 proof of 2026-10-24. The original existence/construction steps are not needed for the universally quantified data statement."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Ordinary mates and tensor Hom transposes in derived strict coefficient systems commute with finite evaluation and geometric composition using simultaneous K flat models",
+   "results": {
+    "summary": "[leanfinder] OK 8 hit(s)",
+    "hits": [
+     {
+      "name": "CategoryTheory.tensorLeftHomEquiv_tensor",
+      "module": "Mathlib/CategoryTheory/Monoidal/Rigid/Basic",
+      "type": "∀ {C : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} C] [inst_1 : CategoryTheory.MonoidalCategory C]\n  {X X' Y Y' Z Z' : C} [inst_2 : CategoryTheory.ExactPairing Y Y']\n  (f : X ⟶ CategoryTheory.MonoidalCategoryStruct.tensorObj Y Z) (g : X' ⟶ Z'),\n  (CategoryTheory.tensorLeftHomEquiv (CategoryThe",
+      "doc": "In a rigid monoidal category $\\mathcal{C}$, given objects $X,X',Z,Z'$ and dual objects $Y,Y'$ with an exact pairing, the natural equivalence between $\\text{Hom}(Y' \\otimes X, Z)$ and $\\text{Hom}(X, Y "
+     },
+     {
+      "name": "CategoryTheory.tensorRightHomEquiv_tensor",
+      "module": "Mathlib/CategoryTheory/Monoidal/Rigid/Basic",
+      "type": "∀ {C : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} C] [inst_1 : CategoryTheory.MonoidalCategory C]\n  {X X' Y Y' Z Z' : C} [inst_2 : CategoryTheory.ExactPairing Y Y']\n  (f : X ⟶ CategoryTheory.MonoidalCategoryStruct.tensorObj Z Y') (g : X' ⟶ Z'),\n  (CategoryTheory.tensorRightHomEquiv (CategoryT",
+      "doc": "Given a monoidal category $\\mathcal{C}$ and dual objects $Y$ and $Y'$, there is a natural bijection between morphisms $X \\otimes Y \\to Z$ and morphisms $X \\to Z \\otimes Y'$. This equivalence is constr"
+     },
+     {
+      "name": "AdicCompletion.ofTensorProduct_naturality",
+      "module": "Mathlib/RingTheory/AdicCompletion/AsTensorProduct",
+      "type": "∀ {R : Type u_1} [inst : CommRing R] (I : Ideal R) {M : Type u_2} [inst_1 : AddCommGroup M] [inst_2 : Module R M]\n  {N : Type u_3} [inst_3 : AddCommGroup N] [inst_4 : Module R N] (f : M →ₗ[R] N),\n  AdicCompletion.map I f ∘ₗ AdicCompletion.ofTensorProduct I M =\n    AdicCompletion.ofTensorProduct I N ",
+      "doc": "For any $ R $-linear map $ f : M \to N $, the diagram involving the $ I $-adic completion maps and tensor products commutes, i.e., $\\text{map}_I(f) \\circ \\text{ofTensorProduct}_I(M) = \\text{ofTensorPro"
+     },
+     {
+      "name": "CategoryTheory.tensorLeftHomEquiv",
+      "module": "Mathlib/CategoryTheory/Monoidal/Rigid/Basic",
+      "type": "{C : Type u₁} →\n  [inst : CategoryTheory.Category.{v₁, u₁} C] →\n    [inst_1 : CategoryTheory.MonoidalCategory C] →\n      (X Y Y' Z : C) →\n        [CategoryTheory.ExactPairing Y Y'] →\n          (CategoryTheory.MonoidalCategoryStruct.tensorObj Y' X ⟶ Z) ≃\n            (X ⟶ CategoryTheory.MonoidalCatego",
+      "doc": "In a rigid monoidal category $\\mathcal{C}$, given objects $X,Z$ and dual objects $Y,Y'$ (with an exact pairing), there is a natural equivalence between the hom-set $\\text{Hom}(Y' \\otimes X, Z)$ and $\\"
+     },
+     {
+      "name": "CategoryTheory.tensorLeftHomEquiv_naturality",
+      "module": "Mathlib/CategoryTheory/Monoidal/Rigid/Basic",
+      "type": "∀ {C : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} C] [inst_1 : CategoryTheory.MonoidalCategory C]\n  {X Y Y' Z Z' : C} [inst_2 : CategoryTheory.ExactPairing Y Y']\n  (f : CategoryTheory.MonoidalCategoryStruct.tensorObj Y' X ⟶ Z) (g : Z ⟶ Z'),\n  (CategoryTheory.tensorLeftHomEquiv X Y Y' Z') (Cat",
+      "doc": "In a rigid monoidal category $\\mathcal{C}$, given dual objects $Y, Y'$ with an exact pairing, the left tensor-hom equivalence is natural in $Z$ and $Z'$. Specifically, for morphisms $f : Y' \\otimes X "
+     },
+     {
+      "name": "CategoryTheory.tensorRightHomEquiv",
+      "module": "Mathlib/CategoryTheory/Monoidal/Rigid/Basic",
+      "type": "{C : Type u₁} →\n  [inst : CategoryTheory.Category.{v₁, u₁} C] →\n    [inst_1 : CategoryTheory.MonoidalCategory C] →\n      (X Y Y' Z : C) →\n        [CategoryTheory.ExactPairing Y Y'] →\n          (CategoryTheory.MonoidalCategoryStruct.tensorObj X Y ⟶ Z) ≃\n            (X ⟶ CategoryTheory.MonoidalCategor",
+      "doc": "Given a monoidal category $\\mathcal{C}$ and dual objects $Y$ and $Y'$, this equivalence establishes a natural bijection between morphisms $X \\otimes Y \\to Z$ and morphisms $X \\to Z \\otimes Y'$. The eq"
+     },
+     {
+      "name": "CategoryTheory.tensorLeftHomEquiv_symm_naturality",
+      "module": "Mathlib/CategoryTheory/Monoidal/Rigid/Basic",
+      "type": "∀ {C : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} C] [inst_1 : CategoryTheory.MonoidalCategory C]\n  {X X' Y Y' Z : C} [inst_2 : CategoryTheory.ExactPairing Y Y'] (f : X ⟶ X')\n  (g : X' ⟶ CategoryTheory.MonoidalCategoryStruct.tensorObj Y Z),\n  (CategoryTheory.tensorLeftHomEquiv X Y Y' Z).symm ",
+      "doc": "In a rigid monoidal category $\\mathcal{C}$, given objects $X,X',Z$ and dual objects $Y,Y'$ with an exact pairing, the inverse of the natural equivalence $\\text{Hom}(Y' \\otimes X, Z) \\simeq \\text{Hom}("
+     },
+     {
+      "name": "CategoryTheory.tensorRightHomEquiv_symm_naturality",
+      "module": "Mathlib/CategoryTheory/Monoidal/Rigid/Basic",
+      "type": "∀ {C : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} C] [inst_1 : CategoryTheory.MonoidalCategory C]\n  {X X' Y Y' Z : C} [inst_2 : CategoryTheory.ExactPairing Y Y'] (f : X ⟶ X')\n  (g : X' ⟶ CategoryTheory.MonoidalCategoryStruct.tensorObj Z Y'),\n  (CategoryTheory.tensorRightHomEquiv X Y Y' Z).sym",
+      "doc": "For a monoidal category $\\mathcal{C}$ with dual objects $Y$ and $Y'$, and morphisms $f : X \\to X'$ and $g : X' \\to Z \\otimes Y'$, the inverse of the tensor-hom equivalence satisfies $(\\Phi_{X,Y,Y',Z})"
+     }
+    ]
+   },
+   "date": "2026-10-22",
+   "verdict": "No match: mateEquiv_vcomp and conjugateEquiv cover ordinary categorical pasting only; the resolution-independent strict-system tensor transpose and its normalized derived finite evaluations are additional content."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Resolution independent tensor Hom currying for actual coefficient system adjunction maps respects finite evaluation and horizontal vertical mate pasting",
+   "results": {
+    "summary": "[leanfinder] OK 8 hit(s)",
+    "hits": [
+     {
+      "name": "CategoryTheory.tensorLeftHomEquiv",
+      "module": "Mathlib/CategoryTheory/Monoidal/Rigid/Basic",
+      "type": "{C : Type u₁} →\n  [inst : CategoryTheory.Category.{v₁, u₁} C] →\n    [inst_1 : CategoryTheory.MonoidalCategory C] →\n      (X Y Y' Z : C) →\n        [CategoryTheory.ExactPairing Y Y'] →\n          (CategoryTheory.MonoidalCategoryStruct.tensorObj Y' X ⟶ Z) ≃\n            (X ⟶ CategoryTheory.MonoidalCatego",
+      "doc": "In a rigid monoidal category $\\mathcal{C}$, given objects $X,Z$ and dual objects $Y,Y'$ (with an exact pairing), there is a natural equivalence between the hom-set $\\text{Hom}(Y' \\otimes X, Z)$ and $\\"
+     },
+     {
+      "name": "CategoryTheory.tensorLeftAdjunction",
+      "module": "Mathlib/CategoryTheory/Monoidal/Rigid/Basic",
+      "type": "{C : Type u₁} →\n  [inst : CategoryTheory.Category.{v₁, u₁} C] →\n    [inst_1 : CategoryTheory.MonoidalCategory C] →\n      (Y Y' : C) →\n        [CategoryTheory.ExactPairing Y Y'] →\n          CategoryTheory.MonoidalCategory.tensorLeft Y' ⊣ CategoryTheory.MonoidalCategory.tensorLeft Y",
+      "doc": "In a rigid monoidal category $\\mathcal{C}$, given dual objects $Y$ and $Y'$ with an exact pairing, the left tensoring functor $\\mathcal{C} \\to \\mathcal{C}$ defined by tensoring with $Y'$ is left adjoi"
+     },
+     {
+      "name": "CategoryTheory.tensorRightHomEquiv",
+      "module": "Mathlib/CategoryTheory/Monoidal/Rigid/Basic",
+      "type": "{C : Type u₁} →\n  [inst : CategoryTheory.Category.{v₁, u₁} C] →\n    [inst_1 : CategoryTheory.MonoidalCategory C] →\n      (X Y Y' Z : C) →\n        [CategoryTheory.ExactPairing Y Y'] →\n          (CategoryTheory.MonoidalCategoryStruct.tensorObj X Y ⟶ Z) ≃\n            (X ⟶ CategoryTheory.MonoidalCategor",
+      "doc": "Given a monoidal category $\\mathcal{C}$ and dual objects $Y$ and $Y'$, this equivalence establishes a natural bijection between morphisms $X \\otimes Y \\to Z$ and morphisms $X \\to Z \\otimes Y'$. The eq"
+     },
+     {
+      "name": "CategoryTheory.tensorRightAdjunction",
+      "module": "Mathlib/CategoryTheory/Monoidal/Rigid/Basic",
+      "type": "{C : Type u₁} →\n  [inst : CategoryTheory.Category.{v₁, u₁} C] →\n    [inst_1 : CategoryTheory.MonoidalCategory C] →\n      (Y Y' : C) →\n        [CategoryTheory.ExactPairing Y Y'] →\n          CategoryTheory.MonoidalCategory.tensorRight Y ⊣ CategoryTheory.MonoidalCategory.tensorRight Y'",
+      "doc": "Given dual objects $Y$ and $Y'$ in a monoidal category $\\mathcal{C}$, this establishes an adjunction between the functors $- \\otimes Y$ and $- \\otimes Y'$. Specifically, tensoring with the dual object"
+     },
+     {
+      "name": "CategoryTheory.tensorLeftHomEquiv_tensor",
+      "module": "Mathlib/CategoryTheory/Monoidal/Rigid/Basic",
+      "type": "∀ {C : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} C] [inst_1 : CategoryTheory.MonoidalCategory C]\n  {X X' Y Y' Z Z' : C} [inst_2 : CategoryTheory.ExactPairing Y Y']\n  (f : X ⟶ CategoryTheory.MonoidalCategoryStruct.tensorObj Y Z) (g : X' ⟶ Z'),\n  (CategoryTheory.tensorLeftHomEquiv (CategoryThe",
+      "doc": "In a rigid monoidal category $\\mathcal{C}$, given objects $X,X',Z,Z'$ and dual objects $Y,Y'$ with an exact pairing, the natural equivalence between $\\text{Hom}(Y' \\otimes X, Z)$ and $\\text{Hom}(X, Y "
+     },
+     {
+      "name": "CategoryTheory.tensorRightHomEquiv_tensor",
+      "module": "Mathlib/CategoryTheory/Monoidal/Rigid/Basic",
+      "type": "∀ {C : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} C] [inst_1 : CategoryTheory.MonoidalCategory C]\n  {X X' Y Y' Z Z' : C} [inst_2 : CategoryTheory.ExactPairing Y Y']\n  (f : X ⟶ CategoryTheory.MonoidalCategoryStruct.tensorObj Z Y') (g : X' ⟶ Z'),\n  (CategoryTheory.tensorRightHomEquiv (CategoryT",
+      "doc": "Given a monoidal category $\\mathcal{C}$ and dual objects $Y$ and $Y'$, there is a natural bijection between morphisms $X \\otimes Y \\to Z$ and morphisms $X \\to Z \\otimes Y'$. This equivalence is constr"
+     },
+     {
+      "name": "CategoryTheory.tensorLeftHomEquiv_naturality",
+      "module": "Mathlib/CategoryTheory/Monoidal/Rigid/Basic",
+      "type": "∀ {C : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} C] [inst_1 : CategoryTheory.MonoidalCategory C]\n  {X Y Y' Z Z' : C} [inst_2 : CategoryTheory.ExactPairing Y Y']\n  (f : CategoryTheory.MonoidalCategoryStruct.tensorObj Y' X ⟶ Z) (g : Z ⟶ Z'),\n  (CategoryTheory.tensorLeftHomEquiv X Y Y' Z') (Cat",
+      "doc": "In a rigid monoidal category $\\mathcal{C}$, given dual objects $Y, Y'$ with an exact pairing, the left tensor-hom equivalence is natural in $Z$ and $Z'$. Specifically, for morphisms $f : Y' \\otimes X "
+     },
+     {
+      "name": "CategoryTheory.tensorRightHomEquiv_naturality",
+      "module": "Mathlib/CategoryTheory/Monoidal/Rigid/Basic",
+      "type": "∀ {C : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} C] [inst_1 : CategoryTheory.MonoidalCategory C]\n  {X Y Y' Z Z' : C} [inst_2 : CategoryTheory.ExactPairing Y Y']\n  (f : CategoryTheory.MonoidalCategoryStruct.tensorObj X Y ⟶ Z) (g : Z ⟶ Z'),\n  (CategoryTheory.tensorRightHomEquiv X Y Y' Z') (Cat",
+      "doc": "For a monoidal category $\\mathcal{C}$ with dual objects $Y$ and $Y'$, the tensor-hom equivalence is natural in $Z$. Specifically, for morphisms $f: X \\otimes Y \\to Z$ and $g: Z \\to Z'$, the equivalenc"
+     }
+    ]
+   },
+   "date": "2026-10-22",
+   "verdict": "No match: mateEquiv_vcomp and conjugateEquiv cover ordinary categorical pasting only; the resolution-independent strict-system tensor transpose and its normalized derived finite evaluations are additional content."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Ordinary mates and tensor Hom transposes in derived strict coefficient systems commute with finite evaluation and geometric composition using simultaneous K flat models",
+   "results": {
+    "summary": "[leansearch] OK 8 hit(s)",
+    "hits": [
+     {
+      "name": "transpose_dualTensorHom",
+      "module": "Mathlib.LinearAlgebra.Contraction",
+      "type": "(f : Module.Dual R M) (m : M) :\n  Dual.transpose (R := R) (dualTensorHom R M M (f ⊗ₜ m)) = dualTensorHom R _ _ (Dual.eval R M m ⊗ₜ f)",
+      "doc": "For any element $ f $ in the dual module $ \\text{Dual}(R, M) $ and any element $ m \\in M $, the transpose of the linear map corresponding to the tensor product $ f \\otimes m $ is equal to the linear m"
+     },
+     {
+      "name": "dualTensorHomEquiv",
+      "module": "Mathlib.LinearAlgebra.Contraction",
+      "type": ": Module.Dual R M ⊗[R] N ≃ₗ[R] M →ₗ[R] N",
+      "doc": "For a commutative semiring $ R $, a free $ R $-module $ M $, and an $ R $-module $ N $, the tensor product of the dual module $ M^* $ with $ N $ is linearly isomorphic to the module of $ R $-linear ma"
+     },
+     {
+      "name": "map_dualTensorHom",
+      "module": "Mathlib.LinearAlgebra.Contraction",
+      "type": "(f : Module.Dual R M) (p : P) (g : Module.Dual R N) (q : Q) :\n  TensorProduct.map (dualTensorHom R M P (f ⊗ₜ[R] p)) (dualTensorHom R N Q (g ⊗ₜ[R] q)) =\n    dualTensorHom R (M ⊗[R] N) (P ⊗[R] Q) (dualDistrib R M N (f ⊗ₜ g) ⊗ₜ[R] (p ⊗ₜ[R] q))",
+      "doc": "For modules $M,N$ over a commutative semiring $R$, the composition of tensor product maps induced by dualTensorHom agrees with the dualTensorHom applied to the dualDistrib isomorphism. Specifically, t"
+     },
+     {
+      "name": "CommRingCat.Under.instPreservesFiniteLimitsUnderTensorProdOfFlatCarrier",
+      "module": "Mathlib.Algebra.Category.Ring.Under.Limits",
+      "type": "[Module.Flat R S] : PreservesFiniteLimits (tensorProd R S)",
+      "doc": "If $ S $ is a flat $ R $-module, then the tensor product functor from the under category of $ R $ to the under category of $ S $ preserves finite limits."
+     },
+     {
+      "name": "CategoryTheory.tensorLeftHomEquiv_symm_coevaluation_comp_whiskerRight",
+      "module": "Mathlib.CategoryTheory.Monoidal.Rigid.Basic",
+      "type": "{X Y : C} [HasRightDual X] [HasRightDual Y] (f : X ⟶ Y) :\n  (tensorLeftHomEquiv _ _ _ _).symm (η_ _ _ ≫ f ▷ (Xᘁ)) = (ρ_ _).hom ≫ fᘁ",
+      "doc": "In a rigid monoidal category $\\mathcal{C}$, for objects $X,Y$ with right duals $X^*, Y^*$ and a morphism $f : X \\to Y$, the inverse of the left tensor-hom equivalence applied to the composition of the"
+     },
+     {
+      "name": "CategoryTheory.tensorRightHomEquiv",
+      "module": "Mathlib.CategoryTheory.Monoidal.Rigid.Basic",
+      "type": "(X Y Y' Z : C) [ExactPairing Y Y'] : (X ⊗ Y ⟶ Z) ≃ (X ⟶ Z ⊗ Y')",
+      "doc": "Given a monoidal category $\\mathcal{C}$ and dual objects $Y$ and $Y'$, this equivalence establishes a natural bijection between morphisms $X \\otimes Y \\to Z$ and morphisms $X \\to Z \\otimes Y'$. The eq"
+     },
+     {
+      "name": "ModuleCat.ihom_ev_app",
+      "module": "Mathlib.Algebra.Category.ModuleCat.Monoidal.Closed",
+      "type": "(M N : ModuleCat.{u} R) :\n  (ihom.ev M).app N =\n    ModuleCat.ofHom\n      (TensorProduct.uncurry (.id R) M ((ihom M).obj N) N\n        (LinearMap.lcomp _ _ homLinearEquiv.toLinearMap ∘ₗ LinearMap.id.flip))",
+      "doc": "For modules $ M $ and $ N $ over a commutative ring $ R $, the evaluation morphism $ \\mathrm{ev}_M: [M, N] \\otimes M \\to N $ corresponds to the composition of uncurrying the bilinear map $ [M, N] \\tim"
+     },
+     {
+      "name": "CategoryTheory.tensorLeftHomEquiv",
+      "module": "Mathlib.CategoryTheory.Monoidal.Rigid.Basic",
+      "type": "(X Y Y' Z : C) [ExactPairing Y Y'] : (Y' ⊗ X ⟶ Z) ≃ (X ⟶ Y ⊗ Z)",
+      "doc": "In a rigid monoidal category $\\mathcal{C}$, given objects $X,Z$ and dual objects $Y,Y'$ (with an exact pairing), there is a natural equivalence between the hom-set $\\text{Hom}(Y' \\otimes X, Z)$ and $\\"
+     }
+    ]
+   },
+   "date": "2026-10-22",
+   "verdict": "No match: mateEquiv_vcomp and conjugateEquiv cover ordinary categorical pasting only; the resolution-independent strict-system tensor transpose and its normalized derived finite evaluations are additional content."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.mateEquiv, CategoryTheory.Adjunction",
+   "results": {
+    "summary": "[loogle] OK 12 hit(s)",
+    "hits": [
+     {
+      "name": "CategoryTheory.mateEquiv",
+      "module": "Mathlib.CategoryTheory.Adjunction.Mates",
+      "type": " {C : Type u₁} {D : Type u₂} {E : Type u₃} {F : Type u₄} [CategoryTheory.Category.{v₁, u₁} C] [CategoryTheory.Category.{v₂, u₂} D] [CategoryTheory.Category.{v₃, u₃} E] [CategoryTheory.Category.{v₄, u₄} F] {G : CategoryTheory.Functor C E} {H : CategoryTheory.Functor D F} {L₁ : CategoryTheory.Functor ",
+      "doc": "Suppose we have a square of functors (where the top and bottom are adjunctions `L₁ ⊣ R₁`\nand `L₂ ⊣ R₂` respectively).\n\n```\n      C ↔ D\n    G ↓   ↓ H\n      E ↔ F\n```\n\nThen we have a bijection between n"
+     },
+     {
+      "name": "CategoryTheory.mateEquiv_counit",
+      "module": "Mathlib.CategoryTheory.Adjunction.Mates",
+      "type": " {C : Type u₁} {D : Type u₂} {E : Type u₃} {F : Type u₄} [CategoryTheory.Category.{v₁, u₁} C] [CategoryTheory.Category.{v₂, u₂} D] [CategoryTheory.Category.{v₃, u₃} E] [CategoryTheory.Category.{v₄, u₄} F] {G : CategoryTheory.Functor C E} {H : CategoryTheory.Functor D F} {L₁ : CategoryTheory.Functor ",
+      "doc": "A component of a transposed version of the mates correspondence."
+     },
+     {
+      "name": "CategoryTheory.mateEquiv_counit_symm",
+      "module": "Mathlib.CategoryTheory.Adjunction.Mates",
+      "type": " {C : Type u₁} {D : Type u₂} {E : Type u₃} {F : Type u₄} [CategoryTheory.Category.{v₁, u₁} C] [CategoryTheory.Category.{v₂, u₂} D] [CategoryTheory.Category.{v₃, u₃} E] [CategoryTheory.Category.{v₄, u₄} F] {G : CategoryTheory.Functor C E} {H : CategoryTheory.Functor D F} {L₁ : CategoryTheory.Functor ",
+      "doc": "A component of a transposed version of the inverse mates correspondence."
+     },
+     {
+      "name": "CategoryTheory.unit_mateEquiv",
+      "module": "Mathlib.CategoryTheory.Adjunction.Mates",
+      "type": " {C : Type u₁} {D : Type u₂} {E : Type u₃} {F : Type u₄} [CategoryTheory.Category.{v₁, u₁} C] [CategoryTheory.Category.{v₂, u₂} D] [CategoryTheory.Category.{v₃, u₃} E] [CategoryTheory.Category.{v₄, u₄} F] {G : CategoryTheory.Functor C E} {H : CategoryTheory.Functor D F} {L₁ : CategoryTheory.Functor ",
+      "doc": "A component of a transposed version of the mates correspondence."
+     },
+     {
+      "name": "CategoryTheory.unit_mateEquiv_symm",
+      "module": "Mathlib.CategoryTheory.Adjunction.Mates",
+      "type": " {C : Type u₁} {D : Type u₂} {E : Type u₃} {F : Type u₄} [CategoryTheory.Category.{v₁, u₁} C] [CategoryTheory.Category.{v₂, u₂} D] [CategoryTheory.Category.{v₃, u₃} E] [CategoryTheory.Category.{v₄, u₄} F] {G : CategoryTheory.Functor C E} {H : CategoryTheory.Functor D F} {L₁ : CategoryTheory.Functor ",
+      "doc": "A component of a transposed version of the inverse mates correspondence."
+     },
+     {
+      "name": "CategoryTheory.conjugateEquiv_mateEquiv_vcomp",
+      "module": "Mathlib.CategoryTheory.Adjunction.Mates",
+      "type": " {A : Type u₁} {B : Type u₂} {C : Type u₃} {D : Type u₄} [CategoryTheory.Category.{v₁, u₁} A] [CategoryTheory.Category.{v₂, u₂} B] [CategoryTheory.Category.{v₃, u₃} C] [CategoryTheory.Category.{v₄, u₄} D] {G : CategoryTheory.Functor A C} {H : CategoryTheory.Functor B D} {L₁ : CategoryTheory.Functor ",
+      "doc": "The mates equivalence commutes with this composition, essentially by `mateEquiv_vcomp`."
+     },
+     {
+      "name": "CategoryTheory.mateEquiv_conjugateEquiv_vcomp",
+      "module": "Mathlib.CategoryTheory.Adjunction.Mates",
+      "type": " {A : Type u₁} {B : Type u₂} {C : Type u₃} {D : Type u₄} [CategoryTheory.Category.{v₁, u₁} A] [CategoryTheory.Category.{v₂, u₂} B] [CategoryTheory.Category.{v₃, u₃} C] [CategoryTheory.Category.{v₄, u₄} D] {G : CategoryTheory.Functor A C} {H : CategoryTheory.Functor B D} {L₁ : CategoryTheory.Functor ",
+      "doc": "The mates equivalence commutes with this composition, essentially by `mateEquiv_vcomp`."
+     },
+     {
+      "name": "CategoryTheory.mateEquiv_vcomp",
+      "module": "Mathlib.CategoryTheory.Adjunction.Mates",
+      "type": " {A : Type u₁} {B : Type u₂} {C : Type u₃} {D : Type u₄} {E : Type u₅} {F : Type u₆} [CategoryTheory.Category.{v₁, u₁} A] [CategoryTheory.Category.{v₂, u₂} B] [CategoryTheory.Category.{v₃, u₃} C] [CategoryTheory.Category.{v₄, u₄} D] [CategoryTheory.Category.{v₅, u₅} E] [CategoryTheory.Category.{v₆, ",
+      "doc": "The mates equivalence commutes with vertical composition."
+     },
+     {
+      "name": "CategoryTheory.mateEquiv_hcomp",
+      "module": "Mathlib.CategoryTheory.Adjunction.Mates",
+      "type": " {A : Type u₁} {B : Type u₂} {C : Type u₃} {D : Type u₄} {E : Type u₅} {F : Type u₆} [CategoryTheory.Category.{v₁, u₁} A] [CategoryTheory.Category.{v₂, u₂} B] [CategoryTheory.Category.{v₃, u₃} C] [CategoryTheory.Category.{v₄, u₄} D] [CategoryTheory.Category.{v₅, u₅} E] [CategoryTheory.Category.{v₆, ",
+      "doc": "The mates equivalence commutes with horizontal composition of squares."
+     },
+     {
+      "name": "CategoryTheory.iterated_mateEquiv_conjugateEquiv",
+      "module": "Mathlib.CategoryTheory.Adjunction.Mates",
+      "type": " {A : Type u₁} {B : Type u₂} {C : Type u₃} {D : Type u₄} [CategoryTheory.Category.{v₁, u₁} A] [CategoryTheory.Category.{v₂, u₂} B] [CategoryTheory.Category.{v₃, u₃} C] [CategoryTheory.Category.{v₄, u₄} D] {F₁ : CategoryTheory.Functor A C} {U₁ : CategoryTheory.Functor C A} {F₂ : CategoryTheory.Functo",
+      "doc": "When all four functors in a square are left adjoints, the mates operation can be iterated:\n\n```\n         L₁                  R₁                  R₁\n      C --→ D             C ←-- D             C ←-- "
+     },
+     {
+      "name": "CategoryTheory.iterated_mateEquiv_conjugateEquiv_symm",
+      "module": "Mathlib.CategoryTheory.Adjunction.Mates",
+      "type": " {A : Type u₁} {B : Type u₂} {C : Type u₃} {D : Type u₄} [CategoryTheory.Category.{v₁, u₁} A] [CategoryTheory.Category.{v₂, u₂} B] [CategoryTheory.Category.{v₃, u₃} C] [CategoryTheory.Category.{v₄, u₄} D] {F₁ : CategoryTheory.Functor A C} {U₁ : CategoryTheory.Functor C A} {F₂ : CategoryTheory.Functo",
+      "doc": ""
+     },
+     {
+      "name": "CategoryTheory.mateEquiv_apply",
+      "module": "Mathlib.CategoryTheory.Adjunction.Mates",
+      "type": " {C : Type u₁} {D : Type u₂} {E : Type u₃} {F : Type u₄} [CategoryTheory.Category.{v₁, u₁} C] [CategoryTheory.Category.{v₂, u₂} D] [CategoryTheory.Category.{v₃, u₃} E] [CategoryTheory.Category.{v₄, u₄} F] {G : CategoryTheory.Functor C E} {H : CategoryTheory.Functor D F} {L₁ : CategoryTheory.Functor ",
+      "doc": ""
+     }
+    ]
+   },
+   "date": "2026-10-22",
+   "verdict": "No match: mateEquiv_vcomp and conjugateEquiv cover ordinary categorical pasting only; the resolution-independent strict-system tensor transpose and its normalized derived finite evaluations are additional content."
+  },
+  {
+   "tool": "grep",
+   "query": "mateEquiv_vcomp|conjugateEquiv|KFlat|kflat",
+   "results": {
+    "summary": "[grep] OK 25 hit(s)",
+    "hits": [
+     {
+      "file": "Mathlib/CategoryTheory/Adjunction/CompositionIso.lean",
+      "line": "48",
+      "text": "lemma conjugateEquiv_leftAdjointIdIso_hom :"
+     },
+     {
+      "file": "Mathlib/CategoryTheory/Adjunction/CompositionIso.lean",
+      "line": "49",
+      "text": "    conjugateEquiv .id adj (leftAdjointIdIso adj e).hom = e.inv := by"
+     },
+     {
+      "file": "Mathlib/CategoryTheory/Adjunction/CompositionIso.lean",
+      "line": "66",
+      "text": "  (conjugateEquiv adj₀₂ (adj₀₁.comp adj₁₂)).symm τ₀₁₂"
+     },
+     {
+      "file": "Mathlib/CategoryTheory/Adjunction/CompositionIso.lean",
+      "line": "82",
+      "text": "lemma conjugateEquiv_leftAdjointCompIso_inv (e₀₁₂ : G₂₁ ⋙ G₁₀ ≅ G₂₀) :"
+     },
+     {
+      "file": "Mathlib/CategoryTheory/Adjunction/CompositionIso.lean",
+      "line": "83",
+      "text": "    conjugateEquiv (adj₀₁.comp adj₁₂) adj₀₂"
+     },
+     {
+      "file": "Mathlib/CategoryTheory/Equivalence/Symmetry.lean",
+      "line": "20",
+      "text": "  taking `Equivalence.symm` on objects, and `conjugateEquiv` on maps."
+     },
+     {
+      "file": "Mathlib/CategoryTheory/Equivalence/Symmetry.lean",
+      "line": "24",
+      "text": "  `Equivalence.congrLeft` on objects, and whiskers left by `conjugateEquiv` on maps."
+     },
+     {
+      "file": "Mathlib/CategoryTheory/Equivalence/Symmetry.lean",
+      "line": "46",
+      "text": "  map {e f} α := (mkHom <| conjugateEquiv f.toAdjunction e.toAdjunction <| asNatTrans α).op"
+     },
+     {
+      "file": "Mathlib/CategoryTheory/Equivalence/Symmetry.lean",
+      "line": "57",
+      "text": "        conjugateEquiv e.symm.toAdjunction f.symm.toAdjunction |>.invFun <| asNatTrans α"
+     },
+     {
+      "file": "Mathlib/CategoryTheory/Equivalence/Symmetry.lean",
+      "line": "118",
+      "text": "        conjugateEquiv e.unop.toAdjunction f.unop.toAdjunction <| asNatTrans <|"
+     },
+     {
+      "file": "Mathlib/CategoryTheory/Adjunction/Unique.lean",
+      "line": "65",
+      "text": "    conjugateEquiv_symm_apply_app, NatTrans.id_app, Functor.map_id, Category.id_comp,"
+     },
+     {
+      "file": "Mathlib/CategoryTheory/Adjunction/Unique.lean",
+      "line": "116",
+      "text": "    Iso.refl_hom, conjugateEquiv_apply_app, NatTrans.id_app, Functor.map_id, Category.id_comp]"
+     },
+     {
+      "file": "Mathlib/CategoryTheory/Adjunction/Mates.lean",
+      "line": "170",
+      "text": "theorem mateEquiv_vcomp (α : TwoSquare G₁ L₁ L₂ H₁) (β : TwoSquare G₂ L₂ L₃ H₂) :"
+     },
+     {
+      "file": "Mathlib/CategoryTheory/Adjunction/Mates.lean",
+      "line": "251",
+      "text": "    mateEquiv_vcomp (adj₁.comp adj₂) (adj₃.comp adj₄) (adj₅.comp adj₆) (α ≫ᵥ β) (γ ≫ᵥ δ)"
+     },
+     {
+      "file": "Mathlib/CategoryTheory/Adjunction/Mates.lean",
+      "line": "257",
+      "text": "section conjugateEquiv"
+     },
+     {
+      "file": "Mathlib/CategoryTheory/Adjunction/Mates.lean",
+      "line": "267",
+      "text": "composition with the unitors. Corresponding natural transformations are called `conjugateEquiv`."
+     },
+     {
+      "file": "Mathlib/CategoryTheory/Adjunction/Mates.lean",
+      "line": "275",
+      "text": "def conjugateEquiv : (L₂ ⟶ L₁) ≃ (R₁ ⟶ R₂) :="
+     },
+     {
+      "file": "Mathlib/CategoryTheory/Shift/Adjunction.lean",
+      "line": "351",
+      "text": "    conjugateEquiv_apply_app, Functor.comp_obj, comp_unit_app, Functor.id_obj,"
+     },
+     {
+      "file": "Mathlib/CategoryTheory/Bicategory/Adjunction/Mate.lean",
+      "line": "216",
+      "text": "theorem mateEquiv_vcomp (α : g₁ ≫ l₂ ⟶ l₁ ≫ h₁) (β : g₂ ≫ l₃ ⟶ l₂ ≫ h₂) :"
+     },
+     {
+      "file": "Mathlib/CategoryTheory/Bicategory/Adjunction/Mate.lean",
+      "line": "371",
+      "text": "    mateEquiv_vcomp (adj₁.comp adj₂) (adj₃.comp adj₄) (adj₅.comp adj₆)"
+     },
+     {
+      "file": "Mathlib/CategoryTheory/Bicategory/Adjunction/Mate.lean",
+      "line": "380",
+      "text": "section conjugateEquiv"
+     },
+     {
+      "file": "Mathlib/CategoryTheory/Bicategory/Adjunction/Mate.lean",
+      "line": "391",
+      "text": "This bijection is `conjugateEquiv`; the image of a 2-morphism under it is called its conjugate."
+     },
+     {
+      "file": "Mathlib/CategoryTheory/Bicategory/Adjunction/Mate.lean",
+      "line": "396",
+      "text": "def conjugateEquiv : (l₂ ⟶ l₁) ≃ (r₁ ⟶ r₂) :="
+     },
+     {
+      "file": "Mathlib/CategoryTheory/Bicategory/Adjunction/Cat.lean",
+      "line": "105",
+      "text": "lemma toNatTrans_conjugateEquiv {C D : Cat}"
+     },
+     {
+      "file": "Mathlib/CategoryTheory/Bicategory/Adjunction/Cat.lean",
+      "line": "108",
+      "text": "    (Bicategory.conjugateEquiv adj₁ adj₂ f).toNatTrans ="
+     }
+    ]
+   },
+   "date": "2026-10-22",
+   "verdict": "No match: mateEquiv_vcomp and conjugateEquiv cover ordinary categorical pasting only; the resolution-independent strict-system tensor transpose and its normalized derived finite evaluations are additional content."
+  },
+  {
+   "tool": "grep",
+   "query": "mateEquiv_vcomp|mateEquiv_hcomp|rightAdjointUniq|KFlat",
+   "results": {
+    "summary": "25 hits",
+    "top": [
+     "Mathlib/CategoryTheory/Adjunction/Unique.lean",
+     "Mathlib/CategoryTheory/Adjunction/Unique.lean",
+     "Mathlib/CategoryTheory/Adjunction/Unique.lean",
+     "Mathlib/CategoryTheory/Adjunction/Unique.lean",
+     "Mathlib/CategoryTheory/Adjunction/Unique.lean",
+     "Mathlib/CategoryTheory/Sites/GlobalSections.lean",
+     "Mathlib/CategoryTheory/Sites/GlobalSections.lean",
+     "Mathlib/CategoryTheory/Adjunction/Triple.lean"
+    ],
+    "digest": "f814199e34ae6426"
+   },
+   "date": "2026-10-22",
+   "verdict": "No match for the complete item: ordinary mate and closed currying identities are reusable categorical ingredients, but do not themselves construct the ringed-system derived tensor models and their finite evaluation comparisons."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived tensor internal Hom adjunction on ringed sequence sites preserves evaluation and resolutions",
+   "results": {
+    "summary": "8 hits",
+    "top": [
+     "CategoryTheory.ihom.adjunction",
+     "CategoryTheory.exp.adjunction",
+     "CategoryTheory.exp.ev",
+     "CategoryTheory.MonoidalClosed.internalHomAdjunction₂",
+     "CategoryTheory.ihom.ihom_adjunction_counit",
+     "CategoryTheory.ihom.ev",
+     "CategoryTheory.Types.tensorProductAdjunction",
+     "CategoryTheory.Pi.closedCounit"
+    ],
+    "digest": "950cc5725753de45"
+   },
+   "date": "2026-10-22",
+   "verdict": "No match for the complete item: ordinary mate and closed currying identities are reusable categorical ingredients, but do not themselves construct the ringed-system derived tensor models and their finite evaluation comparisons."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.mateEquiv, CategoryTheory.Adjunction",
+   "results": {
+    "summary": "12 hits",
+    "top": [
+     "CategoryTheory.mateEquiv",
+     "CategoryTheory.mateEquiv_counit",
+     "CategoryTheory.mateEquiv_counit_symm",
+     "CategoryTheory.unit_mateEquiv",
+     "CategoryTheory.unit_mateEquiv_symm",
+     "CategoryTheory.conjugateEquiv_mateEquiv_vcomp",
+     "CategoryTheory.mateEquiv_conjugateEquiv_vcomp",
+     "CategoryTheory.mateEquiv_vcomp"
+    ],
+    "digest": "b8ac30fd6644aa85"
+   },
+   "date": "2026-10-22",
+   "verdict": "No match for the complete item: ordinary mate and closed currying identities are reusable categorical ingredients, but do not themselves construct the ringed-system derived tensor models and their finite evaluation comparisons."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Mates of actual adjunctions on derived categories of strict semilinear coefficient systems and tensor Hom transposes commute with finite evaluation",
+   "results": {
+    "summary": "8 hits",
+    "top": [
+     "CategoryTheory.tensorLeftHomEquiv",
+     "CategoryTheory.tensorRightHomEquiv",
+     "CategoryTheory.tensorLeftHomEquiv_tensor",
+     "CategoryTheory.tensorRightHomEquiv_tensor",
+     "CategoryTheory.tensorLeftAdjunction",
+     "CategoryTheory.tensorRightHomEquiv_symm_coevaluation_comp_whiskerLeft",
+     "CategoryTheory.leftAdjointMate_comp_evaluation",
+     "CategoryTheory.tensorRightAdjunction"
+    ],
+    "digest": "825cf1f9717457cb"
+   },
+   "date": "2026-10-22",
+   "verdict": "No match for the complete item: ordinary mate and closed currying identities are reusable categorical ingredients, but do not themselves construct the ringed-system derived tensor models and their finite evaluation comparisons."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Naturality of adjunction conjugate transformations and closed tensor currying under unit counit preserving evaluation functors",
+   "results": {
+    "summary": "8 hits",
+    "top": [
+     "CategoryTheory.MonoidalClosed.uncurry_natural_right_assoc",
+     "CategoryTheory.ihom.coev_naturality",
+     "CategoryTheory.MonoidalClosed.uncurry_natural_right",
+     "CategoryTheory.MonoidalClosed.curry_natural_left_assoc",
+     "CategoryTheory.MonoidalClosed.uncurry_natural_left_assoc",
+     "CategoryTheory.MonoidalClosed.curry_natural_right",
+     "CategoryTheory.MonoidalClosed.curry_natural_right_assoc",
+     "CategoryTheory.MonoidalClosed.FunctorCategory.homEquiv_naturality_three"
+    ],
+    "digest": "da590ed0fa0502ac"
+   },
+   "date": "2026-10-22",
+   "verdict": "No match for the complete item: ordinary mate and closed currying identities are reusable categorical ingredients, but do not themselves construct the ringed-system derived tensor models and their finite evaluation comparisons."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-coef-cartesian-section-adjoint-mates",
+  "date": "2026-10-22",
+  "group": "NF"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "blueprint": {
+  "from": {
+   "node": "prop-coef-integral-exceptional-adjoint",
+   "place": "Final proof paragraph: units, counits and transposes before taking the derived limit, with ordinary composition mates; returned steps 16-17.",
+   "via": [
+    "lem-coef-cartesian-section-adjoint-mates",
+    "lem-coef-finite-adjunction-diagram-realization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-coef-system-adjunction-transpose-coherence",
+  "worker": "stage1",
+  "summary": "Preserved the statement and all inherited searches. Six explicit proof steps reuse existing generic ringed-site tensor/closed results, the ordinary semilinear evaluation calculus, mate pasting and counit-compatible uniqueness. No new nodes are necessary. Evaluation compatibility follows by applying evaluation to actual mate words and the uncurrying equation; equality and inverse identities are proved inside the ordinary system category.",
+  "blueprint": "Final paragraph of prop-coef-integral-exceptional-adjoint.proof: finite units/counits, transposes and triangle identities before derived limit; returned steps 16-17 are expanded without changing the route.",
+  "tool_uses": [
+   {
+    "node": "lem-pc-kflat-resolution",
+    "why": "Generic flat-term K-flat existence on the ringed sequence site; the unit has no separate resolution existence theorem."
+   },
+   {
+    "node": "lem-pur-kflat-total-tensor-model",
+    "why": "Generic total tensor of two flat-term K-flat complexes remains such a representative, on any ringed site; no geometric purity assertion is used."
+   }
+  ]
+ },
+ "tool_uses": [],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q114-92581f351",
+  "group": "Q114",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q114-92581f351 (reviewer sub-agent of L); spot-checked: Read the item in full: 6 steps, no new nodes, statement and stmt_deps byte-identical to base. Live and side-live copies are still unsplit with no repair note, and the dependency closure has no cycle. Source: main-20261015 prop-coef-integral-exceptional-adjoint.proof final paragraph (triangle identities before the derived limit); proof_origin agent is correct. Checked each cited statement. def-weil-pbc-adjunction-mate gives the mate word, with direction G'->G via eta(F-|G), G alpha, G eps' and alpha:F->F' as the square L2=F, L1=F'. lem-weil-pbc-mate-pasting clauses 1 to 4 give pasting. det-sp-unique-right-adjoint: the step-5 transpose argument is correct for both the target and source right adjoints, using naturality of alpha. lem-coef-semilinear-derived-sections gives tensor evaluation, Hom evaluation only for a cartesian first input, and natural t_{m,n}. lem-sf-ringed-derived-closed-symmetric-monoidal gives u <-> ev(u x 1), which drives the step-6 uniqueness argument. Edge cases checked: zero objects, alpha=id, m=n, ramified E, noncartesian Hom input excluded. Accepted tool_uses: lem-pc-kflat-resolution and lem-pur-kflat-total-tensor-model, both generic ringed-site facts. One C1/C4 fault: steps 1 and 6 apply site lemmas 'on each ringed sequence site', but no cited node identifies strict systems with module sheaves on a small ringed site; semilinear-derived-sections only speaks of a topos. FIX: cite the on-route lem-pur-system-ringed-sequence-site (sk-def-sf-operations, reviewed, no cycle) in steps 1 and 6 and recompute proof_deps. The corrected file is fixes/dag/nodes/sec-six-functors/lem-coef-system-adjunction-transpose-coherence.json.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.Paper.SystemAdjunctionTransposeCoherence",
+  "declaration": "WeilConjectures.systemAdjunctionTransposeCoherence",
+  "declarations": [
+   "WeilConjectures.adjunctionSystemSiteCategory",
+   "WeilConjectures.adjunctionSystemSiteCategoryCategory",
+   "WeilConjectures.adjunctionSystemSite",
+   "WeilConjectures.adjunctionSystemSiteSmall",
+   "WeilConjectures.adjunctionSystemSiteSheafify",
+   "WeilConjectures.adjunctionSystemRings",
+   "WeilConjectures.adjunctionSystemRingTransition",
+   "WeilConjectures.adjunctionSystemDerived",
+   "WeilConjectures.adjunctionSystemData",
+   "WeilConjectures.SystemMateCoherence",
+   "WeilConjectures.SystemMatePasting",
+   "WeilConjectures.SemilinearSections.SystemTensorTransposeCoherence",
+   "WeilConjectures.SystemAdjunctionCoherenceAt",
+   "WeilConjectures.SystemAdjunctionPastingAt",
+   "WeilConjectures.systemAdjunctionTransposeCoherence"
+  ],
+  "file": "lean/Sheaf/Paper/SystemAdjunctionTransposeCoherence.lean",
+  "statement": "theorem systemAdjunctionTransposeCoherence (D₀ : FiniteFieldDatum.{t}) (hl : l ≠ D₀.p) (X Y : Over (Spec (CommRingCat.of D₀.k))) [LocallyOfFiniteType X.hom] [QuasiCompact X.hom] [IsSeparated X.hom] [LocallyOfFiniteType Y.hom] [QuasiCompact Y.hom] [IsSeparated Y.hom] (f : X ⟶ Y) [LocallyOfFiniteType f.left] [QuasiCompact f.left] [IsSeparated f.left] (compactification : Compactification f.left) : (∀ (W : Scheme.{t}) (_hW : W = X.left ∨ W = Y.left ∨ W = compactification.Z) (s : Bool), ∀ A : adjunctionSystemData l E W s, SemilinearSections.SystemTensorTransposeCoherence.{t + 1, t, u} (adjunctionSystemSite W s) (adjunctionSystemRings l E W s) (adjunctionSystemRingTransition l E W s) A) ∧ (∀ (W W' : Scheme.{t}) (_hW : W = X.left ∨ W = Y.left ∨ W = compactification.Z) (_hW' : W' = X.left ∨ W' = Y.left ∨ W' = compactification.Z) (s s' : Bool), SystemAdjunctionCoherenceAt l E W W' s s') ∧ (∀ (W : Fin 6 → Scheme.{t}) (_hW : ∀ i : Fin 6, W i = X.left ∨ W i = Y.left ∨ W i = compactification.Z) (s : Fin 6 → Bool), SystemAdjunctionPastingAt l E W s)",
+  "branch": "sheaf-dag",
+  "by": "Q104",
+  "date": "2026-10-22",
+  "existing": false,
+  "note": "Uses the recorded ordinary ringed-sequence-site calculus and actual adjunction evaluation data. The added definition node def-coef-adjunction-evaluation owns the existing AdjunctionEvaluation structure; lem-coef-semilinear-derived-sections is used only as a proof dependency. The accepted mathematical statement and proof are unchanged. Helpers specialize existing sites and coefficient quotients and spell out the coherence equations; the theorem is universal in the specified calculus."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-f1342a9b6",
+  "group": "Q104",
+  "result": "pass",
+  "note": "The H2 fault of return L is repaired. The item's stmt_deps now cite the new def node def-coef-adjunction-evaluation instead of the theorem node lem-coef-semilinear-derived-sections; the theorem stays in proof_deps. The new node is an existing:true binding of the plain structure SemilinearSections.AdjunctionEvaluation (SemilinearDerivedSections.lean:93). Its signature is verbatim, its λ/ρ isomorphisms and unit/counit equations match the four fields in direction and inverses, it asserts no existence, its only stmt_dep is def-weil-pbc-adjunction-mate (no cycle), and no other owner or duplicate notion exists in live dag/nodes or lean/Sheaf. The Lean module and the item's statement, proof, proof_deps and lean.statement are byte-identical to the previously reviewed head 79ff73e7, whose objects, three conjuncts, edge cases and gates were all found correct; I re-read the coherence formulas to confirm. Advisory only: the structure's docstring still names the old blueprint node, and the structure uses a single category universe k (already accepted). No file changed, so no compile was run."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H2",
+  "result": "pass",
+  "landing": "20261024T185939-L-3790339",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

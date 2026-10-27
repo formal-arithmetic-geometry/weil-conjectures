@@ -1,0 +1,125 @@
+{
+ "id": "def-sp-signed-double-roos-tensor-exchange-data",
+ "kind": "definition",
+ "title": "Strict double Roos and principal Koszul tensor coordinate interface",
+ "statement": "For a site C essentially small in the module universe and a sheaf R of commutative rings, use the existing module sheaf category [def-weil-sheaf-of-modules-category], unbounded cochain complexes, shifted-cone strict Roos functor [def-weil-strict-roos-model], and principal Koszul tower [def-pur-principal-koszul-quotient-towers]. Rearrange a tower degreewise by koszulTowerComplex; define roos by composition with roosF and its evaluations by roosEval. A Boolean Roos degree is 0 or 1. Its coordinates are the cone projection to the current product followed by the nth product projection, or the shifted cone projection followed by that projection in the preceding degree. Define rows by two applications of roos and columns by first flipping indices; their coordinate projections rowCoordinate and columnCoordinate land in intrinsic degree k-p-q, with columnCoordinate including the canonical equality transport. Define innerEvaluation by the existing natural Roos evaluations. Define derivedInterchange as conjugation of the localized strict isomorphism by specified comparison isomorphisms. Define tensorTower by right tensor with the existing principal Koszul tower, strictAugmentation by the signed symmetry applied to koszulStrictAugmentation, completion by tensorTower followed by roos, and augmentation by the existing zero-shifted-component roosAugment. This node records only the unchanged existing constructions extracted from the parent module to avoid an import cycle between its two proof steps.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-tower/sk-lem-sp-tower.proof.md",
+  "place": "Strict double Roos and principal Koszul tensor coordinate interface; parent node lem-sp-signed-double-roos-tensor-exchange coordinate proof."
+ },
+ "stmt_deps": [
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-abstract-derived-category",
+  "def-weil-strict-roos-model",
+  "def-pc-tensor-complex-sheaves",
+  "def-pur-principal-koszul-quotient-towers"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Interchanging two mapping cocones has sign minus one on the doubly shifted component and preserves the two evaluations",
+   "results": [
+    "CochainComplex.mappingCone.shiftIso",
+    "CochainComplex.mappingCone.shiftTriangleIso",
+    "CategoryTheory.Functor.commShiftIso_map₂CochainComplex_flip_hom_app"
+   ],
+   "date": "2026-10-25",
+   "verdict": "No matching double Roos interchange or its coordinate/tensor interface. Cone and shift APIs are ingredients only."
+  },
+  {
+   "tool": "loogle",
+   "query": "CochainComplex.mappingCocone",
+   "results": [
+    "CochainComplex.mappingCocone",
+    "CochainComplex.mappingCocone.inl",
+    "CochainComplex.mappingCocone.inr",
+    "CochainComplex.mappingCocone.snd",
+    "CochainComplex.mappingCocone.liftCochain"
+   ],
+   "date": "2026-10-25",
+   "verdict": "The construction and its basic maps exist; no theorem combines a double product interchange or the principal Koszul tensor/augmentation equations."
+  },
+  {
+   "tool": "grep",
+   "query": "mappingCocone.*(tensor|prod)|roos.*(interchange|flip)",
+   "results": [],
+   "date": "2026-10-25",
+   "verdict": "No Mathlib hits. Local source search also found no result with this generality; KoszulRoosProjectionComparison uses pro-etale sites and regular coefficients and its left-tensor normalization does not supply this statement."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Algebra.Homology.SignedDoubleRoosTensorExchange",
+  "date": "2026-10-25",
+  "group": "M5"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "sk-lem-sp-tower",
+   "place": "Strict double Roos and principal Koszul tensor coordinate interface; refinement of the completeness calculation.",
+   "via": [
+    "lem-sp-signed-double-roos-tensor-exchange",
+    "lem-sp-power-torsion-sheaf-limit-complete"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-lem-sp-tower",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Algebra.Homology.SignedDoubleRoosTensorExchangeDefinitions",
+  "file": "lean/Sheaf/Algebra/Homology/SignedDoubleRoosTensorExchangeDefinitions.lean",
+  "declaration": "CategoryTheory.SignedDoubleRoos.degree",
+  "declarations": [
+   "CategoryTheory.SignedDoubleRoos.Modules",
+   "CategoryTheory.SignedDoubleRoos.Complex",
+   "CategoryTheory.SignedDoubleRoos.Tower",
+   "CategoryTheory.SignedDoubleRoos.towerComplex",
+   "CategoryTheory.SignedDoubleRoos.roos",
+   "CategoryTheory.SignedDoubleRoos.evaluation",
+   "CategoryTheory.SignedDoubleRoos.degree",
+   "CategoryTheory.SignedDoubleRoos.coordinate",
+   "CategoryTheory.SignedDoubleRoos.rows",
+   "CategoryTheory.SignedDoubleRoos.columns",
+   "CategoryTheory.SignedDoubleRoos.rowCoordinate",
+   "CategoryTheory.SignedDoubleRoos.columnCoordinate",
+   "CategoryTheory.SignedDoubleRoos.innerEvaluation",
+   "CategoryTheory.SignedDoubleRoos.derivedInterchange",
+   "CategoryTheory.SignedDoubleRoos.tensorTower",
+   "CategoryTheory.SignedDoubleRoos.strictAugmentation",
+   "CategoryTheory.SignedDoubleRoos.completion",
+   "CategoryTheory.SignedDoubleRoos.augmentation"
+  ],
+  "statement": "def degree (p : Bool) : ℤ",
+  "branch": "sheaf-dag",
+  "by": "M5",
+  "date": "2026-10-25"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-332c9",
+  "group": "M5",
+  "result": "pass",
+  "landing": "20261025T163857-L-882743",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-332c9",
+  "group": "M5",
+  "result": "pass",
+  "landing": "20261025T163857-L-882743",
+  "kind": "interface",
+  "note": "independent cc review: 18 moved definitions byte-identical to published item module (clone c84b68f); item theorem signature unchanged; two new sorry cores = parent conjuncts 1-3 (minus unneeded exactness) and the tensor conjunct for any β with the coordinate formula (which determines β); nodes follow the assembly proof"
+ }
+}

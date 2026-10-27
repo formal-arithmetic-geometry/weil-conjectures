@@ -1,0 +1,205 @@
+{
+ "id": "lem-trf-comonad-counit-section-right-degeneracies",
+ "kind": "statement",
+ "title": "A counit section gives right extra degeneracies of a comonad resolution",
+ "statement": "Let $\\mathcal C$ be an ordinary category and $(T,e,c)$ a comonad on $\\mathcal C$. Let $B_\\bullet\\to\\operatorname{const}(\\mathrm{id}_{\\mathcal C})$ be a supplied standard augmented simplicial resolution of this comonad [def-trf-comonad-standard-resolution]. Let $b\\in\\mathcal C$ and $v:b\\to Tb$ satisfy $e_bv=1_b$. Put $W_n=T^{n+1}b$ for $n\\geq0$, $W_{-1}=b$, and write $p:W_\\bullet\\to\\operatorname{const}(b)$ for evaluation of the augmentation. Define\n$$t_{-1}=v,\\qquad t_n=T^{n+1}(v):W_n\\to W_{n+1}\\quad(n\\geq0).$$\nThen the right extra-degeneracy identities hold:\n$$p_0t_{-1}=1_b,\\qquad d_{n+1}t_n=1_{W_n}\\quad(n\\geq0),\\qquad d_0t_0=t_{-1}p_0,$$\n$$d_it_{n+1}=t_nd_i\\quad(n\\geq0,\\ 0\\leq i\\leq n+1),\\qquad s_it_n=t_{n+1}s_i\\quad(n\\geq0,\\ 0\\leq i\\leq n).$$\nFaces and degeneracies are those of $W$ and compositions are in functional order. The data are natural in pairs $(b,v)$: if $f:b\\to b'$ satisfies $T(f)v=v'f$, then $T^{n+2}(f)t_n=t'_nT^{n+1}(f)$ for $n\\geq0$, and $T(f)t_{-1}=t'_{-1}f$. No equation $c_bv=T(v)v$ is assumed.",
+ "source": {
+  "document": "literature/stacks-project/simplicial.tex",
+  "place": "Tag 08ND, lemma-standard-simplicial-homotopy, in Situation 08N9 (situation-adjoint-functors); auxiliary extra-degeneracy argument for the standard object of Tag 08NC (lemma-standard-simplicial). Returned proof step 5: right extra degeneracies from a split counit; the free-object case uses v=F eta_s and the left triangle identity."
+ },
+ "stmt_deps": [
+  "def-trf-comonad-standard-resolution"
+ ],
+ "proof": [
+  {
+   "text": "Write $d_i^m:W_m\\to W_{m-1}$ and $s_i^m:W_m\\to W_{m+1}$. By [def-trf-comonad-standard-resolution], $p_0=e_b$, $d_i^m=T^i(e_{T^{m-i}b})$ and $s_i^m=T^i(c_{T^{m-i}b})$. Powers applied to arrows preserve composition and identities. Thus $p_0t_{-1}=e_bv=1_b$ and, for $n\\geq0$, $d_{n+1}^{n+1}t_n=T^{n+1}(e_b)T^{n+1}(v)=T^{n+1}(e_bv)=1_{W_n}$. Regrouping iterates uses $T^rT^s=T^{r+s}$, obtained by expanding the recursive powers (induction on $r$).",
+   "uses": [
+    "def-trf-comonad-standard-resolution"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/simplicial.tex",
+    "place": "Tags 0G5M (example-godement), 08NC (lemma-standard-simplicial), and 08ND (lemma-standard-simplicial-homotopy); explicit right-insertion calculation generalizing the free-object case."
+   }
+  },
+  {
+   "text": "For the remaining augmentation boundary, naturality of $e:T\\to\\mathrm{id}$ at $v:b\\to Tb$ says $e_{Tb}T(v)=ve_b$. Substituting $d_0^1=e_{Tb}$, $t_0=T(v)$, $t_{-1}=v$ and $p_0=e_b$ gives $d_0^1t_0=t_{-1}p_0$.",
+   "uses": [
+    "def-trf-comonad-standard-resolution"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/simplicial.tex",
+    "place": "Tags 0G5M (example-godement), 08NC (lemma-standard-simplicial), and 08ND (lemma-standard-simplicial-homotopy); explicit right-insertion calculation generalizing the free-object case."
+   }
+  },
+  {
+   "text": "Fix $n\\geq0$ and $0\\leq i\\leq n+1$, and put $a=T^{n+1-i}(v)$. Naturality of $e$ at $a:T^{n+1-i}b\\to T^{n+2-i}b$ is $e_{T^{n+2-i}b}T(a)=a e_{T^{n+1-i}b}$. Apply $T^i$ and preserve compositions. Its left side becomes $d_i^{n+2}t_{n+1}$ and its right side becomes $t_nd_i^{n+1}$, proving the required face identity including $i=0$ and $i=n+1$.",
+   "uses": [
+    "def-trf-comonad-standard-resolution"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/simplicial.tex",
+    "place": "Tags 0G5M (example-godement), 08NC (lemma-standard-simplicial), and 08ND (lemma-standard-simplicial-homotopy); explicit right-insertion calculation generalizing the free-object case."
+   }
+  },
+  {
+   "text": "Fix $n\\geq0$ and $0\\leq i\\leq n$, and put $a=T^{n-i}(v)$. Naturality of $c:T\\to T^2$ at $a$ is $c_{T^{n+1-i}b}T(a)=T^2(a)c_{T^{n-i}b}$. Apply $T^i$ and preserve compositions. Its left side is $s_i^{n+1}t_n$, and its right side is $t_{n+1}s_i^n$. This proves the degeneracy identity, also when $n=i=0$. Only naturality of $c$, not an equation involving $c_bv$, was used.",
+   "uses": [
+    "def-trf-comonad-standard-resolution"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/simplicial.tex",
+    "place": "Tags 0G5M (example-godement), 08NC (lemma-standard-simplicial), and 08ND (lemma-standard-simplicial-homotopy); explicit right-insertion calculation generalizing the free-object case."
+   }
+  },
+  {
+   "text": "Let $f:b\\to b\\prime$ satisfy $T(f)v=v\\prime f$. Applying the functor $T^{n+1}$ to this equality gives $T^{n+2}(f)T^{n+1}(v)=T^{n+1}(v\\prime)T^{n+1}(f)$, which is exactly $T^{n+2}(f)t_n=t_n\\prime T^{n+1}(f)$ for every $n\\geq0$. In degree $-1$ the desired equality is the assumed equation itself. These formulas prove naturality for all the specified data.",
+   "uses": [
+    "def-trf-comonad-standard-resolution"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/simplicial.tex",
+    "place": "Tags 0G5M (example-godement), 08NC (lemma-standard-simplicial), and 08ND (lemma-standard-simplicial-homotopy); explicit right-insertion calculation generalizing the free-object case."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-trf-comonad-standard-resolution"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/simplicial.tex",
+  "place": "Explicit naturality calculation for the right-insertion auxiliary to Tag 08ND; operator conventions from Tag 0G5M. The arbitrary split-counit generality is proved here, not asserted verbatim by 08ND."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A counit section on a comonad object induces right extra degeneracies of the standard augmented simplicial resolution",
+   "results": "{\"t\": \"2026-10-22T06:44:07Z\", \"tool\": \"leanfinder\", \"query\": \"A counit section on a comonad object induces right extra degeneracies of the standard augmented simplicial resolution\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.SimplicialObject.Augmented.ExtraDegeneracy.s'_comp_ε_assoc\", \"CategoryTheory.SimplicialObject.Augmented.ExtraDegeneracy.s'\", \"CategoryTheory.SimplicialObject.Augmented.ExtraDegeneracy\", \"CategoryTheory.SimplicialObject.Augmented.ExtraDegeneracy.s'_comp_ε\", \"CategoryTheory.SimplicialObject.Augmented.ExtraDegeneracy.s\", \"CategoryTheory.SimplicialObject.Augmented.ExtraDegeneracy.s_comp_δ₀\", \"CategoryTheory.SimplicialObject.Augmented.ExtraDegeneracy.const\", \"SSet.Augmented.StandardSimplex.extraDegeneracy\"], \"digest\": \"0235c3cbbeffd538\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: ExtraDegeneracy fields and counit identities assume supplied left contraction data, not right extra degeneracies constructed from an arbitrary section of a comonad counit. Comonad.Coalgebra in Mathlib/CategoryTheory/Monad/Algebra.lean:262 requires also a coassociativity equation on the section, which this statement does not assume. CofreeEqualizer.topMap/bottomMap in Mathlib/CategoryTheory/Monad/Equalizer.lean:49,54 construct equalizer arrows, not the simplicial identities. No one-line specialization found."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Free objects admit a contraction by inserting the adjunction unit at the right end of the comonad bar construction",
+   "results": "{\"t\": \"2026-10-22T06:44:22Z\", \"tool\": \"leanfinder\", \"query\": \"Free objects admit a contraction by inserting the adjunction unit at the right end of the comonad bar construction\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Comonad.CofreeEqualizer.bottomMap\", \"CategoryTheory.Comonad.cofree_obj_a\", \"CategoryTheory.Comonad.adj_unit\", \"CategoryTheory.Comonad.CofreeEqualizer.ι\", \"CategoryTheory.Monad.FreeCoequalizer.bottomMap\", \"CategoryTheory.Comonad.CofreeEqualizer.topMap\", \"CategoryTheory.Comonad.CofreeEqualizer.bottomMap_f\", \"CategoryTheory.Cokleisli.Adjunction.toCokleisli_map\"], \"digest\": \"58c7acc30ca7a25f\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: ExtraDegeneracy fields and counit identities assume supplied left contraction data, not right extra degeneracies constructed from an arbitrary section of a comonad counit. Comonad.Coalgebra in Mathlib/CategoryTheory/Monad/Algebra.lean:262 requires also a coassociativity equation on the section, which this statement does not assume. CofreeEqualizer.topMap/bottomMap in Mathlib/CategoryTheory/Monad/Equalizer.lean:49,54 construct equalizer arrows, not the simplicial identities. No one-line specialization found."
+  },
+  {
+   "tool": "leansearch",
+   "query": "On free objects of an adjunction the unit gives right extra degeneracies of the simplicial bar resolution",
+   "results": "{\"t\": \"2026-10-22T06:43:54Z\", \"tool\": \"leansearch\", \"query\": \"On free objects of an adjunction the unit gives right extra degeneracies of the simplicial bar resolution\", \"sub\": \"\", \"ok\": false, \"n_hits\": 0, \"note\": \"service unavailable: {\\\"error\\\":\\\"Rate limit exceeded: 60 per 1 minute\\\"}\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Comonad\", \"Coalgebra\"",
+   "results": "{\"t\": \"2026-10-22T06:44:25Z\", \"tool\": \"loogle\", \"query\": \"\\\"Comonad\\\", \\\"Coalgebra\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"CategoryTheory.Comonad.Coalgebra\", \"CategoryTheory.Comonad.Coalgebra.A\", \"CategoryTheory.Comonad.Coalgebra.eilenbergMoore\", \"CategoryTheory.Comonad.Coalgebra.instCategoryStruct\", \"CategoryTheory.Comonad.instInhabitedCoalgebra\", \"CategoryTheory.Comonad.Coalgebra.Hom\", \"CategoryTheory.Comonad.Coalgebra.Hom.id\", \"CategoryTheory.Comonad.instIsLeftAdjointCoalgebraForget\"], \"digest\": \"7149d83ac34f5c5a\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: ExtraDegeneracy fields and counit identities assume supplied left contraction data, not right extra degeneracies constructed from an arbitrary section of a comonad counit. Comonad.Coalgebra in Mathlib/CategoryTheory/Monad/Algebra.lean:262 requires also a coassociativity equation on the section, which this statement does not assume. CofreeEqualizer.topMap/bottomMap in Mathlib/CategoryTheory/Monad/Equalizer.lean:49,54 construct equalizer arrows, not the simplicial identities. No one-line specialization found."
+  },
+  {
+   "tool": "grep",
+   "query": "right.*[Ee]xtra|[Ee]xtra.*right|[Ff]ree.*[Dd]egener|[Dd]egener.*[Ff]ree [sub=AlgebraicTopology]",
+   "results": "{\"t\": \"2026-10-22T06:44:10Z\", \"tool\": \"grep\", \"query\": \"right.*[Ee]xtra|[Ee]xtra.*right|[Ff]ree.*[Dd]egener|[Dd]egener.*[Ff]ree\", \"sub\": \"AlgebraicTopology\", \"ok\": true, \"n_hits\": 2, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicTopology/SimplexCategory/GeneratorsRelations/Basic.lean\", \"Mathlib/AlgebraicTopology/SimplexCategory/GeneratorsRelations/Basic.lean\"], \"digest\": \"ef7eddf61d12de74\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: ExtraDegeneracy fields and counit identities assume supplied left contraction data, not right extra degeneracies constructed from an arbitrary section of a comonad counit. Comonad.Coalgebra in Mathlib/CategoryTheory/Monad/Algebra.lean:262 requires also a coassociativity equation on the section, which this statement does not assume. CofreeEqualizer.topMap/bottomMap in Mathlib/CategoryTheory/Monad/Equalizer.lean:49,54 construct equalizer arrows, not the simplicial identities. No one-line specialization found."
+  },
+  {
+   "tool": "grep",
+   "query": "[Cc]omonad.*[Dd]egener|[Dd]egener.*[Cc]omonad|right.*[Ee]xtra|[Ee]xtra.*right [sub=AlgebraicTopology]",
+   "results": "{\"t\": \"2026-10-23T12:15:51Z\", \"tool\": \"grep\", \"query\": \"[Cc]omonad.*[Dd]egener|[Dd]egener.*[Cc]omonad|right.*[Ee]xtra|[Ee]xtra.*right\", \"sub\": \"AlgebraicTopology\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: Mathlib ExtraDegeneracy (AlgebraicTopology/ExtraDegeneracy.lean:77-90) requires supplied left extra-degeneracy data and does not construct these right insertions. Comonad.counit_naturality and delta_naturality (CategoryTheory/Monad/Basic.lean:88-96) are individual naturality squares, not the entire statement; Coalgebra (CategoryTheory/Monad/Algebra.lean:262-271) additionally requires coassociativity. CofreeEqualizer maps (CategoryTheory/Monad/Equalizer.lean:49-65) concern coalgebras and equalizers. None is a one-line specialization giving every clause."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A split counit on an object contracts the standard simplicial comonad bar resolution",
+   "results": "{\"t\": \"2026-10-23T12:15:52Z\", \"tool\": \"leansearch\", \"query\": \"A split counit on an object contracts the standard simplicial comonad bar resolution\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Comonad.isSplitEpi_iff_isIso_counit\", \"CategoryTheory.ComonObj.counit\", \"CategoryTheory.Adjunction.counitSplitMonoOfRFull\", \"CategoryTheory.Comonad.beckSplitEqualizer\", \"SimplicialObject.Splitting.summand\", \"SimplicialObject.Split.casesOn\", \"SimplicialObject.Split.mk'_s\", \"SimplicialObject.Splitting.mk.inj\"], \"digest\": \"ee8e06f77eb4a229\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: Mathlib ExtraDegeneracy (AlgebraicTopology/ExtraDegeneracy.lean:77-90) requires supplied left extra-degeneracy data and does not construct these right insertions. Comonad.counit_naturality and delta_naturality (CategoryTheory/Monad/Basic.lean:88-96) are individual naturality squares, not the entire statement; Coalgebra (CategoryTheory/Monad/Algebra.lean:262-271) additionally requires coassociativity. CofreeEqualizer maps (CategoryTheory/Monad/Equalizer.lean:49-65) concern coalgebras and equalizers. None is a one-line specialization giving every clause."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Comonad\", \"counit\"",
+   "results": "{\"t\": \"2026-10-23T12:15:52Z\", \"tool\": \"loogle\", \"query\": \"\\\"Comonad\\\", \\\"counit\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"CategoryTheory.Comonad.isSplitEpi_iff_isIso_counit\", \"CategoryTheory.Comonad.counit_naturality\", \"CategoryTheory.Comonad.map_counit_app\", \"CategoryTheory.Comonad.counit_naturality_assoc\", \"CategoryTheory.Comonad.left_counit\", \"CategoryTheory.Comonad.left_counit_assoc\", \"CategoryTheory.Comonad.right_counit_assoc\", \"CategoryTheory.Comonad.right_counit\"], \"digest\": \"cc94cac2b9419043\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: Mathlib ExtraDegeneracy (AlgebraicTopology/ExtraDegeneracy.lean:77-90) requires supplied left extra-degeneracy data and does not construct these right insertions. Comonad.counit_naturality and delta_naturality (CategoryTheory/Monad/Basic.lean:88-96) are individual naturality squares, not the entire statement; Coalgebra (CategoryTheory/Monad/Algebra.lean:262-271) additionally requires coassociativity. CofreeEqualizer maps (CategoryTheory/Monad/Equalizer.lean:49-65) concern coalgebras and equalizers. None is a one-line specialization giving every clause."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A section of a comonad counit gives right extra degeneracies of its standard augmented simplicial resolution without the coalgebra coassociativity axiom",
+   "results": "{\"t\": \"2026-10-23T12:15:54Z\", \"tool\": \"leanfinder\", \"query\": \"A section of a comonad counit gives right extra degeneracies of its standard augmented simplicial resolution without the coalgebra coassociativity axiom\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.SimplicialObject.Augmented.ExtraDegeneracy.s\", \"SSet.Augmented.StandardSimplex.extraDegeneracy\", \"CategoryTheory.SimplicialObject.Augmented.ExtraDegeneracy.s'\", \"CategoryTheory.SimplicialObject.Augmented.ExtraDegeneracy\", \"CategoryTheory.SimplicialObject.Augmented.ExtraDegeneracy.const\", \"classifyingSpaceUniversalCover.extraDegeneracyCompForgetAugmented\", \"CategoryTheory.SimplicialObject.Augmented.ExtraDegeneracy.s'_comp_ε_assoc\", \"CategoryTheory.SimplicialObject.Augmented.ExtraDegeneracy.s'_comp_ε\"], \"digest\": \"46246989132410c4\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: Mathlib ExtraDegeneracy (AlgebraicTopology/ExtraDegeneracy.lean:77-90) requires supplied left extra-degeneracy data and does not construct these right insertions. Comonad.counit_naturality and delta_naturality (CategoryTheory/Monad/Basic.lean:88-96) are individual naturality squares, not the entire statement; Coalgebra (CategoryTheory/Monad/Algebra.lean:262-271) additionally requires coassociativity. CofreeEqualizer maps (CategoryTheory/Monad/Equalizer.lean:49-65) concern coalgebras and equalizers. None is a one-line specialization giving every clause."
+  },
+  {
+   "tool": "grep",
+   "query": "ExtraDegeneracy|isSplitEpi_iff_isIso_counit|counit_naturality|comul_naturality [sub=CategoryTheory/Monad]",
+   "results": "{\"t\": \"2026-10-23T12:16:11Z\", \"tool\": \"grep\", \"query\": \"ExtraDegeneracy|isSplitEpi_iff_isIso_counit|counit_naturality|comul_naturality\", \"sub\": \"CategoryTheory/Monad\", \"ok\": true, \"n_hits\": 9, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Monad/Monadicity.lean\", \"Mathlib/CategoryTheory/Monad/Monadicity.lean\", \"Mathlib/CategoryTheory/Monad/Adjunction.lean\", \"Mathlib/CategoryTheory/Monad/Adjunction.lean\", \"Mathlib/CategoryTheory/Monad/Adjunction.lean\", \"Mathlib/CategoryTheory/Monad/Equalizer.lean\", \"Mathlib/CategoryTheory/Monad/Basic.lean\", \"Mathlib/CategoryTheory/Monad/Basic.lean\"], \"digest\": \"353dd9c2cb521a0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: Mathlib ExtraDegeneracy (AlgebraicTopology/ExtraDegeneracy.lean:77-90) requires supplied left extra-degeneracy data and does not construct these right insertions. Comonad.counit_naturality and delta_naturality (CategoryTheory/Monad/Basic.lean:88-96) are individual naturality squares, not the entire statement; Coalgebra (CategoryTheory/Monad/Algebra.lean:262-271) additionally requires coassociativity. CofreeEqualizer maps (CategoryTheory/Monad/Equalizer.lean:49-65) concern coalgebras and equalizers. None is a one-line specialization giving every clause."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Inserting a section at the right of an iterated comonad gives a simplicial contraction natural in section preserving morphisms",
+   "results": "{\"t\": \"2026-10-23T12:16:12Z\", \"tool\": \"leanfinder\", \"query\": \"Inserting a section at the right of an iterated comonad gives a simplicial contraction natural in section preserving morphisms\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.SimplicialObject.Augmented.ExtraDegeneracy.s\", \"CategoryTheory.SimplicialObject.σ\", \"AlgebraicTopology.DoldKan.MorphComponents.φ\", \"CategoryTheory.SimplicialObject.Augmented.ExtraDegeneracy.s'\", \"SimplicialObject.Splitting.φ\", \"CategoryTheory.CosimplicialObject.σ\", \"CategoryTheory.SimplicialObject.Augmented.w₀\", \"CategoryTheory.SimplicialObject.diagonal\"], \"digest\": \"7cdec9a6659b6bbf\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: Mathlib ExtraDegeneracy (AlgebraicTopology/ExtraDegeneracy.lean:77-90) requires supplied left extra-degeneracy data and does not construct these right insertions. Comonad.counit_naturality and delta_naturality (CategoryTheory/Monad/Basic.lean:88-96) are individual naturality squares, not the entire statement; Coalgebra (CategoryTheory/Monad/Algebra.lean:262-271) additionally requires coassociativity. CofreeEqualizer maps (CategoryTheory/Monad/Equalizer.lean:49-65) concern coalgebras and equalizers. None is a one-line specialization giving every clause."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-adjunction-standard-simplicial-homotopy",
+  "date": "2026-10-22",
+  "group": "Q34"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Proof (1)--(2), semistable-alteration input in the nearby-cycle branch: ILO Exposé X, Theorem 3.4, Step 3, invoking Temkin 2010, Theorems 1.5 and 1.1 for a semistable multipointed modification. Temkin proof component: Marked dualizing line bundle and contracted-component degrees. Auxiliary input: Local complete-intersection determinant adjunction underlying the marked dualizing construction, before the marking is inserted. Supporting ring/sheaf input: Functorial standard resolutions and comparison with arbitrary polynomial resolutions. Generic input to lem-trf-cotangent-resolution-coherence: Standard simplicial object of an adjunction and its homotopy equivalences. Re-split auxiliary: Returned proof step 5: right extra degeneracies from a split counit; the free-object case uses v=F eta_s and the left triangle identity.",
+   "via": [
+    "lem-trf-adjunction-standard-simplicial-homotopy",
+    "lem-trf-cotangent-resolution-coherence",
+    "lem-trf-lci-cotangent-presentation",
+    "lem-trf-flat-lci-canonical-adjunction",
+    "lem-trf-marked-nodal-dualizing-degrees",
+    "lem-trf-temkin-stable-modification",
+    "lem-trf-stable-modification-flat-curve-pair",
+    "lem-trf-dejong-relative-marked-semistable",
+    "lem-trf-relative-marked-nodal-reduction",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-trf-comonad-counit-section-right-degeneracies",
+  "worker": "stage1",
+  "summary": "Verified the supplied resolution definition and Stacks operator conventions. Proved each right extra-degeneracy identity by the explicit naturality square of e or c and functoriality; proved section-preserving naturality directly. No coalgebra coassociativity is required and no new nodes are needed. Reused the interrupted search log after reading the candidate sources.",
+  "blueprint": "The inherited auxiliary chain below lem-trf-local-term-locality, proof (1)--(2), reaches the standard adjunction resolution via cotangent-resolution coherence. These five steps realize returned step 5 of lem-trf-adjunction-standard-simplicial-homotopy: right extra degeneracies for an object with split counit. The current latest locality blueprint has no separate comonad statement (blueprint searches comonad and extra degenerac returned none); no chapter/unit route is altered."
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q92-5f1e86480",
+  "group": "Q92",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q92-5f1e86480 (reviewer sub-agent of L); spot-checked: I checked the delivery against clones/live and clones/side-live. The statement, source, blueprint and stmt_deps are unchanged, and the item is still unsplit live, so it is not superseded. There are no new nodes. The older search records are kept and six new ones are added; the LeanSearch one is honestly marked unavailable. Read Stacks 0G5M example-godement (simplicial.tex:6193) and 08ND (:6729). Stacks proves the result by a different route (godement-section plus two-maps lemma); the agent route here is properly marked proof_origin agent. The cited node def-trf-comonad-standard-resolution gives d_i^m=T^i(e_{T^{m-i}b}), s_i^m=T^i(c_{T^{m-i}b}) and a_0=e. Each step checked by hand: step 1 gives d_{n+1}^{n+1}t_n=T^{n+1}(e_b v)=1; step 2 is naturality of e at v; step 3 is naturality of e at T^{n+1-i}v followed by T^i, with i<=n+1 and checked at n=0,i=1; step 4 is naturality of c at T^{n-i}v followed by T^i, with no coalgebra law used; step 5 applies T^{n+1} to T(f)v=v'f. All steps are genuinely two-line naturality or functoriality facts, so the elementary flags are justified. The identities are exactly the hypotheses of lem-trf-simplicial-reversal-extra-degeneracies-homotopy and are what parent steps 4-5 consume. No duplicate found: lem-trf-adjunction-right-image-extra-degeneracies is the left-insertion counterpart, a different statement. No SGA cited, no changes, no tool_uses."
+ }
+}

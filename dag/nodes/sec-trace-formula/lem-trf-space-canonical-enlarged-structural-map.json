@@ -1,0 +1,155 @@
+{
+ "id": "lem-trf-space-canonical-enlarged-structural-map",
+ "kind": "statement",
+ "title": "Canonical normalized structural map on enlarged etale sites",
+ "statement": "Let $S$ be a scheme [def-pc-scheme] and let $f:X\\to Y$ be a morphism of algebraic spaces over $S$ [def-trf-algebraic-space]. Give each enlarged etale site its canonical ring sheaf $\\widetilde{\\mathcal O}_A$, the inverse image of $\\mathcal O_A$ under scheme restriction, with the counit restriction isomorphism [lem-trf-space-enlarged-atlas-algebraic-extension]. There is a unique map $r:\\widetilde{\\mathcal O}_Y\\to f_*\\widetilde{\\mathcal O}_X$, where $f_*$ evaluates on $X\\times_YV$, such that for every pair of scheme etale objects $U/X,V/Y$ and every $S$-map $q:U\\to V$ over $f$, its restriction to $U$, conjugated by the two counit normalizations, is the ordinary pullback $q^*:\\Gamma(V,\\mathcal O_V)\\to\\Gamma(U,\\mathcal O_U)$.",
+ "source": {
+  "document": "literature/stacks-project/spaces-properties.tex",
+  "place": "Tags 03G8 (lemma-morphism-ringed-topoi), proof, and 03H7 (remark-explain-equivalence)."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-trf-algebraic-space",
+  "lem-trf-space-enlarged-atlas-algebraic-extension"
+ ],
+ "proof": [
+  {
+   "text": "For each scheme object V over Y choose a surjective representable etale scheme atlas U of X times_Y V. By [lem-trf-space-enlarged-site-scheme-density] the chart is a singleton covering, and [lem-trf-space-enlarged-atlas-algebraic-extension] computes sections by the atlas equalizer. Pull a regular function on V back to U; its two pullbacks on the scheme overlap agree by functoriality. The equalizer uniquely glues the section; its injective map into the atlas sections verifies the ring operations.",
+   "uses": [
+    "lem-trf-space-enlarged-site-scheme-density",
+    "lem-trf-space-enlarged-atlas-algebraic-extension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-properties.tex",
+    "place": "Tags 03G8 (lemma-morphism-ringed-topoi), proof, and 03H7 (remark-explain-equivalence)."
+   }
+  },
+  {
+   "text": "For two atlases use their scheme fibre product over X times_Y V as common refinement. Covering base change and chartwise composition from [lem-trf-space-chartwise-etale-permanence] show that it covers both charts. Equalizer injectivity proves independence and the normalization on all scheme triangles. For V prime to V use the corresponding pullback refinement to prove naturality. Full faithfulness of ring restriction extends the resulting map on scheme objects uniquely to the enlarged ring sheaves. A normalized map must have these same restrictions by the equalizer injection, hence is unique. The canonical normalization is precisely enlargedStructureRestriction, so this gives IsEnlargedStructuralMap, without any choice of a new structure sheaf.",
+   "uses": [
+    "lem-trf-space-chartwise-etale-permanence",
+    "lem-trf-space-enlarged-atlas-algebraic-extension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-properties.tex",
+    "place": "Tags 03G8 (lemma-morphism-ringed-topoi), proof, and 03H7 (remark-explain-equivalence)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-trf-space-enlarged-site-scheme-density",
+  "lem-trf-space-enlarged-atlas-algebraic-extension",
+  "lem-trf-space-chartwise-etale-permanence"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/spaces-properties.tex",
+  "place": "Tags 03G8 (lemma-morphism-ringed-topoi), proof, and 03H7 (remark-explain-equivalence)."
+ },
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Existence and uniqueness of the structural ring sheaf morphism on enlarged etale sites of algebraic spaces normalized by scheme pullback",
+   "results": "{\"t\": \"2026-10-26T07:03:30Z\", \"tool\": \"leansearch\", \"query\": \"Existence and uniqueness of the structural ring sheaf morphism on enlarged etale sites of algebraic spaces normalized by scheme pullback\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Hom.toRingCatSheafHom\", \"AlgebraicGeometry.StructureSheaf.toPushforwardStalk\", \"AlgebraicGeometry.LocallyRingedSpace.𝒪\", \"AlgebraicGeometry.Spec.sheafedSpaceMap_hom_c_app\", \"AlgebraicGeometry.StructureSheaf.toOpen_comp_comap_apply\", \"RingHom.Etale\", \"AlgebraicGeometry.StructureSheaf.toOpen\", \"AlgebraicGeometry.StructureSheaf.globalSectionsIso\"], \"digest\": \"4290ad2a7f50bd5a\"}",
+   "date": "2026-10-26",
+   "verdict": "No exact Mathlib construction; the source signatures in the project were read and the existing construction is reused unchanged."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A canonical map of ring sheaves on the enlarged etale topos is determined uniquely by its pullback of regular functions on scheme charts",
+   "results": "{\"t\": \"2026-10-26T07:03:31Z\", \"tool\": \"leanfinder\", \"query\": \"A canonical map of ring sheaves on the enlarged etale topos is determined uniquely by its pullback of regular functions on scheme charts\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.LocallyRingedSpace.comp_ring_hom_ext\", \"AlgebraicGeometry.Scheme.Etale.forgetFullyFaithful\", \"AlgebraicGeometry.Scheme.instFaithfulEtaleOverForget\", \"AlgebraicGeometry.LocallyRingedSpace.toΓSpecCApp_iff\", \"AlgebraicGeometry.Spec.basicOpen_hom_ext\", \"StandardEtalePair.hom_ext\", \"StandardEtalePair.hom_ext_iff\", \"AlgebraicGeometry.Scheme.Etale.forget\"], \"digest\": \"c02b6ac6106fe746\"}",
+   "date": "2026-10-26",
+   "verdict": "No exact Mathlib construction; the source signatures in the project were read and the existing construction is reused unchanged."
+  },
+  {
+   "tool": "grep",
+   "query": "enlargedStructuralMap|IsEnlargedStructuralMap",
+   "results": "{\"t\": \"2026-10-26T07:03:31Z\", \"tool\": \"grep\", \"query\": \"enlargedStructuralMap|IsEnlargedStructuralMap\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-26",
+   "verdict": "No exact Mathlib construction; the source signatures in the project were read and the existing construction is reused unchanged."
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.EnlargedChartRingedMorphism",
+  "date": "2026-10-26",
+  "group": "A9"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Section-algebra and adjunction-map paragraphs of the polarized ampleness descent input (Stacks 0D3C), through the section-algebra etale-base-change step: present the small etale ringed topoi by enlarged etale sites before applying ringed-site localization. Historical imported ancestry retained. Re-split of lem-trf-space-enlarged-etale-ringed-site-model, old proof steps 6–7: Chart-normalized ringed morphism on enlarged etale sites. Existing canonical subconstruction used by the arbitrary-normalization transport.",
+   "via": [
+    "lem-trf-space-enlarged-chart-ringed-morphism"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.EnlargedEtaleRingedSite",
+  "file": "lean/Sheaf/AlgebraicGeometry/EnlargedEtaleRingedSite.lean",
+  "declaration": "AlgebraicGeometry.AlgebraicSpace.enlargedStructuralMap_existsUnique",
+  "statement": "theorem enlargedStructuralMap_existsUnique {X Y : AlgebraicSpace S} (f : X ⟶ Y) :\n    ∃! r : Y.enlargedStructureSheaf ⟶\n        (enlargedDirectImage f RingCat.{u}).obj X.enlargedStructureSheaf,\n      IsEnlargedStructuralMap f r",
+  "branch": "sheaf-dag",
+  "by": "A9",
+  "date": "2026-10-26",
+  "existing": true,
+  "note": "Attach the existing unchanged canonical-case theorem, not a new Lean theorem or sorry. It is a strict subresult of the arbitrary-normalization ringed-morphism theorem. The ancestor formerly bundled this declaration while depending on the arbitrary-normalization result; this individual attachment avoids that artificial DAG cycle."
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A9",
+  "result": "pass",
+  "landing": "20261026T080913-L-1673565",
+  "kind": "proof",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R8",
+  "result": "pass",
+  "landing": "20261026T100342-L-4192194",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)",
+  "sorry_before": [
+   "AlgebraicGeometry.AlgebraicSpace.enlargedBaseChange_composition",
+   "AlgebraicGeometry.AlgebraicSpace.enlargedBaseChange_continuous",
+   "AlgebraicGeometry.AlgebraicSpace.enlargedBaseChange_identity",
+   "AlgebraicGeometry.AlgebraicSpace.enlargedDirectImage_geometric",
+   "AlgebraicGeometry.AlgebraicSpace.enlargedEtale_localization",
+   "AlgebraicGeometry.AlgebraicSpace.enlargedEtale_site",
+   "AlgebraicGeometry.AlgebraicSpace.enlargedLocalization_equivalence",
+   "AlgebraicGeometry.AlgebraicSpace.enlargedModuleRestriction_equivalence",
+   "AlgebraicGeometry.AlgebraicSpace.enlargedRestriction_equivalence",
+   "AlgebraicGeometry.AlgebraicSpace.enlargedSchemeInclusion_continuous",
+   "AlgebraicGeometry.AlgebraicSpace.enlargedStructuralMap_existsUnique"
+  ],
+  "sorry_after": [
+   "AlgebraicGeometry.AlgebraicSpace.enlargedBaseChange_composition",
+   "AlgebraicGeometry.AlgebraicSpace.enlargedEtale_localization",
+   "AlgebraicGeometry.AlgebraicSpace.enlargedLocalization_equivalence",
+   "AlgebraicGeometry.AlgebraicSpace.enlargedModuleRestriction_equivalence",
+   "AlgebraicGeometry.AlgebraicSpace.enlargedRestriction_equivalence",
+   "AlgebraicGeometry.AlgebraicSpace.enlargedStructuralMap_existsUnique"
+  ]
+ }
+}

@@ -1,0 +1,284 @@
+{
+ "id": "lem-trf-two-term-normalization-locality-equivariance",
+ "kind": "statement",
+ "title": "Localization and equivariance of kernel-normalized determinant maps",
+ "statement": "Let $R$ be a commutative ring. For any two-term cochain complex $E=[E^{-1}\\to E^0]$ of finite projective $R$-modules, put $D(E)=\\det_R(E^0)\\otimes_R\\det_R(E^{-1})^\\vee$, where $\\vee=\\operatorname{Hom}_R(-,R)$ and the determinant lines and kernel-first wedge maps are those of [lem-trf-projective-determinant-exact-sequence]. For every degreewise surjective quasi-isomorphism $a:P\\to Q$, write $N_a=\\ker a$ and use the maps $\\gamma_a^i$, $\\Gamma_a$, the differential generator $\\delta_{N_a}$ and the inverse $T_a$ of $x\\mapsto\\Gamma_a(x\\otimes\\delta_{N_a})$ from [lem-trf-two-term-kernel-normalization]. For every prime ideal $\\mathfrak p\\subset R$, localization [def-weil-pbc-localization-at-prime, def-weil-pbc-module-localization] canonically identifies $\\ker(a_{\\mathfrak p})$ with $(N_a)_{\\mathfrak p}$ and $D(E_{\\mathfrak p})$ with $D(E)_{\\mathfrak p}$, and takes $\\gamma_a^i,\\Gamma_a,\\delta_{N_a},T_a$ to $\\gamma_{a_{\\mathfrak p}}^i,\\Gamma_{a_{\\mathfrak p}},\\delta_{(N_a)_{\\mathfrak p}},T_{a_{\\mathfrak p}}$. All terms become finite free over $R_{\\mathfrak p}$. Two $R$-linear maps between $R$-modules are equal if their localizations at every prime are equal. Moreover let $a':P'\\to Q'$ be another degreewise surjective quasi-isomorphism and $u:P'\\xrightarrow{\\sim}P$, $v:Q'\\xrightarrow{\\sim}Q$ chain isomorphisms with $au=va'$. Let $c:N_{a'}\\xrightarrow{\\sim}N_a$ be the restriction of $u$. For a chain isomorphism $w:E'\\to E$, define $D(w)=\\det(w^0)\\otimes(\\det(w^{-1})^{-1})^\\vee$. Then $\\det(u^i)\\gamma_{a'}^i=\\gamma_a^i(\\det(c^i)\\otimes\\det(v^i))$, $D(c)\\delta_{N_{a'}}=\\delta_{N_a}$, and $D(u)\\Gamma_{a'}=\\Gamma_a(D(v)\\otimes D(c))$. In particular $T_aD(u)=D(v)T_{a'}$.",
+ "source": {
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tag 0FJK (lemma-homotopic-surjections), first and final paragraphs; Tag 0FJC (lemma-det-ses-functorial); Tag 0FJI (section-determinants-complexes)."
+ },
+ "stmt_deps": [
+  "lem-trf-projective-determinant-exact-sequence",
+  "lem-trf-two-term-kernel-normalization",
+  "def-weil-pbc-localization-at-prime",
+  "def-weil-pbc-module-localization"
+ ],
+ "proof": [
+  {
+   "text": "First prove the asserted detection of equality, for arbitrary modules $M,V$ and maps $f,g:M\\to V$. For $x\\in M$ put $z=f(x)-g(x)$ and $I=\\{r\\in R:rz=0\\}$. If every $f_{\\mathfrak p}=g_{\\mathfrak p}$, the fraction criterion in [def-weil-pbc-module-localization] gives, for every prime $\\mathfrak p$, an $s_{\\mathfrak p}\\notin\\mathfrak p$ with $s_{\\mathfrak p}z=0$. Thus the basic opens $D(s)$ for $s\\in I$ cover the spectrum. By clause (i) of [lem-weil-pbc-spec-basic-opens-unit-ideal-quasi-compact], $I=R$, so $z=1z=0$. This proves $f=g$. The same argument compares any two elements. For the zero ring all unital modules are zero, so the empty set of primes causes no exception.",
+   "uses": [
+    "def-weil-pbc-module-localization",
+    "lem-weil-pbc-spec-basic-opens-unit-ideal-quasi-compact"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0FJK (lemma-homotopic-surjections), final paragraph: equality after localization; expanded by Algebra Tag 00HN (lemma-characterize-zero-local), proof of (1), and Tags 00E0/00E8."
+   }
+  },
+  {
+   "text": "Apply [lem-trf-two-term-kernel-normalization] to $a$. It gives finite projective $N^i$, split sequences $0\\to N^i\\to P^i\\to Q^i\\to0$, and an inverse to $d_N$. For $S=R\\setminus\\mathfrak p$, the fraction map $S^{-1}N^i\\to\\ker(S^{-1}a^i)$ is injective: a fraction becoming zero in $S^{-1}P^i$ has some $S$-multiple of its numerator zero already in the submodule $N^i$. It is onto: if $a^i(x)/s=0$, choose $t\\in S$ with $ta^i(x)=0$; then $tx\\in N^i$ and $x/s=tx/(ts)$. These maps respect the differential since it is the restriction of $d_P$. Localizing a section and the inverse of $d_N$ preserves their inverse equations by the fraction formulas [def-weil-pbc-module-localization]. Hence the localized sequences split and the localized kernel is still acyclic. Finally, the finite standard free covers of [lem-weil-pbc-finite-projective-standard-free-cover] show that $P^i_{\\mathfrak p},Q^i_{\\mathfrak p},N^i_{\\mathfrak p}$ are finite free: some cover element is outside $\\mathfrak p$, and its free basis stays a basis on further localization.",
+   "uses": [
+    "lem-trf-two-term-kernel-normalization",
+    "def-weil-pbc-module-localization",
+    "lem-weil-pbc-finite-projective-standard-free-cover"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0FJI (section-determinants-complexes), kernel construction; Algebra Tag 00NX (lemma-finite-projective), finite free charts."
+   }
+  },
+  {
+   "text": "The localized $a$ is indeed a degreewise surjective quasi-isomorphism, as required to form $T_{a_{\\mathfrak p}}$. Surjectivity follows by localizing the sections of Step 2. Here is the cohomology check, writing $a$ for the localized map and $d_N^{-1}$ for the localized inverse. A degree $-1$ cycle in $\\ker a$ is zero since $d_N$ is injective. For a cycle $q\\in Q^{-1}$, lift it to $p\\in P^{-1}$; then $d_Pp\\in N^0$, and $p-d_N^{-1}(d_Pp)$ is a cycle lifting $q$. Thus $H^{-1}(a)$ is bijective. Surjectivity in degree zero gives surjectivity on $H^0$. If $a^0(x)=d_Qy$, lift $y$ to $z\\in P^{-1}$. Then $x-d_Pz\\in N^0$ equals $d_Nn$ for some $n$, so $x=d_P(z+n)$ is a boundary. This proves injectivity on $H^0$. Outside these degrees cohomology is zero.",
+   "uses": [
+    "lem-trf-two-term-kernel-normalization"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0FJI (section-determinants-complexes), hypotheses (1)--(3) for the localized map; elementary cycle calculation."
+   }
+  },
+  {
+   "text": "Write $A=S^{-1}R$. The determinant chart identifications of [lem-trf-projective-determinant-chart-descent] give $\\det_A(E_A)=S^{-1}\\det_R(E)$, compatibly with pure wedges and further localization. The tensor comparison sends $(x\\otimes y)/s$ to $(x/s)\\otimes(y/1)$; its inverse sends $(x/s)\\otimes(y/t)$ to $(x\\otimes y)/(st)$. These are inverse by the fraction and bilinearity relations [def-weil-pbc-module-localization, def-weil-pbc-module-tensor-product]. For completeness, dual localization for any finite projective $L$ has the explicit map $S^{-1}L^\\vee\\to\\operatorname{Hom}_A(L_A,A)$, $(\\lambda/s)(x/t)=\\lambda(x)/(st)$. Choose a finite free retraction presenting $L$ as a summand and its resulting dual frame $e_j\\in L,\\lambda_j\\in L^\\vee$ with $x=\\sum_j\\lambda_j(x)e_j$. The inverse sends $\\Phi$ to $\\sum_j\\Phi(e_j/1)(\\lambda_j/1)$. The frame identity proves both inverse equations by evaluation; the displayed forward map also proves naturality for linear maps directly by substitution. Determinant lines are finite projective by [lem-trf-projective-determinant-exact-sequence], so these comparisons give $D(E_A)=S^{-1}D(E)$ and preserve evaluations, ordinary factor permutations, and inverse maps.",
+   "uses": [
+    "lem-trf-projective-determinant-chart-descent",
+    "def-weil-pbc-module-localization",
+    "def-weil-pbc-module-tensor-product",
+    "lem-trf-projective-determinant-exact-sequence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tags 0FJA (remark-determinant-as-socle), 0FJB (lemma-det-ses), 0FJI (section-determinants-complexes): determinant charts and dual-line interpretation."
+   }
+  },
+  {
+   "text": "Under Steps 2--4, the localized $\\gamma_a^i$ is $\\gamma_{a_A}^i$: this is exactly the further-localization clause of [lem-trf-projective-determinant-exact-sequence], with the identified kernel. Tensoring the two degree maps, taking the inverse dual in degree $-1$, and using the ordinary tensor symmetry therefore identifies $(\\Gamma_a)_A$ with $\\Gamma_{a_A}$. On a free chart, if $e=e_1\\wedge\\cdots\\wedge e_r$ is a basis wedge of $N^{-1}$, the element $\\delta_N$ is $d_N(e_1)\\wedge\\cdots\\wedge d_N(e_r)\\otimes e^\\vee$. The pure-wedge chart maps and the dual evaluation formula of Step 4 send this to the identical formula for $d_{N_A}$; Step 1 makes these chart equalities equalities of elements. Thus $(\\delta_N)_A=\\delta_{N_A}$. Consequently the localization of $F_a:x\\mapsto\\Gamma_a(x\\otimes\\delta_N)$ is $F_{a_A}$. Localizing $T_aF_a=1$ and $F_aT_a=1$ shows $(T_a)_A=F_{a_A}^{-1}=T_{a_A}$, using the unique inverse in [lem-trf-two-term-kernel-normalization].",
+   "uses": [
+    "lem-trf-projective-determinant-exact-sequence",
+    "lem-trf-two-term-kernel-normalization"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0FJI (section-determinants-complexes), definition of the normalized determinant map, and Tag 0FJK (lemma-homotopic-surjections), reduction by localization."
+   }
+  },
+  {
+   "text": "Now consider $au=va'$. For $n'\\in N_{a'}^i$, $a^iu^i(n')=v^ia'^i(n')=0$, so $u$ restricts to $c:N_{a'}\\to N_a$. Conversely $a'^iu^{-1}(n)=v^{-1}a^i(n)=0$ for $n\\in N_a^i$. Thus the restriction of $u^{-1}$ is inverse to $c$, and $d_Nc^{-1}=c^0d_{N'}$, where the superscript $-1$ here denotes the degree of the component $c^{-1}:N_{a'}^{-1}\\to N_a^{-1}$. To check the degree-$i$ wedge identity, localize at a prime and choose bases $n'_j$ of $N_{a'}^i$ and $q'_k$ of $Q'^i$, with lifts $p'_k$ in $P'^i$. The tuples $c^i(n'_j)$ and $v^i(q'_k)$ are bases, and $u^i(p'_k)$ lifts $v^i(q'_k)$. Both sides of $\\det(u^i)\\gamma_{a'}^i=\\gamma_a^i(\\det(c^i)\\otimes\\det(v^i))$ therefore send the generator $(\\bigwedge n'_j)\\otimes(\\bigwedge q'_k)$ to $\\bigwedge u^i(n'_j)\\wedge\\bigwedge u^i(p'_k)$, in that order. This uses exactly the kernel-first formula of [lem-trf-projective-determinant-exact-sequence]. Step 1 proves the identity over $R$. The empty blocks give the same formula without any permutation or sign.",
+   "uses": [
+    "lem-trf-projective-determinant-exact-sequence",
+    "lem-trf-two-term-kernel-normalization"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0FJC (lemma-det-ses-functorial), omitted proof expanded by the ordered-wedge formula; Tag 0FJK (lemma-homotopic-surjections), first diagram."
+   }
+  },
+  {
+   "text": "For any chain isomorphism $w:E'\\to E$, identify $D(E)$ with $\\operatorname{Hom}(\\det E^{-1},\\det E^0)$ as in [lem-trf-two-term-kernel-normalization]. On a pure tensor $y\\otimes\\lambda$, the definition of $D(w)$ sends the corresponding map $x\\mapsto\\lambda(x)y$ to $x\\mapsto\\lambda(\\det(w^{-1})^{-1}x)\\det(w^0)y$. Hence its action on Hom is $f\\mapsto\\det(w^0)f\\det(w^{-1})^{-1}$. Apply this to $w=c$ and $f=\\det(d_{N'})$. The chain equation in Step 6, applied to each factor of a pure wedge, gives $\\det(c^0)\\det(d_{N'})=\\det(d_N)\\det(c^{-1})$. Thus $D(c)\\delta_{N'}=\\delta_N$. To obtain the $\\Gamma$ identity, write the degree $-1$ equation of Step 6 as $U G'=G(C\\otimes V)$, with $U=\\det(u^{-1})$, $C=\\det(c^{-1})$, $V=\\det(v^{-1})$, and $G=\\gamma_a^{-1}$. Its inverse dual reads $(U^{-1})^\\vee(G'^{-1})^\\vee=(G^{-1})^\\vee((C^{-1})^\\vee\\otimes(V^{-1})^\\vee)$, after the canonical dual-tensor identifications. This equality is also checked by evaluating a pure dual tensor on $G(Cn\\otimes Vq)$. Tensor it with the degree-zero equation and reorder the four factors in the definition of $\\Gamma$. Ordinary tensor symmetry contributes no signs and gives $D(u)\\Gamma_{a'}=\\Gamma_a(D(v)\\otimes D(c))$.",
+   "uses": [
+    "lem-trf-two-term-kernel-normalization",
+    "def-weil-pbc-module-tensor-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0FJI (section-determinants-complexes), Hom interpretation and definition of the combined degree maps; Tag 0FJK (lemma-homotopic-surjections), canonical-trivialization comparison."
+   }
+  },
+  {
+   "text": "Set $F_a(x)=\\Gamma_a(x\\otimes\\delta_N)$ and similarly for $a'$. Steps 6--7 give, for every $x\\in D(Q')$, $D(u)F_{a'}(x)=\\Gamma_a(D(v)x\\otimes D(c)\\delta_{N'})=F_aD(v)(x)$. Multiply on the left by $T_a=F_a^{-1}$ and on the right by $T_{a'}=F_{a'}^{-1}$ from [lem-trf-two-term-kernel-normalization]. The result is exactly $T_aD(u)=D(v)T_{a'}$. All constructions used empty wedges and ordinary symmetry, so the argument includes zero ranks and characteristic two.",
+   "uses": [
+    "lem-trf-two-term-kernel-normalization"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0FJK (lemma-homotopic-surjections), first paragraph, commutative normalization diagram; cancellation of inverse isomorphisms."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-module-localization",
+  "lem-weil-pbc-spec-basic-opens-unit-ideal-quasi-compact",
+  "lem-trf-two-term-kernel-normalization",
+  "lem-weil-pbc-finite-projective-standard-free-cover",
+  "lem-trf-projective-determinant-chart-descent",
+  "def-weil-pbc-module-tensor-product",
+  "lem-trf-projective-determinant-exact-sequence"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tags 0FJC, 0FJI and 0FJK: expanded omitted wedge naturality, explicit dual localization and normalization equations; equality detection follows Algebra 00HN."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Kernel-normalized determinant line isomorphisms for surjective two term quasi-isomorphisms commute with localization and with chain isomorphisms",
+   "results": "8 hits; top=['HomologicalComplexUpToQuasiIso.quotientCompQhIso', 'isoOfQuasiIsoAt_hom_inv_id', 'isoOfQuasiIsoAt_inv_hom_id', 'HomologicalComplexUpToQuasiIso.isIso_Q_map_iff_mem_quasiIso', 'CategoryTheory.Functor.mapHomologicalComplexUpToQuasiIsoFactorsh_hom_app', 'HomologicalComplexUpToQuasiIso.homologyFunctorFactors', 'HomologicalComplexUpToQuasiIso.homologyFunctorFactorsh', 'isoOfQuasiIsoAt_inv_hom_id_assoc']; note=; digest=3817ec15f7c109b1. LocalizedModule kernels and map_iso_commute only compare localized linear maps. QuasiIso localization and splitting isomorphisms do not give exterior determinant-line equivariance. SymplecticGroup.det_eq_one is a scalar matrix statement.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Naturality and local equality detection for determinant isomorphisms constructed from split short exact sequences of complexes",
+   "results": "8 hits; top=['CategoryTheory.ShortComplex.Splitting.ofIso_s', 'CategoryTheory.ShortComplex.Splitting.ofIso_r', 'CategoryTheory.ShortComplex.Splitting.ofIso', 'CategoryTheory.ShortComplex.Splitting.g_s_assoc', 'CategoryTheory.ShortComplex.Splitting.r_f_assoc', 'CategoryTheory.ShortComplex.Splitting.g_s', 'CategoryTheory.ShortComplex.Splitting.mk.inj', \"CategoryTheory.ComposableArrows.Exact.isIso_map'\"]; note=; digest=6f07d31b9b091eaf. LocalizedModule kernels and map_iso_commute only compare localized linear maps. QuasiIso localization and splitting isomorphisms do not give exterior determinant-line equivariance. SymplecticGroup.det_eq_one is a scalar matrix statement.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The determinant line map normalized by the acyclic kernel commutes with localization and with a commutative square of chain isomorphisms",
+   "results": "8 hits; top=['IsLocalizedModule.map_iso_commute', 'LinearMap.ker_localizedMap_eq_localized₀_ker', 'CategoryTheory.LocalizerMorphism.homMap', \"LinearMap.ker_localizedMap_eq_localized'_ker\", \"LinearMap.localized'_ker_eq_ker_localizedMap\", 'LinearMap.toKerIsLocalized', 'LinearMap.det', 'KaehlerDifferential.isLocalizedModule_map']; note=; digest=b91fe9872e640e70. LocalizedModule kernels and map_iso_commute only compare localized linear maps. QuasiIso localization and splitting isomorphisms do not give exterior determinant-line equivariance. SymplecticGroup.det_eq_one is a scalar matrix statement.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"det\", \"localization\"",
+   "results": "1 hits; top=['Algebra.IsStandardEtale.of_isLocalizationAway']; note=; digest=3ebc4ba5bc78cac1. LocalizedModule kernels and map_iso_commute only compare localized linear maps. QuasiIso localization and splitting isomorphisms do not give exterior determinant-line equivariance. SymplecticGroup.det_eq_one is a scalar matrix statement.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "det.*localiz|localiz.*det|det.*naturality",
+   "results": "13 hits; top=['Mathlib/LinearAlgebra/SymplecticGroup.lean', 'Mathlib/LinearAlgebra/SymplecticGroup.lean', 'Mathlib/CategoryTheory/Localization/CalculusOfFractions/Preadditive.lean', 'Mathlib/RingTheory/Extension/Presentation/Submersive.lean', 'Mathlib/RingTheory/Unramified/LocalStructure.lean', 'Mathlib/RingTheory/Unramified/LocalStructure.lean', 'Mathlib/RingTheory/Unramified/LocalStructure.lean', 'Mathlib/RingTheory/Unramified/LocalStructure.lean']; note=; digest=5d4134b4d9f0d022. LocalizedModule kernels and map_iso_commute only compare localized linear maps. QuasiIso localization and splitting isomorphisms do not give exterior determinant-line equivariance. SymplecticGroup.det_eq_one is a scalar matrix statement.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Kernel normalized determinant line isomorphisms of two term finite projective complexes commute with localization and chain isomorphisms",
+   "results": "8 hits; top=['CategoryTheory.ProjectiveResolution.iso_inv_naturality', 'CategoryTheory.ProjectiveResolution.iso_inv_naturality_assoc', 'CategoryTheory.ProjectiveResolution.iso_hom_naturality', \"CategoryTheory.ProjectiveResolution.instIsIsoFromLeftDerivedZero'Self\", 'CategoryTheory.ProjectiveResolution.iso_hom_naturality_assoc', \"CategoryTheory.instIsIsoFromLeftDerivedZero'\", \"CategoryTheory.ProjectiveResolution.instQuasiIsoIntπ'\", 'CategoryTheory.instIsIsoAppFromLeftDerivedZeroOfProjective']; note=; digest=98918e2b80f044d5. Read the reported types. Exterior-power map_comp and oneEquiv_naturality concern pure wedge functoriality only; projective-resolution naturality is not a determinant line statement; det_conj and det_map concern scalar endomorphism determinants; no complete match.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "det.*localiz|localiz.*det|det.*naturality",
+   "results": "13 hits; top=['Mathlib/LinearAlgebra/SymplecticGroup.lean', 'Mathlib/LinearAlgebra/SymplecticGroup.lean', 'Mathlib/RingTheory/FractionalIdeal/Norm.lean', 'Mathlib/RingTheory/Localization/NormTrace.lean', 'Mathlib/RingTheory/Localization/NormTrace.lean', 'Mathlib/RingTheory/Unramified/LocalStructure.lean', 'Mathlib/RingTheory/Unramified/LocalStructure.lean', 'Mathlib/RingTheory/Unramified/LocalStructure.lean']; note=; digest=6c96c1c87101b265. Read the reported types. Exterior-power map_comp and oneEquiv_naturality concern pure wedge functoriality only; projective-resolution naturality is not a determinant line statement; det_conj and det_map concern scalar endomorphism determinants; no complete match.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Naturality of determinant line isomorphisms for split exact sequences under localization and isomorphisms of two term complexes",
+   "results": "8 hits; top=['exteriorPower.oneEquiv_naturality', 'LinearMap.det_map', 'LinearEquiv.det_conj', 'LinearMap.det', 'LinearMap.associated_det_comp_equiv', 'DerivedCategory.singleFunctorIsoCompQ', 'LinearMap.det_conj', 'LinearMap.detAux_def']; note=; digest=5a09604bcd245f16. Read the reported types. Exterior-power map_comp and oneEquiv_naturality concern pure wedge functoriality only; projective-resolution naturality is not a determinant line statement; det_conj and det_map concern scalar endomorphism determinants; no complete match.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"det\", \"localization\"",
+   "results": "1 hits; top=['Algebra.IsStandardEtale.of_isLocalizationAway']; note=; digest=3ebc4ba5bc78cac1. Read the reported types. Exterior-power map_comp and oneEquiv_naturality concern pure wedge functoriality only; projective-resolution naturality is not a determinant line statement; det_conj and det_map concern scalar endomorphism determinants; no complete match.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Functoriality of kernel first top exterior power maps of short exact sequences of finite projective modules",
+   "results": "8 hits; top=['ModuleCat.exteriorPower.iso₁_hom_naturality_assoc', 'ModuleCat.exteriorPower.iso₁_hom_naturality', 'ModuleCat.exteriorPower.functor_map', 'ModuleCat.exteriorPower.iso₀_hom_naturality_assoc', 'ModuleCat.exteriorPower.map_mk', 'exteriorPower.map_comp', 'exteriorPower.oneEquiv_naturality', 'exteriorPower.zeroEquiv_naturality']; note=; digest=b2ce09340d20901f. Read the reported types. Exterior-power map_comp and oneEquiv_naturality concern pure wedge functoriality only; projective-resolution naturality is not a determinant line statement; det_conj and det_map concern scalar endomorphism determinants; no complete match.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "theorem map_comp|lemma map_comp|oneEquiv_naturality",
+   "results": "4 hits; top=['Mathlib/LinearAlgebra/ExteriorPower/Basic.lean', 'Mathlib/LinearAlgebra/ExteriorPower/Basic.lean', 'Mathlib/LinearAlgebra/ExteriorPower/Basic.lean', 'Mathlib/LinearAlgebra/ExteriorPower/Basic.lean']; note=; digest=6ee82c32b7caf914. Read the reported types. Exterior-power map_comp and oneEquiv_naturality concern pure wedge functoriality only; projective-resolution naturality is not a determinant line statement; det_conj and det_map concern scalar endomorphism determinants; no complete match.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-surjective-two-term-determinant-calculus",
+  "date": "2026-10-22",
+  "group": "Q30"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Proof (1)--(2), semistable-alteration input in the nearby-cycle branch: ILO Exposé X, Theorem 3.4, Step 3, invoking Temkin 2010, Theorems 1.5 and 1.1 for a semistable multipointed modification. Temkin proof component: Marked dualizing line bundle and contracted-component degrees. Auxiliary input: Local complete-intersection determinant adjunction underlying the marked dualizing construction, before the marking is inserted. Lower-level input: the homotopy and composition calculus for kernel-normalized determinant maps of surjective two-term complex maps, before passage to derived objects. Repair subargument: Localization and equivariance of kernel-normalized determinant maps.",
+   "via": [
+    "lem-trf-surjective-two-term-determinant-calculus",
+    "lem-trf-two-term-perfect-determinant",
+    "lem-trf-flat-lci-canonical-adjunction",
+    "lem-trf-marked-nodal-dualizing-degrees",
+    "lem-trf-temkin-stable-modification",
+    "lem-trf-stable-modification-flat-curve-pair",
+    "lem-trf-dejong-relative-marked-semistable",
+    "lem-trf-relative-marked-nodal-reduction",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-trf-two-term-normalization-locality-equivariance",
+  "worker": "stage1",
+  "summary": "Eight-step split using existing nodes only. Proved arbitrary-module equality detection by the annihilator/basic-open criterion, kernel localization by fractions, preservation of quasi-isomorphisms by an explicit cycle chase, dual localization by a dual-frame inverse, wedge naturality and differential-generator equivariance, then canceled the normalized isomorphisms. Statement unchanged.",
+  "blueprint": "Proof (1)--(2), semistable-alteration input in the nearby-cycle branch: ILO Exposé X, Theorem 3.4, Step 3, invoking Temkin 2010, Theorems 1.5 and 1.1 for a semistable multipointed modification. Temkin proof component: Marked dualizing line bundle and contracted-component degrees. Auxiliary input: Local complete-intersection determinant adjunction underlying the marked dualizing construction, before the marking is inserted. Lower-level input: the homotopy and composition calculus for kernel-normalized determinant maps of surjective two-term complex maps, before passage to derived objects. Repair subargument: Localization and equivariance of kernel-normalized determinant maps. This supplies the locality and equivariance subargument in the existing determinant/adjunction branch; the current blueprint local-term statement and unit route are unchanged."
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q138-796095947",
+  "group": "Q138",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q138-796095947 (reviewer sub-agent of L); spot-checked: Read the item's statement and all 8 steps in full, every cited statement, and Stacks more-algebra 0FJC (l.36337), 0FJI (l.36890) and 0FJK (l.37016), plus tag 00HN. The delivery is one commit with the item and report only, 0 new nodes, statement and stmt_deps unchanged; proof_deps equals the union of step uses; no cycle (46-node closure). There is no repair note, so the re-split rule does not apply. Step checks: (1) the annihilator of f(x)-g(x) meets every complement of a prime, so by basic-opens (i) it is R; true for arbitrary modules, vacuous for R=0. (2) Kernel localization is injective and surjective by fractions, and free charts come from the Lean-closed standard free cover. (3) A degreewise surjective quasi-isomorphism is preserved: H^{-1} and H^0 checked through the d_N inverse. (4) Chart-descent gives the further localization of det; the dual-frame inverse for localized duals verified in both directions. (5) gamma localizes by the exact-sequence node's further-localization clause, the chart formula for delta_N localizes, and T localizes as the unique inverse. (6) c is the restriction of u with inverse the restriction of u^{-1}; u(p'_k) lifts v(q'_k), so both sides give the same kernel-first wedge (the omitted 0FJC proof, written out). (7) D(w) acts on Hom by f -> det(w^0) f det(w^{-1})^{-1}, giving D(c)delta'=delta from c^0 d'=d c^{-1}; the inverse dual preserves composition order; ordinary symmetry introduces no sign. (8) Cancelling the inverses gives T_a D(u)=D(v)T_{a'}, domains checked. Cited statements from other units are only mathlib leaves or Lean-closed nodes, so no tool_uses. Edge cases R=0, identity map, Q=0, rank 0, characteristic 2 and the rank-one scalar case all hold. No 0FJC or 0FJK duplicate exists; the parent and the flag and local-homotopy nodes are distinct. Searches cover leanfinder, leansearch, loogle and grep. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.SecTraceFormula.TwoTermNormalizationLocalityEquivariance",
+  "declaration": "Module.TwoTerm.normalization_localization",
+  "declarations": [
+   "Module.TwoTerm.Normalization",
+   "Module.TwoTerm.DeterminantLocalization",
+   "Module.TwoTerm.LineLocalization",
+   "Module.TwoTerm.DeterminantIso",
+   "Module.TwoTerm.lineIso",
+   "Module.TwoTerm.maps_eq_of_prime_localizations",
+   "Module.TwoTerm.determinant_line_localization",
+   "Module.TwoTerm.normalization_localization",
+   "Module.TwoTerm.normalization_equivariance"
+  ],
+  "file": "lean/Sheaf/SecTraceFormula/TwoTermNormalizationLocalityEquivariance.lean",
+  "statement": "theorem normalization_localization {R : Type u} [CommRing R] {P Q : Arrow (ModuleCat.{v} R)} (a : P ⟶ Q) [Module.Finite R P.left] [Module.Projective R P.left] [Module.Finite R P.right] [Module.Projective R P.right] [Module.Finite R Q.left] [Module.Projective R Q.left] [Module.Finite R Q.right] [Module.Projective R Q.right] (ha : DegreewiseSurjective a) (hqa : QuasiIso a) (n : Normalization a) (p : Ideal R) [p.IsPrime] {A : Type z} [CommRing A] [Algebra R A] [IsLocalization p.primeCompl A] {Pp Qp : Arrow (ModuleCat.{w} A)} [Module R Pp.left] [IsScalarTower R A Pp.left] [Module R Pp.right] [IsScalarTower R A Pp.right] [Module R Qp.left] [IsScalarTower R A Qp.left] [Module R Qp.right] [IsScalarTower R A Qp.right] (ap : Pp ⟶ Qp) (fPn : (P.left : Type v) →ₗ[R] (Pp.left : Type w)) (fPz : (P.right : Type v) →ₗ[R] (Pp.right : Type w)) (fQn : (Q.left : Type v) →ₗ[R] (Qp.left : Type w)) (fQz : (Q.right : Type v) →ₗ[R] (Qp.right : Type w)) [IsLocalizedModule p.primeCompl fPn] [IsLocalizedModule p.primeCompl fPz] [IsLocalizedModule p.primeCompl fQn] [IsLocalizedModule p.primeCompl fQz] (hP : ∀ x, Pp.hom.hom (fPn x) = fPz (P.hom.hom x)) (hQ : ∀ x, Qp.hom.hom (fQn x) = fQz (Q.hom.hom x)) (hn : ∀ x, ap.left.hom (fPn x) = fQn (a.left.hom x)) (hz : ∀ x, ap.right.hom (fPz x) = fQz (a.right.hom x)) : DegreewiseSurjective ap ∧ QuasiIso ap ∧ Module.Finite A Pp.left ∧ Module.Free A Pp.left ∧ Module.Finite A Pp.right ∧ Module.Free A Pp.right ∧ Module.Finite A Qp.left ∧ Module.Free A Qp.left ∧ Module.Finite A Qp.right ∧ Module.Free A Qp.right ∧ Module.Finite A (LinearMap.ker ap.left.hom) ∧ Module.Free A (LinearMap.ker ap.left.hom) ∧ Module.Finite A (LinearMap.ker ap.right.hom) ∧ Module.Free A (LinearMap.ker ap.right.hom) ∧ ∃ (kneg : LinearMap.ker a.left.hom →ₗ[R] LinearMap.ker ap.left.hom) (kzero : LinearMap.ker a.right.hom →ₗ[R] LinearMap.ker ap.right.hom), (∀ x, (kneg x).val = fPn x.val) ∧ (∀ x, (kzero x).val = fPz x.val) ∧ IsLocalizedModule p.primeCompl kneg ∧ IsLocalizedModule p.primeCompl kzero ∧ (∀ x, kernelDifferential ap (kneg x) = kzero (kernelDifferential a x)) ∧ ∃ (lP : LineLocalization (A := A) p.primeCompl fPn fPz) (lQ : LineLocalization (A := A) p.primeCompl fQn fQz) (lN : LineLocalization (R := R) (A := A) p.primeCompl (M := LinearMap.ker a.left.hom) (N := LinearMap.ker a.right.hom) (M' := LinearMap.ker ap.left.hom) (N' := LinearMap.ker ap.right.hom) kneg kzero) (np : Normalization ap), (∀ (x : determinantModule R (LinearMap.ker a.left.hom)) (y : determinantModule R (Q.left : Type v)), lP.neg.map (n.gammaNeg (x ⊗ₜ[R] y)) = np.gammaNeg (lN.neg.map x ⊗ₜ[A] lQ.neg.map y)) ∧ (∀ (x : determinantModule R (LinearMap.ker a.right.hom)) (y : determinantModule R (Q.right : Type v)), lP.zero.map (n.gammaZero (x ⊗ₜ[R] y)) = np.gammaZero (lN.zero.map x ⊗ₜ[A] lQ.zero.map y)) ∧ (∀ (x : determinant Q) (y : kernelDeterminant a), lP.map (n.assembly (x ⊗ₜ[R] y)) = np.assembly (lQ.map x ⊗ₜ[A] lN.map y)) ∧ lN.map n.element = np.element ∧ (∀ x, lQ.map (n.inverse x) = np.inverse (lP.map x))",
+  "branch": "newtargets-dag",
+  "by": "N8",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-37b881ea7",
+  "group": "N8",
+  "result": "pass",
+  "note": "Item node changes only in lean; dependency nodes byte-identical to side-live; lean.statement verbatim; all 9 declarations present; lines ≤100; all proofs sorry; structures Normalization/DeterminantLocalization/LineLocalization/DeterminantIso have real data and Prop specs; lineIso = congr det(w0) (det(w-1)^-1)^dual. Clause check: Normalization data unique (existsUnique γ + IsKernelNormalizedAssembly pins Γ, δ, T) and exists under ha/hqa, so no extra hypothesis. Localization: any IsLocalization model of R_p (includes Localization.AtPrime), IsLocalizedModule term maps with commuting squares; kernel identification kneg/kzero; D(E_p)≅D(E)_p pinned by exterior scalarExtensionMap and dual evaluation; localized γ⁻¹, γ⁰, Γ, δ, T squares; finite free terms and kernels; equality detection via LocalizedModule.map at every prime for arbitrary modules. Equivariance: uIso/vIso arrow isos with au=va', c = restriction of u, DeterminantIso via ExteriorAlgebra.map, γ squares, D(c)δ'=δ, D(u)Γ'=Γ(D(v)⊗D(c)), T_a D(u)=D(v)T_a' with correct directions. Edge cases (zero ring, rank 0, char 2, varying rank, independent universes) fine. No duplicate found (K0DeterminantMap, TwoTermCofactorNaturality, parent calculus module checked). Advisory only: TwoTerm encoding and determinantModule reached through existing theorem stmt_deps; no stmt_dep was added, so the theorem-stmt_dep rule does not apply. No compile needed (no changes)."
+ }
+}

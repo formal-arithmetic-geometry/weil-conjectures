@@ -1,0 +1,125 @@
+{
+ "id": "lem-pur-etale-system-projection-evaluation",
+ "kind": "statement",
+ "title": "Evaluation of the normalized system coefficient mate",
+ "statement": "Let $f:X\\to Y$ be a scheme morphism, $c$ a compactification, $\\ell\\in\\mathbf N$, and $t:\\operatorname{Theory}(c,\\ell)$ a normalized ordinary system presentation [def-pur-etale-system-projection-data]. For finite $\\ell$-power-torsion coefficient sequences $B_\\bullet,C_\\bullet$, a compatible coefficient map $a:B_\\bullet\\to C_\\bullet$, a level $n$, and any unbounded derived strict system $M$ on $X$, evaluation of $q_a$ transported through the specified support and scalar evaluation isomorphisms is exactly the published $C_n$-linear compact-support scalar map $\\operatorname{compactScalarMap}(a_n,c)$ on $e_nM$. The equation is the five-factor transport word in the attached Lean statement, not merely an identification of its source and target.",
+ "source": {
+  "document": "literature/stacks-project/more-etale.tex",
+  "place": "Tag 0GL6, remark-Rf-lower-shriek-change-of-rings; Zheng Constructions 4.1, 5.14-5.15 and Lemma 5.16. Agent elaboration of Original item proof steps 3-4: scalar and geometric transpose calculation, then level evaluation."
+ },
+ "stmt_deps": [
+  "def-pur-etale-system-projection-data"
+ ],
+ "proof": [
+  {
+   "text": "Apply the proved etaleSingleCoefficientProjection at B_n and C_n, using the finite and torsion fields of B and C. Obtain the canonical restriction isomorphism d, its forward-map equation and the transpose formula for compactScalarMap. The unit characterization of mates identifies the mate of compactScalarMap with d.inv.",
+   "uses": [
+    "lem-pur-etale-single-coefficient-projection",
+    "def-weil-pbc-adjunction-mate"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The normalization fields ScalarEvaluation.mate identify the mates of the inverse scalar evaluation isomorphisms with the forward restriction evaluation isomorphisms. The definition of projection identifies the mate of q with RestrictionSupport.iso.inv. Apply etaleSystemRestriction_evaluation to d to supply the restriction cube.",
+   "uses": [
+    "def-pur-etale-system-projection-data",
+    "lem-pur-etale-system-restriction-evaluation",
+    "def-weil-pbc-adjunction-mate"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply CategoryTheory.mateEquiv_app_cube_converse to the system scalar adjunctions on X and Y and the single-ring scalar adjunctions on X and Y. The four mate identifications give its right-adjoint cube hypothesis. Its conclusion is the three-factor scalar evaluation cube. Postcompose with the forward support evaluation at scalarX(M) and compact support applied to the forward scalar evaluation on X. Functoriality and inverse/hom cancellation turn that cube into the original five-factor equation.",
+   "uses": [
+    "def-weil-pbc-adjunction-mate"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-pur-etale-single-coefficient-projection",
+  "def-weil-pbc-adjunction-mate",
+  "def-pur-etale-system-projection-data",
+  "lem-pur-etale-system-restriction-evaluation"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/more-etale.tex",
+  "place": "Tag 0GL6; reuse of the proved single-ring normalization, restriction evaluation, and the converse cube-of-mates identity in WeilConjectures.CategoryTheory.Adjunction.MateCube."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Existence of normalized geometric inverse image direct image extension by zero scalar extension and evaluation on ringed vertical sequence sites of small etale topoi",
+   "results": "['AlgebraicGeometry.Scheme.Hom.normalizationDiagram', 'AlgebraicGeometry.Scheme.Hom.normalizationDiagramMap', 'SheafOfModules.Presentation.map_π_eq', \"AlgebraicGeometry.PresheafedSpace.GlueData.opensImagePreimageMap_app'\", 'AlgebraicGeometry.Scheme.Hom.preservesLocalization_normalizationDiagramMap', 'AlgebraicGeometry.Scheme.IsLocallyDirected.fst_inv_eq_snd_inv', 'AlgebraicGeometry.Scheme.Modules.restrictAdjunction', 'AlgebraicGeometry.Scheme.Modules.instIsLeftAdjointRestrictFunctor']; 8 hits; search log digest 8044d38267dd27b4",
+   "date": "2026-10-25",
+   "verdict": "No direct match for this normalized ordinary etale sequence-site statement; the categorical mate identities are used in the proof."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.mateEquiv",
+   "results": "['CategoryTheory.mateEquiv', 'CategoryTheory.mateEquiv_counit', 'CategoryTheory.mateEquiv_counit_symm', 'CategoryTheory.unit_mateEquiv', 'CategoryTheory.unit_mateEquiv_symm', 'CategoryTheory.conjugateEquiv_mateEquiv_vcomp', 'CategoryTheory.mateEquiv_conjugateEquiv_vcomp', 'CategoryTheory.mateEquiv_vcomp']; 12 hits; search log digest b8ac30fd6644aa85",
+   "date": "2026-10-24",
+   "verdict": "No direct match for this normalized ordinary etale sequence-site statement; the categorical mate identities are used in the proof."
+  },
+  {
+   "tool": "grep",
+   "query": "evaluation_mate|mateEquiv_vcomp|mapDerivedCategorySquareIso_comp",
+   "results": "['Mathlib/CategoryTheory/Adjunction/Mates.lean', 'Mathlib/CategoryTheory/Adjunction/Mates.lean', 'Mathlib/CategoryTheory/Adjunction/Mates.lean', 'Mathlib/CategoryTheory/Adjunction/Mates.lean', 'Mathlib/CategoryTheory/Adjunction/Mates.lean', 'Mathlib/CategoryTheory/Monoidal/Closed/Functor.lean', 'Mathlib/CategoryTheory/Bicategory/Adjunction/Mate.lean', 'Mathlib/CategoryTheory/Bicategory/Adjunction/Mate.lean']; 11 hits; search log digest 5efc7bd8027581eb",
+   "date": "2026-10-25",
+   "verdict": "No direct match for this normalized ordinary etale sequence-site statement; the categorical mate identities are used in the proof."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.EtaleSystemCoefficientProjection",
+  "date": "2026-10-25",
+  "group": "J3"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-def-sf-operations",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "def-weil-exceptional-inverse-image",
+   "place": "Adic-stage paragraph of def-weil-exceptional-inverse-image: compatible finite-level functors before derived inverse limits; coefficient projection and scalar-unit/composition normalization for the ordinary etale system compact-support functor. Original item proof steps 3-4: scalar and geometric transpose calculation, then level evaluation.",
+   "via": [
+    "lem-pur-etale-system-coefficient-projection",
+    "lem-pur-etale-coefficient-system-adjoint"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "module": "Sheaf.Paper.EtaleSystemProjectionEvaluation",
+  "file": "lean/Sheaf/Paper/EtaleSystemProjectionEvaluation.lean",
+  "declaration": "AlgebraicGeometry.Etale.SystemProjection.etaleSystemProjection_evaluation",
+  "statement": "theorem etaleSystemProjection_evaluation\n    {X Y : Scheme.{u}} {f : X ⟶ Y} (c : Compactification f) (l : ℕ) (t : Theory c l) :\n    (∀ (B C : Coefficients.{u} l) (a : B.rings ⟶ C.rings) (n : ℕ)\n        (M : Derived X B.rings),\n        (scalarExtension (a.app (op n)).hom Y).map\n            ((t.supportEvaluation B n).iso.inv.app M) ≫\n          (t.scalarEvaluationY a n).iso.inv.app ((t.support B).F.obj M) ≫\n          (t.evaluationY C n).E.map ((t.q a).app M) ≫\n          (t.supportEvaluation C n).iso.hom.app ((t.scalarX a).model.T.obj M) ≫\n          (rightDerivedLowerShriekOfCompactification\n            (ModuleCat.{u + 1} (C.rings.obj (op n))) c).map\n              ((t.scalarEvaluationX a n).iso.hom.app M) =\n          (compactScalarMap (a.app (op n)).hom c).app ((t.evaluationX B n).E.obj M))",
+  "branch": "sheaf-dag",
+  "by": "J3",
+  "date": "2026-10-25",
+  "existing": false
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J3",
+  "result": "pass",
+  "landing": "20261025T033908-L-157017",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F2",
+  "result": "pass",
+  "landing": "20261027T112337-L-1573362",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

@@ -27,116 +27,54 @@
  ],
  "proof": [
   {
-   "text": "By [sbc-lem-smooth-relative-dimension-locally-constant] the relative-dimension loci $V_d$ of $g$ are open and closed. They cover the quasi-compact finite-type $k$-scheme $V$, so only finitely many are nonempty. By [lem-pc-open-immersion-smooth-composition], each $g_d:V_d\\to B$ is smooth, and it has pure relative dimension $d$ by the definition of $V_d$. It is separated and of finite type: its diagonal is the restriction of the closed diagonal of $g$, and a clopen subset of each quasi-compact inverse image of an affine open of $B$ is quasi-compact. Local finite-type conditions restrict to open subschemes. Thus the pure-dimensional theorem can be applied to every $g_d$, even though the dimension of $g$ need not be constant.",
+   "text": "Apply [lem-pur-varying-dimension-dualizing-inverse] to $g$. It supplies $\\omega_g,P\\in D^b_{ctf}(V,\\Lambda)$ and both inverse isomorphisms $e:\\omega_g\\otimes^L P\\simeq\\Lambda_V$ and $e':P\\otimes^L\\omega_g\\simeq\\Lambda_V$, also when the relative dimension varies or $V$ is empty. The hypotheses are exactly the smooth separated finite-type morphism and finite-type schemes in the statement. In the finite-level Lean realization, apply smooth_dimension_clopen_partition, restrict its index set to nonempty loci, and invoke varyingDimension_finite_dualizing_inverse. Identify its finiteExceptionalInverseImage functor with sfFiniteExceptional by the mapDerivedCategoryCompIso comparison for the fixed intrinsic realization; compactification instances are proof-irrelevant.",
    "uses": [
-    "sbc-lem-smooth-relative-dimension-locally-constant",
-    "def-weil-finite-type-morphism",
-    "def-weil-proper-morphism",
-    "def-sbc-smooth-morphisms",
-    "lem-pc-open-immersion-smooth-composition"
+    "lem-pur-varying-dimension-dualizing-inverse"
    ],
    "elementary": false,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-def-purity-conv/def-pur-section-invariant.md",
-    "place": "Definition def-pur-section-invariant, formula and final invertibility assertion; expanded well-definedness"
+    "place": "Definition formula and final invertibility assertion; short assembly of extracted arguments, step 1"
    }
   },
   {
-   "text": "Apply [lem-pur-finite-clopen-derived-decomposition] to the finite cover $(V_d)_d$. It identifies the constructible finite-Tor category, its tensor and its unit with the product of the corresponding categories on the pieces. Apply [lem-pur-finite-clopen-exceptional-restriction] with $L=\\Lambda_B$ to identify the component of $\\omega_g$ with $\\omega_{g_d}$ at every coefficient stage. Its system-level clause supplies the integral comparison; there is no passage from unrelated levelwise isomorphisms to a coherent tower. These statements also cover empty $V$.",
-   "uses": [
-    "lem-pur-finite-clopen-derived-decomposition",
-    "lem-pur-finite-clopen-exceptional-restriction"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-def-purity-conv/def-pur-section-invariant.md",
-    "place": "Definition def-pur-section-invariant, formula and final invertibility assertion; expanded well-definedness"
-   }
-  },
-  {
-   "text": "Apply the invertibility clause of [thm-pur-cohomological-smoothness] to each $g_d$ of step 1. Its schemes and coefficients are in the same purity conventions, and each $g_d$ is smooth separated with the single relative dimension $d$ required by that theorem. Choose an inverse $P_d$ of $\\omega_{g_d}$ in the stated finite-Tor category. The finite product construction of step 2 gives a genuine object $P$ with these components, and the componentwise inverse isomorphisms give $\\omega_g\\otimes^L_\\Lambda P\\simeq\\Lambda_V\\simeq P\\otimes^L_\\Lambda\\omega_g$. Thus $\\omega_g$ and its inverse belong to $D^b_{ctf}(V,\\Lambda)$. No implication from geometric smoothness to cohomological smoothness is taken from the definition of cohomological smoothness; the required mathematical input is the theorem just cited.",
-   "uses": [
-    "thm-pur-cohomological-smoothness",
-    "lem-pur-finite-clopen-derived-decomposition"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-def-purity-conv/def-pur-section-invariant.md",
-    "place": "Definition def-pur-section-invariant, formula and final invertibility assertion; expanded well-definedness"
-   }
-  },
-  {
-   "text": "Define $C(g,s)=Ls^*\\omega_g$ by the actual derived pullback [def-weil-derived-pullback-tensor-hom], and put $Q=Ls^*P$. The data of $C(g,s)$ are therefore fixed by a construction. The closed immersion $s$ is proper, hence separated and of finite type, by [lem-weil-pbc-closed-immersion-proper]. At finite coefficients apply [lem-sf-pullback-tor-amplitude] to each $F\\in\\{\\omega_g,P\\}$: the source and target schemes are finite type over $k$ and $F$ is bounded constructible with a finite Tor interval by step 3. It follows that both $Ls^*F$ belong to $D^b_{ctf}(B,A)$, with their original Tor bounds.",
+   "text": "Define $C(g,s)=Ls^*\\omega_g$ by [def-weil-derived-pullback-tensor-hom] and put $Q=Ls^*P$. The closed immersion $s$ is proper, hence separated and finite type, by [lem-weil-pbc-closed-immersion-proper]. Apply [lem-pur-all-stage-ctf-pullback-unit] to $s$ and both $\\omega_g,P$: it puts $C(g,s),Q$ in $D^b_{ctf}(B,\\Lambda)$ and gives $u_s:Ls^*\\Lambda_V\\simeq\\Lambda_B$. This includes the unchanged finite Tor bounds, a single bound for all integral reductions, and the rationalized and common-stage coefficient constructions. In Lean, use the finite preservation conjunct of preserves_ctf_and_unit and its reexported ConstantGeometricStalkUnit.finiteUnit. Membership in the finite-Tor category is invariant under the preceding exceptional-image comparison: transport the constructibility predicate along the isomorphism and compose each representative isomorphism in the Tor test with its inverse.",
    "uses": [
     "def-weil-derived-pullback-tensor-hom",
     "lem-weil-pbc-closed-immersion-proper",
-    "lem-sf-pullback-tor-amplitude"
+    "lem-pur-all-stage-ctf-pullback-unit"
    ],
    "elementary": false,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-def-purity-conv/def-pur-section-invariant.md",
-    "place": "Definition def-pur-section-invariant, formula and final invertibility assertion; expanded well-definedness"
+    "place": "Definition formula and final invertibility assertion; short assembly of extracted arguments, step 2"
    }
   },
   {
-   "text": "At integral coefficients [lem-pur-integral-operations-preserve-constructible], clause 1, gives $Ls^*F\\in D^b_c(B,\\mathcal O_E)$ and identifies its $j$-th reduction with $Ls_j^*F_j$, where $F_j=F\\otimes^L_{\\mathcal O_E}A_{E,j}$. By [def-weil-finite-tor-amplitude], the $F_j$ have one Tor interval $[a_F,b_F]$ independent of $j$. Apply [lem-sf-pullback-tor-amplitude] at every $j$: it preserves exactly that interval, so all reductions of $Ls^*F$ satisfy the required common bound. The same definition therefore puts $Ls^*F$ in $D^b_{ctf}(B,\\mathcal O_E)$. At the rational stage pullback is integral pullback on representatives; at the algebraically closed stage it is represented at a finite coefficient field [def-weil-derived-pullback-tensor-hom]. These operations preserve bounded constructibility, and at both field stages $D^b_{ctf}=D^b_c$ by [def-weil-finite-tor-amplitude]. Apply this to both choices of $F$.",
+   "text": "Use the tensor comparison $\\mu$ of [def-pur-finite-pullback-tensor-comparison]. The composites\n$$\n C(g,s)\\otimes^L Q\\xrightarrow{\\mu_{s;\\omega_g,P}^{-1}}Ls^*(\\omega_g\\otimes^L P)\\xrightarrow{Ls^*e}Ls^*\\Lambda_V\\xrightarrow{u_s}\\Lambda_B,\n$$\nand the same composite with $(P,\\omega_g,e')$ give the two inverse isomorphisms. The comparison is ambient at finite coefficients, so no tensor-closure claim for arbitrary bounded inputs is needed; its higher-coefficient maps use compatible reductions and their rationalized and common-stage images. Both factors lie in the full finite-Tor category by step 2. Thus the actual pullback is in its Picard groupoid. Neither its data nor these inverse maps choose a Tate orientation. The finiteIntrinsicDerivedTensor model and intrinsicCoefficientTensor are compared by lem-sf-cochain-tensor-model-rigidity: restrict finiteIntrinsicTensorModels.comparison to the flat-term K-flat representatives and apply uniqueness of tensor descent. Compose this comparison with canonicalFinitePullbackTensor inverse, pullback of each inverse map, and finiteUnit. This uses no higher-coefficient coherence theorem for the finite-level realization.",
    "uses": [
-    "lem-pur-integral-operations-preserve-constructible",
-    "def-weil-finite-tor-amplitude",
-    "lem-sf-pullback-tor-amplitude",
-    "def-weil-derived-pullback-tensor-hom"
+    "def-pur-finite-pullback-tensor-comparison",
+    "lem-sf-cochain-tensor-model-rigidity"
    ],
    "elementary": false,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-def-purity-conv/def-pur-section-invariant.md",
-    "place": "Definition def-pur-section-invariant, formula and final invertibility assertion; expanded well-definedness"
-   }
-  },
-  {
-   "text": "The pullback of the unit is the unit. At finite level [def-weil-derived-pullback-tensor-hom] computes exact inverse image of the constant sheaf, giving $Ls^*\\Lambda_V\\simeq\\Lambda_B$. At integral level that construction and [lem-weil-constant-coefficient-objects-constructible], clause 2, compute this pullback as $R\\varprojlim_j\\operatorname{Res}_j(A_{E,j})_B\\simeq\\widehat{\\mathcal O}_{E,B}$. Indeed clause 2 identifies all finite reductions of the completed unit with the finite constant units, and its derived completeness identifies the completed unit with this derived limit. At field levels apply rationalization to this integral isomorphism and then represent it at a common finite stage, as specified in [def-weil-derived-pullback-tensor-hom].",
-   "uses": [
-    "def-weil-derived-pullback-tensor-hom",
-    "lem-weil-constant-coefficient-objects-constructible"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-def-purity-conv/def-pur-section-invariant.md",
-    "place": "Definition def-pur-section-invariant, formula and final invertibility assertion; expanded well-definedness"
-   }
-  },
-  {
-   "text": "Apply $Ls^*$ to the two inverse isomorphisms in step 3. The tensor comparison of [lem-pur-derived-pullback-tensor-iso], applied to $(\\omega_g,P)$ and $(P,\\omega_g)$, and step 6 give\n$$\n C(g,s)\\otimes^L_\\Lambda Q\\simeq Ls^*(\\omega_g\\otimes^L_\\Lambda P)\\simeq\\Lambda_B,\n \\qquad Q\\otimes^L_\\Lambda C(g,s)\\simeq\\Lambda_B.\n$$\nThe cited comparison includes the compatible finite-reduction construction of the integral map and its rationalized and common-stage images. At finite level it is stated in the ambient derived category, so its use does not presume tensor closure for arbitrary bounded constructible inputs. Steps 4 and 5 place the factors in $D^b_{ctf}(B,\\Lambda)$; the displayed isomorphisms exhibit the claimed inverse there. Hence the actual pullback $C(g,s)$ is an object of its Picard groupoid, with no orientation chosen.",
-   "uses": [
-    "lem-pur-derived-pullback-tensor-iso"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-def-purity-conv/def-pur-section-invariant.md",
-    "place": "Definition def-pur-section-invariant, formula and final invertibility assertion; expanded well-definedness"
+    "place": "Definition formula and final invertibility assertion; short assembly of extracted arguments, step 3"
    }
   }
  ],
  "proof_deps": [
-  "sbc-lem-smooth-relative-dimension-locally-constant",
-  "def-weil-finite-type-morphism",
-  "def-weil-proper-morphism",
-  "def-sbc-smooth-morphisms",
-  "lem-pc-open-immersion-smooth-composition",
-  "lem-pur-finite-clopen-derived-decomposition",
-  "lem-pur-finite-clopen-exceptional-restriction",
-  "thm-pur-cohomological-smoothness",
+  "lem-pur-varying-dimension-dualizing-inverse",
   "def-weil-derived-pullback-tensor-hom",
   "lem-weil-pbc-closed-immersion-proper",
-  "lem-sf-pullback-tor-amplitude",
-  "lem-pur-integral-operations-preserve-constructible",
-  "def-weil-finite-tor-amplitude",
-  "lem-weil-constant-coefficient-objects-constructible",
-  "lem-pur-derived-pullback-tensor-iso"
+  "lem-pur-all-stage-ctf-pullback-unit",
+  "def-pur-finite-pullback-tensor-comparison",
+  "lem-sf-cochain-tensor-model-rigidity"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-def-purity-conv/def-pur-section-invariant.md",
-  "place": "Formula and final invertibility sentence; preserved finite-clopen/pure-dimension/pullback route, with non-elementary comparisons extracted or cited"
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-def-purity-conv/def-pur-section-invariant.md",
+  "place": "Section-invariant formula and Picard assertion; finite realization assembled by X6 from the declared varying-dimension inverse and finite-Tor pullback statements, with canonical tensor-model comparison."
  },
  "mathlib_searches": [
   {
@@ -242,47 +180,34 @@
   "def-weil-derived-tensor",
   "def-weil-scheme-morphism-properties"
  ],
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
  "chapter": "sec-smooth-purity",
  "unit": "sk-def-purity-conv",
  "split_report": {
-  "date": "2026-10-17",
+  "date": "2026-10-22",
   "item": "def-pur-section-invariant",
-  "worker": "Q40 direct-delivery stage-1 worker",
-  "summary": "Dedicated repair of the long-step return. Statement and Lean metadata retained exactly. Extracted two unsplit finite-clopen comparison lemmas; reused the now-correct ambient/higher-coefficient tensor comparison and the existing finite-Tor pullback theorem instead of duplicating their statements. Retained the smooth pure-dimensional invertibility argument and all coefficient stages; seven proof steps, each below 2000 characters.",
-  "blueprint": "Current main-20261015 sk-def-purity-conv definition formula and def-pur-section-invariant final invertibility sentence. The section construction remains the actual derived pullback; the earlier finite-clopen, pure-relative-dimension and monoidal-pullback route is unchanged.",
+  "worker": "Q115 direct-delivery stage-1 repair",
+  "summary": "Preserved the statement exactly. Extracted returned steps 1-3 into the varying-dimension dualizing-inverse node and steps 4-6 into the all-stage finite-Tor pullback/unit node, both unsplit with no proof steps. Retained the explicit tensor-comparison assembly (old step 7) in the item. The report preserves all seven original arguments verbatim and maps their hypotheses and calculations to the new tasks.",
+  "blueprint": "Current main-20261015 def-pur-section-invariant formula and final invertibility sentence, following the unchanged finite-clopen pure-dimensional route and completed coefficient constructions.",
   "tool_uses": [
    {
-    "node": "sbc-lem-smooth-relative-dimension-locally-constant",
-    "why": "Generic smooth-dimension fact needed to reduce varying relative dimension; conventions only define it."
-   },
-   {
-    "node": "thm-pur-cohomological-smoothness",
-    "why": "Existing orientation-free pure-dimensional smooth dualizing invertibility theorem; conventions do not assert it."
-   },
-   {
     "node": "lem-weil-pbc-closed-immersion-proper",
-    "why": "Generic closed-immersion properness gives the separated finite-type hypotheses of the pullback preservation theorem."
-   },
-   {
-    "node": "lem-sf-pullback-tor-amplitude",
-    "why": "Existing finite-coefficient constructible pullback theorem preserving a specified Tor interval, also applied uniformly to integral reductions."
-   },
-   {
-    "node": "lem-pur-integral-operations-preserve-constructible",
-    "why": "Existing integral pullback preservation and reduction formula used for the uniform integral Tor test."
-   },
-   {
-    "node": "lem-weil-constant-coefficient-objects-constructible",
-    "why": "Existing completed unit identification and derived completeness needed for unit pullback."
+    "why": "Generic properness of a closed immersion supplies separated finite type for the all-stage pullback lemma; no conventions-unit theorem supplies this."
    },
    {
     "node": "lem-pur-derived-pullback-tensor-iso",
-    "why": "Existing ambient finite-level and compatible higher-coefficient tensor comparison; the conventions unit supplies no comparison theorem."
-   },
-   {
-    "node": "lem-pc-open-immersion-smooth-composition",
-    "why": "Generic smoothness of an open restriction, needed when passing to the relative-dimension loci; no such theorem in the conventions unit."
+    "why": "The existing ambient and coherent higher-coefficient tensor comparison gives the explicit two inverse composites; reused rather than duplicated."
    }
   ]
  },
@@ -295,16 +220,15 @@
   "sbc-lem-smooth-relative-dimension-locally-constant",
   "lem-weil-pbc-closed-immersion-proper",
   "lem-sf-pullback-tor-amplitude",
-  "lem-pur-derived-pullback-tensor-iso",
   "lem-pc-open-immersion-smooth-composition"
  ],
  "reviewed": {
-  "date": "2026-10-17",
+  "date": "2026-10-22",
   "by": "L",
-  "reviewer": "NT-cc-Q40-51edd1985",
-  "group": "Q40",
+  "reviewer": "NT-cc-Q115-480fec632",
+  "group": "Q115",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q40-51edd1985 (reviewer sub-agent of L); spot-checked: Read the contract docs A-F, packet and report, both blueprint versions of def-pur-section-invariant (identical text; its 'invertible by def-pur-co-smoothness' cites a definition, and the split rightly uses thm-pur-cohomological-smoothness instead), Stacks 04TS/sites-lemma-mapping-property-glue at sites.tex 5909-5926, and the full statement of every cited node, including all of def-weil-exceptional-inverse-image. The item's statement, stmt_deps and lean are byte-identical to the side-DAG copy, so nothing is weakened. Steps 1-7 check out: clopen relative-dimension loci V_d from 02G1, finitely many by quasi-compactness; g_d smooth, separated and of finite type with exact relative dimension d; componentwise inverses glue through new node 1; s is separated and of finite type via the closed-immersion leaf, so lem-sf-pullback-tor-amplitude keeps the exact Tor interval; that interval passes to every integral reduction through clause 1 of lem-pur-integral-operations-preserve-constructible; unit pullback uses clause 2 of lem-weil-constant-coefficient-objects-constructible; the ambient and coherent tensor comparison comes from lem-pur-derived-pullback-tensor-iso. proof_deps equals the union of uses; no cited id is missing or merged; a reachability check finds no cycle. New node 1 is true: clopen glueing, exact restriction commuting with R lim, finite common bounds, and localization/Karoubi/2-colimit commuting with finite products. Tested on one piece, Spec k ⊔ Spec k, two different Tor intervals and the empty cover. New node 2 is true: K = ⊕ j_{i!}K_i, then a Hom chain giving j_i^* g^× ≅ g_i^×, lifted through the system-level R lim construction; Y may be non-separated, as the definition allows. Neither node restates a clause of the item. det-sf-mate-open-restriction is a different functor (the Brown adjoint on Loc(D_ctf) for separated schemes), so it is not a duplicate; the clopen-sheaf and biproduct candidates are not duplicates either. Both nodes are statement-only with three kinds of Mathlib search recorded. Accepted the declared tool_uses. No SGA source is cited. No fixes."
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q115-480fec632 (reviewer sub-agent of L); spot-checked: Re-split of the reviewed 7-step proof, as the 2026-10-22 repair note asks. The statement and stmt_deps are byte-identical to live, and only split-owned fields changed. A script check confirmed all 7 base step texts verbatim in the report. Base steps 1-3 go to lem-pur-varying-dimension-dualizing-inverse: 02G1 clopen loci V_d, finitely many since V is quasi-compact; clopen exceptional restriction with integral comparisons at system level; per-component inverses from thm-pur-cohomological-smoothness assembled through the finite-clopen D^b_ctf equivalence. Base steps 4-6 go to lem-pur-all-stage-ctf-pullback-unit: lem-sf-pullback-tor-amplitude at every j plus lem-pur-integral-operations-preserve-constructible (1) for the uniform integral interval; field-stage D^b_ctf = D^b_c; the completed-unit pullback is R lim Res_j (A_{E,j})_X ≅ Ô_{E,X} by lem-weil-constant-coefficient-objects-constructible (2). Base step 7 stays as the 3-step, 1624-character assembly. In step 2 the closed immersion s is proper, hence separated and finite type, so node B applies to f=s. In step 3, mu^{-1} then Ls^*e then u_s has the right direction, and ω_g,P lie in D^b_c. The two new nodes are statement-only, of comparable size, cite neither each other nor the item, and neither restates an item clause. Small cases hold: a point plus A^1 with varying dimension, the empty source, g = id, f = id, K = 0. There is no duplicate: thm-sf-ctf-stability and lem-pur-completed-unit-pullback-tower assume separated schemes, and the cohomological-smoothness nodes assume pure dimension. Batch-5 finding: lem-pur-finite-clopen-derived-decomposition was already cited by the base item, so the closure is unchanged. The node it reaches, lem-trf-fully-faithful-ess-surj-equivalence, is the generic Mathlib leaf Functor.asEquivalence and belongs to neither assumption, so I accepted it. Tool uses accepted: lem-weil-pbc-closed-immersion-proper (Mathlib leaf) and lem-pur-derived-pullback-tensor-iso (same unit, redundant declaration). No SGA source is cited. Maintainer note: node B's unit clause overlaps the unsplit lem-pur-completed-unit-pullback-tower (separated schemes only)."
  },
  "reviewed_lean": {
   "date": "2026-10-18",
@@ -338,21 +262,13 @@
   "note": "Section 1(B): importing the recorded PuritySectionInvariant mixes the retired pro-etale UpperLowerStar.Iso with FiniteCoefficient.UpperLowerStar.Iso and fails with duplicate upperStarIsoLowerStarInv. Its fixed-scalar section invariant also does not directly inhabit the intrinsic finiteTorConstructible category. This replacement uses the canonical intrinsic coefficient realization, the published finite exceptional functor and exact derived pullback. sectionInvariantFinite obtains compactifiability from the source finite-type hypotheses; no ambient exceptional-adjoint admissibility or orientation is added. The finite coefficient stage is stated here; other stages remain the specified transports of def-pur-conventions."
  },
  "reviewed_proof": {
-  "date": "2026-10-20",
+  "date": "2026-10-25",
   "by": "L",
-  "reviewer": "AUTO",
-  "group": "K6",
+  "reviewer": "C-72a13",
+  "group": "X6",
   "result": "pass",
-  "landing": "20261020T051500-L-1694148",
+  "landing": "20261025T051010-L-3909010",
   "kind": "proof",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)",
-  "sorry_before": [
-   "WeilConjectures.PurityFiniteSetting.sectionCompactifiable",
-   "WeilConjectures.PurityFiniteSetting.sectionInvariantFinite_invertible",
-   "WeilConjectures.PurityFiniteSetting.sectionInvariantIntrinsic_invertible"
-  ],
-  "sorry_after": [
-   "WeilConjectures.PurityFiniteSetting.sectionInvariantIntrinsic_invertible"
-  ]
+  "note": "independent cc review: delivered PuritySectionInvariantIntrinsic.lean + def-pur-section-invariant.json vs clone sheaf-dag; unit sk-def-purity-conv realized (empty); AllStageCtfPullbackUnit public import of FiniteTorAmplitudeSites; #print axioms; 22 direct importers compiled against delivered module"
  }
 }

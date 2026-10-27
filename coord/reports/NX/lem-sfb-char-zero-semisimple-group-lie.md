@@ -1,0 +1,57 @@
+# Stage-1 delivery: lem-sfb-char-zero-semisimple-group-lie
+
+## Files written
+
+- dag/nodes/sec-six-functors-basics/lem-sfb-char-zero-semisimple-group-lie.json: statement, split in seven steps; not a Mathlib leaf.
+- dag/nodes/sec-six-functors-basics/lem-sfb-char-zero-affine-group-smooth.json: statement only, not a Mathlib leaf; attached to the existing project theorem below. One new node, zero Mathlib leaves.
+- citations.json: verbatim statement witnesses for every citation of the seven item steps.
+
+## Attachments
+
+AlgebraicGeometry.smooth_of_grpObj_of_charZero belongs to lem-sfb-char-zero-affine-group-smooth, WeilConjectures/AlgebraicGeometry/GroupScheme/Cartier.lean:356. It assumes a characteristic-zero field, a group object over its spectrum and a locally finite type structure morphism, and concludes smoothness. Finite type affine groups specialize this in one line. Its proof at lines 356-363 contains no sorry. The existing lem-ag-cartier-reduced audit also records this declaration as closed. This is a project attachment, not a Mathlib leaf. The attached new node is deliberately not split.
+
+The item itself has no exact finished project declaration: searches by its id, semisimple group/Lie phrases and source declarations found only abstract Lie algebra semisimplicity, the central-radical theorem under a faithful semisimple representation hypothesis, and matrix group-Lie comparison. Those do not prove this item. Complete reducibility is downstream of the item and is not used.
+
+## WANTED
+
+None. Milne, Algebraic Groups (2017), is present in literature/milne-algebraic-groups_iAG2017.pdf.
+
+## Corrections and scope
+
+The item's mathematical statement is unchanged. Added its missing inline reference to the closed-normal-subgroup definition and removed the two redundant direct tangent-space dependencies: those notions are explicitly supplied by the differentiation node already named in the statement. No hypothesis or conclusion changed. There is no STATEMENT-DISPUTED issue.
+
+The original node had no proof. Milne p.476 argues with an arbitrary commutative Lie ideal and its adjoint pointwise centralizer. I expanded the normality argument by making this centralizer the kernel of the restricted adjoint representation. I use the connected centre itself, which is trivial by the stated semisimplicity hypothesis, rather than asserting without proof that the whole centre is finite. The elementary last-derived-term argument explicitly passes from commutative ideals to solvable ideals.
+
+Read SETUP's three levels, the chapter record and the unit record, and the current latest unit and direct-image proof. This remains the generic representation-theoretic prerequisite for the inherited Casimir/complete-reducibility input in the recorded alteration/level-structure route. The ancestor command prints None; the inherited null ancestor is retained, with the exact place and the via chain. I did not alter the unit or chapter. The imported unit record has an older sec-six-functors source while the latest unit lives under sec-six-functors-basics; the latest text was used. No route is replaced.
+
+## Not duplicates
+
+lem-sfb-char-zero-affine-group-smooth vs lem-ag-cartier-reduced: the existing statement assumes a closed matrix subgroup over Qbar_ell, whereas the new statement is smoothness of an arbitrary affine finite-type group scheme over any characteristic-zero field. The existing statement cannot be applied to the item's arbitrary field. Its recorded project declaration is more general than its statement and is reused as an attachment, without changing that existing node.
+lem-sfb-char-zero-affine-group-smooth vs sk-p-geometry: that node states component, image and equal-Lie-algebra properties, not Cartier smoothness.
+lem-sfb-char-zero-affine-group-smooth vs lem-sfb-locally-algebraic-group-identity-component: the latter gives smoothness of the reduction of the neutral component; it does not say that a characteristic-zero group has no nonreduced structure, nor smoothness of the unreduced group.
+
+Searched the whole DAG by Cartier, characteristic zero/smoothness, declaration name, adjoint, centralizer and invariant subspace, and the whole imported blueprint with blueprint_refs searches for semisimple Lie, Cartier, smooth and reduced, affine algebraic group, centralizer, normal subgroup, pointwise and Lie algebra of the centre. No general smoothness node already supplies the new statement. The pre-existing group-Lie comparison and component/centre nodes are reused. The centralizer's finite matrix equations and their dual-number linearization are elementary work in step 3, not a new lemma. Searches for this possible lemma are logged but no such node was created.
+
+## Mathlib searches
+
+All fresh searches were made through the prescribed msearch.py command and appear in searches.jsonl. Read both semantic phrasings for the item and for Cartier, Loogle results and grep results. The item hits are abstract Lie statements or the Geck construction; they lack any comparison to the tangent algebra of the given group. Read Mathlib/Algebra/Lie/Semisimple/Basic.lean, including the no-abelian-ideals criterion, and the Geck construction source. Their criteria do not supply the group-theoretic content of the item. Cartier searches returned general smoothness, smooth loci, formal smoothness and unramified algebra results, not characteristic-zero group smoothness. The AlgebraicGeometry/Group grep for CharZero or charZero had zero hits. The group theorem was found in the project source, where it is attached. The original item's search history is preserved and fresh item searches appended; no search is claimed without having run it.
+
+## Review by NX
+
+I read delivery-errors B-E in full and checked the statements and sources with the final node files open. For the item I read Milne's complete first paragraph of section 22c, printed p.476, and Theorem 22.53 on p.481, which sends the semisimplicity assertion back to that paragraph. I read the supporting constructions in chapter 10, especially 10.14-10.15 (pp.190-191), Theorem 10.23 (pp.193-194), Proposition 10.31 (p.196) and the centre discussion 10.33 (p.197). For the new Cartier node I read Theorem 3.23 and its proof, printed p.71, and its corollaries on p.72, then read the actual project declaration and its seven-line proof. Thus the new statement has its own hypotheses, a source and a genuine attachment; it is neither a clause of the item nor an unsupported assertion that the item's conclusion is known.
+
+Step 1 uses lem-sfb-central-torus-faithful-weight-blocks, whose statement explicitly permits r=0 and supplies a closed immersion for an arbitrary affine finite-type group. The trivial group is a central closed subgroup by the counit calculation written in the step. Read def-wf-lie-algebra-derivation: its tangent-space, matrix bracket and differential formulas are all over arbitrary algebraically closed characteristic-zero fields. Read lem-sfb-char-zero-differentiation-hom: it gives the canonical bracket and Lie-homomorphism differential for exactly our G. The quotient-of-coordinate-rings tangent description identifies that canonical Lie algebra with its matrix realization; no assumption about a faithful semisimple representation is used.
+
+Step 2 uses the adjoint formulas explicitly stated in def-wf-lie-algebra-derivation and the stable-subspace clause of sk-p-comparison. I opened the latter and its latest blueprint source: it is stated for the characteristic-zero algebraically closed field of the chapter, unlike the narrower Qbar_ell node lem-ag-lie-stable-subspace. The ideal condition supplies precisely the differential stability hypothesis. A basis extending one of the ideal makes restriction a rational action over all algebras, not just a representation of rational points.
+
+Step 3 cites only the dual-number and adjoint formulas from that definition and actually writes the closed kernel equations, the group-law calculation establishing normality, and the linearized tangent condition. These are finite equations r_ij-delta_ij and their epsilon coefficients, rather than a hidden theorem about integrating arbitrary Lie ideals. Its final inclusion n in Z(h) follows immediately from commutativity of n and h's defining equation. I kept this as an elementary step, as instructed for two- or three-line constructions and computations.
+
+Step 4 uses the new Cartier statement twice, for H and for Z(H^0); both are affine finite-type group schemes, so it does not assume that a kernel or centre is reduced. Read lem-sfb-group-neutral-component-translates, which gives the open-and-closed subgroup with its actual open structure without a characteristic or smoothness hypothesis. Thus the neutral component has the same tangent algebra, and smoothness restricts to it. Read lem-sfb-affine-group-centre-base-change, whose statement represents the actual centre functor as a closed commutative subgroup for any affine finite-type group. It supplies exactly Z, while the component node supplies C=Z^0. C is smooth, connected, closed and solvable, the precise hypotheses required by the item.
+
+Step 5 uses those component and centre statements to identify the subschemes preserved by each geometric conjugation. I read lem-sfb-smooth-ambient-normality-geometric: it asks for equality of subgroup schemes for every geometric g and assumes a smooth ambient group. The step supplies scheme equality via automorphisms preserving the component and centre functor, and G is smooth by the item. It therefore justifies normality after every algebra extension, rather than silently turning rational-point normality into scheme normality.
+
+Step 6 uses the centre clause of sk-p-comparison with H^0, not disconnected H: H^0 is a connected closed matrix group over F and its tangent algebra is h. It states Lie(Z(H^0)^0)=Z(Lie(H^0)), exactly what this step takes from it. C=1 then gives z(h)=0 and hence n=0. Step 7 uses only the explicit definitions in def-wf-lie-algebra and def-wf-semisimple-lie-algebra. The Jacobi identity proves that every derived term remains an ambient ideal, and the last nonzero term of a solvable nonzero ideal is commutative. This expands the reduction Milne leaves implicit.
+
+I checked small cases: G=1 gives the zero Lie algebra and permits n=0 (GL(0)=1 in the restricted action); H may be disconnected, so it is H^0 to which the centre comparison is applied. For SL_2 the centre may be nontrivial finite, but its connected centre is trivial in characteristic zero, exactly as used. A torus or additive group would have a nontrivial connected solvable normal subgroup, so the contradiction step does not apply to them. Positive-characteristic nonreduced centres are excluded by Cartier's hypothesis, and were never assumed smooth without that input. No general integration of Lie ideals, classification of semisimple groups, Killing-form nondegeneracy or complete reducibility is hidden in the argument.
+
+All seven steps are below 2000 characters. Every cited node was opened and its statement is copied verbatim in citations.json; no proof of a cited node was used as an interface. Tool use sk-p-comparison is declared in split_report because it supplies generic group-Lie comparison outside this unit. Other substantive tools are in the same unit; definition dependencies are notions. No SGA is cited. Nothing remains mathematically unfinished in the item; the new node's project attachment is independently checkable by the maintainer.

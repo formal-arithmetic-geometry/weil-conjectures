@@ -1,0 +1,111 @@
+{
+ "id": "lem-sp-field-projection-tensor-construction",
+ "kind": "statement",
+ "title": "Canonical signed tensor comparisons on fixed field-system models",
+ "statement": "For any purity finite setting P and simultaneous field-system models D [def-sp-field-shriek-system-models], there exists a ProjectionTensorComparisons P D [def-sp-field-projection-factor-data]. In particular the symmetry is the signed interchange of homogeneous total summands and the scalar tensor comparison is fixed by the ordinary pure-tensor and K-flat representative equations. This is a tensor construction only and asserts no projection square.",
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-lem-sp-field-extension",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-field-extension/sk-lem-sp-field-extension-towers.proof.md",
+  "place": "(2), projection square, expanded as steps 1--4 of lem-sp-field-projection-system-square"
+ },
+ "stmt_deps": [
+  "def-sp-field-projection-factor-data",
+  "def-sp-field-shriek-system-models"
+ ],
+ "proof": [
+  {
+   "text": "on the total tensor of two K-flat complexes interchange the homogeneous\nsummands with sign (-1)^(ab). The two differential contributions transform with\nexactly this sign, so this is a chain isomorphism, natural in both complexes.\nRestriction to the resolving subcategory and the two-variable localization\nuniversal property descend it to the supplied derived tensor. For a coefficient\nmap use extension of scalars on ordinary sheaf tensors: (x tensor y) tensor b\nmaps to (x tensor b) tensor (y tensor 1), with inverse given by multiplying the\ntwo scalar factors. Sheafification preserves the balancing equations. Apply this\nmap in each total summand. It preserves the signed differential and flat-term\nK-flat complexes, and the scalar universal counits identify its localization\nwith the derived tensor comparison. These constructions give all four fields,\nsimultaneously for every coefficient inclusion and scheme.",
+   "uses": [
+    "lem-coef-semilinear-derived-sections",
+    "def-pc-kflat-complex"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-field-extension/sk-lem-sp-field-extension-towers.proof.md",
+    "place": "(2), projection square, expanded as steps 1--4 of lem-sp-field-projection-system-square"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-coef-semilinear-derived-sections",
+  "def-pc-kflat-complex"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-field-extension/sk-lem-sp-field-extension-towers.proof.md",
+  "place": "(2), projection square, expanded as steps 1--4 of lem-sp-field-projection-system-square"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Derived scalar extension has a canonical tensor comparison and Koszul symmetry on K flat complexes",
+   "results": "8 hits: KaehlerDifferential.tensorKaehlerEquivOfFormallyEtale_apply, its congr_simp, LinearMap.tensorKerEquiv, Module.Flat.baseChange, KaehlerDifferential.tensorKaehlerEquivOfFormallyEtale, comonadicExtendScalars, KaehlerDifferential.tensorKaehlerEquiv, LinearMap.tensorEqLocusEquiv. None supplies the normalized derived sheaf tensor data.",
+   "date": "2026-10-26",
+   "verdict": "No match; ordinary module base change is only an ingredient."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived scalar extension has a canonical tensor comparison and Koszul symmetry on K flat complexes",
+   "results": "8 hits on Algebra.Extension.tensorH1Cotangent and flat module tensor exactness, including ModuleCat.preservesFiniteLimits_extendScalars_of_flat. No whole-system normalized derived tensor comparison.",
+   "date": "2026-10-26",
+   "verdict": "No match."
+  },
+  {
+   "tool": "grep",
+   "query": "scalarTensor|tensorModelIso|braiding",
+   "results": "25 initial hits, starting with Mathlib/Probability/Kernel/Category/Stoch.lean and braided monoidal category files. Repository search found the generic prescribed scalar comparison and semilinear model interfaces, but no construction for the fixed field-system models or their two projection factors.",
+   "date": "2026-10-26",
+   "verdict": "No exact statement or one-line specialization."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.FieldProjectionSystemSquare",
+  "date": "2026-10-26",
+  "group": "S2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-sp-field-extension-towers",
+   "place": "(2), projection square, expanded as steps 1--4 of lem-sp-field-projection-system-square",
+   "via": [
+    "lem-sp-field-projection-system-square"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.FieldProjectionTensorConstruction",
+  "file": "lean/Sheaf/Paper/FieldProjectionTensorConstruction.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.FieldShriekSystem.field_projection_tensor_construction",
+  "statement": "theorem field_projection_tensor_construction :\n    Nonempty (ProjectionTensorComparisons P D)",
+  "branch": "sheaf-dag",
+  "by": "S2",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-fb649",
+  "group": "S2",
+  "result": "pass",
+  "landing": "20261025T203038-L-2779089",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-fb649",
+  "group": "S2",
+  "result": "pass",
+  "landing": "20261025T203038-L-2779089",
+  "kind": "interface",
+  "note": "independent cc review: item theorem signature and relocated five data declarations vs clone (identical, public re-export); three new sorried squares/constructions vs Models/Geometry/Operations pinning fields (open_unit, openTensor_mate, tensorPullback_eq, PullComparison.representative)"
+ }
+}

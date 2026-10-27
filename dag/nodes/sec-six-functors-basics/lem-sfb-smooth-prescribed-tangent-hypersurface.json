@@ -1,0 +1,436 @@
+{
+ "id": "lem-sfb-smooth-prescribed-tangent-hypersurface",
+ "kind": "statement",
+ "title": "A smooth hypersurface germ realizes any tangent hyperplane",
+ "statement": "Let $k$ be an algebraically closed field [def-weil-field, def-weil-algebraic-closure], let $Y$ be a smooth separated geometrically integral finite-type $k$-scheme [def-pc-scheme, def-sbc-smooth-morphisms, def-pc-geometrically-irreducible, def-weil-finite-type-morphism], and let $p\\in Y(k)$ [def-pc-rational-point]. Separated means that the diagonal is a closed immersion. Suppose $d=\\dim Y\\ge2$, with dimension as in [def-kun-topological-krull-dimension], and let $H\\subset T_{Y/k,p}$ be a codimension-one $k$-linear subspace of the tangent space [def-sc-scheme-tangent-space]. There are an open neighbourhood $V\\subseteq Y$ of $p$ and a closed immersion $j:D\\hookrightarrow V$ [def-weil-open-immersion, def-weil-closed-immersion], where $D$ is smooth, separated, geometrically integral and of finite type over $k$, with $\\dim D=d-1$, and a point $q\\in D(k)$ mapping to $p$, such that the tangent map of $D\\to Y$ identifies $T_{D/k,q}$ with $H$.",
+ "source": {
+  "document": "literature/milne-abelian-varieties_AV.pdf",
+  "place": "Chapter I Lemma 3.6, printed p.18, proof: hyperplane H through P not containing Tgt_P(V); shrink the unique component through P to its smooth neighbourhood. Algebraic justification: Stacks algebra.tex Tag 00NQ, lemma-regular-ring-CM; Tag 00TV, lemma-separable-smooth; morphisms.tex Tag 01V9, lemma-smooth-at-point; varieties.tex Tag 038X, lemma-geometrically-regular-smooth. The hyperplane in this statement is the intersection of Milne's ambient hyperplane with Tgt_P(V)."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-weil-algebraic-closure",
+  "def-pc-scheme",
+  "def-sbc-smooth-morphisms",
+  "def-pc-geometrically-irreducible",
+  "def-weil-finite-type-morphism",
+  "def-pc-rational-point",
+  "def-kun-topological-krull-dimension",
+  "def-sc-scheme-tangent-space",
+  "def-weil-open-immersion",
+  "def-weil-closed-immersion"
+ ],
+ "proof": [
+  {
+   "text": "Choose an affine chart $U=\\operatorname{Spec}A$ containing $p$ from a finite affine finite-type cover supplied by [def-weil-finite-type-morphism]. Thus $A$ is a finitely generated $k$-algebra, as also expressed by [lem-pc-affine-finite-type-algebra]. Geometric integrality implies that $Y$, hence its nonempty affine open $U$, is integral, so $A$ is a domain. The point gives a surjective evaluation $A\\to k$, with maximal kernel $\\mathfrak p$. Put $R=\\mathcal O_{Y,p}=A_{\\mathfrak p}$ and $\\mathfrak m=\\mathfrak pR$, using [lem-weil-pbc-affine-open-stalk-localization]. Smoothness gives regularity of $R$ by [lem-weil-pbc-smooth-scheme-over-field-regular]. Also $\\dim R=\\dim A=\\dim U=\\dim Y=d$: use [lem-weil-pbc-finite-type-domain-dimension-local-ring-localization], [lem-weil-pbc-spec-topological-krull-dimension-ring] and [lem-sc-integral-locally-algebraic-opens-dimension].",
+   "uses": [
+    "def-weil-finite-type-morphism",
+    "lem-pc-affine-finite-type-algebra",
+    "def-pc-geometrically-irreducible",
+    "def-pc-integral-scheme",
+    "lem-weil-pbc-affine-open-stalk-localization",
+    "lem-weil-pbc-smooth-scheme-over-field-regular",
+    "lem-weil-pbc-finite-type-domain-dimension-local-ring-localization",
+    "lem-weil-pbc-spec-topological-krull-dimension-ring",
+    "lem-sc-integral-locally-algebraic-opens-dimension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 0A21, lemma-dimension-locally-algebraic (3), together with Algebra Tag 00OS, lemma-dimension-spell-it-out, and Varieties Tag 056S, lemma-smooth-regular"
+   }
+  },
+  {
+   "text": "Write $E=\\mathfrak m/\\mathfrak m^2$. By [lem-weil-pbc-regular-local-cotangent-dimension], $\\dim_k E=d$. The identification [lem-sc-rational-point-tangent-derivation-identification] gives $T_{Y/k,p}=E^\\vee$. Choose a nonzero functional $L:E^\\vee\\to k$ whose kernel is $H$, by choosing a basis of $H$ and extending it by one vector. In a basis $e_1,\\ldots,e_d$ of $E$, put $v=\\sum_i L(e_i^\\vee)e_i$. Then $L(\\lambda)=\\lambda(v)$ for every $\\lambda\\in E^\\vee$, and $v\\ne0$. Lift $v$ through the quotient map $\\mathfrak m\\to E$ to $f\\in\\mathfrak m$. Thus $f\\notin\\mathfrak m^2$, and the annihilator of its class in $E^\\vee$ is exactly $H$.",
+   "uses": [
+    "lem-weil-pbc-regular-local-cotangent-dimension",
+    "lem-sc-rational-point-tangent-derivation-identification"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 0B2E, lemma-tangent-space-rational-point; elementary finite-dimensional double-dual calculation"
+   }
+  },
+  {
+   "text": "Represent $f=a/s$ with $a\\in A$, $s\\in A\\setminus\\mathfrak p$, by [lem-weil-pbc-affine-open-stalk-localization]. Since the residue of $f$ is zero and $s(p)\\ne0$, one has $a\\in\\mathfrak p$. Replace $U$ by the principal open $D(s)=\\operatorname{Spec}A_s$, using [lem-weil-pbc-principal-localization-open-immersion], and replace $A$ by $A_s$. This ring is still finite type, as adjoining $s^{-1}$ amounts to adding one generator with relation $sT-1=0$. Now $f$ is the germ of the actual section $a/s\\in A$; call this section $h$. Its germ and its cotangent class are exactly the chosen $f$ and $v$.",
+   "uses": [
+    "lem-weil-pbc-affine-open-stalk-localization",
+    "lem-weil-pbc-principal-localization-open-immersion"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Tag 01I3, lemma-standard-open-affine, and Tag 01HV, lemma-spec-sheaves (6)"
+   }
+  },
+  {
+   "text": "Extend the nonzero class of $f$ to a basis $[f],[f_2],\\ldots,[f_d]$ of $E$. Lift the remaining basis vectors to $\\mathfrak m$. Nakayama [lem-weil-pbc-nakayama-local-generators], applied to the finitely generated $R$-module $\\mathfrak m$, shows that $f,f_2,\\ldots,f_d$ minimally generate $\\mathfrak m$. The regular-parameter theorem [lem-weil-pbc-regular-local-generators-regular-sequence], with $c=1$, gives that $R/(f)$ is regular local of dimension $d-1$.",
+   "uses": [
+    "lem-weil-pbc-nakayama-local-generators",
+    "lem-weil-pbc-regular-local-generators-regular-sequence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00DV, lemma-NAK (4); Tag 00NQ, lemma-regular-ring-CM, with c=1"
+   }
+  },
+  {
+   "text": "Let $Z=\\operatorname{Spec}B$ with $B=A/(h)$, the zero scheme of $h$, a closed subscheme of $U$ by [lem-pc-zero-scheme-properties]. The point $p$ factors through a point $z\\in Z(k)$ because $h(p)=0$. The quotient-localization isomorphism [lem-weil-pbc-localization-at-prime-of-quotient] identifies $\\mathcal O_{Z,z}$ with $R/(f)$, with its quotient map from $R$ and unchanged residue field $k$. Apply [lem-sfb-regular-separable-affine-smooth-neighbourhood] to the affine scheme $Z$, its finite-type algebra $B$, and this prime. Regularity was proved in step 4; its residue extension is the identity $k/k$, hence finite separable. Obtain $b\\in B$ with $b(z)\\ne0$ such that $Z_b=\\operatorname{Spec}B_b$ is smooth over $k$. Lift $b$ to $t\\in A$. Then $Z_b$ is the zero scheme of $h$ inside $U_t$, since $(A/(h))_b=A_t/(h)$ by [lem-weil-pbc-localization-quotient-commute].",
+   "uses": [
+    "lem-pc-zero-scheme-properties",
+    "lem-weil-pbc-localization-at-prime-of-quotient",
+    "lem-sfb-regular-separable-affine-smooth-neighbourhood",
+    "lem-weil-pbc-localization-quotient-commute"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00TV, lemma-separable-smooth; Tag 00CT, proposition-localize-quotient; Schemes Tag 01I3, lemma-standard-open-affine"
+   }
+  },
+  {
+   "text": "The affine finite-type scheme $Z_b$ is smooth, so [lem-wf-smooth-components-disjoint] says its irreducible components are disjoint and open and closed. Let $C$ be the unique component containing $z$. Choose a principal open $D(c)$ of $\\operatorname{Spec}B_b$ with $z\\in D(c)\\subseteq C$. This basis argument is direct from the Zariski topology: if $C$ is open and its complement is $V(I)$, choose $c\\in I$ outside the prime $z$. Lift $c$ to $u\\in A_t$ through the quotient $A_t\\to B_b$. Set $V=(U_t)_u$ and $D=(Z_b)_c$. Principal localization and quotient commute, so $D=\\operatorname{Spec}(\\Gamma(V,\\mathcal O_V)/(h))$ is closed in the affine open $V\\subseteq Y$. It contains the same $k$-point $q=z$. It is smooth by [lem-weil-pbc-smooth-restrict-open-subschemes]. Its space is irreducible, being a nonempty open in $C$. Every stalk of $D$ is regular by [lem-weil-pbc-smooth-scheme-over-field-regular], hence a domain by [lem-sc-regular-local-domain]. In particular every nilpotent section vanishes in every stalk, hence vanishes; $D$ is reduced. By [def-pc-integral-scheme], reducedness and irreducibility show that $D$ is integral.",
+   "uses": [
+    "lem-wf-smooth-components-disjoint",
+    "lem-weil-pbc-principal-localization-open-immersion",
+    "lem-weil-pbc-localization-quotient-commute",
+    "lem-weil-pbc-smooth-restrict-open-subschemes",
+    "lem-weil-pbc-smooth-scheme-over-field-regular",
+    "lem-sc-regular-local-domain",
+    "def-pc-integral-scheme"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-abelian-varieties_AV.pdf",
+    "place": "Chapter I Lemma 3.6, printed p.18: the unique component through the nonsingular point; Stacks algebra.tex Tag 00NP, lemma-regular-domain, for reducedness"
+   }
+  },
+  {
+   "text": "Write $D=\\operatorname{Spec}F$. Its coordinate ring is a quotient of a ring obtained from the finite-type $k$-algebra $A$ by two principal localizations, so it is generated by the images of the generators of $A$ together with two inverse elements. Thus $D$ is finite type. An affine $k$-scheme is separated directly: [lem-weil-pbc-fibre-product-affine-spectra] identifies its self-product with $\\operatorname{Spec}(F\\otimes_kF)$, and its diagonal is induced by the surjective multiplication map $F\\otimes_kF\\to F$, $x\\otimes y\\mapsto xy$, and so is a closed immersion by [def-weil-closed-immersion]. The local ring at $q$ is still $R/(f)$; localization at elements nonzero at $q$ does not change the stalk. As $F$ is a finite-type domain and $q$ has residue field $k$, [lem-weil-pbc-finite-type-domain-dimension-local-ring-localization] and [lem-weil-pbc-spec-topological-krull-dimension-ring] give $\\dim D=\\dim\\mathcal O_{D,q}=d-1$.",
+   "uses": [
+    "lem-weil-pbc-fibre-product-affine-spectra",
+    "def-weil-closed-immersion",
+    "lem-weil-pbc-finite-type-domain-dimension-local-ring-localization",
+    "lem-weil-pbc-spec-topological-krull-dimension-ring"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00OS, lemma-dimension-spell-it-out; Schemes Tag 01I4, lemma-fibre-product-affine-schemes, for the explicit multiplication description"
+   }
+  },
+  {
+   "text": "Let $\\mathfrak n$ be the maximal ideal of $R/(f)=\\mathcal O_{D,q}$, and let $\\iota:D\\to Y$ be $j$ followed by the open immersion $V\\subseteq Y$; by steps 5--7 its stalk map $\\iota^\\sharp_q:R\\to R/(f)$ is the quotient map. Its cotangent space is $\\mathfrak n/\\mathfrak n^2=\\mathfrak m/(\\mathfrak m^2+(f))=E/kv$. Indeed the image of $rf$ modulo $\\mathfrak m^2$ is $r(p)v$, and all multiples of $v$ occur. So $\\iota^\\sharp_q$ induces the quotient $u:E\\to E/kv$. Apply [lem-sc-rational-point-tangent-derivation-identification] to $D$ at $q$ and to $Y$ at $p$, both with residue field $k$: $\\theta\\mapsto\\ell_\\theta$ identifies $T_{D/k,q}$ with $(E/kv)^\\vee$, and $\\eta\\mapsto\\ell_\\eta$ identifies $T_{Y/k,p}$ with $E^\\vee$, the identification used in step 2. By [def-sc-scheme-tangent-space] the tangent map sends $\\theta$ to $\\iota\\circ\\theta$, and by [lem-weil-pbc-scheme-stalk-map-composition](b) $(\\iota\\circ\\theta)^\\sharp=\\theta^\\sharp\\circ\\iota^\\sharp_q$, with the same germ isomorphism of $k[\\epsilon]$ on both sides. Since $\\iota^\\sharp_q$ preserves residues, comparing $\\epsilon$-coefficients gives $D_{\\iota\\circ\\theta}=D_\\theta\\circ\\iota^\\sharp_q$, hence $\\ell_{\\iota\\circ\\theta}=\\ell_\\theta\\circ u$. Thus under these identifications the tangent map is precomposition with $u$. It is injective because $u$ is surjective, and its image is the set of functionals on $E$ vanishing at $v$, which is exactly the hyperplane $H$ of step 2. Thus the required tangent identification holds, with both residue fields equal to $k$.",
+   "uses": [
+    "lem-sc-rational-point-tangent-derivation-identification",
+    "def-sc-scheme-tangent-space",
+    "lem-weil-pbc-scheme-stalk-map-composition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 0B2E, lemma-tangent-space-rational-point; Tag 0B2F, lemma-map-tangent-spaces; elementary cotangent quotient calculation"
+   }
+  },
+  {
+   "text": "Finally $D$ is geometrically integral. For every finite field extension $L/k$, each element of $L$ is algebraic over the algebraically closed field $k$, so it belongs to the image of $k$; hence $k\\to L$ is an isomorphism. Consequently $F\\otimes_kL\\cong F$ is a domain. The finite-field-extension test [lem-per-geometric-integrality-finite-field-test] now shows that $F\\otimes_kK$ is a domain for every field extension $K/k$. Since $D_K=\\operatorname{Spec}(F\\otimes_kK)$, this is precisely geometric integrality as defined in [def-pc-geometrically-irreducible]. All localizations retained $q$, so $p\\in V$ and $q$ maps to $p$.",
+   "uses": [
+    "lem-per-geometric-integrality-finite-field-test",
+    "lem-weil-pbc-fibre-product-affine-spectra",
+    "def-pc-geometrically-irreducible"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 0FWF, lemma-characterize-geometrically-integral, (2) implies (1)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-finite-type-morphism",
+  "lem-pc-affine-finite-type-algebra",
+  "def-pc-geometrically-irreducible",
+  "def-pc-integral-scheme",
+  "lem-weil-pbc-affine-open-stalk-localization",
+  "lem-weil-pbc-smooth-scheme-over-field-regular",
+  "lem-weil-pbc-finite-type-domain-dimension-local-ring-localization",
+  "lem-weil-pbc-spec-topological-krull-dimension-ring",
+  "lem-sc-integral-locally-algebraic-opens-dimension",
+  "lem-weil-pbc-regular-local-cotangent-dimension",
+  "lem-sc-rational-point-tangent-derivation-identification",
+  "lem-weil-pbc-principal-localization-open-immersion",
+  "lem-weil-pbc-nakayama-local-generators",
+  "lem-weil-pbc-regular-local-generators-regular-sequence",
+  "lem-pc-zero-scheme-properties",
+  "lem-weil-pbc-localization-at-prime-of-quotient",
+  "lem-sfb-regular-separable-affine-smooth-neighbourhood",
+  "lem-weil-pbc-localization-quotient-commute",
+  "lem-wf-smooth-components-disjoint",
+  "lem-weil-pbc-smooth-restrict-open-subschemes",
+  "lem-sc-regular-local-domain",
+  "lem-weil-pbc-fibre-product-affine-spectra",
+  "def-weil-closed-immersion",
+  "def-sc-scheme-tangent-space",
+  "lem-weil-pbc-scheme-stalk-map-composition",
+  "lem-per-geometric-integrality-finite-field-test"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/milne-abelian-varieties_AV.pdf",
+  "place": "Chapter I Lemma 3.6, printed p.18: local tangent-hyperplane cut, expanded by the cited Stacks local algebra and tangent-space results."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Given a smooth variety and a rational point, every codimension one tangent subspace is the tangent space of a smooth integral hypersurface on a neighbourhood of the point",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"SmoothBumpCovering.embeddingPiTangent_ker_mfderiv\", \"module\": \"Mathlib/Geometry/Manifold/WhitneyEmbedding\", \"type\": \"∀ {ι : Type uι} {E : Type uE} [inst : NormedAddCommGroup E] [inst_1 : NormedSpace ℝ E] [inst_2 : FiniteDimensional ℝ E]\\n  {H : Type uH} [inst_3 : TopologicalSpace H] {I : ModelWithCorners ℝ E H} {M : Type uM} [inst_4 : TopologicalSpace M]\\n  [inst_5 : ChartedSpace H M] [inst_6 : IsManifold I (↑⊤) M] \", \"doc\": \"For any point $x$ in the manifold $M$ and $x \\\\in s$, the kernel of the Fréchet derivative of the smooth embedding $f.\\\\text{embeddingPiTangent}: M \\\\to \\\\prod_{\\\\iota} (E \\\\times \\\\mathbb{R})$ at $x$ is the\"}\n  {\"name\": \"TangentSpace\", \"module\": \"Mathlib/Geometry/Manifold/IsManifold/Basic\", \"type\": \"{𝕜 : Type u_1} →\\n  [inst : NontriviallyNormedField 𝕜] →\\n    {E : Type u} →\\n      [inst_1 : NormedAddCommGroup E] →\\n        [inst_2 : NormedSpace 𝕜 E] →\\n          {H : Type u_2} →\\n            [inst_3 : TopologicalSpace H] →\\n              ModelWithCorners 𝕜 E H → {M : Type u_3} → [inst : TopologicalSp\", \"doc\": \"The tangent space at a point $ x $ on a charted space $ M $ modeled on a normed vector space $ E $ via a model with corners $ I $ is identified with the normed vector space $ E $ itself. This definiti\"}\n  {\"name\": \"instInhabitedTangentSpace\", \"module\": \"Mathlib/Geometry/Manifold/IsManifold/Basic\", \"type\": \"{𝕜 : Type u_1} →\\n  [inst : NontriviallyNormedField 𝕜] →\\n    {E : Type u_2} →\\n      [inst_1 : NormedAddCommGroup E] →\\n        [inst_2 : NormedSpace 𝕜 E] →\\n          {H : Type u_3} →\\n            [inst_3 : TopologicalSpace H] →\\n              (I : ModelWithCorners 𝕜 E H) →\\n                {M : Type u_4}\", \"doc\": \"The tangent space at a point $ x $ on a manifold modeled on a normed vector space $ E $ is inhabited by the zero vector.\"}\n  {\"name\": \"EuclideanGeometry.Sphere.mem_tangentSet_of_mem_tangentsFrom\", \"module\": \"Mathlib/Geometry/Euclidean/Sphere/Tangent\", \"type\": \"∀ {V : Type u_1} {P : Type u_2} [inst : NormedAddCommGroup V] [inst_1 : InnerProductSpace ℝ V] [inst_2 : MetricSpace P]\\n  [inst_3 : NormedAddTorsor V P] {as : AffineSubspace ℝ P} {s : EuclideanGeometry.Sphere P} {p : P},\\n  as ∈ s.tangentsFrom p → as ∈ s.tangentSet\", \"doc\": \"If an affine subspace is a tangent subspace of the sphere $ s $ containing the point $ p $, then it is also an element of the set of all tangent subspaces to the sphere $ s $.\"}\n  {\"name\": \"EuclideanGeometry.Sphere.IsTangentAt.isTangent\", \"module\": \"Mathlib/Geometry/Euclidean/Sphere/Tangent\", \"type\": \"∀ {V : Type u_1} {P : Type u_2} [inst : NormedAddCommGroup V] [inst_1 : InnerProductSpace ℝ V] [inst_2 : MetricSpace P]\\n  [inst_3 : NormedAddTorsor V P] {s : EuclideanGeometry.Sphere P} {p : P} {as : AffineSubspace ℝ P},\\n  s.IsTangentAt p as → s.IsTangent as\", \"doc\": \"If an affine subspace over $\\\\mathbb{R}$ in a metric space $P$ is tangent to a sphere at a point $p$, then it is tangent to the sphere.\"}\n  {\"name\": \"EuclideanGeometry.Sphere.mem_tangentsFrom_iff\", \"module\": \"Mathlib/Geometry/Euclidean/Sphere/Tangent\", \"type\": \"∀ {V : Type u_1} {P : Type u_2} [inst : NormedAddCommGroup V] [inst_1 : InnerProductSpace ℝ V] [inst_2 : MetricSpace P]\\n  [inst_3 : NormedAddTorsor V P] {as : AffineSubspace ℝ P} {s : EuclideanGeometry.Sphere P} {p : P},\\n  as ∈ s.tangentsFrom p ↔ as ∈ s.tangentSet ∧ p ∈ as\", \"doc\": \"An affine subspace $ \\\\text{as} $ over $ \\\\mathbb{R} $ in a metric space $ P $ is in the set of tangent subspaces of the sphere $ s $ that contain the point $ p $ if and only if $ \\\\text{as} $ is in the \"}\n  {\"name\": \"EuclideanGeometry.Sphere.tangentsFrom\", \"module\": \"Mathlib/Geometry/Euclidean/Sphere/Tangent\", \"type\": \"{V : Type u_1} →\\n  {P : Type u_2} →\\n    [inst : NormedAddCommGroup V] →\\n      [inst_1 : InnerProductSpace ℝ V] →\\n        [inst_2 : MetricSpace P] →\\n          [inst_3 : NormedAddTorsor V P] → EuclideanGeometry.Sphere P → P → Set (AffineSubspace ℝ P)\", \"doc\": \"The set of all tangent subspaces to the sphere $ s $ in the metric space $ P $ that contain the point $ p $. Each tangent subspace is an affine subspace consisting of points $ q $ such that the vector\"}\n  {\"name\": \"EuclideanGeometry.Sphere.isTangent_of_mem_tangentSet\", \"module\": \"Mathlib/Geometry/Euclidean/Sphere/Tangent\", \"type\": \"∀ {V : Type u_1} {P : Type u_2} [inst : NormedAddCommGroup V] [inst_1 : InnerProductSpace ℝ V] [inst_2 : MetricSpace P]\\n  [inst_3 : NormedAddTorsor V P] {as : AffineSubspace ℝ P} {s : EuclideanGeometry.Sphere P},\\n  as ∈ s.tangentSet → s.IsTangent as\", \"doc\": \"For any affine subspace $\\\\text{as}$ over $\\\\mathbb{R}$ in a metric space $P$ and any sphere $s$ in $P$, if $\\\\text{as}$ belongs to the tangent set of $s$, then $s$ is tangent to $\\\\text{as}$.\"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: the semantic hits concern smooth manifolds, spheres, or cotangent modules; the source hits concern cotangent computations and regular elements, not realization of an arbitrary algebraic tangent hyperplane by a smooth geometrically integral hypersurface germ."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A nonzero cotangent vector at a smooth point can be represented by a regular function whose zero locus is smooth of dimension one less near that point",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"Ideal.isTorsionBySet_cotangent\", \"module\": \"Mathlib.RingTheory.Ideal.Cotangent\", \"type\": \": Module.IsTorsionBySet R I.Cotangent I\", \"doc\": \"For every element $ x $ in the cotangent module $ I/I^2 $ and every element $ a $ in the ideal $ I $, the scalar multiplication $ a \\\\cdot x $ equals zero.\"}\n  {\"name\": \"Algebra.Extension.Cotangent.val_zero\", \"module\": \"Mathlib.RingTheory.Extension.Basic\", \"type\": \": (0 : P.Cotangent).val = 0\", \"doc\": \"The canonical projection from the kernel ideal $\\\\ker(\\\\phi)$ to its cotangent module $\\\\ker(\\\\phi)/\\\\ker(\\\\phi)^2$ sends the zero element of the kernel ideal to the zero element of the cotangent module.\"}\n  {\"name\": \"Ideal.Cotangent.smul_eq_zero_of_mem\", \"module\": \"Mathlib.RingTheory.Ideal.Cotangent\", \"type\": \"{I : Ideal R} {x} (hx : x ∈ I) (m : I.Cotangent) : x • m = 0\", \"doc\": \"For any element $x$ in an ideal $I$ of a commutative ring $R$ and any element $m$ in the cotangent module $I/I^2$, the scalar multiplication $x \\\\cdot m$ equals zero in the quotient module.\"}\n  {\"name\": \"IsLocalRing.finrank_cotangentSpace_eq_zero\", \"module\": \"Mathlib.RingTheory.Ideal.Cotangent\", \"type\": \"(R) [Field R] : finrank (ResidueField R) (CotangentSpace R) = 0\", \"doc\": \"For any field $ R $, the finite rank of its cotangent space $ \\\\mathfrak{m}/\\\\mathfrak{m}^2 $ (where $ \\\\mathfrak{m} $ is the maximal ideal) as a module over the residue field $ R/\\\\mathfrak{m} $ is zero.\"}\n  {\"name\": \"IsLocalRing.finrank_cotangentSpace_eq_zero_iff\", \"module\": \"Mathlib.RingTheory.Ideal.Cotangent\", \"type\": \"[IsNoetherianRing R] : finrank (ResidueField R) (CotangentSpace R) = 0 ↔ IsField R\", \"doc\": \"For a Noetherian local ring $ R $, the finite rank of its cotangent space $ \\\\mathfrak{m}/\\\\mathfrak{m}^2 $ as a module over the residue field $ R/\\\\mathfrak{m} $ is zero if and only if $ R $ is a field.\"}\n  {\"name\": \"Ideal.instInhabitedCotangent\", \"module\": \"Mathlib.RingTheory.Ideal.Cotangent\", \"type\": \"{R : Type u_1} → [inst : CommRing R] → (I : Ideal R) → Inhabited I.Cotangent\", \"doc\": \"The cotangent module of an ideal $ I $ in a commutative ring $ R $ is the quotient of $ I $ by the submodule $ I^2 $ generated by products of elements of $ I $. This construction generalizes the cotan\"}\n  {\"name\": \"Algebra.SubmersivePresentation.cotangentEquiv_apply\", \"module\": \"Mathlib.RingTheory.Smooth.StandardSmoothCotangent\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} {ι : Type u_3} {σ : Type u_4} [inst : CommRing R] [inst_1 : CommRing S]\\n  [inst_2 : Algebra R S] [inst_3 : Finite σ] (P : Algebra.SubmersivePresentation R S ι σ) (a : P.toExtension.Cotangent)\\n  (a_1 : σ), P.cotangentEquiv a a_1 = P.cotangentComplexAux a a_1\", \"doc\": \"For a submersive presentation of an $ R $-algebra $ S $ with finite generating set $ \\\\sigma $, there exists a linear isomorphism between the cotangent module $ \\\\ker(\\\\phi)/\\\\ker(\\\\phi)^2 $ (where $ \\\\phi:\"}\n  {\"name\": \"IsLocalRing.CotangentSpace\", \"module\": \"Mathlib.RingTheory.Ideal.Cotangent\", \"type\": \": Type _\", \"doc\": \"The cotangent space of a local ring $ R $ is the quotient of its maximal ideal $ \\\\mathfrak{m} $ by the square $ \\\\mathfrak{m}^2 $, where $ \\\\mathfrak{m} $ consists of all non-units of $ R $. This constr\"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: the semantic hits concern smooth manifolds, spheres, or cotangent modules; the source hits concern cotangent computations and regular elements, not realization of an arbitrary algebraic tangent hyperplane by a smooth geometrically integral hypersurface germ."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Smooth\", \"IsClosedImmersion\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-24",
+   "verdict": "no match: the semantic hits concern smooth manifolds, spheres, or cotangent modules; the source hits concern cotangent computations and regular elements, not realization of an arbitrary algebraic tangent hyperplane by a smooth geometrically integral hypersurface germ."
+  },
+  {
+   "tool": "grep",
+   "query": "hypersurface|hyperplane|cotangent",
+   "results": "[grep] OK 4 hit(s)\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale.lean\", \"line\": \"11\", \"text\": \"public import Mathlib.RingTheory.Smooth.StandardSmoothCotangent\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/FormallyUnramified.lean\", \"line\": \"41\", \"text\": \"  apply (Ideal.cotangent_subsingleton_iff _).mp\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/FormallyUnramified.lean\", \"line\": \"105\", \"text\": \"  obtain ⟨⟨x, hx⟩, rfl⟩ := Ideal.toCotangent_surjective _ x\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/FormallyUnramified.lean\", \"line\": \"107\", \"text\": \"  refine (Ideal.toCotangent_eq_zero _ _).mpr ?_\"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: the semantic hits concern smooth manifolds, spheres, or cotangent modules; the source hits concern cotangent computations and regular elements, not realization of an arbitrary algebraic tangent hyperplane by a smooth geometrically integral hypersurface germ."
+  },
+  {
+   "tool": "grep",
+   "query": "quotient.*regular|regular.*quotient",
+   "results": "[grep] OK 12 hit(s)\n  {\"file\": \"Mathlib/RingTheory/Regular/IsSMulRegular.lean\", \"line\": \"83\", \"text\": \"lemma isSMulRegular_quotient_iff_mem_of_smul_mem :\"}\n  {\"file\": \"Mathlib/RingTheory/Regular/IsSMulRegular.lean\", \"line\": \"91\", \"text\": \"lemma mem_of_isSMulRegular_quotient_of_smul_mem (h1 : IsSMulRegular (M ⧸ N) r)\"}\n  {\"file\": \"Mathlib/RingTheory/Regular/IsSMulRegular.lean\", \"line\": \"93\", \"text\": \"  (isSMulRegular_quotient_iff_mem_of_smul_mem N r).mp h1 x h2\"}\n  {\"file\": \"Mathlib/RingTheory/Regular/IsSMulRegular.lean\", \"line\": \"108\", \"text\": \"lemma isSMulRegular_of_isSMulRegular_on_submodule_on_quotient\"}\n  {\"file\": \"Mathlib/RingTheory/Regular/IsSMulRegular.lean\", \"line\": \"143\", \"text\": \"  isSMulRegular_quotient_iff_mem_of_smul_mem N r\"}\n  {\"file\": \"Mathlib/RingTheory/Regular/RegularSequence.lean\", \"line\": \"201\", \"text\": \"  conv => congr <;> rw [isRegular_iff, ne_comm, ← Quotient.nontrivial_iff]\"}\n  {\"file\": \"Mathlib/RingTheory/Regular/RegularSequence.lean\", \"line\": \"405\", \"text\": \"    (h2 : IsRegular (QuotSMulTop r M) (rs.map (Ideal.Quotient.mk (Ideal.span {r})))) :\"}\n  {\"file\": \"Mathlib/RingTheory/Regular/ProjectiveDimension.lean\", \"line\": \"18\", \"text\": \"# ProjectiveDimension of quotient by regular element\"}\n  {\"file\": \"Mathlib/RingTheory/Regular/ProjectiveDimension.lean\", \"line\": \"22\", \"text\": \"The analogous version for quotient regular sequence is also provided.\"}\n  {\"file\": \"Mathlib/RingTheory/Regular/ProjectiveDimension.lean\", \"line\": \"144\", \"text\": \"lemma projectiveDimension_quotient_eq_add_length_of_isWeaklyRegular (M : ModuleCat.{v} R)\"}\n  {\"file\": \"Mathlib/RingTheory/Regular/ProjectiveDimension.lean\", \"line\": \"167\", \"text\": \"lemma projectiveDimension_quotient_eq_length (rs : List R) (reg : IsRegular R rs) :\"}\n  {\"file\": \"Mathlib/RingTheory/Regular/ProjectiveDimension.lean\", \"line\": \"179\", \"text\": \"    projectiveDimension_quotient_eq_add_length_of_isWeaklyRegular (ModuleCat.of R (Shrink.{v} R)) rs\"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: the semantic hits concern smooth manifolds, spheres, or cotangent modules; the source hits concern cotangent computations and regular elements, not realization of an arbitrary algebraic tangent hyperplane by a smooth geometrically integral hypersurface germ."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A smooth algebraic variety admits a smooth hypersurface through a rational point with any specified tangent hyperplane",
+   "results": "8 hits; declarations/files: Algebra.IsSmoothAt.exists_notMem_smooth, AlgebraicGeometry.IsSmooth.exists_isStandardSmooth, Algebra.IsSmoothAt.exists_notMem_isStandardSmooth, Algebra.Smooth.exists_span_eq_top_isStandardSmooth, AlgebraicGeometry.IsSmoothOfRelativeDimension.exists_isStandardSmoothOfRelativeDimension, Algebra.IsStandardSmoothOfRelativeDimension.out, Algebra.IsStandardSmoothOfRelativeDimension.exists_etale_mvPolynomial, Algebra.IsStandardSmoothOfRelativeDimension",
+   "date": "2026-10-24",
+   "verdict": "no match: smooth-locus localization and algebraic cotangent computations supply individual tools, while manifold tangent-space hits concern a different notion; none realizes an arbitrary prescribed tangent hyperplane by the asserted algebraic hypersurface germ."
+  },
+  {
+   "tool": "grep",
+   "query": "hypersurface|tangentSpace|cotangent",
+   "results": "4 hits; declarations/files: Mathlib/AlgebraicGeometry/Morphisms/Etale.lean, Mathlib/AlgebraicGeometry/Morphisms/FormallyUnramified.lean, Mathlib/AlgebraicGeometry/Morphisms/FormallyUnramified.lean, Mathlib/AlgebraicGeometry/Morphisms/FormallyUnramified.lean; source directory Mathlib/AlgebraicGeometry",
+   "date": "2026-10-24",
+   "verdict": "no match: smooth-locus localization and algebraic cotangent computations supply individual tools, while manifold tangent-space hits concern a different notion; none realizes an arbitrary prescribed tangent hyperplane by the asserted algebraic hypersurface germ."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A nonzero cotangent vector at a rational smooth point is realized by a smooth hypersurface germ",
+   "results": "8 hits; declarations/files: instInhabitedTangentSpace, IsLocalRing.finrank_cotangentSpace_eq_zero, IsLocalRing.finrank_cotangentSpace_eq_zero_iff, Ideal.instInhabitedCotangent, IsLocalRing.CotangentSpace, IsLocalRing.finrank_cotangentSpace_le_one_iff, Algebra.FormallySmooth.subsingleton_h1Cotangent, IsLocalRing.CotangentSpace.span_image_eq_top_iff",
+   "date": "2026-10-24",
+   "verdict": "no match: smooth-locus localization and algebraic cotangent computations supply individual tools, while manifold tangent-space hits concern a different notion; none realizes an arbitrary prescribed tangent hyperplane by the asserted algebraic hypersurface germ."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Smooth\", \"IsClosedImmersion\"",
+   "results": "0 hits; declarations/files: ",
+   "date": "2026-10-24",
+   "verdict": "no match: smooth-locus localization and algebraic cotangent computations supply individual tools, while manifold tangent-space hits concern a different notion; none realizes an arbitrary prescribed tangent hyperplane by the asserted algebraic hypersurface germ."
+  },
+  {
+   "tool": "grep",
+   "query": "hypersurface|hyperplane|tangent",
+   "results": "25 hits; declarations/files: Mathlib/RingTheory/Smooth/StandardSmoothCotangent.lean, Mathlib/RingTheory/Smooth/StandardSmoothCotangent.lean, Mathlib/RingTheory/Smooth/StandardSmoothCotangent.lean, Mathlib/RingTheory/Smooth/StandardSmoothCotangent.lean, Mathlib/RingTheory/Smooth/StandardSmoothCotangent.lean, Mathlib/RingTheory/Smooth/Local.lean, Mathlib/RingTheory/Smooth/Local.lean, Mathlib/RingTheory/Smooth/Local.lean; source directory Mathlib/RingTheory/Smooth",
+   "date": "2026-10-24",
+   "verdict": "no match: smooth-locus localization and algebraic cotangent computations supply individual tools, while manifold tangent-space hits concern a different notion; none realizes an arbitrary prescribed tangent hyperplane by the asserted algebraic hypersurface germ."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-smooth-pointed-curves-dense",
+  "date": "2026-10-24",
+  "group": "Q68"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "Milne I.3.6, printed p.18: hyperplanes through P transverse to the tangent space, followed by the tangent-cone dimension argument. Historical alteration/Picard branch serving det-thm-sf-ctf-stability-direct-images proof (3), through lem-sfb-abelian-product-axis-rigidity; the latest direct-images proof no longer contains the historical auxiliary Picard argument.",
+   "via": [
+    "lem-sfb-smooth-pointed-curves-dense",
+    "lem-sfb-abelian-product-axis-rigidity",
+    "lem-sfb-affine-product-algebraic-equivalence",
+    "lem-sfb-birigidified-affine-triviality-locus",
+    "lem-sfb-field-square-after-finite-extension",
+    "lem-sfb-field-product-square-power",
+    "lem-sfb-normal-group-square-power",
+    "lem-sfb-group-affine-section-ampleness",
+    "lem-sfb-normal-smooth-group-local-ample-line",
+    "lem-sfb-symmetric-line-power-prolongation",
+    "lem-sfb-normal-symmetric-cubical-extension",
+    "lem-sfb-symmetric-ample-power-extension",
+    "lem-sfb-regular-group-generic-ampleness",
+    "lem-sfb-stable-picard-theta-ampleness",
+    "lem-sfb-stable-relative-picard-kummer",
+    "lem-sfb-stable-level-versal-branch-freeness",
+    "lem-sfb-stable-abelian-level-normalization",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-smooth-prescribed-tangent-hypersurface",
+  "worker": "stage1",
+  "summary": "Expanded the prescribed tangent cut using existing tangent-cotangent duality, regular parameter quotient, smooth principal-neighbourhood and component-disjointness nodes. Shrinking is done in the ambient affine scheme so the resulting integral smooth germ remains a closed hypersurface of an open in Y. Proved dimension, separatedness, tangent image and geometric integrality. No new nodes and no statement change.",
+  "blueprint": "Milne I.3.6, printed p.18: hyperplanes through P transverse to the tangent space, followed by the tangent-cone dimension argument. Historical alteration/Picard branch serving det-thm-sf-ctf-stability-direct-images proof (3), through lem-sfb-abelian-product-axis-rigidity; the latest direct-images proof no longer contains the historical auxiliary Picard argument.",
+  "tool_uses": [
+   {
+    "node": "lem-pc-affine-finite-type-algebra",
+    "why": "Generic local algebra, affine geometry or tangent-space tool used in the displayed proof steps; it does not replace the historical Picard/alteration route, and this unit has no statement supplying this tool."
+   },
+   {
+    "node": "lem-weil-pbc-affine-open-stalk-localization",
+    "why": "Generic local algebra, affine geometry or tangent-space tool used in the displayed proof steps; it does not replace the historical Picard/alteration route, and this unit has no statement supplying this tool."
+   },
+   {
+    "node": "lem-weil-pbc-smooth-scheme-over-field-regular",
+    "why": "Generic local algebra, affine geometry or tangent-space tool used in the displayed proof steps; it does not replace the historical Picard/alteration route, and this unit has no statement supplying this tool."
+   },
+   {
+    "node": "lem-weil-pbc-finite-type-domain-dimension-local-ring-localization",
+    "why": "Generic local algebra, affine geometry or tangent-space tool used in the displayed proof steps; it does not replace the historical Picard/alteration route, and this unit has no statement supplying this tool."
+   },
+   {
+    "node": "lem-weil-pbc-spec-topological-krull-dimension-ring",
+    "why": "Generic local algebra, affine geometry or tangent-space tool used in the displayed proof steps; it does not replace the historical Picard/alteration route, and this unit has no statement supplying this tool."
+   },
+   {
+    "node": "lem-sc-integral-locally-algebraic-opens-dimension",
+    "why": "Generic local algebra, affine geometry or tangent-space tool used in the displayed proof steps; it does not replace the historical Picard/alteration route, and this unit has no statement supplying this tool."
+   },
+   {
+    "node": "lem-weil-pbc-regular-local-cotangent-dimension",
+    "why": "Generic local algebra, affine geometry or tangent-space tool used in the displayed proof steps; it does not replace the historical Picard/alteration route, and this unit has no statement supplying this tool."
+   },
+   {
+    "node": "lem-sc-rational-point-tangent-derivation-identification",
+    "why": "Generic local algebra, affine geometry or tangent-space tool used in the displayed proof steps; it does not replace the historical Picard/alteration route, and this unit has no statement supplying this tool."
+   },
+   {
+    "node": "lem-weil-pbc-principal-localization-open-immersion",
+    "why": "Generic local algebra, affine geometry or tangent-space tool used in the displayed proof steps; it does not replace the historical Picard/alteration route, and this unit has no statement supplying this tool."
+   },
+   {
+    "node": "lem-weil-pbc-nakayama-local-generators",
+    "why": "Generic local algebra, affine geometry or tangent-space tool used in the displayed proof steps; it does not replace the historical Picard/alteration route, and this unit has no statement supplying this tool."
+   },
+   {
+    "node": "lem-weil-pbc-regular-local-generators-regular-sequence",
+    "why": "Generic local algebra, affine geometry or tangent-space tool used in the displayed proof steps; it does not replace the historical Picard/alteration route, and this unit has no statement supplying this tool."
+   },
+   {
+    "node": "lem-pc-zero-scheme-properties",
+    "why": "Generic local algebra, affine geometry or tangent-space tool used in the displayed proof steps; it does not replace the historical Picard/alteration route, and this unit has no statement supplying this tool."
+   },
+   {
+    "node": "lem-weil-pbc-localization-at-prime-of-quotient",
+    "why": "Generic local algebra, affine geometry or tangent-space tool used in the displayed proof steps; it does not replace the historical Picard/alteration route, and this unit has no statement supplying this tool."
+   },
+   {
+    "node": "lem-weil-pbc-localization-quotient-commute",
+    "why": "Generic local algebra, affine geometry or tangent-space tool used in the displayed proof steps; it does not replace the historical Picard/alteration route, and this unit has no statement supplying this tool."
+   },
+   {
+    "node": "lem-wf-smooth-components-disjoint",
+    "why": "Generic local algebra, affine geometry or tangent-space tool used in the displayed proof steps; it does not replace the historical Picard/alteration route, and this unit has no statement supplying this tool."
+   },
+   {
+    "node": "lem-weil-pbc-smooth-restrict-open-subschemes",
+    "why": "Generic local algebra, affine geometry or tangent-space tool used in the displayed proof steps; it does not replace the historical Picard/alteration route, and this unit has no statement supplying this tool."
+   },
+   {
+    "node": "lem-sc-regular-local-domain",
+    "why": "Generic local algebra, affine geometry or tangent-space tool used in the displayed proof steps; it does not replace the historical Picard/alteration route, and this unit has no statement supplying this tool."
+   },
+   {
+    "node": "lem-weil-pbc-fibre-product-affine-spectra",
+    "why": "Generic local algebra, affine geometry or tangent-space tool used in the displayed proof steps; it does not replace the historical Picard/alteration route, and this unit has no statement supplying this tool."
+   },
+   {
+    "node": "lem-per-geometric-integrality-finite-field-test",
+    "why": "Generic local algebra, affine geometry or tangent-space tool used in the displayed proof steps; it does not replace the historical Picard/alteration route, and this unit has no statement supplying this tool."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pc-affine-finite-type-algebra",
+  "lem-weil-pbc-affine-open-stalk-localization",
+  "lem-weil-pbc-smooth-scheme-over-field-regular",
+  "lem-weil-pbc-finite-type-domain-dimension-local-ring-localization",
+  "lem-weil-pbc-spec-topological-krull-dimension-ring",
+  "lem-sc-integral-locally-algebraic-opens-dimension",
+  "lem-weil-pbc-regular-local-cotangent-dimension",
+  "lem-sc-rational-point-tangent-derivation-identification",
+  "lem-weil-pbc-principal-localization-open-immersion",
+  "lem-weil-pbc-nakayama-local-generators",
+  "lem-weil-pbc-regular-local-generators-regular-sequence",
+  "lem-pc-zero-scheme-properties",
+  "lem-weil-pbc-localization-at-prime-of-quotient",
+  "lem-weil-pbc-localization-quotient-commute",
+  "lem-wf-smooth-components-disjoint",
+  "lem-weil-pbc-smooth-restrict-open-subschemes",
+  "lem-sc-regular-local-domain",
+  "lem-weil-pbc-fibre-product-affine-spectra",
+  "lem-per-geometric-integrality-finite-field-test"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q143-50a57a8eb",
+  "group": "Q143",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q143-50a57a8eb (reviewer sub-agent of L); spot-checked: I read the whole item (9 steps, no new nodes, statement and stmt_deps unchanged), every cited statement, Milne AV I.3.6 (printed p.18) and Stacks 0FWF. There is no repair note, so the re-split rule does not apply. Steps 1-7 and 9 are correct. In each, the cited statements supply what the step takes (regular-parameter c=1 gives regularity and dimension d-1, the hypotheses of the smooth-neighbourhood lemma hold with residue field k/k, the components are open and closed and are cut down by an explicit principal open, and dimension uses a maximal ideal of a finite-type domain). Small cases checked: A^d at 0, x_1(x_1-1), x_1^p in char p. FIX in step 8 (C3): the step used the 'canonical' isomorphisms of lem-sc-rational-tangent-cotangent-duality, whose statement does not say they are the maps θ↦ℓ_θ of lem-sc-rational-point-tangent-derivation-identification used in step 2 to define H. That agreement is only in the duality node's proof. Step 8 is rewritten at statement level: derivation-identification for D and Y, the tangent map from def-sc-scheme-tangent-space, (ι∘θ)^♯=θ^♯∘ι^♯ from lem-weil-pbc-scheme-stalk-map-composition(b), so ℓ_{ιθ}=ℓ_θ∘u and the image is ann(v)=H. proof_deps and tool_uses are updated to match. Mechanical finding: the citation of lem-per-geometric-integrality-finite-field-test is justified at step 9. It is the generic commutative-algebra lemma Stacks 0FWF (2)⇒(1). It is split and passed review, and it uses none of the methods the 2026-10-19 artin-gabber check bans. It is needed because over algebraically closed k every finite extension is trivial, and no other DAG node gives this fact. Its Lean module was removed as dead, so stage 2 must restate it. The off-unit generic tools declared in tool_uses are accepted. No SGA source is used.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SmoothPrescribedTangentHypersurface",
+  "declaration": "AlgebraicGeometry.exists_smooth_hypersurface_prescribed_tangent",
+  "file": "lean/Sheaf/AlgebraicGeometry/SmoothPrescribedTangentHypersurface.lean",
+  "statement": "theorem exists_smooth_hypersurface_prescribed_tangent (k : Type u) [Field k] [IsAlgClosed k] (Y : Scheme.{u}) (pY : Y ⟶ Spec (.of k)) [Smooth pY] [IsSeparated pY] [GeometricallyIntegral pY] [LocallyOfFiniteType pY] [QuasiCompact pY] (p : pY.fieldPoints k) (d : ℕ) (hd : 2 ≤ d) (hdim : topologicalKrullDim Y = (d : WithBot ℕ∞)) (H : Submodule (Y.residueField (p.1 default)) (schemeTangentSpace k Y pY (p.1 default))) (hH : Module.finrank (Y.residueField (p.1 default)) (schemeTangentSpace k Y pY (p.1 default) ⧸ H) = 1) : ∃ (V : Y.Opens) (_ : p.1 default ∈ V) (D : Scheme.{u}) (j : D ⟶ V.toScheme), IsClosedImmersion j ∧ Smooth ((j ≫ V.ι) ≫ pY) ∧ IsSeparated ((j ≫ V.ι) ≫ pY) ∧ GeometricallyIntegral ((j ≫ V.ι) ≫ pY) ∧ LocallyOfFiniteType ((j ≫ V.ι) ≫ pY) ∧ QuasiCompact ((j ≫ V.ι) ≫ pY) ∧ topologicalKrullDim D = ((d - 1 : ℕ) : WithBot ℕ∞) ∧ ∃ (q : ((j ≫ V.ι) ≫ pY).fieldPoints k) (hq : q.1 ≫ (j ≫ V.ι) = p.1) (he : Function.Bijective ((j ≫ V.ι).residueFieldMap (q.1 default)).hom), Function.Injective (schemeTangentMap k D Y ((j ≫ V.ι) ≫ pY) pY (j ≫ V.ι) rfl (q.1 default) he) ∧ ∀ v : schemeTangentSpace k Y pY (p.1 default), v ∈ H ↔ ∃ w : schemeTangentSpace k D ((j ≫ V.ι) ≫ pY) (q.1 default), HEq (schemeTangentMap k D Y ((j ≫ V.ι) ≫ pY) pY (j ≫ V.ι) rfl (q.1 default) he w) v",
+  "branch": "sheaf-dag",
+  "by": "Q26",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-53047ae5b",
+  "group": "Q26",
+  "result": "pass",
+  "note": "Clause-by-clause match against the node and the dependency records. Hypotheses: IsAlgClosed k; Smooth/IsSeparated/GeometricallyIntegral/LocallyOfFiniteType/QuasiCompact on pY; p : pY.fieldPoints k; 2 ≤ d with topologicalKrullDim Y = d; H a κ(p)-submodule with finrank of the quotient = 1 (canonical scalars, κ(p) ≅ k at a rational point, nothing chosen). Conclusion: V ∋ p, IsClosedImmersion j : D → V, the same five classes on (j≫V.ι)≫pY, dim D = d-1, q a fieldPoint with hq an equality of morphisms, canonical schemeTangentMap injective with image = H via HEq (indices equal through hq). No stronger assumptions; single universe u; autoImplicit false; lean.statement verbatim; sorry only; no defs; docstrings carry Milne I.3.6 p.18, Stacks tags, blueprint tag and the 9 proof steps; all 30 imports exist; diff against side-live is only the item lean record plus the new module; report sections present; no existing declaration found. Not compiled: no file changed. Note: Q46 delivered the same item in parallel (54ac46a0a, S2 PASS, not yet landed, same module path); whichever lands second must be rebound or dropped."
+ }
+}

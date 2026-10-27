@@ -1,0 +1,102 @@
+{
+ "id": "def-sf-integral-ordinary-compactification-composition",
+ "kind": "definition",
+ "title": "Ordinary completed-ring compactification composition",
+ "chapter": "sec-six-functors",
+ "unit": "sk-thm-sf-identification",
+ "statement": "Fix a prime ell and a finite extension E/Q_ell. Supply operations o and normalized Realizations r, and use the independently constructed completedShriekIntegralA of [lem-sf-completed-shriek-composition-laws]. For a compatible compactification triangle t with the three required quasi-compact opens, define ordinaryComparison on the published integral constructible compact-support functors [def-weil-integral-rational-qbar-compact-support] by the inverse realization for g, the ordinary word for g applied to the inverse realization for f, completedShriekIntegralA, and the realization for gf. This is a natural transformation by construction. No constant-word comparison or choice of an unspecified realization enters it. The old ordinary compositor is reused verbatim, not redefined.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-sf-cbc/fix-lem-exchanges.proof.md",
+  "place": "Step 5; agent-formulated comparison obligation implementing the indicated portion of the integral compactification bridge proof, with Stacks sites-cohomology.tex Tag 0941 and more-etale.tex Tags 0F7B--0F7D."
+ },
+ "stmt_deps": [
+  "def-weil-l-adic-coefficient-extension",
+  "def-weil-compactifications-refinements",
+  "def-weil-integral-rational-qbar-compact-support",
+  "def-sf-integral-system-canonical-bridge",
+  "lem-sf-completed-shriek-composition-laws"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-sf-cbc/fix-lem-exchanges.proof.md",
+  "place": "Step 5; comparison of the independently specified normalizations, not a theorem asserted verbatim in Stacks."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Compose compact support functors using the ordinary ringed sheaf proper open adjunction mate and extension by zero",
+   "results": "8 hits, including SheafOfModules.pushforwardPushforwardAdj, SheafOfModules.PullbackConstruction.adjunction and AlgebraicGeometry.Scheme.Modules.restrictAdjunction; the other hits concern support of functions.",
+   "date": "2026-10-26",
+   "verdict": "no match: these ordinary module adjunctions do not construct or compare the normalized derived integral compactification compositions."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A semilinear reduction total limit counit composite agrees with the ordinary ringed site compactification composition map",
+   "results": "8 hits, including Condensed.profiniteSolidCounit and AlgebraicGeometry.Scheme.Modules.restrictAdjunction_counit_app_app, plus GammaSpec adjunction identities.",
+   "date": "2026-10-26",
+   "verdict": "no match: none compares strict semilinear reduction systems, their total limits, or integral compactification composition."
+  },
+  {
+   "tool": "grep",
+   "query": "compactification|semilinear",
+   "results": "25 hits returned: topological compactifications and ordinary continuous semilinear maps, not the integral derived compactification normalizations.",
+   "date": "2026-10-26",
+   "verdict": "no match: the returned declarations have different categories and statements."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.SixFunctors.IntegralCompactificationComparisonBridge",
+  "date": "2026-10-26",
+  "group": "S4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "sk-thm-sf-identification",
+   "place": "Normalized trace sentence; compare compact-support composition before taking its right-adjoint mate.",
+   "via": [
+    "lem-sf-identification-coefficient-transport",
+    "lem-sf-integral-compactification-comparison-bridge"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.SixFunctors.IntegralCompactificationOrdinaryComposition",
+  "file": "lean/Sheaf/SixFunctors/IntegralCompactificationOrdinaryComposition.lean",
+  "declaration": "WeilConjectures.IntegralCompactificationBridge.ordinaryComparison",
+  "statement": "def ordinaryComparison {D : FiniteFieldDatum.{u}} {o : Operations l E}\n    (r : Realizations l E D o) (t : Compactification.Triangle f g)\n    [QuasiCompact t.cf.i] [QuasiCompact t.cg.i] [QuasiCompact t.q] :\n    (sfCompactSupportFiniteIntegralFunctor l k hl t.cf E ⋙\n      sfCompactSupportFiniteIntegralFunctor l k hl t.cg E) ⋙\n        (sfIntegralConstructible l E Z).ι ⟶\n    sfCompactSupportFiniteIntegralFunctor l k hl t.cfg E ⋙\n        (sfIntegralConstructible l E Z).ι",
+  "branch": "sheaf-dag",
+  "by": "S4",
+  "date": "2026-10-26",
+  "declarations": [
+   "WeilConjectures.IntegralCompactificationBridge.ordinaryComparison"
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-fc1fa",
+  "group": "S4",
+  "result": "fix",
+  "landing": "20261026T002638-L-104791",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-fc1fa",
+  "group": "S4",
+  "result": "fix",
+  "landing": "20261026T002638-L-104791",
+  "kind": "interface",
+  "note": "independent cc review: delivered item proof + 4 new modules vs published S8 item (Expr.hash identical for all 14 moved decls), new sorry statements vs node text and RingedProperOpen/RingedOpenComparisons pins; node records vs Lean; importer CompactSupportRealizationFactorNormalization compiled against delivered modules (59.6 s, clean; baseline 61.8–68.8 s)"
+ }
+}

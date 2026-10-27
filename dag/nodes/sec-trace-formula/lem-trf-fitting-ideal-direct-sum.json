@@ -14,7 +14,7 @@
  ],
  "proof": [
   {
-   "text": "Choose finite generating families of $M$ and $N$ [def-weil-finitely-generated-module], giving surjections $\\pi:R^{\\oplus n}\\to M$ and $\\rho:R^{\\oplus m}\\to N$ by sending the standard coordinates to those generators. Put $K=\\ker\\pi$ and $L=\\ker\\rho$. The map $q:R^{\\oplus(n+m)}\\to M\\oplus N$, $q(x,y)=(\\pi(x),\\rho(y))$, is surjective, since preimages can be chosen separately, and $\\ker q=K\\oplus L$, since $q(x,y)=0$ exactly when $\\pi(x)=0$ and $\\rho(y)=0$. The combined family $(\\pi(e_i),0),(0,\\rho(e_j))$ generates $M\\oplus N$. Thus [lem-trf-fitting-ideal-independence-base-change], with $k=0$, computes $I_0(M)$, $I_0(N)$ and $I_0(M\\oplus N)$ from these three surjections. Write their kernel-row ideals as $A$, $B$, $C$, respectively.",
+   "text": "Choose finite free surjections π : R^n → M and ρ : R^m → N using Module.Finite.exists_fin'. Form q : R^(n+m) → M × N using finSumFinEquiv. Choose preimages separately to prove q surjective. Presentation independence identifies the three zeroth Fitting ideals with the ideals of these presentations. At k = 0, each column embedding is a permutation, so presentationFittingIdeal_zero_eq identifies the ideal with the span of determinants of square matrices whose rows lie in the kernel, including n = 0 via the empty determinant 1.",
    "uses": [
     "def-weil-finitely-generated-module",
     "lem-trf-fitting-ideal-independence-base-change"
@@ -26,7 +26,7 @@
    }
   },
   {
-   "text": "For a generator of $C$, take $n+m$ rows $z_i=(x_i,y_i)$ in $K\\oplus L$ and form the square matrix $Z=[X\\ Y]$ with the first $n$ and last $m$ columns separated. In the Leibniz sum [def-weil-pbc-matrix-determinant], group permutations according to the set $S$ of rows used in the first $n$ columns. If $S=\\{s_1<\\cdots<s_n\\}$ and its complement is $\\{t_1<\\cdots<t_m\\}$, every permutation in this group is uniquely $\\tau_S\\circ(\\alpha\\oplus\\beta)$, where $\\tau_S$ lists $s_1,\\ldots,s_n,t_1,\\ldots,t_m$ and $\\alpha\\in S_n$, $\\beta\\in S_m$. Its sign is $\\operatorname{sgn}(\\tau_S)\\operatorname{sgn}(\\alpha)\\operatorname{sgn}(\\beta)$. Distributing the two finite sums therefore gives\n$$\\det Z=\\sum_{|S|=n}\\operatorname{sgn}(\\tau_S)\\det(X_S)\\det(Y_{S^c}).$$\nHere $X_S$ consists of $n$ rows of $K$ and $Y_{S^c}$ of $m$ rows of $L$, in increasing order. Hence their determinants belong to $A$ and $B$. Each summand belongs to the product ideal $AB$, and so $C\\subseteq AB$. This is a regrouping of the defining finite sum, not an appeal to an unstated minor-ideal formula.",
+   "text": "For a kernel-row matrix B of q, write B = X + Y, where X has zero right block and Y has zero left block. Expand det B using Matrix.detRowAlternating.map_add_univ. A summand C has each row chosen from X or Y. If det C = 0 its membership is immediate. Otherwise the Leibniz formula has a nonzero term indexed by a permutation σ. Every entry C(σ j,j) is nonzero, hence σ sends the left column indices to rows chosen from X and the right column indices to rows chosen from Y. Thus C.submatrix σ id is block diagonal, with diagonal rows in ker π and ker ρ. Matrix.det_fromBlocks_zero₂₁ gives the product of two determinant generators. Matrix.det_permute changes det C by the unit sign σ; removing this unit proves that each summand lies in the product ideal. Summing proves the forward inclusion. This argument uses no domain hypothesis: it only uses that a product containing a zero factor is zero.",
    "uses": [
     "def-weil-pbc-matrix-determinant"
    ],
@@ -37,7 +37,7 @@
    }
   },
   {
-   "text": "Conversely, let $a=\\det(x_i)_{i=1}^n$ and $b=\\det(y_j)_{j=1}^m$ be kernel-row generators of $A$ and $B$. The rows $(x_i,0)$ followed by $(0,y_j)$ lie in $K\\oplus L$. In the Leibniz sum [def-weil-pbc-matrix-determinant] for their block diagonal matrix, a term is zero unless its permutation preserves the two blocks. The remaining permutations are uniquely pairs $(\\alpha,\\beta)\\in S_n\\times S_m$, with product signs; distributing gives determinant $ab$. Thus $ab\\in C$. Every $u\\in A$ and $v\\in B$ is a finite linear combination of their respective determinant generators, so distributing $uv$ writes it as a finite linear combination of such $ab$. By the definition of ideal multiplication as finite sums of products $uv$, this proves $AB\\subseteq C$. Together with Step 2 and the identifications of Step 1 this is the asserted equality. If $n=0$ or $m=0$, the empty determinant is $1$ by the same cited definition: the subset and permutation sums above still apply, including $n=m=0$. No finite generation of $K$ or $L$ was used.",
+   "text": "For determinant generators det A of the π-ideal and det D of the ρ-ideal, form Matrix.fromBlocks A 0 0 D. Reindex both rows and columns by finSumFinEquiv.symm. Each row lies in ker q, by the corresponding kernel condition and preservation of zero by the other map. Matrix.det_submatrix_equiv_self and Matrix.det_fromBlocks_zero₂₁ give determinant det A * det D. Ideal.span_mul_span and Ideal.span_le extend this to the reverse ideal inclusion. All constructions allow empty blocks and use the empty determinant convention, without finite generation of either kernel.",
    "uses": [
     "def-weil-pbc-matrix-determinant"
    ],
@@ -56,7 +56,7 @@
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/more-algebra.tex",
-  "place": "Tags 07ZA (lemma-fitting-ideal-basics), part (2), and 07Z8 (lemma-fitting-ideal), kernel-row description. The determinant expansion omitted in 07Z7(4) is written out directly using the Leibniz formula."
+  "place": "Tags 07ZA(2), 07Z7(4), and 07Z8. The block determinant calculation is implemented by row multilinearity, a nonzero Leibniz term to arrange the blocks, and Mathlib block diagonal determinant and permutation formulas."
  },
  "mathlib_searches": [
   {
@@ -196,5 +196,26 @@
   "result": "pass",
   "note": "Statement, dependencies, source alignment, construction, edge cases, docstrings, route-pivot constraints, searches, and compiler evidence checked; no substantive findings."
  },
- "lean_audit": {}
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "reviewed_proof": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D5",
+  "result": "pass",
+  "landing": "20261023T123435-L-1188192",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
 }

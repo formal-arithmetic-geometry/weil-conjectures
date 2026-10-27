@@ -1,0 +1,241 @@
+{
+ "id": "lem-sfb-scalar-composite-model-pasting",
+ "kind": "statement",
+ "title": "Coefficient pasting for the compositor on fixed compactification models",
+ "statement": "Fix a prime $\\ell$ and a field $k$ of characteristic $p>0$ with $p\\ne\\ell$. All schemes are separated of finite type over $k$, and all morphisms are $k$-morphisms [sk-def-sfb-dc-setting]. Let $\\Lambda\\to\\Lambda'$ be any of the coefficient maps specified in [det-prop-scalar-six-direct-image]: a homomorphism of finite commutative $\\ell$-primary rings, $\\mathcal O_E\\to\\mathcal O_F$ or $E\\to F$ for finite $F/E$ inside $\\overline{\\mathbf Q}_\\ell$, $\\mathcal O_E\\to E$, $E\\to\\overline{\\mathbf Q}_\\ell$, a continuous map $\\mathcal O_E\\to A$ to a finite admissible ring, or a finite composite. Here $E/\\mathbf Q_\\ell$ is finite and $\\mathcal O_E$ its valuation ring; use pulled-back condensed coefficients, including the finite-subextension condensed convention for $\\overline{\\mathbf Q}_\\ell$. Work in ordinary unbounded module-object derived categories on the small pro-étale sites [sk-def-sfb-module-derived-pushpull]. Write $T_V=\\Lambda'_V\\otimes^{\\mathbf L}_{\\Lambda_V}-$ [sk-def-sfb-coefficient-change], $\\gamma_{v,M}:T Rv_*M\\to Rv_*TM$ for the unit/pullback/counit comparison [det-prop-scalar-six-direct-image], and $\\delta_{a,M}:T a_!M\\xrightarrow{\\sim}a_!TM$ for the canonical open comparison [def-sfb-derived-open-immersion-shriek-iso, det-prop-scalar-six-pullback]. The notation $\\Dctf$ means bounded constructible complexes of finite Tor amplitude [sk-def-sfb-constructible].\n\nLet $f:X\\to Y$, $g:Y\\to S$ have compactifications $c_f=(j:X\\hookrightarrow\\overline X,p:\\overline X\\to Y)$ and $c_g=(i:Y\\hookrightarrow\\overline Y,q:\\overline Y\\to S)$. Choose a dense compactification $(j':\\overline X\\hookrightarrow W,r:W\\to\\overline Y)$ of $ip$. All compactifications have the meaning of [sk-def-nagata-sketch-data]. Set $H_f=Rp_*j_!$, $H_g=Rq_*i_!$, $H_{gf}=R(qr)_*(j'j)_!$. Define the model compositor\n$$\\alpha_K:H_gH_fK\\xrightarrow{Rq_*\\iota_{j_!K}}Rq_*Rr_*j'_!j_!K\\xrightarrow{\\sim}H_{gf}K,$$\nwhere $\\iota$ is the identity-on-$Y$ proper/open interchange [det-sf-comp-composition-interchange] and the last arrow is proper direct-image and open-extension composition. This is the canonical compositor on these models. For a model $c=(a,b)$ put $C_{c,M}=Rb_*\\delta_{a,M}\\circ\\gamma_{b,a_!M}$. For every $K\\in\\Dctf(X,\\Lambda)$ one has\n$$C_{(j'j,qr),K}\\circ T_S(\\alpha_K)\n=\\alpha_{T_XK}\\circ H_g(C_{c_f,K})\\circ C_{c_g,H_fK}.$$\nHere every functor and compositor on the right after a coefficient comparison is taken over $\\Lambda'$. The equality is in $\\Dctf(S,\\Lambda')$; no comparison between different models of $gf$ is asserted.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-scalar-six/det-prop-scalar-six-compact-support.proof.md",
+  "place": "Composition paragraph: paste the proper, open, and interchange comparisons; returned step 7 on the constructed composite model."
+ },
+ "stmt_deps": [
+  "def-sfb-derived-open-immersion-shriek-iso",
+  "det-prop-scalar-six-direct-image",
+  "det-prop-scalar-six-pullback",
+  "det-sf-comp-composition-interchange",
+  "sk-def-nagata-sketch-data",
+  "sk-def-sfb-coefficient-change",
+  "sk-def-sfb-constructible",
+  "sk-def-sfb-dc-setting",
+  "sk-def-sfb-module-derived-pushpull"
+ ],
+ "proof": [
+  {
+   "text": "Put $P=Rp_*$, $Q=Rq_*$, $R=Rr_*$ and $J=j_!$, $I=i_!$, $L=j'_!$; a prime on one of these letters means coefficients $\\Lambda'$. Put $A=JK$, $B=J'T_XK$ and $d=\\delta_{j,K}:T_{\\overline X}A\\to B$. By [det-thm-sf-ctf-stability-direct-images] (2), $A$ is in $\\Dctf$, so [lem-sfb-scalar-proper-open-interchange-square] applies to $A$. The same stability clauses (2),(3), and preservation of $\\Dctf$ by coefficient change [det-prop-scalar-six-ctf] (3), put all the objects below in the appropriate $\\Dctf$. We first calculate in the ambient derived categories. Transport source and target along the canonical proper and open composition identifications used in the definition of $\\alpha$. Thus $H_{gf}$ is written $QRLJ$, $\\alpha_K$ is $Q(\\iota_A)$, and $\\alpha_{T_XK}$ is $Q'(\\iota_B)$. These are the specified model identifications, with no change of compactification.",
+   "uses": [
+    "det-thm-sf-ctf-stability-direct-images",
+    "lem-sfb-scalar-proper-open-interchange-square",
+    "det-prop-scalar-six-ctf"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-scalar-six/det-prop-scalar-six-compact-support.proof.md",
+    "place": "Composition paragraph; explicit pasting on the fixed composite model."
+   }
+  },
+  {
+   "text": "Apply [det-prop-scalar-six-direct-image] (2) to $q,r$, and [det-prop-scalar-six-pullback] (2) to $j',j$. Under the preceding identifications they give\n$$\\gamma_{qr,LA}=Q'(\\gamma_{r,LA})\\circ\\gamma_{q,RLA},\\qquad \\delta_{j'j,K}=L'(d)\\circ\\delta_{j',A}.$$\nConsequently the left side of the required identity is\n$$E=Q'\\bigl(R'L'(d)\\circ R'(\\delta_{j',A})\\circ\\gamma_{r,LA}\\bigr)\\circ\\gamma_{q,RLA}\\circ T_SQ(\\iota_A).$$\nIn particular these expansions use the proper and open compositors themselves, rather than identifying coefficient comparisons only up to some unspecified isomorphism.",
+   "uses": [
+    "det-prop-scalar-six-direct-image",
+    "det-prop-scalar-six-pullback"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-scalar-six/det-prop-scalar-six-compact-support.proof.md",
+    "place": "Composition paragraph; explicit pasting on the fixed composite model."
+   }
+  },
+  {
+   "text": "Naturality of $\\gamma_q$ [det-prop-scalar-six-direct-image] (2), applied to $\\iota_A:IPA\\to RLA$, gives\n$$\\gamma_{q,RLA}\\circ T_SQ(\\iota_A)=Q'(T_{\\overline Y}\\iota_A)\\circ\\gamma_{q,IPA}.$$\nSubstitute this into $E$ and use functoriality of $Q'$ to obtain\n$$E=Q'\\bigl(R'L'(d)\\circ R'(\\delta_{j',A})\\circ\\gamma_{r,LA}\\circ T_{\\overline Y}(\\iota_A)\\bigr)\\circ\\gamma_{q,IPA}.$$",
+   "uses": [
+    "det-prop-scalar-six-direct-image"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-scalar-six/det-prop-scalar-six-compact-support.proof.md",
+    "place": "Composition paragraph; explicit pasting on the fixed composite model."
+   }
+  },
+  {
+   "text": "The exact interchange coefficient square of [lem-sfb-scalar-proper-open-interchange-square], with input $A=JK$, replaces the middle three factors by\n$$R'(\\delta_{j',A})\\circ\\gamma_{r,LA}\\circ T_{\\overline Y}(\\iota_A)=\\iota_{T_{\\overline X}A}\\circ I'(\\gamma_{p,A})\\circ\\delta_{i,PA}.$$\nIts hypotheses are exactly the proper $p$, quasi-compact open $i$, and dense compactification $(j',r)$ fixed in the statement; no flatness of the coefficient map is required. Thus\n$$E=Q'\\bigl(R'L'(d)\\circ\\iota_{T_{\\overline X}A}\\circ I'(\\gamma_{p,A})\\circ\\delta_{i,PA}\\bigr)\\circ\\gamma_{q,IPA}.$$",
+   "uses": [
+    "lem-sfb-scalar-proper-open-interchange-square"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-scalar-six/det-prop-scalar-six-compact-support.proof.md",
+    "place": "Composition paragraph; explicit pasting on the fixed composite model."
+   }
+  },
+  {
+   "text": "The natural map $\\iota$ in [lem-sfb-scalar-proper-open-interchange-square], now over $\\Lambda'$ and evaluated on $d:T_{\\overline X}A\\to B$, satisfies\n$$R'L'(d)\\circ\\iota_{T_{\\overline X}A}=\\iota_B\\circ I'P'(d).$$\nInsert this equality and regroup using functoriality:\n$$E=Q'(\\iota_B)\\circ Q'I'\\bigl(P'(d)\\circ\\gamma_{p,A}\\bigr)\\circ Q'(\\delta_{i,PA})\\circ\\gamma_{q,IPA}.$$\nBy the definitions in the statement, the four factors are respectively $\\alpha_{T_XK}$, $H'_g(C_{c_f,K})$, and the two factors of $C_{c_g,H_fK}$, since $PA=H_fK$. This is the required right side. Finally $\\Dctf(S,\\Lambda')$ is a full subcategory of its ambient derived category [sk-def-sfb-constructible], so this equality there is the claimed equality in $\\Dctf$.",
+   "uses": [
+    "lem-sfb-scalar-proper-open-interchange-square",
+    "sk-def-sfb-constructible"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-scalar-six/det-prop-scalar-six-compact-support.proof.md",
+    "place": "Composition paragraph; explicit pasting on the fixed composite model."
+   }
+  }
+ ],
+ "proof_deps": [
+  "det-thm-sf-ctf-stability-direct-images",
+  "lem-sfb-scalar-proper-open-interchange-square",
+  "det-prop-scalar-six-ctf",
+  "det-prop-scalar-six-direct-image",
+  "det-prop-scalar-six-pullback",
+  "sk-def-sfb-constructible"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-scalar-six/det-prop-scalar-six-compact-support.proof.md",
+  "place": "Composition paragraph; explicit pasting on the fixed composite model."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "compactSupport.*[Cc]omp|lowerShriek.*[Cc]omp|coefficient.*[Pp]asting",
+   "results": "; Mathlib/MeasureTheory/Function/ContinuousMapDense.lean; Mathlib/MeasureTheory/Function/ContinuousMapDense.lean; Mathlib/MeasureTheory/Function/LocallyIntegrable.lean; Mathlib/Topology/Algebra/ConstMulAction.lean; Mathlib/MeasureTheory/Function/LpSpace/Indicator.lean; Mathlib/MeasureTheory/Function/LpSpace/Indicator.lean; Mathlib/Topology/Algebra/Support.lean; Mathlib/Topology/Algebra/Support.lean",
+   "date": "2026-10-22",
+   "verdict": "no match: generic adjunction, ordinary sheaf/module, scheme or topological results do not state this condensed pro-étale coefficient equation"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Composition compatibility of coefficient comparison for compactly supported derived direct image",
+   "results": "; SheafOfModules.pushforwardComp; AlgebraicGeometry.StructureSheaf.comap_comp; CompactlySupportedContinuousMap.coe_comp_to_continuous_fun; CompactlySupportedContinuousMap.comp_assoc; MvPolynomial.comap_comp; CompactlySupportedContinuousMap.comp; DividedPowers.DPMorphism.comp_toRingHom; CompactlySupportedContinuousMap.compAddMonoidHom",
+   "date": "2026-10-22",
+   "verdict": "no match: generic adjunction, ordinary sheaf/module, scheme or topological results do not state this condensed pro-étale coefficient equation"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Coefficient comparison for a composite compactification is the paste of the proper direct image, open extension and interchange coefficient comparisons",
+   "results": "; OnePoint.map_comp; AbstractCompletion.compare_comp_eq_compare; preStoneCechExtend_extends; BoundedContinuousFunction.extend_comp; stoneCechExtend_extends; IsCompactOpenCovered.of_comp; GeneralizingMap.comp; Profinite.IndexFunctor.map_comp_π_app",
+   "date": "2026-10-22",
+   "verdict": "no match: generic adjunction, ordinary sheaf/module, scheme or topological results do not state this condensed pro-étale coefficient equation"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.NatTrans.naturality",
+   "results": "; CategoryTheory.NatTrans.naturality; CategoryTheory.Limits.PullbackCone.isoMk; CategoryTheory.Limits.PushoutCocone.isoMk; CategoryTheory.Limits.PullbackCone.isoMk_hom_hom; CategoryTheory.Limits.PullbackCone.isoMk_inv_hom; CategoryTheory.Limits.PushoutCocone.isoMk_hom_hom; CategoryTheory.Limits.PushoutCocone.isoMk_inv_hom; CategoryTheory.Grothendieck.map_map",
+   "date": "2026-10-22",
+   "verdict": "no match: generic adjunction, ordinary sheaf/module, scheme or topological results do not state this condensed pro-étale coefficient equation"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Pasting coefficient change natural transformations across a proper open compactification compositor yields the composite coefficient map",
+   "results": "; AlgebraicGeometry.PresheafedSpace.map_comp_c_app; AlgebraicGeometry.Scheme.comp_appLE; AlgebraicGeometry.Scheme.Hom.comp_appLE; AlgebraicGeometry.Scheme.appLE_comp_appLE; AlgebraicGeometry.Scheme.Hom.appLE_comp_appLE; AlgebraicGeometry.Scheme.comp_appLE_assoc; AlgebraicGeometry.Scheme.comp_app; AlgebraicGeometry.Scheme.Hom.comp_appLE_assoc",
+   "date": "2026-10-22",
+   "verdict": "no match: generic adjunction, ordinary sheaf/module, scheme or topological results do not state this condensed pro-étale coefficient equation"
+  },
+  {
+   "tool": "grep",
+   "query": "compactSupport.*[Cc]omp|lowerShriek.*[Cc]omp|coefficient.*[Pp]asting",
+   "results": "Mathlib/Topology/Algebra/ConstMulAction.lean; Mathlib/Analysis/FunctionalSpaces/SobolevInequality.lean; Mathlib/Analysis/FunctionalSpaces/SobolevInequality.lean; Mathlib/Analysis/FunctionalSpaces/SobolevInequality.lean; Mathlib/Topology/Algebra/Support.lean; Mathlib/Topology/Algebra/Support.lean; Mathlib/Topology/Algebra/Support.lean; Mathlib/Topology/Algebra/Support.lean",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern ordinary pushforward composition, general naturality, polynomial laws or compactly supported functions; none states this derived pro-etale fixed-compactification coefficient equation."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived extension of coefficients commutes with composition of compactly supported direct images on fixed compactification models",
+   "results": "PolynomialLaw.comp_toFun'; SheafOfModules.pushforwardComp; CompactlySupportedContinuousMap.coe_comp_to_continuous_fun; CompactlySupportedContinuousMap.compMulHom; CompactlySupportedContinuousMap.compAddMonoidHom; Polynomial.coeff_map_eq_comp; Algebra.Generators.Hom.toExtensionHom_comp; CocompactMap.coe_comp",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern ordinary pushforward composition, general naturality, polynomial laws or compactly supported functions; none states this derived pro-etale fixed-compactification coefficient equation."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.NatTrans.naturality",
+   "results": "CategoryTheory.NatTrans.naturality; CategoryTheory.Limits.PullbackCone.isoMk; CategoryTheory.Limits.PushoutCocone.isoMk; CategoryTheory.Limits.PullbackCone.isoMk_hom_hom; CategoryTheory.Limits.PullbackCone.isoMk_inv_hom; CategoryTheory.Limits.PushoutCocone.isoMk_hom_hom; CategoryTheory.Limits.PushoutCocone.isoMk_inv_hom; CategoryTheory.Grothendieck.map_map",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern ordinary pushforward composition, general naturality, polynomial laws or compactly supported functions; none states this derived pro-etale fixed-compactification coefficient equation."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Coefficient change for compactly supported derived direct image commutes with the compositor on fixed proper open compactifications",
+   "results": "CompactlySupportedContinuousMap.compLinearMap; CompactlySupportedContinuousMap.compNonUnitalAlgHom; CompactlySupportedContinuousMap.comp_assoc; CompactlySupportedContinuousMap.comp; CompactlySupportedContinuousMap.coe_comp_to_continuous_fun; AlgebraicGeometry.Scheme.Modules.pushforwardComp_hom_app_app; ZeroAtInftyContinuousMap.compLinearMap; CompactlySupportedContinuousMap.compMulHom",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern ordinary pushforward composition, general naturality, polynomial laws or compactly supported functions; none states this derived pro-etale fixed-compactification coefficient equation."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Pasting natural scalar comparison squares for proper pushforward and open extension through a natural proper open interchange",
+   "results": "PresheafOfModules.pushforwardComp; AlgebraicGeometry.Scheme.Modules.pushforwardComp_hom_app_app; SheafOfModules.pushforwardNatTrans_comp; AlgebraicGeometry.Scheme.Modules.pushforwardComp_inv_app_app; AlgebraicGeometry.Scheme.Modules.pushforwardComp; PresheafOfModules.pushforward_assoc; CategoryTheory.ExponentiableMorphism.pushforwardComp; TopCat.Presheaf.Pushforward.comp",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern ordinary pushforward composition, general naturality, polynomial laws or compactly supported functions; none states this derived pro-etale fixed-compactification coefficient equation."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "det-prop-scalar-six-compact-support",
+  "date": "2026-10-22",
+  "group": "Q27"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-prop-scalar-six",
+ "blueprint": {
+  "from": {
+   "node": "det-prop-scalar-six-compact-support",
+   "place": "Composition paragraph: paste the proper, open, and interchange comparisons; returned step 7 on the constructed composite model.",
+   "via": []
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-scalar-composite-model-pasting",
+  "worker": "stage1",
+  "summary": "N6 expands the proper and open coefficient compositors, moves the outer coefficient mate by naturality, substitutes the existing exact proper/open interchange square, and regroups to the asserted fixed-model compositor equation. All non-elementary constituent compatibilities reuse existing nodes; no new nodes.",
+  "blueprint": "Composition paragraph of det-prop-scalar-six-compact-support.proof.md: explicit pasting of proper, open, and interchange comparisons on the constructed composite model.",
+  "tool_uses": [
+   {
+    "node": "det-thm-sf-ctf-stability-direct-images",
+    "why": "Clauses (2),(3) supply only domain checks for the open and proper functors on Dctf; the scalar-comparison unit does not state these geometric preservation results."
+   },
+   {
+    "node": "sk-def-sfb-constructible",
+    "why": "Defines Dctf as a full subcategory, allowing the ambient derived equality to be read there; this is only the definition of the categories, not a replacement proof route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "det-thm-sf-ctf-stability-direct-images",
+  "sk-def-sfb-constructible"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-N6-9daa9772c",
+  "group": "N6",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-N6-9daa9772c (reviewer sub-agent of L); spot-checked: I read the whole item. Its 5 steps match the Composition paragraph of the source det-prop-scalar-six-compact-support.proof.md; the latest and main-20261015 copies are identical. Each step checks out against the statements it cites. Step 1: ctf-stability (2) applied to j gives A=j_!K in Dctf, which the interchange square needs; ctf (3) covers coefficient change. Step 2: the composition law for gamma (direct-image (2), g=q, f=r) and for delta (pullback (2), j' then j) produce E. Step 3: naturality of gamma_q along iota_A. Step 4: the interchange-square equation matches lem-sfb-scalar-proper-open-interchange-square literally, and its hypotheses hold (p proper, i a quasi-compact open immersion, (j',r) a dense compactification of ip). Step 5: iota is natural over Lambda' because a map out of i_! is determined by its restriction, so marking the step elementary is fine; every listed Lambda' is admissible, so iota exists over it. The regrouping gives exactly alpha_{TK}, H'_g(C_{c_f}) and C_{c_g,H_fK}. Edge cases hold: identity coefficient map, identity opens, identity propers, empty X or K=0, and non-flat maps. There are no new nodes, no duplicates (rg search) and no cycle; the uses of the steps are exactly proof_deps. I accept tool_uses ctf-stability (domain checks the blueprint itself cites) and sk-def-sfb-constructible (a definition). Batch-5 check: det-thm-sf-ctf-stability-direct-images reaches the PD chapter, and det-prop-scalar-six-ctf reaches the trf chapter, each through generic infrastructure lemmas only (ringed-topos derived comparison; pro-étale stalk/pullback coherence). Both cited nodes are constructibility/finiteness facts that neither assumption gives and that are not steps of either proof. The parent blueprint proof cites the same two nodes, so they are accepted. No changes."
+ },
+ "lean": {
+  "module": "Sheaf.SixFunctors.ScalarCompositeModelPasting",
+  "declaration": "AlgebraicGeometry.ProEtale.CondensedRing.scalarCompositeModelPasting",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.CondensedRing.sfbScalarCompactModel",
+   "AlgebraicGeometry.ProEtale.CondensedRing.sfbScalarCompactComparison",
+   "AlgebraicGeometry.ProEtale.CondensedRing.sfbScalarOpenComp",
+   "AlgebraicGeometry.ProEtale.CondensedRing.sfbScalarModelCompositor",
+   "AlgebraicGeometry.ProEtale.CondensedRing.scalarCompositeModelPasting"
+  ],
+  "file": "lean/Sheaf/SixFunctors/ScalarCompositeModelPasting.lean",
+  "statement": "theorem scalarCompositeModelPasting (ell : ℕ) [Fact ell.Prime] (k : Type u) [Field k] [Fact (ringChar k).Prime] [Fact (ringChar k ≠ ell)] {Λ Λ' : ScalarSixRing.{u}} (a : Λ ⟶ Λ') (_ha : ListedCoefficientMap ell a) {X B Y C S : Over (Spec (.of k))} [LocallyOfFiniteType X.hom] [QuasiCompact X.hom] [IsSeparated X.hom] [LocallyOfFiniteType B.hom] [QuasiCompact B.hom] [IsSeparated B.hom] [LocallyOfFiniteType Y.hom] [QuasiCompact Y.hom] [IsSeparated Y.hom] [LocallyOfFiniteType C.hom] [QuasiCompact C.hom] [IsSeparated C.hom] [LocallyOfFiniteType S.hom] [QuasiCompact S.hom] [IsSeparated S.hom] (j : X ⟶ B) (p : B ⟶ Y) (i : Y ⟶ C) (q : C ⟶ S) [IsOpenImmersion j.left] [QuasiCompact j.left] [IsProper p.left] [IsOpenImmersion i.left] [QuasiCompact i.left] [IsProper q.left] (c : Compactification.BoundaryCompactification (p.left ≫ i.left)) [c.obj.obj.Z.Over (Spec (.of k))] [LocallyOfFiniteType (c.obj.obj.Z ↘ Spec (.of k))] [QuasiCompact (c.obj.obj.Z ↘ Spec (.of k))] [IsSeparated (c.obj.obj.Z ↘ Spec (.of k))] [c.obj.obj.i.IsOver (Spec (.of k))] [c.obj.obj.g.IsOver (Spec (.of k))] [IsSchemeTheoreticallyDominant c.obj.obj.i] (ι : RootCoordinateFace.lower Λ.X p.left ⋙ (openImmersionLowerShriek Λ.X i.left).mapDerivedCategory ⟶ (openImmersionLowerShriek Λ.X c.obj.obj.i).mapDerivedCategory ⋙ RootCoordinateFace.lower Λ.X c.obj.obj.g) (_hι : ∀ A, compositionInterchangeIsNormalized Λ.X p.left i.left c A (ι.app A)) (ι' : RootCoordinateFace.lower Λ'.X p.left ⋙ (openImmersionLowerShriek Λ'.X i.left).mapDerivedCategory ⟶ (openImmersionLowerShriek Λ'.X c.obj.obj.i).mapDerivedCategory ⋙ RootCoordinateFace.lower Λ'.X c.obj.obj.g) (_hι' : ∀ A, compositionInterchangeIsNormalized Λ'.X p.left i.left c A (ι'.app A)) (K : ConstantModelConstructibleFiniteTor Λ.X X.left) : (scalarSixChange a S.left).map (sfbScalarModelCompositor Λ j.left p.left i.left q.left c ι K.obj) ≫ sfbScalarCompactComparison a (j.left ≫ c.obj.obj.i) (c.obj.obj.g ≫ q.left) K.obj = sfbScalarCompactComparison a i.left q.left ((sfbScalarCompactModel Λ j.left p.left).obj K.obj) ≫ (sfbScalarCompactModel Λ' i.left q.left).map (sfbScalarCompactComparison a j.left p.left K.obj) ≫ sfbScalarModelCompositor Λ' j.left p.left i.left q.left c ι' ((scalarSixChange a X.left).obj K.obj)",
+  "branch": "newtargets-dag",
+  "by": "NU",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "The canonical interchange is specified by natural transformations satisfying the published identity-on-restriction normalization over each coefficient ring. Uniqueness in properOpenInterchange identifies every such family with the specified canonical maps. The compositor includes the actual adjunction-normalized proper and open composition identifications; the equation is in the ambient derived category, equivalently in its full Dctf subcategory."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-7ae056e9f",
+  "group": "NU",
+  "result": "pass",
+  "note": "Read node, 9 stmt_deps records, report, module and the upstream declarations it uses (properOpenInterchange/compositionInterchangeIsNormalized, scalarDirectImageMate, scalarSixChange/scalarSixOpenScalarIso, derivedOpenImmersionShriekIso, RootCoordinateFace.lowerComp/upperComp, BoundaryCompactification, ConstantModelConstructibleFiniteTor). Standing binders, listed coefficient maps, c_f/c_g (qc opens, proper), dense compactification (BoundaryCompactification + IsSchemeTheoreticallyDominant), H=Rp_*j_!, C=Rp_*delta∘gamma in correct order, alpha = Rq_*iota then canonical lowerComp.inv and leftAdjointCompIso open compositor; conclusion matches the node read in diagrammatic order with all right-hand functors over Λ'. iota/iota' given as natural transformations satisfying the identity-on-restriction condition; by the recorded uniqueness these are exactly the canonical maps, and a natural family exists, so not vacuous or extra. Edge cases (empty schemes, K=0, identities, non-flat/zero maps, Qbar, universes) covered. Defs non-hollow, single sorry, docstrings and proof steps present, lines<=100, proof-dep imports per brief, names fresh, node changed only in lean, statement verbatim. Not recompiled (no file changed); worker compile clean. Advisory: uncited owner nodes (listed-coefficient-maps, scalar-six-coefficient-interfaces, test-map-derived-composition, module-open-lower-shriek, theorem-module scalarDirectImageMate) reached via cited direct-image/open-iso dependencies, same as the landed direct-image record."
+ }
+}

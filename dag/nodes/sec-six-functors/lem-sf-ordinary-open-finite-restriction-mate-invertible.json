@@ -1,0 +1,138 @@
+{
+ "id": "lem-sf-ordinary-open-finite-restriction-mate-invertible",
+ "kind": "statement",
+ "title": "Invertibility of the finite ordinary open restriction mate",
+ "statement": "Fix a prime l, a finite extension E of Q_l, an open immersion j:U→X, section-normalized coefficient operations o [def-sf-integral-open-operations], and a generator-normalized TensorComparison tensor. At any positive coefficient level indexed by n:N, transpose (tensor.ordinary n).inv under the ordinary integral-open and finite-open adjunctions. The resulting natural transformation finiteRestrictionMate: restriction⋙scalarReductionExtension_U(n) → scalarReductionExtension_X(n)⋙finiteRestriction(n) is invertible. No ordinary quotient model, strict system map, transition equation or system assembly is asserted.",
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tags 03DJ and 0E8I, lemma-j-shriek-and-tensor; sites-cohomology.tex Tag 0941, ordinary quotient construction."
+ },
+ "stmt_deps": [
+  "def-weil-l-adic-coefficient-extension",
+  "def-sf-integral-open-operations"
+ ],
+ "proof": [
+  {
+   "text": "The scalar-reduction adjunction identifies its functor with the sheafified change-of-rings tensor, with unit x ↦ 1 tensor x. On the actual open slice, the sectionwise tensor presheaves have the same sections and balancing relations. Slice sheafification and the localized tensor comparison give inverse maps keeping each pure tensor.",
+   "uses": [
+    "lem-sfb-localized-site-tensor-restriction",
+    "lem-weil-derived-scalar-extension-restriction-adjunction"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Transport through o.integral and o.finite; their specified pushforward descriptions and projection square identify the scalar actions. Transpose the comparison under the finite-open adjunction. On every extension summand and scalar-unit generator, tensor.generators identifies it with inverse tensor comparison followed by the integral counit. Linearity, the tensor universal property, and the sheafification universal property extend the equality to all sections. The triangular identities identify the transpose as finiteRestrictionMate, so its components are isomorphisms.",
+   "uses": [
+    "def-sf-integral-open-operations"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-localized-site-tensor-restriction",
+  "lem-weil-derived-scalar-extension-restriction-adjunction",
+  "def-sf-integral-open-operations"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Ordinary finite slice tensor restriction and its normalized adjunction transpose, original item proof steps 1 and 3; no strict-system transition step remains in this node."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "extension of scalars for sheaves of modules commutes with restriction to slice site",
+   "results": "Eight hits for ordinary module scalar restriction and extension, and Scheme.Modules.map_smul; none supplies the prescribed sheaf-level finite open mate or its strict quotient transition equation.",
+   "date": "2026-10-27",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "restriction of sheaves of modules to a slice commutes with extension of scalars",
+   "results": "Eight hits: SheafOfModules.restrictScalars and its underlying-presheaf formulas, PresheafOfModules.pushforward_obj_obj, and Scheme.Modules.restrictFunctor. No comparison with the specified normalized adjunction mate.",
+   "date": "2026-10-27",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "localizedSystemRestriction.*scalar|systemIsoOfEvaluation_exists|over.*Sheafification",
+   "results": "Two irrelevant Mathlib subsheafification comments. Local searches found the proved localized tensor restriction theorem and systemIsoOfEvaluation_exists. They provide tensor restriction and assembly, but not scalar-extension transport through the prescribed coefficient equivalences. Blueprint search for restriction tensor returned zero nodes.",
+   "date": "2026-10-27",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.OrdinaryOpenRestrictionQuotient",
+  "date": "2026-10-27",
+  "group": "S8"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-thm-sf-compatibility",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "fix-prop-coherence",
+   "place": "Open-factor coefficient compatibility: the finite quotient tensor comparison commutes with ordinary restriction, before strict-system assembly and derived descent.",
+   "via": [
+    "lem-sf-open-restriction-ordinary-quotient",
+    "lem-sf-open-restriction-augmented-descent",
+    "lem-sf-canonical-open-restriction-model",
+    "lem-sf-open-reduction-adjunction-transport",
+    "lem-sf-integral-open-reduction-comparison",
+    "lem-sf-integral-compactification-system-realization"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.OrdinaryOpenFiniteRestrictionMate",
+  "file": "lean/Sheaf/Paper/OrdinaryOpenFiniteRestrictionMate.lean",
+  "declaration": "WeilConjectures.CanonicalOpenRestriction.finiteRestrictionMate_isIso",
+  "statement": "theorem finiteRestrictionMate_isIso (tensor : TensorComparison l E j o) (n : ℕ) :\n    IsIso (finiteRestrictionMate l E j o tensor n)",
+  "branch": "sheaf-dag",
+  "by": "S8",
+  "date": "2026-10-27",
+  "declarations": [
+   "WeilConjectures.CanonicalOpenRestriction.finiteOpenAdjunction",
+   "WeilConjectures.CanonicalOpenRestriction.finiteRestrictionMate",
+   "WeilConjectures.CanonicalOpenRestriction.finiteRestrictionMate_app",
+   "WeilConjectures.CanonicalOpenRestriction.finiteRestrictionMate_isIso"
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-0d913",
+  "group": "S8",
+  "result": "pass",
+  "landing": "20261027T135439-L-3708468",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-0d913",
+  "group": "S8",
+  "result": "pass",
+  "landing": "20261027T135439-L-3708468",
+  "kind": "interface",
+  "note": "independent cc review: item proof vs node lem-sf-open-restriction-ordinary-quotient; OpenSystems.restrictionSections vs change record + def-coef-semilinear-derived-calculus statement_change; finiteRestrictionMate_isIso vs its node (true, generator-pinned); 8 NOT RUN importers compiled OK against delivered SDC"
+ }
+}

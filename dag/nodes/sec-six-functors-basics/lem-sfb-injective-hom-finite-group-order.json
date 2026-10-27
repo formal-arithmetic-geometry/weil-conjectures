@@ -1,0 +1,91 @@
+{
+ "id": "lem-sfb-injective-hom-finite-group-order",
+ "kind": "statement",
+ "title": "An injective homomorphism into a finite group has finite domain and dividing order",
+ "statement": "Let $A$ and $B$ be groups (sets equipped with an associative multiplication, an identity element and inverses). Suppose that $B$ is finite and that $f:A\\to B$ is an injective group homomorphism, meaning $f(1)=1$ and $f(xy)=f(x)f(y)$ for all $x,y\\in A$, and $f(x)=f(y)$ implies $x=y$. Then $A$ is finite and its cardinality divides that of $B$: $|A|\\mid |B|$. Cardinalities here are finite nonnegative integers. Finiteness is finiteness of the underlying sets [def-sfb-finite-infinite-set].",
+ "source": {
+  "document": "literature/stacks-project/fields.tex",
+  "place": "Tag 09I6 (section-Kummer), opening paragraph, last sentence: the order-divisibility input for the image subgroup of the Kummer character. The general finite-group statement is read in Mathlib/GroupTheory/Coset/Card.lean:79-84 (Subgroup.card_dvd_of_injective) and Mathlib/Data/Fintype/EquivFin.lean:182-184 (Finite.of_injective)."
+ },
+ "stmt_deps": [
+  "def-sfb-finite-infinite-set"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "An injective group homomorphism into a finite group has finite domain and its domain cardinality divides the codomain cardinality",
+   "results": "8 hits: Subgroup.card_dvd_of_injective, Fintype.card_coeSort_range, AddSubgroup.card_dvd_of_injective, Subgroup.card_comap_dvd_of_injective, Fintype.card_coeSort_mrange, Subgroup.card_range_dvd, AddSubgroup.card_comap_dvd_of_injective, Function.Injective.isOfFinOrder_iff",
+   "date": "2026-10-23",
+   "verdict": "match: Subgroup.card_dvd_of_injective gives the divisibility clause at Mathlib/GroupTheory/Coset/Card.lean:79-84; Finite.of_injective at Mathlib/Data/Fintype/EquivFin.lean:182-184 gives finiteness of the domain. Both statements and their hypotheses were read."
+  },
+  {
+   "tool": "loogle",
+   "query": "MonoidHom, Function.Injective, Nat.card",
+   "results": "3 hits: Subgroup.card_map_of_injective, Subgroup.card_dvd_of_injective, Subgroup.card_comap_dvd_of_injective",
+   "date": "2026-10-23",
+   "verdict": "match: Subgroup.card_dvd_of_injective gives the divisibility clause at Mathlib/GroupTheory/Coset/Card.lean:79-84; Finite.of_injective at Mathlib/Data/Fintype/EquivFin.lean:182-184 gives finiteness of the domain. Both statements and their hypotheses were read."
+  },
+  {
+   "tool": "leansearch",
+   "query": "An injective group homomorphism into a finite group has finite domain and its order divides the target group order",
+   "results": "8 hits: Subgroup.card_dvd_of_injective, AddSubgroup.card_dvd_of_injective, Subgroup.card_dvd_of_surjective, Fintype.card_coeSort_mrange, Subgroup.card_comap_dvd_of_injective, Subgroup.card_range_dvd, MonoidHom.commGroupOfInjective, AddSubgroup.card_comap_dvd_of_injective",
+   "date": "2026-10-23",
+   "verdict": "match: Subgroup.card_dvd_of_injective gives the divisibility clause at Mathlib/GroupTheory/Coset/Card.lean:79-84; Finite.of_injective at Mathlib/Data/Fintype/EquivFin.lean:182-184 gives finiteness of the domain. Both statements and their hypotheses were read."
+  },
+  {
+   "tool": "grep",
+   "query": "card_dvd_of_injective|card_dvd_of_injective|natCard_pi|card_pi|finite.*injective",
+   "results": "22 hits: Mathlib/GroupTheory/NoncommPiCoprod.lean, Mathlib/GroupTheory/Coset/Card.lean, Mathlib/GroupTheory/Coset/Card.lean, Mathlib/GroupTheory/Schreier.lean, Mathlib/GroupTheory/FixedPointFree.lean, Mathlib/GroupTheory/Transfer.lean, Mathlib/GroupTheory/CommutingProbability.lean, Mathlib/GroupTheory/Perm/Centralizer.lean. Source search under Mathlib/GroupTheory",
+   "date": "2026-10-23",
+   "verdict": "match: Subgroup.card_dvd_of_injective gives the divisibility clause at Mathlib/GroupTheory/Coset/Card.lean:79-84; Finite.of_injective at Mathlib/Data/Fintype/EquivFin.lean:182-184 gives finiteness of the domain. Both statements and their hypotheses were read."
+  },
+  {
+   "tool": "grep",
+   "query": "Finite.of_injective|card_fun|card_pi",
+   "results": "12 hits: Mathlib/Data/Fintype/Prod.lean, Mathlib/Data/Fintype/Prod.lean, Mathlib/Data/Fintype/EquivFin.lean, Mathlib/Data/Fintype/EquivFin.lean, Mathlib/Data/Fintype/EquivFin.lean, Mathlib/Data/Fintype/EquivFin.lean, Mathlib/Data/Fintype/EquivFin.lean, Mathlib/Data/Fintype/BigOperators.lean. Source search under Mathlib/Data/Fintype",
+   "date": "2026-10-23",
+   "verdict": "match: Subgroup.card_dvd_of_injective gives the divisibility clause at Mathlib/GroupTheory/Coset/Card.lean:79-84; Finite.of_injective at Mathlib/Data/Fintype/EquivFin.lean:182-184 gives finiteness of the domain. Both statements and their hypotheses were read."
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "Subgroup.card_dvd_of_injective, Finite.of_injective",
+  "file": "Mathlib/GroupTheory/Coset/Card.lean",
+  "line": 79,
+  "how": "One declaration per clause: Finite.of_injective (Mathlib/Data/Fintype/EquivFin.lean:182-184), applied to f with the given Finite B and injectivity, gives Finite A. Subgroup.card_dvd_of_injective (Mathlib/GroupTheory/Coset/Card.lean:79-84) applied to the group homomorphism f gives Nat.card A dividing Nat.card B, which are the ordinary finite cardinalities under these instances. No commutativity or additional field hypotheses. Both declarations and their surrounding variable binders were read."
+ },
+ "status": "mathlib",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-generated-field-scalar-character-order",
+  "date": "2026-10-23",
+  "group": "N7"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong §§3.2--3.6, printed pp.605--608: finite separable constant extension, invariant Kummer cover and normalization, then rationalization of the generic marking. For a zero-dimensional base use §3.3 and a smooth covering of genus at least two. The kernel fixed-field statements are the fibre-product group construction in §3.5, rather than just the full-group invariant statement.; auxiliary de Jong §3.5, p.607: tame normalization over separable branch points, etale generic marking, and extraction of the algebraic constant field. This isolates the local smoothness assertion, not the relative genus-raising construction. Local PDF WANTED; publisher PDF read. Supporting input: de Jong §3.5, p.607, adjoining finitely many roots; prime-to-characteristic degree is needed in the residue calculation.; the injective scalar character and subgroup-order argument of the opening paragraph, generalized from one radical to a finite field-generating list with specified finite scalar group; extracted from returned proof steps 6--9, excluding the Galois-degree theorem; general Lagrange input for the order of the image of the scalar character, after its construction and injectivity have been proved.",
+   "via": [
+    "lem-sfb-generated-field-scalar-character-order",
+    "lem-sfb-multiradical-galois-degree",
+    "lem-sfb-tame-radical-curve-normalization",
+    "lem-sfb-high-genus-equivariant-cover",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ }
+}

@@ -1,0 +1,120 @@
+{
+ "id": "lem-coef-dualizing-open-compositor-plus",
+ "kind": "statement",
+ "title": "Bounded-below compatibility of the normalized open compositor",
+ "statement": "For a quasi-compact open immersion j:U→Y and a separated locally finite-type quasi-compact morphism f:Y→S between Noetherian schemes, finite commutative coefficients R and a bounded-below complex K on U, the chosen-compactification open normalization of extension by zero [def-weil-pbc-extension-by-zero, def-amb-etale-compact-support] followed by the ordinary bounded-below compositor restricts to the specified unbounded open-normalized compositor, through the canonical Plus compatibilities [lem-amb-etale-compact-comparisons, def-sf-etale-support-compositor]. This is the bounded-below clause of the open-locality argument; no right adjoint, counit or two-level coefficient assertion is included.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-tower/lem-coef-finite-dualizing.proof.md",
+  "place": "Proof paragraph 2, first sentence: etale locality of the ambient adjoint, with the open composition and evaluation counit fixed; extraction of the expanded retained stage-1 proof, steps 20,21"
+ },
+ "stmt_deps": [
+  "lem-amb-etale-compact-comparisons",
+  "def-sf-etale-support-compositor",
+  "def-weil-pbc-extension-by-zero",
+  "def-amb-etale-compact-support"
+ ],
+ "proof": [
+  {
+   "text": "Compare the chosen compactification with (j,identity) by unboundedEtaleCompactSupport_comparison_plus. comparison_coherence identifies the comparison in the reverse direction with its inverse.",
+   "uses": [
+    "lem-amb-unbounded-compact-support-comparisons"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Compare the identity direct-image normalizations by rightDerived_ext after precomposition with their derived units: lowerStarIdDerivedPlus_hom_app_fac and rightDerivedFunctorIsoMapDerivedCategory_hom_fac with mapDerivedCategoryNatIso_fach give the same localization of lowerStarId. The unit equation of rightDerivedFunctorPlusCompatibility identifies the units. Paste the resulting identity square with compactification restriction and cancel the normalization to invert the square. Paste after structural pushforward with unboundedEtaleCompactSupport_composition_plus, using naturality and associativity.",
+   "uses": [
+    "lem-amb-unbounded-compact-support-comparisons",
+    "lem-amb-etale-compact-comparisons"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-amb-etale-compact-comparisons",
+  "lem-amb-unbounded-compact-support-comparisons"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-tower/lem-coef-finite-dualizing.proof.md",
+  "place": "Proof paragraph 2, first sentence: etale locality of the ambient adjoint, with the open composition and evaluation counit fixed; extraction of the expanded retained stage-1 proof, steps 20,21; step 5, bounded-below normalized open compositor"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Restriction of compact support open normalization to bounded below derived categories commutes with the identity direct image comparison",
+   "results": "8 hits, chiefly Scheme.Modules.restrictFunctorId and restrictFunctorComp; these concern Zariski structure-sheaf modules, not derived etale compact support.",
+   "date": "2026-10-25",
+   "verdict": "The general comparison restriction exists; the identity-normalized pasted square is the missing glue."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.rightDerivedFunctorPlusCompatibility",
+   "results": "0 hits; identifier absent from Mathlib index.",
+   "date": "2026-10-25",
+   "verdict": "The project supplies the comparison, not Mathlib."
+  },
+  {
+   "tool": "grep",
+   "query": "lowerStarIdDerivedPlus|comparison_plus",
+   "results": "0 hits in msearch Mathlib index; project rg finds the two factorization APIs.",
+   "date": "2026-10-25",
+   "verdict": "Use project comparison_plus and derived-unit uniqueness."
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.CoefficientDualizingOpenAdjoint",
+  "date": "2026-10-25",
+  "group": "M3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-coef-dualizing-open-adjoint",
+   "place": "Step 5: bounded-below normalized open compositor",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.CoefficientDualizingOpenCompositorPlus",
+  "file": "lean/Sheaf/Paper/CoefficientDualizingOpenCompositorPlus.lean",
+  "declaration": "AlgebraicGeometry.Etale.coefDualizingOpenCompositorPlus",
+  "statement": "theorem coefDualizingOpenCompositorPlus\n    (R : Type (u + 1)) [CommRing R] [Finite R]\n    {U Y S : Scheme.{u}} [IsNoetherian U] [IsNoetherian Y] [IsNoetherian S]\n    (j : U ⟶ Y) (f : Y ⟶ S) [IsOpenImmersion j]\n    [IsSeparated f] [LocallyOfFiniteType f] [QuasiCompact f]\n    [QuasiCompact j] [QuasiCompact (j ≫ f)]\n    [HasCompactification j] [HasCompactification f] [HasCompactification (j ≫ f)] :\n    CoefDualizingOpenPlusStatement R j f",
+  "branch": "sheaf-dag",
+  "by": "M3",
+  "date": "2026-10-25",
+  "declarations": [
+   "AlgebraicGeometry.Etale.coefDualizingOpenNormalization",
+   "AlgebraicGeometry.Etale.coefDualizingOpenLeftIso",
+   "AlgebraicGeometry.Etale.coefDualizingOpenLeftPlusIso",
+   "AlgebraicGeometry.Etale.CoefDualizingOpenPlusStatement",
+   "AlgebraicGeometry.Etale.coefDualizingOpenCompositorPlus"
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-8b1b9",
+  "group": "M3",
+  "result": "fix",
+  "landing": "20261025T163853-L-878364",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-8b1b9",
+  "group": "M3",
+  "result": "fix",
+  "landing": "20261025T163853-L-878364",
+  "kind": "interface",
+  "note": "independent cc review: item conjunct CoefDualizingOpenPlusStatement vs new sorry theorem coefDualizingOpenCompositorPlus (same statement, item hypotheses); moved defs vs clone bodies (verbatim); item node vs clone (proof fields + lean.declarations + tool_uses only)"
+ }
+}

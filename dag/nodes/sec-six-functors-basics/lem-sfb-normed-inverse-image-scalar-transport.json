@@ -1,0 +1,512 @@
+{
+ "id": "lem-sfb-normed-inverse-image-scalar-transport",
+ "kind": "statement",
+ "title": "Normalized inverse-image and coefficient transport for internal normed modules",
+ "statement": "Work in compatible small-site and coefficient universes [def-weil-size-convention]. Let $F$ be a normed field with totally disconnected metric topology, let $C_F(P)=C(P,F)$ on profinite sets [def-sfb-continuous-map-condensed-ring], and put $F_T=p_T^*C_F$ for every scheme $T$ [sk-def-sfb-pulled-back-coefficients]. Use internal $F_T$-modules [sk-def-sfb-module-objects], relative tensor [def-sfb-modobj-relative-tensor, def-sfb-modobj-symmetric-tensor], and the module inverse image $f_F^*=\\operatorname{Ext}_{\\alpha_{f,F}}\\circ\\operatorname{mapMod}(f^{-1})$ of [sk-def-sfb-module-pushforward-pullback].\n\nLet $F\\hookrightarrow F'$ be a continuous inclusion into another totally disconnected normed field. It induces ring-object maps $a_T:F_T\\to F'_T$ by postcomposition on continuous functions [def-sfb-continuous-map-condensed-ring-map]. For every scheme $T$ the functor $r_T=\\operatorname{Res}_{a_T}$ [def-sfb-modobj-restriction] is exact and additive, and is the identity on underlying abelian sheaves and maps. For any scheme morphism $f:Y\\to X$, the coefficient comparisons are ring-object isomorphisms and satisfy\n$$\\alpha_{f,F'}\\circ f^{-1}a_X=a_Y\\circ\\alpha_{f,F}.$$\n\nWrite $E_T^F$ and $E_T^{F'}$ for the canonical equivalences to modules over the reconstructed section-ring sheaves [def-weil-pbc-internal-abelian-sheaf-module-equivalence]. Under these equivalences, $f_F^*$ is canonically identified with the abelian inverse image $f^{-1}$ whose $F_Y$-action is the transported action through $\\alpha_{f,F}^{-1}$; likewise for $F'$. The comparison is the scalar-isomorphism identification\n$$F_Y\\otimes_{f^{-1}F_X}f^{-1}M\\xrightarrow{\\sim}f^{-1}M,\\qquad b\\otimes m\\longmapsto\\alpha_{f,F}^{-1}(b)m.$$\nIt respects addition, scalar multiplication and the regular-module units. The analogous internal/sectionwise identifications of coefficient restriction and scalar extension send $b'\\otimes m$ to the same balanced generator for the sheaf tensor [def-pur-sheaf-tensor-product].\n\nThere is a natural isomorphism $f_F^*r_X\\xrightarrow{\\sim}r_Yf_{F'}^*$. After the displayed identifications its underlying abelian-sheaf map is the identity of $f^{-1}N$, and its $F_Y$-action is explicitly the $f^{-1}F'_X$-action precomposed with the common map\n$$f^{-1}a_X\\circ\\alpha_{f,F}^{-1}=\\alpha_{f,F'}^{-1}\\circ a_Y.$$\nFor $x:s=\\operatorname{Spec}k\\to X$, $k$ algebraically closed [def-weil-geometric-point], constant sections therefore give\n$$\\Gamma(s,x_F^*r_XN)\\xrightarrow{\\sim}\\operatorname{Res}_{F'/F}\\Gamma(s,x_{F'}^*N)$$\nwith identity underlying additive map. These comparisons apply termwise and descend to the ordinary unbounded derived categories [sk-def-sfb-derived-categories]. No boundedness, constructibility, completeness or flatness assumption on $F_X\\to F'_X$ is imposed.",
+ "source": {
+  "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
+  "place": "Section 3, printed p.6: coefficient inverse image and restriction/extension adjunctions; Example 3.1 and Lemma 4.1(1) for point sections. Agent formulation of normalized internal/sectionwise and alpha transport, retaining old step 9."
+ },
+ "stmt_deps": [
+  "def-weil-size-convention",
+  "def-sfb-continuous-map-condensed-ring",
+  "sk-def-sfb-pulled-back-coefficients",
+  "sk-def-sfb-module-objects",
+  "def-sfb-modobj-relative-tensor",
+  "def-sfb-modobj-symmetric-tensor",
+  "sk-def-sfb-module-pushforward-pullback",
+  "def-sfb-continuous-map-condensed-ring-map",
+  "def-sfb-modobj-restriction",
+  "def-weil-pbc-internal-abelian-sheaf-module-equivalence",
+  "def-pur-sheaf-tensor-product",
+  "def-weil-geometric-point",
+  "sk-def-sfb-derived-categories",
+  "def-sfb-section-scalar-map-data",
+  "def-sfb-scalar-extension-pure-tensor-section",
+  "def-sfb-modobj-extension",
+  "def-sfb-modobj-extend-restrict-adjunction",
+  "def-sfb-modobj-extension-along-iso",
+  "def-sfb-comap-upper-star-iso",
+  "def-sfb-alpha",
+  "def-sfb-upper-star-from-point"
+ ],
+ "proof": [
+  {
+   "text": "Postcomposition by the continuous inclusion gives a morphism $a:C_F\\to C_{F'}$ of commutative condensed rings. Pulling it back gives $a_T=p_T^*a$. The maps $\\alpha_{f,F}$ and $\\alpha_{f,F'}$ are isomorphisms of ring objects, not merely of abelian sheaves. By [def-sfb-alpha] they are components at $C_F,C_{F'}$ of one natural comparison $f^{-1}p_X^*\\cong p_Y^*$. Its naturality at $a$ says precisely $\\alpha_{f,F'}\\, f^{-1}a_X=a_Y\\alpha_{f,F}$. Composing on the left and right with the respective inverse components gives $f^{-1}a_X\\,\\alpha_{f,F}^{-1}=\\alpha_{f,F'}^{-1}a_Y$. This uses arbitrary commutative condensed rings, so it does not require that the fields be finite extensions of $\\mathbf Q_\\ell$.",
+   "uses": [
+    "def-sfb-continuous-map-condensed-ring-map",
+    "sk-def-sfb-pulled-back-coefficients",
+    "sk-def-sfb-coefficient-morphisms",
+    "def-sfb-alpha"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
+    "place": "Section 3, printed p.6, Example 3.1 and the two adjunction paragraphs; explicit ordinary-category normalization by Q35"
+   }
+  },
+  {
+   "text": "The equivalences $E_R$ to section-ring module sheaves leave underlying abelian sheaves and maps unchanged. Restriction along a ring-object map $a:R\\to S$ replaces the action by $\\gamma_N(a\\otimes1)$, so on sections it is exactly restriction along the reconstructed ring-sheaf map. For extension, [def-sfb-modobj-extension] takes the coequalizer of the two $R$-action arrows on $S\\otimes R\\otimes M\\rightrightarrows S\\otimes M$. The comparison of [lem-pe-internal-section-tensor-comparison], applied to $R$-modules $S,M$, identifies the relative tensor and its local generators with the sheafified sectionwise balanced tensor. Its formula is $s\\otimes m\\mapsto s\\otimes m$. The additional $S$-action agrees: acting by $s'$ on the first factor gives $(s's)\\otimes m$ on both sides. Thus this is also an $S$-linear comparison for extension of scalars. The same tensor comparison identifies the regular module with the section ring and preserves its unitors. These are the internal/sectionwise coefficient identifications claimed in the statement; sheaf tensor sections need only be locally sums of pure tensors.",
+   "uses": [
+    "def-weil-pbc-internal-abelian-sheaf-module-equivalence",
+    "def-sfb-modobj-restriction",
+    "def-sfb-modobj-extension",
+    "lem-pe-internal-section-tensor-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
+    "place": "Section 3, printed p.6, Example 3.1 and the two adjunction paragraphs; explicit ordinary-category normalization by Q35"
+   }
+  },
+  {
+   "text": "Fix $M$ and set $P=f^{-1}M$, $A=f^{-1}F_X$, $B=F_Y$, $\\alpha=\\alpha_{f,F}$. The internal/sectionwise pullback comparison identifies the specified module pullback with $B\\otimes_A P$. Give $P$ the transported $B$-action $b\\cdot p=\\alpha^{-1}(b)p$. The formula $c(b\\otimes p)=\\alpha^{-1}(b)p$ is balanced since $\\alpha^{-1}(b\\alpha(a))p=\\alpha^{-1}(b)ap$, and it is $B$-linear since $c(b'b\\otimes p)=\\alpha^{-1}(b')c(b\\otimes p)$. It extends uniquely through the sheafified tensor. The map $u(p)=1\\otimes p$ is inverse: $cu(p)=p$, while $uc(b\\otimes p)=1\\otimes\\alpha^{-1}(b)p=b\\otimes p$ by balancing. These formulas commute with restrictions and module morphisms, hence give a natural isomorphism. They preserve sums and send $b\\otimes1$ in the regular-module tensor to $\\alpha^{-1}(b)$; composing with $\\alpha$ gives the usual regular unit map $b\\otimes a\\mapsto b\\alpha(a)$. Thus the regular-module unit normalization also agrees. Repeat with $F'$.",
+   "uses": [
+    "lem-sfb-internal-module-operations-transport",
+    "def-pur-sheaf-tensor-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
+    "place": "Section 3, printed p.6, Example 3.1 and the two adjunction paragraphs; explicit ordinary-category normalization by Q35"
+   }
+  },
+  {
+   "text": "Exactness can be checked on underlying abelian sheaves. Indeed [lem-pe-internal-section-tensor-comparison] makes each $E_R$ exact, and the sectionwise forgetful functor is faithful and exact by [lem-weil-pbc-module-sheaves-colimits-forgetful]. It reflects isomorphisms: the inverse of an invertible underlying additive sheaf map $v$ is linear because $v(rx)=r v(x)$ implies $v^{-1}(ry)=r v^{-1}(y)$. Consequently [lem-weil-pbc-jointly-reflect-short-exact], for a singleton family of these forgetful functors, says that a module short sequence is exact if and only if its underlying abelian-sheaf sequence is exact. Restriction $r_T$ preserves addition of maps and is identity on these underlying sheaves and maps by step 2, so it is additive exact. The normalized pullback of step 3 has underlying functor the exact abelian inverse image of [lem-sfb-finite-upper-star-exact]; its action on sums of maps is that same inverse image. Thus $f_F^*$ and $f_{F'}^*$ are additive exact as well. None of these arguments tensors along $a_T$ to test exactness, so no flatness of $a_T$ is involved.",
+   "uses": [
+    "lem-pe-internal-section-tensor-comparison",
+    "lem-weil-pbc-module-sheaves-colimits-forgetful",
+    "lem-weil-pbc-jointly-reflect-short-exact",
+    "def-sfb-modobj-restriction",
+    "lem-sfb-finite-upper-star-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
+    "place": "Section 3, printed p.6, Example 3.1 and the two adjunction paragraphs; explicit ordinary-category normalization by Q35"
+   }
+  },
+  {
+   "text": "For an $F'_X$-module $N$, both composites in the proposed comparison normalize to the same abelian sheaf $f^{-1}N$. On $f_F^*r_XN$ its action is the $f^{-1}F'_X$-action precomposed with $f^{-1}a_X\\,\\alpha_{f,F}^{-1}$: this follows by applying the formula for transport of an action in [sk-def-sfb-transport] to $\\gamma_N(a_X\\otimes1)$. On $r_Yf_{F'}^*N$ it is that action precomposed with $\\alpha_{f,F'}^{-1}a_Y$. Step 1 equates these ring maps. The identity of $f^{-1}N$ is therefore $F_Y$-linear in both directions and natural in $N$. Conjugating it by the two contractions of step 3 gives the required natural isomorphism of the original module functors. Its underlying map after normalization is literally the identity, rather than an unspecified linear automorphism.",
+   "uses": [
+    "sk-def-sfb-transport",
+    "def-sfb-modobj-restriction"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
+    "place": "Section 3, printed p.6, Example 3.1 and the two adjunction paragraphs; explicit ordinary-category normalization by Q35"
+   }
+  },
+  {
+   "text": "Take $f=x:s\\to X$. Applying sections on $s$ to the isomorphism of step 5 leaves its underlying additive map equal to the identity. The constant functions on the one-point profinite set identify $C_F(*)=F$ and $C_{F'}(*)=F'$. Their pullbacks to $s$ give the constant-section scalar maps $F\\to\\Gamma(s,F_s)$ and $F'\\to\\Gamma(s,F'_s)$; functoriality of pulled-back coefficients and postcomposition give $a_s(c_b)=c_{a(b)}$ for $b\\in F$. Thus restricting the section-module actions through these constant-section maps turns the $F_s$-linear comparison into exactly $\\Gamma(s,x_F^*r_XN)\\cong\\operatorname{Res}_{F'/F}\\Gamma(s,x_{F'}^*N)$, still identity on the additive group. This argument applies in particular when $s=\\operatorname{Spec}k$ with $k$ algebraically closed. It uses neither an equivalence of all point sheaves with vector spaces nor exactness of global sections.",
+   "uses": [
+    "def-sfb-continuous-map-condensed-ring",
+    "def-sfb-continuous-map-condensed-ring-map",
+    "sk-def-sfb-pulled-back-coefficients"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
+    "place": "Section 3, printed p.6, Example 3.1 and the two adjunction paragraphs; explicit ordinary-category normalization by Q35"
+   }
+  },
+  {
+   "text": "Apply every additive functor and natural comparison above degree by degree to a cochain complex. Naturality for each differential makes each comparison a chain isomorphism, with inverse given degree by degree by the same inverse comparison. Step 4 supplies exactness for coefficient restriction and normalized inverse image; the equivalences $E_R$ are exact as well. By [lem-weil-pbc-exact-functor-derived-factorization] their termwise functors preserve quasi-isomorphisms on all unbounded complexes and descend to the ordinary derived categories. The localization universal property in [def-weil-abstract-derived-category] descends the chain comparisons and their inverses (their naturality survives inversion of quasi-isomorphisms). The formulas on localized representatives are the same formulas as before localization, in particular the identity comparison on the common underlying inverse-image complex. This proves the derived assertion without restricting degrees or imposing completeness, constructibility or flatness. For the point-section comparison, [lem-sfb-normed-point-exact-monoidal] gives exact additive sections $E_F$ and $E_{F\\prime}$ on $s$ for these arbitrary normed coefficients. The same factorization theorem therefore also descends the termwise point-section comparison of step 6 to ordinary unbounded derived categories of abstract vector spaces. No assertion of exact sections on a general scheme is needed.",
+   "uses": [
+    "lem-weil-pbc-exact-functor-derived-factorization",
+    "def-weil-abstract-derived-category",
+    "lem-sfb-normed-point-exact-monoidal"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
+    "place": "Section 3, printed p.6, Example 3.1 and the two adjunction paragraphs; explicit ordinary-category normalization by Q35"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sfb-continuous-map-condensed-ring-map",
+  "sk-def-sfb-pulled-back-coefficients",
+  "sk-def-sfb-coefficient-morphisms",
+  "def-sfb-alpha",
+  "def-weil-pbc-internal-abelian-sheaf-module-equivalence",
+  "def-sfb-modobj-restriction",
+  "def-sfb-modobj-extension",
+  "lem-pe-internal-section-tensor-comparison",
+  "lem-sfb-internal-module-operations-transport",
+  "def-pur-sheaf-tensor-product",
+  "lem-weil-pbc-module-sheaves-colimits-forgetful",
+  "lem-weil-pbc-jointly-reflect-short-exact",
+  "lem-sfb-finite-upper-star-exact",
+  "sk-def-sfb-transport",
+  "def-sfb-continuous-map-condensed-ring",
+  "lem-weil-pbc-exact-functor-derived-factorization",
+  "def-weil-abstract-derived-category",
+  "lem-sfb-normed-point-exact-monoidal"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
+  "place": "Section 3, printed p.6, Example 3.1 and the two adjunction paragraphs; explicit ordinary-category normalization by Q35"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For continuous field coefficient sheaves module inverse image Ext alpha mapMod commutes with exact scalar restriction and the comparison is identity on underlying abelian inverse images",
+   "results": {
+    "t": "2026-10-22T07:33:42Z",
+    "tool": "leanfinder",
+    "query": "For continuous field coefficient sheaves module inverse image Ext alpha mapMod commutes with exact scalar restriction and the comparison is identity on underlying abelian inverse images",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom",
+     "SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom_assoc",
+     "SheafOfModules.ιFree_mapFree_inv",
+     "SheafOfModules.pullbackObjFreeIso_hom_naturality",
+     "SheafOfModules.conjugateEquiv_pullbackComp_inv",
+     "SheafOfModules.pullbackObjFreeIso_hom_naturality_assoc",
+     "SheafOfModules.map_ιFree_mapFree_hom",
+     "SheafOfModules.ιFree_mapFree_inv_assoc"
+    ],
+    "digest": "2d4437412f54b9d2"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary sheaf restriction, free pullback and pullback composition do not give this internal/sectionwise alpha-transport and normalized coefficient restriction interface."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Restriction of scalars for pro etale internal module sheaves commutes with geometric pullback after the canonical coefficient ring isomorphisms",
+   "results": {
+    "t": "2026-10-22T07:33:37Z",
+    "tool": "leansearch",
+    "query": "Restriction of scalars for pro etale internal module sheaves commutes with geometric pullback after the canonical coefficient ring isomorphisms",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "PresheafOfModules.restrictScalarsObj",
+     "RestrictScalars",
+     "PresheafOfModules.restrictScalars",
+     "ModuleCat.RestrictScalars.obj'",
+     "SheafOfModules.restrictScalars",
+     "ModuleCat.restrictScalars",
+     "SheafOfModules.instAdditiveRestrictScalars",
+     "ModuleCat.instModuleCarrierObjRestrictScalars"
+    ],
+    "digest": "58144c24a1b21c6f"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary sheaf restriction, free pullback and pullback composition do not give this internal/sectionwise alpha-transport and normalized coefficient restriction interface."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Sheaf\", \"restrictScalars\"",
+   "results": {
+    "t": "2026-10-22T07:33:38Z",
+    "tool": "loogle",
+    "query": "\"Sheaf\", \"restrictScalars\"",
+    "sub": "",
+    "ok": true,
+    "n_hits": 12,
+    "note": "",
+    "top": [
+     "PresheafOfModules.instHasColimitModuleCatCarrierObjOppositeRingCatCompEvaluationRestrictScalarsHomMap",
+     "PresheafOfModules.instHasLimitModuleCatCarrierObjOppositeRingCatCompEvaluationRestrictScalarsHomMap",
+     "PresheafOfModules.instFullRestrictScalarsIdFunctorOppositeRingCat",
+     "PresheafOfModules.restrictScalarsObj",
+     "PresheafOfModules.restrictScalars",
+     "PresheafOfModules.instFaithfulRestrictScalars",
+     "PresheafOfModules.instAdditiveRestrictScalars",
+     "PresheafOfModules.restrictScalars_obj"
+    ],
+    "digest": "a41e5e369182a35c"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary sheaf restriction, free pullback and pullback composition do not give this internal/sectionwise alpha-transport and normalized coefficient restriction interface."
+  },
+  {
+   "tool": "grep",
+   "query": "([Rr]estrict[Ss]calars|[Cc]omap).*(pullback|[Ii]nverse)|pullback.*([Rr]estrict[Ss]calars|[Cc]omap)",
+   "results": {
+    "t": "2026-10-22T07:33:38Z",
+    "tool": "grep",
+    "query": "([Rr]estrict[Ss]calars|[Cc]omap).*(pullback|[Ii]nverse)|pullback.*([Rr]estrict[Ss]calars|[Cc]omap)",
+    "sub": "Algebra/Category/ModuleCat",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary sheaf restriction, free pullback and pullback composition do not give this internal/sectionwise alpha-transport and normalized coefficient restriction interface."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The cartesian square of sheaves of rings induced by continuous field inclusions gives an exact pullback restriction natural isomorphism preserving the underlying additive maps",
+   "results": {
+    "t": "2026-10-22T07:33:45Z",
+    "tool": "leanfinder",
+    "query": "The cartesian square of sheaves of rings induced by continuous field inclusions gives an exact pullback restriction natural isomorphism preserving the underlying additive maps",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "SheafOfModules.pullbackObjFreeIso",
+     "SheafOfModules.pullbackIso",
+     "SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom",
+     "SheafOfModules.pullbackObjFreeIso_hom_naturality",
+     "SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom_assoc",
+     "SheafOfModules.pullbackObjFreeIso_hom_naturality_assoc",
+     "SheafOfModules.freeFunctorCompPullbackIso",
+     "TopCat.Sheaf.objSupIsoProdEqLocus_inv_fst"
+    ],
+    "digest": "f4ae3f6173a97b3d"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary sheaf restriction, free pullback and pullback composition do not give this internal/sectionwise alpha-transport and normalized coefficient restriction interface."
+  },
+  {
+   "tool": "grep",
+   "query": "restrictScalars|pullbackIso|instAdditiveRestrictScalars",
+   "results": {
+    "t": "2026-10-22T11:59:24Z",
+    "tool": "grep",
+    "query": "restrictScalars|pullbackIso|instAdditiveRestrictScalars",
+    "sub": "Algebra/Category/ModuleCat/Sheaf",
+    "ok": true,
+    "n_hits": 13,
+    "note": "",
+    "top": [
+     "Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean",
+     "Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean",
+     "Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean",
+     "Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean",
+     "Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean",
+     "Mathlib/Algebra/Category/ModuleCat/Sheaf/ChangeOfRings.lean",
+     "Mathlib/Algebra/Category/ModuleCat/Sheaf/ChangeOfRings.lean",
+     "Mathlib/Algebra/Category/ModuleCat/Sheaf/ChangeOfRings.lean"
+    ],
+    "digest": "83ff6b1c1882c98e"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: inspected ordinary SheafOfModules restriction and pullback interfaces; they do not state the full normalized internal/sectionwise coefficient-transport result for arbitrary continuous normed-field inclusions."
+  },
+  {
+   "tool": "leansearch",
+   "query": "An isomorphism of ring sheaves identifies module pullback with ordinary inverse image, naturally for coefficient restriction",
+   "results": {
+    "t": "2026-10-22T11:59:24Z",
+    "tool": "leansearch",
+    "query": "An isomorphism of ring sheaves identifies module pullback with ordinary inverse image, naturally for coefficient restriction",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "AlgebraicGeometry.Scheme.Modules.restrictFunctorIsoPullback",
+     "AlgebraicGeometry.LocallyRingedSpace.isoOfSheafedSpaceIso",
+     "PresheafOfModules.isoMk",
+     "AlgebraicGeometry.Scheme.Hom.instIsIsoCommRingCatApp",
+     "SheafOfModules.pullback",
+     "SheafOfModules.instIsIsoPullbackObjUnitToUnitOfFinal",
+     "SheafOfModules.freeFunctorCompPullbackIso",
+     "SheafOfModules.pullbackIso"
+    ],
+    "digest": "41a65bb5feee61a5"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: inspected ordinary SheafOfModules restriction and pullback interfaces; they do not state the full normalized internal/sectionwise coefficient-transport result for arbitrary continuous normed-field inclusions."
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules.restrictScalars, SheafOfModules.pullback",
+   "results": {
+    "t": "2026-10-22T11:59:24Z",
+    "tool": "loogle",
+    "query": "SheafOfModules.restrictScalars, SheafOfModules.pullback",
+    "sub": "",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: inspected ordinary SheafOfModules restriction and pullback interfaces; they do not state the full normalized internal/sectionwise coefficient-transport result for arbitrary continuous normed-field inclusions."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Pullback of internal modules over cartesian sheaves of rings commutes with restriction of scalars and the comparison is identity on underlying abelian sheaves",
+   "results": {
+    "t": "2026-10-22T11:59:35Z",
+    "tool": "leanfinder",
+    "query": "Pullback of internal modules over cartesian sheaves of rings commutes with restriction of scalars and the comparison is identity on underlying abelian sheaves",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom",
+     "SheafOfModules.pullback_id_comp",
+     "SheafOfModules.pullbackObjFreeIso",
+     "SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom_assoc",
+     "SheafOfModules.pullbackObjFreeIso_hom_naturality_assoc",
+     "SheafOfModules.pullback_comp_id",
+     "SheafOfModules.pullbackObjFreeIso_hom_naturality",
+     "SheafOfModules.conjugateEquiv_pullbackComp_inv"
+    ],
+    "digest": "e698020b2a7cc40e"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: inspected ordinary SheafOfModules restriction and pullback interfaces; they do not state the full normalized internal/sectionwise coefficient-transport result for arbitrary continuous normed-field inclusions."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Extension of scalars along an isomorphism equals restriction along the inverse; exact coefficient restriction commutes with inverse image for sheaves of modules",
+   "results": {
+    "t": "2026-10-22T12:00:35Z",
+    "tool": "leanfinder",
+    "query": "Extension of scalars along an isomorphism equals restriction along the inverse; exact coefficient restriction commutes with inverse image for sheaves of modules",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "SheafOfModules.pushforwardCongr",
+     "PresheafOfModules.restrictScalarsCompToPresheaf",
+     "SheafOfModules.restrictScalars_obj_val",
+     "ModuleCat.restrictScalarsComp'_inv_app",
+     "SheafOfModules.restrictScalars_map_val",
+     "SheafOfModules.restrictScalars",
+     "AlgebraicGeometry.Scheme.Modules.restrictFunctorIsoPullback",
+     "AlgebraicGeometry.Scheme.Modules.restrictFunctorId_inv_app_app"
+    ],
+    "digest": "ea46f82ba3193b90"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: inspected ordinary SheafOfModules restriction and pullback interfaces; they do not state the full normalized internal/sectionwise coefficient-transport result for arbitrary continuous normed-field inclusions."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-constructible-normed-geometric-fibres",
+  "date": "2026-10-22",
+  "group": "Q33"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "Paragraph (3), geometric norm-coefficient projection: Exact geometric fibres and constructible detection for continuous normed-field coefficients. Subargument: old step 9 on Z and its internal/sectionwise coefficient transport; the scalar-action square and identity-underlying restriction comparison",
+   "via": [
+    "lem-sfb-constructible-normed-geometric-fibres",
+    "lem-sfb-supported-lattice-norm-projection",
+    "lem-sfb-geometric-condensed-finite-scalar-model",
+    "lem-sfb-norm-algcl-cohomology-topology-comparison",
+    "lem-sfb-supported-finite-stage-topology-defect",
+    "lem-sfb-constructible-algcl-topology-comparison",
+    "lem-sfb-continuous-algcl-proper-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sfb-normed-inverse-image-scalar-transport",
+  "worker": "stage1",
+  "summary": "Q35 gives seven proof steps reusing the existing general condensed coefficient, internal/sectionwise tensor, ordinary module exactness and derived-localization interfaces. No new nodes. Explicit balanced contraction, inverse, scalar-action square and identity-underlying coefficient comparison are retained in the item. Corrected accidental double TeX escaping without changing any mathematical hypothesis or clause.",
+  "blueprint": "Retains the inherited blueprint.from attribution and its via chain: geometric norm-coefficient projection, old step 9 on internal/sectionwise coefficient transport. Steps 1-3 establish the coefficient square and normalized pullback; 4-7 establish exact restriction, identity comparison, constant-section fibres and unbounded descent. No unit or chapter route is changed.",
+  "tool_uses": [
+   {
+    "node": "lem-pe-internal-section-tensor-comparison",
+    "why": "Generic categorical interface used with the small pro-etale sites and commutative condensed coefficients: Relative tensor and K-flatness under the internal-to-sectionwise module equivalence. It supplies this infrastructure without replacing the unit route; no normed-field finiteness theorem is imported."
+   },
+   {
+    "node": "lem-sfb-internal-module-operations-transport",
+    "why": "Generic categorical interface used with the small pro-etale sites and commutative condensed coefficients: Internal and sectionwise module operations agree. It supplies this infrastructure without replacing the unit route; no normed-field finiteness theorem is imported."
+   },
+   {
+    "node": "lem-weil-pbc-module-sheaves-colimits-forgetful",
+    "why": "Generic categorical interface used with the small pro-etale sites and commutative condensed coefficients: Colimits of sheaves of modules and the forgetful functor to abelian sheaves. It supplies this infrastructure without replacing the unit route; no normed-field finiteness theorem is imported."
+   },
+   {
+    "node": "lem-sfb-finite-upper-star-exact",
+    "why": "Generic categorical interface used with the small pro-etale sites and commutative condensed coefficients: $g^*$ is exact. It supplies this infrastructure without replacing the unit route; no normed-field finiteness theorem is imported."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pe-internal-section-tensor-comparison",
+  "lem-sfb-internal-module-operations-transport",
+  "lem-weil-pbc-module-sheaves-colimits-forgetful",
+  "lem-sfb-finite-upper-star-exact"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q35-96231f6a2",
+  "group": "Q35",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q35-96231f6a2 (reviewer sub-agent of L); spot-checked: I read in full the item (7 steps, 0 new nodes), all 18 cited statements, and HRS 2305.18131 printed p.6 (Example 3.1 and the paragraph on f^{-1}, restriction and its left adjoint, which HRS calls 'formal') and p.8 Lemma 4.1(1). The statement and stmt_deps are byte-identical to the base version Q33 created, and the item is still unsplit with the same statement on live and side-live. proof_deps equal the union of the uses. No cycle (closure of 455 nodes) and no SGA. Step 1: the square comes from naturality of def-sfb-alpha at a=phi_*; it is the same square sk-def-sfb-coefficient-change asserts. Step 2: E_R preserves underlying sheaves, Res acts by gamma(a⊗1), and Ext is the coequalizer tensor identified by lem-pe-internal-section-tensor-comparison; I checked the S-action on generators. Step 3: lem-sfb-internal-module-operations-transport gives B⊗_A f^{-1}; I re-checked balancing (c(b alpha(a)⊗p)=alpha^{-1}(b)ap), the inverse 1⊗p and the regular unit. Step 4: the forgetful functor is faithful, exact and reflects isomorphisms, so the singleton case of jointly-reflect applies; Res and the normalized pullback are exact on underlying sheaves, with no flatness used. Step 5: by naturality of mu, mapMod(f^{-1})Res_{a_X} acts through f^{-1}a_X alpha_F^{-1}, which equals alpha_F'^{-1}a_Y by step 1, so the comparison is the identity. Step 6: the constant-section map is natural in Lambda, so a_s c_F = c_F' a, which gives Res_{F'/F} with identity additive map. Step 7: the exact-functor factorization plus localization; lem-sfb-normed-point-exact-monoidal (same unit, unsplit, no cycle) gives exact point sections. Edge cases checked: empty Y, F=F', N=0, x=id, non-complete F (Q_l inside Qbar_l). Not duplicates: lem-sfb-open-coefficient-square-action-identification (open immersions only), lem-sfb-integral-coefficient-square-normalization (O_E constant coefficients only), def-sfb-comap-upper-star-iso (existence only, no identity normalization or point clause), and the ring-restriction square nodes for constant rings and towers. Accepted tool_uses: lem-pe-internal-section-tensor-comparison, lem-sfb-internal-module-operations-transport, lem-weil-pbc-module-sheaves-colimits-forgetful, lem-sfb-finite-upper-star-exact (generic infrastructure). No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.SixFunctors.NormedInverseImageScalarTransport",
+  "declaration": "AlgebraicGeometry.ProEtale.normed_inverse_image_scalar_transport",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.normedCoefficient",
+   "AlgebraicGeometry.ProEtale.normedCoefficientMonObj",
+   "AlgebraicGeometry.ProEtale.normedCoefficientComm",
+   "AlgebraicGeometry.ProEtale.normedCoefficientMap",
+   "AlgebraicGeometry.ProEtale.normedCoefficientMapMonHom",
+   "AlgebraicGeometry.ProEtale.NormedModules",
+   "AlgebraicGeometry.ProEtale.normedRestriction",
+   "AlgebraicGeometry.ProEtale.normedPullback",
+   "AlgebraicGeometry.ProEtale.normedTransportedPullback",
+   "AlgebraicGeometry.ProEtale.normedContraction",
+   "AlgebraicGeometry.ProEtale.normedScalarComparison",
+   "AlgebraicGeometry.ProEtale.normedCondensedConstant",
+   "AlgebraicGeometry.ProEtale.normedConstantSection",
+   "AlgebraicGeometry.ProEtale.normedSectionAction",
+   "AlgebraicGeometry.ProEtale.normedSectionAction_laws",
+   "AlgebraicGeometry.ProEtale.normedSectionModule",
+   "AlgebraicGeometry.ProEtale.normedSectionAction_map",
+   "AlgebraicGeometry.ProEtale.normedSectionsModule",
+   "AlgebraicGeometry.ProEtale.normedSectionsModule_additive",
+   "AlgebraicGeometry.ProEtale.normedAbstractModulesDerived",
+   "AlgebraicGeometry.ProEtale.IsNormedPointScalarCompatible",
+   "AlgebraicGeometry.ProEtale.IsNormedSectionScalarCompatible",
+   "AlgebraicGeometry.ProEtale.IsNormedContractionNormalized",
+   "AlgebraicGeometry.ProEtale.normedDerivedScalarComparison",
+   "AlgebraicGeometry.ProEtale.normed_inverse_image_scalar_transport"
+  ],
+  "file": "lean/Sheaf/SixFunctors/NormedInverseImageScalarTransport.lean",
+  "statement": "theorem normed_inverse_image_scalar_transport {F F' : Type u} [NormedField F] [NormedField F'] [TotallyDisconnectedSpace F] [TotallyDisconnectedSpace F'] (a : F →+* F') (ha : Continuous a) : (∀ T : Scheme.{u}, (normedRestriction a ha T).Additive ∧ PreservesFiniteLimits (normedRestriction a ha T) ∧ PreservesFiniteColimits (normedRestriction a ha T) ∧ (normedRestriction a ha T ⋙ Mod.forget _) = Mod.forget _ ∧ IsNormedSectionScalarCompatible T (normedCoefficientMap a ha T)) ∧ ∀ (X Y : Scheme.{u}) (f : Y ⟶ X), IsIso (condensedPullbackHom (normedCoefficient F) f) ∧ IsIso (condensedPullbackHom (normedCoefficient F') f) ∧ ((ProEtale.upperStar AddCommGrpCat.{u + 1} f).map (normedCoefficientMap a ha X) ≫ condensedPullbackHom (normedCoefficient F') f = condensedPullbackHom (normedCoefficient F) f ≫ normedCoefficientMap a ha Y) ∧ ((asIso (condensedPullbackHom (normedCoefficient F) f)).inv ≫ (ProEtale.upperStar AddCommGrpCat.{u + 1} f).map (normedCoefficientMap a ha X) = normedCoefficientMap a ha Y ≫ (asIso (condensedPullbackHom (normedCoefficient F') f)).inv) ∧ IsNormedContractionNormalized F f ∧ IsNormedContractionNormalized F' f ∧ IsNormedSectionScalarCompatible Y (condensedPullbackHom (normedCoefficient F) f) ∧ IsNormedSectionScalarCompatible Y (condensedPullbackHom (normedCoefficient F') f) ∧ (∀ N : NormedModules F' X, ((normedScalarComparison a ha f).hom.app N).hom ≫ ((normedContraction F' f).hom.app N).hom = ((normedContraction F f).hom.app ((normedRestriction a ha X).obj N)).hom) ∧ (∀ N : NormedModules F' X, Mod.act ((normedTransportedPullback F f).obj ((normedRestriction a ha X).obj N)).X = ((asIso (condensedPullbackHom (normedCoefficient F) f)).inv ≫ (ProEtale.upperStar AddCommGrpCat.{u + 1} f).map (normedCoefficientMap a ha X)) ▷ ((ProEtale.upperStar AddCommGrpCat.{u + 1} f).obj N.X) ≫ Mod.act (((ProEtale.upperStar AddCommGrpCat.{u + 1} f).mapMod (condensedRingObj (normedCoefficient F') X)).obj N).X) ∧ (∀ K : CochainComplex (NormedModules F' X) ℤ, (normedDerivedScalarComparison a ha f).hom.app (DerivedCategory.Q.obj K) ≫ (normedPullback F' f ⋙ normedRestriction a ha Y).mapDerivedCategoryFactors.hom.app K = (normedRestriction a ha X ⋙ normedPullback F f).mapDerivedCategoryFactors.hom.app K ≫ DerivedCategory.Q.map ((NatIso.mapHomologicalComplex (normedScalarComparison a ha f) (.up ℤ)).hom.app K)) ∧ ∀ (k : Type u) [Field k] [IsAlgClosed k] (x : Spec (.of k) ⟶ X), IsNormedPointScalarCompatible a ha k x",
+  "branch": "newtargets-dag",
+  "by": "Q89",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "Uses the published module inverse image and scalar-comparison isomorphisms. The normalization is stated on their actual coequalizer generators, not on a chosen arbitrary isomorphism. Point sections carry the real constant-function scalar action; their derived comparison is fixed on all complexes."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-0569e79b1",
+  "group": "Q89",
+  "result": "pass",
+  "note": "Re-delivery of ba2fc1c0, Lean byte-identical (SHA 9ac0be75…, mathematics judged exact earlier). H2 repaired: the theorem stmt_deps are replaced by def-sfb-section-scalar-map-data and def-sfb-scalar-extension-pure-tensor-section, and the six owners (modobj-extension, extend-restrict-adjunction, extension-along-iso, comap-upper-star-iso, alpha, upper-star-from-point) are added; all exist in side-live and no plain def from a theorem node remains. H11 repaired with an independent second reading. Other node fields equal side-live, lean.statement is verbatim, 25/25 declarations are listed, sorry appears only in the three theorems, imports are present and not quarantined, there is no name clash, and the delivery holds only the item and its module. Advisory: Q14 167fa6b2 parallel delivery must rebind. No compile (no file changed)."
+ }
+}

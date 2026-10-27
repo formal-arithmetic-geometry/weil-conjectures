@@ -1,0 +1,405 @@
+{
+ "id": "lem-trf-finite-return-frobenius-cancellation",
+ "kind": "statement",
+ "title": "Finite return-square cancellation of absolute Frobenius",
+ "statement": "Fix the global finite-field datum $(p,a,q,k_0,k)$ of [def-weil-finite-field-fiber], with $q=p^a$ and $k$ the fixed algebraic closure of $k_0$, a prime $\\ell\\ne p$, and a finite extension $E/\\mathbf Q_\\ell$ in a fixed algebraic closure, with valuation ring $\\mathcal O_E$, uniformizer $\\varpi_E$ and $A_{E,n}=\\mathcal O_E/\\varpi_E^n$ [def-weil-l-adic-coefficient-extension]. Let $X_0$ be separated of finite type over $k_0$, put $X=X_0\\times_{k_0}k$ and $s=\\operatorname{Spec}k$, and put $g=g_X=\\operatorname{id}_{X_0}\\times\\operatorname{Spec}(\\gamma)$ and $g_s=\\operatorname{Spec}(\\gamma)$ for geometric Frobenius [def-weil-frobenius-detailed]. Use the derived pullbacks of [def-weil-derived-pullback-tensor-hom] and the point functor $\\operatorname{Fib}_{s,\\Lambda}$ of [def-weil-finite-coefficient-point], on the small pro-etale sites [def-weil-pbc-proetale-site].\n\nFix $m\\geq1$ and $y\\in X_0(\\mathbf F_{q^m})$, and let $z:s\\to X$ be its induced geometric point. Write $\\Phi$ for the $q$-power scheme Frobenius [def-trf-scheme-frobenius], $H=\\operatorname{Fr}^{(q^m)}_X$ and $r=\\operatorname{Fr}^{(q^m)}_s=g_s^{-m}$ for absolute Frobenius [def-weil-absolute-frobenius-scheme]. Then $\\Phi^mz=z$, $Hz=zr$ and $g^mz=zg_s^m$ as scheme maps.\n\nPut $\\Lambda=A_{E,n}$ with $n\\geq1$, $P=Lz_\\Lambda^*$, $U=Lg_{s,\\Lambda}^*$, $G=Lg_\\Lambda^*$ and $J=\\operatorname{Fib}_{s,\\Lambda}P$. Define $I_N^{(0)}=1$ and $I_N^{(j+1)}=\\iota_{U^jN}I_N^{(j)}$ from the specified point transport [def-weil-frobenius-point-transport]. Let $v_K:U^mPK\\xrightarrow{\\sim}PG^mK$ be the pullback-composition comparison for $g^mz=zg_s^m$, using the canonical composition maps [lem-weil-pbc-proetale-derived-pullback-composition]. Let $\\rho_K:JK\\to JL(\\Phi^m)^*K$ be the comparison for $\\Phi^mz=z$. Let $\\tau_X:L H^*\\xrightarrow{\\sim}1$ and $\\tau_s:Lr^*\\xrightarrow{\\sim}1$ be exactly the absolute-Frobenius trivializations [lem-pur-frobenius-trivialization-pullback] at exponent $am$. Specify $\\kappa_K^{(m)}=(\\tau_X)_{L(g^m)^*K}\\,c_{H,g^m,K}$, the canonical multiplicative comparison [prop-trf-scheme-galois-comparison]. Identify $L(g^m)^*$ with $G^m$ by the canonical compositors.\n\nFor every sheaf $N$ of $\\Lambda$-modules on $s_{\\mathrm{proet}}$, the final-object formula for $\\tau_{s,L(g_s^m)^*N}$, under $Lr^*L(g_s^m)^*N\\cong N$, is the restriction map $\\operatorname{res}_{g_s^m}:N(s,1)\\to N(s,g_s^m)$, namely the inverse of restriction along $r$. This is the $m$-fold successive point transport under the same compositor. For every complex $K$ whose class is in the finite constructible category [def-weil-finite-torsion-constructibility], one has\n$$J(\\kappa_K^{(m)})\\rho_K=\\operatorname{Fib}_{s,\\Lambda}(v_K)I_{PK}^{(m)}.$$\nThis is already an equality of the specified chain maps on flat-term K-flat representatives before derived localization, using restriction, inverse-image colimit insertion, coefficient identification and the relative-Frobenius trivialization; it includes the canonical composition identifications on both paths. The normalization contains no scalar rescaling.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-thm-trace-transport/prop-trf-karoubi-independence.proof.md",
+  "place": "Last sentence, Frobenius transport: returned local normalization proof, Steps 1, 3, 4. Absolute-Frobenius normalization from Stacks Tag 0F6W, more-morphisms.tex, lemma-relative-frobenius-weakly-etale."
+ },
+ "stmt_deps": [
+  "def-weil-finite-field-fiber",
+  "def-weil-l-adic-coefficient-extension",
+  "def-weil-frobenius-detailed",
+  "def-weil-derived-pullback-tensor-hom",
+  "def-weil-finite-coefficient-point",
+  "def-weil-pbc-proetale-site",
+  "def-trf-scheme-frobenius",
+  "def-weil-absolute-frobenius-scheme",
+  "def-weil-frobenius-point-transport",
+  "lem-weil-pbc-proetale-derived-pullback-composition",
+  "lem-pur-frobenius-trivialization-pullback",
+  "prop-trf-scheme-galois-comparison",
+  "def-weil-finite-torsion-constructibility",
+  "def-trf-coefficient-conventions",
+  "def-weil-local-frobenius-trace",
+  "def-pc-kflat-complex",
+  "def-trf-finite-point-transport-iteration",
+  "def-trf-finite-pullback-coordinate-comparison",
+  "def-sp-finite-intrinsic-open-square",
+  "def-sp-finite-intrinsic-pullback",
+  "def-sp-finite-intrinsic-direct-adjunction",
+  "def-pur-integral-finite-pullback",
+  "def-weil-point-section-scalar-functors"
+ ],
+ "proof": [
+  {
+   "text": "Write $h=g_s^m$, $f=g^m$ and $T=L f^*$. On an affine chart through the image of $y$, write its evaluation as $e:A_0\\to\\mathbf F_{q^m}\\subset k$. Then $z^\\sharp(a\\otimes b)=e(a)b$. The maps for $\\Phi^mz$, $Hz$ and $f z$ send $a\\otimes b$ respectively to $e(a)^{q^m}b=e(a)b$, to $e(a)^{q^m}b^{q^m}=e(a)b^{q^m}$, and to $e(a)\\gamma^m(b)=\\gamma^m(e(a)b)$. These are the maps for $z,zr,zh$. Absolute Frobenius and its iterates commute with every scheme map because homomorphisms preserve powers. The inverse convention $\\gamma(b)^q=b$ gives $rh=hr=1$. The factorization cited below gives $\\Phi^m=fH$. These computations concern scheme maps, including the structure-sheaf maps, and therefore glue from affine charts.",
+   "uses": [
+    "def-weil-frobenius-detailed",
+    "def-weil-absolute-frobenius-scheme",
+    "prop-trf-frobenius-factorization"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-thm-trace-transport/prop-trf-karoubi-independence.proof.md",
+    "place": "Last sentence: explicit finite-level local normalization, using the relative-Frobenius construction of Stacks Tag 0F6W (more-morphisms.tex, lemma-relative-frobenius-weakly-etale)."
+   }
+  },
+  {
+   "text": "Use the automorphism inverse-image formula to identify $(h^*N)(U,u)$ with $N(U,hu)$, after transporting the constant coefficient action. Its normalization in the colimit model is explicit: the index $V=(U,hu)$ with the graph $U\\to s\\times_{s,h}V$ is initial in $\\mathcal I_U$, since an index $(V',\\theta)$ gives exactly the map $U\\to V'$ obtained by its second projection. It is terminal in $\\mathcal I_U^{\\mathrm{op}}$, so insertion at it is the evaluation identification; the resulting presheaf is already a sheaf. For module pullback the coefficient isomorphism sends $x\\otimes a$ to $a x$, with inverse $x\\mapsto x\\otimes1$. Consequently this identification uses exactly the insertion and coefficient map in point transport, not a chosen isomorphism of fibers.",
+   "uses": [
+    "lem-weil-proetale-isomorphism-inverse-image",
+    "def-weil-proetale-inverse-image",
+    "def-weil-pbc-proetale-operations"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-thm-trace-transport/prop-trf-karoubi-independence.proof.md",
+    "place": "Last sentence: explicit finite-level local normalization, using the relative-Frobenius construction of Stacks Tag 0F6W (more-morphisms.tex, lemma-relative-frobenius-weakly-etale)."
+   }
+  },
+  {
+   "text": "For successive automorphisms $h_1,h_2$ of $s$, the reindexed sheaf has value $N(U,h_2h_1u)$. On the colimit insertions the ordinary pullback compositor takes the graph for the composite to its two successive graphs; both have second projection the same map to the original site object. Its tensor map takes $x\\otimes a$ to $(x\\otimes1)\\otimes a$. Thus the canonical compositor identifies the successive reindexings with reindexing by the composite, including coefficient action; constants compose by [lem-trf-constant-coefficient-composition]. In particular the identity reindexing is the canonical identity-pullback identification. These are the termwise representatives of the derived compositors specified in [lem-weil-pbc-proetale-derived-pullback-composition].",
+   "uses": [
+    "def-weil-proetale-inverse-image",
+    "lem-trf-constant-coefficient-composition",
+    "lem-weil-pbc-proetale-derived-pullback-composition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-thm-trace-transport/prop-trf-karoubi-independence.proof.md",
+    "place": "Last sentence: explicit finite-level local normalization, using the relative-Frobenius construction of Stacks Tag 0F6W (more-morphisms.tex, lemma-relative-frobenius-weakly-etale)."
+   }
+  },
+  {
+   "text": "Compute the normalization of $\\tau_s$ for an arbitrary module sheaf $M$. The trivialization in [lem-pur-frobenius-trivialization-pullback] is adjoint to the direct-image map $\\delta_M:M\\to r_*M$ given by inverse restriction along relative Frobenius. Evaluate the adjoint unit equation of [lem-weil-pbc-conjugate-iso-unit-equation] at the object $V=(s,r)$ of $s_{\\mathrm{proet}}$. The object $B_rV$ has both projections equal to the identity under its identification with $(s,1)$, since $r$ is an automorphism. Relative Frobenius $V\\to B_rV$ is then the underlying map $r$, so $\\delta_M(V)$ is restriction along $r^{-1}:(s,1)\\to(s,r)$. The inverse-image unit at $V$ is the identity in the reindexing model of Step 2. The unit equation therefore says precisely that $\\tau_{s,M}(s,1):M(s,r)\\to M(s,1)$ is $\\operatorname{res}_{r^{-1}}$. This derives its direction from the specified adjunction normalization.",
+   "uses": [
+    "lem-pur-frobenius-trivialization-pullback",
+    "lem-weil-pbc-conjugate-iso-unit-equation",
+    "def-weil-proetale-inverse-image"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-thm-trace-transport/prop-trf-karoubi-independence.proof.md",
+    "place": "Last sentence: explicit finite-level local normalization, using the relative-Frobenius construction of Stacks Tag 0F6W (more-morphisms.tex, lemma-relative-frobenius-weakly-etale)."
+   }
+  },
+  {
+   "text": "Apply Step 4 to $M=h^*N$. Reindexing gives $M(s,r)=N(s,hr)=N(s,1)$ and $M(s,1)=N(s,h)$. Restriction along $r^{-1}$ becomes restriction along the arrow $h:(s,h)\\to(s,1)$ for $N$. Hence $\\tau_{s,h^*N}$, preceded by the canonical $N\\cong r^*h^*N$, is exactly $\\operatorname{res}_h$ under Step 2. This proves the requested sheaf formula for every $N$, without a constructibility or flatness condition.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-thm-trace-transport/prop-trf-karoubi-independence.proof.md",
+    "place": "Last sentence: explicit finite-level local normalization, using the relative-Frobenius construction of Stacks Tag 0F6W (more-morphisms.tex, lemma-relative-frobenius-weakly-etale)."
+   }
+  },
+  {
+   "text": "Under Step 2, the definition [def-weil-frobenius-point-transport] sends a section to its restriction along $g_s$, since its subsequent insertion is the reindexing identification and $x\\mapsto x\\otimes1$ is the coefficient identification. Induct on $j$ for the asserted formula for $I_N^{(j)}$. For $j=0$ it is identity. If it is restriction from $N(s,1)$ to $N(s,g_s^j)$, the next transport on $(g_s^*)^jN$ is restriction along $g_s:(s,g_s^{j+1})\\to(s,g_s^j)$. Presheaf functoriality makes the composite restriction along $g_s^{j+1}$. Step 3 supplies exactly the canonical compositor used in this induction. Taking $j=m$ identifies Step 5 with $I_N^{(m)}$.",
+   "uses": [
+    "def-weil-frobenius-point-transport",
+    "def-weil-proetale-inverse-image"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-thm-trace-transport/prop-trf-karoubi-independence.proof.md",
+    "place": "Last sentence: explicit finite-level local normalization, using the relative-Frobenius construction of Stacks Tag 0F6W (more-morphisms.tex, lemma-relative-frobenius-weakly-etale)."
+   }
+  },
+  {
+   "text": "For the remaining comparison keep $P=Lz^*$, and write $R=Lr^*$, $V=Lh^*$ and $S=LH^*$. Let $c_{u,v}:L(vu)^*\\to Lu^*Lv^*$ denote the specified compositor. Define $d_K=c_{r,z,TK}c_{z,H,TK}^{-1}:PSTK\\to RPTK$, using $Hz=zr$, and $e_N=c_{r,h,N}:N\\to RVN$, using $hr=1$. Let $v_K:VPK\\to PTK$ be the return comparison of the item. Let $b_K:PK\\to PL(\\Phi^m)^*K$ be the pullback-composition map for $\\Phi^m z=z$, so that $\\rho_K=\\Gamma(s,b_K)$. Put $a_K=P(c_{H,f,K})b_K:PK\\to PSTK$. Associativity of the canonical compositors gives\n$$d_K a_K=R(v_K)e_{PK}:PK\\longrightarrow RPTK.$$\nIndeed, the left side composes the comparisons for the factorization $fHz=z$ through $H z=z r$; the right side composes them through $f z=z h$ and $hr=1$. The triple-composition identity of [lem-trf-derived-pullback-coherence], applied to these factorizations, identifies both with the comparison for the same composite $fHz=z$, followed by $c_{r,z,TK}$. The termwise maps have the same nested colimit indices and send $x\\otimes a$ to $(x\\otimes1)\\otimes a$, so this identity also holds on those representatives.",
+   "uses": [
+    "lem-weil-pbc-proetale-derived-pullback-composition",
+    "lem-trf-derived-pullback-coherence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-thm-trace-transport/prop-trf-karoubi-independence.proof.md",
+    "place": "Last sentence: explicit finite-level local normalization, using the relative-Frobenius construction of Stacks Tag 0F6W (more-morphisms.tex, lemma-relative-frobenius-weakly-etale)."
+   }
+  },
+  {
+   "text": "Apply the arbitrary-pullback naturality equation of [lem-pur-frobenius-trivialization-pullback] to $z:s\\to X$, exponent $am$, and input $TK$. With $d$ as above it reads $P(\\tau_{X,TK})=\\tau_{s,PTK}d_K$. Naturality of $\\tau_s$ in the morphism $v_K:VPK\\to PTK$ reads $\\tau_{s,PTK}R(v_K)=v_K\\tau_{s,VPK}$. The finite coefficient ring and characteristic-$p$ schemes satisfy exactly the hypotheses of that node; its naturality permits the geometric point $z$ without an additional smoothness or etaleness hypothesis.",
+   "uses": [
+    "lem-pur-frobenius-trivialization-pullback"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-thm-trace-transport/prop-trf-karoubi-independence.proof.md",
+    "place": "Last sentence: explicit finite-level local normalization, using the relative-Frobenius construction of Stacks Tag 0F6W (more-morphisms.tex, lemma-relative-frobenius-weakly-etale)."
+   }
+  },
+  {
+   "text": "Substitute the prescribed $\\kappa_K^{(m)}=\\tau_{X,TK}c_{H,f,K}$. Steps 7 and 8 yield\n$$P(\\kappa_K^{(m)})b_K=\\tau_{s,PTK}d_K a_K=\\tau_{s,PTK}R(v_K)e_{PK}=v_K\\tau_{s,VPK}e_{PK}.$$\nApply $\\Gamma(s,-)$. By Steps 5 and 6 the last two factors become $I_{PK}^{(m)}$. Since $\\operatorname{Fib}_{s,\\Lambda}$ is exactly termwise $\\Gamma(s,-)$ at finite level, the result is\n$$J(\\kappa_K^{(m)})\\rho_K=\\operatorname{Fib}_{s,\\Lambda}(v_K)I_{PK}^{(m)}.$$\nThe identification $T=G^m$ is the iterated compositor, so Step 3 and the triple associativity identity also give the requested iterate convention.",
+   "uses": [
+    "def-weil-finite-coefficient-point"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-thm-trace-transport/prop-trf-karoubi-independence.proof.md",
+    "place": "Last sentence: explicit finite-level local normalization, using the relative-Frobenius construction of Stacks Tag 0F6W (more-morphisms.tex, lemma-relative-frobenius-weakly-etale)."
+   }
+  },
+  {
+   "text": "All maps in Steps 2–6 are maps of module sheaves natural in $N$, hence apply degreewise to arbitrary complexes and commute with their differentials. The naturality in Step 8 comes from equality of relative-Frobenius maps under base change: their first projections are the absolute powers and their second projections the structure maps; thus it is an equality of the specified ordinary module maps before applying the exact termwise derived construction. Step 7 was checked with the normalized termwise compositors. Choose a flat-term K-flat representative by [lem-pc-kflat-resolution]; iterated pullbacks remain flat-term K-flat by [lem-weil-pbc-ringed-pullback-preserves-kflat]. Exactness of finite constant-coefficient pullback and of point sections allows these maps and equalities to descend through localization, using [lem-weil-pbc-localization-universal-property]. Thus the displayed identity is already the specified chain-map identity on these representatives. Every coefficient comparison preserves $1$ and every remaining operation is restriction or colimit insertion; no scalar has been introduced. The argument applies to all complexes, hence in particular to the stated bounded constructible objects.",
+   "uses": [
+    "lem-pur-frobenius-trivialization-pullback",
+    "lem-weil-pbc-proetale-derived-pullback-composition",
+    "lem-pc-kflat-resolution",
+    "lem-weil-pbc-ringed-pullback-preserves-kflat",
+    "prop-weil-pbc-proetale-constant-exact",
+    "lem-weil-point-proetale-sections-exact",
+    "lem-weil-pbc-localization-universal-property"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-thm-trace-transport/prop-trf-karoubi-independence.proof.md",
+    "place": "Last sentence: explicit finite-level local normalization, using the relative-Frobenius construction of Stacks Tag 0F6W (more-morphisms.tex, lemma-relative-frobenius-weakly-etale)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-frobenius-detailed",
+  "def-weil-absolute-frobenius-scheme",
+  "prop-trf-frobenius-factorization",
+  "lem-weil-proetale-isomorphism-inverse-image",
+  "def-weil-proetale-inverse-image",
+  "def-weil-pbc-proetale-operations",
+  "lem-trf-constant-coefficient-composition",
+  "lem-weil-pbc-proetale-derived-pullback-composition",
+  "lem-pur-frobenius-trivialization-pullback",
+  "lem-weil-pbc-conjugate-iso-unit-equation",
+  "def-weil-frobenius-point-transport",
+  "lem-trf-derived-pullback-coherence",
+  "def-weil-finite-coefficient-point",
+  "lem-pc-kflat-resolution",
+  "lem-weil-pbc-ringed-pullback-preserves-kflat",
+  "prop-weil-pbc-proetale-constant-exact",
+  "lem-weil-point-proetale-sections-exact",
+  "lem-weil-pbc-localization-universal-property"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-thm-trace-transport/prop-trf-karoubi-independence.proof.md",
+  "place": "Last sentence: explicit finite-level local normalization, using the relative-Frobenius construction of Stacks Tag 0F6W (more-morphisms.tex, lemma-relative-frobenius-weakly-etale)."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "frobenius.*(trivial|transport)|proetale.*[Ff]robenius",
+   "results": "{\"hits\": 0, \"top\": [], \"note\": \"\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: hits do not state the specified derived pro-etale Frobenius comparison; generic naturality, ordinary limits or Zariski pullback do not specialize to it in one line"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.absoluteFrobenius",
+   "results": "{\"hits\": 0, \"top\": [], \"note\": \"loogle: unknown identifier 'AlgebraicGeometry.absoluteFrobenius'\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: hits do not state the specified derived pro-etale Frobenius comparison; generic naturality, ordinary limits or Zariski pullback do not specialize to it in one line"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Fixed point pullback comparison for geometric Frobenius using absolute Frobenius trivialization",
+   "results": "{\"hits\": 8, \"top\": [\"CategoryTheory.Limits.pullbackComparison\", \"CategoryTheory.Limits.instIsIsoPullbackComparison\", \"Trivialization.pullback\", \"Trivialization.pullback_linear\", \"Trivialization.pullback_apply\", \"CategoryTheory.Limits.pullbackComparison_comp_fst\", \"FiberBundle.pullback_trivializationAt'\", \"FiberBundle.pullback_trivializationAtlas'\"], \"note\": \"\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: hits do not state the specified derived pro-etale Frobenius comparison; generic naturality, ordinary limits or Zariski pullback do not specialize to it in one line"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived inverse image along an isomorphism of schemes evaluated at the final object identifies Frobenius cancellation with restriction",
+   "results": "{\"hits\": 8, \"top\": [\"AlgebraicGeometry.Scheme.Hom.inv_app\", \"AlgebraicGeometry.Scheme.inv_app\", \"AlgebraicGeometry.Scheme.Modules.restrictFunctorComp_inv_app_app\", \"AlgebraicGeometry.Scheme.restrictFunctorΓ_inv_app\", \"AlgebraicGeometry.Scheme.restrictFunctorΓ\", \"AlgebraicGeometry.Scheme.Hom.inv_appTop\", \"AlgebraicGeometry.Scheme.ΓSpecIso_inv_naturality\", \"AlgebraicGeometry.Scheme.inv_appTop\"], \"note\": \"\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: hits do not state the specified derived pro-etale Frobenius comparison; generic naturality, ordinary limits or Zariski pullback do not specialize to it in one line"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Canonical absolute Frobenius trivialization on the final object of an algebraically closed proetale point equals inverse restriction and identifies fixed point transport",
+   "results": "{\"hits\": 8, \"top\": [\"FiniteField.frobeniusAlgEquiv_symm_apply\", \"StandardEtalePair.homEquiv_symm_apply\", \"FiniteField.frobeniusAlgEquivOfAlgebraic_symm_apply\", \"FiniteField.frobeniusAlgEquiv\", \"frobenius_comp_frobeniusEquiv_symm\", \"coe_frobenius_comp_coe_frobeniusEquiv_symm\", \"frobeniusEquiv_symm_comp_frobenius\", \"frobeniusEquiv_symm_apply_frobenius\"], \"note\": \"\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: hits do not state the specified derived pro-etale Frobenius comparison; generic naturality, ordinary limits or Zariski pullback do not specialize to it in one line"
+  },
+  {
+   "tool": "grep",
+   "query": "relativeFrobenius|absoluteFrobenius|pro[Ee]tale|[Pp]roetale",
+   "results": "{\"hits\": 10, \"top\": [\"Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean\", \"Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean\", \"Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean\", \"Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean\", \"Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean\", \"Mathlib/AlgebraicGeometry/Sites/Proetale.lean\", \"Mathlib/AlgebraicGeometry/Sites/Proetale.lean\", \"Mathlib/AlgebraicGeometry/Sites/Proetale.lean\"], \"note\": \"\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: hits do not state the specified derived pro-etale Frobenius comparison; generic naturality, ordinary limits or Zariski pullback do not specialize to it in one line"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"frobenius\"",
+   "results": "{\"hits\": 12, \"top\": [\"frobenius\", \"iterateFrobenius\", \"iterateFrobenius_one\", \"iterateFrobenius_zero\", \"iterateFrobenius_zero_apply\", \"frobenius_def\", \"iterateFrobenius_add\", \"iterateFrobenius_one_apply\"], \"note\": \"\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: hits do not state the specified derived pro-etale Frobenius comparison; generic naturality, ordinary limits or Zariski pullback do not specialize to it in one line"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Canonical pullback composition and absolute Frobenius cancellation on proetale sheaves",
+   "results": "{\"hits\": 8, \"top\": [\"AlgebraicGeometry.Scheme.Modules.pullbackComp\", \"SheafOfModules.conjugateEquiv_pullbackComp_inv\", \"CategoryTheory.Over.pullbackComp\", \"SheafOfModules.pullbackComp\", \"CategoryTheory.GrothendieckTopology.overMapPullbackComp_hom_app_val_app\", \"CategoryTheory.MorphismProperty.Over.pullbackComp_inv_app_left\", \"CategoryTheory.ChosenPullbacksAlong.comp\", \"CategoryTheory.MorphismProperty.Over.pullbackComp.congr_simp\"], \"note\": \"\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: ring Frobenius and general sheaf compositors do not state the normalized pro-etale point cancellation or its chain-map equality"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Absolute Frobenius trivialization on proetale sheaves evaluated at a geometric point is inverse restriction and agrees with iterated geometric Frobenius transport",
+   "results": "{\"hits\": 8, \"top\": [\"coe_frobeniusEquiv_symm_comp_coe_frobenius\", \"coe_frobenius_comp_coe_frobeniusEquiv_symm\", \"frobeniusEquiv_symm_apply_frobenius\", \"frobenius_apply_frobeniusEquiv_symm\", \"frobeniusEquiv_symm_comp_frobenius\", \"WittVector.StandardOneDimIsocrystal.frobenius_apply\", \"WittVector.Isocrystal.frob\", \"WittVector.Isocrystal.frobenius\"], \"note\": \"\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: ring Frobenius and general sheaf compositors do not state the normalized pro-etale point cancellation or its chain-map equality"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Inverse image of sheaves along a scheme automorphism is reindexing and canonical iterated pullback transport is restriction along the composite automorphism",
+   "results": "{\"hits\": 8, \"top\": [\"AlgebraicGeometry.Scheme.inv_app\", \"AlgebraicGeometry.Scheme.Hom.preimageIso_hom_\\u03b9\", \"AlgebraicGeometry.Scheme.Hom.inv_app\", \"AlgebraicGeometry.Scheme.Hom.preimageIso_inv_\\u03b9_assoc\", \"AlgebraicGeometry.Scheme.Hom.preimageIso_inv_\\u03b9\", \"AlgebraicGeometry.Scheme.restrictFunctor\\u0393_inv_app\", \"AlgebraicGeometry.Scheme.Modules.restrictFunctorComp_inv_app_app\", \"AlgebraicGeometry.Scheme.Modules.inv_app\"], \"note\": \"\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: ring Frobenius and general sheaf compositors do not state the normalized pro-etale point cancellation or its chain-map equality"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-local-frobenius-transport-normalization",
+  "date": "2026-10-22",
+  "group": "Q128"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-thm-trace-transport",
+ "blueprint": {
+  "from": {
+   "node": "prop-trf-karoubi-independence",
+   "place": "Last sentence, Frobenius transport: returned local normalization proof, Steps 1, 3, 4. Absolute-Frobenius normalization from Stacks Tag 0F6W, more-morphisms.tex, lemma-relative-frobenius-weakly-etale.",
+   "via": [
+    "lem-trf-local-frobenius-transport-normalization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-trf-finite-return-frobenius-cancellation",
+  "worker": "stage1",
+  "summary": "Explicit affine return identities, colimit-normalized automorphism reindexing, the adjoint final-object Frobenius formula, induction for successive transport, and a compositor/naturality calculation prove the finite chain-map cancellation with no scalar. No new nodes.",
+  "blueprint": "prop-trf-karoubi-independence.proof.md last sentence: finite coefficient local Frobenius transport normalization, realizing the returned local-normalization Steps 1, 3 and 4.",
+  "tool_uses": [
+   {
+    "node": "prop-trf-frobenius-factorization",
+    "why": "Generic Factorization of the absolute Frobenius used for its stated normalized pullback, coefficient, resolution or localization property; this unit has no replacement for that input and its Frobenius transport route is unchanged."
+   },
+   {
+    "node": "lem-weil-proetale-isomorphism-inverse-image",
+    "why": "Generic Inverse image along an isomorphism of schemes on the pro-etale site used for its stated normalized pullback, coefficient, resolution or localization property; this unit has no replacement for that input and its Frobenius transport route is unchanged."
+   },
+   {
+    "node": "lem-trf-constant-coefficient-composition",
+    "why": "Generic Canonical pro-etale constant coefficient maps respect composition used for its stated normalized pullback, coefficient, resolution or localization property; this unit has no replacement for that input and its Frobenius transport route is unchanged."
+   },
+   {
+    "node": "lem-weil-pbc-proetale-derived-pullback-composition",
+    "why": "Generic Composition of derived pro-etale module pullbacks used for its stated normalized pullback, coefficient, resolution or localization property; this unit has no replacement for that input and its Frobenius transport route is unchanged."
+   },
+   {
+    "node": "lem-pur-frobenius-trivialization-pullback",
+    "why": "Generic Pullback naturality of the canonical absolute-Frobenius trivialization used for its stated normalized pullback, coefficient, resolution or localization property; this unit has no replacement for that input and its Frobenius transport route is unchanged."
+   },
+   {
+    "node": "lem-weil-pbc-conjugate-iso-unit-equation",
+    "why": "Generic An isomorphism of right adjoints determines a unique isomorphism of left adjoints compatible with the units used for its stated normalized pullback, coefficient, resolution or localization property; this unit has no replacement for that input and its Frobenius transport route is unchanged."
+   },
+   {
+    "node": "lem-trf-derived-pullback-coherence",
+    "why": "Generic Associativity of finite pro-etale derived pullback comparisons used for its stated normalized pullback, coefficient, resolution or localization property; this unit has no replacement for that input and its Frobenius transport route is unchanged."
+   },
+   {
+    "node": "lem-pc-kflat-resolution",
+    "why": "Generic Existence of K-flat resolutions on a ringed site used for its stated normalized pullback, coefficient, resolution or localization property; this unit has no replacement for that input and its Frobenius transport route is unchanged."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-pullback-preserves-kflat",
+    "why": "Generic Ringed pullback kflat used for its stated normalized pullback, coefficient, resolution or localization property; this unit has no replacement for that input and its Frobenius transport route is unchanged."
+   },
+   {
+    "node": "prop-weil-pbc-proetale-constant-exact",
+    "why": "Generic Exactness of the pro-etale inverse image for constant coefficients used for its stated normalized pullback, coefficient, resolution or localization property; this unit has no replacement for that input and its Frobenius transport route is unchanged."
+   },
+   {
+    "node": "lem-weil-point-proetale-sections-exact",
+    "why": "Generic Sections over an algebraically closed point are exact on the pro-etale site used for its stated normalized pullback, coefficient, resolution or localization property; this unit has no replacement for that input and its Frobenius transport route is unchanged."
+   },
+   {
+    "node": "lem-weil-pbc-localization-universal-property",
+    "why": "Generic Universal property of a localization of categories: functors and natural transformations inverting W factor through it used for its stated normalized pullback, coefficient, resolution or localization property; this unit has no replacement for that input and its Frobenius transport route is unchanged."
+   }
+  ]
+ },
+ "tool_uses": [
+  "prop-trf-frobenius-factorization",
+  "lem-weil-proetale-isomorphism-inverse-image",
+  "lem-trf-constant-coefficient-composition",
+  "lem-weil-pbc-proetale-derived-pullback-composition",
+  "lem-pur-frobenius-trivialization-pullback",
+  "lem-weil-pbc-conjugate-iso-unit-equation",
+  "lem-trf-derived-pullback-coherence",
+  "lem-pc-kflat-resolution",
+  "lem-weil-pbc-ringed-pullback-preserves-kflat",
+  "prop-weil-pbc-proetale-constant-exact",
+  "lem-weil-point-proetale-sections-exact",
+  "lem-weil-pbc-localization-universal-property"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q85-7d1cb665f",
+  "group": "Q85",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q85-7d1cb665f (reviewer sub-agent of L); spot-checked: PASS with no fixes. I read the item in full. Its statement and stmt_deps are identical to the node Q128 created; the delivery has no new nodes and adds a 10-step proof to a node that had none. Step 1: I recomputed the affine charts. z♯(a⊗b)=e(a)b gives Φ^m z=z, Hz=zr and g^m z=z g_s^m, and Φ^m=fH comes from prop-trf-frobenius-factorization. Step 2: the initial-index colimit argument agrees with the coprojection in def-weil-frobenius-point-transport. Step 4: for V=(s,r), B_rV is (s,1) and relative Frobenius is the site map r, so τ_{s,M}(s,1)=res_{r^{-1}}. This direction agrees with the existing stalk formula of lem-trf-frobenius-stalk-trivialization-normalization ([V,v,a]↦[V,vδ^{-1},a]). Steps 5–6: res_h equals the m-fold point transport res_{g_s^m}, checked by induction. Step 7: I recomputed both sides from the associativity of lem-trf-derived-pullback-coherence; each equals c_{r,z,T}c_{zr,f}. The unit coherence c_{1,z}=id is not named but follows from the termwise compositors, so I accept it as elementary. Step 8: the statement of lem-pur-frobenius-trivialization-pullback with u=z and b=am gives d with the correct direction. Step 10: the chain-level claim holds because τ and the compositors are termwise. Stacks 0F6W is read at more-morphisms.tex:19215; no SGA is cited. All off-unit tool_uses are generic and accepted. The duplicate search found nothing that states the item: lem-trf-fixed-point-stalk-transport-cocycle proves only naturality and the cocycle, and the stalk and cup-product nodes state other things. The parent lem-trf-local-frobenius-transport-normalization uses exactly the delivered display."
+ },
+ "lean": {
+  "module": "Sheaf.SixFunctors.FiniteReturnFrobeniusCancellation",
+  "declaration": "WeilConjectures.TraceFormulaCoefficientConventions.finiteReturn_frobenius_cancellation",
+  "declarations": [
+   "WeilConjectures.TraceFormulaCoefficientConventions.returnBasePower",
+   "WeilConjectures.TraceFormulaCoefficientConventions.returnBasePowerIsIso",
+   "WeilConjectures.TraceFormulaCoefficientConventions.returnAbsolute",
+   "WeilConjectures.TraceFormulaCoefficientConventions.returnAbsoluteTrivialization",
+   "WeilConjectures.TraceFormulaCoefficientConventions.returnTau",
+   "WeilConjectures.TraceFormulaCoefficientConventions.returnTrivializedComposition",
+   "WeilConjectures.TraceFormulaCoefficientConventions.returnKappa",
+   "WeilConjectures.TraceFormulaCoefficientConventions.returnPointChainModel",
+   "WeilConjectures.TraceFormulaCoefficientConventions.returnPointChainRaw",
+   "WeilConjectures.TraceFormulaCoefficientConventions.returnPointChainPositive",
+   "WeilConjectures.TraceFormulaCoefficientConventions.returnPointChainOne",
+   "WeilConjectures.TraceFormulaCoefficientConventions.returnComplexPullback",
+   "WeilConjectures.TraceFormulaCoefficientConventions.returnComplexPullbackId",
+   "WeilConjectures.TraceFormulaCoefficientConventions.returnComplexPullbackComp",
+   "WeilConjectures.TraceFormulaCoefficientConventions.returnTransportPowers",
+   "WeilConjectures.TraceFormulaCoefficientConventions.returnPointChainPowerRaw",
+   "WeilConjectures.TraceFormulaCoefficientConventions.returnPointChainPower",
+   "WeilConjectures.TraceFormulaCoefficientConventions.returnFixedChain",
+   "WeilConjectures.TraceFormulaCoefficientConventions.returnSquareChain",
+   "WeilConjectures.TraceFormulaCoefficientConventions.returnRestriction",
+   "WeilConjectures.TraceFormulaCoefficientConventions.returnRestrictionInverse",
+   "WeilConjectures.TraceFormulaCoefficientConventions.returnSectionInsertion",
+   "WeilConjectures.TraceFormulaCoefficientConventions.returnPointAbsolute",
+   "WeilConjectures.TraceFormulaCoefficientConventions.returnDerivedKappa",
+   "WeilConjectures.TraceFormulaCoefficientConventions.returnDerivedFixed",
+   "WeilConjectures.TraceFormulaCoefficientConventions.finiteReturn_frobenius_cancellation"
+  ],
+  "file": "lean/Sheaf/SixFunctors/FiniteReturnFrobeniusCancellation.lean",
+  "statement": "theorem finiteReturn_frobenius_cancellation (T : TraceFormulaCoefficientConventions.{u}) (m : ℕ) (hm : 1 ≤ m) (y : T.datum.extensionPoints T.X₀ m hm) : ∃ wPhi : localExtensionPoint T.datum T.X₀ m hm y ≫ T.datum.schemeFrobeniusIterate T.X₀ m = localExtensionPoint T.datum T.X₀ m hm y, ∃ wH : localExtensionPoint T.datum T.X₀ m hm y ≫ T.returnAbsolute (W := T.geometricBaseChange) (T.structureMap ≫ Spec.map (CommRingCat.ofHom (algebraMap T.datum.k₀ T.datum.k))) m = T.returnAbsolute (Spec.map (CommRingCat.ofHom (algebraMap T.datum.k₀ T.datum.k))) m ≫ localExtensionPoint T.datum T.X₀ m hm y, ∃ wG : localExtensionPoint T.datum T.X₀ m hm y ≫ HPow.hPow (α := End T.geometricBaseChange) (T.datum.geometricGaloisFrobenius T.X₀) m = T.returnBasePower m ≫ localExtensionPoint T.datum T.X₀ m hm y, ∃ wRH : T.returnAbsolute (Spec.map (CommRingCat.ofHom (algebraMap T.datum.k₀ T.datum.k))) m ≫ T.returnBasePower m = 𝟙 (Spec (.of T.datum.k)), (T.returnBasePower m ≫ T.returnAbsolute (Spec.map (CommRingCat.ofHom (algebraMap T.datum.k₀ T.datum.k))) m = 𝟙 (Spec (.of T.datum.k))) ∧ ∃ wFactor : T.datum.schemeFrobeniusIterate T.X₀ m = T.returnAbsolute (W := T.geometricBaseChange) (T.structureMap ≫ Spec.map (CommRingCat.ofHom (algebraMap T.datum.k₀ T.datum.k))) m ≫ HPow.hPow (α := End T.geometricBaseChange) (T.datum.geometricGaloisFrobenius T.X₀) m, (∀ (N : proEtaleRingModules (Spec (.of T.datum.k)) (proEtaleConstantRing (Spec (.of T.datum.k)) T.coefficientRing)) (x : N.val.obj (op (ProEt.mk (𝟙 (Spec (.of T.datum.k)))))), ((T.returnPointAbsolute m wRH).app N).val.app (op (ProEt.mk (𝟙 (Spec (.of T.datum.k))))) x = T.returnSectionInsertion m N (N.val.map (T.returnRestriction m).op x) ∧ N.val.map (T.returnRestrictionInverse m wRH).op (N.val.map (T.returnRestriction m).op x) = x) ∧ (∀ (N : proEtaleRingModules (Spec (.of T.datum.k)) (proEtaleConstantRing (Spec (.of T.datum.k)) T.coefficientRing)) (x : N.val.obj (op ((proEtaleIsoPostcompose (T.returnBasePower m)).obj (ProEt.mk (𝟙 (Spec (.of T.datum.k))))))), N.val.map (T.returnRestriction m).op (N.val.map (T.returnRestrictionInverse m wRH).op x) = x) ∧ (∀ N : CochainComplex (proEtaleRingModules (Spec (.of T.datum.k)) (proEtaleConstantRing (Spec (.of T.datum.k)) T.coefficientRing)) ℤ, ((pointFiniteSections T.datum.k T.coefficientRing).mapHomologicalComplex (.up ℤ)).map ((NatTrans.mapHomologicalComplex (T.returnPointAbsolute m wRH) (.up ℤ)).app N) = T.returnPointChainPower m N) ∧ (∀ K : T.boundedConstructible.FullSubcategory, T.graphPointFibre.map ((T.returnDerivedFixed (localExtensionPoint T.datum T.X₀ m hm y) m wPhi).app K.obj) ≫ T.graphPointFibre.map ((sfIntrinsicDerivedPullback T.coefficientRing (localExtensionPoint T.datum T.X₀ m hm y)).map ((T.returnDerivedKappa m hm).app K.obj)) = T.graphPointTransportPower m ((sfIntrinsicDerivedPullback T.coefficientRing (localExtensionPoint T.datum T.X₀ m hm y)).obj K.obj) ≫ T.graphPointFibre.map ((sfIntrinsicDerivedSquarePullback T.coefficientRing (T.returnBasePower m) (localExtensionPoint T.datum T.X₀ m hm y) (localExtensionPoint T.datum T.X₀ m hm y) (HPow.hPow (α := End T.geometricBaseChange) (T.datum.geometricGaloisFrobenius T.X₀) m) wG.symm).hom.app K.obj)) ∧ (∀ K : CochainComplex (proEtaleRingModules T.geometricBaseChange (proEtaleConstantRing T.geometricBaseChange T.coefficientRing)) ℤ, T.boundedConstructible (DerivedCategory.Q.obj K) → CochainComplex.IsKFlatIndependentCoefficients (J := ProEt.topology T.geometricBaseChange) (R := proEtaleConstantRing T.geometricBaseChange T.coefficientRing) K → (∀ i : ℤ, SheafOfModules.IsFlatOnSite.{u + 1, u, u + 1, u + 1} (J := ProEt.topology T.geometricBaseChange) (R := proEtaleConstantRing T.geometricBaseChange T.coefficientRing) (K.X i)) → ((pointFiniteSections T.datum.k T.coefficientRing).mapHomologicalComplex (.up ℤ)).map (returnFixedChain T.coefficientRing (localExtensionPoint T.datum T.X₀ m hm y) (T.datum.schemeFrobeniusIterate T.X₀ m) wPhi K) ≫ ((pointFiniteSections T.datum.k T.coefficientRing).mapHomologicalComplex (.up ℤ)).map (((sfIntrinsicPullback T.coefficientRing (localExtensionPoint T.datum T.X₀ m hm y)).mapHomologicalComplex (.up ℤ)).map ((NatTrans.mapHomologicalComplex (T.returnKappa m wFactor) (.up ℤ)).app K)) = T.returnPointChainPower m (((sfIntrinsicPullback T.coefficientRing (localExtensionPoint T.datum T.X₀ m hm y)).mapHomologicalComplex (.up ℤ)).obj K) ≫ ((pointFiniteSections T.datum.k T.coefficientRing).mapHomologicalComplex (.up ℤ)).map (returnSquareChain T.coefficientRing (T.returnBasePower m) (localExtensionPoint T.datum T.X₀ m hm y) (HPow.hPow (α := End T.geometricBaseChange) (T.datum.geometricGaloisFrobenius T.X₀) m) wG K))",
+  "branch": "newtargets-dag",
+  "by": "Q125",
+  "date": "2026-10-22",
+  "existing": false,
+  "note": "The final-object normalization for arbitrary sheaves, inverse restriction, iterated specified chain transport, derived cancellation using the selected multiplicative comparison, and pre-localization equality on flat-term K-flat representatives. Canonical unit-preserving presentation changes connect the recorded tensor and intrinsic pullbacks. Added only landed statement dependencies for the existing coefficient bundle, geometric point, point-transport powers, coordinate comparison and K-flat predicate. Repair of e5738ce0f537: two new definition nodes own the exact existing ambient finite point transport and normalized pullback-coordinate comparisons; the two exchange theorem nodes are removed from stmt_deps. The five primitive definition owners named by the return are cited. The mathematical statement and published constructions are unchanged."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-23abac879",
+  "group": "Q125",
+  "result": "fix",
+  "note": "Re-delivery of returned head e5738ce0f537. Item Lean module byte-identical (sha256 ee9b18a1); the clause-by-clause substance was accepted before. The H2/H4 return is repaired: theorem stmt_deps lem-trf-graph-frobenius-point-exchange and lem-trf-open-square-exchange removed. New existing:true definition nodes def-trf-finite-point-transport-iteration (graphPointFibre ... graphPointTransportPower, a genuine recursion) and def-trf-finite-pullback-coordinate-comparison (openSquarePullbackModel = choose of an exists-unique with the unit equation, witness leftAdjointUniq; derived version = mapDerivedCategoryNatIso) cover every decl the item uses from those modules; no theorem conclusion used. The five advisory owners are cited. All other snapshot nodes are identical to live. No competing owner. Node statements match the Lean; stmt_deps are definition owners. FIX: lean.statement of def-trf-finite-point-transport-iteration was cut at the first ':=' inside '(α := End ...)'; replaced with the verbatim source signature (normalize-equal to stage2_delivery.declarations). No Lean changed, no compile."
+ }
+}

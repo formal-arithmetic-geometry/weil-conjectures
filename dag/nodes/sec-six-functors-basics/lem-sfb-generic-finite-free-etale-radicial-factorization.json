@@ -1,0 +1,393 @@
+{
+ "id": "lem-sfb-generic-finite-free-etale-radicial-factorization",
+ "kind": "statement",
+ "title": "Generic etale-radicial factorization of a finite locally free scheme",
+ "statement": "Let $R$ be a nonzero Noetherian integral domain [def-weil-pbc-noetherian-ring], let $S=\\operatorname{Spec}R$ [def-weil-affine-spectrum], and let $p:E\\to S$ be finite locally free [def-pc-scheme, def-pc-finite-locally-free]. There exist $0\\ne f\\in R$ and an affine scheme $T$ with a factorization\n$$E\\times_S\\operatorname{Spec}R[1/f]\\xrightarrow{u}T\\xrightarrow{e}\\operatorname{Spec}R[1/f]$$\nof the restriction of $p$ [def-pc-fibre-product, def-weil-ring-localization-away], such that $e$ is finite etale [def-weil-finite-integral-morphism, def-weil-etale-morphism], and $u$ is finite locally free and a universal homeomorphism [def-weil-universal-homeomorphism]. In particular every base change of $u$ is bijective on underlying points. No reducedness or irreducibility of $E$ and no positive-rank assumption are imposed; when $E=\\varnothing$ one may take $T=\\varnothing$.",
+ "source": {
+  "document": "literature/bosch-lutkebohmert-raynaud-neron-models.pdf",
+  "place": "BLR 7.6 proof of Proposition 5(a), printed p.197 (PDF p.203), generic algebra K prime, maximal etale subalgebra L, and shrinking to etale/radicial factors. Local PDF WANTED; primary-source scan read at https://www.math.stonybrook.edu/~kamenova/homepage_files/Bosch_Raynaud_Neron_Model_tc.pdf. The finite local freeness of u is obtained by spreading its generic finite-dimensional L-module bases; this necessary strengthening is explicit here."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-noetherian-ring",
+  "def-weil-affine-spectrum",
+  "def-pc-scheme",
+  "def-pc-finite-locally-free",
+  "def-pc-fibre-product",
+  "def-weil-ring-localization-away",
+  "def-weil-finite-integral-morphism",
+  "def-weil-etale-morphism",
+  "def-weil-universal-homeomorphism"
+ ],
+ "proof": [
+  {
+   "text": "Write $E=\\operatorname{Spec}A$: this is possible because $p$ is finite, and $A$ is a finite $R$-module by [def-weil-finite-integral-morphism]. A finite module generating family also generates the algebra, so [lem-weil-pbc-finite-type-noetherian-finite-presentation] makes $A$ a finitely presented $R$-algebra. Put $K=\\operatorname{Frac}R$ and $B=A\\otimes_RK$. The affine fibre-product formula [lem-weil-pbc-fibre-product-affine-spectra] identifies $E_K$ with $\\operatorname{Spec}B$; tensoring a finite generating family shows that $B$ is finite-dimensional over $K$. If $A=0$, take $f=1$ and $T=\\varnothing$, with both maps the empty maps. The zero algebra is free with empty basis, hence these maps have the asserted finite local freeness by [lem-weil-pbc-finite-free-algebra-spectrum]; the empty map to the base is etale by [lem-weil-pbc-etale-algebra-finite-product], and the empty identity is a universal homeomorphism. Henceforth allow $B=0$ as well; all products below admit the empty index set.",
+   "uses": [
+    "def-weil-finite-integral-morphism",
+    "lem-weil-pbc-finite-type-noetherian-finite-presentation",
+    "lem-weil-pbc-fibre-product-affine-spectra",
+    "lem-weil-pbc-finite-free-algebra-spectrum",
+    "lem-weil-pbc-etale-algebra-finite-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tags 00FP (lemma-Noetherian-finite-type-is-finite-presentation), 00U2(11) (lemma-etale); affine finite-module reduction; empty case"
+   }
+  },
+  {
+   "text": "Let $C=B_K(B)$ be the directed union of finite etale $K$-subalgebras supplied by [lem-sfb-finite-etale-subalgebra-directed-union]. It is a $K$-vector subspace of the finite-dimensional space $B$. Choose a finite $K$-basis of $C$. The finite-subset assertion of that node puts this basis in one finite etale subalgebra $D\\subseteq C$. Since $D$ contains every $K$-linear combination of the basis, $C=D$; thus $C$ itself is finite etale. By [lem-weil-pbc-etale-algebra-over-field-product], $C\\cong\\prod_jL_j$ for finite separable extensions $L_j/K$. Write $\\epsilon_j$ for the corresponding orthogonal idempotents in $B$. The map $B\\to\\prod_j\\epsilon_jB$, $b\\mapsto(\\epsilon_jb)_j$, has inverse $(b_j)\\mapsto\\sum_jb_j$. Each $\\epsilon_jB$ has a finite basis over $L_j$: a finite $K$-spanning family is already an $L_j$-spanning family. By [lem-weil-pbc-finite-free-algebra-spectrum] its spectrum is finite locally free over $\\operatorname{Spec}L_j$. On the disjoint affine components of $\\operatorname{Spec}C$ these are exactly the restrictions of $v:\\operatorname{Spec}B\\to\\operatorname{Spec}C$, so $v$ is finite locally free. This only uses locality in the defining conditions [def-pc-finite-locally-free].",
+   "uses": [
+    "lem-sfb-finite-etale-subalgebra-directed-union",
+    "lem-weil-pbc-etale-algebra-over-field-product",
+    "lem-weil-pbc-finite-free-algebra-spectrum",
+    "def-pc-finite-locally-free"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tags 0CKR/0CKS (lemma-class-weakly-etale-over-field, lemma-max-weakly-etale-subalgebra); algebra.tex Tag 00U3; morphisms.tex Tag 02KB"
+   }
+  },
+  {
+   "text": "Fix any algebraically closed extension field $\\Omega/K$. By [lem-sfb-maximal-ind-etale-field-base-change], $C\\otimes_K\\Omega=B_\\Omega(B\\otimes_K\\Omega)$. Set $H=B\\otimes_K\\Omega$. This finite-dimensional algebra is Artinian: a strict descending chain of ideals is a strict descending chain of finite-dimensional vector subspaces, so has length at most $\\dim_\\Omega H$. Apply [lem-sfb-artinian-ring-finite-local-product] to write $H=\\prod_iH_i$ with nonzero local Artinian factors. Each factor is finite-dimensional over $\\Omega$. Its core $B_\\Omega(H_i)$ is a field by [lem-sfb-ind-etale-core-ring-operations] and [lem-weil-pbc-local-ring-idempotent-zero-one], and is finite-dimensional as a subspace of $H_i$. Therefore its structural embedding of $\\Omega$ is bijective by [lem-weil-pbc-alg-closed-finite-extension-trivial]. The product assertion of [lem-sfb-ind-etale-core-ring-operations] consequently identifies the core inclusion with $\\prod_i\\Omega\\longrightarrow\\prod_iH_i$, componentwise the structural maps.",
+   "uses": [
+    "lem-sfb-maximal-ind-etale-field-base-change",
+    "lem-sfb-artinian-ring-finite-local-product",
+    "lem-sfb-ind-etale-core-ring-operations",
+    "lem-weil-pbc-local-ring-idempotent-zero-one",
+    "lem-weil-pbc-alg-closed-finite-extension-trivial"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tags 0CKU (lemma-change-fields-max-weakly-etale-subalgebra), 0CKT (lemma-properties-of-max-weakly-etale-subalgebra); algebra.tex Tags 00KJ, 00E9; fields.tex Tag 09GR"
+   }
+  },
+  {
+   "text": "Each $H_i$ has exactly one prime by [lem-weil-pbc-artinian-local-unique-prime]. Its residue field is finite-dimensional over $\\Omega$, hence equals $\\Omega$ by [lem-weil-pbc-alg-closed-finite-extension-trivial]. Thus there is exactly one $\\Omega$-algebra homomorphism $H_i\\to\\Omega$: any such map has prime kernel, which must be the maximal ideal, and the induced map on the residue field must fix $\\Omega$. A homomorphism from $\\prod_iH_i$ to the field $\\Omega$ selects exactly one factor, since precisely one of the orthogonal idempotents summing to $1$ maps to $1$. The same is true for $\\prod_i\\Omega$. Step 3 therefore shows that restriction $\\operatorname{Hom}_{\\Omega\\text{-alg}}(H,\\Omega)\\to\\operatorname{Hom}_{\\Omega\\text{-alg}}(C\\otimes_K\\Omega,\\Omega)$ is injective. For an arbitrary field $F$ and two ring maps $B\\to F$ agreeing on $C$ (hence on $K\\subseteq C$, so they are $K$-algebra maps for one $K$-structure on $F$), embed $F$ in an algebraic closure $\\Omega$ using [def-weil-algebraic-closure]. The extended maps $H\\to\\Omega$, $b\\otimes z\\mapsto h(b)z$, agree on $C\\otimes_K\\Omega$ by the tensor universal property [lem-weil-pbc-algebra-tensor-pushout-universal-property]. Hence they agree, so the original maps agree. Every field-valued point of $\\operatorname{Spec}B$ is of this form (or there are no points). The field-point criterion in [def-weil-radicial-morphism] proves that $v$ is universally injective, and that its diagonal is surjective.",
+   "uses": [
+    "lem-weil-pbc-artinian-local-unique-prime",
+    "lem-weil-pbc-alg-closed-finite-extension-trivial",
+    "def-weil-algebraic-closure",
+    "lem-weil-pbc-algebra-tensor-pushout-universal-property",
+    "def-weil-radicial-morphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 01S4 (lemma-universally-injective), using more-algebra.tex Tag 0CKU and algebra.tex Tag 00KH; field-valued point argument"
+   }
+  },
+  {
+   "text": "The inclusion $C\\subseteq B$ is integral: $B$ is finite as a $C$-module, since a finite $K$-spanning family still spans over $C$, and [lem-weil-pbc-finite-algebra-is-integral] applies. Lying over [lem-weil-pbc-integral-injective-lying-over] proves that $v$ is surjective. This includes $C=B=0$, when surjectivity is empty. We have proved separately the three generic properties needed below: finite local freeness of $v$, surjectivity of $v$, and surjectivity of $\\Delta_v$.",
+   "uses": [
+    "lem-weil-pbc-finite-algebra-is-integral",
+    "lem-weil-pbc-integral-injective-lying-over"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tags 00GK (lemma-finite-is-integral), 00GQ (lemma-integral-overring-surjective)"
+   }
+  },
+  {
+   "text": "Order the nonzero elements $g$ of $R$ by divisibility (equivalently use their directed preorder); all upper bounds can be chosen as products and remain nonzero. By [lem-weil-pbc-localization-colimit-principal-localizations], $K=\\varinjlim_{g\\ne0}R_g$. By [lem-weil-pbc-limit-affine-transition], $\\operatorname{Spec}K=\\varprojlim_{g\\ne0}\\operatorname{Spec}R_g$. These are small index categories, being formed from a set of elements of $R$. Descend the finite etale $K$-algebra $C$ using [lem-weil-pbc-etale-algebra-filtered-colimit-descent]: for some nonzero $g$, obtain an etale $R_g$-algebra $C_g$ and an identification $C_g\\otimes_{R_g}K\\cong C$. By [lem-weil-pbc-etale-ring-map-iff-etale-affine], the etale morphism $\\operatorname{Spec}C_g\\to\\operatorname{Spec}R_g$ makes $C_g$ a finitely presented $R_g$-algebra. Both $C_g$ and $A_g$ are finitely presented over $R_g$ (for $A_g$, localize the presentation from step 1). By [lem-weil-pbc-colimit-category-fp-algebras](2), after replacing $g$ by a nonzero multiple, the inclusion $C\\hookrightarrow B$ descends to an $R_g$-algebra homomorphism $h_g:C_g\\to A_g$. The affine fibre-product formula identifies its generic map with $v$. Injectivity of $h_g$ is neither assumed nor needed.",
+   "uses": [
+    "lem-weil-pbc-localization-colimit-principal-localizations",
+    "lem-weil-pbc-limit-affine-transition",
+    "lem-weil-pbc-etale-algebra-filtered-colimit-descent",
+    "lem-weil-pbc-colimit-category-fp-algebras",
+    "lem-weil-pbc-fibre-product-affine-spectra",
+    "lem-weil-pbc-etale-ring-map-iff-etale-affine"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/limits.tex",
+    "place": "Tags 01YX/01YW (directed inverse limits of schemes); algebra.tex Tags 00CR, 00U2(9), 05N9(2)"
+   }
+  },
+  {
+   "text": "For completeness the descended arrow has the finite-presentation hypothesis required by the descent lemmas. Put $R'=R_g$, and choose presentations $C_g=R'[t_1,\\ldots,t_s]/(q_1,\\ldots,q_a)$ and $A_g=R'[x_1,\\ldots,x_n]/(r_1,\\ldots,r_b)$. Choose polynomials $P_i(x)$ representing $h_g(t_i)$. Then $A_g$ is the $C_g$-algebra $$C_g[x_1,\\ldots,x_n]/(r_1,\\ldots,r_b,t_1-P_1(x),\\ldots,t_s-P_s(x)).$$ Indeed substitution of $t_i=P_i(x)$ recovers its given $R'$-presentation; each $q_j(P(x))$ already vanishes modulo the $r_k$ because $h_g$ is a homomorphism. Its diagonal is induced by $A_g\\otimes_{C_g}A_g\\to A_g$, multiplication, whose kernel is generated by the finitely many $x_i\\otimes1-1\\otimes x_i$: quotienting by these relations identifies the two copies of every polynomial in the generators. Thus this diagonal too is of finite presentation. All schemes in these two arrows, and the base, are affine, hence quasi-compact and quasi-separated. The same holds at every later localization.",
+   "uses": [
+    "def-weil-pbc-finitely-presented-algebra",
+    "lem-weil-pbc-fibre-product-affine-spectra",
+    "lem-weil-pbc-algebra-tensor-pushout-universal-property"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Elementary generator-and-relation presentation calculation; algebra.tex Tag 05N9 context, and schemes.tex Tags 01I4/01JQ affine fibre-product formula"
+   }
+  },
+  {
+   "text": "Apply [lem-weil-pbc-descend-finite] to $\\operatorname{Spec}C_g\\to\\operatorname{Spec}R_g$, whose generic fibre is finite. Apply [lem-weil-pbc-descend-surjective] twice, to $u_g=\\operatorname{Spec}h_g$ and its relative diagonal, using steps 4 and 5. In each application the base system is $\\operatorname{Spec}R_h$ for nonzero multiples $h$ of $g$, with limit $\\operatorname{Spec}K$; step 7 verifies the locally finite presentation and qcqs hypotheses. Take a common nonzero multiple of the finitely many indices. Finiteness persists under further localization, since a finite module generating family localizes to a generating family. Surjectivity, both for the arrow and for its diagonal, persists by [lem-weil-pbc-spec-surjective-base-change]; the affine fibre-product formula identifies these further localizations with base changes. The structure map remains etale by [lem-weil-pbc-etale-ring-base-change]. Over this new initial stage apply [lem-weil-pbc-descend-finite-locally-free] to the base changes of $u_g$: its generic fibre is finite locally free by step 2, and step 7 still supplies finite presentation. Let $f$ be the resulting nonzero index. The preceding persistence arguments preserve finiteness and etaleness of the structure map and surjectivity of both $u_f$ and $\\Delta_{u_f}$ at this final stage. Thus $u_f$ is finite locally free without requiring its rank to be constant.",
+   "uses": [
+    "lem-weil-pbc-descend-finite",
+    "lem-weil-pbc-descend-finite-locally-free",
+    "lem-weil-pbc-descend-surjective",
+    "lem-weil-pbc-spec-surjective-base-change",
+    "lem-weil-pbc-fibre-product-affine-spectra",
+    "lem-weil-pbc-etale-ring-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/limits.tex",
+    "place": "Tags 01ZO (lemma-descend-finite-finite-presentation), 06AC (lemma-descend-finite-locally-free), 07RR (lemma-descend-surjective), Situation 081D; algebra.tex Tags 00FI, 00U2(3)"
+   }
+  },
+  {
+   "text": "Set $T=\\operatorname{Spec}C_f$, let $u=\\operatorname{Spec}h_f$, and let $e:T\\to\\operatorname{Spec}R_f$ be its structure morphism. The ring map $h_f$ is an $R_f$-algebra map, so contravariance gives exactly $e\\circ u=p|_{D(f)}$; [lem-weil-pbc-fibre-product-affine-spectra] identifies its source with $E\\times_S\\operatorname{Spec}R_f$. Step 8 makes $e$ finite etale, $u$ finite locally free and surjective, and $\\Delta_u$ surjective. By [def-weil-radicial-morphism], the last assertion makes $u$ universally injective. By [pqf-lem-finite-integral-lft], $u$ is integral; [lem-pc-integral-radicial-surjective-universal-homeomorphism] therefore makes it a universal homeomorphism. The assertion about all base changes being bijective on points follows directly from the definition [def-weil-universal-homeomorphism]. No part of the argument required $E$ reduced, irreducible, or of positive rank.",
+   "uses": [
+    "lem-weil-pbc-fibre-product-affine-spectra",
+    "def-weil-radicial-morphism",
+    "pqf-lem-finite-integral-lft",
+    "lem-pc-integral-radicial-surjective-universal-homeomorphism",
+    "def-weil-universal-homeomorphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tags 01S4, 01WJ (lemma-finite-integral), 04DF (lemma-universal-homeomorphism); assembly of BLR 7.6 Proposition 5(a) generic factorization"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-finite-integral-morphism",
+  "lem-weil-pbc-finite-type-noetherian-finite-presentation",
+  "lem-weil-pbc-fibre-product-affine-spectra",
+  "lem-weil-pbc-finite-free-algebra-spectrum",
+  "lem-weil-pbc-etale-algebra-finite-product",
+  "lem-sfb-finite-etale-subalgebra-directed-union",
+  "lem-weil-pbc-etale-algebra-over-field-product",
+  "def-pc-finite-locally-free",
+  "lem-sfb-maximal-ind-etale-field-base-change",
+  "lem-sfb-artinian-ring-finite-local-product",
+  "lem-sfb-ind-etale-core-ring-operations",
+  "lem-weil-pbc-local-ring-idempotent-zero-one",
+  "lem-weil-pbc-alg-closed-finite-extension-trivial",
+  "lem-weil-pbc-artinian-local-unique-prime",
+  "def-weil-algebraic-closure",
+  "lem-weil-pbc-algebra-tensor-pushout-universal-property",
+  "def-weil-radicial-morphism",
+  "lem-weil-pbc-finite-algebra-is-integral",
+  "lem-weil-pbc-integral-injective-lying-over",
+  "lem-weil-pbc-localization-colimit-principal-localizations",
+  "lem-weil-pbc-limit-affine-transition",
+  "lem-weil-pbc-etale-algebra-filtered-colimit-descent",
+  "lem-weil-pbc-etale-ring-map-iff-etale-affine",
+  "lem-weil-pbc-colimit-category-fp-algebras",
+  "def-weil-pbc-finitely-presented-algebra",
+  "lem-weil-pbc-descend-finite",
+  "lem-weil-pbc-descend-finite-locally-free",
+  "lem-weil-pbc-descend-surjective",
+  "lem-weil-pbc-spec-surjective-base-change",
+  "lem-weil-pbc-etale-ring-base-change",
+  "pqf-lem-finite-integral-lft",
+  "lem-pc-integral-radicial-surjective-universal-homeomorphism",
+  "def-weil-universal-homeomorphism"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/bosch-lutkebohmert-raynaud-neron-models.pdf",
+  "place": "BLR 7.6 Proposition 5(a), printed p.197, PDF p.203; scan read online, local PDF WANTED. Explicit etale-core/limit-descent proof, using the cited Stacks lemmas, replaces the abbreviated shrinking argument and supplies finite local freeness."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A finite locally free morphism over an integral Noetherian scheme factors on a dense open as a finite locally free universally injective morphism followed by a finite etale morphism",
+   "results": "{\"t\": \"2026-10-24T07:57:05Z\", \"tool\": \"leanfinder\", \"query\": \"A finite locally free morphism over an integral Noetherian scheme factors on a dense open as a finite locally free universally injective morphism followed by a finite etale morphism\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.finite_appTop_of_universallyClosed\", \"AlgebraicGeometry.IsFinite\", \"AlgebraicGeometry.Scheme.Etale\", \"AlgebraicGeometry.IsEtale\", \"AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified\", \"AlgebraicGeometry.IsIntegralHom\", \"AlgebraicGeometry.IsFinite.instIsIntegralHom\", \"AlgebraicGeometry.LocallyOfFiniteType\"], \"digest\": \"44dac177f56dfc11\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: separable-closure field results do not spread finite algebras over a Noetherian domain; etale-locus lemmas only shrink an already specified algebra. FormallyEtale.iff_exists_algEquiv_prod (Etale/Field.lean:194) classifies already-etale algebras and does not supply the radicial factor."
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.IsFinite, AlgebraicGeometry.UniversallyInjective",
+   "results": "{\"t\": \"2026-10-24T07:57:04Z\", \"tool\": \"loogle\", \"query\": \"AlgebraicGeometry.IsFinite, AlgebraicGeometry.UniversallyInjective\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: separable-closure field results do not spread finite algebras over a Noetherian domain; etale-locus lemmas only shrink an already specified algebra. FormallyEtale.iff_exists_algEquiv_prod (Etale/Field.lean:194) classifies already-etale algebras and does not supply the radicial factor."
+  },
+  {
+   "tool": "grep",
+   "query": "radicial|[Ee]tale.*[Ff]actor|[Ff]actor.*[Ee]tale",
+   "results": "{\"t\": \"2026-10-24T07:57:04Z\", \"tool\": \"grep\", \"query\": \"radicial|[Ee]tale.*[Ff]actor|[Ff]actor.*[Ee]tale\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: separable-closure field results do not spread finite algebras over a Noetherian domain; etale-locus lemmas only shrink an already specified algebra. FormallyEtale.iff_exists_algEquiv_prod (Etale/Field.lean:194) classifies already-etale algebras and does not supply the radicial factor."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Generic separable inseparable factorization of a finite algebra over a Noetherian integral base",
+   "results": "{\"t\": \"2026-10-24T07:57:04Z\", \"tool\": \"leansearch\", \"query\": \"Generic separable inseparable factorization of a finite algebra over a Noetherian integral base\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"IntermediateField.isSeparable_adjoin_pair_of_isSeparable\", \"Algebra.IsSeparable.finInsepDegree_eq\", \"Algebra.IsSeparable.isAlgebraic\", \"IsSeparable\", \"Algebra.isSeparable_def\", \"IsSepClosure.separable\", \"separableClosure.isSeparable\", \"IsSeparable.isIntegral\"], \"digest\": \"82024a1140f030dd\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: separable-closure field results do not spread finite algebras over a Noetherian domain; etale-locus lemmas only shrink an already specified algebra. FormallyEtale.iff_exists_algEquiv_prod (Etale/Field.lean:194) classifies already-etale algebras and does not supply the radicial factor."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finite free algebra becomes a finite etale algebra followed by purely inseparable local Artinian algebras after localization of the base domain",
+   "results": "{\"t\": \"2026-10-24T07:57:06Z\", \"tool\": \"leanfinder\", \"query\": \"Finite free algebra becomes a finite etale algebra followed by purely inseparable local Artinian algebras after localization of the base domain\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.exists_etale_of_isEtaleAt\", \"RingHom.Etale.ofLocalizationSpan\", \"Algebra.Etale.of_isLocalizationAway\", \"Algebra.Etale.of_isLocalization_Away\", \"RingHom.Etale.ofLocalizationSpanTarget\", \"Algebra.IsEtaleAt\", \"Algebra.FormallyEtale.iff_exists_algEquiv_prod\", \"Algebra.Etale\"], \"digest\": \"c1df231134bc2335\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: separable-closure field results do not spread finite algebras over a Noetherian domain; etale-locus lemmas only shrink an already specified algebra. FormallyEtale.iff_exists_algEquiv_prod (Etale/Field.lean:194) classifies already-etale algebras and does not supply the radicial factor."
+  },
+  {
+   "tool": "grep",
+   "query": "radicial|[Ee]tale.*[Ff]actor|[Ff]actor.*[Ee]tale",
+   "results": "{\"t\": \"2026-10-24T08:36:59Z\", \"tool\": \"grep\", \"query\": \"radicial|[Ee]tale.*[Ff]actor|[Ff]actor.*[Ee]tale\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits classify already-etale algebras or local etale loci; none constructs and spreads the radicial factor with finite local freeness."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Finite dimensional algebra maximal etale subalgebra has radicial spectrum map and spreads over a domain",
+   "results": "{\"t\": \"2026-10-24T08:37:00Z\", \"tool\": \"leansearch\", \"query\": \"Finite dimensional algebra maximal etale subalgebra has radicial spectrum map and spreads over a domain\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"RingHom.Etale\", \"Algebra.Etale.recOn\", \"Algebra.Etale.formallyEtale\", \"Algebra.Etale\", \"Algebra.FormallyEtale.instFormallySmooth\", \"Algebra.FormallyEtale.iff_exists_algEquiv_prod\", \"Algebra.FormallyEtale.of_isSeparable_aux\", \"Algebra.Etale.finitePresentation\"], \"digest\": \"683f43b8ec489931\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits classify already-etale algebras or local etale loci; none constructs and spreads the radicial factor with finite local freeness."
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.IsFinite, AlgebraicGeometry.IsEtale",
+   "results": "{\"t\": \"2026-10-24T08:37:00Z\", \"tool\": \"loogle\", \"query\": \"AlgebraicGeometry.IsFinite, AlgebraicGeometry.IsEtale\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"loogle: unknown identifier 'AlgebraicGeometry.IsEtale'\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A finite algebra over a domain factors after principal localization as a finite locally free universal homeomorphism followed by a finite etale morphism",
+   "results": "{\"t\": \"2026-10-24T08:37:01Z\", \"tool\": \"leanfinder\", \"query\": \"A finite algebra over a domain factors after principal localization as a finite locally free universal homeomorphism followed by a finite etale morphism\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.exists_etale_of_isEtaleAt\", \"Algebra.exists_etale_isIdempotentElem_forall_liesOver_eq\", \"RingHom.Etale.ofLocalizationSpan\", \"Algebra.Etale.of_isLocalizationAway\", \"RingHom.Etale.ofLocalizationSpanTarget\", \"Algebra.Etale.of_isLocalization_Away\", \"Algebra.basicOpen_subset_etaleLocus_iff_etale\", \"Algebra.Etale.exists_subalgebra_fg\"], \"digest\": \"644740b1e89dd7ba\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits classify already-etale algebras or local etale loci; none constructs and spreads the radicial factor with finite local freeness."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A finite dimensional commutative algebra admits a maximal separable subalgebra and a finite flat radicial map on spectra",
+   "results": "{\"t\": \"2026-10-24T08:38:18Z\", \"tool\": \"leanfinder\", \"query\": \"A finite dimensional commutative algebra admits a maximal separable subalgebra and a finite flat radicial map on spectra\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"exists_finite_inj_algHom_of_fg\", \"Algebra.FormallyEtale.iff_exists_algEquiv_prod\", \"Algebra.Smooth.exists_subalgebra_finiteType\", \"Algebra.Etale.iff_exists_algEquiv_prod\", \"exists_integral_inj_algHom_of_fg\", \"Algebra.FormallyUnramified.isSeparable\", \"Algebra.FormallyEtale.of_isSeparable_aux\", \"Algebra.Smooth.exists_finiteType\"], \"digest\": \"f552547c5c951700\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits classify already-etale algebras or local etale loci; none constructs and spreads the radicial factor with finite local freeness."
+  },
+  {
+   "tool": "loogle",
+   "query": "Algebra.FormallyEtale, Module.Finite",
+   "results": "{\"t\": \"2026-10-24T08:55:33Z\", \"tool\": \"loogle\", \"query\": \"Algebra.FormallyEtale, Module.Finite\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits classify already-etale algebras or local etale loci; none constructs and spreads the radicial factor with finite local freeness."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-weil-restriction-geometric-properties",
+  "date": "2026-10-24",
+  "group": "Q101"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), open direct image via sk-prop-open-coefficients; inherited Néron-lft-model descent refinement, BLR 7.6 Proposition 5; Proposition 5(a), generic factorization before Noetherian induction",
+   "via": [
+    "lem-sfb-weil-restriction-geometric-properties",
+    "lem-sfb-neron-lft-weil-restriction-geometry",
+    "lem-sfb-finite-flat-neron-lft-descent",
+    "lem-sfb-semiabelian-neron-lft-existence",
+    "lem-sfb-trait-semiabelian-hom-extension",
+    "lem-sfb-semiabelian-generic-graph-proper",
+    "lem-sfb-normal-semiabelian-hom-extension",
+    "lem-sfb-symmetric-line-power-prolongation",
+    "lem-sfb-normal-symmetric-cubical-extension",
+    "lem-sfb-symmetric-ample-power-extension",
+    "lem-sfb-regular-group-generic-ampleness",
+    "lem-sfb-stable-picard-theta-ampleness",
+    "lem-sfb-stable-relative-picard-kummer",
+    "lem-sfb-stable-level-versal-branch-freeness",
+    "lem-sfb-stable-abelian-level-normalization",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-generic-finite-free-etale-radicial-factorization",
+  "worker": "stage1",
+  "summary": "Constructed the generic etale core, proved finite local freeness by field components and universal injectivity by the algebraically closed scalar-extension description of its core, then descended the map and its surjective diagonal to a principal open. Reused existing DAG nodes throughout, with no new nodes. Checked nonreduced and empty cases; statement unchanged.",
+  "blueprint": "Realizes the inherited BLR 7.6 Proposition 5(a) generic etale/radicial factorization below det-thm-sf-ctf-stability-direct-images proof (3), open direct image. The existing ancestor command returns None; inherited from.node and via retained.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-finite-free-algebra-spectrum",
+    "why": "Generic algebra/scheme tool: The spectrum of a finite free algebra is finite locally free. Used only for its stated assertion in the BLR generic-factorization argument; no replacement of the six-functor unit route."
+   },
+   {
+    "node": "lem-weil-pbc-local-ring-idempotent-zero-one",
+    "why": "Generic algebra/scheme tool: An idempotent of a local ring is 0 or 1. Used only for its stated assertion in the BLR generic-factorization argument; no replacement of the six-functor unit route."
+   },
+   {
+    "node": "lem-weil-pbc-localization-colimit-principal-localizations",
+    "why": "Generic algebra/scheme tool: A localization is the filtered colimit of the principal localizations. Used only for its stated assertion in the BLR generic-factorization argument; no replacement of the six-functor unit route."
+   },
+   {
+    "node": "lem-weil-pbc-limit-affine-transition",
+    "why": "Generic algebra/scheme tool: Limits of schemes along affine transition morphisms. Used only for its stated assertion in the BLR generic-factorization argument; no replacement of the six-functor unit route."
+   },
+   {
+    "node": "lem-weil-pbc-etale-algebra-filtered-colimit-descent",
+    "why": "Generic algebra/scheme tool: Etale algebras over a filtered colimit of rings descend to a finite stage. Used only for its stated assertion in the BLR generic-factorization argument; no replacement of the six-functor unit route."
+   },
+   {
+    "node": "lem-weil-pbc-colimit-category-fp-algebras",
+    "why": "Generic algebra/scheme tool: Maps of finitely presented algebras over a directed colimit of rings come from a stage. Used only for its stated assertion in the BLR generic-factorization argument; no replacement of the six-functor unit route."
+   },
+   {
+    "node": "lem-weil-pbc-descend-finite",
+    "why": "Generic algebra/scheme tool: Finiteness descends to a finite stage of a limit. Used only for its stated assertion in the BLR generic-factorization argument; no replacement of the six-functor unit route."
+   },
+   {
+    "node": "lem-weil-pbc-descend-finite-locally-free",
+    "why": "Generic algebra/scheme tool: Finite local freeness of a given degree descends to a finite stage of a limit (Stacks 06AC). Used only for its stated assertion in the BLR generic-factorization argument; no replacement of the six-functor unit route."
+   },
+   {
+    "node": "lem-weil-pbc-descend-surjective",
+    "why": "Generic algebra/scheme tool: Surjectivity descends to a finite stage of a limit. Used only for its stated assertion in the BLR generic-factorization argument; no replacement of the six-functor unit route."
+   },
+   {
+    "node": "lem-weil-pbc-spec-surjective-base-change",
+    "why": "Generic algebra/scheme tool: Surjectivity on spectra is stable under base change. Used only for its stated assertion in the BLR generic-factorization argument; no replacement of the six-functor unit route."
+   },
+   {
+    "node": "lem-pc-integral-radicial-surjective-universal-homeomorphism",
+    "why": "Generic algebra/scheme tool: An integral, universally injective, surjective morphism is a universal homeomorphism. Used only for its stated assertion in the BLR generic-factorization argument; no replacement of the six-functor unit route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-finite-free-algebra-spectrum",
+  "lem-weil-pbc-local-ring-idempotent-zero-one",
+  "lem-weil-pbc-localization-colimit-principal-localizations",
+  "lem-weil-pbc-limit-affine-transition",
+  "lem-weil-pbc-etale-algebra-filtered-colimit-descent",
+  "lem-weil-pbc-colimit-category-fp-algebras",
+  "lem-weil-pbc-descend-finite",
+  "lem-weil-pbc-descend-finite-locally-free",
+  "lem-weil-pbc-descend-surjective",
+  "lem-weil-pbc-spec-surjective-base-change",
+  "lem-pc-integral-radicial-surjective-universal-homeomorphism"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q128-a2d002a39",
+  "group": "Q128",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q128-a2d002a39 (reviewer sub-agent of L); spot-checked: Read in full: the item (unchanged statement; no new nodes), its 9 steps, and the statement of each of the 32 proof_deps. The statement is true: I tested it on empty E, dual numbers in char 0, a purely inseparable extension, and split products with unequal ranks. Step checks: 1 uses 01WH, 00FP, 01I4, and the empty case via 02KB with an empty basis and 00U2(11) with n=0. 2 uses the 0CKR/0CKS/0CKT finite-subset clause to show C is finite etale, then 00U3, then each epsilon_j B is free over L_j. 3 uses the 0CKU base change, 00KJ local factors and the core field clause plus 09GR to get core = prod Omega componentwise. 4 shows each Artinian local factor has a unique Omega-point, so restriction is injective; algebraic closure plus tensor UP (2)/(3) and 01S4 (1)=>(2),(4) give universal injectivity and a surjective diagonal. 5 uses 00GK and 00GQ for surjectivity. 6 uses 00CR, 01YX/01YW, 00U2(9) and 05N9(2). 7 is an elementary relative presentation and diagonal-kernel computation, which I verified. 8 applies 01ZO, then 07RR twice, then persistence, then 06AC last. 9 uses 01S4, 01WJ and 04DF. Off-unit tool_uses accepted: generic algebra on the inherited BLR route under det-thm-sf-ctf-stability-direct-images proof (3). The BLR PDF is absent locally, so I could not read §7.6 Prop 5(a). The reported source error is correct: (1+eps)^n is not in K for K[eps] in char 0. FIX (C1): step 6 used 'etaleness includes finite presentation' without a node, and def-weil-etale-morphism only gives locally finite presentation. It now cites the Mathlib leaf lem-weil-pbc-etale-ring-map-iff-etale-affine (02GJ/00U1), added to the step's uses and to proof_deps. Step 4 also gets a clause saying field points are ring maps that agree on K. All steps stay under 2000 characters.; 1 file(s) fixed by the reviewer"
+ }
+}

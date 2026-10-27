@@ -17,7 +17,7 @@
  ],
  "proof": [
   {
-   "text": "Fix x∈X and write y=h(x), s=f(y), A=𝒪_{S,s}, B=𝒪_{Y,y}, C=𝒪_{X,x}, and N=𝒢_y. The stalk map B→C is local. Since h is flat at x, it is flat; a flat local homomorphism of local rings is faithfully flat by [lem-pc-local-flat-faithful-flat-reflects-surjective]. The stalk-of-pullback isomorphism [lem-weil-pbc-module-stalk-pullback] identifies (h^*𝒢)_x with N⊗_B C, and the induced A-actions agree because the structure map for fh is the composite of those for f and h.",
+   "text": "Fix x∈X, put y=h(x), A=𝒪_{S,f(y)}, B=𝒪_{Y,y}, C=𝒪_{X,x}, N=𝒢_y, and P=(h^*𝒢)_x. Equip A→B and B→C with the stalk maps, and A→C with their composite. The stalk map B→C is local and flat, hence faithfully flat by [lem-pc-local-flat-faithful-flat-reflects-surjective]. The natural stalk isomorphism [lem-weil-pbc-module-stalk-pullback] gives P≃_C C⊗_B N; restrict this linear equivalence to A. Scheme.Hom.stalkMap_comp identifies the composite scalar action with the action through h≫f.",
    "uses": [
     "lem-pc-local-flat-faithful-flat-reflects-surjective",
     "lem-weil-pbc-module-stalk-pullback"
@@ -29,7 +29,7 @@
    }
   },
   {
-   "text": "Apply [lem-trf-flatness-faithfully-flat-extension] to A→B→C and N. It gives that 𝒢_y is flat over A if and only if N⊗_B C is flat over A. Via the stalk isomorphism and the compatible A-actions from Step 1, this is exactly the pointwise equivalence that 𝒢 is flat over S at y if and only if h^*𝒢 is flat over S at x.",
+   "text": "Apply [lem-trf-flatness-faithfully-flat-extension] to A→B→C and N to obtain Flat_A(N) iff Flat_A(C⊗_B N). Compose with Module.Flat.equiv_iff for the A-linear stalk equivalence of Step 1 to obtain the pointwise assertion.",
    "uses": [
     "lem-trf-flatness-faithfully-flat-extension",
     "lem-weil-pbc-module-stalk-pullback"
@@ -41,11 +41,12 @@
    }
   },
   {
-   "text": "For a jointly surjective family of flat morphisms h_i:X_i→Y, each h_i^*𝒢 is quasi-coherent by [lem-weil-pbc-module-pullback-quasi-coherent], so its relative flatness over S through f h_i is defined. Assume 𝒢 is flat over S. By [lem-pc-relative-flat-module-stalk] every stalk 𝒢_y is flat over 𝒪_{S,f(y)}, i.e. 𝒢 is flat over S at every y. For x∈X_i, Step 2 (h_i is flat at x) gives that h_i^*𝒢 is flat over S at x; so all stalks of h_i^*𝒢 are flat over the base stalks, and [lem-pc-relative-flat-of-stalks], applied to the quasi-coherent module h_i^*𝒢 and the morphism f h_i, shows that h_i^*𝒢 is flat over S. Conversely, assume every h_i^*𝒢 is flat over S. By [lem-pc-relative-flat-module-stalk] applied to f h_i, every stalk (h_i^*𝒢)_x is flat over 𝒪_{S,f h_i(x)}. Given y∈Y, joint surjectivity supplies some i and x∈X_i with h_i(x)=y; Step 2 then gives that 𝒢 is flat over S at y. Since this holds for every y and 𝒢 is quasi-coherent, [lem-pc-relative-flat-of-stalks] shows that 𝒢 is flat over S.",
+   "text": "For every h_i, use [def-weil-pbc-tensor-pullback-ordinary-comparison] to transport ordinary-pullback quasi-coherence [lem-weil-pbc-module-pullback-quasi-coherent] to tensor pullback. Given relative flatness of 𝒢, [lem-pc-relative-flat-module-stalk] makes 𝒢_{h_i(x)} flat over the base stalk. Flat.iff_flat_stalkMap supplies flatness of the stalk map of h_i, so the pointwise assertion gives relative flatness of the pulled-back stalk. Apply [lem-pc-relative-flat-of-stalks] to obtain relative flatness of each pullback. Conversely, for every y choose i,x with h_i(x)=y by joint surjectivity. Apply [lem-pc-relative-flat-module-stalk] to the i-th pullback, then the reverse pointwise implication, to obtain flatness of 𝒢_y. Apply [lem-pc-relative-flat-of-stalks] on Y. No point choices are required when Y is empty.",
    "uses": [
     "lem-weil-pbc-module-pullback-quasi-coherent",
     "lem-pc-relative-flat-module-stalk",
-    "lem-pc-relative-flat-of-stalks"
+    "lem-pc-relative-flat-of-stalks",
+    "def-weil-pbc-tensor-pullback-ordinary-comparison"
    ],
    "elementary": false,
    "source": {
@@ -60,7 +61,8 @@
   "lem-pc-relative-flat-of-stalks",
   "lem-trf-flatness-faithfully-flat-extension",
   "lem-weil-pbc-module-pullback-quasi-coherent",
-  "lem-weil-pbc-module-stalk-pullback"
+  "lem-weil-pbc-module-stalk-pullback",
+  "def-weil-pbc-tensor-pullback-ordinary-comparison"
  ],
  "proof_origin": {
   "by": "document",
@@ -181,5 +183,26 @@
   "result": "pass",
   "note": "Statement of AlgebraicGeometry.relative_flatness_source_cover matches Stacks 02JZ and the node clause by clause: pointwise iff under RingHom.Flat of h.stalkMap x only, with restrictScalars along the f and (h≫f) stalk maps on moduleStalkFunctor stalks of G and of tensorPullback h G; family form with arbitrary I : Type v, all members Flat, joint surjectivity, IsFlatOver iff. No extra hypotheses; G qc as in the node. Edge cases (empty family forces Y empty, empty members, zero module) covered; universes bound. No definitions, proof is only sorry, docstrings carry source and blueprint tag and the 3 proof steps; lean.statement verbatim; node otherwise identical to the side clone; no duplicate found by rg over side and live trees. nt_compile --json clean (3.4 s and 4.5 s, rc 0). Cosmetic: lean.date 2026-10-17."
  },
- "lean_audit": {}
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "reviewed_proof": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U8",
+  "result": "pass",
+  "landing": "20261023T131953-L-2177856",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
 }

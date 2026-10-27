@@ -1,0 +1,120 @@
+{
+ "id": "def-sfb-tensor-pullback-structure-sheaf-map",
+ "kind": "definition",
+ "title": "The canonical structure-sheaf map for tensor pullback",
+ "status": "split",
+ "statement": "Let $g:X\\to Y$ be a morphism of schemes [def-pc-scheme]. Use the tensor-formula module pullback $g^*$ and pushforward $g_*$, with their canonical adjunction $g^*\\dashv g_*$ [def-pc-module-pullback], and regard the structure sheaves as modules over themselves [def-weil-sheaf-of-modules-category]. Define $\\epsilon_g:g^*\\mathcal O_Y\\to\\mathcal O_X$ to be the morphism adjoint to the structure-sheaf morphism $g^\\sharp:\\mathcal O_Y\\to g_*\\mathcal O_X$. Explicitly, $\\epsilon_g$ is the inverse of the canonical Hom adjunction bijection applied to $g^\\sharp$. This defines only the canonical morphism; its isomorphism property is a separate theorem.",
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-module-pullback",
+  "def-weil-sheaf-of-modules-category"
+ ],
+ "source": {
+  "document": "literature/stacks-project/sheaves.tex",
+  "place": "Tag 0096, lemma-adjoint-pullback-pushforward-modules, applied to the structure-sheaf morphism; the tensor-formula pullback is definition-pushforward (Tag 0095)."
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "def (pullbackObjUnitToUnit|unitToPushforwardObjUnit)",
+   "results": "{\"t\": \"2026-10-23T14:20:30Z\", \"tool\": \"grep\", \"query\": \"def (pullbackObjUnitToUnit|unitToPushforwardObjUnit)\", \"sub\": \"Algebra/Category/ModuleCat/Sheaf\", \"ok\": true, \"n_hits\": 2, \"note\": \"\", \"top\": [\"Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackFree.lean\", \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackFree.lean\"], \"digest\": \"28315b65de98fb24\"}",
+   "date": "2026-10-23",
+   "verdict": "Mathlib supplies the analogous map for its abstract pullback. The exact tensorPullback map is already defined upstream as tensorPullbackObjUnitToUnit; record it existing:true, without a duplicate construction."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The canonical morphism from pullback of the structure sheaf to the structure sheaf adjoint to the structure morphism",
+   "results": "{\"t\": \"2026-10-23T14:20:30Z\", \"tool\": \"leansearch\", \"query\": \"The canonical morphism from pullback of the structure sheaf to the structure sheaf adjoint to the structure morphism\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SheafOfModules.pullbackObjUnitToUnit\", \"SheafOfModules.instIsIsoPullbackObjUnitToUnitOfFinal\", \"TopCat.Presheaf.stalkPullbackHom\", \"TopCat.Presheaf.stalkPullbackInv\", \"AlgebraicGeometry.Scheme.Modules.pullbackPushforwardAdjunction\", \"TopCat.Sheaf.pullback\", \"AlgebraicGeometry.Scheme.Modules.pullback\", \"SheafOfModules.pullback\"], \"digest\": \"132e452da5b273fe\"}",
+   "date": "2026-10-23",
+   "verdict": "Mathlib supplies the analogous map for its abstract pullback. The exact tensorPullback map is already defined upstream as tensorPullbackObjUnitToUnit; record it existing:true, without a duplicate construction."
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules.pullbackObjUnitToUnit",
+   "results": "{\"t\": \"2026-10-23T14:20:30Z\", \"tool\": \"loogle\", \"query\": \"SheafOfModules.pullbackObjUnitToUnit\", \"sub\": \"\", \"ok\": true, \"n_hits\": 6, \"note\": \"\", \"top\": [\"SheafOfModules.pullbackObjUnitToUnit\", \"SheafOfModules.instIsIsoPullbackObjUnitToUnitOfFinal\", \"SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom\", \"SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom_assoc\", \"SheafOfModules.pullbackPushforwardAdjunction_homEquiv_pullbackObjUnitToUnit\", \"SheafOfModules.pullbackPushforwardAdjunction_homEquiv_symm_unitToPushforwardObjUnit\"], \"digest\": \"5fce283749d5e928\"}",
+   "date": "2026-10-23",
+   "verdict": "Mathlib supplies the analogous map for its abstract pullback. The exact tensorPullback map is already defined upstream as tensorPullbackObjUnitToUnit; record it existing:true, without a duplicate construction."
+  },
+  {
+   "tool": "rg / blueprint_refs.py",
+   "query": "tensorPullbackObjUnitToUnit|unitCohomologyPullbackLinear in dag/nodes, lean/WeilConjectures and lean/Sheaf; blueprint_refs.py search structure sheaf",
+   "results": "Upstream TensorPullbackStructureSheaf.lean:33 defines tensorPullbackObjUnitToUnit. Project modules use this map but do not define another. No definition node owns the map. The theorem node lem-weil-pbc-module-pullback-structure-sheaf records its isomorphism property. def-pbc-unit-cohomology-pullback-linear defines a different HOver map. Other definition-node mentions occur only inside unrelated coordinate/fibre and augmentation constructions. Blueprint search returned 19 hits, none defining this coefficient map.",
+   "date": "2026-10-23",
+   "verdict": "Add definition-node ownership of the exact existing tensorPullback map, as requested by H2."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-coherent-group-bialgebra",
+  "date": "2026-10-23",
+  "group": "Q73"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Smooth-curve abelian level rigidification. Geometric stabilizer input for the smooth full-level cover; restrict to geometric curves before passing to families. Auxiliary input: Curve pullback is faithful on the canonically polarized Jacobian. Supporting input: Dual abelian varieties and the line-bundle homomorphism. Auxiliary for this split: First coherent cohomology dimension of an abelian variety. Supporting input for the coherent H1 dimension argument: The coherent cohomology bialgebra of a proper group. Canonical structure-sheaf coefficient map for the multiplication and projection pullbacks in the coherent bialgebra construction.",
+   "via": [
+    "lem-sfb-coherent-group-bialgebra",
+    "lem-sfb-abelian-structure-h1-dimension",
+    "lem-sfb-abelian-polarization-calculus",
+    "lem-sfb-curve-polarized-jacobian-faithfulness",
+    "lem-sfb-geometric-curve-level-faithfulness",
+    "lem-sfb-smooth-curve-abelian-level-rigidification",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "lean": {
+  "module": "WeilConjectures.AlgebraicGeometry.TensorPullbackStructureSheaf",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.tensorPullbackObjUnitToUnit",
+  "statement": "def tensorPullbackObjUnitToUnit {X Y : Scheme.{u}} (g : X ⟶ Y) :\n    (tensorPullback g).obj (SheafOfModules.unit Y.ringCatSheaf) ⟶\n      SheafOfModules.unit X.ringCatSheaf",
+  "branch": "slopmaster2",
+  "by": "Q73",
+  "date": "2026-10-23",
+  "existing": true,
+  "note": "Definition-node ownership required by returned delivery ab460dbe2684, H2. This is the existing plain definition: inverse homEquiv of the canonical chosen tensorPullback adjunction, applied to unitToPushforwardObjUnit g.toRingCatSheafHom. No use of tensorPullbackObjUnitToUnit_isIso is needed to define it; that theorem remains a proof dependency of the bialgebra item."
+ },
+ "import_flags": [],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-eb08ac8ce",
+  "group": "Q73",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-eb08ac8ce",
+  "group": "Q73",
+  "result": "pass",
+  "note": "Re-delivery repairs ab460dbe H2 as prescribed: stmt_deps swap lem-weil-pbc-module-pullback-structure-sheaf -> new def node def-sfb-tensor-pullback-structure-sheaf-map (existing:true WeilConjectures.AlgebraicGeometry.TensorPullbackStructureSheaf.tensorPullbackObjUnitToUnit, statement verbatim vs side-live source, §5 fields ok, stmt_deps def-pc-scheme/def-pc-module-pullback/def-weil-sheaf-of-modules-category exist, no competing def owner). ε_g canonical since exists_tensorPullbackAdjunction pins the unit. Lean byte-identical to ab460dbe (sha bf499b5e); item node differs from live only in stmt_deps/lean. Re-read all clauses (cup algebra, H0=k·1, (-1)^{pq}, signed mulT (-1)^{qr}, κ pinned external cup, Δ=κ⁻¹m*, coassoc, counit, H1 primitive) and edge cases: correct. No compile (no file changed)."
+ }
+}

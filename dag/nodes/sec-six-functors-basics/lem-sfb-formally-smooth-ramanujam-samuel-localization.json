@@ -1,0 +1,236 @@
+{
+ "id": "lem-sfb-formally-smooth-ramanujam-samuel-localization",
+ "kind": "statement",
+ "title": "Ramanujam--Samuel parafactorial localizations of a formally smooth local algebra",
+ "statement": "Let $A$ and $B$ be commutative Noetherian local rings [def-weil-pbc-noetherian-ring], with maximal ideals $\\mathfrak m_A$ and $\\mathfrak m_B$, and let $\\rho:A\\to B$ be a local homomorphism (so $\\rho^{-1}(\\mathfrak m_B)=\\mathfrak m_A$). Suppose the $\\mathfrak m_A$-adic completion $\\widehat A$ [def-weil-pbc-adic-completion] is an integrally closed domain [def-weil-pbc-normal-ring], $B$ is formally smooth over $A$ for the $\\mathfrak m_B$-adic topology [def-weil-pbc-formally-smooth-adic], $\\dim B>\\dim A$ [def-weil-pbc-krull-dimension-ring], and $B/\\mathfrak m_B$ is a finite extension of $A/\\mathfrak m_A$. Suppose $\\mathfrak p=\\mathfrak m_AB$ is prime. For every prime $\\mathfrak q\\subset B$ not contained in $\\mathfrak p$ with $\\dim B_{\\mathfrak q}\\ge2$, put $R=B_{\\mathfrak q}$ [def-weil-pbc-localization-at-prime] and $P=\\operatorname{Spec}R\\setminus\\{\\mathfrak qR\\}$ [def-weil-affine-spectrum, def-weil-open-immersion]. The restriction $R\\to\\Gamma(P,\\mathcal O_P)$ is an isomorphism, and every invertible $\\mathcal O_P$-module [def-sc-invertible-module] is isomorphic to $\\mathcal O_P$.",
+ "source": {
+  "document": "literature/ega-iv4.pdf",
+  "place": "EGA IV4 Theorem 21.14.1 and Corollary 21.14.2, with the explicit meaning of local parafactoriality in 21.13.8. No Stacks tag states this Ramanujam--Samuel theorem. Read in the online English EGA translation; local EGA IV4 WANTED.",
+  "url": "https://jcreinhold.github.io/ega/iv/34-ch4-21-divisors.html"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-noetherian-ring",
+  "def-weil-pbc-adic-completion",
+  "def-weil-pbc-normal-ring",
+  "def-weil-pbc-formally-smooth-adic",
+  "def-weil-pbc-krull-dimension-ring",
+  "def-weil-pbc-localization-at-prime",
+  "def-weil-affine-spectrum",
+  "def-weil-open-immersion",
+  "def-sc-invertible-module"
+ ],
+ "proof": [
+  {
+   "text": "Apply [lem-sfb-formally-smooth-normal-power-series-cover] to the given local map. Its hypotheses are exactly the hypotheses on $A,B,\\mathfrak p$ in the statement. Obtain $B\\to D=C[[T_1,\\ldots,T_d]]$, faithfully flat and local, with $C,D$ Noetherian normal local domains and inverse image of $\\mathfrak nD$ equal to $\\mathfrak p$. By [lem-sfb-faithfully-flat-normal-ring-descent], $B$ is normal. By [lem-weil-pbc-faithfully-flat-ideal-contraction] with the zero ideal, $B\\to D$ is injective, so $B$ is a domain as well.",
+   "uses": [
+    "lem-sfb-formally-smooth-normal-power-series-cover",
+    "lem-sfb-faithfully-flat-normal-ring-descent",
+    "lem-weil-pbc-faithfully-flat-ideal-contraction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/ega-iv4.pdf",
+    "place": "EGA IV4 proof of 21.14.1, first paragraph: the power-series cover and normality descent. EGA IV4 is WANTED locally; read the online English translation.",
+    "url": "https://jcreinhold.github.io/ega/iv/34-ch4-21-divisors.html"
+   }
+  },
+  {
+   "text": "Fix a height-one prime $\\mathfrak r$ of $B$ with $\\mathfrak r\\not\\subseteq\\mathfrak p$. It is a nonzero reflexive ideal: [lem-per-divisorial-fractional-module-lattices] gives the reflexive lattice $I_B([\\mathfrak r])$, which equals $\\mathfrak r$. Indeed its elements lie in $B$ by the height-one intersection formula, and its one positive valuation condition says membership in $\\mathfrak rB_{\\mathfrak r}\\cap B=\\mathfrak r$; conversely every element of $\\mathfrak r$ satisfies those inequalities. Choose $c\\in\\mathfrak r\\setminus\\mathfrak p$. Its image is outside $\\mathfrak nD$. Thus every height-one prime of $D$ containing $\\mathfrak rD$ contains that image and is not contained in $\\mathfrak nD$. Each is principal by [lem-sfb-complete-normal-horizontal-primes-principal]. Now [lem-sfb-reflexive-ideal-principal-flat-descent], with $I=\\mathfrak r$, proves $\\mathfrak r=(h_{\\mathfrak r})$ in $B$. Both rings are normal Noetherian local domains by step 1, so all descent hypotheses hold.",
+   "uses": [
+    "lem-per-divisorial-fractional-module-lattices",
+    "lem-sfb-complete-normal-horizontal-primes-principal",
+    "lem-sfb-reflexive-ideal-principal-flat-descent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/ega-iv4.pdf",
+    "place": "EGA IV4 proof of 21.14.1, reduction to the power-series case and the subsequent horizontal-prime calculation. EGA IV4 is WANTED locally; read the online English translation.",
+    "url": "https://jcreinhold.github.io/ega/iv/34-ch4-21-divisors.html"
+   }
+  },
+  {
+   "text": "Verify the hypothesis of [lem-sfb-principal-divisor-punctured-local-criterion]. Let $D_0=(d_{\\mathfrak r})$ be a finite Weil divisor and $a\\in\\operatorname{Frac}(B)^\\times$ with $d_{\\mathfrak r}=v_{\\mathfrak r}(a)$ for all height-one $\\mathfrak r\\subseteq\\mathfrak p$. By [lem-trf-normal-domain-principal-divisor-kernel], $E=D_0-\\operatorname{div}_B(a)$ has finite support, and its coefficients on these primes are zero. For each prime in the remaining support, step 2 gives $\\mathfrak r=(h_{\\mathfrak r})$. At $\\mathfrak r$, $h_{\\mathfrak r}$ generates the maximal ideal of the DVR $B_{\\mathfrak r}$, hence has valuation one. At any different height-one prime $\\mathfrak s$, it is a unit, since $h_{\\mathfrak r}\\in\\mathfrak s$ would imply $\\mathfrak r\\subseteq\\mathfrak s$ and thus equality. Therefore $b=a\\prod_{\\mathfrak r\\in\\operatorname{supp}E}h_{\\mathfrak r}^{e_{\\mathfrak r}}$ has valuation $d_{\\mathfrak s}$ at every height-one prime. Negative exponents are taken in the fraction field, and the empty product is one. The valuation homomorphism in the cited node proves this coefficient by coefficient.",
+   "uses": [
+    "lem-trf-normal-domain-principal-divisor-kernel",
+    "lem-sfb-principal-divisor-punctured-local-criterion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/ega-iv4.pdf",
+    "place": "EGA IV4 21.14.1, reduction of the cycle assertion to principal height-one primes; explicit finite product assembly. EGA IV4 is WANTED locally; read the online English translation.",
+    "url": "https://jcreinhold.github.io/ega/iv/34-ch4-21-divisors.html"
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-principal-divisor-punctured-local-criterion] with this $B$ and $\\mathfrak p$. Step 1 supplies a Noetherian normal domain, and step 3 supplies its divisor hypothesis. The given $\\mathfrak q\\not\\subseteq\\mathfrak p$ and $\\dim B_{\\mathfrak q}\\ge2$ are precisely the remaining hypotheses. Its two conclusions are the asserted restriction isomorphism and triviality of every invertible module on $P$.",
+   "uses": [
+    "lem-sfb-principal-divisor-punctured-local-criterion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/ega-iv4.pdf",
+    "place": "EGA IV4 Corollary 21.14.2: apply 21.13.15 to X=Spec(B), S={p}, then 21.13.8. EGA IV4 is WANTED locally; read the online English translation.",
+    "url": "https://jcreinhold.github.io/ega/iv/34-ch4-21-divisors.html"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-formally-smooth-normal-power-series-cover",
+  "lem-sfb-faithfully-flat-normal-ring-descent",
+  "lem-weil-pbc-faithfully-flat-ideal-contraction",
+  "lem-per-divisorial-fractional-module-lattices",
+  "lem-sfb-complete-normal-horizontal-primes-principal",
+  "lem-sfb-reflexive-ideal-principal-flat-descent",
+  "lem-trf-normal-domain-principal-divisor-kernel",
+  "lem-sfb-principal-divisor-punctured-local-criterion"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/ega-iv4.pdf",
+  "place": "EGA IV4 Theorem 21.14.1 proof and Corollary 21.14.2, read online; local PDF WANTED. Explicit valuation assembly supplied by Q87."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Ramanujam Samuel formally smooth local algebra over an analytically normal local ring with finite residue extension has parafactorial localizations away from the generic fibre prime",
+   "results": "Hits: RingHom.FormallySmooth.holdsForLocalizationAway, RingHom.isStandardSmooth_holdsForLocalizationAway, Algebra.IsStandardSmooth.localization_away, RingHom.isStandardSmoothOfRelativeDimension_holdsForLocalizationAway, Algebra.FormallySmooth.localization_base, Algebra.IsStandardSmoothOfRelativeDimension.localization_away, Algebra.IsSmoothAt.exists_notMem_smooth, Algebra.IsSmoothAt.exists_notMem_isStandardSmooth Read the returned hits; no declaration gives this statement. Smooth charts, ordinary local-ring Picard triviality, or smooth models without normality and closed-pair conditions do not suffice.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Localizations of a formally smooth Noetherian local ring outside the generic closed fibre have zero punctured Picard group when the base completion is normal",
+   "results": "Hits: CommRing.Pic.instSubsingletonOfIsLocalRing, Algebra.IsStandardSmoothOfRelativeDimension.localization_away, RingHom.isStandardSmoothOfRelativeDimension_holdsForLocalizationAway, CommRing.Pic.instSubsingletonOfFiniteMaximalSpectrum, Algebra.Smooth.exists_span_eq_top_isStandardSmooth, Algebra.IsSmoothAt.exists_notMem_isStandardSmooth, tfae_of_isNoetherianRing_of_isLocalRing_of_isDomain, Algebra.IsSmoothAt.exists_notMem_smooth Read the returned hits; no declaration gives this statement. Smooth charts, ordinary local-ring Picard triviality, or smooth models without normality and closed-pair conditions do not suffice.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Parafactorial localizations of a formally smooth local algebra with finite residue extension over an analytically normal base",
+   "results": "Hits: RingHom.FormallySmooth.localizationPreserves, Algebra.Extension.localization, RingHom.FormallySmooth.holdsForLocalizationAway, Algebra.FormallySmooth.of_isLocalization, Algebra.FormallySmooth.instLocalization, Algebra.smoothLocus, Algebra.FormallyUnramified.localization_map, RingHom.Smooth.ofLocalizationSpanTarget Read the returned hits; no declaration gives this statement. Smooth charts, ordinary local-ring Picard triviality, or smooth models without normality and closed-pair conditions do not suffice.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsSmooth\", \"PrimeSpectrum\"",
+   "results": "No hits. Read the returned hits; no declaration gives this statement. Smooth charts, ordinary local-ring Picard triviality, or smooth models without normality and closed-pair conditions do not suffice.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "parafactorial|Ramanujam|analytically.normal|[Pp]icard.*local|local.*[Pp]icard",
+   "results": "Hits: Mathlib/RingTheory/PicardGroup.lean, Mathlib/RingTheory/PicardGroup.lean Read the returned hits; no declaration gives this statement. Smooth charts, ordinary local-ring Picard triviality, or smooth models without normality and closed-pair conditions do not suffice.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Picard\", \"IsLocalRing\"",
+   "results": "No hits. Read the returned hits; no declaration gives this statement. Smooth charts, ordinary local-ring Picard triviality, or smooth models without normality and closed-pair conditions do not suffice.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "formallySmooth.*(normal|powerSeries)|normal.*formallySmooth|parafactorial|Ramanujam",
+   "results": "No hits.  No match for the complete local punctured-spectrum assertion; ordinary formal smoothness and the Picard group of a local ring do not suffice.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Ramanujam Samuel parafactorial localizations of an adically formally smooth algebra over a local ring with normal completion",
+   "results": "Hits: Algebra.FormallySmooth.exists_mkₐ_comp_eq_of_isAdicComplete, Algebra.FormallySmooth.exists_adicCompletionEvalOneₐ_comp_eq, Algebra.FormallySmooth.localization_map, RingHom.FormallySmooth.holdsForLocalizationAway, Algebra.FormallySmooth.localization_base, BDeRham, RingHom.FormallySmooth.localizationPreserves, Algebra.FormallySmooth.instLocalization  No match for the complete local punctured-spectrum assertion; ordinary formal smoothness and the Picard group of a local ring do not suffice.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Punctured local spectrum Picard trivial formally smooth local homomorphism analytically normal finite residue extension",
+   "results": "Hits: CommRing.Pic.instSubsingletonOfIsLocalRing, Algebra.FormallySmooth.iff_injective_lTensor_residueField, Algebra.instFiniteResidueFieldOfFormallyUnramified, Algebra.smoothLocus, Algebra.FormallySmooth.iff_injective_cotangentComplexBaseChange_residueField, Algebra.FormallySmooth.casesOn, Algebra.IsSmoothAt, CommRing.Pic.instSubsingletonOfFiniteMaximalSpectrum  No match for the complete local punctured-spectrum assertion; ordinary formal smoothness and the Picard group of a local ring do not suffice.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Pic\", \"IsLocalRing\"",
+   "results": "Hits: CommRing.Pic.instSubsingletonOfIsLocalRing  No match for the complete local punctured-spectrum assertion; ordinary formal smoothness and the Picard group of a local ring do not suffice.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-smooth-nongeneric-punctured-line-triviality",
+  "date": "2026-10-24",
+  "group": "Q05"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "EGA IV4 21.14.3(i), first assertion, used to verify the parafactoriality hypothesis in the proof of the second assertion; lower input to the inherited affine-boundary construction. Supporting input: EGA IV4 Theorem 21.14.1 and Corollary 21.14.2, with the explicit meaning of local parafactoriality in 21.13.8. No Stacks tag states this Ramanujam--Samuel theorem.",
+   "via": [
+    "lem-sfb-smooth-nongeneric-punctured-line-triviality",
+    "lem-sfb-ramanujam-samuel-prime-divisor",
+    "lem-sfb-smooth-normal-affine-boundary-cartier",
+    "lem-sfb-normal-smooth-group-local-ample-line",
+    "lem-sfb-symmetric-line-power-prolongation",
+    "lem-sfb-normal-symmetric-cubical-extension",
+    "lem-sfb-symmetric-ample-power-extension",
+    "lem-sfb-regular-group-generic-ampleness",
+    "lem-sfb-stable-picard-theta-ampleness",
+    "lem-sfb-stable-relative-picard-kummer",
+    "lem-sfb-stable-level-versal-branch-freeness",
+    "lem-sfb-stable-abelian-level-normalization",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-formally-smooth-ramanujam-samuel-localization",
+  "worker": "stage1",
+  "summary": "Kept the statement. Split the EGA proof through a normal power-series cover, horizontal height-one prime principality, generic reflexive-ideal flat descent and the converse divisor criterion. Reused normality descent and the existing divisorial-lattice and principal-divisor theorems. All four new nodes are statement-only and searched.",
+  "blueprint": "The inherited EGA IV4 21.14.3(i) localization input in the affine-boundary argument. The ancestor command returns null; the inherited null from.node and via chain are retained. Latest blueprint and imported blueprint searches found no exact duplicate.",
+  "tool_uses": [
+   {
+    "node": "lem-per-divisorial-fractional-module-lattices",
+    "why": "Generic normal-domain finite reflexive valuation lattice, used to identify a height-one prime ideal as reflexive."
+   },
+   {
+    "node": "lem-trf-normal-domain-principal-divisor-kernel",
+    "why": "Generic valuation divisor homomorphism with finite support, used for finite product assembly."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-per-divisorial-fractional-module-lattices",
+  "lem-trf-normal-domain-principal-divisor-kernel"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q87-84f84922c",
+  "group": "Q87",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q87-84f84922c (reviewer sub-agent of L); spot-checked: Read the item, all four new nodes and every cited statement in full. EGA IV4 is not local, so I read the translation's markdown source (jcreinhold/ega iv/34-ch4-21-divisors.md): 21.13.8, 21.13.14-16, 21.14.1 with its full proof, and 21.14.2. The item statement agrees with 21.14.1/21.14.2 hypothesis by hypothesis; 'p prime' is redundant (EGA step 0) and harmless. Step 1 is EGA's first paragraph (C finite flat over Â, D0=C[[T]]); the contraction holds because n=m_A C, normality descends by 2.1.13, injectivity comes from faithfully flat contraction. Step 2 is EGA's divisorial descent: I_B([r])=r is reflexive by the lattice node, and c in r minus p lies outside nD, so every height-one prime over rD is horizontal and principal. Step 3 is the valuation assembly that proves the conclusion of 21.14.1. Step 4 is 21.13.15 (a)=>(b) with S={p}. 21.13.15(a) is 'cycles on X principal at S are locally principal', so the node's global hypothesis implies it, and EGA's neighbourhood/21.13.14 argument settles points q with p outside Spec B_q. Small cases checked for each new node: the horizontal node's r not-in nD form is the true one (Danilov elliptic-cone examples rule out an 'every class' version), d=0 is vacuous; for the descent node, I=R is allowed and reflexivity is required (an m-primary ideal of a 2-dimensional regular local ring is a counterexample without it); the cover node holds for an inseparable residue extension; the criterion holds for p=(0) (B factorial) and p=m. No duplicates: parafactorial-principal-cycle-extension is the converse direction, punctured-picard-local-extension-criterion is a different statement. No new node restates the item; each is one paragraph of EGA's proof. Tool uses accepted: divisorial-fractional-module-lattices and normal-domain-principal-divisor-kernel are generic normal-domain algebra. Batch-5 flags: both trf citations and the lattice node's closure are generic facts about div on Noetherian normal domains (finite support, homomorphism, kernel), and def-trf-affine-weil-divisor-class-group is a general definition; none is a step of the trace formula or Poincaré duality, so all are accepted. No SGA source is used. No changes made."
+ }
+}

@@ -1,0 +1,140 @@
+{
+ "kind": "statement",
+ "source": {
+  "document": "literature/stacks-project/more-etale.tex",
+  "place": "Tags 09AK--09AL; auxiliary Step 1 of lem-pur-compact-support-strict-scalar-refinement"
+ },
+ "stmt_deps": [
+  "lem-pur-compact-support-coefficient-models",
+  "def-weil-derived-complete-integral-detailed",
+  "def-weil-finite-tor-amplitude",
+  "lem-sf-proetale-constructible-origin"
+ ],
+ "proof": [
+  {
+   "text": "Unpack finiteTorConstructibleIntegral and sfIntegralConstructible. At level n+1 retain the intrinsic constructible reduction Q and its cohomological interval [a,b]. Restriction to fixed quotient scalars is an exact equivalence, so its homology remains constructible and vanishes outside [a,b].",
+   "uses": [
+    "def-weil-finite-tor-amplitude",
+    "def-weil-derived-complete-integral-detailed",
+    "lem-weil-pbc-proetale-constant-module-encoding"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply the proved fixedDerivedOrigin helper of ProEtaleConstructibleOrigin to that fixed-scalar reduction. It supplies a bounded constructible etale complex L and the comparison isomorphism. Its finite interval makes L bounded below. Apply the specified finiteCoefficientComparison to L to obtain the finite function-coefficient object F with its retained EtaleOriginWitness.",
+   "uses": [
+    "lem-sf-proetale-constructible-origin",
+    "def-cbc-finite-constant-coefficient-transport"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The constant-to-completion map followed by the nth completed projection is the constant quotient map, by limit.lift_π. Naturality of the sheafification unit identifies its action on each constant scalar with the lifted quotient homomorphism. The proved ringUnitLinearizeIso helper gives an identity-on-sections comparison between ordinaryFiniteRestriction followed by fixedRestriction and fixed quotient restriction followed by scalar restriction. The cFixed comparison similarly identifies restriction of F with restriction of the fixed comparison image of L.",
+   "uses": [
+    "def-weil-completed-integral-coefficients",
+    "def-cbc-finite-constant-coefficient-transport",
+    "lem-pur-compact-support-strict-scalar-mate",
+    "lem-weil-pbc-proetale-constant-module-encoding"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Localize these exact functor comparisons. Compose them with the origin isomorphism and use full faithfulness of fixedRestriction to recover the integral-constant-module isomorphism. Finally compose the inverse of S.reductionEvaluation and evaluationRestriction, identifying the restricted reduction Q with the actual nth evaluation of reduction S. Package the quotient ring, quotient homomorphism, F, its retained origin, and this isomorphism as ScalarEtaleOrigin. Repeat independently for each n; no transition compatibility or common choice of origins is needed.",
+   "uses": [
+    "def-cbc-finite-constant-coefficient-transport",
+    "lem-pur-compact-support-strict-scalar-mate",
+    "def-pur-native-constant-support-model",
+    "lem-coef-derived-system-evaluation-calculus"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-cbc-finite-constant-coefficient-transport",
+  "def-pur-native-constant-support-model",
+  "def-weil-completed-integral-coefficients",
+  "def-weil-derived-complete-integral-detailed",
+  "def-weil-finite-tor-amplitude",
+  "lem-coef-derived-system-evaluation-calculus",
+  "lem-pur-compact-support-strict-scalar-mate",
+  "lem-sf-proetale-constructible-origin",
+  "lem-weil-pbc-proetale-constant-module-encoding"
+ ],
+ "proof_origin": {
+  "by": "A2 stage-3 worker",
+  "date": "2026-10-26",
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Tags 09AK--09AL, lemma-compare-constructible-derived; direct scalar-unit calculation using the actual completed quotient cone.",
+  "note": "Use the existing proved fixedDerivedOrigin helper and normalized constant-coefficient helpers; no new sorry or public statement."
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-thm-purity-transport",
+ "id": "lem-pur-compact-support-strict-scalar-refinement-origins-e",
+ "title": "E-side origins for scalar refinement reductions",
+ "statement": "For the finite-field and coefficient hypotheses of the strict scalar refinement, a coefficient calculus S and an object M in finiteTorConstructibleIntegral have, independently at every n, a ScalarEtaleOrigin over the E reduction (ev E X n) ((reduction E X S).obj M).",
+ "lean": {
+  "module": "Sheaf.Paper.ScalarRefinementOriginsE",
+  "declaration": "WeilConjectures.PurStrictScalar.scalar_refinement_origins_E",
+  "statement": "theorem scalar_refinement_origins_E (S : CoefficientDerivedSystemCalculus.{u, u} l E X) (M : DerivedCategory (scalarReductionSource l E X)) (_hM : finiteTorConstructibleIntegral l E X M) : ∀ n : ℕ, Nonempty (ScalarEtaleOrigin (ULift.{u + 1} (Padic.coefficientExtensionIntegers l E)) X ((ev (ULift.{u + 1} (Padic.coefficientExtensionIntegers l E)) X n).obj ((reduction l E X S).obj M)))",
+  "file": "lean/Sheaf/Paper/ScalarRefinementOriginsE.lean",
+  "branch": "newtargets-dag",
+  "by": "X9",
+  "date": "2026-10-26",
+  "existing": false
+ },
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.CompactSupportStrictScalarRefinement",
+  "date": "2026-10-26",
+  "group": "X9"
+ },
+ "blueprint": {
+  "is": null,
+  "from": "lem-pur-compact-support-strict-scalar-refinement",
+  "same_as": []
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "finite coefficient constructible pro-etale origin witness",
+   "results": "No direct specialized theorem beyond the recorded constructible origin theorem.",
+   "date": "2026-10-26",
+   "verdict": "use the stated constructible-origin dependency."
+  },
+  {
+   "tool": "loogle",
+   "query": "ScalarEtaleOrigin",
+   "results": "No shorter existing theorem found.",
+   "date": "2026-10-26",
+   "verdict": "no direct match."
+  },
+  {
+   "tool": "grep",
+   "query": "finiteRing_constructibleDerived_origin",
+   "results": "Existing finite coefficient origin theorem is the intended source.",
+   "date": "2026-10-26",
+   "verdict": "use the stated dependency."
+  }
+ ],
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "X9",
+  "result": "pass",
+  "landing": "20261026T003238-L-156115",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A2",
+  "result": "pass",
+  "landing": "20261026T065007-L-2662492",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

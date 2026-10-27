@@ -1,0 +1,240 @@
+{
+ "id": "lem-sfb-field-groupoid-point-translation",
+ "kind": "statement",
+ "title": "A field-groupoid point with invertible residue maps gives translation",
+ "statement": "Let $k$ be a field [def-weil-field], $V=\\operatorname{Spec}k$ [def-weil-affine-spectrum], and $(V,R,s,t,e,i,c)$ an absolute groupoid scheme [def-a1-groupoid-scheme]. Let $r\\in|R|$ be a point for which both induced maps $k\\to\\kappa(r)$ [def-weil-residue-field] from $s,t$ are isomorphisms. There are morphisms $u,v:V\\to R$ with image $r$, with $s\\circ u=\\mathrm{id}_V$ and $t\\circ v=\\mathrm{id}_V$, and $t\\circ u$ is an automorphism of $V$ with $v=u\\circ(t\\circ u)^{-1}$. The morphism $L_r:R\\to R$ given on test-scheme points by $x\\mapsto c(u\\circ t\\circ x,x)$ is a scheme automorphism, with inverse $y\\mapsto c(i\\circ v\\circ t\\circ y,y)$. It satisfies $L_r\\circ e=u$, and hence sends the identity point to $r$. No finite-type hypothesis is imposed.",
+ "source": {
+  "document": "literature/stacks-project/more-groupoids.tex",
+  "place": "Tag 04LS (lemma-groupoid-on-field-move-point), statement and explicit morphisms in its proof."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-weil-affine-spectrum",
+  "def-a1-groupoid-scheme",
+  "def-weil-residue-field"
+ ],
+ "proof": [
+  {
+   "text": "Write $\\alpha,\\beta:k\\xrightarrow{\\sim}\\kappa(r)$ for the residue maps of $s,t$. By [lem-weil-pbc-morphism-from-spec-field] there is a canonical $j_r:\\operatorname{Spec}\\kappa(r)\\to R$ with image $r$. Set $u=j_r\\circ\\operatorname{Spec}(\\alpha^{-1})$ and $v=j_r\\circ\\operatorname{Spec}(\\beta^{-1})$. Naturality [lem-weil-pbc-residue-field-point-naturality] gives $s\\circ j_r=\\operatorname{Spec}\\alpha$ and $t\\circ j_r=\\operatorname{Spec}\\beta$, identifying the canonical residue point of $V$ with $\\mathrm{id}_V$. Thus functoriality of $\\operatorname{Spec}$ [def-weil-affine-spectrum] gives $s\\circ u=t\\circ v=\\mathrm{id}_V$, and both $u,v$ have image $r$. Put $\\theta=t\\circ u=\\operatorname{Spec}(\\alpha^{-1}\\circ\\beta)$. It is an automorphism with inverse $\\operatorname{Spec}(\\beta^{-1}\\circ\\alpha)=s\\circ v$. The same functoriality gives $v=u\\circ\\theta^{-1}$ and $v\\circ\\theta=u$; hence $u\\circ s\\circ v=v$.",
+   "uses": [
+    "lem-weil-pbc-morphism-from-spec-field",
+    "lem-weil-pbc-residue-field-point-naturality",
+    "def-weil-affine-spectrum"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-groupoids.tex",
+    "place": "Tag 04LS (lemma-groupoid-on-field-move-point), proof, first paragraph: construction of a,b"
+   }
+  },
+  {
+   "text": "Construct actual scheme morphisms using the fibre-product universal property [def-pc-fibre-product]:\n$L=c\\circ\\langle u\\circ t,\\mathrm{id}_R\\rangle$ and $M=c\\circ\\langle i\\circ v\\circ t,\\mathrm{id}_R\\rangle$.\nThe first pair is composable because $s\\circ u\\circ t=t$; the second because $s\\circ i\\circ v\\circ t=t\\circ v\\circ t=t$, using the groupoid identities [def-a1-groupoid-scheme]. For any $x:T\\to R$, precomposition gives $Lx=c(u\\circ t\\circ x,x)$ and $Mx=c(i\\circ v\\circ t\\circ x,x)$ as asserted. Below juxtaposition denotes composition of scheme morphisms, with $c(a,b)$ interpreted by the fibre-product lift. We will compute the two composites at the universal $R$-point $\\mathrm{id}_R$, so the resulting equalities are equalities of morphisms.",
+   "uses": [
+    "def-pc-fibre-product",
+    "def-a1-groupoid-scheme"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-groupoids.tex",
+    "place": "Tag 04LS (lemma-groupoid-on-field-move-point), proof, definitions of Psi and Phi and composability"
+   }
+  },
+  {
+   "text": "For $q=v\\circ t:R\\to R$ one has $tq=t$, and the target law gives $tM=tiq=sq$. Thus $u\\circ t\\circ M=u\\circ s\\circ v\\circ t=q$ by step 1. Apply associativity, the inverse law and the left unit law of [def-a1-groupoid-scheme]:\n$L\\circ M=c(q,c(iq,\\mathrm{id}_R))=c(c(q,iq),\\mathrm{id}_R)=c(e\\circ tq,\\mathrm{id}_R)=c(e\\circ t,\\mathrm{id}_R)=\\mathrm{id}_R$.\nAll compositions in this calculation are defined: $s(iq)=tq=t$ and $s(q)=t(iq)$, so the triple $(q,iq,\\mathrm{id}_R)$ is composable.",
+   "uses": [
+    "def-a1-groupoid-scheme"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-groupoids.tex",
+    "place": "Tag 04LS (lemma-groupoid-on-field-move-point), proof, first displayed inverse calculation"
+   }
+  },
+  {
+   "text": "For $p=u\\circ t:R\\to R$ one has $sp=t$ and $tL=tp=\\theta\\circ t$. Consequently $v\\circ t\\circ L=v\\circ\\theta\\circ t=p$ by step 1. Using the same groupoid laws [def-a1-groupoid-scheme], now in the opposite inverse identity,\n$M\\circ L=c(ip,c(p,\\mathrm{id}_R))=c(c(ip,p),\\mathrm{id}_R)=c(e\\circ sp,\\mathrm{id}_R)=c(e\\circ t,\\mathrm{id}_R)=\\mathrm{id}_R$.\nThe triple $(ip,p,\\mathrm{id}_R)$ is composable because $s(p)=t$ and $s(ip)=t(p)$. Hence $L$ is a scheme automorphism with inverse $M$, which is exactly the inverse formula in the statement.",
+   "uses": [
+    "def-a1-groupoid-scheme"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-groupoids.tex",
+    "place": "Tag 04LS (lemma-groupoid-on-field-move-point), proof, second displayed inverse calculation"
+   }
+  },
+  {
+   "text": "Finally $t\\circ e=\\mathrm{id}_V$ and $s\\circ u=\\mathrm{id}_V$, so the right unit law [def-a1-groupoid-scheme] gives $L\\circ e=c(u,e)=c(u,e\\circ s\\circ u)=u$. The unique point of $V$ maps under $u$ to $r$ by step 1, proving the claimed action on the identity point. Every construction above uses only the two residue-map isomorphisms and the groupoid laws; no finite-type hypothesis is needed.",
+   "uses": [
+    "def-a1-groupoid-scheme"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-groupoids.tex",
+    "place": "Tag 04LS (lemma-groupoid-on-field-move-point), proof, unit-point assertion"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-morphism-from-spec-field",
+  "lem-weil-pbc-residue-field-point-naturality",
+  "def-weil-affine-spectrum",
+  "def-pc-fibre-product",
+  "def-a1-groupoid-scheme"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/more-groupoids.tex",
+  "place": "Tag 04LS (lemma-groupoid-on-field-move-point), proof"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Left translation by a rational point of a groupoid scheme is a scheme automorphism",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.AffineSpace.map\", \"module\": \"Mathlib/AlgebraicGeometry/AffineSpace\", \"type\": \"(n : Type v) →\\n  {S T : AlgebraicGeometry.Scheme} → (S ⟶ T) → (AlgebraicGeometry.AffineSpace n S ⟶ AlgebraicGeometry.AffineSpace n T)\", \"doc\": \"Given a morphism $ f: S \\to T $ of schemes, this function constructs the induced morphism $ \\\\mathbb{A}^n_S \\to \\\\mathbb{A}^n_T $ between affine spaces by composing the canonical projection $ \\\\mathbb{A}^n\"}\n  {\"name\": \"CategoryTheory.PreGaloisCategory.toAutMulEquiv_apply\", \"module\": \"Mathlib/CategoryTheory/Galois/IsFundamentalgroup\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{u₂, u₁} C] (F : CategoryTheory.Functor C FintypeCat)\\n  [inst_1 : CategoryTheory.GaloisCategory C] {G : Type u_1} [inst_2 : Group G]\\n  [inst_3 : (X : C) → MulAction G (F.obj X).carrier] [inst_4 : CategoryTheory.PreGaloisCategory.FiberFunctor F]\\n  [inst\", \"doc\": \"There exists a multiplicative equivalence between the compact topological group $ G $ and the automorphism group $ \\\\mathrm{Aut}(F) $ of the fiber functor $ F : \\\\mathcal{C} \\\\to \\\\text{Fintype} $, establ\"}\n  {\"name\": \"AlgebraicGeometry.AffineSpace.instIsOverHomOfVectorOverSchemeInferInstanceOverClass\", \"module\": \"Mathlib/AlgebraicGeometry/AffineSpace\", \"type\": \"∀ {n : Type v} (S : AlgebraicGeometry.Scheme) {X : AlgebraicGeometry.Scheme} [inst : X.Over S]\\n  (v : n → ↑(X.presheaf.obj (Opposite.op ⊤))),\\n  AlgebraicGeometry.Scheme.Hom.IsOver (AlgebraicGeometry.AffineSpace.homOfVector (X ↘ S) v) S\", \"doc\": \"For any scheme $ S $ and type $ n $, the affine space $ \\\\mathbb{A}^n_S $ is equipped with a canonical morphism to $ S $, making it an object in the category of schemes over $ S $. This structure arise\"}\n  {\"name\": \"CategoryTheory.PreGaloisCategory.toAutHomeo_apply\", \"module\": \"Mathlib/CategoryTheory/Galois/IsFundamentalgroup\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{u₂, u₁} C] (F : CategoryTheory.Functor C FintypeCat)\\n  [inst_1 : CategoryTheory.GaloisCategory C] {G : Type u_1} [inst_2 : Group G]\\n  [inst_3 : (X : C) → MulAction G (F.obj X).carrier] [inst_4 : CategoryTheory.PreGaloisCategory.FiberFunctor F]\\n  [inst\", \"doc\": \"For any element $g$ in a compact topological group $G$, the homeomorphism $\\\\text{toAutHomeo}(F, G)$ evaluated at $g$ coincides with the group homomorphism $\\\\text{toAut}(F, G)$ evaluated at $g$, i.e., \"}\n  {\"name\": \"AlgebraicGeometry.AffineSpace.homOverEquiv_apply\", \"module\": \"Mathlib/AlgebraicGeometry/AffineSpace\", \"type\": \"∀ {n : Type v} (S : AlgebraicGeometry.Scheme) {X : AlgebraicGeometry.Scheme} [inst : X.Over S]\\n  (f : { f // AlgebraicGeometry.Scheme.Hom.IsOver f S }) (i : n),\\n  (AlgebraicGeometry.AffineSpace.homOverEquiv S) f i =\\n    (CategoryTheory.ConcreteCategory.hom (AlgebraicGeometry.Scheme.Hom.appTop ↑f))\\n \", \"doc\": \"For any scheme $ S $ and any scheme $ X $ over $ S $, there is a natural bijection between morphisms from $ X $ to the affine space $ \\\\mathbb{A}^n_S $ over $ S $ and $ n $-tuples of global sections of\"}\n  {\"name\": \"CategoryTheory.PreGaloisCategory.autGaloisSystem\", \"module\": \"Mathlib/CategoryTheory/Galois/Prorepresentability\", \"type\": \"{C : Type u₁} →\\n  [inst : CategoryTheory.Category.{u₂, u₁} C] →\\n    [inst_1 : CategoryTheory.GaloisCategory C] →\\n      (F : CategoryTheory.Functor C FintypeCat) →\\n        CategoryTheory.Functor (CategoryTheory.PreGaloisCategory.PointedGaloisObject F) GrpCat\", \"doc\": \"The functor from the category of pointed Galois objects in a pre-Galois category to the category of groups, which sends each pointed Galois object to its automorphism group and each morphism between p\"}\n  {\"name\": \"WeierstrassCurve.instMulActionVariableChange\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/VariableChange\", \"type\": \"{R : Type u} → [inst : CommRing R] → MulAction (WeierstrassCurve.VariableChange R) (WeierstrassCurve R)\", \"doc\": \"For any commutative ring $ R $, the group of variable changes for Weierstrass curves over $ R $ acts on the set of Weierstrass curves over $ R $. This defines a monoid action where the group operation\"}\n  {\"name\": \"CategoryTheory.PreGaloisCategory.toAut_hom_app_apply\", \"module\": \"Mathlib/CategoryTheory/Galois/IsFundamentalgroup\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{u₂, u₁} C] (F : CategoryTheory.Functor C FintypeCat) {G : Type u_1}\\n  [inst_1 : Group G] [inst_2 : (X : C) → MulAction G (F.obj X).carrier]\\n  [inst_3 : CategoryTheory.PreGaloisCategory.IsNaturalSMul F G] (g : G) {X : C} (x : (F.obj X).carrier),\\n  (Cat\", \"doc\": \"For a group $G$ acting naturally on a functor $F : \\\\mathcal{C} \\\\to \\\\text{FintypeCat}$, the homomorphism $\\\\phi : G \\\\to \\\\mathrm{Aut}(F)$ satisfies $\\\\phi(g)_X(x) = g \\\\cdot x$ for all $g \\\\in G$, objects $\"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: no internal scheme-groupoid theorem; ordinary groupoids, group objects, topological groups, pure-inseparable extensions and residue-field parametrizations do not give the stated general field-groupoid result in one line"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A groupoid arrow whose source and target residue field maps are isomorphisms defines a translation automorphism moving identity to the arrow",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.residueFieldCongr_trans_hom\", \"module\": \"Mathlib/AlgebraicGeometry/ResidueField\", \"type\": \"∀ (X : AlgebraicGeometry.Scheme) {x y z : ↥X} (e : x = y) (e' : y = z),\\n  CategoryTheory.CategoryStruct.comp (AlgebraicGeometry.Scheme.residueFieldCongr e).hom\\n      (AlgebraicGeometry.Scheme.residueFieldCongr e').hom =\\n    (AlgebraicGeometry.Scheme.residueFieldCongr ⋯).hom\", \"doc\": \"For a scheme $X$ and points $x,y,z \\\\in X$ with equalities $x = y$ and $y = z$, the composition of the residue field isomorphisms $\\\\kappa(x) \\\\xrightarrow{\\\\sim} \\\\kappa(y)$ and $\\\\kappa(y) \\\\xrightarrow{\\\\s\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.residueFieldCongr_trans\", \"module\": \"Mathlib/AlgebraicGeometry/ResidueField\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} {x y z : ↥X} (e : x = y) (e' : y = z),\\n  AlgebraicGeometry.Scheme.residueFieldCongr e ≪≫ AlgebraicGeometry.Scheme.residueFieldCongr e' =\\n    AlgebraicGeometry.Scheme.residueFieldCongr ⋯\", \"doc\": \"For a scheme $ X $ and points $ x, y, z \\\\in X $, if $ x = y $ and $ y = z $, then the composition of the residue field isomorphisms $ \\\\kappa(x) \\\\cong \\\\kappa(y) $ and $ \\\\kappa(y) \\\\cong \\\\kappa(z) $ equa\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.residueFieldCongr_refl\", \"module\": \"Mathlib/AlgebraicGeometry/ResidueField\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} {x : ↥X},\\n  AlgebraicGeometry.Scheme.residueFieldCongr ⋯ = CategoryTheory.Iso.refl (X.residueField x)\", \"doc\": \"For any point $x$ on a scheme $X$, applying the residue field isomorphism construction to the reflexive equality $x = x$ yields the identity isomorphism on the residue field $\\\\kappa(x)$.\"}\n  {\"name\": \"IsLocalRing.ResidueField.mapAut_apply\", \"module\": \"Mathlib/RingTheory/LocalRing/ResidueField/Basic\", \"type\": \"∀ {R : Type u_1} [inst : CommRing R] [inst_1 : IsLocalRing R] (f : R ≃+* R),\\n  IsLocalRing.ResidueField.mapAut f = IsLocalRing.ResidueField.mapEquiv f\", \"doc\": \"For any commutative local ring $ R $ and ring automorphism $ f : R ≃+* R $, the automorphism induced on the residue field $ R/\\\\mathfrak{m} $ (where $ \\\\mathfrak{m} $ is the unique maximal ideal) via th\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.SpecToEquivOfField_eq_iff\", \"module\": \"Mathlib/AlgebraicGeometry/ResidueField\", \"type\": \"∀ {K : Type u_1} [inst : Field K] {X : AlgebraicGeometry.Scheme}\\n  {f₁ f₂ : (x : ↥X) × (X.residueField x ⟶ { carrier := K, commRing := Field.toEuclideanDomain.toCommRing })},\\n  f₁ = f₂ ↔\\n    ∃ (e : f₁.fst = f₂.fst),\\n      f₁.snd = CategoryTheory.CategoryStruct.comp (AlgebraicGeometry.Scheme.residueF\", \"doc\": \"For a scheme $X$ and points $x, y \\\\in X$, if $x = y$, then the residue fields $\\\\kappa(x)$ and $\\\\kappa(y)$ are isomorphic via the identity isomorphism on $\\\\kappa(x)$.\"}\n  {\"name\": \"IsLocalRing.ResidueField.mapAut\", \"module\": \"Mathlib/RingTheory/LocalRing/ResidueField/Basic\", \"type\": \"{R : Type u_1} → [inst : CommRing R] → [inst_1 : IsLocalRing R] → RingAut R →* RingAut (IsLocalRing.ResidueField R)\", \"doc\": \"For a commutative local ring $ R $, this defines a group homomorphism from the automorphism group $ \\\\text{Aut}(R) $ to the automorphism group of its residue field $ R/\\\\mathfrak{m} $ (where $ \\\\mathfrak\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.residueFieldMap_id\", \"module\": \"Mathlib/AlgebraicGeometry/ResidueField\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} (x : ↥X),\\n  AlgebraicGeometry.Scheme.Hom.residueFieldMap (CategoryTheory.CategoryStruct.id X) x =\\n    CategoryTheory.CategoryStruct.id (X.residueField x)\", \"doc\": \"For any scheme $X$ and a point $x \\\\in X$, the residue field map induced by the identity morphism $\\\\mathrm{id}_X : X \\\\to X$ at $x$ coincides with the identity map on the residue field $\\\\kappa(x)$ of $x\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.residueFieldCongr_trans_hom_assoc\", \"module\": \"Mathlib/AlgebraicGeometry/ResidueField\", \"type\": \"∀ (X : AlgebraicGeometry.Scheme) {x y z : ↥X} (e : x = y) (e' : y = z) {Z : CommRingCat} (h : X.residueField z ⟶ Z),\\n  CategoryTheory.CategoryStruct.comp (AlgebraicGeometry.Scheme.residueFieldCongr e).hom\\n      (CategoryTheory.CategoryStruct.comp (AlgebraicGeometry.Scheme.residueFieldCongr e').hom h\", \"doc\": \"For a scheme $X$ and points $x,y,z \\\\in X$ with equalities $x = y$ and $y = z$, the composition of residue field isomorphisms $\\\\kappa(x) \\\\cong \\\\kappa(y)$ and $\\\\kappa(y) \\\\cong \\\\kappa(z)$ satisfies assoc\"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: no internal scheme-groupoid theorem; ordinary groupoids, group objects, topological groups, pure-inseparable extensions and residue-field parametrizations do not give the stated general field-groupoid result in one line"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Groupoid\", \"Scheme\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-24",
+   "verdict": "no match: no internal scheme-groupoid theorem; ordinary groupoids, group objects, topological groups, pure-inseparable extensions and residue-field parametrizations do not give the stated general field-groupoid result in one line"
+  },
+  {
+   "tool": "grep",
+   "query": "groupoid.*translat|translat.*groupoid|groupoid.*automorph",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-24",
+   "verdict": "no match: no internal scheme-groupoid theorem; ordinary groupoids, group objects, topological groups, pure-inseparable extensions and residue-field parametrizations do not give the stated general field-groupoid result in one line"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Left multiplication by an arrow in a scheme groupoid is an automorphism if source target residue maps are isomorphisms",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"Equiv.mulLeft\", \"module\": \"Mathlib.Algebra.Group.Units.Equiv\", \"type\": \"(a : G) : Perm G\", \"doc\": \"For a group element $a$, the permutation of $G$ induced by left multiplication by $a$, where each element $x$ is mapped to $a \\\\cdot x$, with the inverse permutation given by multiplication by the inve\"}\n  {\"name\": \"Homeomorph.mulLeft\", \"module\": \"Mathlib.Topology.Algebra.Group.Basic\", \"type\": \"(a : G) : G ≃ₜ G\", \"doc\": \"For any element $a$ in a topological group $G$, the left multiplication map $x \\\\mapsto a \\\\cdot x$ defines a homeomorphism from $G$ to itself. This map is bijective, continuous (as the product of the c\"}\n  {\"name\": \"CategoryTheory.GrpObj.mulRight\", \"module\": \"Mathlib.CategoryTheory.Monoidal.Grp_\", \"type\": \"{A : C} [GrpObj A] (f : 𝟙_ C ⟶ A) : A ≅ A\", \"doc\": \"Given a group object $ A $ in a Cartesian monoidal category $ \\\\mathcal{C} $ and a morphism $ f: \\\\mathbf{1}_\\\\mathcal{C} \\\\to A $ from the unit object, this constructs an isomorphism $ A \\\\cong A $ via ri\"}\n  {\"name\": \"smoothLeftMul\", \"module\": \"Mathlib.Geometry.Manifold.Algebra.Monoid\", \"type\": \": C^∞⟮I, G; I, G⟯\", \"doc\": \"For a group $G$ modeled as a charted space with a model with corners structure over a nontrivially normed field, the left multiplication map $\\\\lambda x. g \\\\cdot x : G \\\\to G$ is smooth ($C^\\\\infty$) whe\"}\n  {\"name\": \"mulLeftEmbedding\", \"module\": \"Mathlib.Algebra.Group.Embedding\", \"type\": \"[Mul G] [IsLeftCancelMul G] (g : G) : G ↪ G\", \"doc\": \"For any element $g$ in a left-cancellative group $G$, the left multiplication map $h \\\\mapsto g \\\\cdot h$ is an embedding of $G$ into itself.\"}\n  {\"name\": \"CategoryTheory.Aut.autMulEquivOfIso\", \"module\": \"Mathlib.CategoryTheory.Endomorphism\", \"type\": \"{X Y : C} (h : X ≅ Y) : Aut X ≃* Aut Y\", \"doc\": \"Given isomorphic objects $X$ and $Y$ in a category $\\\\mathcal{C}$, conjugation by an isomorphism $h: X \\\\cong Y$ induces a group isomorphism $\\\\text{Aut}(X) \\\\to \\\\text{Aut}(Y)$. This isomorphism maps each\"}\n  {\"name\": \"CategoryTheory.Groupoid.vertexGroupIsomOfMap_apply\", \"module\": \"Mathlib.CategoryTheory.Groupoid.VertexGroup\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Groupoid C] {c d : C} (f : c ⟶ d) (γ : c ⟶ c),\\n  (CategoryTheory.Groupoid.vertexGroupIsomOfMap f) γ =\\n    CategoryTheory.CategoryStruct.comp (CategoryTheory.Groupoid.inv f) (CategoryTheory.CategoryStruct.comp γ f)\", \"doc\": \"Given a groupoid $\\\\mathcal{C}$ and an isomorphism $f : c \\\\to d$ between objects $c,d \\\\in \\\\mathcal{C}$, the map $\\\\gamma \\\\mapsto f^{-1} \\\\circ \\\\gamma \\\\circ f$ defines a group isomorphism between the auto\"}\n  {\"name\": \"AddAut.mulLeft\", \"module\": \"Mathlib.Algebra.Ring.AddAut\", \"type\": \": Rˣ →* AddAut R\", \"doc\": \"The monoid homomorphism from the group of units $ R^\\times $ to the additive automorphism group of $ R $, which maps each unit $ u $ to the additive automorphism given by left multiplication by $ u $. \"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: no internal scheme-groupoid theorem; ordinary groupoids, group objects, topological groups, pure-inseparable extensions and residue-field parametrizations do not give the stated general field-groupoid result in one line"
+  },
+  {
+   "tool": "grep",
+   "query": "groupoid.*translat|translat.*groupoid|GroupoidScheme|IsGroupoidScheme",
+   "results": "{\"t\": \"2026-10-23T21:28:35Z\", \"tool\": \"grep\", \"query\": \"groupoid.*translat|translat.*groupoid|GroupoidScheme|IsGroupoidScheme\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match for item: returned scheme isomorphism laws, field-point parametrization or ordinary groupoid vertex-group conjugation; these do not state internal scheme-groupoid translation. Field-point parametrization and naturality are reused through existing Mathlib leaves."
+  },
+  {
+   "tool": "leansearch",
+   "query": "An internal groupoid scheme over a field admits a translation automorphism sending the identity to an arrow whose two residue maps are isomorphisms",
+   "results": "{\"t\": \"2026-10-23T21:28:36Z\", \"tool\": \"leansearch\", \"query\": \"An internal groupoid scheme over a field admits a translation automorphism sending the identity to an arrow whose two residue maps are isomorphisms\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.residueFieldMap_id\", \"AlgebraicGeometry.Scheme.SpecToEquivOfField\", \"AlgebraicGeometry.Scheme.Hom.residueFieldMap\", \"CategoryTheory.Groupoid.vertexGroupIsomOfMap_apply\", \"CategoryTheory.IsIso.of_groupoid\", \"IsLocalRing.ResidueField.mapAut\", \"AlgebraicGeometry.Scheme.residueFieldCongr_refl\", \"CategoryTheory.Aut.instGroup\"], \"digest\": \"ac0765683d923dfd\"}",
+   "date": "2026-10-23",
+   "verdict": "no match for item: returned scheme isomorphism laws, field-point parametrization or ordinary groupoid vertex-group conjugation; these do not state internal scheme-groupoid translation. Field-point parametrization and naturality are reused through existing Mathlib leaves."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Groupoid\", \"Scheme\"",
+   "results": "{\"t\": \"2026-10-23T21:28:36Z\", \"tool\": \"loogle\", \"query\": \"\\\"Groupoid\\\", \\\"Scheme\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match for item: returned scheme isomorphism laws, field-point parametrization or ordinary groupoid vertex-group conjugation; these do not state internal scheme-groupoid translation. Field-point parametrization and naturality are reused through existing Mathlib leaves."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Translation by an arrow of an internal groupoid scheme with invertible source and target is a scheme automorphism",
+   "results": "{\"t\": \"2026-10-23T21:28:36Z\", \"tool\": \"leanfinder\", \"query\": \"Translation by an arrow of an internal groupoid scheme with invertible source and target is a scheme automorphism\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Hom.isIso_toLRSHom\", \"AlgebraicGeometry.Scheme.inv_base_hom_base\", \"AlgebraicGeometry.Scheme.hom_base_inv_base\", \"AlgebraicGeometry.Scheme.iso_inv_base_hom_base\", \"AlgebraicGeometry.Scheme.iso_hom_base_inv_base\", \"AlgebraicGeometry.Scheme.Hom.homeomorph_apply\", \"AlgebraicGeometry.Scheme.inv_appTop\", \"AlgebraicGeometry.Scheme.inv_hom_apply\"], \"digest\": \"9a93045c9f5a97f4\"}",
+   "date": "2026-10-23",
+   "verdict": "no match for item: returned scheme isomorphism laws, field-point parametrization or ordinary groupoid vertex-group conjugation; these do not state internal scheme-groupoid translation. Field-point parametrization and naturality are reused through existing Mathlib leaves."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An invertible bisection acts on the arrow object of a groupoid by left multiplication with inverse multiplication by the inverse bisection",
+   "results": "{\"t\": \"2026-10-23T21:29:59Z\", \"tool\": \"leanfinder\", \"query\": \"An invertible bisection acts on the arrow object of a groupoid by left multiplication with inverse multiplication by the inverse bisection\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Groupoid.vertexGroupIsomOfMap_apply\", \"CategoryTheory.Groupoid.vertexGroupIsomOfMap\", \"CategoryTheory.Groupoid.vertexGroupIsomOfMap_symm_apply\", \"CategoryTheory.Groupoid.invEquiv_apply\", \"CategoryTheory.Groupoid.invEquiv\", \"CategoryTheory.Groupoid.vertexGroup_inv\", \"CategoryTheory.Subgroupoid.IsNormal.conjugation_bij\", \"CategoryTheory.Groupoid.vertexGroup\"], \"digest\": \"4955fcc3a8d257dd\"}",
+   "date": "2026-10-23",
+   "verdict": "no match for item: returned scheme isomorphism laws, field-point parametrization or ordinary groupoid vertex-group conjugation; these do not state internal scheme-groupoid translation. Field-point parametrization and naturality are reused through existing Mathlib leaves."
+  },
+  {
+   "tool": "grep",
+   "query": "def SpecToEquivOfField|theorem Hom.SpecMap_residueFieldMap_fromSpecResidueField|def vertexGroupIsomOfMap|def mulRight",
+   "results": "{\"t\": \"2026-10-23T21:30:41Z\", \"tool\": \"grep\", \"query\": \"def SpecToEquivOfField|theorem Hom.SpecMap_residueFieldMap_fromSpecResidueField|def vertexGroupIsomOfMap|def mulRight\", \"sub\": \"\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/Topology/Algebra/Ring/Basic.lean\", \"Mathlib/AlgebraicGeometry/ResidueField.lean\", \"Mathlib/Topology/Algebra/GroupWithZero.lean\", \"Mathlib/Topology/MetricSpace/IsometricSMul.lean\", \"Mathlib/LinearAlgebra/Matrix/Bilinear.lean\", \"Mathlib/Topology/Algebra/Monoid.lean\", \"Mathlib/LinearAlgebra/Finsupp/LSum.lean\", \"Mathlib/Algebra/Ring/Associator.lean\"], \"digest\": \"a828163588d24271\"}",
+   "date": "2026-10-23",
+   "verdict": "no match for item: returned scheme isomorphism laws, field-point parametrization or ordinary groupoid vertex-group conjugation; these do not state internal scheme-groupoid translation. Field-point parametrization and naturality are reused through existing Mathlib leaves."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-field-groupoid-open-image-closed",
+  "date": "2026-10-24",
+  "group": "Q40"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Affine PGL quotients with closed orbits and zero-dimensional stabilizers. Supporting affine-quotient step: Adequate moduli spaces are universal for separated targets. Alper Theorem 7.2.1, locally separated case through Proposition 7.1.1: Proposition 7.1.1, proof, printed p.36: surjectivity of the diagonal pullback W from condition (a), expanded as its closure-equivalence input. Rational points of a locally separated space over an algebraically closed field have closed images; continuity gives the assertion. This is the geometric-points sublemma, not the universality conclusion. Supporting geometric input: rational sections after field base change are closed immersions. Supporting input: The absolute locally separated space has quasi-compact field-valued representatives. First paragraph of Tag 088J: apply 04Q9 to the kernel relation on the field spectrum and its pair groupoid. Supporting Second proof paragraph of 04Q9: apply 04Q6 to the morphism from the reduced source into the closure groupoid. Supporting Tag 04Q6, second proof paragraph: the translated open neighbourhood of the adapted point.",
+   "via": [
+    "lem-sfb-field-groupoid-open-image-closed",
+    "lem-sfb-field-kernel-relation-immersion-closed",
+    "lem-sfb-locally-separated-space-decent",
+    "lem-sfb-locally-separated-rational-point-closed-immersion",
+    "lem-sfb-locally-separated-closure-equivalent-images",
+    "lem-sfb-adequate-locally-separated-universality",
+    "lem-sfb-affine-pgl-finite-stabilizer-quotient",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-field-groupoid-point-translation",
+  "worker": "stage1",
+  "summary": "Q60 checked Stacks Tag 04LS and wrote the two residue-field sections, both scheme morphisms and both inverse calculations explicitly. Reused existing field-point, residue-naturality and fibre-product nodes; no new nodes or new Mathlib leaves. Statement unchanged. Item Mathlib searches rerun and logged.",
+  "blueprint": "Supporting Tag 04Q6 translation step in the inherited det-thm-sf-ctf-stability-direct-images (3) alteration/moduli chain. Steps realize Tag 04LS first paragraph, the two fibre-product constructions, its two inverse calculations, and its identity-point assertion. The inherited blueprint.from.node is null, as tools/blueprint_refs.py ancestor confirms; the existing detailed from.place and via are preserved. Whole-blueprint searches for groupoid and translation found no node with this general internal-groupoid statement."
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q60-ff4685fc2",
+  "group": "Q60",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q60-ff4685fc2 (reviewer sub-agent of L); spot-checked: Read the item and Stacks 04LS (more-groupoids.tex lemma-groupoid-on-field-move-point) in full: the statement, how a, b, Ψ and Φ are built, and both inverse computations. The node gives the same result for an absolute groupoid, which covers the over-S version, and it states the u/v/θ relations, the inverse formula and L∘e=u explicitly. I recomputed every step. Step 1: θ=Spec(α⁻¹β), and v=u∘θ⁻¹ and u s v=v follow from cited lemmas morphism-from-spec-field (which gives j_ξ=id_V) and residue-field-point-naturality, plus Spec functoriality. Step 2: both pairs are composable by si=t and sc/tc. Steps 3 and 4: LM=id and ML=id at the universal point, using associativity, both inverse laws and the left unit law; all composabilities checked. Step 5: L e=u by the right unit law. Every law used is listed in def-a1-groupoid-scheme. Edge cases tested: the trivial groupoid, and the pair groupoid over F₂ with k=F₄ (θ=Frobenius, so u≠v). No new nodes. 04LS appears in no other DAG node except the citer open-image-closed. proof_deps equal the union of uses, and both theorem deps are existing Mathlib leaves, so there are no tool_uses. No SGA source. Not a re-split note. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.FieldGroupoidPointTranslation",
+  "declaration": "AlgebraicGeometry.exists_fieldGroupoid_pointTranslation",
+  "file": "lean/Sheaf/AlgebraicGeometry/FieldGroupoidPointTranslation.lean",
+  "statement": "theorem exists_fieldGroupoid_pointTranslation (k : Type u) [Field k] {R : Scheme.{u}} (s t : R ⟶ Spec (CommRingCat.of k)) (e : Spec (CommRingCat.of k) ⟶ R) (i : R ⟶ R) (c : pullback s t ⟶ R) (hG : IsGroupoidScheme s t e i c) (r : R) (hs : IsIso (s.residueFieldMap r)) (ht : IsIso (t.residueFieldMap r)) : ∃ (u v : Spec (CommRingCat.of k) ⟶ R) (θ : Spec (CommRingCat.of k) ≅ Spec (CommRingCat.of k)) (L : R ≅ R), (∀ z : Spec (CommRingCat.of k), u z = r) ∧ (∀ z : Spec (CommRingCat.of k), v z = r) ∧ u ≫ s = 𝟙 (Spec (CommRingCat.of k)) ∧ v ≫ t = 𝟙 (Spec (CommRingCat.of k)) ∧ u ≫ t = θ.hom ∧ v = θ.inv ≫ u ∧ (∀ (T : Scheme.{u}) (x : T ⟶ R), ∃ h : (x ≫ t ≫ u) ≫ s = x ≫ t, x ≫ L.hom = pullback.lift (x ≫ t ≫ u) x h ≫ c) ∧ (∀ (T : Scheme.{u}) (y : T ⟶ R), ∃ h : (y ≫ t ≫ v ≫ i) ≫ s = y ≫ t, y ≫ L.inv = pullback.lift (y ≫ t ≫ v ≫ i) y h ≫ c) ∧ e ≫ L.hom = u",
+  "branch": "newtargets-dag",
+  "by": "Q23",
+  "date": "2026-10-23",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-f68d46654",
+  "group": "Q23",
+  "result": "pass",
+  "note": "Read node, Stacks 04LS statement and full proof, delivered module, all 4 stmt_deps (IsGroupoidScheme read in full: c(a,b)=a∘b, lift needs a≫s=b≫t, matching the Stacks Ψ/Φ composability). Each clause matches: IsIso residueFieldMap at r for s and t; u,v with image r; u≫s=𝟙, v≫t=𝟙; u≫t=θ.hom, v=θ.inv≫u; L:R≅R with T-point formulas lift(x≫t≫u,x)≫c and lift(y≫t≫v≫i,y)≫c (Prop certificates are provable from the hypotheses, so they add no assumption); e≫L.hom=u. No extra hypotheses; single universe u; test universe contains R. Edge cases: trivial groupoid, F4/F2 pair groupoid (u≠v), empty R. Live node diff: only the lean record is added; statement verbatim in file; not superseded. No defs, proof is sorry, docstrings have source place, blueprint id and proof plan; both imports needed. No compile (no file changed); worker's compile reported clean. No findings."
+ }
+}

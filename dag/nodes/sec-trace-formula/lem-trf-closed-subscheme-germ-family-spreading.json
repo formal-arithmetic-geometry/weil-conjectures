@@ -1,0 +1,263 @@
+{
+ "id": "lem-trf-closed-subscheme-germ-family-spreading",
+ "kind": "statement",
+ "title": "Simultaneous spreading of embedded closed-subscheme germ equalities",
+ "statement": "Let $Y$ be a locally Noetherian scheme [pqf-def-locnoeth], let $y\\in Y$, and let $F$ be a finite set. For each $a\\in F$ let $Z_a\\hookrightarrow Y$ and $H_a\\hookrightarrow Y$ be closed subschemes [def-weil-closed-immersion], with their defining ideal sheaves [def-sbc-closed-immersion-ideal-sheaf] $\\mathcal I_a,\\mathcal J_a\\subseteq\\mathcal O_Y$. Suppose $(\\mathcal I_a)_y=(\\mathcal J_a)_y$ as ideals in $\\mathcal O_{Y,y}$ for every $a\\in F$ [def-weil-pbc-module-stalk]. There exists a single affine open neighbourhood $U$ of $y$ such that $Z_a\\times_Y U=H_a\\times_Y U$ as closed subschemes of $U$ for every $a\\in F$. Moreover for every subset $S\\subseteq F$, the pullback of the scheme-theoretic intersection of the $Z_a$ for $a\\in S$ equals the intersection of the corresponding $H_a\\times_Y U$ [def-pc-fibre-product]. On $U=\\operatorname{Spec}B$, if $H_a\\times_Y U$ has ideal $J_a\\subseteq B$, this intersection has ideal $\\sum_{a\\in S}J_a$. For $S=\\varnothing$ it is $U$ (ideal zero); if some $H_a\\times_Y U$ with $a\\in S$ is empty, it is empty (ideal the unit ideal).",
+ "source": {
+  "document": "literature/stacks-project/coherent.tex",
+  "place": "Tag 01Y3, lemma-local-isomorphism, neighbourhood principle; agent finite-generator ideal-equality and intersection version of returned parent steps 7--8."
+ },
+ "stmt_deps": [
+  "pqf-def-locnoeth",
+  "def-weil-closed-immersion",
+  "def-weil-pbc-module-stalk",
+  "def-pc-fibre-product",
+  "def-weil-affine-spectrum",
+  "def-sbc-closed-immersion-ideal-sheaf"
+ ],
+ "proof": [
+  {
+   "text": "Choose an affine chart $V=\\operatorname{Spec}R$ containing $y$ from the Noetherian affine cover in [pqf-def-locnoeth]. By [def-weil-pbc-noetherian-ring], every ideal of $R$ is finitely generated. Put $I_a=\\mathcal I_a(V)$ and $J_a=\\mathcal J_a(V)$. By [def-sbc-closed-immersion-ideal-sheaf], the restricted closed subschemes have these ideals and their ideal sheaves on $V$ are $\\widetilde I_a$ and $\\widetilde J_a$. Choose finite generating lists $i_{a,r}$ and $j_{a,t}$ for these ideals, allowing empty lists. The finite family therefore has only finitely many chosen generators in total.",
+   "uses": [
+    "pqf-def-locnoeth",
+    "def-weil-pbc-noetherian-ring",
+    "def-sbc-closed-immersion-ideal-sheaf"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Tag 01IN, lemma-closed-subspace-scheme (3)--(4); Noetherian affine chart from Properties Tag 01OV, definition-locally-Noetherian; Algebra Tag 00FM, section-Noetherian."
+   }
+  },
+  {
+   "text": "Let $\\mathfrak p$ be the prime of $R$ corresponding to $y$. By [lem-weil-pbc-affine-open-stalk-localization] the ring germ map is $R\\to R_{\\mathfrak p}$. Apply [lem-weil-pbc-spec-tilde-stalk-localization] to the two ideal modules. Their maps to the ring stalk send $i/s$ to $i_y/s_y$ and $j/t$ to $j_y/t_y$: this follows directly by applying the inclusion to representative section germs. Thus the hypothesis on embedded ideal stalks says $I_aR_{\\mathfrak p}=J_aR_{\\mathfrak p}$, rather than merely an abstract module isomorphism. For every $i_{a,r}$, [lem-exc-localization-ideal-membership-clearing] supplies $s_{a,r}\\notin\\mathfrak p$ with $s_{a,r}i_{a,r}\\in J_a$. Applying the same statement with the ideals interchanged supplies $t_{a,t}\\notin\\mathfrak p$ with $t_{a,t}j_{a,t}\\in I_a$.",
+   "uses": [
+    "lem-weil-pbc-affine-open-stalk-localization",
+    "lem-weil-pbc-spec-tilde-stalk-localization",
+    "lem-exc-localization-ideal-membership-clearing"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Tag 01HV, lemma-spec-sheaves (6)--(7), interpreted by germs; Algebra Tag 00CD, item-localize-ideal, denominator membership as in IsLocalization.algebraMap_mem_map_algebraMap_iff."
+   }
+  },
+  {
+   "text": "Let $f$ be the product of all the $s_{a,r}$ and $t_{a,t}$, with empty product $1$. Primality gives $f\\notin\\mathfrak p$. By [lem-weil-pbc-affine-open-section-vanishing-prime], $U=D_V(f)$ is an affine open neighbourhood of $y$, with ring $B=R_f$. Every factor $s$ of $f$ is invertible in $B$: writing $f=sg$, its inverse is $g/f$. Hence $s_{a,r}i_{a,r}\\in J_a$ implies $i_{a,r}/1\\in J_aB$, and $t_{a,t}j_{a,t}\\in I_a$ implies $j_{a,t}/1\\in I_aB$. Since the displayed lists generate, these give $I_aB=J_aB$ for every $a$, on this one $U$. No cancellation in $R$, reducedness, or domain assumption was used; cancellation takes place only by units in $R_f$.",
+   "uses": [
+    "lem-weil-pbc-affine-open-section-vanishing-prime",
+    "def-weil-ring-localization-away"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Tag 01I3, lemma-standard-open-affine, and Tag 01HV (3); finite-product denominator argument written by the agent."
+   }
+  },
+  {
+   "text": "By [lem-weil-pbc-spec-module-tilde-sections], the sections on $D(f)$ of $\\widetilde I_a$ and $\\widetilde J_a$ are $(I_a)_f$ and $(J_a)_f$. Their images in $B$ are exactly the ideals generated by $I_a$ and $J_a$: a fraction $i/f^n$ is $f^{-n}(i/1)$, and a finite sum of such fractions has a common power denominator and numerator in the original ideal. Consequently the restricted ideal sheaves have the equal affine ideals $I_aB=J_aB$ from step 3, and are equal by [def-sbc-closed-immersion-ideal-sheaf]. Restricting a closed immersion to an open gives its base change by the fibre-product universal property [def-pc-fibre-product]. Therefore [lem-weil-pbc-closed-immersions-equal-ideal-isomorphic] identifies $Z_a\\times_Y U$ with $H_a\\times_Y U$ over $U$. Equality here is equality of embedded closed subschemes, through that unique isomorphism over the ambient scheme.",
+   "uses": [
+    "lem-weil-pbc-spec-module-tilde-sections",
+    "def-sbc-closed-immersion-ideal-sheaf",
+    "def-pc-fibre-product",
+    "lem-weil-pbc-closed-immersions-equal-ideal-isomorphic"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Tag 01HV (4)--(5), localized sections; Tag 01IN (3)--(4), affine ideal description; Tags 01HO/01HP, lemma-closed-immersion and lemma-characterize-closed-subspace."
+   }
+  },
+  {
+   "text": "For a finite subset $S\\subseteq F$, the scheme-theoretic intersection is the iterated fibre product over $Y$, with empty product $Y$. For any $T\\to U$, a map to its pullback to $U$ amounts, by [def-pc-fibre-product], to maps $T\\to Z_a$ over $Y$ for every $a\\in S$, together with the fixed $T\\to U$. Equivalently these are maps $T\\to Z_a\\times_Y U$ over $U$. This proves that pullback commutes with the intersection, including $S=\\varnothing$, by uniqueness of an object with this universal property. Composing each factor map with the isomorphism from step 4 identifies this functor with that for the $H_a\\times_Y U$, proving the asserted equality of intersections over $U$.",
+   "uses": [
+    "def-pc-fibre-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Tag 01JP, definition-fibre-product-schemes: iterated universal property; no separate limit-commutation theorem is used."
+   }
+  },
+  {
+   "text": "Write $J_a\\subseteq B$ for the ideal of $H_a\\times_Y U$ and put $L=\\sum_{a\\in S}J_a$. The affine closed-subscheme description [def-weil-closed-immersion] identifies these factors with $\\operatorname{Spec}(B/J_a)$. For an arbitrary test scheme $T$, [lem-weil-pbc-morphism-into-affine-scheme] identifies maps $T\\to\\operatorname{Spec}(B/L)$ over $\\operatorname{Spec}B$ with the fixed ring map $B\\to\\Gamma(T,\\mathcal O_T)$ annihilating $L$. A ring map annihilates $L$ exactly when it annihilates every $J_a$: each element of $L$ is a finite sum of elements of the $J_a$. By the same morphism correspondence this is exactly a compatible family of maps to all $\\operatorname{Spec}(B/J_a)$. Thus $\\operatorname{Spec}(B/L)$ realizes the intersection universal property [def-pc-fibre-product] and its defining ideal is $L$. For $S=\\varnothing$, $L=0$ and $\\operatorname{Spec}(B/L)=U$. If one factor is empty, its ideal is $B$: its quotient ring is the ring of sections of the empty scheme, the zero ring. Then $L=B$ and the intersection is $\\operatorname{Spec}0=\\varnothing$.",
+   "uses": [
+    "def-weil-closed-immersion",
+    "lem-weil-pbc-morphism-into-affine-scheme",
+    "def-pc-fibre-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Tag 01I1, lemma-morphism-into-affine; Tag 01QO, affine description of closed immersions; elementary quotient universal property gives the sum-ideal formula (also Morphisms Tag 0C4H, definition-scheme-theoretic-intersection-union)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "pqf-def-locnoeth",
+  "def-weil-pbc-noetherian-ring",
+  "def-sbc-closed-immersion-ideal-sheaf",
+  "lem-weil-pbc-affine-open-stalk-localization",
+  "lem-weil-pbc-spec-tilde-stalk-localization",
+  "lem-exc-localization-ideal-membership-clearing",
+  "lem-weil-pbc-affine-open-section-vanishing-prime",
+  "def-weil-ring-localization-away",
+  "lem-weil-pbc-spec-module-tilde-sections",
+  "def-pc-fibre-product",
+  "lem-weil-pbc-closed-immersions-equal-ideal-isomorphic",
+  "def-weil-closed-immersion",
+  "lem-weil-pbc-morphism-into-affine-scheme"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/schemes.tex",
+  "place": "Tags 01IN, 01HV, 01I3, 01I1 and 01HO; explicit finite-generator denominator proof of the neighbourhood principle cited as 01Y3 in the item, and quotient universal-property calculation of finite intersections."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "If finitely many pairs of finitely generated ideals in a ring become equal after localization at a prime, they become equal on one principal open neighbourhood, and so do all sums of those ideals",
+   "results": "8 hits: IsLocalization.ideal_eq_iInf_comap_map_away, Ideal.fg_of_localizationSpan, Ideal.subset_union_prime_finite, Ideal.exists_not_mem_forall_mem_of_ne_of_liesOver, PrimeSpectrum.exists_primeSpectrum_prod_le, Algebra.QuasiFiniteAt, Module.associatedPrimes.comap_mem_associatedPrimes_of_mem_associatedPrimes_of_isLocalizedModule_of_fg, LocalizedModule.exists_subsingleton_away. No returned declaration gives simultaneous equality of these embedded closed subschemes near one stalk. Ideal extensionality requires all stalks; localization support lemmas are ingredients, not this scheme-level statement.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsLocalization\", \"Ideal.FG\"",
+   "results": "0 hits: . No returned declaration gives simultaneous equality of these embedded closed subschemes near one stalk. Ideal extensionality requires all stalks; localization support lemmas are ingredients, not this scheme-level statement.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "exists.*(eq|le).*localiz|localiz.*(eq|le).*exists|exists.*map.*eq",
+   "results": "25 hits: Mathlib/RingTheory/Localization/Integral.lean, Mathlib/RingTheory/Localization/Integral.lean, Mathlib/RingTheory/Localization/Integral.lean, Mathlib/RingTheory/Localization/Integral.lean, Mathlib/RingTheory/Localization/Integral.lean, Mathlib/RingTheory/Localization/Module.lean, Mathlib/RingTheory/Localization/Module.lean, Mathlib/RingTheory/Localization/Ideal.lean. No returned declaration gives simultaneous equality of these embedded closed subschemes near one stalk. Ideal extensionality requires all stalks; localization support lemmas are ingredients, not this scheme-level statement.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Equality of finitely generated ideals at one stalk spreads to a principal open neighbourhood simultaneously for a finite family",
+   "results": "8 hits: AlgebraicGeometry.IsAffineOpen.ideal_ext_iff, AlgebraicGeometry.Scheme.IdealSheafData.ext_of_iSup_eq_top, AlgebraicGeometry.Scheme.IdealSheafData.ext_iff, PrimeSpectrum.iSup_basicOpen_eq_top_iff, Ideal.isOka_fg, AlgebraicGeometry.Scheme.affineOpenCoverOfSpanRangeEqTop, Ideal.FG, AlgebraicGeometry.StructureSheaf.IsLocalization.to_stalk. No returned declaration gives simultaneous equality of these embedded closed subschemes near one stalk. Ideal extensionality requires all stalks; localization support lemmas are ingredients, not this scheme-level statement.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finite presentation spreads equality of two ideal subsheaves from a stalk to a common open neighbourhood, preserving scheme theoretic intersections",
+   "results": "8 hits: AlgebraicGeometry.Scheme.IdealSheafData.ext_of_iSup_eq_top, AlgebraicGeometry.IsAffineOpen.ideal_ext_iff, AlgebraicGeometry.Scheme.IdealSheafData.mk.inj, AlgebraicGeometry.Scheme.IdealSheafData.ext_of_isAffine, AlgebraicGeometry.Scheme.IdealSheafData.ext_iff, AlgebraicGeometry.Scheme.IdealSheafData.ext, AlgebraicGeometry.Scheme.IdealSheafData.ofIdeals, AlgebraicGeometry.Scheme.IdealSheafData.mkOfMemSupportIff. No returned declaration gives simultaneous equality of these embedded closed subschemes near one stalk. Ideal extensionality requires all stalks; localization support lemmas are ingredients, not this scheme-level statement.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "Ideal.*(exists|eventually)|exists.*(Ideal|ideal)|FG.*map",
+   "results": "1 hits: 92. No returned declaration gives simultaneous equality of these embedded closed subschemes near one stalk. Ideal extensionality requires all stalks; localization support lemmas are ingredients, not this scheme-level statement.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "ideal.*(stalk|germ).*eq|eq.*ideal.*(stalk|germ)|exists.*ideal.*eq",
+   "results": "{\"t\": \"2026-10-23T10:00:29Z\", \"tool\": \"grep\", \"query\": \"ideal.*(stalk|germ).*eq|eq.*ideal.*(stalk|germ)|exists.*ideal.*eq\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 4, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/StructureSheaf.lean\", \"Mathlib/AlgebraicGeometry/StructureSheaf.lean\", \"Mathlib/AlgebraicGeometry/StructureSheaf.lean\", \"Mathlib/AlgebraicGeometry/Properties.lean\"], \"digest\": \"7257aad425b4d377\"} Read the returned declarations: affine ideal extensionality tests all points, germ-injectivity concerns morphism spreading, and localized module vanishing is an ingredient; none states this simultaneous embedded closed-subscheme conclusion with all intersections.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Finitely generated ideal subsheaves with equal germs coincide near a point",
+   "results": "{\"t\": \"2026-10-23T10:00:29Z\", \"tool\": \"leansearch\", \"query\": \"Finitely generated ideal subsheaves with equal germs coincide near a point\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsAffineOpen.ideal_ext_iff\", \"AlgebraicGeometry.Scheme.IdealSheafData.ext_iff\", \"AlgebraicGeometry.Scheme.IdealSheafData.ext_of_isAffine\", \"AlgebraicGeometry.Scheme.IdealSheafData.ext_of_iSup_eq_top\", \"AlgebraicGeometry.Scheme.IdealSheafData.ext\", \"Ideal.FG\", \"AlgebraicGeometry.Scheme.IdealSheafData.ofIdeals_ideal\", \"AlgebraicGeometry.IsAffineOpen.ideal_le_iff\"], \"digest\": \"bc0ccbf5f162b453\"} Read the returned declarations: affine ideal extensionality tests all points, germ-injectivity concerns morphism spreading, and localized module vanishing is an ingredient; none states this simultaneous embedded closed-subscheme conclusion with all intersections.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IdealSheafData\", \"stalk\"",
+   "results": "{\"t\": \"2026-10-23T10:00:29Z\", \"tool\": \"loogle\", \"query\": \"\\\"IdealSheafData\\\", \\\"stalk\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"} Read the returned declarations: affine ideal extensionality tests all points, germ-injectivity concerns morphism spreading, and localized module vanishing is an ingredient; none states this simultaneous embedded closed-subscheme conclusion with all intersections.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finitely many pairs of closed subschemes on a locally Noetherian scheme have equal ideal stalks at a point, so coincide on one affine open neighborhood",
+   "results": "{\"t\": \"2026-10-23T10:00:39Z\", \"tool\": \"leanfinder\", \"query\": \"Finitely many pairs of closed subschemes on a locally Noetherian scheme have equal ideal stalks at a point, so coincide on one affine open neighborhood\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.instIsGermInjectiveOfIsLocallyNoetherian\", \"AlgebraicGeometry.IsAffineOpen.ideal_ext_iff\", \"AlgebraicGeometry.Scheme.IdealSheafData.ext_of_iSup_eq_top\", \"AlgebraicGeometry.Scheme.IdealSheafData.ext_of_isAffine\", \"AlgebraicGeometry.Scheme.IdealSheafData.subschemeCover\", \"AlgebraicGeometry.Scheme.IdealSheafData.mk.inj\", \"AlgebraicGeometry.Scheme.IdealSheafData.glueDataObj\", \"AlgebraicGeometry.Scheme.IdealSheafData.ext\"], \"digest\": \"2e47f0ac2fa1c31a\"} Read the returned declarations: affine ideal extensionality tests all points, germ-injectivity concerns morphism spreading, and localized module vanishing is an ingredient; none states this simultaneous embedded closed-subscheme conclusion with all intersections.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "IsGermInjective|exists.*(ideal|Ideal)|ideal.*(exists|eventually)",
+   "results": "{\"t\": \"2026-10-23T10:02:08Z\", \"tool\": \"grep\", \"query\": \"IsGermInjective|exists.*(ideal|Ideal)|ideal.*(exists|eventually)\", \"sub\": \"AlgebraicGeometry/SpreadingOut.lean\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"37\", \"39\", \"60\", \"77\", \"80\"], \"digest\": \"7612b969a00201dc\"} Read the returned declarations: affine ideal extensionality tests all points, germ-injectivity concerns morphism spreading, and localized module vanishing is an ingredient; none states this simultaneous embedded closed-subscheme conclusion with all intersections.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Two finitely generated ideals equal after localization at a prime become equal after inverting an element outside that prime",
+   "results": "{\"t\": \"2026-10-23T10:02:10Z\", \"tool\": \"leanfinder\", \"query\": \"Two finitely generated ideals equal after localization at a prime become equal after inverting an element outside that prime\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"LocalizedModule.exists_subsingleton_away\", \"IsLocalization.ideal_eq_iInf_comap_map_away\", \"Ideal.le_of_localization_maximal\", \"Ideal.mem_of_localization_maximal\", \"Submodule.fg_of_isLocalized_maximal\", \"Algebra.QuasiFiniteAt\", \"instFiniteAtPrimeLocalizationAlgebraMapSubmonoidPrimeCompl\", \"Algebra.idealMap_eq_ofEq_comp_toLocalized₀\"], \"digest\": \"45e34df3feece84c\"} Read the returned declarations: affine ideal extensionality tests all points, germ-injectivity concerns morphism spreading, and localized module vanishing is an ingredient; none states this simultaneous embedded closed-subscheme conclusion with all intersections.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-etale-component-coordinate-identification",
+  "date": "2026-10-22",
+  "group": "Q152"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "the local strict-normal-crossings criterion after the étale coordinate calculation in Lemma 4.2.9; returned steps 7--8: finite-generator spreading to one neighbourhood and scheme-theoretic intersection ideals",
+   "via": [
+    "lem-trf-etale-component-coordinate-identification",
+    "lem-trf-permissible-boundary-preservation",
+    "lem-trf-normal-crossings-strictification",
+    "lem-trf-nodal-pair-projective-resolution",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-trf-closed-subscheme-germ-family-spreading",
+  "worker": "stage1",
+  "summary": "Read the ideal-stalk and neighbourhood sources and all cited node statements. Proved simultaneous spreading explicitly by finite generators and denominator certificates, preserving embedded ideals; derived all intersection and empty cases by the fibre-product and quotient universal properties. Reused existing nodes throughout; no new nodes or statement changes.",
+  "blueprint": "Serves the local strict-normal-crossings criterion in the ancestor lem-trf-local-term-locality route, specifically the returned parent lem-trf-etale-component-coordinate-identification steps 7--8: a common neighbourhood of the finitely many component ideal equalities and all their scheme-theoretic intersections. The latest ancestor proof has no standalone statement of this algebraic tool."
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q134-c56716766",
+  "group": "Q134",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q134-c56716766 (reviewer sub-agent of L); spot-checked: I read the item, all 6 steps and every cited statement. There are no new nodes and the statement is unchanged. No repair note exists, so the re-split rule does not apply. The statement is true; I tested it on k[x] with V(x) against V(x(x-1)) (certificate x-1), and on the S empty, empty-factor, empty-F and zero-ideal cases. Step 1: a Noetherian chart and finite generators (pqf-def-locnoeth, 00FM, def-sbc / 01IN(3)-(4)). Step 2: the embedded stalk is I_aR_p by the stalk-localization and tilde-stalk nodes, with clearing certificates from IsLocalization.algebraMap_mem_map_algebraMap_iff; it uses equality of ideals, not an abstract module isomorphism. Step 3: f is the product of the certificates, f is not in p, and D(f) is affine with ring R_f; each factor is a unit there, so I_aB=J_aB. Step 4: tilde sections and the 01HO unique isomorphism over U. Step 5: pullback commutes with intersection by the fibre-product universal property. Step 6: Spec(B/sum J_a) by 01I1 for arbitrary T; an empty factor gives the unit ideal. proof_deps equals the union of uses; step 3's extra use def-weil-ring-localization-away is harmless. All Stacks tags resolve and no SGA is cited. Not duplicates of lem-sfb-noetherian-closed-family-intersection (stronger, arbitrary families) or lem-weil-pbc-coherent-local-isomorphism (01Y3, module maps). The parent lem-trf-etale-component-coordinate-identification steps 3-4 use exactly the stated clauses."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.ClosedSubschemeGermFamilySpreading",
+  "declaration": "AlgebraicGeometry.closedSubscheme_germ_family_spreading",
+  "file": "lean/Sheaf/AlgebraicGeometry/ClosedSubschemeGermFamilySpreading.lean",
+  "statement": "theorem closedSubscheme_germ_family_spreading {Y : Scheme.{u}} [IsLocallyNoetherian Y] (y : Y) {F : Type v} [Finite F] (Z H : F → Scheme.{u}) (i : ∀ a : F, Z a ⟶ Y) (j : ∀ a : F, H a ⟶ Y) [∀ a : F, IsClosedImmersion (i a)] [∀ a : F, IsClosedImmersion (j a)] (hgerm : ∀ a : F, LinearMap.range ((PresheafOfModules.moduleStalkFunctor Y.ringCatSheaf.obj y).map (i a).ker.toModulesι.val).hom = LinearMap.range ((PresheafOfModules.moduleStalkFunctor Y.ringCatSheaf.obj y).map (j a).ker.toModulesι.val).hom) : ∃ U : Y.affineOpens, y ∈ U.1 ∧ (∀ a : F, ∃ e : pullback (i a) U.1.ι ≅ pullback (j a) U.1.ι, e.hom ≫ pullback.snd (j a) U.1.ι = pullback.snd (i a) U.1.ι) ∧ ∀ S : Finset F, (∃ e : pullback (⨆ a ∈ S, (i a).ker).subschemeι U.1.ι ≅ (⨆ a ∈ S, (pullback.snd (j a) U.1.ι).ker).subscheme, e.hom ≫ (⨆ a ∈ S, (pullback.snd (j a) U.1.ι).ker).subschemeι = pullback.snd (⨆ a ∈ S, (i a).ker).subschemeι U.1.ι) ∧ (pullback.snd (⨆ a ∈ S, (i a).ker).subschemeι U.1.ι).ker.ideal ⟨⊤, @isAffineOpen_top U.1.toScheme U.2⟩ = ⨆ a ∈ S, (pullback.snd (j a) U.1.ι).ker.ideal ⟨⊤, @isAffineOpen_top U.1.toScheme U.2⟩ ∧ (S = ∅ → IsIso (pullback.snd (⨆ a ∈ S, (i a).ker).subschemeι U.1.ι) ∧ (pullback.snd (⨆ a ∈ S, (i a).ker).subschemeι U.1.ι).ker.ideal ⟨⊤, @isAffineOpen_top U.1.toScheme U.2⟩ = ⊥) ∧ ((∃ a ∈ S, IsEmpty (pullback (C := Scheme.{u}) (j a) U.1.ι)) → IsEmpty (pullback (C := Scheme.{u}) (⨆ a ∈ S, (i a).ker).subschemeι U.1.ι) ∧ (pullback.snd (⨆ a ∈ S, (i a).ker).subschemeι U.1.ι).ker.ideal ⟨⊤, @isAffineOpen_top U.1.toScheme U.2⟩ = ⊤)",
+  "branch": "sheaf-dag",
+  "by": "Q10",
+  "date": "2026-10-23",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-f9a699d37",
+  "group": "Q10",
+  "result": "pass",
+  "note": "Only the item node's lean field and the new module ClosedSubschemeGermFamilySpreading.lean differ from live; no statement_change, new nodes or dep records. Every clause matches: IsLocallyNoetherian Y; Finite F in its own universe v; IsClosedImmersion i a, j a; stalk hypothesis as equal LinearMap.range of moduleStalkFunctor maps of ker.toModulesι in the same 𝒪_Y stalk (embedded ideals, the recorded def-weil-pbc-module-stalk decl); one ∃ U : affineOpens with y ∈ U; per-a iso of pullbacks over U; ∀ S : Finset F, iso over U of the pullback of (⨆ ker i).subscheme with (⨆ ker of pullback.snd j).subscheme, ideal at ⊤ = ⨆ J_a, S=∅ → IsIso and ⊥, empty factor → IsEmpty and ⊤. No extra hypotheses; edge cases F=∅, S=∅, empty factor, Y=∅ and k[x] V(x) vs V(x(x-1)) checked. Intersection uses Mathlib IdealSheafData ⨆/subscheme (0C4H); no DAG node for it. Statement verbatim; universes bound; sorry only; source and blueprint docstrings with 6 proof steps; report has both sections. No compile run (no file changed)."
+ }
+}

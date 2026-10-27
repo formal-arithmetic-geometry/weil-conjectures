@@ -1,0 +1,105 @@
+{
+ "id": "def-weil-pbc-affine-normalized-comparison-family",
+ "kind": "definition",
+ "title": "Named uniquely normalized coherent comparison family",
+ "statement": "For a compact separated scheme X, construct affineNormalizedComparisonFamily as the unique family provided by exists_unique_qcoherentNormalizedComparison [lem-weil-pbc-qcoherent-normalized-comparison-exists]. It assigns to each quasi-coherent X-module F and degree q an additive equivalence from ordinary module cohomology to lifted coherent etale cohomology. Prove that its composite with the inverse module/abelian cohomology comparison has the prescribed normalization. The witness is determined uniquely, so the construction names the existing chosen family rather than an arbitrary existence witness.",
+ "source": {
+  "document": "literature/stacks-project/etale-cohomology.tex; literature/stacks-project/cohomology.tex",
+  "place": "Tags 03P2 and 03FD; defining equation of the canonical normalized affine comparison."
+ },
+ "stmt_deps": [
+  "lem-weil-pbc-qcoherent-normalized-comparison-exists"
+ ],
+ "proof": [
+  {
+   "text": "Define the family by Classical.choose of exists_unique_qcoherentNormalizedComparison. This existence theorem determines the entire family by equality. For normalization, unfold the named family and project the normalization field from Classical.choose_spec. Empty schemes, zero modules and degree zero are included. The named construction prevents repeated expansion of its complete existence predicate at fibre-product schemes.",
+   "uses": [
+    "lem-weil-pbc-qcoherent-normalized-comparison-exists"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-qcoherent-normalized-comparison-exists"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/etale-cohomology.tex; literature/stacks-project/cohomology.tex",
+  "place": "Tags 03P2 and 03FD; defining equation of the canonical normalized affine comparison."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The canonical affine realization comparison equals the inverse of the chosen unique normalized coherent etale comparison",
+   "results": "Eight affine-space and standard-etale hits; none concerns the project comparison.",
+   "date": "2026-10-26",
+   "verdict": "No match."
+  },
+  {
+   "tool": "loogle",
+   "query": "AddEquiv.symm",
+   "results": "Twelve inverse equivalence lemmas; none states the defining equation of the project comparison.",
+   "date": "2026-10-26",
+   "verdict": "No project-specific match."
+  },
+  {
+   "tool": "grep",
+   "query": "affineRealizationComparison_eq_chosen",
+   "results": "No Mathlib hits.",
+   "date": "2026-10-26",
+   "verdict": "No match."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.AffineComparisonPullback",
+  "date": "2026-10-26",
+  "group": "A4"
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-affine-comparison-pullback",
+   "place": "Canonical family and its normalization used in the affine specialization."
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.AffineNormalizedComparisonFamily",
+  "file": "lean/Sheaf/AlgebraicGeometry/AffineNormalizedComparisonFamily.lean",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.affineNormalizedComparisonFamily",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.Modules.affineNormalizedComparisonFamily",
+   "AlgebraicGeometry.Scheme.Modules.affineNormalizedComparisonFamily_normalized"
+  ],
+  "statement": "def affineNormalizedComparisonFamily (X : Scheme.{u})\n    [CompactSpace X] [Scheme.IsSeparated X] :\n    ∀ (F : X.Modules) [F.IsQuasicoherent] (q : ℕ),\n      ((RingedSpace.moduleCohomology X.toRingedSpace q).obj F) ≃+\n        Sheaf.H (liftedCoherentEtaleSheaf F) q",
+  "branch": "sheaf-dag",
+  "by": "A4",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-1544d",
+  "group": "A4",
+  "result": "pass",
+  "landing": "20261026T152140-L-1081818",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-1544d",
+  "group": "A4",
+  "result": "pass",
+  "landing": "20261026T152140-L-1081818",
+  "kind": "interface",
+  "note": "independent cc review: typed affineRealizationComparison_pullback vs old expanded statement (chart map/coef map/section formula/pullback map equal by defn + proved eqs); adapted AffineCohomologyRawRestriction signatures vs clone; 6 new nodes vs Lean; scratch compile of all 8 files + #print axioms (sorryAx only via upstream qcoherentNormalizedComparison_pullback_square)"
+ }
+}

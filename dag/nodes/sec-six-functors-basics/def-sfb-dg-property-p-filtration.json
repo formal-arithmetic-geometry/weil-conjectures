@@ -1,0 +1,139 @@
+{
+ "id": "def-sfb-dg-property-p-filtration",
+ "kind": "definition",
+ "title": "Property-(P) filtration of a right DG module",
+ "status": "split",
+ "import_flags": [],
+ "statement": "Work in the universes of [def-weil-size-convention], with the associative unital DG algebras, right DG modules, underlying complexes and homogeneous right action of [def-sfb-dg-derived-category]. For a right DG module $P$ over $A$, a property-(P) filtration is a sequence of DG modules $F_p$, injective DG maps $e_p:F_p\\to P$, DG maps $i_p:F_p\\to F_{p+1}$ satisfying $e_{p+1}i_p=e_p$, with $F_0=0$ and every homogeneous element of $P$ in some image $e_p$. Each $i_p$ has a degree-zero additive right $A$-linear left inverse, not required to commute with the differential. Give DG modules $L_p$ and degreewise surjective DG maps $F_{p+1}\\to L_p$ whose kernels are the images of $i_p$. Give sets $J_p$ in the component-module universe $u$, integers $k_{pj}$ and additive equivalences $L_p^n\\cong\\bigoplus_{j\\in J_p}A^{n+k_{pj}}$. In these coordinates the differential is $(dx)_j=(-1)^{k_{pj}}d_A(x_j)$ and right action is $(xa)_j=x_ja$, using canonical degree reassociations. Thus $L_p\\cong\\bigoplus_j A[k_{pj}]$ as DG modules. Empty index sets and arbitrary integer shifts are permitted. Say $P$ has property (P) if such a filtration exists.",
+ "stmt_deps": [
+  "def-weil-size-convention",
+  "def-sfb-dg-derived-category"
+ ],
+ "source": {
+  "document": "literature/stacks-project/dga.tex",
+  "place": "Tag 09KK, section-P-resolutions, property (P); definition-shift, with filtration reindexed to start at zero"
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Every differential graded module over an associative DG algebra admits a semi free property P resolution",
+   "results": "8 hits: ModuleCat.projectiveResolution, CategoryTheory.HasProjectiveResolution, CategoryTheory.HasProjectiveResolutions, CategoryTheory.HasProjectiveResolutions.out, CategoryTheory.HasProjectiveResolution.out, CategoryTheory.ProjectiveResolution, CategoryTheory.ProjectiveResolution.ofComplex, CategoryTheory.ProjectiveResolution.instHasProjectiveResolutions",
+   "date": "2026-10-24",
+   "verdict": "No property-(P) definition or DG free filtration; ordinary projective resolutions, ordinary filtrations and graded modules do not include DG actions and signed quotient differentials."
+  },
+  {
+   "tool": "grep",
+   "query": "PropertyP|PropertyPFiltration|SemiFree|DGModule|DGAlgebra",
+   "results": "0 hits: ",
+   "date": "2026-10-24",
+   "verdict": "No property-(P) definition or DG free filtration; ordinary projective resolutions, ordinary filtrations and graded modules do not include DG actions and signed quotient differentials."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Differential graded module with a countable exhaustive split filtration by sums of shifted free modules",
+   "results": "8 hits: IsModuleFiltration.toIsFiltration, IsModuleFiltration.mk_int, IsModuleFiltration, IsRingFiltration.toGradedMonoid, Ideal.Filtration, IsModuleFiltration.toGradedSMul, DirectSum.Gmodule, IsModuleFiltration.mk",
+   "date": "2026-10-24",
+   "verdict": "No property-(P) definition or DG free filtration; ordinary projective resolutions, ordinary filtrations and graded modules do not include DG actions and signed quotient differentials."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"GradedModule\"",
+   "results": "2 hits: GradedModule.isModule, GradedModule.linearEquiv",
+   "date": "2026-10-24",
+   "verdict": "No property-(P) definition or DG free filtration; ordinary projective resolutions, ordinary filtrations and graded modules do not include DG actions and signed quotient differentials."
+  },
+  {
+   "tool": "grep",
+   "query": "PropertyP|propertyP|FreeShift|FreeFiltration|SplitFiltration in lean/Sheaf and lean/WeilConjectures; property (P) in definition DAG nodes; tools/blueprint_refs.py search property (P)",
+   "results": "No existing property-(P) definition; found and reused the DG algebra/right-module framework in Sheaf.CategoryTheory.DgAlgebraDerivedCategory. Blueprint search: 0 matching nodes.",
+   "date": "2026-10-24",
+   "verdict": "new notion required"
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-dg-property-p-resolution",
+  "date": "2026-10-24",
+  "group": "Q76"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "Proof (3) of det-thm-sf-ctf-stability-direct-images, inherited coherent-family/Quot effectivity prerequisite: Tag 0CX8 (lemma-compute-over-affine), with its canonical maps from 0CX6 (lemma-compute-against-perfect). Supporting input: Tag 0CRW (lemma-computing-sections-as-colim), part (2) and its proof constructing hocolim E_m = Ru_*O_U; Tag 08IN (lemma-cohomology-base-change) supplies the normalized maps. The coefficient-linear version retains the commuting B-action in the same tensor and section construction. Supporting subargument: 0CRW proof, application of lemma-countable to the descended structure-sheaf image. Supporting argument in spaces-perfect Tag 0CRV, proof (2) to (1): Tag 09MC, theorem-DQCoh-is-Ddga and its proof, with an arbitrary chosen perfect generator and its K-injective representative; the displayed derived tensor/Hom adjunction and equation-E-is-OK. Supporting subargument: Tag 09MC proof: restrict derived tensor to D_QCoh using lemma-tensor-with-QCoh-complex (09MA). Within lem-sfb-space-dg-tensor-quasicoherent, steps 3 and 4 (Tag 09MA proof, first sentence: 'Let P be a differential graded E-module with property P', the resolution of an arbitrary module by Tag 09KP, lemma-resolve).",
+   "via": [
+    "lem-sfb-dg-property-p-resolution",
+    "lem-sfb-space-dg-tensor-quasicoherent",
+    "lem-sfb-space-generator-dg-equivalence",
+    "lem-sfb-space-countable-telescope",
+    "lem-sfb-space-etale-sections-perfect-telescope",
+    "lem-sfb-space-inverse-module-affine-base-change",
+    "lem-sfb-space-inverse-modules-near-special-fibre",
+    "lem-sfb-space-flat-proper-support-inverse-effectivity",
+    "lem-sfb-space-coherent-stack-general",
+    "lem-sfb-space-quot-representability",
+    "lem-sfb-space-hilbert-representability",
+    "lem-sfb-space-hom-representability",
+    "lem-sfb-curve-descent-isom-spaces",
+    "lem-sfb-nodal-curve-stack-smooth",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "lean": {
+  "module": "Sheaf.CategoryTheory.DgPropertyPFiltration",
+  "declaration": "CategoryTheory.DgAlgebra.PropertyPFiltration",
+  "file": "lean/Sheaf/CategoryTheory/DgPropertyPFiltration.lean",
+  "statement": "structure PropertyPFiltration (A : Algebra.{u}) (P : RightModule A)",
+  "branch": "newtargets-dag",
+  "by": "Q76",
+  "date": "2026-10-24",
+  "existing": false,
+  "declarations": [
+   "CategoryTheory.DgAlgebra.PropertyPFiltration",
+   "CategoryTheory.DgAlgebra.HasPropertyP"
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-7d492c975",
+  "group": "Q76",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-7d492c975",
+  "group": "Q76",
+  "result": "pass",
+  "note": "Read the item, the new def-sfb-dg-property-p-filtration node and module, the theorem module, the DgAlgebraDerivedCategory framework, the sibling CompleteDualFreeFiltration and Stacks dga.tex section-P-resolutions/09KP. Property (P) is rendered faithfully: F0=0; DG submodules by injective embeddings; exhaustive; additive right-A-linear retractions not commuting with d; DG quotient by surjection plus exactness; coordinates as a DirectSum (finite support) of A^{n+k} with (-1)^k d_A and unchanged action; HEq only reassociates degrees; index sets in Type u. The theorem has arbitrary A and M, concludes quasiIsomorphisms (QuasiIso of the underlying complex) plus degreewise surjectivity, and adds no hypotheses. Edge cases (M=0, empty index sets, negative shifts, u=0) are covered. Item diff vs side-live: only lean and stmt_deps, which add the new def node (H2 OK); statements verbatim; lines ≤100; docstrings with source, blueprint and proof steps; proof is sorry. No existing PropertyP/SemiFree declaration or DAG def node. Nothing compiled (no file changed). Notes: the Q76 second reading is brief but enumerates the clauses; the item source.place still says 09KJ instead of 09K0 (separate maintainer fix, outside H2 scope)."
+ }
+}

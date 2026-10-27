@@ -56,7 +56,54 @@
   "def-pc-morphism-conventions"
  ],
  "proof_split_by": "paragraphs",
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": [
+    "AlgebraicGeometry.Scheme.exists_pullback_hom_of_isLimit",
+    "AlgebraicGeometry.Scheme.exists_pullback_fst_comp_eq_of_isLimit"
+   ]
+  },
+  "slopmaster2": {
+   "state": "closed",
+   "decls": [
+    {
+     "name": "AlgebraicGeometry.Scheme.exists_pullback_hom_of_isLimit",
+     "module": "WeilConjectures.Mathlib.AlgebraicGeometry.AffineTransitionLimit",
+     "lines": [
+      3536,
+      3565
+     ],
+     "kind": "theorem",
+     "sorry": false
+    },
+    {
+     "name": "AlgebraicGeometry.Scheme.exists_pullback_fst_comp_eq_of_isLimit",
+     "module": "WeilConjectures.Mathlib.AlgebraicGeometry.AffineTransitionLimit",
+     "lines": [
+      3568,
+      3592
+     ],
+     "kind": "theorem",
+     "sorry": false
+    },
+    {
+     "name": "AlgebraicGeometry.Scheme.exists_isPullback_of_finitePresentation",
+     "module": "WeilConjectures.Mathlib.AlgebraicGeometry.AffineTransitionLimit",
+     "lines": [
+      3155,
+      3190
+     ],
+     "kind": "theorem",
+     "sorry": false,
+     "partial": "`lemma:nagata-finite-presentation-descends`; `thm-pd-spreading-out`, part (1"
+    }
+   ],
+   "missing": [],
+   "open": []
+  }
+ },
  "chapter": "sec-picard-framework",
  "unit": "sk-prop-jacobian-descent",
  "lean_candidates": [
@@ -89,18 +136,24 @@
   "note": "recorded by L at 04:46 UTC from lean_audit (stage 2, rule 2 of the human: one definition per notion; a node whose notion has a declaration in the source repository is not stated again; audit state closed)"
  },
  "blueprint_update": {
-  "snapshot": "main-20261015",
-  "statement": "Let $I$ be a directed set, let $(S_i,f_{ii'})$ be an inverse system of schemes\nover $I$ with affine transition morphisms and $S_i$ quasi-compact and\nquasi-separated, and put $S=\\varprojlim_iS_i$. Then:\n\n1. for every morphism of finite presentation $V\\to S$ there are $i\\in I$ and\na morphism of finite presentation $V_i\\to S_i$ with\n$V\\cong V_i\\times_{S_i}S$;\n1. given $i$, schemes $V_i,W_i$ of finite presentation over $S_i$ and a\nmorphism $\\psi:V_i\\times_{S_i}S\\to W_i\\times_{S_i}S$, there are $i'\\geq i$\nand a morphism $\\psi_{i'}:V_i\\times_{S_i}S_{i'}\\to W_i\\times_{S_i}S_{i'}$\nwhose base change to $S$ is $\\psi$;\n1. given $i$, schemes $V_i,W_i$ of finite presentation over $S_i$ and two\nmorphisms $\\psi_i,\\chi_i:V_i\\to W_i$ whose base changes to $S$ agree,\nthere is $i'\\geq i$ with\n$\\psi_i\\times_{S_i}S_{i'}=\\chi_i\\times_{S_i}S_{i'}$.",
+  "snapshot": "main-20261023",
+  "commit": "c9b5f3ad18a6654dbbee6f7d7b4b4af85e01463f",
+  "changed": [
+   "statement",
+   "proof"
+  ],
+  "statement": "Let $(S_i)_{i\\in I}$ be a cofiltered inverse system of schemes (for instance\nindexed by a directed set $I$) with affine transition morphisms\n$f_{i'i}\\colon S_{i'}\\to S_i$ and $S_i$ quasi-compact and quasi-separated, and\nlet $S=\\varprojlim_iS_i$. Then:\n\n1. for every morphism of finite presentation $V\\to S$ there are $i\\in I$ and\na morphism of finite presentation $V_i\\to S_i$ with\n$V\\cong V_i\\times_{S_i}S$ over $S$;\n1. given $i$, schemes $V_i,W_i$ of finite presentation over $S_i$ and a\nmorphism $\\psi:V_i\\times_{S_i}S\\to W_i$ over $S_i$, there are $i'\\to i$\nand a morphism $\\psi_{i'}:V_i\\times_{S_i}S_{i'}\\to W_i$ over $S_i$\nwhose composite with the canonical map\n$V_i\\times_{S_i}S\\to V_i\\times_{S_i}S_{i'}$ is $\\psi$;\n1. given $i$, schemes $V_i,W_i$ of finite presentation over $S_i$ and two\nmorphisms $\\psi_i,\\chi_i:V_i\\to W_i$ over $S_i$ whose composites with the\nprojection $V_i\\times_{S_i}S\\to V_i$ agree, there is $i'\\to i$ such that\ntheir composites with the projection $V_i\\times_{S_i}S_{i'}\\to V_i$ agree.\n\nBy the universal property of $W_i\\times_{S_i}S$, (2) and (3) say equivalently\nthat $S$-morphisms $V_i\\times_{S_i}S\\to W_i\\times_{S_i}S$ descend to\n$S_{i'}$-morphisms $V_i\\times_{S_i}S_{i'}\\to W_i\\times_{S_i}S_{i'}$, and that\ntwo $S_i$-morphisms $V_i\\to W_i$ whose base changes to $S$ agree have equal\nbase changes to some $S_{i'}$.",
   "proof": [
    {
-    "text": "This is Stacks Project, Limits of Schemes, Lemma 32.10.1, Tag\n[01ZM](https://stacks.math.columbia.edu/tag/01ZM); the proof is the\nstandard reduction to the affine case, where it is Algebra, Lemma 10.127.8,\nTag [05N9](https://stacks.math.columbia.edu/tag/05N9): a finitely\npresented algebra is the colimit of its finitely generated subalgebras, and\ntwo maps out of a finitely presented algebra agree after passing to a\nsufficiently large stage. The passage from the affine case to the general\ncase is carried out in loc. cit. by choosing finite affine open coverings and\nglueing; the three assertions are proved there in the order (3), (2), (1), and\nwe use them in that order. The only two notions of\n[def-pc-morphism-conventions], [def-pc-base-change] that the statement needs\nare ``of finite presentation'' and the fibre product $V_i\\times_{S_i}S$, which\nare the ones appearing in its three clauses. We record the statement here\nbecause the chapter needs exactly those clauses, and because the generality of\nthe cover $\\Spec(k_s)\\to\\Spec(k)$ is what forces this detour through a filtered\nlimit.",
+    "text": "This is Stacks Project, Limits of Schemes, Lemma 32.10.1, Tag\n[01ZM](https://stacks.math.columbia.edu/tag/01ZM); the proof is the\nstandard reduction to the affine case, where it is Algebra, Lemma 10.127.8,\nTag [05N9](https://stacks.math.columbia.edu/tag/05N9): a finitely\npresented algebra is the colimit of its finitely generated subalgebras, and\ntwo maps out of a finitely presented algebra agree after passing to a\nsufficiently large stage. The passage from the affine case to the general\ncase is carried out in loc. cit. by choosing finite affine open coverings and\nglueing. Assertion (1) is the existence part of\n[lemma-nagata-finite-presentation-descends]. For (2) and (3), the schemes\n$V_i\\times_{S_i}S_{i'}$ ($i'\\to i$) form a cofiltered system with affine\ntransition maps and limit $V_i\\times_{S_i}S$, so both are the statements that\nan $S_i$-morphism from the limit into the finitely presented $S_i$-scheme\n$W_i$ factors through a finite stage, and that two such factorizations agree\nat a later stage. The only two notions of\n[def-pc-morphism-conventions], [def-pc-base-change] that the statement needs\nare ``of finite presentation'' and the fibre product $V_i\\times_{S_i}S$, which\nare the ones appearing in its three clauses. We record the statement here\nbecause the chapter needs exactly those clauses, and because the generality of\nthe cover $\\Spec(k_s)\\to\\Spec(k)$ is what forces this detour through a filtered\nlimit.",
     "uses": [
+     "lemma-nagata-finite-presentation-descends",
      "def-pc-morphism-conventions",
      "def-pc-base-change"
     ],
     "elementary": false
    }
   ],
-  "note": "the current blueprint (aligned 2026-10-15 with the six-functors notes) states or proves this differently; a worker who touches the node follows it"
+  "note": "the current blueprint (main-20261023, weil-conjectures-blueprint c9b5f3ad18) states or proves this differently; the node is proved in Lean: recorded 2026-10-23, not reopened"
  }
 }

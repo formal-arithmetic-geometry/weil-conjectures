@@ -17,9 +17,41 @@
   "def-weil-residue-field",
   "def-weil-pbc-module-tensor-product"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Apply [lem-pc-affine-flat-module-localization-preserves-flatness] to the given $R\\to B$, the $R$-flat $B$-module $M$, and the multiplicative subset $B\\setminus\\mathfrak p$. It gives that $M_{\\mathfrak p}$ is flat over $R$. Every $s\\in R\\setminus\\mathfrak r$ maps outside $\\mathfrak p$, since $\\mathfrak p\\cap R=\\mathfrak r$, and hence acts invertibly on $M_{\\mathfrak p}$. Thus $M_{\\mathfrak p}$ is an $R_{\\mathfrak r}$-module by $(u/s)(x/t)=ux/(st)$. Apply [lem-weil-pbc-flat-over-localization] with $A=R$, $W=R\\setminus\\mathfrak r$, $A\\prime=R_{\\mathfrak r}$, and module $M_{\\mathfrak p}$ to conclude that $M_{\\mathfrak p}$ is flat over $R_{\\mathfrak r}$.",
+   "uses": [
+    "lem-pc-affine-flat-module-localization-preserves-flatness",
+    "lem-weil-pbc-flat-over-localization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00HT, lemma-flat-localization, parts (2) and (6)"
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-local-flat-generic-basis-universal-injectivity], renaming its base prime $\\mathfrak p$ as our $\\mathfrak r$, its algebra prime $\\mathfrak q$ as our $\\mathfrak p=\\mathfrak rB$, its module $E$ as $M$, and its rank $r$ as $a$. The flat finite presentation of $B/R$, geometric integrality of every fibre, primeness and contraction of $\\mathfrak p$, finite presentation of $M/B$, and residue-field isomorphism for the specified $\\alpha$ are exactly the hypotheses of this item. Step 1 supplies its remaining hypothesis, flatness of $M_{\\mathfrak p}$ over $R_{\\mathfrak r}$. The cited statement therefore provides $f\\in R\\setminus\\mathfrak r$ such that $L\\otimes_{R_f}\\alpha_f$ is injective for every $R_f$-module $L$. Its localizations use the image of this same $f$ in $B$, so these are precisely $B_f$, $M_f$, and the induced map in the conclusion.",
+   "uses": [
+    "lem-sfb-local-flat-generic-basis-universal-injectivity"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/flat.tex",
+    "place": "Tag 05IA, lemma-induction-step-fp, implication (1) to the universal-injectivity assertion of (2), with q=p"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-affine-flat-module-localization-preserves-flatness",
+  "lem-weil-pbc-flat-over-localization",
+  "lem-sfb-local-flat-generic-basis-universal-injectivity"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/flat.tex",
+  "place": "Tag 05IA, lemma-induction-step-fp, implication (1) to (2), using Tag 00HT for the flatness hypothesis"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -62,10 +94,45 @@
    "results": "{\"t\": \"2026-10-19T00:23:28Z\", \"tool\": \"grep\", \"query\": \"pure|universally.*inject|geometrically.*integral\", \"sub\": \"RingTheory/Flat\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}; The semantic results concern flat localization, going down, or topologically universally injective scheme maps, not universal tensor injectivity of the specified module map on a base open. The Loogle hits preserve an already injective map when tensoring with a flat module; here the tensoring module is arbitrary. The grep queries found no pure-map or devissage shrinking theorem. No exact match or one-line specialization.",
    "date": "2026-10-19",
    "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "universally.*inject|pure.*[Ll]ocal|[Ll]ocal.*pure|generic.*basis",
+   "results": "{\"t\": \"2026-10-24T02:08:42Z\", \"tool\": \"grep\", \"query\": \"universally.*inject|pure.*[Ll]ocal|[Ll]ocal.*pure|generic.*basis\", \"sub\": \"RingTheory\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits give local free-basis criteria, localization flatness, or tensor preservation with a flat testing module (or flat cokernel); none gives base-open universal injectivity of this prescribed map for arbitrary testing modules."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A map from a finite free algebra module that is a basis at a generic fibre point becomes injective after tensoring with every base module on a base open",
+   "results": "{\"t\": \"2026-10-24T02:08:43Z\", \"tool\": \"leansearch\", \"query\": \"A map from a finite free algebra module that is a basis at a generic fibre point becomes injective after tensoring with every base module on a base open\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Module.Basis.eval_injective\", \"Module.FaithfullyFlat.lTensor_injective_iff_injective\", \"Module.FaithfullyFlat.tensorProduct_mk_injective\", \"LinearMap.rTensor_injective_of_fg\", \"Module.Basis.algebraMap_injective\", \"Module.Flat.toAlgebra_injective\", \"Module.Flat.out\", \"Module.FaithfullyFlat.injective_of_tensorProduct\"], \"digest\": \"569f2461cf6cb150\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits give local free-basis criteria, localization flatness, or tensor preservation with a flat testing module (or flat cokernel); none gives base-open universal injectivity of this prescribed map for arbitrary testing modules."
+  },
+  {
+   "tool": "loogle",
+   "query": "Module.Flat, LinearMap.lTensor",
+   "results": "{\"t\": \"2026-10-24T02:08:43Z\", \"tool\": \"loogle\", \"query\": \"Module.Flat, LinearMap.lTensor\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"Module.Flat.lTensor_preserves_injective_linearMap\", \"Module.Flat.iff_lTensor_preserves_injective_linearMapₛ\", \"Module.Flat.iff_lTensor_preserves_injective_linearMap\", \"Module.Flat.iff_lTensor_preserves_injective_linearMap'\", \"Module.Flat.iff_lTensor_injectiveₛ\", \"Module.Flat.lTensor_exact\", \"Module.Flat.iff_lTensor_exact\", \"Module.Flat.iff_lTensor_exact'\"], \"digest\": \"223db9e1b90e943e\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits give local free-basis criteria, localization flatness, or tensor preservation with a flat testing module (or flat cokernel); none gives base-open universal injectivity of this prescribed map for arbitrary testing modules."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A generic fibre basis of a finitely presented module over a flat finitely presented algebra with geometrically integral fibres becomes universally tensor injective after shrinking the base",
+   "results": "{\"t\": \"2026-10-24T02:08:44Z\", \"tool\": \"leanfinder\", \"query\": \"A generic fibre basis of a finitely presented module over a flat finitely presented algebra with geometrically integral fibres becomes universally tensor injective after shrinking the base\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Module.exists_basis_of_basis_baseChange\", \"Module.nonempty_basis_of_flat_of_finrank_eq\", \"Module.exists_basis_of_span_of_maximalIdeal_rTensor_injective\", \"TensorProduct.toIntegralClosure_injective_of_flat\", \"Module.free_of_lTensor_residueField_injective\", \"Submodule.exists_fg_of_baseChange_eq_zero\", \"Module.free_of_maximalIdeal_rTensor_injective\", \"Algebra.FormallyUnramified.flat_of_restrictScalars\"], \"digest\": \"be54e2d74abf6c37\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits give local free-basis criteria, localization flatness, or tensor preservation with a flat testing module (or flat cokernel); none gives base-open universal injectivity of this prescribed map for arbitrary testing modules."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A finite free module map to a relatively flat finitely presented module which is an isomorphism at a fibre generic point is pure on a neighborhood in the base",
+   "results": "{\"t\": \"2026-10-24T02:08:45Z\", \"tool\": \"leanfinder\", \"query\": \"A finite free module map to a relatively flat finitely presented module which is an isomorphism at a fibre generic point is pure on a neighborhood in the base\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Module.flat_of_isLocalized_maximal\", \"Module.isLocallyConstant_rankAtStalk\", \"Module.freeLocus_eq_univ\", \"Module.flat_of_isLocalized_span\", \"AlgebraicGeometry.Flat\", \"AlgebraicGeometry.Flat.generalizingMap\", \"AlgebraicGeometry.Flat.of_stalkMap\", \"RingHom.Flat.propertyIsLocal\"], \"digest\": \"ef7cb26c5a9d959f\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits give local free-basis criteria, localization flatness, or tensor preservation with a flat testing module (or flat cokernel); none gives base-open universal injectivity of this prescribed map for arbitrary testing modules."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-trf-complete-algebra-devissage-projective-localization",
@@ -101,5 +168,68 @@
   "same_as": [],
   "is": null
  },
- "lean_audit": {}
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-trf-generic-basis-base-open-universal-injectivity",
+  "worker": "stage1",
+  "summary": "Kept the statement and all source metadata unchanged. Reused the existing stronger local-flat generic-basis theorem rather than creating a duplicate. Derived its local flatness hypothesis from global R-flatness by localization and change of scalars to R_r. Checked Stacks 05IA and 00HT, all cited node statements, Mathlib searches, and acyclicity of the proposed dependency. No new nodes.",
+  "blueprint": "Historical supporting algebra recorded in the inherited from.place: the first free-subtraction map in Stacks 05IB uses 05IA. The two steps supply the flatness hypothesis and invoke the existing 05IA generic-basis shrinking theorem; they do not replace any current unit step. The latest blueprint local-term-locality proof no longer contains the historical semistable argument; this inherited ancestry is retained unchanged.",
+  "tool_uses": [
+   {
+    "node": "lem-pc-affine-flat-module-localization-preserves-flatness",
+    "why": "Generic algebra tool: localizing a B-module preserves its R-flatness; the trace-formula unit does not state this module-localization fact."
+   },
+   {
+    "node": "lem-weil-pbc-flat-over-localization",
+    "why": "Generic algebra tool: an R_r-module flat over R is flat over R_r; needed to match the local hypothesis, not to replace a unit step."
+   },
+   {
+    "node": "lem-sfb-local-flat-generic-basis-universal-injectivity",
+    "why": "Existing generic algebra tool giving the same base-open universal-injectivity conclusion under the weaker hypothesis of flatness only at the fibre generic point; reuse avoids a duplicate 05IA node."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pc-affine-flat-module-localization-preserves-flatness",
+  "lem-weil-pbc-flat-over-localization",
+  "lem-sfb-local-flat-generic-basis-universal-injectivity"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-NR-35783ccd7",
+  "group": "NR",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NR-35783ccd7 (reviewer sub-agent of L); spot-checked: I read the whole delivery and pass it with no fixes. The statement and stmt_deps are unchanged from live, and live/side-live are still unsplit with no repair note, so this is not a re-split order. Source: Stacks flat.tex Tag 05IA (lemma-induction-step-fp, line 3141), implication (1)=>(2) for universal injectivity, at q=p. Global R-flatness of M is stronger than its hypothesis (1). Step 1: lem-pc-affine-flat-module-localization-preserves-flatness with S=B minus p gives M_p flat over R. Elements of R minus r act invertibly because p∩R=r, so M_p is an R_r-module, and the 00HT(2) leaf lem-weil-pbc-flat-over-localization makes it R_r-flat. Step 2: I matched every hypothesis of the existing reviewed node lem-sfb-local-flat-generic-basis-universal-injectivity (renaming p->r, q->p, E->M, r->a). Its conclusion is literally the item's. The Q51 review of that node already called this item its special case. No new nodes. Cycle check: the 1168-node closure of the sfb node does not contain the item. Edge cases checked: a=0, M=0, a field base, and R=0 (excluded). The three off-unit citations are generic commutative algebra (00HT/05IA) and replace no step of sk-i-curve-zero; I accept them as tool_uses. No SGA is cited, and no coefficient category is involved."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.GenericBasisBaseOpenUniversalInjectivity",
+  "declaration": "AlgebraicGeometry.exists_genericBasis_baseOpen_universalInjectivity",
+  "file": "lean/Sheaf/RingTheory/GenericBasisBaseOpenUniversalInjectivity.lean",
+  "statement": "theorem exists_genericBasis_baseOpen_universalInjectivity (R B : Type u) [CommRing R] [CommRing B] [Algebra R B] [Module.Flat R B] [Algebra.FinitePresentation R B] [GeometricallyIntegral (Spec.map (CommRingCat.ofHom (algebraMap R B)))] (M : Type v) [AddCommGroup M] [Module B M] [Module R M] [IsScalarTower R B M] [Module.FinitePresentation B M] [Module.Flat R M] (r : Ideal R) [r.IsPrime] (p : Ideal B) [p.IsPrime] (hp : p = Ideal.map (algebraMap R B) r) (hcontract : Ideal.comap (algebraMap R B) p = r) (a : ℕ) (α : (Fin a → B) →ₗ[B] M) (hα : Function.Bijective (α.baseChange p.ResidueField)) : ∃ f : R, f ∉ r ∧ ∀ (L : Type (max u v w)) [AddCommGroup L] [Module (Localization.Away f) L], Function.Injective ((LocalizedModule.map (Submonoid.powers f) (α.restrictScalars R)).lTensor L)",
+  "branch": "newtargets-dag",
+  "by": "Q95",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-43aeddd60",
+  "group": "Q95",
+  "result": "pass",
+  "note": "Every clause and hypothesis checked against Stacks 05IA (1)=>(2): Module.Flat/Algebra.FinitePresentation; GeometricallyIntegral of Spec.map (geometrically IsIntegral over all fields, nonempty); M finitely presented over B and R-flat with IsScalarTower; r, p prime with hp and hcontract explicit; hα = bijective α.baseChange p.ResidueField; conclusion ∃ f ∉ r with lTensor L of LocalizedModule.map (powers f) injective for all R_f-modules L in universe max u v w. No extra hypotheses. Edge cases a=0, M=0, R=0 ok. R and B share universe u (needed by Spec.map, ULift-harmless, stated in the report). lean.statement verbatim; body only sorry; docstrings give source, blueprint id and proof steps; stmt_dep nodes byte-identical to side-live; node changed only in its lean field; plain imports are the proof-dependency modules; no duplicate (the sfb parent has no Lean record). Report has the Worker report and Second reading sections (second reading by the same worker). No compile: no changes."
+ }
 }

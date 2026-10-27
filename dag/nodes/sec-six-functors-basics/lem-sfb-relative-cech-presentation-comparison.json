@@ -1,0 +1,335 @@
+{
+ "id": "lem-sfb-relative-cech-presentation-comparison",
+ "kind": "statement",
+ "title": "Relative Cech complexes agree for tuple and iterated 2-fibre-product presentations",
+ "statement": "Fix the universe and small-skeleton convention of [def-weil-size-convention], a scheme $S$ [def-pc-scheme], and a morphism $f:\\mathcal U\\to\\mathcal X$ of categories fibred in groupoids over $\\mathit{Sch}/S$ [def-sfb-stable-pointed-moduli-groupoids]. Use their big etale sites (covering arrows lie over jointly surjective etale families) and abelian sheaves [def-weil-pbc-sites-and-cohomology]. Let $F$ be an abelian sheaf on $\\mathcal X$. For a functor $v:\\mathcal V\\to\\mathcal X$ put $v^{-1}F=F\\circ v$ contravariantly, and define $(v_*N)(x)=\\Gamma(\\mathcal V\\times_{\\mathcal X}T,N)$ for $x$ over $T$; restriction of $N$ to this 2-fibre product is understood, and $\\Gamma$ means compatible families over all its objects.\n\nFor $p\\geq0$ define $A_p(f)$ to have objects $(u_0,\\ldots,u_p,y,\\alpha_0,\\ldots,\\alpha_p)$ over the same scheme, with isomorphisms $\\alpha_i:f(u_i)\\xrightarrow{\\sim}y$. An arrow to $(u'_0,\\ldots,u'_p,y',\\alpha'_0,\\ldots,\\alpha'_p)$ consists of arrows $b_i:u_i\\to u'_i$ and $c:y\\to y'$ over the same base arrow satisfying $c\\alpha_i=\\alpha'_if(b_i)$. Let $a_p:A_p(f)\\to\\mathcal X$ send this object to $y$. Put $A_{-1}(f)=\\mathcal X$. The faces delete the indicated $u_i,\\alpha_i$, with $A_0(f)\\to A_{-1}(f)$ equal to $a_0$. Set $\\widetilde E^{-1}(f,F)=F$, $\\widetilde E^p(f,F)=(a_p)_*a_p^{-1}F$ for $p\\geq0$, with zero terms below $-1$, augmentation restriction, and differential $\\sum_{j=0}^{p+1}(-1)^jd_j^*$ in degree $p\\geq0$.\n\nLet $\\mathcal U_p$ instead be any iterated $(p+1)$-fold 2-fibre-product presentation of the Cech nerve of $f$, including $\\mathcal U_0=\\mathcal U$, with its usual compatible omission maps and map $f_p:\\mathcal U_p\\to\\mathcal X$. Put $E^{-1}=F$ and $E^p=(f_p)_*f_p^{-1}F$, with the same augmentation and alternating differential. The equivalences between these 2-fibre-product presentations induce an isomorphism of augmented complexes of abelian sheaves\n$$\\Phi_F:E^\\bullet(f,F)\\xrightarrow{\\sim}\\widetilde E^\\bullet(f,F).$$\nIt is the identity in degree $-1$, commutes with augmentation and every coface map, and is natural in $F$. In particular the common-target tuple presentation, despite its redundant degree-zero category, computes the original augmented relative Cech complex without any covering or faithfulness hypothesis on $f$.",
+ "source": {
+  "document": "literature/stacks-project/stacks-sheaves.tex",
+  "place": "Tags 06X3 (section-cech, common-target model), 06X7 (section-sheaf-cech-complex), 06X5 (lemma-generalities) and 06X9 (lemma-generalities-sheafified, equivalence invariance), including augmentation"
+ },
+ "stmt_deps": [
+  "def-weil-size-convention",
+  "def-pc-scheme",
+  "def-sfb-stable-pointed-moduli-groupoids",
+  "def-weil-pbc-sites-and-cohomology",
+  "def-sfb-fibred-relative-cech-complex",
+  "def-sfb-fibred-cech-presentation"
+ ],
+ "proof": [
+  {
+   "text": "Fix $x\\in\\mathcal X(T)$ and $p\\geq0$. For each $t:R\\to T$ choose a cartesian lift $x_t\\to x$, with the identity choice for $t=1_T$. The unique factorization property in [def-sfb-stable-pointed-moduli-groupoids] makes these a functor $h_T\\to\\mathcal X$: for $h:R\\to R'$ over $T$ the arrow $x_t\\to x_{t'}$ is the unique arrow whose composite to $x$ is the chosen one; uniqueness proves identity and composition. Work in the small models of [def-weil-size-convention]. Define $C_p(x)$ to have objects $(t:R\\to T,u_0,\\ldots,u_p,\\gamma_i:f(u_i)\\xrightarrow{\\sim}x_t)$ and arrows $(h,b_i)$ satisfying $x(h)\\gamma_i=\\gamma_i'f(b_i)$. Let $D_x:C_p(x)^{op}\\to\\mathrm{Ab}$ have value $F(x_t)$ and restriction $F(x(h))$. Write $L_p(x,F)$ for its compatible families. Such families, with componentwise addition, are a limit: a map to the family group is uniquely determined by its component maps and these land in the family group precisely when they form a cone. No existence of a limit over a larger index category is being assumed.",
+   "uses": [
+    "def-sfb-stable-pointed-moduli-groupoids",
+    "def-weil-size-convention"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/stacks-sheaves.tex",
+    "place": "06X3 (section-cech), common-target objects; equation-pushforward preceding 06X7; small-skeleton implementation"
+   }
+  },
+  {
+   "text": "Put $V_A=A_p(f)\\times_{\\mathcal X}h_T$. Its objects are $(t,(u_i,y,\\alpha_i),\\beta:y\\xrightarrow{\\sim}x_t)$. There is a functor $q_A:V_A\\to C_p(x)$ sending these data to $(t,u_i,\\beta\\alpha_i)$ and an inverse-on-one-side $j_A$ sending $(t,u_i,\\gamma_i)$ to $(t,(u_i,x_t,\\gamma_i),1_{x_t})$. They satisfy $q_Aj_A=1$. The arrows with leaf components $1_{u_i}$ and target component $\\beta$ give $1_{V_A}\\xrightarrow{\\sim}j_Aq_A$; the arrow equations and naturality are exactly $\\beta\\alpha_i=\\gamma_i$. The coefficient at an object of $V_A$ is $F(y)$; $F(\\beta):F(x_t)\\xrightarrow{\\sim}F(y)$ is a natural coefficient isomorphism. Thus both the equivalence and its coefficient comparison are explicit, including when $p=0$.",
+   "uses": [
+    "def-sfb-stable-pointed-moduli-groupoids"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/stacks-sheaves.tex",
+    "place": "06X3 (section-cech), tuple construction, and 06X5 (lemma-generalities), proof of (2)"
+   }
+  },
+  {
+   "text": "Describe a bracketed iterated product by its binary tree $B$. At a leaf $i$ its value is $u_i$, its root object is $r_i=f(u_i)$, and its root comparison is $\\lambda_i=1$. At a vertex $B=(B_L,B_R)$ an object is $(z_L,z_R,\\theta:r_L\\xrightarrow{\\sim}r_R)$; choose $r_B=r_R$. Set $\\lambda_i^B=\\theta\\lambda_i^{B_L}$ on the left leaves and $\\lambda_i^B=\\lambda_i^{B_R}$ on the right leaves. An arrow is a pair of subtree arrows with root arrows $c_L,c_R$ obeying $c_R\\theta=\\theta'c_L$. Substituting the displayed formulas gives $c_R\\lambda_i^B=\\lambda_i^{B\\prime}f(b_i)$ for every leaf, by induction from the identity at a leaf. This constructs the flattening functor on all objects and arrows without discarding any automorphisms. For $V_B=B\\times_{\\mathcal X}h_T$ define $q_B:V_B\\to C_p(x)$ by $\\gamma_i=\\beta\\lambda_i^B$, where $\\beta:r_B\\xrightarrow{\\sim}x_t$. Its coefficient comparison is $F(\\beta):F(x_t)\\xrightarrow{\\sim}F(r_B)$.",
+   "uses": [
+    "def-sfb-stable-pointed-moduli-groupoids"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/stacks-sheaves.tex",
+    "place": "06X3 (section-cech), made explicit using Categories 0040 (lemma-2-product-categories-over-C), recursive object-and-isomorphism model"
+   }
+  },
+  {
+   "text": "Here is the inverse recursion, which also proves the required equivalence. Given $(t,u_i,\\gamma_i)$, at a leaf set $z_i=u_i$ and $\\beta_i=\\gamma_i$. Having reconstructed the two subtrees and maps $\\beta_L:r_L\\to x_t$, $\\beta_R:r_R\\to x_t$, put $\\theta=\\beta_R^{-1}\\beta_L$ and $\\beta_B=\\beta_R$. Then $\\beta_B\\theta\\lambda_i^L=\\beta_L\\lambda_i^L=\\gamma_i$ on the left and $\\beta_B\\lambda_i^R=\\gamma_i$ on the right. This gives $j_B$ with $q_Bj_B=1$. Conversely, from any $(z,\\beta)$, the recursion recovers its internal comparisons since $(\\beta_R)^{-1}\\beta_L=\\theta$; hence $j_Bq_B=1$ in this explicit model. For arrows the same induction applies: the leaf compatibility gives $x(h)\\beta_i=\\beta_i'f(b_i)$, and at each vertex it gives $c_R\\theta=\\theta'c_L$ by cancellation of $\\beta_R'$. Thus the inverse is a functor and the assertions include arrows over nonidentity base maps.",
+   "uses": [
+    "def-sfb-stable-pointed-moduli-groupoids"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/stacks-sheaves.tex",
+    "place": "06X3 (section-cech); Categories 0040 (lemma-2-product-categories-over-C), explicit inverse to the recursive normalization"
+   }
+  },
+  {
+   "text": "The preceding coordinates work for every bracketing. Choosing the other projection at a vertex changes its root by the specified invertible arrow $\\theta$ and changes the coefficient by $F(\\theta)$, so gives the same comparison after that identification. For any other representative of a binary $2$-fibre product, its defining cone property gives functors each way respecting the two projections and their comparison: a functor into that product is a pair of functors together with an invertible comparison, and a transformation is a pair satisfying its square. Applying this description to the identity pair in both directions shows that the composites are isomorphic to the identities by the unique projection-compatible transformations. Iterating at the vertices therefore gives the equivalence with the explicit tree model, with its root comparison. For omission maps, both resulting functors have the same retained leaf projections and comparisons; the same description gives their unique compatible $2$-isomorphism. This justifies arbitrary representatives as well as bracketings, and records the compatibility rather than requiring strict equality of nerve functors.",
+   "uses": [
+    "def-sfb-stable-pointed-moduli-groupoids"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/stacks-sheaves.tex",
+    "place": "06X3 (section-cech), meaning of a presentation; Categories 0040 (lemma-2-product-categories-over-C), cone description and uniqueness"
+   }
+  },
+  {
+   "text": "Apply [lem-weil-pbc-initial-functor-limit] to the opposites of $j_A$ and $j_B$ (composed with the representative equivalence if necessary). To check its hypotheses for an equivalence $H:I\\to J$, choose a quasi-inverse and counit. In the category of pairs $(i,a:H(i)\\to y)$ the pair $(H^{-1}y,\\epsilon_y)$ is terminal: full faithfulness lifts $\\epsilon_y^{-1}a$ uniquely. This supplies nonemptiness and the required zigzags; a cospan $i\\to k\\leftarrow i'$ is written in that node's alternating convention as $i\\leftarrow i\\to k\\leftarrow i'\\to i'$, padding by identities. Thus restriction on compatible families is an isomorphism. Use also the coefficient isomorphisms $F(\\beta)$ from steps 2 and 3, component by component (their inverses are $F(\\beta^{-1})$). This gives additive isomorphisms $R_A:\\widetilde E^p(x)\\xrightarrow{\\sim}L_p(x,F)$ and $R_B:E^p(x)\\xrightarrow{\\sim}L_p(x,F)$. Set $\\Phi^p(x)=R_A^{-1}R_B$. A natural coefficient isomorphism sends compatible families to compatible families because its square holds on each arrow; its inverse does the same, so no separate coefficient-transport theorem is needed.",
+   "uses": [
+    "lem-weil-pbc-initial-functor-limit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/stacks-sheaves.tex",
+    "place": "06X5 (lemma-generalities), proof of (2), and 06X9 (lemma-generalities-sheafified), equivalence invariance on sections"
+   }
+  },
+  {
+   "text": "These isomorphisms commute with restrictions in $x$. Indeed, for $a:x'\\to x$ over $t:T'\\to T$, the lift $x'_{t'}\\to x'$ composed with $a$ factors uniquely through $x_{tt'}\\to x$ by a vertical isomorphism $k:x'_{t'}\\xrightarrow{\\sim}x_{tt'}$. Both ways of restricting a component use $F(k)$ and replace each $\\gamma_i$ by $k\\gamma_i$. Equality follows from the family compatibility equations. For two composable arrows the two factorizations coincide by cartesianness, so these equalities respect composition. The same argument compares any two choices of cartesian lifts. Hence $\\Phi^p$ is a natural transformation of presheaves with a natural inverse. The terms are abelian sheaves. Indeed $f_p$ and $a_p$ are functors over $\\mathit{Sch}/S$ of categories fibred in groupoids, so they preserve cartesian arrows and [lem-sfb-fibred-site-functor-continuity] makes them continuous and cocontinuous for the big etale topologies. By [lem-weil-pbc-continuous-cocontinuous-topos-adjunction], precomposition and the family functor $R$ indexed by pairs $(a,\\psi:v(a)\\to x)$ send sheaves of sets to sheaves of sets. Sending $(t,a,\\phi:v(a)\\xrightarrow{\\sim}x_t)$ to $(a,(x_t\\to x)\\circ\\phi)$ is an isomorphism of index categories, inverse to the unique cartesian factorization, compatibly with restrictions; so $(v_*N)(x)=RN(x)$ on underlying sets, and an abelian presheaf whose underlying presheaf of sets is a sheaf is an abelian sheaf [def-weil-pbc-sites-and-cohomology]. These natural transformations are therefore morphisms of abelian sheaves, since [def-weil-pbc-sites-and-cohomology] defines that category as a full subcategory of presheaves.",
+   "uses": [
+    "def-sfb-stable-pointed-moduli-groupoids",
+    "def-weil-pbc-sites-and-cohomology",
+    "lem-sfb-fibred-site-functor-continuity",
+    "lem-weil-pbc-continuous-cocontinuous-topos-adjunction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/stacks-sheaves.tex",
+    "place": "06X9 (lemma-generalities-sheafified), evaluated on objects as in 06XB (remark-cech-complex-sections); sheaf property of the pushforward terms as in 06X7 (section-sheaf-cech-complex) and equation-pushforward"
+   }
+  },
+  {
+   "text": "Check every face before taking alternating sums. In $C_{p+1}(x)$ the face $d_j$ simply forgets $(u_j,\\gamma_j)$. In tuple coordinates this is exactly deletion. In tree coordinates every internal comparison reconstructed from the retained leaves is $\\beta_R^{-1}\\beta_L$ as in step 4. If the distinguished root leaf is deleted, the new root comparison is the retained $\\gamma_i$, and the old-to-new root comparison is $\\gamma_i^{-1}\\beta$; composing with $\\gamma_i$ recovers $\\beta$. Thus the coefficient maps also agree: contravariance gives $F(\\gamma_i^{-1}\\beta)F(\\gamma_i)=F(\\beta)$. These equations say precisely that restricting a family before or after a face gives the same component; step 5 supplies the projection-compatible comparison for other representatives. Therefore $R_A$ and $R_B$ identify every coface with pullback under the same deletion functor, and $\\Phi^{p+1}d_j^*=d_j^*\\Phi^p$. Summing with coefficients $(-1)^j$ proves compatibility with the differentials.",
+   "uses": [
+    "def-sfb-stable-pointed-moduli-groupoids"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/stacks-sheaves.tex",
+    "place": "06X3 (section-cech), omission maps and alternating differential; 06X7 (section-sheaf-cech-complex)"
+   }
+  },
+  {
+   "text": "Set $\\Phi^{-1}=1_F$ and use the unique maps between zero objects in lower degrees. On an object $(t,u_0,\\gamma_0)$ of $C_0(x)$, augmentation sends $s\\in F(x)$ to its restriction $F(x_t\\to x)(s)\\in F(x_t)$. Both models give exactly this value: their further coefficient comparison is the already specified $F(\\beta)$. Hence $\\Phi^0$ commutes with augmentation. For a morphism $\\eta:F\\to G$, every component of $R_A$ and $R_B$ commutes with $\\eta$, since $\\eta$ commutes with all the restriction maps $F(\\beta)$ and with the maps defining compatible families. The inverses also commute, by composing with these isomorphisms. Consequently $\\Phi$ is natural in $F$ and is an isomorphism of augmented complexes. The construction has used only invertible comparison arrows, cartesian factorization and restriction of compatible families, so has required neither a cover nor faithfulness of $f$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/stacks-sheaves.tex",
+    "place": "06X3 (section-cech), extended complex; 06X7 (section-sheaf-cech-complex), augmentation; 06X9 (lemma-generalities-sheafified)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sfb-stable-pointed-moduli-groupoids",
+  "def-weil-size-convention",
+  "lem-weil-pbc-initial-functor-limit",
+  "def-weil-pbc-sites-and-cohomology",
+  "lem-sfb-fibred-site-functor-continuity",
+  "lem-weil-pbc-continuous-cocontinuous-topos-adjunction"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/stacks-sheaves.tex",
+  "place": "06X3/06X7 constructions and 06X5/06X9 equivalence argument, expanded by explicit tree normalization and augmentation checks; Categories 0040"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Relative Cech complexes of abelian sheaves on categories fibred in groupoids are invariant under equivalence of the covering fibred category over a fixed base",
+   "results": "Hits read: CategoryTheory.GrothendieckTopology.overMapPullbackCongr, CategoryTheory.GrothendieckTopology.Point.toPresheafFiber_eq_iff', TopCat.Presheaf.SheafConditionPairwiseIntersections.coneEquiv_functor, CategoryTheory.Presieve.isSheafFor_iso, CategoryTheory.Equivalence.sheafCongrPreregular, CategoryTheory.Equivalence.sheafCongrPrecoherent, TopCat.Presheaf.SheafConditionEqualizerProducts.diagram.isoOfIso, TopCat.Presheaf.generateEquivalenceOpensLe_functor",
+   "date": "2026-10-24",
+   "verdict": "no match: ordinary categorical Cech nerves, equivalences of sheaf categories and categorical pullback coordinate maps do not state the comparison of these 2-fibre-product presentations with their coefficient and coface compatibilities; this requires a theorem, not a one-line specialization"
+  },
+  {
+   "tool": "grep",
+   "query": "Cech.*[Ee]quiv|cech.*[Ee]quiv|[Ee]quiv.*[Cc]ech|[Ff]ibred",
+   "results": "Hits read: Mathlib/CategoryTheory/FiberedCategory/Cartesian.lean, Mathlib/CategoryTheory/Shift/CommShift.lean Search directory Mathlib/CategoryTheory",
+   "date": "2026-10-24",
+   "verdict": "no match: ordinary categorical Cech nerves, equivalences of sheaf categories and categorical pullback coordinate maps do not state the comparison of these 2-fibre-product presentations with their coefficient and coface compatibilities; this requires a theorem, not a one-line specialization"
+  },
+  {
+   "tool": "grep",
+   "query": "generalities.sheafified|relative.*[Cc]ech|[Cc]ech.*relative|[Cc]ech.*[Ff]ibr",
+   "results": "Hits read: Mathlib/Algebra/Lie/Weights/Chain.lean",
+   "date": "2026-10-24",
+   "verdict": "no match: ordinary categorical Cech nerves, equivalences of sheaf categories and categorical pullback coordinate maps do not state the comparison of these 2-fibre-product presentations with their coefficient and coface compatibilities; this requires a theorem, not a one-line specialization"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"cechNerve\", \"mapIso\"",
+   "results": "No hits.",
+   "date": "2026-10-24",
+   "verdict": "no match: ordinary categorical Cech nerves, equivalences of sheaf categories and categorical pullback coordinate maps do not state the comparison of these 2-fibre-product presentations with their coefficient and coface compatibilities; this requires a theorem, not a one-line specialization"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"cechComplexFunctor\", \"iso\"",
+   "results": "No hits.",
+   "date": "2026-10-24",
+   "verdict": "no match: ordinary categorical Cech nerves, equivalences of sheaf categories and categorical pullback coordinate maps do not state the comparison of these 2-fibre-product presentations with their coefficient and coface compatibilities; this requires a theorem, not a one-line specialization"
+  },
+  {
+   "tool": "leansearch",
+   "query": "An equivalence of categories fibred in groupoids over X induces an isomorphism of augmented relative Cech complexes of any abelian sheaf on X",
+   "results": "Hits read: CategoryTheory.CosimplicialObject.cechConerveEquiv, CategoryTheory.CosimplicialObject.cechConerveEquiv_apply, CategoryTheory.CosimplicialObject.cechConerveEquiv_symm_apply, CategoryTheory.SimplicialObject.cechNerveEquiv, CategoryTheory.SimplicialObject.cechNerveEquiv_apply, HasFibers.instIsEquivalenceFibFiberInducedFunctor, CategoryTheory.Equivalence.sheafCongr.functor, CategoryTheory.Equivalence.transportIsoSheafToPresheaf",
+   "date": "2026-10-24",
+   "verdict": "no match: ordinary categorical Cech nerves, equivalences of sheaf categories and categorical pullback coordinate maps do not state the comparison of these 2-fibre-product presentations with their coefficient and coface compatibilities; this requires a theorem, not a one-line specialization"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A 2 commutative square of fibred groupoids induces a natural pullback map of relative Cech complexes which is an isomorphism when the horizontal functors are equivalences",
+   "results": "Hits read: CategoryTheory.Functor.IsFibered.pullbackPullbackIso, CategoryTheory.Limits.CategoricalPullback.toCatCommSqOver_mapIso_mkNatIso_eq_mkIso, CategoryTheory.Limits.CategoricalPullback.CatCommSqOver.transform_obj_obj_iso_hom_app, CategoryTheory.Limits.CategoricalPullback.CatCommSqOver.transform_obj_obj_iso_inv_app, CategoryTheory.Limits.CategoricalPullback.CatCommSqOver.toFunctorToCategoricalPullback_obj_obj_iso_hom, CategoryTheory.Limits.CategoricalPullback.CatCommSqOver.toFunctorToCategoricalPullback_obj_obj_iso_inv, CategoryTheory.Limits.CategoricalPullback.CatCommSqOver.transform, CategoryTheory.Limits.CategoricalPullback.mkNatIso",
+   "date": "2026-10-24",
+   "verdict": "no match: ordinary categorical Cech nerves, equivalences of sheaf categories and categorical pullback coordinate maps do not state the comparison of these 2-fibre-product presentations with their coefficient and coface compatibilities; this requires a theorem, not a one-line specialization"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Using compatible families over tuples of objects with common target gives the same relative Cech complex as iterated two fibre products of categories fibred in groupoids",
+   "results": "Hits read: CategoryTheory.Meq.pullback, CategoryTheory.Equalizer.Presieve.Arrows.compatible_iff_of_small, CategoryTheory.Presieve.Arrows.pullbackCompatible_iff, CategoryTheory.Equalizer.Presieve.Arrows.compatible_iff, CategoryTheory.regularTopology.mapToEqualizer_eq_comp, CategoryTheory.GrothendieckTopology.diagramPullback, CategoryTheory.Presieve.FamilyOfElements.Compatible.functorPullback, CategoryTheory.Presieve.pullbackCompatible_iff",
+   "date": "2026-10-24",
+   "verdict": "no match: ordinary categorical Cech nerves, equivalences of sheaf categories and categorical pullback coordinate maps do not state the comparison of these 2-fibre-product presentations with their coefficient and coface compatibilities; this requires a theorem, not a one-line specialization"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Equivalent categories over a category X give the same right Kan extension of an abelian presheaf to X, naturally in the presheaf",
+   "results": "LightCondensed.lanPresheafExt, Condensed.lanPresheafExt, CategoryTheory.Presheaf.uniqueExtensionAlongYoneda, CategoryTheory.Functor.IsCoverDense.isoOver, CategoryTheory.Functor.instIsEquivalenceRightExtensionPostcomp₁OfIsIso, CategoryTheory.Presheaf.uniqueExtensionAlongULiftYoneda, CategoryTheory.Functor.isRightKanExtensionAlongEquivalence, CategoryTheory.RanIsSheafOfIsCocontinuous.hom_ext",
+   "date": "2026-10-24",
+   "verdict": "no exact match for the item: ordinary categorical Cech nerves and general limit/Kan-extension equivalences do not supply the fibred 2-product presentation and all coface/augmentation coefficient compatibilities. The general initial-functor limit result is reused through its existing DAG node."
+  },
+  {
+   "tool": "grep",
+   "query": "limit.*[Ee]quiv|[Ee]quiv.*limit",
+   "results": "Mathlib/CategoryTheory/Limits/ConeCategory.lean, Mathlib/CategoryTheory/Limits/ConeCategory.lean, Mathlib/CategoryTheory/Limits/ConeCategory.lean, Mathlib/CategoryTheory/Limits/ConeCategory.lean, Mathlib/CategoryTheory/Limits/ConeCategory.lean, Mathlib/CategoryTheory/Limits/Preserves/Shapes/Equalizers.lean, Mathlib/CategoryTheory/Limits/Preserves/Shapes/Equalizers.lean, Mathlib/CategoryTheory/Limits/Preserves/Shapes/Equalizers.lean | directory Mathlib/CategoryTheory/Limits",
+   "date": "2026-10-24",
+   "verdict": "no exact match for the item: ordinary categorical Cech nerves and general limit/Kan-extension equivalences do not supply the fibred 2-product presentation and all coface/augmentation coefficient compatibilities. The general initial-functor limit result is reused through its existing DAG node."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"limit\", \"equivalence\"",
+   "results": "CategoryTheory.Limits.Cocone.precomposeEquivalence, CategoryTheory.Limits.Cone.postcomposeEquivalence, CategoryTheory.Limits.Cocone.functorialityEquivalence, CategoryTheory.Limits.Cocone.whiskeringEquivalence, CategoryTheory.Limits.Cone.functorialityEquivalence, CategoryTheory.Limits.Cone.whiskeringEquivalence, CategoryTheory.Limits.Cocone.equivalenceOfReindexing, CategoryTheory.Limits.Cone.equivalenceOfReindexing",
+   "date": "2026-10-24",
+   "verdict": "no exact match for the item: ordinary categorical Cech nerves and general limit/Kan-extension equivalences do not supply the fibred 2-product presentation and all coface/augmentation coefficient compatibilities. The general initial-functor limit result is reused through its existing DAG node."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Restriction along an equivalence of categories induces an isomorphism of limits of a functor",
+   "results": "CategoryTheory.Limits.HasLimit.isoOfEquivalence, CategoryTheory.Limits.hasLimit_equivalence_comp, CategoryTheory.Enriched.HasConicalLimit.of_equiv, CategoryTheory.Adjunction.hasLimit_comp_equivalence, CategoryTheory.Limits.hasLimit_of_equivalence_comp, CategoryTheory.Limits.HasLimit.isoOfEquivalence_hom_π, CategoryTheory.Limits.IsLimit.conePointsIsoOfEquivalence, CategoryTheory.Adjunction.hasLimit_of_comp_equivalence",
+   "date": "2026-10-24",
+   "verdict": "no exact match for the item: ordinary categorical Cech nerves and general limit/Kan-extension equivalences do not supply the fibred 2-product presentation and all coface/augmentation coefficient compatibilities. The general initial-functor limit result is reused through its existing DAG node."
+  },
+  {
+   "tool": "grep",
+   "query": "relative.*[Cc]ech|[Cc]ech.*relative|[Cc]ech.*[Ff]ibr",
+   "results": "No hits. | directory Mathlib/CategoryTheory",
+   "date": "2026-10-24",
+   "verdict": "no exact match for the item: ordinary categorical Cech nerves and general limit/Kan-extension equivalences do not supply the fibred 2-product presentation and all coface/augmentation coefficient compatibilities. The general initial-functor limit result is reused through its existing DAG node."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Common target tuple and iterated two fibre product presentations induce isomorphic augmented Cech complexes of sheaves",
+   "results": "CategoryTheory.SimplicialObject.cechNerveEquiv, CategoryTheory.CechNerveTerminalFrom.iso, CategoryTheory.Arrow.augmentedCechConerve, CategoryTheory.Arrow.augmentedCechNerve, CategoryTheory.CechNerveTerminalFrom.wideCospan.limitIsoPi, TopCat.Presheaf.SheafConditionEqualizerProducts.piInters, TopCat.Presheaf.SheafConditionEqualizerProducts.piInters.isoOfIso, CategoryTheory.Arrow.mapAugmentedCechConerve",
+   "date": "2026-10-24",
+   "verdict": "no exact match for the item: ordinary categorical Cech nerves and general limit/Kan-extension equivalences do not supply the fibred 2-product presentation and all coface/augmentation coefficient compatibilities. The general initial-functor limit result is reused through its existing DAG node."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"cechNerve\", \"iso\"",
+   "results": "CategoryTheory.CechNerveTerminalFrom.wideCospan.limitIsoPi, CategoryTheory.CechNerveTerminalFrom.iso, CategoryTheory.CechNerveTerminalFrom.wideCospan.limitIsoPi_hom_comp_pi, CategoryTheory.CechNerveTerminalFrom.wideCospan.limitIsoPi_inv_comp_pi, CategoryTheory.CechNerveTerminalFrom.wideCospan.limitIsoPi_hom_comp_pi_assoc, CategoryTheory.CechNerveTerminalFrom.wideCospan.limitIsoPi_inv_comp_pi_assoc, CategoryTheory.Limits.FormalCoproduct.cechIsoCechNerve, CategoryTheory.Limits.FormalCoproduct.cechIsoCechNerveApp",
+   "date": "2026-10-24",
+   "verdict": "no exact match for the item: ordinary categorical Cech nerves and general limit/Kan-extension equivalences do not supply the fibred 2-product presentation and all coface/augmentation coefficient compatibilities. The general initial-functor limit result is reused through its existing DAG node."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The augmented relative Cech complex of an abelian sheaf on a fibred groupoid is unchanged when its iterated two fibre products are replaced by tuples with a common target",
+   "results": "CategoryTheory.Presieve.firstMap_eq_secondMap, CategoryTheory.GrothendieckTopology.MayerVietorisSquare.SheafCondition.glue, CategoryTheory.GrothendieckTopology.MayerVietorisSquare.SheafCondition.ext, TopCat.Presheaf.SheafConditionPairwiseIntersections.coneEquivFunctor_obj_π_app, TopCat.Presheaf.SheafConditionPairwiseIntersections.coneEquivInverse_obj_π_app, TopCat.Presheaf.SheafConditionPairwiseIntersections.coneEquivFunctorObj_π_app, TopCat.Presheaf.SheafConditionPairwiseIntersections.coneEquiv_functor, TopCat.Presheaf.SheafConditionPairwiseIntersections.coneEquivInverseObj_π_app",
+   "date": "2026-10-24",
+   "verdict": "no exact match for the item: ordinary categorical Cech nerves and general limit/Kan-extension equivalences do not supply the fibred 2-product presentation and all coface/augmentation coefficient compatibilities. The general initial-functor limit result is reused through its existing DAG node."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-split-fibred-cech-contraction",
+  "date": "2026-10-24",
+  "group": "Q108"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Affine PGL quotients with closed orbits and zero-dimensional stabilizers. Supporting affine-quotient step: Finite inertia gives an adequate coarse moduli space. Supporting input to the finite-inertia coarse-space construction: Passage from invariant global power liftings on the affine rank charts to adequate moduli spaces, then etale descent to the glued map. Flat scalar-section comparison needed in the descent of a power lying in the image of a global algebra map; this does not assert adequate-moduli locality. General cohomological input: preservation of locally quasi-coherent modules and flat comparison maps under qcqs stack direct images. Supporting input: Smooth descent criterion for preservation by higher direct images. Supporting cohomological input: the relative smooth-Cech spectral sequence used in each of the four diagonal reductions. Supporting input: Exact augmented relative Cech complex for stack module sheaves. Supporting input: A 2-section contracts the augmented relative Cech complex. Presentation comparison for the relative Cech complex; latest blueprint proof (3), preservation of direct images. The creation chain has no computed blueprint ancestor; its textual route refers to the named blueprint passage, also recorded by def-sfb-stable-pointed-moduli-groupoids.",
+   "via": [
+    "lem-sfb-split-fibred-cech-contraction",
+    "lem-sfb-stack-relative-cech-module-augmentation-exact",
+    "lem-sfb-stack-smooth-cech-module-spectral-sequence",
+    "lem-sfb-stack-smooth-descent-higher-image-criterion",
+    "lem-sfb-stack-higher-images-flat-comparison",
+    "lem-sfb-stack-flat-scalar-sections",
+    "lem-sfb-adequate-moduli-etale-locality",
+    "lem-sfb-finite-inertia-adequate-coarse-space",
+    "lem-sfb-affine-pgl-finite-stabilizer-quotient",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-relative-cech-presentation-comparison",
+  "worker": "stage1",
+  "summary": "Explicit comparison through the common group of compatible families on the test-object cone category. Tree reconstruction handles arbitrary bracketings, the redundant degree-zero target and coefficient identifications; every face, base restriction, augmentation and coefficient morphism is checked. Reuses the existing initial-functor limit Mathlib leaf; no new node and no statement change.",
+  "blueprint": "Latest blueprint sec-six-functors-basics/sk-thm-sf-ctf-stability, preservation of direct images, through the existing smooth-Cech descent creation chain; this item supplies the presentation comparison prerequisite of lem-sfb-split-fibred-cech-contraction. The inherited creation chain has no computed imported ancestor (blueprint_refs.py ancestor returns None); the existing precise textual from.place and via are retained.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-continuous-cocontinuous-topos-adjunction",
+    "why": "Step 7: generic site infrastructure (continuous cocontinuous functor gives a morphism of topoi whose pushforward is the compatible-family functor), used only to see that the pushforward terms are sheaves; no node of sk-thm-sf-ctf-stability gives it, as already accepted for lem-sfb-relative-cech-base-change."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-continuous-cocontinuous-topos-adjunction"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q49-63333d4ce",
+  "group": "Q49",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q49-63333d4ce (reviewer sub-agent of L); spot-checked: I read the whole delivery: the item and its 9 steps (no new nodes), all four cited statements, and Stacks stacks-sheaves at 06X3, 06X5, 06X7, 06X9, 06XB and equation-pushforward; all tags were checked in tags/tags (06XA→06XB correction right). The statement and stmt_deps are identical to the unsplit base, and there is no repair note, so this is not a re-split. The steps are correct, and I recomputed the key equations by hand: the tuple 2-product q_A/j_A with 1⇒j_A q_A given by β (step 2); the tree recursion λ, its inverse θ=β_R^{-1}β_L and the arrow cancellation (steps 3-4); the terminal-object proof that an equivalence meets the zigzag hypotheses of the Mathlib leaf lem-weil-pbc-initial-functor-limit, plus the F(β) coefficient naturality along j_B (step 6); the vertical k for restrictions (step 7); and face compatibility both when the root leaf is deleted (F(γ_i^{-1}β)F(γ_i)=F(β)) and for a middle leaf (step 8). Edge cases p=0, empty U, f=id and nontrivial fibre automorphisms all pass. No duplicate exists: the only nodes on these tags are the base-change siblings, which state a different comparison, and the parent is not cited. FIX (C1/E5): step 7 claimed sheaf morphisms only by 'since the terms are the abelian sheaves in the statement', without proving that the pushforward terms are sheaves. I added that argument as in sibling lem-sfb-relative-cech-base-change step 1: lem-sfb-fibred-site-functor-continuity (same unit) and lem-weil-pbc-continuous-cocontinuous-topos-adjunction (declared in split_report.tool_uses), the index-category isomorphism from cartesian factorization, and the abelian-sheaf ⇔ underlying-sets criterion of def-weil-pbc-sites-and-cohomology. Neither added node's closure contains the item or its parent, so there is no cycle. Step 5 is now elementary=false and proof_deps is the union of all step uses. The corrected file is fixes/dag/nodes/sec-six-functors-basics/lem-sfb-relative-cech-presentation-comparison.json.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.RelativeCechPresentationComparison",
+  "declaration": "CategoryTheory.relativeCechPresentationComparison",
+  "declarations": [
+   "CategoryTheory.relativeCechPresentationComparison"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/RelativeCechPresentationComparison.lean",
+  "statement": "theorem relativeCechPresentationComparison {S : AlgebraicGeometry.Scheme.{u}} {U X : BasedCategory.{v, max v w} (Over S)} (f : BasedFunctor U X) (hU : IsFibredInGroupoids U) (hX : IsFibredInGroupoids X) (P : FibredCechPresentation f) : (∀ (F : Sheaf (fibredBigEtaleTopology X) AddCommGrpCat.{max v w}) (n : ℕ), Presheaf.IsSheaf (fibredBigEtaleTopology X) ((P.term n).obj F.obj) ∧ Presheaf.IsSheaf (fibredBigEtaleTopology X) (((fibredTupleCechPresentation f).term n).obj F.obj)) ∧ ∃ phi : ∀ n : ℕ, sheafToPresheaf (fibredBigEtaleTopology X) AddCommGrpCat.{max v w} ⋙ P.term n ≅ sheafToPresheaf (fibredBigEtaleTopology X) AddCommGrpCat.{max v w} ⋙ (fibredTupleCechPresentation f).term n, (phi 0).hom = 𝟙 _ ∧ (∀ n : ℕ, (phi n).inv = whiskerLeft (sheafToPresheaf (fibredBigEtaleTopology X) AddCommGrpCat.{max v w}) (P.comparison n)) ∧ (∀ (p : ℕ) (j : Fin (p + 2)), whiskerLeft (sheafToPresheaf (fibredBigEtaleTopology X) AddCommGrpCat.{max v w}) (P.coface p j) ≫ (phi (p + 2)).hom = (phi (p + 1)).hom ≫ whiskerLeft (sheafToPresheaf (fibredBigEtaleTopology X) AddCommGrpCat.{max v w}) ((fibredTupleCechPresentation f).coface p j)) ∧ (∀ n : ℕ, whiskerLeft (sheafToPresheaf (fibredBigEtaleTopology X) AddCommGrpCat.{max v w}) (P.differential n) ≫ (phi (n + 1)).hom = (phi n).hom ≫ whiskerLeft (sheafToPresheaf (fibredBigEtaleTopology X) AddCommGrpCat.{max v w}) ((fibredTupleCechPresentation f).differential n)) ∧ ∃ (hdP : ∀ n : ℕ, P.restrictedDifferential n ≫ P.restrictedDifferential (n + 1) = 0) (hdA : ∀ n : ℕ, (fibredTupleCechPresentation f).restrictedDifferential n ≫ (fibredTupleCechPresentation f).restrictedDifferential (n + 1) = 0) (Phi : P.complex hdP ≅ (fibredTupleCechPresentation f).complex hdA), ∀ n : ℕ, ((P.nonnegativeComplex hdP).extendXIso (ComplexShape.embeddingUpIntGE (-1)) (i := n) rfl).inv ≫ Phi.hom.f ((ComplexShape.embeddingUpIntGE (-1)).f n) ≫ (((fibredTupleCechPresentation f).nonnegativeComplex hdA).extendXIso (ComplexShape.embeddingUpIntGE (-1)) (i := n) rfl).hom = (phi n).hom",
+  "branch": "sheaf-dag",
+  "by": "Q26",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-c088a7dc1",
+  "group": "Q26",
+  "result": "pass",
+  "note": "Item Lean matches node/Stacks 06X3/06X7/06X5/06X9 clause by clause: S, U X CFGs (BasedCategory.{v,max v w}, IsFibredInGroupoids), f BasedFunctor, big etale site + AddCommGrpCat.{max v w} sheaves; arbitrary presentation P : FibredCechPresentation f (new def node: levels Category.{v}, cone functor to vertical common-target tuples required IsEquivalence = Categories 0040 cone form, faces with specified omission isos; U_0=U and FibredCechLevel are instances); tuple presentation = A_p(f) with redundant degree 0; conclusions: sheafness of all terms, phi n iso of functors on sheaves (natural in F), (phi 0).hom = id, (phi n).inv = canonical restriction P.comparison, every coface and differential (n=0 augmentation) commute, complex iso Phi identified with phi n via extendXIso. Generalized P checked true (equivalence restriction, omission-iso transport, d^2=0 by conjugation). Statements verbatim, item changes only lean + stmt_deps (landed def-sfb-fibred-relative-cech-complex + new node), new node declarations complete, docstrings/source/blueprint present, sorry-only, no duplicate in live lean/Sheaf or WeilConjectures, report sections present. No compile (no change)."
+ }
+}

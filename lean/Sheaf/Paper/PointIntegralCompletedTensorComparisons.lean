@@ -4,6 +4,9 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 module
 
 public import Sheaf.Paper.PointFibreDerivedTensorCompatibility
+import Sheaf.Paper.PointIntegralTensorChain
+import Sheaf.Paper.PointIntegralTensorDescent
+import Sheaf.Paper.PointIntegralTensorScalarCompatibility
 /-! # Completed integral tensor at the geometric point
 
 Source: Stacks 0941, 031B and 07A4.
@@ -54,6 +57,20 @@ theorem pointIntegralCompletedTensorComparisons
           [FiniteDimensional ℚ_[l] E] (L : Type u) [Field L] [Algebra ℚ_[l] L]
           [FiniteDimensional ℚ_[l] L] (ι : E →ₐ[ℚ_[l]] L),
           PointIntegralTensorScalarSquare D l hl E L ι (I E) (I L) (C E) (C L) := by
-  sorry
+  classical
+  have h (E : Type u) [Field E] [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E] :
+      ∃ S : PointIntegralTensorData D l hl E,
+        Nonempty (PointIntegralTensorCanonical D l hl E S) := by
+    obtain ⟨completion, hfirst, hsecond⟩ := pointIntegralTensorChain D l E
+    obtain ⟨S, hcomparison, hunit⟩ :=
+      pointIntegralTensorDescent D l hl E completion hfirst hsecond
+    exact ⟨S, ⟨⟨completion, hfirst, hsecond, hcomparison, hunit⟩⟩⟩
+  let I := fun (E : Type u) [Field E] [Algebra ℚ_[l] E]
+    [FiniteDimensional ℚ_[l] E] ↦ (h E).choose
+  let C := fun (E : Type u) [Field E] [Algebra ℚ_[l] E]
+    [FiniteDimensional ℚ_[l] E] ↦ (h E).choose_spec.some
+  refine ⟨I, C, ?_⟩
+  intro E _ _ _ L _ _ _ ι
+  exact pointIntegralTensorScalarCompatibility D l hl E L ι (I E) (I L) (C E) (C L)
 
 end WeilConjectures

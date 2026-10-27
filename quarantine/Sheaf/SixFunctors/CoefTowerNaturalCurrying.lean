@@ -571,6 +571,10 @@ invertible. Its lifting clause is not used for gamma.
 uncurried composites H(K') tensor const C(K) to A_bullet. Both use the same t.
 7. Naturality and injectivity of tensor-Hom transposition give the displayed
 naturality equality before evaluating the tower index. -/
+-- STATEMENT-DISPUTED: eTrace is an arbitrary R-linear isomorphism of compact-support
+-- values. It need not carry the dualizing comparison or its counit. On two disjoint
+-- points an invertible matrix can turn the sum trace into projection onto just one
+-- component, so the resulting pairing is degenerate on the other component.
 theorem coefTowerNaturalCurrying (hl : l ≠ D.p)
     (Q : CochainComplex (coefficientSequenceModules.{u, u} l E X) ℤ)
     (eQ : ∀ n : ℕ,

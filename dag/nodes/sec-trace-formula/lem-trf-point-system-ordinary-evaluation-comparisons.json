@@ -1,0 +1,128 @@
+{
+ "id": "lem-trf-point-system-ordinary-evaluation-comparisons",
+ "kind": "statement",
+ "title": "Identity-normalized ordinary evaluation comparisons for point systems",
+ "statement": "Fix the finite-field datum, prime ell and finite coefficient extension E [def-trf-coefficient-conventions]. Let s=Spec(k), and let g be any automorphism of s. For the strict coefficient-system category, its finite evaluation ev_n [def-coef-ringed-sequence-site], its canonical inverse-image reindexing G_g [lem-trf-point-restriction-system-chain-map], and completed-scalar restriction followed by whole-tower sections Gamma_bullet [def-sf-scalar-reduction-categories-restriction, def-trf-point-restriction-coordinates], there is a unique pair of natural isomorphisms Gamma_bullet followed by tower evaluation at n isomorphic to ev_n followed by finite sections with scalars restricted along the actual R to A_n quotient, and G_g followed by Gamma_bullet and tower evaluation at n isomorphic to ev_n followed by the canonical finite inverse-image module functor and those same finite R-sections [lem-weil-proetale-isomorphism-inverse-image]. Both isomorphisms are identity on every underlying final-object section. The index n denotes A_n=R/(varpi^(n+1)); all strict systems and all automorphisms are allowed.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-trace-formula/sk-prop-tf-transport-integral/sk-prop-tf-transport-integral.proof.md",
+  "place": "Paragraph 2: scalar extension commutes with pullbacks and units defining the operators. Agent-formulated ordinary strict-system evaluation prerequisite to the inherited point-system transport argument; not a verbatim theorem of the current blueprint."
+ },
+ "stmt_deps": [
+  "def-trf-coefficient-conventions",
+  "def-coef-ringed-sequence-site",
+  "lem-trf-point-restriction-system-chain-map",
+  "def-sf-scalar-reduction-categories-restriction",
+  "def-trf-point-restriction-coordinates",
+  "lem-weil-proetale-isomorphism-inverse-image"
+ ],
+ "proof": [
+  {
+   "text": "The prescribed coefficient map on the sequence site has finite component c_n inverse. Evaluate its defining unique specification. The evaluation cast is identity on every section, so this gives the commutative coefficient square. Mathlib pushforward composition and congruence produce the finite evaluation versus inverse-image comparison.",
+   "uses": [
+    "lem-trf-point-restriction-system-chain-map",
+    "def-coef-ringed-sequence-site",
+    "lem-weil-proetale-isomorphism-inverse-image"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Restriction through the completed coefficient ring commutes with level evaluation by the composition identity for sheaf-module pushforward and scalar restriction. At final-object sections, the completed projection sends an integral constant section to the constant quotient section. Hence identity on the section carriers is linear for the R to A_n quotient map and defines the source comparison. Combine this comparison and finite inverse image using explicit functor associators to obtain the target comparison.",
+   "uses": [
+    "lem-weil-point-automorphism-restriction-natural",
+    "def-sf-scalar-reduction-categories-restriction"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Every comparison map in the construction is identity on underlying sections. Heterogeneous equality records the identical section carriers with their transported scalar structures. For any second pair with that normalization, its two underlying functions equal those of the constructed pair at every module. Module morphism and natural transformation extensionality give equality of both isomorphisms, proving uniqueness. This holds for identity automorphisms and zero modules as well as arbitrary coefficient systems; no transition-surjectivity or boundedness assumption is used.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-trf-point-restriction-system-chain-map",
+  "def-coef-ringed-sequence-site",
+  "lem-weil-proetale-isomorphism-inverse-image",
+  "lem-weil-point-automorphism-restriction-natural",
+  "def-sf-scalar-reduction-categories-restriction"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-trace-formula/sk-prop-tf-transport-integral/sk-prop-tf-transport-integral.proof.md",
+  "place": "Paragraph 2: scalar extension commutes with pullbacks and units defining the operators. Agent-formulated ordinary strict-system evaluation prerequisite to the inherited point-system transport argument; not a verbatim theorem of the current blueprint."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Canonical evaluation of a scalar-restricted inverse system of sheaf modules commutes with finite inverse image under a point automorphism, with identity on section carriers",
+   "results": "8 hits, including SheafOfModules.restrictScalars_obj_val and PresheafOfModules.restriction; these describe underlying scalar restriction and restriction maps, rather than the specified whole-system evaluation pair.",
+   "date": "2026-10-27",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules.pushforwardComp",
+   "results": "7 hits. SheafOfModules.pushforwardComp and its component identities, together with pushforwardCongr, supply the composition and coefficient-square ingredients used in the proof. None states the system-specific pair and its uniqueness.",
+   "date": "2026-10-27",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "pushforward(Congr|Comp)|coefficientSequenceEvaluation",
+   "results": "25 hits, principally pushforward composition and congruence in Mathlib.Algebra.Category.ModuleCat.Sheaf.PushforwardContinuous. The proof uses these generic isomorphisms; no existing whole-system evaluation comparison is present.",
+   "date": "2026-10-27",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.PointSystemTransportDescent",
+  "date": "2026-10-27",
+  "group": "G9"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-thm-trace-transport",
+ "blueprint": {
+  "is": null,
+  "same_as": [],
+  "from": {
+   "node": "thm-trf-l-function-euler-product",
+   "place": "Step 1, Global powers, of thm-trf-l-function-euler-product; coefficient compatibility through sk-prop-tf-transport-integral, scalar comparisons and pullback/unit compatibility. Ordinary strict-system prerequisite of the inherited point-system transport node.",
+   "via": [
+    "lem-trf-point-system-transport-descent"
+   ]
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.PointSystemEvaluationComparisons",
+  "file": "lean/Sheaf/Paper/PointSystemEvaluationComparisons.lean",
+  "declaration": "WeilConjectures.PointSystemEvaluation.evaluation_existsUnique",
+  "statement": "theorem evaluation_existsUnique (n : ℕ) :\n    ∃! e :\n      (PointRestrictionSystem.sections D l E ⋙ (evaluation ℕᵒᵖ (ModuleCat.{max u (t + 1)}\n          (pointRestrictionScalars.{t, u} l E none))).obj (op n) ≅\n        coefficientSequenceEvaluation l E (Spec (.of D.k)) n ⋙\n          (pointRestrictionSections l E D.k (some n) ⋙\n          ModuleCat.restrictScalars.{max u (t + 1)}\n            (show pointRestrictionScalars.{t, u} l E none →+*\n              pointRestrictionScalars.{t, u} l E (some n) from\n            RingHom.ulift (Ideal.Quotient.mk\n              (Padic.coefficientExtensionIdeal l E (n + 1)))))) ×\n      ((PointRestrictionSystem.pull D l E g ⋙ PointRestrictionSystem.sections D l E) ⋙\n        (evaluation ℕᵒᵖ (ModuleCat.{max u (t + 1)}\n          (pointRestrictionScalars.{t, u} l E none))).obj (op n) ≅\n        coefficientSequenceEvaluation l E (Spec (.of D.k)) n ⋙\n          (inverseImageFiniteModules.{t, u} l E g n ⋙ (pointRestrictionSections l E D.k (some n) ⋙\n          ModuleCat.restrictScalars.{max u (t + 1)}\n            (show pointRestrictionScalars.{t, u} l E none →+*\n              pointRestrictionScalars.{t, u} l E (some n) from\n            RingHom.ulift (Ideal.Quotient.mk\n              (Padic.coefficientExtensionIdeal l E (n + 1))))))),\n      ∀ M : coefficientSequenceModules l E (Spec (.of D.k)),\n        HEq (fun x : ((PointRestrictionSystem.sections D l E).obj M).obj (op n) ↦ e.1.hom.app M x)\n          (fun x : M.val.obj (op (n, ProEt.mk (𝟙 (Spec (.of D.k))))) ↦ x) ∧\n        HEq (fun x : ((PointRestrictionSystem.sections D l E).obj\n            ((PointRestrictionSystem.pull D l E g).obj M)).obj (op n) ↦\n            e.2.hom.app M x)\n          (fun x : M.val.obj (op (n,\n            (proEtaleIsoPostcompose g).obj\n              (ProEt.mk (𝟙 (Spec (.of D.k)))))) ↦ x)",
+  "branch": "sheaf-dag",
+  "by": "G9",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G9",
+  "result": "pass",
+  "landing": "20261026T195324-L-2936826",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G9",
+  "result": "pass",
+  "landing": "20261026T195324-L-2936826",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

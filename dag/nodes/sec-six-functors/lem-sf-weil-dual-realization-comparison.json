@@ -1,0 +1,251 @@
+{
+ "id": "lem-sf-weil-dual-realization-comparison",
+ "kind": "statement",
+ "title": "Native Weil dualizing Hom and its constructible coefficient realization",
+ "statement": "Fix a finite field $k_0$, an algebraic closure $k$ of $k_0$, a prime $\\ell\\ne\\operatorname{char}k_0$, and $\\Omega=\\overline{\\mathbf Q}_\\ell$ [def-weil-finite-field-fiber]. For a separated finite-type $k_0$-scheme $X$ put $\\bar X=X\\times_{k_0}k$ and let $g_{\\bar X}$ be geometric Frobenius [def-weil-frobenius-detailed]. On the small pro-etale site of $\\bar X$, let $R_{\\bar X}$ be the coefficient sheaf whose sections on a quasi-compact object $V$ are continuous functions $|V|\\to\\Omega$ with values in one finite intermediate extension of $\\mathbf Q_\\ell$; on general objects impose this condition locally [sk-def-sfb-qlbar-condensed, sk-prop-sfb-qlbar-colimit-x]. Write $\\mathcal A_{\\bar X}=\\operatorname{Mod}(R_{\\bar X})$ for its module sheaves [def-weil-sheaf-of-modules-category] and $\\mathcal B_{\\bar X}$ for pairs $(F,\\theta:g_{\\bar X}^*F\\xrightarrow{\\sim}F)$ in $\\mathcal A_{\\bar X}$, with intertwining morphisms [def-weil-endofunctor-fixed-pair-category]. Derived categories mean localization of complexes at quasi-isomorphisms [def-weil-abstract-derived-category]. Let $\\mathrm{WC}(X)\\subset D(\\mathcal B_{\\bar X})$ be the full subcategory with bounded cohomology whose underlying cohomology sheaves admit a finite locally closed stratification with pro-etale locally finite free restrictions over $R_{\\bar X}$. This is the native category `AlgebraicGeometry.WeilComplex`, not the category of fixed pairs in $D(\\mathcal A_{\\bar X})$.\n\nLet $a_0:X\\to\\operatorname{Spec}k_0$ be the structure morphism and let $Ra_{0!}^{\\mathrm W}:\\mathrm{WC}(X)\\to\\mathrm{WC}(\\operatorname{Spec}k_0)$ be the native compact-support functor `AlgebraicGeometry.WeilComplex.derivedLowerShriek`, formed from equivariant open extension by zero and proper direct image along a compactification [def-compact-support-direct-image-detailed]. Assume that $Ra_{0!}^{\\mathrm W}$ has a right adjoint $Ra_0^{!,\\mathrm W}$ on $\\mathrm{WC}$, as in `WeilComplex.HasUpperShriek`. Put $\\omega_X=Ra_0^{!,\\mathrm W}\\Omega^{\\mathrm W}$, where $\\Omega^{\\mathrm W}$ is $R_s[0]$ with its canonical Frobenius pullback isomorphism at $s=\\operatorname{Spec}k$. For $K,L\\in D(\\mathcal B_{\\bar X})$ let $R\\mathcal Hom_{\\mathcal B_{\\bar X}}(K,L)$ be the native derived internal Hom `ProEtaleWeilSheaf.derivedHom`: choose a K-injective resolution $L\\to I$ in complexes over $\\mathcal B_{\\bar X}$ [def-pur-kinjective-complex] and take the product total complex $\\prod_p\\mathcal Hom_{R_{\\bar X}}(K^p,I^{p+n})$ of internal Hom sheaves of $R_{\\bar X}$-modules, each with the contragredient Weil structure $\\theta_I\\circ(-)\\circ\\theta_K^{-1}$ (through the canonical isomorphism $g^*\\mathcal Hom(A,B)\\cong\\mathcal Hom(g^*A,g^*B)$ for the automorphism $g=g_{\\bar X}$). \n\nPut $Y=\\bar X$, $\\mathcal C_Y=D^b_c(Y,\\Omega)$, the common finite-coefficient-stage category [def-weil-algebraically-closed-coefficients], with raw rationalizations [def-weil-rationalization-karoubi], and $\\omega_Y=Ra_Y^!\\Omega$ for $a_Y:Y\\to\\operatorname{Spec}k$, using the constructible exceptional functor [def-weil-exceptional-inverse-image]. Write $D_YM=R\\mathcal Hom(M,\\omega_Y)$ for the coefficient-passage internal Hom [def-weil-derived-pullback-tensor-hom]. Let $\\rho_Y:\\mathcal C_Y\\simeq D^b_{\\mathrm{cons}}(\\mathcal A_Y)$ be the evaluation-normalized coefficient realization [lem-sf-adic-qbar-constructible-realization], and $U:D(\\mathcal B_Y)\\to D(\\mathcal A_Y)$ the termwise forgetful functor [lem-sf-weil-native-closed-forgetful]. Here $D^b_{\\mathrm{cons}}$ means bounded cohomology whose sheaves have a finite locally closed stratification with pro-etale locally finite free restrictions over $R_Y$. Fix an inverse equivalence to $\\rho_Y$, including its unit and counit. For $K\\in\\mathrm{WC}(X)$ set $M_K=\\rho_Y^{-1}UK$ and denote its counit isomorphism by $j_K:\\rho_YM_K\\xrightarrow{\\sim}UK$. Write $H_XK=R\\mathcal Hom_{\\mathcal B_Y}(K,\\omega_X)$ in the ambient native derived category.\n\nLet $h:U\\omega_X\\xrightarrow{\\sim}\\rho_Y\\omega_Y$ be the isomorphism of [lem-sf-weil-native-exceptional-forgetful] for $f_0=a_0$ and the specified right adjoint, normalized by the exceptional-adjunction counit and the identification of the constant Weil sheaf at the point with the coefficient unit. There is a natural isomorphism, for every native $K$,\n$$c_K:UH_XK\\xrightarrow{\\sim}\\rho_YD_YM_K.$$\nIt is the following specified composite: the native forgetful Hom comparison $UH_XK\\cong R\\mathcal Hom_{R_Y}(UK,U\\omega_X)$, followed by the Hom map induced by $j_K$ in the first variable and $h$ in the second, followed by the inverse of the evaluation-transpose realization comparison $\\rho_YD_YM_K\\cong R\\mathcal Hom_{R_Y}(\\rho_YM_K,\\rho_Y\\omega_Y)$. The object $D_YM_K$ belongs to $\\mathcal C_Y$, and $UH_XK$ has bounded constructible cohomology. The comparisons are natural for all native derived morphisms, including extension morphisms. Under the tensor comparisons and $j_K$, the evaluation $UH_XK\\otimes^{\\mathbf L}UK\\to U\\omega_X$ becomes the realized evaluation $\\rho_YD_YM_K\\otimes^{\\mathbf L}\\rho_YM_K\\to\\rho_Y\\omega_Y$ after postcomposition by $h$.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/thm-coef-qbar-verdier.proof.md",
+  "place": "Returned native biduality proof steps 1-3: realize the underlying category, compare the counit-normalized dualizing object, and compare its Hom with common-stage duality. Agent native-derived refinement of the blueprint coefficient-descent and transposition paragraphs."
+ },
+ "stmt_deps": [
+  "def-weil-finite-field-fiber",
+  "def-weil-frobenius-detailed",
+  "sk-def-sfb-qlbar-condensed",
+  "sk-prop-sfb-qlbar-colimit-x",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-endofunctor-fixed-pair-category",
+  "def-weil-abstract-derived-category",
+  "def-compact-support-direct-image-detailed",
+  "def-pur-kinjective-complex",
+  "def-weil-algebraically-closed-coefficients",
+  "def-weil-rationalization-karoubi",
+  "def-weil-exceptional-inverse-image",
+  "def-weil-derived-pullback-tensor-hom",
+  "lem-sf-adic-qbar-constructible-realization",
+  "lem-sf-weil-native-closed-forgetful",
+  "lem-sf-weil-native-exceptional-forgetful"
+ ],
+ "proof": [
+  {
+   "text": "Apply lem-sf-ordinary-closed-presentation to the given compatible closed model N. Its two natural isomorphisms and the evaluation-transpose normalization construct Presentation, independently of the native exceptional adjoint. Fix any such T thereafter.",
+   "uses": [
+    "lem-sf-ordinary-closed-presentation"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply lem-sf-structural-omega-hom-pairs to the specified structural system and compactification, at V(K). These permitted pairs define coefficientHom by the actual common-stage internal Hom lift. The realized Hom comparison beta is invertible by the given realization data. The specified Package gives omegaComparison with the exceptional counit normalization.",
+   "uses": [
+    "lem-sf-structural-omega-hom-pairs",
+    "lem-sf-adic-qbar-constructible-realization",
+    "lem-sf-weil-native-exceptional-forgetful"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use T.alpha, then ambientHom applied to the pair of counit and omegaComparison isomorphisms, then inverse beta. Naturality of alpha is the naturality of three whiskered isomorphisms: the native Hom model, native forgetful Hom comparison and T.hom. After composing with beta, its naturality and counit naturality identify both composites. NatIso.ofComponents therefore gives a comparison on every native derived morphism. Its displayed composite follows by cancellation of beta inverse with beta.",
+   "uses": [
+    "lem-sf-weil-native-closed-forgetful",
+    "lem-sf-adic-qbar-constructible-realization"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "The realization image criterion transfers bounded constructibility from the actual realized coefficientHom object to the isomorphic native Hom object, using the inverse comparison as the witness.",
+   "uses": [
+    "lem-sf-adic-qbar-constructible-realization"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Uncurry T.hom_normalization. Naturality of T.tensor inverse and the native evaluation clause of N.Compatible show that inverse composite tensor comparison followed by forgotten native evaluation equals tensor of transported native Hom comparison followed by ordinary evaluation. The native-model isomorphism cancels its inverse in alpha. Evaluation naturality in j and h, followed by the given realization Hom evaluation law, is exactly the asserted square. This calculation uses neither faithfulness of U nor reflexivity.",
+   "uses": [
+    "lem-sf-weil-native-closed-forgetful",
+    "lem-sf-adic-qbar-constructible-realization"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-sf-ordinary-closed-presentation",
+  "lem-sf-structural-omega-hom-pairs",
+  "lem-sf-adic-qbar-constructible-realization",
+  "lem-sf-weil-native-exceptional-forgetful",
+  "lem-sf-weil-native-closed-forgetful"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-package/cor-coef-verdier-weil-equivariance.proof.md",
+  "place": "Evaluation and exceptional-counit paragraphs; explicit Lean assembly retaining the given presentation and specified three-arrow comparison."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Native Weil complexes dualizing internal Hom comparison with common finite coefficient stage realization",
+   "results": "8 hits: LightCondensed.ihomPoints_symm_apply, LightCondensed.ihomPoints_symm_comp, LightCondensed.ihomPoints, LightCondensed.ihomPoints_apply, LightCondensed.ihom_map_val_app, CharacterModule.dual_rTensor_conj_homEquiv, FGModuleCat.FGModuleCatCoevaluation, CategoryTheory.coev_expComparison; no native derived Weil/constructible common-stage comparison. LightCondensed hits concern underived internal Hom; FGModuleCat and Module.Dual hits concern finite modules or linear maps; expComparison is Cartesian closed (Closed/Functor.lean:43-44,85-95), not derived tensor/Hom of equivariant module sheaves.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "derived internal Hom into dualizing complex commutes with forgetting Frobenius and constructible coefficient realization",
+   "results": "8 hits: FinPartOrd_dual_comp_forget_to_partOrd, bddDistLat_dual_comp_forget_to_distLat, finBddDistLat_dual_comp_forget_to_bddDistLat, PresheafOfModules.pushforward₀CompToPresheaf, completeLat_dual_comp_forget_to_bddLat, CategoryTheory.frobeniusMorphism, CategoryTheory.Functor.mapDerivedCategoryFactorsh_hom_app, FDRep.forget₂HomLinearEquiv; no native derived Weil/constructible common-stage comparison. LightCondensed hits concern underived internal Hom; FGModuleCat and Module.Dual hits concern finite modules or linear maps; expComparison is Cartesian closed (Closed/Functor.lean:43-44,85-95), not derived tensor/Hom of equivariant module sheaves.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"derivedHom\"",
+   "results": "0 hits: ; no native derived Weil/constructible common-stage comparison. LightCondensed hits concern underived internal Hom; FGModuleCat and Module.Dual hits concern finite modules or linear maps; expComparison is Cartesian closed (Closed/Functor.lean:43-44,85-95), not derived tensor/Hom of equivariant module sheaves.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "verdierDual|dualizingComplex|WeilComplex",
+   "results": "0 hits: ; no native derived Weil/constructible common-stage comparison. LightCondensed hits concern underived internal Hom; FGModuleCat and Module.Dual hits concern finite modules or linear maps; expComparison is Cartesian closed (Closed/Functor.lean:43-44,85-95), not derived tensor/Hom of equivariant module sheaves.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Realization of constructible l adic complexes preserves derived internal Hom into the Verdier dualizing complex and its evaluation",
+   "results": "8 hits: LightCondensed.ihom_map_val_app, LightCondensed.ihomPoints_symm_comp, localCohomology.diagram, LightCondensed.ihomPoints_apply, LightCondensed.ihomPoints, LightCondensed.ihomPoints_symm_apply, LightCondensed.internallyProjective_iff_tensor_condition', LightCondensed.instMonoidalClosedSheafLightProfiniteCoherentTopologyModuleCat. Underived light condensed internal Hom or representation adjunctions; not constructible coefficient realization or native derived Weil duality.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "verdierDual|dualizingComplex|WeilComplex",
+   "results": "0 hits: . No native derived Weil/coefficient-realization comparison.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"derivedHom\"",
+   "results": "0 hits: .",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Forgetting an equivariant constructible sheaf commutes with Verdier duality and derived internal Hom",
+   "results": "8 hits: PresheafOfModules.toPresheaf_map_sheafificationHomEquiv_def, PresheafOfModules.toSheaf_map_sheafificationHomEquiv_symm, PresheafOfModules.toPresheaf_map_sheafificationHomEquiv, CategoryTheory.sheafForget, PresheafOfModules.sheafificationCompToSheaf, SheafOfModules.PullbackConstruction.adjunction, smoothSheafCommRing.forgetStalk, SheafOfModules.fullyFaithfulForget. Sheafification and ordinary forgetful functors; none compares native derived Weil duality with common-stage realization.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "internalHom|derivedInternalHom|dualizing",
+   "results": "24 hits: Mathlib/CategoryTheory/Functor/Derived/PointwiseRightDerived.lean, Mathlib/CategoryTheory/Functor/Derived/PointwiseLeftDerived.lean, Mathlib/CategoryTheory/Functor/Derived/LeftDerived.lean, Mathlib/CategoryTheory/Preadditive/Projective/Internal.lean, Mathlib/CategoryTheory/LiftingProperties/PushoutProduct.lean, Mathlib/CategoryTheory/LiftingProperties/PushoutProduct.lean, Mathlib/CategoryTheory/Category/Cat/Op.lean, Mathlib/CategoryTheory/Monoidal/Arrow.lean. Search directory: Mathlib/CategoryTheory/. No native derived Weil/coefficient-realization comparison.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"expComparison\"",
+   "results": "7 hits: CategoryTheory.expComparison, CategoryTheory.expComparison_iso_of_frobeniusMorphism_iso, CategoryTheory.frobeniusMorphism_iso_of_expComparison_iso, CategoryTheory.expComparison_whiskerLeft, CategoryTheory.uncurry_expComparison, CategoryTheory.coev_expComparison, CategoryTheory.expComparison_ev. Read Closed/Functor.lean:43-110: Cartesian monoidal hypotheses, not derived tensor of sheaves.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Exact symmetric monoidal coefficient equivalence identifies internal Hom duality and evaluation of equivariant sheaf complexes",
+   "results": "8 hits: LightCondensed.ihomPoints_symm_apply, LightCondensed.ihomPoints_symm_comp, LightCondensed.ihomPoints, Rep.MonoidalClosed.linearHomEquivComm_symm_hom, LightCondensed.ihom_map_val_app, Rep.MonoidalClosed.linearHomEquivComm, LightCondensed.ihomPoints_apply, Rep.MonoidalClosed.linearHomEquiv_symm_hom. Underived light condensed internal Hom or representation adjunctions; not constructible coefficient realization or native derived Weil duality.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sf-weil-verdier-biduality",
+  "date": "2026-10-22",
+  "group": "Q64"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "lem-a1-local-boundary-duality uses native Weil biduality; thm-coef-qbar-verdier.proof.md, last paragraph: scalar-compatible evaluations descend and the exceptional adjunction identifies omega and internal Hom including units and counits. Native refinement via lem-sf-weil-verdier-biduality, returned steps 1-3.",
+   "via": [
+    "lem-sf-weil-verdier-biduality"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sf-weil-dual-realization-comparison",
+  "worker": "stage1",
+  "summary": "Q121: statement unchanged; assemble the existing native exceptional-forgetful and closed-forgetful comparisons with constructible realization, using common-stage Verdier duality to verify the Hom comparison hypotheses first. Give the explicit composite, its naturality equation and evaluation identity; no new nodes.",
+  "blueprint": "thm-coef-qbar-verdier.proof.md, final paragraph: descended evaluation and identification of omega, internal Hom and exceptional units/counits; native refinement following cor-coef-verdier-weil-equivariance.proof.md. This realizes returned native biduality steps 1-3 and keeps the coefficient-descent route."
+ },
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q121-4f13ef257",
+  "group": "Q121",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q121-4f13ef257 (reviewer sub-agent of L); spot-checked: Q121 lem-sf-weil-dual-realization-comparison: the delivery is a 6-step assembly with no new nodes. The statement and stmt_deps are byte-identical to the version merged through the Q64 FIX, and proof_deps equals the union of the step uses. All four cited nodes (native-closed-forgetful, adic-qbar-constructible-realization, native-exceptional-forgetful, thm-coef-qbar-verdier) are split, unmerged and in the item's own unit sk-prop-sf-biduality-general, so there are no tool_uses. There is no cycle, no SGA citation and no repair note. Step 1 checks the realization Hom premise (M, N and RHom(M, omega_Y) all in C_Y) before using it: thm-coef-qbar-verdier is the internal Hom into Ra^!Qlbar, and Y = Xbar is separated of finite type. Step 2 takes h from the stated in-particular clause of exceptional-forgetful for f_0 = a_0, using the item's assumed right adjoint and the point-unit identification. I recomputed the step-5 naturality: both sides equal H(j_L∘ρ m_u, h)∘α_L, using the naturality of α and β in their first variable and the counit naturality Uu∘j_K = j_L∘ρ m_u. It is valid for every derived arrow, including Ext classes, and needs neither faithfulness nor fullness of U. I recomputed the step-6 evaluation identity from the evaluation clauses of both cited nodes plus naturality of evaluation and the strong monoidal structure of ρ. Edge cases checked: X empty, the point with a Jordan Frobenius block, and scaling h by λ. Sources read: the final paragraph of thm-coef-qbar-verdier.proof.md and cor-coef-verdier-weil-equivariance.proof.md (main-20261015). No duplicate was found; lem-sf-weil-bidual-evaluation-realization and the native-weil and cyclic-derived nodes are distinct statements."
+ },
+ "lean": {
+  "module": "Sheaf.WeilSheaf.DualRealizationComparison",
+  "declaration": "WeilConjectures.NativeDualRealization.dual_realization_comparison",
+  "declarations": [
+   "WeilConjectures.NativeDualRealization.transport",
+   "WeilConjectures.NativeDualRealization.forget",
+   "WeilConjectures.NativeDualRealization.structureArrow",
+   "WeilConjectures.NativeDualRealization.structureArrowSeparated",
+   "WeilConjectures.NativeDualRealization.structureArrowFiniteType",
+   "WeilConjectures.NativeDualRealization.structureArrowQuasiCompact",
+   "WeilConjectures.NativeDualRealization.nativeOmega",
+   "WeilConjectures.NativeDualRealization.coefficientOmega",
+   "WeilConjectures.NativeDualRealization.omegaComparison",
+   "WeilConjectures.NativeDualRealization.closed",
+   "WeilConjectures.NativeDualRealization.coefficientTensor",
+   "WeilConjectures.NativeDualRealization.tensorator",
+   "WeilConjectures.NativeDualRealization.beta",
+   "WeilConjectures.NativeDualRealization.coefficientEvaluation",
+   "WeilConjectures.NativeDualRealization.coefficientHom",
+   "WeilConjectures.NativeDualRealization.Presentation",
+   "WeilConjectures.NativeDualRealization.Presentation.nativeTensor",
+   "WeilConjectures.NativeDualRealization.Presentation.alpha",
+   "WeilConjectures.NativeDualRealization.nativeHom",
+   "WeilConjectures.NativeDualRealization.Comparison",
+   "WeilConjectures.NativeDualRealization.dual_realization_comparison"
+  ],
+  "file": "lean/Sheaf/WeilSheaf/DualRealizationComparison.lean",
+  "statement": "theorem dual_realization_comparison (P : Package D l R) (V : ForgetModel D l R X) (S : StructuralSystem D l X) (c : Compactification (geometric D X).base.hom) (hN : N.Compatible) : Nonempty (Presentation D l R X N) ∧ ∀ T : Presentation D l R X N, Nonempty (Comparison D l R X G adj N P V S c T)",
+  "branch": "newtargets-dag",
+  "by": "Q06",
+  "date": "2026-10-25",
+  "existing": false,
+  "note": "Native ambient derived Hom for any specified compact-support right adjoint; actual closureMap and ordinary section presentation; coefficient Hom on the chosen inverse realization with its counit. Comparison is a natural isomorphism fixed by alpha followed by Hom(j,h) followed by inverse beta; includes coefficient Hom constructibility, bounded ordinary cohomology, and the evaluation square. Presentation Hom is the transported evaluation transpose. All helper definitions have real data; only the assigned theorem has sorry. Reviewer fix (Q06 3a5eb6d0): the presentation change T (whose tensor iso is not otherwise normalized) was an existential field of Comparison, so c was pinned only up to the sign/automorphism of T.tensor (T and -T give c and -c). Comparison now takes T as a parameter; the theorem asserts that a presentation exists and that for every presentation the comparison through T.alpha exists, so for the canonical presentation c is exactly the node's specified composite.",
+  "fixed_by": "NT-stage2-cc-3a5eb6d08"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-3a5eb6d08",
+  "group": "Q06",
+  "result": "fix",
+  "note": "H3: Comparison held an existential presentation field whose tensor iso is not pinned, so alpha and hence c were fixed only up to sign or tensor automorphism (T -> -T gives c -> -c, and both evaluation sides flip). FIX: Comparison now takes T : Presentation as a parameter; the theorem states Nonempty Presentation and, for every T, Nonempty (Comparison ... T), so c is pinned through T.alpha, and naturality and evaluation are formal for any T. Docstrings and the lean-record statement and note are updated. The fixed module compiled clean via nt_compile --json (31.7 s, no errors or warnings). All other clauses match the node: j and h directions, beta = recorded homComparison, permitted and bounded, NatIso over all derived arrows, no extra assumptions or universe restrictions, docstrings and source places present. Advisory: Package.actualSpecialization has no equation upstream; adic realization data owners reached through the cited realization theorem are not cited themselves."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B3",
+  "result": "pass",
+  "landing": "20261026T180817-L-3403424",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)",
+  "sorry_before": [],
+  "sorry_after": []
+ }
+}

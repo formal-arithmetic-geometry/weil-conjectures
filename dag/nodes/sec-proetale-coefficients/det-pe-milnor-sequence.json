@@ -218,7 +218,18 @@
   "date": "2026-10-16",
   "existing": false
  },
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
  "reviewed_proof": {
   "date": "2026-10-19",
   "by": "L",
@@ -228,5 +239,29 @@
   "landing": "20261019T034326-L-421589",
   "kind": "interface",
   "note": "independent cc review: delivered MilnorTower/RoosCohomology*/ProEtaleMilnorSequence vs live base and det-pe-milnor-sequence node; moved tower defs verbatim + public re-export; 5 delivered modules and all 8 direct importers compiled; #print axioms (new theorems clean, milnor_sequence sorryAx only via products_exact)"
+ },
+ "blueprint_update": {
+  "snapshot": "main-20261023-1620",
+  "commit": "7284bb09daf97437d544c51882b325f9c52cd345",
+  "changed": [
+   "statement",
+   "proof"
+  ],
+  "statement": "Let $\\mathcal C$ be an abelian category with K-injective resolutions in which countable\nproducts exist and are exact (for instance the sheaves of $\\Lambda$-modules on\n$X_{\\mathrm{proét}}$, by [det-pe-products-exact]). Let\n$\\cdots\\to F_2\\xrightarrow{t_1}F_1\\xrightarrow{t_0}F_0$ be a tower in $D(\\mathcal C)$, let\n$T\\colon\\prod_nF_n\\to\\prod_nF_n$ be the map with components $\\prod_mF_m\\to F_{n+1}\n\\xrightarrow{t_n}F_n$, and let $R\\varprojlim_nF_n$ be a homotopy limit of the tower: an object\nwith maps to the $F_n$ compatible with the $t_n$, whose induced map to $\\prod_nF_n$ sits in a\ndistinguished triangle\n$R\\varprojlim_nF_n\\to\\prod_nF_n\\xrightarrow{1-T}\\prod_nF_n\\to R\\varprojlim_nF_n[1]$. (For a\ntower of complexes one may take $\\operatorname{Cone}(1-T)[-1]$, formed on complexes.) For a\ntower $(M_n)$ in $\\mathcal C$ write $R^1\\varprojlim_nM_n=\\coker(1-T\\colon\\prod_nM_n\\to\n\\prod_nM_n)$.\n\n1. For every $q$ there is a short exact sequence\n\n   $$\n   0\\to\\coker\\Bigl(\\prod_nH^{q-1}(F_n)\\xrightarrow{1-T}\\prod_nH^{q-1}(F_n)\\Bigr)\n   \\to H^q\\bigl(R\\varprojlim_nF_n\\bigr)\\to\\varprojlim_nH^q(F_n)\\to0,\n   $$\n\n   whose second map is induced by the maps $R\\varprojlim_nF_n\\to F_n$.\n2. For a tower $(M_n)$ in $\\mathcal C$, viewed as complexes in degree $0$,\n   $H^p(R\\varprojlim_nM_n)$ is $\\varprojlim_nM_n$ for $p=0$, $R^1\\varprojlim_nM_n$ for\n   $p=1$, and $0$ for $p\\notin\\{0,1\\}$.\n3. Consequently the sequence in 1 is the Milnor sequence\n   $0\\to R^1\\varprojlim_nH^{q-1}(F_n)\\to H^q(R\\varprojlim_nF_n)\\to\\varprojlim_nH^q(F_n)\\to0$.",
+  "proof": [
+   {
+    "text": "The distinguished triangle\n$R\\varprojlim_nF_n\\xrightarrow{p}\\prod_nF_n\\xrightarrow{1-T}\\prod_nF_n\\to R\\varprojlim_nF_n[1]$\ngives the long exact sequence\n\n$$\n\\cdots\\to H^{q-1}\\bigl(\\textstyle\\prod_nF_n\\bigr)\\xrightarrow{H^{q-1}(1-T)}\nH^{q-1}\\bigl(\\textstyle\\prod_nF_n\\bigr)\\to H^q\\bigl(R\\varprojlim_nF_n\\bigr)\\xrightarrow{H^qp}\nH^q\\bigl(\\textstyle\\prod_nF_n\\bigr)\\xrightarrow{H^q(1-T)}H^q\\bigl(\\textstyle\\prod_nF_n\\bigr)\\to\\cdots,\n$$\n\nhence the short exact sequence\n$0\\to\\coker H^{q-1}(1-T)\\to H^q(R\\varprojlim_nF_n)\\to\\ker H^q(1-T)\\to0$. Countable products\nin $\\mathcal C$ are exact, so by [det-pe-products-derived] products in $D(\\mathcal C)$ are\ntermwise and $H^q(\\prod_nF_n)=\\prod_nH^q(F_n)$; under this identification $H^q(1-T)$ is $1-T$\nfor the tower $(H^q(F_n))_n$. Its kernel consists of the families $(h_n)$ with\n$h_n=t_n(h_{n+1})$, i.e. it is $\\varprojlim_nH^q(F_n)$, and the map to it is induced by the\nlegs of the cone. This proves 1.",
+    "uses": [
+     "det-pe-products-derived"
+    ],
+    "elementary": false
+   },
+   {
+    "text": "For 2, the terms $M_n$ lie in degree $0$, so the product $\\prod_nM_n$ lies in degree $0$ and,\nby the long exact sequence, $R\\varprojlim_nM_n$ lies in degrees $[0,1]$. In the sequence of 1,\nfor $q=0$ the cokernel term is $0$ and the limit term is $\\varprojlim_nM_n$; for $q=1$ the\ncokernel term is $R^1\\varprojlim_nM_n$ and the limit term is $0$. Statement 3 is 1 combined\nwith the definition of $R^1\\varprojlim$ applied to the tower $(H^{q-1}(F_n))_n$.",
+    "uses": [],
+    "elementary": null
+   }
+  ],
+  "note": "the current blueprint (main-20261023-1620, weil-conjectures-blueprint 7284bb09da) states or proves this differently; the node is proved in Lean: recorded 2026-10-23, not reopened"
  }
 }

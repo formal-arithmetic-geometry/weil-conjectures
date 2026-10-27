@@ -1,0 +1,187 @@
+{
+ "id": "lem-trf-ideal-monomial-relation-congruence",
+ "kind": "statement",
+ "title": "Monomial differences in an ideal define a congruence",
+ "statement": "Let $M$ be a commutative monoid written additively, let $A$ be a commutative ring, and write $A[M]$ for the free $A$-module [def-weil-pbc-free-module] with basis $[m]$, $m\\in M$, and multiplication $[u][v]=[u+v]$, extended $A$-bilinearly, with unit $[0]$. Let $J$ be any ideal of $A[M]$, meaning an additive subgroup stable under multiplication by arbitrary elements of $A[M]$. Define $d_J(u,v)$ to mean $[u]-[v]\\in J$. Then $d_J$ is a monoid congruence: it is an equivalence relation and $d_J(u,v)$ implies $d_J(u+w,v+w)$ for every $w\\in M$. Let $S\\subseteq M\\times M$ be any set, and let $c$ be the smallest monoid congruence containing $S$, namely the intersection of all equivalence relations preserved by addition and containing $S$. Then\n$$c\\subseteq d_J\\quad\\Longleftrightarrow\\quad [u]-[v]\\in J\\text{ for every }(u,v)\\in S.$$\nIn particular, whenever $J$ contains those generating differences, it contains $[u]-[v]$ for every pair with $c(u,v)$. No finiteness of $S$, cancellation in $M$, or properness of $J$ is assumed.",
+ "source": {
+  "document": "Mathlib/GroupTheory/Congruence/Defs.lean",
+  "place": "addConGen (generated from conGen, lines 100--105) and AddCon.addConGen_le (generated from Con.conGen_le, lines 416--421), supporting definitions and minimality only. Agent-formulated ideal-induced relation and propagation lemma extracted from steps 5--7 of lem-trf-congruence-polynomial-kernel."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-free-module"
+ ],
+ "proof": [
+  {
+   "text": "The additive-subgroup condition on $J$ gives $0\\in J$ and closure under negation and addition. Thus $[u]-[u]=0\\in J$; if $[u]-[v]\\in J$, then $[v]-[u]=-([u]-[v])\\in J$; and if $[u]-[v]\\in J$ and $[v]-[t]\\in J$, then $[u]-[t]=([u]-[v])+([v]-[t])\\in J$. These three calculations prove reflexivity, symmetry and transitivity of $d_J$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "Mathlib/GroupTheory/Congruence/Defs.lean",
+    "place": "Agent calculation from the additive-subgroup hypothesis in the item; no external theorem used."
+   }
+  },
+  {
+   "text": "If $d_J(u,v)$ and $w\\in M$, ideal closure gives $([u]-[v])[w]\\in J$. The specified bilinear multiplication gives $([u]-[v])[w]=[u+w]-[v+w]$, hence $d_J(u+w,v+w)$. Together with step 1 this proves the required monoid congruence. It also gives the two-variable compatibility if desired: from $d_J(u,v)$ and $d_J(w,z)$, translation gives $d_J(u+w,v+w)$ and $d_J(w+v,z+v)$; commutativity and transitivity give $d_J(u+w,v+z)$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "Mathlib/GroupTheory/Congruence/Defs.lean",
+    "place": "Agent calculation from ideal closure and the multiplication law in the item; comparison with AddCon compatibility."
+   }
+  },
+  {
+   "text": "Let $\\mathcal C$ be the family of monoid congruences containing $S$. This family is nonempty since the universal relation belongs to it. By the stated definition, $c(u,v)$ means $r(u,v)$ for every $r\\in\\mathcal C$. Every pair in $S$ belongs to every such $r$, hence to $c$. Consequently $c\\subseteq d_J$ implies that every $S$-difference lies in $J$. Conversely, if every $S$-difference lies in $J$, then $S\\subseteq d_J$; steps 1 and 2 show $d_J\\in\\mathcal C$. Evaluating the intersection at this member gives $c\\subseteq d_J$. Unfolding $d_J$ yields the claimed propagation of all $c$-related differences. No step uses finiteness, cancellation, or properness.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "Mathlib/GroupTheory/Congruence/Defs.lean",
+    "place": "Direct unfolding of the intersection definition in the item; compare conGen_eq, lines 400--410, and conGen_le, lines 416--421 (to_additive names AddCon.addConGen_eq / AddCon.addConGen_le)."
+   }
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "agent",
+  "document": "Mathlib/GroupTheory/Congruence/Defs.lean",
+  "place": "Direct proof by Q58 from the definitions in the item; Mathlib conGen_eq and conGen_le support only the generated-congruence conventions, not the monoid-algebra theorem."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "addConGen|conGen|congruence",
+   "results": "0 hits: ; Mathlib subdirectory Algebra/MonoidAlgebra. No exact match or one-line specialization: Ideal.ofRel only defines a generated ideal, Ideal.Quotient.ringCon concerns a relation on the ring rather than its monoid indices, and AddCon.addConGen_le requires an already constructed additive congruence. The pullback to basis monomials and its compatibility with translation, followed by propagation of the generating relations, remain separate work. Algebra.Presentation.span_range_relation_eq_ker assumes a presentation.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The relation on an additive monoid defined by membership of the difference of basis monomials in an ideal of the monoid algebra is a congruence and contains the congruence generated by any relations whose differences lie in the ideal",
+   "results": "service unavailable: {\"error\":\"Rate limit exceeded: 60 per 1 minute\"}; 0 hits: ",
+   "date": "2026-10-22",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "loogle",
+   "query": "addConGen",
+   "results": "12 hits: addConGen, AddCon.addConGen_of_addCon, AddCon.addConGen_idem, AddCon.addConGen_mono, AddCon.addConGen_monotone, AddCon.le_addConGen, AddCon.gi, AddCon.addConGen_eq. No exact match or one-line specialization: Ideal.ofRel only defines a generated ideal, Ideal.Quotient.ringCon concerns a relation on the ring rather than its monoid indices, and AddCon.addConGen_le requires an already constructed additive congruence. The pullback to basis monomials and its compatibility with translation, followed by propagation of the generating relations, remain separate work. Algebra.Presentation.span_range_relation_eq_ker assumes a presentation.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "In a commutative monoid algebra, if an ideal contains the monomial differences of generating relations, then it contains all monomial differences in the generated additive congruence",
+   "results": "8 hits: Ideal.ofRel, AddMonoidAlgebra.mem_ideal_span_of'_image, MonoidAlgebra.mem_ideal_span_of_image, Algebra.Presentation.span_range_relation_eq_ker, Algebra.Presentation.relation_mem_ker, Algebra.Generators.ker, Algebra.Presentation.naive_relation, Algebra.Presentation.mem_ker_naive. No exact match or one-line specialization: Ideal.ofRel only defines a generated ideal, Ideal.Quotient.ringCon concerns a relation on the ring rather than its monoid indices, and AddCon.addConGen_le requires an already constructed additive congruence. The pullback to basis monomials and its compatibility with translation, followed by propagation of the generating relations, remain separate work. Algebra.Presentation.span_range_relation_eq_ker assumes a presentation.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "ofRel|conGen_le|addConGen_le",
+   "results": "25 hits: Mathlib/Order/Interval/Set/InitialSeg.lean, Mathlib/Algebra/Colimit/Module.lean, Mathlib/Algebra/PresentedMonoid/Basic.lean, Mathlib/Algebra/PresentedMonoid/Basic.lean, Mathlib/Order/Hom/Lex.lean, Mathlib/Order/Hom/Lex.lean, Mathlib/Order/Hom/Basic.lean, Mathlib/Order/Hom/Basic.lean. No exact match or one-line specialization: Ideal.ofRel only defines a generated ideal, Ideal.Quotient.ringCon concerns a relation on the ring rather than its monoid indices, and AddCon.addConGen_le requires an already constructed additive congruence. The pullback to basis monomials and its compatibility with translation, followed by propagation of the generating relations, remain separate work. Algebra.Presentation.span_range_relation_eq_ker assumes a presentation.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For any ideal J of a monoid algebra the relation u related to v if single u 1 minus single v 1 belongs to J is a monoid congruence",
+   "results": "8 hits: RingQuot.ringCon, TwoSidedIdeal.rel_iff, TwoSidedIdeal.mem_mk, ringConGen, Ideal.Quotient.ringCon, TwoSidedIdeal.ringCon, RingConGen.Rel, RingCon.rel_mk. No exact match or one-line specialization: Ideal.ofRel only defines a generated ideal, Ideal.Quotient.ringCon concerns a relation on the ring rather than its monoid indices, and AddCon.addConGen_le requires an already constructed additive congruence. The pullback to basis monomials and its compatibility with translation, followed by propagation of the generating relations, remain separate work. Algebra.Presentation.span_range_relation_eq_ker assumes a presentation.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "addConGen|conGen_le|ofRel|ringCon",
+   "results": "25 hits; recorded top results: Mathlib/Order/Interval/Set/InitialSeg.lean, Mathlib/FieldTheory/LinearDisjoint.lean, Mathlib/FieldTheory/LinearDisjoint.lean, Mathlib/FieldTheory/Relrank.lean, Mathlib/Algebra/RingQuot.lean, Mathlib/Algebra/RingQuot.lean, Mathlib/Algebra/RingQuot.lean, Mathlib/Algebra/RingQuot.lean. No combined theorem found in these hits. The monoid-algebra directory hits concern degrees, grading, equivalences and division, not ideal-induced exponent congruences.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The difference of monomials lies in an ideal defines a monoid congruence on the exponent monoid",
+   "results": "8 hits; recorded top results: Ideal.ofRel, TwoSidedIdeal.ringCon, Polynomial.monomial_sub, MonoidAlgebra.domCongr, Con.monoid, diffToIdealOfQuotientCompEq, Ideal.Quotient.ringCon, Con.ofSubmonoid. Ideal.ofRel defines an ideal of differences, while TwoSidedIdeal.ringCon and Ideal.Quotient.ringCon concern ring elements. Neither is the relation on monoid indices or its generated-congruence clause.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "AddCon, Ideal",
+   "results": "0 hits; recorded top results: . AddCon.addConGen_eq and AddCon.addConGen_le give the intersection/minimality facts only after the relation has been proved an additive congruence; no combined monomial-ideal statement.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The relation on an additive commutative monoid given by membership of the difference of basis monomials in an ideal of its monoid algebra is a congruence and contains generated relations",
+   "results": "8 hits; recorded top results: Algebra.Presentation.naive_relation, Algebra.Presentation.relation_mem_ker, Algebra.Presentation.naive_relation_apply, Module.Presentation.tautologicalRelations_R, Module.Presentation.tautologicalRelations_relation, Module.Presentation.tautological_relation, Module.Presentation.tautological_R, Algebra.Presentation.span_range_relation_eq_ker. The presentation lemmas assume a presentation; ring-congruence and quotient-equality lemmas concern ring elements. Construction and verification of the relation on exponent indices remain necessary.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "ringCon|ofRel|congr",
+   "results": "22 hits; recorded top results: Mathlib/Algebra/MonoidAlgebra/Degree.lean, Mathlib/Algebra/MonoidAlgebra/Degree.lean, Mathlib/Algebra/MonoidAlgebra/Grading.lean, Mathlib/Algebra/MonoidAlgebra/Grading.lean, Mathlib/Algebra/MonoidAlgebra/Defs.lean, Mathlib/Algebra/MonoidAlgebra/Defs.lean, Mathlib/Algebra/MonoidAlgebra/Defs.lean, Mathlib/Algebra/MonoidAlgebra/Defs.lean. Subdirectory: Algebra/MonoidAlgebra. No combined theorem found in these hits. The monoid-algebra directory hits concern degrees, grading, equivalences and division, not ideal-induced exponent congruences.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "addConGen",
+   "results": "12 hits; recorded top results: addConGen, AddCon.addConGen_of_addCon, AddCon.addConGen_idem, AddCon.addConGen_mono, AddCon.addConGen_monotone, AddCon.le_addConGen, AddCon.gi, AddCon.addConGen_eq. AddCon.addConGen_eq and AddCon.addConGen_le give the intersection/minimality facts only after the relation has been proved an additive congruence; no combined monomial-ideal statement.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For an ideal J of a monoid algebra, exponent pairs u v whose basis elements differ by an element of J form an additive congruence",
+   "results": "8 hits; recorded top results: TwoSidedIdeal.rel_iff, Ideal.Quotient.ringCon, TwoSidedIdeal.mem_mk, Ideal.Quotient.eq, Ideal.Quotient.mk_eq_mk_iff_sub_mem, Ideal.ofRel, SModEq.pow, AddMonoidAlgebra.modOf_apply_of_exists_add. The presentation lemmas assume a presentation; ring-congruence and quotient-equality lemmas concern ring elements. Construction and verification of the relation on exponent indices remain necessary.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-congruence-polynomial-kernel",
+  "date": "2026-10-22",
+  "group": "Q142"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Finite-presentation input used in the chart-spreading proof: Kernel of a monoid-algebra quotient induced by a congruence. Refines the binomial-kernel input to lem-trf-fg-commutative-monoid-finite-presentation: the ideal-detected congruence and propagation of its generating relations (returned kernel proof, steps 5--7).",
+   "via": [
+    "lem-trf-congruence-polynomial-kernel",
+    "lem-trf-fg-commutative-monoid-finite-presentation",
+    "lem-trf-log-regular-sharp-chart",
+    "lem-trf-free-characteristic-regular-boundary",
+    "lem-trf-log-regular-desingularization",
+    "lem-trf-nodal-pair-projective-resolution",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-trf-ideal-monomial-relation-congruence",
+  "worker": "stage1",
+  "summary": "Verified the unchanged arbitrary-ideal statement and wrote three elementary steps: additive-subgroup calculations for equivalence, monomial multiplication for translation, and explicit intersection membership for both directions of generated-congruence containment. No new nodes: each step is direct from definitions. Preserved all inherited searches and appended the actual Q58 wrapper searches after reading their hits. No exact upstream attachment or Mathlib leaf found. Checked zero and unit ideals, zero coefficients ring, empty or infinite S, and a noncancellative monoid.",
+  "blueprint": "Refines the existing chart-spreading/finite-presentation ancestry below lem-trf-local-term-locality, specifically the propagation used in step 3 of lem-trf-congruence-polynomial-kernel (the extracted old steps 5--7). Read the latest ancestor statement and proof and the current sk-i-curve-zero unit: they do not themselves state this algebra lemma. This fills only the existing descendant input; it changes no ancestor statement or unit route.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q58-d58ce14ee",
+  "group": "Q58",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q58-d58ce14ee (reviewer sub-agent of L); spot-checked: I read the item, its parent and the source in full. The shape is one commit with the item and report only and no new nodes. Compared with the live node (unsplit), statement, stmt_deps, source and blueprint are unchanged; only proof, proof_origin, status, split_report and searches changed. There is no repair note, so the re-split rule does not apply. Step 1: the additive-subgroup axioms give reflexivity, symmetry and transitivity without cancellation in M. Step 2: ([u]-[v])[w]=[u+w]-[v+w] lies in J. The two-variable compatibility (translate by w and by v, then commutativity and transitivity) is correct, so the statement's one-sided congruence equals Mathlib's AddCon notion. Step 3: the intersection argument in both directions, with d_J in the family by steps 1-2. This is conGen_le written out (Mathlib Congruence/Defs.lean lines 401-413 for conGen_eq and 418-421 for conGen_le; the cited line ranges are correct to within a line or two). All three steps are genuinely elementary, proof_deps=[] is consistent, and there is no cycle: the parent congruence-polynomial-kernel step 3 cites the item and the item cites nothing back. Edge cases checked: J=0 (including A=0), J=A[M], S empty, S infinite, and the noncancellative {0,e}. No DAG duplicate was found with rg -L. It is not a Mathlib leaf, because addConGen_le needs the AddCon to be built first. All three search kinds are recorded, with one LeanSearch honestly marked unavailable. The blueprint ancestry is unchanged, there are no SGA citations and no tool_uses."
+ }
+}

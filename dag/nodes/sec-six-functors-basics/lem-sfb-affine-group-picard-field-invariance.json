@@ -1,0 +1,257 @@
+{
+ "id": "lem-sfb-affine-group-picard-field-invariance",
+ "kind": "statement",
+ "title": "Field-extension invariance of the Picard group of a connected affine group over an algebraically closed field",
+ "statement": "Let $k$ be an algebraically closed field [def-weil-field, def-weil-algebraic-closure], and let $G$ be a smooth connected affine $k$-group scheme of finite type [def-sc-group-scheme, def-sbc-smooth-morphisms, def-weil-connected-scheme, def-weil-affine-spectrum, def-weil-finite-type-morphism]. For every field extension $K/k$ [def-pc-field-extension], put $G_K=G\\times_{\\operatorname{Spec}k}\\operatorname{Spec}K$ and let $p_K:G_K\\to G$ be its projection [def-pc-fibre-product]. For a scheme $Y$, write $\\operatorname{Pic}(Y)$ for the abelian group of isomorphism classes of invertible $\\mathcal O_Y$-modules [def-sc-invertible-module], with tensor product as addition [def-pur-sheaf-tensor-product] and zero the class of $\\mathcal O_Y$. Then pullback is an isomorphism of abelian groups $$p_K^*:\\operatorname{Pic}(G)\\xrightarrow{\\sim}\\operatorname{Pic}(G_K).$$ No algebraicity, separability, or perfection assumption is imposed on $K/k$; the trivial group is included.",
+ "source": {
+  "document": "literature/brion-on-linearization-of-line-bundles-2015.pdf",
+  "place": "WANTED locally: M. Brion, On Linearization of Line Bundles, J. Math. Sci. Univ. Tokyo 22 (2015), Lemma 2.3, printed pp.117–118, and Remark 2.2(v), printed p.117: specialize to algebraically closed k. The primary publisher PDF was read online; no Stacks tag located for this assertion.",
+  "url": "https://www.ms.u-tokyo.ac.jp/journal/pdf/jms220104.pdf"
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-weil-algebraic-closure",
+  "def-sc-group-scheme",
+  "def-sbc-smooth-morphisms",
+  "def-weil-connected-scheme",
+  "def-weil-affine-spectrum",
+  "def-weil-finite-type-morphism",
+  "def-pc-field-extension",
+  "def-sc-invertible-module",
+  "def-pur-sheaf-tensor-product",
+  "def-pc-fibre-product",
+  "def-pc-module-pullback",
+  "def-sc-picard-group",
+  "lem-sc-pic-group"
+ ],
+ "proof": [
+  {
+   "text": "Apply [lem-sfb-split-reductive-affine-space-quotient] to $G/k$. Obtain $q:G\\to H$ and $a:G\\simeq H\\times_k\\mathbf A^n$ over $H$, where $H$ is reductive with a split maximal torus. Its scalar extension gives $G_K\\simeq H_K\\times_K\\mathbf A^n$ over $H_K$. The same cited statement ensures that both $H$ and $H_K$ are smooth geometrically integral affine varieties over their respective fields.",
+   "uses": [
+    "lem-sfb-split-reductive-affine-space-quotient"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/brion-on-linearization-of-line-bundles-2015.pdf",
+    "place": "Brion Lemma 2.3, p.118, unipotent-radical reduction"
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-smooth-affine-space-picard-invariance] to $H/k$ and $H_K/K$ and then the isomorphisms $a,a_K$. Thus $q^*$ and $q_K^*$ are isomorphisms on Picard groups. If $p_H:H_K\\to H$, tensor pullback composition [def-pc-module-pullback] and $q\\circ p_K=p_H\\circ q_K$ give $p_K^*q^*=q_K^*p_H^*$. It remains to show that this particular pullback $p_H^*$ is bijective.",
+   "uses": [
+    "lem-sfb-smooth-affine-space-picard-invariance",
+    "def-pc-module-pullback"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/brion-on-linearization-of-line-bundles-2015.pdf",
+    "place": "Brion Lemma 2.3, p.118, Pic(H_K) to Pic(G_K)"
+   }
+  },
+  {
+   "text": "Choose the split Borel pair $T\\subseteq B\\subseteq H$ supplied by [lem-sfb-split-reductive-characteristic-sequence], and put $Q=H/B$. The same node gives the two exact rows $X_k^*(T)\\xrightarrow{c_k}\\operatorname{Pic}(Q)\\xrightarrow{f^*}\\operatorname{Pic}(H)\\to0$ and $X_K^*(T_K)\\xrightarrow{c_K}\\operatorname{Pic}(Q_K)\\xrightarrow{f_K^*}\\operatorname{Pic}(H_K)\\to0$, with their scalar-extension vertical maps. Both squares commute, including $p_Q^*c_k(\\chi)=c_K(\\chi_K)$. This applies over arbitrary $K$, since the pair remains split.",
+   "uses": [
+    "lem-sfb-split-reductive-characteristic-sequence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/brion-on-linearization-of-line-bundles-2015.pdf",
+    "place": "Brion Lemma 2.3, p.118, equation (2); Milne Theorem 18.15"
+   }
+  },
+  {
+   "text": "Fix split coordinates $T\\simeq\\mathbf G_m^r$. Using the Hopf structure of $\\mathbf G_m$ [def-sc-gm-ga] on each factor, a character over a field $F$ is a Laurent polynomial $u=\\sum_m a_m t^m$ satisfying $\\Delta(u)=u\\otimes u$ and $\\epsilon(u)=1$. Comparison of Laurent monomials gives $a_ma_l=0$ for $m\\ne l$ and $a_m^2=a_m$, with $\\sum_m a_m=1$. Since $F$ is a field, exactly one coefficient is $1$ and all others are zero. Thus all characters are uniquely $t^m$, $m\\in\\mathbf Z^r$, and scalar extension $X_k^*(T)\\to X_K^*(T_K)$ is the identity on this exponent lattice. This argument also covers $r=0$.",
+   "uses": [
+    "def-sc-gm-ga"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Agent: elementary Laurent-coordinate verification of the split character lattice"
+   }
+  },
+  {
+   "text": "The pair of step 3 satisfies the hypotheses of [lem-sfb-split-flag-schubert-picard-lattice]: by [lem-sfb-split-reductive-characteristic-sequence], $B=U\\rtimes T$ with $U$ split unipotent and $Q=H/B$ represented; the series of $U$ with $\\mathbf G_a$ quotients, preceded by $B\\supseteq U\\rtimes T_1\\supseteq\\cdots\\supseteq U$ with $T_i=\\mathbf G_m^{r-i}$ (normal since $T$ is commutative and $U$ normal), has quotients $\\mathbf G_m$ or $\\mathbf G_a$, so $B$ is split solvable. Apply [lem-sfb-split-flag-schubert-picard-lattice] to this split pair over $k$ and to $K/k$. Its geometrically integral boundary divisors give a basis of $\\operatorname{Pic}(Q)$ and their scalar extensions give a basis of $\\operatorname{Pic}(Q_K)$. The node states that $p_Q^*$ sends each basis class to the corresponding scalar-extended class. Hence $p_Q^*$ is an isomorphism: it is the identity on the integer coefficients of these bases.",
+   "uses": [
+    "lem-sfb-split-flag-schubert-picard-lattice",
+    "lem-sfb-split-reductive-characteristic-sequence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/brion-on-linearization-of-line-bundles-2015.pdf",
+    "place": "Brion Lemma 2.3, p.118, flag Picard lattice and unchanged root datum"
+   }
+  },
+  {
+   "text": "Write $A,A_K$ for the character groups, $P,P_K$ for the flag Picard groups and $R,R_K$ for the group Picard groups of the two rows. The maps $u:A\\to A_K$ and $v:P\\to P_K$ are bijective by steps 4 and 5. Surjectivity: lift $y\\in R_K$ to $z_K\\in P_K$, write $z_K=v(z)$, and use the right square to obtain $y=p_H^*(f^*z)$. Injectivity: if $p_H^*(f^*z)=0$, exactness gives $v(z)=c_K(b_K)$; write $b_K=u(b)$. The left square yields $v(z)=v(c_k(b))$. Injectivity of $v$ gives $z=c_k(b)$, whence $f^*z=0$. Every element of $R$ is $f^*z$ by exactness. Therefore $p_H^*$ is bijective. Step 2 expresses $p_K^*=q_K^*p_H^*(q^*)^{-1}$, so the required pullback is an isomorphism of abelian groups. When $G=1$ every basis is empty and this same argument gives $0\\simeq0$.",
+   "uses": [
+    "lem-sfb-split-reductive-characteristic-sequence"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Agent: explicit cokernel diagram chase and the commuting pullback square"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-split-reductive-affine-space-quotient",
+  "lem-sfb-smooth-affine-space-picard-invariance",
+  "def-pc-module-pullback",
+  "lem-sfb-split-reductive-characteristic-sequence",
+  "def-sc-gm-ga",
+  "lem-sfb-split-flag-schubert-picard-lattice"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/brion-on-linearization-of-line-bundles-2015.pdf",
+  "place": "Brion Lemma 2.3, printed pp.117-118, and Remark 2.2(v), p.117; publisher PDF read online. Local PDF WANTED. Agent expanded the naturality and cokernel argument; Milne Theorem 18.15 and Stacks 02TT/0BE9 supply the supporting sources."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "Picard.*(base.?change|field|invarian)|Pic.*mapAlgebra",
+   "results": "{\"t\": \"2026-10-24T02:43:07Z\", \"tool\": \"grep\", \"query\": \"Picard.*(base.?change|field|invarian)|Pic.*mapAlgebra\", \"sub\": \"RingTheory/PicardGroup.lean\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"565\", \"572\", \"617\", \"618\", \"859\"], \"digest\": \"f6db6a3ebe61fbe3\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: read the returned hits. Pic.mapAlgebra constructs a homomorphism and its composition laws; it does not prove this map is bijective for coordinate rings of connected affine groups. Semilocal Picard triviality, relative Picard definitions, Hilbert 90, and scalar-extension equivalences do not supply the asserted group-scheme result."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Scalar extension of a connected split linear algebraic group preserves its Picard group",
+   "results": "{\"t\": \"2026-10-24T02:43:08Z\", \"tool\": \"leansearch\", \"query\": \"Scalar extension of a connected split linear algebraic group preserves its Picard group\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"LinearEquiv.extendScalarsOfIsLocalizationEquiv\", \"IntermediateField.extendScalars\", \"LinearEquiv.extendScalarsOfSurjective_apply\", \"AlgEquiv.extendScalarsOfSurjective\", \"AlgHom.extendScalarsOfSurjective\", \"Algebra.IsAlgebraic.extendScalars\", \"Module.FinitePresentation.isLocalizedModule_mapExtendScalars\", \"Algebra.Generators.extendScalars_val\"], \"digest\": \"cf213a012c938852\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: read the returned hits. Pic.mapAlgebra constructs a homomorphism and its composition laws; it does not prove this map is bijective for coordinate rings of connected affine groups. Semilocal Picard triviality, relative Picard definitions, Hilbert 90, and scalar-extension equivalences do not supply the asserted group-scheme result."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Pic\", \"Bijective\"",
+   "results": "{\"t\": \"2026-10-24T02:43:08Z\", \"tool\": \"loogle\", \"query\": \"\\\"Pic\\\", \\\"Bijective\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 7, \"note\": \"\", \"top\": [\"HomotopicalAlgebra.LeftHomotopyClass.postcomp_bijective_of_fibration_of_weakEquivalence\", \"HomotopicalAlgebra.RightHomotopyClass.precomp_bijective_of_cofibration_of_weakEquivalence\", \"HomotopicalAlgebra.LeftHomotopyClass.postcomp_bijective_of_weakEquivalence\", \"HomotopicalAlgebra.RightHomotopyClass.precomp_bijective_of_weakEquivalence\", \"HomotopicalAlgebra.bijective_leftHomotopyClassToHom\", \"HomotopicalAlgebra.bijective_rightHomotopyClassToHom\", \"HomotopicalAlgebra.bijective_leftHomotopyClassToHom_iff_bijective_rightHomotopyClassToHom\"], \"digest\": \"6aab467e5d918a0a\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: read the returned hits. Pic.mapAlgebra constructs a homomorphism and its composition laws; it does not prove this map is bijective for coordinate rings of connected affine groups. Semilocal Picard triviality, relative Picard definitions, Hilbert 90, and scalar-extension equivalences do not supply the asserted group-scheme result."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For an algebraically closed field k and a smooth connected affine k-group G, pullback Pic(G) to Pic(G_K) is an isomorphism for every field extension K",
+   "results": "{\"t\": \"2026-10-24T02:43:11Z\", \"tool\": \"leanfinder\", \"query\": \"For an algebraically closed field k and a smooth connected affine k-group G, pullback Pic(G) to Pic(G_K) is an isomorphism for every field extension K\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"galLiftEquiv\", \"galLiftEquiv_apply\", \"CommRing.Pic.mapAlgebra_mapAlgebra\", \"CommRing.Pic.mapAlgebra\", \"galRestrict\", \"CommRing.Pic.mapRingHom_algebraMap\", \"CommRing.Pic.mapAlgebra_self\", \"CommRing.Pic.mapAlgebra_comp_mapAlgebra\"], \"digest\": \"806ceb541141bd2f\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: read the returned hits. Pic.mapAlgebra constructs a homomorphism and its composition laws; it does not prove this map is bijective for coordinate rings of connected affine groups. Semilocal Picard triviality, relative Picard definitions, Hilbert 90, and scalar-extension equivalences do not supply the asserted group-scheme result."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Every invertible sheaf on G times Spec K descends to G when G is a connected linear group over an algebraically closed base field",
+   "results": "{\"t\": \"2026-10-24T02:43:12Z\", \"tool\": \"leanfinder\", \"query\": \"Every invertible sheaf on G times Spec K descends to G when G is a connected linear group over an algebraically closed base field\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.PreGaloisCategory.instIsPretransitiveCarrierObjFintypeCatOfIsConnected\", \"groupCohomology.H1ofAutOnUnitsUnique\", \"CategoryTheory.PreGaloisCategory.exists_hom_from_galois_of_connected\", \"CategoryTheory.PreGaloisCategory.exists_set_ker_evaluation_subset_of_isOpen\", \"CommRing.relPic_eq_top\", \"CommRing.relPic\", \"CategoryTheory.PreGaloisCategory.IsFundamentalGroup.non_trivial\", \"CategoryTheory.PreGaloisCategory.FiberFunctor.isPretransitive_of_isConnected\"], \"digest\": \"2d212d42031604f4\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: read the returned hits. Pic.mapAlgebra constructs a homomorphism and its composition laws; it does not prove this map is bijective for coordinate rings of connected affine groups. Semilocal Picard triviality, relative Picard definitions, Hilbert 90, and scalar-extension equivalences do not supply the asserted group-scheme result."
+  },
+  {
+   "tool": "grep",
+   "query": "Picard.*(base.?change|field|invarian)|Pic.*mapAlgebra",
+   "results": "{\"t\": \"2026-10-24T03:08:49Z\", \"tool\": \"grep\", \"query\": \"Picard.*(base.?change|field|invarian)|Pic.*mapAlgebra\", \"sub\": \"RingTheory/PicardGroup.lean\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"565\", \"572\", \"617\", \"618\", \"859\"], \"digest\": \"f6db6a3ebe61fbe3\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: Pic.mapAlgebra and its composition laws define pullback but do not establish bijectivity for coordinate rings of connected affine groups; abstract Hilbert 90 and semilocal Picard triviality do not apply."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Pullback Picard group of a split linear algebraic group is bijective under extension of scalars",
+   "results": "{\"t\": \"2026-10-24T03:08:50Z\", \"tool\": \"leansearch\", \"query\": \"Pullback Picard group of a split linear algebraic group is bijective under extension of scalars\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CommRing.Pic.mapAlgebra_mapAlgebra\", \"CommRing.Pic.mapRingHom\", \"CommRing.Pic.mapAlgebra\", \"PresheafOfModules.pullback\", \"CommRing.Pic.mapRingHom_algebraMap\", \"Submodule.mulExact_unitsToPic_mapAlgebra\", \"PresheafOfModules.pullbackPushforwardAdjunction\", \"CommRing.relPic\"], \"digest\": \"3469071524c9653e\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: Pic.mapAlgebra and its composition laws define pullback but do not establish bijectivity for coordinate rings of connected affine groups; abstract Hilbert 90 and semilocal Picard triviality do not apply."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Pic\", \"mapAlgebra\"",
+   "results": "{\"t\": \"2026-10-24T03:08:50Z\", \"tool\": \"loogle\", \"query\": \"\\\"Pic\\\", \\\"mapAlgebra\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 7, \"note\": \"\", \"top\": [\"CommRing.Pic.mapAlgebra\", \"CommRing.Pic.mapAlgebra_self\", \"CommRing.Pic.mapAlgebra_self_apply\", \"CommRing.Pic.mapAlgebra_comp_mapAlgebra\", \"CommRing.Pic.mapAlgebra_mapAlgebra\", \"Submodule.mulExact_unitsToPic_mapAlgebra\", \"CommRing.Pic.mapAlgebra_apply\"], \"digest\": \"f6b8c6051cd6dfba\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: Pic.mapAlgebra and its composition laws define pullback but do not establish bijectivity for coordinate rings of connected affine groups; abstract Hilbert 90 and semilocal Picard triviality do not apply."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Picard group of smooth connected affine algebraic group over algebraically closed field unchanged by every field extension",
+   "results": "{\"t\": \"2026-10-24T03:08:51Z\", \"tool\": \"leanfinder\", \"query\": \"Picard group of smooth connected affine algebraic group over algebraically closed field unchanged by every field extension\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CommRing.Pic.mapAlgebra_self\", \"CommRing.relPic\", \"CommRing.relPic_eq_top\", \"CommRing.Pic.mapAlgebra_self_apply\", \"CommRing.Pic.instSubsingletonOfFiniteMaximalSpectrum\", \"Algebra.IsStandardSmooth.subsingleton_h1Cotangent\", \"groupCohomology.H1ofAutOnUnitsUnique\", \"instCommGroupPic\"], \"digest\": \"c9ea45136673e469\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: Pic.mapAlgebra and its composition laws define pullback but do not establish bijectivity for coordinate rings of connected affine groups; abstract Hilbert 90 and semilocal Picard triviality do not apply."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-affine-group-picard-stable-exponent",
+  "date": "2026-10-24",
+  "group": "Q24"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Haboush symmetric-power lifting for a trivial quotient representation. Supporting representation-theoretic input: Steinberg endomorphisms detect a nonzero fixed vector. Supporting Self-duality of rho section modules at characteristic-dependent weights. Supporting input: Positive-characteristic simplicity step, using irreducibility of the Steinberg induced module rather than assuming self-duality. Numerical input to the dimension comparison: Weyl dimension of the induced module. Supporting Integral Euler character of arbitrary flag line bundles. Section 22d, proof of Theorem 22.50, p.480: general fixed-point input, stated here in its integral equivariant form; Example 22.36, pp.473--474, for formal characters. WANTED: Nielsen 1974 general fixed-point theorem and Iversen 1976, 9.4; neither document is present. The integral formulation is an agent-supplied supporting statement. Supporting input: Section 22d, proof of Theorem 22.50, p.480: agent-supplied concentration prerequisite, not the numerical fixed-point formula itself. WANTED: Thomason, Une formule de Lefschetz en K-theorie equivariante algebrique, Duke Math. J. 53 (1986), concentration theorem; not present locally. No proof of concentration is claimed to occur in Milne. Supporting step: The concentration theorem's nonfixed-locus annihilation argument in the proof of the item. Geometric input to nonfixed-locus annihilation: invariant affine strata of the reduction, before the Laurent-coefficient and localization arguments. Supporting normal-case neighbourhood input used after passing to the invariant smooth locus, before removing one affine open in the Noetherian induction. Supporting proof input: Linearize the normal quasi-projective neighborhood by an immersion into projective space of a rational representation. Supporting line-bundle prerequisite: replace an ample invertible module by a positive tensor power carrying an algebraic G-linearization, before choosing invariant sections. Supporting Picard input: a tensor exponent uniform over the generic residue fields of all normal components, before applying the generic-line pullback criterion. Supporting base-change input: Brion Lemma 2.3, pullback Pic(G) to Pic(G_K), specialized using Remark 2.2(v).",
+   "via": [
+    "lem-sfb-affine-group-picard-stable-exponent",
+    "lem-sfb-normal-line-bundle-power-linearization",
+    "lem-sfb-normal-quasiprojective-equivariant-immersion",
+    "lem-sfb-sumihiro-normal-torus-affine-neighbourhood",
+    "lem-sfb-torus-invariant-affine-filtration",
+    "lem-sfb-torus-nonfixed-complement-annihilation",
+    "lem-sfb-torus-coherent-concentration",
+    "lem-sfb-torus-coherent-fixed-point-formula",
+    "lem-sfb-flag-line-euler-alternant",
+    "lem-sfb-induced-weyl-dimension-formula",
+    "lem-sfb-steinberg-induced-module-irreducible",
+    "lem-sfb-rho-section-self-duality",
+    "lem-sfb-steinberg-endomorphism-detection",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-affine-group-picard-field-invariance",
+  "worker": "stage1",
+  "summary": "Q16 follows Brion Lemma 2.3: affine-space reduction to a split reductive quotient, polynomial Picard invariance, natural characteristic exact rows, split character coordinates, and split Schubert Picard bases. The final explicit cokernel chase proves that the canonical pullback is invertible. No statement correction or claim of Mathlib coverage is made. Four strictly supporting statement-only nodes expose the substantial geometric inputs, including their validity over arbitrary imperfect extension fields.",
+  "blueprint": "Realizes the existing inherited from.place: supporting field-invariance step for the uniform affine-group Picard exponent on the det-thm-sf-ctf-stability-direct-images (3) alteration route. The current latest blueprint proof (3) was read; this long support chain is agent-added. blueprint_refs.py ancestor returns None, retained honestly; every new from.via prepends this item."
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q16-c85e20bcc",
+  "group": "Q16",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q16-c85e20bcc (reviewer sub-agent of L); spot-checked: Read the item and all four new nodes in full. The item statement is unchanged from live, and live still has the item unsplit with an empty proof. No re-split note applies, there is no SGA source, and all cited nodes are in the same unit or are definitions. Sources checked: Milne iAG pp.390, 392, 395-396 (Thm 18.15 sequence (128); the χ(b^{-1}) convention matches node C; Lemma 18.21 affine-cell generation) and Stacks 02TT/0BE9. Brion Lemma 2.3 and Iversen 5.2/5.3 are listed WANTED; the item's six steps follow Brion's route. All four new nodes are true. (A) G≅H×A^n over H=G/R_u(G), since a torsor under a split unipotent group over an affine base is trivial. (B) Pic(X×A^n)=Pic(X) for smooth X, because regular gives Pic=Cl, plus 02TT. (C) The split characteristic sequence over any field (Milne 18.15) plus naturality under base change; the existing borel-characteristic node is only for algebraically closed fields. (D) The Schubert-boundary basis of Pic(H/B) over any field, stable under base change. Cases tested: G=1, unipotent G, torus, SL2, and PGL2 (image 2Z). The DAG search found no duplicate or restatement (the closest are opposite-schubert-picard-basis, flag-effective-picard-generators, affine-cell-picard-product and normal-variety-affine-parameter-picard). The step-6 chase is correct and uses only bijectivity of u and v. FIX to the item: step 4 now cites def-sc-gm-ga for the G_m Hopf structure. Step 5 now states that B=U⋊T from node C is split solvable (series through U⋊G_m^{r-i}) and cites node C, which is the hypothesis of node D. proof_deps is the union of all uses. blueprint.from.node=null is inherited from the base (the parent is also null), so it is not a fault of this delivery.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.AffineGroupPicardFieldInvariance",
+  "declaration": "AlgebraicGeometry.affineGroup_picard_field_invariance",
+  "file": "lean/Sheaf/AlgebraicGeometry/AffineGroupPicardFieldInvariance.lean",
+  "statement": "theorem affineGroup_picard_field_invariance (k : Type u) [Field k] [IsAlgClosed k] (G : Over (Spec (CommRingCat.of k))) [GrpObj G] [Smooth G.hom] [ConnectedSpace G.left] [IsAffine G.left] [LocallyOfFiniteType G.hom] [QuasiCompact G.hom] (K : Type u) [Field K] [Algebra k K] : Function.Bijective (Scheme.Pic.mapHom (pullback.fst G.hom (Spec.map (CommRingCat.ofHom (algebraMap k K)))))",
+  "branch": "newtargets-dag",
+  "by": "Q31",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "Uses the existing scheme Picard group and its canonical pullback homomorphism, with multiplicative notation for tensor product. Bijectivity of this homomorphism is exactly that the displayed pullback is an isomorphism of abelian groups."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-791a7b927",
+  "group": "Q31",
+  "result": "pass",
+  "note": "Clause-by-clause match: IsAlgClosed k; GrpObj on Over (Spec k); Smooth/ConnectedSpace/IsAffine/LocallyOfFiniteType+QuasiCompact as recorded; arbitrary K:Type u with Algebra k K; pullback.fst orientation G_K→G; conclusion Function.Bijective (Scheme.Pic.mapHom p_K) = iso of abelian groups. Pic.map uses Mathlib Scheme.Modules.pullback, which agrees with tensor pullback on iso classes (canonical). Mechanical theorem-stmt_dep finding on lem-sc-pic-group: mapHom's →* type needs Scheme.Pic.instCommGroup, the theorem's recorded constructed instance (and def-sc-picard-group itself cites it), so a genuine dependency: PASS on point. Edge cases G=1, tori, PGL2, K=k, imperfect K are covered. Universe u is the scheme convention. Statement text unchanged vs live; diff is only stmt_deps+lean; no parallel supersession. No defs, sorry-only, docstrings carry source place, blueprint tag and 6 steps; lean.statement verbatim; imports exist live. No compile (no file changed). Advisory: second-reading section is the author's self-reading."
+ }
+}

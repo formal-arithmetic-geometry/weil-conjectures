@@ -119,7 +119,32 @@
   "item": "lem-weil-pbc-lift-idempotent-upstairs",
   "date": "2026-10-10"
  },
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": [
+    "Polynomial.exists_monic_aeval_eq_zero_map_eq_of_isIdempotentElem_quotient"
+   ]
+  },
+  "slopmaster2": {
+   "state": "closed",
+   "decls": [
+    {
+     "name": "Polynomial.exists_monic_aeval_eq_zero_map_eq_of_isIdempotentElem_quotient",
+     "module": "WeilConjectures.RingTheory.IntegralIdempotentAnnihilatingPolynomial",
+     "lines": [
+      29,
+      84
+     ],
+     "kind": "theorem",
+     "sorry": false
+    }
+   ],
+   "missing": [],
+   "open": []
+  }
+ },
  "chapter": "sec-proper-base-change",
  "unit": "sk-thm-p1",
  "reviewed": {
@@ -162,5 +187,31 @@
   "landing": "20261012T112832-L-764975",
   "kind": "interface",
   "note": "independent Codex review: Delivered module and importer compiled without warnings; theorem signature and target statement unchanged; proof uses only allowed axioms; import visibility change is documented and independently verified."
+ },
+ "blueprint_update": {
+  "snapshot": "main-20261023-1620",
+  "commit": "7284bb09daf97437d544c51882b325f9c52cd345",
+  "changed": [
+   "proof"
+  ],
+  "statement": "Let $A$ be a commutative ring, $I\\subseteq A$ an ideal and $A\\to B$ a ring map with $B$ integral over $A$. Let $b\\in B$ be an element whose image in $B/IB$ is idempotent. Then there are an integer $d\\ge1$ and a monic polynomial $f\\in A[x]$ with $f(b)=0$ in $B$ and $f\\equiv x^d(x-1)^d$ modulo $I$, i.e. the image of $f$ in $(A/I)[x]$ is $x^d(x-1)^d$.",
+  "proof": [
+   {
+    "text": "*$z=b^2-b$ lies in $IB$.* The kernel of the quotient map $B\\to B/IB$ is $IB$. The image $\\bar b$ of $b$ is idempotent, so the image of $z=b^2-b$ is $\\bar b^2-\\bar b=0$, i.e. $z\\in IB$.",
+    "uses": [],
+    "elementary": null
+   },
+   {
+    "text": "Since $z\\in IB$ is integral over $A$, it satisfies an integral equation whose non-leading coefficients lie in $I$: there is a monic $g\\in A[x]$ with $g(z)=0$ and all non-leading coefficients of $g$ in $I$ (the standard lemma for elements of $IB$ in an integral extension). Reducing coefficientwise, $g\\equiv x^{m}$ modulo $I$ with $m=\\deg g$. Set $h=x\\,g$ and $d=m+1$; then $d\\ge1$, $h$ is monic, $h(z)=0$, and $h\\equiv x^d$ modulo $I$. Multiplying by $x$ also handles the case $\\deg g=0$ without a separate argument.",
+    "uses": [],
+    "elementary": null
+   },
+   {
+    "text": "Suppose $A\\neq0$. Put $q=x(x-1)$ and $f=h(q)=h\\circ q$. Since $q$ is monic of positive degree and $h$ is monic, $f$ is monic. As $q(b)=b^2-b=z$, $f(b)=h(z)=0$. Reduction modulo $I$ commutes with composition, so $f\\equiv q^d=x^d(x-1)^d$ modulo $I$. If $A$ is the zero ring, then $B$ is the zero ring too (it is an $A$-algebra); take $d=1$ and $f=1$, and all required equalities hold trivially.",
+    "uses": [],
+    "elementary": null
+   }
+  ],
+  "note": "the current blueprint (main-20261023-1620, weil-conjectures-blueprint 7284bb09da) states or proves this differently; the node is proved in Lean: recorded 2026-10-23, not reopened"
  }
 }

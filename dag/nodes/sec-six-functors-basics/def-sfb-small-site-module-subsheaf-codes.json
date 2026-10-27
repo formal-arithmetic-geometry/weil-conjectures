@@ -1,0 +1,112 @@
+{
+ "id": "def-sfb-small-site-module-subsheaf-codes",
+ "kind": "definition",
+ "title": "Powerset codes and actual module subsheaves on a small ringed site",
+ "status": "split",
+ "statement": "Fix a universe $\\mathcal V$ [def-weil-size-convention], a $\\mathcal V$-small site $\\mathcal C$ [def-weil-pbc-sites-and-cohomology] with object set $K$, a sheaf of rings $R$ with $\\mathcal V$-small section sets, and an $R$-module sheaf $P$ with $\\mathcal V$-small section sets [def-weil-sheaf-of-modules-category]. Define $D(P)=\\prod_{V\\in K}\\mathcal P(P(V))$. A family $s\\in D(P)$ is a module-subsheaf code if there exists a restriction-stable family of $R(V)$-submodules $N(V)\\subseteq P(V)$ with underlying subsets $s(V)$ whose inherited module presheaf is a sheaf. Let $E(P)$ be the subset of $D(P)$ of these codes. For $s\\in E(P)$, recover this family of submodules (determined by its underlying subsets), equip its subsets with the inherited module operations and restriction maps to obtain the actual sheaf $N_s$, and let $\\iota_s:N_s\\to P$ be the subset inclusion.",
+ "stmt_deps": [
+  "def-weil-size-convention",
+  "def-weil-pbc-sites-and-cohomology",
+  "def-weil-sheaf-of-modules-category"
+ ],
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-int-integral-heart/sk-lem-int-integral-heart-triangulated.proof.md",
+  "place": "Paragraph (2), final sentence: sheaves on a fixed small site and gluing morphisms form a set; extracted product-bound proof steps 8–9: injectivity, transport of the sheaf axiom to actual ranges, uniqueness over the target and powerset codes. The sectionwise-kernel input is Stacks Tag 03DA, sites-modules.tex, lemma-abelian."
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Families of sectionwise submodules of a module sheaf stable under restrictions and satisfying the sheaf axiom, encoded as a subset of the product of powersets",
+   "results": "[leansearch] OK 8 hit(s): SheafOfModules.mk; TopCat.Presheaf.IsSheaf; TopCat.Presheaf.IsSheafEqualizerProducts; SheafOfModules.sections; PresheafOfModules.sections; PresheafOfModules.sectionsMk; ModuleCat.sectionsSubmodule; AlgebraicGeometry.Scheme.Modules",
+   "date": "2026-10-22",
+   "verdict": "no match: these give sheaves and sections, not the powerset-code subset and its realization"
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules, Submodule",
+   "results": "[loogle] OK 2 hit(s): SheafOfModules.Submodule.isSheaf; SheafOfModules.Submodule.mk; both in Mathlib.Algebra.Category.ModuleCat.Sheaf.Submodule. scompile.py --source Mathlib.Algebra.Category.ModuleCat.Sheaf.Submodule: Module source unavailable: Mathlib.Algebra.Category.ModuleCat.Sheaf.Submodule (exit 1). The pinned local Mathlib has no such module; its PresheafOfModules.Submodule is available and reused.",
+   "date": "2026-10-22",
+   "verdict": "no match in the pinned library: current search index has a newer module; the code construction reuses the available presheaf submodule without copying it"
+  },
+  {
+   "tool": "grep",
+   "query": "structure Submodule|toPresheafOfModules|def.*ι",
+   "results": "[grep] OK 5 hit(s), scope Algebra/Category/ModuleCat/Presheaf/Submodule.lean: lines 22, 41, 65, 72, 73; structure Submodule, noncomputable def toPresheafOfModules, lemma toPresheafOfModules_map_apply. Read the full module, including inclusion ι at line 78.",
+   "date": "2026-10-22",
+   "verdict": "no match: existing restriction-stable submodule and subset-presheaf realization are reused, but the raw subset codes with sheaf membership are absent"
+  },
+  {
+   "tool": "grep",
+   "query": "subshea(f|ves).{0,45}(cod|subset famil)|cod.{0,30}subshea",
+   "results": "rg -l -i over dag/nodes, lean/Sheaf, lean/WeilConjectures: FiniteTypeQuasiCoherentSubalgebras.lean and nodes lem-sfb-condensed-action-injective-infrastructure, lem-sfb-sheaf-product-fixed-adjunction, lem-sfb-small-site-image-subsheaf-representatives, det-lem-coefficient-heart-small, lem-sfb-stratified-constant-model-product-bound. These are specialized constructions or consumers, not a definition of powerset codes. No def node in sec-six-functors-basics matched actual.*subsheaf|subset.*code|powerset. tools/blueprint_refs.py search small-site-module-subsheaf-codes: 0 blueprint nodes match.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-small-site-image-subsheaf-representatives",
+  "date": "2026-10-22",
+  "group": "NF"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-lem-int-integral-heart-triangulated",
+   "place": "Paragraph (2), final sentence: sheaves on a fixed small site and gluing morphisms form a set; extracted product-bound proof steps 8–9: injectivity, transport of the sheaf axiom to actual ranges, uniqueness over the target and powerset codes. The sectionwise-kernel input is Stacks Tag 03DA, sites-modules.tex, lemma-abelian.",
+   "via": [
+    "lem-sfb-small-site-image-subsheaf-representatives",
+    "lem-sfb-stratified-constant-model-product-bound"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-lem-int-integral-heart",
+ "lean": {
+  "module": "Sheaf.CategoryTheory.SmallSiteModuleSubsheafCodes",
+  "declaration": "SheafOfModules.ModuleSubsheafCode",
+  "file": "lean/Sheaf/CategoryTheory/SmallSiteModuleSubsheafCodes.lean",
+  "statement": "def ModuleSubsheafCode (P : ringedSiteModules.{u} R) : Type u",
+  "branch": "sheaf-dag",
+  "by": "NF",
+  "date": "2026-10-22",
+  "existing": false,
+  "declarations": [
+   "SheafOfModules.SectionSubsetFamily",
+   "SheafOfModules.IsModuleSubsheafCode",
+   "SheafOfModules.ModuleSubsheafCode",
+   "SheafOfModules.ModuleSubsheafCode.submodule",
+   "SheafOfModules.ModuleSubsheafCode.toSheaf",
+   "SheafOfModules.ModuleSubsheafCode.ι"
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-88f42e24a",
+  "group": "NF",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-88f42e24a",
+  "group": "NF",
+  "result": "pass",
+  "note": "Read the item, the new def node, both modules, the dependency declarations (ringedSiteModules: first universe parameter v, so the .{u} fixes the module universe; IsSiteForCoverings) and Mathlib PresheafOfModules.Submodule (pinned; ext by carriers, toPresheafOfModules, ι, Mono instance). Every node clause is rendered: unique subsheaf per code (∃!), Mono ι, sectionwise injectivity, image family is a code, iso e with e≫ι=m pinned elementwise to the induced map, iso over P_j ⇔ equal ranges, every code realized by its inclusion, Small.{u} for D_j, E_j and the Σ-type. No extra assumptions: noncommutative R, empty I/site/coverings allowed, single universe u. New def node is non-hollow (choose determined by carriers), no duplicate found in Lean/DAG/Mathlib, statements verbatim, docstrings with source and blueprint, only the theorem sorry. Live diff: lean record plus the new stmt_dep only. No compile (no change). Advisory: Small.{u} conjuncts automatic for Type u, the accepted size-convention rendering."
+ }
+}

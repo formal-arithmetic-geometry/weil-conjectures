@@ -1,0 +1,136 @@
+{
+ "id": "lem-asd-cartier-pole-boundary-pullback",
+ "kind": "statement",
+ "title": "Integral Cartier pole-extension pullback",
+ "statement": "Let $i:D\\hookrightarrow T$ and $i':D'\\hookrightarrow T'$ be effective Cartier closed immersions [def-nagata-effective-cartier-ideal] of schemes [def-pc-scheme]. Let $v:T'\\to T$ and $w:D'\\to D$ form a cartesian square [def-pc-fibre-product]. Write $\\beta_i\\in\\operatorname{Ext}^1(i_*\\mathbf Z_D,\\mathbf G_{m,T})$ for the unique normalized pole-extension class [def-sp-cartier-pole-boundary, lem-sp-cartier-pole-boundary-existence], and similarly for $i'$. With the canonical integral closed exchange $e:v^{-1}i_*\\mathbf Z_D\\to i'_*\\mathbf Z_{D'}$ of [lem-pur-relative-extension-cohomology-normalization], and the units map $b:v^{-1}\\mathbf G_{m,T}\\to\\mathbf G_{m,T'}$, one has $e^*\\beta_{i'}=b_*v^{-1}\\beta_i$ in $\\operatorname{Ext}^1(v^{-1}i_*\\mathbf Z_D,\\mathbf G_{m,T'})$. The base morphism is arbitrary; only both Cartier hypotheses are imposed. This identity involves no Kummer sequence, exponent or finite coefficient ring.",
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-nagata-effective-cartier-ideal",
+  "def-pc-fibre-product",
+  "def-sp-cartier-pole-boundary",
+  "lem-sp-cartier-pole-boundary-existence",
+  "lem-pur-relative-extension-cohomology-normalization"
+ ],
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-lem-geo-cartier/lem-amb-cartier-kummer-map.proof.md",
+  "place": "Relative line bundle with its complementary trivialization, and the sentence beginning All the cone maps"
+ },
+ "proof": [
+  {
+   "text": "Use the proved canonical Cartier-pair comparison to identify the ordinary pullback of the dual ideal and its canonical divisor section. Apply presheafHomPullback to frames and postcompose with this isomorphism. Pullback of scalar endomorphisms makes this natural map equivariant along the units map. Its value on the complementary frame is the primed complementary frame, by compatibility of pullHom with mapped global morphisms.",
+   "uses": [
+    "lem-asd-cartier-pair-pullback-section",
+    "lem-sp-picard-cohomology-arbitrary-pullback",
+    "lem-pur-tensor-pullback-frames",
+    "lem-pur-cartier-pair-tensor-addition",
+    "lem-sp-cartier-complement-frame"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply the proved arbitrary-morphism framed extension square. Its proof chooses a target representing extension, uses the mate of closed exchange and its unit compatibility to preserve supported one, and constructs a morphism from the source extension to the direct image. Adjunction and extClass naturality give the equation. No exchange inverse or etaleness hypothesis is used.",
+   "uses": [
+    "lem-asd-relative-framed-extension-pullback-square"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The normalized pole specification identifies each pole class with the relative extension of its frame torsor and canonical complementary frame, using pole_boundary_eq_relative. Rewrite the extension square by these two identifications. The adjoint of the direct-image units map is exactly upperStarGmSheafToGmSheaf.",
+   "uses": [
+    "lem-sp-cartier-pole-boundary-existence",
+    "lem-pur-cartier-pair-tensor-addition"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-asd-cartier-pair-pullback-section",
+  "lem-sp-picard-cohomology-arbitrary-pullback",
+  "lem-pur-tensor-pullback-frames",
+  "lem-pur-cartier-pair-tensor-addition",
+  "lem-sp-cartier-complement-frame",
+  "lem-asd-relative-framed-extension-pullback-square",
+  "lem-sp-cartier-pole-boundary-existence"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-lem-geo-cartier/lem-amb-cartier-kummer-map.proof.md",
+  "place": "F9: canonical Cartier section comparison followed by relative-extension morphism and extClass naturality; no exchange inverse required."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "The integral pole extension of an effective Cartier divisor is natural under pullback preserving the Cartier property",
+   "results": "Eight results including Scheme.IdealSheafData.comap and comapIso, and stability of integral morphisms; none states naturality of a framed torsor extension class.",
+   "date": "2026-10-27",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Ext\", \"extClass_naturality\"",
+   "results": "CategoryTheory.ShortComplex.ShortExact.extClass_naturality supplies naturality after constructing a morphism of extensions; no geometric Cartier comparison.",
+   "date": "2026-10-27",
+   "verdict": "generic API only"
+  },
+  {
+   "tool": "grep",
+   "query": "cartierPoleBoundary_pullback|CartierPoleBoundarySpec",
+   "results": "0 Mathlib hits. Local project search finds the pole specification and its existence/uniqueness, Cartier dual pullback, and relative_extension_pullback restricted to etale base maps. No general Cartier-preserving pole pullback theorem. blueprint_refs.py search pole extension pullback: 0 matches.",
+   "date": "2026-10-27",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.SupportedKummerBoundaryPullback",
+  "date": "2026-10-27",
+  "group": "P4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-asd-smooth-tensor",
+   "place": "The relative Cartier class in the pullback argument: integral degree-one extension before the Kummer map",
+   "via": [
+    "lem-asd-supported-kummer-boundary-pullback",
+    "lem-asd-ordinary-supported-kummer",
+    "lem-asd-ordinary-finite-p1-adjunction"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sf-cbc",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.CartierPoleBoundaryPullback",
+  "file": "lean/Sheaf/AlgebraicGeometry/CartierPoleBoundaryPullback.lean",
+  "declaration": "AlgebraicGeometry.Etale.cartierPoleBoundary_pullback",
+  "statement": "theorem cartierPoleBoundary_pullback {D D' T T' : Scheme.{u}}\n    (i : D ⟶ T) [IsClosedImmersion i] (hI : i.ker.IsInvertible)\n    (i' : D' ⟶ T') [IsClosedImmersion i'] (hI' : i'.ker.IsInvertible)\n    (v : T' ⟶ T) (w : D' ⟶ D) (sq : IsPullback w i' i v) :\n    (Ext.mk₀ (relativeExtensionExchange i i' v w sq.toCommSq)).comp\n        (cartierPoleBoundary i' hI') (zero_add 1) =\n      ((cartierPoleBoundary i hI).mapExactFunctor\n        (upperStar AddCommGrpCat.{u + 1} v)).comp\n        (Ext.mk₀ (Scheme.upperStarGmSheafToGmSheaf v)) (add_zero 1)",
+  "branch": "sheaf-dag",
+  "by": "P4",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P4",
+  "result": "pass",
+  "landing": "20261027T103500-L-1087496",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F9",
+  "result": "pass",
+  "landing": "20261027T123439-L-2299310",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

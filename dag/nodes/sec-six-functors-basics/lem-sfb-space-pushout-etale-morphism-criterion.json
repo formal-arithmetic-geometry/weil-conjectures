@@ -1,0 +1,308 @@
+{
+ "id": "lem-sfb-space-pushout-etale-morphism-criterion",
+ "kind": "statement",
+ "title": "Etaleness of the morphism induced by an infinitesimal pushout triple",
+ "statement": "Let $B$ be a scheme and work with algebraic spaces over $B$ [def-trf-algebraic-space] in the universes of [def-weil-size-convention], with sheaf fibre products [lem-trf-space-fibre-products-etale-covers]. A thickening is a representable closed immersion inducing a homeomorphism on underlying spaces, whose topology is the quotient topology from a surjective etale scheme atlas; closed immersions are tested on scheme base changes [def-weil-closed-immersion]. An affine map is representable and every scheme base change is an affine scheme morphism. Let $A\\hookrightarrow A^+$ be a thickening, let $A\\to C$ be affine, and let $Q=C\\amalg_A A^+$ be their pushout in algebraic spaces [lem-sfb-space-affine-thickening-pushout]. Let $X\\to C$ and $Y\\to A^+$ be chartwise etale morphisms [def-sfb-space-chartwise-etale-morphism], and let $\\phi:X\\times_C A\\xrightarrow{\\sim}Y\\times_{A^+}A$ be an isomorphism over $A$. Put $U=X\\times_C A$ and use $\\phi$ to define $U\\to Y$. Form the pushout $Z=X\\amalg_U Y$, which exists by [lem-sfb-space-affine-thickening-pushout]. Then the unique morphism $Z\\to Q$ whose restrictions are $X\\to C\\to Q$ and $Y\\to A^+\\to Q$ is chartwise etale. Here chartwise etale means that its composite with every representable etale map from a scheme to its source is representable etale. No separation, quasi-compactness, finite-order, or Noetherian hypothesis is imposed, and no algebraic space over $Q$ restricting to the given triple is assumed to exist.",
+ "source": {
+  "document": "literature/stacks-project/spaces-pushouts.tex",
+  "place": "Tag 07W3, lemma-equivalence-categories-spaces-pushout-flat, part (5), forward construction direction: etale components imply G(V,U\\prime,phi) is etale over the base pushout; not the final flat counit assertion."
+ },
+ "stmt_deps": [
+  "def-trf-algebraic-space",
+  "def-weil-size-convention",
+  "lem-trf-space-fibre-products-etale-covers",
+  "def-weil-closed-immersion",
+  "lem-sfb-space-affine-thickening-pushout",
+  "def-sfb-space-chartwise-etale-morphism"
+ ],
+ "proof": [
+  {
+   "text": "Choose a representable surjective etale scheme atlas $C_0\\to C$ [def-trf-algebraic-space]. Put $A_0=C_0\\times_C A$, a scheme affine over $C_0$ by the definition of the affine map $A\\to C$. Its projection to $A$ is representable surjective etale by [lem-trf-space-representable-etale-scheme-tests]. Lift it across $A\\hookrightarrow A^+$ using [lem-sfb-space-thickening-etale-scheme-equivalence], obtaining a scheme $A_0^+$ etale over $A^+$ and an identification $A_0^+\\times_{A^+}A=A_0$. Both this closed restriction and $A\\hookrightarrow A^+$ are thickenings by [lem-sfb-space-thickening-base-change]. Their homeomorphisms on point sets show that $A_0^+\\to A^+$ is surjective, since $A_0\\to A$ is. Apply [lem-sfb-space-pushout-lifted-atlas] to this compatible pair. It gives a scheme $Q_0=C_0\\amalg_{A_0}A_0^+$ and a representable surjective etale map $Q_0\\to Q$.",
+   "uses": [
+    "def-trf-algebraic-space",
+    "lem-trf-space-representable-etale-scheme-tests",
+    "lem-sfb-space-thickening-etale-scheme-equivalence",
+    "lem-sfb-space-thickening-base-change",
+    "lem-sfb-space-pushout-lifted-atlas"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-pushouts.tex",
+    "place": "Tags 07VX and 07W1: choice of the base atlas cube"
+   }
+  },
+  {
+   "text": "Choose a representable surjective etale scheme atlas $X_0\\to X\\times_C C_0$. The fibre product is an algebraic space by [lem-trf-space-fibre-products-etale-covers]. The composite $X_0\\to X$ is representable surjective etale by [lem-trf-space-representable-etale-scheme-tests]. Put $U_0=X_0\\times_C A$. The affine map $A\\to C$ makes it a scheme. Write $H=Y\\times_{A^+}A_0^+$. Its closed restriction along $A_0\\hookrightarrow A_0^+$ is\n$$H_0=Y\\times_{A^+}A_0\\simeq U\\times_A A_0\\simeq (X\\times_C C_0)\\times_C A.$$\nThese are canonical fibre-product identifications using $\\phi$. Thus $U_0\\to H_0$ is the base change of the chosen atlas of $X\\times_C C_0$, so is representable surjective etale. The map $H_0\\hookrightarrow H$ is a thickening by [lem-sfb-space-thickening-base-change]. Lift $U_0\\to H_0$ using [lem-sfb-space-thickening-etale-scheme-equivalence], obtaining a scheme $Y_0$ etale over $H$ and $Y_0\\times_H H_0=U_0$. It is surjective by the same homeomorphism argument as in step 1. Hence $Y_0\\to Y$ is representable surjective etale by [lem-trf-space-representable-etale-scheme-tests].",
+   "uses": [
+    "def-trf-algebraic-space",
+    "lem-trf-space-fibre-products-etale-covers",
+    "lem-trf-space-representable-etale-scheme-tests",
+    "lem-sfb-space-thickening-base-change",
+    "lem-sfb-space-thickening-etale-scheme-equivalence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-pushouts.tex",
+    "place": "Tag 07W0, construction before equation-cube-over (07W2)"
+   }
+  },
+  {
+   "text": "The lift gives $Y_0\\times_{A_0^+}A_0=U_0=X_0\\times_{C_0}A_0$. It also gives $Y_0\\times_Y U=U_0$, since $H_0=H\\times_Y U$. Thus $(X_0,Y_0)$ is a compatible pair of scheme atlases for the span $U\\to X$, $U\\hookrightarrow Y$. Here $U\\to X$ is affine by testing the base change of $A\\to C$ on schemes, and $U\\hookrightarrow Y$ is a thickening by [lem-sfb-space-thickening-base-change]. Apply [lem-sfb-space-pushout-lifted-atlas] to that span. The scheme pushout $Z_0=X_0\\amalg_{U_0}Y_0$ has a representable surjective etale map $z:Z_0\\to Z$. The compatible maps $X_0\\to C_0$ and $Y_0\\to A_0^+$ induce $g_0:Z_0\\to Q_0$. Its composite to $Q$ equals $Z_0\\xrightarrow{z}Z\\to Q$: the restrictions to $X_0$ and $Y_0$ agree, so equality follows from the pushout universal property against algebraic-space targets in [lem-sfb-space-affine-thickening-pushout].",
+   "uses": [
+    "lem-sfb-space-thickening-base-change",
+    "lem-sfb-space-pushout-lifted-atlas",
+    "lem-sfb-space-affine-thickening-pushout"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-pushouts.tex",
+    "place": "Tag 07W2, compatible map of scheme pushouts and source atlas"
+   }
+  },
+  {
+   "text": "The maps $X_0\\to C_0$ and $Y_0\\to A_0^+$ are etale scheme morphisms. For the first, compose the chosen atlas with the base change of the chartwise etale map $X\\to C$; for the second, compose the lifted atlas with the base change of $Y\\to A^+$. Base change and composition preserve chartwise etaleness by [lem-trf-space-chartwise-etale-permanence], and for scheme sources it is representable etaleness, hence ordinary scheme etaleness. Apply [lem-sfb-scheme-infinitesimal-etale-patching] to the scheme thickening $A_0\\hookrightarrow A_0^+$, affine map $A_0\\to C_0$ and compatible triple $(X_0,Y_0)$. It says precisely that the induced $g_0:Z_0\\to Q_0$ is etale. By [lem-trf-space-representable-etale-scheme-tests], its composite with $Q_0\\to Q$ is representable etale. This composite is $(Z\\to Q)\\circ z$ by step 3. Source-atlas detection [lem-trf-space-etale-source-atlas-detection], clause (3), now makes $Z\\to Q$ chartwise etale. All auxiliary lifts used only arbitrary thickenings; no object over $Q$ realizing the triple was assumed.",
+   "uses": [
+    "lem-trf-space-chartwise-etale-permanence",
+    "lem-sfb-scheme-infinitesimal-etale-patching",
+    "lem-trf-space-representable-etale-scheme-tests",
+    "lem-trf-space-etale-source-atlas-detection"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-pushouts.tex",
+    "place": "Tag 07W3, proof of (1)-(5), using schemes Tag 07RX (5) and spaces Tag 03FS"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-trf-algebraic-space",
+  "lem-trf-space-representable-etale-scheme-tests",
+  "lem-sfb-space-thickening-etale-scheme-equivalence",
+  "lem-sfb-space-thickening-base-change",
+  "lem-sfb-space-pushout-lifted-atlas",
+  "lem-trf-space-fibre-products-etale-covers",
+  "lem-sfb-space-affine-thickening-pushout",
+  "lem-trf-space-chartwise-etale-permanence",
+  "lem-sfb-scheme-infinitesimal-etale-patching",
+  "lem-trf-space-etale-source-atlas-detection"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/spaces-pushouts.tex",
+  "place": "Tag 07W3 proof of (5), forward direction; the two atlas constructions are Tags 07VX, 07W1 and 07W2."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "pushout.*etale|etale.*pushout|thickening.*pushout",
+   "results": "Actual search: 0 hits; . Subdirectory Mathlib/AlgebraicGeometry",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme etale permanence and Spec of a ring pushout do not give etaleness of the induced map between infinitesimal pushouts of algebraic spaces"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Etale morphisms of algebraic spaces glue across an infinitesimal pushout",
+   "results": "Actual search: 8 hits; AlgebraicGeometry.IsEtale, AlgebraicGeometry.Scheme.Etale, Algebra.FormallyEtale, AlgebraicGeometry.IsEtale.instIsSmooth, AlgebraicGeometry.LocallyRingedSpace.GlueData.casesOn, AlgebraicGeometry.IsEtale.instFormallyUnramified, AlgebraicGeometry.IsEtale.instIsStableUnderBaseChangeScheme, AlgebraicGeometry.IsEtale.of_comp",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme etale permanence and Spec of a ring pushout do not give etaleness of the induced map between infinitesimal pushouts of algebraic spaces"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"pushout\", \"Etale\"",
+   "results": "Actual search: 0 hits; ",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme etale permanence and Spec of a ring pushout do not give etaleness of the induced map between infinitesimal pushouts of algebraic spaces"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The morphism from a pushout of algebraic spaces along a thickening is etale when both component morphisms are etale",
+   "results": "Actual search: 8 hits; AlgebraicGeometry.IsEtale.instHasOfPostcompPropertyScheme, AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified, AlgebraicGeometry.IsEtale.instIsStableUnderBaseChangeScheme, AlgebraicGeometry.IsEtale.of_comp, AlgebraicGeometry.IsEtale, AlgebraicGeometry.Scheme.instCategoryEtale, AlgebraicGeometry.Scheme.instHasPullbacksEtale, AlgebraicGeometry.Scheme.Etale",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme etale permanence and Spec of a ring pushout do not give etaleness of the induced map between infinitesimal pushouts of algebraic spaces"
+  },
+  {
+   "tool": "grep",
+   "query": "class IsEtale|lemma of_comp|theorem of_comp|isPullback_Spec.*pushout",
+   "results": "Actual search: 16 hits; Mathlib/AlgebraicGeometry/Pullbacks.lean, Mathlib/AlgebraicGeometry/Pullbacks.lean, Mathlib/AlgebraicGeometry/Pullbacks.lean, Mathlib/AlgebraicGeometry/Morphisms/Preimmersion.lean, Mathlib/AlgebraicGeometry/Morphisms/Integral.lean, Mathlib/AlgebraicGeometry/Morphisms/Integral.lean, Mathlib/AlgebraicGeometry/Morphisms/Immersion.lean, Mathlib/AlgebraicGeometry/Morphisms/WeaklyEtale.lean. Subdirectory Mathlib/AlgebraicGeometry",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme etale permanence and Spec of a ring pushout do not give etaleness of the induced map between infinitesimal pushouts of algebraic spaces"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Etaleness is preserved when gluing a pair of etale algebraic spaces along a nilpotent closed immersion and an affine morphism",
+   "results": "Actual search: 8 hits; AlgebraicGeometry.IsEtale.instHasOfPostcompPropertyScheme, AlgebraicGeometry.IsEtale.instIsStableUnderBaseChangeScheme, AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified, AlgebraicGeometry.IsEtale, AlgebraicGeometry.Scheme.Etale, AlgebraicGeometry.Scheme.instCategoryEtale, AlgebraicGeometry.IsEtale.of_comp, AlgebraicGeometry.Scheme.instHasPullbacksEtale",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme etale permanence and Spec of a ring pushout do not give etaleness of the induced map between infinitesimal pushouts of algebraic spaces"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Etale base change preserves a pushout of algebraic spaces along an infinitesimal thickening and an affine map",
+   "results": "Actual search: 8 hits; AlgebraicGeometry.IsEtale.instIsStableUnderBaseChangeScheme, AlgebraicGeometry.FormallyUnramified.instIsStableUnderBaseChangeScheme, AlgebraicGeometry.IsEtale.instHasOfPostcompPropertyScheme, AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified, AlgebraicGeometry.Scheme.instHasPullbacksEtale, RingHom.Etale.isStableUnderBaseChange, AlgebraicGeometry.IsEtale.instFormallyUnramified, AlgebraicGeometry.isPullback_Spec_map_pushout",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme etale permanence and Spec of a ring pushout do not give etaleness of the induced map between infinitesimal pushouts of algebraic spaces"
+  },
+  {
+   "tool": "grep",
+   "query": "class IsEtale|lemma of_comp|isPullback_Spec_map_pushout|IsStableUnderBaseChange",
+   "results": "3 hits in Mathlib/AlgebraicGeometry/Morphisms/Etale.lean, lines 74, 75 and 130. Read Etale definition at line 42, base-change instance at 74 and of_comp at 130: these are permanence results for scheme morphisms, not algebraic-space infinitesimal pushout gluing.",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme etale permanence does not state the algebraic-space pushout assertion"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The map induced by an etale triple between infinitesimal pushouts of algebraic spaces is etale",
+   "results": "Actual search: 8 hits; RingHom.Etale, AlgebraicGeometry.IsEtale.instIsStableUnderBaseChangeScheme, RingHom.FormallyEtale, RingHom.Etale.toAlgebra, AlgebraicGeometry.IsEtale.instIsSmooth, Algebra.Etale.formallyEtale, AlgebraicGeometry.Scheme.Etale, AlgebraicGeometry.IsEtale.instFormallyUnramified; inspected scheme Etale.lean lines 41, 69, 74, Pullbacks.lean line 799 and Sites/Representability.lean lines 50-91. These concern scheme permanence, Spec taking ring pushouts to pullbacks, or Zariski open gluing.",
+   "date": "2026-10-23",
+   "verdict": "no match: none constructs an etale scheme atlas of an algebraic-space infinitesimal pushout or proves the induced space morphism etale"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An algebraic space pushout of etale components over a thickening and an affine map is etale over the base pushout",
+   "results": "Actual search: 8 hits; AlgebraicGeometry.IsEtale.instHasOfPostcompPropertyScheme, AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified, AlgebraicGeometry.IsEtale.instIsStableUnderBaseChangeScheme, AlgebraicGeometry.IsEtale.of_comp, AlgebraicGeometry.IsEtale, AlgebraicGeometry.Scheme.instCategoryEtale, AlgebraicGeometry.Scheme.instHasPullbacksEtale, AlgebraicGeometry.Scheme.Etale; inspected scheme Etale.lean lines 41, 69, 74, Pullbacks.lean line 799 and Sites/Representability.lean lines 50-91. These concern scheme permanence, Spec taking ring pushouts to pullbacks, or Zariski open gluing.",
+   "date": "2026-10-23",
+   "verdict": "no match: none constructs an etale scheme atlas of an algebraic-space infinitesimal pushout or proves the induced space morphism etale"
+  },
+  {
+   "tool": "grep",
+   "query": "pushout.*etale|etale.*pushout|thickening.*pushout",
+   "results": "Actual search: 0 hits; . Subdirectory Mathlib/AlgebraicGeometry; inspected scheme Etale.lean lines 41, 69, 74, Pullbacks.lean line 799 and Sites/Representability.lean lines 50-91. These concern scheme permanence, Spec taking ring pushouts to pullbacks, or Zariski open gluing.",
+   "date": "2026-10-23",
+   "verdict": "no match: none constructs an etale scheme atlas of an algebraic-space infinitesimal pushout or proves the induced space morphism etale"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"pushout\", \"Etale\"",
+   "results": "Actual search: 0 hits; ; inspected scheme Etale.lean lines 41, 69, 74, Pullbacks.lean line 799 and Sites/Representability.lean lines 50-91. These concern scheme permanence, Spec taking ring pushouts to pullbacks, or Zariski open gluing.",
+   "date": "2026-10-23",
+   "verdict": "no match: none constructs an etale scheme atlas of an algebraic-space infinitesimal pushout or proves the induced space morphism etale"
+  },
+  {
+   "tool": "grep",
+   "query": "class Etale|etale_comp|etale_isStableUnderBaseChange|isPullback_SpecMap_pushout|def toGlued",
+   "results": "Actual search: 6 hits; Mathlib/AlgebraicGeometry/PullbackCarrier.lean, Mathlib/AlgebraicGeometry/Sites/Representability.lean, Mathlib/AlgebraicGeometry/Pullbacks.lean, Mathlib/AlgebraicGeometry/Morphisms/Etale.lean, Mathlib/AlgebraicGeometry/Morphisms/Etale.lean, Mathlib/AlgebraicGeometry/Morphisms/Etale.lean. Subdirectory Mathlib/AlgebraicGeometry; inspected scheme Etale.lean lines 41, 69, 74, Pullbacks.lean line 799 and Sites/Representability.lean lines 50-91. These concern scheme permanence, Spec taking ring pushouts to pullbacks, or Zariski open gluing.",
+   "date": "2026-10-23",
+   "verdict": "no match: none constructs an etale scheme atlas of an algebraic-space infinitesimal pushout or proves the induced space morphism etale"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-space-pushout-etale-base-change",
+  "date": "2026-10-23",
+  "group": "Q42"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Algebraicity and smoothness of the stack of all nodal curves. Supporting input: Tag 0D56 (lemma-curves-RS-star). Underlying flat locally finitely presented gluing used by Tag 0D56 through Tag 0D1J, first paragraph of its proof; Tag 07W3. Supporting input: Etale scheme charts in Tag 07W3, proof of (1)-(5) and flat counit, via equation-cube-over (07W2). Input for the lifted etale object E -> Z: Stacks 07W3 final flat counit assertion, specialized to etale base change of the pushout U, X, Y, Z. Supporting input: Tag 07W3 (5), etaleness of the pushout of an arbitrary compatible etale triple, before identifying its counit.",
+   "via": [
+    "lem-sfb-space-pushout-etale-base-change",
+    "lem-sfb-space-pushout-compatible-etale-charts",
+    "lem-sfb-flat-lfp-space-pushout-gluing",
+    "lem-sfb-curve-infinitesimal-pushout",
+    "lem-sfb-nodal-curve-stack-smooth",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-space-pushout-etale-morphism-criterion",
+  "worker": "stage1",
+  "summary": "Followed the two-atlas scheme reduction of Stacks 07W3 (5). Isolated the prescribed-atlas output of 07VX as one statement-only node, avoiding the cyclic compatible-charts/base-change route. Used actual logged Mathlib searches, checked every cited statement, and retained all hypotheses.",
+  "blueprint": "Supporting input for the imported direct-image finiteness route: Tag 07W3 (5), forward construction. The latest direct-images proof has changed and no longer displays the historical alteration subroute; the local source lemma and existing item are unchanged. Steps 1-3 realize the two atlas cubes, step 4 the scheme patching and descent.",
+  "tool_uses": [
+   {
+    "node": "lem-trf-space-representable-etale-scheme-tests",
+    "why": "Generic algebraic-space atlas, fibre-product or etale calculus needed to reduce to scheme patching; this unit provides no replacement."
+   },
+   {
+    "node": "lem-trf-space-fibre-products-etale-covers",
+    "why": "Generic algebraic-space atlas, fibre-product or etale calculus needed to reduce to scheme patching; this unit provides no replacement."
+   },
+   {
+    "node": "lem-trf-space-chartwise-etale-permanence",
+    "why": "Generic algebraic-space atlas, fibre-product or etale calculus needed to reduce to scheme patching; this unit provides no replacement."
+   },
+   {
+    "node": "lem-trf-space-etale-source-atlas-detection",
+    "why": "Generic algebraic-space atlas, fibre-product or etale calculus needed to reduce to scheme patching; this unit provides no replacement."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-trf-space-representable-etale-scheme-tests",
+  "lem-trf-space-fibre-products-etale-covers",
+  "lem-trf-space-chartwise-etale-permanence",
+  "lem-trf-space-etale-source-atlas-detection"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q151-40c3dd1a3",
+  "group": "Q151",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q151-40c3dd1a3 (reviewer sub-agent of L); spot-checked: I read the whole delivery: the item's 4 steps, the new node lem-sfb-space-pushout-lifted-atlas and every cited statement, against spaces-pushouts.tex 07VX, 07W0/07W1/07W2 and the proof of 07W3 (1)-(5), and more-morphisms 07RX (5). The item statement is identical to live, where the item is still unsplit; there is no repair note and no parallel landing. Step 1 builds Q_0 = C_0 ⊔_{A_0} A_0^+ from a lifted atlas, and surjectivity follows from the homeomorphisms of the thickenings. Step 2: I recomputed H_0 ≅ (X×_C C_0)×_C A and U_0→H_0 is the base change of the atlas. Step 3: Y_0×_Y U = U_0 = X_0×_X U, the span U→X affine and U→Y a thickening carries Z_0→Z, and the two composites to Q agree by the space universal property of lem-sfb-space-affine-thickening-pushout. Step 4: scheme patching gives g_0 étale, and clause (3) of the source-atlas detection lemma gives the conclusion. The proof replaces the 07W3 claim 'base change of G to Y_1' is G_1' with a commuting atlas square, which is all it needs. The new node is true: W is the unique étale lift of V×_S T, so V⊔_D W is the V' of 07VX and V'→V'/R' ≅ P. Edge cases T=T^+, T=S and the empty case hold, and it allows non-scheme T, S, T^+ as step 3 needs. It is statement-only, cites every notion, has 6 searches of all 3 kinds, from/via inherited and same_as []. It is not a duplicate: compatible-etale-charts needs a span of schemes and is circular through pushout-etale-base-change. It is not a clause of the item. The closure of all cited nodes does not contain the item. The 4 lem-trf tool_uses are generic algebraic-space calculus and are accepted. Batch-5 flags are all generic foundational space facts, definitions or lem-trf-smooth-composition, none a step of the trace formula or Poincaré duality proofs. There is no SGA citation."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SpacePushoutEtaleMorphismCriterion",
+  "declaration": "AlgebraicGeometry.AlgebraicSpace.existsUnique_chartwiseEtale_affineThickeningPushout",
+  "file": "lean/Sheaf/AlgebraicGeometry/SpacePushoutEtaleMorphismCriterion.lean",
+  "statement": "theorem existsUnique_chartwiseEtale_affineThickeningPushout {B : Scheme.{u}} (A A' C Q : AlgebraicSpace B) (i : A ⟶ A') (a : A ⟶ C) (j : C ⟶ Q) (b : A' ⟶ Q) (hi : IsRepresentableWith (fun _ _ p ↦ IsClosedImmersion p.left) i.hom.hom) (hiTop : IsHomeomorph (mapPoint i.hom.hom)) (ha : IsRepresentableWith (fun _ _ p ↦ IsAffineHom p.left) a.hom.hom) (hQ : IsPushout a i j b) (X Y : AlgebraicSpace B) (x : X ⟶ C) (y : Y ⟶ A') (hx : IsChartwiseEtale x) (hy : IsChartwiseEtale y) (φ : enlargedFibreProduct x a ≅ enlargedFibreProduct y i) (hφ : φ.hom.hom ≫ Limits.pullback.snd y.hom i.hom = Limits.pullback.snd x.hom a.hom) (Z : AlgebraicSpace B) (u : X ⟶ Z) (v : Y ⟶ Z) (hZ : IsPushout (enlargedFibreProductFst x a) (φ.hom ≫ enlargedFibreProductFst y i) u v) : ∃! p : Z ⟶ Q, u ≫ p = x ≫ j ∧ v ≫ p = y ≫ b ∧ IsChartwiseEtale p",
+  "branch": "sheaf-dag",
+  "by": "Q03",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "The overlap isomorphism is over A; both pushouts are given by their categorical universal properties. The conclusion constructs the induced map with its two prescribed restrictions and chartwise etaleness. No algebraic space over Q realizing the triple is hypothesized. Existing sheaf fibre products, point topology and mapPoint are reused through the recorded dependency modules."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-ab3493020",
+  "group": "Q03",
+  "result": "pass",
+  "note": "Re-delivery after RETURN H2 at 5a228a53d35d. Item node differs from the previous snapshot only in statement/stmt_deps/statement_change. The statement is identical except that [lem-trf-space-chartwise-etale-permanence] becomes [def-sfb-space-chartwise-etale-morphism] (checked programmatically). The stmt_dep is swapped to the owner def node (record identical to live, existing:true IsChartwiseEtale, EnlargedEtaleRingedSite.lean:47). old_statement and old_stmt_deps are verbatim. The citer lem-sfb-space-pushout-etale-base-change holds. Permanence is kept in proof step 4 and proof_deps. The Lean module is byte-identical to the previously reviewed file and the lean record is unchanged and verbatim. The maths still matches 07W3(5): hi/hiTop/ha/hQ/hφ/hZ, and ∃! is pinned by hZ. No extra hypotheses, no universe restriction, sorry only. The item is still unlanded live. No compile (no file changed).",
+  "statement_corrected": true
+ },
+ "statement_change": {
+  "date": "2026-10-24",
+  "by": "Q03 stage 2",
+  "old_statement": "Let $B$ be a scheme and work with algebraic spaces over $B$ [def-trf-algebraic-space] in the universes of [def-weil-size-convention], with sheaf fibre products [lem-trf-space-fibre-products-etale-covers]. A thickening is a representable closed immersion inducing a homeomorphism on underlying spaces, whose topology is the quotient topology from a surjective etale scheme atlas; closed immersions are tested on scheme base changes [def-weil-closed-immersion]. An affine map is representable and every scheme base change is an affine scheme morphism. Let $A\\hookrightarrow A^+$ be a thickening, let $A\\to C$ be affine, and let $Q=C\\amalg_A A^+$ be their pushout in algebraic spaces [lem-sfb-space-affine-thickening-pushout]. Let $X\\to C$ and $Y\\to A^+$ be chartwise etale morphisms [lem-trf-space-chartwise-etale-permanence], and let $\\phi:X\\times_C A\\xrightarrow{\\sim}Y\\times_{A^+}A$ be an isomorphism over $A$. Put $U=X\\times_C A$ and use $\\phi$ to define $U\\to Y$. Form the pushout $Z=X\\amalg_U Y$, which exists by [lem-sfb-space-affine-thickening-pushout]. Then the unique morphism $Z\\to Q$ whose restrictions are $X\\to C\\to Q$ and $Y\\to A^+\\to Q$ is chartwise etale. Here chartwise etale means that its composite with every representable etale map from a scheme to its source is representable etale. No separation, quasi-compactness, finite-order, or Noetherian hypothesis is imposed, and no algebraic space over $Q$ restricting to the given triple is assumed to exist.",
+  "what": "H2 repair requested by the maintainer for returned head 5a228a53d35d: chartwise etaleness is the predicate owned by def-sfb-space-chartwise-etale-morphism, not the permanence theorem. Repoint only its statement citation and replace that stmt_dep; keep permanence in proof step 4 and proof_deps. No mathematical hypothesis, conclusion, Lean source, or lean record changes.",
+  "source": {
+   "document": "literature/stacks-project/spaces-properties.tex",
+   "place": "Tag 03FR (definition-etale), chartwise etaleness; spaces-pushouts.tex Tag 07W3 (5) uses this same predicate."
+  },
+  "citers": [
+   {
+    "id": "lem-sfb-space-pushout-etale-base-change",
+    "holds": true,
+    "note": "Only the chartwise-etale definition citation and ownership dependency change; the mathematical statement and Lean theorem are identical, so this proof use is unchanged."
+   }
+  ],
+  "old_stmt_deps": [
+   "def-trf-algebraic-space",
+   "def-weil-size-convention",
+   "lem-trf-space-fibre-products-etale-covers",
+   "def-weil-closed-immersion",
+   "lem-sfb-space-affine-thickening-pushout",
+   "lem-trf-space-chartwise-etale-permanence"
+  ]
+ }
+}

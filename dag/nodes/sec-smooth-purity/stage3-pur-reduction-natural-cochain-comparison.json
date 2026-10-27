@@ -1,0 +1,140 @@
+{
+ "id": "stage3-pur-reduction-natural-cochain-comparison",
+ "kind": "statement",
+ "title": "Natural cochain counit of completed-coefficient reduction",
+ "statement": "Fix a prime l, a finite extension E of Q_l and any scheme W, with independent site and coefficient universes. Let S be a coherent derived reduction calculus [lem-coef-derived-system-evaluation-calculus] and let M be an ordinary quotient-tensor/limit model [def-trf-completion-unit-models]. There is a natural transformation epsilon from Q followed by S.reduction to M.quotient followed by Q, on all cochain complexes over the completed E-coefficient sheaf. For every flat-term K-flat complex P and every finite level n, evaluating epsilon and composing the exact-localization comparison and the termwise M.evaluation n gives S.reductionEvaluation n followed by coefficientFiniteReductionModel. No coefficient extension E to L or direct L-system is involved.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "sites-cohomology.tex, lemma-adjoint (07A6) and lemma-derived-pushforward-composition (0D6E); derived.tex, lemma-derived-adjoint-functors (09T5); step 1 of stage3-pur-extension-strict-derived-comparison."
+ },
+ "stmt_deps": [
+  "lem-coef-derived-system-evaluation-calculus",
+  "def-trf-completion-unit-models",
+  "def-pc-kflat-complex",
+  "lem-pur-integral-operations-well-defined"
+ ],
+ "proof": [
+  {
+   "text": "Construct the natural isomorphism between the degreewise ordinary limit and roosLimitFunctor from their limit cones. Transport the standard rightDerivedFunctorUnit of lim through this isomorphism and the quotient-to-homotopy localization factors. The definition of rightDerivedFunctorObjQIso gives its required normalization on K-injective towers. All helpers are constructed and proved privately in the item module.",
+   "uses": [
+    "def-trf-completion-unit-models",
+    "lem-coef-derived-system-evaluation-calculus"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Whisker the normalized limit unit by coefficient restriction and compose with M.limitComparison and the inverse exact-restriction localization factor. Compose the localization of the ordinary tensor-adjunction unit with this system unit at M.quotient. Apply the inverse of S.adjunction.homEquiv at every complex. Naturality in both variables of homEquiv proves naturality of this transformation; applying homEquiv recovers the prescribed ordinary-unit composite by Equiv.apply_symm_apply.",
+   "uses": [
+    "def-trf-completion-unit-models",
+    "lem-coef-derived-system-evaluation-calculus"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Apply finiteComparison_of_unit to the constructed natural transformation and the proved ordinary-unit transpose identity. At each good complex P use P.property.1 for K-flatness and P.property.2 for termwise flatness. This gives exactly the stated finite evaluation identity for every n, without extra invertibility or coherence hypotheses.",
+   "uses": [
+    "lem-trf-completion-unit-finite-mate-comparison",
+    "lem-pur-integral-operations-well-defined"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-trf-completion-unit-models",
+  "lem-coef-derived-system-evaluation-calculus",
+  "lem-trf-completion-unit-finite-mate-comparison",
+  "lem-pur-integral-operations-well-defined"
+ ],
+ "proof_origin": {
+  "kind": "from-document",
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "lemma-adjoint (07A6), lemma-derived-pushforward-composition (0D6E), and the existing finiteComparison_of_unit normalization (lem-trf-completion-unit-finite-mate-comparison). Direct adjunction transpose of the localized ordinary unit; standard rightDerivedFunctorUnit supplies the limit comparison.",
+  "group": "F6",
+  "date": "2026-10-26"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "K-flat derived tensor restriction adjunction natural cochain counit commutes with evaluation on inverse systems",
+   "results": "8 hits: ModuleCat.RestrictionCoextensionAdj.counit', CategoryTheory.Adjunction.derived_counit and generic adjunction API.",
+   "date": "2026-10-26",
+   "verdict": "No normalized comparison on actual coefficient systems."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A composite derived extension of scalars on K-flat complexes computes the ordinary composite tensor functor",
+   "results": "8 hits about Module.Flat exactness and ModuleCat.extendScalars.",
+   "date": "2026-10-26",
+   "verdict": "Only ordinary module flatness; no cochain coefficient-system statement."
+  },
+  {
+   "tool": "grep",
+   "query": "coefficientReductionNaturalCochainComparison|coefficientScalarCochainEvaluation|coefficientExtensionOrdinaryAssociationChain|reductionComparison|transpose_evaluation",
+   "results": "msearch grep returned 0 Mathlib hits. Direct project rg found CompletionUnit.DerivedModel.reductionComparison and ScalarSystems.transpose_evaluation.",
+   "date": "2026-10-26",
+   "verdict": "The existing completion comparison requires invertibility of l on W and extra coherence, absent here. ScalarSystems has derived transpose evaluation but no ordinary/cochain counit square."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.CoefficientExtensionStrictDerivedComparison",
+  "date": "2026-10-26",
+  "group": "T8"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "def-weil-frobenius-coefficient-twists",
+   "place": "Compatibility with finite reduction and scalar extension to Qlbar: Strict normalized representatives of coefficient extension; Derived comparison for a strict finite scalar tensor model; Natural cochain counit of completed-coefficient reduction",
+   "via": [
+    "stage3-pur-extension-strict-derived-comparison",
+    "stage3-pur-extension-strict-representatives",
+    "stage3-pur-reduction-skeleton-exists"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-def-purity-conv",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.CoefficientReductionNaturalCochainComparison",
+  "file": "lean/Sheaf/Paper/CoefficientReductionNaturalCochainComparison.lean",
+  "declaration": "WeilConjectures.coefficientReductionNaturalCochainComparison",
+  "statement": "theorem coefficientReductionNaturalCochainComparison\n    (S : CoefficientDerivedSystemCalculus l E W)\n    (M : CompletionUnit.OrdinaryModel l E W) :\n    ∃ ε : DerivedCategory.Q ⋙ S.reduction ⟶\n        M.quotient l E W ⋙ DerivedCategory.Q,\n      ∀ (P : (integralOperationsGoodComplex l E W).FullSubcategory) (n : ℕ),\n        (coefficientSequenceDerivedEvaluation l E W n).map (ε.app P.obj) ≫\n            (coefficientSequenceEvaluation l E W n).mapDerivedCategoryFactors.hom.app\n              ((M.quotient l E W).obj P.obj) ≫\n            DerivedCategory.Q.map\n              ((NatIso.mapHomologicalComplex (M.evaluation n) (.up ℤ)).hom.app P.obj) =\n          (S.reductionEvaluation n).hom.app (DerivedCategory.Q.obj P.obj) ≫\n            (coefficientFiniteReductionModel l E W P.obj P.property.1 n).hom",
+  "branch": "sheaf-dag",
+  "by": "T8",
+  "date": "2026-10-26"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T8",
+  "result": "pass",
+  "landing": "20261026T071135-L-3860480",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F6",
+  "result": "pass",
+  "landing": "20261026T081816-L-2076710",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

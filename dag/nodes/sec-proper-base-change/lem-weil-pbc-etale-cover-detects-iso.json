@@ -150,7 +150,18 @@
   "item": "lemma-weil-pbc-target-locality",
   "date": "2026-10-09"
  },
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
  "chapter": "sec-proper-base-change",
  "unit": "sk-thm-reduction",
  "split_report": {
@@ -195,5 +206,51 @@
    "AlgebraicGeometry.Etale.isIso_iff_of_jointlySurjective_etale_family"
   ],
   "sorry_after": []
+ },
+ "blueprint_update": {
+  "snapshot": "main-20261023-1620",
+  "commit": "7284bb09daf97437d544c51882b325f9c52cd345",
+  "changed": [
+   "statement",
+   "proof"
+  ],
+  "statement": "Let $T$ be a scheme [def-pc-scheme] and let $(t_i:T_i\\to T)_{i\\in I}$ be a family of morphisms of schemes which is jointly surjective (every point of $T$ lies in the image of some $t_i$), for instance an etale covering [def-weil-etale-morphism]. Let $\\varphi:G\\to H$ be a morphism of abelian sheaves on the small etale site of $T$ [def-weil-pbc-abelian-etale-sheaves] (more generally of sheaves of $\\Lambda$-modules, or of sheaves with values in a concrete Grothendieck abelian category whose forgetful functor reflects isomorphisms, preserves filtered colimits and is compatible with the sheaf condition). Then $\\varphi$ is an isomorphism if and only if for every $i$ its inverse image [def-weil-pbc-inverse-image] $t_i^{-1}\\varphi:t_i^{-1}G\\to t_i^{-1}H$ is an isomorphism. (For $I=\\emptyset$, $T$ is empty and every morphism is an isomorphism.)",
+  "proof": [
+   {
+    "text": "**Step 1.** *The easy direction.* If $\\varphi$ is an isomorphism with inverse $\\psi$, then $t_i^{-1}$, being a functor [def-weil-pbc-inverse-image], sends $\\psi\\circ\\varphi=\\mathrm{id}_G$ and $\\varphi\\circ\\psi=\\mathrm{id}_H$ to $t_i^{-1}\\psi\\circ t_i^{-1}\\varphi=\\mathrm{id}$ and $t_i^{-1}\\varphi\\circ t_i^{-1}\\psi=\\mathrm{id}$; so every $t_i^{-1}\\varphi$ is an isomorphism.",
+    "uses": [
+     "def-weil-pbc-inverse-image"
+    ],
+    "elementary": false
+   },
+   {
+    "text": "**Step 2.** *Lifting a geometric point.* Assume every $t_i^{-1}\\varphi$ is an isomorphism, and let $t\\in T$. Since the family $(t_i)$ is jointly surjective there are $i\\in I$ and $s\\in T_i$ with $t_i(s)=t$. Let $\\bar s:\\operatorname{Spec}\\Omega\\to T_i$ be the geometric point at an algebraic closure $\\Omega$ of $\\kappa(s)$ [def-weil-geometric-point]; then $\\bar t=t_i\\circ\\bar s$ is a geometric point of $T$ over $t$, with algebraically closed field $\\Omega$. (If $I=\\emptyset$ then $T=\\emptyset$ and there is nothing to prove.)",
+    "uses": [
+     "def-weil-geometric-point"
+    ],
+    "elementary": false
+   },
+   {
+    "text": "**Step 3.** *The stalk of the pullback is the stalk at the image.* There is an isomorphism $c_K:(t_i^{-1}K)_{\\bar s}\\xrightarrow{\\sim}K_{t_i\\circ\\bar s}=K_{\\bar t}$ of stalks [def-weil-pbc-geometric-stalks], natural in the sheaf $K$ on $T_{\\Et}$ [lemma-openclosed-stalk-upperstar] (Stacks 03Q1 (3)). Naturality applied to $\\varphi:G\\to H$ gives $\\varphi_{\\bar t}\\circ c_G=c_H\\circ(t_i^{-1}\\varphi)_{\\bar s}$. The stalk at $\\bar s$ is a functor, so it sends the isomorphism $t_i^{-1}\\varphi$ to an isomorphism; hence $\\varphi_{\\bar t}$ is an isomorphism.",
+    "uses": [
+     "def-weil-pbc-geometric-stalks",
+     "lemma-openclosed-stalk-upperstar"
+    ],
+    "elementary": false
+   },
+   {
+    "text": "**Step 4.** *Geometric stalks detect isomorphisms.* By steps 2 and 3, $\\varphi$ is an isomorphism on the stalk at one geometric point over each point of $T$, with algebraically closed field. These stalks jointly detect isomorphisms [lemma-weil-pbc-geometric-stalk-conservative], so $\\varphi$ is an isomorphism.",
+    "uses": [
+     "lemma-weil-pbc-geometric-stalk-conservative"
+    ],
+    "elementary": false
+   },
+   {
+    "text": "*Source: Stacks project, Tag 0EZR, end of (1), made explicit through Tags 03PU and 03Q1.*",
+    "uses": [],
+    "elementary": null
+   }
+  ],
+  "note": "the current blueprint (main-20261023-1620, weil-conjectures-blueprint 7284bb09da) states or proves this differently; the node is proved in Lean: recorded 2026-10-23, not reopened"
  }
 }

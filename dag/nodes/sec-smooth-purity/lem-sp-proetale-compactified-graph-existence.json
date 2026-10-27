@@ -1,0 +1,154 @@
+{
+ "id": "lem-sp-proetale-compactified-graph-existence",
+ "kind": "statement",
+ "title": "Unique compactification graph map for a specified pro-etale sum adjunction",
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sp-tower-geometric",
+ "statement": "Let A be a finite commutative ring, e:U -> T separated etale, locally of finite type and quasi-compact, and c=(U --i--> Z --p--> T) a compactification. Work with fixed-A module sheaves on the small pro-etale sites [def-weil-pbc-proetale-site, def-weil-sheaf-of-modules-category]. Let F:Sh(U_proet,A) -> Sh(T_proet,A) be any functor with a specified adjunction adj:F left adjoint to restriction along composition with e. There is a unique natural transformation G:F -> i_! followed by p_* with the following generator values. For each sheaf M and weakly etale b:B -> U, there is a clopen morphism gamma:B -> B times_T Z whose first projection is the identity and whose second projection is b followed by i. Restricting G_M applied to adj.unit_M(m) to gamma gives the open-extension unit applied to m. For every open presentation of the complement of gamma, that same section restricts to zero. The units are the actual specified adjunction units; no unit normalization is suppressed.",
+ "source": {
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tag 0F4L, lemma-shriek-into-star-separated-etale, clopen graph extension; proetale.tex Tag 09AF and the common-right-adjoint comparison"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-nagata-compactification",
+  "def-weil-pbc-proetale-site",
+  "def-weil-etale-morphism",
+  "def-weil-proper-morphism",
+  "def-weil-open-immersion",
+  "def-pc-fibre-product",
+  "def-weil-sheaf-of-modules-category"
+ ],
+ "proof": [
+  {
+   "text": "Use the fibre-product projections to construct gamma uniquely. The graph in U times_T B is an etale section and therefore open. Its composite into Z times_T B is open because i is open. It is closed because p is separated. The fixed-level graph construction of lem-sp-semilinear-compactified-graph-evaluation supplies these graph sections with their open-unit normalization; alternatively this is the direct graph construction in Tag 0F4L.",
+   "uses": [
+    "lem-sp-semilinear-compactified-graph-evaluation",
+    "def-pc-fibre-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 0F4L, lemma-shriek-into-star-separated-etale, clopen graph extension; proetale.tex Tag 09AF and the common-right-adjoint comparison"
+   }
+  },
+  {
+   "text": "Apply the sheaf condition to the disjoint opens gamma(B) and its complement in Z times_T B. Glue the open-extension unit of m and zero. Uniqueness proves additivity, A-linearity, naturality in M and compatibility with every restriction. Direct-sum elimination and module sheafification therefore give a natural map from the usual sheafified sum extension. Weakly etale localization identifies its restriction functor with the literal composition restriction used in the statement.",
+   "uses": [
+    "lem-weil-proetale-weakly-etale-localization",
+    "def-weil-extension-by-zero-presheaf",
+    "def-weil-presheaf-modules-sheafification"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 0F4L, lemma-shriek-into-star-separated-etale, clopen graph extension; proetale.tex Tag 09AF and the common-right-adjoint comparison"
+   }
+  },
+  {
+   "text": "Compare the specified adjunction adj with the usual sum-extension adjunction by the unique unit-preserving left-adjoint isomorphism. Transport the constructed graph map along this isomorphism. For uniqueness, transpose two proposed maps under adj. The graph and complementary-open values identify their sections on every b and m by sheaf separation; hence their transposes agree componentwise. Injectivity of the adjunction correspondence identifies the original natural transformations. Empty tests use the empty-cover sheaf axiom and cause no exception.",
+   "uses": [
+    "lem-weil-pbc-conjugate-iso-unit-equation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 0F4L, lemma-shriek-into-star-separated-etale, clopen graph extension; proetale.tex Tag 09AF and the common-right-adjoint comparison"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sp-semilinear-compactified-graph-evaluation",
+  "def-pc-fibre-product",
+  "lem-weil-proetale-weakly-etale-localization",
+  "def-weil-extension-by-zero-presheaf",
+  "def-weil-presheaf-modules-sheafification",
+  "lem-weil-pbc-conjugate-iso-unit-equation"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tag 0F4L, lemma-shriek-into-star-separated-etale, clopen graph extension; proetale.tex Tag 09AF and the common-right-adjoint comparison"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "There exists a unique natural sheaf map from sum extension to proper pushforward of open extension specified by a section on its clopen graph and zero on complement",
+   "results": "{\"t\": \"2026-10-26T08:06:29Z\", \"tool\": \"leanfinder\", \"query\": \"There exists a unique natural sheaf map from sum extension to proper pushforward of open extension specified by a section on its clopen graph and zero on complement\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"TopCat.Sheaf.existsUnique_gluing'\", \"TopCat.Sheaf.existsUnique_gluing\", \"TopCat.Sheaf.interUnionPullbackConeLift\", \"CompHausLike.LocallyConstant.presheaf_ext\", \"TopCat.Sheaf.objSupIsoProdEqLocus_hom_snd\", \"TopCat.Sheaf.objSupIsoProdEqLocus_inv_eq_iff\", \"TopCat.Sheaf.objSupIsoProdEqLocus_hom_fst\", \"AlgebraicGeometry.PresheafedSpace.GlueData.opensImagePreimageMap_app'\"], \"digest\": \"f83da1424942edfd\"}",
+   "date": "2026-10-26",
+   "verdict": "No exact match: the results supply generic gluing, adjunction or sheafification tools, not this normalized compactification-graph assertion."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Sheaf\", \"hom_ext\"",
+   "results": "{\"t\": \"2026-10-26T08:06:30Z\", \"tool\": \"loogle\", \"query\": \"\\\"Sheaf\\\", \\\"hom_ext\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"CategoryTheory.Presheaf.compULiftYonedaIsoULiftYonedaCompLan.hom_ext\", \"CategoryTheory.Presheaf.compULiftYonedaIsoULiftYonedaCompLan.hom_ext_iff\", \"PresheafOfModules.hom_ext\", \"PresheafOfModules.hom_ext_iff\", \"PresheafOfModules.free_hom_ext\", \"CategoryTheory.Presieve.IsSheafFor.hom_ext\", \"CategoryTheory.Presheaf.IsSheaf.hom_ext_ofArrows\", \"CategoryTheory.Presheaf.IsSheaf.hom_ext\"], \"digest\": \"9fc603ce708269b1\"}",
+   "date": "2026-10-26",
+   "verdict": "No exact match: the results supply generic gluing, adjunction or sheafification tools, not this normalized compactification-graph assertion."
+  },
+  {
+   "tool": "grep",
+   "query": "graph.*(comparison|sheaf)|clopen.*gluing",
+   "results": "{\"t\": \"2026-10-26T08:06:30Z\", \"tool\": \"grep\", \"query\": \"graph.*(comparison|sheaf)|clopen.*gluing\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-26",
+   "verdict": "No exact match: the results supply generic gluing, adjunction or sheafification tools, not this normalized compactification-graph assertion."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The graph supported extension of sections by zero induces a unique natural map from an etale sum extension into compactified proper pushforward",
+   "results": "{\"t\": \"2026-10-26T08:08:08Z\", \"tool\": \"leansearch\", \"query\": \"The graph supported extension of sections by zero induces a unique natural map from an etale sum extension into compactified proper pushforward\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Finsupp.supportedEquivFinsupp_symm_apply_coe\", \"Function.ExtendByZero.hom\", \"DFinsupp.lmk\", \"Function.ExtendByZero.linearMap\", \"HasCompactSupport.tsupport_extend_zero\", \"HasCompactSupport.extend_zero\", \"Function.ExtendByZero.hom_apply\", \"ContMDiff.extend_zero\"], \"digest\": \"2e55af8cbe698dd3\"}",
+   "date": "2026-10-26",
+   "verdict": "No exact match: the results supply generic gluing, adjunction or sheafification tools, not this normalized compactification-graph assertion."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.EtaleProEtaleGraphSheafSquare",
+  "date": "2026-10-26",
+  "group": "H3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-sp-tower-gluing",
+   "place": "det-sp-tower-gluing, Local pairs and Levels: the graph extension used for etale fibre sums; isolates Step 3 and the uniqueness part of Step 6 of lem-sp-et-proet-graph-sheaf-square.",
+   "via": [
+    "lem-sp-et-proet-graph-sheaf-square",
+    "lem-sp-varying-ring-graph-summand",
+    "lem-sp-coefficient-tower-shriek-calculus"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.ProEtaleCompactifiedGraphExistence",
+  "file": "lean/Sheaf/AlgebraicGeometry/ProEtaleCompactifiedGraphExistence.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.compactified_graph_existsUnique",
+  "statement": "theorem compactified_graph_existsUnique\n    (A : Type (u + 1)) [CommRing A] [Finite A]\n    {U T : Scheme.{u}} (e : U ⟶ T) [Etale e] [IsSeparated e]\n    [LocallyOfFiniteType e] [QuasiCompact e] (c : Compactification e)\n    (F : Sheaf (Scheme.ProEt.topology U) (ModuleCat.{u + 1} A) ⥤\n      Sheaf (Scheme.ProEt.topology T) (ModuleCat.{u + 1} A))\n    (adj : F ⊣ localizationRestriction (ModuleCat.{u + 1} A) e inferInstance)\n    : ∃! G : F ⟶\n      openImmersionLowerShriek (ModuleCat.{u + 1} A) c.i ⋙\n        lowerStar (ModuleCat.{u + 1} A) c.g,\n  ∀ (M : Sheaf (Scheme.ProEt.topology U) (ModuleCat.{u + 1} A)) (b : U.ProEt),\n    ∃ γ :\n      (MorphismProperty.Over.map (P := @WeaklyEtale) ⊤\n        (inferInstance : WeaklyEtale c.i)).obj b ⟶\n      (MorphismProperty.Over.pullback @WeaklyEtale ⊤ c.g).obj\n        ((MorphismProperty.Over.map (P := @WeaklyEtale) ⊤\n          (inferInstance : WeaklyEtale e)).obj b),\n      γ.left ≫ pullback.fst (b.hom ≫ e) c.g = 𝟙 b.left ∧\n      γ.left ≫ pullback.snd (b.hom ≫ e) c.g = b.hom ≫ c.i ∧\n      IsOpenImmersion γ.left ∧ IsClosedImmersion γ.left ∧\n      ∀ m : M.obj.obj (op b),\n        (((openImmersionLowerShriek (ModuleCat.{u + 1} A) c.i).obj M).obj.map γ.op)\n          (((G.app M).hom.app\n            (op ((MorphismProperty.Over.map (P := @WeaklyEtale) ⊤\n              (inferInstance : WeaklyEtale e)).obj b)))\n            ((adj.unit.app M).hom.app (op b) m)) =\n          (((openImmersionLowerShriekAdjunction (ModuleCat.{u + 1} A) c.i).unit.app M).hom.app\n            (op b) m) ∧\n        ∀ (D : c.Z.ProEt)\n          (k : D ⟶ (MorphismProperty.Over.pullback @WeaklyEtale ⊤ c.g).obj\n            ((MorphismProperty.Over.map (P := @WeaklyEtale) ⊤\n              (inferInstance : WeaklyEtale e)).obj b)),\n          IsOpenImmersion k.left → Set.range k.left = (Set.range γ.left)ᶜ →\n          (((openImmersionLowerShriek (ModuleCat.{u + 1} A) c.i).obj M).obj.map k.op)\n            (((G.app M).hom.app\n              (op ((MorphismProperty.Over.map (P := @WeaklyEtale) ⊤\n                (inferInstance : WeaklyEtale e)).obj b)))\n              ((adj.unit.app M).hom.app (op b) m)) = 0",
+  "existing": false,
+  "branch": "sheaf-dag",
+  "by": "H3",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H3",
+  "result": "pass",
+  "landing": "20261026T091719-L-3367426",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H3",
+  "result": "pass",
+  "landing": "20261026T091719-L-3367426",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

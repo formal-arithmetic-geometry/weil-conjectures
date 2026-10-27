@@ -1,0 +1,252 @@
+{
+ "id": "lem-fd-rational-pullback-fibre-comparison",
+ "kind": "statement",
+ "title": "Scalar-compatible rational derived pullback fibre comparison",
+ "statement": "Fix $k_0=\\mathbf F_q$, an algebraic closure $k$, a prime $\\ell\\ne\\operatorname{char}k_0$, and an algebraic closure $\\Qlb/\\mathbf Q_\\ell$. Let $f_0:X_0\\to Y_0$ be a morphism of separated finite-type $k_0$-schemes, let $f:X\\to Y$ be its base change to $k$, and put $s=\\operatorname{Spec}k$. Choose geometric points $\\bar z:s\\to X$, $\\bar x:s\\to Y$ with $f\\bar z=\\bar x$. Use the framework rationalized categories and their common-stage categories [def-weil-algebraically-closed-coefficients], pullbacks [def-weil-derived-pullback-tensor-hom], and point fibres [def-weil-finite-coefficient-point]. For a finite coefficient field $E\\subset\\Qlb$, put $J_{z,E}=\\operatorname{Fib}_{s,E}L\\bar z_E^*$ and $J_{x,E}=\\operatorname{Fib}_{s,E}L\\bar x_E^*$. Use the specified composition and scalar comparisons of [lem-trf-integral-pullback-comparison-realization] and the point-sections comparisons of [lem-weil-point-sections-scalar-extension].\n\nThere is a natural isomorphism of functors to $D^b_{\\mathrm{fd}}(E)$,\n$$c^E_M:J_{z,E}Lf_E^*M\\xrightarrow{\\sim}J_{x,E}M,$$\nwhose component is $\\operatorname{Fib}_{s,E}$ of the inverse of $L(f\\bar z)_E^*M\\xrightarrow{\\sim}L\\bar z_E^*Lf_E^*M$. For $E\\subset L$, write $T_U=-\\otimes_E L$ on $U=X,Y$, $a_{f,M}:T_XLf_E^*M\\xrightarrow{\\sim}Lf_L^*T_YM$ for the specified scalar comparison, and $b_{z,N}:J_{z,E}N\\otimes_E L\\xrightarrow{\\sim}J_{z,L}T_XN$, $b_{x,M}:J_{x,E}M\\otimes_E L\\xrightarrow{\\sim}J_{x,L}T_YM$ for the specified fibre scalar comparisons. Then\n$$c^L_{T_YM}\\,J_{z,L}(a_{f,M})\\,b_{z,Lf_E^*M}=b_{x,M}(c^E_M\\otimes_E L).$$\nThese comparisons respect identity coefficient extensions and the specified associators for $E\\subset L\\subset H$. They therefore induce a natural $\\Qlb$-linear isomorphism $c:J_zLf^*\\xrightarrow{\\sim}J_x$ in the derived category of common-stage point complexes, independent of representatives. The assertion applies to all constructible complexes; no Weil structure, integral Weil-stable lattice, or finite Tor-amplitude of finite reductions is required.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-a1/sk-p-dl-a1-some-weight/lem-fd-realified-kernel-real.proof.md",
+  "place": "Step 2, sentence on pullback and the residue-degree Frobenius power; extracted rational argument from lem-fd-weil-pullback-local-frobenius, returned proof steps 3 and scalar-comparison part of 7. Compare Deligne Weil II (1.1.7)-(1.1.10), pp. 150-151; construction is agent-written."
+ },
+ "stmt_deps": [
+  "def-weil-derived-pullback-tensor-hom",
+  "def-weil-finite-coefficient-point",
+  "lem-trf-integral-pullback-comparison-realization",
+  "def-weil-algebraically-closed-coefficients",
+  "lem-weil-point-sections-scalar-extension",
+  "def-trf-realized-pullback-comparisons",
+  "lem-weil-scalar-extension-composition",
+  "def-weil-finite-field-fiber"
+ ],
+ "proof": [
+  {
+   "text": "Write $P_{g,E}=Lg_E^*$ and $V_E=\\operatorname{Fib}_{s,E}$. The specified comparison of [lem-trf-integral-pullback-comparison-realization], rationalized as in its statement, gives $d_E:P_{\\bar x,E}\\xrightarrow{\\sim}P_{\\bar z,E}P_{f,E}$, since $f\\bar z=\\bar x$. Define $c^E=V_E(d_E^{-1})$. The pullbacks of [def-weil-derived-pullback-tensor-hom] and the fibre functor of [def-weil-finite-coefficient-point] have the required constructible and finite-dimensional derived targets. Naturality of $d_E$ and functoriality of $V_E$ show, for $u:M\\to N$, that $c^E_NJ_{z,E}P_{f,E}(u)=J_{x,E}(u)c^E_M$. Its inverse is $V_E(d_E)$, so this is the required natural isomorphism, with exactly the specified component.",
+   "uses": [
+    "lem-trf-integral-pullback-comparison-realization",
+    "def-weil-derived-pullback-tensor-hom",
+    "def-weil-finite-coefficient-point"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-deligne-laumon-a1/sk-p-dl-a1-some-weight/lem-fd-realified-kernel-real.proof.md",
+    "place": "Step 2, pullback along p_1; expanded rational derived-fibre comparison and coefficient descent (agent-written)"
+   }
+  },
+  {
+   "text": "Let $T_s$ denote coefficient extension at $s$. For a scheme map $g$ use $a_g:T P_{g,E}\\xrightarrow{\\sim}P_{g,L}T$ from [lem-trf-integral-pullback-comparison-realization]. Write $\\beta_K:V_E(K)\\otimes_E L\\xrightarrow{\\sim}V_L(T_sK)$ for the inverse of the rational sections comparison in [lem-weil-point-sections-scalar-extension]. The specified fibre comparison is $b_{z,N}=V_L(a_{\\bar z,N})\\beta_{P_{\\bar z,E}N}$, and similarly for $x$. Specializing the mixed equation of the first cited node to $h=\\bar z$, $k=f$ gives\n$$P_{\\bar z,L}(a_{f,M})a_{\\bar z,P_{f,E}M}T_s(d_{E,M})=d_{L,T_YM}a_{\\bar x,M}.$$\nMultiplying on the left by $d_{L,T_YM}^{-1}$ and on the right by $T_s(d_{E,M}^{-1})$ yields\n$$d_{L,T_YM}^{-1}P_{\\bar z,L}(a_{f,M})a_{\\bar z,P_{f,E}M}=a_{\\bar x,M}T_s(d_{E,M}^{-1}).$$\nThis uses equality of the scheme maps $f\\bar z$ and $\\bar x$, which that cited comparison explicitly respects.",
+   "uses": [
+    "lem-trf-integral-pullback-comparison-realization",
+    "lem-weil-point-sections-scalar-extension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-deligne-laumon-a1/sk-p-dl-a1-some-weight/lem-fd-realified-kernel-real.proof.md",
+    "place": "Step 2, pullback along p_1; expanded rational derived-fibre comparison and coefficient descent (agent-written)"
+   }
+  },
+  {
+   "text": "Apply $V_L$ to the last equality and precompose with $\\beta_{P_{\\bar z,E}P_{f,E}M}$. Naturality of the rational sections comparison of [lem-weil-point-sections-scalar-extension] gives\n$$V_L(T_s(d_{E,M}^{-1}))\\beta_{P_{\\bar z,E}P_{f,E}M}=\\beta_{P_{\\bar x,E}M}(V_E(d_{E,M}^{-1})\\otimes_E L).$$\nInserting the definitions of $b_z,b_x,c^E,c^L$ from the preceding steps therefore gives exactly\n$$c^L_{T_YM}J_{z,L}(a_{f,M})b_{z,P_{f,E}M}=b_{x,M}(c^E_M\\otimes_E L).$$\nThese equations are equations of morphisms of derived objects, before taking any cohomology.",
+   "uses": [
+    "lem-weil-point-sections-scalar-extension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-deligne-laumon-a1/sk-p-dl-a1-some-weight/lem-fd-realified-kernel-real.proof.md",
+    "place": "Step 2, pullback along p_1; expanded rational derived-fibre comparison and coefficient descent (agent-written)"
+   }
+  },
+  {
+   "text": "For an identity extension $E= L$, both $a_g$ and $\\beta$ are identities under the specified unit identifications, by [lem-trf-integral-pullback-comparison-realization] and [lem-weil-point-sections-scalar-extension]. For $E\\subset L\\subset H$, those same statements give the tower equations for $a_g$ and $\\beta$ with the specified tensor associators. Substituting $b_z=V(a_{\\bar z})\\beta$ into its twice-extended expression, naturality of $\\beta$ moves the inner $a_{\\bar z}$ past the outer $\\beta$. The two adjacent $a_{\\bar z}$ maps become the direct $E\\subset H$ map by the first tower equation; the two remaining $\\beta$ maps become its direct sections map by the second. Thus $b_z$, and identically $b_x$, have the required tower law. The mixed equation in Step 2 also respects these associators by the first cited statement, so the square of Step 3 for the two successive extensions is the square for $E\\subset H$.",
+   "uses": [
+    "lem-trf-integral-pullback-comparison-realization",
+    "lem-weil-point-sections-scalar-extension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-deligne-laumon-a1/sk-p-dl-a1-some-weight/lem-fd-realified-kernel-real.proof.md",
+    "place": "Step 2, pullback along p_1; expanded rational derived-fibre comparison and coefficient descent (agent-written)"
+   }
+  },
+  {
+   "text": "Use the common-stage representatives of [def-weil-algebraically-closed-coefficients] and the functors of [def-weil-derived-pullback-tensor-hom, def-weil-finite-coefficient-point]. Put $F_E=J_{z,E}P_{f,E}$, $G_E=J_{x,E}$, $A_M=J_{z,L}(a_{f,M})b_{z,P_{f,E}M}$ and $B_M=b_{x,M}$. Step 3 says $c^L_{T_YM}A_M=B_M(c^E_M\\otimes_E L)$. Hence the class of $c^E_M$ is the same component after changing stage, and so is the class of its inverse. For a morphism represented over $L$ by $u:T M\\to T N$ (allowing different original fields), the two functors act by $A_N^{-1}F_L(u)A_M$ and $B_N^{-1}G_L(u)B_M$. Using the displayed square at both ends, the desired naturality equation reduces to $c^L_{TN}F_L(u)=G_L(u)c^L_{TM}$, proved in Step 1. Equal representatives become equal over a further common field by the cited common-stage definition; Step 4 makes their conjugated maps and these equations equal there too. This proves independence, naturality and invertibility in the common-stage derived category. At every finite stage all operations are linear; representing a scalar in $\\Qlb$ in a common finite extension therefore proves $\\Qlb$-linearity. The composition comparison cited in Step 1 expressly imposes no finite Tor-amplitude condition, and all its inputs are arbitrary constructible complexes. No Weil datum or Weil-stable lattice entered any step.",
+   "uses": [
+    "def-weil-algebraically-closed-coefficients",
+    "def-weil-derived-pullback-tensor-hom",
+    "def-weil-finite-coefficient-point",
+    "lem-trf-integral-pullback-comparison-realization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-deligne-laumon-a1/sk-p-dl-a1-some-weight/lem-fd-realified-kernel-real.proof.md",
+    "place": "Step 2, pullback along p_1; expanded rational derived-fibre comparison and coefficient descent (agent-written)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-trf-integral-pullback-comparison-realization",
+  "def-weil-derived-pullback-tensor-hom",
+  "def-weil-finite-coefficient-point",
+  "lem-weil-point-sections-scalar-extension",
+  "def-weil-algebraically-closed-coefficients"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-deligne-laumon-a1/sk-p-dl-a1-some-weight/lem-fd-realified-kernel-real.proof.md",
+  "place": "Step 2, pullback along p_1; expanded rational derived-fibre comparison and coefficient descent (agent-written)"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Canonical derived stalk isomorphism for pullback of constructible rational ell adic complexes is natural and compatible with coefficient field extension",
+   "results": "TopCat.Presheaf.stalkPullbackIso; TopCat.Presheaf.stalkPullbackInv; AlgebraicGeometry.StructureSheaf.toPushforwardStalk_comp; TopCat.Presheaf.stalkPullbackHom; AlgebraicGeometry.StructureSheaf.toPushforwardStalk_comp_assoc; TopCat.Presheaf.germToPullbackStalk_stalkPullbackHom; TopCat.Presheaf.germ_stalkPullbackInv; AlgebraicGeometry.stalkMap_toStalk",
+   "date": "2026-10-22",
+   "verdict": "no match: topological presheaf stalks, categorical slice pullbacks and module sheaf comparisons do not state the derived-complete rational/common-stage point-fibre comparison with its specified scalar square."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"stalk\", \"pullback\"",
+   "results": "TopCat.Presheaf.stalkPullbackIso; TopCat.Presheaf.stalkPullbackHom; TopCat.Presheaf.stalkPullbackInv; TopCat.Presheaf.germToPullbackStalk; TopCat.Presheaf.germToPullbackStalk_stalkPullbackHom; TopCat.Presheaf.germ_stalkPullbackInv; TopCat.Presheaf.germToPullbackStalk_stalkPullbackHom_assoc; TopCat.Presheaf.germ_stalkPullbackInv_assoc",
+   "date": "2026-10-22",
+   "verdict": "no match: topological presheaf stalks, categorical slice pullbacks and module sheaf comparisons do not state the derived-complete rational/common-stage point-fibre comparison with its specified scalar square."
+  },
+  {
+   "tool": "grep",
+   "query": "stalkPullbackIso|stalk.*[Ss]calar|[Ss]calar.*stalk",
+   "results": "Mathlib/Topology/Sheaves/Stalks.lean; Mathlib/AlgebraicGeometry/OrderOfVanishing.lean; Mathlib/AlgebraicGeometry/FunctionField.lean; Mathlib/AlgebraicGeometry/StructureSheaf.lean; Mathlib/RingTheory/Spectrum/Prime/FreeLocus.lean; Mathlib/RingTheory/Spectrum/Prime/FreeLocus.lean; Mathlib/RingTheory/QuasiFinite/Basic.lean",
+   "date": "2026-10-22",
+   "verdict": "no match: topological presheaf stalks, categorical slice pullbacks and module sheaf comparisons do not state the derived-complete rational/common-stage point-fibre comparison with its specified scalar square."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived pullback composition gives a scalar compatible natural isomorphism between the fibre of a pullback and the fibre at the image point",
+   "results": "CategoryTheory.Over.pullbackComp; CategoryTheory.ChosenPullbacksAlong.pullbackComp; CategoryTheory.Limits.CategoricalPullback.mkNatIso; CategoryTheory.Limits.CategoricalPullback.CatCommSqOver.e; CategoryTheory.Limits.pullback.mapDesc_comp; CategoryTheory.MonoOver.pullbackComp; SheafOfModules.pullbackComp; CategoryTheory.MorphismProperty.Over.pullbackComp",
+   "date": "2026-10-22",
+   "verdict": "no match: topological presheaf stalks, categorical slice pullbacks and module sheaf comparisons do not state the derived-complete rational/common-stage point-fibre comparison with its specified scalar square."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Naturality and scalar tower coherence of the derived fibre comparison Fib(z pullback f pullback M) isomorphic Fib((f z) pullback M)",
+   "results": "CategoryTheory.Functor.IsFibered.pullbackPullbackIso; HasFibers.pullbackMap; HasFibers.mkPullback; SheafOfModules.pullbackObjFreeIso_hom_naturality; SheafOfModules.pullbackObjFreeIso_hom_naturality_assoc; PresheafOfModules.pullbackComp; CategoryTheory.PreGaloisCategory.fiberPullbackEquiv; PresheafOfModules.pullback_assoc",
+   "date": "2026-10-22",
+   "verdict": "no match: topological presheaf stalks, categorical slice pullbacks and module sheaf comparisons do not state the derived-complete rational/common-stage point-fibre comparison with its specified scalar square."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived pullback composition gives a natural isomorphism between the geometric point fibre of a pullback and the fibre at its image, compatible with extension of coefficient fields",
+   "results": "AlgebraicGeometry.Scheme.Pullback.Triplet.Spec_ofPointTensor_SpecTensorTo; AlgebraicGeometry.Scheme.Pullback.ofPointTensor_SpecTensorTo; AlgebraicGeometry.Scheme.Pullback.residueFieldCongr_inv_residueFieldMap_ofPoint; AlgebraicGeometry.Scheme.Modules.pullbackComp; AlgebraicGeometry.pullbackSpecIso_hom_base; AlgebraicGeometry.Scheme.Pullback.Triplet.specTensorTo_snd; AlgebraicGeometry.pullbackSpecIso_hom_base_assoc; AlgebraicGeometry.Scheme.Pullback.Triplet.specTensorTo_fst",
+   "date": "2026-10-24",
+   "verdict": "no match: ordinary topological stalks, sheaf-module pullback composition, scheme fibres and scalar instances do not give the specified completed/rational derived fibre comparisons and their coefficient-field coherence."
+  },
+  {
+   "tool": "grep",
+   "query": "stalkPullbackIso|pullbackComp|scalar.*[Cc]ompos",
+   "results": "Mathlib/AlgebraicGeometry/PullbackCarrier.lean; Mathlib/AlgebraicGeometry/PullbackCarrier.lean; Mathlib/AlgebraicGeometry/PullbackCarrier.lean; Mathlib/AlgebraicGeometry/PullbackCarrier.lean; Mathlib/AlgebraicGeometry/PullbackCarrier.lean; Mathlib/AlgebraicGeometry/EffectiveEpi.lean; Mathlib/AlgebraicGeometry/EffectiveEpi.lean; Mathlib/AlgebraicGeometry/Modules/Sheaf.lean",
+   "date": "2026-10-24",
+   "verdict": "no match: ordinary topological stalks, sheaf-module pullback composition, scheme fibres and scalar instances do not give the specified completed/rational derived fibre comparisons and their coefficient-field coherence."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Natural scalar compatible derived geometric fibre comparison for pullback of constructible rational ell adic complexes",
+   "results": "PadicComplex.instIsScalarTowerPadicPadicAlgCl; SheafOfModules.pullbackComp; AlgebraicGeometry.Scheme.Hom.fiber; PresheafOfModules.pullback; AlgebraicGeometry.Scheme.Modules.pullbackComp; VectorField.mpullback_smul; AlgebraicGeometry.Scheme.Modules.instAdditivePullback; SheafOfModules.PullbackConstruction.adjunction",
+   "date": "2026-10-24",
+   "verdict": "no match: ordinary topological stalks, sheaf-module pullback composition, scheme fibres and scalar instances do not give the specified completed/rational derived fibre comparisons and their coefficient-field coherence."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"stalk\", \"pullback\"",
+   "results": "TopCat.Presheaf.stalkPullbackIso; TopCat.Presheaf.stalkPullbackHom; TopCat.Presheaf.stalkPullbackInv; TopCat.Presheaf.germToPullbackStalk; TopCat.Presheaf.germToPullbackStalk_stalkPullbackHom; TopCat.Presheaf.germ_stalkPullbackInv; TopCat.Presheaf.germToPullbackStalk_stalkPullbackHom_assoc; TopCat.Presheaf.germ_stalkPullbackInv_assoc",
+   "date": "2026-10-24",
+   "verdict": "no match: ordinary topological stalks, sheaf-module pullback composition, scheme fibres and scalar instances do not give the specified completed/rational derived fibre comparisons and their coefficient-field coherence."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Naturality and coefficient extension coherence of the composition isomorphism for derived inverse image followed by geometric stalk evaluation",
+   "results": "AlgebraicGeometry.Scheme.Modules.restrictStalkNatIso; AlgebraicGeometry.Scheme.Modules.germ_restrictStalkNatIso_inv_app; AlgebraicGeometry.Scheme.Modules.germ_restrictStalkNatIso_hom_app; TopCat.Presheaf.germ_stalkPullbackInv_assoc; TopCat.Presheaf.germ_stalkPullbackHom; TopCat.Presheaf.pushforwardPullbackAdjunction_unit_app_app_germToPullbackStalk_assoc; AlgebraicGeometry.StructureSheaf.toPushforwardStalk_comp_assoc; AlgebraicGeometry.StructureSheaf.toPushforwardStalk_comp",
+   "date": "2026-10-24",
+   "verdict": "no match: ordinary topological stalks, sheaf-module pullback composition, scheme fibres and scalar instances do not give the specified completed/rational derived fibre comparisons and their coefficient-field coherence."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-fd-weil-pullback-local-frobenius",
+  "date": "2026-10-22",
+  "group": "Q60"
+ },
+ "chapter": "sec-deligne-laumon-a1",
+ "unit": "sk-p-dl-a1-some-weight",
+ "blueprint": {
+  "from": {
+   "node": "lem-fd-realified-kernel-real",
+   "place": "Proof Step 2, sentence pullback along p_1 raises the local Frobenius to the e-th power: construct the scalar-compatible derived fibre comparison",
+   "via": [
+    "lem-fd-weil-pullback-local-frobenius"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-fd-rational-pullback-fibre-comparison",
+  "worker": "stage1",
+  "summary": "Construct the finite-field comparison from the specified compositor, derive the scalar square by inversion of its mixed equation and naturality of sections, verify identity/tower laws, and prove descent by the explicit conjugated common-stage morphism formulas. No new nodes or statement changes.",
+  "blueprint": "lem-fd-realified-kernel-real.proof.md Step 2: the underlying derived fibre comparison needed for pullback of local Frobenius, without imposing a Weil lattice or finite Tor-amplitude.",
+  "tool_uses": [
+   {
+    "node": "lem-trf-integral-pullback-comparison-realization",
+    "why": "Uses the specified completed pullback compositor and its rational mixed scalar equation; this is a coefficient-comparison tool, not a replacement of the affine-line Fourier route."
+   },
+   {
+    "node": "lem-weil-point-sections-scalar-extension",
+    "why": "Uses natural point-sections scalar comparisons and their tower equation to evaluate the specified pullback comparisons; the affine-line unit has no separate sections-scalar statement."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-trf-integral-pullback-comparison-realization",
+  "lem-weil-point-sections-scalar-extension"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-O4-4bc9d8e00",
+  "group": "O4",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-O4-4bc9d8e00 (reviewer sub-agent of L); spot-checked: Ordinary split with no new nodes, statement unchanged, no re-split note. I read the cited statements in full: trf integral-pullback-comparison-realization (compositor c, scalar comparison a, mixed equation, unit/tower laws with the chi-conjugated associator, equality of morphisms respected, no Tor bound), point-sections-scalar-extension, finite-coefficient-point items 3-4, derived-pullback-tensor-hom (its theta is the trf a), algebraically-closed-coefficients, rationalization-karoubi, and the proof of scalar-extension-composition (same chi-conjugated associator). Step 1: h=z, k=f gives d_E, and c^E=Fib(d_E^{-1}) is the prescribed component. Step 2: the specialised mixed equation and its inversion are correct; b=V(a_z)beta matches the b of sibling lem-fd-local-frobenius-coefficient-extension and of the parent. Step 3: naturality of beta along d_E^{-1} gives the square exactly. Step 4: tower law via beta-naturality plus both tower laws. Step 5: the composite theta/phi conjugation equals A_M; the naturality chain checks out with different fields; independence via a further field plus Step 4. Edge cases: f=id, E=L, M=0, empty X, non-perfect reductions. trf is on the unit route (sk-thm-trace-transport reachable); the point-sections tool use is a generic coefficient lemma and is accepted. No SGA, no duplicate (frobenius-degree-formula and finite-stage-fibre-vanishing differ). Blueprint source main-20261015 lem-fd-realified-kernel-real Step 2 lines 30-40 checked. Maintainer note: the cited pullback and point defs carry a blueprint_update (condensed route); this item follows the current DAG statements and will need restating when that update is applied. review_split.py's 'no such node' errors are a symlink artifact."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.RationalPullbackFibreComparison",
+  "declaration": "WeilConjectures.rationalPullbackFibreComparison",
+  "declarations": [
+   "WeilConjectures.RationalPullbackFibre.fibre",
+   "WeilConjectures.RationalPullbackFibre.scalar",
+   "WeilConjectures.RationalPullbackFibre.component",
+   "WeilConjectures.RationalPullbackFibre.scalarComparison",
+   "WeilConjectures.RationalPullbackFibre.scalarUnit",
+   "WeilConjectures.RationalPullbackFibre.scalarTower",
+   "WeilConjectures.RationalPullbackFibre.commonFibre",
+   "WeilConjectures.RationalPullbackFibre.commonRepresentative",
+   "WeilConjectures.RationalPullbackFibre.Family",
+   "WeilConjectures.RationalPullbackFibre.ComparisonStatement",
+   "WeilConjectures.RationalPullbackFibre.geometricMap",
+   "WeilConjectures.RationalPullbackFibre.ModelStatement",
+   "WeilConjectures.rationalPullbackFibreComparison"
+  ],
+  "file": "lean/Sheaf/Paper/RationalPullbackFibreComparison.lean",
+  "statement": "theorem rationalPullbackFibreComparison (D : FiniteFieldDatum.{u}) (l : ℕ) [Fact l.Prime] (hl : l ≠ D.p) (Ω : Type u) [Field Ω] [Algebra ℚ_[l] Ω] [IsAlgClosure ℚ_[l] Ω] (X₀ Y₀ : Over (Spec (.of D.k₀))) [LocallyOfFiniteType X₀.hom] [QuasiCompact X₀.hom] [IsSeparated X₀.hom] [LocallyOfFiniteType Y₀.hom] [QuasiCompact Y₀.hom] [IsSeparated Y₀.hom] (f₀ : X₀ ⟶ Y₀) (z : Spec (.of D.k) ⟶ (D.geometricFiber X₀).left) (x : Spec (.of D.k) ⟶ (D.geometricFiber Y₀).left) (h : z ≫ RationalPullbackFibre.geometricMap D f₀ = x) : ∃ C : IntegralComparisonSystem.{u} l, (∀ (E : Type u) [Field E] [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E] (L : Type u) [Field L] [Algebra ℚ_[l] L] [FiniteDimensional ℚ_[l] L] (ι : E →ₐ[ℚ_[l]] L), IntegralComparisonRealizationCoherence l E L ι C) ∧ RationalPullbackFibre.ModelStatement D l hl C Ω X₀ Y₀ f₀ z x h",
+  "branch": "sheaf-dag",
+  "by": "NJ",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "Canonical specified compositor, explicit point equality transport, scalar square, units and towers, and common-stage component classes. Adds the landed rational-comparison and scalar-associator nodes. The comparison-system dependency gains its simultaneous-coefficient interface in this delivery; all its existing constructions remain publicly imported."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-ba3b27df0",
+  "group": "NJ",
+  "result": "pass",
+  "note": "Read node, both delivered modules, dep JSON diff (lean-only), report, and the dependency declarations in side-live. Clause match: separated finite-type X0/Y0, f is the Over.pullback base change, z≫f=x; c^E pinned to Fib((rational compositor z,f).symm ≫ eqToIso h); b = β^{-1} then Fib(a_z); scalar square b_z≫J_z(a_f)≫c^L = (c^E⊗L)≫b_x for all F≤G; unit and tower at both z and x; γ on the quotient common-stage categories with HEq to pointFdQbarStage(Shrink-ext c^E), types propositionally equal via commonStagePullbackObject/pointQbarFibreObj, so the HEq is genuine. Mechanical finding: sfRationalScalarUnit/Comp are ∃!.choose of lem-weil-scalar-extension-composition, i.e. objects the theorem constructs → PASS on that point. §1(B) dep module integralPullbackComparisonRealization_simultaneous (∃C ∀E L ι Coherence) is correct: the node specifies one system across towers. ∃C is usable by the existential parent; same shape as landed automorphismConstructibleStage_comparison_system. Advisory: ∀C strengthening; dep lean.declarations now lists only the new theorem; sibling b uses LocalFrobeniusTransport.rationalScalar instead of the def-node owner. No hollow defs, sorry only, docstrings OK. No compile run (no changes); worker scompile and deliver2 dry run OK."
+ }
+}

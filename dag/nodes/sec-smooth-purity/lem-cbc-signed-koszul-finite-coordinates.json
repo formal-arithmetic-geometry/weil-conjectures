@@ -14,50 +14,50 @@
  ],
  "proof": [
   {
-   "text": "Induct on the ordered number of factors. For the empty tensor the right unitor identifies K tensor O[0] with K. For the successor split subsets by whether they contain index zero, and identify the two supported degrees of the new negative factor with O. Distribute tensor over the finite sums. Tensor unitors and total tensor inclusions give the specified pure-tensor inclusions; multiplication gives the inverse coordinates. Naturality makes maps of K diagonal. Expanding the signed total differential gives d_K plus the erased-index coefficients (-1)^(q+|I|)(-1)^#{j in I:j<i} a_i^(m+1), with precisely the equality transports in the Lean statement.",
+   "text": "Use the normalized finite subset decomposition and its differential matrix. Derive the diagonal matrix for coefficient maps, rather than assume it: naturality of the total tensor inclusions, the tensor bifunctor and the inverse right unitor gives naturality of ringedNegativeKoszulSummand. Substitute the normalization, cancel the coordinate isomorphisms and apply the biproduct Kronecker identities.",
    "uses": [
+    "lem-cbc-signed-koszul-tensor-coordinates",
+    "def-cbc-signed-koszul-completion-model",
+    "def-pc-tensor-complex-sheaves"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For each subset I put p(I)=product over i in I of a_i. Define the degreewise transition by conjugating the biproduct diagonal with entries rho(p(I)) times identity by the coordinate isomorphisms at m+1 and m. Its row and column identities reduce the chain condition to scalar multiplication of differential entries. On the diagonal it is immediate. For an erased index use prod(I)=a_i prod(I.erase i), the power identity, and commutativity to prove p(I) coefficient_m(I,L)=coefficient_(m+1)(I,L) p(L); distribute the scalar over the finite sum. The diagonal coefficient-map matrices give naturality. This constructs a chain natural transformation, with exactly the required transition matrix.",
+   "uses": [
+    "def-cbc-signed-koszul-completion-model"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Construct the inclusion in degree q by the equality transport K^q to K^(q+0), the empty-subset biproduct injection, and the inverse coordinates. The empty row of the differential matrix gives its chain equation: its erased-index sum is empty. The degree equality q=(q+1)+|I| is impossible. The already derived coefficient-map matrix gives naturality, using naturality of the equality transports. The biproduct Kronecker identities give the stated inclusion matrix, since q=q+|I| holds exactly for the empty subset. Apply the transition row identity at the empty subset; its scalar is the empty product one, so the inclusions commute with transitions.",
+   "uses": [
+    "def-cbc-signed-koszul-completion-model"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Prove quasi-isomorphism preservation independently of the coordinate calculation. A negative double factor is zero off degrees -1 and 0, and in both supported degrees is isomorphic to the tensor unit, hence flat. Apply the existing proved source bounded-flat K-flat criterion CochainComplex.kFlat_of_bounded_of_flat (the bounded sublemma in the module of lem-sfb-bounded-above-flat-kflat). The empty ordered tensor is K-flat because it is the tensor unit, and closure of the quasi-isomorphism K-flat object property under tensor products proves K-flatness of the ordered tensor by induction on r. Its right-whiskering property then gives the required quasi-isomorphism for every unbounded coefficient complex.",
+   "uses": [
+    "lem-sfb-bounded-above-flat-kflat",
     "def-pc-tensor-complex-sheaves",
     "def-pur-sheaf-tensor-product",
     "def-cbc-signed-koszul-completion-model"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/algebraization.tex",
-    "place": "Tag 0A0E, lemma-derived-completion-koszul, finite free negative Koszul complexes; finite-coordinate expansion in steps 1 and 3 of lem-cbc-exact-linear-koszul-fiber"
-   }
-  },
-  {
-   "text": "Define transitions by conjugating the diagonal scalar product over I by these coordinates. The chain equation is (product over I of a_j) a_i^(m+1) = a_i^(m+2)(product over I.erase i of a_j). Empty-coordinate inclusions are chain maps and commute with the transitions because the empty product is one. All formulas apply at r=0 and require no scalar inversion.",
-   "uses": [
-    "def-cbc-signed-koszul-completion-model"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/algebraization.tex",
-    "place": "Tag 0A0E, lemma-derived-completion-koszul, finite free negative Koszul complexes; finite-coordinate expansion in steps 1 and 3 of lem-cbc-exact-linear-koszul-fiber"
-   }
-  },
-  {
-   "text": "Filter each tensor by subset cardinality at most k. The kth quotient is the finite sum of copies of K reindexed by |I|=k; multiplication by the standard degreewise signs identifies these with usual shifts. A quasi-isomorphism of K induces a quasi-isomorphism on each quotient. These short exact sequences are degreewise split, so the long exact homology sequences and induction on k give quasi-isomorphism invariance of the finite total tensor, even when K is unbounded.",
-   "uses": [
-    "def-pc-tensor-complex-sheaves"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/algebraization.tex",
-    "place": "Tag 0A0E, lemma-derived-completion-koszul, finite free negative Koszul complexes; finite-coordinate expansion in steps 1 and 3 of lem-cbc-exact-linear-koszul-fiber"
-   }
+   "elementary": false
   }
  ],
  "proof_deps": [
+  "lem-cbc-signed-koszul-tensor-coordinates",
+  "def-cbc-signed-koszul-completion-model",
   "def-pc-tensor-complex-sheaves",
-  "def-pur-sheaf-tensor-product",
-  "def-cbc-signed-koszul-completion-model"
+  "lem-sfb-bounded-above-flat-kflat",
+  "def-pur-sheaf-tensor-product"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-cbc/lem-cbc-completed-extension-zero-comparison.proof.md",
-  "place": "Finite free negative Koszul tensor calculation of Stacks 0A0E, refined by the explicit signed pure-tensor normalization; no product or fibre assertion."
+  "document": "literature/stacks-project/algebraization.tex",
+  "place": "Tag 0A0E, lemma-derived-completion-koszul. K2 proves the scalar-diagonal transitions, empty inclusions and their compatibility in Lean, derives coefficient-map naturality from actual tensors, and uses the proved generic bounded-flat K-flat criterion for quasi-isomorphism preservation; only the normalized tensor decomposition and its differential matrix remain a separate obligation."
  },
  "mathlib_searches": [
   {
@@ -138,13 +138,25 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-21",
+  "date": "2026-10-26",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "M1",
+  "group": "K2",
   "result": "pass",
-  "landing": "20261021T140839-L-2761445",
+  "landing": "20261026T111908-L-1768240",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
  }
 }

@@ -1,0 +1,107 @@
+{
+ "id": "lem-asd-source-invertible-relative-bidual",
+ "kind": "statement",
+ "title": "Invertible relative duality on dualizable objects",
+ "statement": "Let C be a braided closed monoidal category [def-sfb-monoidal-category] with its canonical evaluation and currying [lem-pod-closed-uncurry-laws]. If T is tensor-invertible, gamma:T ≅ W, and X is dualizable, then [X,W] is dualizable and the canonical braided evaluation-transpose X -> [[X,W],W] is an isomorphism. No scheme, orientation or constructibility datum is required.",
+ "source": {
+  "document": "lean/WeilConjectures/CategoryTheory/Monoidal/Closed/InvertibleDualizing.lean",
+  "place": "Existing complete source proof; no Lean edit or new hole."
+ },
+ "stmt_deps": [
+  "def-sfb-monoidal-category",
+  "lem-pod-closed-uncurry-laws"
+ ],
+ "proof": [
+  {
+   "text": "The invertible-coefficient internal-Hom comparison identifies [X,W] with [X,1] tensor T. The right side is dualizable because X and T are dualizable. The evaluation-defined comparison for [[X,W],W] identifies it with [[X,1],1]. Uncurrying shows that the relative bidual map followed by this comparison is the coefficient bidual map. The latter is an isomorphism for a dualizable X by its exact dual pairing and triangle identities; cancellation of the comparison proves the relative assertion. This is precisely isDualizable_ihom_obj and isIso_toIhomIhom_of_isDualizable in the cited source.",
+   "uses": [
+    "lem-sf-invertible-hom-cancellation"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sf-invertible-hom-cancellation"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "lean/WeilConjectures/CategoryTheory/Monoidal/Closed/InvertibleDualizing.lean",
+  "place": "Recorded from the existing proved source declaration."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "In a braided closed monoidal category duality into an invertible object preserves dualizable objects and the canonical double dual map is an isomorphism",
+   "results": "Eight generic dual-object, equivalence and order-duality results; none states the relative bidual result.",
+   "date": "2026-10-26",
+   "verdict": "existing source match; no exact Mathlib match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "In a braided closed monoidal category duality into an invertible object preserves dualizable objects and the canonical double dual map is an isomorphism",
+   "results": "Eight braided rigid-category dual-object and exact-pairing results; no exact relative coefficient result.",
+   "date": "2026-10-26",
+   "verdict": "existing source match; no exact Mathlib match"
+  },
+  {
+   "tool": "grep",
+   "query": "isIso_toIhomIhom_of_isDualizable|isDualizable_ihom_obj",
+   "results": "No Mathlib hits. Read the exact existing source declarations and their complete proofs.",
+   "date": "2026-10-26",
+   "verdict": "existing source match; no exact Mathlib match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.SmoothCompactDualModel",
+  "date": "2026-10-26",
+  "group": "B3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-asd-smooth-compact-dual-model",
+   "place": "Actual lower-level source ingredient used by the finite-lisse relative dual.",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sf-cbc",
+ "lean": {
+  "existing": true,
+  "module": "WeilConjectures.CategoryTheory.Monoidal.Closed.InvertibleDualizing",
+  "declaration": "CategoryTheory.MonoidalClosed.isIso_toIhomIhom_of_isDualizable",
+  "declarations": [
+   "CategoryTheory.MonoidalClosed.isDualizable_ihom_obj",
+   "CategoryTheory.MonoidalClosed.isIso_toIhomIhom_of_isDualizable"
+  ],
+  "statement": "theorem isIso_toIhomIhom_of_isDualizable {X : C} (hX : IsDualizable X) :\n    IsIso (toIhomIhom W X)",
+  "branch": "sheaf-dag",
+  "by": "B3",
+  "date": "2026-10-26",
+  "note": "Ambient variables: C has Category, MonoidalCategory, MonoidalClosed and BraidedCategory instances; gamma:T ≅ W and hT:IsInvertible T. Both recorded theorems are completely proved. This is the abstract categorical fragment, not the oriented four-coefficient geometric theorem thm-sf-dual-perfect."
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-e3e16",
+  "group": "B3",
+  "result": "fix",
+  "landing": "20261026T065155-L-2731829",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-e3e16",
+  "group": "B3",
+  "result": "fix",
+  "landing": "20261026T065155-L-2731829",
+  "kind": "interface",
+  "note": "independent cc review: item SmoothCompactDualModel + 4 modules and 8 nodes against the packet, the clone (signatures, SmoothBaseChange import cycle, canonical-map definitions) and a sandbox compile of all delivered modules with the unchanged importer SmoothGenericDirectImage (exit 0) and #print axioms"
+ }
+}

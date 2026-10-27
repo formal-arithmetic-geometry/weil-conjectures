@@ -1,0 +1,248 @@
+{
+ "id": "lem-sfb-faithfully-flat-ring-epimorphism-isomorphism",
+ "kind": "statement",
+ "title": "A faithfully flat ring epimorphism is an isomorphism",
+ "statement": "Let $R,S$ be commutative rings with identity and $f:R\\to S$ a unital ring homomorphism. Assume $f$ is faithfully flat [def-weil-pbc-faithfully-flat-ring-map]. Assume also that it is an epimorphism of commutative rings: for every commutative ring $B$ and unital ring homomorphisms $a,b:S\\to B$, if $a\\circ f=b\\circ f$ then $a=b$. Then $f$ is bijective, and hence an isomorphism of rings. No finite-generation or finite-presentation hypothesis is imposed.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tag 04VU, lemma-faithfully-flat-epimorphism (statement and proof), the general ring-theoretic result invoked by the proof of Tag 04VV in the inherited Tag 03DP/direct-image ancestry."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-faithfully-flat-ring-map"
+ ],
+ "proof": [
+  {
+   "text": "Give $S$ its $R$-algebra structure through $f$ and form $T=S\\otimes_R S$. By [lem-weil-pbc-algebra-tensor-pushout-universal-property], the maps $i_1,i_2:S\\to T$ given by $i_1(s)=s\\otimes1$ and $i_2(s)=1\\otimes s$ are unital $R$-algebra homomorphisms. Thus $i_1f=i_2f$ (both send $r$ to $f(r)\\otimes1=1\\otimes f(r)$). Apply precisely the assumed epimorphism property with the commutative ring $B=T$ to obtain $i_1=i_2$.",
+   "uses": [
+    "lem-weil-pbc-algebra-tensor-pushout-universal-property"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 04VU, lemma-faithfully-flat-epimorphism, proof invoking lemma-epimorphism (2); the omitted implication (1) to (2) is expanded here."
+   }
+  },
+  {
+   "text": "The multiplication homomorphism $\\mu:T\\to S$, $\\mu(s\\otimes t)=st$, is the map in clause (2) of [lem-weil-pbc-algebra-tensor-pushout-universal-property] for the two identity maps of $S$. We have $\\mu i_1=\\mathrm{id}_S$. On a pure tensor, the equality $i_1=i_2$ from step 1 gives $i_1\\mu(s\\otimes t)=st\\otimes1=(s\\otimes1)(t\\otimes1)=(s\\otimes1)(1\\otimes t)=s\\otimes t$. Since pure tensors generate by [def-weil-pbc-module-tensor-product], $i_1\\mu=\\mathrm{id}_T$. Hence $i_1$ and $\\mu$ are mutually inverse.",
+   "uses": [
+    "lem-weil-pbc-algebra-tensor-pushout-universal-property",
+    "def-weil-pbc-module-tensor-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 04VU, lemma-faithfully-flat-epimorphism, proof invoking lemma-epimorphism (3); the omitted tensor-product inverse calculation is expanded here."
+   }
+  },
+  {
+   "text": "Tensor the $R$-linear map $f:R\\to S$ on the left with $S$. The tensor universal property [def-weil-pbc-module-tensor-product] gives $u:S\\otimes_R R\\to S$, $u(s\\otimes r)=sf(r)$, with inverse $s\\mapsto s\\otimes1$: balancing gives $sf(r)\\otimes1=s\\otimes r$. The tensor map $S\\otimes_R f$ sends $s\\otimes r$ to $s\\otimes f(r)=sf(r)\\otimes1$, so equals $i_1u$ and is bijective by step 2. Also $S\\otimes_R0=0$, since pure tensors with a zero entry vanish and generate. The complexes $0\\to R\\xrightarrow{f}S$ and $R\\xrightarrow{f}S\\to0$ therefore become exact after tensoring with $S$. Apply the exactness-reflection clause of the very definition [def-weil-pbc-faithfully-flat-ring-map] to each complex: $\\ker f=0$ and $\\operatorname{im}f=S$. Thus $f$ is bijective. Its inverse preserves addition, multiplication and $1$, by applying the injective map $f$ to each required equality; hence $f$ is a ring isomorphism.",
+   "uses": [
+    "def-weil-pbc-module-tensor-product",
+    "def-weil-pbc-faithfully-flat-ring-map"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 04VU, lemma-faithfully-flat-epimorphism, final tensor-descent inference; Tag 00HB, definition-flat (2) and (4), applied to the two three-term complexes."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-algebra-tensor-pushout-universal-property",
+  "def-weil-pbc-module-tensor-product",
+  "def-weil-pbc-faithfully-flat-ring-map"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tag 04VU, lemma-faithfully-flat-epimorphism; expand lemma-epimorphism (1)-(3) by the tensor universal property, and the descent inference by Tag 00HB, definition-flat (2)."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A faithfully flat epimorphism of commutative rings is an isomorphism",
+   "results": "8 hits; directory (remote service). RingHom.FaithfullyFlat.codescendsAlong_bijective/surjective/injective, of_bijective, respectsIso, injective, flat_and_surjective_SpecMap_iff. Read the returned types and Descent.lean:31-59.",
+   "date": "2026-10-24",
+   "verdict": "no match: injectivity and descent results alone do not give the epi conclusion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A faithfully flat ring map which is an epimorphism is bijective without a finiteness assumption",
+   "results": "8 hits; directory (remote service). Module.FaithfullyFlat.bijective_of_tensorProduct and surjective_of_tensorProduct; RingHom.FaithfullyFlat descent lemmas. Read Descent.lean:40-59.",
+   "date": "2026-10-24",
+   "verdict": "no match: bijective_of_tensorProduct requires a separate proof that the base-changed map is bijective"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"epi\", \"FaithfullyFlat\"",
+   "results": "2 hits; directory (remote service). CommRingCat.Opposite.effectiveEpi_of_faithfullyFlat and regularEpiOfFaithfullyFlat. Read EqualizerPushout.lean:73-95: these assert regular monicity on rings, not bijectivity of the given ring epimorphism.",
+   "date": "2026-10-24",
+   "verdict": "no match: regular/effective epimorphisms are in the opposite category"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A faithfully flat epimorphism of commutative rings is an isomorphism",
+   "results": "8 hits; directory (remote service). AlgebraicGeometry.Flat.isIso_of_surjective_of_mono, RingHom.FaithfullyFlat.injective, iff_flat_and_comap_surjective, Module.FaithfullyFlat and definitions.",
+   "date": "2026-10-24",
+   "verdict": "no match: the scheme isomorphism criterion needs the Spec comparison, and the ring result returned is injectivity only"
+  },
+  {
+   "tool": "grep",
+   "query": "epimorph|IsEpi|isEpi",
+   "results": "0 hits; directory RingTheory/Flat. RingTheory/Flat: zero hits.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "epimorphism|IsEpi|isEpi",
+   "results": "7 hits; directory Algebra/Category/Ring. Algebra/Category/Ring/Epi.lean:26-50 gives CommRingCat.epi_iff_epi and RingHom.surjective_of_epi_of_finite; EqualizerPushout.lean:84,91 gives opposite regular/effective epi results.",
+   "date": "2026-10-24",
+   "verdict": "no match: finite-module epi theorem has an additional hypothesis"
+  },
+  {
+   "tool": "grep",
+   "query": "FaithfullyFlat|faithfullyFlat",
+   "results": "16 hits; directory RingTheory/Flat. RingTheory/Flat/FaithfullyFlat/Descent.lean:31-59 has injective/surjective/bijective_of_tensorProduct; Basic.lean has the module predicate.",
+   "date": "2026-10-24",
+   "verdict": "no match: the tensor-descent theorem is an ingredient, not the desired statement"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.IsRegularMono, CategoryTheory.IsIso",
+   "results": "0 hits; directory (remote service). Zero hits.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "isIso.*[Ee]pi|[Ee]pi.*isIso|isIso_of_epi",
+   "results": "24 hits; directory CategoryTheory/Limits/Shapes. CategoryTheory/Limits/Shapes/RegularMono.lean:277 has isIso_of_regularMono_of_epi; StrongEpi.lean:129 and equalizer/pushout isomorphism results also occur. This suggests an alternative proof using regularMonoOfFaithfullyFlat followed by this categorical lemma, not a one-line specialization of a single matched declaration.",
+   "date": "2026-10-24",
+   "verdict": "no match: regular monicity is a separate non-definitional hypothesis"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A faithfully flat epimorphism of commutative rings is bijective",
+   "results": "8 hits; directory (remote service). RingHom.FaithfullyFlat.codescendsAlong_bijective, RingHom.FaithfullyFlat.codescendsAlong_surjective, RingHom.FaithfullyFlat.of_bijective, Module.FaithfullyFlat.bijective_of_tensorProduct, RingHom.Flat.of_bijective, RingHom.FaithfullyFlat.codescendsAlong_injective, AlgebraicGeometry.flat_and_surjective_SpecMap_iff, RingHom.FaithfullyFlat.injective",
+   "date": "2026-10-24",
+   "verdict": "no match: tensor descent needs a separate bijectivity hypothesis; faithful-flat injectivity alone is insufficient"
+  },
+  {
+   "tool": "loogle",
+   "query": "RingHom.FaithfullyFlat, Function.Bijective",
+   "results": "2 hits; directory (remote service). RingHom.FaithfullyFlat.of_bijective, RingHom.FaithfullyFlat.codescendsAlong_bijective",
+   "date": "2026-10-24",
+   "verdict": "no match: of_bijective is the converse and codescendsAlong_bijective is tensor descent"
+  },
+  {
+   "tool": "grep",
+   "query": "epimorph|IsEpi|isEpi",
+   "results": "0 hits; directory RingTheory/Flat. ",
+   "date": "2026-10-24",
+   "verdict": "no match: no epimorphism declaration in this directory"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A faithfully flat epimorphism of commutative rings is an isomorphism",
+   "results": "8 hits; directory (remote service). AlgebraicGeometry.Flat.isIso_of_surjective_of_mono, RingHom.FaithfullyFlat.injective, RingHom.FaithfullyFlat, RingHom.Flat, RingHom.FaithfullyFlat.iff_flat_and_comap_surjective, Module.FaithfullyFlat, AlgebraicGeometry.Flat.flat_and_surjective_iff_faithfullyFlat_of_isAffine, Module.FaithfullyFlat.iff_flat_and_ideal_smul_eq_top",
+   "date": "2026-10-24",
+   "verdict": "no match: ring result is injectivity only; scheme criterion needs a separate Spec comparison"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A flat ring epimorphism which is faithfully flat must be an isomorphism without finiteness assumptions",
+   "results": "8 hits; directory (remote service). RingHom.FaithfullyFlat.codescendsAlong_bijective, RingHom.FaithfullyFlat.codescendsAlong_surjective, RingHom.FaithfullyFlat.respectsIso, RingHom.FaithfullyFlat.flat, RingHom.FaithfullyFlat.codescendsAlong_injective, RingHom.FaithfullyFlat, Module.FaithfullyFlat.self, RingHom.FaithfullyFlat.of_bijective",
+   "date": "2026-10-24",
+   "verdict": "no match: only descent, definitions and elementary faithful-flat properties returned"
+  },
+  {
+   "tool": "grep",
+   "query": "epi_iff|surjective_of_epi|FaithfullyFlat",
+   "results": "11 hits; directory Algebra/Category/Ring. Mathlib/Algebra/Category/Ring/LinearAlgebra.lean, Mathlib/Algebra/Category/Ring/EqualizerPushout.lean, Mathlib/Algebra/Category/Ring/EqualizerPushout.lean, Mathlib/Algebra/Category/Ring/EqualizerPushout.lean, Mathlib/Algebra/Category/Ring/EqualizerPushout.lean, Mathlib/Algebra/Category/Ring/EqualizerPushout.lean, Mathlib/Algebra/Category/Ring/Epi.lean, Mathlib/Algebra/Category/Ring/Epi.lean",
+   "date": "2026-10-24",
+   "verdict": "no match: epi_iff_epi describes tensor epimorphy; surjective_of_epi_of_finite adds a finite-module hypothesis; equalizer results need separate categorical inference"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-field-ring-epimorphism-trivial-or-iso",
+  "date": "2026-10-24",
+  "group": "Q52"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "mathlib_candidate": {
+  "declarations": [
+   "CommRingCat.regularMonoOfFaithfullyFlat",
+   "CategoryTheory.isIso_of_regularMono_of_epi",
+   "Module.FaithfullyFlat.bijective_of_tensorProduct"
+  ],
+  "note": "Ingredients for later splitting; no single result found states the faithfully-flat ring-epimorphism conclusion under these hypotheses."
+ },
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "Tag 04VU, lemma-faithfully-flat-epimorphism (statement and proof), the general ring-theoretic result invoked by the proof of Tag 04VV in the inherited Tag 03DP/direct-image ancestry.",
+   "via": [
+    "lem-sfb-field-ring-epimorphism-trivial-or-iso",
+    "lem-sfb-monomorphism-into-field-coproduct",
+    "lem-sfb-locally-separated-space-decent",
+    "lem-sfb-locally-separated-rational-point-closed-immersion",
+    "lem-sfb-locally-separated-closure-equivalent-images",
+    "lem-sfb-adequate-locally-separated-universality",
+    "lem-sfb-affine-pgl-finite-stabilizer-quotient",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-faithfully-flat-ring-epimorphism-isomorphism",
+  "worker": "stage1",
+  "summary": "Expanded the Stacks 04VU argument into three elementary steps using existing tensor-product and faithful-flatness nodes. Epimorphy equates the two tensor inclusions; multiplication is their explicit inverse; tensoring f is this inclusion after an explicit unit identification, so exactness reflection gives injectivity and surjectivity. No new nodes, no finiteness assumptions, and no statement changes. Searched the project, DAG, latest blueprint and Mathlib.",
+  "blueprint": "This created item has no resolvable imported ancestor (blueprint_refs.py ancestor returns None); retain its inherited Tag 04VU / Tag 04VV / Tag 03DP direct-image ancestry and precise from.place. The three steps expand the entire Tag 04VU argument used by the parent lem-sfb-field-ring-epimorphism-trivial-or-iso. Latest blueprint searches found no same statement."
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q47-83b30d645",
+  "group": "Q47",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q47-83b30d645 (reviewer sub-agent of L); spot-checked: I read Stacks algebra.tex 04VU lemma-faithfully-flat-epimorphism and lemma-epimorphism (proof omitted). The item statement is byte-identical to live (unsplit there). The proof expands the omitted lemma-epimorphism (1)⇒(2)⇒(3) and the source's 'R→S tensored with S' inference. Step 1: i1, i2 are R-algebra maps by clause (1) of lem-weil-pbc-algebra-tensor-pushout-universal-property, so i1∘f = i2∘f, and the epimorphism hypothesis with B = S⊗S gives i1 = i2. Step 2: μ comes from clause (2) with id, id; i1μ(s⊗t) = (s⊗1)(1⊗t) = s⊗t, and pure tensors generate (def-weil-pbc-module-tensor-product), so i1 and μ are inverse. Step 3: u(s⊗r) = s·f(r) is an isomorphism with inverse s↦s⊗1 by balancing, and id⊗f = i1∘u. The reflection clause of def-weil-pbc-faithfully-flat-ring-map, applied to 0→R→S and R→S→0, gives f injective and surjective. All steps are genuinely elementary from the cited statements, and proof_deps equals the union of uses; every dependency is a Mathlib-status node, so there is no tool_use or cycle. Edge cases check out: S=0 (forces R=0), Z→Q (not faithfully flat, reflection fails), k→k×k (not an epimorphism, step 1 fails). There are no new nodes. An rg -L search for 04VU, lemma-epimorphism and 'ring epimorphism' over the DAG finds no duplicate. No changes made."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.FaithfullyFlatRingEpimorphism",
+  "declaration": "Algebra.bijective_algebraMap_of_faithfullyFlat_of_epi",
+  "file": "lean/Sheaf/RingTheory/FaithfullyFlatRingEpimorphism.lean",
+  "statement": "theorem bijective_algebraMap_of_faithfullyFlat_of_epi (R : Type u) (S : Type v) [CommRing R] [CommRing S] [Algebra R S] [Module.FaithfullyFlat R S] (hepi : ∀ (B : Type (max u v)) [CommRing B] (a b : S →+* B), a.comp (algebraMap R S) = b.comp (algebraMap R S) → a = b) : Function.Bijective (algebraMap R S) ∧ ∃ e : R ≃+* S, e.toRingHom = algebraMap R S",
+  "branch": "newtargets-dag",
+  "by": "Q129",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-cee081523",
+  "group": "Q129",
+  "result": "pass",
+  "note": "Node diff is the lean field only; the dep record is identical to live; lean.statement is verbatim in the file. R:Type u, S:Type v, [Algebra R S], [Module.FaithfullyFlat R S] (= dep record); hepi tests B : Type (max u v), a weaker hypothesis, still equivalent because S⊗_R S : Type v lifts by ULift. Conclusion: Bijective ∧ ∃ e : R ≃+* S, e.toRingHom = algebraMap, which matches 'bijective, hence a ring iso'. No finiteness or Nontrivial binder; zero-ring, ℤ→ℚ and k→k×k edge cases correct. Proof is sorry; docstrings carry the source place, blueprint id and 3-step plan; no defs; Worker report and Second reading sections present. No Mathlib duplicate (surjective_of_epi_of_finite needs Module.Finite). No compile needed (no change)."
+ }
+}

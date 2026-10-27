@@ -1,0 +1,111 @@
+{
+ "id": "lem-pur-graph-proper-precomposition-unit-component",
+ "kind": "statement",
+ "title": "Objectwise proper-first graph unit normalization",
+ "statement": "At a homotopy-category object, the proper-first graph comparison word satisfies the canonical right-derived unit equation under the stated sheaf normalization hypothesis.",
+ "source": {
+  "document": "literature/stacks-project/more-etale.tex",
+  "place": "Tags 0F7B, 0F7I and 0F7J; the objectwise component of the proper-first unit calculation."
+ },
+ "stmt_deps": [
+  "lem-amb-unbounded-compact-support-comparisons",
+  "lem-asd-compact-support-graph-derived-isomorphism",
+  "def-pur-graph-chosen-proper-comparison",
+  "def-pur-graph-chosen-etale-comparison",
+  "def-weil-pbc-derived-categories",
+  "lem-cbc-proper-support-sheaf-composition",
+  "lem-asd-compact-support-graph-sheaf-normalization",
+  "lem-asd-compact-support-graph-coherence",
+  "def-weil-compactifications-refinements"
+ ],
+ "proof": [
+  {
+   "text": "Expand the two derived units at the chosen homotopy object. The comparison word is the normalized proper/open tower map. The sheaf normalization hypothesis and monicity of the compactification inclusion identify its degreewise component with the stated natural transformation; transport through Qh gives the equality.",
+   "uses": [
+    "lem-amb-unbounded-compact-support-comparisons",
+    "lem-asd-compact-support-graph-derived-isomorphism",
+    "def-pur-graph-chosen-proper-comparison",
+    "def-pur-graph-chosen-etale-comparison",
+    "def-weil-pbc-derived-categories",
+    "lem-cbc-proper-support-sheaf-composition",
+    "lem-asd-compact-support-graph-sheaf-normalization",
+    "lem-asd-compact-support-graph-coherence",
+    "def-weil-compactifications-refinements"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-amb-unbounded-compact-support-comparisons",
+  "lem-asd-compact-support-graph-derived-isomorphism",
+  "def-pur-graph-chosen-proper-comparison",
+  "def-pur-graph-chosen-etale-comparison",
+  "def-weil-pbc-derived-categories",
+  "lem-cbc-proper-support-sheaf-composition",
+  "lem-asd-compact-support-graph-sheaf-normalization",
+  "lem-asd-compact-support-graph-coherence",
+  "def-weil-compactifications-refinements"
+ ],
+ "proof_origin": {
+  "document": "literature/stacks-project/more-etale.tex",
+  "place": "Tags 0F7B, 0F7I and 0F7J, objectwise component calculation.",
+  "by": "worker"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "rightDerivedFunctorCompMapDerivedCategoryUnit_app and compactSupportGraphSheafComparison_normalization",
+   "results": "The generic right-derived unit APIs and graph normalization are available; no exact proper-first objectwise theorem is present.",
+   "date": "2026-10-27",
+   "verdict": "Use the objectwise split as the remaining geometric calculation."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.EtaleGraphProperPrecompositionUnit",
+  "date": "2026-10-27",
+  "group": "U5"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pur-graph-proper-precomposition-unit",
+   "place": "Objectwise form of the proper-first unit proof."
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.EtaleGraphProperPrecompositionUnitKInjective",
+  "file": "lean/Sheaf/AlgebraicGeometry/EtaleGraphProperPrecompositionUnitKInjective.lean",
+  "declaration": "AlgebraicGeometry.Etale.graph_proper_precomposition_unit_component",
+  "statement": "theorem graph_proper_precomposition_unit_component\n    (A : Type (u + 1)) [CommRing A] [Finite A]\n    {W V Y : Scheme.{u}}\n    [IsNoetherian W] [IsNoetherian V] [IsNoetherian Y]\n    (q : W ⟶ V) [IsProper q]\n    (v : V ⟶ Y) [Etale v] [IsSeparated v] [QuasiCompact v]\n    [HasCompactification v] [HasCompactification (q ≫ v)]\n    {f : W ⟶ Y} (hf : f = q ≫ v) [HasCompactification f]\n    (c : Compactification f)\n    (τ : lowerStar (ModuleCat.{u + 1} A) q ⋙\n        etaleLowerShriek (ModuleCat.{u + 1} A) v inferInstance ⟶\n      openImmersionLowerShriek (ModuleCat.{u + 1} A) c.i ⋙\n        lowerStar (ModuleCat.{u + 1} A) c.g)\n    (hτ : ∀ F : Sheaf W.smallEtaleTopology (ModuleCat.{u + 1} A),\n      τ.app F ≫ (compactificationSheafToDirectImage A c).app F =\n        etaleLowerShriekToLowerStar (ModuleCat.{u + 1} A) v\n            ((lowerStar (ModuleCat.{u + 1} A) q).obj F) ≫\n          (lowerStarComp (ModuleCat.{u + 1} A) q v f hf).hom.app F)\n    (J : HomotopyCategory\n      (Sheaf W.smallEtaleTopology (ModuleCat.{u + 1} A)) (.up ℤ)) :\n    (Functor.rightDerivedFunctorCompMapDerivedCategoryUnit\n        (lowerStar (ModuleCat.{u + 1} A) q)\n        (etaleLowerShriek (ModuleCat.{u + 1} A) v inferInstance) ≫\n      Functor.whiskerLeft DerivedCategory.Qh\n        (Functor.isoWhiskerRight (graphChosenProperComparison A q).symm\n            (etaleLowerShriek (ModuleCat.{u + 1} A) v inferInstance).mapDerivedCategory ≪≫\n          Functor.isoWhiskerLeft (rightDerivedLowerShriek (ModuleCat.{u + 1} A) q)\n            (graphChosenEtaleComparison A v).symm ≪≫\n          unboundedEtaleLowerShriekCompIso A q v ≪≫\n          unboundedEtaleLowerShriekCongr A hf.symm ≪≫\n          (rightDerivedLowerShriekIso A c).symm).hom).app\n      J =\n      (Functor.whiskerRight (NatTrans.mapHomotopyCategory τ (.up ℤ))\n          DerivedCategory.Qh ≫\n        Functor.mapDerivedCategoryCompRightDerivedFunctorUnit\n          (openImmersionLowerShriek (ModuleCat.{u + 1} A) c.i)\n          (lowerStar (ModuleCat.{u + 1} A) c.g)).app\n        J",
+  "branch": "sheaf-dag",
+  "by": "U5",
+  "date": "2026-10-27"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-thm-smooth-purity",
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U5",
+  "result": "pass",
+  "landing": "20261027T123543-L-2319658",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U5",
+  "result": "pass",
+  "landing": "20261027T123543-L-2319658",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

@@ -1,0 +1,283 @@
+{
+ "id": "lem-trf-half-bounded-hom-scalar-isomorphism",
+ "kind": "statement",
+ "title": "Oppositely bounded finite-free Hom commutes with termwise scalar extension",
+ "statement": "Let $R\\to S$ be any homomorphism of commutative rings. Work with ordinary integer cochain complexes of modules, identified with the one-object bottom-topology module-sheaf categories [lem-weil-pbc-singleton-site-module-comparison], and let $F$ apply $S\\otimes_R-$ termwise. Let $P,N$ be $R$-complexes, with integers $a,b$ such that $P^p=0$ for $p>b$, every $P^p$ is finite free, and $N^q=0$ for $q<a$. Use the product total Hom complexes [def-sc-module-total-hom-complex], equivalently the shared Hom complexes [def-pur-hom-complex], whose degree-$n$ differential is $d(f)=d_Nf-(-1)^nfd_P$. The normalized scalar-extension chain map [lem-pc-normalized-ring-hom-extension]\n$$\\chi:F\\operatorname{Hom}_R^\\bullet(P,N)\\longrightarrow\\operatorname{Hom}_S^\\bullet(FP,FN),\\qquad (\\chi(s\\otimes f))_p(t\\otimes x)=st\\otimes f_p(x)$$\nis an isomorphism of complexes, natural in cochain maps of $P,N$. More precisely, for each $n$ put $c=a-n$ and let $P_c=\\sigma_{\\ge c}P$ be the stupid truncation [def-kun-truncations]. Restriction of homogeneous families, with inverse inserting zero components, gives identifications\n$$\\operatorname{Hom}_R^n(P,N)\\cong\\operatorname{Hom}_R^n(P_c,N),\\qquad\\operatorname{Hom}_S^n(FP,FN)\\cong\\operatorname{Hom}_S^n(FP_c,FN).$$\nUnder these identifications $\\chi^n$ is the degree-$n$ normalized scalar comparison for the bounded finite-free complex $P_c$. Every $\\chi^n$ is invertible, and its inverses commute with the Hom differentials. The truncations are used only for these degreewise identifications, with no assertion that $P_c$ represents $Q_RP$ in the derived category. No flatness of $S$ over $R$, Noetherian hypothesis, or K-flatness of $N$ is assumed.",
+ "source": {
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tag 0ATK (lemma-internal-hom-evaluate-tensor-isomorphism), proof of clause (3), specialized to the degree-zero scalar complex; finite-support comparison refined by degree-dependent stupid truncations."
+ },
+ "stmt_deps": [
+  "lem-weil-pbc-singleton-site-module-comparison",
+  "def-sc-module-total-hom-complex",
+  "def-pur-hom-complex",
+  "lem-pc-normalized-ring-hom-extension",
+  "def-kun-truncations"
+ ],
+ "proof": [
+  {
+   "text": "Use [lem-weil-pbc-singleton-site-module-comparison] to work in the punctual-site module model. At its sole object a sheaf Hom is the ordinary module of linear maps, and a product is the ordinary product, so the terms and differentials in [def-sc-module-total-hom-complex] and [def-pur-hom-complex] agree. The tensor-order change $x\\otimes s\\leftrightarrow s\\otimes x$ is well-defined by the balanced relations, and its two composites are identities. Apply [lem-pc-normalized-ring-hom-extension] to the actual scalar-extension functor $F$: its maps send $s\\otimes x$ to $s\\otimes u(x)$ and are additive. This supplies the chain map $\\chi$ with the formula in the statement, with no boundedness or flatness assumption.",
+   "uses": [
+    "lem-weil-pbc-singleton-site-module-comparison",
+    "def-sc-module-total-hom-complex",
+    "def-pur-hom-complex",
+    "lem-pc-normalized-ring-hom-extension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0ATK (lemma-internal-hom-evaluate-tensor-isomorphism), proof of (3), degree-zero scalar complex; Tag 0A8H (section-hom-complexes)."
+   }
+  },
+  {
+   "text": "Fix $n$, set $c=a-n$, and form $P_c=\\sigma_{\\ge c}P$ using [def-kun-truncations]. For $p<c$, $p+n<a$, hence $N^{p+n}=0$; the $p$th degree-$n$ Hom factor is therefore zero. Restriction $r_R(f)=(f_p)_{p\\ge c}$ has inverse inserting the unique zero maps for $p<c$. Both composites are identities coordinatewise. The same construction gives $r_S$ after applying $F$, since $S\\otimes_R0=0$: both directions of this last identification send every pure tensor to zero. Thus $r_R,r_S$ are precisely the asserted degreewise identifications. Also $P_c^p=0$ outside $[c,b]$, and every retained term is finite free; the zero terms have the empty basis. If $c>b$, $P_c=0$ and both degree-$n$ Hom modules are zero.",
+   "uses": [
+    "def-kun-truncations",
+    "def-sc-module-total-hom-complex"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0ATK (lemma-internal-hom-evaluate-tensor-isomorphism), proof of (3), degree-zero scalar complex; Tag 0A8H (section-hom-complexes)."
+   }
+  },
+  {
+   "text": "For every $p$, choose a finite basis of $P_c^p$. It generates the module, as required by [def-weil-finitely-generated-module]. Given a surjection and a map from $P_c^p$, choose a preimage of the image of each basis vector and extend linearly; this proves the lifting characterization of projectivity in [def-weil-pbc-projective-module]. Consequently [lem-pc-finite-projective-ring-hom-extension] supplies isomorphisms $g_p:F\\operatorname{Hom}_R(P_c^p,N^{p+n})\\to\\operatorname{Hom}_S(FP_c^p,FN^{p+n})$ with $g_p(s\\otimes h)(t\\otimes x)=st\\otimes h(x)$. Its hypotheses impose no restriction on $N^{p+n}$ or on $S$ over $R$.",
+   "uses": [
+    "def-weil-finitely-generated-module",
+    "def-weil-pbc-projective-module",
+    "lem-pc-finite-projective-ring-hom-extension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0ATK (lemma-internal-hom-evaluate-tensor-isomorphism), proof of (3), degree-zero scalar complex; Tag 0A8H (section-hom-complexes)."
+   }
+  },
+  {
+   "text": "Put $t_n=r_S\\chi^nF(r_R^{-1})$. For $p\\ge c$, restriction keeps the $p$th component, and zero insertion also keeps it, so $t_n(s\\otimes h)_p(t\\otimes x)=st\\otimes h_p(x)$. For $p<c$ the source $P_c^p$ is zero and the same equation is the equality of the unique zero maps. Hence $t_n$ has the normalized coordinate formula of [lem-pc-bounded-ring-hom-extension-degree]. Apply that node to $P_c,N,n$, the interval $[\\min(c,b),b]$, and the $g_p$ of Step 3. All its hypotheses hold, including when $c>b$; it requires only a module map in degree $n$. It follows that $t_n$ is invertible. The degree-$n$ map supplied by [lem-pc-normalized-ring-hom-extension] for $P_c,N$ has the same coordinates on all pure tensors. Such tensors generate, and product maps are determined by their coordinates, so that map equals $t_n$. Since $r_R,r_S$ are isomorphisms and a functor carries an inverse pair to an inverse pair, $\\chi^n$ is invertible.",
+   "uses": [
+    "lem-pc-bounded-ring-hom-extension-degree",
+    "lem-pc-normalized-ring-hom-extension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0ATK (lemma-internal-hom-evaluate-tensor-isomorphism), proof of (3), degree-zero scalar complex; Tag 0A8H (section-hom-complexes)."
+   }
+  },
+  {
+   "text": "Write $H=\\operatorname{Hom}_R^\\bullet(P,N)$ and $H'=\\operatorname{Hom}_S^\\bullet(FP,FN)$, and let $\\psi^n=(\\chi^n)^{-1}$. The chain equation already supplied by [lem-pc-normalized-ring-hom-extension] is $d_{H'}^n\\chi^n=\\chi^{n+1}F(d_H^n)$. Multiplying by $\\psi^{n+1}$ on the left and $\\psi^n$ on the right gives $F(d_H^n)\\psi^n=\\psi^{n+1}d_{H'}^n$. Thus the inverses form a chain map and both composites are the identity degreewise. This proves the complex isomorphism using the degreewise truncations only; no comparison in the derived category has been made.",
+   "uses": [
+    "lem-pc-normalized-ring-hom-extension"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0ATK (lemma-internal-hom-evaluate-tensor-isomorphism), proof of (3), degree-zero scalar complex; Tag 0A8H (section-hom-complexes)."
+   }
+  },
+  {
+   "text": "For cochain maps $\\alpha:P'\\to P$ and $\\beta:N\\to N'$, the Hom functor of [def-pur-hom-complex] sends $f$ to the family $\\beta^{p+n}f_p\\alpha^p$. The formula of [lem-pc-normalized-ring-hom-extension] gives, at $t\\otimes x$ in coordinate $p$, both paths in its naturality square the value $st\\otimes\\beta^{p+n}(f_p(\\alpha^p(x)))$. Equality extends by additivity from pure tensors, and then by the product coordinates to the whole degree. This proves naturality (in particular on the stated bounded classes); composing its square with the two inverse chain maps gives naturality of the inverse isomorphism as well.",
+   "uses": [
+    "def-pur-hom-complex",
+    "lem-pc-normalized-ring-hom-extension"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0ATK (lemma-internal-hom-evaluate-tensor-isomorphism), proof of (3), degree-zero scalar complex; Tag 0A8H (section-hom-complexes)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-singleton-site-module-comparison",
+  "def-sc-module-total-hom-complex",
+  "def-pur-hom-complex",
+  "lem-pc-normalized-ring-hom-extension",
+  "def-kun-truncations",
+  "def-weil-finitely-generated-module",
+  "def-weil-pbc-projective-module",
+  "lem-pc-finite-projective-ring-hom-extension",
+  "lem-pc-bounded-ring-hom-extension-degree"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Explicit degree-dependent truncation refinement of the finite-support argument in Tag 0ATK(3); normalized chain map and finite-support assembly from the cited existing nodes."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For bounded above complexes of finite projective modules and bounded below complexes scalar extension of the product Hom complex is an isomorphism",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"HomologicalComplex.extendSingleIso\", \"module\": \"Mathlib/Algebra/Homology/Embedding/Extend\", \"type\": \"{ι : Type u_1} →\\n  {ι' : Type u_2} →\\n    {c : ComplexShape ι} →\\n      {c' : ComplexShape ι'} →\\n        {C : Type u_3} →\\n          [inst : CategoryTheory.Category.{v_1, u_3} C] →\\n            [inst_1 : CategoryTheory.Limits.HasZeroObject C] →\\n              [inst_2 : CategoryTheory.Limits.HasZeroMorphi\", \"doc\": \"Given a category $\\\\mathcal{C}$ with zero morphisms, a shape embedding $e : c \\\\to c'$, an index $i$ in the source shape, and an index $i'$ in the target shape satisfying $e(i) = i'$, this constructs an\"}\n  {\"name\": \"CochainComplex.isKProjective_of_projective\", \"module\": \"Mathlib/Algebra/Homology/HomotopyCategory/KProjective\", \"type\": \"∀ {C : Type u_1} [inst : CategoryTheory.Category.{v_1, u_1} C] [inst_1 : CategoryTheory.Abelian C]\\n  (K : CochainComplex C ℤ) (d : ℤ) [K.IsStrictlyLE d] [∀ (n : ℤ), CategoryTheory.Projective (K.X n)], K.IsKProjective\", \"doc\": \"In an abelian category, if a cochain complex $ K $ is strictly supported (via the embedding $ \\\\text{embeddingUpIntLE}(d) $) and every object $ K^i $ in the complex is projective, then $ K $ satisfies \"}\n  {\"name\": \"CategoryTheory.ProjectiveResolution.isoExt\", \"module\": \"Mathlib/CategoryTheory/Abelian/Ext\", \"type\": \"{R : Type u_1} →\\n  [inst : Ring R] →\\n    {C : Type u_2} →\\n      [inst_1 : CategoryTheory.Category.{v_1, u_2} C] →\\n        [inst_2 : CategoryTheory.Abelian C] →\\n          [inst_3 : CategoryTheory.Linear R C] →\\n            [inst_4 : CategoryTheory.EnoughProjectives C] →\\n              {X : C} →\\n       \", \"doc\": \"For a ring $ R $, an abelian $ R $-linear category $ \\\\mathcal{C} $, an object $ X $ with projective resolution $ P $, natural number $ n $, and object $ Y $, there is an isomorphism between the $ n $-\"}\n  {\"name\": \"HomologicalComplex.extendSingleIso_hom_f_assoc\", \"module\": \"Mathlib/Algebra/Homology/Embedding/Extend\", \"type\": \"∀ {ι : Type u_1} {ι' : Type u_2} {c : ComplexShape ι} {c' : ComplexShape ι'} {C : Type u_3}\\n  [inst : CategoryTheory.Category.{v_1, u_3} C] [inst_1 : CategoryTheory.Limits.HasZeroObject C]\\n  [inst_2 : CategoryTheory.Limits.HasZeroMorphisms C] [inst_3 : DecidableEq ι] (e : c.Embedding c') (X : C)\\n  [\", \"doc\": \"Given a category $\\\\mathcal{C}$ with zero morphisms, a shape embedding $e : c \\\\to c'$, indices $i \\\\in \\\\iota$ and $i' \\\\in \\\\iota'$ satisfying $e(i) = i'$, and an object $X \\\\in \\\\mathcal{C}$, the compositi\"}\n  {\"name\": \"HomologicalComplex.extendSingleIso_inv_f_assoc\", \"module\": \"Mathlib/Algebra/Homology/Embedding/Extend\", \"type\": \"∀ {ι : Type u_1} {ι' : Type u_2} {c : ComplexShape ι} {c' : ComplexShape ι'} {C : Type u_3}\\n  [inst : CategoryTheory.Category.{v_1, u_3} C] [inst_1 : CategoryTheory.Limits.HasZeroObject C]\\n  [inst_2 : CategoryTheory.Limits.HasZeroMorphisms C] [inst_3 : DecidableEq ι] (e : c.Embedding c') (X : C)\\n  [\", \"doc\": \"Given a category $\\\\mathcal{C}$ with zero morphisms, a shape embedding $e : c \\\\to c'$, indices $i \\\\in \\\\iota$ and $i' \\\\in \\\\iota'$ satisfying $e(i) = i'$, and an object $X \\\\in \\\\mathcal{C}$, the inverse o\"}\n  {\"name\": \"CochainComplex.HomComplex.CohomologyClass.bijective_toSmallShiftedHom_of_isKProjective\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/KProjective\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Abelian C] (K L : CochainComplex C ℤ)\\n  (n : ℤ)\\n  [inst_2 :\\n    CategoryTheory.Localization.HasSmallLocalizedShiftedHom (HomologicalComplex.quasiIso C (ComplexShape.up ℤ)) ℤ K L]\\n  [K.IsKProjective], Function.Bijective\", \"doc\": \"If $ K $ is a K-projective cochain complex, then the function mapping cohomology classes in degree $ n $ of the homomorphism complex $ \\\\text{Hom}(K, L) $ to morphisms in the localized category $ \\\\math\"}\n  {\"name\": \"DerivedCategory.from_singleFunctor_obj_eq_zero_of_projective\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/Ext/EnoughProjectives\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Abelian C]\\n  [inst_2 : HasDerivedCategory C] {P : C} [CategoryTheory.Projective P] {L : CochainComplex C ℤ} {i : ℤ}\\n  (φ : DerivedCategory.Q.obj ((CochainComplex.singleFunctor C i).obj P) ⟶ DerivedCategory.Q.obj L),\\n  \", \"doc\": \"In an abelian category with enough projectives, for any projective object $ P $, cochain complex $ L $, and integer $ i $, every morphism in the derived category from the single complex concentrated a\"}\n  {\"name\": \"CochainComplex.isKProjective_of_iso\", \"module\": \"Mathlib/Algebra/Homology/HomotopyCategory/KProjective\", \"type\": \"∀ {C : Type u_1} [inst : CategoryTheory.Category.{v_1, u_1} C] [inst_1 : CategoryTheory.Abelian C]\\n  {K₁ K₂ : CochainComplex C ℤ} (e : K₁ ≅ K₂) [K₁.IsKProjective], K₂.IsKProjective\", \"doc\": \"If two cochain complexes in an abelian category are isomorphic and one is K-projective, then the other is also K-projective.\"}\n Read: The complex embedding, monoidal tensor, K-projective and ordinary module-adjunction hits do not give the product-Hom scalar chain isomorphism for these half bounds.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The tensor Hom comparison for oppositely bounded cochain complexes has finite support in each degree and commutes with arbitrary base change",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"HomologicalComplex.tensorHom\", \"module\": \"Mathlib/Algebra/Homology/Monoidal\", \"type\": \"{C : Type u_1} →\\n  [inst : CategoryTheory.Category.{v_1, u_1} C] →\\n    [inst_1 : CategoryTheory.MonoidalCategory C] →\\n      [inst_2 : CategoryTheory.Preadditive C] →\\n        [inst_3 : (CategoryTheory.MonoidalCategory.curriedTensor C).Additive] →\\n          [inst_4 : ∀ (X₁ : C), ((CategoryTheory.Monoi\", \"doc\": \"Given morphisms $f: K_1 \\\\to L_1$ and $g: K_2 \\\\to L_2$ between homological complexes in a monoidal category, this constructs the induced morphism $K_1 \\\\otimes K_2 \\\\to L_1 \\\\otimes L_2$ between their ten\"}\n  {\"name\": \"HomologicalComplex.HasTensor\", \"module\": \"Mathlib/Algebra/Homology/Monoidal\", \"type\": \"{C : Type u_1} →\\n  [inst : CategoryTheory.Category.{v_1, u_1} C] →\\n    [inst_1 : CategoryTheory.MonoidalCategory C] →\\n      [inst_2 : CategoryTheory.Preadditive C] →\\n        [(CategoryTheory.MonoidalCategory.curriedTensor C).Additive] →\\n          [∀ (X₁ : C), ((CategoryTheory.MonoidalCategory.currie\", \"doc\": \"Given two homological complexes $K_1$ and $K_2$ in a category $\\\\mathcal{C}$ equipped with a monoidal structure via the curried tensor product bifunctor, this definition asserts the existence of a tens\"}\n  {\"name\": \"HomologicalComplex.HasGoodTensor₁₂\", \"module\": \"Mathlib/Algebra/Homology/Monoidal\", \"type\": \"{C : Type u_1} →\\n  [inst : CategoryTheory.Category.{v_1, u_1} C] →\\n    [CategoryTheory.MonoidalCategory C] →\\n      [inst_2 : CategoryTheory.Preadditive C] →\\n        {I : Type u_2} →\\n          [inst_3 : AddMonoid I] →\\n            {c : ComplexShape I} →\\n              [c.TensorSigns] → HomologicalCompl\", \"doc\": \"A proposition asserting that for three homological complexes $K_1, K_2, K_3$ in a category $\\\\mathcal{C}$ with shape $c$, the composition of curried tensor product functors preserves colimits of diagra\"}\n  {\"name\": \"HomologicalComplex.ιTensorObj\", \"module\": \"Mathlib/Algebra/Homology/Monoidal\", \"type\": \"{C : Type u_1} →\\n  [inst : CategoryTheory.Category.{v_1, u_1} C] →\\n    [inst_1 : CategoryTheory.MonoidalCategory C] →\\n      [inst_2 : CategoryTheory.Preadditive C] →\\n        [inst_3 : (CategoryTheory.MonoidalCategory.curriedTensor C).Additive] →\\n          [inst_4 : ∀ (X₁ : C), ((CategoryTheory.Monoi\", \"doc\": \"Given two homological complexes $ K_1 $ and $ K_2 $ in a monoidal category $ \\\\mathcal{C} $, and indices $ i_1, i_2, j $ in the additive monoid $ I $ satisfying $ i_1 + i_2 = j $, this morphism maps th\"}\n  {\"name\": \"HomologicalComplex.instHasGoodTensor₁₂OfHasGoodTensor₁₂TensorX\", \"module\": \"Mathlib/Algebra/Homology/Monoidal\", \"type\": \"∀ {C : Type u_1} [inst : CategoryTheory.Category.{v_1, u_1} C] [inst_1 : CategoryTheory.MonoidalCategory C]\\n  [inst_2 : CategoryTheory.Preadditive C] {I : Type u_2} [inst_3 : AddMonoid I] {c : ComplexShape I}\\n  [inst_4 : c.TensorSigns] (K₁ K₂ K₃ : HomologicalComplex C c)\\n  [CategoryTheory.GradedObje\", \"doc\": \"Given three homological complexes $ K_1, K_2, K_3 $ in a category $ \\\\mathcal{C} $ with shape $ c $, if their underlying graded objects $ K_1.X, K_2.X, K_3.X $ satisfy the colimit-preserving tensor pro\"}\n  {\"name\": \"HomologicalComplex.instHasGoodTensor₂₃OfHasGoodTensorTensor₂₃X\", \"module\": \"Mathlib/Algebra/Homology/Monoidal\", \"type\": \"∀ {C : Type u_1} [inst : CategoryTheory.Category.{v_1, u_1} C] [inst_1 : CategoryTheory.MonoidalCategory C]\\n  [inst_2 : CategoryTheory.Preadditive C] {I : Type u_2} [inst_3 : AddMonoid I] {c : ComplexShape I}\\n  [inst_4 : c.TensorSigns] (K₁ K₂ K₃ : HomologicalComplex C c)\\n  [CategoryTheory.GradedObje\", \"doc\": \"Given three homological complexes $K_1, K_2, K_3$ in a category $\\\\mathcal{C}$ with zero morphisms, if their underlying graded objects $K_1.X, K_2.X, K_3.X$ admit a tensor product preserving colimits, \"}\n  {\"name\": \"HomologicalComplex.HasGoodTensor₂₃\", \"module\": \"Mathlib/Algebra/Homology/Monoidal\", \"type\": \"{C : Type u_1} →\\n  [inst : CategoryTheory.Category.{v_1, u_1} C] →\\n    [CategoryTheory.MonoidalCategory C] →\\n      [inst_2 : CategoryTheory.Preadditive C] →\\n        {I : Type u_2} →\\n          [inst_3 : AddMonoid I] →\\n            {c : ComplexShape I} →\\n              [c.TensorSigns] → HomologicalCompl\", \"doc\": \"The tensor product of three homological complexes $K_1, K_2, K_3$ in a category $\\\\mathcal{C}$ with zero morphisms, using the curried tensor product structure and complex shapes $c$, forms a trifunctor\"}\n  {\"name\": \"HomologicalComplex.instHasTensorTensorUnit\", \"module\": \"Mathlib/Algebra/Homology/Monoidal\", \"type\": \"∀ {C : Type u_1} [inst : CategoryTheory.Category.{v_1, u_1} C] [inst_1 : CategoryTheory.MonoidalCategory C]\\n  [inst_2 : CategoryTheory.Preadditive C] [inst_3 : CategoryTheory.Limits.HasZeroObject C]\\n  [inst_4 : (CategoryTheory.MonoidalCategory.curriedTensor C).Additive]\\n  [inst_5 : ∀ (X₁ : C), ((Cat\", \"doc\": \"The tensor unit homological complex in a monoidal category $ \\\\mathcal{C} $, when tensored with any homological complex $ K $, results in a complex that satisfies the total complex condition with respe\"}\n Read: The complex embedding, monoidal tensor, K-projective and ordinary module-adjunction hits do not give the product-Hom scalar chain isomorphism for these half bounds.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"HomComplex\", \"TensorProduct\"",
+   "results": "[loogle] OK 0 hit(s)\n Read: The complex embedding, monoidal tensor, K-projective and ordinary module-adjunction hits do not give the product-Hom scalar chain isomorphism for these half bounds.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "[Hh]om[Cc]omplex.*(baseChange|extendScalars|tensor)|pseudo.?coherent|RHom",
+   "results": "[grep] OK 25 hit(s)\n  {\"file\": \"Mathlib/Algebra/Algebra/Unitization.lean\", \"line\": \"413\", \"text\": \"def inrHom : A →ₗ[S] Unitization R A where\"}\n  {\"file\": \"Mathlib/Algebra/Algebra/Unitization.lean\", \"line\": \"419\", \"text\": \"lemma inrHom_injective : Function.Injective (inrHom S R A) := Unitization.inr_injective\"}\n  {\"file\": \"Mathlib/Algebra/Colimit/DirectLimit.lean\", \"line\": \"98\", \"text\": \"variable [∀ i j h, StarHomClass (T h) (G i) (G j)] [∀ i, StarHomClass (H i) (G i) C]\"}\n  {\"file\": \"Mathlib/Algebra/Colimit/DirectLimit.lean\", \"line\": \"115\", \"text\": \"variable [∀ i, InvolutiveStar (G i)] [∀ i j h, StarHomClass (T h) (G i) (G j)]\"}\n  {\"file\": \"Mathlib/Algebra/Colimit/DirectLimit.lean\", \"line\": \"162\", \"text\": \"variable [∀ i, StarMul (G i)] [∀ i j h, StarHomClass (T h) (G i) (G j)]\"}\n  {\"file\": \"Mathlib/Algebra/Colimit/DirectLimit.lean\", \"line\": \"186\", \"text\": \"instance [Star R] [∀ i, Star (G i)] [∀ i j h, StarHomClass (T h) (G i) (G j)]\"}\n  {\"file\": \"Mathlib/Algebra/Colimit/DirectLimit.lean\", \"line\": \"246\", \"text\": \"variable [∀ i, StarAddMonoid (G i)] [∀ i j h, StarHomClass (T h) (G i) (G j)]\"}\n  {\"file\": \"Mathlib/Algebra/TrivSqZeroExt/Basic.lean\", \"line\": \"389\", \"text\": \"def inrHom [Semiring R] [AddCommMonoid M] [Module R M] : M →ₗ[R] tsze R M :=\"}\n  {\"file\": \"Mathlib/Algebra/TrivSqZeroExt/Basic.lean\", \"line\": \"923\", \"text\": \"    (hinr : f.toLinearMap.comp (inrHom R M |>.restrictScalars S) =\"}\n  {\"file\": \"Mathlib/Algebra/TrivSqZeroExt/Basic.lean\", \"line\": \"924\", \"text\": \"      g.toLinearMap.comp (inrHom R M |>.restrictScalars S)) : f = g :=\"}\n  {\"file\": \"Mathlib/Algebra/TrivSqZeroExt/Basic.lean\", \"line\": \"993\", \"text\": \"theorem lift_comp_inrHom (f : R →ₐ[S] A) (g : M →ₗ[S] A)\"}\n  {\"file\": \"Mathlib/Algebra/TrivSqZeroExt/Basic.lean\", \"line\": \"997\", \"text\": \"    (lift f g hg hfg hgf).toLinearMap.comp (inrHom R M |>.restrictScalars S) = g :=\"}\n  {\"file\": \"Mathlib/NumberTheory/Padics/Measure/Basic.lean\", \"line\": \"230\", \"text\": \"  apply denseRange_tensorHom.equalizer (by fun_prop) (by fun_prop) (funext fun h ↦ ?_)\"}\n  {\"file\": \"Mathlib/NumberTheory/NumberField/CanonicalEmbedding/Basic.lean\", \"line\": \"410\", \"text\": \"    ← OrderHom.Subtype.val_coe, map_finset_sup', OrderHom.Subtype.val_coe]\"}\n  {\"file\": \"Mathlib/Algebra/Order/Archimedean/Class.lean\", \"line\": \"34\", \"text\": \"* `ArchimedeanClass.orderHom` and `MulArchimedeanClass.orderHom` are `OrderHom` over\"}\n  {\"file\": \"Mathlib/Algebra/Order/Archimedean/Class.lean\", \"line\": \"155\", \"text\": \"/-- An `OrderMonoidHom` can be made to an `OrderHom` between their `MulArchimedeanOrder`. -/\"}\n  {\"file\": \"Mathlib/Algebra/Order/Archimedean/Class.lean\", \"line\": \"156\", \"text\": \"@[to_additive /-- An `OrderAddMonoidHom` can be made to an `OrderHom` between their\"}\n  {\"file\": \"Mathlib/Algebra/Order/Archimedean/Class.lean\", \"line\": \"158\", \"text\": \"def orderHom (f : M →*o N) : MulArchimedeanOrder M →o MulArchimedeanOrder N where\"}\n  {\"file\": \"Mathlib/Algebra/Order/Archimedean/Class.lean\", \"line\": \"163\", \"text\": \"    exact ⟨n, OrderHomClass.monotone f hn⟩\"}\n  {\"file\": \"Mathlib/NumberTheory/NumberField/Cyclotomic/Galois.lean\", \"line\": \"116\", \"text\": \"  let τ := IsFractionRing.stabilizerHom Gal(K/ℚ) (Ideal.span {(p : ℤ)}) P\"}\n  {\"file\": \"Mathlib/NumberTheory/NumberField/Cyclotomic/Galois.lean\", \"line\": \"127\", \"text\": \"  have h₁ := IsFractionRing.stabilizerHom_apply_apply_mk Gal(K/ℚ) (Ideal.span {(p : ℤ)}) P\"}\n  {\"file\": \"Mathlib/Algebra/Order/Archimedean/Hom.lean\", \"line\": \"38\", \"text\": \"      (lt_asymm ((OrderHomClass.mono g).reflect_lt hg) <|\"}\n  {\"file\": \"Mathlib/Algebra/Order/Archimedean/Hom.lean\", \"line\": \"39\", \"text\": \"          (OrderHomClass.mono f).reflect_lt hf).elim⟩\"}\n  {\"file\": \"Mathlib/Algebra/Lie/LieTheorem.lean\", \"line\": \"67\", \"text\": \"    simp only [OrderHom.coe_mk, Submodule.map_span, toEnd_apply_apply, U']\"}\n  {\"file\": \"Mathlib/Algebra/Lie/LieTheorem.lean\", \"line\": \"73\", \"text\": \"    simp only [OrderHom.coe_mk, U', Submodule.map_span, Submodule.span_le, Set.image_subset_iff]\"}\n Read: The complex embedding, monoidal tensor, K-projective and ordinary module-adjunction hits do not give the product-Hom scalar chain isomorphism for these half bounds.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Hom complexes from bounded above finite projective sources to bounded below targets commute with scalar extension without flatness",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"ModuleCat.preservesFiniteLimits_extendScalars_of_flat\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Descent\", \"type\": \"(hf : f.Flat) : PreservesFiniteLimits (extendScalars.{_, _, u} f)\", \"doc\": \"Given a flat ring homomorphism $ f : R \\\\to S $ between commutative rings, the scalar extension functor $ \\\\text{Mod}_R \\\\to \\\\text{Mod}_S $ induced by $ f $ preserves finite limits in the category of mod\"}\n  {\"name\": \"ModuleCat.ExtendRestrictScalarsAdj.HomEquiv.fromExtendScalars_hom_apply\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.ChangeOfRings\", \"type\": \"∀ {R : Type u₁} {S : Type u₂} [inst : CommRing R] [inst_1 : CommRing S] (f : R →+* S) {X : ModuleCat R}\\n  {Y : ModuleCat S} (g : X ⟶ (ModuleCat.restrictScalars f).obj Y)\\n  (z : TensorProduct R ↑((ModuleCat.restrictScalars f).obj (ModuleCat.of S S)) ↑X),\\n  (ModuleCat.Hom.hom (ModuleCat.ExtendRestrict\", \"doc\": \"Given commutative rings $ R $ and $ S $, a ring homomorphism $ f : R \\to S $, an $ R $-module $ X $, and an $ S $-module $ Y $, there is a natural bijection between $ R $-linear maps from $ X $ to the \"}\n  {\"name\": \"CochainComplex.HomComplex.Cochain.shift_smul\", \"module\": \"Mathlib.Algebra.Homology.HomotopyCategory.HomComplexShift\", \"type\": \"(a : ℤ) (x : R) : (x • γ).shift a = x • (γ.shift a)\", \"doc\": \"For any integer $a$ and scalar $x$ in a ring $R$, the shift operation on cochains in the homomorphism complex of two cochain complexes commutes with scalar multiplication. Specifically, shifting a coc\"}\n  {\"name\": \"ModuleCat.ExtendRestrictScalarsAdj.homEquiv\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.ChangeOfRings\", \"type\": \"{R : Type u₁} →\\n  {S : Type u₂} →\\n    [inst : CommRing R] →\\n      [inst_1 : CommRing S] →\\n        (f : R →+* S) →\\n          {X : ModuleCat R} →\\n            {Y : ModuleCat S} → ((ModuleCat.extendScalars f).obj X ⟶ Y) ≃ (X ⟶ (ModuleCat.restrictScalars f).obj Y)\", \"doc\": \"For commutative rings $ R $ and $ S $ with a ring homomorphism $ f : R → S $, there is a natural bijection between $ S $-linear maps from the extension of scalars of an $ R $-module $ X $ to an $ S $-\"}\n  {\"name\": \"ModuleCat.ExtendRestrictScalarsAdj.HomEquiv.toRestrictScalars\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.ChangeOfRings\", \"type\": \"{R : Type u₁} →\\n  {S : Type u₂} →\\n    [inst : CommRing R] →\\n      [inst_1 : CommRing S] →\\n        (f : R →+* S) →\\n          {X : ModuleCat R} →\\n            {Y : ModuleCat S} → ((ModuleCat.extendScalars f).obj X ⟶ Y) → (X ⟶ (ModuleCat.restrictScalars f).obj Y)\", \"doc\": \"For commutative rings $ R $ and $ S $ with a ring homomorphism $ f : R → S $, there is a natural bijection between $ R $-linear maps from an $ R $-module $ X $ to the restriction of scalars of an $ S \"}\n  {\"name\": \"CochainComplex.HomComplex.Cochain.rightUnshift_smul\", \"module\": \"Mathlib.Algebra.Homology.HomotopyCategory.HomComplexShift\", \"type\": \"{n' a : ℤ} (γ : Cochain K (L⟦a⟧) n') (n : ℤ) (hn : n' + a = n) (x : R) :\\n  (x • γ).rightUnshift n hn = x • γ.rightUnshift n hn\", \"doc\": \"For cochain complexes $K$ and $L$ in a preadditive category $\\\\mathcal{C}$, an integer $a$, a cochain $\\\\gamma$ of degree $n'$ in the homomorphism complex $\\\\text{Hom}(K, L[a])$, and a scalar $x \\\\in R$, \"}\n  {\"name\": \"CochainComplex.HomComplex.δ_units_smul\", \"module\": \"Mathlib.Algebra.Homology.HomotopyCategory.HomComplex\", \"type\": \"(k : Rˣ) (z : Cochain F G n) : δ n m (k • z) = k • δ n m z\", \"doc\": \"For any unit $k$ in the semiring $R$ and any cochain $z$ in degree $n$ of the homomorphism complex $\\\\text{Hom}(F, G)$ between cochain complexes $F$ and $G$ in an $R$-linear category, the differential \"}\n  {\"name\": \"CochainComplex.HomComplex.Cochain.leftShift_smul\", \"module\": \"Mathlib.Algebra.Homology.HomotopyCategory.HomComplexShift\", \"type\": \"(a n' : ℤ) (hn' : n + a = n') (x : R) : (x • γ).leftShift a n' hn' = x • γ.leftShift a n' hn'\", \"doc\": \"For any scalar $x$ in a ring $R$ and cochain $\\\\gamma$ in the homomorphism complex $\\\\text{Hom}(K, L)$ between cochain complexes $K$ and $L$ in a preadditive category, and for integers $a$ and $n'$ sati\"}\n Read: The complex embedding, monoidal tensor, K-projective and ordinary module-adjunction hits do not give the product-Hom scalar chain isomorphism for these half bounds.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "[Hh]om[Cc]omplex.*(baseChange|extendScalars|tensor)|pseudo.?coherent",
+   "results": "{\"t\": \"2026-10-22T07:43:10Z\", \"tool\": \"grep\", \"query\": \"[Hh]om[Cc]omplex.*(baseChange|extendScalars|tensor)|pseudo.?coherent\", \"sub\": \"Algebra\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"} Precise scoped grep returned zero hits; the broad grep also matched unrelated names ending in rHom.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Scalar extension of product Hom complexes for bounded above finite free source and bounded below target is an isomorphism",
+   "results": "Hits: HomologicalComplex.extendSingleIso, HomologicalComplex.extendSingleIso_inv_f_assoc, HomologicalComplex.extendSingleIso_hom_f_assoc, HomologicalComplex.extendSingleIso_hom_f, ComplexShape.Embedding.isIso_liftExtend_f_iff, HomologicalComplex.extendXIso, HomologicalComplex.extendCyclesIso, ComplexShape.Embedding.liftExtendfArrowIso; inspected the returned types and relevant Mathlib sources. No result states the product-Hom chain comparison for these opposite bounds. Module Hom base change and componentwise complex-isomorphism assembly are only constituent facts.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"HomComplex\", \"baseChange\"",
+   "results": "Hits: ; inspected the returned types and relevant Mathlib sources. No result states the product-Hom chain comparison for these opposite bounds. Module Hom base change and componentwise complex-isomorphism assembly are only constituent facts.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "HomComplex.*(baseChange|extendScalars)|half[Bb]ounded|hom.*[Ss]calar",
+   "results": "Hits: Mathlib/Algebra/Homology/ShortComplex/Linear.lean; inspected the returned types and relevant Mathlib sources. No result states the product-Hom chain comparison for these opposite bounds. Module Hom base change and componentwise complex-isomorphism assembly are only constituent facts.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Base change isomorphism for Hom complexes of bounded above finite free and bounded below complexes",
+   "results": "Hits: IsBaseChange.linearMapLeftRightHom.congr_simp, IsBaseChange.linearMapLeftRight, IsBaseChange.linearMapLeftRightHom, HomologicalComplex.Hom.isoOfComponents.congr_simp, HomologicalComplex.Hom.isoOfComponents, HomologicalComplex₂.total.mapIso_hom, HomologicalComplex.Hom.isoOfComponents_hom_f, HomologicalComplex.Hom.isoApp_hom; inspected the returned types and relevant Mathlib sources. No result states the product-Hom chain comparison for these opposite bounds. Module Hom base change and componentwise complex-isomorphism assembly are only constituent facts.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Extension of scalars commutes with the total internal Hom of cochain complexes when only finitely many source target degree pairs contribute",
+   "results": "Hits: CochainComplex.HomComplex.Cochain.comp_units_smul, CochainComplex.HomComplex.Cochain.units_smul_comp, CochainComplex.HomComplex.instModuleCochain, CochainComplex.HomComplex.Cochain.toSingleMk_postcomp, CochainComplex.HomComplex.Cochain.fromSingleMk_postcomp, CochainComplex.HomComplex.Cochain.fromSingleMk_precomp, CochainComplex.HomComplex.Cochain.toSingleMk_precomp, CochainComplex.instLinearIntFunctorSingleFunctors; inspected the returned types and relevant Mathlib sources. No result states the product-Hom chain comparison for these opposite bounds. Module Hom base change and componentwise complex-isomorphism assembly are only constituent facts.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-pseudocoherent-rhom-flat-base-change",
+  "date": "2026-10-22",
+  "group": "NC"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Proof (1)--(2), semistable-alteration input in the nearby-cycle branch: ILO Exposé X, Theorem 3.4, Step 3, invoking Temkin 2010, Theorems 1.5 and 1.1 for a semistable multipointed modification. Temkin proof component: Marked dualizing line bundle and contracted-component degrees. Auxiliary input: Local complete-intersection determinant adjunction underlying the marked dualizing construction, before the marking is inserted. More precisely: coherent relative-duality polynomial-chart input; Algebraic upper shriek: polynomial models, coinduction, composition and flat base change. Technical input for the algebraic calculus: bounded-below flat scalar extension of derived Hom, before applying polynomial models. Re-split component: degree-dependent stupid-truncation finite-support calculation (returned step 6)",
+   "via": [
+    "lem-trf-pseudocoherent-rhom-flat-base-change",
+    "lem-trf-algebraic-shriek-calculus",
+    "lem-trf-relative-duality-polynomial-chart",
+    "lem-trf-flat-lci-canonical-adjunction",
+    "lem-trf-marked-nodal-dualizing-degrees",
+    "lem-trf-temkin-stable-modification",
+    "lem-trf-stable-modification-flat-curve-pair",
+    "lem-trf-dejong-relative-marked-semistable",
+    "lem-trf-relative-marked-nodal-reduction",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-trf-half-bounded-hom-scalar-isomorphism",
+  "worker": "stage1",
+  "summary": "Q110 supplies six proof steps and reuses existing normalized scalar-Hom, finite-projective and bounded degree-assembly results. The degree-dependent restriction and zero insertion, all hypotheses of bounded assembly, inverse differential equation and naturality are explicit. No statement change and no new nodes.",
+  "blueprint": "Nearest ancestor lem-trf-local-term-locality, proof (1)--(2), specialization/nearby-cycle duality branch recorded in blueprint.from.place: the pseudocoherent RHom flat-base-change auxiliary calculation, specifically the degree-dependent finite-support comparison of its step 3. The latest blueprint has no separate statement of this auxiliary chain-level result.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-singleton-site-module-comparison",
+    "why": "Generic equivalence between ordinary modules and the punctual-site model used by the scalar-Hom inputs; no node in sk-i-curve-zero states it."
+   },
+   {
+    "node": "lem-pc-normalized-ring-hom-extension",
+    "why": "Generic normalized chain map for arbitrary complexes; the unit has no scalar-Hom chain construction."
+   },
+   {
+    "node": "lem-pc-finite-projective-ring-hom-extension",
+    "why": "Generic one-module tensor-Hom isomorphism applied to finite free truncation terms; no such algebraic input occurs in this unit."
+   },
+   {
+    "node": "lem-pc-bounded-ring-hom-extension-degree",
+    "why": "Generic finite-support assembly applied separately to each bounded stupid truncation; it replaces no trace-formula unit step."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-singleton-site-module-comparison",
+  "lem-pc-normalized-ring-hom-extension",
+  "lem-pc-finite-projective-ring-hom-extension",
+  "lem-pc-bounded-ring-hom-extension-degree"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q110-ce49be38b",
+  "group": "Q110",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q110-ce49be38b (reviewer sub-agent of L); spot-checked: Read the item, all 6 steps and every cited statement, and Stacks 0ATK(3) in more-algebra.tex. This is a first split: live is unsplit, there is no repair note, and the statement is unchanged. There are no new nodes. The statement is true: degree n has only the finitely many factors a-n<=p<=b, and Hom out of finite free modules commutes with S⊗- with no flatness needed. Checked on P=0, N=0, a-n>b, the single surviving index, non-flat Z->Z/2 and zero rings. Step 1: singleton-site model; the flip S⊗- vs -⊗S is handled explicitly, so the normalized-χ node applies. Step 2: N^{p+n}=0 for p<c, so restriction and zero-insertion are mutually inverse (elementary). Step 3: finite free gives finitely generated and projective, so the finite-projective node gives g_p for every p, with no condition on N or S. Step 4: t_n=r_Sχ^nF(r_R^{-1}) meets every hypothesis of the bounded-degree node (support [min(c,b),b], no chain-map hypothesis), so it is an iso; it is identified with the normalized map for P_c by pure-tensor generation and product coordinates. Step 5: the inverse differential identity is correct. Step 6: I recomputed both naturality paths: st⊗βfα(x). proof_deps equals the union of uses. No duplicate: the 0ATK hits are bounded or perfect versions. Five Mathlib searches are recorded. The four declared tool_uses (singleton-site comparison, normalized χ, finite-projective, bounded-degree assembly) are generic algebra and accepted. The item is strictly smaller than its parent lem-trf-pseudocoherent-rhom-flat-base-change, step 3. No SGA."
+ },
+ "lean": {
+  "module": "Sheaf.Algebra.Homology.HalfBoundedHomScalarIsomorphism",
+  "declaration": "CategoryTheory.halfBoundedHomScalar_isomorphism",
+  "declarations": [
+   "CategoryTheory.halfBoundedHomScalarMap",
+   "CategoryTheory.halfBoundedHomScalarMap_naturality",
+   "CategoryTheory.halfBoundedHomScalar_isomorphism"
+  ],
+  "file": "lean/Sheaf/Algebra/Homology/HalfBoundedHomScalarIsomorphism.lean",
+  "statement": "theorem halfBoundedHomScalar_isomorphism {R S : Type u} [CommRing R] [CommRing S] (φ : R →+* S) (F : RingSiteModules R ⥤ RingSiteModules S) (h : ∀ M, F.obj M = SheafOfModules.changeOfRings (ringSiteMap φ) M) (hm : ∀ {M N} (f : M ⟶ N), F.map f = eqToHom (h M) ≫ SheafOfModules.changeOfRingsHom (ringSiteMap φ) M f ≫ eqToHom (h N).symm) (hF : F.Additive) (P N : CochainComplex (RingSiteModules R) ℤ) (a b : ℤ) (hP : ∀ p : ℤ, b < p → IsZero (P.X p)) (hfree : ∀ p : ℤ, Module.Free R ((P.X p).val.obj (op ⟨PUnit.unit⟩))) (hfinite : ∀ p : ℤ, Module.Finite R ((P.X p).val.obj (op ⟨PUnit.unit⟩))) (hN : ∀ q : ℤ, q < a → IsZero (N.X q)) : ∃ e : (ringExtensionComplex F hF).obj (homComplex (R := CochainComplex.onePointRingSheaf R) P N) ≅ homComplex (R := CochainComplex.onePointRingSheaf S) ((ringExtensionComplex F hF).obj P) ((ringExtensionComplex F hF).obj N), e.hom = halfBoundedHomScalarMap φ F h hm hF P N ∧ (∀ n : ℤ, IsIso ((halfBoundedHomScalarMap φ F h hm hF P N).f n)) ∧ (∀ n : ℤ, ∃ rR : (homComplex (R := CochainComplex.onePointRingSheaf R) P N).X n ≅ (homComplex (R := CochainComplex.onePointRingSheaf R) (P.stupidTrunc (ComplexShape.embeddingUpIntGE (a - n))) N).X n, ∃ rS : (homComplex (R := CochainComplex.onePointRingSheaf S) ((ringExtensionComplex F hF).obj P) ((ringExtensionComplex F hF).obj N)).X n ≅ (homComplex (R := CochainComplex.onePointRingSheaf S) ((ringExtensionComplex F hF).obj (P.stupidTrunc (ComplexShape.embeddingUpIntGE (a - n)))) ((ringExtensionComplex F hF).obj N)).X n, rR.hom = (((homComplexFunctor (R := CochainComplex.onePointRingSheaf R)).map (P.ιStupidTrunc (ComplexShape.embeddingUpIntGE (a - n))).op).app N).f n ∧ rS.hom = (((homComplexFunctor (R := CochainComplex.onePointRingSheaf S)).map ((ringExtensionComplex F hF).map (P.ιStupidTrunc (ComplexShape.embeddingUpIntGE (a - n)))).op).app ((ringExtensionComplex F hF).obj N)).f n ∧ (halfBoundedHomScalarMap φ F h hm hF P N).f n ≫ rS.hom = F.map rR.hom ≫ (halfBoundedHomScalarMap φ F h hm hF (P.stupidTrunc (ComplexShape.embeddingUpIntGE (a - n))) N).f n ∧ (∀ (p : ℤ) (_hp : p < a - n) (U : (Discrete PUnit.{u + 1})ᵒᵖ) (f : (homComplex (R := CochainComplex.onePointRingSheaf R) (P.stupidTrunc (ComplexShape.embeddingUpIntGE (a - n))) N).X n |>.val.obj U) (x : (P.X p).val.obj U), ringHomEvaluate P N n p U (rR.inv.val.app U f) x = 0) ∧ (∀ (p : ℤ) (_hp : p < a - n) (U : (Discrete PUnit.{u + 1})ᵒᵖ) (f : (homComplex (R := CochainComplex.onePointRingSheaf S) ((ringExtensionComplex F hF).obj (P.stupidTrunc (ComplexShape.embeddingUpIntGE (a - n)))) ((ringExtensionComplex F hF).obj N)).X n |>.val.obj U) (x : (((ringExtensionComplex F hF).obj P).X p).val.obj U), ringHomEvaluate ((ringExtensionComplex F hF).obj P) ((ringExtensionComplex F hF).obj N) n p U (rS.inv.val.app U f) x = 0))",
+  "branch": "newtargets-dag",
+  "by": "Q49",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-2c083dbf4",
+  "group": "Q49",
+  "result": "pass",
+  "note": "Only the item's lean record changes vs live; lean.statement is verbatim equal to the file. Clause-by-clause match: arbitrary φ:R→+*S with the dependency's F/h/hm/hF; strict bounds hP (b<p) and hN (q<a); hfree+hfinite = finite free at the unique object. Main theorem: ∃ complex iso e with e.hom = normalized χ (.choose of normalizedRingHomExtension_exists, same pinned convention as PerfectRHomBaseChangeMap homMap and unique by pure-tensor generation), plus ∀n IsIso. rR/rS are fixed to homComplexFunctor.map of ιStupidTrunc for embeddingUpIntGE (a-n) (direction checked), and the conjugation square identifies χ^n with χ for P_c. Naturality is stated for arbitrary α:P'→P, β:N→N'. No flatness/Noetherian/K-flat binders. Edge cases c>b, zero ring, non-flat map, zero P/N covered. No duplicate def, no hollow def, theorems sorry only, docstrings carry source and blueprint. Minor: the zero-insertion conjuncts are automatically true (target terms zero); harmless."
+ }
+}

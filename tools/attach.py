@@ -81,7 +81,8 @@ def main() -> int:
         who = json.loads(cl.read_text()).get("who") if cl.exists() else None
         if who != g: print(f"REFUSED: the claim on {nid} is held by {who}, not by {g}"); return 1
         if d.get("status") not in ("unsplit", "imported"): print(f"REFUSED: {nid} has status {d.get('status')}"); return 1
-        cur = ((d.get("lean_audit") or {}).get(BRANCH) or {})
+        cur = (d.get("lean_audit") if isinstance(d.get("lean_audit"), dict) else {}).get(BRANCH)
+        cur = cur if isinstance(cur, dict) else {}
         if cur.get("state") not in (None, "none"): print(f"REFUSED: {nid} already has the Lean state {cur.get('state')} on {BRANCH} ({[x.get('name') for x in cur.get('decls') or []][:4]}); this is the maintainer's to sort out"); return 1
         if dry: print(f"WOULD ATTACH {nid}: " + ", ".join(f"{r['name']} ({r['module']}:{r['lines'][0]})" for r in recs)); return 0
         day = time.strftime("%Y-%m-%d %H:%M UTC", time.gmtime())
@@ -108,6 +109,9 @@ def main() -> int:
             h = git("rev-parse", "--short", "HEAD").stdout.strip()
     subprocess.run([sys.executable, str(ROOT / "tools" / "claim.py"), "release", g, nid, f"attached by tools/attach.py at {h}: {recs[0]['name']}"], capture_output=True, text=True)
     print(f"ATTACHED {nid} at {h}")
+    # the human, 2026-10-25: the attached node leaves the queue at once (tools/queue_mark.py done)
+    subprocess.run([sys.executable, str(ROOT / "tools" / "queue_mark.py"), "done", "-", nid, "--note", f"attached {h}"],
+                   capture_output=True, text=True, timeout=60)
     # 2026-10-15 (launcher): the queue reads the live DAG; copy the attachment there too (tools/nt_promote_attach.py).
     pr = subprocess.run([sys.executable, str(ROOT / "tools" / "nt_promote_attach.py"), nid], capture_output=True, text=True)
     print((pr.stdout + pr.stderr).strip())

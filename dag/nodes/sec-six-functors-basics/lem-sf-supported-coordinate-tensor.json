@@ -1,0 +1,135 @@
+{
+ "id": "lem-sf-supported-coordinate-tensor",
+ "kind": "statement",
+ "title": "Tensor compatibility of a transported common-coordinate comparison",
+ "statement": "Let $C$ be a Grothendieck abelian symmetric monoidal closed coefficient category, with tensor additive in each variable, functorial flat resolutions, and every etale inverse-image functor preserving flat objects. Write $D_C(T)$ for the ordinary unbounded derived category of $C$-valued sheaves on the small etale site of a scheme $T$, with its canonical derived tensor. This includes $C=\\operatorname{ModuleCat}(A)$ for any commutative ring $A$, with the operations of [def-kun-derived-tensor] and [lem-kun-inverse-image-monoidal]. Let $f:X\\to Y$ be any morphism of schemes, $L,K\\in D_C(Y)$, $B\\in D_C(X)$ and $e:B\\simeq f^*L$. Put $U=f^*$, $R=p_1^*$, $V=p_2^*$ for the self-product, $Q=UK$ and $M=B\\otimes Q$. Let $\\kappa:RU\\simeq VU$ be the canonical comparison obtained from the two pullback composition isomorphisms, and $\\delta_U,\\delta_R,\\delta_V$ the canonical tensor comparisons. Define $c_B=R(e);\\kappa_L;V(e^{-1})$ (coefficientCoordinate). Define $e_K=(e\\otimes1_Q);\\delta_U(L,K)^{-1}$ and $c_M=R(e_K);\\kappa_{L\\otimes K};V(e_K^{-1})$ (tensorCoordinate). Then\n$$ c_M;\\delta_V(B,Q)=\\delta_R(B,Q);(c_B\\otimes\\kappa_K). $$\nNo self-symmetry hypothesis on $L$, properness, direct image, projection formula or scalar trace is assumed. The module also records the canonical tensor split $d=\\delta_R(B,Q);(RB\\otimes\\kappa_K)$ and the cyclic isomorphism $(E\\otimes VQ)\\otimes VB\\simeq V(B\\otimes Q)\\otimes E$, obtained by associating, swapping VQ with VB, undoing the V tensor comparison, and swapping E past V(B tensor Q). These are composites of the same canonical tensor data, with no asserted projection compatibility.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-geo-p1-adjunction/thm-amb-p1-adjunction.proof.md",
+  "place": "Second triangle: transport the common coefficient through the two pullbacks and their tensor comparisons, before using even self-symmetry."
+ },
+ "stmt_deps": [
+  "def-kun-derived-tensor",
+  "lem-kun-inverse-image-monoidal",
+  "lem-kun-tensor-sym"
+ ],
+ "proof": [
+  {
+   "text": "Use the existing native theorem derivedSquareUpperStarIso_hom_tensor for the canonical reversed self-product square. This is monoidality of the two pullback composition comparisons, with exactly the general coefficient hypotheses of the Lean theorem; its module-coefficient specialization is the tensor compatibility in lem-kun-derived-pullback-composition-monoidal. Precompose by R of the inverse f tensor comparison. Functoriality and inverse identities cancel R of the f tensor comparison.",
+   "uses": [
+    "lem-kun-derived-pullback-composition-monoidal"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Conjugate by e tensor the identity on Q and its inverse. Naturality of the R and V tensor comparisons moves these to R(e) tensor the identity and V(e inverse) tensor the identity. Functoriality of the right tensor factor and whisker exchange identify the composite with cB tensor kappa_K. The resulting full-tensor conjugation is cM by its definition. This is conjugate_tensor followed by the native square equation.",
+   "uses": [
+    "lem-kun-inverse-image-monoidal"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-geo-p1-adjunction/thm-amb-p1-adjunction.proof.md",
+  "place": "Canonical inverse-image tensor comparison in the common-coefficient part of the second triangle; fully proved by U4."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A monoidal comparison between two compositions of inverse image functors respects tensor products after conjugating by a coefficient isomorphism",
+   "results": "8 hits: generic monoidal tensor comparisons and transport, including Functor.Monoidal.commTensorRight, commTensorLeft and muNatIso. None states the canonical etale coordinate conjugation.",
+   "date": "2026-10-27",
+   "verdict": "No exact match."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A monoidal natural isomorphism between two compositions of pullback functors respects tensor after conjugation by a coefficient isomorphism",
+   "results": "8 hits concerning tensor products in over categories, including Over.mu_pullback_left_snd and ChosenPullbacksAlong.Over.tensorHom_left. None concerns the derived etale coordinate comparison.",
+   "date": "2026-10-27",
+   "verdict": "No exact match; use the native square tensor equation and naturality."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Iso.hom_inv_id",
+   "results": "Iso.hom_inv_id and Pseudofunctor.DescentData.pullFunctorEquivalence_counitIso. The first is the inverse cancellation used in the proof.",
+   "date": "2026-10-27",
+   "verdict": "Generic supporting inverse identity only."
+  },
+  {
+   "tool": "grep",
+   "query": "derivedSquareUpperStarIso_hom_tensor|leftDerivedUpperStarTensorIso_hom_naturality_left",
+   "results": "0 Mathlib hits. The project source provides derivedSquareUpperStarIso_hom_tensor and pullback comparison naturality, which are used directly.",
+   "date": "2026-10-27",
+   "verdict": "The native square lemma is a component, not this conjugated statement."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.SfSupportedSecondExtraction",
+  "date": "2026-10-27",
+  "group": "U4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "Common-coefficient transport through the tensor comparisons, before the self-symmetry argument; inherited null ancestor.",
+   "via": [
+    "lem-sf-supported-coefficient-braid",
+    "lem-sf-supported-second-extraction",
+    "lem-sf-supported-trace-contractions",
+    "lem-sf-diagonal-kernel-integral-triangles",
+    "lem-sf-affine-base-p1-trace-adjunction",
+    "lem-sf-affine-line-canonical-duality",
+    "lem-sf-smooth-dualizing-complex-invertible"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-prop-sf-rf-shriek-preservation",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.SfSupportedCoordinateTensor",
+  "file": "lean/Sheaf/AlgebraicGeometry/SfSupportedCoordinateTensor.lean",
+  "declaration": "AlgebraicGeometry.Etale.SupportedTrace.coordinateTensor",
+  "declarations": [
+   "AlgebraicGeometry.Etale.SupportedTrace.coefficientSplit",
+   "AlgebraicGeometry.Etale.SupportedTrace.cyclicShuffle",
+   "AlgebraicGeometry.Etale.SupportedTrace.coefficientCoordinate",
+   "AlgebraicGeometry.Etale.SupportedTrace.tensorCoordinate",
+   "AlgebraicGeometry.Etale.SupportedTrace.coordinateTensor"
+  ],
+  "statement": "theorem coordinateTensor {X Y : Scheme.{u}} (f : X ⟶ Y)\n    (L K : _root_.DerivedCategory (Sheaf Y.smallEtaleTopology C))\n    {B : _root_.DerivedCategory (Sheaf X.smallEtaleTopology C)}\n    (e : B ≅ (upperStar C f).leftDerivedFunctor.obj L) :\n    (tensorCoordinate C f L K e).hom ≫\n        (leftDerivedUpperStarTensorIso C (pullback.snd f f) B\n          ((upperStar C f).leftDerivedFunctor.obj K)).hom =\n      (leftDerivedUpperStarTensorIso C (pullback.fst f f) B\n        ((upperStar C f).leftDerivedFunctor.obj K)).hom ≫\n        ((coefficientCoordinate C f L e).hom ⊗ₘ\n          ((derivedSquareUpperStarIso C\n            (CommSq.mk (pullback.condition (f := f) (g := f)).symm)).app K).hom)",
+  "branch": "sheaf-dag",
+  "by": "U4",
+  "date": "2026-10-27"
+ },
+ "proof_deps": [
+  "lem-kun-derived-pullback-composition-monoidal",
+  "lem-kun-inverse-image-monoidal"
+ ],
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U4",
+  "result": "pass",
+  "landing": "20261027T034752-L-3684687",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U4",
+  "result": "pass",
+  "landing": "20261027T034752-L-3684687",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

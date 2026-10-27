@@ -1,0 +1,137 @@
+{
+ "id": "def-sfb-projectivized-gm-representation",
+ "kind": "definition",
+ "title": "Projectivization of a rational multiplicative-group representation",
+ "status": "split",
+ "import_flags": [],
+ "statement": "Let $F$ be a field [def-weil-field] and $n\\geq0$. Write $N=\\{0,\\ldots,n\\}$ and let $\\rho:\\mathbf G_{m,F}\\to\\mathrm{GL}_{N,F}$ be a group-scheme homomorphism [def-sc-group-scheme, def-sc-gm-ga, def-sc-general-linear-group], a rational representation on $F^N$. Let $P=\\operatorname{Proj}F[z_i:i\\in N]$, the projective space of lines in $F^N$ [def-nagata-projective-space-base-change, def-sfb-diagonal-projective-action], with total-degree polynomial grading [def-weil-pbc-mv-polynomial-ring]. The universal Laurent-valued point of $\\mathbf G_m$ gives an invertible matrix $M=(M_{ij})$ over $F[t,t^{-1}]$ via $\\rho$. Define the coefficient-fixing graded coordinate substitution $c:F[z_i]\\to F[t,t^{-1}][z_i]$ by $c(z_i)=\\sum_jM_{ij}z_j$. An algebraic action $a:\\mathbf G_m\\times_F P\\to P$, satisfying the unit and associativity identities, is the projectivization of $\\rho$ if, under the canonical comparison $\\operatorname{Proj}(F[t,t^{-1}][z_i])\\simeq\\mathbf G_m\\times_F P$, its action morphism equals $\\operatorname{Proj}(c)$. The comparison is specified by its projections: the first is the structural morphism to $\\operatorname{Spec}F[t,t^{-1}]$ and the second is Proj of coefficient inclusion $F[z_i]\\to F[t,t^{-1}][z_i]$. This specifies the line action on every commutative test algebra, not just field-valued points.",
+ "stmt_deps": [
+  "def-weil-field",
+  "def-sc-group-scheme",
+  "def-sc-gm-ga",
+  "def-sc-general-linear-group",
+  "def-nagata-projective-space-base-change",
+  "def-weil-pbc-mv-polynomial-ring",
+  "def-sfb-diagonal-projective-action"
+ ],
+ "source": {
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "7.26 (linear action on the space of lines) and Lemma 13.46, printed p.272; polynomial homogeneous-coordinate description of the induced action."
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "The projective scheme action induced by a rational multiplicative group representation via matrix homogeneous coordinate substitution",
+   "results": "{\"t\": \"2026-10-24T08:11:33Z\", \"tool\": \"leansearch\", \"query\": \"The projective scheme action induced by a rational multiplicative group representation via matrix homogeneous coordinate substitution\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Projectivization.smul_def\", \"Projectivization.smul_mk\", \"Projectivization.instMulAction.congr_simp\", \"Projectivization.instMulAction\", \"OnePoint.smul_some_eq_ite\", \"Projectivization.generalLinearGroup_smul_def\", \"OnePoint.instGLAction\", \"Rep.ρ_hom\"], \"digest\": \"32bc8361eda44f40\"}",
+   "date": "2026-10-24",
+   "verdict": "No matching scheme action: the search returns actions on projective vector-space points over division rings or an unrelated locally-fraction predicate. Neither covers all commutative test algebras or specifies a projective scheme action."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Projectivization of a linear group scheme representation acts on projective space by homogeneous matrix coordinate substitution",
+   "results": "{\"t\": \"2026-10-24T08:11:36Z\", \"tool\": \"leanfinder\", \"query\": \"Projectivization of a linear group scheme representation acts on projective space by homogeneous matrix coordinate substitution\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Projectivization.generalLinearGroup_smul_def\", \"Projectivization.smul_def\", \"Projectivization.instMulAction\", \"Projectivization.smul_mk\", \"Projectivization.rep\", \"Projectivization.mk_rep\", \"Rep.diagonal_succ_projective\", \"Projectivization.map\"], \"digest\": \"de31f0db05d3571b\"}",
+   "date": "2026-10-24",
+   "verdict": "No matching scheme action: the search returns actions on projective vector-space points over division rings or an unrelated locally-fraction predicate. Neither covers all commutative test algebras or specifies a projective scheme action."
+  },
+  {
+   "tool": "grep",
+   "query": "projectiviz|projectivis|projective.*[Aa]ction",
+   "results": "{\"t\": \"2026-10-24T08:11:36Z\", \"tool\": \"grep\", \"query\": \"projectiviz|projectivis|projective.*[Aa]ction\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/StructureSheaf.lean\"], \"digest\": \"f81e47fa58166b5c\"}",
+   "date": "2026-10-24",
+   "verdict": "No matching scheme action: the search returns actions on projective vector-space points over division rings or an unrelated locally-fraction predicate. Neither covers all commutative test algebras or specifies a projective scheme action."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-rational-projective-attracting-cells",
+  "date": "2026-10-24",
+  "group": "Q72"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Haboush symmetric-power lifting for a trivial quotient representation. Supporting representation-theoretic input: Steinberg endomorphisms detect a nonzero fixed vector. Supporting Self-duality of rho section modules at characteristic-dependent weights. Supporting input: Positive-characteristic simplicity step, using irreducibility of the Steinberg induced module rather than assuming self-duality. Numerical input to the dimension comparison: Weyl dimension of the induced module. Supporting Integral Euler character of arbitrary flag line bundles. Section 22d, proof of Theorem 22.50, p.480: general fixed-point input, stated here in its integral equivariant form; Example 22.36, pp.473--474, for formal characters. WANTED: Nielsen 1974 general fixed-point theorem and Iversen 1976, 9.4; neither document is present. The integral formulation is an agent-supplied supporting statement. Supporting input: Section 22d, proof of Theorem 22.50, p.480: agent-supplied concentration prerequisite, not the numerical fixed-point formula itself. WANTED: Thomason, Une formule de Lefschetz en K-theorie equivariante algebrique, Duke Math. J. 53 (1986), concentration theorem; not present locally. No proof of concentration is claimed to occur in Milne. Supporting step: The concentration theorem's nonfixed-locus annihilation argument in the proof of the item. Geometric input to nonfixed-locus annihilation: invariant affine strata of the reduction, before the Laurent-coefficient and localization arguments. Supporting normal-case neighbourhood input used after passing to the invariant smooth locus, before removing one affine open in the Noetherian induction. Supporting proof input: Linearize the normal quasi-projective neighborhood by an immersion into projective space of a rational representation. Supporting line-bundle prerequisite: replace an ample invertible module by a positive tensor power carrying an algebraic G-linearization, before choosing invariant sections. Supporting Picard input: a tensor exponent uniform over the generic residue fields of all normal components, before applying the generic-line pullback criterion. Supporting base-change input: Brion Lemma 2.3, pullback Pic(G) to Pic(G_K), specialized using Remark 2.2(v). Supporting substep: Brion, On Linearization of Line Bundles, Lemma 2.3 proof, printed p.118, the Pic(G/B) and root-datum paragraph, citing Iversen 1976 Proposition 5.2 and Theorem 5.3. The explicit split Schubert-boundary basis and its scalar-extension form are the geometric input unpacked here; also Milne Lemma 18.21, printed p.392, the split affine-cell argument. The statement concerns split groups over arbitrary fields, not only algebraically closed fields. Supporting geometry: the split Bruhat stratification before the boundary-divisor argument; Milne Theorems 21.73 and 21.80. Supporting input: Theorem 13.47 and Corollary 13.49, printed pp.272--274, and the linear-action application after Lemma 13.51, p.275. Retain projectivity so that every geometric orbit has a limit, and require the fixed points to be rational, so that the affine fibres are affine spaces over F itself. The all-test-algebra formulation is the concentrator construction of Section 13g; its representing functor specifies the scalar-extension compatibility. This is the arbitrary-field form of the existing algebraically-closed-field lemma lem-sfb-projective-attracting-cells. Definition interface: projective line action of the rational representation in the hypothesis.",
+   "via": [
+    "lem-sfb-rational-projective-attracting-cells",
+    "lem-sfb-split-bruhat-affine-stratification",
+    "lem-sfb-split-flag-schubert-picard-lattice",
+    "lem-sfb-affine-group-picard-field-invariance",
+    "lem-sfb-affine-group-picard-stable-exponent",
+    "lem-sfb-normal-line-bundle-power-linearization",
+    "lem-sfb-normal-quasiprojective-equivariant-immersion",
+    "lem-sfb-sumihiro-normal-torus-affine-neighbourhood",
+    "lem-sfb-torus-invariant-affine-filtration",
+    "lem-sfb-torus-nonfixed-complement-annihilation",
+    "lem-sfb-torus-coherent-concentration",
+    "lem-sfb-torus-coherent-fixed-point-formula",
+    "lem-sfb-flag-line-euler-alternant",
+    "lem-sfb-induced-weyl-dimension-formula",
+    "lem-sfb-steinberg-induced-module-irreducible",
+    "lem-sfb-rho-section-self-duality",
+    "lem-sfb-steinberg-endomorphism-detection",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.ProjectivizedGmRepresentation",
+  "declaration": "AlgebraicGeometry.ProjectivizedGmRepresentation.IsProjectivization",
+  "declarations": [
+   "AlgebraicGeometry.ProjectivizedGmRepresentation.matrix",
+   "AlgebraicGeometry.ProjectivizedGmRepresentation.coaction",
+   "AlgebraicGeometry.ProjectivizedGmRepresentation.IsProjectivization"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/ProjectivizedGmRepresentation.lean",
+  "statement": "def IsProjectivization {F : Type u} [Field F] {n : ℕ} (rho : StandardGroupSchemes.multiplicative F ⟶ GeneralLinearGroup (ULift.{u} (Fin (n + 1))) F) (a : ModObj (StandardGroupSchemes.multiplicative F) (DiagonalProjectiveAction.space F n)) : Prop",
+  "branch": "sheaf-dag",
+  "by": "Q72",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-3745f06fa",
+  "group": "Q72",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-3745f06fa",
+  "group": "Q72",
+  "result": "pass",
+  "note": "The Lean matches the node clause by clause: hypotheses as Smooth, IsProjective, GeometricallyConnected, Nonempty, ModObj action, rho with IsMonHom, IsProjectivization, IsClosedImmersion with morphism-level equivariance; fixed subfunctor as injectivity plus image of Sigma.desc on all test algebras. RepresentsAttractor's two unique-existence clauses give a natural bijection by evaluation at 1. Also stated: smooth immersions isomorphic to A^d, partition of |X|, unique open dense cell via the closure iff, base change along the actual Over.pullback, and the Spec F clause. New node def-sfb-projectivized-gm-representation is a real, satisfiable predicate; its substitution gives the action on lines and the comparison iso is fixed by both projections. It reuses DiagonalProjectiveAction.space, and no duplicate was found in the Lean trees or the DAG. Item statement unchanged; the only added stmt_dep is the new node; lean.statement matches the files verbatim; theorem proof is only sorry. No compile: no file changed, worker compile evidence relied on. Note: the L-clause is stated through restriction of scalars, which is equivalent by the pullback adjunction."
+ }
+}

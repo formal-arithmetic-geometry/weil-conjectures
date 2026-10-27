@@ -14,6 +14,7 @@ import Sheaf.Algebra.Homology.FunctorialBoundedInjectiveResolution
 import Sheaf.Paper.CondensedClosedCostalkDerivedContinuity
 import Sheaf.Paper.CondensedClosedCostalkInjectiveContinuity
 import Sheaf.Paper.CondensedOpenClosedRecollement
+import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.OpenImmersionLowerShriek
 
 /-! # A compatible strict costalk model for the Hom cocone of a locally closed piece -/
 

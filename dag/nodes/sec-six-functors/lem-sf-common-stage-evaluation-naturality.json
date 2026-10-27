@@ -1,0 +1,133 @@
+{
+ "id": "lem-sf-common-stage-evaluation-naturality",
+ "kind": "statement",
+ "title": "Naturality of common-stage evaluation on permitted Hom pairs",
+ "statement": "Let $\\ell$ be prime, let $\\Omega/\\mathbf Q_\\ell$ be an algebraic closure, and let $W$ be a scheme on whose residue fields $\\ell$ is invertible. Use the actual common-stage category [def-weil-algebraically-closed-coefficients], its tensor functor $T$ and permitted internal-Hom functor $H$ [def-weil-derived-pullback-tensor-hom], and the normalized partial closed structure [def-pod-partial-closed-interfaces]. For any permitted pairs $P,Q$ and any pair morphism $g:P\\to Q$, evaluation satisfies $T(H(g),1_{Q_1})\\,\\mathrm{ev}_Q=T(1_{H(P)},g_1)\\,\\mathrm{ev}_P\\,g_2$, where $g_1:Q_1\\to P_1$ is the unop of the first component and $g_2:P_2\\to Q_2$ is the second component. This is an equality in the actual common-stage category; no perfectness or invertibility of $g$ is assumed.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-package/prop-functor-package.proof.md",
+  "place": "Exceptional-adjunction coefficient passage; parent lem-sf-package-qbar-adjunction-map-descent, proof step 5 (evaluation naturality and dinaturality)."
+ },
+ "stmt_deps": [
+  "def-weil-algebraically-closed-coefficients",
+  "def-weil-derived-pullback-tensor-hom",
+  "def-pod-partial-closed-interfaces"
+ ],
+ "proof": [
+  {
+   "text": "Represent the two components of the pair morphism at one finite field large enough for both permitted pairs, their Hom objects and the tensor sources. The representative formulas identify common tensor and Hom with the rational operations, conjugated by the recorded comparisons.",
+   "uses": [
+    "def-weil-algebraically-closed-coefficients",
+    "def-weil-derived-pullback-tensor-hom"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Rational evaluation is the localized integral inverse transpose of identity. Integral evaluation is the ordinary derived Hom counit transported through completion, hence is natural in the target and dinatural in the source. Expanding arbitrary localized maps into sums of pure tensors and using bilinearity gives the rational equation. The prescribed common inverse-transpose normalization carries it to the representatives at the common field.",
+   "uses": [
+    "lem-pod-derived-automorphism-hom-evaluation"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Cancel inverse tensor and Hom comparisons; the finite-stage composites are equal. Taking their classes proves the asserted equation. Tower coherence makes the equality independent of enlargement and representatives.",
+   "uses": [
+    "def-weil-algebraically-closed-coefficients",
+    "def-weil-derived-pullback-tensor-hom"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-weil-algebraically-closed-coefficients",
+  "def-weil-derived-pullback-tensor-hom",
+  "lem-pod-derived-automorphism-hom-evaluation"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-package/prop-functor-package.proof.md",
+  "place": "Exceptional-adjunction coefficient passage; parent lem-sf-package-qbar-adjunction-map-descent, proof step 5 (evaluation naturality and dinaturality)."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Internal Hom evaluation naturality on permitted pairs of rational constructible complexes over an algebraically closed coefficient field",
+   "results": "ihom.ev_naturality in Mathlib.CategoryTheory.Monoidal.Closed.Basic is the full closed-monoidal special case; it has no identification with the normalized partial common-stage structure.",
+   "date": "2026-10-25",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Evaluation on a partial internal Hom is natural in pairs in the common stage colimit category",
+   "results": "ihom.ev_naturality and generic closed-category evaluations; no exact partial common-stage theorem.",
+   "date": "2026-10-25",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "commonStageEvaluation|evaluation_naturality|evaluation_dinaturality",
+   "results": "Search of Mathlib and local Sheaf/WeilConjectures finds generic full closed evaluation laws, but no common-stage pair naturality theorem. PodPartialClosed only records tensor-parameter naturality. Blueprint search evaluation naturality: no matching node.",
+   "date": "2026-10-25",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.SfPackageQbarAdjunctionMapDescent",
+  "date": "2026-10-25",
+  "group": "H7"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-functor-package",
+   "place": "Exceptional-adjunction coefficient passage; parent lem-sf-package-qbar-adjunction-map-descent, proof step 5 (evaluation naturality and dinaturality).",
+   "via": [
+    "lem-sf-package-qbar-adjunction-map-descent",
+    "lem-sf-package-exceptional-coherence-realization"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-thm-sf-package",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.CommonStageEvaluationNaturality",
+  "file": "lean/Sheaf/Paper/CommonStageEvaluationNaturality.lean",
+  "declaration": "WeilConjectures.commonStageEvaluation_naturality",
+  "statement": "theorem commonStageEvaluation_naturality\n    (l : ℕ) [Fact l.Prime] (Ω : Type v) [Field Ω]\n    [Algebra (Padic l) Ω] [IsAlgClosure (Padic l) Ω] (W : Scheme.{u})\n    [∀ x : W, Invertible (l : W.residueField x)]\n    (P Q : (commonStageHomPairs l Ω W).FullSubcategory) (g : P ⟶ Q) :\n    (commonStageDerivedTensor l Ω W).map\n        (Prod.mkHom ((commonStageDerivedInternalHom l Ω W).map g) (𝟙 Q.obj.1.unop)) ≫\n      (podCommonClosed l Ω W).evaluation Q =\n    (commonStageDerivedTensor l Ω W).map\n        (Prod.mkHom (𝟙 ((commonStageDerivedInternalHom l Ω W).obj P)) g.hom.1.unop) ≫\n      (podCommonClosed l Ω W).evaluation P ≫ g.hom.2",
+  "branch": "sheaf-dag",
+  "by": "H7",
+  "date": "2026-10-25"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H7",
+  "result": "pass",
+  "landing": "20261025T123059-L-1829808",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H7",
+  "result": "pass",
+  "landing": "20261025T123059-L-1829808",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

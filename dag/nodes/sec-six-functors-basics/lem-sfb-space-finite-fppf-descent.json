@@ -1,0 +1,298 @@
+{
+ "id": "lem-sfb-space-finite-fppf-descent",
+ "kind": "statement",
+ "title": "Fppf descent and base change of finite algebraic-space morphisms",
+ "statement": "Let $S$ be a scheme [def-pc-scheme] in the universes [def-weil-size-convention], and let $f:X\\to Y$ be a morphism of algebraic spaces over $S$ [def-trf-algebraic-space]. Call $f$ finite if every scheme base change $X\\times_YT\\to T$ is represented by a finite morphism of schemes [def-weil-finite-integral-morphism]. Fibre products are sheaf fibre products [lem-trf-space-fibre-products-etale-covers]. Let $\\{Y_i\\to Y\\}_{i\\in I}$ be a set-indexed jointly surjective family of flat locally finitely presented algebraic-space morphisms, with these properties tested on etale scheme charts [def-weil-flat-morphism, def-sbc-locally-finite-presentation]. Then $f$ is finite if and only if every $X\\times_YY_i\\to Y_i$ is finite.",
+ "source": {
+  "document": "literature/stacks-project/spaces-descent.tex",
+  "place": "Tag 0426 (lemma-descending-property-finite), fppf specialization of fpqc locality; finite on scheme tests is the finite case of spaces-morphisms.tex Tag 03ZQ (lemma-integral-local)."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-size-convention",
+  "def-trf-algebraic-space",
+  "def-weil-finite-integral-morphism",
+  "lem-trf-space-fibre-products-etale-covers",
+  "def-weil-flat-morphism",
+  "def-sbc-locally-finite-presentation",
+  "def-sfb-space-morphism-properties",
+  "def-trf-algebraic-space-jointly-surjective-family"
+ ],
+ "proof": [
+  {
+   "text": "Finiteness in the stated scheme-test sense is preserved by every algebraic-space base change: for $Y\\prime\\to Y$ and a scheme $T\\to Y\\prime$, the test pullback $(X\\times_Y Y\\prime)\\times_{Y\\prime}T$ is $X\\times_YT$, with the same projection to $T$, by the fibre-product universal property [lem-trf-space-fibre-products-etale-covers]. If $f$ is finite, this projection is a finite scheme morphism by hypothesis. This proves the forward implication and fixes the base-change identifications used below.",
+   "uses": [
+    "lem-trf-space-fibre-products-etale-covers"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-morphisms.tex",
+    "place": "Tag 03ZQ (lemma-integral-local), representable finite condition; base-change identification"
+   }
+  },
+  {
+   "text": "Assume each $f_i:X\\times_Y Y_i\\to Y_i$ is finite. Each $f_i$ is affine: on an affine scheme test its source is a scheme finite over that affine scheme, hence affine by [def-weil-finite-integral-morphism, lem-weil-pbc-affine-morphism-permanence](2). Apply the affine clause of [lem-sfb-space-four-property-fppf-descent] to the given covering. Thus $f$ is affine in that node's sense: $X\\times_YU$ is an affine scheme for every affine scheme $U\\to Y$. Now let $T\\to Y$ be any scheme and $X_T=X\\times_YT$, an algebraic space by [lem-trf-space-fibre-products-etale-covers]. For an affine open $U\\subseteq T$, $X_U=X_T\\times_TU=X\\times_YU$ is an affine scheme, and it is an open subspace of $X_T$ [def-a1-space-open-subspace]: for a scheme $W\\to X_T$, $W\\times_{X_T}X_U=W\\times_TU$ is the open preimage of $U$ in $W$. By [lem-sfb-space-largest-schematic-open] each $X_U$ lies in the schematic open subspace $A\\subseteq X_T$. For every scheme $W\\to X_T$ the open subscheme $W\\times_{X_T}A$ contains every $W\\times_TU$, and these cover $W$ as $U$ runs through an affine open cover of $T$; so $W\\times_{X_T}A=W$, every $W\\to X_T$ factors through $A$, and $X_T=A$ is a scheme. Its preimage over each affine open $U$ is the affine scheme $X_U$, so $f_T:X_T\\to T$ is an affine morphism of schemes [pqf-def-affine-morphism]. This establishes representability before applying any scheme descent theorem.",
+   "uses": [
+    "def-weil-finite-integral-morphism",
+    "lem-weil-pbc-affine-morphism-permanence",
+    "lem-sfb-space-four-property-fppf-descent",
+    "lem-trf-space-fibre-products-etale-covers",
+    "def-a1-space-open-subspace",
+    "lem-sfb-space-largest-schematic-open",
+    "pqf-def-affine-morphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-descent.tex",
+    "place": "Tag 041Z (lemma-descending-property-affine); spaces-morphisms.tex Tag 03WG (lemma-affine-local)"
+   }
+  },
+  {
+   "text": "Fix an affine scheme $T\\to Y$. Apply [lem-sfb-space-fppf-finite-affine-refinement] to obtain affine schemes $V_j$, a finite set $J$, maps $V_j\\to Y_{a(j)}$ over $Y$, and a flat surjective map $p:T\\prime=\\coprod_{j\\in J}V_j\\to T$ with $T\\prime$ affine. The equality of the two composites $V_j\\to Y$ identifies $X_T\\times_TV_j$ with $(X\\times_Y Y_{a(j)})\\times_{Y_{a(j)}}V_j$, so its projection to $V_j$ is finite by the assumed scheme tests of $f_{a(j)}$. This identification is the one induced by the projections, using [lem-trf-space-fibre-products-etale-covers].",
+   "uses": [
+    "lem-sfb-space-fppf-finite-affine-refinement",
+    "lem-trf-space-fibre-products-etale-covers"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-topologies.tex",
+    "place": "Tag 0DFQ (lemma-zariski-etale-smooth-syntomic-fppf-fpqc), finite affine refinement"
+   }
+  },
+  {
+   "text": "The coprojections $V_j\\to T\\prime$ are open immersions and their images cover $T\\prime$ by [lem-weil-pbc-scheme-coproduct-family]. The restriction of the scheme morphism $f_{T\\prime}:X_T\\times_TT\\prime\\to T\\prime$ to this open $V_j$ is the finite morphism of Step 3: both pullbacks have the same projection characterization. The open-cover equivalence (3) of [lem-weil-pbc-finite-local-on-target] therefore shows that $f_{T\\prime}$ is finite. If $J$ is empty, $T\\prime$ is empty, its pullback source is empty, and the same empty-open-cover criterion still applies.",
+   "uses": [
+    "lem-weil-pbc-scheme-coproduct-family",
+    "lem-weil-pbc-finite-local-on-target",
+    "lem-trf-space-fibre-products-etale-covers"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 01WI (lemma-finite-local), open-cover criterion; schemes.tex Tags 01JB, 01JC for the coproduct opens"
+   }
+  },
+  {
+   "text": "The morphism $p:T\\prime\\to T$ is a morphism between affine schemes, hence affine by [lem-weil-pbc-morphism-affine-schemes-affine], and quasi-compact by [lem-weil-pbc-affine-morphism-permanence](3). It is flat and surjective by Step 3. Both $X_T$ and $X_T\\times_TT\\prime$ are schemes by Step 2. Apply [lem-sbc-finite-morphism-fpqc-descent] to $f_T$ and $p$, with Step 4 supplying finiteness after pullback. It follows that $f_T$ is finite. This proves finiteness on every affine scheme test, with no quasi-compactness imposed on $Y$ or on the original covering members.",
+   "uses": [
+    "lem-weil-pbc-morphism-affine-schemes-affine",
+    "lem-weil-pbc-affine-morphism-permanence",
+    "lem-sbc-finite-morphism-fpqc-descent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/descent.tex",
+    "place": "Tag 02LA (lemma-descending-property-finite), applied after affine representability descent"
+   }
+  },
+  {
+   "text": "Finally let $T\\to Y$ be any scheme test. Step 2 makes $f_T$ an affine morphism of schemes. Cover $T$ by its affine opens $U$. Its restriction to $U$ is canonically $f_U$ and is finite by Step 5. Apply [lem-weil-pbc-finite-local-on-target](3) to conclude that $f_T$ is finite. Thus every scheme test has the required finite scheme source and projection, proving the converse. For $T=\\varnothing$ the empty cover proves the same statement; if the original family is empty, joint surjectivity forces the target to be empty, as also allowed by the refinement statement.",
+   "uses": [
+    "lem-weil-pbc-finite-local-on-target"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-morphisms.tex",
+    "place": "Tag 03ZQ (lemma-integral-local), representable finite criterion; morphisms.tex Tag 01WI (lemma-finite-local)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-trf-space-fibre-products-etale-covers",
+  "def-weil-finite-integral-morphism",
+  "lem-weil-pbc-affine-morphism-permanence",
+  "lem-sfb-space-four-property-fppf-descent",
+  "def-a1-space-open-subspace",
+  "lem-sfb-space-largest-schematic-open",
+  "pqf-def-affine-morphism",
+  "lem-sfb-space-fppf-finite-affine-refinement",
+  "lem-weil-pbc-scheme-coproduct-family",
+  "lem-weil-pbc-finite-local-on-target",
+  "lem-weil-pbc-morphism-affine-schemes-affine",
+  "lem-sbc-finite-morphism-fpqc-descent"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/spaces-descent.tex",
+  "place": "Tag 0426 (lemma-descending-property-finite): expanded fppf specialization through affine descent Tag 041Z, finite affine refinement Tag 0DFQ, and scheme finite descent Tag 02LA. This assembles existing statements rather than reproducing the source's integral/locally-finite-type decomposition."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "loogle",
+   "query": "\"IsFinite\", \"pullback\"",
+   "results": "0 hits: ",
+   "date": "2026-10-23",
+   "verdict": "no match: the inspected declarations are for schemes, ring modules or ordinary categories; none states this algebraic-space descent theorem or the algebraic-stack quotient theorem. The passage to spaces/stacks is not a one-line specialization."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A finite morphism of algebraic spaces is representable by schemes quasi compact separated and descends under faithfully flat covers",
+   "results": "8 hits: AlgebraicGeometry.IsFinite, AlgebraicGeometry.IsFinite.recOn, AlgebraicGeometry.IsFinite.toIsAffineHom, AlgebraicGeometry.quasiSeparated_iff_quasiSeparatedSpace, AlgebraicGeometry.IsFinite.iff_isIntegralHom_and_locallyOfFiniteType, AlgebraicGeometry.isFinite_iff, AlgebraicGeometry.IsFinite.mk, AlgebraicGeometry.IsSeparated.instQuasiSeparated",
+   "date": "2026-10-23",
+   "verdict": "no match: the inspected declarations are for schemes, ring modules or ordinary categories; none states this algebraic-space descent theorem or the algebraic-stack quotient theorem. The passage to spaces/stacks is not a one-line specialization."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finiteness of morphisms of algebraic spaces is local on the base for fppf covers and preserved by base change",
+   "results": "8 hits: AlgebraicGeometry.locallyOfFiniteType_isStableUnderBaseChange, AlgebraicGeometry.IsFinite.instIsStableUnderBaseChangeScheme, AlgebraicGeometry.locallyOfFiniteType_of_comp, AlgebraicGeometry.instIsMultiplicativeSchemeLocallyOfFiniteType, AlgebraicGeometry.IsFinite.instIsMultiplicativeScheme, AlgebraicGeometry.IsFinite.comp_iff, AlgebraicGeometry.instIsStableUnderCompositionSchemeLocallyOfFiniteType, AlgebraicGeometry.instIsStableUnderBaseChangeSchemeLocallyQuasiFinite",
+   "date": "2026-10-23",
+   "verdict": "no match: the inspected declarations are for schemes, ring modules or ordinary categories; none states this algebraic-space descent theorem or the algebraic-stack quotient theorem. The passage to spaces/stacks is not a one-line specialization."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A finite map between algebraic spaces is representable affine quasi compact separated; its finiteness descends on an fppf base covering",
+   "results": "8 hits: AlgebraicGeometry.IsFinite, AlgebraicGeometry.IsFinite.instHasOfPostcompPropertySchemeIsSeparated, AlgebraicGeometry.isFinite_iff, AlgebraicGeometry.IsFinite.toIsAffineHom, AlgebraicGeometry.IsFinite.instHasAffinePropertyAndIsAffineFiniteCarrierObjOppositeOpensCarrierCarrierCommRingCatPresheafOpOpensTopHomAppTop, AlgebraicGeometry.instLocallyQuasiFiniteOfIsFinite, AlgebraicGeometry.IsFinite.instLocallyOfFiniteType, AlgebraicGeometry.instIsProperOfIsFinite",
+   "date": "2026-10-23",
+   "verdict": "no match: the inspected declarations are for schemes, ring modules or ordinary categories; none states this algebraic-space descent theorem or the algebraic-stack quotient theorem. The passage to spaces/stacks is not a one-line specialization."
+  },
+  {
+   "tool": "grep",
+   "query": "AlgebraicSpace|AlgebraicStack|finite.*(fppf|fpqc)|IsFinite.*(IsSeparated|QuasiCompact)",
+   "results": "3 hits: Mathlib/AlgebraicGeometry/Morphisms/Finite.lean, Mathlib/AlgebraicGeometry/Morphisms/Finite.lean, Mathlib/AlgebraicGeometry/Morphisms/QuasiFinite.lean",
+   "date": "2026-10-23",
+   "verdict": "no match: the inspected declarations are for schemes, ring modules or ordinary categories; none states this algebraic-space descent theorem or the algebraic-stack quotient theorem. The passage to spaces/stacks is not a one-line specialization."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Descent of finite maps of algebraic spaces and representability by finite schemes after fppf base extension",
+   "results": "8 hits: AlgebraicGeometry.IsFinite.recOn, AlgebraicGeometry.isFinite_iff, AlgebraicGeometry.IsFinite.instIsStableUnderBaseChangeScheme, AlgebraicGeometry.IsFinite.toIsAffineHom, AlgebraicGeometry.IsFinite.iff_isIntegralHom_and_locallyOfFiniteType, AlgebraicGeometry.descendsAlong_isomorphisms_surjective_inf_flat_inf_quasicompact, AlgebraicGeometry.instIsProperOfIsFinite, AlgebraicGeometry.IsProper.instOfIsFinite",
+   "date": "2026-10-23",
+   "verdict": "no match: the inspected declarations are for schemes, ring modules or ordinary categories; none states this algebraic-space descent theorem or the algebraic-stack quotient theorem. The passage to spaces/stacks is not a one-line specialization."
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.IsFinite",
+   "results": "12 hits: AlgebraicGeometry.IsFinite.instContainsIdentitiesScheme, AlgebraicGeometry.IsFinite.instIsMultiplicativeScheme, AlgebraicGeometry.IsFinite.instIsStableUnderBaseChangeScheme, AlgebraicGeometry.IsFinite.instIsStableUnderCompositionScheme, AlgebraicGeometry.IsFinite.instHasOfPostcompPropertySchemeIsSeparated, AlgebraicGeometry.IsFinite, AlgebraicGeometry.IsFinite.instIsIntegralHom, AlgebraicGeometry.IsFinite.instLocallyOfFiniteType",
+   "date": "2026-10-23",
+   "verdict": "no match: the inspected declarations are for schemes, ring modules or ordinary categories; none states this algebraic-space descent theorem or the algebraic-stack quotient theorem. The passage to spaces/stacks is not a one-line specialization."
+  },
+  {
+   "tool": "grep",
+   "query": "IsFinite|fpqc|fppf",
+   "results": "25 hits: Mathlib/AlgebraicGeometry/Morphisms/QuasiFinite.lean, Mathlib/AlgebraicGeometry/Morphisms/QuasiFinite.lean, Mathlib/AlgebraicGeometry/Morphisms/QuasiFinite.lean, Mathlib/AlgebraicGeometry/Morphisms/QuasiFinite.lean, Mathlib/AlgebraicGeometry/Morphisms/QuasiFinite.lean, Mathlib/AlgebraicGeometry/Morphisms/FlatRank.lean, Mathlib/AlgebraicGeometry/Morphisms/FlatRank.lean, Mathlib/AlgebraicGeometry/Morphisms/FlatRank.lean",
+   "date": "2026-10-23",
+   "verdict": "no match: the inspected declarations are for schemes, ring modules or ordinary categories; none states this algebraic-space descent theorem or the algebraic-stack quotient theorem. The passage to spaces/stacks is not a one-line specialization."
+  },
+  {
+   "tool": "grep",
+   "query": "AlgebraicSpace|IsFinite.*(descend|StableUnderBaseChange)",
+   "results": "Logged 0 hits: . ",
+   "date": "2026-10-23",
+   "verdict": "no match: inspected Finite.lean lines 35-77 and FlatDescent scheme signatures; these results concern schemes, not algebraic-space finiteness descent. Scheme results are reused through existing DAG nodes."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Finite representable morphisms of algebraic spaces are local on the target for the fppf topology",
+   "results": "Logged 8 hits: AlgebraicGeometry.IsFinite.recOn, AlgebraicGeometry.Scheme.LocalRepresentability.isRepresentable, AlgebraicGeometry.IsFinite, AlgebraicGeometry.instLocallyOfFinitePresentationOfIsSmooth, AlgebraicGeometry.IsFinite.instLocallyOfFiniteType, AlgebraicGeometry.IsFinite.toIsAffineHom, AlgebraicGeometry.IsFinite.casesOn, AlgebraicGeometry.IsFinite.instIsStableUnderCompositionScheme. ",
+   "date": "2026-10-23",
+   "verdict": "no match: inspected Finite.lean lines 35-77 and FlatDescent scheme signatures; these results concern schemes, not algebraic-space finiteness descent. Scheme results are reused through existing DAG nodes."
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.IsFinite",
+   "results": "Logged 12 hits: AlgebraicGeometry.IsFinite.instContainsIdentitiesScheme, AlgebraicGeometry.IsFinite.instIsMultiplicativeScheme, AlgebraicGeometry.IsFinite.instIsStableUnderBaseChangeScheme, AlgebraicGeometry.IsFinite.instIsStableUnderCompositionScheme, AlgebraicGeometry.IsFinite.instHasOfPostcompPropertySchemeIsSeparated, AlgebraicGeometry.IsFinite, AlgebraicGeometry.IsFinite.instIsIntegralHom, AlgebraicGeometry.IsFinite.instLocallyOfFiniteType. ",
+   "date": "2026-10-23",
+   "verdict": "no match: inspected Finite.lean lines 35-77 and FlatDescent scheme signatures; these results concern schemes, not algebraic-space finiteness descent. Scheme results are reused through existing DAG nodes."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finiteness of a morphism of algebraic spaces descends along a jointly surjective flat locally finitely presented covering",
+   "results": "Logged 8 hits: AlgebraicGeometry.instDescendsAlongSchemeMinMorphismPropertySurjectiveFlatLocallyOfFinitePresentationOfQuasiCompactOfIsZariskiLocalAtTarget, AlgebraicGeometry.Flat.surjective_descendsAlong_surjective_inf_flat_inf_quasicompact, AlgebraicGeometry.IsFinite.instIsMultiplicativeScheme, AlgebraicGeometry.descendsAlong_universallyOpen_surjective_inf_flat_inf_quasicompact, AlgebraicGeometry.descendsAlong_isomorphisms_surjective_inf_flat_inf_quasicompact, AlgebraicGeometry.IsFinite.instIsStableUnderCompositionScheme, AlgebraicGeometry.IsFinite, AlgebraicGeometry.LocallyOfFinitePresentation. ",
+   "date": "2026-10-23",
+   "verdict": "no match: inspected Finite.lean lines 35-77 and FlatDescent scheme signatures; these results concern schemes, not algebraic-space finiteness descent. Scheme results are reused through existing DAG nodes."
+  },
+  {
+   "tool": "grep",
+   "query": "IsFinite|finite.*descend|fppf",
+   "results": "Logged 23 hits: Mathlib/AlgebraicGeometry/Morphisms/QuasiFinite.lean, Mathlib/AlgebraicGeometry/Morphisms/QuasiFinite.lean, Mathlib/AlgebraicGeometry/Morphisms/QuasiFinite.lean, Mathlib/AlgebraicGeometry/Morphisms/QuasiFinite.lean, Mathlib/AlgebraicGeometry/Morphisms/QuasiFinite.lean, Mathlib/AlgebraicGeometry/Morphisms/FlatRank.lean, Mathlib/AlgebraicGeometry/Morphisms/FlatRank.lean, Mathlib/AlgebraicGeometry/Morphisms/FlatRank.lean. ",
+   "date": "2026-10-23",
+   "verdict": "no match: inspected Finite.lean lines 35-77 and FlatDescent scheme signatures; these results concern schemes, not algebraic-space finiteness descent. Scheme results are reused through existing DAG nodes."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A representable finite morphism of fppf sheaves is finite if and only if it is finite after an fppf covering by algebraic spaces",
+   "results": "Logged 8 hits: AlgebraicGeometry.IsFinite, AlgebraicGeometry.IsFinite.instLocallyOfFiniteType, AlgebraicGeometry.IsFinite.instHasAffinePropertyAndIsAffineFiniteCarrierObjOppositeOpensCarrierCarrierCommRingCatPresheafOpOpensTopHomAppTop, AlgebraicGeometry.isFinite_iff, AlgebraicGeometry.IsFinite.finite_app, AlgebraicGeometry.instLocallyQuasiFiniteOfIsFinite, AlgebraicGeometry.IsFinite.comp_iff, AlgebraicGeometry.LocallyOfFinitePresentation. ",
+   "date": "2026-10-23",
+   "verdict": "no match: inspected Finite.lean lines 35-77 and FlatDescent scheme signatures; these results concern schemes, not algebraic-space finiteness descent. Scheme results are reused through existing DAG nodes."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-flat-groupoid-quotient-open-presentation",
+  "date": "2026-10-23",
+  "group": "Q102"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Affine PGL quotients with closed orbits and zero-dimensional stabilizers. Supporting affine-quotient step: Finite inertia gives an adequate coarse moduli space. Supporting input to the finite-inertia coarse-space construction: The stabilizer-preserving etale cover preceding the local invariant-ring quotients. Supporting proof input: middle paragraph of Tag 0DUE: pull back the open, restrict the groupoid, and recover its quotient open and finite-flat presentation. Supporting space-level input: descend finiteness of the presentation from its relation after fppf local object lifts.",
+   "via": [
+    "lem-sfb-flat-groupoid-quotient-open-presentation",
+    "lem-sfb-finite-inertia-etale-affine-charts",
+    "lem-sfb-finite-inertia-adequate-coarse-space",
+    "lem-sfb-affine-pgl-finite-stabilizer-quotient",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-space-finite-fppf-descent",
+  "worker": "stage1",
+  "summary": "Kept the statement and statement dependencies unchanged. Reused existing space-affineness descent and finite-affine-refinement nodes, then proved scheme finiteness on the finite coproduct by its open cover and descended it by scheme fpqc descent. Wrote out both base-change identifications and the final passage from affine tests to all scheme tests. No new node is needed. Checked source hypotheses, empties, duplicate statements, exact node citations and Mathlib candidates. Review FIX (cc reader): step 2 now proves that every scheme base change $X_T$ is a scheme through the largest schematic open subspace, since the four-property node's affine notion is the affine-test one, not representable-and-affine; the affine-locality citation was dropped.",
+  "blueprint": "Supporting input under the inherited det-thm-sf-ctf-stability-direct-images proof (3), via the existing alteration/moduli/groupoid chain: finiteness of the groupoid presentation after local object lifts. The latest direct-images proof (3) was read; no chapter/unit route or statement changes. The inherited nearest blueprint ancestor is null, as confirmed by blueprint_refs.py ancestor.",
+  "tool_uses": [
+   {
+    "node": "lem-sbc-finite-morphism-fpqc-descent",
+    "why": "Generic scheme finiteness descent along a flat surjective quasi-compact base change, used only after the space source has been proved a scheme; this unit has no separate scheme-level descent statement."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sbc-finite-morphism-fpqc-descent"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q52-956efb44d",
+  "group": "Q52",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q52-956efb44d (reviewer sub-agent of L); spot-checked: FIX, one fault (C4/E1) in step 2. I read the item, all 10 cited statements and Stacks 0426 (spaces-descent.tex:1770) and 03WD/03WG (spaces-morphisms.tex:3683). No new nodes; statement and stmt_deps unchanged; no cycle; not superseded (live and side-live still unsplit); no re-split note; no SGA. The fault: the four-property node's 'affine' is the affine-test notion of Stacks Def 03WD. lem-sfb-space-affine-locality defines affine as representable plus affine, and its statement lacks 03WG (1)<=>(2). So 'X_T is a scheme for every scheme T' was not given by the cited statement. Repair in fixes/dag/nodes/sec-six-functors-basics/lem-sfb-space-finite-fppf-descent.json: for affine opens U of T, X_U is an affine open subspace of X_T (def-a1-space-open-subspace). These lie in the schematic open of lem-sfb-space-largest-schematic-open (03JH, same unit), and the open W x_{X_T} A covers every scheme W, so X_T = A is a scheme. f_T is then affine by pqf-def-affine-morphism. The affine-locality citation is dropped; proof_deps equals the union of step uses. Steps 1 and 3-6 are correct: the refinement node's hypotheses match, the open-cover criterion 01WI(3) works including the empty cover, and p is affine and quasi-compact via 01SH and 01S7 as 02LA needs. Small cases checked: T empty, empty family, identity cover, non-quasi-compact bases. tool_uses lem-sbc-finite-morphism-fpqc-descent (generic 02LA) accepted. Batch-5: four-property descent and affine-locality reach sec-trace-formula only through def-trf-algebraic-space and general algebraic-space foundations (unit sk-i-curve-zero). Neither is a step of the trace formula or Poincare duality, so the citations are allowed; affine-locality is removed by the fix anyway, and the new citations reach only def-trf-algebraic-space.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.AlgebraicSpaceFiniteFppfDescent",
+  "declaration": "AlgebraicGeometry.AlgebraicSpace.finite_fppf_descent",
+  "file": "lean/Sheaf/AlgebraicGeometry/AlgebraicSpaceFiniteFppfDescent.lean",
+  "statement": "theorem finite_fppf_descent {S : Scheme.{u}} {I : Type w} {X Y : AlgebraicSpace S} (f : X ⟶ Y) (Yᵢ : I → AlgebraicSpace S) (g : ∀ i : I, Yᵢ i ⟶ Y) (hflat : ∀ i : I, MapIsFlat (g i)) (hlfp : ∀ i : I, MapIsLocallyOfFinitePresentation (g i)) (hsurj : IsJointlySurjective (fun i : I ↦ (g i).hom.hom)) : IsRepresentableWith (fun _ _ p ↦ IsFinite p.left) f.hom.hom ↔ ∀ i : I, IsRepresentableWith (fun _ _ p ↦ IsFinite p.left) (Limits.pullback.snd f.hom (g i).hom).hom",
+  "branch": "sheaf-dag",
+  "by": "Q04",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-b93cc526d",
+  "group": "Q04",
+  "result": "pass",
+  "note": "Clause-by-clause match: IsRepresentableWith (IsFinite p.left) on f.hom.hom ↔ ∀ i, the same on the sheaf-pullback snd onto Yᵢ. MapIsFlat/MapIsLocallyOfFinitePresentation are the all-étale-chart tests of def-sfb-space-morphism-properties, and IsJointlySurjective is the field-extension point lifting. I : Type w is free; no Nonempty, finiteness, quasi-compactness or extra universe hypothesis. The two added stmt_deps are the real owner definition nodes, with no cycle; all other node fields are unchanged vs side-live. lean.statement is verbatim. Docstrings carry Stacks 0426/03ZQ, the blueprint id and all six steps. Proof is sorry only; no hollow defs. Edge cases checked: I empty, T empty, identity cover, non-quasi-compact Y. The second reading is a short self-audit but covers each clause, so accepted. No files changed and no compile run; the worker's compile was clean."
+ }
+}

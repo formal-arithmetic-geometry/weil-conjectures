@@ -86,7 +86,7 @@ theorem isIso_exchange_iff_strictLocalCohomology
         ((DerivedCategory.Plus.singleFunctor _ 0).obj F))
   constructor
   · intro h Ω _ _ x a he ha
-    exact (isIso_exchange_stalk_iff_strictLocalCohomology f g F q α x a he ha).mp
+    exact (isIso_exchange_stalk_iff_strictLocalCohomology f g F q α rfl x a he ha).mp
       (by infer_instance)
   · intro h
     apply Scheme.isIso_of_isIso_sheafFiber_map α
@@ -114,7 +114,7 @@ theorem isIso_exchange_iff_strictLocalCohomology
       have hring := congrArg CommRingCat.Hom.hom (Spec.map_injective hh)
       exact (DFunLike.congr_fun hring r).symm
     have hi :=
-      (isIso_exchange_stalk_iff_strictLocalCohomology f g F q α x a he ha).mpr
+      (isIso_exchange_stalk_iff_strictLocalCohomology f g F q α rfl x a he ha).mpr
         (h _ x a he ha)
     rw [Scheme.uliftPointSmallEtale, NatIso.isIso_map_iff
       ((Scheme.pointSmallEtale x).uliftSheafFiberIso AddCommGrpCat.{u + 1})]

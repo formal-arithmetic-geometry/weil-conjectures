@@ -1,0 +1,137 @@
+{
+ "id": "def-sfb-split-torus-over-ring",
+ "kind": "definition",
+ "title": "Split tori over commutative rings",
+ "status": "split",
+ "statement": "Let $R$ be a commutative ring. Define the multiplicative $R$-group scheme $\\mathbf G_{m,R}=\\operatorname{Spec}R[z,z^{-1}]$, using affine spectra [def-weil-affine-spectrum] and Laurent polynomial rings [def-weil-laurent-polynomial-ring]. Its multiplication, identity and inverse are given on coordinate rings by $z\\mapsto z\\otimes z$, $z\\mapsto1$, and $z\\mapsto z^{-1}$, satisfying the group-object diagrams of [def-sc-group-scheme] over $\\operatorname{Spec}R$. For $r\\in\\mathbf N$, define the split torus $\\mathbf G_{m,R}^r$ as the product over $\\operatorname{Spec}R$ [def-pc-fibre-product] of $r$ copies of this group, with the componentwise group law; the product for $r=0$ is the trivial group over $\\operatorname{Spec}R$.",
+ "stmt_deps": [
+  "def-weil-affine-spectrum",
+  "def-weil-laurent-polynomial-ring",
+  "def-sc-group-scheme",
+  "def-pc-fibre-product"
+ ],
+ "source": {
+  "document": "literature/alper-halpern-leistner-heinloth-cartan-iwahori-matsumoto.pdf",
+  "place": "Author-hosted PDF https://sites.math.washington.edu/~jarod/papers/iwahori.pdf, Remark 3.5, printed p.5; Laurent Hopf algebra realizes the multiplicative group used there over R."
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "splitTorus|SplitTorus|LaurentPolynomial|GrpObj",
+   "results": "{\"t\": \"2026-10-24T03:47:17Z\", \"tool\": \"grep\", \"query\": \"splitTorus|SplitTorus|LaurentPolynomial|GrpObj\", \"sub\": \"AlgebraicGeometry/Group\", \"ok\": true, \"n_hits\": 15, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/Group/Abelian.lean\", \"Mathlib/AlgebraicGeometry/Group/Abelian.lean\", \"Mathlib/AlgebraicGeometry/Group/Abelian.lean\", \"Mathlib/AlgebraicGeometry/Group/Abelian.lean\", \"Mathlib/AlgebraicGeometry/Group/Abelian.lean\", \"Mathlib/AlgebraicGeometry/Group/Affine.lean\", \"Mathlib/AlgebraicGeometry/Group/Affine.lean\", \"Mathlib/AlgebraicGeometry/Group/Affine.lean\"], \"digest\": \"9c81483fc48ed7c0\"}",
+   "date": "2026-10-24",
+   "verdict": "Reuse LaurentPolynomial.instHopfAlgebra and the generic affine Hopf group structure. No named split torus over an arbitrary commutative ring; the project splitTorus and StandardGroupSchemes.multiplicative require a field."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Split torus over a commutative ring spectrum Laurent polynomial Hopf algebra finite product multiplicative group",
+   "results": "{\"t\": \"2026-10-24T03:47:18Z\", \"tool\": \"leansearch\", \"query\": \"Split torus over a commutative ring spectrum Laurent polynomial Hopf algebra finite product multiplicative group\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"LaurentPolynomial\", \"LaurentPolynomial.instBialgebra\", \"LaurentPolynomial.comul_T\", \"LaurentPolynomial.antipode_C_mul_T\", \"LaurentPolynomial.antipode_T\", \"LaurentPolynomial.counit_T\", \"LaurentPolynomial.instModulePolynomial\", \"LaurentPolynomial.T_add\"], \"digest\": \"5d9bd67937768b0b\"}",
+   "date": "2026-10-24",
+   "verdict": "Reuse LaurentPolynomial.instHopfAlgebra and the generic affine Hopf group structure. No named split torus over an arbitrary commutative ring; the project splitTorus and StandardGroupSchemes.multiplicative require a field."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Split torus over a commutative ring spectrum Laurent polynomial Hopf algebra finite product multiplicative group",
+   "results": "{\"t\": \"2026-10-24T03:47:18Z\", \"tool\": \"leanfinder\", \"query\": \"Split torus over a commutative ring spectrum Laurent polynomial Hopf algebra finite product multiplicative group\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"LaurentPolynomial.instHopfAlgebra\", \"LaurentPolynomial.comul_T\", \"LaurentPolynomial.antipode_T\", \"LaurentPolynomial.antipode_C_mul_T\", \"LaurentPolynomial.isUnit_T\", \"LaurentPolynomial.invertibleT\", \"LaurentPolynomial.instBialgebra\", \"LaurentPolynomial.comul_C_mul_T_self\"], \"digest\": \"9f401d61ff5cbb72\"}",
+   "date": "2026-10-24",
+   "verdict": "Reuse LaurentPolynomial.instHopfAlgebra and the generic affine Hopf group structure. No named split torus over an arbitrary commutative ring; the project splitTorus and StandardGroupSchemes.multiplicative require a field."
+  },
+  {
+   "tool": "grep",
+   "query": "rg -n def.*multiplicative|splitTorus lean/WeilConjectures lean/Sheaf; rg -l split torus dag/nodes; python3 tools/blueprint_refs.py search split torus",
+   "results": "Project: ToriMultiplicativeType.splitTorus and StandardGroupSchemes.multiplicative require Field. Etale.multiplicativeGroup is an open of affine space without group structure; ZetaFunction example requires Field. No ring-base split torus declaration. DAG carries field tori and statement uses, no definition over rings. blueprint_refs: 0 blueprint nodes match split torus.",
+   "date": "2026-10-24",
+   "verdict": "New ring-base finite-product construction needed; all structure data comes from Mathlib Hopf algebra and cartesian products."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-split-reductive-dvr-cartan-decomposition",
+  "date": "2026-10-24",
+  "group": "Q74"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.GroupScheme.SplitTorusOverRing",
+  "declaration": "AlgebraicGeometry.RingGroupSchemes.splitTorus",
+  "file": "lean/Sheaf/AlgebraicGeometry/GroupScheme/SplitTorusOverRing.lean",
+  "statement": "def splitTorus (R : Type u) [CommRing R] (r : ℕ) : Grp (Over (Spec (.of R)))",
+  "branch": "newtargets-dag",
+  "by": "Q74",
+  "date": "2026-10-24",
+  "existing": false,
+  "declarations": [
+   "AlgebraicGeometry.RingGroupSchemes.multiplicative",
+   "AlgebraicGeometry.RingGroupSchemes.splitTorus"
+  ]
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Haboush symmetric-power lifting for a trivial quotient representation. Supporting representation-theoretic input: Steinberg endomorphisms detect a nonzero fixed vector. Supporting Self-duality of rho section modules at characteristic-dependent weights. Supporting input: Positive-characteristic simplicity step, using irreducibility of the Steinberg induced module rather than assuming self-duality. Numerical input to the dimension comparison: Weyl dimension of the induced module. Supporting Kempf vanishing for dominant flag line bundles. Positive-characteristic Andersen–Haboush argument: trivial pushforward of M_((p^r-1)rho), before the Serre twisting calculation. Supporting input: Lemma 2.3, second assertion, and Lemma 2.1, printed pp.153--155: H^0(u,V(lambda))=K v_lambda for p-restricted dominant lambda. With roots positive in Lie(B), V(lambda)=Gamma(M_{-w0 lambda}). Supporting input: Simple-root distributions and infinitesimal subalgebra calculus. Supporting input: pinning-compatible integral-to-geometric distribution comparison, with all positive root divided powers, before simple-root generation. Integral-root-model prerequisite before the comparison: integral Chevalley construction and a positive-root coordinate chart; integral matrix-closure construction: the big cell and its Weyl translates, before identifying the special fibre. Supporting input: Integral closure atlas, exhaustion of each special fibre: exclude extra components using the generic and special identity-component big-cell dimensions. Supporting input: Lemma 3.7 (first assertion, the Iwahori--Matsumoto maximal-boundedness statement) and its application in Proposition 4.3, second paragraph, printed pp.7-8; Cartan double-coset input used to prove the maximal-boundedness prerequisite, before the torus-powers argument. Definition of the given split torus over the DVR before Cartan factorization.",
+   "via": [
+    "lem-sfb-split-reductive-dvr-cartan-decomposition",
+    "lem-sfb-split-reductive-integral-maximal-bounded",
+    "lem-sfb-quasi-reductive-special-connectedness",
+    "lem-sfb-integral-chevalley-weyl-atlas",
+    "lem-sfb-chevalley-integral-root-model",
+    "lem-sfb-borel-kostant-distribution-comparison",
+    "lem-sfb-borel-simple-root-distribution-calculus",
+    "lem-sfb-restricted-induced-infinitesimal-invariants",
+    "lem-sfb-flag-frobenius-rho-pushforward",
+    "lem-sfb-dominant-flag-line-kempf-vanishing",
+    "lem-sfb-induced-weyl-dimension-formula",
+    "lem-sfb-steinberg-induced-module-irreducible",
+    "lem-sfb-rho-section-self-duality",
+    "lem-sfb-steinberg-endomorphism-detection",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": []
+ },
+ "import_flags": [],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-1687ca4ae",
+  "group": "Q74",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-1687ca4ae",
+  "group": "Q74",
+  "result": "pass",
+  "note": "Checked every clause against the node: DVR + fraction field with no completeness; D smooth/affine/finite type as a Grp over Spec R; hred/hmax test every R→Ω with Ω algebraically closed in Type u, equivalent to the geometric-fibre conditions; T closed (IsClosedImmersion), group iso to splitTorus R r; generic-fibre points via the pullback universal property, canonical toUnit restrictions, g = k1*t*k2 in node order. New def-sfb-split-torus-over-ring has real data (Mathlib Hopf Spec of LaurentPolynomial R, Nat.rec cartesian product, rank 0 trivial); only field versions exist in side-live, one built on the same instance, so no duplicate. Item diff vs live: lean record + 2 used stmt_deps; statements verbatim; live lean null, no competing records; sorry only; source/blueprint docstrings and 6-step plan; imports match proof deps. Edge cases r=0, G_m^r, GL_n, residue char checked. No file changed, no compile. Advisory only: ring/field splitTorus comparison."
+ }
+}

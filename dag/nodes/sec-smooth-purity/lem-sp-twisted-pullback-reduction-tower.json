@@ -1,0 +1,282 @@
+{
+ "id": "lem-sp-twisted-pullback-reduction-tower",
+ "kind": "statement",
+ "title": "Coherent reduction and realization of twisted completed pullback",
+ "statement": "Fix a finite field $k_0$ of characteristic $p$, its algebraic closure $k$, a prime $\\ell\\ne p$, and a finite extension $E/\\mathbf Q_\\ell$ with valuation ring $\\mathcal O_E$ [def-weil-finite-field-fiber, def-weil-l-adic-coefficient-extension]. Let $X,Y$ be separated finite-type $k$-schemes and $f:X\\to Y$ smooth separated of pure relative dimension $d\\geq0$ [def-weil-scheme-morphism-properties, def-sbc-smooth-morphisms]. On the small pro-etale sites put $R_T=\\varprojlim_{n\\geq1}(\\mathcal O_E/\\ell^n)_T$, $B_{n,T}=(\\mathcal O_E/\\ell^n)_T$, for $T=X,Y$ [def-weil-completed-integral-coefficients]. Write $\\mathcal C_T=\\Dbc(T,\\mathcal O_E)$ for the derived-complete bounded constructible category [def-weil-derived-complete-integral-detailed], and $\\mathcal N_T$ for the full subcategory of normalized constructible strict varying-coefficient towers with common cohomological and Tor bounds [sk-def-sp-coefficient-towers, sk-def-sp-normalized-towers]. Put $r_TA=(A\\otimes^L_{R_T}B_{n,T})_n$ and $L_T=R\\varprojlim\\operatorname{Res}$, the total derived limit after restriction of scalars to $R_T$ [det-sp-normalized-equivalence].\n\nUse the completed integral pullback $f^*_{\\mathcal O_E}$ of [def-pur-integral-derived-operations] and the integral and finite Tate twists of [def-coefficient-twists-detailed]. For arbitrary integers $m,s$ and $K\\in\\mathcal C_Y$, put $P_{m,s}(K)=f^*_{\\mathcal O_E}K(m)[s]$. Then $P_{m,s}(K)\\in\\mathcal C_X$, and the canonical pullback, tensor-with-the-Tate-line and shift coefficient comparisons form a natural isomorphism of entire derived towers\n$$q_K:r_XP_{m,s}(K)\\xrightarrow{\\sim}\\bigl(f^*_{B_n}(K\\otimes^L_{R_Y}B_{n,Y})(m)[s]\\bigr)_{n\\geq1}.$$\nIt includes every quotient transition $B_n\\to B_j$ for $1\\leq j\\leq n$, not just the displayed evaluations. Its component at $n$ is the composite of the canonical reduction comparison for completed pullback, the balanced derived tensor comparison using $\\mathcal O_E(m)\\otimes^L_{R_X}B_{n,X}\\cong B_{n,X}(m)$, and the canonical shift comparison. These components commute with all coefficient quotient maps. For a uniformizer $\\varpi_E$ and ramification index $e$, this is the restriction to the levels $en$ of the corresponding uniformizer-power construction, via $(\\ell^n)=(\\varpi_E^{en})$; the comparison uses the canonical quotient-ring identifications and is independent of a choice of generator for these ideals.\n\nConsequently, for a functor $C:\\mathcal C_Y\\to\\mathcal N_X$ and an isomorphism of derived towers $v_K:(f^*_{B_n}(K\\otimes^L B_{n,Y})(m)[s])_n\\xrightarrow{\\sim}C(K)$ natural in $K$, the specified realization\n$$P_{m,s}(K)\\xrightarrow{u_{P_{m,s}(K)}}L_Xr_XP_{m,s}(K)\\xrightarrow{L_X(q_K)}L_X\\bigl(f^*_{B_n}(K\\otimes^L B_{n,Y})(m)[s]\\bigr)_n\\xrightarrow{L_X(v_K)}L_XC(K)$$\nis a natural isomorphism. This is a comparison of objects and morphisms in the derived category, rather than a degreewise cohomology assertion.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sp-integral-adjunction/sk-prop-sp-integral-adjunction-bijection.proof.md",
+  "place": "Purity: pullback, twist and shift commute with reduction, including the source comparison before applying total derived inverse limit"
+ },
+ "stmt_deps": [
+  "def-weil-finite-field-fiber",
+  "def-weil-l-adic-coefficient-extension",
+  "def-weil-scheme-morphism-properties",
+  "def-sbc-smooth-morphisms",
+  "def-weil-completed-integral-coefficients",
+  "def-weil-derived-complete-integral-detailed",
+  "sk-def-sp-coefficient-towers",
+  "sk-def-sp-normalized-towers",
+  "det-sp-normalized-equivalence",
+  "def-pur-integral-derived-operations",
+  "def-coefficient-twists-detailed",
+  "def-sp-twisted-pullback-reduction-data",
+  "def-coef-reduction-limit-shift-data",
+  "def-sf-integral-strict-reduction-model",
+  "def-sf-integral-pullback-reduction-comparison",
+  "def-sp-tower-shriek-realization",
+  "def-coef-derived-system-calculus-data"
+ ],
+ "proof": [
+  {
+   "text": "The finite-field cardinality gives characteristic p, so l≠p implies l is a unit in k and in each residue field of X and Y. Integral pullback preserves constructibility; apply the signed-line membership lemma to its output, then shift using the triangulated constructible subcategory.",
+   "uses": [
+    "lem-pur-integral-operations-preserve-constructible",
+    "lem-sp-twisted-pullback-line-membership",
+    "lem-weil-integral-constructible-triangulated"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-integral-adjunction/sk-prop-sp-integral-adjunction-bijection.proof.md",
+    "place": "Purity: pullback, twist and shift commute with reduction before total derived inverse limit"
+   }
+  },
+  {
+   "text": "Obtain the strict cofinal models and their counit-normalized pullback/tensor transport, including its functorial native finite-source comparison and component equation from twistedPullbackCofinalModels. Obtain the normalized TateReduction record and reduction shift structure. Take the whole-system pullback comparison a from integralPullbackSystemComparison; its representative equation is exactly the first equation in the conclusion.",
+   "uses": [
+    "lem-sp-twisted-pullback-cofinal-models",
+    "lem-sp-twisted-pullback-tate-reduction",
+    "lem-pur-reduction-limit-shift-adjunction",
+    "lem-pod-integral-pullback-system-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-integral-adjunction/sk-prop-sp-integral-adjunction-bijection.proof.md",
+    "place": "Purity: pullback, twist and shift commute with reduction before total derived inverse limit"
+   }
+  },
+  {
+   "text": "Whisker the reduction shift comparison and reductionTensor with the pullback and fixed line. Compose with a in the first tensor factor, using the private mappedTensorPairIso constructor. The proved private nativeNat_app identifies its component with nativeComparison. Use the cofinal comparison c supplied together with the strict cofinal models. Compose the inverse of cX.derived, the image of nativeNat, and c to obtain q. Their component equations give the stipulated equation for q.",
+   "uses": [
+    "def-sp-twisted-pullback-reduction-data",
+    "lem-coef-derived-system-evaluation-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-integral-adjunction/sk-prop-sp-integral-adjunction-bijection.proof.md",
+    "place": "Purity: pullback, twist and shift commute with reduction before total derived inverse limit"
+   }
+  },
+  {
+   "text": "The private proved categorical helper equivalenceRealization cancels the tower realization equivalence using its unit, yielding a natural isomorphism from completed reduction of the source to the underlying given C. Compose its total-limit image with the actual NX adjunction unit. Intrinsic derived completeness implies the legacy completeness predicate, using an auxiliary finite-field datum in universe zero; NX.unit_isIso applies. Thus every component is invertible, and naturality is the natural-transformation composition law. Expanding only the whiskering definitions verifies that this map is precisely realizationMap.",
+   "uses": [
+    "det-sp-normalized-equivalence",
+    "lem-sf-derived-complete-legacy-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-integral-adjunction/sk-prop-sp-integral-adjunction-bijection.proof.md",
+    "place": "Purity: pullback, twist and shift commute with reduction before total derived inverse limit"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-pur-integral-operations-preserve-constructible",
+  "lem-sp-twisted-pullback-line-membership",
+  "lem-weil-integral-constructible-triangulated",
+  "lem-sp-twisted-pullback-cofinal-models",
+  "lem-sp-twisted-pullback-tate-reduction",
+  "lem-pur-reduction-limit-shift-adjunction",
+  "lem-pod-integral-pullback-system-comparison",
+  "def-sp-twisted-pullback-reduction-data",
+  "lem-coef-derived-system-evaluation-calculus",
+  "det-sp-normalized-equivalence",
+  "lem-sf-derived-complete-legacy-comparison"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-integral-adjunction/sk-prop-sp-integral-adjunction-bijection.proof.md",
+  "place": "Purity: pullback, twist and shift commute with reduction before total derived inverse limit",
+  "description": "X2: complete Lean assembly from three strictly simpler construction/membership lemmas, the existing native pullback comparison, and the actual reconstruction unit. No existing statement change."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Realize the smooth purity isomorphism from normalized finite coefficient towers by derived inverse limit with pullback Tate twist shift source comparison",
+   "results": "BDeRhamPlus; BDeRham; AlgebraicGeometry.Proj.pullbackAwayιIso_hom_awayι; AlgebraicGeometry.Proj.pullbackAwayιIso_inv_fst; AlgebraicGeometry.Proj.pullbackAwayιIso_inv_snd; SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom; SheafOfModules.freeFunctorCompPullbackIso; AlgebraicGeometry.Scheme.Modules.pseudofunctor_mapComp_hom_τl. Read the retained command output. These hits do not assert the completed pro-etale constructible/tower comparison in this statement; categorical or ordinary algebraic analogues only.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Integral smooth purity canonical comparison derived complete sheaves cofinal uniformizer powers reduction twist shift",
+   "results": "BDeRhamPlus; BDeRham; instCommRingBDeRhamPlus; PreTilt.exists_smodEq_untiltAux; localCohomology.isoSelfLERadical; PreTilt; PreTilt.untiltFun; PreTilt.untiltAux_smodEq_untiltFun. Read the retained command output. These hits do not assert the completed pro-etale constructible/tower comparison in this statement; categorical or ordinary algebraic analogues only.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.mapIso",
+   "results": "CategoryTheory.Functor.mapIso; CategoryTheory.Functor.mapIso_refl; CategoryTheory.Functor.mapIso_symm; CategoryTheory.Functor.mapIso_hom; CategoryTheory.Functor.mapIso_inv; CategoryTheory.Functor.mapIso_trans; CategoryTheory.Functor.mapIso_injective; CategoryTheory.Functor.preimageIso_mapIso. Read the retained command output. These hits do not assert the completed pro-etale constructible/tower comparison in this statement; categorical or ordinary algebraic analogues only.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "TateTwist|smooth.*purity|purity.*tower|pullback.*twist",
+   "results": "Mathlib/CategoryTheory/Limits/Shapes/Pullback/IsPullback/Basic.lean. Read the retained command output. These hits do not assert the completed pro-etale constructible/tower comparison in this statement; categorical or ordinary algebraic analogues only.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived reduction of completed pullback tensor an integral Tate line and shift is canonically the whole finite coefficient tower with coherent quotient transitions",
+   "results": "AdicCompletion.tensor_map_id_left_eq_map; AdicCompletion.ofTensorProductEquivOfFiniteNoetherian_symm_of; AdicCompletion.ofTensorProductEquivOfPiFintype; AdicCompletion.ofTensorProduct_tmul; AdicCompletion.ofTensorProductEquivOfFiniteNoetherian_apply; AdicCompletion.ofTensorProductEquivOfFiniteNoetherian; AdicCompletion.coe_ofTensorProductEquivOfFiniteNoetherian; AdicCompletion.ofTensorProduct. Read the retained command output. These hits do not assert the completed pro-etale constructible/tower comparison in this statement; categorical or ordinary algebraic analogues only.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived reduction of completed pullback tensor an integral Tate line and shift is canonically the whole finite coefficient tower with coherent quotient transitions",
+   "results": "AdicCompletion.ofTensorProductEquivOfFiniteNoetherian; TensorProduct.toDirectLimit; DerivedCategory.instLinearShiftFunctorInt; DerivedCategory.instHasShiftInt; TensorProduct.fromDirectLimit; AdicCompletion.transitionMap_comp_reduceModIdeal; CategoryTheory.Functor.instCommShiftCochainComplexIntDerivedCategoryHomMapDerivedCategoryFactors; TensorProduct.directLimitRight. Read the retained command output. These hits do not assert the completed pro-etale constructible/tower comparison in this statement; categorical or ordinary algebraic analogues only.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "TateTwist|twist.*reduction|normalized.*constructible|constructible.*tower",
+   "results": "No hits. Read the retained command output. These hits do not assert the completed pro-etale constructible/tower comparison in this statement; categorical or ordinary algebraic analogues only.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived reduction of completed pullback tensor an integral Tate line and shift is canonically the entire finite coefficient tower compatible with quotient transitions",
+   "results": "TensorProduct.toDirectLimit; AdicCompletion.transitionMap_comp_reduceModIdeal; AdicCompletion.ofTensorProductEquivOfFiniteNoetherian; DerivedCategory.instHasShiftInt; DerivedCategory.instLinearShiftFunctorInt; TensorProduct.fromDirectLimit; IsBaseChange.tensorEquiv; lTensor.inverse_comp_lTensor Read actual command output: ordinary algebraic completion, general sheaf pullback or categorical isomorphism facts only; none states this whole derived pro-etale twisted completed pullback comparison.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived reduction of completed pullback tensor an integral Tate line and shift is canonically the entire finite coefficient tower compatible with quotient transitions",
+   "results": "AlgebraicGeometry.Scheme.Pullback.Triplet.Spec_ofPointTensor_SpecTensorTo; AdicCompletion.coe_ofTensorProductEquivOfFiniteNoetherian; AdicCompletion.ofTensorProductEquivOfFiniteNoetherian_symm_of; AdicCompletion.tensor_map_id_left_eq_map; AdicCompletion.ofTensorProductEquivOfFiniteNoetherian_apply; AdicCompletion.ofTensorProduct_tmul; AlgebraicGeometry.Scheme.Pullback.ofPointTensor_SpecTensorTo; AdicCompletion.ofTensorProductEquivOfPiFintype Read actual command output: ordinary algebraic completion, general sheaf pullback or categorical isomorphism facts only; none states this whole derived pro-etale twisted completed pullback comparison.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived complete sheaves equivalence normalized inverse systems reductions pullback invertible module tensor coherent natural comparison",
+   "results": "SheafOfModules.conjugateEquiv_pullbackComp_inv; SheafOfModules.pullbackObjFreeIso; SheafOfModules.freeFunctorCompPullbackIso; CondensedMod.ofSheafProfinite; SheafOfModules.instIsIsoPullbackObjUnitToUnitOfFinal; LightCondensed.instMonoidalClosedSheafLightProfiniteCoherentTopologyModuleCat; LightCondMod.ofSheafLightProfinite; LightCondensed.instMonoidalFunctorOppositeLightProfiniteModuleCatSheafCoherentTopologyPresheafToSheaf Read actual command output: ordinary algebraic completion, general sheaf pullback or categorical isomorphism facts only; none states this whole derived pro-etale twisted completed pullback comparison.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "det-sp-integral-adjunction-bijection",
+  "date": "2026-10-22",
+  "group": "N8"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sp-integral-adjunction",
+ "blueprint": {
+  "from": {
+   "node": "det-sp-integral-adjunction-bijection",
+   "place": "Purity: pullback, twist and shift commute with reduction, including the source comparison before applying total derived inverse limit",
+   "via": []
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sp-twisted-pullback-reduction-tower",
+  "worker": "stage1",
+  "summary": "Statement unchanged. Seven proof steps assemble the coherent completed-pullback comparison, balanced signed-line reduction and shift as whole derived systems, restrict all uniformizer levels to en, and realize using the actual unit. Existing generic lemmas suffice: no new nodes, no Mathlib leaves and no Lean changes. Explicitly checked all negative twists, every quotient transition, ordinary/completed tensor identification and the absence of a Noetherian requirement for the ambient unit.",
+  "blueprint": "Expands the Purity paragraph of det-sp-integral-adjunction-bijection, especially its sentence that pullback, twist and shift commute with reduction; the final step supplies its application of R lim and the unit isomorphism.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-l-adic-extension-integers-dvr",
+    "why": "Coefficient arithmetic gives ell=u*pi^e and generator independence; it supplies no geometric purity assertion. The integral-adjunction unit does not state this supporting calculus."
+   },
+   {
+    "node": "lem-pur-system-level-left-extension",
+    "why": "Uses only componentwise cohomology and exact restriction/evaluations of derived strict systems, a generic indexing tool. The integral-adjunction unit does not state this supporting calculus."
+   },
+   {
+    "node": "lem-pur-integral-operations-preserve-constructible",
+    "why": "Generic completed pullback preservation supplies the domain of the integral reconstruction unit. The integral-adjunction unit does not state this supporting calculus."
+   },
+   {
+    "node": "lem-pur-twist-sheaf-locally-free",
+    "why": "Provides the actual completed Tate line and its finite locally constant rank-one reduction models. The integral-adjunction unit does not state this supporting calculus."
+   },
+   {
+    "node": "lem-pur-integral-line-reduction-restriction",
+    "why": "Generic signed-line result identifies ordinary and completed tensor and preserves constructibility, with normalized quotient comparisons. The integral-adjunction unit does not state this supporting calculus."
+   },
+   {
+    "node": "lem-pur-normalized-scalar-comparison-realization",
+    "why": "Uses its D=E whole-system pullback realization and actual reduction comparison, as a generic completion tool, not a scalar-extension or purity replacement. The integral-adjunction unit does not state this supporting calculus."
+   },
+   {
+    "node": "lem-pur-ordinary-line-derived-scalar-comparison",
+    "why": "Generic balanced chain comparison for signed invertible modules, including K-flatness and independence of representatives. The integral-adjunction unit does not state this supporting calculus."
+   },
+   {
+    "node": "lem-weil-integral-constructible-triangulated",
+    "why": "Only closure under all integer shifts is used. The integral-adjunction unit does not state this supporting calculus."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-l-adic-extension-integers-dvr",
+  "lem-pur-system-level-left-extension",
+  "lem-pur-integral-operations-preserve-constructible",
+  "lem-pur-twist-sheaf-locally-free",
+  "lem-pur-integral-line-reduction-restriction",
+  "lem-pur-normalized-scalar-comparison-realization",
+  "lem-pur-ordinary-line-derived-scalar-comparison",
+  "lem-weil-integral-constructible-triangulated"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q27-a78ea87d1",
+  "group": "Q27",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q27-a78ea87d1 (reviewer sub-agent of L); spot-checked: I read the item, all 11 proof_deps statements, the defs it cites (def-pur-integral-derived-operations, def-coefficient-twists-detailed, sk-def-sp-coefficient-towers, sk-def-sp-normalized-towers, def-weil-completed-integral-coefficients) and the blueprint source main-20261015 sk-prop-sp-integral-adjunction-bijection.proof.md, Purity paragraph (lines 23-26). It is a first split with an unchanged statement, no new nodes, no SGA and no cycle (closure checked). Step checks. (1) DVR (5) gives ell=u*varpi^e with e>=1, so (ell^n)=(varpi^{en}); the explicit inverse on compatible sections is correct (checked e=1 and e=2 at a=1,3); restriction U_r along n->en comes from lem-pur-system-level-left-extension. (2) lem-pur-integral-operations-preserve-constructible(1) needs only ell invertible; twist-sheaf (3)-(4) supplies exactly the line hypotheses of lem-pur-integral-line-reduction-restriction; L^[m]=O_E(m) of def-coefficient-twists-detailed, including m<0. (3) The D=E pullback part of lem-pur-normalized-scalar-comparison-realization states that r_F is an isomorphism of whole systems on D^b_c inputs, with normalized pullback systems. (4-5) ordinary-line lemma with R0=Ô, R1=A_a, R2=A_b; the cocycle and the a->b square check out. (6) The shift sign is (-1)^s d⊗1 on both sides, and the line in degree 0 gives no Koszul swap. (7) The unit clause of det-sp-normalized-equivalence holds for derived-complete objects with no Noetherian hypothesis. Edge cases checked: m=0,±1 and negative m, s of either sign, K=0, empty schemes, e=1,2, a=b. The citer det-sp-integral-adjunction-bijection uses the item with m=d, s=2d and v=gamma, which matches the item. Duplicate search: lem-pur-adic-source-finiteness-reductions gives only levelwise isomorphisms for D^b_ctf with m=d, s=2d and no realization clause, so it is partial overlap, not a duplicate (advisory: it could later cite this item). tool_uses are generic coefficient calculus; accepted."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.TwistedPullbackReductionTower",
+  "declaration": "WeilConjectures.SpTwistedPullback.twistedPullbackReductionTower",
+  "declarations": [
+   "WeilConjectures.SpTwistedPullback.twistedPullbackReductionTower"
+  ],
+  "file": "lean/Sheaf/Paper/TwistedPullbackReductionTower.lean",
+  "statement": "theorem twistedPullbackReductionTower (D₀ : FiniteFieldDatum.{u}) (_hlp : l ≠ D₀.p) (X Y : Over (Spec (CommRingCat.of D₀.k))) [IsSeparated X.hom] [LocallyOfFiniteType X.hom] [QuasiCompact X.hom] [IsSeparated Y.hom] [LocallyOfFiniteType Y.hom] [QuasiCompact Y.hom] (f : X ⟶ Y) [IsSeparated f.left] (d : ℕ) [SmoothOfRelativeDimension d f.left] (b : SpTowerShriek.Base l E) (g : SpTowerShriek.Geometry l E b f.left) (DX : SpCoefficientTowersAbelian l E X.left) (RX : SpReductionTower l E X.left DX) (NX : SpNormalizedEquivalence l E X.left DX RX) (DY : SpCoefficientTowersAbelian l E Y.left) (RY : SpReductionTower l E Y.left DY) (m s : ℤ) : (∀ K : sfIntegralConstructibleCategory l E Y.left, sfIntegralConstructible l E X.left ((source l E f.left m s).obj K)) ∧ ∃ (hX : ∀ x : X.left, Invertible (l : X.left.residueField x)) (hY : ∀ y : Y.left, Invertible (l : Y.left.residueField y)), letI := hX letI := hY ∃ (AX : IntegralStrictReductionModel l E X.left) (AY : IntegralStrictReductionModel l E Y.left) (FX : CofinalModel l E b X.left) (FY : CofinalModel l E b Y.left) (cX : CofinalReduction l E b X.left DX RX AX FX) (cY : CofinalReduction l E b Y.left DY RY AY FY) (G : CofinalGeometry l E b f.left g FX FY) (T : CofinalTensor l E b X.left FX) (tate : TateReduction l E X.left) (h : PurReductionLimitShiftData l E X.left (coefficientDerivedSystemEvaluationCalculus l E X.left).choose) (a : (sfIntegralConstructible l E Y.left).ι ⋙ integralDerivedPullback l E f.left ⋙ (coefficientDerivedSystemEvaluationCalculus l E X.left).choose.reduction ≅ integralSystemReduction l E Y.left ⋙ finiteSystemDerivedPullback (integralSystemRings l E) (integralSystemTransition l E) f.left) (q : source l E f.left m s ⋙ reduction l E b X.left DX RX ≅ finiteSource l E b f.left g DX RX DY RY m s), (∀ (K : sfIntegralConstructibleCategory l E Y.left) (P : (integralOperationsGoodComplex l E Y.left).FullSubcategory) (e : DerivedCategory.Q.obj P.obj ≅ K.obj) (n : ℕ), (finiteSystemDerivedEvaluation (integralSystemRings l E) (integralSystemTransition l E) X.left n).map (a.hom.app K) ≫ (finiteSystemDerivedPullbackEvaluation (integralSystemRings l E) (integralSystemTransition l E) f.left n).hom.app ((integralSystemReduction l E Y.left).obj K) ≫ (Scheme.proEtaleConstantRingDerivedPullback (Padic.coefficientExtensionRing l E (n + 1)) f.left).map ((integralSystemReductionEvaluation l E Y.left n).hom.app K) = (((coefficientDerivedSystemEvaluationCalculus l E X.left).choose.reductionEvaluation n).hom.app ((integralDerivedPullback l E f.left).obj K.obj)) ≫ (integralSystemPullbackReductionIso l E f.left K P e n).hom) ∧ (∀ K : sfIntegralConstructibleCategory l E Y.left, q.app K = (cX.derived.app ((source l E f.left m s).obj K)).symm ≪≫ FX.ordinary.mapDerivedCategory.mapIso (nativeComparison l E f.left m s h a K) ≪≫ cofinalSourceComparison l E b f.left g DX RX DY RY AX AY FX FY cX cY G T m s K) ∧ (∀ C : sfIntegralConstructibleCategory l E Y.left ⥤ spNormalizedConstructibleTorTowerCategory l E X.left DX, ∀ v : finiteSource l E b f.left g DX RX DY RY m s ≅ C ⋙ (spNormalizedConstructibleTorTowers l E X.left DX).ι ⋙ (spTowerShriekRealization l E b X.left DX).functor, (∀ K : sfIntegralConstructibleCategory l E Y.left, IsIso (realizationMap l E b f.left g DX RX NX DY RY m s q C v K)) ∧ ∀ (K K' : sfIntegralConstructibleCategory l E Y.left) (z : K ⟶ K'), letI := NX.forgetAdditive letI := NX.forgetLimits letI := NX.forgetColimits (source l E f.left m s).map z ≫ realizationMap l E b f.left g DX RX NX DY RY m s q C v K' = realizationMap l E b f.left g DX RX NX DY RY m s q C v K ≫ (spCompletedTotalLimit l E X.left DX).map (C.map z).hom)",
+  "branch": "newtargets-dag",
+  "by": "NR",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-8a87af8ac",
+  "group": "NR",
+  "result": "fix",
+  "note": "Lean and records correct in substance, unchanged. Hypotheses exact (l≠p, separated lft+qc X,Y over k, f separated SmoothOfRelativeDimension d, m,s∈ℤ; ℓ invertibility only an existential conclusion). q is an iso of whole strict-system towers fixed by an explicit composite (reduction_shift, reductionTensor, tensor of a) carried by the cofinal package (index e(n+1)-1, HEq sections/maps/scalars, mate of identity, pure-tensor chain, representative pins). a is pinned on every good representative and level exactly like landed integralPullbackSystemComparison. Realization = NX unit then total limit of q≫v, IsIso for every K plus naturality. Edge cases m=0, m<0, s<0, d=0, K=0, empty X/Y, e=1 and e>1 covered. Statement fields verbatim, 17 declarations exist, only the main proof is sorry, no hollow defs, docstrings OK, pro-etale site, new-node H12 fields OK, added stmt_deps are landed definition nodes. Only fault: H11, the Second reading by NR is the worker's self-check; fixed by fixes/lem-sp-twisted-pullback-reduction-tower.report.md (worker report and New nodes verbatim plus an independent clause-by-clause reading). Advisories: source builds K(m) with the K-flat derived tensor instead of the recorded sfIntegralTwistingFunctor (canonically isomorphic for the flat line; the citer det-sp-integral-adjunction-bijection must insert the comparison); the ∃ tate clause is unused; owners not cited (det-sp-tower-shriek-levels, det-sp-reduction-tower-normalized and others) as in landed practice. No compile run because no Lean file changed."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "X2",
+  "result": "pass",
+  "landing": "20261026T003137-L-149491",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

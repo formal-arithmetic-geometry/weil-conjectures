@@ -1,0 +1,301 @@
+{
+ "id": "lem-pur-kummer-triangle-concentration",
+ "kind": "statement",
+ "title": "Kummer restriction triangle: derived concentration and tensor-unit Tor bound",
+ "statement": "Fix $k,\\ell,E,n,A$ in the finite-coefficient setting of [def-pur-conventions], with $k=\\overline{\\mathbf F}_q$, $\\ell\\ne\\operatorname{char}k$, $A=\\mathcal O_E/\\varpi_E^n$, $n\\geq1$. Let $Y$ be a separated finite-type $k$-scheme and suppose $e(E/\\mathbf Q_\\ell)\\mid n$. Use $X=\\mathbf A^1_Y$, $p:X\\to Y$, the zero section $s$, its open complement $j:U=\\mathbf G_{m,Y}\\hookrightarrow X$, $\\pi=pj$, the twist $A(1)$, and $\\kappa(t)\\in H^1(U,A(1))$ from [def-pur-affine-line-datum]. All sheaves and derived categories are ordinary constant-$A$ module sheaves on the small pro-etale sites [def-weil-pbc-proetale-modules]. Put $P=Rp_*A_X(1)[0]$ and $Q=R\\pi_*A_U(1)[0]$ [def-weil-derived-direct-image]. Let\n$$B_0\\longrightarrow P\\xrightarrow{r}Q\\xrightarrow{\\delta}B_0[1]$$\nbe any distinguished triangle [def-weil-triangulated-category] whose second arrow is derived restriction along $j$, with the canonical direct-image composition identification [lem-weil-derived-direct-image-composition]. Use cohomology sheaves [def-weil-derived-cohomology-sheaves] and put $C_0=B_0[2]$.\n\nThe unit $A_Y(1)[0]\\to P$ is an isomorphism, $\\mathcal H^0(r)$ is an isomorphism, $P$ has no cohomology outside degree zero, and $Q$ has no cohomology outside degrees zero and one. Let $\\gamma:A_Y\\to\\mathcal H^1(Q)$ be the map sending $1$ to the edge image of $\\kappa(t)$. The connecting map of this triangle gives an isomorphism $\\delta^1:\\mathcal H^1(Q)\\xrightarrow{\\sim}\\mathcal H^2(B_0)$, and $\\gamma$ is an isomorphism. There is a derived isomorphism\n$$\\theta:A_Y[0]\\xrightarrow{\\sim}C_0$$\nwhose degree-zero cohomology map, under $\\mathcal H^0(C_0)=\\mathcal H^2(B_0)$, is exactly $\\delta^1\\gamma$. More precisely the canonical good-truncation isomorphism $C_0\\cong\\mathcal H^0(C_0)[0]$ [def-sbc-standard-tstructure-derived-category] induces the identity on $\\mathcal H^0$; composing its inverse with $(\\delta^1\\gamma)[0]$ gives $\\theta$. In particular $\\mathcal H^m(B_0)=0$ for $m\\ne2$, and $C_0$ has constant lisse rank-one degree-zero cohomology and no other cohomology. Moreover $C_0\\in D^b_{ctf}(Y,A)$ [def-weil-finite-torsion-constructibility, def-weil-finite-tor-amplitude]. For every degree-zero module sheaf $M$, there is an isomorphism $C_0\\otimes_A^L M[0]\\cong M[0]$ induced by $\\theta$ and the tensor unit [def-weil-derived-tensor], so its Tor interval is $[0,0]$.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-a1-kummer/lem-pur-gysin-structure.proof.md",
+  "place": "First paragraph, units and Kummer generator, long exact sequence, shift, good truncation and finite-Tor conclusion; returned steps 3-6."
+ },
+ "stmt_deps": [
+  "def-pur-conventions",
+  "def-pur-affine-line-datum",
+  "def-weil-pbc-proetale-modules",
+  "def-weil-derived-direct-image",
+  "def-weil-triangulated-category",
+  "def-weil-derived-cohomology-sheaves",
+  "def-sbc-standard-tstructure-derived-category",
+  "def-weil-finite-torsion-constructibility",
+  "def-weil-finite-tor-amplitude",
+  "def-weil-derived-tensor",
+  "lem-weil-derived-direct-image-composition"
+ ],
+ "proof": [
+  {
+   "text": "The coefficient module categories on the chosen small pro-etale sites are Grothendieck abelian by [lem-weil-pbc-ring-sheaves-grothendieck], applied to the constant ring sheaves. Both direct images are additive and left exact by [lem-weil-proetale-module-direct-image-left-exact]. Apply [lem-weil-pbc-derived-functor-negative-vanishing] with $b=0$ to the degree-zero sheaves $A_X(1)$ and $A_U(1)$. Thus $\\mathcal H^m(P)=\\mathcal H^m(Q)=0$ for $m<0$. The total derived images here restrict to the bounded-below right derived functors used by that lemma, computed by the same injective resolutions.",
+   "uses": [
+    "lem-weil-pbc-ring-sheaves-grothendieck",
+    "lem-weil-proetale-module-direct-image-left-exact",
+    "lem-weil-pbc-derived-functor-negative-vanishing"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 05TC, lemma-negative-vanishing (1), applied to degree-zero module sheaves"
+   }
+  },
+  {
+   "text": "Apply [prop-pur-gm-relative-kummer](1)-(3), with $\\Lambda=A$ and precisely the specified pro-etale Kummer class. It gives the unit $u_p:A_Y(1)[0]\\xrightarrow{\\sim}P$, $\\mathcal H^m(Q)=0$ for $m\\ge2$, and the isomorphism $\\gamma:A_Y\\xrightarrow{\\sim}\\mathcal H^1(Q)$ sending $1$ to the edge image of $\\kappa(t)$. Its clause (2) identifies the degree-zero unit for $\\pi$ with restriction composed with $p^*$: $u_\\pi^0=\\mathcal H^0(r)\\mathcal H^0(u_p)$. Both units are invertible, so $\\mathcal H^0(r)=u_\\pi^0\\mathcal H^0(u_p)^{-1}$ is invertible. Since $u_p$ identifies $P$ with a degree-zero sheaf, $P$ vanishes cohomologically outside zero. Together with step 1 this gives every claimed bound on $P,Q$.",
+   "uses": [
+    "prop-pur-gm-relative-kummer"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-a1-kummer/lem-pur-gysin-structure.proof.md",
+    "place": "First paragraph: restriction triangle and its cohomology"
+   }
+  },
+  {
+   "text": "Use [lem-sf-derived-homology-long-exact] for the given triangle, without rotating it. Its degree-zero segment, since $\\mathcal H^{-1}(Q)=0$, is $0\\to\\mathcal H^0(B_0)\\to\\mathcal H^0(P)\\xrightarrow{\\sim}\\mathcal H^0(Q)\\to\\mathcal H^1(B_0)\\to0$. Exactness makes the kernel and cokernel of this isomorphism zero, hence $\\mathcal H^0(B_0)=\\mathcal H^1(B_0)=0$. The next segment is $0=\\mathcal H^1(P)\\to\\mathcal H^1(Q)\\xrightarrow{\\delta^1}\\mathcal H^2(B_0)\\to\\mathcal H^2(P)=0$, so the actual connecting map $\\delta^1$ is an isomorphism.",
+   "uses": [
+    "lem-sf-derived-homology-long-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 05RS, lemma-cohomology-homological; Tag 0147, equation-long-exact-cohomology-sequence (unrotated triangle)"
+   }
+  },
+  {
+   "text": "For $m<0$ or $m\\ge3$, the same exact sequence has segment $\\mathcal H^{m-1}(Q)\\to\\mathcal H^m(B_0)\\to\\mathcal H^m(P)$ with both outer objects zero, so $\\mathcal H^m(B_0)=0$. Together with step 3 this leaves only degree two. The cochain shift convention [def-weil-abstract-derived-category] gives $\\mathcal H^i(C_0)=\\mathcal H^{i+2}(B_0)$; hence $C_0=B_0[2]$ is concentrated in degree zero, and $\\delta^1\\gamma:A_Y\\xrightarrow{\\sim}\\mathcal H^0(C_0)$.",
+   "uses": [
+    "lem-sf-derived-homology-long-exact",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 0147, long exact sequence; cochain shift convention preceding lemma-cohomology-homological"
+   }
+  },
+  {
+   "text": "Apply [lem-pur-good-truncation-exact-normalization] to $C_0$ in the abelian category of $A_Y$-module sheaves. Its canonical isomorphism $\\epsilon:C_0\\xrightarrow{\\sim}\\mathcal H^0(C_0)[0]$ is $Q(p_K)Q(c_K)^{-1}$ on any representative $K$. On $H^0$, $c_K$ identifies cycles modulo boundaries with the same quotient, and $p_K$ sends a cycle to its class, so $H^0(\\epsilon)$ is the identity under the canonical single-complex comparison. Define $\\theta=\\epsilon^{-1}\\circ(\\delta^1\\gamma)[0]$. This is a derived isomorphism and its degree-zero map is exactly $\\delta^1\\gamma$, as required.",
+   "uses": [
+    "lem-pur-good-truncation-exact-normalization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/homology.tex",
+    "place": "Tag 0118, section-truncations: canonical cochain truncation at zero, cycle-to-cohomology quotient"
+   }
+  },
+  {
+   "text": "By step 5 the only cohomology sheaf of $C_0$ is the constant sheaf $A_Y$, which is already globally free of rank one. Thus it is lisse. The one stratum $Y$ and the finite module $A$ satisfy [def-weil-finite-torsion-constructibility] (use the empty partition if $Y$ is empty); hence $C_0\\in D^b_c(Y,A)$. No conclusion is inferred merely from fibre ranks.",
+   "uses": [
+    "def-weil-finite-torsion-constructibility"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-a1-kummer/lem-pur-gysin-structure.proof.md",
+    "place": "First paragraph: restriction triangle and its cohomology"
+   }
+  },
+  {
+   "text": "The sheaf tensor definition [def-pur-sheaf-tensor-product] gives $A_Y\\otimes_{A_Y}F\\cong F$ by $a\\otimes x\\mapsto ax$, inverse $x\\mapsto1\\otimes x$; these sectionwise mutually inverse maps sheafify and commute with restrictions. Consequently the total tensor of $A_Y[0]$ with any complex $F^\\bullet$ is that same complex, degree by degree, with the same differential [def-pc-tensor-complex-sheaves]. In particular it sends acyclic complexes to acyclic complexes, so $A_Y[0]$ is K-flat by [def-pc-kflat-complex].",
+   "uses": [
+    "def-pur-sheaf-tensor-product",
+    "def-pc-tensor-complex-sheaves",
+    "def-pc-kflat-complex"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-a1-kummer/lem-pur-gysin-structure.proof.md",
+    "place": "First paragraph: restriction triangle and its cohomology"
+   }
+  },
+  {
+   "text": "For any degree-zero module sheaf $M$, use the K-flat representative $A_Y[0]$ in [def-weil-derived-tensor] to compute $A_Y[0]\\otimes_A^L M[0]\\cong M[0]$ by step 7. Tensoring the inverse of $\\theta$ gives $C_0\\otimes_A^L M[0]\\xrightarrow{\\sim}A_Y[0]\\otimes_A^L M[0]\\xrightarrow{\\sim}M[0]$. It has cohomology only in degree zero for every $M$, so [def-weil-finite-tor-amplitude] gives the Tor interval $[0,0]$. With step 6 this proves $C_0\\in D^b_{ctf}(Y,A)$.",
+   "uses": [
+    "def-weil-derived-tensor",
+    "def-weil-finite-tor-amplitude"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-a1-kummer/lem-pur-gysin-structure.proof.md",
+    "place": "First paragraph: restriction triangle and its cohomology"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-kflat-complex",
+  "def-pc-tensor-complex-sheaves",
+  "def-pur-sheaf-tensor-product",
+  "def-weil-abstract-derived-category",
+  "def-weil-derived-tensor",
+  "def-weil-finite-tor-amplitude",
+  "def-weil-finite-torsion-constructibility",
+  "lem-pur-good-truncation-exact-normalization",
+  "lem-sf-derived-homology-long-exact",
+  "lem-weil-pbc-derived-functor-negative-vanishing",
+  "lem-weil-pbc-ring-sheaves-grothendieck",
+  "lem-weil-proetale-module-direct-image-left-exact",
+  "prop-pur-gm-relative-kummer"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-a1-kummer/lem-pur-gysin-structure.proof.md",
+  "place": "First paragraph; explicit long-exact-sequence, normalized good-truncation and tensor-unit arguments, using existing general DAG tools."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "concentrated|isIso.*homology|iso.*singleFunctor",
+   "results": "{\"t\": \"2026-10-22T06:46:07Z\", \"tool\": \"grep\", \"query\": \"concentrated|isIso.*homology|iso.*singleFunctor\", \"sub\": \"Algebra/Homology/DerivedCategory\", \"ok\": true, \"n_hits\": 19, \"note\": \"\", \"top\": [\"Mathlib/Algebra/Homology/DerivedCategory/HomologySequence.lean\", \"Mathlib/Algebra/Homology/DerivedCategory/HomologySequence.lean\", \"Mathlib/Algebra/Homology/DerivedCategory/TStructure.lean\", \"Mathlib/Algebra/Homology/DerivedCategory/Basic.lean\", \"Mathlib/Algebra/Homology/DerivedCategory/Basic.lean\", \"Mathlib/Algebra/Homology/DerivedCategory/Basic.lean\", \"Mathlib/Algebra/Homology/DerivedCategory/ExactFunctor.lean\", \"Mathlib/Algebra/Homology/DerivedCategory/ExactFunctor.lean\"], \"digest\": \"20201b90d8b339b5\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: generic single-degree and homology-detection tools do not compute the A1/Gm restriction map, Kummer boundary generator or the resulting tensor-unit Tor bound. TStructure.lean:189 and HomologySequence.lean:89 were read."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Kummer localization triangle support complex on affine line is constant shifted by minus two with finite Tor amplitude",
+   "results": "{\"t\": \"2026-10-22T06:46:08Z\", \"tool\": \"leansearch\", \"query\": \"Kummer localization triangle support complex on affine line is constant shifted by minus two with finite Tor amplitude\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"DerivedCategory.isGE_Q_obj_iff\", \"CategoryTheory.Triangulated.Localization.instAdditiveLocalization'ShiftFunctorInt\", \"CategoryTheory.Triangulated.Localization.instIsTriangulatedLocalization'\", \"DerivedCategory.instIsLEObjCochainComplexIntQOfIsLE\", \"CategoryTheory.Triangulated.Localization.instPretriangulatedLocalization\", \"CategoryTheory.Triangulated.Localization.isTriangulated_functor\", \"HomologicalComplex.quasiIso_ιTruncLE_iff_isSupported\", \"CochainComplex.isIso_ιTruncLE_iff\"], \"digest\": \"e47736b77ab89583\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: generic single-degree and homology-detection tools do not compute the A1/Gm restriction map, Kummer boundary generator or the resulting tensor-unit Tor bound. TStructure.lean:189 and HomologySequence.lean:89 were read."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"DerivedCategory\", \"single\"",
+   "results": "{\"t\": \"2026-10-22T06:46:08Z\", \"tool\": \"loogle\", \"query\": \"\\\"DerivedCategory\\\", \\\"single\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"DerivedCategory.singleFunctor\", \"DerivedCategory.singleFunctors\", \"DerivedCategory.instAdditiveSingleFunctor\", \"DerivedCategory.singleFunctorIsoCompQ\", \"DerivedCategory.singleFunctorsPostcompQIso\", \"DerivedCategory.singleFunctorIsoCompQh\", \"DerivedCategory.singleFunctorsPostcompQhIso\", \"DerivedCategory.Q_obj_single_obj\"], \"digest\": \"989edf5244b05d5d\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: generic single-degree and homology-detection tools do not compute the A1/Gm restriction map, Kummer boundary generator or the resulting tensor-unit Tor bound. TStructure.lean:189 and HomologySequence.lean:89 were read."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "If P is a degree zero sheaf and Q has cohomology in degrees zero and one with H0 restriction an isomorphism then the fiber shifted by two is a constant rank one sheaf of Tor amplitude zero",
+   "results": "{\"t\": \"2026-10-22T06:46:19Z\", \"tool\": \"leanfinder\", \"query\": \"If P is a degree zero sheaf and Q has cohomology in degrees zero and one with H0 restriction an isomorphism then the fiber shifted by two is a constant rank one sheaf of Tor amplitude zero\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Sheaf.H\", \"DerivedCategory.exists_iso_singleFunctor_obj_of_isGE_of_isLE\", \"DerivedCategory.isGE_Q_obj_iff\", \"DerivedCategory.isLE_Q_obj_iff\", \"DerivedCategory.instIsGEObjSingleFunctor\", \"DerivedCategory.exists_iso_Q_obj_of_isGE_of_isLE\", \"DerivedCategory.exists_iso_Q_obj_of_isGE\", \"DerivedCategory.isGE_iff\"], \"digest\": \"b4b0e4f6b27ba448\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: generic single-degree and homology-detection tools do not compute the A1/Gm restriction map, Kummer boundary generator or the resulting tensor-unit Tor bound. TStructure.lean:189 and HomologySequence.lean:89 were read."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "In the derived category of sheaves the localization triangle of the affine and punctured lines with Kummer coefficients has fiber the constant module in degree two",
+   "results": "{\"t\": \"2026-10-22T06:46:19Z\", \"tool\": \"leanfinder\", \"query\": \"In the derived category of sheaves the localization triangle of the affine and punctured lines with Kummer coefficients has fiber the constant module in degree two\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"DerivedCategory.exists_iso_singleFunctor_obj_of_isGE_of_isLE\", \"DerivedCategory.instIsGEObjSingleFunctor\", \"DerivedCategory.instIsLEObjSingleFunctor\", \"AlgebraicGeometry.exists_appTop_map_eq_zero_of_isAffine_of_isLimit\", \"DerivedCategory.left_fac_of_isStrictlyGE\", \"DerivedCategory.left_fac_of_isStrictlyLE_of_isStrictlyGE\", \"DerivedCategory.to_singleFunctor_obj_eq_zero_of_injective\", \"DerivedCategory.exists_iso_Q_obj_of_isGE_of_isLE\"], \"digest\": \"435b7dbe60fc0b7f\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: generic single-degree and homology-detection tools do not compute the A1/Gm restriction map, Kummer boundary generator or the resulting tensor-unit Tor bound. TStructure.lean:189 and HomologySequence.lean:89 were read."
+  },
+  {
+   "tool": "grep",
+   "query": "kummer|Kummer|exists_iso_singleFunctor_obj_of_isGE_of_isLE",
+   "results": "{\"t\": \"2026-10-22T07:54:38Z\", \"tool\": \"grep\", \"query\": \"kummer|Kummer|exists_iso_singleFunctor_obj_of_isGE_of_isLE\", \"sub\": \"Algebra/Homology/DerivedCategory\", \"ok\": true, \"n_hits\": 3, \"note\": \"\", \"top\": [\"Mathlib/Algebra/Homology/DerivedCategory/TStructure.lean\", \"Mathlib/Algebra/Homology/DerivedCategory/Ext/TStructure.lean\", \"Mathlib/Algebra/Homology/DerivedCategory/Ext/TStructure.lean\"], \"digest\": \"a9af31a840409edb\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: results give general truncation, single-complex or unrelated localization/group-cohomology facts, not the pro-etale relative Kummer restriction triangle. TStructure.lean:189-194 was read; existing DAG tools are reused."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"DerivedCategory\", \"singleFunctor\"",
+   "results": "{\"t\": \"2026-10-22T07:54:39Z\", \"tool\": \"loogle\", \"query\": \"\\\"DerivedCategory\\\", \\\"singleFunctor\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"DerivedCategory.singleFunctor\", \"DerivedCategory.singleFunctors\", \"DerivedCategory.instAdditiveSingleFunctor\", \"DerivedCategory.singleFunctorIsoCompQ\", \"DerivedCategory.singleFunctorsPostcompQIso\", \"DerivedCategory.singleFunctorIsoCompQh\", \"DerivedCategory.singleFunctorsPostcompQhIso\", \"DerivedCategory.singleFunctorIsoCompQ_hom_app\"], \"digest\": \"9bfc06cbd5eff124\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: results give general truncation, single-complex or unrelated localization/group-cohomology facts, not the pro-etale relative Kummer restriction triangle. TStructure.lean:189-194 was read; existing DAG tools are reused."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Kummer cohomology localization triangle of affine line and multiplicative group",
+   "results": "{\"t\": \"2026-10-22T07:54:39Z\", \"tool\": \"leansearch\", \"query\": \"Kummer cohomology localization triangle of affine line and multiplicative group\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Triangulated.Localization.instIsTriangulatedLocalization'\", \"AlgebraicGeometry.Γ_restrict_isLocalization\", \"groupCohomology.isMulCoboundary₁_of_isMulCocycle₁_of_aut_to_units\", \"CategoryTheory.Triangulated.Localization.instIsTriangulatedLocalization\", \"Algebra.tensorH1CotangentOfIsLocalization\", \"groupCohomology.mapCocycles₁_comp_i\", \"groupCohomology.isoCocycles₁_hom_comp_i\", \"groupCohomology.H1InfRes\"], \"digest\": \"095f3babe9405a00\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: results give general truncation, single-complex or unrelated localization/group-cohomology facts, not the pro-etale relative Kummer restriction triangle. TStructure.lean:189-194 was read; existing DAG tools are reused."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "If restriction induces an isomorphism on degree zero and punctured line cohomology is generated by Kummer class then shifted fiber is constant rank one",
+   "results": "{\"t\": \"2026-10-22T07:54:48Z\", \"tool\": \"leanfinder\", \"query\": \"If restriction induces an isomorphism on degree zero and punctured line cohomology is generated by Kummer class then shifted fiber is constant rank one\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"groupCohomology.exists_mul_galRestrict_of_norm_eq_one\", \"CochainComplex.ConnectData.restrictionGEIso\", \"Rep.FiniteCyclicGroup.homResolutionIso\", \"CochainComplex.ConnectData.restrictionLEIso\", \"CochainComplex.ConnectData.restrictionLEIso_hom_f\", \"groupCohomology.isMulCoboundary₁_of_isMulCocycle₁_of_aut_to_units\", \"groupCohomology.H1ofAutOnUnitsUnique\", \"groupCohomology.inhomogeneousCochainsIso\"], \"digest\": \"2365141af804766d\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: results give general truncation, single-complex or unrelated localization/group-cohomology facts, not the pro-etale relative Kummer restriction triangle. TStructure.lean:189-194 was read; existing DAG tools are reused."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Kummer restriction triangle on affine line has fiber concentrated in degree two and is a shifted tensor unit",
+   "results": "{\"t\": \"2026-10-22T07:54:49Z\", \"tool\": \"leanfinder\", \"query\": \"Kummer restriction triangle on affine line has fiber concentrated in degree two and is a shifted tensor unit\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Triangulated.TStructure.truncGEδLT\", \"CategoryTheory.Triangulated.TStructure.triangleLTGE\", \"CategoryTheory.ShortComplex.ShortExact.singleTriangle_obj₁\", \"CategoryTheory.Triangulated.TStructure.exists_triangle_zero_one\", \"CochainComplex.triangleOfDegreewiseSplit_obj₁\", \"CochainComplex.triangleOfDegreewiseSplit\", \"CategoryTheory.Triangulated.TStructure.triangleLTGE_obj_mor₁\", \"CategoryTheory.Pretriangulated.contractibleTriangleFunctor_obj\"], \"digest\": \"c5be2fed8535775b\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: results give general truncation, single-complex or unrelated localization/group-cohomology facts, not the pro-etale relative Kummer restriction triangle. TStructure.lean:189-194 was read; existing DAG tools are reused."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-pur-gysin-structure",
+  "date": "2026-10-22",
+  "group": "Q159"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-a1-kummer",
+ "blueprint": {
+  "from": {
+   "node": "lem-pur-gysin-structure",
+   "place": "First paragraph, units and Kummer generator, long exact sequence, shift, good truncation and finite-Tor conclusion; returned steps 3-6.",
+   "via": []
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-pur-kummer-triangle-concentration",
+  "worker": "stage1",
+  "summary": "Q123: unchanged statement. Eight steps assemble the reviewed relative Kummer computation with negative vanishing, the long exact cohomology sequence, canonical good truncation, and an explicit K-flat tensor-unit computation. All auxiliary facts already exist; zero new nodes. Negative degrees, the actual boundary normalization, empty base and non-flat test modules are included.",
+  "blueprint": "lem-pur-gysin-structure.proof.md first paragraph: units and restriction (steps 1-2), long exact sequence and shift (3-4), degree-zero constant object (5-6), finite Tor conclusion (7-8).",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-ring-sheaves-grothendieck",
+    "why": "Generic ringed-site module-category foundation, needed for the bounded-below vanishing theorem; no Kummer computation is replaced."
+   },
+   {
+    "node": "lem-weil-proetale-module-direct-image-left-exact",
+    "why": "Generic module direct-image exactness hypothesis for negative vanishing."
+   },
+   {
+    "node": "lem-weil-pbc-derived-functor-negative-vanishing",
+    "why": "Generic right-derived negative-degree bound; the unit computation only states positive vanishing."
+   },
+   {
+    "node": "lem-pur-good-truncation-exact-normalization",
+    "why": "Generic canonical good-truncation isomorphism, after concentration has been proved; fixes the precise H0 map without using purity."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-ring-sheaves-grothendieck",
+  "lem-weil-proetale-module-direct-image-left-exact",
+  "lem-weil-pbc-derived-functor-negative-vanishing",
+  "lem-pur-good-truncation-exact-normalization"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q123-0728940ea",
+  "group": "Q123",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q123-0728940ea (reviewer sub-agent of L); spot-checked: Read the source: blueprint main-20261015 sk-prop-a1-kummer/lem-pur-gysin-structure.proof.md, first paragraph. The item is the Q159 re-split child and has no repair note of its own. Its statement and stmt_deps are identical to the Q159 fix. The delivery creates 0 new nodes and has 8 steps. Steps 1-2: negative vanishing via the Grothendieck site, left-exact f_* and lem-weil-pbc-derived-functor-negative-vanishing (b=0); Rf_* is computed by the K-injective resolution of def-weil-derived-direct-image, so the lemma applies. prop-pur-gm-relative-kummer (1)-(3) gives u_p, gamma iso and R^{>=2}pi_*=0. Its clause (2) says the unit equals restriction composed with p^*, which gives H^0(r) invertible; the blueprint cites fix-prop-adjunctions(3) here instead, and I accept the substitution. Steps 3-4: the long exact sequence (Mathlib leaf), triangle not rotated. H^0B=H^1B=0, delta^1 is an iso, and every m<0 or m>=3 is covered. Shift H^i(B[2])=H^{i+2}(B) is correct. Step 5: H^0 of the good-truncation epsilon is the identity, so theta = epsilon^{-1}(delta^1 gamma)[0] is a derived iso; this is the same tau<=0 iso that the statement names via def-sbc-standard-tstructure. Steps 6-8 are elementary from the definitions: one stratum (empty partition if Y is empty), A_Y[0] is K-flat (only p=0 contributes, sign +1), C_0 tensor^L M = M[0], Tor [0,0]. Advisory only: step 8 uses invariance of tensor^L under isomorphism in D. Small cases checked: Y=Spec k gives C_0=A; Y empty; M=A/varpi with n>1. Duplicate scan found the parent, thm-pur-affine-line-orientation and lem-pur-affine-line-boundary-realization (unsplit, assumes concentration, different content); none is a duplicate, and there is no cycle. Searches cover grep, LeanSearch, Loogle and LeanFinder. The 4 generic off-unit tool_uses are accepted. No SGA. Batch-5: the flagged path prop-pur-gm-relative-kummer -> def-pur-affine-line-datum -> ... -> lem-poincare-compatible-primitive-roots adds zero forbidden nodes, since def-pur-affine-line-datum is already a stmt_dep of the item. That target is a roots-of-unity local-trivialization fact (Tate-twist foundation), not a step of the trace formula or Poincare duality, as also accepted for Q159 d8377036 and Q03. No fixes written."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.PurityKummerTriangleConcentration",
+  "declaration": "WeilConjectures.PurityFiniteSetting.kummer_triangle_concentration",
+  "declarations": [
+   "WeilConjectures.PurityFiniteSetting.orientationTensorUnitIso",
+   "WeilConjectures.PurityFiniteSetting.OrientationTensorUnitConclusions",
+   "WeilConjectures.PurityFiniteSetting.KummerSheaves",
+   "WeilConjectures.PurityFiniteSetting.kummerImage",
+   "WeilConjectures.PurityFiniteSetting.kummerRestriction",
+   "WeilConjectures.PurityFiniteSetting.kummerConstantUnit",
+   "WeilConjectures.PurityFiniteSetting.kummerDerivedUnit",
+   "WeilConjectures.PurityFiniteSetting.kummerIntrinsicRealization",
+   "WeilConjectures.PurityFiniteSetting.kummerBoundaryZero",
+   "WeilConjectures.PurityFiniteSetting.kummerConstructibleFiniteTor",
+   "WeilConjectures.PurityFiniteSetting.kummerTorZero",
+   "WeilConjectures.PurityFiniteSetting.kummer_triangle_concentration"
+  ],
+  "file": "lean/Sheaf/Paper/PurityKummerTriangleConcentration.lean",
+  "statement": "theorem kummer_triangle_concentration (P : PurityFiniteSetting.{u}) (h : P.ramificationIndex ∣ P.level) (Y : Scheme.{u}) (a : Y ⟶ Spec (CommRingCat.of P.field.k)) [IsSeparated a] [LocallyOfFiniteType a] [QuasiCompact a] (B : DerivedCategory (P.KummerSheaves Y)) (b : B ⟶ P.kummerImage h Y false) (δ : P.kummerImage h Y true ⟶ B⟦(1 : ℤ)⟧) (hT : Triangle.mk b (P.kummerRestriction h Y) δ ∈ distTriang _) : IsIso (P.relativeUnit h (lineProjection Y) true) ∧ IsIso ((DerivedCategory.homologyFunctor (P.KummerSheaves Y) 0).map (P.kummerRestriction h Y)) ∧ (∀ m : ℤ, m ≠ 0 → IsZero ((DerivedCategory.homologyFunctor (P.KummerSheaves Y) m).obj (P.kummerImage h Y false))) ∧ (∀ m : ℤ, m ≠ 0 → m ≠ 1 → IsZero ((DerivedCategory.homologyFunctor (P.KummerSheaves Y) m).obj (P.kummerImage h Y true))) ∧ IsIso (P.kummerGenerator h Y a) ∧ IsIso (DerivedCategory.HomologySequence.δ (Triangle.mk b (P.kummerRestriction h Y) δ) 1 2) ∧ (∀ m : ℤ, m ≠ 2 → IsZero ((DerivedCategory.homologyFunctor (P.KummerSheaves Y) m).obj B)) ∧ ∃ (hC : ∀ m : ℤ, m ≠ 0 → IsZero ((DerivedCategory.homologyFunctor (P.KummerSheaves Y) m).obj (B⟦(2 : ℤ)⟧))) (θ : P.derivedSheaf h Y false ≅ B⟦(2 : ℤ)⟧), (DerivedCategory.homologyFunctor (P.KummerSheaves Y) 0).map (DerivedCategory.goodTruncationNormalization (B⟦(2 : ℤ)⟧) hC).hom ≫ (DerivedCategory.singleFunctorCompHomologyFunctorIso (P.KummerSheaves Y) 0).hom.app ((DerivedCategory.homologyFunctor (P.KummerSheaves Y) 0).obj (B⟦(2 : ℤ)⟧)) = 𝟙 _ ∧ θ.hom = (DerivedCategory.singleFunctor (P.KummerSheaves Y) 0).map (P.kummerBoundaryZero h Y a B b δ) ≫ (DerivedCategory.goodTruncationNormalization (B⟦(2 : ℤ)⟧) hC).inv ∧ (DerivedCategory.singleFunctorCompHomologyFunctorIso (P.KummerSheaves Y) 0).inv.app (P.constant Y) ≫ (DerivedCategory.homologyFunctor (P.KummerSheaves Y) 0).map θ.hom ≫ ((DerivedCategory.homologyFunctor (P.KummerSheaves Y) 0).shiftIso (2 : ℤ) 0 2 (add_zero 2)).hom.app B = P.kummerGenerator h Y a ≫ DerivedCategory.HomologySequence.δ (Triangle.mk b (P.kummerRestriction h Y) δ) 1 2 ∧ Nonempty (P.constant Y ≅ (DerivedCategory.homologyFunctor (P.KummerSheaves Y) 0).obj (B⟦(2 : ℤ)⟧)) ∧ Scheme.intrinsicFiniteTorsionConstructible P.coefficients.l P.extension P.level P.level_pos Y ((P.kummerIntrinsicRealization Y).obj (B⟦(2 : ℤ)⟧)) ∧ P.kummerConstructibleFiniteTor Y (B⟦(2 : ℤ)⟧) ∧ P.kummerTorZero Y (B⟦(2 : ℤ)⟧) ∧ OrientationTensorUnitConclusions (D := DerivedCategory (P.KummerSheaves Y)) (DerivedCategory.singleFunctor (P.KummerSheaves Y) 0).obj θ (P.kummerDerivedUnit h Y)",
+  "branch": "newtargets-dag",
+  "by": "Q109",
+  "date": "2026-10-22",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-8f245ec46",
+  "group": "Q109",
+  "result": "pass",
+  "note": "Read the node (stmt_deps unchanged, only the lean record differs from live), the source place (lem-pur-gysin-structure.proof.md first paragraph), all 11 stmt_deps (byte-identical to live), and the delivered module with its used declarations: relativeUnit, kummerGenerator, finiteDirectImageComposition, goodTruncationNormalization, HomologySequence.δ, shiftIso, torAmplitudeIn, constructibleFiniteTor, singleFunctorObjUnitIso. Hypotheses match: P, h for e|n, a with IsSeparated/LocallyOfFiniteType/QuasiCompact. P and Q are the lowerStar(ModuleCat) derived images; r is Rp_* of the j-unit followed by the compositor inverse; the triangle is arbitrary and unrotated. Every clause is present: unit iso, H0(r) iso, P/Q/B concentration over all m:ℤ, γ iso, δ¹ iso, hC, θ pinned to ε⁻¹∘(δ¹γ)[0], H0(θ)=δ¹γ, constant H0, D^b_c, D^b_ctf, Tor[0,0] for all M. Edge cases (empty Y, ℓ=2, negative degrees, non-flat M) and universes are fine. Gates pass: no hollow defs, only the theorem sorry, docstrings with 8 steps, lines ≤100, statement verbatim, no name collisions. No compile needed since nothing was changed. Advisories: OrientationTensorUnitConclusions is a ∃e,e=def tautology but faithful to the node's 'iso induced by θ and the unit' clause, with Tor[0,0] stated separately; relativeUnit/kummerGenerator and goodTruncationNormalization are owned by theorem nodes outside stmt_deps, which an S2 fix cannot change."
+ }
+}

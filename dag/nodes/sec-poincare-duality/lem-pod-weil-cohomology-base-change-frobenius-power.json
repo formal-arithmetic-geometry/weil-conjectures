@@ -1,0 +1,258 @@
+{
+ "id": "lem-pod-weil-cohomology-base-change-frobenius-power",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-duality-reciprocity",
+   "place": "the Lean proof of this node's declaration uses AlgebraicGeometry.WeilSheaf.exists_linearEquiv_cohomology_baseChangeField (found by the 2026-10-22 maintainer audit of the batch sorry route); in blueprint terms: the base-change clause of Poincaré duality used through WeilSheaf.poincareDuality (Lean docstring: blueprint sk-def-weil, Frobenius-operator convention def-weil-frobenius-detailed, $\\mathrm{Frob}_{q^r}=\\mathrm{Frob}_q^r$) (prop-duality-reciprocity)",
+   "via": []
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Cohomology of a finite base change of the ground field, with Frobenius the r-th power",
+ "statement": "Let $k_0$ be a finite field, $\\ell$ a prime different from the characteristic of $k_0$, and $\\overline{\\mathbf Q}_\\ell$ an algebraic closure of $\\mathbf Q_\\ell$ (Lean `PadicAlgCl ℓ`). Weil complexes on a $k_0$-scheme $X$ are the objects of the category $\\mathrm{WC}(X)$ of [def-weil-weil-sheaf-complex] (Lean `WeilComplex k₀ ℓ X`). Let $X$ be a $k_0$-scheme, quasi-compact, quasi-separated and locally of finite type over $k_0$, let $k_0'/k_0$ be an extension of finite fields of degree $r=[k_0':k_0]$, and let $i\\in\\mathbf Z$. Write $H^i(X)=H^i(X\\otimes_{k_0}\\bar k,\\overline{\\mathbf Q}_\\ell)$ for the cohomology of the constant Weil sheaf ([def-weil-ordinary-compact-cohomology]) with its geometric Frobenius $F$ ([def-weil-frobenius-detailed]), and $H^i(X')$ with geometric Frobenius $F'$ of $k_0'$ for the base change $X'=X\\times_{k_0}k_0'$ as a $k_0'$-scheme. Then there is a $\\overline{\\mathbf Q}_\\ell$-linear isomorphism $e\\colon H^i(X')\\to H^i(X)$ with $e\\circ F'=F^r\\circ e$.",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-zeta-weil/sk-prop-reciprocity/prop-duality-reciprocity.md",
+  "place": "prop-duality-reciprocity: the base-change clause of Poincaré duality used through WeilSheaf.poincareDuality (Lean docstring: blueprint sk-def-weil, Frobenius-operator convention def-weil-frobenius-detailed, $\\mathrm{Frob}_{q^r}=\\mathrm{Frob}_q^r$); Lean: upstream file lean/WeilConjectures/WeilSheaf/PoincareDuality.lean, declaration AlgebraicGeometry.WeilSheaf.exists_linearEquiv_cohomology_baseChangeField (module WeilConjectures.WeilSheaf.PoincareDuality, lines 127-136, proof `sorry`)"
+ },
+ "stmt_deps": [
+  "def-weil-weil-sheaf-complex",
+  "def-weil-ordinary-compact-cohomology",
+  "def-weil-frobenius-detailed",
+  "def-pc-base-change",
+  "def-pc-field-tower",
+  "def-weil-finite-type-morphism",
+  "def-weil-quasi-separated-morphism",
+  "def-weil-algebraic-closure",
+  "def-weil-constant-weil-structure"
+ ],
+ "proof": [
+  {
+   "text": "Put $Y=X\\times_{k_0}k_0\\prime$, $q=\\#k_0$ and $q\\prime=\\#k_0\\prime$. Since $k_0\\prime$ is a finite set, choose a maximal linearly independent list over $k_0$; it spans, since otherwise one could append another vector. Its length is $r=[k_0\\prime:k_0]$. Taking coordinates gives a bijection $k_0\\prime\\simeq k_0^r$, so $q\\prime=q^r$ and $r\\ge1$ because $1\\ne0$. This is the elementary basis-counting argument, not a separate lemma obligation (also Mathlib Module.card_eq_pow_finrank). The finite-field power identity gives $z^{q\\prime}=z$ for every $z\\in k_0\\prime$. Thus each $z$ is a root of the nonzero polynomial $T^{q\\prime}-T\\in k_0[T]$ ($q\\prime\\ge2$), proving $k_0\\prime/k_0$ algebraic. The field homomorphism $k_0\\to k_0\\prime$ is injective, so the two characteristics coincide.",
+   "uses": [
+    "def-pc-field-tower",
+    "def-pc-field-extension",
+    "lem-weil-finite-field-pow-card",
+    "def-weil-vector-space-dimension"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-poincare-duality/sk-thm-poincare-duality/thm-weil-poincare-duality.md",
+    "place": "Base change clause and proof paragraph identifying the geometric fibers and using Frob_{q^r}=Frob_q^r; generalized hypotheses exactly as in exists_linearEquiv_cohomology_baseChangeField."
+   }
+  },
+  {
+   "text": "Let $\\Omega$ and $\\Omega\\prime$ be the algebraic closures used to form the geometric fibers over $k_0$ and $k_0\\prime$. Apply [lem-pod-algebraic-extension-closure-equivalence] to the algebraic extension established in step 1, obtaining a $k_0$-isomorphism $a:\\Omega\\prime\\xrightarrow{\\sim}\\Omega$. No equality of the independently chosen closures is assumed. Denote their structure maps by $j:k_0\\to\\Omega$ and $j\\prime:k_0\\prime\\to\\Omega\\prime$.",
+   "uses": [
+    "lem-pod-algebraic-extension-closure-equivalence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/fields.tex",
+    "place": "Tags 09GJ (lemma-algebraic-permanence) and 09GV (lemma-algebraic-closures-isomorphic); Mathlib IsAlgClosure.equivOfAlgebraic:439."
+   }
+  },
+  {
+   "text": "Write $\\overline Y=(X\\times_{k_0}k_0\\prime)\\times_{k_0\\prime}\\Omega\\prime$ and $\\overline X=X\\times_{k_0}\\Omega$. Construct $u:\\overline Y\\to\\overline X$ by its two projections: the composite to $X$, and $\\operatorname{Spec}(a^{-1})$ after the projection to $\\operatorname{Spec}\\Omega\\prime$. They agree over $k_0$ because $a$ is a $k_0$-map. Conversely, the projection $\\overline X\\to\\operatorname{Spec}\\Omega$ followed by $\\operatorname{Spec}(a)$ gives its map to $\\operatorname{Spec}\\Omega\\prime$, hence to $\\operatorname{Spec}k_0\\prime$ via $\\operatorname{Spec}(j\\prime)$. Together with the projection to $X$ these maps first give a map to $Y$ and then to $\\overline Y$. On composing in either order the projections to $X$ and the respective closure spectra are unchanged; uniqueness in the fiber-product universal property proves that these maps are inverse. Thus $u$ is an isomorphism of schemes.",
+   "uses": [
+    "def-pc-fibre-product",
+    "def-pc-base-change"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-poincare-duality/sk-thm-poincare-duality/thm-weil-poincare-duality.md",
+    "place": "Base change clause and proof paragraph identifying the geometric fibers and using Frob_{q^r}=Frob_q^r; generalized hypotheses exactly as in exists_linearEquiv_cohomology_baseChangeField."
+   }
+  },
+  {
+   "text": "Let $\\phi(z)=z^q$ on $\\Omega$ and $\\phi\\prime(z)=z^{q\\prime}$ on $\\Omega\\prime$ be arithmetic Frobenius, and put $\\gamma=\\phi^{-1}$, $\\gamma\\prime=(\\phi\\prime)^{-1}$. Induction gives $\\phi^r(z)=z^{q^r}$; since $a$ preserves powers and $q\\prime=q^r$, one has $a\\phi\\prime=\\phi^r a$. Taking inverses gives $a\\gamma\\prime=\\gamma^r a$, equivalently $\\gamma\\prime a^{-1}=a^{-1}\\gamma^r$. The scheme automorphisms $\\tau_Y,\\tau_X$ are identity on the model and induced by these geometric field Frobenii on the closure factor. The maps $u\\tau_Y$ and $\\tau_X^r u$ have the same projection to $X$. Their projections to $\\operatorname{Spec}\\Omega$ agree by the last field identity and contravariance of Spec. The universal property of $\\overline X$ therefore gives $u\\tau_Y=\\tau_X^r u$. This calculation compares geometric Galois Frobenius, not the absolute scheme Frobenius.",
+   "uses": [
+    "def-weil-frobenius-detailed",
+    "def-pc-fibre-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-poincare-duality/sk-thm-poincare-duality/thm-weil-poincare-duality.md",
+    "place": "Base change clause and proof paragraph identifying the geometric fibers and using Frob_{q^r}=Frob_q^r; generalized hypotheses exactly as in exists_linearEquiv_cohomology_baseChangeField."
+   }
+  },
+  {
+   "text": "The structure map of $X$ is of finite type because it is locally of finite type and quasi-compact. By [lem-sfb-finite-type-composition-base-change], the structure map of $Y$ over $k_0\\prime$ is of finite type, in particular locally of finite type and quasi-compact. By clause (3) of [lem-weil-pbc-qcqs-morphism-permanence] it is quasi-separated. Also $\\ell$ is invertible in both finite fields, since their characteristics agree by step 1. These are exactly the hypotheses for the geometric-cohomology comparison; no separatedness, smoothness, properness or geometric connectedness is required.",
+   "uses": [
+    "lem-sfb-finite-type-composition-base-change",
+    "lem-weil-pbc-qcqs-morphism-permanence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-poincare-duality/sk-thm-poincare-duality/thm-weil-poincare-duality.md",
+    "place": "Base change clause and proof paragraph identifying the geometric fibers and using Frob_{q^r}=Frob_q^r; generalized hypotheses exactly as in exists_linearEquiv_cohomology_baseChangeField."
+   }
+  },
+  {
+   "text": "Apply [def-pod-cohomology-geometric-equivalence] to $X/k_0$, $Y/k_0\\prime$ and $u:\\overline Y\\simeq\\overline X$. It supplies a $\\overline{\\mathbf Q}_\\ell$-linear equivalence $e_i:H^i(\\overline Y,\\overline{\\mathbf Q}_\\ell)\\simeq H^i(\\overline X,\\overline{\\mathbf Q}_\\ell)$ for every $i\\in\\mathbf Z$, using precisely constant-Weil-sheaf cohomology. By [lem-pod-cohomology-geometric-conjugacy], the equation $u\\tau_Y=\\tau_X^r u$ from step 4 implies $e_i(F\\prime x)=F^r e_i(x)$ for every $x$. For the specified $i$, take $e=e_i$. This proves the requested existence and intertwining equation on the same linear equivalence.",
+   "uses": [
+    "def-pod-cohomology-geometric-equivalence",
+    "lem-pod-cohomology-geometric-conjugacy"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-poincare-duality/sk-thm-poincare-duality/thm-weil-poincare-duality.md",
+    "place": "Base change clause and proof paragraph identifying the geometric fibers and using Frob_{q^r}=Frob_q^r; generalized hypotheses exactly as in exists_linearEquiv_cohomology_baseChangeField."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-field-tower",
+  "def-pc-field-extension",
+  "lem-weil-finite-field-pow-card",
+  "def-weil-vector-space-dimension",
+  "lem-pod-algebraic-extension-closure-equivalence",
+  "def-pc-fibre-product",
+  "def-pc-base-change",
+  "def-weil-frobenius-detailed",
+  "lem-sfb-finite-type-composition-base-change",
+  "lem-weil-pbc-qcqs-morphism-permanence",
+  "def-pod-cohomology-geometric-equivalence",
+  "lem-pod-cohomology-geometric-conjugacy"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/master/blueprint/sec-poincare-duality/sk-thm-poincare-duality/thm-weil-poincare-duality.md",
+  "place": "Base change clause and proof paragraph identifying the geometric fibers and using Frob_{q^r}=Frob_q^r; generalized hypotheses exactly as in exists_linearEquiv_cohomology_baseChangeField. The geometric-fiber comparison is written out from the fiber-product universal property; the cohomology transport uses the already existing DAG interface."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "etale cohomology of smooth variety vanishes above twice the dimension; Frobenius of base change to finite extension is power of Frobenius",
+   "results": "FiniteField.Extension.frob, FiniteField.frobeniusAlgEquivOfAlgebraic(_iterate) (Mathlib.FieldTheory.Finite.*): field-level Frobenius only, no étale cohomology",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"dualizingComplex\" (name substring)",
+   "results": "none",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rlE 'cohomologicalDimension|cohomological dimension ; geometricFrobenius|Frobenius.*base change ; WeilSheaf|WeilComplex' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/",
+   "results": "none",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Ordinary etale cohomology of a scheme after finite extension of the finite base field has Frobenius equal to a power of the original Frobenius",
+   "results": "Eight field-level hits including FiniteField.coe_frobeniusAlgEquivOfAlgebraic_iterate and iterateFrobeniusEquiv_eq_pow; none constructs the cohomology isomorphism.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a finite extension of finite fields the geometric fibers of a scheme are isomorphic and geometric Frobenius becomes the extension degree power",
+   "results": "Eight field-level Frobenius hits, including FiniteField.frobeniusAlgEquivOfAlgebraic_apply and FiniteField.Extension.frob; no geometric/cohomological comparison.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "cohomology.*[Ff]robenius|[Ff]robenius.*cohomology|geometricGaloisFrobenius|adicConstant",
+   "results": "No hits in Mathlib.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "maintainer",
+  "item": null,
+  "date": "2026-10-22",
+  "why": "upstream sorried declaration on the batch-5 stage-3 sorry route without a DAG node (maintainer audit 2026-10-22, approved by the human); recorded so that stage 1 splits it"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": [
+    "AlgebraicGeometry.WeilSheaf.exists_linearEquiv_cohomology_baseChangeField"
+   ]
+  },
+  "slopmaster2": {
+   "state": "sorry_here",
+   "decls": [
+    {
+     "name": "AlgebraicGeometry.WeilSheaf.exists_linearEquiv_cohomology_baseChangeField",
+     "module": "WeilConjectures.WeilSheaf.PoincareDuality",
+     "lines": [
+      123,
+      136
+     ],
+     "kind": "theorem",
+     "sorry": true
+    }
+   ],
+   "missing": [],
+   "open": []
+  }
+ },
+ "chapter": "sec-poincare-duality",
+ "unit": "sk-def-weil",
+ "lean": {
+  "existing": true,
+  "module": "WeilConjectures.WeilSheaf.PoincareDuality",
+  "file": "lean/WeilConjectures/WeilSheaf/PoincareDuality.lean",
+  "declaration": "AlgebraicGeometry.WeilSheaf.exists_linearEquiv_cohomology_baseChangeField",
+  "declarations": [
+   "AlgebraicGeometry.WeilSheaf.exists_linearEquiv_cohomology_baseChangeField"
+  ],
+  "statement": "theorem exists_linearEquiv_cohomology_baseChangeField\n    [QuasiCompact (X ↘ Spec (CommRingCat.of k₀))] [QuasiSeparated (X ↘ Spec (CommRingCat.of k₀))]\n    [LocallyOfFiniteType (X ↘ Spec (CommRingCat.of k₀))]\n    (k₀' : Type u) [Field k₀'] [Finite k₀'] [Algebra k₀ k₀'] (i : ℤ) :\n    haveI := fact_ringChar_ne_of_algebra (l := l) k₀ k₀'\n    ∃ e : ((adicConstant k₀' l (X.baseChangeField k₀ k₀')).cohomology i).carrier ≃ₗ[PadicAlgCl l]\n        ((adicConstant k₀ l X).cohomology i).carrier,\n      ∀ x, e (((adicConstant k₀' l (X.baseChangeField k₀ k₀')).cohomology i).frobenius x) =\n        (((adicConstant k₀ l X).cohomology i).frobeniusEnd ^ Module.finrank k₀ k₀') (e x) :=\n  sorry",
+  "branch": "slopmaster2",
+  "by": "maintainer",
+  "date": "2026-10-22",
+  "note": "upstream declaration (verbatim in live), proof still `sorry`; on the batch-5 own sorry route (local/sorry-route*.json) with no node recording it before 2026-10-22"
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-pod-weil-cohomology-base-change-frobenius-power",
+  "worker": "stage1",
+  "summary": "Constructs the isomorphism of independently chosen geometric fibers and checks both projections of the Frobenius conjugacy. Reuses the existing cohomology equivalence/conjugacy nodes and finite-type/qcqs permanence. One general algebraic-closure comparison is an exact Mathlib leaf; the cardinality count is an elementary proof step. The original statement is preserved.",
+  "blueprint": "Realizes the Frobenius-normalization ingredient used through WeilSheaf.poincareDuality in prop-duality-reciprocity, as recorded by the maintainer; details the Base change clause and Frob_{q^r}=Frob_q^r proof paragraph of thm-weil-poincare-duality. No use of Poincare duality itself.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-finite-field-pow-card",
+    "why": "Finite-field field identity gives algebraicity of the finite extension, independently of any cohomology or duality theorem."
+   },
+   {
+    "node": "lem-sfb-finite-type-composition-base-change",
+    "why": "Generic scheme permanence establishes the hypotheses of the existing geometric-cohomology equivalence."
+   },
+   {
+    "node": "lem-weil-pbc-qcqs-morphism-permanence",
+    "why": "Only quasi-separated stability under base change, clause (3); generic geometry, with no replacement of the Weil-normalization route."
+   },
+   {
+    "node": "lem-pod-cohomology-geometric-conjugacy",
+    "why": "Existing transport-of-structure theorem converts the explicitly verified geometric conjugacy to cohomological conjugacy; no unit-level duality route is replaced."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-finite-field-pow-card",
+  "lem-sfb-finite-type-composition-base-change",
+  "lem-weil-pbc-qcqs-morphism-permanence",
+  "lem-pod-cohomology-geometric-conjugacy"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q13-6e4d428b6",
+  "group": "Q13",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q13-6e4d428b6 (reviewer sub-agent of L); spot-checked: Statement unchanged from base (diffed against side-live, where the item is still unsplit; first delivery, not on the dropped list). The added stmt_deps are all used by the statement. Steps: (1) q'=q^r by an elementary basis count plus lem-weil-finite-field-pow-card, which makes k0'/k0 algebraic with equal characteristic. (2) The new leaf gives a k0-iso a:Ω'→Ω. (3) The isomorphism Ȳ≅X̄ is built from fibre-product universality, and I checked the compatibility over k0 in both directions (a^{-1}j=j'ι). (4) aφ'=φ^r a, so γ'a^{-1}=a^{-1}γ^r, and the projections give uτ_Y=τ_X^r u. This matches def-weil-frobenius-detailed (id×Spec γ) and Lean GeometricFrobenius.lean:458; the composition order matches the Lean hypothesis of the conjugacy theorem. (5) Finite type and quasi-separated for Y come from clause (2) of the finite-type base-change lemma and clause (3) of the qcqs permanence lemma; no separatedness is used. (6) def-pod-cohomology-geometric-equivalence plus lem-pod-cohomology-geometric-conjugacy with r=finrank give exactly the Lean conclusion. Source checked: thm-weil-poincare-duality.md lines 61-98 and proof item (6); the delivery writes out the 'canonical identification' that the source only names. New node lem-pod-algebraic-extension-closure-equivalence: exact Mathlib leaf IsAlgClosure.equivOfAlgebraic, Basic.lean:439 (variable block 411-422, L ≃ₐ[K] M); it is not a duplicate of lem-pc-algebraic-closure-exists-unique (same base only) or of the IsAlgClosed.lift embedding node; tested at L=K and on infinite algebraic L. Batch 5: nt-assume-poincare-duality is isIso_poincareMap and its scope explicitly excludes Frobenius equivariance and base-change compatibility. The geometric equivalence (a definition) and the conjugacy (Frobenius transport) are outside both assumptions, and neither closure reaches thm-weil-poincare-duality or nt-assume-*. The new leaf is pure field theory. All three are accepted. Tool uses accepted (generic black boxes; sk-def-weil has no proof steps). Advisory only: the new node's from.node is null because the item has created.item=null (prop-duality-reciprocity would be better); def-weil-ordinary-compact-cohomology is worded for separated schemes while the Lean covers qcqs lft, which predates this delivery. No fixes written."
+ }
+}

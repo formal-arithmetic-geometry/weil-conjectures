@@ -1,0 +1,142 @@
+{
+ "id": "def-sfb-rational-representation-coordinate-comodule",
+ "kind": "definition",
+ "title": "Natural rational representations and coordinate comodules",
+ "status": "split",
+ "import_flags": [],
+ "statement": "Let $k$ be a field [def-weil-field], $G$ an affine $k$-group scheme [def-sc-group-scheme], and $A=k[G]=\\Gamma(G,\\mathcal O_G)$ with its canonical coordinate Hopf structure [def-sfb-affine-coordinate-hopf-algebra]. Let $V$ be any $k$-vector space, with scalar extensions $V_R=R\\otimes_k V$ [def-weil-module-base-change]. A natural rational representation on $V$ is a family of group homomorphisms $r_R:G(R)\\to\\operatorname{Aut}_R(V_R)$ for all commutative $k$-algebras $R$, such that $(\\alpha\\otimes1)r_R(x)=r_T(G(\\alpha)(x))(\\alpha\\otimes1)$ for every $k$-algebra map $\\alpha:R\\to T$ and $x\\in G(R)$. Here $G(R)$ is the group of scheme morphisms $\\operatorname{Spec}R\\to G$ over $k$, using [def-weil-affine-spectrum]. A coordinate comodule on $V$ is a $k$-linear map $c:V\\to V\\otimes_k A$ satisfying $(c\\otimes1)c=(1\\otimes\\Delta)c$ and $(1\\otimes\\epsilon)c=1_V$, with the tensor associativity and unit identifications of [def-sfb-hopf-action-module-data]. The generic point $a\\in G(A)$ is the inverse of the canonical affine isomorphism $G\\simeq\\operatorname{Spec}A$. For a $k$-algebra map $x:A\\to R$, its coordinate point is $\\operatorname{Spec}R\\xrightarrow{\\operatorname{Spec}x}\\operatorname{Spec}A\\xrightarrow{a}G$. The generic coaction construction of a natural representation $r$ is the $k$-linear map sending $v$ to $r_A(a)(1\\otimes v)$ followed by the symmetry $A\\otimes_k V\\simeq V\\otimes_k A$. These are definitions; no correspondence theorem is asserted here. All individual spaces, schemes and test algebras lie in one common universe, and natural families may lie in a containing universe. No finite-dimensionality, nonzero-space or finite-type condition is imposed.",
+ "stmt_deps": [
+  "def-weil-field",
+  "def-sc-group-scheme",
+  "def-weil-affine-spectrum",
+  "def-sfb-affine-coordinate-hopf-algebra",
+  "def-sfb-hopf-action-module-data",
+  "def-weil-module-base-change"
+ ],
+ "source": {
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Chapter 4(a), printed p.83; right comodules, equations (24), and the universal-element construction of Remark 4.1, printed p.84."
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "CoordinateComodule|NaturalRepresentation|genericCoaction|coordinatePoint",
+   "results": "0 hits: ",
+   "date": "2026-10-24",
+   "verdict": "No exact Mathlib definition: abstract-monoid representations, coalgebra elements and affine-space coordinates differ from natural group-scheme actions and coordinate comodules."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Natural rational representations of an affine group scheme and coordinate comodules are natural families of linear actions and counital coassociative linear coactions",
+   "results": "8 hits: Rep.linearization, Coalgebra.Repr.ι, Rep.linearizationOfMulActionIso, AffineBasis.coord_smul, GroupLike.noConfusion, Coalgebra.counitCoalgHom, GroupLike, CoalgCat.concreteCategory",
+   "date": "2026-10-24",
+   "verdict": "No exact Mathlib definition: abstract-monoid representations, coalgebra elements and affine-space coordinates differ from natural group-scheme actions and coordinate comodules."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Coordinate comodules over an affine group scheme Hopf algebra and natural rational representations on a vector space",
+   "results": "8 hits: AlgebraicGeometry.AffineSpace.coord, CoalgCat.instComonObjModuleCatOfCarrier, Coalgebra.Repr.ι, Coalgebra.Repr.arbitrary, Coalgebra.Repr, HopfAlgebra.sum_antipode_mul_eq_smul, HopfAlgebra.sum_mul_antipode_eq_smul, Coalgebra.Repr.eq",
+   "date": "2026-10-24",
+   "verdict": "No exact Mathlib definition: abstract-monoid representations, coalgebra elements and affine-space coordinates differ from natural group-scheme actions and coordinate comodules."
+  },
+  {
+   "tool": "rg",
+   "query": "CoordinateComodule|NaturalRepresentation|genericCoaction|coordinatePoint in lean/WeilConjectures and lean/Sheaf",
+   "results": "No upstream WeilConjectures match. Sheaf.AlgebraicGeometry.RationalRepresentationComoduleDictionary defines NaturalRepresentation (49), genericPoint (63), coordinatePoint (69), genericCoaction (76), CoordinateComodule (85). Other hits are consumers or unrelated private coordinatePoint helpers.",
+   "date": "2026-10-24",
+   "verdict": "Reuse these five landed definitions, existing:true; no new Lean module or definition."
+  },
+  {
+   "tool": "rg / blueprint_refs.py search",
+   "query": "coordinate.comodule|coordinate-comodule|NaturalRepresentation|CoordinateComodule|natural representations|natural rational representations in dag/nodes; blueprint_refs.py search \"coordinate comodule\"",
+   "results": "No definition node owns these five declarations; full definition-node lean-record scan found none. def-sfb-rational-representation-gzero defines finite-dimensional coaction objects and their Grothendieck group, not arbitrary-dimensional natural families or generic-point maps. def-wf-algebraic-representations defines finite-dimensional scheme homomorphisms. The dictionary is a theorem node. Blueprint search: 0 blueprint nodes match.",
+   "date": "2026-10-24",
+   "verdict": "A definition ownership node is missing, as the maintainer return requires."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-triangular-group-representation-eigenline",
+  "date": "2026-10-24",
+  "group": "Q06"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Haboush symmetric-power lifting for a trivial quotient representation. Supporting representation-theoretic input: Steinberg endomorphisms detect a nonzero fixed vector. Supporting Self-duality of rho section modules at characteristic-dependent weights. Supporting input: Positive-characteristic simplicity step, using irreducibility of the Steinberg induced module rather than assuming self-duality. Numerical input to the dimension comparison: Dimension of the simple module at the first restricted rho weight. Supporting general input: dominant induced-module composition factors, multiplicity one at the highest weight and affine linkage; used to exclude all lower factors at (p-1)rho. Repair of the strong-linkage input: Finite rational cohomology and character filtrations for homogeneous bundles. Supporting input to lem-sfb-flag-cohomology-finite-exact: passage from the triangular embedding to a rational eigenline, before induction on the dimension of a Borel module Definition ownership for the natural representations, coordinate comodules and generic-point constructions used in the eigenline statement.",
+   "via": [
+    "lem-sfb-triangular-group-representation-eigenline",
+    "lem-sfb-flag-cohomology-finite-exact",
+    "lem-sfb-induced-composition-linkage",
+    "lem-sfb-restricted-rho-simple-dimension",
+    "lem-sfb-steinberg-induced-module-irreducible",
+    "lem-sfb-rho-section-self-duality",
+    "lem-sfb-steinberg-endomorphism-detection",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.RationalRepresentationComoduleDictionary",
+  "declaration": "AlgebraicGeometry.RationalRepresentation.CoordinateComodule",
+  "declarations": [
+   "AlgebraicGeometry.RationalRepresentation.CoordinateComodule",
+   "AlgebraicGeometry.RationalRepresentation.NaturalRepresentation",
+   "AlgebraicGeometry.RationalRepresentation.genericPoint",
+   "AlgebraicGeometry.RationalRepresentation.coordinatePoint",
+   "AlgebraicGeometry.RationalRepresentation.genericCoaction"
+  ],
+  "statement": "abbrev CoordinateComodule",
+  "branch": "newtargets-dag",
+  "by": "Q06",
+  "date": "2026-10-24",
+  "existing": true,
+  "note": "Owns the five already landed plain definitions at lines 49--88 of RationalRepresentationComoduleDictionary.lean. All have explicit data, not .choose of the dictionary theorem. The theorem remains a proof dependency of the eigenline item; this definition node records its statement-level notions without copying or moving declarations. The coassociativity and counitality predicates and canonical coordinate Hopf structure are reused from their definition nodes."
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-e3527e2b3",
+  "group": "Q06",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-e3527e2b3",
+  "group": "Q06",
+  "result": "pass",
+  "note": "Re-delivery after the H2 return of 29383e6e. The item now cites the new definition node def-sfb-rational-representation-coordinate-comodule (existing:true on the 5 landed plain defs CoordinateComodule/NaturalRepresentation/genericPoint/coordinatePoint/genericCoaction, each read against the node TeX; fields follow the H12 rule; source Milne Ch.4(a) p.83 and (24)/Rem 4.1 p.84). The dictionary theorem appears only in proof_deps. Item diff vs side-live: only lean and stmt_deps (+new node, +def-sc-gm-ga); statement verbatim. Clause check vs Milne Def 16.1/Prop 16.2(c)=>(a): field; affine finite-type J; n>0; closed IsMonHom i into GL_n with below-diagonal entries zero on all R-points (equivalent to a closed embedding into B_n); nonzero finite-dimensional V with coassociative counital coaction; finrank L = 1; IsMonHom chi to G_m; c v = v ⊗ chi*(T) with correct pullback direction; action by x(chi*t) on all of R⊗L via the c-determined NaturalRepresentation. No extra hypotheses. Edge cases n=1, dim V=1, trivial J, mu_p/alpha_p, imperfect k, zero R, common universe u. Proof is sorry only; docstrings carry the source place and the 8 proof steps. Advisory: GL owner def-sc-general-linear-group uncited (it does not list the upstream GeneralLinearGroup/homMulEquiv; same as a landed precedent); the second reading is a self-check (H11 advisory). No files changed, no compile run; the delivery's dry run compiled the identical file."
+ }
+}

@@ -1,0 +1,125 @@
+{
+ "id": "lem-zl-framework-quotient-augmentation",
+ "kind": "statement",
+ "title": "Compatible finite quotient-unit augmentations under completed pullback",
+ "status": "split",
+ "statement": "Fix a prime $\\ell$ and a finite extension $E/\\mathbf{Q}_\\ell$. For a morphism $h:U\\to T$ of schemes and a cochain complex $P$ of modules over the completed integral coefficient sheaf [def-pur-integral-compact-support-coefficient-data], there exist chain maps $\\gamma_n:h^*P\\to T_n(P)$, where $h^*$ is ordinary completed-coefficient pullback and $T_n(P)$ is the $n$-th term of the finite pullback quotient tower [lem-pur-integral-operations-well-defined]. They satisfy $t_n\\gamma_{n+1}=\\gamma_n$ for the consecutive tower transition $t_n$. For every degree $i$, pro-etale test object $V\\to T$ and section $x\\in P^i(V)$, the map $\\gamma_n^i$ takes the inverse-image unit generator of $x$ to the finite pullback unit generator of $1\\otimes x$ [lem-weil-integral-reduction-tower-well-defined]. The index $n\\in\\mathbf N$ means quotient exponent $n+1$. No completeness, flatness, constructibility or immersion hypothesis is imposed.",
+ "stmt_deps": [
+  "def-pur-integral-compact-support-coefficient-data",
+  "lem-pur-integral-operations-well-defined",
+  "lem-weil-integral-reduction-tower-well-defined"
+ ],
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex; literature/stacks-project/proetale.tex",
+  "place": "Modules on Sites, lemma-adjoint-push-pull-modules and section-tensor-product (Tag 03EK); Pro-etale Cohomology, lemma-pushforward-Noetherian-case (Tag 099N(5)), quotient-unit construction before derived completion."
+ },
+ "proof": [
+  {
+   "text": "The completed coefficient direct-image map commutes with each finite quotient projection. Forget commutative rings to rings. Its adjoint is exactly the chosen completed coefficient inverse-image isomorphism. Thus the ordinary module adjunction and the finite module adjunction form the coefficient square needed to transpose the quotient unit.",
+   "uses": [
+    "def-pur-integral-compact-support-coefficient-data"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "In degree i apply the general restriction/pullback mate to the quotient unit P^i -> Res_n(P_n^i). The mate unit formula says that on an inverse-image generator x it is the finite unit of 1 tensor x. Naturality of the quotient-unit chain map and the mate proves the differential equation, giving gamma_n.",
+   "uses": [
+    "lem-pur-integral-operations-well-defined",
+    "lem-weil-integral-reduction-tower-well-defined"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Transpose the two proposed maps gamma_(n+1) followed by transition and gamma_n through the completed module adjunction. It suffices to compare sections on inverse-image unit generators. The finite pullback transition formula sends the first generator to the finite unit of the quotient transition of 1 tensor x. The quotient tensor transition sends this to rho(1) tensor x = 1 tensor x, the second generator. Extensionality proves the consecutive compatibility.",
+   "uses": [
+    "lem-pur-integral-operations-well-defined",
+    "lem-weil-integral-reduction-tower-well-defined"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-pur-integral-compact-support-coefficient-data",
+  "lem-pur-integral-operations-well-defined",
+  "lem-weil-integral-reduction-tower-well-defined"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-modules.tex; literature/stacks-project/proetale.tex",
+  "place": "Agent-written quotient-unit adjunction calculation; no derived-completion claim is used in this chain-level lemma."
+ },
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Compatible quotient unit maps from completed sheaf module pullback to inverse system of finite reductions, homotopy inverse limit Roos complex",
+   "results": "AdicCompletion; IsAdicComplete.of_lift; AdicCompletion.incl; AdicCompletion.of; SheafOfModules.sheafificationCompPullback; SheafOfModules.pullbackPushforwardAdjunction_homEquiv_pullbackObjUnitToUnit; SheafOfModules.pullbackObjUnitToUnit; SheafOfModules.instIsIsoPullbackObjUnitToUnitOfFinal.",
+   "date": "2026-10-25",
+   "verdict": "Use existing project quotient units and module adjunctions."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A module quotient unit commutes with pullback and quotient transition maps, giving a compatible family of chain maps into the finite reduction tower",
+   "results": "AdicCompletion.transitionMap_comp_reduceModIdeal; IsAdicComplete.mkQ_comp_lift; IsAdicComplete.StrictMono.mkQ_comp_lift; AdicCompletion.transitionMap; IsAdicComplete.StrictMono.factorPow_comp_eq_of_factorPow_comp_succ_eq; Submodule.factorPowSucc; Module.Relations.Solution.fromQuotient_comp_toQuotient; IsAdicComplete.StrictMono.factorPow_comp_extend.",
+   "date": "2026-10-25",
+   "verdict": "No exact match: ordinary adic module quotient formulas, not sheaf pullback quotient units."
+  },
+  {
+   "tool": "grep",
+   "query": "quotient.*unit.*pullback|pullback.*quotient.*unit",
+   "results": "1 irrelevant hit: Mathlib/CategoryTheory/Abelian/Preradical/Colon.lean:128. Direct rg found the module mate API, unrestrictedTowerUnit_condition, and the two normalized transition theorems used in the proof.",
+   "date": "2026-10-25",
+   "verdict": "No existing theorem with the whole compatible-family conclusion."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.ZlFrameworkOpenExchange",
+  "date": "2026-10-25",
+  "group": "N2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "sk-l-dl-general-quasifinite",
+   "place": "Finite and quasi-finite direct images: the compact-support construction requires open base change; the framework open comparison fixes its pullback endpoint by compatible quotient-unit augmentations. This node is the chain-level family used before the Roos lift in def-zl-framework-open-exchange.",
+   "via": [
+    "def-zl-framework-open-exchange",
+    "lem-zl-framework-pbc-open-exchange-comparison"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-deligne-laumon-general",
+ "unit": "sk-l-dl-general-quasifinite",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.ZlFrameworkQuotientAugmentation",
+  "file": "lean/Sheaf/Paper/ZlFrameworkQuotientAugmentation.lean",
+  "declaration": "WeilConjectures.ZlFrameworkPbc.frameworkQuotientAugmentation_exists",
+  "statement": "theorem frameworkQuotientAugmentation_exists {U T : Scheme.{u}} (h : U ⟶ T)\n    (P : CochainComplex (integralTowerModules l E T) ℤ) :\n    ∃ γ : ∀ n : ℕ,\n      ((proEtaleRingModulePullback h ((completed l E).ring T)\n        ((completed l E).ring U) ((completed l E).pull h)).mapHomologicalComplex\n          (.up ℤ)).obj P ⟶ ((integralOperationsPullbackTowerFunctor l E h).obj P).obj (op n),\n      (∀ n : ℕ, γ (n + 1) ≫\n        ((integralOperationsPullbackTowerFunctor l E h).obj P).map\n          (homOfLE (Nat.le_succ n)).op = γ n) ∧\n      (∀ (n : ℕ) (i : ℤ) (V : T.ProEt) (x : (P.X i).val.obj (op V)),\n        ((γ n).f i).val.app (op ((proEtaleBaseChange h).obj V))\n          (((proEtaleRingModuleAdjunction h ((completed l E).ring T)\n            ((completed l E).ring U) ((completed l E).pull h)).unit.app (P.X i)).val.app\n              (op V) x) =\n          integralOperationsPullbackGenerator l E h n\n            (((unrestrictedIntegralFiniteComplex l E T n).obj P).X i) V\n            (unrestrictedIntegralTensorSection l E T n (P.X i) (op V) 1 x))",
+  "branch": "sheaf-dag",
+  "by": "N2",
+  "date": "2026-10-25"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "N2",
+  "result": "pass",
+  "landing": "20261025T163930-L-903663",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "N2",
+  "result": "pass",
+  "landing": "20261025T163930-L-903663",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

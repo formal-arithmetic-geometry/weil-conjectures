@@ -35,8 +35,12 @@ def git(*args, check=True):
     return result
 
 
-def retire_completed(group, item, expected_head):
+def retire_completed(group, item, expected_head, not_open=False):
     """Return True only for a completed stage-1 packet at the reviewed head.
+
+    2026-10-25 (deliverfix): `not_open=True` (the caller found the node outside Dag.stage1(): reached, unsplit, but no
+    longer open for progress) retires the packet the same way: no open route needs the split, and the landing's old
+    answer "side completion never promoted; L promotes it" (no side project since 2026-10-19) restarted the item forever.
 
     Unsplit nodes, Lean deliveries, replacement heads and stage-2 claims must
     survive. The merge lock covers eligibility, records and the commit; the
@@ -71,11 +75,12 @@ def retire_completed(group, item, expected_head):
         # (with unfolded() alone): a re-split repaired here but never promoted to live (thm-sf-pf-proetale) and an
         # attachment live audited closed_part (lem-sfb-modobj-abelian) stayed queued while every delivery for them was
         # archived as already completed, ~60 rounds for thm-sf-pf-proetale.
-        if not dag_queue.stage1_completed(node):
-            return False
-        queued = dag_queue.queue_node(item)
-        if queued is not None and not dag_queue.stage1_completed(queued):
-            return False
+        if not not_open:
+            if not dag_queue.stage1_completed(node):
+                return False
+            queued = dag_queue.queue_node(item)
+            if queued is not None and not dag_queue.stage1_completed(queued):
+                return False
 
         returns = ROOT / "coord/returns" / f"{group}.md"
         ledger = ROOT / "coord/ledger.md"
@@ -126,7 +131,9 @@ def retire_completed(group, item, expected_head):
             for p, line in (
                 (ledger, f"- {now} L: superseded stage-1 delivery {group}/{item} at {head}; "
                  f"current completion retained; packet archived at {archive}; stale return retired.\n"),
-                (deliveries, f"{now} {group} superseded {item}: stage 1 already completed; archived {head}\n"),
+                (deliveries, f"{now} {group} superseded {item}: "
+                             + ("no longer open for progress" if not_open else "stage 1 already completed")
+                             + f"; archived {head}\n"),
             ):
                 with p.open("a") as stream:
                     stream.write(line)

@@ -1,0 +1,305 @@
+{
+ "id": "lem-trf-fibre-generators-projective-neighbourhood",
+ "kind": "statement",
+ "title": "Fibre-generating sections define a proper projective-space morphism near the fibre",
+ "statement": "Let $f:Z\\to S$ be a proper morphism [def-weil-proper-morphism] of schemes [def-pc-scheme], let $s\\in S$, and let $Z_s$ be its scheme-theoretic fibre [def-pc-scheme-fibre]. Let $M$ be an invertible $\\mathcal O_Z$-module [def-sc-invertible-module], let $r\\geq0$, and let $u_0,\\ldots,u_r\\in\\Gamma(Z,M)$. Assume their pullbacks to $Z_s$ [def-pc-module-pullback] generate $M_s=M|_{Z_s}$ [def-weil-pbc-generating-sections]. There is an affine open neighbourhood $U\\subseteq S$ of $s$ such that the restricted $u_j$ generate $M_U=M|_{Z_U}$ on $Z_U=f^{-1}(U)$. Their associated $U$-morphism $\\varphi:Z_U\\to\\mathbf P^r_U$ [def-weil-pbc-morphism-to-projective-space-by-sections] is proper and has a quotient-compatible isomorphism $\\varphi^*\\mathcal O(1)\\cong M_U$. Its base change to $\\operatorname{Spec}\\kappa(s)$ is the morphism $Z_s\\to\\mathbf P^r_{\\kappa(s)}$ associated to the pulled-back tuple, with the same quotient-compatible twist isomorphism. Projective space is [def-nagata-projective-space-base-change]; over the affine $U$ its twist is [def-pc-projective-space-twist].",
+ "source": {
+  "document": "literature/stacks-project/coherent.tex",
+  "place": "Tag 0D2N, lemma-ample-in-neighbourhood, first paragraph from the nonvanishing opens through construction of phi and identification of its fibre."
+ },
+ "stmt_deps": [
+  "def-weil-proper-morphism",
+  "def-pc-scheme",
+  "def-pc-scheme-fibre",
+  "def-sc-invertible-module",
+  "def-pc-module-pullback",
+  "def-weil-pbc-generating-sections",
+  "def-weil-pbc-morphism-to-projective-space-by-sections",
+  "def-nagata-projective-space-base-change",
+  "def-pc-projective-space-twist"
+ ],
+ "proof": [
+  {
+   "text": "Pullback preserves invertibility, so $M_s$ is invertible. For each $j$ put $W_j=Z_{u_j}$, the locus where $u_j$ has nonzero residue value, and put $W=\\bigcup_{j=0}^rW_j$. The nonvanishing-section lemma makes each $W_j$ open. Let $i_s:Z_s\\to Z$ be the fibre projection. Nonvanishing commutes with pullback, so the nonvanishing locus of $i_s^*u_j$ is $i_s^{-1}(W_j)$. Apply the generating-sections fibre criterion on $Z_s$: the hypothesis implies $Z_s=\\bigcup_j i_s^{-1}(W_j)$. The fibre projection identifies $|Z_s|$ with $f^{-1}(s)$, hence $f^{-1}(s)\\subseteq W$.",
+   "uses": [
+    "lem-weil-pbc-nonvanishing-section-trivializes",
+    "lem-sc-nonvanishing-tensor-pullback",
+    "lem-weil-pbc-invertible-generating-sections-fibre",
+    "def-pc-scheme-fibre",
+    "lem-weil-pbc-invertible-pullback-tensor"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/coherent.tex",
+    "place": "Tag 0D2N, lemma-ample-in-neighbourhood: the opens X_{s_i} cover the fibre; Modules Tag 01CY, lemma-s-open and remark-pullback-s-open"
+   }
+  },
+  {
+   "text": "Put $C=|Z|\\setminus W$. It is closed. Properness includes universal closedness, so $f(C)$ is closed (use the identity base change). No point of $C$ maps to $s$, by step 1. Thus $V=S\\setminus f(C)$ is an open neighbourhood of $s$ and $f^{-1}(V)\\subseteq W$. Choose an affine open $s\\in U\\subseteq V$ using the affine-opens basis. The restriction $M_U$ is invertible by pullback stability. Nonvanishing commutes with the open pullback $Z_U\\to Z$, so the nonvanishing opens of $u_j|_{Z_U}$ cover $Z_U$. The generating-sections criterion now gives generation of $M_U$ by that restricted tuple.",
+   "uses": [
+    "def-weil-proper-morphism",
+    "lem-weil-pbc-affine-opens-basis",
+    "lem-sc-nonvanishing-tensor-pullback",
+    "lem-weil-pbc-invertible-generating-sections-fibre",
+    "lem-weil-pbc-invertible-pullback-tensor"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/coherent.tex",
+    "place": "Tag 0D2N, lemma-ample-in-neighbourhood: since X to Y is closed shrink so f^{-1}(V) is in the union; Schemes Tag 01IT, lemma-basis-affine-opens"
+   }
+  },
+  {
+   "text": "Apply the projective-space functor of points to $(M_U,(u_j|_{Z_U}))$, obtaining $\\psi:Z_U\\to\\mathbf P^r_{\\mathbf Z}$ and $\\alpha:\\psi^*\\mathcal O_{\\mathbf P^r_{\\mathbf Z}}(1)\\xrightarrow{\\sim}M_U$ sending every pulled-back $T_j$ to $u_j|_{Z_U}$. The definition of the morphism by sections gives $\\varphi=(f_U,\\psi):Z_U\\to U\\times_{\\operatorname{Spec}\\mathbf Z}\\mathbf P^r_{\\mathbf Z}$, a $U$-morphism. Write $\\rho$ for the second projection. The standard-chart lemma defines the relative twist as $\\rho^*\\mathcal O_{\\mathbf P^r_{\\mathbf Z}}(1)$. Since $\\rho\\varphi=\\psi$, the composite-pullback isomorphism identifies $\\varphi^*\\mathcal O(1)$ with $\\psi^*\\mathcal O(1)$; compose with $\\alpha$. This carries $\\varphi^*T_j$ to $u_j|_{Z_U}$ and is therefore quotient-compatible. Over $U=\\operatorname{Spec}A$ the chart rings are $A[T_l/T_j:l\\ne j]$, with overlap maps given by the same fractions. By the polynomial-Proj chart lemma these are precisely the charts $D_+(x_j)\\cong\\operatorname{Spec}A[x_l/x_j:l\\ne j]$ of $\\operatorname{Proj}(A[x_0,\\ldots,x_r])$, with $D_+(x_i)\\cap D_+(x_j)$ the basic open of $x_i/x_j$ in $D_+(x_j)$ and with twist bases satisfying $e_i=(x_i/x_j)e_j$; their coordinate-preserving identifications ($T_l/T_j\\mapsto x_l/x_j$) therefore agree on overlaps and glue. The twist frames $T_j$ satisfy $T_i=(T_i/T_j)T_j$, exactly the transition rule of the specified affine twist, so the twist identification also glues.",
+   "uses": [
+    "lem-weil-pbc-projective-space-functor-of-points",
+    "def-weil-pbc-morphism-to-projective-space-by-sections",
+    "lem-weil-pbc-projective-space-standard-charts",
+    "def-pc-module-pullback",
+    "def-pc-projective-space-twist",
+    "lem-weil-pbc-invertible-pullback-tensor",
+    "lem-weil-pbc-proj-polynomial-twist-chart"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/constructions.tex",
+    "place": "Tag 01NE, lemma-projective-space; definition-projective-space and its following paragraph; Tag 01NG, lemma-standard-covering-projective-space"
+   }
+  },
+  {
+   "text": "The restriction $f_U:Z_U\\to U$ is a base change of $f$, hence proper. The structural map $q:\\mathbf P^r_U\\to U$ is proper by the projective-space properness lemma with finite coordinate set $\\{0,\\ldots,r\\}$; in particular it is separated by the definition of properness. We have $q\\varphi=f_U$ by step 3. Apply proper-over-separated cancellation to this triangle to conclude that $\\varphi$ is proper.",
+   "uses": [
+    "lem-weil-pbc-proper-base-change",
+    "lemma-nagata-projective-space-base-change-proper",
+    "def-weil-proper-morphism",
+    "lem-weil-pbc-proper-over-separated"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 01W4, lemma-base-change-proper; Tag 01W6, lemma-image-proper-scheme-closed (2); Constructions Tag 01NH, lemma-projective-space-separated"
+   }
+  },
+  {
+   "text": "Let $b:\\operatorname{Spec}\\kappa(s)\\to U$ and $i:Z_s\\to Z_U$ be the fibre maps. The universal property of fibre products identifies $(U\\times_{\\operatorname{Spec}\\mathbf Z}\\mathbf P^r_{\\mathbf Z})\\times_U\\operatorname{Spec}\\kappa(s)$ with $\\operatorname{Spec}\\kappa(s)\\times_{\\operatorname{Spec}\\mathbf Z}\\mathbf P^r_{\\mathbf Z}$, preserving both projections: in either case a map into it is a pair of maps to $\\operatorname{Spec}\\kappa(s)$ and $\\mathbf P^r_{\\mathbf Z}$ with equal composites to $\\operatorname{Spec}\\mathbf Z$. The second projection of $\\varphi_s$ is $\\psi i$. Naturality in the functor-of-points lemma identifies $\\psi i$ with the morphism classified by $(i^*M_U,(i^*u_j))$. Its first projection is the fibre structure map, so uniqueness in the fibre-product definition proves that $\\varphi_s$ is the associated morphism over $\\kappa(s)$. Pull back the isomorphism of step 3 along $i$ and use composite pullback: it sends each pulled-back coordinate $T_j$ to $i^*u_j$. This is precisely the same quotient-compatible twist isomorphism on the fibre. Indeed on the nonvanishing opens, which cover by the fibre hypothesis, such an isomorphism must send the coordinate generator to the specified generator, so it is unique.",
+   "uses": [
+    "def-pc-fibre-product",
+    "def-nagata-projective-space-base-change",
+    "lem-weil-pbc-projective-space-functor-of-points",
+    "def-weil-pbc-morphism-to-projective-space-by-sections",
+    "def-pc-module-pullback",
+    "lem-weil-pbc-invertible-pullback-tensor"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/constructions.tex",
+    "place": "Tag 01NE, lemma-projective-space (represented functor and pullback); definition-projective-space and following paragraph; Coherent Tag 0D2N, identification of phi_y"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-nonvanishing-section-trivializes",
+  "lem-sc-nonvanishing-tensor-pullback",
+  "lem-weil-pbc-invertible-generating-sections-fibre",
+  "def-pc-scheme-fibre",
+  "lem-weil-pbc-invertible-pullback-tensor",
+  "def-weil-proper-morphism",
+  "lem-weil-pbc-affine-opens-basis",
+  "lem-weil-pbc-projective-space-functor-of-points",
+  "def-weil-pbc-morphism-to-projective-space-by-sections",
+  "lem-weil-pbc-projective-space-standard-charts",
+  "def-pc-module-pullback",
+  "def-pc-projective-space-twist",
+  "lem-weil-pbc-proper-base-change",
+  "lemma-nagata-projective-space-base-change-proper",
+  "lem-weil-pbc-proper-over-separated",
+  "def-pc-fibre-product",
+  "def-nagata-projective-space-base-change",
+  "lem-weil-pbc-proj-polynomial-twist-chart"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/coherent.tex",
+  "place": "Tag 0D2N, lemma-ample-in-neighbourhood, first paragraph from the nonvanishing opens onward, with Constructions 01NE/01NG and Morphisms 01W6 spelling out its interfaces."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Sections of a line bundle generating on one fibre of a proper scheme generate near that fibre and define a proper morphism to projective space",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Proj.fromOfGlobalSections\", \"module\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Basic\", \"type\": \"{σ : Type u_1} →\\n  {A : Type u} →\\n    [inst : CommRing A] →\\n      [inst_1 : SetLike σ A] →\\n        [inst_2 : AddSubgroupClass σ A] →\\n          (𝒜 : ℕ → σ) →\\n            [inst_3 : GradedRing 𝒜] →\\n              {X : AlgebraicGeometry.Scheme} →\\n                (f : A →+* ↑(X.presheaf.obj (Opposite.op ⊤\", \"doc\": \"Given a graded ring $\\\\mathcal{A}$ and a global section $f$ satisfying certain conditions, this morphism $X \\\\to \\\\operatorname{Proj}(\\\\mathcal{A})$ is constructed by gluing local morphisms defined on ope\"}\n  {\"name\": \"AlgebraicGeometry.Proj.instIsProperToSpecZeroOfFiniteTypeSubtypeMemOfNatNat\", \"module\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Proper\", \"type\": \"∀ {σ : Type u_1} {A : Type u_2} [inst : CommRing A] [inst_1 : SetLike σ A] [inst_2 : AddSubgroupClass σ A] (𝒜 : ℕ → σ)\\n  [inst_3 : GradedRing 𝒜] [Algebra.FiniteType (↥(𝒜 0)) A],\\n  AlgebraicGeometry.IsProper (AlgebraicGeometry.Proj.toSpecZero 𝒜)\", \"doc\": \"If the zero-graded component $ \\\\mathcal{A}_0 $ of a graded ring $ \\\\mathcal{A} $ is a finitely generated $ A $-algebra, then the canonical morphism from the projective spectrum $ \\\\operatorname{Proj}(\\\\m\"}\n  {\"name\": \"AlgebraicGeometry.Proj.openCoverOfMapIrreleventEqTop\", \"module\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Basic\", \"type\": \"{σ : Type u_1} →\\n  {A : Type u} →\\n    [inst : CommRing A] →\\n      [inst_1 : SetLike σ A] →\\n        [inst_2 : AddSubgroupClass σ A] →\\n          (𝒜 : ℕ → σ) →\\n            [inst_3 : GradedRing 𝒜] →\\n              {X : AlgebraicGeometry.Scheme} →\\n                (f : A →+* ↑(X.presheaf.obj (Opposite.op ⊤\", \"doc\": \"Given a graded ring $\\\\mathcal{A}$ and a scheme $X$ equipped with a ring homomorphism $f: \\\\mathcal{A}_0 \\\\to \\\\mathcal{O}_X(\\\\top)$ from the degree-zero component of $\\\\mathcal{A}$ to the structure sheaf o\"}\n  {\"name\": \"AlgebraicGeometry.Proj.openCoverOfMapIrrelevantEqTop\", \"module\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Basic\", \"type\": \"{σ : Type u_1} →\\n  {A : Type u} →\\n    [inst : CommRing A] →\\n      [inst_1 : SetLike σ A] →\\n        [inst_2 : AddSubgroupClass σ A] →\\n          (𝒜 : ℕ → σ) →\\n            [inst_3 : GradedRing 𝒜] →\\n              {X : AlgebraicGeometry.Scheme} →\\n                (f : A →+* ↑(X.presheaf.obj (Opposite.op ⊤\", \"doc\": \"Given a graded ring $\\\\mathcal{A}$ and a scheme $X$ equipped with a ring homomorphism $f: \\\\mathcal{A}_0 \\\\to \\\\mathcal{O}_X(\\\\top)$ from the degree-zero component of $\\\\mathcal{A}$ to the structure sheaf o\"}\n  {\"name\": \"AlgebraicGeometry.Proj.affineOpenCoverOfIrrelevantLESpan\", \"module\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Basic\", \"type\": \"{σ : Type u_1} →\\n  {A : Type u} →\\n    [inst : CommRing A] →\\n      [inst_1 : SetLike σ A] →\\n        [inst_2 : AddSubgroupClass σ A] →\\n          (𝒜 : ℕ → σ) →\\n            [inst_3 : GradedRing 𝒜] →\\n              {ι : Type u_2} →\\n                (f : ι → A) →\\n                  {m : ι → ℕ} →\\n            \", \"doc\": \"Given a graded commutative ring $\\\\mathcal{A}$ over a commutative ring $A$, if the irrelevant ideal (consisting of elements with zero zeroth homogeneous component) is contained in the ideal generated b\"}\n  {\"name\": \"AlgebraicGeometry.Proj.fromOfGlobalSections_resLE\", \"module\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Basic\", \"type\": \"∀ {σ : Type u_1} {A : Type u} [inst : CommRing A] [inst_1 : SetLike σ A] [inst_2 : AddSubgroupClass σ A] (𝒜 : ℕ → σ)\\n  [inst_3 : GradedRing 𝒜] {X : AlgebraicGeometry.Scheme} (f : A →+* ↑(X.presheaf.obj (Opposite.op ⊤)))\\n  (hf : Ideal.map f (HomogeneousIdeal.irrelevant 𝒜).toIdeal = ⊤) {r : A} {n : ℕ}\", \"doc\": \"For a graded ring $\\\\mathcal{A}$, a positive integer $n$, and an element $r \\\\in \\\\mathcal{A}_n$, the restriction of the morphism induced by global sections composed with the preimage of the basic open s\"}\n  {\"name\": \"AlgebraicGeometry.Proj.instLocallyOfFiniteTypeToSpecZeroOfFiniteTypeSubtypeMemOfNatNat\", \"module\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Proper\", \"type\": \"∀ {σ : Type u_1} {A : Type u_2} [inst : CommRing A] [inst_1 : SetLike σ A] [inst_2 : AddSubgroupClass σ A] (𝒜 : ℕ → σ)\\n  [inst_3 : GradedRing 𝒜] [Algebra.FiniteType (↥(𝒜 0)) A],\\n  AlgebraicGeometry.LocallyOfFiniteType (AlgebraicGeometry.Proj.toSpecZero 𝒜)\", \"doc\": \"Given a graded ring $\\\\mathcal{A}$ whose zero-graded component $\\\\mathcal{A}_0$ is a finitely generated algebra over a base ring $A$, the canonical morphism from the projective spectrum $\\\\operatorname{P\"}\n  {\"name\": \"AlgebraicGeometry.Proj\", \"module\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Scheme\", \"type\": \"{A : Type u_1} →\\n  {σ : Type u_2} →\\n    [inst : CommRing A] →\\n      [inst_1 : SetLike σ A] → [inst_2 : AddSubgroupClass σ A] → (𝒜 : ℕ → σ) → [GradedRing 𝒜] → AlgebraicGeometry.Scheme\", \"doc\": \"The projective spectrum $\\\\operatorname{Proj}(\\\\mathcal{A})$ of a graded ring $\\\\mathcal{A}$ is constructed as a scheme by equipping it with a locally ringed space structure. For every point $x \\\\in \\\\oper\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: Proj.fromOfGlobalSections constructs a map from a graded-ring map to structure-sheaf sections (Basic.lean:443); it does not handle an arbitrary invertible module, the fibre-generation shrinking, or its quotient-compatible fibre comparison."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Extend fibrewise generating global sections of an invertible module to a generating tuple over a neighbourhood in the base of a proper morphism",
+   "results": "[leansearch] UNAVAILABLE 0 hit(s) | service unavailable: {\"error\":\"Rate limit exceeded: 60 per 1 minute\"}\n  This kind of search is not available now. It is recorded as unavailable; use the other kinds and grep, and do not write a verdict for it.",
+   "date": "2026-10-22",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsProper\", \"ProjectiveSpectrum\"",
+   "results": "[loogle] OK 0 hit(s)",
+   "date": "2026-10-22",
+   "verdict": "no match: Proj.fromOfGlobalSections constructs a map from a graded-ring map to structure-sheaf sections (Basic.lean:443); it does not handle an arbitrary invertible module, the fibre-generation shrinking, or its quotient-compatible fibre comparison."
+  },
+  {
+   "tool": "grep",
+   "query": "generat.*(fiber|fibre)|(fiber|fibre).*generat",
+   "results": "[grep] OK 0 hit(s)",
+   "date": "2026-10-22",
+   "verdict": "no match: Proj.fromOfGlobalSections constructs a map from a graded-ring map to structure-sheaf sections (Basic.lean:443); it does not handle an arbitrary invertible module, the fibre-generation shrinking, or its quotient-compatible fibre comparison."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Shrink the base so a finite tuple of sections with no common zero on a fibre defines a projective space morphism with the prescribed pullback of O(1)",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Proj.fromOfGlobalSections\", \"module\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Basic\", \"type\": \"{σ : Type u_1} →\\n  {A : Type u} →\\n    [inst : CommRing A] →\\n      [inst_1 : SetLike σ A] →\\n        [inst_2 : AddSubgroupClass σ A] →\\n          (𝒜 : ℕ → σ) →\\n            [inst_3 : GradedRing 𝒜] →\\n              {X : AlgebraicGeometry.Scheme} →\\n                (f : A →+* ↑(X.presheaf.obj (Opposite.op ⊤\", \"doc\": \"Given a graded ring $\\\\mathcal{A}$ and a global section $f$ satisfying certain conditions, this morphism $X \\\\to \\\\operatorname{Proj}(\\\\mathcal{A})$ is constructed by gluing local morphisms defined on ope\"}\n  {\"name\": \"AlgebraicGeometry.Proj.fromOfGlobalSections_resLE\", \"module\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Basic\", \"type\": \"∀ {σ : Type u_1} {A : Type u} [inst : CommRing A] [inst_1 : SetLike σ A] [inst_2 : AddSubgroupClass σ A] (𝒜 : ℕ → σ)\\n  [inst_3 : GradedRing 𝒜] {X : AlgebraicGeometry.Scheme} (f : A →+* ↑(X.presheaf.obj (Opposite.op ⊤)))\\n  (hf : Ideal.map f (HomogeneousIdeal.irrelevant 𝒜).toIdeal = ⊤) {r : A} {n : ℕ}\", \"doc\": \"For a graded ring $\\\\mathcal{A}$, a positive integer $n$, and an element $r \\\\in \\\\mathcal{A}_n$, the restriction of the morphism induced by global sections composed with the preimage of the basic open s\"}\n  {\"name\": \"AlgebraicGeometry.Proj.fromOfGlobalSections_morphismRestrict\", \"module\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Basic\", \"type\": \"∀ {σ : Type u_1} {A : Type u} [inst : CommRing A] [inst_1 : SetLike σ A] [inst_2 : AddSubgroupClass σ A] (𝒜 : ℕ → σ)\\n  [inst_3 : GradedRing 𝒜] {X : AlgebraicGeometry.Scheme} (f : A →+* ↑(X.presheaf.obj (Opposite.op ⊤)))\\n  (hf : Ideal.map f (HomogeneousIdeal.irrelevant 𝒜).toIdeal = ⊤) {r : A} {n : ℕ}\", \"doc\": \"For a graded ring $\\\\mathcal{A}$, a global section $f$, and a positive integer $n$ with $r \\\\in \\\\mathcal{A}_n$, the restriction of the morphism $\\\\text{fromOfGlobalSections}(\\\\mathcal{A}, f, hf)$ to the b\"}\n  {\"name\": \"AlgebraicGeometry.Proj.pullbackAwayιIso\", \"module\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Basic\", \"type\": \"{σ : Type u_1} →\\n  {A : Type u} →\\n    [inst : CommRing A] →\\n      [inst_1 : SetLike σ A] →\\n        [inst_2 : AddSubgroupClass σ A] →\\n          (𝒜 : ℕ → σ) →\\n            [inst_3 : GradedRing 𝒜] →\\n              {f : A} →\\n                {m : ℕ} →\\n                  (f_deg : f ∈ 𝒜 m) →\\n                 \", \"doc\": \"For a graded ring $\\\\mathcal{A}$ and homogeneous elements $f \\\\in \\\\mathcal{A}_m$, $g \\\\in \\\\mathcal{A}_{m'}$ with positive degrees, the pullback of the inclusion morphisms $\\\\operatorname{Spec}(\\\\mathcal{A}\"}\n  {\"name\": \"AlgebraicGeometry.Proj.awayMap_awayToSection\", \"module\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Basic\", \"type\": \"∀ {σ : Type u_1} {A : Type u} [inst : CommRing A] [inst_1 : SetLike σ A] [inst_2 : AddSubgroupClass σ A] (𝒜 : ℕ → σ)\\n  [inst_3 : GradedRing 𝒜] {f : A} {m' : ℕ} {g : A} (g_deg : g ∈ 𝒜 m') {x : A} (hx : x = f * g),\\n  CategoryTheory.CategoryStruct.comp (CommRingCat.ofHom (HomogeneousLocalization.awayMa\", \"doc\": \"For a graded ring $\\\\mathcal{A}$ and homogeneous elements $f,g$ where $f$ divides $g$, the composition of the ring homomorphism $\\\\mathcal{A}_{(g)} \\\\to \\\\mathcal{A}_{(f)}$ (induced by localization) follo\"}\n  {\"name\": \"AlgebraicGeometry.Proj.toBasicOpenOfGlobalSections\", \"module\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Basic\", \"type\": \"{σ : Type u_1} →\\n  {A : Type u} →\\n    [inst : CommRing A] →\\n      [inst_1 : SetLike σ A] →\\n        [inst_2 : AddSubgroupClass σ A] →\\n          (𝒜 : ℕ → σ) →\\n            [inst_3 : GradedRing 𝒜] →\\n              {X : AlgebraicGeometry.Scheme} →\\n                (f : A →+* ↑(X.presheaf.obj (Opposite.op ⊤\", \"doc\": \"Given a graded ring $\\\\mathcal{A}$, a homogeneous element $t \\\\in \\\\mathcal{A}_d$ with $d > 0$, and a global section $x$ such that $f(t) = x$, this morphism constructs a scheme map from the basic open su\"}\n  {\"name\": \"AlgebraicGeometry.Proj\", \"module\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Scheme\", \"type\": \"{A : Type u_1} →\\n  {σ : Type u_2} →\\n    [inst : CommRing A] →\\n      [inst_1 : SetLike σ A] → [inst_2 : AddSubgroupClass σ A] → (𝒜 : ℕ → σ) → [GradedRing 𝒜] → AlgebraicGeometry.Scheme\", \"doc\": \"The projective spectrum $\\\\operatorname{Proj}(\\\\mathcal{A})$ of a graded ring $\\\\mathcal{A}$ is constructed as a scheme by equipping it with a locally ringed space structure. For every point $x \\\\in \\\\oper\"}\n  {\"name\": \"AlgebraicGeometry.Proj.fromOfGlobalSections_toSpecZero\", \"module\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Basic\", \"type\": \"∀ {σ : Type u_1} {A : Type u} [inst : CommRing A] [inst_1 : SetLike σ A] [inst_2 : AddSubgroupClass σ A] (𝒜 : ℕ → σ)\\n  [inst_3 : GradedRing 𝒜] {X : AlgebraicGeometry.Scheme} (f : A →+* ↑(X.presheaf.obj (Opposite.op ⊤)))\\n  (hf : Ideal.map f (HomogeneousIdeal.irrelevant 𝒜).toIdeal = ⊤),\\n  CategoryTheo\", \"doc\": \"Given a graded ring $\\\\mathcal{A}$ over a commutative ring $A$, a scheme $X$, and a ring homomorphism $f : A \\\\to \\\\Gamma(X, \\\\mathcal{O}_X)$ such that the image of the irrelevant ideal $\\\\mathcal{I} \\\\subs\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: Proj.fromOfGlobalSections constructs a map from a graded-ring map to structure-sheaf sections (Basic.lean:443); it does not handle an arbitrary invertible module, the fibre-generation shrinking, or its quotient-compatible fibre comparison."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Sections of an invertible sheaf generating on a fibre of a proper morphism generate near that fibre and induce a proper morphism to projective space",
+   "results": "OK 8 hits: AlgebraicGeometry.Proj.fromOfGlobalSections, AlgebraicGeometry.Proj.instIsProperToSpecZeroOfFiniteTypeSubtypeMemOfNatNat, AlgebraicGeometry.Proj.fromOfGlobalSections_morphismRestrict, AlgebraicGeometry.Proj.toBasicOpenOfGlobalSections, AlgebraicGeometry.Proj.fromOfGlobalSections_resLE, AlgebraicGeometry.Proj, AlgebraicGeometry.Proj.valuativeCriterion_existence, AlgebraicGeometry.Proj.awayMap_awayToSection",
+   "date": "2026-10-23",
+   "verdict": "no match: the listed Proj maps use structure-sheaf sections, not arbitrary invertible-module sections; the generating-section hits give neither proper-fibre shrinking nor the projective-space and twist comparison."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsProper\", \"Projectivization\"",
+   "results": "OK 0 hits: ",
+   "date": "2026-10-23",
+   "verdict": "no match: the listed Proj maps use structure-sheaf sections, not arbitrary invertible-module sections; the generating-section hits give neither proper-fibre shrinking nor the projective-space and twist comparison."
+  },
+  {
+   "tool": "grep",
+   "query": "generat.*(fiber|fibre)|(fiber|fibre).*generat",
+   "results": "OK 0 hits: ",
+   "date": "2026-10-23",
+   "verdict": "no match: the listed Proj maps use structure-sheaf sections, not arbitrary invertible-module sections; the generating-section hits give neither proper-fibre shrinking nor the projective-space and twist comparison."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Global sections of a line bundle generating on one fibre generate on a neighbourhood under a proper morphism",
+   "results": "OK 8 hits: SheafOfModules.GeneratingSections.ofEpi_s, IsLocalFrameOn.generating, CategoryTheory.Sheaf.Γ, SheafOfModules.GeneratingSections.ofEpi, SheafOfModules.GeneratingSections.mk, AlgebraicGeometry.termΓ(_,_), CategoryTheory.HasGlobalSectionsFunctor, SheafOfModules.GeneratingSections.s",
+   "date": "2026-10-23",
+   "verdict": "no match: the listed Proj maps use structure-sheaf sections, not arbitrary invertible-module sections; the generating-section hits give neither proper-fibre shrinking nor the projective-space and twist comparison."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A finite family of sections of an invertible module with no common zero defines a morphism to projective space pulling back O(1) compatibly with base change",
+   "results": "OK 8 hits: AlgebraicGeometry.Proj.fromOfGlobalSections, AlgebraicGeometry.Proj.pullbackAwayιIso, AlgebraicGeometry.ProjectiveSpectrum.Proj.awayToΓ, AlgebraicGeometry.ProjectiveSpectrum.Proj.awayToSection, AlgebraicGeometry.Proj.toBasicOpenOfGlobalSections, AlgebraicGeometry.Proj.awayι, AlgebraicGeometry.Proj.awayMap_awayToSection, AlgebraicGeometry.Proj.fromOfGlobalSections_morphismRestrict",
+   "date": "2026-10-23",
+   "verdict": "no match: the listed Proj maps use structure-sheaf sections, not arbitrary invertible-module sections; the generating-section hits give neither proper-fibre shrinking nor the projective-space and twist comparison."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-noetherian-fibre-ample-neighbourhood",
+  "date": "2026-10-22",
+  "group": "Q157"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Fibrewise ampleness-to-projectivity input below lem-trf-local-term-locality: 0D2S applies the Noetherian-base cohomological lemma 0D2N after descending fibre ampleness. Re-split of the Noetherian input: Tag 0D2N, lemma-ample-in-neighbourhood, first paragraph from the nonvanishing opens through construction of phi and identification of its fibre.",
+   "via": [
+    "lem-trf-noetherian-fibre-ample-neighbourhood",
+    "lem-trf-ample-neighbourhood",
+    "lem-trf-proper-fibrewise-ample-projective",
+    "lem-trf-temkin-stable-modification",
+    "lem-trf-stable-modification-flat-curve-pair",
+    "lem-trf-dejong-relative-marked-semistable",
+    "lem-trf-relative-marked-nodal-reduction",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-trf-fibre-generators-projective-neighbourhood",
+  "worker": "stage1",
+  "summary": "Followed the topological shrinking and projective-space construction in Stacks 0D2N. Existing DAG statements cover all inputs; no new nodes. Wrote the closed-image complement explicitly, checked affine shrinking, quotient-compatible twist and fibre naturality, and properness via 01W6. Statement unchanged; no Noetherian hypothesis is used in this part of 0D2N.",
+  "blueprint": "Auxiliary fibre-ampleness/projectivity route below lem-trf-local-term-locality through the existing via chain: the first paragraph of Stacks 0D2N, from the nonvanishing opens through construction of phi and its fibre. The current latest blueprint has no duplicate of this auxiliary statement.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-nonvanishing-section-trivializes",
+    "why": "Generic input for the 0D2N nonvanishing/projective-space argument: A section of an invertible module trivializes it where it does not vanish. No node of sk-i-curve-zero supplies this scheme-theoretic interface; this preserves the already selected auxiliary route."
+   },
+   {
+    "node": "lem-sc-nonvanishing-tensor-pullback",
+    "why": "Generic input for the 0D2N nonvanishing/projective-space argument: Nonvanishing of a pulled-back invertible section. No node of sk-i-curve-zero supplies this scheme-theoretic interface; this preserves the already selected auxiliary route."
+   },
+   {
+    "node": "lem-weil-pbc-invertible-generating-sections-fibre",
+    "why": "Generic input for the 0D2N nonvanishing/projective-space argument: Generating sections of an invertible module: the fibre criterion. No node of sk-i-curve-zero supplies this scheme-theoretic interface; this preserves the already selected auxiliary route."
+   },
+   {
+    "node": "lem-weil-pbc-projective-space-functor-of-points",
+    "why": "Generic input for the 0D2N nonvanishing/projective-space argument: Projective space over Z represents invertible modules with generating sections. No node of sk-i-curve-zero supplies this scheme-theoretic interface; this preserves the already selected auxiliary route."
+   },
+   {
+    "node": "lem-weil-pbc-projective-space-standard-charts",
+    "why": "Generic input for the 0D2N nonvanishing/projective-space argument: Standard charts and coordinate sections of projective space over a scheme. No node of sk-i-curve-zero supplies this scheme-theoretic interface; this preserves the already selected auxiliary route."
+   },
+   {
+    "node": "lemma-nagata-projective-space-base-change-proper",
+    "why": "Generic input for the 0D2N nonvanishing/projective-space argument: Projective space is proper over its base. No node of sk-i-curve-zero supplies this scheme-theoretic interface; this preserves the already selected auxiliary route."
+   },
+   {
+    "node": "lem-weil-pbc-invertible-pullback-tensor",
+    "why": "Preservation of invertibility and section-compatible composite pullback, needed to apply the generating-sections criterion and identify the pulled-back twist. This generic module interface is not supplied by sk-i-curve-zero."
+   },
+   {
+    "node": "lem-weil-pbc-proj-polynomial-twist-chart",
+    "why": "Charts of Proj(A[x_0,...,x_r]) (D_+(x_k) = Spec A[x_l/x_k], overlaps, twist transition e_l=(x_l/x_k)e_k), needed in step 3 to identify P^r_U over affine U with the polynomial Proj carrying the twist of def-pc-projective-space-twist. Generic Constructions interface; no node of sk-i-curve-zero supplies it (added by the maintainer reader)."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-nonvanishing-section-trivializes",
+  "lem-sc-nonvanishing-tensor-pullback",
+  "lem-weil-pbc-invertible-generating-sections-fibre",
+  "lem-weil-pbc-projective-space-functor-of-points",
+  "lem-weil-pbc-projective-space-standard-charts",
+  "lemma-nagata-projective-space-base-change-proper",
+  "lem-weil-pbc-invertible-pullback-tensor",
+  "lem-weil-pbc-proj-polynomial-twist-chart"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q62-e3e61d719",
+  "group": "Q62",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q62-e3e61d719 (reviewer sub-agent of L); spot-checked: The delivery creates no new node and leaves the statement unchanged; the split is an ordinary one-level split (no repair note for this item). Source check: Stacks coherent.tex 0D2N, from the nonvanishing opens to the base change of φ, read in full. The Noetherian hypothesis serves only the earlier section lifting (sibling node A), so omitting it is correct. Properness of φ is an added consequence: 01W6(2) gives it because P^r_U→U is proper, hence separated. Steps 1, 2, 4 and 5 were checked against every cited statement. In step 1 the fibre is covered, using the residue criterion, nonvanishing under pullback and the homeomorphism of the fibre onto f^{-1}(s). In step 2 f(Z∖W) is closed by universal closedness with the identity base change, and an affine U is chosen inside the complement of that image. In step 4 base change, properness of P(n;S) and proper-over-separated apply with all hypotheses met. In step 5 the fibre-product reassociation, the naturality clause of the functor of points and the section-compatible composite pullback give the fibre identification; uniqueness holds on the cover. Edge cases checked: empty fibre, r=0, zero members of the tuple, non-Noetherian or nonreduced base; parent step 3 uses the item with matching hypotheses. Duplicate search (rg -L for 0D2N and the key phrases): siblings A and C, the parent, the ample-neighbourhood nodes and the algebraic-space ampleness nodes all differ; lem-weil-pbc-sections-morphism-to-proj-polynomial-ring is a tool, not a duplicate. FIX (C1/C4): step 3 says the base-change charts A[T_l/T_j] 'are precisely the polynomial-Proj charts' (D_+(x_j)=Spec A[x_l/x_j], overlaps, twist bases e_i=(x_i/x_j)e_j), but no cited node states that; def-pc-projective-space-twist only names the opens and the transition rule. The fix cites the existing lem-weil-pbc-proj-polynomial-twist-chart in step 3, spells out what it supplies, adds it to proof_deps and declares it in split_report.tool_uses as a generic Constructions interface. File: fixes/dag/nodes/sec-trace-formula/lem-trf-fibre-generators-projective-neighbourhood.json. The seven declared tool uses (generic scheme interfaces already used by the Q157 parent split) are accepted.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.FibreGeneratorsProjectiveNeighbourhood",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.fibre_generators_projective_neighbourhood",
+  "file": "lean/Sheaf/AlgebraicGeometry/FibreGeneratorsProjectiveNeighbourhood.lean",
+  "statement": "theorem fibre_generators_projective_neighbourhood {Z S : Scheme.{u}} (f : Z ⟶ S) [IsProper f] (s : S) (M : Z.Modules) [M.IsInvertible] (r : ℕ) (a : ULift.{u} (Fin (r + 1)) → M.sections) (us : ULift.{u} (Fin (r + 1)) → ((tensorPullback (f.fiberι s)).obj M).sections) (hus : ∀ j, (us j).val (op ⊤) = ((tensorPullbackSectionAdjunction (f.fiberι s)).unit.app M).app ⊤ ((a j).val (op ⊤))) (hgen : Epi (((tensorPullback (f.fiberι s)).obj M).freeHomEquiv.symm us)) : ∃ U : S.Opens, s ∈ U ∧ IsAffineOpen U ∧ ∃ (hMU : ((tensorPullback (f ⁻¹ᵁ U).ι).obj M).IsInvertible) (v : ULift.{u} (Fin (r + 1)) → ((tensorPullback (f ⁻¹ᵁ U).ι).obj M).sections), (∀ j, (v j).val (op ⊤) = ((tensorPullbackSectionAdjunction (f ⁻¹ᵁ U).ι).unit.app M).app ⊤ ((a j).val (op ⊤))) ∧ ∃ hv : Epi (((tensorPullback (f ⁻¹ᵁ U).ι).obj M).freeHomEquiv.symm v), ∃ φ : (f ⁻¹ᵁ U).toScheme ⟶ ℙ(ULift.{u} (Fin (r + 1)); U.toScheme), φ = @ProjectiveSpace.homOfGeneratingSections (ULift.{u} (Fin (r + 1))) _ _ _ (f ∣_ U) ((tensorPullback (f ⁻¹ᵁ U).ι).obj M) hMU v hv ∧ IsProper φ ∧ ∃ e : (tensorPullback φ).obj (ProjectiveSpace.twist (ULift.{u} (Fin (r + 1))) U.toScheme 1) ≅ (tensorPullback (f ⁻¹ᵁ U).ι).obj M, (∀ j, e.hom.app ⊤ (((tensorPullbackSectionAdjunction φ).unit.app (ProjectiveSpace.twist (ULift.{u} (Fin (r + 1))) U.toScheme 1)).app ⊤ (ProjectiveSpace.twistOneSection (ULift.{u} (Fin (r + 1))) U.toScheme j)) = (v j).val (op ⊤)) ∧ ∃ (b : Spec (S.residueField s) ⟶ U.toScheme) (i : f.fiber s ⟶ (f ⁻¹ᵁ U).toScheme) (hi : i ≫ (f ⁻¹ᵁ U).ι = f.fiberι s), b ≫ U.ι = S.fromSpecResidueField s ∧ IsPullback i (f.fiberToSpecResidueField s) (f ∣_ U) b ∧ ∃ (φs : f.fiber s ⟶ ℙ(ULift.{u} (Fin (r + 1)); Spec (S.residueField s))) (hc : φs ≫ ProjectiveSpace.map (ULift.{u} (Fin (r + 1))) b = i ≫ φ), φs = @ProjectiveSpace.homOfGeneratingSections (ULift.{u} (Fin (r + 1))) _ _ _ (f.fiberToSpecResidueField s) ((tensorPullback (f.fiberι s)).obj M) ((invertible_pullback_tensor (f.fiberι s)).1 M).2 us hgen ∧ ∃ β : (tensorPullback (ProjectiveSpace.map (ULift.{u} (Fin (r + 1))) b)).obj (ProjectiveSpace.twist (ULift.{u} (Fin (r + 1))) U.toScheme 1) ≅ ProjectiveSpace.twist (ULift.{u} (Fin (r + 1))) (Spec (S.residueField s)) 1, (∀ j, β.hom.app ⊤ (((tensorPullbackSectionAdjunction (ProjectiveSpace.map (ULift.{u} (Fin (r + 1))) b)).unit.app (ProjectiveSpace.twist (ULift.{u} (Fin (r + 1))) U.toScheme 1)).app ⊤ (ProjectiveSpace.twistOneSection (ULift.{u} (Fin (r + 1))) U.toScheme j)) = ProjectiveSpace.twistOneSection (ULift.{u} (Fin (r + 1))) (Spec (S.residueField s)) j) ∧ ∃ es : (tensorPullback φs).obj (ProjectiveSpace.twist (ULift.{u} (Fin (r + 1))) (Spec (S.residueField s)) 1) ≅ (tensorPullback (f.fiberι s)).obj M, (∀ j, es.hom.app ⊤ (((tensorPullbackSectionAdjunction φs).unit.app (ProjectiveSpace.twist (ULift.{u} (Fin (r + 1))) (Spec (S.residueField s)) 1)).app ⊤ (ProjectiveSpace.twistOneSection (ULift.{u} (Fin (r + 1))) (Spec (S.residueField s)) j)) = (us j).val (op ⊤)) ∧ (tensorPullback φs).mapIso β ≪≫ es = ((tensorPullbackSectionComp φs (ProjectiveSpace.map (ULift.{u} (Fin (r + 1))) b)).app (ProjectiveSpace.twist (ULift.{u} (Fin (r + 1))) U.toScheme 1)).symm ≪≫ eqToIso (congrArg (fun h ↦ (tensorPullback h).obj (ProjectiveSpace.twist (ULift.{u} (Fin (r + 1))) U.toScheme 1)) hc) ≪≫ (tensorPullbackSectionComp i φ).app (ProjectiveSpace.twist (ULift.{u} (Fin (r + 1))) U.toScheme 1) ≪≫ (tensorPullback i).mapIso e ≪≫ ((tensorPullbackSectionComp i (f ⁻¹ᵁ U).ι).app M).symm ≪≫ eqToIso (congrArg (fun h ↦ (tensorPullback h).obj M) hi)",
+  "branch": "newtargets-dag",
+  "by": "Q68",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-d1f07a67a",
+  "group": "Q68",
+  "result": "pass",
+  "note": "Clause-by-clause check of FibreGeneratorsProjectiveNeighbourhood.lean against the node and Stacks 0D2N, Constructions 01NE/01NG and Morphisms 01W4/01W6. Only the item node's lean field changed and the recorded statement is verbatim. Fibre tuple us is tied by hus to the normalized tensorPullbackSectionAdjunction unit; hgen is the Epi of freeHomEquiv.symm as in the generating-sections record. U is an affine open containing s; v, hv and hMU are outputs; phi equals homOfGeneratingSections(f|_U), with IsProper phi. The twist isomorphism e is fixed by twistOneSection to v. b and i are fixed by equations, the fibre square is stated with IsPullback, phi_s equals homOfGeneratingSections(fiberToSpecResidueField) for us, and hc together with isPullback_map makes it the base change of phi. beta and es are fixed by coordinates, and the iso equation through tensorPullbackSectionComp and eqToIso of hc and hi gives the same quotient-compatible isomorphism, which holds because the coordinate sections generate. Edge cases r=0, empty fibre, zero sections, non-Noetherian or nonreduced base and universe u are covered with no extra hypotheses. No duplicate found (grep for 0D2N and the declaration name in side-live). Proof is sorry, no definitions, docstrings and report sections present. Advisory only: invertible_pullback_tensor (an upstream proof_dep, not a stmt_dep) supplies a proof-irrelevant Prop witness, with no cycle. No file changed, so no compile; the worker reports a clean server compile."
+ }
+}

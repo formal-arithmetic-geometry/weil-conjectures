@@ -1,0 +1,109 @@
+{
+ "kind": "definition",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-orientation/sk-prop-sp-orientation-charts.proof.md",
+  "place": "Steps 1--4, the canonical constructions used by both factor equations"
+ },
+ "status": "split",
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "The normalized deformation isomorphism of smooth section invariants commutes with etale coordinate charts and the actual conormal differential",
+   "results": "8 hits: ContMDiffSection.ext, MDifferentiableWithinAt.change_section_trivialization, Scheme.Hom.instIsIsoToNormalizationOfIsIntegralHom, MDifferentiable.coordChangeL, ContMDiffSection.mk.injEq, Trivialization.contMDiffOn_section_iff, ContMDiffWithinAt.change_section_trivialization, Trivialization.contMDiffOn_section_baseSet_iff; none states the derived-category comparison.",
+   "date": "2026-10-25",
+   "verdict": "No exact match."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Naturality of normalized deformation to the normal cone for etale maps of smooth sections, and inverse vector bundle integration transpose under pullback",
+   "results": "8 hits, chiefly smoothSheaf evaluation identities and Scheme.Hom.normalizationDiagramMap; no exact match.",
+   "date": "2026-10-25",
+   "verdict": "No exact match."
+  },
+  {
+   "tool": "grep",
+   "query": "deformation.*normal.*etale|integration.*adjoint.*base",
+   "results": "[grep] OK 0 hit(s)",
+   "date": "2026-10-25",
+   "verdict": "No Mathlib match. Local ChartDncSquare and ChartNormalIntegrationSquare require affine U; the present steps allow non-affine U."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.ChartDncVectorFactors",
+  "date": "2026-10-25",
+  "group": "G4"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sp-orientation",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-sp-orientation-charts",
+   "via": [
+    "lem-pur-chart-dnc-vector-factors"
+   ],
+   "place": "Steps 1--4, the canonical constructions used by both factor equations"
+  },
+  "same_as": []
+ },
+ "id": "def-pur-chart-dnc-vector-factor-data",
+ "title": "Canonical chart deformation and integration data independent of the comparison theorem",
+ "statement": "For the finite purity setting P [def-pur-conventions], use the canonical chart source comparison [def-pur-chart-source-comparison] and the actual Rees/normal/integration constructions [def-pur-chart-affine-comparison-data]. These constructions are exactly the published selfMap, sourceLift, sourceOrdinary, source, deformation, normalMap, normal, normalBundleComparison, beta and canonical Tate comparison, with all projection, etaleness and zero-section geometry witnesses. This node records their unchanged common module; it introduces no alternative comparison or orientation.",
+ "stmt_deps": [
+  "def-pur-conventions",
+  "def-pur-chart-source-comparison",
+  "def-pur-chart-affine-comparison-data"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "lean": {
+  "module": "Sheaf.Paper.ChartDncVectorFactorData",
+  "file": "lean/Sheaf/Paper/ChartDncVectorFactorData.lean",
+  "declaration": "WeilConjectures.PurityFiniteSetting.ChartFactors.beta",
+  "declarations": [
+   "WeilConjectures.PurityFiniteSetting.ChartFactors.selfMap",
+   "WeilConjectures.PurityFiniteSetting.ChartFactors.selfMap_fst",
+   "WeilConjectures.PurityFiniteSetting.ChartFactors.sourceLift",
+   "WeilConjectures.PurityFiniteSetting.ChartFactors.sourceLift_geometry",
+   "WeilConjectures.PurityFiniteSetting.ChartFactors.sourceOrdinary",
+   "WeilConjectures.PurityFiniteSetting.ChartFactors.source",
+   "WeilConjectures.PurityFiniteSetting.ChartFactors.idealCondition",
+   "WeilConjectures.PurityFiniteSetting.ChartFactors.deformation",
+   "WeilConjectures.PurityFiniteSetting.ChartFactors.normalCondition",
+   "WeilConjectures.PurityFiniteSetting.ChartFactors.normalMap",
+   "WeilConjectures.PurityFiniteSetting.ChartFactors.normalGeometry",
+   "WeilConjectures.PurityFiniteSetting.ChartFactors.normal",
+   "WeilConjectures.PurityFiniteSetting.ChartFactors.normalBundleComparison",
+   "WeilConjectures.PurityFiniteSetting.ChartFactors.beta",
+   "WeilConjectures.PurityFiniteSetting.ChartFactors.tate"
+  ],
+  "statement": "def beta (P : PurityFiniteSetting.{u}) {U Y : Scheme.{u}} (d : ℕ) (h : U ⟶ Y) [IsSeparated h] [LocallyOfFiniteType h] [QuasiCompact h] [SmoothOfRelativeDimension d h] (aY : Y ⟶ Spec (.of P.field.k)) [LocallyOfFiniteType aY] [QuasiCompact aY] (N : Etale.EtaleCompactSupportNormalization P.Coefficient)",
+  "branch": "sheaf-dag",
+  "by": "G4",
+  "date": "2026-10-25",
+  "existing": false
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-e1755",
+  "group": "G4",
+  "result": "pass",
+  "landing": "20261025T122958-L-1821326",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-e1755",
+  "group": "G4",
+  "result": "pass",
+  "landing": "20261025T122958-L-1821326",
+  "kind": "interface",
+  "note": "independent cc review: old ChartDncVectorFactors.lean (clone) vs delivered ChartDncVectorFactorData+item (verbatim extraction, public reexport); new sorry lemmas vs Conclusion clauses 1/2; node lean.statements vs Lean signatures; importers ChartDiagonalSourceMate and GeneralChartComparisons compiled against delivered modules (exit 0)"
+ }
+}

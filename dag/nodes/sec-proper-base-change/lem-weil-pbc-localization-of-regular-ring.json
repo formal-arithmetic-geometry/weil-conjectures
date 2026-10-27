@@ -111,7 +111,18 @@
   "item": "lem-weil-pbc-geometrically-regular-finitely-generated-extensions",
   "date": "2026-10-10"
  },
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
  "chapter": "sec-proper-base-change",
  "unit": "sk-thm-p1",
  "split_report": {
@@ -154,5 +165,37 @@
   "landing": "20261012T085258-L-22501",
   "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ },
+ "blueprint_update": {
+  "snapshot": "main-20261023-1620",
+  "commit": "7284bb09daf97437d544c51882b325f9c52cd345",
+  "changed": [
+   "statement",
+   "proof"
+  ],
+  "statement": "Let $R$ be a regular ring (Noetherian, with every localization at a prime ideal a regular local ring), let $M\\subseteq R$ be a multiplicative subset ($1\\in M$, $st\\in M$ for $s,t\\in M$), and let $\\varphi:R\\to R'$ be a homomorphism of commutative rings which is a localization of $R$ at $M$: (a) $\\varphi(s)$ is a unit for every $s\\in M$; (b) every element of $R'$ is $\\varphi(r)\\varphi(s)^{-1}$ with $r\\in R$, $s\\in M$; (c) $\\varphi(r)=0$ implies $sr=0$ for some $s\\in M$ (for instance $R'=M^{-1}R$). Then $R'$ is a regular ring.",
+  "proof": [
+   {
+    "text": "Conditions (a)-(c) say that $\\varphi$ is a localization of $R$ at $M$ in the usual sense: every element of $R'$ has the form $\\varphi(r)\\varphi(s)^{-1}$ (if $y=\\varphi(r)u$ with $\\varphi(s)u=1$, then $y\\varphi(s)=\\varphi(r)$), and $\\varphi(x)=\\varphi(y)$ implies $sx=sy$ for some $s\\in M$ (apply (c) to $x-y$). By the uniqueness of localizations, $R'$ is therefore isomorphic as an $R$-algebra to $M^{-1}R$, so it suffices to show that $M^{-1}R$ is regular.",
+    "uses": [],
+    "elementary": null
+   },
+   {
+    "text": "$M^{-1}R$ is Noetherian, being a localization of the Noetherian ring $R$ (ideals of $M^{-1}R$ are extended from ideals of $R$).",
+    "uses": [],
+    "elementary": null
+   },
+   {
+    "text": "Let $\\mathfrak p$ be a prime of $M^{-1}R$ and $\\mathfrak q$ its contraction to $R$, a prime ideal disjoint from $M$. By transitivity of localization, $(M^{-1}R)_{\\mathfrak p}$ is a localization of $R$ at the set of elements of $R$ whose image in $M^{-1}R$ lies outside $\\mathfrak p$; these are exactly the elements outside $\\mathfrak q$. Hence $(M^{-1}R)_{\\mathfrak p}\\cong R_{\\mathfrak q}$, which is a regular local ring because $R$ is regular. Thus every localization of $M^{-1}R$ at a prime is regular local, and $M^{-1}R$ is regular.",
+    "uses": [],
+    "elementary": null
+   },
+   {
+    "text": "Finally, regularity (Noetherianity together with the regular-local condition at every prime) is invariant under ring isomorphism, so $R'\\cong M^{-1}R$ is regular.",
+    "uses": [],
+    "elementary": null
+   }
+  ],
+  "note": "the current blueprint (main-20261023-1620, weil-conjectures-blueprint 7284bb09da) states or proves this differently; the node is proved in Lean: recorded 2026-10-23, not reopened"
  }
 }

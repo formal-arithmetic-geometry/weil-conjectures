@@ -1,61 +1,19 @@
 /-
 Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
-Authors: SHEAF group Q21
+Authors: SHEAF group W3
 -/
 module
 
-public import Sheaf.Paper.DerivedCompleteOnSlices
-public import Sheaf.Paper.CompletedIntegralCoefficientGerm
-public import Sheaf.CategoryTheory.ScalarLocalizationTriangulated
-public import Mathlib.CategoryTheory.Triangulated.Triangulated
-public import Sheaf.Paper.IntegralConstructibleLinear
-public import Mathlib.CategoryTheory.Triangulated.Opposite.Triangulated
-public import Mathlib.CategoryTheory.Triangulated.Subcategory
-public import Mathlib.CategoryTheory.ObjectProperty.Retract
-public import Mathlib.CategoryTheory.ObjectProperty.FiniteProducts
-public import Mathlib.Algebra.Module.TransferInstance
+public import Sheaf.Paper.RationalEvaluationData
+import Sheaf.Paper.IntegralCompletedEvaluation
+import Sheaf.Paper.CompletedEvaluationRationalDescent
+import WeilConjectures.Mathlib.CategoryTheory.Triangulated.Generators
+import Mathlib.CategoryTheory.Triangulated.Opposite.Subcategory
 
-import Sheaf.NumberTheory.Padics.ExtensionIntegersDvr
-import Sheaf.Paper.ConstantCompletionEquivalence
-import Sheaf.Paper.WeilCompletedTensorReflector
-import Sheaf.Paper.DerivedCompleteUnrestricted
-import Sheaf.Algebra.Homology.KFlat
-import Sheaf.Algebra.Homology.WeilSiteDerivedTensorDescent
-import Sheaf.Algebra.Homology.ChangeOfRingsKFlat
-import Sheaf.Paper.IntegralDerivedOperations
-import Sheaf.Algebra.Homology.KFlatTelescopeClosure
-import WeilConjectures.FromJoel.Algebra.Homology.BifunctorMappingCone
-import Sheaf.CategoryTheory.RingedStrictTowerHomotopyLimitOfUniverses
-import Sheaf.Algebra.Homology.RingedInternalHomExactRestriction
-import Sheaf.CategoryTheory.RingedSiteDualityMaps
-import Sheaf.Paper.CoefficientRingedTensorHomModel
-import Sheaf.Paper.CoefficientHomRepresentativeEvaluation
-import WeilConjectures.Algebra.Homology.HomComplex
-import Mathlib.Algebra.Homology.BifunctorShift
-import Sheaf.Algebra.Homology.KFlatResolutionIndependentCoefficients
-import Sheaf.CategoryTheory.RingedSiteKInjectiveResolutionsOfUniverses
-public import Sheaf.Algebra.Homology.DerivedInternalHomOfUniverses
+/-! # Thickness of rational completed evaluation
 
-public import Sheaf.CategoryTheory.RingedSiteModules
-
-public import Mathlib.Algebra.Homology.DerivedCategory.Basic
-
-public import Sheaf.Paper.IntegralDerivedOperationsOnSlices
-
-public import Mathlib.Algebra.Category.ModuleCat.Sheaf.PushforwardContinuous
-import Sheaf.Algebra.Homology.RingedInternalHomDerivedComplete
-import Sheaf.Algebra.Homology.RingedInternalHomShiftOfUniverses
-import Sheaf.Algebra.Homology.SiteDerivedTensorDescentIndependentCoefficients
-import Sheaf.CategoryTheory.RingedStrictTowerHomotopyLimitIndependentCoefficients
-import Sheaf.CategoryTheory.ScalarLocalization
-import Sheaf.Algebra.Homology.KFlatIndependentCoefficients
-
-/-!
-# The rational completed-evaluation locus is thick
-
-Source: Weil blueprint, sec-six-functors/sk-prop-sf-dualizable-biduality,
-first proof paragraph, exact functors and preservation of direct summands
+Source: blueprint, sec-six-functors/sk-prop-sf-dualizable-biduality, first proof paragraph
 (blueprint: lem-sf-rational-thick-evaluation).
 -/
 
@@ -74,128 +32,7 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]
   (X : AlgebraicGeometry.Scheme.{t}) (U : Option X.ProEt)
 
-/-- Restrict the published constant scalar section to the actual over-site.
-Source: blueprint, sk-def-sf-operations (blueprint: lem-sf-rational-thick-evaluation). -/
-def scalarConstant (V : (Site X U)ᵒᵖ) (a : Padic.coefficientExtensionIntegers l E) :
-    (ring l E X U).obj.obj V :=
-  match U, V with
-  | none, V => integralScalarConstant l E X V a
-  | some _W, V => integralScalarConstant l E X (op V.unop.left) a
-
-/-- Scalars act on complexes by multiplication by the specified constant section.
-Source: blueprint, sk-def-sf-operations (blueprint: lem-sf-rational-thick-evaluation).
-Proof: the scalar sections commute with restriction, since they do at every finite
-projection. Commutativity makes multiplication linear. It commutes with differentials
-and all module maps. These equations give the chain maps and their naturality;
-equality on each degree and section proves uniqueness. -/
-theorem scalarChain_existsUnique (a : Padic.coefficientExtensionIntegers l E) :
-    ∃! σ : 𝟭 (Cx l E X U) ⟶ 𝟭 (Cx l E X U),
-      ∀ (P : Cx l E X U) (n : ℤ) (V : (Site X U)ᵒᵖ) (x : (P.X n).val.obj V),
-        ((σ.app P).f n).val.app V x = scalarConstant l E X U V a • x := by
-  sorry
-
-/-- The uniquely determined scalar action on complexes. Source: blueprint, sk-def-sf-operations
-(blueprint: lem-sf-rational-thick-evaluation). -/
-def scalarChain (a : Padic.coefficientExtensionIntegers l E) :=
-  (scalarChain_existsUnique l E X U a).exists.choose
-
-/-- The same scalar action after the actual quasi-isomorphism localization.
-Source: Stacks 05RR (blueprint: lem-sf-rational-thick-evaluation). -/
-def scalarDerived (a : Padic.coefficientExtensionIntegers l E) :
-    𝟭 (D l E X U) ⟶ 𝟭 (D l E X U) :=
-  (Localization.fullyFaithfulWhiskeringLeft
-    (DerivedCategory.Q : Cx l E X U ⥤ D l E X U)
-    (HomologicalComplex.quasiIso (Mod l E X U) (ComplexShape.up ℤ)) (D l E X U)).preimage
-      (Functor.whiskerRight (scalarChain l E X U a) DerivedCategory.Q)
-
-/-- The canonical scalar action determines the linear structure, including localized maps.
-Source: Stacks 05RR (blueprint: lem-sf-rational-thick-evaluation).
-Proof: the ring and module identities hold on sections, hence on complexes. Whiskering
-by the quasi-isomorphism localization is fully faithful, so they descend to the displayed
-central derived endomorphisms. Define a f by precomposition with that endomorphism.
-Centrality gives bilinear composition, and the formula determines every Hom action. -/
-theorem linear_existsUnique :
-    ∃! s : Linear (Padic.coefficientExtensionIntegers l E) (D l E X U),
-      (fun [linearInst : Linear (Padic.coefficientExtensionIntegers l E) (D l E X U)] ↦
-        ∀ (a : Padic.coefficientExtensionIntegers l E) (A B : D l E X U) (f : A ⟶ B),
-          a • f = (scalarDerived l E X U a).app A ≫ f) (linearInst := s) := by
-  sorry
-
-/-- Use the canonical constant-section linear structure, not an arbitrary scalar action.
-Source: Stacks 05RR (blueprint: lem-sf-rational-thick-evaluation). -/
-instance linear : Linear (Padic.coefficientExtensionIntegers l E) (D l E X U) :=
-  (linear_existsUnique l E X U).exists.choose
-
-/-- The opposite uses the same scalar action on reversed Hom modules.
-Source: Stacks 08JC (blueprint: lem-sf-rational-thick-evaluation). -/
-instance linearOpposite : Linear (Padic.coefficientExtensionIntegers l E) (D l E X U)ᵒᵖ where
-  homModule A B := (opEquiv A B).module (Padic.coefficientExtensionIntegers l E)
-  smul_comp A B C a f g := Quiver.Hom.unop_inj
-    (Linear.comp_smul C.unop B.unop A.unop g.unop a f.unop)
-  comp_smul A B C f a g := Quiver.Hom.unop_inj
-    (Linear.smul_comp C.unop B.unop A.unop a g.unop f.unop)
-
-/-- The canonical integer shifts preserve this coefficient action. Source: Stacks 05RR
-(blueprint: lem-sf-rational-thick-evaluation).
-Proof: translation and its signed differential commute with scalar multiplication
-in each degree; fully faithful localization of natural transformations gives the
-same assertion on all derived maps. -/
-theorem shift_linear (n : ℤ) :
-    (shiftFunctor (D l E X U) n).Linear (Padic.coefficientExtensionIntegers l E) := by
-  sorry
-
-/-- The shifts use the preceding canonical linearity proof. Source: Stacks 05RR
-(blueprint: lem-sf-rational-thick-evaluation). -/
-instance shiftLinear (n : ℤ) :
-    (shiftFunctor (D l E X U) n).Linear (Padic.coefficientExtensionIntegers l E) :=
-  shift_linear l E X U n
-
-/-- The coefficient sheaf in degree zero. Source: Stacks 08JD
-(blueprint: lem-sf-rational-thick-evaluation). -/
-def coefficient : D l E X U := ringedSiteDualityUnit (topology X U) (ring l E X U)
-
-/-- Psi is actual derived internal Hom with fixed second argument. Source: Stacks 08J7
-(blueprint: lem-sf-rational-thick-evaluation). -/
-def psi (M : D l E X U) : (D l E X U)ᵒᵖ ⥤ D l E X U :=
-  (Functor.curry.obj (hom l E X U)).flip.obj M
-
-/-- Ordinary dual tensor M before completing. Source: Stacks 08JE
-(blueprint: lem-sf-rational-thick-evaluation). -/
-def ordinaryPhi (M : D l E X U) : (D l E X U)ᵒᵖ ⥤ D l E X U :=
-  psi l E X U (coefficient l E X U) ⋙
-    Prod.sectL (D l E X U) M ⋙ (duality l E X U).closed.tensor
-
-/-- Phi is completed dual tensor M. Source: Bhatt--Scholze, Definition 3.4.10
-(blueprint: lem-sf-rational-thick-evaluation). -/
-def phi (M : D l E X U) : (D l E X U)ᵒᵖ ⥤ D l E X U :=
-  psi l E X U (coefficient l E X U) ⋙
-    Prod.sectL (D l E X U) M ⋙ completedTensor l E X U
-
-/-- The actual ordinary adjunct of evaluation, with the Koszul symmetry in the node's order.
-Source: Stacks 08JD, 08JE (blueprint: lem-sf-rational-thick-evaluation). -/
-def ordinaryEvaluation (L M : D l E X U) :
-    (ordinaryPhi l E X U M).obj (op L) ⟶ (psi l E X U M).obj (op L) :=
-  ringedSiteDualEvaluationLeft (duality l E X U).closed (duality l E X U).symmetric
-    (coefficient l E X U) (duality l E X U).unitIso L M
-
-/-- The scalar localization uses the specified coefficient ring and uniformizer.
-Source: blueprint, sk-def-sf-operations (blueprint: lem-sf-rational-thick-evaluation). -/
-abbrev Rational := ScalarLocalization (Padic.coefficientExtensionIntegers l E)
-  (D l E X U) (Padic.coefficientExtensionUniformizer l E)
-
-/-- The actual tensor-with-one localization functor. Source: blueprint, sk-def-sf-operations
-(blueprint: lem-sf-rational-thick-evaluation). -/
-abbrev q : D l E X U ⥤ Rational l E X U :=
-  ScalarLocalization.localization (Padic.coefficientExtensionIntegers l E)
-    (D l E X U) (Padic.coefficientExtensionUniformizer l E)
-
-/-- Membership tests the actual localized evaluation component on the unchanged object.
-Source: blueprint, sk-prop-sf-dualizable-biduality
-(blueprint: lem-sf-rational-thick-evaluation). -/
-def evaluationLocus (M : D l E X U) (α : phi l E X U M ⟶ psi l E X U M) :
-    ObjectProperty (Rational l E X U) :=
-  fun L ↦ IsIso ((q l E X U).map (α.app (op L.obj)))
-
+set_option linter.unusedVariables false in
 /-- Completed evaluation is natural and exact; its rational isomorphism locus is thick.
 
 Source: blueprint, sec-six-functors/sk-prop-sf-dualizable-biduality, first proof paragraph;
@@ -288,6 +125,63 @@ theorem rationalThickEvaluation
                 (evaluationLocus l E X U M α).IsStableUnderRetracts ∧
                 (evaluationLocus l E X U M α).IsClosedUnderFiniteCoproducts)
               (fShift := sF) (gShift := sG)) (phiShift := sPhi) (psiShift := sPsi) := by
-  sorry
+  obtain ⟨hPhiAdd, hPhiLin, hPsiAdd, hPsiLin, hComplete, sPhi, sPsi, hi⟩ :=
+    integralCompletedEvaluation l E X U _hInv M hM
+  let := hPhiAdd
+  let := hPhiLin
+  let := hPsiAdd
+  let := hPsiLin
+  let := sPhi
+  let := sPsi
+  obtain ⟨hPhiTri, hPsiTri, α, hα, hUnique, hShift, hUnit⟩ := hi
+  let := hPhiTri
+  let := hPsiTri
+  let := hShift
+  let := hUnit
+  obtain ⟨F, G, eF, eG, sF, sG, hd⟩ :=
+    completedEvaluation_rationalDescent l E X U _hshift _hQshift _htriangles M α
+  let := sF
+  let := sG
+  obtain ⟨hFTri, hGTri, αQ, hQShift, hSquare⟩ := hd
+  let := hFTri
+  let := hGTri
+  let := hQShift
+  have hLocus : evaluationLocus l E X U M α = αQ.isoLocus.unop := by
+    funext L
+    apply propext
+    have h := NatTrans.congr_app hSquare (op L.obj)
+    change αQ.app (op L) ≫ eG.hom.app (op L.obj) =
+      eF.hom.app (op L.obj) ≫ (q l E X U).map (α.app (op L.obj)) at h
+    change IsIso ((q l E X U).map (α.app (op L.obj))) ↔ IsIso (αQ.app (op L))
+    constructor
+    · intro hIso
+      let := hIso
+      have : IsIso (αQ.app (op L) ≫ eG.hom.app (op L.obj)) := by rw [h]; infer_instance
+      exact IsIso.of_isIso_comp_right _ (eG.hom.app (op L.obj))
+    · intro hIso
+      let := hIso
+      have : IsIso (eF.hom.app (op L.obj) ≫
+          (q l E X U).map (α.app (op L.obj))) := by rw [← h]; infer_instance
+      exact IsIso.of_isIso_comp_left (eF.hom.app (op L.obj)) _
+  have hTri : (evaluationLocus l E X U M α).IsTriangulated := by
+    rw [hLocus]
+    infer_instance
+  have hRetract : (evaluationLocus l E X U M α).IsStableUnderRetracts := by
+    rw [hLocus]
+    exact ⟨fun r h ↦ αQ.isoLocus.prop_of_retract r.op h⟩
+  let := hTri
+  let := hRetract
+  refine ⟨hPhiAdd, hPhiLin, hPsiAdd, hPsiLin, hComplete, sPhi, sPsi,
+    hPhiTri, hPsiTri, α, hα, hUnique, hShift, F, G, eF, eG, sF, sG,
+    hFTri, hGTri, αQ, hQShift, hSquare, ?_, hTri, inferInstance, hRetract, ?_⟩
+  · change IsIso ((q l E X U).map (α.app (op (coefficient l E X U))))
+    infer_instance
+  · refine ⟨fun J _ ↦ ⟨?_⟩⟩
+    rintro Z ⟨p⟩
+    exact (evaluationLocus l E X U M α).prop_of_iso
+      (((HasBiproductsOfShape.colimIsoLim (J := J)
+        (C := Rational l E X U)).app p.diag).symm ≪≫
+          IsColimit.coconePointUniqueUpToIso (colimit.isColimit p.diag) p.isColimit)
+      ((evaluationLocus l E X U M α).prop_limit p.diag p.prop_diag_obj)
 
 end WeilConjectures.IntegralOnSlice

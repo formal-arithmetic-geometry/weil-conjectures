@@ -1,0 +1,131 @@
+{
+ "id": "lem-per-adic-lisse-exact-tensor-comparisons",
+ "kind": "statement",
+ "title": "Exact lisse tensor comparisons for cohomology and geometric fibres",
+ "statement": "Let ell be prime, let Qbar be an algebraic closure of Q_ell, and let X be a separated Noetherian scheme of finite Krull dimension on which ell is invertible. let M be any normalized model bundle [def-zl-adic-lisse-calculus-models]. Tensor with M.realization of an adic lisse sheaf commutes naturally with M.cohomology in every integer degree. Its M.fiber at each geometric point is naturally the ordinary coefficient tensor of the fibre of the first factor and the recorded adic fibre of the lisse factor. The comparisons use the completed tensor [def-weil-derived-pullback-tensor-hom] transported through M.comparison. This asserts only these two natural isomorphisms, not lisse duality.",
+ "source": {
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Proposition 6.8.4(1),(4), Remark 6.8.15; exact tensor and fibre calculations in parent proof Steps 1--7 and 10."
+ },
+ "stmt_deps": [
+  "def-zl-adic-lisse-calculus-models",
+  "def-weil-derived-pullback-tensor-hom"
+ ],
+ "proof": [
+  {
+   "text": "Tensor with a lisse realization commutes with standard cohomology and\nits degree-zero geometric fibre is the ordinary coefficient tensor.\nSource: Bhatt--Scholze 6.8.4(1),(4), Remark 6.8.15; the two tensor calculations\nin the blueprint lisse tensor permanence proof.\n(blueprint: lem-per-adic-lisse-exact-tensor-comparisons).\n\nProof: pass to a common finite coefficient field. On each of the finitely many\nopen connected components, the representation correspondence and the profinite\nstable-lattice theorem replace the rational lisse sheaf by a finite-free integral\nlattice. Its completed realization N is locally finite free over the completed\ncoefficient ring. Tensor with N is exact, since on a trivializing pro-etale slice\nit is a finite direct sum of the identity; exactness descends by the sheaf axiom.\nThe cycles and boundaries sequences therefore give a natural cohomology comparison\nfor termwise tensor with N. This also proves that N in degree zero is K-flat.\n\nTensor with this bounded finite-free local model preserves derived sequential\nlimits. Apply Koszul reconstruction to the complete integral representative of K.\nAt each quotient the balanced map sends y tensor (x tensor a) to\n(x tensor a) tensor the reduction of y. These maps and their inverses commute with\nquotient transitions, so their limit identifies ordinary tensor with the specified\ncompleted tensor. Stratified finite presentations put the result in the integral\nconstructible category, with the original cohomological bounds.\n\nFor the fibre comparison take completed geometric pullback and point sections,\nthen cohomology in degree zero. Exactness of pullback and sections at the point\nand the same finite-free tensor calculation give the ordinary tensor of the two\nfibres. Equivalently, reduce on a lisse stratum and take finite etale stalks:\nthe levelwise tensor-germ maps commute with all quotient maps; their inverse\nlimits are tensor with a finite-free module. Invert the uniformizer and extend\nto Qbar. This does not commute an ordinary stalk with an infinite limit.\n\nBoth calculations are canonical on tensor generators, natural in K and the\nlisse factor, and commute with coefficient extension. The integral scalar-operation\nunit and tower equations descend the two isomorphisms to common-stage functors.\nThe prescribed normalizations of M identify their endpoints with those below.\nThe zero-rank case is tensor with zero and is included throughout.",
+   "uses": [
+    "lem-sfb-noetherian-connected-components-open",
+    "cor-galois-lisse-representations",
+    "lem-pod-profinite-stable-lattice",
+    "lem-per-lisse-completed-system-comparison",
+    "lem-weil-pbc-integral-stratified-perfect-characterization",
+    "lem-pur-site-restriction-module-adjunction-exact",
+    "lem-sfb-localized-site-tensor-restriction",
+    "det-lem-int-tensor-product",
+    "prop-weil-pbc-koszul-reconstruction",
+    "prop-weil-localized-tstructure",
+    "det-pe-finite-local-systems-twist",
+    "lem-pod-lisse-tensor-and-scalar-extension",
+    "lem-pod-adic-limit-finite-modules",
+    "lem-pur-integral-operations-scalar-extension",
+    "lem-sfb-local-field-integral-basis",
+    "det-prop-sfb-qlbar-colimit-x-integral-limit"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-noetherian-connected-components-open",
+  "cor-galois-lisse-representations",
+  "lem-pod-profinite-stable-lattice",
+  "lem-per-lisse-completed-system-comparison",
+  "lem-weil-pbc-integral-stratified-perfect-characterization",
+  "lem-pur-site-restriction-module-adjunction-exact",
+  "lem-sfb-localized-site-tensor-restriction",
+  "det-lem-int-tensor-product",
+  "prop-weil-pbc-koszul-reconstruction",
+  "prop-weil-localized-tstructure",
+  "det-pe-finite-local-systems-twist",
+  "lem-pod-lisse-tensor-and-scalar-extension",
+  "lem-pod-adic-limit-finite-modules",
+  "lem-pur-integral-operations-scalar-extension",
+  "lem-sfb-local-field-integral-basis",
+  "det-prop-sfb-qlbar-colimit-x-integral-limit"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Proposition 6.8.4(1),(4), Remark 6.8.15; exact tensor and fibre calculations in parent proof Steps 1--7 and 10."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Cohomology of derived tensor with a finite locally free lisse sheaf and its dual",
+   "results": "No exact adic common-stage match; sheaf cohomology and condensed module instances only.",
+   "date": "2026-10-25"
+  },
+  {
+   "tool": "loogle",
+   "query": "Functor.mapHomologyIso",
+   "results": "Unknown identifier. Ordinary exact-functor homology is available as ShortComplex.mapHomologyIso, but gives neither completed lisse realization nor common-stage descent.",
+   "date": "2026-10-25"
+  },
+  {
+   "tool": "grep",
+   "query": "mapHomologyIso|homologyFunctor.*tensor|lisse.*dual",
+   "results": "ShortComplex.mapHomologyIso and ordinary stalk homology hits; no normalized adic bundle or completed dual theorem. Project searches found CompletedLisse.System, localized t-structures, and finite-stage operations; none directly supplies this substatement.",
+   "date": "2026-10-25"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.AdicLisseCohomologyCalculus",
+  "date": "2026-10-25",
+  "group": "A6"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-per-adic-lisse-cohomology-calculus",
+   "place": "Proposition 6.8.4(1),(4), Remark 6.8.15; exact tensor and fibre calculations in parent proof Steps 1--7 and 10.",
+   "via": [
+    "lem-per-adic-lisse-cohomology-calculus"
+   ]
+  }
+ },
+ "chapter": "sec-deligne-laumon-a1",
+ "unit": "sk-p-dl-a1-perverse",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.AdicLisseExactTensorComparisons",
+  "file": "lean/Sheaf/Paper/AdicLisseExactTensorComparisons.lean",
+  "declaration": "AlgebraicGeometry.Scheme.adic_lisse_exact_tensor_comparisons",
+  "statement": "theorem adic_lisse_exact_tensor_comparisons (M : AdicLisseCalculusModels l Qbar X) :\n    Nonempty (∀ a : ℤ,\n    ((𝟭 (pbcQbarCategory.{u + 1, u} l Qbar X)).prod M.realization) ⋙\n        adicCalculusTensor l Qbar X M.comparison ⋙ M.cohomology a ≅\n      ((M.cohomology a).prod M.realization) ⋙ adicCalculusTensor l Qbar X M.comparison) ∧\n    Nonempty (∀ (k : Type u) [Field k] [IsAlgClosed k]\n    (x : Spec (.of k) ⟶ X),\n    ((𝟭 (pbcQbarCategory.{u + 1, u} l Qbar X)).prod M.realization) ⋙\n        adicCalculusTensor l Qbar X M.comparison ⋙ M.fiber k x ≅\n      ((M.fiber k x).prod (lisseAlgebraicFiberFunctor l X x Qbar)) ⋙\n        MonoidalCategory.tensor (ModuleCat.{u + 1} Qbar))",
+  "branch": "sheaf-dag",
+  "by": "A6",
+  "date": "2026-10-25"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-42474",
+  "group": "A6",
+  "result": "fix",
+  "landing": "20261025T003304-L-3225711",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-42474",
+  "group": "A6",
+  "result": "fix",
+  "landing": "20261025T003304-L-3225711",
+  "kind": "interface",
+  "note": "independent cc review: item Nonempty(AdicLisseCohomologyCalculus) vs normalized-models ∧ ∀M tensor ∧ ∀M dual assembly; moved data block diffed byte-identical to clone; def-node vs theorem-node lean ownership"
+ }
+}

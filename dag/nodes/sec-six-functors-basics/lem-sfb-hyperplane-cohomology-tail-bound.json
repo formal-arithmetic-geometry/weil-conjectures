@@ -1,0 +1,253 @@
+{
+ "id": "lem-sfb-hyperplane-cohomology-tail-bound",
+ "kind": "statement",
+ "title": "Cohomology tail bounds from a regular hyperplane restriction",
+ "statement": "Let $k$ be a field [def-weil-field], $n\\geq1$, $X=\\mathbf P^n_k$, and $E$ a coherent $\\mathcal O_X$-module [pqf-def-coherent]. Use twists $E(d)=E\\otimes\\mathcal O_X(d)$ [def-pc-projective-space-twist] and module sheaf cohomology [pqf-def-cohomology]. Let $s\\in H^0(X,\\mathcal O_X(1))$ be a nonzero linear form, and let $i:H=V(s)\\hookrightarrow X$ be its hyperplane closed immersion [def-weil-closed-immersion]. Fix an identification $H\\cong\\mathbf P^{n-1}_k$ carrying $i^*\\mathcal O_X(d)$ to $\\mathcal O_H(d)$ for every integer $d$. Put $G=i^*E$ [def-pc-module-pullback], and assume $G$ is coherent and multiplication by $s$ is injective on $E(d-1)\\to E(d)$ for every integer $d$. Let $m\\in\\mathbf Z$, and assume $G$ is $m$-regular, that is,\n$$H^q(H,G(m-q))=0\\qquad(1\\leq q\\leq n-1).$$\nPut $h=\\dim_k H^1(X,E(m))$, the finite vector-space dimension [def-weil-vector-space-dimension]. Then\n$$H^q(X,E(t))=0\\qquad(q\\geq2,\\ t\\geq m),$$\nand\n$$H^1(X,E(t))=0\\qquad(t\\geq m+h).$$",
+ "source": {
+  "document": "literature/stacks-project/varieties.tex",
+  "place": "Tag 08AG, lemma-bound-quotients-free, proof: paragraphs beginning Let i >= 2, We still have to control H1, and Suppose d > m prime. Extracted for an arbitrary coherent module with regular hyperplane restriction; the conclusions are cohomology thresholds, not the erroneous closing regularity estimate."
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "stmt_deps": [
+  "def-weil-field",
+  "pqf-def-coherent",
+  "def-pc-projective-space-twist",
+  "pqf-def-cohomology",
+  "def-weil-closed-immersion",
+  "def-pc-module-pullback",
+  "def-weil-vector-space-dimension",
+  "def-pc-zero-scheme",
+  "def-sfb-regular-hyperplane-restriction-maps"
+ ],
+ "proof": [
+  {
+   "text": "Every $E(d)$ is coherent: on an open trivializing $\\mathcal O_X(d)$ it is isomorphic to $E$, and the finite-type and kernel conditions defining coherence are local. A field is Noetherian since its only ideals are $0$ and $k$. Applying [lem-pc-projective-space-coherent-finiteness] to $E(d)$ therefore makes every $H^q(X,E(d))$ finite-dimensional. In particular $h$ is a nonnegative integer. By [lem-sfb-fixed-hyperplane-restriction-cohomology], write $a_d^q:H^q(X,E(d-1))\\to H^q(X,E(d))$ for multiplication by $s$, and $r_d:H^0(X,E(d))\\to H^0(H,G(d))$ for restriction. We have the stated long exact sequence, surjectivity of restriction on linear forms, and $r_{d+1}(uv)=r_d(u)(v|_H)$. The fixed-section lemma applies to the very $s$ of the hypothesis and does not require $k$ infinite. Choose the twist comparisons on $H$ compatibly with products: from a degree-one comparison sending a local frame $a$ to $cb$, send $a^d$ to $c^d b^d$ for every integer $d$, with negative powers interpreted using dual frames. The twist transition rule makes these formulas glue. The identity $c^dc^e=c^{d+e}$ proves compatibility with multiplication. Thus the product on the restricted twists in the fixed-section lemma is identified with the standard product used by the regularity consequence in step 2.",
+   "uses": [
+    "lem-pc-projective-space-coherent-finiteness",
+    "pqf-def-coherent",
+    "def-pc-projective-space-twist",
+    "lem-sfb-fixed-hyperplane-restriction-cohomology"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 08AG, lemma-bound-quotients-free, middle cohomology paragraphs, applied to E and its given hyperplane restriction G."
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-m-regular-coherent-sheaf-consequences] on $H\\cong\\mathbf P^{n-1}_k$ to the coherent module $G$, with regularity parameter $m$. It gives $H^j(H,G(d))=0$ for every $j>0$ and $d\\geq m$, including $n=1$ where $H\\cong\\mathbf P^0_k$. For every $d\\geq m$, multiplication $H^0(H,G(d))\\otimes_k H^0(H,\\mathcal O_H(1))\\to H^0(H,G(d+1))$ is surjective. Apply [lem-pc-projective-space-serre-vanishing] to $E$ over the Noetherian field $k$: choose $D\\geq0$ such that $H^q(X,E(t))=0$ for all $q>0$ and all $t\\geq D$.",
+   "uses": [
+    "lem-sfb-m-regular-coherent-sheaf-consequences",
+    "lem-pc-projective-space-serre-vanishing"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 08AG, lemma-bound-quotients-free, middle cohomology paragraphs, applied to E and its given hyperplane restriction G."
+   }
+  },
+  {
+   "text": "Fix $q\\geq2$ and $t\\geq m$. For each $d\\geq m$, the segment $H^{q-1}(H,G(d))\\to H^q(X,E(d-1))\\xrightarrow{a_d^q}H^q(X,E(d))$ is exact and its left term is zero, so $a_d^q$ is injective. Choose the integer $T=\\max(t,D)$. If $T=t$, Serre vanishing already gives $H^q(X,E(t))=0$. Otherwise each index $d=t+1,\\ldots,T$ satisfies $d\\geq m$, so the composite of these finitely many injections embeds $H^q(X,E(t))$ into the zero space $H^q(X,E(T))$. Hence $H^q(X,E(t))=0$. The same argument applies separately to every $q\\geq2$, proving the whole higher-cohomology assertion.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 08AG, lemma-bound-quotients-free, middle cohomology paragraphs, applied to E and its given hyperplane restriction G."
+   }
+  },
+  {
+   "text": "For $d\\geq m$, exactness of $H^1(X,E(d-1))\\xrightarrow{a_d^1}H^1(X,E(d))\\to H^1(H,G(d))=0$ makes $a_d^1$ surjective. Denote the preceding connecting map by $\\delta_d:H^0(H,G(d))\\to H^1(X,E(d-1))$. Exactness gives $\\ker a_d^1=\\operatorname{im}\\delta_d$ and $\\ker\\delta_d=\\operatorname{im}r_d$. Consequently $a_d^1$ is injective precisely when $\\operatorname{im}\\delta_d=0$, precisely when $\\delta_d=0$, precisely when $\\ker\\delta_d=H^0(H,G(d))$, and hence precisely when $r_d$ is surjective. This identifies the actual maps used in the propagation step.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 08AG, lemma-bound-quotients-free, middle cohomology paragraphs, applied to E and its given hyperplane restriction G."
+   }
+  },
+  {
+   "text": "Suppose $d\\geq m+1$ and $a_d^1$ is injective. Step 4 makes $r_d$ surjective. For any $w\\in H^0(H,G(d+1))$, the multiplication surjection of step 2 writes $w=\\sum_{\\nu=1}^N g_\\nu\\ell_\\nu$, with $g_\\nu\\in H^0(H,G(d))$ and $\\ell_\\nu\\in H^0(H,\\mathcal O_H(1))$. Lift $g_\\nu$ to $u_\\nu\\in H^0(X,E(d))$ using $r_d$, and lift $\\ell_\\nu$ to $v_\\nu\\in H^0(X,\\mathcal O_X(1))$ using the linear-form restriction surjection from [lem-sfb-fixed-hyperplane-restriction-cohomology]. Then $r_{d+1}(\\sum u_\\nu v_\\nu)=\\sum g_\\nu\\ell_\\nu=w$. Thus $r_{d+1}$ is surjective, so $a_{d+1}^1$ is injective by step 4. This is the induction step: starting from the assumed injectivity at $d$, induction on $e-d\\geq0$ gives injectivity at every $e\\geq d$. Set $T=\\max(d,D)$. For $e=d,\\ldots,T$ the maps $a_e^1$ are injective; their finite composite embeds $H^1(X,E(d-1))$ into $H^1(X,E(T))=0$ by Serre vanishing. Hence $H^1(X,E(d-1))=0$.",
+   "uses": [
+    "lem-sfb-fixed-hyperplane-restriction-cohomology"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 08AG, lemma-bound-quotients-free, middle cohomology paragraphs, applied to E and its given hyperplane restriction G."
+   }
+  },
+  {
+   "text": "Put $V_t=H^1(X,E(t))$ and $b_t=\\dim_k V_t$ for $t\\geq m$. The maps $V_t\\to V_{t+1}$ are surjective. If $V_t\\ne0$, step 5 with $d=t+1\\geq m+1$ shows that this map cannot be injective. Choose $0\\ne z$ in its kernel and extend $z$ to a basis of the finite-dimensional $V_t$. Images of the remaining $b_t-1$ basis vectors span the quotient $V_{t+1}$, so $b_{t+1}\\leq b_t-1$. If $V_t=0$, its surjective image $V_{t+1}$ is zero. We prove $b_{m+r}\\leq\\max(h-r,0)$ by induction on the nonnegative integer $r$. At $r=0$ this is $b_m=h$. If $b_{m+r}=0$, surjectivity gives $b_{m+r+1}=0$. Otherwise the induction hypothesis forces $h-r>0$, and the strict decrease gives $b_{m+r+1}\\leq b_{m+r}-1\\leq h-r-1=\\max(h-(r+1),0)$. This proves the induction step in both cases. In particular $b_{m+h}=0$, and all $V_t$ for $t\\geq m+h$ are zero. This proves the first-cohomology assertion, including $h=0$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 08AG, lemma-bound-quotients-free, middle cohomology paragraphs, applied to E and its given hyperplane restriction G."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-projective-space-twist",
+  "lem-pc-projective-space-coherent-finiteness",
+  "lem-pc-projective-space-serre-vanishing",
+  "lem-sfb-fixed-hyperplane-restriction-cohomology",
+  "lem-sfb-m-regular-coherent-sheaf-consequences",
+  "pqf-def-coherent"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/varieties.tex",
+  "place": "Tag 08AG, lemma-bound-quotients-free, middle cohomology paragraphs, applied to E and its given hyperplane restriction G."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "Castelnuovo|Mumford|mRegular|hyperplane",
+   "results": "{\"t\": \"2026-10-22T06:25:06Z\", \"tool\": \"grep\", \"query\": \"Castelnuovo|Mumford|mRegular|hyperplane\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: projective-object Ext and derived-category truncation, regular sequences, structure-sheaf restrictions and Proj constructions do not give twisted coherent-sheaf cohomology tail bounds."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Hyperplane restriction regularity gives strict decrease of nonzero first cohomology dimensions of twists of a coherent sheaf on projective space",
+   "results": "{\"t\": \"2026-10-22T06:25:06Z\", \"tool\": \"leansearch\", \"query\": \"Hyperplane restriction regularity gives strict decrease of nonzero first cohomology dimensions of twists of a coherent sheaf on projective space\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.StructureSheaf.res_const\", \"AlgebraicGeometry.Proj.res_apply\", \"AlgebraicGeometry.StructureSheaf.res_const'\", \"Algebra.FormallySmooth.subsingleton_h1Cotangent\", \"AlgebraicGeometry.Proj.fromOfGlobalSections_resLE\", \"Algebra.Generators.cotangentRestrict_bijective_of_basis_kaehlerDifferential\", \"AlgebraicGeometry.Flat.instMorphismRestrict\", \"CochainComplex.ConnectData.restrictionGEIso\"], \"digest\": \"a833e3b10a9a9a15\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: projective-object Ext and derived-category truncation, regular sequences, structure-sheaf restrictions and Proj constructions do not give twisted coherent-sheaf cohomology tail bounds."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"cohomology\", \"Projective\"",
+   "results": "{\"t\": \"2026-10-22T06:25:07Z\", \"tool\": \"loogle\", \"query\": \"\\\"cohomology\\\", \\\"Projective\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"CochainComplex.HomComplex.CohomologyClass.equivOfIsKProjective\", \"CochainComplex.HomComplex.CohomologyClass.bijective_toSmallShiftedHom_of_isKProjective\", \"CochainComplex.HomComplex.CohomologyClass.equivOfIsKProjective_apply\", \"CochainComplex.HomComplex.CohomologyClass.equivOfIsKProjective_symm_apply\", \"CategoryTheory.ProjectiveResolution.extEquivCohomologyClass\", \"CategoryTheory.ProjectiveResolution.extLinearEquivCohomologyClass\", \"CategoryTheory.ProjectiveResolution.extAddEquivCohomologyClass\", \"CategoryTheory.ProjectiveResolution.extEquivCohomologyClass_extMk\"], \"digest\": \"cc8c5e8721526af6\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: projective-object Ext and derived-category truncation, regular sequences, structure-sheaf restrictions and Proj constructions do not give twisted coherent-sheaf cohomology tail bounds."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A coherent sheaf on projective space with m regular restriction to a hyperplane has higher cohomology vanishing above degree one for twists at least m and first cohomology vanishing after m plus its dimension at m",
+   "results": "{\"t\": \"2026-10-22T06:25:16Z\", \"tool\": \"leanfinder\", \"query\": \"A coherent sheaf on projective space with m regular restriction to a hyperplane has higher cohomology vanishing above degree one for twists at least m and first cohomology vanishing after m plus its dimension at m\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"DerivedCategory.from_singleFunctor_obj_eq_zero_of_projective\", \"CategoryTheory.ProjectiveResolution.instIsGECochainComplexOfNatInt\", \"CochainComplex.isKProjective_of_projective\", \"CategoryTheory.ProjectiveResolution.instIsStrictlyLECochainComplexOfNatInt\", \"CochainComplex.IsKProjective\", \"isZero_Ext_succ_of_projective\", \"CategoryTheory.ProjectiveResolution.instProjectiveXIntCochainComplex\", \"Rep.isZero_Tor_succ_of_projective\"], \"digest\": \"277ff416669c57ff\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: projective-object Ext and derived-category truncation, regular sequences, structure-sheaf restrictions and Proj constructions do not give twisted coherent-sheaf cohomology tail bounds."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Castelnuovo Mumford regular hyperplane restriction bounds the vanishing threshold of first sheaf cohomology by its current dimension using multiplication maps and Serre vanishing",
+   "results": "{\"t\": \"2026-10-22T06:25:39Z\", \"tool\": \"leanfinder\", \"query\": \"Castelnuovo Mumford regular hyperplane restriction bounds the vanishing threshold of first sheaf cohomology by its current dimension using multiplication maps and Serre vanishing\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Module.supportDim_add_length_eq_supportDim_of_isRegular\", \"AlgebraicGeometry.exists_of_res_zero_of_qcqs_of_top\", \"DerivedCategory.from_singleFunctor_obj_eq_zero_of_projective\", \"DerivedCategory.to_singleFunctor_obj_eq_zero_of_injective\", \"CochainComplex.cm5b.instIsStrictlyGEI\", \"DerivedCategory.isZero_of_isGE\", \"CategoryTheory.ProjectiveResolution.instIsGECochainComplexOfNatInt\", \"CochainComplex.isLE_iff\"], \"digest\": \"632428f2983596ef\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: projective-object Ext and derived-category truncation, regular sequences, structure-sheaf restrictions and Proj constructions do not give twisted coherent-sheaf cohomology tail bounds."
+  },
+  {
+   "tool": "grep",
+   "query": "Castelnuovo|Mumford|mRegular|hyperplane",
+   "results": "{\"t\": \"2026-10-23T04:18:24Z\", \"tool\": \"grep\", \"query\": \"Castelnuovo|Mumford|mRegular|hyperplane\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the results are abstract projective resolutions, derived-category dimension/truncation, or Proj structure-sheaf formulas, not this regular-hyperplane cohomology bound."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"cohomology\", \"Projective\"",
+   "results": "{\"t\": \"2026-10-23T04:18:24Z\", \"tool\": \"loogle\", \"query\": \"\\\"cohomology\\\", \\\"Projective\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"CochainComplex.HomComplex.CohomologyClass.equivOfIsKProjective\", \"CochainComplex.HomComplex.CohomologyClass.bijective_toSmallShiftedHom_of_isKProjective\", \"CochainComplex.HomComplex.CohomologyClass.equivOfIsKProjective_apply\", \"CochainComplex.HomComplex.CohomologyClass.equivOfIsKProjective_symm_apply\", \"CategoryTheory.ProjectiveResolution.extEquivCohomologyClass\", \"CategoryTheory.ProjectiveResolution.extLinearEquivCohomologyClass\", \"CategoryTheory.ProjectiveResolution.extAddEquivCohomologyClass\", \"CategoryTheory.ProjectiveResolution.extEquivCohomologyClass_extMk\"], \"digest\": \"cc8c5e8721526af6\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the results are abstract projective resolutions, derived-category dimension/truncation, or Proj structure-sheaf formulas, not this regular-hyperplane cohomology bound."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A coherent sheaf on projective space whose restriction to a regular hyperplane is m regular has higher cohomology vanishing for twists at least m and first cohomology vanishing by m plus its dimension at m",
+   "results": "{\"t\": \"2026-10-23T04:18:30Z\", \"tool\": \"leanfinder\", \"query\": \"A coherent sheaf on projective space whose restriction to a regular hyperplane is m regular has higher cohomology vanishing for twists at least m and first cohomology vanishing by m plus its dimension at m\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"DerivedCategory.from_singleFunctor_obj_eq_zero_of_projective\", \"isZero_Ext_succ_of_projective\", \"CategoryTheory.ProjectiveResolution.instIsGECochainComplexOfNatInt\", \"CochainComplex.isKProjective_of_projective\", \"CategoryTheory.ProjectiveResolution.instIsStrictlyLECochainComplexOfNatInt\", \"CochainComplex.IsKProjective\", \"CategoryTheory.ProjectiveResolution.instProjectiveXIntCochainComplex\", \"CategoryTheory.hasProjectiveDimensionLT_iff\"], \"digest\": \"53a7bf7f65bea2ff\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the results are abstract projective resolutions, derived-category dimension/truncation, or Proj structure-sheaf formulas, not this regular-hyperplane cohomology bound."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A coherent sheaf on projective space with regular hyperplane restriction has strictly decreasing nonzero first cohomology dimensions under twisting",
+   "results": "{\"t\": \"2026-10-23T04:27:09Z\", \"tool\": \"leansearch\", \"query\": \"A coherent sheaf on projective space with regular hyperplane restriction has strictly decreasing nonzero first cohomology dimensions under twisting\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Proj.ext\", \"AlgebraicGeometry.Proj.pow_apply\", \"AlgebraicGeometry.Proj.sub_apply\", \"AlgebraicGeometry.Proj.res_apply\", \"AlgebraicGeometry.ProjectiveSpectrum.StructureSheaf.IsFraction\", \"AlgebraicGeometry.ProjectiveSpectrum.Proj.specStalkEquiv\", \"AlgebraicGeometry.Proj.fromOfGlobalSections_resLE\", \"AlgebraicGeometry.ProjectiveSpectrum.StructureSheaf.structureSheafInType\"], \"digest\": \"21370425cf44d744\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the results are abstract projective resolutions, derived-category dimension/truncation, or Proj structure-sheaf formulas, not this regular-hyperplane cohomology bound."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Castelnuovo Mumford regularity on a hyperplane and Serre vanishing imply a bound for the first cohomology vanishing threshold",
+   "results": "{\"t\": \"2026-10-23T04:27:19Z\", \"tool\": \"leanfinder\", \"query\": \"Castelnuovo Mumford regularity on a hyperplane and Serre vanishing imply a bound for the first cohomology vanishing threshold\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.ProjectiveResolution.instIsGECochainComplexOfNatInt\", \"DerivedCategory.from_singleFunctor_obj_eq_zero_of_projective\", \"CategoryTheory.hasProjectiveDimensionLT_iff\", \"CategoryTheory.HasProjectiveDimensionLT.mk\", \"CategoryTheory.hasInjectiveDimensionLT_iff\", \"DerivedCategory.isZero_of_isGE\", \"CategoryTheory.HasInjectiveDimensionLT.mk\", \"DerivedCategory.isZero_of_isLE\"], \"digest\": \"fdfa84c1d4d3be39\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the results are abstract projective resolutions, derived-category dimension/truncation, or Proj structure-sheaf formulas, not this regular-hyperplane cohomology bound."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-free-quotient-kernel-regularity-bound",
+  "date": "2026-10-22",
+  "group": "Q40"
+ },
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong §§3.9--3.12, Claim 3.10 and Lemma 3.13, printed p.609. Agent-formulated version: the proof of Lemma 3.13 uses only that rational exceptional curves have constant image in each target fibre; this property replaces its genus-at-least-two and pure-curve target hypotheses. This statement does not assert existence of a semistable source.; de Jong 3.9, projective Hilbert schemes underlying the relative morphism scheme; Hilbert construction prerequisite: Uniform generation and section bounds for projective ideals with fixed Hilbert polynomial; Hilbert construction prerequisite, field boundedness input: Stacks 08AG before passage to families; Stacks 08AG, middle cohomology paragraphs: regular hyperplane restriction implies higher-cohomology vanishing and strict decrease of nonzero H1 dimensions.",
+   "via": [
+    "lem-sfb-free-quotient-kernel-regularity-bound",
+    "lem-sfb-hilbert-uniform-section-bound",
+    "lem-sfb-projective-hilbert-polynomial-representability",
+    "lem-sfb-high-genus-hom-closure",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-hyperplane-cohomology-tail-bound",
+  "worker": "stage1",
+  "summary": "Preserved the statement; supplied the fixed-section restriction interface over arbitrary fields as one new unsplit lemma, reused regularity consequences and projective coherent finiteness/Serre vanishing, and wrote out injective higher-cohomology tails, propagation of an H1 plateau by section multiplication, and the finite dimension countdown. No use of a chosen infinite-field hyperplane for the given section. Repair of returned f964d1b7659: re-read the current dependency statements, retained the unchanged statement and all six arguments, and made the compatible twist comparisons explicit before using multiplication on the lower projective space; delivery is rebuilt on current origin/sheaf-dag with maintainer metadata preserved. Repair of returned 5f574415e6b: compared all eleven existing dependency records against current main bd013ba848e0b4780e5fc8e62abc406d707a3469 (all unchanged), re-read their full statements, and explicitly bounded the finite composites in steps 3 and 5, including the empty-composite boundary. Retained all searches and citations; the delivery tool rebases this adjusted split onto current origin/sheaf-dag. Repair of returned 08bb85bf36b: compared the returned tree with current origin/sheaf-dag 57a74afc56cb6058a41fe335b0237cb716a749f0; all eleven existing dependency records are unchanged. Re-read their statements and the cited Stacks passages, and expanded step 4 using the named connecting map and both kernel-image identities. The delivery is rebuilt against current main for promotion to the live DAG. Repair of returned 0e895221c28: compared its immutable tree with current origin/sheaf-dag e1d69d198c7cebf20da26f30565afddff155b8d4; all eleven existing dependency records are unchanged. Re-read every cited statement and the source passages, and made step 6 explicitly prove the countdown induction by its base and its zero/nonzero cases. Retained the statement, route, structural node, searches and citations; deliver.py rebuilds this adjusted split on fetched current main.",
+  "blueprint": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong §§3.9--3.12, Claim 3.10 and Lemma 3.13, printed p.609. Agent-formulated version: the proof of Lemma 3.13 uses only that rational exceptional curves have constant image in each target fibre; this property replaces its genus-at-least-two and pure-curve target hypotheses. This statement does not assert existence of a semistable source.; de Jong 3.9, projective Hilbert schemes underlying the relative morphism scheme; Hilbert construction prerequisite: Uniform generation and section bounds for projective ideals with fixed Hilbert polynomial; Hilbert construction prerequisite, field boundedness input: Stacks 08AG before passage to families; Stacks 08AG, middle cohomology paragraphs: regular hyperplane restriction implies higher-cohomology vanishing and strict decrease of nonzero H1 dimensions.",
+  "tool_uses": [
+   {
+    "node": "lem-pc-projective-space-coherent-finiteness",
+    "why": "Generic projective coherent-cohomology finiteness, specialized to a field and coherent twists; this unit does not state it."
+   },
+   {
+    "node": "lem-pc-projective-space-serre-vanishing",
+    "why": "Generic Serre eventual vanishing on projective space; supplies the terminal zero for the injections, without replacing the alteration route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pc-projective-space-coherent-finiteness",
+  "lem-pc-projective-space-serre-vanishing"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-NO-2a2e04e9e",
+  "group": "NO",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NO-2a2e04e9e (reviewer sub-agent of L); spot-checked: I read in full the item, the new node lem-sfb-fixed-hyperplane-restriction-cohomology, and the statements of every node they cite: m-regular consequences (allows n>=0), Serre vanishing, coherent finiteness, def-pc-zero-scheme and the edge map. The source check was against Stacks varieties.tex 08AG lemma-bound-quotients-free, the paragraphs 'Let i>=2', 'We still have to control H^1' and 'Suppose d>m'', together with 089Z, 08A0 and 0EGK. This is the fifth push. Compared with 0e895221c28, only step 6 and the split_report changed: step 6 now proves the countdown by induction on r. The base case is b_m=h. If b_{m+r}=0, surjectivity keeps it 0. If b_{m+r}>0, then max(h-r,0)>0 forces h-r>0, and b_{m+r+1}<=h-r-1. This is correct. The item statement is unchanged from the base, and the parent free-quotient-kernel-regularity-bound still gets both clauses with E=K, m=b. Steps 1-5 are as before and are correct. Step 1: twists are coherent, a field is Noetherian so h is finite, and the multiplicative twist comparisons are legitimate. Step 2: the regularity range 1<=j<=n-1 matches the item, P^0 is covered, and Serre vanishing gives D. Step 3: for q>=2 the maps are injective into zero, with T=max(t,D). Step 4: ker a=im delta and ker delta=im r_d. Step 5: the lifts make r_{d+1} onto, and the finite composite reaches zero. Edge cases n=1, h=0, E=0, G=0, negative m and finite k all work. The new node is true: locally it is M/fM, a closed immersion is affine, and restriction of linear forms is onto, also for n=1. It is not a duplicate of the existential infinite-field hyperplane nodes, and it does not restate a clause of the item (D1). FIX (B3): the new node writes V(s) without a definition node. It now cites def-pc-zero-scheme in its statement and stmt_deps. This fix was made on f964 and lost on 5f57, 08bb, 0e89 and now 2a2e; I re-applied it as the delivered node plus these two field changes. Advisory: the item's own V(s), unchanged from the base, also lacks this citation. Accepted generic tool uses: lem-pc-projective-space-coherent-finiteness and lem-pc-projective-space-serre-vanishing. No SGA is cited.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.ProjectiveSpace.HyperplaneCohomologyTailBound",
+  "declaration": "AlgebraicGeometry.ProjectiveSpace.hyperplane_cohomology_tail_bound",
+  "file": "lean/Sheaf/AlgebraicGeometry/ProjectiveSpace/HyperplaneCohomologyTailBound.lean",
+  "statement": "theorem hyperplane_cohomology_tail_bound (k : Type u) [Field k] (n : ℕ) (hn : 1 ≤ n) (E : (ℙ(ULift.{u} (Fin (n + 1)); Spec (.of k))).Modules) (hE : RingedSpace.IsCoherent (ℙ(ULift.{u} (Fin (n + 1)); Spec (.of k))).toRingedSpace E) (s : Γ(twist (ULift.{u} (Fin (n + 1))) (Spec (.of k)) 1, ⊤)) (hs : s ≠ 0) {H : Scheme.{u}} (i : H ⟶ ℙ(ULift.{u} (Fin (n + 1)); Spec (.of k))) [IsClosedImmersion i] (hH : i.ker = Scheme.Modules.Hom.zeroLocus (Scheme.Modules.homOfGlobalSection _ s)) (e : H ≅ ℙ(ULift.{u} (Fin ((n - 1) + 1)); Spec (.of k))) (he : e.hom ≫ (ℙ(ULift.{u} (Fin ((n - 1) + 1)); Spec (.of k)) ↘ Spec (.of k)) = i ≫ (ℙ(ULift.{u} (Fin (n + 1)); Spec (.of k)) ↘ Spec (.of k))) (htwist : ∀ d : ℤ, (Scheme.Modules.tensorPullback i).obj (twist (ULift.{u} (Fin (n + 1))) (Spec (.of k)) d) ≅ (Scheme.Modules.tensorPullback e.hom).obj (twist (ULift.{u} (Fin ((n - 1) + 1))) (Spec (.of k)) d)) (hG : RingedSpace.IsCoherent H.toRingedSpace ((Scheme.Modules.tensorPullback i).obj E)) (hinj : ∀ d : ℤ, Mono (regularHyperplaneMultiplication k n E d s)) (m : ℤ) (hregular : ∀ q : ℕ, 1 ≤ q → q ≤ n - 1 → Subsingleton ((RingedSpace.moduleCohomology H.toRingedSpace q).obj ((Scheme.Modules.tensorPullback i).obj E ⊗ₘ (Scheme.Modules.tensorPullback i).obj (twist (ULift.{u} (Fin (n + 1))) (Spec (.of k)) (m - (q : ℤ)))))) : (∀ (q : ℕ) (t : ℤ), 2 ≤ q → m ≤ t → Subsingleton ((RingedSpace.moduleCohomology (ℙ(ULift.{u} (Fin (n + 1)); Spec (.of k))).toRingedSpace q).obj (E ⊗ₘ twist (ULift.{u} (Fin (n + 1))) (Spec (.of k)) t))) ∧ (∀ t : ℤ, m + (Module.finrank k ((ModuleCat.restrictScalars (Scheme.globalSectionsRingHom k (X := ℙ(ULift.{u} (Fin (n + 1)); Spec (.of k))))).obj ((RingedSpace.moduleCohomology (ℙ(ULift.{u} (Fin (n + 1)); Spec (.of k))).toRingedSpace 1).obj (E ⊗ₘ twist (ULift.{u} (Fin (n + 1))) (Spec (.of k)) m))) : ℤ) ≤ t → Subsingleton ((RingedSpace.moduleCohomology (ℙ(ULift.{u} (Fin (n + 1)); Spec (.of k))).toRingedSpace 1).obj (E ⊗ₘ twist (ULift.{u} (Fin (n + 1))) (Spec (.of k)) t)))",
+  "branch": "newtargets-dag",
+  "by": "Q19",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "The statement is unchanged. Added the already-landed definition nodes for the zero scheme and canonical hyperplane multiplication used in its hypotheses. The degree pair d,1+d ranges over every pair D-1,D. The fixed k-isomorphism with projective (n-1)-space and its twist comparisons are explicit. Cohomology is RingedSpace.moduleCohomology; the dimension is Module.finrank after canonical restriction of scalars along Scheme.globalSectionsRingHom, with its natural-number value cast to an integer. No finiteness, infinitude, or vanishing hypothesis is added."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-0b90d16fc",
+  "group": "Q19",
+  "result": "pass",
+  "note": "Delivery changes only the item node (lean, +2 landed stmt_deps def-pc-zero-scheme and def-sfb-regular-hyperplane-restriction-maps, both with lean records and used in the statement) and the new module. Each node clause matches the Lean: Field k, 1<=n, P^n via ULift(Fin(n+1)), RingedSpace.IsCoherent E, s:Gamma(O(1)), s!=0, IsClosedImmersion i with i.ker = zeroLocus(homOfGlobalSection s), e:H=P^{n-1} over k, htwist i^*O(d)=e^*O(d) (existence-only hypotheses, not stronger), coherent G = tensorPullback i E, Mono of regularHyperplaneMultiplication for all d (d,1+d covers all pairs), hregular 1<=q<=n-1 with ambient pulled-back twist; conclusions H^q(E(t))=0 for q>=2, t>=m and H^1(E(t))=0 for t>=m+finrank_k(restrictScalars globalSectionsRingHom H^1(E(m))). Hypotheses identical to fixed_hyperplane_restriction_cohomology; mRegular_coherent_consequences range matches. Source Stacks 08AG middle paragraphs agrees. Edge cases n=1, E=0, h=0, negative m, finite k, universe u covered. No new defs, sorry only, docstrings with source, blueprint id and 6 steps, statement verbatim, report sections present. No change, so no compile."
+ }
+}

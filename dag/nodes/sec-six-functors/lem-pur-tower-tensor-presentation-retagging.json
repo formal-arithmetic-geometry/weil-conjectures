@@ -1,0 +1,134 @@
+{
+ "id": "lem-pur-tower-tensor-presentation-retagging",
+ "kind": "statement",
+ "title": "The actual projection-counit and tensor transpose are independent of normalized presentations",
+ "statement": "In the finite-field setting [def-pur-conventions] and interfaces [def-pur-tower-geometric-purity-data, det-sp-tower-gamma], fix f=jp smooth of pure dimension d, j open and p proper, between separated finite-type Noetherian k-schemes. Fix all actual normalized operations, twists, support functor, right adjoint G, adjunction, finite-level presentations and purity record a. For every second right-adjoint presentation G_gamma, adj_gamma, lv_gamma, a_gamma of that same support functor, the inverse-projection/counit composites agree after the counit-preserving right-adjoint comparison at the coefficient unit; their actual tensor transposes agree after the same comparison at K. The two tensor-model pairs are the supplied normalized data of a and a_gamma, not existentially chosen replacement models. Both equations are in the ordinary derived tower category. This statement asserts neither orientation agreement nor the purity square.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-package/thm-pur-weil-equivariance-of-purity-and-trace.proof.md",
+  "place": "Step 1 (purity square) and Step 5 (coefficient transports)"
+ },
+ "stmt_deps": [
+  "def-pur-tower-geometric-purity-data",
+  "def-pur-conventions",
+  "det-sp-tower-gamma"
+ ],
+ "proof": [
+  {
+   "text": "Apply tensor_transpose_ground_field_retagging with identity automorphism and the same factorization. Its right-adjoint comparison is the unique counit-preserving comparison. It supplies both equations for a normalized tensor model.",
+   "uses": [
+    "lem-pur-tower-tensor-transpose-ground-field-retagging"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-package/thm-pur-weil-equivariance-of-purity-and-trace.proof.md",
+    "place": "Step 1 (purity square) and Step 5 (coefficient transports)"
+   }
+  },
+  {
+   "text": "For a fixed closed adjunction, uncurry_model fixes the representative tensor comparison: transpose and compute the same componentwise pure-tensor evaluation, then use injectivity of the Hom bijection. The normalized signed symmetry and coefficient unitor act by the same signed interchange and scalar multiplication. Cancel the representative comparisons and use full faithfulness of restriction to flat K-flat representatives. Hence the constraints agree for the supplied tensor data.",
+   "uses": [
+    "lem-sf-cochain-tensor-model-rigidity"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-package/thm-pur-weil-equivariance-of-purity-and-trace.proof.md",
+    "place": "Step 1 (purity square) and Step 5 (coefficient transports)"
+   }
+  },
+  {
+   "text": "Substitute the constraint identities into the projection-counit equation; proof irrelevance identifies membership and invertibility witnesses. Realize the tensor transposes and use injectivity of the adjunction Hom bijection on that equation. The faithful realization then gives the tensorMate equation. This retains the whole tower and includes zero dimension and empty schemes.",
+   "uses": [
+    "det-sp-tower-gluing"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-package/thm-pur-weil-equivariance-of-purity-and-trace.proof.md",
+    "place": "Step 1 (purity square) and Step 5 (coefficient transports)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-pur-tower-tensor-transpose-ground-field-retagging",
+  "lem-sf-cochain-tensor-model-rigidity",
+  "det-sp-tower-gluing"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-package/thm-pur-weil-equivariance-of-purity-and-trace.proof.md",
+  "place": "Step 1 (purity square) and Step 5 (coefficient transports)"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Normalized smooth purity orientations and tensor counit transposes are independent of the presentation of the same right adjoint",
+   "results": "8 hits: CategoryTheory.Adjunction.rightAdjointUniq_hom_counit; CategoryTheory.Adjunction.IsMonoidal.instIsMonoidalCounit; CategoryTheory.Adjunction.rightAdjointLaxMonoidal; CategoryTheory.Bicategory.adjointifyCounit; CategoryTheory.rightAdjointMate; CategoryTheory.tensorRightAdjunction; CategoryTheory.Adjunction.rightOp_counit; CategoryTheory.Adjunction.counit_isIso_of_R_fully_faithful",
+   "date": "2026-10-27",
+   "verdict": "No exact tower statement. Generic adjunction formulas are used in the assembly; scheme and algebra tensor hits do not supply the normalized tower comparisons."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Normalized smooth purity orientations and tensor counit transposes are independent of the presentation of the same right adjoint",
+   "results": "8 hits: CategoryTheory.Adjunction.map_μ_comp_counit_app_tensor; CategoryTheory.Adjunction.rightAdjointLaxMonoidal_ε; CategoryTheory.Adjunction.map_μ_comp_counit_app_tensor_assoc; CategoryTheory.Monoidal.Reflective.instIsIsoMapTensorHomAppUnit; CategoryTheory.Adjunction.unit_app_tensor_comp_map_δ; CategoryTheory.mateEquiv_counit; CategoryTheory.Adjunction.ε_comp_map_ε_assoc; CategoryTheory.Adjunction.map_ε_comp_counit_app_unit",
+   "date": "2026-10-27",
+   "verdict": "No exact tower statement. Generic adjunction formulas are used in the assembly; scheme and algebra tensor hits do not supply the normalized tower comparisons."
+  },
+  {
+   "tool": "grep",
+   "query": "normalizedTower|TowerPurity|orientation.*retagging|coefficient.*tower",
+   "results": "0 hits: none",
+   "date": "2026-10-27",
+   "verdict": "No exact tower statement. Generic adjunction formulas are used in the assembly; scheme and algebra tensor hits do not supply the normalized tower comparisons."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.TowerGeometricPurityMate",
+  "date": "2026-10-27",
+  "group": "P4"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-thm-sf-package",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-pur-weil-equivariance-of-purity-and-trace",
+   "place": "Step 1 (purity square) and Step 5 (coefficient transports)",
+   "via": [
+    "lem-pur-tower-geometric-purity-mate"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.TowerTensorPresentationRetagging",
+  "file": "lean/Sheaf/Paper/TowerTensorPresentationRetagging.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.SpGeometricPurity.tensor_presentation_retagging",
+  "statement": "theorem tensor_presentation_retagging (S : PurityFiniteSetting.{u}) (b : SpTowerShriek.Base S.coefficients.l S.extension) (o : SpTowerShriek.Operations S.coefficients.l S.extension b) (q : SpTowerCalculus.Coordinates S.coefficients.l S.extension b) {X Z Y : AlgebraicGeometry.Scheme.{u}} [IsNoetherian X] [IsNoetherian Y] (j : X ⟶ Z) [IsOpenImmersion j] (p : Z ⟶ Y) [IsProper p] [QuasiCompact (j ≫ p)] [HasCompactification (j ≫ p)] (d : ℕ) (w : SpChartAdmissibility.Twists S.coefficients.l S.extension X) (hF : ∀ K : SpTowerCalculus.C S.coefficients.l S.extension b q X, spConstructibleTorTowers S.coefficients.l S.extension Y (q.abelian Y) ((SpTowerCalculus.F S.coefficients.l S.extension b o q (SpTowerGamma.factorization j p)).obj K.obj)) (G : SpTowerCalculus.C S.coefficients.l S.extension b q Y ⥤ SpTowerCalculus.C S.coefficients.l S.extension b q X) (adj : SpTowerGluing.support S.coefficients.l S.extension b o q (SpTowerGamma.factorization j p) hF ⊣ G) (lv : SpTowerGluing.Levels S.coefficients.l S.extension b o q (SpTowerGamma.factorization j p) hF G adj) (a : SpTowerGamma.Purity S.coefficients.l S.extension b o q j p d w hF G adj lv) [AlgebraicGeometry.Scheme.Over X (Spec (.of S.field.k))] [AlgebraicGeometry.Scheme.Over Y (Spec (.of S.field.k))] [hSX : IsSeparated (X ↘ Spec (.of S.field.k))] [hTX : LocallyOfFiniteType (X ↘ Spec (.of S.field.k))] [hCX : QuasiCompact (X ↘ Spec (.of S.field.k))] [hSY : IsSeparated (Y ↘ Spec (.of S.field.k))] [hTY : LocallyOfFiniteType (Y ↘ Spec (.of S.field.k))] [hCY : QuasiCompact (Y ↘ Spec (.of S.field.k))] [hOver : (j ≫ p).IsOver (Spec (.of S.field.k))] [hsm : SmoothOfRelativeDimension d (j ≫ p)] : ∀ (Gγ : SpTowerCalculus.C S.coefficients.l S.extension b q Y ⥤ SpTowerCalculus.C S.coefficients.l S.extension b q X) (adjγ : SpTowerGluing.support S.coefficients.l S.extension b o q (SpTowerGamma.factorization j p) hF ⊣ Gγ) (lvγ : SpTowerGluing.Levels S.coefficients.l S.extension b o q (SpTowerGamma.factorization j p) hF Gγ adjγ) (aγ : SpTowerGamma.Purity S.coefficients.l S.extension b o q j p d w hF Gγ adjγ lvγ), ∀ K : SpTowerCalculus.C S.coefficients.l S.extension b q Y, (SpTowerShriek.F S.coefficients.l S.extension b o (SpTowerGamma.factorization j p)).map ((SpTowerShriek.tensor S.coefficients.l S.extension b X).map (Prod.mkHom (𝟙 _) ((SpTowerGamma.realization S.coefficients.l S.extension b q X).map ((adjγ.rightAdjointUniq adj).hom.app ⟨SpTowerGamma.originalUnit S.coefficients.l S.extension b q Y, a.unit_mem⟩)))) ≫ SpTowerGamma.projectionCounit S.coefficients.l S.extension b o q (SpTowerGamma.factorization j p) a.tensorX a.tensorY hF G adj a.unit_mem K (a.projection_iso K) = SpTowerGamma.projectionCounit S.coefficients.l S.extension b o q (SpTowerGamma.factorization j p) aγ.tensorX aγ.tensorY hF Gγ adjγ aγ.unit_mem K (aγ.projection_iso K) ∧ (SpTowerShriek.tensor S.coefficients.l S.extension b X).map (Prod.mkHom (𝟙 _) ((SpTowerGamma.realization S.coefficients.l S.extension b q X).map ((adjγ.rightAdjointUniq adj).hom.app ⟨SpTowerGamma.originalUnit S.coefficients.l S.extension b q Y, a.unit_mem⟩))) ≫ SpTowerGamma.tensorMate S.coefficients.l S.extension b o q (SpTowerGamma.factorization j p) a.tensorX a.tensorY hF G adj a.unit_mem K (a.tensor_mem K) (a.projection_iso K) = SpTowerGamma.tensorMate S.coefficients.l S.extension b o q (SpTowerGamma.factorization j p) aγ.tensorX aγ.tensorY hF Gγ adjγ aγ.unit_mem K (aγ.tensor_mem K) (aγ.projection_iso K) ≫ (SpTowerGamma.realization S.coefficients.l S.extension b q X).map ((adjγ.rightAdjointUniq adj).hom.app K)",
+  "branch": "sheaf-dag",
+  "by": "P4",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-3317e",
+  "group": "P4",
+  "result": "fix",
+  "landing": "20261027T012915-L-2345962",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-3317e",
+  "group": "P4",
+  "result": "fix",
+  "landing": "20261027T012915-L-2345962",
+  "kind": "interface",
+  "note": "independent cc review: TowerGeometricPurityData vs published item prefix (verbatim); item theorem+Conclusion byte-identical; 3 sorried holes vs pinned Twists/RootLines/CoefficientPullback/TensorData; scratch --all build + #print axioms (propext, sorryAx, Classical.choice, Quot.sound)"
+ }
+}

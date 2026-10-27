@@ -1,0 +1,111 @@
+{
+ "id": "lem-pur-etale-system-projection-existence",
+ "kind": "statement",
+ "title": "Normalized ordinary etale system operations exist",
+ "statement": "Let $f:X\\to Y$ be a morphism of schemes and $c=(j:X\\to Z,p:Z\\to Y)$ a compactification, so $j$ is open and $p$ is proper. Fix $\\ell\\in\\mathbf N$. On the vertical sequence site of each small etale site, use strict module systems over every inverse sequence of finite commutative rings annihilated levelwise by powers of $\\ell$. The normalized operations record $\\operatorname{Theory}(c,\\ell)$ of [def-pur-etale-system-projection-data] is inhabited: its proper direct image is the actual sequence-site module direct image, its inverse image and open extension are their exact adjoints, its scalar functors use the published derived scalar model, and all restriction and evaluation comparisons have the section and mate normalizations in that record.",
+ "source": {
+  "document": "literature/stacks-project/more-etale.tex",
+  "place": "Tag 0GL6, remark-Rf-lower-shriek-change-of-rings; Zheng Constructions 4.1, 5.14-5.15 and Lemma 5.16. Agent elaboration of Original item proof steps 1-2: construction of actual ordinary system operations and restriction comparisons."
+ },
+ "stmt_deps": [
+  "def-pur-etale-system-projection-data"
+ ],
+ "proof": [
+  {
+   "text": "Use base change on each small etale site and the identity on coefficient indices.\nThe constant-sheaf universal property gives the structural ring map, characterized on\nconstant generators. Take its module inverse-image/direct-image adjunction. The\ncoefficient rings are identified under inverse image, so inverse image is exact.\nFor an open immersion, localization of the site supplies exact extension by zero\nleft adjoint to inverse image. Module sheaves on the sequence site have K-injective\nresolutions. Use these functors for the support presentation at every coefficient\nsequence. Evaluation is exact; the ordinary direct-image evaluation comparison is\nidentity on sections. Its inverse-image mate is invertible, and its exact localization\nhas invertible derived mate. The same construction for scalar restriction gives its\nsectionwise identity comparison, and the normalized scalar-extension adjunction gives\nits invertible scalar mate. The open comparisons are the open-adjunction mates of\nthose inverse-image comparisons and are exact. Paste the proper and open comparisons.\nAll equations required by Theory are the defining mate equations or exact localization\nidentities, including the fixed scalar model's unit normalization.",
+   "uses": [
+    "lem-coef-semilinear-derived-sections",
+    "lem-pur-sheaf-ring-derived-coefficient-adjunction",
+    "lem-pur-system-level-left-extension",
+    "lem-weil-pbc-ringed-topoi-derived-pushforward-composition"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-coef-semilinear-derived-sections",
+  "lem-pur-sheaf-ring-derived-coefficient-adjunction",
+  "lem-pur-system-level-left-extension",
+  "lem-weil-pbc-ringed-topoi-derived-pushforward-composition"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/more-etale.tex",
+  "place": "remark-Rf-lower-shriek-change-of-rings; normalized adjunction and mate-pasting argument."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Existence of normalized geometric inverse image direct image extension by zero scalar extension and evaluation on ringed vertical sequence sites of small etale topoi",
+   "results": "['AlgebraicGeometry.Scheme.Hom.normalizationDiagram', 'AlgebraicGeometry.Scheme.Hom.normalizationDiagramMap', 'SheafOfModules.Presentation.map_π_eq', \"AlgebraicGeometry.PresheafedSpace.GlueData.opensImagePreimageMap_app'\", 'AlgebraicGeometry.Scheme.Hom.preservesLocalization_normalizationDiagramMap', 'AlgebraicGeometry.Scheme.IsLocallyDirected.fst_inv_eq_snd_inv', 'AlgebraicGeometry.Scheme.Modules.restrictAdjunction', 'AlgebraicGeometry.Scheme.Modules.instIsLeftAdjointRestrictFunctor']; 8 hits; search log digest 8044d38267dd27b4",
+   "date": "2026-10-25",
+   "verdict": "No direct match for this normalized ordinary etale sequence-site statement; the categorical mate identities are used in the proof."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.mateEquiv",
+   "results": "['CategoryTheory.mateEquiv', 'CategoryTheory.mateEquiv_counit', 'CategoryTheory.mateEquiv_counit_symm', 'CategoryTheory.unit_mateEquiv', 'CategoryTheory.unit_mateEquiv_symm', 'CategoryTheory.conjugateEquiv_mateEquiv_vcomp', 'CategoryTheory.mateEquiv_conjugateEquiv_vcomp', 'CategoryTheory.mateEquiv_vcomp']; 12 hits; search log digest b8ac30fd6644aa85",
+   "date": "2026-10-24",
+   "verdict": "No direct match for this normalized ordinary etale sequence-site statement; the categorical mate identities are used in the proof."
+  },
+  {
+   "tool": "grep",
+   "query": "evaluation_mate|mateEquiv_vcomp|mapDerivedCategorySquareIso_comp",
+   "results": "['Mathlib/CategoryTheory/Adjunction/Mates.lean', 'Mathlib/CategoryTheory/Adjunction/Mates.lean', 'Mathlib/CategoryTheory/Adjunction/Mates.lean', 'Mathlib/CategoryTheory/Adjunction/Mates.lean', 'Mathlib/CategoryTheory/Adjunction/Mates.lean', 'Mathlib/CategoryTheory/Monoidal/Closed/Functor.lean', 'Mathlib/CategoryTheory/Bicategory/Adjunction/Mate.lean', 'Mathlib/CategoryTheory/Bicategory/Adjunction/Mate.lean']; 11 hits; search log digest 5efc7bd8027581eb",
+   "date": "2026-10-25",
+   "verdict": "No direct match for this normalized ordinary etale sequence-site statement; the categorical mate identities are used in the proof."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.EtaleSystemCoefficientProjection",
+  "date": "2026-10-25",
+  "group": "J3"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-def-sf-operations",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "def-weil-exceptional-inverse-image",
+   "place": "Adic-stage paragraph of def-weil-exceptional-inverse-image: compatible finite-level functors before derived inverse limits; coefficient projection and scalar-unit/composition normalization for the ordinary etale system compact-support functor. Original item proof steps 1-2: construction of actual ordinary system operations and restriction comparisons.",
+   "via": [
+    "lem-pur-etale-system-coefficient-projection",
+    "lem-pur-etale-coefficient-system-adjoint"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "module": "Sheaf.Paper.EtaleSystemProjectionExistence",
+  "file": "lean/Sheaf/Paper/EtaleSystemProjectionExistence.lean",
+  "declaration": "AlgebraicGeometry.Etale.SystemProjection.etaleSystemProjectionTheory_nonempty",
+  "statement": "theorem etaleSystemProjectionTheory_nonempty\n    {X Y : Scheme.{u}} {f : X ⟶ Y} (c : Compactification f) (l : ℕ) :\n    Nonempty (Theory c l)",
+  "branch": "sheaf-dag",
+  "by": "J3",
+  "date": "2026-10-25",
+  "existing": false
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J3",
+  "result": "pass",
+  "landing": "20261025T033908-L-157017",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J3",
+  "result": "pass",
+  "landing": "20261025T033908-L-157017",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

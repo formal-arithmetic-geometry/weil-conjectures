@@ -1,0 +1,300 @@
+{
+ "id": "lem-sfb-sheaf-rees-symmetric-presentation",
+ "kind": "statement",
+ "title": "Affine presentations and symmetric-algebra surjection for the sheaf Rees algebra",
+ "statement": "Let $X$ be a scheme [def-pc-scheme] and $\\mathcal I\\subseteq\\mathcal O_X$ a quasi-coherent ideal [pqf-def-coherent]. Put $\\mathcal R=\\bigoplus_{n\\geq0}\\mathcal I^n$, the quasi-coherent sheaf Rees algebra [def-nagata-sheaf-rees-algebra], with ideal powers [def-sbc-ideal-sheaf-powers], and let $\\operatorname{Sym}(\\mathcal I)$ have its symmetric grading [lem-weil-pbc-quasi-coherent-symmetric-algebra] [def-trf-canonical-symmetric-graded-algebra]. Then there are graded $\\mathcal O_X$-algebra identifications and a morphism with the following properties.\n\nFor every affine open $V=\\operatorname{Spec}R\\subseteq X$, put $I_V=\\Gamma(V,\\mathcal I)$. There is a canonical graded $R$-algebra isomorphism\n$$\\theta_V:\\Gamma(V,\\mathcal R)\\xrightarrow{\\sim}\\mathcal R_R(I_V)\\subseteq R[t],$$\nwhere the right side is the Rees algebra [def-nagata-rees-algebra]. In degree $n$, it sends $x\\in\\Gamma(V,\\mathcal I^n)=I_V^n$ to $xt^n$, and in degree zero it is the identity of $R$. Under these identifications all affine restriction maps act coefficientwise; in particular on $D(s)\\subseteq V$ the degree-$n$ map is $xt^n\\mapsto(x/1)t^n$.\n\nThe degree-one inclusion $\\mathcal I\\to\\mathcal R$ extends uniquely to a morphism $\\varphi:\\operatorname{Sym}(\\mathcal I)\\to\\mathcal R$ of sheaves of $\\mathcal O_X$-algebras. This morphism preserves degree and is surjective in every degree on every affine open. Under the canonical identification $\\Gamma(V,\\operatorname{Sym}(\\mathcal I))=\\operatorname{Sym}_R(I_V)$ and $\\theta_V$, its degree-$n$ map sends the symmetric monomial $x_1\\cdots x_n$ to $(x_1\\cdots x_n)t^n$; its degree-zero map is the identity. These formulas commute with affine restriction. No finite-type, Noetherian or nonzero-ideal hypothesis is required.",
+ "source": {
+  "document": "literature/stacks-project/divisors.tex",
+  "place": "Tag 02NS (lemma-blowing-up-projective), proof: symmetric-to-Rees surjection; affine computation of the sheaf Rees algebra."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "pqf-def-coherent",
+  "def-nagata-sheaf-rees-algebra",
+  "def-sbc-ideal-sheaf-powers",
+  "lem-weil-pbc-quasi-coherent-symmetric-algebra",
+  "def-trf-canonical-symmetric-graded-algebra",
+  "def-nagata-rees-algebra"
+ ],
+ "proof": [
+  {
+   "text": "Fix an affine open $V=\\operatorname{Spec}R$ and set $I=\\mathcal I(V)$. By [def-sbc-ideal-sheaf-powers], $\\mathcal I^n|_V=\\widetilde{I^n}$. Restriction to $V$ preserves coproducts by [lem-weil-pbc-module-restriction-open-immersion-colimits]. Thus the defining coproduct of [def-nagata-sheaf-rees-algebra] restricts to the coproduct of the $\\widetilde{I^n}$. Apply clause (4) of [lem-weil-pbc-affine-tilde-gamma-adjunction] to the module direct sum $M=\\bigoplus_{n\\geq0}I^n$: its associated sheaf is this coproduct, with the specified summand inclusions. Clause (2) then gives $\\Gamma(V,\\mathcal R)=M$, compatibly with those inclusions. In particular these sections have finite degree support. This uses preservation of coproducts by the associated-sheaf functor, rather than an assertion that arbitrary global-sections functors preserve coproducts.",
+   "uses": [
+    "def-sbc-ideal-sheaf-powers",
+    "lem-weil-pbc-module-restriction-open-immersion-colimits",
+    "def-nagata-sheaf-rees-algebra",
+    "lem-weil-pbc-affine-tilde-gamma-adjunction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Tags 01HV (lemma-spec-sheaves), 01IA (lemma-quasi-coherent-affine), 01ID (lemma-colimit-quasi-coherent); open restriction: Modules Tag 01AJ (lemma-exactness-pushforward-pullback)."
+   }
+  },
+  {
+   "text": "Send the finite tuple $(a_n)_n$ of Step 1 to $\\sum_n a_nt^n$. By [def-nagata-rees-algebra], coefficient extraction is its inverse onto $\\mathcal R_R(I)$. The degree-$n$ summand is sent to $I^nt^n$. Addition is coefficientwise; the multiplication in [def-nagata-sheaf-rees-algebra] sends $a_m,b_n$ to $a_mb_n$ in degree $m+n$, just as polynomial multiplication does. The unit is the degree-zero $1$. This proves that the resulting $\\theta_V$ is a graded $R$-algebra isomorphism and is the identity in degree zero.",
+   "uses": [
+    "def-nagata-rees-algebra",
+    "def-nagata-sheaf-rees-algebra"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/divisors.tex",
+    "place": "Tag 0804 (lemma-blowing-up-affine), affine Rees algebra in the statement and proof; Schemes Tag 01ID."
+   }
+  },
+  {
+   "text": "Let $W\\subseteq V$ be affine, and write $r:R\\to\\mathcal O_X(W)$ for restriction. Each coproduct insertion is a sheaf map, so restriction carries $\\sum_n\\iota_n(a_n)$ to $\\sum_n\\iota_n(a_n|_W)$. The inclusions $\\mathcal I^n\\subseteq\\mathcal O_X$ identify $a_n|_W$ with $r(a_n)$; hence under the two maps $\\theta$ restriction is $\\sum_n a_nt^n\\mapsto\\sum_n r(a_n)t^n$. For $W=D(s)$, apply [lem-weil-pbc-spec-module-tilde-sections] to the module $I^n$ and the presentation in [def-sbc-ideal-sheaf-powers]: its localization formula gives $a_n\\mapsto a_n/1$. This proves the asserted restriction formulas without assuming intersections of arbitrary affine opens are affine.",
+   "uses": [
+    "def-nagata-sheaf-rees-algebra",
+    "def-sbc-ideal-sheaf-powers",
+    "lem-weil-pbc-spec-module-tilde-sections"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Tag 01HV (lemma-spec-sheaves), localization of associated-module sections, and Tag 01I9 (lemma-widetilde-pullback)."
+   }
+  },
+  {
+   "text": "The coproduct inclusion $\\iota_1:\\mathcal I\\to\\mathcal R$ is $\\mathcal O_X$-linear and $\\mathcal R$ is a commutative $\\mathcal O_X$-algebra by [def-nagata-sheaf-rees-algebra]. Apply clause (a) of [lem-weil-pbc-quasi-coherent-symmetric-algebra] to $\\mathcal F=\\mathcal I$, $\\mathcal B=\\mathcal R$, $u=\\iota_1$. It supplies a unique algebra-sheaf morphism $\\varphi$ extending this inclusion. Clause (b) identifies its affine source with $\\operatorname{Sym}_R(I)$. Since it is an algebra morphism, it fixes $R$, and on a product of $n$ degree-one generators its affine component, followed by $\\theta_V$, is exactly $x_1\\cdots x_n\\mapsto(x_1\\cdots x_n)t^n$.",
+   "uses": [
+    "def-nagata-sheaf-rees-algebra",
+    "lem-weil-pbc-quasi-coherent-symmetric-algebra"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/modules.tex",
+    "place": "Tags 01CF (section-symmetric-exterior), 01CG (lemma-local-tensor-algebra), 01CL (lemma-whole-tensor-algebra-permanence); Divisors Tag 02NS (lemma-blowing-up-projective), displayed symmetric-to-Rees map."
+   }
+  },
+  {
+   "text": "By [lem-weil-pbc-symmetric-algebra-graded], the degree-$n$ part of $\\operatorname{Sym}_R(I)$ is spanned over $R$ by the monomials $x_1\\cdots x_n$. The grading and affine identifications are those of [def-trf-canonical-symmetric-graded-algebra]. Step 4 sends each such generator into $I^nt^n$, so $\\varphi$ preserves degree on every affine open, and hence as a sheaf morphism. It is onto in degree $n$: by the definition of ideal multiplication every element of $I^n$ is a finite sum $\\sum_j c_jx_{j1}\\cdots x_{jn}$ with $c_j\\in R$ and $x_{ji}\\in I$. Explicitly this holds for $n=0$ since $I^0=R$; the inductive step expands an element of $I^{n+1}=I^nI$ as a finite sum of products and inserts the degree-$n$ expressions. Its preimage is $\\sum_j c_j\\iota(x_{j1})\\cdots\\iota(x_{jn})$ in symmetric degree $n$. At $n=0$ use the scalar itself. No finite generation of $I$ is used.",
+   "uses": [
+    "lem-weil-pbc-symmetric-algebra-graded",
+    "def-trf-canonical-symmetric-graded-algebra",
+    "def-sbc-ideal-sheaf-powers"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00DM (section-tensor-algebra), symmetric powers generated by monomials; Divisors Tag 02NS (lemma-blowing-up-projective), the displayed surjection."
+   }
+  },
+  {
+   "text": "For an affine inclusion $W\\subseteq V$ with restriction $r$, the restriction in [def-trf-canonical-symmetric-graded-algebra] sends $c\\,\\iota(x_1)\\cdots\\iota(x_n)$ to $r(c)\\,\\iota(r(x_1))\\cdots\\iota(r(x_n))$. Both orders of applying restriction and Step 4 therefore give $r(c)r(x_1)\\cdots r(x_n)t^n$, by multiplicativity of $r$ and Step 3. These monomials span every degree, so the formulas commute for every section. The same formula covers degree zero. The unique morphism of Step 4 thus has all the requested affine, graded and surjectivity properties. For $I=0$, all positive target degrees vanish; for $I=R$ the target is $R[t]$; the empty affine has zero section rings. The argument applies unchanged to these cases.",
+   "uses": [
+    "def-trf-canonical-symmetric-graded-algebra",
+    "lem-weil-pbc-symmetric-algebra-graded"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/divisors.tex",
+    "place": "Tag 02NS (lemma-blowing-up-projective), symmetric-to-Rees morphism; Modules Tag 01CG; the restriction calculation is written out here."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sbc-ideal-sheaf-powers",
+  "lem-weil-pbc-module-restriction-open-immersion-colimits",
+  "def-nagata-sheaf-rees-algebra",
+  "lem-weil-pbc-affine-tilde-gamma-adjunction",
+  "def-nagata-rees-algebra",
+  "lem-weil-pbc-spec-module-tilde-sections",
+  "lem-weil-pbc-quasi-coherent-symmetric-algebra",
+  "lem-weil-pbc-symmetric-algebra-graded",
+  "def-trf-canonical-symmetric-graded-algebra"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/divisors.tex",
+  "place": "Tag 02NS (lemma-blowing-up-projective), expanding the displayed surjection using Schemes Tags 01HV, 01IA, 01ID, and Modules Tags 01CG, 01CL."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For a quasi coherent ideal sheaf on a scheme the symmetric algebra surjects as a graded sheaf algebra onto the sheaf Rees algebra with affine sections the Rees algebra of the ideal of sections",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.IdealSheafData.subschemeι_app_surjective\", \"module\": \"Mathlib/AlgebraicGeometry/IdealSheaf/Subscheme\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} (I : X.IdealSheafData) (U : ↑X.affineOpens),\\n  Function.Surjective ⇑(CategoryTheory.ConcreteCategory.hom (AlgebraicGeometry.Scheme.Hom.app I.subschemeι ↑U))\", \"doc\": \"For any affine open subset $U$ of a scheme $X$, the canonical morphism $\\\\iota: Z \\\\to X$ from the closed subscheme $Z$ defined by an ideal sheaf $\\\\mathcal{I}$ induces a surjective map $\\\\iota_U: \\\\mathca\"}\n  {\"name\": \"AlgebraicGeometry.ProjIsoSpecTopComponent.toSpec_surjective\", \"module\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Scheme\", \"type\": \"∀ {A : Type u_1} {σ : Type u_2} [inst : CommRing A] [inst_1 : SetLike σ A] [inst_2 : AddSubgroupClass σ A] (𝒜 : ℕ → σ)\\n  [inst_3 : GradedRing 𝒜] {f : A} {m : ℕ},\\n  f ∈ 𝒜 m →\\n    0 < m →\\n      Function.Surjective ⇑(CategoryTheory.ConcreteCategory.hom (AlgebraicGeometry.ProjIsoSpecTopComponent.toSpec \", \"doc\": \"For a homogeneous element $ f $ of positive degree $ m $ in a graded ring $ A $, the continuous map from the projective spectrum $ \\\\operatorname{Proj}(A) $ to the prime spectrum $ \\\\operatorname{Spec}(\"}\n  {\"name\": \"AlgebraicGeometry.Proj.lift_awayMapₐ_awayMapₐ_surjective\", \"module\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Proper\", \"type\": \"∀ {σ : Type u_1} {A : Type u_2} [inst : CommRing A] [inst_1 : SetLike σ A] [inst_2 : AddSubgroupClass σ A] (𝒜 : ℕ → σ)\\n  [inst_3 : GradedRing 𝒜] {d e : ℕ} {f : A} (hf : f ∈ 𝒜 d) {g : A} (hg : g ∈ 𝒜 e) {x : A} (hx : x = f * g),\\n  0 < d →\\n    Function.Surjective\\n      ⇑(Algebra.TensorProduct.lift (Hom\", \"doc\": \"Given a graded algebra $\\\\mathcal{A}$ over a commutative semiring, for homogeneous elements $f \\\\in \\\\mathcal{A}_d$ and $g \\\\in \\\\mathcal{A}_e$ with $d > 0$, the canonical algebra homomorphism from the ten\"}\n  {\"name\": \"AlgebraicGeometry.StructureSheaf.toBasicOpen_surjective\", \"module\": \"Mathlib/AlgebraicGeometry/StructureSheaf\", \"type\": \"∀ (R : Type u) [inst : CommRing R] (f : R), Function.Surjective ⇑(AlgebraicGeometry.StructureSheaf.toBasicOpen R f)\", \"doc\": \"The canonical ring homomorphism from the localization $ R_f $ of a commutative ring $ R $ at an element $ f $ to the ring of sections $ \\\\mathcal{O}(D(f)) $ in the structure sheaf over the basic open s\"}\n  {\"name\": \"AlgebraicGeometry.specTargetImageRingHom_surjective\", \"module\": \"Mathlib/AlgebraicGeometry/AffineScheme\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} {A : CommRingCat} (f : X ⟶ AlgebraicGeometry.Spec A),\\n  Function.Surjective ⇑(CategoryTheory.ConcreteCategory.hom (AlgebraicGeometry.specTargetImageRingHom f))\", \"doc\": \"The ring homomorphism associated to the target image of a morphism of schemes is surjective, i.e., for a morphism $ f $ of schemes, the induced ring homomorphism $ \\\\operatorname{specTargetImageRingHom\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.IdealSheafData.glueDataObjHom\", \"module\": \"Mathlib/AlgebraicGeometry/IdealSheaf/Subscheme\", \"type\": \"{X : AlgebraicGeometry.Scheme} →\\n  {I J : X.IdealSheafData} → I ≤ J → (U : ↑X.affineOpens) → J.glueDataObj U ⟶ I.glueDataObj U\", \"doc\": \"For a scheme $X$ and ideal sheaf data $\\\\mathcal{I} \\\\leq \\\\mathcal{J}$, this constructs the morphism $\\\\operatorname{Spec}(\\\\mathcal{O}_X(U)/\\\\mathcal{J}(U)) \\\\to \\\\operatorname{Spec}(\\\\mathcal{O}_X(U)/\\\\mathc\"}\n  {\"name\": \"AlgebraicGeometry.Proj.fromOfGlobalSections\", \"module\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Basic\", \"type\": \"{σ : Type u_1} →\\n  {A : Type u} →\\n    [inst : CommRing A] →\\n      [inst_1 : SetLike σ A] →\\n        [inst_2 : AddSubgroupClass σ A] →\\n          (𝒜 : ℕ → σ) →\\n            [inst_3 : GradedRing 𝒜] →\\n              {X : AlgebraicGeometry.Scheme} →\\n                (f : A →+* ↑(X.presheaf.obj (Opposite.op ⊤\", \"doc\": \"Given a graded ring $\\\\mathcal{A}$ and a global section $f$ satisfying certain conditions, this morphism $X \\\\to \\\\operatorname{Proj}(\\\\mathcal{A})$ is constructed by gluing local morphisms defined on ope\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.IdealSheafData.isLocalization_away\", \"module\": \"Mathlib/AlgebraicGeometry/IdealSheaf/Subscheme\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} (I : X.IdealSheafData) {U V : ↑X.affineOpens} (h : U ≤ V)\\n  (f : ↑(X.presheaf.obj (Opposite.op ↑V))),\\n  U = X.affineBasicOpen f →\\n    IsLocalization.Away ((Ideal.Quotient.mk (I.ideal V)) f) (↑(X.presheaf.obj (Opposite.op ↑U)) ⧸ I.ideal U)\", \"doc\": \"For affine open subsets $U \\\\subseteq V$ of a scheme $X$, the ideal $I(V)$ in the ring of sections $\\\\Gamma(V, \\\\mathcal{O}_X)$ is contained in the preimage of the ideal $I(U)$ in $\\\\Gamma(U, \\\\mathcal{O}_\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: symmetric algebra universal properties and the ring Rees generation theorem do not state the sheaf-level affine presentation, grading, surjection and restriction compatibility."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The canonical map from the symmetric algebra of an ideal sheaf to the direct sum of its powers is graded surjective and compatible with affine restriction",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"SymAlg.sym_surjective\", \"module\": \"Mathlib.Algebra.Symmetrized\", \"type\": \": Surjective (sym : α → αˢʸᵐ)\", \"doc\": \"The canonical map from $\\\\alpha$ to its symmetric algebra $\\\\alpha^{\\\\mathrm{sym}}$ is surjective, where the symmetric algebra is canonically isomorphic to $\\\\alpha$ itself.\"}\n  {\"name\": \"SymmetricAlgebra.algHom_surjective\", \"module\": \"Mathlib.LinearAlgebra.SymmetricAlgebra.Basic\", \"type\": \": Function.Surjective (algHom R M)\", \"doc\": \"The canonical algebra homomorphism from the tensor algebra $ \\\\mathrm{TensorAlgebra}(R, M) $ to the symmetric algebra $ \\\\mathrm{SymmetricAlgebra}(R, M) $, induced by quotienting out the symmetric relat\"}\n  {\"name\": \"SymmetricPower.range_mk\", \"module\": \"Mathlib.LinearAlgebra.TensorPower.Symmetric\", \"type\": \": LinearMap.range (mk R ι M) = ⊤\", \"doc\": \"The range of the canonical linear map from the tensor product $\\\\bigotimes_R M$ to the symmetric power $\\\\text{Sym}^n(M)$ is the entire symmetric power module, i.e., $\\\\text{Range}(\\\\text{mk}) = \\\\top$.\"}\n  {\"name\": \"SymAlg.unsym_surjective\", \"module\": \"Mathlib.Algebra.Symmetrized\", \"type\": \": Surjective (unsym : αˢʸᵐ → α)\", \"doc\": \"The identity function from the symmetric algebra $\\\\mathrm{SymAlg}\\\\, \\\\alpha$ (which is defined as $\\\\alpha$ itself) to $\\\\alpha$ is surjective, i.e., every element of $\\\\alpha$ is the image of itself unde\"}\n  {\"name\": \"SymAlg.sym_injective\", \"module\": \"Mathlib.Algebra.Symmetrized\", \"type\": \": Injective (sym : α → αˢʸᵐ)\", \"doc\": \"The canonical map from a type $\\\\alpha$ to its symmetric algebra $\\\\alpha^\\\\mathrm{sym}$ is injective. This follows from the fact that the symmetric algebra is canonically isomorphic to $\\\\alpha$ itself, \"}\n  {\"name\": \"IsSymmetricAlgebra\", \"module\": \"Mathlib.LinearAlgebra.SymmetricAlgebra.Basic\", \"type\": \"(f : M →ₗ[R] A) : Prop\", \"doc\": \"For any commutative semiring $ R $, $ R $-module $ M $, and commutative $ R $-algebra $ A $, an $ R $-linear map $ f : M \\to A $ satisfies the universal property of the symmetric algebra if the induced\"}\n  {\"name\": \"Algebra.Generators.algebraMap_surjective\", \"module\": \"Mathlib.RingTheory.Extension.Generators\", \"type\": \": Function.Surjective (algebraMap P.Ring S)\", \"doc\": \"The canonical algebra homomorphism from the polynomial ring $ R[\\\\iota] $ (the ring of generators) to the algebra $ S $ is surjective, meaning every element of $ S $ can be expressed as a combination o\"}\n  {\"name\": \"SymmetricAlgebra.lift\", \"module\": \"Mathlib.LinearAlgebra.SymmetricAlgebra.Basic\", \"type\": \": (M →ₗ[R] A) ≃ (SymmetricAlgebra R M →ₐ[R] A)\", \"doc\": \"For any commutative semiring $ R $, $ R $-module $ M $, and commutative $ R $-algebra $ A $, there is a natural equivalence between $ R $-linear maps from $ M $ to $ A $ and $ R $-algebra homomorphism\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: symmetric algebra universal properties and the ring Rees generation theorem do not state the sheaf-level affine presentation, grading, surjection and restriction compatibility."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"SymmetricAlgebra\", \"reesAlgebra\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-22",
+   "verdict": "no match: symmetric algebra universal properties and the ring Rees generation theorem do not state the sheaf-level affine presentation, grading, surjection and restriction compatibility."
+  },
+  {
+   "tool": "grep",
+   "query": "SymmetricAlgebra.*[Rr]ees|[Rr]ees.*SymmetricAlgebra|sym.*[Rr]ees|[Rr]ees.*sym",
+   "results": "[grep] OK 11 hit(s)\n  {\"file\": \"Mathlib/Combinatorics/SimpleGraph/DegreeSum.lean\", \"line\": \"103\", \"text\": \"  G.dart_card_eq_sum_degrees.symm.trans G.dart_card_eq_twice_card_edges\"}\n  {\"file\": \"Mathlib/Combinatorics/SimpleGraph/Bipartite.lean\", \"line\": \"279\", \"text\": \"    ∑ v ∈ t, G.degree v = #G.edgeFinset := isBipartiteWith_sum_degrees_eq_card_edges h.symm\"}\n  {\"file\": \"Mathlib/Combinatorics/Enumerative/DyckWord.lean\", \"line\": \"544\", \"text\": \"  Fintype.ofEquiv _ (equivTreesOfNumNodesEq n).symm\"}\n  {\"file\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Free.lean\", \"line\": \"101\", \"text\": \"  (freeHomEquiv _).symm (fun i ↦ freeSection (f i))\"}\n  {\"file\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Free.lean\", \"line\": \"113\", \"text\": \"lemma sectionsMap_freeHomEquiv_symm_freeSection\"}\n  {\"file\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Free.lean\", \"line\": \"115\", \"text\": \"    sectionsMap ((freeHomEquiv M).symm f) (freeSection i) = f i := by\"}\n  {\"file\": \"Mathlib/Algebra/MvPolynomial/Degrees.lean\", \"line\": \"172\", \"text\": \"  simpa [add_comm] using le_degrees_add_left h.symm\"}\n  {\"file\": \"Mathlib/Algebra/MvPolynomial/Degrees.lean\", \"line\": \"176\", \"text\": \"  degrees_add_le.antisymm <| Multiset.union_le (le_degrees_add_left h) (le_degrees_add_right h)\"}\n  {\"file\": \"Mathlib/RingTheory/MvPolynomial/Symmetric/Defs.lean\", \"line\": \"280\", \"text\": \"theorem degrees_esymm [Nontrivial R] {n : ℕ} (hpos : 0 < n) (hn : n ≤ Fintype.card σ) :\"}\n  {\"file\": \"Mathlib/RingTheory/MvPolynomial/Symmetric/Defs.lean\", \"line\": \"281\", \"text\": \"    (esymm σ R n).degrees = (univ : Finset σ).val := by\"}\n  {\"file\": \"Mathlib/RingTheory/MvPolynomial/Symmetric/Defs.lean\", \"line\": \"287\", \"text\": \"    rw [degrees_def, support_esymm, sup_image, this]\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: symmetric algebra universal properties and the ring Rees generation theorem do not state the sheaf-level affine presentation, grading, surjection and restriction compatibility."
+  },
+  {
+   "tool": "grep",
+   "query": "\\b[Rr]ees|SymmetricAlgebra",
+   "results": "[grep] OK 19 hit(s)\n  {\"file\": \"Mathlib/RingTheory/Bialgebra/SymmetricAlgebra.lean\", \"line\": \"8\", \"text\": \"public import Mathlib.LinearAlgebra.SymmetricAlgebra.Basic\"}\n  {\"file\": \"Mathlib/RingTheory/Bialgebra/SymmetricAlgebra.lean\", \"line\": \"13\", \"text\": \"# Bialgebra structure on `SymmetricAlgebra R M`\"}\n  {\"file\": \"Mathlib/RingTheory/Bialgebra/SymmetricAlgebra.lean\", \"line\": \"15\", \"text\": \"`SymmetricAlgebra R M` is the cocommutative commutative `R`-bialgebra on `M`\"}\n  {\"file\": \"Mathlib/RingTheory/Bialgebra/SymmetricAlgebra.lean\", \"line\": \"22\", \"text\": \"namespace SymmetricAlgebra\"}\n  {\"file\": \"Mathlib/RingTheory/Bialgebra/SymmetricAlgebra.lean\", \"line\": \"28\", \"text\": \"instance instBialgebra : Bialgebra R (SymmetricAlgebra R M) :=\"}\n  {\"file\": \"Mathlib/RingTheory/Depth/Rees.lean\", \"line\": \"17\", \"text\": \"# The Rees theorem\"}\n  {\"file\": \"Mathlib/RingTheory/Depth/Rees.lean\", \"line\": \"19\", \"text\": \"In this file we prove the Rees theorem for depth, which relates the vanishing of\"}\n  {\"file\": \"Mathlib/RingTheory/Depth/Rees.lean\", \"line\": \"24\", \"text\": \"* `ModuleCat.exists_isRegular_tfae` (Rees theorem) : For any `n : ℕ`, Noetherian ring `R`,\"}\n  {\"file\": \"Mathlib/RingTheory/Depth/Rees.lean\", \"line\": \"148\", \"text\": \"**The Rees theorem**\"}\n  {\"file\": \"Mathlib/RingTheory/ReesAlgebra.lean\", \"line\": \"13\", \"text\": \"# Rees algebra\"}\n  {\"file\": \"Mathlib/RingTheory/ReesAlgebra.lean\", \"line\": \"15\", \"text\": \"The Rees algebra of an ideal `I` is the subalgebra `R[It]` of `R[t]` defined as `R[It] = ⨁ₙ Iⁿ tⁿ`.\"}\n  {\"file\": \"Mathlib/RingTheory/ReesAlgebra.lean\", \"line\": \"16\", \"text\": \"This is used to prove the Artin-Rees lemma, and will potentially enable us to calculate some\"}\n  {\"file\": \"Mathlib/RingTheory/ReesAlgebra.lean\", \"line\": \"21\", \"text\": \"- `reesAlgebra` : The Rees algebra of an ideal `I`, defined as a subalgebra of `R[X]`.\"}\n  {\"file\": \"Mathlib/RingTheory/ReesAlgebra.lean\", \"line\": \"22\", \"text\": \"- `adjoin_monomial_eq_reesAlgebra` : The Rees algebra is generated by the degree one elements.\"}\n  {\"file\": \"Mathlib/RingTheory/Filtration.lean\", \"line\": \"11\", \"text\": \"public import Mathlib.RingTheory.ReesAlgebra\"}\n  {\"file\": \"Mathlib/RingTheory/Filtration.lean\", \"line\": \"32\", \"text\": \"- `Ideal.exists_pow_inf_eq_pow_smul`: **Artin-Rees lemma**.\"}\n  {\"file\": \"Mathlib/RingTheory/Filtration.lean\", \"line\": \"240\", \"text\": \"protected noncomputable def submodule : Submodule (reesAlgebra I) (PolynomialModule R M) where\"}\n  {\"file\": \"Mathlib/RingTheory/Filtration.lean\", \"line\": \"264\", \"text\": \"    InfHom (I.Filtration M) (Submodule (reesAlgebra I) (PolynomialModule R M)) where\"}\n  {\"file\": \"Mathlib/RingTheory/Filtration.lean\", \"line\": \"286\", \"text\": \"    Submodule.span (reesAlgebra I) (⋃ i, single R i '' (F.N i : Set M)) = F.submodule := by\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: symmetric algebra universal properties and the ring Rees generation theorem do not state the sheaf-level affine presentation, grading, surjection and restriction compatibility."
+  },
+  {
+   "tool": "grep",
+   "query": "SymmetricAlgebra.*[Rr]ees|[Rr]ees.*SymmetricAlgebra",
+   "results": "Hits: ",
+   "date": "2026-10-23",
+   "verdict": "no match: ring Rees membership and generation, symmetric-algebra universal properties, and ideal-sheaf data do not give the sheaf-level presentation and degreewise surjection in one specialization."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The symmetric algebra of a quasi coherent ideal maps onto its Rees algebra degree by degree compatibly with restriction on affine opens",
+   "results": "Hits: reesAlgebra, SymmetricAlgebra, IsSymmetricAlgebra, adjoin_monomial_eq_reesAlgebra, SymmetricAlgebra.lift, IsSymmetricAlgebra.of_equiv, SymAlg.sym_surjective, IsSymmetricAlgebra.comp_equiv",
+   "date": "2026-10-23",
+   "verdict": "no match: ring Rees membership and generation, symmetric-algebra universal properties, and ideal-sheaf data do not give the sheaf-level presentation and degreewise surjection in one specialization."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"SymmetricAlgebra\", \"reesAlgebra\"",
+   "results": "Hits: ",
+   "date": "2026-10-23",
+   "verdict": "no match: ring Rees membership and generation, symmetric-algebra universal properties, and ideal-sheaf data do not give the sheaf-level presentation and degreewise surjection in one specialization."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a quasi coherent ideal sheaf on a scheme the symmetric algebra surjects as a graded sheaf algebra onto the direct sum of its ideal powers with affine sections equal to the Rees algebra",
+   "results": "Hits: AlgebraicGeometry.Scheme.IdealSheafData.subschemeι_app_surjective, AlgebraicGeometry.Scheme.IdealSheafData.glueDataObjι, AlgebraicGeometry.Scheme.IdealSheafData.glueDataObj, AlgebraicGeometry.Scheme.IdealSheafData.glueDataObjMap, AlgebraicGeometry.Scheme.IdealSheafData.glueDataObjHom, AlgebraicGeometry.Scheme.IdealSheafData.ideal_le_ker_glueDataObjι, AlgebraicGeometry.Scheme.IdealSheafData.isLocalization_away, AlgebraicGeometry.Scheme.IdealSheafData.subschemeObjIso",
+   "date": "2026-10-23",
+   "verdict": "no match: ring Rees membership and generation, symmetric-algebra universal properties, and ideal-sheaf data do not give the sheaf-level presentation and degreewise surjection in one specialization."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Sections of the sheaf direct sum of powers of a quasi coherent ideal on an affine scheme identify with polynomials whose coefficient of degree n belongs to the nth ideal power",
+   "results": "Hits: mem_reesAlgebra_iff, mem_reesAlgebra_iff_support, AlgebraicGeometry.Scheme.IdealSheafData.ofIdeals, AlgebraicGeometry.Scheme.IdealSheafData.ideal, AlgebraicGeometry.Scheme.IdealSheafData.mkOfMemSupportIff_ideal, reesAlgebra, AlgebraicGeometry.Scheme.IdealSheafData.ofIdealTop_ideal, AlgebraicGeometry.Scheme.IdealSheafData.glueDataObj",
+   "date": "2026-10-23",
+   "verdict": "no match: ring Rees membership and generation, symmetric-algebra universal properties, and ideal-sheaf data do not give the sheaf-level presentation and degreewise surjection in one specialization."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-projective-affine-base-blowup",
+  "date": "2026-10-22",
+  "group": "Q56"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong §§3.9--3.12, Claim 3.10 and Lemma 3.13, printed p.609. Agent-formulated version: the proof of Lemma 3.13 uses only that rational exceptional curves have constant image in each target fibre; this property replaces its genus-at-least-two and pure-curve target hypotheses. This statement does not assert existence of a semistable source.; de Jong Lemma 3.13, rational exceptional-curve geometry before contraction; H-projectivity bookkeeping for the point-blowup tower in the rational-exceptional-curve argument; returned proof Steps 2--3: affine Rees sections, symmetric-to-Rees graded surjection",
+   "via": [
+    "lem-sfb-projective-affine-base-blowup",
+    "lem-sfb-nodal-trait-rational-domination",
+    "lem-sfb-high-genus-hom-closure",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-sheaf-rees-symmetric-presentation",
+  "worker": "stage1",
+  "summary": "Q82 checked the sheaf coproduct on each affine through the associated-sheaf adjunction, wrote the polynomial coefficient and restriction formulas, then used the sheaf symmetric universal property and monomial spanning to prove grading and degreewise surjectivity. No statement correction or new node is needed.",
+  "blueprint": "Expands the existing from.place: returned proof Steps 2--3 of lem-sfb-projective-affine-base-blowup (affine Rees sections and symmetric-to-Rees graded surjection), along the det-thm-sf-ctf-stability-direct-images proof (3) alteration prerequisite chain. The inherited nearest blueprint node is null and is retained. Searches of the whole blueprint for Rees algebra and symmetric algebra found no duplicate of this complete statement.",
+  "tool_uses": [
+   {
+    "node": "def-sbc-ideal-sheaf-powers",
+    "why": "Ideal powers on affine opens and their associated sheaves; generic algebra input to the blowup route."
+   },
+   {
+    "node": "def-nagata-sheaf-rees-algebra",
+    "why": "The coproduct construction and multiplication of the sheaf Rees algebra, already used by the item statement."
+   },
+   {
+    "node": "def-nagata-rees-algebra",
+    "why": "Coefficient definition of the ring Rees algebra, already used by the item statement."
+   },
+   {
+    "node": "lem-weil-pbc-quasi-coherent-symmetric-algebra",
+    "why": "Sheaf symmetric algebra universal property and its affine sections, already used by the item statement."
+   },
+   {
+    "node": "lem-weil-pbc-symmetric-algebra-graded",
+    "why": "Symmetric-degree monomials span the homogeneous component; generic commutative algebra input, not a replacement for alteration."
+   },
+   {
+    "node": "def-trf-canonical-symmetric-graded-algebra",
+    "why": "Specified degree and affine restriction formulas for the symmetric algebra; already used by the item statement."
+   },
+   {
+    "node": "lem-weil-pbc-affine-tilde-gamma-adjunction",
+    "why": "Clauses (2) and (4) compute affine coproduct sections without inventing another sheaf-direct-sum lemma."
+   },
+   {
+    "node": "lem-weil-pbc-module-restriction-open-immersion-colimits",
+    "why": "Restriction preserves the defining sheaf coproduct; generic sheaf theory input."
+   },
+   {
+    "node": "lem-weil-pbc-spec-module-tilde-sections",
+    "why": "Associated-module localization on a principal open computes the explicit coefficient restriction."
+   }
+  ]
+ },
+ "tool_uses": [
+  "def-sbc-ideal-sheaf-powers",
+  "def-nagata-sheaf-rees-algebra",
+  "def-nagata-rees-algebra",
+  "lem-weil-pbc-quasi-coherent-symmetric-algebra",
+  "lem-weil-pbc-symmetric-algebra-graded",
+  "def-trf-canonical-symmetric-graded-algebra",
+  "lem-weil-pbc-affine-tilde-gamma-adjunction",
+  "lem-weil-pbc-module-restriction-open-immersion-colimits",
+  "lem-weil-pbc-spec-module-tilde-sections"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q82-a68dbba0b",
+  "group": "Q82",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q82-a68dbba0b (reviewer sub-agent of L); spot-checked: Shape: one commit with the item and the report only; no new nodes, no unit edits, statement unchanged. The snapshot has no repair note, so the re-split rules do not apply; this is the first split of a Q56-created node whose proof was empty. Sources checked: Stacks Divisors 02NS (divisors.tex:8623) displays the surjection Sym*(I) -> ⊕I^d with no finite type needed for the surjection itself; 0804 (:8322) gives the affine Rees algebra; the tags 01HV/01IA/01ID/01AJ/01CF/01CG/01CL/00DM/01I9 match their labels. I read every cited statement in full. Step 1: def-sbc gives I^n|_V = (I(V)^n)~; restriction keeps the coproduct (restriction-colimits lemma, clause 1); tilde keeps colimits (adjunction lemma, clause 4); clause 2 gives Γ(V,R) = ⊕I^n. Γ is never assumed to commute with coproducts. Step 2: μ is the product in O_X, since I^{m+n} is the image of I^m⊗I^n under the canonical map (def-sbc and the assoc lemma through the definition); the elementary flag is OK. Step 3: coefficientwise restriction through the subsheaves I^n ⊆ O_X, and a ↦ a/1 on D(s); no affine intersections are used. Step 4: clauses (a) and (b) of the quasi-coherent symmetric-algebra lemma give a unique algebra map extending ι_1, sending monomials to (x1⋯xn)t^n. Step 5: Sym^n is spanned by monomials (symmetric-algebra-graded lemma); I^n is spanned by n-fold products, proved by a written-out induction; no finite generation is used. Step 6: restriction compatibility via the def-trf restriction formulas. Edge cases: n=0, I=0, I=O_X (R[t]), I^2=0 (e.g. k[x]/(x²): Sym² ≠ 0 but I² = 0, consistent because only surjectivity is claimed), and the empty affine. Duplicates: searched \\bRees\\b over dag/nodes and every node citing def-nagata-sheaf-rees-algebra. lem-sfb-blowup-rees-symmetric-presentation is a citer of this item, and the per- conormal nodes concern different algebras; no duplicate found. The citer lem-sfb-projective-affine-base-blowup Step 2 uses exactly the stated clauses. Accepted tool_uses: the two split sk-thm-p1 symmetric-algebra lemmas and three Mathlib sheaf lemmas as generic tools; the rest are definitions. No SGA citation. No changes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SheafReesSymmetricPresentation",
+  "declaration": "AlgebraicGeometry.Scheme.IdealSheafData.sheaf_rees_symmetric_presentation",
+  "file": "lean/Sheaf/AlgebraicGeometry/SheafReesSymmetricPresentation.lean",
+  "statement": "theorem sheaf_rees_symmetric_presentation {X : Scheme.{u}} (I : X.IdealSheafData) : ∃ hqc : I.toModules.IsQuasicoherent, ∃ q : (@SymmetricAlgebraSheaf.gradedAlgebraData X I.toModules hqc ⟶ I.reesData), (∀ (U : X.affineOpens) (n : ℕ), Function.Surjective ((q.app U).gradedAddHom n)) ∧ (∀ (U : X.affineOpens) (n : ℕ) (x : Fin n → Γ(I.toModules, U.1)), (reesAlgebra (I.ideal U)).subtype (q.app U (∏ i, SymmetricAlgebra.ι (X.presheaf.obj (op U.1)) (I.toModules.val.obj (op U.1)) (x i))) = Polynomial.monomial n (∏ i, @id (X.presheaf.obj (op U.1)) (I.toModulesι.app U.1 (x i)))) ∧ (∀ (U : X.affineOpens) (r : (X.presheaf.obj (op U.1))), (reesAlgebra (I.ideal U)).subtype (q.app U (algebraMap (X.presheaf.obj (op U.1)) (SymmetricAlgebraSheaf.sections I.toModules (op U.1)) r)) = Polynomial.C r) ∧ (∀ U : X.affineOpens, Function.Bijective (SymmetricAlgebraSheaf.sectionMap I.toModules (op U.1))) ∧ (∀ (U : X.affineOpens) (n : ℕ), ∃ e : Γ((I ^ n).toModules, U.1) ≃ₗ[(X.presheaf.obj (op U.1))] reesGrading (I.ideal U) n, ∀ x : Γ((I ^ n).toModules, U.1), (reesAlgebra (I.ideal U)).subtype (e x) = Polynomial.monomial n (@id (X.presheaf.obj (op U.1)) ((I ^ n).toModulesι.app U.1 x))) ∧ (∀ (U : X.affineOpens) (F : reesAlgebra (I.ideal U)) (n : ℕ), (reesGradingEquivPow (I.ideal U) n ((DirectSum.decomposeAlgEquiv (reesGrading (I.ideal U)) F) n) : X.presheaf.obj (op U.1)) = (F : Polynomial (X.presheaf.obj (op U.1))).coeff n) ∧ (∀ (U V : X.affineOpens) (h : U ≤ V) (F : reesAlgebra (I.ideal V)), (reesAlgebra (I.ideal U)).subtype (I.reesData.res h F) = (F : Polynomial (X.presheaf.obj (op V.1))).map (X.presheaf.map (homOfLE (X := X.Opens) h).op).hom) ∧ (∀ (U V : X.affineOpens) (h : U ≤ V) (a : SymmetricAlgebraSheaf.sections I.toModules (op V.1)), (reesAlgebra (I.ideal U)).subtype (q.app U (SymmetricAlgebraSheaf.restriction I.toModules (homOfLE (X := X.Opens) h).op a)) = ((reesAlgebra (I.ideal V)).subtype (q.app V a)).map (X.presheaf.map (homOfLE (X := X.Opens) h).op).hom) ∧ (∀ (f : ∀ U : X.affineOpens, SymmetricAlgebraSheaf.sections I.toModules (op U.1) →ₐ[(X.presheaf.obj (op U.1))] reesAlgebra (I.ideal U)), (∀ (U V : X.affineOpens) (h : U ≤ V) (a : SymmetricAlgebraSheaf.sections I.toModules (op V.1)), f U (SymmetricAlgebraSheaf.restriction I.toModules (homOfLE (X := X.Opens) h).op a) = I.reesData.res h (f V a)) → (∀ (U : X.affineOpens) (x : Γ(I.toModules, U.1)), (reesAlgebra (I.ideal U)).subtype (f U (SymmetricAlgebra.ι (X.presheaf.obj (op U.1)) (I.toModules.val.obj (op U.1)) x)) = Polynomial.monomial 1 (@id (X.presheaf.obj (op U.1)) (I.toModulesι.app U.1 x))) → ∀ (U : X.affineOpens) (a : SymmetricAlgebraSheaf.sections I.toModules (op U.1)), f U a = q.app U a)",
+  "branch": "newtargets-dag",
+  "by": "Q145",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "Uses the dependency reesData affine-basis model of the quasi-coherent graded Rees sheaf: theta is definitionally the identity on affine rings. Includes ideal-power section identifications, the direct-sum coefficient formula, degreewise surjectivity, restrictions and uniqueness even among ungraded compatible algebra maps."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-84a0f10ee",
+  "group": "Q145",
+  "result": "pass",
+  "note": "First S2 delivery; only lean changed and lean.statement is verbatim. One theorem with a single sorry, no new definitions. Source Stacks 02NS: the surjection needs no finite type. Uses I.reesData (audit-closed upstream owner of def-nagata-sheaf-rees-algebra; sections definitionally reesAlgebra, so theta is the identity). Degree-n linear equiv pinned by x↦x t^n; decomposeAlgEquiv coefficient clause; coefficientwise Polynomial.map restriction. q : gradedAlgebraData ⟶ reesData is graded by type, gradedAddHom surjective in each degree on every affine, monomial and C r formulas, explicit restriction square. Uniqueness over ungraded restriction-compatible affine algebra maps with the degree-one formula. sectionMap bijectivity = witness of the landed exists_quasiCoherentSymmetricAlgebra proof. Edge cases n=0, I=0, I=O, nilpotent I, empty affine, infinitely generated I covered; single universe u, no extra hypotheses. Docstrings carry source, blueprint and 6 proof steps. Note only: sectionMap's module node (lem-weil-pbc-symmetric-algebra-sheaf-construction) is not a stmt_dep; landed sibling Q143 blowup_rees_symmetric_presentation uses the same interface and is not a duplicate (no degreewise surjectivity or uniqueness). No compile (no changes)."
+ }
+}

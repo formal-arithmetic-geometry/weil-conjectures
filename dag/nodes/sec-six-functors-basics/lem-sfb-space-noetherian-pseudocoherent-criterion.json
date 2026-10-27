@@ -1,0 +1,272 @@
+{
+ "id": "lem-sfb-space-noetherian-pseudocoherent-criterion",
+ "kind": "statement",
+ "title": "Noetherian algebraic-space pseudo-coherence criterion",
+ "statement": "Work in the universes of [def-weil-size-convention]. Let $S$ be a scheme [def-pc-scheme], and use algebraic spaces over $S$ with their small etale structure sheaves [def-trf-algebraic-space]. Use module sheaves [def-weil-sheaf-of-modules-category], the unbounded derived categories $D(\\mathcal O_Z)$ [def-weil-abstract-derived-category], quasi-coherent modules [def-trf-space-quasi-coherent-module], and canonical module functors [def-trf-space-etale-module-functors]. Derived tensor and pullback use K-flat resolutions with flat terms; derived direct image uses K-injective resolutions. Noetherian means quasi-compact, quasi-separated and locally Noetherian on etale scheme charts. Coherent means quasi-coherent and, on Noetherian affine etale charts, associated to finitely generated modules. Let $Y$ be Noetherian and $K\\in D(\\mathcal O_Y)$ have quasi-coherent cohomology. A strictly perfect complex is bounded with terms direct summands of finite free structure modules. Call $K$ pseudo-coherent when for every integer $m$, locally on every etale site object, there is a strictly perfect $P$ and a map $P\\to K$ inducing cohomology isomorphisms in degrees greater than $m$ and a surjection in degree $m$. Then $K$ is pseudo-coherent if and only if all $H^i(K)$ are coherent and $H^i(K)=0$ for all sufficiently large $i$.",
+ "source": {
+  "document": "literature/stacks-project/spaces-perfect.tex",
+  "place": "Tag 08IK (lemma-identify-pseudo-coherent-noetherian), final equivalence; pseudo-coherence convention sites-cohomology.tex Tag 08FT (definition-pseudo-coherent)."
+ },
+ "stmt_deps": [
+  "def-weil-size-convention",
+  "def-pc-scheme",
+  "def-trf-algebraic-space",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-abstract-derived-category",
+  "def-trf-space-quasi-coherent-module",
+  "def-trf-space-etale-module-functors",
+  "def-sfb-space-small-ringed-model",
+  "def-sfb-space-derived-module-calculus",
+  "def-sfb-space-supported-perfect-approximation",
+  "def-a1-space-point-topology",
+  "def-sfb-space-absolute-quasi-separated"
+ ],
+ "proof": [
+  {
+   "text": "For an etale scheme chart $u:U\\to Y$, restriction is localization on the small etale site by [def-trf-algebraic-space]. It is exact: kernels restrict sectionwise, and a section of the target of an epimorphism lifts on a covering, which remains a covering on the slice. Thus $H^j(K|_U)=H^j(K)|_U$. Quasi-coherence restricts because the local presentations of [def-trf-space-quasi-coherent-module] remain local presentations after localization. The local approximation condition defining pseudo-coherence restricts as well. Conversely, if it holds on a covering of every site object, compose the coverings with the coverings giving the approximations; for each fixed $m$ this is exactly the condition in the item. Vanishing of a module sheaf is also detected on any surjective etale atlas: pull that atlas back to a site object and use the sheaf uniqueness axiom on the resulting covering.",
+   "uses": [
+    "def-trf-algebraic-space",
+    "def-trf-space-quasi-coherent-module"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-perfect.tex",
+    "place": "Tag 08IK, first reduction paragraph; sites-cohomology.tex Tag 08FT, definition-pseudo-coherent, and lemma-pseudo-coherent-independent-representative (3)."
+   }
+  },
+  {
+   "text": "Fix any affine etale chart $U=\\operatorname{Spec}A\\to Y$. By the locally Noetherian chart hypothesis $U$ is locally Noetherian, so [pqf-lem-affine-open-locnoeth], applied to the whole affine open of $U$, makes $A$ Noetherian. Apply [lem-sfb-affine-etale-derived-module-realization] to the quasi-coherent-cohomology object $K|_U$: choose $M_U\\in D(A)$ and $a_A(M_U)\\simeq K|_U$. This equivalence has no boundedness hypothesis. Its exactness and cohomology comparison give $H^j(K)|_U\\simeq a_A(H^j(M_U))$, and its faithfulness detects zero modules. With the chartwise definition of coherence in the statement, $H^j(K)$ coherent implies $H^j(M_U)$ finitely generated: on this chart the sheaf is $a_A(N)$ for a finite $A$-module $N$, and applying sections and $\\Gamma(U,a_A(-))\\cong\\mathrm{id}$ identifies $H^j(M_U)$ with $N$. Conversely, finite generation of these modules on every such chart is precisely coherence of $H^j(K)$.",
+   "uses": [
+    "pqf-lem-affine-open-locnoeth",
+    "lem-sfb-affine-etale-derived-module-realization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-perfect.tex",
+    "place": "Tag 08IK, reductions to an affine chart and to schemes; Tag 071Q, lemma-derived-quasi-coherent-small-etale-site; spaces-cohomology.tex Tag 07UB, lemma-coherent-Noetherian."
+   }
+  },
+  {
+   "text": "The functor $a_A$ in step 2 is Zariski tilde followed by $\\epsilon_U^*$. Choose any cochain representative of $M_U$ and let $E_U$ be its termwise associated Zariski module complex. Then $\\epsilon_U^*E_U\\simeq K|_U$ by the specified construction of [lem-sfb-affine-etale-derived-module-realization]. By [lem-sfb-etale-pseudocoherence-descent], $K|_U$ is pseudo-coherent in the strictly-perfect approximation sense defined in the statement if and only if $E_U$ is $m$-pseudo-coherent on the Zariski site for every $m$. By [def-pur-pseudo-coherent-complex], this is the same as pseudo-coherence of $E_U$ in the sense of that node, local bounded-above finite-free models on $U$. By [lem-pc-affine-pseudo-coherent-criterion], the latter holds if and only if $M_U$ has a bounded-above finite-free representative. By [def-pc-ring-pseudo-coherent-complex], that is exactly pseudo-coherence of $M_U$ over $A$. All comparisons are invariant under the displayed derived isomorphisms; they concern ordinary unbounded module derived categories, not finite-coefficient constant sheaves.",
+   "uses": [
+    "lem-sfb-affine-etale-derived-module-realization",
+    "lem-sfb-etale-pseudocoherence-descent",
+    "lem-pc-affine-pseudo-coherent-criterion",
+    "def-pur-pseudo-coherent-complex",
+    "def-pc-ring-pseudo-coherent-complex"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-perfect.tex",
+    "place": "Tag 08IK, second reduction paragraph; Tag 08HE, lemma-descend-pseudo-coherent; perfect.tex Tag 08E7, lemma-pseudo-coherent-affine."
+   }
+  },
+  {
+   "text": "Assume $K$ is pseudo-coherent. For every affine etale chart, step 1 restricts this property and step 3 makes $M_U$ pseudo-coherent. Apply [lem-weil-pbc-noetherian-pseudocoherent-cohomology-criterion] over the Noetherian ring $A$ from step 2. Every $H^j(M_U)$ is finite. The cohomology identification of step 2 therefore proves that every $H^j(K)$ is coherent according to the definition in the statement. This checks all degrees and all affine etale charts, without descending finite generation from one unspecified cover.",
+   "uses": [
+    "lem-weil-pbc-noetherian-pseudocoherent-cohomology-criterion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-perfect.tex",
+    "place": "Tag 08IK, forward implication, reduced through perfect.tex Tag 08E8 to more-algebra.tex Tag 066E (2), lemma-Noetherian-pseudo-coherent."
+   }
+  },
+  {
+   "text": "Still assuming pseudo-coherence, use quasi-compactness of $Y$ and [lem-sfb-qc-space-affine-etale-atlas] to choose one surjective affine etale atlas $U=\\operatorname{Spec}A\\to Y$. Apply steps 2 and 3 to this chart. The same ring criterion [lem-weil-pbc-noetherian-pseudocoherent-cohomology-criterion] supplies a single integer $b$ such that $H^j(M_U)=0$ for $j>b$. By the cohomology comparison in step 2, $H^j(K)|_U=0$ for these $j$. Step 1 detects zero sheaves on the surjective atlas, so $H^j(K)=0$ for every $j>b$. This is a global bound, not a family of bounds on a possibly infinite covering. If $Y$ is empty, the only module sheaf is zero and any $b$ works, so the assertion also holds in that case.",
+   "uses": [
+    "lem-sfb-qc-space-affine-etale-atlas",
+    "lem-weil-pbc-noetherian-pseudocoherent-cohomology-criterion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-perfect.tex",
+    "place": "Tag 08IK, first paragraph: quasi-compact affine cover; spaces-properties.tex Tag 03H6, lemma-quasi-compact-affine-cover; more-algebra.tex Tag 066E (2)."
+   }
+  },
+  {
+   "text": "Conversely, suppose all $H^j(K)$ are coherent and vanish for $j>b$. For each affine etale chart, step 2 gives a Noetherian $A$, finite $H^j(M_U)$ in every degree, and $H^j(M_U)=0$ for $j>b$ by faithfulness of $a_A$. Apply [lem-weil-pbc-noetherian-pseudocoherent-cohomology-criterion] to obtain pseudo-coherence of $M_U$; step 3 then gives pseudo-coherence of $K|_U$. Any etale site object is a locally Noetherian scheme and is covered by affine opens. For each integer $m$, take its affine covering and then the local strictly perfect approximations just obtained on each affine. Composing these coverings proves the $m$-approximation condition defining pseudo-coherence on that object, as in step 1. Since $m$ and the object were arbitrary, $K$ is pseudo-coherent. There is no lower bound on its cohomology.",
+   "uses": [
+    "lem-weil-pbc-noetherian-pseudocoherent-cohomology-criterion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-perfect.tex",
+    "place": "Tag 08IK, converse; perfect.tex Tag 08E8, lemma-identify-pseudo-coherent-noetherian; more-algebra.tex Tag 066E (2)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-trf-algebraic-space",
+  "def-trf-space-quasi-coherent-module",
+  "pqf-lem-affine-open-locnoeth",
+  "lem-sfb-affine-etale-derived-module-realization",
+  "lem-sfb-etale-pseudocoherence-descent",
+  "def-pur-pseudo-coherent-complex",
+  "lem-pc-affine-pseudo-coherent-criterion",
+  "def-pc-ring-pseudo-coherent-complex",
+  "lem-weil-pbc-noetherian-pseudocoherent-cohomology-criterion",
+  "lem-sfb-qc-space-affine-etale-atlas"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/spaces-perfect.tex",
+  "place": "Tag 08IK, lemma-identify-pseudo-coherent-noetherian, final equivalence; expand the affine scheme reduction via Tags 08HE, 08E7 and 066E (2)."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Bounded above coherent cohomology on a Noetherian algebraic space is equivalent to pseudo coherence of a derived complex",
+   "results": "{\"t\": \"2026-10-23T15:32:02Z\", \"tool\": \"leanfinder\", \"query\": \"Bounded above coherent cohomology on a Noetherian algebraic space is equivalent to pseudo coherence of a derived complex\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"DerivedCategory.isGE_Q_obj_iff\", \"DerivedCategory.instIsGEObjCochainComplexIntQOfIsGE\", \"DerivedCategory.isGE_iff\", \"DerivedCategory.instIsLEObjCochainComplexIntQOfIsLE\", \"DerivedCategory.isLE_Q_obj_iff\", \"DerivedCategory.isLE_iff\", \"DerivedCategory.IsGE\", \"DerivedCategory.exists_iso_Q_obj_of_isGE_of_isLE\"], \"digest\": \"89f47753d5a13b7d\"}",
+   "date": "2026-10-23",
+   "verdict": "No match: the hits concern ordinary finite presentation, Noetherian schemes, or representatives with cohomological bounds; none supplies pseudo-coherence on algebraic spaces."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Pseudo coherent complexes on Noetherian algebraic spaces are exactly complexes with bounded above coherent cohomology",
+   "results": "{\"t\": \"2026-10-23T15:31:59Z\", \"tool\": \"leansearch\", \"query\": \"Pseudo coherent complexes on Noetherian algebraic spaces are exactly complexes with bounded above coherent cohomology\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.isNoetherian_iff\", \"AlgebraicGeometry.IsNoetherian.toCompactSpace\", \"SheafOfModules.QuasicoherentData.IsFinitePresentation\", \"SheafOfModules.instIsQuasicoherentOfIsFinitePresentation\", \"SheafOfModules.QuasicoherentData.IsFinitePresentation.isFinite_presentation\", \"DerivedCategory.exists_iso_Q_obj_of_isGE_of_isLE\", \"AlgebraicGeometry.quasiCompact_of_noetherianSpace_source\", \"CategoryTheory.HasExt.instHasSmallLocalizedShiftedHomHomologicalComplexIntUpQuasiIsoOfIsGEOfIsLEOfNat\"], \"digest\": \"2967827b6513cc3a\"}",
+   "date": "2026-10-23",
+   "verdict": "No match: the hits concern ordinary finite presentation, Noetherian schemes, or representatives with cohomological bounds; none supplies pseudo-coherence on algebraic spaces."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"PseudoCoherent\"",
+   "results": "{\"t\": \"2026-10-23T15:31:59Z\", \"tool\": \"loogle\", \"query\": \"\\\"PseudoCoherent\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "No match: the hits concern ordinary finite presentation, Noetherian schemes, or representatives with cohomological bounds; none supplies pseudo-coherence on algebraic spaces."
+  },
+  {
+   "tool": "grep",
+   "query": "[Pp]seudo.?[Cc]oherent|AlgebraicSpace",
+   "results": "{\"t\": \"2026-10-23T15:31:58Z\", \"tool\": \"grep\", \"query\": \"[Pp]seudo.?[Cc]oherent|AlgebraicSpace\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "No match: the hits concern ordinary finite presentation, Noetherian schemes, or representatives with cohomological bounds; none supplies pseudo-coherence on algebraic spaces."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A pseudo coherent complex on a Noetherian algebraic space has bounded above coherent cohomology and conversely",
+   "results": "{\"t\": \"2026-10-23T18:33:28Z\", \"tool\": \"leanfinder\", \"query\": \"A pseudo coherent complex on a Noetherian algebraic space has bounded above coherent cohomology and conversely\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"DerivedCategory.isGE_iff\", \"DerivedCategory.isLE_iff\", \"DerivedCategory.isGE_Q_obj_iff\", \"DerivedCategory.instIsGEObjCochainComplexIntQOfIsGE\", \"DerivedCategory.instIsLEObjCochainComplexIntQOfIsLE\", \"DerivedCategory.isLE_Q_obj_iff\", \"CochainComplex.isGE_iff\", \"DerivedCategory.IsGE\"], \"digest\": \"1496ac99e88335d6\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits give cohomological bounds or ordinary finite presentations, not the pseudo-coherence criterion for algebraic spaces."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Pseudo coherent complexes on Noetherian algebraic spaces are equivalent to bounded above coherent cohomology",
+   "results": "{\"t\": \"2026-10-23T18:34:06Z\", \"tool\": \"leansearch\", \"query\": \"Pseudo coherent complexes on Noetherian algebraic spaces are equivalent to bounded above coherent cohomology\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"DerivedCategory.exists_iso_Q_obj_of_isGE_of_isLE\", \"SheafOfModules.instIsQuasicoherentOfIsFinitePresentation\", \"AlgebraicGeometry.IsNoetherian.toCompactSpace\", \"AlgebraicGeometry.isNoetherian_iff\", \"SheafOfModules.QuasicoherentData.IsFinitePresentation\", \"CategoryTheory.ProjectiveResolution.extEquivCohomologyClass_extMk\", \"AlgebraicGeometry.quasiCompact_of_noetherianSpace_source\", \"SheafOfModules.Presentation.IsFinite\"], \"digest\": \"983c8a6d89750994\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits give cohomological bounds or ordinary finite presentations, not the pseudo-coherence criterion for algebraic spaces."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"PseudoCoherent\"",
+   "results": "{\"t\": \"2026-10-23T18:34:06Z\", \"tool\": \"loogle\", \"query\": \"\\\"PseudoCoherent\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits give cohomological bounds or ordinary finite presentations, not the pseudo-coherence criterion for algebraic spaces."
+  },
+  {
+   "tool": "grep",
+   "query": "[Pp]seudo.?[Cc]oherent|AlgebraicSpace",
+   "results": "{\"t\": \"2026-10-23T18:34:06Z\", \"tool\": \"grep\", \"query\": \"[Pp]seudo.?[Cc]oherent|AlgebraicSpace\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits give cohomological bounds or ordinary finite presentations, not the pseudo-coherence criterion for algebraic spaces."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A derived complex on a locally Noetherian ringed etale site is pseudo coherent exactly when it has coherent cohomology and is locally bounded above",
+   "results": "{\"t\": \"2026-10-23T18:34:08Z\", \"tool\": \"leanfinder\", \"query\": \"A derived complex on a locally Noetherian ringed etale site is pseudo coherent exactly when it has coherent cohomology and is locally bounded above\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"DerivedCategory.IsGE\", \"DerivedCategory.instIsGEObjCochainComplexIntQOfIsGE\", \"DerivedCategory.instIsLEObjCochainComplexIntQOfIsLE\", \"DerivedCategory.isGE_Q_obj_iff\", \"SheafOfModules.IsFiniteType\", \"DerivedCategory.isGE_iff\", \"DerivedCategory.isLE_Q_obj_iff\", \"DerivedCategory.isLE_iff\"], \"digest\": \"d1bea32539799ea2\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits give cohomological bounds or ordinary finite presentations, not the pseudo-coherence criterion for algebraic spaces."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-space-bounded-coherent-finite-tor-image-perfect",
+  "date": "2026-10-23",
+  "group": "NJ"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Stable genus and smooth-family open loci in curve families. Supporting input: 0E76 proof, reduction to prestable curves, and 0E78 proof, decomposition by genus before imposing stability. Supporting input: 0E1J proof, perfectness and arbitrary derived base change before extracting the positive-degree perfect summand. Supporting input to this derived direct-image specialization: Tag 0A1P (lemma-base-change-tensor-perfect), perfectness assertion; perfect means sites-cohomology.tex Tag 08G5 (definition-perfect). Supporting input: Tag 0DKJ (lemma-tensor-perfect), based on Tag 08IS (lemma-perfect-direct-image). Supporting input: Tag 08IS, applied to the tensor object only after verifying all three hypotheses. Supporting input: Tag 08IK (lemma-identify-pseudo-coherent-noetherian), final equivalence; pseudo-coherence convention sites-cohomology.tex Tag 08FT (definition-pseudo-coherent).",
+   "via": [
+    "lem-sfb-space-bounded-coherent-finite-tor-image-perfect",
+    "lem-sfb-space-noetherian-tensor-perfect",
+    "lem-sfb-proper-support-tensor-perfect",
+    "lem-sfb-proper-flat-space-derived-base-change",
+    "lem-sfb-curve-h0-genus-strata",
+    "lem-sfb-stable-and-smooth-family-open-loci",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-space-noetherian-pseudocoherent-criterion",
+  "worker": "stage1",
+  "summary": "Verified Stacks 08IK and supplied the affine reduction through existing etale realization, etale pseudo-coherence descent, affine pseudo-coherence and Noetherian ring criteria. Zero new nodes. Proved coherence on every chart and extracted a global upper bound from one surjective affine atlas; no lower boundedness imposed. Statement and statement dependencies unchanged.",
+  "blueprint": "Supports det-thm-sf-ctf-stability-direct-images proof (3), through the inherited proper-coherent finite-Tor image prerequisite and its Noetherian pseudo-coherence input. Latest blueprint unit and direct-image proof read; no route change. Inherited ancestor command returns None; retained existing blueprint.from.node=null and its precise provenance place.",
+  "tool_uses": [
+   {
+    "node": "pqf-lem-affine-open-locnoeth",
+    "why": "Generic affine section-ring criterion turns a locally Noetherian etale chart into a Noetherian ring; the unit has no replacement."
+   },
+   {
+    "node": "lem-pc-affine-pseudo-coherent-criterion",
+    "why": "Generic affine identification of sheaf pseudo-coherence with finite-free module models, needed in the Stacks 08IK scheme reduction."
+   },
+   {
+    "node": "lem-weil-pbc-noetherian-pseudocoherent-cohomology-criterion",
+    "why": "Generic Noetherian ring criterion, Tag 066E (2), is the algebra input explicitly underlying the scheme reduction in 08IK."
+   }
+  ]
+ },
+ "tool_uses": [
+  "pqf-lem-affine-open-locnoeth",
+  "lem-pc-affine-pseudo-coherent-criterion",
+  "lem-weil-pbc-noetherian-pseudocoherent-cohomology-criterion"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q24-f602485f4",
+  "group": "Q24",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q24-f602485f4 (reviewer sub-agent of L); spot-checked: Read in full: Stacks 08IK (spaces-perfect.tex:3107), 08HE, 066E(2), 03H6 and 07UB. The statement matches the final equivalence of 08IK unchanged: E in D_QCoh is pseudo-coherent iff it is in D^-_Coh. No new nodes; the live item is still unsplit and no other group delivered it. Steps 1-6 hold. Step 1: restriction is exact, the m-approximation condition is local, and zero is detected on an atlas. Step 2: 01OW makes A Noetherian, and the unbounded realization node (exact, faithful, H^i and Gamma comparisons) identifies finite modules with coherence. Step 3: by 08HE, epsilon^* of the termwise tilde is the same construction as a_A, and 08E7 plus def-pc-ring finish. Steps 4 and 6 apply 066E(2), which needs only an upper bound. Step 5 gets one global bound from a single affine atlas (03H6). Edge cases checked: K=0, Y empty, cohomology unbounded below. Fault C4/C1, repaired: step 3 passed between the m-approximation convention of the descent node and the local bounded-above free-model convention of lem-pc-affine-pseudo-coherent-criterion without citing def-pur-pseudo-coherent-complex, whose statement records that the two agree. The FIX adds that citation to step 3 uses and to proof_deps, with one sentence. No duplicates: the 08E8 scheme nodes are bounded or one-directional, and def-sfb-space-pseudocoherent-complex is only a definition. Batch-5: the closures of the realization, descent and qc-atlas nodes contain only foundational trf nodes (algebraic-space and fppf descent, the 03FH/03LC Zariski/etale comparison square, def-trf-algebraic-space). There is no trace-formula or Poincare node, so all three flags are generic and accepted. tool_uses (01OW, 08E7, 066E(2)) are generic and accepted. The blueprint proof defect in pqf-lem-affine-open-locnoeth (Z[1/2] is not a finite Z-module) is noted for the maintainer; its statement is true.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SpaceNoetherianPseudoCoherentCriterion",
+  "declaration": "AlgebraicGeometry.AlgebraicSpace.isMPseudoCoherent_forall_iff_coherent_boundedAbove",
+  "file": "lean/Sheaf/AlgebraicGeometry/SpaceNoetherianPseudoCoherentCriterion.lean",
+  "statement": "theorem isMPseudoCoherent_forall_iff_coherent_boundedAbove {S : Scheme.{u}} (Y : AlgebraicSpace S) [HasDerivedCategory.{w} Y.SmallModules] (hqc : CompactSpace (Point Y.obj.obj)) (hqs : Y.IsAbsolutelyQuasiSeparated) (hln : ∀ T : Y.EtaleSite, IsLocallyNoetherian (Y.etaleForget.obj T)) (K : Y.DerivedModules) (hK : Y.derivedQCohProperty K) : (∀ m : ℤ, Y.IsMPseudoCoherent m K) ↔ (∀ i : ℤ, SheafOfModules.IsFinitePresentation (Y.smallModuleEquivalence.inverse.obj ((DerivedCategory.homologyFunctor Y.SmallModules i).obj K))) ∧ ∃ b : ℤ, ∀ i : ℤ, b < i → IsZero ((DerivedCategory.homologyFunctor Y.SmallModules i).obj K)",
+  "branch": "newtargets-dag",
+  "by": "Q38",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "Uses the existing IsMPseudoCoherent in every integer degree, exactly the approximation definition in this item, rather than replacing it by the local bounded-above finite-free predicate. The small-model equivalence transports cohomology back to the original module topos; by Stacks 07UB finite presentation means coherence under the locally Noetherian hypothesis. Five already landed definition nodes added to stmt_deps; no new definitions or statement correction."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-92b029eca",
+  "group": "Q38",
+  "result": "pass",
+  "note": "Read Stacks 08IK/08FT/08FU, the item node, all 12 stmt_dep records (byte-identical to live) and the dependency declarations: IsMPseudoCoherent, derivedQCohProperty, SmallModules/smallModuleEquivalence, the point topology, IsAbsolutelyQuasiSeparated, etaleForget, and Mathlib IsFinitePresentation/QuasicoherentData. Clauses match: Noetherian = CompactSpace on points + absolute quasi-separatedness + locally Noetherian on every EtaleSite object; D_QCoh via derivedQCohProperty; pseudo-coherent = forall m IsMPseudoCoherent (the node's own m-approximation convention, not the IsPseudoCoherent predicate); coherent = IsFinitePresentation after the fixed inverse equivalence (07UB under hln, same convention as the landed AlgebraicSpaceCoherentAbelian); one global upper bound; no lower bound. The generalized universe of the IsFinitePresentation index is harmless because Y is quasi-compact (one affine atlas). Edge cases (empty Y, K=0, unbounded below, negative m) are fine. lean.statement is verbatim. Only lean and five landed def stmt_deps were added; statement and proof are unchanged. Proof is sorry only; docstrings have source and blueprint; no new definitions. Report sections present. No compile run (no file changed)."
+ }
+}

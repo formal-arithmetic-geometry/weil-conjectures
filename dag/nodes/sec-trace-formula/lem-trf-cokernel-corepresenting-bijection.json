@@ -1,0 +1,220 @@
+{
+ "id": "lem-trf-cokernel-corepresenting-bijection",
+ "kind": "statement",
+ "title": "Corepresenting Hom bijections from compatible cokernel presentations",
+ "statement": "Let $\\mathcal A,\\mathcal B$ be abelian categories [def-sp-abelian], let $R:\\mathcal A\\to\\mathcal B$ be a functor, and let $d:P_2\\to P_1$ and $q:P_1\\to B$ be morphisms in $\\mathcal B$ with $q$ a cokernel of $d$. For $i=1,2$, let $L_i\\in\\mathcal A$ and let $\\theta_{i,X}:\\operatorname{Hom}_{\\mathcal A}(L_i,X)\\xrightarrow{\\sim}\\operatorname{Hom}_{\\mathcal B}(P_i,R(X))$ be bijections natural in $X$, so $\\theta_{i,X'}(u\\circ a)=R(u)\\circ\\theta_{i,X}(a)$ for $u:X\\to X'$. Assume $\\theta_{i,X}(0)=0$. Let $D:L_2\\to L_1$ satisfy $\\theta_{2,X}(a\\circ D)=\\theta_{1,X}(a)\\circ d$ for every $X$ and $a:L_1\\to X$. For any cokernel $c:L_1\\to C$ of $D$, there is a unique family of bijections $\\psi_X:\\operatorname{Hom}_{\\mathcal A}(C,X)\\xrightarrow{\\sim}\\operatorname{Hom}_{\\mathcal B}(B,R(X))$ characterized by $\\psi_X(v)\\circ q=\\theta_{1,X}(v\\circ c)$. Its inverse sends $b:B\\to R(X)$ to the unique $v:C\\to X$ satisfying $v\\circ c=\\theta_{1,X}^{-1}(b\\circ q)$. These bijections are natural in $X$: for every $u:X\\to X'$ and $v:C\\to X$, one has $\\psi_{X'}(u\\circ v)=R(u)\\circ\\psi_X(v)$.",
+ "source": {
+  "document": "literature/stacks-project/homology.tex",
+  "place": "Tag 0793, lemma-partially-defined-adjoint, proof: last paragraph, the displayed Hom identifications, with their naturality and the inverse factorization made explicit."
+ },
+ "stmt_deps": [
+  "def-sp-abelian"
+ ],
+ "proof": [
+  {
+   "text": "Fix $X$. In an abelian category [def-sp-abelian], a cokernel is the coequalizer of its arrow and the parallel zero arrow. Thus the colimit definition [def-weil-pbc-category-colimit], applied to this finite parallel-pair diagram, says that maps killing the arrow factor uniquely through its cokernel. For $v:C\\to X$, put $a=v\\circ c$. Since $c\\circ D=0$, compatibility and zero preservation give $\\theta_{1,X}(a)\\circ d=\\theta_{2,X}(a\\circ D)=\\theta_{2,X}(0)=0$. The cokernel property of $q$ therefore gives a unique $b:B\\to R(X)$ with $b\\circ q=\\theta_{1,X}(v\\circ c)$; define $\\psi_X(v)=b$.",
+   "uses": [
+    "def-sp-abelian",
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/homology.tex",
+    "place": "Tag 0793, lemma-partially-defined-adjoint, proof, final paragraph: the three displayed Hom identifications."
+   }
+  },
+  {
+   "text": "Conversely, for $b:B\\to R(X)$ put $a=\\theta_{1,X}^{-1}(b\\circ q)$. Then $\\theta_{2,X}(a\\circ D)=\\theta_{1,X}(a)\\circ d=b\\circ q\\circ d=0=\\theta_{2,X}(0)$. Injectivity of $\\theta_{2,X}$ gives $a\\circ D=0$. The unique-factorization clause of [def-weil-pbc-category-colimit] for the cokernel $c$ supplies a unique $v:C\\to X$ with $v\\circ c=a$. This defines the asserted inverse candidate $\\chi_X(b)$.",
+   "uses": [
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/homology.tex",
+    "place": "Tag 0793, lemma-partially-defined-adjoint, proof, final paragraph: the three displayed Hom identifications."
+   }
+  },
+  {
+   "text": "For $v:C\\to X$, the defining equations give $\\chi_X(\\psi_X(v))\\circ c=\\theta_{1,X}^{-1}(\\psi_X(v)\\circ q)=v\\circ c$, so uniqueness of factorization through $c$ [def-weil-pbc-category-colimit] gives $\\chi_X(\\psi_X(v))=v$. For $b:B\\to R(X)$, they give $\\psi_X(\\chi_X(b))\\circ q=\\theta_{1,X}(\\chi_X(b)\\circ c)=b\\circ q$, so the same uniqueness for $q$ gives $\\psi_X(\\chi_X(b))=b$. Thus $\\psi_X$ is a bijection with exactly the inverse stated.",
+   "uses": [
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/homology.tex",
+    "place": "Tag 0793, lemma-partially-defined-adjoint, proof, final paragraph: the three displayed Hom identifications."
+   }
+  },
+  {
+   "text": "For $u:X\\to X'$ and $v:C\\to X$, naturality of the supplied $\\theta_1$ gives $\\psi_{X'}(u\\circ v)\\circ q=\\theta_{1,X'}(u\\circ v\\circ c)=R(u)\\circ\\theta_{1,X}(v\\circ c)=(R(u)\\circ\\psi_X(v))\\circ q$. Unique factorization through $q$ [def-weil-pbc-category-colimit] proves naturality. Any other family satisfying the required characterization has, for each $X,v$, the same composite with $q$, hence the same value by this uniqueness. This proves uniqueness of the entire family.",
+   "uses": [
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/homology.tex",
+    "place": "Tag 0793, lemma-partially-defined-adjoint, proof, final paragraph: the three displayed Hom identifications."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sp-abelian",
+  "def-weil-pbc-category-colimit"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/homology.tex",
+  "place": "Tag 0793, lemma-partially-defined-adjoint, proof, final paragraph: the three displayed Hom identifications."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "corepresent.*cokernel|cokernel.*corepresent|leftAdjointObjIsDefined_colimit|cokernel.*[Ee]quiv|[Ee]quiv.*cokernel",
+   "results": "16 hits: Mathlib/CategoryTheory/ObjectProperty/Kernels.lean, Mathlib/CategoryTheory/Preadditive/LeftExact.lean, Mathlib/CategoryTheory/Adjunction/PartialAdjoint.lean, Mathlib/CategoryTheory/Limits/Preserves/Shapes/Kernels.lean, Mathlib/CategoryTheory/Limits/Preserves/Shapes/Kernels.lean, Mathlib/CategoryTheory/Limits/Preserves/Shapes/Kernels.lean, Mathlib/CategoryTheory/Limits/Shapes/NormalMono/Equalizers.lean, Mathlib/CategoryTheory/Limits/FunctorCategory/Shapes/Kernels.lean. Digest 39038b62b9c832dc. ",
+   "date": "2026-10-22",
+   "verdict": "no match: leftAdjointObjIsDefined_colimit (Adjunction/PartialAdjoint.lean:188-193) proves existence of a corepresenter for a colimit. corepresentableByCompCoyonedaObjOfIsColimit (lines 153-178) uses the library-chosen partial adjoint and its diagram colimit. The present statement fixes arbitrary supplied L_i, theta_i, D and cokernel c, with an explicit normalization and inverse; identifying those choices with that diagram is additional work. cokernel.mapIso compares arrows in one category, not these cross-category Hom bijections. Read PartialAdjoint.lean:149-193. No direct match.",
+   "subdirectory": "CategoryTheory"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.leftAdjointObjIsDefined_colimit",
+   "results": "1 hits: CategoryTheory.Functor.leftAdjointObjIsDefined_colimit. Digest 548a766b8e41c832. ",
+   "date": "2026-10-22",
+   "verdict": "no match: leftAdjointObjIsDefined_colimit (Adjunction/PartialAdjoint.lean:188-193) proves existence of a corepresenter for a colimit. corepresentableByCompCoyonedaObjOfIsColimit (lines 153-178) uses the library-chosen partial adjoint and its diagram colimit. The present statement fixes arbitrary supplied L_i, theta_i, D and cokernel c, with an explicit normalization and inverse; identifying those choices with that diagram is additional work. cokernel.mapIso compares arrows in one category, not these cross-category Hom bijections. Read PartialAdjoint.lean:149-193. No direct match."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A compatible pair of natural Hom bijections between two term presentations induces a natural Hom bijection for their cokernels",
+   "results": "8 hits: CategoryTheory.Limits.cokernel.mapIso_hom, CategoryTheory.Limits.cokernel.mapIso, CategoryTheory.Limits.cokernel.mapIso.congr_simp, CategoryTheory.Limits.cokernel.map, CategoryTheory.Limits.cokernelComparison_map_desc, CategoryTheory.Limits.CokernelCofork.mapIsoOfIsColimit_hom, SemiNormedGrp.explicitCokernel.map, CategoryTheory.Limits.cokernel.map.congr_simp. Digest 07f7d23f24fd669b. ",
+   "date": "2026-10-22",
+   "verdict": "no match: leftAdjointObjIsDefined_colimit (Adjunction/PartialAdjoint.lean:188-193) proves existence of a corepresenter for a colimit. corepresentableByCompCoyonedaObjOfIsColimit (lines 153-178) uses the library-chosen partial adjoint and its diagram colimit. The present statement fixes arbitrary supplied L_i, theta_i, D and cokernel c, with an explicit normalization and inverse; identifying those choices with that diagram is additional work. cokernel.mapIso compares arrows in one category, not these cross-category Hom bijections. Read PartialAdjoint.lean:149-193. No direct match."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Given natural Hom bijections for P1 and P2, the cokernel of the induced map between their corepresenters corepresents Hom from the cokernel of P2 to P1, naturally in the target",
+   "results": "8 hits: CategoryTheory.Limits.cokerIsCokernel, CategoryTheory.Limits.isCokernelOfComp, CategoryTheory.Limits.cokernelIsCokernel, CategoryTheory.Limits.isColimitAux, CategoryTheory.Limits.CokernelCofork.isColimitOfIsColimitOfIff', CategoryTheory.NonPreadditiveAbelian.isColimitσ, CategoryTheory.Limits.CokernelCofork.IsColimit.desc', CategoryTheory.Limits.cokernel.map. Digest 0b43136ae945a301. ",
+   "date": "2026-10-22",
+   "verdict": "no match: leftAdjointObjIsDefined_colimit (Adjunction/PartialAdjoint.lean:188-193) proves existence of a corepresenter for a colimit. corepresentableByCompCoyonedaObjOfIsColimit (lines 153-178) uses the library-chosen partial adjoint and its diagram colimit. The present statement fixes arbitrary supplied L_i, theta_i, D and cokernel c, with an explicit normalization and inverse; identifying those choices with that diagram is additional work. cokernel.mapIso compares arrows in one category, not these cross-category Hom bijections. Read PartialAdjoint.lean:149-193. No direct match."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The cokernel universal property transports compatible corepresentations across a relation map and yields natural target Hom equivalences with an explicit precomposition formula",
+   "results": "8 hits: CategoryTheory.Functor.CorepresentableBy.homEquiv_comp, CategoryTheory.Functor.CorepresentableBy.homEquiv_eq, CategoryTheory.Functor.coreprW_hom_app, CategoryTheory.Functor.CorepresentableBy.homEquiv_symm_comp, CategoryTheory.Functor.CorepresentableBy.ofIsoObj_homEquiv, CategoryTheory.Functor.CorepresentableBy.uniqueUpToIso_hom, CategoryTheory.Functor.CorepresentableBy.homEquiv, CategoryTheory.Functor.coreprW. Digest f9150503584f6ba9. ",
+   "date": "2026-10-22",
+   "verdict": "no match: leftAdjointObjIsDefined_colimit (Adjunction/PartialAdjoint.lean:188-193) proves existence of a corepresenter for a colimit. corepresentableByCompCoyonedaObjOfIsColimit (lines 153-178) uses the library-chosen partial adjoint and its diagram colimit. The present statement fixes arbitrary supplied L_i, theta_i, D and cokernel c, with an explicit normalization and inverse; identifying those choices with that diagram is additional work. cokernel.mapIso compares arrows in one category, not these cross-category Hom bijections. Read PartialAdjoint.lean:149-193. No direct match."
+  },
+  {
+   "tool": "grep",
+   "query": "cokernel.*[Ee]quiv|[Ee]quiv.*cokernel|corepresentableByCompCoyonedaObjOfIsColimit",
+   "results": "17 hits: Mathlib/CategoryTheory/ObjectProperty/Kernels.lean, Mathlib/CategoryTheory/Adjunction/PartialAdjoint.lean, Mathlib/CategoryTheory/Adjunction/PartialAdjoint.lean, Mathlib/CategoryTheory/Preadditive/LeftExact.lean, Mathlib/CategoryTheory/Abelian/Subcategory.lean, Mathlib/CategoryTheory/Abelian/SerreClass/Localization.lean, Mathlib/CategoryTheory/Abelian/SerreClass/Localization.lean, Mathlib/CategoryTheory/Abelian/SerreClass/Localization.lean. Digest a2a8407dffefa4e8. ",
+   "date": "2026-10-23",
+   "verdict": "no match: The full chosen-presentation statement is not a one-line specialization of these declarations. Cokernel operations and equalizer comparison isomorphisms do not supply the given cross-category theta_i and normalization; PartialAdjoint.lean:154-178 constructs a corepresentation from the chosen partial-adjoint diagram, requiring additional identification with the supplied L_i, D and theta_i.",
+   "subdirectory": "CategoryTheory"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Natural Hom bijections for two generators descend to their cokernels by the cokernel universal property",
+   "results": "8 hits: CategoryTheory.Limits.cokernel.π_desc_apply, CategoryTheory.Limits.cokernel.π_desc, CategoryTheory.Limits.cokernel.desc', CategoryTheory.Limits.cokernel.map, CategoryTheory.Limits.cokernel.desc, AddCommGrpCat.cokernelIsColimit, ModuleCat.cokernelIsColimit, CategoryTheory.Limits.coker.π. Digest 05d89b8b7f6819da. ",
+   "date": "2026-10-23",
+   "verdict": "no match: The full chosen-presentation statement is not a one-line specialization of these declarations. Cokernel operations and equalizer comparison isomorphisms do not supply the given cross-category theta_i and normalization; PartialAdjoint.lean:154-178 constructs a corepresentation from the chosen partial-adjoint diagram, requiring additional identification with the supplied L_i, D and theta_i."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Limits.CokernelCofork.IsColimit",
+   "results": "0 hits: . Digest 4f53cda18c2baa0c. loogle: unknown identifier 'CategoryTheory.Limits.CokernelCofork.IsColimit'",
+   "date": "2026-10-23",
+   "verdict": "no match: Loogle did not recognize this namespace as a declaration identifier; no absence conclusion is drawn from this query alone."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Compatible natural Hom bijections induce natural Hom bijections on cokernels with explicit factorization formula",
+   "results": "8 hits: CategoryTheory.Limits.cokernel.mapIso_hom, CategoryTheory.Limits.cokernel.map_desc, CategoryTheory.Limits.cokernel_map_comp_cokernelComparison, CategoryTheory.Limits.cokernel.mapIso, CategoryTheory.Limits.π_comp_cokernelComparison, CategoryTheory.Limits.cokernelComparison_map_desc, CategoryTheory.Limits.cokernel.map, CategoryTheory.Limits.cokernel.mapIso_inv. Digest 23b9b44944c553b3. ",
+   "date": "2026-10-23",
+   "verdict": "no match: The full chosen-presentation statement is not a one-line specialization of these declarations. Cokernel operations and equalizer comparison isomorphisms do not supply the given cross-category theta_i and normalization; PartialAdjoint.lean:154-178 constructs a corepresentation from the chosen partial-adjoint diagram, requiring additional identification with the supplied L_i, D and theta_i."
+  },
+  {
+   "tool": "grep",
+   "query": "def corepresentableByCompCoyonedaObjOfIsColimit|def desc|theorem hom_ext|theorem desc_π",
+   "results": "1 hits: 154. Digest afa96fad23233612. ",
+   "date": "2026-10-23",
+   "verdict": "no match: The full chosen-presentation statement is not a one-line specialization of these declarations. Cokernel operations and equalizer comparison isomorphisms do not supply the given cross-category theta_i and normalization; PartialAdjoint.lean:154-178 constructs a corepresentation from the chosen partial-adjoint diagram, requiring additional identification with the supplied L_i, D and theta_i.",
+   "subdirectory": "CategoryTheory/Adjunction/PartialAdjoint.lean"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A natural isomorphism between two Hom functors compatible with parallel arrows restricts to an equivalence between their equalizers",
+   "results": "8 hits: CategoryTheory.Limits.PreservesEqualizer.iso_hom, CategoryTheory.Limits.instIsIsoEqualizerComparison, CategoryTheory.Limits.diagramIsoParallelPair_hom_app, CategoryTheory.Limits.PreservesEqualizer.iso_inv_ι, CategoryTheory.Limits.diagramIsoParallelFamily_hom_app, CategoryTheory.Limits.parallelPairIsoMk_hom_app, CategoryTheory.Limits.parallelPairIsoMk, CategoryTheory.Limits.parallelPair.ext. Digest 43c21f0fc47337d0. ",
+   "date": "2026-10-23",
+   "verdict": "no match: The full chosen-presentation statement is not a one-line specialization of these declarations. Cokernel operations and equalizer comparison isomorphisms do not supply the given cross-category theta_i and normalization; PartialAdjoint.lean:154-178 constructs a corepresentation from the chosen partial-adjoint diagram, requiring additional identification with the supplied L_i, D and theta_i."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-partially-defined-module-adjoint",
+  "date": "2026-10-22",
+  "group": "Q102"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Proof (1)--(2), semistable-alteration input in the nearby-cycle branch: ILO Exposé X, Theorem 3.4, Step 3, invoking Temkin 2010, Theorems 1.5 and 1.1 for a semistable multipointed modification. Temkin proof component: Marked dualizing line bundle and contracted-component degrees. Auxiliary input: Local complete-intersection determinant adjunction underlying the marked dualizing construction, before the marking is inserted. Supporting ring/sheaf input: Transitivity triangle for ring cotangent complexes. Proof of the supporting transitivity triangle: polynomial differential sequence, derived category homology comparisons, and identification of functoriality maps. Generic homological input to the category bar resolution: Unbounded derived lower shriek for continuous and cocontinuous site functors. Supporting input: The ordinary module lower-shriek adjoint is constructed from its values on free sheaf generators, before deriving it. Re-split of Tag 0793: last paragraph, three displayed Hom identifications and their functoriality in the target.",
+   "via": [
+    "lem-trf-partially-defined-module-adjoint",
+    "lem-trf-continuous-cocontinuous-derived-shriek",
+    "lem-trf-derived-colimit-bar",
+    "lem-trf-cotangent-transitivity-triangle",
+    "lem-trf-lci-cotangent-presentation",
+    "lem-trf-flat-lci-canonical-adjunction",
+    "lem-trf-marked-nodal-dualizing-degrees",
+    "lem-trf-temkin-stable-modification",
+    "lem-trf-stable-modification-flat-curve-pair",
+    "lem-trf-dejong-relative-marked-semistable",
+    "lem-trf-relative-marked-nodal-reduction",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-trf-cokernel-corepresenting-bijection",
+  "worker": "stage1",
+  "summary": "Expanded Tag 0793 final Hom identifications into forward and inverse cokernel factorizations, both inverse identities, naturality and uniqueness. Reused the existing Mathlib colimit definition for the cokernel universal property. All steps are elementary explicit calculations under the given hypotheses; no new nodes, no statement change. Checked project attachment searches, whole-DAG and blueprint searches, and two Mathlib semantic phrasings.",
+  "blueprint": "Auxiliary homological input in the inherited ancestry from lem-trf-local-term-locality, proof (1)--(2), normal-cone/specialization route: the ordinary module lower-shriek adjoint preceding its derivation. This split realizes precisely the Tag 0793 final-paragraph Hom identifications named in blueprint.from.place, without changing any chapter or unit route. The current latest blueprint ancestor proof was read; it does not itself state this elementary categorical auxiliary.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q115-043136349",
+  "group": "Q115",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q115-043136349 (reviewer sub-agent of L); spot-checked: PASS with no changes and no fixes; review.md is written. The item is unchanged, has no new nodes and has no repair note in coord. Source: Stacks homology.tex lemma-partially-defined-adjoint, label at line 7388, tags/tags maps it to 0793; I read proof lines 7403-7454. The final-paragraph Hom identifications match the item, with θ_i as the Yoneda bijections and D as v(d). Pointed-set zero preservation replaces Stacks' implicit additivity; this is not a weakening. The parent lem-trf-partially-defined-module-adjoint applies the item with exactly these hypotheses and conclusion. Cited nodes: def-sp-abelian makes cokernel the Mathlib colimit of the parallel pair (f,0). def-weil-pbc-category-colimit gives existence and uniqueness of factorization over the small walking parallel pair, where a cocone is a map killing d or D. Step 1: θ1(vc)d = θ2(vcD) = θ2(0) = 0, then factor through q. Step 2: θ2(aD) = bqd = 0 = θ2(0), injectivity gives aD = 0, then factor through c. Step 3: both composites are identities by uniqueness through c and through q. Step 4: naturality of θ1 plus uniqueness through q gives naturality and uniqueness of the family. All four steps are correctly marked elementary, and proof_deps equals the union of the uses. R is not assumed additive and nothing uses additivity; θ1(0)=0 is never needed. Cases checked: d=D=0; d=D=1 with zero cokernels; R=0; non-chosen cokernels. No duplicate found by rg -L corepresent over the DAG. The Mathlib PartialAdjoint declarations do not take the supplied θ_i and D, so this is not a one-line leaf. No SGA source is used."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.CokernelCorepresentingBijection",
+  "declaration": "CategoryTheory.exists_cokernel_corepresenting_bijection",
+  "file": "lean/Sheaf/CategoryTheory/CokernelCorepresentingBijection.lean",
+  "statement": "theorem exists_cokernel_corepresenting_bijection {A : Type u₁} [Category.{v₁} A] [Abelian A] {𝓑 : Type u₂} [Category.{v₂} 𝓑] [Abelian 𝓑] (R : A ⥤ 𝓑) {P₂ P₁ B : 𝓑} (d : P₂ ⟶ P₁) (q : P₁ ⟶ B) (hdq : d ≫ q = 0) (hq : IsColimit (CokernelCofork.ofπ q hdq)) (L₁ L₂ : A) (θ₁ : ∀ X : A, (L₁ ⟶ X) ≃ (P₁ ⟶ R.obj X)) (θ₂ : ∀ X : A, (L₂ ⟶ X) ≃ (P₂ ⟶ R.obj X)) (hθ₁ : ∀ (X X' : A) (u : X ⟶ X') (a : L₁ ⟶ X), θ₁ X' (a ≫ u) = θ₁ X a ≫ R.map u) (hθ₂ : ∀ (X X' : A) (u : X ⟶ X') (a : L₂ ⟶ X), θ₂ X' (a ≫ u) = θ₂ X a ≫ R.map u) (hθ₁_zero : ∀ X : A, θ₁ X 0 = 0) (hθ₂_zero : ∀ X : A, θ₂ X 0 = 0) (D : L₂ ⟶ L₁) (hD : ∀ (X : A) (a : L₁ ⟶ X), θ₂ X (D ≫ a) = d ≫ θ₁ X a) {C : A} (c : L₁ ⟶ C) (hDc : D ≫ c = 0) (hc : IsColimit (CokernelCofork.ofπ c hDc)) : ∃ ψ : ∀ X : A, (C ⟶ X) ≃ (B ⟶ R.obj X), (∀ (X : A) (v : C ⟶ X), q ≫ ψ X v = θ₁ X (c ≫ v)) ∧ (∀ ψ' : ∀ X : A, (C ⟶ X) ≃ (B ⟶ R.obj X), (∀ (X : A) (v : C ⟶ X), q ≫ ψ' X v = θ₁ X (c ≫ v)) → ψ' = ψ) ∧ (∀ (X : A) (b : B ⟶ R.obj X), c ≫ (ψ X).symm b = (θ₁ X).symm (q ≫ b) ∧ ∀ v : C ⟶ X, c ≫ v = (θ₁ X).symm (q ≫ b) → v = (ψ X).symm b) ∧ (∀ (X X' : A) (u : X ⟶ X') (v : C ⟶ X), ψ X' (v ≫ u) = ψ X v ≫ R.map u)",
+  "branch": "newtargets-dag",
+  "by": "NN",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-ca4fc70e9",
+  "group": "NN",
+  "result": "pass",
+  "note": "Lean theorem exists_cokernel_corepresenting_bijection matches node clause by clause (abelian A,B; arbitrary R; IsColimit cokernel forks for q and c, not chosen cokernels; natural Equiv families θ1, θ2 with both zero-preservations; hD = θ2(a∘D)=θ1(a)∘d; ∃ψ with characterization q≫ψ=θ1(c≫v), uniqueness over all families with that characterization, inverse factorization with uniqueness, naturality). Matches Stacks 0793 homology.tex 7387-7454 final paragraph. lean.statement verbatim in file; only lean field changed vs live; no name clash or parallel landing; Mathlib PartialAdjoint is not an exact match; sorry-only, docstrings with source and blueprint, no definitions, all variables bound. Edge cases d=0, identities, R=0, cross-universe Equiv fine. No compile needed (no file changed)."
+ }
+}

@@ -1,0 +1,120 @@
+{
+ "id": "lem-pur-system-restriction-mate-coherence",
+ "kind": "statement",
+ "title": "Restriction mates preserve scalar evaluation and strict transitions",
+ "statement": "For two compatible geometric inverse images of varying and constant ring systems [lem-pur-system-singleton-geometric-pullback], normalized ordinary level scalar and transition squares extend to a whole-system square. Their derived right mates are invertible and satisfy the scalar evaluation cube and actual derived strict transition identity. These are identities of exact evaluation mates, without using any singleton comparison or requiring preservation of K-injectives by restriction.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 03D2, 03DA, 07A6 and 0D6E; normalized adjunction and coefficient comparison argument."
+ },
+ "stmt_deps": [
+  "lem-pur-system-singleton-geometric-pullback",
+  "lem-pur-inverse-image-scalar-restriction-comparison",
+  "lem-pur-system-ringed-sequence-site",
+  "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
+  "lem-weil-pbc-mate-pasting",
+  "def-pur-system-evaluation-normalization-data"
+ ],
+ "proof": [
+  {
+   "text": "For each level, the identity between underlying inverse-image sheaves is linear\nby the compatible ring square; transport it through the specified underlying module\nisomorphisms. The same construction level by level respects strict transitions because\nthe transition equation of each geometric inverse image identifies both paths with the\ninverse image of the original transition. This constructs d. On the sequence sites and\non each level site, scalar restriction is the direct image of the identity-topos\ncoefficient morphism. The two factorizations of the common ringed morphism give the\ninvertible derived comparisons by derived pushforward composition, including for\nnonflat coefficient maps. Their unit equations, or equivalently the counit transpose,\nidentify them with the derived mates of d. Localize d.scalarEvaluation and the ordinary\ntransition square using exact-functor localization. Taking the four mates of the scalar\ncube gives the scalar identity. Transpose the transition identity under the level\nadjunction: mate/counit equations replace the two evaluation mates by evaluated\ncounits, naturality moves the transition across the counit, and the localized ordinary\ntransition square identifies the results. Finally cancel the invertible restriction\nmate to obtain the displayed restriction-form transition identity.",
+   "uses": [
+    "lem-pur-system-singleton-geometric-pullback",
+    "lem-pur-inverse-image-scalar-restriction-comparison",
+    "lem-pur-system-ringed-sequence-site",
+    "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
+    "lem-weil-pbc-mate-pasting"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-pur-system-singleton-geometric-pullback",
+  "lem-pur-inverse-image-scalar-restriction-comparison",
+  "lem-pur-system-ringed-sequence-site",
+  "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
+  "lem-weil-pbc-mate-pasting"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Adjunction transposition and derived composition; explicit argument in Lean docstring."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Restriction of scalars commutes with algebraic inverse image of sheaves of modules",
+   "results": "restrictScalars_obj_val and restrictScalars_map_val describe restriction; no general inverse-image comparison.",
+   "date": "2026-10-25",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "mateEquiv_counit",
+   "results": "Unknown identifier in search index. Local Mathlib adjunction mates supply counit identities.",
+   "date": "2026-10-25",
+   "verdict": "local generic tool used"
+  },
+  {
+   "tool": "grep",
+   "query": "derived_mate_factorsh",
+   "results": "msearch index no match; rg locates derivedExact_mateEquiv_app_fac and library private normalization helpers.",
+   "date": "2026-10-25",
+   "verdict": "generic resolution normalization available; no whole item duplicate"
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.CategoryTheory.SystemEvaluationScalarRestrictionNormalization",
+  "date": "2026-10-25",
+  "group": "F8"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-pur-rational-and-qbar-purity",
+   "via": [
+    "lem-pur-system-evaluation-scalar-restriction-normalization",
+    "lem-pur-quotient-diagram-projection-evaluation",
+    "lem-pur-compact-support-completed-projection-coherence",
+    "lem-pur-compact-support-integral-coefficient-comparison",
+    "lem-pur-adic-purity-scalar-naturality"
+   ],
+   "place": "Proof Step 2 of thm-pur-rational-and-qbar-purity: independence of finite coefficient extension; sk-thm-sf-compatibility clause (7). Extracted from quotient-diagram-projection-evaluation, old proof steps 3–4 and 9, actual evaluated counit, restriction/direct-image normalization and lower-level transitions.; this auxiliary supplies Restriction mates preserve scalar evaluation and strict transitions."
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-thm-sf-compatibility",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.SystemRestrictionMateCoherence",
+  "file": "lean/Sheaf/CategoryTheory/SystemRestrictionMateCoherence.lean",
+  "declaration": "SheafOfModules.systemRestrictionMateCoherence",
+  "statement": "theorem systemRestrictionMateCoherence\n    (htransition : ∀ {n m : ℕ} (h : n ≤ m),\n      uTop.inverse.map ((sheafCompose J (CategoryTheory.forget CommRingCat.{w})).map\n          (BY.map (homOfLE h).op)) ≫ (IB n).ringUnderlying.hom =\n        (IB m).ringUnderlying.hom ≫\n          (sheafCompose K (CategoryTheory.forget CommRingCat.{w})).map\n            (BX.map (homOfLE h).op))\n    (halgebra : ∀ n : ℕ,\n      uTop.inverse.map ((sheafCompose J (CategoryTheory.forget CommRingCat.{w})).map\n          (aY.app (op n))) ≫ (IB n).ringUnderlying.hom =\n        IA.ringUnderlying.hom ≫\n          (sheafCompose K (CategoryTheory.forget CommRingCat.{w})).map (aX.app (op n)))\n    (level : ∀ n : ℕ,\n    FB.levelFunctor n ⋙ singletonLevelRestriction aX n ≅\n      singletonLevelRestriction aY n ⋙ FA.levelFunctor 0)\n    (levelUnderlying : ∀ (n : ℕ) (M : systemLevel BY n),\n    (systemGeometricUnderlying ((Functor.const ℕᵒᵖ).obj AX) 0).map\n          ((level n).hom.app M) ≫\n        IA.moduleUnderlying.hom.app ((singletonLevelRestriction aY n).obj M) =\n      (IB n).moduleUnderlying.hom.app M)\n    (restriction : ∀ {n m : ℕ} (h : n ≤ m),\n    FB.levelFunctor n ⋙ systemRestriction BX h ≅\n      systemRestriction BY h ⋙ FB.levelFunctor m)\n    (restrictionUnderlying : ∀ {n m : ℕ} (h : n ≤ m) (M : systemLevel BY n),\n    (systemGeometricUnderlying BX m).map ((restriction h).hom.app M) ≫\n        (IB m).moduleUnderlying.hom.app ((systemRestriction BY h).obj M) =\n      (IB n).moduleUnderlying.hom.app M) :\n    ∃ d : SystemNormalizationSquares AY AX BY BX aY aX uTop IA IB FB FA,\n      d.level = level ∧ @d.restriction = @restriction ∧\n      IsIso (CategoryTheory.SystemEvaluationNormalization.derivedMate adjB adjA d.scalar) ∧\n      (∀ n : ℕ, IsIso (CategoryTheory.SystemEvaluationNormalization.derivedMate\n        (adjn n) adj0 (d.level n))) ∧\n      (∀ {n m : ℕ} (h : n ≤ m),\n        IsIso (CategoryTheory.SystemEvaluationNormalization.derivedMate\n          (adjn n) (adjn m) (d.restriction h))) ∧\n      (∀ (n : ℕ) (Z : DerivedCategory (StrictRingSystem BX)),\n        (singletonLevelRestriction aY n).mapDerivedCategory.map\n            ((SystemEvaluationNormalization.derivedMate adjB (adjn n) (FB.evaluation n)).app Z) ≫\n          (SystemEvaluationNormalization.derivedMate (adjn n) adj0 (d.level n)).app\n            ((derivedSystemEvaluation BX n).obj Z) =\n        (systemNormalizationDerivedRestrictionEvaluation aY n).inv.app\n            (HB.rightDerivedFunctor.obj Z) ≫\n          (derivedSystemEvaluation ((Functor.const ℕᵒᵖ).obj AY) n).map\n            ((SystemEvaluationNormalization.derivedMate adjB adjA d.scalar).app Z) ≫\n          (CategoryTheory.SystemEvaluationNormalization.derivedMate adjA adj0 (FA.evaluation n)).app\n              ((systemNormalizationRestriction aX).mapDerivedCategory.obj Z) ≫\n          H0.rightDerivedFunctor.map\n            ((systemNormalizationDerivedRestrictionEvaluation aX n).hom.app Z)) ∧\n      (∀ {n m : ℕ} (h : n ≤ m) (Z : DerivedCategory (StrictRingSystem BX)),\n        (systemDerivedTransition BY h).app (HB.rightDerivedFunctor.obj Z) ≫\n            (systemRestriction BY h).mapDerivedCategory.map\n              ((SystemEvaluationNormalization.derivedMate adjB (adjn n)\n                (FB.evaluation n)).app Z) ≫\n            (SystemEvaluationNormalization.derivedMate (adjn n) (adjn m)\n              (d.restriction h)).app\n            ((derivedSystemEvaluation BX n).obj Z) =\n          (SystemEvaluationNormalization.derivedMate adjB (adjn m) (FB.evaluation m)).app Z ≫\n            (Hn m).rightDerivedFunctor.map ((systemDerivedTransition BX h).app Z))",
+  "branch": "sheaf-dag",
+  "by": "F8",
+  "date": "2026-10-25"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-2c595",
+  "group": "F8",
+  "result": "pass",
+  "landing": "20261025T143323-L-980706",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-2c595",
+  "group": "F8",
+  "result": "pass",
+  "landing": "20261025T143323-L-980706",
+  "kind": "interface",
+  "note": "independent cc review: item stmt + 12 moved decls byte-identical to live clone; new sorried statements read against SystemGeometricInverseImageData/SystemSingletonGeometricComparisons; 5 direct importers of the adapted SystemSingleDerivedExtension compiled against the delivered module"
+ }
+}

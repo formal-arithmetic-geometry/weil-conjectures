@@ -1,0 +1,252 @@
+{
+ "id": "lem-trf-power-series-coefficient-extension-surjection",
+ "kind": "statement",
+ "title": "Surjective coefficient-extension map for a complete local power-series presentation",
+ "statement": "Let $F,K$ be fields and $\\iota:F\\hookrightarrow K$ a field embedding. Let $(R,\\mathfrak m_R)$ and $(C,\\mathfrak m_C)$ be nonzero commutative Noetherian local rings [def-weil-pbc-noetherian-ring], complete and separated for their maximal-ideal-adic topologies [def-weil-pbc-adically-complete-ring]. Fix residue-field identifications $R/\\mathfrak m_R=F$, $C/\\mathfrak m_C=K$ and ring sections $\\sigma:F\\to R$, $\\tau:K\\to C$ of the residue maps. Let $h:R\\to C$ be a continuous local ring homomorphism, meaning $h(\\mathfrak m_R)\\subseteq\\mathfrak m_C$, with $\\mathfrak m_RC=\\mathfrak m_C$ and $h\\sigma=\\tau\\iota$. For integers $n,s\\geq0$, fix a continuous surjective $F$-algebra map $\\phi:F[[t_1,\\ldots,t_n]]\\to R$ for the action $\\sigma$, with kernel $I=(f_1,\\ldots,f_s)\\subseteq(t_1,\\ldots,t_n)$ [def-weil-pbc-multivariate-power-series]. Let $j:F[[t_1,\\ldots,t_n]]\\to K[[t_1,\\ldots,t_n]]$ apply $\\iota$ to every coefficient, put $I_K=(j(f_1),\\ldots,j(f_s))$ and $T=K[[t_1,\\ldots,t_n]]/I_K$, and write $\\pi:K[[t_1,\\ldots,t_n]]\\to T$ for the quotient map. There is a continuous surjective $K$-algebra map $\\Psi:K[[t_1,\\ldots,t_n]]\\to C$ satisfying $\\Psi(t_i)=h(\\phi(t_i))$ and $\\Psi\\circ j=h\\circ\\phi$. It annihilates $I_K$ and induces a surjective $K$-algebra map $\\theta:T\\to C$ with $\\theta\\pi=\\Psi$. The ring $T$ is Noetherian local with maximal ideal $\\mathfrak m_T=(\\pi(t_1),\\ldots,\\pi(t_n))$ and residue field $K$. There is a local map $\\alpha:R\\to T$ uniquely specified by $\\alpha\\phi=\\pi j$, and $\\theta\\alpha=h$. One has $\\mathfrak m_RT=\\mathfrak m_T$; under the residue identifications $T/\\mathfrak m_RT=K=C/\\mathfrak m_RC$, the reduction of $\\theta$ is the identity of $K$.",
+ "source": {
+  "document": "literature/stacks-project/varieties.tex",
+  "place": "Tag 0C54 (lemma-base-change-complete-local-ring), variable generation, power-series map, surjectivity, transported relations and commutative quotient square; abstracted to compatible complete local rings."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-noetherian-ring",
+  "def-weil-pbc-adically-complete-ring",
+  "def-weil-pbc-multivariate-power-series"
+ ],
+ "proof": [
+  {
+   "text": "Put $P_F=F[[t_1,\\ldots,t_n]]$, $P_K=K[[t_1,\\ldots,t_n]]$ and $\\mathfrak a_L=(t_1,\\ldots,t_n)\\subset P_L$. By [lem-weil-pbc-power-series-local-ring], $P_F$ is local and its maximal ideal consists of series with zero constant coefficient; [lem-weil-pbc-power-series-combined-ideal-coefficients] with base ideal zero and exponent $1$ identifies this ideal with $\\mathfrak a_F$. Since $\\phi$ is surjective, $\\phi^{-1}(\\mathfrak m_R)$ is maximal, hence equals $\\mathfrak a_F$. Thus $\\phi(\\mathfrak a_F)=\\mathfrak m_R$ and the elements $b_i=h(\\phi(t_i))$ generate $\\mathfrak m_RC=\\mathfrak m_C$.",
+   "uses": [
+    "lem-weil-pbc-power-series-local-ring",
+    "lem-weil-pbc-power-series-combined-ideal-coefficients"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 0C54 (lemma-base-change-complete-local-ring), proof: variable generation, power-series surjection and commutative quotient square."
+   }
+  },
+  {
+   "text": "Apply [lem-trf-coefficient-field-generator-presentation] with field $K$, ring $C$, its given residue identification and section $\\tau$, and generators $b_i$. Its hypotheses hold by Step 1 and completeness and Noetherianity of $C$. It supplies a continuous surjective $K$-algebra map $\\Psi:P_K\\to C$ with $\\Psi(t_i)=b_i$.",
+   "uses": [
+    "lem-trf-coefficient-field-generator-presentation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 0C54 (lemma-base-change-complete-local-ring), proof: variable generation, power-series surjection and commutative quotient square."
+   }
+  },
+  {
+   "text": "The coefficientwise map $j$ is a ring map by the finite Cauchy product formula of [def-weil-pbc-multivariate-power-series]. It takes $\\mathfrak a_F^N$ into $\\mathfrak a_K^N$, so it is continuous. The continuous maps $\\Psi j$ and $h\\phi$ agree on variables and on constants, since $h\\sigma=\\tau\\iota$. Apply the uniqueness assertion of [lem-weil-pbc-power-series-adic-evaluation] with coefficient ring $F$, target $C$, ideal $\\mathfrak m_C$, coefficient map $\\tau\\iota$ and variables $b_i$. It gives $\\Psi j=h\\phi$ on all series.",
+   "uses": [
+    "def-weil-pbc-multivariate-power-series",
+    "lem-weil-pbc-power-series-adic-evaluation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 0C54 (lemma-base-change-complete-local-ring), proof: variable generation, power-series surjection and commutative quotient square."
+   }
+  },
+  {
+   "text": "For each relation, $\\Psi(j(f_a))=h(\\phi(f_a))=0$. Hence $I_K\\subseteq\\ker\\Psi$. Define $\\theta(\\pi(g))=\\Psi(g)$; this is well-defined, is a $K$-algebra map, and is surjective because $\\Psi$ is. Also $I\\subseteq\\ker(\\pi j)$: every $f_a$ maps to zero and these generate $I$. Define $\\alpha(\\phi(g))=\\pi(j(g))$. Equality of two representatives differs by $I$, proving well-definedness, and surjectivity of $\\phi$ proves uniqueness and $\\theta\\alpha=h$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 0C54 (lemma-base-change-complete-local-ring), proof: variable generation, power-series surjection and commutative quotient square."
+   }
+  },
+  {
+   "text": "By [lem-weil-pbc-power-series-noetherian], $P_K$ is Noetherian. Every ideal of $T$ is generated by the images of generators of its inverse image in $P_K$, so $T$ is Noetherian. Each $j(f_a)$ has constant coefficient zero, so $I_K\\subseteq\\mathfrak a_K$. The constant coefficient map therefore descends to a surjection $T\\to K$ with kernel $\\pi(\\mathfrak a_K)$, using [lem-weil-pbc-power-series-combined-ideal-coefficients] with base ideal zero and exponent $1$. A class outside this kernel has a representative with nonzero constant coefficient, which is a unit by [lem-weil-pbc-power-series-local-ring]; its class is a unit. Thus the kernel is the unique maximal ideal $\\mathfrak m_T=(\\pi(t_1),\\ldots,\\pi(t_n))$, and $T/\\mathfrak m_T=K$.",
+   "uses": [
+    "lem-weil-pbc-power-series-noetherian",
+    "lem-weil-pbc-power-series-combined-ideal-coefficients",
+    "lem-weil-pbc-power-series-local-ring"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 0C54 (lemma-base-change-complete-local-ring), proof: variable generation, power-series surjection and commutative quotient square."
+   }
+  },
+  {
+   "text": "Step 1 shows that $\\mathfrak m_R$ is generated by $\\phi(t_i)$, whose images under $\\alpha$ are $\\pi(t_i)$. Consequently $\\alpha(\\mathfrak m_R)\\subseteq\\mathfrak m_T$ and $\\mathfrak m_RT=\\mathfrak m_T$. Thus $\\alpha$ is local. Since $\\theta(\\pi(t_i))=b_i\\in\\mathfrak m_C$, $\\theta$ descends modulo these maximal ideals. For each $c\\in K$, the constant class $\\pi(c)$ represents $c$ in $T/\\mathfrak m_RT$ and $\\theta(\\pi(c))=\\tau(c)$ represents the same $c$ in $C/\\mathfrak m_RC$. Every residue class has such a representative, so the reduced map is $\\operatorname{id}_K$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 0C54 (lemma-base-change-complete-local-ring), proof: variable generation, power-series surjection and commutative quotient square."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-power-series-local-ring",
+  "lem-weil-pbc-power-series-combined-ideal-coefficients",
+  "lem-trf-coefficient-field-generator-presentation",
+  "def-weil-pbc-multivariate-power-series",
+  "lem-weil-pbc-power-series-adic-evaluation",
+  "lem-weil-pbc-power-series-noetherian"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/varieties.tex",
+  "place": "Tag 0C54 (lemma-base-change-complete-local-ring), proof: variable generation, power-series surjection and commutative quotient square."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "surjective|eval₂|aeval|constantCoeff [RingTheory/MvPowerSeries]",
+   "results": "{\"t\": \"2026-10-22T06:04:29Z\", \"tool\": \"grep\", \"query\": \"surjective|eval₂|aeval|constantCoeff\", \"sub\": \"RingTheory/MvPowerSeries\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/MvPowerSeries/Rename.lean\", \"Mathlib/RingTheory/MvPowerSeries/Rename.lean\", \"Mathlib/RingTheory/MvPowerSeries/Rename.lean\", \"Mathlib/RingTheory/MvPowerSeries/GaussNorm.lean\", \"Mathlib/RingTheory/MvPowerSeries/Derivative.lean\", \"Mathlib/RingTheory/MvPowerSeries/Derivative.lean\", \"Mathlib/RingTheory/MvPowerSeries/Derivative.lean\", \"Mathlib/RingTheory/MvPowerSeries/LinearTopology.lean\"], \"digest\": \"1fdd14ee9c604b7e\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: evaluation, coefficientwise map surjectivity and complete-source surjectivity do not state the comparison with a chosen presentation, transported relations and local quotient"
+  },
+  {
+   "tool": "leansearch",
+   "query": "coefficient extension of multivariate formal power series quotient surjects onto complete local ring",
+   "results": "{\"t\": \"2026-10-22T06:04:30Z\", \"tool\": \"leansearch\", \"query\": \"coefficient extension of multivariate formal power series quotient surjects onto complete local ring\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"MvPowerSeries.coeff\", \"PowerSeries.constantCoeff_surj\", \"PowerSeries.map_surjective\", \"PowerSeries.ker_coeff_eq_max_ideal\", \"MvPolynomial.coe_def\", \"MvPolynomial.map_surjective\", \"PowerSeries.IsWeierstrassDivisorAt.isUnit_shift\", \"MvPolynomial.coeToMvPowerSeries.algHom\"], \"digest\": \"523d65c936812604\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: evaluation, coefficientwise map surjectivity and complete-source surjectivity do not state the comparison with a chosen presentation, transported relations and local quotient"
+  },
+  {
+   "tool": "loogle",
+   "query": "MvPowerSeries, Function.Surjective",
+   "results": "{\"t\": \"2026-10-22T06:04:30Z\", \"tool\": \"loogle\", \"query\": \"MvPowerSeries, Function.Surjective\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"MvPowerSeries.C_surjective\"], \"digest\": \"7ec2fd5cc6ef8166\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: evaluation, coefficientwise map surjectivity and complete-source surjectivity do not state the comparison with a chosen presentation, transported relations and local quotient"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Surjective formal power series presentation extends along a local map of complete local rings and a field embedding when the maximal ideal extends to the target maximal ideal",
+   "results": "{\"t\": \"2026-10-22T06:04:40Z\", \"tool\": \"leanfinder\", \"query\": \"Surjective formal power series presentation extends along a local map of complete local rings and a field embedding when the maximal ideal extends to the target maximal ideal\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"PowerSeries.map_surjective\", \"IsLocalization.surjective_piRingHom_algebraMap_comp_piEvalRingHom\", \"AdicCompletion.evalOneₐ_surjective\", \"surjective_of_mk_map_comp_surjective\", \"surjective_of_isLocalization_of_span_eq_top\", \"AdicCompletion.surjective_evalₐ\", \"IsLocalization.Away.map_surjective_iff\", \"RingHom.surjective_ofLocalizationSpan\"], \"digest\": \"d949ba2d2d411ddb\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: evaluation, coefficientwise map surjectivity and complete-source surjectivity do not state the comparison with a chosen presentation, transported relations and local quotient"
+  },
+  {
+   "tool": "grep",
+   "query": "surjective|eval₂|aeval [RingTheory/MvPowerSeries/Evaluation.lean]",
+   "results": "{\"t\": \"2026-10-22T06:04:53Z\", \"tool\": \"grep\", \"query\": \"surjective|eval₂|aeval\", \"sub\": \"RingTheory/MvPowerSeries/Evaluation.lean\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"26\", \"37\", \"38\", \"39\", \"40\"], \"digest\": \"d2b430eefee9f7cf\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: evaluation, coefficientwise map surjectivity and complete-source surjectivity do not state the comparison with a chosen presentation, transported relations and local quotient"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A continuous map from a formal power series ring to a complete local ring is surjective if it induces an isomorphism on residue fields and its variables generate the maximal ideal; compatible change of coefficient fields and relations",
+   "results": "{\"t\": \"2026-10-22T06:05:04Z\", \"tool\": \"leanfinder\", \"query\": \"A continuous map from a formal power series ring to a complete local ring is surjective if it induces an isomorphism on residue fields and its variables generate the maximal ideal; compatible change of coefficient fields and relations\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AdicCompletion.evalOneₐ_surjective\", \"AdicCompletion.surjective_evalₐ\", \"surjective_of_mk_map_comp_surjective\", \"Ideal.algebraMap_residueField_surjective\", \"Ideal.surjectiveOnStalks_residueField\", \"IsLocalRing.residue_surjective\", \"AdicCompletion.kerProj_surjective\", \"AlgebraicGeometry.Scheme.residue_surjective\"], \"digest\": \"62ae45b5e9b9eb36\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: evaluation, coefficientwise map surjectivity and complete-source surjectivity do not state the comparison with a chosen presentation, transported relations and local quotient"
+  },
+  {
+   "tool": "grep",
+   "query": "surjective|eval₂|aeval [RingTheory/MvPowerSeries]",
+   "results": "{\"t\": \"2026-10-23T04:18:25Z\", \"tool\": \"grep\", \"query\": \"surjective|eval₂|aeval\", \"sub\": \"RingTheory/MvPowerSeries\", \"ok\": true, \"n_hits\": 13, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/MvPowerSeries/Substitution.lean\", \"Mathlib/RingTheory/MvPowerSeries/Substitution.lean\", \"Mathlib/RingTheory/MvPowerSeries/Substitution.lean\", \"Mathlib/RingTheory/MvPowerSeries/Substitution.lean\", \"Mathlib/RingTheory/MvPowerSeries/Substitution.lean\", \"Mathlib/RingTheory/MvPowerSeries/Expand.lean\", \"Mathlib/RingTheory/MvPowerSeries/Expand.lean\", \"Mathlib/RingTheory/MvPowerSeries/Evaluation.lean\"], \"digest\": \"c9be94656c84b3cf\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: returned declarations cover evaluation, coefficient maps, Weierstrass preparation or residue fields, not the compatible coefficient-extension presentation and quotient square"
+  },
+  {
+   "tool": "leansearch",
+   "query": "extension of coefficients in a formal power series presentation of a complete local ring gives a compatible surjection",
+   "results": "{\"t\": \"2026-10-23T04:18:25Z\", \"tool\": \"leansearch\", \"query\": \"extension of coefficients in a formal power series presentation of a complete local ring gives a compatible surjection\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"PowerSeries.map_surjective\", \"PowerSeries.coeff_toSubring\", \"PowerSeries.map_expand\", \"PowerSeries.constantCoeff_surj\", \"Polynomial.coeToPowerSeries.algHom_apply\", \"PowerSeries.coeff_map\", \"PowerSeries.instIsLocalRing\", \"Polynomial.coeToPowerSeries.algHom\"], \"digest\": \"089b071bfeadf068\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: returned declarations cover evaluation, coefficient maps, Weierstrass preparation or residue fields, not the compatible coefficient-extension presentation and quotient square"
+  },
+  {
+   "tool": "loogle",
+   "query": "MvPowerSeries, Function.Surjective",
+   "results": "{\"t\": \"2026-10-23T04:18:25Z\", \"tool\": \"loogle\", \"query\": \"MvPowerSeries, Function.Surjective\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"MvPowerSeries.C_surjective\"], \"digest\": \"7ec2fd5cc6ef8166\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: returned declarations cover evaluation, coefficient maps, Weierstrass preparation or residue fields, not the compatible coefficient-extension presentation and quotient square"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A complete local power series presentation extends along a field embedding to a surjective map with transported relations and compatible quotient square",
+   "results": "{\"t\": \"2026-10-23T04:18:36Z\", \"tool\": \"leanfinder\", \"query\": \"A complete local power series presentation extends along a field embedding to a surjective map with transported relations and compatible quotient square\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"PowerSeries.exists_isWeierstrassDivision\", \"PowerSeries.IsWeierstrassFactorizationAt.algEquivQuotient_apply\", \"PowerSeries.exists_isWeierstrassFactorization\", \"PowerSeries.algEquivQuotientWeierstrassDistinguished\", \"PowerSeries.map_surjective\", \"PowerSeries.IsWeierstrassDivision\", \"PowerSeries.IsWeierstrassFactorization\", \"PowerSeries.IsWeierstrassFactorizationAt.algEquivQuotient_symm_apply\"], \"digest\": \"c9bc1165cf5d4c58\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: returned declarations cover evaluation, coefficient maps, Weierstrass preparation or residue fields, not the compatible coefficient-extension presentation and quotient square"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A continuous homomorphism from a multivariate power series ring over a residue coefficient field onto a complete local ring with specified maximal ideal generators and change of coefficient fields",
+   "results": "{\"t\": \"2026-10-23T04:19:17Z\", \"tool\": \"leanfinder\", \"query\": \"A continuous homomorphism from a multivariate power series ring over a residue coefficient field onto a complete local ring with specified maximal ideal generators and change of coefficient fields\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"PowerSeries.residueFieldOfPowerSeries\", \"PowerSeries.weierstrassUnit\", \"PowerSeries.exists_isWeierstrassDivision\", \"PowerSeries.weierstrassDistinguished\", \"PowerSeries.exists_isWeierstrassFactorization\", \"IsAdicComplete.liftRingHom\", \"Algebra.FormallySmooth.exists_adicCompletionEvalOneₐ_comp_eq\", \"PowerSeries.algEquivQuotientWeierstrassDistinguished\"], \"digest\": \"a38d2d538615dd1a\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: returned declarations cover evaluation, coefficient maps, Weierstrass preparation or residue fields, not the compatible coefficient-extension presentation and quotient square"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-field-extension-completion-presentation",
+  "date": "2026-10-22",
+  "group": "Q76"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Completion/base-change comparison in the descent/ascent paragraphs of the pointwise nodal ingredient: power-series comparison from chosen variable images, surjectivity and quotient square (returned item Steps 3-4 and the local quotient checks of Step 5).",
+   "via": [
+    "lem-trf-field-extension-completion-presentation",
+    "lem-trf-separable-closed-point-formal-presentation",
+    "lem-trf-nodal-point-local-criterion",
+    "lem-trf-nodal-curve-lci-criterion",
+    "lem-trf-nodal-family-fitting-singular",
+    "lem-trf-projective-nodal-family-geometry",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-trf-power-series-coefficient-extension-surjection",
+  "worker": "stage1",
+  "summary": "Proved the coefficient-extension map and quotient square using existing generator-presentation, continuous evaluation uniqueness and power-series ring structure nodes. Retained the exact statement and definitions. No new nodes; all quotient, local and residue checks are written out.",
+  "blueprint": "Retains the recorded lem-trf-local-term-locality ancestry: the completion/base-change comparison in the pointwise nodal ingredient, realized concretely by Stacks 0C54, proof paragraphs beginning Let f_i and Consider the map and the following commutative quotient diagram. Steps 1-3 realize generation, surjectivity and whole-series compatibility; Steps 4-6 realize relations and the local quotient square.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-power-series-adic-evaluation",
+    "why": "The generic universal property identifies two continuous maps on whole series from their constants and variables; the unit generator-presentation node gives existence and surjectivity but does not state this uniqueness."
+   },
+   {
+    "node": "lem-weil-pbc-power-series-combined-ideal-coefficients",
+    "why": "The generic coefficient criterion with base ideal zero and exponent one identifies the variables ideal with the kernel of constant coefficient. It supplies the maximal-ideal and residue calculation used by the unit presentation route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-power-series-adic-evaluation",
+  "lem-weil-pbc-power-series-combined-ideal-coefficients"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q52-bb0c96deb",
+  "group": "Q52",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q52-bb0c96deb (reviewer sub-agent of L); spot-checked: Read the item in full. There are no new nodes. The statement and stmt_deps are identical to live, where the item is still unsplit; there is no repair note and no supersession. The split follows Stacks 0C54 (varieties.tex lemma-base-change-complete-local-ring): the generation step 'Let f_i', the surjectivity step 'Consider the map', 'g_j map to zero' and the quotient square. Step 1: local-ring(b) and combined-ideal (J=0, n=1) make the variables ideal the maximal ideal of P_F; since phi is surjective, phi^{-1}(m_R)=a_F, so the b_i generate m_RC=m_C. Step 2: the statement of coefficient-field-generator-presentation (same unit), with K, C, tau and b_i, gives Psi. Step 3: Psi j and h phi are continuous and agree on constants (h sigma=tau iota) and on variables; the uniqueness clause of adic-evaluation then gives Psi j=h phi. Steps 4-6 are checked: theta and alpha are well defined, theta alpha=h, T is Noetherian local with m_T=(pi t_i) and residue K, m_RT=m_T, and the reduction is id_K via tau being a section. Edge cases tested: n=0, s=0, and h:Q[[t]]->Q[[t]]/(t^2), where theta is surjective but not injective, consistent since injectivity is left to the parent's flat step. The parent field-extension-completion-presentation step 2 uses exactly the item's clauses. Duplicate search over 0C54 and power-series presentation nodes found none. The declared tool_uses (adic-evaluation, combined-ideal-coefficients, both generic sk-thm-p1 algebra) are accepted. proof_deps equals the union of uses, and no SGA is cited."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.PowerSeriesCoefficientExtensionSurjection",
+  "declaration": "MvPowerSeries.exists_coefficient_extension_surjection",
+  "file": "lean/Sheaf/RingTheory/PowerSeriesCoefficientExtensionSurjection.lean",
+  "statement": "theorem exists_coefficient_extension_surjection {F : Type uF} {K : Type uK} [Field F] [Field K] (ι : F →+* K) {R : Type uR} {C : Type uC} [CommRing R] [CommRing C] [IsNoetherianRing R] [IsNoetherianRing C] [IsLocalRing R] [IsLocalRing C] [IsAdicComplete (IsLocalRing.maximalIdeal R) R] [IsAdicComplete (IsLocalRing.maximalIdeal C) C] [Algebra F R] [Algebra K C] (ρR : R ⧸ IsLocalRing.maximalIdeal R ≃+* F) (ρC : C ⧸ IsLocalRing.maximalIdeal C ≃+* K) (hσ : ∀ a : F, ρR (Ideal.Quotient.mk _ (algebraMap F R a)) = a) (hτ : ∀ a : K, ρC (Ideal.Quotient.mk _ (algebraMap K C a)) = a) (h : R →+* C) (hlocal : ∀ r ∈ IsLocalRing.maximalIdeal R, h r ∈ IsLocalRing.maximalIdeal C) (hcont : ∀ N : ℕ, ∃ M : ℕ, ∀ r ∈ (IsLocalRing.maximalIdeal R) ^ M, h r ∈ (IsLocalRing.maximalIdeal C) ^ N) (hm : Ideal.map h (IsLocalRing.maximalIdeal R) = IsLocalRing.maximalIdeal C) (hcompat : h.comp (algebraMap F R) = (algebraMap K C).comp ι) (n s : ℕ) (φ : MvPowerSeries (Fin n) F →ₐ[F] R) (hφ : Function.Surjective φ) (hφcont : ∀ N : ℕ, ∃ M : ℕ, ∀ g ∈ (Ideal.span (Set.range (X : Fin n → MvPowerSeries (Fin n) F))) ^ M, φ g ∈ (IsLocalRing.maximalIdeal R) ^ N) (f : Fin s → MvPowerSeries (Fin n) F) (hker : RingHom.ker φ.toRingHom = Ideal.span (Set.range f)) (hrel : Ideal.span (Set.range f) ≤ Ideal.span (Set.range (X : Fin n → MvPowerSeries (Fin n) F))) : ∃ J : Ideal (MvPowerSeries (Fin n) K), J = Ideal.span (Set.range (fun a : Fin s ↦ map ι (f a))) ∧ ∃ Ψ : MvPowerSeries (Fin n) K →ₐ[K] C, Function.Surjective Ψ ∧ (∀ N : ℕ, ∃ M : ℕ, ∀ g ∈ (Ideal.span (Set.range (X : Fin n → MvPowerSeries (Fin n) K))) ^ M, Ψ g ∈ (IsLocalRing.maximalIdeal C) ^ N) ∧ (∀ i : Fin n, Ψ (X i) = h (φ (X i))) ∧ Ψ.toRingHom.comp (map ι) = h.comp φ.toRingHom ∧ J ≤ RingHom.ker Ψ.toRingHom ∧ ∃ θ : (MvPowerSeries (Fin n) K ⧸ J) →ₐ[K] C, Function.Surjective θ ∧ (∀ g : MvPowerSeries (Fin n) K, θ (Ideal.Quotient.mk J g) = Ψ g) ∧ IsNoetherianRing (MvPowerSeries (Fin n) K ⧸ J) ∧ ∃ _ : IsLocalRing (MvPowerSeries (Fin n) K ⧸ J), IsLocalRing.maximalIdeal (MvPowerSeries (Fin n) K ⧸ J) = Ideal.span (Set.range (fun i : Fin n ↦ Ideal.Quotient.mk J (X i))) ∧ ∃ ρT : ((MvPowerSeries (Fin n) K ⧸ J) ⧸ IsLocalRing.maximalIdeal (MvPowerSeries (Fin n) K ⧸ J)) ≃+* K, (∀ a : K, ρT (Ideal.Quotient.mk _ (Ideal.Quotient.mk J (MvPowerSeries.C a))) = a) ∧ ∃ α : R →+* (MvPowerSeries (Fin n) K ⧸ J), (∀ r ∈ IsLocalRing.maximalIdeal R, α r ∈ IsLocalRing.maximalIdeal (MvPowerSeries (Fin n) K ⧸ J)) ∧ α.comp φ.toRingHom = (Ideal.Quotient.mk J).comp (map ι) ∧ (∀ α' : R →+* (MvPowerSeries (Fin n) K ⧸ J), α'.comp φ.toRingHom = (Ideal.Quotient.mk J).comp (map ι) → α' = α) ∧ θ.toRingHom.comp α = h ∧ Ideal.map α (IsLocalRing.maximalIdeal R) = IsLocalRing.maximalIdeal (MvPowerSeries (Fin n) K ⧸ J) ∧ (∀ x : MvPowerSeries (Fin n) K ⧸ J, ρC (Ideal.Quotient.mk _ (θ x)) = ρT (Ideal.Quotient.mk _ x))",
+  "branch": "newtargets-dag",
+  "by": "Q49",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-0a4943f9c",
+  "group": "Q49",
+  "result": "pass",
+  "note": "Lean statement matches node clause by clause: fields+ι; Noetherian local (IsLocalRing ⊇ Nontrivial) complete rings; ρR/ρC with algebra-map sections normalized (hσ,hτ); h local, m_R C=m_C, hσ=τι; φ F-alg surjective continuous, ker=span f ⊆ (t). Conclusion: J fixed by equality; Ψ surjective continuous, Ψ(X i)=hφ(X i), Ψ∘map ι=h∘φ; J≤ker Ψ; θ surjective with θπ=Ψ; T Noetherian local, m_T=span π X_i, ρT normalized on constants; α local, α∘φ=π∘j, unique, θα=h, Ideal.map α m_R=m_T; residue identity. Truth checked (φ⁻¹m_R=(t), complete Nakayama, uniqueness of continuous evaluation, J⊆(t)). hcont/hφcont redundant, not stronger. Edge cases n=0 (T=K), s=0, char, universes OK. Only lean field changed vs live; docstrings with 0C54 source/blueprint and 6-step proof; sorry only; proof-dep imports exist; no duplicate found. No changes, no compile."
+ }
+}

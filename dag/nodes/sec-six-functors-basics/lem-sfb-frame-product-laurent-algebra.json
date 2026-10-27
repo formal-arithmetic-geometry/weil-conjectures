@@ -1,0 +1,271 @@
+{
+ "id": "lem-sfb-frame-product-laurent-algebra",
+ "kind": "statement",
+ "title": "Laurent tensor algebra of a product of line-module frame schemes",
+ "statement": "Let $S$ be a scheme [def-pc-scheme], let $r\\geq0$, and let $A_1,\\ldots,A_r$ be invertible $\\mathcal O_S$-modules [def-sc-invertible-module]. Let $q:P\\to S$ be an $S$-scheme representing simultaneous frames: for every $f:U\\to S$, its $U$-points are the tuples of isomorphisms $\\tau_i:\\mathcal O_U\\xrightarrow{\\sim}f^*A_i$, naturally in $U$, with tensor pullback [def-pc-module-pullback]. For $n=(n_1,\\ldots,n_r)\\in\\mathbf Z^r$ put $N_n=\\bigotimes_{i=1}^r A_i^{\\otimes(-n_i)}$, using sheaf tensor product [def-pur-sheaf-tensor-product], $A^{\\otimes0}=\\mathcal O_S$, and $A^{\\otimes m}=(A^\\vee)^{\\otimes(-m)}$ for $m<0$. Empty tensor products are $\\mathcal O_S$. Form the sheaf $\\mathcal B=\\bigoplus_{n\\in\\mathbf Z^r}N_n$, where the direct sum means the sheafification of the presheaf direct sum, with multiplication $N_n\\otimes N_m\\simeq N_{n+m}$ given by tensor multiplication and evaluation $A_i^\\vee\\otimes A_i\\to\\mathcal O_S$, and unit $\\mathcal O_S=N_0$. Then $q$ is affine [pqf-def-affine-morphism], and there is an isomorphism of sheaves of $\\mathcal O_S$-algebras\n$$\\mathcal B\\xrightarrow{\\sim}q_*\\mathcal O_P,$$\nwhere $(q_*\\mathcal O_P)(V)=\\Gamma(q^{-1}V,\\mathcal O_P)$ with its natural $\\mathcal O_S(V)$-action. The map is specified on each summand by pulling it to $P$ and evaluating against the tautological frames. Explicitly, on any affine open $V=\\operatorname{Spec}R\\subseteq S$ with frames $e_i$ of $A_i|_V$, write $\\tau_i=z_iq^*e_i$. Then $q^{-1}V\\simeq\\operatorname{Spec}R[z_1^{\\pm1},\\ldots,z_r^{\\pm1}]$, and the displayed isomorphism sends the generator $\\bigotimes_i e_i^{-n_i}$ of $N_n|_V$ to $z_1^{n_1}\\cdots z_r^{n_r}$. The ring on this chart consists of finite sums of these monomials with uniquely determined coefficients in $R$. No quasi-compactness, quasi-separatedness, Noetherian, reducedness, or field hypothesis on $S$ is imposed.",
+ "source": {
+  "document": "literature/stacks-project/constructions.tex",
+  "place": "Tags 01M2 (definition-vector-bundle), using the dual module to parametrize vectors, and 01LX (lemma-spec-properties), parts (1),(3). Agent-extracted Laurent version on the frame open and finite products, with the evaluation normalization written explicitly; neither tag states this Laurent frame-product assertion verbatim."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-sc-invertible-module",
+  "def-pc-module-pullback",
+  "def-pur-sheaf-tensor-product",
+  "pqf-def-affine-morphism",
+  "def-sfb-split-torus-frame-model",
+  "def-weil-pbc-comm-algebra-sheaf",
+  "def-sc-local-free-generator"
+ ],
+ "proof": [
+  {
+   "text": "For any commutative ring $R$, write $C_R=\\bigoplus_{n\\in\\mathbf Z^r}Rz^n$: these are finitely supported coefficient families, with coefficientwise addition and multiplication $z^nz^m=z^{n+m}$, extended bilinearly. All product sums are finite. Associativity and commutativity follow by reindexing the finite sums and adding exponents; $z^0$ is the unit and $(z^{e_i})^{-1}=z^{-e_i}$. Given an $R$-algebra $D$ and units $u_1,\\ldots,u_r\\in D$, the formula $\\sum a_nz^n\\mapsto\\sum a_n\\prod_i u_i^{n_i}$ is an $R$-algebra map. It is the unique such map taking $z^{e_i}$ to $u_i$, since every monomial is a product of these generators and their inverses. Thus $C_R$ is precisely $R[z_1^{\\pm1},\\ldots,z_r^{\\pm1}]$, including its finite-support and coefficient-uniqueness assertions. For $r=0$, $\\mathbf Z^0$ is a singleton and $C_R=R$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/constructions.tex",
+    "place": "Tag 01M2 (definition-vector-bundle): agent Laurent coordinate calculation, with its universal property proved here"
+   }
+  },
+  {
+   "text": "By [def-sc-invertible-module], near each point all the finitely many $A_i$ have frames; refine their common trivializing open to an affine $V=\\operatorname{Spec}R$ using [lem-weil-pbc-affine-opens-basis]. For any $f:U\\to V$, an isomorphism $\\mathcal O_U\\to f^*A_i=\\mathcal O_U f^*e_i$ is uniquely multiplication by a global unit $u_i$: its inverse multiplies by $u_i^{-1}$. Here the trivialization pulls back by the tensor formula of [def-pc-module-pullback]. Step 1 and [lem-weil-pbc-morphism-into-affine-scheme] identify these tuples naturally with $V$-morphisms $U\\to\\operatorname{Spec}C_R$: being over $V$ means that the ring map restricts to the fixed structural map on $R$. The inverse image $q^{-1}V$ has the same frame functor by the assumed representing property. Apply [lem-pc-yoneda] to this natural isomorphism and its inverse to obtain inverse $V$-scheme morphisms. Thus $q^{-1}V\\simeq\\operatorname{Spec}C_R$. The correspondence takes the tautological frame to $z_iq^*e_i$, because its value at the identity point of the representing object is the universal tuple $(z_i)$. This argument applies to every affine trivializing open, and to every affine open inside it.",
+   "uses": [
+    "def-sc-invertible-module",
+    "lem-weil-pbc-affine-opens-basis",
+    "def-pc-module-pullback",
+    "lem-weil-pbc-morphism-into-affine-scheme",
+    "lem-pc-yoneda"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Tag 01I1 (lemma-morphism-into-affine), and categories.tex Tag 001P (lemma-yoneda); agent application to the frame functor"
+   }
+  },
+  {
+   "text": "The affine trivializing opens of step 2 cover $S$ and their inverse images are affine. Therefore [pqf-lem-affine-local-target] gives that $q$ is affine, with no finiteness condition on this covering or on $S$.",
+   "uses": [
+    "pqf-lem-affine-local-target"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 01S8 (lemma-characterize-affine), (2) implies (1)"
+   }
+  },
+  {
+   "text": "Fix a chart $V$ with frames as in step 2. Tensor multiplication and evaluation in [def-pur-sheaf-tensor-product, def-sc-invertible-module] identify each $N_n|_V$ with $\\mathcal O_V$, its generator being $b_n=\\bigotimes_i e_i^{-n_i}$; the stated multiplication sends $b_n\\otimes b_m$ to $b_{n+m}$. Hence $\\mathcal B|_V$ is the sheafification of $D(W)=\\bigoplus_n\\mathcal O_V(W)b_n$. For an affine open $W\\subseteq V$, step 2 and [def-weil-affine-spectrum] give $\\Gamma(q^{-1}W,\\mathcal O_P)=C_{\\mathcal O_V(W)}$. Step 1 gives a bijective linear map $D(W)\\to\\Gamma(q^{-1}W,\\mathcal O_P)$ sending $b_n$ to $z^n$; its inverse reads the finitely many Laurent coefficients. For an inclusion of affine opens these maps commute with restriction: the frames restrict to the same frames, the tautological frame restricts to itself, and coefficients restrict by $\\mathcal O_V(W)\\to\\mathcal O_V(W')$. Apply [lem-sc-module-sheafification-affine-restriction] on the scheme $V$, with parameter category the one-object category with only its identity, to get $\\mathcal B|_V\\simeq(q_*\\mathcal O_P)|_V$. Restricting the sheafification to $V$ uses the same local representatives, so is the sheafification just described. The comparison is an algebra map: on finite sums its multiplication is the convolution in step 1, with unit $b_0$, and these equalities hold locally for all sheaf sections. Its inverse is therefore an algebra map as well.",
+   "uses": [
+    "def-pur-sheaf-tensor-product",
+    "def-sc-invertible-module",
+    "def-weil-affine-spectrum",
+    "lem-sc-module-sheafification-affine-restriction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sheaves.tex",
+    "place": "Tag 009U (lemma-restrict-basis-equivalence-modules), applied on V; constructions.tex Tag 01LX (lemma-spec-properties), (3), for the local algebra interpretation"
+   }
+  },
+  {
+   "text": "The chart maps of step 4 are independent of frames. On an overlap, locally write $e_i'=g_i e_i$ for units $g_i$. Then $\\tau_i=z_iq^*e_i=z_i'q^*e_i'$ gives $z_i'=g_i^{-1}z_i$, while $b_n'=(\\prod_i g_i^{-n_i})b_n$. Both chart maps consequently send $b_n'$ to $(\\prod_i g_i^{-n_i})z^n=(z')^n$. Equality on these generators implies equality on finite sums and hence on sheafifications. The sheaf axiom glues the chart maps and their inverses to an algebra isomorphism $\\mathcal B\\simeq q_*\\mathcal O_P$. Its normalization is exactly evaluation against the universal frames: for the factor $A_i^\\vee$, evaluate a pulled-back covector on $\\tau_i(1)$, which sends $e_i^\\vee$ to $z_i$; for the factor $A_i$, use $\\tau_i^{-1}$, which sends $q^*e_i$ to $z_i^{-1}$; tensor these maps for every integer $n_i$. This uses the tensor pullback and dual of [def-pc-module-pullback, def-sc-invertible-module, def-pur-sheaf-tensor-product]. For $n=0$ it is the structural scalar map. Thus every summand has the required map and sign. No argument has used a global finite cover, a field, or a reduced coefficient ring; for $r=0$ the same proof gives $P\\simeq S$ and the identity algebra map.",
+   "uses": [
+    "def-pc-module-pullback",
+    "def-sc-invertible-module",
+    "def-pur-sheaf-tensor-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/constructions.tex",
+    "place": "Tags 01M2 (definition-vector-bundle), 01LX (lemma-spec-properties), (3): agent transition and evaluation calculation"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sc-invertible-module",
+  "lem-weil-pbc-affine-opens-basis",
+  "def-pc-module-pullback",
+  "lem-weil-pbc-morphism-into-affine-scheme",
+  "lem-pc-yoneda",
+  "pqf-lem-affine-local-target",
+  "def-pur-sheaf-tensor-product",
+  "def-weil-affine-spectrum",
+  "lem-sc-module-sheafification-affine-restriction"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/constructions.tex",
+  "place": "Tags 01M2 and 01LX: Laurent frame-open analogue, proved explicitly with Tags 01I1, 001P, 01S8, 009U"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "frameBundle|frame_bundle|Laurent|integer.*tensor",
+   "results": "{\"t\": \"2026-10-24T03:40:19Z\", \"tool\": \"grep\", \"query\": \"frameBundle|frame_bundle|Laurent|integer.*tensor\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: no hits"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Laurent graded algebra of a line bundle frame torsor on a scheme",
+   "results": "{\"t\": \"2026-10-24T03:40:19Z\", \"tool\": \"leansearch\", \"query\": \"Laurent graded algebra of a line bundle frame torsor on a scheme\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"LaurentSeries\", \"LaurentPolynomial\", \"LaurentPolynomial.instModulePolynomial\", \"TensorAlgebra.gradedAlgebra\", \"LaurentSeries.instAlgebraPowerSeries\", \"LaurentPolynomial.algebraPolynomial\", \"LaurentPolynomial.instIsScalarTowerPolynomial\", \"GradedAlgebra\"], \"digest\": \"1eda9b134364df73\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: read the returned types; these give generic sheaf operations, abstract group cohomology, algebraic Laurent polynomials, or topological bundle trivializations, not the asserted scheme frame-product algebra or torsor section extraction"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Frame\", \"Sheaf\"",
+   "results": "{\"t\": \"2026-10-24T03:40:19Z\", \"tool\": \"loogle\", \"query\": \"\\\"Frame\\\", \\\"Sheaf\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: no hits"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The pushforward of the structure sheaf of the product of frame bundles of invertible modules is the direct sum of their integer tensor powers",
+   "results": "{\"t\": \"2026-10-24T03:40:23Z\", \"tool\": \"leanfinder\", \"query\": \"The pushforward of the structure sheaf of the product of frame bundles of invertible modules is the direct sum of their integer tensor powers\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SheafOfModules.unitToPushforwardObjUnit\", \"SheafOfModules.pullbackObjFreeIso\", \"SheafOfModules.unitToPushforwardObjUnit_val_app_apply\", \"CommRing.Pic.mk_tensor\", \"SheafOfModules.pushforwardSections_unitHomEquiv\", \"PresheafOfModules.Monoidal.tensorObj\", \"SheafOfModules.pushforwardSections_coe\", \"ModuleCat.tilde\"], \"digest\": \"33e9e49a24a921bf\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: read the returned types; these give generic sheaf operations, abstract group cohomology, algebraic Laurent polynomials, or topological bundle trivializations, not the asserted scheme frame-product algebra or torsor section extraction"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Functions on the complement of the zero section of a line bundle are the direct sum of positive and negative tensor powers of the dual line bundle",
+   "results": "{\"t\": \"2026-10-24T03:40:24Z\", \"tool\": \"leanfinder\", \"query\": \"Functions on the complement of the zero section of a line bundle are the direct sum of positive and negative tensor powers of the dual line bundle\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Trivialization.zeroSection\", \"Trivialization.localFrame_apply_of_notMem\", \"Pretrivialization.linearMapAt_def_of_notMem\", \"Pretrivialization.linearMapAt_eq_zero\", \"Trivialization.symmₗ\", \"AlgebraicGeometry.sectionInBasicOpen\", \"Trivialization.linearMapAt_def_of_notMem\", \"Trivialization.symmL_apply\"], \"digest\": \"d12f6bcf0e2238e9\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: read the returned types; these give generic sheaf operations, abstract group cohomology, algebraic Laurent polynomials, or topological bundle trivializations, not the asserted scheme frame-product algebra or torsor section extraction"
+  },
+  {
+   "tool": "grep",
+   "query": "frameBundle|frame_bundle|Laurent|integer.*tensor",
+   "results": "{\"t\": \"2026-10-24T04:13:50Z\", \"tool\": \"grep\", \"query\": \"frameBundle|frame_bundle|Laurent|integer.*tensor\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: returned hits give algebraic Laurent polynomials, natural tensor-power grading, or generic structure/module sheaves, not the frame-product isomorphism"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Laurent algebra of functions on a line bundle with the zero section removed",
+   "results": "{\"t\": \"2026-10-24T04:13:50Z\", \"tool\": \"leansearch\", \"query\": \"Laurent algebra of functions on a line bundle with the zero section removed\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"LaurentSeries\", \"LaurentPolynomial.isLocalization\", \"LaurentPolynomial\", \"LaurentSeries.instAlgebraPowerSeries\", \"LaurentSeries.LaurentSeriesAlgEquiv\", \"LaurentSeries.instIsFractionRingPowerSeries\", \"LaurentPolynomial.algebraPolynomial\", \"LaurentSeries.of_powerSeries_localization\"], \"digest\": \"89354d4dc2ae84c8\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: returned hits give algebraic Laurent polynomials, natural tensor-power grading, or generic structure/module sheaves, not the frame-product isomorphism"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Scheme, LaurentPolynomial",
+   "results": "{\"t\": \"2026-10-24T04:13:50Z\", \"tool\": \"loogle\", \"query\": \"AlgebraicGeometry.Scheme, LaurentPolynomial\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: returned hits give algebraic Laurent polynomials, natural tensor-power grading, or generic structure/module sheaves, not the frame-product isomorphism"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The algebra of functions on the product of line bundle frame schemes is the direct sum of integer tensor powers of the dual line bundles",
+   "results": "{\"t\": \"2026-10-24T04:14:01Z\", \"tool\": \"leanfinder\", \"query\": \"The algebra of functions on the product of line bundle frame schemes is the direct sum of integer tensor powers of the dual line bundles\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"TensorPower.galgebra\", \"AlgebraicGeometry.ΓRestrictAlgebra\", \"AlgebraicGeometry.Proj.awayMap_awayToSection\", \"AlgebraicGeometry.Proj.mul_apply\", \"AlgebraicGeometry.Proj.pow_apply\", \"AlgebraicGeometry.AffineSpace.coord\", \"AlgebraicGeometry.ProjectiveSpectrum.StructureSheaf.structurePresheafInCommRing\", \"AlgebraicGeometry.Proj.add_apply\"], \"digest\": \"899671ec3dd43594\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: returned hits give algebraic Laurent polynomials, natural tensor-power grading, or generic structure/module sheaves, not the frame-product isomorphism"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Pushforward structure sheaf of a punctured line bundle is the Laurent tensor algebra of the dual line module",
+   "results": "{\"t\": \"2026-10-24T04:15:10Z\", \"tool\": \"leanfinder\", \"query\": \"Pushforward structure sheaf of a punctured line bundle is the Laurent tensor algebra of the dual line module\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.StructureSheaf.isLocalizedModule_toPushforwardStalkAlgHom_aux\", \"AlgebraicGeometry.StructureSheaf.isLocalizedModule_toPushforwardStalkAlgHom\", \"ModuleCat.tilde\", \"ModuleCat.Tilde.const\", \"AlgebraicGeometry.StructureSheaf.to_global_factors\", \"ModuleCat.tildeInType\", \"ModuleCat.tildeInModuleCat\", \"ModuleCat.Tilde.toOpen\"], \"digest\": \"33da5b358e05da9e\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: returned hits give algebraic Laurent polynomials, natural tensor-power grading, or generic structure/module sheaves, not the frame-product isomorphism"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-split-torus-torsor-section-extraction",
+  "date": "2026-10-24",
+  "group": "Q111"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Scheme representability of the stable abelian-level normalization. Supporting input: freeness at normalized boundary branches. Comparison of the full cohomology frame in the item with Deligne 3.3--3.5 Picard torsion frames; relative Picard existence for the pulled-back stable family. Supporting input for the present split: A relatively ample line module on the stable-curve multidegree-zero Picard space. Supporting input: Generic ampleness criterion for smooth connected group schemes. Raynaud input: existence, locally on a normal base, of an ample extension of a positive power of a symmetric line on the dense abelian open; comparison with the supplied line is a separate proof step. Cubical proof input: extension of cubical objects and isomorphisms, without positivity; supporting input: Local prolongation of a tensor power of a symmetric line; Moret-Bailly II 3.3.3 opening application of Raynaud XI 1.13 to generic ample modules; isolate the positive generic input before forming a tensor quotient and comparing over U. Supporting input for Q35: Relative ampleness of the inversion norm of a supplied line. Q15 support: Fibrewise ampleness criterion for cubical lines on semiabelian schemes. Q06 supporting input: One affine section chart at the strict-local identity. NM supporting input: XI Proposition 1.11, field case; compare Lan, Arithmetic compactifications of PEL-type Shimura varieties, Proposition 3.3.3.6 proof and Lemma 4.2.1.8 proof, which explicitly use this implication. Raynaud original WANTED. Q83 supporting input: extraction of an effective character twist from a nonzero section on a split-torus torsor, before applying abelian Picard-kernel algebraic triviality. Supporting Laurent-algebra calculation on the product of the coordinate frame bundles: its degree-n summand is the tensor product of the inverse n-th powers of the coordinate lines.",
+   "via": [
+    "lem-sfb-split-torus-torsor-section-extraction",
+    "lem-sfb-semiabelian-abelian-quotient-ample-reflection",
+    "lem-sfb-cubical-strict-local-affine-seed",
+    "lem-sfb-cubical-fibrewise-ample-criterion",
+    "lem-sfb-semiabelian-supplied-norm-ampleness",
+    "lem-sfb-raynaud-generic-ample-symmetrization",
+    "lem-sfb-symmetric-line-power-prolongation",
+    "lem-sfb-normal-symmetric-cubical-extension",
+    "lem-sfb-symmetric-ample-power-extension",
+    "lem-sfb-regular-group-generic-ampleness",
+    "lem-sfb-stable-picard-theta-ampleness",
+    "lem-sfb-stable-relative-picard-kummer",
+    "lem-sfb-stable-level-versal-branch-freeness",
+    "lem-sfb-stable-abelian-level-normalization",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-frame-product-laurent-algebra",
+  "worker": "stage1",
+  "summary": "Preserved the statement and all inherited search records. Proved the Laurent universal property explicitly, represented frames on affine trivializing charts by the functor of points, applied the existing affine-local-target lemma, and used the existing affine-basis sheafification comparison. Checked all transition factors and the evaluation sign. No new nodes.",
+  "blueprint": "Supporting Laurent-algebra calculation for lem-sfb-split-torus-torsor-section-extraction step 2, in the inherited ancestry under det-thm-sf-ctf-stability-direct-images (3). The current blueprint gives the direct-image preservation route, not the auxiliary Laurent calculation; steps 1–5 supply this prerequisite without changing that route. The inherited null blueprint ancestor is retained; whole-blueprint searches Laurent, relative Spec, frame, sheafification found no equivalent blueprint assertion.",
+  "tool_uses": [
+   {
+    "node": "lem-sc-module-sheafification-affine-restriction",
+    "why": "Generic module-sheafification comparison on an affine basis, applied to the one-object parameter category on each frame chart. The unit has no replacement for this sheaf-theoretic tool."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sc-module-sheafification-affine-restriction"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q59-30243c879",
+  "group": "Q59",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q59-30243c879 (reviewer sub-agent of L); spot-checked: I read the item, all five steps and every cited node statement in full. The delivery has 0 new nodes, and the statement is unchanged from live, where the item is still unsplit with no repair note. Sign check: for n_i=1 the generator e_i^∨ evaluated on τ_i=z_i q*e_i gives z_i, and for n_i=-1, τ_i^{-1}(q*e_i)=z_i^{-1}. This matches V(L^∨) minus the zero section being Spec ⊕(L^∨)^{⊗n} (Stacks 01M2). Step 1 builds the Laurent ring over any ring R as finitely supported convolution with its universal property; it does not use def-weil-laurent-polynomial-ring, which is defined only over a field. Step 2: a common affine trivializing chart via 01IT; frames are multiplication by units since End(O_U)=Γ(U,O_U); then 01I1, which holds for arbitrary U, and Yoneda 001P over V give q^{-1}V≅Spec C_R, with the tautological frame equal to z_i q*e_i. Step 3 is 01S8 (2)⇒(1), checked at morphisms.tex:1736. Step 4: since z_i=τ_i/q*e_i is intrinsic, the maps commute with restriction between affine opens, and the affine-basis sheafification lemma (009U) applies with the one-object parameter category. Step 5: I recomputed the frame change b_n'=∏g_i^{-n_i}b_n and z_i'=g_i^{-1}z_i, so the chart maps agree and glue. Edge cases r=0, non-quasi-compact S and k[ε] coefficients all hold. Duplicate search: lem-sfb-split-torus-torsor-frame-geometry, def-sfb-split-torus-over-ring and the Laurent/torus nodes do not state the item. The only node using it, the Q111 torsor-section-extraction lemma, uses the same normalization. No SGA source is used. I accept the tool_uses entry for the generic sheafification lemma. Advisory only: the report mentions citations.json and searches.jsonl, which are not in the delivery."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.FrameProductLaurentAlgebra",
+  "declaration": "AlgebraicGeometry.FrameProductLaurentAlgebra.frame_product_laurent_algebra",
+  "declarations": [
+   "AlgebraicGeometry.FrameProductLaurentAlgebra.signedPower",
+   "AlgebraicGeometry.FrameProductLaurentAlgebra.finiteTensor",
+   "AlgebraicGeometry.FrameProductLaurentAlgebra.summand",
+   "AlgebraicGeometry.FrameProductLaurentAlgebra.powerSection",
+   "AlgebraicGeometry.FrameProductLaurentAlgebra.signedSection",
+   "AlgebraicGeometry.FrameProductLaurentAlgebra.finiteTensorSection",
+   "AlgebraicGeometry.FrameProductLaurentAlgebra.monomialSection",
+   "AlgebraicGeometry.FrameProductLaurentAlgebra.structureAlgebra",
+   "AlgebraicGeometry.FrameProductLaurentAlgebra.frame_product_laurent_algebra"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/FrameProductLaurentAlgebra.lean",
+  "statement": "theorem frame_product_laurent_algebra {S P : Scheme.{u}} (q : P ⟶ S) (r : ℕ) (A : Fin r → S.Modules) [hinv : ∀ i, (A i).IsInvertible] (τ : (i : Fin r) → 𝟙_ P.Modules ≅ (tensorPullback q).obj (A i)) (hrep : ∀ U : Over S, Function.Bijective fun a : U ⟶ Over.mk q ↦ fun i : Fin r ↦ SplitTorusFrames.pullFrame (A i) q (τ i) a.left ≪≫ eqToIso (congrArg (fun f ↦ (tensorPullback f).obj (A i)) a.w)) : IsAffineHom q ∧ ∃ (B : S.CommAlgebraSheaf) (j : (n : Fin r → ℤ) → summand A n ⟶ B.toModule), Nonempty (IsColimit (Cofan.mk B.toModule j)) ∧ ∃ φ : B ≅ structureAlgebra q, ∀ (V : S.Opens) (e : (i : Fin r) → Γ(A i, V)) (d : (i : Fin r) → Γ(dual (A i), V)), (∀ i, IsFreeGenerator (e i)) → (∀ i, IsFreeGenerator (d i)) → (∀ i, (dualEvaluation (A i)).app V (tmulSection (e i) (d i)) = unitSectionsEquiv V 1) → (∀ a : Γ(S, V), (j 0).app V (a • monomialSection e d 0) = B.hom.hom.app (op V) a) ∧ (∀ n m : Fin r → ℤ, @id (B.right.obj.obj (op V)) ((j n).app V (monomialSection e d n)) * @id (B.right.obj.obj (op V)) ((j m).app V (monomialSection e d m)) = (j (n + m)).app V (monomialSection e d (n + m))) ∧ ∃ z : Fin r → Γ(P, q ⁻¹ᵁ V)ˣ, (∀ i, (τ i).hom.app (q ⁻¹ᵁ V) (unitSectionsEquiv (q ⁻¹ᵁ V) 1) = (z i : Γ(P, q ⁻¹ᵁ V)) • tensorPullbackSection q (A i) V (e i)) ∧ (∀ n : Fin r → ℤ, φ.hom.right.hom.app (op V) ((j n).app V (monomialSection e d n)) = ∏ i : Fin r, ((z i ^ n i : Γ(P, q ⁻¹ᵁ V)ˣ) : Γ(P, q ⁻¹ᵁ V))) ∧ ∀ hV : IsAffineOpen V, ∃ c : AddMonoidAlgebra Γ(S, V) (Fin r → ℤ) ≃+* Γ(P, q ⁻¹ᵁ V), (∀ (n : Fin r → ℤ) (a : Γ(S, V)), c (AddMonoidAlgebra.single n a) = q.app V a * ∏ i : Fin r, ((z i ^ n i : Γ(P, q ⁻¹ᵁ V)ˣ) : Γ(P, q ⁻¹ᵁ V))) ∧ ∃ χ : (q ⁻¹ᵁ V).toScheme ≅ Spec (.of (AddMonoidAlgebra Γ(S, V) (Fin r → ℤ))), χ.hom ≫ Spec.map (CommRingCat.ofHom (AddMonoidAlgebra.singleZeroRingHom (R := Γ(S, V)) (M := Fin r → ℤ))) = (q ∣_ V) ≫ hV.isoSpec.hom ∧ ∀ f : AddMonoidAlgebra Γ(S, V) (Fin r → ℤ), χ.hom.appTop ((Scheme.ΓSpecIso (.of (AddMonoidAlgebra Γ(S, V) (Fin r → ℤ)))).inv f) = (q ⁻¹ᵁ V).topIso.inv (c f)",
+  "branch": "newtargets-dag",
+  "by": "Q02",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "The explicit tensor summands and local generators use upstream tensorPow, dual and tmulSection. The algebra and its inclusions are existentially specified by the sheaf-module coproduct universal property and evaluation-normalized local multiplication; no definition chooses an unspecified algebra. Existing landed frame pullback and commutative-algebra-sheaf nodes are added to stmt_deps. The affine chart is over Spec Gamma(V), and its section-ring map has the same normalized Laurent coefficients as the global algebra comparison. H2 returned-delivery repair: pullFrame is owned by the landed definition node def-sfb-split-torus-frame-model, replacing the theorem-node stmt_dep; def-sc-local-free-generator owns IsFreeGenerator and is now cited explicitly. Lean source and mathematical statement are unchanged."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-5ad8db40d",
+  "group": "Q02",
+  "result": "pass",
+  "note": "Re-delivery after H2 RETURN of 825d2be0. Lean file byte-identical (sha256 da547cdc…0052); node diff vs prior snapshot only stmt_deps and lean.note. stmt_deps now cite def-sfb-split-torus-frame-model (owner of pullFrame, Q18 existing:true) in place of the theorem node, and add def-sc-local-free-generator (IsFreeGenerator), as prescribed. Re-read all clauses: frame representability via actual pullFrame (natural), signed summands, coproduct-characterized algebra with unit/multiplication on local frames, IsAffineHom, algebra iso to the actual direct-image structure sheaf, evaluation sign (n_i=1→z_i, −1→z_i⁻¹), affine Laurent chart c/χ. Edge cases r=0, n=0, zero ring, non-reduced, non-qc, single universe u OK. Docstrings, sorry-only proof, no hollow defs. No file changed, so no compile; worker scompile clean."
+ }
+}

@@ -1,0 +1,294 @@
+{
+ "id": "lem-trf-resolution-word-progress-termination",
+ "kind": "statement",
+ "title": "Progress and termination of the normalized-word maximum-center process",
+ "statement": "Over $\\mathbf Q$, let $X\\hookrightarrow P$ be a closed embedding with $X$ reduced and $P$ smooth, separated and of finite type, allowing empty schemes and finite disjoint unions [def-weil-closed-immersion, def-pc-reduced-scheme, def-sbc-smooth-morphisms, def-weil-proper-morphism, def-weil-finite-type-morphism]. Fix the normalized word assignment of [lem-trf-normalized-resolution-word-gluing]: $w_H(x)=\\bot$ at regular points, and otherwise $w_H(x)=(A_x,t_x)$, the normalized Hilbert--Samuel head followed by the maximal-order marked-ideal word after deletion of its leading $1$. Use finite histories of ordinary ambient blowups with scheme-theoretic strict transforms and retained ordered earlier center ideals [def-trf-admissible-embedded-history, def-nagata-global-blowup, def-nagata-strict-transform]. At a nonregular stage whose ambient scheme is smooth and strict transform reduced, blow up the reduced full maximum stratum furnished by [lem-trf-resolution-word-maximum-center-descent].\n\nThis is a permissible next stage for the local presentations; its ambient scheme remains smooth, separated and of finite type, and its strict transform remains reduced. If the next stage is nonregular, its greatest word is strictly smaller than the preceding greatest word. Along this process the greatest normalized heads cannot increase, and can strictly decrease only finitely many times for one fixed initial input. On any interval on which that greatest head stays fixed, the local presentations of that head evolve by exactly the synchronized maximum-center process of their marked-ideal tails; empty cosupport removes that head. Such a constant-head interval cannot be infinite. Consequently there is no infinite sequence of these maximum-center extensions from an empty initial history. A regular or empty initial scheme has zero extensions. These conclusions concern this fixed normalized word construction and do not assert that every descending sequence in its totally ordered value space terminates.",
+ "source": {
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "ILO VIII 2.3.11, p.93, singular-locus part before exceptional cleanup; old proof step 4 after coherence and step 7. Supporting Stacks Tag 0FUT, more-morphisms.tex lemma-blowup. Detailed BMT Theorem 6.1 Addendum (2) and coefficient-dimension termination WANTED."
+ },
+ "stmt_deps": [
+  "def-weil-closed-immersion",
+  "def-pc-reduced-scheme",
+  "def-sbc-smooth-morphisms",
+  "def-weil-proper-morphism",
+  "def-weil-finite-type-morphism",
+  "def-trf-admissible-embedded-history",
+  "def-nagata-global-blowup",
+  "def-nagata-strict-transform",
+  "def-weil-regular-scheme",
+  "lem-trf-normalized-resolution-word-gluing",
+  "lem-trf-resolution-word-maximum-center-descent"
+ ],
+ "proof": [
+  {
+   "text": "Fix a nonregular stage. The gluing lemma gives a finite image, hence a greatest word $m>\\bot$. The maximum-center lemma identifies its reduced full stratum $M$ scheme-theoretically with the smooth local presentation centers, with the required normal crossings. Thus it is permissible, not merely contained set-theoretically in cosupport. Its closed immersion into the finite-type ambient makes it finite type: on an affine chart a quotient of a finitely generated $\\mathbf Q$-algebra is again finitely generated. It is regular by the maximum-center lemma, hence smooth by the perfect-field smoothness lemma ($\\mathbf Q$ is perfect). Apply the smooth-center blowup lemma: the new ambient is smooth, separated and finite type and the strict transform is reduced. Retain all old center ideals in order and append this center, as the history definition requires. This proves the induction step preserving the geometric hypotheses, with the given initial pair as base. For an already given maximum extension E, its greatest word equals m by uniqueness of a greatest element. Its center is reduced and has range T, so its kernel is the vanishing ideal of T by the reduced-induced-closed-subscheme theorem. Rewriting the ideal equality in maximum-center descent therefore gives the requested local controlled extensions and adapted normal-crossings condition for this actual E, without replacing its center by a set-theoretically equivalent one.",
+   "uses": [
+    "lem-trf-normalized-resolution-word-gluing",
+    "lem-trf-resolution-word-maximum-center-descent",
+    "lem-trf-regular-perfect-field-smooth",
+    "lem-trf-smooth-center-blowup-geometry",
+    "def-trf-admissible-embedded-history",
+    "lem-weil-pbc-reduced-induced-closed-subscheme"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose VIII, Remark 2.3.11, printed p.93; singular-locus phase only. Detailed BMT Theorem 6.1 and Addendum, sections 6.1--6.3, WANTED; assembly argument by agent."
+   }
+  },
+  {
+   "text": "Write $m=(a,t)$. The dimension-profile lemma gives nonincrease of the head under these admissible blowups, including the ordered histories. Therefore only points of old head $a$ can retain head $a$ after this step. The local-presentation lemma identifies their retained-level loci with cosupports after every finite sequence, using strict transforms for $X$ and controlled transforms for its presenting ideal. By the gluing lemma these controlled transforms compute the prescribed word, rather than a newly chosen algorithm. On the retained-head locus the full word is $(a,t)$ and the presenting word is $(1,t)$; deleting the same leading $1$ preserves every comparison. Consequently the scheme-theoretic center of step 1 is precisely the synchronized full maximum center of those marked-ideal presentations.",
+   "uses": [
+    "lem-trf-hilbert-samuel-smooth-dimension-profile",
+    "lem-trf-hilbert-samuel-local-presentations",
+    "lem-trf-normalized-resolution-word-gluing",
+    "lem-trf-resolution-word-maximum-center-descent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose VIII, Remark 2.3.11, printed p.93; singular-locus phase only. Detailed BMT Theorem 6.1 and Addendum, sections 6.1--6.3, WANTED; assembly argument by agent."
+   }
+  },
+  {
+   "text": "Apply marked-ideal progress to the compatible local presentations in step 2: their greatest remaining tail is strictly below $t$, unless their cosupport is empty. In the latter case the local-presentation lemma removes head $a$ altogether. All points with smaller heads have words smaller than $(a,t)$ regardless of their tails; regular points have word $\\bot$. Thus every point of a nonregular next stage has word less than $m$. Its image is finite by the gluing lemma, so its greatest word is strictly less than $m$. This uses a maximum of an actual finite image, not an unattained supremum.",
+   "uses": [
+    "lem-trf-marked-ideal-numerical-resolution-engine",
+    "lem-trf-hilbert-samuel-local-presentations",
+    "lem-trf-normalized-resolution-word-gluing"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose VIII, Remark 2.3.11, printed p.93; singular-locus phase only. Detailed BMT Theorem 6.1 and Addendum, sections 6.1--6.3, WANTED; assembly argument by agent."
+   }
+  },
+  {
+   "text": "On a constant-greatest-head interval beginning at any finite stage, retain the local presentations at that stage and their recorded earlier history. At each subsequent step, step 2 and the all-finite-test-sequences assertion for presentations identify their controlled transforms with exactly the retained-head locus. The same-word assertion of the gluing lemma and the ideal identification of the maximum-center lemma identify each selected center with their synchronized maximum center. This is an induction on the number of extensions in the interval; it does not assume a completed tower. Use a finite covering family at the starting stage (the maximum stratum is closed in the quasi-compact finite-type scheme). Pull back this fixed family throughout the interval; patches missing the selected maximum undergo an empty-center stage. The finite-family synchronization assertion of the marked-ideal engine now applies. It terminates, and empty cosupport removes the retained head by the presentation lemma. Hence an infinite interval with greatest head fixed is impossible. Explicitly, a final point of head a has a preimage in one of the continued charts by the cover assertion. The retained-locus equality puts that preimage in the range of the local cosupport map, producing an element of the local cosupport and contradicting its equality to the empty set. This also covers zero patches or an empty final scheme.",
+   "uses": [
+    "lem-trf-hilbert-samuel-local-presentations",
+    "lem-trf-normalized-resolution-word-gluing",
+    "lem-trf-resolution-word-maximum-center-descent",
+    "lem-trf-marked-ideal-numerical-resolution-engine"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose VIII, Remark 2.3.11, printed p.93; singular-locus phase only. Detailed BMT Theorem 6.1 and Addendum, sections 6.1--6.3, WANTED; assembly argument by agent."
+   }
+  },
+  {
+   "text": "Start with a hypothetical infinite sequence of maximum extensions. Induction makes every prefix both admissible and a MaximumHistory, and progress preserves its geometry. At each stage the positive greatest word is attained at a singular point x. Its head a is singular by normalizedHead_regular. Every regular point has the smaller regular head; at any other point y the normalized-word charts express both words as (head,tail), so projection of their lexicographic comparison gives head(y) <= a. Thus a is an attained greatest head. Pointwise head nonincrease, evaluated at a point attaining the next greatest head, makes the sequence of greatest heads antitone. The reachable-head descending-chain clause (resolution_word_finitely_many_head_drops, obtained from the dimension-profile theorem) forbids strict drops along every selected sequence of prefixes. If the head sequence had no constant final tail, no value in its range could be least: an attained least value and antitonicity would give a constant tail. Choose a strictly smaller value recursively from each selected value. These selected prefixes contradict the reachable-head clause. Therefore some tail is constant. Reindex the original histories by n+k, retaining the actual extensions and their earlier centers. Its head is still singular, and resolution_word_no_constant_head_tail excludes this infinite tail. No well-foundedness of the entire word alphabet is asserted.",
+   "uses": [
+    "def-trf-admissible-embedded-history",
+    "lem-trf-normalized-resolution-word-gluing",
+    "lem-trf-hilbert-samuel-smooth-dimension-profile"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose VIII, Remark 2.3.11, printed p.93; singular-locus phase only. Detailed BMT Theorem 6.1 and Addendum, sections 6.1--6.3, WANTED; assembly argument by agent."
+   }
+  },
+  {
+   "text": "If the initial scheme is regular, every point has word $\\bot$ by the gluing lemma, so no greatest value strictly above $\\bot$ exists. For the empty scheme there are no values at all. In either case the definition of a maximum extension permits no first extension. The same reasoning applies once a later stage is regular or empty. For a length-zero raw history the initial intrinsic isomorphism identifies its last scheme with the initial X. An isomorphism is etale, so regular stalks pull back along it. In the empty case its underlying map cannot have a source point. An assumed positive attained maximum would then equal bottom by the fixed assignment, a contradiction.",
+   "uses": [
+    "lem-trf-normalized-resolution-word-gluing",
+    "def-trf-admissible-embedded-history"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose VIII, Remark 2.3.11, printed p.93; singular-locus phase only. Detailed BMT Theorem 6.1 and Addendum, sections 6.1--6.3, WANTED; assembly argument by agent."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-trf-admissible-embedded-history",
+  "lem-trf-hilbert-samuel-local-presentations",
+  "lem-trf-hilbert-samuel-smooth-dimension-profile",
+  "lem-trf-marked-ideal-numerical-resolution-engine",
+  "lem-trf-normalized-resolution-word-gluing",
+  "lem-trf-regular-perfect-field-smooth",
+  "lem-trf-resolution-word-maximum-center-descent",
+  "lem-trf-smooth-center-blowup-geometry",
+  "lem-weil-pbc-reduced-induced-closed-subscheme"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "Expose VIII, Remark 2.3.11, printed p.93; singular-locus phase only. Detailed BMT Theorem 6.1 and Addendum, sections 6.1--6.3, WANTED; assembly argument by agent. Lean assembly by P1, 2026-10-26: permissibility via equality of reduced center ideals; empty cosupport via cover/retained fields; termination via attained greatest heads and a recursively selected descending sequence; regular/empty initial cases via the initial intrinsic isomorphism. Other geometric clauses retain the existing proof plans."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "resolution.*invariant|maximum.*blow|Bierstone|marked.ideal",
+   "results": "{\"t\": \"2026-10-22T06:15:52Z\", \"tool\": \"grep\", \"query\": \"resolution.*invariant|maximum.*blow|Bierstone|marked.ideal\", \"sub\": \"\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"Mathlib/RepresentationTheory/Homological/ContCohomology/LowDegree.lean\", \"Mathlib/RepresentationTheory/Homological/ContCohomology/LowDegree.lean\", \"Mathlib/RepresentationTheory/Homological/ContCohomology/Functoriality.lean\", \"Mathlib/RepresentationTheory/Homological/GroupHomology/FiniteCyclic.lean\", \"Mathlib/RepresentationTheory/Homological/GroupHomology/Shapiro.lean\"], \"digest\": \"8d86b08f600467a0\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: returned signatures concern general smoothness, descent, group or homological words, Hilbert spaces or unrelated termination; none states this normalized Hilbert--Samuel/marked-ideal assertion"
+  },
+  {
+   "tool": "leansearch",
+   "query": "lem-trf-resolution-word-progress-termination: Termination of canonical desingularization by dimension normalized Hilbert Samuel invariant and marked ideal coefficient dimension induction",
+   "results": "{\"t\": \"2026-10-22T06:15:53Z\", \"tool\": \"leansearch\", \"query\": \"lem-trf-resolution-word-progress-termination: Termination of canonical desingularization by dimension normalized Hilbert Samuel invariant and marked ideal coefficient dimension induction\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Polynomial.trailingDegree_lt_wf\", \"GenContFract.Terminates\", \"Computation.terminates_of_liftRel\", \"IsSolvable.solvable\", \"Computation.terminates_def\", \"GenContFract.of_correctness_of_terminates\", \"AlgebraicGeometry.Scheme.Hom.instIsDominantToNormalization\", \"Computation.terminates_iff\"], \"digest\": \"1f56b330e900df17\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: returned signatures concern general smoothness, descent, group or homological words, Hilbert spaces or unrelated termination; none states this normalized Hilbert--Samuel/marked-ideal assertion"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"desingularization\"",
+   "results": "{\"t\": \"2026-10-22T06:15:53Z\", \"tool\": \"loogle\", \"query\": \"\\\"desingularization\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: returned signatures concern general smoothness, descent, group or homological words, Hilbert spaces or unrelated termination; none states this normalized Hilbert--Samuel/marked-ideal assertion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "lem-trf-resolution-word-progress-termination: Maximum Hilbert Samuel marked ideal invariant drops after blowing up its smooth maximum locus and terminates by finite head descent and constant head marked ideal termination",
+   "results": "{\"t\": \"2026-10-22T06:16:00Z\", \"tool\": \"leanfinder\", \"query\": \"lem-trf-resolution-word-progress-termination: Maximum Hilbert Samuel marked ideal invariant drops after blowing up its smooth maximum locus and terminates by finite head descent and constant head marked ideal termination\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"IsNoetherianRing.exists_relSeries_isQuotientEquivQuotientPrime\", \"PrimeSpectrum.exist_ltSeries_mem_one_of_mem_last\", \"Algebra.smoothLocus\", \"Algebra.Smooth.exists_span_eq_top_isStandardSmooth\", \"localCohomology.ideal_powers_initial\", \"Algebra.IsSmoothAt.exists_notMem_smooth\", \"Algebra.IsSmoothAt.exists_notMem_isStandardSmooth\", \"Algebra.IsSmoothAt\"], \"digest\": \"f39db6dda6060a46\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: returned signatures concern general smoothness, descent, group or homological words, Hilbert spaces or unrelated termination; none states this normalized Hilbert--Samuel/marked-ideal assertion"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Hilbert\"",
+   "results": "{\"t\": \"2026-10-22T06:17:15Z\", \"tool\": \"loogle\", \"query\": \"\\\"Hilbert\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"Metric.PiNatEmbed.exists_embedding_to_hilbert_cube\", \"HilbertSpace\", \"HilbertSpace.mk\", \"HilbertBasis\", \"HilbertBasis.instFunLike\", \"HilbertBasis.toOrthonormalBasis\", \"HilbertBasis.toSchauderBasis\", \"HilbertBasis.toUnconditionalSchauderBasis\"], \"digest\": \"a29075003a41958e\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: returned signatures concern general smoothness, descent, group or homological words, Hilbert spaces or unrelated termination; none states this normalized Hilbert--Samuel/marked-ideal assertion"
+  },
+  {
+   "tool": "grep",
+   "query": "desingulari|HilbertSamuel|marked.ideal|resolution.*invariant",
+   "results": "{\"t\": \"2026-10-23T09:28:37Z\", \"tool\": \"grep\", \"query\": \"desingulari|HilbertSamuel|marked.ideal|resolution.*invariant\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: signatures concern continued fractions, computations, solvable groups, prime chains, smooth algebras, power series, or etale lifting; none states maximum-center desingularization progress and termination"
+  },
+  {
+   "tool": "leansearch",
+   "query": "lem-trf-resolution-word-progress-termination: Termination of blowing up maximum strata of Hilbert Samuel resolution invariant for reduced characteristic zero schemes",
+   "results": "{\"t\": \"2026-10-23T09:28:37Z\", \"tool\": \"leansearch\", \"query\": \"lem-trf-resolution-word-progress-termination: Termination of blowing up maximum strata of Hilbert Samuel resolution invariant for reduced characteristic zero schemes\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"GenContFract.Terminates\", \"IsSolvable.solvable\", \"GenContFract.of_correctness_of_terminates\", \"Computation.terminates_of_liftRel\", \"Stream'.Seq.terminates_map_iff\", \"Computation.Terminates\", \"Computation.terminates_def\", \"Computation.terminates_map\"], \"digest\": \"a8e06c5af6f32dc5\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: signatures concern continued fractions, computations, solvable groups, prime chains, smooth algebras, power series, or etale lifting; none states maximum-center desingularization progress and termination"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"HilbertSamuel\"",
+   "results": "{\"t\": \"2026-10-23T09:28:38Z\", \"tool\": \"loogle\", \"query\": \"\\\"HilbertSamuel\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: signatures concern continued fractions, computations, solvable groups, prime chains, smooth algebras, power series, or etale lifting; none states maximum-center desingularization progress and termination"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "lem-trf-resolution-word-progress-termination: Desingularization by successive maximum invariant blowups terminates using normalized Hilbert Samuel head descent and marked ideal resolution",
+   "results": "{\"t\": \"2026-10-23T09:28:42Z\", \"tool\": \"leanfinder\", \"query\": \"lem-trf-resolution-word-progress-termination: Desingularization by successive maximum invariant blowups terminates using normalized Hilbert Samuel head descent and marked ideal resolution\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"PrimeSpectrum.exist_ltSeries_mem_one_of_mem_last\", \"IsNoetherianRing.exists_relSeries_isQuotientEquivQuotientPrime\", \"Algebra.IsSmoothAt.exists_notMem_isStandardSmooth\", \"Algebra.Smooth.exists_span_eq_top_isStandardSmooth\", \"Algebra.IsStandardSmooth.out\", \"Algebra.IsSmoothAt.exists_notMem_smooth\", \"Algebra.IsStandardSmoothOfRelativeDimension.out\", \"Algebra.IsStandardSmoothOfRelativeDimension\"], \"digest\": \"d3e85b878f402737\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: signatures concern continued fractions, computations, solvable groups, prime chains, smooth algebras, power series, or etale lifting; none states maximum-center desingularization progress and termination"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"blowup\"",
+   "results": "{\"t\": \"2026-10-23T09:29:12Z\", \"tool\": \"loogle\", \"query\": \"\\\"blowup\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: signatures concern continued fractions, computations, solvable groups, prime chains, smooth algebras, power series, or etale lifting; none states maximum-center desingularization progress and termination"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "lem-trf-resolution-word-progress-termination: Principalization of coherent marked ideals in characteristic zero with Hilbert Samuel strata and synchronized smooth centers",
+   "results": "{\"t\": \"2026-10-23T09:29:22Z\", \"tool\": \"leanfinder\", \"query\": \"lem-trf-resolution-word-progress-termination: Principalization of coherent marked ideals in characteristic zero with Hilbert Samuel strata and synchronized smooth centers\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"PrimeSpectrum.exist_ltSeries_mem_one_of_mem_last\", \"Algebra.Smooth.exists_span_eq_top_isStandardSmooth\", \"PowerSeries.exist_eq_span_eq_ncard_of_X_notMem\", \"StandardEtalePair.existsUnique_hasMap_of_hasMap_quotient_of_sq_eq_bot\", \"Algebra.IsSmoothAt.exists_notMem_isStandardSmooth\", \"Algebra.IsSmoothAt.exists_notMem_smooth\", \"HenselianRing\", \"localCohomology.ideal_powers_initial\"], \"digest\": \"2f05c5212f9d95f1\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: signatures concern continued fractions, computations, solvable groups, prime chains, smooth algebras, power series, or etale lifting; none states maximum-center desingularization progress and termination"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-hilbert-samuel-resolution-invariant-calculus",
+  "date": "2026-10-22",
+  "group": "Q153"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Historical nearby-duality/alteration branch of lem-trf-local-term-locality, proof (1)--(2), through lem-trf-log-regular-desingularization: monoidal resolution used for the regular modification of nodal pairs; ILO VIII 3.3.15, pp.109--110. Expose VIII, Theorems 3.1.27 and 3.2.20, and Remark 3.2.21, pp.102,106; construction in 3.2.19 over k=Q. Supporting source: Expose VIII, Theorem 2.3.10, normalized restriction in 2.3.9 and Remark 2.3.12(i), equivariance in Corollary 2.3.17, printed pp.93--95; application in 3.2.19, p.106. Refinement in this split: Expose VIII, Theorem 2.3.10 restricted to finite-type Q-schemes, with tower conventions 2.1.4, 2.3.1, 2.3.4 and Remark 2.3.5(i), printed pp.87,91--93. This is ordinary resolution, not the normalized toric conclusion; no Stacks tag states this characteristic-zero resolution theorem. Lower input: embedded characteristic-zero resolution and invariant synchronization discussed in ILO VIII 2.3.11 and 2.3.13; the intrinsic gluing argument is supplied in this item. Lower input: Expose VIII 2.3.11 and 2.3.13, pp.93--94: local invariant input underlying the cited strong embedded algorithm; BMT sections 6.1--6.3, especially local embedding independence and the correction of synchronization for arbitrary smooth morphisms. Re-split: ILO VIII 2.3.11, p.93, singular-locus part before exceptional cleanup; old proof step 4 after coherence and step 7. Supporting Stacks Tag 0FUT, more-morphisms.tex lemma-blowup. Detailed BMT Theorem 6.1 Addendum (2) and coefficient-dimension termination WANTED.",
+   "via": [
+    "lem-trf-hilbert-samuel-resolution-invariant-calculus",
+    "lem-trf-embedded-resolution-ambient-comparison",
+    "lem-trf-smooth-functorial-ordinary-resolution",
+    "lem-trf-toric-normalized-desingularization",
+    "lem-trf-functorial-fan-desingularization",
+    "lem-trf-monoidal-resolution-tower",
+    "lem-trf-log-regular-desingularization",
+    "lem-trf-nodal-pair-projective-resolution",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-trf-resolution-word-progress-termination",
+  "worker": "stage1",
+  "summary": "Assembled progress and termination from the existing normalized-word gluing, maximum-center descent, Hilbert--Samuel dimension-profile and presentation, marked-ideal engine, and smooth-center geometry nodes. Kept the statement unchanged, checked every cited statement and absence of cycles, supplied the finite-history constant-head synchronization induction and the finite-head-change argument, and checked empty, regular and finite-disjoint-union cases. No new nodes are needed. Exact project searches found no attachment; fresh recorded Mathlib searches found no match.",
+  "blueprint": "Realizes the singular-locus resolution termination input in the historical alteration/nearby-duality branch of lem-trf-local-term-locality, through lem-trf-hilbert-samuel-resolution-invariant-calculus, old step 4 after coherence and step 7 (ILO VIII 2.3.11). The latest blueprint now proves contracting local terms by Varshavsky; this item does not replace that unit route or assert a new blueprint equivalence."
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q18-67012febb",
+  "group": "Q18",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q18-67012febb (reviewer sub-agent of L); spot-checked: I read the mathematics in full. One commit on base d6f859a; no new nodes; the statement and stmt_deps are byte-identical to live, where the item is still unsplit (not superseded). There is no repair note for the item; the parent's re-split note is resolved and the parent landed with this node carrying old steps 4 and 7, and all of their arguments reappear here. Step 1: the descent lemma gives M nonempty, regular, scheme-theoretically the presentation centre with normal crossings; M is locally of finite type, so it is smooth by the perfect-field lemma; the blowup-geometry lemma keeps P smooth/separated/finite type and X reduced; the induction is set up from the initial pair. Steps 2-3: head nonincrease (profile), cosupport equals the retained locus (presentations) and the same word (gluing), so the engine's maximum word drops strictly or the cosupport empties and the head is removed; lower-head and regular points are handled, and the finite image gives an attained maximum. Step 4: the starting presentations on a fixed finite cover, pulled back with empty-centre patches, use exactly the engine's patched synchronized termination clause. Step 5: the profile's 'no infinite strictly decreasing chain' (stated with histories and disjoint unions) gives finitely many head drops. Step 6 (regular/empty) is correctly marked elementary. All cited nodes are in unit sk-i-curve-zero (no tool_uses needed); proof_deps equals the union of uses; no cycle (the only citer is the parent). Source is ILO VIII Remark 2.3.11 (PDF p.98), read and matching; BMT is WANTED and proof_origin is agent; no SGA. Edge cases checked: empty input, regular input, node plus smooth component, dimension 0. The searches cover all three kinds."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.ResolutionWordProgressTermination",
+  "declaration": "AlgebraicGeometry.EmbeddedResolutionHistory.resolution_word_termination",
+  "declarations": [
+   "AlgebraicGeometry.EmbeddedResolutionHistory.IsNormalizedResolutionWord",
+   "AlgebraicGeometry.EmbeddedResolutionHistory.HasResolutionGeometry",
+   "AlgebraicGeometry.EmbeddedResolutionHistory.MaximumHistory",
+   "AlgebraicGeometry.EmbeddedResolutionHistory.Extension.resolutionMap",
+   "AlgebraicGeometry.EmbeddedResolutionHistory.HeadIntervalPresentations",
+   "AlgebraicGeometry.EmbeddedResolutionHistory.resolution_word_progress",
+   "AlgebraicGeometry.EmbeddedResolutionHistory.resolution_word_permissible",
+   "AlgebraicGeometry.EmbeddedResolutionHistory.resolution_word_head_nonincrease",
+   "AlgebraicGeometry.EmbeddedResolutionHistory.resolution_word_finitely_many_head_drops",
+   "AlgebraicGeometry.EmbeddedResolutionHistory.resolution_word_constant_head_presentations",
+   "AlgebraicGeometry.EmbeddedResolutionHistory.resolution_word_empty_cosupport_removes_head",
+   "AlgebraicGeometry.EmbeddedResolutionHistory.resolution_word_no_constant_head_tail",
+   "AlgebraicGeometry.EmbeddedResolutionHistory.resolution_word_termination",
+   "AlgebraicGeometry.EmbeddedResolutionHistory.resolution_word_zero_extensions"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/ResolutionWordProgressTermination.lean",
+  "statement": "theorem resolution_word_termination (R : MarkedIdeal.NumericalResolution.{u}) (ν : ValueFamily.{u} HilbertSamuel.ResolutionWord) (hν : IsNormalizedResolutionWord R ν) (A : EmbeddedResolutionPair.{u}) : ¬ ∃ (H : ∀ n : ℕ, EmbeddedResolutionHistory A n) (E : ∀ n : ℕ, Extension (H n) (H (n + 1))), ∀ n, IsMaximumStep ν (E n)",
+  "branch": "sheaf-dag",
+  "by": "Q31",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "The nine named statements render all progress, permissibility, head, synchronization, termination and zero-extension clauses. The helper predicates and finite-interval data belong to this fixed process and reuse the existing histories, word charts and controlled transforms. IsNormalizedResolutionWord is definitionally the full output property of normalized_resolution_word_gluing, so the invariant is not replaced by an arbitrary decreasing label."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-2564f28f6",
+  "group": "Q31",
+  "result": "pass",
+  "note": "Node JSON differs from live only in lean; lean.statement verbatim in module; 14 declarations present, no name clash. IsNormalizedResolutionWord is verbatim the gluing theorem's output (pins ν). Pair = node hypotheses, universe u, empty/disjoint unions allowed. Clauses: progress (∃ maximum step, geometry preserved, strict drop if nonregular), permissible (scheme-theoretic ideal identification as in descent theorem), head nonincrease (canonical resolutionMap, WithBot for empty), finitely many head drops (from modifiedHead_no_infinite_drops), constant-head HeadIntervalPresentations (actual charts, controlled extensions, cartesian, retained locus, synchronized max, empty centers), empty cosupport removes head, no constant-head tail, termination from empty history (Admissible.empty), regular/empty zero extensions; no well-foundedness claim. Only sorry; helpers real; docstrings with source/blueprint; report has Worker report and Second reading by Q31. Minor: local center Smooth not restated (carried by HistoryStep). No compile needed."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P1",
+  "result": "pass",
+  "landing": "20261026T092159-L-3407710",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

@@ -132,7 +132,43 @@
   "item": "lemma-weil-pbc-exact-couple-abutment",
   "date": "2026-10-09"
  },
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": [
+    "CategoryTheory.Functor.mono_homologyFunctor_rightDerivedFunctorPlus_map",
+    "CategoryTheory.Functor.isIso_homologyFunctor_rightDerivedFunctorPlus_truncLEι"
+   ]
+  },
+  "slopmaster2": {
+   "state": "closed",
+   "decls": [
+    {
+     "name": "CategoryTheory.Functor.mono_homologyFunctor_rightDerivedFunctorPlus_map",
+     "module": "WeilConjectures.CategoryTheory.RightDerivedFunctorTruncationIso",
+     "lines": [
+      72,
+      121
+     ],
+     "kind": "theorem",
+     "sorry": false
+    },
+    {
+     "name": "CategoryTheory.Functor.isIso_homologyFunctor_rightDerivedFunctorPlus_truncLEι",
+     "module": "WeilConjectures.CategoryTheory.RightDerivedFunctorTruncationIso",
+     "lines": [
+      176,
+      203
+     ],
+     "kind": "theorem",
+     "sorry": false
+    }
+   ],
+   "missing": [],
+   "open": []
+  }
+ },
  "chapter": "sec-proper-base-change",
  "unit": "sk-thm-properbasechange",
  "split_report": {
@@ -182,5 +218,57 @@
    "CategoryTheory.Functor.mono_homologyFunctor_rightDerivedFunctorPlus_map"
   ],
   "sorry_after": []
+ },
+ "blueprint_update": {
+  "snapshot": "main-20261023-1620",
+  "commit": "7284bb09daf97437d544c51882b325f9c52cd345",
+  "changed": [
+   "proof"
+  ],
+  "statement": "Let $v:\\mathcal A\\to\\mathcal B$ be a left exact additive functor [def-sp-left-exact-additive] between Grothendieck abelian categories [def-sp-grothendieck-abelian], with right derived functor $Rv:D^+(\\mathcal A)\\to D^+(\\mathcal B)$ computed by K-injective resolutions [def-sp-kinjective-bridge]. Let $n\\in\\mathbf Z$ and let $c:L\\to M$ be a morphism of $D^+(\\mathcal A)$ [def-weil-pbc-bounded-derived-subcategories] such that $\\mathcal H^i(c):\\mathcal H^i(L)\\to\\mathcal H^i(M)$ (cohomology functors of [def-weil-abstract-derived-category]) is an isomorphism for every $i\\leq n$ and a monomorphism for $i=n+1$. Then $\\mathcal H^j(Rv(c)):\\mathcal H^j(RvL)\\to\\mathcal H^j(RvM)$ is an isomorphism for every $j\\leq n$. In particular, for $K\\in D^+(\\mathcal A)$ and the canonical truncation $c_n:\\tau_{\\leq n}K\\to K$ [def-sbc-standard-tstructure-derived-category] (of a bounded below complex representing $K$), the map $\\mathcal H^n(Rv\\,\\tau_{\\leq n}K)\\to\\mathcal H^n(RvK)$ induced by $c_n$ is an isomorphism.",
+  "proof": [
+   {
+    "text": "**Step 1.** **Step 1 (the cone of $c$ has no cohomology in degrees $\\leq n$).** $D^+(\\mathcal A)$ is a full triangulated subcategory of $D(\\mathcal A)$, closed under isomorphisms and containing the third vertex of a distinguished triangle of $D(\\mathcal A)$ whose other two vertices lie in it [def-weil-pbc-bounded-derived-subcategories]; by axiom TR1 of the triangulated category $D(\\mathcal A)$ [def-weil-triangulated-category] complete $c$ to a distinguished triangle $L\\xrightarrow{c}M\\xrightarrow{p}C\\xrightarrow{w}L[1 ]$, so $C\\in D^+(\\mathcal A)$. Its long exact cohomology sequence [lem-sf-derived-homology-long-exact] contains, for each $j$, the exact piece $\\mathcal H^j(L)\\xrightarrow{\\mathcal H^j(c)}\\mathcal H^j(M)\\xrightarrow{\\mathcal H^j(p)}\\mathcal H^j(C)\\xrightarrow{\\delta^j}\\mathcal H^{j+1}(L)\\xrightarrow{\\mathcal H^{j+1}(c)}\\mathcal H^{j+1}(M)$. Let $j\\leq n$. Since $\\mathcal H^j(c)$ is an isomorphism, in particular an epimorphism, exactness at $\\mathcal H^j(M)$ gives $\\Ker\\mathcal H^j(p)=\\Im\\mathcal H^j(c)=\\mathcal H^j(M)$, so $\\mathcal H^j(p)=0$; exactness at $\\mathcal H^j(C)$ then gives $\\Ker\\delta^j=\\Im\\mathcal H^j(p)=0$, so $\\delta^j$ is a monomorphism. Since $j+1\\leq n+1$, $\\mathcal H^{j+1}(c)$ is a monomorphism (an isomorphism if $j+1\\leq n$, a monomorphism by hypothesis if $j+1=n+1$), so exactness at $\\mathcal H^{j+1}(L)$ gives $\\Im\\delta^j=\\Ker\\mathcal H^{j+1}(c)=0$, i.e. $\\delta^j=0$. A monomorphism that is zero has zero source: $\\mathcal H^j(C)=0$ for all $j\\leq n$, i.e. $\\mathcal H^i(C)=0$ for all $i<n+1$. (This is where both hypotheses are used: surjectivity of $\\mathcal H^j(c)$ for $j\\leq n$ and injectivity of $\\mathcal H^{j+1}(c)$ for $j+1\\leq n+1$; in the source's case $C=\\tau_{\\geq n+1}K$ this vanishing holds by construction.)",
+    "uses": [
+     "def-weil-pbc-bounded-derived-subcategories",
+     "def-weil-triangulated-category",
+     "lem-sf-derived-homology-long-exact"
+    ],
+    "elementary": false
+   },
+   {
+    "text": "**Step 2.** **Step 2 ($Rv$ of the triangle is distinguished).** The right derived functor $Rv:D^+(\\mathcal A)\\to D^+(\\mathcal B)$, $RvK=v(I(K))$ for a K-injective resolution $K\\to I(K)$ [def-sp-kinjective-bridge] (a Grothendieck abelian category has enough injectives and K-injective resolutions of bounded below complexes [def-sp-grothendieck-abelian]; any two K-injective resolutions, in particular a bounded below complex of injectives, are homotopy equivalent over $K$, so this is the functor of the cited lemma), is a triangulated functor with its shift isomorphism $\\sigma$ [lem-weil-pbc-derived-direct-image-triangulated]. Hence $RvL\\xrightarrow{Rv(c)}RvM\\xrightarrow{Rv(p)}RvC\\xrightarrow{\\sigma_L\\circ Rv(w)}(RvL)[1 ]$ is a distinguished triangle of $D^+(\\mathcal B)$, hence of $D(\\mathcal B)$ ($D^+(\\mathcal B)$ being a full triangulated subcategory [def-weil-pbc-bounded-derived-subcategories]).",
+    "uses": [
+     "def-sp-kinjective-bridge",
+     "def-sp-grothendieck-abelian",
+     "lem-weil-pbc-derived-direct-image-triangulated",
+     "def-weil-pbc-bounded-derived-subcategories"
+    ],
+    "elementary": false
+   },
+   {
+    "text": "**Step 3.** **Step 3 ($Rv C$ has no cohomology in degrees $\\leq n$).** By Step 1, $C\\in D^+(\\mathcal A)$ satisfies $\\mathcal H^i(C)=0$ for all $i<n+1$. By [lem-weil-pbc-derived-functor-negative-vanishing] with $b=n+1$, $\\mathcal H^j(RvC)=0$ for all $j<n+1$, i.e. for all $j\\leq n$.",
+    "uses": [
+     "lem-weil-pbc-derived-functor-negative-vanishing"
+    ],
+    "elementary": false
+   },
+   {
+    "text": "**Step 4.** **Step 4 (the long exact sequence of $Rv$ of the triangle).** Apply [lem-sf-derived-homology-long-exact] to the distinguished triangle of Step 2 in $D(\\mathcal B)$: for every $j$ the sequence $\\mathcal H^{j-1}(RvC)\\xrightarrow{\\delta^{j-1}}\\mathcal H^j(RvL)\\xrightarrow{\\mathcal H^j(Rv(c))}\\mathcal H^j(RvM)\\xrightarrow{\\mathcal H^j(Rv(p))}\\mathcal H^j(RvC)$ is exact. Let $j\\leq n$. Exactness at $\\mathcal H^j(RvL)$ gives $\\Ker\\mathcal H^j(Rv(c))=\\Im\\delta^{j-1}$, which is $0$ because $\\mathcal H^{j-1}(RvC)=0$ by Step 3 ($j-1<n$); so $\\mathcal H^j(Rv(c))$ is a monomorphism. Exactness at $\\mathcal H^j(RvM)$ gives $\\Im\\mathcal H^j(Rv(c))=\\Ker\\mathcal H^j(Rv(p))=\\mathcal H^j(RvM)$, because $\\mathcal H^j(RvC)=0$ by Step 3 ($j\\leq n$); so $\\mathcal H^j(Rv(c))$ is an epimorphism. A monomorphism and epimorphism in the abelian category $\\mathcal B$ is an isomorphism: $\\mathcal H^j(Rv(c))$ is an isomorphism for every $j\\leq n$.",
+    "uses": [
+     "lem-sf-derived-homology-long-exact"
+    ],
+    "elementary": false
+   },
+   {
+    "text": "**Step 5.** **Step 5 (the truncation).** Let $K\\in D^+(\\mathcal A)$, represented by a bounded below complex $K$, and $c_n:\\tau_{\\leq n}K\\to K$ the inclusion of the canonical truncation. By [lem-weil-pbc-truncation-cohomology], $\\tau_{\\leq n}K$ is bounded below (so $c_n$ is a morphism of $D^+(\\mathcal A)$ [def-weil-pbc-bounded-derived-subcategories]), $\\mathcal H^i(c_n)$ is an isomorphism for every $i\\leq n$, and $\\mathcal H^{n+1}(\\tau_{\\leq n}K)=0$, so $\\mathcal H^{n+1}(c_n)$, a morphism out of a zero object, is a monomorphism. Steps 1-4 applied to $c=c_n$ give that $\\mathcal H^j(Rv(c_n))$ is an isomorphism for $j\\leq n$, in particular $\\mathcal H^n(Rv\\,\\tau_{\\leq n}K)\\to\\mathcal H^n(RvK)$ for $j=n$.",
+    "uses": [
+     "lem-weil-pbc-truncation-cohomology",
+     "def-weil-pbc-bounded-derived-subcategories"
+    ],
+    "elementary": false
+   }
+  ],
+  "note": "the current blueprint (main-20261023-1620, weil-conjectures-blueprint 7284bb09da) states or proves this differently; the node is proved in Lean: recorded 2026-10-23, not reopened"
  }
 }

@@ -132,5 +132,59 @@
   "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  },
- "lean_audit": {}
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": [
+    "AlgebraicGeometry.exists_dense_open_component_coproduct"
+   ]
+  },
+  "slopmaster2": {
+   "state": "closed",
+   "decls": [
+    {
+     "name": "AlgebraicGeometry.exists_dense_open_component_coproduct",
+     "module": "WeilConjectures.AlgebraicGeometry.DenseOpenComponentCoproduct",
+     "lines": [
+      21,
+      231
+     ],
+     "kind": "theorem",
+     "sorry": false
+    }
+   ],
+   "missing": [],
+   "open": []
+  }
+ },
+ "blueprint_update": {
+  "snapshot": "main-20261023-1620",
+  "commit": "7284bb09daf97437d544c51882b325f9c52cd345",
+  "changed": [
+   "statement",
+   "proof"
+  ],
+  "statement": "Let X be a reduced scheme, and let ι_i:C_i→X, indexed by Fin(n), be closed immersions from integral schemes whose images enumerate without repetitions the irreducible components. For dense opens V_i⊆C_i, there is a dense open U⊆X such that the component coproduct morphism [def-weil-pbc-scheme-conventions] restricted to U is an isomorphism and ι_i^{-1}(U)⊆V_i for every i.",
+  "proof": [
+   {
+    "text": "*Component opens.* Put $Z_i=\\iota_i(C_i)$ and let $W_i$ be the complement of the union of the other irreducible components. There are finitely many components (they are the $Z_i$), so $W_i$ is open; the closure of $W_i$ is $Z_i$, so $W_i$ is nonempty and contained in $Z_i$.",
+    "uses": [],
+    "elementary": null
+   },
+   {
+    "text": "*Local isomorphisms.* Over $W_i$, the restriction of $\\iota_i$ is a surjective closed immersion into the reduced open subscheme $W_i$, hence an isomorphism (its ideal sheaf consists of nilpotent sections, which vanish on a reduced scheme). Transport $V_i\\cap\\iota_i^{-1}(W_i)$ through this isomorphism to an open $O_i\\subseteq X$. It is nonempty, since $V_i$ is dense and $\\iota_i^{-1}(W_i)$ is a nonempty open of the irreducible $C_i$; being open, nonempty and contained in the irreducible $Z_i$, it has closure $Z_i$. The restriction of $\\iota_i$ over $O_i$ is an isomorphism.",
+    "uses": [],
+    "elementary": null
+   },
+   {
+    "text": "*Gluing.* Let $U=\\bigcup_iO_i$. The $O_i$ are pairwise disjoint, since $W_i$ avoids every other component. Their closures are the components, which cover $X$, so $U$ is dense. The inverse image of $U$ in $C_i$ is the inverse image of $O_i$, contained in $V_i$. Coproducts of schemes are disjoint and stable under base change, so the restriction of $\\coprod_iC_i\\to X$ over $U$ is the coproduct of the restrictions over the $O_i$; these are open immersions with pairwise disjoint images covering $U$, each an isomorphism onto $O_i$, so their coproduct is an isomorphism onto $U$. For the empty family $X$ is empty and $U=\\emptyset$ [def-weil-pbc-scheme-conventions].",
+    "uses": [
+     "def-weil-pbc-scheme-conventions"
+    ],
+    "elementary": false
+   }
+  ],
+  "note": "the current blueprint (main-20261023-1620, weil-conjectures-blueprint 7284bb09da) states or proves this differently; the node is proved in Lean: recorded 2026-10-23, not reopened"
+ }
 }

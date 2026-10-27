@@ -1,0 +1,138 @@
+{
+ "id": "lem-sf-pull-quotient-augmentation-on-good",
+ "kind": "statement",
+ "title": "Strict pullback augmentation computes the scalar transpose",
+ "statement": "Fix l,E, arbitrary schemes X,Y and f:X→Y, a system operation model and representative-normalized RealizationModel [def-sf-integral-system-canonical-bridge], a normalized Pull presentation p [def-sf-pull-completion-comparison], and a good flat-term K-flat complex P on Y [lem-pur-integral-operations-well-defined]. The reconstruction unit at ordinary derived pullback QP, followed by total limit of realization.reductionPull and the full reference pullback Roos model [def-pur-completed-pullback-tensor-comparison], equals the ordinary pullback localization factor followed by Q of the actual quotient roosUnit on the pulled complex followed by Q of the Roos map induced by p.tower. This is a whole Roos equation before descent to arbitrary objects; it does not assert invertibility.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-compatibility/fix-prop-coherence.proof.md",
+  "place": "Maps-used sentence, primitive tensor/pullback coefficient comparison and open-factor normalization."
+ },
+ "stmt_deps": [
+  "def-sf-integral-system-canonical-bridge",
+  "def-sf-pull-completion-comparison",
+  "lem-pur-integral-operations-well-defined",
+  "def-pur-completed-pullback-tensor-comparison",
+  "def-pur-integral-derived-operations"
+ ],
+ "proof": [
+  {
+   "text": "Expand pullbackTensorReferencePullbackModel and use RealizationModel.model on the ordinary pulled good complex. Naturality of the reconstruction unit moves the ordinary-pullback localization factor in front.",
+   "uses": [
+    "def-sf-integral-system-canonical-bridge",
+    "def-sf-pull-completion-comparison",
+    "def-pur-completed-pullback-tower-realizations"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Extend the normalized ordinary-limit/Roos inclusion from K-injective tower complexes to every complex by naturality and a K-injective resolution. The ordinary Roos inclusion is natural, as seen from its product coordinates and its zero shifted coordinate. Cancel the exact restriction factors. The defining adjunction-transpose equation of pullbackTensorReductionModel and naturality of pullbackTensorLimitUnit now give the whole derived transpose formula.",
+   "uses": [
+    "def-pur-completed-pullback-tower-realizations",
+    "def-pur-integral-derived-operations",
+    "lem-pur-integral-operations-well-defined"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply the ordinary finite projection identity for every n. Product extensionality identifies the first coordinates after the two strict tower maps; both shifted coordinates vanish. The explicit mapping-cocone lift and diagonal product-map formulas prove the whole cochain equation. Apply Q and compose with the ordinary pullback factor.",
+   "uses": [
+    "lem-sf-pull-quotient-ordinary-projection",
+    "def-pur-integral-derived-operations",
+    "lem-pur-integral-operations-well-defined"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-sf-integral-system-canonical-bridge",
+  "def-sf-pull-completion-comparison",
+  "def-pur-completed-pullback-tower-realizations",
+  "def-pur-integral-derived-operations",
+  "lem-pur-integral-operations-well-defined",
+  "lem-sf-pull-quotient-ordinary-projection"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-compatibility/fix-prop-coherence.proof.md",
+  "place": "K7: original three-step route made explicit using the published reduction-model Hom normalization, K-injective extension of the Roos inclusion, and a finite ordinary projection identity."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "The quotient augmentation from an unbounded complex of sheaves to the Roos limit of its finite reductions becomes an isomorphism after finite scalar extension",
+   "results": "Eight hits: scalar restriction for module sheaves, homotopy/derived localization comparisons, module quotients and ordinary limits. None supplies finite reduction of the actual Roos completion unit or its tensor/pullback transpose equations.",
+   "date": "2026-10-25",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "finite derived scalar extension inverts the quotient completion unit of arbitrary unbounded sheaf complex",
+   "results": "Eight hits on ordinary algebraic adic completion or local cohomology; no matching representative-normalized derived sheaf-system equation.",
+   "date": "2026-10-25",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"NatTrans\", \"naturality\", \"Iso\"",
+   "results": "No hits for the natural transformation pattern. The IsIso/unit search returns generic fully faithful adjunction facts, insufficient to identify the specified maps.",
+   "date": "2026-10-25",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "Roos.*[Tt]ranspose|[Tt]ranspose.*Roos|[Qq]uotient.*[Aa]ugmentation",
+   "results": "Zero Mathlib matches. Local source searches read the canonical models, cochain transposes and operation effectivity, and alternative completion normalizations.",
+   "date": "2026-10-25",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.SixFunctors.PrimitiveQuotientAugmentations",
+  "date": "2026-10-25",
+  "group": "D4"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-thm-sf-compatibility",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sf-primitive-quotient-augmentations",
+   "place": "Representative transpose computation and finite invertibility in proof steps 1–4",
+   "via": []
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.SixFunctors.PullQuotientAugmentationOnGood",
+  "file": "lean/Sheaf/SixFunctors/PullQuotientAugmentationOnGood.lean",
+  "declaration": "WeilConjectures.GeneratorReduction.pullQuotientTranspose_onGood",
+  "statement": "theorem pullQuotientTranspose_onGood\n    (system : IntegralSystemRealization.Operations l E)\n    (realization : IntegralSystemRealization.RealizationModel l E system)\n    {X Y : Scheme.{u}} (f : X ⟶ Y) (p : OpenFactorCoherence.Pull l E f)\n    (P : (integralOperationsGoodComplex l E Y).FullSubcategory) :\n    (IntegralSystemRealization.calculus l E X).adjunction.unit.app\n        ((IntegralSystemRealization.ringedPull l E f).obj (DerivedCategory.Q.obj P.obj)) ≫\n      (coefficientSequenceLimit l E X).map\n        ((realization.reductionPull f).hom.app (DerivedCategory.Q.obj P.obj)) ≫\n      (pullbackTensorReferencePullbackModel l E f P).hom =\n      (IntegralSystemRealization.integralOrdinaryPull l E f).mapDerivedCategoryFactors.hom.app\n          P.obj ≫\n        DerivedCategory.Q.map (IntegralOnSlice.roosUnit l E X none\n          ((OpenFactorCoherence.pullCx l E f).obj P.obj)) ≫\n        DerivedCategory.Q.map (integralOperationsRoosMap (p.tower.hom.app P.obj))",
+  "branch": "sheaf-dag",
+  "by": "D4",
+  "date": "2026-10-25"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D4",
+  "result": "pass",
+  "landing": "20261025T143015-L-907616",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K7",
+  "result": "pass",
+  "landing": "20261027T034707-L-3675027",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

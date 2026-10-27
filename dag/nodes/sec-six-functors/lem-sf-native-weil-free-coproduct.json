@@ -1,0 +1,189 @@
+{
+ "id": "lem-sf-native-weil-free-coproduct",
+ "kind": "statement",
+ "title": "Localized native free induction is the integer coproduct",
+ "statement": "For a finite field k₀, a prime l distinct from its characteristic, any k₀-scheme T and any A in the ordinary derived category of native adic sheaves on its geometric fibre, the cofan with point U_T I_T A and integer legs inclusion k₀ l T A n is colimiting. These are the actual localized structure and adjunction unit of [def-sf-native-weil-induction-comparison-data], using [lem-sf-free-derived-weil-resolution].",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-package/cor-coef-verdier-weil-equivariance.proof.md",
+  "place": "Parent comparison proof: Native heart structural and localizing properties. Final exceptional-adjunction sentence; extraction of parent proof steps 2-4: Grothendieck hearts, K-injective normalization, actual left-functor and free-induction comparison. Generic source: Stacks Tags 079P (theorem-K-injective-embedding-grothendieck), 08BJ (lemma-adjoint-preserve-K-injectives), 070Y (lemma-K-injective-defined). The native induction specialization is agent-formulated."
+ },
+ "stmt_deps": [
+  "def-sf-native-weil-induction-comparison-data",
+  "lem-sf-free-derived-weil-resolution"
+ ],
+ "proof": [
+  {
+   "text": "For each integer n form the additive orbit functor with object Free.obj F X n and morphism Free.objMap F f n. Its successor comparison is Free.objSucc. For a complex K, the termwise coprojections form a cofan of the orbit complexes with point the underlying complex of termwise free induction. Evaluation in each degree identifies it with the heart coproduct, so HomologicalComplex.isColimitOfEval proves it colimiting. The heart successor formula is a chain-map equation.",
+   "uses": [
+    "lem-sf-free-derived-weil-resolution"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply derived_Q_preservesCoproducts to this cofan. Compose each localized successor comparison with the exact Frobenius factorization. Naturality of that factorization and the chain-map successor equation give the corresponding recurrence for the localized cofan.",
+   "uses": [
+    "lem-pur-exact-derived-coproducts"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The comparison from derived free induction followed by derived forgetting to the localization of termwise free induction is the composite of the two specified exact-functor factorizations. Adjunction.Localization.ε_app identifies the localized unit with the zeroth termwise coprojection. The composition and natural-isomorphism factorization equations identify the localized structure with the termwise free structure. Naturality extends both equations along the chosen representative isomorphism of an arbitrary derived object A.",
+   "uses": [
+    "lem-sf-free-derived-weil-resolution",
+    "def-weil-exact-derived-adjunction"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "An integer orbit cofan with invertible successor comparisons and the free structure recurrence is determined, up to summand isomorphisms, by its zeroth leg. Construct these isomorphisms by integer induction: forward use the successor comparisons; backward lift their composite through the fully faithful Frobenius equivalence. The recurrence proves that each summand isomorphism takes the given leg to Free.hom of the zeroth leg. The resulting isomorphism of discrete diagrams and cocones transports the colimit. Apply this to the localized cofan, transported through the normalized comparison, whose zeroth leg is the actual derived unit. This is exactly the cofan in the theorem.",
+   "uses": [
+    "lem-sf-free-derived-weil-resolution"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sf-free-derived-weil-resolution",
+  "lem-pur-exact-derived-coproducts",
+  "def-weil-exact-derived-adjunction"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "A7",
+  "date": "2026-10-27",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-package/cor-coef-verdier-weil-equivariance.proof.md",
+  "place": "Same ordinary derived free-resolution route, implemented with a degreewise cofan, the specified exact-adjunction unit normalization, and forward/backward integer recurrence transport."
+ },
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.NativeWeilDerivedInductionComparison",
+  "date": "2026-10-24",
+  "group": "S1"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sf-native-weil-derived-induction-comparison",
+   "place": "Native comparison proof step 2: localized integer free coproduct",
+   "via": [
+    "lem-sf-native-weil-derived-induction-comparison"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "module": "Sheaf.Paper.NativeWeilFreeCoproduct",
+  "file": "lean/Sheaf/Paper/NativeWeilFreeCoproduct.lean",
+  "declaration": "AlgebraicGeometry.NativeWeilInduction.nativeWeil_free_coproduct",
+  "statement": "theorem nativeWeil_free_coproduct\n    (T : Scheme.{u}) [T.Over (Spec (.of k₀))]\n    (A : _root_.DerivedCategory\n      (ProEtale.AdicSheaf l (T ↘ Spec (.of k₀)).geometricFiber)) :\n    Nonempty (IsColimit (Cofan.mk\n      ((forget k₀ l T).obj ((induction k₀ l T).obj A)) (inclusion k₀ l T A)))",
+  "existing": false,
+  "branch": "sheaf-dag",
+  "by": "S1",
+  "date": "2026-10-24"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "An exact functor between categories with automorphisms commutes with free integer induction when it preserves coproducts",
+   "results": {
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "CategoryTheory.ExactFunctor.of",
+     "CategoryTheory.Functor.exact_tfae",
+     "CategoryTheory.ExactFunctor",
+     "CategoryTheory.ExactFunctor.of_fst",
+     "CategoryTheory.PreGaloisCategory.instPreservesFiniteCoproductsActionFintypeCatAutFunctorFunctorToAction",
+     "CategoryTheory.exactFunctor_le_additiveFunctor",
+     "CategoryTheory.AdditiveFunctor.ofExact_obj_fst",
+     "AddCommGrpCat.leftExactFunctorForgetEquivalence.inverseAux"
+    ],
+    "digest": "aefc0384226e1db4"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match for the specified normalized native derived comparison"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Endofunctor.IsoAlgebra.Free.obj",
+   "results": {
+    "ok": true,
+    "n_hits": 0,
+    "note": "loogle: unknown identifier 'CategoryTheory.Endofunctor.IsoAlgebra.Free.obj'",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match for the specified normalized native derived comparison"
+  },
+  {
+   "tool": "grep",
+   "query": "objSucc|freeWeilDerivedAdjunction|rightDerivedFunctorMapOfNatIsoCompForgetIso",
+   "results": {
+    "ok": true,
+    "n_hits": 16,
+    "note": "",
+    "top": [
+     "Mathlib/CategoryTheory/Presentable/OrthogonalReflection.lean",
+     "Mathlib/CategoryTheory/Presentable/OrthogonalReflection.lean",
+     "Mathlib/CategoryTheory/Presentable/OrthogonalReflection.lean",
+     "Mathlib/CategoryTheory/Presentable/OrthogonalReflection.lean",
+     "Mathlib/CategoryTheory/SmallObject/TransfiniteIteration.lean",
+     "Mathlib/CategoryTheory/SmallObject/TransfiniteIteration.lean",
+     "Mathlib/CategoryTheory/SmallObject/Iteration/ExtendToSucc.lean",
+     "Mathlib/CategoryTheory/SmallObject/Iteration/ExtendToSucc.lean"
+    ],
+    "digest": "4bb62de89dcea727"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match for the specified normalized native derived comparison"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Localization of an exact free adjunction preserves the integer coproduct cocone for an automorphism",
+   "results": {
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "ModuleCat.instPreservesFiniteColimitsLocalizationLocalizedModule_functor",
+     "CategoryTheory.Adjunction.localization",
+     "CategoryTheory.Adjunction.derived",
+     "CategoryTheory.Adjunction.derived'",
+     "CategoryTheory.Adjunction.localization_unit_app",
+     "CategoryTheory.Adjunction.isLocalization_leftAdjoint",
+     "CategoryTheory.Adjunction.localization_counit_app",
+     "CategoryTheory.Localization.HasProductsOfShapeAux.isLimitMapCone"
+    ],
+    "digest": "e96b52d3734942d9"
+   },
+   "date": "2026-10-24",
+   "verdict": "general localization adjunction API; not the native integer induction summand comparison"
+  }
+ ],
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-ff560",
+  "group": "S1",
+  "result": "fix",
+  "landing": "20261025T013237-L-3944560",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A7",
+  "result": "pass",
+  "landing": "20261026T235828-L-1458185",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

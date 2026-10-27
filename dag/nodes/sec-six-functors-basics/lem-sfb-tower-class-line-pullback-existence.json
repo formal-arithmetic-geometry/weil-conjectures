@@ -1,0 +1,136 @@
+{
+ "id": "lem-sfb-tower-class-line-pullback-existence",
+ "kind": "statement",
+ "title": "Root-line transport for normalized unit and tensor inverse image",
+ "statement": "Fix l prime, E/Q_l finite, f:X→Y, Base b, Geometry g, and its normalized CoefficientPullback q and TensorPullback k [def-sfb-tower-class-tensor-pullback, def-sp-tower-class-diagonal]. Suppose l is a unit in Γ(Y,O_Y). For normalized Chern data cY,cX [def-sp-tower-class-chern], LinePullback(f,g,cY,cX) [def-sp-tower-class-pullback] is nonempty. Its adjoint is exactly coefficient restriction tensored with restrictRoot on every finite pure tensor. No twisting equivalence, positive functor comparison, or projection map is asserted.",
+ "stmt_deps": [
+  "def-sp-tower-shriek-data",
+  "def-sp-tower-class-diagonal",
+  "def-sfb-tower-class-tensor-pullback",
+  "def-sp-tower-class-chern",
+  "def-sp-tower-class-pullback"
+ ],
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-tower-geometric/sk-prop-sp-tower-geometric-classes.proof.md",
+  "place": "clause (2), scalar extension of the root tower; tensor transport used in the diagonal trace"
+ },
+ "proof": [
+  {
+   "text": "Apply finiteLineComparisons_exists to obtain the finite isomorphisms and their actual coefficient/root tensor formula. This theorem pulls the global unit to X and both sets of residue fields and specializes the existing finite Tate comparison theorem.",
+   "uses": [
+    "lem-sfb-tower-class-finite-line-comparisons"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Conjugate those comparisons by ordinaryPullEvaluation and the two lineEvaluation isomorphisms. The normalized finite tensor formulas imply horizontal compatibility by lem-sfb-tower-class-line-pullback-horizontal. Apply systemIsoOfEvaluation_exists to obtain an ordinary system isomorphism whose evaluations are exactly those conjugates.",
+   "uses": [
+    "lem-sfb-tower-class-line-pullback-horizontal",
+    "lem-coef-system-iso-assembly"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Evaluate the ordinary adjoint using the tower unit evaluation theorem and naturality of ordinaryPushEvaluation. Its evaluation equals the finite adjoint of inverse ordinaryPullEvaluation followed by the evaluated system map. Substitute the assembly equations, cancel the comparison isomorphisms, and use naturality of the finite Hom equivalence in source and target. Applying the resulting morphism equality to the inverse lineEvaluation of a finite tensor cancels the source lineEvaluation and gives the finite tensor formula. This is precisely LinePullback.normalization.",
+   "uses": [
+    "lem-sp-tower-ordinary-unit-evaluation",
+    "def-sp-tower-class-pullback"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-tower-class-finite-line-comparisons",
+  "lem-sfb-tower-class-line-pullback-horizontal",
+  "lem-coef-system-iso-assembly",
+  "lem-sp-tower-ordinary-unit-evaluation",
+  "def-sp-tower-class-pullback"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "H5",
+  "date": "2026-10-27",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-tower-geometric/sk-prop-sp-tower-geometric-classes.proof.md",
+  "place": "classes (2), finite root-line transport; existing normalized finite comparisons and ordinary system assembly, leaving only the horizontal equation"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "LinePullback|PositivePullback",
+   "results": "0 hits: ",
+   "date": "2026-10-27",
+   "verdict": "Generic tensor/adjunction tools only; no normalized tower-unit or root-line assembly. Existing local sheaf results are cited in the proof steps."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"conjugateEquiv\"",
+   "results": "12 hits: CategoryTheory.conjugateEquiv, CategoryTheory.conjugateEquiv_id, CategoryTheory.conjugateEquiv_iso, CategoryTheory.conjugateEquiv_of_iso, CategoryTheory.conjugateEquiv_symm_id, CategoryTheory.conjugateEquiv_symm_iso, CategoryTheory.conjugateEquiv_symm_of_iso, CategoryTheory.conjugateEquiv_adjunction_id",
+   "date": "2026-10-27",
+   "verdict": "Generic tensor/adjunction tools only; no normalized tower-unit or root-line assembly. Existing local sheaf results are cited in the proof steps."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Inverse image of sheaves of modules preserves the tensor product and the tensor unit",
+   "results": "8 hits: CategoryTheory.Sheaf.instMonoidalFunctorOppositePresheafToSheaf, CategoryTheory.sheafToPresheafMonoidal, PresheafOfModules.Monoidal.tensorObj_map_tmul, SheafOfModules.instIsLeftAdjointPullback, SheafOfModules.PullbackConstruction.adjunction, SheafOfModules.instIsIsoPullbackObjUnitToUnitOfFinal, LightCondensed.instMonoidalFunctorOppositeLightProfiniteModuleCatSheafCoherentTopologyPresheafToSheaf, SheafOfModules.pullbackPushforwardAdjunction",
+   "date": "2026-10-27",
+   "verdict": "Generic tensor/adjunction tools only; no normalized tower-unit or root-line assembly. Existing local sheaf results are cited in the proof steps."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The roots of unity Tate line pulls back under a morphism of schemes on which ell is invertible",
+   "results": "8 hits: AlgebraicGeometry.Scheme.Pullback.Triplet.Spec_map_tensor_isPullback, AlgebraicGeometry.Scheme.Pullback.Triplet.isPullback_SpecMap_tensor, AlgebraicGeometry.Scheme.Pullback.Triplet.Spec_ofPointTensor_SpecTensorTo, AlgebraicGeometry.Scheme.Pullback.carrierEquiv, AlgebraicGeometry.AffineSpace.isPullback_map, AlgebraicGeometry.pullbackSpecIso_hom_base, AlgebraicGeometry.Scheme.Pullback.Triplet.SpecTensorTo, AlgebraicGeometry.Scheme.Pullback.ofPointTensor_SpecTensorTo",
+   "date": "2026-10-27",
+   "verdict": "Generic tensor/adjunction tools only; no normalized tower-unit or root-line assembly. Existing local sheaf results are cited in the proof steps."
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.DiagonalTraceGeometricModelExistence",
+  "date": "2026-10-27",
+  "group": "J8"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-prop-diagonal-tower-trace",
+   "place": "clause (2), scalar extension of the root tower; tensor transport used in the diagonal trace",
+   "via": [
+    "lem-sfb-diagonal-trace-geometric-model-existence"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-prop-diagonal-tower",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.TowerClassLinePullbackExistence",
+  "file": "lean/Sheaf/Paper/TowerClassLinePullbackExistence.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.SpTowerClasses.linePullback_nonempty",
+  "statement": "theorem linePullback_nonempty\n    {b : SpTowerShriek.Base l E} {X Y : Scheme.{u}} (f : X ⟶ Y)\n    (g : SpTowerShriek.Geometry l E b f)\n    (q : CoefficientPullback l E b f g) (k : TensorPullback l E f g)\n    (hY : IsUnit (l : Γ(Y, ⊤))) (cY : Chern l E Y) (cX : Chern l E X)\n    (nY : cY.Normalized l E) (nX : cX.Normalized l E) :\n    Nonempty (LinePullback l E f g cY cX)",
+  "branch": "sheaf-dag",
+  "by": "J8",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J8",
+  "result": "pass",
+  "landing": "20261027T012856-L-2343048",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H5",
+  "result": "pass",
+  "landing": "20261027T034654-L-3673013",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

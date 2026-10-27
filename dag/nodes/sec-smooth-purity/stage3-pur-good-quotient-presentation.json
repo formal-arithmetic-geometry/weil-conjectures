@@ -1,0 +1,137 @@
+{
+ "id": "stage3-pur-good-quotient-presentation",
+ "kind": "statement",
+ "title": "Good simultaneous strict quotient presentations",
+ "statement": "Fix a prime l, a finite extension E/Q_l, a family W of schemes, and any completed-operation model M [def-pur-completed-operation-comparison-data]. For every flat-term independently K-flat complex P over the completed coefficient ring on W(a), and every proof hP of its K-flatness, there is an IntegralCoherence.QuotientPresentation(M,a,P,hP) [stage3-pur-integral-realization-data]. It uses the specified reduction calculus, ordinary quotient extensions, evaluation comparisons and all transition maps, and its whole sequence-site complex is independently K-flat with flat terms. No flatness of the quotient ring map is required.",
+ "stmt_deps": [
+  "stage3-pur-integral-realization-data",
+  "def-pur-completed-operation-comparison-data"
+ ],
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 07A4, 0941 and 0D6D; integral coherence construction, before and after localization."
+ },
+ "proof": [
+  {
+   "text": "Take the complex C, reduction comparison and finite evaluation isomorphisms from M.calculus(a).reductionModel. Retain its two normalization equations as CoefficientReductionPresentation. No arbitrary new quotient data is selected.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 07A4, 0941 and 0D6D; integral coherence construction, before and after localization."
+   }
+  },
+  {
+   "text": "K-flat scalar extension preserves independent K-flatness at each quotient. Flat scalar extension follows from the change-of-rings tensor adjunction; it does not require flatness of the ring map.",
+   "uses": [
+    "lem-pur-kflat-change-of-rings-all-independent",
+    "lem-weil-pbc-ringed-topos-flat-module-pullback"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 07A4, 0941 and 0D6D; integral coherence construction, before and after localization."
+   }
+  },
+  {
+   "text": "Package all evaluations into the faithful exact functor to Discrete N-indexed abelian sheaves. It detects exactness by faithful exactness and componentwise zero homology. Tensor evaluation identifies evaluated total tensors with finite-level tensors. Thus level K-flatness implies whole-system K-flatness. Apply this to the single complex of a module and use Mathlib kFlat_single_obj_iff_flat to detect flatness of each whole-system term.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 07A4, 0941 and 0D6D; integral coherence construction, before and after localization."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-pur-kflat-change-of-rings-all-independent",
+  "lem-weil-pbc-ringed-topos-flat-module-pullback"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 07A4, 0941 and 0D6D; integral coherence construction, before and after localization."
+ },
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "tensorGenerator_ext|mapDerivedCategoryCompIso_hom_app_factors",
+   "results": "No hits",
+   "date": "2026-10-25",
+   "verdict": "Generic infrastructure only; no declaration states this strict sequence-site comparison."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.CoreMonoidal",
+   "results": "CategoryTheory.Functor.CoreMonoidal; CategoryTheory.Functor.CoreMonoidal.toLaxMonoidal; CategoryTheory.Functor.CoreMonoidal.toMonoidal; CategoryTheory.Functor.CoreMonoidal.toOplaxMonoidal; CategoryTheory.Functor.CoreMonoidal.εIso; CategoryTheory.Functor.Monoidal.coreMonoidalTransport; CategoryTheory.Functor.CoreMonoidal.toMonoidal_toLaxMonoidal; CategoryTheory.Functor.CoreMonoidal.toMonoidal_toOplaxMonoidal",
+   "date": "2026-10-25",
+   "verdict": "Generic infrastructure only; no declaration states this strict sequence-site comparison."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Localization of K flat cochain sheaf tensor associators unitors and signed braiding",
+   "results": "HomologicalComplex.leftUnitor'_inv_comm_assoc; HomologicalComplex.leftUnitor'_inv_comm; CategoryTheory.Functor.commShiftIso_map₂CochainComplex_flip_inv_app; CategoryTheory.Sheaf.symmetricCategory; CategoryTheory.Functor.commShiftIso_map₂CochainComplex_flip_hom_app; CategoryTheory.Sheaf.braidedCategory; CategoryTheory.Sheaf.monoidalCategory; CochainComplex.ι_mapBifunctorShift₂Iso_hom_f",
+   "date": "2026-10-25",
+   "verdict": "Generic infrastructure only; no declaration states this strict sequence-site comparison."
+  },
+  {
+   "tool": "grep",
+   "query": "rg tensorGenerator_ext|mapDerivedCategoryCompIso_hom_app_factors|kFlat_single_obj_iff_flat in lean/Sheaf, lean/WeilConjectures and Mathlib; blueprint_refs searches strict quotient, tensor coherence, structural, quotient presentation",
+   "results": "RingedTensorConstraintCompletion tensorGenerator_ext; Mathlib monoidal and adjunction operations; source-library exact localization factors; no exact result. Blueprint searches: three unrelated strict quotient nodes, zero tensor coherence nodes, 38 unrelated structural nodes, zero quotient presentation nodes.",
+   "date": "2026-10-25",
+   "verdict": "Reuse the named generic infrastructure; these specialized statements are absent."
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.IntegralCoherenceTower",
+  "date": "2026-10-25",
+  "group": "B5"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-def-purity-conv",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "def-weil-frobenius-coefficient-twists",
+   "place": "Former coefficient-twists proof step 5: simultaneous strict quotient models, cochain tensor/pullback structural coherence, transport through derived inverse limit and the coherent reduction counit.",
+   "via": [
+    "lem-pur-integral-coherence-tower",
+    "lem-pur-derived-pullback-tensor-iso"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.IntegralGoodQuotientPresentation",
+  "file": "lean/Sheaf/Paper/IntegralGoodQuotientPresentation.lean",
+  "declaration": "WeilConjectures.IntegralCoherence.goodQuotientPresentation",
+  "statement": "theorem goodQuotientPresentation (M : CompletedOperations.Models l E W) (a : S)\n    (P : CochainComplex (scalarReductionSource l E (W a)) ℤ)\n    (hP : CochainComplex.IsKFlatIndependentCoefficients\n      (R := completedIntegralCommRingSheafUnrestricted l E (W a)) P)\n    (hflat : ∀ k : ℤ, SheafOfModules.IsFlatOnSite\n      (J := AlgebraicGeometry.Scheme.ProEt.topology (W a))\n      (R := completedIntegralCommRingSheafUnrestricted l E (W a)) (P.X k)) :\n    Nonempty (QuotientPresentation l E M a P hP)",
+  "branch": "sheaf-dag",
+  "by": "B5",
+  "date": "2026-10-25"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-11613",
+  "group": "B5",
+  "result": "fix",
+  "landing": "20261025T142858-L-818729",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-11613",
+  "group": "B5",
+  "result": "fix",
+  "landing": "20261025T142858-L-818729",
+  "kind": "interface",
+  "note": "independent cc review: 11613abe vs reviewed c5d796 (diff -r: nodes and 6 Lean modules identical; GoodQuotientPresentation adds only private canonical instance caches); moved data vs clone item block (unchanged since 10-24); 7 delivered + Defs, RelativeProduct, Normalization, Realization (+CanonicalIdentification, ScalarLimitImage) compiled in /tmp/rv_b5ict2 on 84292a05575, all exit 0, max 27.6 s"
+ }
+}

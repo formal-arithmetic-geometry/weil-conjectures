@@ -130,13 +130,14 @@
  "unit": "sk-thm-properbasechange",
  "lean": {
   "existing": false,
-  "module": "Sheaf.SixFunctors.ProEtale.BaseChange.ComparisonCounit",
-  "file": "lean/Sheaf/SixFunctors/ProEtale/BaseChange/ComparisonCounit.lean",
-  "declaration": "AlgebraicGeometry.ProEtale.comparison_counit",
-  "statement": "theorem comparison_counit {U V : Scheme.{u}} (f : U ⟶ V)\n    [QuasiCompact f] [QuasiSeparated f]\n    (K : DerivedCategory.Plus (Sheaf U.smallEtaleTopology (ModuleCat.{u + 1} Λ))) :\n    (leftDerivedUpperStarComparisonIso f Λ).hom.app\n        (R+(Etale.lowerStar (ModuleCat.{u + 1} Λ) f).obj K) ≫\n      L(ProEtale.upperStar (ModuleCat.{u + 1} Λ) f).map\n        ((rightDerivedLowerStarComparisonIso' f (ModuleCat.{u + 1} Λ)).hom.app K) ≫\n      (derivedUpperStarLowerStarAdjunction (ModuleCat.{u + 1} Λ) f).counit.app\n        ((DerivedCategory.Plus.ι ⋙ D(ν^*(U)[ModuleCat.{u + 1} Λ])).obj K) =\n    (DerivedCategory.Plus.ι ⋙ D(ν^*(U)[ModuleCat.{u + 1} Λ])).map\n      ((Etale.derivedUpperStarLowerStarAdjunctionPlus (ModuleCat.{u + 1} Λ) f).counit.app K)",
+  "module": "Sheaf.SixFunctors.ProEtale.BaseChange.ComparisonCounitCore",
+  "file": "lean/Sheaf/SixFunctors/ProEtale/BaseChange/ComparisonCounitCore.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.ComparisonCore.comparison_counit",
+  "statement": "theorem comparison_counit {U V : Scheme.{u}} (f : U ⟶ V)\n    [QuasiCompact f] [QuasiSeparated f]\n    (K : DerivedCategory.Plus (Sheaf U.smallEtaleTopology (ModuleCat.{u + 1} Λ))) :\n    (  (fun {U V : Scheme.{u}} (g : U ⟶ V) (Λ : Type (u + 1)) [CommRing Λ] ↦\n    Functor.isoWhiskerRight\n        (Etale.upperStar (ModuleCat.{u + 1} Λ) g).mapDerivedCategoryPlusCompatibility\n        D(ν^*(U)[ModuleCat.{u + 1} Λ]) ≪≫\n      Functor.isoWhiskerLeft DerivedCategory.Plus.ι\n        ((Functor.mapDerivedCategoryCompIso _ _).symm ≪≫\n          Functor.mapDerivedCategoryNatIso\n            (comparisonUpperStarCompUpperStarIso (ModuleCat.{u + 1} Λ) g).symm ≪≫\n          Functor.mapDerivedCategoryCompIso _ _) ≪≫\n      Functor.isoWhiskerLeft (DerivedCategory.Plus.ι ⋙ D(ν^*(V)[ModuleCat.{u + 1} Λ]))\n        (leftDerivedUpperStarIsoMapDerivedCategory (ModuleCat.{u + 1} Λ) g).symm\n) f Λ).hom.app\n        (R+(Etale.lowerStar (ModuleCat.{u + 1} Λ) f).obj K) ≫\n      L(ProEtale.upperStar (ModuleCat.{u + 1} Λ) f).map\n        ((  (fun {U V : Scheme.{u}} (f : U ⟶ V) (A : Type _)\n    [Category.{u + 1} A] [Abelian A] [IsGrothendieckAbelian.{u + 1} A]\n    [QuasiCompact f] [QuasiSeparated f] ↦\n    Functor.isoWhiskerLeft R+(Etale.lowerStar A f)\n        (ν^*(V)[A]).mapDerivedCategoryPlusCompatibility.symm ≪≫\n      Functor.isoWhiskerRight ((fun {U V : Scheme.{u}} (f : U ⟶ V) (A : Type _)\n    [Category.{u + 1} A] [Abelian A] [IsGrothendieckAbelian.{u + 1} A]\n    [QuasiCompact f] [QuasiSeparated f] ↦\n  have := isIso_lowerStarComparisonUpperStarBaseChange f A\n  have : IsIso (Functor.rightDerivedFunctorPlusBaseChange\n      (lowerStarComparisonUpperStarBaseChange f A)) :=\n    Functor.isIso_rightDerivedFunctorPlusBaseChange_of_rightAcyclic\n      (asIso (lowerStarComparisonUpperStarBaseChange f A))\n      (fun I _ ↦ rightAcyclic_lowerStar_comparisonUpperStar_obj_of_injective A f I)\n  asIso (Functor.rightDerivedFunctorPlusBaseChange (lowerStarComparisonUpperStarBaseChange f A))\n) f A) DerivedCategory.Plus.ι ≪≫\n      Functor.isoWhiskerLeft D+(ν^*(U)[A])\n        (ProEtale.lowerStar A f).rightDerivedFunctorPlusCompatibility ≪≫\n      Functor.isoWhiskerRight (ν^*(U)[A]).mapDerivedCategoryPlusCompatibility\n        R(ProEtale.lowerStar A f)\n) f (ModuleCat.{u + 1} Λ)).hom.app K) ≫\n      (derivedUpperStarLowerStarAdjunction (ModuleCat.{u + 1} Λ) f).counit.app\n        ((DerivedCategory.Plus.ι ⋙ D(ν^*(U)[ModuleCat.{u + 1} Λ])).obj K) =\n    (DerivedCategory.Plus.ι ⋙ D(ν^*(U)[ModuleCat.{u + 1} Λ])).map\n      ((Etale.derivedUpperStarLowerStarAdjunctionPlus (ModuleCat.{u + 1} Λ) f).counit.app K)",
   "branch": "sheaf-dag",
   "by": "G1",
-  "date": "2026-10-16"
+  "date": "2026-10-16",
+  "note": "Same fixed-map equality, with the upstream comparison constants expanded to their unchanged defining expressions. Its proof and auxiliary declarations are available below the upstream module, avoiding the post-sync import cycle. The original module remains a compatibility consumer."
  },
  "reviewed": {
   "date": "2026-10-16",
@@ -149,14 +150,25 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-16",
+  "date": "2026-10-24",
   "by": "L",
-  "reviewer": "X-996bd",
-  "group": "D4",
-  "result": "pass",
-  "landing": "20261016T145217-L-3935343",
+  "reviewer": "C-d6751",
+  "group": "K2",
+  "result": "fix",
+  "landing": "20261024T204623-L-3807184",
   "kind": "interface",
-  "note": "independent Codex review: Unchanged Lean signature matched the node and published version; proof matched updated DAG steps. Delivered module and sole direct importer compiled cleanly; all six proved declarations use only the three permitted axioms. Mechanical findings empty."
+  "note": "independent cc review: item proof + 5 Core copies + verbatim PathsCore relocation vs published ComparisonSquarePaths/helper modules, node lean records vs Core signatures, lambda expansions vs item defs; sandbox compile of delivery + both direct importers of ComparisonSquarePaths + downstream originals all OK; axioms only inherited sorryAx from rightDerivedLowerStarComparisonIso'"
  },
- "lean_audit": {}
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ }
 }

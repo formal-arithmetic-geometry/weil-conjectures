@@ -1,0 +1,142 @@
+{
+ "id": "lem-pur-etale-proper-open-horizontal-normalization",
+ "kind": "statement",
+ "title": "Horizontal pasting of normalized unbounded proper/open comparisons on arbitrary schemes",
+ "statement": "Let A be a finite commutative ring. Work with ordinary constant-A module sheaves on the small etale sites of arbitrary schemes and their unbounded derived categories [def-weil-pbc-derived-categories]. For each of three fixed horizontally composable commutative squares Q (the two adjacent squares and their composite) with top open immersion k:U→V, bottom open immersion i:W→Z and proper vertical maps r:U→W and p:V→Z, fix natural isomorphisms theta_Q:r_*⋙i_! ≅ k_!⋙p_* and Gamma_Q:Rr_*⋙Di_! ≅ Dk_!⋙Rp_*. Assume the support normalization: theta_Q,F followed by p_*(k_!F→k_*F) and the direct-image compositor equals i_!r_*F→i_*r_*F followed by the compositor into (ir)_*F=(pk)_*F [lem-cbc-proper-support-sheaf-composition]. Assume also unit normalization on every homotopy object X: Di_!(eta_r,X) followed by Gamma_Q,QhX equals the exact-functor factorization for i_!, followed by Qh(theta_Q,X), the derived unit for p_* on k_!X, and Rp_* of the inverse exact-functor factorization for k_!. For horizontally composable Q1,Q2, Gamma_(Q2Q1) equals the descended open-extension compositor for i,j, then Dj_!Gamma_Q1, then Gamma_Q2 at Dk_!K, then Rq_* of the inverse descended open-extension compositor for k,l. Use the canonical exact termwise open-extension compositors.",
+ "source": {
+  "document": "literature/stacks-project/more-etale.tex",
+  "place": "Tag 0F7D"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-pbc-derived-categories",
+  "def-weil-proper-morphism",
+  "def-weil-open-immersion",
+  "def-weil-pbc-extension-by-zero",
+  "lem-weil-pbc-extension-by-zero-exact",
+  "def-weil-pbc-kinjective-resolutions",
+  "lem-weil-pbc-kinjective-total-derived",
+  "lem-cbc-proper-support-sheaf-composition",
+  "lem-cbc-extension-zero-composition"
+ ],
+ "proof": [
+  {
+   "text": "Take a K-injective representative J and resolutions rho:k!J→I and sigma:l!I→H.\nExactness of l! makes sigma after l!rho a resolution of l!k!J. The two consecutive\ninterchanges are represented by j!(p*rho after theta1), followed by q*sigma after theta2.\nNaturality of theta2 moves rho through this expression. Include the remaining sheaf\nmaps into the common composite direct image using the given support normalizations.\nAssociativity of support composition identifies their product with the outer theta,\nwith the open-extension compositors inserted. Their termwise derived descents identify\nthe chosen composite resolution with the outer one. Equivalently, precompose with the\nright-derived unit, use both assumed unit equations, and apply the universal property\nof right derivation to the equality of the sheaf maps. This proves the equation for\nevery derived object without a boundedness assumption.",
+   "uses": [
+    "lem-cbc-proper-support-sheaf-composition",
+    "lem-cbc-extension-zero-composition",
+    "lem-weil-pbc-extension-by-zero-exact",
+    "lem-weil-pbc-kinjective-total-derived",
+    "lem-weil-pbc-localization-universal-property"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-cbc-proper-support-sheaf-composition",
+  "lem-cbc-extension-zero-composition",
+  "lem-weil-pbc-extension-by-zero-exact",
+  "lem-weil-pbc-kinjective-total-derived",
+  "lem-weil-pbc-localization-universal-property"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/more-etale.tex",
+  "place": "Tag 0F7D; arbitrary schemes as in the parent, without the unnecessary Noetherian restrictions in lem-amb-unbounded-proper-open-horizontal-composition"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Right derived natural transformations preserve horizontal pasting of normalized proper direct image and exact extension by zero comparisons",
+   "results": "8 generic derived-comparison and rightDerivedNatTrans_comp hits; no geometric normalized statement.",
+   "date": "2026-10-24",
+   "verdict": "Use localization and mate APIs; no complete match."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.mateEquiv",
+   "results": "12 mate, counit, unit and pasting API hits, including mateEquiv_hcomp and mateEquiv_vcomp.",
+   "date": "2026-10-24",
+   "verdict": "Useful generic APIs; no proper/open normalized theorem."
+  },
+  {
+   "tool": "grep",
+   "query": "rightDerived.*cube|mateEquiv.*derived|proper.*open.*horizontal",
+   "results": "0 Mathlib matches. Library has analogous Noetherian statements and generic private helpers, but no arbitrary-scheme theorem.",
+   "date": "2026-10-24",
+   "verdict": "Separate result required for arbitrary schemes."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Right derived natural transformations preserve a commutative cube with exact horizontal functors",
+   "results": "8 hits: CategoryTheory.Functor.rightDerivedNatTrans; CategoryTheory.Functor.rightDerivedNatTrans_app; CategoryTheory.NatTrans.rightDerived; CategoryTheory.Functor.toRightDerivedZero; CategoryTheory.Functor.rightDerived_fac_app; CategoryTheory.NatTrans.rightDerivedToHomotopyCategory_comp; CategoryTheory.Functor.rightDerivedNatTrans_app_assoc; CategoryTheory.NatTrans.rightDerivedToHomotopyCategory.",
+   "date": "2026-10-24",
+   "verdict": "Generic derived-transformation APIs only; prove the geometric support equality and lift it by right-derived uniqueness."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.EtaleProperOpenExchangeCube",
+  "date": "2026-10-24",
+  "group": "G9"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-asd-smooth-base-change",
+   "place": "prop-asd-smooth-base-change.proof.md, coherences (i) and (iii): compatibility of proper/open comparisons under base change; proof step 7, Stacks Tag 0F7D",
+   "via": [
+    "lem-pur-etale-proper-open-exchange-cube",
+    "lem-route-exists-right-derived-lower-shriek-comp-iso",
+    "lem-asd-exceptional-base-change-affine-locality"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sf-cbc",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.EtaleProperOpenHorizontalNormalization",
+  "file": "lean/Sheaf/AlgebraicGeometry/EtaleProperOpenHorizontalNormalization.lean",
+  "declaration": "AlgebraicGeometry.Etale.etaleProperOpenHorizontalNormalization",
+  "statement": "theorem etaleProperOpenHorizontalNormalization (A : Type (u + 1)) [CommRing A] [Finite A]\n    {U V T W Z S : Scheme.{u}}\n    (k : U ⟶ V) (l : V ⟶ T) (r : U ⟶ W) (p : V ⟶ Z) (q : T ⟶ S)\n    (i : W ⟶ Z) (j : Z ⟶ S)\n    [IsOpenImmersion k] [IsOpenImmersion l] [IsOpenImmersion i] [IsOpenImmersion j]\n    [IsProper r] [IsProper p] [IsProper q]\n    (sq₁ : CommSq k r p i) (sq₂ : CommSq l p q j)\n    (θ₁ : (r)_*[ModuleCat.{u + 1} A] ⋙ (i)_!open[ModuleCat.{u + 1} A] ≅\n      (k)_!open[ModuleCat.{u + 1} A] ⋙ (p)_*[ModuleCat.{u + 1} A])\n    (θ₂ : (p)_*[ModuleCat.{u + 1} A] ⋙ (j)_!open[ModuleCat.{u + 1} A] ≅\n      (l)_!open[ModuleCat.{u + 1} A] ⋙ (q)_*[ModuleCat.{u + 1} A])\n    (θ : (r)_*[ModuleCat.{u + 1} A] ⋙ (i ≫ j)_!open[ModuleCat.{u + 1} A] ≅\n      (k ≫ l)_!open[ModuleCat.{u + 1} A] ⋙ (q)_*[ModuleCat.{u + 1} A])\n    (h₁ : ∀ F, θ₁.hom.app F ≫\n      (p)_*[ModuleCat.{u + 1} A].map\n        ((openImmersionLowerShriekToLowerStar (ModuleCat.{u + 1} A) k).app F) ≫\n      (lowerStarComp (ModuleCat.{u + 1} A) k p).hom.app F =\n      (openImmersionLowerShriekToLowerStar (ModuleCat.{u + 1} A) i).app\n        ((r)_*[ModuleCat.{u + 1} A].obj F) ≫\n      (lowerStarComp (ModuleCat.{u + 1} A) r i (k ≫ p) sq₁.w).hom.app F)\n    (h₂ : ∀ F, θ₂.hom.app F ≫\n      (q)_*[ModuleCat.{u + 1} A].map\n        ((openImmersionLowerShriekToLowerStar (ModuleCat.{u + 1} A) l).app F) ≫\n      (lowerStarComp (ModuleCat.{u + 1} A) l q).hom.app F =\n      (openImmersionLowerShriekToLowerStar (ModuleCat.{u + 1} A) j).app\n        ((p)_*[ModuleCat.{u + 1} A].obj F) ≫\n      (lowerStarComp (ModuleCat.{u + 1} A) p j (l ≫ q) sq₂.w).hom.app F)\n    (h : ∀ F, θ.hom.app F ≫\n      (q)_*[ModuleCat.{u + 1} A].map\n        ((openImmersionLowerShriekToLowerStar (ModuleCat.{u + 1} A) (k ≫ l)).app F) ≫\n      (lowerStarComp (ModuleCat.{u + 1} A) (k ≫ l) q).hom.app F =\n      (openImmersionLowerShriekToLowerStar (ModuleCat.{u + 1} A) (i ≫ j)).app\n        ((r)_*[ModuleCat.{u + 1} A].obj F) ≫\n      (lowerStarComp (ModuleCat.{u + 1} A) r (i ≫ j) ((k ≫ l) ≫ q)\n        (sq₁.horiz_comp sq₂).w).hom.app F)\n    (Γ₁ : R((r)_*[ModuleCat.{u + 1} A]) ⋙ D((i)_!open[ModuleCat.{u + 1} A]) ≅\n      D((k)_!open[ModuleCat.{u + 1} A]) ⋙ R((p)_*[ModuleCat.{u + 1} A]))\n    (Γ₂ : R((p)_*[ModuleCat.{u + 1} A]) ⋙ D((j)_!open[ModuleCat.{u + 1} A]) ≅\n      D((l)_!open[ModuleCat.{u + 1} A]) ⋙ R((q)_*[ModuleCat.{u + 1} A]))\n    (Γ : R((r)_*[ModuleCat.{u + 1} A]) ⋙ D((i ≫ j)_!open[ModuleCat.{u + 1} A]) ≅\n      D((k ≫ l)_!open[ModuleCat.{u + 1} A]) ⋙ R((q)_*[ModuleCat.{u + 1} A]))\n    (hΓ₁ : ProperOpenUnitNormalized\n      (r)_*[ModuleCat.{u + 1} A] (p)_*[ModuleCat.{u + 1} A]\n      (k)_!open[ModuleCat.{u + 1} A] (i)_!open[ModuleCat.{u + 1} A] θ₁.hom Γ₁.hom)\n    (hΓ₂ : ProperOpenUnitNormalized\n      (p)_*[ModuleCat.{u + 1} A] (q)_*[ModuleCat.{u + 1} A]\n      (l)_!open[ModuleCat.{u + 1} A] (j)_!open[ModuleCat.{u + 1} A] θ₂.hom Γ₂.hom)\n    (hΓ : ProperOpenUnitNormalized\n      (r)_*[ModuleCat.{u + 1} A] (q)_*[ModuleCat.{u + 1} A]\n      (k ≫ l)_!open[ModuleCat.{u + 1} A] (i ≫ j)_!open[ModuleCat.{u + 1} A] θ.hom Γ.hom)\n    (K : DerivedCategoryModule A U) :\n    Γ.hom.app K =\n          (Functor.mapDerivedCategoryNatIso\n              (openImmersionLowerShriekComp (ModuleCat.{u + 1} A) i j) ≪≫\n            Functor.mapDerivedCategoryCompIso _ _).hom.app\n              (R((r)_*[ModuleCat.{u + 1} A]).obj K) ≫\n            D((j)_!open[ModuleCat.{u + 1} A]).map (Γ₁.hom.app K) ≫\n            Γ₂.hom.app (D((k)_!open[ModuleCat.{u + 1} A]).obj K) ≫\n            R((q)_*[ModuleCat.{u + 1} A]).map\n              ((Functor.mapDerivedCategoryNatIso\n                  (openImmersionLowerShriekComp (ModuleCat.{u + 1} A) k l) ≪≫\n                Functor.mapDerivedCategoryCompIso _ _).inv.app K)",
+  "branch": "sheaf-dag",
+  "by": "G9",
+  "date": "2026-10-24",
+  "declarations": [
+   "AlgebraicGeometry.Etale.etaleProperOpenHorizontalNormalization",
+   "AlgebraicGeometry.Etale.ProperOpenUnitNormalized"
+  ]
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G9",
+  "result": "pass",
+  "landing": "20261024T185855-L-3744288",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G9",
+  "result": "pass",
+  "landing": "20261024T185855-L-3744288",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

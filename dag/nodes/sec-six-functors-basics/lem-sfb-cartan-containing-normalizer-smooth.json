@@ -1,0 +1,280 @@
+{
+ "id": "lem-sfb-cartan-containing-normalizer-smooth",
+ "kind": "statement",
+ "title": "Smooth normalizers of subgroups containing a maximal-torus centralizer",
+ "statement": "Let $F$ be an algebraically closed field [def-weil-field, def-weil-algebraic-closure]. All groups are affine $F$-group schemes [def-sc-group-scheme] of finite type [def-weil-finite-type-morphism], and subgroups are closed subgroup schemes [def-sc-group-scheme-subgroup]. Smoothness and connectedness are as in [def-sbc-smooth-morphisms, def-weil-connected-scheme]. A torus is a group isomorphic to $\\mathbf G_m^r$ for an integer $r\\geq0$, where $\\mathbf G_m(A)=A^\\times$ [def-sc-gm-ga]. A maximal torus is a torus subgroup maximal under inclusion. For a subgroup $S\\subseteq G$, write $C_G(S)(A)=\\{g\\in G(A):g_{A\\prime}s=sg_{A\\prime}\\text{ for every commutative }A\\text{-algebra }A\\prime\\text{ and }s\\in S(A\\prime)\\}$. Let $G$ be smooth and connected, let $T\\subseteq G$ be a maximal torus, and let $H\\subseteq G$ be a smooth subgroup, not necessarily connected, containing $C_G(T)$ as a subgroup functor. Define $$N_G(H)(A)=\\{g\\in G(A):g_{A\\prime}H(A\\prime)g_{A\\prime}^{-1}=H(A\\prime)\\text{ for every commutative }A\\text{-algebra }A\\prime\\}.$$ This functor is represented by a smooth closed subgroup scheme $N\\subseteq G$ of finite type, and $N^\\circ=H^\\circ$ as subgroup schemes, where the superscript denotes the connected component containing the identity. The formula for $N_G(H)(A)$ holds for all commutative algebras, including nonreduced algebras. No reductivity or solvability hypothesis is imposed.",
+ "source": {
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Lemma 17.47, printed p.366; normalizer representability in Section 1j, Proposition 1.83 (deduced from 1.79), printed pp.30--31; Lie normalizer identity Proposition 10.34, printed pp.197--198."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-weil-algebraic-closure",
+  "def-sc-group-scheme",
+  "def-weil-finite-type-morphism",
+  "def-sc-group-scheme-subgroup",
+  "def-sbc-smooth-morphisms",
+  "def-weil-connected-scheme",
+  "def-sc-gm-ga",
+  "def-sfb-reductive-torus-centralizer-terminology",
+  "def-wf-algebraic-components"
+ ],
+ "proof": [
+  {
+   "text": "The schemes $G,H$ are separated: for any affine $F$-scheme $\\operatorname{Spec}R$, the affine product formula [lem-weil-pbc-fibre-product-affine-spectra] identifies its diagonal with the surjection $R\\otimes_FR\\to R$, $a\\otimes b\\mapsto ab$. This is a closed immersion [def-weil-closed-immersion], which is separatedness [def-weil-proper-morphism]. Thus $Y=H$, $X=G$, $S=G$, and $W=H\\hookrightarrow G$ satisfy the separated finite-type hypotheses of the factorization theorem used next.",
+   "uses": [
+    "lem-weil-pbc-fibre-product-affine-spectra",
+    "def-weil-closed-immersion",
+    "def-weil-proper-morphism"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 1.83, pp.30–31, scheme hypotheses for its transporter construction; affine diagonal calculation."
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-constant-source-closed-factorization-locus] to the two morphisms $f_+(h,g)=ghg^{-1}$ and $f_-(h,g)=g^{-1}hg$, with source $H\\times_FG$ and closed target $H\\hookrightarrow G$. These are morphisms by the group operations [def-sc-group-scheme]. Obtain closed subschemes $L_+,L_-\\hookrightarrow G$. If $G=\\operatorname{Spec}R$ and their ideals are $I_+,I_-$, set $N=\\operatorname{Spec}(R/(I_++I_-))$. By [def-weil-closed-immersion] and the affine ring-map description [def-weil-affine-spectrum], a map to $G$ factors through $N$ precisely when it factors through both $L_+$ and $L_-$. In particular $N$ is closed, affine and finite type: images of a finite set of generators of $R$ generate the quotient [def-weil-finite-type-morphism].",
+   "uses": [
+    "lem-sfb-constant-source-closed-factorization-locus",
+    "def-sc-group-scheme",
+    "def-weil-closed-immersion",
+    "def-weil-affine-spectrum",
+    "def-weil-finite-type-morphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 1.83, printed p.31, N = transporter intersect inverse transporter; closed factorization locus Theorem 1.105, pp.37–38."
+   }
+  },
+  {
+   "text": "For $g\\in G(A)$ the two factorizations mean $gH_Ag^{-1}\\subseteq H_A$ and $g^{-1}H_Ag\\subseteq H_A$. Their conjunction is equality. Factorization implies both containments on every $A'$-point. Conversely take $A'=A\\otimes_F\\mathcal O(H)$ and the universal point of $H_A$: the corresponding point containment is exactly factorization of the coordinate map through the quotient defining $H$ [def-weil-affine-spectrum, def-weil-closed-immersion]. This proves precisely the displayed formula for $N_G(H)(A)$ for arbitrary, including nonreduced, $A$. Identity, multiplication and inverse preserve this condition: $(gh)H(gh)^{-1}=g(hHh^{-1})g^{-1}$ and the inverse reverses the equality. Thus $N$ is a subgroup scheme [def-sc-group-scheme-subgroup]. Also $H\\subseteq N$, since conjugation by an element of $H(A)$ permutes $H(A')$ for every $A'/A$.",
+   "uses": [
+    "def-weil-affine-spectrum",
+    "def-weil-closed-immersion",
+    "def-sc-group-scheme-subgroup"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 1.83, printed p.31: universal functor formula and subgroup property, made explicit on universal points."
+   }
+  },
+  {
+   "text": "By [lem-sfb-torus-centralizer-smooth-connected], the centralizer functor $C_G(T)$ is represented by a closed group $C$: $G$ is smooth connected and $T$ is a torus. The inclusion $C\\subseteq H$ is a hypothesis. Since $T$ is commutative, $T\\subseteq C\\subseteq H$ on every test algebra. Apply [lem-sfb-lie-normalizer-centralizer-invariants] with $K=T$, and with the normalizer constructed above. Writing $\\mathfrak g=\\operatorname{Lie}(G)$, $\\mathfrak h=\\operatorname{Lie}(H)$, $\\mathfrak n=\\operatorname{Lie}(N)$, the injective tangent maps and the centralizer identity give $\\mathfrak g^T=\\operatorname{Lie}(C)\\subseteq\\mathfrak h$. The same node gives the rational $H$-action on $\\mathfrak g/\\mathfrak h$ and $\\mathfrak n/\\mathfrak h=(\\mathfrak g/\\mathfrak h)^H$. In particular $\\mathfrak h$ is stable under $T$.",
+   "uses": [
+    "lem-sfb-torus-centralizer-smooth-connected",
+    "lem-sfb-lie-normalizer-centralizer-invariants"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Lemma 17.47, printed p.366, first paragraph and Lie identities from Proposition 10.34, pp.197–198."
+   }
+  },
+  {
+   "text": "Choose $T\\simeq\\mathbf G_m^r$. Apply [lem-sfb-gm-representation-weight-basis] to the first coordinate action on $\\mathfrak g$, then to the second on each first-coordinate weight space, and so on. The coordinate actions commute, so each preserves the preceding weight spaces: apply the other coordinate to the defining equation $t\\cdot v=t^av$. Induction on $r$, starting with the single space for $r=0$, gives $\\mathfrak g=\\bigoplus_{\\alpha\\in\\mathbf Z^r}\\mathfrak g_\\alpha$. A $T$-stable subspace, in particular $\\mathfrak h$, decomposes by the same weights: for $v=\\sum v_\\alpha$ in that subspace, evaluate the action at the universal tuple in $F[t_1^{\\pm1},\\ldots,t_r^{\\pm1}]$ and project to the quotient by the subspace. The equation $\\sum \\overline v_\\alpha t^\\alpha=0$ and linear independence of Laurent monomials force each $\\overline v_\\alpha=0$. This also identifies $\\mathfrak g^T=\\mathfrak g_0$: a nonzero exponent gives a Laurent monomial different from $1$, even in positive characteristic.",
+   "uses": [
+    "lem-sfb-gm-representation-weight-basis"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Theorem 12.12(d), Remark 12.13 and Example 12.15, printed pp.234–236; coordinate-by-coordinate specialization of the existing G_m weight-basis theorem."
+   }
+  },
+  {
+   "text": "The quotient is therefore the direct sum of $\\mathfrak g_\\alpha/(\\mathfrak h\\cap\\mathfrak g_\\alpha)$. Its invariant subspace is its zero-weight summand, by exactly the universal Laurent-monomial coefficient test in the preceding step. Since $\\mathfrak g_0=\\mathfrak g^T\\subseteq\\mathfrak h$, this summand is zero. An $H$-fixed vector is $T$-fixed because $T\\subseteq H$, so $(\\mathfrak g/\\mathfrak h)^H=0$. The normalizer identity of step 4 now gives $\\mathfrak n/\\mathfrak h=0$, hence $\\mathfrak n=\\mathfrak h$. This avoids replacing group invariants by Lie-algebra invariants.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Lemma 17.47, printed p.366, exact-sequence and invariants argument, written via the weight decomposition rather than an uncited exactness assertion."
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-group-tangent-dimension-smoothness] first to the smooth group $H$ and then to the finite-type group $N$. The closed inclusion $H\\subseteq N$ gives $\\dim H\\leq\\dim N$: every chain of irreducible closed subsets of the closed subspace $|H|$ is a chain in $|N|$ [def-weil-closed-immersion, def-kun-topological-krull-dimension]. Thus\n$$\\dim_F\\mathfrak h=\\dim H\\leq\\dim N\\leq\\dim_F\\mathfrak n=\\dim_F\\mathfrak h.$$\nAll terms are finite, so equality holds. The criterion gives smoothness of $N$ and $\\dim H=\\dim N$.",
+   "uses": [
+    "lem-sfb-group-tangent-dimension-smoothness",
+    "def-weil-closed-immersion",
+    "def-kun-topological-krull-dimension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Lemma 17.47, printed p.366, dimension inequalities using Proposition 1.37, printed p.18."
+   }
+  },
+  {
+   "text": "By [lem-sfb-group-neutral-component-translates], $H^\\circ,N^\\circ$ are open and closed subgroup schemes and every component is a translate of the identity component. A finite clopen decomposition has dimension the maximum of its component dimensions (an irreducible chain lies in a single component). Thus $\\dim H^\\circ=\\dim H=\\dim N=\\dim N^\\circ$. The inclusion $H\\subseteq N$ maps the connected set $|H^\\circ|$ into $|N^\\circ|$; its image is closed there. By [lem-sfb-locally-algebraic-group-identity-component], $N^\\circ$ is irreducible and its reduced induced scheme is integral. It is affine, being closed in affine $N$. Apply [lem-wf-affine-dimension-drop] to this reduced affine variety: the equal dimension just proved rules out a proper closed image of $H^\\circ$. Hence $|H^\\circ|=|N^\\circ|$. Finally [sbc-lem-smooth-geometrically-reduced], applied to the smooth groups $H,N$ over $F$, makes them reduced, and their open components are reduced by restriction of their local rings. They are closed reduced subschemes of $G$ with the same support; uniqueness in [lem-weil-pbc-reduced-induced-closed-subscheme](3) identifies them as subgroup schemes. Therefore $N^\\circ=H^\\circ$, as required.",
+   "uses": [
+    "lem-sfb-group-neutral-component-translates",
+    "lem-sfb-locally-algebraic-group-identity-component",
+    "lem-wf-affine-dimension-drop",
+    "sbc-lem-smooth-geometrically-reduced",
+    "lem-weil-pbc-reduced-induced-closed-subscheme"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Lemma 17.47, printed p.366, equality of identity components; Propositions 1.34–1.37, pp.16–18, and dimension argument as in Proposition 10.15, pp.190–191. Reduced closed structures: Stacks Tag 01J3, as in the cited node."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-fibre-product-affine-spectra",
+  "def-weil-closed-immersion",
+  "def-weil-proper-morphism",
+  "lem-sfb-constant-source-closed-factorization-locus",
+  "def-sc-group-scheme",
+  "def-weil-affine-spectrum",
+  "def-weil-finite-type-morphism",
+  "def-sc-group-scheme-subgroup",
+  "lem-sfb-torus-centralizer-smooth-connected",
+  "lem-sfb-lie-normalizer-centralizer-invariants",
+  "lem-sfb-gm-representation-weight-basis",
+  "lem-sfb-group-tangent-dimension-smoothness",
+  "def-kun-topological-krull-dimension",
+  "lem-sfb-group-neutral-component-translates",
+  "lem-sfb-locally-algebraic-group-identity-component",
+  "lem-wf-affine-dimension-drop",
+  "sbc-lem-smooth-geometrically-reduced",
+  "lem-weil-pbc-reduced-induced-closed-subscheme"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Lemma 17.47, printed p.366, with representability from Proposition 1.83, p.31, and explicit weight-space and component arguments."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The normalizer group scheme of a smooth subgroup containing the centralizer of a maximal torus is smooth and has the same identity component",
+   "results": "{\"t\": \"2026-10-23T20:18:59Z\", \"tool\": \"leanfinder\", \"query\": \"The normalizer group scheme of a smooth subgroup containing the centralizer of a maximal torus is smooth and has the same identity component\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"LieSubalgebra.IsCartanSubalgebra.self_normalizing\", \"LieSubalgebra.normalizer_eq_self_of_isCartanSubalgebra\", \"LieAlgebra.zeroRootSubalgebra_normalizer_eq_self\", \"LieModule.genWeightSpace_zero_normalizer_eq_self\", \"LieSubalgebra.normalizer_engel\", \"IsCyclic.normalizer_le_centralizer\", \"Sylow.normalizer_le_centralizer_or_le_commutator\", \"instNormalUpperCentralSeriesStep\"], \"digest\": \"60394d223629d992\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern abstract subgroups, Lie algebras, linear maps or general scheme morphisms; none states this algebraic-group-scheme assertion"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"normalizer\", \"smooth\"",
+   "results": "{\"t\": \"2026-10-23T20:20:31Z\", \"tool\": \"loogle\", \"query\": \"\\\"normalizer\\\", \\\"smooth\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern abstract subgroups, Lie algebras, linear maps or general scheme morphisms; none states this algebraic-group-scheme assertion"
+  },
+  {
+   "tool": "grep",
+   "query": "normalizer.*[Ss]mooth|[Ss]mooth.*normalizer|Cartan.*[Ss]ubgroup",
+   "results": "{\"t\": \"2026-10-23T20:20:31Z\", \"tool\": \"grep\", \"query\": \"normalizer.*[Ss]mooth|[Ss]mooth.*normalizer|Cartan.*[Ss]ubgroup\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern abstract subgroups, Lie algebras, linear maps or general scheme morphisms; none states this algebraic-group-scheme assertion"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Normalizer of subgroup containing a Cartan subgroup is smooth",
+   "results": "{\"t\": \"2026-10-23T20:20:32Z\", \"tool\": \"leansearch\", \"query\": \"Normalizer of subgroup containing a Cartan subgroup is smooth\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Subgroup.setNormalizer\", \"Subgroup.normalizer\", \"LieSubalgebra.IsCartanSubalgebra.self_normalizing\", \"AddSubgroup.normalizer\", \"LieSubalgebra.normalizer\", \"Subgroup.subgroupOf_normalizer_eq\", \"LieSubalgebra.normalizer_eq_self_of_isCartanSubalgebra\", \"AddSubgroup.addSubgroupOf_normalizer_eq\"], \"digest\": \"116b0a45d2278887\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern abstract subgroups, Lie algebras, linear maps or general scheme morphisms; none states this algebraic-group-scheme assertion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Milne algebraic groups Lie normalizer quotient invariants vanish when subgroup contains a maximal torus centralizer",
+   "results": "{\"t\": \"2026-10-23T20:20:35Z\", \"tool\": \"leanfinder\", \"query\": \"Milne algebraic groups Lie normalizer quotient invariants vanish when subgroup contains a maximal torus centralizer\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"LieSubalgebra.normalizer_eq_self_iff\", \"LieModule.genWeightSpace_zero_normalizer_eq_self\", \"LieAlgebra.zeroRootSubalgebra_normalizer_eq_self\", \"LieSubalgebra.normalizer_eq_self_of_isCartanSubalgebra\", \"LieAlgebra.IsKilling.invtSubmoduleToLieIdeal_apply_eq_bot_iff\", \"LieSubmodule.ucs_eq_self_of_normalizer_eq_self\", \"LieSubalgebra.IsCartanSubalgebra.self_normalizing\", \"LieAlgebra.exists_engelian_lieSubalgebra_of_lt_normalizer\"], \"digest\": \"ace702e6dd440f21\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern abstract subgroups, Lie algebras, linear maps or general scheme morphisms; none states this algebraic-group-scheme assertion"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-borel-scheme-normalizer",
+  "date": "2026-10-24",
+  "group": "Q22"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Haboush symmetric-power lifting for a trivial quotient representation. Supporting representation-theoretic input: Central covering of a reductive group by a torus and a simply connected semisimple group. Milne central-cover construction: Multiplicative simply connected covering of a semisimple algebraic group. Supporting Milne construction: Proposition 18.18, sequence (129), printed p.391, specialized to finite multiplicative kernel; all connected groups are split over the algebraically closed F. Supporting step in Milne Proposition 18.18: Borel quotients and Borel characters under a multiplicative isogeny. Supporting input in the proof of Milne Proposition 18.18: Theorem 17.48 puts the central multiplicative kernel inside the chosen Borel, scheme-theoretically. Supporting lemma for Milne Theorem 17.48: Lemma 17.47, printed p.366; normalizer representability in Section 1i, Proposition 1.79 and Corollary 1.80, printed pp.30--31; Lie normalizer identity Proposition 10.34, printed pp.197--198.",
+   "via": [
+    "lem-sfb-borel-scheme-normalizer",
+    "lem-sfb-multiplicative-isogeny-borel-comparison",
+    "lem-sfb-character-picard-isogeny-sequence",
+    "lem-sfb-semisimple-multiplicative-universal-cover",
+    "lem-sfb-reductive-torus-simply-connected-cover",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-cartan-containing-normalizer-smooth",
+  "worker": "stage1",
+  "group": "Q18",
+  "summary": "Kept the statement unchanged. Constructed the scheme normalizer with the existing closed-factorization locus on all algebras; used full group invariants for Lie spaces, the existing G_m weight-basis theorem coordinate by coordinate, the tangent-dimension smoothness criterion, and existing component/dimension/reduced-structure lemmas. Two new statement-only general inputs; no clause of the item relabelled and no characteristic-zero assumption.",
+  "blueprint": "Realizes the inherited supporting Milne Lemma 17.47 step of the Borel normalizer input, below latest det-thm-sf-ctf-stability-direct-images proof (3). Read latest sk-thm-sf-ctf-stability/_section.md and sk-thm-sf-ctf-stability-direct-images.proof.md. No standalone latest blueprint counterpart found; blueprint_refs.py ancestor returns None, so the inherited null ancestor and complete via chain are retained.",
+  "tool_uses": [
+   {
+    "node": "lem-wf-affine-dimension-drop",
+    "why": "Generic scheme/group/linear representation tool used only for its stated assertion in the Milne normalizer argument; the inherited six-functor unit has no replacement for this supporting fact."
+   },
+   {
+    "node": "sbc-lem-smooth-geometrically-reduced",
+    "why": "Generic scheme/group/linear representation tool used only for its stated assertion in the Milne normalizer argument; the inherited six-functor unit has no replacement for this supporting fact."
+   },
+   {
+    "node": "lem-weil-pbc-reduced-induced-closed-subscheme",
+    "why": "Generic scheme/group/linear representation tool used only for its stated assertion in the Milne normalizer argument; the inherited six-functor unit has no replacement for this supporting fact."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-wf-affine-dimension-drop",
+  "sbc-lem-smooth-geometrically-reduced",
+  "lem-weil-pbc-reduced-induced-closed-subscheme"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q18-c0cafa99a",
+  "group": "Q18",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q18-c0cafa99a (reviewer sub-agent of L); spot-checked: I read the item, both new nodes and every cited statement in full. Statement: the item matches Milne Lemma 17.47 (p.366) specialised to an algebraically closed F, with the all-algebras normalizer of Prop. 1.83; it is unchanged from base. Steps 1-3: separatedness of affine schemes, then the existing closed factorization locus applied to g^{±1}hg^{∓1}, intersected via a sum of ideals; the universal-point argument gives the functor on all algebras, including nonreduced ones. Step 4: the torus-centralizer node applies (F algebraically closed, so connected implies geometrically connected), and the new Lie node gives g^T=Lie(C)⊆h and n/h=(g/h)^H. Steps 5-6: coordinate-by-coordinate G_m weight decomposition using the existing weight-basis node; the decomposition of a stable subspace and g^T=g_0 are proved with Laurent monomials, valid in characteristic p; this gives (g/h)^H=0 and n=h. Step 7: the dimension chain of Milne 1.37 shows N is smooth. Step 8: components are translates, the dimension-drop node applies to the integral affine (N°)_red, so |H°|=|N°|; H° and N° are reduced closed subschemes, hence equal by Stacks 01J3 uniqueness. New nodes: lie-normalizer-centralizer-invariants (Milne 10.34 with the extra hypothesis that H is smooth; I checked the normalizer clause with a dual-number calculation) and group-tangent-dimension-smoothness (Milne 1.37; μ_p, finite étale and trivial cases tested). Both are statement-only and self-contained, neither is a duplicate (compared with lem-ag-smooth-lie-local-dimension, lem-ag-lie-centre, the torus-centralizer node and the cocharacter-limit node), and neither restates an item clause. No SGA source is cited. The three declared tool uses (affine dimension drop, smooth implies reduced, 01J3) are generic and accepted. Batch-5 flag: lem-trf-smooth-at-point-fibre-criterion is Stacks 01V9, a general smoothness fibre criterion; it is neither the trace formula nor Poincaré duality nor a step of their proofs, so the citation is fine. The item is not superseded: live and side-live both still have it unsplit and unreviewed. No changes made."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.GroupScheme.CartanContainingNormalizerSmooth",
+  "declaration": "AlgebraicGeometry.cartanContaining_normalizer_smooth",
+  "file": "lean/Sheaf/AlgebraicGeometry/GroupScheme/CartanContainingNormalizerSmooth.lean",
+  "statement": "theorem cartanContaining_normalizer_smooth (F : Type u) [Field F] [IsAlgClosed F] (G T H : Grp (Over (Spec (.of F)))) [IsAffine G.X.left] [LocallyOfFiniteType G.X.hom] [QuasiCompact G.X.hom] [Smooth G.X.hom] [ConnectedSpace G.X.left] [IsAffine H.X.left] [LocallyOfFiniteType H.X.hom] [QuasiCompact H.X.hom] [Smooth H.X.hom] (iT : T ⟶ G) (iH : H ⟶ G) (hT : ReductiveTorusCentralizer.IsMaximalTorus iT) [IsClosedSubgroupScheme iH.hom.hom] (hcontains : ∀ (A : Type u) [CommRing A] [Algebra F A], ReductiveTorusCentralizer.centralizerPoints iT A ⊆ Set.range (fun h : StandardGroupSchemes.affine F A ⟶ H.X ↦ h ≫ iH.hom.hom)) : ∃ (N : Grp (Over (Spec (.of F)))) (iN : N ⟶ G), IsClosedSubgroupScheme iN.hom.hom ∧ IsAffine N.X.left ∧ ∃ (_ : LocallyOfFiniteType N.X.hom) (_ : QuasiCompact N.X.hom), Smooth N.X.hom ∧ (∀ (A : Type u) [CommRing A] [Algebra F A], Set.range (fun n : StandardGroupSchemes.affine F A ⟶ N.X ↦ n ≫ iN.hom.hom) = {g : StandardGroupSchemes.affine F A ⟶ G.X | ∀ (B : Type u) [CommRing B] [Algebra F B] (f : A →ₐ[F] B), (fun h : StandardGroupSchemes.affine F B ⟶ G.X ↦ (StandardGroupSchemes.map F f ≫ g) * h * (StandardGroupSchemes.map F f ≫ g)⁻¹) '' Set.range (fun h : StandardGroupSchemes.affine F B ⟶ H.X ↦ h ≫ iH.hom.hom) = Set.range (fun h : StandardGroupSchemes.affine F B ⟶ H.X ↦ h ≫ iH.hom.hom)}) ∧ ∃ e : GrpObj.identityComponent H.X ≅ GrpObj.identityComponent N.X, e.hom ≫ GrpObj.identityComponentι N.X ≫ iN.hom.hom = GrpObj.identityComponentι H.X ≫ iH.hom.hom",
+  "branch": "newtargets-dag",
+  "by": "NP",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-d08f87422",
+  "group": "NP",
+  "result": "pass",
+  "note": "Diff vs side-live: lean record plus 2 definition stmt_deps (def-sfb-reductive-torus-centralizer-terminology, def-wf-algebraic-components); statement unchanged; lean.statement verbatim in file. Clauses match Milne Lemma 17.47 / node: IsAlgClosed F; G affine finite type, smooth, ConnectedSpace; T IsMaximalTorus (closed, IsTorus via AlgebraicClosure base change, maximal); H smooth closed subgroup, no connectedness; hcontains = centralizerPoints (all A->B, all t in T(B), no reducedness) contained in H(A); conclusion: N closed subgroup, affine, finite type, smooth, point image = {g | all B, f: g_B H(B) g_B^-1 = H(B)} for all A; N°=H° as Over-iso of GrpObj.identityComponent commuting with inclusions into G. Edge cases rank 0, H=G, disconnected H, char p, nonreduced/zero rings fine; single universe u. No duplicate (RankOneRoots.normalizer is rational points only). Docstrings with source/blueprint and 8 steps; sorry only; imports exist in side-live; report sections present. No compile run (no change)."
+ }
+}

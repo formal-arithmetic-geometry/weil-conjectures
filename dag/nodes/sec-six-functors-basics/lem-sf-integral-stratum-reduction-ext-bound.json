@@ -1,0 +1,141 @@
+{
+ "id": "lem-sf-integral-stratum-reduction-ext-bound",
+ "kind": "statement",
+ "title": "Finite reduction estimate for an integral stratum source",
+ "statement": "In the finite-field setting of [sk-def-sf-setting], let X be separated of finite type, and let a=i v:S->Z->X be an open immersion followed by a closed immersion, with quasi-compact open complement j:V->X. Let L be constructible with finite constant local model as in [det-lem-int-ext-formula]. Let c,s be natural numbers whose images in WithTop N are cd_l(j) and cd_l(S), respectively [sk-def-cd]. For any constructible integral sheaf N [sk-def-sfb-constructible], any n>=0, and any integer r>c+s+2, Hom(a_!L[0], integralReductionFunctor l E X (n+1)(N[0])[r]) is zero. These are actual derived quotient tensors [def-sfb-integral-derived-coefficient-data], with no torsion-freeness assumption.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-lem-int-ext/sk-lem-int-ext.proof.md",
+  "place": "paragraph (2): derived completeness and the three finite-reduction bullets"
+ },
+ "stmt_deps": [
+  "sk-def-sf-setting",
+  "sk-def-sfb-constructible",
+  "def-sfb-integral-derived-coefficient-data",
+  "def-weil-finite-field-fiber",
+  "det-lem-int-ext-formula",
+  "sk-def-cd",
+  "sk-def-sfb-module-objects",
+  "sk-def-sfb-module-pushforward-pullback",
+  "def-sfb-module-open-lower-shriek"
+ ],
+ "proof": [
+  {
+   "text": "The proved integral stratum Hom formula supplies the additive closed-support functor and its natural isomorphism from global internal Hom to sections of the dual tensor restricted support. The finite-field datum gives the required characteristic hypotheses. No target signature changes.",
+   "uses": [
+    "det-lem-int-ext-formula"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply integral_reduction_support_amplitude to the actual positive derived reduction. Its restricted support M has cohomology in [-1,c+1], with each cohomology sheaf classical and locally l-power torsion.",
+   "uses": [
+    "lem-sf-integral-reduction-support-amplitude"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Let T be integralStratumDualTensor followed by integralStratumDerivedSections. The torsion heart sections theorem bounds T on each H^q(M)[0] in [0,s+1]. The proved bounded_heart_amplitude theorem extends this to T(M) in [-1,c+s+2]. In Lean the auxiliary heart class is the class of objects satisfying that image bound; it is closed under isomorphisms and contains zero by functoriality.",
+   "uses": [
+    "lem-sf-integral-dual-torsion-heart-sections",
+    "lem-pur-bounded-heart-amplitude"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Since r>c+s+2, H^r(T(M)) vanishes. Commute the support/pullback/tensor/sections composite with shift and use H^0(K[r])=H^r(K). The Hom formula identifies this with H^0 of global internal Hom to the shifted reduction. Derived additive coyoneda for the regular module identifies that group with maps from its degree-zero complex. The existing singleFunctorObjUnitIso identifies this complex with the derived tensor unit; tensor-Hom adjunction and the right unitor identify its maps into internal Hom with the requested morphisms. Transport subsingleton along these equivalences.",
+   "uses": [
+    "lem-pc-right-derived-functor-triangulated",
+    "lem-weil-pbc-derived-coyoneda-evaluation",
+    "sk-def-sfb-derived-tensor-hom"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "det-lem-int-ext-formula",
+  "lem-sf-integral-reduction-support-amplitude",
+  "lem-sf-integral-dual-torsion-heart-sections",
+  "lem-pur-bounded-heart-amplitude",
+  "lem-pc-right-derived-functor-triangulated",
+  "lem-weil-pbc-derived-coyoneda-evaluation",
+  "sk-def-sfb-derived-tensor-hom"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "B6",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-lem-int-ext/sk-lem-int-ext.proof.md",
+  "place": "paragraph (2), the three finite-reduction bullets",
+  "note": "Lean reduction via support amplitude and a heart-only dual sections bound, then bounded_heart_amplitude, the proved stratum Hom formula, and derived coyoneda evaluation."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Hom from an integral constructible stratum extension to derived reductions vanishes above the sum of cohomological dimensions plus two",
+   "results": "DerivedCategory.isZero_of_isLE; isLE_iff; subsingleton_hom_of_isStrictlyLE_of_isStrictlyGE; isZero_of_isGE. These require amplitude assumptions and do not supply the geometric estimate.",
+   "date": "2026-10-27",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Uniform vanishing of Ext from integral constructible sheaves to constructible sheaves on pro etale sites",
+   "results": "CategoryTheory.Sheaf.H and unrelated condensed-module constructions; no integral stratum estimate.",
+   "date": "2026-10-27",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "constructible.*Ext|Ext.*constructible",
+   "results": "0 Mathlib hits. The local stratum Hom formula computes the Hom complex and supplies dual Tor amplitude, but not the finite-reduction sections bound.",
+   "date": "2026-10-27",
+   "verdict": "no match"
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.IntegralStratumExtBound",
+  "date": "2026-10-27",
+  "group": "T1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-lem-int-ext-bound",
+   "place": "paragraph (2), the three bullets: the finite-reduction upper bound",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-lem-int-ext",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.IntegralStratumReductionExtBound",
+  "file": "lean/Sheaf/Paper/IntegralStratumReductionExtBound.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.CondensedRing.integral_stratum_reduction_ext_bound",
+  "statement": "theorem integral_stratum_reduction_ext_bound\n    (D : WeilConjectures.FiniteFieldDatum.{u}) (l : ℕ) [Fact l.Prime] (hl : l ≠ D.p)\n    (E : Type u) [Field E] [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]\n    (X : Scheme.{u}) [X.Over (Spec (.of D.k))]\n    [LocallyOfFiniteType (X ↘ Spec (.of D.k))] [QuasiCompact (X ↘ Spec (.of D.k))]\n    [IsSeparated (X ↘ Spec (.of D.k))]\n    (S Z V : Scheme.{u}) (v : S ⟶ Z) (i : Z ⟶ X) (j : V ⟶ X)\n    [IsOpenImmersion v] [IsClosedImmersion i] [IsOpenImmersion j]\n    [CompactSpace S] [QuasiSeparatedSpace S] [QuasiCompact j]\n    (hij : Set.range j = (Set.range i)ᶜ)\n    (L : pulledBackModuleObjects (integralCoefficientRing l E) S)\n    (hL : IsConstantModelConstructible (integralCoefficientRing l E) S L)\n    (hmodel : HasFiniteConstantLocalModel (integralCoefficientRing l E) S L)\n    (c s : ℕ)\n    (hc : (c : WithTop ℕ) = relativeCohomologicalDimension l (Fact.out : l.Prime) j)\n    (hs : (s : WithTop ℕ) = cohomologicalDimension l (Fact.out : l.Prime) S)\n    (N : pulledBackModuleObjects (integralCoefficientRing l E) X)\n    (hN : IsConstantModelConstructible (integralCoefficientRing l E) X N)\n    (n : ℕ) (r : ℤ) (hr : (c : ℤ) + s + 2 < r) :\n    Subsingleton (((DerivedCategory.singleFunctor _ 0).obj\n        ((lowerStar (integralCoefficientRing l E) i).obj\n          ((openImmersionLowerShriek (integralCoefficientRing l E) v).obj L))) ⟶\n      ((integralReductionFunctor l E X (n + 1)).obj\n        ((DerivedCategory.singleFunctor _ 0).obj N)) ⟦r⟧)",
+  "branch": "sheaf-dag",
+  "by": "T1",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-5ca77",
+  "group": "T1",
+  "result": "fix",
+  "landing": "20261027T094521-L-238190",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B6",
+  "result": "pass",
+  "landing": "20261027T112319-L-1570250",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

@@ -1,0 +1,239 @@
+{
+ "id": "lem-sfb-stack-smooth-descent-higher-image-criterion",
+ "kind": "statement",
+ "title": "Smooth descent criterion for preservation by higher direct images",
+ "statement": "Work in the universes and small-skeleton convention of [def-weil-size-convention]. For a scheme $S$ [def-pc-scheme] and an algebraic stack $\\mathcal Z/S$ [def-sfb-algebraic-moduli-stack], its big etale site has all objects and arrows of the fibred category in [def-sfb-stack-quasi-coherent-algebra], with coverings lying over jointly surjective etale scheme maps. Its structure sheaf is $\\mathcal O_{\\mathcal Z}(z)=\\Gamma(U,\\mathcal O_U)$ for $z$ over $U$. Use module sheaves [def-weil-sheaf-of-modules-category]. For $h:\\mathcal A\\to\\mathcal Z$, direct image has value $(h_*N)(z)=\\Gamma(\\mathcal A\\times_{\\mathcal Z}U,N|_{\\mathcal A\\times_{\\mathcal Z}U})$; restrictions are induced by base change, and pullback of a module along a stack morphism means precomposition. Higher direct images are computed by injective resolutions in all module sheaves [def-sp-injective-resolutions]. For every algebraic stack $\\mathcal Z/S$, let $\\mathcal M_{\\mathcal Z}$ be a strictly full subcategory of its big etale module category. Assume: (1) it contains zero and is closed under kernels and cokernels of morphisms between its objects and under extensions (this is the weak Serre condition); (2) precomposition by every smooth morphism of algebraic stacks preserves these subcategories; (3) membership is detected by every jointly surjective family of smooth morphisms $p_j:\\mathcal Z_j\\to\\mathcal Z$, namely $M\\in\\mathcal M_{\\mathcal Z}$ if and only if $p_j^*M\\in\\mathcal M_{\\mathcal Z_j}$ for every $j$; and (4) for every morphism between stacks represented by affine schemes, $R^ih_*$ preserves membership for every $i\\geq0$. Smoothness here means smoothness after all scheme tests and etale scheme charts, as in [def-sfb-algebraic-moduli-stack, def-sbc-smooth-morphisms]; joint surjectivity means that every object over a field lifts after a field extension to one family member. Then for every quasi-compact, quasi-separated morphism $h:\\mathcal A\\to\\mathcal Z$ [def-sfb-stack-qcqs-morphism] and every $i\\geq0$, $R^ih_*$ sends $\\mathcal M_{\\mathcal A}$ into $\\mathcal M_{\\mathcal Z}$.",
+ "source": {
+  "document": "literature/stacks-project/stacks-cohomology.tex",
+  "place": "Tag 076Z, lemma-general-pushforward (etale version)."
+ },
+ "stmt_deps": [
+  "def-weil-size-convention",
+  "def-pc-scheme",
+  "def-sfb-algebraic-moduli-stack",
+  "def-sfb-stack-quasi-coherent-algebra",
+  "def-weil-sheaf-of-modules-category",
+  "def-sp-injective-resolutions",
+  "def-sbc-smooth-morphisms",
+  "def-sfb-stack-qcqs-morphism"
+ ],
+ "proof": [
+  {
+   "text": "Fix $F\\in\\mathcal M_{\\mathcal A}$. Choose a smooth surjective scheme atlas of $\\mathcal Z$ and an affine open cover of its source. Their composites give a jointly surjective family of representable smooth maps $b_j:T_j\\to\\mathcal Z$ with affine $T_j$. Form $\\mathcal A_j=\\mathcal A\\times_{\\mathcal Z}T_j$, with projection $a_j$ and map $h_j:\\mathcal A_j\\to T_j$. Fibre products are algebraic; $a_j$ is smooth. The definitions of qcqs, together with associativity of fibre products and the base-change identification of the relative diagonal, show that each $h_j$ is qcqs. Assumption (2) gives $a_j^*F\\in\\mathcal M_{\\mathcal A_j}$. Big-etale base change identifies $b_j^*R^ih_*F$ with $R^i(h_j)_*(a_j^*F)$ for every $i$. Thus assumption (3) reduces the assertion to affine target $T_j$; no representability of $h$ has been used.",
+   "uses": [
+    "def-sfb-algebraic-moduli-stack",
+    "def-pc-scheme",
+    "lem-sfb-stack-chartwise-smooth-etale-calculus",
+    "lem-sfb-algebraic-stack-fibre-products",
+    "def-sfb-stack-qcqs-morphism",
+    "lem-sfb-stack-big-etale-higher-image-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/stacks-cohomology.tex",
+    "place": "Tag 076Z, lemma-general-pushforward, proof paragraph 1; base change is Tag 075H."
+   }
+  },
+  {
+   "text": "For the remaining argument let $h:\\mathcal A\\to T$ be qcqs with $T$ affine. Quasi-compactness of $h$ makes $\\mathcal A$ quasi-compact, so the affine-atlas theorem gives a representable smooth surjection $v:V\\to\\mathcal A$ with $V$ affine. Write $v_p:V_p\\to\\mathcal A$ for its Cech augmentations. The nerve geometry lemma makes $h\\circ v_p$ qcqs. Each $v_p$ is smooth, by repeated base change and composition, so $v_p^*F\\in\\mathcal M_{V_p}$ by (2). The smooth-Cech theorem gives $E_1^{p,q}=R^q(h\\circ v_p)_*(v_p^*F)\\Rightarrow R^{p+q}h_*F$. If all its $E_1$ terms lie in $\\mathcal M_T$, so does each successive page: the image of a differential is the kernel of its cokernel, and next-page terms are cokernels of the inclusions of incoming images into outgoing kernels. These are morphisms between objects already in the subcategory, so (1) applies; arbitrary subobjects are not needed. Eventual stabilization puts each $E_\\infty^{p,q}$ in $\\mathcal M_T$. The finite filtration in degree $n$, starting at zero, then puts $R^nh_*F$ in $\\mathcal M_T$ by repeated extensions. Hence it suffices at any such stage to know preservation for every $h\\circ v_p$. This is a finite-filtration argument, with no uniform cohomological dimension bound.",
+   "uses": [
+    "def-sfb-stack-qcqs-morphism",
+    "lem-sfb-algebraic-stack-quasicompact-surjection",
+    "lem-sfb-stack-chartwise-smooth-etale-calculus",
+    "lem-sfb-stack-affine-source-nerve-geometry",
+    "lem-sfb-stack-smooth-cech-module-spectral-sequence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/stacks-cohomology.tex",
+    "place": "Tag 076Z, proof paragraph 2; Tag 072G (E_1 convention), and Tag 0132, last clause."
+   }
+  },
+  {
+   "text": "First consider $h:A\\to T$ with $A$ a scheme separated over $T$. For the affine atlas of step 2, the last clause of the nerve geometry lemma says every $V_p$ is affine. Assumption (4) applies to $h\\circ v_p$ in every degree $q$, with input $v_p^*F$ in the required subcategory by (2). Thus all $E_1$ entries belong to $\\mathcal M_T$, and step 2 proves preservation for separated scheme sources.",
+   "uses": [
+    "lem-sfb-stack-affine-source-nerve-geometry"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/stacks-cohomology.tex",
+    "place": "Tag 076Z, proof last paragraph: separated-scheme case reduced to affine schemes."
+   }
+  },
+  {
+   "text": "Now let $h:A\\to T$ have an arbitrary scheme source. Its affine atlas has each $V_p$ a scheme separated over $T$, by the third clause of the nerve geometry lemma; every $h\\circ v_p$ is qcqs. The separated-scheme result of step 3 therefore applies to all inputs $v_p^*F$ and all degrees $q$. Step 2 proves preservation for arbitrary scheme sources.",
+   "uses": [
+    "lem-sfb-stack-affine-source-nerve-geometry"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/stacks-cohomology.tex",
+    "place": "Tag 076Z, proof paragraph 4: scheme case reduced to separated schemes."
+   }
+  },
+  {
+   "text": "Next let $h:\\mathcal A\\to T$ have source represented by an algebraic space. The second clause of the nerve geometry lemma makes the affine-atlas terms $V_p$ schemes, and their maps to $T$ are qcqs. Apply step 4 to each $h\\circ v_p$, with coefficient $v_p^*F$ and every degree $q$, and then step 2. This proves preservation for algebraic-space sources.",
+   "uses": [
+    "lem-sfb-stack-affine-source-nerve-geometry"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/stacks-cohomology.tex",
+    "place": "Tag 076Z, proof paragraph 3: algebraic-space case reduced to schemes."
+   }
+  },
+  {
+   "text": "Finally let $h:\\mathcal A\\to T$ have arbitrary algebraic-stack source. The first clause of the nerve geometry lemma makes the affine-atlas terms $V_p$ algebraic spaces with qcqs maps to $T$. Step 5 applies to these maps, coefficients and all degrees. Step 2 now proves preservation for arbitrary stack sources over an affine target. Step 1 and assumption (3) give the asserted membership on the original target in every degree, including degree zero.",
+   "uses": [
+    "lem-sfb-stack-affine-source-nerve-geometry"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/stacks-cohomology.tex",
+    "place": "Tag 076Z, proof paragraph 2, followed by paragraph 1."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sfb-algebraic-moduli-stack",
+  "def-pc-scheme",
+  "lem-sfb-stack-chartwise-smooth-etale-calculus",
+  "lem-sfb-algebraic-stack-fibre-products",
+  "def-sfb-stack-qcqs-morphism",
+  "lem-sfb-stack-big-etale-higher-image-base-change",
+  "lem-sfb-algebraic-stack-quasicompact-surjection",
+  "lem-sfb-stack-affine-source-nerve-geometry",
+  "lem-sfb-stack-smooth-cech-module-spectral-sequence"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/stacks-cohomology.tex",
+  "place": "Tag 076Z, lemma-general-pushforward, full proof; supporting Tags 075H, 072G, 0132 and 075S."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "general.*pushforward|AlgebraicStack|smooth.*Serre",
+   "results": "{\"t\": \"2026-10-23T13:56:06Z\", \"tool\": \"grep\", \"query\": \"general.*pushforward|AlgebraicStack|smooth.*Serre\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits give scheme module functors, general Serre classes and scheme locality; none gives this smooth-descent criterion for stack module systems"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A weak Serre system of module sheaves on algebraic stacks stable under smooth pullback smooth locally detected and preserved by affine direct images is preserved by qcqs higher direct images",
+   "results": "{\"t\": \"2026-10-23T13:56:06Z\", \"tool\": \"leansearch\", \"query\": \"A weak Serre system of module sheaves on algebraic stacks stable under smooth pullback smooth locally detected and preserved by affine direct images is preserved by qcqs higher direct images\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Modules.instAdditivePullback\", \"AlgebraicGeometry.Scheme.Modules.instAdditivePushforward\", \"SheafOfModules.IsQuasicoherent.mk\", \"SheafOfModules.IsQuasicoherent.casesOn\", \"CategoryTheory.ObjectProperty.IsSerreClass\", \"AlgebraicGeometry.sourceLocalClosure.instIsStableUnderBaseChangeScheme\", \"SheafOfModules.isQuasicoherent\", \"SheafOfModules.pullbackObjFreeIso\"], \"digest\": \"1ec3b59ead09eca8\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits give scheme module functors, general Serre classes and scheme locality; none gives this smooth-descent criterion for stack module systems"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"WeakSerre\"",
+   "results": "{\"t\": \"2026-10-23T13:56:06Z\", \"tool\": \"loogle\", \"query\": \"\\\"WeakSerre\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits give scheme module functors, general Serre classes and scheme locality; none gives this smooth-descent criterion for stack module systems"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A weak Serre system of module sheaves on algebraic stacks stable under smooth pullback smooth locally detected and preserved by affine direct images is preserved by qcqs higher direct images",
+   "results": "{\"t\": \"2026-10-23T13:56:09Z\", \"tool\": \"leanfinder\", \"query\": \"A weak Serre system of module sheaves on algebraic stacks stable under smooth pullback smooth locally detected and preserved by affine direct images is preserved by qcqs higher direct images\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SheafOfModules.isFinitePresentation\", \"AlgebraicGeometry.IsLocalAtTarget.descendsAlong_inf_quasiCompact\", \"SheafOfModules.isQuasicoherent\", \"AlgebraicGeometry.Scheme.Modules.instAbelian\", \"AlgebraicGeometry.IsZariskiLocalAtTarget.descendsAlong_inf_quasiCompact\", \"AlgebraicGeometry.Scheme.Modules.instHasColimits\", \"SheafOfModules.IsFinitePresentation\", \"LightCondensed.instIsGrothendieckAbelianLightCondMod\"], \"digest\": \"24db84bc7ee55a43\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits give scheme module functors, general Serre classes and scheme locality; none gives this smooth-descent criterion for stack module systems"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Descent criterion for preservation of a class of sheaves by higher direct images using smooth covers and affine schemes",
+   "results": "{\"t\": \"2026-10-23T13:56:11Z\", \"tool\": \"leanfinder\", \"query\": \"Descent criterion for preservation of a class of sheaves by higher direct images using smooth covers and affine schemes\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.HasAffineProperty.descendsAlong_of_affineAnd\", \"AlgebraicGeometry.HasRingHomProperty.descendsAlong\", \"CategoryTheory.Functor.sheafPushforwardCocontinuous\", \"AlgebraicGeometry.IsLocalAtTarget.descendsAlong\", \"AlgebraicGeometry.IsZariskiLocalAtTarget.descendsAlong\", \"AlgebraicGeometry.Scheme.AffineZariskiSite.PreservesLocalization.isLocallyDirected\", \"CategoryTheory.Functor.SmallCategories.instPreservesFiniteLimitsSheafSheafPullbackOfRepresentablyFlat\", \"AlgebraicGeometry.instIsLocallyDirectedCompSchemeOverOverTopMorphismPropertyForgetForgetForget\"], \"digest\": \"4c95b2cfa449be01\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits give scheme module functors, general Serre classes and scheme locality; none gives this smooth-descent criterion for stack module systems"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A weak Serre system of modules on big etale sites of algebraic stacks stable under smooth pullback and descent is preserved by qcqs higher direct images if this holds for affine schemes",
+   "results": "{\"t\": \"2026-10-23T19:58:04Z\", \"tool\": \"leanfinder\", \"query\": \"A weak Serre system of modules on big etale sites of algebraic stacks stable under smooth pullback and descent is preserved by qcqs higher direct images if this holds for affine schemes\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.AffineTargetMorphismProperty.IsLocal\", \"AlgebraicGeometry.HasAffineProperty.descendsAlong_of_affineAnd\", \"AlgebraicGeometry.IsLocalAtTarget.descendsAlong_inf_quasiCompact\", \"AlgebraicGeometry.IsEtale.instHasOfPostcompPropertyScheme\", \"AlgebraicGeometry.IsZariskiLocalAtTarget.descendsAlong_inf_quasiCompact\", \"AlgebraicGeometry.HasAffineProperty.affineAnd_le_affineAnd\", \"AlgebraicGeometry.HasAffineProperty.affineAnd_iff\", \"AlgebraicGeometry.targetAffineLocally_affineAnd_le\"], \"digest\": \"02ba87ada064f601\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme morphism locality and quasi-coherent or Serre object properties do not give the smooth descent criterion for arbitrary systems on big stack sites"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"WeakSerre\"",
+   "results": "{\"t\": \"2026-10-23T19:58:19Z\", \"tool\": \"loogle\", \"query\": \"\\\"WeakSerre\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme morphism locality and quasi-coherent or Serre object properties do not give the smooth descent criterion for arbitrary systems on big stack sites"
+  },
+  {
+   "tool": "grep",
+   "query": "AlgebraicStack|smooth.*Serre|general.*pushforward",
+   "results": "{\"t\": \"2026-10-23T19:58:20Z\", \"tool\": \"grep\", \"query\": \"AlgebraicStack|smooth.*Serre|general.*pushforward\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme morphism locality and quasi-coherent or Serre object properties do not give the smooth descent criterion for arbitrary systems on big stack sites"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A weak Serre system of modules on big etale sites of algebraic stacks stable under smooth pullback and descent is preserved by qcqs higher direct images if this holds for affine schemes",
+   "results": "{\"t\": \"2026-10-23T19:58:42Z\", \"tool\": \"leansearch\", \"query\": \"A weak Serre system of modules on big etale sites of algebraic stacks stable under smooth pullback and descent is preserved by qcqs higher direct images if this holds for affine schemes\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.quasiCompact_isStableUnderBaseChange\", \"SheafOfModules.IsQuasicoherent.casesOn\", \"AlgebraicGeometry.IsEtale.instIsStableUnderBaseChangeScheme\", \"AlgebraicGeometry.AffineTargetMorphismProperty.IsStableUnderBaseChange\", \"AlgebraicGeometry.Scheme.instIsStableUnderBaseChangeJointlySurjectivePrecoverage\", \"AlgebraicGeometry.Scheme.Modules.instAdditivePullback\", \"AlgebraicGeometry.QuasiCompactCover.instPullback₂Scheme\", \"AlgebraicGeometry.Scheme.instIsStableUnderBaseChangePrecoverageOfIsJointlySurjectivePreservingOfIsStableUnderBaseChange\"], \"digest\": \"8d8ac22ede28ba55\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme morphism locality and quasi-coherent or Serre object properties do not give the smooth descent criterion for arbitrary systems on big stack sites"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Preservation of weak Serre subcategories by derived pushforward can be checked smooth locally and on maps of affine schemes",
+   "results": "{\"t\": \"2026-10-23T19:59:25Z\", \"tool\": \"leanfinder\", \"query\": \"Preservation of weak Serre subcategories by derived pushforward can be checked smooth locally and on maps of affine schemes\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.AffineTargetMorphismProperty.IsLocal\", \"AlgebraicGeometry.affineLocally\", \"AlgebraicGeometry.targetAffineLocally_affineAnd_le\", \"AlgebraicGeometry.affineLocally_le\", \"AlgebraicGeometry.sourceAffineLocally_isLocal\", \"AlgebraicGeometry.HasAffineProperty.isLocal_affineProperty\", \"AlgebraicGeometry.HasAffineProperty.of_isLocalAtTarget\", \"AlgebraicGeometry.HasAffineProperty.descendsAlong_of_affineAnd\"], \"digest\": \"74100827879b1c54\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme morphism locality and quasi-coherent or Serre object properties do not give the smooth descent criterion for arbitrary systems on big stack sites"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-stack-higher-images-flat-comparison",
+  "date": "2026-10-23",
+  "group": "Q160"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Affine PGL quotients with closed orbits and zero-dimensional stabilizers. Supporting affine-quotient step: Finite inertia gives an adequate coarse moduli space. Supporting input to the finite-inertia coarse-space construction: Passage from invariant global power liftings on the affine rank charts to adequate moduli spaces, then etale descent to the glued map. Flat scalar-section comparison needed in the descent of a power lying in the image of a global algebra map; this does not assert adequate-moduli locality. General cohomological input: preservation of locally quasi-coherent modules and flat comparison maps under qcqs stack direct images. Supporting input: Smooth descent criterion for preservation by higher direct images.",
+   "via": [
+    "lem-sfb-stack-higher-images-flat-comparison",
+    "lem-sfb-stack-flat-scalar-sections",
+    "lem-sfb-adequate-moduli-etale-locality",
+    "lem-sfb-finite-inertia-adequate-coarse-space",
+    "lem-sfb-affine-pgl-finite-stabilizer-quotient",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-stack-smooth-descent-higher-image-criterion",
+  "worker": "stage1",
+  "summary": "NX checked Tag 076Z against the big-etale module conventions, reused the existing affine-atlas theorem and representable smooth calculus, and wrote the target-localization plus four diagonal reductions. Four statement-only inputs record derived and per-degree big-site base change, the smooth-Cech spectral sequence, and qcqs affine-source nerve geometry. The weak-Serre page and finite-filtration argument is explicit; the statement is unchanged.",
+  "blueprint": "The inherited det-thm-sf-ctf-stability-direct-images (3) alteration/coarse-space supporting chain is unchanged. The present split supplies the general smooth-descent criterion used by lem-sfb-stack-higher-images-flat-comparison. Current latest blueprint was read; there is no nearer imported ancestor (blueprint_refs.py reports None).",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-NX-2e1f03cc7",
+  "group": "NX",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NX-2e1f03cc7 (reviewer sub-agent of L); spot-checked: This is the item's first split (Q160-created item, no re-split note). The item statement and stmt_deps are unchanged and match Stacks 076Z: weak Serre (1), smooth pullback (2), field-lifting detection on smooth families (3), affine-to-affine images (4), qcqs conclusion; I read the statement and proof at stacks-cohomology.tex l.236-366. Step 1: an atlas composed with an affine cover gives smooth b_j (calculus node); A_j is algebraic (04T2 node); h_j is qcqs directly from the definition; per-degree 075H base change, then (3). Step 2: the affine atlas comes from the final equivalence of lem-sfb-algebraic-stack-quasicompact-surjection; v_p is smooth, so (2) applies; the weak-Serre page argument (im = ker coker, next page = coker between members), stabilization and the finite filtration are correct; the E_1 page per 072G is right, Stacks' E_2 in 076Z is notation only. Steps 3-6 apply the four nerve clauses in order affine, separated scheme, scheme, space, stack; the induction is not circular. New nodes: (a) derived 075H base change matches stacks-sheaves l.3929-3970 for arbitrary f and b; (b) its per-degree consequence has only the derived node as proof_dep (brief l.60); (c) the smooth-Cech spectral sequence matches 072G(1)(b) with the 0132 convergence clauses; (d) nerve geometry is true: Δ is representable, 075S(3) gives qcqs, immersion into an affine scheme gives separated, closed immersion gives affine. I tested it on Spec k, BG (V_1 = G), the doubled-origin plane (V_1 contains A^2 minus 0: separated, not affine) and empty schemes. No duplicates: representable-derived-restriction (075P), space-relative-cech (small étale, spaces), qcqs-permanence, qcqs-atlas-affine-diagonal and space-qcqs-source-products are all different statements. None of the new nodes restates an item clause. Batch-5 flags: all are generic definitions or stack foundations (algebraic stack, qcqs, 2-fibre products, algebraic space, the site convention, 04T2, 04YC, representable calculus), neither part of nor given by the trace-formula or Poincaré assumptions. No SGA is cited. No fixes."
+ }
+}

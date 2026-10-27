@@ -1,0 +1,314 @@
+{
+ "id": "lem-sfb-bounded-cotangent-artinian-limit",
+ "kind": "statement",
+ "title": "Bounded cotangent dimension makes an Artinian inverse limit Noetherian and adic",
+ "statement": "Let $\\Lambda$ be a commutative Noetherian local ring and $l$ a field finite as a $\\Lambda$-module [def-weil-pbc-noetherian-ring, def-weil-field]. Let $\\cdots\\twoheadrightarrow A_{n+1}\\xrightarrow{q_n} A_n\\twoheadrightarrow\\cdots\\twoheadrightarrow A_1$ be a sequence, indexed by integers $n\\geq1$, of surjective morphisms in $\\mathcal C_{\\Lambda,l}$ [def-sfb-artin-deformation-test-category]. Suppose there is an integer $d\\geq0$ such that $\\dim_l(\\mathfrak m_{A_n}/\\mathfrak m_{A_n}^2)\\leq d$ for every $n$, where the vector-space structures use the specified residue field $l$. Define the ring $B=\\{(a_n)\\in\\prod_{n\\geq1}A_n:q_n(a_{n+1})=a_n\\text{ for every }n\\}$ with componentwise operations and the diagonal $\\Lambda$-structure. Then $B$ is a Noetherian local $\\Lambda$-algebra with specified residue field $l$ and is complete for its maximal ideal $\\mathfrak m_B$ [def-weil-pbc-adic-completion]. Each coordinate map $p_n:B\\to A_n$ is a surjective local residue-preserving $\\Lambda$-map. With $I_n=\\ker p_n$, the kernel filtration and the powers of $\\mathfrak m_B$ are cofinal: for every $r\\geq1$ there exists $n\\geq1$ with $I_n\\subseteq\\mathfrak m_B^r$, and for every $n\\geq1$ there exists $r\\geq1$ with $\\mathfrak m_B^r\\subseteq I_n$.",
+ "source": {
+  "document": "literature/stacks-project/formal-defos.tex",
+  "place": "Tag 06SF (lemma-limit-artinian), including surjectivity of projections used in its proof"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-noetherian-ring",
+  "def-weil-field",
+  "def-sfb-artin-deformation-test-category",
+  "def-weil-pbc-adic-completion"
+ ],
+ "proof": [
+  {
+   "text": "The coordinate maps are surjective: to lift $a\\in A_n$, choose successively a preimage in $A_{n+1}$, then in $A_{n+2}$, and so on; the earlier coordinates are forced by the transition maps. All coordinates of a compatible sequence have the same residue in $l$. This gives a surjection $\\rho:B\\to l$, and set $\\mathfrak m_B=\\ker\\rho$. If $b\\notin\\mathfrak m_B$, each $b_n$ is a unit of the local ring $A_n$; the sequence $(b_n^{-1})_n$ is compatible and is an inverse in $B$. If $b\\in\\mathfrak m_B$, it cannot be a unit because its residue is zero. Thus $B$ is local with maximal ideal $\\mathfrak m_B$ and specified residue field $l$. Each $p_n$ preserves the residue marking, and $p_n^{-1}(\\mathfrak m_{A_n})=\\mathfrak m_B$, so it is local.",
+   "uses": [
+    "def-sfb-artin-deformation-test-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/formal-defos.tex",
+    "place": "Tag 06SF (lemma-limit-artinian), opening sentence of proof; componentwise inverse and recursive lifting made explicit"
+   }
+  },
+  {
+   "text": "Surjectivity and the residue markings imply that $q_n$ maps $\\mathfrak m_{A_{n+1}}$ onto $\\mathfrak m_{A_n}$, hence gives a surjection on their quotients by squares. Therefore their dimensions are nondecreasing integers bounded by $d$; choose $N$ after they stabilize, with value $r$. Choose a basis of $\\mathfrak m_{A_N}/\\mathfrak m_{A_N}^2$, representatives in $\\mathfrak m_{A_N}$, and lift them by $p_N$ to $x_1,\\ldots,x_r\\in\\mathfrak m_B$. For $n\\geq N$ the cotangent map to level $N$ is a surjection between $r$-dimensional spaces and hence an isomorphism, so the images of these $x_i$ form a basis. For $n<N$ their classes still span, by surjectivity from level $N$. Each $A_n$ is Noetherian by the Artinian-local lemma, so its maximal ideal is finitely generated. Apply the cited local-generator form of Nakayama with $M=\\mathfrak m_{A_n}$: the images of the $x_i$ generate that ideal for every $n$. Also choose $c_n\\geq1$ with $\\mathfrak m_{A_n}^{c_n}=0$ by the same Artinian-local lemma.",
+   "uses": [
+    "lem-weil-pbc-artinian-local-noetherian-nilpotent",
+    "lem-weil-pbc-nakayama-local-generators"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/formal-defos.tex",
+    "place": "Tag 06SF (lemma-limit-artinian), stabilization and common generators; algebra.tex Tags 00KH, 00J8 and 00DV (lemma-NAK), part (8)"
+   }
+  },
+  {
+   "text": "Choose finitely many $\\Lambda$-module generators of $l$; they also generate $l$ as a $\\Lambda$-algebra. Lift them through $\\rho$ to $y_1,\\ldots,y_t\\in B$. Evaluation defines $f:P=\\Lambda[Y_1,\\ldots,Y_t,X_1,\\ldots,X_r]\\to B$ with $Y_j\\mapsto y_j$, $X_i\\mapsto x_i$. Its residue map $e:P\\to l$ is surjective and sends $X_i$ to zero. For each $n$, the composite $f_n:P\\to A_n$ is surjective as follows. Write $x_i$ also for their images in $A_n$. For any $a\\in A_n$ choose a polynomial in the $y_j$ with the same residue, so the error lies in $\\mathfrak m_{A_n}$. If an error lies in $\\mathfrak m_{A_n}^h$, write it as a finite sum $\\sum_{|\\alpha|=h}a_\\alpha x^\\alpha$, since the $x_i$ generate the maximal ideal. Replace each $a_\\alpha$ by a polynomial in the $y_j$ with the same residue; subtracting the resulting polynomial changes the error to one in $\\mathfrak m_{A_n}^{h+1}$. Iterating for $h=1,\\ldots,c_n-1$ kills the error. This proves surjectivity without assuming a coefficient field in any $A_n$.",
+   "uses": [
+    "def-weil-pbc-mv-polynomial-ring"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/formal-defos.tex",
+    "place": "Tag 06SF (lemma-limit-artinian), polynomial presentation; nilpotent approximation giving its surjectivity written out"
+   }
+  },
+  {
+   "text": "Put $\\mathfrak q=\\ker(e)$ and $R=\\varprojlim_hP/\\mathfrak q^h$. Apply the completed-polynomial test-ring lemma with base $\\Lambda$, field $l$, $s=t$ and $d=r$ (finite as a module implies finite type as used in the preceding step). It says that $R$ is Noetherian complete local with residue field $l$ and that each residue-compatible $f_n$ extends uniquely to a local $\\Lambda$-map $g_n:R\\to A_n$. The maps $g_n$ are surjective because their images contain $f_n(P)=A_n$. Their uniqueness gives $q_n g_{n+1}=g_n$, since both maps restrict to $f_n$ on $P$. Set $J_n=\\ker(g_n)$ and $J=\\bigcap_nJ_n$. These are decreasing proper ideals, $J_n\\subseteq\\mathfrak m_R$, and $\\mathfrak m_R^{c_n}\\subseteq J_n$: a product of $c_n$ elements of $\\mathfrak m_R$ maps into $\\mathfrak m_{A_n}^{c_n}=0$.",
+   "uses": [
+    "lem-sfb-artin-completed-polynomial-test-ring"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/formal-defos.tex",
+    "place": "Tag 06SF (lemma-limit-artinian), completion R and its compatible surjective maps; completed-polynomial construction from Tag 06SM (lemma-exists-smooth)"
+   }
+  },
+  {
+   "text": "Let $T=R/J$ and $\\mathfrak m_T=\\mathfrak m_R/J$. Because $J\\subseteq\\mathfrak m_R$, $T$ is local with this maximal ideal and residue field $l$: an element outside $\\mathfrak m_T$ lifts to a unit in $R$. It is Noetherian: the inverse image of any ideal of $T$ is a finitely generated ideal of $R$, and the images of these generators generate the given ideal. The $R$-module $T$ is cyclic, generated by $1$. Thus the finite-module completeness lemma applied to the Noetherian ring $R$, its ideal $\\mathfrak m_R$, and the finite module $T$, makes the canonical map $T\\to\\varprojlim_hT/\\mathfrak m_R^hT$ bijective. Here $\\mathfrak m_R^hT=\\mathfrak m_T^h$ as ideals of $T$, so $T$ is complete for its maximal ideal.",
+   "uses": [
+    "def-weil-pbc-noetherian-ring",
+    "lem-weil-pbc-finite-module-complete-over-complete-noetherian"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/formal-defos.tex",
+    "place": "Tag 06SF (lemma-limit-artinian), quotient R/J; algebra.tex Tag 00MA (lemma-completion-tensor), part (3), and Tag 0325 (lemma-quotient-complete-local)"
+   }
+  },
+  {
+   "text": "To apply the descending-ideal lemma with its exact indexing hypothesis, choose strictly increasing positive integers $e_n\\geq c_n$, tending to infinity. For positive $h<e_1$ set $K_h=\\mathfrak m_R$; for $e_n\\leq h<e_{n+1}$ set $K_h=J_n$. Then $K_h$ is decreasing, $\\mathfrak m_R^h\\subseteq K_h$, and $\\bigcap_hK_h=J$. The descending-ideal lemma applied to $R$ and $(K_h)$ gives, for every $a\\geq1$, some $h$ with $K_h\\subseteq J+\\mathfrak m_R^a$. There is an original $J_n\\subseteq K_h$ (take $n=1$ in the initial block and the block index otherwise). Hence some $J_n\\subseteq J+\\mathfrak m_R^a$. Conversely, each $J_n$ contains $\\mathfrak m_R^{c_n}$. Passing to $T$ proves that $L_n=J_n/J$ and $\\mathfrak m_T^a$ are cofinal. This handles arbitrary nilpotence exponents rather than presuming $c_n=n$.",
+   "uses": [
+    "lem-sfb-artin-descending-ideal-adic-topology"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/formal-defos.tex",
+    "place": "Tag 06SF (lemma-limit-artinian), final parenthetical renumbering; Tag 06SE (lemma-m-adic-topology)"
+   }
+  },
+  {
+   "text": "The maps $g_n$ give $\\phi:T\\to B$ and identifications $T/L_n\\cong A_n$, all with the specified quotient maps. Here is the explicit inverse-limit comparison using the cofinality just proved. Choose increasing indices $n(a)\\geq a$ with $L_{n(a)}\\subseteq\\mathfrak m_T^a$. For $b=(b_n)\\in B$, regard $b_{n(a)}$ as an element of $T/L_{n(a)}$ and map it to $T/\\mathfrak m_T^a$. These residues are compatible, so completeness of $T$ gives a unique $t\\in T$. For a fixed $n$ choose $a\\geq c_n$ with $n(a)\\geq n$; since $\\mathfrak m_T^a\\subseteq L_n$, the residue of $t$ in $T/L_n$ is exactly $b_n$. Thus $\\phi(t)=b$. Also $\\ker\\phi=\\bigcap_n L_n=0$, because $J=\\bigcap_nJ_n$. Therefore $\\phi$ is a bijective $\\Lambda$-ring map, with $p_n\\phi$ precisely the map induced by $g_n$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/formal-defos.tex",
+    "place": "Tag 06SF (lemma-limit-artinian), identification R/J = lim R/J_n = lim A_n, via explicit maps"
+   }
+  },
+  {
+   "text": "The isomorphism $\\phi$ preserves the common residue map to $l$, so it sends $\\mathfrak m_T$ to $\\mathfrak m_B$, their powers to the corresponding powers, and $L_n=\\ker(T\\to A_n)$ to $I_n=\\ker(p_n)$. The Noetherianity and maximal-ideal completeness of $T$ therefore give those properties for $B$. The two containments of step 6 become, respectively, $I_n\\subseteq\\mathfrak m_B^a$ for a suitable $n$ for every $a$, and $\\mathfrak m_B^{c_n}\\subseteq I_n$ for every $n$. Along with step 1 these are every claimed conclusion.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/formal-defos.tex",
+    "place": "Tag 06SF (lemma-limit-artinian), conclusion and transport of the two filtrations"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sfb-artin-deformation-test-category",
+  "lem-weil-pbc-artinian-local-noetherian-nilpotent",
+  "lem-weil-pbc-nakayama-local-generators",
+  "def-weil-pbc-mv-polynomial-ring",
+  "lem-sfb-artin-completed-polynomial-test-ring",
+  "def-weil-pbc-noetherian-ring",
+  "lem-weil-pbc-finite-module-complete-over-complete-noetherian",
+  "lem-sfb-artin-descending-ideal-adic-topology"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/formal-defos.tex",
+  "place": "Tag 06SF (lemma-limit-artinian), entire proof, with its cited Tag 06SE and the explicit polynomial-completion and quotient-completeness prerequisites"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A surjective inverse sequence of Artinian local algebras with bounded cotangent dimensions has a Noetherian complete local inverse limit and its kernel ideals are cofinal with maximal ideal powers",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AdicCompletion.surjective_evalₐ\", \"module\": \"Mathlib/RingTheory/AdicCompletion/Algebra\", \"type\": \"∀ {R : Type u_1} [inst : CommRing R] (I : Ideal R) (n : ℕ), Function.Surjective ⇑(AdicCompletion.evalₐ I n)\", \"doc\": \"For any natural number $ n $, the canonical $ R $-algebra homomorphism from the $ I $-adic completion of $ R $ to the quotient ring $ R/I^n $ is surjective, meaning every element of $ R/I^n $ is the i\"}\n  {\"name\": \"AdicCompletion.kerProj_surjective\", \"module\": \"Mathlib/RingTheory/AdicCompletion/Algebra\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} [inst : CommRing R] [inst_1 : CommRing S] {A : Type u_4} [inst_2 : CommRing A]\\n  [inst_3 : Algebra R A] [inst_4 : Algebra R S] {f : S →ₐ[R] A} (hf : Function.Surjective ⇑f),\\n  Function.Surjective ⇑(AdicCompletion.kerProj hf)\", \"doc\": \"If $ f : S \\\\to A $ is a surjective $ S $-algebra homomorphism, then the kernel projection associated with $ f $ is surjective.\"}\n  {\"name\": \"AdicCompletion.evalOneₐ_surjective\", \"module\": \"Mathlib/RingTheory/AdicCompletion/Algebra\", \"type\": \"∀ {R : Type u_1} [inst : CommRing R] (I : Ideal R), Function.Surjective ⇑(AdicCompletion.evalOneₐ I)\", \"doc\": \"The evaluation map from the I-adic completion of a commutative ring $ R $ to the quotient ring $ R/I $, defined as the projection to the first component in the inverse limit $ \\\\varprojlim R/I^n $, is \"}\n  {\"name\": \"IsAdicComplete.henselianRing\", \"module\": \"Mathlib/RingTheory/Henselian\", \"type\": \"∀ (R : Type u_1) [inst : CommRing R] (I : Ideal R) [IsAdicComplete I R], HenselianRing R I\", \"doc\": \"For any commutative ring $ R $ and ideal $ I $, if $ R $ is adic complete with respect to $ I $, then $ R $ is Henselian with respect to $ I $.\"}\n  {\"name\": \"Ideal.instIsNoetherianCotangentOfSubtypeMem\", \"module\": \"Mathlib/RingTheory/Ideal/Cotangent\", \"type\": \"∀ {R : Type u_1} [inst : CommRing R] (I : Ideal R) [IsNoetherian R ↥I], IsNoetherian R I.Cotangent\", \"doc\": \"For a commutative ring $ R $ and an ideal $ I $, if $ I $ is a Noetherian $ R $-module, then the cotangent module $ I/I^2 $ is also Noetherian as an $ R $-module. This follows from the fact that quoti\"}\n  {\"name\": \"IsLocalRing.exists_maximalIdeal_pow_le_of_isArtinianRing_quotient\", \"module\": \"Mathlib/RingTheory/LocalRing/Quotient\", \"type\": \"∀ {R : Type u_1} [inst : CommRing R] [inst_1 : IsLocalRing R] (I : Ideal R) [IsArtinianRing (R ⧸ I)],\\n  ∃ n, IsLocalRing.maximalIdeal R ^ n ≤ I\", \"doc\": \"In a local ring $ R $, if the quotient ring $ R/I $ is Artinian for some ideal $ I $, then there exists a natural number $ n $ such that the $ n $-th power of the maximal ideal of $ R $ is contained w\"}\n  {\"name\": \"instIsHausdorffMaximalIdeal\", \"module\": \"Mathlib/RingTheory/AdicCompletion/Noetherian\", \"type\": \"∀ {R : Type u_1} [inst : CommRing R] (M : Type u_2) [inst_1 : AddCommGroup M] [inst_2 : Module R M] [IsNoetherianRing R]\\n  [Module.Finite R M] [inst_5 : IsLocalRing R], IsHausdorff (IsLocalRing.maximalIdeal R) M\", \"doc\": \"The maximal ideal of a local Noetherian ring is equipped with a Hausdorff topology, ensuring that the intersection of all powers of the ideal is trivial.\"}\n  {\"name\": \"IsLocalRing.exists_maximalIdeal_pow_le_of_finite_quotient\", \"module\": \"Mathlib/RingTheory/LocalRing/Quotient\", \"type\": \"∀ {R : Type u_1} [inst : CommRing R] [inst_1 : IsLocalRing R] (I : Ideal R) [IsArtinianRing (R ⧸ I)],\\n  ∃ n, IsLocalRing.maximalIdeal R ^ n ≤ I\", \"doc\": \"In a local ring $ R $ with maximal ideal $ \\\\mathfrak{m} $, if the quotient ring $ R/I $ is Artinian, then there exists a natural number $ n $ such that $ \\\\mathfrak{m}^n \\\\subseteq I $.\"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: completion of a given Noetherian ring, Artinian quotients and general ring limits do not assert Noetherianity or the adic topology of this inverse limit under a bound on cotangent dimensions"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Inverse limit of local Artinian rings with bounded embedding dimension is a complete Noetherian local ring",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"instIsNoetherianRingOfIsArtinianRing\", \"module\": \"Mathlib.RingTheory.HopkinsLevitzki\", \"type\": \"[IsArtinianRing R] : IsNoetherianRing R\", \"doc\": \"Every Artinian ring is a Noetherian ring. This is a consequence of the Akizuki–Hopkins–Levitzki theorem, which states that for a ring, the descending chain condition on ideals implies the ascending ch\"}\n  {\"name\": \"IsArtinianRing.localization_artinian\", \"module\": \"Mathlib.RingTheory.Artinian.Ring\", \"type\": \": IsArtinianRing L\", \"doc\": \"If $ R $ is an Artinian ring and $ L $ is the localization of $ R $ at a submonoid $ M $, then $ L $ is also an Artinian ring.\"}\n  {\"name\": \"AdicCompletion.subring\", \"module\": \"Mathlib.RingTheory.AdicCompletion.Algebra\", \"type\": \"{R : Type u_1} → [inst : CommRing R] → (I : Ideal R) → Subring ((n : ℕ) → R ⧸ I ^ n • ⊤)\", \"doc\": \"The subring of the inverse limit $\\\\varprojlim R/I^n$ consisting of compatible sequences $(x_n)$ where each $x_n \\\\in R/I^n$ and the transition maps $\\\\varphi_{m,n}: R/I^n \\\\to R/I^m$ satisfy $\\\\varphi_{m,\"}\n  {\"name\": \"AdicCompletion.instCommRing\", \"module\": \"Mathlib.RingTheory.AdicCompletion.Algebra\", \"type\": \"{R : Type u_1} → [inst : CommRing R] → (I : Ideal R) → CommRing (AdicCompletion I R)\", \"doc\": \"The $I$-adic completion of a commutative ring $R$ with respect to an ideal $I$ forms a commutative ring under component-wise operations induced by the inverse limit of the quotient rings $R/I^n$. The \"}\n  {\"name\": \"AdicCompletion\", \"module\": \"Mathlib.RingTheory.AdicCompletion.Basic\", \"type\": \"{R : Type u_1} → [inst : CommRing R] → Ideal R → (M : Type u_4) → [inst_1 : AddCommGroup M] → [Module R M] → Type u_4\", \"doc\": \"The adic completion of an $ R $-module $ M $ with respect to an ideal $ I $ of a commutative ring $ R $ is the inverse limit of the quotient modules $ M/I^nM $, where $ I^n $ denotes the $ n $th power\"}\n  {\"name\": \"IsLocalRing.quotient_artinian_of_mem_minimalPrimes_of_isLocalRing\", \"module\": \"Mathlib.RingTheory.Ideal.KrullsHeightTheorem\", \"type\": \"[IsLocalRing R] (I : Ideal R) (hp : IsLocalRing.maximalIdeal R ∈ I.minimalPrimes) : IsArtinianRing (R ⧸ I)\", \"doc\": \"Let $ R $ be a local ring with maximal ideal $ \\\\mathfrak{m} $, and let $ I $ be an ideal of $ R $ such that $ \\\\mathfrak{m} $ is a minimal prime ideal containing $ I $. Then the quotient ring $ R/I $ i\"}\n  {\"name\": \"isNoetherian_of_finite_isArtinian\", \"module\": \"Mathlib.RingTheory.HopkinsLevitzki\", \"type\": \"{R} [CommRing R] [Module R M] [Module.Finite R M] [IsArtinian R M] : IsNoetherian R M\", \"doc\": \"Every finitely generated Artinian module over a commutative ring is Noetherian.\"}\n  {\"name\": \"isArtinian_of_fg_of_artinian\", \"module\": \"Mathlib.RingTheory.Artinian.Module\", \"type\": \"{R M} [Ring R] [AddCommGroup M] [Module R M] (N : Submodule R M) [IsArtinianRing R] (hN : N.FG) : IsArtinian R N\", \"doc\": \"If $ R $ is an Artinian ring and $ N $ is a finitely generated submodule of an $ R $-module $ M $, then $ N $ is an Artinian $ R $-module.\"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: completion of a given Noetherian ring, Artinian quotients and general ring limits do not assert Noetherianity or the adic topology of this inverse limit under a bound on cotangent dimensions"
+  },
+  {
+   "tool": "loogle",
+   "query": "IsNoetherianRing, IsAdicComplete",
+   "results": "[loogle] OK 1 hit(s)\n  {\"name\": \"AdicCompletion.instIsAdicCompleteMaximalIdeal\", \"module\": \"Mathlib.RingTheory.AdicCompletion.LocalRing\", \"type\": \" {R : Type u_1} [CommRing R] [IsNoetherianRing R] [IsLocalRing R] : IsAdicComplete (IsLocalRing.maximalIdeal (AdicCompletion (IsLocalRing.maximalIdeal R) R)) (AdicCompletion (IsLocalRing.maximalIdeal R) R)\", \"doc\": \"\"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: completion of a given Noetherian ring, Artinian quotients and general ring limits do not assert Noetherianity or the adic topology of this inverse limit under a bound on cotangent dimensions"
+  },
+  {
+   "tool": "grep",
+   "query": "[Bb]ounded.*[Cc]otangent|[Aa]rtinian.*[Ll]imit|[Ll]imit.*[Aa]rtinian|[Bb]ounded.*[Ee]mbedding",
+   "results": "[grep] OK 7 hit(s)\n  {\"file\": \"Mathlib/Topology/MetricSpace/GromovHausdorff.lean\", \"line\": \"51\", \"text\": \"open BoundedContinuousFunction Nat Int kuratowskiEmbedding\"}\n  {\"file\": \"Mathlib/Topology/UniformSpace/Closeds.lean\", \"line\": \"381\", \"text\": \"  totallyBounded_preimage isUniformEmbedding_coe.isUniformInducing ht.powerset_hausdorff\"}\n  {\"file\": \"Mathlib/Topology/UniformSpace/Closeds.lean\", \"line\": \"549\", \"text\": \"  totallyBounded_preimage isUniformEmbedding_coe.isUniformInducing ht.powerset_hausdorff\"}\n  {\"file\": \"Mathlib/Topology/UniformSpace/Closeds.lean\", \"line\": \"700\", \"text\": \"  totallyBounded_preimage isUniformEmbedding_coe.isUniformInducing ht.powerset_hausdorff\"}\n  {\"file\": \"Mathlib/Topology/ContinuousMap/Compact.lean\", \"line\": \"67\", \"text\": \"theorem isUniformEmbedding_equivBoundedOfCompact : IsUniformEmbedding (equivBoundedOfCompact α β) :=\"}\n  {\"file\": \"Mathlib/Topology/Instances/Rat.lean\", \"line\": \"104\", \"text\": \"    using totallyBounded_preimage Rat.isUniformEmbedding_coe_real.isUniformInducing\"}\n  {\"file\": \"Mathlib/Algebra/Module/ZLattice/Summable.lean\", \"line\": \"246\", \"text\": \"    (Metric.isBounded_closedBall (x := (0 : E)) (r := 2 * ‖x‖)) H).preimage_embedding\"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: completion of a given Noetherian ring, Artinian quotients and general ring limits do not assert Noetherianity or the adic topology of this inverse limit under a bound on cotangent dimensions"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Projective limit of Artin local rings is adically complete and Noetherian when the dimensions of maximal ideal modulo its square are uniformly bounded",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"IsAdicComplete.henselianRing\", \"module\": \"Mathlib/RingTheory/Henselian\", \"type\": \"∀ (R : Type u_1) [inst : CommRing R] (I : Ideal R) [IsAdicComplete I R], HenselianRing R I\", \"doc\": \"For any commutative ring $ R $ and ideal $ I $, if $ R $ is adic complete with respect to $ I $, then $ R $ is Henselian with respect to $ I $.\"}\n  {\"name\": \"IsAdicComplete\", \"module\": \"Mathlib/RingTheory/AdicCompletion/Basic\", \"type\": \"{R : Type u_1} → [inst : CommRing R] → Ideal R → (M : Type u_4) → [inst_1 : AddCommGroup M] → [Module R M] → Prop\", \"doc\": \"Given a commutative ring $ R $, an ideal $ I $ of $ R $, and an $ R $-module $ M $, the proposition that $ M $ is adic complete with respect to $ I $.\"}\n  {\"name\": \"AdicCompletion.flat_of_isNoetherian\", \"module\": \"Mathlib/RingTheory/AdicCompletion/AsTensorProduct\", \"type\": \"∀ {R : Type u} [inst : CommRing R] (I : Ideal R) [IsNoetherianRing R], Module.Flat R (AdicCompletion I R)\", \"doc\": \"If $ R $ is a Noetherian commutative ring and $ I $ is an ideal of $ R $, then the $ I $-adic completion of $ R $, defined as the inverse limit $ \\\\varprojlim R/I^n $, is a flat $ R $-module.\"}\n  {\"name\": \"isLocalRing_of_isAdicComplete_maximal\", \"module\": \"Mathlib/RingTheory/AdicCompletion/LocalRing\", \"type\": \"∀ {R : Type u_1} [inst : CommRing R] (m : Ideal R) [hmax : m.IsMaximal] [IsAdicComplete m R], IsLocalRing R\", \"doc\": \"If a commutative ring $ R $ is adic complete with respect to a maximal ideal $ \\\\mathfrak{m} $, then $ R $ is a local ring.\"}\n  {\"name\": \"isAdicComplete_iff\", \"module\": \"Mathlib/RingTheory/AdicCompletion/Basic\", \"type\": \"∀ {R : Type u_1} [inst : CommRing R] (I : Ideal R) (M : Type u_4) [inst_1 : AddCommGroup M] [inst_2 : Module R M],\\n  IsAdicComplete I M ↔ IsHausdorff I M ∧ IsPrecomplete I M\", \"doc\": \"For a commutative ring $ R $, an ideal $ I $ of $ R $, and an $ R $-module $ M $, the module $ M $ is adic complete with respect to $ I $ if and only if it is both Hausdorff (the intersection of all $\"}\n  {\"name\": \"IsHausdorff.of_isLocalRing\", \"module\": \"Mathlib/RingTheory/AdicCompletion/Noetherian\", \"type\": \"∀ {R : Type u_1} [inst : CommRing R] (I : Ideal R) (M : Type u_2) [inst_1 : AddCommGroup M] [inst_2 : Module R M]\\n  [IsNoetherianRing R] [Module.Finite R M] [IsLocalRing R], I ≠ ⊤ → IsHausdorff I M\", \"doc\": \"If $ R $ is a local ring and $ I $ is a proper ideal of $ R $, then the $ I $-adic topology on the module $ M $ is Hausdorff, meaning the intersection of all powers of $ I $ in $ M $ is trivial.\"}\n  {\"name\": \"AdicCompletion.map_exact\", \"module\": \"Mathlib/RingTheory/AdicCompletion/Exactness\", \"type\": \"∀ {R : Type u} [inst : CommRing R] {I : Ideal R} {M : Type u} [inst_1 : AddCommGroup M] [inst_2 : Module R M]\\n  {N : Type u} [inst_3 : AddCommGroup N] [inst_4 : Module R N] {P : Type u} [inst_5 : AddCommGroup P]\\n  [inst_6 : Module R P] [IsNoetherianRing R] [Module.Finite R N] {f : M →ₗ[R] N} {g : N \", \"doc\": \"If $ f : M \\\\to N $ and $ g : N \\\\to P $ are $ R $-linear maps forming an exact sequence (i.e., $ \\\\operatorname{im} f = \\\\ker g $), then their induced $ I $-adic completions $ \\\\hat{f} : \\\\hat{M} \\\\to \\\\hat{\"}\n  {\"name\": \"IsAdicComplete.toIsPrecomplete\", \"module\": \"Mathlib/RingTheory/AdicCompletion/Basic\", \"type\": \"∀ {R : Type u_1} {inst : CommRing R} {I : Ideal R} {M : Type u_4} {inst_1 : AddCommGroup M} {inst_2 : Module R M}\\n  [self : IsAdicComplete I M], IsPrecomplete I M\", \"doc\": \"For a commutative ring $ R $, an ideal $ I $ of $ R $, and an $ R $-module $ M $, if $ M $ is adic complete with respect to $ I $, then $ M $ is precomplete with respect to $ I $.\"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: completion of a given Noetherian ring, Artinian quotients and general ring limits do not assert Noetherianity or the adic topology of this inverse limit under a bound on cotangent dimensions"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The quotient of a complete Noetherian local ring by a proper ideal is complete for the maximal ideal",
+   "results": "Actual logged search: OK, 8 hits. Top hits: IsHausdorff.of_isLocalRing, IsLocalRing.finite_quotient_iff, IsAdicComplete.henselianRing, isLocalRing_of_isAdicComplete_maximal, instFiniteQuotientIdealOfIsMaximal, IsAdicComplete, IsAdic.isAdicComplete_iff, AdicCompletion.subring. ",
+   "date": "2026-10-23",
+   "verdict": "no match for the item: completion, finite-module and quotient facts do not assert Noetherianity of this inverse limit from bounded cotangent dimension; the failed-pattern query is not used as absence evidence"
+  },
+  {
+   "tool": "loogle",
+   "query": "IsAdicComplete, Submodule.Quotient",
+   "results": "Actual logged search: OK, 0 hits. Top hits: none. loogle: unknown identifier 'Submodule.Quotient'",
+   "date": "2026-10-23",
+   "verdict": "no match for the item: completion, finite-module and quotient facts do not assert Noetherianity of this inverse limit from bounded cotangent dimension; the failed-pattern query is not used as absence evidence"
+  },
+  {
+   "tool": "grep",
+   "query": "quotient|quot",
+   "results": "Actual logged search: OK, 25 hits. Top hits: Mathlib/RingTheory/AdicCompletion/Completeness.lean, Mathlib/RingTheory/AdicCompletion/Completeness.lean, Mathlib/RingTheory/AdicCompletion/Completeness.lean, Mathlib/RingTheory/AdicCompletion/Completeness.lean, Mathlib/RingTheory/AdicCompletion/Completeness.lean, Mathlib/RingTheory/AdicCompletion/Algebra.lean, Mathlib/RingTheory/AdicCompletion/Algebra.lean, Mathlib/RingTheory/AdicCompletion/Algebra.lean. ",
+   "date": "2026-10-23",
+   "verdict": "no match for the item: completion, finite-module and quotient facts do not assert Noetherianity of this inverse limit from bounded cotangent dimension; the failed-pattern query is not used as absence evidence"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A quotient of an adically complete Noetherian local ring is adically complete",
+   "results": "Actual logged search: OK, 8 hits. Top hits: IsAdicComplete, AdicCompletion.instCommRing, AdicCompletion.subring, AdicCompletion.liftRingHom.congr_simp, AdicCompletion.module, IsAdic.isAdicComplete_iff, IsAdicComplete.bot, Ideal.Quotient.isNoetherianRing. ",
+   "date": "2026-10-23",
+   "verdict": "no match for the item: completion, finite-module and quotient facts do not assert Noetherianity of this inverse limit from bounded cotangent dimension; the failed-pattern query is not used as absence evidence"
+  },
+  {
+   "tool": "grep",
+   "query": "IsAdicComplete|isAdicComplete",
+   "results": "Actual logged search: OK, 0 hits. Top hits: none. ",
+   "date": "2026-10-23",
+   "verdict": "no match for the item: completion, finite-module and quotient facts do not assert Noetherianity of this inverse limit from bounded cotangent dimension; the failed-pattern query is not used as absence evidence"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An inverse sequence of surjective Artinian local algebras with uniformly bounded dimensions of maximal ideal modulo square has a Noetherian adically complete inverse limit",
+   "results": "Actual logged search: OK, 8 hits. Top hits: IsAdicComplete.henselianRing, AdicCompletion.flat_of_isNoetherian, IsAdicComplete, AdicCompletion.ofTensorProduct_bijective_of_finite_of_isNoetherian, AdicCompletion.of_surjective_iff, AdicCompletion.instIsHausdorff, AdicCompletion.map_exact, AdicCompletion.exists_smodEq_pow_smul_top_and_smodEq_pow_add_one_smul_top. ",
+   "date": "2026-10-23",
+   "verdict": "no match for the item: completion, finite-module and quotient facts do not assert Noetherianity of this inverse limit from bounded cotangent dimension; the failed-pattern query is not used as absence evidence"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Projective limit of local Artinian rings with bounded embedding dimension is Noetherian and complete",
+   "results": "Actual logged search: OK, 8 hits. Top hits: instIsNoetherianRingOfIsArtinianRing, isNoetherian_of_finite_isArtinian, AdicCompletion, AdicCompletion.subring, isArtinianRing_iff_isNoetherianRing_krullDimLE_zero, IsNoetherianRing.isArtinianRing_of_krullDimLE_zero, IsArtinianRing.localization_artinian, AdicCompletion.flat_of_isNoetherian. ",
+   "date": "2026-10-23",
+   "verdict": "no match for the item: completion, finite-module and quotient facts do not assert Noetherianity of this inverse limit from bounded cotangent dimension; the failed-pattern query is not used as absence evidence"
+  },
+  {
+   "tool": "loogle",
+   "query": "IsNoetherianRing, IsAdicComplete",
+   "results": "Actual logged search: OK, 1 hits. Top hits: AdicCompletion.instIsAdicCompleteMaximalIdeal. ",
+   "date": "2026-10-23",
+   "verdict": "no match for the item: completion, finite-module and quotient facts do not assert Noetherianity of this inverse limit from bounded cotangent dimension; the failed-pattern query is not used as absence evidence"
+  },
+  {
+   "tool": "grep",
+   "query": "bounded.*cotangent|artinian.*limit|limit.*artinian|bounded.*embedding",
+   "results": "Actual logged search: OK, 0 hits. Top hits: none. ",
+   "date": "2026-10-23",
+   "verdict": "no match for the item: completion, finite-module and quotient facts do not assert Noetherianity of this inverse limit from bounded cotangent dimension; the failed-pattern query is not used as absence evidence"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Projective limit of Artin local rings is adically complete and Noetherian when maximal ideal cotangent spaces have bounded dimension",
+   "results": "Actual logged search: OK, 8 hits. Top hits: IsAdicComplete.henselianRing, AdicCompletion.flat_of_isNoetherian, IsAdicComplete, isLocalRing_of_isAdicComplete_maximal, IsHausdorff.of_isLocalRing, AdicCompletion.ofTensorProduct_bijective_of_finite_of_isNoetherian, isAdicComplete_iff, instIsHausdorffMaximalIdeal. ",
+   "date": "2026-10-23",
+   "verdict": "no match for the item: completion, finite-module and quotient facts do not assert Noetherianity of this inverse limit from bounded cotangent dimension; the failed-pattern query is not used as absence evidence"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-versal-minimal-subring-descent",
+  "date": "2026-10-24",
+  "group": "Q144"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Algebraicity and smoothness of the stack of all nodal curves. Supporting input: Tag 0DZX (lemma-big-smooth-part-curves), clauses (1) and (3), with the open substack lci+ in the statement. This is the full isolated-lci locus, not the nodal locus. Supporting input for the intersection construction and smoothness argument of Tag 0DZX: Smooth points of the stack of curves detected by unobstructed deformations. Supporting input for Tag 0DZU: the final application of the general smoothness criterion after identifying the two deformation groupoids. Supporting input: Common formally smooth extension of two stack versal rings. Supporting input: Versal rings differ from a minimal one by formal variables. Supporting input: Tag 06T2, lemma-smallest-where-descends-versal, clauses (1) and (2). Supporting lemma: Tag 06SF (lemma-limit-artinian), including surjectivity of projections used in its proof",
+   "via": [
+    "lem-sfb-versal-minimal-subring-descent",
+    "lem-sfb-stack-minimal-versal-power-series",
+    "lem-sfb-stack-versal-ring-smooth-span",
+    "lem-sfb-stack-artinian-smoothness-criterion",
+    "lem-sfb-curve-smooth-locus-deformation-test",
+    "lem-sfb-isolated-lci-curve-smooth-open",
+    "lem-sfb-nodal-curve-stack-smooth",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-bounded-cotangent-artinian-limit",
+  "worker": "stage1",
+  "summary": "Followed Tag 06SF with no new nodes: reused the existing polynomial-completion, descending-ideal, Artinian nilpotence, Nakayama and finite-module completeness statements. Wrote recursive projection lifting, stable cotangent generators, nilpotent polynomial approximation, exact repeated-ideal renumbering and the canonical inverse-limit comparison. Statement unchanged.",
+  "blueprint": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Algebraicity and smoothness of the stack of all nodal curves. Supporting input: Tag 0DZX (lemma-big-smooth-part-curves), clauses (1) and (3), with the open substack lci+ in the statement. This is the full isolated-lci locus, not the nodal locus. Supporting input for the intersection construction and smoothness argument of Tag 0DZX: Smooth points of the stack of curves detected by unobstructed deformations. Supporting input for Tag 0DZU: the final application of the general smoothness criterion after identifying the two deformation groupoids. Supporting input: Common formally smooth extension of two stack versal rings. Supporting input: Versal rings differ from a minimal one by formal variables. Supporting input: Tag 06T2, lemma-smallest-where-descends-versal, clauses (1) and (2). Supporting lemma: Tag 06SF (lemma-limit-artinian), including surjectivity of projections used in its proof The current latest blueprint sk-thm-sf-ctf-stability-direct-images.proof.md paragraph (3) is the direct-image route; this inherited deformation-theory prerequisite serves the already recorded alteration branch, and no route is changed.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-finite-module-complete-over-complete-noetherian",
+    "why": "Generic commutative-algebra completeness of the cyclic R-module R/J; no statement in this unit supplies quotient completeness."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-finite-module-complete-over-complete-noetherian"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q24-a44ae613c",
+  "group": "Q24",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q24-a44ae613c (reviewer sub-agent of L); spot-checked: Read the item and all 8 steps against Stacks formal-defos 06SF (lemma-limit-artinian) and 06SE (lemma-m-adic-topology). The delivery has no new nodes and the statement is the same as the live unsplit base. Steps: (1) Coordinate maps are onto by recursive lifting; inverses of sequences with nonzero residue are compatible, so B is local with m_B = ker ρ. (2) q_n maps m onto m, so the cotangent dimensions are nondecreasing and at most d and they stabilize. The lifted basis spans at every level. Nakayama applies to the finitely generated m_{A_n}; the Artinian node supplies Noetherianity and c_n. (3) Approximation with m^h = (x^α : |α| = h) holds with no coefficient field. (4) The completed-polynomial lemma's hypotheses hold (Λ Noetherian, l finite type, e onto with e(X_i) = 0, and f_n composed with the residue map is e). Uniqueness gives q_n g_{n+1} = g_n, and m_R^{c_n} ⊆ J_n. (5) The finite-module completeness lemma for the cyclic module T = R/J over the m_R-complete R holds because m_R^h T = m_T^h. (6) The block renumbering K_h satisfies the exact hypothesis m^h ⊆ K_h of the descending-ideal lemma: K_h is decreasing and ∩K_h = J. This closes the renumbering gap that Stacks notes. (7–8) The comparison φ: T → B is explicit: compatible residues give a t, the kernel is ∩L_n = 0, and residues, powers and kernels are transported. proof_deps equals the union of step uses. No cycle. The only cited node from another unit, lem-weil-pbc-finite-module-complete-over-complete-noetherian, is a generic algebra tool; I accept the declared tool_use. No SGA. Edge cases checked: k[t]/(t^n), constant tower, d = 0, Z/p^n, stretched c_n; the unbounded-dimension counterexample shows the bound is needed. No changes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.BoundedCotangentArtinianLimit",
+  "declaration": "AlgebraicGeometry.ArtinDeformation.bounded_cotangent_artinian_limit",
+  "declarations": [
+   "AlgebraicGeometry.ArtinDeformation.artinianSequenceLimit",
+   "AlgebraicGeometry.ArtinDeformation.artinianSequenceProjection",
+   "AlgebraicGeometry.ArtinDeformation.artinianSequenceResidue",
+   "AlgebraicGeometry.ArtinDeformation.bounded_cotangent_artinian_limit"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/BoundedCotangentArtinianLimit.lean",
+  "statement": "theorem bounded_cotangent_artinian_limit (R k : Type u) [CommRing R] [IsNoetherianRing R] [IsLocalRing R] [Field k] [Algebra R k] [Module.Finite R k] (A : ℕ → TestCategory R k) (q : ∀ n : ℕ, A (n + 1) ⟶ A n) (hq : ∀ n : ℕ, Function.Surjective (map (q n))) (hbound : ∃ d : ℕ, ∀ n : ℕ, Module.finrank (IsLocalRing.ResidueField (ring (A n))) (IsLocalRing.CotangentSpace (ring (A n))) ≤ d) : ∃ hB : IsLocalRing (artinianSequenceLimit A q), IsNoetherianRing (artinianSequenceLimit A q) ∧ RingHom.ker (artinianSequenceResidue A q).toRingHom = @IsLocalRing.maximalIdeal (artinianSequenceLimit A q) _ hB ∧ IsAdicComplete (RingHom.ker (artinianSequenceResidue A q).toRingHom) (artinianSequenceLimit A q) ∧ Function.Surjective (artinianSequenceResidue A q) ∧ (∀ n : ℕ, Function.Surjective (artinianSequenceProjection A q n) ∧ IsLocalHom (artinianSequenceProjection A q n) ∧ (residue (A n)).comp (artinianSequenceProjection A q n) = artinianSequenceResidue A q) ∧ (∀ r : ℕ, 1 ≤ r → ∃ n : ℕ, RingHom.ker (artinianSequenceProjection A q n).toRingHom ≤ RingHom.ker (artinianSequenceResidue A q).toRingHom ^ r) ∧ (∀ n : ℕ, ∃ r : ℕ, 1 ≤ r ∧ RingHom.ker (artinianSequenceResidue A q).toRingHom ^ r ≤ RingHom.ker (artinianSequenceProjection A q n).toRingHom)",
+  "branch": "newtargets-dag",
+  "by": "Q59",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "Positive levels are encoded by n : ℕ denoting source level n+1. The literal compatible-sequence subalgebra, coordinate maps, and canonical marked augmentation are explicit helpers of this theorem. Cotangent dimensions use the intrinsic residue fields, whose specified identifications with k preserve dimension. The surjective augmentation with maximal kernel encodes the specified residue-field algebra isomorphism."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-1710959f8",
+  "group": "Q59",
+  "result": "pass",
+  "note": "Read node (8 steps), Stacks 06SF source, all 4 stmt_deps (IsNoetherianRing, Field, TestCategory/IsTestAlgebra/residue/map, IsAdicComplete) and the delivered module. Every hypothesis matches the node (R Noetherian local, Module.Finite R k, surjective q_n in TestCategory, bounded finrank of CotangentSpace over the intrinsic residue field, which equals the marked dimension and cannot be finrank-0 since Artinian implies Noetherian). B is the equalizer subalgebra with x_n = q_n(x_{n+1}) checked. Conclusions all present: local, Noetherian, ker of level-0 residue = m_B, residue surjective, IsAdicComplete, p_n surjective/IsLocalHom/residue-preserving, both cofinality directions with r>=1. Edge cases d=0, constant towers, arbitrary nilpotence exponents, single universe u. Probe compile of my own file confirms TestCategory needs only CommRing/Field/Algebra, so the helper defs type-check. lean.statement is verbatim the file signature; only the lean field changed vs side-live; helpers are real constructions; proof is sorry; docstrings carry 06SF, the blueprint id and all 8 steps; non-public imports serve the proof only. Advisory: the node assumes Lambda local where Stacks 06GB does not; the Lean faithfully follows the node."
+ }
+}

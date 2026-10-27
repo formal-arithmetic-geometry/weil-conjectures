@@ -1,0 +1,262 @@
+{
+ "id": "lem-sfb-two-closed-immersions-conormal-exact",
+ "kind": "statement",
+ "title": "Right-exact conormal sequence for two closed immersions",
+ "statement": "Let $f:X\\to Y$ be any morphism of schemes [def-pc-scheme]. Let $i:Z\\hookrightarrow X$ and $j:Z\\hookrightarrow Y$ be closed immersions with $f\\circ i=j$ [def-weil-closed-immersion], with ideal sheaves $\\mathcal I_i,\\mathcal I_j$ [def-sbc-closed-immersion-ideal-sheaf]. Put $\\mathcal C_{Z/X}=i^*\\mathcal I_i$ and $\\mathcal C_{Z/Y}=j^*\\mathcal I_j$ [def-pc-module-pullback], and let $\\Omega^1_{X/Y}$ be the relative differential sheaf [def-sc-relative-differential-sheaf]. There is a canonical right-exact sequence of $\\mathcal O_Z$-modules\n$$\\mathcal C_{Z/Y}\\xrightarrow{u}\\mathcal C_{Z/X}\\xrightarrow{v}i^*\\Omega^1_{X/Y}\\longrightarrow0.$$\nHere $u$ is exactly the canonical conormal morphism of [lem-weil-pbc-closed-immersion-conormal-functorial] for the square with top map $1_Z$ and bottom map $f$. Locally the map $v$ sends the class of a local equation $a\\in\\mathcal I_i$ to $1\\otimes\\mathrm d_{X/Y}a$. Right exactness means that $v$ is surjective as a sheaf morphism and its kernel is the sheaf image of $u$. No finite-type, smoothness, flatness or Noetherian hypothesis is imposed.",
+ "source": {
+  "document": "literature/stacks-project/morphisms.tex",
+  "place": "Tag 067L (morphisms-lemma-two-immersions)."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-closed-immersion",
+  "def-sbc-closed-immersion-ideal-sheaf",
+  "def-pc-module-pullback",
+  "def-sc-relative-differential-sheaf",
+  "lem-weil-pbc-closed-immersion-conormal-functorial"
+ ],
+ "proof": [
+  {
+   "text": "Construct $v$ globally. For a local equation $a\\in\\mathcal I_i(U)$, take $\\mathrm d_{X/Y}a$ and then its pullback-unit image in $\\Gamma(i^{-1}U,i^*\\Omega^1_{X/Y})$. This defines a morphism of additive sheaves $t:\\mathcal I_i\\to i_*i^*\\Omega^1_{X/Y}$. For $b\\in\\mathcal O_X(U)$ the Leibniz identity gives $t(ba)=i^*b\\,t(a)+i^*a\\,i^*(\\mathrm db)=i^*b\\,t(a)$, since $i^*a=0$. Thus $t$ is $\\mathcal O_X$-linear. The pullback adjunction supplies $v:i^*\\mathcal I_i\\to i^*\\Omega^1_{X/Y}$ with the required formula. Restrictions commute with the derivation and the pullback unit, so this construction is global and canonical. In particular $t(ab)=0$ for $a,b\\in\\mathcal I_i$, explaining its dependence only on the conormal class.",
+   "uses": [
+    "def-sc-relative-differential-sheaf",
+    "def-weil-pbc-kahler-differentials",
+    "def-sbc-closed-immersion-ideal-sheaf",
+    "lem-pc-module-pullback-adjunction"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 01UZ (lemma-differentials-relative-immersion), construction of the first arrow, as used in Tag 067L."
+   }
+  },
+  {
+   "text": "Take $u$ to be the canonical map of the conormal-functoriality node, applied with ambient map $f$ and map $1_Z$ on the closed subschemes. Its hypotheses are exactly $f\\circ i=j$ and the two given closed immersions. On equation classes it sends $a$ to $f^\\sharp(a)$. Since $\\mathrm d_{X/Y}(f^\\sharp a)=0$, the composite $vu$ vanishes on these classes and hence on their $\\mathcal O_Z$-linear combinations. They locally generate the pullback of the ideal sheaf, so $vu=0$.",
+   "uses": [
+    "lem-weil-pbc-closed-immersion-conormal-functorial",
+    "def-sc-relative-differential-sheaf",
+    "def-weil-pbc-kahler-differentials",
+    "def-pc-module-pullback"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 01R4 (lemma-conormal-functorial), equation-class formula; Tag 067L (lemma-two-immersions), first arrow."
+   }
+  },
+  {
+   "text": "Fix $z\\in Z$, put $x=i(z)$, $y=j(z)$, and set $A=\\mathcal O_{Y,y}$, $B=\\mathcal O_{X,x}$, $C=\\mathcal O_{Z,z}$. The closed immersions give surjections $A\\to C$ and $B\\to C$: on affine charts they are quotients, and a fraction in a quotient local ring lifts by lifting its numerator and denominator. The triangle makes the former map the composite $A\\to B\\to C$. Put $I=\\ker(A\\to C)$, $J=\\ker(B\\to C)$. The inclusion of each ideal sheaf remains injective on stalks by clause (1) of the module-stalk-exactness node, so its stalk identifies with its range in the local ring. The ideal-stalk-range node identifies $(\\mathcal I_j)_y=I$ and $(\\mathcal I_i)_x=J$. The pullback-stalk node then gives $(\\mathcal C_{Z/Y})_z=I\\otimes_A C$ and $(\\mathcal C_{Z/X})_z=J\\otimes_B C$. Identify the latter tensor with $J/J^2$ by $b\\otimes\\bar r\\mapsto rb\\bmod J^2$, inverse $b\\bmod J^2\\mapsto b\\otimes1$; changing $r$ by an element of $J$ changes $rb$ by an element of $J^2$, and $(bb')\\otimes1=b\\otimes\\bar b'=0$ for $b,b'\\in J$. These formulas are inverse on pure tensors. The identical calculation for $I$ identifies the first tensor with $I/I^2$.",
+   "uses": [
+    "def-weil-closed-immersion",
+    "lem-weil-pbc-closed-immersion-ideal-stalk-range",
+    "lem-weil-pbc-module-stalk-pullback",
+    "lem-weil-pbc-module-stalk-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tags 01R3 (lemma-affine-conormal) and 067L: local conormal calculation; Sheaves Tag 0098 (lemma-stalk-pullback-modules)."
+   }
+  },
+  {
+   "text": "The differential-stalk comparison identifies $(\\Omega^1_{X/Y})_x$ with $\\Omega_{B/A}$, sending the germ of $\\mathrm da$ to $\\mathrm d(a_x)$. Apply the pullback-stalk isomorphism once more to obtain $(i^*\\Omega^1_{X/Y})_z\\cong C\\otimes_B\\Omega_{B/A}$, using tensor symmetry. Under step 3 and these isomorphisms the stalk of $u$ is $a\\bmod I^2\\mapsto\\alpha(a)\\bmod J^2$, where $\\alpha:A\\to B$: this follows from the equation-class formula for conormal functoriality by taking germs. The stalk of $v$ is $b\\bmod J^2\\mapsto1\\otimes\\mathrm db$, by step 1 and the germ-of-unit formula in the pullback-stalk node. These identities hold on every class, since every ideal-stalk element is represented by a local equation.",
+   "uses": [
+    "lem-sfb-relative-differentials-stalk",
+    "lem-weil-pbc-module-stalk-pullback",
+    "lem-weil-pbc-closed-immersion-conormal-functorial"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/modules.tex",
+    "place": "Tag 08TE (lemma-stalk-module-differentials); Sheaves Tag 0098; Morphisms Tag 01R4."
+   }
+  },
+  {
+   "text": "Apply the ring two-quotients sequence to $A\\to B\\to C$ from step 3. Its only extra hypothesis, surjectivity of $A\\to C$, has already been verified. Step 4 identifies its two arrows with the stalk maps of the constructed sheaf sequence, so $v_z$ is surjective and $\\ker(v_z)=\\operatorname{im}(u_z)$ for every $z$. The module-stalk-exactness node, applied to the complex from step 2, now proves exactness at $\\mathcal C_{Z/X}$. Applied also to $\\mathcal C_{Z/X}\\to i^*\\Omega^1_{X/Y}\\to0$, it proves that $v$ is a sheaf epimorphism. This is precisely the stated right exactness. For empty $Z$ both stalk tests are vacuous and all three sheaves are zero.",
+   "uses": [
+    "lem-sfb-ring-two-quotients-conormal-exact",
+    "lem-weil-pbc-module-stalk-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 067L (lemma-two-immersions), using Algebra Tag 065V (lemma-application-NL); Modules Tag 01AG (lemma-abelian), stalkwise exactness."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sc-relative-differential-sheaf",
+  "def-weil-pbc-kahler-differentials",
+  "def-sbc-closed-immersion-ideal-sheaf",
+  "lem-pc-module-pullback-adjunction",
+  "lem-weil-pbc-closed-immersion-conormal-functorial",
+  "def-pc-module-pullback",
+  "def-weil-closed-immersion",
+  "lem-weil-pbc-closed-immersion-ideal-stalk-range",
+  "lem-weil-pbc-module-stalk-pullback",
+  "lem-sfb-relative-differentials-stalk",
+  "lem-sfb-ring-two-quotients-conormal-exact",
+  "lem-weil-pbc-module-stalk-exact"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/morphisms.tex",
+  "place": "Tag 067L (lemma-two-immersions), its algebraic reduction to Tag 065V; map construction from Tag 01UZ. Stalk comparison is made explicit using Modules Tag 08TE and Sheaves Tag 0098."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For two closed immersions of the same scheme into source and target of a morphism the conormal sheaves and pullback of relative differentials form a right exact sequence",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"Algebra.Generators.H1Cotangent.exact_δ_map\", \"module\": \"Mathlib/RingTheory/Kaehler/JacobiZariski\", \"type\": \"∀ {R : Type u₁} {S : Type u₂} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S] {T : Type u₃}\\n  [inst_3 : CommRing T] [inst_4 : Algebra R T] [inst_5 : Algebra S T] [inst_6 : IsScalarTower R S T] {ι : Type w₁}\\n  {σ : Type w₂} (Q : Algebra.Generators S T ι) (P : Algebra.Generators R S σ\", \"doc\": \"The sequence involving the connecting homomorphism $\\\\delta: H^1(Q) \\\\to T \\\\otimes_S \\\\Omega_{S/R}$ and the base change map $\\\\Omega_{A/R} \\\\otimes_A B \\\\to \\\\Omega_{B/R}$ is exact, establishing a fundamenta\"}\n  {\"name\": \"Algebra.H1Cotangent.exact_δ_mapBaseChange\", \"module\": \"Mathlib/RingTheory/Kaehler/JacobiZariski\", \"type\": \"∀ (R : Type u₁) (S : Type u₂) [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S] (T : Type u₃)\\n  [inst_3 : CommRing T] [inst_4 : Algebra R T] [inst_5 : Algebra S T] [inst_6 : IsScalarTower R S T],\\n  Function.Exact ⇑(Algebra.H1Cotangent.δ R S T) ⇑(KaehlerDifferential.mapBaseChange R S T\", \"doc\": \"The image of the connecting homomorphism $\\\\delta: H^1(S \\\\to T) \\\\to T \\\\otimes_S \\\\Omega_{S/R}$ in the Jacobi-Zariski exact sequence equals the kernel of the base change map $\\\\Omega_{S/R} \\\\otimes_S B \\\\to\"}\n  {\"name\": \"Algebra.Extension.exact_cotangentComplex_toKaehler\", \"module\": \"Mathlib/RingTheory/Extension/Cotangent/Basic\", \"type\": \"∀ {R : Type u} {S : Type v} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S]\\n  {P : Algebra.Extension R S}, Function.Exact ⇑P.cotangentComplex ⇑P.toKaehler\", \"doc\": \"The image of the cotangent complex map $\\\\ker(\\\\phi)/\\\\ker(\\\\phi)^2 \\\\to S \\\\otimes_R \\\\Omega_{S/R}$ coincides with the kernel of the canonical map to the module of Kähler differentials, establishing exactne\"}\n  {\"name\": \"Algebra.Generators.H1Cotangent.exact_map_δ'\", \"module\": \"Mathlib/RingTheory/Kaehler/JacobiZariski\", \"type\": \"∀ {R : Type u₁} {S : Type u₂} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S] {T : Type u₃}\\n  [inst_3 : CommRing T] [inst_4 : Algebra R T] [inst_5 : Algebra S T] [inst_6 : IsScalarTower R S T] {ι : Type w₁}\\n  {σ : Type w₂} {τ : Type w₅} (Q : Algebra.Generators S T ι) (P : Algebra.Ge\", \"doc\": \"For an algebra extension homomorphism $ f $, the induced map on the first cotangent cohomology modules is exact at the image of $ f $, meaning the image of $ f $ is equal to the kernel of the connecti\"}\n  {\"name\": \"Algebra.H1Cotangent.exact_map_δ\", \"module\": \"Mathlib/RingTheory/Kaehler/JacobiZariski\", \"type\": \"∀ (R : Type u₁) (S : Type u₂) [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S] (T : Type u₃)\\n  [inst_3 : CommRing T] [inst_4 : Algebra R T] [inst_5 : Algebra S T] [inst_6 : IsScalarTower R S T],\\n  Function.Exact ⇑(Algebra.H1Cotangent.map R S T T) ⇑(Algebra.H1Cotangent.δ R S T)\", \"doc\": \"The sequence involving the induced map on first cotangent cohomology and the connecting homomorphism δ in the Jacobi-Zariski exact sequence is exact, meaning the image of the map $ H^1(S \\\\to T) \\\\to T \"}\n  {\"name\": \"Algebra.Generators.H1Cotangent.exact_map_δ\", \"module\": \"Mathlib/RingTheory/Kaehler/JacobiZariski\", \"type\": \"∀ {R : Type u₁} {S : Type u₂} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S] {T : Type u₃}\\n  [inst_3 : CommRing T] [inst_4 : Algebra R T] [inst_5 : Algebra S T] [inst_6 : IsScalarTower R S T] {ι : Type w₁}\\n  {σ : Type w₂} (Q : Algebra.Generators S T ι) (P : Algebra.Generators R S σ\", \"doc\": \"The sequence involving the first cotangent cohomology modules is exact at $ H^1(Q) $ with the connecting homomorphism $ \\\\delta $, as established by the Snake Lemma applied to the cotangent complexes o\"}\n  {\"name\": \"AlgebraicGeometry.isPullback_of_isClosedImmersion\", \"module\": \"Mathlib/AlgebraicGeometry/IdealSheaf/Functorial\", \"type\": \"∀ {ZX ZY X Y : AlgebraicGeometry.Scheme} (iX : ZX ⟶ X) (iY : ZY ⟶ Y) (Zf : ZX ⟶ ZY) (f : X ⟶ Y)\\n  [AlgebraicGeometry.IsClosedImmersion iX] [AlgebraicGeometry.IsClosedImmersion iY],\\n  CategoryTheory.CategoryStruct.comp iX f = CategoryTheory.CategoryStruct.comp Zf iY →\\n    (AlgebraicGeometry.Scheme.Ho\", \"doc\": \"Given schemes $Z_X \\\\subset X$ and $Z_Y \\\\subset Y$ as closed immersions with ideal sheaves $\\\\mathcal{I}_X$ and $\\\\mathcal{I}_Y$, and morphisms $f: X \\\\to Y$ and $Zf: Z_X \\\\to Z_Y$ forming a commutative sq\"}\n  {\"name\": \"Algebra.Generators.CotangentSpace.exact\", \"module\": \"Mathlib/RingTheory/Kaehler/JacobiZariski\", \"type\": \"∀ {R : Type u₁} {S : Type u₂} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S] {T : Type u₃}\\n  [inst_3 : CommRing T] [inst_4 : Algebra R T] [inst_5 : Algebra S T] [inst_6 : IsScalarTower R S T] {ι : Type w₁}\\n  {σ : Type w₂} (Q : Algebra.Generators S T ι) (P : Algebra.Generators R S σ\", \"doc\": \"Given algebra extensions $ P $ and $ Q $ with compatible generators, the sequence involving the cotangent spaces $ P.\\text{CotangentSpace} $, $ Q.\\text{CotangentSpace} $, and their composition is exact.\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits give ring-level cotangent/Jacobi–Zariski exactness, not this exact sequence of sheaves for arbitrary schemes. Passing from those ring statements to the conormal sheaves is not a one-line specialization."
+  },
+  {
+   "tool": "grep",
+   "query": "conormal|two_immersions|twoImmersions|exact.*[Dd]ifferential",
+   "results": "[grep] OK 0 hit(s)",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits give ring-level cotangent/Jacobi–Zariski exactness, not this exact sequence of sheaves for arbitrary schemes. Passing from those ring statements to the conormal sheaves is not a one-line specialization."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Exact sequence conormal of two immersions C Z Y to C Z X to pullback Kahler differential sheaf X Y to zero",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"Algebra.Extension.exact_cotangentComplex_toKaehler\", \"module\": \"Mathlib.RingTheory.Extension.Cotangent.Basic\", \"type\": \": Function.Exact P.cotangentComplex P.toKaehler\", \"doc\": \"The image of the cotangent complex map $\\\\ker(\\\\phi)/\\\\ker(\\\\phi)^2 \\\\to S \\\\otimes_R \\\\Omega_{S/R}$ coincides with the kernel of the canonical map to the module of Kähler differentials, establishing exactne\"}\n  {\"name\": \"KaehlerDifferential.exact_mapBaseChange_map\", \"module\": \"Mathlib.RingTheory.Kaehler.Basic\", \"type\": \": Function.Exact (mapBaseChange R A B) (map R A B B)\", \"doc\": \"The image of the base change map $\\\\Omega_{A/R} \\\\otimes_A B \\\\to \\\\Omega_{B/R}$ is equal to the kernel of the Kähler differentials map $\\\\Omega_{A/R} \\\\to \\\\Omega_{B/S}$, establishing an exact sequence in t\"}\n  {\"name\": \"AlgebraicGeometry.LocallyRingedSpace.IsOpenImmersion.pullbackConeOfLeft\", \"module\": \"Mathlib.Geometry.RingedSpace.OpenImmersion\", \"type\": \": PullbackCone f g\", \"doc\": \"Given an open immersion $ f : X \\\\to Z $ between locally ringed spaces and a morphism $ g : Y \\\\to Z $, this constructs the pullback cone in the category of sheafed spaces over commutative rings. The co\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.IdealSheafData.ker_fst_of_isClosedImmersion\", \"module\": \"Mathlib.AlgebraicGeometry.IdealSheaf.Functorial\", \"type\": \"(i : Z ⟶ Y) (f : X ⟶ Y) [IsClosedImmersion i] : (pullback.fst f i).ker = i.ker.comap f\", \"doc\": \"Given a closed immersion $ i: Z \\\\to Y $ and a morphism $ f: X \\\\to Y $, the kernel of the first projection from the pullback of $ f $ and $ i $ to $ X $ is equal to the comap of the kernel of $ i $ alo\"}\n  {\"name\": \"CategoryTheory.ComposableArrows.Exact\", \"module\": \"Mathlib.Algebra.Homology.ExactSequence\", \"type\": \"{C : Type u_1} →\\n  [inst : CategoryTheory.Category.{v_1, u_1} C] →\\n    [CategoryTheory.Limits.HasZeroMorphisms C] → {n : ℕ} → CategoryTheory.ComposableArrows C n → Prop\", \"doc\": \"Given a category $\\\\mathcal{C}$ equipped with zero morphisms and a sequence of $n$ composable morphisms $A_0 \\\\to A_1 \\\\to \\\\cdots \\\\to A_n$ in $\\\\mathcal{C}$, this predicate asserts that the sequence is ex\"}\n  {\"name\": \"CategoryTheory.ComposableArrows.exact₂_mk\", \"module\": \"Mathlib.Algebra.Homology.ExactSequence\", \"type\": \"(S : ComposableArrows C 2) (w : S.map' 0 1 ≫ S.map' 1 2 = 0) (h : (ShortComplex.mk _ _ w).Exact) : S.Exact\", \"doc\": \"Let $\\\\mathcal{C}$ be a category with zero morphisms. For a sequence of two composable morphisms $A \\\\xrightarrow{f} B \\\\xrightarrow{g} C$ in $\\\\mathcal{C}$, if the composition $g \\\\circ f$ equals the zero\"}\n  {\"name\": \"CategoryTheory.ShortComplex.Exact\", \"module\": \"Mathlib.Algebra.Homology.ShortComplex.Exact\", \"type\": \"{C : Type u_1} →\\n  [inst : CategoryTheory.Category.{v_1, u_1} C] →\\n    [inst_1 : CategoryTheory.Limits.HasZeroMorphisms C] → CategoryTheory.ShortComplex C → Prop\", \"doc\": \"A short complex is exact if the image of each differential is equal to the kernel of the subsequent differential.\"}\n  {\"name\": \"CategoryTheory.ShortComplex.Exact.recOn\", \"module\": \"Mathlib.Algebra.Homology.ShortComplex.Exact\", \"type\": \"{C : Type u_1} →\\n  [inst : CategoryTheory.Category.{v_1, u_1} C] →\\n    [inst_1 : CategoryTheory.Limits.HasZeroMorphisms C] →\\n      {S : CategoryTheory.ShortComplex C} →\\n        {motive : S.Exact → Sort u} →\\n          (t : S.Exact) → ((condition : ∃ h, CategoryTheory.Limits.IsZero h.left.H) → motive \", \"doc\": \"A short complex is exact if the image of each differential is equal to the kernel of the subsequent differential.\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits give ring-level cotangent/Jacobi–Zariski exactness, not this exact sequence of sheaves for arbitrary schemes. Passing from those ring statements to the conormal sheaves is not a one-line specialization."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"differential\"",
+   "results": "[loogle] OK 0 hit(s)",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits give ring-level cotangent/Jacobi–Zariski exactness, not this exact sequence of sheaves for arbitrary schemes. Passing from those ring statements to the conormal sheaves is not a one-line specialization."
+  },
+  {
+   "tool": "grep",
+   "query": "conormal|two_immersions|twoImmersions",
+   "results": "[grep] OK 0 hit(s)",
+   "date": "2026-10-23",
+   "verdict": "no match: neither conormal sheaves nor this sheaf exact sequence are stated by the returned ring-level or ideal-pullback results. The sheaf comparison is not a one-line specialization."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Right exact conormal sheaf sequence for two closed immersions with common domain",
+   "results": "[leansearch] OK 8 hit(s)\nReturned names/files: SnakeLemma.exact_δ'_right, AlgebraicGeometry.IsClosedImmersion.toSurjectiveOnStalks, AlgebraicGeometry.Scheme.IdealSheafData.ker_fst_of_isClosedImmersion, CategoryTheory.ComposableArrows.exact₂_iff, Algebra.Generators.Cotangent.exact, AlgebraicGeometry.IsClosedImmersion.casesOn, AlgebraicGeometry.Scheme.Modules.restrictFunctorComp, CategoryTheory.ComposableArrows.Exact.mk",
+   "date": "2026-10-23",
+   "verdict": "no match: neither conormal sheaves nor this sheaf exact sequence are stated by the returned ring-level or ideal-pullback results. The sheaf comparison is not a one-line specialization."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"conormal\"",
+   "results": "[loogle] OK 0 hit(s)",
+   "date": "2026-10-23",
+   "verdict": "no match: neither conormal sheaves nor this sheaf exact sequence are stated by the returned ring-level or ideal-pullback results. The sheaf comparison is not a one-line specialization."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a morphism of schemes and closed immersions of the same scheme into source and target, the conormal sheaves map in an exact sequence to the pullback of relative Kahler differentials",
+   "results": "[leanfinder] OK 8 hit(s)\nReturned names/files: AlgebraicGeometry.isPullback_of_isClosedImmersion, Algebra.Generators.H1Cotangent.exact_δ_map, Algebra.H1Cotangent.exact_δ_mapBaseChange, AlgebraicGeometry.Scheme.IdealSheafData.ker_fst_of_isClosedImmersion, AlgebraicGeometry.IsClosedImmersion.isIso_of_ker_eq, AlgebraicGeometry.IsClosedImmersion.isIso_lift, AlgebraicGeometry.IsClosedImmersion.lift, Algebra.Extension.exact_cotangentComplex_toKaehler",
+   "date": "2026-10-23",
+   "verdict": "no match: neither conormal sheaves nor this sheaf exact sequence are stated by the returned ring-level or ideal-pullback results. The sheaf comparison is not a one-line specialization."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-conormal-surjection-unramified",
+  "date": "2026-10-22",
+  "group": "NP"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "Inherited 0C5R exceptional-fibre argument (resolve-lemma-proper-birational-regular-surfaces, lines 4957–4961): apply the two-immersions sequence to show that relative differentials restrict to zero on the exceptional curve, then use the unramified-at-point criterion. Serves det-thm-sf-ctf-stability-direct-images, proof (3), through the inherited alteration/regular-surface dependency chain.",
+   "via": [
+    "lem-sfb-conormal-surjection-unramified",
+    "lem-sfb-point-exceptional-isomorphism-neighbourhood",
+    "lem-sfb-proper-birational-surface-factorization",
+    "lem-sfb-common-regular-surface-resolution",
+    "lem-sfb-common-nodal-model",
+    "lem-sfb-semistable-log-pluricanonical-lattices",
+    "lem-sfb-stable-pointed-isom-finite",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-two-closed-immersions-conormal-exact",
+  "worker": "stage1",
+  "summary": "Q128 repair of the side-completion return: rebased the retained five-step split on the current live unsplit item. Reused the live differential-stalk node (08TE) and removed its conflicting sandbox copy; the only new statement-only prerequisite is the ring two-quotients sequence (065V). Reread all live cited statements and regenerated verbatim citations. The statement, hypotheses, canonical arrows and proof route are unchanged.",
+  "blueprint": "Inherited 0C5R exceptional-fibre argument (resolve-lemma-proper-birational-regular-surfaces, lines 4957–4961): apply the two-immersions sequence to show that relative differentials restrict to zero on the exceptional curve, then use the unramified-at-point criterion. Serves det-thm-sf-ctf-stability-direct-images, proof (3), through the inherited alteration/regular-surface dependency chain. The five steps expand the two-immersions argument in that inherited exceptional-fibre route. The ancestor command reports None for this inherited chain; its existing null ancestor is preserved.",
+  "tool_uses": [
+   {
+    "node": "lem-pc-module-pullback-adjunction",
+    "why": "Generic pullback adjunction constructs the sheaf map from its O_X-linear adjoint. No statement of this unit supplies this general module-sheaf tool."
+   },
+   {
+    "node": "lem-weil-pbc-closed-immersion-conormal-functorial",
+    "why": "Generic functorial conormal map fixes the first arrow, as required by the unchanged statement. No statement of this unit supplies this general module-sheaf tool."
+   },
+   {
+    "node": "lem-weil-pbc-closed-immersion-ideal-stalk-range",
+    "why": "Generic ideal-stalk identification computes the kernels of the two closed immersions. No statement of this unit supplies this general module-sheaf tool."
+   },
+   {
+    "node": "lem-weil-pbc-module-stalk-pullback",
+    "why": "Generic pullback-stalk formula identifies all three stalk modules and the unit on local sections. No statement of this unit supplies this general module-sheaf tool."
+   },
+   {
+    "node": "lem-weil-pbc-module-stalk-exact",
+    "why": "Generic exactness test for O_Z-modules turns the local ring calculation into sheaf exactness. No statement of this unit supplies this general module-sheaf tool."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pc-module-pullback-adjunction",
+  "lem-weil-pbc-closed-immersion-conormal-functorial",
+  "lem-weil-pbc-closed-immersion-ideal-stalk-range",
+  "lem-weil-pbc-module-stalk-pullback",
+  "lem-weil-pbc-module-stalk-exact"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q128-3e5fff467",
+  "group": "Q128",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q128-3e5fff467 (reviewer sub-agent of L); spot-checked: Re-delivery after the refused landing of the 80dc3d5e09e head, which I had passed with a FIX: the clause-(1) citation in step 3. This head removes the sandbox copy of lem-sfb-relative-differentials-stalk, which now exists live (Q10, Stacks 08TE), and step 4 cites the live node unchanged. Statement and stmt_deps are unchanged from the base. Steps 1, 2, 4 and 5 are byte-identical to my earlier FIX file, and step 3 carries its clause-(1) injectivity argument. Sources read: Stacks 067L (morphisms.tex 6824) and 065V (algebra.tex 35519). Step checks: (1) v is built from the map t, which is O_X-linear by Leibniz because i^#a=0, then the pullback adjunction applies. (2) u comes from conormal-functorial with g=f, i'=j and top map 1_Z, and vu=0 because d_{X/Y} kills f^#a. (3) The stalk maps are surjective, the factorization A->B->C holds, the ideal stalks are I and J by clause (1) plus ideal-stalk-range, and I⊗_A A/I ≅ I/I^2 is written out. (4) The live 08TE germ formula and the pullback-stalk formula identify u_z and v_z with the 065V maps. (5) module-stalk-exact (5) gives exactness at C_{Z/X} and that v is an epimorphism. New node lem-sfb-ring-two-quotients-conormal-exact is faithful to 065V. I checked that u and v are well defined and tested A=k[x], B=k[x,y]/(y^2), C=k (exact, also in characteristic 2), A=B=C, C=0, and the k[e]/e^2 case, which needs no left injectivity. It is statement-only, all three search kinds are recorded, and it is not a Mathlib one-liner. It does not duplicate the smooth conormal sequence or the Jacobi–Zariski nodes, and no blueprint node states it. The five tool uses are generic module-sheaf tools and are accepted. No SGA."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.TwoClosedImmersionsConormalExact",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.twoClosedImmersions_conormal_exact",
+  "file": "lean/Sheaf/AlgebraicGeometry/TwoClosedImmersionsConormalExact.lean",
+  "statement": "theorem twoClosedImmersions_conormal_exact {X Y Z : Scheme.{u}} (f : X ⟶ Y) (i : Z ⟶ X) (j : Z ⟶ Y) [IsClosedImmersion i] [IsClosedImmersion j] (h : i ≫ f = j) : ∃ (u : (tensorPullback j).obj j.ker.toModules ⟶ (tensorPullback i).obj i.ker.toModules) (v : (tensorPullback i).obj i.ker.toModules ⟶ (tensorPullback i).obj f.relativeDifferentials), u = (tensorPullbackSectionId Z).inv.app ((tensorPullback j).obj j.ker.toModules) ≫ Classical.choose ((Classical.choose_spec (closedImmersion_conormal_functorial i j f (𝟙 Z) (h.trans (Category.id_comp j).symm)).2).2) ∧ (∀ (U : X.Opens) (a : Γ(i.ker.toModules, U)), v.app (i ⁻¹ᵁ U) (tensorPullbackSection i i.ker.toModules U a) = tensorPullbackSection i f.relativeDifferentials U (f.relativeDifferentialsDerivation.d (X := op U) (i.ker.toModulesι.app U a))) ∧ Epi v ∧ ∃ w : u ≫ v = 0, (ShortComplex.mk u v w).Exact",
+  "branch": "newtargets-dag",
+  "by": "Q47",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-41d7f2980",
+  "group": "Q47",
+  "result": "pass",
+  "note": "Clause-by-clause against Stacks 067L (morphisms.tex l.6824): arbitrary f; IsClosedImmersion i and j; h : i ≫ f = j; C = tensorPullback of Hom.ker.toModules; Ω = f.relativeDifferentials; u = tensorPullbackSectionId inverse ≫ the unique c of closedImmersion_conormal_functorial i j f (𝟙 Z). u is canonical: the dependency uses Classical.choose of exists_tensorPullbackAdjunction, whose unit is fixed to 1⊗m and which is unique by the ext argument, so no scalar ambiguity; γ is unique since toModulesι is mono. v is pinned on all opens and all ideal sections by the relative derivation d_{X/Y}, which determines it. Epi v and ShortComplex.Exact with w : u ≫ v = 0 give right exactness; no finiteness hypotheses. Same u expression as the downstream ConormalSurjectionUnramified. Snapshot node differs from live only in lean; statement verbatim; all declarations owned by stmt_deps or Mathlib generics; docstrings carry 067L/01R4/01UZ and the blueprint id plus the 5 proof steps; one sorry, no definitions; report has Worker report and Second reading by Q47. Edge cases: empty Z, non-injective left arrow (k[t]→k→k), k→k[ε]/ε²→k in characteristic 2, f = id; single universe u. No compile run (no file changed); worker reports a clean scompile. No findings."
+ }
+}

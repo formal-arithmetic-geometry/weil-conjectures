@@ -1,0 +1,272 @@
+{
+ "id": "lem-sp-strict-compactification-comparison-realization",
+ "kind": "statement",
+ "title": "Normalized realization of strict-tower compactification comparison words",
+ "statement": "Fix a prime $\\ell$, a finite extension $E/\\mathbf Q_\\ell$ with valuation ring $\\mathcal O_E$ [def-weil-l-adic-coefficient-extension], and $R_n=\\mathcal O_E/\\ell^n$ for $n\\geq1$. For each scheme $T$ use a fixed small pro-etale site [def-weil-pbc-proetale-site], the strict tower category $\\operatorname{Tow}(T,\\mathcal O_E)$ and its ordinary unbounded derived category and evaluations $e_n$ [det-sp-coefficient-towers-abelian]. Set $B_{n,T}=(R_n)_T$. Use the strict semilinear section operations of [lem-coef-semilinear-derived-sections], normalized by the identity on underlying module sections in identifying towers with $\\mathscr S(B_T)$. For a scheme map $u$ write $V_u=u^{-1}$ and $G_u=Ru_{*,\\bullet}$ with unit $\\eta_u$ and counit $\\varepsilon_u$; for an open immersion $j$ write $J_j=j_{!,\\bullet}$.\n\nThese operations admit a simultaneous realization on the actual tower categories with the following specified comparisons. Derived tensor evaluates to $K_n\\otimes^L_{B_{n,T}}L_n$. If $T_{mn}=-\\otimes^L_{B_{m,T}}B_{n,T}$ and $t^K_{mn}:T_{mn}K_m\\to K_n$, its reduction transition is\n$$T_{mn}(K_m\\otimes^LL_m)\\simeq T_{mn}K_m\\otimes^LT_{mn}L_m\\xrightarrow{t^K_{mn}\\otimes t^L_{mn}}K_n\\otimes^LL_n.$$\nFor $u:T\\to S$, put $S_{mn}=-\\otimes^L_{B_{m,T}}B_{n,T}$ on the source and $T_{mn}=-\\otimes^L_{B_{m,S}}B_{n,S}$ on the target. The direct-image transition is $G_{u,n}(t^C_{mn})b_{mn,C_m}$, where $b_{mn}:T_{mn}G_{u,m}\\to G_{u,n}S_{mn}$ is the adjoint transpose of\n$$V_{u,n}T_{mn}G_{u,m}\\simeq S_{mn}V_{u,m}G_{u,m}\\xrightarrow{S_{mn}\\varepsilon_{u,m}}S_{mn}.$$\nThese tensor and direct-image comparisons have the canonical composition coherences for $m\\geq n\\geq r$. On $D^+$ the direct image is canonically the bounded-below injective-resolution direct image, compatibly with its adjunction and evaluation comparisons.\n\nLet $X\\xrightarrow j\\overline X\\xrightarrow pY$ be a compactification of a separated finite-type map $f$ [def-weil-compactifications-refinements], and form its base change along any $g:Y'\\to Y$, with maps $j',p',g',\\bar g'$ [def-cbc-compact-support-square]. Put $F^c=G_pJ_j$. The following are natural transformations on ordinary unbounded tower derived categories:\n$$\\operatorname{PF}^c_{K,L}=G_p(\\gamma_{K,L})\\pi_{p;J_jK,L}:F^cK\\otimes^LL\\longrightarrow F^c(K\\otimes^LV_fL),$$\n$$\\operatorname{Ex}^c_!(C)=G_{p'}(\\beta_C)\\operatorname{Ex}_{*,p}(J_jC):V_gF^cC\\longrightarrow F^{c'}V_{g'}C.$$\nHere $\\pi_p$ is the transpose of $\\varepsilon_p\\otimes1$ under the pullback/tensor comparison; $\\gamma:J_jK\\otimes^LV_pL\\simeq J_j(K\\otimes^LV_fL)$ and $\\beta:V_{\\bar g'}J_j\\simeq J_{j'}V_{g'}$ are the open-unit-normalized comparisons; and $\\operatorname{Ex}_{*,p}=G_{p'}(V_{\\bar g'}\\varepsilon_p)\\circ G_{p'}(\\theta)\\circ\\eta_{p'}$, with $\\theta:V_{p'}V_g\\simeq V_{\\bar g'}V_p$. Evaluation carries these actual composite transformations, including their units, counits and normalizations, to the identical finite-coefficient words. At the finite-field finite-coefficient domain of [def-exchange-projection] this is precisely its projection word; for bounded-below etale-origin inputs the exchange word is the pro-etale compactification exchange of [thm-cbc-finite-level-proetale] defined from [def-cbc-exchange-map]. Tensor evaluation also holds for any specified coefficient-twist tower [def-coefficient-twists-detailed] on a scheme where $\\ell$ is invertible. No flatness of quotient maps, normalization of towers, compatible origin witnesses, or invertibility of these projection/exchange transformations is assumed.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-tower-bound/sk-lem-sp-tower-bound-operations.proof.md",
+  "place": "(2): transposes of units and counits of the levelwise adjunctions, associativity of tensor products, and evaluation to the corresponding finite map; agent expansion of the varying-coefficient construction"
+ },
+ "stmt_deps": [
+  "def-weil-l-adic-coefficient-extension",
+  "def-weil-pbc-proetale-site",
+  "det-sp-coefficient-towers-abelian",
+  "lem-coef-semilinear-derived-sections",
+  "def-weil-compactifications-refinements",
+  "def-cbc-compact-support-square",
+  "def-exchange-projection",
+  "def-cbc-exchange-map",
+  "thm-cbc-finite-level-proetale",
+  "def-coefficient-twists-detailed"
+ ],
+ "proof": [
+  {
+   "text": "Choose coherent system and geometric coordinates. Their section-calculus extension and the two three-index equations give three clauses of StrictSystemComparisons. The remaining tensor reduction clause is exactly tensor_reduction_formula specialized to the actual coefficient system.",
+   "uses": [
+    "lem-sp-strict-system-geometric-realization",
+    "lem-pur-system-tensor-reduction-formula"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For these coordinates construct the normalized open and level comparisons with evaluation of the two complete compactification words.",
+   "uses": [
+    "lem-sp-strict-open-word-evaluation"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The chosen system has enough injectives for coefficient towers and finite levels. Use the bounded-below adjunction and evaluation comparison statements to supply the canonical StrictPlusComparisons and StrictPlusEvaluation clauses.",
+   "uses": [
+    "lem-sp-strict-plus-comparisons-realization",
+    "lem-sp-strict-plus-evaluation-realization"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Choose the finite adjunction coordinates identifying the published projection and exchange words. Assemble all clauses into StrictCompactificationComparisons with these same levels and coordinates.",
+   "uses": [
+    "lem-sp-strict-finite-word-identification"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sp-strict-system-geometric-realization",
+  "lem-pur-system-tensor-reduction-formula",
+  "lem-sp-strict-open-word-evaluation",
+  "lem-sp-strict-plus-comparisons-realization",
+  "lem-sp-strict-plus-evaluation-realization",
+  "lem-sp-strict-finite-word-identification"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-tower-bound/sk-lem-sp-tower-bound-operations.proof.md",
+  "place": "(2), assembly of the three separated construction/identification steps; bounded-below restriction proved using canonical derived-unit factorization and fully faithful inclusion"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "strict semilinear inverse systems of sheaves with varying coefficient rings: derived tensor transitions and evaluation of compactification projection and base change adjunction mates",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"LightCondensed.ihomPoints_symm_comp\", \"module\": \"Mathlib/Condensed/Light/InternallyProjective\", \"type\": \"∀ (R : Type u) [inst : CommRing R] (B P : LightCondMod R) (S S' : LightProfinite) (π : S ⟶ S')\\n  (f : CategoryTheory.MonoidalCategoryStruct.tensorObj P ((LightCondensed.free R).obj S'.toCondensed) ⟶ B),\\n  (LightCondensed.ihomPoints R P B S).symm\\n      (CategoryTheory.CategoryStruct.comp\\n        (Cat\", \"doc\": \"Let $R$ be a commutative ring, and let $P, B$ be light condensed $R$-modules. For any light profinite space $T$, there is a canonical isomorphism of $R$-modules, denoted $\\\\Phi_T$, between the sections\"}\n  {\"name\": \"LightCondensed.internallyProjective_iff_tensor_condition'\", \"module\": \"Mathlib/Condensed/Light/InternallyProjective\", \"type\": \"∀ (R : Type u) [inst : CommRing R] (P : LightCondMod R),\\n  CategoryTheory.InternallyProjective P ↔\\n    ∀ {A B : LightCondMod R} (e : A ⟶ B) [CategoryTheory.Epi e] (S : LightProfinite)\\n      (g : CategoryTheory.MonoidalCategoryStruct.tensorObj ((LightCondensed.free R).obj S.toCondensed) P ⟶ B),\\n     \", \"doc\": \"Let $R$ be a commutative ring. A light condensed $R$-module $P$ is internally projective if and only if for every epimorphism $e: A \\\\to B$ of light condensed $R$-modules, any light profinite space $S$\"}\n  {\"name\": \"LightCondensed.free_lightProfinite_internallyProjective_iff_tensor_condition'\", \"module\": \"Mathlib/Condensed/Light/InternallyProjective\", \"type\": \"∀ (R : Type u) [inst : CommRing R] (P : LightProfinite),\\n  CategoryTheory.InternallyProjective ((LightCondensed.free R).obj P.toCondensed) ↔\\n    ∀ {A B : LightCondMod R} (e : A ⟶ B) [CategoryTheory.Epi e] (S : LightProfinite)\\n      (g : (LightCondensed.free R).obj (CategoryTheory.MonoidalCategoryStr\", \"doc\": \"Let $R$ be a commutative ring and $P$ be a light profinite space. The free light condensed $R$-module on the condensed set associated with $P$, denoted $\\\\mathcal{F}(P)$, is internally projective if an\"}\n  {\"name\": \"LightCondensed.free_internallyProjective_iff_tensor_condition'\", \"module\": \"Mathlib/Condensed/Light/InternallyProjective\", \"type\": \"∀ (R : Type u) [inst : CommRing R] (P : LightCondSet),\\n  CategoryTheory.InternallyProjective ((LightCondensed.free R).obj P) ↔\\n    ∀ {A B : LightCondMod R} (e : A ⟶ B) [CategoryTheory.Epi e] (S : LightProfinite)\\n      (g : (LightCondensed.free R).obj (CategoryTheory.MonoidalCategoryStruct.tensorObj \", \"doc\": \"For any commutative ring $ R $, the category of light condensed $ R $-modules forms a monoidal closed category. This structure arises from the adjunction between sheafification and inclusion functors,\"}\n  {\"name\": \"LightCondensed.internallyProjective_iff_tensor_condition\", \"module\": \"Mathlib/Condensed/Light/InternallyProjective\", \"type\": \"∀ (R : Type u) [inst : CommRing R] (P : LightCondMod R),\\n  CategoryTheory.InternallyProjective P ↔\\n    ∀ {A B : LightCondMod R} (e : A ⟶ B) [CategoryTheory.Epi e] (S : LightProfinite)\\n      (g : CategoryTheory.MonoidalCategoryStruct.tensorObj P ((LightCondensed.free R).obj S.toCondensed) ⟶ B),\\n     \", \"doc\": \"Let $R$ be a commutative ring and $P$ be a light condensed $R$-module. $P$ is an internally projective object if and only if for every epimorphism $e: A \\\\to B$ of light condensed $R$-modules, any ligh\"}\n  {\"name\": \"LightCondensed.free_internallyProjective_iff_tensor_condition\", \"module\": \"Mathlib/Condensed/Light/InternallyProjective\", \"type\": \"∀ (R : Type u) [inst : CommRing R] (P : LightCondSet),\\n  CategoryTheory.InternallyProjective ((LightCondensed.free R).obj P) ↔\\n    ∀ {A B : LightCondMod R} (e : A ⟶ B) [CategoryTheory.Epi e] (S : LightProfinite)\\n      (g : (LightCondensed.free R).obj (CategoryTheory.MonoidalCategoryStruct.tensorObj \", \"doc\": \"For a light condensed set $ P $, the free $ R $-module $ \\\\text{free}_R(P) $ is internally projective in the category of light condensed $ R $-modules if and only if for every epimorphism $ e : A \\\\to B\"}\n  {\"name\": \"LightCondensed.free_lightProfinite_internallyProjective_iff_tensor_condition\", \"module\": \"Mathlib/Condensed/Light/InternallyProjective\", \"type\": \"∀ (R : Type u) [inst : CommRing R] (P : LightProfinite),\\n  CategoryTheory.InternallyProjective ((LightCondensed.free R).obj P.toCondensed) ↔\\n    ∀ {A B : LightCondMod R} (e : A ⟶ B) [CategoryTheory.Epi e] (S : LightProfinite)\\n      (g : (LightCondensed.free R).obj (CategoryTheory.MonoidalCategoryStr\", \"doc\": \"For a light profinite space $ P $, the free $ R $-module $ \\\\text{Free}(P) $ is internally projective in the category of light condensed $ R $-modules if and only if for every epimorphism $ e: A \\\\to B \"}\n  {\"name\": \"LightCondensed.isColimitLocallyConstantPresheafDiagram_desc_apply\", \"module\": \"Mathlib/Condensed/Discrete/Colimit\", \"type\": \"∀ (X : Type u) (S : LightProfinite)\\n  (s : CategoryTheory.Limits.Cocone (S.diagram.rightOp.comp (LightCondensed.locallyConstantPresheaf X))) (n : ℕ)\\n  (f : LocallyConstant (↑(S.diagram.obj (Opposite.op n)).toTop) X),\\n  (LightCondensed.isColimitLocallyConstantPresheafDiagram X S).desc s\\n      (Locall\", \"doc\": \"For a light profinite space $ S $ and a cocone $ s $ over the diagram $ S.\\\\text{diagram}.\\\\text{rightOp} \\\\circ \\\\text{locallyConstantPresheaf}(X) $, the colimit condition holds such that for any natural\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: generic adjunction/mate infrastructure does not construct compactification maps on varying-ring derived systems"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction, CategoryTheory.NatTrans",
+   "results": "[loogle] OK 0 hit(s)",
+   "date": "2026-10-22",
+   "verdict": "no match: generic adjunction/mate infrastructure does not construct compactification maps on varying-ring derived systems"
+  },
+  {
+   "tool": "grep",
+   "query": "semilinear.*(system|tower)|compactification.*(projection|exchange)|projection.*formula",
+   "results": "[grep] OK 4 hit(s)\n  {\"file\": \"Mathlib/Algebra/Ring/CompTypeclasses.lean\", \"line\": \"20\", \"text\": \"semilinear map; instead, the typeclass system directly finds the appropriate `RingHom` to use.\"}\n  {\"file\": \"Mathlib/Geometry/Manifold/VectorBundle/CovariantDerivative/Basic.lean\", \"line\": \"146\", \"text\": \"-- This will be easy using the projection formula about Ehresmann connections,\"}\n  {\"file\": \"Mathlib/RingTheory/WittVector/Identities.lean\", \"line\": \"20\", \"text\": \"* `verschiebung_mul_frobenius`: the “projection formula”: `V(x * F y) = V x * y`\"}\n  {\"file\": \"Mathlib/RingTheory/WittVector/Identities.lean\", \"line\": \"98\", \"text\": \"/-- The “projection formula” for Frobenius and Verschiebung. -/\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: generic adjunction/mate infrastructure does not construct compactification maps on varying-ring derived systems"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived tensor products in varying coefficient inverse systems of sheaves and evaluation of compactly supported base change mates",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"TensorProduct.isBaseChange\", \"module\": \"Mathlib.RingTheory.IsTensorProduct\", \"type\": \": IsBaseChange S (TensorProduct.mk R S M 1)\", \"doc\": \"The tensor product of modules satisfies the universal property of base change, establishing a bijective correspondence between bilinear maps and linear maps from the tensor product under scalar restri\"}\n  {\"name\": \"IsLocalization.algebraTensorEquiv\", \"module\": \"Mathlib.RingTheory.Localization.BaseChange\", \"type\": \": B ⊗[A] C ≃ₐ[A] B ⊗[R] C\", \"doc\": \"Given commutative semirings $ R $ and $ S $, $ R $-algebras $ A $, $ B $, and $ C $ with compatible $ S $-module structures (via $ \\\\mathrm{SMulCommClass} $ and $ \\\\mathrm{TensorProduct.CompatibleSMul} \"}\n  {\"name\": \"TensorProduct.AlgebraTensorModule.cancelBaseChange_symm_tmul\", \"module\": \"Mathlib.LinearAlgebra.TensorProduct.Tower\", \"type\": \"(m : M) (n : N) : (cancelBaseChange R A B M N).symm (m ⊗ₜ n) = m ⊗ₜ (1 ⊗ₜ n)\", \"doc\": \"For modules $M$ and $N$ over a commutative semiring $R$, the inverse of the base change isomorphism $\\\\operatorname{cancelBaseChange}_{R,A,B,M,N}$ maps the tensor product $m \\\\otimes n$ to $m \\\\otimes (1\"}\n  {\"name\": \"Derivation.tensorProductTo_tmul\", \"module\": \"Mathlib.RingTheory.Kaehler.Basic\", \"type\": \"(D : Derivation R S M) (s t : S) : D.tensorProductTo (s ⊗ₜ t) = s • D t\", \"doc\": \"For any $ R $-derivation $ D : S \\\\to M $ and elements $ s, t \\\\in S $, the action of $ D $ on the tensor product $ s \\\\otimes t $ in $ S \\\\otimes_R S $ satisfies $ D(s \\\\otimes t) = s \\\\cdot D(t) $, where \"}\n  {\"name\": \"IsBaseChange.pi\", \"module\": \"Mathlib.RingTheory.TensorProduct.IsBaseChangePi\", \"type\": \"{ι : Type*} [Finite ι] {M M' : ι → Type*} [∀ i, AddCommMonoid (M i)] [∀ i, AddCommMonoid (M' i)] [∀ i, Module R (M i)]\\n  [∀ i, Module R (M' i)] [∀ i, Module S (M' i)] [∀ i, IsScalarTower R S (M' i)] (f : ∀ i, M i →ₗ[R] M' i)\\n  (hf : ∀ i, IsBaseChange S (f i)) : IsBaseChange S (.pi fun i ↦ f i ∘ₗ .pr\", \"doc\": \"Given a finite index type $\\\\iota$ and families of $R$-modules $\\\\{M_i\\\\}$ and $S$-modules $\\\\{M'_i\\\\}$ with compatible scalar actions of $R$ and $S$, if each linear map $f_i: M_i \\\\to M'_i$ is a base chang\"}\n  {\"name\": \"IsBaseChange\", \"module\": \"Mathlib.RingTheory.IsTensorProduct\", \"type\": \": Prop\", \"doc\": \"The proposition that the base change construction satisfies the universal property of the tensor product bijectively, establishing a one-to-one correspondence between bilinear maps and linear maps fro\"}\n  {\"name\": \"IsBaseChange.tensorEquiv\", \"module\": \"Mathlib.RingTheory.IsTensorProduct\", \"type\": \"{f : M →ₗ[R] N} (hf : IsBaseChange S f) (P : Type*) [AddCommGroup P] [Module R P] [Module S P] [IsScalarTower R S P] :\\n  P ⊗[S] N ≃ₗ[S] P ⊗[R] M\", \"doc\": \"Given an $ R $-linear map $ f : M → N $ that satisfies the base change condition with respect to a ring homomorphism $ R → S $, and an $ S $-module $ P $ equipped with compatible $ R $-module and scal\"}\n  {\"name\": \"IsBaseChange.finsuppPow\", \"module\": \"Mathlib.RingTheory.TensorProduct.IsBaseChangePi\", \"type\": \"(ibc : IsBaseChange S ε) : IsBaseChange S (Finsupp.mapRange.linearMap (α := ι) ε)\", \"doc\": \"If the base change construction satisfies the tensor product universal property for a linear map $\\\\varepsilon$, then the induced linear map on the space of finite support functions $\\\\alpha \\\\to_0 M$ al\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: generic adjunction/mate infrastructure does not construct compactification maps on varying-ring derived systems"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For inverse systems of module sheaves over quotient rings, evaluation preserves the compactification counit tensor projection word and the proper square mate followed by open base change",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"LightCondensed.ihomPoints_symm_comp\", \"module\": \"Mathlib/Condensed/Light/InternallyProjective\", \"type\": \"∀ (R : Type u) [inst : CommRing R] (B P : LightCondMod R) (S S' : LightProfinite) (π : S ⟶ S')\\n  (f : CategoryTheory.MonoidalCategoryStruct.tensorObj P ((LightCondensed.free R).obj S'.toCondensed) ⟶ B),\\n  (LightCondensed.ihomPoints R P B S).symm\\n      (CategoryTheory.CategoryStruct.comp\\n        (Cat\", \"doc\": \"Let $R$ be a commutative ring, and let $P, B$ be light condensed $R$-modules. For any light profinite space $T$, there is a canonical isomorphism of $R$-modules, denoted $\\\\Phi_T$, between the sections\"}\n  {\"name\": \"Profinite.NobelingProof.GoodProducts.square_commutes\", \"module\": \"Mathlib/Topology/Category/Profinite/Nobeling/Successor\", \"type\": \"∀ {I : Type u} (C : Set (I → Bool)) [inst : LinearOrder I] [inst_1 : WellFoundedLT I] {o : Ordinal.{u}}\\n  (ho : o < Ordinal.type fun x1 x2 => x1 < x2),\\n  Profinite.NobelingProof.GoodProducts.SumEval C ho ∘ Sum.inl =\\n    ⇑(CategoryTheory.ConcreteCategory.hom (ModuleCat.ofHom (Profinite.NobelingProof.\", \"doc\": \"The composition of the evaluation map for good products with the left injection into the disjoint union of good and maximal products equals the composition of the module homomorphism induced by the No\"}\n  {\"name\": \"Condensed.isColimitLocallyConstantPresheaf_desc_apply\", \"module\": \"Mathlib/Condensed/Discrete/Colimit\", \"type\": \"∀ {I : Type u} [inst : CategoryTheory.Category.{u, u} I] [inst_1 : CategoryTheory.IsCofiltered I]\\n  {F : CategoryTheory.Functor I FintypeCat} (c : CategoryTheory.Limits.Cone (F.comp FintypeCat.toProfinite))\\n  (X : Type (u + 1)) (hc : CategoryTheory.Limits.IsLimit c) [inst_2 : ∀ (i : I), CategoryTheo\", \"doc\": \"Given a cofiltered diagram $\\\\mathcal{I}$ with values in the category of finite types and a cone $c$ over its composition with the profinite completion functor, if all projections of the cone are epimo\"}\n  {\"name\": \"LightCondensed.isColimitLocallyConstantPresheafDiagram_desc_apply\", \"module\": \"Mathlib/Condensed/Discrete/Colimit\", \"type\": \"∀ (X : Type u) (S : LightProfinite)\\n  (s : CategoryTheory.Limits.Cocone (S.diagram.rightOp.comp (LightCondensed.locallyConstantPresheaf X))) (n : ℕ)\\n  (f : LocallyConstant (↑(S.diagram.obj (Opposite.op n)).toTop) X),\\n  (LightCondensed.isColimitLocallyConstantPresheafDiagram X S).desc s\\n      (Locall\", \"doc\": \"For a light profinite space $ S $ and a cocone $ s $ over the diagram $ S.\\\\text{diagram}.\\\\text{rightOp} \\\\circ \\\\text{locallyConstantPresheaf}(X) $, the colimit condition holds such that for any natural\"}\n  {\"name\": \"LightCondensed.isColimitLocallyConstantPresheaf_desc_apply\", \"module\": \"Mathlib/Condensed/Discrete/Colimit\", \"type\": \"∀ {F : CategoryTheory.Functor ℕᵒᵖ FintypeCat} (c : CategoryTheory.Limits.Cone (F.comp FintypeCat.toLightProfinite))\\n  (X : Type u) (hc : CategoryTheory.Limits.IsLimit c) [inst : ∀ (i : ℕᵒᵖ), CategoryTheory.Epi (c.π.app i)]\\n  (s :\\n    CategoryTheory.Limits.Cocone\\n      ((F.comp FintypeCat.toLightProf\", \"doc\": \"Given a limit cone $ c $ with epimorphic projections and a cocone $ s $ over the diagram of locally constant presheaves, the application of the colimit's universal morphism $ \\\\text{desc} $ to a locall\"}\n  {\"name\": \"LightCondensed.isoLocallyConstantOfIsColimit_inv\", \"module\": \"Mathlib/Condensed/Discrete/Colimit\", \"type\": \"∀ (X : CategoryTheory.Functor LightProfiniteᵒᵖ (Type u)) [inst : CategoryTheory.Limits.PreservesFiniteProducts X]\\n  (hX :\\n    (S : LightProfinite) →\\n      CategoryTheory.Limits.IsColimit (X.mapCocone (CategoryTheory.Limits.coconeRightOpOfCone S.asLimitCone))),\\n  (LightCondensed.isoLocallyConstantOfI\", \"doc\": \"For a contravariant functor $ F : \\text{LightProfinite}^{\\text{op}} \\to \\text{Type} $ preserving finite products, if every light profinite space $ S $ satisfies the colimit condition for the cocone constr\"}\n  {\"name\": \"Condensed.isoLocallyConstantOfIsColimit_inv\", \"module\": \"Mathlib/Condensed/Discrete/Colimit\", \"type\": \"∀ (X : CategoryTheory.Functor Profiniteᵒᵖ (Type (u + 1))) [inst : CategoryTheory.Limits.PreservesFiniteProducts X]\\n  (hX : (S : Profinite) → CategoryTheory.Limits.IsColimit (X.mapCocone S.asLimitCone.op)),\\n  (Condensed.isoLocallyConstantOfIsColimit X hX).inv = CompHausLike.LocallyConstant.counitApp \", \"doc\": \"Given a functor $ F : \\text{Profinite}^{\\text{op}} \\to \\text{Type} $ that preserves finite products and satisfies the condition that for every profinite space $ S $, the image of the limit cone $ S.asLimi\"}\n  {\"name\": \"AdicCompletion.transitionMap_comp_eval\", \"module\": \"Mathlib/RingTheory/AdicCompletion/Basic\", \"type\": \"∀ {R : Type u_1} [inst : CommRing R] (I : Ideal R) (M : Type u_4) [inst_1 : AddCommGroup M] [inst_2 : Module R M]\\n  {m n : ℕ} (hmn : m ≤ n), AdicCompletion.transitionMap I M hmn ∘ₗ AdicCompletion.eval I M n = AdicCompletion.eval I M m\", \"doc\": \"For natural numbers $m \\\\leq n$, the composition of the transition map $M/I^nM \\\\to M/I^mM$ with the evaluation map at level $n$ equals the evaluation map at level $m$. In other words, projecting an ele\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: generic adjunction/mate infrastructure does not construct compactification maps on varying-ring derived systems"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.mkOfUnitCounit",
+   "results": "[loogle] OK 3 hit(s)\n  {\"name\": \"CategoryTheory.Adjunction.mkOfUnitCounit\", \"module\": \"Mathlib.CategoryTheory.Adjunction.Basic\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [CategoryTheory.Category.{v₂, u₂} D] {F : CategoryTheory.Functor C D} {G : CategoryTheory.Functor D C} (adj : CategoryTheory.Adjunction.CoreUnitCounit F G) : F ⊣ G\", \"doc\": \"Construct an adjunction between functors `F` and `G` given a unit and counit for the adjunction\\nsatisfying the triangle identities.\"}\n  {\"name\": \"CategoryTheory.Adjunction.mkOfUnitCounit_counit\", \"module\": \"Mathlib.CategoryTheory.Adjunction.Basic\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [CategoryTheory.Category.{v₂, u₂} D] {F : CategoryTheory.Functor C D} {G : CategoryTheory.Functor D C} (adj : CategoryTheory.Adjunction.CoreUnitCounit F G) : (CategoryTheory.Adjunction.mkOfUnitCounit adj).counit = adj.counit\", \"doc\": \"\"}\n  {\"name\": \"CategoryTheory.Adjunction.mkOfUnitCounit_unit\", \"module\": \"Mathlib.CategoryTheory.Adjunction.Basic\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [CategoryTheory.Category.{v₂, u₂} D] {F : CategoryTheory.Functor C D} {G : CategoryTheory.Functor D C} (adj : CategoryTheory.Adjunction.CoreUnitCounit F G) : (CategoryTheory.Adjunction.mkOfUnitCounit adj).unit = adj.unit\", \"doc\": \"\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: generic adjunction/mate infrastructure does not construct compactification maps on varying-ring derived systems"
+  },
+  {
+   "tool": "grep",
+   "query": "leftAdjointMate|rightAdjointMate|projectionFormula|compactification",
+   "results": "[grep] OK 14 hit(s)\n  {\"file\": \"Mathlib/CategoryTheory/Monoidal/Rigid/Basic.lean\", \"line\": \"22\", \"text\": \"* The `rightAdjointMate f` as a morphism `fᘁ : Yᘁ ⟶ Xᘁ` for a morphism `f : X ⟶ Y`\"}\n  {\"file\": \"Mathlib/CategoryTheory/Monoidal/Rigid/Basic.lean\", \"line\": \"27\", \"text\": \"* `comp_rightAdjointMate`: The adjoint mates of the composition is the composition of\"}\n  {\"file\": \"Mathlib/CategoryTheory/Monoidal/Rigid/Basic.lean\", \"line\": \"253\", \"text\": \"The overlapping notation for `leftDual` and `leftAdjointMate` become more problematic in\"}\n  {\"file\": \"Mathlib/CategoryTheory/Monoidal/Rigid/Basic.lean\", \"line\": \"295\", \"text\": \"def rightAdjointMate {X Y : C} [HasRightDual X] [HasRightDual Y] (f : X ⟶ Y) : Yᘁ ⟶ Xᘁ :=\"}\n  {\"file\": \"Mathlib/CategoryTheory/Monoidal/Rigid/Basic.lean\", \"line\": \"299\", \"text\": \"def leftAdjointMate {X Y : C} [HasLeftDual X] [HasLeftDual Y] (f : X ⟶ Y) : ᘁY ⟶ ᘁX :=\"}\n  {\"file\": \"Mathlib/CategoryTheory/Monoidal/Rigid/Functor.lean\", \"line\": \"46\", \"text\": \"  map_id X := by simp [leftAdjointMate_id]\"}\n  {\"file\": \"Mathlib/CategoryTheory/Monoidal/Rigid/Functor.lean\", \"line\": \"47\", \"text\": \"  map_comp f g := by simp [comp_leftAdjointMate]\"}\n  {\"file\": \"Mathlib/CategoryTheory/Monoidal/Rigid/Functor.lean\", \"line\": \"60\", \"text\": \"  map_id X := by simp [rightAdjointMate_id]\"}\n  {\"file\": \"Mathlib/CategoryTheory/Monoidal/Rigid/Functor.lean\", \"line\": \"61\", \"text\": \"  map_comp f g := by simp [comp_rightAdjointMate]\"}\n  {\"file\": \"Mathlib/CategoryTheory/Monoidal/Rigid/FunctorCategory.lean\", \"line\": \"34\", \"text\": \"      map_comp := fun f g => by simp [comp_rightAdjointMate] }\"}\n  {\"file\": \"Mathlib/CategoryTheory/Monoidal/Rigid/FunctorCategory.lean\", \"line\": \"42\", \"text\": \"              rightAdjointMate_comp_evaluation, ← MonoidalCategory.whiskerLeft_comp_assoc,\"}\n  {\"file\": \"Mathlib/CategoryTheory/Monoidal/Rigid/FunctorCategory.lean\", \"line\": \"50\", \"text\": \"              coevaluation_comp_rightAdjointMate, Category.assoc, ← comp_whiskerRight,\"}\n  {\"file\": \"Mathlib/CategoryTheory/Monoidal/Rigid/FunctorCategory.lean\", \"line\": \"59\", \"text\": \"      map_comp := fun f g => by simp [comp_leftAdjointMate] }\"}\n  {\"file\": \"Mathlib/CategoryTheory/Monoidal/Rigid/FunctorCategory.lean\", \"line\": \"64\", \"text\": \"            simp [tensorHom_def, leftAdjointMate_comp_evaluation] }\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: generic adjunction/mate infrastructure does not construct compactification maps on varying-ring derived systems"
+  },
+  {
+   "tool": "grep",
+   "query": "semilinear.*(system|tower)|compactification.*(projection|exchange)|projectionFormula",
+   "results": "OK; 1 hits; Mathlib/Algebra/Ring/CompTypeclasses.lean; ; digest 2d98c19dcf1fc6ae",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern ordinary sheaf or general derived adjunction infrastructure, not the simultaneous varying-coefficient compactification comparisons"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction, CategoryTheory.NatTrans",
+   "results": "OK; 0 hits; ; ; digest 4f53cda18c2baa0c",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern ordinary sheaf or general derived adjunction infrastructure, not the simultaneous varying-coefficient compactification comparisons"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Evaluation of derived inverse systems of sheaves preserves adjunction units counits tensor and compact support exchange",
+   "results": "OK; 8 hits; CategoryTheory.Adjunction.derived_unit, SheafOfModules.pushforwardPushforwardAdj_unit_app_val_app, CategoryTheory.Adjunction.derived'_unit, CategoryTheory.Sheaf.adjunction_counit_app_val, CategoryTheory.Adjunction.derivedη, CategoryTheory.Adjunction.derived, CompHausLike.LocallyConstant.counit_app_val, CategoryTheory.constantSheafAdj_counit_app; ; digest 2b871c6a4964cdc0",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern ordinary sheaf or general derived adjunction infrastructure, not the simultaneous varying-coefficient compactification comparisons"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Strict inverse systems of module sheaves with varying quotient coefficients: derived tensor reductions and evaluation of compactification projection and base change adjunction words",
+   "results": "OK; 8 hits; localCohomology.diagram, CondensedMod.ofSheafProfinite, SheafOfModules.Presentation.map_π_eq, LightCondensed.free_lightProfinite_internallyProjective_iff_tensor_condition', LightCondensed.free_lightProfinite_internallyProjective_iff_tensor_condition, LightCondensed.instMonoidalClosedSheafLightProfiniteCoherentTopologyModuleCat, LightCondensed.ihomPoints_symm_comp, LightCondensed.free_internallyProjective_iff_tensor_condition'; ; digest 154533b61ebddb6b",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern ordinary sheaf or general derived adjunction infrastructure, not the simultaneous varying-coefficient compactification comparisons"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived projection formula and open extension by zero for module sheaves on ringed diagram topoi with inverse coefficient systems",
+   "results": "OK; 8 hits; SheafOfModules.Presentation.map_π_eq, SheafOfModules.Presentation.mapGenerators, SheafOfModules.Presentation.map, SheafOfModules.Presentation.map_generators_I, SheafOfModules.Presentation.map_relations_I, SheafOfModules.Presentation.mapRelations, SheafOfModules.generatorsOfIsCokernelFree_π, SheafOfModules.Presentation.mapRelations_mapGenerators_assoc; ; digest f11977db5cbc594e",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern ordinary sheaf or general derived adjunction infrastructure, not the simultaneous varying-coefficient compactification comparisons"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "det-sp-tower-shriek-levels",
+  "date": "2026-10-22",
+  "group": "Q62"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-lem-sp-tower-bound",
+ "blueprint": {
+  "from": {
+   "node": "det-sp-tower-shriek-levels",
+   "place": "(2): transposes of units and counits of the levelwise adjunctions, associativity of tensor products, and evaluation to the corresponding finite map",
+   "via": []
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sp-strict-compactification-comparison-realization",
+  "worker": "stage1",
+  "summary": "Realize the compactification words by exact identity-section transport of the existing semilinear calculus. Cite existing tensor reduction and open normalization results, compute the coefficient mate and its coherence, compare bounded-below resolutions, and identify the ambient exchange with its transported etale counterpart. Statement unchanged; no new nodes.",
+  "blueprint": "det-sp-tower-shriek-levels, operations proof (2): transposes of units/counits, associativity and evaluation to the corresponding finite map. Steps 1-5 construct its normalized tower operations; steps 6-8 assemble the specified compactification words and twist specialization.",
+  "tool_uses": [
+   {
+    "node": "lem-coef-semilinear-derived-sections",
+    "why": "Simultaneous unbounded varying-ring operations, adjunction and evaluation calculus; the tower-bound unit does not construct them."
+   },
+   {
+    "node": "lem-pur-system-tensor-reduction-formula",
+    "why": "Generic formula for the reduction adjunct of an actual system tensor; required for arbitrary noncartesian inputs."
+   },
+   {
+    "node": "lem-weil-pbc-mate-pasting",
+    "why": "Formal pasting of coefficient-change mates gives composition coherence, independent of geometry."
+   },
+   {
+    "node": "lem-sp-grothendieck-enough-injectives",
+    "why": "Enough injectives for the already established Grothendieck tower category."
+   },
+   {
+    "node": "lem-weil-pbc-dplus-injective-representative",
+    "why": "Generic bounded-below injective representative in any abelian category with enough injectives."
+   },
+   {
+    "node": "lem-sp-kinjective-computes",
+    "why": "Common injective representative computes the unbounded direct image canonically."
+   },
+   {
+    "node": "lem-weil-pbc-right-derived-plus-injective",
+    "why": "Uniqueness of the bounded-below right derived functor with its comparison maps."
+   },
+   {
+    "node": "lem-sf-open-tensor-normalization",
+    "why": "Section-unit-normalized open tensor and base-change comparisons on arbitrary ringed diagram topoi."
+   },
+   {
+    "node": "lem-pur-co-smooth-exchange-transport",
+    "why": "Identifies the ambient finite compactification mate with transported etale exchange for arbitrary base change; no field or smoothness hypothesis."
+   },
+   {
+    "node": "lem-pc-separated-quasi-separated",
+    "why": "Generic separation implication needed to check the quasi-compact open hypothesis of the exchange-transport theorem."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-coef-semilinear-derived-sections",
+  "lem-pur-system-tensor-reduction-formula",
+  "lem-weil-pbc-mate-pasting",
+  "lem-sp-grothendieck-enough-injectives",
+  "lem-weil-pbc-dplus-injective-representative",
+  "lem-weil-pbc-right-derived-plus-injective",
+  "lem-sf-open-tensor-normalization",
+  "lem-pur-co-smooth-exchange-transport",
+  "lem-pc-separated-quasi-separated"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q150-5337efe70",
+  "group": "Q150",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q150-5337efe70 (reviewer sub-agent of L); spot-checked: Ordinary one-level split with no new nodes; there is no repair note for this item. statement, stmt_deps and blueprint are byte-identical to the Q62-accepted node, and only the proof fields changed. Source: main-20261015 sk-lem-sp-tower-bound-operations.proof.md paragraph (2); the old Q62 parent steps 3-4 are fully carried by steps 1-8 and nothing was dropped. Step 1: Tow = S(B_T) by the identity on sections. Step 2: lem-pur-system-tensor-reduction-formula gives the transition t = (t⊗t)∘scalarTensor for arbitrary noncartesian inputs; its calculus (def-coef-semilinear-system-models) is the same category as lem-coef-semilinear-derived-sections. Step 3: b_mn mate types checked (T on the target, S on the source); mate-pasting clause 1 with L1=V_m, L2=V_n, G=T_mn, H=S_mn gives the composite coherence. Step 4: Grothendieck category, so bounded-below injective representatives exist and are K-injective; lem-sp-kinjective-computes and the uniqueness clause (3) of right-derived-plus-injective give the D^+ identification; e_n I is never claimed injective. Step 5: the diagram-topos clause of lem-sf-open-tensor-normalization gives β and γ with open-unit inverses, and its finite constant case is the def-exchange-projection β and γ. Step 6: π_p matches def-exchange-projection; R_n = A_{E,en} since ℓ = uϖ^e. Step 7: j is quasi-compact (f qc, p separated hence qs, Nagata leaf); lem-pur-co-smooth-exchange-transport (finite Λ, arbitrary g, supplied compactification) identifies the ambient word with the transported exchange of thm-cbc-finite-level-proetale, with levelwise witnesses. Step 8: specialization to twist towers, correctly marked elementary. Edge cases checked: m=n, X empty, g=id, j=id, zero transitions, nonflat quotients. No cycle (BFS over 26k nodes), no SGA, Stacks 05TI/070J/0GL1 labels verified. Tool uses accepted as declared; thm-cbc-finite-level-proetale (route flag 'recorded, not refused', already a stmt_dep) is accepted as a tool use, and the maintainer should add it to tool_uses at merge. Advisory: the theorem stmt_dep in the unchanged statement is for stage 2, and the step-3 associator coherence is stated briefly."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.SmoothPurityStrictCompactificationComparisonRealization",
+  "declaration": "AlgebraicGeometry.ProEtale.SpTowerShriek.strictCompactificationComparisonRealization",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.SpTowerShriek.strictCompactificationComparisonRealization"
+  ],
+  "file": "lean/Sheaf/Paper/SmoothPurityStrictCompactificationComparisonRealization.lean",
+  "statement": "theorem strictCompactificationComparisonRealization : ∃ b : Base l E, ∃ o : Operations l E b, ∃ x : OpenExchange l E b o, StrictCompactificationComparisons l E b o x",
+  "branch": "newtargets-dag",
+  "by": "Q10",
+  "date": "2026-10-23",
+  "existing": false,
+  "note": "F4: existing interfaces moved verbatim to SmoothPurityStrictCompactificationComparisonData and publicly reexported. The theorem assembles three strictly smaller construction/identification steps; tensor reduction and both bounded-below clauses have complete proofs."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-ec22e9a32",
+  "group": "Q10",
+  "result": "pass",
+  "note": "Re-delivery after H3 RETURN of 35971ea2f3ff. Diff vs returned snapshot: only report, node lean record (+comparisonFiniteUnderlying in declarations, note) and item module changed; node equals live except lean, signature unchanged. New helper comparisonFiniteUnderlying = asIso of AddCommGrp sheafificationAdjunction counit (Stacks 00YV), actual data; new conjunct HEq e.underlying (comparisonFiniteUnderlying …) is type-consistent given the existing e.equivalence pin and satisfiable (counit A-linear, cf. finite_realization_exists). With underlying fixed, the FiniteTensorPin (pure-summand totalIso + finiteTensorModel on resolving reps, t.functor and representative pinned) fixes d and hence tensor T n uniquely, so projectionWord compares projectionMapOfCompactification exactly; per-scheme unit rescaling removed. No new hypotheses, one sorry, no name collision, no >100-char lines. Not compiled (no file changed); worker scompile + deliver2 dry run OK (39c689b070e). Advisories carried: A1 parent-helper import cycle split note, A2 non-stmt_dep owner decls, A3 unused twist import/comparisonTower defs, A4 self-audit second reading."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-44687",
+  "group": "F4",
+  "result": "pass",
+  "landing": "20261025T143221-L-967072",
+  "kind": "interface",
+  "note": "independent cc review: Data module vs clone's item module (diff: only blueprint tag, removed proof imports and removed theorem); item theorem signature byte-identical; 3 new sorried statements vs their nodes and the pinned Base/Operations/ComparisonLevels fields; delivered modules plus importer TowerAdjointCompositorRealization compiled in sandbox (exit 0); #print axioms sorryAx traced to published proEtaleCanonicalPullbackComposition inside the Operations type and to the 3 residual statements"
+ }
+}

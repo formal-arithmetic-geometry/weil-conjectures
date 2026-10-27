@@ -1,0 +1,394 @@
+{
+ "id": "lem-sfb-finite-open-geometric-chart-family",
+ "kind": "statement",
+ "title": "A small family of finite-open pairs realizes all field-valued parts",
+ "statement": "Let $\\mathcal U\\in\\mathcal V$ be the universes of [def-weil-size-convention], and let $f:X\\to Y$ be a separated, locally finite type morphism of $\\mathcal U$-small schemes [def-pc-scheme, def-weil-proper-morphism, def-weil-finite-type-morphism]. There exist a $\\mathcal U$-small set $I$, affine $\\mathcal U$-small schemes $U_i$, etale morphisms $a_i:U_i\\to Y$ [def-weil-etale-morphism], and open subschemes $W_i\\subseteq X\\times_YU_i$ [def-pc-fibre-product, def-weil-open-immersion], each finite over $U_i$ [def-weil-finite-integral-morphism], with this lifting property. For every field $K$ in $\\mathcal U$ [def-weil-field], map $b:\\operatorname{Spec}K\\to Y$, and open subscheme $Z\\subseteq X\\times_Y\\operatorname{Spec}K$ finite over $K$, there exist $i\\in I$, a field extension $K\\hookrightarrow L$ with $L$ in $\\mathcal U$, and $u:\\operatorname{Spec}L\\to U_i$ such that\n$$a_i u=b\\circ\\operatorname{Spec}(K\\hookrightarrow L),\\qquad u^*W_i=Z\\times_KL$$\nas open subschemes of $X\\times_Y\\operatorname{Spec}L$. Spectra and pullback use [def-weil-affine-spectrum, def-pc-fibre-product]. The empty open part is included. No sheaf representability or algebraicity assertion is part of this statement.",
+ "source": {
+  "document": "literature/stacks-project/spaces-more-groupoids.tex",
+  "place": "Tag 04QG (lemma-finite-surjective-etale-cover), scheme-case proof: choices of finite unions of the split pieces and geometric-point surjectivity; preceded by the reduction of Tag 04PG (lemma-finite-lives-on-locally-quasi-finite-part). The family is restricted to one choice per finite subset of each fixed geometric fibre, then shrunk to affine neighbourhoods."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-size-convention",
+  "def-pc-fibre-product",
+  "def-weil-open-immersion",
+  "def-weil-finite-integral-morphism",
+  "def-weil-proper-morphism",
+  "def-weil-finite-type-morphism",
+  "def-weil-etale-morphism",
+  "def-weil-field",
+  "def-weil-affine-spectrum"
+ ],
+ "proof": [
+  {
+   "text": "Choose a $\\mathcal U$-small family $(A_t\\to Y)_{t\\in T}$ of affine etale representatives using [lem-weil-pbc-affine-etale-essentially-small-cover], applied in the universe of $Y$. This is the smallness of affine objects, not of all etale schemes: its Mathlib representative category is essentially small in precisely that universe. For each $t$, let $B_t$ be the set of opens of $X\\times_YA_t$ whose restricted projection to $A_t$ is finite. Since the fibre product is $\\mathcal U$-small, its opens form a subset of a power set in $\\mathcal U$; so does $B_t$. By the universe closure convention [def-weil-size-convention], $I=\\coprod_{t\\in T}B_t$ is $\\mathcal U$-small. Set $U_{(t,B)}=A_t$ and $W_{(t,B)}=B$. These pairs already have all required geometric properties; it remains to establish the lifting property.",
+   "uses": [
+    "lem-weil-pbc-affine-etale-essentially-small-cover",
+    "def-weil-size-convention"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-more-groupoids.tex",
+    "place": "Tag 04QG, lemma-finite-surjective-etale-cover, scheme-case construction and geometric-field argument; Tag 04PG, lemma-finite-lives-on-locally-quasi-finite-part. The bounded family is obtained using the existing small affine etale representative lemma."
+   }
+  },
+  {
+   "text": "Fix $(K,b,Z)$ as in the statement. Choose a $\\mathcal U$-small algebraic closure $K\\hookrightarrow L$ by [lem-pc-algebraic-closure-exists-unique], and write $Z_L=Z\\times_KL$. By [lem-weil-pbc-finite-morphism-permanence] it is finite over $L$. By [pqf-lem-finite-qf] and [pqf-lem-qf-finitefibres], its underlying set is finite. Let $y$ be the image of $\\operatorname{Spec}L\\to Y$. The finite set of images of $|Z_L|$ in $X_y$ will be denoted $\\{x_1,\\ldots,x_n\\}$. For $Z=\\varnothing$ this is the empty list.",
+   "uses": [
+    "lem-pc-algebraic-closure-exists-unique",
+    "lem-weil-pbc-finite-morphism-permanence",
+    "pqf-lem-finite-qf",
+    "pqf-lem-qf-finitefibres"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-more-groupoids.tex",
+    "place": "Tag 04QG, lemma-finite-surjective-etale-cover, scheme-case construction and geometric-field argument; Tag 04PG, lemma-finite-lives-on-locally-quasi-finite-part. The bounded family is obtained using the existing small affine etale representative lemma."
+   }
+  },
+  {
+   "text": "Let $Q\\subseteq X$ be the quasi-finite locus of $f$. The locus theorem [lem-sfb-space-quasifinite-locus-open], specialized to schemes, says it is open and its formation commutes with arbitrary base change, including $\\operatorname{Spec}L\\to Y$. On the open $Z_L$ the base-changed map is finite and hence quasi-finite by [pqf-lem-finite-qf]; quasi-finiteness at a point is unaffected by restricting its source to an open neighbourhood. Consequently every $x_i$ belongs to $Q$. Applying [lem-weil-pbc-quasi-finite-at-point-isolated] shows that the $x_i$ are isolated in $X_y$. Thus the local splitting lemma applies to these points of the original morphism $f$, without any global quasi-finiteness or quasi-compactness assumption.",
+   "uses": [
+    "lem-sfb-space-quasifinite-locus-open",
+    "pqf-lem-finite-qf",
+    "lem-weil-pbc-quasi-finite-at-point-isolated"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-more-groupoids.tex",
+    "place": "Tag 04QG, lemma-finite-surjective-etale-cover, scheme-case construction and geometric-field argument; Tag 04PG, lemma-finite-lives-on-locally-quasi-finite-part. The bounded family is obtained using the existing small affine etale representative lemma."
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-etale-splits-isolated-purely-inseparable] to $f$, $y$, and the distinct isolated points $x_i$. Obtain $(U,u)\\to(Y,y)$ and $U\\times_YX=W\\amalg\\coprod_{i,j}V_{i,j}$. Its residue extension $\\kappa(u)/\\kappa(y)$ is finite separable, hence algebraic. The map $\\kappa(y)\\to L$ determined by $b$ and $K\\hookrightarrow L$ extends to an embedding $\\kappa(u)\\to L$ by [lem-weil-pbc-algebraic-extension-embeds-algebraically-closed]. Composing $\\operatorname{Spec}L\\to\\operatorname{Spec}\\kappa(u)\\to U$ gives a lift $c$ with $a c=b\\operatorname{Spec}(K\\hookrightarrow L)$. In this decomposition all products are over $Y$ (the display $U\\times_SX$ in the scheme-case paragraph of the source must be read as $U\\times_YX$).",
+   "uses": [
+    "lem-sfb-etale-splits-isolated-purely-inseparable",
+    "lem-weil-pbc-algebraic-extension-embeds-algebraically-closed"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-more-groupoids.tex",
+    "place": "Tag 04QG, lemma-finite-surjective-etale-cover, scheme-case construction and geometric-field argument; Tag 04PG, lemma-finite-lives-on-locally-quasi-finite-part. The bounded family is obtained using the existing small affine etale representative lemma."
+   }
+  },
+  {
+   "text": "For each $(i,j)$ its special fibre $(V_{i,j})_u$ is a one-point scheme with purely inseparable residue extension over $\\kappa(u)$. It is therefore radicial by [def-weil-radicial-morphism], and that node's equivalence with universal injectivity implies that its base change to $L$ has at most one point. It has a point: extend $\\kappa(u)\\to L$ to its algebraic residue extension $\\kappa(v_{i,j})$ by [lem-weil-pbc-algebraic-extension-embeds-algebraically-closed], and compose the resulting spectrum map with the canonical residue-field point. The fibre identification [lem-weil-pbc-fibre-of-base-change] identifies this scheme with $V_{i,j}\\times_{U,c}\\operatorname{Spec}L$. Hence each such piece has exactly one point. No reduction or identification of nonreduced schemes with their residue fields is made.",
+   "uses": [
+    "def-weil-radicial-morphism",
+    "lem-weil-pbc-algebraic-extension-embeds-algebraically-closed",
+    "lem-weil-pbc-fibre-of-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-more-groupoids.tex",
+    "place": "Tag 04QG, lemma-finite-surjective-etale-cover, scheme-case construction and geometric-field argument; Tag 04PG, lemma-finite-lives-on-locally-quasi-finite-part. The bounded family is obtained using the existing small affine etale representative lemma."
+   }
+  },
+  {
+   "text": "The pullback of $W$ to $L$ is disjoint from $Z_L$: a point of their intersection would map to one of the $x_i$, contradicting the avoidance clause of [lem-sfb-etale-splits-isolated-purely-inseparable]. Each of the other pieces has exactly one point by the preceding step. Its intersection with the open $Z_L$ is therefore either the empty open or the entire piece. Select the finite set $J$ of pieces for which it is the entire piece, and put $B=\\coprod_{(i,j)\\in J}V_{i,j}$ as an open of $U\\times_YX$. Its projection to $U$ is finite: induct on $|J|$ using [lem-weil-pbc-finite-coproduct] for the binary union of disjoint pieces; for the empty union the zero algebra is generated as a module by the empty set. The two opens $c^*B$ and $Z_L$ have exactly the same points and therefore are equal as open subschemes, with their induced structure sheaves. This equality includes all nilpotent structure.",
+   "uses": [
+    "lem-sfb-etale-splits-isolated-purely-inseparable",
+    "lem-weil-pbc-finite-coproduct"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-more-groupoids.tex",
+    "place": "Tag 04QG, lemma-finite-surjective-etale-cover, scheme-case construction and geometric-field argument; Tag 04PG, lemma-finite-lives-on-locally-quasi-finite-part. The bounded family is obtained using the existing small affine etale representative lemma."
+   }
+  },
+  {
+   "text": "Choose an affine open neighbourhood $U'\\subseteq U$ of $u$. The map $c$ factors through $U'$ because its image is $u$. The composite $U'\\to Y$ is etale by the open-immersion and composition clauses of [lem-weil-pbc-etale-composition-cancellation]. Its finite open part $B'=B\\times_UU'$ is finite by [lem-weil-pbc-finite-morphism-permanence]. Transport $(U',B',c)$ along its $Y$-isomorphism to an affine representative $A_t$ supplied by [lem-weil-pbc-affine-etale-essentially-small-cover]. The transported open belongs to $B_t$, so the corresponding $i\\in I$ and transported map $u:\\operatorname{Spec}L\\to U_i$ satisfy the two required equalities. Restriction and transport merely compose the preceding equality with pullback isomorphisms. For the empty part the chosen union is empty; if $Y$ is empty no field-valued data exist. No construction or representability of a finite-part functor has been used.",
+   "uses": [
+    "lem-weil-pbc-etale-composition-cancellation",
+    "lem-weil-pbc-finite-morphism-permanence",
+    "lem-weil-pbc-affine-etale-essentially-small-cover"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-more-groupoids.tex",
+    "place": "Tag 04QG, lemma-finite-surjective-etale-cover, scheme-case construction and geometric-field argument; Tag 04PG, lemma-finite-lives-on-locally-quasi-finite-part. The bounded family is obtained using the existing small affine etale representative lemma."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-affine-etale-essentially-small-cover",
+  "def-weil-size-convention",
+  "lem-pc-algebraic-closure-exists-unique",
+  "lem-weil-pbc-finite-morphism-permanence",
+  "pqf-lem-finite-qf",
+  "pqf-lem-qf-finitefibres",
+  "lem-sfb-space-quasifinite-locus-open",
+  "lem-weil-pbc-quasi-finite-at-point-isolated",
+  "lem-sfb-etale-splits-isolated-purely-inseparable",
+  "lem-weil-pbc-algebraic-extension-embeds-algebraically-closed",
+  "def-weil-radicial-morphism",
+  "lem-weil-pbc-fibre-of-base-change",
+  "lem-weil-pbc-finite-coproduct",
+  "lem-weil-pbc-etale-composition-cancellation"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/spaces-more-groupoids.tex",
+  "place": "Tag 04QG, lemma-finite-surjective-etale-cover, scheme-case construction and geometric-field argument; Tag 04PG, lemma-finite-lives-on-locally-quasi-finite-part. The bounded family is obtained using the existing small affine etale representative lemma. Explicit set-indexed replacement of the family of all choices; uses the scheme local splitting argument of 04QG."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For every geometric finite open part of a separated locally quasi-finite scheme morphism there is an affine etale neighbourhood with a finite open subscheme inducing that part",
+   "sub": "",
+   "results": {
+    "t": "2026-10-23T20:13:28Z",
+    "tool": "leanfinder",
+    "query": "For every geometric finite open part of a separated locally quasi-finite scheme morphism there is an affine etale neighbourhood with a finite open subscheme inducing that part",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "AlgebraicGeometry.locallyQuasiFinite_iff",
+     "AlgebraicGeometry.LocallyQuasiFinite.quasiFinite_appLE",
+     "AlgebraicGeometry.ExistsHomHomCompEqCompAux.h𝒰S",
+     "AlgebraicGeometry.IsFinite.instHasAffinePropertyAndIsAffineFiniteCarrierObjOppositeOpensCarrierCarrierCommRingCatPresheafOpOpensTopHomAppTop",
+     "AlgebraicGeometry.reduce_to_affine_nbhd",
+     "AlgebraicGeometry.LocallyOfFinitePresentation",
+     "AlgebraicGeometry.locallyOfFiniteType_iff",
+     "AlgebraicGeometry.LocallyOfFiniteType"
+    ],
+    "digest": "3843ceccdec9aaa7"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: Mathlib/AlgebraicGeometry/ZariskisMainTheorem.lean:49-53 only splits one finite piece containing a chosen point, and explicitly says it is weaker than 02LN. It does not separate geometric points or realize prescribed subsets. Scheme affine covers and etale sites do not provide the finite-part lifting property or its bounded family."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Lift a finite open subscheme of a geometric fibre of a separated locally quasi-finite morphism to a finite open subscheme over an etale neighbourhood",
+   "sub": "",
+   "results": {
+    "t": "2026-10-23T20:13:27Z",
+    "tool": "leansearch",
+    "query": "Lift a finite open subscheme of a geometric fibre of a separated locally quasi-finite morphism to a finite open subscheme over an etale neighbourhood",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "AlgebraicGeometry.instLocallyQuasiFiniteOfIsFinite",
+     "AlgebraicGeometry.IsOpenImmersion.lift.congr_simp",
+     "AlgebraicGeometry.IsOpenImmersion.lift",
+     "AlgebraicGeometry.IsOpenImmersion.instLift",
+     "AlgebraicGeometry.LocallyQuasiFinite.mk",
+     "AlgebraicGeometry.LocallyQuasiFinite.recOn",
+     "AlgebraicGeometry.LocallyRingedSpace.IsOpenImmersion.lift.congr_simp",
+     "AlgebraicGeometry.LocallyRingedSpace.IsOpenImmersion.lift_range"
+    ],
+    "digest": "43a39288a358ec8c"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: Mathlib/AlgebraicGeometry/ZariskisMainTheorem.lean:49-53 only splits one finite piece containing a chosen point, and explicitly says it is weaker than 02LN. It does not separate geometric points or realize prescribed subsets. Scheme affine covers and etale sites do not provide the finite-part lifting property or its bounded family."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsEtale\", \"IsFinite\", \"IsOpenImmersion\"",
+   "sub": "",
+   "results": {
+    "t": "2026-10-23T20:13:27Z",
+    "tool": "loogle",
+    "query": "\"IsEtale\", \"IsFinite\", \"IsOpenImmersion\"",
+    "sub": "",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: Mathlib/AlgebraicGeometry/ZariskisMainTheorem.lean:49-53 only splits one finite piece containing a chosen point, and explicitly says it is weaker than 02LN. It does not separate geometric points or realize prescribed subsets. Scheme affine covers and etale sites do not provide the finite-part lifting property or its bounded family."
+  },
+  {
+   "tool": "grep",
+   "query": "finite.*(geometric|fiber).*([Ll]ift|[Nn]eigh)|exists_etale_isCompl",
+   "sub": "AlgebraicGeometry",
+   "results": {
+    "t": "2026-10-23T20:13:27Z",
+    "tool": "grep",
+    "query": "finite.*(geometric|fiber).*([Ll]ift|[Nn]eigh)|exists_etale_isCompl",
+    "sub": "AlgebraicGeometry",
+    "ok": true,
+    "n_hits": 2,
+    "note": "",
+    "top": [
+     "Mathlib/AlgebraicGeometry/ZariskisMainTheorem.lean",
+     "Mathlib/AlgebraicGeometry/ZariskisMainTheorem.lean"
+    ],
+    "digest": "e29727c0b0067e05"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: Mathlib/AlgebraicGeometry/ZariskisMainTheorem.lean:49-53 only splits one finite piece containing a chosen point, and explicitly says it is weaker than 02LN. It does not separate geometric points or realize prescribed subsets. Scheme affine covers and etale sites do not provide the finite-part lifting property or its bounded family."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Etale locally a chosen union of geometric isolated fibre components extends to an open finite part, without flatness",
+   "sub": "",
+   "results": {
+    "t": "2026-10-23T20:13:29Z",
+    "tool": "leanfinder",
+    "query": "Etale locally a chosen union of geometric isolated fibre components extends to an open finite part, without flatness",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "Algebra.isOpen_etaleLocus",
+     "AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified",
+     "RingHom.Etale.propertyIsLocal",
+     "Algebra.etaleLocus",
+     "RingHom.Etale.ofLocalizationSpanTarget",
+     "AlgebraicGeometry.Scheme.etalePretopology",
+     "AlgebraicGeometry.Scheme.smallEtalePretopology",
+     "Algebra.isOpen_unramifiedLocus"
+    ],
+    "digest": "b6c081b2f0687318"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: Mathlib/AlgebraicGeometry/ZariskisMainTheorem.lean:49-53 only splits one finite piece containing a chosen point, and explicitly says it is weaker than 02LN. It does not separate geometric points or realize prescribed subsets. Scheme affine covers and etale sites do not provide the finite-part lifting property or its bounded family."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a separated locally quasi-finite map of small schemes there is a small set of affine etale neighbourhoods with finite open parts realizing every geometric finite open part",
+   "sub": "",
+   "results": {
+    "t": "2026-10-23T20:14:56Z",
+    "tool": "leanfinder",
+    "query": "For a separated locally quasi-finite map of small schemes there is a small set of affine etale neighbourhoods with finite open parts realizing every geometric finite open part",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "AlgebraicGeometry.locallyQuasiFinite_iff",
+     "AlgebraicGeometry.LocallyQuasiFinite.quasiFinite_appLE",
+     "AlgebraicGeometry.LocallyQuasiFinite",
+     "AlgebraicGeometry.IsFinite.instHasAffinePropertyAndIsAffineFiniteCarrierObjOppositeOpensCarrierCarrierCommRingCatPresheafOpOpensTopHomAppTop",
+     "AlgebraicGeometry.ExistsHomHomCompEqCompAux.h𝒰S",
+     "AlgebraicGeometry.instLocallyQuasiFiniteOfIsFinite",
+     "AlgebraicGeometry.locallyOfFiniteType_iff",
+     "AlgebraicGeometry.LocallyOfFiniteType"
+    ],
+    "digest": "08bcae0e381edca5"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: Mathlib/AlgebraicGeometry/ZariskisMainTheorem.lean:49-53 only splits one finite piece containing a chosen point, and explicitly says it is weaker than 02LN. It does not separate geometric points or realize prescribed subsets. Scheme affine covers and etale sites do not provide the finite-part lifting property or its bounded family."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A bounded family of etale neighbourhoods and finite open subschemes covers all finite open parts of geometric fibres",
+   "sub": "",
+   "results": {
+    "t": "2026-10-23T20:14:55Z",
+    "tool": "leansearch",
+    "query": "A bounded family of etale neighbourhoods and finite open subschemes covers all finite open parts of geometric fibres",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "AlgebraicGeometry.Scheme.affineOpenCover",
+     "AlgebraicGeometry.QuasiCompactCover.isCompactOpenCovered_of_isAffineOpen",
+     "AlgebraicGeometry.Scheme.affineCover",
+     "AlgebraicGeometry.Scheme.OpenCover.compactSpace",
+     "AlgebraicGeometry.Scheme.smallEtaleTopology",
+     "AlgebraicGeometry.Scheme.etaleTopology",
+     "AlgebraicGeometry.Scheme.OpenCover",
+     "AlgebraicGeometry.Scheme.directedAffineCover"
+    ],
+    "digest": "3f8a753c30ef0dc3"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: Mathlib/AlgebraicGeometry/ZariskisMainTheorem.lean:49-53 only splits one finite piece containing a chosen point, and explicitly says it is weaker than 02LN. It does not separate geometric points or realize prescribed subsets. Scheme affine covers and etale sites do not provide the finite-part lifting property or its bounded family."
+  },
+  {
+   "tool": "grep",
+   "query": "finite.*open.*part|geometric.*finite.*part|finite.*etale.*atlas",
+   "sub": "AlgebraicGeometry",
+   "results": {
+    "t": "2026-10-23T20:14:55Z",
+    "tool": "grep",
+    "query": "finite.*open.*part|geometric.*finite.*part|finite.*etale.*atlas",
+    "sub": "AlgebraicGeometry",
+    "ok": true,
+    "n_hits": 1,
+    "note": "",
+    "top": [
+     "Mathlib/AlgebraicGeometry/Morphisms/FlatMono.lean"
+    ],
+    "digest": "9d625071524054d3"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: Mathlib/AlgebraicGeometry/ZariskisMainTheorem.lean:49-53 only splits one finite piece containing a chosen point, and explicitly says it is weaker than 02LN. It does not separate geometric points or realize prescribed subsets. Scheme affine covers and etale sites do not provide the finite-part lifting property or its bounded family."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-unmarked-finite-open-parts-space",
+  "date": "2026-10-24",
+  "group": "O2"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Algebraicity and smoothness of the stack of all nodal curves. Supporting input: Tags 0D52 (lemma-curves-stack) and 0D53 (lemma-curves-diagonal), with situation-curves. Supporting input: Effectivity step in quot-lemma-curves-stack via quot-lemma-spaces-stack; finite-type part (2) of bootstrap-lemma-descend-algebraic-space. Supporting input: theorem-final-bootstrap (3), applied after constructing a representable fppf cover of the descended sheaf. Subdivision of the final bootstrap: affine locally quasi-finite relation; finite etale quasi-splitting charts and quotient by the open finite locally free subrelation (Tags 04S0, 04S4). Supporting input: Pointed affine etale quasi-splitting of a flat locally quasi-finite groupoid. Supporting input: finite-part parameter scheme and its residue-field point used before the affine quasi-splitting. Unmarked finite-part algebraic space used in the proof of Tag 04RI, first paragraph (Proposition 04QH). Supporting input for 04QH: Tag 04QG (lemma-finite-surjective-etale-cover), scheme-case proof: choices of finite unions of the split pieces and geometric-point surjectivity; preceded by the reduction of Tag 04PG (lemma-finite-lives-on-locally-quasi-finite-part). The family is restricted to one choice per finite subset of each fixed geometric fibre, then shrunk to affine neighbourhoods.",
+   "via": [
+    "lem-sfb-unmarked-finite-open-parts-space",
+    "lem-sfb-section-marked-finite-parts-scheme",
+    "lem-sfb-affine-groupoid-pointed-quasisplitting",
+    "lem-sfb-fppf-relation-etale-replacement",
+    "lem-sfb-fppf-space-atlas-bootstrap",
+    "lem-sfb-space-finite-type-fppf-effectivity",
+    "lem-sfb-curve-descent-isom-spaces",
+    "lem-sfb-nodal-curve-stack-smooth",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-finite-open-geometric-chart-family",
+  "worker": "stage1",
+  "summary": "Kept the statement. Reused the existing universe-small affine etale representatives and formed the small set of all their finite open parts. Proved the field-valued lifting by extending K to an algebraic closure, using the base-change-compatible quasi-finite locus to isolate the finitely many relevant ordinary fibre points, applying the new 02LO local splitting input, and selecting its one-point geometric pieces. The equality is of opens, retaining nilpotents, not just of reduced components. One statement-only local geometry node is new.",
+  "blueprint": "Realizes the recorded ancestor obligation under det-thm-sf-ctf-stability-direct-images (3): Tag 04QG scheme-case geometric-point charts after 04PG. The current latest blueprint has no separate finite-part lemma; this is a supporting generic geometry input, not a replacement of a unit step. blueprint_refs ancestor reports None for this inherited chain, so from.node is retained as null.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-quasi-finite-at-point-isolated",
+    "why": "Generic scheme/field geometry input used with exactly the hypotheses of its statement in the finite-part chart construction; this unit has no substitute and its direct-image route is unchanged."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-quasi-finite-at-point-isolated"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-N6-f57b84dd8",
+  "group": "N6",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-N6-f57b84dd8 (reviewer sub-agent of L); spot-checked: Read Stacks 04PG and 04QG in full (spaces-more-groupoids.tex l.1430-1451 and l.1631-1792, scheme case plus the algebraically-closed-point argument), and more-morphisms.tex 02LM-var, 02LN and 02LO (l.12040-12160). Item statement unchanged; it is the scheme case of the 04QG datum, and the source's U x_S X correctly becomes U x_Y X. Steps checked against the cited statements. Step 1: the Mathlib leaf's match AffineEtale.instEssentiallySmall is EssentiallySmall.{u}, so the representative set is U-small; the set of finite opens is a subset of a power set, so I is U-small. Step 2: algebraic closure, finiteness by base change, finite => quasi-finite => finite fibres (pqf nodes are Lean-closed). Step 3: the 04NW locus is stable under base change, then 01TH (1)=>(2) gives isolatedness in the correct direction. Step 4: the new node's finite separable residue extension kappa(u)/kappa(y) plus 09GU gives the lift c with a c = b Spec(K->L). Step 5: radicial => universally injective gives at most one point, the 09GU extension gives one point, and fibre-of-base-change identifies the piece; matches 04QG l.1777-1781. Step 6 (elementary, justified): W avoids the x_i, each one-point piece is all-or-nothing, the finite coproduct gives B finite, and opens with the same points are equal including nilpotents. Step 7: affine shrink, etale composition, base change and transport to a representative. proof_deps = union of uses. New node lem-sfb-etale-splits-isolated-purely-inseparable matches 02LO hypothesis by hypothesis. Its additions are true: kappa(s)->kappa(u) finite separable (02GL; finite Galois in the 02LM-var proof) and kappa(v)/kappa(u) finite. Tested n=0, a rational point, a separable degree-d point (d pieces) and a purely inseparable point (one piece). It is statement-only with three kinds of search recorded. Not a duplicate: 02LM-var has no clopen W decomposition, 02LN/02LP are elementary neighbourhoods with no separable splitting, and getting 02LO from 02LM-var needs the separatedness/closedness/shrinking argument. Not a restatement of the item. Declared tool use quasi-finite-at-point-isolated (01TH generic) accepted. No SGA. Batch-5 flag on lem-sfb-space-quasifinite-locus-open (reaches def-trf-algebraic-space): accepted, because 04NW is general geometry outside the trace formula and Poincare duality and their proofs; its sec-trace-formula dependencies are only the general definition of an algebraic space and the space fibre-product node, and the parent is already about algebraic spaces. No changes."
+ }
+}

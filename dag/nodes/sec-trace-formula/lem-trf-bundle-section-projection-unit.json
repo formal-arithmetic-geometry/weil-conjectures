@@ -1,0 +1,104 @@
+{
+ "id": "lem-trf-bundle-section-projection-unit",
+ "kind": "statement",
+ "title": "Canonical bundle projection normalized at the scalar unit",
+ "statement": "For a commutative coefficient ring A annihilated by N, a Noetherian scheme S, and a rank-d locally free module M, the canonical coefficient-first compact-support projection for its vector bundle at the scalar unit, followed by compact support of the canonical pulled-back-unit tensor identification, equals the left unitor on the compact-support coefficient object. No trace, exceptional adjoint, inverse projection, or invertibility hypothesis is involved. All maps are exactly the published constructions of [def-trf-bundle-section-orientation-data] and [thm-amb-vector-bundle-purity].",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-an/thm-amb-vector-bundle-purity.proof.md",
+  "place": "Opening paragraph: projection followed by transposition; sk-thm-dnc final purity comparison"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "stmt_deps": [
+  "def-trf-bundle-section-orientation-data",
+  "thm-amb-vector-bundle-purity"
+ ],
+ "proof": [
+  {
+   "text": "The single-functor constant-sheaf comparison identifies ordinaryFiniteUnitPullback with the derived monoidal unit comparison; cancel the identity scalar-unit components. Expand the coefficient-first projection into the two symmetries and ordinary projection. Naturality of braiding and the triangle identities turn the source unit comparison into the right-unit comparison. Apply projectionMap_rightUnitality, then braiding_rightUnitor. This works for rank zero, empty S and the zero coefficient ring.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-an/thm-amb-vector-bundle-purity.proof.md",
+    "place": "Opening paragraph: projection followed by transposition; sk-thm-dnc final purity comparison"
+   }
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-an/thm-amb-vector-bundle-purity.proof.md",
+  "place": "Opening paragraph: projection followed by transposition; sk-thm-dnc final purity comparison",
+  "by": "agent"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "projection.*[Uu]nit|[Uu]nit.*projection",
+   "results": "{\"t\": \"2026-10-25T11:36:01Z\", \"tool\": \"grep\", \"query\": \"projection.*[Uu]nit|[Uu]nit.*projection\", \"sub\": \"\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/Condensed/Discrete/LocallyConstant.lean\", \"Mathlib/Geometry/Euclidean/Angle/Unoriented/TriangleInequality.lean\", \"Mathlib/Geometry/Manifold/Instances/Icc.lean\", \"Mathlib/Geometry/Manifold/Instances/Sphere.lean\", \"Mathlib/Geometry/Manifold/Instances/Sphere.lean\", \"Mathlib/Geometry/Manifold/Instances/Sphere.lean\", \"Mathlib/Geometry/Manifold/Instances/Sphere.lean\", \"Mathlib/Algebra/Algebra/NonUnitalHom.lean\"], \"digest\": \"0bbb7d89c513fa9a\"}",
+   "date": "2026-10-25",
+   "verdict": "No match for the specified projection/unit maps; abstract unit and braiding infrastructure only."
+  },
+  {
+   "tool": "loogle",
+   "query": "projectionMap_rightUnitality",
+   "results": "{\"t\": \"2026-10-25T11:36:01Z\", \"tool\": \"loogle\", \"query\": \"projectionMap_rightUnitality\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"loogle: unknown identifier 'projectionMap_rightUnitality'\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-25",
+   "verdict": "No match for the specified projection/unit maps; abstract unit and braiding infrastructure only."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived compact support tensor projection at the tensor unit followed by pullback unit equals the left unitor",
+   "results": "{\"t\": \"2026-10-25T11:36:02Z\", \"tool\": \"leanfinder\", \"query\": \"Derived compact support tensor projection at the tensor unit followed by pullback unit equals the left unitor\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.tensorRightHomEquiv_symm_coevaluation_comp_whiskerRight\", \"CategoryTheory.MonoidalCategory.tensor_\\u03b5\", \"CategoryTheory.tensorLeftHomEquiv_symm_coevaluation_comp_whiskerLeft\", \"CategoryTheory.Dial.rightUnitorImpl\", \"CategoryTheory.ExponentiableMorphism.unit_pushforwardId_hom\", \"CategoryTheory.unitOfTensorIsoUnit_hom_app\", \"CategoryTheory.MonoidalCategory.tensoringRight_\\u03b5\", \"CategoryTheory.ChosenPullbacksAlong.cartesianMonoidalCategoryFst_mapPullbackAdj_unit_app\"], \"digest\": \"181d9982be71f415\"}",
+   "date": "2026-10-25",
+   "verdict": "No match for the specified projection/unit maps; abstract unit and braiding infrastructure only."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.FiniteRingSectionDeformation",
+  "date": "2026-10-25",
+  "group": "M7"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "sk-thm-dnc",
+   "place": "Final comparison with vector-bundle purity, scalar-unit projection identity",
+   "via": [
+    "lem-trf-finite-ring-section-deformation"
+   ]
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.BundleSectionProjectionUnit",
+  "file": "lean/Sheaf/AlgebraicGeometry/BundleSectionProjectionUnit.lean",
+  "declaration": "AlgebraicGeometry.Etale.bundleSectionProjection_unit",
+  "statement": "theorem bundleSectionProjection_unit (N : ℕ)\n    (A : Type (u + 1)) [CommRing A] (hA : (N : A) = 0)\n    (S : Scheme.{u}) [IsNoetherian S] (d : ℕ)\n    (M : S.Modules) [M.IsFiniteLocallyFreeOfRank d] :\n    vectorBundlePurityProjectionMap A N hA S d M (ordinaryFiniteUnit A S) ≫\n        (vectorBundlePurityLower A S d M).map\n          (bundleSectionPurityUnitIso N A hA S d M).hom =\n      (derivedTensorLeftUnitor (ModuleCat.{u + 1} A) S\n        (vectorIntegrationSource A N hA S d M)).hom",
+  "branch": "sheaf-dag",
+  "by": "M7",
+  "date": "2026-10-25"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M7",
+  "result": "pass",
+  "landing": "20261025T143708-L-1076089",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M7",
+  "result": "pass",
+  "landing": "20261025T143708-L-1076089",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

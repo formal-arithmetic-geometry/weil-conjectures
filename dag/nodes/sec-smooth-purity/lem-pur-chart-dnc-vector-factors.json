@@ -1,0 +1,226 @@
+{
+ "id": "lem-pur-chart-dnc-vector-factors",
+ "kind": "statement",
+ "title": "Deformation and integration factors under a coordinate chart",
+ "statement": "Fix $k=\\overline{\\mathbf F}_q$, a prime $\\ell\\ne\\operatorname{char}(k)$, $n\\geq1$ and $\\Lambda=\\mathbf Z/\\ell^n\\mathbf Z$, at $E=\\mathbf Q_\\ell$ in [def-pur-conventions]. Let $Y$ be an affine finite-type $k$-scheme, let $h:U\\to Y$ be smooth separated of finite type and pure relative dimension $d\\geq0$, and let $e:U\\to A=\\mathbf A^d_Y$ be an etale $Y$-map, where $U$ is finite type over $k$ [def-weil-scheme-morphism-properties, def-sbc-smooth-morphisms, def-weil-etale-morphism, def-sbc-affine-space]. Put $p:A\\to Y$, so $h=pe$. Use fibre products [def-pc-fibre-product] $W=U\\times_YU$, $W_A=A\\times_YA$, with first projections $p_U,p_A$ and diagonal closed immersions $\\Delta_U,\\Delta_A$ [def-weil-closed-immersion]. Put $Z=U\\times_AU\\subset W$ and $O=W\\setminus(Z\\setminus\\Delta_U(U))$, with its induced open subscheme structure [def-weil-open-immersion]. Write $i:O\\hookrightarrow W$ and $q=(e\\times e)|_O:O\\to W_A$. Use the constructible exceptional inverse images [def-weil-exceptional-inverse-image], derived pullbacks [def-weil-derived-pullback-tensor-hom], and $\\omega_g=Rg^!\\Lambda_{\\operatorname{target}(g)}$. For any smooth separated finite-type $g$ with closed section $s$, put $C(g,s)=Ls^*\\omega_g$ [def-pur-section-invariant]. Let $N_U=N_{\\Delta_U/W}$ and $N_A=N_{\\Delta_A/W_A}$, with projections $\\pi_U,\\pi_A$ and zero sections $z_U,z_A$ [def-pur-normal-bundle, lem-pur-diagonal-regular-immersion]. Use the actual normal-bundle isomorphism $N_U\\xrightarrow{\\sim}U\\times_A N_A$ induced by the graded conormal pullback [lem-pur-conormal-algebra-flat-base-change], which identifies with $de$ on the tangent bundles. Let $a:C(p_U,\\Delta_U)\\xrightarrow{\\sim}Le^*C(p_A,\\Delta_A)$ be open restriction to $O$ followed by the canonical etale exceptional comparison for $q$, and let $b:C(\\pi_U,z_U)\\xrightarrow{\\sim}Le^*C(\\pi_A,z_A)$ be the corresponding comparison for this actual pullback bundle. These use the canonical etale exceptional identification and exceptional composition [thm-pur-cohomological-smoothness, lem-amb-etale-adjoint-locality].\n\nWrite $\\delta_h,\\delta_p$ for the uniquely normalized DNC maps of [thm-pur-dnc-invariance] for these diagonal sections, and write $\\beta_h,\\beta_p$ for the zero-section restrictions of the inverse integration-transposed vector-bundle purity maps [cor-pur-vector-bundle-purity, lem-pur-vector-integration-site-comparison], with targets $\\Lambda_U(d)[2d]$ and $\\Lambda_A(d)[2d]$ [def-coefficient-twists-detailed]. Then, with canonical Tate pullback [det-prop-sfb-cartesian-coefficients-twists],\n$$b\\circ\\delta_h=(Le^*\\delta_p)\\circ a,\\qquad \\beta_h=(Le^*\\beta_p)\\circ b.$$\nThe DNC comparisons in the first identity are normalized to the identity on the standard section invariant, with deformation coordinates $u_i=x_i/t$ [lem-pur-dnc-section-geometry], and its normal comparison is the actual differential specified above. The second identity concerns the actual ordinary-etale integration trace transported to the specified pro-etale category, and remains valid under any further invertible linear change of normal frame [lem-amb-linear-trace-invariance]. Thus neither identity has a scalar or sign ambiguity. They hold in the derived category, including the identity normalization at $d=0$.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sp-orientation/sk-prop-sp-orientation-charts.proof.md",
+  "place": "Step 3, second paragraph and Step 4, first sentence: normalized deformation and linear vector-integration comparisons; inherited proof Steps 6–7"
+ },
+ "stmt_deps": [
+  "def-pur-conventions",
+  "def-pc-fibre-product",
+  "def-weil-closed-immersion",
+  "def-weil-open-immersion",
+  "def-weil-exceptional-inverse-image",
+  "def-weil-derived-pullback-tensor-hom",
+  "def-pur-section-invariant",
+  "lem-pur-conormal-algebra-flat-base-change",
+  "thm-pur-dnc-invariance",
+  "def-coefficient-twists-detailed",
+  "det-prop-sfb-cartesian-coefficients-twists",
+  "lem-pur-dnc-section-geometry",
+  "lem-amb-linear-trace-invariance",
+  "def-weil-scheme-morphism-properties",
+  "def-sbc-smooth-morphisms",
+  "def-weil-etale-morphism",
+  "def-sbc-affine-space",
+  "def-pur-normal-bundle",
+  "lem-pur-diagonal-regular-immersion",
+  "thm-pur-cohomological-smoothness",
+  "lem-amb-etale-adjoint-locality",
+  "cor-pur-vector-bundle-purity",
+  "lem-pur-vector-integration-site-comparison",
+  "def-pur-diagonal-dnc-chart-data",
+  "def-pur-finite-ring-section-data",
+  "lem-trf-finite-ring-section-deformation"
+ ],
+ "proof": [
+  {
+   "text": "Use the already proved geometric constructions, now reexported from ChartDncVectorFactorData. Apply lem-pur-chart-dnc-naturality to get the exact first factor equation without an integration hypothesis.",
+   "uses": [
+    "lem-pur-chart-dnc-naturality"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply lem-pur-chart-integration-adjoints to the forward zero-section transpose equation. Postcompose with inverse Tate and precompose with beta_U inverse; cancellation and preservation of inverses by derived pullback give beta_U = normal followed by e*beta_A followed by Tate. No DNC map occurs in this calculation.",
+   "uses": [
+    "lem-pur-chart-integration-adjoints"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For every open W, frame f and automorphism G, apply bundleOrientation_frames to G followed by f. In beta inverse followed by normalBundleComparison cancel the latter isomorphism. The remaining map is nu* of bundleSectionAdjoint. Naturality of the explicit pullComparison natural isomorphism moves this adjoint through W restriction; functoriality transports the frame equation and proves FrameIndependence. All ranks and empty schemes are retained.",
+   "uses": [
+    "lem-trf-finite-ring-section-deformation"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-pur-chart-dnc-naturality",
+  "lem-pur-chart-integration-adjoints",
+  "lem-trf-finite-ring-section-deformation"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-orientation/sk-prop-sp-orientation-charts.proof.md",
+  "place": "Steps 3--4, two separate non-affine compatibility steps; complete inversion/cancellation and site-naturality proof of the frame clause in Lean."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Normalized deformation to the normal bundle comparison and vector bundle integration orientation commute with an etale Cartesian chart of diagonal centres",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"SmoothBumpCovering.embeddingPiTangent_coe\", \"module\": \"Mathlib/Geometry/Manifold/WhitneyEmbedding\", \"type\": \"∀ {ι : Type uι} {E : Type uE} [inst : NormedAddCommGroup E] [inst_1 : NormedSpace ℝ E] [inst_2 : FiniteDimensional ℝ E]\\n  {H : Type uH} [inst_3 : TopologicalSpace H] {I : ModelWithCorners ℝ E H} {M : Type uM} [inst_4 : TopologicalSpace M]\\n  [inst_5 : ChartedSpace H M] [inst_6 : IsManifold I (↑⊤) M] \", \"doc\": \"For a finite-dimensional manifold $ M $ modeled on a normed vector space $ E $ over $ \\\\mathbb{R} $ with a model with corners $ I $, and a smooth bump covering $ f $, the embedding $ \\\\operatorname{embe\"}\n  {\"name\": \"SmoothBumpCovering.comp_embeddingPiTangent_mfderiv\", \"module\": \"Mathlib/Geometry/Manifold/WhitneyEmbedding\", \"type\": \"∀ {ι : Type uι} {E : Type uE} [inst : NormedAddCommGroup E] [inst_1 : NormedSpace ℝ E] [inst_2 : FiniteDimensional ℝ E]\\n  {H : Type uH} [inst_3 : TopologicalSpace H] {I : ModelWithCorners ℝ E H} {M : Type uM} [inst_4 : TopologicalSpace M]\\n  [inst_5 : ChartedSpace H M] [inst_6 : IsManifold I (↑⊤) M] \", \"doc\": \"For a smooth bump covering $ f $ on a manifold $ M $ modeled on $ \\\\mathbb{R}^\\\\iota \\\\times \\\\mathbb{R} $, the composition of the first projection $ \\\\mathbb{R}^\\\\iota \\\\times \\\\mathbb{R} \\\\to \\\\mathbb{R}^\\\\iot\"}\n  {\"name\": \"Manifold.IsImmersionAt.instNormedSpaceComplement\", \"module\": \"Mathlib/Geometry/Manifold/Immersion\", \"type\": \"{𝕜 : Type u_1} →\\n  [inst : NontriviallyNormedField 𝕜] →\\n    {E : Type u_2} →\\n      {E'' : Type u} →\\n        [inst_1 : NormedAddCommGroup E] →\\n          [inst_2 : NormedSpace 𝕜 E] →\\n            [inst_3 : NormedAddCommGroup E''] →\\n              [inst_4 : NormedSpace 𝕜 E''] →\\n                {H : Type \", \"doc\": \"For a function between manifolds with corners that is an immersion at a point, the associated complement subspace in the model space is equipped with a normed vector space structure over the nontrivia\"}\n  {\"name\": \"SmoothBumpCovering.embeddingPiTangent_ker_mfderiv\", \"module\": \"Mathlib/Geometry/Manifold/WhitneyEmbedding\", \"type\": \"∀ {ι : Type uι} {E : Type uE} [inst : NormedAddCommGroup E] [inst_1 : NormedSpace ℝ E] [inst_2 : FiniteDimensional ℝ E]\\n  {H : Type uH} [inst_3 : TopologicalSpace H] {I : ModelWithCorners ℝ E H} {M : Type uM} [inst_4 : TopologicalSpace M]\\n  [inst_5 : ChartedSpace H M] [inst_6 : IsManifold I (↑⊤) M] \", \"doc\": \"For any point $x$ in the manifold $M$ and $x \\\\in s$, the kernel of the Fréchet derivative of the smooth embedding $f.\\\\text{embeddingPiTangent}: M \\\\to \\\\prod_{\\\\iota} (E \\\\times \\\\mathbb{R})$ at $x$ is the\"}\n  {\"name\": \"Manifold.IsImmersionAt.instNormedAddCommGroupComplement\", \"module\": \"Mathlib/Geometry/Manifold/Immersion\", \"type\": \"{𝕜 : Type u_1} →\\n  [inst : NontriviallyNormedField 𝕜] →\\n    {E : Type u_2} →\\n      {E'' : Type u} →\\n        [inst_1 : NormedAddCommGroup E] →\\n          [inst_2 : NormedSpace 𝕜 E] →\\n            [inst_3 : NormedAddCommGroup E''] →\\n              [inst_4 : NormedSpace 𝕜 E''] →\\n                {H : Type \", \"doc\": \"For a function between manifolds with corners that is an immersion at a point, the associated complement subspace in the model space is equipped with a normed additive commutative group structure.\"}\n  {\"name\": \"SmoothBumpCovering.embeddingPiTangent\", \"module\": \"Mathlib/Geometry/Manifold/WhitneyEmbedding\", \"type\": \"{ι : Type uι} →\\n  {E : Type uE} →\\n    [inst : NormedAddCommGroup E] →\\n      [inst_1 : NormedSpace ℝ E] →\\n        [inst_2 : FiniteDimensional ℝ E] →\\n          {H : Type uH} →\\n            [inst_3 : TopologicalSpace H] →\\n              {I : ModelWithCorners ℝ E H} →\\n                {M : Type uM} →\\n     \", \"doc\": \"For a finite-dimensional manifold $ M $ modeled on a normed vector space $ E $ over $ \\\\mathbb{R} $ with a model with corners $ I $, and a smooth bump covering $ f $, this function defines a $ C^\\\\infty\"}\n  {\"name\": \"inCoordinates_tangent_bundle_core_model_space\", \"module\": \"Mathlib/Geometry/Manifold/VectorBundle/Tangent\", \"type\": \"∀ {𝕜 : Type u_1} [inst : NontriviallyNormedField 𝕜] {E : Type u_2} [inst_1 : NormedAddCommGroup E]\\n  [inst_2 : NormedSpace 𝕜 E] {E' : Type u_3} [inst_3 : NormedAddCommGroup E'] [inst_4 : NormedSpace 𝕜 E'] {H : Type u_4}\\n  [inst_5 : TopologicalSpace H] {I : ModelWithCorners 𝕜 E H} {H' : Type u_5} [in\", \"doc\": \"For model spaces $ H $ and $ H' $ with associated normed vector spaces $ E $ and $ E' $, and a linear map $ \\\\phi: E \\\\to E' $, the coordinate representation of the tangent bundle core model space evalu\"}\n  {\"name\": \"inTangentCoordinates_eq\", \"module\": \"Mathlib/Geometry/Manifold/VectorBundle/Tangent\", \"type\": \"∀ {𝕜 : Type u_1} [inst : NontriviallyNormedField 𝕜] {E : Type u_2} [inst_1 : NormedAddCommGroup E]\\n  [inst_2 : NormedSpace 𝕜 E] {E' : Type u_3} [inst_3 : NormedAddCommGroup E'] [inst_4 : NormedSpace 𝕜 E'] {H : Type u_4}\\n  [inst_5 : TopologicalSpace H] {I : ModelWithCorners 𝕜 E H} {H' : Type u_5} [in\", \"doc\": \"For smooth maps $ f:N\\\\to M $, $ g:N\\\\to M' $ and a family of continuous linear maps $ \\\\phi:N\\\\to L_\\\\mathbb{K}(E,E') $, the coordinate representation of the tangent map at points $ x_0,x\\\\in N $ is given \"}",
+   "date": "2026-10-22",
+   "verdict": "no match: hits do not state the specified chart comparison with all its clauses"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Etale pullback preserves both the normalized deformation comparison and zero section inverse integration trace under the differential normal bundle isomorphism",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"KaehlerDifferential.tensorKaehlerEquivOfFormallyEtale_symm_D_algebraMap\", \"module\": \"Mathlib/RingTheory/Etale/Kaehler\", \"type\": \"∀ (R : Type u_1) (S : Type u_2) (T : Type u_3) [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : CommRing T]\\n  [inst_3 : Algebra R S] [inst_4 : Algebra R T] [inst_5 : Algebra S T] [inst_6 : IsScalarTower R S T]\\n  [inst_7 : Algebra.FormallyEtale S T] (s : S),\\n  (KaehlerDifferential.tensorKaehlerEqu\", \"doc\": \"For a formally étale algebra extension $ S \\to T $ over $ R $, the inverse of the base change isomorphism $ \\\\Omega_{S/R} \\\\otimes_S T \\\\cong \\\\Omega_{T/R} $ maps the Kähler differential $ d_T(\\\\mathrm{alge\"}\n  {\"name\": \"KaehlerDifferential.isBaseChange_of_formallyEtale\", \"module\": \"Mathlib/RingTheory/Etale/Kaehler\", \"type\": \"∀ (R : Type u_1) (S : Type u_2) (T : Type u_3) [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : CommRing T]\\n  [inst_3 : Algebra R S] [inst_4 : Algebra R T] [inst_5 : Algebra S T] [inst_6 : IsScalarTower R S T]\\n  [Algebra.FormallyEtale S T], IsBaseChange T (KaehlerDifferential.map R R S T)\", \"doc\": \"If $ S $ is a formally étale $ R $-algebra and $ T $ is an $ S $-algebra, then the module of Kähler differentials $ \\\\Omega_{T/S} $ is a base change of $ \\\\Omega_{S/R} $ via the algebra homomorphism $ S\"}\n  {\"name\": \"AlgebraicGeometry.IsEtale.of_comp\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) {Z : AlgebraicGeometry.Scheme} (g : Y ⟶ Z)\\n  [AlgebraicGeometry.IsEtale (CategoryTheory.CategoryStruct.comp f g)] [AlgebraicGeometry.LocallyOfFiniteType g]\\n  [AlgebraicGeometry.FormallyUnramified g], AlgebraicGeometry.IsEtale f\", \"doc\": \"If the composition of a morphism $ f: X \\to Y $ with a morphism $ g: Y \\to Z $ is étale, and $ g $ is locally of finite type and formally unramified, then $ f $ is an étale morphism.\"}\n  {\"name\": \"KaehlerDifferential.tensorKaehlerEquivOfFormallyEtale\", \"module\": \"Mathlib/RingTheory/Etale/Kaehler\", \"type\": \"(R : Type u_1) →\\n  (S : Type u_2) →\\n    (T : Type u_3) →\\n      [inst : CommRing R] →\\n        [inst_1 : CommRing S] →\\n          [inst_2 : CommRing T] →\\n            [inst_3 : Algebra R S] →\\n              [inst_4 : Algebra R T] →\\n                [inst_5 : Algebra S T] →\\n                  [IsScalarTower\", \"doc\": \"Given commutative rings $R$, $S$, and $T$ with $S$ an $R$-algebra, $T$ an $S$-algebra, and $T$ an $R$-algebra via the scalar tower $R \\\\to S \\\\to T$, if the algebra $S \\\\to T$ is formally étale, then the\"}\n  {\"name\": \"KaehlerDifferential.tensorKaehlerEquivOfFormallyEtale_apply\", \"module\": \"Mathlib/RingTheory/Etale/Kaehler\", \"type\": \"∀ (R : Type u_1) (S : Type u_2) (T : Type u_3) [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : CommRing T]\\n  [inst_3 : Algebra R S] [inst_4 : Algebra R T] [inst_5 : Algebra S T] [inst_6 : IsScalarTower R S T]\\n  [inst_7 : Algebra.FormallyEtale S T] (a : TensorProduct S T Ω[S⁄R]),\\n  (KaehlerDiffer\", \"doc\": \"Given commutative rings $ R $, $ S $, and $ T $ with $ S $ an $ R $-algebra, $ T $ an $ S $-algebra, and $ T $ an $ R $-algebra via the scalar tower $ R \\\\to S \\\\to T $, if the algebra $ S \\\\to T $ is fo\"}\n  {\"name\": \"AlgebraicGeometry.IsEtale.instFormallyUnramified\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.IsEtale f], AlgebraicGeometry.FormallyUnramified f\", \"doc\": \"If a morphism $ f: X \\to Y $ of schemes is étale, then it is formally unramified. This means that every étale morphism satisfies the infinitesimal lifting property characterizing formal unramification,\"}\n  {\"name\": \"StandardEtalePair.homEquiv_symm_apply\", \"module\": \"Mathlib/RingTheory/Etale/StandardEtale\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S]\\n  (P : StandardEtalePair R) (x : { x // P.HasMap x }), P.homEquiv.symm x = P.lift ↑x ⋯\", \"doc\": \"For a commutative ring $ R $, a standard étale pair $ P $ over $ R $, and an $ R $-algebra $ S $, the inverse of the equivalence $ \\\\text{homEquiv} $ maps an element $ x \\\\in S $ satisfying $ P.\\\\text{Ha\"}\n  {\"name\": \"StandardEtalePair.instFormallyEtaleRing\", \"module\": \"Mathlib/RingTheory/Etale/StandardEtale\", \"type\": \"∀ {R : Type u_1} [inst : CommRing R] (P : StandardEtalePair R), Algebra.FormallyEtale R P.Ring\", \"doc\": \"For any commutative ring $ R $ and standard étale pair $ P $ over $ R $, the ring $ P.\\\\text{Ring} $ is a formally étale $ R $-algebra. This instance asserts that the standard étale ring extension, con\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: hits do not state the specified chart comparison with all its clauses"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Etale",
+   "results": "[loogle] OK 12 hit(s)\n  {\"name\": \"AlgebraicGeometry.Etale.etale_isStableUnderBaseChange\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Etale\", \"type\": \" : CategoryTheory.MorphismProperty.IsStableUnderBaseChange @AlgebraicGeometry.Etale\", \"doc\": \"Etale is stable under base change.\"}\n  {\"name\": \"AlgebraicGeometry.Etale.instIsMultiplicativeScheme\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Etale\", \"type\": \" : CategoryTheory.MorphismProperty.IsMultiplicative @AlgebraicGeometry.Etale\", \"doc\": \"Being étale is multiplicative.\"}\n  {\"name\": \"AlgebraicGeometry.Etale.instHasOfPostcompPropertyScheme\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Etale\", \"type\": \" : CategoryTheory.MorphismProperty.HasOfPostcompProperty @AlgebraicGeometry.Etale @AlgebraicGeometry.Etale\", \"doc\": \"\"}\n  {\"name\": \"AlgebraicGeometry.Etale\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Etale\", \"type\": \" {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) : Prop\", \"doc\": \"A morphism of schemes `f : X ⟶ Y` is étale if for each affine `U ⊆ Y` and\\n`V ⊆ f ⁻¹' U`, The induced map `Γ(Y, U) ⟶ Γ(X, V)` is étale.\"}\n  {\"name\": \"AlgebraicGeometry.Etale.instHasRingHomPropertyEtale\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Etale\", \"type\": \" : AlgebraicGeometry.HasRingHomProperty @AlgebraicGeometry.Etale fun {R S} [CommRing R] [CommRing S] => RingHom.Etale\", \"doc\": \"The property of scheme morphisms `Etale` is associated with the ring\\nhomomorphism property `Etale`.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Etale.mk\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Etale\", \"type\": \" {X Y : AlgebraicGeometry.Scheme} (f : Y ⟶ X) [AlgebraicGeometry.Etale f] : X.Etale\", \"doc\": \"Constructor for objects in the étale site of a scheme `X`: it takes\\nan étale morphism `f : Y ⟶ X` as an input.\"}\n  {\"name\": \"AlgebraicGeometry.Etale.instFormallyUnramified\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Etale\", \"type\": \" {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.Etale f] : AlgebraicGeometry.FormallyUnramified f\", \"doc\": \"\"}\n  {\"name\": \"AlgebraicGeometry.Etale.instOfIsOpenImmersion\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Etale\", \"type\": \" {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.IsOpenImmersion f] : AlgebraicGeometry.Etale f\", \"doc\": \"Open immersions are étale.\"}\n  {\"name\": \"AlgebraicGeometry.Etale.instSmooth\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Etale\", \"type\": \" {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.Etale f] : AlgebraicGeometry.Smooth f\", \"doc\": \"\"}\n  {\"name\": \"AlgebraicGeometry.Etale.eq_smoothOfRelativeDimension_zero\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Etale\", \"type\": \" : @AlgebraicGeometry.Etale = @AlgebraicGeometry.SmoothOfRelativeDimension 0\", \"doc\": \"\"}\n  {\"name\": \"AlgebraicGeometry.Etale.instSmoothOfRelativeDimensionOfNatNat\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Etale\", \"type\": \" {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.Etale f] : AlgebraicGeometry.SmoothOfRelativeDimension 0 f\", \"doc\": \"\"}\n  {\"name\": \"AlgebraicGeometry.Etale.iff_smoothOfRelativeDimension_zero\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Etale\", \"type\": \" {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) : AlgebraicGeometry.Etale f ↔ AlgebraicGeometry.SmoothOfRelativeDimension 0 f\", \"doc\": \"\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: hits do not state the specified chart comparison with all its clauses"
+  },
+  {
+   "tool": "grep",
+   "query": "deformation|dualizing|purity|integration",
+   "results": "[grep] OK 0 hit(s)",
+   "date": "2026-10-22",
+   "verdict": "no match: hits do not state the specified chart comparison with all its clauses"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Normalized deformation to the normal bundle comparison and vector bundle integration orientation commute with an etale Cartesian chart of diagonal centres",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.preservesLocalization_normalizationDiagramMap\", \"module\": \"Mathlib.AlgebraicGeometry.Normalization\", \"type\": \": PreservesLocalization _ ((toOpensFunctor Y).op.whiskerLeft f.normalizationDiagramMap)\", \"doc\": \"For a scheme morphism $ f $, the normalization diagram functor $ F $ equipped with a natural transformation $ \\\\alpha: \\\\mathcal{O}_Y \\\\Rightarrow F $ satisfies the localization condition: for every affi\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.normalizationDesc\", \"module\": \"Mathlib.AlgebraicGeometry.Normalization\", \"type\": \"(H : f = f₁ ≫ f₂) : f.normalization ⟶ T\", \"doc\": \"A morphism from the normalization of a scheme morphism $ f: X \\to Y $ to another scheme $ T $, constructed as the colimit in the category of schemes of a diagram involving the affine Zariski site of $ \"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.instIsIsoToNormalizationOfIsIntegralHom\", \"module\": \"Mathlib.AlgebraicGeometry.Normalization\", \"type\": \"[IsIntegralHom f] : IsIso f.toNormalization\", \"doc\": \"For any integral morphism $ f: X \\to Y $ of schemes, the normalization morphism from $ X $ to the normalization of $ f $ is an isomorphism.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.ι_fromNormalization\", \"module\": \"Mathlib.AlgebraicGeometry.Normalization\", \"type\": \"(U : Y.affineOpens) :\\n  f.normalizationOpenCover.f U ≫ f.fromNormalization = Spec.map (f.normalizationDiagramMap.app (.op U.1)) ≫ U.2.fromSpec\", \"doc\": \"For an affine open subset $U$ of $Y$, the composition of the open cover morphism $f.\\\\text{normalizationOpenCover}.f(U)$ with the normalization morphism $f.\\\\text{fromNormalization}$ equals the composit\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.normalizationDiagram\", \"module\": \"Mathlib.AlgebraicGeometry.Normalization\", \"type\": \": Y.Opensᵒᵖ ⥤ CommRingCat\", \"doc\": \"The functor assigns to each open subset $ U $ of $ Y $ the integral closure of the ring of sections $ \\\\Gamma(Y, U) $ in $ \\\\Gamma(X, f^{-1}(U)) $, and to each inclusion $ V \\\\subseteq U $ the induced ri\"}\n  {\"name\": \"mdifferentiableOn_coordChangeL\", \"module\": \"Mathlib.Geometry.Manifold.VectorBundle.MDifferentiable\", \"type\": \": MDifferentiableOn IB 𝓘(𝕜, F →L[𝕜] F) (fun b : B ↦ (e.coordChangeL 𝕜 e' b : F →L[𝕜] F)) (e.baseSet ∩ e'.baseSet)\", \"doc\": \"The coordinate change map between two linear trivializations $ e $ and $ e' $ of a vector bundle is continuously differentiable (of class $ C^k $) on the intersection of their base sets $ e.baseSet \\\\c\"}\n  {\"name\": \"ContMDiffWithinAt.change_section_trivialization\", \"module\": \"Mathlib.Geometry.Manifold.VectorBundle.Basic\", \"type\": \"{f : M → TotalSpace F E} (hp : ContMDiffWithinAt IM IB n (π F E ∘ f) s x)\\n  (hf : ContMDiffWithinAt IM 𝓘(𝕜, F) n (fun y ↦ (e (f y)).2) s x) (he : f x ∈ e.source) (he' : f x ∈ e'.source) :\\n  ContMDiffWithinAt IM 𝓘(𝕜, F) n (fun y ↦ (e' (f y)).2) s x\", \"doc\": \"If a section of a vector bundle is $ C^n $-differentiable within a set $ s $ at a point $ x $ with respect to one trivialization, then it remains $ C^n $-differentiable within $ s $ at $ x $ when expr\"}\n  {\"name\": \"VectorBundleCore.localTriv\", \"module\": \"Mathlib.Topology.VectorBundle.Basic\", \"type\": \"(i : ι) : Trivialization F (π F Z.Fiber)\", \"doc\": \"For each index $i$, this constructs a trivialization of the vector bundle, which is a homeomorphism between the preimage of the base set $Z.\\\\text{baseSet}(i)$ under the projection map and the product \"}",
+   "date": "2026-10-22",
+   "verdict": "no match: hits do not state the specified chart comparison with all its clauses"
+  },
+  {
+   "tool": "grep",
+   "query": "deformationToNormal|vectorBundlePurity|integrationTrace|normalCone.*etale",
+   "results": "[grep] OK 0 hit(s); ; ",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern ordinary pullbacks, etale stability, normalization of schemes, or topological vector bundles; none states either specified derived chart equation"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Etale pullback compatibility of deformation to the normal bundle and integration normalized vector bundle purity",
+   "results": "[leansearch] OK 8 hit(s); ; VectorBundle.pullback, AlgebraicGeometry.Scheme.instHasPullbacksEtale, AlgebraicGeometry.IsEtale.instIsStableUnderBaseChangeScheme, ContMDiffVectorBundle.pullback, Algebra.Etale.formallyEtale, Algebra.Etale.baseChange, Algebra.FormallyEtale.instTensorProduct, VectorField.mpullback_smul_apply",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern ordinary pullbacks, etale stability, normalization of schemes, or topological vector bundles; none states either specified derived chart equation"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Etale",
+   "results": "[loogle] OK 12 hit(s); ; AlgebraicGeometry.Etale.etale_isStableUnderBaseChange, AlgebraicGeometry.Etale.instIsMultiplicativeScheme, AlgebraicGeometry.Etale.instHasOfPostcompPropertyScheme, AlgebraicGeometry.Etale, AlgebraicGeometry.Etale.instHasRingHomPropertyEtale, AlgebraicGeometry.Scheme.Etale.mk, AlgebraicGeometry.Etale.instFormallyUnramified, AlgebraicGeometry.Etale.instOfIsOpenImmersion",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern ordinary pullbacks, etale stability, normalization of schemes, or topological vector bundles; none states either specified derived chart equation"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Normalized deformation to the normal cone isomorphism and vector bundle integration transpose commute with etale coordinate charts",
+   "results": "[leanfinder] OK 8 hit(s); ; AlgebraicGeometry.Scheme.Hom.inr_toNormalization_normalizationCoprodIso_inv, AlgebraicGeometry.Scheme.Hom.inr_toNormalization_normalizationCoprodIso_inv_assoc, AlgebraicGeometry.Scheme.Hom.inl_toNormalization_normalizationCoprodIso_inv, AlgebraicGeometry.Scheme.Hom.inl_toNormalization_normalizationCoprodIso_inv_assoc, AlgebraicGeometry.Scheme.Hom.toNormalization_inr_normalizationCoprodIso_hom, AlgebraicGeometry.Scheme.Hom.toNormalization_inl_normalizationCoprodIso_hom, AlgebraicGeometry.Scheme.Hom.toNormalization_inl_normalizationCoprodIso_hom_assoc, AlgebraicGeometry.Scheme.Hom.inl_normalizationCoprodIso_hom_fromNormalization",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern ordinary pullbacks, etale stability, normalization of schemes, or topological vector bundles; none states either specified derived chart equation"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Exceptional inverse image on etale sheaves vector bundle integration orientation naturality under pullback and change of frame",
+   "results": "[leanfinder] OK 8 hit(s); ; SheafOfModules.pullbackObjFreeIso_hom_naturality, SheafOfModules.pullbackObjFreeIso_hom_naturality_assoc, VectorBundleCore.inCoordinates_eq, SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom, hom_trivializationAt_apply, hom_trivializationAt, VectorBundleCore.localTriv_symmL, Trivialization.symmₗ_linearMapAt",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern ordinary pullbacks, etale stability, normalization of schemes, or topological vector bundles; none states either specified derived chart equation"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "det-sp-orientation-charts",
+  "date": "2026-10-22",
+  "group": "Q127"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sp-orientation",
+ "blueprint": {
+  "from": {
+   "node": "det-sp-orientation-charts",
+   "place": "Step 3, second paragraph and Step 4, first sentence: normalized deformation and linear vector-integration comparisons; inherited proof Steps 6–7",
+   "via": []
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-pur-chart-dnc-vector-factors",
+  "worker": "stage1",
+  "summary": "Reused existing Cartesian chart geometry, actual differential-normal comparison, counit-normalized etale section coherence, DNC base change, integration-normalized bundle purity, and actual two-site integration comparison. Composed the three DNC equations explicitly and inverted the integration base-change equation before zero-section pullback. No new nodes, statement changes, or Lean edits.",
+  "blueprint": "det-sp-orientation-charts proof Steps 1–2 supply the chart factorization and actual normal differential; Step 3 second paragraph is realized by proof Steps 2–3; Step 4 first sentence by proof Steps 4–5.",
+  "tool_uses": [
+   {
+    "node": "lem-pur-section-etale-restriction-coherence",
+    "why": "Generic counit-normalized coherence for an etale map of smooth section pairs, including its DNC family and endpoints; the chart unit does not itself state this general coherence."
+   },
+   {
+    "node": "lem-pur-vector-integration-site-comparison",
+    "why": "Generic comparison of the actual ordinary-etale integration trace and adjoint transpose with their specified pro-etale realizations; required to identify the maps rather than an unspecified purity isomorphism."
+   },
+   {
+    "node": "lem-pur-finite-etale-dualizing-normalization",
+    "why": "Generic etale exceptional normalization: composition of counit-normalized etale comparisons (2) and agreement of smooth base change with the etale composition comparison (3); identifies the canonical comparison for q (and for the bundle map v) with the pasted comparisons; no node of the chart unit states it."
+   }
+  ]
+ },
+ "tool_uses": [],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q33-388cc2e29",
+  "group": "Q33",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q33-388cc2e29 (reviewer sub-agent of L); spot-checked: Read in full: the item, all 12 cited proof-dependency statements, the parent det-sp-orientation-charts, the sibling lem-pur-chart-diagonal-source-mate and the blueprint main-20261015 sk-prop-sp-orientation-charts.proof.md Steps 1-4. The statement is unchanged from live, which is unsplit with no repair note, so this is not a re-split. There are no new nodes, no SGA source and no cycle. Its a/b/delta/beta are the specified maps, and the definition of a matches the sibling source-mate, so the parent's product of identities is consistent. Step 1 hypotheses checked: cartesian-domain applies with X=U, j=1, V=Y (Y affine). Step 2 hypotheses checked: R_i and R_r are etale over U with Cartesian centres, all schemes are separated of finite type, B is the smooth base change along e pulled back via ks=Delta_A e, and the direction is a=B R_r R_i^{-1}. Steps 3-5 checked: the DNC endpoint and base-change equations, the cancellation chain, the inverted integration base-change equation pulled back along z_U with v z_U=z_A e, the site comparison identifying the transported transpose with cor-pur-vector-bundle-purity, and linear-trace-invariance on a trivial N_U over Noetherian U. Edge cases tested: d=0, the open immersion G_m in A^1, the squaring map on G_m (antidiagonal removed, de=2x), empty U and non-affine U. FIX, one C4/C1 fault: Steps 2 and 3 attributed the identification of the canonical etale comparison for q (and for the bundle map v) with the pasted B R_r (and B_N R_{n_r}) to the section-restriction lemma, which only treats maps over a fixed base. The needed facts are lem-pur-finite-etale-dualizing-normalization (2), rho_q = Lr^* rho_k rho_r c, and (3), smooth base change = inverse of the etale composition comparison for the Cartesian square k/e over g/p_A. These are now cited and written out, with the normal map of q split as k after r through the affine formula. proof_deps is updated and a tool_use is added. Accepted tool_uses: lem-pur-section-etale-restriction-coherence, lem-pur-vector-integration-site-comparison and lem-pur-finite-etale-dualizing-normalization, all from sk-thm-smooth-purity and all generic. Maintainer note: lem-pur-chart-exceptional-mate-coherence (unsplit) states the same two identities only for affine U. This item generalizes it to the non-affine U_V the parent needs, so it is not a duplicate; that node's future split should cite this item and the source-mate.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.Paper.ChartDncVectorFactors",
+  "declaration": "WeilConjectures.PurityFiniteSetting.ChartFactors.chart_dnc_vector_factors",
+  "declarations": [
+   "WeilConjectures.PurityFiniteSetting.ChartFactors.FrameIndependence",
+   "WeilConjectures.PurityFiniteSetting.ChartFactors.Conclusion",
+   "WeilConjectures.PurityFiniteSetting.ChartFactors.chart_dnc_vector_factors"
+  ],
+  "file": "lean/Sheaf/Paper/ChartDncVectorFactors.lean",
+  "statement": "theorem chart_dnc_vector_factors (P : PurityFiniteSetting.{u}) (_hE : P.extension = ⊥) {U Y : Scheme.{u}} [IsAffine Y] (d : ℕ) (h : U ⟶ Y) [IsSeparated h] [LocallyOfFiniteType h] [QuasiCompact h] [SmoothOfRelativeDimension d h] (aY : Y ⟶ Spec (.of P.field.k)) [LocallyOfFiniteType aY] [QuasiCompact aY] (e : U ⟶ AffineSpace (ULift.{u} (Fin d)) Y) [Etale e] (w : e ≫ (AffineSpace (ULift.{u} (Fin d)) Y ↘ Y) = h) : Conclusion P d h aY e w",
+  "branch": "newtargets-dag",
+  "by": "Q126",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "Canonical source comparison uses normalized etale locality and inverse smooth base change; the actual normal map is the zero fibre of the extended-Rees map. The normalized DNC choice is inlined from the already cited existsUnique_dncInvariance; the chart-normalization theorem is not a statement dependency. beta is the inverse integration transpose via the fixed conormal model. FrameIndependence states an equation for beta_h itself on every local conormal frame changed by Aut(F.restrict W.ι), using the canonical frame exceptional mate and the fixed affine integration adjoint transported by nu*. No affine trace theorem is substituted for this clause. All canonical construction helpers retain their existing owners. Includes non-affine U, empty U and d=0."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-660dee841",
+  "group": "Q126",
+  "result": "pass",
+  "note": "Re-delivery after RETURN 2708a099. F1 fixed: lem-pur-diagonal-dnc-chart-normalization dropped from stmt_deps; both δ inline (Dnc.existsUnique_dncInvariance …).exists.choose, identical to chartDiagonalDelta's body (thm-pur-dnc-invariance already cited); the other chart* helpers are owned by existing:true def-pur-diagonal-dnc-chart-data. F2 fixed: third conjunct FrameIndependence states, for every open W, frame f : Trivialization U d F W of the diagonal conormal F, and G : Aut(F|W), that W.ι^*(β_h⁻¹ ≫ normalBundleComparison) followed by the ν*-transported frame mate bundleFrameSectionMap (G≪≫f) equals the Tate pullback followed by the same affineSectionAdjoint. This is an equation on the item's own β_h and N_U, not a copy of a dependency; beta is unchanged (prefix factored out). Mechanical theorem-stmt_dep finding on lem-trf-finite-ring-section-deformation: PASS, because bundleOrientation = asIso via the theorem bundleAdjoint_isIso. Checked statement verbatim, 18 declarations match, only the item's lean/stmt_deps differ from live, docstrings with source and blueprint, sorry-only proofs, d=0, empty/non-affine U, universes. Advisory: ConormalAlgebraFlatBaseChange import likely redundant (H9). No files changed, no compile."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-e1755",
+  "group": "G4",
+  "result": "pass",
+  "landing": "20261025T122958-L-1821326",
+  "kind": "interface",
+  "note": "independent cc review: old ChartDncVectorFactors.lean (clone) vs delivered ChartDncVectorFactorData+item (verbatim extraction, public reexport); new sorry lemmas vs Conclusion clauses 1/2; node lean.statements vs Lean signatures; importers ChartDiagonalSourceMate and GeneralChartComparisons compiled against delivered modules (exit 0)"
+ }
+}

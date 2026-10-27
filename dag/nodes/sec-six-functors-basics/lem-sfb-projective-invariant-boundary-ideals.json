@@ -1,0 +1,341 @@
+{
+ "id": "lem-sfb-projective-invariant-boundary-ideals",
+ "kind": "statement",
+ "title": "Invariant reduced projective closures and boundary ideals",
+ "statement": "Let $k$ be an algebraically closed field [def-weil-field, def-weil-algebraic-closure], and let $G$ be a smooth affine $k$-group scheme of finite type [def-sc-group-scheme, def-sbc-smooth-morphisms, def-weil-finite-type-morphism, def-weil-affine-spectrum]. Let $V\\ne0$ be a finite-dimensional $k$-vector space with a rational representation $\\rho:G\\to\\operatorname{GL}(V)$ [def-weil-finite-dimensional-subspace, def-sc-general-linear-group]. Put $\\mathbf P(V)=\\operatorname{Proj}(S)$, where in a basis $S=k[z_0,\\ldots,z_{\\dim V-1}]$ is the total-degree graded polynomial ring [def-pc-proj, def-weil-pbc-mv-polynomial-ring]; use the induced action on the space of lines. Let $W\\subseteq\\mathbf P(V)$ be a reduced locally closed subscheme [def-pc-reduced-scheme, def-weil-closed-immersion, def-weil-open-immersion] invariant in the scheme sense that the projective action restricts to $G\\times_k W\\to W$. Let $Z$ be the reduced induced closed subscheme on $\\overline{|W|}$, and $B$ the reduced induced closed subscheme on $|Z|\\setminus |W|$ [lem-weil-pbc-reduced-induced-closed-subscheme]. Then $W$ identifies with the open subscheme $Z\\setminus |B|$, and $Z$ and $B$ are invariant closed subschemes of $\\mathbf P(V)$: their restricted actions exist and all inclusions are equivariant. For $C=Z$ or $C=B$ and $d\\geq0$, let $I(C)_d\\subseteq S_d$ be the space of degree-$d$ polynomials whose section restricts to zero on $C$, equivalently those for which every $f/z_i^d$ restricts to zero on $C\\cap D_+(z_i)$. Then $I(C)_d$ is a finite-dimensional rational $G$-subrepresentation of $S_d$ for the contragredient polynomial action $(g\\cdot f)(v)=f(\\rho(g)^{-1}v)$. Explicitly the action on $S_d\\otimes_k A$ preserves $I(C)_d\\otimes_k A$ for every commutative $k$-algebra $A$ and every $g\\in G(A)$, and restricts to a group-scheme representation on $I(C)_d$. Empty $W$, empty boundary, disconnected $G$, and all characteristics are permitted; smoothness of $G$ is retained.",
+ "source": {
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Agent-formulated scheme-level closure and boundary-ideal input to Section 7e (linear actions) and Lemma 13.46. Section 1, Corollary 1.18, determination of reduced closed subvarieties by geometric points; Section 4, representations and subrepresentations. Homogeneous ideal interface: Stacks Tag 03GL, constructions.tex, lemma-closed-in-projective-space. This equivariant combination is not quoted as a theorem of Milne or of Tag 03GL."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-weil-algebraic-closure",
+  "def-sc-group-scheme",
+  "def-sbc-smooth-morphisms",
+  "def-weil-finite-type-morphism",
+  "def-weil-affine-spectrum",
+  "def-pc-scheme",
+  "def-pc-fibre-product",
+  "def-weil-finite-dimensional-subspace",
+  "def-sc-general-linear-group",
+  "def-weil-pbc-mv-polynomial-ring",
+  "def-pc-proj",
+  "def-weil-closed-immersion",
+  "def-weil-open-immersion",
+  "def-pc-reduced-scheme",
+  "lem-weil-pbc-reduced-induced-closed-subscheme",
+  "def-weil-module-base-change",
+  "def-sfb-rational-natural-representation",
+  "def-sfb-projective-chart-fraction"
+ ],
+ "proof": [
+  {
+   "text": "Choose an open subscheme $U\\subseteq\\mathbf P(V)$ in which $W$ is closed, as in [def-weil-closed-immersion]. Closure commutes with restriction to an open subset, so $\\overline{|W|}\\cap U=|W|$. Both $W$ and $Z\\cap U$ are reduced closed subschemes of $U$: restrictions of the reduced structure sheaf remain reduced. Their supports coincide; uniqueness in [lem-weil-pbc-reduced-induced-closed-subscheme] identifies them over $U$. Thus $W$ is the open subscheme $Z\\cap U$ of $Z$, and its complement $|B|$ is closed in $Z$ and in $\\mathbf P(V)$, because $Z$ is closed there. The same uniqueness constructs the reduced boundary $B$ in $Z$. Its inclusion in $\\mathbf P(V)$ is closed: on an affine ambient chart the two closed inclusions correspond to $R\\twoheadrightarrow R/I\\twoheadrightarrow (R/I)/J$, whose composite is the quotient by the inverse image of $J$. In particular $W=Z\\setminus|B|$ as schemes, not merely as sets.",
+   "uses": [
+    "def-weil-closed-immersion",
+    "lem-weil-pbc-reduced-induced-closed-subscheme"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Tag 01J3, lemma-reduced-closed-subscheme, uniqueness; Remark 0F2L, remark-reduced-induced-locally-closed (open restriction)."
+   }
+  },
+  {
+   "text": "For $g\\in G(k)$, let $a_g$ be its projective automorphism; its inverse is $a_{g^{-1}}$ by the action identities. The assumed restricted action on $W$ gives $a_g(|W|)=|W|$, using $g^{-1}$ for the reverse inclusion. A homeomorphism preserves closure, so $a_g(|Z|)=|Z|$; subtracting $|W|$ gives $a_g(|B|)=|B|$. Transporting a reduced closed subscheme through an automorphism gives another reduced closed subscheme with the transported support. Uniqueness in [lem-weil-pbc-reduced-induced-closed-subscheme] therefore gives $a_g(Z)=Z$ and $a_g(B)=B$ as closed subschemes. This argument uses each individual $g$, with no connectedness assumption.",
+   "uses": [
+    "lem-weil-pbc-reduced-induced-closed-subscheme"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Corollary 1.18, printed p.11; agent application of reduced-induced uniqueness to projective automorphisms."
+   }
+  },
+  {
+   "text": "Fix $C=Z$ or $B$. Smoothness gives that $G$ is reduced by [sbc-lem-smooth-geometrically-reduced], applied to the fibre over $\\operatorname{Spec}k$. The standard affine charts of $C$ are quotients of $k[z_j/z_i:j\\ne i]$ by ideals, by [def-pc-proj] and [def-weil-closed-immersion]; their rings are reduced by [def-pc-reduced-scheme]. They are finitely generated. Choose an affine cover of $G$ by finitely generated $k$-algebras using [def-weil-finite-type-morphism]. Then [lem-wf-affine-product-reduced] gives an affine cover of $G\\times_k C$ by reduced finitely generated $k$-algebras. Its $k$-points are pairs $(g,c)$. Those points are dense on each such chart: if a nonempty principal open $D(h)$ contained no $k$-point, $h$ would vanish at every $k$-point and hence be zero by [lem-wf-affine-nullstellensatz-vanishing], contradicting nonemptiness. Principal opens form a basis in an affine spectrum. Thus $G\\times_k C$ is reduced and its $k$-points are topologically dense.",
+   "uses": [
+    "sbc-lem-smooth-geometrically-reduced",
+    "def-pc-proj",
+    "def-weil-closed-immersion",
+    "def-pc-reduced-scheme",
+    "lem-wf-affine-product-reduced",
+    "lem-wf-affine-nullstellensatz-vanishing",
+    "def-weil-finite-type-morphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Propositions 1.10--1.12, printed pp.9--10; Stacks Tag 056T, varieties.tex lemma-smooth-geometrically-normal; product input as stated in lem-wf-affine-product-reduced."
+   }
+  },
+  {
+   "text": "The inverse image of the closed subset $|C|$ under $a:G\\times_k C\\to\\mathbf P(V)$ is closed and contains every $k$-point by step 2. Density from step 3 makes this inverse image all of $G\\times_k C$. Since that source is reduced, [lem-weil-pbc-reduced-source-factors-through-closed-subscheme] factors $a$ through $C$. This is the required morphism $a_C:G\\times_k C\\to C$. Its unit and associativity identities follow by composing both sides with $C\\hookrightarrow\\mathbf P(V)$ and using the ambient action identities. Such composition detects equality: on affine target charts, the defining ring homomorphism is surjective, so two factorizations through the quotient agreeing before factorization agree. The same uniqueness proves equivariance of $B\\hookrightarrow Z$, $Z\\hookrightarrow\\mathbf P(V)$, and the open inclusion $W\\hookrightarrow Z$. Hence these are scheme actions, not just actions of $G(k)$.",
+   "uses": [
+    "lem-weil-pbc-reduced-source-factors-through-closed-subscheme",
+    "def-weil-closed-immersion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Tag 0356, lemma-map-into-reduction; uniqueness of factorization through an affine quotient, as in Definition 01IO."
+   }
+  },
+  {
+   "text": "The degree-$d$ monomials $z^\\alpha$ with $\\sum_i\\alpha_i=d$ form a basis of $S_d$ by [def-weil-pbc-mv-polynomial-ring]; their index set is finite since $0\\leq\\alpha_i\\leq d$. For every $k$-algebra $A$ and $g\\in G(A)$, substitute the linear forms given by $\\rho_A(g)^{-1}$ for the variables in $A[z_0,\\ldots,z_{\\dim V-1}]$. The polynomial universal property gives an $A$-linear automorphism $r_{d,A}(g)$ of the homogeneous degree-$d$ part $S_d\\otimes_k A$. Its inverse substitutes $\\rho_A(g)$. Substitution commutes with homomorphisms $A\\to A'$. Moreover $r_{d,A}(g)r_{d,A}(h)f(v)=f(\\rho_A(h)^{-1}\\rho_A(g)^{-1}v)=f(\\rho_A(gh)^{-1}v)$; the identity matrix acts identically. Thus these are natural group representations. The finite-dimensional clause of [lem-sfb-rational-representation-comodule-dictionary] makes them a group-scheme representation on $S_d$. This is precisely the required contragredient polynomial action.",
+   "uses": [
+    "def-weil-pbc-mv-polynomial-ring",
+    "lem-sfb-rational-representation-comodule-dictionary"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Remark 4.1, printed p.84, and Section 7f, printed p.145, dual and symmetric-power action; explicit substitution inserts inversion to obtain a left action."
+   }
+  },
+  {
+   "text": "For $C=Z$ or $B$, the spaces $I(C)_d$ are the chart-vanishing degree pieces in [lem-sfb-projective-closed-subscheme-homogeneous-ideal], applied with $n=\\dim V-1\\geq0$. In particular they are linear subspaces of the finite-dimensional space $S_d$. On each reduced affine chart $C\\cap D_+(z_i)$, [lem-wf-affine-nullstellensatz-vanishing] says that $f/z_i^d$ is zero if and only if it is zero at all $k$-points of that chart. Consequently $f\\in I(C)_d$ if and only if $f(v)=0$ for every nonzero vector $v\\in V$ whose line $[v]$ is in $C(k)$: choose $i$ with $v_i\\ne0$ and use $(f/z_i^d)([v])=f(v)/v_i^d$. For $g\\in G(k)$ step 2 puts $[\\rho(g)^{-1}v]$ in $C(k)$ whenever $[v]\\in C(k)$. Hence $r_{d,k}(g)f$ satisfies the same vanishing criterion. Applying this also to $g^{-1}$ proves $r_{d,k}(g)I(C)_d=I(C)_d$.",
+   "uses": [
+    "lem-sfb-projective-closed-subscheme-homogeneous-ideal",
+    "lem-wf-affine-nullstellensatz-vanishing"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/constructions.tex",
+    "place": "Tag 03GL, lemma-closed-in-projective-space, definition of I_d; Milne Corollary 1.18 and the affine vanishing principle, applied in the standard trivializations."
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-smooth-group-rational-point-subspace-test] to the rational representation $r_d$ constructed in step 5 and its subspace $I(C)_d$, stable on $G(k)$ by step 6. Its hypotheses hold: $k$ is algebraically closed, $G$ is smooth affine of finite type, and $S_d$ is finite-dimensional. Its conclusion gives $r_{d,A}(g)(I(C)_d\\otimes_k A)=I(C)_d\\otimes_k A$ for every commutative $k$-algebra $A$ and every $g\\in G(A)$. Restrict these automorphisms to that submodule; their inverses, group identities and naturality restrict as well. Choosing a basis of $I(C)_d$ and extending it to one of $S_d$ identifies its tensor with the corresponding direct summand after any scalar extension, so the restrictions are natural automorphisms of $(I(C)_d)_A$. The finite-dimensional clause of [lem-sfb-rational-representation-comodule-dictionary] now gives a group-scheme representation on $I(C)_d$, and its inclusion intertwines the actions. This proves rational subrepresentation, including stability over nonreduced algebras $A$.",
+   "uses": [
+    "lem-sfb-smooth-group-rational-point-subspace-test",
+    "lem-sfb-rational-representation-comodule-dictionary"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Corollaries 4.4--4.5, printed p.85; Remark 4.1, printed p.84, for the natural restricted representation."
+   }
+  },
+  {
+   "text": "If $W=\\varnothing$, its closure and boundary are empty and the degree pieces are all $S_d$; if $B=\\varnothing$, its pieces are likewise $S_d$. For nonempty $C$, $I(C)_0=0$, since a nonzero constant cannot vanish on a nonempty chart; the zero subspace has the unique trivial representation. When $\\dim V=1$, projective space has its single standard chart and the same arguments apply. No step divides by a positive integer, uses connectedness of $G$, or assumes that $A$ is reduced. Smoothness is used to make $G$ reduced and to invoke the rational-point subspace test. These observations verify all the stated degenerate cases.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Agent edge-case verification of the preceding construction."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-closed-immersion",
+  "lem-weil-pbc-reduced-induced-closed-subscheme",
+  "sbc-lem-smooth-geometrically-reduced",
+  "def-pc-proj",
+  "def-pc-reduced-scheme",
+  "lem-wf-affine-product-reduced",
+  "lem-wf-affine-nullstellensatz-vanishing",
+  "def-weil-finite-type-morphism",
+  "lem-weil-pbc-reduced-source-factors-through-closed-subscheme",
+  "def-weil-pbc-mv-polynomial-ring",
+  "lem-sfb-rational-representation-comodule-dictionary",
+  "lem-sfb-projective-closed-subscheme-homogeneous-ideal",
+  "lem-sfb-smooth-group-rational-point-subspace-test"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Section 1, Propositions 1.10--1.12 and Corollary 1.18; Section 4, Remark 4.1 and Corollaries 4.4--4.5; Section 7f, p.145. Scheme-level argument assembled explicitly using Stacks Tags 01J3, 0356 and the chart ideal of Tag 03GL; not claimed to be a theorem quoted verbatim from Milne."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Projective closure of an invariant locally closed subvariety and its reduced boundary are invariant and their homogeneous vanishing ideals are rational subrepresentations",
+   "results": "{\"t\": \"2026-10-24T00:58:42Z\", \"tool\": \"leanfinder\", \"query\": \"Projective closure of an invariant locally closed subvariety and its reduced boundary are invariant and their homogeneous vanishing ideals are rational subrepresentations\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"ProjectiveSpectrum.vanishingIdeal_closure\", \"AlgebraicGeometry.ProjIsoSpecTopComponent.FromSpec.carrier.asHomogeneousIdeal\", \"AlgebraicGeometry.ProjIsoSpecTopComponent.FromSpec.carrier.relevant\", \"ProjectiveSpectrum.vanishingIdeal\", \"ProjectiveSpectrum.zeroLocus_vanishingIdeal_eq_closure\", \"AlgebraicGeometry.ProjIsoSpecTopComponent.FromSpec.carrier\", \"ProjectiveSpectrum.homogeneousIdeal_le_vanishingIdeal_zeroLocus\", \"ProjectiveSpectrum.mem_vanishingIdeal\"], \"digest\": \"a5370f97bd3031a8\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: Proj vanishingIdeal and its closure identity have no group action or rational representation clause; abstract projectivization actions also omit invariant scheme closures and polynomial ideal subrepresentations."
+  },
+  {
+   "tool": "loogle",
+   "query": "ProjectiveSpectrum, \"invariant\"",
+   "results": "{\"t\": \"2026-10-24T01:02:00Z\", \"tool\": \"loogle\", \"query\": \"ProjectiveSpectrum, \\\"invariant\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: Proj vanishingIdeal and its closure identity have no group action or rational representation clause; abstract projectivization actions also omit invariant scheme closures and polynomial ideal subrepresentations."
+  },
+  {
+   "tool": "grep",
+   "query": "invariant.*(closure|ideal)|stable.*(closure|ideal)|vanishingIdeal",
+   "results": "{\"t\": \"2026-10-24T00:58:43Z\", \"tool\": \"grep\", \"query\": \"invariant.*(closure|ideal)|stable.*(closure|ideal)|vanishingIdeal\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Topology.lean\", \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Topology.lean\", \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Topology.lean\", \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Topology.lean\", \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Topology.lean\", \"Mathlib/AlgebraicGeometry/Properties.lean\", \"Mathlib/AlgebraicGeometry/StructureSheaf.lean\", \"Mathlib/AlgebraicGeometry/StructureSheaf.lean\"], \"digest\": \"35803fd346cdeb47\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: Proj vanishingIdeal and its closure identity have no group action or rational representation clause; abstract projectivization actions also omit invariant scheme closures and polynomial ideal subrepresentations."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The homogeneous ideal of a stable closed projective subscheme is a rational subrepresentation in every degree",
+   "results": "{\"t\": \"2026-10-24T00:58:43Z\", \"tool\": \"leansearch\", \"query\": \"The homogeneous ideal of a stable closed projective subscheme is a rational subrepresentation in every degree\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Ideal.IsHomogeneous\", \"HomogeneousIdeal\", \"HomogeneousIdeal.irrelevant\", \"Ideal.isHomogeneous_iff_forall_subset\", \"AlgebraicGeometry.ProjIsoSpecTopComponent.FromSpec.carrier.asIdeal.homogeneous\", \"Ideal.IsHomogeneous.mem_iff\", \"Ideal.homogeneousCore\", \"AlgebraicGeometry.ProjIsoSpecTopComponent.FromSpec.carrier.asHomogeneousIdeal\"], \"digest\": \"267e080837e42a24\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: Proj vanishingIdeal and its closure identity have no group action or rational representation clause; abstract projectivization actions also omit invariant scheme closures and polynomial ideal subrepresentations."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A group representation on projective space preserves the ideal of the boundary of an invariant locally closed subvariety",
+   "results": "{\"t\": \"2026-10-24T00:58:45Z\", \"tool\": \"leanfinder\", \"query\": \"A group representation on projective space preserves the ideal of the boundary of an invariant locally closed subvariety\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Projectivization.smul_mk\", \"Projectivization.smul_def\", \"Projectivization.instMulAction\", \"AlgebraicGeometry.ProjIsoSpecTopComponent.FromSpec.carrier.relevant\", \"Rep.instPreservesProjectiveObjectsActionModuleCatSubtypeMemSubgroupResSubtype\", \"ProjectiveSpectrum.vanishingIdeal_closure\", \"AlgebraicGeometry.ProjectiveSpectrum.Proj.mk_mem_toSpec_base_apply\", \"AlgebraicGeometry.Proj\"], \"digest\": \"bce19f25a657af7e\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: Proj vanishingIdeal and its closure identity have no group action or rational representation clause; abstract projectivization actions also omit invariant scheme closures and polynomial ideal subrepresentations."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Projective closure of an invariant reduced locally closed subscheme and its boundary have homogeneous ideals stable as rational subrepresentations",
+   "results": "{\"t\": \"2026-10-24T01:34:21Z\", \"tool\": \"leanfinder\", \"query\": \"Projective closure of an invariant reduced locally closed subscheme and its boundary have homogeneous ideals stable as rational subrepresentations\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.ProjIsoSpecTopComponent.FromSpec.carrier.asHomogeneousIdeal\", \"AlgebraicGeometry.ProjIsoSpecTopComponent.FromSpec.carrier.relevant\", \"AlgebraicGeometry.ProjIsoSpecTopComponent.FromSpec.carrier.asIdeal.homogeneous\", \"AlgebraicGeometry.Proj\", \"AlgebraicGeometry.ProjIsoSpecTopComponent.ToSpec.carrier\", \"AlgebraicGeometry.ProjIsoSpecTopComponent.FromSpec.carrier\", \"AlgebraicGeometry.ProjIsoSpecTopComponent.FromSpec.toFun\", \"ProjectiveSpectrum.asHomogeneousIdeal\"], \"digest\": \"f9d666a6833840b8\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: returned Proj, homogeneous ideal and immersion declarations lack the equivariant reduced closure/boundary and rational subrepresentation conclusions. Read ProjectiveSpectrum/Topology.lean:86--108 and Scheme.lean:30--70; no returned declaration proves this item."
+  },
+  {
+   "tool": "loogle",
+   "query": "ProjectiveSpectrum, \"invariant\"",
+   "results": "{\"t\": \"2026-10-24T01:34:22Z\", \"tool\": \"loogle\", \"query\": \"ProjectiveSpectrum, \\\"invariant\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: returned Proj, homogeneous ideal and immersion declarations lack the equivariant reduced closure/boundary and rational subrepresentation conclusions. Read ProjectiveSpectrum/Topology.lean:86--108 and Scheme.lean:30--70; no returned declaration proves this item."
+  },
+  {
+   "tool": "grep",
+   "query": "invariant.*(closure|ideal)|stable.*(closure|ideal)|vanishingIdeal",
+   "results": "{\"t\": \"2026-10-24T01:34:49Z\", \"tool\": \"grep\", \"query\": \"invariant.*(closure|ideal)|stable.*(closure|ideal)|vanishingIdeal\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/Properties.lean\", \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Topology.lean\", \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Topology.lean\", \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Topology.lean\", \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Topology.lean\", \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Topology.lean\", \"Mathlib/AlgebraicGeometry/FunctionField.lean\", \"Mathlib/AlgebraicGeometry/AffineTransitionLimit.lean\"], \"digest\": \"a0dd300845dcbef7\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: returned Proj, homogeneous ideal and immersion declarations lack the equivariant reduced closure/boundary and rational subrepresentation conclusions. Read ProjectiveSpectrum/Topology.lean:86--108 and Scheme.lean:30--70; no returned declaration proves this item."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The homogeneous vanishing ideal of a stable closed projective subscheme is a rational subrepresentation in every degree",
+   "results": "{\"t\": \"2026-10-24T01:35:03Z\", \"tool\": \"leansearch\", \"query\": \"The homogeneous vanishing ideal of a stable closed projective subscheme is a rational subrepresentation in every degree\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"MvPolynomial.vanishingIdeal\", \"ProjectiveSpectrum.vanishingIdeal\", \"HomogeneousIdeal.irrelevant\", \"AlgebraicGeometry.Scheme.IdealSheafData.vanishingIdeal\", \"ProjectiveSpectrum.homogeneousIdeal_le_vanishingIdeal_zeroLocus\", \"ProjectiveSpectrum.mem_vanishingIdeal\", \"ProjectiveSpectrum.coe_vanishingIdeal\", \"Ideal.isHomogeneous_iff_forall_subset\"], \"digest\": \"4f08c27fa19e48ae\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: returned Proj, homogeneous ideal and immersion declarations lack the equivariant reduced closure/boundary and rational subrepresentation conclusions. Read ProjectiveSpectrum/Topology.lean:86--108 and Scheme.lean:30--70; no returned declaration proves this item."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A smooth affine algebraic group preserves the reduced projective closure and boundary of an invariant locally closed subscheme",
+   "results": "{\"t\": \"2026-10-24T01:35:04Z\", \"tool\": \"leanfinder\", \"query\": \"A smooth affine algebraic group preserves the reduced projective closure and boundary of an invariant locally closed subscheme\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Proj\", \"AlgebraicGeometry.instIsClosedImmersionLiftCoborder\", \"AlgebraicGeometry.Scheme.Hom.coborderRange\", \"AlgebraicGeometry.ProjIsoSpecTopComponent.fromSpec\", \"AlgebraicGeometry.Proj.affineOpenCover\", \"AlgebraicGeometry.Proj.affineOpenCoverOfIrrelevantLESpan\", \"AlgebraicGeometry.Proj.isAffineOpen_basicOpen\", \"AlgebraicGeometry.Proj.opensRange_awayι\"], \"digest\": \"bf0f77ce64e29e79\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: returned Proj, homogeneous ideal and immersion declarations lack the equivariant reduced closure/boundary and rational subrepresentation conclusions. Read ProjectiveSpectrum/Topology.lean:86--108 and Scheme.lean:30--70; no returned declaration proves this item."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-sumihiro-normal-torus-affine-neighbourhood",
+  "date": "2026-10-24",
+  "group": "Q26"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Haboush symmetric-power lifting for a trivial quotient representation. Supporting representation-theoretic input: Steinberg endomorphisms detect a nonzero fixed vector. Supporting Self-duality of rho section modules at characteristic-dependent weights. Supporting input: Positive-characteristic simplicity step, using irreducibility of the Steinberg induced module rather than assuming self-duality. Numerical input to the dimension comparison: Weyl dimension of the induced module. Supporting Integral Euler character of arbitrary flag line bundles. Section 22d, proof of Theorem 22.50, p.480: general fixed-point input, stated here in its integral equivariant form; Example 22.36, pp.473--474, for formal characters. WANTED: Nielsen 1974 general fixed-point theorem and Iversen 1976, 9.4; neither document is present. The integral formulation is an agent-supplied supporting statement. Supporting input: Section 22d, proof of Theorem 22.50, p.480: agent-supplied concentration prerequisite, not the numerical fixed-point formula itself. WANTED: Thomason, Une formule de Lefschetz en K-theorie equivariante algebrique, Duke Math. J. 53 (1986), concentration theorem; not present locally. No proof of concentration is claimed to occur in Milne. Supporting step: The concentration theorem's nonfixed-locus annihilation argument in the proof of the item. Geometric input to nonfixed-locus annihilation: invariant affine strata of the reduction, before the Laurent-coefficient and localization arguments. Supporting normal-case neighbourhood input used after passing to the invariant smooth locus, before removing one affine open in the Noetherian induction. Supporting proof input: Form the invariant reduced projective closure and boundary; use the boundary homogeneous degree pieces as rational representations before extracting a weight polynomial.",
+   "via": [
+    "lem-sfb-sumihiro-normal-torus-affine-neighbourhood",
+    "lem-sfb-torus-invariant-affine-filtration",
+    "lem-sfb-torus-nonfixed-complement-annihilation",
+    "lem-sfb-torus-coherent-concentration",
+    "lem-sfb-torus-coherent-fixed-point-formula",
+    "lem-sfb-flag-line-euler-alternant",
+    "lem-sfb-induced-weyl-dimension-formula",
+    "lem-sfb-steinberg-induced-module-irreducible",
+    "lem-sfb-rho-section-self-duality",
+    "lem-sfb-steinberg-endomorphism-detection",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-projective-invariant-boundary-ideals",
+  "worker": "stage1",
+  "group": "NN",
+  "summary": "Kept the statement unchanged. Proved open identification by reduced-induced uniqueness, invariance on rational points by projective automorphisms, scheme-level actions by reduced-product density and closed factorization, and all-algebra ideal stability by the existing smooth-group rational-point subspace test. Constructed the polynomial action by explicit matrix substitution. Reused all supporting statements; no new nodes. Checked empty loci, degree zero, dimension one, disconnected groups and nonreduced scalar algebras.",
+  "blueprint": "Supporting projective-closure and boundary-ideal argument of the immediate parent lem-sfb-sumihiro-normal-torus-affine-neighbourhood, in the inherited chain to det-thm-sf-ctf-stability-direct-images, clause (3). Current latest blueprint sk-thm-sf-ctf-stability-direct-images.proof.md (3) has the direct-image preservation route; this generic geometric prerequisite does not replace a unit step. Blueprint searches for invariant closure, projective closure and homogeneous ideal found no equivalent imported node.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-reduced-induced-closed-subscheme",
+    "why": "Generic supporting statement used with exactly its stated hypotheses; uniqueness of reduced closed structures, no substitute in this unit."
+   },
+   {
+    "node": "sbc-lem-smooth-geometrically-reduced",
+    "why": "Generic supporting statement used with exactly its stated hypotheses; smoothness implies reducedness of G over k."
+   },
+   {
+    "node": "lem-wf-affine-product-reduced",
+    "why": "Generic supporting statement used with exactly its stated hypotheses; affine charts of G times C are reduced finite-type algebras."
+   },
+   {
+    "node": "lem-wf-affine-nullstellensatz-vanishing",
+    "why": "Generic supporting statement used with exactly its stated hypotheses; rational-point density and chart-section vanishing on reduced finite-type affine schemes."
+   },
+   {
+    "node": "lem-weil-pbc-reduced-source-factors-through-closed-subscheme",
+    "why": "Generic supporting statement used with exactly its stated hypotheses; closed factorization of the ambient action from the reduced product."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-reduced-induced-closed-subscheme",
+  "sbc-lem-smooth-geometrically-reduced",
+  "lem-wf-affine-product-reduced",
+  "lem-wf-affine-nullstellensatz-vanishing",
+  "lem-weil-pbc-reduced-source-factors-through-closed-subscheme"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-NN-e2ac83993",
+  "group": "NN",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NN-e2ac83993 (reviewer sub-agent of L); spot-checked: I read the item, all 8 steps and the 14 cited statements in full. The delivery adds no new nodes and leaves the statement unchanged; the only stmt_deps change adds def-weil-module-base-change, which the statement needs for the tensor clause. proof_deps equals the union of the step uses. The item is still unsplit in live and side-live, and there is no repair note. Step by step: (1) W is closed in an open U, the closure meets U in |W|, and uniqueness of the reduced induced structure (01J3, 0F2L) gives W = Z\\|B| as schemes; B -> P(V) is closed as a composite of quotients. (2) a_g is a homeomorphism, so it preserves Z and B as reduced subschemes by uniqueness; this works for each g separately (cf. Milne Cor 1.18). (3) G is reduced by sbc-lem-smooth-geometrically-reduced applied to the fibre over k; the charts of C are reduced and finitely generated; lem-wf-affine-product-reduced applies; density of k-points follows from the Nullstellensatz vanishing clause. (4) The factorization lemma applies because the source is reduced; the action identities and equivariance follow because closed immersions are monomorphisms. (5) The action by substituting rho(g)^{-1} is a left action, (gh)^{-1}=h^{-1}g^{-1}, matching Milne 7f p.145 (checked; 7e->7f correction right); the dictionary's finite-dimensional clause makes it a homomorphism to GL. (6) I(C)_d equals the 03GL-node I_d; vanishing on k-points gives G(k)-stability, both inclusions. (7) The hypotheses of the subspace test hold exactly (Milne Cor 4.4-4.5); direction (i)=>(ii) covers every algebra A including nonreduced ones; restricting via a basis extension and the dictionary gives the subrepresentation. (8) The edge cases are right: empty C, I_0, dim V=1, every characteristic. I tested a small case: G_m with weights (0,1) on k^2 gives I(B)_d spanned by z0^a z1^b with a,b>=1, which is a subrepresentation. The five off-unit tool_uses are generic black boxes and are accepted. Stacks tags 01J3, 0F2L, 0356, 03GL and 056T are verified; no SGA source is used, and the DAG search found no duplicate."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.ProjectiveInvariantBoundaryIdeals",
+  "declaration": "AlgebraicGeometry.ProjectiveInvariantBoundary.projective_invariant_boundary_ideals",
+  "declarations": [
+   "AlgebraicGeometry.ProjectiveInvariantBoundary.space",
+   "AlgebraicGeometry.ProjectiveInvariantBoundary.substitution",
+   "AlgebraicGeometry.ProjectiveInvariantBoundary.IsInduced",
+   "AlgebraicGeometry.ProjectiveInvariantBoundary.reducedClosed",
+   "AlgebraicGeometry.ProjectiveInvariantBoundary.inclusion",
+   "AlgebraicGeometry.ProjectiveInvariantBoundary.closureSet",
+   "AlgebraicGeometry.ProjectiveInvariantBoundary.polynomialTensor",
+   "AlgebraicGeometry.ProjectiveInvariantBoundary.projective_invariant_boundary_ideals"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/ProjectiveInvariantBoundaryIdeals.lean",
+  "statement": "theorem projective_invariant_boundary_ideals [IsAlgClosed k] [Smooth (G ↘ Spec (.of k))] [LocallyOfFiniteType (G ↘ Spec (.of k))] [QuasiCompact (G ↘ Spec (.of k))] (n : ℕ) (ρ : GeneralLinearGroup.RationalHom (G.asOver (Spec (.of k))) (ULift.{u} (Fin (n + 1)))) [IsMonHom ρ] (a : ModObj (G.asOver (Spec (.of k))) (space k n)) (ha : IsInduced G n ρ a) (W : Over (Spec (.of k))) [IsReduced W.left] (j : W ⟶ space k n) [IsImmersion j.left] (aW : ModObj (G.asOver (Spec (.of k))) W) (hj : aW.smul ≫ j = (𝟙 (G.asOver (Spec (.of k))) ⊗ₘ j) ≫ a.smul) : ∃ B : TopologicalSpace.Closeds (space k n).left, (B : Set (space k n).left) = closure (Set.range j.left) \\ Set.range j.left ∧ ∃ (aZ : ModObj (G.asOver (Spec (.of k))) (reducedClosed n (closureSet n j))) (aB : ModObj (G.asOver (Spec (.of k))) (reducedClosed n B)) (jW : W ⟶ reducedClosed n (closureSet n j)) (jB : reducedClosed n B ⟶ reducedClosed n (closureSet n j)), IsOpenImmersion jW.left ∧ IsClosedImmersion jB.left ∧ jW ≫ inclusion n (closureSet n j) = j ∧ jB ≫ inclusion n (closureSet n j) = inclusion n B ∧ Set.range jW.left = (Set.range jB.left)ᶜ ∧ aZ.smul ≫ inclusion n (closureSet n j) = (𝟙 (G.asOver (Spec (.of k))) ⊗ₘ inclusion n (closureSet n j)) ≫ a.smul ∧ aB.smul ≫ inclusion n B = (𝟙 (G.asOver (Spec (.of k))) ⊗ₘ inclusion n B) ≫ a.smul ∧ aW.smul ≫ jW = (𝟙 (G.asOver (Spec (.of k))) ⊗ₘ jW) ≫ aZ.smul ∧ aB.smul ≫ jB = (𝟙 (G.asOver (Spec (.of k))) ⊗ₘ jB) ≫ aZ.smul ∧ ∀ d : ℕ, ∃ r : RationalRepresentation.NaturalRepresentation (k := k) G (homogeneousSubmodule (Fin (n + 1)) k d), (∀ (A : Type u) [CommRing A] [Algebra k A] (g : points (G.asOver (Spec (.of k))) A) (t : A ⊗[k] homogeneousSubmodule (Fin (n + 1)) k d), polynomialTensor n d A (r.action A g t) = MvPolynomial.aeval (fun i : Fin (n + 1) ↦ ∑ l : Fin (n + 1), C (((ρ.points A g)⁻¹ : Matrix.GeneralLinearGroup (ULift.{u} (Fin (n + 1))) A) (ULift.up i) (ULift.up l)) * X l) (polynomialTensor n d A t)) ∧ ∀ T ∈ ({closureSet n j, B} : Set (TopologicalSpace.Closeds (space k n).left)), ∃ I : Submodule k (homogeneousSubmodule (Fin (n + 1)) k d), (∀ F : homogeneousSubmodule (Fin (n + 1)) k d, F ∈ I ↔ ∀ i : Fin (n + 1), (inclusion n T).left.app (Proj.basicOpen (homogeneousSubmodule (Fin (n + 1)) k) (X i)) (projectiveClosedSubschemeChartFraction k n d F i) = 0) ∧ FiniteDimensional k I ∧ (∀ (A : Type u) [CommRing A] [Algebra k A] (g : points (G.asOver (Spec (.of k))) A), (I.baseChange A).map (r.action A g).toLinearMap = I.baseChange A) ∧ ∃ s : RationalRepresentation.NaturalRepresentation (k := k) G I, (∀ (A : Type u) [CommRing A] [Algebra k A] (g : points (G.asOver (Spec (.of k))) A), I.subtype.baseChange A ∘ₗ (s.action A g).toLinearMap = (r.action A g).toLinearMap ∘ₗ I.subtype.baseChange A) ∧ ∃ (b : Module.Basis (ULift.{u} (Fin (Module.finrank k I))) k I) (τ : GeneralLinearGroup.RationalHom (G.asOver (Spec (.of k))) (ULift.{u} (Fin (Module.finrank k I)))), IsMonHom τ ∧ ∀ (A : Type u) [CommRing A] [Algebra k A] (g : points (G.asOver (Spec (.of k))) A) (t : A ⊗[k] I), s.action A g t = (Matrix.GeneralLinearGroup.toLin' (b.baseChange A) (GeneralLinearGroup.homMulEquiv (ULift.{u} (Fin (Module.finrank k I))) k A (g ≫ τ))).toLinearEquiv t",
+  "branch": "newtargets-dag",
+  "by": "Q91",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "Coordinate form with dim(V)=n+1; ULift is only the index convention of the existing general linear group. Canonical helper definitions package the existing polynomial Proj, its reduced closed subschemes, the actual matrix substitution and the actual tensor inclusion. IsInduced fixes the projective scheme action by the universal matrix and both projections of affine base change. Homogeneous ideal pieces are uniquely specified by the existing chart fractions. Restricted representations include natural actions over all algebras, tensor inclusion intertwiners, and group-scheme homomorphisms with specified point actions, including dimension zero. H2 repair: statement dependencies now cite existing-definition ownership nodes for NaturalRepresentation/genericPoint and projectiveClosedSubschemeChartFraction; the dictionary and homogeneous-ideal theorems remain proof dependencies. Lean source unchanged from returned head 23e70f25006a."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-29d2965d4",
+  "group": "Q91",
+  "result": "pass",
+  "note": "Re-delivery after H2 RETURN of 23e70f25006a. Lean module byte-identical (sha c5e37fcf), maths re-checked: hypotheses, IsInduced sign (z_i↦Σρ_ij z_j), ρ⁻¹ left action on S_d, W=Z\\B open/closed identification, aZ/aB equivariances, chart-fraction I(C)_d, all-A stability, restricted rep with τ/basis; edge cases empty W/B, d=0, n=0, dim I=0. Item vs live differs only in lean and stmt_deps (theorem deps replaced by def-sfb-rational-natural-representation and def-sfb-projective-chart-fraction); statement and proof_deps unchanged; lean.statement verbatim in file. Both new existing:true def nodes match the published declarations (NaturalRepresentation action/naturality + genericPoint=isoSpec.inv; F/z_i^d via awayToSection) with correct sources (Milne 4(a)/Rem 4.1; Stacks 03GL), no extra hypotheses, valid stmt_deps; no other owner in live/side-live. Minor: existing docstrings name theorem blueprint ids (not blocking). No compile needed (no changes)."
+ }
+}

@@ -1,0 +1,126 @@
+{
+ "id": "lem-weil-pbc-ringed-tensor-koszul-existence",
+ "kind": "statement",
+ "title": "Koszul exchange for any K-flat tensor presentation",
+ "statement": "Let J be a Grothendieck topology on a category with object universe c and morphism universe v, let A be a commutative ring sheaf in max(c,v,u), and assume module sheafification and a derived category in universe w. For any closed structure S for the fixed derived internal Hom and any tensor model T of [def-coef-ringed-tensor-hom-model], there is a natural isomorphism sigma from S.tensor to its composite with swapping factors. For every pair of K-flat complexes P,Q there is an ordinary total-tensor exchange beta: Tot(P tensor Q) isomorphic to Tot(Q tensor P). On the (p,q) summand beta takes the coefficientTensorGenerator(x,y) to (-1)^(p*q) times coefficientTensorGenerator(y,x) on (q,p). Its derived map fits T(P,Q).hom followed by sigma(QP,QQ) = Q(beta.hom) followed by T(Q,P).hom. No flat-term, boundedness or slice hypothesis is required.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 06YU and 0FPQ; signed exchange of total tensor complexes and its localization."
+ },
+ "stmt_deps": [
+  "def-coef-ringed-tensor-hom-model"
+ ],
+ "proof": [
+  {
+   "text": "The K-flat inclusion followed by Q is a localization, using the proved kFlatLocalization helper of [lem-sf-ringed-derived-tensor-hom-adjunction]. Its product with itself is a localization by Mathlib Localization.Prod. Compose the inverse of T.comparison with the native comparison of [lem-sf-ringed-derived-native-tensor]. Fully faithful whiskering along this product localization descends that natural isomorphism to e: S.tensor isomorphic to the native derived tensor. The preimage equation identifies its components on every K-flat pair with T.iso.inv followed by native tensorIso.hom.",
+   "uses": [
+    "lem-sf-ringed-derived-tensor-hom-adjunction",
+    "lem-sf-ringed-derived-native-tensor",
+    "def-coef-ringed-tensor-hom-model"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 06YU; the K-flat construction of derived tensor."
+   }
+  },
+  {
+   "text": "Conjugate the native natural braiding by e and the inverse of e after swapping the two arguments. Naturality is preserved by composition. Identify coefficientTotalTensor definitionally with the native total tensor and choose beta to be its native complex braiding. Its pure generator formula is exactly complexConstraints.symmetry. To obtain the model square, postcompose with e on the reversed pair, cancel its inverse, substitute the two component equations from the previous step, and apply the proved native symmetry_square. Cancel that postcomposition isomorphism to finish.",
+   "uses": [
+    "lem-sf-ringed-derived-native-tensor",
+    "lem-sf-ringed-tensor-complex-constraints"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0FPQ and More on Algebra, sign rules; the signed total-tensor exchange."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-coef-ringed-tensor-hom-model",
+  "lem-sf-ringed-derived-native-tensor",
+  "lem-sf-ringed-derived-tensor-hom-adjunction",
+  "lem-sf-ringed-tensor-complex-constraints"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 06YU and 0FPQ; signed exchange of total tensor complexes and its localization."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A tensor product presented on K-flat complexes inherits the Koszul braiding by localization",
+   "results": "service unavailable: error code: 502 ",
+   "date": "2026-10-26",
+   "verdict": "No exact theorem for this ringed-site normalization; use the generic APIs and the cited project declarations."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.BraidedCategory.braiding_naturality",
+   "results": "1 hits: CategoryTheory.BraidedCategory.braiding_naturality",
+   "date": "2026-10-26",
+   "verdict": "No exact theorem for this ringed-site normalization; use the generic APIs and the cited project declarations."
+  },
+  {
+   "tool": "grep",
+   "query": "ringedSlice_normalizedComparisons|RingedSliceKoszulModel|RingedSliceFlatRestriction",
+   "results": "0 hits: ",
+   "date": "2026-10-26",
+   "verdict": "No exact theorem for this ringed-site normalization; use the generic APIs and the cited project declarations."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Algebra.Homology.RingedSliceNormalizedComparisons",
+  "date": "2026-10-26",
+  "group": "K2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-delta-restriction",
+   "place": "The signed exchange used in the tensor and transposition compatibility for restriction.",
+   "via": [
+    "lem-weil-pbc-ringed-slice-normalized-comparisons",
+    "lem-weil-pbc-ringed-slice-evaluation-transpose"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Algebra.Homology.RingedTensorKoszulExistence",
+  "file": "lean/Sheaf/Algebra/Homology/RingedTensorKoszulExistence.lean",
+  "declaration": "CategoryTheory.ringedTensor_koszul_exists",
+  "statement": "theorem ringedTensor_koszul_exists\n    (S : CoefficientClosedStructure (derivedInternalHomOfUniverses.{c, v, u, w} J A))\n    (T : CoefficientTensorModels.{u, c, v, w} J A S) :\n    ∃ σ : S.tensor ≅ (Prod.swap _ _) ⋙ S.tensor,\n      ∀ (P Q : CochainComplex (SheafOfModules.{max c v u} ((sheafCompose J (forget₂\n        CommRingCat.{max c v u} RingCat.{max c v u})).obj A)) ℤ)\n        (hP : CochainComplex.IsKFlatIndependentCoefficients (J := J) (R := A) P)\n        (hQ : CochainComplex.IsKFlatIndependentCoefficients (J := J) (R := A) Q),\n      ∃ β : (coefficientTotalTensor.{u, c, v} J A).obj (P, Q) ≅\n          (coefficientTotalTensor.{u, c, v} J A).obj (Q, P),\n        (∀ (p q k : ℤ) (h : p + q = k) (h' : q + p = k) (V : Cᵒᵖ)\n          (x : (P.X p).val.obj V) (y : (Q.X q).val.obj V),\n          (β.hom.f k).val.app V\n            (coefficientTensorGenerator.{u, c, v} J A P Q p q k h V x y) =\n          (p * q).negOnePow •\n            coefficientTensorGenerator.{u, c, v} J A Q P q p k h' V y x) ∧\n        (T.iso J A S P Q hP hQ).hom ≫\n          σ.hom.app (DerivedCategory.Q.obj P, DerivedCategory.Q.obj Q) =\n        DerivedCategory.Q.map β.hom ≫ (T.iso J A S Q P hQ hP).hom",
+  "branch": "sheaf-dag",
+  "by": "K2",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K2",
+  "result": "pass",
+  "landing": "20261026T135527-L-4040856",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K2",
+  "result": "pass",
+  "landing": "20261026T135527-L-4040856",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

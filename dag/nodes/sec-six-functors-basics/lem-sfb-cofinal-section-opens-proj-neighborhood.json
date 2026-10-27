@@ -1,0 +1,379 @@
+{
+ "id": "lem-sfb-cofinal-section-opens-proj-neighborhood",
+ "kind": "statement",
+ "title": "Mutually refining section opens give isomorphic Proj neighborhoods",
+ "statement": "Let $B$ be an affine scheme and let $q:Y\\to B$ be a morphism of schemes [def-pc-scheme]. Assume $Y$ is quasi-compact [def-weil-pbc-quasi-compact-scheme] and quasi-separated, meaning that intersections of affine opens of $Y$ are quasi-compact. Let $L,K$ be invertible $\\mathcal O_Y$-modules [def-sc-invertible-module], with section rings $A_L=\\bigoplus_{n\\geq0}\\Gamma(Y,L^{\\otimes n})$ and $A_K=\\bigoplus_{n\\geq0}\\Gamma(Y,K^{\\otimes n})$ [def-sc-invertible-section-ring]. For a positive-degree section $s$ of either module write $Y_s$ for its nonvanishing open [def-weil-pbc-ample-invertible-module]. Assume that both families of these opens cover $Y$. Assume further the following two refinement conditions: for every $n>0$, $t\\in\\Gamma(Y,K^{\\otimes n})$ and $y\\in Y_t$, there exist $d>0$ and $s\\in\\Gamma(Y,L^{\\otimes d})$ with $y\\in Y_s\\subseteq Y_t$; and for every $d>0$, $s\\in\\Gamma(Y,L^{\\otimes d})$ and $y\\in Y_s$, there exist $n>0$ and $t\\in\\Gamma(Y,K^{\\otimes n})$ with $y\\in Y_t\\subseteq Y_s$. Put $P_L=\\operatorname{Proj}(A_L)$ and $P_K=\\operatorname{Proj}(A_K)$ [def-pc-proj], with $B$-structure induced by $q$, and let $r_L:Y\\to P_L$ and $r_K:Y\\to P_K$ be the canonical maps [lem-sc-ample-proj-canonical-map]. There are open subschemes $V_L\\subseteq P_L$, $V_K\\subseteq P_K$ [def-weil-open-immersion] containing respectively $r_L(Y)$ and $r_K(Y)$, and a $B$-isomorphism $\\theta:V_L\\xrightarrow{\\sim}V_K$ such that $\\theta\\circ r_L=r_K$ after factoring the two maps through these opens.",
+ "source": {
+  "document": "literature/stacks-project/properties.tex",
+  "place": "Agent-formulated comparison lemma from Tag 01PW (label lemma-invert-s-sections), used to supply the omitted comparison in Guo Proposition 6.2. The comparison is not stated verbatim by this tag; its affine chart gluing argument is written in report.md."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-pbc-quasi-compact-scheme",
+  "def-sc-invertible-module",
+  "def-sc-invertible-section-ring",
+  "def-weil-pbc-ample-invertible-module",
+  "def-pc-proj",
+  "lem-sc-ample-proj-canonical-map",
+  "def-weil-open-immersion"
+ ],
+ "proof": [
+  {
+   "text": "For $M=L,K$ write $D_M(s)=D_+(s)\\subset P_M$. By lem-sc-ample-proj-canonical-map, $r_M^{-1}D_M(s)=Y_s$ and the ring map $\\rho_{M,s}:\\Gamma(D_M(s),\\mathcal O)= (A_M)_{(s)}\\to\\Gamma(Y_s,\\mathcal O_Y)$ sends $\\xi/s^a$ to $\\xi|_{Y_s}/s^a$. Apply lem-sc-section-ring-localization-bijective: $Y$ is qcqs and $s$ has positive degree, and its required identity follows by multiplying this fraction formula by $s^a$. Thus every $\\rho_{M,s}$ is a ring isomorphism, without assuming $Y_s$ affine.",
+   "uses": [
+    "lem-sc-ample-proj-canonical-map",
+    "lem-sc-section-ring-localization-bijective"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/properties.tex",
+    "place": "Tags 01PZ (lemma-map-into-proj), clause (1) and chart formula; 01PW (lemma-invert-s-sections), qcqs isomorphism"
+   }
+  },
+  {
+   "text": "The standard opens $D_M(s)$ form a basis of $P_M$: the complement of a homogeneous vanishing set is a union of these opens, and $D_M(s)\\cap D_M(s\\prime)=D_M(ss\\prime)$ by the prime-ideal description in def-pc-proj. The canonical sheaf morphism $\\mathcal O_{P_M}\\to(r_M)_*\\mathcal O_Y$ evaluates on this basis to the isomorphisms of Step 1. Apply clause (b) of lem-weil-pbc-sheaf-morphism-on-basis with values in commutative rings. It is therefore an isomorphism on all opens. In particular, for every open $W\\subset P_M$, the restriction $r_M^{-1}(W)\\to W$ is scheme-theoretically dominant, meaning that the induced map $\\mathcal O_W\\to(r_M|_{r_M^{-1}(W)})_*\\mathcal O_{r_M^{-1}(W)}$ is injective.",
+   "uses": [
+    "def-pc-proj",
+    "lem-weil-pbc-sheaf-morphism-on-basis"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sheaves.tex",
+    "place": "Tags 009O (lemma-restrict-basis-equivalence) and 009R (lemma-restrict-basis-equivalence-structures); Proj basis from constructions.tex, standard opens"
+   }
+  },
+  {
+   "text": "For every pair $(s,t)$ of positive-degree sections with $Y_s\\subseteq Y_t$, define a ring map $\\Gamma(D_K(t),\\mathcal O)\\to\\Gamma(D_L(s),\\mathcal O)$ as $\\rho_{L,s}^{-1}\\circ\\operatorname{res}_{Y_t,Y_s}\\circ\\rho_{K,t}$. The affine-target correspondence lem-weil-pbc-morphism-into-affine-scheme gives a morphism $h_{s,t}:D_L(s)\\to D_K(t)$. Its composite with $r_L|_{Y_s}$ equals $r_K|_{Y_s}$ as maps into $D_K(t)$: both induce the ring map $\\operatorname{res}_{Y_t,Y_s}\\circ\\rho_{K,t}$, since $\\rho_{L,s}\\rho_{L,s}^{-1}$ is the identity. It is a $B$-morphism, since the two maps from $D_L(s)$ to the affine $B$ induce the same ring map from $\\Gamma(B,\\mathcal O_B)$ after the injective map $\\rho_{L,s}$; both then become $q|_{Y_s}$.",
+   "uses": [
+    "lem-weil-pbc-morphism-into-affine-scheme"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Tags 01I1 (lemma-morphism-into-affine) and 01HY (lemma-morphism-into-affine-where-point-goes); agent construction of the comparison ring map"
+   }
+  },
+  {
+   "text": "Let $U_L$ be the union of all $D_L(s)$ occurring in pairs of Step 3. For $y\\in Y$ choose a $K$-section $t$ nonvanishing at $y$ using its cover, and then an $L$-section $s$ with $y\\in Y_s\\subseteq Y_t$ using the first refinement hypothesis. Hence $r_L(Y)\\subset U_L$. On an overlap $W=D_L(s)\\cap D_L(s\\prime)$, the two constructed maps to $P_K$ agree after $r_L^{-1}W\\to W$, since both composites are $r_K$ there. Step 2 supplies scheme-theoretic dominance of this test map. The target $P_K$ is separated over $\\operatorname{Spec}\\mathbf Z$ by lem-trf-proj-separated. Apply lemma-nagata-ext-scheme-theoretically-dominant-separated over $\\operatorname{Spec}\\mathbf Z$ (all scheme maps have the same composite to this terminal scheme). Thus the maps agree on overlaps, including two choices of $t$ for the same $s$. The gluing lemma gives a $B$-morphism $h:U_L\\to P_K$ with $h r_L=r_K$.",
+   "uses": [
+    "lem-trf-proj-separated",
+    "lemma-nagata-ext-scheme-theoretically-dominant-separated",
+    "lem-weil-pbc-scheme-morphism-gluing"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Tag 01KM (lemma-where-are-they-equal), closed equalizer; Tag 01JA (gluing); constructions.tex Tag 01MC (lemma-proj-separated)"
+   }
+  },
+  {
+   "text": "Perform Steps 3--4 with $L,K$ interchanged, using pairs $(t,s)$ with $Y_t\\subseteq Y_s$. The ring map is now $\\rho_{K,t}^{-1}\\circ\\operatorname{res}_{Y_s,Y_t}\\circ\\rho_{L,s}$. The $L$-section cover and the second refinement hypothesis ensure that the union $U_K$ of these $D_K(t)$ contains $r_K(Y)$. On overlaps the composites agree after the restrictions of $r_K$, which are scheme-theoretically dominant by Step 2, and the separated target is now $P_L$. The same affine correspondence, separated-target uniqueness and gluing statements give a $B$-morphism $k:U_K\\to P_L$ with $k r_K=r_L$.",
+   "uses": [
+    "lem-weil-pbc-morphism-into-affine-scheme",
+    "lem-trf-proj-separated",
+    "lemma-nagata-ext-scheme-theoretically-dominant-separated",
+    "lem-weil-pbc-scheme-morphism-gluing"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Tags 01I1, 01KM and 01JA; constructions.tex Tag 01MC; symmetric chart construction"
+   }
+  },
+  {
+   "text": "Put $V_L=U_L\\cap h^{-1}(U_K)$ and $V_K=U_K\\cap k^{-1}(U_L)$. These are open and contain the respective images, because $h r_L=r_K$ and $k r_K=r_L$. On $V_L$, compare $k h:V_L\\to P_L$ with its inclusion into $P_L$. Their composites with $Y=r_L^{-1}(V_L)\\to V_L$ are both $r_L$. By Step 2 this test map is scheme-theoretically dominant, and $P_L$ is separated over $\\operatorname{Spec}\\mathbf Z$. The separated-target uniqueness lemma gives $k h=\\operatorname{id}$ on $V_L$, as maps to $P_L$. Interchanging $L,K$ gives $h k=\\operatorname{id}$ on $V_K$, as maps to $P_K$.",
+   "uses": [
+    "lemma-nagata-ext-scheme-theoretically-dominant-separated",
+    "lem-trf-proj-separated"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Tag 01KM (lemma-where-are-they-equal), applied to the two compositions; constructions.tex Tag 01MC"
+   }
+  },
+  {
+   "text": "For $x\\in V_L$, $h(x)\\in U_K$ and $k(h(x))=x\\in U_L$, so $h(x)\\in V_K$. Likewise $k(V_K)\\subseteq V_L$. Thus $h$ and $k$ restrict to morphisms $V_L\\to V_K$ and $V_K\\to V_L$. The equalities of Step 6 show that these restrictions are inverse (an open-subscheme morphism is its ambient morphism with codomain restricted). They are $B$-morphisms by their construction. Set $\\theta=h|_{V_L}$. Its composite with $r_L$ is $r_K$, as established before restriction, proving all clauses.",
+   "uses": [
+    "def-weil-open-immersion"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Open subschemes: Tag 01IO; agent restriction of the constructed inverse morphisms"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sc-ample-proj-canonical-map",
+  "lem-sc-section-ring-localization-bijective",
+  "def-pc-proj",
+  "lem-weil-pbc-sheaf-morphism-on-basis",
+  "lem-weil-pbc-morphism-into-affine-scheme",
+  "lem-trf-proj-separated",
+  "lemma-nagata-ext-scheme-theoretically-dominant-separated",
+  "lem-weil-pbc-scheme-morphism-gluing",
+  "def-weil-open-immersion"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/properties.tex",
+  "place": "Agent chart comparison from Tags 01PW and 01PZ; separated equalizer gluing uses schemes.tex Tag 01KM and constructions.tex Tag 01MC. The source tag does not state the neighborhood comparison verbatim."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Section ring Proj of two line bundles are isomorphic near the canonical images when nonvanishing loci of sections of positive tensor powers mutually refine each other",
+   "results": "{\"t\": \"2026-10-24T04:22:58Z\", \"tool\": \"leanfinder\", \"query\": \"Section ring Proj of two line bundles are isomorphic near the canonical images when nonvanishing loci of sections of positive tensor powers mutually refine each other\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Proj.fromOfGlobalSections_morphismRestrict\", \"AlgebraicGeometry.Proj.awayMap_awayToSection\", \"AlgebraicGeometry.Proj.awayMap_awayToSection_assoc\", \"AlgebraicGeometry.ProjectiveSpectrum.Proj.awayToΓ\", \"AlgebraicGeometry.Proj.fromOfGlobalSections_resLE\", \"AlgebraicGeometry.Proj.basicOpenIsoAway_hom\", \"AlgebraicGeometry.ProjectiveSpectrum.Proj.awayToSection_germ\", \"AlgebraicGeometry.ProjectiveSpectrum.Proj.awayToΓ_ΓToStalk\"], \"digest\": \"fa6d4ba87e52f495\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected the hits; open-immersion isomorphisms assume open immersions already, Proj chart and stalk comparisons concern one graded ring, and reduced-source dominant extensionality does not construct the comparison between two section rings. None states this neighborhood comparison or a one-line specialization."
+  },
+  {
+   "tool": "grep",
+   "query": "cofinal.*affin|affin.*cofinal|neighbou?rhood.*isomorph|isomorph.*neighbou?rhood",
+   "results": "{\"t\": \"2026-10-24T04:25:49Z\", \"tool\": \"grep\", \"query\": \"cofinal.*affin|affin.*cofinal|neighbou?rhood.*isomorph|isomorph.*neighbou?rhood\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected the hits; open-immersion isomorphisms assume open immersions already, Proj chart and stalk comparisons concern one graded ring, and reduced-source dominant extensionality does not construct the comparison between two section rings. None states this neighborhood comparison or a one-line specialization."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Two separated schemes receiving schematically dominant morphisms with isomorphic direct image structure sheaves and cofinal affine inverse image opens are isomorphic near the images",
+   "results": "{\"t\": \"2026-10-24T04:25:50Z\", \"tool\": \"leansearch\", \"query\": \"Two separated schemes receiving schematically dominant morphisms with isomorphic direct image structure sheaves and cofinal affine inverse image opens are isomorphic near the images\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsOpenImmersion.isoOfRangeEq\", \"AlgebraicGeometry.Scheme.Hom.isoOpensRange\", \"AlgebraicGeometry.IsOpenImmersion.isoOfRangeEq_hom_fac_assoc\", \"AlgebraicGeometry.IsOpenImmersion.isoOfRangeEq.congr_simp\", \"AlgebraicGeometry.Scheme.Hom.preimageIso\", \"AlgebraicGeometry.isomorphisms_eq_stalkwise\", \"AlgebraicGeometry.Scheme.isoOfEq\", \"AlgebraicGeometry.IsSeparated.instRespectsIsoScheme\"], \"digest\": \"7ef658f903144199\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected the hits; open-immersion isomorphisms assume open immersions already, Proj chart and stalk comparisons concern one graded ring, and reduced-source dominant extensionality does not construct the comparison between two section rings. None states this neighborhood comparison or a one-line specialization."
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Scheme.Hom, IsIso",
+   "results": "{\"t\": \"2026-10-24T04:25:50Z\", \"tool\": \"loogle\", \"query\": \"AlgebraicGeometry.Scheme.Hom, IsIso\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"loogle: unknown identifier 'IsIso'\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "invalid query: loogle: unknown identifier 'IsIso'"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Given morphisms from a scheme to two separated schemes with structure sheaf equal to the direct image of the source structure sheaf and mutually cofinal pullbacks of affine open bases the target schemes are isomorphic on neighborhoods of the images",
+   "results": "{\"t\": \"2026-10-24T04:25:51Z\", \"tool\": \"leanfinder\", \"query\": \"Given morphisms from a scheme to two separated schemes with structure sheaf equal to the direct image of the source structure sheaf and mutually cofinal pullbacks of affine open bases the target schemes are isomorphic on neighborhoods of the images\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsOpenImmersion.isoOfRangeEq\", \"AlgebraicGeometry.Scheme.hom_ext_of_forall\", \"AlgebraicGeometry.ext_of_isDominant_of_isSeparated'\", \"AlgebraicGeometry.ext_of_isDominant\", \"AlgebraicGeometry.ext_of_isDominant_of_isSeparated\", \"AlgebraicGeometry.IsSeparated.instRespectsIsoScheme\", \"AlgebraicGeometry.Scheme.IsLocallyDirected.fst_inv_eq_snd_inv\", \"AlgebraicGeometry.IsSeparated.hasAffineProperty\"], \"digest\": \"0358e99298ac9d04\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected the hits; open-immersion isomorphisms assume open immersions already, Proj chart and stalk comparisons concern one graded ring, and reduced-source dominant extensionality does not construct the comparison between two section rings. None states this neighborhood comparison or a one-line specialization."
+  },
+  {
+   "tool": "grep",
+   "query": "isIso.*(pushforward|structureSheaf)|schematicallyDominant|IsSchematicallyDominant|isoOfRangeEq",
+   "results": "{\"t\": \"2026-10-24T04:26:26Z\", \"tool\": \"grep\", \"query\": \"isIso.*(pushforward|structureSheaf)|schematicallyDominant|IsSchematicallyDominant|isoOfRangeEq\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/Normalization.lean\", \"Mathlib/AlgebraicGeometry/Normalization.lean\", \"Mathlib/AlgebraicGeometry/Cover/Open.lean\", \"Mathlib/AlgebraicGeometry/OpenImmersion.lean\", \"Mathlib/AlgebraicGeometry/OpenImmersion.lean\", \"Mathlib/AlgebraicGeometry/OpenImmersion.lean\", \"Mathlib/AlgebraicGeometry/OpenImmersion.lean\", \"Mathlib/AlgebraicGeometry/OpenImmersion.lean\"], \"digest\": \"39e0d0c823df25cc\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected the hits; open-immersion isomorphisms assume open immersions already, Proj chart and stalk comparisons concern one graded ring, and reduced-source dominant extensionality does not construct the comparison between two section rings. None states this neighborhood comparison or a one-line specialization."
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Scheme.Hom, CategoryTheory.IsIso",
+   "results": "{\"t\": \"2026-10-24T04:26:26Z\", \"tool\": \"loogle\", \"query\": \"AlgebraicGeometry.Scheme.Hom, CategoryTheory.IsIso\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected the hits; open-immersion isomorphisms assume open immersions already, Proj chart and stalk comparisons concern one graded ring, and reduced-source dominant extensionality does not construct the comparison between two section rings. None states this neighborhood comparison or a one-line specialization."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Two scheme morphisms with isomorphic pushforward structure sheaves and the same inverse image topology from affine open bases admit inverse morphisms on open neighborhoods of their images",
+   "results": "{\"t\": \"2026-10-24T04:26:36Z\", \"tool\": \"leanfinder\", \"query\": \"Two scheme morphisms with isomorphic pushforward structure sheaves and the same inverse image topology from affine open bases admit inverse morphisms on open neighborhoods of their images\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.inv_app\", \"AlgebraicGeometry.Scheme.Hom.instIsIsoCommRingCatApp\", \"AlgebraicGeometry.IsAffineOpen.appBasicOpenIsoAwayMap\", \"AlgebraicGeometry.IsOpenImmersion.affineOpensEquiv_symm_apply_coe\", \"AlgebraicGeometry.IsOpenImmersion.isoOfRangeEq_inv_fac\", \"AlgebraicGeometry.AffineTargetMorphismProperty.arrow_mk_iso_iff\", \"AlgebraicGeometry.IsAffineOpen.isoSpec_inv_appTop\", \"AlgebraicGeometry.Scheme.Hom.appLE_congr\"], \"digest\": \"9b4a8c18baa4fac5\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected the hits; open-immersion isomorphisms assume open immersions already, Proj chart and stalk comparisons concern one graded ring, and reduced-source dominant extensionality does not construct the comparison between two section rings. None states this neighborhood comparison or a one-line specialization."
+  },
+  {
+   "tool": "grep",
+   "query": "sectionRing|fromOfGlobalSections|basicOpenIsoAway",
+   "results": "{\"t\": \"2026-10-24T04:28:11Z\", \"tool\": \"grep\", \"query\": \"sectionRing|fromOfGlobalSections|basicOpenIsoAway\", \"sub\": \"AlgebraicGeometry/ProjectiveSpectrum\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Basic.lean\", \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Basic.lean\", \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Basic.lean\", \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Basic.lean\", \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Basic.lean\"], \"digest\": \"68a42c9780179d1a\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected the hits; open-immersion isomorphisms assume open immersions already, Proj chart and stalk comparisons concern one graded ring, and reduced-source dominant extensionality does not construct the comparison between two section rings. None states this neighborhood comparison or a one-line specialization."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Proj of section rings of two invertible sheaves whose nonvanishing section opens mutually refine is isomorphic on open neighborhoods of their canonical images",
+   "results": "{\"t\": \"2026-10-24T04:28:12Z\", \"tool\": \"leansearch\", \"query\": \"Proj of section rings of two invertible sheaves whose nonvanishing section opens mutually refine is isomorphic on open neighborhoods of their canonical images\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsOpenImmersion.ΓIso\", \"AlgebraicGeometry.Scheme.Hom.appIso\", \"AlgebraicGeometry.StructureSheaf.isIso_toBasicOpen\", \"AlgebraicGeometry.StructureSheaf.toBasicOpen\", \"AlgebraicGeometry.StructureSheaf.basicOpenIso\", \"AlgebraicGeometry.Proj.ext\", \"AlgebraicGeometry.ProjectiveSpectrum.StructureSheaf.sectionsSubring\", \"AlgebraicGeometry.Scheme.coprodPresheafObjIso\"], \"digest\": \"99755d1ed57b02d6\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected the hits; open-immersion isomorphisms assume open immersions already, Proj chart and stalk comparisons concern one graded ring, and reduced-source dominant extensionality does not construct the comparison between two section rings. None states this neighborhood comparison or a one-line specialization."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Proj\", \"Iso\"",
+   "results": "{\"t\": \"2026-10-24T04:28:13Z\", \"tool\": \"loogle\", \"query\": \"\\\"Proj\\\", \\\"Iso\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"CategoryTheory.CostructuredArrow.proj_reflectsIsomorphisms\", \"CategoryTheory.StructuredArrow.proj_reflectsIsomorphisms\", \"CategoryTheory.CostructuredArrow.map₂IsoPreEquivalenceInverseCompProj\", \"CategoryTheory.StructuredArrow.map₂IsoPreEquivalenceInverseCompProj\", \"CategoryTheory.CategoryOfElements.costructuredArrowULiftYonedaEquivalenceFunctorCompProjIso\", \"CategoryTheory.Functor.Elements.costructuredArrowULiftYonedaEquivalenceFunctorCompProjIso\", \"CategoryTheory.Functor.Elements.costructuredArrowShrinkYonedaEquivalenceFunctorCompProjIso\", \"CategoryTheory.Functor.Elements.costructuredArrowULiftYonedaEquivalenceFunctorCompProjIso_hom_app\"], \"digest\": \"1f3ebe9888259cb7\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected the hits; open-immersion isomorphisms assume open immersions already, Proj chart and stalk comparisons concern one graded ring, and reduced-source dominant extensionality does not construct the comparison between two section rings. None states this neighborhood comparison or a one-line specialization."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry.Proj\", \"Iso\"",
+   "results": "{\"t\": \"2026-10-24T04:32:20Z\", \"tool\": \"loogle\", \"query\": \"\\\"AlgebraicGeometry.Proj\\\", \\\"Iso\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Proj.stalkIso'\", \"AlgebraicGeometry.Proj.stalkIso'_symm_mk\", \"AlgebraicGeometry.Proj.stalkIso'_germ\", \"AlgebraicGeometry.ProjIsoSpecTopComponent.FromSpec.carrier\", \"AlgebraicGeometry.ProjIsoSpecTopComponent.FromSpec.carrier.asIdeal\", \"AlgebraicGeometry.ProjIsoSpecTopComponent.FromSpec.carrier.asIdeal.prime\", \"AlgebraicGeometry.ProjIsoSpecTopComponent.FromSpec.carrier.asHomogeneousIdeal\", \"AlgebraicGeometry.ProjIsoSpecTopComponent.FromSpec.carrier.zero_mem\"], \"digest\": \"81c4296079ee5461\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected the hits; open-immersion isomorphisms assume open immersions already, Proj chart and stalk comparisons concern one graded ring, and reduced-source dominant extensionality does not construct the comparison between two section rings. None states this neighborhood comparison or a one-line specialization."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For two invertible modules L and N on a quasi compact quasi separated scheme, if their positive tensor power section nonvanishing opens mutually refine at every point, the Proj section rings are isomorphic on neighborhoods of the canonical images",
+   "results": "{\"t\": \"2026-10-24T04:33:23Z\", \"tool\": \"leanfinder\", \"query\": \"For two invertible modules L and N on a quasi compact quasi separated scheme, if their positive tensor power section nonvanishing opens mutually refine at every point, the Proj section rings are isomorphic on neighborhoods of the canonical images\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.projIsoSpec\", \"AlgebraicGeometry.projIsoSpecTopComponent\", \"AlgebraicGeometry.Proj.fromOfGlobalSections_morphismRestrict\", \"AlgebraicGeometry.Proj.basicOpenIsoAway\", \"AlgebraicGeometry.ProjectiveSpectrum.Proj.toOpen_toSpec_val_c_app_assoc\", \"AlgebraicGeometry.ProjectiveSpectrum.Proj.toOpen_toSpec_val_c_app\", \"AlgebraicGeometry.Proj.fromOfGlobalSections_resLE\", \"AlgebraicGeometry.Proj.awayMap_awayToSection\"], \"digest\": \"1400f9967d4be699\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected the hits; open-immersion isomorphisms assume open immersions already, Proj chart and stalk comparisons concern one graded ring, and reduced-source dominant extensionality does not construct the comparison between two section rings. None states this neighborhood comparison or a one-line specialization."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A canonical map from a quasi compact quasi separated scheme to Proj of its invertible sheaf section ring induces an isomorphism on the pushforward structure sheaf",
+   "results": "{\"t\": \"2026-10-24T05:05:43Z\", \"tool\": \"leanfinder\", \"query\": \"A canonical map from a quasi compact quasi separated scheme to Proj of its invertible sheaf section ring induces an isomorphism on the pushforward structure sheaf\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.projIsoSpecTopComponent\", \"AlgebraicGeometry.projIsoSpec\", \"AlgebraicGeometry.ProjectiveSpectrum.Proj.isIso_toSpec\", \"AlgebraicGeometry.isIso_ΓSpec_adjunction_unit_app_basicOpen\", \"AlgebraicGeometry.ProjectiveSpectrum.Proj.toOpen_toSpec_val_c_app_assoc\", \"AlgebraicGeometry.ProjectiveSpectrum.Proj.toSpec_base_isIso\", \"AlgebraicGeometry.Proj.fromOfGlobalSections_morphismRestrict\", \"AlgebraicGeometry.ProjIsoSpecTopComponent.fromSpec_toSpec\"], \"digest\": \"7dfd170c379c6e6a\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: chart and stalk isomorphisms concern a single graded ring, and the returned dominant-map extensionality requires a reduced source. No hit constructs the mutual section-ring neighborhood comparison."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "If a scheme morphism induces injections of structure sheaves then morphisms into a separated scheme agreeing after its pullback are equal",
+   "results": "{\"t\": \"2026-10-24T05:07:30Z\", \"tool\": \"leanfinder\", \"query\": \"If a scheme morphism induces injections of structure sheaves then morphisms into a separated scheme agreeing after its pullback are equal\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.isSeparated_of_injective\", \"AlgebraicGeometry.ext_of_isDominant\", \"AlgebraicGeometry.ext_of_isDominant_of_isSeparated\", \"AlgebraicGeometry.ext_of_isDominant_of_isSeparated'\", \"AlgebraicGeometry.Scheme.hom_ext_of_forall\", \"AlgebraicGeometry.IsSeparated.valuativeCriterion\", \"AlgebraicGeometry.Scheme.Hom.ext\", \"AlgebraicGeometry.IsSeparated.isSeparated_of_mono\"], \"digest\": \"1b3d97b6940c9d37\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: chart and stalk isomorphisms concern a single graded ring, and the returned dominant-map extensionality requires a reduced source. No hit constructs the mutual section-ring neighborhood comparison."
+  },
+  {
+   "tool": "grep",
+   "query": "fromOfGlobalSections|basicOpenIsoAway|instIsSeparated",
+   "results": "{\"t\": \"2026-10-24T05:08:15Z\", \"tool\": \"grep\", \"query\": \"fromOfGlobalSections|basicOpenIsoAway|instIsSeparated\", \"sub\": \"AlgebraicGeometry/ProjectiveSpectrum\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Basic.lean\", \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Basic.lean\", \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Basic.lean\", \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Basic.lean\", \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Basic.lean\"], \"digest\": \"68a42c9780179d1a\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: chart and stalk isomorphisms concern a single graded ring, and the returned dominant-map extensionality requires a reduced source. No hit constructs the mutual section-ring neighborhood comparison."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry.Proj\", \"Iso\"",
+   "results": "{\"t\": \"2026-10-24T05:08:16Z\", \"tool\": \"loogle\", \"query\": \"\\\"AlgebraicGeometry.Proj\\\", \\\"Iso\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Proj.stalkIso'\", \"AlgebraicGeometry.Proj.stalkIso'_symm_mk\", \"AlgebraicGeometry.Proj.stalkIso'_germ\", \"AlgebraicGeometry.ProjIsoSpecTopComponent.FromSpec.carrier\", \"AlgebraicGeometry.ProjIsoSpecTopComponent.FromSpec.carrier.asIdeal\", \"AlgebraicGeometry.ProjIsoSpecTopComponent.FromSpec.carrier.asIdeal.prime\", \"AlgebraicGeometry.ProjIsoSpecTopComponent.FromSpec.carrier.asHomogeneousIdeal\", \"AlgebraicGeometry.ProjIsoSpecTopComponent.FromSpec.carrier.zero_mem\"], \"digest\": \"81c4296079ee5461\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: chart and stalk isomorphisms concern a single graded ring, and the returned dominant-map extensionality requires a reduced source. No hit constructs the mutual section-ring neighborhood comparison."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The Proj section rings of two line bundles on a quasi compact quasi separated scheme are isomorphic near their canonical images if the section nonvanishing opens mutually refine",
+   "results": "{\"t\": \"2026-10-24T05:11:00Z\", \"tool\": \"leansearch\", \"query\": \"The Proj section rings of two line bundles on a quasi compact quasi separated scheme are isomorphic near their canonical images if the section nonvanishing opens mutually refine\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Hom.appIso\", \"AlgebraicGeometry.IsOpenImmersion.ΓIso\", \"AlgebraicGeometry.exists_of_res_eq_of_qcqs\", \"AlgebraicGeometry.Proj.basicOpenIsoAway\", \"AlgebraicGeometry.Proj.ext\", \"AlgebraicGeometry.projIsoSpec\", \"AlgebraicGeometry.ProjectiveSpectrum.StructureSheaf.sectionsSubring\", \"AlgebraicGeometry.Scheme.coprodPresheafObjIso\"], \"digest\": \"68c972378ee93712\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: chart and stalk isomorphisms concern a single graded ring, and the returned dominant-map extensionality requires a reduced source. No hit constructs the mutual section-ring neighborhood comparison."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-square-action-proj-translation-extension",
+  "date": "2026-10-24",
+  "group": "Q74"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "Guo Proposition 6.2, translation-extension assertion preceding (i)--(iii): comparison of the two section-ring Proj targets after the translated and original section opens have been shown to refine each other.",
+   "via": [
+    "lem-sfb-square-action-proj-translation-extension",
+    "lem-sfb-square-action-proj-immersion-locus-stable",
+    "lem-sfb-square-action-affine-orbit-criterion",
+    "lem-sfb-group-affine-section-ampleness",
+    "lem-sfb-normal-smooth-group-local-ample-line",
+    "lem-sfb-symmetric-line-power-prolongation",
+    "lem-sfb-normal-symmetric-cubical-extension",
+    "lem-sfb-symmetric-ample-power-extension",
+    "lem-sfb-regular-group-generic-ampleness",
+    "lem-sfb-stable-picard-theta-ampleness",
+    "lem-sfb-stable-relative-picard-kummer",
+    "lem-sfb-stable-level-versal-branch-freeness",
+    "lem-sfb-stable-abelian-level-normalization",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-cofinal-section-opens-proj-neighborhood",
+  "worker": "stage1",
+  "group": "Q96",
+  "summary": "Preserved the full statement. Proved chart section maps are isomorphisms by the existing qcqs localization node, extended this to an isomorphism of pushforward structure sheaves, constructed comparison maps from each refinement pair, glued using scheme-theoretic dominance and absolute separatedness, and explicitly restricted the two maps to inverse neighborhoods. No new nodes.",
+  "blueprint": "The item is a created generic tool with no imported blueprint ancestor (blueprint_refs.py ancestor prints None). Its inherited from.place is the comparison omitted in Guo Proposition 6.2, used in step 5 of lem-sfb-square-action-proj-translation-extension. This split supplies that comparison without changing the unit route.",
+  "tool_uses": [
+   {
+    "node": "lem-sc-ample-proj-canonical-map",
+    "why": "Canonical preimages and fraction formulas for section-ring Proj."
+   },
+   {
+    "node": "lem-sc-section-ring-localization-bijective",
+    "why": "Generic qcqs invertible-section localization, without affineness or ampleness."
+   },
+   {
+    "node": "def-pc-proj",
+    "why": "Standard affine charts and homogeneous-prime topology."
+   },
+   {
+    "node": "lem-weil-pbc-sheaf-morphism-on-basis",
+    "why": "Generic isomorphism criterion for ring sheaves on a basis."
+   },
+   {
+    "node": "lem-weil-pbc-morphism-into-affine-scheme",
+    "why": "Construct and compare morphisms by their maps on rings of global functions."
+   },
+   {
+    "node": "lem-trf-proj-separated",
+    "why": "Absolute separatedness of Proj for an arbitrary graded ring."
+   },
+   {
+    "node": "lemma-nagata-ext-scheme-theoretically-dominant-separated",
+    "why": "Separated-target uniqueness after an injective pushforward structure-sheaf map; avoids any reducedness assumption."
+   },
+   {
+    "node": "lem-weil-pbc-scheme-morphism-gluing",
+    "why": "Generic gluing and uniqueness of scheme morphisms on open covers."
+   },
+   {
+    "node": "def-weil-open-immersion",
+    "why": "Factor morphisms through open subschemes containing their images."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sc-ample-proj-canonical-map",
+  "lem-sc-section-ring-localization-bijective",
+  "def-pc-proj",
+  "lem-weil-pbc-sheaf-morphism-on-basis",
+  "lem-weil-pbc-morphism-into-affine-scheme",
+  "lem-trf-proj-separated",
+  "lemma-nagata-ext-scheme-theoretically-dominant-separated",
+  "lem-weil-pbc-scheme-morphism-gluing",
+  "def-weil-open-immersion"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q96-689e633d4",
+  "group": "Q96",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q96-689e633d4 (reviewer sub-agent of L); spot-checked: I read the item, all 7 steps and every cited statement. The statement is preserved, and the parent lem-sfb-square-action-proj-translation-extension step 5 uses exactly this conclusion. Small cases checked: Y empty, L=K, Veronese O(1)/O(2); on P1xP1, O(1,0)/O(0,1) correctly fails the refinement hypothesis. Steps 1-2: lem-sc-ample-proj-canonical-map gives the fraction formula, which meets the identity required by lem-sc-section-ring-localization-bijective (qcqs, positive degree, no affineness). sheaf-on-basis clause (b) then makes O_P -> r_*O_Y an isomorphism, so r^-1W -> W is scheme-theoretically dominant with no reducedness used. Step 3: the affine-target bijection gives h_{s,t}; h r_L = r_K, and the B-structure is compared through the injective rho. Steps 4-6: gluing on overlaps, and kh = id, follow from nagata-ext-scheme-theoretically-dominant-separated over Spec Z, with Proj separated (lem-trf-proj-separated). Both refinement directions are used correctly, and r_L^-1(V_L) = Y. Step 7 is an elementary corestriction. Batch-5 check: lem-trf-proj-separated is a Mathlib leaf (Stacks 01MC) on a general scheme property, not part of the trace-formula or Poincare-duality assumptions or their proofs, so it is OK. All 9 declared tool_uses are generic and accepted. No new nodes; the DAG search found no duplicate. No changes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.CofinalSectionOpensProjNeighborhood",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.exists_cofinal_section_opens_proj_neighborhood_iso",
+  "file": "lean/Sheaf/AlgebraicGeometry/CofinalSectionOpensProjNeighborhood.lean",
+  "statement": "theorem exists_cofinal_section_opens_proj_neighborhood_iso (B Y : Scheme.{u}) [IsAffine B] (q : Y ⟶ B) [CompactSpace Y] [QuasiSeparatedSpace Y] (L K : Y.Modules) [L.IsInvertible] [K.IsInvertible] (hL : ∀ y : Y, ∃ (d : ℕ) (s : sectionRingGrade L d), 0 < d ∧ y ∈ nonvanishingLocus (L.tensorPow d) (s.val d)) (hK : ∀ y : Y, ∃ (n : ℕ) (t : sectionRingGrade K n), 0 < n ∧ y ∈ nonvanishingLocus (K.tensorPow n) (t.val n)) (hLK : ∀ (n : ℕ), 0 < n → ∀ (t : sectionRingGrade K n) (y : Y), y ∈ nonvanishingLocus (K.tensorPow n) (t.val n) → ∃ (d : ℕ) (s : sectionRingGrade L d), 0 < d ∧ y ∈ nonvanishingLocus (L.tensorPow d) (s.val d) ∧ nonvanishingLocus (L.tensorPow d) (s.val d) ⊆ nonvanishingLocus (K.tensorPow n) (t.val n)) (hKL : ∀ (d : ℕ), 0 < d → ∀ (s : sectionRingGrade L d) (y : Y), y ∈ nonvanishingLocus (L.tensorPow d) (s.val d) → ∃ (n : ℕ) (t : sectionRingGrade K n), 0 < n ∧ y ∈ nonvanishingLocus (K.tensorPow n) (t.val n) ∧ nonvanishingLocus (K.tensorPow n) (t.val n) ⊆ nonvanishingLocus (L.tensorPow d) (s.val d)) (pL : Proj (sectionRingGrade L) ⟶ B) (pK : Proj (sectionRingGrade K) ⟶ B) (hpL : (exists_sectionRing_proj_morphism Y L hL).choose ≫ pL = q) (hpK : (exists_sectionRing_proj_morphism Y K hK).choose ≫ pK = q) : ∃ (VL : (Proj (sectionRingGrade L)).Opens) (VK : (Proj (sectionRingGrade K)).Opens) (rL : Y ⟶ VL.toScheme) (rK : Y ⟶ VK.toScheme) (θ : VL.toScheme ≅ VK.toScheme), rL ≫ VL.ι = (exists_sectionRing_proj_morphism Y L hL).choose ∧ rK ≫ VK.ι = (exists_sectionRing_proj_morphism Y K hK).choose ∧ rL ≫ θ.hom = rK ∧ θ.hom ≫ VK.ι ≫ pK = VL.ι ≫ pL",
+  "branch": "newtargets-dag",
+  "by": "Q93",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "The canonical source maps are the witnesses of exists_sectionRing_proj_morphism, determined uniquely by its chart formulas. The induced B-structures are supplied with their defining triangles hpL and hpK, which uniquely characterize them for a qcqs source and affine base; no arbitrary source or base maps are substituted."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-41e17e9cd",
+  "group": "Q93",
+  "result": "pass",
+  "note": "Fresh S2 statement (node previously split, no lean); only lean field changed vs side-live, 8 dep records identical. Hypotheses: B affine, CompactSpace+QuasiSeparatedSpace Y, invertible L,K, covers hL/hK in exactly the hcover form of exists_sectionRing_proj_morphism, both refinement directions hLK/hKL with full quantifiers and degree>0. Canonical r_L/r_K = .choose of the dep theorem, unique by its preimage+fraction-formula characterization. pL/pK triangles hpL/hpK characterize the induced B-structure uniquely (B affine, r_M.appTop iso) and it always exists (toSpecZero composite), so no stronger assumption. Conclusion: open VL/VK factorizations (image containment), iso θ, rL≫θ.hom=rK, θ over B. Edge cases empty Y/B, L=K, O(1)/O(2), P1xP1 counterexample, nilpotent sections OK. No duplicate in Sheaf/WeilConjectures/Mathlib; docstrings carry source+blueprint+7 steps; proof only sorry; single universe u; statement verbatim; report sections present. No compile run (no change)."
+ }
+}

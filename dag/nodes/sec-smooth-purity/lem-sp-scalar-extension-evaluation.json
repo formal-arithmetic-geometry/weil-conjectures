@@ -1,0 +1,133 @@
+{
+ "id": "lem-sp-scalar-extension-evaluation",
+ "kind": "statement",
+ "title": "Section-normalized evaluation of ordinary scalar extension",
+ "statement": "Let J be an essentially small site with coefficient universe max(c,v,r), B,tau and D,sigma inverse ring-sheaf sequences, phi a ring-system morphism with section components alpha_n, S its ScalarData and M a B-system [def-coef-semilinear-system-models]. For each n, morphisms from evaluation_n(S.model.E(M)) to a D_n-module N are naturally equivalent to morphisms from evaluation_n M to N with scalars restricted along alpha_n. The equivalences commute with postcomposition. If v is heterogeneously equal to a times scalarExtensionSection(phi,S,M,(n,U),x), then f(v) equals a times the corresponding restricted-linear morphism evaluated on x.",
+ "stmt_deps": [
+  "def-coef-semilinear-system-models"
+ ],
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Section 03EK (section-tensor-product) and Tag 03CY (lemma-sheafification-presheaf-modules), applied to vertical restriction in blueprint classes (2)"
+ },
+ "proof": [
+  {
+   "text": "Apply scalarExtension_evaluation_comparison to obtain the finite-level scalar-extension isomorphism and its formula on the sheafified tensor 1 tensor x.",
+   "uses": [
+    "lem-sp-scalar-extension-evaluation-comparison",
+    "def-coef-semilinear-system-models"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Section 03EK (section-tensor-product) and Tag 03CY (lemma-sheafification-presheaf-modules), applied to vertical restriction in blueprint classes (2)"
+   }
+  },
+  {
+   "text": "Precompose a map out of the evaluated extension with the constructed isomorphism, then apply the ordinary sheafified tensor/restriction Hom equivalence. Its postcomposition equation is tensorHomEquiv_naturality_right. Its value on a root section is evaluation on the sheafified tensor 1 tensor x, which the preceding unit calculation identifies with the stated scalar-extension section. The evaluation functors retain the section carriers, giving the displayed formula directly on sections. Evaluation transports the scalar action along evaluation_ring; its component ring map is the identity. Thus a raw scalar multiple is the corresponding evaluated scalar multiple. Linearity of f upgrades the unit-generator equation to the formula for any scalar a, and heterogeneous equality allows any evaluated representative v.",
+   "uses": [
+    "lem-weil-derived-scalar-extension-restriction-adjunction",
+    "def-coef-semilinear-system-models"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Section 03EK (section-tensor-product) and Tag 03CY (lemma-sheafification-presheaf-modules), applied to vertical restriction in blueprint classes (2)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sp-scalar-extension-evaluation-comparison",
+  "def-coef-semilinear-system-models",
+  "lem-weil-derived-scalar-extension-restriction-adjunction"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Section 03EK (section-tensor-product) and Tag 03CY (lemma-sheafification-presheaf-modules), applied to vertical restriction in blueprint classes (2)"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Evaluation on the sequence site commutes with extension of scalars of sheaves of modules",
+   "results": "SheafOfModules.evaluation and ModuleCat.ExtendRestrictScalarsAdj.HomEquiv.evalAt; no sequence-site scalar-extension comparison.",
+   "date": "2026-10-27",
+   "verdict": "No exact match; use the existing sheafification and tensor adjunctions."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Evaluation of extension of scalars of a sheaf of modules represents linear maps with restricted scalars",
+   "results": "SheafOfModules.restrictScalars; ModuleCat.ExtendRestrictScalarsAdj.HomEquiv.fromExtendScalars and evalAt_apply.",
+   "date": "2026-10-27",
+   "verdict": "Algebraic ingredients only; the evaluated sheafification comparison is additional."
+  },
+  {
+   "tool": "grep",
+   "query": "scalarExtensionSection|sheafScalar.*[Aa]djunction|evaluation.*[Aa]djunction; Mathlib module-sheaf ChangeOfRings and Presheaf.Sheafify",
+   "results": "ModuleCat.extendRestrictScalarsAdj; PresheafOfModules.sheafificationAdjunction; fixed-coefficient evaluation adjunctions. No combined sequence-site statement.",
+   "date": "2026-10-27",
+   "verdict": "No exact match."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.TowerLineEvaluationUniversal",
+  "date": "2026-10-27",
+  "group": "P5"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-sp-tower-classes",
+   "place": "classes (2), evaluation of ordinary coefficient extension, the tensor and sheafification part of the universal property",
+   "via": [
+    "lem-sp-tower-line-evaluation-universal",
+    "def-sp-tower-class-diagonal"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sp-tower-geometric",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.ScalarExtensionEvaluation",
+  "file": "lean/Sheaf/Paper/ScalarExtensionEvaluation.lean",
+  "declaration": "WeilConjectures.SemilinearSections.scalarExtension_evaluation",
+  "statement": "theorem scalarExtension_evaluation\n    {C : Type c} [Category.{v} C] [EssentiallySmall.{max c v r} C]\n    (J : GrothendieckTopology C)\n    (B D : ℕ → Sheaf J CommRingCat.{max c v r})\n    (τ : ∀ n, B (n + 1) ⟶ B n) (σ : ∀ n, D (n + 1) ⟶ D n)\n    (α : ∀ n, B n ⟶ D n)\n    (φ : systemRing.{c, v, max c v r} J B τ ⟶ systemRing.{c, v, max c v r} J D σ)\n    (hφ : ∀ (n : ℕ) (U : Cᵒᵖ), φ.hom.app (op (n, U.unop)) = (α n).hom.app U)\n    (S : ScalarData.{c, v, max c v r} φ)\n    (M : Systems.{c, v, max c v r} J B τ) (n : ℕ) :\n    ∃ Ψ : ∀ N : Mod.{c, v, max c v r} J (D n),\n      ((evaluation.{c, v, max c v r} J D σ n).obj (S.model.E.obj M) ⟶ N) ≃\n        ((evaluation.{c, v, max c v r} J B τ n).obj M ⟶ (res.{c, v, max c v r} (α n)).obj N),\n      (∀ {N N'} (f : (evaluation.{c, v, max c v r} J D σ n).obj (S.model.E.obj M) ⟶ N)\n        (g : N ⟶ N'), Ψ N' (f ≫ g) = Ψ N f ≫ (res.{c, v, max c v r} (α n)).map g) ∧\n      (∀ N (f : (evaluation.{c, v, max c v r} J D σ n).obj (S.model.E.obj M) ⟶ N)\n        (U : Cᵒᵖ) (a : (D n).obj.obj U) (x : M.val.obj (op (n, U.unop)))\n        (v : ((evaluation.{c, v, max c v r} J D σ n).obj (S.model.E.obj M)).val.obj U),\n        HEq v (a • scalarExtensionSection.{c, v, r} φ S M (op (n, U.unop)) x) →\n        f.val.app U v = a • (show N.val.obj U from (Ψ N f).val.app U x))",
+  "branch": "sheaf-dag",
+  "by": "P5",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P5",
+  "result": "pass",
+  "landing": "20261027T021343-L-2760843",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P5",
+  "result": "pass",
+  "landing": "20261027T021343-L-2760843",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

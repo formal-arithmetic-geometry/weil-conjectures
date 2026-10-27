@@ -110,13 +110,15 @@ private theorem ordinary_coherence (T : Scheme.{u}) (l : ℕ)
       rfl)
   have hQ := congr_app hp Q
   simp only [NatTrans.comp_app, Functor.whiskerLeft_app, Functor.whiskerRight_app] at hQ
-  apply (cancel_epi ((ProEtale.comparisonUpperStar
-    (ModuleCat.{u + 1} (Coeff.{u} l n)) T).map
-      ((ordinaryAssociator T.smallEtaleTopology l hmr hnm).inv.app Q))).mp
-  simp only [← Functor.map_comp_assoc, Iso.inv_hom_id_app]
-  apply (cancel_mono ((ordinaryAssociator (Scheme.ProEt.topology T) l hmr hnm).inv.app
-    ((ProEtale.comparisonUpperStar (ModuleCat.{u + 1} (Coeff.{u} l r)) T).obj Q))).mp
-  simp only [Category.assoc, Iso.hom_inv_id_app]
+  apply (Iso.cancel_iso_inv_left
+    ((ProEtale.comparisonUpperStar (ModuleCat.{u + 1} (Coeff.{u} l n)) T).mapIso
+      ((ordinaryAssociator T.smallEtaleTopology l hmr hnm).app Q)) _ _).mp
+  simp only [Functor.mapIso_inv, Iso.app_inv,
+    ← Functor.map_comp_assoc, Iso.inv_hom_id_app]
+  apply (Iso.cancel_iso_inv_right _ _
+    ((ordinaryAssociator (Scheme.ProEt.topology T) l hmr hnm).app
+      ((ProEtale.comparisonUpperStar (ModuleCat.{u + 1} (Coeff.{u} l r)) T).obj Q))).mp
+  simp only [Iso.app_inv, Category.assoc, Iso.hom_inv_id_app]
   erw [Category.comp_id, CategoryTheory.Functor.map_id, Category.id_comp]
   exact hQ
 

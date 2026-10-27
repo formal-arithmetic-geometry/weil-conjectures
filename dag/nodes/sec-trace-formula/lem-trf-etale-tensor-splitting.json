@@ -27,7 +27,7 @@
    }
   },
   {
-   "text": "Base change the assumed etale map $A\\to B$ along $A\\to C$. By [lem-weil-pbc-etale-ring-base-change], $\\operatorname{Spec}T\\to\\operatorname{Spec}C$ induced by $i$ is etale. By [lem-weil-pbc-principal-localization-open-immersion], $\\operatorname{Spec}B\\to\\operatorname{Spec}C$ induced by $\\lambda$ is an open immersion, hence etale by [lem-weil-pbc-etale-composition-cancellation](1). For $f=\\operatorname{Spec}\\mu$ and $g=\\operatorname{Spec}i$, the identity $\\mu i=\\lambda$ of Step 1 gives $g\\circ f=\\operatorname{Spec}\\lambda$. Since $g$ and $g\\circ f$ are etale, clause (3) of the same cancellation node implies that $f$ is etale. Thus $\\mu:T\\to B$ is a surjective ring map whose spectrum morphism is etale. This concerns $\\mu$, not a claim that $T$ is etale as a $B$-algebra.",
+   "text": "Translate the assumed spectrum-etaleness to Algebra.Etale A B using HasRingHomProperty.Spec_iff and RingHom.etale_algebraMap. By [lem-weil-pbc-etale-ring-base-change], T is etale over C. The principal localization C to B is etale, the consequence of [lem-weil-pbc-principal-localization-open-immersion] and clause (1) of [lem-weil-pbc-etale-composition-cancellation]; Lean applies the direct ring theorem Algebra.Etale.of_isLocalizationAway. Give B the T-algebra structure induced by mu. The tensor formula mu(c tensor 1) = lambda(c) supplies the scalar tower C to T to B. Apply Algebra.Etale.of_restrictScalars C T B, the ring form of clause (3) of the cancellation node. Thus the surjective map mu is etale; no etaleness of T over B is asserted.",
    "uses": [
     "lem-weil-pbc-etale-ring-base-change",
     "lem-weil-pbc-principal-localization-open-immersion",
@@ -40,7 +40,7 @@
    }
   },
   {
-   "text": "Put $I=\\ker\\mu$. Steps 1-2 verify precisely the surjectivity and spectrum-etaleness assumptions of [lem-weil-pbc-surjective-etale-kernel-idempotent-fg], so $I^2=I$ and $I$ is finitely generated as an ideal of $T$. Apply [lem-weil-pbc-fg-idempotent-ideal-idempotent-generator](1) in the commutative ring $T$ to choose $e\\in T$ with $e^2=e$ and $I=eT$. Since $e\\in I$, $\\mu(e)=0$. Set $q=1-e$; then $q^2=q$, $eq=0$, $q+e=1$, and $\\mu(q)=1$.",
+   "text": "Put I = ker(mu). Steps 1–2 verify the surjectivity and etaleness assumptions of [lem-weil-pbc-surjective-etale-kernel-idempotent-fg]. Apply Algebra.FormallyEtale.iff_of_surjective to get I*I = I, and Algebra.FinitePresentation.ker_fG_of_surjective over T to get finite generation. Apply [lem-weil-pbc-fg-idempotent-ideal-idempotent-generator](1), implemented by Ideal.isIdempotentElem_iff_of_fg, to obtain an idempotent e in T with I = (e).",
    "uses": [
     "lem-weil-pbc-surjective-etale-kernel-idempotent-fg",
     "lem-weil-pbc-fg-idempotent-ideal-idempotent-generator"
@@ -52,7 +52,7 @@
    }
   },
   {
-   "text": "Define $D=eT=\\{et:t\\in T\\}$, with inherited addition and multiplication and identity $e$. It is a commutative ring: $e(et)=et$ and $(et)(eu)=e(tu)$, so these operations close in $D$. Give it the $B$-algebra structure $b\\mapsto ej(b)$; this map preserves $1$ because the identity of $D$ is $e$. The map $\\theta:T\\to B\\times D$, $t\\mapsto(\\mu(t),et)$, preserves addition and multiplication, since $e^2=e$, and preserves the identity $(1,e)$. It is a $B$-algebra map since $\\theta(j(b))=(b,ej(b))$. Its first projection is $\\mu$ by the displayed formula.",
+   "text": "Put D = T/(1-e), a quotient commutative B-algebra using the second-factor B-algebra structure on T. Since e and 1-e are idempotent, sum to 1, and have product zero, the complementary-idempotent quotient theorem AlgEquiv.prodQuotientOfIsIdempotentElem gives a B-algebra equivalence theta_1 : T to T/(e) times T/(1-e). Its projections are the two quotient maps. This uses the same complementary-idempotent identities as the corner-ring construction, with the quotient model for the complementary factor.",
    "uses": [],
    "elementary": true,
    "source": {
@@ -61,7 +61,7 @@
    }
   },
   {
-   "text": "For $(b,d)\\in B\\times D$, regarded with $d\\in T$, set $\\psi(b,d)=qj(b)+d$. Since $d\\in eT=\\ker\\mu$, one has $\\mu(d)=0$ and $ed=d$. Hence $\\theta(\\psi(b,d))=(b,d)$ using $\\mu(q)=1$, $\\mu j=\\mathrm{id}_B$, and $eq=0$. Conversely, for $t\\in T$ the element $t-j\\mu(t)$ lies in $\\ker\\mu=eT$, so $q(t-j\\mu(t))=0$. Therefore $qj\\mu(t)=qt$ and $\\psi(\\theta(t))=qt+et=t$. These two identities show that $\\theta$ is bijective, so the $B$-algebra map of Step 4 is the required $B$-algebra isomorphism, with $\\operatorname{pr}_1\\theta=\\mu$.",
+   "text": "The equality ker(mu) = (e) identifies T/(e) with T/ker(mu). Surjectivity of mu and the first isomorphism theorem Ideal.quotientKerAlgEquivOfSurjective identify the latter with B as a B-algebra. Compose theta_1 with the product of this equivalence and the identity on D. On t the first projection is the kernel quotient lift evaluated on the quotient class of t, which is mu(t) by RingHom.kerLift_mk. This gives the requested equivalence and its prescribed first projection.",
    "uses": [],
    "elementary": true,
    "source": {
@@ -81,7 +81,7 @@
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/flat.tex",
-  "place": "Tag 0812 (lemma-trick-fitting-ideal), proof, multiplication-map decomposition; Algebra Tags 00U7, 00U8 first proof and 00EH(1), with complementary-idempotent maps expanded"
+  "place": "Tag 0812 (lemma-trick-fitting-ideal), proof, multiplication-map decomposition; Algebra Tags 00U7, 00U8 first proof and 00EH(1), with complementary-idempotent maps expanded; C8 Lean proof uses ring-level etale cancellation and complementary-idempotent quotients instead of a corner-ring model"
  },
  "mathlib_searches": [
   {
@@ -242,5 +242,26 @@
   "date": "2026-10-17",
   "existing": false
  },
- "lean_audit": {}
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "reviewed_proof": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C8",
+  "result": "pass",
+  "landing": "20261023T104742-L-3424247",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
 }

@@ -1,0 +1,130 @@
+{
+ "id": "lem-sf-ordinary-finite-quotient-open-support",
+ "kind": "statement",
+ "title": "Finite quotient preserves ordinary open support",
+ "statement": "Fix a prime l, a finite extension E/Q_l, an open immersion j:X→Y, a nonnegative index n, a left adjoint L to the specified finite module inverse image [lem-pur-integral-operations-well-defined], and its adjunction adj. For every completed-coefficient module M on X, adj.counit is invertible at the quotient of exponent n+1 of the actual completed-coefficient open extension of M [def-pur-integral-compact-support-coefficient-data]. There is no flatness or completeness assumption on M.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-compatibility/fix-prop-coherence.proof.md",
+  "place": "Maps-used sentence, open-factor normalization: the ordinary section-normalized quotient/open map."
+ },
+ "stmt_deps": [
+  "lem-pur-integral-operations-well-defined",
+  "def-pur-integral-compact-support-coefficient-data"
+ ],
+ "proof": [
+  {
+   "text": "Use the canonical constant-ring inverse-image isomorphism for the finite coefficient ring. Transposing twice identifies its direct image with the specified coefficient direct image, so uniqueness gives an isomorphism of their left adjoints.",
+   "uses": [
+    "def-weil-pbc-proetale-operations",
+    "lem-pur-integral-operations-well-defined"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Transpose the completed coefficient projection identity to get the coefficient square. The proved scalar-restriction/pullback isomorphism identifies the two composite right adjoints. Uniqueness of their left adjoints gives actual completed open extension followed by quotient ≅ quotient on the open followed by L.",
+   "uses": [
+    "def-pur-integral-compact-support-coefficient-data",
+    "def-pur-completed-pullback-tensor-comparison"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Present finite extension as an equivalence followed by slice extension. The open is subterminal, hence the slice unit is invertible and extension is fully faithful. Transport this to L. Its counit is invertible on its essential image; the preceding comparison puts the quotient object there. This also covers empty and identity opens and zero modules.",
+   "uses": [
+    "lem-sp-proetale-open-slice-presentation",
+    "def-pur-integral-compact-support-coefficient-data"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-proetale-operations",
+  "lem-pur-integral-operations-well-defined",
+  "def-pur-integral-compact-support-coefficient-data",
+  "def-pur-completed-pullback-tensor-comparison",
+  "lem-sp-proetale-open-slice-presentation"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-compatibility/fix-prop-coherence.proof.md",
+  "place": "Maps-used sentence, open-factor normalization: the ordinary section-normalized quotient/open map. G7: ordinary adjunction factorization and finite support route."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Extension by zero for an open immersion commutes with extension of scalars, inverse adjunction mate is an isomorphism",
+   "results": "Eight hits on scalar extension and scheme module restriction; no theorem for the actual coefficient-system open mate.",
+   "date": "2026-10-27",
+   "verdict": "No match for the system assertion."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"leftAdjointUniq\", \"counit\"",
+   "results": "Four generic leftAdjointUniq_hom_counit and component/assoc variants.",
+   "date": "2026-10-27",
+   "verdict": "Useful for transporting adjunction counits; does not prove finite evaluation compatibility."
+  },
+  {
+   "tool": "grep",
+   "query": "isIso_counit_app_of_iso|isIso_counit_app_iff_mem_essImage|coForAdj",
+   "results": "Eight Mathlib hits, including Adjunction.isIso_counit_app_of_iso and isIso_counit_app_iff_mem_essImage. Local rg found the proved slice presentation and sequence coextension helpers.",
+   "date": "2026-10-27",
+   "verdict": "Use fully faithful adjunction API for finite support; no actual open evaluation theorem found."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.SixFunctors.OrdinaryOpenReductionMate",
+  "date": "2026-10-27",
+  "group": "G7"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-thm-sf-compatibility",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "fix-prop-coherence",
+   "place": "Maps-used sentence, open-factor normalization: the ordinary section-normalized quotient/open map.",
+   "via": [
+    "lem-sf-ordinary-open-reduction-mate",
+    "lem-sf-open-reconstruction-effectivity",
+    "lem-sf-primitive-reduction-transpose",
+    "lem-sf-generator-reduction-coherence",
+    "lem-sf-integral-compactification-system-realization"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.SixFunctors.OrdinaryFiniteQuotientOpenSupport",
+  "file": "lean/Sheaf/SixFunctors/OrdinaryFiniteQuotientOpenSupport.lean",
+  "declaration": "WeilConjectures.IntegralSystemRealization.ordinaryFiniteQuotientOpenSupport",
+  "statement": "theorem ordinaryFiniteQuotientOpenSupport {X Y : Scheme.{u}}\n    (j : X ⟶ Y) [IsOpenImmersion j] (n : ℕ)\n    (L : normalizedDVRModules l E X n ⥤ normalizedDVRModules l E Y n)\n    (adj : L ⊣ integralOperationsLevelPullback l E j n)\n    (M : scalarReductionSource l E X) :\n    IsIso (adj.counit.app ((unrestrictedIntegralReductionFunctor l E Y n).obj\n      ((PurCompactSupport.openExtension (PurCompactSupport.completed l E) j).obj M)))",
+  "branch": "sheaf-dag",
+  "by": "G7",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G7",
+  "result": "pass",
+  "landing": "20261026T222703-L-681951",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G7",
+  "result": "pass",
+  "landing": "20261026T222703-L-681951",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

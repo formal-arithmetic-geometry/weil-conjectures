@@ -1,0 +1,410 @@
+{
+ "id": "lem-sfb-flat-section-coinduction",
+ "kind": "statement",
+ "title": "Coinduction for a closed section of a flat finitely presented morphism",
+ "statement": "Let $p:W\\to Z$ be a flat locally finitely presented morphism between quasi-compact quasi-separated schemes, and let $i:Z\\hookrightarrow W$ be a closed immersion with $p\\circ i=\\mathrm{id}_Z$ [def-pc-scheme], [def-weil-pbc-scheme-conventions], [def-weil-flat-morphism], [def-sbc-locally-finite-presentation], [def-weil-closed-immersion]. Use the unbounded derived categories of structure-module sheaves and their full quasi-coherent subcategories [def-pc-derived-category], derived direct image [def-pc-derived-direct-image], and derived internal Hom [def-pur-derived-internal-hom]. Let $c$ be a supplied right adjoint to $Ri_*$ on $D_{\\mathrm{QCoh}}$, with counit $\\varepsilon^i$. For $M\\in D_{\\mathrm{QCoh}}(W)$ assume $H^j(M)=0$ for all $j<n$ for some integer $n$. There is a canonical natural isomorphism\n$$\\Phi_M:Ri_*c(M)\\xrightarrow{\\sim}R\\mathcal Hom_W(i_*\\mathcal O_Z,M).$$\nIt is normalized so that evaluation at the unit $\\mathcal O_W\\to i_*\\mathcal O_Z$ corresponds to $\\varepsilon^i_M$. More precisely, for every $h:\\mathcal O_Z\\to c(M)$, put $\\xi=\\varepsilon^i_M\\circ Ri_*h:i_*\\mathcal O_Z\\to M$. Then $\\Phi_M\\circ Ri_*h$ is the transpose of\n$$i_*\\mathcal O_Z\\otimes^{\\mathbf L}_{\\mathcal O_W}i_*\\mathcal O_Z\\xrightarrow{m}i_*\\mathcal O_Z\\xrightarrow{\\xi}M.$$\nHere $m$ is the canonical derived multiplication induced by the ordinary multiplication on the direct-image algebra, and transpose uses the canonical derived tensor--Hom bijection [def-pc-canonical-derived-tensor-hom-bijection], with the derived tensor structure [def-pc-scheme-derived-tensor-structure]. No Noetherianity, perfectness of $i_*\\mathcal O_Z$, or properness of $p$ is assumed.",
+ "source": {
+  "document": "literature/stacks-project/duality.tex",
+  "place": "Tags 0A9X (lemma-twisted-inverse-image-closed), 0A77 (lemma-sheaf-with-exact-support-ext), and 0E2T (definition-relative-dualizing-complex, following paragraph); the closed section is pseudo-coherent by more-morphisms.tex Tags 0695 (lemma-flat-finite-presentation-pseudo-coherent) and 0683 (lemma-permanence-pseudo-coherent)."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-pbc-scheme-conventions",
+  "def-weil-flat-morphism",
+  "def-sbc-locally-finite-presentation",
+  "def-weil-closed-immersion",
+  "def-pc-derived-category",
+  "def-pc-derived-direct-image",
+  "def-pur-derived-internal-hom",
+  "def-pc-canonical-derived-tensor-hom-bijection",
+  "def-pc-scheme-derived-tensor-structure",
+  "lem-pc-derived-direct-image-preserves-qcoh",
+  "lem-weil-pbc-module-base-change-map-algebra",
+  "def-pc-derived-pullback-tensor-comparison"
+ ],
+ "proof": [
+  {
+   "text": "Put $B=i_*\\mathcal O_Z$ and $\\mathcal J=\\ker(\\mathcal O_W\\to B)$. First $B[0]$ is pseudo-coherent. Indeed $\\mathcal O_Z[0]$ is pseudo-coherent relative to $\\mathrm{id}_Z$: on each affine base open use the identity embedding into relative affine space of dimension zero and the one-term rank-one free complex. For every integer $m$ its identity map satisfies the defining $m$-approximation conditions. Apply [lem-sfb-flat-ambient-relative-pseudocoherence] to $Z\\xrightarrow{i}W\\xrightarrow{p}Z$, using $pi=\\mathrm{id}$ and the assumed flatness and local finite presentation of $p$. It gives $Ri_*\\mathcal O_Z$ pseudo-coherent. The exactness supplied by [lem-pc-closed-module-pushforward-homology] identifies this object with $B[0]$, by [lem-weil-pbc-exact-functor-derived-functor].",
+   "uses": [
+    "def-sfb-relative-pseudo-coherent-complex",
+    "def-sfb-m-pseudo-coherent-complex",
+    "lem-sfb-flat-ambient-relative-pseudocoherence",
+    "lem-pc-closed-module-pushforward-homology",
+    "lem-weil-pbc-exact-functor-derived-functor"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/duality.tex",
+    "place": "Tag 0A9X, pseudo-coherence hypothesis; more-morphisms.tex Tag 09UU, lemma-check-relative-pseudo-coherence-on-charts"
+   }
+  },
+  {
+   "text": "Factor ordinary $i_*$ as $TE$, where $E:\\operatorname{Mod}(\\mathcal O_Z)\\to\\operatorname{Mod}(B)$ is pushforward retaining the $B$-action and $T$ forgets this action. This $E$ is an exact equivalence. To see essential surjectivity explicitly, an arbitrary $B$-module $F$, viewed over $\\mathcal O_W$, is killed by $\\mathcal J$. The unit quotient formula [lem-weil-pbc-closed-immersion-unit-quotient] gives $F\\simeq i_*i^*F$ since $\\mathcal JF=0$. This is $B$-linear: $\\mathcal O_W\\to B$ is a surjection of sheaves, so its local lifts test $B$-linearity. The same test shows that every $\\mathcal O_W$-linear map between $B$-modules is $B$-linear. Thus [lem-weil-pbc-closed-immersion-pushforward-fully-faithful] gives full faithfulness of $E$. Exactness follows from [lem-pc-closed-module-pushforward-homology], since kernels and cokernels for $B$-modules have the same underlying module sheaves. Choose a quasi-inverse $V$ with these natural unit identifications.",
+   "uses": [
+    "def-weil-closed-immersion",
+    "lem-weil-pbc-closed-immersion-unit-quotient",
+    "lem-weil-pbc-closed-immersion-pushforward-fully-faithful",
+    "lem-pc-closed-module-pushforward-homology"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/duality.tex",
+    "place": "Section Right adjoint of pushforward for closed immersions, before Tag 0A76; modules.tex Tag 08KS, lemma-i-star-equivalence"
+   }
+  },
+  {
+   "text": "Apply [lem-sc-sheaf-coinduction-adjunction] to $i$. It supplies $H:\\operatorname{Mod}(\\mathcal O_W)\\to\\operatorname{Mod}(B)$, $T\\dashv H$, and $TH(F)\\simeq\\mathcal Hom_W(B,F)$ with action $(b\\phi)(b')=\\phi(bb')$ and counit $\\phi\\mapsto\\phi(1)$, including restriction to smaller opens. Put $C=VH$. Composing the Hom bijection with $E\\dashv V$ gives $i_*\\dashv C$. Under $i_*C(F)\\simeq TH(F)$ its counit is evaluation at $1$. Both $T$ and $E$ are exact: $T$ leaves kernels and sheafified cokernels unchanged, and $E$ is the exact equivalence of Step 2. Consequently $i_*$ is exact, and [lem-weil-pbc-right-adjoint-preserves-kinjective] shows that $C$ sends K-injective complexes to K-injective complexes.",
+   "uses": [
+    "lem-sc-sheaf-coinduction-adjunction",
+    "lem-weil-pbc-right-adjoint-preserves-kinjective"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/duality.tex",
+    "place": "Tag 0A76, lemma-sheaf-with-exact-support-adjoint; Tag 0A77, lemma-sheaf-with-exact-support-ext"
+   }
+  },
+  {
+   "text": "For any $M\\in D(\\mathcal O_W)$ take a K-injective representative $I$ using [prop-pur-kinjective-resolutions-exist], and define $J(M)=Q_ZC(I)$. For a complex $N$ on $Z$, the ordinary adjunction gives a bijection of chain maps $i_*N\\to I$ and $N\\to C(I)$. It preserves homotopies: in degree $-1$ the same adjunction intertwines $d_I s+s d_N$, since it is additive and natural in source and target. Pass to homotopy classes and use [lem-weil-pbc-kinjective-hom-derived] for $I$ and $C(I)$. This yields $\\operatorname{Hom}_{D(W)}(Ri_*N,M)\\simeq\\operatorname{Hom}_{D(Z)}(N,J(M))$, natural in both variables. Thus $Ri_*\\dashv J$ on the full unbounded categories, with counit represented by evaluation at $1$. Exactness of $i_*$ and [lem-weil-pbc-exact-functor-derived-functor] identify $Ri_*J(M)$ with $Q_W\\mathcal Hom_W(B,I)$, which is $R\\mathcal Hom_W(B,M)$ by [def-pur-derived-internal-hom]. Call this natural identification $\\Psi_M$.",
+   "uses": [
+    "prop-pur-kinjective-resolutions-exist",
+    "lem-weil-pbc-kinjective-hom-derived",
+    "lem-weil-pbc-exact-functor-derived-functor",
+    "def-pur-derived-internal-hom"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/duality.tex",
+    "place": "Tags 0A76 and 0A77, constructions and proofs; derived.tex Tag 070I, lemma-K-injective"
+   }
+  },
+  {
+   "text": "Now let $M\\in D_{\\mathrm{QCoh}}(W)$ have $H^j(M)=0$ for $j<n$. By Step 1 and [lem-sc-rhom-supported-qcoherent], $R\\mathcal Hom_W(B,M)$ has quasi-coherent cohomology. Since exact $i_*$ commutes with cohomology, Step 4 gives $i_*H^q(J(M))\\simeq H^q(R\\mathcal Hom_W(B,M))$. Each is killed by $\\mathcal J$. Apply [lem-weil-pbc-closed-immersion-pushforward-annihilated](2) to this quasi-coherent module. Its pullback is quasi-coherent and is isomorphic to $H^q(J(M))$ by the ordinary counit isomorphism of [lem-weil-pbc-closed-immersion-pushforward-fully-faithful]. Therefore $J(M)\\in D_{\\mathrm{QCoh}}(Z)$. This uses bounded-below $M$, not perfectness of $B$.",
+   "uses": [
+    "lem-sc-rhom-supported-qcoherent",
+    "lem-pc-closed-module-pushforward-homology",
+    "lem-weil-pbc-closed-immersion-pushforward-annihilated",
+    "lem-weil-pbc-closed-immersion-pushforward-fully-faithful"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/duality.tex",
+    "place": "Tag 0A9X via lemma-sheaf-with-exact-support-quasi-coherent; perfect.tex Tag 0A6H"
+   }
+  },
+  {
+   "text": "For this $M$, both $c(M)$ and $J(M)$ represent the same functor on all of $D_{\\mathrm{QCoh}}(Z)$: $N\\mapsto\\operatorname{Hom}_{D(W)}(Ri_*N,M)$. The latter equality uses fullness of the quasi-coherent subcategories and Step 5, not a claim that $J$ preserves every unbounded quasi-coherent object. Define $\\alpha_M:c(M)\\to J(M)$ to be the $J$-adjunct of $\\varepsilon^i_M$, and $\\beta_M:J(M)\\to c(M)$ the $c$-adjunct of the $J$-counit $e_M$. Then $e_M Ri_*\\alpha_M=\\varepsilon^i_M$ and $\\varepsilon^i_M Ri_*\\beta_M=e_M$. Applying the two adjunction bijections gives $\\beta_M\\alpha_M=1$ and $\\alpha_M\\beta_M=1$. Naturality follows by applying the same bijection to each square and using counit naturality. Set $\\Phi_M=\\Psi_M Ri_*\\alpha_M$. Evaluation at the unit is represented in Step 4 by $\\phi\\mapsto\\phi(1)$, so the first equation gives exactly the stated counit normalization.",
+   "uses": [
+    "def-pc-derived-category",
+    "def-pc-derived-direct-image"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/duality.tex",
+    "place": "Tag 0A9X, uniqueness-of-adjoint argument, and example-trace-closed-immersion"
+   }
+  },
+  {
+   "text": "Let $h:\\mathcal O_Z\\to c(M)$ and $k=\\alpha_Mh$. As $C(I)$ is K-injective, [lem-weil-pbc-kinjective-hom-derived] represents $k$ by an actual chain map $\\mathcal O_Z[0]\\to C(I)$. Pushing it forward gives a $B$-linear chain map $g:B[0]\\to\\mathcal Hom_W(B,I)$. The chain map $\\xi_0:B[0]\\to I$ obtained by evaluation at $1$ represents $\\xi$, by Step 6. On every open and every pair of local sections $b,b'$ of $B$, the action formula in [lem-sc-sheaf-coinduction-adjunction] gives\n$$g(b)(b')=(b'g(b))(1)=g(b'b)(1)=\\xi_0(bb').$$\nThese equations are equations of sheaf morphisms, since the cited action formula includes restrictions. Thus ordinary uncurrying of $g$ is ordinary multiplication followed by $\\xi_0$.",
+   "uses": [
+    "lem-weil-pbc-kinjective-hom-derived",
+    "lem-sc-sheaf-coinduction-adjunction"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/duality.tex",
+    "place": "Tag 0E2T following paragraph; multiplication-action calculation from modules.tex Tag 0A6F"
+   }
+  },
+  {
+   "text": "To verify the derived transpose with the fixed normalization, choose a K-flat resolution $q:P\\to B[0]$ by [lem-pc-kflat-resolution]. The composite $gq:P\\to\\mathcal Hom_W(B,I)$ represents $\\Phi_MRi_*h$ after the source identification $QP\\simeq B[0]$. The canonical bijection [def-pc-canonical-derived-tensor-hom-bijection] takes it to the chain map $P\\otimes B[0]\\to I$ given by $x\\otimes b\\mapsto g(qx)(b)=\\xi_0(qx\\,b)$. Here only degree-zero $qx$ contributes; the other degrees map to zero, so there is no sign. Under [def-pc-scheme-derived-tensor-structure], $P\\otimes B[0]$ represents $B\\otimes^{\\mathbf L}B$, and $x\\otimes b\\mapsto qx\\,b$ is precisely its canonical derived multiplication (the tensor comparison to $B\\otimes B$ followed by ordinary multiplication). The displayed chain map is therefore $\\xi\\circ m$. This proves the final clause for every $h$.",
+   "uses": [
+    "lem-pc-kflat-resolution",
+    "def-pc-canonical-derived-tensor-hom-bijection",
+    "def-pc-scheme-derived-tensor-structure"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/duality.tex",
+    "place": "Tag 0E2T following paragraph; canonical tensor-Hom normalization and K-flat model"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sfb-relative-pseudo-coherent-complex",
+  "def-sfb-m-pseudo-coherent-complex",
+  "lem-sfb-flat-ambient-relative-pseudocoherence",
+  "lem-pc-closed-module-pushforward-homology",
+  "lem-weil-pbc-exact-functor-derived-functor",
+  "def-weil-closed-immersion",
+  "lem-weil-pbc-closed-immersion-unit-quotient",
+  "lem-weil-pbc-closed-immersion-pushforward-fully-faithful",
+  "lem-sc-sheaf-coinduction-adjunction",
+  "lem-weil-pbc-right-adjoint-preserves-kinjective",
+  "prop-pur-kinjective-resolutions-exist",
+  "lem-weil-pbc-kinjective-hom-derived",
+  "def-pur-derived-internal-hom",
+  "lem-sc-rhom-supported-qcoherent",
+  "lem-weil-pbc-closed-immersion-pushforward-annihilated",
+  "def-pc-derived-category",
+  "def-pc-derived-direct-image",
+  "lem-pc-kflat-resolution",
+  "def-pc-canonical-derived-tensor-hom-bijection",
+  "def-pc-scheme-derived-tensor-structure"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/duality.tex",
+  "place": "Tags 0A76, 0A77, 0A9X and 0E2T; explicit sheaf-action and K-flat representative verification of the multiplication transpose"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For a closed section i of a flat finitely presented morphism p of quasi compact quasi separated schemes the right adjoint c to Ri pushforward on bounded below quasi coherent complexes satisfies Ri c M equals derived internal Hom of i O with M and its adjunct is multiplication by the class",
+   "results": "8 hits; top=['AlgebraicGeometry.Scheme.Modules.instIsRightAdjointPushforward', 'AlgebraicGeometry.Scheme.Modules.instIsRightAdjointPresheafOfModulesToPresheafOfModules', 'AlgebraicGeometry.Scheme.Modules.pullbackPushforwardAdjunction', 'AlgebraicGeometry.Scheme.Modules.instIsLeftAdjointPullback', 'AlgebraicGeometry.Scheme.Modules.restrictAdjunction', 'AlgebraicGeometry.Scheme.Modules.instIsLeftAdjointRestrictFunctor', 'SheafOfModules.instIsRightAdjointPushforward', 'AlgebraicGeometry.Scheme.Modules.pseudofunctor_map_adj']; digest=97e594271e494500; ",
+   "date": "2026-10-23",
+   "verdict": "no match: ordinary pushforward is a right adjoint to pullback, not the left adjoint in closed coinduction; abstract internal Hom adjunction does not supply this sheaf-theoretic comparison"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Closed immersion extraordinary inverse image sheaf Hom coinduction evaluation at one adjunction",
+   "results": "8 hits; top=['AlgebraicGeometry.Scheme.Modules.restrictAdjunction_counit_app_app', 'AlgebraicGeometry.Scheme.ofRestrict_toLRSHom_c_app', 'AlgebraicGeometry.Scheme.Modules.restrictAdjunction_unit_app_app', 'AlgebraicGeometry.Scheme.ofRestrict_app', 'AlgebraicGeometry.SheafedSpace.ofRestrict_hom_c_app', 'AlgebraicGeometry.Scheme.Modules.restrictAdjunction', 'AlgebraicGeometry.IsOpenImmersion.map_ΓIso_inv', 'AlgebraicGeometry.IsOpenImmersion.map_ΓIso_inv_apply']; digest=9b1cd4fa5897ba28; ",
+   "date": "2026-10-23",
+   "verdict": "no match: ordinary pushforward is a right adjoint to pullback, not the left adjoint in closed coinduction; abstract internal Hom adjunction does not supply this sheaf-theoretic comparison"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"rightAdjoint\"",
+   "results": "4 hits; top=['AlgebraicGeometry.instIsRightAdjointCommRingCatOppositeLocallyRingedSpaceΓ', 'AlgebraicGeometry.instIsRightAdjointCommRingCatOppositeSchemeΓ', 'AlgebraicGeometry.Scheme.Modules.instIsRightAdjointPushforward', 'AlgebraicGeometry.Scheme.Modules.instIsRightAdjointPresheafOfModulesToPresheafOfModules']; digest=9057506f1507c403; ",
+   "date": "2026-10-23",
+   "verdict": "no match: ordinary pushforward is a right adjoint to pullback, not the left adjoint in closed coinduction; abstract internal Hom adjunction does not supply this sheaf-theoretic comparison"
+  },
+  {
+   "tool": "grep",
+   "query": "closedImmersion.*[Rr]ightAdjoint|exactSupport|coinduction.*[Ss]heaf",
+   "results": "0 hits; top=[]; digest=4f53cda18c2baa0c; ",
+   "date": "2026-10-23",
+   "verdict": "no match: ordinary pushforward is a right adjoint to pullback, not the left adjoint in closed coinduction; abstract internal Hom adjunction does not supply this sheaf-theoretic comparison"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Closed immersion right adjoint derived internal Hom multiplication by adjunct",
+   "results": "8 hits; top=['CategoryTheory.ihom', 'CategoryTheory.Closed.rightAdj', 'CategoryTheory.ihom.adjunction', 'CategoryTheory.Pi.monoidalClosed_closed_rightAdj', 'CategoryTheory.exp.adjunction', 'CategoryTheory.MonoidalClosed.internalHom', 'CategoryTheory.Closed.adj', 'CategoryTheory.MonoidalClosed.internalHomAdjunction₂']; digest=dfd5ab04e7471ce4; ",
+   "date": "2026-10-23",
+   "verdict": "no match: ordinary pushforward is a right adjoint to pullback, not the left adjoint in closed coinduction; abstract internal Hom adjunction does not supply this sheaf-theoretic comparison"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"SheafOfModules\", \"equivalence\"",
+   "results": "3 hits; top=['SheafOfModules.pushforwardPushforwardEquivalence', 'SheafOfModules.pushforwardPushforwardEquivalence_unit_app_val_app', 'SheafOfModules.pushforwardPushforwardEquivalence_counit_app_val_app']; digest=571c2771101662dc; ",
+   "date": "2026-10-23",
+   "verdict": "no match: ordinary pullback adjunctions, open-immersion results, and equivalences of indexing sites do not state closed exact-support derived coinduction or its normalization"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a closed immersion of schemes i Z into X direct image gives an exact equivalence between O Z module sheaves and module sheaves over i pushforward O Z on X",
+   "results": "8 hits; top=['AlgebraicGeometry.IsClosedImmersion.overEquivIdealSheafData', 'AlgebraicGeometry.Scheme.Modules.restrictAdjunction', 'AlgebraicGeometry.Scheme.Modules.instFullPushforward', 'AlgebraicGeometry.Scheme.Modules.instFaithfulPushforward', 'AlgebraicGeometry.Scheme.Modules.instIsRightAdjointPushforward', 'AlgebraicGeometry.Scheme.Modules.restrictFunctorAdjCounitIso', 'AlgebraicGeometry.Scheme.Modules.instIsLeftAdjointRestrictFunctor', 'AlgebraicGeometry.Scheme.Modules.restrict']; digest=5f44d183d0c406f3; ",
+   "date": "2026-10-23",
+   "verdict": "no match: ordinary pullback adjunctions, open-immersion results, and equivalences of indexing sites do not state closed exact-support derived coinduction or its normalization"
+  },
+  {
+   "tool": "grep",
+   "query": "closed.*[Ee]quivalence|[Ee]quivalence.*closed|isClosedEmbedding.*[Mm]odule",
+   "results": "25 hits; top=['Mathlib/MeasureTheory/Measure/Portmanteau.lean', 'Mathlib/AlgebraicGeometry/AlgebraicCycle/Basic.lean', 'Mathlib/Topology/Sheaves/Over.lean', 'Mathlib/Topology/Algebra/Module/ContinuousLinearMap/Restrict.lean', 'Mathlib/Topology/Algebra/Module/ContinuousLinearMap/Restrict.lean', 'Mathlib/Topology/Sets/Closeds.lean', 'Mathlib/Topology/Sets/Closeds.lean', 'Mathlib/Topology/Sets/Closeds.lean']; digest=05b8054a3f8e3a95; ",
+   "date": "2026-10-23",
+   "verdict": "no match: ordinary pullback adjunctions, open-immersion results, and equivalences of indexing sites do not state closed exact-support derived coinduction or its normalization"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Modules on a closed subspace are equivalent to modules over the pushforward structure sheaf on the ambient space",
+   "results": "8 hits; top=['AlgebraicGeometry.Scheme.Modules', 'SheafOfModules.pushforward_obj_val', 'AlgebraicGeometry.Scheme.Modules.pullbackPushforwardAdjunction', 'PresheafOfModules.pushforward₀_obj_obj_isModule', 'AlgebraicGeometry.Scheme.Modules.restrictAdjunction', 'ModuleCat.tildeInModuleCat', 'SheafOfModules.pushforward', 'AlgebraicGeometry.Scheme.Modules.pushforward']; digest=bb4ab35874674d92; ",
+   "date": "2026-10-23",
+   "verdict": "no match: ordinary pullback adjunctions, open-immersion results, and equivalences of indexing sites do not state closed exact-support derived coinduction or its normalization"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Sheaves of modules over a quotient sheaf of rings supported on a closed subset are equivalent to sheaves of modules on the closed subset",
+   "results": "8 hits; top=['SheafOfModules.isQuasicoherent', 'SheafOfModules.LocalGeneratorsData.X', 'ModuleCat.tilde', 'SheafOfModules.QuasicoherentData.X', 'SheafOfModules.Presentation', 'SheafOfModules.QuasicoherentData.I', 'SheafOfModules.LocalGeneratorsData.I', 'SheafOfModules.QuasicoherentData.presentation']; digest=07f6df157af83dba; ",
+   "date": "2026-10-23",
+   "verdict": "no match: ordinary pullback adjunctions, open-immersion results, and equivalences of indexing sites do not state closed exact-support derived coinduction or its normalization"
+  },
+  {
+   "tool": "grep",
+   "query": "exactSupport|closedImmersion.*[Rr]ightAdjoint|[Dd]erived.*[Cc]oinduction",
+   "results": "0 hits; top=[]; digest=4f53cda18c2baa0c; ",
+   "date": "2026-10-23",
+   "verdict": "no match: ordinary pullback adjunctions, open-immersion results, and equivalences of indexing sites do not state closed exact-support derived coinduction or its normalization"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Closed immersion derived coinduction internal Hom counit multiplication",
+   "results": "8 hits; top=['CategoryTheory.Functor.closedCounit', 'CategoryTheory.Pi.closedCounit', 'CategoryTheory.ihom.ihom_adjunction_counit', 'CategoryTheory.ihom.ev', 'CategoryTheory.ihom', 'Coalgebra.counitCoalgHom', 'CategoryTheory.ihom.coev', 'AlgebraicGeometry.IsClosedImmersion']; digest=9b68aec552aefa01; ",
+   "date": "2026-10-23",
+   "verdict": "no match: ordinary pullback adjunctions, open-immersion results, and equivalences of indexing sites do not state closed exact-support derived coinduction or its normalization"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Right adjoint to derived pushforward of a closed immersion agrees with derived internal Hom from its structure sheaf and counit is evaluation at one",
+   "results": "8 hits; top=['AlgebraicGeometry.Scheme.Modules.instIsRightAdjointPushforward', 'SheafOfModules.instIsRightAdjointPushforward', 'AlgebraicGeometry.Scheme.Modules.restrictAdjunction', 'SheafOfModules.pushforwardPushforwardAdj_counit_app_val_app', 'SheafOfModules.pushforwardPushforwardAdj', 'SheafOfModules.instIsRightAdjointPushforwardCompSheafRingCatMapSheafPushforwardContinuous', 'AlgebraicGeometry.Scheme.Modules.instIsLeftAdjointRestrictFunctor', 'AlgebraicGeometry.Scheme.Modules.pullbackPushforwardAdjunction']; digest=d609ed0fc42dd0fe; ",
+   "date": "2026-10-23",
+   "verdict": "no match: ordinary pullback adjunctions, open-immersion results, and equivalences of indexing sites do not state closed exact-support derived coinduction or its normalization"
+  },
+  {
+   "tool": "grep",
+   "query": "pushforward.*[Ee]quivalence|[Ee]quivalence.*pushforward|[Ii]sClosedImmersion",
+   "results": "6 hits; top=['Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean', 'Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean', 'Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean', 'Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean', 'Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean', 'Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent.lean']; digest=1d8c08f5e8b0fc93; ",
+   "date": "2026-10-23",
+   "verdict": "no match: ordinary pullback adjunctions, open-immersion results, and equivalences of indexing sites do not state closed exact-support derived coinduction or its normalization"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Extraordinary inverse image for a closed section of a flat finitely presented scheme morphism is sheaf derived Hom and the transpose of a pushed unit map is multiplication followed by its adjunct",
+   "results": "8 hits; top=['AlgebraicGeometry.Scheme.Modules.instIsRightAdjointPushforward', 'AlgebraicGeometry.Scheme.Modules.instIsLeftAdjointPullback', 'AlgebraicGeometry.Scheme.Modules.pullbackPushforwardAdjunction', 'AlgebraicGeometry.Scheme.kerAdjunction', 'AlgebraicGeometry.Scheme.Modules.restrictAdjunction', 'AlgebraicGeometry.Scheme.Modules.pseudofunctor_map_adj', 'AlgebraicGeometry.Scheme.Modules.instIsLeftAdjointRestrictFunctor', 'AlgebraicGeometry.Scheme.Modules.restrictAdjunction_unit_app_app']; digest=4a98811317d5bbfa; ",
+   "date": "2026-10-23",
+   "verdict": "no match: ordinary pullback adjunctions, open-immersion results, and equivalences of indexing sites do not state closed exact-support derived coinduction or its normalization"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-proper-adjoint-diagonal-pair",
+  "date": "2026-10-23",
+  "group": "Q47"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: The ten-canonical Hilbert parameter and projective-frame torsors. Specific prerequisite: Relative dualizing line of an arbitrary nodal family. Derived-complex prerequisite: proper flat duality and its normalized polynomial models, before applying the regular-equation calculation. Supporting input: Diagonal pair associated to proper flat duality over a qcqs base. Supporting input: Coinduction for a closed section of a flat finitely presented morphism.",
+   "via": [
+    "lem-sfb-proper-adjoint-diagonal-pair",
+    "lem-sfb-proper-flat-dualizing-polynomial-model",
+    "lem-sfb-gorenstein-curve-relative-dualizing",
+    "lem-sfb-ten-canonical-hilbert-parameter",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-flat-section-coinduction",
+  "worker": "stage1",
+  "summary": "Preserved the statement. Reused the flat-ambient relative pseudo-coherence criterion and existing ordinary closed-module and coinduction statements. Constructed the exact-support right adjoint on K-injectives, proved quasi-coherence for the supplied bounded-below input, compared representing objects with the supplied adjoint using counits, and checked the multiplication formula on a K-flat representative. No new nodes.",
+  "blueprint": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: The ten-canonical Hilbert parameter and projective-frame torsors. Specific prerequisite: Relative dualizing line of an arbitrary nodal family. Derived-complex prerequisite: proper flat duality and its normalized polynomial models, before applying the regular-equation calculation. Supporting input: Diagonal pair associated to proper flat duality over a qcqs base. Supporting input: Coinduction for a closed section of a flat finitely presented morphism.",
+  "tool_uses": [
+   {
+    "node": "lem-pc-closed-module-pushforward-homology",
+    "why": "Generic Ordinary closed module pushforward preserves homology input for the closed-section exact-support calculation; no statement of the item unit supplies this general module/derived-category fact."
+   },
+   {
+    "node": "lem-weil-pbc-exact-functor-derived-functor",
+    "why": "Generic The functor induced by an exact functor is its own right and left derived functor input for the closed-section exact-support calculation; no statement of the item unit supplies this general module/derived-category fact."
+   },
+   {
+    "node": "lem-weil-pbc-closed-immersion-unit-quotient",
+    "why": "Generic For a closed immersion i with ideal J, the unit F -> i_* i^* F is the quotient F -> F/JF input for the closed-section exact-support calculation; no statement of the item unit supplies this general module/derived-category fact."
+   },
+   {
+    "node": "lem-weil-pbc-closed-immersion-pushforward-fully-faithful",
+    "why": "Generic Pushforward of modules along a closed immersion is fully faithful input for the closed-section exact-support calculation; no statement of the item unit supplies this general module/derived-category fact."
+   },
+   {
+    "node": "lem-sc-sheaf-coinduction-adjunction",
+    "why": "Generic Sheaf coinduction with multiplication action and evaluation counit input for the closed-section exact-support calculation; no statement of the item unit supplies this general module/derived-category fact."
+   },
+   {
+    "node": "lem-weil-pbc-right-adjoint-preserves-kinjective",
+    "why": "Generic A right adjoint of an exact functor preserves K-injective complexes input for the closed-section exact-support calculation; no statement of the item unit supplies this general module/derived-category fact."
+   },
+   {
+    "node": "prop-pur-kinjective-resolutions-exist",
+    "why": "Generic Existence of K-injective resolutions of sheaves of modules input for the closed-section exact-support calculation; no statement of the item unit supplies this general module/derived-category fact."
+   },
+   {
+    "node": "lem-weil-pbc-kinjective-hom-derived",
+    "why": "Generic Morphisms into a K-injective complex are computed in the homotopy category input for the closed-section exact-support calculation; no statement of the item unit supplies this general module/derived-category fact."
+   },
+   {
+    "node": "lem-sc-rhom-supported-qcoherent",
+    "why": "Generic Internal Hom from a pseudo-coherent or perfect complex to a supported complex input for the closed-section exact-support calculation; no statement of the item unit supplies this general module/derived-category fact."
+   },
+   {
+    "node": "lem-weil-pbc-closed-immersion-pushforward-annihilated",
+    "why": "Generic Quasi-coherent modules killed by the ideal of a closed subscheme are pushforwards from it input for the closed-section exact-support calculation; no statement of the item unit supplies this general module/derived-category fact."
+   },
+   {
+    "node": "lem-pc-kflat-resolution",
+    "why": "Generic Existence of K-flat resolutions on a ringed site input for the closed-section exact-support calculation; no statement of the item unit supplies this general module/derived-category fact."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pc-closed-module-pushforward-homology",
+  "lem-weil-pbc-exact-functor-derived-functor",
+  "lem-weil-pbc-closed-immersion-unit-quotient",
+  "lem-weil-pbc-closed-immersion-pushforward-fully-faithful",
+  "lem-sc-sheaf-coinduction-adjunction",
+  "lem-weil-pbc-right-adjoint-preserves-kinjective",
+  "prop-pur-kinjective-resolutions-exist",
+  "lem-weil-pbc-kinjective-hom-derived",
+  "lem-sc-rhom-supported-qcoherent",
+  "lem-weil-pbc-closed-immersion-pushforward-annihilated",
+  "lem-pc-kflat-resolution"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-NS-05b2cd39b",
+  "group": "NS",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NS-05b2cd39b (reviewer sub-agent of L); spot-checked: I read the item and all 8 steps in full against every cited statement. The statement and stmt_deps are identical to live and side-live, where the item is still unsplit, so no parallel group has split it. There is no re-split repair note and no new node. Source: Stacks duality.tex 0A9X (line 2250) and 0A77 (line 2122) match the item hypothesis by hypothesis. Step 1: B[0] is pseudo-coherent by the flat-ambient criterion with X=S=Z, P=W, using p∘i=id and id_Z relative pseudo-coherence with n=0 and the identity chart. Step 2: Mod(O_Z)≃Mod(B) follows from the unit-quotient, fully-faithful and homology nodes, with B-linearity checked by local lifts. Step 3: coinduction T⊣H gives i_*⊣C, and C preserves K-injectives (correct direction: right adjoint of the exact i_*). Step 4: Ri_*⊣J on D via homotopy classes into the K-injectives I and C(I); Ψ is Hom^•(B[0],I). Step 5: quasi-coherence of J(M) for bounded-below M uses rhom-supported-qcoherent clause 1 and annihilated (2) plus the counit. Step 6: representing-object uniqueness inside D_QCoh(Z); the counit equations and normalization check out. Steps 7–8: the action formula gives g(b)(b')=ξ0(bb'), and the uncurrying with K-flat P→B[0] is (q⊗1) followed by multiplication with no sign; this matches def-pc-canonical-derived-tensor-hom-bijection and the derived tensor structure. Edge cases: id section, k[ε]/ε²→k with non-perfect B, M=0. No cycle (closure of 940 nodes), no SGA, no duplicate in the DAG. I accept the 11 generic tool_uses (picard-duality, p1, def-exchange, sf-operations, picard-semicon). The review_split 'no such node' output is an artifact of the symlinked chapter directories. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.FlatSectionCoinduction",
+  "declaration": "AlgebraicGeometry.exists_flatSectionCoinduction",
+  "declarations": [
+   "AlgebraicGeometry.flatSectionAlgebraModule",
+   "AlgebraicGeometry.flatSectionStructureObject",
+   "AlgebraicGeometry.flatSectionAlgebraObject",
+   "AlgebraicGeometry.flatSectionAlgebraUnit",
+   "AlgebraicGeometry.flatSectionOrdinaryMultiplication",
+   "AlgebraicGeometry.flatSectionTensorSingleIso",
+   "AlgebraicGeometry.flatSectionDerivedMultiplication",
+   "AlgebraicGeometry.flatSectionStructureUnitIso",
+   "AlgebraicGeometry.flatSectionPushforwardStructureIso",
+   "AlgebraicGeometry.flatSectionQCohPushforward",
+   "AlgebraicGeometry.flatSectionRHomFunctor",
+   "AlgebraicGeometry.exists_flatSectionCoinduction"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/FlatSectionCoinduction.lean",
+  "statement": "theorem exists_flatSectionCoinduction {Z W : Scheme.{u}} [CompactSpace Z] [QuasiSeparatedSpace Z] [CompactSpace W] [QuasiSeparatedSpace W] [HasDerivedCategory.{wZ} (SheafOfModules.{u} (moduleRings Z.toRingedSpace))] [HasDerivedCategory.{wW} (SheafOfModules.{u} (moduleRings W.toRingedSpace))] (p : W ⟶ Z) [Flat p] [LocallyOfFinitePresentation p] (i : Z ⟶ W) [IsClosedImmersion i] (hi : i ≫ p = 𝟙 Z) (c : schemeDerivedQCohCategory W ⥤ schemeDerivedQCohCategory Z) (adj : flatSectionQCohPushforward i ⊣ c) : ∃ Φ : ∀ (M : schemeDerivedQCohCategory W) (_hM : ∃ n : ℤ, M.obj.IsGE n), (schemeDerivedDirectImage i).obj (c.obj M).obj ≅ (flatSectionRHomFunctor i).obj M.obj, (∀ (M N : schemeDerivedQCohCategory W) (hM : ∃ n : ℤ, M.obj.IsGE n) (hN : ∃ n : ℤ, N.obj.IsGE n) (f : M ⟶ N), (schemeDerivedDirectImage i).map (c.map f).hom ≫ (Φ N hN).hom = (Φ M hM).hom ≫ (flatSectionRHomFunctor i).map f.hom) ∧ (∀ (M : schemeDerivedQCohCategory W) (hM : ∃ n : ℤ, M.obj.IsGE n), (𝟙 ((schemeDerivedDirectImage i).obj (c.obj M).obj) ⊗ₘ flatSectionAlgebraUnit i) ≫ schemeDerivedTensorHomEquiv W _ _ M.obj (Φ M hM).hom = (𝟙 ((schemeDerivedDirectImage i).obj (c.obj M).obj) ⊗ₘ (flatSectionStructureUnitIso W).hom) ≫ (ρ_ ((schemeDerivedDirectImage i).obj (c.obj M).obj)).hom ≫ (adj.counit.app M).hom) ∧ (∀ (M : schemeDerivedQCohCategory W) (hM : ∃ n : ℤ, M.obj.IsGE n) (h : flatSectionStructureObject Z ⟶ (c.obj M).obj), schemeDerivedTensorHomEquiv W (flatSectionAlgebraObject i) (flatSectionAlgebraObject i) M.obj ((flatSectionPushforwardStructureIso i).inv ≫ (schemeDerivedDirectImage i).map h ≫ (Φ M hM).hom) = flatSectionDerivedMultiplication i ≫ (flatSectionPushforwardStructureIso i).inv ≫ (schemeDerivedDirectImage i).map h ≫ (adj.counit.app M).hom)",
+  "branch": "newtargets-dag",
+  "by": "NA",
+  "date": "2026-10-23",
+  "existing": false,
+  "note": "The supplied right adjunction is on the recorded full quasi-coherent categories. Helpers construct the canonical ordinary algebra, degree-zero comparison, derived unit and multiplication; the theorem states naturality, evaluation and the canonical tensor-Hom transpose. No hypothesis of perfectness or Noetherianity is used."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-9b8829274",
+  "group": "NA",
+  "result": "pass",
+  "note": "All hypotheses and clauses match the node and Tag 0A9X: qcqs Z,W; Flat+LFP p; IsClosedImmersion i with i≫p=𝟙; adj : (lift of schemeDerivedDirectImage i to D_QCoh) ⊣ c; a separate ∃ n IsGE bound per M; Φ an iso Ri_*c(M) ≅ derivedInternalHom(B[0],M); naturality; unit evaluation equal to the counit via schemeDerivedTensorHomEquiv; transpose of Φ∘Ri_*h equal to m≫ξ through the canonical exact-pushforward iso and the lax-μ multiplication. No added hypothesis or universe restriction. Item json changes only lean+stmt_deps (3 landed nodes, allowed); dependency files byte-identical to live; statement verbatim; docstrings and 8 proof steps present; only sorry is the theorem proof. Theorem stmt_deps PASS: preserves_QCoh is the proof needed for the D_QCoh lift; moduleBaseChangeMap_algebra .choose gives the ordinary multiplication, fixed uniquely on products of sections, and no plain def exists. Advisory: closed_modulePushforward_preservesHomology used in a def via proof_deps only; def-pur-derived-internal-hom record points to the ModuleCat abbrev (item correctly uses the generic derivedInternalHom); degreeZeroDerivedMultiplication owned by a lemma node could become a def node. No compile (no fix)."
+ }
+}

@@ -17,6 +17,8 @@ public import Mathlib.AlgebraicGeometry.Geometrically.Connected
 public import Mathlib.FieldTheory.PurelyInseparable.Basic
 public import Mathlib.Topology.KrullDimension
 public import WeilConjectures.AlgebraicGeometry.Thickening
+import Sheaf.AlgebraicGeometry.MarkedCurveDiagramModel
+import Sheaf.AlgebraicGeometry.MarkedCurveDiagramRefinement
 
 /-!
 # Spreading a marked curve diagram from a generic fibre
@@ -31,6 +33,23 @@ universe u
 open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry
 
+set_option backward.isDefEq.respectTransparency false in
+private theorem lift_generic_square_through_refinement
+    {A C Y Y' V V' : Scheme.{u}} {h : A ⟶ Y} {a : A ⟶ C}
+    {b : Y ⟶ V} {σ : C ⟶ V} (H : IsPullback h a b σ)
+    {y : Y' ⟶ Y} {b' : Y' ⟶ V'} {v : V' ⟶ V}
+    (H' : IsPullback y b' b v) (σ' : C ⟶ V') (hσ : σ' ≫ v = σ) :
+    ∃ h' : A ⟶ Y', h' ≫ y = h ∧ IsPullback h' a b' σ' := by
+  let h' := H'.lift h (a ≫ σ') (by rw [Category.assoc, hσ]; exact H.w)
+  have hh : h' ≫ y = h := H'.lift_fst _ _ _
+  have hb : h' ≫ b' = a ≫ σ' := H'.lift_snd _ _ _
+  refine ⟨h', hh, ?_⟩
+  have Houter : IsPullback (h' ≫ y) a b (σ' ≫ v) := by
+    rw [hh, hσ]
+    exact H
+  exact Houter.of_right hb H'
+
+set_option backward.isDefEq.respectTransparency false in
 /-- Spread a specified finite diagram over a finite purely inseparable extension of a
 component's generic residue field. The supplied open marks a thickening locus that meets
 each normalized component densely. The output keeps the supplied number of components
@@ -127,6 +146,58 @@ theorem exists_spread_marked_curve_diagram
         ∃ W : (pullback f (g ≫ U.ι)).Opens,
           (∀ i, Surjective (((Sigma.ι Y i ≫ ν) ⁻¹ᵁ W).ι ≫ j i ≫ p i)) ∧
           IsThickening (pullback.snd ν W.ι) := by
-  sorry
+  classical
+  obtain ⟨U, hηU, V, g, hgf, hgs, hgr, T, Y, Ybar, t, j, p, ν,
+    hνf, hνs, hcomm', ht, hj, hp, hgeneric, W, hW, hgood⟩ :=
+    exists_marked_curve_diagram_model f η hη K n L A B j₀ q₀ ν₀
+      hν₀ hcomm hL hj₀ hq₀ W₀ hW₀
+  obtain ⟨σK, hA, hB, hT, hσK, H⟩ := hgeneric
+  have : IsFinite g := hgf
+  have : Surjective g := hgs
+  have : UniversallyInjective g := hgr
+  have : IsFinite ν := hνf
+  have : Surjective ν := hνs
+  have hσpoint (z : Spec (.of K)) : (g ≫ U.ι) (σK z) = η := by
+    have hz := congrArg (fun a : Spec (.of K) ⟶ S ↦ a z) hσK
+    exact hz.trans (S.fromSpecResidueField_apply η _)
+  obtain ⟨U', hηU', V', g', hgf', hgs', hgr', aV, σ', haV, hσ', hbase,
+    T', Y', B', t', j', p', ν', hνf', hνs', hcomm'', ht', hj', hsm', hp',
+    hW', aY, aB, aT, H'⟩ :=
+    exists_marked_curve_diagram_refinement f U η hηU g σK hσpoint n
+      T Y Ybar t j p ν hcomm' ht hj hp W hW hgood
+  have (i : Fin n) : IsOpenImmersion (aB i) :=
+    MorphismProperty.of_isPullback (H' i).2.1.flip haV
+  have (i : Fin n) : IsOpenImmersion (aT i) :=
+    MorphismProperty.of_isPullback (H' i).2.2.1.flip haV
+  have hexA (i : Fin n) :=
+    lift_generic_square_through_refinement (H i).1 (H' i).1 σ' hσ'
+  have hexB (i : Fin n) :=
+    lift_generic_square_through_refinement (H i).2.1 (H' i).2.1 σ' hσ'
+  have hexT (i : Fin n) :=
+    lift_generic_square_through_refinement (H i).2.2.1 (H' i).2.2.1 σ' hσ'
+  choose hA' heA HA using hexA
+  choose hB' heB HB using hexB
+  choose hT' heT HT using hexT
+  refine ⟨U', hηU', V', g', hgf', hgs', hgr', T', Y', B', t', j', p', ν',
+    hνf', hνs', hcomm'', ht', hj', hsm', hp', ?_, hW'⟩
+  refine ⟨σ', hA', hB', hT', ?_, fun i ↦ ⟨HA i, HB i, HT i, ?_, ?_⟩⟩
+  · calc
+      σ' ≫ g' ≫ U'.ι = σ' ≫ aV ≫ g ≫ U.ι := by rw [hbase]
+      _ = σK ≫ g ≫ U.ι := by rw [← Category.assoc, hσ']
+      _ = _ := hσK
+  · apply (cancel_mono (aB i)).mp
+    calc
+      (hA' i ≫ j' i) ≫ aB i = hA' i ≫ aY i ≫ j i := by
+        rw [Category.assoc, (H' i).2.2.2.1]
+      _ = hA i ≫ j i := by rw [← Category.assoc, heA]
+      _ = j₀ i ≫ hB i := (H i).2.2.2.1
+      _ = (j₀ i ≫ hB' i) ≫ aB i := by rw [Category.assoc, heB]
+  · apply (cancel_mono (aT i)).mp
+    calc
+      (hB' i ≫ p' i) ≫ aT i = hB' i ≫ aB i ≫ p i := by
+        rw [Category.assoc, (H' i).2.2.2.2]
+      _ = hB i ≫ p i := by rw [← Category.assoc, heB]
+      _ = q₀ i ≫ hT i := (H i).2.2.2.2
+      _ = (q₀ i ≫ hT' i) ≫ aT i := by rw [Category.assoc, heT]
 
 end AlgebraicGeometry

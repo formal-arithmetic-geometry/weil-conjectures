@@ -1,0 +1,384 @@
+{
+ "id": "lem-sfb-space-stein-factorization-affine",
+ "kind": "statement",
+ "title": "Stein factorization of a proper algebraic space over an affine scheme",
+ "statement": "Let $A$ be a commutative ring, $T=\\operatorname{Spec}A$ a scheme [def-pc-scheme, def-weil-affine-spectrum], and $f:X\\to T$ a proper morphism from an algebraic space [def-trf-algebraic-space, def-sfb-space-morphism-properties]. Put $B=\\Gamma(X_{\\mathrm{et}},\\mathcal O_X)$, the ring of global sections of its small etale structure sheaf, and let $A\\to B$ be pullback by $f$. Evaluation of global functions defines a morphism $q:X\\to Z=\\operatorname{Spec}B$, with $f=\\pi q$ for $\\pi:Z\\to T$ induced by $A\\to B$. The map $\\pi$ is integral, meaning that each element of $B$ satisfies a monic polynomial with coefficients in the image of $A$ [def-weil-finite-integral-morphism]. The map $q$ is proper. For every field $K$ and every morphism $\\operatorname{Spec}K\\to Z$, the fibre $X\\times_Z\\operatorname{Spec}K$ is nonempty and geometrically connected: after every field extension $L/K$ [def-pc-field-extension] its point space is nonempty and has no partition into two nonempty relatively open subsets. Fibre products are sheaf fibre products [lem-trf-space-fibre-products-etale-covers], and point spaces carry the atlas topology [def-a1-space-point-topology]. No Noetherian, flatness, finite-presentation, reducedness, or scheme-representability hypothesis on $X$ is assumed.",
+ "source": {
+  "document": "literature/stacks-project/spaces-more-morphisms.tex",
+  "place": "Tag 0A1C, theorem-stein-factorization-general, clauses (1), (2), (4), over an affine scheme target; canonical evaluation and surjectivity are also in Tag 0A19, lemma-stein-universally-closed."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-affine-spectrum",
+  "def-trf-algebraic-space",
+  "def-sfb-space-morphism-properties",
+  "def-weil-finite-integral-morphism",
+  "lem-trf-space-fibre-products-etale-covers",
+  "def-a1-space-point-topology",
+  "def-pc-field-extension",
+  "def-trf-scheme-algebraic-space",
+  "def-sfb-space-small-ringed-model",
+  "def-sfb-space-affine-global-sections"
+ ],
+ "proof": [
+  {
+   "text": "Apply the affine-target global-functions bijection to $X$ and $Z=\\operatorname{Spec}B$, with the ring map $B\\to\\Gamma(X,\\mathcal O_X)$ equal to the identity. This constructs the evaluation morphism $q$. The morphism $\\pi=\\operatorname{Spec}(A\\to B)$ exists by the spectrum construction. The pullbacks of $f$ and $\\pi q$ on global functions are both the specified $A\\to B$, so injectivity of the same bijection for target $T$ gives $f=\\pi q$. In particular $q^\\sharp:B\\to\\Gamma(X,\\mathcal O_X)=B$ is the identity, not merely an unspecified ring isomorphism.",
+   "uses": [
+    "lem-sfb-space-affine-target-global-functions",
+    "def-weil-affine-spectrum"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-properties.tex",
+    "place": "Tag 05Z1, lemma-morphism-to-affine-scheme; applied twice."
+   }
+  },
+  {
+   "text": "The scheme morphism $\\pi$ has affine source $Z$, so it is separated by the affine-source separatedness theorem. This is also separatedness as a morphism of algebraic spaces, since the scheme diagonal and its scheme tests are the same diagonal. Proper cancellation, applied to $X\\xrightarrow q Z\\xrightarrow\\pi T$ and the given proper composite $f$, now proves that $q$ is proper. In particular $q$ is quasi-compact. Its diagonal is a closed immersion, hence proper and quasi-compact by the closed-immersion theorem, so $q$ is quasi-separated as required for flat cohomology base change below.",
+   "uses": [
+    "lem-weil-pbc-affine-source-morphism-separated",
+    "lem-sfb-space-proper-cancellation",
+    "lem-sfb-space-closed-subspace-proper"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-morphisms.tex",
+    "place": "Tag 04NX, lemma-universally-closed-permanence, (2); scheme separatedness from Schemes Tags 01KN and 01KV."
+   }
+  },
+  {
+   "text": "The affine qcqs theorem makes $T=\\operatorname{Spec}A$ quasi-compact and quasi-separated. Apply proper Noetherian approximation to obtain a small nonempty directed system $X_i\\to T_i$ of proper finitely presented morphisms, affine transitions on both systems, and limit $X\\to T$. Each $T_i$ is finitely presented over $\\mathbf Z$, and both $T_i$ and $X_i$ are qcqs. Since $T$ is affine, the affine-limit theorem makes all $T_i$ affine after restricting to a final tail (cofinal since directedness gives a common upper bound with its initial index). Write $T_i=\\operatorname{Spec}A_i$ there. Each $T_i$ is of finite type over $\\mathbf Z$ (forget the finite relations in its local finite presentations), hence Noetherian by finite-type inheritance. Applying the affine-open theorem to the whole affine open $T_i\\subset T_i$ shows that $A_i$ is a Noetherian ring.",
+   "uses": [
+    "lem-weil-pbc-affine-scheme-qcqs",
+    "lem-sfb-space-proper-noetherian-approximation",
+    "lem-sfb-space-affine-limits-schematic-stages",
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "pqf-lem-affine-open-locnoeth"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-limits.tex",
+    "place": "Tag 0A0X, lemma-proper-limit-of-proper-finite-presentation-noetherian; Tag 07SQ, lemma-limit-is-affine; scheme Noetherian inheritance Tag 01T6."
+   }
+  },
+  {
+   "text": "For every remaining $i$, properness makes $X_i\\to T_i$ quasi-separated and of finite type, so $X_i$ is Noetherian by the coherent-Noetherian theorem. Its structure module $\\mathcal O_{X_i}$ is quasi-coherent of finite type (locally free of rank one), hence coherent by that theorem. Apply proper coherent Ext finiteness with $E=F=\\mathcal O_{X_i}[0]$ and $n=0$. Both boundedness hypotheses hold because these complexes have cohomology only in degree zero. The single-complex embedding is fully faithful, so the resulting finite $A_i$-module is $\\operatorname{Hom}_{\\mathcal O_{X_i}}(\\mathcal O_{X_i},\\mathcal O_{X_i})$. Evaluation at $1$ identifies this with $B_i=\\Gamma(X_i,\\mathcal O_{X_i})$: its inverse sends a section $b$ to multiplication by its restrictions on every site object. These maps respect the $A_i$-action induced by $X_i\\to T_i$. Thus $B_i$ is a finite $A_i$-module.",
+   "uses": [
+    "lem-sfb-space-noetherian-coherent-acc",
+    "lem-sfb-proper-space-coherent-ext-finite",
+    "lem-weil-pbc-derived-single-fully-faithful"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-perfect.tex",
+    "place": "Tag 0D0T, lemma-ext-finite, specialized to two structure modules in degree zero; derived.tex Tag 06XS, lemma-negative-exts (2)."
+   }
+  },
+  {
+   "text": "The global-sections limit theorem, applied to the two qcqs systems with affine transitions, identifies $A=\\varinjlim_i A_i$ and $B=\\varinjlim_i B_i$, compatibly with the structure ring maps. Let $b\\in B$. It is the pullback of some $b_i\\in B_i$. Finiteness from the preceding step and finite-algebra integrality give $b_i^n+a_{n-1}b_i^{n-1}+\\cdots+a_0=0$, with $a_j\\in A_i$ and leading coefficient $1$. Pulling this equality to $B$ yields exactly the same monic equation for $b$, with each coefficient mapped along $A_i\\to A\\to B$. Every $b$ is therefore integral over $A$, which is the asserted integrality of $\\pi$. This argument asserts finiteness only at the Noetherian stages, not finiteness of $B$ over the original $A$.",
+   "uses": [
+    "lem-sfb-space-limit-sections",
+    "lem-weil-pbc-finite-algebra-is-integral"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-limits.tex",
+    "place": "Tag 07SI, lemma-descend-section; algebra.tex Tag 00GK, lemma-finite-is-integral."
+   }
+  },
+  {
+   "text": "Fix a prime $z\\subset B$ and put $R=B_z$, with residue field $k=\\kappa(z)$. A separable closure $k^s/k$ exists by the separable-closure theorem. Form the strict henselization $H=R^{\\mathrm{sh}}$ using the triples theorem: $H$ is local and henselian, and its residue field is the chosen $k^s$. The map $R\\to H$ is faithfully flat. The localization $B\\to R$ is flat, and composition of flat ring maps shows that $B\\to H$ is flat. The affine flatness equivalence makes $\\operatorname{Spec}H\\to Z$ flat as a scheme morphism. Put $Y=X\\times_Z\\operatorname{Spec}H$ and $Y_0=Y\\times_H\\operatorname{Spec}k^s$. Proper base change makes both $Y\\to\\operatorname{Spec}H$ and $Y_0\\to\\operatorname{Spec}k^s$ proper. Under the specified residue map, $Y_0$ is $X\\times_Z\\operatorname{Spec}k^s$ over $z$.",
+   "uses": [
+    "def-weil-pbc-localization-at-prime",
+    "lem-weil-pbc-separable-closure-exists-galois",
+    "lem-weil-pbc-strict-henselization-triples",
+    "lem-sc-strict-henselization-faithfully-flat",
+    "lem-weil-pbc-localization-flat",
+    "lem-weil-pbc-flat-ring-map-comp",
+    "lem-weil-pbc-flat-ring-map-iff-flat-affine",
+    "lem-sfb-space-proper-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tags 04GP and 04GW, strict henselization; more-algebra.tex Tag 07QM (1), faithfully flat; spaces-morphisms.tex Tag 04WP, proper base change."
+   }
+  },
+  {
+   "text": "Apply degree-zero flat cohomology base change to $q$, the flat map $\\operatorname{Spec}H\\to Z$, and the quasi-coherent module $\\mathcal O_X$. Tensor pullback of the structure module is the structure module. Since $\\Gamma(X,\\mathcal O_X)=B$ as a $B$-module via the identity $q^\\sharp$ established in step 1, the base-change isomorphism gives $\\Gamma(Y,\\mathcal O_Y)=B\\otimes_BH=H$. This is an isomorphism of rings over $H$: the canonical map sends $b\\otimes h$ to the product of the pulled-back section $b$ and the structural section $h$, and hence preserves multiplication and the unit. Thus the structural map $H\\to\\Gamma(Y,\\mathcal O_Y)$ is itself an isomorphism.",
+   "uses": [
+    "lem-sfb-space-flat-higher-image-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-cohomology.tex",
+    "place": "Tag 073K, lemma-flat-base-change-cohomology, q=0 on affine targets."
+   }
+  },
+  {
+   "text": "The local ring $H$ is nonzero. If $|Y|$ were empty, every scheme atlas would be empty and the sheaf axiom for the empty covering would give $\\Gamma(Y,\\mathcal O_Y)=0$, contradicting the preceding isomorphism with $H$. Thus $Y$ is nonempty. Clopen subsets of $|Y|$ correspond to idempotents of $H$ by the global-idempotent theorem. A local ring has only the idempotents $0,1$, and their corresponding subspaces are respectively $\\varnothing,Y$. Hence $Y$ admits no nontrivial clopen subset and is connected.",
+   "uses": [
+    "lem-sfb-space-global-idempotent-clopen",
+    "lem-weil-pbc-local-ring-idempotent-zero-one"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-properties.tex",
+    "place": "Tag 03BZ, lemma-open-subspaces, and the idempotent/decomposition argument in spaces-over-fields.tex Tag 0DMY; local idempotents as in algebra.tex Tag 00E9."
+   }
+  },
+  {
+   "text": "The image of the nonempty $|Y|$ in $\\operatorname{Spec}H$ is a nonempty closed subset, by properness. Any prime of a local ring is contained in its maximal ideal, so its closure contains the closed point; consequently this image contains the closed point. The point-space fibre-product surjectivity theorem then gives a point of $Y_0$. Thus $Y_0$ is nonempty. This uses closedness, not a claim that a nonempty space over a local base always has a nonempty closed fibre.",
+   "uses": [
+    "lem-sfb-space-proper-base-change",
+    "lem-a1-space-point-open-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-morphisms.tex",
+    "place": "Tag 04WP, lemma-base-change-proper, and the definition of universally closed; spaces-properties point-space fibre-product calculus."
+   }
+  },
+  {
+   "text": "Suppose $|Y_0|$ has a nontrivial clopen subset. The clopen-subspace correspondence supplies its open-subspace structure $U\\subset Y_0$. Its inclusion is a closed immersion: on any scheme test the preimage is clopen, and it is cut out by the ideal sheaf which is zero on that open and the unit ideal on its open complement. The closed-immersion theorem and proper composition therefore make $U\\to\\operatorname{Spec}k^s$ proper. Since $H$ is henselian local, $(H,\\mathfrak m_H)$ is a henselian pair. Apply proper clopen lifting to the separated finite-type $H$-space $Y$ and this $U$: it gives a clopen $W\\subset Y$ with $W_0=U$. Connectedness of $Y$ forces $W=\\varnothing$ or $Y$, so $U=\\varnothing$ or $Y_0$, a contradiction. Together with step 9 this proves $Y_0$ connected.",
+   "uses": [
+    "lem-sfb-space-global-idempotent-clopen",
+    "def-weil-closed-immersion",
+    "lem-sfb-space-closed-subspace-proper",
+    "lem-sfb-space-proper-composition",
+    "def-weil-pbc-henselian-terminology",
+    "lem-sfb-space-henselian-proper-clopen-lift"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-more-morphisms.tex",
+    "place": "Tag 0CWI, lemma-split-off-proper-part-henselian, with I the maximal ideal; properness permanence Tags 04XZ and 04XY."
+   }
+  },
+  {
+   "text": "Because $k^s$ is separably closed, the separably-closed components theorem makes the nonempty connected $Y_0$ geometrically connected: $Y_0\\times_{k^s}E$ is nonempty connected for every extension $E/k^s$. Now take any $\\operatorname{Spec}K\\to Z$ and any extension $L/K$. Its image is a prime $z$ and the ring map factors through $k=\\kappa(z)$: elements outside $z$ become invertible, and $zB_z$ maps to zero. Apply the preceding construction at this $z$. The common-extension theorem gives a field $E$ containing compatible copies of $k^s$ and $L$ over $k$. The space $Y_0\\times_{k^s}E=X\\times_Z\\operatorname{Spec}E$ is nonempty connected. Its projection to $X\\times_Z\\operatorname{Spec}L$ is continuous and surjective: $\\operatorname{Spec}E\\to\\operatorname{Spec}L$ is surjective, and the point-space fibre-product theorem preserves that surjectivity on this pullback. A continuous surjective image of a nonempty connected space is nonempty connected (a putative clopen partition pulls back to such a partition). This proves the required assertion for every $K$ and $L/K$. If $B$ is the zero ring there are no field-valued points of $Z$, so the fibre assertion is vacuous and the preceding construction and integrality proof still apply.",
+   "uses": [
+    "lem-sfb-space-sepclosed-components-base-change",
+    "def-weil-pbc-localization-at-prime",
+    "lem-trf-family-common-extension-field",
+    "lem-pc-field-extension-surjective",
+    "lem-a1-space-point-open-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-over-fields.tex",
+    "place": "Tag 0A12, lemma-separably-closed-field-connected-components; limits.tex Tag 0CNJ, common extension construction."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-space-affine-target-global-functions",
+  "def-weil-affine-spectrum",
+  "lem-weil-pbc-affine-source-morphism-separated",
+  "lem-sfb-space-proper-cancellation",
+  "lem-sfb-space-closed-subspace-proper",
+  "lem-weil-pbc-affine-scheme-qcqs",
+  "lem-sfb-space-proper-noetherian-approximation",
+  "lem-sfb-space-affine-limits-schematic-stages",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "pqf-lem-affine-open-locnoeth",
+  "lem-sfb-space-noetherian-coherent-acc",
+  "lem-sfb-proper-space-coherent-ext-finite",
+  "lem-weil-pbc-derived-single-fully-faithful",
+  "lem-sfb-space-limit-sections",
+  "lem-weil-pbc-finite-algebra-is-integral",
+  "def-weil-pbc-localization-at-prime",
+  "lem-weil-pbc-separable-closure-exists-galois",
+  "lem-weil-pbc-strict-henselization-triples",
+  "lem-sc-strict-henselization-faithfully-flat",
+  "lem-weil-pbc-localization-flat",
+  "lem-weil-pbc-flat-ring-map-comp",
+  "lem-weil-pbc-flat-ring-map-iff-flat-affine",
+  "lem-sfb-space-proper-base-change",
+  "lem-sfb-space-flat-higher-image-base-change",
+  "lem-sfb-space-global-idempotent-clopen",
+  "lem-weil-pbc-local-ring-idempotent-zero-one",
+  "lem-a1-space-point-open-calculus",
+  "def-weil-closed-immersion",
+  "lem-sfb-space-proper-composition",
+  "def-weil-pbc-henselian-terminology",
+  "lem-sfb-space-henselian-proper-clopen-lift",
+  "lem-sfb-space-sepclosed-components-base-change",
+  "lem-trf-family-common-extension-field",
+  "lem-pc-field-extension-surjective"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/spaces-more-morphisms.tex",
+  "place": "Agent assembly proving the affine form of Tag 0A1C using proper Noetherian approximation for integrality and Tag 0CWI henselian clopen lifting for connectedness, rather than claiming to reproduce the formal-functions proof of 0A1C."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A proper morphism from an algebraic space to an affine scheme admits a Stein factorization with integral affine second map and geometrically connected fibres",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.isIntegral_appTop_of_universallyClosed\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Proper\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.UniversallyClosed f] [AlgebraicGeometry.IsAffine Y],\\n  (CommRingCat.Hom.hom (AlgebraicGeometry.Scheme.Hom.appTop f)).IsIntegral\", \"doc\": \"If $ f: X \\\\to Y $ is a universally closed morphism of schemes and $ Y $ is affine, then the induced ring homomorphism on global sections $ \\\\Gamma(Y, \\\\mathcal{O}_Y) \\\\to \\\\Gamma(X, \\\\mathcal{O}_X) $ is in\"}\n  {\"name\": \"AlgebraicGeometry.IsFinite.iff_isProper_and_isAffineHom\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Proper\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y},\\n  AlgebraicGeometry.IsFinite f ↔ AlgebraicGeometry.IsProper f ∧ AlgebraicGeometry.IsAffineHom f\", \"doc\": \"A morphism $ f: X \\\\to Y $ of schemes is finite if and only if it is proper and affine, i.e., $ \\\\text{IsFinite}(f) \\\\leftrightarrow \\\\text{IsProper}(f) \\\\land \\\\text{IsAffineHom}(f) $.\"}\n  {\"name\": \"AlgebraicGeometry.IsIntegralHom.hasAffineProperty\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Integral\", \"type\": \"AlgebraicGeometry.HasAffineProperty @AlgebraicGeometry.IsIntegralHom fun X x f x_1 =>\\n  AlgebraicGeometry.IsAffine X ∧ (CommRingCat.Hom.hom (AlgebraicGeometry.Scheme.Hom.app f ⊤)).IsIntegral\", \"doc\": \"A morphism $ f: X \\to Y $ of schemes is integral if the target scheme $ Y $ is affine, the source scheme $ X $ is affine, and the induced ring homomorphism between their coordinate rings is integral (i\"}\n  {\"name\": \"AlgebraicGeometry.IsProper\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Proper\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"A morphism $ f: X \\\\to Y $ of schemes is proper.\"}\n  {\"name\": \"AlgebraicGeometry.IsIntegralHom\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Integral\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"A morphism $ f: X \\to Y $ of schemes is integral.\"}\n  {\"name\": \"AlgebraicGeometry.finite_appTop_of_universallyClosed\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Proper\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} (K : Type u) [inst : Field K]\\n  (f : X ⟶ AlgebraicGeometry.Spec { carrier := K, commRing := Field.toEuclideanDomain.toCommRing })\\n  [AlgebraicGeometry.IsIntegral X] [AlgebraicGeometry.UniversallyClosed f] [AlgebraicGeometry.LocallyOfFiniteType f],\\n  (CommRingCat.Hom.\", \"doc\": \"Let $K$ be a field, and let $f: X \\\\to \\\\operatorname{Spec}(K)$ be a morphism from an integral scheme $X$. If $f$ is universally closed and locally of finite type, then the ring of global sections of $X\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.normalizationDesc\", \"module\": \"Mathlib/AlgebraicGeometry/Normalization\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} →\\n  (f : X ⟶ Y) →\\n    [inst : AlgebraicGeometry.QuasiCompact f] →\\n      [inst_1 : AlgebraicGeometry.QuasiSeparated f] →\\n        {T : AlgebraicGeometry.Scheme} →\\n          (f₁ : X ⟶ T) →\\n            (f₂ : T ⟶ Y) →\\n              [AlgebraicGeometry.IsIntegralHom f₂] →\\n \", \"doc\": \"A morphism from the normalization of a scheme morphism $ f: X \\to Y $ to another scheme $ T $, constructed as the colimit in the category of schemes of a diagram involving the affine Zariski site of $ \"}\n  {\"name\": \"AlgebraicGeometry.isProper_eq\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Proper\", \"type\": \"@AlgebraicGeometry.IsProper =\\n  @AlgebraicGeometry.IsSeparated ⊓ @AlgebraicGeometry.UniversallyClosed ⊓ @AlgebraicGeometry.LocallyOfFiniteType\", \"doc\": \"A morphism of schemes is proper if and only if it is separated, universally closed, and locally of finite type.\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the returned scheme, ring, or topology results do not state the assertion for algebraic spaces or specialize to it in one line."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"Stein\"",
+   "results": "[loogle] OK 0 hit(s)",
+   "date": "2026-10-24",
+   "verdict": "no match: the returned scheme, ring, or topology results do not state the assertion for algebraic spaces or specialize to it in one line."
+  },
+  {
+   "tool": "grep",
+   "query": "stein.*factor|factor.*stein",
+   "results": "[grep] OK 0 hit(s)",
+   "date": "2026-10-24",
+   "verdict": "no match: the returned scheme, ring, or topology results do not state the assertion for algebraic spaces or specialize to it in one line."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Stein factorization for a proper algebraic space over an arbitrary affine base",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.specTargetImageFactorization\", \"module\": \"Mathlib.AlgebraicGeometry.AffineScheme\", \"type\": \"(f : X ⟶ Spec A) : X ⟶ Spec (specTargetImage f)\", \"doc\": \"For a morphism of schemes $f: X \\\\to \\\\operatorname{Spec}(A)$, this defines the canonical morphism from $X$ to the scheme-theoretic image of $f$. The scheme-theoretic image is the affine scheme $\\\\operat\"}\n  {\"name\": \"AlgebraicGeometry.IsProper.toLocallyOfFiniteType\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Proper\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y} [self : AlgebraicGeometry.IsProper f],\\n  AlgebraicGeometry.LocallyOfFiniteType f\", \"doc\": \"If $ f: X \\\\to Y $ is a proper morphism of schemes, then $ f $ is locally of finite type.\"}\n  {\"name\": \"AlgebraicGeometry.IsFinite.toIsAffineHom\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Finite\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y} [self : AlgebraicGeometry.IsFinite f], AlgebraicGeometry.IsAffineHom f\", \"doc\": \"If a morphism of schemes is finite, then it is affine.\"}\n  {\"name\": \"AlgebraicGeometry.IsProper.toUniversallyClosed\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Proper\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y} [self : AlgebraicGeometry.IsProper f],\\n  AlgebraicGeometry.UniversallyClosed f\", \"doc\": \"A proper morphism $ f: X \\to Y $ of schemes is universally closed, meaning that for every base change, the induced morphism is a closed map in the topological sense.\"}\n  {\"name\": \"AlgebraicGeometry.IsFinite.iff_isProper_and_isAffineHom\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Proper\", \"type\": \": IsFinite f ↔ IsProper f ∧ IsAffineHom f\", \"doc\": \"A morphism $ f: X \\\\to Y $ of schemes is finite if and only if it is proper and affine, i.e., $ \\\\text{IsFinite}(f) \\\\leftrightarrow \\\\text{IsProper}(f) \\\\land \\\\text{IsAffineHom}(f) $.\"}\n  {\"name\": \"AlgebraicGeometry.isProper_iff\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Proper\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y),\\n  AlgebraicGeometry.IsProper f ↔\\n    AlgebraicGeometry.IsSeparated f ∧ AlgebraicGeometry.UniversallyClosed f ∧ AlgebraicGeometry.LocallyOfFiniteType f\", \"doc\": \"A morphism of schemes is proper if and only if it is separated, universally closed, and locally of finite type.\"}\n  {\"name\": \"AlgebraicGeometry.IsProper.toIsSeparated\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Proper\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y} [self : AlgebraicGeometry.IsProper f], AlgebraicGeometry.IsSeparated f\", \"doc\": \"Every proper morphism of schemes is separated, i.e., if $ f: X \\\\to Y $ is a proper morphism of schemes, then $ f $ is separated.\"}\n  {\"name\": \"AlgebraicGeometry.isProper_eq\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Proper\", \"type\": \": @IsProper = (@IsSeparated ⊓ @UniversallyClosed : MorphismProperty Scheme) ⊓ @LocallyOfFiniteType\", \"doc\": \"A morphism of schemes is proper if and only if it is separated, universally closed, and locally of finite type.\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the returned scheme, ring, or topology results do not state the assertion for algebraic spaces or specialize to it in one line."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a proper algebraic space X over Spec A the map to Spec of global sections is proper with nonempty connected fibres after every field extension",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.IsProper\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Proper\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"A morphism $ f: X \\\\to Y $ of schemes is proper.\"}\n  {\"name\": \"AlgebraicGeometry.Proj.instIsProperToSpecZeroOfFiniteTypeSubtypeMemOfNatNat\", \"module\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Proper\", \"type\": \"∀ {σ : Type u_1} {A : Type u_2} [inst : CommRing A] [inst_1 : SetLike σ A] [inst_2 : AddSubgroupClass σ A] (𝒜 : ℕ → σ)\\n  [inst_3 : GradedRing 𝒜] [Algebra.FiniteType (↥(𝒜 0)) A],\\n  AlgebraicGeometry.IsProper (AlgebraicGeometry.Proj.toSpecZero 𝒜)\", \"doc\": \"If the zero-graded component $ \\\\mathcal{A}_0 $ of a graded ring $ \\\\mathcal{A} $ is a finitely generated $ A $-algebra, then the canonical morphism from the projective spectrum $ \\\\operatorname{Proj}(\\\\m\"}\n  {\"name\": \"AlgebraicGeometry.isProper_eq\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Proper\", \"type\": \"@AlgebraicGeometry.IsProper =\\n  @AlgebraicGeometry.IsSeparated ⊓ @AlgebraicGeometry.UniversallyClosed ⊓ @AlgebraicGeometry.LocallyOfFiniteType\", \"doc\": \"A morphism of schemes is proper if and only if it is separated, universally closed, and locally of finite type.\"}\n  {\"name\": \"AlgebraicGeometry.IsProper.toUniversallyClosed\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Proper\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y} [self : AlgebraicGeometry.IsProper f],\\n  AlgebraicGeometry.UniversallyClosed f\", \"doc\": \"A proper morphism $ f: X \\to Y $ of schemes is universally closed, meaning that for every base change, the induced morphism is a closed map in the topological sense.\"}\n  {\"name\": \"AlgebraicGeometry.instIsProperOfIsFinite\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Proper\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.IsFinite f], AlgebraicGeometry.IsProper f\", \"doc\": \"Every finite morphism of schemes is proper.\"}\n  {\"name\": \"AlgebraicGeometry.compactSpace_of_universallyClosed\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/UniversallyClosed\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} {K : Type u} [inst : Field K]\\n  (f : X ⟶ AlgebraicGeometry.Spec { carrier := K, commRing := Field.toEuclideanDomain.toCommRing })\\n  [AlgebraicGeometry.UniversallyClosed f], CompactSpace ↥X\", \"doc\": \"If $ f: X \\\\to \\\\operatorname{Spec}(K) $ is a universally closed morphism of schemes, where $ K $ is a field, then the underlying topological space of $ X $ is compact.\"}\n  {\"name\": \"AlgebraicGeometry.IsProper.instOfIsFinite\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Proper\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.IsFinite f], AlgebraicGeometry.IsProper f\", \"doc\": \"Every finite morphism of schemes is a proper morphism.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.isProperMap\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/UniversallyClosed\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.UniversallyClosed f],\\n  IsProperMap ⇑(CategoryTheory.ConcreteCategory.hom f.base)\", \"doc\": \"If $ f: X \\\\to Y $ is a morphism of schemes that is universally closed, then $ f $ is a proper map, meaning that the preimage of every compact subset of $ Y $ is compact in $ X $.\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the returned scheme, ring, or topology results do not state the assertion for algebraic spaces or specialize to it in one line."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Proper algebraic spaces have Stein factorization over an arbitrary affine scheme",
+   "results": "8 hits; AlgebraicGeometry.IsProper.toLocallyOfFiniteType; AlgebraicGeometry.IsProper.casesOn; AlgebraicGeometry.IsProper.recOn; AlgebraicGeometry.IsProper.of_comp_of_isSeparated; AlgebraicGeometry.IsProper.toIsSeparated; AlgebraicGeometry.IsSeparated.of_isAffineHom; AlgebraicGeometry.IsFinite.iff_isProper_and_isAffineHom; AlgebraicGeometry.IsProper.isStableUnderBaseChange",
+   "date": "2026-10-24",
+   "verdict": "no match: hits are scheme statements, not the required algebraic-space assertion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Stein factorization of a proper algebraic space over an affine ring has integral global functions and geometrically connected fibres",
+   "results": "8 hits; AlgebraicGeometry.isIntegral_appTop_of_universallyClosed; AlgebraicGeometry.IsIntegralHom.hasAffineProperty; AlgebraicGeometry.finite_appTop_of_universallyClosed; AlgebraicGeometry.IsIntegralHom; AlgebraicGeometry.IsIntegral; AlgebraicGeometry.AffineSpace.not_isIntegralHom; AlgebraicGeometry.Scheme.Hom.instIsIntegralHomFromNormalization; AlgebraicGeometry.isField_of_universallyClosed",
+   "date": "2026-10-24",
+   "verdict": "no match: hits are scheme statements, not the required algebraic-space assertion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Global functions on a proper algebraic space give a proper morphism with connected geometric fibres",
+   "results": "8 hits; AlgebraicGeometry.IsProper; AlgebraicGeometry.Scheme.Hom.isProperMap; AlgebraicGeometry.instIsProperOfIsFinite; AlgebraicGeometry.isProper_eq; AlgebraicGeometry.IsProper.instOfIsFinite; AlgebraicGeometry.Proj.instIsProperToSpecZeroOfFiniteTypeSubtypeMemOfNatNat; AlgebraicGeometry.IsProper.toUniversallyClosed; AlgebraicGeometry.IsFinite.iff_isProper_and_isAffineHom",
+   "date": "2026-10-24",
+   "verdict": "no match: hits are scheme statements, not the required algebraic-space assertion."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-space-flat-proper-components-lower-semicontinuous",
+  "date": "2026-10-24",
+  "group": "Q33"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Scheme representability of the stable abelian-level normalization. Supporting input: freeness at normalized boundary branches. Comparison of the full cohomology frame in the item with Deligne 3.3--3.5 Picard torsion frames; relative Picard existence for the pulled-back stable family. Supporting input for the present split: A relatively ample line module on the stable-curve multidegree-zero Picard space. Supporting input: Canonical rigidified ample line module on smooth relative Jacobians. Prerequisite for the diagonal construction: Relative dual abelian spaces and normalized Poincare identities. Auxiliary for this split: Proper neutral subgroup from local infinitesimal smoothness. Supporting input: Etale neighbourhood carrying one proper smooth fibre component. Further prerequisite: Final shrinking after the proper open has been spread to an etale neighbourhood: Tag 0E1E keeps the number of geometric connected components equal to one. Supporting input: Tag 0E1E proof, first sentence invoking Tag 0E1D; persistence of components without reducedness. Current latest blueprint: sk-thm-sf-ctf-stability-direct-images.proof.md (3), proper direct-image input; retained historical alteration-chain provenance, with this split supplying the Tag 0E1D auxiliary component-persistence input only. Supporting input: Tag 0A1C, theorem-stein-factorization-general, clauses (1), (2), (4), over an affine scheme target; canonical evaluation and surjectivity are also in Tag 0A19, lemma-stein-universally-closed.",
+   "via": [
+    "lem-sfb-space-flat-proper-components-lower-semicontinuous",
+    "lem-sfb-space-proper-flat-geometric-component-count",
+    "lem-sfb-smooth-space-proper-component-neighbourhood",
+    "lem-sfb-smooth-group-proper-neutral",
+    "lem-sfb-abelian-space-poincare-calculus",
+    "lem-sfb-smooth-jacobian-canonical-line",
+    "lem-sfb-stable-picard-theta-ampleness",
+    "lem-sfb-stable-relative-picard-kummer",
+    "lem-sfb-stable-level-versal-branch-freeness",
+    "lem-sfb-stable-abelian-level-normalization",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-space-stein-factorization-affine",
+  "worker": "stage1",
+  "summary": "Constructed the canonical evaluation map and properness by cancellation, proved integrality by proper Noetherian approximation and finite Ext in degree zero, and proved all field-extension fibres nonempty connected using flat strict henselization and proper clopen lifting. All prerequisites already exist; no new nodes. Statement and statement dependencies unchanged; scheme-only Lean/Mathlib hits do not cover algebraic spaces.",
+  "blueprint": "Latest sk-thm-sf-ctf-stability-direct-images.proof.md (3), proper direct-image input. This is the existing auxiliary Tag 0A1C input to the historical Tag 0E1D component-persistence chain recorded in blueprint.from.via. The unit statement and steps are unchanged; only this below-unit auxiliary proof is supplied.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-strict-henselization-triples",
+    "why": "Constructs a henselian local ring with the specified separably closed residue field; the unit has no construction of strict henselizations."
+   },
+   {
+    "node": "lem-sc-strict-henselization-faithfully-flat",
+    "why": "Flatness of the chosen local strict henselization, to apply flat cohomology base change; generic ring-theoretic tool."
+   },
+   {
+    "node": "lem-weil-pbc-local-ring-idempotent-zero-one",
+    "why": "Only idempotents of the nonzero local ring H are 0 and 1; generic local algebra tool."
+   },
+   {
+    "node": "lem-a1-space-point-open-calculus",
+    "why": "Generic prerequisite for the explicitly written auxiliary Stein argument; no statement or step of the unit is replaced."
+   },
+   {
+    "node": "lem-trf-family-common-extension-field",
+    "why": "Amalgamates k^s and an arbitrary field extension L over the residue field; generic field tool needed for the all-extensions clause."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-strict-henselization-triples",
+  "lem-sc-strict-henselization-faithfully-flat",
+  "lem-weil-pbc-local-ring-idempotent-zero-one",
+  "lem-a1-space-point-open-calculus",
+  "lem-trf-family-common-extension-field"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q23-39ef31ae8",
+  "group": "Q23",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q23-39ef31ae8 (reviewer sub-agent of L); spot-checked: I read all 11 steps in full against the full statements of the 34 cited nodes. I compared the statement with Stacks 0A1C (theorem-stein-factorization-general) and its proof, and with 0CWI (lemma-split-off-proper-part-henselian). Over Spec A, Z=Spec Γ(X,O) matches Stacks' (4), and the statement matches clauses (1) and (2) together with the surjectivity of 0A19; the statement is unchanged. Steps: (1) the affine-target bijection gives q with q^♯=id and f=πq. (2) Affine-source separatedness and proper cancellation make q proper; the diagonal is a closed immersion, hence quasi-compact, so q is quasi-separated. (3) Proper Noetherian approximation and affine-limit stages make a tail of T_i=Spec A_i with A_i Noetherian. (4) Noetherian-coherent-acc and coherent Ext finiteness with E=F=O[0], n=0, plus the derived single-complex embedding, make B_i finite over A_i. (5) Limit sections and finite⇒integral push the monic equations to B. (6) Strict henselization H of B_z is flat over B, and proper base change applies. (7) Degree-0 affine flat base change gives Γ(Y,O)=H. (8) The idempotent/clopen bijection and the local ring H make Y nonempty and connected. (9) The closed image and the point-calculus image formula make Y_0 nonempty. (10) 0CWI applied to the henselian pair (H,m_H) makes Y_0 connected; that node's closure does not reach the item. (11) Separably-closed component base change, field amalgamation and a surjective point map cover every L/K. Edge cases X=∅/B=0, non-Noetherian or non-reduced A and transcendental L all hold. There are no new nodes, proof_deps equals the union of the uses, the graph is acyclic and there is no SGA citation. I accept the five generic tool_uses. Batch 5: fifteen flagged citations reach only def-trf-algebraic-space, a definition. The full 11.5k-node closure contains no trace-formula, trace-transport or nt-assume node and no PD theorem; it adds 17 trf nodes, all generic algebra. lem-trf-family-common-extension-field is pure field theory (0CNJ), so all are outside the assumptions. Details in review.md."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SpaceSteinFactorizationAffine",
+  "declaration": "AlgebraicGeometry.AlgebraicSpace.steinFactorization_affine",
+  "declarations": [
+   "AlgebraicGeometry.AlgebraicSpace.steinGlobalFunctionsCommRing",
+   "AlgebraicGeometry.AlgebraicSpace.steinGlobalFunctions",
+   "AlgebraicGeometry.AlgebraicSpace.steinChartRestriction",
+   "AlgebraicGeometry.AlgebraicSpace.steinAffineProjection",
+   "AlgebraicGeometry.AlgebraicSpace.steinFactorization_affine"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/SpaceSteinFactorizationAffine.lean",
+  "statement": "theorem steinFactorization_affine (A : Type u) [CommRing A] (X : AlgebraicSpace (Spec (.of (ULift.{u} ℤ)))) (f : X ⟶ schemeSpace (Over.mk (specULiftZIsTerminal.from (Spec (.of A))))) (hf : MapIsProper f) : ∃ q : X ⟶ schemeSpace (Over.mk (specULiftZIsTerminal.from (Spec X.steinGlobalFunctions))), (∀ T : X.SmallEtaleModel, (yoneda.preimage ((X.smallEtaleInclusion.obj T).obj.hom ≫ q.hom.hom)).left = (X.etaleForget.obj (X.smallEtaleInclusion.obj T)).toSpecΓ ≫ Spec.map (steinChartRestriction X T)) ∧ q.hom.hom ≫ yoneda.map (Over.homMk (V := Over.mk (specULiftZIsTerminal.from (Spec (.of A)))) (steinAffineProjection A X f) (specULiftZIsTerminal.hom_ext _ _)) = f.hom.hom ∧ IsIntegralHom (steinAffineProjection A X f) ∧ MapIsProper q ∧ ∀ (K : Type u) [Field K] (z : Spec (.of K) ⟶ Spec X.steinGlobalFunctions) (L : Type u) [Field L] [Algebra K L], ConnectedSpace (Point (Limits.pullback q.hom ((Scheme.fppfTopology.over (Spec (.of (ULift.{u} ℤ)))).yoneda.map (Over.homMk (U := Over.mk (specULiftZIsTerminal.from (Spec (.of L)))) (V := Over.mk (specULiftZIsTerminal.from (Spec X.steinGlobalFunctions))) (Spec.map (CommRingCat.ofHom (algebraMap K L)) ≫ z) (specULiftZIsTerminal.hom_ext _ _)))).obj)",
+  "branch": "newtargets-dag",
+  "by": "Q59",
+  "date": "2026-10-23",
+  "existing": false,
+  "note": "Global functions use the existing compatible-section ring on the small affine etale model; its pointwise commutative structure, chart projections and spectrum of the existing affineGlobalScalar are real constructions. The existential evaluation map is pinned by its restriction to every affine etale chart, not an arbitrary factorization. Added only the three already-landed definition owners to stmt_deps."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-45f2a4311",
+  "group": "Q59",
+  "result": "pass",
+  "note": "Lean matches node clause by clause: B = compatible sections on the small affine étale model (same ring as affineGlobalScalar's target, universe u); q pinned on every affine chart to toSpecΓ ≫ Spec.map(restriction), so canonical, not arbitrary; f = πq with π = Spec.map affineGlobalScalar; IsIntegralHom π; MapIsProper q; ∀ K z L/K ConnectedSpace (includes Nonempty) of the sheaf-pullback point space. No extra hypotheses; edge cases A=0, X=∅/B=0, L=K hold. Statement verbatim; only item JSON and module changed vs side-live; 3 added stmt_deps are landed def nodes with acyclic closures (133/133/414). Helpers are real data, the theorem is the only sorry, docstrings with source/blueprint and 11-step proof present, no duplicate Stein/global-functions declaration, report sections present. No compile (no change)."
+ }
+}

@@ -173,7 +173,32 @@
   "item": "lem-weil-pbc-henselian-local-root-lifting",
   "date": "2026-10-09"
  },
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": [
+    "finite_algebra_is_product_local_rings"
+   ]
+  },
+  "slopmaster2": {
+   "state": "closed",
+   "decls": [
+    {
+     "name": "finite_algebra_is_product_local_rings",
+     "module": "WeilConjectures.RingTheory.EtaleRetractionFiniteProductLocal",
+     "lines": [
+      97,
+      253
+     ],
+     "kind": "theorem",
+     "sorry": false
+    }
+   ],
+   "missing": [],
+   "open": []
+  }
+ },
  "chapter": "sec-proper-base-change",
  "unit": "sk-thm-p1",
  "split_report": {
@@ -216,5 +241,46 @@
   "landing": "20261012T044745-L-2035601",
   "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ },
+ "blueprint_update": {
+  "snapshot": "main-20261023-1620",
+  "commit": "7284bb09daf97437d544c51882b325f9c52cd345",
+  "changed": [
+   "proof"
+  ],
+  "statement": "Let $(R,\\mathfrak m,\\kappa)$ be a local ring such that for every ring map $R\\to R'$ with $\\operatorname{Spec}R'\\to\\operatorname{Spec}R$ etale [def-weil-etale-morphism] and every prime $\\mathfrak m'\\subset R'$ lying over $\\mathfrak m$ with $\\kappa\\to\\kappa(\\mathfrak m')$ an isomorphism [def-weil-residue-field] there is an $R$-algebra homomorphism $\\tau:R'\\to R$ with $\\tau^{-1}(\\mathfrak m)=\\mathfrak m'$. Then every finite $R$-algebra $B$ ($B$ finitely generated as an $R$-module) is isomorphic, as an $R$-algebra, to a finite product $B_1\\times\\cdots\\times B_r$ ($r\\ge0$) of local rings.",
+  "proof": [
+   {
+    "text": "*Setup and decomposition upstairs.* Let $B$ be a finite $R$-algebra. Apply the etale-local structure of quasi-finite (in particular finite) algebras to $R\\to B$ and the prime $\\mathfrak m$: there are a ring map $R\\to R'$ with $\\operatorname{Spec}R'\\to\\operatorname{Spec}R$ etale, a prime $\\mathfrak m'\\subset R'$ with preimage $\\mathfrak m$ in $R$ and $\\kappa=\\kappa(\\mathfrak m)\\to\\kappa(\\mathfrak m')$ bijective (for the maximal ideal of the local ring $R$, $R_{\\mathfrak m}=R$ and $\\kappa(\\mathfrak m)=R/\\mathfrak m=\\kappa$), an integer $n\\ge0$, complete orthogonal idempotents $e_1,\\dots,e_n,e_\\infty$ of $C=R'\\otimes_RB$, and primes $Q_1,\\dots,Q_n$ of $C$ over $\\mathfrak m'$, such that $e_i\\notin Q_i$, and every prime $Q$ of $C$ over $\\mathfrak m'$ contains $e_\\infty$ and equals $Q_i$ whenever $e_i\\notin Q$.",
+    "uses": [],
+    "elementary": null
+   },
+   {
+    "text": "*The retraction.* $(R',\\mathfrak m')$ satisfies the hypothesis of the statement ($\\operatorname{Spec}R'\\to\\operatorname{Spec}R$ etale, $\\mathfrak m'$ over $\\mathfrak m$, $\\kappa\\to\\kappa(\\mathfrak m')$ an isomorphism, by step 1), so there is an $R$-algebra homomorphism $\\tau:R'\\to R$ with $\\tau^{-1}(\\mathfrak m)=\\mathfrak m'$.",
+    "uses": [],
+    "elementary": null
+   },
+   {
+    "text": "*Base change back along $\\tau$.* Let $\\varphi:C=R'\\otimes_RB\\to B$ be the ring homomorphism $r'\\otimes b\\mapsto\\tau(r')b$ (well defined by the universal property of the tensor product of commutative $R$-algebras, applied to the $R$-algebra maps $R'\\xrightarrow{\\tau}R\\to B$ and $\\mathrm{id}_B$). It is surjective, since $\\varphi(1\\otimes b)=b$; this is the identification $B=(B\\otimes_RR')\\otimes_{R',\\tau}R$ of the source, i.e. $B=C/\\ker\\varphi$. Its restriction to $R'$ (via $r'\\mapsto r'\\otimes1$) is $r'\\mapsto\\tau(r')\\cdot1_B$. Hence for every prime $\\mathfrak q$ of $B$ whose preimage in $R$ is $\\mathfrak m$, the prime $\\varphi^{-1}(\\mathfrak q)$ of $C$ has preimage $\\tau^{-1}(\\mathfrak m)=\\mathfrak m'$ in $R'$ (step 2), i.e. lies over $\\mathfrak m'$; and $\\mathfrak q=\\varphi(\\varphi^{-1}(\\mathfrak q))$ by surjectivity.",
+    "uses": [],
+    "elementary": null
+   },
+   {
+    "text": "*Idempotents of $B$ and the primes over $\\mathfrak m$.* Put $f_i=\\varphi(e_i)$ ($1\\le i\\le n$) and $f_\\infty=\\varphi(e_\\infty)$; as $\\varphi$ is a ring homomorphism these are complete orthogonal idempotents of $B$. Let $\\mathfrak q$ be a prime of $B$ over $\\mathfrak m$ and $Q=\\varphi^{-1}(\\mathfrak q)$, a prime of $C$ over $\\mathfrak m'$ (step 3). By step 1, $e_\\infty\\in Q$, so $f_\\infty\\in\\mathfrak q$. If $f_i\\notin\\mathfrak q$, then $e_i\\notin Q$, so $Q=Q_i$ (step 1) and $\\mathfrak q=\\varphi(Q_i)$ (step 3). Hence: every prime of $B$ over $\\mathfrak m$ contains $f_\\infty$, and for each $i$ there is at most one prime of $B$ over $\\mathfrak m$ not containing $f_i$, namely $\\varphi(Q_i)$.",
+    "uses": [],
+    "elementary": null
+   },
+   {
+    "text": "*Maximal-ideal separation and local quotient factors.* Every maximal ideal of the finite R-algebra B lies over the maximal ideal of R, since $B$ is integral over $R$ and the contraction of a maximal ideal along an integral extension is maximal. Thus, by step 4, for each idempotent f_i at most one maximal ideal misses f_i; no maximal ideal misses f_infinity. For any finite complete orthogonal family (f_j) with this maximal-ideal separation property, retain J = {j | f_j != 0}. Put K_j = (1-f_j)B. The idempotency identity proves f_j is not in K_j: if f_j=(1-f_j)b, multiplication by f_j gives f_j=0. Hence B/K_j is nonzero. A maximal ideal of B/K_j pulls back to a maximal ideal of B containing 1-f_j and therefore missing f_j. Surjectivity of the quotient map makes this pullback injective, so B/K_j has exactly one maximal ideal and is local. The last idempotent cannot be nonzero, since its quotient would have a maximal ideal whose pullback misses f_infinity.",
+    "uses": [],
+    "elementary": null
+   },
+   {
+    "text": "*Product isomorphism and finite indexing.* Removing the zero terms preserves orthogonality and the sum 1. For a complete family of orthogonal idempotents the map B -> product_{j in J} B/(1-f_j)B is a bijective ring map (Chinese remainder theorem for the pairwise comaximal ideals (1-f_j)B, whose intersection is zero). Its components are R-algebra quotient maps, so it is an R-algebra isomorphism. Numbering the finite set J as 1, ..., r gives B ≅ B_1 × ... × B_r, the factors being the local quotient rings from step 5. For B=0, J is empty and the same construction gives the empty product.",
+    "uses": [],
+    "elementary": null
+   }
+  ],
+  "note": "the current blueprint (main-20261023-1620, weil-conjectures-blueprint 7284bb09da) states or proves this differently; the node is proved in Lean: recorded 2026-10-23, not reopened"
  }
 }

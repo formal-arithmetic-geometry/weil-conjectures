@@ -1,0 +1,100 @@
+{
+ "id": "def-sf-common-stage-inclusion-tensor-model",
+ "kind": "definition",
+ "title": "The common tensor on two included inputs extended back to their finite stage",
+ "statement": "Fix a prime l, an algebraic closure Ω of Q_l, a scheme W with l invertible, and a finite coefficient field E. Use the common-stage pair category [def-weil-algebraically-closed-coefficients] and tensor formula [def-weil-derived-pullback-tensor-hom]. Define commonInclusionTensorModel(K,L) from the common tensor of i_E K and i_E L to i_E of the rational tensor of T_EE K and T_EE L: first use the specified literal tensor object, then isoToStage at E, then inclusion of commonStageTensorComparison. This is an explicit composite, with no arbitrary choice of an isomorphism. The normalized scalar unit is deliberately not applied yet.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sf-pf-field/thm-sf-pf-field.proof.md",
+  "place": "Compatibility and the common finite coefficient-field paragraph: flat extension of scalars respects the units, counits, associativity and specified projection mate."
+ },
+ "stmt_deps": [
+  "def-weil-algebraically-closed-coefficients",
+  "def-weil-derived-pullback-tensor-hom"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A functor preserves a proper adjunction projection mate when it preserves the tensor pullback comparison and the adjunction counit",
+   "results": "Eight hits on categorical pullbacks, functorialityCounit, Frobenius mates and adjunctions. None gives this coefficient-stage comparison.",
+   "date": "2026-10-27",
+   "verdict": "No exact match."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.NatIso.ofComponents",
+   "results": "NatIso.ofComponents and its component formulas construct the natural tensorator; no common-stage projection-factor theorem.",
+   "date": "2026-10-27",
+   "verdict": "Generic construction used; no matching factor compatibility."
+  },
+  {
+   "tool": "grep",
+   "query": "stageTensor.*natur|commonProjectionTensorCompatibility; local Mathlib CategoryTheory/Adjunction and Functor/Currying; Sheaf/Paper/ExchangeProjectionSuppliedDomains",
+   "results": "Existing stageTensor specifies object components only. The supplied projection is literally a composite of the proper counit mate and proper image of open projection, with support identifications. No canonical common-stage factor square found.",
+   "date": "2026-10-27",
+   "verdict": "Use the existing formula and isolate its two actual factors."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.CommonProjectionTensorCompatibility",
+  "date": "2026-10-27",
+  "group": "A7"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "Compatibility paragraph of thm-sf-pf-field: the canonical tensor comparison and the proper/open factors of its projection mate. The created.item chain ends at a module name; no blueprint ancestor is returned by blueprint_refs.py.",
+   "via": []
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-rem-sf-pf-done",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.CommonStageInclusionTensorModel",
+  "file": "lean/Sheaf/Paper/CommonStageInclusionTensorModel.lean",
+  "declaration": "WeilConjectures.commonInclusionTensorModel",
+  "declarations": [
+   "WeilConjectures.commonInclusionTensorModel"
+  ],
+  "statement": "def commonInclusionTensorModel (K L : Stage l Ω W E) :\n    (commonStageDerivedTensor l Ω W).obj\n        ((inclusion (l := l) (Ω := Ω) (Y := W) E).obj K,\n          (inclusion (l := l) (Ω := Ω) (Y := W) E).obj L) ≅\n      (inclusion (l := l) (Ω := Ω) (Y := W) E).obj\n        ((rationalDerivedTensor l (Coefficient.{u} l Ω E) W).obj\n          (((stageSystem l Ω W).T (le_rfl : E ≤ E)).obj K,\n           ((stageSystem l Ω W).T (le_rfl : E ≤ E)).obj L))",
+  "branch": "sheaf-dag",
+  "by": "A7",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A7",
+  "result": "pass",
+  "landing": "20261026T222546-L-668253",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A7",
+  "result": "pass",
+  "landing": "20261026T222546-L-668253",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

@@ -99,21 +99,35 @@
   },
   "same_as": []
  },
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
  "chapter": "sec-deligne-laumon-a1",
  "unit": "sk-p-dl-a1-perverse",
  "lean": {
   "module": "Sheaf.AlgebraicGeometry.VeryTameFSLogAction",
   "declaration": "AlgebraicGeometry.FSLogGroupAction.IsVeryTame",
   "declarations": [
-   "AlgebraicGeometry.FSLogGroupAction.IsVeryTame"
+   "AlgebraicGeometry.FSLogGroupAction.IsVeryTame",
+   "AlgebraicGeometry.EtaleLogGroupAction.IsVeryTameAt",
+   "AlgebraicGeometry.EtaleLogGroupAction.veryTameLocus"
   ],
   "file": "lean/Sheaf/AlgebraicGeometry/VeryTameFSLogAction.lean",
   "statement": "def FSLogGroupAction.IsVeryTame {G : Type v} [Group G] {X : FineSaturatedLogScheme.{u}} (a : FSLogGroupAction G X) : Prop",
   "branch": "newtargets-dag",
-  "by": "Q46",
-  "date": "2026-10-18",
-  "existing": false
+  "by": "Q40",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "Section 1(B): the recorded IsVeryTame only applies to an fs action, while the item’s strict inert source is arbitrary until the conclusion establishes fs log regularity. This module retains that exact fs definition and adds the pointwise EtaleLogGroupAction tests and locus used by the item."
  },
  "reviewed": {
   "date": "2026-10-18",
@@ -124,11 +138,11 @@
   "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
  },
  "reviewed_lean": {
-  "date": "2026-10-18",
+  "date": "2026-10-24",
   "by": "L",
-  "reviewer": "NT-stage2-cc-74dae3218",
-  "group": "Q46",
+  "reviewer": "NT-stage2-cc-256249661",
+  "group": "Q40",
   "result": "pass",
-  "note": "Checked ILO VI 2.1-2.3, 3.1-3.5 and proof 3.7 clause by clause. Hypotheses: Noetherian fs log regular X; finite G acting by log automorphisms; admissible invariant affine cover; generically free (geometric stabilizers on a dense invariant open); IsVeryTame = IsTame + inertia Associated on log germs (characteristic monoid) + ring germ difference in nonunitIdeal (strict local stratum). Conclusions: exists Y and q; Noetherian, finite, surjective; IsQuotient (invariant rings, M_Y=(q_*M)^G on etale tests, injective log pullback); geometric orbit fibres on Spec Omega points; Y log regular; IsLogEtale; IsKummer (ILO 2.1); HasStrictLocalKummerChart at every geometric point (fs stalk charts, ring map pinned on germs, injective Kummer h, finite cokernel killed by a d invertible on O^sh_Y, IsPullback correctly oriented, as in ILO 2.2/3.5(c)); unique EtaleLogHom factorization of invariant maps (uniqueness follows from log_injective). New def nodes def-per-very-tame-fs-log-action and def-per-kummer-log-morphism are true and not hollow, with source/blueprint docstrings. No duplicate: IsVeryTameDivisorialAction/veryTame_quotient_logRegular are a divisorial-pair interface; no competing landed node. The statement interface matches the live citer exists_gabber_logSmooth_equivariant_modification. Imports: all proof dependencies with recorded modules are imported. lean.statement is verbatim in all 3 records. Compile: nt_compile --json clean (3.0 s, 3.0 s, 2.5 s) at load 83. Edge cases: empty X, trivial G, trivial log structure, t->-t, universes. No findings."
+  "note": "Clause-by-clause match. Y: FineSaturatedLogScheme (locally Noetherian + fs), [Y.scheme.IsSeparated], IsLogRegular, FSLogGroupAction H with [Finite H] in universe v. T = veryTameLocus: every geometric lift satisfies IsVeryTameAt, the verbatim pointwise form of the existing IsVeryTame (order a unit in Ω, Associated germs, stratum ring difference in nonunitIdeal), so one notion only. Conclusions: open and H-invariant (iff). Arbitrary Y'/M' with EtaleLogGroupAction, IsEquivariant (CompEq order checked), IsStrictEtale and the canonical inertia iff; Y' locally Noetherian, fs and log regular is concluded, and a'.veryTameLocus = v⁻¹T; Y' not assumed separated. §1(B) dependency modules keep live text and only add declarations; live dependency records equal the base; the added LogIdealChartPresentation import is acyclic and already in every importer's closure; new names have no clashes. Statements verbatim; docstrings carry source, blueprint id and Steps 1-5; sorry only. Edge cases checked: empty Y, Y' and T; trivial H; residue characteristic dividing the inertia order; trivial log structure; non-surjective v. No compile (no file changed). Nit: $Y\\prime$ in node text."
  }
 }

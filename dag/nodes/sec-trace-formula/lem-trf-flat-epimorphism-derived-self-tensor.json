@@ -15,7 +15,7 @@
  ],
  "proof": [
   {
-   "text": "Put $f:A\\to B$ for the given surjection and regard $B$ as an $A$-module through $f$. For any acyclic $A$-module complex $F^\\bullet$, each sequence $F^{n-1}\\to F^n\\to F^{n+1}$ is exact. Since $B$ is flat, [lem-weil-pbc-flat-tensor-exact] says that $F^{n-1}\\otimes_A B\\to F^n\\otimes_A B\\to F^{n+1}\\otimes_A B$ is exact for every $n$. The total tensor with $B[0]$ is precisely this termwise tensor complex, so it is acyclic. Thus $B[0]$ is K-flat by [def-pc-module-kflat-complex].",
+   "text": "Regard B as the A-module M obtained by restriction along f. The hypothesis f.Flat is exactly Module.Flat A M. The proved library equivalence ModuleCat.flat_iff_flat expresses flat tensor exactness [lem-weil-pbc-flat-tensor-exact] categorically. Apply CochainComplex.kFlat_single_obj_iff_flat to obtain K-flatness [def-pc-module-kflat-complex] of the degree-zero complex E=M[0].",
    "uses": [
     "lem-weil-pbc-flat-tensor-exact",
     "def-pc-module-kflat-complex"
@@ -27,7 +27,7 @@
    }
   },
   {
-   "text": "Apply clause (2) of [lem-pc-derived-tensor-second-factor-functor] with its base ring $R=A$, target ring $A=B$, second complex $N=B[0]$, and first complex $E=B[0]$. By Step 1 the identity $B[0]\\to B[0]$ is a K-flat resolution. The resulting canonical K-flat computation identifies $B\\otimes_A^{\\mathbf L}B$ with $(B\\otimes_A B)[0]$ in $D(B)$, with the $B$-action through the second factor. In this identity-resolution model the canonical derived multiplication is represented by the ordinary multiplication chain map $\\mu[0]$, where $\\mu(b\\otimes c)=bc$: the derived-to-underived comparison on the chosen resolution is the identity.",
+   "text": "Take T and its comparison ε from the same nested Classical.choose terms used by derivedSelfTensorMultiplication. Clause (2) of [lem-pc-derived-tensor-second-factor-functor] supplies IsIso ((ε N).app E) for E=M[0] and N=B[0], by the K-flatness of Step 1. The remaining factors in the definition are the canonical single-complex tensor isomorphism, the single/map isomorphism, and single applied to the left unitor followed by the extension/restriction counit.",
    "uses": [
     "lem-pc-derived-tensor-second-factor-functor"
    ],
@@ -38,7 +38,7 @@
    }
   },
   {
-   "text": "Use the balanced tensor relations and pure-tensor generation of [def-weil-pbc-module-tensor-product]. Multiplication is $A$-bilinear and so gives $\\mu:B\\otimes_A B\\to B$. Define $\\nu:B\\to B\\otimes_A B$ by $\\nu(c)=1\\otimes c$; both maps are $B$-linear for the second-factor action. We have $\\mu\\nu(c)=c$. For a pure tensor $b\\otimes c$, choose $a\\in A$ with $f(a)=b$, using surjectivity. Then $b\\otimes c=(a\\cdot1)\\otimes c=1\\otimes(a\\cdot c)=1\\otimes bc=\\nu\\mu(b\\otimes c)$. Generation by pure tensors gives $\\nu\\mu=\\mathrm{id}$. Hence $\\mu$ is an isomorphism with the displayed inverse.",
+   "text": "Restriction of scalars along f is fully faithful. Faithfulness is the standard ModuleCat instance. For fullness, take any A-linear map g between B-modules. It is additive, and for b in B choose a in A with f(a)=b by surjectivity; the required equation g(b • x)=b • g(x) is precisely A-linearity of g at a. Thus g is B-linear and restricts back to the given map. The standard fully faithful right-adjoint theorem now makes the counit of ModuleCat.extendRestrictScalarsAdj f invertible. This is exactly ordinary multiplication on B ⊗_A B, with the stated B-action [def-weil-pbc-module-tensor-product]; equivalently its inverse sends b to 1 ⊗ b.",
    "uses": [
     "def-weil-pbc-module-tensor-product"
    ],
@@ -49,7 +49,7 @@
    }
   },
   {
-   "text": "The inverse maps in Step 3 give inverse chain maps $\\mu[0]$ and $\\nu[0]$. The localization functor defining the derived category [def-weil-abstract-derived-category] preserves their two inverse equations. Consequently $\\mu[0]$ is invertible in $D(B)$; Step 2 identifies this very morphism with the canonical multiplication $B\\otimes_A^{\\mathbf L}B\\to B[0]$. It is therefore an isomorphism, also after restriction to $D(A)$.",
+   "text": "The left unitor, both canonical complex identifications, and the extension/restriction counit of Step 3 are isomorphisms. The single-complex functor and the localization Q [def-weil-abstract-derived-category] preserve isomorphisms. Consequently Q applied to their composite is invertible. Compose with the invertible comparison of Step 2 to obtain IsIso (derivedSelfTensorMultiplication f).",
    "uses": [
     "def-weil-abstract-derived-category"
    ],
@@ -70,7 +70,7 @@
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/more-algebra.tex",
-  "place": "Tag 06XZ and Tag 06Y6, with the explicit ordinary-tensor inverse calculation supporting cotangent.tex Tag 08R2"
+  "place": "Tags 06XZ and 06Y6; ordinary multiplication from cotangent.tex Tag 08R2, expressed by full faithfulness of restriction along a surjection and the extension/restriction adjunction counit. Lean proof by Q9, 2026-10-23."
  },
  "mathlib_searches": [
   {
@@ -208,5 +208,26 @@
   "result": "pass",
   "note": "Read node, 4 stmt_deps, module, record, report. Hyps exactly CommRing A B, f:A→+*B, Surjective f, f.Flat (=Module.Flat via toAlgebra; restrictScalars smul agrees); common universe u forced by recorded exists_derivedTensor_second_factor_functor. Source B⊗^L_A B = (choose T).obj B[0]_B applied to Q(restrict B)[0]; helper derivedSelfTensorMultiplication = (ε N).app E ≫ Q.map(mapBifunctorSingle₁Iso ≫ singleMapHomologicalComplex ≫ single.map(λ_ ≫ extendRestrictScalarsAdj counit)) = canonical μ, ε from the same choose_spec; no arbitrary map, no sorry in data. Conclusion IsIso of the named arrow in D(B); true (B[0] K-flat ⇒ ε iso; μ bijective by surjectivity). Edge cases A=B, B=0, k×k→k ok; ℤ→ℤ/2 and field ext show hyps needed. No duplicate (changeOfRingsFixedTensor is a theorem-node .choose abbrev). Record differs from live only in lean; statement verbatim; proof-dep imports per rule 7; lines ≤100; docstrings with source+blueprint+4 steps. nt_compile --json clean 4.7 s, control fails. Advisory: mixedTensor (def-pc-mixed-total-tensor) used in helper body via the dep's stmt_deps."
  },
- "lean_audit": {}
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "reviewed_proof": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q9",
+  "result": "pass",
+  "landing": "20261023T105512-L-3568296",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
 }

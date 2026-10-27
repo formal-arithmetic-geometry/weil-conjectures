@@ -1,0 +1,320 @@
+{
+ "id": "lem-per-completion-finite-type-base-change",
+ "kind": "statement",
+ "title": "Completion of finite-type schemes and adic base change",
+ "statement": "Let $A$ be a commutative Noetherian ring, $K\\subset A$ an ideal, and suppose $A\\cong\\varprojlim_n A/K^n$ [def-weil-pbc-adic-completion]. For a finite-type $A$-scheme $Z$ [def-weil-finite-type-morphism], its completion along $K\\mathcal O_Z$, as a ringed space, is obtained by completing its affine charts; an affine chart $\\operatorname{Spec}C$ becomes $\\operatorname{Spf}\\widehat C_{KC}$. Here $\\operatorname{Spf}R$ has the primes containing its ideal of definition and the inverse-limit structure sheaf [def-per-adic-formal-geometry]. This completion is a Noetherian adic formal scheme. Morphisms of finite-type $A$-schemes induce completion morphisms functorially, and open immersions induce formal open immersions. If $A\\to B$ is a homomorphism to a Noetherian ring complete for $KB$, then there is a canonical isomorphism\n$$\\widehat{(Z\\times_{\\operatorname{Spec}A}\\operatorname{Spec}B)}_{K}\\ \\cong\\ \\widehat Z_K\\times_{\\operatorname{Spf}A}\\operatorname{Spf}B.$$\nThe fibre product here is the fibre product of adic formal schemes: on an affine chart it is the formal spectrum of the completed tensor product\n$$\\widehat C_{KC}\\widehat\\otimes_A B:=\\varprojlim_{n\\ge1}\\bigl((\\widehat C_{KC}/K^n\\widehat C_{KC})\\otimes_{A/K^n}(B/K^nB)\\bigr)\\ \\cong\\ \\widehat{(C\\otimes_A B)}_K.$$\nThe tensor product is the commutative algebra tensor product, with multiplication $(c\\otimes b)(c'\\otimes b')=cc'\\otimes bb'$ [def-weil-pbc-module-tensor-product]. The displayed isomorphisms are induced by the coefficient maps, are natural in $Z$ and $B$, commute with principal-open restrictions on either side, and respect the ideals extended from $Z$. For a second complete Noetherian adic algebra $B\\to D$, the two successive comparisons agree with the direct comparison for $A\\to D$. On formal affine charts, morphisms $\\operatorname{Spf}S\\to\\operatorname{Spf}R$ correspond precisely to continuous ring homomorphisms $R\\to S$.",
+ "source": {
+  "document": "literature/stacks-project/formal-spaces.tex; literature/stacks-project/algebra.tex",
+  "place": "Tags 0AHY, section-formal-schemes-EGA, affine spectrum, completed localization and inverse-limit sheaf construction; 0AHZ, equation-morphisms-affine-formal-schemes; 031C, lemma-completion-complete, and 0316, lemma-completion-Noetherian-Noetherian. Completed tensor formula is the finite-quotient fibre-product calculation, not an uncompleted tensor identity."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-adic-completion",
+  "def-weil-finite-type-morphism",
+  "def-per-adic-formal-geometry",
+  "def-weil-pbc-module-tensor-product",
+  "def-weil-pbc-noetherian-ring",
+  "def-per-adic-principal-chart-data",
+  "def-per-topological-formal-morphisms",
+  "def-per-completed-algebra-tensor-product"
+ ],
+ "proof": [
+  {
+   "text": "Choose a finite affine cover of $Z$ by $U_i=\\operatorname{Spec}C_i$, with each $C_i$ a finite-type $A$-algebra, using the definition of finite type. Each $C_i$ is Noetherian by the finite-type algebra theorem. Write $I_i=KC_i$ and $R_i=\\varprojlim_n C_i/I_i^n$. Completion is Noetherian and complete, and its projection onto $C_i/I_i^n$ is surjective with kernel $I_i^nR_i$, by the cited completion results. Thus $R_i/I_i^nR_i=C_i/I_i^n$, canonically and compatibly with reduction. The same argument works on any affine chart: $Z$ is Noetherian by finite-type permanence, and its affine coordinate ring is Noetherian by the affine-open lemma. All ideals used here are finitely generated because these rings are Noetherian.",
+   "uses": [
+    "def-weil-finite-type-morphism",
+    "lem-weil-pbc-finite-type-algebra-noetherian",
+    "lem-weil-pbc-adic-completion-noetherian",
+    "lem-weil-pbc-adic-completion-mod-ideal",
+    "lem-weil-pbc-adic-completion-mod-power",
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "pqf-lem-affine-open-locnoeth"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex; literature/stacks-project/morphisms.tex",
+    "place": "Tags 0316 (lemma-completion-Noetherian-Noetherian), 031C (lemma-completion-complete), 05GG (lemma-hathat-finitely-generated); 00FN and 01T6"
+   }
+  },
+  {
+   "text": "On $U=\\operatorname{Spec}C$, put $I=KC$ and $R=\\widehat C_I$. The completion definition has space $V(I)$ and sheaf the inverse limit of the quotient-scheme sheaves. The canonical isomorphisms $C/I^n=R/I^nR$ of Step 1 identify this ringed space with $\\operatorname{Spf}R$: they identify the prime spaces, and the sheaves agree sectionwise. The index category of positive integers is small; the sectionwise-limit lemma applies to the underlying sheaves of sets, with ring operations defined componentwise. On $D(c)$ the sections are $\\varprojlim_n(C/I^n)_c=\\widehat{C_c}_{IC_c}$, using localization modulo an ideal. The formal principal-chart lemma identifies this with the corresponding formal open of $\\operatorname{Spf}R$. Hence these identifications agree on all open overlaps, by their agreement on a principal basis. The completion is therefore covered by the finitely many $\\operatorname{Spf}R_i$ and is a Noetherian adic formal scheme. No intersection of two affine opens is assumed affine.",
+   "uses": [
+    "def-per-adic-formal-geometry",
+    "lem-weil-pbc-site-sheaf-sets-limits-sectionwise",
+    "lem-weil-pbc-localization-quotient-commute",
+    "lem-per-formal-affine-principal-refinement"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/formal-spaces.tex",
+    "place": "Tag 0AHY (section-formal-schemes-EGA), inverse-limit structure sheaf and principal-section formula"
+   }
+  },
+  {
+   "text": "Here and below formal morphisms are continuous local morphisms of topologically ringed spaces. We prove the affine morphism assertion. Let $R,S$ be complete Noetherian rings with ideals of definition $I,J$, and let $\\phi:R\\to S$ be continuous. For each $m$ choose $n(m)$ with $\\phi(I^{n(m)})\\subseteq J^m$. The induced affine-scheme maps $\\operatorname{Spec}(S/J^m)\\to\\operatorname{Spec}(R/I^{n(m)})$ give one continuous map of prime spaces: inverse image of $\\mathfrak q$ is $\\phi^{-1}(\\mathfrak q)$. On a principal open $D(r)$ they give maps $(R/I^{n(m)})_r\\to(S/J^m)_{\\phi(r)}$. Passing to compatible sequences defines the continuous map of completed section rings. Independence of $n(m)$ follows by increasing it and reducing; agreement on smaller principal opens follows by localizing the same quotient map. These maps define a sheaf morphism. It is local on stalks: a germ of a section is a unit exactly when its reduction on the closed fibre is a unit at the point. Indeed, after shrinking to a principal neighbourhood an inverse modulo the defining ideal lifts to an inverse by the convergent geometric series $1+e+e^2+\\cdots$ for an error $e$ in that ideal. Conversely a unit stays a unit on the closed fibre. The quotient-scheme maps are local, so the resulting morphism is local.",
+   "uses": [
+    "def-weil-affine-spectrum",
+    "lem-per-formal-affine-principal-refinement",
+    "lem-weil-pbc-localization-quotient-commute",
+    "def-per-adic-formal-geometry"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/formal-spaces.tex",
+    "place": "Tag 0AHY (section-formal-schemes-EGA), construction on quotient spectra; Tag 0AHZ (equation-morphisms-affine-formal-schemes)"
+   }
+  },
+  {
+   "text": "Conversely a formal morphism $f:\\operatorname{Spf}S\\to\\operatorname{Spf}R$ gives a continuous homomorphism $\\phi:R\\to S$ on global sections, since the principal-section formula at $1$ identifies these section rings with $R,S$. Locality and the unit criterion proved in Step 3 force $f(\\mathfrak q)=\\phi^{-1}(\\mathfrak q)$, and thus $f^{-1}D(r)=D(\\phi(r))$. Its map on these sections extends $R_r\\to S_{\\{\\phi(r)\\}}$ with $a/r^k\\mapsto\\phi(a)/\\phi(r)^k$. This extension is unique: $R_r$ surjects onto every $(R/I^n)_r$, hence is dense in $R_{\\{r\\}}$, while $S_{\\{\\phi(r)\\}}$ is separated. More explicitly, for any target power $J^m$, continuity lets us compute the image of a section using a representative modulo a sufficiently large $I^n$; two representatives have the same image modulo $J^m$. All $m$ determine the image. These are exactly the maps of Step 3, so the constructions are inverse. Applying the completion construction to the maps on $Z_n=Z\\times_A A/K^n$ gives functoriality for scheme morphisms. It respects identities and composition at every quotient. Restricting to an open simply restricts the same space and sheaf, so an open immersion completes to a formal open immersion.",
+   "uses": [
+    "lem-per-formal-affine-principal-refinement",
+    "def-per-adic-formal-geometry",
+    "def-weil-affine-spectrum"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/formal-spaces.tex",
+    "place": "Tag 0AHZ (equation-morphisms-affine-formal-schemes); Tag 0AHY (section-formal-schemes-EGA), principal-section formula and local morphisms"
+   }
+  },
+  {
+   "text": "Fix $U=\\operatorname{Spec}C$ as in Step 1 and write $R=\\widehat C_{KC}$, $E=C\\otimes_A B$. The algebra $E$ is finite type over $B$: if $c_1,\\ldots,c_r$ generate $C$ over $A$, then $c_i\\otimes1$ generate $E$ over $B$. Therefore $E$ is Noetherian, and $P=\\widehat E_{KE}$ is Noetherian and complete. For each $n$ the quotient theorem of Step 1 gives $R/K^nR=C/K^nC$. There is a canonical ring isomorphism\n$$(R/K^nR)\\otimes_{A/K^n}(B/K^nB)\\simeq E/K^nE.$$\nIts forward map sends $\\bar c\\otimes\\bar b$ to $[c\\otimes b]$. Its inverse sends $[c\\otimes b]$ to $\\bar c\\otimes\\bar b$. The tensor pushout property supplies these ring maps: they are well defined because the images of $K^n$ vanish and the two coefficient maps agree on $A$. The composites are identities on both coefficient rings, hence on their tensor product. Reduction in $n$ commutes with both formulas. Taking compatible sequences gives exactly the displayed completed-tensor-product isomorphism $R\\widehat\\otimes_A B\\simeq P$. Ordinary affine fibre products identify $U\\times_A B$ with $\\operatorname{Spec}E$, so Step 2 identifies its completion with $\\operatorname{Spf}P$.",
+   "uses": [
+    "lem-weil-pbc-finite-type-algebra-noetherian",
+    "lem-weil-pbc-adic-completion-noetherian",
+    "lem-weil-pbc-adic-completion-mod-ideal",
+    "lem-weil-pbc-adic-completion-mod-power",
+    "lem-weil-pbc-algebra-tensor-pushout-universal-property",
+    "lem-weil-pbc-fibre-product-affine-spectra"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex; literature/stacks-project/schemes.tex",
+    "place": "Tags 05GG (lemma-hathat-finitely-generated), 0316 (lemma-completion-Noetherian-Noetherian); Tag 01I4 (lemma-fibre-product-affine-schemes), tensor-product universal property"
+   }
+  },
+  {
+   "text": "We check the formal fibre-product universal property, rather than interchange tensor product and inverse limit. For a formal affine test object $\\operatorname{Spf}(T,J)$, Steps 3–4 turn a pair of maps to $\\operatorname{Spf}R$ and $\\operatorname{Spf}B$ over $\\operatorname{Spf}A$ into continuous maps $\\alpha:R\\to T$ and $\\beta:B\\to T$ agreeing on $A$. The tensor universal property gives $h:E\\to T$, $h(c\\otimes b)=\\alpha(c)\\beta(b)$. For each $m$, continuity of $\\beta$ gives an $n$ with $h(K^nE)\\subseteq J^m$. Thus $E/K^nE\\to T/J^m$ defines a map $P\\to T/J^m$ by projection from $P$; increasing $n$ leaves it unchanged. These maps are compatible in $m$ and hence give $P\\to\\varprojlim_mT/J^m=T$. This map is continuous, since it annihilates $K^nP$ modulo $J^m$, and extends $h$. It is unique by the same quotient-representative argument as in Step 4, since $E$ is dense in $P$. Its restriction to $R$ is $\\alpha$ since both maps agree on dense $C$; its restriction to $B$ is $\\beta$. Conversely any continuous map $P\\to T$ gives this pair. Steps 3–4 now identify $\\operatorname{Spf}P$ as the formal fibre product on affine test objects. For arbitrary formal test objects cover by formal affines and glue these uniquely determined maps; uniqueness on overlaps follows after an affine refinement.",
+   "uses": [
+    "lem-weil-pbc-algebra-tensor-pushout-universal-property",
+    "def-weil-pbc-adic-completion",
+    "lem-per-adic-formal-open-gluing"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/formal-spaces.tex; literature/stacks-project/schemes.tex",
+    "place": "Tag 0AHZ (equation-morphisms-affine-formal-schemes), applied to the completed version of the tensor-product argument of Tag 01I4 (lemma-fibre-product-affine-schemes)"
+   }
+  },
+  {
+   "text": "On a principal open of a $C$-chart, the comparison of Step 5 has the same formulas with $c$ inverted; on a principal open of the $B$-side it has the same formulas with $b$ inverted. Localization commutes with quotient, and the tensor pushout property identifies the localized tensors, since the indicated coefficient is made invertible on both sides. Consequently all the finite-level comparison maps commute with these restrictions. Passing to compatible sequences and using the formal principal-chart lemma proves compatibility with formal principal opens. Cover an arbitrary overlap by principal opens inside each chart; the comparisons there are the maps induced by the same two coefficient maps, so they agree by the uniqueness in Step 6. The formal gluing lemma now gives the global comparison isomorphism. Its inverse glues from the inverse formulas of Step 5. The fibre-product universal property is local on the source by that same gluing lemma, so the global comparison is the asserted formal fibre product.",
+   "uses": [
+    "lem-weil-pbc-localization-quotient-commute",
+    "lem-weil-pbc-algebra-tensor-pushout-universal-property",
+    "lem-per-formal-affine-principal-refinement",
+    "lem-per-adic-formal-open-gluing"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/formal-spaces.tex",
+    "place": "Tag 0AHY (section-formal-schemes-EGA), completed principal localization; Tag 00CT (proposition-localize-quotient)"
+   }
+  },
+  {
+   "text": "All maps above are specified on the coefficient elements $c\\otimes1$ and $1\\otimes b$ and on every quotient by $K^n$. A morphism of $Z$ or a further coefficient map carries these elements to their named images; both orders around each naturality square do exactly that. The tensor uniqueness proves equality at each finite quotient, and equality of every projection proves equality of the maps on completions. For $A\\to B\\to D$, both the iterated and direct comparisons therefore send $c$ to $c\\otimes1$ and $d$ to $1\\otimes d$ in $\\widehat{C\\otimes_A D}$; equivalently both are the unique map of the same fibre-product cone. This proves the composition clause. If $H\\subseteq C$ is an ideal from $Z$, both sides carry its extended ideal to the ideal generated by exactly the same elements $h\\otimes1$ ($h\\in H$); inverses give equality, and the restriction compatibility in Step 7 glues it. Thus ideals are respected as well. These arguments include $K=0$, nilpotent $K$, empty charts, and the zero ring.",
+   "uses": [
+    "lem-weil-pbc-algebra-tensor-pushout-universal-property"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex; literature/stacks-project/formal-spaces.tex",
+    "place": "Tag 01I4 (lemma-fibre-product-affine-schemes), uniqueness on coefficient maps; Tag 0AHY (section-formal-schemes-EGA), inverse-limit projections"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-finite-type-morphism",
+  "lem-weil-pbc-finite-type-algebra-noetherian",
+  "lem-weil-pbc-adic-completion-noetherian",
+  "lem-weil-pbc-adic-completion-mod-ideal",
+  "lem-weil-pbc-adic-completion-mod-power",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "pqf-lem-affine-open-locnoeth",
+  "def-per-adic-formal-geometry",
+  "lem-weil-pbc-site-sheaf-sets-limits-sectionwise",
+  "lem-weil-pbc-localization-quotient-commute",
+  "lem-per-formal-affine-principal-refinement",
+  "def-weil-affine-spectrum",
+  "lem-weil-pbc-algebra-tensor-pushout-universal-property",
+  "lem-weil-pbc-fibre-product-affine-spectra",
+  "def-weil-pbc-adic-completion",
+  "lem-per-adic-formal-open-gluing"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/formal-spaces.tex; literature/stacks-project/algebra.tex; literature/stacks-project/schemes.tex",
+  "place": "Tag 0AHY, construction on quotient spectra and principal opens; 0AHZ affine morphisms; 05GG completion quotients; 01I4 tensor fibre-product argument, completed by explicit compatible sequences",
+  "note": "Agent supplies the finite-quotient calculation and universal-property details; no tensor/limit interchange is assumed."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Formal completion finite type schemes completed tensor product adic base change compatible localization",
+   "results": "8 hits; AdicCompletion.ofTensorProductEquivOfPiFintype; AdicCompletion.ofTensorProduct_bijective_of_pi_of_fintype; AdicCompletion.tensor_map_id_left_eq_map; AdicCompletion.ofTensorProductEquivOfFiniteNoetherian_apply; AdicCompletion.coe_ofTensorProductEquivOfFiniteNoetherian; AdicCompletion.ofTensorProductEquivOfFiniteNoetherian; AdicCompletion.ofTensorProduct_surjective_of_finite; AdicCompletion.ofTensorProduct_bijective_of_finite_of_isNoetherian",
+   "date": "2026-10-24",
+   "verdict": "no match: finite-module completion tensor equivalences do not state this finite-type-algebra completed tensor comparison or formal-scheme theorem"
+  },
+  {
+   "tool": "loogle",
+   "query": "AdicCompletion, TensorProduct",
+   "results": "12 hits; AdicCompletion.ofTensorProduct; AdicCompletion.ofTensorProductEquivOfFiniteNoetherian; AdicCompletion.ofTensorProductEquivOfPiFintype; AdicCompletion.ofTensorProductInvOfPiFintype; AdicCompletion.coe_ofTensorProductEquivOfFiniteNoetherian; AdicCompletion.ofTensorProduct_surjective_of_finite; AdicCompletion.ofTensorProduct_bijective_of_finite_of_isNoetherian; AdicCompletion.ofTensorProduct_tmul",
+   "date": "2026-10-24",
+   "verdict": "no match: finite-module completion tensor equivalences do not state this finite-type-algebra completed tensor comparison or formal-scheme theorem"
+  },
+  {
+   "tool": "grep",
+   "query": "FormalScheme|formalSpectrum|completedTensorProduct|completedTensor",
+   "results": "0 hits; ",
+   "date": "2026-10-24",
+   "verdict": "no match: finite-module completion tensor equivalences do not state this finite-type-algebra completed tensor comparison or formal-scheme theorem"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Formal completion of a finite type scheme over an adic ring commutes with completed base change",
+   "results": "8 hits; AdicCompletion.piEquivOfFintype_apply; AdicCompletion.ofTensorProductEquivOfFiniteNoetherian.congr_simp; AdicCompletion.coe_ofTensorProductEquivOfFiniteNoetherian; AdicCompletion.ofTensorProductEquivOfFiniteNoetherian; AdicCompletion.liftRingHom.congr_simp; AdicCompletion.liftAlgHom.congr_simp; AdicCompletion.module; AdicCompletion.ofTensorProductEquivOfFiniteNoetherian_apply",
+   "date": "2026-10-24",
+   "verdict": "no match: finite-module completion tensor equivalences do not state this finite-type-algebra completed tensor comparison or formal-scheme theorem"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The completion of a tensor product of a finite type algebra with an adically complete ring represents the formal fibre product",
+   "results": "8 hits; AdicCompletion.ofTensorProductEquivOfPiFintype; AdicCompletion.ofTensorProduct_bijective_of_pi_of_fintype; AdicCompletion.ofTensorProductEquivOfFiniteNoetherian_apply; AdicCompletion.coe_ofTensorProductEquivOfFiniteNoetherian; AdicCompletion.ofTensorProductEquivOfFiniteNoetherian; AdicCompletion.ofTensorProduct_surjective_of_finite; AdicCompletion.tensor_map_id_left_eq_map; AdicCompletion.ofTensorProduct_bijective_of_finite_of_isNoetherian",
+   "date": "2026-10-24",
+   "verdict": "no match: finite-module completion tensor equivalences do not state this finite-type-algebra completed tensor comparison or formal-scheme theorem"
+  },
+  {
+   "tool": "grep",
+   "query": "FormalScheme|formalSpectrum|completedTensorProduct|completedTensor",
+   "results": "0 hits: ",
+   "date": "2026-10-24",
+   "verdict": "no match: finite-module completion tensors and ordinary affine-scheme pullbacks do not give adic formal spectra or this completed finite-type-algebra base change"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Formal spectrum completion of a finite type scheme and completed tensor product base change",
+   "results": "8 hits: AdicCompletion.tensor_map_id_left_eq_map, AdicCompletion.ofTensorProductEquivOfFiniteNoetherian, AdicCompletion.ofTensorProductEquivOfFiniteNoetherian.congr_simp, AdicCompletion.coe_ofTensorProductEquivOfFiniteNoetherian, AlgebraicGeometry.pullbackSpecIso_hom_base, AlgebraicGeometry.Spec.fullyFaithful, AdicCompletion.ofTensorProductEquivOfFiniteNoetherian_apply, AdicCompletion.piEquivOfFintype",
+   "date": "2026-10-24",
+   "verdict": "no match: finite-module completion tensors and ordinary affine-scheme pullbacks do not give adic formal spectra or this completed finite-type-algebra base change"
+  },
+  {
+   "tool": "loogle",
+   "query": "AdicCompletion, TensorProduct",
+   "results": "12 hits: AdicCompletion.ofTensorProduct, AdicCompletion.ofTensorProductEquivOfFiniteNoetherian, AdicCompletion.ofTensorProductEquivOfPiFintype, AdicCompletion.ofTensorProductInvOfPiFintype, AdicCompletion.coe_ofTensorProductEquivOfFiniteNoetherian, AdicCompletion.ofTensorProduct_surjective_of_finite, AdicCompletion.ofTensorProduct_bijective_of_finite_of_isNoetherian, AdicCompletion.ofTensorProduct_tmul",
+   "date": "2026-10-24",
+   "verdict": "no match: finite-module completion tensors and ordinary affine-scheme pullbacks do not give adic formal spectra or this completed finite-type-algebra base change"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Formal completion of finite type schemes commutes with completed adic base change",
+   "results": "8 hits: AdicCompletion.piEquivOfFintype_apply, AdicCompletion.piEquivOfFintype, AlgebraicGeometry.Scheme.exists_hom_comp_eq_comp_of_locallyOfFiniteType, AlgebraicGeometry.IsFinite.instIsStableUnderBaseChangeScheme, AdicCompletion.piEquivFin_apply, AdicCompletion.piEquivFin, AlgebraicGeometry.Scheme.exists_hom_hom_comp_eq_comp_of_locallyOfFiniteType, AdicCompletion.ofTensorProductEquivOfPiFintype",
+   "date": "2026-10-24",
+   "verdict": "no match: finite-module completion tensors and ordinary affine-scheme pullbacks do not give adic formal spectra or this completed finite-type-algebra base change"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Formal spectra of complete adic rings morphisms correspond to continuous homomorphisms and fibre products are completed tensor products",
+   "results": "8 hits: PrimeSpectrum.continuous_tensorProductTo, AlgebraicGeometry.Scheme.Pullback.Triplet.isPullback_SpecMap_tensor, AlgebraicGeometry.Scheme.Pullback.Triplet.Spec_map_tensor_isPullback, AlgebraicGeometry.pullbackSpecIso_hom_base, AlgebraicGeometry.pullbackSpecIso, AlgebraicGeometry.pullbackSpecIso_hom_fst, AlgebraicGeometry.pullbackSpecIso_hom_fst', AlgebraicGeometry.pullbackSpecIso_hom_base_assoc",
+   "date": "2026-10-24",
+   "verdict": "no match: finite-module completion tensors and ordinary affine-scheme pullbacks do not give adic formal spectra or this completed finite-type-algebra base change"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-per-formal-open-blowup-base-change",
+  "date": "2026-10-24",
+  "group": "Q44"
+ },
+ "chapter": "sec-deligne-laumon-a1",
+ "unit": "sk-p-dl-a1-perverse",
+ "blueprint": {
+  "from": {
+   "node": "lem-per-artin-gabber-affine-curve",
+   "place": "Ancestor proof Step 3, regular-local-model/purity branch, through the formal-resolution descendants; formal open blowup construction in Temkin §§2.4.4–2.4.6: completion and change of formal affine chart.",
+   "via": [
+    "lem-per-formal-open-blowup-base-change",
+    "lem-per-rig-formal-resolution-gluing",
+    "lem-per-rig-regular-formal-resolution",
+    "lem-per-small-singular-locus-resolution",
+    "lem-per-qe-ordinary-regular-resolution",
+    "lem-per-characteristic-zero-log-resolution-independence",
+    "lem-per-complete-local-rigidification-comparison",
+    "lem-per-gabber-absolute-equivariant-modification",
+    "lem-per-gabber-log-smooth-equivariant-modification",
+    "lem-per-trait-prime-to-ell-log-alteration",
+    "lem-per-gabber-regular-pair-purity",
+    "lem-per-absolute-gysin-purity",
+    "lem-per-potential-dualizing-regular-unit",
+    "lem-per-finite-regular-reduction-dualizing",
+    "lem-per-qbar-generic-duality-model",
+    "lem-per-qbar-middle-tstructure"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-per-completion-finite-type-base-change",
+  "worker": "stage1",
+  "group": "Q92",
+  "summary": "Kept the statement; proved formal charts, continuous affine morphisms, the finite-quotient tensor comparison, the formal fibre-product universal property, restriction/gluing and coefficient coherence. Reused existing DAG nodes; no new node, no compiler.",
+  "blueprint": "Inherited descendant of lem-per-artin-gabber-affine-curve through formal-resolution/formal-blowup charts; realizes completion and change of chart in the existing from.place. Current latest ancestor proof has no independent equivalent formal-completion node.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-adic-completion-noetherian",
+    "why": "Generic Noetherian/completion tool used for formal affine chart rings; the unit provides no replacement commutative algebra theorem."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-adic-completion-noetherian"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q92-8c3c1e634",
+  "group": "Q92",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q92-8c3c1e634 (reviewer sub-agent of L); spot-checked: Read in full: the item with all 8 steps, the statement of every cited node, and Stacks formal-spaces.tex section-formal-schemes-EGA (0AHY) including the principal-section formula and equation 0AHZ (Mor_LTRS(Spf B, Spf A) = Hom_cont(A,B)). Also read the 05GG, 0316 and 031C completion leaves and the 01I4 fibre-product leaf. The delivery has no new nodes and is a first split: there is no repair note and the item had no proof before. Steps by number: Step 1 (finite cover, Noetherian C_i, R/K^nR = C/K^nC) uses each completion leaf's finitely-generated-ideal hypothesis, which holds because C is Noetherian. Step 2 identifies the completion with Spf R on a principal basis and does not assume affine intersections. Steps 3–4 write out the 0AHZ correspondence that Stacks leaves unchecked: a separate continuity index n(m), the stalk unit criterion, the point map forced by locality, and uniqueness by density into a separated ring. Step 5 builds the finite-level tensor isomorphism in both directions from the pushout leaf and does not use flatness of B. Step 6 proves the formal fibre-product universal property: h(K^nE) ⊆ J^m, assembly through P → E/K^nE → T/J^m, uniqueness by density, and gluing for non-affine test objects. Step 7 gives restriction compatibility and global gluing through common principal refinements. Step 8 checks naturality, the B→D coherence and the ideal clause through tensor uniqueness. Edge cases tested: K = 0, nilpotent K, K = (1) forcing A = 0, empty Z, non-flat Z_p→F_p, and A^1 over Z_p with B = Z_p[[t]] in its p-adic topology, where both sides are Spf Z_p[[t]]<x>. The citer lem-per-formal-open-blowup-base-change uses exactly the stated clauses. No cycle. The declared tool use of lem-weil-pbc-adic-completion-noetherian is accepted as a generic black-box algebra tool. Searched for duplicates: lem-per-formal-completion-reduction-dictionary is related (Step 2 could have cited it) but has no base-change or morphism clause, so it is not a duplicate. LeanSearch, LeanFinder/Loogle and grep searches are recorded. No SGA is cited. No changes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.CompletionFiniteTypeBaseChange",
+  "declaration": "AlgebraicGeometry.completion_finiteType_baseChange",
+  "declarations": [
+   "AlgebraicGeometry.completionCoefficientIdeal",
+   "AlgebraicGeometry.completionSectionTopology",
+   "AlgebraicGeometry.completionToScheme",
+   "AlgebraicGeometry.completionAffineChart",
+   "AlgebraicGeometry.coefficientCompletion",
+   "AlgebraicGeometry.coefficientCompletionTopology",
+   "AlgebraicGeometry.coefficientCompletionMap",
+   "AlgebraicGeometry.IsCompletionAffineComparison",
+   "AlgebraicGeometry.completion_finiteType_baseChange"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/CompletionFiniteTypeBaseChange.lean",
+  "statement": "theorem completion_finiteType_baseChange : (∀ (A : CommRingCat.{u}) (K : Ideal A) [IsNoetherianRing A] [IsAdicComplete K A], (∀ (Z : Over (Spec A)) [LocallyOfFiniteType Z.hom] [QuasiCompact Z.hom], IsNoetherianAdicFormalScheme (coefficientCompletion K Z) ∧ IsAdicFormalSectionTopology (coefficientCompletion K Z) (coefficientCompletionTopology K Z) ∧ ∀ U : Z.left.affineOpens, ∃ e : completionAffineChart ((completionCoefficientIdeal A K).comap Z.hom) U ≅ adicFormalSpec (.of (AdicCompletion (((completionCoefficientIdeal A K).comap Z.hom).ideal U) (Z.left.presheaf.obj (op U.1)))) ((((completionCoefficientIdeal A K).comap Z.hom).ideal U).map (algebraMap _ _)), IsCompletionAffineComparison ((completionCoefficientIdeal A K).comap Z.hom) U e) ∧ (∀ (X Y : Over (Spec A)) [LocallyOfFiniteType X.hom] [QuasiCompact X.hom] [LocallyOfFiniteType Y.hom] [QuasiCompact Y.hom] (f : X ⟶ Y), IsContinuousFormalMorphism (coefficientCompletionTopology K X) (coefficientCompletionTopology K Y) (coefficientCompletionMap K f) ∧ (IsOpenImmersion f.left → SheafedSpace.IsOpenImmersion (coefficientCompletionMap K f))) ∧ (∀ X : Over (Spec A), coefficientCompletionMap K (𝟙 X) = 𝟙 _) ∧ (∀ (X Y Z : Over (Spec A)) (f : X ⟶ Y) (g : Y ⟶ Z), coefficientCompletionMap K (f ≫ g) = coefficientCompletionMap K f ≫ coefficientCompletionMap K g) ∧ (∀ (B : CommRingCat.{u}) (g : A ⟶ B) [IsNoetherianRing B] [IsAdicComplete (K.map g.hom) B], ∃ (eA : coefficientCompletion K (Over.mk (𝟙 (Spec A))) ≅ adicFormalSpec A K) (eB : coefficientCompletion K (Over.mk (Spec.map g)) ≅ adicFormalSpec B (K.map g.hom)), eA.hom ≫ adicFormalSpecToSpec A K = completionToScheme ((completionCoefficientIdeal A K).comap (𝟙 (Spec A))) ∧ eB.hom ≫ adicFormalSpecToSpec B (K.map g.hom) = completionToScheme ((completionCoefficientIdeal A K).comap (Spec.map g)) ∧ ∀ (Z : Over (Spec A)) [LocallyOfFiniteType Z.hom] [QuasiCompact Z.hom], IsContinuousFormalPullback (coefficientCompletionTopology K (Over.mk (pullback.fst Z.hom (Spec.map g) ≫ Z.hom))) (coefficientCompletionTopology K Z) (adicFormalSectionTopology B (K.map g.hom)) (adicFormalSectionTopology A K) (coefficientCompletionMap K (Over.homMk (V := Z) (pullback.fst Z.hom (Spec.map g)) rfl)) (coefficientCompletionMap K (Over.homMk (V := Over.mk (Spec.map g)) (pullback.snd Z.hom (Spec.map g)) pullback.condition.symm) ≫ eB.hom) (coefficientCompletionMap K (Over.homMk (U := Z) (V := Over.mk (𝟙 (Spec A))) Z.hom (Category.comp_id _)) ≫ eA.hom) (eB.inv ≫ coefficientCompletionMap K (Over.homMk (U := Over.mk (Spec.map g)) (V := Over.mk (𝟙 (Spec A))) (Spec.map g) (Category.comp_id _)) ≫ eA.hom))) ∧ (∀ (A C B : CommRingCat.{u}) [Algebra A C] [Algebra A B] (K : Ideal A) [IsNoetherianRing A] [IsAdicComplete K A] [Algebra.FiniteType A C] [IsNoetherianRing B] [IsAdicComplete (K.map (algebraMap A B)) B], ∃! e : AdicCompletion (K.map (algebraMap A (C ⊗[A] B))) (C ⊗[A] B) ≃+* adicCompletedAlgebraTensor K (CommRingCat.ofHom (algebraMap A (AdicCompletion (K.map (algebraMap A C)) C))) (CommRingCat.ofHom (algebraMap A B)), @IsHomeomorph _ _ (K.map (algebraMap A (AdicCompletion (K.map (algebraMap A (C ⊗[A] B))) (C ⊗[A] B)))).adicTopology (⨅ n : ℕ, TopologicalSpace.induced (limit.π (adicQuotientTensorTower K (CommRingCat.ofHom (algebraMap A (AdicCompletion (K.map (algebraMap A C)) C))) (CommRingCat.ofHom (algebraMap A B))) (op n)).hom ⊥) e ∧ ∀ (n : ℕ) (c : C) (b : B), (limit.π (adicQuotientTensorTower K (CommRingCat.ofHom (algebraMap A (AdicCompletion (K.map (algebraMap A C)) C))) (CommRingCat.ofHom (algebraMap A B))) (op n)).hom (e (algebraMap (C ⊗[A] B) _ (c ⊗ₜ[A] b))) = (pushout.inl (adicPowerQuotientMap K (CommRingCat.ofHom (algebraMap A (AdicCompletion (K.map (algebraMap A C)) C))) (n + 1)) (adicPowerQuotientMap K (CommRingCat.ofHom (algebraMap A B)) (n + 1))).hom (Ideal.Quotient.mk _ (algebraMap C _ c)) * (pushout.inr (adicPowerQuotientMap K (CommRingCat.ofHom (algebraMap A (AdicCompletion (K.map (algebraMap A C)) C))) (n + 1)) (adicPowerQuotientMap K (CommRingCat.ofHom (algebraMap A B)) (n + 1))).hom (Ideal.Quotient.mk _ b)) ∧ (∀ (R S : CommRingCat.{u}) (K : Ideal R) (L : Ideal S) [IsNoetherianRing R] [IsNoetherianRing S] [IsAdicComplete K R] [IsAdicComplete L S], (∀ (φ : R →+* S), @Continuous _ _ K.adicTopology L.adicTopology φ → ∃! F : adicFormalSpec S L ⟶ adicFormalSpec R K, IsContinuousFormalMorphism (adicFormalSectionTopology S L) (adicFormalSectionTopology R K) F ∧ IsAdicFormalSpectrumMap K L φ F) ∧ (∀ F : adicFormalSpec S L ⟶ adicFormalSpec R K, IsContinuousFormalMorphism (adicFormalSectionTopology S L) (adicFormalSectionTopology R K) F → ∃! φ : R →+* S, @Continuous _ _ K.adicTopology L.adicTopology φ ∧ IsAdicFormalSpectrumMap K L φ F))",
+  "branch": "newtargets-dag",
+  "by": "Q52",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-d58f0ffa4",
+  "group": "Q52",
+  "result": "pass",
+  "note": "Read item, all stmt_deps, live AdicFormalGeometry/AdicPrincipalChartData, Mathlib IdealSheafData.comap (=I·O_X, KC on charts), all three delivered modules and both new node records. Clauses match the node: Noetherian+IsAdicComplete A; finite type = LocallyOfFiniteType+QuasiCompact; completion along comap ideal; affine charts ≅ Spf(Ĉ_KC) pinned by triangle to Z (automorphisms over Spec C are continuous, so identity); IsNoetherianAdicFormalScheme + section topology; continuous local completion maps, open immersions, id/comp; base change as IsContinuousFormalPullback of the canonical cone with eA/eB pinned by triangles, B only Noetherian+complete; ∃! homeomorphic ring equiv Ê ≃ lim (R/K^n⊗B/K^n) with c⊗b ↦ inl[c]·inr[b]; both directions of 0AHZ with ∃!. Naturality/restriction/ideal/transitivity clauses follow from uniqueness, with no arbitrary iso. New nodes def-per-topological-formal-morphisms and def-per-completed-algebra-tensor-product are real, match their texts and duplicate nothing (searched side-live Sheaf/WeilConjectures). lean.statement verbatim for all three; docstrings with source/blueprint; only the main theorem sorried; both report sections present. Edge cases K=0, nilpotent K, K=(1), empty Z, non-flat B covered. No file changed, no compile."
+ }
+}

@@ -178,7 +178,32 @@
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NQ-74e224ecd (reviewer sub-agent of L); spot-checked: Read the item, all cited statements, current blueprint sources, unit/chapter route, and master construction. All four steps are correctly typed and justified; inverse directions, module actions, naturality, and edge cases check out. No new nodes, duplicates, cycles, route departures, or repairs. Detailed checks are in review.md."
  },
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": [
+    "CategoryTheory.Mod.extendScalarsComapIsoOfIsIso"
+   ]
+  },
+  "slopmaster2": {
+   "state": "closed",
+   "decls": [
+    {
+     "name": "CategoryTheory.Mod.extendScalarsComapIsoOfIsIso",
+     "module": "WeilConjectures.CategoryTheory.ModuleObjects.ChangeOfScalarsSquare",
+     "lines": [
+      115,
+      129
+     ],
+     "kind": "def",
+     "sorry": false
+    }
+   ],
+   "missing": [],
+   "open": []
+  }
+ },
  "lean": {
   "module": "WeilConjectures.CategoryTheory.ModuleObjects.ChangeOfScalarsSquare",
   "declaration": "CategoryTheory.Mod.extendScalarsComapIsoOfIsIso",
@@ -196,5 +221,24 @@
   "group": "Q87",
   "result": "pass",
   "note": "Existing:true attachment of CategoryTheory.Mod.extendScalarsComapIsoOfIsIso (ChangeOfScalarsSquare.lean:120; blueprint lean field names it). All clauses match: braided closed, equalizers/coequalizers, tensor colimit preservation (PreservesColimitsOfSize.{0,0}, weaker), IsCommMonObj only on R,S, IsIso only a,b, sq : a ≫ ψ = φ ≫ b, extendScalars b ⋙ comap ψ ≅ comap φ ⋙ extendScalars a; Ext/Res = sk-def-sfb-change-of-scalars declarations; canonical body via leftAdjointUniq comparisons, not hollow; statement verbatim; single definition, no Mathlib match; not dropped. nt_compile probe hit 600 s under load (~28 queued); published olean contains the decl with no sorryAx and live modules use it. Advisory: upstream docstring says 'horizontal' for vertical a,b."
+ },
+ "blueprint_update": {
+  "snapshot": "main-20261023-1620",
+  "commit": "7284bb09daf97437d544c51882b325f9c52cd345",
+  "changed": [
+   "statement",
+   "proof"
+  ],
+  "statement": "Let $\\mathcal C$ be a braided monoidal closed category with equalizers and coequalizers in which\ntensoring on either side preserves colimits, and let\n\n$$\n\\begin{array}{ccc}\nR & \\xrightarrow{\\ \\varphi\\ } & S\\\\\n{\\scriptstyle a}\\downarrow & & \\downarrow{\\scriptstyle b}\\\\\nR' & \\xrightarrow{\\ \\psi\\ } & S'\n\\end{array}\n$$\n\nbe a commutative square ($\\psi\\circ a=b\\circ\\varphi$) of morphisms of monoid objects, with $R$,\n$S$ commutative and $a$, $b$ isomorphisms. With $\\operatorname{Res}$, $\\operatorname{Ext}$ as in\n[det-def-sfb-change-of-scalars], there is a natural isomorphism\n\n$$\n\\operatorname{Res}_\\psi\\circ\\operatorname{Ext}_b\\;\\cong\\;\\operatorname{Ext}_a\\circ\n\\operatorname{Res}_\\varphi\\colon\\Mod_S(\\mathcal C)\\longrightarrow\\Mod_{R'}(\\mathcal C).\n$$",
+  "proof": [
+   {
+    "text": "Along an isomorphism of monoid objects, extension of scalars is restriction of scalars along the\ninverse ([det-def-sfb-change-of-scalars]): $\\operatorname{Ext}_b\\cong\\operatorname{Res}_{b^{-1}}$,\n$\\operatorname{Ext}_a\\cong\\operatorname{Res}_{a^{-1}}$. Restriction of scalars turns composites\ninto composites in the opposite order, so the left side is\n$\\operatorname{Res}_{b^{-1}\\circ\\psi}$ and the right side is\n$\\operatorname{Res}_{\\varphi\\circ a^{-1}}$, and $b^{-1}\\circ\\psi=\\varphi\\circ a^{-1}$ by the\ncommutativity of the square.",
+    "uses": [
+     "det-def-sfb-change-of-scalars"
+    ],
+    "elementary": false
+   }
+  ],
+  "note": "the current blueprint (main-20261023-1620, weil-conjectures-blueprint 7284bb09da) states or proves this differently; the node is proved in Lean: recorded 2026-10-23, not reopened"
  }
 }

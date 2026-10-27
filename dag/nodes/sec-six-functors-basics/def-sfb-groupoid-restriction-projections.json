@@ -1,0 +1,135 @@
+{
+ "id": "def-sfb-groupoid-restriction-projections",
+ "kind": "definition",
+ "title": "Scheme groupoid restriction saturation and endpoint projections",
+ "status": "split",
+ "statement": "Let $U,R,B$ be schemes [def-pc-scheme], let $s,t:R\\to U$ and $g:B\\to U$ be morphisms, and use the chosen fibre products [def-pc-fibre-product]. Put $W=B\\times_{g,U,t}R$, with projections $\\pi_B:W\\to B$ and $\\pi_R:W\\to R$. Define the saturation map $h:W\\to U$ to be $s\\circ\\pi_R$. Put $R_B=W\\times_{h,U,g}B$ with projections $a:R_B\\to W$ and $b:R_B\\to B$. Define the restricted source $s_B:R_B\\to B$ to be $b$ and the restricted target $t_B:R_B\\to B$ to be $\\pi_B\\circ a$. Thus on every test scheme the triples $(u,r,v)$ satisfy $g(u)=t(r)$ and $s(r)=g(v)$, the restricted source is $v$, and the restricted target is $u$. These definitions require no groupoid laws or finiteness hypotheses.",
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-fibre-product"
+ ],
+ "source": {
+  "document": "literature/stacks-project/groupoids.tex",
+  "place": "Tag 02VB (lemma-restrict-groupoid), defining fibre-product diagram and its endpoint maps; saturation map also written h in more-groupoids.tex Tag 04MX."
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Scheme groupoid restriction projections from the iterated fibre product, with source last endpoint and target first endpoint",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.fiberι\", \"module\": \"Mathlib.AlgebraicGeometry.Fiber\", \"type\": \"(f : X ⟶ Y) (y : Y) : f.fiber y ⟶ X\", \"doc\": \"Given a morphism of schemes $f: X \\\\to Y$ and a point $y \\\\in Y$, the fiber of $f$ over $y$ is the scheme defined by the pullback $X_y := X \\\\times_Y \\\\operatorname{Spec}(\\\\kappa(y))$, where $\\\\kappa(y)$ is\"}\n  {\"name\": \"FundamentalGroupoidFunctor.projLeft\", \"module\": \"Mathlib.AlgebraicTopology.FundamentalGroupoid.Product\", \"type\": \": πₓ (TopCat.of (A × B)) ⥤ πₓ A\", \"doc\": \"The functor induced by the first projection map $\\\\pi_1 : A \\\\times B \\\\to A$ between fundamental groupoids, which sends each point $(a,b) \\\\in A \\\\times B$ to $a \\\\in A$ and each homotopy class of paths in\"}\n  {\"name\": \"FundamentalGroupoidFunctor.projRight\", \"module\": \"Mathlib.AlgebraicTopology.FundamentalGroupoid.Product\", \"type\": \": πₓ (TopCat.of (A × B)) ⥤ πₓ B\", \"doc\": \"The functor induced by the second projection map from the product space $A \\\\times B$ to $B$, acting between the fundamental groupoids of these spaces. This is constructed by applying the fundamental g\"}\n  {\"name\": \"CategoryTheory.Grpd.piLimitFanIsLimit\", \"module\": \"Mathlib.CategoryTheory.Groupoid.Grpd.Basic\", \"type\": \"⦃J : Type u⦄ (F : J → Grpd.{u, u}) : Limits.IsLimit (piLimitFan F)\", \"doc\": \"For any family of groupoids $\\\\{\\\\mathcal{G}_j\\\\}_{j \\\\in J}$, the product groupoid $\\\\prod_{j \\\\in J} \\\\mathcal{G}_j$ equipped with evaluation functors $\\\\text{ev}_j : \\\\prod_{j \\\\in J} \\\\mathcal{G}_j \\\\to \\\\math\"}\n  {\"name\": \"CategoryTheory.Grp.fst_hom\", \"module\": \"Mathlib.CategoryTheory.Monoidal.Grp_\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} C] [inst_1 : CategoryTheory.CartesianMonoidalCategory C]\\n  [inst_2 : CategoryTheory.BraidedCategory C] (G H : CategoryTheory.Grp C),\\n  (CategoryTheory.SemiCartesianMonoidalCategory.fst G H).hom.hom =\\n    CategoryTheory.SemiCartesianMonoidalCat\", \"doc\": \"For group objects $G$ and $H$ in a Cartesian monoidal category $\\\\mathcal{C}$, the hom component of the first projection morphism $G \\\\times H \\\\to G$ in the category of groups is equal to the first proj\"}\n  {\"name\": \"FundamentalGroupoidFunctor.piTopToPiCone\", \"module\": \"Mathlib.AlgebraicTopology.FundamentalGroupoid.Product\", \"type\": \": Limits.Fan.mk (πₓ (TopCat.of (∀ i, X i))) (proj X) ⟶ Grpd.piLimitFan fun i : I => πₓ (X i)\", \"doc\": \"For any family of topological spaces $\\\\{X_i\\\\}_{i \\\\in I}$, the fundamental groupoid of the product space $\\\\prod X_i$ is naturally isomorphic to the product of the fundamental groupoids of each $X_i$, w\"}\n  {\"name\": \"CategoryTheory.Over.grpObjMkPullbackSnd\", \"module\": \"Mathlib.CategoryTheory.Monoidal.Cartesian.Over\", \"type\": \"[GrpObj (Over.mk f)] : GrpObj (Over.mk (pullback.snd f g))\", \"doc\": \"Given morphisms $f : X \\to Y$ and $g : Z \\to Y$ in a category $\\\\mathcal{C}$ with pullbacks, this constructs a group object in the over category $\\\\mathcal{C}/X$ by applying the pullback functor along $g$\"}\n  {\"name\": \"CategoryTheory.Grpd.piIsoPi_hom_π\", \"module\": \"Mathlib.CategoryTheory.Groupoid.Grpd.Basic\", \"type\": \"(J : Type u) (f : J → Grpd.{u, u}) (j : J) : (piIsoPi J f).hom ≫ Limits.Pi.π f j = CategoryTheory.Pi.eval _ j\", \"doc\": \"For any type $J$, $J$-indexed family of groupoids $f : J → \\\\text{Grpd}$, and index $j ∈ J$, the composition of the isomorphism morphism $\\\\text{hom}$ from the product groupoid $\\\\prod_{j ∈ J} f(j)$ to t\"}\n",
+   "date": "2026-10-24",
+   "verdict": "No exact Mathlib definition found; hits concern ordinary pullbacks, fibres or abstract groupoids."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Restriction of a scheme relation along a morphism by two pullbacks, source last and target first, saturation map",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.Pullback.t'\", \"module\": \"Mathlib/AlgebraicGeometry/Pullbacks\", \"type\": \"{X Y Z : AlgebraicGeometry.Scheme} →\\n  (𝒰 : X.OpenCover) →\\n    (f : X ⟶ Z) →\\n      (g : Y ⟶ Z) →\\n        [inst : ∀ (i : 𝒰.I₀), CategoryTheory.Limits.HasPullback (CategoryTheory.CategoryStruct.comp (𝒰.f i) f) g] →\\n          (i j k : 𝒰.I₀) →\\n            CategoryTheory.Limits.pullback (AlgebraicGeometr\", \"doc\": \"Given an open cover $\\\\mathcal{U}$ of a scheme $X$, morphisms $f: X \\\\to Z$ and $g: Y \\\\to Z$, and indices $i, j, k \\\\in \\\\mathcal{U}.I_0$, this constructs a morphism from the pullback of $\\\\text{fV}(\\\\mathc\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Pullback.t\", \"module\": \"Mathlib/AlgebraicGeometry/Pullbacks\", \"type\": \"{X Y Z : AlgebraicGeometry.Scheme} →\\n  (𝒰 : X.OpenCover) →\\n    (f : X ⟶ Z) →\\n      (g : Y ⟶ Z) →\\n        [inst : ∀ (i : 𝒰.I₀), CategoryTheory.Limits.HasPullback (CategoryTheory.CategoryStruct.comp (𝒰.f i) f) g] →\\n          (i j : 𝒰.I₀) → AlgebraicGeometry.Scheme.Pullback.v 𝒰 f g i j ⟶ AlgebraicGeome\", \"doc\": \"Given an open cover $\\\\mathcal{U}$ of a scheme $X$, morphisms $f: X \\\\to Z$ and $g: Y \\\\to Z$, and indices $i, j \\\\in \\\\mathcal{U}.I_0$, this constructs a canonical isomorphism between the pullback objects\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Pullback.v\", \"module\": \"Mathlib/AlgebraicGeometry/Pullbacks\", \"type\": \"{X Y Z : AlgebraicGeometry.Scheme} →\\n  (𝒰 : X.OpenCover) →\\n    (f : X ⟶ Z) →\\n      (g : Y ⟶ Z) →\\n        [∀ (i : 𝒰.I₀), CategoryTheory.Limits.HasPullback (CategoryTheory.CategoryStruct.comp (𝒰.f i) f) g] →\\n          𝒰.I₀ → 𝒰.I₀ → AlgebraicGeometry.Scheme\", \"doc\": \"For an open cover $\\\\mathcal{U}$ of a scheme $X$, morphisms $f: X \\\\to Z$ and $g: Y \\\\to Z$, and indices $i, j \\\\in \\\\mathcal{U}.I_0$, this constructs the pullback scheme of the composition $\\\\mathcal{U}.f(\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Pullback.fV\", \"module\": \"Mathlib/AlgebraicGeometry/Pullbacks\", \"type\": \"{X Y Z : AlgebraicGeometry.Scheme} →\\n  (𝒰 : X.OpenCover) →\\n    (f : X ⟶ Z) →\\n      (g : Y ⟶ Z) →\\n        [inst : ∀ (i : 𝒰.I₀), CategoryTheory.Limits.HasPullback (CategoryTheory.CategoryStruct.comp (𝒰.f i) f) g] →\\n          (i j : 𝒰.I₀) →\\n            AlgebraicGeometry.Scheme.Pullback.v 𝒰 f g i j ⟶\\n  \", \"doc\": \"For indices $i, j$ in the zeroth component of an open cover $\\\\mathcal{U}$ of a scheme $X$, this morphism maps the pullback scheme $v(\\\\mathcal{U}, f, g, i, j)$ to the pullback of the composed morphism \"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Pullback.t'_fst_fst_snd\", \"module\": \"Mathlib/AlgebraicGeometry/Pullbacks\", \"type\": \"∀ {X Y Z : AlgebraicGeometry.Scheme} (𝒰 : X.OpenCover) (f : X ⟶ Z) (g : Y ⟶ Z)\\n  [inst : ∀ (i : 𝒰.I₀), CategoryTheory.Limits.HasPullback (CategoryTheory.CategoryStruct.comp (𝒰.f i) f) g]\\n  (i j k : 𝒰.I₀),\\n  CategoryTheory.CategoryStruct.comp (AlgebraicGeometry.Scheme.Pullback.t' 𝒰 f g i j k)\\n      (\", \"doc\": \"For an open cover $\\\\mathcal{U}$ of a scheme $X$, morphisms $f: X \\\\to Z$ and $g: Y \\\\to Z$, and indices $i, j, k \\\\in \\\\mathcal{U}.I_0$, the composition of the $t'$-induced morphism with successive first \"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Pullback.t_fst_fst\", \"module\": \"Mathlib/AlgebraicGeometry/Pullbacks\", \"type\": \"∀ {X Y Z : AlgebraicGeometry.Scheme} (𝒰 : X.OpenCover) (f : X ⟶ Z) (g : Y ⟶ Z)\\n  [inst : ∀ (i : 𝒰.I₀), CategoryTheory.Limits.HasPullback (CategoryTheory.CategoryStruct.comp (𝒰.f i) f) g]\\n  (i j : 𝒰.I₀),\\n  CategoryTheory.CategoryStruct.comp (AlgebraicGeometry.Scheme.Pullback.t 𝒰 f g i j)\\n      (Categ\", \"doc\": \"For an open cover $\\\\mathcal{U}$ of a scheme $X$, morphisms $f: X \\\\to Z$ and $g: Y \\\\to Z$, and indices $i, j \\\\in \\\\mathcal{U}.I_0$, the composition of the symmetry isomorphism $t(\\\\mathcal{U}, f, g, i, j\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Pullback.t_snd\", \"module\": \"Mathlib/AlgebraicGeometry/Pullbacks\", \"type\": \"∀ {X Y Z : AlgebraicGeometry.Scheme} (𝒰 : X.OpenCover) (f : X ⟶ Z) (g : Y ⟶ Z)\\n  [inst : ∀ (i : 𝒰.I₀), CategoryTheory.Limits.HasPullback (CategoryTheory.CategoryStruct.comp (𝒰.f i) f) g]\\n  (i j : 𝒰.I₀),\\n  CategoryTheory.CategoryStruct.comp (AlgebraicGeometry.Scheme.Pullback.t 𝒰 f g i j)\\n      (Categ\", \"doc\": \"For an open cover $\\\\mathcal{U}$ of a scheme $X$, morphisms $f: X \\\\to Z$ and $g: Y \\\\to Z$, and indices $i, j \\\\in \\\\mathcal{U}.I_0$, the composition of the symmetry isomorphism $t(\\\\mathcal{U}, f, g, i, j\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Cover.gluedCoverT'\", \"module\": \"Mathlib/AlgebraicGeometry/Gluing\", \"type\": \"{X : AlgebraicGeometry.Scheme} →\\n  (𝒰 : X.OpenCover) →\\n    (x y z : 𝒰.I₀) →\\n      CategoryTheory.Limits.pullback (CategoryTheory.Limits.pullback.fst (𝒰.f x) (𝒰.f y))\\n          (CategoryTheory.Limits.pullback.fst (𝒰.f x) (𝒰.f z)) ⟶\\n        CategoryTheory.Limits.pullback (CategoryTheory.Limits.pullbac\", \"doc\": \"For an open cover $\\\\mathcal{U}$ of a scheme $X$ and indices $x, y, z \\\\in I_0(\\\\mathcal{U})$, this defines a morphism between the pullback of $\\\\mathcal{U}.f(x)$ with $\\\\mathcal{U}.f(y)$ and the pullback \"}\n",
+   "date": "2026-10-24",
+   "verdict": "No exact Mathlib definition found; hits concern ordinary pullbacks, fibres or abstract groupoids."
+  },
+  {
+   "tool": "grep",
+   "query": "groupoidSaturationMap|groupoidRestrictionSource|groupoidRestrictionTarget",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-24",
+   "verdict": "No Mathlib occurrence. Existing project declarations are reused with existing:true; no copies."
+  },
+  {
+   "tool": "grep",
+   "query": "rg -n groupoidSaturationMap|groupoidRestrictionSource|groupoidRestrictionTarget lean/WeilConjectures lean/Sheaf",
+   "results": "No WeilConjectures hit. Existing definitions in lean/Sheaf/AlgebraicGeometry/CohenMacaulayGroupoidDoubleRestriction.lean lines 51-67, plus their uses in the same module. These are the exact Scheme definitions reused.",
+   "date": "2026-10-24",
+   "verdict": "Reuse existing definitions unchanged, no new module."
+  },
+  {
+   "tool": "grep",
+   "query": "rg -l groupoidSaturationMap|groupoidRestrictionSource|groupoidRestrictionTarget dag/nodes; python3 tools/blueprint_refs.py search \"groupoid restriction projections\"",
+   "results": "The only node naming these helpers is lem-sfb-cm-groupoid-double-restriction, a theorem node. Blueprint search prints no matches. The existing def-sfb-restricted-groupoid-relation instead owns the source-first relation in Over S, not these Scheme declarations.",
+   "date": "2026-10-24",
+   "verdict": "No existing definition node owns these plain Scheme projections; add ownership as requested in immutable-head H2 review."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-field-groupoid-restriction-open",
+  "date": "2026-10-24",
+  "group": "Q20"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Affine PGL quotients with closed orbits and zero-dimensional stabilizers. Supporting affine-quotient step: Adequate moduli spaces are universal for separated targets. Alper Theorem 7.2.1, locally separated case through Proposition 7.1.1: Proposition 7.1.1, proof, printed p.36: surjectivity of the diagonal pullback W from condition (a), expanded as its closure-equivalence input. Rational points of a locally separated space over an algebraically closed field have closed images; continuity gives the assertion. This is the geometric-points sublemma, not the universality conclusion. Supporting geometric input: rational sections after field base change are closed immersions. Supporting input: The absolute locally separated space has quasi-compact field-valued representatives. First paragraph of Tag 088J: apply 04Q9 to the kernel relation on the field spectrum and its pair groupoid. Supporting Second proof paragraph of 04Q9: apply 04Q6 to the morphism from the reduced source into the closure groupoid. Supporting Tag 04Q6, first proof paragraph: openness of the restriction projection, and the restriction construction used before it. Canonical saturation and restriction endpoint projections in the field-groupoid restriction construction (Stacks 02VB and 04LQ).",
+   "via": [
+    "lem-sfb-field-groupoid-restriction-open",
+    "lem-sfb-field-groupoid-open-image-closed",
+    "lem-sfb-field-kernel-relation-immersion-closed",
+    "lem-sfb-locally-separated-space-decent",
+    "lem-sfb-locally-separated-rational-point-closed-immersion",
+    "lem-sfb-locally-separated-closure-equivalent-images",
+    "lem-sfb-adequate-locally-separated-universality",
+    "lem-sfb-affine-pgl-finite-stabilizer-quotient",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "import_flags": [],
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.CohenMacaulayGroupoidDoubleRestriction",
+  "declaration": "AlgebraicGeometry.groupoidSaturationMap",
+  "declarations": [
+   "AlgebraicGeometry.groupoidSaturationMap",
+   "AlgebraicGeometry.groupoidRestrictionSource",
+   "AlgebraicGeometry.groupoidRestrictionTarget"
+  ],
+  "statement": "noncomputable def groupoidSaturationMap {U R B : Scheme.{u}}\n    (s t : R ⟶ U) (g : B ⟶ U) : pullback g t ⟶ U",
+  "branch": "newtargets-dag",
+  "by": "Q20",
+  "date": "2026-10-24",
+  "existing": true,
+  "note": "Definition ownership requested by immutable-head H2 review of 4fad425c2c87. The three existing definitions at lines 51-67 are plain Scheme pullback projections, with no groupoid, Cohen-Macaulay or finiteness hypothesis and no theorem choice. They are reused unchanged in their existing module, without moving or copying declarations. The source is last endpoint and target is first, as in Stacks 02VB."
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-8a8f28367",
+  "group": "Q20",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-8a8f28367",
+  "group": "Q20",
+  "result": "pass",
+  "note": "Re-delivery repairs the H2 fault of 4fad425c2c87: theorem node lem-sfb-cm-groupoid-double-restriction removed from stmt_deps and replaced by new def node def-sfb-groupoid-restriction-projections (existing:true on groupoidSaturationMap/RestrictionSource/RestrictionTarget in CohenMacaulayGroupoidDoubleRestriction, not moved or copied). Module byte-identical to the previous head; item differs only in stmt_deps and lean.note, statement unchanged vs live. New node statement matches the def bodies (W=pullback g t, h=snd≫s, R_B=pullback h g, s_B=snd, t_B=fst≫fst), lean.statement verbatim, no duplicate owner in side-live. Item maths re-checked against IsGroupoidScheme: endpoints forced, middle equations pin eK/iK/cK, composition orientation correct, Surjective∧IsOpenMap of the real middle projection, no finiteness. Docstrings, sorry-only proof and both report sections present. Non-blocking: the helpers' docstrings still name the theorem node as blueprint. No compile (no change)."
+ }
+}

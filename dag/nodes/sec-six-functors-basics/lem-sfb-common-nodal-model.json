@@ -1,0 +1,305 @@
+{
+ "id": "lem-sfb-common-nodal-model",
+ "kind": "statement",
+ "title": "Common domination of marked nodal models over a discrete valuation ring",
+ "statement": "Let $R$ be a discrete valuation ring with fraction field $K$ [def-sc-discrete-valuation-ring, def-pc-field-extension], and put $S=\\operatorname{Spec}R$ [def-weil-affine-spectrum]. For $i=1,2$, let $X_i\\to S$ be projective [def-kun-projective], flat [def-weil-flat-morphism], finitely presented [def-sbc-locally-finite-presentation], with nonempty connected reduced one-dimensional geometric fibres having only ordinary double points, and let $a_{i1},\\ldots,a_{in}$ be pairwise disjoint sections in the relative smooth locus. These are marked nodal families in the terminology of [lem-sfb-nodal-log-canonical-reconstruction], with no positivity assumption. Let $u:(X_1)_K\\xrightarrow{\\sim}(X_2)_K$ be a $K$-isomorphism carrying $a_{1j,K}$ to $a_{2\\sigma(j),K}$ for a permutation $\\sigma$ of $\\{1,\\ldots,n\\}$. There exist a projective flat finitely presented marked nodal family $Y\\to S$ with disjoint smooth sections $b_1,\\ldots,b_n$, proper $S$-morphisms $p_i:Y\\to X_i$ [def-weil-proper-morphism], and finite sets $Z_i$ of closed points of the special fibres of $X_i$, such that $p_i^{-1}(X_i\\setminus Z_i)\\to X_i\\setminus Z_i$ is an isomorphism, $(p_2)_K=u\\circ(p_1)_K$, $p_1b_j=a_{1j}$, and $p_2b_j=a_{2\\sigma(j)}$. In particular both $(p_i)_K$ are isomorphisms. No smoothness of the generic fibres, stability, completeness, excellence, or extension of $R$ is assumed. The case $n=0$ is allowed.",
+ "source": {
+  "document": "literature/stacks-project/resolve.tex",
+  "place": "Agent marked and persistently nodal extension of the common-resolution construction of Tag 0C5S (lemma-birational-regular-surfaces), combined in the smooth-generic case with models.tex Tag 0CDE (lemma-blowup-at-worst-nodal). Those tags do not themselves state this nodal-generic, semistable common-model result. A precise reference for the conductor-and-marking version is WANTED: Knudsen, The projectivity of the moduli space of stable curves II, sections 1--2."
+ },
+ "stmt_deps": [
+  "def-sc-discrete-valuation-ring",
+  "def-pc-field-extension",
+  "def-weil-affine-spectrum",
+  "def-kun-projective",
+  "def-weil-flat-morphism",
+  "def-sbc-locally-finite-presentation",
+  "lem-sfb-nodal-log-canonical-reconstruction",
+  "def-weil-proper-morphism"
+ ],
+ "proof": [
+  {
+   "text": "Normalize persistent nodes. The generic identification and integral-closure uniqueness identify $B\\to N$ for both models; write $X_i=C_i\\amalg_BN$. Markings lift away from $B$. Regularize $C_i$ to $T_i$, unchanged generically and near branches and markings. The component-comparison lemma matches integral regular surface components and supplies comparisons with special-fibre centres. Choose minimum length on each pair. The minimum ranges over sequences equipped with the second comparison map.",
+   "uses": [
+    "lem-sfb-persistent-node-normalization",
+    "lem-sfb-nodal-trait-regularization",
+    "lem-sfb-trait-surface-component-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/models.tex",
+    "place": "Agent assembly of persistent normalization (0CDD) and regularization (0CDE); component-comparison statement supplies matched surfaces and special-centred comparisons."
+   }
+  },
+  {
+   "text": "Apply the good-centre criterion to each pair. Induct on its sequence: $T_i$ starts regular projective flat fp nodal with smooth generic fibre; each centre is smooth with finite separable residue field, so fibre defects preserves these properties and gives nonempty geometrically connected blowup fibres. Their finite disjoint union $W$ has these properties and maps to both $C_i$.",
+   "uses": [
+    "lem-sfb-minimal-comparison-good-centres",
+    "lem-sfb-point-blowup-fibre-defects"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/resolve.tex",
+    "place": "Agent assembly of the extracted minimum-length good-centre criterion and the point-blowup fibre-defect preservation statement (0AGQ)."
+   }
+  },
+  {
+   "text": "Projectivity gives properness. Extend $B_K\\to W_K$ at every closed-point DVR of $B$ by proper valuative extension; spread to neighbourhoods and glue by separated dense-open equality. Flatness makes $B_K$ schematically dense. Extend each marking over $R$ similarly. Separated uniqueness fixes their composites to both $T_i$ and $C_i$, including the marking permutation. Etale-section avoidance makes the lifts smooth. Disjoint images in $C_1$ give disjoint lifts. Closed-immersion cancellation for $B\\to W\\to C_1$ makes the branch lift closed.",
+   "uses": [
+    "lem-sfb-persistent-node-normalization",
+    "lemma-nagata-proper-separated-valuation-extension",
+    "lem-sfb-local-ring-map-spread",
+    "lemma-nagata-ext-scheme-theoretically-dominant-separated",
+    "lem-sfb-etale-sections-avoid-regular-nodes",
+    "lem-weil-pbc-closed-immersion-cancellation",
+    "lem-kun-projective-implies-proper"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/models.tex",
+    "place": "Agent extension of branches and markings by proper valuative extension, local-map spreading, separated gluing and the extracted regular-node avoidance statement (0CDD/0CDC)."
+   }
+  },
+  {
+   "text": "Pinch $B\\hookrightarrow W$ along $B\\to N$: the pinching theorem gives projective flat fp nodal $Y=W\\amalg_BN$. Applied to $B\\hookrightarrow C_i$ and $B\\to N$ it gives a pushout which by uniqueness is $X_i$; so $C_i\\to X_i$ is finite surjective, the square is cartesian, $N\\to X_i$ is closed, and the square restricts to pushouts over opens and commutes with geometric-fibre base change. The universal property of $Y$ gives $p_i:Y\\to X_i$, compatible on $B$ by step 3. Projectivity and proper-to-separated give properness of $p_i$. Generic conductor reconstruction gives $(p_1)_K$ an isomorphism and $(p_2)_K=u(p_1)_K$. Lifted markings survive off $B$, with both identities.",
+   "uses": [
+    "lem-sfb-trait-etale-branch-pinching",
+    "lem-sfb-persistent-node-normalization",
+    "lem-kun-projective-implies-proper",
+    "lem-weil-pbc-proper-to-separated",
+    "lemma-nagata-proper-separated-valuation-extension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Agent assembly of trait branch pinching (0E25), including universal property and geometric-fibre base change; apply to C_i as well as W."
+   }
+  },
+  {
+   "text": "For each $i$, apply finite-complement conductor descent with $r_i:T_i\\to C_i$ the regularization and $q_i:W\\to T_i$. Here $q_i$ is proper (proper source over separated target), $W$ is regular hence reduced, and $q_i$ is componentwise birational and generically an isomorphism. The branch compatibility was fixed in step 3, and steps 1 and 4 give the pushout hypotheses on $X_i$ and $Y$. It supplies finite closed special sets $Z_i$ and the required isomorphisms off them, including along persistent nodes.",
+   "uses": [
+    "lem-sfb-conductor-modification-finite-complement",
+    "lem-sfb-nodal-trait-regularization",
+    "lem-kun-projective-implies-proper",
+    "lem-weil-pbc-proper-to-separated",
+    "lem-sfb-persistent-node-normalization",
+    "lem-sfb-trait-etale-branch-pinching"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Agent application of the extracted finite-complement conductor-descent statement, refining 0BFP(1),(2) and open restriction of 0E25 pushouts."
+   }
+  },
+  {
+   "text": "For $W\\to C_1$, regularization and the selected point blowups give a finite proper chain with nonempty geometrically connected fibres. Apply proper-chain pinching connectedness to this chain and the common $B\\to N$; steps 1 and 4 give its hypotheses on $X_1$ and $Y$. Since each $(X_1)_{\\bar s}$ is nonempty connected, each $Y_{\\bar s}$ is too. Empty $B$ and $n=0$ are allowed.",
+   "uses": [
+    "lem-sfb-proper-chain-pinching-connected-fibres",
+    "lem-sfb-nodal-trait-regularization",
+    "lem-sfb-point-blowup-fibre-defects",
+    "lem-sfb-persistent-node-normalization",
+    "lem-sfb-trait-etale-branch-pinching"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Agent application of the extracted proper-chain pinching connectedness statement to the regularization and good-centre blowup chain; geometric-fibre pushout property supplied in step 4."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-persistent-node-normalization",
+  "lem-sfb-nodal-trait-regularization",
+  "lem-sfb-trait-surface-component-comparison",
+  "lem-sfb-minimal-comparison-good-centres",
+  "lem-sfb-point-blowup-fibre-defects",
+  "lemma-nagata-proper-separated-valuation-extension",
+  "lem-sfb-local-ring-map-spread",
+  "lemma-nagata-ext-scheme-theoretically-dominant-separated",
+  "lem-sfb-etale-sections-avoid-regular-nodes",
+  "lem-weil-pbc-closed-immersion-cancellation",
+  "lem-kun-projective-implies-proper",
+  "lem-sfb-trait-etale-branch-pinching",
+  "lem-weil-pbc-proper-to-separated",
+  "lem-sfb-conductor-modification-finite-complement",
+  "lem-sfb-proper-chain-pinching-connected-fibres"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/resolve.tex",
+  "place": "Common regular resolution and point-blowdown universal property, with explicit persistent-node and pinching reductions"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Two semistable marked nodal curve models over a DVR with isomorphic generic fibres admit a common semistable model",
+   "results": "{\"t\": \"2026-10-22T04:03:18Z\", \"tool\": \"leanfinder\", \"query\": \"Two semistable marked nodal curve models over a DVR with isomorphic generic fibres admit a common semistable model\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.ValuativeCriterion.eq\", \"AlgebraicGeometry.ValuativeCriterion.Existence.eq\", \"AlgebraicGeometry.ValuativeCriterion.existence\", \"WeierstrassCurve.exists_isMinimal\", \"AlgebraicGeometry.ValuativeCriterion.uniqueness\", \"WeierstrassCurve.IsGoodReduction\", \"WeierstrassCurve.instIsMinimalMinimal\", \"WeierstrassCurve.minimal\"], \"digest\": \"aa4626d46dd2789e\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: birational partial isomorphisms, valuative criteria, and minimal Weierstrass equations do not provide simultaneous projective nodal domination with disjoint markings; source grep has no semistable-model construction."
+  },
+  {
+   "tool": "grep",
+   "query": "semistable|NodalCurve|nodal.*model|common.*model",
+   "results": "{\"t\": \"2026-10-22T04:04:49Z\", \"tool\": \"grep\", \"query\": \"semistable|NodalCurve|nodal.*model|common.*model\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: birational partial isomorphisms, valuative criteria, and minimal Weierstrass equations do not provide simultaneous projective nodal domination with disjoint markings; source grep has no semistable-model construction."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Common domination of two nodal marked curve models by proper birational semistable modifications",
+   "results": "{\"t\": \"2026-10-22T04:04:49Z\", \"tool\": \"leansearch\", \"query\": \"Common domination of two nodal marked curve models by proper birational semistable modifications\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsDominant.respectsIso\", \"AlgebraicGeometry.instIsDominantιCoborderRange\", \"AlgebraicGeometry.instIsDominantOfSurjective\", \"AlgebraicGeometry.IsDominant\", \"AlgebraicGeometry.instIsMultiplicativeSchemeIsDominant\", \"WeierstrassCurve.exists_isMinimal\", \"WeierstrassCurve.IsGoodReduction.congr_simp\", \"AlgebraicGeometry.instIsDominantCompScheme\"], \"digest\": \"76bd3c5303e797bc\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: birational partial isomorphisms, valuative criteria, and minimal Weierstrass equations do not provide simultaneous projective nodal domination with disjoint markings; source grep has no semistable-model construction."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"birational\"",
+   "results": "{\"t\": \"2026-10-22T04:04:49Z\", \"tool\": \"loogle\", \"query\": \"\\\"AlgebraicGeometry\\\", \\\"birational\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Birational\", \"AlgebraicGeometry.Scheme.Birational.refl\", \"AlgebraicGeometry.Scheme.Birational.partialIso\", \"AlgebraicGeometry.Scheme.Birational.symm\", \"AlgebraicGeometry.Scheme.Birational.trans\", \"AlgebraicGeometry.Scheme.BirationalOver.refl\", \"AlgebraicGeometry.Scheme.BirationalOver\", \"AlgebraicGeometry.Scheme.Hom.birational\"], \"digest\": \"b1297fdaf32f7b52\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: birational partial isomorphisms, valuative criteria, and minimal Weierstrass equations do not provide simultaneous projective nodal domination with disjoint markings; source grep has no semistable-model construction."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A generic isomorphism of pointed semistable curve models extends to two morphisms from a third pointed semistable model",
+   "results": "{\"t\": \"2026-10-22T04:04:51Z\", \"tool\": \"leanfinder\", \"query\": \"A generic isomorphism of pointed semistable curve models extends to two morphisms from a third pointed semistable model\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.specializingMap_respectsIso\", \"AlgebraicGeometry.Scheme.fromSpecResidueField.hcongr_2\", \"AlgebraicGeometry.Scheme.arrowStalkMapIsoOfEq\", \"AlgebraicGeometry.Scheme.PartialMap.ext\", \"AlgebraicGeometry.Scheme.SpecToEquivOfField_eq_iff\", \"AlgebraicGeometry.Scheme.PartialMap.ext_iff\", \"AlgebraicGeometry.Scheme.Hom.arrowStalkMapIsoOfEq\", \"AlgebraicGeometry.Scheme.residueFieldCongr_fromSpecResidueField_assoc\"], \"digest\": \"b695dac153f59d94\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: birational partial isomorphisms, valuative criteria, and minimal Weierstrass equations do not provide simultaneous projective nodal domination with disjoint markings; source grep has no semistable-model construction."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Two marked nodal curve models over a discrete valuation ring admit a common nodal model preserving their generic isomorphism",
+   "results": "{\"t\": \"2026-10-22T04:21:01Z\", \"tool\": \"leanfinder\", \"query\": \"Two marked nodal curve models over a discrete valuation ring admit a common nodal model preserving their generic isomorphism\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.ValuativeCriterion.eq\", \"WeierstrassCurve.minimal\", \"WeierstrassCurve.exists_isMinimal\", \"WeierstrassCurve.IsMinimal\", \"WeierstrassCurve.IsGoodReduction\", \"WeierstrassCurve.instIsMinimalMinimal\", \"AlgebraicGeometry.ValuativeCriterion.Existence.eq\", \"WeierstrassCurve.reduction\"], \"digest\": \"a1b4bee7a865d766\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: valuative criteria and minimal Weierstrass equations do not construct common marked nodal families."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Common semistable domination of pointed curves with singular generic fibre without extending the valuation ring",
+   "results": "{\"t\": \"2026-10-22T04:21:00Z\", \"tool\": \"leansearch\", \"query\": \"Common semistable domination of pointed curves with singular generic fibre without extending the valuation ring\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"WeierstrassCurve.exists_isMinimal\", \"WeierstrassCurve.IsGoodReduction.congr_simp\", \"WeierstrassCurve.isGoodReduction_iff\", \"AlgebraicGeometry.ValuativeCommSq.K\", \"AlgebraicGeometry.ValuativeCriterion.Existence.of_specializingMap\", \"WeierstrassCurve.IsGoodReduction.mk\", \"ValuationRing.rec\", \"ValuativeExtension.casesOn\"], \"digest\": \"196a143dc159f1a3\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: valuative criteria and minimal Weierstrass equations do not construct common marked nodal families."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"birational\"",
+   "results": "{\"t\": \"2026-10-22T04:21:00Z\", \"tool\": \"loogle\", \"query\": \"\\\"AlgebraicGeometry\\\", \\\"birational\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Birational\", \"AlgebraicGeometry.Scheme.Birational.refl\", \"AlgebraicGeometry.Scheme.Birational.partialIso\", \"AlgebraicGeometry.Scheme.Birational.symm\", \"AlgebraicGeometry.Scheme.Birational.trans\", \"AlgebraicGeometry.Scheme.BirationalOver.refl\", \"AlgebraicGeometry.Scheme.BirationalOver\", \"AlgebraicGeometry.Scheme.Hom.birational\"], \"digest\": \"b1297fdaf32f7b52\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: valuative criteria and minimal Weierstrass equations do not construct common marked nodal families."
+  },
+  {
+   "tool": "grep",
+   "query": "semistable|NodalCurve|nodal.*model|common.*model",
+   "results": "{\"t\": \"2026-10-22T04:20:59Z\", \"tool\": \"grep\", \"query\": \"semistable|NodalCurve|nodal.*model|common.*model\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: valuative criteria and minimal Weierstrass equations do not construct common marked nodal families."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-semistable-log-pluricanonical-lattices",
+  "date": "2026-10-22",
+  "group": "N5"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong §3.8, last paragraph, printed pp.608--609: finite unramified Isom for unordered stable marked curves, and extension over a normal base. This is rigidity of stable pointed curves themselves, independent of any modification map.; rigidity input: Invariance of logarithmic pluricanonical lattices of semistable models; Common domination of marked nodal models over a discrete valuation ring",
+   "via": [
+    "lem-sfb-semistable-log-pluricanonical-lattices",
+    "lem-sfb-stable-pointed-isom-finite",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-common-nodal-model",
+  "worker": "stage1",
+  "summary": "Renewed promotion-return repair against the current DAG after dry run cc9794c449f: reconstruct the item from the current live node, retain the five independent unsplit lemmas and six-step assembly, and reread all ten live cited statements (none changed from the previous rebase). Explicitly choose the minimum among comparisons with a second map, use separated uniqueness to fix branch and marking composites to both models, and apply finite-complement descent with W reduced. Current statement, statement dependencies and every maintainer-owned field are preserved. All retained source arguments, citations and logged searches are kept; assembly stays below 3000 characters.",
+  "blueprint": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong §3.8, last paragraph, printed pp.608--609: finite unramified Isom for unordered stable marked curves, and extension over a normal base. This is rigidity of stable pointed curves themselves, independent of any modification map.; rigidity input: Invariance of logarithmic pluricanonical lattices of semistable models; Common domination of marked nodal models over a discrete valuation ring; full common-domination prerequisite realized by steps 1--6.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-proper-to-separated",
+    "why": "General surface, valuative or blowup tool used with its stated hypotheses; this unit has no substitute for this generic tool."
+   },
+   {
+    "node": "lem-kun-projective-implies-proper",
+    "why": "General surface, valuative or blowup tool used with its stated hypotheses; this unit has no substitute for this generic tool."
+   },
+   {
+    "node": "lemma-nagata-proper-separated-valuation-extension",
+    "why": "General surface, valuative or blowup tool used with its stated hypotheses; this unit has no substitute for this generic tool."
+   },
+   {
+    "node": "lemma-nagata-ext-scheme-theoretically-dominant-separated",
+    "why": "General surface, valuative or blowup tool used with its stated hypotheses; this unit has no substitute for this generic tool."
+   },
+   {
+    "node": "lem-weil-pbc-closed-immersion-cancellation",
+    "why": "General surface, valuative or blowup tool used with its stated hypotheses; this unit has no substitute for this generic tool."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-proper-to-separated",
+  "lem-kun-projective-implies-proper",
+  "lemma-nagata-proper-separated-valuation-extension",
+  "def-sbc-locally-finite-presentation",
+  "lemma-nagata-ext-scheme-theoretically-dominant-separated",
+  "lem-trf-nodal-family-etale-local-model",
+  "lem-sfb-dvr-nodal-chart-blowup-calculus",
+  "lem-weil-pbc-closed-immersion-cancellation"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q02-bfe3906da",
+  "group": "Q02",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q02-bfe3906da (reviewer sub-agent of L); spot-checked: Third delivery of the human re-split (note released 2026-10-22). I read the item, its 6 assembly steps, the retained 10-step old proof, all 5 new statement-only nodes (byte-identical to the f5ce9514 run) and every cited statement. Sources read: resolve.tex 0C5S (l.4975) and 0C5J (4322), models.tex 0CDD (5890) and 0CDC, varieties.tex 0BFP(1),(2) (3300), more-morphisms.tex 0E25 (19758). No SGA. Re-split: old step 2 → trait-surface-component-comparison (flatness excludes vertical components; properness makes centres special); old steps 3–5 → minimal-comparison-good-centres (0BFP(2) contracts coefficient>1 and inseparable P^1_l components, the last bad creation is blown down by 0C5J); old step 7 → etale-sections-avoid-regular-nodes (regularity forces uv=π, and an étale point would need v(u)+v(v)=1 with both ≥1); old step 9 → conductor-modification-finite-complement (0BFP gives finitely many closed special points; open restriction of both pushouts); old step 10 → proper-chain-pinching-connected-fibres. All five are true; small cases checked (uv=π², ramified B, B empty, q=id, length 0, disconnected fibres). Statements are comparable in size (1.1k–2.9k). None restates the item, and rg -L over the live DAG found no duplicates. The live item differs from this head only in proof fields. This head repairs the earlier fault (1) in its own words (step 3, separated uniqueness fixes the composites to T_i and C_i). However, it again loses the rest of the d934/f5ce FIX (C3/C4). Step 5 applies finite-complement descent, whose hypotheses on the X_i and Y squares (cartesian, C_i→X_i finite surjective, N closed, pushouts restrict over opens) come only from branch pinching applied to C_i and W. Step 5 neither cites that statement nor refers to step 4. Step 6 also dropped persistent normalization and the pointer to steps 1 and 4. Fixed: step 4 lists those clauses for X_i and gives compatibility of p_i on B via step 3. Steps 5 and 6 cite persistent-node-normalization and trait-etale-branch-pinching and refer to steps 1 and 4. I removed the split_report tool_use lem-sc-regular-dim1-dvr because no step cites it. Statement, stmt_deps, proof_deps and the head's own wording of steps 1 and 3 are unchanged; the proof is 2973 characters. Accepted tool uses: generic valuative, dense-open, closed-immersion, proper-to-separated and projective-to-proper. Maintainer note: this FIX has been lost twice through promotion refusals and should merge on this push.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.CommonMarkedNodalModel",
+  "declaration": "AlgebraicGeometry.exists_common_marked_nodal_model",
+  "file": "lean/Sheaf/AlgebraicGeometry/CommonMarkedNodalModel.lean",
+  "statement": "theorem exists_common_marked_nodal_model (R K : Type u) [CommRing R] [IsDomain R] [IsDiscreteValuationRing R] [Field K] [Algebra R K] [IsFractionRing R K] (X₁ X₂ : Over (Spec (.of R))) [IsHProjective X₁.hom] [IsHProjective X₂.hom] [Flat X₁.hom] [Flat X₂.hom] [LocallyOfFinitePresentation X₁.hom] [LocallyOfFinitePresentation X₂.hom] (hnodal₁ : HasNodalGeometricFibres X₁.hom) (hnodal₂ : HasNodalGeometricFibres X₂.hom) (hgeometric₁ : ∀ (Ω : Type u) [Field Ω] [IsAlgClosed Ω] (t : Spec (.of Ω) ⟶ Spec (.of R)), IsReduced (pullback X₁.hom t) ∧ (pullback X₁.hom t).IsPureDimension 1) (hgeometric₂ : ∀ (Ω : Type u) [Field Ω] [IsAlgClosed Ω] (t : Spec (.of Ω) ⟶ Spec (.of R)), IsReduced (pullback X₂.hom t) ∧ (pullback X₂.hom t).IsPureDimension 1) (n : ℕ) (a₁ : Fin n → (Spec (.of R) ⟶ X₁.left)) (a₂ : Fin n → (Spec (.of R) ⟶ X₂.left)) (ha₁ : ∀ j : Fin n, a₁ j ≫ X₁.hom = 𝟙 (Spec (.of R))) (ha₂ : ∀ j : Fin n, a₂ j ≫ X₂.hom = 𝟙 (Spec (.of R))) (hdisjoint₁ : Pairwise (fun j k : Fin n ↦ Disjoint (Set.range (a₁ j)) (Set.range (a₁ k)))) (hdisjoint₂ : Pairwise (fun j k : Fin n ↦ Disjoint (Set.range (a₂ j)) (Set.range (a₂ k)))) (hsmooth₁ : ∀ (j : Fin n) (s : Spec (.of R)), a₁ j s ∈ X₁.hom.smoothLocus) (hsmooth₂ : ∀ (j : Fin n) (s : Spec (.of R)), a₂ j s ∈ X₂.hom.smoothLocus) (σ : Equiv.Perm (Fin n)) (uK : (Over.pullback (Spec.map (CommRingCat.ofHom (algebraMap R K)))).obj X₁ ≅ (Over.pullback (Spec.map (CommRingCat.ofHom (algebraMap R K)))).obj X₂) (hmark : ∀ j : Fin n, sectionBaseChange X₁.hom (a₁ j) (ha₁ j) (Over.mk (Spec.map (CommRingCat.ofHom (algebraMap R K)))) ≫ uK.hom.left = sectionBaseChange X₂.hom (a₂ (σ j)) (ha₂ (σ j)) (Over.mk (Spec.map (CommRingCat.ofHom (algebraMap R K))))) : ∃ (Y : Over (Spec (.of R))) (_ : IsHProjective Y.hom) (_ : Flat Y.hom) (hY : LocallyOfFinitePresentation Y.hom) (b : Fin n → (Spec (.of R) ⟶ Y.left)) (p₁ : Y ⟶ X₁) (p₂ : Y ⟶ X₂), @HasNodalGeometricFibres Y.left (Spec (.of R)) Y.hom hY ∧ (∀ (Ω : Type u) [Field Ω] [IsAlgClosed Ω] (t : Spec (.of Ω) ⟶ Spec (.of R)), IsReduced (pullback Y.hom t) ∧ (pullback Y.hom t).IsPureDimension 1) ∧ (∀ j : Fin n, b j ≫ Y.hom = 𝟙 (Spec (.of R))) ∧ Pairwise (fun j k : Fin n ↦ Disjoint (Set.range (b j)) (Set.range (b k))) ∧ (∀ (j : Fin n) (s : Spec (.of R)), b j s ∈ Y.hom.smoothLocus) ∧ IsProper p₁.left ∧ IsProper p₂.left ∧ (∃ (Z₁ : Set X₁.left) (V₁ : X₁.left.Opens), Z₁.Finite ∧ (∀ z ∈ Z₁, IsClosed ({z} : Set X₁.left) ∧ X₁.hom z = IsLocalRing.closedPoint R) ∧ (V₁ : Set X₁.left) = Z₁ᶜ ∧ IsIso (pullback.snd p₁.left V₁.ι)) ∧ (∃ (Z₂ : Set X₂.left) (V₂ : X₂.left.Opens), Z₂.Finite ∧ (∀ z ∈ Z₂, IsClosed ({z} : Set X₂.left) ∧ X₂.hom z = IsLocalRing.closedPoint R) ∧ (V₂ : Set X₂.left) = Z₂ᶜ ∧ IsIso (pullback.snd p₂.left V₂.ι)) ∧ ((Over.pullback (Spec.map (CommRingCat.ofHom (algebraMap R K)))).map p₂).left = ((Over.pullback (Spec.map (CommRingCat.ofHom (algebraMap R K)))).map p₁).left ≫ uK.hom.left ∧ (∀ j : Fin n, b j ≫ p₁.left = a₁ j) ∧ (∀ j : Fin n, b j ≫ p₂.left = a₂ (σ j)) ∧ IsIso ((Over.pullback (Spec.map (CommRingCat.ofHom (algebraMap R K)))).map p₁) ∧ IsIso ((Over.pullback (Spec.map (CommRingCat.ofHom (algebraMap R K)))).map p₂)",
+  "branch": "newtargets-dag",
+  "by": "NW",
+  "date": "2026-10-22",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-8cbe0b884",
+  "group": "NW",
+  "result": "pass",
+  "note": "Clause-by-clause match of exists_common_marked_nodal_model with the node: DVR R, fraction field K; IsHProjective+Flat+LocallyOfFinitePresentation (fp via projective⇒proper qcqs); HasNodalGeometricFibres gives nonempty connected 1-dim fibres with Ω[[u,v]]/(uv) nodes; reduced and pure-dim-1 geometric fibres in the same form as lem-sfb-nodal-log-canonical-reconstruction; Fin n disjoint smooth-locus sections (n=0 vacuous); σ; uK an iso in Over(Spec K) with hmark via the canonical sectionBaseChange; conclusion has Y with the same predicates, proper p_i in Over, finite closed special-fibre Z_i with IsIso pullback.snd over Z_iᶜ, (p2)_K = (p1)_K≫u, both marking equations, both generic IsIso. No extra hypotheses; universes all u. Only the lean field changed vs live; statement verbatim; 10-step docstring, source place and blueprint tag present; only sorry; item and imports not on the route-pivot dropped lists. Advisory: proof-only imports unused; the second-reading section is the worker's self-check. No compile (no file changed)."
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ }
+}

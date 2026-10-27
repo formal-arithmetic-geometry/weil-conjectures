@@ -21,144 +21,72 @@
   "lem-pur-cfiber-stalk",
   "lem-sf-class-compact-support-comparison",
   "lem-asd-ordinary-supported-kummer",
-  "def-weil-finite-tor-amplitude"
+  "def-weil-finite-tor-amplitude",
+  "def-pur-section-compact-source-maps",
+  "def-pur-line-kummer-compact-images",
+  "def-pur-finite-tate-site-comparison",
+  "def-asd-finite-etale-tate-twist"
  ],
  "proof": [
   {
-   "text": "Check the pulled-back pair. On a trivializing affine $U=\\operatorname{Spec}R$ the bundle and section are $\\operatorname{Spec}R[t]$ and $V(t)$. After any affine base change $\\operatorname{Spec}R'\\to U$ these are $\\operatorname{Spec}R'[t]$ and $V(t)$. Multiplication by $t$ is injective, since the coefficient of $t^{i+1}$ in $t\\sum a_it^i$ is $a_i$. Thus $D'=z'(B')$ is Cartier even for nonflat $g$. This argument is local on both bases and so covers arbitrary $B'$. The augmentation $t\\mapsto0$ and projection still compose to the identity. These are the zero-section data of [def-pur-vector-bundle-zero-section].",
+   "text": "Apply the field realization over the fixed field k to the canonical total space of V. Transport its Cartier-pair assertions through the specified total-space isomorphism, and compose arbitrary base-change squares with this isomorphism. This gives the Cartier and invertibility witnesses and normalized site comparison for V and every pulled-back pair, including the given affine-line fibre presentation.",
    "uses": [
-    "def-pur-vector-bundle-zero-section"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-an/thm-pur-rank-one-thom.proof.md",
-    "place": "Step 3, checking the Cartier hypothesis for arbitrary pullback"
-   }
-  },
-  {
-   "text": "Put $K=A_E(1)[2]$ and $M=z_*A_B$. Since $\\ell$ is a unit times $\\varpi_F^e$ with $e\\geq1$, $\\ell^nA=0$. Apply [lem-amb-cartier-kummer-map] with annihilating exponent $r=n$. It supplies an ordinary etale supported morphism $c^e: Rz_*A_B\\to L_E[2]$ whose pro-etale realization is $c=c_{D,A}$, where $L_E=\\mu^{\\mathrm{et}}_{\\ell^n,E}\\otimes^L_{\\mathbf Z/\\ell^n}A$. The same statement identifies the pullback of $c$ with $c'=c_{D',A}$ using the supported-constant and prescribed-twist comparisons; Step 1 checks its only extra geometric hypothesis. On the etale side [lem-asd-ordinary-supported-kummer] supplies the same supported morphism and its pullback identity. Finite direct image is exact by [lemma-weil-pbc-finite-direct-image-exact]; the module version follows because forgetting scalar action commutes with underived direct image and detects exact sequences. Thus $Rz_*=z_*$ here. On the pro-etale side [lem-exc-proetale-closed-exact] gives this equality: the zero-section complement is quasi-compact locally, since it is $D(t)\\subset\\operatorname{Spec}R[t]$. The primed assertions follow by the same local calculation.",
-   "uses": [
-    "lem-amb-cartier-kummer-map",
-    "lem-asd-ordinary-supported-kummer",
-    "lemma-weil-pbc-finite-direct-image-exact",
-    "lem-exc-proetale-closed-exact"
+    "lem-pur-line-kummer-field-realization"
    ],
    "elementary": false,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-an/thm-pur-rank-one-thom.proof.md",
-    "place": "Step 3, supported Kummer pullback; Cartier source construction detailed in lem-amb-cartier-kummer-map.proof.md"
+    "place": "Step 3: base-change compatibility, and Step 2 first paragraph: identify the geometric-fibre morphism; previous expanded proof steps 3--4"
    }
   },
   {
-   "text": "Compute the source comparison on a compactification $E\\xrightarrow j\\bar E\\xrightarrow pB$. Let $s=jz$; since $ps=1_B$ and $p$ is separated, [lem-weil-pbc-section-separated-closed-immersion] makes $s$ closed. Both $z$ and $s$ are proper by [lem-weil-pbc-closed-immersion-proper]. Apply [lem-cbc-proper-open-interchange-coherence] to the square with top open $1_B$, bottom open $j$, left proper map $z$ and right proper map $s$. It gives $j_!Rz_*\\cong Rs_*$. Therefore, using the normalized direct-image comparison of [lem-cbc-etale-derived-direct-image-coherence],\n$$R\\pi_!^eRz_*A_B=Rp_*j_!Rz_*A_B\\cong Rp_*Rs_*A_B\\cong R(ps)_*A_B\\cong A_B.$$\nAll maps used are the normalized proper/open and direct-image maps, so this is the compactification construction of the source comparison in [thm-sf-comp-composition], with $\\pi z=1$. The primed comparison is computed by the pulled-back diagram. Its construction uses only the given proper/open model; it makes sense for arbitrary $B'$ and invokes no finite-type-over-$k$ theorem on $B'$.",
+   "text": "Apply Cartier Kummer base change. The uniqueness part of supported-constant normalization identifies its source comparison with the specified canonical closed exchange, because both preserve constant restriction. Pass the Ext equality to D+ through the fully faithful inclusion and its single/shift comparisons. This gives the supported proClass pullback equality with the prescribed twistPull.",
    "uses": [
-    "lem-weil-pbc-section-separated-closed-immersion",
-    "lem-weil-pbc-closed-immersion-proper",
-    "lem-cbc-proper-open-interchange-coherence",
-    "lem-cbc-etale-derived-direct-image-coherence",
-    "thm-sf-comp-composition"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/more-etale.tex",
-    "place": "Tag 0F7B, lemma-shriek-proper-and-open; sites-cohomology.tex Tag 0D6E, lemma-derived-pushforward-composition; blueprint Step 3"
-   }
-  },
-  {
-   "text": "The source exchange is the identity, not just an automorphism of a rank-one object. Work first on the ordinary etale models. The last displayed base-change equation of [lem-cbc-proper-open-interchange-coherence], for the square in Step 3, identifies exchange on $Rp_*j_!Rz_*A_B$ with the successive proper exchanges for $p$ and $s$ on $A_B$. The exchange is the specified unit--square--counit map of [def-cbc-exchange-map]. Part (2) of [lem-weil-pbc-mate-pasting] identifies these successive exchanges, under the direct-image compositors of [lem-cbc-etale-derived-direct-image-coherence], with exchange for $ps=1_B$. Part (4) says this mate is the identity. Thus under the comparisons of Step 3 the source exchange is $1_{A_{B'}}$. For the pro-etale functors use [thm-cbc-finite-level-proetale]: its exchange is exactly this etale exchange transported through the proper/open and pullback comparisons. On the original diagram these comparisons identify the source normalization by [lem-sp-finite-compact-site-coherence], including its identity and composition equations: the proper comparison is the counit-normalized mate of [lem-weil-pbc-comparison-direct-image-canonical-mate], the open comparison is [lem-cbc-proetale-extension-zero-comparison], and part (2) of the mate-pasting lemma identifies their proper composite for $ps$ with the identity comparison. All original schemes are Noetherian by [lem-weil-pbc-finite-type-over-noetherian] (a field has only two ideals). On arbitrary $B'$, use the transported source comparison of the pulled-back proper/open model stipulated in the statement, not a new application of the Noetherian coherence theorem. The transported identity is therefore $1_{A_{B'}}$.",
-   "uses": [
-    "lem-cbc-proper-open-interchange-coherence",
-    "def-cbc-exchange-map",
-    "lem-weil-pbc-mate-pasting",
-    "lem-cbc-etale-derived-direct-image-coherence",
-    "thm-cbc-finite-level-proetale",
-    "lem-weil-pbc-comparison-direct-image-canonical-mate",
-    "lem-cbc-proetale-extension-zero-comparison",
-    "lem-sp-finite-compact-site-coherence",
-    "lem-weil-pbc-finite-type-over-noetherian"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/more-etale.tex",
-    "place": "Tag 0F7F, lemma-shriek-proper-and-open-base-change; sites-cohomology.tex Tags 0E46/0E47, remark-compose-base-change / remark-compose-base-change-horizontal; blueprint Step 3"
-   }
-  },
-  {
-   "text": "Write $a:A_B\\xrightarrow{\\sim}R\\pi_!M$ and $a':A_{B'}\\xrightarrow{\\sim}R\\pi'_!M'$ for the inverse source comparisons, and $\\beta:v^{-1}M\\xrightarrow{\\sim}M'=z'_*A_{B'}$. Step 4 says $R\\pi'_!(\\beta)C_{\\pi,g}(M)g^{-1}a=a'$. Step 2 gives $c$ the etale witness $c^e$. The etale exchange is natural in its argument by [thm-cbc-finite-torsion], and the exchange of [thm-cbc-finite-level-proetale] is that etale exchange transported through the natural proper/open and pullback comparisons and conjugated by the witness isomorphisms, independently of the witness. Hence, applied to $c:M\\to K$, it is natural:\n$$C_{\\pi,g}(K)g^{-1}(R\\pi_!c)=R\\pi'_!(v^{-1}c)C_{\\pi,g}(M).$$\nStep 2 gives $v^{-1}c=c'\\beta$ after the target twist comparison. Compose the displayed equality with $g^{-1}a$, and substitute the source equality. Its right side becomes $R\\pi'_!(c')a'=\\tau_{E'}$ and its left side is $C_{\\pi,g}(K)g^{-1}\\tau_E$. This proves the equality of the actual morphisms for every $g$, with exactly the source identification in the statement.",
-   "uses": [
-    "thm-cbc-finite-level-proetale",
-    "thm-cbc-finite-torsion",
-    "lem-amb-cartier-kummer-map"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-an/thm-pur-rank-one-thom.proof.md",
-    "place": "Step 3, explicit naturality square and its source normalization"
-   }
-  },
-  {
-   "text": "The input $K=A_E(1)[2]$ satisfies the finite-Tor hypothesis of [lem-pur-cfiber-stalk]. Indeed [lem-pur-twist-sheaf-locally-free](3)--(4) makes $A_E(1)$ a finite locally constant, locally free rank-one sheaf. Tensoring locally with it is tensoring with $A$, so it is exact. Hence $K\\otimes_A^LM$ is concentrated in degree $-2$ for any sheaf $M$; this is the interval $[-2,-2]$ in [def-weil-finite-tor-amplitude]. Apply [lem-pur-cfiber-stalk] at $\\bar b$. Its canonical comparison is the compact-fibre exchange, so Step 5 with $g=\\bar b$ identifies the stalk morphism of $\\tau_E$ with the compact image of $c_{D_{\\bar b},A}$. The chosen fibre basis carries $D_{\\bar b}$ to $0\\subset X=\\mathbf A^1_\\Omega$. Apply [lem-amb-cartier-kummer-map] to this isomorphism of Cartier pairs: the supported morphism becomes $c_{0,A}$ with the same prescribed twist.",
-   "uses": [
-    "lem-pur-twist-sheaf-locally-free",
-    "def-weil-finite-tor-amplitude",
-    "lem-pur-cfiber-stalk",
-    "lem-amb-cartier-kummer-map"
+    "lem-pur-supported-cartier-derived-pullback"
    ],
    "elementary": false,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-an/thm-pur-rank-one-thom.proof.md",
-    "place": "Step 2, first paragraph: finite-Tor compact-fibre comparison and the class of the origin"
+    "place": "Step 3: base-change compatibility, and Step 2 first paragraph: identify the geometric-fibre morphism; previous expanded proof steps 3--4"
    }
   },
   {
-   "text": "Finally [lem-asd-finite-etale-twist-line] makes $\\mu^{\\mathrm{et}}_{\\ell^n,X}$ locally free over $\\mathbf Z/\\ell^n$, so the derived tensor defining $L_X$ agrees with its ordinary tensor. The root projection comparison [lem-amb-tate-root-projection-reduction], with $r=n$, and [lem-amb-cartier-kummer-map] identify $\\nu_X^*L_X$ with the prescribed $A_X(1)$ and identify $\\nu_X^*c^e_{0,A}$ with $c_{0,A}$. Apply [lem-sf-class-compact-support-comparison] over the field $\\Omega$ to $X\\to\\operatorname{Spec}\\Omega$ and the morphism $c^e_{0,A}$. Both schemes and the compactification are finite type over $\\Omega$, hence Noetherian by [lem-weil-pbc-finite-type-over-noetherian], even when $\\Omega$ is not finite type over $k$. Naturality in the witness identifies its compact image with $\\nu_\\Omega^*(R\\Gamma_c(X_{\\mathrm{et}},c^e_{0,A}))$. On the source supported at the origin the comparison is the identity-normalized one: compute with the closed section in a compactification as in Steps 3--4, and use the counit normalization of [lem-weil-pbc-comparison-direct-image-canonical-mate] and the composition rule of [lem-weil-pbc-mate-pasting]. Thus the source is $A$, and the resulting morphism is precisely the realization of $\\tau_X^e$. This proves the asserted identification of morphisms; no assertion equating supported cohomology and compact cohomology has been used.",
+   "text": "Apply normalized section compact source exchange. The specified proExchange is natural: it is the fully faithful preimage of the composite of ambient comparison transformations and the proper/open base-change mate. Naturality at proClass, followed by the supported pullback equality and the source exchange identity, proves the actual compact arrow equality. Its target exchange is invertible on the shifted etale-origin witness by finite-level pro-etale base change.",
    "uses": [
-    "lem-asd-finite-etale-twist-line",
-    "lem-amb-tate-root-projection-reduction",
-    "lem-amb-cartier-kummer-map",
-    "lem-sf-class-compact-support-comparison",
-    "lem-weil-pbc-comparison-direct-image-canonical-mate",
-    "lem-weil-pbc-mate-pasting",
-    "lem-sp-finite-compact-site-coherence",
-    "lem-weil-pbc-finite-type-over-noetherian"
+    "lem-pur-section-compact-source-exchange",
+    "thm-cbc-finite-level-proetale"
    ],
    "elementary": false,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-an/thm-pur-rank-one-thom.proof.md",
-    "place": "Step 2, first paragraph: ordinary etale realization of the geometric-fibre morphism"
+    "place": "Step 3: base-change compatibility, and Step 2 first paragraph: identify the geometric-fibre morphism; previous expanded proof steps 3--4"
+   }
+  },
+  {
+   "text": "Specialize the preceding exchange identity to the prescribed geometric fibre square. Use PairRealization for this pulled-back pair and naturality of the compact-support site-comparison isomorphism to identify proTau followed by compactTarget with the comparison pullback of etaleTau and the stipulated scalar-unit source. Compose these two actual arrow equalities. This is exactly FibreFormula, without a separate compact-fibre invertibility application or a new realization over Omega.",
+   "uses": [
+    "lem-pur-line-kummer-field-realization",
+    "lem-sf-class-compact-support-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-an/thm-pur-rank-one-thom.proof.md",
+    "place": "Step 3: base-change compatibility, and Step 2 first paragraph: identify the geometric-fibre morphism; previous expanded proof steps 3--4"
    }
   }
  ],
  "proof_deps": [
-  "def-pur-vector-bundle-zero-section",
-  "lem-amb-cartier-kummer-map",
-  "lem-asd-ordinary-supported-kummer",
-  "lemma-weil-pbc-finite-direct-image-exact",
-  "lem-exc-proetale-closed-exact",
-  "lem-weil-pbc-section-separated-closed-immersion",
-  "lem-weil-pbc-closed-immersion-proper",
-  "lem-cbc-proper-open-interchange-coherence",
-  "lem-cbc-etale-derived-direct-image-coherence",
-  "thm-sf-comp-composition",
-  "def-cbc-exchange-map",
-  "lem-weil-pbc-mate-pasting",
+  "lem-pur-line-kummer-field-realization",
+  "lem-pur-supported-constant-exchange-normalization",
+  "lem-pur-section-compact-source-exchange",
   "thm-cbc-finite-level-proetale",
-  "lem-weil-pbc-comparison-direct-image-canonical-mate",
-  "lem-cbc-proetale-extension-zero-comparison",
-  "lem-sp-finite-compact-site-coherence",
-  "lem-weil-pbc-finite-type-over-noetherian",
-  "thm-cbc-finite-torsion",
-  "lem-pur-twist-sheaf-locally-free",
-  "def-weil-finite-tor-amplitude",
-  "lem-pur-cfiber-stalk",
-  "lem-asd-finite-etale-twist-line",
-  "lem-amb-tate-root-projection-reduction",
-  "lem-sf-class-compact-support-comparison"
+  "lem-sf-class-compact-support-comparison",
+  "lem-pur-supported-cartier-derived-pullback"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-an/thm-pur-rank-one-thom.proof.md",
-  "place": "Steps 2 (first paragraph) and 3, expanded using Stacks 0F7B/0F7F, 0D6E and 0E46/0E47; no purity or trace argument"
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-an/thm-pur-rank-one-thom.proof.md",
+  "place": "Z6: Step 3 and Step 2 first paragraph; explicit D+ naturality, normalized Cartier pullback and fibre compact site comparison"
  },
  "mathlib_searches": [
   {
@@ -358,41 +286,12 @@
   "is": null
  },
  "split_report": {
-  "date": "2026-10-21",
+  "date": "2026-10-22",
   "item": "lem-pur-line-zero-class-exchange",
   "worker": "stage1",
-  "summary": "Expanded arbitrary-base-change compatibility into Cartier pullback, a proper/open computation of the normalized source exchange, and the explicit exchange naturality equation. Separately checked finite Tor amplitude and the ordinary etale realization of the fibre morphism. All prerequisites already exist; no new nodes and no statement change.",
-  "blueprint": "thm-pur-rank-one-thom.proof.md Step 3 is realized by proof steps 1--5; the first paragraph of Step 2 by proof steps 6--7. The later supported-to-compact generator argument is not needed for this item.",
-  "tool_uses": [
-   {
-    "node": "lem-weil-pbc-section-separated-closed-immersion",
-    "why": "Section of a separated compactification is closed, used to compute source support; a generic scheme lemma, not an alternative purity route."
-   },
-   {
-    "node": "lem-weil-pbc-closed-immersion-proper",
-    "why": "Properness of the closed zero section and its compactified section, for the proper/open square."
-   },
-   {
-    "node": "lem-weil-pbc-mate-pasting",
-    "why": "Formal pasting and identity of actual adjunction mates, used to normalize source exchange; no purity computation is replaced."
-   },
-   {
-    "node": "lemma-weil-pbc-finite-direct-image-exact",
-    "why": "Etale finite direct image is exact, so supported constant sheaves equal their derived direct images."
-   },
-   {
-    "node": "lem-weil-pbc-comparison-direct-image-canonical-mate",
-    "why": "Counit normalization of site-comparison direct image, required to identify the source map rather than an unspecified isomorphism."
-   },
-   {
-    "node": "lem-sp-finite-compact-site-coherence",
-    "why": "Its identity and composition equations identify the etale/pro-etale source normalizations on the original Noetherian diagram and the Noetherian fibre diagram. It is not applied to an arbitrary non-Noetherian base change."
-   },
-   {
-    "node": "lem-weil-pbc-finite-type-over-noetherian",
-    "why": "Verifies the Noetherian hypothesis of the generic compact-support site coherence theorem over k and over Omega."
-   }
-  ]
+  "summary": "Repair of the requested work-spreading re-split: retain the statement verbatim, extract old steps 3--4 as a generic supported-section source-exchange lemma, and old steps 1--2 and coefficient/site portions of 6--7 as an arbitrary-field Kummer-realization lemma. Both new nodes are statement-only unsplit work items, searched separately. The item now assembles their conclusions using exchange naturality and the existing compact-fibre theorem. The full seven-step returned argument and its precise allocation are retained in report.md.",
+  "blueprint": "thm-pur-rank-one-thom.proof.md Step 3 is carried by assembly steps 1--2 and the two extracted lemmas; Step 2 first paragraph by assembly step 3 and the arbitrary-field realization lemma. No purity calculation or trace route is substituted.",
+  "tool_uses": []
  },
  "tool_uses": [
   "lem-weil-pbc-section-separated-closed-immersion",
@@ -404,11 +303,59 @@
   "lem-weil-pbc-finite-type-over-noetherian"
  ],
  "reviewed": {
-  "date": "2026-10-21",
+  "date": "2026-10-22",
   "by": "L",
-  "reviewer": "NT-cc-Q23-c5b0c9c9e",
-  "group": "Q23",
+  "reviewer": "NT-cc-Q124-023ba1ad1",
+  "group": "Q124",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q23-c5b0c9c9e (reviewer sub-agent of L); spot-checked: Read the item's 7 steps in full against the statements of all 23 cited nodes. Also read thm-pur-rank-one-thom.proof.md Step 3 and Step 2 para 1 (main-20261015), the cfiber-stalk proof, and Stacks 0F7B/0F7F and lemma-section-immersion. Basic checks: the statement is unchanged; def-weil-finite-tor-amplitude was correctly added to stmt_deps; no SGA; the item is not dropped; there is no re-split note; live is still unsplit. Step-by-step: Step 1, t is a nonzerodivisor after any base change, also for nonreduced B'. Step 2, l^n kills A because l = unit*varpi^e, and the complement of the zero section is locally D(t), so it is qc. Steps 3-4, the interchange square (k=1_B, r=z, p=s=jz, i=j) is valid. Its base-change equation with b=g' reduces the source exchange to Rp'_*Ex_s∘Ex_p(Rs_*), and mate pasting (2)+(4) for ps=1 makes that the identity. Site coherence is applied only on Noetherian diagrams (finite type over k or over Omega). Step 6, A(1) is locally free, so Tor amplitude is [-2,-2]. Step 7, field hypothesis over Omega holds. Edge cases checked: B empty, g=id, geometric point with big Omega, k[eps], n=1 with F ramified. FIX (C4): Step 5 got naturality of the exchange from thm-cbc-finite-level-proetale, whose statement does not say it is natural. Step 5 now uses the etale witness c^e and cites thm-cbc-finite-torsion ('natural in K'). That node is on route (sk-prop-sf-cbc) and already in the closure, so the closure gains no node and no batch-5 flag, and there is no cycle. proof_deps was recomputed. Batch-5 flag lem-sp-finite-compact-site-coherence -> lem-pod-lisse-module-sheaves-as-module-objects: accepted. The cited node is generic etale/pro-etale compact-support coherence, and the pod node is a generic lisse-module statement; neither is a step of the trace formula or of Poincare duality. The flagged trf/pod sets are identical with and without the citation. Tool uses: lem-exc-proetale-closed-exact (sk-prop-sf-closed-unit) is off-route and missing from split_report.tool_uses; it is a generic tool, so the maintainer should record it. Advisory: Step 3 does not cite existence of a compactification. The statement presupposes one and thm-cbc-finite-level-proetale supplies a Nagata compactification for qcqs B.; 1 file(s) fixed by the reviewer"
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q124-023ba1ad1 (reviewer sub-agent of L); spot-checked: This is a re-split delivery answering the human's note of 2026-10-22 (7726 characters, 7 steps, at least 2 new nodes). The live item still has the 7-step proof, so the delivery is not superseded; the Q23, Q40, Q125 and Q130 deliveries of 2026-10-21 predate the note. Item: statement and stmt_deps unchanged; the proof is a 3-step assembly of about 1994 characters. Old step 5 (naturality of thm-cbc-finite-torsion transported by thm-cbc-finite-level-proetale, then substituting v^{-1}c=c'beta) is kept as step 2; I checked the order of every composite. Step 3 uses lem-pur-cfiber-stalk (D^b_ctf hypothesis supplied by step 1) and re-applies the realization node over K_0=Omega, which is valid because ell is not char Omega. Every old step has a destination: 1-2 and the Tor part of 6 go to the realization node, the compact-fibre part of 6 goes to step 3, 3-4 go to the section node, and 7 is split among the realization node, the section node and step 3. All old texts are verbatim in the report. New node lem-pur-section-compact-source-exchange is true: js is a closed section of the separated p, so lem-cbc-proper-open-interchange-coherence applies to the square (1_B, s, js, j) and the direct-image coherence lemma gives R(pjs)_*=id; on the pro-etale side, thm-sf-comp-composition applies; the arbitrary-g exchange is the identity (Stacks 0F7B/0F7F). It is not a duplicate of the proper/open interchange, compact-site coherence or supported-constant normalization nodes. New node lem-pur-line-kummer-field-realization: the cited Kummer, roots-projection and compact-comparison lemmas are stated for any T with ell invertible or for any field, so the K_0-generality is sound. It generalizes the fixed-k lem-pur-line-zero-class-etale-realization, which cannot be applied over a transcendental Omega, so it is not a C5 duplicate. Maintainer note: the parallel Q123 e96e2333 nodes (closed-section-compact-origin and cartier-relative-kummer-realization, fixed k, not yet landed) overlap these nodes. FIX made: the realization node normalized both source identifications through thm-sf-comp-composition, which is pro-etale only, so the etale tau^e and the equation T_pi tau^p = nu^* tau^e were ambiguous up to an automorphism of A_B. I rewrote the clause to use a_pi^et and a_pi^proet of lem-pur-section-compact-source-exchange with (h,s)=(pi,z), and added that node to stmt_deps; this creates no cycle. Batch-5 flag (lem-asd-ordinary-supported-kummer -> lem-pod-etale-stalk-tensor-scalar): already in the base item's stmt_deps and proof_deps, and the end node is generic stalk/tensor algebra, not a step of Poincare duality, so I accepted it. Sources (main-20261015 thm-pur-rank-one-thom.proof.md Steps 2-3) checked; no SGA.; 1 file(s) fixed by the reviewer"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "lean": {
+  "module": "Sheaf.Paper.LineZeroClassExchange",
+  "declaration": "AlgebraicGeometry.LineZeroClass.line_zero_class_exchange",
+  "declarations": [
+   "AlgebraicGeometry.LineZeroClass.zeroClosed",
+   "AlgebraicGeometry.LineZeroClass.twistPull",
+   "AlgebraicGeometry.LineZeroClass.Exchange",
+   "AlgebraicGeometry.LineZeroClass.FibreFormula",
+   "AlgebraicGeometry.LineZeroClass.line_zero_class_exchange"
+  ],
+  "file": "lean/Sheaf/Paper/LineZeroClassExchange.lean",
+  "statement": "theorem line_zero_class_exchange (P : WeilConjectures.PurityFiniteSetting.{u}) (n : ℕ) (_hn : P.level = n + 1) {B : Scheme.{u}} (hB : B ⟶ Spec (.of P.field.k)) [IsSeparated hB] [LocallyOfFiniteType hB] [QuasiCompact hB] (V : PurityVectorBundle P B hB 1) : ∃ (hA : ((P.coefficients.l ^ (n + 1) : ℕ) : finiteTateCoefficient P.coefficients.l P.extension n) = 0) (hI : V.zeroSection.ker.IsInvertible) (hX : IsUnit (P.coefficients.l : Γ(V.E, ⊤))), ∀ c : Compactification V.p, IsIso (SectionCompactSource.proSource (finiteTateCoefficient P.coefficients.l P.extension n) c V.zeroSection V.zeroSection_spec.1) ∧ (∀ {B' X' : Scheme.{u}} (g : B' ⟶ B) (v : X' ⟶ V.E) (π' : X' ⟶ B') (sq : IsPullback v π' V.p g) (z' : B' ⟶ X') [IsClosedImmersion z'] (hz' : z' ≫ π' = 𝟙 B') (sqZ : ChosenCartesianSquare g z' V.zeroSection v), ∃ (hI' : z'.ker.IsInvertible) (hX' : IsUnit (P.coefficients.l : Γ(X', ⊤))) (p : (ProEtale.upperStar (ModuleCat.{u + 1} (finiteTateCoefficient P.coefficients.l P.extension n)) v).obj (finiteTateProSheaf P.coefficients.l P.extension n V.E 1) ≅ finiteTateProSheaf P.coefficients.l P.extension n X' 1), IsFiniteTateProPullback P.coefficients.l P.extension n V.E v 1 p ∧ Exchange P.coefficients.l P.extension n c V.zeroSection V.zeroSection_spec.1 hI hX g v π' sq z' hz' sqZ hI' hX' p) ∧ (∀ (Ω : Type u) [Field Ω] [IsAlgClosed Ω] (b : Spec (.of Ω) ⟶ B) (v : AffineSpace (ULift.{u} (Fin 1)) (Spec (.of Ω)) ⟶ V.E) (sq : IsPullback v (AffineSpace (ULift.{u} (Fin 1)) (Spec (.of Ω)) ↘ Spec (.of Ω)) V.p b) (sqZ : ChosenCartesianSquare b (AffineSpace.zeroSection (ULift.{u} (Fin 1)) (Spec (.of Ω))) V.zeroSection v), ∃ (hIΩ : (AffineSpace.zeroSection (ULift.{u} (Fin 1)) (Spec (.of Ω))).ker.IsInvertible) (hXΩ : IsUnit (P.coefficients.l : Γ(AffineSpace (ULift.{u} (Fin 1)) (Spec (.of Ω)), ⊤))) (p : (ProEtale.upperStar (ModuleCat.{u + 1} (finiteTateCoefficient P.coefficients.l P.extension n)) v).obj (finiteTateProSheaf P.coefficients.l P.extension n V.E 1) ≅ finiteTateProSheaf P.coefficients.l P.extension n (AffineSpace (ULift.{u} (Fin 1)) (Spec (.of Ω))) 1) (q : (ProEtale.comparisonUpperStar (ModuleCat.{u + 1} (finiteTateCoefficient P.coefficients.l P.extension n)) (AffineSpace (ULift.{u} (Fin 1)) (Spec (.of Ω)))).obj (finiteEtaleTateLine (AffineSpace (ULift.{u} (Fin 1)) (Spec (.of Ω))) (P.coefficients.l ^ (n + 1)) (finiteTateCoefficient P.coefficients.l P.extension n) hA) ≅ finiteTateProSheaf P.coefficients.l P.extension n (AffineSpace (ULift.{u} (Fin 1)) (Spec (.of Ω))) 1), IsFiniteTateProPullback P.coefficients.l P.extension n V.E v 1 p ∧ IsFiniteTateSiteComparison P.coefficients.l P.extension n (AffineSpace (ULift.{u} (Fin 1)) (Spec (.of Ω))) n hA 1 q ∧ FibreFormula P.coefficients.l P.extension n hA c V.zeroSection V.zeroSection_spec.1 hI hX Ω b v sq hIΩ hXΩ p q)",
+  "branch": "newtargets-dag",
+  "by": "Q43",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "Uses the published fixed-scalar D+ Kummer, compactification exchange, normalized section source and root-projection comparisons. Every positive exponent is retained by P.level = n+1. The geometric-fibre basis is any Cartesian presentation of the fibre by the affine line carrying its origin to the zero section; the conclusion identifies actual arrows through the canonical target comparison. H2 repair at 1368a514b839: plain helper definitions are owned by def-pur-line-kummer-compact-images and def-pur-section-compact-source-maps (existing:true). The two theorem nodes remain only in proof_deps. Existing finite Tate comparison and etale twist definition owners are also cited. Lean source and theorem signature are unchanged."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-3f639c23f",
+  "group": "Q43",
+  "result": "pass",
+  "note": "Re-delivery after RETURN H2 at 1368a514. LineZeroClassExchange.lean is byte-identical (sha 9d895ed5) to the head whose mathematics was accepted; re-read setting/_hn, the ∃ hA hI hX conclusions, Exchange (source identity, IsIso, g*τ≫C≫Rπ'_!(twistPull)=constantPull≫τ'), FibreFormula, pinned p/q, arbitrary g and Ω, every basis; lean.statement verbatim. H2 repaired: theorem nodes lem-pur-line-kummer-field-realization and lem-pur-section-compact-source-exchange moved to proof_deps only; new existing:true def nodes def-pur-section-compact-source-maps (18 SectionCompactSource defs) and def-pur-line-kummer-compact-images (10 LineKummerField defs) cited, plus def-pur-finite-tate-site-comparison and def-asd-finite-etale-tate-twist. Def-node statements checked against the live bodies (etaleSource inverse composite, proSource, proExchange = Plus.ι.preimage of the ambient mate, proTau = proSource≫F^c(proClass)); signatures verbatim; [Finite A]/Type(u+1) and n+1 quotient match; no cycle; no owner race in side-live. lem-cbc-proper-open-interchange-coherence citation needed (interchange = .choose); direct-image-coherence citation advisory. Docstrings, sorry-only proof, Worker report and Second reading sections present. No file changed, so nothing compiled."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Z6",
+  "result": "pass",
+  "landing": "20261025T205617-L-3302888",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

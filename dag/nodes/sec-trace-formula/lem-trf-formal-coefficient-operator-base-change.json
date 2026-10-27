@@ -1,0 +1,271 @@
+{
+ "id": "lem-trf-formal-coefficient-operator-base-change",
+ "kind": "statement",
+ "title": "Base change of finite coefficient formulas on unrestricted formal series",
+ "statement": "Let $R,S$ be commutative rings, $\\sigma:R\\to S$ a unital ring homomorphism, and $T=(T_1,\\ldots,T_t)$ a finite set of formal variables [def-weil-pbc-multivariate-power-series]. Consider $R$-linear operators specified by finite expressions using addition, composition, multiplication by fixed full formal series, insertion of unused variables, partial coefficient extractions\n$$E_{U,\\beta}:R[[U,V]]\\to R[[V]],\\qquad E_{U,\\beta}\\Bigl(\\sum_\\eta a_\\eta(V)U^\\eta\\Bigr)=a_\\beta(V),$$\nwhere $(U,V)$ partitions the variables, and multiplication by finite matrices over $R$ or their specified inverses [def-weil-matrix]. Every expression has matching source and target variable sets. Let $P:R[[T]]\\to R[[T]]$ be such an expression. Applying $\\sigma$ to every scalar coefficient and every full series defines an $S$-linear operator $P_\\sigma:S[[T]]\\to S[[T]]$, with\n$$P_\\sigma\\,\\sigma_*H=\\sigma_*PH,\\qquad \\sigma_*\\Bigl(\\sum_\\nu a_\\nu T^\\nu\\Bigr)=\\sum_\\nu\\sigma(a_\\nu)T^\\nu.$$\nEach output coefficient depends on finitely many input coefficients. The operators are continuous for the topology in which coefficients are discrete and a net converges when each coefficient is eventually fixed. All equalities between such operator expressions, and all equalities of their values on specified series, persist under $\\sigma$; matrices and their specified inverses still multiply to the identity. In particular, if $P$ is a projection onto the common kernel of any given family of partial coefficient tests $E_{U,\\beta}$ (its image is contained in that kernel and it fixes every member of the kernel), then $P_\\sigma$ is a projection onto the common kernel of the same tests on $S[[T]]$. Tests here vanish as full series in the complementary variables.\nIn addition suppose that $S$ is Noetherian [def-weil-pbc-noetherian-ring]. If $f_1,\\ldots,f_q\\in R[[T]]$ and\n$$(P-1)(R[[T]])\\subseteq(f_1,\\ldots,f_q),$$\nthen, for unrestricted inputs,\n$$(P_\\sigma-1)(S[[T]])\\subseteq(\\sigma_*f_1,\\ldots,\\sigma_*f_q).$$\nThis applies in particular when $L$ is a field [def-weil-field], $X$ a finite variable set and $\\tau:R\\to L[[X]]$ any unital ring homomorphism: the ring $L[[X]]$ is Noetherian and, identifying $L[[X]][[T]]=L[[X,T]]$ by coefficient families, $(P_\\tau-1)(L[[X,T]])\\subseteq(\\tau_*f_1,\\ldots,\\tau_*f_q)$. All the constructions commute with composition of coefficient homomorphisms. In particular they commute with continuous changes of the coefficient variables $X$ that fix $T$. Empty variable sets, empty matrices, zero generators, and zero tests are allowed.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tags 0306 (lemma-Noetherian-power-series) and 00IQ (lemma-intersection-powers-ideal-module, part (2): Krull intersection for an ideal in the Jacobson radical; 00IP is its local case) supply Noetherianity of S[[T]] and (T)-adic closedness of its ideals, (T) lying in the Jacobson radical of S[[T]]. The operator assertion is an agent lemma extending the coefficient transport in Bierstone--Milman 1997, Remark 9.11; no Stacks tag states the combined assertion."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-multivariate-power-series",
+  "def-weil-matrix",
+  "def-weil-field",
+  "def-weil-pbc-noetherian-ring",
+  "def-trf-finite-coefficient-expression"
+ ],
+ "proof": [
+  {
+   "text": "Use the coefficient families and finite convolution product of [def-weil-pbc-multivariate-power-series]. For each expression $A$ from variables $V$ to variables $W$, inductively construct coefficients $a_{\\mu\\nu}\\in R$, only finitely many nonzero for fixed $\\mu$, with $(AH)_\\mu=\\sum_\\nu a_{\\mu\\nu}H_\\nu$. Identity has entries $\\delta_{\\mu\\nu}$. Multiplication by $F$ has entry $F_{\\mu-\\nu}$ when $\\nu\\leq\\mu$, and zero otherwise; the set $\\{\\nu:\\nu\\leq\\mu\\}$ is finite. Insertion along an inclusion $i:V\\hookrightarrow W$ has entry $1$ when $\\mu=i_*\\nu$, and zero otherwise. The row of $E_{U,\\beta}$ indexed by $\\gamma$ selects just the input coefficient $(\\beta,\\gamma)$. A finite matrix $M$ acts on finite tuples by entries $M_{ij}\\delta_{\\mu\\nu}$, using [def-weil-matrix]; treat a specified inverse as its given matrix of ring entries. These formulas establish the induction base, including finite tuple intermediates implicit in matrix multiplication.",
+   "uses": [
+    "def-weil-pbc-multivariate-power-series",
+    "def-weil-matrix"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Agent coefficient-family argument for the operator assertion; Tags 0306 (lemma-Noetherian-power-series) and 00IQ (lemma-intersection-powers-ideal-module), part (2), for the ideal assertion."
+   }
+  },
+  {
+   "text": "For addition use the union of the two finite row supports. For composition $BA$ use $c_{\\lambda\\nu}=\\sum_{\\mu\\in\\operatorname{supp}(b_{\\lambda,-})}b_{\\lambda\\mu}a_{\\mu\\nu}$; its support is contained in the finite union of those rows of $A$. This completes structural induction on the finite expression. Applying $\\sigma$ to these formulas gives exactly the rows $\\sigma(a_{\\mu\\nu})$ of the transported expression: a ring homomorphism preserves each displayed finite sum and product. Thus $(P_\\sigma H')_\\mu=\\sum_\\nu\\sigma(a_{\\mu\\nu})H'_\\nu$ for every $H'\\in S[[T]]$, proves $S$-linearity, and gives $P_\\sigma\\sigma_*H=\\sigma_*PH$. Fixing the finitely many input coordinates in a row fixes that output coordinate; a finite intersection does the same for any finite set of output coordinates. These are exactly the basic neighborhoods of the stated coefficient topology, proving continuity.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Agent coefficient-family argument for the operator assertion; Tags 0306 (lemma-Noetherian-power-series) and 00IQ (lemma-intersection-powers-ideal-module), part (2), for the ideal assertion."
+   }
+  },
+  {
+   "text": "For two equal operator expressions $A=B$, evaluate on each monomial $T^\\nu$ with coefficient $1$: their $(\\mu,\\nu)$ entries agree in $R$. Applying $\\sigma$ to these entries and using the finite row formulas proves $A_\\sigma=B_\\sigma$ on all $S$-series, without any surjectivity of $\\sigma$. An equality of values on specified series is transported by the intertwining identity of Step 2. Matrix inverse identities are finite entrywise identities $\\sum_j M_{ij}N_{jk}=\\delta_{ik}$ and $\\sum_j N_{ij}M_{jk}=\\delta_{ik}$, so they persist as well. No inverse of a new matrix is chosen.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Agent coefficient-family argument for the operator assertion; Tags 0306 (lemma-Noetherian-power-series) and 00IQ (lemma-intersection-powers-ideal-module), part (2), for the ideal assertion."
+   }
+  },
+  {
+   "text": "Let $D$ be the union of the input multi-indices selected by the given partial coefficient tests, including every index in their complementary variables. Their common kernel consists exactly of series whose coefficients on $D$ vanish. For $\\mu\\in D$, the hypothesis that the image of $P$ lies in that kernel, evaluated on every $T^\\nu$, says $a_{\\mu\\nu}=0$ for all $\\nu$. For $\\nu\\notin D$, the monomial $T^\\nu$ belongs to the kernel, so the fixing hypothesis says $a_{\\mu\\nu}=\\delta_{\\mu\\nu}$ for every $\\mu$. These entry identities persist under $\\sigma$. The first identities give the image condition over $S$; the second, inserted in the finite row formula for an arbitrary series supported off $D$, give $P_\\sigma H'=H'$. Hence it is the required projection (and is idempotent). This argument allows an infinite family of tests.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Agent coefficient-family argument for the operator assertion; Tags 0306 (lemma-Noetherian-power-series) and 00IQ (lemma-intersection-powers-ideal-module), part (2), for the ideal assertion."
+   }
+  },
+  {
+   "text": "For any coefficient ring $S$, put $B=S[[T]]$ and $I=(T_1,\\ldots,T_t)$. A series belongs to $I^n$ exactly when its coefficients of total degree less than $n$ vanish: one implication follows by convolution; for the other assign each monomial of degree at least $n$ to one of its finitely many degree-$n$ divisors and collect the corresponding quotient series. Thus coefficientwise convergence and $I$-adic convergence agree when $T$ is finite. Also $I$ is contained in the Jacobson radical: for $h\\in I$ and $b\\in B$, the series $\\sum_{r\\geq0}(bh)^r$ is well defined coefficient by coefficient and is an inverse of $1-bh$ by telescoping. If $h$ were outside some maximal ideal $\\mathfrak m$, choose $b$ inverse to its nonzero residue in $B/\\mathfrak m$; then the unit $1-bh$ would lie in $\\mathfrak m$, a contradiction.",
+   "uses": [
+    "def-weil-pbc-multivariate-power-series"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Agent coefficient-family argument for the operator assertion; Tags 0306 (lemma-Noetherian-power-series) and 00IQ (lemma-intersection-powers-ideal-module), part (2), for the ideal assertion."
+   }
+  },
+  {
+   "text": "Now assume $S$ Noetherian. By [lem-weil-pbc-power-series-noetherian], $B=S[[T]]$ is Noetherian. For every ideal $J\\subseteq B$, the quotient $M=B/J$ is a finite $B$-module, generated by $1+J$. Apply [lem-weil-pbc-krull-intersection-jacobson] to $B,I,M$, with the Jacobson containment from Step 5, obtaining $\\bigcap_n I^nM=0$. Since $I^nM=(I^n+J)/J$, this is $\\bigcap_n(J+I^n)=J$. Thus a coefficientwise limit of elements of $J$ belongs to $J$: modulo each $I^n$ it eventually agrees with such an element by Step 5. This establishes precisely the closedness needed here, without assuming that $S$ is local or that $R\\to S$ is flat.",
+   "uses": [
+    "lem-weil-pbc-power-series-noetherian",
+    "lem-weil-pbc-krull-intersection-jacobson"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tags 0306 (lemma-Noetherian-power-series) and 00IQ (lemma-intersection-powers-ideal-module), part (2), applied to B/J."
+   }
+  },
+  {
+   "text": "Set $Q=P-1$ and $J=(\\sigma_*f_1,\\ldots,\\sigma_*f_q)\\subseteq B$. For each $\\nu$ the hypothesis supplies $g_{j\\nu}\\in R[[T]]$ with $Q(T^\\nu)=\\sum_j f_jg_{j\\nu}$. Coefficient transport preserves products directly from the finite convolution formula, so Step 2 gives $Q_\\sigma(T^\\nu)=\\sum_j(\\sigma_*f_j)(\\sigma_*g_{j\\nu})\\in J$. For an arbitrary $H'=\\sum_\\nu s_\\nu T^\\nu$, let $H'_{<N}=\\sum_{|\\nu|<N}s_\\nu T^\\nu$. Linearity gives $Q_\\sigma H'_{<N}\\in J$. Each row uses only finitely many input coefficients, so $Q_\\sigma H'_{<N}$ converges coefficientwise to $Q_\\sigma H'$. Step 6 puts this limit in $J$, proving the assertion for unrestricted inputs; it does not require lifting the coefficients $s_\\nu$ to $R$.",
+   "uses": [
+    "def-weil-pbc-multivariate-power-series"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Agent coefficient-family argument for the operator assertion; Tags 0306 (lemma-Noetherian-power-series) and 00IQ (lemma-intersection-powers-ideal-module), part (2), for the ideal assertion."
+   }
+  },
+  {
+   "text": "Every ideal of a field $L$ is either zero or contains a nonzero element and hence $1$, so $L$ is Noetherian by [def-weil-field, def-weil-pbc-noetherian-ring]. Apply [lem-weil-pbc-power-series-noetherian] with the finite variable set $X$ to get that $S=L[[X]]$ is Noetherian, and apply Step 7 to $\\tau$. Regrouping coefficients via $\\mathbf N^X\\times\\mathbf N^T=\\mathbf N^{X\\sqcup T}$ identifies $L[[X]][[T]]$ with $L[[X,T]]$ as rings: both products sum over the same finite decompositions of each pair of exponents. This is an identification of coefficient families; no equality of differently chosen topologies is needed. For $R\\xrightarrow{\\sigma}S\\xrightarrow{\\rho}A$, every transported row entry is $\\rho(\\sigma(a_{\\mu\\nu}))$, equal to the entry transported along $\\rho\\sigma$. The same coefficient equality applies to each specified series and matrix. This proves compatibility with composition, including continuous changes of the coefficient variables $X$ fixing $T$. If $T$ is empty there is one index, $I=0$, and truncations are already the entire input for $N\\geq1$; empty tuples and matrices give empty sums, zero generators give $J=0$, and no tests give $D=\\varnothing$ and force $P=1$.",
+   "uses": [
+    "def-weil-field",
+    "def-weil-pbc-noetherian-ring",
+    "lem-weil-pbc-power-series-noetherian",
+    "def-weil-pbc-multivariate-power-series"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Agent coefficient-family argument for the operator assertion; Tags 0306 (lemma-Noetherian-power-series) and 00IQ (lemma-intersection-powers-ideal-module), part (2), for the ideal assertion."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-field",
+  "def-weil-matrix",
+  "def-weil-pbc-multivariate-power-series",
+  "def-weil-pbc-noetherian-ring",
+  "lem-weil-pbc-krull-intersection-jacobson",
+  "lem-weil-pbc-power-series-noetherian"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Agent coefficient-family argument for the operator assertion; Tags 0306 (lemma-Noetherian-power-series) and 00IQ (lemma-intersection-powers-ideal-module), part (2), for the ideal assertion."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "coeff_map|map_mul|continuous.*coeff|isClosed.*[Ii]deal",
+   "results": "{\"t\": \"2026-10-23T11:53:26Z\", \"tool\": \"grep\", \"query\": \"coeff_map|map_mul|continuous.*coeff|isClosed.*[Ii]deal\", \"sub\": \"RingTheory/MvPowerSeries\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/MvPowerSeries/Trunc.lean\", \"Mathlib/RingTheory/MvPowerSeries/Substitution.lean\", \"Mathlib/RingTheory/MvPowerSeries/Substitution.lean\", \"Mathlib/RingTheory/MvPowerSeries/Substitution.lean\", \"Mathlib/RingTheory/MvPowerSeries/Substitution.lean\", \"Mathlib/RingTheory/MvPowerSeries/Substitution.lean\", \"Mathlib/RingTheory/MvPowerSeries/PiTopology.lean\", \"Mathlib/RingTheory/MvPowerSeries/PiTopology.lean\"], \"digest\": \"a8f4308aa60ad9be\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: read the returned signatures; coefficient maps, analytic implicit functions and finite free tensor base change do not state extension of these operators on unrestricted formal series, preservation of coordinate kernels, and ideal-valued corrections in a complete formal target"
+  },
+  {
+   "tool": "leansearch",
+   "query": "lem-trf-formal-coefficient-operator-base-change: scalar extension of continuous coefficient operators preserves projection onto coefficient kernel in formal power series",
+   "results": "{\"t\": \"2026-10-23T11:53:27Z\", \"tool\": \"leansearch\", \"query\": \"lem-trf-formal-coefficient-operator-base-change: scalar extension of continuous coefficient operators preserves projection onto coefficient kernel in formal power series\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HasFPowerSeriesAt.restrictScalars\", \"PowerSeries.coeff\", \"HasFPowerSeriesWithinAt.restrictScalars\", \"MvPowerSeries.coeff\", \"HasFPowerSeriesOnBall.restrictScalars\", \"HasFTaylorSeriesUpToOn.restrictScalars\", \"ContinuousMultilinearMap.restrictScalarsLinear.congr_simp\", \"ContinuousLinearMap.restrictScalars\"], \"digest\": \"745e14d89cdb7e9b\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: read the returned signatures; coefficient maps, analytic implicit functions and finite free tensor base change do not state extension of these operators on unrestricted formal series, preservation of coordinate kernels, and ideal-valued corrections in a complete formal target"
+  },
+  {
+   "tool": "loogle",
+   "query": "MvPowerSeries.map, MvPowerSeries.coeff",
+   "results": "{\"t\": \"2026-10-23T11:53:27Z\", \"tool\": \"loogle\", \"query\": \"MvPowerSeries.map, MvPowerSeries.coeff\", \"sub\": \"\", \"ok\": true, \"n_hits\": 2, \"note\": \"\", \"top\": [\"MvPowerSeries.coeff_map\", \"MvPowerSeries.map_toSubring\"], \"digest\": \"5cc0375e303e5c5b\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: read the returned signatures; coefficient maps, analytic implicit functions and finite free tensor base change do not state extension of these operators on unrestricted formal series, preservation of coordinate kernels, and ideal-valued corrections in a complete formal target"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "lem-trf-formal-coefficient-operator-base-change: finite compositions of partial coefficient extractions and multiplication on multivariate formal power series extend along ring homomorphisms preserving operator identities",
+   "results": "{\"t\": \"2026-10-23T11:53:30Z\", \"tool\": \"leanfinder\", \"query\": \"lem-trf-formal-coefficient-operator-base-change: finite compositions of partial coefficient extractions and multiplication on multivariate formal power series extend along ring homomorphisms preserving operator identities\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"MvPowerSeries.coeff_map\", \"MvPowerSeries.map_expand\", \"FormalMultilinearSeries.compChangeOfVariables\", \"MvPowerSeries.map\", \"FormalMultilinearSeries.comp_coeff_one\", \"MvPowerSeries.coeff_subst\", \"PowerSeries.coeff_subst\", \"MvPowerSeries.expand_mul\"], \"digest\": \"908be22213615d86\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: read the returned signatures; coefficient maps, analytic implicit functions and finite free tensor base change do not state extension of these operators on unrestricted formal series, preservation of coordinate kernels, and ideal-valued corrections in a complete formal target"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "lem-trf-formal-coefficient-operator-base-change: row finite matrices representing continuous linear operators on products of copies of a ring preserve equalities under coefficient ring homomorphisms",
+   "results": "{\"t\": \"2026-10-23T11:53:31Z\", \"tool\": \"leanfinder\", \"query\": \"lem-trf-formal-coefficient-operator-base-change: row finite matrices representing continuous linear operators on products of copies of a ring preserve equalities under coefficient ring homomorphisms\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"IsBaseChange.endHom_toMatrix\", \"IsBaseChange.linearMapLeftRightHom_toMatrix\", \"Matrix.toLinearMapₛₗ₂'_aux_eq\", \"LinearMap.toMatrix_baseChange\", \"Matrix.toLin_finTwoProd_toContinuousLinearMap\", \"Matrix.liftLinear_piSingle\", \"Matrix.liftLinear\", \"Matrix.liftLinear_single\"], \"digest\": \"eddf7e1ab81d1b51\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: read the returned signatures; coefficient maps, analytic implicit functions and finite free tensor base change do not state extension of these operators on unrestricted formal series, preservation of coordinate kernels, and ideal-valued corrections in a complete formal target"
+  },
+  {
+   "tool": "grep",
+   "query": "coeff_map|map_mul|map_map",
+   "results": "{\"t\": \"2026-10-23T13:09:20Z\", \"tool\": \"grep\", \"query\": \"coeff_map|map_mul|map_map\", \"sub\": \"RingTheory/MvPowerSeries\", \"ok\": true, \"n_hits\": 23, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/MvPowerSeries/Rename.lean\", \"Mathlib/RingTheory/MvPowerSeries/Rename.lean\", \"Mathlib/RingTheory/MvPowerSeries/Rename.lean\", \"Mathlib/RingTheory/MvPowerSeries/LinearTopology.lean\", \"Mathlib/RingTheory/MvPowerSeries/Trunc.lean\", \"Mathlib/RingTheory/MvPowerSeries/Substitution.lean\", \"Mathlib/RingTheory/MvPowerSeries/Substitution.lean\", \"Mathlib/RingTheory/MvPowerSeries/Substitution.lean\"], \"digest\": \"045633c32b6a77de\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: returned coefficient-map and substitution lemmas, general continuous linear maps, or coefficient ideals do not state the combined operator and unrestricted ideal transport assertion."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A continuous linear operator on a product of copies of a ring represented by row finite coefficients extends to another coefficient ring preserving identities and ideal containment",
+   "results": "{\"t\": \"2026-10-23T13:09:20Z\", \"tool\": \"leansearch\", \"query\": \"A continuous linear operator on a product of copies of a ring represented by row finite coefficients extends to another coefficient ring preserving identities and ideal containment\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"ContinuousLinearMap.pi\", \"ContinuousLinearMap.completion\", \"ContinuousLinearMap.coe_completion\", \"LinearMap.extendOfNorm\", \"ContinuousLinearEquiv.piCongrRight\", \"ContinuousLinearMap.inl\", \"ContinuousLinearEquiv.prodCongr\", \"ContinuousLinearMap.toLinearMapRingHom\"], \"digest\": \"f40c270e8f6f2fec\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: returned coefficient-map and substitution lemmas, general continuous linear maps, or coefficient ideals do not state the combined operator and unrestricted ideal transport assertion."
+  },
+  {
+   "tool": "loogle",
+   "query": "MvPowerSeries.map, MvPowerSeries.coeff",
+   "results": "{\"t\": \"2026-10-23T13:09:20Z\", \"tool\": \"loogle\", \"query\": \"MvPowerSeries.map, MvPowerSeries.coeff\", \"sub\": \"\", \"ok\": true, \"n_hits\": 2, \"note\": \"\", \"top\": [\"MvPowerSeries.coeff_map\", \"MvPowerSeries.map_toSubring\"], \"digest\": \"5cc0375e303e5c5b\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: returned coefficient-map and substitution lemmas, general continuous linear maps, or coefficient ideals do not state the combined operator and unrestricted ideal transport assertion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finite expressions in partial coefficient extractions and multiplication of formal power series commute with coefficient ring maps and preserve coordinate kernel projections",
+   "results": "{\"t\": \"2026-10-23T13:09:23Z\", \"tool\": \"leanfinder\", \"query\": \"Finite expressions in partial coefficient extractions and multiplication of formal power series commute with coefficient ring maps and preserve coordinate kernel projections\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"PowerSeries.coeff_subst_finite\", \"MvPowerSeries.coeff_subst_finite\", \"MvPowerSeries.coeff_mul_eq_coeff_trunc'_mul_trunc'\", \"MvPowerSeries.coeff_expand_smul\", \"PowerSeries.coeff_mul_eq_coeff_trunc_mul_trunc₂\", \"MvPowerSeries.coeff_mul_prod_one_sub_of_lt_order\", \"PowerSeries.coeff_mul_prod_one_sub_of_lt_order\", \"MvPowerSeries.coeff_mul_prod_one_sub_of_lt_weightedOrder\"], \"digest\": \"4a1dbcbab206af75\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: returned coefficient-map and substitution lemmas, general continuous linear maps, or coefficient ideals do not state the combined operator and unrestricted ideal transport assertion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Row finite linear operators on formal power series send unrestricted scalar extended inputs into a closed ideal if they send every monomial into that ideal",
+   "results": "{\"t\": \"2026-10-23T13:09:24Z\", \"tool\": \"leanfinder\", \"query\": \"Row finite linear operators on formal power series send unrestricted scalar extended inputs into a closed ideal if they send every monomial into that ideal\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"MvPowerSeries.LinearTopology.basis\", \"MvPowerSeries.LinearTopology.mem_basis_iff\", \"MvPowerSeries.hasEvalIdeal\", \"MvPowerSeries.hasSubstIdeal\", \"PowerSeries.hasEvalIdeal\", \"PowerSeries.HasSubst.ideal\", \"PowerSeries.coeff_mul_mem_ideal_of_coeff_right_mem_ideal'\", \"PowerSeries.coeff_mul_mem_ideal_of_coeff_left_mem_ideal'\"], \"digest\": \"084b1b0036b7ddb0\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: returned coefficient-map and substitution lemmas, general continuous linear maps, or coefficient ideals do not state the combined operator and unrestricted ideal transport assertion."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-block-straightening-projection-transport",
+  "date": "2026-10-23",
+  "group": "Q11"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "ILO VIII 2.3.11--2.3.13, pp.93--94: local Hilbert--Samuel presentation input; refined by BM 1997 Chapter III, Theorem 9.6 and its block induction (9.7)--(9.14), with the five formal conditions (7.2). Subargument: BM 1997 Theorem 9.6, (9.7)--(9.8)(a)--(c), Remarks 9.9--9.11, pp.279--280; agent refinement transporting stored exact projections. Returned steps 1--4. Generic algebra input to the block induction: extend finite coefficient formulas, exact coefficient kernels, and ideal corrections along the regular Taylor homomorphism.",
+   "via": [
+    "lem-trf-block-straightening-projection-transport",
+    "lem-trf-regular-hilbert-coefficient-data",
+    "lem-trf-hilbert-samuel-local-presentations",
+    "lem-trf-hilbert-samuel-resolution-invariant-calculus",
+    "lem-trf-embedded-resolution-ambient-comparison",
+    "lem-trf-smooth-functorial-ordinary-resolution",
+    "lem-trf-toric-normalized-desingularization",
+    "lem-trf-functorial-fan-desingularization",
+    "lem-trf-monoidal-resolution-tower",
+    "lem-trf-log-regular-desingularization",
+    "lem-trf-nodal-pair-projective-resolution",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-trf-formal-coefficient-operator-base-change",
+  "worker": "stage1",
+  "summary": "Eight steps give the finite row formulas by structural induction, transport identities by monomial tests, prove the coordinate-kernel projection by its entries, and extend ideal-valued corrections from polynomial truncations using the existing Noetherian power-series and Jacobson Krull-intersection leaves. Statement unchanged; no new nodes, no Lean edits or compilation.",
+  "blueprint": "Retains the local-term-locality ancestry and the existing BM block-straightening coefficient-transport refinement, specifically the stored projection transport in lem-trf-block-straightening-projection-transport Step 6. Current latest sk-i-curve-zero and lem-trf-local-term-locality were read; this is the generic algebra tool already placed below their local Hilbert--Samuel presentation branch."
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q40-341fadbb5",
+  "group": "Q40",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q40-341fadbb5 (reviewer sub-agent of L); spot-checked: I read the whole item and its 8 steps. The statement, source and blueprint fields are byte-identical to clones/live, where the item is still unsplit and has no repair note; there are no new nodes and no SGA. Stacks 0306 (algebra.tex 6028) and 00IQ(2) (12257) say what steps 6 and 8 take from them, and every cited node is a definition or Mathlib leaf (MvPowerSeries.isNoetherianRing, Ideal.iInf_pow_smul_eq_bot_of_le_jacobson), so there are no route issues. Steps: (1) the row-finite entries of multiplication, insertion, E_{U,beta} and matrices are correct. (2) Induction over sums and compositions; a unital sigma carries the rows to sigma(a), which gives S-linearity, intertwining and product-topology continuity. (3) Equalities transport by monomial columns, with no surjectivity of sigma needed. (4) The kernel is the set of series vanishing on D; a_{mu nu}=0 for mu in D and a=delta for nu not in D transport, even for infinitely many tests. (5) For finite T, I^n is the set of series vanishing in degree <n, and 1-bh is a unit, so I lies in the Jacobson radical. (6) Krull on the finite module B/J gives that J is closed. (7) The truncations are finite S-combinations and converge, so the clause holds for unrestricted inputs. (8) A field is Noetherian, so L[[X]] is; L[[X]][[T]] = L[[X,T]]; composition holds entrywise. Small cases checked: T empty, no tests (P=1), q=0, Z to F_p, the zero ring, empty matrices, and the parent's use with rho: O(B) to O(C)[[Y]]. The Q11 parent's step 6 uses exactly these clauses. An rg -L search found no duplicates. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.FormalCoefficientOperatorBaseChange",
+  "declaration": "MvPowerSeries.FiniteCoefficientExpression.eval_map",
+  "declarations": [
+   "MvPowerSeries.FiniteCoefficientExpression.linear_finite_continuous",
+   "MvPowerSeries.FiniteCoefficientExpression.eval_map",
+   "MvPowerSeries.FiniteCoefficientExpression.eval_eq_map",
+   "MvPowerSeries.FiniteCoefficientExpression.value_eq_map",
+   "MvPowerSeries.formalCoefficientMatrix_inverse_map",
+   "MvPowerSeries.FiniteCoefficientExpression.isKernelProjection_map",
+   "MvPowerSeries.FiniteCoefficientExpression.hasIdealCorrection_map",
+   "MvPowerSeries.flattenFormalCoefficients_ring_identification",
+   "MvPowerSeries.FiniteCoefficientExpression.hasIdealCorrection_formalTarget",
+   "MvPowerSeries.FiniteCoefficientExpression.map_identity_comp"
+  ],
+  "file": "lean/Sheaf/RingTheory/FormalCoefficientOperatorBaseChange.lean",
+  "statement": "theorem FiniteCoefficientExpression.eval_map {R : Type u} {S : Type v} [CommRing R] [CommRing S] (σ : R →+* S) {n k m l : ℕ} (A : FiniteCoefficientExpression R n k m l) (H : Fin k → MvPowerSeries (Fin n) R) : (A.map σ).eval (fun j ↦ MvPowerSeries.map σ (H j)) = fun j ↦ MvPowerSeries.map σ (A.eval H j)",
+  "branch": "newtargets-dag",
+  "by": "Q142",
+  "date": "2026-10-23",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-c33fec759",
+  "group": "Q142",
+  "result": "pass",
+  "note": "Item differs from live only in lean and in stmt_deps, which adds the new def node; the 4 dep nodes are byte-identical to live; both lean.statement fields are verbatim in their files. Clause match: the grammar (identity/add/comp/multiply/insert via rename/extract via FormalCoefficientTest with beta vanishing on retained variables/matrix), eval_map intertwining, linear_finite_continuous (linearity, finite row support, continuity for discrete coefficient products), eval_eq_map/value_eq_map/both matrix-inverse equations, isKernelProjection_map over any ι : Type z with full-series kernel, hasIdealCorrection_map with only [IsNoetherianRing S] and all S inputs, hasIdealCorrection_formalTarget for Field L and arbitrary τ with an explicit flatten ring identification, map_identity_comp. All are true by the node's steps; no hypothesis added. Edge cases (Fin 0, empty matrices, q=0, empty test family, zero ring) are allowed. New node def-trf-finite-coefficient-expression: not a duplicate (Mathlib/side-live/DAG grep), H12 fields correct, cited by the item. No hollow defs, theorems are sorry, docstrings name source and blueprint, no line over 100 characters. Advisory: two proof-only plain imports are kept for stage 3. No compile run, since no file was changed."
+ }
+}

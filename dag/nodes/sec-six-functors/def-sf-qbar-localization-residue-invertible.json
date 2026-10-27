@@ -1,0 +1,111 @@
+{
+ "id": "def-sf-qbar-localization-residue-invertible",
+ "kind": "definition",
+ "title": "Residue-field invertibility for the localized adic coefficient prime",
+ "status": "split",
+ "statement": "Fix a prime $\\ell$, a finite-field datum $D$ [def-weil-finite-field-fiber] with $\\ell\\ne D.p$, a scheme $W$, a morphism $t:W\\to\\operatorname{Spec}D.k$ and $x\\in W$. Define the canonical invertibility witness for $\\ell$ in $W.residueField(x)$ by mapping the coefficient-prime unit along the composite of the inverse Spec global-sections isomorphism, the structure map on global sections, and residue evaluation. It is the actual `sfQbarLocalizationResidueInvertible` construction, with no extra geometric assumption.",
+ "stmt_deps": [
+  "def-weil-finite-field-fiber"
+ ],
+ "source": {
+  "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
+  "place": "common-stage localization coefficient construction; canonical residue-field unit for l ≠ p"
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "The characteristic prime different from l is invertible in every residue field of a scheme over a finite field",
+   "results": "8 hits: invertibleOfCharPNotDvd, isUnit_iff_not_dvd_char, invertibleOfRingCharNotDvd, Algebra.QuasiFinite.instFiniteResidueField, Algebra.instFormallyUnramifiedResidueField_1, PreTilt.instCharP, LocalSubring.instAtPrimeSubtypeMemSubringToSubringOfPrime, Algebra.QuasiFinite.instResidueField.",
+   "date": "2026-10-24",
+   "verdict": "General tools do not give this exact global-sections-to-residue evaluation construction."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Canonical invertible coefficient prime in residue fields of schemes over a field of different characteristic",
+   "results": "8 hits: AlgebraicGeometry.Scheme.SpecToEquivOfField_eq_iff; Algebra.exists_etale_bijective_residueFieldMap_and_map_eq_mul_and_isCoprime; Algebra.instFormallyUnramifiedResidueField; PreTilt.instCharP; Polynomial.UniversalCoprimeFactorizationRing.exists_liesOver_residueFieldMap_bijective; Algebra.instFormallyUnramifiedResidueField_1; Algebra.instIsSeparableResidueFieldOfFormallyUnramified; PreTilt.",
+   "date": "2026-10-24",
+   "verdict": "No exact match."
+  },
+  {
+   "tool": "grep",
+   "query": "sfQbarLocalizationResidueInvertible|Invertible.*residueField",
+   "results": "msearch Mathlib: 0 hits. Direct rg in lean/WeilConjectures, lean/Sheaf and dag/nodes found only the exact existing definition at Sheaf/Paper/SfQbarLocalizationCommonStage.lean:319, its uses and the enclosing theorem record. blueprint_refs search residue invertible: 0 nodes.",
+   "date": "2026-10-24",
+   "verdict": "Reuse existing declaration; no independent definition node."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-sf-adic-realization-isomorphism-normalization",
+  "date": "2026-10-24",
+  "group": "Q119"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "Canonical coefficient invertibility used to form the common-stage localization in the adic realization statement.",
+   "via": [
+    "lem-sf-adic-realization-isomorphism-normalization",
+    "lem-sf-adic-qbar-constructible-realization",
+    "lem-sf-weil-verdier-biduality"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "import_flags": [],
+ "lean": {
+  "module": "Sheaf.Paper.SfQbarLocalizationCommonStage",
+  "declaration": "WeilConjectures.sfQbarLocalizationResidueInvertible",
+  "branch": "sheaf-dag",
+  "by": "Q119",
+  "date": "2026-10-24",
+  "existing": true,
+  "note": "The exact canonical definition is already published in this module; the theorem node lem-sf-qbar-localization-common-stage is not used as a statement dependency.",
+  "statement": "def sfQbarLocalizationResidueInvertible\n    (D : FiniteFieldDatum.{u}) (hl : l ≠ D.p)\n    (W : Scheme.{u}) (t : W ⟶ Spec (.of D.k)) (x : W) :\n    Invertible (l : W.residueField x)"
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-5c09854ea",
+  "group": "Q119",
+  "result": "fix",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-5c09854ea",
+  "group": "Q119",
+  "result": "fix",
+  "note": "H3 fixed: the conclusion ∃ F : Family with (F.data T).realization = R T and tensor ≍ A T also asserted SpaceData.presentation (sectionFunctor IsEquivalence, a real theorem not in Realization or the deps) and HomLaws for the given R/A, which the node neither states nor proves. Added hypotheses P (presentation) and H (HomLaws); exactness, full faithfulness and essential image follow from R+P. No stmt_deps change. fixes/AdicRealizationIsomorphismNormalization.lean + lem-sf-adic-realization-isomorphism-normalization.lean-record.json (statement verbatim); nt_compile --json clean in 2.6 s, control compile errors as expected. Otherwise clause-by-clause correct: comparison pinned by integralRealizationAgreement (specified completion map inverse, balanced reindexing), tensor/unit/Hom (permitted pairs), identity (sourceId_unit)/composition, arbitrary non-k-linear g, edge cases and universes fine; both new existing:true def nodes well-formed and acyclic. M1 maintainer note: the item imports the parent module AdicQbarConstructibleRealization (parent lem-sf-adic-qbar-constructible-realization proof_deps contain the item) through existing:true def-sf-adic-realization-isomorphism-data, a stage-3 import cycle the group cannot fix (parent outside closure); move the five package defs into a def-node-owned module. Advisories: the final mixed-square clause is comparison naturality (content carried by integral_normalization); Second-reading section uses dispatcher wording (H11 advisory); def-sf-native-adic-* owners reached only via the new def node."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T1",
+  "result": "pass",
+  "landing": "20261025T101416-L-3690709",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)",
+  "sorry_before": [
+   "WeilConjectures.sfQbarLocalizationCommonStage"
+  ],
+  "sorry_after": []
+ }
+}

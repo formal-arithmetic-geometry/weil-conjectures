@@ -43,99 +43,59 @@
  ],
  "proof": [
   {
-   "text": "Write $A=\\mathcal O_E$, $P_n=A_{E,n}$. The proper factor $p:\\bar X\\to Y$ is finite type; composing finite affine covers and their finite algebra generators makes $\\bar X/K_0$ finite type [def-weil-compactifications-refinements, def-weil-proper-morphism, def-weil-finite-type-morphism]. A field is Noetherian, so $X,Y,\\bar X$ are Noetherian [lem-weil-pbc-finite-type-over-noetherian]. Their opens are quasi-compact [lem-weil-pbc-noetherian-open-subscheme-noetherian]; thus $j$ is quasi-compact. Choose its reduced closed complement [lem-weil-pbc-closed-subset-closed-subscheme].",
+   "text": "Give the compactification middle scheme the structure map p followed by Y→Spec K0. Properness of p and finite type of Y imply finite type and quasi-compactness of this structure map, hence the middle scheme is Noetherian. Quasi-compactness of f implies that j is quasi-compact. Map the unit l of K0 through global sections and the germ to each stalk.",
    "uses": [
     "def-weil-compactifications-refinements",
     "def-weil-proper-morphism",
     "def-weil-finite-type-morphism",
-    "lem-weil-pbc-finite-type-over-noetherian",
-    "lem-weil-pbc-noetherian-open-subscheme-noetherian",
-    "lem-weil-pbc-closed-subset-closed-subscheme"
+    "lem-weil-pbc-finite-type-over-noetherian"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
-    "place": "Lemma 6.7.7, compactification hypotheses"
-   }
+   "elementary": false
   },
   {
-   "text": "Set $L=JK=j_!K$ over completed coefficients, identified on the open by [lem-weil-pbc-profinite-coefficient-inverse-image]. Identify the open site with its slice [lem-weil-proetale-weakly-etale-localization]. On a K-flat resolution [lem-pc-kflat-resolution], [lem-sf-ringed-open-total-tensor-kflat] makes $JQ$ a K-flat resolution of $L$. The resulting $\\alpha_n:L_n\\cong j_!K_n$ are precisely [lem-sf-integral-open-reduction-comparison]; they preserve quotient transitions and reduction units, computed by $q\\otimes a\\mapsto q\\otimes\\rho_n(a)$ and $q\\mapsto q\\otimes1$ [lem-weil-integral-reduction-tower-well-defined].",
+   "text": "Choose the section- and resolution-normalized open/proper records and the canonical slice-tower isomorphism using compactSupportProperImageTower. The presentation lemma identifies the finite extension with the intrinsic finite extension and gives the two end comparisons of whole inverse systems.",
    "uses": [
-    "lem-weil-pbc-profinite-coefficient-inverse-image",
-    "lem-weil-proetale-weakly-etale-localization",
-    "lem-pc-kflat-resolution",
-    "lem-sf-ringed-open-total-tensor-kflat",
+    "lem-sf-compact-support-proper-image-tower",
+    "lem-sf-compact-support-slice-intrinsic-towers"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Convert sf derived completeness to the unrestricted completeness predicate by sfDerivedComplete_iff_legacy. The auxiliary finite field can be chosen at any prime larger than l+1; it imposes no structure on the geometric schemes. The open-reduction comparison proves completeness of J=j_!K. Its evaluated alpha identifies each reduction of J with finite extension of the corresponding reduction of K.",
+   "uses": [
     "lem-sf-integral-open-reduction-comparison",
-    "lem-weil-integral-reduction-tower-well-defined"
+    "lem-sf-derived-complete-legacy-comparison"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
-    "place": "Stacks Tag 0E8I, K-flat representatives and quotient units"
-   }
+   "elementary": false
   },
   {
-   "text": "Apply [lem-sf-ringed-open-roos-preservation] to the completeness triangle of $K$ [def-weil-derived-complete]; its terms are $J\\operatorname{Res}_nK_n$. Both $j_!$ (completed and finite level) sheafify the extension-by-zero presheaf [lem-weil-pbc-proetale-ringed-open-closed], and module sheafification is abelian sheafification with its unique scalar action [lem-pc-sites-module-sheafification-interface]; so $J\\operatorname{Res}_n=\\operatorname{Res}_nj_!$. Step 2 then identifies the terms, projections and first map with the reduction tower and units of $L$; the middle map is $1-s$ for its transitions. Hence $L$ is derived complete.",
+   "text": "Take the common interval [a,b] from the hypothesis. Apply open_finite_constructibility_interval to each finite reduction; exactness of intrinsic extension by zero lets its derived functor transport the finite model isomorphism. Transport constructibility and the same interval through the derived finite model and alpha isomorphisms, giving sfIntegralConstructible J.",
    "uses": [
-    "lem-sf-ringed-open-roos-preservation",
-    "def-weil-derived-complete",
-    "lem-weil-pbc-proetale-ringed-open-closed",
-    "lem-pc-sites-module-sheafification-interface"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
-    "place": "Lemma 6.1.13 and the completion Roos triangle"
-   }
-  },
-  {
-   "text": "The hypothesis gives constructible $K_n$ in one interval $[a,b]$ [def-weil-derived-complete-integral-detailed]. By [lem-sf-open-finite-constructibility-interval], $L_n\\cong j_!K_n$ are constructible in that interval. With step 3 this is $L\\in D^b_c(\\bar X,A)$.",
-   "uses": [
-    "def-weil-derived-complete-integral-detailed",
-    "lem-sf-open-finite-constructibility-interval"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
-    "place": "Lemma 6.7.7, open constructible factor"
-   }
-  },
-  {
-   "text": "Apply [lem-sf-integral-direct-image-constructible] to $p,L$: $T=Rp_*L\\in D^b_c(Y,A)$, with reduction interval $[a,b+N]$ independent of $n$. Step 1 verifies its field-base finite-type hypotheses. By [def-weil-derived-direct-image], $T$ is a derived limit of $N_n=\\operatorname{Res}_nRp_{*,n}L_n$ with quotient transitions.",
-   "uses": [
-    "lem-sf-integral-direct-image-constructible",
-    "def-weil-derived-direct-image"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
-    "place": "Lemma 6.7.2 and Definition 6.7.6, proper factor"
-   }
-  },
-  {
-   "text": "By [lem-sf-compact-support-proper-image-tower], the $\\alpha_n$ induce $N_\\bullet\\cong M_\\bullet$ with exactly the transitions specified in the statement.",
-   "uses": [
-    "lem-sf-compact-support-proper-image-tower"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
-    "place": "Definition 6.7.6, coefficient-transition naturality"
-   }
-  },
-  {
-   "text": "For every derived limit $M$ in the statement, [lem-weil-derived-limit-morphism] extends this system isomorphism to the Roos triangles of $T,M$; [lem-weil-derived-limit-levelwise-iso] makes $T\\to M$ invertible. Isomorphism closure [lem-weil-integral-constructible-triangulated] gives $M\\in D^b_c(Y,A)$, which means all three claimed properties [def-weil-derived-complete-integral-detailed].",
-   "uses": [
-    "lem-weil-derived-limit-morphism",
-    "lem-weil-derived-limit-levelwise-iso",
-    "lem-weil-integral-constructible-triangulated",
+    "lem-sf-open-finite-constructibility-interval",
+    "lem-weil-extension-by-zero-exact",
+    "lem-weil-proetale-dbc-triangulated",
     "def-weil-derived-complete-integral-detailed"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
-    "place": "Lemma 6.7.7, arbitrary Roos choices and isomorphism closure"
-   }
+   "elementary": false
+  },
+  {
+   "text": "Apply sfIntegralDirectImage_constructible to p,J. It supplies a chosen Roos direct image L and proves sfIntegralConstructible L. Compose the left presentation isomorphism, the slice proper/support tower isomorphism and the right presentation isomorphism. This identifies the defining tower of L with the specified tower of M.",
+   "uses": [
+    "lem-sf-integral-direct-image-constructible",
+    "def-weil-derived-direct-image",
+    "lem-sf-compact-support-proper-image-tower",
+    "lem-sf-compact-support-slice-intrinsic-towers"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For arbitrary two Roos limits of isomorphic towers, take the products of the level isomorphisms. Naturality intertwines 1 minus shift. Rotate the two distinguished triangles, complete the isomorphism on their first two objects, and inverse-rotate. This gives L≅M. Transport integral constructibility through that isomorphism. This uses no functorial choice of a limit comparison.",
+   "uses": [
+    "def-weil-derived-limit",
+    "def-weil-triangulated-category",
+    "lem-weil-integral-constructible-triangulated"
+   ],
+   "elementary": false
   }
  ],
  "proof_deps": [
@@ -143,31 +103,24 @@
   "def-weil-proper-morphism",
   "def-weil-finite-type-morphism",
   "lem-weil-pbc-finite-type-over-noetherian",
-  "lem-weil-pbc-noetherian-open-subscheme-noetherian",
-  "lem-weil-pbc-closed-subset-closed-subscheme",
-  "lem-weil-pbc-profinite-coefficient-inverse-image",
-  "lem-weil-proetale-weakly-etale-localization",
-  "lem-pc-kflat-resolution",
-  "lem-sf-ringed-open-total-tensor-kflat",
+  "lem-sf-compact-support-proper-image-tower",
+  "lem-sf-compact-support-slice-intrinsic-towers",
   "lem-sf-integral-open-reduction-comparison",
-  "lem-weil-integral-reduction-tower-well-defined",
-  "lem-sf-ringed-open-roos-preservation",
-  "def-weil-derived-complete",
-  "lem-weil-pbc-proetale-ringed-open-closed",
-  "lem-pc-sites-module-sheafification-interface",
-  "def-weil-derived-complete-integral-detailed",
+  "lem-sf-derived-complete-legacy-comparison",
   "lem-sf-open-finite-constructibility-interval",
+  "lem-weil-extension-by-zero-exact",
+  "lem-weil-proetale-dbc-triangulated",
+  "def-weil-derived-complete-integral-detailed",
   "lem-sf-integral-direct-image-constructible",
   "def-weil-derived-direct-image",
-  "lem-sf-compact-support-proper-image-tower",
-  "lem-weil-derived-limit-morphism",
-  "lem-weil-derived-limit-levelwise-iso",
+  "def-weil-derived-limit",
+  "def-weil-triangulated-category",
   "lem-weil-integral-constructible-triangulated"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
-  "place": "Lemmas 6.1.13, 6.7.2, 6.7.7 and Definition 6.7.6; explicit seven-step assembly of the extracted representative, Roos, finite-stratification and tower comparisons"
+  "place": "Definition 6.7.6 and Lemma 6.7.7: open extension, proper image, and isomorphism closure. The real Lean assembly retains the canonical slice tower theorem and isolates only its slice/intrinsic presentation identifications."
  },
  "mathlib_searches": [
   {
@@ -319,7 +272,18 @@
   "item": "def-weil-integral-rational-qbar-compact-support",
   "date": "2026-10-09"
  },
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
  "chapter": "sec-smooth-purity",
  "unit": "sk-def-sf-operations",
  "split_report": {
@@ -422,18 +386,7 @@
   "date": "2026-10-16",
   "existing": false,
   "file": "lean/Sheaf/Paper/SfIntegralCompactSupportConstructible.lean",
-  "declarations": [
-   "WeilConjectures.sfCompactSupportCoefficientFinite",
-   "WeilConjectures.sfCompactSupportFiniteRestriction",
-   "WeilConjectures.sfCompactSupportFiniteRestrictionLimits",
-   "WeilConjectures.sfCompactSupportFiniteRestrictionColimits",
-   "WeilConjectures.sfCompactSupportRestrictionComp",
-   "WeilConjectures.sfCompactSupportDerivedRestrictionComp",
-   "WeilConjectures.sfCompactSupportReductionTransition",
-   "WeilConjectures.sfCompactSupportTerm",
-   "WeilConjectures.sfCompactSupportTransition",
-   "WeilConjectures.sfCompactSupportProjection_transition"
-  ]
+  "declarations": []
  },
  "reviewed_lean": {
   "date": "2026-10-16",
@@ -444,20 +397,13 @@
   "note": "Wrote review.md. Checked the immutable delivery, all statement dependencies, source correspondence, canonical transitions, universes, edge cases, records, and docstrings. Both modules compile cleanly through scompile.py. No fixes needed; branch unchanged.; reverted the delivery's change of existing node(s) def-weil-derived-complete-integral-detailed (--revert-nodes; kept as on newtargets-dag)"
  },
  "reviewed_proof": {
-  "date": "2026-10-21",
+  "date": "2026-10-25",
   "by": "L",
-  "reviewer": "AUTO",
-  "group": "A6",
-  "result": "pass",
-  "landing": "20261021T173332-L-3587733",
-  "kind": "proof",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)",
-  "sorry_before": [
-   "WeilConjectures.sfCompactSupportProjection_transition",
-   "WeilConjectures.sfIntegralCompactSupport_constructible"
-  ],
-  "sorry_after": [
-   "WeilConjectures.sfIntegralCompactSupport_constructible"
-  ]
+  "reviewer": "C-c744e",
+  "group": "E3",
+  "result": "fix",
+  "landing": "20261025T011011-L-3633664",
+  "kind": "interface",
+  "note": "independent cc review: item node lem-sf-integral-compact-support-constructible + new nodes def-sf-integral-compact-support-tower / lem-sf-compact-support-slice-intrinsic-towers against the three delivered modules, the clone's CompactSupportProperImageTower / IntegralOpenReductionComparison / SfDerivedDirectImage definitions, and the change record; 18/20 direct importers compiled against the delivered modules"
  }
 }

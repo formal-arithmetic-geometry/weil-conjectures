@@ -1,0 +1,273 @@
+{
+ "id": "lem-sf-adic-realization-isomorphism-normalization",
+ "kind": "statement",
+ "title": "Isomorphism reindexing normalizes adic realization comparisons",
+ "statement": "Fix $k=\\overline{\\mathbf F}_q$, a prime $\\ell\\ne\\operatorname{char}k$, and $\\Omega=\\overline{\\mathbf Q}_\\ell$ [def-weil-finite-field-fiber]. Let $T$ be a separated finite-type $k$-scheme. On its small pro-etale site [def-weil-pbc-proetale-site], for each finite $E\\subset\\Omega$ put $B_{E,T}=\\varprojlim_{n\\ge1}(\\mathcal O_E/\\varpi_E^n)_T$ [def-weil-completed-integral-coefficients], $E_T=B_{E,T}[1/\\varpi_E]$, and $R_T=p_T^*\\underline\\Omega$, where $\\underline\\Omega(S)$ consists of continuous functions on a profinite set $S$ valued in one finite subextension [sk-def-sfb-qlbar-condensed, sk-prop-sfb-qlbar-colimit-x]. Write $\\mathcal C_E(T)=D^b_c(T,E)$ for the raw rationalization of derived-complete integral constructible complexes, with its specified completed finite scalar transitions $S_{F/E}$ [def-weil-rationalization-karoubi]. Write $\\mathcal C_T$ for the common-stage pair category of these $\\mathcal C_E(T)$, with Hom groups the directed colimits over common finite fields [def-weil-algebraically-closed-coefficients]. For $A=E_T,R_T$, let $\\mathcal D_T(A)$ be the full subcategory of $D(\\operatorname{Mod}(A))$ [def-weil-sheaf-of-modules-category, def-weil-abstract-derived-category] of bounded objects whose cohomology sheaves have a finite locally closed stratification on each stratum of which they are pro-etale locally finite free over $A$.\n\nFor each separated finite-type $k$-scheme $W$ use the rings, raw finite categories and common-stage categories defined above with $W$ replacing $T$. Let $J_{E,W}=E_W\\otimes^L_{B_{E,W}}-$ and $\\rho_W(E,K)=R_W\\otimes^L_{E_W}J_{E,W}K$, with the actual completed finite scalar transitions and balanced comparison maps. Equip $\\rho_W$ with the tensorator obtained from the quotient maps $\\chi_{K,L}:K\\otimes^L L\\to K\\widehat\\otimes^L L$ and balanced scalar multiplication, and with the Hom map defined by transposing realized evaluation for every permitted pair [def-weil-derived-pullback-tensor-hom].\n\nLet $g:T\\xrightarrow{\\sim}U$ be any scheme isomorphism between separated finite-type $k$-schemes; $g$ is not required to be a $k$-morphism. Use its specified integral derived pullback and its rational and common-stage passages [def-weil-derived-pullback-tensor-hom], and the coefficient identifications induced by reindexing $(V\\to T)$ as $(V\\to U)$ and by inverse image of the quotient projections. There is a natural isomorphism\n$$b_g:\\rho_Tg^*\\xrightarrow{\\sim}g^*\\rho_U.$$\nIt is induced on the integral coefficient representatives by exact inverse-image reindexing and balanced tensor multiplication. It carries the actual completion quotient cocones (including the zero shifted-product component), total K-flat tensor maps, and finite scalar comparison maps to their corresponding maps over $T$. It respects the specified tensorator, coefficient unit and evaluation-transpose Hom maps. For every finite coefficient extension its mixed scalar square commutes. For an identity isomorphism $b_g$ is the identity under the specified identity pullbacks; for composable scheme isomorphisms its two routes coincide under the actual pullback composition maps. This includes the semilinear geometric Frobenius isomorphism when a finite-field descent datum is supplied, without a $k$-linearity assumption.",
+ "source": {
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "BS Remark 6.8.15; arbitrary scheme-isomorphism reindexing, including semilinear Frobenius; old step 12; HRS: literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf; precise map normalization is the agent-written argument retained in report.md."
+ },
+ "stmt_deps": [
+  "def-weil-finite-field-fiber",
+  "def-weil-pbc-proetale-site",
+  "def-weil-completed-integral-coefficients",
+  "sk-def-sfb-qlbar-condensed",
+  "sk-prop-sfb-qlbar-colimit-x",
+  "def-weil-rationalization-karoubi",
+  "def-weil-algebraically-closed-coefficients",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-abstract-derived-category",
+  "def-weil-derived-pullback-tensor-hom",
+  "def-sf-adic-realization-isomorphism-data",
+  "def-sf-qbar-localization-residue-invertible"
+ ],
+ "proof": [
+  {
+   "text": "Construct SpaceData at each space from the given R, P, A, N and H. The exact-derived section equivalence preserves full faithfulness and essential image. All realization, tensor and finite-normalization projections retain exactly the supplied data.",
+   "uses": [
+    "def-sf-adic-realization-isomorphism-data"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Apply normalized integral/common-stage reindexing to this objectwise family, obtaining FamilyCore with its original data and the ordinary section and integral normalization equations.",
+   "uses": [
+    "lem-sf-adic-reindexing-core"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use normalized functoriality for identity/composition, normalized tensor compatibility for tensor/unit, and the evaluation-transpose lemma for Hom. Assemble these fields with the unchanged FamilyCore into Family.",
+   "uses": [
+    "lem-sf-adic-reindexing-functoriality",
+    "lem-sf-adic-reindexing-tensor",
+    "lem-sf-adic-reindexing-hom"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "The equality of objectwise data gives all three required equalities by projection. The remaining mixed common-stage equation is naturality of comparison.hom on StageSystem.isoToStage.",
+   "uses": [
+    "def-sf-adic-realization-isomorphism-data"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-sf-adic-realization-isomorphism-data",
+  "lem-sf-adic-reindexing-core",
+  "lem-sf-adic-reindexing-functoriality",
+  "lem-sf-adic-reindexing-tensor",
+  "lem-sf-adic-reindexing-hom"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Remark 6.8.15; complete Lean assembly from four strictly partial subarguments. Source normalized route retained."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Common stage continuous adic constructible realization commutes with arbitrary scheme isomorphism pullback including semilinear geometric Frobenius with identity composition and evaluation normalization",
+   "results": "[leanfinder] OK 8 hit(s); AlgebraicGeometry.Scheme.IsLocallyDirected.fst_inv_eq_snd_inv: ∀ {J : Type w} [inst : CategoryTheory.Category.{v, w} J] (F : CategoryTheory.Functor J AlgebraicGeometry.Scheme)\n  [inst_1 : ∀ {i j : J} (f : i ⟶ j), AlgebraicGeometry.IsOpenImmersion (F.map f)]\n  [(F.comp AlgebraicGeometry.Scheme.forget).IsLocallyDirected] [Quiver.IsThin J] {i j : J}\n  (k₁ k₂ : (k ; AlgebraicGeometry.Scheme.exists_hom_comp_eq_comp_of_locallyOfFiniteType: ∀ {I : Type u} [inst : CategoryTheory.Category.{u, u} I] {S X : AlgebraicGeometry.Scheme}\n  (D : CategoryTheory.Functor I AlgebraicGeometry.Scheme) (t : D ⟶ (CategoryTheory.Functor.const I).obj S) (f : X ⟶ S)\n  (c : CategoryTheory.Limits.Cone D) (hc : CategoryTheory.Limits.IsLimit c) [∀ (i : I), Com; AlgebraicGeometry.ExistsHomHomCompEqCompAux.exists_eq: ∀ {I : Type u} [inst : CategoryTheory.Category.{u, u} I] {S X : AlgebraicGeometry.Scheme}\n  {D : CategoryTheory.Functor I AlgebraicGeometry.Scheme} {t : D ⟶ (CategoryTheory.Functor.const I).obj S} {f : X ⟶ S}\n  [inst_1 : ∀ (i : I), CompactSpace ↥(D.obj i)] [AlgebraicGeometry.LocallyOfFiniteType f]\n ; AlgebraicGeometry.Scheme.OpenCover.pullbackCoverAffineRefinementObjIso_inv_map: ∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) (𝒰 : Y.OpenCover)\n  (i : (CategoryTheory.Precoverage.ZeroHypercover.pullback₁ f 𝒰.affineRefinement.openCover).I₀),\n  CategoryTheory.CategoryStruct.comp (AlgebraicGeometry.Scheme.OpenCover.pullbackCoverAffineRefinementObjIso f 𝒰 i).inv\n      ((CategoryTh; AlgebraicGeometry.Scheme.IdealSheafData.comapIso_hom_snd: ∀ {X Y : AlgebraicGeometry.Scheme} (I : Y.IdealSheafData) (f : X ⟶ Y),\n  CategoryTheory.CategoryStruct.comp (I.comapIso f).hom (CategoryTheory.Limits.pullback.snd f I.subschemeι) =\n    (I.comap f).subschemeMap I f ⋯; AlgebraicGeometry.Scheme.exists_hom_hom_comp_eq_comp_of_locallyOfFiniteType: ∀ {I : Type u} [inst : CategoryTheory.Category.{u, u} I] {S X : AlgebraicGeometry.Scheme}\n  (D : CategoryTheory.Functor I AlgebraicGeometry.Scheme) (t : D ⟶ (CategoryTheory.Functor.const I).obj S) (f : X ⟶ S)\n  (c : CategoryTheory.Limits.Cone D) (hc : CategoryTheory.Limits.IsLimit c) [∀ (i : I), Com; AlgebraicGeometry.exists_app_map_eq_map_of_isLimit: ∀ {I : Type u} [inst : CategoryTheory.Category.{u, u} I] (D : CategoryTheory.Functor I AlgebraicGeometry.Scheme)\n  (c : CategoryTheory.Limits.Cone D) (hc : CategoryTheory.Limits.IsLimit c) [CategoryTheory.IsCofiltered I]\n  [∀ {i j : I} (f : i ⟶ j), AlgebraicGeometry.IsAffineHom (D.map f)] {i : I} {U; AlgebraicGeometry.Scheme.IdealSheafData.comapIso_hom_fst: ∀ {X Y : AlgebraicGeometry.Scheme} (I : Y.IdealSheafData) (f : X ⟶ Y),\n  CategoryTheory.CategoryStruct.comp (I.comapIso f).hom (CategoryTheory.Limits.pullback.fst f I.subschemeι) =\n    (I.comap f).subschemeι",
+   "date": "2026-10-22",
+   "verdict": "no match: general modules, condensed objects or categorical tools do not state this specified constructible adic comparison"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Sheaf\", \"iso\"",
+   "results": "[loogle] OK 12 hit(s); CategoryTheory.OverPresheafAux.OverArrows.costructuredArrowIso:  {C : Type u} [CategoryTheory.Category.{v, u} C] {A : CategoryTheory.Functor Cᵒᵖ (Type v)} (s t : CategoryTheory.CostructuredArrow CategoryTheory.yoneda A) : CategoryTheory.OverPresheafAux.OverArrows s.hom t.hom ≅ t ⟶ s; CategoryTheory.Presheaf.compULiftYonedaIsoULiftYonedaCompLan:  {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [CategoryTheory.Category.{v₂, u₂} D] (F : CategoryTheory.Functor C D) [∀ (P : CategoryTheory.Functor Cᵒᵖ (Type (max w v₁ v₂))), F.op.HasLeftKanExtension P] : F.comp CategoryTheory.uliftYoneda.{max w v₁, v₂, u₂} ≅ CategoryTheory.uliftY; CategoryTheory.Presheaf.instIsIsoFunctorOfIsLeftKanExtensionOppositeType:  {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] {ℰ : Type u₂} [CategoryTheory.Category.{v₂, u₂} ℰ] {A : CategoryTheory.Functor C ℰ} [CategoryTheory.uliftYoneda.{max w v₂, v₁, u₁}.HasPointwiseLeftKanExtension A] (L : CategoryTheory.Functor (CategoryTheory.Functor Cᵒᵖ (Type (max w v₁ v₂))) ℰ) (α :; CategoryTheory.Presheaf.isIso_of_isLeftKanExtension:  {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] {ℰ : Type u₂} [CategoryTheory.Category.{v₂, u₂} ℰ] {A : CategoryTheory.Functor C ℰ} [CategoryTheory.uliftYoneda.{max w v₂, v₁, u₁}.HasPointwiseLeftKanExtension A] (L : CategoryTheory.Functor (CategoryTheory.Functor Cᵒᵖ (Type (max w v₁ v₂))) ℰ) (α :; CategoryTheory.Presheaf.instIsIsoFunctorLeftKanExtensionUnitOppositeTypeUliftYoneda:  {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] {ℰ : Type u₂} [CategoryTheory.Category.{v₂, u₂} ℰ] (A : CategoryTheory.Functor C ℰ) [CategoryTheory.uliftYoneda.{max w v₂, v₁, u₁}.HasPointwiseLeftKanExtension A] : CategoryTheory.IsIso (CategoryTheory.uliftYoneda.{max w v₂, v₁, u₁}.leftKanExtensio; CategoryTheory.Presheaf.instIsLeftKanExtensionFunctorOppositeTypeLanOpHomCompULiftYonedaIsoULiftYonedaCompLan:  {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [CategoryTheory.Category.{v₂, u₂} D] (F : CategoryTheory.Functor C D) [∀ (P : CategoryTheory.Functor Cᵒᵖ (Type (max w v₁ v₂))), F.op.HasLeftKanExtension P] : F.op.lan.IsLeftKanExtension (CategoryTheory.Presheaf.compULiftYonedaIsoULift; CategoryTheory.Presheaf.compULiftYonedaIsoULiftYonedaCompLan.presheafHom:  {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [CategoryTheory.Category.{v₂, u₂} D] {F : CategoryTheory.Functor C D} {G : CategoryTheory.Functor (CategoryTheory.Functor Cᵒᵖ (Type (max w v₁ v₂))) (CategoryTheory.Functor Dᵒᵖ (Type (max w v₁ v₂)))} (φ : F.comp CategoryTheory.uliftYon; CategoryTheory.Presheaf.compULiftYonedaIsoULiftYonedaCompLan.coconeApp:  {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [CategoryTheory.Category.{v₂, u₂} D] {F : CategoryTheory.Functor C D} {G : CategoryTheory.Functor (CategoryTheory.Functor Cᵒᵖ (Type (max w v₁ v₂))) (CategoryTheory.Functor Dᵒᵖ (Type (max w v₁ v₂)))} (φ : F.comp CategoryTheory.uliftYon; CategoryTheory.Presheaf.compULiftYonedaIsoULiftYonedaCompLan.natTrans:  {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [CategoryTheory.Category.{v₂, u₂} D] {F : CategoryTheory.Functor C D} {G : CategoryTheory.Functor (CategoryTheory.Functor Cᵒᵖ (Type (max w v₁ v₂))) (CategoryTheory.Functor Dᵒᵖ (Type (max w v₁ v₂)))} (φ : F.comp CategoryTheory.uliftYon; CategoryTheory.Presheaf.compULiftYonedaIsoULiftYonedaCompLan.coconeApp_naturality:  {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [CategoryTheory.Category.{v₂, u₂} D] {F : CategoryTheory.Functor C D} {G : CategoryTheory.Functor (CategoryTheory.Functor Cᵒᵖ (Type (max w v₁ v₂))) (CategoryTheory.Functor Dᵒᵖ (Type (max w v₁ v₂)))} (φ : F.comp CategoryTheory.uliftYon; CategoryTheory.Presheaf.compULiftYonedaIsoULiftYonedaCompLan.presheafHom_naturality:  {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [CategoryTheory.Category.{v₂, u₂} D] {F : CategoryTheory.Functor C D} {G : CategoryTheory.Functor (CategoryTheory.Functor Cᵒᵖ (Type (max w v₁ v₂))) (CategoryTheory.Functor Dᵒᵖ (Type (max w v₁ v₂)))} (φ : F.comp CategoryTheory.uliftYon; CategoryTheory.Presheaf.compULiftYonedaIsoULiftYonedaCompLan.coconeApp_naturality_assoc:  {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [CategoryTheory.Category.{v₂, u₂} D] {F : CategoryTheory.Functor C D} {G : CategoryTheory.Functor (CategoryTheory.Functor Cᵒᵖ (Type (max w v₁ v₂))) (CategoryTheory.Functor Dᵒᵖ (Type (max w v₁ v₂)))} (φ : F.comp CategoryTheory.uliftYon",
+   "date": "2026-10-22",
+   "verdict": "no match: general modules, condensed objects or categorical tools do not state this specified constructible adic comparison"
+  },
+  {
+   "tool": "grep",
+   "query": "realization.*pullback|pullback.*realization|proetale.*isomorphism",
+   "results": "[grep] OK 0 hit(s); ",
+   "date": "2026-10-22",
+   "verdict": "no match: general modules, condensed objects or categorical tools do not state this specified constructible adic comparison"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Reindexing the pro etale site along a scheme isomorphism commutes with completed rational realization tensor and evaluation Hom comparisons",
+   "results": "[leansearch] OK 8 hit(s); PiTensorProduct.map_comp_reindex_eq: (f : Π i, s i →ₗ[R] t i) (e : ι ≃ ι₂) : map (fun i ↦ f (e.symm i)) ∘ₗ reindex R s e = reindex R t e ∘ₗ map f; PiTensorProduct.map_reindex: (f : Π i, s i →ₗ[R] t i) (e : ι ≃ ι₂) (x : ⨂[R] i, s i) :\n  map (fun i ↦ f (e.symm i)) (reindex R s e x) = reindex R t e (map f x); AlgebraicGeometry.Scheme.Cover.copy_X: ∀ {P : CategoryTheory.MorphismProperty AlgebraicGeometry.Scheme} [inst : P.RespectsIso] {X : AlgebraicGeometry.Scheme}\n  (𝒰 : AlgebraicGeometry.Scheme.Cover (AlgebraicGeometry.Scheme.precoverage P) X) (J : Type u_1)\n  (obj : J → AlgebraicGeometry.Scheme) (map : (i : J) → obj i ⟶ X) (e₁ : J ≃ 𝒰.I₀) (; AlgebraicGeometry.Scheme.Cover.copy: [P.RespectsIso] {X : Scheme.{u}} (𝒰 : X.Cover (precoverage P)) (J : Type*) (obj : J → Scheme) (map : ∀ i, obj i ⟶ X)\n  (e₁ : J ≃ 𝒰.I₀) (e₂ : ∀ i, obj i ≅ 𝒰.X (e₁ i)) (h : ∀ i, map i = (e₂ i).hom ≫ 𝒰.f (e₁ i)) : X.Cover (precoverage P); RingHom.Etale.respectsIso: : RespectsIso Etale; PiTensorProduct.map_reindex_symm: (f : Π i, s i →ₗ[R] t i) (e : ι ≃ ι₂) (x : ⨂[R] i, s (e.symm i)) :\n  map f ((reindex R s e).symm x) = (reindex R t e).symm (map (fun i ↦ f (e.symm i)) x); PiTensorProduct.reindex_symm: (e : ι ≃ ι₂) : (reindex R (fun _ ↦ M) e).symm = reindex R (fun _ ↦ M) e.symm; PiTensorProduct.lift_reindex_symm: (e : ι ≃ ι₂) (φ : MultilinearMap R s E) (x : ⨂[R] i, s (e.symm i)) :\n  lift φ (reindex R s e |>.symm x) = lift (domDomCongrLinearEquiv' R R s _ e φ) x",
+   "date": "2026-10-22",
+   "verdict": "no match: general modules, condensed objects or categorical tools do not state this specified constructible adic comparison"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The completion quotient maps and balanced scalar tensor formulas are invariant under scheme isomorphism inverse image without base field linearity",
+   "results": "[leansearch] OK 8 hit(s); AdicCompletion.congr_symm_apply: (f : M ≃ₗ[R] N) (x : AdicCompletion I N) : (congr I f).symm x = map I f.symm x; TensorProduct.tensorQuotEquivQuotSMul_symm_comp_mkQ: (I : Ideal R) :\n  (tensorQuotEquivQuotSMul M I).symm ∘ₗ (I • ⊤ : Submodule R M).mkQ = (TensorProduct.mk R M (R ⧸ I)).flip 1; AdicCompletion.mk_ofAlgEquiv_symm_eq_evalOneₐ: (x : AdicCompletion I S) : Ideal.Quotient.mk I ((ofAlgEquiv I).symm x) = evalOneₐ I x; lTensor.inverse_comp_lTensor: : (lTensor.inverse Q hfg hg).comp (lTensor Q g) = Submodule.mkQ (p := LinearMap.range (lTensor Q f)); AdicCompletion.congr: {R : Type u_1} →\n  [inst : CommRing R] →\n    (I : Ideal R) →\n      {M : Type u_2} →\n        [inst_1 : AddCommGroup M] →\n          [inst_2 : Module R M] →\n            {N : Type u_3} →\n              [inst_3 : AddCommGroup N] →\n                [inst_4 : Module R N] → (M ≃ₗ[R] N) → AdicCompletion I M ≃ₗ; TensorProduct.tensorQuotMapSMulEquivTensorQuot: (I : Ideal R) :\n  ((S ⊗[R] M) ⧸ I.map (algebraMap R S) • (⊤ : Submodule S (S ⊗[R] M))) ≃ₗ[S] S ⊗[R] (M ⧸ (I • (⊤ : Submodule R M))); TensorProduct.quotTensorEquivQuotSMul_symm_comp_mkQ: (I : Ideal R) : (quotTensorEquivQuotSMul M I).symm ∘ₗ (I • ⊤ : Submodule R M).mkQ = TensorProduct.mk R (R ⧸ I) M 1; TensorProduct.tensorQuotEquivQuotSMul_comp_mk: (I : Ideal R) : tensorQuotEquivQuotSMul M I ∘ₗ (TensorProduct.mk R M (R ⧸ I)).flip 1 = Submodule.mkQ (I • ⊤)",
+   "date": "2026-10-22",
+   "verdict": "no match: general modules, condensed objects or categorical tools do not state this specified constructible adic comparison"
+  },
+  {
+   "tool": "grep",
+   "query": "realization.*pullback|pullback.*realization|proetale.*isomorphism",
+   "results": "0 hits: ",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary adic module completions, scheme affine-space/pullback identities and presheaf Yoneda constructions do not state the specified constructible adic realization comparison"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Exact reindexing equivalence of ringed sites preserves derived completion quotient augmentations and internal Hom evaluation",
+   "results": "8 hits: AdicCompletion.congr, AdicCompletion.factor_eval_liftRingHom, IsAdicComplete.StrictMono.liftRingHom.congr_simp, AdicCompletion.liftRingHom.congr_simp, IsAdicComplete.ofAlgEquiv_comp_liftRingHom, AdicCompletion.ofAlgEquiv, UniformSpace.Completion.mapRingHom_coe, UniformSpace.Completion.mapRingHom_id",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary adic module completions, scheme affine-space/pullback identities and presheaf Yoneda constructions do not state the specified constructible adic realization comparison"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Scheme isomorphism pullback commutes with completed coefficient realization and balanced scalar tensor multiplication",
+   "results": "8 hits: AlgebraicGeometry.Scheme.OpenCover.pullbackCoverAffineRefinementObjIso_inv_pullbackHom, AlgebraicGeometry.pullbackSpecIso_inv_fst_assoc, AlgebraicGeometry.Scheme.Pullback.affine_hasPullback, AlgebraicGeometry.Scheme.Pullback.t, AlgebraicGeometry.pullbackSpecIso, AlgebraicGeometry.Scheme.Pullback.pullbackP1Iso_hom_snd, AlgebraicGeometry.pullbackSpecIso_hom_fst', AlgebraicGeometry.Scheme.Pullback.pullbackP1Iso",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary adic module completions, scheme affine-space/pullback identities and presheaf Yoneda constructions do not state the specified constructible adic realization comparison"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Realization of constructible adic complexes commutes with reindexing a pro etale site along a scheme isomorphism preserving completion tensor and evaluation",
+   "results": "8 hits: AlgebraicGeometry.AffineSpace.map_reindex, AdicCompletion.transitionMap_comp_eval, AlgebraicGeometry.ExistsHomHomCompEqCompAux.hii', AdicCompletion.transitionMap_comp_eval_apply, AlgebraicGeometry.AffineSpace.map_reindex_assoc, AlgebraicGeometry.ExistsHomHomCompEqCompAux.exists_eq, AlgebraicGeometry.ExistsHomHomCompEqCompAux.exists_index, AlgebraicGeometry.AffineSpace.reindex_comp",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary adic module completions, scheme affine-space/pullback identities and presheaf Yoneda constructions do not state the specified constructible adic realization comparison"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Sheaf\", \"iso\"",
+   "results": "12 hits: CategoryTheory.OverPresheafAux.OverArrows.costructuredArrowIso, CategoryTheory.Presheaf.compULiftYonedaIsoULiftYonedaCompLan, CategoryTheory.Presheaf.instIsIsoFunctorOfIsLeftKanExtensionOppositeType, CategoryTheory.Presheaf.isIso_of_isLeftKanExtension, CategoryTheory.Presheaf.instIsIsoFunctorLeftKanExtensionUnitOppositeTypeUliftYoneda, CategoryTheory.Presheaf.instIsLeftKanExtensionFunctorOppositeTypeLanOpHomCompULiftYonedaIsoULiftYonedaCompLan, CategoryTheory.Presheaf.compULiftYonedaIsoULiftYonedaCompLan.presheafHom, CategoryTheory.Presheaf.compULiftYonedaIsoULiftYonedaCompLan.coconeApp",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary adic module completions, scheme affine-space/pullback identities and presheaf Yoneda constructions do not state the specified constructible adic realization comparison"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sf-adic-qbar-constructible-realization",
+  "date": "2026-10-22",
+  "group": "Q53"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "The native obligation has no imported blueprint ancestor (ancestor prints None); supplied provenance is the evaluation/biduality clause of thm-coef-qbar-verdier. This node carries returned realization proof steps 12: Isomorphism reindexing normalizes adic realization comparisons.",
+   "via": [
+    "lem-sf-adic-qbar-constructible-realization",
+    "lem-sf-weil-verdier-biduality"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sf-adic-realization-isomorphism-normalization",
+  "worker": "stage1",
+  "summary": "Q07 repairs the 2026-10-22 landing return against the current live DAG, retains the eight-step proof and all searches, and rechecks all 17 proof dependencies and 24 citation excerpts. Steps 4-5 now display the inverted specified-kappa scalar equation and its common-stage theta conjugations explicitly. No new nodes and no statement change; the report identifies the prior side-completion promotion failure.",
+  "blueprint": "Native obligation has no imported ancestor (blueprint_refs ancestor prints None). Preserves supplied thm-coef-qbar-verdier provenance and realizes old realization step 12 retained in coord/reports/Q53/lem-sf-adic-qbar-constructible-realization.md. Whole-blueprint searches found no equivalent node.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-proetale-isomorphism-inverse-image",
+    "why": "Generic Inverse image along an isomorphism of schemes on the pro-etale site used as a black box for the explicitly described reindexing, tensor, coefficient or transpose operation; this unit has no replacement for that tool."
+   },
+   {
+    "node": "sk-prop-sfb-cartesian-coefficients",
+    "why": "Generic Inverse image of the coefficient sheaves used as a black box for the explicitly described reindexing, tensor, coefficient or transpose operation; this unit has no replacement for that tool."
+   },
+   {
+    "node": "sk-prop-sfb-qlbar-colimit-x",
+    "why": "Generic Comparison with completed coefficients used as a black box for the explicitly described reindexing, tensor, coefficient or transpose operation; this unit has no replacement for that tool."
+   },
+   {
+    "node": "lem-pur-isomorphism-inverse-image-tensor-hom",
+    "why": "Generic Inverse image along an isomorphism of schemes commutes with tensor products and sheaf Hom used as a black box for the explicitly described reindexing, tensor, coefficient or transpose operation; this unit has no replacement for that tool."
+   },
+   {
+    "node": "lem-sfb-exact-monoidal-equivalence-total-kflat",
+    "why": "Generic Signed total tensor and both K-flat tests under an exact monoidal equivalence used as a black box for the explicitly described reindexing, tensor, coefficient or transpose operation; this unit has no replacement for that tool."
+   },
+   {
+    "node": "lem-weil-isomorphism-derived-pullback-comparison-normalization",
+    "why": "Generic Specified inverse-image comparison is the completion unit used as a black box for the explicitly described reindexing, tensor, coefficient or transpose operation; this unit has no replacement for that tool."
+   },
+   {
+    "node": "lem-weil-isomorphism-comparison-natural",
+    "why": "Generic Naturality of the specified finite and completed inverse-image comparison used as a black box for the explicitly described reindexing, tensor, coefficient or transpose operation; this unit has no replacement for that tool."
+   },
+   {
+    "node": "lem-pur-cochain-pullback-tensor-coherence",
+    "why": "Generic Signed tensor comparison and composition on cochain sheaf pullbacks used as a black box for the explicitly described reindexing, tensor, coefficient or transpose operation; this unit has no replacement for that tool."
+   },
+   {
+    "node": "lem-weil-isomorphism-derived-pullback",
+    "why": "Generic Derived pullback along an isomorphism of schemes is the termwise inverse image used as a black box for the explicitly described reindexing, tensor, coefficient or transpose operation; this unit has no replacement for that tool."
+   },
+   {
+    "node": "lem-weil-finite-free-completed-scalar-comparison",
+    "why": "Generic Finite free completed coefficient extension is ordinary derived scalar extension used as a black box for the explicitly described reindexing, tensor, coefficient or transpose operation; this unit has no replacement for that tool."
+   },
+   {
+    "node": "lem-weil-isomorphism-comparison-scalar-extension",
+    "why": "Generic The specified inverse-image comparison respects finite coefficient extension used as a black box for the explicitly described reindexing, tensor, coefficient or transpose operation; this unit has no replacement for that tool."
+   },
+   {
+    "node": "lem-fix-constructible-tensor-completion",
+    "why": "Generic Ordinary and completed tensor agree on integral constructible complexes used as a black box for the explicitly described reindexing, tensor, coefficient or transpose operation; this unit has no replacement for that tool."
+   },
+   {
+    "node": "lem-pod-derived-automorphism-hom-evaluation",
+    "why": "Generic Derived internal Hom and evaluation under an isomorphism of coefficient sites used as a black box for the explicitly described reindexing, tensor, coefficient or transpose operation; this unit has no replacement for that tool."
+   },
+   {
+    "node": "lem-pur-derived-pullback-tensor-iso",
+    "why": "Generic specification of the integral pullback tensor comparison (derived limit of the finite ringed-topos comparisons, scalar-extension compatible) used as a black box in Step 6; no node of this unit specifies it. Added by the maintainer reader."
+   },
+   {
+    "node": "lem-trf-integral-inverse-image-comparison-composition",
+    "why": "Generic compatibility of the specified inverse-image comparison kappa with the integral pullback compositor for composable scheme isomorphisms, used as a black box in Step 8; no node of this unit states it. Added by the maintainer reader."
+   }
+  ]
+ },
+ "tool_uses": [],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q07-4b5252955",
+  "group": "Q07",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q07-4b5252955 (reviewer sub-agent of L); spot-checked: Q07 lem-sf-adic-realization-isomorphism-normalization 4b525295: FIX. This is a split with no new nodes, and the statement is identical to the base. The item is still unsplit in clones/live and clones/side-live, so the delivery is not superseded, and there is no repair note. Compared with the earlier maintainer FIX at 4c682d566fd8 (whose repair was lost when the side completion failed to land), this head rewrote only Steps 4 and 5; Steps 6 and 8 still have the same two gaps. Checks: the categories match def-weil-rationalization-karoubi, def-weil-algebraically-closed-coefficients and the Q̄_ℓ-level paragraph of def-weil-derived-pullback-tensor-hom (θ-conjugated pullback, tensor formed at EE'). The base change is reindexing G_g together with the specified κ, with no k-linearity, so semilinear Frobenius is covered. Small cases T empty, K=0, g=id, E=F, a geometric point and torsion K all hold. Step 1 (site equivalence, coefficient identifications), Step 2 (κ normalized on the entire cone, invertible for derived-complete inputs), Step 3 (localization by R_T-linearity) and Step 7 (evaluation transpose for permitted pairs) are correctly cited. New Step 4: the inverted equation (κ^F)^{-1}α = β T((κ^E)^{-1}) is correct, and κ^F is invertible on the constructible T_U K. New Step 5: the conjugation θ^{-1}g_F^*(u)θ is verbatim the definition, and the colimit descent is elementary. Faults repaired: (1) C3/C4, Step 6: the tensorator square passes through the specified integral pullback tensor comparison μ_g, the derived limit of the finite comparisons, which was never cited, and the common stage EE' was not treated. Step 6 now cites lem-pur-derived-pullback-tensor-iso and adds the common-stage passage. (2) E5/C1, Step 8: the cochain composition equation covers only morphisms of ringed topoi; compatibility of κ with the integral compositor c^E is the separate node lem-trf-integral-inverse-image-comparison-composition (c^E κ^{kh} d = κ^h h^{-1}(κ^k)). Step 8 now cites it. proof_deps are recomputed (19 entries) and two generic tool_uses are added. There is no cycle, and the batch-5 trf/pod citations are generic isomorphism-pullback coherence, which I accept. Sources: BS Remark 6.8.15 (l.4151) and Lemma 6.5.9 (l.3222); Stacks 07A4, 03EL and 0GMX, labels confirmed in the files. No SGA source is used.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.Paper.AdicRealizationIsomorphismNormalization",
+  "declaration": "WeilConjectures.AdicQbarRealization.adic_realization_isomorphism_normalization",
+  "declarations": [
+   "WeilConjectures.AdicQbarRealization.adic_realization_isomorphism_normalization"
+  ],
+  "file": "lean/Sheaf/Paper/AdicRealizationIsomorphismNormalization.lean",
+  "statement": "theorem adic_realization_isomorphism_normalization (l : ℕ) [Fact l.Prime] (D : FiniteFieldDatum.{u}) (hl : l ≠ D.p) (R : ∀ T : GeometricSpace D, LocallyFiniteAdicRealization.Realization l T.base.left) (A : ∀ T : GeometricSpace D, letI := fun x ↦ sfQbarLocalizationResidueInvertible l D hl T.base.left T.base.hom x At l T.base.left (R T)) (N : ∀ (T : GeometricSpace D) (E : AlgebraicallyClosedCoefficients.Index l (PadicAlgCl l)), letI := fun x ↦ sfQbarLocalizationResidueInvertible l D hl T.base.left T.base.hom x FiniteNormalization l T.base.left (R T) (A T) E) (P : ∀ T : GeometricSpace D, (sectionFunctor l T.base.left (R T)).IsEquivalence) (H : ∀ T : GeometricSpace D, letI := fun x ↦ sfQbarLocalizationResidueInvertible l D hl T.base.left T.base.hom x HomLaws l T.base.left (R T) (A T)) : ∃ F : Family l D, (∀ T, (F.data T).realization = R T) ∧ (∀ T, HEq (F.data T).tensor (A T)) ∧ (∀ T E, HEq ((F.data T).finite E) (N T E)) ∧ ∀ (T U : GeometricSpace D) (g : T.base.left ≅ U.base.left) (K : GeneralAlgebraicallyClosedCoefficients.Pair l (PadicAlgCl l) U.base.left) (L : AlgebraicallyClosedCoefficients.Index l (PadicAlgCl l)) (h : K.stage ≤ L), letI := (F.data T).units letI := (F.data U).units (ordinary l T.base.left (F.data T).realization).map ((commonStageDerivedPullback l (PadicAlgCl l) g.hom).map (StageSystem.isoToStage (GeneralAlgebraicallyClosedCoefficients.stageSystem l (PadicAlgCl l) U.base.left) K h).hom) ≫ (F.comparison T U g).hom.app ((GeneralAlgebraicallyClosedCoefficients.inclusion (l := l) (Ω := PadicAlgCl l) (Y := U.base.left) L).obj (K.toStage h)) = (F.comparison T U g).hom.app K ≫ (derivedPull l T.base.left g.hom (F.ring T U g)).map ((ordinary l U.base.left (F.data U).realization).map (StageSystem.isoToStage (GeneralAlgebraicallyClosedCoefficients.stageSystem l (PadicAlgCl l) U.base.left) K h).hom)",
+  "branch": "newtargets-dag",
+  "by": "Q119",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "Reviewer FIX (H3): the delivered conclusion ∃ F : Family with (F.data T).realization = R T also asserted, for the given realizations, every SpaceData field, in particular the section-module equivalence (sectionFunctor IsEquivalence) and the HomLaws of the given Hom map; the node neither states nor proves these. They are now hypotheses P and H (the established properties of the fixed realization, as in the sibling AdicAmbientHomEvaluationComparison); exactness, full faithfulness and essential image follow from R and P. No stmt_deps change.",
+  "fixed_by": "NT-stage2-cc-5c09854ea"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-5c09854ea",
+  "group": "Q119",
+  "result": "fix",
+  "note": "H3 fixed: the conclusion ∃ F : Family with (F.data T).realization = R T and tensor ≍ A T also asserted SpaceData.presentation (sectionFunctor IsEquivalence, a real theorem not in Realization or the deps) and HomLaws for the given R/A, which the node neither states nor proves. Added hypotheses P (presentation) and H (HomLaws); exactness, full faithfulness and essential image follow from R+P. No stmt_deps change. fixes/AdicRealizationIsomorphismNormalization.lean + lem-sf-adic-realization-isomorphism-normalization.lean-record.json (statement verbatim); nt_compile --json clean in 2.6 s, control compile errors as expected. Otherwise clause-by-clause correct: comparison pinned by integralRealizationAgreement (specified completion map inverse, balanced reindexing), tensor/unit/Hom (permitted pairs), identity (sourceId_unit)/composition, arbitrary non-k-linear g, edge cases and universes fine; both new existing:true def nodes well-formed and acyclic. M1 maintainer note: the item imports the parent module AdicQbarConstructibleRealization (parent lem-sf-adic-qbar-constructible-realization proof_deps contain the item) through existing:true def-sf-adic-realization-isomorphism-data, a stage-3 import cycle the group cannot fix (parent outside closure); move the five package defs into a def-node-owned module. Advisories: the final mixed-square clause is comparison naturality (content carried by integral_normalization); Second-reading section uses dispatcher wording (H11 advisory); def-sf-native-adic-* owners reached only via the new def node."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-3d4c5",
+  "group": "B9",
+  "result": "pass",
+  "landing": "20261025T142905-L-826383",
+  "kind": "interface",
+  "note": "independent cc review: item proof assembly + 4 split statements against AdicRealizationFamilyData Family/FamilyCore fields and pinning structures (RingReindex, IntegralReindex, ReindexTensor); item node proof_deps against Lean; unit sk-prop-sfb-cartesian-coefficients against core child proof_deps; importers AdicQbarConstructibleRealization + NativeWeilScalarFrobeniusCounit compiled against delivered modules"
+ }
+}

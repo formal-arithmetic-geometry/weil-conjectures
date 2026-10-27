@@ -1,0 +1,225 @@
+{
+ "id": "lem-sfb-abelian-line-bundle-degree-square",
+ "kind": "statement",
+ "title": "Degree of a line-bundle homomorphism from its top intersection",
+ "statement": "Let $k$ be an algebraically closed field [def-weil-field, def-weil-algebraic-closure] and $A/k$ an abelian variety [def-sc-abelian-variety] of dimension $g\\geq1$ [def-kun-topological-krull-dimension]. For any invertible sheaf $N$ on $A$ [def-sc-invertible-module], let $\\phi_N:A\\to A^\\vee$ be the homomorphism of [lem-sfb-abelian-polarization-calculus]. For any group-scheme homomorphism $h:A\\to A^\\vee$ [def-sc-group-scheme] define $d(h)$ to be its degree if it is an isogeny [def-sc-isogeny], and zero otherwise; the degree of an isogeny is the dimension over $k$ of the coordinate algebra of its finite scheme-theoretic kernel. Then\n$$d(\\phi_N)=\\left(\\frac{(N^g\\cdot A)}{g!}\\right)^2\\quad\\text{in }\\mathbf Q,$$\nwhere the intersection number is [def-sc-intersection-number]. No ampleness or nondegeneracy of $N$ is assumed.",
+ "source": {
+  "document": "literature/milne-abelian-varieties_AV.pdf",
+  "place": "Chapter I, Theorem 11.1(a),(b), printed p.54, with the zero-degree convention for non-isogenies preceding Theorem 10.9, printed p.46. Combine the degree/Euler-characteristic square formula with abelian Riemann–Roch; the identity applies to arbitrary invertible sheaves."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-weil-algebraic-closure",
+  "def-sc-abelian-variety",
+  "def-kun-topological-krull-dimension",
+  "def-sc-invertible-module",
+  "lem-sfb-abelian-polarization-calculus",
+  "def-sc-group-scheme",
+  "def-sc-isogeny",
+  "def-sc-intersection-number"
+ ],
+ "proof": [
+  {
+   "text": "Put $c=\\chi(A,N)$. Apply [lem-sfb-abelian-euler-tensor-homogeneity] to the given $A,N$: for every integer $m$, $\\chi(A,N^{\\otimes m})=m^gc$. Consequently, for integers $n_1,\\ldots,n_g$, tensoring powers of the same invertible sheaf gives $\\chi(A,N^{\\otimes n_1}\\otimes\\cdots\\otimes N^{\\otimes n_g})=c(n_1+\\cdots+n_g)^g$. The input requires exactly algebraic closedness, an abelian variety of positive dimension, and invertibility, all assumed here; it does not require ampleness.",
+   "uses": [
+    "lem-sfb-abelian-euler-tensor-homogeneity"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-abelian-varieties_AV.pdf",
+    "place": "Chapter I, Theorem 11.1(b), printed p.54; homogeneous Euler-polynomial consequence"
+   }
+  },
+  {
+   "text": "Use [def-sc-intersection-number] with $X=Z=A$, the identity closed immersion and $\\mathcal L_j=N$ for every $j$. The polynomial defining $(N^g\\cdot A)$ is therefore $c(n_1+\\cdots+n_g)^g$. Equality of its integer values determines the polynomial over $\\mathbf Q$: fixing all but one variable gives infinitely many roots of the difference, and repeating in each variable makes every coefficient vanish. The coefficient of $n_1\\cdots n_g$ is $c\\,g!$, since each of the $g$ factors must contribute a different variable and there are $g!$ permutations. Thus $(N^g\\cdot A)=g!c$. Since $g!$ is nonzero in $\\mathbf Q$, $c=(N^g\\cdot A)/g!$.",
+   "uses": [
+    "def-sc-intersection-number"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 0BEP, definition-intersection-number; coefficient calculation after the homogeneous Euler identity"
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-abelian-euler-degree-square] to $A,N$. Its homomorphism is the same $\\phi_N$ and its degree uses the same scheme-theoretic kernel length, with value zero when the homomorphism is not an isogeny. It gives $d(\\phi_N)=c^2$. In particular this step covers a positive-dimensional kernel; no assumption that $\\phi_N$ is an isogeny has entered.",
+   "uses": [
+    "lem-sfb-abelian-euler-degree-square"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-abelian-varieties_AV.pdf",
+    "place": "Chapter I, Theorem 11.1(a), printed p.54; degree-zero convention at printed p.46"
+   }
+  },
+  {
+   "text": "Embed the integer equality of step 3 into $\\mathbf Q$ and substitute $c=(N^g\\cdot A)/g!$ from step 2. This gives $d(\\phi_N)=((N^g\\cdot A)/g!)^2$, as required.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-abelian-varieties_AV.pdf",
+    "place": "Chapter I, Theorem 11.1(a),(b), printed p.54; algebraic assembly"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-abelian-euler-tensor-homogeneity",
+  "def-sc-intersection-number",
+  "lem-sfb-abelian-euler-degree-square"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/milne-abelian-varieties_AV.pdf",
+  "place": "Chapter I, Theorem 11.1(a),(b), printed p.54, assembled using the existing Stacks Tag 0BEP intersection-number convention."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For a line bundle M on an abelian variety of dimension g the degree of its polarization homomorphism is the square of its top intersection number divided by g factorial",
+   "results": "8 hits; top: WeierstrassCurve.natDegree_preΨ', WeierstrassCurve.natDegree_preΨ, WeierstrassCurve.natDegree_ΨSq, WeierstrassCurve.natDegree_preΨ_le, WeierstrassCurve.natDegree_preΨ'_le, RootPairing.PolarizationIn_eq, RootPairing.PolarizationIn_apply, RootPairing.PolarizationIn",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern division-polynomial degrees on elliptic curves, root-system or bilinear-form polarization, and linear duality; none is abelian Riemann–Roch or the degree of a line-bundle homomorphism"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The degree of a homomorphism associated to a line bundle on an abelian variety equals its Euler characteristic squared by Riemann Roch",
+   "results": "8 hits; top: WeierstrassCurve.natDegree_Φ, WeierstrassCurve.natDegree_ΨSq, WeierstrassCurve.natDegree_preΨ, WeierstrassCurve.natDegree_Φ_le, WeierstrassCurve.natDegree_preΨ', WeierstrassCurve.natDegree_preΨ'_le, WeierstrassCurve.natDegree_preΨ_le, WeierstrassCurve.natDegree_ΨSq_le",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern division-polynomial degrees on elliptic curves, root-system or bilinear-form polarization, and linear duality; none is abelian Riemann–Roch or the degree of a line-bundle homomorphism"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"isogeny\"",
+   "results": "0 hits; top: ",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern division-polynomial degrees on elliptic curves, root-system or bilinear-form polarization, and linear duality; none is abelian Riemann–Roch or the degree of a line-bundle homomorphism"
+  },
+  {
+   "tool": "grep",
+   "query": "polarization|riemannRoch|riemann_roch|eulerChar.*sq",
+   "results": "25 hits; top: Mathlib/LinearAlgebra/BilinearForm/Properties.lean, Mathlib/LinearAlgebra/BilinearForm/Properties.lean, Mathlib/LinearAlgebra/BilinearForm/Properties.lean, Mathlib/LinearAlgebra/BilinearForm/Properties.lean, Mathlib/LinearAlgebra/BilinearForm/Properties.lean, Mathlib/LinearAlgebra/RootSystem/Finite/CanonicalBilinear.lean, Mathlib/LinearAlgebra/RootSystem/Finite/CanonicalBilinear.lean, Mathlib/LinearAlgebra/RootSystem/Finite/CanonicalBilinear.lean",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern division-polynomial degrees on elliptic curves, root-system or bilinear-form polarization, and linear duality; none is abelian Riemann–Roch or the degree of a line-bundle homomorphism"
+  },
+  {
+   "tool": "grep",
+   "query": "riemannRoch|riemann_roch|polarization",
+   "results": "0 hits; top: ; subdirectory AlgebraicGeometry",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern division-polynomial degrees on elliptic curves, root-system or bilinear-form polarization, and linear duality; none is abelian Riemann–Roch or the degree of a line-bundle homomorphism"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The degree of the line bundle homomorphism to the dual abelian variety is the square of top intersection divided by factorial",
+   "results": "8 hits; top: LinearMap.det_dualMap, WeierstrassCurve.Affine.degree_polynomial, exteriorPower.pairingDual_ιMulti_ιMulti, Polynomial.degreeMonoidHom, WeierstrassCurve.natDegree_Ψ₂Sq_pos, WeierstrassCurve.natDegree_preΨ₄_pos, WeierstrassCurve.natDegree_preΨ_le, HomogeneousLocalization.NumDenSameDeg.deg_mul",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern division-polynomial degrees on elliptic curves, root-system or bilinear-form polarization, and linear duality; none is abelian Riemann–Roch or the degree of a line-bundle homomorphism"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Degree of the homomorphism from an abelian variety to its dual defined by an arbitrary line bundle equals the square of its top self intersection divided by factorial",
+   "results": "8 hits; top: WeierstrassCurve.natDegree_preΨ', WeierstrassCurve.natDegree_preΨ, WeierstrassCurve.natDegree_Φ, WeierstrassCurve.natDegree_Φ_le, WeierstrassCurve.natDegree_ΨSq, WeierstrassCurve.natDegree_preΨ'_le, WeierstrassCurve.natDegree_preΨ_le, WeierstrassCurve.natDegree_ΨSq_pos",
+   "date": "2026-10-23",
+   "verdict": "no match: returned declarations concern division polynomials, abstract linear duality, root pairings, ordinary complex or poset Euler characteristics, tensor algebra, or analytic Riemann integration; none states this identity for line bundles on abelian varieties"
+  },
+  {
+   "tool": "grep",
+   "query": "riemannRoch|riemann_roch|polarization|eulerChar",
+   "results": "0 hits; top: ; subdirectory AlgebraicGeometry",
+   "date": "2026-10-23",
+   "verdict": "no match: returned declarations concern division polynomials, abstract linear duality, root pairings, ordinary complex or poset Euler characteristics, tensor algebra, or analytic Riemann integration; none states this identity for line bundles on abelian varieties"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Degree of a line bundle homomorphism equals Euler characteristic squared on an abelian variety",
+   "results": "8 hits; top: CochainComplex.HomComplex.Triplet.q, IncidenceAlgebra.eulerChar, LinearMap.charpoly_natDegree, WeierstrassCurve.Affine.degree_polynomial, Polynomial.degreeMonoidHom, HomogeneousLocalization.NumDenSameDeg.deg_smul, LinearMap.polyCharpoly_natDegree, LinearMap.det_eq_sign_charpoly_coeff",
+   "date": "2026-10-23",
+   "verdict": "no match: returned declarations concern division polynomials, abstract linear duality, root pairings, ordinary complex or poset Euler characteristics, tensor algebra, or analytic Riemann integration; none states this identity for line bundles on abelian varieties"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"isogeny\"",
+   "results": "0 hits; top: ",
+   "date": "2026-10-23",
+   "verdict": "no match: returned declarations concern division polynomials, abstract linear duality, root pairings, ordinary complex or poset Euler characteristics, tensor algebra, or analytic Riemann integration; none states this identity for line bundles on abelian varieties"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An abelian variety line bundle has degree of associated dual homomorphism equal to Euler characteristic squared and Euler characteristic is top intersection over factorial",
+   "results": "8 hits; top: WeierstrassCurve.natDegree_Φ, WeierstrassCurve.natDegree_preΨ', WeierstrassCurve.natDegree_ΨSq, WeierstrassCurve.natDegree_preΨ, WeierstrassCurve.natDegree_preΨ'_le, WeierstrassCurve.natDegree_preΨ_le, WeierstrassCurve.natDegree_preΨ'_pos, WeierstrassCurve.natDegree_preΨ_pos",
+   "date": "2026-10-23",
+   "verdict": "no match: returned declarations concern division polynomials, abstract linear duality, root pairings, ordinary complex or poset Euler characteristics, tensor algebra, or analytic Riemann integration; none states this identity for line bundles on abelian varieties"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-abelian-trace-intersection",
+  "date": "2026-10-23",
+  "group": "Q104"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Smooth-curve abelian level rigidification. Geometric stabilizer input for the smooth full-level cover; restrict to geometric curves before passing to families. Auxiliary input: Prime-to-characteristic level rigidity for polarized abelian varieties. Supporting input in the level-rigidity proof: Chapter I, Proposition 14.4(a), printed p.62; polarization convention in I §11, printed p.53. Supporting fact for Proposition 14.4(a): Chapter I §14, printed p.61 (Rosati formula and involution), Theorem 14.3, printed p.62 (positive trace form); §11 p.53 (polarization isogeny); Proposition 10.20, printed pp.50–52 (trace on Tate modules). Supporting input: Chapter I, Theorem 14.3, printed p.62, displayed trace/intersection identity; Proposition 10.20, p.50, identifies its trace with Tate trace. The displayed identity is stated for alpha alpha-dagger; cyclicity of ordinary trace gives the order used here. The calculation is omitted by these notes (reference there: Milne 1986 §17). Supporting calculation: Chapter I, Theorem 11.1(a),(b), printed p.54, with the zero-degree convention for non-isogenies preceding Theorem 10.9, printed p.46. Combine the degree/Euler-characteristic square formula with abelian Riemann–Roch; the identity applies to arbitrary invertible sheaves.",
+   "via": [
+    "lem-sfb-abelian-trace-intersection",
+    "lem-sfb-rosati-trace-positive",
+    "lem-sfb-polarized-abelian-automorphisms-finite",
+    "lem-sfb-polarized-abelian-odd-level-rigidity",
+    "lem-sfb-geometric-curve-level-faithfulness",
+    "lem-sfb-smooth-curve-abelian-level-rigidification",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-abelian-line-bundle-degree-square",
+  "worker": "stage1",
+  "summary": "Read Milne AV I Theorem 11.1(a),(b) and the non-isogeny degree convention. Isolated the Euler-characteristic square theorem and the homogeneous Euler tensor-power theorem as two distinct statement-only inputs; extracted the factorial normalization directly from the existing intersection definition. Checked arbitrary invertible sheaves including degenerate and anti-ample examples. No statement change or Lean attachment. All searches are actual logged queries.",
+  "blueprint": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Smooth-curve abelian level rigidification. Geometric stabilizer input for the smooth full-level cover; restrict to geometric curves before passing to families. Auxiliary input: Prime-to-characteristic level rigidity for polarized abelian varieties. Supporting input in the level-rigidity proof: Chapter I, Proposition 14.4(a), printed p.62; polarization convention in I §11, printed p.53. Supporting fact for Proposition 14.4(a): Chapter I §14, printed p.61 (Rosati formula and involution), Theorem 14.3, printed p.62 (positive trace form); §11 p.53 (polarization isogeny); Proposition 10.20, printed pp.50–52 (trace on Tate modules). Supporting input: Chapter I, Theorem 14.3, printed p.62, displayed trace/intersection identity; Proposition 10.20, p.50, identifies its trace with Tate trace. The displayed identity is stated for alpha alpha-dagger; cyclicity of ordinary trace gives the order used here. The calculation is omitted by these notes (reference there: Milne 1986 §17). Supporting calculation: Chapter I, Theorem 11.1(a),(b), printed p.54, with the zero-degree convention for non-isogenies preceding Theorem 10.9, printed p.46. Combine the degree/Euler-characteristic square formula with abelian Riemann–Roch; the identity applies to arbitrary invertible sheaves. This split realizes the supporting degree/top-intersection calculation using the two coherent Euler inputs; chapter and unit routes are unchanged.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q50-2cb12de90",
+  "group": "Q50",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q50-2cb12de90 (reviewer sub-agent of L); spot-checked: I read Milne AV Theorem 11.1(a),(b) (printed p.54, PDF p.60) and the zero-degree convention before Theorem 10.9 (printed p.46). The item statement is unchanged and is faithful to them: arbitrary invertible N, g>=1, degree = kernel length (def-sc-isogeny's order of the kernel = dim_k Gamma), and 0 for a non-isogeny. Step 1 cites the tensor-homogeneity node with exactly the same hypotheses, and the extension to signed tensor powers is elementary. Step 2 is correctly marked elementary: with X=Z=A and i=id in def-sc-intersection-number (Tag 0BEP), the polynomial equals c(sum n_i)^g on Z^g, so the coefficient of n_1...n_g is g!c, divided in Q. Step 3 cites the degree-square node, which uses the same phi_N from polarization-calculus and the same zero convention. Step 4 is substitution in Q. Both new nodes are self-contained, statement-only and true, and neither restates the item. Degree-square is Milne 11.1(a), and it vanishes on positive-dimensional K(L) by Mumford's vanishing theorem. Homogeneity follows from Riemann-Roch and (nD)^g=n^g D^g, and at n=0 it agrees with chi(O_A)=0. I tested both on O_A, an elliptic curve with any degree, a pullback to E x E, and L^{-1}. A statement scan of the whole DAG for abelian-variety nodes mentioning chi, degree or Riemann-Roch found no duplicate; Hilbert/Snapper polynomiality and lem-sc-isogeny-degree are different results. Batch-5 flag: the new node cites lem-sfb-abelian-polarization-calculus only to construct A^vee and phi_L. That is a general abelian-variety construction, not given by the trace formula or Poincare duality and not a step of their proofs, and the item already cited the same node on the base for the same phi_N, so it is outside the assumptions. No tool_uses, no SGA, no cycle. blueprint.from.node is null, inherited from the base item. No changes made."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.AbelianVariety.LineBundleDegreeSquare",
+  "declaration": "AlgebraicGeometry.IsAbelianVariety.line_bundle_degree_square",
+  "file": "lean/Sheaf/AlgebraicGeometry/AbelianVariety/LineBundleDegreeSquare.lean",
+  "statement": "theorem IsAbelianVariety.line_bundle_degree_square {k : Type u} [Field k] [IsAlgClosed k] (A : Over (Spec (.of k))) [GrpObj A] [IsAbelianVariety A] (g : ℕ) (_hg : 1 ≤ g) (hA : topologicalKrullDim A.left = ((g : ℕ∞) : WithBot ℕ∞)) (D : AbelianDualPoincareDatum A) (N : A.left.Modules) [N.IsInvertible] (φ : A ⟶ D.dual) [IsMonHom φ] (_hφ : ClassifiesAbelianDifference D N φ) : @ite ℚ (IsIsogeny φ) (Classical.propDecidable _) (isogenyDegree φ : ℚ) 0 = (@Scheme.Modules.selfIntersectionNumber k _ A.left ⟨A.hom⟩ (inferInstance : IsProper A.hom) A.left inferInstance (𝟙 A.left) inferInstance g hA N inferInstance / (Nat.factorial g : ℚ)) ^ 2",
+  "branch": "sheaf-dag",
+  "by": "Q128",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-88125601e",
+  "group": "Q128",
+  "result": "pass",
+  "note": "Statement matches the node and Milne AV I Thm 11.1(a),(b) clause by clause: alg-closed k : Type u; A abelian variety (GrpObj+IsAbelianVariety); g>=1 with topologicalKrullDim = g; arbitrary invertible N; phi_N given by any AbelianDualPoincareDatum D (fixed up to unique iso by its universal property, group law pinned by tensorGroupLaw) and ClassifiesAbelianDifference D N phi, which names phi_N uniquely by polarization-calculus clause 2 (IsMonHom binder is implied by it); d(phi) = ite IsIsogeny (isogenyDegree = finrankΓ of the scheme-theoretic kernel) 0; right side = selfIntersectionNumber with Z=A, identity immersion, all L_j=N, divided by g! and squared in Q. No ampleness or isogeny assumption, no universe restriction. Edge cases O_A, elliptic curve degree d incl. d<=0, E×E pullback, anti-ample with g odd, char-p nonreduced kernel are all consistent. lean.statement verbatim; only the lean field differs from live; sorry only; docstrings carry source place, blueprint tag and the 4-step proof plan; both imports needed; no duplicate found; not superseded. No compile run (no file changed). Advisory: the second reading is the worker's self-reading."
+ }
+}

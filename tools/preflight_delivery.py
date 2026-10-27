@@ -273,6 +273,9 @@ def main_stage3(argv: list[str]) -> int:
 
 
 def main() -> int:
+    import nodefiles, textcache
+    nodefiles.enable()        # 2026-10-24 (cpu): each node file parsed once in this process
+    textcache.use_shared()    # 2026-10-24 (cpu): SHEAF_LEANINDEX_CACHE, set by the server preflight for its slots
     if "--stage" in sys.argv[1:] or any(a.startswith("--stage=") for a in sys.argv[1:]):
         argv = sys.argv[1:]
         st = next((a.split("=", 1)[1] for a in argv if a.startswith("--stage=")), None)
@@ -506,7 +509,21 @@ def main() -> int:
     if not is_def and st == "split":
         if not isinstance(pf, list) or not pf:
             f("the item has no proof steps")
-    form_checks(f, warns, "the item's statement", d.get("statement") or "")
+    # 2026-10-27 (lead): the form checks B2/B4 refuse only a statement the delivery writes. A statement left unchanged
+    # against the base (a re-split note asks to keep it) is not the delivery's text: its findings are printed, not
+    # refused (a TeX row break \\ before a letter looks like a doubled backslash; "In the setting of [node]" cites).
+    _bstmt = None
+    if item in base_ids:
+        try:
+            _bstmt = load_at(base, base_ids[item]).get("statement")
+        except Exception:  # noqa: BLE001
+            _bstmt = None
+    if _bstmt is not None and (_bstmt or "") == (d.get("statement") or ""):
+        _sf: list[str] = []
+        form_checks(_sf.append, warns, "the item's statement", d.get("statement") or "")
+        warns.extend(x + " [statement unchanged against the base: recorded, not refused]" for x in _sf)
+    else:
+        form_checks(f, warns, "the item's statement", d.get("statement") or "")
     for c in CITE.findall(d.get("statement") or ""):
         if c not in all_ids:
             f(f"the item's statement cites [{c}], which is no node (B3)")
@@ -569,8 +586,7 @@ def main() -> int:
 
     # 7. the scripts
     if not dirty:
-        r = subprocess.run([sys.executable, "tools/review_split.py", item], cwd=ROOT, capture_output=True, text=True)
-        out = (r.stdout + r.stderr).strip()
+        out = review_split_output(item)
         if "PASS" not in out.splitlines()[0] if out else True:
             f("tools/review_split.py does not pass:\n   " + "\n   ".join(out.splitlines()[:12]))
         import dag_delta
@@ -603,6 +619,29 @@ def main() -> int:
 
     print_result(fails, warns)
     return 1 if fails else 0
+
+
+def review_split_output(item: str) -> str:
+    """The output (stdout, then stderr, stripped) of `python3 tools/review_split.py <item>` run in ROOT. 2026-10-24 (cpu):
+    run in this process, so that it shares the parsed node files (tools/nodefiles.py) instead of reading all of them again
+    in a new interpreter; if it raises, the separate process is run as before."""
+    import contextlib, io, os
+    so, se = io.StringIO(), io.StringIO()
+    argv, cwd = sys.argv, os.getcwd()
+    try:
+        import review_split
+        sys.argv = [str(ROOT / "tools" / "review_split.py"), item]
+        os.chdir(ROOT)
+        with contextlib.redirect_stdout(so), contextlib.redirect_stderr(se):
+            review_split.main()
+        return (so.getvalue() + se.getvalue()).strip()
+    except Exception:  # noqa: BLE001
+        pass
+    finally:
+        sys.argv = argv
+        os.chdir(cwd)
+    r = subprocess.run([sys.executable, "tools/review_split.py", item], cwd=ROOT, capture_output=True, text=True)
+    return (r.stdout + r.stderr).strip()
 
 
 DOUBLED = re.compile(r"\\\\[A-Za-z]")

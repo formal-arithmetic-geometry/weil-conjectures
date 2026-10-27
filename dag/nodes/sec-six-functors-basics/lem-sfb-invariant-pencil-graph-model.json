@@ -1,0 +1,314 @@
+{
+ "id": "lem-sfb-invariant-pencil-graph-model",
+ "kind": "statement",
+ "title": "Invariant rational functions and their normalized equivariant graph",
+ "statement": "Let $k$ be a field, let $N$ be a normal projective geometrically integral finite-type $k$-scheme, and let a finite group $H$ act semilinearly on $N$ and $k$. Put $E=k(N)$. Let $r\\geq0$ and let $t_1,\\ldots,t_r\\in E$ be algebraically independent over $k$ and fixed by every element of $H$. Give $P=\\mathbf P^r_k$ the action induced by that on $k$, fixing the homogeneous coordinates. There is an $H$-invariant dense open $V\\subseteq N$ on which $[1:t_1:\\cdots:t_r]$ defines an equivariant morphism $v:V\\to P$. Let $Z$ be the scheme-theoretic closure of its graph in $N\\times_kP$, and let $X'$ be the normalization of $Z$ in $E$. Then $Z$ is integral, the projection $Z\\to N$ identifies $k(Z)$ with $E$ and is an isomorphism over $V$, and $X'$ is normal projective geometrically integral of finite type over $k$. The diagonal action on the graph extends to $Z$ and lifts to a semilinear action on $X'$. The resulting projections $a:X'\\to N$ and $b:X'\\to P$ are equivariant H-projective morphisms; $a$ is proper, surjective and birational and is an isomorphism over $V$, while $b$ is dominant and proper and induces precisely the inclusion $k(P)=k(t_1,\\ldots,t_r)\\subseteq E$.\n\nThe notions used are [def-weil-field], [def-pc-integral-scheme], [def-weil-finite-type-morphism], [def-weil-proper-morphism], [def-kun-projective], [def-sc-function-field], [def-sc-normalization], [def-pc-geometrically-irreducible], [def-nagata-scheme-theoretic-image], [def-pc-fibre-product], [def-weil-pbc-transcendence-basis], [def-kun-transcendence-degree], [def-sfb-dominant-function-field-map]. Normal means that every local ring is an integrally closed domain. A projective morphism here means an H-projective morphism: it admits a closed immersion into a finite-dimensional projective space over its target. A semilinear $H$-action means actions by scheme automorphisms and by field automorphisms of $k$, with the structure morphisms equivariant; faithfulness is not assumed. A birational morphism here identifies the function fields and is an isomorphism over a dense open of the target.",
+ "source": {
+  "document": "literature/de-jong-families-curves-alterations-1997.pdf",
+  "place": "Lemma 5.2 proof, printed p.613, invariant rational map and normal projective modification. Expanded graph construction: Stacks morphisms.tex Tag 01R8 (lemma-quasi-compact-scheme-theoretic-image), constructions.tex Tag 01WD (lemma-segre-embedding). Local PDF WANTED; publisher PDF read online.",
+  "url": "https://aif.centre-mersenne.org/item/10.5802/aif.1575.pdf"
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-pc-integral-scheme",
+  "def-weil-finite-type-morphism",
+  "def-weil-proper-morphism",
+  "def-kun-projective",
+  "def-sc-function-field",
+  "def-sc-normalization",
+  "def-pc-geometrically-irreducible",
+  "def-nagata-scheme-theoretic-image",
+  "def-pc-fibre-product",
+  "def-weil-pbc-transcendence-basis",
+  "def-kun-transcendence-degree",
+  "def-sfb-dominant-function-field-map"
+ ],
+ "proof": [
+  {
+   "text": "Write $\\eta$ for the generic point of $N$. Represent each $t_i\\in\\mathcal O_{N,\\eta}$ by a section on a neighbourhood of $\\eta$, and intersect these finitely many neighbourhoods to obtain $U$. Set $V=\\bigcap_{h\\in H}h(U)$. Every translate contains $\\eta$, so $V$ is a dense invariant open. On $V$ the sections define a ring map $k[T_1,\\ldots,T_r]\\to\\Gamma(V,\\mathcal O_V)$, hence a morphism to the chart $D_+(T_0)\\subset P$ by [lem-weil-pbc-morphism-into-affine-scheme] and [lem-weil-pbc-projective-space-standard-charts]. Its composite is $v=[1:t_1:\\cdots:t_r]$. For each $h$, the morphisms $v\\circ h$ and $h_P\\circ v$ land in this chart. Their pullbacks agree on coefficients by semilinearity and on $T_i/T_0$ because $t_i$ is fixed in $E$. These equalities of germs are equalities of sections by [lem-sc-integral-scheme-stalks-in-function-field], so the affine-morphism bijection gives equivariance. This uses representatives of germs, finite intersections and the cited coordinate descriptions.",
+   "uses": [
+    "lem-sc-integral-scheme-stalks-in-function-field",
+    "lem-weil-pbc-morphism-into-affine-scheme",
+    "lem-weil-pbc-projective-space-standard-charts"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 01RV (lemma-integral-scheme-rational-functions), generic-stalk representatives; Constructions Tag 01NG (lemma-standard-covering-projective-space), Schemes Tag 01I1 (lemma-morphism-into-affine)."
+   }
+  },
+  {
+   "text": "The field $k$ is Noetherian (its only ideals are $0$ and $k$), hence $N$ is Noetherian by [lem-weil-pbc-finite-type-over-noetherian]. By [lem-weil-pbc-noetherian-open-subscheme-noetherian], every open of $N$, including $V$, is quasi-compact. Put $M=N\\times_kP$ and $j=(\\mathrm{id},v):V\\to M$. Projective space is separated by [lem-weil-pbc-projective-space-proj-separated]. The graph $V\\to V\\times_kP$ is the pullback of its closed diagonal along $(v\\circ\\operatorname{pr}_V,\\operatorname{pr}_P)$, hence a closed immersion by [lem-weil-pbc-closed-immersion-base-change]. Composing with the open immersion $V\\times_kP\\to M$ makes $j$ an immersion. It is quasi-compact: the preimage of any affine open of $M$ is an open of the Noetherian scheme $V$. Thus the scheme-image tools below have their quasi-compactness hypotheses.",
+   "uses": [
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "lem-weil-pbc-noetherian-open-subscheme-noetherian",
+    "lem-weil-pbc-projective-space-proj-separated",
+    "lem-weil-pbc-closed-immersion-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tags 01T6 (lemma-finite-type-noetherian), 01OW/01OZ (Noetherian opens); graph as base change of the separated diagonal; Constructions Tag 01MC (lemma-proj-separated)."
+   }
+  },
+  {
+   "text": "By [lem-trf-reduced-scheme-image], $Z=\\operatorname{SIm}(j)$ is reduced with underlying space $\\overline{j(|V|)}$. This space is nonempty and irreducible: $V$ is nonempty irreducible, and continuous images and closures preserve irreducibility. Hence $Z$ is integral by [def-pc-integral-scheme]. Apply [lemma-nagata-scheme-image-partial-section] to the quasi-compact open $V\\hookrightarrow N$ and the separated $P\\to\\operatorname{Spec}k$. It makes $p:Z\\to N$ an isomorphism over $V$. More precisely, $p^{-1}(V)\\to V$ is an isomorphism and $j$ factors through its inverse, so $j(V)=p^{-1}(V)$ as an open subscheme of $Z$. This open is dense because its image is the original graph and $|Z|=\\overline{j(|V|)}$. The generic point of $Z$ therefore lies in this open and maps to $\\eta$; the generic stalk map of $p$ is the stalk map of that open isomorphism. This identifies $k(Z)$ with $E$ by actual pullback, using [def-sc-function-field].",
+   "uses": [
+    "lem-trf-reduced-scheme-image",
+    "def-pc-integral-scheme",
+    "lemma-nagata-scheme-image-partial-section",
+    "lem-weil-pbc-projective-space-proj-separated",
+    "def-sc-function-field"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 056B (lemma-scheme-theoretic-image-reduced); Tag 0CNG (lemma-scheme-theoretic-image-of-partial-section); Tag 01RW (definition-function-field)."
+   }
+  },
+  {
+   "text": "Let $A_h$ be the diagonal automorphism of $M$. The equation $A_hj=jh$ shows that $A_h$ preserves the kernel ideal of $j$: a section vanishes after pullback along $j$ if and only if its transform vanishes, because pullback along $h$ is invertible. The affine kernel description in [lem-weil-pbc-scheme-image-qc-kernel] therefore identifies the transformed defining ideal of $Z$ with itself. Restricting $A_h$ to this closed subscheme gives $h_Z$ with $c h_Z=A_h c$, where $c:Z\\hookrightarrow M$. The restrictions obey the identity and multiplication laws: after composition with $c$ these are the laws for $A_h$, and a closed immersion is a monomorphism, as stated in the cited node. This gives a semilinear action, with both projections equivariant.",
+   "uses": [
+    "lem-weil-pbc-scheme-image-qc-kernel"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 01R8 (lemma-quasi-compact-scheme-theoretic-image), affine kernel characterization and restriction of the diagonal action."
+   }
+  },
+  {
+   "text": "Choose a closed immersion $e:N\\hookrightarrow\\mathbf P^m_k$ from projectivity. The map $e\\times\\mathrm{id}_P:M\\to\\mathbf P^m_k\\times_k\\mathbf P^r_k$ is a closed immersion by [lem-weil-pbc-closed-immersion-base-change]. Compose it with the Segre closed immersion of [lem-chow-segre] and with $c:Z\\hookrightarrow M$. By [lem-weil-pbc-closed-immersion-comp] this embeds $Z$ in $\\mathbf P^{(m+1)(r+1)-1}_k$. Thus $Z$ is projective in the finite-space convention [def-kun-projective], and proper by [lem-kun-projective-implies-proper], hence of finite type by [def-weil-proper-morphism]. The same projective-implies-proper result supplies properness of $N$ for the normalization tool.",
+   "uses": [
+    "def-kun-projective",
+    "lem-weil-pbc-closed-immersion-base-change",
+    "lem-chow-segre",
+    "lem-weil-pbc-closed-immersion-comp",
+    "lem-kun-projective-implies-proper",
+    "def-weil-proper-morphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/constructions.tex",
+    "place": "Constructions Tag 01WD (lemma-segre-embedding); closed-immersion base change/composition; projective implies proper."
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-equivariant-normal-projective-model] with its $X=N$, $T=Z$, $p:Z\\to N$ and $U=V$. Steps 2--5 give integral finite-type projective $Z$, its semilinear action, equivariance of $p$, the specified field isomorphism and the isomorphism over $V$; $N$ is normal integral proper of finite type by hypothesis and step 5. The normalization $n:X'\\to Z$ in $k(Z)=E$ is finite, surjective and birational. The cited statement gives $X'$ normal integral, projective and of finite type over $k$, the unique lifted semilinear action, and $a=pn$ equivariant, proper, surjective and H-projective, identifying $k(X')$ with $E$ and an isomorphism over $V$. Since $N$ is geometrically integral, its final clause gives geometric integrality of $Z$ and $X'$. Composing $n$ with the other projection defines the equivariant $b:X'\\to P$.",
+   "uses": [
+    "lem-sfb-equivariant-normal-projective-model"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Varieties Tag 0BXR (lemma-normalization-locally-algebraic); finite equivariant normalization tool; de Jong Lemma 5.2, printed p.613."
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-projective-fibre-product-closed-model] with its $X=P$, separated over $S=\\operatorname{Spec}k$ by [lem-weil-pbc-projective-space-proj-separated], $I=\\{1\\}$, $Y_1=X'$, $q_1=b$, a closed immersion $e_1:X'\\hookrightarrow\\mathbf P^n_k$ over $k$ from the projectivity of $X'$ in step 6 (its structure map is that of $P$ composed with the $k$-morphism $b$), and $c=\\mathrm{id}$. The one-factor fibre product is $X'$ with $r=b$, so $b$ is H-projective, with a closed immersion into $\\mathbf P^n_P$ over $P$, and proper. For dominance and the specified field map use $D_+(T_0)=\\operatorname{Spec}k[T_1,\\ldots,T_r]$. The standard charts have domain coordinate rings, and each overlaps $D_+(T_0)$ in the dense principal open obtained by inverting the nonzero coordinate $T_0/T_i$. Thus $P$ is integral and this chart is dense. At the generic point of $X'$, its coordinate map is $k[T_1,\\ldots,T_r]\\to E$, $T_i\\mapsto t_i$, by the construction on $V$. Algebraic independence means exactly that its kernel is zero. By [lem-weil-pbc-spec-field-point-residue-field] the generic point therefore maps to the zero prime, the generic point of $P$. Thus the image of $b$ contains a point whose closure is all of $P$, so $b$ is dominant. By [lem-sc-integral-function-field-affine-fraction], $k(P)=\\operatorname{Frac}k[T_1,\\ldots,T_r]$. The same residue-field statement identifies the induced map as the unique extension of polynomial evaluation, namely the inclusion $k(t_1,\\ldots,t_r)\\subset E$; [def-sfb-dominant-function-field-map] identifies it with the required generic stalk pullback. When $r=0$ these are the ring $k$ and $P=\\operatorname{Spec}k$.",
+   "uses": [
+    "lem-sfb-projective-fibre-product-closed-model",
+    "lem-weil-pbc-projective-space-proj-separated",
+    "lem-weil-pbc-projective-space-standard-charts",
+    "def-kun-transcendence-degree",
+    "lem-weil-pbc-spec-field-point-residue-field",
+    "lem-sc-integral-function-field-affine-fraction",
+    "def-sfb-dominant-function-field-map"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 0C4Q (lemma-projective-permanence), finite-space graph argument; Constructions Tag 01NG (standard charts); Tag 01RW (function field) and affine generic-point coordinate calculation."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sc-integral-scheme-stalks-in-function-field",
+  "lem-weil-pbc-morphism-into-affine-scheme",
+  "lem-weil-pbc-projective-space-standard-charts",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-weil-pbc-noetherian-open-subscheme-noetherian",
+  "lem-weil-pbc-projective-space-proj-separated",
+  "lem-weil-pbc-closed-immersion-base-change",
+  "lem-trf-reduced-scheme-image",
+  "def-pc-integral-scheme",
+  "lemma-nagata-scheme-image-partial-section",
+  "def-sc-function-field",
+  "lem-weil-pbc-scheme-image-qc-kernel",
+  "def-kun-projective",
+  "lem-chow-segre",
+  "lem-weil-pbc-closed-immersion-comp",
+  "lem-kun-projective-implies-proper",
+  "def-weil-proper-morphism",
+  "lem-sfb-equivariant-normal-projective-model",
+  "lem-sfb-projective-fibre-product-closed-model",
+  "def-kun-transcendence-degree",
+  "lem-weil-pbc-spec-field-point-residue-field",
+  "lem-sc-integral-function-field-affine-fraction",
+  "def-sfb-dominant-function-field-map"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+  "place": "Proof (3), alteration/finiteness input, expanded invariant rational-map modification of de Jong Lemma 5.2, printed p.613, using Stacks scheme-image and normalization tools."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Resolve a rational map given by invariant rational functions on a normal projective variety by the normalization of its graph equivariantly",
+   "results": "{\"t\": \"2026-10-22T06:07:20Z\", \"tool\": \"leanfinder\", \"query\": \"Resolve a rational map given by invariant rational functions on a normal projective variety by the normalization of its graph equivariantly\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.RationalMap.fromFunctionField\", \"AlgebraicGeometry.Scheme.RationalMap.fromFunctionField_ofFunctionField\", \"AlgebraicGeometry.Scheme.RationalMap.ofFunctionField\", \"AlgebraicGeometry.Scheme.RationalMap.fromFunctionField_toRationalMap\", \"AlgebraicGeometry.Scheme.PartialMap.fromFunctionField\", \"AlgebraicGeometry.Scheme.Hom.toNormalization\", \"AlgebraicGeometry.Scheme.Hom.normalizationDesc\", \"AlgebraicGeometry.Scheme.RationalMap.toPartialMap\"], \"digest\": \"7f2e411ba9271958\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: returned declarations checked; constituent normalization, rational-map, projectivization, fibre or field results do not state this full lemma or specialize to it in one line"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"RationalMap\"",
+   "results": "{\"t\": \"2026-10-22T06:08:02Z\", \"tool\": \"loogle\", \"query\": \"\\\"AlgebraicGeometry\\\", \\\"RationalMap\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.RationalMap\", \"AlgebraicGeometry.Scheme.RationalMap.id\", \"AlgebraicGeometry.Scheme.RationalMap.domain\", \"AlgebraicGeometry.Scheme.Hom.toRationalMap\", \"AlgebraicGeometry.Scheme.PartialMap.toRationalMap\", \"AlgebraicGeometry.Scheme.RationalMap.representative\", \"AlgebraicGeometry.Scheme.PartialMap.toRationalMap_surjective\", \"AlgebraicGeometry.Scheme.RationalMap.openCoverDomain\"], \"digest\": \"17fc852bc34c880c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: returned declarations checked; constituent normalization, rational-map, projectivization, fibre or field results do not state this full lemma or specialize to it in one line"
+  },
+  {
+   "tool": "grep",
+   "query": "([Gg]raph|[Pp]encil).*([Ee]quivariant|normalization)|invariant.*rational",
+   "results": "{\"t\": \"2026-10-22T06:08:01Z\", \"tool\": \"grep\", \"query\": \"([Gg]raph|[Pp]encil).*([Ee]quivariant|normalization)|invariant.*rational\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: returned declarations checked; constituent normalization, rational-map, projectivization, fibre or field results do not state this full lemma or specialize to it in one line"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A dominant equivariant rational map to projective space extends on the normalized closure of its graph and preserves the function field",
+   "results": "{\"t\": \"2026-10-22T06:08:29Z\", \"tool\": \"leansearch\", \"query\": \"A dominant equivariant rational map to projective space extends on the normalized closure of its graph and preserves the function field\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.PartialMap.fromFunctionField_restrict\", \"AlgebraicGeometry.Scheme.RationalMap.ofFunctionField\", \"AlgebraicGeometry.Scheme.RationalMap.fromFunctionField_toRationalMap\", \"AlgebraicGeometry.Scheme.RationalMap\", \"AlgebraicGeometry.Scheme.RationalMap.fromFunctionField\", \"AlgebraicGeometry.Scheme.PartialMap.noConfusionType\", \"AlgebraicGeometry.Scheme.RationalMap.fromFunctionField_ofFunctionField\", \"AlgebraicGeometry.IsDominant.rec\"], \"digest\": \"1acf31712dd132b3\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: returned declarations checked; constituent normalization, rational-map, projectivization, fibre or field results do not state this full lemma or specialize to it in one line"
+  },
+  {
+   "tool": "grep",
+   "query": "(graph|Graph).*(normaliz|equivariant)|invariant.*[Rr]ational",
+   "results": "{\"t\": \"2026-10-22T11:08:56Z\", \"tool\": \"grep\", \"query\": \"(graph|Graph).*(normaliz|equivariant)|invariant.*[Rr]ational\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: inspected returned signatures; relative normalization, partial rational maps and projectivization do not state the equivariant normalized-graph construction with projectivity and its specified function-field map."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Resolving a rational map to projective space by the normalized graph gives a proper birational equivariant modification",
+   "results": "{\"t\": \"2026-10-22T11:08:57Z\", \"tool\": \"leansearch\", \"query\": \"Resolving a rational map to projective space by the normalized graph gives a proper birational equivariant modification\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.RationalMap\", \"AlgebraicGeometry.Scheme.instIsOverCompHomOfIsOver\", \"AlgebraicGeometry.Scheme.PartialMap.noConfusionType\", \"AlgebraicGeometry.Scheme.Hom.toNormalization_normalizationDesc\", \"AlgebraicGeometry.Scheme.Hom.instIsAffineHomToNormalization\", \"AlgebraicGeometry.Scheme.PartialMap.restrict_toRationalMap\", \"AlgebraicGeometry.Scheme.RationalMap.exists_rep\", \"AlgebraicGeometry.Scheme.RationalMap.ofFunctionField\"], \"digest\": \"e9b15f77b0cb4857\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: inspected returned signatures; relative normalization, partial rational maps and projectivization do not state the equivariant normalized-graph construction with projectivity and its specified function-field map."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"normalization\"",
+   "results": "{\"t\": \"2026-10-22T11:08:57Z\", \"tool\": \"loogle\", \"query\": \"\\\"AlgebraicGeometry\\\", \\\"normalization\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Hom.normalization\", \"AlgebraicGeometry.Scheme.Hom.normalizationOpenCover\", \"AlgebraicGeometry.Scheme.Hom.instIsIntegralNormalization\", \"AlgebraicGeometry.Scheme.Hom.instIsReducedNormalization\", \"AlgebraicGeometry.Scheme.Hom.fromNormalization\", \"AlgebraicGeometry.Scheme.Hom.instIsDominantToNormalization\", \"AlgebraicGeometry.Scheme.Hom.instIsIntegralHomFromNormalization\", \"AlgebraicGeometry.Scheme.Hom.instQuasiCompactToNormalization\"], \"digest\": \"d48a5d2f8710c873\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: inspected returned signatures; relative normalization, partial rational maps and projectivization do not state the equivariant normalized-graph construction with projectivity and its specified function-field map."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An invariant tuple of rational functions gives an equivariant morphism to projective space after normalizing the closure of its graph",
+   "results": "{\"t\": \"2026-10-22T11:08:58Z\", \"tool\": \"leanfinder\", \"query\": \"An invariant tuple of rational functions gives an equivariant morphism to projective space after normalizing the closure of its graph\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Projectivization.lift\", \"Projectivization.lift_mk\", \"AlgebraicGeometry.Proj.fromOfGlobalSections\", \"WeierstrassCurve.Projective.toAffine\", \"AlgebraicGeometry.Proj.valuativeCriterion_existence_aux\", \"AlgebraicGeometry.Proj.awayι\", \"AlgebraicGeometry.ProjectiveSpectrum.Proj.awayToSection_apply\", \"AlgebraicGeometry.Scheme.RationalMap.fromFunctionField\"], \"digest\": \"21d41b7b518a0d6a\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: inspected returned signatures; relative normalization, partial rational maps and projectivization do not state the equivariant normalized-graph construction with projectivity and its specified function-field map."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-equivariant-curve-pencil",
+  "date": "2026-10-22",
+  "group": "Q78"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; equivariant curve pencil, de Jong Lemma 5.2; extracted argument: Invariant rational functions and their normalized equivariant graph",
+   "via": [
+    "lem-sfb-equivariant-curve-pencil",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-invariant-pencil-graph-model",
+  "worker": "stage1",
+  "summary": "Repair of the approved-but-not-promoted delivery: rebased the retained seven-step split onto the current live DAG through deliver.py, re-read all 23 distinct proof-dependency statements and checked all 28 verbatim citation pairs. The live item remains unsplit and has the same statement, statement dependencies, source and provenance; no dependency replacement is needed. Made explicit the equality of the graph with p^{-1}(V), its density in Z, the resulting generic-stalk identification, and the generic-point criterion for dominance. Retained the normalization and alteration route, all prior searches, and every existing tool; no new nodes or statement changes.",
+  "blueprint": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; equivariant curve pencil, de Jong Lemma 5.2; extracted argument: Invariant rational functions and their normalized equivariant graph",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-projective-space-standard-charts",
+    "why": "Generic scheme-geometry tool for the normalized graph in de Jong Lemma 5.2, without replacing the unit alteration route: Standard charts and coordinate sections of projective space over a scheme."
+   },
+   {
+    "node": "lem-trf-reduced-scheme-image",
+    "why": "Generic scheme-geometry tool for the normalized graph in de Jong Lemma 5.2, without replacing the unit alteration route: Scheme theoretic image of a reduced scheme."
+   },
+   {
+    "node": "lemma-nagata-scheme-image-partial-section",
+    "why": "Generic scheme-geometry tool for the normalized graph in de Jong Lemma 5.2, without replacing the unit alteration route: Scheme-theoretic image of a partial section."
+   },
+   {
+    "node": "lem-chow-segre",
+    "why": "Generic scheme-geometry tool for the normalized graph in de Jong Lemma 5.2, without replacing the unit alteration route: The Segre embedding is a closed immersion."
+   },
+   {
+    "node": "lem-kun-projective-implies-proper",
+    "why": "Generic scheme-geometry tool for the normalized graph in de Jong Lemma 5.2, without replacing the unit alteration route: Projective morphisms are proper."
+   },
+   {
+    "node": "lem-weil-pbc-spec-field-point-residue-field",
+    "why": "Generic scheme-geometry tool for the normalized graph in de Jong Lemma 5.2, without replacing the unit alteration route: Morphisms from the spectrum of a field to an affine scheme: the image point and the residue field map."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-projective-space-standard-charts",
+  "lem-trf-reduced-scheme-image",
+  "lemma-nagata-scheme-image-partial-section",
+  "lem-chow-segre",
+  "lem-kun-projective-implies-proper",
+  "lem-weil-pbc-spec-field-point-residue-field"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q149-d663e31e0",
+  "group": "Q149",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q149-d663e31e0 (reviewer sub-agent of L); spot-checked: This is a re-delivery after the earlier FIX of run 134e5e09f842 was not promoted. It adds no new nodes and leaves the statement and stmt_deps unchanged. Against the earlier head it differs in three places. (1) Step 3 now proves explicitly that j(V)=p^{-1}(V) and that this open is dense. This is correct: p∘j is the inclusion, the partial-section lemma makes p^{-1}(V)→V an isomorphism, and |Z| is the closure of j(|V|) by 056B. So the generic stalk of p is a stalk of an isomorphism and k(Z)=E. (2) Step 7 now states dominance through the generic point. This is correct. (3) Step 7 still cites lem-per-h-projective-permanence, the node the earlier FIX removed; that repair was lost. I re-read every cited statement in the current snapshot, re-checked steps 1-6, and re-tested r=0, trivial and nonfaithful H, a nontrivial action on k, and imperfect k. All 23 proof_deps statements were re-read. Batch-5 finding, lem-trf-reduced-scheme-image: accepted. It is Stacks 056B, general scheme theory with generic proof_deps, and neither the trace formula nor Poincaré duality gives it or uses it in its proof. Dropped-route finding, lem-per-h-projective-permanence: the item is not a child of artin-gabber-affine-curve, but the node belongs to the dropped Q75 compactification route and no step justifies it. Fixed again: step 7 now gets H-projectivity and properness of b from lem-sfb-projective-fibre-product-closed-model (same unit, now split, no cycle) with X=P separated, I={1}, Y_1=X', q_1=b, e_1 from step 6, c=id. proof_deps is recomputed as the union of step uses, and the permanence tool_use is removed. No SGA is cited. The other generic tool_uses are accepted. Fix file: fixes/dag/nodes/sec-six-functors-basics/lem-sfb-invariant-pencil-graph-model.json.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.InvariantPencilGraphModel",
+  "declaration": "AlgebraicGeometry.exists_invariant_pencil_graph_model",
+  "declarations": [
+   "AlgebraicGeometry.invariantPencilFieldConstants",
+   "AlgebraicGeometry.invariantPencilGenericMap",
+   "AlgebraicGeometry.exists_invariant_pencil_graph_model"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/InvariantPencilGraphModel.lean",
+  "statement": "theorem exists_invariant_pencil_graph_model (k : Type u) [Field k] (N : Scheme.{u}) [IsIntegral N] (f : N ⟶ Spec (.of k)) [IsHProjective f] [GeometricallyIntegral f] [LocallyOfFiniteType f] [QuasiCompact f] (hN : ∀ x : N, IsDomain (N.presheaf.stalk x) ∧ IsIntegrallyClosed (N.presheaf.stalk x)) (H : Type v) [Group H] [Finite H] (rho : H →* (k ≃+* k)) (act : H →* Aut N) (hact : ∀ h : H, (act h).hom ≫ f = f ≫ Spec.map (CommRingCat.ofHom (rho h⁻¹).toRingHom)) (r : ℕ) (t : Fin r → N.functionField) (ht : @AlgebraicIndependent (Fin r) k N.functionField t _ _ (invariantPencilFieldConstants f).toAlgebra) (hfixed : ∀ (h : H) (i : Fin r), @algebraMap N.functionField N.functionField _ _ ((act h).hom.dominantFunctionFieldAlgebra) (t i) = t i) : ∃ (actP : H →* Aut ℙ(ULift.{u} (Fin (r + 1)); Spec (.of k))), (∀ h : H, (actP h).hom = ProjectiveSpace.map (ULift.{u} (Fin (r + 1))) (Spec.map (CommRingCat.ofHom (rho h⁻¹).toRingHom))) ∧ ∃ (V : N.Opens), Dense (V : Set N) ∧ (∀ h : H, (act h).hom ⁻¹ᵁ V = V) ∧ ∃ (actV : H →* Aut V.toScheme) (v : V.toScheme ⟶ ℙ(ULift.{u} (Fin (r + 1)); Spec (.of k))) (etaV : Spec N.functionField ⟶ V.toScheme), (∀ h : H, (actV h).hom ≫ V.ι = V.ι ≫ (act h).hom) ∧ (∀ h : H, (actV h).hom ≫ v = v ≫ (actP h).hom) ∧ v ≫ ℙ(ULift.{u} (Fin (r + 1)); Spec (.of k)) ↘ Spec (.of k) = V.ι ≫ f ∧ etaV ≫ V.ι = N.fromSpecFunctionField ∧ etaV ≫ v = invariantPencilGenericMap f t ∧ v ⁻¹ᵁ ProjectiveSpace.standardOpen (ULift.{u} (Fin (r + 1))) (Spec (.of k)) ⟨0⟩ = ⊤ ∧ ∃ (j : V.toScheme ⟶ pullback f (ℙ(ULift.{u} (Fin (r + 1)); Spec (.of k)) ↘ Spec (.of k))), j ≫ pullback.fst _ _ = V.ι ∧ j ≫ pullback.snd _ _ = v ∧ ∃ (_ : IsIntegral j.image) (p : j.image ⟶ N), p = j.imageι ≫ pullback.fst _ _ ∧ IsIso (p ∣_ V) ∧ ∃ (hp : p (genericPoint j.image) = genericPoint N) (eZ : N.functionField ≅ j.image.functionField), eZ.hom = p.functionFieldMap hp ∧ ∃ (actZ : H →* Aut j.image) (actX : H →* Aut j.image.normalization) (a : j.image.normalization ⟶ N) (b : j.image.normalization ⟶ ℙ(ULift.{u} (Fin (r + 1)); Spec (.of k))), a = j.image.fromNormalization ≫ p ∧ b = j.image.fromNormalization ≫ j.imageι ≫ pullback.snd _ _ ∧ (∀ x : j.image.normalization, IsDomain (j.image.normalization.presheaf.stalk x) ∧ IsIntegrallyClosed (j.image.normalization.presheaf.stalk x)) ∧ IsHProjective (a ≫ f) ∧ GeometricallyIntegral (a ≫ f) ∧ LocallyOfFiniteType (a ≫ f) ∧ QuasiCompact (a ≫ f) ∧ (∀ h : H, (actZ h).hom ≫ p = p ≫ (act h).hom) ∧ (∀ h : H, (actZ h).hom ≫ j.imageι ≫ pullback.snd _ _ = j.imageι ≫ pullback.snd _ _ ≫ (actP h).hom) ∧ (∀ h : H, (actX h).hom ≫ j.image.fromNormalization = j.image.fromNormalization ≫ (actZ h).hom) ∧ (∀ h : H, (actX h).hom ≫ (a ≫ f) = (a ≫ f) ≫ Spec.map (CommRingCat.ofHom (rho h⁻¹).toRingHom)) ∧ (∀ h : H, (actX h).hom ≫ a = a ≫ (act h).hom) ∧ (∀ h : H, (actX h).hom ≫ b = b ≫ (actP h).hom) ∧ IsHProjective a ∧ IsHProjective b ∧ IsProper a ∧ Surjective a ∧ IsIso (a ∣_ V) ∧ IsDominant b ∧ IsProper b ∧ ∃ (_ : IsIntegral j.image.normalization) (_ : IsIntegral ℙ(ULift.{u} (Fin (r + 1)); Spec (.of k))) (ha : a (genericPoint j.image.normalization) = genericPoint N) (hb : b (genericPoint j.image.normalization) = genericPoint ℙ(ULift.{u} (Fin (r + 1)); Spec (.of k))) (eX : N.functionField ≅ j.image.normalization.functionField) (beta : ℙ(ULift.{u} (Fin (r + 1)); Spec (.of k)).functionField →+* N.functionField), eX.hom = a.functionFieldMap ha ∧ CommRingCat.ofHom beta = b.functionFieldMap hb ≫ eX.inv ∧ Spec.map (CommRingCat.ofHom beta) ≫ ℙ(ULift.{u} (Fin (r + 1)); Spec (.of k)).fromSpecFunctionField = invariantPencilGenericMap f t ∧ Set.range beta = ((@IntermediateField.adjoin k _ N.functionField _ (invariantPencilFieldConstants f).toAlgebra (Set.range t)) : Set N.functionField)",
+  "branch": "newtargets-dag",
+  "by": "Q59",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-2819ef6c0",
+  "group": "Q59",
+  "result": "pass",
+  "note": "Only the item's lean record changed (diff vs side-live) and one new module was added; lean.statement is verbatim. Every clause matches the node through the recorded dependency declarations: IsHProjective, GeometricallyIntegral, LocallyOfFiniteType+QuasiCompact, the stalkwise normality hN, act/rho semilinearity with Spec.map(rho h⁻¹) (Aut and Spec conventions checked), hfixed via dominantFunctionFieldAlgebra, AlgebraicIndependent over the canonical k→k(N), actP = ProjectiveSpace.map, dense invariant V, v pinned by its generic value and chart (helper coordinates T_j/T_0 checked), j pinned by fst/snd, Z = j.image integral, IsIso (p∣_V), eZ = actual p pullback, X' = j.image.normalization (normalization in the function field), the normal/projective/geometrically integral/finite-type clauses for X', actZ pinned by both projections, actX lift, a and b equivariant and H-projective, a proper, surjective, iso over V with eX the actual pullback, b dominant and proper, beta the actual pullback with range adjoin k (range t). Edge cases r=0, trivial/non-faithful H, nontrivial action on k, imperfect k, universes: all fine. Notes, not blocking: inline normality vs upstream IsNormalScheme (not a stmt_dep, matches the node's definition); invariantPencilFieldConstants mirrors Scheme.functionFieldAlgebra, which needs an Over instance. Helpers have real data, the theorem is sorry, docstrings have source and blueprint tags, the Second reading section is the post-10-17 placeholder. No compile (no files changed)."
+ }
+}

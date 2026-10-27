@@ -1,0 +1,420 @@
+{
+ "id": "lem-sfb-accelerated-finite-field-cochain-differences",
+ "kind": "statement",
+ "title": "Accelerated finite-field projections and pointwise finite cochain differences",
+ "statement": "Fix a prime $\\ell$, an algebraic closure $\\Omega/\\mathbf Q_\\ell$ with its extended nonarchimedean norm [def-weil-l-adic-numbers], [def-weil-algebraic-closure], and its isometric inclusion in the norm completion $B=\\widehat\\Omega$ [lem-sfb-normed-field-completion]. Let $(F_N)_{N\\geq0}$ be increasing intermediate fields, finite-dimensional over $\\mathbf Q_\\ell$, with union $\\Omega$. Let $S$ be a nonempty profinite space and $G$ a profinite group, meaning compact Hausdorff totally disconnected spaces, with continuous group operations on $G$. For a coefficient space $V$ let $C_V^r=C(S\\times G^r,V)$, with trivial action and\n$$(dh)(s;g_1,\\ldots,g_{r+1})=h(s;g_2,\\ldots,g_{r+1})+\\sum_{a=1}^r(-1)^a h(s;g_1,\\ldots,g_ag_{a+1},\\ldots,g_{r+1})+(-1)^{r+1}h(s;g_1,\\ldots,g_r),$$\nwhere $C_V^0=C(S,V)$ and $d^0=0$. Fix $n\\geq2$, $z\\in C_\\Omega^n$ with $dz=0$, and $b\\in C_B^{n-1}$ with $db=z$ in $B$. Given any integers $N_j\\geq0$ and real constants $C_j\\geq1$, $j\\geq1$, set $D_t=\\max(1,C_1,\\ldots,C_t)$ and $\\delta_i=2^{-i}/D_{i+1}$ for $i\\geq0$. There exist continuous $\\mathbf Q_\\ell$-linear contractions $Q_N:B\\to F_N$ fixing $F_N$, and strictly increasing integers $L_i\\geq i$ with $L_i\\geq N_j$ for $1\\leq j\\leq i+1$, such that, writing $P_i=Q_{L_i}$ and $P_{-1}=0$,\n$$\\|P_i z-z\\|_\\infty\\leq\\delta_i,\\qquad \\|P_i b-b\\|_\\infty\\leq\\delta_i.$$\nHere maps into finite fields are also viewed in $\\Omega$ or $B$ by inclusion and $\\|h\\|_\\infty=\\sup_x|h(x)|$. The continuous cochains\n$$e_i=(P_i-P_{i-1})z\\in C_{F_{L_i}}^n,\\qquad c_i=(P_i-P_{i-1})b\\in C_{F_{L_i}}^{n-1}$$\nsatisfy $de_i=0$, $dc_i=e_i$ and $\\sum_{h=0}^ie_h=P_i z\\to z$ uniformly. For $i\\geq1$ both norms are at most $\\max(\\delta_i,\\delta_{i-1})$, and hence at most $2^{-(i-1)}/D_i$. For each fixed $(s,y)\\in S\\times G^n$, $e_i(s,y)=0$ for all sufficiently large $i$. If $j\\leq i$ and the homogeneous function $f_z(s;-)$ takes values in $F_{N_j}$ on any subset $R\\subseteq G^{n+1}$, then $f_{e_i}(s;-)$ is zero on $R$, where $f_h(s;g_0,\\ldots,g_n)=h(s;g_0^{-1}g_1,\\ldots,g_{n-1}^{-1}g_n)$. No pointwise eventual vanishing is asserted for $c_i$, and no retraction $B\\to\\Omega$ is assumed. Use [def-weil-size-convention].",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+  "place": "Paragraph (3), agent-formulated scalar analytic input, not a theorem asserted in the blueprint. Old proof steps 7–10: finite-index constants, extension of finite-field contractions, simultaneous accelerated approximation and telescoping differences. Exact literature reference WANTED; the full inherited argument is retained in the delivery report."
+ },
+ "stmt_deps": [
+  "def-weil-size-convention",
+  "def-weil-l-adic-numbers",
+  "def-weil-algebraic-closure",
+  "lem-sfb-normed-field-completion",
+  "def-sfb-continuous-inhomogeneous-cochains"
+ ],
+ "proof": [
+  {
+   "text": "For each $N$, apply [lem-sfb-norm-one-finite-subfield-projection] to $F_N\\subseteq\\Omega$, obtaining an $F_N$-linear contraction $p_N:\\Omega\\to F_N$ fixing $F_N$. It is in particular $\\mathbf Q_\\ell$-linear. The restricted absolute value on $F_N$ extends the given one on $\\mathbf Q_\\ell$, and $F_N$ is finite-dimensional, so [lem-weil-l-adic-extension-complete] makes $F_N$ complete. By definition the completion embedding has dense image; identify $\\Omega$ with that linear subspace of $B$ using [lem-sfb-normed-field-completion]. Multiplicativity of the completion norm gives $|av|=|a||v|$ for $a\\in\\mathbf Q_\\ell$ and $v\\in B$; its restriction does the same on $F_N$. Thus both are normed $\\mathbf Q_\\ell$-vector spaces, with the stated norm topologies. Apply [lem-sfb-dense-subspace-contractive-extension] with $k=\\mathbf Q_\\ell$, ambient space $B$, dense subspace $\\Omega$, target $F_N$, and map $p_N$. Obtain a continuous $\\mathbf Q_\\ell$-linear contraction $Q_N:B\\to F_N$, agreeing with $p_N$ and hence fixing $F_N$. Choose one for each $N$. The norm on $B$ is ultrametric: for $x,y\\in B$ choose sequences from $\\Omega$ tending to them and pass to the limit in $|x_m+y_m|\\leq\\max(|x_m|,|y_m|)$, using the ordinary norm continuity inequality $\\big||u|-|v|\\big|\\leq|u-v|$.",
+   "uses": [
+    "lem-sfb-norm-one-finite-subfield-projection",
+    "lem-weil-l-adic-extension-complete",
+    "lem-sfb-normed-field-completion",
+    "lem-sfb-dense-subspace-contractive-extension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), agent scalar analytic expansion: extend finite-field contractions to the norm completion; dense extension is LinearMap.extendOfNorm in Mathlib/Analysis/Normed/Operator/Extend.lean:190–210"
+   }
+  },
+  {
+   "text": "The domains $X_r=S\\times G^r$ are quasi-compact by [lem-weil-pbc-tychonoff-product-quasi-compact] applied to their finite families of compact factors (Stacks Tag 08ZU, theorem-tychonov). For $h=z$ or $h=b$ viewed in $B$ and any $\\epsilon>0$, the sets $h^{-1}(\\{v:|v-a|<\\epsilon\\})$, $a\\in\\Omega$, form an open cover of its domain: density supplies an $a$ near each $h(x)$. Take a finite subcover. All its centers lie in some common $F_M$, since the fields increase and cover $\\Omega$. For $N\\geq M$ and a center $a$ with $|h(x)-a|<\\epsilon$, linearity, contractivity and $Q_N(a)=a$ give\n$$|Q_Nh(x)-h(x)|=|Q_N(h(x)-a)-(h(x)-a)|\\leq|h(x)-a|<\\epsilon.$$\nThus $\\|Q_Nh-h\\|_\\infty\\leq\\epsilon$ for every $N\\geq M$. Taking the larger of the two indices works for $z$ and $b$ simultaneously. The suprema are finite: the same finite cover with $\\epsilon=1$ bounds $|h(x)|$ by $\\max(1,\\max_a|a|)$, and $|Q_Nh(x)|\\leq|h(x)|$.",
+   "uses": [
+    "lem-weil-pbc-tychonoff-product-quasi-compact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), agent scalar analytic expansion: simultaneous uniform approximation, finite-subcover argument; compact products use Stacks topology.tex, Tag 08ZU"
+   }
+  },
+  {
+   "text": "Each $D_t$ is a finite real number at least $1$, so each $\\delta_i>0$. Step 2 with $\\epsilon=\\delta_i$ gives $M_i$ such that both errors are at most $\\delta_i$ for every $N\\geq M_i$. Choose recursively $L_0\\geq\\max(M_0,N_1,0)$ and\n$$L_i\\geq\\max(M_i,L_{i-1}+1,i,N_1,\\ldots,N_{i+1})\\quad(i\\geq1).$$\nThen $L_i$ strictly increases, $L_i\\geq i$, all required $N_j$ are dominated, and $P_i=Q_{L_i}$ has the two required error bounds. This is only a choice above a finite list of integers at each stage.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), agent scalar analytic expansion: recursive acceleration absorbing the prescribed finite-index constants"
+   }
+  },
+  {
+   "text": "Put $T_i=P_i-P_{i-1}$ with $P_{-1}=0$. For $i\\geq1$, both summands have values in $F_{L_i}$ because $F_{L_{i-1}}\\subseteq F_{L_i}$; the same holds for $i=0$. Subtraction and composition preserve continuity, so $e_i=T_i z$ and $c_i=T_i b$ are continuous cochains with the stated coefficient fields and degrees. Every term in the displayed differential is a value of the cochain with coefficient $+1$ or $-1$. Consequently $d(Th)=T(dh)$ for each $\\mathbf Q_\\ell$-linear coefficient map $T$, by applying its additivity term by term to that finite displayed sum. Hence $de_i=T_i(dz)=0$ and $dc_i=T_i(db)=T_i z=e_i$ as equalities in $B$, and thus in $F_{L_i}$ by the injective field inclusions. This uses no assertion about general group cohomology or $d^2$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), agent scalar analytic expansion: continuous telescoping differences and coefficientwise differential identities"
+   }
+  },
+  {
+   "text": "For either $h=z$ or $h=b$ and $i\\geq1$, write\n$$T_i h=(P_i h-h)-(P_{i-1}h-h).$$\nThe ultrametric inequality gives $\\|T_i h\\|_\\infty\\leq\\max(\\delta_i,\\delta_{i-1})$. Since $D_{i+1}\\geq D_i\\geq1$,\n$$\\delta_i=2^{-i}/D_{i+1}\\leq 2^{-(i-1)}/D_i=\\delta_{i-1}.$$\nThis proves both requested estimates. Finite telescoping gives $\\sum_{h=0}^i e_h=P_i z$. Finally $\\delta_i\\leq2^{-i}\\to0$, so the error bound gives uniform convergence to $z$ in its original norm topology as well as in $B$, since the inclusion is isometric. No infinite summation in $\\Omega$ is needed for this convergence statement.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), agent scalar analytic expansion: ultrametric error estimates and uniform convergence of finite telescoping sums"
+   }
+  },
+  {
+   "text": "Fix $(s,y)\\in S\\times G^n$. There is $M$ with $z(s,y)\\in F_M$. If $i\\geq M+1$, then $L_{i-1}\\geq i-1\\geq M$ and $L_i\\geq M$, so both $P_i$ and $P_{i-1}$ fix $z(s,y)$. Their difference is zero there. For the last clause fix $j\\geq1$ and $i\\geq j$. The index bounds imply $L_{i-1}\\geq N_j$ (since $j\\leq(i-1)+1$) and $L_i\\geq N_j$. For any $(g_0,\\ldots,g_n)\\in R$, the value $f_z(s;g_0,\\ldots,g_n)$ lies in $F_{N_j}$, so both projections fix it. Substituting the definition of $f_h$ yields $f_{e_i}=P_i f_z-P_{i-1}f_z=0$ on $R$. This reasoning allows $R$ to be arbitrary and does not use its topology. It does not apply to a value of $b$ outside $\\Omega$, and no eventual vanishing of $c_i$ follows or is needed.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), agent scalar analytic expansion: pointwise eventual finiteness and exact vanishing on finite-field homogeneous rectangles"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-norm-one-finite-subfield-projection",
+  "lem-weil-l-adic-extension-complete",
+  "lem-sfb-normed-field-completion",
+  "lem-sfb-dense-subspace-contractive-extension",
+  "lem-weil-pbc-tychonoff-product-quasi-compact"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+  "place": "Paragraph (3), agent expansion of the scalar analytic input: norm-one projection, dense extension, finite-cover acceleration and elementary cochain telescoping. No analytic theorem is attributed to the blueprint."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Contractive projections from the completion of an algebraic closure of Q_p to finite subfields approximate two continuous compact families and give summably small cochain differences eventually zero pointwise",
+   "results": {
+    "t": "2026-10-22T06:02:01Z",
+    "tool": "leanfinder",
+    "query": "Contractive projections from the completion of an algebraic closure of Q_p to finite subfields approximate two continuous compact families and give summably small cochain differences eventually zero pointwise",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "PadicInt.limNthHom_spec",
+     "PadicInt.hasSum_mahler",
+     "PadicInt.mahlerSeries_apply",
+     "PadicInt.hasSum_mahlerSeries",
+     "PadicInt.mahlerSeries_apply_nat",
+     "PadicInt.mahlerEquiv",
+     "PadicInt.mahlerSeries",
+     "ContinuousMap.exists_finite_sum_const_indicator_approximation_of_mem_nhds_diagonal"
+    ],
+    "digest": "1bc69ccd029f82f5"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: completion extensions and linear projections do not provide simultaneous accelerated finite-field approximation, telescoping cocycles or pointwise eventual vanishing."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Accelerate finite subfield linear projections to absorb prescribed norm losses and telescope continuous p-adic cochains",
+   "results": {
+    "t": "2026-10-22T06:02:13Z",
+    "tool": "leanfinder",
+    "query": "Accelerate finite subfield linear projections to absorb prescribed norm losses and telescope continuous p-adic cochains",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "PadicInt.limNthHom_spec",
+     "PadicInt.nthHomSeq",
+     "PadicInt.isCauSeq_nthHom",
+     "PadicInt.lift_sub_val_mem_span",
+     "BDeRhamPlus",
+     "WittVector.factorPowSucc_comp_fontaineThetaModPPow",
+     "PadicInt.mahlerTerm",
+     "Profinite.NobelingProof.πs'"
+    ],
+    "digest": "3f785205f0052c6b"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: completion extensions and linear projections do not provide simultaneous accelerated finite-field approximation, telescoping cocycles or pointwise eventual vanishing."
+  },
+  {
+   "tool": "loogle",
+   "query": "ContinuousLinearMap, UniformSpace.Completion",
+   "results": {
+    "t": "2026-10-22T06:02:13Z",
+    "tool": "loogle",
+    "query": "ContinuousLinearMap, UniformSpace.Completion",
+    "sub": "",
+    "ok": true,
+    "n_hits": 12,
+    "note": "",
+    "top": [
+     "UniformSpace.Completion.toComplL",
+     "UniformSpace.Completion.coe_toComplL",
+     "ContinuousLinearMap.fromCompletion",
+     "ContinuousLinearMap.completion",
+     "ContinuousLinearMap.fromCompletion_apply_coe",
+     "ContinuousLinearMap.coe_fromCompletion",
+     "ContinuousLinearMap.coe_completion",
+     "ContinuousLinearMap.completion_apply_coe"
+    ],
+    "digest": "0df4a7de5997149d"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: completion extensions and linear projections do not provide simultaneous accelerated finite-field approximation, telescoping cocycles or pointwise eventual vanishing."
+  },
+  {
+   "tool": "grep",
+   "query": "(cochain|cocycle).*(projection|IntermediateField)|(projection|IntermediateField).*(cochain|cocycle)",
+   "results": {
+    "t": "2026-10-22T06:02:13Z",
+    "tool": "grep",
+    "query": "(cochain|cocycle).*(projection|IntermediateField)|(projection|IntermediateField).*(cochain|cocycle)",
+    "sub": "",
+    "ok": true,
+    "n_hits": 4,
+    "note": "",
+    "top": [
+     "Mathlib/Algebra/Homology/HomotopyCategory/HomComplexCohomology.lean",
+     "Mathlib/Algebra/Homology/HomotopyCategory/MappingCocone.lean",
+     "Mathlib/Algebra/Homology/HomotopyCategory/MappingCone.lean",
+     "Mathlib/Algebra/Homology/HomotopyCategory/MappingCone.lean"
+    ],
+    "digest": "fe19cd4a86a5a8cc"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: completion extensions and linear projections do not provide simultaneous accelerated finite-field approximation, telescoping cocycles or pointwise eventual vanishing."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Finite subfield contractive projections accelerated to decompose continuous cocycles and completed primitives",
+   "results": {
+    "t": "2026-10-22T06:02:14Z",
+    "tool": "leansearch",
+    "query": "Finite subfield contractive projections accelerated to decompose continuous cocycles and completed primitives",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "Submodule.linearProjOfClosedCompl",
+     "IsLprojection.recOn",
+     "Submodule.fstL_comp_coe_orthogonalDecomposition",
+     "LinearMap.isStarProjection_toContinuousLinearMap_iff",
+     "Submodule.coe_continuous_linearProjOfClosedCompl",
+     "ContinuousLinearMap.IsIdempotentElem.hasOrthogonalProjection_range",
+     "Subfield.completableTopField",
+     "Submodule.coe_continuous_linearProjOfClosedCompl'"
+    ],
+    "digest": "8f412f8a5a3150bc"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: completion extensions and linear projections do not provide simultaneous accelerated finite-field approximation, telescoping cocycles or pointwise eventual vanishing."
+  },
+  {
+   "tool": "grep",
+   "query": "(cochain|cocycle).*(projection|IntermediateField)|(projection|IntermediateField).*(cochain|cocycle)",
+   "results": {
+    "t": "2026-10-22T11:20:01Z",
+    "tool": "grep",
+    "query": "(cochain|cocycle).*(projection|IntermediateField)|(projection|IntermediateField).*(cochain|cocycle)",
+    "sub": "",
+    "ok": true,
+    "n_hits": 4,
+    "note": "",
+    "top": [
+     "Mathlib/Algebra/Homology/HomotopyCategory/HomComplexCohomology.lean",
+     "Mathlib/Algebra/Homology/HomotopyCategory/MappingCocone.lean",
+     "Mathlib/Algebra/Homology/HomotopyCategory/MappingCone.lean",
+     "Mathlib/Algebra/Homology/HomotopyCategory/MappingCone.lean"
+    ],
+    "digest": "fe19cd4a86a5a8cc"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: completion extension results give only one analytic ingredient; inner-product projections require RCLike scalars; approximation results do not assert the finite-subfield retractions, accelerated cochain decomposition and exact eventual vanishing stated here."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Contractive retractions onto finite subfields uniformly approximate compact families and telescope continuous cocycles",
+   "results": {
+    "t": "2026-10-22T11:20:02Z",
+    "tool": "leansearch",
+    "query": "Contractive retractions onto finite subfields uniformly approximate compact families and telescope continuous cocycles",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "PiNat.exists_lipschitz_retraction_of_isClosed",
+     "ContractingWith.toLipschitzWith",
+     "Equicontinuous.comap_uniformFun_eq",
+     "ContractingWith.dist_fixedPoint_fixedPoint_of_dist_le'",
+     "ContractingWith.tendsto_iterate_efixedPoint'",
+     "ContractingWith.dist_fixedPoint_le",
+     "ContractingWith.efixedPoint_isFixedPt'",
+     "ContractingWith.edist_efixedPoint_lt_top'"
+    ],
+    "digest": "b1a28b1968b355bd"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: completion extension results give only one analytic ingredient; inner-product projections require RCLike scalars; approximation results do not assert the finite-subfield retractions, accelerated cochain decomposition and exact eventual vanishing stated here."
+  },
+  {
+   "tool": "loogle",
+   "query": "ContinuousLinearMap, UniformSpace.Completion",
+   "results": {
+    "t": "2026-10-22T11:20:02Z",
+    "tool": "loogle",
+    "query": "ContinuousLinearMap, UniformSpace.Completion",
+    "sub": "",
+    "ok": true,
+    "n_hits": 12,
+    "note": "",
+    "top": [
+     "UniformSpace.Completion.toComplL",
+     "UniformSpace.Completion.coe_toComplL",
+     "ContinuousLinearMap.fromCompletion",
+     "ContinuousLinearMap.completion",
+     "ContinuousLinearMap.fromCompletion_apply_coe",
+     "ContinuousLinearMap.coe_fromCompletion",
+     "ContinuousLinearMap.coe_completion",
+     "ContinuousLinearMap.completion_apply_coe"
+    ],
+    "digest": "0df4a7de5997149d"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: completion extension results give only one analytic ingredient; inner-product projections require RCLike scalars; approximation results do not assert the finite-subfield retractions, accelerated cochain decomposition and exact eventual vanishing stated here."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Contractive finite subfield projections on a completed algebraic closure uniformly approximate continuous cochains on compact spaces and yield pointwise eventually zero telescoping differences",
+   "results": {
+    "t": "2026-10-22T11:20:11Z",
+    "tool": "leanfinder",
+    "query": "Contractive finite subfield projections on a completed algebraic closure uniformly approximate continuous cochains on compact spaces and yield pointwise eventually zero telescoping differences",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "ContinuousMap.exists_finite_sum_smul_approximation_of_mem_uniformity",
+     "ContinuousMap.exists_finite_sum_mul_approximation_of_mem_uniformity",
+     "PadicInt.mahlerEquiv",
+     "ContinuousMap.exists_finite_sum_const_indicator_approximation_of_mem_nhds_diagonal",
+     "ContinuousMap.exists_finite_sum_const_mulIndicator_approximation_of_mem_nhds_diagonal",
+     "ContinuousMap.exists_finite_approximation_of_mem_nhds_diagonal",
+     "ContinuousMap.exists_mem_subalgebra_near_continuousMap_of_separatesPoints",
+     "ContinuousMap.exists_mem_subalgebra_near_continuous_of_separatesPoints"
+    ],
+    "digest": "dc175c9765500797"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: completion extension results give only one analytic ingredient; inner-product projections require RCLike scalars; approximation results do not assert the finite-subfield retractions, accelerated cochain decomposition and exact eventual vanishing stated here."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A sequence of norm one linear retractions fixing increasing dense subspaces converges uniformly on compact subsets",
+   "results": {
+    "t": "2026-10-22T11:20:12Z",
+    "tool": "leanfinder",
+    "query": "A sequence of norm one linear retractions fixing increasing dense subspaces converges uniformly on compact subsets",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "isCompactOperator_of_tendsto",
+     "ContinuousLinearEquiv.toCompactConvergenceCLM",
+     "Submodule.starProjection_tendsto_self",
+     "LinearMap.tendsto_birkhoffAverage_of_ker_subset_closure",
+     "ContinuousLinearMap.ofTendstoOfBoundedRange",
+     "Urysohns.CU.tendsto_approx_atTop",
+     "ContinuousLinearEquiv.toCompactConvergenceCLM_apply",
+     "Submodule.starProjection_tendsto_closure_iSup"
+    ],
+    "digest": "124c67ba0d2f6a82"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: completion extension results give only one analytic ingredient; inner-product projections require RCLike scalars; approximation results do not assert the finite-subfield retractions, accelerated cochain decomposition and exact eventual vanishing stated here."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-parameter-cochain-completion-boundary-descent",
+  "date": "2026-10-22",
+  "group": "Q49"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "Paragraph (3), open direct image: scalar analytic base. Old proof steps 7–10: finite-index constants, extension of finite-field contractions, simultaneous accelerated approximation and telescoping differences.",
+   "via": [
+    "lem-sfb-parameter-cochain-completion-boundary-descent",
+    "lem-sfb-procyclic-scalar-cochain-evaluation",
+    "lem-sfb-ind-unipotent-procyclic-difference",
+    "lem-sfb-polynomial-translation-acyclic",
+    "lem-sfb-polynomial-derived-bar-comparison",
+    "lem-sfb-trivial-ladic-derived-exterior",
+    "lem-sfb-dense-lattice-derived-invariants-comparison",
+    "lem-sfb-tame-inertia-continuous-koszul",
+    "lem-sfb-continuous-algcl-tame-boundary-comparison",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-accelerated-finite-field-cochain-differences",
+  "worker": "stage1",
+  "summary": "Statement unchanged. Reuse the existing norm-one finite-subfield projection, finite-extension completeness, dense contractive extension and compact-product leaves. Give explicit simultaneous finite-cover approximation, recursive acceleration, cochain differential calculation, norm estimates and eventual vanishing. No new nodes. Repair of the promotion return at d3a137cee44: overlay the retained split on the current unsplit item, preserve all current nonsplit metadata, reread all five current proof inputs, and explicitly verify the normed-vector-space hypotheses of the dense-extension input in step 1. The current projection input has a repaired four-step proof but the same statement; no dependency replacement is needed.",
+  "blueprint": "Paragraph (3) of det-thm-sf-ctf-stability-direct-images, open direct image with algebraic-closure coefficients: scalar analytic base, formerly steps 7–10 of lem-sfb-parameter-cochain-completion-boundary-descent. The ancestor tool currently reports None, retained in blueprint.from.node. Whole-blueprint searches contractive projection, contractive, accelerated and cochain differences found no matching blueprint statement."
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q51-10d0ad423",
+  "group": "Q51",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q51-10d0ad423 (reviewer sub-agent of L); spot-checked: This delivery has 0 new nodes, keeps the statement, and has no repair note, so the re-split rule does not apply. It re-delivers d3a137cee44b, which was PASSed and then refused at landing because the side completion had not been promoted. Diffing the two heads shows one change only: step 1 gains a sentence saying the completion norm is multiplicative, so |av|=|a||v| on B and on F_N. That discharges the normed-space hypotheses of lem-sfb-dense-subspace-contractive-extension, and it is correct. I re-read all six steps against the current statements of the five cited nodes; none of those statements changed. Step 1: F_N is finite over Q_ell, so the norm-one projection applies. F_N is complete because its restricted absolute value extends |.|_ell. Omega is dense in B by definition of the completion, which gives a contractive Q_N fixing F_N. The ultrametric inequality passes to B by limits. Step 2: Tychonoff applies to the finite product SxG^r. A finite ball cover has its algebraic centres in one F_M, and contractivity plus the ultrametric inequality give a tail bound for every N>=M. Step 3: L_i dominates every N_j with j<=i+1, and L_0>=N_1. Step 4: d is a finite sum of +-1 times evaluations, so it commutes with additive maps; this gives de_i=0 and dc_i=e_i, and n>=2 keeps d^0 out of it. Step 5: the bound is max(delta_i,delta_{i-1})=delta_{i-1}=2^{-(i-1)}/D_i, and the sum telescopes to P_i z. Step 6: e_i vanishes pointwise eventually, and j<=i gives L_{i-1},L_i>=N_j. The edge cases work: a point S, trivial G, zero cochains, N_j out of order, and i=j=1. The parent's step 5 applies the item only after its step 1 has removed n=1 and S empty. Duplicate search with rg -L found Q57's metrizable-cocycle-finite-field-components and rectangle-corrected-pointwise-finite-primitives. Neither is a duplicate: they have no completed primitive b and no accelerated rates. For the maintainer: the metrizable node's last part overlaps the z-half of this item. Source checked: paragraph (3) of main-20261015 direct-images.proof.md, which gives motivation only; the proof is correctly marked agent-written with a WANTED reference. No SGA is used and no fixes were made."
+ },
+ "lean": {
+  "module": "Sheaf.RepresentationTheory.AcceleratedFiniteFieldCochainDifferences",
+  "declaration": "ContinuousCohomology.exists_acceleratedFiniteFieldCochainDifferences",
+  "declarations": [
+   "ContinuousCohomology.acceleratedTrivialD",
+   "ContinuousCohomology.acceleratedCompletionCochain",
+   "ContinuousCohomology.acceleratedFieldCochain",
+   "ContinuousCohomology.acceleratedLoss",
+   "ContinuousCohomology.acceleratedTolerance",
+   "ContinuousCohomology.exists_acceleratedFiniteFieldCochainDifferences"
+  ],
+  "file": "lean/Sheaf/RepresentationTheory/AcceleratedFiniteFieldCochainDifferences.lean",
+  "statement": "theorem exists_acceleratedFiniteFieldCochainDifferences (l : ℕ) [Fact l.Prime] (Ω : Type u) [NormedField Ω] [NormedAlgebra ℚ_[l] Ω] [IsAlgClosure ℚ_[l] Ω] [IsUltrametricDist Ω] (F : ℕ → IntermediateField ℚ_[l] Ω) (hF : Monotone F) [∀ N : ℕ, FiniteDimensional ℚ_[l] (F N)] (hcover : ∀ a : Ω, ∃ N, a ∈ F N) (S : Type w) [TopologicalSpace S] [CompactSpace S] [T2Space S] [TotallyDisconnectedSpace S] [Nonempty S] (G : Type v) [Group G] [TopologicalSpace G] [IsTopologicalGroup G] [CompactSpace G] [T2Space G] [TotallyDisconnectedSpace G] (n : ℕ) (z : C(S × (Fin (n + 2) → G), Ω)) (hz : ∀ s : S, acceleratedTrivialD Ω G (n + 2) (z.curry s) = 0) (b : C(S × (Fin (n + 1) → G), Completion Ω)) (hb : ∀ (s : S) (g : Fin (n + 2) → G), acceleratedTrivialD (Completion Ω) G (n + 1) (b.curry s) g = (z (s, g) : Completion Ω)) (N : ℕ+ → ℕ) (C : ℕ+ → ℝ) (hC : ∀ j : ℕ+, 1 ≤ C j) : ∃ (Q : ∀ k : ℕ, Completion Ω →L[ℚ_[l]] F k) (L : ℕ → ℕ) (pz : ∀ i : ℕ, C(S × (Fin (n + 2) → G), F (L i))) (pb : ∀ i : ℕ, C(S × (Fin (n + 1) → G), F (L i))) (e : ∀ i : ℕ, C(S × (Fin (n + 2) → G), F (L i))) (c : ∀ i : ℕ, C(S × (Fin (n + 1) → G), F (L i))), (∀ (k : ℕ) (a : F k), Q k ((a : Ω) : Completion Ω) = a) ∧ (∀ (k : ℕ) (a : Completion Ω), ‖Q k a‖ ≤ ‖a‖) ∧ StrictMono L ∧ (∀ i : ℕ, i ≤ L i) ∧ (∀ (i : ℕ) (j : ℕ+), (j : ℕ) ≤ i + 1 → N j ≤ L i) ∧ (∀ (i : ℕ) (a : S × (Fin (n + 2) → G)), pz i a = Q (L i) (z a : Completion Ω)) ∧ (∀ (i : ℕ) (a : S × (Fin (n + 1) → G)), pb i a = Q (L i) (b a)) ∧ (∀ i : ℕ, ‖acceleratedFieldCochain (F (L i)) (pz i) - z‖ ≤ acceleratedTolerance C i) ∧ (∀ i : ℕ, ‖acceleratedCompletionCochain (acceleratedFieldCochain (F (L i)) (pb i)) - b‖ ≤ acceleratedTolerance C i) ∧ (∀ (i : ℕ) (a : S × (Fin (n + 2) → G)), (e i a : Ω) = (pz i a : Ω) - if i = 0 then 0 else (pz (i - 1) a : Ω)) ∧ (∀ (i : ℕ) (a : S × (Fin (n + 1) → G)), ((c i a : Ω) : Completion Ω) = ((pb i a : Ω) : Completion Ω) - if i = 0 then 0 else ((pb (i - 1) a : Ω) : Completion Ω)) ∧ (∀ (i : ℕ) (s : S), acceleratedTrivialD (F (L i)) G (n + 2) ((e i).curry s) = 0) ∧ (∀ (i : ℕ) (s : S), acceleratedTrivialD (F (L i)) G (n + 1) ((c i).curry s) = (e i).curry s) ∧ (∀ (i : ℕ) (a : S × (Fin (n + 2) → G)), (∑ k ∈ Finset.range (i + 1), (e k a : Ω)) = (pz i a : Ω)) ∧ TendstoUniformly (fun i a ↦ ∑ k ∈ Finset.range (i + 1), (e k a : Ω)) z atTop ∧ (∀ i : ℕ, 1 ≤ i → ‖e i‖ ≤ max (acceleratedTolerance C i) (acceleratedTolerance C (i - 1)) ∧ ‖c i‖ ≤ max (acceleratedTolerance C i) (acceleratedTolerance C (i - 1)) ∧ max (acceleratedTolerance C i) (acceleratedTolerance C (i - 1)) ≤ (2 : ℝ)⁻¹ ^ (i - 1) / acceleratedLoss C i) ∧ (∀ a : S × (Fin (n + 2) → G), ∀ᶠ i : ℕ in atTop, e i a = 0) ∧ ∀ (i : ℕ) (j : ℕ+) (s : S) (R : Set (Fin (n + 3) → G)), (j : ℕ) ≤ i → (∀ g ∈ R, z (s, fun q ↦ (g q.castSucc)⁻¹ * g q.succ) ∈ F (N j)) → ∀ g ∈ R, e i (s, fun q ↦ (g q.castSucc)⁻¹ * g q.succ) = 0",
+  "branch": "newtargets-dag",
+  "by": "Q41",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "Degree n+2 parametrizes precisely n>=2. The existing continuousInhomogeneousD is specialized to trivial action. pz, pb, e and c are continuous finite-field-valued maps uniquely fixed by their evaluation equations; their existential binders add no assumptions."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-2d4186657",
+  "group": "Q41",
+  "result": "pass",
+  "note": "Every node clause has a Lean counterpart. The node's n>=2 is rendered as degrees n+2/n+1. Ω is any IsAlgClosure field with a NormedAlgebra norm, unique and so the node's norm; B is the actual Completion Ω. The node's d is acceleratedTrivialD, an abbrev of the landed continuousInhomogeneousD at the trivial representation; checked via Fin.contractNth, including d^0=0. The Q_k are continuous Q_l-linear contractions fixing F_k. L is StrictMono with L_i>=i and N_j<=L_i for j<=i+1. pz/pb/e/c are pinned by equations. de_i=0 and dc_i=e_i hold in F_{L_i}. The telescoping sum converges uniformly in Ω. The norm bounds use max(δ_i,δ_{i-1})<=2^{-(i-1)}/D_i. e_i vanishes pointwise eventually and on any R. Nothing is claimed for c_i and no retraction is assumed. Edge cases i=0, i=j=1, empty R, singleton S, trivial G all pass. The statement field is verbatim. One sorry, on the main theorem, whose docstring has all six proof steps. Helpers are real and documented. The only stmt_dep addition is the landed def node def-sfb-continuous-inhomogeneous-cochains. A local abbrev is correct because rectangleTrivialD is owned by a theorem node. No stage-2 supersession. Report has both sections. No file changed, no recompile."
+ }
+}

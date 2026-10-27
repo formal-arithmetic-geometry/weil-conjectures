@@ -1,0 +1,98 @@
+{
+ "id": "lem-sfb-smooth-nonzero-complex-reciprocal",
+ "kind": "statement",
+ "title": "Smooth reciprocal of a nowhere zero complex function",
+ "statement": "Use $\\mathbf R,\\mathbf C$ [def-weil-field] with their usual Euclidean structures. Let $m\\geq1$, let $U\\subseteq\\mathbf R^m$ be open, and let $f:U\\to\\mathbf C$ be smooth, meaning real $C^\\infty$ (all real coordinate derivatives of every finite order exist and are continuous). If $f(x)\\ne0$ for every $x\\in U$, then the pointwise reciprocal $x\\mapsto f(x)^{-1}$ is smooth on $U$. The open set may be empty.",
+ "source": {
+  "document": "Mathlib/Analysis/Calculus/ContDiff/Operations.lean",
+  "place": "ContDiffOn.inv, lines 801–804 (read), with scalar real differentiation and complex target."
+ },
+ "stmt_deps": [
+  "def-weil-field"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A smooth nonzero complex valued function on an open real Euclidean set has a smooth pointwise reciprocal",
+   "results": "Returned ContDiffOn.inv (Mathlib/Analysis/Calculus/ContDiff/Operations), ContDiff.inv, ContDiffWithinAt.inv, ContDiffAt.inv and contDiffOn_inv.",
+   "date": "2026-10-24",
+   "verdict": "match: ContDiffOn.inv gives exactly smoothness of the reciprocal on the nonvanishing locus."
+  },
+  {
+   "tool": "leansearch",
+   "query": "If f is smooth and never zero on a set then one divided by f is smooth on that set",
+   "results": "Returned ContMDiffOn.inv₀, ContDiffWithinAt.inv and ContDiffOn.fun_div among other inverse/division results.",
+   "date": "2026-10-24",
+   "verdict": "match: ContDiffOn.inv gives exactly smoothness of the reciprocal on the nonvanishing locus."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"ContDiffOn.inv\"",
+   "results": "[loogle] OK 2 hit(s): ContDiffOn.inv (Mathlib.Analysis.Calculus.ContDiff.Operations) and ContDiffOn.inversion (Euclidean inversion).",
+   "date": "2026-10-24",
+   "verdict": "match: ContDiffOn.inv gives exactly smoothness of the reciprocal on the nonvanishing locus."
+  },
+  {
+   "tool": "grep",
+   "query": "theorem ContDiffOn.inv|theorem contDiffOn_inv",
+   "results": "[grep] OK 2 hit(s): Mathlib/Analysis/Calculus/ContDiff/Operations.lean:791 contDiffOn_inv and :802 ContDiffOn.inv.",
+   "date": "2026-10-24",
+   "verdict": "match: ContDiffOn.inv gives exactly smoothness of the reciprocal on the nonvanishing locus."
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "ContDiffOn.inv",
+  "file": "Mathlib/Analysis/Calculus/ContDiff/Operations.lean",
+  "line": 802,
+  "how": "specializes in one line: source Fin m → R, base field R, target field C, s = U, n = infinity. Represent a function on U by any extension outside U; ContDiffOn and the nonvanishing assumption only concern U. Lines 802–804 give ContDiffOn R n of its pointwise reciprocal."
+ },
+ "status": "mathlib",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-coordinate-weighted-adjoint",
+  "date": "2026-10-24",
+  "group": "Q02"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Haboush symmetric-power lifting for a trivial quotient representation. Supporting representation-theoretic input: Steinberg endomorphisms detect a nonzero fixed vector. Supporting Self-duality of rho section modules at characteristic-dependent weights. Supporting input: Positive-characteristic simplicity step, using irreducibility of the Steinberg induced module rather than assuming self-duality. Numerical input to the dimension comparison: Weyl dimension of the induced module. Supporting Kempf vanishing for dominant flag line bundles. Characteristic-zero branch of Milne 22.51: apply Kodaira to M_(lambda+2rho). Supporting injectivity argument for Kodaira: Popa Theorem 1.6.6 used in the proof of Theorem 1.6.1. Supporting input: Popa Theorem 1.6.6 proof: Hodge-theory vanishing of the differential on structure-sheaf cohomology of the smooth projective root cover. Supporting input: Harmonic representatives on complex projective manifolds. Supporting analytic input: the decomposition of all forms underlying the representative assertion Analytic prerequisite: Kong Lemmas 6.2 and 6.4, smooth formal adjoints and ellipticity of the Dolbeault Laplacian. Supporting input: Localize the adjunction calculation to a real coordinate chart with arbitrary Hermitian Gram matrices and volume density. Supporting scalar calculus input: Smooth reciprocal of a nowhere zero complex function.",
+   "via": [
+    "lem-sfb-coordinate-weighted-adjoint",
+    "lem-sfb-dolbeault-laplacian-elliptic",
+    "lem-sfb-hermitian-dolbeault-orthogonal-decomposition",
+    "lem-sfb-projective-harmonic-representatives",
+    "lem-sfb-hodge-first-differential-zero",
+    "lem-sfb-kollar-smooth-divisor-injectivity",
+    "lem-sfb-kodaira-vanishing",
+    "lem-sfb-dominant-flag-line-kempf-vanishing",
+    "lem-sfb-induced-weyl-dimension-formula",
+    "lem-sfb-steinberg-induced-module-irreducible",
+    "lem-sfb-rho-section-self-duality",
+    "lem-sfb-steinberg-endomorphism-detection",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ }
+}

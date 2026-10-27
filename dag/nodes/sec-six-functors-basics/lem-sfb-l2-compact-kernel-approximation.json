@@ -1,0 +1,407 @@
+{
+ "id": "lem-sfb-l2-compact-kernel-approximation",
+ "kind": "statement",
+ "title": "Compact probability kernels approximate the identity in L2",
+ "statement": "Use $\\mathbf R$ [def-weil-field]. Let $m\\geq1$ and $r\\geq0$ be integers and use Lebesgue measure on $\\mathbf R^m$. Let $k:\\mathbf R^m\\to\\mathbf R$ be measurable, nonnegative almost everywhere, integrable, with $\\int k=1$, and zero almost everywhere outside the closed unit ball. For $\\epsilon>0$ define $k_\\epsilon(y)=\\epsilon^{-m}k(y/\\epsilon)$. For each measurable $g:\\mathbf R^m\\to\\mathbf R^r$ with $\\int\\|g\\|^2<\\infty$, the convolution $$A_\\epsilon g(x)=\\int_{\\mathbf R^m}k_\\epsilon(y)g(x-y)\\,dy$$ exists for almost every $x$, represents an element of $L^2$ (measurable functions modulo almost-everywhere equality), and satisfies $\\|A_\\epsilon g\\|_2\\leq\\|g\\|_2$ and $$\\lim_{\\epsilon\\downarrow0}\\|A_\\epsilon g-g\\|_2=0,\\qquad\\|g\\|_2=\\left(\\int\\|g(x)\\|^2\\,dx\\right)^{1/2}.$$ The resulting $L^2$ class is independent of the measurable representatives of $k$ and $g$.",
+ "source": {
+  "document": "Mathlib/MeasureTheory/Function/LpSpace/DomAct/Continuous.lean",
+  "place": "Lp.instContinuousSMulDomMulAct:53–59 and its additive translation version supply strong continuity; supporting approximate-identity input formulated by the agent from this and Bochner averaging/Fubini. The full L2 convolution assertion is not claimed to be stated by this file. Demailly course Differential and pseudodifferential operators on manifolds, §2, p.3 supplies the Sobolev context; WANTED locally."
+ },
+ "stmt_deps": [
+  "def-weil-field"
+ ],
+ "proof": [
+  {
+   "text": "First choose Borel representatives of $k,g$ using [lem-sfb-euclidean-bochner-integral-calculus]. Replace the representative of $k$ by its nonnegative part times the indicator of the closed unit ball; this is Borel, equals $k$ almost everywhere, and is everywhere nonnegative and zero outside that ball. These replacements preserve the hypotheses. For any fixed $x$, the map $y\\mapsto x-y$ preserves null sets: every null set lies in a Borel null set $B$, and [lem-sfb-euclidean-jacobian-nonnegative-integrability], applied to this global affine diffeomorphism, whose absolute Jacobian is $1$, and to the indicator of $B$, gives that the Borel preimage of $B$ has measure $\\int\\mathbf 1_B=0$. The same argument for $y\\mapsto y/\\epsilon$ has constant positive Jacobian $\\epsilon^{-m}$ and also preserves null sets. Thus for every fixed $\\epsilon>0$ and $x$, replacing $k,g$ by these representatives changes the integrand only on a null set in $y$. The integrability and integral clauses of [lem-sfb-euclidean-bochner-integral-calculus] then show that all section integrals, wherever integrable, agree. We may prove the assertions for these Borel representatives. This also establishes independence of the original representatives once existence has been proved.",
+   "uses": [
+    "lem-sfb-euclidean-bochner-integral-calculus",
+    "lem-sfb-euclidean-jacobian-nonnegative-integrability"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "Mathlib/MeasureTheory/Function/LpSpace/DomAct/Continuous.lean",
+    "place": "Agent assembly using the additive translation-continuity instance at 53–59, the Bochner/Prod integration facts and Jacobian change of variables identified by the cited nodes; not a proof quoted from this file."
+   }
+  },
+  {
+   "text": "Fix $\\epsilon>0$ and put $h(y)=k_\\epsilon(y)$. It is Borel and nonnegative and vanishes for $\\|y\\|>\\epsilon$. In [lem-sfb-euclidean-jacobian-nonnegative-integrability] take $D=D'=S=\\mathbf R^m$ and $F(y)=y/\\epsilon$, with absolute Jacobian $\\epsilon^{-m}$. The nonnegative formula gives $\\int h=\\int k=1$, and the integrability clause gives integrability of $h$. The elementary support calculation is $\\|y/\\epsilon\\|=\\|y\\|/\\epsilon$. All change-of-variable maps here are globally bijective $C^1$ maps with $C^1$ inverse, as required.",
+   "uses": [
+    "lem-sfb-euclidean-jacobian-nonnegative-integrability"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "Mathlib/MeasureTheory/Function/LpSpace/DomAct/Continuous.lean",
+    "place": "Agent assembly using the additive translation-continuity instance at 53–59, the Bochner/Prod integration facts and Jacobian change of variables identified by the cited nodes; not a proof quoted from this file."
+   }
+  },
+  {
+   "text": "Define the possibly infinite nonnegative integral $H(x)=\\int h(y)\\|g(x-y)\\|^2\\,dy$. Its joint integrand is Borel: subtraction is continuous, $g,h$ are Borel, and products and squared norms preserve measurability. By [lem-sfb-tonelli-nonnegative-product] its iterated integrals can be swapped. Translation $x\\mapsto x-y$ has absolute Jacobian $1$, so [lem-sfb-euclidean-jacobian-nonnegative-integrability] gives $\\int\\|g(x-y)\\|^2\\,dx=\\|g\\|_2^2$. Consequently $\\int H(x)\\,dx=\\int h(y)\\|g\\|_2^2\\,dy=\\|g\\|_2^2<\\infty$. The finite-integral clause of [lem-sfb-tonelli-nonnegative-product] gives $H(x)<\\infty$ for almost every $x$.",
+   "uses": [
+    "lem-sfb-tonelli-nonnegative-product",
+    "lem-sfb-euclidean-jacobian-nonnegative-integrability"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "Mathlib/MeasureTheory/Function/LpSpace/DomAct/Continuous.lean",
+    "place": "Agent assembly using the additive translation-continuity instance at 53–59, the Bochner/Prod integration facts and Jacobian change of variables identified by the cited nodes; not a proof quoted from this file."
+   }
+  },
+  {
+   "text": "For each $x$ with $H(x)<\\infty$, apply the scalar integral Cauchy–Schwarz clause of [lem-sfb-real-l2-hilbert-pairing] to $a(y)=\\sqrt{h(y)}$ and $b(y)=\\sqrt{h(y)}\\|g(x-y)\\|$. Both are measurable and square integrable, with squared norm integrals $1$ and $H(x)$. It gives $\\int h(y)\\|g(x-y)\\|\\,dy\\leq\\sqrt{H(x)}<\\infty$. The norm criterion of [lem-sfb-euclidean-bochner-integral-calculus] proves existence of the required vector integral at this $x$; its norm bound gives $\\|A_\\epsilon g(x)\\|^2\\leq H(x)$.",
+   "uses": [
+    "lem-sfb-real-l2-hilbert-pairing",
+    "lem-sfb-euclidean-bochner-integral-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "Mathlib/MeasureTheory/Function/LpSpace/DomAct/Continuous.lean",
+    "place": "Agent assembly using the additive translation-continuity instance at 53–59, the Bochner/Prod integration facts and Jacobian change of variables identified by the cited nodes; not a proof quoted from this file."
+   }
+  },
+  {
+   "text": "Apply the parameter-integral measurability clause of [lem-sfb-euclidean-bochner-integral-calculus] to the Borel function $(x,y)\\mapsto h(y)g(x-y)$; assign zero to a nonintegrable section. This produces a Borel representative of $A_\\epsilon g$. Integrating the preceding nonnegative inequality, using monotonicity from [lem-sfb-tonelli-nonnegative-product], gives $\\int\\|A_\\epsilon g\\|^2\\leq\\int H=\\|g\\|_2^2$. It therefore defines an $L^2$ class with the claimed contraction bound. By step 1 this is also the class for every original measurable representative.",
+   "uses": [
+    "lem-sfb-euclidean-bochner-integral-calculus",
+    "lem-sfb-tonelli-nonnegative-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "Mathlib/MeasureTheory/Function/LpSpace/DomAct/Continuous.lean",
+    "place": "Agent assembly using the additive translation-continuity instance at 53–59, the Bochner/Prod integration facts and Jacobian change of variables identified by the cited nodes; not a proof quoted from this file."
+   }
+  },
+  {
+   "text": "Linearity from [lem-sfb-euclidean-bochner-integral-calculus] and $\\int h=1$ give $A_\\epsilon g(x)-g(x)=\\int h(y)(g(x-y)-g(x))\\,dy$ for almost every $x$: both original sections are integrable, the constant-vector section having norm integral $\\|g(x)\\|$. Put $H_\\Delta(x)=\\int h(y)\\|g(x-y)-g(x)\\|^2\\,dy$. Tonelli [lem-sfb-tonelli-nonnegative-product] and $\\|u-v\\|^2\\leq2\\|u\\|^2+2\\|v\\|^2$ give $\\int H_\\Delta\\leq4\\|g\\|_2^2$, using the unit-Jacobian translation formula of [lem-sfb-euclidean-jacobian-nonnegative-integrability]. Hence $H_\\Delta<\\infty$ almost everywhere. For those $x$, Cauchy–Schwarz [lem-sfb-real-l2-hilbert-pairing] with $\\sqrt h$ and $\\sqrt h\\|g(x-y)-g(x)\\|$, followed by the Bochner norm bound, gives $\\|A_\\epsilon g(x)-g(x)\\|^2\\leq H_\\Delta(x)$. Integrate and swap the nonnegative integrals to obtain\n$$\\|A_\\epsilon g-g\\|_2^2\\leq\\int h(y)\\|T_y g-g\\|_2^2\\,dy,\\qquad T_y g(x)=g(x-y).$$\nAll the integrands are Borel before integration, and Lebesgue measure on each Euclidean factor is sigma-finite.",
+   "uses": [
+    "lem-sfb-euclidean-bochner-integral-calculus",
+    "lem-sfb-tonelli-nonnegative-product",
+    "lem-sfb-euclidean-jacobian-nonnegative-integrability",
+    "lem-sfb-real-l2-hilbert-pairing"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "Mathlib/MeasureTheory/Function/LpSpace/DomAct/Continuous.lean",
+    "place": "Agent assembly using the additive translation-continuity instance at 53–59, the Bochner/Prod integration facts and Jacobian change of variables identified by the cited nodes; not a proof quoted from this file."
+   }
+  },
+  {
+   "text": "Given $\\eta>0$, [lem-sfb-l2-translation-continuity] supplies $\\delta>0$ such that $\\|T_y g-g\\|_2<\\eta/2$ for $\\|y\\|<\\delta$. If $0<\\epsilon<\\delta$, $h$ vanishes outside $\\|y\\|\\leq\\epsilon$, so monotonicity and scalar homogeneity [lem-sfb-tonelli-nonnegative-product] bound the last integral by $(\\eta/2)^2\\int h=(\\eta/2)^2$. Thus $\\|A_\\epsilon g-g\\|_2\\leq\\eta/2<\\eta$, proving the asserted right-hand limit. The argument also covers $g=0$ and $r=0$, since all squared norms and integrals then vanish.",
+   "uses": [
+    "lem-sfb-l2-translation-continuity",
+    "lem-sfb-tonelli-nonnegative-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "Mathlib/MeasureTheory/Function/LpSpace/DomAct/Continuous.lean",
+    "place": "Agent assembly using the additive translation-continuity instance at 53–59, the Bochner/Prod integration facts and Jacobian change of variables identified by the cited nodes; not a proof quoted from this file."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-euclidean-bochner-integral-calculus",
+  "lem-sfb-euclidean-jacobian-nonnegative-integrability",
+  "lem-sfb-tonelli-nonnegative-product",
+  "lem-sfb-real-l2-hilbert-pairing",
+  "lem-sfb-l2-translation-continuity"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "Mathlib/MeasureTheory/Function/LpSpace/DomAct/Continuous.lean",
+  "place": "Agent assembly using the additive translation-continuity instance at 53–59, the Bochner/Prod integration facts and Jacobian change of variables identified by the cited nodes; not a proof quoted from this file."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For a nonnegative compactly supported kernel with integral one, the rescaled approximate identity convolutions converge to any L2 function in L2 norm",
+   "results": {
+    "t": "2026-10-24T03:32:07Z",
+    "tool": "leanfinder",
+    "query": "For a nonnegative compactly supported kernel with integral one, the rescaled approximate identity convolutions converge to any L2 function in L2 norm",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "MeasureTheory.convolution_tendsto_right",
+     "MeasureTheory.dist_convolution_le",
+     "ContDiffBump.ae_convolution_tendsto_right_of_locallyIntegrable",
+     "ContDiffBump.convolution_tendsto_right",
+     "tendsto_integral_comp_smul_smul_of_integrable",
+     "tendsto_integral_comp_smul_smul_of_integrable'",
+     "ContDiffBump.convolution_tendsto_right_of_continuous",
+     "MeasureTheory.ConvolutionExistsAt.of_norm"
+    ],
+    "digest": "aaaeb4d206189919"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: the convolution_tendsto_right and bump theorems assert pointwise/ae convergence under pointwise hypotheses, not this L2 norm assertion. The Lp domain-action continuity instance gives norm-continuous translations; obtaining the asserted convolution classes still needs the Bochner-integral/Fubini identification, so this is not a one-line specialization. PeakFunction results require an integrable function of the translation parameter, whereas its uncut L2-valued translation orbit need not be globally integrable."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Convolution with rescaled compactly supported probability densities converges in Lp norm as the support shrinks to zero",
+   "results": {
+    "t": "2026-10-24T03:32:04Z",
+    "tool": "leansearch",
+    "query": "Convolution with rescaled compactly supported probability densities converges in Lp norm as the support shrinks to zero",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "HasCompactSupport.continuous_convolution_right",
+     "HasCompactSupport.continuous_convolution_left",
+     "MeasureTheory.convolution_tendsto_right",
+     "ContDiffBump.convolution_tendsto_right",
+     "ProbabilityTheory.Kernel.tendsto_eLpNorm_one_restrict_densityProcess_limitProcess",
+     "MeasureTheory.MemLp.exists_hasCompactSupport_integral_rpow_sub_le",
+     "HasCompactSupport.convolution",
+     "MeasureTheory.MemLp.exists_hasCompactSupport_eLpNorm_sub_le"
+    ],
+    "digest": "d2617ebe8847a933"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: the convolution_tendsto_right and bump theorems assert pointwise/ae convergence under pointwise hypotheses, not this L2 norm assertion. The Lp domain-action continuity instance gives norm-continuous translations; obtaining the asserted convolution classes still needs the Bochner-integral/Fubini identification, so this is not a one-line specialization. PeakFunction results require an integrable function of the translation parameter, whereas its uncut L2-valued translation orbit need not be globally integrable."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"convolution\", \"Lp\"",
+   "results": {
+    "t": "2026-10-24T03:32:04Z",
+    "tool": "loogle",
+    "query": "\"convolution\", \"Lp\"",
+    "sub": "",
+    "ok": true,
+    "n_hits": 6,
+    "note": "",
+    "top": [
+     "MeasureTheory.ConvolutionExists.of_memLp_memLp",
+     "MeasureTheory.eLpNorm_convolution_integrand_le",
+     "CategoryTheory.MonoidalCategory.DayConvolutionUnit.instIsLeftKanExtensionProdDiscretePUnitExternalProductExtensionUnitLeftφ",
+     "CategoryTheory.MonoidalCategory.DayConvolutionUnit.instIsLeftKanExtensionProdDiscretePUnitExternalProductExtensionUnitRightφ",
+     "CategoryTheory.MonoidalCategory.DayConvolution.instIsLeftKanExtensionProdExternalProductConvolutionExtensionUnitLeftUnit",
+     "CategoryTheory.MonoidalCategory.DayConvolution.instIsLeftKanExtensionProdExternalProductConvolutionExtensionUnitRightUnit"
+    ],
+    "digest": "c2750eba255bb2e9"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: the convolution_tendsto_right and bump theorems assert pointwise/ae convergence under pointwise hypotheses, not this L2 norm assertion. The Lp domain-action continuity instance gives norm-continuous translations; obtaining the asserted convolution classes still needs the Bochner-integral/Fubini identification, so this is not a one-line specialization. PeakFunction results require an integrable function of the translation parameter, whereas its uncut L2-valued translation orbit need not be globally integrable."
+  },
+  {
+   "tool": "grep",
+   "query": "approximate.?identity|eLpNorm.*convolution|convolution.*eLpNorm|convolution.*tendsto|tendsto.*convolution",
+   "results": {
+    "t": "2026-10-24T03:32:03Z",
+    "tool": "grep",
+    "query": "approximate.?identity|eLpNorm.*convolution|convolution.*eLpNorm|convolution.*tendsto|tendsto.*convolution",
+    "sub": "Analysis",
+    "ok": true,
+    "n_hits": 10,
+    "note": "",
+    "top": [
+     "Mathlib/Analysis/Convolution.lean",
+     "Mathlib/Analysis/Convolution.lean",
+     "Mathlib/Analysis/Convolution.lean",
+     "Mathlib/Analysis/Convolution.lean",
+     "Mathlib/Analysis/Calculus/BumpFunction/Convolution.lean",
+     "Mathlib/Analysis/Calculus/BumpFunction/Convolution.lean",
+     "Mathlib/Analysis/Calculus/BumpFunction/Convolution.lean",
+     "Mathlib/Analysis/Calculus/BumpFunction/Convolution.lean"
+    ],
+    "digest": "518fbe83e3aedaa5"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: the convolution_tendsto_right and bump theorems assert pointwise/ae convergence under pointwise hypotheses, not this L2 norm assertion. The Lp domain-action continuity instance gives norm-continuous translations; obtaining the asserted convolution classes still needs the Bochner-integral/Fubini identification, so this is not a one-line specialization. PeakFunction results require an integrable function of the translation parameter, whereas its uncut L2-valued translation orbit need not be globally integrable."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Translations are strongly continuous on L2 and averaging translations against compactly supported probability kernels shrinking to zero converges to the identity in norm",
+   "results": {
+    "t": "2026-10-24T03:33:26Z",
+    "tool": "leanfinder",
+    "query": "Translations are strongly continuous on L2 and averaging translations against compactly supported probability kernels shrinking to zero converges to the identity in norm",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "ContDiffBump.convolution_tendsto_right",
+     "MeasureTheory.convolution_tendsto_right",
+     "ContDiffBump.convolution_tendsto_right_of_continuous",
+     "ContDiffBump.ae_convolution_tendsto_right_of_locallyIntegrable",
+     "tendsto_integral_comp_smul_smul_of_integrable",
+     "tendsto_integral_comp_smul_smul_of_integrable'",
+     "MeasureTheory.tendsto_measure_vadd_diff_isCompact_isClosed",
+     "MeasureTheory.continuous_integral_apply_neg_add"
+    ],
+    "digest": "1df516f422dedd5c"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: the convolution_tendsto_right and bump theorems assert pointwise/ae convergence under pointwise hypotheses, not this L2 norm assertion. The Lp domain-action continuity instance gives norm-continuous translations; obtaining the asserted convolution classes still needs the Bochner-integral/Fubini identification, so this is not a one-line specialization. PeakFunction results require an integrable function of the translation parameter, whereas its uncut L2-valued translation orbit need not be globally integrable."
+  },
+  {
+   "tool": "grep",
+   "query": "instContinuousSMulDomMulAct|tendsto_integral_comp_smul_smul_of_integrable|integral_comp_smul_smul",
+   "results": {
+    "t": "2026-10-24T03:33:25Z",
+    "tool": "grep",
+    "query": "instContinuousSMulDomMulAct|tendsto_integral_comp_smul_smul_of_integrable|integral_comp_smul_smul",
+    "sub": "MeasureTheory",
+    "ok": true,
+    "n_hits": 5,
+    "note": "",
+    "top": [
+     "Mathlib/MeasureTheory/Function/LpSpace/DomAct/Continuous.lean",
+     "Mathlib/MeasureTheory/Integral/PeakFunction.lean",
+     "Mathlib/MeasureTheory/Integral/PeakFunction.lean",
+     "Mathlib/MeasureTheory/Integral/PeakFunction.lean",
+     "Mathlib/MeasureTheory/Integral/PeakFunction.lean"
+    ],
+    "digest": "288a8c597fb41511"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: the convolution_tendsto_right and bump theorems assert pointwise/ae convergence under pointwise hypotheses, not this L2 norm assertion. The Lp domain-action continuity instance gives norm-continuous translations; obtaining the asserted convolution classes still needs the Bochner-integral/Fubini identification, so this is not a one-line specialization. PeakFunction results require an integrable function of the translation parameter, whereas its uncut L2-valued translation orbit need not be globally integrable."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Convolution against nonnegative compactly supported rescaled probability kernels tends to the identity in L2 norm, not merely pointwise",
+   "results": {
+    "t": "2026-10-24T04:00:47Z",
+    "tool": "leanfinder",
+    "query": "Convolution against nonnegative compactly supported rescaled probability kernels tends to the identity in L2 norm, not merely pointwise",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "MeasureTheory.convolution_tendsto_right",
+     "ContDiffBump.convolution_tendsto_right",
+     "ContDiffBump.ae_convolution_tendsto_right_of_locallyIntegrable",
+     "MeasureTheory.dist_convolution_le",
+     "ContDiffBump.convolution_tendsto_right_of_continuous",
+     "ContDiffBump.normed_convolution_eq_right",
+     "MeasureTheory.convolution_eq_right'",
+     "MeasureTheory.ConvolutionExistsAt.of_norm'"
+    ],
+    "digest": "3da352a0a4025c66"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: convolution_tendsto_right at Analysis/Convolution.lean:789 assumes joint pointwise convergence of its second input; using an L2-valued orbit still needs identification of the Bochner average with a.e. pointwise convolution. Norm existence, representative independence, and that identification are not a one-line specialization."
+  },
+  {
+   "tool": "grep",
+   "query": "convolution_tendsto_right|eLpNorm_convolution|convolution.*Lp|Lp.*convolution",
+   "results": {
+    "t": "2026-10-24T04:00:45Z",
+    "tool": "grep",
+    "query": "convolution_tendsto_right|eLpNorm_convolution|convolution.*Lp|Lp.*convolution",
+    "sub": "Analysis",
+    "ok": true,
+    "n_hits": 10,
+    "note": "",
+    "top": [
+     "Mathlib/Analysis/Convolution.lean",
+     "Mathlib/Analysis/Convolution.lean",
+     "Mathlib/Analysis/Convolution.lean",
+     "Mathlib/Analysis/Convolution.lean",
+     "Mathlib/Analysis/Convolution.lean",
+     "Mathlib/Analysis/Calculus/BumpFunction/Convolution.lean",
+     "Mathlib/Analysis/Calculus/BumpFunction/Convolution.lean",
+     "Mathlib/Analysis/Calculus/BumpFunction/Convolution.lean"
+    ],
+    "digest": "5b9e2a5b5a5e904c"
+   },
+   "date": "2026-10-24",
+   "verdict": "no full match: inspected Analysis/Convolution.lean:789 and the pointwise bump-function results; inherited PeakFunction candidate also assumes a globally integrable input orbit."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-euclidean-sobolev-graph-mollification",
+  "date": "2026-10-24",
+  "group": "Q06"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "mathlib_candidate": {
+  "declarations": [
+   "MeasureTheory.Lp.instContinuousVAddDomAddAct",
+   "MeasureTheory.convolution_tendsto_right",
+   "tendsto_integral_comp_smul_smul_of_integrable"
+  ],
+  "reason": "Strongly continuous translations can be averaged in L2 against k; identifying this Bochner integral with the almost-everywhere pointwise convolution is additional work. Neither pointwise convolution convergence nor a peak-function limit alone states the node."
+ },
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Haboush symmetric-power lifting for a trivial quotient representation. Supporting representation-theoretic input: Steinberg endomorphisms detect a nonzero fixed vector. Supporting Self-duality of rho section modules at characteristic-dependent weights. Supporting input: Positive-characteristic simplicity step, using irreducibility of the Steinberg induced module rather than assuming self-duality. Numerical input to the dimension comparison: Weyl dimension of the induced module. Supporting Kempf vanishing for dominant flag line bundles. Characteristic-zero branch of Milne 22.51: apply Kodaira to M_(lambda+2rho). Supporting injectivity argument for Kodaira: Popa Theorem 1.6.6 used in the proof of Theorem 1.6.1. Supporting input: Popa Theorem 1.6.6 proof: Hodge-theory vanishing of the differential on structure-sheaf cohomology of the smooth projective root cover. Supporting input: Harmonic representatives on complex projective manifolds. Supporting analytic input: the decomposition of all forms underlying the representative assertion Analytic prerequisite: Kong Theorem 6.5(4), the general real elliptic-operator decomposition used on the realified type bundle. Supporting input: WANTED locally; Demailly, Complex Analytic and Differential Geometry, June 21, 2012, VI §1 (1.4), VI §2 Sobolev spaces and the closed-Sobolev-range part of Corollary (2.4)(ii), equations (2.5)--(2.6), printed pp.288--290; the local-system argument applies between two metric bundles; read online https://www-fourier.univ-grenoble-alpes.fr/~demailly/manuscripts/agbook.pdf Supporting input for Sobolev closed range: VI §1 (1.4), VI §2 Sobolev-space setup and Rellich lemma (2.2), printed pp.288–289; completion/weak-derivative realization made explicit; WANTED locally, read online https://www-fourier.univ-grenoble-alpes.fr/~demailly/manuscripts/agbook.pdf Supporting local analytic lemma: Euclidean weak Sobolev graphs and smoothing with controlled support. Supporting Euclidean input: support-controlled Sobolev smoothing: apply ordinary L2 approximate identities separately to the finitely many weak derivative representatives, without any Sobolev assumption in this analytic tool.",
+   "via": [
+    "lem-sfb-euclidean-sobolev-graph-mollification",
+    "lem-sfb-bundle-sobolev-rellich",
+    "lem-sfb-elliptic-sobolev-closed-range",
+    "lem-sfb-elliptic-smooth-fredholm-decomposition",
+    "lem-sfb-hermitian-dolbeault-orthogonal-decomposition",
+    "lem-sfb-projective-harmonic-representatives",
+    "lem-sfb-hodge-first-differential-zero",
+    "lem-sfb-kollar-smooth-divisor-injectivity",
+    "lem-sfb-kodaira-vanishing",
+    "lem-sfb-dominant-flag-line-kempf-vanishing",
+    "lem-sfb-induced-weyl-dimension-formula",
+    "lem-sfb-steinberg-induced-module-irreducible",
+    "lem-sfb-rho-section-self-duality",
+    "lem-sfb-steinberg-endomorphism-detection",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-l2-compact-kernel-approximation",
+  "worker": "stage1",
+  "summary": "N8: retained the statement, audited completed-measure representatives via Borel versions, proved scaling/mass/support and a.e. existence by Tonelli and integral Cauchy–Schwarz, derived the squared L2 error bound and concluded by strong continuity of translations. Three new generic Mathlib leaves; reused existing Jacobian and Hilbert/Cauchy–Schwarz nodes. No Lean or compiler invocation.",
+  "blueprint": "Realizes the supporting ordinary L2 approximate-identity input in the existing blueprint.from.place chain, below Euclidean Sobolev graph mollification. The current latest blueprint direct-images proof (3) is preserved; no unit or chapter route is replaced. The ancestor search returns None; this inherited null ancestor and its full via chain are retained."
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-N8-fec0cf890",
+  "group": "N8",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-N8-fec0cf890 (reviewer sub-agent of L); spot-checked: I read the item, the three new nodes, the cited nodes (def-weil-field, lem-sfb-euclidean-jacobian-nonnegative-integrability, lem-sfb-real-l2-hilbert-pairing) and the parent lem-sfb-euclidean-sobolev-graph-mollification in full. The live node is still unsplit and there is no repair note. The item's statement and maintainer fields are unchanged from live. The statement is true; I tested r=0, g=0, unbounded L1 kernels and null modifications. Steps 2-7 are correct: dilation gives unit mass and integrability; Tonelli plus the translation Jacobian give ∫H=||g||^2 and H<∞ almost everywhere; scalar Cauchy-Schwarz with sqrt(h) and the Bochner norm criterion give existence almost everywhere and ||A g(x)||^2≤H(x); integral_prod_right (SFinite, no product integrability) gives a Borel representative, hence the contraction; linearity and integral_smul_const give the squared error bound ∫h||T_y g-g||^2; L2 translation continuity gives the limit. I read every Mathlib declaration at its cited line: Lp.instContinuousVAddDomAddAct (Continuous.lean:52-59) with DomAct/Basic.lean:42-45 and :102-104; lintegral_prod/lintegral_prod_symm (Prod.lean:1006/:1030), AEMeasurable.lintegral_prod_right (:979), ae_lt_top' (Markov.lean:148), lintegral_mono_ae (Lebesgue/Basic.lean:217), lintegral_const_mul'' (Add.lean:400); integral_add, integral_congr_ae, norm_integral_le_integral_norm (Bochner/Basic.lean:237/:299/:934), integral_smul_const (ContinuousLinearMap.lean:218), integrable_norm_iff (Integrable.lean:617), measurable_mk/ae_eq_mk. All three new nodes are valid one-declaration-per-clause Mathlib leaves, and none restates the item. I found no duplicates in the DAG: the tonelli/fubini, DomAddAct/translation and Bochner greps hit only unrelated nodes. No SGA, all citations are same-unit leaves, and no tool_uses are needed. FIX: step 1 applied the Jacobian lower-integral identity to the indicator of an arbitrary null set, which only gives inner measure zero. I enlarged it to a Borel null hull B, so the preimage is Borel with measure ∫1_B=0. Only that step text was changed, in fixes/dag/nodes/sec-six-functors-basics/lem-sfb-l2-compact-kernel-approximation.json.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.Analysis.L2CompactKernelApproximation",
+  "declaration": "MeasureTheory.l2_compact_kernel_approximation",
+  "file": "lean/Sheaf/Analysis/L2CompactKernelApproximation.lean",
+  "statement": "theorem l2_compact_kernel_approximation (m r : ℕ) (hm : 1 ≤ m) (k : EuclideanSpace ℝ (Fin m) → ℝ) (hk : Integrable k volume) (hk_nonneg : ∀ᵐ y ∂volume, 0 ≤ k y) (hk_integral : ∫ y, k y ∂volume = 1) (hk_support : ∀ᵐ y ∂volume, y ∉ Metric.closedBall 0 1 → k y = 0) (g : EuclideanSpace ℝ (Fin m) → EuclideanSpace ℝ (Fin r)) (hg : MemLp g 2 volume) : ∃ A : ℝ → Lp (EuclideanSpace ℝ (Fin r)) 2 (volume : Measure (EuclideanSpace ℝ (Fin m))), (∀ ε : ℝ, 0 < ε → (∀ᵐ x ∂volume, ConvolutionExistsAt (fun y ↦ ε⁻¹ ^ m * k (ε⁻¹ • y)) g x (ContinuousLinearMap.lsmul ℝ ℝ) volume) ∧ (A ε : EuclideanSpace ℝ (Fin m) → EuclideanSpace ℝ (Fin r)) =ᵐ[volume] convolution (fun y ↦ ε⁻¹ ^ m * k (ε⁻¹ • y)) g (ContinuousLinearMap.lsmul ℝ ℝ) volume ∧ ‖A ε‖ ≤ ‖hg.toLp g‖) ∧ Tendsto (fun ε : ℝ ↦ ‖A ε - hg.toLp g‖) (nhdsWithin 0 (Set.Ioi 0)) (𝓝 0) ∧ (∀ (k' : EuclideanSpace ℝ (Fin m) → ℝ) (g' : EuclideanSpace ℝ (Fin m) → EuclideanSpace ℝ (Fin r)), k' =ᵐ[volume] k → g' =ᵐ[volume] g → ∀ ε : ℝ, 0 < ε → convolution (fun y ↦ ε⁻¹ ^ m * k' (ε⁻¹ • y)) g' (ContinuousLinearMap.lsmul ℝ ℝ) volume =ᵐ[volume] (A ε : EuclideanSpace ℝ (Fin m) → EuclideanSpace ℝ (Fin r)))",
+  "branch": "sheaf-dag",
+  "by": "NF",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-6260ae71e",
+  "group": "NF",
+  "result": "pass",
+  "note": "Clause-by-clause match of node vs l2_compact_kernel_approximation: m≥1/r≥0 naturals, volume on EuclideanSpace, Integrable k, a.e. nonneg, ∫k=1, a.e. support in closedBall 0 1, k_ε = ε⁻¹^m*k(ε⁻¹•y), MemLp g 2 (Euclidean norm), ∀ᵐ ConvolutionExistsAt with lsmul (kernel first, g(x-t), checked Convolution.lean:156/403), Lp class pinned a.e. to the convolution for ε>0, ‖A ε‖≤‖toLp g‖, Tendsto along 𝓝[>]0, representative independence for k',g' a.e.-equal. No extra hypotheses; edge cases r=0, m=1, g=0, null modifications OK. Node diff vs live only in lean; statement verbatim; stmt_deps def-weil-field only, no project decls used; no duplicate in Mathlib/Sheaf/WeilConjectures; docstrings carry source place, blueprint tag and 7-step plan; proof sorry; report has Worker report and Second reading by NF. No file changed, no compile run."
+ }
+}

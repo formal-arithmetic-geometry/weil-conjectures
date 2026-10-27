@@ -1,0 +1,102 @@
+{
+ "id": "lem-sfb-scheme-pullback-point-images",
+ "kind": "statement",
+ "title": "Pointwise images of scheme fibre-product projections and maps",
+ "statement": "Let $X,Y,S$ be schemes [def-pc-scheme], $f:X\\to S$, $g:Y\\to S$, and $P=X\\times_SY$ with projections $p_X,p_Y$ [def-pc-fibre-product]. Then $\\operatorname{im}(|p_Y|)=|g|^{-1}(\\operatorname{im}(|f|))$. Furthermore, let $X^{\\prime},Y^{\\prime}$ be schemes, $f^{\\prime}:X^{\\prime}\\to S$, $g^{\\prime}:Y^{\\prime}\\to S$, and $a:X\\to X^{\\prime}$, $b:Y\\to Y^{\\prime}$ satisfy $f^{\\prime}a=f$ and $g^{\\prime}b=g$. Write $P^{\\prime}=X^{\\prime}\\times_SY^{\\prime}$, with projections $p_X^{\\prime},p_Y^{\\prime}$. The induced map $h=a\\times_Sb:P\\to P^{\\prime}$ satisfies $\\operatorname{im}(|h|)=|p_X^{\\prime}|^{-1}(\\operatorname{im}(|a|))\\cap|p_Y^{\\prime}|^{-1}(\\operatorname{im}(|b|))$. All images are images of underlying point sets; no finiteness or flatness assumption is imposed.",
+ "source": {
+  "document": "Mathlib/AlgebraicGeometry/PullbackCarrier.lean",
+  "place": "Mathlib AlgebraicGeometry.Scheme.Pullback.range_snd, line 337, and range_map, line 355. Used in both paragraphs of Tag 04Q6 to track actual scheme points."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-fibre-product"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The range of a map of scheme fiber products over the same base is the intersection of inverse images of the two ranges",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.Pullback.range_fst_comp\", \"module\": \"Mathlib/AlgebraicGeometry/PullbackCarrier\", \"type\": \"∀ {X Y S : AlgebraicGeometry.Scheme} (f : X ⟶ S) (g : Y ⟶ S),\\n  Set.range\\n      ⇑(CategoryTheory.ConcreteCategory.hom\\n          (CategoryTheory.CategoryStruct.comp (CategoryTheory.Limits.pullback.fst f g) f).base) =\\n    Set.range ⇑(CategoryTheory.ConcreteCategory.hom f.base) ∩ Set.range ⇑(CategoryTh\", \"doc\": \"For morphisms $ f : X \\\\to Z $ and $ g : Y \\\\to Z $ of schemes, the image of the composition of the first projection from the pullback of $ f $ and $ g $ with $ f $ is equal to the intersection of the i\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Pullback.range_snd_comp\", \"module\": \"Mathlib/AlgebraicGeometry/PullbackCarrier\", \"type\": \"∀ {X Y S : AlgebraicGeometry.Scheme} (f : X ⟶ S) (g : Y ⟶ S),\\n  Set.range\\n      ⇑(CategoryTheory.ConcreteCategory.hom\\n          (CategoryTheory.CategoryStruct.comp (CategoryTheory.Limits.pullback.snd f g) g).base) =\\n    Set.range ⇑(CategoryTheory.ConcreteCategory.hom f.base) ∩ Set.range ⇑(CategoryTh\", \"doc\": \"For morphisms $f: X \\\\to Z$ and $g: Y \\\\to Z$ in the category of schemes, the image of the composition $g \\\\circ \\\\text{snd}$ (where $\\\\text{snd}: X \\\\times_Z Y \\\\to Y$ is the second projection of the pullba\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Pullback.range_fst\", \"module\": \"Mathlib/AlgebraicGeometry/PullbackCarrier\", \"type\": \"∀ {X Y S : AlgebraicGeometry.Scheme} (f : X ⟶ S) (g : Y ⟶ S),\\n  Set.range ⇑(CategoryTheory.ConcreteCategory.hom (CategoryTheory.Limits.pullback.fst f g).base) =\\n    ⇑(CategoryTheory.ConcreteCategory.hom f.base) ⁻¹' Set.range ⇑(CategoryTheory.ConcreteCategory.hom g.base)\", \"doc\": \"The image of the first projection morphism from the pullback of $ f $ and $ g $ to $ X $ is equal to the preimage under $ f $ of the image of $ g $, i.e., $ \\\\operatorname{im}(\\\\mathrm{pullback.fst}(f,g\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Pullback.range_snd\", \"module\": \"Mathlib/AlgebraicGeometry/PullbackCarrier\", \"type\": \"∀ {X Y S : AlgebraicGeometry.Scheme} (f : X ⟶ S) (g : Y ⟶ S),\\n  Set.range ⇑(CategoryTheory.ConcreteCategory.hom (CategoryTheory.Limits.pullback.snd f g).base) =\\n    ⇑(CategoryTheory.ConcreteCategory.hom g.base) ⁻¹' Set.range ⇑(CategoryTheory.ConcreteCategory.hom f.base)\", \"doc\": \"For morphisms $f : X \\to Z$ and $g : Y \\to Z$ of schemes, the image of the second projection morphism $X \\times_Z Y \\to Y$ from the pullback is equal to the preimage under $g$ of the image of $f$, i.e., $\"}\n  {\"name\": \"AlgebraicGeometry.IsOpenImmersion.range_pullback_to_base_of_left\", \"module\": \"Mathlib/AlgebraicGeometry/OpenImmersion\", \"type\": \"∀ {X Y Z : AlgebraicGeometry.Scheme} (f : X ⟶ Z) (g : Y ⟶ Z) [H : AlgebraicGeometry.IsOpenImmersion f],\\n  Set.range\\n      ⇑(CategoryTheory.ConcreteCategory.hom\\n          (CategoryTheory.CategoryStruct.comp (CategoryTheory.Limits.pullback.fst f g) f).base) =\\n    Set.range ⇑(CategoryTheory.ConcreteCat\", \"doc\": \"Given an open immersion $ f: X \\\\to Y $ of schemes and a morphism $ g: Z \\\\to Y $, the image of the composition $ \\\\text{pullback.fst}(f,g) \\\\circ f $ is equal to the intersection of the images of $ f $ a\"}\n  {\"name\": \"AlgebraicGeometry.IsOpenImmersion.range_pullback_to_base_of_right\", \"module\": \"Mathlib/AlgebraicGeometry/OpenImmersion\", \"type\": \"∀ {X Y Z : AlgebraicGeometry.Scheme} (f : X ⟶ Z) (g : Y ⟶ Z) [H : AlgebraicGeometry.IsOpenImmersion f],\\n  Set.range\\n      ⇑(CategoryTheory.ConcreteCategory.hom\\n          (CategoryTheory.CategoryStruct.comp (CategoryTheory.Limits.pullback.fst g f) g).base) =\\n    Set.range ⇑(CategoryTheory.ConcreteCat\", \"doc\": \"For an open immersion $ f: X \\\\to Y $ of schemes and any morphism $ g: Z \\\\to Y $, the image of the composition of the first projection from the pullback of $ f $ and $ g $ with $ g $ is equal to the in\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Pullback.range_map\", \"module\": \"Mathlib/AlgebraicGeometry/PullbackCarrier\", \"type\": \"∀ {X Y S : AlgebraicGeometry.Scheme} (f : X ⟶ S) (g : Y ⟶ S) {X' Y' S' : AlgebraicGeometry.Scheme} (f' : X' ⟶ S')\\n  (g' : Y' ⟶ S') (i₁ : X ⟶ X') (i₂ : Y ⟶ Y') (i₃ : S ⟶ S')\\n  (e₁ : CategoryTheory.CategoryStruct.comp f i₃ = CategoryTheory.CategoryStruct.comp i₁ f')\\n  (e₂ : CategoryTheory.CategoryStru\", \"doc\": \"Given morphisms $f: X \\\\to S$ and $g: Y \\\\to S$ of schemes, and compatible morphisms $i_1: X \\\\to X'$, $i_2: Y \\\\to Y'$, $i_3: S \\\\to S'$ where $i_3$ is a monomorphism, the image of the induced pullback ma\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.image_preimage_eq_of_isPullback\", \"module\": \"Mathlib/AlgebraicGeometry/PullbackCarrier\", \"type\": \"∀ {P X Y Z : AlgebraicGeometry.Scheme} {fst : P ⟶ X} {snd : P ⟶ Y} {f : X ⟶ Z} {g : Y ⟶ Z},\\n  CategoryTheory.IsPullback fst snd f g →\\n    ∀ (s : Set ↥X),\\n      ⇑(CategoryTheory.ConcreteCategory.hom snd.base) '' (⇑(CategoryTheory.ConcreteCategory.hom fst.base) ⁻¹' s) =\\n        ⇑(CategoryTheory.Concre\", \"doc\": \"In the category of schemes, given a pullback square with morphisms $ P \\to X $, $ P \\to Y $, $ X \\to Z $, and $ Y \\to Z $, for any subset $ s $ of the underlying topological space of $ X $, the image of t\"}\n",
+   "date": "2026-10-24",
+   "verdict": "match: range_snd (line 337) and range_map (line 355), read in PullbackCarrier.lean"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Scheme.Pullback.range_map",
+   "results": "[loogle] OK 1 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.Pullback.range_map\", \"module\": \"Mathlib.AlgebraicGeometry.PullbackCarrier\", \"type\": \" {X Y S : AlgebraicGeometry.Scheme} (f : X ⟶ S) (g : Y ⟶ S) {X' Y' S' : AlgebraicGeometry.Scheme} (f' : X' ⟶ S') (g' : Y' ⟶ S') (i₁ : X ⟶ X') (i₂ : Y ⟶ Y') (i₃ : S ⟶ S') (e₁ : CategoryTheory.CategoryStruct.comp f i₃ = CategoryTheory.CategoryStruct.comp i₁ f') (e₂ : CategoryTheory.CategoryStruct.comp\", \"doc\": \"\"}\n",
+   "date": "2026-10-24",
+   "verdict": "match: range_snd (line 337) and range_map (line 355), read in PullbackCarrier.lean"
+  },
+  {
+   "tool": "grep",
+   "query": "lemma range_fst|lemma range_snd|lemma range_map",
+   "results": "[grep] OK 5 hit(s)\n  {\"file\": \"328\", \"line\": \"lemma range_fst \", \"text\": \" Set.range (pullback.fst f g) = f ⁻¹' Set.range g := by\"}\n  {\"file\": \"337\", \"line\": \"lemma range_snd \", \"text\": \" Set.range (pullback.snd f g) = g ⁻¹' Set.range f := by\"}\n  {\"file\": \"346\", \"line\": \"lemma range_fst_comp \", \"text\": \"\"}\n  {\"file\": \"350\", \"line\": \"lemma range_snd_comp \", \"text\": \"\"}\n  {\"file\": \"355\", \"line\": \"lemma range_map {X' Y' S' \", \"text\": \" Scheme.{u}} (f' : X' ⟶ S') (g' : Y' ⟶ S') (i₁ : X ⟶ X')\"}\n",
+   "date": "2026-10-24",
+   "verdict": "match: range_snd (line 337) and range_map (line 355), read in PullbackCarrier.lean"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Scheme pullback projection range is inverse image of range",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"CategoryTheory.Limits.Types.range_fst_of_isPullback\", \"module\": \"Mathlib.CategoryTheory.Limits.Types.Pullbacks\", \"type\": \"(h : IsPullback fst snd f g) : Set.range fst = f ⁻¹' Set.range g\", \"doc\": \"In the category of types, if a square formed by morphisms $ P \\to X $, $ P \\to Y $, $ X \\to Z $, and $ Y \\to Z $ is a pullback, then the image of the first projection $ \\text{fst} : P \\to X $ is equal to th\"}\n  {\"name\": \"CategoryTheory.Limits.Types.range_pullbackSnd\", \"module\": \"Mathlib.CategoryTheory.Limits.Types.Pullbacks\", \"type\": \": Set.range (pullback.snd f g) = g ⁻¹' Set.range f\", \"doc\": \"The image of the second projection morphism $\\\\text{snd}: X \\\\times_Z Y \\\\to Y$ in the pullback of morphisms $f: X \\\\to Z$ and $g: Y \\\\to Z$ is equal to the preimage under $g$ of the image of $f$, i.e., $\\\\\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.opensRange_pullbackSnd\", \"module\": \"Mathlib.AlgebraicGeometry.OpenImmersion\", \"type\": \": (pullback.snd f g).opensRange = g ⁻¹ᵁ f.opensRange\", \"doc\": \"Given an open immersion $ f: X \\\\to Y $ of schemes and a morphism $ g: Z \\\\to Y $, the open subset of $ Z $ given by the image of the second projection morphism $ X \\\\times_Y Z \\\\to Z $ in the pullback di\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Pullback.range_fst\", \"module\": \"Mathlib.AlgebraicGeometry.PullbackCarrier\", \"type\": \": Set.range (pullback.fst f g) = f ⁻¹' Set.range g\", \"doc\": \"The image of the first projection morphism from the pullback of $ f $ and $ g $ to $ X $ is equal to the preimage under $ f $ of the image of $ g $, i.e., $ \\\\operatorname{im}(\\\\mathrm{pullback.fst}(f,g\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Pullback.range_snd\", \"module\": \"Mathlib.AlgebraicGeometry.PullbackCarrier\", \"type\": \": Set.range (pullback.snd f g) = g ⁻¹' Set.range f\", \"doc\": \"For morphisms $f : X \\to Z$ and $g : Y \\to Z$ of schemes, the image of the second projection morphism $X \\times_Z Y \\to Y$ from the pullback is equal to the preimage under $g$ of the image of $f$, i.e., $\"}\n  {\"name\": \"CategoryTheory.Limits.Types.range_snd_of_isPullback\", \"module\": \"Mathlib.CategoryTheory.Limits.Types.Pullbacks\", \"type\": \"(h : IsPullback fst snd f g) : Set.range snd = g ⁻¹' Set.range f\", \"doc\": \"Given a pullback square with morphisms $\\\\text{fst}$, $\\\\text{snd}$, $f$, and $g$, the range of $\\\\text{snd}$ is equal to the preimage of the range of $f$ under $g$, i.e., $\\\\text{range}(\\\\text{snd}) = g^{\"}\n  {\"name\": \"CategoryTheory.Limits.Types.range_pullbackFst\", \"module\": \"Mathlib.CategoryTheory.Limits.Types.Pullbacks\", \"type\": \": Set.range (pullback.fst f g) = f ⁻¹' Set.range g\", \"doc\": \"The image of the first projection morphism from the pullback of $ f $ and $ g $ is equal to the preimage under $ f $ of the image of $ g $, i.e., $ \\\\mathrm{im}(\\\\mathrm{fst}) = f^{-1}(\\\\mathrm{im}(g)) $\"}\n  {\"name\": \"AlgebraicGeometry.IsOpenImmersion.opensRange_pullback_fst_of_right\", \"module\": \"Mathlib.AlgebraicGeometry.OpenImmersion\", \"type\": \"∀ {X Y Z : AlgebraicGeometry.Scheme} (f : X ⟶ Z) (g : Y ⟶ Z) [H : AlgebraicGeometry.IsOpenImmersion f],\\n  AlgebraicGeometry.Scheme.Hom.opensRange (CategoryTheory.Limits.pullback.fst g f) =\\n    (TopologicalSpace.Opens.map g.base).obj (AlgebraicGeometry.Scheme.Hom.opensRange f)\", \"doc\": \"For an open immersion $ f: X \\to Z $ of schemes and a morphism $ g: Y \\to Z $, the image of the first projection from the pullback $ Y \\times_Z X $ to $ Y $ is equal to the preimage under $ g $ of the im\"}\n",
+   "date": "2026-10-24",
+   "verdict": "match: range_snd (line 337) and range_map (line 355), read in PullbackCarrier.lean"
+  },
+  {
+   "tool": "grep",
+   "query": "lemma range_snd|lemma range_map",
+   "results": "Mathlib/AlgebraicGeometry/PullbackCarrier.lean:337: lemma range_snd; line 350: lemma range_snd_comp; line 355: lemma range_map. Search run with subdirectory AlgebraicGeometry.",
+   "date": "2026-10-24",
+   "verdict": "match: range_snd at 337 and range_map at 355; statements read."
+  }
+ ],
+ "mathlib_match": {
+  "declaration": [
+   "AlgebraicGeometry.Scheme.Pullback.range_snd",
+   "AlgebraicGeometry.Scheme.Pullback.range_map"
+  ],
+  "file": "Mathlib/AlgebraicGeometry/PullbackCarrier.lean",
+  "line": 337,
+  "how": "range_snd, line 337, is the first clause exactly. range_map, line 355, specializes in one line with S′=S and i₃=id_S (which is Mono) to the second clause."
+ },
+ "status": "mathlib",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-field-groupoid-open-image-closed",
+  "date": "2026-10-24",
+  "group": "Q40"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Affine PGL quotients with closed orbits and zero-dimensional stabilizers. Supporting affine-quotient step: Adequate moduli spaces are universal for separated targets. Alper Theorem 7.2.1, locally separated case through Proposition 7.1.1: Proposition 7.1.1, proof, printed p.36: surjectivity of the diagonal pullback W from condition (a), expanded as its closure-equivalence input. Rational points of a locally separated space over an algebraically closed field have closed images; continuity gives the assertion. This is the geometric-points sublemma, not the universality conclusion. Supporting geometric input: rational sections after field base change are closed immersions. Supporting input: The absolute locally separated space has quasi-compact field-valued representatives. First paragraph of Tag 088J: apply 04Q9 to the kernel relation on the field spectrum and its pair groupoid. Supporting Second proof paragraph of 04Q9: apply 04Q6 to the morphism from the reduced source into the closure groupoid. Supporting Mathlib AlgebraicGeometry.Scheme.Pullback.range_snd, line 337, and range_map, line 355. Used in both paragraphs of Tag 04Q6 to track actual scheme points.",
+   "via": [
+    "lem-sfb-field-groupoid-open-image-closed",
+    "lem-sfb-field-kernel-relation-immersion-closed",
+    "lem-sfb-locally-separated-space-decent",
+    "lem-sfb-locally-separated-rational-point-closed-immersion",
+    "lem-sfb-locally-separated-closure-equivalent-images",
+    "lem-sfb-adequate-locally-separated-universality",
+    "lem-sfb-affine-pgl-finite-stabilizer-quotient",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ }
+}

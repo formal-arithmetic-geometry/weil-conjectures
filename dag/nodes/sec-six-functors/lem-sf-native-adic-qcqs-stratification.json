@@ -1,0 +1,242 @@
+{
+ "id": "lem-sf-native-adic-qcqs-stratification",
+ "kind": "statement",
+ "title": "Finite global stratification for a native adic constructible sheaf on a qcqs scheme",
+ "statement": "Fix a prime $\\ell$ and $\\Omega=\\overline{\\mathbf Q}_\\ell$. For any scheme $X$, let $B_X$ be the locally finite continuous $\\Omega$-valued coefficient sheaf of [def-sf-native-weil-derived-framework], applied on $X_{\\mathrm{proet}}$ itself rather than on a geometric fibre, and let $\\mathcal A(X)=\\operatorname{Mod}(B_X)$. Use the same lisse and constructible conditions as that framework: lisse means pro-etale locally $B^{\\oplus r}$ with $r$ finite and allowed to depend on the covering member; constructible means locally on the scheme a finite constructible locally closed partition with lisse restrictions. For a scheme morphism $f:Y\\to X$, let $f^*M=B_Y\\otimes_{f^{-1}B_X}f^{-1}M$, with the coefficient map induced by precomposition of functions. Let $X$ be quasi-compact and quasi-separated [def-weil-pbc-quasi-compact-scheme, def-weil-quasi-separated-morphism]. Every constructible $M\\in\\mathcal A(X)$ admits a finite stratification [def-constructible-stratification] of the whole scheme $X$ by constructible locally closed subschemes on each of which the restriction of $M$ is lisse. The empty scheme and zero ranks are allowed.",
+ "source": {
+  "document": "lean/WeilConjectures/SixFunctors/ProEtale/Adic/ExtensionByZero.lean",
+  "place": "IsAdicConstructibleSheaf.isAdicStratifiedLisseSheaf, lines 127-198; exists_isAffineOpen, lines 108-125. The result assumes both CompactSpace X and QuasiSeparatedSpace X."
+ },
+ "stmt_deps": [
+  "def-sf-native-weil-derived-framework",
+  "def-weil-pbc-quasi-compact-scheme",
+  "def-weil-quasi-separated-morphism",
+  "def-constructible-stratification"
+ ],
+ "proof": [
+  {
+   "text": "By the constructibility condition in [def-sf-native-weil-derived-framework], applied on $X$ itself as in the statement, choose an open covering $X=\\bigcup_\\alpha V_\\alpha$ and, on each $V_\\alpha$, a finite constructible locally closed immersed partition $t_{\\alpha b}:T_{\\alpha b}\\to V_\\alpha$ such that $t_{\\alpha b}^*(M|_{V_\\alpha})$ is lisse. Apply [lem-weil-pbc-qcqs-scheme-cofinal-finite-coverings] to this open covering: the assumed quasi-compactness and quasi-separatedness of $X$ give a finite affine open covering $W_a\\subseteq V_{\\alpha(a)}$. Enumerate its finite index set by $\\operatorname{Fin}n$.",
+   "uses": [
+    "def-sf-native-weil-derived-framework",
+    "lem-weil-pbc-qcqs-scheme-cofinal-finite-coverings"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "lean/WeilConjectures/SixFunctors/ProEtale/Adic/ExtensionByZero.lean",
+    "place": "IsAdicConstructibleSheaf.exists_isAffineOpen and IsAdicConstructibleSheaf.isAdicStratifiedLisseSheaf, lines 108-198; geometric finite-chart refinement is supplied by the cited existing DAG lemma"
+   }
+  },
+  {
+   "text": "For each $a$, base change the partition of $V_{\\alpha(a)}$ along the open inclusion $q_a:W_a\\to V_{\\alpha(a)}$. By [lemma-constructible-pullback-stratification] the schemes $R_{ab}=T_{\\alpha(a)b}\\times_{V_{\\alpha(a)}}W_a$, with immersions $r_{ab}:R_{ab}\\to W_a$, form a finite locally closed immersed stratification. Their images are the intersections of the original stratum images with $W_a$, hence are constructible in $W_a$ by [lem-weil-pbc-constructible-open-restriction]. Write $p_{ab}:R_{ab}\\to T_{\\alpha(a)b}$ for the first projections and $w_a:W_a\\to X$, $v_\\alpha:V_\\alpha\\to X$ for the inclusions. Pullback composition from [lem-sf-native-adic-pullback-exact-lisse] and $t_{\\alpha(a)b}p_{ab}=q_ar_{ab}$ give $r_{ab}^*w_a^*M\\cong p_{ab}^*t_{\\alpha(a)b}^*v_{\\alpha(a)}^*M$. The same cited node says that the pullback of a lisse object along any scheme morphism is lisse. Therefore every $r_{ab}^*w_a^*M$ is lisse.",
+   "uses": [
+    "lemma-constructible-pullback-stratification",
+    "lem-weil-pbc-constructible-open-restriction",
+    "lem-sf-native-adic-pullback-exact-lisse"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "lean/WeilConjectures/SixFunctors/ProEtale/Adic/ExtensionByZero.lean",
+    "place": "IsAdicConstructibleSheaf.exists_isAffineOpen and IsAdicConstructibleSheaf.isAdicStratifiedLisseSheaf, lines 108-198; geometric finite-chart refinement is supplied by the cited existing DAG lemma"
+   }
+  },
+  {
+   "text": "Apply [lem-weil-pbc-etale-stratification-local-gluing-core] to the finite affine open cover $(W_a)_{a<n}$ and the finite constructible immersed stratifications $(R_{ab})_b$ just obtained. Its only scheme hypotheses are exactly that $X$ is quasi-compact and quasi-separated. It supplies a finite constructible locally closed immersed stratification $s_i:S_i\\to X$ and, for each $i$, indices $a(i),b(i)$ and an actual scheme morphism $h_i:S_i\\to R_{a(i)b(i)}$ such that $s_i=w_{a(i)}r_{a(i)b(i)}h_i$. Thus the refinement has scheme-theoretic factorizations, not just inclusions of its underlying images.",
+   "uses": [
+    "lem-weil-pbc-etale-stratification-local-gluing-core"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "lean/WeilConjectures/SixFunctors/ProEtale/Adic/ExtensionByZero.lean",
+    "place": "IsAdicConstructibleSheaf.exists_isAffineOpen and IsAdicConstructibleSheaf.isAdicStratifiedLisseSheaf, lines 108-198; geometric finite-chart refinement is supplied by the cited existing DAG lemma"
+   }
+  },
+  {
+   "text": "For each $i$, the composition comparison of [lem-sf-native-adic-pullback-exact-lisse] identifies $s_i^*M$ with $h_i^*(r_{a(i)b(i)}^*w_{a(i)}^*M)$. The object in parentheses is lisse by step 2, and the same node gives lissity after pullback by $h_i$. The stratification supplied in step 3 therefore has all the required lisse restrictions, and it is a stratification in [def-constructible-stratification]. When $X$ is empty, take instead the empty indexed family, whose partition and restriction conditions are vacuous. No argument assumes positive or constant rank: the pullback assertion preserves each finite rank, including zero, on each covering member.",
+   "uses": [
+    "lem-sf-native-adic-pullback-exact-lisse",
+    "def-constructible-stratification"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "lean/WeilConjectures/SixFunctors/ProEtale/Adic/ExtensionByZero.lean",
+    "place": "IsAdicConstructibleSheaf.exists_isAffineOpen and IsAdicConstructibleSheaf.isAdicStratifiedLisseSheaf, lines 108-198; geometric finite-chart refinement is supplied by the cited existing DAG lemma"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sf-native-weil-derived-framework",
+  "lem-weil-pbc-qcqs-scheme-cofinal-finite-coverings",
+  "lemma-constructible-pullback-stratification",
+  "lem-weil-pbc-constructible-open-restriction",
+  "lem-sf-native-adic-pullback-exact-lisse",
+  "lem-weil-pbc-etale-stratification-local-gluing-core",
+  "def-constructible-stratification"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "lean/WeilConjectures/SixFunctors/ProEtale/Adic/ExtensionByZero.lean",
+  "place": "Native-coefficient adaptation of the finite affine cover/disjointification proof at lines 108-198, using the existing geometric refinement core; compare Stacks 095E (lemma-constructible-quasi-compact-quasi-separated), implication (2) to (3), in literature/stacks-project/etale-cohomology.tex."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "On a quasi compact quasi separated scheme a locally stratified lisse sheaf of modules over continuous l adic coefficients admits a finite constructible stratification",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.exists_of_res_zero_of_qcqs_of_top\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiSeparated\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} [CompactSpace ↥X] [QuasiSeparatedSpace ↥X] {f s : ↑(X.presheaf.obj (Opposite.op ⊤))},\\n  TopCat.Presheaf.restrictOpen f (X.basicOpen s) ⋯ = 0 → ∃ n, s ^ n * f = 0\", \"doc\": \"Let $X$ be a quasi-compact and quasi-separated scheme, and let $f$ and $s$ be global sections of the structure sheaf $\\\\mathcal{O}_X$. If the restriction of $f$ to the basic open subset $D(s)$ defined \"}\n  {\"name\": \"AlgebraicGeometry.exists_eq_pow_mul_of_isCompact_of_isQuasiSeparated\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiSeparated\", \"type\": \"∀ (X : AlgebraicGeometry.Scheme) (U : X.Opens),\\n  IsCompact U.carrier →\\n    IsQuasiSeparated U.carrier →\\n      ∀ (f : ↑(X.presheaf.obj (Opposite.op U))) (x : ↑(X.presheaf.obj (Opposite.op (X.basicOpen f)))),\\n        ∃ n y,\\n          TopCat.Presheaf.restrictOpen y (X.basicOpen f) ⋯ = TopCat.Presheaf.\", \"doc\": \"For a scheme $X$, an open subset $U \\\\subseteq X$ that is both compact and quasi-separated, a section $f$ of the structure sheaf $\\\\mathcal{O}_X$ over $U$, and a section $x$ of $\\\\mathcal{O}_X$ over the \"}\n  {\"name\": \"AlgebraicGeometry.exists_of_res_zero_of_qcqs\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiSeparated\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} {U : TopologicalSpace.Opens ↥X},\\n  IsCompact U.carrier →\\n    IsQuasiSeparated U.carrier →\\n      ∀ {f s : ↑(X.presheaf.obj (Opposite.op U))},\\n        TopCat.Presheaf.restrictOpen f (X.basicOpen s) ⋯ = 0 → ∃ n, s ^ n * f = 0\", \"doc\": \"Let $ X $ be a scheme and $ U $ an open subset of $ X $ that is both quasi-compact and quasi-separated. Suppose $ f $ and $ s $ are sections of the structure sheaf $ \\\\mathcal{O}_X $ over $ U $, and th\"}\n  {\"name\": \"AlgebraicGeometry.exists_of_res_eq_of_qcqs\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiSeparated\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} {U : TopologicalSpace.Opens ↥X},\\n  IsCompact U.carrier →\\n    IsQuasiSeparated U.carrier →\\n      ∀ {f g s : ↑(X.presheaf.obj (Opposite.op U))},\\n        TopCat.Presheaf.restrictOpen f (X.basicOpen s) ⋯ = TopCat.Presheaf.restrictOpen g (X.basicOpen s) ⋯ →\\n          ∃ n,\", \"doc\": \"Let $X$ be a scheme, and let $U$ be a quasi-compact and quasi-separated open subset of $X$. Let $f, g, s \\\\in \\\\mathcal{O}_X(U)$ be sections of the structure sheaf over $U$. Let $U_s$ be the basic open \"}\n  {\"name\": \"AlgebraicGeometry.exists_of_res_eq_of_qcqs_of_top\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiSeparated\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} [CompactSpace ↥X] [QuasiSeparatedSpace ↥X] {f g s : ↑(X.presheaf.obj (Opposite.op ⊤))},\\n  TopCat.Presheaf.restrictOpen f (X.basicOpen s) ⋯ = TopCat.Presheaf.restrictOpen g (X.basicOpen s) ⋯ →\\n    ∃ n, s ^ n * f = s ^ n * g\", \"doc\": \"For a compact and quasi-separated scheme $X$, given global sections $f, g, s$ of the structure sheaf $\\\\mathcal{O}_X$, if the restrictions of $f$ and $g$ to the basic open set $D(s)$ (where $s$ is a un\"}\n  {\"name\": \"SheafOfModules.LocalGeneratorsData.IsFiniteType\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Generators\", \"type\": \"{C : Type u'} →\\n  [inst : CategoryTheory.Category.{v', u'} C] →\\n    {J : CategoryTheory.GrothendieckTopology C} →\\n      {R : CategoryTheory.Sheaf J RingCat} →\\n        {M : SheafOfModules R} →\\n          [inst_1 : ∀ (X : C), CategoryTheory.HasWeakSheafify (J.over X) AddCommGrpCat] →\\n            [inst_\", \"doc\": \"Given a category $\\\\mathcal{C}$ with a Grothendieck topology $J$, a sheaf $\\\\mathcal{R}$ of rings on $\\\\mathcal{C}$, and a sheaf $\\\\mathcal{F}$ of $\\\\mathcal{R}$-modules, this proposition asserts that the \"}\n  {\"name\": \"SheafOfModules.isFinitePresentation\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent\", \"type\": \"{C : Type u'} →\\n  [inst : CategoryTheory.Category.{v', u'} C] →\\n    {J : CategoryTheory.GrothendieckTopology C} →\\n      (R : CategoryTheory.Sheaf J RingCat) →\\n        [∀ (X : C), (J.over X).HasSheafCompose (CategoryTheory.forget₂ RingCat AddCommGrpCat)] →\\n          [∀ (X : C), CategoryTheory.HasWeak\", \"doc\": \"A predicate asserting that a sheaf of modules over a ring sheaf $ R $ is of finite presentation, meaning it can be locally described as the cokernel of a morphism between free modules of finite rank, \"}\n  {\"name\": \"SheafOfModules.IsFiniteType.exists_localGeneratorsData\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Generators\", \"type\": \"∀ {C : Type u'} {inst : CategoryTheory.Category.{v', u'} C} {J : CategoryTheory.GrothendieckTopology C}\\n  {R : CategoryTheory.Sheaf J RingCat} {inst_1 : ∀ (X : C), CategoryTheory.HasWeakSheafify (J.over X) AddCommGrpCat}\\n  {inst_2 : ∀ (X : C), (J.over X).WEqualsLocallyBijective AddCommGrpCat}\\n  {ins\", \"doc\": \"For a category $\\\\mathcal{C}$ with a Grothendieck topology $J$, a sheaf $\\\\mathcal{R}$ of rings on $\\\\mathcal{C}$, and a sheaf $\\\\mathcal{F}$ of $\\\\mathcal{R}$-modules of finite type, there exists local ge\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the displayed hits do not state this native continuous-coefficient sheaf assertion; general pullback constructions and constructible subsets alone do not imply it"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Constructible\", \"stratification\"",
+   "results": "[loogle] OK 0 hit(s)",
+   "date": "2026-10-22",
+   "verdict": "no match: the displayed hits do not state this native continuous-coefficient sheaf assertion; general pullback constructions and constructible subsets alone do not imply it"
+  },
+  {
+   "tool": "grep",
+   "query": "IsAdicStratifiedLisseSheaf|isAdicStratifiedLisseSheaf|stratified.*[Ll]isse",
+   "results": "[grep] OK 0 hit(s)",
+   "date": "2026-10-22",
+   "verdict": "no match: the displayed hits do not state this native continuous-coefficient sheaf assertion; general pullback constructions and constructible subsets alone do not imply it"
+  },
+  {
+   "tool": "leansearch",
+   "query": "finite stratification of a constructible continuous l adic module sheaf on a quasi compact quasi separated scheme",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"SheafOfModules.isFinitePresentation\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent\", \"type\": \": ObjectProperty (SheafOfModules.{u} R)\", \"doc\": \"A predicate asserting that a sheaf of modules over a ring sheaf $ R $ is of finite presentation, meaning it can be locally described as the cokernel of a morphism between free modules of finite rank, \"}\n  {\"name\": \"SheafOfModules.IsFinitePresentation.mk\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent\", \"type\": \"∀ {C : Type u'} [inst : CategoryTheory.Category.{v', u'} C] {J : CategoryTheory.GrothendieckTopology C}\\n  {R : CategoryTheory.Sheaf J RingCat}\\n  [inst_1 : ∀ (X : C), (J.over X).HasSheafCompose (CategoryTheory.forget₂ RingCat AddCommGrpCat)]\\n  [inst_2 : ∀ (X : C), CategoryTheory.HasWeakSheafify (J.ov\", \"doc\": \"If there exists a quasicoherent sheaf $\\\\sigma$ over the ring sheaf $\\\\mathcal{O}$ such that $\\\\sigma$ satisfies the finite presentation condition, then the sheaf $\\\\mathcal{M}$ also satisfies the finite \"}\n  {\"name\": \"SheafOfModules.QuasicoherentData.IsFinitePresentation.isFinite_presentation\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent\", \"type\": \"∀ {C : Type u'} {inst : CategoryTheory.Category.{v', u'} C} {J : CategoryTheory.GrothendieckTopology C}\\n  {R : CategoryTheory.Sheaf J RingCat}\\n  {inst_1 : ∀ (X : C), (J.over X).HasSheafCompose (CategoryTheory.forget₂ RingCat AddCommGrpCat)}\\n  {inst_2 : ∀ (X : C), CategoryTheory.HasWeakSheafify (J.ov\", \"doc\": \"For a quasicoherent sheaf $\\\\mathcal{M}$ over a ring sheaf $\\\\mathcal{O}$ on a site $(\\\\mathcal{C}, J)$, under conditions ensuring sheaf composition, weak sheafification, and local bijectivity for additi\"}\n  {\"name\": \"SheafOfModules.IsFiniteType.mk\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.Generators\", \"type\": \"∀ {C : Type u'} [inst : CategoryTheory.Category.{v', u'} C] {J : CategoryTheory.GrothendieckTopology C}\\n  {R : CategoryTheory.Sheaf J RingCat} [inst_1 : ∀ (X : C), CategoryTheory.HasWeakSheafify (J.over X) AddCommGrpCat]\\n  [inst_2 : ∀ (X : C), (J.over X).WEqualsLocallyBijective AddCommGrpCat]\\n  [ins\", \"doc\": \"Given a category $\\\\mathcal{C}$ with a Grothendieck topology $J$, a sheaf $\\\\mathcal{R}$ of rings on $\\\\mathcal{C}$, and a sheaf $\\\\mathcal{F}$ of $\\\\mathcal{R}$-modules, if there exists local generators d\"}\n  {\"name\": \"SheafOfModules.QuasicoherentData.IsFinitePresentation\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent\", \"type\": \"{C : Type u'} →\\n  [inst : CategoryTheory.Category.{v', u'} C] →\\n    {J : CategoryTheory.GrothendieckTopology C} →\\n      {R : CategoryTheory.Sheaf J RingCat} →\\n        [inst_1 : ∀ (X : C), (J.over X).HasSheafCompose (CategoryTheory.forget₂ RingCat AddCommGrpCat)] →\\n          [inst_2 : ∀ (X : C), Cate\", \"doc\": \"A proposition asserting that a quasicoherent sheaf $\\\\mathcal{M}$ over a ring sheaf $\\\\mathcal{O}$ on a site $(\\\\mathcal{C}, J)$ satisfies the finite presentation condition: for every object $X \\\\in \\\\math\"}\n  {\"name\": \"Topology.IsLocallyConstructible.isConstructible\", \"module\": \"Mathlib.Topology.Constructible\", \"type\": \"[PrespectralSpace X] [QuasiSeparatedSpace X] [CompactSpace X] (hs : IsLocallyConstructible s) : IsConstructible s\", \"doc\": \"In a compact quasi-separated prespectral space $X$, if a set $s$ is locally constructible (i.e., every point has an open neighborhood whose intersection with $s$ is constructible), then $s$ is constru\"}\n  {\"name\": \"SheafOfModules.IsFinitePresentation.casesOn\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent\", \"type\": \"{C : Type u'} →\\n  [inst : CategoryTheory.Category.{v', u'} C] →\\n    {J : CategoryTheory.GrothendieckTopology C} →\\n      {R : CategoryTheory.Sheaf J RingCat} →\\n        [inst_1 : ∀ (X : C), (J.over X).HasSheafCompose (CategoryTheory.forget₂ RingCat AddCommGrpCat)] →\\n          [inst_2 : ∀ (X : C), Cate\", \"doc\": \"Given a sheaf $\\\\mathcal{M}$ of modules over a ring sheaf $\\\\mathcal{O}$ on a site $(\\\\mathcal{C}, J)$, this function allows defining a function on the finite presentation condition of $\\\\mathcal{M}$ by s\"}\n  {\"name\": \"SheafOfModules.instIsQuasicoherentOfIsFinitePresentation\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent\", \"type\": \"(M : SheafOfModules.{u} R) [M.IsFinitePresentation] : M.IsQuasicoherent\", \"doc\": \"Every sheaf of modules with finite presentation over a ring sheaf is quasicoherent.\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the displayed hits do not state this native continuous-coefficient sheaf assertion; general pullback constructions and constructible subsets alone do not imply it"
+  },
+  {
+   "tool": "grep",
+   "query": "IsAdicConstructibleSheaf|isAdicStratifiedLisseSheaf|[Ll]isse.*[Ss]tratif",
+   "results": "[grep] OK 0 hit(s)",
+   "date": "2026-10-22",
+   "verdict": "no match: no displayed hit states finite global stratification of this native continuous-coefficient module sheaf; constructible subsets, finite affine subcovers and structure-sheaf modules alone are only ingredients"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A constructible sheaf of continuous ell adic modules on a qcqs scheme has a finite stratification with locally free restrictions",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules\", \"module\": \"Mathlib.AlgebraicGeometry.Modules.Sheaf\", \"type\": \"AlgebraicGeometry.Scheme → Type (u + 1)\", \"doc\": \"Given a scheme $X$, this defines the type of sheaves of modules over the ring sheaf associated to $X$, obtained by composing the structure sheaf (taking values in commutative rings) with the canonical\"}\n  {\"name\": \"SheafOfModules.QuasicoherentData.IsFinitePresentation.isFinite_presentation\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent\", \"type\": \"∀ {C : Type u'} {inst : CategoryTheory.Category.{v', u'} C} {J : CategoryTheory.GrothendieckTopology C}\\n  {R : CategoryTheory.Sheaf J RingCat}\\n  {inst_1 : ∀ (X : C), (J.over X).HasSheafCompose (CategoryTheory.forget₂ RingCat AddCommGrpCat)}\\n  {inst_2 : ∀ (X : C), CategoryTheory.HasWeakSheafify (J.ov\", \"doc\": \"For a quasicoherent sheaf $\\\\mathcal{M}$ over a ring sheaf $\\\\mathcal{O}$ on a site $(\\\\mathcal{C}, J)$, under conditions ensuring sheaf composition, weak sheafification, and local bijectivity for additi\"}\n  {\"name\": \"SheafOfModules.Finite.hasFiniteLimits\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.Limits\", \"type\": \": HasFiniteLimits (SheafOfModules.{v} R)\", \"doc\": \"For any category $\\\\mathcal{C}$ with a Grothendieck topology $J$ and a sheaf $R$ of rings on $\\\\mathcal{C}$, the category of sheaves of modules over $R$ has all finite limits. This includes the existenc\"}\n  {\"name\": \"SheafOfModules.QuasicoherentData.IsFinitePresentation\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent\", \"type\": \"{C : Type u'} →\\n  [inst : CategoryTheory.Category.{v', u'} C] →\\n    {J : CategoryTheory.GrothendieckTopology C} →\\n      {R : CategoryTheory.Sheaf J RingCat} →\\n        [inst_1 : ∀ (X : C), (J.over X).HasSheafCompose (CategoryTheory.forget₂ RingCat AddCommGrpCat)] →\\n          [inst_2 : ∀ (X : C), Cate\", \"doc\": \"A proposition asserting that a quasicoherent sheaf $\\\\mathcal{M}$ over a ring sheaf $\\\\mathcal{O}$ on a site $(\\\\mathcal{C}, J)$ satisfies the finite presentation condition: for every object $X \\\\in \\\\math\"}\n  {\"name\": \"SheafOfModules.mk\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf\", \"type\": \"{C : Type u₁} →\\n  [inst : CategoryTheory.Category.{v₁, u₁} C] →\\n    {J : CategoryTheory.GrothendieckTopology C} →\\n      {R : CategoryTheory.Sheaf J RingCat} →\\n        (val : PresheafOfModules R.val) → CategoryTheory.Presheaf.IsSheaf J val.presheaf → SheafOfModules R\", \"doc\": \"Given a category $\\\\mathcal{C}$ with a Grothendieck topology $J$ and a sheaf $R$ of rings on $\\\\mathcal{C}$, if a presheaf of modules over the underlying presheaf of $R$ satisfies the sheaf condition wi\"}\n  {\"name\": \"SheafOfModules.IsQuasicoherent.casesOn\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent\", \"type\": \"{C : Type u'} →\\n  [inst : CategoryTheory.Category.{v', u'} C] →\\n    {J : CategoryTheory.GrothendieckTopology C} →\\n      {R : CategoryTheory.Sheaf J RingCat} →\\n        [inst_1 : ∀ (X : C), (J.over X).HasSheafCompose (CategoryTheory.forget₂ RingCat AddCommGrpCat)] →\\n          [inst_2 : ∀ (X : C), Cate\", \"doc\": \"A case analysis principle for quasicoherence of a sheaf of modules over a ring sheaf, enabling definitions or proofs by recursion on the quasicoherence structure established via sheaf composition, wea\"}\n  {\"name\": \"SheafOfModules.isFinitePresentation\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent\", \"type\": \": ObjectProperty (SheafOfModules.{u} R)\", \"doc\": \"A predicate asserting that a sheaf of modules over a ring sheaf $ R $ is of finite presentation, meaning it can be locally described as the cokernel of a morphism between free modules of finite rank, \"}\n  {\"name\": \"SheafOfModules.free\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.Free\", \"type\": \"(I : Type u) : SheafOfModules.{u} R\", \"doc\": \"Given a sheaf $ R $ of rings on a category $ \\\\mathcal{C} $ with Grothendieck topology $ J $ and an index type $ I $, this constructs the free sheaf of $ R $-modules as the coproduct (direct sum) of $ \"}",
+   "date": "2026-10-22",
+   "verdict": "no match: no displayed hit states finite global stratification of this native continuous-coefficient module sheaf; constructible subsets, finite affine subcovers and structure-sheaf modules alone are only ingredients"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsConstructible\", \"Sheaf\"",
+   "results": "[loogle] OK 0 hit(s)",
+   "date": "2026-10-22",
+   "verdict": "no match: no displayed hit states finite global stratification of this native continuous-coefficient module sheaf; constructible subsets, finite affine subcovers and structure-sheaf modules alone are only ingredients"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A locally stratified lisse sheaf over continuous ell adic coefficients on a quasi compact quasi separated scheme admits a finite global constructible locally closed stratification",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.exists_of_res_zero_of_qcqs_of_top\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiSeparated\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} [CompactSpace ↥X] [QuasiSeparatedSpace ↥X] {f s : ↑(X.presheaf.obj (Opposite.op ⊤))},\\n  TopCat.Presheaf.restrictOpen f (X.basicOpen s) ⋯ = 0 → ∃ n, s ^ n * f = 0\", \"doc\": \"Let $X$ be a quasi-compact and quasi-separated scheme, and let $f$ and $s$ be global sections of the structure sheaf $\\\\mathcal{O}_X$. If the restriction of $f$ to the basic open subset $D(s)$ defined \"}\n  {\"name\": \"AlgebraicGeometry.exists_of_res_zero_of_qcqs\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiSeparated\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} {U : TopologicalSpace.Opens ↥X},\\n  IsCompact U.carrier →\\n    IsQuasiSeparated U.carrier →\\n      ∀ {f s : ↑(X.presheaf.obj (Opposite.op U))},\\n        TopCat.Presheaf.restrictOpen f (X.basicOpen s) ⋯ = 0 → ∃ n, s ^ n * f = 0\", \"doc\": \"Let $ X $ be a scheme and $ U $ an open subset of $ X $ that is both quasi-compact and quasi-separated. Suppose $ f $ and $ s $ are sections of the structure sheaf $ \\\\mathcal{O}_X $ over $ U $, and th\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.isConstructible_image\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.LocallyOfFinitePresentation f]\\n  [AlgebraicGeometry.QuasiCompact f] [CompactSpace ↥Y] [QuasiSeparatedSpace ↥Y] {s : Set ↥X},\\n  Topology.IsConstructible s → Topology.IsConstructible (⇑(CategoryTheory.ConcreteCategory.hom f.base) '' s)\", \"doc\": \"Let $f: X \\\\to Y$ be a morphism of schemes. Suppose that $f$ is locally of finite presentation and quasi-compact, and the underlying topological space of $Y$ is compact and quasi-separated. Then for an\"}\n  {\"name\": \"AlgebraicGeometry.exists_eq_pow_mul_of_isCompact_of_isQuasiSeparated\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiSeparated\", \"type\": \"∀ (X : AlgebraicGeometry.Scheme) (U : X.Opens),\\n  IsCompact U.carrier →\\n    IsQuasiSeparated U.carrier →\\n      ∀ (f : ↑(X.presheaf.obj (Opposite.op U))) (x : ↑(X.presheaf.obj (Opposite.op (X.basicOpen f)))),\\n        ∃ n y,\\n          TopCat.Presheaf.restrictOpen y (X.basicOpen f) ⋯ = TopCat.Presheaf.\", \"doc\": \"For a scheme $X$, an open subset $U \\\\subseteq X$ that is both compact and quasi-separated, a section $f$ of the structure sheaf $\\\\mathcal{O}_X$ over $U$, and a section $x$ of $\\\\mathcal{O}_X$ over the \"}\n  {\"name\": \"Topology.IsLocallyConstructible.isConstructible\", \"module\": \"Mathlib/Topology/Constructible\", \"type\": \"∀ {X : Type u_2} [inst : TopologicalSpace X] {s : Set X} [PrespectralSpace X] [QuasiSeparatedSpace X] [CompactSpace X],\\n  Topology.IsLocallyConstructible s → Topology.IsConstructible s\", \"doc\": \"In a compact quasi-separated prespectral space $X$, if a set $s$ is locally constructible (i.e., every point has an open neighborhood whose intersection with $s$ is constructible), then $s$ is constru\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.exists_isOpenCover_and_isAffine\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"∀ {I : Type u} [inst : CategoryTheory.Category.{u, u} I] (D : CategoryTheory.Functor I AlgebraicGeometry.Scheme)\\n  (c : CategoryTheory.Limits.Cone D) (hc : CategoryTheory.Limits.IsLimit c) [CategoryTheory.IsCofiltered I]\\n  [∀ {i j : I} (f : i ⟶ j), AlgebraicGeometry.IsAffineHom (D.map f)] [∀ (i : I)\", \"doc\": \"Given a cofiltered diagram $ D: I^{\\\\text{op}} \\\\to \\\\text{Sch} $ of schemes where all transition morphisms are affine, each scheme in the diagram is compact and quasi-separated, and an open cover $ \\\\{U_\"}\n  {\"name\": \"AlgebraicGeometry.IsLocallyNoetherian\", \"module\": \"Mathlib/AlgebraicGeometry/Noetherian\", \"type\": \"AlgebraicGeometry.Scheme → Prop\", \"doc\": \"A scheme is locally Noetherian if it admits an open cover by Noetherian schemes.\"}\n  {\"name\": \"AlgebraicGeometry.IsNoetherian.noetherianSpace\", \"module\": \"Mathlib/AlgebraicGeometry/Noetherian\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} [AlgebraicGeometry.IsNoetherian X], TopologicalSpace.NoetherianSpace ↥X\", \"doc\": \"Every Noetherian scheme has an underlying topological space that satisfies the Noetherian condition, meaning every descending chain of closed subsets stabilizes.\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: no displayed hit states finite global stratification of this native continuous-coefficient module sheaf; constructible subsets, finite affine subcovers and structure-sheaf modules alone are only ingredients"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Local finite partitions with a pullback stable property on affine charts of a quasi compact quasi separated scheme glue to a global finite stratification",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.𝒰D\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"{I : Type u} →\\n  [inst : CategoryTheory.Category.{u, u} I] →\\n    {S X : AlgebraicGeometry.Scheme} →\\n      {D : CategoryTheory.Functor I AlgebraicGeometry.Scheme} →\\n        {t : D ⟶ (CategoryTheory.Functor.const I).obj S} →\\n          {f : X ⟶ S} →\\n            [inst_1 : ∀ (i : I), CompactSpace ↥(D.obj\", \"doc\": \"The open cover of the diagram object $ D(i') $ formed by refining the open cover $ \\\\mathcal{U}_{D₀} $ with affine open immersions, ensuring each point lies in an affine open subscheme and compatibilit\"}\n  {\"name\": \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.𝒰D₀\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"{I : Type u} →\\n  [inst : CategoryTheory.Category.{u, u} I] →\\n    {S X : AlgebraicGeometry.Scheme} →\\n      {D : CategoryTheory.Functor I AlgebraicGeometry.Scheme} →\\n        {t : D ⟶ (CategoryTheory.Functor.const I).obj S} →\\n          {f : X ⟶ S} →\\n            [inst_1 : ∀ (i : I), CompactSpace ↥(D.obj\", \"doc\": \"For a diagram $D: \\\\mathcal{I} \\\\to \\\\text{Sch}$ of schemes, a natural transformation from $D$ to the constant diagram at $S$, and a morphism $X \\\\to S$, this constructs an open cover of the object $D(i')\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.exists_isOpenCover_and_isAffine\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"∀ {I : Type u} [inst : CategoryTheory.Category.{u, u} I] (D : CategoryTheory.Functor I AlgebraicGeometry.Scheme)\\n  (c : CategoryTheory.Limits.Cone D) (hc : CategoryTheory.Limits.IsLimit c) [CategoryTheory.IsCofiltered I]\\n  [∀ {i j : I} (f : i ⟶ j), AlgebraicGeometry.IsAffineHom (D.map f)] [∀ (i : I)\", \"doc\": \"Given a cofiltered diagram $ D: I^{\\\\text{op}} \\\\to \\\\text{Sch} $ of schemes where all transition morphisms are affine, each scheme in the diagram is compact and quasi-separated, and an open cover $ \\\\{U_\"}\n  {\"name\": \"AlgebraicGeometry.instIsAffineXSchemeFiniteSubcover\", \"module\": \"Mathlib/AlgebraicGeometry/AffineScheme\", \"type\": \"∀ (X : AlgebraicGeometry.Scheme) [inst : CompactSpace ↥X] (𝒰 : X.OpenCover)\\n  [∀ (i : 𝒰.I₀), AlgebraicGeometry.IsAffine (𝒰.X i)] (i : 𝒰.finiteSubcover.I₀),\\n  AlgebraicGeometry.IsAffine (𝒰.finiteSubcover.X i)\", \"doc\": \"For any compact scheme $X$ and an open cover $\\\\mathcal{U}$ of $X$ consisting of affine open subschemes, every finite subcover of $\\\\mathcal{U}$ also consists of affine open subschemes. Specifically, if\"}\n  {\"name\": \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.h𝒰S\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"∀ {I : Type u} [inst : CategoryTheory.Category.{u, u} I] {S X : AlgebraicGeometry.Scheme}\\n  {D : CategoryTheory.Functor I AlgebraicGeometry.Scheme} {t : D ⟶ (CategoryTheory.Functor.const I).obj S} {f : X ⟶ S}\\n  (self : AlgebraicGeometry.ExistsHomHomCompEqCompAux D t f) (i : self.𝒰S.I₀), AlgebraicGeo\", \"doc\": \"Given a category $\\\\mathcal{I}$, a diagram $D:\\\\mathcal{I}\\\\to\\\\text{Sch}$ of schemes, a natural transformation from $D$ to the constant diagram at $S$, and a morphism $X\\\\to S$, every element of the zerot\"}\n  {\"name\": \"AlgebraicGeometry.QuasiCompactCover.of_finite\", \"module\": \"Mathlib/AlgebraicGeometry/Cover/QuasiCompact\", \"type\": \"∀ {S : AlgebraicGeometry.Scheme} {K : CategoryTheory.Precoverage AlgebraicGeometry.Scheme}\\n  {𝒰 : AlgebraicGeometry.Scheme.Cover K S} [AlgebraicGeometry.Scheme.JointlySurjective K]\\n  [∀ (i : 𝒰.I₀), AlgebraicGeometry.QuasiCompact (𝒰.f i)] [Finite 𝒰.I₀],\\n  AlgebraicGeometry.QuasiCompactCover 𝒰.toPreZe\", \"doc\": \"A pre-zero hypercover of a scheme is quasi-compact if it arises from a finite family of quasi-compact morphisms whose images cover the scheme, under a jointly surjective precoverage.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.instFintypeI₀FiniteSubcover\", \"module\": \"Mathlib/AlgebraicGeometry/Cover/Open\", \"type\": \"{X : AlgebraicGeometry.Scheme} → (𝒰 : X.OpenCover) → [H : CompactSpace ↥X] → Fintype 𝒰.finiteSubcover.I₀\", \"doc\": \"For any compact scheme $ X $ and an open cover $ \\\\mathcal{U} $ of $ X $, the index set $ I_0 $ of the finite subcover is finite. This follows from the compactness of $ X $, which guarantees that any o\"}\n  {\"name\": \"AlgebraicGeometry.QuasiCompactCover.instBindScheme\", \"module\": \"Mathlib/AlgebraicGeometry/Cover/QuasiCompact\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} (𝒰 : CategoryTheory.PreZeroHypercover X) [AlgebraicGeometry.QuasiCompactCover 𝒰]\\n  (f : (x : 𝒰.I₀) → CategoryTheory.PreZeroHypercover (𝒰.X x)) [∀ (x : 𝒰.I₀), AlgebraicGeometry.QuasiCompactCover (f x)],\\n  AlgebraicGeometry.QuasiCompactCover (𝒰.bind f)\", \"doc\": \"Given a scheme $X$, if $\\\\mathcal{U}$ is a quasi-compact pre-zero hypercover of $X$ and for each $x \\\\in \\\\mathcal{U}.I_0$ there is a quasi-compact pre-zero hypercover $f(x)$ of $\\\\mathcal{U}.X(x)$, then \"}",
+   "date": "2026-10-22",
+   "verdict": "no match: no displayed hit states finite global stratification of this native continuous-coefficient module sheaf; constructible subsets, finite affine subcovers and structure-sheaf modules alone are only ingredients"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sf-native-weil-open-exact-constructible",
+  "date": "2026-10-22",
+  "group": "NL"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-thm-sf-package",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "Native open-extension heart argument serving the package projection/localization clause: qcqs-stratification. The maintainer-seeded created.item chain has no imported blueprint ancestor (blueprint_refs.py ancestor returns None).",
+   "via": [
+    "lem-sf-native-weil-open-exact-constructible",
+    "lem-sf-native-weil-shriek-triangulated",
+    "lem-sf-weil-compact-image-localization-triangle"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sf-native-adic-qcqs-stratification",
+  "worker": "stage1",
+  "summary": "Four-step proof from local partitions to a finite affine cover, restricted local strata, actual global immersed refinement, and lisse pullback. No new nodes. Read every cited statement and preserved the native continuous coefficient construction, arbitrary qcqs schemes and varying finite rank. The finite-coefficient etale globalization lemma is not applied to native coefficients: only its coefficient-independent geometric refinement core is used. All search results were read and no item-level Mathlib match found.",
+  "blueprint": "Native open-extension heart argument serving the package localization/compact-support clauses through lem-sf-native-weil-open-exact-constructible. The created.item chain has no imported blueprint ancestor (blueprint_refs.py ancestor returns None); retained the existing from.node=null and via breadcrumb. Steps realize the local-to-global stratification input of ExtensionByZero.lean lines 108-198, using the existing geometric disjointification core. Whole-blueprint searches for stratification, stratified lisse, lisse and qcqs found no exact native-coefficient statement. This is not the unit key theorem, so its realized fields are untouched.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-qcqs-scheme-cofinal-finite-coverings",
+    "why": "Generic geometric finite affine refinement of the given local open cover; the package unit does not restate this cover theorem."
+   },
+   {
+    "node": "lemma-constructible-pullback-stratification",
+    "why": "Generic scheme-theoretic base change of finite immersed partitions; no coefficient-category assertion is imported."
+   },
+   {
+    "node": "lem-weil-pbc-constructible-open-restriction",
+    "why": "Generic topological restriction of constructible subsets to an open subspace."
+   },
+   {
+    "node": "lem-weil-pbc-etale-stratification-local-gluing-core",
+    "why": "Coefficient-independent global immersed refinement with actual factorization morphisms; its statement has no etale sheaf or finite-coefficient hypothesis."
+   },
+   {
+    "node": "def-constructible-stratification",
+    "why": "The finite immersed partition definition used in the conclusion."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-qcqs-scheme-cofinal-finite-coverings",
+  "lemma-constructible-pullback-stratification",
+  "lem-weil-pbc-constructible-open-restriction",
+  "lem-weil-pbc-etale-stratification-local-gluing-core",
+  "def-constructible-stratification"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q15-90ba4d266",
+  "group": "Q15",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q15-90ba4d266 (reviewer sub-agent of L); spot-checked: Read the item and all seven cited statements in full. The delivery is the item plus the report, with no new nodes and the statement unchanged. The item was created on 2026-10-22, so it is not dropped and no re-split note applies. Source: ExtensionByZero.lean lines 108-198 (exists_isAffineOpen, and isAdicStratifiedLisseSheaf with CompactSpace and QuasiSeparatedSpace). Same route as Stacks 095E (2)⇒(3); tags 095E, 005J and 01IT checked. Step 1 uses the framework's local constructibility on X and the qcqs finite affine refinement; no affine intersections are assumed. Step 2 uses the base change of the stratification along the open inclusion W_a→V_α (lemma-constructible-pullback-stratification), Stacks 005J (E∩U constructible in an open U), and the composition and lisse-preservation clauses of lem-sf-native-adic-pullback-exact-lisse, with t p = q r written out. Step 3: the local-gluing-core statement gives actual morphisms h_i with s_i = w r h_i. Its hypotheses (qcqs, finite affine cover indexed by Fin n, constructible immersed local strata) are all met, and it has no étale or coefficient content. Step 4 combines composition with lisse pullback. Edge cases checked: empty X, zero or varying ranks, nonreduced and nonseparated X; quasi-separatedness is needed for retrocompactness. No duplicate: the stratified-lisse nodes elsewhere are Noetherian or use other coefficients. No cycle. Off-unit geometric tool uses (sk-thm-p1 nodes) accepted as generic. Listing def-constructible-stratification as a tool use is redundant but harmless."
+ },
+ "lean": {
+  "module": "WeilConjectures.SixFunctors.ProEtale.Adic.ExtensionByZero",
+  "declaration": "AlgebraicGeometry.ProEtale.IsAdicConstructibleSheaf.isAdicStratifiedLisseSheaf",
+  "statement": "theorem IsAdicConstructibleSheaf.isAdicStratifiedLisseSheaf [CompactSpace X]\n    [QuasiSeparatedSpace X] {F : AdicSheaf l X}\n    (hF : IsAdicConstructibleSheaf F) : IsAdicStratifiedLisseSheaf F",
+  "branch": "slopmaster2",
+  "by": "NH",
+  "date": "2026-10-22",
+  "existing": true,
+  "note": "Exact existing native-coefficient qcqs stratification theorem, ExtensionByZero.lean:132-134. Its context binds {l : ℕ} [Fact l.Prime] {X : Scheme.{u}}. IsAdicStratifiedLisseSheaf unfolds to a finite family of scheme immersions with constructible images partitioning all of X and lisse pullbacks. The finite index type can be enumerated by Fin n, giving the recorded finite locally closed stratification notion with its additional constructibility condition. No finite-field, geometric-fibre, Noetherian, nonempty, positive-rank or uniform-rank hypothesis is imposed."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-45f9a8b86",
+  "group": "NH",
+  "result": "pass",
+  "note": "Existing:true attachment of AlgebraicGeometry.ProEtale.IsAdicConstructibleSheaf.isAdicStratifiedLisseSheaf (ExtensionByZero.lean:132). It is the node's own source place, and the statement is verbatim in side-live and slopmaster2. The snapshot node differs from live only in the lean field. Hypotheses match exactly: Fact l.Prime, Scheme.{u}, CompactSpace + QuasiSeparatedSpace, nothing stronger. Lisse, constructible and pullback are the framework-recorded declarations; the rank is per covering member and may be 0. IsAdicStratifiedLisseSheaf (finite ι, immersions, constructible ranges, ∃! cover, lisse pullbacks) is equivalent to def-constructible-stratification plus constructibility. Edge cases (empty X, rank 0, universes) are covered, no other node owns the declaration, and the report sections are present. No fixes, no compile needed."
+ }
+}

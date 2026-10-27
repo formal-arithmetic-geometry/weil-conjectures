@@ -1,0 +1,112 @@
+{
+ "id": "lem-pur-reconstructed-refinement-common",
+ "kind": "statement",
+ "title": "Common-refinement independence in reconstructed coordinates",
+ "statement": "Fix a prime $\\ell$, a normed finite extension $E/\\mathbf Q_\\ell$, a field $k$ whose characteristic is prime and different from $\\ell$, separated finite-type $k$-schemes $X,Y$, a $k$-morphism $f:X\\to Y$, and a specified normalized compact-support comparison family $C$ [lem-pur-compact-support-condensed-realization]. Use the actual functors, maps, supplied pairs, and normalized Brown data of [def-pur-reconstructed-refinement-data]. Let $c,d$ be compactifications of $f$, and let $e,e\\prime$ be two common dominating compactifications, with refinements $r:e\\to c$, $s:e\\to d$, $r\\prime:e\\prime\\to c$, $s\\prime:e\\prime\\to d$. For Brown packages $D_1,D_2,D_0,D_0\\prime$ at these compactifications and an ordinary derived coefficient system $B$ of bounded-below etale origin in both dominating packages, the two actual system comparisons $\\operatorname{systemCommon}(D_1,D_2,D_0,r,s,B)$ and $\\operatorname{systemCommon}(D_1,D_2,D_0\\prime,r\\prime,s\\prime,B)$ agree. Each is the ratio of the two downward refinement maps conjugated by the specified coordinate and support comparisons, inverted only on $B$. On the completed integral categories the two natural isomorphisms $\\operatorname{comparison}(r)^{-1}\\operatorname{comparison}(s)$ and $\\operatorname{comparison}(r\\prime)^{-1}\\operatorname{comparison}(s\\prime)$ agree (composition is read in traversal order here). No cocycle, Brown-mate or representing-pair equation is asserted.",
+ "stmt_deps": [
+  "def-pur-reconstructed-refinement-data"
+ ],
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-unique-adjoint/sk-prop-sp-unique-adjoint-categorical.proof.md",
+  "place": "Stacks Tags 0ATU and 0F7C--0F7J; parent proof Steps 2--3."
+ },
+ "proof": [
+  {
+   "text": "take a further compactification dominating the two chosen common refinements,\nand equalize the two parallel arrows to each endpoint. For intrinsic system support,\ncomposition factors each refined downward arrow through the same further-refinement\narrow. Its component is invertible on the bounded-below etale-origin input by finite\nproper/open calculus and conservative evaluations. Cancel that common factor to\nidentify the ratios. Coordinate conjugation cancels its intermediate beta and\ncoordinate counit factors, so the same equality holds for systemCommon even when\nthe Brown packages at the two dominating objects differ. Applying actual total limit\nand restricting to complete objects gives integral commonComparison independence.\nNo equality is detected merely from finite evaluations.",
+   "uses": [
+    "lem-cbc-compactifiable-cofiltered",
+    "lem-pur-compact-support-condensed-realization",
+    "lem-pur-refinement-finite-origin-evaluation",
+    "def-pur-integral-support-coordinate-comparison"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-cbc-compactifiable-cofiltered",
+  "lem-pur-compact-support-condensed-realization",
+  "lem-pur-refinement-finite-origin-evaluation",
+  "def-pur-integral-support-coordinate-comparison"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-unique-adjoint/sk-prop-sp-unique-adjoint-categorical.proof.md",
+  "place": "Stacks Tags 0ATU and 0F7C--0F7J; parent proof Steps 2--3."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Exact conservative derived evaluations detect equality of maps between systems concentrated in a single degree",
+   "results": "CochainComplex.fromSingle₀Equiv and chain-map extensionality; no project geometric comparison.",
+   "date": "2026-10-26",
+   "verdict": "Generic tools only; the project-specific normalization calculation is not stated."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Transport a counit preserving comparison of right adjoints along an isomorphism of left adjoints",
+   "results": "Adjunction.rightAdjointUniq and its counit formulas; the Brown domain here is restricted, with explicitly transported system maps.",
+   "date": "2026-10-26",
+   "verdict": "Use the counit uniqueness argument; no exact project statement."
+  },
+  {
+   "tool": "grep",
+   "query": "systemRefinement_(id|comp)|hom_formula|single_degree_square|condensedProjection_refinement",
+   "results": "Remote Mathlib grep: OK 0 hits. Local rg on the project found systemRefinement_id and systemRefinement_comp, Brown hom_formula, same-compactification single_degree_square, and condensedProjection_refinement; their signatures were read.",
+   "date": "2026-10-26",
+   "verdict": "These supply substeps of the recorded proof."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.ReconstructedPairRefinementCoherence",
+  "date": "2026-10-26",
+  "group": "A5"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-thm-purity-transport",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-pur-rational-and-qbar-purity",
+   "place": "Stacks Tags 0ATU and 0F7C--0F7J; parent proof Steps 2--3.",
+   "via": [
+    "lem-pur-reconstructed-pair-refinement-coherence",
+    "lem-pur-condensed-exceptional-reconstruction",
+    "nt-target-smooth-purity-qbar"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.ReconstructedRefinementCommon",
+  "file": "lean/Sheaf/Paper/ReconstructedRefinementCommon.lean",
+  "declaration": "WeilConjectures.ReconstructedPairRefinement.reconstructedRefinementCommon",
+  "statement": "theorem reconstructedRefinementCommon :\n    (∀ (c d e e' : Compactification f)\n    (D₁ : At l E k C X Y f c) (D₂ : At l E k C X Y f d)\n    (D₀ : At l E k C X Y f e) (D₀' : At l E k C X Y f e')\n    (r : e.Refinement c) (s : e.Refinement d)\n    (r' : e'.Refinement c) (s' : e'.Refinement d)\n    (B : DerivedCategory (BrownTowerComparison.ProSystem X.scheme\n      (integralExceptionalIntegers l E) (integralExceptionalUniformizer l E)))\n    (hB : D₀.transport.siteX.Origin B) (hB' : D₀'.transport.siteX.Origin B),\n    systemCommon D₁ D₂ D₀ r s B hB = systemCommon D₁ D₂ D₀' r' s' B hB') ∧\n    (∀ (c d e e' : Compactification f)\n    (r : e.Refinement c) (s : e.Refinement d)\n    (r' : e'.Refinement c) (s' : e'.Refinement d),\n    commonComparison l E k C X Y f r s = commonComparison l E k C X Y f r' s')",
+  "branch": "sheaf-dag",
+  "by": "A5",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-039cd",
+  "group": "A5",
+  "result": "fix",
+  "landing": "20261025T204354-L-2947874",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-039cd",
+  "group": "A5",
+  "result": "fix",
+  "landing": "20261025T204354-L-2947874",
+  "kind": "interface",
+  "note": "independent cc review: delivered ReconstructedPairRefinementData.lean vs clone item module (verbatim prefix); 5 sorried lemmas vs old Coherence fields (4 verbatim, TraceTransport generalized, true via scalar_refinement/RefinementCoherence.realization/condensedProjection_refinement); item node vs proof"
+ }
+}

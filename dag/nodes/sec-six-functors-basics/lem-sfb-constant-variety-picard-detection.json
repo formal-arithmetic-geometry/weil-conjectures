@@ -1,0 +1,301 @@
+{
+ "id": "lem-sfb-constant-variety-picard-detection",
+ "kind": "statement",
+ "title": "Field-extension detection of lines on a variety with algebraically closed constants",
+ "statement": "Let $k$ be an algebraically closed field [def-weil-field, def-weil-algebraic-closure], and let $X$ be a smooth geometrically integral affine finite-type $k$-scheme [def-pc-scheme, def-weil-affine-spectrum, def-weil-finite-type-morphism, def-sbc-smooth-morphisms, def-pc-geometrically-irreducible]. For every tower of field extensions $k\\subseteq K\\subseteq L$ [def-pc-field-extension], put $X_K=X\\times_k\\operatorname{Spec}K$ and $X_L=X\\times_k\\operatorname{Spec}L$ [def-pc-fibre-product], and let $q:X_L\\to X_K$ be the projection. For every invertible module $N$ on $X_K$ [def-sc-invertible-module], if $q^*N\\cong\\mathcal O_{X_L}$, then $N\\cong\\mathcal O_{X_K}$, where pullback is tensor pullback [def-pc-module-pullback]. Equivalently, scalar extension is injective on the groups of isomorphism classes of invertible modules, with tensor product as group law. The ground field $k$ is algebraically closed; neither $K$ nor $L$ is required to be algebraic over $k$.",
+ "source": {
+  "document": "literature/guo-divisors-coherent-schemes-homogeneous-spaces.pdf",
+  "url": "https://ningguomath.com/wp-content/uploads/2026/03/amplenew-1.pdf",
+  "place": "Guo Proposition 5.2, proof of Claim 5.2.1, printed pp.12-13: perfect-closure reduction and the paragraph asserting clopenness via normal projective compactifications and Picard theory; supporting the historical alteration/Picard route beneath det-thm-sf-ctf-stability-direct-images, proof (3). Agent-extracted geometric-triviality detection input. Related normal-compactification method: Guralnick--Jaffe--Raskind--Wiegand, On the Picard group: torsion and the kernel induced by a faithfully flat map, proof of Theorem 5.2, Step 1, pp.21-22 (arXiv:alg-geom/9410031); that theorem itself has extra resolution and algebraicity hypotheses and is NOT being cited as an exact statement of this node."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-weil-algebraic-closure",
+  "def-pc-scheme",
+  "def-weil-affine-spectrum",
+  "def-weil-finite-type-morphism",
+  "def-sbc-smooth-morphisms",
+  "def-pc-geometrically-irreducible",
+  "def-sc-invertible-module",
+  "def-pc-fibre-product",
+  "def-pc-module-pullback",
+  "def-pc-field-extension"
+ ],
+ "proof": [
+  {
+   "text": "Choose $j:X\\hookrightarrow C$ and boundary primes $B_1,\\ldots,B_r$ by [lem-sfb-algclosed-affine-normal-projective-boundary]. For $F=K,L$, write $U_F=j_F(X_F)\\subset C_F$. Both $C_K,C_L$ are normal integral Noetherian projective schemes, hence proper. Their boundary prime divisors are exactly $B_{i,K},B_{i,L}$, and all these primes are geometrically integral over the respective fields. Since $(C_K)_E=C_E$ and $((B_i)_K)_E=(B_i)_E$ for every extension $E/K$, $C_K$ is geometrically integral and geometrically normal over $K$ and the $B_{i,K}$ are geometrically integral prime divisors over $K$, as the scalar comparison used in steps 2 and 3 requires.",
+   "uses": [
+    "lem-sfb-algclosed-affine-normal-projective-boundary"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/divisors.tex; literature/stacks-project/varieties.tex",
+    "place": "Agent-written normal-projective-compactification proof; divisorial dictionary Tags 0EBM, 0EBL, geometric normality Tag 038N; coherent.tex Tag 02KH for the final proper-section descent. Historical motivation: the imported Guo Proposition 5.2 / Claim 5.2.1 citation; that PDF is WANTED locally."
+   }
+  },
+  {
+   "text": "By [lem-sfb-normal-divisorial-open-restriction], extend $N$ on $U_K$ to a coherent reflexive rank-one module $F$ on $C_K$. By [lem-sfb-geonormal-divisorial-scalar-comparison], its scalar pullback $F_L$ is coherent reflexive of rank one. Its restriction to $U_L$ is $q^*N$, which is trivial by hypothesis. Apply the boundary-kernel clause of the dictionary on $C_L$: there are integers $n_i$ such that $F_L\\cong\\mathcal O_{C_L}(\\sum_i n_i B_{i,L})$. This is a boundary-divisor expression over $L$, not a claim that the original trivialization descends.",
+   "uses": [
+    "lem-sfb-normal-divisorial-open-restriction",
+    "lem-sfb-geonormal-divisorial-scalar-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/divisors.tex; literature/stacks-project/varieties.tex",
+    "place": "Agent-written normal-projective-compactification proof; divisorial dictionary Tags 0EBM, 0EBL, geometric normality Tag 038N; coherent.tex Tag 02KH for the final proper-section descent. Historical motivation: the imported Guo Proposition 5.2 / Claim 5.2.1 citation; that PDF is WANTED locally."
+   }
+  },
+  {
+   "text": "Put $D_K=\\sum_i n_i B_{i,K}$ and $H=(F\\otimes\\mathcal O_{C_K}(-D_K))^{**}$. The dictionary gives a coherent reflexive rank-one $H$ with $H|_{U_K}\\cong N$, since $D_K$ is supported in the boundary. Scalar comparison and the reflexive tensor law give $H_L\\cong(\\mathcal O_{C_L}(D_L)\\otimes\\mathcal O_{C_L}(-D_L))^{**}\\cong\\mathcal O_{C_L}$, where $D_L=\\sum_i n_iB_{i,L}$. The coefficients $n_i$ need not descend as a chosen divisor of a section: the same integer list defines $D_K$ because each boundary prime is defined over $k$.",
+   "uses": [
+    "lem-sfb-normal-divisorial-open-restriction",
+    "lem-sfb-geonormal-divisorial-scalar-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/divisors.tex; literature/stacks-project/varieties.tex",
+    "place": "Agent-written normal-projective-compactification proof; divisorial dictionary Tags 0EBM, 0EBL, geometric normality Tag 038N; coherent.tex Tag 02KH for the final proper-section descent. Historical motivation: the imported Guo Proposition 5.2 / Claim 5.2.1 citation; that PDF is WANTED locally."
+   }
+  },
+  {
+   "text": "Apply [lem-sc-flat-base-change-coherent] in degree zero to the proper $K$-scheme $C_K$, the flat extension $K\\to L$ (flatness of the map of base spectra is [lem-pc-field-extension-flat]) and the quasi-coherent $H$. Together with $H_L\\cong\\mathcal O_{C_L}$ (step 3) and [lem-pc-h0-proper-variety](2) on the geometrically integral proper $L$-scheme $C_L$, this gives an $L$-linear isomorphism $\\Gamma(C_K,H)\\otimes_K L\\cong\\Gamma(C_L,H_L)\\cong L$. Thus $\\Gamma(C_K,H)$ has dimension one over $K$: extension of a $K$-basis is an $L$-basis of the tensor product. Choose a nonzero $s\\in\\Gamma(C_K,H)$ and an affine open $V=\\operatorname{Spec}A\\subset C_K$ with $s|_V\\neq0$ in $M=\\Gamma(V,H)$. By [lem-weil-pbc-fibre-product-affine-spectra], $V_L=V\\times_KL=\\operatorname{Spec}(A\\otimes_KL)$, and by [lem-weil-pbc-module-pullback-affine-sections] for the projection $V_L\\to V$ the map $M\\otimes_A(A\\otimes_KL)=M\\otimes_KL\\to\\Gamma(V_L,H_L)$, $m\\otimes1\\mapsto m_L$, is an isomorphism. Since $K\\to L$ is a $K$-linear injection with a $K$-linear retraction, $M\\to M\\otimes_KL$ is injective, so $s_L|_{V_L}=(s|_V)_L\\neq0$ and the scalar pullback $s_L\\in\\Gamma(C_L,H_L)$ is nonzero. Under an isomorphism $H_L\\cong\\mathcal O_{C_L}$, $s_L$ becomes a nonzero element of $\\Gamma(C_L,\\mathcal O_{C_L})=L$, hence a global unit; consequently the pulled-back section morphism $\\mathcal O_{C_L}\\xrightarrow{s_L}H_L$ is an isomorphism. No canonicity of the abstract base-change isomorphism is used.",
+   "uses": [
+    "lem-sc-flat-base-change-coherent",
+    "lem-pc-h0-proper-variety",
+    "lem-pc-field-extension-flat",
+    "lem-weil-pbc-fibre-product-affine-spectra",
+    "lem-weil-pbc-module-pullback-affine-sections"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/divisors.tex; literature/stacks-project/varieties.tex",
+    "place": "Agent-written normal-projective-compactification proof; divisorial dictionary Tags 0EBM, 0EBL, geometric normality Tag 038N; coherent.tex Tag 02KH for the final proper-section descent. Historical motivation: the imported Guo Proposition 5.2 / Claim 5.2.1 citation; that PDF is WANTED locally."
+   }
+  },
+  {
+   "text": "The section morphism $\\mathcal O_{C_K}\\xrightarrow{s}H$ is an isomorphism. Indeed on any affine open $V=\\operatorname{Spec}A\\subset C_K$, put $M=\\Gamma(V,H)$. Pullback to $V_L=\\operatorname{Spec}(A\\otimes_K L)$ is the tensor extension of $A\\xrightarrow{s|_V}M$, by the affine-spectrum fibre-product identification and the natural affine-sections pullback isomorphism. The map $A\\to A\\otimes_K L$ is faithfully flat by [lem-weil-pbc-field-extension-base-change-faithfully-flat]. Exactness of flat tensor [lem-weil-pbc-flat-tensor-exact] identifies the tensored kernel and cokernel with the kernel and cokernel after extension. They vanish since $s_L$ is an isomorphism. Faithfully flat detection [lem-sc-faithfully-flat-tensor-zero] makes both original modules zero. Thus $A\\to M$ is bijective on every affine open, so the affine tilde/global-sections equivalence makes $s$ an isomorphism on every affine open, hence an isomorphism of sheaves.",
+   "uses": [
+    "lem-weil-pbc-field-extension-base-change-faithfully-flat",
+    "lem-weil-pbc-flat-tensor-exact",
+    "lem-sc-faithfully-flat-tensor-zero",
+    "pqf-def-coherent",
+    "def-pc-module-pullback",
+    "lem-weil-pbc-module-pullback-affine-sections",
+    "lem-weil-pbc-affine-tilde-gamma-adjunction",
+    "lem-weil-pbc-fibre-product-affine-spectra"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/divisors.tex; literature/stacks-project/varieties.tex",
+    "place": "Agent-written normal-projective-compactification proof; divisorial dictionary Tags 0EBM, 0EBL, geometric normality Tag 038N; coherent.tex Tag 02KH for the final proper-section descent. Historical motivation: the imported Guo Proposition 5.2 / Claim 5.2.1 citation; that PDF is WANTED locally."
+   }
+  },
+  {
+   "text": "Restrict $H\\cong\\mathcal O_{C_K}$ to $U_K$ and use $H|_{U_K}\\cong N$ to obtain $N\\cong\\mathcal O_{X_K}$. For injectivity on isomorphism classes, if $N_1,N_2$ have isomorphic pullbacks, apply the proved assertion to $N_1\\otimes N_2^\\vee$ and tensor the resulting trivialization with $N_2$. Conversely injectivity implies the stated triviality test by taking $N_2=\\mathcal O_{X_K}$.",
+   "uses": [
+    "def-sc-invertible-module"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/divisors.tex; literature/stacks-project/varieties.tex",
+    "place": "Agent-written normal-projective-compactification proof; divisorial dictionary Tags 0EBM, 0EBL, geometric normality Tag 038N; coherent.tex Tag 02KH for the final proper-section descent. Historical motivation: the imported Guo Proposition 5.2 / Claim 5.2.1 citation; that PDF is WANTED locally."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-module-pullback",
+  "def-sc-invertible-module",
+  "lem-pc-field-extension-flat",
+  "lem-pc-h0-proper-variety",
+  "lem-sc-faithfully-flat-tensor-zero",
+  "lem-sc-flat-base-change-coherent",
+  "lem-sfb-algclosed-affine-normal-projective-boundary",
+  "lem-sfb-geonormal-divisorial-scalar-comparison",
+  "lem-sfb-normal-divisorial-open-restriction",
+  "lem-weil-pbc-affine-tilde-gamma-adjunction",
+  "lem-weil-pbc-fibre-product-affine-spectra",
+  "lem-weil-pbc-field-extension-base-change-faithfully-flat",
+  "lem-weil-pbc-flat-tensor-exact",
+  "lem-weil-pbc-module-pullback-affine-sections",
+  "pqf-def-coherent"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/divisors.tex; literature/stacks-project/varieties.tex; literature/stacks-project/coherent.tex",
+  "place": "Agent-written assembly using normal-projective compactification, divisorial rank-one reflexive extension and boundary correction, then flat base change in degree zero. Supporting tags and labels are specified on steps and new nodes."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For a smooth variety defined over an algebraically closed field its Picard group over an extension field injects into its Picard group after any further field extension",
+   "results": "{\"t\": \"2026-10-24T05:35:49Z\", \"tool\": \"leanfinder\", \"query\": \"For a smooth variety defined over an algebraically closed field its Picard group over an extension field injects into its Picard group after any further field extension\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.Extension.h1Cotangentι_injective\", \"WeierstrassCurve.Affine.Point.map_injective\", \"IntermediateField.extendScalars_injective\", \"CommRing.Pic.mapAlgebra_mapAlgebra\", \"IsPurelyInseparable.injective_comp_algebraMap\", \"CommRing.Pic.mapRingHom_algebraMap\", \"IsPurelyInseparable.of_injective_comp_algebraMap\", \"IsDedekindDomain.selmerGroup.fromUnitLift_injective\"], \"digest\": \"1a1ba9856cad2b9d\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern scalar Picard functoriality, tensor-module identities, topological bundles or unrelated algebra; none states this geometric result or specializes to it in one line."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Base extension injectivity of the Picard group of a smooth constant variety over an algebraically closed field",
+   "results": "{\"t\": \"2026-10-24T05:36:18Z\", \"tool\": \"leansearch\", \"query\": \"Base extension injectivity of the Picard group of a smooth constant variety over an algebraically closed field\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"FractionalIdeal.extendedHomₐ_injective\", \"WeierstrassCurve.Affine.Point.map_injective\", \"Algebra.Generators.liftBaseChange_injective_of_isLocalizationAway\", \"IntermediateField.extendScalars_injective\", \"Algebra.Extension.σ_injective\", \"Algebra.Extension.cotangentComplex_injective_iff\", \"CommRing.Pic.mapRingHom\", \"IsPurelyInseparable.of_injective_comp_algebraMap\"], \"digest\": \"1c4bb67398efc5f6\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern scalar Picard functoriality, tensor-module identities, topological bundles or unrelated algebra; none states this geometric result or specializes to it in one line."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Pic\", \"injective\"",
+   "results": "{\"t\": \"2026-10-24T05:36:19Z\", \"tool\": \"loogle\", \"query\": \"\\\"Pic\\\", \\\"injective\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"AddSubgroup.injective_noncommPiCoprod_of_iSupIndep\", \"Subgroup.injective_noncommPiCoprod_of_iSupIndep\", \"AddMonoidHom.injective_noncommPiCoprod_of_iSupIndep\", \"MonoidHom.injective_noncommPiCoprod_of_iSupIndep\", \"CochainComplex.Plus.instInjectiveXIntAsHomologicalComplexUpHomotopicObjHomotopyCategoryPlusObjPlusInjectiveObjectMapHomotopyCategoryPlusι\", \"HomotopyCategory.Plus.instInjectiveXIntAsHomologicalComplexUpHomotopicObjPlusObjPlusQuotientOfCochainComplexPlus\", \"HomotopyCategory.Plus.instInjectiveXIntAsHomologicalComplexUpHomotopicObjPlusObjPlusQuotientInjectiveObjectMapCochainComplexPlusι\", \"HomotopyCategory.Plus.instIsIsoAppOfInjectiveXIntAsHomologicalComplexUpHomotopicObjPlus\"], \"digest\": \"3c401fb66e95dbe0\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern scalar Picard functoriality, tensor-module identities, topological bundles or unrelated algebra; none states this geometric result or specializes to it in one line."
+  },
+  {
+   "tool": "grep",
+   "query": "Pic.*(injective|baseChange)|picard.*(injective|base)",
+   "results": "{\"t\": \"2026-10-24T05:36:19Z\", \"tool\": \"grep\", \"query\": \"Pic.*(injective|baseChange)|picard.*(injective|base)\", \"sub\": \"\", \"ok\": true, \"n_hits\": 10, \"note\": \"\", \"top\": [\"Mathlib/Algebra/Tropical/Basic.lean\", \"Mathlib/Algebra/Tropical/Basic.lean\", \"Mathlib/Algebra/Tropical/Basic.lean\", \"Mathlib/FieldTheory/CardinalEmb.lean\", \"Mathlib/Algebra/HierarchyDesign.lean\", \"Mathlib/Analysis/Normed/Module/PiTensorProduct/InjectiveSeminorm.lean\", \"Mathlib/Probability/Independence/InfinitePi.lean\", \"Mathlib/RingTheory/SimpleModule/Isotypic.lean\"], \"digest\": \"7ff824b26e71d364\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern scalar Picard functoriality, tensor-module identities, topological bundles or unrelated algebra; none states this geometric result or specializes to it in one line."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The Picard group of a smooth affine variety with algebraically closed field of constants has no kernel under any further scalar extension",
+   "results": "{\"t\": \"2026-10-24T05:37:07Z\", \"tool\": \"leanfinder\", \"query\": \"The Picard group of a smooth affine variety with algebraically closed field of constants has no kernel under any further scalar extension\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CommRing.relPic_eq_top\", \"CommRing.relPic\", \"CommRing.Pic.instSubsingletonOfFiniteMaximalSpectrum\", \"Algebra.IsStandardSmooth.subsingleton_h1Cotangent\", \"Submodule.range_unitsToPic\", \"Submodule.ker_unitsToPic\", \"Submodule.mulExact_unitsToPic_mapAlgebra\", \"CommRing.Pic.subsingleton_iffₛ\"], \"digest\": \"abca8235c32da5fa\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern scalar Picard functoriality, tensor-module identities, topological bundles or unrelated algebra; none states this geometric result or specializes to it in one line."
+  },
+  {
+   "tool": "grep",
+   "query": "Pic|relPic",
+   "results": "{\"t\": \"2026-10-24T05:39:36Z\", \"tool\": \"grep\", \"query\": \"Pic|relPic\", \"sub\": \"RingTheory/PicardGroup.lean\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"17\", \"19\", \"29\", \"36\", \"38\"], \"digest\": \"f19211a08c2221d5\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern scalar Picard functoriality, tensor-module identities, topological bundles or unrelated algebra; none states this geometric result or specializes to it in one line."
+  },
+  {
+   "tool": "loogle",
+   "query": "CommRing.Pic.mapAlgebra",
+   "results": "{\"t\": \"2026-10-24T05:39:36Z\", \"tool\": \"loogle\", \"query\": \"CommRing.Pic.mapAlgebra\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CommRing.Pic.mapAlgebra\", \"CommRing.Pic.mapRingHom_algebraMap\", \"CommRing.Pic.mapAlgebra_self\", \"CommRing.Pic.mapAlgebra_self_apply\", \"CommRing.Pic.mapAlgebra_comp_mapAlgebra\", \"CommRing.Pic.mapAlgebra_mapAlgebra\", \"Submodule.mulExact_unitsToPic_mapAlgebra\", \"CommRing.Pic.mapAlgebra_apply\"], \"digest\": \"39c67557826d358b\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern scalar Picard functoriality, tensor-module identities, topological bundles or unrelated algebra; none states this geometric result or specializes to it in one line."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The Picard group of a smooth constant variety over an algebraically closed field injects after any further field extension",
+   "results": "{\"t\": \"2026-10-24T07:19:46Z\", \"tool\": \"leanfinder\", \"query\": \"The Picard group of a smooth constant variety over an algebraically closed field injects after any further field extension\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.Extension.h1Cotangentι_injective\", \"WeierstrassCurve.Affine.Point.map_injective\", \"WeierstrassCurve.Affine.Point.toClass_injective\", \"IsPurelyInseparable.injective_comp_algebraMap\", \"Algebra.IsStandardSmooth.subsingleton_h1Cotangent\", \"Algebra.Extension.subsingleton_h1Cotangent\", \"CommRing.Pic.instSubsingletonOfFiniteMaximalSpectrum\", \"IsDedekindDomain.selmerGroup.fromUnitLift_injective\"], \"digest\": \"f7b9356833e245fd\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: Read the returned signatures: normalization, general module duals, restriction, or fractional-ideal functoriality do not state this scheme-theoretic assertion or specialize to it in one line."
+  },
+  {
+   "tool": "grep",
+   "query": "Pic.*injective|injective.*Pic|Rosenlicht",
+   "results": "{\"t\": \"2026-10-24T07:19:39Z\", \"tool\": \"grep\", \"query\": \"Pic.*injective|injective.*Pic|Rosenlicht\", \"sub\": \"RingTheory\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/Derivation/Basic.lean\", \"Mathlib/RingTheory/SimpleModule/Isotypic.lean\", \"Mathlib/RingTheory/SimpleModule/Isotypic.lean\", \"Mathlib/RingTheory/SimpleModule/Isotypic.lean\", \"Mathlib/RingTheory/SimpleModule/Isotypic.lean\"], \"digest\": \"da69c7980e130cd7\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: Read the returned signatures: normalization, general module duals, restriction, or fractional-ideal functoriality do not state this scheme-theoretic assertion or specialize to it in one line."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-birigidified-affine-triviality-locus",
+  "date": "2026-10-24",
+  "group": "Q94"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "Historical alteration/Picard prerequisite beneath det-thm-sf-ctf-stability-direct-images, proof (3), extracted in lem-sfb-birigidified-affine-triviality-locus: detection of geometric triviality by normal projective compactification. The latest blueprint proof (3) assembles open and proper direct image and no longer spells out this historical prerequisite.",
+   "via": [
+    "lem-sfb-birigidified-affine-triviality-locus",
+    "lem-sfb-field-square-after-finite-extension",
+    "lem-sfb-field-product-square-power",
+    "lem-sfb-normal-group-square-power",
+    "lem-sfb-group-affine-section-ampleness",
+    "lem-sfb-normal-smooth-group-local-ample-line",
+    "lem-sfb-symmetric-line-power-prolongation",
+    "lem-sfb-normal-symmetric-cubical-extension",
+    "lem-sfb-symmetric-ample-power-extension",
+    "lem-sfb-regular-group-generic-ampleness",
+    "lem-sfb-stable-picard-theta-ampleness",
+    "lem-sfb-stable-relative-picard-kummer",
+    "lem-sfb-stable-level-versal-branch-freeness",
+    "lem-sfb-stable-abelian-level-normalization",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-constant-variety-picard-detection",
+  "worker": "stage1",
+  "summary": "No exact upstream declaration found. Three statement-only auxiliary geometric inputs: normal projective compactification with constant boundary primes, the normal divisorial restriction dictionary, and scalar comparison of reflexive hulls/divisorial modules. The item itself carries extension, boundary correction, and proper-section descent. Reuses existing proper global functions, flat cohomology base change and faithful-flat tensor tools. No change to mathematical statement; fixes doubled TeX escapes. Guo PDF is WANTED and proof is honestly agent-derived from local Stacks sources.",
+  "blueprint": "Historical alteration/Picard prerequisite beneath det-thm-sf-ctf-stability-direct-images, proof (3), extracted in lem-sfb-birigidified-affine-triviality-locus: detection of geometric triviality by normal projective compactification. The latest blueprint proof (3) assembles open and proper direct image and no longer spells out this historical prerequisite.",
+  "tool_uses": [
+   {
+    "node": "lem-pc-h0-proper-variety",
+    "why": "Generic algebraic geometry or faithful-flat algebra used below the unit in the historical Picard prerequisite; no replacement of a unit step."
+   },
+   {
+    "node": "lem-sc-faithfully-flat-tensor-zero",
+    "why": "Generic algebraic geometry or faithful-flat algebra used below the unit in the historical Picard prerequisite; no replacement of a unit step."
+   },
+   {
+    "node": "lem-sc-flat-base-change-coherent",
+    "why": "Generic algebraic geometry or faithful-flat algebra used below the unit in the historical Picard prerequisite; no replacement of a unit step."
+   },
+   {
+    "node": "lem-weil-pbc-field-extension-base-change-faithfully-flat",
+    "why": "Generic algebraic geometry or faithful-flat algebra used below the unit in the historical Picard prerequisite; no replacement of a unit step."
+   },
+   {
+    "node": "lem-weil-pbc-flat-tensor-exact",
+    "why": "Generic algebraic geometry or faithful-flat algebra used below the unit in the historical Picard prerequisite; no replacement of a unit step."
+   },
+   {
+    "node": "lem-pc-field-extension-flat",
+    "why": "Generic flatness of field-extension spectra for the proper degree-zero cohomology comparison."
+   },
+   {
+    "node": "lem-weil-pbc-module-pullback-affine-sections",
+    "why": "Generic affine quasi-coherent module/spectrum comparison used to identify the section morphism after extension; this is a tool below the unit route."
+   },
+   {
+    "node": "lem-weil-pbc-affine-tilde-gamma-adjunction",
+    "why": "Generic affine quasi-coherent module/spectrum comparison used to identify the section morphism after extension; this is a tool below the unit route."
+   },
+   {
+    "node": "lem-weil-pbc-fibre-product-affine-spectra",
+    "why": "Generic affine quasi-coherent module/spectrum comparison used to identify the section morphism after extension; this is a tool below the unit route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pc-h0-proper-variety",
+  "lem-sc-faithfully-flat-tensor-zero",
+  "lem-sc-flat-base-change-coherent",
+  "lem-weil-pbc-field-extension-base-change-faithfully-flat",
+  "lem-weil-pbc-flat-tensor-exact",
+  "lem-pc-field-extension-flat",
+  "lem-weil-pbc-module-pullback-affine-sections",
+  "lem-weil-pbc-affine-tilde-gamma-adjunction",
+  "lem-weil-pbc-fibre-product-affine-spectra"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-NL-15b872361",
+  "group": "NL",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NL-15b872361 (reviewer sub-agent of L); spot-checked: Read in full: the item, the 3 new nodes and every cited node statement, against Stacks 0EBM, 0EBL, 0GK4, 038N, 020I/J, 0EBF/0EB9, 0EBJ and 02KH. Item statement unchanged against live (unsplit, no re-split note). The route is sound and smoothness is not even needed. Normal projective compactification over k̄ gives C with boundary primes that stay prime under every field extension. N extends to a reflexive rank-one F on C_K. F_L is O(sum n_i B_{i,L}) by the boundary-kernel clause. H=(F⊗O(-D_K))^** has H_L≅O. Flat base change and H^0=L give dim Γ(C_K,H)=1, and faithfully flat descent of s:O→H finishes. Separately, a Galois-cohomology check confirms the statement is true; also tested dim 0, K=L, transcendental and inseparable L/K. The new nodes are true, statement-only, searched and not duplicates (affine-only dictionaries, the codim-2 equivalence and the proper birational model all differ). None restates the item. FIX 1: step 4 claimed the canonical base-change map sends s⊗1 to s_L, but lem-sc-flat-base-change-coherent gives only an abstract ≅ (C4). Rewritten: non-vanishing of s_L now comes from an affine open, via lem-weil-pbc-fibre-product-affine-spectra and lem-weil-pbc-module-pullback-affine-sections, and injectivity of M→M⊗_K L. FIX 2: step 1 now says why C_K and the B_{i,K} are geometrically integral/normal over K, as the scalar node requires. proof_deps unchanged. Batch-5: lem-pc-h0-proper-variety reaches the general definition def-trf-schematically-dense-open through Nagata/Chow nodes. H^0(O)=k for proper geometrically integral schemes is a general fact, not part of the trace formula or Poincaré duality, so it is accepted. tool_uses (generic flatness, affine-module and H^0 tools) accepted. No SGA.; 1 file(s) fixed by the reviewer"
+ }
+}

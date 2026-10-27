@@ -1,0 +1,120 @@
+{
+ "id": "lem-weil-pbc-punctured-leg-open-subspace-comparison",
+ "kind": "statement",
+ "title": "Formula for the specified punctured-neighborhood leg",
+ "statement": "For any topological space T, closed Z, abelian sheaf A, degree q and compact open neighborhood N, ambient object cohomology on the punctured open is canonically isomorphic to cohomology of the inverse-image sheaf on that open. The canonical cocone leg factors as this isomorphism followed by the canonical subspace cohomology f-map with the inverse-image composition arrow. The forward isomorphism is specified by the canonical pullback, so is uniquely determined. No spectrality or lifting conclusion is asserted.",
+ "source": {
+  "document": "literature/stacks-project/cohomology.tex; literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 01E1, 03F3 and 01F8; Tag 0A3D(2)"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-punctured-neighborhood-cohomology-diagram",
+  "lem-weil-pbc-open-system-restriction-presentation"
+ ],
+ "proof": [
+  {
+   "text": "Restrict injective resolutions to the open; exact extension by zero is left adjoint, so restriction preserves injectives. Equality of section complexes gives the canonical cohomology isomorphism. The unit-preserving inverse-image composition equation identifies maps in degree zero. Universality of derived evaluation and the normalized pullback boundary equation identify the maps in all degrees. Finally unfold the cocone leg and identify the terminal-open restriction arrows.",
+   "uses": [
+    "lem-weil-pbc-cohomology-over-object-localization-addEquiv",
+    "lem-weil-pbc-site-cohomology-pullback-composite"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-cohomology-over-object-localization-addEquiv",
+  "lem-weil-pbc-site-cohomology-pullback-composite"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "J8",
+  "date": "2026-10-25",
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Tags 01F7, 01F8, 03F3 and 0A37; restriction-system setup for Tag 0A3D(2)"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Cohomology of a sheaf on an open subspace; inverse image adjunction composition constant diagram colimit",
+   "results": "Scheme restriction and section isomorphisms; sheafAdjunctionContinuous and colimConstAdj. No normalized open-subspace cohomology comparison.",
+   "date": "2026-10-25",
+   "verdict": "reuse adjunction and colimit API; no complete match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "sheaf cohomology on an intersection of compact open subspaces of a spectral space is the directed colimit",
+   "results": "Condensed locally constant diagram colimits, no sheaf cohomology match. Loogle coconePointUniqueUpToIso finds colimit uniqueness component equations.",
+   "date": "2026-10-25",
+   "verdict": "no complete match"
+  },
+  {
+   "tool": "grep",
+   "query": "cohomology.*(restrict|open)|IsOpenEmbedding.*cohomology; spectralSpace; leftAdjointUniq",
+   "results": "Found Mathlib open-embedding spectralSpace and adjunction uniqueness; project general spectral-limit lifting and object localization AddEquiv, but not the required comparison square.",
+   "date": "2026-10-25",
+   "verdict": "reuse existing general dependencies"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Topology.PuncturedNeighborhoodCohomologyClassLift",
+  "date": "2026-10-25",
+  "group": "J8"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "Punctured-neighborhood class-lifting proof: explicit geometry, restriction coefficients, and canonical map comparison in steps 1 through 5",
+   "via": [
+    "Sheaf.Topology.PuncturedNeighborhoodCohomologyClassLift"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Topology.PuncturedNeighborhoodLegOpenSubspaceComparison",
+  "file": "lean/Sheaf/Topology/PuncturedNeighborhoodLegOpenSubspaceComparison.lean",
+  "declaration": "TopCat.puncturedNeighborhoodLeg_openSubspace_comparison",
+  "declarations": [
+   "TopCat.puncturedNeighborhoodLeg_openSubspace_comparison"
+  ],
+  "statement": "theorem puncturedNeighborhoodLeg_openSubspace_comparison {T : Type u} [TopologicalSpace T] (Z : Set T) (hZ : IsClosed Z) (A : CategoryTheory.Sheaf (Opens.grothendieckTopology T) AddCommGrpCat.{u}) (q : ℕ) (N : compactOpenNeighborhoods Z) (h : puncturedGeneralizations Z ⊆ puncturedNeighborhoodOpen Z hZ N) : ∃ e : CategoryTheory.Sheaf.H' A q (puncturedNeighborhoodOpen Z hZ N) ≅ CategoryTheory.Sheaf.H' ((OpenSystem.inverseImage (OpenSystem.inclusion (puncturedNeighborhoodOpen Z hZ N : Set T))).obj A) q ⊤, e.hom = objectCohomologyPullback (OpenSystem.inclusion (puncturedNeighborhoodOpen Z hZ N : Set T)) q (puncturedNeighborhoodOpen Z hZ N) A ≫ (((OpenSystem.inverseImage (OpenSystem.inclusion (puncturedNeighborhoodOpen Z hZ N : Set T))).obj A).cohomologyPresheaf q).map (homOfLE (show (⊤ : Opens (puncturedNeighborhoodOpen Z hZ N)) ≤ (Opens.map (OpenSystem.inclusion (puncturedNeighborhoodOpen Z hZ N : Set T))).obj (puncturedNeighborhoodOpen Z hZ N) from fun x _ ↦ x.property)).op ∧ puncturedNeighborhoodCohomologyLeg Z hZ A q N = e.hom ≫ TopCat.Sheaf.spectralLimitCohomologyMap (OpenSystem.inclusionOfLE h) (objectCohomologyPullback (OpenSystem.inclusionOfLE h)) ((OpenSystem.adjunction (OpenSystem.inclusionOfLE h)).homEquiv _ _ (OpenSystem.restrictionIso h A).hom) q",
+  "branch": "sheaf-dag",
+  "by": "J8",
+  "date": "2026-10-25"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J8",
+  "result": "pass",
+  "landing": "20261025T163802-L-834892",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J8",
+  "result": "pass",
+  "landing": "20261025T163802-L-834892",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

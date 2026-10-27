@@ -1,0 +1,143 @@
+{
+ "id": "lem-coef-semilinear-singleton-evaluation-mate",
+ "kind": "statement",
+ "title": "Invertible below-level singleton evaluation mate",
+ "statement": "For any site C,J and coefficient system B,tau with the universes of [def-coef-semilinear-system-models], any n,q with q<=n, any normalized ScalarData A for B_n to B_q, any adjunction L left adjoint to the actual derived evaluation e_n, and any P in D(B_n), the morphism A.T(unit_P) followed by reduction_A(LP,n,q) is an isomorphism. This is the inverse adjunction transpose of the unit followed by the actual derived horizontal transition. No tensor, projection morphism, closed structure, internal-Hom comparison or cartesianness occurs.",
+ "source": {
+  "document": "literature/zheng-six-operations-lefschetz-verdier-DM-stacks_arXiv-1006.3810.pdf",
+  "place": "Construction 4.1, printed p.21 (singleton extension and below-level scalar extension); Proposition 4.17(a), printed pp.25-26 (tensor projection). Stacks Tags 03EK, 06YY, 07A4, 06YT and 0FND supply the module tensor and normalized derived-adjunction constructions."
+ },
+ "stmt_deps": [
+  "def-coef-semilinear-system-models"
+ ],
+ "proof": [
+  {
+   "text": "Construct the ordinary sequence-site singleton by composing the strict-system singleton with the strict-system/sequence-site equivalence. Identify evaluation through this equivalence by pushforward congruence for the identity ring map. The below-level singleton is ordinary scalar extension. Its unit-transpose equation follows from systemSingleOrdinaryUnitSquare, because the equivalence unit and coefficient transport maps are identity on underlying sections.",
+   "uses": [
+    "lem-pur-system-single-derived-evaluation",
+    "def-coef-semilinear-system-models",
+    "lem-pur-system-evaluation-topos"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Choose its normalized left-derived extension on the flat-term K-flat resolving class. The scalar SystemScalarModel supplies the other normalized extension. Localization of the actual horizontal transition satisfies the representative transition square. Apply derivedExtensionMate_isIso: the ordinary comparison is an isomorphism and both models compute on the same resolving class.",
+   "uses": [
+    "lem-pur-normalized-left-extension",
+    "lem-pur-system-scalar-derived-extension",
+    "lem-pur-extension-evaluation-comparison",
+    "lem-coef-semilinear-tensor-reduction-core"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The adjunction-mate transpose formula identifies the invertible derived mate with the scalar transpose of singleton unit followed by transition. For arbitrary adjunctions L and A, unique left-adjoint isomorphisms conjugate the normalized mate to this mate; naturality and unit compatibility prove the conjugation equation. Naturality of the scalar Hom equivalence identifies its component with A.T(unit_P) followed by reduction_A(LP).",
+   "uses": [
+    "def-coef-semilinear-system-models",
+    "lem-pur-adjunction-mate-transpose"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-coef-semilinear-system-models",
+  "lem-coef-semilinear-tensor-reduction-core",
+  "lem-pur-adjunction-mate-transpose",
+  "lem-pur-extension-evaluation-comparison",
+  "lem-pur-normalized-left-extension",
+  "lem-pur-system-evaluation-topos",
+  "lem-pur-system-scalar-derived-extension",
+  "lem-pur-system-single-derived-evaluation"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/zheng-six-operations-lefschetz-verdier-DM-stacks_arXiv-1006.3810.pdf",
+  "place": "Construction 4.1, printed p.21 (singleton extension and below-level scalar extension); Proposition 4.17(a), printed pp.25-26 (tensor projection). Stacks Tags 03EK, 06YY, 07A4, 06YT and 0FND supply the module tensor and normalized derived-adjunction constructions."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "derived scalar extension and evaluation of singleton extension below a coefficient vertex",
+   "results": "8 hits: LinearPMap.supSpanSingleton_apply_smul_self, Algebra.SubmersivePresentation.ofSubsingleton_algebra_smul, Algebra.Generators.extendScalars, ModuleCat.ExtendRestrictScalarsAdj.HomEquiv.evalAt_apply, Algebra.Generators.extendScalars_val, ModuleCat.RestrictionCoextensionAdj.counit'_app, AlgHom.extendScalars, IntermediateField scalar-tower instance. No derived sequence-site result.",
+   "date": "2026-10-26",
+   "verdict": "No exact match; ordinary scalar adjunction only."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The derived reduction of a tensor of semilinear module systems is the tensor of their two reductions after scalar extension tensor comparison",
+   "results": "Module.Relations tensor presentation and ordinary tensor/scalar compatibility lemmas; no derived sequence-site comparison.",
+   "date": "2026-10-26",
+   "verdict": "No exact match."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.unit_leftAdjointUniq_hom_app",
+   "results": "The unit-compatible uniqueness theorem for two left adjoints to the same right adjoint.",
+   "date": "2026-10-26",
+   "verdict": "Used for the categorical transport; no singleton or tensor-reduction statement."
+  },
+  {
+   "tool": "grep",
+   "query": "cochain.*reduction|reduction.*cochain|tensor.*reduction",
+   "results": "0 Mathlib hits. Local library search found SystemOrdinaryTensorReduction, SystemCochainTensorReduction and SystemTensorReductionFormula, all requiring full Data (including internal-Hom evaluation data). Their proofs are reused here with only their tensor fields.",
+   "date": "2026-10-26",
+   "verdict": "Existing full-Data signatures cannot be used to construct the internal-Hom data consuming this item. A tensor-only interface is needed."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.SemilinearProjectionBelowFactorization",
+  "date": "2026-10-26",
+  "group": "J4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-coef-integral-exceptional-adjoint",
+   "place": "Step 2 of lem-coef-semilinear-cartesian-projection: Invertible below-level singleton evaluation mate, before cartesianness is used.",
+   "via": [
+    "lem-coef-semilinear-projection-below-factorization",
+    "lem-coef-semilinear-cartesian-projection",
+    "lem-coef-semilinear-system-existence",
+    "lem-coef-semilinear-derived-sections",
+    "lem-coef-finite-adjunction-diagram-realization",
+    "lem-coef-semilinear-cartesian-hom-evaluation"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.SemilinearSingletonEvaluationMate",
+  "file": "lean/Sheaf/Paper/SemilinearSingletonEvaluationMate.lean",
+  "declaration": "WeilConjectures.SemilinearSections.semilinearSingletonEvaluationMate_isIso",
+  "statement": "theorem semilinearSingletonEvaluationMate_isIso\n    (n q : ℕ) (h : q ≤ n)\n    (A : ScalarData.{c, v, max c v r}\n      (coefficientMap.{c, v, max c v r} J B τ h))\n    (L : D.{c, v, max c v r} J (B n) ⥤ DS.{c, v, max c v r} J B τ)\n    (adj : L ⊣ e.{c, v, max c v r} J B τ n)\n    (P : D.{c, v, max c v r} J (B n)) :\n    IsIso (A.T.map (adj.unit.app P) ≫\n      reduction.{c, v, max c v r} J B τ h A (L.obj P))",
+  "branch": "sheaf-dag",
+  "by": "J4",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J4",
+  "result": "pass",
+  "landing": "20261026T114155-L-2271281",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J4",
+  "result": "pass",
+  "landing": "20261026T114155-L-2271281",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

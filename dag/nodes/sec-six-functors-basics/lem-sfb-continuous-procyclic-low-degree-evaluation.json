@@ -1,0 +1,257 @@
+{
+ "id": "lem-sfb-continuous-procyclic-low-degree-evaluation",
+ "kind": "statement",
+ "title": "Low-degree evaluation and functorial construction for continuous procyclic cochains",
+ "statement": "Fix a prime $\\ell$, put $H=\\mathbf Z_\\ell$ with its inverse-limit topology [def-weil-l-adic-numbers], and let $F$ be a normed field with an isometric field embedding $\\mathbf Q_\\ell\\hookrightarrow F$. Completeness of $F$ is not assumed. On the coherent site of profinite sets in [def-weil-size-convention], with finite jointly surjective covering families, put $A_F(S)=C(S,F)$, using all continuous functions [def-sfb-continuous-map-condensed-ring]. For $q\\geq0$ set $U_F^q(S)=C(S\\times H^q,F)$ with $A_F(S)$ acting through $S$, and set $U_F^q=0$ for $q<0$. Set $d^0=0$ and, for $q\\geq1$, define\n$$(df)(s;t_1,\\ldots,t_{q+1})=f(s;t_2,\\ldots,t_{q+1})+\\sum_{i=1}^{q}(-1)^if(s;t_1,\\ldots,t_i+t_{i+1},\\ldots,t_{q+1})+(-1)^{q+1}f(s;t_1,\\ldots,t_q).$$\nThese are sheaves of internal $A_F$-modules [sk-def-sfb-module-objects], and these differentials satisfy $d^{q+1}d^q=0$. Put $K_F^0=K_F^1=A_F$, zero in other degrees, with zero differential. The formulas $\\epsilon^0=1$, $\\epsilon^1(f)(s)=f(s;1)$ and $\\epsilon^q=0$ for $q\\geq2$ define a morphism of these sheaf complexes. The maps $\\epsilon$ commute with restriction under every continuous map of profinite parameter sets, including the empty set, and with postcomposition by every continuous field embedding over $\\mathbf Q_\\ell$. For every profinite $S$, evaluation at $1$ gives an $A_F(S)$-linear bijection\n$$\\{f\\in C(S\\times H,F): f(s;x+y)=f(s;x)+f(s;y)\\}\\xrightarrow{\\sim} C(S,F),$$\nwhose inverse sends $a$ to $((s,t)\\mapsto t a(s))$. Consequently $H^0(U_F(S))\\to H^0(K_F(S))$ and $H^1(U_F(S))\\to H^1(K_F(S))$ are isomorphisms of abstract modules, with no closure of boundaries.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+  "place": "Paragraph (3), open direct image; agent-formulated scalar analytic input, extracted from Returned scalar-cochain proof steps 1–3: face cancellation, sheaf descent, evaluation naturality and dense-integer low-degree calculation. Stacks Tag 0DVG (etale-cohomology-section-continuous-group-cohomology) supplies only the cochain differential, not this theorem."
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "stmt_deps": [
+  "def-weil-l-adic-numbers",
+  "def-weil-size-convention",
+  "def-sfb-continuous-map-condensed-ring",
+  "sk-def-sfb-module-objects",
+  "def-sfb-bundled-continuous-scalar-ring"
+ ],
+ "proof": [
+  {
+   "text": "The ring sheaf $A_F$ is supplied by [def-sfb-continuous-map-condensed-ring]. For a finite jointly surjective cover $(S_i\\to S)$, let $T=\\coprod_i S_i$. A matching family $f_i\\in C(S_i\\times H^q,F)$ gives a continuous function on $T\\times H^q$, constant on the fibres of $p:T\\times H^q\\to S\\times H^q$: matching on $S_i\\times_S S_j$ is exactly equality of those values. Applied with $E=\\mathbf Q_\\ell$, so $\\mathcal O_E=\\mathbf Z_\\ell$ and $A_n=\\mathbf Z_\\ell/\\ell^n\\mathbf Z_\\ell$, [lem-sfb-integers-profinite-tower] (1)--(2) says that $H$ with its inverse-limit topology is homeomorphic to $\\mathbf Z_\\ell$ with its norm topology and is compact Hausdorff. Hence $T\\times H^q$ is compact, as a finite product of compact spaces, $S\\times H^q$ is Hausdorff, and $p$ is continuous and surjective. Apply [lem-sfb-compact-hausdorff-surjection-quotient] with the whole spaces as its subsets. The resulting set function $f:S\\times H^q\\to F$ is continuous, since for every open $O\\subseteq F$ the inverse image $p^{-1}(f^{-1}(O))$ is open and $p$ is quotient. Surjectivity proves uniqueness. For $S=\\varnothing$ there is exactly one function, the zero module, so also the empty covering satisfies descent. Thus every $U_F^q$ is an abelian sheaf, with the zero sheaf in negative degrees.",
+   "uses": [
+    "def-sfb-continuous-map-condensed-ring",
+    "lem-sfb-compact-hausdorff-surjection-quotient",
+    "lem-sfb-integers-profinite-tower"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), open direct image; agent-supplied scalar analytic input: continuous-function descent on products"
+   }
+  },
+  {
+   "text": "For each $S$, $(a\\cdot f)(s;\\mathbf t)=a(s)f(s;\\mathbf t)$ is continuous and additive in each argument. It commutes with restrictions. By the sheafified objectwise tensor description in [sk-def-sfb-sheaf-tensor], these bilinear maps induce $A_F\\otimes_{\\mathbf Z}U_F^q\\to U_F^q$. Associativity and the unit equation are the pointwise identities $(ab)f=a(bf)$ and $1f=f$, so they give precisely the module action of [sk-def-sfb-module-objects]. Every face map leaves $s$ fixed and is continuous: it drops the first or last $H$ coordinate or replaces two adjacent coordinates by their sum. Pullback along it is $A_F(S)$-linear; a finite signed sum is continuous and linear. Hence the displayed $d^q$, including $d^0=0$, are morphisms of internal $A_F$-modules.",
+   "uses": [
+    "sk-def-sfb-sheaf-tensor",
+    "sk-def-sfb-module-objects"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), open direct image; agent-supplied scalar analytic input: internal module structures and linear continuous differentials"
+   }
+  },
+  {
+   "text": "Write $b_i^n:H^{n+1}\\to H^n$ for the face dropping the first coordinate ($i=0$), adding coordinates $i,i+1$ ($1\\le i\\le n$), or dropping the last ($i=n+1$). For $0\\le i<j\\le n+2$, $b_i^n b_j^{n+1}=b_{j-1}^n b_i^{n+1}$. If the operations involve disjoint coordinates this just says that performing them in either order gives the same ordered list. For adjacent merges it says $(x+y)+z=x+(y+z)$; if a dropping operation meets a merge, both sides delete the same initial or final two coordinates. This includes the two end drops. In $d^{n+1}d^n f$ pair the term $f\\circ b_i^n\\circ b_j^{n+1}$ with indices $(i,j)$, $i<j$, with the term having indices $(j-1,i)$. These pairs exhaust the double sum, since the complementary region is $i\\ge j$. Their signs are $(-1)^{i+j}$ and $(-1)^{j-1+i}$, so they cancel. This proves $d^{n+1}d^n=0$ for $n\\ge1$. At $n=0$ the composite vanishes because $d^0=0$, and negative degrees are zero.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), open direct image; agent-supplied scalar analytic input: explicit face-pair cancellation; Stacks 0DVG, section-continuous-group-cohomology, differential formula"
+   }
+  },
+  {
+   "text": "Evaluation along the continuous map $s\\mapsto(s,1)$ sends $U_F^1(S)$ to $A_F(S)$ and is $A_F(S)$-linear. It commutes with restriction, and $\\epsilon^0$ is the identity while the other components are zero. The only potentially nonzero chain-map condition is $\\epsilon^1d^0=d_K^0\\epsilon^0$, whose two sides are zero. For the next condition both $\\epsilon^2$ and $d_K^1$ are zero; all remaining conditions also have zero target. Thus $\\epsilon$ is a morphism of the internal-module complexes constructed above.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), open direct image; agent-supplied scalar analytic input: evaluation is a chain map"
+   }
+  },
+  {
+   "text": "For $u:S'\\to S$, both composites in the degree-one naturality square send $f$ to $s'\\mapsto f(u(s');1)$; in degree zero both are restriction, and elsewhere both are zero. If $j:F\\hookrightarrow F'$ is a continuous field embedding over $\\mathbf Q_\\ell$, both coefficient composites send $f$ to $s\\mapsto j(f(s;1))$. Postcomposition preserves the differential because $j$ preserves addition, negation and finite sums, and preserves actions after scalar change because $j(af)=j(a)j(f)$. These formulas prove every asserted compatibility, including $S'=\\varnothing$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), open direct image; agent-supplied scalar analytic input: parameter and coefficient naturality with explicit formulas"
+   }
+  },
+  {
+   "text": "For an additive $f\\in C(S\\times H,F)$ put $a(s)=f(s;1)$; it is continuous by restriction. For fixed $s$, additivity gives $f(s;0)=0$ and induction gives $f(s;n)=n a(s)$ for all $n\\ge0$. For $t\\in H$ choose the representative $n_m\\in\\{0,\\ldots,\\ell^m-1\\}$ of its residue modulo $\\ell^m$. In the inverse-limit topology [def-weil-l-adic-numbers], $n_m\\to t$: each residue modulo $\\ell^k$ agrees with that of $t$ for $m\\ge k$. Continuity of $f(s;-)$ gives $f(s;n_m)\\to f(s;t)$; continuity of the inclusion $H\\subset\\mathbf Q_\\ell\\hookrightarrow F$ (the inverse-limit topology of $H$ is the norm topology by [lem-sfb-integers-profinite-tower] (1) with $E=\\mathbf Q_\\ell$, and the embedding is isometric) and of multiplication gives $n_m a(s)\\to t a(s)$. The two sequences coincide, so uniqueness of a limit in the Hausdorff normed field $F$ gives $f(s;t)=t a(s)$. This constructs no limit in $F$; both limits are already supplied by the indicated continuous maps, so completeness is unnecessary.",
+   "uses": [
+    "def-weil-l-adic-numbers",
+    "lem-sfb-integers-profinite-tower"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), open direct image; agent-supplied scalar analytic input: residue representatives and the low-degree uniqueness argument"
+   }
+  },
+  {
+   "text": "Conversely, for $a\\in C(S,F)$ the map $g_a(s,t)=t a(s)$ is jointly continuous, since $H\\to\\mathbf Q_\\ell$ is continuous for the inverse-limit topology by [lem-sfb-integers-profinite-tower] (1) with $E=\\mathbf Q_\\ell$, the field embedding is isometric and hence continuous and multiplication in $F$ is continuous. Distributivity gives $g_a(s,x+y)=g_a(s,x)+g_a(s,y)$, and $g_a(s,1)=a(s)$. The preceding step gives $g_{\\epsilon^1(f)}=f$. Evaluation is $A_F(S)$-linear, and $g_{ba}(s,t)=t b(s)a(s)=b(s)g_a(s,t)$, so its inverse is also linear. This proves the asserted linear bijection for every $S$, including the empty set, where both modules have one element.",
+   "uses": [
+    "lem-sfb-integers-profinite-tower"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), open direct image; agent-supplied scalar analytic input: continuous explicit inverse and scalar linearity"
+   }
+  },
+  {
+   "text": "In degree zero, $U_F^0(S)=A_F(S)$ and both its incoming differential and $d^0$ are zero, so $H^0(U_F(S))=A_F(S)$ and $H^0(\\epsilon)$ is the identity. In degree one the displayed formula is $d^1f(s;x,y)=f(s;y)-f(s;x+y)+f(s;x)$, so its kernel is exactly the additive families of steps 6--7. Its incoming image is zero because $d^0=0$. The target $K_F(S)$ has zero differentials, so $H^1(K_F(S))=A_F(S)$ and its induced map is exactly the bijection just proved. These are ordinary kernel/image quotients of abstract modules; no topological closure is taken.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), open direct image; agent-supplied scalar analytic input: abstract degree-zero and degree-one cohomology"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sfb-continuous-map-condensed-ring",
+  "lem-sfb-compact-hausdorff-surjection-quotient",
+  "sk-def-sfb-sheaf-tensor",
+  "sk-def-sfb-module-objects",
+  "def-weil-l-adic-numbers",
+  "lem-sfb-integers-profinite-tower"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+  "place": "Paragraph (3), scalar analytic input; explicit descent, face cancellation and residue-sequence proof. Stacks 0DVG supplies the cochain formula only."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Continuous additive maps from p adic integers to a Hausdorff topological Qp vector space are t maps to t times the value at one",
+   "results": "{\"t\": \"2026-10-22T06:04:23Z\", \"tool\": \"leanfinder\", \"query\": \"Continuous additive maps from p adic integers to a Hausdorff topological Qp vector space are t maps to t times the value at one\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"PadicInt.continuousAddCharEquiv_apply\", \"PadicInt.continuousAddCharEquiv\", \"PadicInt.continuousAddCharEquiv_of_norm_mul_apply\", \"PadicInt.mahlerTerm\", \"PadicInt.mahlerTerm_apply\", \"PadicInt.mahlerEquiv\", \"PadicInt.continuous_addChar_of_value_at_one\", \"PadicInt.continuousAddCharEquiv_of_norm_mul\"], \"digest\": \"071726886bf64d1a\"}\n[leanfinder] OK 8 hit(s)\n  {\"name\": \"PadicInt.continuousAddCharEquiv_apply\", \"module\": \"Mathlib/NumberTheory/Padics/AddChar\", \"type\": \"∀ {p : ℕ} [inst : Fact (Nat.Prime p)] {R : Type u_1} [inst_1 : NormedRing R] [inst_2 : Algebra ℤ_[p] R]\\n  [inst_3 : IsBoundedSMul ℤ_[p] R] [inst_4 : IsUltrametricDist R] [inst_5 : CompleteSpace R] {κ : AddChar ℤ_[p] R}\\n  (hκ : Continuous ⇑κ), ↑((PadicInt.continuousAddCharEquiv p R) ⟨κ, hκ⟩) = κ 1 - \", \"doc\": \"For a prime $ p $, a normed ring $ R $ with $ \\\\mathbb{Z}_p $-algebra structure, and a continuous additive character $ \\\\chi: \\\\mathbb{Z}_p \\\\to R^\\\\times $, the canonical equivalence between such characte\"}\n  {\"name\": \"PadicInt.continuousAddCharEquiv\", \"module\": \"Mathlib/NumberTheory/Padics/AddChar\", \"type\": \"(p : ℕ) →\\n  [inst : Fact (Nat.Prime p)] →\\n    (R : Type u_1) →\\n      [inst_1 : NormedRing R] →\\n        [inst_2 : Algebra ℤ_[p] R] →\\n          [IsBoundedSMul ℤ_[p] R] →\\n            [IsUltrametricDist R] →\\n              [CompleteSpace R] →\\n                { κ // Continuous ⇑κ } ≃ { r // Filter.Tendsto\", \"doc\": \"For a prime $ p $ and a normed ring $ R $ equipped with a $ \\\\mathbb{Z}_p $-algebra structure, bounded scalar multiplication, ultrametric distance, and completeness, there is a canonical equivalence be\"}\n  {\"name\": \"PadicInt.continuousAddCharEquiv_of_norm_mul_apply\", \"module\": \"Mathlib/NumberTheory/Padics/AddChar\", \"type\": \"∀ {p : ℕ} [inst : Fact (Nat.Prime p)] {R : Type u_1} [inst_1 : NormedRing R] [inst_2 : Algebra ℤ_[p] R]\\n  [inst_3 : IsBoundedSMul ℤ_[p] R] [inst_4 : IsUltrametricDist R] [inst_5 : CompleteSpace R] [inst_6 : NormMulClass R]\\n  {κ : AddChar ℤ_[p] R} (hκ : Continuous ⇑κ), ↑((PadicInt.continuousAddCharEq\", \"doc\": \"For a prime $ p $ and a normed ring $ R $ equipped with a $ \\\\mathbb{Z}_p $-algebra structure, bounded scalar multiplication, ultrametric distance, and completeness, applying the canonical equivalence \"}\n  {\"name\": \"PadicInt.mahlerTerm\", \"module\": \"Mathlib/NumberTheory/Padics/MahlerBasis\", \"type\": \"{p : ℕ} →\\n  [hp : Fact (Nat.Prime p)] →\\n    {E : Type u_1} →\\n      [inst : NormedAddCommGroup E] → [inst_1 : Module ℤ_[p] E] → [IsBoundedSMul ℤ_[p] E] → E → ℕ → C(ℤ_[p], E)\", \"doc\": \"The function in the space of continuous maps from $\\\\mathbb{Z}_p$ to $E$ obtained by scaling the $n$-th Mahler basis function $\\\\binom{x}{n}$ by a constant $a$, where $\\\\mathbb{Z}_p$ denotes the p-adic i\"}\n  {\"name\": \"PadicInt.mahlerTerm_apply\", \"module\": \"Mathlib/NumberTheory/Padics/MahlerBasis\", \"type\": \"∀ {p : ℕ} [hp : Fact (Nat.Prime p)] {E : Type u_1} [inst : NormedAddCommGroup E] [inst_1 : Module ℤ_[p] E]\\n  [inst_2 : IsBoundedSMul ℤ_[p] E] (a : E) (n : ℕ) (x : ℤ_[p]), (PadicInt.mahlerTerm a n) x = (mahler n) x • a\", \"doc\": \"For any $ a \\\\in E $, $ n \\\\in \\\\mathbb{N} $, and $ x \\\\in \\\\mathbb{Z}_p $, the application of the Mahler basis term scaled by $ a $ satisfies $ \\\\text{mahlerTerm}_a(n)(x) = \\\\binom{x}{n} \\\\cdot a $.\"}\n  {\"name\": \"PadicInt.mahlerEquiv\", \"module\": \"Mathlib/NumberTheory/Padics/MahlerBasis\", \"type\": \"{p : ℕ} →\\n  [hp : Fact (Nat.Prime p)] →\\n    (E : Type u_1) →\\n      [inst : NormedAddCommGroup E] →\\n        [inst_1 : Module ℤ_[p] E] →\\n          [inst_2 : IsBoundedSMul ℤ_[p] E] →\\n            [IsUltrametricDist E] → [CompleteSpace E] → C(ℤ_[p], E) ≃ₗᵢ[ℤ_[p]] ZeroAtInftyContinuousMap ℕ E\", \"doc\": \"The linear isometric equivalence between the space of continuous functions $ C(\\\\mathbb{Z}_p, E) $ and the space of continuous functions vanishing at infinity $ C_0(\\\\mathbb{N}, E) $, established via th\"}\n  {\"name\": \"PadicInt.continuous_addChar_of_value_at_one\", \"module\": \"Mathlib/NumberTheory/Padics/AddChar\", \"type\": \"∀ {p : ℕ} [inst : Fact (Nat.Prime p)] {R : Type u_1} [inst_1 : NormedRing R] [inst_2 : Algebra ℤ_[p] R]\\n  [inst_3 : IsBoundedSMul ℤ_[p] R] [inst_4 : IsUltrametricDist R] [inst_5 : CompleteSpace R] {r : R}\\n  (hr : Filter.Tendsto (fun x => r ^ x) Filter.atTop (nhds 0)), Continuous ⇑(PadicInt.addChar_o\", \"doc\": \"For a prime $ p $, a normed ring $ R $ equipped with a $ \\\\mathbb{Z}_p $-algebra structure, bounded scalar multiplication, ultrametric distance, and completeness, if the sequence $ r^n $ converges to z\"}\n  {\"name\": \"PadicInt.continuousAddCharEquiv_of_norm_mul\", \"module\": \"Mathlib/NumberTheory/Padics/AddChar\", \"type\": \"(p : ℕ) →\\n  [inst : Fact (Nat.Prime p)] →\\n    (R : Type u_1) →\\n      [inst_1 : NormedRing R] →\\n        [inst_2 : Algebra ℤ_[p] R] →\\n          [IsBoundedSMul ℤ_[p] R] →\\n            [IsUltrametricDist R] → [CompleteSpace R] → [NormMulClass R] → { κ // Continuous ⇑κ } ≃ { r // ‖r‖ < 1 }\", \"doc\": \"For a prime $ p $ and a normed ring $ R $ equipped with a $ \\\\mathbb{Z}_p $-algebra structure, bounded scalar multiplication, ultrametric distance, and completeness, there is a canonical equivalence be\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: AddChar.lean:102 classifies multiplicative-valued additive characters and assumes completeness, not additive scalar cochains for an arbitrary norm field; ContCohomology/Basic.lean:113 defines homogeneous cochains only. No parameterwise evaluation theorem or face/sheaf construction with these clauses was found."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Parameter families of continuous procyclic trivial action cochains evaluation at one computes degree zero and degree one",
+   "results": "{\"t\": \"2026-10-22T06:04:12Z\", \"tool\": \"leansearch\", \"query\": \"Parameter families of continuous procyclic trivial action cochains evaluation at one computes degree zero and degree one\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CochainComplex.HomComplex.Cochain.ofHom_zero\", \"CochainComplex.HomComplex.Cochain.ofHoms_v\", \"CochainComplex.HomComplex.Cochain.ofHom_v\", \"groupCohomology.d₀₁_eq_zero\", \"groupCohomology.map_one_of_isCocycle₁\", \"ContinuousCohomology.MultiInd.complex\", \"CategoryTheory.PresheafOfGroups.ZeroCochain\", \"ContinuousMapZero.instContinuousEval\"], \"digest\": \"d0cfdfac06fbb5a9\"}\n[leansearch] OK 8 hit(s)\n  {\"name\": \"CochainComplex.HomComplex.Cochain.ofHom_zero\", \"module\": \"Mathlib.Algebra.Homology.HomotopyCategory.HomComplex\", \"type\": \": ofHom (0 : F ⟶ G) = 0\", \"doc\": \"The cochain of degree 0 in the homomorphism complex $\\\\text{Hom}(F,G)$ obtained from the zero chain map $0 : F \\\\to G$ is equal to the zero cochain.\"}\n  {\"name\": \"CochainComplex.HomComplex.Cochain.ofHoms_v\", \"module\": \"Mathlib.Algebra.Homology.HomotopyCategory.HomComplex\", \"type\": \"(ψ : ∀ (p : ℤ), F.X p ⟶ G.X p) (p : ℤ) : (ofHoms ψ).v p p (add_zero p) = ψ p\", \"doc\": \"For cochain complexes $F$ and $G$ in a preadditive category, and a family of morphisms $\\\\psi_p: F.X_p \\\\to G.X_p$, the component of the degree-zero cochain $\\\\gamma = \\\\text{ofHoms}(\\\\psi)$ at $(p, p)$ wi\"}\n  {\"name\": \"CochainComplex.HomComplex.Cochain.ofHom_v\", \"module\": \"Mathlib.Algebra.Homology.HomotopyCategory.HomComplex\", \"type\": \"(φ : F ⟶ G) (p : ℤ) : (ofHom φ).v p p (add_zero p) = φ.f p\", \"doc\": \"For any chain map $\\\\varphi: F \\\\to G$ and integer $p$, the component of the degree-zero cochain constructed from $\\\\varphi$ at index $p$ is equal to the component $\\\\varphi_f(p)$ of the chain map, i.e., \"}\n  {\"name\": \"groupCohomology.d₀₁_eq_zero\", \"module\": \"Mathlib.RepresentationTheory.Homological.GroupCohomology.LowDegree\", \"type\": \"[A.IsTrivial] : d₀₁ A = 0\", \"doc\": \"If $ A $ is a trivial representation of a group over a commutative ring, then the first boundary map $ d_{0,1} $ in group cohomology satisfies $ d_{0,1}(A) = 0 $.\"}\n  {\"name\": \"groupCohomology.map_one_of_isCocycle₁\", \"module\": \"Mathlib.RepresentationTheory.Homological.GroupCohomology.LowDegree\", \"type\": \"{f : G → A} (hf : IsCocycle₁ f) : f 1 = 0\", \"doc\": \"If $ f : G \\\\to A $ is a 1-cocycle (satisfying $ f(gh) = g \\\\cdot f(h) + f(g) $ for all $ g, h \\\\in G $), then $ f(1) = 0 $.\"}\n  {\"name\": \"ContinuousCohomology.MultiInd.complex\", \"module\": \"Mathlib.Algebra.Category.ContinuousCohomology.Basic\", \"type\": \": CochainComplex (Action (TopModuleCat R) G ⥤ Action (TopModuleCat R) G) ℕ\", \"doc\": \"A cochain complex in the category of $G$-actions on topological $R$-modules, constructed using the family of functors $\\\\text{functor}_{R,G}$ and differentials $d_n$, where consecutive differentials sa\"}\n  {\"name\": \"CategoryTheory.PresheafOfGroups.ZeroCochain\", \"module\": \"Mathlib.CategoryTheory.Sites.NonabelianCohomology.H1\", \"type\": \"{C : Type u} →\\n  [inst : CategoryTheory.Category.{v, u} C] →\\n    CategoryTheory.Functor Cᵒᵖ GrpCat → {I : Type w'} → (I → C) → Type (max w w')\", \"doc\": \"Given a category $\\\\mathcal{C}$, a presheaf of groups $G: \\\\mathcal{C}^{\\\\text{op}} \\\\to \\\\text{Grp}$, and a function $U: I \\\\to \\\\mathcal{C}$ assigning objects in $\\\\mathcal{C}$ to indices $i \\\\in I$, the zer\"}\n  {\"name\": \"ContinuousMapZero.instContinuousEval\", \"module\": \"Mathlib.Topology.ContinuousMap.ContinuousMapZero\", \"type\": \"[LocallyCompactPair X R] : ContinuousEval C(X, R)₀ X R\", \"doc\": \"When $X$ and $R$ form a locally compact pair of topological spaces, the evaluation map $\\\\operatorname{ev}: C(X, R)_0 \\\\times X \\\\to R$ defined by $\\\\operatorname{ev}(f, x) = f(x)$ is continuous, where $C\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: AddChar.lean:102 classifies multiplicative-valued additive characters and assumes completeness, not additive scalar cochains for an arbitrary norm field; ContCohomology/Basic.lean:113 defines homogeneous cochains only. No parameterwise evaluation theorem or face/sheaf construction with these clauses was found."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"PadicInt\", \"ext\"",
+   "results": "{\"t\": \"2026-10-22T06:04:12Z\", \"tool\": \"loogle\", \"query\": \"\\\"PadicInt\\\", \\\"ext\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"loogle: Loogle is currently under load, please try again later.\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}\n[loogle] OK 0 hit(s) | loogle: Loogle is currently under load, please try again later.\n",
+   "date": "2026-10-22",
+   "verdict": "unavailable: loogle: Loogle is currently under load, please try again later."
+  },
+  {
+   "tool": "grep",
+   "query": "PadicInt.*(addHom|AddMonoidHom|ext)|continuous.*cocycle|cocycle.*continuous",
+   "results": "{\"t\": \"2026-10-22T06:04:12Z\", \"tool\": \"grep\", \"query\": \"PadicInt.*(addHom|AddMonoidHom|ext)|continuous.*cocycle|cocycle.*continuous\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"Mathlib/NumberTheory/Cyclotomic/CyclotomicCharacter.lean\", \"Mathlib/NumberTheory/Cyclotomic/CyclotomicCharacter.lean\", \"Mathlib/RepresentationTheory/Homological/ContCohomology/LowDegree.lean\", \"Mathlib/RepresentationTheory/Homological/ContCohomology/Basic.lean\", \"Mathlib/RepresentationTheory/Homological/ContCohomology/Functoriality.lean\", \"Mathlib/RepresentationTheory/Homological/ContCohomology/Functoriality.lean\", \"Mathlib/RingTheory/WittVector/Compare.lean\", \"Mathlib/RingTheory/WittVector/Compare.lean\"], \"digest\": \"73fed3b2bd6a17a2\"}\n[grep] OK 12 hit(s)\n  {\"file\": \"Mathlib/NumberTheory/Cyclotomic/CyclotomicCharacter.lean\", \"line\": \"313\", \"text\": \"        refine PadicInt.ext_of_toZModPow.mp fun n ↦ ?_\"}\n  {\"file\": \"Mathlib/NumberTheory/Cyclotomic/CyclotomicCharacter.lean\", \"line\": \"319\", \"text\": \"        refine PadicInt.ext_of_toZModPow.mp fun n ↦ ?_\"}\n  {\"file\": \"Mathlib/RepresentationTheory/Homological/ContCohomology/LowDegree.lean\", \"line\": \"48\", \"text\": \"lemma cocycles₀IsoAux' (x : X) (h : ContinuousMap.const G x ∈ ((resolution' X).X 0).ρ.invariants) :\"}\n  {\"file\": \"Mathlib/RepresentationTheory/Homological/ContCohomology/Basic.lean\", \"line\": \"145\", \"text\": \"/-- The natural map from `n`-cocycles to `n`th continuous cohomology for a `k`-linear\"}\n  {\"file\": \"Mathlib/RepresentationTheory/Homological/ContCohomology/Functoriality.lean\", \"line\": \"127\", \"text\": \"/-- The map `Zⁿ(G, X) ⟶ Zⁿ(H, Y)` on cocycles induced by a continuous group homomorphism\"}\n  {\"file\": \"Mathlib/RepresentationTheory/Homological/ContCohomology/Functoriality.lean\", \"line\": \"135\", \"text\": \"    cocyclesMap (ContinuousMonoidHom.id G) (𝟙 X) n = 𝟙 _ := by\"}\n  {\"file\": \"Mathlib/RingTheory/WittVector/Compare.lean\", \"line\": \"173\", \"text\": \"  rw [← PadicInt.toZModPow_eq_iff_ext]\"}\n  {\"file\": \"Mathlib/RingTheory/WittVector/Compare.lean\", \"line\": \"180\", \"text\": \"theorem toPadicInt_comp_fromPadicInt_ext (x) :\"}\n  {\"file\": \"Mathlib/RingTheory/WittVector/Compare.lean\", \"line\": \"192\", \"text\": \"theorem fromPadicInt_comp_toPadicInt_ext (x) :\"}\n  {\"file\": \"Mathlib/RingTheory/WittVector/Compare.lean\", \"line\": \"202\", \"text\": \"  left_inv := fromPadicInt_comp_toPadicInt_ext _\"}\n  {\"file\": \"Mathlib/RingTheory/WittVector/Compare.lean\", \"line\": \"203\", \"text\": \"  right_inv := toPadicInt_comp_fromPadicInt_ext _\"}\n  {\"file\": \"Mathlib/Topology/FiberBundle/Basic.lean\", \"line\": \"112\", \"text\": \"continuously on the base point, satisfying basic compatibility conditions (cocycle property).\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: AddChar.lean:102 classifies multiplicative-valued additive characters and assumes completeness, not additive scalar cochains for an arbitrary norm field; ContCohomology/Basic.lean:113 defines homogeneous cochains only. No parameterwise evaluation theorem or face/sheaf construction with these clauses was found."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Low degree continuous cochains with trivial action on a topological vector space over Qp natural in compact parameter spaces",
+   "results": "{\"t\": \"2026-10-22T06:04:25Z\", \"tool\": \"leanfinder\", \"query\": \"Low degree continuous cochains with trivial action on a topological vector space over Qp natural in compact parameter spaces\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"ContinuousCohomology.homogeneousCochains\", \"ContinuousCohomology.MultiInd.complex\", \"continuousCohomology\", \"ContinuousCohomology.const_app_hom\", \"ContinuousCohomology.I_obj_V_carrier\", \"ContinuousCohomology.const\", \"ContinuousCohomology.MultiInd.d_zero\", \"ContinuousCohomology.I_obj_V_topologicalSpace\"], \"digest\": \"89388ae5a5902a5a\"}\n[leanfinder] OK 8 hit(s)\n  {\"name\": \"ContinuousCohomology.homogeneousCochains\", \"module\": \"Mathlib/Algebra/Category/ContinuousCohomology/Basic\", \"type\": \"(R : Type u_1) →\\n  (G : Type u_2) →\\n    [inst : CommRing R] →\\n      [inst_1 : Group G] →\\n        [inst_2 : TopologicalSpace R] →\\n          [inst_3 : TopologicalSpace G] →\\n            [IsTopologicalGroup G] →\\n              CategoryTheory.Functor (Action (TopModuleCat R) G) (CochainComplex (TopModuleC\", \"doc\": \"The functor constructs cochain complexes in the category of topological $ R $-modules by first forming the $ G $-equivariant cochain complex $ \\\\text{MultiInd.complex} $, then applying the invariants f\"}\n  {\"name\": \"ContinuousCohomology.MultiInd.complex\", \"module\": \"Mathlib/Algebra/Category/ContinuousCohomology/Basic\", \"type\": \"(R : Type u_1) →\\n  (G : Type u_2) →\\n    [inst : CommRing R] →\\n      [inst_1 : Group G] →\\n        [inst_2 : TopologicalSpace R] →\\n          [inst_3 : TopologicalSpace G] →\\n            [IsTopologicalGroup G] →\\n              CochainComplex (CategoryTheory.Functor (Action (TopModuleCat R) G) (Action (To\", \"doc\": \"A cochain complex in the category of $G$-actions on topological $R$-modules, constructed using the family of functors $\\\\text{functor}_{R,G}$ and differentials $d_n$, where consecutive differentials sa\"}\n  {\"name\": \"continuousCohomology\", \"module\": \"Mathlib/Algebra/Category/ContinuousCohomology/Basic\", \"type\": \"(R : Type u_1) →\\n  (G : Type u_2) →\\n    [inst : CommRing R] →\\n      [inst_1 : Group G] →\\n        [inst_2 : TopologicalSpace R] →\\n          [inst_3 : TopologicalSpace G] →\\n            [IsTopologicalGroup G] → ℕ → CategoryTheory.Functor (Action (TopModuleCat R) G) (TopModuleCat R)\", \"doc\": \"The functor computes the $n$-th continuous cohomology group by composing the homogeneous cochain complex construction (which forms $G$-equivariant cochains and extracts $G$-invariant submodules) with \"}\n  {\"name\": \"ContinuousCohomology.const_app_hom\", \"module\": \"Mathlib/Algebra/Category/ContinuousCohomology/Basic\", \"type\": \"∀ (R : Type u_1) (G : Type u_2) [inst : CommRing R] [inst_1 : Group G] [inst_2 : TopologicalSpace R]\\n  [inst_3 : TopologicalSpace G] [inst_4 : IsTopologicalGroup G] (x : Action (TopModuleCat R) G),\\n  ((ContinuousCohomology.const R G).app x).hom = TopModuleCat.ofHom (ContinuousLinearMap.const R G)\", \"doc\": \"For any commutative topological ring $ R $, topological group $ G $, and action $ x $ of $ G $ on the category of topological $ R $-modules, the morphism obtained by applying the constant natural tran\"}\n  {\"name\": \"ContinuousCohomology.I_obj_V_carrier\", \"module\": \"Mathlib/Algebra/Category/ContinuousCohomology/Basic\", \"type\": \"∀ (R : Type u_1) (G : Type u_2) [inst : CommRing R] [inst_1 : Group G] [inst_2 : TopologicalSpace R]\\n  [inst_3 : TopologicalSpace G] [inst_4 : IsTopologicalGroup G] (rep : Action (TopModuleCat R) G),\\n  ↑((ContinuousCohomology.I R G).obj rep).V.toModuleCat = C(G, ↑rep.V.toModuleCat)\", \"doc\": \"For a commutative ring $ R $ and a topological group $ G $, applying the ContinuousCohomology functor $ I $ to a $ G $-action on a topological $ R $-module results in an object whose underlying module\"}\n  {\"name\": \"ContinuousCohomology.const\", \"module\": \"Mathlib/Algebra/Category/ContinuousCohomology/Basic\", \"type\": \"(R : Type u_1) →\\n  (G : Type u_2) →\\n    [inst : CommRing R] →\\n      [inst_1 : Group G] →\\n        [inst_2 : TopologicalSpace R] →\\n          [inst_3 : TopologicalSpace G] →\\n            [inst_4 : IsTopologicalGroup G] →\\n              CategoryTheory.Functor.id (Action (TopModuleCat R) G) ⟶ ContinuousCoh\", \"doc\": \"The natural transformation from the identity functor on the category of $G$-actions on topological $R$-modules to the endofunctor $I$, which maps each object to the constant morphism constructed via t\"}\n  {\"name\": \"ContinuousCohomology.MultiInd.d_zero\", \"module\": \"Mathlib/Algebra/Category/ContinuousCohomology/Basic\", \"type\": \"∀ (R : Type u_1) (G : Type u_2) [inst : CommRing R] [inst_1 : Group G] [inst_2 : TopologicalSpace R]\\n  [inst_3 : TopologicalSpace G] [inst_4 : IsTopologicalGroup G],\\n  ContinuousCohomology.MultiInd.d R G 0 = ContinuousCohomology.const R G\", \"doc\": \"The 0th differential $d_0$ in the continuous cohomology sequence coincides with the constant natural transformation from the identity functor to the endofunctor $I_{R,G}$, which maps objects to consta\"}\n  {\"name\": \"ContinuousCohomology.I_obj_V_topologicalSpace\", \"module\": \"Mathlib/Algebra/Category/ContinuousCohomology/Basic\", \"type\": \"∀ (R : Type u_1) (G : Type u_2) [inst : CommRing R] [inst_1 : Group G] [inst_2 : TopologicalSpace R]\\n  [inst_3 : TopologicalSpace G] [inst_4 : IsTopologicalGroup G] (rep : Action (TopModuleCat R) G),\\n  ((ContinuousCohomology.I R G).obj rep).V.topologicalSpace = ContinuousMap.compactOpen\", \"doc\": \"For any commutative ring $ R $, topological group $ G $, and a continuous action of $ G $ on a topological $ R $-module $ V $, the topology on the space of continuous functions $ C(G, V) $ induced by \"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: AddChar.lean:102 classifies multiplicative-valued additive characters and assumes completeness, not additive scalar cochains for an arbitrary norm field; ContCohomology/Basic.lean:113 defines homogeneous cochains only. No parameterwise evaluation theorem or face/sheaf construction with these clauses was found."
+  },
+  {
+   "tool": "grep",
+   "query": "denseRange_natCast|denseRange_intCast|continuousAddCharEquiv|d₀₁_eq_zero",
+   "results": "{\"t\": \"2026-10-23T11:48:36Z\", \"tool\": \"grep\", \"query\": \"denseRange_natCast|denseRange_intCast|continuousAddCharEquiv|d₀₁_eq_zero\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"Mathlib/NumberTheory/Padics/RingHoms.lean\", \"Mathlib/NumberTheory/Padics/RingHoms.lean\", \"Mathlib/NumberTheory/Padics/RingHoms.lean\", \"Mathlib/NumberTheory/Padics/MahlerBasis.lean\", \"Mathlib/NumberTheory/Padics/MahlerBasis.lean\", \"Mathlib/NumberTheory/Padics/AddChar.lean\", \"Mathlib/NumberTheory/Padics/AddChar.lean\", \"Mathlib/NumberTheory/Padics/AddChar.lean\"], \"digest\": \"b68a315888dbef6e\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: no single theorem covers the parameter sheaf complex, chain map, naturality and additive evaluation without completeness. PadicInt density is only a component; AddChar classifies multiplicative characters and assumes completeness; homogeneous continuous cochains require a model comparison."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Continuous additive maps from the p adic integers to a normed Qp field are determined by evaluation at one without completeness",
+   "results": "{\"t\": \"2026-10-23T11:48:36Z\", \"tool\": \"leansearch\", \"query\": \"Continuous additive maps from the p adic integers to a normed Qp field are determined by evaluation at one without completeness\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"PadicInt.continuousAddCharEquiv_of_norm_mul_apply\", \"PadicInt.continuousAddCharEquiv_apply\", \"PadicInt.continuous_addChar_of_value_at_one\", \"PadicInt.addChar_of_value_at_one_def\", \"PadicInt.addChar_of_value_at_one\", \"PadicInt.continuousAddCharEquiv_of_norm_mul_symm_apply\", \"PadicInt.continuousAddCharEquiv_of_norm_mul\", \"PadicInt.continuousAddCharEquiv\"], \"digest\": \"f5bd7277ee2bec02\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: no single theorem covers the parameter sheaf complex, chain map, naturality and additive evaluation without completeness. PadicInt density is only a component; AddChar classifies multiplicative characters and assumes completeness; homogeneous continuous cochains require a model comparison."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"PadicInt\", \"denseRange\"",
+   "results": "{\"t\": \"2026-10-23T11:48:36Z\", \"tool\": \"loogle\", \"query\": \"\\\"PadicInt\\\", \\\"denseRange\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 2, \"note\": \"\", \"top\": [\"PadicInt.denseRange_intCast\", \"PadicInt.denseRange_natCast\"], \"digest\": \"b36cb91e7cee2418\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: no single theorem covers the parameter sheaf complex, chain map, naturality and additive evaluation without completeness. PadicInt density is only a component; AddChar classifies multiplicative characters and assumes completeness; homogeneous continuous cochains require a model comparison."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Continuous p adic scalar cochains with trivial action form a sheaf complex and evaluation at one computes H0 H1 for arbitrary normed Qp field",
+   "results": "{\"t\": \"2026-10-23T11:48:39Z\", \"tool\": \"leanfinder\", \"query\": \"Continuous p adic scalar cochains with trivial action form a sheaf complex and evaluation at one computes H0 H1 for arbitrary normed Qp field\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"continuousCohomology\", \"ContinuousCohomology.homogeneousCochains\", \"ContinuousCohomology.MultiInd.complex\", \"ContinuousCohomology.continuousCohomologyZeroIso\", \"ContinuousCohomology.kerHomogeneousCochainsZeroEquiv\", \"groupCohomology.π_comp_H0IsoOfIsTrivial_hom\", \"groupCohomology.π_comp_H0IsoOfIsTrivial_hom_apply\", \"groupCohomology.H0\"], \"digest\": \"1f5b845e34098044\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: no single theorem covers the parameter sheaf complex, chain map, naturality and additive evaluation without completeness. PadicInt density is only a component; AddChar classifies multiplicative characters and assumes completeness; homogeneous continuous cochains require a model comparison."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For finite surjective covers of profinite parameter sets continuous functions on the product descend and the inhomogeneous bar differential squares to zero",
+   "results": "{\"t\": \"2026-10-23T11:48:40Z\", \"tool\": \"leanfinder\", \"query\": \"For finite surjective covers of profinite parameter sets continuous functions on the product descend and the inhomogeneous bar differential squares to zero\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"ContinuousCohomology.MultiInd.d_comp_d\", \"ContinuousCohomology.MultiInd.d_comp_d_assoc\", \"groupHomology.inhomogeneousChains.d_comp_d\", \"Rep.barComplex.d_def\", \"Rep.standardComplex.d_comp_ε\", \"ContinuousCohomology.MultiInd.d_succ\", \"Rep.barComplex.d_comp_diagonalSuccIsoFree_inv_eq\", \"groupCohomology.d₀₁_comp_d₁₂\"], \"digest\": \"ba57eec1999a88e5\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: no single theorem covers the parameter sheaf complex, chain map, naturality and additive evaluation without completeness. PadicInt density is only a component; AddChar classifies multiplicative characters and assumes completeness; homogeneous continuous cochains require a model comparison."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-procyclic-scalar-cochain-evaluation",
+  "date": "2026-10-22",
+  "group": "Q71"
+ },
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "Paragraph (3), open direct image; scalar analytic base. Returned scalar-cochain proof steps 1–3: face cancellation, sheaf descent, evaluation naturality and dense-integer low-degree calculation.",
+   "via": [
+    "lem-sfb-procyclic-scalar-cochain-evaluation",
+    "lem-sfb-ind-unipotent-procyclic-difference",
+    "lem-sfb-polynomial-translation-acyclic",
+    "lem-sfb-polynomial-derived-bar-comparison",
+    "lem-sfb-trivial-ladic-derived-exterior",
+    "lem-sfb-dense-lattice-derived-invariants-comparison",
+    "lem-sfb-tame-inertia-continuous-koszul",
+    "lem-sfb-continuous-algcl-tame-boundary-comparison",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-continuous-procyclic-low-degree-evaluation",
+  "worker": "stage1",
+  "summary": "Q155 proves the unchanged statement by quotient descent, pointwise module actions, explicit face-pair cancellation, chain-map and naturality calculations, and convergent residue representatives. No completeness, local primitives, or derived-invariant comparison is used. No new nodes are needed.",
+  "blueprint": "Current blueprint latest, det-thm-sf-ctf-stability-direct-images paragraph (3), open direct image; scalar-cochain construction and low-degree evaluation below lem-sfb-procyclic-scalar-cochain-evaluation. The inherited created.item chain returns ancestor None; its existing from.node and via are retained."
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q155-7f8404867",
+  "group": "Q155",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q155-7f8404867 (reviewer sub-agent of L); spot-checked: Read the item's statement and all 8 steps against the 6 cited statements, Stacks 0DVG (etale-cohomology.tex:9008) and main-20261015 paragraph (3) of the direct-images proof. The statement is unchanged from live and there are no new nodes. The math holds: quotient descent over finite covers, including the empty one; pointwise internal-module structure; an explicit d²=0 face pairing; chain map and naturality; the residue-sequence argument for f(s;t)=t·a(s), which uses no completeness of F; and the H⁰/H¹ calculation with no closure. Checked S=∅, S a point, ℓ=2, q=0,1 and incomplete F=Ω. One fault (C1/C3), repaired: step 1 needs Z_ℓ with its inverse-limit topology to be compact, and steps 6–7 need H→Q_ℓ to be continuous for that topology, but neither def-weil-l-adic-numbers nor any other cited node says so. The fix cites lem-sfb-integers-profinite-tower (1)–(2) with E=Q_ℓ in steps 1, 6 and 7 and adds it to proof_deps. It causes no cycle. Accepted tool_use: lem-sfb-integers-profinite-tower, a generic p-adic topology fact from off-route unit sk-prop-sfb-qlbar-colimit-x; the same unit already records it for lem-sfb-normed-scalar-profinite-cech-exact.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.RepresentationTheory.ContinuousProcyclicLowDegreeEvaluation",
+  "declaration": "ContinuousCohomology.exists_continuousProcyclicLowDegreeEvaluation",
+  "file": "lean/Sheaf/RepresentationTheory/ContinuousProcyclicLowDegreeEvaluation.lean",
+  "statement": "theorem exists_continuousProcyclicLowDegreeEvaluation (ell : ℕ) [Fact ell.Prime] (F : Bool → Type u) [∀ b : Bool, NormedField (F b)] (iota : ∀ b : Bool, ℚ_[ell] →+* F b) (hiota : ∀ b : Bool, Isometry (iota b)) (j : F false →+* F true) (hj : Continuous j) (hjQ : j.comp (iota false) = iota true) : ∃ (U K : ∀ b : Bool, CochainComplex (Modules (continuousScalarRing (F b))) ℤ) (e : ∀ (b : Bool) (n : ℕ) (S : Profinite.{u}), sections (continuousScalarRing (F b)) ((U b).X (n : ℤ)) S ≃+ C(S × (Fin n → ℤ_[ell]), F b)) (k : ∀ (b : Bool) (n : ℕ) (_ : n ≤ 1) (S : Profinite.{u}), sections (continuousScalarRing (F b)) ((K b).X (n : ℤ)) S ≃+ C(S, F b)) (epsilon : ∀ b : Bool, U b ⟶ K b), (∀ b : Bool, (∀ n : ℤ, n < 0 → IsZero ((U b).X n)) ∧ (∀ n : ℤ, (n < 0 ∨ 1 < n) → IsZero ((K b).X n)) ∧ (U b).d 0 1 = 0 ∧ (∀ n m : ℤ, (K b).d n m = 0) ∧ (∀ (n : ℕ) (S : Profinite.{u}) (a : sectionRing (continuousScalarRing (F b)) S) (x : sections (continuousScalarRing (F b)) ((U b).X (n : ℤ)) S) (s : S) (t : Fin n → ℤ_[ell]), e b n S (a • x) (s, t) = a.down s * e b n S x (s, t)) ∧ (∀ (n : ℕ) (hn : n ≤ 1) (S : Profinite.{u}) (a : sectionRing (continuousScalarRing (F b)) S) (x : sections (continuousScalarRing (F b)) ((K b).X (n : ℤ)) S) (s : S), k b n hn S (a • x) s = a.down s * k b n hn S x s) ∧ (∀ (n : ℕ) (S T : Profinite.{u}) (v : T ⟶ S) (x : sections (continuousScalarRing (F b)) ((U b).X (n : ℤ)) S) (s : T) (t : Fin n → ℤ_[ell]), e b n T (((U b).X (n : ℤ)).X.obj.map v.op x) (s, t) = e b n S x (v s, t)) ∧ (∀ (n : ℕ) (hn : n ≤ 1) (S T : Profinite.{u}) (v : T ⟶ S) (x : sections (continuousScalarRing (F b)) ((K b).X (n : ℤ)) S) (s : T), k b n hn T (((K b).X (n : ℤ)).X.obj.map v.op x) s = k b n hn S x (v s)) ∧ (∀ (n : ℕ) (S : Profinite.{u}) (x : sections (continuousScalarRing (F b)) ((U b).X (n : ℤ)) S) (s : S) (t : Fin (n + 1) → ℤ_[ell]), e b (n + 1) S ((((U b).d (n : ℤ) ((n + 1 : ℕ) : ℤ)).hom.hom.app (op S)) x) (s, t) = e b n S x (s, fun a ↦ t a.succ) + ∑ a : Fin (n + 1), (-1 : ℤ) ^ (a.val + 1) • e b n S x (s, Fin.contractNth a (· + ·) t)) ∧ (∀ (S : Profinite.{u}) (x : sections (continuousScalarRing (F b)) ((U b).X 0) S) (s : S), k b 0 (by decide) S ((((epsilon b).f 0).hom.hom.app (op S)) x) s = e b 0 S x (s, Fin.elim0)) ∧ (∀ (S : Profinite.{u}) (x : sections (continuousScalarRing (F b)) ((U b).X 1) S) (s : S), k b 1 (by decide) S ((((epsilon b).f 1).hom.hom.app (op S)) x) s = e b 1 S x (s, fun _ ↦ 1)) ∧ (∀ n : ℤ, (n < 0 ∨ 1 < n) → (epsilon b).f n = 0) ∧ (∀ S : Profinite.{u}, ∃ L : LinearMap.ker (((sectionsFunctor (continuousScalarRing (F b)) ⋙ SheafOfModules.evaluation _ (op S)).map ((U b).d 1 2)).hom) ≃ₗ[ sectionRing (continuousScalarRing (F b)) S] sections (continuousScalarRing (F b)) ((K b).X 1) S, (∀ x, L x = (((epsilon b).f 1).hom.hom.app (op S)) x.val) ∧ (∀ (x : sections (continuousScalarRing (F b)) ((U b).X 1) S), x ∈ LinearMap.ker (((sectionsFunctor (continuousScalarRing (F b)) ⋙ SheafOfModules.evaluation _ (op S)).map ((U b).d 1 2)).hom) ↔ ∀ (s : S) (t t' : ℤ_[ell]), e b 1 S x (s, fun _ ↦ t + t') = e b 1 S x (s, fun _ ↦ t) + e b 1 S x (s, fun _ ↦ t')) ∧ (∀ (a : sections (continuousScalarRing (F b)) ((K b).X 1) S) (s : S) (t : ℤ_[ell]), e b 1 S (L.symm a).val (s, fun _ ↦ t) = iota b (t : ℚ_[ell]) * k b 1 (by decide) S a s)) ∧ (∀ (S : Profinite.{u}) (n : ℤ), n = 0 ∨ n = 1 → IsIso ((HomologicalComplex.homologyFunctor _ (ComplexShape.up ℤ) n).map (((sectionsFunctor (continuousScalarRing (F b)) ⋙ SheafOfModules.evaluation _ (op S)).mapHomologicalComplex (ComplexShape.up ℤ)).map (epsilon b))))) ∧ ∃ (uMap : ((Mod.forget (D := Sheaf (coherentTopology Profinite.{u}) AddCommGrpCat.{u + 1}) (continuousScalarRing (F false)).X).mapHomologicalComplex (.up ℤ)).obj (U false) ⟶ ((Mod.forget (D := Sheaf (coherentTopology Profinite.{u}) AddCommGrpCat.{u + 1}) (continuousScalarRing (F true)).X).mapHomologicalComplex (.up ℤ)).obj (U true)) (kMap : ((Mod.forget (D := Sheaf (coherentTopology Profinite.{u}) AddCommGrpCat.{u + 1}) (continuousScalarRing (F false)).X).mapHomologicalComplex (.up ℤ)).obj (K false) ⟶ ((Mod.forget (D := Sheaf (coherentTopology Profinite.{u}) AddCommGrpCat.{u + 1}) (continuousScalarRing (F true)).X).mapHomologicalComplex (.up ℤ)).obj (K true)), (∀ (n : ℕ) (S : Profinite.{u}) (x : sections (continuousScalarRing (F false)) ((U false).X (n : ℤ)) S) (s : S) (t : Fin n → ℤ_[ell]), e true n S (((uMap.f (n : ℤ)).hom.app (op S)) x) (s, t) = j (e false n S x (s, t))) ∧ (∀ (n : ℕ) (hn : n ≤ 1) (S : Profinite.{u}) (x : sections (continuousScalarRing (F false)) ((K false).X (n : ℤ)) S) (s : S), k true n hn S (((kMap.f (n : ℤ)).hom.app (op S)) x) s = j (k false n hn S x s)) ∧ ((Mod.forget (D := Sheaf (coherentTopology Profinite.{u}) AddCommGrpCat.{u + 1}) (continuousScalarRing (F false)).X).mapHomologicalComplex (.up ℤ)).map (epsilon false) ≫ kMap = uMap ≫ ((Mod.forget (D := Sheaf (coherentTopology Profinite.{u}) AddCommGrpCat.{u + 1}) (continuousScalarRing (F true)).X).mapHomologicalComplex (.up ℤ)).map (epsilon true)",
+  "branch": "sheaf-dag",
+  "by": "Q23",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "All clauses are stated together by section-coordinate existential complexes, simultaneously for an arbitrary pair of normed coefficient fields and an arbitrary continuous field embedding over Q_l. Bool only labels this pair. For a single field use the constant pair and identity embedding. The additional statement dependency is the landed lightweight bundle of the already recorded continuous-map ring.",
+  "declarations": [
+   "ContinuousCohomology.continuousScalarSections_preservesZeroMorphisms",
+   "ContinuousCohomology.exists_continuousProcyclicLowDegreeEvaluation"
+  ]
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-140b6e3e8",
+  "group": "Q23",
+  "result": "pass",
+  "note": "Read the item node, all 5 stmt_deps, the delivered module and report.md (with real Worker report and Second reading sections), and the landed citer ProcyclicScalarCochainEvaluation, which uses the same coordinate pattern. U, K, coordinates e/k and epsilon are existential but pinned by onto coordinates to C(S×Z_l^n,F)/C(S,F), pointwise scalar action, restriction by precomposition, and formula clauses. Differential checked against Mathlib Fin.contractNth (a<n merges a,a+1 with sign (-1)^{a+1}; a=n drops the last coordinate with sign (-1)^{n+1}; separate first-coordinate drop; n=0 cancels, consistent with d^0=0). K is zero outside degrees 0,1 with zero differentials; epsilon pinned in degrees 0,1 and zero elsewhere. L is a sectionRing-linear equivalence from ker d^1 (= additive families) to K^1 with inverse iota(t)*a(s). H^0/H^1 IsIso of ordinary ModuleCat homology after section evaluation. Coefficient naturality via Bool pair and continuous j over Q_l, with uMap/kMap pinned to postcomposition and a commuting square. No completeness assumed; F : Type u inherited from the landed continuousScalarRing. Only lean and stmt_deps (+landed def-sfb-bundled-continuous-scalar-ring) differ from live; lean.statement verbatim; sorry proof; one Prop rfl instance with docstring; docstrings with source, blueprint tag and 8 steps; no name collisions. No compile (no file changed). Advisory: CondensedBar abbrevs owned by def-sfb-condensed-equivariant-bar-data are reached only through the bundled-ring stmt_dep."
+ }
+}

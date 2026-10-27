@@ -1,0 +1,305 @@
+{
+ "id": "lem-sp-chart-sum-affine-counit-transport",
+ "kind": "statement",
+ "title": "Ordered sum-affine chart adjunction and counit under model changes",
+ "statement": "Let $N\\geq1$ and let $R$ be a finite commutative ring with $NR=0$. Let $Y$ be a Noetherian scheme on which $N$ is invertible, put $V=\\mathbf A^d_Y$ for an integer $d\\geq0$, and let $e:U\\to V$ be separated etale of finite type, with $U$ Noetherian and $g=p_de$. Choose compactifications of $e,p_d,g$ with Noetherian middle schemes [def-weil-compactifications-refinements]. Use ordinary constant-$R$ module derived categories [def-weil-pbc-derived-categories], compact-support candidates $F_{e,R},F_{d,R},F_{g,R}$ [def-amb-etale-compact-support], exact sum extension $E_R=De_{\\Sigma!,R}$ and exact inverse image $e_R^*$ [def-weil-pbc-etale-sum-extension] [def-weil-pbc-inverse-image]. Specify a graph-normalized comparison datum [def-sp-etale-compact-support-normalization], with $c_{e,R}:F_{e,R}\\simeq E_R$, and canonical composition $\\alpha_R:F_{d,R}F_{e,R}\\simeq F_{g,R}$ [lem-amb-etale-compact-comparisons]. Put $\\lambda_R=\\alpha_R F_{d,R}(c_{e,R}^{-1})$.\nUse the ordered affine-space adjunction $F_{d,R}\\dashv G_{d,R}$, $G_{d,R}=p_d^*(-)(d)[2d]$, of [lem-amb-affine-space-top-trace], transported to the chosen compactification by its canonical comparison; here $R_T(1)=\\mu_{N,T}\\otimes_{(\\mathbf Z/N)_T}R_T$ and $(d)$ is tensor with its $d$th tensor power. In dimension zero this is the identity adjunction. Give $E_R\\dashv e_R^*$ its degreewise sum/evaluation adjunction [def-sp-etale-adjoint-chart-comparison], with counit $v_R$, and write $\\epsilon_{d,R}$ for the actual ordered affine counit and $H_R=e_R^*G_{d,R}$.\nOn bounded-below inputs the Hom bijection of the composite adjunction [def-weil-pbc-composite-adjunction], precomposed by $a\\mapsto a\\lambda_{R,M}$, defines the specified chart adjunction $F_{g,R}\\dashv H_R$. Its actual counit is\n$$\\epsilon_{g,R,K}=\\epsilon_{d,R,K}\\circ F_{d,R}(v_{R,G_{d,R}K})\\circ\\lambda_{R,H_RK}^{-1}.$$\nFor second compactification models, denote the common-refinement comparisons by $\\rho_{d,R},\\rho_{g,R}$ and form the primed adjunctions by the same ordered construction. Then\n$$\\epsilon'_{g,R,K}\\circ\\rho_{g,R,H_RK}=\\epsilon_{g,R,K},$$\nand the corresponding composite counits $\\delta_R=\\epsilon_{d,R}F_{d,R}(v_RG_{d,R})$ satisfy $\\delta'_R\\circ(\\rho_{d,R}E_R)H_R=\\delta_R$. Changing the model of $e$ leaves this sum adjunction unchanged. The identifications satisfy the common-refinement cocycle laws and retain the actual sum-then-affine counit for every model.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-reduction/sk-lem-sp-reduction-exceptional.proof.md",
+  "place": "Charts, sum-then-ordered-affine counit; old scalar-normalization Step 2 and the counit part of Step 5"
+ },
+ "stmt_deps": [
+  "def-weil-compactifications-refinements",
+  "def-weil-pbc-derived-categories",
+  "def-amb-etale-compact-support",
+  "def-weil-pbc-etale-sum-extension",
+  "def-weil-pbc-inverse-image",
+  "def-sp-etale-compact-support-normalization",
+  "lem-amb-etale-compact-comparisons",
+  "lem-amb-affine-space-top-trace",
+  "def-sp-etale-adjoint-chart-comparison",
+  "def-weil-pbc-composite-adjunction"
+ ],
+ "proof": [
+  {
+   "text": "Suppress $R$. Let $P$ be the ordered affine left functor before choosing the model of $p_d$, and let $\\kappa:P\\simeq F_d$ be its canonical comparison. The affine node supplies $P\\dashv G_d$ with its specified counit, and its transport along $\\kappa$ is the adjunction in the statement. The sum adjunction is the degreewise adjunction of [def-sp-etale-adjoint-chart-comparison], with counit $v$. Apply the composite-adjunction formula to $E\\dashv e^*$ followed by $F_d\\dashv G_d$. Its right functor is $H=e^*G_d$, its Hom equivalence is the two specified Hom equivalences in that order, and its counit is $\\delta_K=\\epsilon_{d,K}\\circ F_d(v_{G_dK})$. All compact-support identifications here and below are used on bounded-below inputs, as in [lem-amb-etale-compact-comparisons]. The functors $E$ and $e^*$ are exact, $F_d$ is a candidate $Rr_*Dj_!$, and $G_d$ is inverse image, tensor with the locally free rank-one Tate power and shift; all four preserve bounded-below objects, so both adjunctions and their composite restrict to the full bounded-below subcategories with the same Hom bijections and counits. Lean implementation: boundedness on every D+ input uses the natural affineTraceRight_normalForm, flatness of the finite Tate line, the Tor-amplitude tensor lower-bound lemma and exact inverse image. The Hom and counit formulas are the component formulas of Mathlib Adjunction.ofNatIsoLeft and Adjunction.comp.",
+   "uses": [
+    "lem-amb-affine-space-top-trace",
+    "def-sp-etale-adjoint-chart-comparison",
+    "def-weil-pbc-composite-adjunction",
+    "lem-amb-etale-compact-comparisons",
+    "lem-amb-affine-trace-right-normal-form",
+    "lem-asd-finite-etale-twist-line",
+    "lem-sc-source-tor-amplitude-lower-tensor-bound",
+    "lem-weil-pbc-exact-functor-bounded-below"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-reduction/sk-lem-sp-reduction-exceptional.proof.md",
+    "place": "Charts, sum-then-ordered-affine counit; old scalar-normalization Step 2 and the counit part of Step 5"
+   }
+  },
+  {
+   "text": "The isomorphism $\\lambda=\\alpha\\circ F_d(c_e^{-1})$ has source $F_dE$ and target $F_g$. Apply [lem-sfb-adjunction-transport-left-iso] to the composite adjunction of Step 1 and $\\lambda$. This gives exactly the prescribed Hom map $a\\mapsto\\Phi(a\\circ\\lambda_M)$, where $\\Phi$ is the composite Hom equivalence. To calculate its actual counit, take $M=HK$: the inverse image of $1_{HK}$ under $\\Phi$ is $\\delta_K$, so under the new equivalence it is $\\delta_K\\circ\\lambda_{HK}^{-1}$. This is the displayed formula for $\\epsilon_{g,K}$, including the specified sum/evaluation and ordered affine counits.",
+   "uses": [
+    "lem-sfb-adjunction-transport-left-iso"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-reduction/sk-lem-sp-reduction-exceptional.proof.md",
+    "place": "Charts, sum-then-ordered-affine counit; old scalar-normalization Step 2 and the counit part of Step 5"
+   }
+  },
+  {
+   "text": "Write $\\rho_e:F_e\\simeq F'_e$ as well as $\\rho_d,\\rho_g$. Refinement compatibility in the supplied graph-normalized datum gives $c'_e\\rho_e=c_e$; the same identity for a common-refinement comparison follows by composition and inversion. Hence $(c'_e)^{-1}=\\rho_ec_e^{-1}$. Independence of choices for the canonical composition in [lem-amb-etale-compact-comparisons] gives\n$$\\alpha'\\circ F'_d(\\rho_e)\\circ(\\rho_dF_e)=\\rho_g\\circ\\alpha.$$\nNaturality of $\\rho_d$ at $c_e^{-1}:E\\to F_e$ now gives, by substitution,\n$$\\lambda'\\circ(\\rho_dE)=\\alpha' F'_d(\\rho_e)F'_d(c_e^{-1})(\\rho_dE)=\\rho_g\\alpha F_d(c_e^{-1})=\\rho_g\\lambda.$$\nThus changing only the model of $e$ leaves $\\lambda$ itself unchanged under the fixed comparisons for $p_d$ and $g$. Lean implementation: the unbounded common-refinement cocycle and every-tower compositor equation identify each actual model composition with the same chosen-model compositor. Refinement normalization of M first gives comparison_change; cancellation gives comparison_inverse_change. Substitution and naturality give chart_to_chosen and then chart_change. These identities hold on all inputs, and are specialized to the bounded-below inputs in the conclusion.",
+   "uses": [
+    "def-sp-etale-compact-support-normalization",
+    "lem-amb-etale-compact-comparisons",
+    "lem-amb-unbounded-compact-support-comparisons"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-reduction/sk-lem-sp-reduction-exceptional.proof.md",
+    "place": "Charts, sum-then-ordered-affine counit; old scalar-normalization Step 2 and the counit part of Step 5"
+   }
+  },
+  {
+   "text": "Let $\\kappa':P\\simeq F'_d$. Coherence gives $\\kappa'=\\rho_d\\kappa$. The same inverse-Hom calculation as in Step 2 gives $\\epsilon_{d,K}=\\epsilon_{P,K}\\kappa_{G_dK}^{-1}$ and $\\epsilon'_{d,K}=\\epsilon_{P,K}(\\kappa'_{G_dK})^{-1}$; therefore $\\epsilon'_{d,K}\\rho_{d,G_dK}=\\epsilon_{d,K}$. Naturality of $\\rho_d$ at $v_{G_dK}:Ee^*G_dK\\to G_dK$ gives\n$$\\delta'_K\\rho_{d,EHK}=\\epsilon'_{d,K}F'_d(v_{G_dK})\\rho_{d,EHK}=\\epsilon'_{d,K}\\rho_{d,G_dK}F_d(v_{G_dK})=\\delta_K.$$\nThis is the claimed identity for composite counits; no replacement of a counit by an unspecified adjunction is involved. The ordered affineComparison changes only in its final model comparison: at zero apply the common-refinement cocycle, and at a successor apply composition_change_target to the fixed preceding stage. No induction hypothesis on the preceding stage is required. Cancel its hom component to obtain the counit transport equation, and use naturality to obtain the composite counit equation.",
+   "uses": [
+    "lem-amb-affine-space-top-trace",
+    "lem-amb-etale-compact-comparisons",
+    "lem-amb-unbounded-compact-support-comparisons"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-reduction/sk-lem-sp-reduction-exceptional.proof.md",
+    "place": "Charts, sum-then-ordered-affine counit; old scalar-normalization Step 2 and the counit part of Step 5"
+   }
+  },
+  {
+   "text": "Evaluate Step 3 at $HK$ and invert its isomorphisms to obtain $(\\lambda'_{HK})^{-1}\\rho_{g,HK}=\\rho_{d,EHK}\\lambda_{HK}^{-1}$. Steps 2 and 4 then give\n$$\\epsilon'_{g,K}\\rho_{g,HK}=\\delta'_K(\\lambda'_{HK})^{-1}\\rho_{g,HK}=\\delta'_K\\rho_{d,EHK}\\lambda_{HK}^{-1}=\\delta_K\\lambda_{HK}^{-1}=\\epsilon_{g,K}.$$\nFor three models, the comparison identities and cocycle laws of [lem-amb-etale-compact-comparisons] imply $\\kappa''=\\rho'_d\\rho_d\\kappa$ and $\\lambda''(\\rho'_d\\rho_d)E=(\\rho'_g\\rho_g)\\lambda$; substituting in the same formulas proves the asserted coherence for the actual adjunctions and counits. The sum adjunction uses only $e$, so is unaffected by its compactification. For $d=0$, take $P=1$ and $\\epsilon_P=1$: all formulas reduce to the sum counit with the canonical identity-model comparison.",
+   "uses": [
+    "lem-amb-etale-compact-comparisons",
+    "lem-amb-unbounded-compact-support-comparisons"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-reduction/sk-lem-sp-reduction-exceptional.proof.md",
+    "place": "Charts, sum-then-ordered-affine counit; old scalar-normalization Step 2 and the counit part of Step 5"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-amb-affine-space-top-trace",
+  "def-sp-etale-adjoint-chart-comparison",
+  "def-weil-pbc-composite-adjunction",
+  "lem-amb-etale-compact-comparisons",
+  "lem-amb-affine-trace-right-normal-form",
+  "lem-asd-finite-etale-twist-line",
+  "lem-sc-source-tor-amplitude-lower-tensor-bound",
+  "lem-weil-pbc-exact-functor-bounded-below",
+  "lem-sfb-adjunction-transport-left-iso",
+  "def-sp-etale-compact-support-normalization",
+  "lem-amb-unbounded-compact-support-comparisons"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-reduction/sk-lem-sp-reduction-exceptional.proof.md",
+  "place": "Charts, sum-then-ordered-affine counit; old scalar-normalization Step 2 and the counit part of Step 5; explicit categorical calculation from the specified data; composition formula from Stacks Tag 0DV0, categories.tex, lemma-compose-counits; Q4: Lean componentwise proof using the published unbounded comparison coherence and tower formula; preserves the sum-then-ordered-affine construction and all five original steps."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "ofNatIsoLeft|ofNatIsoLeft_counit",
+   "results": "{\"t\": \"2026-10-22T06:53:29Z\", \"tool\": \"grep\", \"query\": \"ofNatIsoLeft|ofNatIsoLeft_counit\", \"sub\": \"CategoryTheory/Adjunction\", \"ok\": true, \"n_hits\": 10, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Adjunction/Lifting/Right.lean\", \"Mathlib/CategoryTheory/Adjunction/Lifting/Right.lean\", \"Mathlib/CategoryTheory/Adjunction/Lifting/Right.lean\", \"Mathlib/CategoryTheory/Adjunction/Lifting/Right.lean\", \"Mathlib/CategoryTheory/Adjunction/Triple.lean\", \"Mathlib/CategoryTheory/Adjunction/Basic.lean\", \"Mathlib/CategoryTheory/Adjunction/Basic.lean\", \"Mathlib/CategoryTheory/Adjunction/Basic.lean\"], \"digest\": \"c8c6b8cb431eb31b\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: Adjunction.ofNatIsoLeft and its Hom/counit formulas supply formal transport only; they do not identify the ordered affine and graph-normalized geometric adjunctions simultaneously over independently chosen compactifications."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The counit of the adjunction transported along a natural isomorphism of left adjoints equals the inverse comparison followed by the composite sum and affine counits",
+   "results": "{\"t\": \"2026-10-22T06:53:29Z\", \"tool\": \"leansearch\", \"query\": \"The counit of the adjunction transported along a natural isomorphism of left adjoints equals the inverse comparison followed by the composite sum and affine counits\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Adjunction.counitAsIsoOfIso\", \"CategoryTheory.Comonad.transport\", \"CategoryTheory.Bicategory.Adj.rIso\", \"CategoryTheory.Functor.Monoidal.coreMonoidalTransport\", \"CategoryTheory.Adjunction.toEquivalence_counitIso_inv_app\", \"CategoryTheory.Bicategory.adjointifyCounit\", \"CategoryTheory.Adjunction.whiskerLeftLCounitIsoOfIsIsoUnit\", \"CategoryTheory.Adjunction.toEquivalence_counitIso_hom_app\"], \"digest\": \"928a07660be3a5e6\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: Adjunction.ofNatIsoLeft and its Hom/counit formulas supply formal transport only; they do not identify the ordered affine and graph-normalized geometric adjunctions simultaneously over independently chosen compactifications."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.ofNatIsoLeft",
+   "results": "{\"t\": \"2026-10-22T06:53:29Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.Adjunction.ofNatIsoLeft\", \"sub\": \"\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"CategoryTheory.Adjunction.ofNatIsoLeft\", \"CategoryTheory.Adjunction.ofNatIsoLeft_counit\", \"CategoryTheory.Adjunction.ofNatIsoLeft_unit\", \"CategoryTheory.Adjunction.homEquiv_ofNatIsoLeft_apply\", \"CategoryTheory.Adjunction.homEquiv_ofNatIsoLeft_symm_apply\"], \"digest\": \"f6cdf75f254109e9\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: Adjunction.ofNatIsoLeft and its Hom/counit formulas supply formal transport only; they do not identify the ordered affine and graph-normalized geometric adjunctions simultaneously over independently chosen compactifications."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The Hom equivalence for an affine chart compact support adjunction is precomposition by the graph normalized chart comparison followed by the two original Hom equivalences",
+   "results": "{\"t\": \"2026-10-22T06:53:33Z\", \"tool\": \"leanfinder\", \"query\": \"The Hom equivalence for an affine chart compact support adjunction is precomposition by the graph normalized chart comparison followed by the two original Hom equivalences\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.ΓSpec_adjunction_homEquiv_eq\", \"AlgebraicGeometry.AffineSpace.homOverEquiv_apply\", \"AlgebraicGeometry.AffineSpace.homOverEquiv\", \"AlgebraicGeometry.ΓSpec.toOpen_comp_locallyRingedSpaceAdjunction_homEquiv_app\", \"writtenInExtChartAt\", \"AlgebraicGeometry.ΓSpecIso_inv_ΓSpec_adjunction_homEquiv\", \"AlgebraicGeometry.AffineSpace.toSpecMvPolyIntEquiv_comp\", \"AlgebraicGeometry.ΓSpec.adjunction_homEquiv_apply\"], \"digest\": \"b324258df783edd1\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: Adjunction.ofNatIsoLeft and its Hom/counit formulas supply formal transport only; they do not identify the ordered affine and graph-normalized geometric adjunctions simultaneously over independently chosen compactifications."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Transport the specified composite etale sum extension and ordered affine space adjunction along the canonical compact support chart isomorphism and preserve its actual sum then affine counit under refinement",
+   "results": "{\"t\": \"2026-10-22T06:53:34Z\", \"tool\": \"leanfinder\", \"query\": \"Transport the specified composite etale sum extension and ordered affine space adjunction along the canonical compact support chart isomorphism and preserve its actual sum then affine counit under refinement\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.ExistsHomHomCompEqCompAux.𝒰D\", \"AlgebraicGeometry.AffineSpace.reindex\", \"AlgebraicGeometry.Scheme.OpenCover.fromAffineRefinement\", \"AlgebraicGeometry.AffineSpace.reindex_over\", \"AlgebraicGeometry.AffineSpace.reindex_comp\", \"StandardEtalePresentation.toPresentation_σ'\", \"AlgebraicGeometry.AffineSpace.map_reindex\", \"StandardEtalePresentation.toSubmersivePresentation_map\"], \"digest\": \"40eb3c251bc08016\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: Adjunction.ofNatIsoLeft and its Hom/counit formulas supply formal transport only; they do not identify the ordered affine and graph-normalized geometric adjunctions simultaneously over independently chosen compactifications."
+  },
+  {
+   "tool": "grep",
+   "query": "ofNatIsoLeft|def comp |comp_counit",
+   "results": "{\"t\": \"2026-10-22T06:56:25Z\", \"tool\": \"grep\", \"query\": \"ofNatIsoLeft|def comp |comp_counit\", \"sub\": \"CategoryTheory/Adjunction\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Adjunction/Lifting/Right.lean\", \"Mathlib/CategoryTheory/Adjunction/Lifting/Right.lean\", \"Mathlib/CategoryTheory/Adjunction/Lifting/Right.lean\", \"Mathlib/CategoryTheory/Adjunction/Lifting/Right.lean\", \"Mathlib/CategoryTheory/Adjunction/Mates.lean\", \"Mathlib/CategoryTheory/Adjunction/Mates.lean\", \"Mathlib/CategoryTheory/Adjunction/Basic.lean\", \"Mathlib/CategoryTheory/Adjunction/Basic.lean\"], \"digest\": \"904984d22572740e\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the returned adjunction composition, counit, mate and natural-isomorphism formulas do not identify the specified geometric chart models with the ordered affine/sum adjunction over all compactifications."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Transport a composite adjunction and a coefficient comparison through replacement of one factor by a natural isomorphism, including refinement coherence",
+   "results": "{\"t\": \"2026-10-22T06:56:26Z\", \"tool\": \"leansearch\", \"query\": \"Transport a composite adjunction and a coefficient comparison through replacement of one factor by a natural isomorphism, including refinement coherence\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Adjunction.comp\", \"CategoryTheory.Adjunction.ofNatIsoRight\", \"CategoryTheory.Adjunction.comp_unit\", \"CategoryTheory.Functor.Monoidal.coreMonoidalTransport\", \"CategoryTheory.Functor.Monoidal.transport\", \"CategoryTheory.Adjunction.natIsoOfLeftAdjointNatIso\", \"CategoryTheory.Adjunction.natIsoOfRightAdjointNatIso\", \"CategoryTheory.Adjunction.ofNatIsoLeft\"], \"digest\": \"1d85a5c937631b8a\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the returned adjunction composition, counit, mate and natural-isomorphism formulas do not identify the specified geometric chart models with the ordered affine/sum adjunction over all compactifications."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.comp",
+   "results": "{\"t\": \"2026-10-22T06:56:26Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.Adjunction.comp\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"CategoryTheory.Adjunction.comp\", \"CategoryTheory.Equivalence.trans_toAdjunction\", \"CategoryTheory.Adjunction.comp_homEquiv\", \"CategoryTheory.Adjunction.comp_counit_app\", \"CategoryTheory.Adjunction.comp_unit_app\", \"CategoryTheory.Adjunction.comp_counit_app_assoc\", \"CategoryTheory.Adjunction.comp_unit_app_assoc\", \"CategoryTheory.Adjunction.comp_counit\"], \"digest\": \"ac2dfcadb3e25da5\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the returned adjunction composition, counit, mate and natural-isomorphism formulas do not identify the specified geometric chart models with the ordered affine/sum adjunction over all compactifications."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A composite comparison alpha P c inverse simultaneously transports an adjunction counit and a coefficient square beta under natural replacement c, with invariance under isomorphic functor models",
+   "results": "{\"t\": \"2026-10-22T06:56:36Z\", \"tool\": \"leanfinder\", \"query\": \"A composite comparison alpha P c inverse simultaneously transports an adjunction counit and a coefficient square beta under natural replacement c, with invariance under isomorphic functor models\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Adjunction.leftAdjointCompIso_hom_app\", \"CategoryTheory.Adjunction.leftAdjointCompIso_inv_app\", \"CategoryTheory.Adjunction.leftAdjointCompIso_hom\", \"CategoryTheory.conjugateEquiv_counit_symm\", \"CategoryTheory.Adjunction.comp_counit\", \"CategoryTheory.Adjunction.leftAdjointCompIso\", \"CategoryTheory.Adjunction.leftAdjointCompNatTrans₀₂₃_eq_conjugateEquiv_symm\", \"CategoryTheory.Adjunction.Triple.adj₁_counit_app_rightToLeft_app\"], \"digest\": \"3c0403a2c43c0db2\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the returned adjunction composition, counit, mate and natural-isomorphism formulas do not identify the specified geometric chart models with the ordered affine/sum adjunction over all compactifications."
+  },
+  {
+   "tool": "grep",
+   "query": "ofNatIsoLeft|comp_counit",
+   "results": "{\"t\": \"2026-10-22T09:12:49Z\", \"tool\": \"grep\", \"query\": \"ofNatIsoLeft|comp_counit\", \"sub\": \"CategoryTheory/Adjunction\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Adjunction/Lifting/Right.lean\", \"Mathlib/CategoryTheory/Adjunction/Lifting/Right.lean\", \"Mathlib/CategoryTheory/Adjunction/Lifting/Right.lean\", \"Mathlib/CategoryTheory/Adjunction/Lifting/Right.lean\", \"Mathlib/CategoryTheory/Adjunction/Triple.lean\", \"Mathlib/CategoryTheory/Adjunction/Basic.lean\", \"Mathlib/CategoryTheory/Adjunction/Basic.lean\", \"Mathlib/CategoryTheory/Adjunction/Basic.lean\"], \"digest\": \"b303d0d01cdaf7d3\"}",
+   "date": "2026-10-22",
+   "verdict": "no match for the geometric item: categorical composition/transport formulas are present and are used through existing DAG nodes; the chart comparisons and their refinement normalization are additional geometric data."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.ofNatIsoLeft, CategoryTheory.Adjunction.comp",
+   "results": "{\"t\": \"2026-10-22T09:12:49Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.Adjunction.ofNatIsoLeft, CategoryTheory.Adjunction.comp\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match for the geometric item: categorical composition/transport formulas are present and are used through existing DAG nodes; the chart comparisons and their refinement normalization are additional geometric data."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The counit of a transported composite adjunction is the composite of the two counits precomposed with the inverse left natural isomorphism",
+   "results": "{\"t\": \"2026-10-22T09:12:49Z\", \"tool\": \"leansearch\", \"query\": \"The counit of a transported composite adjunction is the composite of the two counits precomposed with the inverse left natural isomorphism\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Adjunction.comp_counit\", \"CategoryTheory.Adjunction.counitAsIsoOfIso\", \"CategoryTheory.Adjunction.comp\", \"CategoryTheory.Adjunction.comp_counit_app\", \"CategoryTheory.Adjunction.CoreUnitCounit.counit\", \"CategoryTheory.Comonad.transport\", \"CategoryTheory.Bicategory.Adjunction.compCounit\", \"CategoryTheory.Adjunction.counit\"], \"digest\": \"b30b914f58265e5c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match for the geometric item: categorical composition/transport formulas are present and are used through existing DAG nodes; the chart comparisons and their refinement normalization are additional geometric data."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Compose an etale sum extension adjunction with the ordered affine space compact support adjunction, transport along a natural isomorphism and preserve the actual counit under changes of compactification",
+   "results": "{\"t\": \"2026-10-22T09:12:50Z\", \"tool\": \"leanfinder\", \"query\": \"Compose an etale sum extension adjunction with the ordered affine space compact support adjunction, transport along a natural isomorphism and preserve the actual counit under changes of compactification\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CondensedSet.instIsIsoFunctorCompactlyGeneratedCounitCompactlyGeneratedAdjunction\", \"CompHausLike.LocallyConstant.adjunction_counit\", \"Condensed.profiniteSolidCounit\", \"LightCondSet.instIsIsoFunctorSequentialCounitSequentialAdjunction\", \"CompHausLike.LocallyConstant.adjunction_left_triangle\", \"CondensedSet.compactlyGeneratedAdjunction\", \"CompHausLike.LocallyConstant.counitAppApp\", \"CompHausLike.LocallyConstant.incl_of_counitAppApp\"], \"digest\": \"3f6b3138fc3b0ae5\"}",
+   "date": "2026-10-22",
+   "verdict": "no match for the geometric item: categorical composition/transport formulas are present and are used through existing DAG nodes; the chart comparisons and their refinement normalization are additional geometric data."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.ofNatIsoLeft",
+   "results": "{\"t\": \"2026-10-22T09:13:06Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.Adjunction.ofNatIsoLeft\", \"sub\": \"\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"CategoryTheory.Adjunction.ofNatIsoLeft\", \"CategoryTheory.Adjunction.ofNatIsoLeft_counit\", \"CategoryTheory.Adjunction.ofNatIsoLeft_unit\", \"CategoryTheory.Adjunction.homEquiv_ofNatIsoLeft_apply\", \"CategoryTheory.Adjunction.homEquiv_ofNatIsoLeft_symm_apply\"], \"digest\": \"f6cdf75f254109e9\"}",
+   "date": "2026-10-22",
+   "verdict": "no match for the geometric item: categorical composition/transport formulas are present and are used through existing DAG nodes; the chart comparisons and their refinement normalization are additional geometric data."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Coherent refinement comparisons for compactifications commute with the composite etale sum and affine space counit and satisfy the common refinement cocycle",
+   "results": "{\"t\": \"2026-10-22T09:13:07Z\", \"tool\": \"leanfinder\", \"query\": \"Coherent refinement comparisons for compactifications commute with the composite etale sum and affine space counit and satisfy the common refinement cocycle\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.ExistsHomHomCompEqCompAux.exists_eq\", \"AlgebraicGeometry.Scheme.exists_hom_comp_eq_comp_of_locallyOfFiniteType\", \"AlgebraicGeometry.exists_app_map_eq_map_of_isLimit\", \"AlgebraicGeometry.Scheme.OpenCover.pullbackCoverAffineRefinementObjIso_inv_map\", \"AlgebraicGeometry.Scheme.Cover.glued_cover_cocycle\", \"AlgebraicGeometry.Scheme.IsLocallyDirected.homOfLE_tAux\", \"AlgebraicGeometry.Scheme.Cover.glued_cover_cocycle_snd\", \"AlgebraicGeometry.Scheme.Cover.glued_cover_cocycle_fst\"], \"digest\": \"bebffe34d8a9e796\"}",
+   "date": "2026-10-22",
+   "verdict": "no match for the geometric item: categorical composition/transport formulas are present and are used through existing DAG nodes; the chart comparisons and their refinement normalization are additional geometric data."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sp-chart-left-scalar-normalization",
+  "date": "2026-10-22",
+  "group": "Q10"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-lem-sp-reduction",
+ "blueprint": {
+  "from": {
+   "node": "det-sp-reduction-exceptional",
+   "place": "Charts, sum-then-ordered-affine counit; old scalar-normalization Step 2 and the counit part of Step 5",
+   "via": [
+    "lem-sp-chart-left-scalar-normalization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sp-chart-sum-affine-counit-transport",
+  "worker": "stage1",
+  "summary": "Q08: retained the statement; computed the specified composite Hom equivalence and actual counit, expanded the refinement square by naturality, and checked the counit and cocycle identities. Reused the existing Mathlib transport leaf; no new nodes.",
+  "blueprint": "det-sp-reduction-exceptional.proof.md, Charts: the sum-then-ordered-affine construction and its compactification coherence, prior to extension of coefficients. No coefficient-compatibility claim is used or proved here.",
+  "tool_uses": [
+   {
+    "node": "lem-amb-affine-space-top-trace",
+    "why": "Steps 1 and 4 take the explicit ordered affine-space adjunction F_d -| p_d^*(-)(d)[2d] and its counit from its statement as a black box; unit sk-lem-sp-reduction has no node constructing it, and the parent lem-sp-chart-left-scalar-normalization already carries this tool use."
+   },
+   {
+    "node": "lem-amb-etale-compact-comparisons",
+    "why": "Steps 1 and 3-5 take the canonical bounded-below compact-support composition and its compactification independence and cocycle laws as a generic coherence statement; no node of unit sk-lem-sp-reduction gives it, and the parent already carries this tool use."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-amb-affine-space-top-trace",
+  "lem-amb-etale-compact-comparisons"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q08-f3bcad609",
+  "group": "Q08",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q08-f3bcad609 (reviewer sub-agent of L); spot-checked: Read the whole item: statement, 5 steps, every cited statement, the main-20261015 Charts paragraph (sk-lem-sp-reduction-exceptional.proof.md l.20-36) and the parent. Statement and stmt_deps are byte-identical to the Q10-created node; it is not a re-split (no repair note) and has no new nodes. The counit order matches the source: sum/evaluation first, then the ordered affine counit. Recomputed: (1) composite counit delta=eps_d F_d(v G_d) from def-weil-pbc-composite-adjunction; (2) transported counit delta lambda^{-1} via lem-sfb-adjunction-transport-left-iso, direction correct; (3) c'_e rho_e=c_e from the refinement clause through a Noetherian common refinement, then lambda'(rho_d E)=rho_g lambda by compact-comparison independence and naturality of rho_d; (4) kappa'=rho_d kappa gives eps'_d rho_d=eps_d and delta' rho_d=delta; (5) eps'_g rho_g=eps_g. Edge cases d=0, e=id, U empty and identity model changes check. No duplicate: chart-finite-ring-adjunction uses this counit, chart-counit-scalar-transport is about coefficients, and normalized-model-identification has no counit. No SGA. Two repairs in the item file: Step 1 gains one sentence explaining why E, e^*, F_d and G_d preserve D^+, so both adjunctions and their composite restrict there; split_report.tool_uses now declares lem-amb-affine-space-top-trace (sk-prop-an) and lem-amb-etale-compact-comparisons (sk-prop-sf-cbc). Both are accepted generic black boxes, matching the parent's tool_uses. review_split's 'no such node' lines come from the symlinked chapter directories; every cited node exists.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.ChartSumAffineCounitTransport",
+  "declaration": "AlgebraicGeometry.Etale.ChartSumAffine.counit_transport",
+  "declarations": [
+   "AlgebraicGeometry.Etale.ChartSumAffine.composition",
+   "AlgebraicGeometry.Etale.ChartSumAffine.affineComparison",
+   "AlgebraicGeometry.Etale.ChartSumAffine.affineAdjunction",
+   "AlgebraicGeometry.Etale.ChartSumAffine.comparison",
+   "AlgebraicGeometry.Etale.ChartSumAffine.chartComparison",
+   "AlgebraicGeometry.Etale.ChartSumAffine.right",
+   "AlgebraicGeometry.Etale.ChartSumAffine.adjunction",
+   "AlgebraicGeometry.Etale.ChartSumAffine.counit_transport"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/ChartSumAffineCounitTransport.lean",
+  "statement": "theorem counit_transport (N : ℕ) (hN : 0 < N) (A : Type (u + 1)) [CommRing A] [Finite A] (hA : (N : A) = 0) (t : OrdinaryFiniteTwistTransport A N hA) (D : ∀ (T : Scheme.{u}) [IsNoetherian T] (hT : IsUnit (N : Γ(T, ⊤))), OrdinaryFiniteP1Datum A N hA t T hT) (M : EtaleCompactSupportNormalization A) (S : Scheme.{u}) [IsNoetherian S] (hS : IsUnit (N : Γ(S, ⊤))) (d : ℕ) {U : Scheme.{u}} [IsNoetherian U] (e : U ⟶ affineTraceTower S d) [Etale e] [IsSeparated e] [QuasiCompact e] (ce : Compactification e) [IsNoetherian ce.Z] (cd : Compactification (affineTraceProjection S d)) [IsNoetherian cd.Z] (cg : Compactification (e ≫ affineTraceProjection S d)) [IsNoetherian cg.Z] : (∀ (K : DerivedCategory.Plus (Sheaf S.smallEtaleTopology (ModuleCat.{u + 1} A))), _root_.DerivedCategory.TStructure.t.plus ((right N A hA S d e).obj (DerivedCategory.Plus.ι.obj K))) ∧ (∀ (L : DerivedCategory.Plus (Sheaf U.smallEtaleTopology (ModuleCat.{u + 1} A))) (K : DerivedCategory.Plus (Sheaf S.smallEtaleTopology (ModuleCat.{u + 1} A))) (a : (rightDerivedLowerShriekOfCompactification (ModuleCat.{u + 1} A) cg).obj (DerivedCategory.Plus.ι.obj L) ⟶ DerivedCategory.Plus.ι.obj K), (adjunction N A hA t D M S hS d e ce cd cg).homEquiv _ _ a = (derivedEtaleLowerShriekUpperStarAdjunction (ModuleCat.{u + 1} A) e inferInstance).homEquiv _ _ ((affineAdjunction N A hA t D S hS d cd).homEquiv _ _ ((chartComparison A M S d e ce cd cg).hom.app (DerivedCategory.Plus.ι.obj L) ≫ a))) ∧ (∀ (K : DerivedCategory.Plus (Sheaf S.smallEtaleTopology (ModuleCat.{u + 1} A))), (adjunction N A hA t D M S hS d e ce cd cg).counit.app (DerivedCategory.Plus.ι.obj K) = (chartComparison A M S d e ce cd cg).inv.app ((right N A hA S d e).obj (DerivedCategory.Plus.ι.obj K)) ≫ (rightDerivedLowerShriekOfCompactification (ModuleCat.{u + 1} A) cd).map ((derivedEtaleLowerShriekUpperStarAdjunction (ModuleCat.{u + 1} A) e inferInstance).counit.app ((affineTraceRight A N hA S d).obj (DerivedCategory.Plus.ι.obj K))) ≫ (affineAdjunction N A hA t D S hS d cd).counit.app (DerivedCategory.Plus.ι.obj K)) ∧ (∀ (ce' : Compactification e) [IsNoetherian ce'.Z] (cd' : Compactification (affineTraceProjection S d)) [IsNoetherian cd'.Z] (cg' : Compactification (e ≫ affineTraceProjection S d)) [IsNoetherian cg'.Z], (∀ (K : DerivedCategory.Plus (Sheaf S.smallEtaleTopology (ModuleCat.{u + 1} A))), (rightDerivedLowerShriekOfCompactificationIso A cg cg').hom.app ((right N A hA S d e).obj (DerivedCategory.Plus.ι.obj K)) ≫ (adjunction N A hA t D M S hS d e ce' cd' cg').counit.app (DerivedCategory.Plus.ι.obj K) = (adjunction N A hA t D M S hS d e ce cd cg).counit.app (DerivedCategory.Plus.ι.obj K)) ∧ (∀ (K : DerivedCategory.Plus (Sheaf S.smallEtaleTopology (ModuleCat.{u + 1} A))), (rightDerivedLowerShriekOfCompactificationIso A cd cd').hom.app (((etaleLowerShriek (ModuleCat.{u + 1} A) e inferInstance).mapDerivedCategory).obj ((right N A hA S d e).obj (DerivedCategory.Plus.ι.obj K))) ≫ ((derivedEtaleLowerShriekUpperStarAdjunction (ModuleCat.{u + 1} A) e inferInstance).comp (affineAdjunction N A hA t D S hS d cd')).counit.app (DerivedCategory.Plus.ι.obj K) = ((derivedEtaleLowerShriekUpperStarAdjunction (ModuleCat.{u + 1} A) e inferInstance).comp (affineAdjunction N A hA t D S hS d cd)).counit.app (DerivedCategory.Plus.ι.obj K)) ∧ (∀ (L : DerivedCategory.Plus (Sheaf U.smallEtaleTopology (ModuleCat.{u + 1} A))), (chartComparison A M S d e ce cd cg).hom.app (DerivedCategory.Plus.ι.obj L) ≫ (rightDerivedLowerShriekOfCompactificationIso A cg cg').hom.app (DerivedCategory.Plus.ι.obj L) = (rightDerivedLowerShriekOfCompactificationIso A cd cd').hom.app (((etaleLowerShriek (ModuleCat.{u + 1} A) e inferInstance).mapDerivedCategory).obj (DerivedCategory.Plus.ι.obj L)) ≫ (chartComparison A M S d e ce' cd' cg').hom.app (DerivedCategory.Plus.ι.obj L)) ∧ (∀ (L : DerivedCategory.Plus (Sheaf U.smallEtaleTopology (ModuleCat.{u + 1} A))), (chartComparison A M S d e ce cd cg).hom.app (DerivedCategory.Plus.ι.obj L) = (chartComparison A M S d e ce' cd cg).hom.app (DerivedCategory.Plus.ι.obj L)) ∧ (∀ (cd'' : Compactification (affineTraceProjection S d)) [IsNoetherian cd''.Z] (cg'' : Compactification (e ≫ affineTraceProjection S d)) [IsNoetherian cg''.Z] (L : DerivedCategory.Plus (Sheaf U.smallEtaleTopology (ModuleCat.{u + 1} A))) (K : DerivedCategory.Plus (Sheaf (affineTraceTower S d).smallEtaleTopology (ModuleCat.{u + 1} A))), (rightDerivedLowerShriekOfCompactificationIso A cg cg').hom.app (DerivedCategory.Plus.ι.obj L) ≫ (rightDerivedLowerShriekOfCompactificationIso A cg' cg'').hom.app (DerivedCategory.Plus.ι.obj L) = (rightDerivedLowerShriekOfCompactificationIso A cg cg'').hom.app (DerivedCategory.Plus.ι.obj L) ∧ (rightDerivedLowerShriekOfCompactificationIso A cd cd').hom.app (DerivedCategory.Plus.ι.obj K) ≫ (rightDerivedLowerShriekOfCompactificationIso A cd' cd'').hom.app (DerivedCategory.Plus.ι.obj K) = (rightDerivedLowerShriekOfCompactificationIso A cd cd'').hom.app (DerivedCategory.Plus.ι.obj K)))",
+  "branch": "newtargets-dag",
+  "by": "Q83",
+  "date": "2026-10-22",
+  "existing": false,
+  "note": "The source affine-space convention is the published coordinate tower affineTraceTower, canonically identified with affine d-space. Helpers construct actual canonical comparisons and the ordered composite adjunction; the theorem states its Hom and counit formulas and bounded-below model coherence. No adjunction or comparison is chosen from a bare existence assertion."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-58f498494",
+  "group": "Q83",
+  "result": "pass",
+  "note": "Read node, 10 stmt_dep records (all unchanged vs live), source Charts l.20-36, module and report. Every hypothesis matches (N>0, finite CommRing A, NA=0, S Noetherian with N a unit, e etale+separated+quasi-compact, U Noetherian, Noetherian middle schemes for all models). lambda = whiskered c_e^{-1} then canonical composition (triangle form of rightDerivedLowerShriekPlusCompIso_hom_eq). Chart adjunction = (sum adjunction).comp(affine adjunction) transported by ofNatIsoLeft along lambda. Hom formula order is affine then sum; counit formula is lambda^{-1}(HK), then F_d(v_{G_dK}), then eps_d,K, as in node and source. Model-change clauses rho_g(HK)>>eps'_g=eps_g and rho_d(EHK)>>delta'=delta have correct direction and checked true. Extra clauses (H preserves D+, lambda unchanged under ce change, lambda rho_g = rho_d E lambda') are proof content and true; the cocycle clause restates the dependency, advisory. d=0 identity case covered; no unbound variables; statement verbatim; docstrings and both report sections present; sole sorry. Advisory notes: composition/comparison duplicate Q81's chartModelComposition/chartNormalizedModelComparison (theorem module, not citable); unbounded affineComparison vs D+ affineTraceCompactSupportComparison need a stage-3 agreement lemma; RefinementCategory import possibly redundant. No compile run (no change)."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q4",
+  "result": "pass",
+  "landing": "20261023T231934-L-3661686",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

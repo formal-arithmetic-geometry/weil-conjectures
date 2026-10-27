@@ -12,66 +12,59 @@
  ],
  "proof": [
   {
-   "text": "Apply [lem-pe-internal-section-tensor-comparison] with $C=T_{\\mathrm{pro\\acute et}}$ and $R=p_T^*\\underline A$; its site, sheafification and closed-monoidal hypotheses are exactly those used in step 2 and [sk-def-sfb-sheaf-tensor]. It gives natural isomorphisms $E_R(M\\otimes_RN)\\cong E_RM\\otimes_{R_{\\mathrm{sec}}}E_RN$ and $E_R(R)\\cong R_{\\mathrm{sec}}$ for the coequalizer tensor of [def-sfb-modobj-relative-tensor] and the sheafified balanced tensor of [def-pur-sheaf-tensor-product], given on local pure tensors by $m\\otimes n\\mapsto m\\otimes n$ and compatible with associators, unitors and symmetry. By step 2, $E_T$ is $E_R$ followed by restriction of scalars along the ring-sheaf isomorphism $c_T:A_T\\to R_{\\mathrm{sec}}$. Under $c_T$ the balancing relations $m a\\otimes n=m\\otimes an$ over $R_{\\mathrm{sec}}(U)$ and over $A_T(U)$ are the same relations, so the presheaf tensors of [def-pur-sheaf-tensor-product] coincide sectionwise and hence after sheafification, with the same action through the first factor. Composing gives the natural, coherent comparison $E_T(M\\otimes_{p_T^*\\underline A}N)\\cong E_TM\\otimes_{A_T}E_TN$ with $E_T(p_T^*\\underline A)\\cong A_T$.",
+   "text": "Equip the existing section-action equivalence with its strong monoidal structure using the tensor and unit isomorphisms, naturality, associator and unitor equations of [lem-pe-internal-section-tensor-comparison]. Compose with restriction along the specified ring-sheaf isomorphism using [lem-sfb-ring-isomorphism-tensor-transport]. The recorded ordinary_functor equality identifies this composite with the given ordinary equivalence. Restriction to constant sections is strong monoidal by [lem-sfb-constant-scalar-restriction-tensor]; the recorded fixed_functor equality identifies the actual fixed equivalence.",
    "uses": [
     "lem-pe-internal-section-tensor-comparison",
-    "def-sfb-modobj-relative-tensor",
-    "sk-def-sfb-sheaf-tensor",
-    "def-pur-sheaf-tensor-product"
+    "lem-sfb-ring-isomorphism-tensor-transport",
+    "lem-sfb-constant-scalar-restriction-tensor"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-modules.tex",
-    "place": "Tag 03EK, section-tensor-product (sheafified balanced tensor); comparison supplied by the cited internal/section tensor node"
-   }
+   "elementary": false
   },
   {
-   "text": "Both equivalences preserve small coproducts: for a family $(M_i)$ and any $L$, the equivalence identifies $\\operatorname{Hom}(E_T(\\bigoplus_i M_i),L)$ with $\\prod_i\\operatorname{Hom}(E_TM_i,L)$, the coproduct universal property. By [lem-pe-internal-section-tensor-comparison], $E_R$ applied termwise identifies the direct-sum total tensor complexes, with differential $d(m\\otimes n)=dm\\otimes n+(-1)^{\\deg m}m\\otimes dn$, and preserves and reflects acyclicity and K-flat complexes in the acyclic-total-tensor sense of [def-pc-kflat-complex]; restricting scalars along $c_T$ as in step 5 changes none of this. The internal K-flatness of [sk-def-sfb-derived-categories] is [def-sfb-preserves-kflat-quasi-iso] ($P\\otimes-$ and $-\\otimes P$ preserve quasi-isomorphisms), which is the same test: the additive total tensor commutes with mapping cones, a map is a quasi-isomorphism exactly when its cone is acyclic, $0\\to Q$ is a quasi-isomorphism exactly when $Q$ is acyclic, and the symmetry handles the second side. Hence an internal K-flat resolution $P\\to K$ goes to an ordinary K-flat resolution $E_TP\\to E_TK$. Computing [sk-def-sfb-derived-tensor-hom] and [def-weil-derived-tensor] on this same $P$ gives the natural comparison $D(E_T)(K\\otimes^{\\mathrm L}_{p_T^*\\underline A}L)\\cong D(E_T)K\\otimes^{\\mathrm L}_{A}D(E_T)L$.",
+   "text": "Compose the two strong monoidal equivalences and equip its inverse with the canonical adjoint monoidal structure. Apply [new-lem-kun-exact-monoidal-equivalence-derived] to its adjunction. This supplies a strong monoidal structure on its actual termwise extension, exactly fixedDerived, without transferring or redefining either native derived tensor.",
    "uses": [
-    "lem-pe-internal-section-tensor-comparison",
-    "sk-def-sfb-derived-categories",
-    "def-sfb-preserves-kflat-quasi-iso",
+    "new-lem-kun-exact-monoidal-equivalence-derived"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For the ordinary module category identify the acyclic-tensor K-flat predicate with the quasi-isomorphism K-flat predicate by descending to the homotopy category and applying the acyclic criterion and symmetry. For every resolution P -> L representing K, [lem-pc-source-kflat-module-tensor-model] identifies Q(P tensor M[0]) with K tensor^L M[0]. The generic Tor predicate therefore implies the resolution predicate for every representative and resolution. Conversely choose a flat-term K-flat resolution by [lem-pc-source-module-kflat-resolution] and use the same comparison to recover every degree-zero tensor test. The supplied inequality provides the ordered-interval conjunct.",
+   "uses": [
     "def-pc-kflat-complex",
-    "sk-def-sfb-derived-tensor-hom",
-    "def-weil-derived-tensor"
+    "lem-pc-source-kflat-module-tensor-model",
+    "lem-pc-source-module-kflat-resolution",
+    "def-weil-proetale-tor-amplitude"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/derived.tex",
-    "place": "K-flat computation of derived tensor, with the explicit acyclic-test argument; definitions in the cited tensor nodes"
-   }
+   "elementary": false
   },
   {
-   "text": "Every ordinary module sheaf in degree zero is the image of an internal module sheaf in degree zero, and conversely. For each such test $N$, steps 2 and 6 identify $H^i(K\\otimes^{\\mathrm L}N)$ with its image under the exact equivalence. Since the equivalence reflects zero objects, the vanishing tests in [def-weil-proetale-tor-amplitude] are equivalent for every integer $i$ and every $N$. This proves preservation and reflection of each specified interval $[a,b]$, not merely existence of some finite interval.",
+   "text": "An exact monoidal equivalence preserves flat objects. Apply the source library theorem DerivedCategory.torAmplitudeIn_mapDerivedCategory_obj_iff to the ordinary equivalence and to the composite fixed equivalence. Compose the former equivalence of predicates with the resolution comparison in the preceding step; the latter gives the fixed-scalar assertion directly. These results have unrestricted derived objects, every degree-zero test module, and the specified integers; no constructibility or boundedness assumption is used.",
    "uses": [
-    "def-weil-proetale-tor-amplitude",
-    "sk-def-sfb-constructible"
+    "sk-def-sfb-derived-tensor-hom",
+    "sk-def-sfb-derived-categories"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 08FZ, definition-tor-amplitude; comparison of identical tensor tests"
-   }
+   "elementary": false
   }
  ],
  "proof_deps": [
   "lem-pe-internal-section-tensor-comparison",
-  "def-sfb-modobj-relative-tensor",
-  "sk-def-sfb-sheaf-tensor",
-  "def-pur-sheaf-tensor-product",
-  "sk-def-sfb-derived-categories",
-  "def-sfb-preserves-kflat-quasi-iso",
+  "lem-sfb-ring-isomorphism-tensor-transport",
+  "lem-sfb-constant-scalar-restriction-tensor",
+  "new-lem-kun-exact-monoidal-equivalence-derived",
   "def-pc-kflat-complex",
-  "sk-def-sfb-derived-tensor-hom",
-  "def-weil-derived-tensor",
+  "lem-pc-source-kflat-module-tensor-model",
+  "lem-pc-source-module-kflat-resolution",
   "def-weil-proetale-tor-amplitude",
-  "sk-def-sfb-constructible"
+  "sk-def-sfb-derived-tensor-hom",
+  "sk-def-sfb-derived-categories"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-rf-shriek-preservation/sk-prop-sf-rf-shriek-preservation.proof.md",
-  "place": "Strict component of lem-sf-module-object-ordinary-coefficient-equivalence.",
-  "note": "The original public statement is unchanged. This node isolates a proper part of its argument. The displayed proof in words is the corresponding part of the original twelve-step argument; it remains a named proof obligation."
+  "group": "E4",
+  "date": "2026-10-24",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 06YN, 06YS, 06YU and 08FZ; the existing section comparison and scalar-transport nodes implement the coefficient comparison.",
+  "note": "Proof assembled from existing tensor comparisons, exact derived monoidal descent and native Tor transport. The resolution-based intrinsic predicate is compared directly with the generic derived predicate."
  },
  "mathlib_searches": [
   {
@@ -143,13 +136,25 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-21",
+  "date": "2026-10-24",
   "by": "L",
-  "reviewer": "C-caefd",
-  "group": "K1",
+  "reviewer": "COMPILER",
+  "group": "E4",
   "result": "pass",
-  "landing": "20261021T061419-L-1771997",
+  "landing": "20261024T185059-L-3386453",
   "kind": "interface",
-  "note": "independent cc review: delivered item theorem signature (md5) and the 17 moved defs vs live lean/ (= quarantine/) text, verbatim apart from blueprint ids; the three sorry components vs the item's clauses and CondensedConstantConstructibility definitions; importers FiniteLocalizingExceptionalPreservation and TowerCompactSupportProjectionFormula compiled with the delivered modules"
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
  }
 }

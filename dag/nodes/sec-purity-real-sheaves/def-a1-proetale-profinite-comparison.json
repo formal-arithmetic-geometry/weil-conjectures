@@ -1,0 +1,126 @@
+{
+ "id": "def-a1-proetale-profinite-comparison",
+ "kind": "definition",
+ "title": "Canonical constant and inverse-limit coefficient comparisons under pro-etale inverse image",
+ "statement": "Let $f:X\\to Y$ be a morphism of schemes [def-pc-scheme]. Use their small pro-etale sites [def-weil-pbc-proetale-site], the inverse-image functor $f^{-1}$, and the canonical maps $c^f_R:f^{-1}R_Y\\to R_X$ adjoint to constant sections, from [def-weil-proetale-inverse-image]; here $R_Z$ denotes the sheafification of the constant ring presheaf [def-weil-pbc-constant-sheaf]. Define $c^f$ as the natural transformation from $R\\mapsto f^{-1}R_Y$ to $R\\mapsto R_X$ with component $c^f_R$. For any countable diagram $Q:\\mathbf N^{\\mathrm{op}}\\to\\mathrm{CRing}_{u+1}$, with $X,Y:\\mathrm{Scheme}_u$, define $T_Z(Q)=Q\\circ(-)_Z$, the diagram of constant ring sheaves. Define $c^f_Q:f^{-1}(\\varprojlim T_Y(Q))\\to\\varprojlim T_X(Q)$ to be the universal limit comparison $f^{-1}\\varprojlim T_Y(Q)\\to\\varprojlim(f^{-1}T_Y(Q))$, followed by the limit map induced by the natural transformation with components $c^f_{Q_n}$. This defines the specific map for every such diagram, without requiring finite rings, surjective transition maps, limit preservation or invertibility of $c^f_Q$.",
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-pbc-proetale-site",
+  "def-weil-proetale-inverse-image",
+  "def-weil-pbc-constant-sheaf"
+ ],
+ "source": {
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Lemma 6.8.2(1) (coefficient limits) and Remark 6.8.15 (naive coefficient pullback), pp. 58–59, 62; canonical constant-section adjunct and limit comparison as in Stacks Tags 098T(2), 04D3, 097N, 01YW."
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "finiteCoefficient(Ring|Tower|Limit)|finiteContinuousCoefficient|proEtale(ConstantComparison|CoefficientTower|ProfiniteComparison)",
+   "results": "No hits (0 hits)",
+   "date": "2026-10-23",
+   "verdict": "No exact Mathlib match. Reuse the existing project definitions; add definition ownership only, with no new Lean construction."
+  },
+  {
+   "tool": "leansearch",
+   "query": "constant finite quotient coefficient ring tower inverse limit sheaf continuous functions evaluation",
+   "results": "ProfiniteGrp.toLimit_fun_continuous; SheafOfModules.evaluationPreservesLimitsOfShape; SheafOfModules.Finite.evaluationPreservesFiniteLimits; ProfiniteGrp.isIso_toLimit; AdicCompletion.coe_eval; SheafOfModules.evaluationPreservesLimitsOfSize; smoothSheafCommRing.evalAt; SheafOfModules.evaluationPreservesLimit (8 hits)",
+   "date": "2026-10-23",
+   "verdict": "No exact Mathlib match. Reuse the existing project definitions; add definition ownership only, with no new Lean construction."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Limits.limit, CategoryTheory.Limits.limit.post, CategoryTheory.Limits.limMap",
+   "results": "CategoryTheory.Limits.limit.map_post (1 hits)",
+   "date": "2026-10-23",
+   "verdict": "No exact Mathlib match. Reuse the existing project definitions; add definition ownership only, with no new Lean construction."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Canonical inverse image comparison for the inverse limit of a countable tower of constant ring sheaves on the pro etale site",
+   "results": "LightProfinite.lightToProfinite_map_proj_eq; Condensed.isColimitLocallyConstantPresheaf_desc_apply; LightCondensed.isColimitLocallyConstantPresheafDiagram_desc_apply; Condensed.isoLocallyConstantOfIsColimit_inv; AlgebraicGeometry.exists_app_map_eq_map_of_isLimit; LightCondensed.isColimitLocallyConstantPresheaf_desc_apply; Condensed.isColimitLocallyConstantPresheafDiagram; TopCat.Sheaf.objSupIsoProdEqLocus_inv_snd (8 hits)",
+   "date": "2026-10-23",
+   "verdict": "No exact Mathlib match. Reuse the existing project definitions; add definition ownership only, with no new Lean construction."
+  },
+  {
+   "tool": "grep",
+   "query": "rg -n finiteCoefficient(Ring|Tower|Limit)|finiteContinuousCoefficient|proEtale(ConstantComparison|CoefficientTower|ProfiniteComparison) lean/WeilConjectures lean/Sheaf; exact lean ownership census in dag/nodes",
+   "results": "No upstream WeilConjectures definition of these names. Existing definitions in ContinuousCoefficientBasic, ContinuousCoefficientCompletion, ProfiniteCoefficientInverseImage. Only theorem nodes own the relevant finite-coefficient sheaf definitions and profinite comparison definitions; finiteCoefficientRingTower has no own DAG record.",
+   "date": "2026-10-23",
+   "verdict": "Reuse unchanged project declarations under existing:true definition records, as required by the return."
+  },
+  {
+   "tool": "grep",
+   "query": "tools/blueprint_refs.py search coefficient tower; tools/blueprint_refs.py search profinite comparison",
+   "results": "General adic coefficient datum and derived tower nodes; no definition node owns these exact positive finite-extension quotient sheaves or canonical proEtaleProfiniteComparison. def-per-proetale-ring-inverse-image-comparisons owns only composition and identity comparisons.",
+   "date": "2026-10-23",
+   "verdict": "No existing definition node for these exact constructions."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-a1-normal-lattice-finite-cover-presentation",
+  "date": "2026-10-23",
+  "group": "Q132"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-a1-affine-hc0",
+   "place": "Proof of lem-a1-affine-hc0, first sentence about a compactly supported global section: coefficient realization via global integral lattices. Returned monodromy split steps 1–4: coefficient conventions, qcqs checks, lattice classes and the finite-cover section.",
+   "via": [
+    "lem-a1-normal-lattice-finite-cover-presentation",
+    "lem-a1-normal-proetale-monodromy",
+    "lem-a1-smooth-lisse-integral-lattice",
+    "lem-a1-degree-zero-compact-support-sections"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-purity-real-sheaves",
+ "unit": "sk-p-real-rankin",
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.ProfiniteCoefficientInverseImage",
+  "declaration": "AlgebraicGeometry.Scheme.proEtaleProfiniteComparison",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.proEtaleConstantComparison",
+   "AlgebraicGeometry.Scheme.proEtaleCoefficientTower",
+   "AlgebraicGeometry.Scheme.proEtaleProfiniteComparison"
+  ],
+  "statement": "noncomputable def proEtaleProfiniteComparison {X Y : Scheme.{u}} (f : X ⟶ Y)\n    (Q : ℕᵒᵖ ⥤ CommRingCat.{u + 1}) :\n    (proEtaleSheafInverseImage f CommRingCat.{u + 1}).obj\n        (limit (proEtaleCoefficientTower Y Q)) ⟶ limit (proEtaleCoefficientTower X Q)",
+  "branch": "newtargets-dag",
+  "by": "Q132",
+  "date": "2026-10-23",
+  "existing": true,
+  "note": "Definition ownership repair of returned head 2e004cf8162b. Reuses unchanged, actual-data definitions in the published module. No theorem conclusion is needed to form these objects or maps; no Lean module is delivered for this existing:true record."
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-40e707bf4",
+  "group": "Q132",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-40e707bf4",
+  "group": "Q132",
+  "result": "pass",
+  "note": "Re-delivery of RETURNed 2e004cf8. H3 repaired: the trivialization clause now has the normalized k (class of g = c U P iff t.hom image of P.image = matrixLatticeImage g on every T), term-for-term the same as integralLatticeSheaf_locallyConstant (LatticeSheafLocallyConstant.lean:74-100); t is used and rank 0 is covered. H2 repaired: the completion and profinite-inverse-image theorems are moved to proof_deps only; three new existing:true definition nodes (def-a1-finite-coefficient-sheaves, def-a1-finite-coefficient-ring-tower, def-a1-proetale-profinite-comparison) own the unchanged real-data defs in ContinuousCoefficientBasic, ContinuousCoefficientCompletion and ProfiniteCoefficientInverseImage. Their statements match the Lean, their recorded signatures are verbatim, and the live DAG has no other owner apart from the theorem nodes. def-sfb-integral-lattice-pairs is now cited. Item lean.statement verbatim, all 7 declarations present, only one sorry, docstrings have source and blueprint and list all 9 steps; all other clauses and edge cases unchanged from the earlier full check. Advisory: def-weil-completed-integral-coefficients is the same B construction with a different Lean declaration (RingCat-valued); 'Second reading by Q132' still reports none. No file changed, so no compile; the worker reports a clean scompile and a passing dry run."
+ }
+}

@@ -1,0 +1,143 @@
+{
+ "id": "lem-pur-finite-pullback-tensor-composition-representatives",
+ "kind": "statement",
+ "title": "Finite tensor pullback composition on flat K-flat representatives",
+ "status": "split",
+ "statement": "Fix a prime $\\ell$, a finite extension $E/\\mathbf Q_\\ell$, $n\\geq0$ and composable scheme morphisms $h:Z\\to X$, $f:X\\to Y$, with $\\ell$ invertible on all three schemes. Use the intrinsic operations and canonical comparison of [def-pur-finite-pullback-tensor-construction]. For any flat-term K-flat cochain complexes $P,Q$ on $Y$, let $M=Q_Y(P)$, $N=Q_Y(Q)$, $F=f^*$, $H=h^*$, $K=(h\\gg f)^*$ at the finite derived level and $c:K\\simeq FH$ the specified compositor sfIntrinsicDerivedPullbackComp of [def-sp-finite-intrinsic-open-square]. Then $\\mu_{h\\gg f;M,N}\\,(c_M\\otimes c_N)=c_{M\\otimes N}\\,H(\\mu_{f;M,N})\\,\\mu_{h;FM,FN}$, composed in traversal order. Only the localized flat K-flat pairs are asserted here.",
+ "stmt_deps": [
+  "def-pur-finite-pullback-tensor-construction",
+  "def-sp-finite-intrinsic-open-square"
+ ],
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 07A4, lemma-pullback-tensor-product; ordinary tensor/unit and adjunction-composition formulas from Modules on Sites 03EL and Sites 00YV. Representative composition calculation of def-pur-finite-pullback-tensor-comparison."
+ },
+ "proof": [
+  {
+   "text": "Use the proved single-pullback representative square for f,h,h≫f, applying the h square to the ordinary pullbacks of P,Q. Pasting the first two squares uses naturality of the finite tensor comparison and gives the normalized square for the iterated pullback.",
+   "uses": [
+    "lem-pur-finite-pullback-tensor-representative-square",
+    "def-pur-finite-pullback-tensor-construction"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "The exact-derived functor compositor and natural-isomorphism factorization formulas identify sfIntrinsicDerivedPullbackComp with the termwise compositor conjugated by the three finite realization maps. Cancel the three realization isomorphisms in the computation maps. This is the proved compositor_fac calculation.",
+   "uses": [
+    "lem-pur-finite-pullback-tensor-representative-square",
+    "def-sp-finite-intrinsic-open-square",
+    "lem-pur-finite-pullback-tensor-compositor-factors"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Apply the ordinary chain-composition identity. Naturality of the fixed tensor representative comparison identifies its image under Q with the tensor of the two localized compositor components. Cancel the source representative isomorphism and the two iterated computation isomorphisms; the remaining equality is the required representative coherence. The normalized_tensor_square helper performs these cancellations explicitly.",
+   "uses": [
+    "lem-pur-finite-pullback-tensor-chain-composition",
+    "lem-pur-finite-pullback-tensor-representative-square"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-pur-finite-pullback-tensor-representative-square",
+  "def-pur-finite-pullback-tensor-construction",
+  "def-sp-finite-intrinsic-open-square",
+  "lem-pur-finite-pullback-tensor-compositor-factors",
+  "lem-pur-finite-pullback-tensor-chain-composition"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 07A4 representative calculation, with exact-derived pseudofunctor factorization from 00YV and private proved categorical square-pasting helpers."
+ },
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "LeanSearch",
+   "query": "The canonical derived pullback tensor comparison on flat K-flat complexes respects associativity, the tensor unit, and composition of morphisms of ringed topoi",
+   "results": "8 hits, including PresheafOfModules.pullback_assoc, SheafOfModules.pullback_assoc, HomologicalComplex.rightUnitor'. These concern ordinary pullback pseudofunctor associativity or native complex unitors; none identifies this finite intrinsic representative comparison.",
+   "date": "2026-10-26",
+   "verdict": "No exact match for the representative-normalized finite coherence equations."
+  },
+  {
+   "tool": "LeanFinder",
+   "query": "On K-flat representatives derived pullback preserves tensor associators, left and right unitors, and is compatible with composition of pullbacks",
+   "results": "8 hits: PresheafOfModules.pullbackComp, PresheafOfModules.pullback_assoc, Scheme.Modules.pullbackComp and its pseudofunctor unit laws, and Over pullback tensor projection laws. No normalized finite derived tensor comparison.",
+   "date": "2026-10-26",
+   "verdict": "No exact match."
+  },
+  {
+   "tool": "grep",
+   "query": "derived.*[Pp]ullback.*[Tt]ensor|[Pp]ullback.*[Aa]ssociativ|[Pp]ullback.*[Uu]nitor",
+   "results": "15 Mathlib hits: Scheme.Modules pullback unitors, pullback associativity documentation, sheaf and presheaf pullback unit laws, and unrelated categorical pullbacks. Local rg of WeilConjectures/Sheaf found the generic exact-pullback signed comparison and FiniteDerivedComparisonNormalization, whose separate presentations do not directly identify the intrinsic comparison here. Whole-blueprint search \"pullback tensor\" found only det-thm-sf-pf-adic-projection and sk-d-pairing, neither this representative calculation.",
+   "date": "2026-10-26",
+   "verdict": "No duplicate representative statement found."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.FinitePullbackTensorComparison",
+  "date": "2026-10-26",
+  "group": "W3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "def-weil-frobenius-coefficient-twists",
+   "place": "Clause 5: derived pullback/tensor comparison before theta_K tensor theta_m; its finite composition representative calculation.",
+   "via": [
+    "def-pur-finite-pullback-tensor-comparison",
+    "lem-pur-derived-pullback-tensor-iso"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-def-purity-conv",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.FinitePullbackTensorCompositionRepresentatives",
+  "file": "lean/Sheaf/Paper/FinitePullbackTensorCompositionRepresentatives.lean",
+  "declaration": "WeilConjectures.finitePullbackTensor_composition_representatives",
+  "declarations": [
+   "WeilConjectures.finitePullbackTensor_composition_representatives"
+  ],
+  "statement": "theorem finitePullbackTensor_composition_representatives {X Y Z : Scheme.{u}}\n    (f : X ⟶ Y) (h : Z ⟶ X) (n : ℕ)\n    [hX : ∀ x : X, Invertible (l : X.residueField x)]\n    [hY : ∀ y : Y, Invertible (l : Y.residueField y)]\n    [hZ : ∀ z : Z, Invertible (l : Z.residueField z)]\n    (P Q : CochainComplex (normalizedDVRModules l E Y n) ℤ)\n    (hP : proEtaleFlatRepresentatives Y (integralCoefficientCommRingSheaf l E Y n) P)\n    (hQ : proEtaleFlatRepresentatives Y (integralCoefficientCommRingSheaf l E Y n) Q) :\n    let M := DerivedCategory.Q.obj P\n    let N := DerivedCategory.Q.obj Q\n    ((@finitePullbackTensorConstruction l _ E _ _ _ Z Y (h ≫ f) n hZ hY) M N).hom ≫\n      (finiteIntrinsicDerivedTensor l E Z n).map\n        (Prod.mkHom\n          ((sfIntrinsicDerivedPullbackComp (finiteCoefficientRing l E (n + 1)) h f).hom.app M)\n          ((sfIntrinsicDerivedPullbackComp (finiteCoefficientRing l E (n + 1)) h f).hom.app N)) =\n    (sfIntrinsicDerivedPullbackComp (finiteCoefficientRing l E (n + 1)) h f).hom.app\n        ((finiteIntrinsicDerivedTensor l E Y n).obj (M,N)) ≫\n      (finiteDerivedPullback l E n h).map\n        ((@finitePullbackTensorConstruction l _ E _ _ _ X Y f n hX hY) M N).hom ≫\n      ((@finitePullbackTensorConstruction l _ E _ _ _ Z X h n hZ hX)\n        ((finiteDerivedPullback l E n f).obj M)\n        ((finiteDerivedPullback l E n f).obj N)).hom",
+  "branch": "sheaf-dag",
+  "by": "W3",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "W3",
+  "result": "pass",
+  "landing": "20261026T202912-L-3491824",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M1",
+  "result": "pass",
+  "landing": "20261026T222735-L-688410",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

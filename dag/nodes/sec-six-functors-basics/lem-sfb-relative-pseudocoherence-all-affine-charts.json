@@ -1,0 +1,276 @@
+{
+ "id": "lem-sfb-relative-pseudocoherence-all-affine-charts",
+ "kind": "statement",
+ "title": "Relative pseudo-coherence can be tested on every affine polynomial chart",
+ "statement": "Let $f:X\\to S$ be a locally finite type morphism of schemes [def-pc-scheme], [def-pc-morphism-conventions], let $E\\in D(\\mathcal O_X)$ [def-pc-derived-category], and let $m\\in\\mathbf Z$. Then $E$ is $m$-pseudo-coherent relative to $S$ [def-sfb-relative-pseudo-coherent-complex] if and only if, for every pair of affine open subschemes $U\\subset X$ and $V\\subset S$ with $f(U)\\subset V$, every integer $n\\geq0$, and every closed immersion $j:U\\hookrightarrow\\mathbf A^n_V$ over $V$, the object $Rj_*(E|_U)$ is $m$-pseudo-coherent on $\\mathbf A^n_V$ [def-pc-derived-direct-image]. Such an embedding exists for each pair $(U,V)$, with $n$ allowed to depend on the pair. Absolute $m$-pseudo-coherence here has the local strictly perfect approximation meaning specified in [def-sfb-m-pseudo-coherent-complex]; restrictions to open subschemes are derived pullbacks as in that definition. Relative affine space has the meaning of [def-nagata-relative-affine-space], and closed immersions that of [def-weil-closed-immersion].",
+ "source": {
+  "document": "literature/stacks-project/more-morphisms.tex",
+  "place": "Tag 09UJ, lemma-relative-pseudo-coherence-characterize, together with Tag 09VC, lemma-relatively-pseudo-coherent (some embedding if and only if every embedding)"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-morphism-conventions",
+  "def-pc-derived-category",
+  "def-sfb-relative-pseudo-coherent-complex",
+  "def-pc-derived-direct-image",
+  "def-sfb-m-pseudo-coherent-complex",
+  "def-nagata-relative-affine-space",
+  "def-weil-closed-immersion"
+ ],
+ "proof": [
+  {
+   "text": "For any affine pair $(U,V)$ in the statement, [lem-weil-pbc-lft-affine-pairs] makes $A=\\Gamma(U,\\mathcal O_X)$ a finitely generated algebra over $R=\\Gamma(V,\\mathcal O_S)$. Choose finitely many generators $a_1,\\ldots,a_n$. Evaluation gives the surjection $R[T_1,\\ldots,T_n]\\twoheadrightarrow A$. The affine description of relative affine space and of closed immersions identifies its spectrum with the required embedding $U\\hookrightarrow\\mathbf A^n_V$. This proves the existence assertion independently of $E$.",
+   "uses": [
+    "lem-weil-pbc-lft-affine-pairs",
+    "def-nagata-relative-affine-space",
+    "def-weil-closed-immersion"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 01T2, lemma-locally-finite-type-characterize, recalled immediately before Tag 09UI"
+   }
+  },
+  {
+   "text": "Assume $E$ is relatively $m$-pseudo-coherent. Choose the affine covers $V_a$, $U_{ab}$ and their good embeddings from [def-sfb-relative-pseudo-coherent-complex]. Fix arbitrary affine $U,V$ and $u\\in U$. Pick $a,b$ with $f(u)\\in V_a$ and $u\\in U_{ab}$. Apply [lem-sc-affine-inter-principal-both] on $S$ to get $f(u)\\in V'\\subseteq V\\cap V_a$, principal in both $V$ and $V_a$. Put $U_0=U\\cap f^{-1}(V')$ and $X_0=U_{ab}\\cap f^{-1}(V')$. Pulling back their defining sections makes these principal affine opens of $U$ and $U_{ab}$. Apply the same common-principal-neighborhood lemma on $X$ to $U_0,X_0$ at $u$, obtaining $U'_u$ principal in both. It is also principal in $U$: a principal open $D_{D(t)}(s/t^q)$ equals $D_U(ts)$ after representing its defining section in the localization. Thus these $U'_u$ cover $U$ by principal opens.",
+   "uses": [
+    "def-sfb-relative-pseudo-coherent-complex",
+    "lem-sc-affine-inter-principal-both"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 09UJ, lemma-relative-pseudo-coherence-characterize, common principal neighborhoods in its proof; Schemes Tag 01IW"
+   }
+  },
+  {
+   "text": "Restrict the chosen good embedding $i_{ab}:U_{ab}\\hookrightarrow\\mathbf A^{n_{ab}}_{V_a}$ to the open subscheme $\\mathbf A^{n_{ab}}_{V'}$. The resulting embedding $i_0:X_0\\hookrightarrow\\mathbf A^{n_{ab}}_{V'}$ has $Ri_{0*}(E|_{X_0})\\cong(Ri_{ab*}(E|_{U_{ab}}))|_{\\mathbf A^{n_{ab}}_{V'}}$ by [lem-pc-restrict-derived-direct-image-open]. This is $m$-pseudo-coherent: restrict the local strictly perfect approximations in [def-sfb-m-pseudo-coherent-complex] to this open. Their cohomology isomorphisms and degree-$m$ surjections restrict as well. Relative affine space has the indicated open restriction by its affine coefficient-localization description. The morphism $X_0\\to V'$ is finite type since its ring of sections is the quotient of the finite-variable polynomial ring defining $i_0$.",
+   "uses": [
+    "lem-pc-restrict-derived-direct-image-open",
+    "def-sfb-m-pseudo-coherent-complex",
+    "def-nagata-relative-affine-space",
+    "def-weil-closed-immersion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 09UJ proof, restriction to the common principal base open; Cohomology Tag 08FE, lemma-restrict-direct-image-open"
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-affine-principal-relative-pseudocoherence-localization] with its ambient affine base $S$ equal to the present $V$, its standard open equal to $V'$, its affine source equal to $X_0$, and its principal source open equal to $U'_u$. Step 3 supplies the good embedding over $V'$. The lemma gives a good embedding of $U'_u$ into finite-dimensional affine space over $V$. This is valid for every $u\\in U$.",
+   "uses": [
+    "lem-sfb-affine-principal-relative-pseudocoherence-localization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 09VD, lemma-localize-relative-pseudo-coherent, applied as in Tag 09UJ"
+   }
+  },
+  {
+   "text": "The affine morphism $U\\to V$ is finite type by [lem-weil-pbc-lft-affine-pairs]. Its principal cover $(U'_u)_{u\\in U}$ has the good embeddings over the fixed base $V$ supplied in step 4. Apply [lem-sfb-affine-principal-relative-pseudocoherence-gluing] to obtain one good embedding of $U$ over $V$. For every other closed embedding $j:U\\hookrightarrow\\mathbf A^n_V$, [lem-sfb-affine-polynomial-embedding-pseudocoherence-invariance] gives $m$-pseudo-coherence of $Rj_*(E|_U)$. Since $(U,V)$ was arbitrary, this is the forward implication.",
+   "uses": [
+    "lem-weil-pbc-lft-affine-pairs",
+    "lem-sfb-affine-principal-relative-pseudocoherence-gluing",
+    "lem-sfb-affine-polynomial-embedding-pseudocoherence-invariance"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 09UJ, reduction to a principal cover by Tag 09VE; Tag 09VC for every embedding"
+   }
+  },
+  {
+   "text": "Conversely assume the stated condition for every affine pair and every embedding. Choose an affine cover of $S$ and affine covers of its inverse images, using [lem-weil-pbc-affine-opens-basis]. For each pair choose an embedding as constructed in step 1. The hypothesis says its derived pushforward is $m$-pseudo-coherent. These covers and embeddings are exactly the witnesses required by [def-sfb-relative-pseudo-coherent-complex]. Hence $E$ is $m$-pseudo-coherent relative to $S$.",
+   "uses": [
+    "lem-weil-pbc-affine-opens-basis",
+    "def-sfb-relative-pseudo-coherent-complex"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 09UJ, implication (2) to (1), directly from Tag 09UI"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-lft-affine-pairs",
+  "def-nagata-relative-affine-space",
+  "def-weil-closed-immersion",
+  "def-sfb-relative-pseudo-coherent-complex",
+  "lem-sc-affine-inter-principal-both",
+  "lem-pc-restrict-derived-direct-image-open",
+  "def-sfb-m-pseudo-coherent-complex",
+  "lem-sfb-affine-principal-relative-pseudocoherence-localization",
+  "lem-sfb-affine-principal-relative-pseudocoherence-gluing",
+  "lem-sfb-affine-polynomial-embedding-pseudocoherence-invariance",
+  "lem-weil-pbc-affine-opens-basis"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/more-morphisms.tex",
+  "place": "Tag 09UJ, lemma-relative-pseudo-coherence-characterize, with Tags 09VC, 09VD, 09VE and Cohomology Tag 08FE"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Relative m pseudo coherence of a complex can be checked on every affine open chart and every closed embedding in affine space over the base",
+   "results": "{\"t\": \"2026-10-23T13:39:13Z\", \"tool\": \"leanfinder\", \"query\": \"Relative m pseudo coherence of a complex can be checked on every affine open chart and every closed embedding in affine space over the base\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.AffineTargetMorphismProperty.IsLocal\", \"AlgebraicGeometry.targetAffineLocally\", \"AlgebraicGeometry.HasAffineProperty.instTargetAffineLocallyOfIsLocal\", \"AlgebraicGeometry.reduce_to_affine_nbhd\", \"AlgebraicGeometry.reduce_to_affine_global\", \"AlgebraicGeometry.HasAffineProperty.iff\", \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.h𝒰S\", \"AlgebraicGeometry.HasAffineProperty.iff_of_openCover\"], \"digest\": \"830a54eade7f2438\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern morphism properties, module presentations, pseudofunctors or unrelated uses of pseudo/perfect; none states the derived relative pseudo-coherence assertion."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"pseudoCoherent\"",
+   "results": "{\"t\": \"2026-10-23T13:39:04Z\", \"tool\": \"loogle\", \"query\": \"\\\"pseudoCoherent\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern morphism properties, module presentations, pseudofunctors or unrelated uses of pseudo/perfect; none states the derived relative pseudo-coherence assertion."
+  },
+  {
+   "tool": "grep",
+   "query": "[Mm][Pp]seudo|[Pp]seudo.?[Cc]oher",
+   "results": "{\"t\": \"2026-10-23T13:39:11Z\", \"tool\": \"grep\", \"query\": \"[Mm][Pp]seudo|[Pp]seudo.?[Cc]oher\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern morphism properties, module presentations, pseudofunctors or unrelated uses of pseudo/perfect; none states the derived relative pseudo-coherence assertion."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Independence of polynomial presentations and affine charts for relative pseudo coherent complexes",
+   "results": "{\"t\": \"2026-10-23T13:39:11Z\", \"tool\": \"leansearch\", \"query\": \"Independence of polynomial presentations and affine charts for relative pseudo coherent complexes\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SheafOfModules.Presentation\", \"SheafOfModules.Presentation.noConfusion\", \"SheafOfModules.QuasicoherentData.presentation\", \"SheafOfModules.Presentation.noConfusionType\", \"AlgebraicGeometry.locallyOfFinitePresentation_iff\", \"SheafOfModules.instIsQuasicoherentOfIsFinitePresentation\", \"SheafOfModules.QuasicoherentData.IsFinitePresentation.isFinite_presentation\", \"AlgebraicGeometry.AffineSpace.instLocallyOfFinitePresentationOverSchemeInferInstanceOverClassOfFinite\"], \"digest\": \"eef00385ef9e3e75\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern morphism properties, module presentations, pseudofunctors or unrelated uses of pseudo/perfect; none states the derived relative pseudo-coherence assertion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Every affine polynomial embedding tests relative finite free approximations for a locally finite type scheme morphism",
+   "results": "{\"t\": \"2026-10-23T13:39:14Z\", \"tool\": \"leanfinder\", \"query\": \"Every affine polynomial embedding tests relative finite free approximations for a locally finite type scheme morphism\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.locallyOfFiniteType_iff\", \"AlgebraicGeometry.LocallyOfFiniteType\", \"AlgebraicGeometry.Scheme.Hom.finiteType_appLE\", \"AlgebraicGeometry.LocallyOfFinitePresentation\", \"AlgebraicGeometry.LocallyOfFiniteType.finiteType_appLE\", \"AlgebraicGeometry.LocallyOfFiniteType.finiteType_of_affine_subset\", \"AlgebraicGeometry.locallyOfFinitePresentation_iff\", \"AlgebraicGeometry.AffineSpace.instLocallyOfFinitePresentationOverSchemeInferInstanceOverClassOfFinite\"], \"digest\": \"aad444f22baad6c7\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern morphism properties, module presentations, pseudofunctors or unrelated uses of pseudo/perfect; none states the derived relative pseudo-coherence assertion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Relative m pseudo coherence of complexes is independent of affine charts and polynomial embeddings",
+   "results": "{\"t\": \"2026-10-23T17:56:30Z\", \"tool\": \"leanfinder\", \"query\": \"Relative m pseudo coherence of complexes is independent of affine charts and polynomial embeddings\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.affineOpenCover_f\", \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.h𝒰S\", \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.𝒰D\", \"AlgebraicGeometry.HasAffineProperty.copy\", \"AlgebraicGeometry.Scheme.affineOpenCover_I₀\", \"AlgebraicGeometry.Scheme.AffineCover.cover_I₀\", \"AlgebraicGeometry.reduce_to_affine_global\", \"AlgebraicGeometry.AffineTargetMorphismProperty.ext\"], \"digest\": \"64a96f1313c53c35\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern ordinary morphism properties, presentations, localization or gluing, or unrelated uses of pseudo; none asserts this derived-complex polynomial-chart property."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"pseudoCoherent\"",
+   "results": "{\"t\": \"2026-10-23T17:56:31Z\", \"tool\": \"loogle\", \"query\": \"\\\"pseudoCoherent\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern ordinary morphism properties, presentations, localization or gluing, or unrelated uses of pseudo; none asserts this derived-complex polynomial-chart property."
+  },
+  {
+   "tool": "grep",
+   "query": "[Pp]seudo.?[Cc]oher",
+   "results": "{\"t\": \"2026-10-23T17:57:32Z\", \"tool\": \"grep\", \"query\": \"[Pp]seudo.?[Cc]oher\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern ordinary morphism properties, presentations, localization or gluing, or unrelated uses of pseudo; none asserts this derived-complex polynomial-chart property."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A derived complex is relatively m pseudo coherent if polynomial chart direct images are m pseudo coherent",
+   "results": "{\"t\": \"2026-10-23T17:57:33Z\", \"tool\": \"leansearch\", \"query\": \"A derived complex is relatively m pseudo coherent if polynomial chart direct images are m pseudo coherent\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HasDerivedCategory.standard\", \"DerivedCategory\", \"DerivedCategory.right_fac_of_isStrictlyLE\", \"SheafOfModules.instIsQuasicoherentOfIsFinitePresentation\", \"DerivedCategory.Q\", \"HomologicalComplexUpToQuasiIso\", \"DerivedCategory.instEssSurjCochainComplexIntQ\", \"DerivedCategory.instIsLEObjCochainComplexIntQOfIsLE\"], \"digest\": \"83c7586fa558cc1c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern ordinary morphism properties, presentations, localization or gluing, or unrelated uses of pseudo; none asserts this derived-complex polynomial-chart property."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finite free approximation of derived direct image in all polynomial presentations",
+   "results": "{\"t\": \"2026-10-23T17:57:34Z\", \"tool\": \"leanfinder\", \"query\": \"Finite free approximation of derived direct image in all polynomial presentations\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Module.Finite.exists_free_surjective\", \"Algebra.IsStandardSmooth.out\", \"Algebra.SubmersivePresentation\", \"Algebra.Generators.exists_presentation_of_free_cotangent\", \"Algebra.IsStandardSmooth.finitePresentation\", \"Algebra.Presentation.exists_presentation_fin\", \"RingHom.FinitePresentation.polynomial_induction\", \"AlgHom.FinitePresentation\"], \"digest\": \"8b30db2236533ae2\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern ordinary morphism properties, presentations, localization or gluing, or unrelated uses of pseudo; none asserts this derived-complex polynomial-chart property."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-flat-ambient-relative-pseudocoherence",
+  "date": "2026-10-23",
+  "group": "Q23"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Knudsen forgetful morphism as the universal stable curve. Section 2, Lemma 2.5 (printed pp.178--179), using Section 1, Corollary 1.5 and Lemma 1.6: multiplication and the pushforward exact sequences, retaining the twist by minus the old-marking divisor. Lemma 2.5, first paragraph and final evaluation: Corollary 1.5 supplies vanishing, base-flat direct images, arbitrary base change and generation for the five divisor modules. Corollary 1.5, printed p.167: the general cohomology-and-base-change tool whose conditions (1) and (2) the exceptional-fibre calculation must verify. General tool for Corollary 1.5: finite presentation of the acyclic image: detect pseudo-coherence by perfect tensor tests on V, using proper-support perfect direct image for U -> S. Supporting tool: 09UU (lemma-check-relative-pseudo-coherence-on-charts, equivalence (1) and (3) for every integer m). Supporting prerequisite of 09UU proof, application to id:P -> P: identify pseudo-coherence relative to P with absolute pseudo-coherence using the zero-dimensional polynomial chart of every affine open.",
+   "via": [
+    "lem-sfb-flat-ambient-relative-pseudocoherence",
+    "lem-sfb-perfect-tests-detect-pseudocoherence",
+    "lem-sfb-relative-acyclic-direct-image",
+    "lem-sfb-rational-contraction-line-cohomology",
+    "lem-sfb-elementary-contraction-evaluation",
+    "lem-sfb-knudsen-pointed-forgetful-universal-curve",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-relative-pseudocoherence-all-affine-charts",
+  "worker": "stage1",
+  "summary": "Followed Tag 09UJ with explicit common-principal refinements and open restriction of derived pushforward. Added three statement-only prerequisites for fixed-embedding invariance, principal localization/base enlargement, and principal-cover gluing. Retained the statement and all its hypotheses.",
+  "blueprint": "Current latest sk-thm-sf-ctf-stability-direct-images.proof.md (3), auxiliary relative-pseudo-coherence tool on the existing alteration branch; realizes the inherited Tag 09UU prerequisite by Tag 09UJ without changing the unit route.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-lft-affine-pairs",
+    "why": "Generic affine characterization of locally finite type, needed for the embedding existence; this unit has no such scheme-theoretic criterion."
+   },
+   {
+    "node": "lem-pc-restrict-derived-direct-image-open",
+    "why": "Generic restriction of unbounded structure-sheaf derived pushforward to an open, needed before base enlargement; this unit has no replacement."
+   },
+   {
+    "node": "lem-weil-pbc-affine-opens-basis",
+    "why": "Generic existence of affine open covers, used only to unpack the reverse implication."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-lft-affine-pairs",
+  "lem-pc-restrict-derived-direct-image-open",
+  "lem-weil-pbc-affine-opens-basis"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-NX-48a1e47a8",
+  "group": "NX",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NX-48a1e47a8 (reviewer sub-agent of L); spot-checked: Read the item, the 3 new nodes and every cited node's statement against Stacks more-morphisms.tex 09VC (16610), 09UI (16675), 09VD (16738), 09VE (16789) and 09UJ (16837) in full, plus perfect lemma-closed-push-pseudo-coherent (holds for arbitrary E). Item statement, stmt_deps and source are unchanged versus clones/live; the item is still unsplit live and on side-live, and there is no repair note. Step 1: 01T2 finite generation gives a surjection R[T] -> A, which is a closed immersion; elementary. Step 2: common principal neighbourhood on S, then on X; D_{D_U(t)}(s/t^q)=D_U(ts) is correct; no affine intersections are used. Step 3: 08FE restriction of R(i_ab)_* to A^n_{V'}, whose preimage is X_0; restricting m-pseudo-coherence to an open is elementary from the definition; this fills the base-restriction step 09UJ omits. Step 4: every hypothesis of the localization node (09VD, principal U) holds. Step 5: gluing (09VE 1=>2, arbitrary index set) then invariance (09VC) for every j. Step 6: the converse unpacks 09UI with step 1. All three new statements are true; tested on empty I, X or S empty, a=1 and a=0, n=0, E=0 and arbitrary m. They are statement-only, self-contained with definitions cited and three search kinds recorded, and are strictly smaller pieces of comparable size that do not restate the item. Ring-level lem-sfb-polynomial-presentation-pseudocoherence-invariance (065H, D(A), full pseudo-coherence) is not a duplicate. local-on-source and closed-support depend on the item, so citing them would create a cycle. No SGA is cited. Accepted tool_uses: lem-pc-restrict-derived-direct-image-open, plus the Mathlib leaves lft-affine-pairs and affine-opens-basis. Advisory: lem-sc-affine-inter-principal-both stores tag 01HR, but the true label is 01IW (lemma-standard-open-two-affines); its statement is correct."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.RelativePseudoCoherenceAllAffineCharts",
+  "declaration": "AlgebraicGeometry.Scheme.isMPseudoCoherentRelativeTo_iff_all_affine_charts_and_exists_embedding",
+  "file": "lean/Sheaf/AlgebraicGeometry/RelativePseudoCoherenceAllAffineCharts.lean",
+  "statement": "theorem isMPseudoCoherentRelativeTo_iff_all_affine_charts_and_exists_embedding [∀ Y : Scheme.{u}, HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))] {X S : Scheme.{u}} (f : X ⟶ S) [LocallyOfFiniteType f] (E : schemeDerivedCategory X) (m : ℤ) : (IsMPseudoCoherentRelativeTo f m E ↔ ∀ (U : X.Opens) (V : S.Opens), IsAffineOpen U → IsAffineOpen V → ∀ (hUV : U ≤ f ⁻¹ᵁ V) (n : ℕ) (j : U.toScheme ⟶ AffineSpace (ULift.{u} (Fin n)) V.toScheme), IsClosedImmersion j → j ≫ (AffineSpace (ULift.{u} (Fin n)) V.toScheme ↘ V.toScheme) = f.resLE V U hUV → IsMPseudoCoherent (AffineSpace (ULift.{u} (Fin n)) V.toScheme) m ((schemeDerivedDirectImage j).obj ((derivedPullback U.ι).obj E))) ∧ (∀ (U : X.Opens) (V : S.Opens), IsAffineOpen U → IsAffineOpen V → ∀ hUV : U ≤ f ⁻¹ᵁ V, ∃ n : ℕ, ∃ j : U.toScheme ⟶ AffineSpace (ULift.{u} (Fin n)) V.toScheme, IsClosedImmersion j ∧ j ≫ (AffineSpace (ULift.{u} (Fin n)) V.toScheme ↘ V.toScheme) = f.resLE V U hUV)",
+  "branch": "sheaf-dag",
+  "by": "NY",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-0e4c69077",
+  "group": "NY",
+  "result": "pass",
+  "note": "Statement matches node and Stacks 09UJ(2)+09VC(2): lft f, arbitrary E and m; iff with all affine pairs U,V (IsAffineOpen, U ≤ f⁻¹V), all n, all closed immersions over V (resLE equation), IsMPseudoCoherent of Rj_*(E|_U) via derivedPullback U.ι, same shape as the clause inside IsMPseudoCoherentRelativeTo; separate existence conjunct with n per pair, no pseudo-coherence hypothesis. Universes u,w bound, only the definition's own HasDerivedCategory family. lean.statement verbatim; node differs from live only in lean; no duplicate in project or Mathlib; imported proof-dep modules (localization, gluing, invariance, open restriction) landed, no cycle; docstrings carry source, blueprint and the 6 steps; only sorry; report has Worker report and Second reading by NY. Edge cases n=0, empty schemes, E=0 OK. No compile (no file changed)."
+ }
+}

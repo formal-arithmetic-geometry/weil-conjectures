@@ -1,0 +1,53 @@
+## Worker report
+
+Files written, in delivery order:
+
+- `dag/nodes/sec-six-functors-basics/lem-sfb-fibred-fppf-space-module-comparisons.json`: statement, unsplit; Mathlib searches found no match. This is comparison calculus on algebraic-space tests of an arbitrary category fibred in groupoids, not a descent or Hom theorem.
+- `dag/nodes/sec-six-functors-basics/lem-sfb-groupoid-maps-from-quasicoherent.json`: the item, split into six steps. Its mathematical statement and hypotheses are unchanged. All inherited searches and the historical ancestry remain.
+- `citations.json`: one verbatim statement quotation for each cited node at each item step. `searches.jsonl` is the unmodified msearch log.
+
+Attachments: none. I searched `lean/WeilConjectures/` for the exact blueprint tag, groupoid/quotient-stack terminology, and quasi-coherent modules; no project declaration states the item or the new comparison lemma. Ordinary scheme module and groupoid facts are not attachments of this assertion about arbitrary big-fppf targets.
+
+WANTED: none; all sources used are in `literature/stacks-project/`.
+
+What was wrong: the item had no proof. Tag 076S calls injectivity clear and omits the arrow-compatibility verification; a split cannot repeat that omission. Also, `lem-sfb-stack-small-etale-comparison-calculus` assumes an algebraic stack, whereas the proof works on the presheaf groupoid before invoking any algebraicity theorem. I did not apply that node beyond its hypotheses. The new generic comparison lemma supplies exactly this missing interface. The comparisons for H are not assumed invertible: the only H inverses used are the maps induced by invertible groupoid arrows, which every presheaf sends to isomorphisms.
+
+Unfinished: only the new statement-only comparison lemma, deliberately left unsplit for stage 1. No Lean was written and no compiler or build command was run. Nothing in the shared repository or launcher was changed.
+
+## Blueprint and searches
+
+I read the chapter record, the unit record, the latest blueprint `sec-six-functors-basics/sk-thm-sf-ctf-stability/_section.md`, and `sk-thm-sf-ctf-stability-direct-images.proof.md`. The latest direct-image paragraph (3) is the surrounding route; this item is the inherited stack-coherator prerequisite below that chain. I preserve the unit route and do not replace the direct-image proof. `tools/blueprint_refs.py ancestor lem-sfb-groupoid-maps-from-quasicoherent` returns None, reflecting the existing broken historical ancestry, so the new node retains null and extends the item's existing via list rather than inventing a blueprint ancestor. Its place specifies the actual Tag 076S comparison step.
+
+Whole-blueprint searches were run for map-from-quasi-coherent, groupoid, quasi-coherent, 076S, 075D, 076R, 0GQD, cartesian, comparison and restriction. Searches by those tags and concepts across all `dag/nodes/` found the nodes compared below; none states the general fibred-category comparison assertion. Neither item nor helper has an equal imported blueprint statement, hence same_as is empty. The smooth-atlas quasicoherent-source-maps node is only a special case of the item, not a tool proving the general case.
+
+The item's retained Q22 search records were read, including their results and verdicts. I also ran fresh Q60 msearch queries (LeanFinder, LeanSearch, Loogle and grep) for the item. For the new lemma I ran all four kinds, including two distinct LeanFinder phrasings. The exact queries and returned hit names are recorded in the JSON and searches.jsonl. All services answered. QuasicoherentData and its presentation fields only define local presentations; the scheme module pseudofunctor and SheafOfModules.pullbackComp give ordinary pullback coherence. I read Quasicoherent.lean:195-258 and PullbackContinuous.lean:83-155 to check those candidates. Neither supplies the comparison of restriction from a fibred big site to small-etale algebraic-space tests, or its cartesianness for quasi-coherent modules. The generic locally-bijective-source Hom equivalence and scalar-restriction Hom equivalence do not specialize in one line to the quotient-stack assertion.
+
+## Not duplicates
+
+lem-sfb-fibred-fppf-space-module-comparisons vs lem-sfb-stack-small-etale-comparison-calculus: the existing theorem requires an algebraic stack and proves a flat-compatibility criterion for locally quasi-coherent targets; the new theorem applies to any fibred category, including the presheaf groupoid, and asserts all base-map comparisons are invertible only for site-quasi-coherent modules.
+
+lem-sfb-fibred-fppf-space-module-comparisons vs lem-sfb-fibred-big-etale-restriction-calculus: the existing theorem treats scheme tests on a big etale site; it does not supply algebraic-space tests or the quasi-coherent comparison isomorphism for arbitrary algebraic-space maps.
+
+lem-sfb-fibred-fppf-space-module-comparisons vs lem-sfb-stack-quasi-coherent-scheme-restriction: the existing theorem treats quasi-coherent modules on scheme tests only; it does not give comparisons for arbitrary H or for algebraic-space tests such as U and R.
+
+lem-sfb-fibred-fppf-space-module-comparisons vs lem-sfb-groupoid-module-descent-tensor-cokernel: the existing theorem is descent of quasi-coherent objects and maps between them for a scheme groupoid, with tensor and cokernel clauses; the new theorem has no groupoid and compares arbitrary module sheaves on space tests of any fibred category.
+
+lem-sfb-fibred-fppf-space-module-comparisons vs lem-sfb-stack-flat-scalar-sections: the existing theorem is a global-sections flat base change theorem for a qcqs algebraic stack over an affine base; the new theorem has no qcqs or flatness assumption and makes no global-sections base change assertion.
+
+## Review by Q60
+
+I read Tag 076S, `stacks-sheaves.tex`, label lemma-map-from-quasi-coherent, statement and complete proof, including the displayed comparison diagram and omitted-verification hint. The item's equality is obtained by inverting only the two source comparisons in that diagram. Its arbitrary target, small-etale restrictions, groupoid in spaces, and flat locally finitely presented source and target maps match that source. No statement correction is needed.
+
+For the new node I read Tag 075D, lemma-comparison (all four clauses), equation-comparison-modules, Tag 076R with its following sentence, and Tag 0GQD, lemma-compare-quasi-coherent, including its proof and compatibility with pullback. Tag 06WH permits precomposition to any space test, and 0GQD identifies its quasi-coherent big-site restriction with the small-etale module and respects arbitrary pullbacks. Thus these give quasi-coherence of K_z and the asserted invertibility for a quasi-coherent K. The general comparison formula and its composition rule impose no algebraicity on the fibred category. This is a real missing lemma below the item, not its Hom assertion moved to a helper: it has neither a groupoid nor an extension-of-maps conclusion. It has no proof, proof dependencies, or proof sketch in its statement; all its notions are defined inline or have statement dependencies.
+
+Step 1 uses the statement of lem-sfb-stackification-module-equivalence, which explicitly asserts an equivalence on ALL modules, preserving quasi-coherence and with (q^*K)(y)=K(qy). This is enough to transport both F and the arbitrary H. The object/arrow description and factorization are the literal presheaf-groupoid definition appearing in the proof of 06WT before 076S. This step does not borrow an unrecorded construction from the proof of an existing node.
+
+Step 2 uses the new comparison node for quasi-coherence of F_U and invertibility of every source comparison. It uses the statement of lem-sfb-stack-quasi-coherent-scheme-restriction for F(T,u)=Gamma(T,F_(T,u)); the node really states that evaluation formula and applies to arbitrary fibred categories. H(T,u)=Gamma(T,H_(T,u)) is evaluation at the identity object of the small-etale site, so no quasi-coherence of H is needed.
+
+Step 3 uses precisely the composition formula from the new node. Substituting it into b_u proves the written special-arrow square. Step 4 uses that same formula with the two-isomorphism defining c_t; the formulas d r^*c_s=c_sr and d r^*c_t=k c_tr account for BOTH source and target identifications. Pulling back the assumed equality and conjugating by d^F yields the written square for a groupoid arrow. I checked the direction of k: it is restriction from the target object to the source object. Every general arrow is the composite already written in step 1, so no hidden groupoid descent theorem is invoked.
+
+Step 5 is elementary after the new node's naturality statement: psi_T c_u^F=c_u^H u^*psi_U forces psi_T. The same equation at s and t proves necessity of the relation. In my first draft I wrote an unnecessary local tensor-generator argument here; I replaced it by this direct naturality square, reducing the proof obligations and removing extra citations. Step 6 uses the new node's etale comparison property to recover v chartwise and the module stackification equivalence to return to [U/R]. Naturality of the resulting Hom bijection follows from uniqueness and the functoriality of restriction; no adjunction is assumed. All cited statements were reopened and their actual relevant formulas are included verbatim in citations.json.
+
+I tested the argument on the empty groupoid, the identity groupoid of a space, a group acting on a point, F=0 and H=0, and arbitrary-size local free presentations. In the empty case every component is vacuous; in the identity case the formula is the ordinary small-to-big comparison formula; for an action on a point, step 4 is precisely equivariance. For a noncartesian H every c_u^H is used only forward. None of the steps assumes R is a scheme, a global section of U exists, a cover is finite, or H is locally quasi-coherent. The new comparison statement also works for a fibred category which is not a stack. The inherited s,t hypotheses remain, even though the comparison proof is stronger and uses no flatness. I checked the identity and zero-module cases of the new statement, and it does not claim arbitrary H comparisons are isomorphisms.
+
+I checked delivery-errors B--E point by point: the new node is a self-contained statement-only lemma, all non-elementary step inputs have actual node citations, no existing node's proof is used in place of its statement, and the extension calculation remains in the item. No step exceeds 2000 characters. The earlier isolated server review_split check passed; the final dry run and direct push are performed after this report.

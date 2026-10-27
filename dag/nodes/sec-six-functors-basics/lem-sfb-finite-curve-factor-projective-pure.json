@@ -1,0 +1,419 @@
+{
+ "id": "lem-sfb-finite-curve-factor-projective-pure",
+ "kind": "statement",
+ "title": "Projectivity and pure curve fibres for a finite relative factor",
+ "statement": "Let $k$ be a field and let $S,X,T,Y$ be integral finite-type $k$-schemes. Let $f:X\\to S$ be H-projective, with $S/k$ H-projective and every geometric fibre of $f$ pure of dimension one. Let $q:T\\to S$ and $\\nu:Y\\to X$ be finite surjective $k$-morphisms. Suppose $g:Y\\to T$ is a dominant $k$-morphism with $q\\circ g=f\\circ\\nu$ and that the induced morphism $h=(\\nu,g):Y\\to X\\times_ST$ is finite. Suppose the generic fibre of $g$ over $k(T)$ is nonempty and pure of dimension one. Then $X,Y,T$ are H-projective over $k$, and $g$ is H-projective. At every $y\\in Y$ the local topological dimension of its fibre for $g$ is at least one. Every geometric fibre of $g$ is pure of dimension one. No flatness of $f$ or $g$, and no normality of these schemes, is assumed.\n\nH-projective means factoring as a closed immersion into a finite-dimensional projective space over the target followed by its projection [def-kun-projective]. Pure dimension one means that every irreducible component has topological Krull dimension one [def-weil-pure-dimension]. The local topological dimension at a point is the infimum of dimensions of its open neighbourhoods; this is not the dimension of its local ring. Dominant means having dense image. The remaining notions used are [def-weil-field], [def-pc-integral-scheme], [def-weil-finite-type-morphism], [def-weil-finite-integral-morphism], [def-sc-function-field], [def-pc-fibre-product].",
+ "source": {
+  "document": "literature/stacks-project/morphisms.tex",
+  "place": "Tags 01WE (lemma-H-projective-composition), 0B3I (lemma-finite-projective), 02FZ (lemma-openness-bounded-dimension-fibres), 02FY (lemma-dimension-fibre-after-base-change). The global graph embedding uses schemes.tex 01KR (lemma-fibre-product-after-map); the finite-over-projective input is used over the affine field base only. Upper dimension bound: algebra.tex 00OK (lemma-integral-sub-dim-equal). Agent synthesis of the graph embedding and two local fibre dimension bounds."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-pc-integral-scheme",
+  "def-weil-finite-type-morphism",
+  "def-weil-finite-integral-morphism",
+  "def-sc-function-field",
+  "def-pc-fibre-product",
+  "def-kun-projective",
+  "def-weil-pure-dimension"
+ ],
+ "proof": [
+  {
+   "text": "Compose the H-projective maps $X\\to S\\to\\operatorname{Spec}k$ to obtain H-projectivity of $X/k$. Apply the affine-base clause of finite-over-projective to $Y\\to X\\to\\operatorname{Spec}k$ and to $T\\to S\\to\\operatorname{Spec}k$: the base is affine Noetherian and the finite-type $k$-schemes $X,S$ are quasi-compact, so the required global projective embeddings are available. This proves H-projectivity of $Y/k,T/k$. Projectivity makes $S/k$ and $T/k$ proper, hence separated. Apply the finite-constant projective graph theorem with $F=k$, $R=Y$ (closed in some $\\mathbf P^N_k$), the separated $k$-scheme $T$ and $c=g$: the graph $(i,g):Y\\hookrightarrow\\mathbf P^N_T$ is a closed immersion over $T$, so $g$ is H-projective, and (taking $S'=T$) $g$ is proper. The same theorem with $R=X$, the separated $k$-scheme $S$ and $c=f$ shows that $f$ is proper.",
+   "uses": [
+    "lem-trf-h-projective-composition",
+    "lem-fin-finite-over-projective",
+    "def-pc-projective-morphism",
+    "lem-pc-projective-proper",
+    "def-weil-proper-morphism",
+    "lem-sfb-finite-constant-projective-graph"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "01WE (lemma-H-projective-composition); finite-over-projective over the affine field base; graph embedding of Tag 0C4Q (lemma-projective-permanence) as stated in lem-sfb-finite-constant-projective-graph, with schemes.tex 01KR (lemma-fibre-product-after-map)"
+   }
+  },
+  {
+   "text": "The composite of $g$ with $T\\to\\operatorname{Spec}k$ is locally of finite type by hypothesis; finite-type cancellation makes $g$ locally of finite type. Step 1 makes $g$ and $f$ proper, hence of finite type. Base change therefore makes each ordinary or geometric fibre of $g$ and of $f$ of finite type over its field. All these fibres are Noetherian, since a field is Noetherian. These observations supply the finite-type and Noetherian hypotheses in the following steps.",
+   "uses": [
+    "lem-weil-pbc-proper-fp-permanence",
+    "lem-pc-projective-proper",
+    "def-weil-proper-morphism",
+    "lem-sfb-finite-type-composition-base-change",
+    "lem-weil-pbc-finite-type-over-noetherian"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "01T4 (lemma-base-change-finite-type), 01T6 (lemma-finite-type-noetherian), and finite-type cancellation"
+   }
+  },
+  {
+   "text": "Let $\\xi$ be the generic point of the integral scheme $Y$ and $\\eta$ that of $T$, supplied by sobriety. Every nonempty open of $Y$ contains $\\xi$. Continuity gives $g(Y)\\subseteq\\overline{\\{g(\\xi)\\}}$; dominance and uniqueness of generic points imply $g(\\xi)=\\eta$. Thus $\\xi$ corresponds to a point $\\widetilde\\xi$ of $Y_\\eta$, using the fibre projection homeomorphism onto $g^{-1}(\\eta)$. The given pure dimension one of $Y_\\eta$ and the equidimensional-open local-dimension theorem, applied with the whole fibre as its open subset, give $\\dim_{\\widetilde\\xi}Y_\\eta=1$.",
+   "uses": [
+    "def-pc-integral-scheme",
+    "lem-sc-scheme-sober",
+    "def-sc-generic-point",
+    "def-pc-scheme-fibre",
+    "lem-sbc-equidimensional-open-local-dimension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "0A21 (lemma-dimension-locally-algebraic), (3),(5); generic-point identification and schemes.tex 01K1 (lemma-fibre-topological)"
+   }
+  },
+  {
+   "text": "For $y\\in Y$ write $d(y)=\\dim_{\\widetilde y}Y_{g(y)}$. The locus $U_0=\\{y:d(y)\\leq0\\}$ is open by the local-fibre-dimension openness theorem, applicable by step 2. Step 3 shows $\\xi\\notin U_0$. Since any nonempty open of $Y$ contains $\\xi$, $U_0$ is empty. Local dimension at an actual point is nonnegative, so $d(y)\\geq1$ for every $y\\in Y$. This is the asserted ordinary-fibre local lower bound; it uses neither flatness nor normality.",
+   "uses": [
+    "lem-weil-pbc-local-fibre-dimension-open",
+    "def-sc-generic-point",
+    "def-kun-topological-dimension-at-point"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "02FZ (lemma-openness-bounded-dimension-fibres); generic-point argument as in varieties.tex 0B2L (lemma-dimension-fibres-locally-algebraic)"
+   }
+  },
+  {
+   "text": "Fix a geometric point $\\bar t:\\operatorname{Spec}\\Omega\\to T$ and put $B=Y\\times_T\\operatorname{Spec}\\Omega$, $C=X\\times_S\\operatorname{Spec}\\Omega$, using $q\\bar t$ for the second map. Associativity of fibre products identifies $B\\to C$ with the base change of $h:Y\\to X\\times_ST$, so it is finite. For each $b\\in B$ with image $y\\in Y$, fibre-dimension invariance under base change identifies $\\dim_b B$ with $d(y)$, hence gives $\\dim_b B\\geq1$. The given geometric-fibre hypothesis makes $C$ pure of dimension one. If $B$ is empty the purity conclusion is vacuous; otherwise $C$ is nonempty. Applying the equidimensional-open theorem to $C$, followed by the supremum-of-local-dimensions formula, gives $\\dim C=1$.",
+   "uses": [
+    "def-pc-fibre-product",
+    "lem-weil-pbc-finite-morphism-permanence",
+    "lem-sc-fibre-dimension-after-base-change",
+    "lem-sbc-equidimensional-open-local-dimension",
+    "lem-weil-pbc-dimension-supremum-local-dimensions",
+    "def-weil-pure-dimension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "01WL (lemma-base-change-finite), 02FY (lemma-dimension-fibre-after-base-change); varieties.tex 0A21 (lemma-dimension-locally-algebraic) and topology.tex 0B7I (lemma-dimension-supremum-local-dimensions)"
+   }
+  },
+  {
+   "text": "For every $c\\in C$, the scheme-theoretic fibre $B_c$ of $B\\to C$ is finite over $\\kappa(c)$ by finite base change. The finite-over-field theorem writes it as $\\operatorname{Spec}D$ with $D$ finite-dimensional over $\\kappa(c)$. Apply the finite-algebra discrete-spectrum theorem to the local ring $R=\\kappa(c)$, whose only prime is zero: $\\operatorname{Spec}D$ is finite discrete. An irreducible nonempty closed subset of a discrete space is a singleton, so its dimension is zero when nonempty; when empty its dimension is $-\\infty$. Thus every $B_c$ has dimension at most zero.",
+   "uses": [
+    "lem-weil-pbc-finite-morphism-permanence",
+    "lem-weil-pbc-finite-over-field-affine-finite-dim",
+    "lem-weil-pbc-finite-over-zero-dim-local-discrete-spectrum",
+    "def-kun-topological-krull-dimension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "06RS (lemma-local-dimension-zero-henselian), proof, finite algebra over a dimension-zero local ring; morphisms.tex 01WH (definition-integral), 01WL (lemma-base-change-finite)"
+   }
+  },
+  {
+   "text": "Apply the fibre-and-image dimension bound to the $\\Omega$-morphism $B\\to C$: both schemes are finite type over $\\Omega$ by step 2, $\\dim C\\leq1$ by step 5, and all its fibres have dimension at most zero by step 6. With $d=1,n=0$ it gives $\\dim B\\leq1$. The whole $B$ is an open neighbourhood of any $b\\in B$, so $\\dim_bB\\leq\\dim B\\leq1$. Together with step 5 this gives $\\dim_bB=1$ everywhere. The constant-local-dimension component theorem applies because $B$ is Noetherian by step 2. Every irreducible component of $B$ therefore has dimension one, as required. The empty case was already handled in step 5.",
+   "uses": [
+    "lem-zl-finite-type-fibre-image-dimension-bounds",
+    "def-kun-topological-dimension-at-point",
+    "lem-sbc-constant-local-dimension-components"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "0B2L (lemma-dimension-fibres-locally-algebraic); topology.tex 0055 (definition-Krull), conversion from constant local dimension to component dimension"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-trf-h-projective-composition",
+  "lem-fin-finite-over-projective",
+  "def-pc-projective-morphism",
+  "lem-pc-projective-proper",
+  "def-weil-proper-morphism",
+  "lem-sfb-finite-constant-projective-graph",
+  "lem-weil-pbc-proper-fp-permanence",
+  "lem-sfb-finite-type-composition-base-change",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "def-pc-integral-scheme",
+  "lem-sc-scheme-sober",
+  "def-sc-generic-point",
+  "def-pc-scheme-fibre",
+  "lem-sbc-equidimensional-open-local-dimension",
+  "lem-weil-pbc-local-fibre-dimension-open",
+  "def-kun-topological-dimension-at-point",
+  "def-pc-fibre-product",
+  "lem-weil-pbc-finite-morphism-permanence",
+  "lem-sc-fibre-dimension-after-base-change",
+  "lem-weil-pbc-dimension-supremum-local-dimensions",
+  "def-weil-pure-dimension",
+  "lem-weil-pbc-finite-over-field-affine-finite-dim",
+  "lem-weil-pbc-finite-over-zero-dim-local-discrete-spectrum",
+  "def-kun-topological-krull-dimension",
+  "lem-zl-finite-type-fibre-image-dimension-bounds",
+  "lem-sbc-constant-local-dimension-components"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/morphisms.tex",
+  "place": "Assembly of existing DAG statements: affine-base finite-over-projective and graph embedding; 02FZ generic-point lower bound; 02FY geometric base change; finite discrete fibres and 0B2L upper bound."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A finite cover of an integral projective family of pure curves factoring through a finite integral base change is projective over the new base and has pure one dimensional geometric fibres if its generic fibre is pure one dimensional",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Proj.instUniversallyClosedToSpecZeroOfFiniteTypeSubtypeMemOfNatNat\", \"module\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Proper\", \"type\": \"∀ {σ : Type u_1} {A : Type u_2} [inst : CommRing A] [inst_1 : SetLike σ A] [inst_2 : AddSubgroupClass σ A] (𝒜 : ℕ → σ)\\n  [inst_3 : GradedRing 𝒜] [Algebra.FiniteType (↥(𝒜 0)) A],\\n  AlgebraicGeometry.UniversallyClosed (AlgebraicGeometry.Proj.toSpecZero 𝒜)\", \"doc\": \"For a graded ring $\\\\mathcal{A}$ whose zero-graded component $\\\\mathcal{A}_0$ is a finite type algebra over a base ring $A$, the canonical morphism $\\\\operatorname{Proj}(\\\\mathcal{A}) \\\\to \\\\operatorname{Sp\"}\n  {\"name\": \"AlgebraicGeometry.Proj.instIsProperToSpecZeroOfFiniteTypeSubtypeMemOfNatNat\", \"module\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Proper\", \"type\": \"∀ {σ : Type u_1} {A : Type u_2} [inst : CommRing A] [inst_1 : SetLike σ A] [inst_2 : AddSubgroupClass σ A] (𝒜 : ℕ → σ)\\n  [inst_3 : GradedRing 𝒜] [Algebra.FiniteType (↥(𝒜 0)) A],\\n  AlgebraicGeometry.IsProper (AlgebraicGeometry.Proj.toSpecZero 𝒜)\", \"doc\": \"If the zero-graded component $ \\\\mathcal{A}_0 $ of a graded ring $ \\\\mathcal{A} $ is a finitely generated $ A $-algebra, then the canonical morphism from the projective spectrum $ \\\\operatorname{Proj}(\\\\m\"}\n  {\"name\": \"AlgebraicGeometry.finite_appTop_of_universallyClosed\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Proper\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} (K : Type u) [inst : Field K]\\n  (f : X ⟶ AlgebraicGeometry.Spec { carrier := K, commRing := Field.toEuclideanDomain.toCommRing })\\n  [AlgebraicGeometry.IsIntegral X] [AlgebraicGeometry.UniversallyClosed f] [AlgebraicGeometry.LocallyOfFiniteType f],\\n  (CommRingCat.Hom.\", \"doc\": \"Let $K$ be a field, and let $f: X \\\\to \\\\operatorname{Spec}(K)$ be a morphism from an integral scheme $X$. If $f$ is universally closed and locally of finite type, then the ring of global sections of $X\"}\n  {\"name\": \"AlgebraicGeometry.IsIntegralHom.instSndScheme\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Integral\", \"type\": \"∀ {X Y S : AlgebraicGeometry.Scheme} (f : X ⟶ S) (g : Y ⟶ S) [AlgebraicGeometry.IsIntegralHom f],\\n  AlgebraicGeometry.IsIntegralHom (CategoryTheory.Limits.pullback.snd f g)\", \"doc\": \"In the category of schemes, if $ f: X \\to S $ is an integral morphism and $ g: Y \\to S $ is any morphism, then the second projection morphism from the pullback $ X \\times_S Y $ to $ Y $ is also integral.\"}\n  {\"name\": \"AlgebraicGeometry.IsFinite.instIsStableUnderBaseChangeScheme\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Finite\", \"type\": \"CategoryTheory.MorphismProperty.IsStableUnderBaseChange @AlgebraicGeometry.IsFinite\", \"doc\": \"The property of being a finite morphism of schemes is stable under base change. That is, if $ f : X \\to Y $ is a finite morphism of schemes and $ Y' \\to Y $ is any morphism of schemes, then the base cha\"}\n  {\"name\": \"AlgebraicGeometry.IsIntegralHom.instFstScheme\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Integral\", \"type\": \"∀ {X Y S : AlgebraicGeometry.Scheme} (f : X ⟶ S) (g : Y ⟶ S) [AlgebraicGeometry.IsIntegralHom g],\\n  AlgebraicGeometry.IsIntegralHom (CategoryTheory.Limits.pullback.fst f g)\", \"doc\": \"In the category of schemes, for any pair of morphisms $ f : X \\\\to Z $ and $ g : Y \\\\to Z $, the pullback of $ f $ and $ g $ exists. This asserts that the category of schemes admits pullbacks for all co\"}\n  {\"name\": \"AlgebraicGeometry.Proj.isSeparated\", \"module\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Proper\", \"type\": \"∀ {σ : Type u_1} {A : Type u_2} [inst : CommRing A] [inst_1 : SetLike σ A] [inst_2 : AddSubgroupClass σ A] (𝒜 : ℕ → σ)\\n  [inst_3 : GradedRing 𝒜], AlgebraicGeometry.IsSeparated (AlgebraicGeometry.Proj.toSpecZero 𝒜)\", \"doc\": \"The canonical morphism from the projective spectrum $\\\\operatorname{Proj}(\\\\mathcal{A})$ of a graded ring $\\\\mathcal{A}$ to the affine scheme $\\\\operatorname{Spec}(\\\\mathcal{A}_0)$, where $\\\\mathcal{A}_0$ i\"}\n  {\"name\": \"AlgebraicGeometry.IsFinite.instSndScheme\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Finite\", \"type\": \"∀ {X Y Z : AlgebraicGeometry.Scheme} (f : X ⟶ Z) (g : Y ⟶ Z) [AlgebraicGeometry.IsFinite f],\\n  AlgebraicGeometry.IsFinite (CategoryTheory.Limits.pullback.snd f g)\", \"doc\": \"In the category of schemes, for any pair of morphisms $ f : X \\\\to Z $ and $ g : Y \\\\to Z $, the pullback $ X \\\\times_Z Y $ exists. This asserts that the category of schemes admits pullbacks for all cosp\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: read the returned declarations; they give only individual normalization, finiteness or properness facts, not this statement or a one-line specialization"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"IsHProjective\", \"IsFinite\"",
+   "results": "[loogle] OK 0 hit(s)",
+   "date": "2026-10-22",
+   "verdict": "no match: read the returned declarations; they give only individual normalization, finiteness or properness facts, not this statement or a one-line specialization"
+  },
+  {
+   "tool": "grep",
+   "query": "(IsHProjective|IsPureDimension|fiberDimension).*([Ff]inite|[Cc]omp)|([Ff]inite|[Cc]omp).*(IsHProjective|IsPureDimension|fiberDimension)",
+   "results": "[grep] OK 0 hit(s)",
+   "date": "2026-10-22",
+   "verdict": "no match: read the returned declarations; they give only individual normalization, finiteness or properness facts, not this statement or a one-line specialization"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Pure dimension one fibres of a finite morphism of integral projective families from openness of bounded local fibre dimension and integral extension dimension equality",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.IsFinite.recOn\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Finite\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} →\\n  {f : X ⟶ Y} →\\n    {motive : AlgebraicGeometry.IsFinite f → Sort u} →\\n      (t : AlgebraicGeometry.IsFinite f) →\\n        ([toIsAffineHom : AlgebraicGeometry.IsAffineHom f] →\\n            (finite_app :\\n                ∀ (U : Y.Opens),\\n                  AlgebraicGeom\", \"doc\": \"A morphism $ f : X \\\\to Y $ of schemes is finite if it is affine and for every affine open subset $ U \\\\subseteq Y $, the induced ring homomorphism $ \\\\Gamma(Y, U) \\\\to \\\\Gamma(X, f^{-1}(U)) $ is finite, m\"}\n  {\"name\": \"AlgebraicGeometry.IsFinite.finite_preimage_singleton\", \"module\": \"Mathlib.AlgebraicGeometry.Fiber\", \"type\": \"(f : X ⟶ Y) [IsFinite f] (y : Y) : (f ⁻¹' { y }).Finite\", \"doc\": \"Let $f: X \\\\to Y$ be a finite morphism of schemes. For any point $y \\\\in Y$, the fiber $f^{-1}(\\\\{y\\\\})$ is a finite set.\"}\n  {\"name\": \"AlgebraicGeometry.IsFinite.iff_isIntegralHom_and_locallyOfFiniteType\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Finite\", \"type\": \": IsFinite f ↔ IsIntegralHom f ∧ LocallyOfFiniteType f\", \"doc\": \"For a morphism $ f: X \\\\to Y $ of schemes, $ f $ is finite if and only if $ f $ is integral and locally of finite type.\"}\n  {\"name\": \"AlgebraicGeometry.instLocallyQuasiFiniteOfIsFinite\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.QuasiFinite\", \"type\": \"[IsFinite f] : LocallyQuasiFinite f\", \"doc\": \"Every finite morphism of schemes is quasi-finite. That is, if $ f: X \\to Y $ is a finite morphism of schemes, then $ f $ satisfies the conditions of being quasi-finite, which typically requires it to b\"}\n  {\"name\": \"Ring.DimensionLEOne.integralClosure\", \"module\": \"Mathlib.RingTheory.DedekindDomain.Basic\", \"type\": \"[Nontrivial R] [IsDomain A] [Algebra R A] [DimensionLEOne R] : DimensionLEOne (integralClosure R A)\", \"doc\": \"Let $ R $ be a nontrivial commutative ring with Krull dimension at most one, and let $ A $ be an $ R $-algebra that is a domain. Then, the integral closure of $ R $ in $ A $ also has Krull dimension a\"}\n  {\"name\": \"Ring.DimensionLEOne.isIntegralClosure\", \"module\": \"Mathlib.RingTheory.DedekindDomain.Basic\", \"type\": \"(B : Type*) [CommRing B] [IsDomain B] [Nontrivial R] [Algebra R A] [Algebra R B] [Algebra B A] [IsScalarTower R B A]\\n  [IsIntegralClosure B R A] [DimensionLEOne R] : DimensionLEOne B\", \"doc\": \"If $ R $ is a commutative ring with Krull dimension at most one, $ B $ is the integral closure of $ A $ over $ R $, and the necessary algebra and scalar tower conditions hold, then $ B $ also has Krul\"}\n  {\"name\": \"AlgebraicGeometry.instFiniteCarrierCarrierCommRingCatFiberOfIsFinite\", \"module\": \"Mathlib.AlgebraicGeometry.Fiber\", \"type\": \"(f : X ⟶ Y) (y : Y) [IsFinite f] : Finite (f.fiber y)\", \"doc\": \"Given a finite morphism of schemes $f: X \\\\to Y$, the fiber over any point $y \\\\in Y$ has a finite underlying set of points.\"}\n  {\"name\": \"AlgebraicGeometry.IsIntegralHom.instUniversallyClosed\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Integral\", \"type\": \"(f : X ⟶ Y) [IsIntegralHom f] : UniversallyClosed f\", \"doc\": \"Every integral morphism $ f: X \\to Y $ of schemes is universally closed. This instance asserts that if a morphism of schemes is integral, then it satisfies the condition that all base changes of the mo\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: read the returned declarations; they give only individual normalization, finiteness or properness facts, not this statement or a one-line specialization"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "If an integral finite cover of a projective curve family has generic fibre dimension one then all its geometric fibres are pure dimension one without assuming flatness",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.AffineSpace.not_isIntegralHom\", \"module\": \"Mathlib/AlgebraicGeometry/AffineSpace\", \"type\": \"∀ {n : Type v} (S : AlgebraicGeometry.Scheme) [Nonempty ↥S] [Nonempty n],\\n  ¬AlgebraicGeometry.IsIntegralHom (AlgebraicGeometry.AffineSpace n S ↘ S)\", \"doc\": \"For any nonempty scheme $ S $ and nonempty type $ n $, the canonical morphism from the affine $ n $-space $ \\\\mathbb{A}^n_S $ to $ S $ is not an integral morphism of schemes.\"}\n  {\"name\": \"AlgebraicGeometry.finite_appTop_of_universallyClosed\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Proper\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} (K : Type u) [inst : Field K]\\n  (f : X ⟶ AlgebraicGeometry.Spec { carrier := K, commRing := Field.toEuclideanDomain.toCommRing })\\n  [AlgebraicGeometry.IsIntegral X] [AlgebraicGeometry.UniversallyClosed f] [AlgebraicGeometry.LocallyOfFiniteType f],\\n  (CommRingCat.Hom.\", \"doc\": \"Let $K$ be a field, and let $f: X \\\\to \\\\operatorname{Spec}(K)$ be a morphism from an integral scheme $X$. If $f$ is universally closed and locally of finite type, then the ring of global sections of $X\"}\n  {\"name\": \"AlgebraicGeometry.isField_of_universallyClosed\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Proper\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} (K : Type u) [inst : Field K]\\n  (f : X ⟶ AlgebraicGeometry.Spec { carrier := K, commRing := Field.toEuclideanDomain.toCommRing })\\n  [AlgebraicGeometry.IsIntegral X] [AlgebraicGeometry.UniversallyClosed f], IsField ↑(X.presheaf.obj (Opposite.op ⊤))\", \"doc\": \"If $X$ is an integral scheme and the morphism $f: X \\\\to \\\\operatorname{Spec}(K)$ is universally closed, then the ring of global sections $\\\\Gamma(X, \\\\mathcal{O}_X)$ is a field.\"}\n  {\"name\": \"AlgebraicGeometry.Proj.instUniversallyClosedToSpecZeroOfFiniteTypeSubtypeMemOfNatNat\", \"module\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Proper\", \"type\": \"∀ {σ : Type u_1} {A : Type u_2} [inst : CommRing A] [inst_1 : SetLike σ A] [inst_2 : AddSubgroupClass σ A] (𝒜 : ℕ → σ)\\n  [inst_3 : GradedRing 𝒜] [Algebra.FiniteType (↥(𝒜 0)) A],\\n  AlgebraicGeometry.UniversallyClosed (AlgebraicGeometry.Proj.toSpecZero 𝒜)\", \"doc\": \"For a graded ring $\\\\mathcal{A}$ whose zero-graded component $\\\\mathcal{A}_0$ is a finite type algebra over a base ring $A$, the canonical morphism $\\\\operatorname{Proj}(\\\\mathcal{A}) \\\\to \\\\operatorname{Sp\"}\n  {\"name\": \"Algebra.IsStandardSmoothOfRelativeDimension.out\", \"module\": \"Mathlib/RingTheory/Smooth/StandardSmooth\", \"type\": \"∀ {n : ℕ} {R : Type u} {S : Type v} {inst : CommRing R} {inst_1 : CommRing S} {inst_2 : Algebra R S}\\n  [self : Algebra.IsStandardSmoothOfRelativeDimension n R S],\\n  ∃ ι σ, ∃ (x : Finite σ) (_ : Finite ι), ∃ P, P.dimension = n\", \"doc\": \"For any commutative ring $ R $, commutative ring $ S $ with an $ R $-algebra structure, and natural number $ n $, if $ S $ is a standard smooth algebra of relative dimension $ n $ over $ R $, then the\"}\n  {\"name\": \"AlgebraicGeometry.AffineSpace.isIntegralHom_over_iff_isEmpty\", \"module\": \"Mathlib/AlgebraicGeometry/AffineSpace\", \"type\": \"∀ {n : Type v} (S : AlgebraicGeometry.Scheme),\\n  AlgebraicGeometry.IsIntegralHom (AlgebraicGeometry.AffineSpace n S ↘ S) ↔ IsEmpty ↥S ∨ IsEmpty n\", \"doc\": \"The structure morphism of the affine space $\\\\mathbb{A}^n_S$ over a scheme $S$ is an integral morphism if and only if the base scheme $S$ is empty or the type $n$ is empty.\"}\n  {\"name\": \"AlgebraicGeometry.instFiniteCarrierCarrierCommRingCatFiberOfIsFinite\", \"module\": \"Mathlib/AlgebraicGeometry/Fiber\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) (y : ↥Y) [AlgebraicGeometry.IsFinite f],\\n  Finite ↥(AlgebraicGeometry.Scheme.Hom.fiber f y)\", \"doc\": \"Given a finite morphism of schemes $f: X \\\\to Y$, the fiber over any point $y \\\\in Y$ has a finite underlying set of points.\"}\n  {\"name\": \"AlgebraicGeometry.IsSmoothOfRelativeDimension\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"ℕ → {X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"For a natural number $n$ and a morphism $f: X \\\\to Y$ of schemes, the proposition that $f$ is smooth of relative dimension $n$.\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: read the returned declarations; they give only individual normalization, finiteness or properness facts, not this statement or a one-line specialization"
+  },
+  {
+   "tool": "grep",
+   "query": "IsFinite.*[Dd]im|[Dd]im.*[Ii]sFinite|krullDim.*[Ii]ntegral|[Ii]ntegral.*krullDim",
+   "results": "[grep] OK 6 hit(s); Mathlib/AlgebraicGeometry/ZariskisMainTheorem.lean, Mathlib/AlgebraicGeometry/Morphisms/Finite.lean, Mathlib/AlgebraicGeometry/Morphisms/Finite.lean, Mathlib/AlgebraicGeometry/Morphisms/Finite.lean, Mathlib/AlgebraicGeometry/Morphisms/Finite.lean, Mathlib/AlgebraicGeometry/Morphisms/Finite.lean",
+   "date": "2026-10-23",
+   "verdict": "no match: inspected returned declarations; finite/proper morphism and subspace dimension infrastructure do not state the item or a one-line specialization"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The topological dimension of the source of a finite morphism of schemes is at most the dimension of the target",
+   "results": "[leansearch] OK 8 hit(s); IsInducing.topologicalKrullDim_le, IsClosedEmbedding.topologicalKrullDim_le, AlgebraicGeometry.IsFinite.recOn, AlgebraicGeometry.IsFinite.finite_app, AlgebraicGeometry.Scheme.Hom.finite_app, AlgebraicGeometry.instLocallyQuasiFiniteOfIsFinite, AlgebraicGeometry.IsFinite.toIsAffineHom, AlgebraicGeometry.IsFinite.finite_preimage_singleton",
+   "date": "2026-10-23",
+   "verdict": "no match: inspected returned declarations; finite/proper morphism and subspace dimension infrastructure do not state the item or a one-line specialization"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"IsFinite\", \"topologicalKrullDim\"",
+   "results": "[loogle] OK 0 hit(s); ",
+   "date": "2026-10-23",
+   "verdict": "no match: inspected returned declarations; finite/proper morphism and subspace dimension infrastructure do not state the item or a one-line specialization"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A finite morphism of schemes does not increase topological Krull dimension of the source relative to its target",
+   "results": "[leanfinder] OK 8 hit(s); AlgebraicGeometry.IsFinite, AlgebraicGeometry.instLocallyQuasiFiniteOfIsFinite, AlgebraicGeometry.instFiniteCarrierCarrierCommRingCatFiberOfIsFinite, AlgebraicGeometry.instIsProperOfIsFinite, AlgebraicGeometry.IsFinite.finite_preimage_singleton, AlgebraicGeometry.IsProper.instOfIsFinite, AlgebraicGeometry.IsFinite.instLocallyOfFiniteType, AlgebraicGeometry.IsFinite.instIsIntegralHom",
+   "date": "2026-10-23",
+   "verdict": "no match: inspected returned declarations; finite/proper morphism and subspace dimension infrastructure do not state the item or a one-line specialization"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a quasi finite morphism of schemes the dimension of the source is bounded by the dimension of the target",
+   "results": "[leanfinder] OK 8 hit(s); AlgebraicGeometry.LocallyQuasiFinite, AlgebraicGeometry.LocallyQuasiFinite.quasiFinite_appLE, AlgebraicGeometry.instLocallyQuasiFiniteOfIsFinite, AlgebraicGeometry.instHasRingHomPropertyLocallyQuasiFiniteQuasiFinite, AlgebraicGeometry.LocallyQuasiFinite.of_comp, AlgebraicGeometry.IsFinite, AlgebraicGeometry.locallyQuasiFinite_iff, AlgebraicGeometry.instIsMultiplicativeSchemeLocallyQuasiFinite",
+   "date": "2026-10-23",
+   "verdict": "no match: inspected returned declarations; finite/proper morphism and subspace dimension infrastructure do not state the item or a one-line specialization"
+  },
+  {
+   "tool": "grep",
+   "query": "topologicalKrullDim|krullDim",
+   "results": "[grep] OK 0 hit(s); ",
+   "date": "2026-10-23",
+   "verdict": "no match: inspected returned declarations; finite/proper morphism and subspace dimension infrastructure do not state the item or a one-line specialization"
+  },
+  {
+   "tool": "grep",
+   "query": "(IsHProjective|IsPureDimension|fiberDimension).*([Ff]inite|[Cc]omp)|([Ff]inite|[Cc]omp).*(IsHProjective|IsPureDimension|fiberDimension)",
+   "results": "[grep] OK 0 hit(s); ",
+   "date": "2026-10-23",
+   "verdict": "no match: inspected returned declarations; finite/proper morphism and subspace dimension infrastructure do not state the item or a one-line specialization"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"IsProjective\", \"IsFinite\"",
+   "results": "[loogle] OK 0 hit(s); ",
+   "date": "2026-10-23",
+   "verdict": "no match: inspected returned declarations; finite/proper morphism and subspace dimension infrastructure do not state the item or a one-line specialization"
+  },
+  {
+   "tool": "leansearch",
+   "query": "An integral finite cover of a projective curve family whose generic fibre has dimension one has pure one dimensional geometric fibres without flatness",
+   "results": "[leansearch] OK 8 hit(s); AlgebraicGeometry.IsIntegralHom.hasAffineProperty, AlgebraicGeometry.instFiniteCarrierCarrierCommRingCatFiberOfIsFinite, AlgebraicGeometry.IsIntegralHom.instUniversallyClosed, AlgebraicGeometry.IsFinite.iff_isIntegralHom_and_locallyOfFiniteType, AlgebraicGeometry.IsFinite.instIsIntegralHom, AlgebraicGeometry.Flat.mk, AlgebraicGeometry.Flat.casesOn, AlgebraicGeometry.Flat.instIsMultiplicativeScheme",
+   "date": "2026-10-23",
+   "verdict": "no match: inspected returned declarations; finite/proper morphism and subspace dimension infrastructure do not state the item or a one-line specialization"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A finite cover of an integral projective family of pure curves factoring through a finite base change is projective over the new base with pure one dimensional geometric fibres",
+   "results": "[leanfinder] OK 8 hit(s); AlgebraicGeometry.Proj.instUniversallyClosedToSpecZeroOfFiniteTypeSubtypeMemOfNatNat, AlgebraicGeometry.Proj.instIsProperToSpecZeroOfFiniteTypeSubtypeMemOfNatNat, AlgebraicGeometry.IsFinite.instIsStableUnderBaseChangeScheme, AlgebraicGeometry.locallyOfFiniteType_isStableUnderBaseChange, AlgebraicGeometry.IsFinite.instSndScheme, AlgebraicGeometry.instLocallyOfFiniteTypeSndScheme, AlgebraicGeometry.Proj.isSeparated, AlgebraicGeometry.IsFinite.instFstScheme",
+   "date": "2026-10-23",
+   "verdict": "no match: inspected returned declarations; finite/proper morphism and subspace dimension infrastructure do not state the item or a one-line specialization"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Integral finite relative factors of equidimensional projective curve fibrations remain projective and have constant local fibre dimension one by openness of bounded fibre dimension",
+   "results": "[leanfinder] OK 8 hit(s); WeierstrassCurve.integralModel, WeierstrassCurve.IsIntegral.integral, WeierstrassCurve.exists_isIntegral, AlgebraicGeometry.instFiniteCarrierCarrierCommRingCatFiberOfIsFinite, AlgebraicGeometry.Proj.instIsProperToSpecZeroOfFiniteTypeSubtypeMemOfNatNat, AlgebraicGeometry.finite_appTop_of_universallyClosed, AlgebraicGeometry.Proj.instUniversallyClosedToSpecZeroOfFiniteTypeSubtypeMemOfNatNat, WeierstrassCurve.IsIntegral",
+   "date": "2026-10-23",
+   "verdict": "no match: inspected returned declarations; finite/proper morphism and subspace dimension infrastructure do not state the item or a one-line specialization"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-finite-normal-relative-curve-model",
+  "date": "2026-10-22",
+  "group": "Q93"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong §§3.2--3.6, printed pp.605--608: finite separable constant extension, invariant Kummer cover and normalization, then rationalization of the generic marking. For a zero-dimensional base use §3.3 and a smooth covering of genus at least two. The kernel fixed-field statements are the fibre-product group construction in §3.5, rather than just the full-group invariant statement.; auxiliary de Jong §§3.2 and 3.5, pp.605,607--608, finite normalization and constant-field models. The relative purity and the full fibre-product surjectivity are the finite normal-model assertions used there; no flatness is claimed. Finiteness itself is already lem-fin-normalization-extension-finite. Local PDF WANTED; publisher PDF read.; extracted arguments of the returned split, steps 5, 7, 8: Projectivity and pure curve fibres for a finite relative factor.",
+   "via": [
+    "lem-sfb-finite-normal-relative-curve-model",
+    "lem-sfb-high-genus-equivariant-cover",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-finite-curve-factor-projective-pure",
+  "worker": "stage1",
+  "summary": "Repair of the refused landing at 79b882960db: rechecked the retained seven-step split against the current unsplit DAG and all 26 current proof-dependency statements; all 32 retained citation quotes still agree verbatim. Retains the statement, provenance, search history and proof route, and replaces generic tool-use explanations by the exact step and clause used. The delivery tool rebases this completed split onto the current server DAG for live promotion; no new nodes or Lean edits.",
+  "blueprint": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong §§3.2--3.6, printed pp.605--608: finite separable constant extension, invariant Kummer cover and normalization, then rationalization of the generic marking. For a zero-dimensional base use §3.3 and a smooth covering of genus at least two. The kernel fixed-field statements are the fibre-product group construction in §3.5, rather than just the full-group invariant statement.; auxiliary de Jong §§3.2 and 3.5, pp.605,607--608, finite normalization and constant-field models. The relative purity and the full fibre-product surjectivity are the finite normal-model assertions used there; no flatness is claimed. Finiteness itself is already lem-fin-normalization-extension-finite. Local PDF WANTED; publisher PDF read.; extracted arguments of the returned split, steps 5, 7, 8: Projectivity and pure curve fibres for a finite relative factor.",
+  "tool_uses": [
+   {
+    "node": "lem-trf-h-projective-composition",
+    "why": "Step 1 composes the two global projective-space embeddings for X/S/k. This is a general projectivity tool, not an alternative to the alteration construction of this unit."
+   },
+   {
+    "node": "lem-fin-finite-over-projective",
+    "why": "Step 1 uses only the affine-base conclusion over Spec k, first for Y over X and then for T over S. The unit has no finite-cover projectivity theorem of its own."
+   },
+   {
+    "node": "lem-pc-projective-proper",
+    "why": "Step 1 uses projective implies proper to obtain separatedness of S/k and T/k for the graph theorem; step 2 then uses properness of f and g to get finite type. This general implication does not replace an alteration step."
+   },
+   {
+    "node": "lem-weil-pbc-proper-fp-permanence",
+    "why": "Step 2 uses precisely clause (f), cancellation of local finite type from Y/k through T/k. It is a general scheme-morphism tool absent from the unit."
+   },
+   {
+    "node": "lem-sfb-finite-type-composition-base-change",
+    "why": "Step 2 uses finite-type base change to ordinary and geometric fibres. This is a general property of finite-type morphisms, not a replacement of the alteration route."
+   },
+   {
+    "node": "lem-weil-pbc-finite-type-over-noetherian",
+    "why": "Step 2 applies finite type over a Noetherian base to the field-valued fibres. The unit has no separate Noetherianity theorem."
+   },
+   {
+    "node": "lem-sc-scheme-sober",
+    "why": "Step 3 obtains the unique generic points of the integral schemes Y and T. Scheme sobriety is a general topological tool, not a curve-alteration assertion."
+   },
+   {
+    "node": "lem-sbc-equidimensional-open-local-dimension",
+    "why": "Steps 3 and 5 convert componentwise purity of the generic fibre and C into pointwise local topological dimension. This generic dimension comparison is not supplied by the unit."
+   },
+   {
+    "node": "lem-weil-pbc-local-fibre-dimension-open",
+    "why": "Step 4 uses the upstairs open locus of fibre dimension at most zero to propagate the generic lower bound. This general local-finite-type theorem is not a curve-factor purity assertion."
+   },
+   {
+    "node": "lem-weil-pbc-finite-morphism-permanence",
+    "why": "Steps 5 and 6 base change the assumed finite h, and then its geometric-base-change map to each residual fibre. The unit has no finite-base-change theorem of its own."
+   },
+   {
+    "node": "lem-sc-fibre-dimension-after-base-change",
+    "why": "Step 5 uses equality of local topological fibre dimensions after geometric base change. This general dimension invariance is not supplied by the alteration construction."
+   },
+   {
+    "node": "lem-weil-pbc-dimension-supremum-local-dimensions",
+    "why": "Step 5 deduces dim C = 1 from constant local dimension and nonemptiness. This general topological identity is absent from the unit."
+   },
+   {
+    "node": "lem-weil-pbc-finite-over-field-affine-finite-dim",
+    "why": "Step 6 writes a finite fibre over kappa(c) as the spectrum of a finite-dimensional algebra. This general affine algebra description does not assert the item or any purity clause."
+   },
+   {
+    "node": "lem-weil-pbc-finite-over-zero-dim-local-discrete-spectrum",
+    "why": "Step 6 applies this finite-algebra theorem with R = kappa(c) to prove discrete zero-dimensional fibres. This is a general algebraic input, not a curve-factor purity theorem."
+   },
+   {
+    "node": "lem-zl-finite-type-fibre-image-dimension-bounds",
+    "why": "Step 7 uses only the second inequality, with d = 1 and n = 0, for B to C. The unit gives no general finite-type fibre/image dimension estimate."
+   },
+   {
+    "node": "lem-sbc-constant-local-dimension-components",
+    "why": "Step 7 converts constant local dimension on the Noetherian geometric fibre B into componentwise purity. It is a general topological conversion and does not establish the preceding dimension bounds."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-trf-h-projective-composition",
+  "lem-fin-finite-over-projective",
+  "lem-pc-projective-proper",
+  "lem-weil-pbc-proper-fp-permanence",
+  "lem-sfb-finite-type-composition-base-change",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-sc-scheme-sober",
+  "lem-sbc-equidimensional-open-local-dimension",
+  "lem-weil-pbc-local-fibre-dimension-open",
+  "lem-weil-pbc-finite-morphism-permanence",
+  "lem-sc-fibre-dimension-after-base-change",
+  "lem-weil-pbc-dimension-supremum-local-dimensions",
+  "lem-weil-pbc-finite-over-field-affine-finite-dim",
+  "lem-weil-pbc-finite-over-zero-dim-local-discrete-spectrum",
+  "lem-zl-finite-type-fibre-image-dimension-bounds",
+  "lem-sbc-constant-local-dimension-components"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q19-89af32302",
+  "group": "Q19",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q19-89af32302 (reviewer sub-agent of L); spot-checked: This head (89af) is the earlier reviewed head 79b8 with only split_report changed: a new summary and new tool_use explanations. The statement, the 7 proof steps and proof_deps are byte-identical. The step-1 FIX of the earlier review (79b8, verdict FIX) is therefore missing; it was lost when the landing was refused, and I re-applied it. Mechanical Artin-Gabber finding upheld: lem-per-h-projective-permanence is still on clones/live/coord/route-pivot-dropped.txt line 1626, and the delivery does not justify using it. Step 1 now cites lem-sfb-finite-constant-projective-graph, a node of the same unit sk-thm-sf-ctf-stability, applied with F=k, R=Y (projective over k by lem-fin-finite-over-projective over the affine base Spec k), S=T (separated because T/k is projective, hence proper) and c=g. This gives a closed graph immersion Y into P^N_T, so g is H-projective, and with S'=T, g is proper. The same node with R=X and c=f gives f proper, which supplies the finite type of f in step 2. The dropped node is removed from proof_deps and split_report.tool_uses. proof_deps equals the union of step uses (26 nodes), and I updated the lem-pc-projective-proper tool_use explanation. Batch-5 flag lem-trf-h-projective-composition (Stacks 01WE) is a generic composition lemma, not a step of the trace formula or Poincare duality: accepted. No SGA, no new nodes, no repair note, so this is not a re-split. The statement equals the live unsplit node. I re-read every cited statement in this snapshot. Step 3: the generic point maps to the generic point of T by continuity, dominance and sobriety; 0A21 gives local dimension 1 on the generic fibre. Step 4: the 02FZ locus U_0 is open in Y and misses the generic point, so it is empty and d(y)>=1. Step 5: B->C is a base change of h, hence finite; 02FY gives dim_b B=d(y); C is pure of dimension 1, so dim C=1. Step 6: fibres of B->C are Spec of finite kappa(c)-algebras, hence finite discrete. Step 7: 0B2L with d=1, n=0 gives dim B<=1, and constant local dimension on the Noetherian B gives pure dimension 1. Edge cases checked: identity on P^1, inseparable covers with nonreduced fibres, empty B, non-surjective h. lem-trf-finite-dominant-fibre-purity is not a duplicate. Fixed file: fixes/dag/nodes/sec-six-functors-basics/lem-sfb-finite-curve-factor-projective-pure.json.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.FiniteCurveFactorProjectivePure",
+  "declaration": "AlgebraicGeometry.finite_curve_factor_projective_pure",
+  "file": "lean/Sheaf/AlgebraicGeometry/FiniteCurveFactorProjectivePure.lean",
+  "statement": "theorem finite_curve_factor_projective_pure (k : Type u) [Field k] {S X T Y : Scheme.{u}} (pS : S ⟶ Spec (.of k)) (pX : X ⟶ Spec (.of k)) (pT : T ⟶ Spec (.of k)) (pY : Y ⟶ Spec (.of k)) (f : X ⟶ S) (q : T ⟶ S) (ν : Y ⟶ X) (g : Y ⟶ T) (hf : f ≫ pS = pX) (hq : q ≫ pS = pT) (hν : ν ≫ pX = pY) (hg : g ≫ pT = pY) [IsIntegral S] [IsIntegral X] [IsIntegral T] [IsIntegral Y] [LocallyOfFiniteType pS] [QuasiCompact pS] [LocallyOfFiniteType pX] [QuasiCompact pX] [LocallyOfFiniteType pT] [QuasiCompact pT] [LocallyOfFiniteType pY] [QuasiCompact pY] [IsHProjective f] [IsHProjective pS] [IsFinite q] [Surjective q] [IsFinite ν] [Surjective ν] [IsDominant g] (hcompat : ν ≫ f = g ≫ q) (hfinite : IsFinite (pullback.lift ν g hcompat)) (hfib : ∀ (Ω : Type u) [Field Ω] [IsAlgClosed Ω] (s : Spec (.of Ω) ⟶ S), Scheme.IsPureDimension (pullback (C := Scheme.{u}) f s) 1) (hgGeneric : Nonempty (pullback (C := Scheme.{u}) g T.fromSpecFunctionField) ∧ Scheme.IsPureDimension (pullback (C := Scheme.{u}) g T.fromSpecFunctionField) 1) : IsHProjective pX ∧ IsHProjective pY ∧ IsHProjective pT ∧ IsHProjective g ∧ (∀ y : Y, ((1 : ℕ) : WithBot ℕ∞) ≤ topologicalKrullDimAt (g.asFiber y)) ∧ (∀ (Ω : Type u) [Field Ω] [IsAlgClosed Ω] (t : Spec (.of Ω) ⟶ T), Scheme.IsPureDimension (pullback (C := Scheme.{u}) g t) 1)",
+  "branch": "newtargets-dag",
+  "by": "NR",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-521a3e65e",
+  "group": "NR",
+  "result": "pass",
+  "note": "Lean matches the node clause by clause: 4 integral finite-type k-schemes via structure maps; IsHProjective f and pS; geometric-fibre purity of f quantified over every algebraically closed Omega:Type u and every point Spec Omega -> S; finite surjective q and nu; IsDominant g; hcompat; IsFinite of the canonical pullback.lift; generic fibre over T.fromSpecFunctionField nonempty and pure of dim 1. Conclusions: pX, pY, pT, g H-projective; 1 <= topologicalKrullDimAt (g.asFiber y) (local topological dimension, not the local ring); geometric fibres of g pure of dim 1. No extra hypotheses and no flatness or normality binder. Universes all u with autoImplicit false. lean.statement verbatim. Only the lean field changed against the live node; no new nodes, dependency modules or corrections. The recorded declarations were read live: IsHProjective, IsPureDimension (vacuous on the empty scheme), topologicalKrullDimAt, fromSpecFunctionField, the def-sc-function-field integral clause. Empty-fibre and generic-nonempty edge cases are handled. Proof deps are plain imports; all 8 modules exist and none cites this item. Docstrings give the source tags, the blueprint id and the 7-step proof. Only proof is sorry. Note only: the statement uses landed definitions of def-kun-topological-dimension-at-point, def-pc-scheme-fibre and def-sc-generic-point, which are in proof_deps but not stmt_deps; the node text defines local dimension inline. Accepted. No compile, since no file was changed."
+ }
+}

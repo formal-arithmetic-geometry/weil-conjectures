@@ -1,0 +1,126 @@
+{
+ "id": "def-coef-internal-adjunction-comparison-maps",
+ "kind": "definition",
+ "title": "Canonical stratum internal-adjunction and coefficient-comparison maps",
+ "statement": "Use ordinary unbounded derived categories of constant-ring module sheaves on small etale sites [def-weil-pbc-derived-categories], derived scalar extension $F_T=-\\otimes_A^LB$ for a commutative ring map $\\phi:A\\to B$ [lem-pur-derived-change-of-rings], and derived internal Hom $H_A$ [def-pur-derived-internal-hom]. Let $g:Z\\hookrightarrow X$ be closed [def-weil-closed-immersion] and $j:S\\hookrightarrow Z$ open [def-weil-open-immersion]. For a finite commutative coefficient ring $R$ define $s_{!,R}=Rg_*j_!$ [def-amb-etale-compact-support], $s_{*,R}=Rg_*Rj_*$, and $s_R^!=j^*Rg^!$ using the ambient closed right adjoint [lem-exc-closed-ambient]. Define $\\epsilon_s:s_!s^!\\to1$ as the pasted exceptional counit, and $\\eta_s:s^*s_*\\to1$ as the pasted ordinary counit. For $L\\in D(S,R)$ and $T\\in D(X,R)$ define $\\pi:s_!L\\otimes_R^LT\\to s_!(L\\otimes_R^Ls^*T)$ by the closed proper projection followed by the inverse open projection [def-kun-projection-formula-map] [lem-coef-etale-open-tensor]. Define $I_R:s_*H_R(L,s^!M)\\to H_R(s_!L,M)$ as the tensor–Hom transpose of $\\pi$ followed by $s_!(1\\otimes\\eta_s)$, $s_!\\operatorname{ev}$, and $\\epsilon_s$. Define the compact scalar map $q_{s,L}=c_{g,j_!L};Rg_*(q_{j,L})$ using the canonical open scalar isomorphism; define the ordinary scalar map $c_{s,Q}=c_{g,Rj_*Q};Rg_*(c_{j,Q})$, where each $c_f$ is the ordinary-counit scalar comparison [lem-coef-finite-direct-image]. Define $v_{K,M}:F_TH_A(K,M)\\to H_B(F_TK,F_TM)$ as the transpose of the canonical scalar/tensor identification followed by $F_T\\operatorname{ev}$. For a prime $\\ell$ and a finite extension $E/\\mathbf Q_\\ell$, define $A_n=\\mathcal O_E/(\\varpi_E^n)$ for $n\\ge1$ [def-weil-l-adic-coefficient-extension], with the standard universe lift, its inherited finiteness instance, and for $m\\le n$ define $A_n\\to A_m$ as the quotient factor map of the uniformizer-power ideals. These are constructions of arrows, without assertions of their invertibility or of their compatibility. Semicolon denotes composition in the written order.",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-biduality-general/thm-coef-finite-hom.md",
+  "place": "Proof paragraphs 3–4: the closed/open internal-adjunction pairing, counit-normalized exceptional comparison, and finite coefficient maps"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-derived-categories",
+  "lem-pur-derived-change-of-rings",
+  "def-pur-derived-internal-hom",
+  "def-weil-closed-immersion",
+  "def-weil-open-immersion",
+  "def-amb-etale-compact-support",
+  "lem-exc-closed-ambient",
+  "def-kun-projection-formula-map",
+  "lem-coef-etale-open-tensor",
+  "lem-coef-finite-direct-image",
+  "def-weil-l-adic-coefficient-extension"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "internalAdjunction|etaleShriekLocallyClosedCoefficientMap|compactComparison",
+   "results": "[grep] OK 0 hit(s); No hits. No Mathlib definition of these ordinary-etale comparison maps.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Canonical internal adjunction and exceptional coefficient comparison for closed open factorizations on small etale sites",
+   "results": "[leansearch] OK 8 hit(s); CategoryTheory.ihom.adjunction; CategoryTheory.Functor.sheafPullbackConstruction.sheafAdjunctionContinuous; CategoryTheory.Functor.sheafAdjunctionCocontinuous; CategoryTheory.constantSheafΓAdj; CategoryTheory.Closed.adj; TopologicalSpace.Opens.adjunction_counit_app_self; Topology.IsInducing.adjunction; CategoryTheory.Comonad.ComonadicityInternal.comparisonAdjunction No Mathlib definition of these ordinary-etale comparison maps.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived etale internal adjunction coefficient change canonical evaluation pairing for locally closed immersion",
+   "results": "[leanfinder] OK 8 hit(s); StandardEtalePair.hasMap_X; StandardEtalePresentation.toPresentation_σ'; AlgebraicGeometry.Scheme.Etale.forget; StandardEtalePair.homEquiv_symm_apply; StandardEtalePair.homEquiv_apply_coe; AlgebraicGeometry.Scheme.instCategoryEtale; StandardEtalePresentation.hasMap; StandardEtalePair.HasMap.map No Mathlib definition of these ordinary-etale comparison maps.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "rg -l 'CoefficientPairingChange\\.(shriek|internalAdjunction)|etaleShriekLocallyClosedCoefficientMap' dag/nodes; blueprint_refs.py search 'internal adjunction'; blueprint_refs.py search 'locally closed comparison'; rg in lean/WeilConjectures, lean/Sheaf and Mathlib/CategoryTheory",
+   "results": "DAG matches only lem-coef-internal-adjunction-pairing-change and lem-coef-etale-locally-closed-shriek, both statement nodes; no definition node owns these helpers. Both blueprint searches: 0 matches. No matching Mathlib or WeilConjectures declaration. Sheaf/Paper/InternalAdjunctionPairingChange.lean and Sheaf/Paper/EtaleLocallyClosedShriek.lean already define the exact maps. Reuse them unchanged with existing:true records.",
+   "date": "2026-10-22",
+   "verdict": "existing project definitions; no owning definition node"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-coef-locally-closed-hom-generator",
+  "date": "2026-10-22",
+  "group": "Q107"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-coef-finite-hom",
+   "place": "Proof paragraphs 3–4: the closed/open internal-adjunction pairing, counit-normalized exceptional comparison, and finite coefficient maps",
+   "via": [
+    "lem-coef-locally-closed-hom-generator"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "lean": {
+  "module": "Sheaf.Paper.InternalAdjunctionPairingChange",
+  "declaration": "AlgebraicGeometry.Etale.CoefficientPairingChange.internalAdjunction",
+  "declarations": [
+   "AlgebraicGeometry.Etale.CoefficientPairingChange.shriek",
+   "AlgebraicGeometry.Etale.CoefficientPairingChange.star",
+   "AlgebraicGeometry.Etale.CoefficientPairingChange.exceptional",
+   "AlgebraicGeometry.Etale.CoefficientPairingChange.counit",
+   "AlgebraicGeometry.Etale.CoefficientPairingChange.ordinaryCounit",
+   "AlgebraicGeometry.Etale.CoefficientPairingChange.projection",
+   "AlgebraicGeometry.Etale.CoefficientPairingChange.internalAdjunction",
+   "AlgebraicGeometry.Etale.CoefficientPairingChange.compactComparison",
+   "AlgebraicGeometry.Etale.CoefficientPairingChange.ordinaryComparison",
+   "AlgebraicGeometry.Etale.CoefficientPairingChange.evaluationComparison",
+   "AlgebraicGeometry.Etale.CoefficientPairingChange.coefficient",
+   "AlgebraicGeometry.Etale.CoefficientPairingChange.coefficientFinite",
+   "AlgebraicGeometry.Etale.CoefficientPairingChange.reduction"
+  ],
+  "statement": "def internalAdjunction (A : Type (u + 1)) [CommRing A] [Finite A]\n    (g : Z ⟶ X) [IsClosedImmersion g] (j : S ⟶ Z) [IsOpenImmersion j]\n    (L : DerivedCategoryModule A S) (M : DerivedCategoryModule A X) :\n    (star A g j).obj\n        (((derivedHom (ModuleCat A) S).obj (op L)).obj ((exceptional A g j).obj M)) ⟶\n      ((derivedHom (ModuleCat A) X).obj (op ((shriek A g j).obj L))).obj M",
+  "branch": "newtargets-dag",
+  "by": "Q107",
+  "date": "2026-10-22",
+  "existing": true,
+  "note": "Returned H2 repair: this definition node owns the existing plain definitions, abbreviations and instance listed here. The published module and every declaration are unchanged; theorem assertions remain owned by their original statement node."
+ },
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-659e53fda",
+  "group": "Q107",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-659e53fda",
+  "group": "Q107",
+  "result": "pass",
+  "note": "Re-delivery after H2 RETURN (bbddb2e6). Lean module byte-identical to the returned delivery; item changes only stmt_deps and lean.note. stmt_deps = 12 base entries + 2 new def nodes, replacing the 2 theorem nodes and def-weil-finite-tor-amplitude. New def nodes def-coef-internal-adjunction-comparison-maps (13 plain decls in InternalAdjunctionPairingChange) and def-coef-etale-locally-closed-comparison-maps (8 plain decls in EtaleLocallyClosedShriek, cites def-weil-finite-tor-amplitude): existing:true, verbatim statements, all decls present and not .choose of the theorems, TeX matches the code, H12 fields ok, no other owner, acyclic, published oleans present. Item maths re-confirmed: hypotheses, N/Q ctf, IsIso of I_A plus 6 factors, composite = v, edge cases and universes ok, sorry only. Advisory: open scalar maps are owned in Lean by lem-coef-etale-open-comparison-data (and etaleHomTensorComparison by lem-coef-etale-tensor-model-comparison) while the new nodes cite lem-coef-etale-open-tensor; LocallyConstantDatum has no owner (base-era). No compile: no file changed."
+ }
+}

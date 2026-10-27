@@ -1,0 +1,260 @@
+{
+ "id": "lem-pd-conjugate-tensor-localization-counit",
+ "chapter": "sec-poincare-duality",
+ "unit": "sk-thm-sf-verdier-exchange",
+ "kind": "statement",
+ "title": "Conjugate tensor comparison identifies localization counits on all complexes",
+ "statement": "Let $(C,J)$ be a site small relative to its module universe [def-weil-pbc-sites-and-cohomology, def-weil-size-convention], $R$ a sheaf of commutative rings, and $\\mathcal M=\\operatorname{Mod}(R)$ [def-weil-sheaf-of-modules-category], with sheaf tensor [def-pur-sheaf-tensor-product]. Let $\\mathcal A$ be a closed symmetric monoidal Grothendieck abelian category with additive tensor and functorial flat resolutions [def-sp-grothendieck-abelian, def-sfb-monoidal-category, lem-sfb-derived-monoidal]. Here a functorial flat resolution means a functor to flat objects equipped with a natural epimorphism to the identity, and $M,N$ below range over $D(\\mathcal A)$. Let $E:\\mathcal A\\simeq\\mathcal M$ be an additive exact equivalence with fixed quasi-inverse $H$, unit and counit satisfying the triangle identities, and a specified strong symmetric monoidal structure [def-sfb-strong-monoidal-functor]. Assume $E,H$ preserve flat objects (tensor with the object is exact), acyclic complexes (all cohomology objects vanish), and K-flat complexes, meaning that tensor with any acyclic complex is acyclic [def-pc-flat-sheaf-modules, def-pc-kflat-complex]. Use unbounded integer cochain complexes, homotopy localizations $q_{\\mathcal A},q_R$ [def-weil-abstract-derived-category], signed direct-sum total tensors [def-sfb-preserves-kflat-quasi-iso], the specified termwise total comparison $t_{P,Q}:E\\operatorname{Tot}(P\\otimes Q)\\cong\\operatorname{Tot}(EP\\otimes EQ)$, and localization factors $\\kappa_P:D(E)q_{\\mathcal A}P\\cong q_REP$.\nFix the internal K-flat derived tensor $B_{\\mathcal A}$ and the independently constructed ringed-site tensor $B_R$ [lem-sfb-derived-monoidal, lem-weil-pbc-site-derived-tensor-descent]. Write $\\varepsilon^{\\mathcal A}_{P,Q}:B_{\\mathcal A}(q_{\\mathcal A}P,q_{\\mathcal A}Q)\\to q_{\\mathcal A}\\operatorname{Tot}(P\\otimes Q)$ and $\\varepsilon^R$ for their canonical derived-to-ordinary localization transformations on every complex pair. Their inverses on flat-term K-flat pairs are denoted $r^{\\mathcal A},r^R$. Conjugate $B_{\\mathcal A}$ by $D(E),D(H)$ to a section bifunctor $B_c$, with its fixed comparison $\\theta_0:D(E)B_{\\mathcal A}(M,N)\\cong B_c(D(E)M,D(E)N)$ obtained from the equivalence unit. Define its localization transformation $\\varepsilon^c$ by the following equation on all termwise $E$-images, then by the equivalence counit on arbitrary complex pairs:\n$$\\varepsilon^c_{EP,EQ}\\,B_c(\\kappa_P,\\kappa_Q)\\,\\theta_{0;q_{\\mathcal A}P,q_{\\mathcal A}Q}=q_R(t_{P,Q})\\,\\kappa_{\\operatorname{Tot}(P\\otimes Q)}\\,D(E)(\\varepsilon^{\\mathcal A}_{P,Q}).$$\nThere is a unique natural isomorphism $\\theta:D(E)B_{\\mathcal A}(M,N)\\cong B_R(D(E)M,D(E)N)$ whose value on flat-term K-flat $P,Q$ is\n$$\\theta_{q_{\\mathcal A}P,q_{\\mathcal A}Q}=B_R(\\kappa_P,\\kappa_Q)^{-1}\\,r^R_{EP,EQ}\\,q_R(t_{P,Q})\\,\\kappa_{\\operatorname{Tot}(P\\otimes Q)}\\,D(E)(r^{\\mathcal A}_{P,Q})^{-1}.$$\nThe natural isomorphism $v:B_c\\cong B_R$ specified by $v_{D(E)M,D(E)N}\\theta_{0;M,N}=\\theta_{M,N}$ satisfies\n$$\\varepsilon^R_{U,V}\\,v_{q_RU,q_RV}=\\varepsilon^c_{U,V}$$\nfor every pair of complexes $U,V$, without any K-flatness or flat-term hypothesis on them. In particular this identifies the localization transformations, not only the derived bifunctors. All statements permit independent object and morphism universes of the site. Composition in these formulas is read right to left.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Agent extraction of original lem-pd-section-kflat-tensor-comparison Steps 3–4; Tag 06YU (definition-derived-tor), with 06YS (lemma-K-flat-resolution); exact-functor comparison and conjugation counit calculation."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-sites-and-cohomology",
+  "def-weil-size-convention",
+  "def-weil-sheaf-of-modules-category",
+  "def-pur-sheaf-tensor-product",
+  "def-sp-grothendieck-abelian",
+  "def-sfb-monoidal-category",
+  "lem-sfb-derived-monoidal",
+  "def-sfb-strong-monoidal-functor",
+  "def-pc-flat-sheaf-modules",
+  "def-pc-kflat-complex",
+  "def-weil-abstract-derived-category",
+  "def-sfb-preserves-kflat-quasi-iso",
+  "lem-weil-pbc-site-derived-tensor-descent",
+  "def-pd-site-derived-tensor-resolving-data"
+ ],
+ "proof": [
+  {
+   "text": "Identify two-sided total-tensor K-flatness with categorical K-flatness by the definitions. Apply the native derived tensor universal property on the K-flat first factor, then transport the invertible Qh tensorator through the homotopy quotient factorization to obtain invertibility of internalCounit. Every other arrow of imageCounit is an isomorphism. For a site resolving pair U,V, use inverse preservation of K-flatness to apply this to HU,HV; the explicit counit extension formula then shows that conjugateCounit is invertible at U,V.",
+   "uses": [
+    "lem-sfb-derived-monoidal"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 06YS and 06YU; explicit equivalence-unit/counit and naturality-square calculation, using the published cochain rigidity and site counit APIs"
+   }
+  },
+  {
+   "text": "Restrict conjugateCounit and the fixed site counit to the full category of flat-term K-flat cochain pairs. The latter equals the inverse fixed model map by counit_existsUnique. Their ratio is a natural isomorphism. Full faithfulness of cochain representative restriction lifts this ratio to a unique isomorphism v from conjugateTensor to the fixed independent site tensor. Lift the isomorphism with FullyFaithful.preimageIso, so inverse identities hold without choosing functorial resolutions.",
+   "uses": [
+    "lem-sf-cochain-tensor-model-rigidity",
+    "def-pd-site-derived-tensor-resolving-data"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 06YS and 06YU; explicit equivalence-unit/counit and naturality-square calculation, using the published cochain rigidity and site counit APIs"
+   }
+  },
+  {
+   "text": "The transformation v inverse followed by conjugateCounit is another site localization transformation. On resolving pairs cancellation of the lifted ratio makes it exactly the inverse model map. Uniqueness in counit_existsUnique therefore identifies this transformation with the fixed counit on all complex pairs. Multiplication by v proves the required all-complex equation; no arbitrary-complex counit or ordinary tensor of resolution maps is inverted.",
+   "uses": [
+    "def-pd-site-derived-tensor-resolving-data"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 06YS and 06YU; explicit equivalence-unit/counit and naturality-square calculation, using the published cochain rigidity and site counit APIs"
+   }
+  },
+  {
+   "text": "Prove directly that counit extension along an equivalence restricts back to its given transformation, using naturality along the equivalence unit and the triangle identities; extending an already restricted transformation returns it. Hence comparisonOnSection of theta-zero followed by v is v, and theta-zero followed by comparisonOnSection of any theta is theta. A general naturality-square cancellation lemma rewrites Normalized exactly as the counit equation on termwise E-images of resolving pairs, using the localization factors and the fixed model map.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 06YS and 06YU; explicit equivalence-unit/counit and naturality-square calculation, using the published cochain rigidity and site counit APIs"
+   }
+  },
+  {
+   "text": "For any normalized theta prime, the preceding square gives its counit equation on E-images of resolving complexes in A. For a resolving site pair U,V apply it to HU,HV, which have flat terms and are K-flat by the hypotheses. Naturality along the termwise equivalence counit EHU to U, EHV to V transfers the equation to U,V; only the derived bifunctor of this isomorphism is canceled. Full faithfulness of cochain representative restriction and cancellation of the invertible site model map imply comparisonOnSection theta prime equals v. Its image equation then implies theta prime equals theta. This proves existence, uniqueness, the specified image equation, and the all-complex counit equation.",
+   "uses": [
+    "lem-sf-cochain-tensor-model-rigidity",
+    "def-pd-site-derived-tensor-resolving-data"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 06YS and 06YU; explicit equivalence-unit/counit and naturality-square calculation, using the published cochain rigidity and site counit APIs"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pd-site-derived-tensor-resolving-data",
+  "lem-sf-cochain-tensor-model-rigidity",
+  "lem-sfb-derived-monoidal"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "group": "B5",
+  "date": "2026-10-25",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 06YS and 06YU; native K-flat tensorator, cochain representative full faithfulness, and uniqueness of the fixed all-complex site counit. The original final resolution calculation is supplied by the existing counit uniqueness API."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Conjugating a derived tensor bifunctor by an exact equivalence identifies its resolution natural transformation with the independently constructed derived tensor localization counit on every complex pair",
+   "results": "{\"t\": \"2026-10-24T13:24:56Z\", \"tool\": \"leanfinder\", \"query\": \"Conjugating a derived tensor bifunctor by an exact equivalence identifies its resolution natural transformation with the independently constructed derived tensor localization counit on every complex pair\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Tor'_map_app\", \"CategoryTheory.Tor\", \"CategoryTheory.Tor'\", \"CategoryTheory.Tor'_obj_map\", \"CategoryTheory.Tor_map\", \"CategoryTheory.Functor.mapDerivedCategoryFactorsh_hom_app\", \"CategoryTheory.Tor'_obj_obj\", \"CategoryTheory.Functor.rightDerived_map_eq\"], \"digest\": \"828a81096730de67\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: lift₂NatIso lifts already localized bifunctors and leftDerivedNatIso assumes the required derived universal properties; neither constructs this conjugate K-flat comparison or identifies its prescribed localization transformation on all complex pairs."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A conjugate derived bifunctor and an independently constructed left derived tensor have the same localization counit under the canonical comparison",
+   "results": "{\"t\": \"2026-10-24T13:24:57Z\", \"tool\": \"leansearch\", \"query\": \"A conjugate derived bifunctor and an independently constructed left derived tensor have the same localization counit under the canonical comparison\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Adjunction.derived_counit\", \"CategoryTheory.Adjunction.localization_counit_app\", \"CategoryTheory.Functor.totalLeftDerivedCounit\", \"CategoryTheory.Adjunction.derivedε\", \"CategoryTheory.Adjunction.derived_unit\", \"CategoryTheory.Adjunction.Localization.ε\", \"CategoryTheory.Functor.instIsLeftDerivedFunctorTotalLeftDerivedTotalLeftDerivedCounit\", \"CategoryTheory.Adjunction.derivedε_fac_app\"], \"digest\": \"c67173c211ec4dfb\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: lift₂NatIso lifts already localized bifunctors and leftDerivedNatIso assumes the required derived universal properties; neither constructs this conjugate K-flat comparison or identifies its prescribed localization transformation on all complex pairs."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Localization.lift₂NatIso",
+   "results": "{\"t\": \"2026-10-24T13:26:00Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.Localization.lift₂NatIso\", \"sub\": \"\", \"ok\": true, \"n_hits\": 3, \"note\": \"\", \"top\": [\"CategoryTheory.Localization.lift₂NatIso\", \"CategoryTheory.Localization.lift₂NatIso_hom\", \"CategoryTheory.Localization.lift₂NatIso_inv\"], \"digest\": \"01f4d93be3985a19\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: lift₂NatIso lifts already localized bifunctors and leftDerivedNatIso assumes the required derived universal properties; neither constructs this conjugate K-flat comparison or identifies its prescribed localization transformation on all complex pairs."
+  },
+  {
+   "tool": "grep",
+   "query": "conjugat.*[Dd]eriv|[Dd]eriv.*conjugat|leftDerived.*(comparison|Comparison)",
+   "results": "{\"t\": \"2026-10-24T13:26:00Z\", \"tool\": \"grep\", \"query\": \"conjugat.*[Dd]eriv|[Dd]eriv.*conjugat|leftDerived.*(comparison|Comparison)\", \"sub\": \"CategoryTheory\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: lift₂NatIso lifts already localized bifunctors and leftDerivedNatIso assumes the required derived universal properties; neither constructs this conjugate K-flat comparison or identifies its prescribed localization transformation on all complex pairs."
+  },
+  {
+   "tool": "grep",
+   "query": "leftDerivedNatIso|totalLeftDerivedCounit|isLeftDerivedFunctor_iff_of_iso",
+   "results": "{\"t\": \"2026-10-24T13:29:11Z\", \"tool\": \"grep\", \"query\": \"leftDerivedNatIso|totalLeftDerivedCounit|isLeftDerivedFunctor_iff_of_iso\", \"sub\": \"CategoryTheory/Functor/Derived\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Functor/Derived/LeftDerived.lean\", \"Mathlib/CategoryTheory/Functor/Derived/LeftDerived.lean\", \"Mathlib/CategoryTheory/Functor/Derived/LeftDerived.lean\", \"Mathlib/CategoryTheory/Functor/Derived/LeftDerived.lean\", \"Mathlib/CategoryTheory/Functor/Derived/LeftDerived.lean\"], \"digest\": \"7ed6c2e0ce62479e\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: lift₂NatIso lifts already localized bifunctors and leftDerivedNatIso assumes the required derived universal properties; neither constructs this conjugate K-flat comparison or identifies its prescribed localization transformation on all complex pairs."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An exact monoidal equivalence compares two K-flat derived tensor products and their derived-to-ordinary counits on all complexes",
+   "results": "{\"t\": \"2026-10-24T13:56:22Z\", \"tool\": \"leanfinder\", \"query\": \"An exact monoidal equivalence compares two K-flat derived tensor products and their derived-to-ordinary counits on all complexes\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Module.Flat.lTensor_shortComplex_exact\", \"Module.Flat.rTensor_shortComplex_exact\", \"Module.Flat.iff_rTensor_preserves_shortComplex_exact\", \"Module.Flat.iff_lTensor_preserves_shortComplex_exact\", \"Module.Flat.iff_rTensor_exact\", \"Module.FaithfullyFlat.iff_exact_iff_rTensor_exact\", \"Module.Flat.iff_rTensor_exact'\", \"Module.FaithfullyFlat.iff_exact_iff_lTensor_exact\"], \"digest\": \"28177812b32a60a5\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: flatness of modules is not an unbounded sheaf tensor comparison"
+  },
+  {
+   "tool": "grep",
+   "query": "leftDerivedNatIso|totalLeftDerivedCounit|lift₂NatIso",
+   "results": "{\"t\": \"2026-10-24T13:56:56Z\", \"tool\": \"grep\", \"query\": \"leftDerivedNatIso|totalLeftDerivedCounit|lift₂NatIso\", \"sub\": \"CategoryTheory\", \"ok\": true, \"n_hits\": 9, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Localization/Bifunctor.lean\", \"Mathlib/CategoryTheory/Localization/Monoidal/Functor.lean\", \"Mathlib/CategoryTheory/Functor/Derived/LeftDerived.lean\", \"Mathlib/CategoryTheory/Functor/Derived/LeftDerived.lean\", \"Mathlib/CategoryTheory/Functor/Derived/LeftDerived.lean\", \"Mathlib/CategoryTheory/Functor/Derived/LeftDerived.lean\", \"Mathlib/CategoryTheory/Functor/Derived/LeftDerived.lean\", \"Mathlib/CategoryTheory/Localization/Monoidal/Braided.lean\"], \"digest\": \"7b9cf65b79e465ef\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: LeftDerived.lean:130 requires derived universal properties already supplied; Bifunctor.lean:191 requires localized liftings. The item must construct and normalize this particular comparison and prove its all-complex equation."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.leftDerivedNatIso",
+   "results": "{\"t\": \"2026-10-24T13:56:56Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.Functor.leftDerivedNatIso\", \"sub\": \"\", \"ok\": true, \"n_hits\": 3, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.leftDerivedNatIso\", \"CategoryTheory.Functor.leftDerivedNatIso_hom\", \"CategoryTheory.Functor.leftDerivedNatIso_inv\"], \"digest\": \"9451af80b3f2358a\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: LeftDerived.lean:130 requires derived universal properties already supplied; Bifunctor.lean:191 requires localized liftings. The item must construct and normalize this particular comparison and prove its all-complex equation."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The comparison of conjugated and ringed-site derived tensor bifunctors commutes with the derived tensor counit on arbitrary unbounded complexes",
+   "results": "{\"t\": \"2026-10-24T13:56:56Z\", \"tool\": \"leansearch\", \"query\": \"The comparison of conjugated and ringed-site derived tensor bifunctors commutes with the derived tensor counit on arbitrary unbounded complexes\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Adjunction.derivedε\", \"CategoryTheory.Adjunction.derivedε.congr_simp\", \"HomologicalComplex.rightUnitor'_inv_comm\", \"CategoryTheory.Functor.instCommShiftCochainComplexIntDerivedCategoryHomMapDerivedCategoryFactors\", \"CategoryTheory.Functor.instCommShiftHomotopyCategoryIntUpDerivedCategoryHomMapDerivedCategoryFactorsh\", \"HomologicalComplex.rightUnitor'\", \"HomologicalComplex.rightUnitor\", \"CategoryTheory.Functor.mapDerivedCategoryFactorsh\"], \"digest\": \"f9cb6bbe0227e64d\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: adjunction counits, unitors and exact-functor factors do not state the conjugate tensor comparison"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Uniqueness of a natural comparison of left derived tensor products compatible with their resolution maps",
+   "results": "{\"t\": \"2026-10-24T13:56:57Z\", \"tool\": \"leanfinder\", \"query\": \"Uniqueness of a natural comparison of left derived tensor products compatible with their resolution maps\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Tor_map\", \"CategoryTheory.Tor'_obj_map\", \"CategoryTheory.Tor\", \"CategoryTheory.Tor'\", \"CategoryTheory.Tor'_obj_obj\", \"CategoryTheory.Tor_obj\", \"CategoryTheory.Tor'_map_app\", \"CategoryTheory.Functor.leftDerived_map_eq\"], \"digest\": \"760482cff95a505b\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: Tor is module-level homology of projective derived functors, not this sheaf bifunctor and counit identification"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-pd-section-kflat-tensor-comparison",
+  "date": "2026-10-24",
+  "group": "NO"
+ },
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "Seeded nt-target-poincare-isiso Step 2, via lem-pd-module-ringed-topos-derived-comparison Step 3 and lem-pd-section-derived-tensor-normalization Step 1: internal/section K-flat tensor identification with specified representative map, unit and constraints. Re-split original Steps 3–4: representative comparison and equality of conjugate/native localization transformations on every complex pair.",
+   "via": [
+    "lem-pd-section-kflat-tensor-comparison",
+    "lem-pd-section-derived-tensor-normalization",
+    "lem-pd-module-ringed-topos-derived-comparison",
+    "nt-target-poincare-isiso"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-pd-conjugate-tensor-localization-counit",
+  "worker": "stage1",
+  "summary": "Construct the resolving-pair comparison as the ratio of the two localization transformations, extend it and its inverse using the existing site tensor descent theorem, derive and uniquely characterize the specified representative formula, and prove the counit identity on arbitrary complexes by an explicit naturality calculation and cancellation of the derived resolution map. No statement change and no new nodes.",
+  "blueprint": "Seeded nt-target-poincare-isiso Step 2, via lem-pd-module-ringed-topos-derived-comparison Step 3 and lem-pd-section-derived-tensor-normalization Step 1; realizes original lem-pd-section-kflat-tensor-comparison Steps 3–4, now its conjugate localization-counit ingredient. Latest blueprint lem-sfb-derived-monoidal.proof.md supplies the K-flat descent and resolution-map route.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-site-derived-tensor-descent",
+    "why": "Generic ringed-site tensor descent and the fully faithful extension of transformations on flat-term K-flat representatives; the Verdier-exchange unit supplies no replacement for this localization tool."
+   },
+   {
+    "node": "lem-pc-kflat-resolution",
+    "why": "Generic existence of flat-term K-flat resolutions for arbitrary complexes of module sheaves (06YS), used solely to test the naturality equation; the unit has no separate resolution construction."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-site-derived-tensor-descent"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-NI-15d984725",
+  "group": "NI",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NI-15d984725 (reviewer sub-agent of L); spot-checked: Read the item and all five steps in full; the review is in review.md. The delivery is one commit (item JSON plus report) with no new nodes and the statement unchanged. Sources: Stacks 06YS (sites-cohomology.tex l.3207, lemma-K-flat-resolution) and 06YU (l.3300, definition-derived-tor) were checked against tags/tags; the conjugation and counit calculation is agent-written. Step checks: (1) H preserves flat and K-flat complexes, so ε^c at (EHU,EHV) is a composite of isomorphisms; the counit-conjugated formula has the right directions; r^A and r^R are data fixed by the statement. (2) b=(ε^R)^{-1}ε^c is natural on homotopy maps; the extension and uniqueness clause of lem-weil-pbc-site-derived-tensor-descent (any target category, site small relative to modules as in the item) is applied to b and to b^{-1}, so v is invertible. (3) Naturality of v along κ together with v=r^Rε^c on (EP,EQ) gives exactly the stated θ formula, in the stated order. (4) For the uniqueness, v' is built from θ'; I checked v'θ_0=θ' via the triangle identity d_{FM}F(η_M)=id. The normalization at HU,HV plus naturality along a_U gives v'=b on resolving pairs, and uniqueness gives v'=v; the parent is not cited, so there is no cycle. (5) The 06YS resolutions and localization make z_c invertible; the naturality chain is correct and only z_c is cancelled. Edge cases checked: zero objects, E=id (θ=r^R(r^A)^{-1}), and Z/2[0] over Z, where ε is never inverted at a non-flat pair. Not duplicates: lem-sfb-ringed-equivalence-resolving-tensor-descent and lem-sfb-exact-tensor-functor-derived-normalization give representative normalizations only, not the all-pair counit equation. Accepted tool_uses: lem-weil-pbc-site-derived-tensor-descent and lem-pc-kflat-resolution, both generic and already accepted in the parent chain. Advisory: the statement takes the all-pair ε^R as canonical, but the descent node's statement gives it only on resolving pairs, so stage 2 must pin the standard resolution extension. No SGA is cited."
+ },
+ "lean": {
+  "module": "Sheaf.Algebra.Homology.ConjugateTensorLocalizationCounit",
+  "declaration": "SheafOfModules.ConjugateTensorLocalization.conjugate_tensor_localization_counit",
+  "declarations": [
+   "CategoryTheory.ConjugateTensor.conjugate",
+   "CategoryTheory.ConjugateTensor.comparison",
+   "CategoryTheory.ConjugateTensor.extend",
+   "CategoryTheory.ConjugateTensor.internalCounit",
+   "SheafOfModules.ConjugateTensorLocalization.conjugateTensor",
+   "SheafOfModules.ConjugateTensorLocalization.totalComparison",
+   "SheafOfModules.ConjugateTensorLocalization.imageCounit",
+   "SheafOfModules.ConjugateTensorLocalization.conjugateCounit",
+   "SheafOfModules.ConjugateTensorLocalization.Normalized",
+   "SheafOfModules.ConjugateTensorLocalization.comparisonOnSection",
+   "SheafOfModules.ConjugateTensorLocalization.conjugate_tensor_localization_counit"
+  ],
+  "file": "lean/Sheaf/Algebra/Homology/ConjugateTensorLocalizationCounit.lean",
+  "statement": "theorem conjugate_tensor_localization_counit (hflat : ∀ X : A, ObjectProperty.flat X → IsFlatOnSite (J := J) (R := R) (e.functor.obj X)) (hflatInv : ∀ X : Modules R, IsFlatOnSite (J := J) (R := R) X → ObjectProperty.flat (e.inverse.obj X)) (hacyclic : ∀ P : CochainComplex A ℤ, P.Acyclic → ((e.functor.mapHomologicalComplex (.up ℤ)).obj P).Acyclic) (hacyclicInv : ∀ P : Complexes R, P.Acyclic → ((e.inverse.mapHomologicalComplex (.up ℤ)).obj P).Acyclic) (hkflat : ∀ P : CochainComplex A ℤ, P.IsKFlatForTotalTensor → CochainComplex.IsKFlatIndependentCoefficients ((e.functor.mapHomologicalComplex (.up ℤ)).obj P)) (hkflatInv : ∀ P : Complexes R, P.IsKFlatIndependentCoefficients → CochainComplex.IsKFlatForTotalTensor ((e.inverse.mapHomologicalComplex (.up ℤ)).obj P)) : (∃! θ : tensor (DerivedCategory A) ⋙ e.functor.mapDerivedCategory ≅ e.functor.mapDerivedCategory.prod e.functor.mapDerivedCategory ⋙ siteDerivedTensorIndependentCoefficients J R, Normalized R e θ hflat hkflat) ∧ (∀ θ : tensor (DerivedCategory A) ⋙ e.functor.mapDerivedCategory ≅ e.functor.mapDerivedCategory.prod e.functor.mapDerivedCategory ⋙ siteDerivedTensorIndependentCoefficients J R, Normalized R e θ hflat hkflat → (∀ M N : DerivedCategory A, (comparison e.mapDerivedCategory (tensor (DerivedCategory A))).hom.app (M, N) ≫ (comparisonOnSection R e θ).hom.app (e.functor.mapDerivedCategory.obj M, e.functor.mapDerivedCategory.obj N) = θ.hom.app (M, N)) ∧ (∀ U V : Complexes R, (comparisonOnSection R e θ).hom.app (DerivedCategory.Q.obj U, DerivedCategory.Q.obj V) ≫ (counit R).app (U, V) = (conjugateCounit R e).app (U, V)))",
+  "branch": "sheaf-dag",
+  "by": "Q22",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-f25471123",
+  "group": "Q22",
+  "result": "fix",
+  "note": "Re-delivery after the d3e7 H2 RETURN: the item no longer cites the theorem node; its module is unchanged except for the import, open and moved declarations, and the maths was re-checked against the node (hypotheses, kappa/t/epsA/theta0/B_c, imageCounit order, Normalized formula, exists-unique theta, theta0>>v=theta, all-pair counit equation with no premise on U,V). H4: the new def node def-pd-site-derived-tensor-resolving-data re-declared the resolving-pair model map and the descent-witness projections (model/resolving/chainComparison/resolvingComparison/resolvingObject). These duplicate the landed def-weil-pbc-tensor-descent-representative-comparison (CategoryTheory.tensorDescentPair: same composite, same witness projections; landed 2026-10-21, on base). The parent lem-pd-section-kflat-tensor-comparison already uses tensorDescentPair. FIX: fixes/SiteDerivedTensorResolvingData.lean makes model an abbrev of tensorDescentPair, imports Sheaf.Paper.SiteDerivedTensorRestriction and drops the duplicates. fixes/def-pd-site-derived-tensor-resolving-data.json adds that stmt_dep, rewrites the TeX for r and prunes lean.declarations. counit_existsUnique/counit (exists-unique-pinned all-pair epsilon^R) are kept as the genuinely new content. nt_compile --json of the fixed module plus the delivered item module: clean, 8.4 s and 13.5 s at load ~60."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B5",
+  "result": "pass",
+  "landing": "20261025T005344-L-3471230",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

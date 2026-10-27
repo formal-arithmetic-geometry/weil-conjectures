@@ -14,8 +14,11 @@ import Mathlib.Algebra.Homology.ShortComplex.Ab
 import Mathlib.CategoryTheory.Abelian.ShortExact
 import WeilConjectures.CategoryTheory.Sites.MonObj
 import WeilConjectures.Mathlib.Algebra.Homology.ShortComplex.Exact
-import WeilConjectures.CategoryTheory.Monoidal.Mod.Abelian
+public import WeilConjectures.CategoryTheory.Monoidal.Mod.Abelian
 import WeilConjectures.CategoryTheory.GrothendieckAbelian.Sheaf
+public import Mathlib.Algebra.Category.Grp.Zero
+public import Mathlib.Combinatorics.Quiver.ReflQuiver
+public import WeilConjectures.Mathlib.CategoryTheory.Monoidal.Mod
 
 /-!
 # Continuous sections with finite discrete quotient

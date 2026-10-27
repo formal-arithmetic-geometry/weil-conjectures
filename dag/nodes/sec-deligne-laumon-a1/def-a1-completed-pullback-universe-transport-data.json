@@ -1,0 +1,112 @@
+{
+ "kind": "definition",
+ "status": "split",
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tags 03EK and 03EL, tensor construction and lemma-tensor-product-pullback; finite-map-purity proof, balanced finite and pulled-Koszul normalization notation"
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Transport of sheaves of modules between universe sizes by sectionwise additive equivalences compatible with ring equivalences and normalized tensor pullback generators",
+   "results": "{\"ok\": true, \"n_hits\": 8, \"top\": [\"AlgebraicGeometry.Scheme.Modules.pullback\", \"Equiv.module\", \"AlgebraicGeometry.Scheme.Modules.instAdditivePushforward\", \"SheafOfModules.pullback\", \"SheafOfModules.PullbackConstruction.adjunction\", \"SheafOfModules.restrictScalars\", \"SheafOfModules.pushforward\", \"SheafOfModules.instAdditiveRestrictScalars\"], \"digest\": \"fd29c7aba7c6119e\", \"note\": \"\"}",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "sectionwise additive equivalences transport sheaves of modules across independent coefficient universes commuting with scalar action and tensor generators",
+   "results": "{\"ok\": true, \"n_hits\": 8, \"top\": [\"SheafOfModules.Presentation.map_generators_I\", \"SheafOfModules.mapFree\", \"SheafOfModules.Presentation.mapGenerators\", \"SheafOfModules.ιFree_mapFree_inv\", \"SheafOfModules.map_ιFree_mapFree_hom\", \"SheafOfModules.freeMap\", \"SheafOfModules.freeFunctor\", \"SheafOfModules.freeHomEquiv_symm_comp\"], \"digest\": \"1c719519a70c60e5\", \"note\": \"\"}",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "SectionTransport|PublishedOrdinaryTransport|PublishedCompatibility",
+   "results": "{\"ok\": true, \"n_hits\": 0, \"top\": [], \"digest\": \"4f53cda18c2baa0c\", \"note\": \"\"}",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-a1-balanced-finite-tower-generator-comparison",
+  "date": "2026-10-22",
+  "group": "Q24"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-a1-finite-map-purity",
+   "place": "Geometric-stalk finite-map pullback paragraph, strict finite tower and two Koszul generators, old parent proof steps 6-7 and 9.",
+   "via": [
+    "lem-a1-balanced-finite-tower-generator-comparison",
+    "lem-a1-finite-pullback-strict-tower-comparison",
+    "lem-a1-integral-pullback-completed-comparison",
+    "lem-a1-constructible-pullback-t-exact",
+    "lem-a1-finite-etale-weil-fibre-comparison"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-deligne-laumon-a1",
+ "unit": "sk-thm-dl-a1-upper",
+ "id": "def-a1-completed-pullback-universe-transport-data",
+ "title": "Normalized sectionwise universe transport for the published completed-pullback comparison",
+ "statement": "Fix a prime $\\ell$, a finite extension $E/\\mathbf Q_\\ell$, and a scheme morphism $g:X\\to Y$, at independent coefficient and scheme universes. Use the actual completed module categories, ordinary pullback and its adjunction unit from [def-a1-integral-completed-tower-pullback-universes], finite module pullback and its unit from [def-pur-integral-finite-pullback], and the fixed published completed-pullback maps from [def-a1-integral-completed-pullback-interfaces]. For comparison with the fixed published interfaces [def-a1-integral-completed-pullback-interfaces], write $D_{W,n}$ for ordinary scalar extension to $S_{W,n}$ followed by restriction along $\\pi_{W,n}$, and $B_{g,n}$ for finite pullback of that reduction followed by restriction. The quotient-unit normalization for an isomorphism $G\\circ D_{Y,n}\\simeq B_{g,n}$ fixes the pulled unit generator, including every outer scalar. A section transport between module sheaves at possibly different universes is an additive equivalence on every section, commuting with every restriction and semilinear for the specified coefficient ring equivalences. A published coefficient transport consists of completed and finite sectionwise ring equivalences, natural on the small site and compatible with every projection and completed structural map; they factor through the published completedRingIso and finiteRingIso, followed by the integral coefficient universe equivalences. For a published coefficient field $F$ at scheme universe and a section transport of $M_0$ to $M$, an ordinary source/target transport is a pair of such section equivalences on the actual published ordinary source and finite target. The source equivalence sends the published pullback of the quotient unit, with arbitrary outer scalar and restriction to any target site object, to the corresponding ordinary pullback generator. The target equivalence sends every published completedReductionFiniteGenerator to its integral finite pullback tensor, using the finite coefficient equivalences on both scalars. PublishedCompatibility of $e$ means that for every such coefficient and input transport there is a unique normalized source/target transport $tr$ and, on every section, $tr_{target}\\circ completedReductionOrdinaryComparison=e\\circ tr_{source}$. These are definitions of transport data and normalization predicates, with no existence theorem or chosen comparison.",
+ "stmt_deps": [
+  "def-a1-integral-completed-tower-pullback-universes",
+  "def-pur-integral-finite-pullback",
+  "def-a1-integral-completed-pullback-interfaces"
+ ],
+ "lean": {
+  "module": "Sheaf.Paper.CompletedPullbackUniverseTransportData",
+  "declaration": "WeilConjectures.CompletedPullbackUniverseTransportData.PublishedCompatibility",
+  "file": "lean/Sheaf/Paper/CompletedPullbackUniverseTransportData.lean",
+  "statement": "def PublishedCompatibility (n : ℕ) (e : ordinaryReduction l E Y n ⋙ pull l E g ≅ ordinaryFinite l E g n) : Prop",
+  "branch": "newtargets-dag",
+  "by": "Q24",
+  "date": "2026-10-22",
+  "existing": false,
+  "declarations": [
+   "WeilConjectures.CompletedPullbackUniverseTransportData.SectionTransport",
+   "WeilConjectures.CompletedPullbackUniverseTransportData.ordinaryReduction",
+   "WeilConjectures.CompletedPullbackUniverseTransportData.ordinaryFinite",
+   "WeilConjectures.CompletedPullbackUniverseTransportData.OrdinaryNormalization",
+   "WeilConjectures.CompletedPullbackUniverseTransportData.PublishedCoefficients",
+   "WeilConjectures.CompletedPullbackUniverseTransportData.publishedSource",
+   "WeilConjectures.CompletedPullbackUniverseTransportData.publishedTarget",
+   "WeilConjectures.CompletedPullbackUniverseTransportData.ordinarySourceGenerator",
+   "WeilConjectures.CompletedPullbackUniverseTransportData.PublishedOrdinaryTransport",
+   "WeilConjectures.CompletedPullbackUniverseTransportData.PublishedCompatibility"
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-ab0b19f2c",
+  "group": "Q24",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-ab0b19f2c",
+  "group": "Q24",
+  "result": "pass",
+  "note": "Re-delivery after RETURN of cd24 (G1, G2). G1 resolved: the def-a1-integral-completed-pullback-interfaces record equals live NY existing:true (JSON-identical) and the commit does not touch it; the IntegralCompletedPullbackInterfacesUniverses module is removed; ordinaryReduction/ordinaryFinite/OrdinaryNormalization moved to the new def node def-a1-completed-pullback-universe-transport-data (read from the commit with git show; the snapshot omits it). G2 resolved: no theorem/sorry/choose in the def modules; the item's final conjunct is ∃! e with OrdinaryNormalization ∧ PublishedCompatibility ∧ good-P C = pull(r)≫e; PublishedCompatibility literally conjugates the published completedReductionOrdinaryComparison by unique generator-pinned sectionwise universe transports, universally quantified over PublishedCoefficients/SectionTransport. Hand-checked: uniqueness by local generation plus sheaf separation, consistency with HasCompletedReductionOrdinaryComparisonNormalization via the projection field, true for twisted p, inhabited via Type-t copies of E. Advisory: integralCompleted/integralQuotient free, so completed/quotient_transport are cosmetic but harmless under ∀. The earlier advisory was done: reductions/koszuls/finite/QuotientUnitNormalization now in def-a1-finite-pullback-strict-tower-data. Item diff vs live: lean + one stmt_dep; statements verbatim; all declarations present; imports resolve; no namespace clash with the parent; docstrings with source, blueprint and 8 steps. λ/C/θ, strict square, hypotheses and edge cases (P=0, empty, g=id, n=0, unbounded, both Koszul degrees, nonflat c_g, u≠t) unchanged and correct. No compile (no file changed); the worker reports 3 clean compiles and an OK dry run. Maintainer note: re-point the parent and Q39 to FinitePullbackStrictTowerData."
+ }
+}

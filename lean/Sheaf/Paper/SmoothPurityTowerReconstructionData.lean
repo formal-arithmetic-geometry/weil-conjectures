@@ -1,0 +1,313 @@
+/-
+Copyright (c) 2026 The SHEAF contributors. All rights reserved.
+Released under Apache 2.0 license as described in the file LICENSE.
+Authors: SHEAF group Q02
+-/
+module
+
+public import Sheaf.Paper.SmoothPurityNormalizedTowers
+public import Sheaf.Paper.EllCoefficientFiber
+public import Sheaf.Paper.SfIntegralConstructible
+public import Sheaf.AlgebraicGeometry.ProEtaleCohomologicalSupport
+public import Sheaf.Paper.IntrinsicFiniteTorsionConstructibility
+public import Sheaf.Paper.SfDerivedComplete
+public import Sheaf.Algebra.Homology.DerivedChangeOfRingsCochainModel
+public import Sheaf.CategoryTheory.RingedStrictTowerHomotopyLimitIndependentCoefficients
+
+import all Sheaf.Paper.SmoothPurityCoefficientTowersAbelian
+
+/-!
+# Completed evaluations and the canonical tower reconstruction map
+
+Source: blueprint main-20261015, sec-smooth-purity,
+`sk-lem-sp-tower/_section.md`; Stacks Project, Tags 0940 and 099P
+(blueprint: def-sp-tower-reconstruction-data).
+
+The natural index n denotes positive exponent n+1. A Roos triangle specifies the
+actual derived inverse limit and its projections. The comparison at each finite level
+is the tensor-restriction adjoint of that projection, in the finite-coefficient category.
+-/
+
+@[expose] public noncomputable section
+
+set_option autoImplicit false
+set_option synthInstance.maxSize 2048
+
+universe u
+
+open CategoryTheory CategoryTheory.Limits Opposite SheafOfModules
+
+namespace AlgebraicGeometry.ProEtale
+
+attribute [-instance] spCoefficientModulesAbelian
+
+
+variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
+  [Algebra (Padic l) E] [FiniteDimensional (Padic l) E] (T : Scheme.{u})
+
+/-- The small pro-etale site fits in the actual coefficient universe.
+Source: blueprint, coefficient setup (blueprint: def-sp-tower-reconstruction-data). -/
+instance (priority := 4000) spReconstructionSiteSmall : EssentiallySmall.{u + 1} T.ProEt :=
+  essentiallySmallSelf.{0, u, u + 1} _
+
+/-- The fixed-universe abelian structure used by the reconstruction interface.
+This specializes the ordinary module-sheaf structure without leaving the coefficient
+universe undetermined. Source: Stacks, Modules on Sites
+(blueprint: def-sp-tower-reconstruction-data). -/
+instance (priority := 3000) spReconstructionModulesAbelian
+    (R : Sheaf (Scheme.ProEt.topology T) RingCat.{u + 1}) :
+    Abelian (SheafOfModules.{u + 1} R) := SheafOfModules.instAbelian R
+
+/-- The same projection retaining the existing commutative ring structures.
+Source: blueprint, coefficient setup (blueprint: def-sp-tower-reconstruction-data). -/
+def spCompletedEllCommProjection (n : ℕ) :
+    WeilConjectures.completedIntegralCommRingSheafUnrestricted l E T ⟶
+      (spCoefficientCommRings l E T).obj (op n) :=
+  (sheafCompose (Scheme.ProEt.topology T)
+    (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).preimage
+      (spCompletedEllProjection.{u, u} l E T n)
+
+/-- Exact restriction from the actual ell-power quotient to completed coefficients.
+Source: blueprint, restriction in proof step 2 (blueprint: def-sp-tower-reconstruction-data). -/
+abbrev spCompletedEllRestriction (n : ℕ) :=
+  restrictScalars.{u + 1} ((sheafCompose (Scheme.ProEt.topology T)
+    (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).map
+      (spCompletedEllCommProjection l E T n))
+
+variable (D : SpCoefficientTowersAbelian l E T)
+
+/-- The given tower's level as a module over the completed ring, without changing its
+underlying sheaf or transition. Source: blueprint, proof step 2
+(blueprint: def-sp-tower-reconstruction-data). -/
+def spCompletedEvaluation (n : ℕ) : spCoefficientTowers l E T ⥤
+    WeilConjectures.scalarReductionSource.{u, u} l E T :=
+  spCoefficientEvaluation l E T D.equivalence n ⋙ spCompletedEllRestriction l E T n
+
+/-- Exactness is inherited from exact level evaluation and scalar restriction.
+Source: blueprint, proof step 2 (blueprint: def-sp-tower-reconstruction-data).
+Proof: addition and kernels are componentwise. Sheafified cokernels are unchanged by
+restriction of the scalar action. Compose with the exact evaluation supplied by D. -/
+theorem spCompletedEvaluation_exact (n : ℕ) :
+    (spCompletedEvaluation l E T D n).Additive ∧
+      PreservesFiniteLimits (spCompletedEvaluation l E T D n) ∧
+      PreservesFiniteColimits (spCompletedEvaluation l E T D n) := by
+  let := D.equivalenceAdditive
+  let := D.evaluationLimits n
+  let := D.evaluationColimits n
+  let : (spCoefficientEvaluation l E T D.equivalence n).Additive :=
+    Functor.additive_of_preserves_binary_products _
+  unfold spCompletedEvaluation
+  exact ⟨inferInstance, inferInstance, inferInstance⟩
+
+/-- Additivity of the actual completed-coefficient evaluation.
+Source: blueprint, proof step 2 (blueprint: def-sp-tower-reconstruction-data). -/
+instance spCompletedEvaluationAdditive (n : ℕ) :
+    (spCompletedEvaluation l E T D n).Additive :=
+  (spCompletedEvaluation_exact l E T D n).1
+
+/-- Preservation of finite limits by the actual evaluation.
+Source: blueprint, proof step 2 (blueprint: def-sp-tower-reconstruction-data). -/
+instance spCompletedEvaluationLimits (n : ℕ) :
+    PreservesFiniteLimits (spCompletedEvaluation l E T D n) :=
+  (spCompletedEvaluation_exact l E T D n).2.1
+
+/-- Preservation of finite colimits by the actual evaluation.
+Source: blueprint, proof step 2 (blueprint: def-sp-tower-reconstruction-data). -/
+instance spCompletedEvaluationColimits (n : ℕ) :
+    PreservesFiniteColimits (spCompletedEvaluation l E T D n) :=
+  (spCompletedEvaluation_exact l E T D n).2.2
+
+private theorem spCompletedEllProjection_comp {m n : ℕ} (h : m ≤ n) :
+    spCompletedEllProjection.{u, u} l E T n ≫
+      (spCoefficientRings l E T).map (homOfLE h).op =
+        spCompletedEllProjection.{u, u} l E T m := by
+  unfold spCompletedEllProjection
+  rw [Category.assoc, limit.w]
+
+private theorem spCompletedEllCommProjection_comp {m n : ℕ} (h : m ≤ n) :
+    spCompletedEllCommProjection l E T n ≫
+      (spCoefficientCommRings l E T).map (homOfLE h).op =
+        spCompletedEllCommProjection l E T m := by
+  let F := sheafCompose (Scheme.ProEt.topology T)
+    (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})
+  apply F.map_injective
+  rw [F.map_comp]
+  simp only [spCompletedEllCommProjection]
+  dsimp only [F]
+  rw [Functor.map_preimage, Functor.map_preimage]
+  have hm : F.map ((spCoefficientCommRings l E T).map (homOfLE h).op) =
+      (spCoefficientRings l E T).map (homOfLE h).op := by
+    exact eq_of_heq (Functor.hcongr_hom (coefficientRings_eq l E T) (homOfLE h).op).symm
+  rw [hm]
+  exact spCompletedEllProjection_comp l E T h
+
+set_option backward.isDefEq.respectTransparency false in
+set_option backward.isDefEq.respectTransparency.types false in
+/-- The unique ordinary transition, fixed on every section by the original strict
+semilinear tower. Source: blueprint, proof step 2 (blueprint: def-sp-tower-reconstruction-data).
+Proof: the completed projections commute with quotient transitions by the limit-cone
+condition. Thus the original semilinear transition becomes completed-ring linear.
+It commutes with sheaf restrictions and tower morphisms. Equality on all sections
+determines each component uniquely. -/
+theorem spCompletedTransition_existsUnique (n : ℕ) :
+    ∃! τ : spCompletedEvaluation l E T D (n + 1) ⟶ spCompletedEvaluation l E T D n,
+      ∀ (M : spCoefficientTowers l E T) (U : T.ProEtᵒᵖ)
+        (x : ((spCompletedEvaluation l E T D (n + 1)).obj M).val.obj U),
+        (τ.app M).val.app U x =
+          (((D.equivalence.functor.obj M).transition (Nat.le_succ n)).val.app U) x := by
+  let τ : spCompletedEvaluation l E T D (n + 1) ⟶ spCompletedEvaluation l E T D n :=
+    { app M :=
+        { val :=
+            { app U := ModuleCat.ofHom
+                (X := ((spCompletedEvaluation l E T D (n + 1)).obj M).val.obj U)
+                (Y := ((spCompletedEvaluation l E T D n).obj M).val.obj U)
+                { toFun := fun x ↦
+                    ((D.equivalence.functor.obj M).transition (Nat.le_succ n)).val.app U x
+                  map_add' := map_add _
+                  map_smul' := by
+                    intro r x
+                    have he := congrArg (fun f ↦ f.hom.app U r)
+                      (spCompletedEllCommProjection_comp l E T (Nat.le_succ n))
+                    change ((spCoefficientCommRings l E T).map
+                      (homOfLE (Nat.le_succ n)).op).hom.app U
+                        ((spCompletedEllCommProjection l E T (n + 1)).hom.app U r) =
+                          (spCompletedEllCommProjection l E T n).hom.app U r at he
+                    have hh := (((D.equivalence.functor.obj M).transition
+                      (Nat.le_succ n)).val.app U).hom.map_smul
+                        ((spCompletedEllCommProjection l E T (n + 1)).hom.app U r)
+                        (show ((D.equivalence.functor.obj M).level (n + 1)).val.obj U
+                          from x)
+                    exact hh.trans (congrArg
+                      (fun a : ((spCoefficientCommRings l E T).obj (op n)).obj.obj U ↦
+                        a • (show ((D.equivalence.functor.obj M).level n).val.obj U
+                          from ((D.equivalence.functor.obj M).transition
+                            (Nat.le_succ n)).val.app U x)) he)
+                }
+              naturality := by
+                intro U V f
+                ext x
+                exact PresheafOfModules.naturality_apply
+                  ((D.equivalence.functor.obj M).transition (Nat.le_succ n)).val f x } }
+      naturality := by
+        intro M N f
+        ext U x
+        have h := congrArg (fun a ↦ a.val.app U x)
+          ((D.equivalence.functor.map f).comm (Nat.le_succ n))
+        change (((D.equivalence.functor.obj N).transition (Nat.le_succ n)).val.app U)
+            (((D.equivalence.functor.map f).app (n + 1)).val.app U x) =
+          ((D.equivalence.functor.map f).app n).val.app U
+            (((D.equivalence.functor.obj M).transition (Nat.le_succ n)).val.app U x)
+        exact h }
+  refine ⟨τ, ?_, ?_⟩
+  · intro M U x
+    rfl
+  · intro σ hσ
+    ext M U x
+    exact hσ M U x
+
+/-- The original transition with its restricted scalar action, selected only from
+its sectionwise unique characterization. Source: blueprint, proof step 2
+(blueprint: def-sp-tower-reconstruction-data). -/
+def spCompletedTransition (n : ℕ) :
+    spCompletedEvaluation l E T D (n + 1) ⟶ spCompletedEvaluation l E T D n :=
+  (spCompletedTransition_existsUnique l E T D n).exists.choose
+
+/-- Derived level evaluation followed by exact completed-coefficient restriction.
+Source: blueprint, proof step 2 (blueprint: def-sp-tower-reconstruction-data). -/
+def spDerivedCompletedEvaluation (n : ℕ) : spDerivedCoefficientTowers l E T D ⥤
+    DerivedCategory (WeilConjectures.scalarReductionSource.{u, u} l E T) :=
+  spDerivedCoefficientEvaluation l E T D n ⋙
+    (spCompletedEllRestriction l E T n).mapDerivedCategory
+
+/-- The canonical comparison between derived and termwise completed evaluation.
+Source: blueprint, proof step 2 (blueprint: def-sp-tower-reconstruction-data). -/
+def spCompletedEvaluationFactors (n : ℕ) :
+    @DerivedCategory.Q (spCoefficientTowers l E T) _ _ D.hasDerived ⋙
+        spDerivedCompletedEvaluation l E T D n ≅
+      (spCompletedEvaluation l E T D n).mapHomologicalComplex (.up ℤ) ⋙
+        DerivedCategory.Q :=
+  letI := D.hasDerived
+  letI := D.equivalenceAdditive
+  letI := D.evaluationLimits n
+  letI := D.evaluationColimits n
+  letI : (spCoefficientEvaluation l E T D.equivalence n).Additive :=
+    Functor.additive_of_preserves_binary_products _
+  Functor.isoWhiskerRight (spCoefficientEvaluation l E T D.equivalence n).mapDerivedCategoryFactors
+      (spCompletedEllRestriction l E T n).mapDerivedCategory ≪≫
+    Functor.isoWhiskerLeft
+      ((spCoefficientEvaluation l E T D.equivalence n).mapHomologicalComplex (.up ℤ))
+      (spCompletedEllRestriction l E T n).mapDerivedCategoryFactors
+
+set_option backward.isDefEq.respectTransparency false in
+set_option backward.isDefEq.respectTransparency.types false in
+/-- The unique derived transition induced by the actual ordinary transition.
+Source: blueprint, proof step 2 (blueprint: def-sp-tower-reconstruction-data).
+Proof: the ordinary square is natural and therefore descends through localization,
+since both evaluation functors preserve quasi-isomorphisms. The displayed comparison
+formula fixes the transition on every localized complex. Essential surjectivity of
+the localization and naturality then prove uniqueness on the whole derived category. -/
+theorem spDerivedCompletedTransition_existsUnique (n : ℕ) :
+    ∃! τ : spDerivedCompletedEvaluation l E T D (n + 1) ⟶
+        spDerivedCompletedEvaluation l E T D n,
+      ∀ P : CochainComplex (spCoefficientTowers l E T) ℤ,
+        τ.app (@DerivedCategory.Q (spCoefficientTowers l E T) _ _ D.hasDerived |>.obj P) ≫
+            (spCompletedEvaluationFactors l E T D n).hom.app P =
+          (spCompletedEvaluationFactors l E T D (n + 1)).hom.app P ≫
+            DerivedCategory.Q.map
+              ((NatTrans.mapHomologicalComplex (spCompletedTransition l E T D n)
+                (.up ℤ)).app P) := by
+  let := D.hasDerived
+  let Q := @DerivedCategory.Q (spCoefficientTowers l E T) _ _ D.hasDerived
+  let W := HomologicalComplex.quasiIso (spCoefficientTowers l E T) (.up ℤ)
+  let F := fun n : ℕ ↦
+    (spCompletedEvaluation l E T D n).mapHomologicalComplex (.up ℤ) ⋙ DerivedCategory.Q
+  let G := spDerivedCompletedEvaluation l E T D
+  let : Localization.Lifting Q W (F n) (G n) :=
+    ⟨spCompletedEvaluationFactors l E T D n⟩
+  let : Localization.Lifting Q W (F (n + 1)) (G (n + 1)) :=
+    ⟨spCompletedEvaluationFactors l E T D (n + 1)⟩
+  let t : F (n + 1) ⟶ F n := Functor.whiskerRight
+    (NatTrans.mapHomologicalComplex (spCompletedTransition l E T D n) (.up ℤ))
+    DerivedCategory.Q
+  let τ := Localization.liftNatTrans Q W (F (n + 1)) (F n) (G (n + 1)) (G n) t
+  have ht (P : CochainComplex (spCoefficientTowers l E T) ℤ) :
+      τ.app (Q.obj P) ≫ (spCompletedEvaluationFactors l E T D n).hom.app P =
+        (spCompletedEvaluationFactors l E T D (n + 1)).hom.app P ≫
+          DerivedCategory.Q.map
+            ((NatTrans.mapHomologicalComplex (spCompletedTransition l E T D n)
+              (.up ℤ)).app P) := by
+    dsimp only [τ]
+    rw [Localization.liftNatTrans_app]
+    change ((spCompletedEvaluationFactors l E T D (n + 1)).hom.app P ≫
+      t.app P ≫ (spCompletedEvaluationFactors l E T D n).inv.app P) ≫ _ = _
+    simp only [Category.assoc, Iso.inv_hom_id_app]
+    dsimp only [t, Functor.whiskerRight_app]
+    rw [Category.comp_id]
+  refine ⟨τ, ht, ?_⟩
+  intro σ hσ
+  apply Localization.natTrans_ext Q W
+  intro P
+  apply (cancel_mono ((spCompletedEvaluationFactors l E T D n).hom.app P)).1
+  exact (hσ P).trans (ht P).symm
+
+/-- The canonical derived transition; it retains the strict tower's specified maps.
+Source: blueprint, proof step 2 (blueprint: def-sp-tower-reconstruction-data). -/
+def spDerivedCompletedTransition (n : ℕ) :
+    spDerivedCompletedEvaluation l E T D (n + 1) ⟶
+      spDerivedCompletedEvaluation l E T D n :=
+  (spDerivedCompletedTransition_existsUnique l E T D n).exists.choose
+
+/-- The natural reduction map, as the normalized derived tensor-restriction adjunct
+of the given limit projection, in the finite-coefficient derived category.
+Source: blueprint, displayed map and proof step 8 (blueprint: def-sp-tower-reconstruction-data). -/
+def spTowerReconstructionMap (C : spDerivedCoefficientTowers l E T D)
+    (M : DerivedCategory (WeilConjectures.scalarReductionSource.{u, u} l E T))
+    [HasProduct (fun n : ℕ ↦ (spDerivedCompletedEvaluation l E T D n).obj C)]
+    (p : M ⟶ ∏ᶜ fun n : ℕ ↦ (spDerivedCompletedEvaluation l E T D n).obj C) (n : ℕ) :
+    (D.scalar (spCompletedEllCommProjection l E T n)).model.T.obj M ⟶
+      (spDerivedCoefficientEvaluation l E T D n).obj C :=
+  ((D.scalar (spCompletedEllCommProjection l E T n)).adjunction.homEquiv M
+    ((spDerivedCoefficientEvaluation l E T D n).obj C)).symm
+    (p ≫ Pi.π (fun k : ℕ ↦ (spDerivedCompletedEvaluation l E T D k).obj C) n)
+
+end AlgebraicGeometry.ProEtale

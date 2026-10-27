@@ -1,0 +1,306 @@
+{
+ "id": "lem-trf-open-sheaf-coproduct-base-change",
+ "kind": "statement",
+ "title": "Scheme base changes of a sheaf coproduct of open subfunctors",
+ "statement": "Let $S$ be a scheme [def-pc-scheme], and work on its big fppf site [def-pc-fppf-site] in the universes of [def-weil-size-convention]. For a scheme $X$ over $S$ write $h_X(W)=\\operatorname{Mor}_S(W,X)$. Let $F$ and $(F_i)_{i\\in I}$ be sheaves of sets [def-weil-pbc-sites-and-cohomology], indexed by a small set $I$, with subfunctor inclusions $\\iota_i:F_i\\hookrightarrow F$ [def-pc-subfunctor] representable by open immersions [def-trf-algebraic-space, def-weil-open-immersion]. Let $H=\\coprod_{i\\in I}F_i$ be their coproduct in sheaves [def-weil-pbc-category-colimit], with injections $j_i$, and let $q:H\\to F$ satisfy $qj_i=\\iota_i$. For every scheme $T$ over $S$ and map $t:h_T\\to F$, let $V_i\\hookrightarrow T$ represent $h_T\\times_FF_i$, and form the scheme coproduct $C_T=\\coprod_iV_i$ [lem-weil-pbc-scheme-coproduct-family], assumed to lie in the chosen big site. The functors $h_X$ are fppf sheaves. The maps $h_{V_i}\\to H\\times_Fh_T$ induce a canonical isomorphism of fppf sheaves $h_{C_T}\\simeq H\\times_Fh_T$ over $h_T$, whose restriction to every summand is the specified map and which commutes with every change of scheme test $T'\\to T$. In particular $q$ is representable and its scheme base change along $t$ is the morphism $C_T\\to T$ induced by the inclusions $V_i\\hookrightarrow T$. No covering condition on the $V_i$ and no algebraic-space condition on $F_i$ or $H$ is assumed.",
+ "source": {
+  "document": "literature/stacks-project/spaces.tex",
+  "place": "Tag 02WR (lemma-glueing-algebraic-spaces), first paragraph, sentence 'It follows that $(\\coprod F_i) \\times_F T$ is represented by the scheme $\\coprod V_i$ over $T$'; including the sheaf-descent and local-representative verifications expanded in returned proof steps 1, 2 and 4"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-fppf-site",
+  "def-weil-size-convention",
+  "def-weil-pbc-sites-and-cohomology",
+  "def-pc-subfunctor",
+  "def-trf-algebraic-space",
+  "def-weil-open-immersion",
+  "def-weil-pbc-category-colimit",
+  "lem-weil-pbc-scheme-coproduct-family"
+ ],
+ "proof": [
+  {
+   "text": "Every fppf covering is fpqc by [lem-trf-fppf-covering-is-fpqc]. Apply [lem-weil-pbc-fpqc-representable-descent] to a compatible family of maps into any scheme $X$. This gives a unique underlying scheme map. When all local maps are over $S$, its composite into $S$ agrees locally with the structure map, so uniqueness in the same descent lemma with target $S$ makes it an $S$-map. Thus every $h_X$ satisfies the fppf sheaf equalizer condition. Products with an equality condition satisfy the same condition componentwise; in particular $P_T(W)=\\{(a,b):a\\in H(W),\\ b:W\\to T,\\ q(a)=t(b)\\}$ is the sheaf $H\\times_Fh_T$.",
+   "uses": [
+    "lem-trf-fppf-covering-is-fpqc",
+    "lem-weil-pbc-fpqc-representable-descent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 03O3 (lemma-representable-sheaf-fpqc), with topologies.tex Tag 022C."
+   }
+  },
+  {
+   "text": "Write $k_i:V_i\\to C_T$ and $v_i:V_i\\to T$, and let $s_i\\in F_i(V_i)$ be the universal section of the specified representing isomorphism. The coproduct property of [lem-weil-pbc-scheme-coproduct-family] gives $p:C_T\\to T$ with $pk_i=v_i$. Its summands are a clopen partition. The converse gluing in [lem-trf-fppf-sheaf-coproduct-partition] gives $a_C\\in H(C_T)$ restricting to $j_i(s_i)$. The maps $k_i$ form an fppf cover by [lem-pc-zariski-coverings-are-fppf]; hence $q(a_C)=t(p)$, since both restrict to $\\iota_i(s_i)=t(v_i)$. Define $\\Phi_W(g)=(g^*a_C,pg)$ for $g:W\\to C_T$. This is natural in $W$ and its summand restrictions are the required maps. For the universe sizes in Lean, first discard empty summands. Choosing a point in each remaining summand injects its index set into the points of C_T: distinct indices are separated using the map from the coproduct to the binary coproduct of terminal schemes that labels one summand by the first injection and all others by the second. Thus the support is small in the scheme universe. Reindex it by a small type, compare the given cofan with the canonical scheme coproduct, and transport openness, disjointness and joint surjectivity. Sheaf descent on this cover also proves that the lifted representables of the summands form a coproduct in sheaves.",
+   "uses": [
+    "lem-weil-pbc-scheme-coproduct-family",
+    "lem-trf-fppf-sheaf-coproduct-partition",
+    "lem-pc-zariski-coverings-are-fppf"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces.tex",
+    "place": "Tag 02WR (lemma-glueing-algebraic-spaces), first paragraph, coproduct base-change comparison; detailed sectionwise verification using Tags 0F15 and 02WO."
+   }
+  },
+  {
+   "text": "For $(a,b)\\in P_T(W)$, [lem-trf-fppf-sheaf-coproduct-partition] gives the unique decomposition $W=\\coprod_iW_i$ and $a_i\\in F_i(W_i)$ with $j_i(a_i)=a|_{W_i}$. The equation defining $P_T(W)$ restricts to $\\iota_i(a_i)=t(b|_{W_i})$. By the given representing property of $V_i$ there is a unique $g_i:W_i\\to V_i$ with projections $(a_i,b|_{W_i})$. The scheme coproduct decomposition of $W$ gives a unique $g:W\\to C_T$ restricting to $k_ig_i$. Define $\\Psi_W(a,b)=g$. This uses no covering property of the opens $V_i\\subset T$.",
+   "uses": [
+    "lem-trf-fppf-sheaf-coproduct-partition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces.tex",
+    "place": "Tag 02WR (lemma-glueing-algebraic-spaces), first paragraph, coproduct base-change comparison; detailed sectionwise verification using Tags 0F15 and 02WO."
+   }
+  },
+  {
+   "text": "The construction in Step 2, together with the cartesian clause of [lem-trf-fppf-sheaf-coproduct-partition], makes each square from h_{V_i} to h_{C_T} over F_i to H cartesian. The map g of Step 3 has the prescribed two projections, as is checked on the partition pieces, which form an fppf cover by [lem-pc-zariski-coverings-are-fppf]. For another map with these projections, the first family of cartesian squares factors its restrictions through V_i; the given representing square for V_i then identifies each such factor with g_i. The scheme coproduct property [lem-weil-pbc-scheme-coproduct-family] gives equality globally. Thus every compatible pair has exactly one lift, including empty pieces, and the comparison square is cartesian. This argument uses the definition of open immersion [def-weil-open-immersion] to identify the open summands and their monomorphisms.",
+   "uses": [
+    "lem-pc-zariski-coverings-are-fppf",
+    "lem-weil-pbc-scheme-coproduct-family",
+    "def-weil-open-immersion",
+    "lem-trf-fppf-sheaf-coproduct-partition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces.tex",
+    "place": "Tag 02WR (lemma-glueing-algebraic-spaces), first paragraph, coproduct base-change comparison; detailed sectionwise verification using Tags 0F15 and 02WO."
+   }
+  },
+  {
+   "text": "Express the preceding unique lifting property on each test W as the pullback criterion in sets. Limits of presheaves are computed objectwise, so the already natural morphisms a_C and h_p form a cartesian presheaf square. Its canonical isomorphism with the categorical pullback is the desired comparison, and Step 1 identifies these presheaves with sheaves. Its summand equations characterize its first projection by the sheaf coproduct of representables proved in Step 2; its second projection is h_p. Pullback extensionality therefore gives uniqueness of the isomorphism. This implements the sectionwise inverse of [lem-trf-fppf-sheaf-coproduct-partition] without a separate choice of an inverse natural transformation.",
+   "uses": [
+    "lem-trf-fppf-sheaf-coproduct-partition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces.tex",
+    "place": "Tag 02WR (lemma-glueing-algebraic-spaces), first paragraph, coproduct base-change comparison; detailed sectionwise verification using Tags 0F15 and 02WO."
+   }
+  },
+  {
+   "text": "For $f:T\\prime\\to T$, use $t\\prime=t\\circ h_f$ and the chosen representing opens $V_i\\prime$. On $V_i\\prime$ the universal pair gives a unique map $d_i:V_i\\prime\\to V_i$ over $f$, and the scheme coproduct property [lem-weil-pbc-scheme-coproduct-family] gives $d:C_{T\\prime}\\to C_T$. For a test $W$, the two comparison maps send $g:W\\to C_{T\\prime}$ to the same pair $(g^*a_{C_{T\\prime}},f p\\prime g)$: this holds on each inverse-image summand by the definition of $d_i$, and holds globally by the sheaf condition of Step 1. Thus the isomorphisms commute with $f$. The sectionwise description also identifies $h_{C_{T\\prime}}$ with $h_{C_T}\\times_{h_T}h_{T\\prime}$: a pair $(g,b\\prime)$ with $pg=f b\\prime$ corresponds under $\\Phi$ to $(g^*a_C,b\\prime)$ and then under $\\Psi$ for $T\\prime$ to its unique map into $C_{T\\prime}$. This verifies the full base-change assertion. In Lean the last assertion follows by pullback pasting for the two comparison squares, reflection along the fully faithful lifted Yoneda functor, and preservation of pullbacks by the forgetful functor from schemes over S. The uniqueness of each d_i follows from the open-immersion monomorphism V_i to T [def-weil-open-immersion], and uniqueness of d follows from the scheme cofan.",
+   "uses": [
+    "lem-weil-pbc-scheme-coproduct-family",
+    "def-weil-open-immersion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces.tex",
+    "place": "Tag 02WR (lemma-glueing-algebraic-spaces), first paragraph, coproduct base-change comparison; detailed sectionwise verification using Tags 0F15 and 02WO."
+   }
+  },
+  {
+   "text": "For every $T,t$, Steps 2-5 exhibit $h_{C_T}\\simeq H\\times_Fh_T$, and its projection is $p$, restricting to $v_i$ on each summand. This is exactly representability of $q$ in [def-trf-algebraic-space]. Step 6 gives the stated test-change compatibility. For $I=\\varnothing$, the partition theorem says $H(W)$ is empty for nonempty $W$ and a singleton for empty $W$, agreeing with $h_{\\varnothing}(W)$; empty summands cause the same unique empty-piece maps throughout.",
+   "uses": [
+    "def-trf-algebraic-space",
+    "lem-trf-fppf-sheaf-coproduct-partition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces.tex",
+    "place": "Tag 02WR (lemma-glueing-algebraic-spaces), first paragraph, coproduct base-change comparison; detailed sectionwise verification using Tags 0F15 and 02WO."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-trf-fppf-covering-is-fpqc",
+  "lem-weil-pbc-fpqc-representable-descent",
+  "lem-weil-pbc-scheme-coproduct-family",
+  "lem-trf-fppf-sheaf-coproduct-partition",
+  "lem-pc-zariski-coverings-are-fppf",
+  "def-weil-open-immersion",
+  "def-trf-algebraic-space"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/spaces.tex",
+  "place": "Tag 02WR (lemma-glueing-algebraic-spaces), first paragraph; explicit sectionwise construction using the existing Tag 0F15/02WO partition lemma. M9 formalization: small-support reduction for the given scheme cofan; sheaf descent on its disjoint open summands; partition-theorem cartesian squares and objectwise unique lifts; base-change compatibility by pullback pasting and Yoneda reflection."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For fppf sheaves F_i with representable maps to a sheaf F, base change of their sheaf coproduct to a scheme T is represented by the coproduct of the scheme base changes",
+   "results": "AlgebraicGeometry.Scheme.coprodPresheafObjIso; AlgebraicGeometry.isPullback_inl_inl_coprodMap; AlgebraicGeometry.isPullback_inr_inr_coprodMap; AlgebraicGeometry.instHasCoproductsOfShapeOverSchemeTopMorphismPropertyOfSmall; AlgebraicGeometry.instCoproductsOfShapeDisjointSchemeOfSmall; AlgebraicGeometry.instFinitaryExtensiveScheme; AlgebraicGeometry.Scheme.coprodPresheafObjIso_hom_fst_assoc; AlgebraicGeometry.instHasFiniteCoproductsOverSchemeTopMorphismProperty",
+   "date": "2026-10-22",
+   "verdict": "no match: hits give scheme coproducts, rings of sections on a binary scheme coproduct, generic sheaf coproduct existence or module presheaf generators, not this relative sheaf-to-scheme representation"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Sheaf\", \"coprod\"",
+   "results": "PresheafOfModules.freeYonedaCoproduct; PresheafOfModules.instEpiFromFreeYonedaCoproduct; PresheafOfModules.fromFreeYonedaCoproduct; PresheafOfModules.ιFreeYonedaCoproduct; PresheafOfModules.ι_fromFreeYonedaCoproduct; PresheafOfModules.ι_fromFreeYonedaCoproduct_assoc; PresheafOfModules.freeYonedaCoproductMk; PresheafOfModules.ι_fromFreeYonedaCoproduct_apply",
+   "date": "2026-10-22",
+   "verdict": "no match: hits give scheme coproducts, rings of sections on a binary scheme coproduct, generic sheaf coproduct existence or module presheaf generators, not this relative sheaf-to-scheme representation"
+  },
+  {
+   "tool": "grep",
+   "query": "AlgebraicSpace|sheaf.*coproduct|coproduct.*sheaf|isRepresentable",
+   "results": "Mathlib/AlgebraicGeometry/Sites/ConstantSheaf.lean; Mathlib/AlgebraicGeometry/Sites/Representability.lean; Mathlib/AlgebraicGeometry/Sites/Representability.lean; Mathlib/AlgebraicGeometry/Sites/BigZariski.lean; Mathlib/AlgebraicGeometry/Sites/BigZariski.lean; Mathlib/AlgebraicGeometry/Sites/Fpqc.lean; Mathlib/AlgebraicGeometry/Sites/Fpqc.lean; Mathlib/AlgebraicGeometry/Sites/Fpqc.lean",
+   "date": "2026-10-22",
+   "verdict": "no match: hits give scheme coproducts, rings of sections on a binary scheme coproduct, generic sheaf coproduct existence or module presheaf generators, not this relative sheaf-to-scheme representation"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Representability of the pullback of a coproduct of fppf sheaves by the disjoint union of scheme pullbacks",
+   "results": "none; service unavailable: {\"error\":\"Rate limit exceeded: 60 per 1 minute\"}",
+   "date": "2026-10-22",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Base change commutes with arbitrary coproducts of sheaves and a disjoint union of schemes represents the coproduct sheaf",
+   "results": "AlgebraicGeometry.Scheme.coprodPresheafObjIso; AlgebraicGeometry.Scheme.coprodPresheafObjIso_hom_fst_assoc; AlgebraicGeometry.Scheme.coprodPresheafObjIso_hom_snd_assoc; AlgebraicGeometry.Scheme.coprodPresheafObjIso_hom_fst; AlgebraicGeometry.Scheme.coprodPresheafObjIso_hom_snd; AlgebraicGeometry.isPullback_inr_inr_coprodMap; AlgebraicGeometry.isPullback_inl_inl_coprodMap; AlgebraicGeometry.instCoproductsOfShapeDisjointSchemeOfSmall",
+   "date": "2026-10-22",
+   "verdict": "no match: hits give scheme coproducts, rings of sections on a binary scheme coproduct, generic sheaf coproduct existence or module presheaf generators, not this relative sheaf-to-scheme representation"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"pullback\", \"PreservesColimits\"",
+   "results": "none",
+   "date": "2026-10-22",
+   "verdict": "no match: hits give scheme coproducts, rings of sections on a binary scheme coproduct, generic sheaf coproduct existence or module presheaf generators, not this relative sheaf-to-scheme representation"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The sheaf coproduct of a family of representable open maps has scheme base changes given by disjoint unions",
+   "results": "AlgebraicGeometry.sigmaOpenCover; AlgebraicGeometry.LocallyRingedSpace.coproduct; AlgebraicGeometry.instFinitaryExtensiveScheme; AlgebraicGeometry.instIsOpenImmersionMapScheme; CategoryTheory.Sheaf.instHasFiniteCoproducts; AlgebraicGeometry.instCoproductsOfShapeDisjointSchemeOfSmall; AlgebraicGeometry.Scheme.coprodPresheafObjIso; AlgebraicGeometry.isOpenImmersion_sigmaDesc",
+   "date": "2026-10-22",
+   "verdict": "no match: hits give scheme coproducts, rings of sections on a binary scheme coproduct, generic sheaf coproduct existence or module presheaf generators, not this relative sheaf-to-scheme representation"
+  },
+  {
+   "tool": "grep",
+   "query": "coprodPresheafObjIso|isPullback_inl_inl_coprodMap|FinitaryExtensive",
+   "results": "Mathlib/AlgebraicGeometry/Limits.lean; Mathlib/AlgebraicGeometry/Limits.lean; Mathlib/AlgebraicGeometry/Limits.lean; Mathlib/AlgebraicGeometry/Limits.lean; Mathlib/AlgebraicGeometry/Limits.lean; Mathlib/AlgebraicGeometry/Sites/BigZariski.lean; Mathlib/AlgebraicGeometry/Morphisms/AffineAnd.lean; Mathlib/AlgebraicGeometry/Morphisms/Basic.lean",
+   "date": "2026-10-22",
+   "verdict": "no match: hits give scheme coproducts, rings of sections on a binary scheme coproduct, generic sheaf coproduct existence or module presheaf generators, not this relative sheaf-to-scheme representation"
+  },
+  {
+   "tool": "grep",
+   "query": "AlgebraicSpace|sheaf.*coproduct|coproduct.*sheaf|isRepresentable",
+   "results": "{\"t\": \"2026-10-22T07:23:13Z\", \"tool\": \"grep\", \"query\": \"AlgebraicSpace|sheaf.*coproduct|coproduct.*sheaf|isRepresentable\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 9, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/Sites/ConstantSheaf.lean\", \"Mathlib/AlgebraicGeometry/Sites/Representability.lean\", \"Mathlib/AlgebraicGeometry/Sites/Representability.lean\", \"Mathlib/AlgebraicGeometry/Sites/Fpqc.lean\", \"Mathlib/AlgebraicGeometry/Sites/Fpqc.lean\", \"Mathlib/AlgebraicGeometry/Sites/Fpqc.lean\", \"Mathlib/AlgebraicGeometry/Sites/Fpqc.lean\", \"Mathlib/AlgebraicGeometry/Sites/BigZariski.lean\"], \"digest\": \"c10f7236356d9c03\"}",
+   "date": "2026-10-22",
+   "verdict": "no match for the item: scheme coproducts and their structure-sheaf sections, general local representability, or module-presheaf coproducts do not supply this relative sheaf-coproduct comparison"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Representability of pullback of coproducts of fppf sheaves by disjoint unions of scheme pullbacks",
+   "results": "{\"t\": \"2026-10-22T07:23:14Z\", \"tool\": \"leansearch\", \"query\": \"Representability of pullback of coproducts of fppf sheaves by disjoint unions of scheme pullbacks\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.instHasFiniteCoproductsScheme\", \"AlgebraicGeometry.Scheme.isEmpty_pullback\", \"AlgebraicGeometry.Scheme.LocalRepresentability.isRepresentable\", \"CategoryTheory.Limits.FormalCoproduct.instHasPullbacks\", \"CategoryTheory.Limits.FormalCoproduct.instHasPullback\", \"AlgebraicGeometry.coprodMk\", \"AlgebraicGeometry.isPullback_inl_inl_coprodMap\", \"AlgebraicGeometry.instFinitaryExtensiveScheme\"], \"digest\": \"c89a40c1ac6b7e69\"}",
+   "date": "2026-10-22",
+   "verdict": "no match for the item: scheme coproducts and their structure-sheaf sections, general local representability, or module-presheaf coproducts do not supply this relative sheaf-coproduct comparison"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Sheaf\", \"coprod\"",
+   "results": "{\"t\": \"2026-10-22T07:23:14Z\", \"tool\": \"loogle\", \"query\": \"\\\"Sheaf\\\", \\\"coprod\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"PresheafOfModules.freeYonedaCoproduct\", \"PresheafOfModules.instEpiFromFreeYonedaCoproduct\", \"PresheafOfModules.fromFreeYonedaCoproduct\", \"PresheafOfModules.ιFreeYonedaCoproduct\", \"PresheafOfModules.ι_fromFreeYonedaCoproduct\", \"PresheafOfModules.ι_fromFreeYonedaCoproduct_assoc\", \"PresheafOfModules.freeYonedaCoproductMk\", \"PresheafOfModules.ι_fromFreeYonedaCoproduct_apply\"], \"digest\": \"c167a828c5a62f6b\"}",
+   "date": "2026-10-22",
+   "verdict": "no match for the item: scheme coproducts and their structure-sheaf sections, general local representability, or module-presheaf coproducts do not supply this relative sheaf-coproduct comparison"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Base change of a coproduct of fppf sheaves represented by open immersions is represented by the disjoint union of the open scheme pullbacks",
+   "results": "{\"t\": \"2026-10-22T07:23:19Z\", \"tool\": \"leanfinder\", \"query\": \"Base change of a coproduct of fppf sheaves represented by open immersions is represented by the disjoint union of the open scheme pullbacks\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.coprodPresheafObjIso\", \"AlgebraicGeometry.Scheme.LocalRepresentability.glueData_V\", \"AlgebraicGeometry.isOpenImmersion_sigmaDesc\", \"AlgebraicGeometry.instIsOpenImmersionMapScheme\", \"AlgebraicGeometry.isPullback_inl_inl_coprodMap\", \"AlgebraicGeometry.instCoproductsOfShapeDisjointSchemeOfSmall\", \"AlgebraicGeometry.isPullback_inr_inr_coprodMap\", \"AlgebraicGeometry.instFinitaryExtensiveScheme\"], \"digest\": \"379efc869fde3568\"}",
+   "date": "2026-10-22",
+   "verdict": "no match for the item: scheme coproducts and their structure-sheaf sections, general local representability, or module-presheaf coproducts do not supply this relative sheaf-coproduct comparison"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"pullback\", \"PreservesColimits\"",
+   "results": "{\"t\": \"2026-10-22T07:25:50Z\", \"tool\": \"loogle\", \"query\": \"\\\"pullback\\\", \\\"PreservesColimits\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match for the item: scheme coproducts and their structure-sheaf sections, general local representability, or module-presheaf coproducts do not supply this relative sheaf-coproduct comparison"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A coproduct of sheaves of sets commutes with pullback and representable sheaf coproducts are disjoint unions of schemes",
+   "results": "{\"t\": \"2026-10-22T07:25:51Z\", \"tool\": \"leanfinder\", \"query\": \"A coproduct of sheaves of sets commutes with pullback and representable sheaf coproducts are disjoint unions of schemes\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.coprodPresheafObjIso\", \"AlgebraicGeometry.Scheme.coprodPresheafObjIso_hom_fst\", \"AlgebraicGeometry.instCoproductsOfShapeDisjointSchemeOfSmall\", \"AlgebraicGeometry.coprodIsoSigma\", \"AlgebraicGeometry.Scheme.coprodPresheafObjIso_hom_fst_assoc\", \"AlgebraicGeometry.isPullback_inr_inr_coprodMap\", \"AlgebraicGeometry.isPullback_inl_inl_coprodMap\", \"AlgebraicGeometry.instFinitaryExtensiveScheme\"], \"digest\": \"d77eaa9cee6b1d5d\"}",
+   "date": "2026-10-22",
+   "verdict": "no match for the item: scheme coproducts and their structure-sheaf sections, general local representability, or module-presheaf coproducts do not supply this relative sheaf-coproduct comparison"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-algebraic-space-open-gluing",
+  "date": "2026-10-22",
+  "group": "Q147"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "first paragraph, sentence 'It follows that $(\\coprod F_i) \\times_F T$ is represented by the scheme $\\coprod V_i$ over $T$'; including the sheaf-descent and local-representative verifications expanded in returned proof steps 1, 2 and 4",
+   "via": [
+    "lem-trf-algebraic-space-open-gluing",
+    "lem-trf-etale-relation-quotient",
+    "lem-trf-polarized-scheme-etale-descent",
+    "lem-trf-polarized-fine-log-etale-descent",
+    "lem-trf-coherent-log-ideal-chart-construction",
+    "lem-trf-log-blowup-normalization",
+    "lem-trf-log-regular-desingularization",
+    "lem-trf-nodal-pair-projective-resolution",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-trf-open-sheaf-coproduct-base-change",
+  "worker": "stage1",
+  "summary": "Constructed the comparison and inverse explicitly using the existing clopen partition theorem. Proved representable test functors are fppf sheaves by the existing fpqc descent leaf and one new exact Mathlib covering-comparison leaf. Checked inverse maps, naturality, arbitrary test change and empty indices; no statement change.",
+  "blueprint": "Supplies the Tag 02WR open-gluing comparison in the historical polarized-scheme descent route below lem-trf-local-term-locality, without changing its chapter or unit route. The nearest ancestor has no identical statement; whole-blueprint searches for coproduct, subcanonical, 02WR and fppf covering found no duplicate.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q19-d7bf976fd",
+  "group": "Q19",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q19-d7bf976fd (reviewer sub-agent of L); spot-checked: Statement unchanged: byte-identical to the Q147 snapshot (Q147 created the item and PASSed at bb86d889). It is true: H×_F h_T = ∐(F_i×_F h_T) = ∐h_{V_i} = h_{∐V_i}. It matches Stacks 02WR, which I read in spaces.tex (first proof paragraph); that sentence uses only (2)(b) and (2)(c), so dropping (2)(d) and (2)(e) loses nothing. Edge cases tested: I=∅, empty V_i, V_1=V_2=T, ∪V_i⊊T, and infinite I. Step 1 uses the existence and uniqueness of fpqc-representable-descent, applied again with target S to get the S-map property. Step 2: the scheme-coproduct mapping property and clopen summands, the converse gluing clause of the partition lemma, and the summands forming a Zariski cover, hence fppf, give q(a_C)=t(p). Step 3: the partition clause gives ι_i(a_i)=t(b|W_i), and the V_i representing property gives g_i. Gluing on the clopen W_i is elementary (Step 1 sheaf on a Zariski cover). Step 4: both composites checked: g^*a_C|W_i=j_i(a_i), and D_i=g^{-1}(k_iV_i) with uniqueness of the partition and of representing maps. Step 5 is the restriction clause. Step 6: d_i is defined by (s_i', f v_i'), d^*a_C=a_{C_T'} holds on summands, and the base change C_{T'}=C_T×_T T' follows. Step 7 is exactly the representability clause of def-trf-algebraic-space and the empty-index clause. New node lem-trf-fppf-covering-is-fpqc: true (Stacks 022C; tags line 2701). Exact Mathlib leaf fppfPrecoverage_le_fpqcPrecoverage, read at Fpqc.lean:66-69. Statement only; B1-B9 OK. A grep -R for 022C, fppfPrecoverage_le_fpqc and subcanonical finds no node stating it, only inline uses: fpqc-finer-than-etale is étale only, pc-fppf-affine-refinement is an fppf refinement, a1-algebraic-space-fpqc-sheaf is about spaces. No cycle: the 137-node dependency closure does not contain the item. Other-unit citations are all Mathlib leaves, so no tool_uses are needed; no SGA. No changes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.OpenSheafCoproductBaseChange",
+  "declaration": "AlgebraicGeometry.Scheme.openSheafCoproduct_baseChange",
+  "declarations": [
+   "AlgebraicGeometry.AlgebraicSpace.IsRepresentableWithLift",
+   "AlgebraicGeometry.AlgebraicSpace.IsRepresentableLift",
+   "AlgebraicGeometry.Scheme.OpenSheafCoproductTest",
+   "AlgebraicGeometry.Scheme.OpenSheafCoproductTest.ComparisonEquations",
+   "AlgebraicGeometry.Scheme.openSheafCoproduct_baseChange"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/OpenSheafCoproductBaseChange.lean",
+  "statement": "theorem openSheafCoproduct_baseChange {S : Scheme.{u}} {I : Type (max u v)} (F : Sheaf (fppfTopology.over S) (Type (max u v))) (Fi : I → Sheaf (fppfTopology.over S) (Type (max u v))) (ι : ∀ i, Fi i ⟶ F) (hmono : ∀ i, Mono (ι i)) (hopen : ∀ i, AlgebraicSpace.IsRepresentableWithLift (fun _ _ p ↦ IsOpenImmersion p.left) (ι i).hom) (H : Sheaf (fppfTopology.over S) (Type (max u v))) (j : ∀ i, Fi i ⟶ H) (hcol : IsColimit (Cofan.mk H j)) (q : H ⟶ F) (hfac : ∀ i, j i ≫ q = ι i) (hsite : ∀ (T : Over S) (t : uliftYoneda.{v}.obj T ⟶ F.obj), Nonempty (OpenSheafCoproductTest Fi ι T t)) : (∀ X : Over S, Presheaf.IsSheaf (fppfTopology.over S) (uliftYoneda.{v}.obj X)) ∧ AlgebraicSpace.IsRepresentableLift q.hom ∧ ∀ (T : Over S) (t : uliftYoneda.{v}.obj T ⟶ F.obj) (D : OpenSheafCoproductTest Fi ι T t), ∃! e : uliftYoneda.{v}.obj D.C ≅ pullback q.hom t, D.ComparisonEquations j q e ∧ ∀ (T' : Over S) (f : T' ⟶ T) (D' : OpenSheafCoproductTest Fi ι T' (uliftYoneda.{v}.map f ≫ t)), ∃! d : D'.C ⟶ D.C, (∀ i, ∃! di : D'.V i ⟶ D.V i, uliftYoneda.{v}.map di ≫ D.sectionMap i = D'.sectionMap i ∧ di ≫ D.inclusion i = D'.inclusion i ≫ f ∧ D'.injection i ≫ d = di ≫ D.injection i) ∧ d ≫ D.p = D'.p ≫ f ∧ IsPullback d.left D'.p.left D.p.left f.left ∧ ∀ e' : uliftYoneda.{v}.obj D'.C ≅ pullback q.hom (uliftYoneda.{v}.map f ≫ t), D'.ComparisonEquations j q e' → (uliftYoneda.{v}.map d ≫ e.hom ≫ pullback.fst q.hom t = e'.hom ≫ pullback.fst q.hom (uliftYoneda.{v}.map f ≫ t)) ∧ (uliftYoneda.{v}.map d ≫ e.hom ≫ pullback.snd q.hom t = e'.hom ≫ pullback.snd q.hom (uliftYoneda.{v}.map f ≫ t) ≫ uliftYoneda.{v}.map f)",
+  "branch": "newtargets-dag",
+  "by": "Q81",
+  "date": "2026-10-22",
+  "existing": false,
+  "note": "The auxiliary record packages exactly the chosen representing opens, their universal sections and the scheme coproduct assumed to lie in the site. ComparisonEquations gives the summand and projection equations. Isomorphisms and cartesian squares are expressed in presheaves, equivalently in sheaves by the representable-sheaf assertion and creation of limits by the sheaf inclusion. hsite is precisely the stated site-size assumption for every test, not a covering or algebraic-space assumption. The two uliftYoneda scheme-test predicates are helper declarations in this item module; the landed def-trf-algebraic-space record and its complete original interface remain byte-identical to live."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-ee20d055f",
+  "group": "Q81",
+  "result": "pass",
+  "note": "Re-delivery fixes the H13 fault of 62f959: the def-trf-algebraic-space record is byte-identical to live (cmp vs clones/live and side-live; Q128, 21 decls) and the item node differs from live only in its lean record. IsRepresentableWithLift/IsRepresentableLift are now in the item module and listed in lean.declarations; they are the live IsRepresentableWith/IsRepresentable with uliftYoneda.{v} (sections in Type (max u v), tests in Scheme.{u}, no extra hypothesis or universe equality), and no name collision. Statement checked against the node and Stacks 02WR (spaces.tex:1082, first proof paragraph): Mono inclusions, open-immersion representability, sheaf cofan, hfac, hsite = C_T-in-site assumption; conclusions are sheafness of h_X, IsRepresentableLift q, unique comparison with summand/projection equations (uniqueness via sheaf property on the summand cover), unique test-change d/di with Scheme IsPullback (coproducts stable under base change) and e' compatibility. Edge cases I=empty, empty/repeated V_i, non-covering, infinite I, v=0/v>0 fine. Statement verbatim; no hollow defs; only sorry; docstrings with source, blueprint tag and steps 1-7. No compile run (no change); report records clean scompile (5.6 s / 7.9 s). Advisories: plain proof import FppfSheafCoproductPartition is unused by the statement; second reading is a self-check by the same worker."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M9",
+  "result": "pass",
+  "landing": "20261023T123903-L-1285910",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

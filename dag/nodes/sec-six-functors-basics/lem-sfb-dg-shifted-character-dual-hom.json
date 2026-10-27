@@ -1,0 +1,461 @@
+{
+ "id": "lem-sfb-dg-shifted-character-dual-hom",
+ "kind": "statement",
+ "title": "Maps into shifted character-dual free DG modules compute dual cohomology",
+ "statement": "Work in the universes of [def-weil-size-convention]. Let $A=\\bigoplus_{j\\in\\mathbf Z}A^j$ be an associative unital differential graded algebra over $\\mathbf Z$: $d_A$ has degree $1$, $d_A^2=0$, and $d_A(ab)=d_A(a)b+(-1)^j a\\,d_A(b)$ for $a\\in A^j$. A right DG $A$-module $M$ is a graded right module with a degree-$1$ differential satisfying $d_M^2=0$ and $d_M(ma)=d_M(m)a+(-1)^j m\\,d_A(a)$ for $m\\in M^j$. Use shifts $M[k]^n=M^{n+k}$ with differential $(-1)^k d_M$ and unchanged right action. Write $(A^\\vee)^n=\\operatorname{Hom}_{\\mathbf Z}(A^{-n},\\mathbf Q/\\mathbf Z)$, with $(d\\lambda)(a)=(-1)^{n+1}\\lambda(d_Aa)$ for $\\lambda\\in(A^\\vee)^n$, and right action $(\\lambda a)(b)=\\lambda(ab)$. For the underlying cochain complex of abelian groups define $(M^\\vee)^r=\\operatorname{Hom}_{\\mathbf Z}(M^{-r},\\mathbf Q/\\mathbf Z)$ and $(d_{M^\\vee}\\lambda)(m)=(-1)^{r+1}\\lambda(d_Mm)$. Put $H^r(M^\\vee)=\\ker d_{M^\\vee}^r/\\operatorname{im}d_{M^\\vee}^{r-1}$. Let $\\operatorname{Hom}_{\\mathrm{DG}(A)}(X,Y)$ denote the group of degree-zero right $A$-linear chain maps, and let $\\operatorname{Hom}_{K(A)}(X,Y)$ be its quotient by chain homotopy: $f\\sim f^{\\prime}$ when $f-f^{\\prime}=d_Yh+hd_X$ for a degree-$-1$ right $A$-linear additive map $h$. For every integer $k$, evaluation $f\\mapsto(m\\mapsto f(m)(1))$ induces natural isomorphisms of abelian groups $$\\operatorname{Hom}_{\\mathrm{DG}(A)}(M,A^\\vee[k])\\cong\\ker(d_{M^\\vee}:(M^\\vee)^k\\to(M^\\vee)^{k+1}),\\qquad\\operatorname{Hom}_{K(A)}(M,A^\\vee[k])\\cong H^k(M^\\vee).$$ In the evaluation formula $m\\in M^{-k}$. These isomorphisms are contravariantly natural in all right DG $A$-modules $M$, without any boundedness, acyclicity or finiteness assumption.",
+ "source": {
+  "document": "literature/stacks-project/dga.tex",
+  "place": "Tag 09K4, lemma-hom-into-shift-dual-free, both displayed natural identifications."
+ },
+ "stmt_deps": [
+  "def-weil-size-convention",
+  "def-sfb-dg-character-dual-coordinates"
+ ],
+ "proof": [
+  {
+   "text": "Set $Y=A^\\vee[k]$ and write $D=M^\\vee$. First $d_A1=0$: the Leibniz identity at $1\\cdot1$ gives $d_A1=2d_A1$. The displayed dual differential squares to zero since it is a signed precomposition with $d_A^2=0$. For $\\alpha\\in(A^\\vee)^n$, $a\\in A^j$ and $b\\in A^{-n-j-1}$, the Leibniz rule gives\n$$(d(\\alpha a))(b)=(-1)^{n+j+1}\\alpha(a\\,d_Ab)=( (d\\alpha)a+(-1)^n\\alpha(d_Aa))(b).$$\nAssociativity of the right action is $((\\alpha a)c)(b)=\\alpha(acb)=(\\alpha(ac))(b)$, and its unit is immediate. Thus the specified formulas really make $A^\\vee$ a right DG module. Multiplying the differential by $(-1)^k$ verifies the DG rule for $Y$ with its unchanged action. The same square-zero check defines the complex $D$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/dga.tex",
+    "place": "Tag 09K4, lemma-hom-into-shift-dual-free; explicit expansion of the proof, using the preceding character-dual conventions."
+   }
+  },
+  {
+   "text": "For an integer $t$, let $G^t$ be the abelian group of degree-$t$ additive maps $\\phi:M\\to Y$ satisfying $\\phi(ma)=\\phi(m)a$, with no chain-map condition. Define $E_t:G^t\\to D^{k+t}$ by $E_t(\\phi)(m)=\\phi(m)(1)$ for $m\\in M^{-k-t}$. Its inverse is the explicit formula\n$$F_t(\\lambda)(m)(a)=\\lambda(ma),\\qquad m\\in M^p,\\quad a\\in A^{-p-k-t}.$$\nThe degrees put $ma$ in $M^{-k-t}$ and $F_t(\\lambda)(m)$ in $Y^{p+t}$. Additivity is termwise, and right linearity follows from $\\lambda((mc)a)=\\lambda(m(ca))$. Evaluation of $F_t(\\lambda)$ at $1$ recovers $\\lambda$. Conversely right linearity gives $\\phi(m)(a)=(\\phi(m)a)(1)=\\phi(ma)(1)$, so $F_tE_t\\phi=\\phi$. These are inverse additive bijections.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/dga.tex",
+    "place": "Tag 09K4, lemma-hom-into-shift-dual-free; explicit expansion of the proof, using the preceding character-dual conventions."
+   }
+  },
+  {
+   "text": "For $\\phi\\in G^t$ put $\\delta\\phi=d_Y\\phi-(-1)^t\\phi d_M$. Expanding both terms at $ma$ shows that the two terms involving $d_Aa$ have coefficients $(-1)^{p+t}$ and $-(-1)^{t+p}$; they cancel. Hence $\\delta\\phi\\in G^{t+1}$. For $m\\in M^{-k-t-1}$, the $d_Y\\phi$ term evaluates to zero at $1$, since $d_A1=0$. Consequently\n$$E_{t+1}(\\delta\\phi)(m)=(-1)^{t+1}E_t(\\phi)(d_Mm)=(-1)^k(d_D E_t(\\phi))(m),$$\nwhere $d_D$ in degree $k+t$ is $(-1)^{k+t+1}$ times precomposition with $d_M$. This proves the differential identity in every degree, including negative $k$ and $t$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/dga.tex",
+    "place": "Tag 09K4, lemma-hom-into-shift-dual-free; explicit expansion of the proof, using the preceding character-dual conventions."
+   }
+  },
+  {
+   "text": "Take $t=0$ in step 3. The condition $\\delta f=0$ is precisely $d_Yf=f d_M$, whereas $E_1(\\delta f)=(-1)^k d_D E_0(f)$. Since $E_1$ is injective and multiplication by $(-1)^k$ is invertible, $E_0$ restricts to an additive bijection between degree-zero DG maps $M\\to Y$ and $\\ker(d_D:D^k\\to D^{k+1})$. Its inverse is $F_0$ restricted to those cycles. This is the first asserted isomorphism, with exactly the stated evaluation formula.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/dga.tex",
+    "place": "Tag 09K4, lemma-hom-into-shift-dual-free; explicit expansion of the proof, using the preceding character-dual conventions."
+   }
+  },
+  {
+   "text": "Take $t=-1$ in step 3. A homotopy operator is precisely $h\\in G^{-1}$, and $\\delta h=d_Yh+h d_M$. The formula reads $E_0(\\delta h)=(-1)^k d_D E_{-1}(h)$. Thus homotopic chain maps have evaluations differing by a boundary. Conversely if $E_0(f-g)=d_D\\mu$ for $\\mu\\in D^{k-1}$, choose $h=F_{-1}((-1)^k\\mu)$. The formula and injectivity of $E_0$ give $f-g=d_Yh+h d_M$. Therefore evaluation and $F_0$ descend to mutually inverse additive maps between the two quotients, namely $\\operatorname{Hom}_{K(A)}(M,Y)$ and $\\ker d_D^k/\\operatorname{im}d_D^{k-1}=H^k(D)$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/dga.tex",
+    "place": "Tag 09K4, lemma-hom-into-shift-dual-free; explicit expansion of the proof, using the preceding character-dual conventions."
+   }
+  },
+  {
+   "text": "For a DG map $u:N\\to M$, and $n\\in N^{-k-t}$, evaluation gives $E_t(\\phi u)(n)=\\phi(u(n))(1)=(E_t(\\phi)\\circ u)(n)$. The inverse formula also commutes with $u$, because $u(na)=u(n)a$. Precomposition commutes with the differentials since $u$ is a chain map, and sends $d_Yh+h d_M$ to $d_Y(hu)+(hu)d_N$. Hence these equalities pass both to cycles and to the quotients in step 5. They prove contravariant naturality of both isomorphisms. Every formula is degreewise and uses no infinite sum, boundedness, finiteness, or acyclicity hypothesis.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/dga.tex",
+    "place": "Tag 09K4, lemma-hom-into-shift-dual-free; explicit expansion of the proof, using the preceding character-dual conventions."
+   }
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/dga.tex",
+  "place": "Tag 09K4, lemma-hom-into-shift-dual-free: expanded the source's implicit proof by evaluation, its explicit inverse, and a signed differential calculation."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Hom complex into coinduced character dual differential graded module is the dual of the underlying complex",
+   "results": {
+    "t": "2026-10-24T01:57:28Z",
+    "tool": "leansearch",
+    "query": "Hom complex into coinduced character dual differential graded module is the dual of the underlying complex",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "CochainComplex.HomComplex",
+     "CharacterModule.dual",
+     "CochainComplex.HomComplex.δ",
+     "CochainComplex.HomComplex_d_hom_apply",
+     "CochainComplex.HomComplex.δ_hom_apply",
+     "CochainComplex.HomComplex.Cochain.diff",
+     "CochainComplex.HomComplex.Cochain.δ_toSingleMk",
+     "CochainComplex.HomComplex.δ_hom"
+    ],
+    "digest": "589c662399f384cc"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: CharacterModule.homEquiv (Algebra/Module/CharacterModule.lean:145-147) treats ordinary modules over a commutative ring, not modules over a DG algebra. CochainComplex.HomComplex.CohomologyClass.homAddEquiv identifies ordinary Hom-complex cohomology with homotopy classes, but gives no coinduction/character-dual identification for DG A-modules. Shift equivalences alone do not supply it; the DG-specific source grep and the Loogle dual/HomComplex query have no hits."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"HomComplex\", \"dual\"",
+   "results": {
+    "t": "2026-10-24T01:57:28Z",
+    "tool": "loogle",
+    "query": "\"HomComplex\", \"dual\"",
+    "sub": "",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: CharacterModule.homEquiv (Algebra/Module/CharacterModule.lean:145-147) treats ordinary modules over a commutative ring, not modules over a DG algebra. CochainComplex.HomComplex.CohomologyClass.homAddEquiv identifies ordinary Hom-complex cohomology with homotopy classes, but gives no coinduction/character-dual identification for DG A-modules. Shift equivalences alone do not supply it; the DG-specific source grep and the Loogle dual/HomComplex query have no hits."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Evaluation at the unit identifies the Hom complex from a right dg module into the character dual of the dg algebra with the character dual complex of the module",
+   "results": {
+    "t": "2026-10-24T01:57:32Z",
+    "tool": "leanfinder",
+    "query": "Evaluation at the unit identifies the Hom complex from a right dg module into the character dual of the dg algebra with the character dual complex of the module",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "CharacterModule.homEquiv_symm_apply_apply_apply",
+     "ModuleCat.ihom_ev_app",
+     "CharacterModule.homEquiv",
+     "FGModuleCat.FGModuleCatEvaluation",
+     "Module.Dual.eval",
+     "FGModuleCat.FGModuleCatEvaluation_apply'",
+     "FGModuleCat.FGModuleCatEvaluation_apply",
+     "HomologicalComplex.evalCompCoyonedaCorepresentableByDoubleId_homEquiv_apply"
+    ],
+    "digest": "faf155a0dff37ffb"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: CharacterModule.homEquiv (Algebra/Module/CharacterModule.lean:145-147) treats ordinary modules over a commutative ring, not modules over a DG algebra. CochainComplex.HomComplex.CohomologyClass.homAddEquiv identifies ordinary Hom-complex cohomology with homotopy classes, but gives no coinduction/character-dual identification for DG A-modules. Shift equivalences alone do not supply it; the DG-specific source grep and the Loogle dual/HomComplex query have no hits."
+  },
+  {
+   "tool": "grep",
+   "query": "DGModule|DGAlgebra|DifferentialGraded|hom.*shift.*dual|dual.*HomComplex",
+   "results": {
+    "t": "2026-10-24T01:57:57Z",
+    "tool": "grep",
+    "query": "DGModule|DGAlgebra|DifferentialGraded|hom.*shift.*dual|dual.*HomComplex",
+    "sub": "",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: CharacterModule.homEquiv (Algebra/Module/CharacterModule.lean:145-147) treats ordinary modules over a commutative ring, not modules over a DG algebra. CochainComplex.HomComplex.CohomologyClass.homAddEquiv identifies ordinary Hom-complex cohomology with homotopy classes, but gives no coinduction/character-dual identification for DG A-modules. Shift equivalences alone do not supply it; the DG-specific source grep and the Loogle dual/HomComplex query have no hits."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Hom into a shifted coinduced dual of a dg ring agrees naturally with the shifted dual of the underlying module complex",
+   "results": {
+    "t": "2026-10-24T01:57:58Z",
+    "tool": "leanfinder",
+    "query": "Hom into a shifted coinduced dual of a dg ring agrees naturally with the shifted dual of the underlying module complex",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "CochainComplex.HomComplex.Cochain.rightShiftLinearEquiv",
+     "CochainComplex.HomComplex.Cochain.rightShiftLinearEquiv_apply",
+     "CochainComplex.HomComplex.Cochain.leftShiftLinearEquiv",
+     "CochainComplex.HomComplex.Cochain.rightShiftLinearEquiv_symm_apply",
+     "CochainComplex.HomComplex.Cochain.leftShiftLinearEquiv_apply",
+     "CochainComplex.HomComplex.Cochain.shiftLinearMap",
+     "CochainComplex.HomComplex.Cochain.shiftLinearMap_apply",
+     "CochainComplex.HomComplex.Cochain.fromSingleEquiv_fromSingleMk"
+    ],
+    "digest": "631dd6dc68804ba5"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: CharacterModule.homEquiv (Algebra/Module/CharacterModule.lean:145-147) treats ordinary modules over a commutative ring, not modules over a DG algebra. CochainComplex.HomComplex.CohomologyClass.homAddEquiv identifies ordinary Hom-complex cohomology with homotopy classes, but gives no coinduction/character-dual identification for DG A-modules. Shift equivalences alone do not supply it; the DG-specific source grep and the Loogle dual/HomComplex query have no hits."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Hom in the homotopy category from a DG module to a shifted character dual free DG module equals cohomology of the dual complex",
+   "results": {
+    "t": "2026-10-24T01:58:43Z",
+    "tool": "leansearch",
+    "query": "Hom in the homotopy category from a DG module to a shifted character dual free DG module equals cohomology of the dual complex",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "CochainComplex.HomComplex.CohomologyClass.homAddEquiv",
+     "CochainComplex.HomComplex.CohomologyClass.homAddEquiv_apply",
+     "CochainComplex.HomComplex.CohomologyClass.toHom_mk",
+     "CochainComplex.HomComplex.CohomologyClass.toHom",
+     "CochainComplex.HomComplex.δ_ofHomotopy",
+     "CochainComplex.HomComplex.CohomologyClass.toSmallShiftedHom_mk",
+     "CochainComplex.HomComplex.Cochain.shift",
+     "CochainComplex.HomComplex.CohomologyClass.toSmallShiftedHom"
+    ],
+    "digest": "9ffa65a314dfbefb"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: CharacterModule.homEquiv (Algebra/Module/CharacterModule.lean:145-147) treats ordinary modules over a commutative ring, not modules over a DG algebra. CochainComplex.HomComplex.CohomologyClass.homAddEquiv identifies ordinary Hom-complex cohomology with homotopy classes, but gives no coinduction/character-dual identification for DG A-modules. Shift equivalences alone do not supply it; the DG-specific source grep and the Loogle dual/HomComplex query have no hits."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Homotopy classes of maps from an arbitrary right differential graded module M to the shifted character dual A dual k equal degree k cohomology of the character dual of M",
+   "results": {
+    "t": "2026-10-24T01:58:49Z",
+    "tool": "leanfinder",
+    "query": "Homotopy classes of maps from an arbitrary right differential graded module M to the shifted character dual A dual k equal degree k cohomology of the character dual of M",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "CochainComplex.HomComplex.CohomologyClass.homAddEquiv",
+     "CochainComplex.HomComplex.CohomologyClass.toHom",
+     "CochainComplex.HomComplex.CohomologyClass",
+     "CochainComplex.HomComplex.CohomologyClass.toHom_mk",
+     "CochainComplex.HomComplex.CohomologyClass.toSmallShiftedHom_mk",
+     "CochainComplex.HomComplex.leftHomologyData'_H_coe",
+     "CochainComplex.HomComplex.leftHomologyData_H_coe",
+     "groupCohomologyIsoExt"
+    ],
+    "digest": "bd5d25da6924067f"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: CharacterModule.homEquiv (Algebra/Module/CharacterModule.lean:145-147) treats ordinary modules over a commutative ring, not modules over a DG algebra. CochainComplex.HomComplex.CohomologyClass.homAddEquiv identifies ordinary Hom-complex cohomology with homotopy classes, but gives no coinduction/character-dual identification for DG A-modules. Shift equivalences alone do not supply it; the DG-specific source grep and the Loogle dual/HomComplex query have no hits."
+  },
+  {
+   "tool": "grep",
+   "query": "DGModule|DGAlgebra|DifferentialGraded|hom.*shift.*dual|dual.*HomComplex",
+   "results": {
+    "t": "2026-10-24T02:24:50Z",
+    "tool": "grep",
+    "query": "DGModule|DGAlgebra|DifferentialGraded|hom.*shift.*dual|dual.*HomComplex",
+    "sub": "",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: no declaration for DG modules or character-dual Hom complexes found."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Homotopy classes of DG module maps into a shifted character dual are cohomology of the dual complex",
+   "results": {
+    "t": "2026-10-24T02:24:50Z",
+    "tool": "leansearch",
+    "query": "Homotopy classes of DG module maps into a shifted character dual are cohomology of the dual complex",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "CochainComplex.HomComplex.CohomologyClass.homAddEquiv",
+     "CochainComplex.HomComplex.CohomologyClass.homAddEquiv_apply",
+     "CochainComplex.HomComplex.CohomologyClass.toHom",
+     "CochainComplex.HomComplex.δ_ofHomotopy",
+     "CochainComplex.HomComplex.CohomologyClass.toHom_mk",
+     "CochainComplex.HomComplex.CohomologyClass.toHom_bijective",
+     "Homotopy.shift",
+     "CochainComplex.HomComplex.CohomologyClass.mk_neg"
+    ],
+    "digest": "75a4c555985d4780"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: ordinary Hom-complex cohomology and homotopy classes (HomComplexCohomology.lean:170-173) or group cohomology do not give the character-dual identification for modules over an arbitrary DG algebra."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"HomComplex\", \"dual\"",
+   "results": {
+    "t": "2026-10-24T02:24:50Z",
+    "tool": "loogle",
+    "query": "\"HomComplex\", \"dual\"",
+    "sub": "",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: no declaration for DG modules or character-dual Hom complexes found."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Maps from a right differential graded module to the shifted character dual of the DG algebra are cycles in the dual complex",
+   "results": {
+    "t": "2026-10-24T02:24:52Z",
+    "tool": "leanfinder",
+    "query": "Maps from a right differential graded module to the shifted character dual of the DG algebra are cycles in the dual complex",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "HomologicalComplex.i_cyclesMk",
+     "CochainComplex.liftCycles_shift_homologyπ",
+     "CochainComplex.HomComplex.Cocycle.fromSingleMk_mem_coboundaries_iff",
+     "CochainComplex.HomComplex.cocycle",
+     "CochainComplex.HomComplex.leftHomologyData'_K_coe",
+     "HomologicalComplex.cyclesMk",
+     "CochainComplex.HomComplex.Cocycle.toSingleMk_mem_coboundaries_iff",
+     "CochainComplex.HomComplex.leftHomologyData'"
+    ],
+    "digest": "0e46d08e3a569dd5"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: ordinary Hom-complex cohomology and homotopy classes (HomComplexCohomology.lean:170-173) or group cohomology do not give the character-dual identification for modules over an arbitrary DG algebra."
+  },
+  {
+   "tool": "grep",
+   "query": "homEquiv|homAddEquiv",
+   "results": {
+    "t": "2026-10-24T02:25:09Z",
+    "tool": "grep",
+    "query": "homEquiv|homAddEquiv",
+    "sub": "Algebra/Module/CharacterModule.lean",
+    "ok": true,
+    "n_hits": 5,
+    "note": "",
+    "top": [
+     "27",
+     "145",
+     "149",
+     "150",
+     "238"
+    ],
+    "digest": "94d747a7d14a0717"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: CharacterModule.homEquiv, Algebra/Module/CharacterModule.lean:145-147, concerns ordinary modules over a commutative ring, with no DG algebra or graded-module differential."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Evaluation at the unit identifies right DG linear maps into a coinduced character module with additive functionals; chain homotopies correspond to dual coboundaries",
+   "results": {
+    "t": "2026-10-24T02:25:10Z",
+    "tool": "leanfinder",
+    "query": "Evaluation at the unit identifies right DG linear maps into a coinduced character module with additive functionals; chain homotopies correspond to dual coboundaries",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "groupCohomology.inhomogeneousCochainsIso",
+     "groupCohomology.cochainsIso₁",
+     "groupCohomologyIsoExt",
+     "inhomogeneousCochains.d_eq",
+     "CochainComplex.HomComplex.CohomologyClass.homAddEquiv",
+     "HomologicalComplex.evalCompCoyonedaCorepresentableByDoubleId_homEquiv_apply",
+     "Rep.standardResolution.extIso",
+     "CochainComplex.HomComplex.CohomologyClass.toHom"
+    ],
+    "digest": "860f0729cc497582"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: ordinary Hom-complex cohomology and homotopy classes (HomComplexCohomology.lean:170-173) or group cohomology do not give the character-dual identification for modules over an arbitrary DG algebra."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-dg-complete-cofree-orthogonality",
+  "date": "2026-10-24",
+  "group": "Q05"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "Proof (3) of det-thm-sf-ctf-stability-direct-images, inherited coherent-family/Quot effectivity prerequisite: Tag 0CX8 (lemma-compute-over-affine), with its canonical maps from 0CX6 (lemma-compute-against-perfect). Supporting input: Tag 0CRW (lemma-computing-sections-as-colim), part (2) and its proof constructing hocolim E_m = Ru_*O_U; Tag 08IN (lemma-cohomology-base-change) supplies the normalized maps. The coefficient-linear version retains the commuting B-action in the same tensor and section construction. Supporting subargument: 0CRW proof, application of lemma-countable to the descended structure-sheaf image. Supporting argument in spaces-perfect Tag 0CRV, proof (2) to (1): Tag 0CRM, lemma-countable, implication (2) to (1); derived.tex Tags 090Z, definition-derived-colimit and 0CRH, remark-map-from-derived-colimit, for the legs. Supporting input for 0CRM (2) to (1): the reduction to the countable subalgebra A' by Tag 09S6, lemma-qis-equivalence. Supporting input for Tag 09S6: Tag 09LT, lemma-tensor-hom-adjoint; its derived tensor and Hom constructions and the canonical tensor/Hom shift comparisons in the preceding sections. Within Tag 09LT: Tags 09KU, lemma-right-resolution; 09KS, lemma-property-I-K-injective, applied also to all shifts; 09KY, lemma-hom-derived, part (2) and its proof, which only uses homotopical injectivity. Supporting input: Tag 09KS, lemma-property-I-K-injective, with property (I) defined immediately before Tag 09KR, lemma-property-I-sequence; the proof uses Tag 09K4, lemma-hom-into-shift-dual-free. Supporting input: Tag 09K4, lemma-hom-into-shift-dual-free, both displayed natural Hom identifications, for the character-dual layers in Tag 09KS.",
+   "via": [
+    "lem-sfb-dg-complete-cofree-orthogonality",
+    "lem-sfb-dg-injective-resolution-localization",
+    "lem-sfb-dg-bimodule-derived-adjunction",
+    "lem-sfb-dg-qis-restriction-equivalence",
+    "lem-sfb-dg-countable-compact-telescope",
+    "lem-sfb-space-countable-telescope",
+    "lem-sfb-space-etale-sections-perfect-telescope",
+    "lem-sfb-space-inverse-module-affine-base-change",
+    "lem-sfb-space-inverse-modules-near-special-fibre",
+    "lem-sfb-space-flat-proper-support-inverse-effectivity",
+    "lem-sfb-space-coherent-stack-general",
+    "lem-sfb-space-quot-representability",
+    "lem-sfb-space-hilbert-representability",
+    "lem-sfb-space-hom-representability",
+    "lem-sfb-curve-descent-isom-spaces",
+    "lem-sfb-nodal-curve-stack-smooth",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-dg-shifted-character-dual-hom",
+  "worker": "stage1",
+  "summary": "Kept the full statement and its conventions unchanged. Expanded Tag 09K4 into six explicit elementary calculations: DG structure, degreewise evaluation and inverse, signed differential identity, cycles, homotopies/boundaries in both directions, and naturality. All objects are defined in the item; no non-elementary input or new node is needed. Rechecked project attachment searches, both Mathlib semantic phrasings, Loogle and source grep.",
+  "blueprint": "Supports proof (3) of det-thm-sf-ctf-stability-direct-images in literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md through the inherited Tag 09KS character-dual-layer argument. The item is a source-level auxiliary lemma with no imported blueprint ancestor (blueprint_refs.py ancestor prints None); same_as searches for character dual, dual free and 09K4 found none."
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q24-1723c7198",
+  "group": "Q24",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q24-1723c7198 (reviewer sub-agent of L); spot-checked: Read the full item, the Stacks dga.tex Tag 09K4 (lemma-hom-into-shift-dual-free, line 2149, with the preceding M^vee discussion and 09K3) and the citer lem-sfb-dg-complete-cofree-orthogonality. Compared with clones/live, the statement, stmt_deps, source and blueprint are unchanged; only status, proof, proof_origin, split_report and mathlib_searches are added (the 7 Q05 searches are kept). There are no new nodes and no re-split note, and the live item is still unsplit. Stacks only says the proof is clear from the discussion above, so the 6 elementary steps write out that omitted argument (D5). I rederived each step. Step 1: d1=0, d^2=0 on A^vee, the right Leibniz rule (-1)^{n+j+1}alpha(a db) = ((dalpha)a + (-1)^n alpha(da))(b), the associativity order acb, and the shift sign (-1)^{n+k}. Step 2: the degrees of E_t and F_t and both inverse identities. Step 3: the da terms cancel ((-1)^{p+t} against -(-1)^{t+p}), and E_{t+1}(delta phi) = (-1)^k d_D E_t phi using d1=0 on (A^vee)^{-1}. Step 4: chain maps correspond to cycles. Step 5: homotopies correspond to boundaries in both directions, with h = F_{-1}((-1)^k mu). Step 6: contravariant naturality. Small cases: M=0; A=Z with a one-term M (Q/Z); cone(id) acyclic gives 0; odd k needs the (-1)^k sign. All steps are genuinely elementary with uses=[] and no hidden lemma; injectivity of Q/Z is never used. rg -L for 09K4 finds no duplicate. There are no route or tool_uses issues. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.DgShiftedCharacterDualHom",
+  "declaration": "CategoryTheory.DgAlgebra.shiftedCharacterDualHom",
+  "declarations": [
+   "CategoryTheory.DgAlgebra.shiftedCharacterDualHom"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/DgShiftedCharacterDualHom.lean",
+  "statement": "theorem shiftedCharacterDualHom (A : Algebra.{u}) (k : ℤ) : ∃ (E : ∀ M : RightModule A, characterDualMaps A M k ≃+ characterDualCycles ((underlying A).obj M) k) (F : ∀ M : RightModule A, CharacterDualHomotopyMaps A M k ≃+ CharacterDualCohomology ((underlying A).obj M) k), (∀ (M : RightModule A) (f : characterDualMaps A M k) (m : ((underlying A).obj M).X (-k)), (E M f).val m = f.val (-k) m ((A.X.XIsoOfEq (show (0 : ℤ) = -(-k + k + 0) by omega)).hom (characterDualUnit A))) ∧ (∀ (M : RightModule A) (f : characterDualMaps A M k), F M (QuotientAddGroup.mk' (characterDualNullMaps A M k) f) = QuotientAddGroup.mk' (characterDualBoundaries ((underlying A).obj M) k) (E M f)) ∧ (∀ (M N : RightModule A) (u : N ⟶ M) (f : characterDualMaps A M k) (g : characterDualMaps A N k) (_hg : ∀ (p : ℤ) (n : ((underlying A).obj N).X p), g.val p n = f.val p ((((underlying A).map u).f p) n)) (n : ((underlying A).obj N).X (-k)), (E N g).val n = (E M f).val ((((underlying A).map u).f (-k)) n))",
+  "branch": "newtargets-dag",
+  "by": "Q06",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-791967189",
+  "group": "Q06",
+  "result": "pass",
+  "note": "Read node, Stacks dga.tex Tag 09K4 (l.2149) with the preceding M^vee discussion, both modules, report, new def node, the side-live DgAlgebraDerivedCategory dependency, and the existing CharacterDualShiftProduct/CompleteDualFreeFiltration conventions. Clause check: A^vee[k] coordinates Hom(A^{-(p+k+t)},Q/Z); shift differential sign (p+1).negOnePow = (-1)^k(-1)^{p+k+1}; right action phi(ma)(b)=phi(m)(ab); null maps f=(-1)^p h(d_A b)+h(d_M m) with right-linear degree -1 h; dual differential (r+1).negOnePow precomposition; Z/B/H correct; unit is the actual MonObj.one. E pinned by f(m)(1) for m in M^{-k}, F pinned on representatives, naturality for all u. No extra hypotheses; universe u only; k arbitrary. New node def-sfb-dg-character-dual-coordinates: H12 fields ok, real data, no duplicate in Mathlib or project. Item changed only in lean plus the added new-node stmt_dep (H2 ok); lean.statement verbatim for both; docstrings, lines and imports ok; only sorry. Not recompiled (no change). No findings."
+ }
+}

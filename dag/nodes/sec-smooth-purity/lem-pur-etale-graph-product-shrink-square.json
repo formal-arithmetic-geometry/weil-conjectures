@@ -1,0 +1,140 @@
+{
+ "id": "lem-pur-etale-graph-product-shrink-square",
+ "kind": "statement",
+ "title": "Shrinking the final Q exchange after the mixed boundary",
+ "statement": "Let A,d1,d2,b and the explicit middleBoundary and squareInterchange be as in [def-pur-etale-graph-product-shrink-words]. Let sh be shrinkLambda for the composite presentation. Then squareInterchange.hom ≫ sh.hom = middleBoundary.hom ≫ productSquareInterchange.hom. This equation involves neither sourceShrink nor either inverse B exchange.",
+ "source": {
+  "document": "literature/stacks-project/more-etale.tex",
+  "place": "Tags 0F7C (lemma-shriek-proper-and-open-compose), 0F7D (lemma-shriek-proper-and-open-compose-horizontal), and 0F7J (lemma-shriek-composition), final A--F calculation. Agent formalization of the indicated strict substeps of the product-graph extension, not a claim that Stacks states this extension verbatim."
+ },
+ "stmt_deps": [
+  "def-pur-etale-graph-product-shrink-words"
+ ],
+ "proof": [
+  {
+   "text": "Use the proved private unboundedFormalism and unbounded_sh_comp identification from lem-amb-unbounded-compact-support-comparisons to obtain associativity for the canonical derived open expansion with equality transports. Apply it to (vh,E,K) and (productE,n,K), using vh_E, E_K, n_K and the two v_j/productE_productK equations from def-pur-etale-graph-product-shrink-words. Cancel the common open expansion. This proves the open_rectangle_tail identity without any proper/open exchange.",
+   "uses": [
+    "def-pur-etale-graph-product-shrink-words",
+    "lem-pur-etale-graph-product-geometry",
+    "lem-amb-unbounded-compact-support-comparisons"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Extract horizontal pasting for the particular chosen normalized family by Classical.choose_spec twice in lem-pur-etale-proper-open-exchange-cube. Paste shrink_square before the ambient Q square. Substitute n_K and vg followed by G.e equals productG.e. Cancel the inverse mixed exchange in middleBoundary. Naturality of the ambient Q exchange moves an arbitrary input morphism through the square; the open_rectangle_tail identity and naturality of the open contraction finish exchange_rectangle. This is proved for arbitrary input objects and morphism, independently of graph triangles and final proper maps.",
+   "uses": [
+    "def-pur-etale-graph-product-shrink-words",
+    "lem-pur-etale-graph-product-geometry",
+    "lem-pur-etale-proper-open-exchange-cube",
+    "lem-amb-unbounded-compact-support-comparisons"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Evaluate at an arbitrary coefficient complex. The two Boolean cases give the same uniform component formula for squareInterchange, by unfolding only that isomorphism and the functor associators. Apply exchange_rectangle with the inverse composite graph triangle as its input morphism. Map the equality by the final proper functor and compose with the final proper compositor. Its naturality moves it through the two shrink factors. Expanding middleBoundary, compositeShrink and productSquareInterchange yields exactly the required equality of components; natural-transformation extensionality concludes.",
+   "uses": [
+    "def-pur-etale-graph-product-shrink-words",
+    "lem-pur-etale-graph-product-geometry",
+    "lem-pur-etale-proper-open-exchange-cube",
+    "lem-amb-unbounded-compact-support-comparisons"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pur-etale-graph-product-shrink-words",
+  "lem-pur-etale-graph-product-geometry",
+  "lem-pur-etale-proper-open-exchange-cube",
+  "lem-amb-unbounded-compact-support-comparisons"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/more-etale.tex",
+  "place": "Tags 0F7D and 0F7J. C1: full Lean proof using the selected normalized family horizontal law, canonical derived open compositor associativity, cancellation, naturality and componentwise extensionality."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Proper open exchange horizontal pasting and shrinking three graph neighborhoods in a fibre product grid",
+   "results": "CategoryTheory.Limits.pasteHorizIsPullback; Scheme.Pullback.openCoverOfLeftRight; Opens.mayerVietorisSquare; IsOpenImmersion projection instances.",
+   "date": "2026-10-26",
+   "verdict": "Geometric pasting tools, no theorem for these specified unbounded exchange words."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Coherence of proper pushforward and extension by zero exchange under shrinking three open graph neighborhoods",
+   "results": "TopCat.Presheaf.Pushforward.comp; Scheme.Modules.pushforwardComp_inv_app_app; SheafOfModules.pushforwardComp_inv_app_val_app; Scheme.Modules.restrictFunctorComp.",
+   "date": "2026-10-26",
+   "verdict": "No matching proper/open mixed exchange calculation."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"whiskerLeft_comp_whiskerRight\"",
+   "results": "CategoryTheory.Functor.whiskerLeft_comp_whiskerRight and its reassociated version.",
+   "date": "2026-10-26",
+   "verdict": "Used for naturality algebra only; no geometric exchange grid."
+  },
+  {
+   "tool": "grep",
+   "query": "proper.*[Oo]pen.*[Cc]omp|[Gg]raph.*[Ii]nterchange (Mathlib); product-shrink-(words|lift|square)|mixed-neighborhood.*(exchange|boundary)|inverse B exchange (DAG and newest blueprint)",
+   "results": "Mathlib/Topology/MetricSpace/Polish.lean only; the DAG has the parent shrink obligation and ambient pasting geometry, no matching mixed boundary or separate lift/Q shrink assertions.",
+   "date": "2026-10-26",
+   "verdict": "No duplicate of the constructed boundary or its two compatibility equations."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.EtaleGraphProductShrinkPasting",
+  "date": "2026-10-26",
+  "group": "Y7"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sf-cbc",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "prop-asd-smooth-base-change.proof.md, coherences (i) and (iii): the specified compactification exchange, its restriction to a base chart, and the composition comparison used before transposition; detailed compositor argument in sk-thm-sf-comp-composition and sk-prop-sf-pf-coherence. Missing comparison/interchange square when changing the graph presentations; Stacks 0F7J independence-of-choices argument. Proper ambient / graph shrinking factorization: the shrink subgrid.; Shrinking the final Q exchange after the mixed boundary",
+   "via": [
+    "lem-pur-etale-graph-product-shrink-pasting",
+    "lem-pur-etale-graph-product-row-pasting",
+    "lem-pur-etale-graph-comparison-interchange",
+    "lem-route-exists-right-derived-lower-shriek-comp-iso",
+    "lem-asd-exceptional-base-change-affine-locality"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.EtaleGraphProductShrinkSquare",
+  "file": "lean/Sheaf/AlgebraicGeometry/EtaleGraphProductShrinkSquare.lean",
+  "declaration": "AlgebraicGeometry.Etale.etaleGraphProductShrinkSquare",
+  "statement": "theorem etaleGraphProductShrinkSquare\n    (A : Type (u + 1)) [CommRing A] [Finite A]\n    {X Y Z : Scheme.{u}} {f : X ⟶ Y} {g : Y ⟶ Z}\n    (d₁ d₂ : EtaleGraphInterchangeDiagram f g) (second : Bool) :\n    (squareInterchange d₁ d₂ second A).hom ≫ (compositeShrink d₁ d₂ second A).hom =\n      (middleBoundary d₁ d₂ second A).hom ≫ (d₁.productSquareInterchange d₂ A).hom",
+  "branch": "sheaf-dag",
+  "by": "Y7",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Y7",
+  "result": "pass",
+  "landing": "20261026T071539-L-3946810",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C1",
+  "result": "pass",
+  "landing": "20261026T091217-L-3322342",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

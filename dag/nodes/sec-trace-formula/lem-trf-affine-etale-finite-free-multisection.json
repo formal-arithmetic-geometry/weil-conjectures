@@ -1,0 +1,306 @@
+{
+ "id": "lem-trf-affine-etale-finite-free-multisection",
+ "kind": "statement",
+ "title": "An affine elementary etale finite locally free multisection of a nonempty fibre",
+ "statement": "Let $S$ be an affine scheme [def-pc-scheme, def-weil-affine-spectrum], and let $h:Y\\to S$ be flat [def-weil-flat-morphism] and of finite presentation, meaning locally of finite presentation [def-sbc-locally-finite-presentation], quasi-compact and quasi-separated [def-weil-pbc-scheme-conventions]. Suppose each fibre $Y_t$ [def-pc-scheme-fibre] is geometrically reduced over $\\kappa(t)$ [def-weil-residue-field, def-pc-geometrically-irreducible]. Let $s\\in S$ satisfy $Y_s\\ne\\varnothing$. There exist an affine scheme $U$, an etale morphism $a:U\\to S$ [def-weil-etale-morphism], a point $u\\in U$ with $a(u)=s$ inducing an isomorphism $\\kappa(s)\\to\\kappa(u)$, a scheme $E$, a finite locally free morphism $p:E\\to U$ [def-pc-finite-locally-free], and a morphism $\\sigma:E\\to Y_U=Y\\times_S U$ [def-pc-fibre-product] such that $h_U\\circ\\sigma=p$, where $h_U:Y_U\\to U$ is the projection. The fibre $E_u$ has exactly one point. Moreover $h_U$ is flat and of finite presentation with geometrically reduced fibres, $(Y_U)_u\\simeq Y_s\\times_{\\operatorname{Spec}\\kappa(s)}\\operatorname{Spec}\\kappa(u)$ canonically, and if $Y_s$ is geometrically connected then $(Y_U)_u$ is geometrically connected (connected includes nonempty [def-weil-connected-scheme]).",
+ "source": {
+  "document": "literature/stacks-project/more-morphisms.tex",
+  "place": "Tag 055W, label lemma-fibre-geometrically-connected-reduced, proof, second paragraph: closed Cohen–Macaulay point, flat quasi-finite slice, elementary-etale finite piece, affine refinement, finite local freeness and base-changed fibre checks (old item steps 4–7)"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-flat-morphism",
+  "def-sbc-locally-finite-presentation",
+  "def-weil-pbc-scheme-conventions",
+  "def-pc-scheme-fibre",
+  "def-weil-residue-field",
+  "def-pc-geometrically-irreducible",
+  "def-pc-fibre-product",
+  "def-weil-affine-spectrum",
+  "def-weil-etale-morphism",
+  "def-pc-finite-locally-free",
+  "def-weil-connected-scheme"
+ ],
+ "proof": [
+  {
+   "text": "The fibre Y_s is locally of finite type over its residue field: local finite presentation implies local finite type and this persists under base change [lem-weil-pbc-qcqs-morphism-permanence, def-sbc-locally-finite-presentation, def-weil-finite-type-morphism]. Apply Mathlib LocallyOfFiniteType.isLocallyNoetherian to its structure morphism and the Mathlib stalk instance to obtain Noetherianity of every fibre stalk [pqf-def-locnoeth]. No hypothesis on the base being Noetherian is used. These are the instances in exists_closed_cm_fibre_point.",
+   "uses": [
+    "lem-weil-pbc-qcqs-morphism-permanence",
+    "def-sbc-locally-finite-presentation",
+    "def-weil-finite-type-morphism",
+    "pqf-def-locnoeth"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 055W, lemma-fibre-geometrically-connected-reduced, second paragraph, hypotheses for choosing a closed Cohen–Macaulay fibre point; locally Noetherian fibres as in Tag 045U."
+   }
+  },
+  {
+   "text": "Take the inverse image under the fibre inclusion of the open relative depth-equals-dimension locus [lem-sbc-fibre-cohen-macaulay-locus-open]. The elementary helper fibre_cm_iff identifies it with the intrinsic depth-equals-dimension locus C in Y_s: substitute the equality of base points and use injectivity of the fibre inclusion to identify asFiber with the chosen fibre point. Apply [lem-trf-flat-lfp-cm-locus-fibre-dense] to the whole nonempty fibre to see C is nonempty. The fibre is Jacobson by [lem-sc-lft-over-field-jacobson-space], so its nonempty open C contains a closed point. Step 1 supplies Noetherianity at that closed point. This completes exists_closed_cm_fibre_point.",
+   "uses": [
+    "lem-sbc-fibre-cohen-macaulay-locus-open",
+    "lem-trf-flat-lfp-cm-locus-fibre-dense",
+    "lem-sc-lft-over-field-jacobson-space"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 055W, lemma-fibre-geometrically-connected-reduced, second paragraph: pick a closed Cohen–Macaulay fibre point; Tag 045U, lemma-flat-finite-presentation-CM-open, parts (1)–(3)."
+   }
+  },
+  {
+   "text": "Apply [lem-trf-cm-closed-point-flat-quasifinite-slice] at the closed Cohen-Macaulay fibre point to obtain i:Z -> Y, with f=i followed by h flat and locally of finite presentation and a distinguished singleton fibre. Local finite presentation implies local finite type [def-sbc-locally-finite-presentation, def-weil-finite-type-morphism]. The singleton fibre is subsingleton, hence discrete; after transporting the base point equality, the singleton at f.asFiber x is open for x the image of its unique point. Apply [lem-weil-pbc-etale-local-finite-at-point-elementary] to obtain an elementary etale neighbourhood (U0,a0,u0), and an open V in Z times_S U0 finite over U0 with its unique point v over u0, its projection to x, and the specified residue-field isomorphism.",
+   "uses": [
+    "lem-trf-cm-closed-point-flat-quasifinite-slice",
+    "def-sbc-locally-finite-presentation",
+    "def-weil-finite-type-morphism",
+    "lem-weil-pbc-etale-local-finite-at-point-elementary"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 055W, lemma-fibre-geometrically-connected-reduced, second paragraph: apply Tag 0570, lemma-slice-CM, then Tag 02LK, lemma-etale-makes-quasi-finite-finite-at-point."
+   }
+  },
+  {
+   "text": "Choose the member j:U -> U0 of the affine open cover containing u0, and its preimage point u [lem-weil-pbc-affine-opens-basis]. Define a=j followed by a0 and define pi:Z times_S U -> Z times_S U0 by pullback.map, with both projection equations. Etaleness of a follows by composition [lem-weil-pbc-etale-composition-cancellation]. The residue-field map for j is an isomorphism, so Scheme.residueFieldMap_comp and the equality j(u)=u0 give the residue-field isomorphism for a. Apply [lem-weil-pbc-elementary-etale-finite-piece-persistence] to V,v,j,u and pi, with all hypotheses supplied by the previous step. It gives finiteness of p:E -> U for E=pi inverse-image V and a unique point vprime over u. The fibre homeomorphism gives nonemptiness of p.fiber u, and injectivity of its fibre inclusion together with uniqueness of vprime gives subsingletonness.",
+   "uses": [
+    "lem-weil-pbc-affine-opens-basis",
+    "lem-weil-pbc-etale-composition-cancellation",
+    "lem-weil-pbc-elementary-etale-finite-piece-persistence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 055W, lemma-fibre-geometrically-connected-reduced, affine elementary-etale refinement; Tag 02LK, lemma-etale-makes-quasi-finite-finite-at-point, final assertion."
+   }
+  },
+  {
+   "text": "Flatness and local finite presentation of f persist under base change and composition with the open inclusion of E [lem-weil-pbc-flat-morphism-base-change, lem-weil-pbc-qcqs-morphism-permanence, def-weil-open-immersion, def-weil-flat-morphism, def-sbc-locally-finite-presentation]. Together with finiteness from step 4 these are precisely the fields of Scheme.Hom.IsFiniteLocallyFree [def-pc-finite-locally-free]. Define sigma as the inclusion E -> Z times_S U followed by pullback.map induced by i:Z -> Y [def-pc-base-change]. The pullback projection equations prove sigma followed by the second projection equals p.",
+   "uses": [
+    "lem-weil-pbc-flat-morphism-base-change",
+    "lem-weil-pbc-qcqs-morphism-permanence",
+    "def-weil-open-immersion",
+    "def-weil-flat-morphism",
+    "def-sbc-locally-finite-presentation",
+    "def-pc-finite-locally-free",
+    "def-pc-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 055W, lemma-fibre-geometrically-connected-reduced, second paragraph: flat locally finitely presented finite piece is finite locally free; the equivalence of Tag 02KB, lemma-finite-flat, is already the definition in def-pc-finite-locally-free."
+   }
+  },
+  {
+   "text": "Flatness, local finite presentation, quasi-compactness and quasi-separatedness of h persist under base change [lem-weil-pbc-flat-morphism-base-change, lem-weil-pbc-qcqs-morphism-permanence]. Mathlib isPullback_fiberToSpecResidueField_of_isPullback gives the cartesian fibre square over each residue-field map [def-pc-fibre-product, def-pc-base-change]. Geometric reducedness and geometric connectedness transport through that square by MorphismProperty.of_isPullback [def-pc-geometrically-irreducible]. In baseChange_fibre_iso, substitute a(u)=s, use this square's isoPullback, and compose its first projection identity with the old fibre inclusion to obtain exactly the two required canonical equations. Thus no noncanonical identification of fibres is used.",
+   "uses": [
+    "lem-weil-pbc-flat-morphism-base-change",
+    "lem-weil-pbc-qcqs-morphism-permanence",
+    "def-pc-fibre-product",
+    "def-pc-base-change",
+    "def-pc-geometrically-irreducible"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 055W, lemma-fibre-geometrically-connected-reduced, second paragraph: base-changed family and distinguished fibre checks."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-base-change",
+  "def-pc-fibre-product",
+  "def-pc-finite-locally-free",
+  "def-pc-geometrically-irreducible",
+  "def-sbc-locally-finite-presentation",
+  "def-weil-finite-type-morphism",
+  "def-weil-flat-morphism",
+  "def-weil-open-immersion",
+  "lem-sbc-fibre-cohen-macaulay-locus-open",
+  "lem-sc-lft-over-field-jacobson-space",
+  "lem-trf-cm-closed-point-flat-quasifinite-slice",
+  "lem-trf-flat-lfp-cm-locus-fibre-dense",
+  "lem-weil-pbc-affine-opens-basis",
+  "lem-weil-pbc-elementary-etale-finite-piece-persistence",
+  "lem-weil-pbc-etale-composition-cancellation",
+  "lem-weil-pbc-etale-local-finite-at-point-elementary",
+  "lem-weil-pbc-flat-morphism-base-change",
+  "lem-weil-pbc-qcqs-morphism-permanence",
+  "pqf-def-locnoeth"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/more-morphisms.tex",
+  "place": "Tag 055W, lemma-fibre-geometrically-connected-reduced, second paragraph; Tags 045U, 0570, 02LK and 02KB. Lean proof follows these six steps, using the Mathlib locally-finite-type fibre and stalk instances and the canonical cartesian residue-field fibre square."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A flat locally finitely presented scheme with a nonempty fibre admits a finite locally free multisection with singleton fibre after an affine elementary etale neighbourhood of the base",
+   "results": "{\"t\": \"2026-10-22T06:46:34Z\", \"tool\": \"leanfinder\", \"query\": \"A flat locally finitely presented scheme with a nonempty fibre admits a finite locally free multisection with singleton fibre after an affine elementary etale neighbourhood of the base\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.Etale.exists_subalgebra_fg\", \"Algebra.isOpen_etaleLocus\", \"AlgebraicGeometry.IsSmoothOfRelativeDimension.exists_isStandardSmoothOfRelativeDimension\", \"AlgebraicGeometry.IsEtale.of_comp\", \"Algebra.Etale.finitePresentation\", \"AlgebraicGeometry.IsSmooth.exists_isStandardSmooth\", \"Algebra.etaleLocus_eq_univ_iff_etale\", \"AlgebraicGeometry.LocallyOfFinitePresentation\"], \"digest\": \"964067cf4582c080\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits give flatness criteria, base-change instances, smooth local charts, descent of existing etale algebras and rank properties of an already finite flat map, not existence of this multisection"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Flat, AlgebraicGeometry.Finite",
+   "results": "{\"t\": \"2026-10-22T06:46:24Z\", \"tool\": \"loogle\", \"query\": \"AlgebraicGeometry.Flat, AlgebraicGeometry.Finite\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"loogle: unknown identifier 'AlgebraicGeometry.Finite'\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "invalid pattern: unknown identifier; corrected query using AlgebraicGeometry.IsFinite was also run"
+  },
+  {
+   "tool": "grep",
+   "query": "multisection|multiSection|finite.locally.free.*neigh|exists.*[Ff]inite.*[Ee]tale|[Cc]ohen.*[Mm]acaulay",
+   "results": "{\"t\": \"2026-10-22T06:46:23Z\", \"tool\": \"grep\", \"query\": \"multisection|multiSection|finite.locally.free.*neigh|exists.*[Ff]inite.*[Ee]tale|[Cc]ohen.*[Mm]acaulay\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits give flatness criteria, base-change instances, smooth local charts, descent of existing etale algebras and rank properties of an already finite flat map, not existence of this multisection"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Construct a finite flat finitely presented cover mapping into a flat family near a specified nonempty fibre using a Cohen Macaulay slice and a residue field preserving etale neighbourhood",
+   "results": "{\"t\": \"2026-10-22T06:46:24Z\", \"tool\": \"leansearch\", \"query\": \"Construct a finite flat finitely presented cover mapping into a flat family near a specified nonempty fibre using a Cohen Macaulay slice and a residue field preserving etale neighbourhood\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.flat_iff\", \"AlgebraicGeometry.Flat.casesOn\", \"AlgebraicGeometry.Scheme.Hom.fiberOverSpecResidueField\", \"AlgebraicGeometry.Flat.recOn\", \"AlgebraicGeometry.Scheme.AffineCover.mk\", \"AlgebraicGeometry.Flat.stalkMap\", \"AlgebraicGeometry.Flat.instMorphismRestrict\", \"AlgebraicGeometry.Scheme.Cover.sigma\"], \"digest\": \"92ad0704700634cf\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits give flatness criteria, base-change instances, smooth local charts, descent of existing etale algebras and rank properties of an already finite flat map, not existence of this multisection"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Flat, AlgebraicGeometry.IsFinite",
+   "results": "{\"t\": \"2026-10-22T06:46:36Z\", \"tool\": \"loogle\", \"query\": \"AlgebraicGeometry.Flat, AlgebraicGeometry.IsFinite\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Hom.isLocallyConstant_finrank\", \"AlgebraicGeometry.Scheme.Hom.finrank_comp_left_of_isIso\", \"AlgebraicGeometry.Scheme.Hom.isIso_iff_finrank_eq\", \"AlgebraicGeometry.Scheme.Hom.one_le_finrank_iff_surjective\", \"AlgebraicGeometry.Scheme.Hom.one_le_finrank_map\", \"AlgebraicGeometry.Scheme.Hom.finrank_pullback_fst\", \"AlgebraicGeometry.Scheme.Hom.finrank_pullback_snd\", \"AlgebraicGeometry.Scheme.Hom.finrank_of_isPullback\"], \"digest\": \"f9e3e0131bdbbfe8\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits give flatness criteria, base-change instances, smooth local charts, descent of existing etale algebras and rank properties of an already finite flat map, not existence of this multisection"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Every nonempty fibre of a flat finite presentation scheme family has a finite flat multisection after an etale base change inducing an isomorphism of residue fields",
+   "results": "{\"t\": \"2026-10-22T06:46:48Z\", \"tool\": \"leanfinder\", \"query\": \"Every nonempty fibre of a flat finite presentation scheme family has a finite flat multisection after an etale base change inducing an isomorphism of residue fields\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.UniversallyOpen.of_flat\", \"AlgebraicGeometry.Flat\", \"Algebra.Etale.exists_subalgebra_fg\", \"AlgebraicGeometry.IsEtale.of_comp\", \"AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified\", \"AlgebraicGeometry.Flat.instSndScheme\", \"AlgebraicGeometry.Flat.instFstScheme\", \"AlgebraicGeometry.Flat.of_stalkMap\"], \"digest\": \"728524545e5a36b8\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits give flatness criteria, base-change instances, smooth local charts, descent of existing etale algebras and rank properties of an already finite flat map, not existence of this multisection"
+  },
+  {
+   "tool": "grep",
+   "query": "multisection|multiSection|finite.*locally.*free.*neigh|Cohen.*Macaulay",
+   "results": "{\"t\": \"2026-10-23T20:10:50Z\", \"tool\": \"grep\", \"query\": \"multisection|multiSection|finite.*locally.*free.*neigh|Cohen.*Macaulay\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: smooth charts require smoothness, etale loci require etaleness, and flat rank results concern a given finite flat map. Reading Algebra.exists_etale_isIdempotentElem_forall_liesOver_eq at Mathlib/RingTheory/Etale/QuasiFinite.lean:379 shows its current statement assumes a finite type algebra quasi-finite at the specified prime (more general than the returned doc/type summary). It supplies the etale finite-piece algebraic input, not the closed Cohen–Macaulay point or flat slice required for the full item."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Flat finitely presented family has a finite flat cover mapping to it etale locally near a nonempty fibre",
+   "results": "{\"t\": \"2026-10-23T20:10:50Z\", \"tool\": \"leansearch\", \"query\": \"Flat finitely presented family has a finite flat cover mapping to it etale locally near a nonempty fibre\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.instLocallyOfFinitePresentationOfIsSmooth\", \"AlgebraicGeometry.Flat.stalkMap\", \"AlgebraicGeometry.Flat.casesOn\", \"AlgebraicGeometry.instLocallyOfFiniteTypeOfLocallyOfFinitePresentation\", \"AlgebraicGeometry.Flat\", \"AlgebraicGeometry.Scheme.Hom.flat_appLE\", \"AlgebraicGeometry.Flat.flat_appLE\", \"AlgebraicGeometry.Flat.comp\"], \"digest\": \"623f5aac3d29640f\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: smooth charts require smoothness, etale loci require etaleness, and flat rank results concern a given finite flat map. Reading Algebra.exists_etale_isIdempotentElem_forall_liesOver_eq at Mathlib/RingTheory/Etale/QuasiFinite.lean:379 shows its current statement assumes a finite type algebra quasi-finite at the specified prime (more general than the returned doc/type summary). It supplies the etale finite-piece algebraic input, not the closed Cohen–Macaulay point or flat slice required for the full item."
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Flat, AlgebraicGeometry.IsFinite",
+   "results": "{\"t\": \"2026-10-23T20:10:50Z\", \"tool\": \"loogle\", \"query\": \"AlgebraicGeometry.Flat, AlgebraicGeometry.IsFinite\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Hom.isLocallyConstant_finrank\", \"AlgebraicGeometry.Scheme.Hom.finrank_comp_left_of_isIso\", \"AlgebraicGeometry.Scheme.Hom.isIso_iff_finrank_eq\", \"AlgebraicGeometry.Scheme.Hom.one_le_finrank_iff_surjective\", \"AlgebraicGeometry.Scheme.Hom.one_le_finrank_map\", \"AlgebraicGeometry.Scheme.Hom.finrank_pullback_fst\", \"AlgebraicGeometry.Scheme.Hom.finrank_pullback_snd\", \"AlgebraicGeometry.Scheme.Hom.finrank_of_isPullback\"], \"digest\": \"f9e3e0131bdbbfe8\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: smooth charts require smoothness, etale loci require etaleness, and flat rank results concern a given finite flat map. Reading Algebra.exists_etale_isIdempotentElem_forall_liesOver_eq at Mathlib/RingTheory/Etale/QuasiFinite.lean:379 shows its current statement assumes a finite type algebra quasi-finite at the specified prime (more general than the returned doc/type summary). It supplies the etale finite-piece algebraic input, not the closed Cohen–Macaulay point or flat slice required for the full item."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A nonempty fibre of a flat finitely presented scheme admits a finite locally free multisection with singleton fibre after a residue field preserving etale neighbourhood",
+   "results": "{\"t\": \"2026-10-23T20:10:51Z\", \"tool\": \"leanfinder\", \"query\": \"A nonempty fibre of a flat finitely presented scheme admits a finite locally free multisection with singleton fibre after a residue field preserving etale neighbourhood\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsSmooth.exists_isStandardSmooth\", \"AlgebraicGeometry.IsSmoothOfRelativeDimension.exists_isStandardSmoothOfRelativeDimension\", \"Algebra.IsStandardSmoothOfRelativeDimension.exists_etale_mvPolynomial\", \"AlgebraicGeometry.Scheme.Etale\", \"AlgebraicGeometry.instFiniteCarrierCarrierCommRingCatFiberOfIsFinite\", \"Algebra.exists_etale_isIdempotentElem_forall_liesOver_eq\", \"Algebra.exists_etale_bijective_residueFieldMap_and_map_eq_mul_and_isCoprime\", \"Algebra.Etale.exists_subalgebra_fg\"], \"digest\": \"9a36465b07b417bf\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: smooth charts require smoothness, etale loci require etaleness, and flat rank results concern a given finite flat map. Reading Algebra.exists_etale_isIdempotentElem_forall_liesOver_eq at Mathlib/RingTheory/Etale/QuasiFinite.lean:379 shows its current statement assumes a finite type algebra quasi-finite at the specified prime (more general than the returned doc/type summary). It supplies the etale finite-piece algebraic input, not the closed Cohen–Macaulay point or flat slice required for the full item."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An isolated point of a flat locally finitely presented slice becomes finite over an elementary etale neighbourhood with unchanged residue field",
+   "results": "{\"t\": \"2026-10-23T20:10:52Z\", \"tool\": \"leanfinder\", \"query\": \"An isolated point of a flat locally finitely presented slice becomes finite over an elementary etale neighbourhood with unchanged residue field\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.Etale.finitePresentation\", \"Algebra.IsEtaleAt\", \"Algebra.etaleLocus\", \"Algebra.exists_etale_of_isEtaleAt\", \"Algebra.Etale\", \"Algebra.IsStandardSmoothOfRelativeDimension.exists_etale_mvPolynomial\", \"Algebra.isOpen_etaleLocus\", \"RingHom.Etale.ofLocalizationSpanTarget\"], \"digest\": \"7493a97e997e28b4\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: smooth charts require smoothness, etale loci require etaleness, and flat rank results concern a given finite flat map. Reading Algebra.exists_etale_isIdempotentElem_forall_liesOver_eq at Mathlib/RingTheory/Etale/QuasiFinite.lean:379 shows its current statement assumes a finite type algebra quasi-finite at the specified prime (more general than the returned doc/type summary). It supplies the etale finite-piece algebraic input, not the closed Cohen–Macaulay point or flat slice required for the full item."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-geometrically-connected-fibre-open-spreading",
+  "date": "2026-10-22",
+  "group": "Q71"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "The elementary-etale finite-over-smooth ingredient (Stacks 057K) in the 057S flatification route for the horizontal curve reduction of lem-trf-local-term-locality: in the application of 057J to the smooth intermediate scheme, the preliminary spreading of the specified fibre open with geometrically connected fibres (055W). Subargument of Tag 055W: second paragraph: closed Cohen–Macaulay point, flat quasi-finite slice, elementary-etale finite piece, affine refinement, finite local freeness and base-changed fibre checks (old item steps 4–7)",
+   "via": [
+    "lem-trf-geometrically-connected-fibre-open-spreading",
+    "lem-trf-geometrically-integral-fibre-neighbourhood",
+    "lem-trf-etale-finite-smooth-local-structure",
+    "lem-trf-elementary-module-devissage",
+    "lem-trf-flattening-module-by-admissible-blowup",
+    "lem-trf-flattening-by-admissible-blowup",
+    "lem-trf-flatification-horizontal-curve-pair",
+    "lem-trf-dejong-relative-marked-semistable",
+    "lem-trf-relative-marked-nodal-reduction",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-trf-affine-etale-finite-free-multisection",
+  "worker": "stage1",
+  "summary": "Split the existing multisection node into six steps using existing DAG results only. Expanded the closed Cohen–Macaulay point choice using fibre Noetherianity, openness, density and the Jacobson property; made affine elementary-etale refinement and preservation of the singleton fibre explicit; constructed the multisection map and checked each base-changed fibre. Statement and statement dependencies unchanged; no new nodes.",
+  "blueprint": "Realizes the inherited lem-trf-local-term-locality horizontal-curve/flatification route at the 055W subargument specified in blueprint.from.place: choose the closed Cohen–Macaulay point (steps 1–2), slice and take an elementary-etale finite piece (step 3), refine affinely (step 4), obtain finite local freeness and the map (step 5), and verify the base-changed family and fibre (step 6).",
+  "tool_uses": [
+   {
+    "node": "lem-sbc-restricted-fibre-locally-noetherian",
+    "why": "Generic locally finitely presented fibre Noetherianity, needed only for the closed Cohen–Macaulay point choice in 055W; no statement in this unit supplies this general fact."
+   },
+   {
+    "node": "lem-sbc-fibre-cohen-macaulay-locus-open",
+    "why": "Generic openness of the fibre depth-equals-dimension locus for a flat locally finitely presented morphism, exactly the 045U input in 055W; the same-unit density lemma gives density only, not openness."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sbc-fibre-cohen-macaulay-locus-open"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q08-4df1bf655",
+  "group": "Q08",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q08-4df1bf655 (reviewer sub-agent of L); spot-checked: I read Stacks 055W (more-morphisms.tex l.13193-13260), second paragraph: closed Cohen–Macaulay point (045U), slice (0570), elementary étale finite piece (02LK), finite locally free (02KB), base-changed fibres. The item states exactly this package over an affine S, plus the affine refinement. Its hypotheses and conclusions match the source and what the parent geometrically-connected-fibre-open-spreading uses in its step 2. The delivery adds no new nodes and leaves the statement and stmt_deps unchanged. The item is still unsplit in clones/live and clones/side-live, and no repair note applies. I checked every cited statement against what each step takes from it. Step 2: the openness of W plus density of C_s plus the Jacobson lemma give the closed CM point, and step 1's Noetherianity makes W_s equal to C_s. Steps 3–4: the hypotheses of the 02LK node and of the persistence node (both Lean-closed) are checked, including both residue-field isomorphisms. Step 5: def-pc-finite-locally-free is literally finite + flat + lfp. Step 6: the geometrically reduced and geometrically connected fibre identifications are correct. Edge cases checked: S = Y = Spec k, a nonperfect residue field, empty other fibres, a non-Noetherian S. I accept the two declared tool uses: lem-sbc-restricted-fibre-locally-noetherian and lem-sbc-fibre-cohen-macaulay-locus-open (the 045U openness, which the same-unit density node does not give). FIX, in fixes/dag/nodes/sec-trace-formula/lem-trf-affine-etale-finite-free-multisection.json: (1) step 3 inferred that f is locally of finite type, in the def-weil-finite-type-morphism sense that 02LK requires, only from the presentation charts; it now cites def-weil-finite-type-morphism, lem-weil-pbc-affine-opens-basis and the Mathlib leaf lem-weil-pbc-lfp-affine-opens-finite-presentation (01TQ), as the sibling zero-dimensional-closed-fibre-open-slice does in its step 1. (2) Step 1 now cites def-weil-finite-type-morphism, with the one-line reason that a scheme over a field is lft. (3) Step 4 now defines E = π^{-1}(V), the V' of the persistence lemma, instead of V ×_{U_0} U. proof_deps is updated to the union of the uses; nothing else changed.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.Morphisms.AffineEtaleFiniteLocallyFreeMultisection",
+  "declaration": "AlgebraicGeometry.exists_affine_etale_finiteLocallyFree_multisection",
+  "file": "lean/Sheaf/AlgebraicGeometry/Morphisms/AffineEtaleFiniteLocallyFreeMultisection.lean",
+  "statement": "theorem exists_affine_etale_finiteLocallyFree_multisection {Y S : Scheme.{u}} [IsAffine S] (h : Y ⟶ S) [Flat h] [LocallyOfFinitePresentation h] [QuasiCompact h] [QuasiSeparated h] (hred : ∀ t : S, GeometricallyReduced (h.fiberToSpecResidueField t)) (s : S) (hs : Nonempty (h.fiber s)) : ∃ (U : Scheme.{u}) (a : U ⟶ S) (u : U) (hu : a u = s), IsAffine U ∧ Etale a ∧ IsIso (a.residueFieldMap u) ∧ ∃ (E : Scheme.{u}) (p : E ⟶ U) (σ : E ⟶ pullback h a), Scheme.Hom.IsFiniteLocallyFree p ∧ σ ≫ pullback.snd h a = p ∧ Nonempty (p.fiber u) ∧ Subsingleton (p.fiber u) ∧ Flat (pullback.snd h a) ∧ LocallyOfFinitePresentation (pullback.snd h a) ∧ QuasiCompact (pullback.snd h a) ∧ QuasiSeparated (pullback.snd h a) ∧ (∀ v : U, GeometricallyReduced ((pullback.snd h a).fiberToSpecResidueField v)) ∧ (∃ e : (pullback.snd h a).fiber u ≅ pullback (h.fiberToSpecResidueField s) (Spec.map ((S.residueFieldCongr hu).inv ≫ a.residueFieldMap u)), e.hom ≫ pullback.fst (h.fiberToSpecResidueField s) (Spec.map ((S.residueFieldCongr hu).inv ≫ a.residueFieldMap u)) ≫ h.fiberι s = (pullback.snd h a).fiberι u ≫ pullback.fst h a ∧ e.hom ≫ pullback.snd (h.fiberToSpecResidueField s) (Spec.map ((S.residueFieldCongr hu).inv ≫ a.residueFieldMap u)) = (pullback.snd h a).fiberToSpecResidueField u) ∧ (GeometricallyConnected (h.fiberToSpecResidueField s) → GeometricallyConnected ((pullback.snd h a).fiberToSpecResidueField u))",
+  "branch": "newtargets-dag",
+  "by": "NV",
+  "date": "2026-10-23",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-edfed677b",
+  "group": "NV",
+  "result": "pass",
+  "note": "Only the item's lean field changed vs side-live (node split, lean null live; no supersession). One theorem, body sorry, no defs; lean.statement verbatim in file. Every hypothesis matches the node with nothing stronger: affine S, Flat + LFP/QC/QS, all fibres GeometricallyReduced, Nonempty fibre over s. Every conclusion clause is present: affine étale (U,a,u) with IsIso residueFieldMap; IsFiniteLocallyFree p (FiberDegree:899 = finite+flat+lfp); σ ≫ snd = p; fibre of p over u nonempty and subsingleton; base change flat/fp with geometrically reduced fibres; geometric-connectedness implication. The fibre iso e is canonical: residueFieldCongr direction correct (κ(s)→κ(a u)→κ(u)), and the two projection equations determine e uniquely. Agrees with Stacks 055W proof paragraph 2. Edge cases fine (empty other fibres, Spec k identity, imperfect fields, non-Noetherian S); single universe u. All 12 stmt_dep records read; proof-dep imports exist live as module files; docstrings carry source place, blueprint id and six proof steps; no existing declaration found. No compile (no file changed). Advisory: the second reading was by the same worker."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R7",
+  "result": "pass",
+  "landing": "20261026T092509-L-3437000",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

@@ -1,0 +1,377 @@
+{
+ "id": "lem-sfb-relative-rhom-finite-flat-base-change-model",
+ "kind": "statement",
+ "title": "Finite flat Hom-complex model with arbitrary scalar-extension comparison",
+ "statement": "Let $R\\to S$ be a flat finitely presented homomorphism of commutative rings [def-weil-pbc-flat-ring-map, def-weil-pbc-finitely-presented-algebra]. Work in ordinary module derived categories [def-weil-abstract-derived-category], with derived scalar extension [lem-pur-derived-change-of-rings] and derived Hom [def-pur-derived-internal-hom] on the one-object ringed site. Let $K,L\\in D(S)$ be pseudo-coherent over $S$ [def-pc-ring-pseudo-coherent-complex], and assume that $L$ has finite Tor amplitude over $R$: there are integers $a\\le b$ such that $H^i(L\\otimes_R^{\\mathbf L}N)=0$ for every $R$-module $N$ and every $i\\notin[a,b]$. There exist a bounded-above complex $P^\\bullet$ of finite free $S$-modules representing $K$, and a bounded complex $F^\\bullet$ representing $L$, whose terms are $R$-flat finitely presented $S$-modules. Here a module is $R$-flat when tensoring with it preserves exact sequences; finitely presented means admitting a presentation $S^m\\to S^n\\to F^j\\to0$ with $m,n$ finite. For any such choices the Hom complex $E^\\bullet=\\operatorname{Hom}_S^\\bullet(P^\\bullet,F^\\bullet)$, with $E^n=\\bigoplus_i\\operatorname{Hom}_S(P^i,F^{i+n})$ and differential $d(h)=d_Fh-(-1)^nhd_P$, is bounded below, has $R$-flat finitely presented $S$-modules as terms, and represents $R\\operatorname{Hom}_S(K,L)$ in $D(S)$. For every ring map $R\\to T$, put $S_T=S\\otimes_RT$, $K_T=K\\otimes_S^{\\mathbf L}S_T$, and $L_T=L\\otimes_S^{\\mathbf L}S_T$. The termwise tensors $P^\\bullet\\otimes_RT$ and $F^\\bullet\\otimes_RT$ represent $K_T$ and $L_T$, respectively. There is an isomorphism in $D(S_T)$\n$$E^\\bullet\\otimes_RT\\ \\simeq\\ R\\operatorname{Hom}_{S_T}(K_T,L_T),$$\nwhere the tensor on the left is ordinary termwise tensor. This is represented by the chain isomorphism\n$$\\operatorname{Hom}_S^\\bullet(P,F)\\otimes_RT\\xrightarrow{\\sim}\\operatorname{Hom}_{S_T}^\\bullet(P\\otimes_RT,F\\otimes_RT),\\qquad(h\\otimes t)(p\\otimes u)=h(p)\\otimes tu.$$\nUnder $H^0(E^\\bullet)=\\operatorname{Hom}_{D(S)}(K,L)$, the map on classes defined by tensoring degree-zero cocycles sends a morphism to its derived scalar extension $K_T\\to L_T$. The comparisons respect identity and iterated ring extension and are natural in derived morphisms of $K,L$. No flatness of $R\\to T$ or Noetherianity is assumed.",
+ "source": {
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tag 0E1U, lemma-compute-RHom-relatively-perfect, (a), (b), and its finite-presentation clause; cocycle normalization and iterated-extension compatibility from the termwise Hom identification in its proof."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-flat-ring-map",
+  "def-weil-pbc-finitely-presented-algebra",
+  "def-weil-abstract-derived-category",
+  "lem-pur-derived-change-of-rings",
+  "def-pur-derived-internal-hom",
+  "def-pc-ring-pseudo-coherent-complex"
+ ],
+ "proof": [
+  {
+   "text": "Choose bounded-above finite free $S$-complexes $P,Q$ representing $K,L$, using pseudo-coherence. Since $S$ is $R$-flat, each $Q^i$, as a finite direct sum of copies of $S$, is $R$-flat. By the bounded-above-flat K-flatness lemma, $Q\\otimes_R N$ computes $L\\otimes_R^{\\mathbf L}N$ for every $R$-module $N$ (using the singleton-site comparison for ordinary derived tensor). It is therefore exact in degree $a-1$ for every $N$. The flat-opcycles criterion gives $R$-flatness of $C=\\operatorname{coker}(Q^{a-1}\\to Q^a)$. Set $F^a=C$, $F^i=Q^i$ for $i>a$, and $F^i=0$ for $i<a$, with induced differential. This is a bounded complex: $Q$ was bounded above. Taking $N=R$ gives $H^i(Q)=0$ below $a$, so the quotient map $Q\\to F$ induces isomorphisms on all cohomology groups. Thus $F$ represents $L$. The displayed presentation $Q^{a-1}\\to Q^a\\to C\\to0$ is finite free, and the other nonzero terms are finite free. Hence all terms of $F$ are finitely presented over $S$.",
+   "uses": [
+    "def-pc-ring-pseudo-coherent-complex",
+    "lem-pc-module-bounded-flat-kflat",
+    "lem-weil-pbc-singleton-site-module-comparison",
+    "lem-pur-derived-change-of-rings",
+    "lem-pc-module-flat-opcycles-tor-criterion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0E1U, lemma-compute-RHom-relatively-perfect, first paragraph; Tag 0DHV, lemma-structure-relatively-perfect, (1) implies (2); Tag 0653, lemma-last-one-flat."
+   }
+  },
+  {
+   "text": "Now take any choices $P,F$ as in the statement. Choose integers $u,v,w$ with $P^i=0$ for $i>u$ and $F^j=0$ for $j\\notin[v,w]$. In degree $n$, only indices $v-n\\leq i\\leq\\min(u,w-n)$ contribute to the product total Hom of [def-sc-module-total-hom-complex]; this is a finite set. Thus the product is the displayed finite direct sum, and it is zero when $n<v-u$. If $P^i\\cong S^{r_i}$, its summand is $(F^{i+n})^{r_i}$. Tensoring an injection of $R$-modules with this finite sum is a finite sum of injections, so the term is $R$-flat. Direct sums of the given finite presentations, repeated $r_i$ times, give a finite presentation over $S$. The Hom differential is the one in the statement.",
+   "uses": [
+    "def-sc-module-total-hom-complex",
+    "def-weil-pbc-flat-ring-map"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0E1U, lemma-compute-RHom-relatively-perfect, proof of (a), finite direct sum calculation and final finite-presentation clause."
+   }
+  },
+  {
+   "text": "Finite free modules are projective (a free module is a direct summand of itself). The complex $F$ is bounded, in particular bounded below. Hence [lem-sc-affine-projective-complex-derived-hom], applied over $S$ to the bounded-above projective complex $P$ and the bounded-below complex $F$, says that $\\operatorname{Hom}_S^\\bullet(P,F)$, with terms $\\prod_i\\operatorname{Hom}_S(P^i,F^{i+n})$, represents $R\\operatorname{Hom}_S(K,L)$ of [def-pur-derived-internal-hom] on the one-object ringed site with ring $S$. This is exactly the derived Hom of the statement, so $Q_S\\operatorname{Hom}_S^\\bullet(P,F)\\cong R\\operatorname{Hom}_S(K,L)$ in $D(S)$. This gives the asserted derived representative for every choice, not just for the truncation constructed in step 1.",
+   "uses": [
+    "lem-sc-affine-projective-complex-derived-hom",
+    "def-pur-derived-internal-hom"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0A66, lemma-RHom-out-of-projective, as used in Tag 0E1U, proof of (a)."
+   }
+  },
+  {
+   "text": "Both $P$ and $F$ are bounded above and termwise $R$-flat, so they are K-flat over $R$. For either $G=P$ or $G=F$, apply [lem-sfb-flat-algebra-derived-module-tensor-exchange] with $N=T$. After restriction to $D(S)$ it identifies $Q_SG\\otimes_S^{\\mathbf L}(S\\otimes_RT)$ with the mixed tensor using a free $R$-resolution of $T$. Since $G$ is $R$-K-flat, tensoring its augmentation gives a quasi-isomorphism from that mixed tensor to $G\\otimes_RT$. The canonical derived-to-ordinary comparison is formed from an $S$-K-flat resolution $V\\to G$: the map $V\\otimes_SS_T\\to G\\otimes_SS_T$ is $S_T$-linear. Its restriction is the cited augmentation comparison under the balancing $(g\\otimes s)\\otimes t\\mapsto sg\\otimes t$. Its restriction to $S$ is the cited comparison. Forgetting an $S_T$-complex to an $S$-complex preserves its kernels, images and cohomology; therefore this comparison is a quasi-isomorphism in $D(S_T)$ as well. Consequently $P_T=P\\otimes_RT$ and $F_T=F\\otimes_RT$ represent $K_T,L_T$, without any flatness assumption on $T$.",
+   "uses": [
+    "lem-pc-module-bounded-flat-kflat",
+    "lem-sfb-flat-algebra-derived-module-tensor-exchange",
+    "lem-pc-mixed-tensor-kflat-quasi-iso",
+    "lem-pur-derived-change-of-rings",
+    "lem-weil-pbc-singleton-site-module-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0661, lemma-base-change-comparison; Tag 0E1U, lemma-compute-RHom-relatively-perfect, proof of (b)."
+   }
+  },
+  {
+   "text": "Apply the half-bounded Hom scalar-isomorphism lemma to the ring map $S\\to S_T$, source $P$, and target $F$. The ordinary balancing isomorphism $M\\otimes_SS_T\\cong M\\otimes_RT$, $m\\otimes(s\\otimes t)\\mapsto sm\\otimes t$, turns its chain isomorphism into the asserted $\\chi:E\\otimes_RT\\to\\operatorname{Hom}_{S_T}^\\bullet(P_T,F_T)$. Its formula becomes $(\\chi(h\\otimes t))(p\\otimes u)=h(p)\\otimes tu$. The lemma assumes finite free terms and an upper bound for $P$ and a lower bound for $F$, which hold here; it assumes no flatness of $S_T$ over $S$. Equivalently, each term is a finite sum of the basis identifications $(F^{i+n})^{r_i}\\otimes_RT\\cong(F^{i+n}\\otimes_RT)^{r_i}$.",
+   "uses": [
+    "lem-trf-half-bounded-hom-scalar-isomorphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0E1U, lemma-compute-RHom-relatively-perfect, proof of (b), last displayed equality; Tag 0ATK, lemma-internal-hom-evaluate-tensor-isomorphism, finite-support calculation."
+   }
+  },
+  {
+   "text": "The complex $P_T$ is bounded above finite free over $S_T$. The complex $F_T$ is bounded. Apply [lem-sc-affine-projective-complex-derived-hom] over $S_T$ to $P_T,F_T$, and use step 4. Composing this derived-category isomorphism with the localization of the chain isomorphism in step 5 gives $Q_{S_T}(E\\otimes_RT)\\cong R\\operatorname{Hom}_{S_T}(K_T,L_T)$. This uses ordinary termwise tensor on $E$. It requires no K-flatness assertion for the bounded-below complex $E$.",
+   "uses": [
+    "lem-sc-affine-projective-complex-derived-hom",
+    "def-pur-derived-internal-hom"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0E1U, lemma-compute-RHom-relatively-perfect, proof of (b); Tag 0A66, lemma-RHom-out-of-projective."
+   }
+  },
+  {
+   "text": "A degree-zero Hom cocycle $h$ is precisely a chain map $P\\to F$. A degree-zero boundary is $d_Fs+sd_P$ for a degree-minus-one cochain $s$, so quotienting cocycles by boundaries is quotienting chain maps by homotopy. The projective-source morphism-representative lemma identifies this quotient with $\\operatorname{Hom}_{D(S)}(K,L)$. Under $\\chi$, the cocycle $h\\otimes1$ is the chain map $h\\otimes_R1:P_T\\to F_T$. By the natural augmentation comparisons of step 4 this represents the derived scalar extension of $h$. Tensoring the equation $h-h'=d_Fs+sd_P$ tensors its homotopy too, so the map on classes is well-defined and has the asserted normalization.",
+   "uses": [
+    "def-sc-module-total-hom-complex",
+    "lem-pc-ring-derived-map-representative",
+    "lem-sfb-flat-algebra-derived-module-tensor-exchange"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0E1U, lemma-compute-RHom-relatively-perfect, termwise identification; Tag 0A66 and the degree-zero Hom differential. Cocycle normalization written out by Q104."
+   }
+  },
+  {
+   "text": "To check target naturality for a derived morphism $L\\to L'$ between allowed targets represented by $F,F'$, choose a bounded-above finite free $Q$ representing $L$. The morphism-representative lemma supplies chain maps $q:Q\\to F$ and $r:Q\\to F'$ representing the chosen isomorphism to $L$ and the given morphism; $q$ is a quasi-isomorphism. Choose $c$ at most the lower Tor bound for $L$ and the lower support bounds of $F,F'$. The step-1 argument with $c$ gives a bounded $R$-flat finitely presented complex $B=\\tau_{\\geq c}Q$. Both maps descend to $B$: at degree $c$, $q^cd_Q^{c-1}=d_Fq^{c-1}=0$, and likewise for $r$, because both targets vanish below $c$. Hence $F\\leftarrow B\\to F'$ represents the morphism with a quasi-isomorphism on the left. The complexes $B,F$ are $R$-K-flat, so [lem-pc-mixed-tensor-kflat-quasi-iso](i), with second complex $T[0]$, makes the left arrow a quasi-isomorphism after tensoring with $T$. This also proves independence of the chosen bounded flat target representative by taking the morphism to be an identity.",
+   "uses": [
+    "def-pc-ring-pseudo-coherent-complex",
+    "lem-pc-ring-derived-map-representative",
+    "lem-pc-module-flat-opcycles-tor-criterion",
+    "lem-pc-module-bounded-flat-kflat",
+    "lem-pc-mixed-tensor-kflat-quasi-iso"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0DHV, lemma-structure-relatively-perfect, good truncation construction; Tag 0653, lemma-last-one-flat; Tag 064L, lemma-derived-tor-quasi-isomorphism-other-side. Target-roof refinement written out by Q104."
+   }
+  },
+  {
+   "text": "The formula for $\\chi$ commutes with precomposition and postcomposition of chain maps: both orders send $h\\otimes t$ and $p\\otimes u$ to the same value, and tensoring preserves homotopies. Every derived source morphism between the chosen bounded-above finite free representatives is represented by a chain map, by the morphism-representative lemma. Every derived target morphism is represented by the roof of step 8. Applying the comparisons of [lem-pod-projective-hom-evaluation-model], natural covariantly in the target, before and after extension shows that the quasi-isomorphism in that roof remains a quasi-isomorphism on Hom complexes; the derived identifications of steps 3 and 6 are those of [lem-sc-affine-projective-complex-derived-hom], whose targets in the roof are all bounded. Thus chain-level naturality extends to these roofs and gives naturality in all derived morphisms and all choices. For $R\\to T\\to U$, each $F^j\\otimes_RT$ is $T$-flat: tensoring a $T$-module injection with it is tensoring the underlying $R$-injection with $F^j$. Its finite $S_T$-presentation is obtained by tensoring the given finite presentation, using right exactness. The same injection test shows $S_T$ is $T$-flat. A finite polynomial presentation of $S$ over $R$ tensors to one of $S_T$ over $T$. The finite free complexes $P_T,Q_T$ (with $Q$ from step 1) witness pseudo-coherence of $K_T,L_T$, and bounded $T$-flatness of $F_T$ gives finite Tor amplitude by bounded-flat K-flatness. Hence the repeated construction is defined. Under the tensor associators, direct and repeated comparisons both evaluate $(h\\otimes t)\\otimes u$ on $(p\\otimes t')\\otimes u'$ as $h(p)\\otimes (tt')uu'$, with $tt'$ mapped to $U$. For $T=R$ the formula is the identity. This proves identity and iteration compatibility.",
+   "uses": [
+    "lem-pc-ring-derived-map-representative",
+    "lem-pod-projective-hom-evaluation-model",
+    "lem-trf-half-bounded-hom-scalar-isomorphism",
+    "def-weil-pbc-finitely-presented-algebra",
+    "def-pc-ring-pseudo-coherent-complex",
+    "lem-pc-module-bounded-flat-kflat",
+    "lem-sc-affine-projective-complex-derived-hom"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0E1U, lemma-compute-RHom-relatively-perfect, termwise comparison; naturality, identity and iterated-extension formulas written out by Q104."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-ring-pseudo-coherent-complex",
+  "lem-pc-module-bounded-flat-kflat",
+  "lem-weil-pbc-singleton-site-module-comparison",
+  "lem-pur-derived-change-of-rings",
+  "lem-pc-module-flat-opcycles-tor-criterion",
+  "def-sc-module-total-hom-complex",
+  "def-weil-pbc-flat-ring-map",
+  "lem-pod-projective-hom-evaluation-model",
+  "lem-sfb-flat-algebra-derived-module-tensor-exchange",
+  "lem-pc-mixed-tensor-kflat-quasi-iso",
+  "lem-trf-half-bounded-hom-scalar-isomorphism",
+  "lem-pc-ring-derived-map-representative",
+  "def-weil-pbc-finitely-presented-algebra",
+  "lem-sc-affine-projective-complex-derived-hom",
+  "def-pur-derived-internal-hom"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tag 0E1U, lemma-compute-RHom-relatively-perfect, following its proof with the finite-presentation construction of 0DHV and explicit cocycle, roof and iteration checks."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "pseudo.?coherent|PseudoCoherent|relatively.?perfect|RHom",
+   "results": "[grep] OK 25 hit(s)\n  {\"file\": \"Mathlib/Algebra/Homology/Bifunctor.lean\", \"line\": \"15\", \"text\": \"`c₂ : ComplexShape I₂`, we define a bifunctor `mapBifunctorHomologicalComplex F c₁ c₂`\"}\n  {\"file\": \"Mathlib/Algebra/Homology/Bifunctor.lean\", \"line\": \"22\", \"text\": \"bicomplex `(((F.mapBifunctorHomologicalComplex c₁ c₂).obj K₁).obj K₂)`.\"}\n  {\"file\": \"Mathlib/Algebra/Homology/Bifunctor.lean\", \"line\": \"45\", \"text\": \"/-- Auxiliary definition for `mapBifunctorHomologicalComplex`. -/\"}\n  {\"file\": \"Mathlib/Algebra/Homology/Bifunctor.lean\", \"line\": \"47\", \"text\": \"def mapBifunctorHomologicalComplexObj (K₁ : HomologicalComplex C₁ c₁) :\"}\n  {\"file\": \"Mathlib/Algebra/Homology/Bifunctor.lean\", \"line\": \"84\", \"text\": \"def mapBifunctorHomologicalComplex :\"}\n  {\"file\": \"Mathlib/Algebra/Homology/Monoidal.lean\", \"line\": \"60\", \"text\": \"noncomputable abbrev tensorHom {K₁ K₂ L₁ L₂ : HomologicalComplex C c}\"}\n  {\"file\": \"Mathlib/Algebra/Homology/Monoidal.lean\", \"line\": \"194\", \"text\": \"    GradedObject.Monoidal.ι_tensorHom]\"}\n  {\"file\": \"Mathlib/Algebra/Homology/Monoidal.lean\", \"line\": \"196\", \"text\": \"  rw [tensorHom_id, ← comp_whiskerRight_assoc]\"}\n  {\"file\": \"Mathlib/Algebra/Homology/Monoidal.lean\", \"line\": \"245\", \"text\": \"    GradedObject.Monoidal.ι_tensorHom]\"}\n  {\"file\": \"Mathlib/Algebra/Homology/Monoidal.lean\", \"line\": \"247\", \"text\": \"  rw [id_tensorHom, ← whiskerLeft_comp_assoc]\"}\n  {\"file\": \"Mathlib/Algebra/Homology/BifunctorFlip.lean\", \"line\": \"40\", \"text\": \"  (((F.mapBifunctorHomologicalComplex c₁ c₂).obj K₁).obj K₂).flip_hasTotal_iff c\"}\n  {\"file\": \"Mathlib/Algebra/Homology/BifunctorFlip.lean\", \"line\": \"51\", \"text\": \"  (((F.mapBifunctorHomologicalComplex c₁ c₂).obj K₁).obj K₂).totalFlipIso c\"}\n  {\"file\": \"Mathlib/Algebra/Homology/BifunctorFlip.lean\", \"line\": \"59\", \"text\": \"    (((F.mapBifunctorHomologicalComplex c₁ c₂).obj K₁).obj K₂) c i₁ i₂ j hj\"}\n  {\"file\": \"Mathlib/Algebra/Homology/BifunctorFlip.lean\", \"line\": \"67\", \"text\": \"    (((F.mapBifunctorHomologicalComplex c₁ c₂).obj K₁).obj K₂) c i₁ i₂ j hj\"}\n  {\"file\": \"Mathlib/Algebra/Homology/BifunctorFlip.lean\", \"line\": \"72\", \"text\": \"  (((F.mapBifunctorHomologicalComplex c₁ c₂).obj K₁).obj K₂).flip_totalFlipIso c\"}\n  {\"file\": \"Mathlib/Algebra/Homology/BifunctorHomotopy.lean\", \"line\": \"101\", \"text\": \"        (((F.mapBifunctorHomologicalComplex c₁ c₂).obj L₁).obj L₂).d₂ c i₁ i₂ j =\"}\n  {\"file\": \"Mathlib/Algebra/Homology/BifunctorHomotopy.lean\", \"line\": \"102\", \"text\": \"    -(((F.mapBifunctorHomologicalComplex c₁ c₂).obj K₁).obj K₂).d₂ c i₁' i₂ (c.next j) ≫\"}\n  {\"file\": \"Mathlib/Algebra/Homology/BifunctorHomotopy.lean\", \"line\": \"112\", \"text\": \"    Functor.mapBifunctorHomologicalComplex_obj_obj_X_d,\"}\n  {\"file\": \"Mathlib/Algebra/Homology/BifunctorHomotopy.lean\", \"line\": \"113\", \"text\": \"    Functor.mapBifunctorHomologicalComplex_obj_obj_X_d,\"}\n  {\"file\": \"Mathlib/Algebra/Homology/BifunctorHomotopy.lean\", \"line\": \"131\", \"text\": \"      Functor.mapBifunctorHomologicalComplex_obj_obj_toGradedObject, Preadditive.comp_add,\"}\n  {\"file\": \"Mathlib/Algebra/Homology/BifunctorShift.lean\", \"line\": \"50\", \"text\": \"/-- The condition that `((F.mapBifunctorHomologicalComplex _ _).obj K₁).obj K₂` has\"}\n  {\"file\": \"Mathlib/Algebra/Homology/BifunctorShift.lean\", \"line\": \"79\", \"text\": \"def mapBifunctorHomologicalComplexShift₁Iso :\"}\n  {\"file\": \"Mathlib/Algebra/Homology/BifunctorShift.lean\", \"line\": \"80\", \"text\": \"    ((F.mapBifunctorHomologicalComplex _ _).obj (K₁⟦x⟧)).obj K₂ ≅\"}\n  {\"file\": \"Mathlib/Algebra/Homology/BifunctorShift.lean\", \"line\": \"82\", \"text\": \"      (((F.mapBifunctorHomologicalComplex _ _).obj K₁).obj K₂) :=\"}\n  {\"file\": \"Mathlib/Algebra/Homology/BifunctorShift.lean\", \"line\": \"91\", \"text\": \"  HomologicalComplex₂.hasTotal_of_iso (mapBifunctorHomologicalComplexShift₁Iso K₁ K₂ F x).symm _\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: the results give ordinary flatness, exactness or Hom-complex infrastructure, not this relative derived-Hom model and universal base-change assertion"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived Hom from pseudocoherent complex to finite Tor dimension complex computed by flat Hom complex universally after base change",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"CategoryTheory.Functor.rightDerivedToHomotopyCategory\", \"module\": \"Mathlib.CategoryTheory.Abelian.RightDerived\", \"type\": \"(F : C ⥤ D) [F.Additive] : C ⥤ HomotopyCategory D (ComplexShape.up ℕ)\", \"doc\": \"The right-derived functor associated to an additive functor $ F : C \\to D $, constructed by first taking injective resolutions in the abelian category $ C $ and then applying the induced functor betwee\"}\n  {\"name\": \"RingHom.Flat.isStableUnderBaseChange\", \"module\": \"Mathlib.RingTheory.RingHom.Flat\", \"type\": \": IsStableUnderBaseChange Flat\", \"doc\": \"For commutative rings $ R, S, R', S' $ with compatible algebra structures and scalar tower conditions, if the ring homomorphism $ R \\to S $ is flat, then the ring homomorphism $ R' \\to S' $ obtained by \"}\n  {\"name\": \"AlgebraicGeometry.Flat.isStableUnderBaseChange\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Flat\", \"type\": \": MorphismProperty.IsStableUnderBaseChange @Flat\", \"doc\": \"The property of being a flat morphism of schemes is stable under base change, meaning that if a morphism of schemes is flat, then any base change (pullback) of this morphism is also flat.\"}\n  {\"name\": \"HomologicalComplexUpToQuasiIso.Q\", \"module\": \"Mathlib.Algebra.Homology.Localization\", \"type\": \": HomologicalComplex C c ⥤ HomologicalComplexUpToQuasiIso C c\", \"doc\": \"The category obtained by localizing the category of homological complexes (with shape $\\\\iota$ in category $\\\\mathcal{C}$) at quasi-isomorphisms, which are morphisms inducing isomorphisms on all homolog\"}\n  {\"name\": \"RingHom.FaithfullyFlat.isStableUnderBaseChange\", \"module\": \"Mathlib.RingTheory.RingHom.FaithfullyFlat\", \"type\": \": IsStableUnderBaseChange FaithfullyFlat\", \"doc\": \"For commutative rings $ R, S, R', S' $ with compatible algebra structures and scalar tower conditions, if the ring homomorphism $ R \\\\to S $ is faithfully flat, then the base change homomorphism $ R' \\\\\"}\n  {\"name\": \"CategoryTheory.Functor.mapDerivedCategoryFactorsh_hom_app\", \"module\": \"Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor\", \"type\": \"(K : CochainComplex C₁ ℤ) :\\n  F.mapDerivedCategoryFactorsh.hom.app ((HomotopyCategory.quotient _ _).obj K) =\\n    F.mapDerivedCategory.map ((DerivedCategory.quotientCompQhIso C₁).hom.app K) ≫\\n      F.mapDerivedCategoryFactors.hom.app K ≫\\n        (DerivedCategory.quotientCompQhIso C₂).inv.app _ ≫\\n    \", \"doc\": \"For an additive functor $ F : \\\\mathcal{C}_1 \\\\to \\\\mathcal{C}_2 $ between abelian categories, the hom-component of the natural isomorphism asserting that composing the homotopy category functor with the\"}\n  {\"name\": \"CategoryTheory.HasExt.instHasSmallLocalizedShiftedHomHomologicalComplexIntUpQuasiIsoOfIsGEOfIsLEOfNat\", \"module\": \"Mathlib.Algebra.Homology.DerivedCategory.Ext.TStructure\", \"type\": \"[HasExt.{w} C] (K L : CochainComplex C ℤ) [K.IsGE 0] [K.IsLE 0] [L.IsGE 0] [L.IsLE 0] :\\n  HasSmallLocalizedShiftedHom.{w} (HomologicalComplex.quasiIso C (ComplexShape.up ℤ)) ℤ K L\", \"doc\": \"For cochain complexes $ K $ and $ L $ concentrated at degree 0 (satisfying both $ K $ is bounded below at 0 and $ K $ is bounded above at 0, and similarly for $ L $), the localized hom-sets between $ \"}\n  {\"name\": \"CochainComplex.HomComplex\", \"module\": \"Mathlib.Algebra.Homology.HomotopyCategory.HomComplex\", \"type\": \": CochainComplex AddCommGrpCat ℤ\", \"doc\": \"The cochain complex in the category of additive commutative groups, where each degree $n$ consists of the group of homomorphisms between two cochain complexes $F$ and $G$ at degree $n$, equipped with \"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: the results give ordinary flatness, exactness or Hom-complex infrastructure, not this relative derived-Hom model and universal base-change assertion"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"DerivedCategory\", \"HomComplex\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-23",
+   "verdict": "no match: the results give ordinary flatness, exactness or Hom-complex infrastructure, not this relative derived-Hom model and universal base-change assertion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a flat ring algebra a pseudocoherent source and a complex of finite relative Tor dimension admit a bounded below flat Hom complex computing derived Hom after arbitrary base change",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"Ext\", \"module\": \"Mathlib/CategoryTheory/Abelian/Ext\", \"type\": \"(R : Type u_1) →\\n  [inst : Ring R] →\\n    (C : Type u_2) →\\n      [inst_1 : CategoryTheory.Category.{v_1, u_2} C] →\\n        [inst_2 : CategoryTheory.Abelian C] →\\n          [CategoryTheory.Linear R C] →\\n            [CategoryTheory.EnoughProjectives C] →\\n              ℕ → CategoryTheory.Functor Cᵒᵖ (Cat\", \"doc\": \"For a ring $ R $ and an abelian $ R $-linear category $ \\\\mathcal{C} $ with enough projectives, the $ n $-th extension functor $ \\\\text{Ext}^n $ is a bifunctor $ \\\\mathcal{C}^{\\\\text{op}} \\\\times \\\\mathcal{\"}\n  {\"name\": \"CategoryTheory.hasExt_of_hasDerivedCategory\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/Ext/Basic\", \"type\": \"∀ (C : Type u) [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Abelian C] [HasDerivedCategory C],\\n  CategoryTheory.HasExt C\", \"doc\": \"If an abelian category $\\\\mathcal{C}$ has a derived category, then for any objects $X$ and $Y$, the localized hom-sets between single-term cochain complexes concentrated at degree 0 (with respect to qu\"}\n  {\"name\": \"DerivedCategory.left_fac_of_isStrictlyLE_of_isStrictlyGE\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/Fractions\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Abelian C]\\n  [inst_2 : HasDerivedCategory C] {X Y : CochainComplex C ℤ} (a b : ℤ) [X.IsStrictlyLE b] [Y.IsStrictlyGE a]\\n  [Y.IsStrictlyLE b] (f : DerivedCategory.Q.obj X ⟶ DerivedCategory.Q.obj Y),\\n  ∃ Y',\\n    ∃ (_ : Y\", \"doc\": \"Given cochain complexes $X$ and $Y$ with integer indices, where $X$ is strictly supported in degrees $\\\\leq b$, $Y$ is strictly supported in degrees $\\\\geq a$ and $\\\\leq b$, and a morphism $f: Q(X) \\\\to Q\"}\n  {\"name\": \"CategoryTheory.hasExt_iff\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/Ext/Basic\", \"type\": \"∀ (C : Type u) [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Abelian C]\\n  [inst_2 : HasDerivedCategory C],\\n  CategoryTheory.HasExt C ↔\\n    ∀ (X Y : C) (n : ℤ),\\n      0 ≤ n →\\n        Small.{w, w'}\\n          ((DerivedCategory.singleFunctor C 0).obj X ⟶\\n            (CategoryTheory.\", \"doc\": \"For an abelian category $\\\\mathcal{C}$ with a derived category, the property $\\\\text{HasExt}$ holds if and only if for all objects $X, Y \\\\in \\\\mathcal{C}$ and non-negative integers $n$, the hom-set betwe\"}\n  {\"name\": \"CategoryTheory.isZero_Tor'_succ_of_projective\", \"module\": \"Mathlib/CategoryTheory/Monoidal/Tor\", \"type\": \"∀ (C : Type u_1) [inst : CategoryTheory.Category.{v_1, u_1} C] [inst_1 : CategoryTheory.MonoidalCategory C]\\n  [inst_2 : CategoryTheory.Abelian C] [inst_3 : CategoryTheory.MonoidalPreadditive C]\\n  [inst_4 : CategoryTheory.HasProjectiveResolutions C] (X Y : C) [CategoryTheory.Projective X] (n : ℕ),\\n  \", \"doc\": \"For any projective object $X$ in a monoidal abelian category $\\\\mathcal{C}$ with enough projective objects, and for any object $Y$ in $\\\\mathcal{C}$, the $(n+1)$-th Tor functor $\\\\mathrm{Tor}_{n+1}(X, Y)\"}\n  {\"name\": \"CategoryTheory.isZero_Tor_succ_of_projective\", \"module\": \"Mathlib/CategoryTheory/Monoidal/Tor\", \"type\": \"∀ (C : Type u_1) [inst : CategoryTheory.Category.{v_1, u_1} C] [inst_1 : CategoryTheory.MonoidalCategory C]\\n  [inst_2 : CategoryTheory.Abelian C] [inst_3 : CategoryTheory.MonoidalPreadditive C]\\n  [inst_4 : CategoryTheory.HasProjectiveResolutions C] (X Y : C) [CategoryTheory.Projective Y] (n : ℕ),\\n  \", \"doc\": \"In a monoidal abelian category with enough projectives, for any object $X$ and projective object $Y$, the $(n+1)$-th left-derived tensor product functor $\\\\mathrm{Tor}_{n+1}(X, Y)$ is zero.\"}\n  {\"name\": \"DerivedCategory.from_singleFunctor_obj_eq_zero_of_projective\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/Ext/EnoughProjectives\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Abelian C]\\n  [inst_2 : HasDerivedCategory C] {P : C} [CategoryTheory.Projective P] {L : CochainComplex C ℤ} {i : ℤ}\\n  (φ : DerivedCategory.Q.obj ((CochainComplex.singleFunctor C i).obj P) ⟶ DerivedCategory.Q.obj L),\\n  \", \"doc\": \"In an abelian category with enough projectives, for any projective object $ P $, cochain complex $ L $, and integer $ i $, every morphism in the derived category from the single complex concentrated a\"}\n  {\"name\": \"DerivedCategory.left_fac_of_isStrictlyGE\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/Fractions\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Abelian C]\\n  [inst_2 : HasDerivedCategory C] {X Y : CochainComplex C ℤ} (f : DerivedCategory.Q.obj X ⟶ DerivedCategory.Q.obj Y)\\n  (n : ℤ) [Y.IsStrictlyGE n],\\n  ∃ Y',\\n    ∃ (_ : Y'.IsStrictlyGE n),\\n      ∃ g s,\\n        \", \"doc\": \"Given cochain complexes $X$ and $Y$ in an abelian category $\\\\mathcal{C}$ with integer indices, a morphism $f: Q(X) \\\\to Q(Y)$ in the derived category, and an integer $n$ such that $Y$ is strictly suppo\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: the results give ordinary flatness, exactness or Hom-complex infrastructure, not this relative derived-Hom model and universal base-change assertion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Hom complex of a bounded above finite free resolution and a bounded flat complex commutes with scalar extension",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"ModuleCat.preservesFiniteLimits_extendScalars_of_flat\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Descent\", \"type\": \"∀ {A B : Type u} [inst : CommRing A] [inst_1 : CommRing B] {f : A →+* B},\\n  f.Flat → CategoryTheory.Limits.PreservesFiniteLimits (ModuleCat.extendScalars f)\", \"doc\": \"Given a flat ring homomorphism $ f : R \\\\to S $ between commutative rings, the scalar extension functor $ \\\\text{Mod}_R \\\\to \\\\text{Mod}_S $ induced by $ f $ preserves finite limits in the category of mod\"}\n  {\"name\": \"CategoryTheory.ProjectiveResolution.mk₀_comp_extMk\", \"module\": \"Mathlib/CategoryTheory/Abelian/Projective/Ext\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Abelian C]\\n  [inst_2 : CategoryTheory.HasExt C] {X Y : C} {R : CategoryTheory.ProjectiveResolution X} {n : ℕ}\\n  (f : R.complex.X n ⟶ Y) (m : ℕ) (hm : n + 1 = m) (hf : CategoryTheory.CategoryStruct.comp (R.complex.d m n\", \"doc\": \"Given projective resolutions $R$ and $R'$ of objects $X$ and $X'$ in an abelian category $\\\\mathcal{C}$, a morphism $f: R_n \\\\to Y$ satisfying $d_{n+1,n} \\\\circ f = 0$, and a morphism $\\\\phi: R' \\\\to R$ co\"}\n  {\"name\": \"CategoryTheory.ProjectiveResolution.Hom.hom'_f_assoc\", \"module\": \"Mathlib/CategoryTheory/Abelian/Projective/Extend\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Abelian C] {X : C}\\n  {R : CategoryTheory.ProjectiveResolution X} {X' : C} {R' : CategoryTheory.ProjectiveResolution X'} {f : X ⟶ X'}\\n  (φ : R.Hom R' f) (n : ℤ) (m : ℕ) (h : -↑m = n) {Z : C} (h_1 : R'.cochainComplex.X n\", \"doc\": \"Given projective resolutions $ R $ and $ R' $ of objects $ X $ and $ X' $ in an abelian category $ \\\\mathcal{C} $, and a morphism $ \\\\phi: R \\\\to R' $ compatible with $ f: X \\\\to X' $, the induced cochain\"}\n  {\"name\": \"CategoryTheory.ProjectiveResolution.isoExt\", \"module\": \"Mathlib/CategoryTheory/Abelian/Ext\", \"type\": \"{R : Type u_1} →\\n  [inst : Ring R] →\\n    {C : Type u_2} →\\n      [inst_1 : CategoryTheory.Category.{v_1, u_2} C] →\\n        [inst_2 : CategoryTheory.Abelian C] →\\n          [inst_3 : CategoryTheory.Linear R C] →\\n            [inst_4 : CategoryTheory.EnoughProjectives C] →\\n              {X : C} →\\n       \", \"doc\": \"For a ring $ R $, an abelian $ R $-linear category $ \\\\mathcal{C} $, an object $ X $ with projective resolution $ P $, natural number $ n $, and object $ Y $, there is an isomorphism between the $ n $-\"}\n  {\"name\": \"CategoryTheory.ProjectiveResolution.extMk_hom\", \"module\": \"Mathlib/CategoryTheory/Abelian/Projective/Ext\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Abelian C]\\n  [inst_2 : CategoryTheory.HasExt C] {X Y : C} (R : CategoryTheory.ProjectiveResolution X)\\n  [inst_3 : HasDerivedCategory C] {n : ℕ} (f : R.complex.X n ⟶ Y) (m : ℕ) (hm : n + 1 = m)\\n  (hf : CategoryTheory.Ca\", \"doc\": \"In an abelian category with derived category structure, for a projective resolution $ R $ of an object $ X $, if a morphism $ f: R_n \\\\to Y $ satisfies $ d_{n+1,n} \\\\circ f = 0 $, then the extended homo\"}\n  {\"name\": \"CategoryTheory.Functor.mapExtLinearMap_apply\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/Ext/Map\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Abelian C] {D : Type u'}\\n  [inst_2 : CategoryTheory.Category.{v', u'} D] [inst_3 : CategoryTheory.Abelian D] (F : CategoryTheory.Functor C D)\\n  [inst_4 : F.Additive] [inst_5 : CategoryTheory.Limits.PreservesFiniteLimit\", \"doc\": \"For an exact functor $ F: \\\\mathcal{C} \\\\to \\\\mathcal{D} $ between $ R $-linear abelian categories and objects $ X, Y \\\\in \\\\mathcal{C} $, the induced map $ \\\\operatorname{Ext}^n(X,Y) \\\\to \\\\operatorname{Ext}\"}\n  {\"name\": \"CategoryTheory.Functor.mapExtLinearMap_coe\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/Ext/Map\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Abelian C] {D : Type u'}\\n  [inst_2 : CategoryTheory.Category.{v', u'} D] [inst_3 : CategoryTheory.Abelian D] (F : CategoryTheory.Functor C D)\\n  [inst_4 : F.Additive] [inst_5 : CategoryTheory.Limits.PreservesFiniteLimit\", \"doc\": \"For an exact functor $ F: \\\\mathcal{C} \\\\to \\\\mathcal{D} $ between $ R $-linear abelian categories and objects $ X, Y \\\\in \\\\mathcal{C} $, the induced map $ \\\\operatorname{Ext}^n(X,Y) \\\\to \\\\operatorname{Ext}\"}\n  {\"name\": \"CategoryTheory.ProjectiveResolution.Hom.hom'_f\", \"module\": \"Mathlib/CategoryTheory/Abelian/Projective/Extend\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Abelian C] {X : C}\\n  {R : CategoryTheory.ProjectiveResolution X} {X' : C} {R' : CategoryTheory.ProjectiveResolution X'} {f : X ⟶ X'}\\n  (φ : R.Hom R' f) (n : ℤ) (m : ℕ) (h : -↑m = n),\\n  φ.hom'.f n =\\n    CategoryTheory.C\", \"doc\": \"For integers $n$ and natural numbers $m$ satisfying $n = -m$, the $n$-th component of the cochain map $\\\\phi_{\\\\text{ext}}$ induced by a morphism $\\\\phi$ of projective resolutions is given by the composi\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: the results give ordinary flatness, exactness or Hom-complex infrastructure, not this relative derived-Hom model and universal base-change assertion"
+  },
+  {
+   "tool": "grep",
+   "query": "pseudo.?coherent|relatively.?perfect|finite.?tor.?dimension|compute.*RHom",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "relative.*[Hh]om|[Hh]om.*base[Cc]hange|[Pp]seudo[Cc]oherent|[Rr]elatively[Pp]erfect",
+   "results": "25 hits; top results: Mathlib/LinearAlgebra/TensorProduct/Tower.lean, Mathlib/Algebra/Lie/CartanCriterion.lean, Mathlib/Algebra/Lie/SemiDirect.lean, Mathlib/LinearAlgebra/CliffordAlgebra/BaseChange.lean, Mathlib/LinearAlgebra/CliffordAlgebra/BaseChange.lean, Mathlib/LinearAlgebra/CliffordAlgebra/BaseChange.lean, Mathlib/LinearAlgebra/CliffordAlgebra/BaseChange.lean, Mathlib/AlgebraicTopology/EilenbergSteenrod.lean. ",
+   "date": "2026-10-23",
+   "verdict": "no match: ordinary flatness and Hom-complex infrastructure do not state the relative Hom model with arbitrary base extension"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived Hom of a pseudo coherent complex and a relatively perfect complex commutes with arbitrary base change using a flat Hom complex model",
+   "results": "8 hits; top results: IsBaseChange.linearMapLeftRight, RingHom.Flat.isStableUnderBaseChange, RingHom.FaithfullyFlat.isStableUnderBaseChange, CategoryTheory.Functor.mapDerivedCategoryFactorsh_hom_app, Module.Flat.isBaseChange, HomologicalComplexUpToQuasiIso.Q, CategoryTheory.Functor.instCommShiftCochainComplexIntDerivedCategoryHomMapDerivedCategoryFactors, CategoryTheory.Functor.instCommShiftDerivedCategoryMapDerivedCategoryInt. ",
+   "date": "2026-10-23",
+   "verdict": "no match: ordinary flatness and Hom-complex infrastructure do not state the relative Hom model with arbitrary base extension"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"HomComplex\", \"tensor\"",
+   "results": "0 hits; top results: none. ",
+   "date": "2026-10-23",
+   "verdict": "no match: ordinary flatness and Hom-complex infrastructure do not state the relative Hom model with arbitrary base extension"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A finite free bounded above source and bounded relatively flat target compute derived Hom after every base ring extension",
+   "results": "8 hits; top results: AlgebraicGeometry.Flat.instHasRingHomPropertyFlat, RingHom.FormallySmooth.isStableUnderBaseChange, RingHom.Flat.propertyIsLocal, RingHom.Flat, Algebra.FormallyUnramified.flat_of_restrictScalars, Algebra.FormallySmooth.iff_injective_cotangentComplexBaseChange, RingHom.FaithfullyFlat.codescendsAlong_surjective, RingHom.FaithfullyFlat.codescendsAlong_bijective. ",
+   "date": "2026-10-23",
+   "verdict": "no match: ordinary flatness and Hom-complex infrastructure do not state the relative Hom model with arbitrary base extension"
+  },
+  {
+   "tool": "grep",
+   "query": "HomComplex|baseChange",
+   "results": "25 hits; top results: Mathlib/Algebra/Homology/HomotopyCategory/KInjective.lean, Mathlib/Algebra/Homology/HomotopyCategory/KInjective.lean, Mathlib/Algebra/Homology/HomotopyCategory/KInjective.lean, Mathlib/Algebra/Homology/HomotopyCategory/KInjective.lean, Mathlib/Algebra/Homology/HomotopyCategory/KProjective.lean, Mathlib/Algebra/Homology/HomotopyCategory/KProjective.lean, Mathlib/Algebra/Homology/HomotopyCategory/KProjective.lean, Mathlib/Algebra/Homology/HomotopyCategory/HomComplexShift.lean. ",
+   "date": "2026-10-23",
+   "verdict": "no match: ordinary flatness and Hom-complex infrastructure do not state the relative Hom model with arbitrary base extension"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A bounded above complex of finite free modules and a bounded flat complex have a Hom complex compatible with nonflat tensor base change",
+   "results": "8 hits; top results: Module.Flat.rTensor_shortComplex_exact, Module.Flat.lTensor_shortComplex_exact, ModuleCat.preservesFiniteLimits_tensorLeft_of_ringHomFlat, Module.Flat.isBaseChange, Module.Flat.of_flat_tensorProduct, ModuleCat.preservesFiniteLimits_extendScalars_of_flat, Module.Flat.lTensor_exact, Module.Flat.rTensor_exact. ",
+   "date": "2026-10-23",
+   "verdict": "no match: ordinary flatness and Hom-complex infrastructure do not state the relative Hom model with arbitrary base extension"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-algebraic-diagonal-generator-base-change",
+  "date": "2026-10-23",
+  "group": "Q84"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: The ten-canonical Hilbert parameter and projective-frame torsors. Specific prerequisite: Relative dualizing line of an arbitrary nodal family. Derived-complex prerequisite: proper flat duality and its normalized polynomial models, before applying the regular-equation calculation. Supporting input: Arbitrary base change of supplied coherent relative dualizing pairs. Specific prerequisite: Algebraic diagonal-Hom vanishing and generator preservation in the affine check of arbitrary base change of a supplied pair. Specific input: the finite flat Hom-complex and its cocycle-normalized base-change identification (Stacks 0E1U).",
+   "via": [
+    "lem-sfb-algebraic-diagonal-generator-base-change",
+    "lem-sfb-relative-dualizing-pair-base-change",
+    "lem-sfb-proper-flat-dualizing-polynomial-model",
+    "lem-sfb-gorenstein-curve-relative-dualizing",
+    "lem-sfb-ten-canonical-hilbert-parameter",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-relative-rhom-finite-flat-base-change-model",
+  "worker": "stage1",
+  "summary": "Q104 checked Stacks 0E1U and its 0653/0661/0A66/0DHV inputs. Reused existing algebraic prerequisite nodes, constructed the finite-presentation good truncation, and wrote the bounded-support calculation and arbitrary extension comparison. Added explicit cocycle normalization, target roofs, derived naturality and iterated-extension formulas. Statement unchanged; no new nodes.",
+  "blueprint": "Supporting finite-flat Hom model in the inherited det-thm-sf-ctf-stability-direct-images proof-(3) dependency chain, specifically the algebraic diagonal-Hom base-change check. Steps 1-6 realize the 0E1U input and steps 7-9 normalize its morphism and iteration comparisons. The ancestor tool returns None, so the inherited null ancestor and via chain are retained.",
+  "tool_uses": [
+   {
+    "node": "lem-pc-module-bounded-flat-kflat",
+    "why": "Ordinary-module bounded-above flat K-flatness computes the resolutions; no geometric or coefficient route is changed."
+   },
+   {
+    "node": "lem-weil-pbc-singleton-site-module-comparison",
+    "why": "Identifies the ordinary module K-flat operations with the ringed-site definitions in the statement."
+   },
+   {
+    "node": "lem-pur-derived-change-of-rings",
+    "why": "Computes derived scalar extension on K-flat representatives."
+   },
+   {
+    "node": "lem-pc-module-flat-opcycles-tor-criterion",
+    "why": "General algebraic opcycles-flatness criterion needed for the good truncation; this is the 0653 input to 0E1U."
+   },
+   {
+    "node": "lem-pod-projective-hom-evaluation-model",
+    "why": "General projective-source derived Hom computation, the 0A66 input to 0E1U."
+   },
+   {
+    "node": "lem-pc-mixed-tensor-kflat-quasi-iso",
+    "why": "General preservation of quasi-isomorphisms under mixed tensor with K-flat representatives."
+   },
+   {
+    "node": "lem-trf-half-bounded-hom-scalar-isomorphism",
+    "why": "General finite-support Hom scalar comparison for any ring map; used with S to S tensor_R T, without a flatness assumption."
+   },
+   {
+    "node": "lem-sc-affine-projective-complex-derived-hom",
+    "why": "Ordinary-module identification of the Hom complex out of a bounded-above projective complex into a bounded-below complex with the derived Hom of def-pur-derived-internal-hom on the one-object site; the statement's RHom (added by the Q104 reviewer)."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pc-module-bounded-flat-kflat",
+  "lem-weil-pbc-singleton-site-module-comparison",
+  "lem-pur-derived-change-of-rings",
+  "lem-pc-module-flat-opcycles-tor-criterion",
+  "lem-pod-projective-hom-evaluation-model",
+  "lem-pc-mixed-tensor-kflat-quasi-iso",
+  "lem-trf-half-bounded-hom-scalar-isomorphism",
+  "lem-sc-affine-projective-complex-derived-hom"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q104-d7423cec6",
+  "group": "Q104",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q104-d7423cec6 (reviewer sub-agent of L); spot-checked: I read the whole delivery and recommend FIX. It is a first split with no new nodes, and the statement is byte-identical to the live unsplit item. I checked it against Stacks 0E1U (statement, (a), (b), finite-presentation clause, proof) and its inputs 0653, 0661, 0A66 and 0ATK; it matches hypothesis by hypothesis.\n\nSteps 1, 2, 4, 5, 7 and 8 check out against what the cited nodes actually say:\n- Step 1: Tor amplitude gives H^{a-1}(Q⊗N)=0 for every N, so the opcycles criterion makes coker(d^{a-1}) flat, and the truncation is a quasi-isomorphism by the case N=R.\n- Step 2: the contributing index range v-n<=i<=min(u,w-n) is finite.\n- Step 4: the exchange node is applied with N=T, plus mixed-tensor (ii); no flatness of T is used.\n- Step 5: the half-bounded node is applied to S->S_T and turned into the item's formula by the balancing isomorphism.\n- Step 7: the H^0 identification comes from the Mathlib Qh bijection.\n- Step 8: the roof maps descend because F^{c-1}=0, and mixed-tensor (i) keeps the left map a quasi-isomorphism after tensoring.\n\nIn step 9 the naturality and iteration hypotheses are made explicit and check out.\n\nSmall case R=S=Z, K=Z, L=Z/p: E⊗Z/p = F_p ⊕ F_p[1], which is correct.\n\nOne citation fault (C4), now fixed. Steps 3 and 6 cited lem-pod-projective-hom-evaluation-model, whose RHom is the adjoint internal Hom of D(R); the item's RHom is def-pur-derived-internal-hom on the one-object site. The fix cites lem-sc-affine-projective-complex-derived-hom instead (F and F_T are bounded) together with def-pur in steps 3 and 6. Step 9 now also cites the sc node and keeps pod only for target naturality. proof_deps now equals the union of step uses, and I added a tool_uses entry for the sc node.\n\nBatch-5 flags, each judged generic and accepted:\n- pod-projective-hom-evaluation-model: general module algebra (Stacks 0A66); neither assumption gives it and it is not a step of the Poincaré duality proof.\n- flat-algebra exchange: its route into the trace-formula chapter goes only through the one-point-site module identification, which is foundational.\n- trf-half-bounded-hom-scalar-isomorphism: Stacks 0ATK termwise scalar extension, valid for any ring map.\n\nNo duplicate exists: I grepped for 0E1U; the flat-base-change RHom node needs a flat base map, and base-change-rhom-perfect needs a perfect source. No SGA is cited.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.Algebra.Homology.RelativeRhomFiniteFlatBaseChangeModel",
+  "declaration": "CochainComplex.relativeRhom_finiteFlat_baseChange_model",
+  "declarations": [
+   "CochainComplex.RelativeFiniteFlatHomModel",
+   "CochainComplex.relativeFiniteFlatHomPair",
+   "CochainComplex.RelativeFiniteFlatHomModels",
+   "CochainComplex.relativeHomExtend",
+   "CochainComplex.relativeHomDerivedFunctor",
+   "CochainComplex.relativeHomDerivedFunctorOriginal",
+   "CochainComplex.relativeHomCoefficientMap",
+   "CochainComplex.RelativeHomScalarComparisons",
+   "CochainComplex.relativeHomScalarCounit",
+   "CochainComplex.relativeRhom_finiteFlat_baseChange_model"
+  ],
+  "file": "lean/Sheaf/Algebra/Homology/RelativeRhomFiniteFlatBaseChangeModel.lean",
+  "statement": "theorem relativeRhom_finiteFlat_baseChange_model (R S : Type u) [CommRing R] [CommRing S] [Algebra R S] (hflat : RingHom.Flat (algebraMap R S)) [Algebra.FinitePresentation R S] (K L : DerivedCategory (ModuleCat.{u} S)) (hK : DerivedCategory.IsPseudoCoherent K) (hL : DerivedCategory.IsPseudoCoherent L) (hTor : ∃ a b : ℤ, a ≤ b ∧ ∀ (N : ModuleCat.{u} R) (i : ℤ), i < a ∨ b < i → IsZero ((DerivedCategory.homologyFunctor (ModuleCat.{u} R) i).obj (((ModuleCat.restrictScalars (algebraMap R S)).mapDerivedCategory.obj L) ⊗ DerivedCategory.Q.obj ((singleFunctor _ 0).obj N)))) : (∃ M : RelativeFiniteFlatHomModel R S, Nonempty (DerivedCategory.Q.obj M.P ≅ K) ∧ Nonempty (DerivedCategory.Q.obj M.F ≅ L)) ∧ (∀ M : RelativeFiniteFlatHomModels R S, (∃ a : ℤ, ∀ n : ℤ, n < a → IsZero ((moduleHomComplex M.P M.F).X n)) ∧ (∀ n : ℤ, Module.Flat R ((ModuleCat.restrictScalars (algebraMap R S)).obj ((moduleHomComplex M.P M.F).X n)) ∧ Module.FinitePresentation S ((moduleHomComplex M.P M.F).X n)) ∧ (∀ n : ℤ, ∃ σ : (moduleHomComplex M.P M.F).X n ≃ₗ[S] DirectSum ℤ (fun i : ℤ ↦ M.P.X i →ₗ[S] M.F.X (i + n)), ∀ (h : (moduleHomComplex M.P M.F).X n) (i : ℤ), (σ h) i = (h.v i (i + n) rfl).hom)) ∧ ∃ (H : RelativeFiniteFlatHomModels R S ⥤ DerivedCategory (ModuleCat.{u} S)) (eH : ∀ M, H.obj M ≅ DerivedCategory.Q.obj (moduleHomComplex M.P M.F)) (α : H ≅ relativeHomDerivedFunctorOriginal R S) (HT : ∀ (T : Type u) [CommRing T] [Algebra R T], RelativeFiniteFlatHomModels R S ⥤ DerivedCategory (ModuleCat.{u} (S ⊗[R] T))) (eT : ∀ (T : Type u) [CommRing T] [Algebra R T] (M : RelativeFiniteFlatHomModels R S), (HT T).obj M ≅ DerivedCategory.Q.obj ((relativeHomExtend (relativeHomCoefficientMap R S T)).obj (moduleHomComplex M.P M.F))) (β : ∀ (T : Type u) [CommRing T] [Algebra R T], HT T ≅ relativeHomDerivedFunctor R S (S ⊗[R] T) (relativeHomCoefficientMap R S T)) (χ : RelativeHomScalarComparisons R S) (ev : ∀ (A : Type u) [CommRing A] (P F : CochainComplex (ModuleCat.{u} A) ℤ), P ⊗ moduleHomComplex P F ⟶ F), (∀ (A : Type u) [CommRing A] (P F : CochainComplex (ModuleCat.{u} A) ℤ) (p n : ℤ) (x : P.X p) (h : (moduleHomComplex P F).X n), (ev A P F).f (p + n) (HomologicalComplex.ιTensorObj P (moduleHomComplex P F) p n (p + n) rfl (x ⊗ₜ[A] h)) = (p * n).negOnePow • (h.v p (p + n) rfl x)) ∧ (∀ M : RelativeFiniteFlatHomModels R S, Functor.LaxMonoidal.μ DerivedCategory.Q M.P (moduleHomComplex M.P M.F) ≫ DerivedCategory.Q.map (ev S M.P M.F) = DerivedCategory.Q.obj M.P ◁ ((eH M).inv ≫ α.hom.app M) ≫ (ihom.ev (DerivedCategory.Q.obj M.P)).app (DerivedCategory.Q.obj M.F)) ∧ (∀ (T : Type u) [CommRing T] [Algebra R T] (M : RelativeFiniteFlatHomModels R S), IsIso (relativeHomScalarCounit (relativeHomCoefficientMap R S T) M.P) ∧ IsIso (relativeHomScalarCounit (relativeHomCoefficientMap R S T) M.F)) ∧ (∀ (T : Type u) [CommRing T] [Algebra R T] (M : RelativeFiniteFlatHomModels R S) (n p q : ℤ) (hpq : p + n = q) (h : (moduleHomComplex M.P M.F).X n) (c d : S ⊗[R] T) (x : M.P.X p), (((χ T M).hom.f n (c ⊗ₜ[S,relativeHomCoefficientMap R S T] h)).v p q hpq) (d ⊗ₜ[S,relativeHomCoefficientMap R S T] x) = (c * d) ⊗ₜ[S,relativeHomCoefficientMap R S T] (h.v p q hpq x)) ∧ (∀ (M M' : RelativeFiniteFlatHomModels R S) (a : M'.P ⟶ M.P) (b : M.F ⟶ M'.F), ∃ f : moduleHomComplex M.P M.F ⟶ moduleHomComplex M'.P M'.F, (∀ (n p q : ℤ) (hpq : p + n = q) (h : (moduleHomComplex M.P M.F).X n), (f.f n h).v p q hpq = a.f p ≫ h.v p q hpq ≫ b.f q) ∧ H.map (InducedCategory.homMk ((DerivedCategory.Q.map a).op, DerivedCategory.Q.map b)) ≫ (eH M').hom = (eH M).hom ≫ DerivedCategory.Q.map f ∧ ∀ (T : Type u) [CommRing T] [Algebra R T], (HT T).map (InducedCategory.homMk ((DerivedCategory.Q.map a).op, DerivedCategory.Q.map b)) ≫ (eT T M').hom = (eT T M).hom ≫ DerivedCategory.Q.map ((relativeHomExtend (relativeHomCoefficientMap R S T)).map f)) ∧ (∀ (T : Type u) [CommRing T] [Algebra R T] (M : RelativeFiniteFlatHomModels R S) (n : ℤ) (h : (moduleHomComplex M.P M.F).X n), (χ T M).hom.f n ((1 : S ⊗[R] T) ⊗ₜ[S,relativeHomCoefficientMap R S T] h) = h.map (ModuleCat.extendScalars (relativeHomCoefficientMap R S T))) ∧ (∀ (T : Type u) [CommRing T] [Algebra R T], ∃ ω : ((ModuleCat.restrictScalars (algebraMap R S) ⋙ ModuleCat.extendScalars (algebraMap R T)).mapHomologicalComplex (.up ℤ)) ≅ relativeHomExtend (relativeHomCoefficientMap R S T) ⋙ Functor.mapHomologicalComplex (ModuleCat.restrictScalars (Algebra.TensorProduct.includeRight : T →ₐ[R] S ⊗[R] T).toRingHom) (.up ℤ), ∀ (G : CochainComplex (ModuleCat.{u} S) ℤ) (i : ℤ) (t : T) (x : G.X i), (ω.hom.app G).f i (t ⊗ₜ[R,algebraMap R T] x) = ((Algebra.TensorProduct.includeRight : T →ₐ[R] S ⊗[R] T) t) ⊗ₜ[S,relativeHomCoefficientMap R S T] x) ∧ (∀ M : RelativeFiniteFlatHomModels R S, ∃ θ : (moduleHomComplex M.P M.F).homology 0 ≃+ (DerivedCategory.Q.obj M.P ⟶ DerivedCategory.Q.obj M.F), (∀ (f : M.P ⟶ M.F) (z : (moduleHomComplex M.P M.F).cycles 0), (moduleHomComplex M.P M.F).iCycles 0 z = HomComplex.Cochain.ofHom f → θ ((moduleHomComplex M.P M.F).homologyπ 0 z) = DerivedCategory.Q.map f) ∧ ∀ (T : Type u) [CommRing T] [Algebra R T] (f : M.P ⟶ M.F), (ModuleCat.ordinaryDerivedExtendScalars (relativeHomCoefficientMap R S T)).map (DerivedCategory.Q.map f) ≫ relativeHomScalarCounit (relativeHomCoefficientMap R S T) M.F = relativeHomScalarCounit (relativeHomCoefficientMap R S T) M.P ≫ DerivedCategory.Q.map ((relativeHomExtend (relativeHomCoefficientMap R S T)).map f)) ∧ (∀ (T : Type u) [CommRing T] [Algebra R T] (M : RelativeFiniteFlatHomModels R S), ∃ γ : DerivedCategory.Q.obj (moduleHomComplex ((relativeHomExtend (relativeHomCoefficientMap R S T)).obj M.P) ((relativeHomExtend (relativeHomCoefficientMap R S T)).obj M.F)) ≅ (relativeHomDerivedFunctor R S (S ⊗[R] T) (relativeHomCoefficientMap R S T)).obj M, (eT T M).hom ≫ DerivedCategory.Q.map (χ T M).hom ≫ γ.hom = (β T).hom.app M ∧ (relativeHomScalarCounit (relativeHomCoefficientMap R S T) M.P ▷ DerivedCategory.Q.obj (moduleHomComplex ((relativeHomExtend (relativeHomCoefficientMap R S T)).obj M.P) ((relativeHomExtend (relativeHomCoefficientMap R S T)).obj M.F))) ≫ Functor.LaxMonoidal.μ DerivedCategory.Q ((relativeHomExtend (relativeHomCoefficientMap R S T)).obj M.P) (moduleHomComplex ((relativeHomExtend (relativeHomCoefficientMap R S T)).obj M.P) ((relativeHomExtend (relativeHomCoefficientMap R S T)).obj M.F)) ≫ DerivedCategory.Q.map (ev (S ⊗[R] T) ((relativeHomExtend (relativeHomCoefficientMap R S T)).obj M.P) ((relativeHomExtend (relativeHomCoefficientMap R S T)).obj M.F)) = (ModuleCat.ordinaryDerivedExtendScalars (relativeHomCoefficientMap R S T)).obj (DerivedCategory.Q.obj M.P) ◁ γ.hom ≫ (ihom.ev ((ModuleCat.ordinaryDerivedExtendScalars (relativeHomCoefficientMap R S T)).obj (DerivedCategory.Q.obj M.P))).app ((ModuleCat.ordinaryDerivedExtendScalars (relativeHomCoefficientMap R S T)).obj (DerivedCategory.Q.obj M.F)) ≫ relativeHomScalarCounit (relativeHomCoefficientMap R S T) M.F) ∧ (∀ (T U : Type u) [CommRing T] [CommRing U] [Algebra R T] [Algebra R U] (v : T →ₐ[R] U) (M : RelativeFiniteFlatHomModels R S), ∃ τ : relativeHomExtend (relativeHomCoefficientMap R S U) ≅ relativeHomExtend (relativeHomCoefficientMap R S T) ⋙ relativeHomExtend (Algebra.TensorProduct.map (AlgHom.id R S) v).toRingHom, (∀ (G : CochainComplex (ModuleCat.{u} S) ℤ) (i : ℤ) (x : G.X i), (τ.hom.app G).f i ((1 : S ⊗[R] U) ⊗ₜ[S,relativeHomCoefficientMap R S U] x) = (1 : S ⊗[R] U) ⊗ₜ[S ⊗[R] T, (Algebra.TensorProduct.map (AlgHom.id R S) v).toRingHom] ((1 : S ⊗[R] T) ⊗ₜ[S,relativeHomCoefficientMap R S T] x)) ∧ ∃ ξ : (relativeHomExtend (Algebra.TensorProduct.map (AlgHom.id R S) v).toRingHom).obj (moduleHomComplex ((relativeHomExtend (relativeHomCoefficientMap R S T)).obj M.P) ((relativeHomExtend (relativeHomCoefficientMap R S T)).obj M.F)) ≅ moduleHomComplex ((relativeHomExtend (relativeHomCoefficientMap R S U)).obj M.P) ((relativeHomExtend (relativeHomCoefficientMap R S U)).obj M.F), (∀ (n p q : ℤ) (hpq : p + n = q) (z : (moduleHomComplex ((relativeHomExtend (relativeHomCoefficientMap R S T)).obj M.P) ((relativeHomExtend (relativeHomCoefficientMap R S T)).obj M.F)).X n) (c : S ⊗[R] U), (ξ.hom.f n (c ⊗ₜ[S ⊗[R] T, (Algebra.TensorProduct.map (AlgHom.id R S) v).toRingHom] z)).v p q hpq = (τ.hom.app M.P).f p ≫ (c • ((ModuleCat.extendScalars (Algebra.TensorProduct.map (AlgHom.id R S) v).toRingHom).map (z.v p q hpq))) ≫ (τ.inv.app M.F).f q) ∧ (relativeHomExtend (Algebra.TensorProduct.map (AlgHom.id R S) v).toRingHom).map (χ T M).hom ≫ ξ.hom = (τ.inv.app (moduleHomComplex M.P M.F)) ≫ (χ U M).hom)",
+  "branch": "sheaf-dag",
+  "by": "Q32",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "Helpers package the allowed representatives, the induced category with actual derived morphisms, and the recorded scalar-extension and RHom interfaces. No independent replacement definition of tensor, Hom, flatness or pseudo-coherence. Ordinary tensor over S to S tensor_R T is identified with ordinary tensor over R by the normalized natural isomorphism omega in the theorem."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-cdcfdb869",
+  "group": "Q32",
+  "result": "pass",
+  "note": "Read node, Stacks 0E1U source (R-perfect case with fp), all 6 stmt_dep records and their declarations (OrdinaryDerivedChangeOfRings counit direction/K-flat invertibility; ordinaryModuleDerivedInternalHom = uncurry MonoidalClosed.internalHom so ihom.ev matches), moduleHomComplex (δ = d_F h − (−1)^n h d_P), and the full 335-line module. Every hypothesis is present and not strengthened (RingHom.Flat, Algebra.FinitePresentation, IsPseudoCoherent, Tor amplitude via derived tensor with N[0] for all N). Model fields match the node exactly. All existential data is pinned: σ componentwise; eH⁻¹≫α by the evaluation adjunction with ev fixed on pure tensors (sign (−1)^{pn} hand-checked as a chain map, same as ProjectiveHomEvaluationModel); χ on generators (cd)⊗h(x); γ by the evaluation/counit equation (counit at F invertible); θ on chain maps; τ, ξ on generators for iterated extension; ω balancing S_T-extension with ⊗_R T. Derived naturality via InducedCategory functors plus chain-map clause. Edge cases (zero rings/complexes, a=b, nonflat T, universe u) are covered. lean.statement verbatim; stmt/stmt_deps unchanged; no name clashes or duplicates in the live tree; docstrings carry source and blueprint; only the main proof is sorry. Cosmetic only: the proof docstring has 8 steps vs the node's 9. No compile run (no file changed)."
+ }
+}

@@ -1,0 +1,452 @@
+{
+ "id": "lem-sfb-internal-action-coinduction",
+ "kind": "statement",
+ "title": "Slice-sheaf coinduction for internal group restriction",
+ "statement": "Fix a universe $\\mathcal V$ and a $\\mathcal V$-small site $(C,J)$ with finite limits [def-weil-size-convention, def-weil-pbc-sites-and-cohomology]. Put $\\mathscr E=\\operatorname{Sh}(C,J)$. For a sheaf of groups $K$ with $\\mathcal V$-small values, let $\\mathscr E^K$ be the category of sheaves of sets $X$ with a natural left action $K\\times X\\to X$ satisfying the identity and associativity laws; its maps are equivariant sheaf maps. Let $L$ be another sheaf of groups and $\\theta:L\\to K$ a morphism, and let $\\operatorname{Res}_\\theta:\\mathscr E^K\\to\\mathscr E^L$ replace $k\\cdot x$ by $l\\cdot x=\\theta(l)\\cdot x$. For $Y\\in\\mathscr E^L$, define $B_\\theta(Y)(U)$ to be the set of natural maps of sheaves $F:K|_U\\to Y|_U$ on $C/U$ [def-pur-localized-ringed-site] such that $F_V(\\theta(l)k)=l\\cdot F_V(k)$ for every $V\\to U$, $l\\in L(V)$, $k\\in K(V)$. Restriction is relocalization of these maps. These sets are $\\mathcal V$-small and form a sheaf. The formula $(a\\cdot F)_V(k)=F_V(k\\,a|_V)$ defines a natural left $K$-action on it. Postcomposition with an $L$-equivariant map makes $B_\\theta:\\mathscr E^L\\to\\mathscr E^K$ a functor. There is an adjunction $\\operatorname{Res}_\\theta\\dashv B_\\theta$ with the natural bijection $\\operatorname{Hom}_L(\\operatorname{Res}_\\theta X,Y)\\simeq\\operatorname{Hom}_K(X,B_\\theta Y)$ given by $\\widehat u_U(x)_V(k)=u_V(k\\cdot x|_V)$ and inverse $v\\mapsto(x\\mapsto v_U(x)_U(1))$. The two displayed maps are inverse on every test object and natural in both variables. No injectivity or surjectivity hypothesis on $\\theta$ is imposed.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+  "place": "Paragraph (3), agent-written categorical infrastructure; re-split of lem-sfb-action-topos-geometric-restriction, former steps 4, 5, 6. The full original arguments and their existing sources are retained in the repair report."
+ },
+ "stmt_deps": [
+  "def-weil-size-convention",
+  "def-weil-pbc-sites-and-cohomology",
+  "def-pur-localized-ringed-site"
+ ],
+ "proof": [
+  {
+   "text": "For each $U$, the objects $(V\\to U)$ and arrows of $C/U$ form $\\mathcal V$-small sets. The underlying set of natural maps $K|_U\\to Y|_U$ is a subset of $\\prod_{(V\\to U)}\\operatorname{Map}(K(V),Y(V))$, hence is $\\mathcal V$-small by the universe convention [def-weil-size-convention]. Imposing the displayed equivariance equations gives another subset. Relocalization [def-pur-localized-ringed-site] sends such a map to its restriction on $C/V$; the same equations still hold there. Restricting twice is restricting along the composite, sectionwise, and restriction along an identity changes nothing. Thus the prescribed sets and restrictions form a small-valued presheaf.",
+   "uses": [
+    "def-weil-size-convention",
+    "def-pur-localized-ringed-site"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), agent-written internal-action categorical infrastructure; explicit expansion of former steps 4–6 of lem-sfb-action-topos-geometric-restriction, preserved in its Q21 report."
+   }
+  },
+  {
+   "text": "Let $\\{U_i\\to U\\}$ be a covering and let $F_i\\in B_\\theta(Y)(U_i)$ agree on double fibre products. Apply the morphism-gluing clause of [lem-pe-set-sheaf-cover-descent] to $P=K|_U$ and $Q=Y|_U$, using relocalization [def-pur-localized-ringed-site] to identify their restrictions with $K|_{U_i}$ and $Y|_{U_i}$. This gives a unique sheaf map $F:K|_U\\to Y|_U$ with those restrictions. The hypotheses of that clause hold: $C$ is small with all fibre products, and the family and section values lie in the stipulated universe. This invocation uses only the morphism clause, not effective descent of objects.",
+   "uses": [
+    "lem-pe-set-sheaf-cover-descent",
+    "def-pur-localized-ringed-site"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Tag 04TQ, lemma-glue-maps, with the section following it identifying slice-map sections as a sheaf"
+   }
+  },
+  {
+   "text": "The glued map lies in $B_\\theta(Y)(U)$. For $V\\to U$, $l\\in L(V)$ and $k\\in K(V)$, restrict $F_V(\\theta(l)k)$ and $l\\cdot F_V(k)$ to the covering $\\{V\\times_U U_i\\to V\\}$. Naturality of $F$, $\\theta$ and the action identifies these restrictions with the equal expressions for $F_i$. Separatedness of the sheaf $Y$, namely uniqueness of amalgamation in [def-weil-pbc-sites-and-cohomology], makes the two sections equal. Uniqueness of $F$ as a map also gives uniqueness in $B_\\theta(Y)(U)$. This proves the sheaf condition, including an empty covering.",
+   "uses": [
+    "def-weil-pbc-sites-and-cohomology"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), agent-written internal-action categorical infrastructure; explicit expansion of former steps 4–6 of lem-sfb-action-topos-geometric-restriction, preserved in its Q21 report."
+   }
+  },
+  {
+   "text": "For $a\\in K(U)$ define $(a\\cdot F)_V(k)=F_V(k a|_V)$. For $h:W\\to V$ over $U$, restriction of this value is $F_W(k|_W a|_W)$, so this is a natural slice map. Its equivariance is $(a\\cdot F)_V(\\theta(l)k)=F_V(\\theta(l)(k a|_V))=l\\cdot F_V(k a|_V)$. Restriction along $U'\\to U$ commutes with this construction, so the operation is a sheaf map $K\\times B_\\theta(Y)\\to B_\\theta(Y)$. The identity acts trivially, and $(a\\cdot(b\\cdot F))_V(k)=F_V((k a|_V)b|_V)=F_V(k(ab)|_V)=((ab)\\cdot F)_V(k)$; these are the left-action laws.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), agent-written internal-action categorical infrastructure; explicit expansion of former steps 4–6 of lem-sfb-action-topos-geometric-restriction, preserved in its Q21 report."
+   }
+  },
+  {
+   "text": "For an $L$-equivariant sheaf map $b:Y\\to Y'$, put $B_\\theta(b)_U(F)=b|_U\\circ F$. Naturality of $b$ makes this commute with relocalization. Its defining equation is $b_V(F_V(\\theta(l)k))=b_V(l\\cdot F_V(k))=l\\cdot b_V(F_V(k))$, and $B_\\theta(b)(a\\cdot F)(k)=b(F(k a))=(a\\cdot B_\\theta(b)(F))(k)$. Thus it is a $K$-equivariant sheaf map. Postcomposition with an identity is the identity, and postcomposition with $b'b$ is consecutive postcomposition with $b$ and $b'$. Together with the previous steps this constructs the functor $B_\\theta$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), agent-written internal-action categorical infrastructure; explicit expansion of former steps 4–6 of lem-sfb-action-topos-geometric-restriction, preserved in its Q21 report."
+   }
+  },
+  {
+   "text": "Given $u:\\operatorname{Res}_\\theta X\\to Y$, set $\\widehat u_U(x)_V(k)=u_V(k\\cdot x|_V)$. For $h:W\\to V$ over $U$, naturality of $u$ and the action gives $u_V(k\\cdot x|_V)|_W=u_W(k|_W\\cdot x|_W)$; hence this is a natural slice map. It is $L$-equivariant since $u_V((\\theta(l)k)\\cdot x|_V)=u_V(\\theta(l)\\cdot(k\\cdot x|_V))=l\\cdot u_V(k\\cdot x|_V)$. Replacing $U$ by $U'\\to U$ in the formula proves naturality of $\\widehat u$ as a sheaf map. Finally $\\widehat u_U(a\\cdot x)_V(k)=u_V((k a|_V)\\cdot x|_V)=(a\\cdot\\widehat u_U(x))_V(k)$, so it is a $K$-map.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), agent-written internal-action categorical infrastructure; explicit expansion of former steps 4–6 of lem-sfb-action-topos-geometric-restriction, preserved in its Q21 report."
+   }
+  },
+  {
+   "text": "Given a $K$-map $v:X\\to B_\\theta(Y)$, set $u_U(x)=v_U(x)_U(1_U)$. For $h:V\\to U$, naturality of the slice map $v_U(x)$ and then of $v$ gives $u_U(x)|_V=v_U(x)_V(1_V)=v_V(x|_V)_V(1_V)=u_V(x|_V)$, so $u$ is a sheaf map. Its $L$-equivariance is $u_U(\\theta(l)\\cdot x)=(\\theta(l)\\cdot v_U(x))_U(1_U)=v_U(x)_U(\\theta(l))=l\\cdot v_U(x)_U(1_U)$, the last equality using the defining equation for $v_U(x)$ at $k=1_U$. Thus $u:\\operatorname{Res}_\\theta X\\to Y$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), agent-written internal-action categorical infrastructure; explicit expansion of former steps 4–6 of lem-sfb-action-topos-geometric-restriction, preserved in its Q21 report."
+   }
+  },
+  {
+   "text": "Starting with $u$, evaluation of $\\widehat u_U(x)$ at $1_U$ gives $u_U(1_U\\cdot x)=u_U(x)$. Starting with $v$, the reconstructed map has at $(U,x;V\\to U,k)$ the value $v_V(k\\cdot x|_V)_V(1_V)=(k\\cdot v_V(x|_V))_V(1_V)=v_U(x)_V(k)$, by $K$-equivariance and naturality of $v$. Thus the constructions are inverse on every test object. For a $K$-map $f:X'\\to X$, equivariance gives $\\widehat{u\\circ\\operatorname{Res}_\\theta(f)}(x')(k)=u(k\\cdot f(x'))=u(f(k\\cdot x'))=(\\widehat u\\circ f)(x')(k)$. For an $L$-map $b:Y\\to Y'$, $\\widehat{b\\circ u}(x)(k)=b(u(k\\cdot x))=(B_\\theta(b)\\circ\\widehat u)(x)(k)$. These are exactly both naturality laws for the Hom bijection.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), agent-written internal-action categorical infrastructure; explicit expansion of former steps 4–6 of lem-sfb-action-topos-geometric-restriction, preserved in its Q21 report."
+   }
+  },
+  {
+   "text": "Apply [lem-weil-pbc-adjunction-of-natural-bijection] with $F=\\operatorname{Res}_\\theta$, $G=B_\\theta$ and the bijections of steps 6–8. Its hypotheses are precisely the functoriality proved above and the two displayed naturality identities. This produces $\\operatorname{Res}_\\theta\\dashv B_\\theta$ with the stipulated Hom bijection and inverse. All equations used only that $\\theta$ is a group-sheaf homomorphism; no injectivity or surjectivity has been used.",
+   "uses": [
+    "lem-weil-pbc-adjunction-of-natural-bijection"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Tag 0037, definition-adjoint, and the following unit/counit discussion"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pur-localized-ringed-site",
+  "def-weil-pbc-sites-and-cohomology",
+  "def-weil-size-convention",
+  "lem-pe-set-sheaf-cover-descent",
+  "lem-weil-pbc-adjunction-of-natural-bijection"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+  "place": "Paragraph (3), internal-action categorical input; explicit equivariant slice-map construction expanding the Q21 parent proof, with Stacks Tag 04TQ for map gluing and Tag 0037 for adjunction assembly."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "coinduc|res.*[Aa]djunction",
+   "results": {
+    "note": "",
+    "hits": 25,
+    "top": [
+     "Mathlib/CategoryTheory/Triangulated/Adjunction.lean",
+     "Mathlib/CategoryTheory/Triangulated/Adjunction.lean",
+     "Mathlib/CategoryTheory/Functor/EpiMono.lean",
+     "Mathlib/CategoryTheory/Functor/EpiMono.lean",
+     "Mathlib/CategoryTheory/Adjunction/FullyFaithfulLimits.lean",
+     "Mathlib/CategoryTheory/Presentable/OrthogonalReflection.lean",
+     "Mathlib/CategoryTheory/Presentable/Adjunction.lean",
+     "Mathlib/CategoryTheory/Adjunction/Restrict.lean"
+    ],
+    "subdirectory": "CategoryTheory",
+    "digest": "fcbf843beafbf6c4"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: Rep.resCoindAdjunction is for ordinary monoids and modules over an ordinary ring, not internal group-sheaf actions on set sheaves with slice-wise natural-map sections"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Restriction along a group sheaf homomorphism has a coinduction right adjoint",
+   "results": {
+    "note": "",
+    "hits": 8,
+    "top": [
+     "Rep.coindResAdjunction",
+     "Rep.resCoindAdjunction",
+     "Rep.coindFunctor",
+     "Rep.instIsRightAdjointCoindFunctor",
+     "Rep.indResAdjunction",
+     "Rep.instIsLeftAdjointSubtypeMemSubgroupCoindFunctorSubtype",
+     "Rep.resCoindHomEquiv",
+     "Rep.coindMap'"
+    ],
+    "subdirectory": "",
+    "digest": "03b14c90ea8aa379"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: Rep.resCoindAdjunction is for ordinary monoids and modules over an ordinary ring, not internal group-sheaf actions on set sheaves with slice-wise natural-map sections"
+  },
+  {
+   "tool": "loogle",
+   "query": "Action.res",
+   "results": {
+    "note": "",
+    "hits": 12,
+    "top": [
+     "Action.res",
+     "Action.instFaithfulRes",
+     "Action.res_obj_V",
+     "Action.resId",
+     "Action.full_res",
+     "Action.resCongr",
+     "Action.resComp",
+     "Action.resEquiv_functor"
+    ],
+    "subdirectory": "",
+    "digest": "e88d85dc8a93da39"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: Rep.resCoindAdjunction is for ordinary monoids and modules over an ordinary ring, not internal group-sheaf actions on set sheaves with slice-wise natural-map sections"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a morphism of sheaves of groups restriction of internal group actions is left adjoint to sheaf coinduction by equivariant maps on slice sites",
+   "results": {
+    "note": "",
+    "hits": 8,
+    "top": [
+     "SheafOfModules.PullbackConstruction.adjunction",
+     "Rep.instIsRightAdjointActionModuleCatRes",
+     "Rep.instIsLeftAdjointActionModuleCatRes",
+     "PresheafOfModules.sheafificationAdjunction",
+     "Rep.indResAdjunction",
+     "CategoryTheory.instIsRightAdjointSheafΓ",
+     "AlgebraicGeometry.Scheme.Modules.instIsLeftAdjointRestrictFunctor",
+     "Rep.resCoindAdjunction"
+    ],
+    "subdirectory": "",
+    "digest": "cd4a14bbefe870e6"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: Rep.resCoindAdjunction is for ordinary monoids and modules over an ordinary ring, not internal group-sheaf actions on set sheaves with slice-wise natural-map sections"
+  },
+  {
+   "tool": "grep",
+   "query": "coind|Coind|resCoind",
+   "results": {
+    "note": "",
+    "hits": 5,
+    "top": [
+     "14",
+     "17",
+     "20",
+     "22",
+     "24"
+    ],
+    "subdirectory": "RepresentationTheory/Coinduced.lean",
+    "digest": "77246b0682fc79bf"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: Rep.resCoindAdjunction is for ordinary monoids and modules over an ordinary ring, not internal group-sheaf actions on set sheaves with slice-wise natural-map sections"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Internal group object restriction has a right adjoint whose sections are equivariant natural maps on localized sites with action by right translation",
+   "results": {
+    "note": "",
+    "hits": 8,
+    "top": [
+     "Rep.instIsRightAdjointActionModuleCatRes",
+     "Rep.instIsLeftAdjointIndFunctor",
+     "Rep.instIsLeftAdjointActionModuleCatRes",
+     "LightCondMod.LocallyConstant.adjunction",
+     "CondensedMod.LocallyConstant.adjunction",
+     "Rep.indResAdjunction",
+     "Rep.instIsRightAdjointCoindFunctor",
+     "PresheafOfModules.sheafificationAdjunction"
+    ],
+    "subdirectory": "",
+    "digest": "ec8bb4edf009f732"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: Rep.resCoindAdjunction is for ordinary monoids and modules over an ordinary ring, not internal group-sheaf actions on set sheaves with slice-wise natural-map sections"
+  },
+  {
+   "tool": "grep",
+   "query": "coind|Coind|resCoind",
+   "results": {
+    "t": "2026-10-22T09:34:06Z",
+    "tool": "grep",
+    "query": "coind|Coind|resCoind",
+    "sub": "RepresentationTheory/Coinduced.lean",
+    "ok": true,
+    "n_hits": 5,
+    "note": "",
+    "top": [
+     "14",
+     "17",
+     "20",
+     "22",
+     "24"
+    ],
+    "digest": "77246b0682fc79bf"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: inspected ordinary external-monoid Action.res and module-valued Rep coinduction; neither states the internal group-sheaf, slice-map set-sheaf construction or this adjunction"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Sheaf of equivariant maps is right adjoint to restriction of actions of sheaves of groups",
+   "results": {
+    "t": "2026-10-22T09:34:06Z",
+    "tool": "leansearch",
+    "query": "Sheaf of equivariant maps is right adjoint to restriction of actions of sheaves of groups",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "CategoryTheory.constantSheafΓAdj",
+     "Rep.resCoindAdjunction",
+     "Rep.instIsRightAdjointActionModuleCatRes",
+     "CategoryTheory.instIsRightAdjointSheafΓ",
+     "SheafOfModules.PullbackConstruction.adjunction",
+     "Rep.resIndAdjunction",
+     "CategoryTheory.plusPlusAdjunction",
+     "CategoryTheory.sheafToPresheaf_isRightAdjoint"
+    ],
+    "digest": "0cd928807c1f5420"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: inspected ordinary external-monoid Action.res and module-valued Rep coinduction; neither states the internal group-sheaf, slice-map set-sheaf construction or this adjunction"
+  },
+  {
+   "tool": "loogle",
+   "query": "Action.res",
+   "results": {
+    "t": "2026-10-22T09:34:06Z",
+    "tool": "loogle",
+    "query": "Action.res",
+    "sub": "",
+    "ok": true,
+    "n_hits": 12,
+    "note": "",
+    "top": [
+     "Action.res",
+     "Action.instFaithfulRes",
+     "Action.res_obj_V",
+     "Action.resId",
+     "Action.full_res",
+     "Action.resCongr",
+     "Action.resComp",
+     "Action.resEquiv_functor"
+    ],
+    "digest": "e88d85dc8a93da39"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: inspected ordinary external-monoid Action.res and module-valued Rep coinduction; neither states the internal group-sheaf, slice-map set-sheaf construction or this adjunction"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Restriction along a homomorphism of internal group sheaves has right adjoint the sheaf of equivariant maps on slice sites",
+   "results": {
+    "t": "2026-10-22T09:34:09Z",
+    "tool": "leanfinder",
+    "query": "Restriction along a homomorphism of internal group sheaves has right adjoint the sheaf of equivariant maps on slice sites",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "CategoryTheory.sheafToPresheaf_isRightAdjoint",
+     "TopCat.Sheaf.instIsRightAdjointPushforward",
+     "SheafOfModules.PullbackConstruction.adjunction",
+     "Rep.instIsRightAdjointActionModuleCatRes",
+     "CategoryTheory.instIsRightAdjointSheafΓ",
+     "TopCat.Sheaf.instIsLeftAdjointPullback",
+     "SheafOfModules.instIsRightAdjointPushforward",
+     "SheafOfModules.instIsRightAdjointPushforwardCompSheafRingCatMapSheafPushforwardContinuous"
+    ],
+    "digest": "4191230316304e59"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: inspected ordinary external-monoid Action.res and module-valued Rep coinduction; neither states the internal group-sheaf, slice-map set-sheaf construction or this adjunction"
+  },
+  {
+   "tool": "grep",
+   "query": "coinduc|resCoindAdjunction|internal.*[Gg]roup",
+   "results": {
+    "t": "2026-10-22T09:34:36Z",
+    "tool": "grep",
+    "query": "coinduc|resCoindAdjunction|internal.*[Gg]roup",
+    "sub": "CategoryTheory",
+    "ok": true,
+    "n_hits": 4,
+    "note": "",
+    "top": [
+     "Mathlib/CategoryTheory/Abelian/Injective/Resolution.lean",
+     "Mathlib/CategoryTheory/Galois/Topology.lean",
+     "Mathlib/CategoryTheory/Monoidal/Internal/Types/Grp.lean",
+     "Mathlib/CategoryTheory/Monoidal/Internal/Types/CommGrp_.lean"
+    ],
+    "digest": "3ba9889cf5186703"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: inspected ordinary external-monoid Action.res and module-valued Rep coinduction; neither states the internal group-sheaf, slice-map set-sheaf construction or this adjunction"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Coinduction for internal group objects in a sheaf topos consists of locally natural equivariant maps with right translation action",
+   "results": {
+    "t": "2026-10-22T09:34:37Z",
+    "tool": "leanfinder",
+    "query": "Coinduction for internal group objects in a sheaf topos consists of locally natural equivariant maps with right translation action",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "Representation.coind'",
+     "CategoryTheory.PreGaloisCategory.IsNaturalSMul",
+     "CategoryTheory.PreGaloisCategory.IsFundamentalGroup.toIsNaturalSMul",
+     "ContinuousCohomology.I",
+     "Representation.coind'_apply_apply",
+     "ContinuousCohomology.Iobj_ρ_apply",
+     "Rep.coind",
+     "Rep.coindFunctor'_obj"
+    ],
+    "digest": "eeb667ea4921d26b"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: inspected ordinary external-monoid Action.res and module-valued Rep coinduction; neither states the internal group-sheaf, slice-map set-sheaf construction or this adjunction"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-action-topos-geometric-restriction",
+  "date": "2026-10-22",
+  "group": "Q21"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "Paragraph (3), dense-lattice restriction input: geometric realization of restriction of internal group actions, before taking derived invariants. Separate argument: Slice-sheaf coinduction for internal group restriction; extracted from the parent proof steps 4, 5, 6.",
+   "via": [
+    "lem-sfb-action-topos-geometric-restriction",
+    "lem-sfb-condensed-derived-restriction-calculus",
+    "lem-sfb-dense-lattice-derived-invariants-comparison",
+    "lem-sfb-tame-inertia-continuous-koszul",
+    "lem-sfb-continuous-algcl-tame-boundary-comparison",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sfb-internal-action-coinduction",
+  "worker": "stage1",
+  "summary": "Expanded the entire slice coinduction construction in nine steps without new nodes: smallness and restriction, existing map gluing, local equivariance, translation action, postcomposition, both transposes, their inverseness and naturality, then existing natural-Hom-bijection adjunction assembly. Statement and statement dependencies unchanged.",
+  "blueprint": "Supports paragraph (3) of the main-20261015 direct-images proof through the inherited internal-action restriction route. Expands precisely former parent steps 4–6, preserved in coord/reports/Q21/lem-sfb-action-topos-geometric-restriction.md. blueprint_refs.py ancestor returns None; retained the inherited null ancestor, exact place and via list. Searches coinduction, equivariant maps, 04TQ, sheaf morphisms found no same blueprint statement.",
+  "tool_uses": [
+   {
+    "node": "lem-pe-set-sheaf-cover-descent",
+    "why": "Only its unique gluing of maps on a cover is used to construct the slice-equivariant map sheaf; the unit has no replacement for this general sheaf tool."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pe-set-sheaf-cover-descent"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q95-437588a48",
+  "group": "Q95",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q95-437588a48 (reviewer sub-agent of L); spot-checked: I read all nine steps of the delivery and every cited statement in full. The delivery is only the item: no new nodes, and the statement and stmt_deps are unchanged. There is no repair note for this item, so the re-split rule does not apply. I recomputed the mathematics by hand. (1) Smallness: the sets are subsets of a product of function sets in the universe. (2) Gluing: the morphism clause of lem-pe-set-sheaf-cover-descent applies to K|_U and Y|_U, and its fibre-product hypothesis comes from the item's finite limits. (3) Equivariance of the glued map: compare both sides on the cover {V×_U U_i→V} and use separatedness of Y; empty covers are fine. (4) The K-action: (a·(b·F))(k)=F(kab), which is the left-action law, and a·F stays L-equivariant. (5) Postcomposition makes B_θ a functor. (6) û(x)(θ(l)k)=l·û(x)(k), and û is a K-map. (7) u=v(-)(1) is L-equivariant via (θ(l)·G)(1)=G(θ(l)). (8) Both composites are the identity, using v_V(k·x|_V)(1)=(k·v_V(x|_V))(1)=v_U(x)_V(k), and both naturality laws hold. (9) This matches the hypotheses of lem-weil-pbc-adjunction-of-natural-bijection (Adjunction.mkOfHomEquiv). Small cases agree: point site, θ=id, L=1 and K=1. No step lifts elements along θ, so no injectivity or surjectivity of θ is needed. Stacks 04TQ (sites-lemma-glue-maps) and 0037 (categories-definition-adjoint) are the correct labels. No SGA source is used, and proof_origin by agent is right. I accept the declared tool use of lem-pe-set-sheaf-cover-descent as generic map gluing. The DAG grep found no duplicate: the NL coset induction node is a different left adjoint. The Mathlib searches cover all three kinds. The Q21 parent's step 2 uses this B_θ exactly as stated."
+ }
+}

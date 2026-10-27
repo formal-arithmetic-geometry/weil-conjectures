@@ -1,0 +1,137 @@
+{
+ "id": "lem-weil-pbc-global-section-scalar-cech-model",
+ "kind": "statement",
+ "title": "Scalar extension of an augmented ring Cech model equals the tensor Cech model",
+ "statement": "Let (C,J,O) be a small commutative ringed site, A its ring of global sections and T the explicit scalar-extension functor [def-weil-pbc-global-section-scalar-extension]. For a finite global list f let I=(f) in A. Suppose an augmented complex (P,epsilon_P) over A has the ordered Cech model for I [def-weil-pbc-ring-complex-cech-data] and P is K-flat [def-pc-kflat-complex]. Then the tensor extended Cech complex of f [def-weil-pbc-ringed-extended-cech] is isomorphic in D(O) [def-weil-abstract-derived-category] to T(P), compatibly with its explicit augmentation to O[0]. Derived categories of A-modules and O-module sheaves are assumed, with independent hom universes. This statement contains no functorial ring family, no transition maps, and no Godement construction.",
+ "source": {
+  "document": "literature/stacks-project/algebraization.tex",
+  "place": "Tags 099D(c),(d), 099E, final paragraph; Tag 0996 for the finite tensor localization model"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-global-section-scalar-extension",
+  "def-weil-pbc-ring-complex-cech-data",
+  "def-pc-kflat-complex",
+  "def-weil-pbc-ringed-extended-cech",
+  "def-weil-abstract-derived-category"
+ ],
+ "proof": [
+  {
+   "text": "Extract K, its augmentation, its ordered localization coordinates and the augmented derived isomorphism from the Cech-model hypothesis. An increasing (q+1)-subset of Fin r cannot exist for q+1>r, so K vanishes above r. It vanishes below zero by hypothesis. Degree zero is free, and every positive term is a finite direct sum of flat localizations. Evaluation at the unique object detects zero objects and flatness on the one-point site. Thus the bounded-above flat criterion proves K is K-flat.",
+   "uses": [
+    "def-weil-pbc-ring-complex-cech-data",
+    "lem-weil-pbc-localization-flat",
+    "lem-pc-bounded-above-flat-kflat-site"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Represent the derived isomorphism K to P by a roof. Equality of its augmented maps in the derived category can be refined by a quasi-isomorphism in the homotopy category; lift that refinement to complexes, making the augmented composites homotopic. Resolve its source by a K-flat W. The two maps W to K and P are quasi-isomorphisms between K-flat complexes, so their global scalar extensions are quasi-isomorphisms. The additive scalar extension preserves the homotopy. Invert the first image and compose with the second image to obtain a derived isomorphism T(K) to T(P) preserving the mapped augmentations. Postcompose with the fixed map T(A[0]) to O[0]. This argument does not identify the two derived-category universes.",
+   "uses": [
+    "def-weil-abstract-derived-category",
+    "lem-pc-kflat-resolution",
+    "lem-weil-pbc-global-section-scalar-kflat-quasi-iso",
+    "def-weil-pbc-global-section-scalar-extension"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply the chain-level ordered-to-tensor comparison to the extracted coordinates and augmentation. Apply Q to this chain isomorphism and compose it with the preceding derived isomorphism. Functoriality of Q and the two augmentation equations give the asserted equation.",
+   "uses": [
+    "lem-weil-pbc-global-section-ordered-cech-tensor",
+    "def-weil-pbc-ringed-extended-cech",
+    "def-weil-pbc-global-section-scalar-extension"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-ring-complex-cech-data",
+  "lem-weil-pbc-localization-flat",
+  "lem-pc-bounded-above-flat-kflat-site",
+  "def-weil-abstract-derived-category",
+  "lem-pc-kflat-resolution",
+  "lem-weil-pbc-global-section-scalar-kflat-quasi-iso",
+  "def-weil-pbc-global-section-scalar-extension",
+  "lem-weil-pbc-global-section-ordered-cech-tensor",
+  "def-weil-pbc-ringed-extended-cech"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "group": "B6",
+  "date": "2026-10-26",
+  "document": "literature/stacks-project/algebraization.tex",
+  "place": "Tags 099D(c),(d), 099E, final paragraph; Tag 0996 for the finite tensor localization model"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Sheafification of a functorial augmented ring complex with ordered localization Cech model equals tensor product of two term localization complexes",
+   "results": "SheafOfModules.mapFree; SheafOfModules.Presentation.map; HomologicalComplex.ιTensorObj; PresheafOfModules.sheafificationCompToSheaf; HomologicalComplex.HasGoodTensor₁₂; localCohomology.diagram; CategoryTheory.Sheaf.monoidalCategory; PresheafOfModules.sheafification",
+   "date": "2026-10-25",
+   "verdict": "No direct theorem for the augmented sheafification or finite tensor localization comparison."
+  },
+  {
+   "tool": "grep",
+   "query": "ringFamilySheafModel|ringComplex_cech|ringedExtendedCech",
+   "results": "No hits.",
+   "date": "2026-10-25",
+   "verdict": "No direct theorem for the augmented sheafification or finite tensor localization comparison."
+  },
+  {
+   "tool": "loogle",
+   "query": "CochainComplex, Localization.Away",
+   "results": "No hits.",
+   "date": "2026-10-25",
+   "verdict": "No direct theorem for the augmented sheafification or finite tensor localization comparison."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.FunctorialRingComplexCechComparison",
+  "date": "2026-10-26",
+  "group": "X7"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-functorial-ring-complex-cech-comparison",
+   "place": "The two scalar-extension comparisons in proof steps 1 and 2.",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.GlobalSectionScalarCechModel",
+  "file": "lean/Sheaf/Paper/GlobalSectionScalarCechModel.lean",
+  "declaration": "CategoryTheory.ringFamilyGlobalExtension_cech",
+  "statement": "theorem ringFamilyGlobalExtension_cech\n    {C : Type u} [SmallCategory C] {J : GrothendieckTopology C}\n    (O : Sheaf J CommRingCat.{u})\n    [HasDerivedCategory.{w} (ringedSiteModules.{u}\n      ((sheafCompose J (forget₂ CommRingCat RingCat)).obj O))]\n    [HasDerivedCategory.{wA} (RingSiteModules (ringFamilyGlobalRing O))]\n    (r : ℕ) (f : Fin r → (O.obj ⋙ forget CommRingCat).sections)\n    (P : CochainComplex (RingSiteModules (ringFamilyGlobalRing O)) ℤ)\n    (εP : P ⟶ ringComplexSingle (ringFamilyGlobalRing O))\n    (hflat : P.IsKFlatIndependentCoefficients)\n    (hP : RingComplexHasCechModel (ringFamilyGlobalRing O)\n      (ringFamilyGlobalIdeal O r f).val P εP) :\n    ∃ e : DerivedCategory.Q.obj (ringedExtendedCech O r f).1 ≅\n        DerivedCategory.Q.obj (ringFamilyGlobalExtensionComplex O P),\n      e.hom ≫ DerivedCategory.Q.map (ringFamilyGlobalExtensionAugmentation O εP) =\n        DerivedCategory.Q.map (ringedExtendedCech O r f).2",
+  "branch": "sheaf-dag",
+  "by": "X7",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "X7",
+  "result": "pass",
+  "landing": "20261026T003226-L-155006",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B6",
+  "result": "pass",
+  "landing": "20261026T022856-L-492967",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

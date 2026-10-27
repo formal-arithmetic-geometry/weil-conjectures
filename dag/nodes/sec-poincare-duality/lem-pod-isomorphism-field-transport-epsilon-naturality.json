@@ -1,0 +1,127 @@
+{
+ "id": "lem-pod-isomorphism-field-transport-epsilon-naturality",
+ "kind": "statement",
+ "title": "Naturality of own-stage epsilon on the actual coefficient quotient",
+ "statement": "Fix a prime $\\ell$, an algebraic closure $\\Omega/\\mathbb Q_\\ell$, and an isomorphism $g:X\\to Y$ of schemes with $\\ell$ invertible, with stalk-unit proofs $h_X,h_Y$. For each finite coefficient field $E$ in $\\Omega$ let $S_E$ be an IsomorphismFieldTransportStage for $g$ as defined in [def-pod-isomorphism-field-transport-clauses]. Assume isomorphismFieldTransportRationalScalarLaw for every $E\\subseteq L$. Write $F_g,F_{g^{-1}}$ for the actual commonStageDerivedPullback functors of [def-weil-derived-pullback-tensor-hom]. Let $e_P:F_{g^{-1}}F_g(P)\\simeq P$ be any family of object isomorphisms whose hom at each pair $P=(E,K)$ is heterogeneously equal to the image of $(S_E).rationalEpsilon_K$ under the actual inclusion of [def-weil-algebraically-closed-coefficients]. Then for every arrow $f:P\\to Q$, $(F_g\\mathbin{\\ggg}F_{g^{-1}})(f)\\,e_Q=e_P f$. No inverse stage family or shift data beyond that already inside $S_E$ is assumed.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-rem-sf-pf-done/lem-fix-weil-operations.proof.md",
+  "place": "First paragraph, inverse automorphism squares and “Since g* is an equivalence”; expanded steps of lem-pod-isomorphism-field-transport."
+ },
+ "stmt_deps": [
+  "def-pod-isomorphism-field-transport-clauses",
+  "def-weil-derived-pullback-tensor-hom",
+  "def-weil-algebraically-closed-coefficients"
+ ],
+ "proof": [
+  {
+   "text": "Transport the given rational inverse/scalar law across the published operationStageTransitionIso on source and target. Naturality of these transition identifications and cancellation of their inverse components give the compatibility square for the two actual stage-system morphisms.",
+   "uses": [
+    "def-weil-derived-pullback-tensor-hom",
+    "lem-pod-common-stage-pullback-normalized-descent"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "The normalized comparison components identify each stage-system descent with the prescribed commonStageDerivedPullback by its unique object and arrow characterization. Use the transported scalar square to construct a compatible Morphism.Hom from the composite to the identity.",
+   "uses": [
+    "lem-sbc-coherent-pair-functor-descent",
+    "def-weil-derived-pullback-tensor-hom"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Descend this transformation. Its components are the inclusions of the finite epsilon isomorphisms, so NatIso.ofComponents supplies an isomorphism for the composite descended functor. The prescribed component equality identifies its hom with the supplied e at each pair. Its naturality is the desired equation.",
+   "uses": [
+    "lem-sbc-coherent-pair-functor-descent",
+    "def-weil-algebraically-closed-coefficients"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-weil-algebraically-closed-coefficients",
+  "def-weil-derived-pullback-tensor-hom",
+  "lem-pod-common-stage-pullback-normalized-descent",
+  "lem-sbc-coherent-pair-functor-descent"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-rem-sf-pf-done/lem-fix-weil-operations.proof.md",
+  "place": "First paragraph, inverse automorphism squares and “Since g* is an equivalence”; expanded steps of lem-pod-isomorphism-field-transport."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A compatible family of natural transformations on finite coefficient categories descends to a natural transformation on the common stage pair category",
+   "results": "CategoryTheory.NatTrans.pi'; CategoryTheory.Sigma.natTrans; CategoryTheory.EffectiveEpiFamily.desc; CategoryTheory.NatTrans.mk; CategoryTheory.Sigma.natTrans.sigma; CategoryTheory.Presieve.FamilyOfElements.map_comp; CategoryTheory.Limits.mapPair; CategoryTheory.NatTrans.ofSequence",
+   "date": "2026-10-27",
+   "verdict": "no exact match; project-specific normalized quotient formulas are required"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.IsEquivalence",
+   "results": "CategoryTheory.Functor.isEquivalence_refl; CategoryTheory.Functor.IsEquivalence; CategoryTheory.Equivalence.isEquivalence_functor; CategoryTheory.Equivalence.isEquivalence_inverse; CategoryTheory.Functor.asEquivalence; CategoryTheory.Functor.inv; CategoryTheory.Functor.IsEquivalence.essSurj; CategoryTheory.Functor.IsEquivalence.faithful",
+   "date": "2026-10-27",
+   "verdict": "no exact match; project-specific normalized quotient formulas are required"
+  },
+  {
+   "tool": "grep",
+   "query": "descFunctor_commShift|descNatTrans|shift_app_comm",
+   "results": "Mathlib/CategoryTheory/Triangulated/Functor.lean; Mathlib/CategoryTheory/Shift/Opposite.lean; Mathlib/CategoryTheory/Shift/CommShift.lean; Mathlib/CategoryTheory/Shift/CommShift.lean; Mathlib/CategoryTheory/Shift/CommShift.lean; Mathlib/CategoryTheory/Shift/CommShift.lean; Mathlib/CategoryTheory/Shift/CommShift.lean; Mathlib/CategoryTheory/Shift/CommShiftTwo.lean",
+   "date": "2026-10-27",
+   "verdict": "no exact match; project-specific normalized quotient formulas are required"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.IsomorphismFieldTransportCommonStage",
+  "date": "2026-10-27",
+  "group": "Q9"
+ },
+ "chapter": "sec-poincare-duality",
+ "unit": "sk-lem-finite",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-weil-operations",
+   "place": "First paragraph, inverse automorphism squares and “Since g* is an equivalence”; expanded steps of lem-pod-isomorphism-field-transport.",
+   "via": [
+    "lem-pod-isomorphism-field-transport",
+    "lem-pod-semilinear-field-operation-lifts"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.IsomorphismFieldTransportEpsilonNaturality",
+  "file": "lean/Sheaf/Paper/IsomorphismFieldTransportEpsilonNaturality.lean",
+  "declaration": "WeilConjectures.isomorphismFieldTransportEpsilonNaturality",
+  "statement": "theorem isomorphismFieldTransportEpsilonNaturality\n    (l : ℕ) [Fact l.Prime]\n    (Ω : Type v) [Field Ω] [Algebra ℚ_[l] Ω] [IsAlgClosure ℚ_[l] Ω]\n    {X Y : Scheme.{u}} (g : X ⟶ Y) [IsIso g]\n    [∀ x : X, Invertible (l : X.residueField x)]\n    [∀ y : Y, Invertible (l : Y.residueField y)]\n    (hX : ∀ x : X, IsUnit (l : X.presheaf.stalk x))\n    (hY : ∀ y : Y, IsUnit (l : Y.presheaf.stalk y))\n    (S : ∀ E : Index l Ω,\n      IsomorphismFieldTransportStage l (Coefficient.{u} l Ω E) g hX hY)\n    (hS : ∀ (E L : Index l Ω) (h : E ≤ L),\n      isomorphismFieldTransportRationalScalarLaw l\n        (Coefficient.{u} l Ω E) (Coefficient.{u} l Ω L)\n        (coefficientInclusion l Ω E L h) g hX hY (S E) (S L))\n    (e : ∀ P : generalAlgebraicallyClosedConstructibleCategory l Ω Y,\n      (commonStageDerivedPullback l Ω g ⋙ commonStageDerivedPullback l Ω (inv g)).obj P ≅ P)\n    (he : ∀ P : generalAlgebraicallyClosedConstructibleCategory l Ω Y,\n      HEq (e P).hom\n        ((inclusion (Y := Y) P.stage).map ((S P.stage).rationalEpsilon.hom.app P.obj))) :\n    ∀ (P Q : generalAlgebraicallyClosedConstructibleCategory l Ω Y) (f : P ⟶ Q),\n      (commonStageDerivedPullback l Ω g ⋙ commonStageDerivedPullback l Ω (inv g)).map f ≫\n        (e Q).hom = (e P).hom ≫ f",
+  "branch": "sheaf-dag",
+  "by": "Q9",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q9",
+  "result": "pass",
+  "landing": "20261027T103510-L-1090992",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q9",
+  "result": "pass",
+  "landing": "20261027T103510-L-1090992",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

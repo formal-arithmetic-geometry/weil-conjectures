@@ -1,0 +1,234 @@
+{
+ "id": "lem-sfb-sl2-rational-polynomial-model",
+ "kind": "statement",
+ "title": "Rational polynomial models for finite-dimensional sl2 modules",
+ "statement": "Let $W$ be a finite-dimensional $\\mathbf Q$-vector space, and let $E,F,H\\in\\operatorname{End}_{\\mathbf Q}(W)$ satisfy $HE-EH=2E$, $HF-FH=-2F$, and $EF-FE=H$. Assume $E$ and $F$ are nilpotent and $H$ is diagonalizable with integer eigenvalues. For each integer $n\\geq0$, let $P_n\\subset\\mathbf Q[X,Y]$ [def-weil-pbc-mv-polynomial-ring] be the vector space with basis $X^{n-i}Y^i$ for $0\\leq i\\leq n$, equipped with the operators $e_n=X\\partial/\\partial Y$, $f_n=Y\\partial/\\partial X$, and $h_n=X\\partial/\\partial X-Y\\partial/\\partial Y$, where $\\partial/\\partial X,\\partial/\\partial Y$ are the formal partial derivatives [def-weil-pbc-polynomial-partial-derivative]. There are a finite set $I$, nonnegative integers $n_i$ for $i\\in I$, and a $\\mathbf Q$-linear isomorphism $T:W\\xrightarrow{\\sim}\\bigoplus_{i\\in I}P_{n_i}$ such that\n$$TE=(\\bigoplus_{i\\in I}e_{n_i})T,\\qquad TF=(\\bigoplus_{i\\in I}f_{n_i})T,\\qquad TH=(\\bigoplus_{i\\in I}h_{n_i})T.$$\nThe empty direct sum is permitted and gives the assertion for $W=0$.",
+ "source": {
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Theorem 23.70 and its proof, printed pp.507-508 (characteristic-zero integration and Weyl complete reducibility); Example 22.33, printed p.472 (homogeneous polynomial models). Agent-stated explicit rational Lie-module consequence, with the transpose substitution convention specified in the report, not an integral-lattice assertion."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-mv-polynomial-ring",
+  "def-weil-pbc-polynomial-partial-derivative"
+ ],
+ "proof": [
+  {
+   "text": "We use strong induction on $\\dim_{\\mathbf Q}W$ for all triples satisfying the stated hypotheses. If $W=0$, take $I=\\varnothing$ and the unique linear isomorphism. Otherwise let $S\\subset\\mathbf Z$ be the finite nonempty set of eigenvalues of $H$, let $m=\\max S$, and choose $0\\ne v\\in\\ker(H-m)$. The relation $HE=EH+2E$ gives $H(Ev)=(m+2)Ev$; maximality of $m$ forces $Ev=0$. All these choices are over $\\mathbf Q$, since diagonalizability with integer eigenvalues is an assumption.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Agent expansion of the characteristic-zero highest-weight calculation supporting Theorem 23.70 and Example 22.33."
+   }
+  },
+  {
+   "text": "Put $u_j=F^jv$ for $j\\ge0$. The identities $HF=FH-2F$ and $EF=FE+H$ give, by induction, $Hu_j=(m-2j)u_j$ and $Eu_{j+1}=(j+1)(m-j)u_j$. Explicitly the first induction starts at $Hv=mv$ and multiplies by $F$; the second starts at $EFv=Hv$ and its next coefficient is $j(m-j+1)+(m-2j)=(j+1)(m-j)$. Nilpotence of $F$ gives a largest $r\\ge0$ with $u_r\\ne0$, and $u_{r+1}=0$. The second identity at $j=r$ yields $(r+1)(m-r)u_r=0$. Over $\\mathbf Q$ we conclude $m=r$. Write $n=r$, so $n\\ge0$, $u_0,\\ldots,u_n$ are nonzero, and $u_{n+1}=0$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Agent calculation of the primitive-vector string; compare Example 22.33, p.472."
+   }
+  },
+  {
+   "text": "The eigenvalues $n-2j$ for $0\\le j\\le n$ are pairwise distinct. Thus $u_0,\\ldots,u_n$ are linearly independent: apply $\\prod_{\\ell\\ne j}(H-(n-2\\ell))/(2\\ell-2j)$ to any linear relation to isolate its $u_j$ term. Let $U$ be their span. The preceding formulas show that $H$, $E$, and $F$ preserve $U$, including the endpoints $Eu_0=0$ and $Fu_n=0$. Hence these vectors are a basis of a nonzero invariant subspace $U\\subseteq W$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Agent expansion of the highest-weight string construction."
+   }
+  },
+  {
+   "text": "For $b_j=X^{n-j}Y^j$, the monomial and derivative definitions give $e_nb_j=jb_{j-1}$, $f_nb_j=(n-j)b_{j+1}$, and $h_nb_j=(n-2j)b_j$, with the zero-coefficient endpoint terms interpreted as zero. Define $A:U\\to P_n$ by $A(u_j)=c_jb_j$, where $c_j=n!/(n-j)!\\in\\mathbf Q^\\times$. Distinct monomials are independent by the polynomial definition, so $A$ is a linear isomorphism. For $j\\ge1$, $c_j=(n-j+1)c_{j-1}$ makes $AEu_j=j(n-j+1)c_{j-1}b_{j-1}=e_nAu_j$; for $j<n$, $c_{j+1}=(n-j)c_j$ gives $AFu_j=f_nAu_j$. The endpoint equalities and $AHu_j=h_nAu_j$ follow directly from the displayed formulas. This also covers $n=0$, with $c_0=1$.",
+   "uses": [
+    "def-weil-pbc-mv-polynomial-ring",
+    "def-weil-pbc-polynomial-partial-derivative"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Example 22.33, printed p.472; agent normalization for the differential operators of the item."
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-sl2-invariant-complement] to the finite-dimensional rational space $W$ and the invariant subspace $U$ just constructed. Its three commutator hypotheses are exactly the hypotheses of the item. It supplies a common invariant complement $C$ with $W=U\\oplus C$. The restrictions of $E,F$ to $C$ are nilpotent, and the commutator identities restrict to $C$. To check the remaining induction hypothesis, for $s\\in S$ use the polynomial projector $p_s(H)=\\prod_{t\\in S,\\,t\\ne s}(H-t)/(s-t)$. It preserves $C$, and $\\sum_s p_s(H)=1$ and $\\operatorname{im}p_s(H)\\subseteq\\ker(H-s)$ follow by evaluating on an eigenbasis of $W$. Consequently $C=\\bigoplus_{s\\in S}(C\\cap\\ker(H-s))$. Thus $H|_C$ is diagonalizable with integer eigenvalues, and $\\dim C<\\dim W$ because $U\\ne0$.",
+   "uses": [
+    "lem-sfb-sl2-invariant-complement"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Theorem 23.70, proof (a), printed p.507, Weyl input; agent verification that restrictions satisfy the induction hypotheses."
+   }
+  },
+  {
+   "text": "The induction hypothesis gives $B:C\\xrightarrow{\\sim}\\bigoplus_{i\\in J}P_{n_i}$ intertwining all three restricted operators. Let $I=\\{*\\}\\sqcup J$, assign $n_*=n$, and set $T(u+c)=(A(u),B(c))$ under $W=U\\oplus C$. Its inverse sends $(p,q)$ to $A^{-1}(p)+B^{-1}(q)$, so it is a rational linear isomorphism. Invariance of both summands and the three identities for $A$ and $B$ give the required three identities for $T$ on every $u+c$. This completes the dimension induction and produces a finite set $I$; the base case already includes its empty instance.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Agent assembly of the string model with Weyl complements; Example 22.33 and Theorem 23.70, p.507."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-mv-polynomial-ring",
+  "def-weil-pbc-polynomial-partial-derivative",
+  "lem-sfb-sl2-invariant-complement"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Explicit rational highest-weight string and dimension induction, motivated by Example 22.33 (p.472) and using the Weyl theorem invoked in Theorem 23.70 proof (a), p.507. The factorial intertwiner and rational restriction checks are supplied here."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "IsSl2Triple|irreducible.*sl2|sl2.*irreducible|symmetric.*power",
+   "results": "{\"t\": \"2026-10-23T23:31:49Z\", \"tool\": \"grep\", \"query\": \"IsSl2Triple|irreducible.*sl2|sl2.*irreducible|symmetric.*power\", \"sub\": \"Algebra/Lie\", \"ok\": true, \"n_hits\": 16, \"note\": \"\", \"top\": [\"Mathlib/Algebra/Lie/Basis/Basic.lean\", \"Mathlib/Algebra/Lie/Sl2.lean\", \"Mathlib/Algebra/Lie/Sl2.lean\", \"Mathlib/Algebra/Lie/Sl2.lean\", \"Mathlib/Algebra/Lie/Sl2.lean\", \"Mathlib/Algebra/Lie/Sl2.lean\", \"Mathlib/Algebra/Lie/Weights/RootSystem.lean\", \"Mathlib/Algebra/Lie/Weights/RootSystem.lean\"], \"digest\": \"faa82d1e2af16275\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: primitive-vector weights and root strings are present in Algebra/Lie/Sl2.lean, but neither the decomposition of an arbitrary module nor its polynomial model is stated; SymmetricPower only defines a module."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Finite dimensional sl2 modules in characteristic zero decompose into symmetric powers of the standard representation",
+   "results": "{\"t\": \"2026-10-23T23:31:49Z\", \"tool\": \"leansearch\", \"query\": \"Finite dimensional sl2 modules in characteristic zero decompose into symmetric powers of the standard representation\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"IsSl2Triple.HasPrimitiveVectorWith.pow_toEnd_f_eq_zero_of_eq_nat\", \"IsSl2Triple.HasPrimitiveVectorWith.exists_nat\", \"LieModule.instLinearWeightsOfCharZero\", \"Rep.instInjective\", \"SymmetricPower\", \"IsSl2Triple.HasPrimitiveVectorWith.lie_h_pow_toEnd_f\", \"LieAlgebra.IsKilling.sl2SubmoduleOfRoot_ne_bot\", \"LieAlgebra.IsKilling.sl2SubmoduleOfRoot_eq_sup\"], \"digest\": \"f889e3b05fe3b050\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: primitive-vector weights and root strings are present in Algebra/Lie/Sl2.lean, but neither the decomposition of an arbitrary module nor its polynomial model is stated; SymmetricPower only defines a module."
+  },
+  {
+   "tool": "loogle",
+   "query": "IsSl2Triple, LieModule",
+   "results": "{\"t\": \"2026-10-23T23:31:49Z\", \"tool\": \"loogle\", \"query\": \"IsSl2Triple, LieModule\", \"sub\": \"\", \"ok\": true, \"n_hits\": 9, \"note\": \"\", \"top\": [\"IsSl2Triple.HasPrimitiveVectorWith.exists_nat\", \"IsSl2Triple.exists_hasPrimitiveVectorWith\", \"IsSl2Triple.HasPrimitiveVectorWith.mk'\", \"IsSl2Triple.HasPrimitiveVectorWith.pow_toEnd_f_ne_zero_of_eq_nat\", \"IsSl2Triple.HasPrimitiveVectorWith.pow_toEnd_f_eq_zero_of_eq_nat\", \"IsSl2Triple.HasPrimitiveVectorWith.lie_f_pow_toEnd_f\", \"IsSl2Triple.HasPrimitiveVectorWith.lie_h_pow_toEnd_f\", \"IsSl2Triple.HasPrimitiveVectorWith.lie_e_pow_succ_toEnd_f\"], \"digest\": \"2e628f43a294afe3\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: primitive-vector weights and root strings are present in Algebra/Lie/Sl2.lean, but neither the decomposition of an arbitrary module nor its polynomial model is stated; SymmetricPower only defines a module."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Every finite dimensional representation of sl2 over the rationals is a direct sum of homogeneous polynomial symmetric power representations",
+   "results": "{\"t\": \"2026-10-23T23:31:53Z\", \"tool\": \"leanfinder\", \"query\": \"Every finite dimensional representation of sl2 over the rationals is a direct sum of homogeneous polynomial symmetric power representations\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"IsSl2Triple.HasPrimitiveVectorWith\", \"IsSl2Triple.HasPrimitiveVectorWith.exists_nat\", \"IsSl2Triple.HasPrimitiveVectorWith.mk'\", \"LieAlgebra.IsKilling.sl2SubmoduleOfRoot_eq_sup\", \"LieModule.instIsTriangularizableOfIsAlgClosed\", \"LieAlgebra.IsKilling.exists_isSl2Triple_of_weight_isNonZero\", \"RootPairing.GeckConstruction.isSl2Triple\", \"LieModule.iSup_genWeightSpace_eq_top'\"], \"digest\": \"092a344274f3e4e9\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: primitive-vector weights and root strings are present in Algebra/Lie/Sl2.lean, but neither the decomposition of an arbitrary module nor its polynomial model is stated; SymmetricPower only defines a module."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Weyl complete reducibility theorem for sl2 gives a basis of highest weight strings with e acting as X times partial derivative Y",
+   "results": "{\"t\": \"2026-10-23T23:32:35Z\", \"tool\": \"leanfinder\", \"query\": \"Weyl complete reducibility theorem for sl2 gives a basis of highest weight strings with e acting as X times partial derivative Y\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"IsSl2Triple.HasPrimitiveVectorWith.mk'\", \"IsSl2Triple.HasPrimitiveVectorWith\", \"RootPairing.GeckConstruction.isSl2Triple\", \"LieAlgebra.IsKilling.exists_isSl2Triple_of_weight_isNonZero\", \"LieAlgebra.IsKilling.sl2SubmoduleOfRoot_eq_sup\", \"LieAlgebra.IsKilling.sl2SubmoduleOfRoot\", \"LieAlgebra.IsKilling.mem_sl2SubalgebraOfRoot_iff\", \"LieModule.chainBotCoeff\"], \"digest\": \"59325fad8aad42aa\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: primitive-vector weights and root strings are present in Algebra/Lie/Sl2.lean, but neither the decomposition of an arbitrary module nor its polynomial model is stated; SymmetricPower only defines a module."
+  },
+  {
+   "tool": "grep",
+   "query": "IsSl2Triple|irreducible.*sl2|sl2.*irreducible|symmetric.*power",
+   "results": "{\"t\": \"2026-10-24T00:09:28Z\", \"tool\": \"grep\", \"query\": \"IsSl2Triple|irreducible.*sl2|sl2.*irreducible|symmetric.*power\", \"sub\": \"Algebra/Lie\", \"ok\": true, \"n_hits\": 16, \"note\": \"\", \"top\": [\"Mathlib/Algebra/Lie/Basis/Basic.lean\", \"Mathlib/Algebra/Lie/Sl2.lean\", \"Mathlib/Algebra/Lie/Sl2.lean\", \"Mathlib/Algebra/Lie/Sl2.lean\", \"Mathlib/Algebra/Lie/Sl2.lean\", \"Mathlib/Algebra/Lie/Sl2.lean\", \"Mathlib/Algebra/Lie/Weights/Killing.lean\", \"Mathlib/Algebra/Lie/Weights/Killing.lean\"], \"digest\": \"46fa6108b0914ef2\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: primitive-vector weights and root strings are present, but not decomposition of an arbitrary rational module into the specified polynomial models; the root-space and Geck results have special ambient modules."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Finite dimensional sl2 modules in characteristic zero decompose into symmetric powers of the standard representation",
+   "results": "{\"t\": \"2026-10-24T00:09:28Z\", \"tool\": \"leansearch\", \"query\": \"Finite dimensional sl2 modules in characteristic zero decompose into symmetric powers of the standard representation\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"IsSl2Triple.HasPrimitiveVectorWith.pow_toEnd_f_eq_zero_of_eq_nat\", \"IsSl2Triple.HasPrimitiveVectorWith.exists_nat\", \"LieModule.instLinearWeightsOfCharZero\", \"Rep.instInjective\", \"SymmetricPower\", \"IsSl2Triple.HasPrimitiveVectorWith.lie_h_pow_toEnd_f\", \"LieAlgebra.IsKilling.sl2SubmoduleOfRoot_ne_bot\", \"LieAlgebra.IsKilling.sl2SubmoduleOfRoot_eq_sup\"], \"digest\": \"f889e3b05fe3b050\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: primitive-vector weights and root strings are present, but not decomposition of an arbitrary rational module into the specified polynomial models; the root-space and Geck results have special ambient modules."
+  },
+  {
+   "tool": "loogle",
+   "query": "IsSl2Triple, LieModule",
+   "results": "{\"t\": \"2026-10-24T00:09:28Z\", \"tool\": \"loogle\", \"query\": \"IsSl2Triple, LieModule\", \"sub\": \"\", \"ok\": true, \"n_hits\": 9, \"note\": \"\", \"top\": [\"IsSl2Triple.HasPrimitiveVectorWith.exists_nat\", \"IsSl2Triple.exists_hasPrimitiveVectorWith\", \"IsSl2Triple.HasPrimitiveVectorWith.mk'\", \"IsSl2Triple.HasPrimitiveVectorWith.pow_toEnd_f_ne_zero_of_eq_nat\", \"IsSl2Triple.HasPrimitiveVectorWith.pow_toEnd_f_eq_zero_of_eq_nat\", \"IsSl2Triple.HasPrimitiveVectorWith.lie_f_pow_toEnd_f\", \"IsSl2Triple.HasPrimitiveVectorWith.lie_h_pow_toEnd_f\", \"IsSl2Triple.HasPrimitiveVectorWith.lie_e_pow_succ_toEnd_f\"], \"digest\": \"2e628f43a294afe3\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: primitive-vector weights and root strings are present, but not decomposition of an arbitrary rational module into the specified polynomial models; the root-space and Geck results have special ambient modules."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Every finite dimensional representation of sl2 over the rationals is a direct sum of homogeneous polynomial symmetric power representations",
+   "results": "{\"t\": \"2026-10-24T00:09:31Z\", \"tool\": \"leanfinder\", \"query\": \"Every finite dimensional representation of sl2 over the rationals is a direct sum of homogeneous polynomial symmetric power representations\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"IsSl2Triple.HasPrimitiveVectorWith\", \"IsSl2Triple.HasPrimitiveVectorWith.exists_nat\", \"IsSl2Triple.HasPrimitiveVectorWith.mk'\", \"LieAlgebra.IsKilling.sl2SubmoduleOfRoot_eq_sup\", \"LieModule.instIsTriangularizableOfIsAlgClosed\", \"LieAlgebra.IsKilling.exists_isSl2Triple_of_weight_isNonZero\", \"RootPairing.GeckConstruction.isSl2Triple\", \"LieModule.iSup_genWeightSpace_eq_top'\"], \"digest\": \"092a344274f3e4e9\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: primitive-vector weights and root strings are present, but not decomposition of an arbitrary rational module into the specified polynomial models; the root-space and Geck results have special ambient modules."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Highest weight strings of a rational sl2 representation are isomorphic to homogeneous binary forms and span a direct sum",
+   "results": "{\"t\": \"2026-10-24T00:10:22Z\", \"tool\": \"leanfinder\", \"query\": \"Highest weight strings of a rational sl2 representation are isomorphic to homogeneous binary forms and span a direct sum\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"RootPairing.GeckConstruction.coe_genWeightSpace_zero_eq_span_range_u\", \"LieAlgebra.IsKilling.sl2SubmoduleOfRoot_eq_sup\", \"LieModule.genWeightSpaceChain\", \"LieModule.genWeightSpaceChain_def'\", \"LieModule.genWeightSpaceChain_def\", \"LieModule.iSup_genWeightSpace_eq_top\", \"LieModule.iSup_genWeightSpace_eq_top'\", \"RootPairing.GeckConstruction.span_range_h'_eq_top\"], \"digest\": \"6542e14af6592a00\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: primitive-vector weights and root strings are present, but not decomposition of an arbitrary rational module into the specified polynomial models; the root-space and Geck results have special ambient modules."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-sl2-lattice-integration",
+  "date": "2026-10-24",
+  "group": "Q61"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Haboush symmetric-power lifting for a trivial quotient representation. Supporting representation-theoretic input: Steinberg endomorphisms detect a nonzero fixed vector. Supporting Borel pairs and actual rho section modules. Supporting input: Integrality of the half sum of positive roots supporting the rho section modules in the Steinberg endomorphism detection input. Supporting lattice proof: Appendix C.35, printed p.615; Theorem 23.55 and Corollary 23.56, printed p.501; Theorem 23.9, printed p.487; Proposition 23.5, printed pp.485--486, centrality and isomorphism criteria. Theorem 23.55: realize the explicitly constructed reduced root datum on L. Supporting proof of root-datum realization: Section 23h, equation (153) and Theorem 23.72, printed pp.510--511, with the full-weight representation of Corollary 23.73; torus defined by its weight characters. Supporting Section 23h, equation (153), Theorem 23.72 proof, pp.510-511: rank-one hypotheses and simple-root generation omitted there; Section 23d and Theorem 23.71 for Weyl signs. These integral rank-one details are an agent-stated supporting lemma, not a quotation of Theorem 23.72. Supporting input: Section 23h, equation (153), pp.509--510, and characteristic-zero integration Theorem 23.70, pp.507--508. Agent-formulated integral sl2 input filling the omitted rank-one verification in Theorem 23.72; the lattice integration assertion is not explicitly proved in Milne. Rational-fibre input: decompose the given sl2 operators into homogeneous polynomial modules before constructing the two integral charts.",
+   "via": [
+    "lem-sfb-sl2-lattice-integration",
+    "lem-sfb-chevalley-integral-rank-one",
+    "lem-sfb-chevalley-root-exponential-group",
+    "lem-sfb-root-datum-realization",
+    "lem-sfb-central-lattice-enlargement",
+    "lem-sfb-simply-connected-character-lattice",
+    "lem-sfb-rho-section-modules",
+    "lem-sfb-steinberg-endomorphism-detection",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-sl2-rational-polynomial-model",
+  "worker": "stage1",
+  "summary": "Statement unchanged. Construct a maximal-weight vector, derive its full F-string by the two commutator inductions, prove independence, and compute the factorial-normalized polynomial intertwiner. Use one new statement-only Weyl invariant-complement input and perform strong dimension induction after verifying all restriction hypotheses. No integration or algebraic-closure descent is used.",
+  "blueprint": "The ancestor command returns None; preserve the inherited null from.node and precise place/via chain. This realizes the rational-fibre prerequisite in the integral rank-one argument on the recorded det-thm-sf-ctf-stability-direct-images proof (3) alteration route. Whole-DAG and latest-blueprint searches found no same-statement node.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q113-f0c524805",
+  "group": "Q113",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q113-f0c524805 (reviewer sub-agent of L); spot-checked: Read the item, all six steps and the new statement-only node lem-sfb-sl2-invariant-complement. The item statement and stmt_deps are byte-equal to the base version (the Q61 FIX); this is a first split, not a re-split, and no repair note exists. Source checks in Milne iAG: Thm 23.70 proof (a), p.507, invokes Weyl's theorem for semisimple Lie algebras over any char-0 field, and the new node states exactly that input for the standard basis of sl2(Q). Example 22.33, p.472, gives the polynomial action; the item fixes X d/dY etc. directly, and this normalisation matches the parent lattice-integration step (P(X,Y+tX)=sum t^m e^m P/m!). Steps recomputed: (1) the max-weight vector is killed by E; (2) Hu_j=(m-2j)u_j and Eu_{j+1}=(j+1)(m-j)u_j (j(m-j+1)+(m-2j) checked), so nilpotence of F and invertibility of r+1 in Q give m=r; (3) the Lagrange projector gives independence and U is invariant; (4) from the mv-polynomial and partial-derivative definition statements, e_n b_j=j b_{j-1}, f_n b_j=(n-j)b_{j+1}, c_j=n!/(n-j)! satisfies both ratio identities, endpoints and n=0 hold; (5) the Weyl complement is used from its statement only, and the projectors p_s(H) show H|_C is diagonalizable with integer eigenvalues; (6) T=A+B with I={*}+J closes the induction. New node: B1-B4 OK, true over Q (Casimir argument), small cases U=0, U=V, V=0 and the zero action checked; it does not restate the item. Duplicate search (rg -L for Weyl, complete reducibility, Casimir, complements) finds only the algebraic-group complete reducibility over an algebraically closed field, adjoint ideal complements and single-operator complements, none of which gives Lie-module complements; Mathlib has no Weyl complete reducibility. No SGA, tool_uses empty, no off-unit citation. No changes."
+ },
+ "lean": {
+  "module": "Sheaf.RepresentationTheory.Sl2RationalPolynomialModel",
+  "declaration": "RepresentationTheory.exists_sl2_rational_polynomial_model",
+  "file": "lean/Sheaf/RepresentationTheory/Sl2RationalPolynomialModel.lean",
+  "statement": "theorem exists_sl2_rational_polynomial_model (W : Type u) [AddCommGroup W] [Module ℚ W] [FiniteDimensional ℚ W] (E F H : Module.End ℚ W) (hHE : H * E - E * H = (2 : ℚ) • E) (hHF : H * F - F * H = (-2 : ℚ) • F) (hEF : E * F - F * E = H) (hE : IsNilpotent E) (hF : IsNilpotent F) (hH : ∃ (d : ℕ) (b : Module.Basis (Fin d) ℚ W) (weight : Fin d → ℤ), ∀ j : Fin d, H (b j) = (weight j : ℚ) • b j) : ∃ (r : ℕ) (n : Fin r → ℕ) (T : W ≃ₗ[ℚ] DirectSum (Fin r) (fun i ↦ MvPolynomial.homogeneousSubmodule (Fin 2) ℚ (n i))), ∀ (w : W) (i : Fin r), (T (E w) i : MvPolynomial (Fin 2) ℚ) = MvPolynomial.X (0 : Fin 2) * MvPolynomial.pderiv (1 : Fin 2) (T w i) ∧ (T (F w) i : MvPolynomial (Fin 2) ℚ) = MvPolynomial.X (1 : Fin 2) * MvPolynomial.pderiv (0 : Fin 2) (T w i) ∧ (T (H w) i : MvPolynomial (Fin 2) ℚ) = MvPolynomial.X (0 : Fin 2) * MvPolynomial.pderiv (0 : Fin 2) (T w i) - MvPolynomial.X (1 : Fin 2) * MvPolynomial.pderiv (1 : Fin 2) (T w i)",
+  "branch": "newtargets-dag",
+  "by": "NZ",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-20a66a6c0",
+  "group": "NZ",
+  "result": "pass",
+  "note": "Single sorry'd theorem RepresentationTheory.exists_sl2_rational_polynomial_model; node unchanged except lean; lean.statement verbatim in the file. Clauses matched: 3 commutators (End mul = composition), nilpotence of E and F, integral eigenbasis ⇔ diagonalizable with integer eigenvalues, P_n = MvPolynomial.homogeneousSubmodule (Fin 2) ℚ n (X = var 0, Y = var 1), finite I as Fin r (r = 0 allowed), T a linear equivalence to the DirectSum, componentwise e = X∂Y, f = Y∂X, h = X∂X − Y∂Y with correct signs. Model sl2 relations checked by hand; true via Weyl plus V(n) ≅ P_n (Milne 23.70, Ex. 22.33); consistent with citer lattice-integration step 1. Edge cases W = 0, n = 0, n = 1 and trivial module covered. Stmt deps are existing Mathlib records; proof-only invariant-complement has no Lean record and is not needed by the statement. No hollow defs, docstrings carry source and blueprint, no duplicate notion, no competing live record. No changes made, no compile run."
+ }
+}

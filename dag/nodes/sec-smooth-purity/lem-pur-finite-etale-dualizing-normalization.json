@@ -32,74 +32,76 @@
  ],
  "proof": [
   {
-   "text": "Finite-type schemes over a field are Noetherian (the field has only the two ideals) by [lem-weil-pbc-finite-type-over-noetherian]. Apply [lem-pur-finite-site-counit-projection-transport] to the stated finite coefficient domain. It suffices to calculate with ordinary etale origins: the specified counits, projections, compositors and exchange transposes are preserved, and equality is reflected. Absolute separatedness is unnecessary.",
+   "text": "Work in the ordinary etale-origin coordinates used by the Lean statement. Finite-type schemes over the coefficient field are Noetherian by the Mathlib finite-type and quasi-compact results. Construct graphSupportModel directly as the published canonical graph-derived isomorphism. This is the same graph-normalized support comparison: its sheaf map is the clopen-graph extension and its derived inverse is the specified homotopy descent. The identification with the canonical graph comparison is reflexive.",
    "uses": [
-    "lem-pur-finite-site-counit-projection-transport",
-    "lem-weil-pbc-finite-type-over-noetherian"
+    "lem-asd-etale-compact-support-normalization"
    ],
    "elementary": false,
    "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-cohsm/lem-pur-co-smooth-etale-locality.proof.md",
-    "place": "Step 1: etale-origin transport of the actual compact-support counits, proper/open projections and their transposes"
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-cohsm/lem-pur-co-smooth-etale-locality.proof.md",
+    "place": "Step 1: canonical etale normalization and compatibility of its specified maps"
    }
   },
   {
-   "text": "On the etale sites set $\\rho_e=(d_e^{-1})^c$ and $\\eta_e=\\rho_{e,A}$ with the coefficient-unit comparison. [lem-pur-etale-sum-right-adjoint-tensor] gives its unique sum/evaluation counit normalization and identifies $\\rho_e\\theta_e$ with the unit tensor map. Step 1 transports precisely these maps, proving existence and (1).",
+   "text": "Identify the exact sum adjunction with the published derived sum adjunction by comparing counits after localization. Conjugacy gives the counit law directly. Apply the tensor law of lem-pur-etale-sum-right-adjoint-tensor. Transport its transpose through the canonical exact/left-derived pullback isomorphism and use symmetry naturality and the unitors to obtain the statement in omega-first tensor order.",
    "uses": [
     "lem-pur-etale-sum-right-adjoint-tensor"
    ],
    "elementary": false,
    "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-cohsm/lem-pur-co-smooth-etale-locality.proof.md",
-    "place": "Step 1: sum/evaluation characterization of the etale normalization and tensor-transpose calculation"
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-cohsm/lem-pur-co-smooth-etale-locality.proof.md",
+    "place": "Step 1: canonical etale normalization and compatibility of its specified maps"
    }
   },
   {
-   "text": "[lem-pur-etale-sum-right-adjoint-coherence] gives the identity comparison and the composite comparison for two etale arrows with the actual compact-support compositor. Its inverse-exchange/counit adjunct is exactly the defining adjunct of $\\beta_{e,w}$, so its coefficient-unit equation gives $\\eta_{e'}\\beta_{e,w}=Lw'^*\\eta_e$. Step 1 transports the formulas, proving (2).",
+   "text": "Apply the identity and composition equations of lem-pur-etale-sum-right-adjoint-coherence, inserting the exact/left-derived pullback comparisons. Transport the inverse compact-support exchange through these comparisons using mate naturality. Its value at the coefficient unit is exactly beta followed by the unit comparison, so the coherence theorem gives eta base change.",
    "uses": [
     "lem-pur-etale-sum-right-adjoint-coherence"
    ],
    "elementary": false,
    "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-cohsm/lem-pur-co-smooth-etale-locality.proof.md",
-    "place": "Step 1: identity, composition and arbitrary base-change normalization from sum/evaluation counits"
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-cohsm/lem-pur-co-smooth-etale-locality.proof.md",
+    "place": "Step 1: canonical etale normalization and compatibility of its specified maps"
    }
   },
   {
-   "text": "Apply [lem-pur-dualizing-unit-composite] with Step 2's normalized tensor equation. It gives $E_{e,h}\\sigma_{e,h}$ as the unit after $\\eta_e\\otimes1$, the first assertion of (3). For the other factor it gives the normalized inverse $\\sigma_{h',e}^{-1}=Rh'^!(\\eta_e)c_{e,h',A}$, including invertibility; the displayed inverse uses the target unit identification from that lemma.",
+   "text": "Cancel the exceptional compositor in sourceEtaleEquation and apply the tensor law at omega_h. Apply lem-pur-dualizing-unit-composite for the canonical target sigma: its constructed inverse proves invertibility and its normalized inverse formula identifies targetUnit inverse followed by sigma with exceptional pullback of eta inverse followed by the inverse compositor.",
    "uses": [
     "lem-pur-dualizing-unit-composite"
    ],
    "elementary": false,
    "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-cohsm/lem-pur-co-smooth-etale-locality.proof.md",
-    "place": "Step 1: source-etale cancellation and tensor-unit/naturality calculation for the target-etale composition factor"
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-cohsm/lem-pur-co-smooth-etale-locality.proof.md",
+    "place": "Step 1: canonical etale normalization and compatibility of its specified maps"
    }
   },
   {
-   "text": "In the etale-horizontal square apply [lem-pur-etale-horizontal-double-counit] at $K=A$. Its single-counit formula is the defining transpose of $\\beta_{h,e}$; hence its $b_A$ equals that specified map by the adjunction bijection. Substitute Step 4 and $E_{e',h}^{-1}=c_{h,e',A}^{-1}\\rho_{e',\\omega_h}^{-1}$ to obtain $\\beta_{h,e}=\\sigma_{h',e}^{-1}E_{e',h}^{-1}$. The lemmas' open-restriction compatibilities and Step 1 preserve every equation on further compatible opens. No orientation was selected.",
+   "text": "Apply the horizontal double-counit compositor formula and its exchange equation at the coefficient unit, using the canonical graph normalization. Conjugacy of the lower-shriek congruence identifies the cross compositor. Substitute the normalized inverse formula, then cancel rho and the pullback-unit comparisons to obtain smooth base change. For open restriction apply the normalized-mates open-restriction theorem to the chosen compactifications. The compact-support comparison coherence identifies its exchange with the actual exchange; transport the exact pullback square through the canonical left-derived comparisons.",
    "uses": [
-    "lem-pur-etale-horizontal-double-counit"
+    "lem-pur-etale-horizontal-double-counit",
+    "lem-pur-etale-normalized-mates-composition-pasting",
+    "lem-amb-unbounded-compact-support-comparisons"
    ],
    "elementary": false,
    "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-cohsm/lem-pur-co-smooth-etale-locality.proof.md",
-    "place": "Step 1: composite-counit expansion and the two adjunction cancellations identifying Cartesian base change"
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-cohsm/lem-pur-co-smooth-etale-locality.proof.md",
+    "place": "Step 1: canonical etale normalization and compatibility of its specified maps"
    }
   }
  ],
  "proof_deps": [
-  "lem-pur-finite-site-counit-projection-transport",
-  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-asd-etale-compact-support-normalization",
   "lem-pur-etale-sum-right-adjoint-tensor",
   "lem-pur-etale-sum-right-adjoint-coherence",
   "lem-pur-dualizing-unit-composite",
-  "lem-pur-etale-horizontal-double-counit"
+  "lem-pur-etale-horizontal-double-counit",
+  "lem-pur-etale-normalized-mates-composition-pasting",
+  "lem-amb-unbounded-compact-support-comparisons"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-cohsm/lem-pur-co-smooth-etale-locality.proof.md",
-  "place": "Step 1; short assembly of the five independent normalization and counit calculations extracted from the returned nine-step proof"
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-cohsm/lem-pur-co-smooth-etale-locality.proof.md",
+  "place": "Step 1; N2 assembly in canonical etale-origin coordinates, with explicit adjunction, tensor and square transports"
  },
  "mathlib_searches": [
   {
@@ -272,7 +274,18 @@
   "is": null
  },
  "merged_into": null,
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
  "split_report": {
   "date": "2026-10-21",
   "item": "lem-pur-finite-etale-dualizing-normalization",
@@ -294,21 +307,11 @@
   "def-weil-pbc-composite-adjunction",
   "def-weil-pbc-etale-shriek-base-change-map",
   "fix-lem-exchanges",
-  "lem-amb-etale-adjoint-locality",
-  "lem-cbc-proetale-extension-zero-comparison",
-  "lem-pur-compact-support-site-coherence",
   "lem-pur-etale-support-map-compatibility",
-  "lem-sf-proetale-constructible-origin",
   "lem-sfb-quasifinite-compact-support-exact",
-  "lem-weil-pbc-comparison-direct-image-canonical-mate",
-  "lem-weil-pbc-comparison-pullback",
-  "lem-weil-pbc-etale-shriek-base-change-modules",
-  "lem-weil-pbc-finite-type-over-noetherian",
   "lem-weil-pbc-mate-pasting",
   "lem-weil-pbc-ringed-projection-mate-exact",
-  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
-  "thm-cbc-finite-level-proetale",
-  "thm-weil-pbc-site-comparison"
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback"
  ],
  "reviewed": {
   "date": "2026-10-21",
@@ -376,5 +379,15 @@
   "group": "Q10",
   "result": "fix",
   "note": "Re-delivery applies exactly the correction prescribed by run 4073606c5c4e: def-pur-co-smoothness module and node change dropped (node identical to the side clone), the three prescribed imports, local Finite P.Coefficient, inlined Nagata compactification; nothing else changed. Clause check passes: rho is the conjugate of the inverse support comparison, uniquely fixed through etaleSupportMapCompatibility (not hollow); eta is defined; clause (1) holds in the library's tensor order; clause (2) identity/composition with c, eta base change for any w; clause (3) E and sigma from the specified maps, beta = sigma^-1 E^-1 via the inverse-free equation plus TargetSigmaIsIso; open restriction is a genuine equation. No extra hypotheses, one universe u, no absolute separatedness; edge cases covered. check_lean_text reports no failures (statement verbatim, 37 declarations). nt_compile: delivered module clean in 13.0 s and 13.2 s; fixed module clean in 13.3 s. FIX (docstrings only, signature unchanged): the coefficientFinite docstring carried (blueprint: def-pur-co-smoothness) and a vague source place, now this item's tag and source; the stale comparedTensorClause reference in the domain docstring is replaced."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "N2",
+  "result": "pass",
+  "landing": "20261025T202632-L-2736248",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

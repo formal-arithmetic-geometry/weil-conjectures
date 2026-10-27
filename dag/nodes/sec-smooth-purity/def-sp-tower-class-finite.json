@@ -12,9 +12,47 @@
   "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sp-tower-geometric/sk-prop-sp-tower-geometric-classes.md",
   "place": "node det-sp-tower-classes, order None"
  },
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "For finiteForget_exact apply the existing Mathlib finite-limit preservation instance for SheafOfModules.toSheaf and the proved source-library SheafOfModules.preservesFiniteColimits_toSheaf instance. These apply with the actual finite coefficient ring and the existing pro-etale sheafification witnesses.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-tower-geometric/sk-prop-sp-tower-geometric-classes.md",
+    "place": "classes (2)--(3), forgetting scalars, finite integer quotient and finite Kummer root map"
+   }
+  },
+  {
+   "text": "For finiteQuotient_existsUnique form the presheaf map from the constant lifted integers by Int.castAddHom after AddEquiv.ulift. Ring restriction maps preserve integer casts, so this is natural. The evaluated coefficient unit has precisely the underlying additive groups of the finite ring sheaf. Lift the presheaf map with sheafifyLift. The equation toSheafify_sheafifyLift proves the prescribed value on every constant generator. Any two maps with those values agree after the sheafification unit and therefore agree by sheafify_hom_ext.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-tower-geometric/sk-prop-sp-tower-geometric-classes.md",
+    "place": "classes (2)--(3), forgetting scalars, finite integer quotient and finite Kummer root map"
+   }
+  },
+  {
+   "text": "For finiteRootMap_existsUnique specialize finiteTateLine_universal to the actual FiniteRing and finiteScalar. Apply its Hom equivalence to the identity endomorphism of finiteLine. The pure-tensor formula with scalar one and one_smul gives exactly z maps to 1 tensor z. Any competing morphism has the same value on every section, and Sheaf.hom_ext followed by componentwise extensionality proves uniqueness. This uses no invertibility hypothesis on ell, and includes empty schemes and zero coefficient rings. The generic evaluation and Kummer wrappers state their already inferred result types explicitly. FiniteChernNormalization locally binds its compared arrows and reuses evaluatedChern; unfolding evaluatedChern and forgetEvaluatedArrow and reducing the local lets recovers exactly the former formula. No endpoint, map, sign or hypothesis changes.",
+   "uses": [
+    "lem-sp-finite-tate-line-universal"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-tower-geometric/sk-prop-sp-tower-geometric-classes.md",
+    "place": "classes (2)--(3), forgetting scalars, finite integer quotient and finite Kummer root map"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sp-finite-tate-line-universal"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "W4",
+  "date": "2026-10-27",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-tower-geometric/sk-prop-sp-tower-geometric-classes.md",
+  "place": "classes (2)--(3), forgetting scalars, finite integer quotient and finite Kummer root map"
+ },
  "mathlib_match": null,
  "mathlib_searches": [
   {
@@ -68,7 +106,18 @@
   },
   "same_as": []
  },
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
  "chapter": "sec-smooth-purity",
  "unit": "sk-prop-sp-tower-geometric",
  "lean": {
@@ -112,5 +161,15 @@
   "group": "ND",
   "result": "pass",
   "note": "Read all 11 modules, the 10 new def-node records, the item (16 steps) and dependency declarations (SpTowerShriek Base/Geometry, DiagonalTowerSystem boundary = -extClass positive roof, CartierPoleBoundarySpec beta=extClass, ScalarData, toCohomologicalPicardGroup). The H5/H3 faults of 7d49898/ca826686 are repaired. (1) Kummer maps pinned componentwise, exact field. (2) c1 = scalar extension of unitIso^-1 ≫ T_R(lambda_L) ≫ rootIso; Reduction (left adjoint of a section-pinned forget, universal derived functor, transpose-pinned adjunction), rootModule/rootForget and the iso fields are unique up to unique iso; targetNormalization = singleδ⟦1⟧ (= -pv^-1, step 6); FiniteChernNormalization is a genuine level-n characterization. (3) diagonalBoundary = a[1](-pv^-1) via the negated dependency roof; sourceIso pinned by the unit; chern_normalization = c1(O(Δ)); finite diagonal equality. (4) bq = biprod.desc(unit, untwisted adjoint c1(O(1))), IsIso field; trace = projection^-1, T(bq^-1)[2], snd, contraction, with types as in the node; trace_unit/trace_chern characterize the finite trace of det-sp-p1-trace(2). No added hypotheses or universe restriction; only sorry proofs; source/blueprint docstrings throughout; 16-step main docstring; not dropped; only new def nodes added to stmt_deps. nt_compile --json, 11 files: exit 0, clean, max 28.6 s, repeat run within ±2 s. Advisories: decls owned by non-stmt_dep nodes (cartierUnitsComparison in theorem lem-sp-cartier-reduction-site-comparison's module, cartierIntegralSourceIso, supportedIntegralUnit, tateFiniteLine, base-era det-* statement nodes' plain defs); HEq-∃ finiteBoundaryEquality has endpoint types traced as identical (Lean probe inconclusive: 60 s timeouts under load), elaboration-cost workaround; second-reading section is a self-check; maxHeartbeats in Pullback; tower-level boundary compatibility implied by the normalizations, not a separate field."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-bf472",
+  "group": "W4",
+  "result": "pass",
+  "landing": "20261027T021416-L-2768426",
+  "kind": "interface",
+  "note": "independent cc review: TowerClassFinite bf472acb against def-sp-tower-class-finite and the clone: 3 holes proved (axioms clean); old FiniteChernNormalization ↔ new by Iff.rfl compiled; the 3 direct importers (TowerClassFiniteDiagonal 47.9 s, DiagonalTowerTraceModels 16.0 s, DiagonalTraceChernTwistExistence 4.4 s) compile unchanged against the delivered module; node changed only in proof fields"
  }
 }

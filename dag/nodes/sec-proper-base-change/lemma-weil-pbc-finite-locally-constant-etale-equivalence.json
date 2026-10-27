@@ -157,7 +157,32 @@
  "blueprint_order": 1123,
  "blueprint_uses": [],
  "proof_split_by": "paragraphs",
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": [
+    "AlgebraicGeometry.Scheme.isFiniteLocallyConstant_yoneda_and_exists_iso"
+   ]
+  },
+  "slopmaster2": {
+   "state": "closed",
+   "decls": [
+    {
+     "name": "AlgebraicGeometry.Scheme.isFiniteLocallyConstant_yoneda_and_exists_iso",
+     "module": "WeilConjectures.AlgebraicGeometry.HenselianFiniteEtale",
+     "lines": [
+      83,
+      106
+     ],
+     "kind": "theorem",
+     "sorry": false
+    }
+   ],
+   "missing": [],
+   "open": []
+  }
+ },
  "chapter": "sec-proper-base-change",
  "unit": "sk-thm-p1",
  "lead_note": "2026-10-09 L: repeats the first clauses of thm-galois-lc-etale (without base-change compatibility), which lemma-weil-pbc-h1-torsor-comparison cites instead; reached by nothing; merge candidate for stage 3.",
@@ -200,5 +225,32 @@
   "group": "NW",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NW-580312b9b (reviewer sub-agent of L); spot-checked: Read the item, all cited statements, sources and unit/chapter route in full. Stacks 03RV and Yoneda 001P support all five steps, including the explicit inverse and action equations. Edge cases passed; no new nodes or repairs. The report’s circularity claim is stale but does not affect the proof. Concrete checks and inherited DAG cycles are documented in review.md."
+ },
+ "blueprint_update": {
+  "snapshot": "main-20261023-1620",
+  "commit": "7284bb09daf97437d544c51882b325f9c52cd345",
+  "changed": [
+   "statement",
+   "proof"
+  ],
+  "statement": "Let $T$ be a scheme.\n\n1. For every finite etale morphism $\\pi:P\\to T$, the functor of points\n   $h_P:(U\\to T)\\mapsto\\operatorname{Hom}_T(U,P)$ on $T_{\\mathrm{et}}$ is a\n   sheaf of sets, and it is finite locally constant.\n2. Every finite locally constant sheaf of sets $E$ on $T_{\\mathrm{et}}$ is\n   isomorphic to $h_P$ for some finite etale $\\pi:P\\to T$.\n3. Let $M$ be a finite abelian group. Every torsor under the constant sheaf\n   $\\underline M$ on $T_{\\mathrm{et}}$ is isomorphic to the sheaf of sections\n   of an etale $M$-torsor over $T$: a finite etale surjective $P\\to T$ with an\n   action of $M$ by $T$-automorphisms for which\n   $\\coprod_{m\\in M}P\\to P\\times_TP$, $(m,x)\\mapsto(mx,x)$, is an isomorphism.\n\nSince $h$ is fully faithful (Yoneda), (1) and (2) say that finite locally\nconstant sheaves of sets on $T_{\\mathrm{et}}$ are equivalent to finite etale\n$T$-schemes.",
+  "proof": [
+   {
+    "text": "(1) $h_P$ is a sheaf since the etale topology is subcanonical. Etale locally on\n$T$ a finite etale $P$ is a finite disjoint union of copies of the base, so\n$h_P$ is locally the constant sheaf on a finite set.",
+    "uses": [],
+    "elementary": null
+   },
+   {
+    "text": "(2) Given $E$, choose an etale cover $U\\to T$ trivializing it with finite\nfibre $S$. The descent isomorphism on $U\\times_TU$ is a permutation of $S$\nsatisfying the cocycle equation, hence descends the disjoint union\n$\\coprod_{s\\in S}U$ to a finite etale scheme $P$ (descent of affine morphisms\nalong etale covers), and $h_P\\cong E$ because both become\n$\\coprod_{s\\in S}U$ after the same cover.",
+    "uses": [],
+    "elementary": null
+   },
+   {
+    "text": "(3) A torsor $Q$ under $\\underline M$ is locally isomorphic to $\\underline M$,\nso it is a finite locally constant sheaf of sets and $Q\\cong h_P$ for a finite\netale $P\\to T$ by (2). By the Yoneda lemma the action\n$\\underline M\\times Q\\to Q$ is an action of $M$ on $P$ by $T$-automorphisms.\nThe map $\\coprod_{m\\in M}P\\to P\\times_TP$ induces on functors of points the\nmap $\\underline M\\times Q\\to Q\\times Q$, $(m,x)\\mapsto(mx,x)$, which is an\nisomorphism because the action is simply transitive; hence it is an\nisomorphism. Finally $P\\to T$ is surjective because $Q$ has sections etale\nlocally.",
+    "uses": [],
+    "elementary": null
+   }
+  ],
+  "note": "the current blueprint (main-20261023-1620, weil-conjectures-blueprint 7284bb09da) states or proves this differently; the node is proved in Lean: recorded 2026-10-23, not reopened"
  }
 }

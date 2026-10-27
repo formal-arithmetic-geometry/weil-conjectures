@@ -1,0 +1,400 @@
+{
+ "id": "lem-per-qe-complete-pair-lifting",
+ "kind": "statement",
+ "title": "Quasi-excellence lifts across an ideal of definition in characteristic zero",
+ "statement": "Let $A$ be a commutative Noetherian $\\mathbf Q$-algebra [def-weil-pbc-noetherian-ring], and let $J\\subseteq A$ be an ideal. Assume that $A$ is $J$-adically complete [def-weil-pbc-adically-complete-ring], meaning that the canonical map $A\\longrightarrow\\varprojlim_{n\\geq1}A/J^n$ is an isomorphism. Then $A$ is quasi-excellent if and only if $A/J$ is quasi-excellent [def-exc-excellent-ring].",
+ "source": {
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "Exposé I, Théorème 9.2 (Gabber), printed p.17: a Noetherian I-adically complete ring with A/I quasi-excellent is quasi-excellent (no characteristic hypothesis); the converse holds since A/J is a finite type A-algebra. Characteristic-zero form: Temkin, arXiv:0904.1592v2, Theorem 2.1.6 and Remark 2.1.7 (Nishimura-Nishimura, Theorem B), printed p.9."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-noetherian-ring",
+  "def-weil-pbc-adically-complete-ring",
+  "def-exc-excellent-ring"
+ ],
+ "proof": [
+  {
+   "text": "First assume $A$ is quasi-excellent. The quotient map $A\\to A/J$ is a finite type map (the empty list generates the algebra). By [lem-weil-pbc-finite-type-over-g-ring] its target is a G-ring. To check J-2 directly, any finite list generating an $(A/J)$-algebra also generates it as an $A$-algebra: each coefficient in $A/J$ has a lift in $A$. Its regular locus is therefore open by J-2 for $A$. This proves that $A/J$ is quasi-excellent by [def-exc-excellent-ring].",
+   "uses": [
+    "lem-weil-pbc-finite-type-over-g-ring",
+    "def-exc-excellent-ring",
+    "def-weil-pbc-finite-type-algebra"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 07PV, proposition-finite-type-over-G-ring; Tag 07QT, definition-excellent; Tag 07P7, definition-J"
+   }
+  },
+  {
+   "text": "Now assume $A/J$ is quasi-excellent. Suppose for contradiction that $A$ is not. Apply [lem-per-qe-normal-counterexample-reduction] to the actual Noetherian complete pair $(A,J)$, keeping its rational algebra structure. Obtain $R,x$ with all the listed properties: $0\\ne x$ is a nonunit, $R$ is a normal Nagata universally catenary domain, all its nonzero quotients are quasi-excellent, but $R$ is not. In particular the auxiliary integral closures in finite extensions satisfy every hypothesis of the next two lemmas. The reduction includes passage to principal ideals and a maximal bad quotient; it does not assert the desired lifting theorem.",
+   "uses": [
+    "lem-per-qe-normal-counterexample-reduction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.isc.meiji.ac.jp/~kurano/ronbun/kurano40.pdf",
+    "place": "Kurano–Shimomoto, Ideal-adic completion of quasi-excellent rings (after Gabber), Theorem 5.1, Step 1; obtained in sandbox sources/kurano40.pdf (bibliographic integration requested in report.md)."
+   }
+  },
+  {
+   "text": "Apply [lem-per-qe-minimal-formal-defect] to this $R,x$. Choose a triple $(L,\\mathfrak n,\\mathfrak s)$ attaining its least height $h\\geq2$. Write $B=B_L$ and $C=C_{L,\\mathfrak n}$. Thus $\\mathfrak s$ is a minimal singular prime of $C$ and $\\mathfrak s\\cap B=0$. Every $B_{\\mathfrak q}$ of height at most $h$ is excellent. By [lem-per-qe-semilocal-defect-height], for every finite $\\gamma\\subset\\operatorname{Max}B$ containing $\\mathfrak n$, the ring $D_\\gamma$ and contracted prime $\\mathfrak s_\\gamma$ have the stated comparisons, $\\operatorname{ht}\\mathfrak s_\\gamma=h>0$, and every member of $\\Delta_\\gamma(x)$ has height $h+1$ in $B$. Use exactly the normalized definition of $\\Delta_\\gamma(x)$ from these lemmas; its alternative description supplies a prime minimal over $\\mathfrak s_\\gamma+xD_\\gamma$.",
+   "uses": [
+    "lem-per-qe-minimal-formal-defect",
+    "lem-per-qe-semilocal-defect-height"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.isc.meiji.ac.jp/~kurano/ronbun/kurano40.pdf",
+    "place": "Kurano–Shimomoto, Ideal-adic completion of quasi-excellent rings (after Gabber), Theorem 5.1, Step 2 and Claim 5.4; obtained in sandbox sources/kurano40.pdf (bibliographic integration requested in report.md)."
+   }
+  },
+  {
+   "text": "For each prime $\\mathfrak q\\subset B$ of height at most $h$, apply [lem-per-qe-alteration-regular-neighbourhood] with $J=xB$: $B$ is a Noetherian domain, $B_{\\mathfrak q}$ is excellent by Step 3, and $B/xB$ is quasi-excellent by the reduction. Obtain $b_{\\mathfrak q}\\notin\\mathfrak q$, schemes $X_{\\mathfrak q,i}$ regular above $V(x)$, and a proper surjective witness $V_{\\mathfrak q}$ with an open cover mapping to them. Put $\\Omega=\\bigcup_{\\operatorname{ht}\\mathfrak q\\leq h}D(b_{\\mathfrak q})\\subseteq\\operatorname{Spec}B$. It is open and contains every prime of height at most $h$.",
+   "uses": [
+    "lem-per-qe-alteration-regular-neighbourhood",
+    "lem-per-qe-normal-counterexample-reduction",
+    "lem-per-qe-minimal-formal-defect"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.isc.meiji.ac.jp/~kurano/ronbun/kurano40.pdf",
+    "place": "Kurano–Shimomoto, Ideal-adic completion of quasi-excellent rings (after Gabber), Theorem 5.1, Step 3, (5.12)–(5.13); obtained in sandbox sources/kurano40.pdf (bibliographic integration requested in report.md)."
+   }
+  },
+  {
+   "text": "We show $\\Delta(x)\\cap\\Omega=\\varnothing$. Suppose $Q$ lies in the intersection. By [lem-per-qe-semilocal-defect-height], choose $\\gamma$ and $\\widetilde Q\\supset\\mathfrak s_\\gamma+xD_\\gamma$ contracting to $Q$. Choose $\\mathfrak q$ with $Q\\in D(b_{\\mathfrak q})$. Both $\\mathfrak s_\\gamma$ and $\\widetilde Q$ then lie in $\\operatorname{Spec}D_\\gamma[1/b_{\\mathfrak q}]$: the former contracts to zero, and the latter contracts to $Q$. Base change the witness $V_{\\mathfrak q}$ and its cover along $\\operatorname{Spec}D_\\gamma[1/b_{\\mathfrak q}]\\to D(b_{\\mathfrak q})$. The new witness $V'$ is surjective by [lem-weil-pbc-surjective-base-change] and closed by the universal closedness in [def-weil-proper-morphism].",
+   "uses": [
+    "lem-per-qe-semilocal-defect-height",
+    "lem-weil-pbc-surjective-base-change",
+    "def-weil-proper-morphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.isc.meiji.ac.jp/~kurano/ronbun/kurano40.pdf",
+    "place": "Kurano–Shimomoto, Ideal-adic completion of quasi-excellent rings (after Gabber), Theorem 5.1, Step 3, final diagram, printed pp.13–14; obtained in sandbox sources/kurano40.pdf (bibliographic integration requested in report.md)."
+   }
+  },
+  {
+   "text": "Lift $\\mathfrak s_\\gamma$ to a point $\\xi_2$ of $V'$, using that surjectivity. Since $\\mathfrak s_\\gamma\\subseteq\\widetilde Q$, apply [lem-trf-closed-map-specializing] to the closed map $V'\\to\\operatorname{Spec}D_\\gamma[1/b_{\\mathfrak q}]$: a specialization $\\xi_1$ of $\\xi_2$ lies above $\\widetilde Q$. Choose a member $V_i'$ of the pulled-back open cover containing $\\xi_1$. It also contains its generalization $\\xi_2$. Their images $\\eta_1,\\eta_2$ in $X_i'=X_{\\mathfrak q,i}\\times_B D_\\gamma$ satisfy $\\eta_2\\rightsquigarrow\\eta_1$. Write $\\zeta_1$ for the image of $\\eta_1$ in $X_{\\mathfrak q,i}$. Its image in $\\operatorname{Spec}B$ is $Q$, which contains $x$, so its local ring is regular by the closed-fibre conclusion of [lem-per-qe-alteration-regular-neighbourhood].",
+   "uses": [
+    "lem-trf-closed-map-specializing",
+    "lem-per-qe-alteration-regular-neighbourhood"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.isc.meiji.ac.jp/~kurano/ronbun/kurano40.pdf",
+    "place": "Kurano–Shimomoto, Ideal-adic completion of quasi-excellent rings (after Gabber), Theorem 5.1, Step 3, printed p.14, specialization lifting; obtained in sandbox sources/kurano40.pdf (bibliographic integration requested in report.md)."
+   }
+  },
+  {
+   "text": "The map $B\\to D_\\gamma$ is flat by [lem-per-qe-semilocal-defect-height]; hence [lem-weil-pbc-flat-ring-map-iff-flat-affine] makes the affine scheme map flat, and the local map $\\mathcal O_{X_{\\mathfrak q,i},\\zeta_1}\\to\\mathcal O_{X_i',\\eta_1}$ is flat by [lem-weil-pbc-flat-morphism-base-change] and [def-weil-flat-morphism]. Its closed fibre is a field: $x\\in Q$ and $D_\\gamma/xD_\\gamma\\simeq B_\\gamma/xB_\\gamma$ identify $\\operatorname{Spec}D_\\gamma\\times_B V(x)$ with the corresponding localization of $V(x)$, so base change over $\\zeta_1$ has a single reduced point with residue field $\\kappa(\\zeta_1)$. The source is regular by Step 6. Apply [lem-weil-pbc-flat-over-regular-with-regular-fibre] to obtain regularity at $\\eta_1$. All these local rings are Noetherian: $D_\\gamma$ is Noetherian and the charts $X_i'$ are of finite type over it.",
+   "uses": [
+    "lem-per-qe-semilocal-defect-height",
+    "lem-weil-pbc-flat-ring-map-iff-flat-affine",
+    "lem-weil-pbc-flat-morphism-base-change",
+    "def-weil-flat-morphism",
+    "lem-weil-pbc-flat-over-regular-with-regular-fibre",
+    "lem-weil-pbc-finite-type-algebra-noetherian"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.isc.meiji.ac.jp/~kurano/ronbun/kurano40.pdf",
+    "place": "Kurano–Shimomoto, Ideal-adic completion of quasi-excellent rings (after Gabber), Theorem 5.1, Step 3, printed p.14, flat closed-fibre comparison; obtained in sandbox sources/kurano40.pdf (bibliographic integration requested in report.md)."
+   }
+  },
+  {
+   "text": "Since $\\eta_2$ generalizes $\\eta_1$, [lem-weil-pbc-regular-local-localization] gives regularity at $\\eta_2$. The local map $(D_\\gamma)_{\\mathfrak s_\\gamma}\\to\\mathcal O_{X_i',\\eta_2}$ is flat: its point in $\\operatorname{Spec}B$ is the generic point because $\\mathfrak s_\\gamma\\cap B=0$. Thus it is a localization of a base change from a field; tensoring vector spaces is exact. Apply [lem-weil-pbc-flat-under-regular] to this local map. It makes $(D_\\gamma)_{\\mathfrak s_\\gamma}$ regular, contradicting [lem-per-qe-semilocal-defect-height]. This proves $\\Delta(x)\\subseteq\\Omega^c$.",
+   "uses": [
+    "lem-weil-pbc-regular-local-localization",
+    "lem-weil-pbc-flat-under-regular",
+    "lem-per-qe-semilocal-defect-height"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.isc.meiji.ac.jp/~kurano/ronbun/kurano40.pdf",
+    "place": "Kurano–Shimomoto, Ideal-adic completion of quasi-excellent rings (after Gabber), Theorem 5.1, Step 3, last paragraph, printed p.14; obtained in sandbox sources/kurano40.pdf (bibliographic integration requested in report.md)."
+   }
+  },
+  {
+   "text": "Write the closed set $\\Omega^c$ as $V(H)$. By [lem-sc-finite-minimal-primes-over-ideal], $H$ has finitely many minimal primes. Every prime in $V(H)$ has height at least $h+1$, since $\\Omega$ contains the primes of height at most $h$. A height-$(h+1)$ member $Q$ of $V(H)$ must itself be minimal over $H$: if $P\\subsetneq Q$ were a minimal prime over $H$, a chain of length at least $h+1$ ending at $P$, followed by $P\\subsetneq Q$, would force $\\operatorname{ht}Q\\geq h+2$. By [lem-per-qe-semilocal-defect-height], every member of $\\Delta(x)$ has height $h+1$, so Step 8 puts $\\Delta(x)$ inside this finite set of minimal primes. Hence $\\Delta(x)$ is finite.",
+   "uses": [
+    "lem-sc-finite-minimal-primes-over-ideal",
+    "lem-per-qe-semilocal-defect-height"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://www.isc.meiji.ac.jp/~kurano/ronbun/kurano40.pdf",
+    "place": "Kurano–Shimomoto, Ideal-adic completion of quasi-excellent rings (after Gabber), Theorem 5.1, Step 3, printed p.13, finiteness of the boundary; obtained in sandbox sources/kurano40.pdf (bibliographic integration requested in report.md)."
+   }
+  },
+  {
+   "text": "Finally apply [lem-per-qe-rotthaus-finite-boundary] with this $B,x,\\mathfrak n,\\mathfrak s$. The ring $B$ is Noetherian Nagata and $(x)$-adically complete by [lem-per-qe-normal-counterexample-reduction]; $\\mathfrak s$ is a minimal singular prime of $C$ by [lem-per-qe-minimal-formal-defect]; the contracted primes have positive height $h$ by [lem-per-qe-semilocal-defect-height]; and Step 9 proves finiteness of the very same normalized $\\Delta(x)$. The criterion gives $\\mathfrak s\\cap B\\ne0$, contradicting the chosen triple. Thus $A$ is quasi-excellent. Together with Step 1 this proves both implications.",
+   "uses": [
+    "lem-per-qe-rotthaus-finite-boundary",
+    "lem-per-qe-normal-counterexample-reduction",
+    "lem-per-qe-minimal-formal-defect",
+    "lem-per-qe-semilocal-defect-height"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.isc.meiji.ac.jp/~kurano/ronbun/kurano40.pdf",
+    "place": "Kurano–Shimomoto, Ideal-adic completion of quasi-excellent rings (after Gabber), Theorem 5.1, Step 3, application of Theorem 5.3; obtained in sandbox sources/kurano40.pdf (bibliographic integration requested in report.md)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-exc-excellent-ring",
+  "def-weil-flat-morphism",
+  "def-weil-pbc-finite-type-algebra",
+  "def-weil-proper-morphism",
+  "lem-per-qe-alteration-regular-neighbourhood",
+  "lem-per-qe-minimal-formal-defect",
+  "lem-per-qe-normal-counterexample-reduction",
+  "lem-per-qe-rotthaus-finite-boundary",
+  "lem-per-qe-semilocal-defect-height",
+  "lem-sc-finite-minimal-primes-over-ideal",
+  "lem-trf-closed-map-specializing",
+  "lem-weil-pbc-finite-type-algebra-noetherian",
+  "lem-weil-pbc-finite-type-over-g-ring",
+  "lem-weil-pbc-flat-morphism-base-change",
+  "lem-weil-pbc-flat-over-regular-with-regular-fibre",
+  "lem-weil-pbc-flat-ring-map-iff-flat-affine",
+  "lem-weil-pbc-flat-under-regular",
+  "lem-weil-pbc-regular-local-localization",
+  "lem-weil-pbc-surjective-base-change"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "https://www.isc.meiji.ac.jp/~kurano/ronbun/kurano40.pdf",
+  "place": "Kurano–Shimomoto, Ideal-adic completion of quasi-excellent rings (after Gabber), Theorem 5.1, Steps 1–3 (with the elementary converse from Stacks Tag 07QU); obtained in sandbox sources/kurano40.pdf (bibliographic integration requested in report.md)."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "quasi.?excellent|Nishimura",
+   "results": "{\"t\": \"2026-10-24T03:19:49Z\", \"tool\": \"grep\", \"query\": \"quasi.?excellent|Nishimura\", \"sub\": \"RingTheory\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the actual hits concern Noetherian quotients, adic completeness, Henselian rings, smooth loci, or normalization; none states quasi-excellence lifting or the formal-geometric conclusion"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"QuasiExcellent\"",
+   "results": "{\"t\": \"2026-10-24T03:19:50Z\", \"tool\": \"loogle\", \"query\": \"\\\"QuasiExcellent\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the actual hits concern Noetherian quotients, adic completeness, Henselian rings, smooth loci, or normalization; none states quasi-excellence lifting or the formal-geometric conclusion"
+  },
+  {
+   "tool": "leansearch",
+   "query": "lem-per-qe-complete-pair-lifting: quasi excellence lifts from the quotient of a complete Noetherian Q algebra",
+   "results": "{\"t\": \"2026-10-24T03:19:50Z\", \"tool\": \"leansearch\", \"query\": \"lem-per-qe-complete-pair-lifting: quasi excellence lifts from the quotient of a complete Noetherian Q algebra\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"isNoetherian_quotient\", \"IsAdicComplete.mk_liftAlgHom\", \"Algebra.FormallySmooth.exists_lift\", \"Ideal.Quotient.exists_algHom_fixedPoint_quotient_under\", \"AlgebraicGeometry.Scheme.Hom.liftQuotient\", \"AlgebraicGeometry.Scheme.Hom.liftQuotient.congr_simp\", \"Algebra.FormallySmooth.exists_mkₐ_comp_eq_of_isAdicComplete\", \"IsAdicComplete.StrictMono.mkQ_comp_lift\"], \"digest\": \"457d0333dc221faf\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the actual hits concern Noetherian quotients, adic completeness, Henselian rings, smooth loci, or normalization; none states quasi-excellence lifting or the formal-geometric conclusion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "lem-per-qe-complete-pair-lifting: A Noetherian rational algebra complete for an ideal is quasi excellent if and only if its quotient by that ideal is quasi excellent",
+   "results": "{\"t\": \"2026-10-24T03:19:53Z\", \"tool\": \"leanfinder\", \"query\": \"lem-per-qe-complete-pair-lifting: A Noetherian rational algebra complete for an ideal is quasi excellent if and only if its quotient by that ideal is quasi excellent\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"QuotientMapQuotient.isNoetherian\", \"Algebra.QuasiFinite.instQuotientIdeal\", \"isNoetherian_of_liesOver\", \"Algebra.QuasiFiniteAt\", \"Algebra.quasiFinite_iff\", \"Algebra.instEssFiniteTypeQuotientIdeal\", \"Ideal.Quotient.isNoetherianRing\", \"Algebra.QuasiFiniteAt.of_le\"], \"digest\": \"979998b4e4bcbd8b\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the actual hits concern Noetherian quotients, adic completeness, Henselian rings, smooth loci, or normalization; none states quasi-excellence lifting or the formal-geometric conclusion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "lem-per-qe-complete-pair-lifting: Excellence of an adically complete ring from excellence modulo an ideal of definition",
+   "results": "{\"t\": \"2026-10-24T03:19:54Z\", \"tool\": \"leanfinder\", \"query\": \"lem-per-qe-complete-pair-lifting: Excellence of an adically complete ring from excellence modulo an ideal of definition\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"IsAdicComplete.henselianRing\", \"WittVector.isAdicCompleteIdealSpanP\", \"BDeRhamPlus\", \"IsAdicComplete.of_liftRingHom\", \"IsAdic.isAdicComplete_iff\", \"isLocalRing_of_isAdicComplete_maximal\", \"instCommRingBDeRhamPlus\", \"IsAdicComplete.toIsPrecomplete\"], \"digest\": \"7638958684f6f989\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the actual hits concern Noetherian quotients, adic completeness, Henselian rings, smooth loci, or normalization; none states quasi-excellence lifting or the formal-geometric conclusion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "lem-per-qe-complete-pair-lifting: A Noetherian rational algebra complete for an ideal is quasi excellent if and only if its quotient is quasi excellent",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"QuotientMapQuotient.isNoetherian\", \"module\": \"Mathlib/RingTheory/Finiteness/Quotient\", \"type\": \"∀ {A : Type u_1} {B : Type u_2} [inst : CommRing A] [inst_1 : CommRing B] [inst_2 : Algebra A B] (p : Ideal A)\\n  [IsNoetherian A B], IsNoetherian (A ⧸ p) (B ⧸ Ideal.map (algebraMap A B) p)\", \"doc\": \"If $ A $ is a Noetherian $ B $-module, then the quotient module $ A/p $ is Noetherian over the quotient ring $ B/\\text{image}(p) $, where $ p $ is an ideal of $ A $ and $ \\text{image}(p) $ denotes the i\"}\n  {\"name\": \"Algebra.QuasiFinite.instQuotientIdeal\", \"module\": \"Mathlib/RingTheory/QuasiFinite/Basic\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S] (I : Ideal S)\\n  [Algebra.QuasiFinite R S], Algebra.QuasiFinite R (S ⧸ I)\", \"doc\": \"Given a commutative ring $ S $ with a quasi-finite $ R $-algebra structure (i.e., $ S $ is finitely generated as an $ R $-module) and an ideal $ I $ of $ S $, the quotient ring $ S/I $ inherits a cano\"}\n  {\"name\": \"Algebra.QuasiFiniteAt\", \"module\": \"Mathlib/RingTheory/QuasiFinite/Basic\", \"type\": \"(R : Type u_1) →\\n  {S : Type u_2} → [inst : CommRing R] → [inst_1 : CommRing S] → [Algebra R S] → (p : Ideal S) → [p.IsPrime] → Prop\", \"doc\": \"For a prime ideal $ p $ in a commutative ring $ S $, this proposition asserts that the localization of $ S $ at the complement of $ p $ forms a quasi-finite algebra over the base commutative ring $ R \"}\n  {\"name\": \"isNoetherian_of_liesOver\", \"module\": \"Mathlib/RingTheory/Finiteness/Quotient\", \"type\": \"∀ {A : Type u_1} {B : Type u_2} [inst : CommRing A] [inst_1 : CommRing B] [inst_2 : Algebra A B] (P : Ideal B)\\n  (p : Ideal A) [inst_3 : P.LiesOver p] [IsNoetherian A B], IsNoetherian (A ⧸ p) (B ⧸ P)\", \"doc\": \"If $ A $ is a Noetherian $ B $-module and $ P $ is an ideal in $ B $ lying over an ideal $ p $ in $ A $ (i.e., $ P \\\\cap A = p $), then the quotient module $ A/p $ is Noetherian over the quotient ring \"}\n  {\"name\": \"Algebra.quasiFinite_iff\", \"module\": \"Mathlib/RingTheory/QuasiFinite/Basic\", \"type\": \"∀ (R : Type u_1) (S : Type u_2) [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S],\\n  Algebra.QuasiFinite R S ↔\\n    autoParam (∀ (P : Ideal R) [inst_3 : P.IsPrime], Module.Finite P.ResidueField (P.Fiber S))\\n      Algebra.QuasiFinite.finite_fiber._autoParam\", \"doc\": \"For commutative rings $ R $ and $ S $, where $ S $ is an $ R $-algebra, $ S $ is quasi-finite over $ R $ if and only if for every prime ideal $ P $ in $ R $, the tensor product of the residue field of\"}\n  {\"name\": \"Algebra.QuasiFinite.instResidueField\", \"module\": \"Mathlib/RingTheory/QuasiFinite/Basic\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S] (P : Ideal S)\\n  [inst_3 : P.IsPrime] [Algebra.QuasiFinite R S], Algebra.QuasiFinite R P.ResidueField\", \"doc\": \"For any commutative ring $ R $, a quasi-finite $ R $-algebra $ S $, and a prime ideal $ P $ of $ S $, the residue field of $ P $ is a quasi-finite $ R $-algebra.\"}\n  {\"name\": \"Algebra.QuasiFiniteAt.of_le\", \"module\": \"Mathlib/RingTheory/QuasiFinite/Basic\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S] {P Q : Ideal S}\\n  [inst_3 : P.IsPrime] [inst_4 : Q.IsPrime], P ≤ Q → ∀ [Algebra.QuasiFiniteAt R Q], Algebra.QuasiFiniteAt R P\", \"doc\": \"Given prime ideals $ P $ and $ Q $ in a commutative ring $ S $ such that $ P \\\\subseteq Q $, if the localization of $ S $ at $ Q $ forms a quasi-finite algebra over $ R $ (i.e., $ S_Q $ is finitely gen\"}\n  {\"name\": \"IsNoetherianRing.exists_relSeries_isQuotientEquivQuotientPrime\", \"module\": \"Mathlib/RingTheory/Ideal/AssociatedPrime/Finiteness\", \"type\": \"∀ (A : Type u) [inst : CommRing A] (M : Type v) [inst_1 : AddCommGroup M] [inst_2 : Module A M] [IsNoetherianRing A]\\n  [Module.Finite A M], ∃ s, s.head = ⊥ ∧ s.last = ⊤\", \"doc\": \"In a Noetherian ring $ A $, for any $ A $-module $ M $, there exists a relation series of submodules starting from the trivial submodule $ \\\\{0\\\\} $ and ending at the entire module $ M $, such that each\"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: the returned statements concern ordinary Noetherian quotients, quasi-finiteness, Henselian rings or adic lifts; none asserts quasi-excellence lifting."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"QuasiExcellent\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-24",
+   "verdict": "no match: the returned statements concern ordinary Noetherian quotients, quasi-finiteness, Henselian rings or adic lifts; none asserts quasi-excellence lifting."
+  },
+  {
+   "tool": "grep",
+   "query": "quasi.?excellent|Nishimura|IsGRing",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-24",
+   "verdict": "no match: the returned statements concern ordinary Noetherian quotients, quasi-finiteness, Henselian rings or adic lifts; none asserts quasi-excellence lifting."
+  },
+  {
+   "tool": "leansearch",
+   "query": "lem-per-qe-complete-pair-lifting: A Noetherian rational algebra complete for an ideal is quasi excellent if and only if its quotient is quasi excellent",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"isNoetherian_quotient\", \"module\": \"Mathlib.RingTheory.Noetherian.Basic\", \"type\": \"{A M : Type*} [Ring A] [AddCommGroup M] [SMul R A] [Module R M] [Module A M] [IsScalarTower R A M] (N : Submodule A M)\\n  [IsNoetherian R M] : IsNoetherian R (M ⧸ N)\", \"doc\": \"If $ M $ is a Noetherian module over a ring $ R $ and $ N $ is a submodule of $ M $, then the quotient module $ M/N $ is also a Noetherian module over $ R $. This holds under the scalar tower compatib\"}\n  {\"name\": \"Ideal.Quotient.isNoetherianRing\", \"module\": \"Mathlib.RingTheory.Ideal.Quotient.Noetherian\", \"type\": \"{R : Type*} [CommRing R] [IsNoetherianRing R] (I : Ideal R) : IsNoetherianRing (R ⧸ I)\", \"doc\": \"For any Noetherian commutative ring $ R $ and any ideal $ I $ of $ R $, the quotient ring $ R/I $ is also Noetherian. This means that if every ideal of $ R $ is finitely generated, then every ideal of\"}\n  {\"name\": \"IsAdicComplete.StrictMono.mkQ_comp_lift\", \"module\": \"Mathlib.RingTheory.AdicCompletion.Basic\", \"type\": \"{n : ℕ} : mkQ (I ^ (a n) • ⊤ : Submodule R N) ∘ₗ (lift I ha f hf) = f n\", \"doc\": \"Given a commutative ring $ R $, an ideal $ I $, $ R $-modules $ M $ and $ N $, a strictly monotonic sequence $ a : \\\\mathbb{N} \\\\to \\\\mathbb{N} $, and a compatible family of $ R $-linear maps $ f_n : M \\\\\"}\n  {\"name\": \"QuotientMapQuotient.isNoetherian\", \"module\": \"Mathlib.RingTheory.Finiteness.Quotient\", \"type\": \"[IsNoetherian A B] : IsNoetherian (A ⧸ p) (B ⧸ p.map (algebraMap A B))\", \"doc\": \"If $ A $ is a Noetherian $ B $-module, then the quotient module $ A/p $ is Noetherian over the quotient ring $ B/\\text{image}(p) $, where $ p $ is an ideal of $ A $ and $ \\text{image}(p) $ denotes the i\"}\n  {\"name\": \"isNoetherian_iff_submodule_quotient\", \"module\": \"Mathlib.RingTheory.Noetherian.Basic\", \"type\": \"(S : Submodule R P) : IsNoetherian R P ↔ IsNoetherian R S ∧ IsNoetherian R (P ⧸ S)\", \"doc\": \"For any module $P$ over a ring $R$ and any submodule $S$ of $P$, the module $P$ is Noetherian if and only if both the submodule $S$ and the quotient module $P/S$ are Noetherian. This equivalence estab\"}\n  {\"name\": \"Algebra.FormallySmooth.exists_mkₐ_comp_eq_of_isAdicComplete\", \"module\": \"Mathlib.RingTheory.Smooth.AdicCompletion\", \"type\": \"{I : Ideal S} [IsAdicComplete I S] (f : A →ₐ[R] S ⧸ I) : ∃ (g : A →ₐ[R] S), (Ideal.Quotient.mkₐ _ _).comp g = f\", \"doc\": \"Let $ R $ be a commutative ring, $ A $ an $ R $-algebra, and $ S $ a commutative ring with an ideal $ I $. If $ S $ is adic complete with respect to $ I $, then for any $ R $-algebra homomorphism $ f \"}\n  {\"name\": \"StandardEtalePair.existsUnique_hasMap_of_hasMap_quotient_of_sq_eq_bot\", \"module\": \"Mathlib.RingTheory.Etale.StandardEtale\", \"type\": \"(I : Ideal S) (hI : I ^ 2 = ⊥) (x : S) (hx : P.HasMap (Ideal.Quotient.mk I x)) : ∃! ε, ε ∈ I ∧ P.HasMap (x + ε)\", \"doc\": \"Let $S$ be a commutative algebra over a commutative ring $R$, and let $I$ be an ideal of $S$ such that $I^2 = \\\\{0\\\\}$. Let $P$ be a standard étale pair over $R$. If the image of an element $x \\\\in S$ in\"}\n  {\"name\": \"IsAdicComplete.mk_liftRingHom\", \"module\": \"Mathlib.RingTheory.AdicCompletion.RingHom\", \"type\": \"(n : ℕ) (x : R) : Ideal.Quotient.mk (I ^ n) (liftRingHom I f hf x) = f n x\", \"doc\": \"For each natural number $n$ and element $x$ in the commutative ring $R$, the image of the lifted ring homomorphism $\\\\text{liftRingHom}(I, f, hf, x)$ under the canonical quotient map to $R/I^n$ is equa\"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: the returned statements concern ordinary Noetherian quotients, quasi-finiteness, Henselian rings or adic lifts; none asserts quasi-excellence lifting."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "lem-per-qe-complete-pair-lifting: Lifting quasi excellence from the closed fibre of an adically complete ring",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"IsAdicComplete.henselianRing\", \"module\": \"Mathlib/RingTheory/Henselian\", \"type\": \"∀ (R : Type u_1) [inst : CommRing R] (I : Ideal R) [IsAdicComplete I R], HenselianRing R I\", \"doc\": \"For any commutative ring $ R $ and ideal $ I $, if $ R $ is adic complete with respect to $ I $, then $ R $ is Henselian with respect to $ I $.\"}\n  {\"name\": \"Algebra.FormallySmooth.exists_mkₐ_comp_eq_of_isAdicComplete\", \"module\": \"Mathlib/RingTheory/Smooth/AdicCompletion\", \"type\": \"∀ {R : Type u_1} {A : Type u_2} [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A] {S : Type u_3}\\n  [inst_3 : CommRing S] [inst_4 : Algebra R S] [Algebra.FormallySmooth R A] {I : Ideal S} [IsAdicComplete I S]\\n  (f : A →ₐ[R] S ⧸ I), ∃ g, (Ideal.Quotient.mkₐ R I).comp g = f\", \"doc\": \"Let $ R $ be a commutative ring, $ A $ an $ R $-algebra, and $ S $ a commutative ring with an ideal $ I $. If $ S $ is adic complete with respect to $ I $, then for any $ R $-algebra homomorphism $ f \"}\n  {\"name\": \"IsAdicComplete.of_liftRingHom\", \"module\": \"Mathlib/RingTheory/AdicCompletion/RingHom\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} [inst : NonAssocSemiring R] [inst_1 : CommRing S] (I : Ideal S)\\n  [inst_2 : IsAdicComplete I S] (f : (n : ℕ) → R →+* S ⧸ I ^ n)\\n  (hf : ∀ {m n : ℕ} (hle : m ≤ n), (Ideal.Quotient.factorPow I hle).comp (f n) = f m) (x : R),\\n  (AdicCompletion.of I S) ((IsAdicComplete.li\", \"doc\": \"Given a commutative ring $ R $, an ideal $ I $ of $ R $, and an $ I $-adically complete commutative ring $ S $, this constructs a ring homomorphism $ R \\to S $ by composing the inverse of the canonical\"}\n  {\"name\": \"IsAdicComplete.liftRingHom\", \"module\": \"Mathlib/RingTheory/AdicCompletion/RingHom\", \"type\": \"{R : Type u_1} →\\n  {S : Type u_2} →\\n    [inst : NonAssocSemiring R] →\\n      [inst_1 : CommRing S] →\\n        (I : Ideal S) →\\n          [IsAdicComplete I S] →\\n            (f : (n : ℕ) → R →+* S ⧸ I ^ n) →\\n              (∀ {m n : ℕ} (hle : m ≤ n), (Ideal.Quotient.factorPow I hle).comp (f n) = f m) → R \", \"doc\": \"Given a commutative ring $ R $, an ideal $ I $ of $ R $, and an $ I $-adically complete commutative ring $ S $, this constructs a ring homomorphism $ R \\to+* S $ by composing the inverse of the canonic\"}\n  {\"name\": \"IsAdicComplete.of_lift\", \"module\": \"Mathlib/RingTheory/AdicCompletion/Basic\", \"type\": \"∀ {R : Type u_1} [inst : CommRing R] (I : Ideal R) {M : Type u_4} [inst_1 : AddCommGroup M] [inst_2 : Module R M]\\n  {N : Type u_5} [inst_3 : AddCommGroup N] [inst_4 : Module R N] [inst_5 : IsAdicComplete I N]\\n  (f : (n : ℕ) → M →ₗ[R] N ⧸ I ^ n • ⊤) (h : ∀ {m n : ℕ} (hle : m ≤ n), Submodule.factorPow\", \"doc\": \"The canonical $ R $-linear map sending each element $ m $ of an $ R $-module $ M $ to its image in the $ I $-adic completion of $ M $, defined as the inverse limit $ \\\\varprojlim M/I^nM $. This map con\"}\n  {\"name\": \"isLocalRing_of_isAdicComplete_maximal\", \"module\": \"Mathlib/RingTheory/AdicCompletion/LocalRing\", \"type\": \"∀ {R : Type u_1} [inst : CommRing R] (m : Ideal R) [hmax : m.IsMaximal] [IsAdicComplete m R], IsLocalRing R\", \"doc\": \"If a commutative ring $ R $ is adic complete with respect to a maximal ideal $ \\\\mathfrak{m} $, then $ R $ is a local ring.\"}\n  {\"name\": \"IsAdicComplete.StrictMono.liftRingHom\", \"module\": \"Mathlib/RingTheory/AdicCompletion/RingHom\", \"type\": \"{R : Type u_1} →\\n  {S : Type u_2} →\\n    [inst : NonAssocSemiring R] →\\n      [inst_1 : CommRing S] →\\n        (I : Ideal S) →\\n          {a : ℕ → ℕ} →\\n            (ha : StrictMono a) →\\n              (f : (n : ℕ) → R →+* S ⧸ I ^ a n) →\\n                (∀ {m : ℕ}, (Ideal.Quotient.factorPow I ⋯).comp (f (\", \"doc\": \"Given a commutative ring $ R $, an ideal $ I $, and an $ I $-adically complete commutative ring $ S $, this constructs a ring homomorphism $ R \\to+* S $ by composing the inverse of the canonical $ S $-\"}\n  {\"name\": \"IsAdicComplete.StrictMono.of_lift\", \"module\": \"Mathlib/RingTheory/AdicCompletion/Basic\", \"type\": \"∀ {R : Type u_1} [inst : CommRing R] (I : Ideal R) {M : Type u_4} [inst_1 : AddCommGroup M] [inst_2 : Module R M]\\n  {N : Type u_5} [inst_3 : AddCommGroup N] [inst_4 : Module R N] {a : ℕ → ℕ} (ha : StrictMono a)\\n  (f : (n : ℕ) → M →ₗ[R] N ⧸ I ^ a n • ⊤) (hf : ∀ {m : ℕ}, Submodule.factorPow I N ⋯ ∘ₗ f\", \"doc\": \"For natural numbers $ m \\\\leq n $, the composition of the canonical factor map $ M/I^nM \\\\to M/I^mM $ with the extension of a linear map $ f $ at level $ n $ equals the extension of $ f $ at level $ m $\"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: the returned statements concern ordinary Noetherian quotients, quasi-finiteness, Henselian rings or adic lifts; none asserts quasi-excellence lifting."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "lem-per-qe-complete-pair-lifting: A Noetherian rational algebra complete for an ideal is quasi excellent if and only if its quotient is quasi excellent",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"QuotientMapQuotient.isNoetherian\", \"module\": \"Mathlib/RingTheory/Finiteness/Quotient\", \"type\": \"∀ {A : Type u_1} {B : Type u_2} [inst : CommRing A] [inst_1 : CommRing B] [inst_2 : Algebra A B] (p : Ideal A)\\n  [IsNoetherian A B], IsNoetherian (A ⧸ p) (B ⧸ Ideal.map (algebraMap A B) p)\", \"doc\": \"If $ A $ is a Noetherian $ B $-module, then the quotient module $ A/p $ is Noetherian over the quotient ring $ B/\\text{image}(p) $, where $ p $ is an ideal of $ A $ and $ \\text{image}(p) $ denotes the i\"}\n  {\"name\": \"Algebra.QuasiFinite.instQuotientIdeal\", \"module\": \"Mathlib/RingTheory/QuasiFinite/Basic\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S] (I : Ideal S)\\n  [Algebra.QuasiFinite R S], Algebra.QuasiFinite R (S ⧸ I)\", \"doc\": \"Given a commutative ring $ S $ with a quasi-finite $ R $-algebra structure (i.e., $ S $ is finitely generated as an $ R $-module) and an ideal $ I $ of $ S $, the quotient ring $ S/I $ inherits a cano\"}\n  {\"name\": \"Algebra.QuasiFiniteAt\", \"module\": \"Mathlib/RingTheory/QuasiFinite/Basic\", \"type\": \"(R : Type u_1) →\\n  {S : Type u_2} → [inst : CommRing R] → [inst_1 : CommRing S] → [Algebra R S] → (p : Ideal S) → [p.IsPrime] → Prop\", \"doc\": \"For a prime ideal $ p $ in a commutative ring $ S $, this proposition asserts that the localization of $ S $ at the complement of $ p $ forms a quasi-finite algebra over the base commutative ring $ R \"}\n  {\"name\": \"isNoetherian_of_liesOver\", \"module\": \"Mathlib/RingTheory/Finiteness/Quotient\", \"type\": \"∀ {A : Type u_1} {B : Type u_2} [inst : CommRing A] [inst_1 : CommRing B] [inst_2 : Algebra A B] (P : Ideal B)\\n  (p : Ideal A) [inst_3 : P.LiesOver p] [IsNoetherian A B], IsNoetherian (A ⧸ p) (B ⧸ P)\", \"doc\": \"If $ A $ is a Noetherian $ B $-module and $ P $ is an ideal in $ B $ lying over an ideal $ p $ in $ A $ (i.e., $ P \\\\cap A = p $), then the quotient module $ A/p $ is Noetherian over the quotient ring \"}\n  {\"name\": \"Algebra.quasiFinite_iff\", \"module\": \"Mathlib/RingTheory/QuasiFinite/Basic\", \"type\": \"∀ (R : Type u_1) (S : Type u_2) [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S],\\n  Algebra.QuasiFinite R S ↔\\n    autoParam (∀ (P : Ideal R) [inst_3 : P.IsPrime], Module.Finite P.ResidueField (P.Fiber S))\\n      Algebra.QuasiFinite.finite_fiber._autoParam\", \"doc\": \"For commutative rings $ R $ and $ S $, where $ S $ is an $ R $-algebra, $ S $ is quasi-finite over $ R $ if and only if for every prime ideal $ P $ in $ R $, the tensor product of the residue field of\"}\n  {\"name\": \"Algebra.QuasiFinite.instResidueField\", \"module\": \"Mathlib/RingTheory/QuasiFinite/Basic\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S] (P : Ideal S)\\n  [inst_3 : P.IsPrime] [Algebra.QuasiFinite R S], Algebra.QuasiFinite R P.ResidueField\", \"doc\": \"For any commutative ring $ R $, a quasi-finite $ R $-algebra $ S $, and a prime ideal $ P $ of $ S $, the residue field of $ P $ is a quasi-finite $ R $-algebra.\"}\n  {\"name\": \"Algebra.QuasiFiniteAt.of_le\", \"module\": \"Mathlib/RingTheory/QuasiFinite/Basic\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S] {P Q : Ideal S}\\n  [inst_3 : P.IsPrime] [inst_4 : Q.IsPrime], P ≤ Q → ∀ [Algebra.QuasiFiniteAt R Q], Algebra.QuasiFiniteAt R P\", \"doc\": \"Given prime ideals $ P $ and $ Q $ in a commutative ring $ S $ such that $ P \\\\subseteq Q $, if the localization of $ S $ at $ Q $ forms a quasi-finite algebra over $ R $ (i.e., $ S_Q $ is finitely gen\"}\n  {\"name\": \"IsNoetherianRing.exists_relSeries_isQuotientEquivQuotientPrime\", \"module\": \"Mathlib/RingTheory/Ideal/AssociatedPrime/Finiteness\", \"type\": \"∀ (A : Type u) [inst : CommRing A] (M : Type v) [inst_1 : AddCommGroup M] [inst_2 : Module A M] [IsNoetherianRing A]\\n  [Module.Finite A M], ∃ s, s.head = ⊥ ∧ s.last = ⊤\", \"doc\": \"In a Noetherian ring $ A $, for any $ A $-module $ M $, there exists a relation series of submodules starting from the trivial submodule $ \\\\{0\\\\} $ and ending at the entire module $ M $, such that each\"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: the returned statements concern ordinary Noetherian quotients, quasi-finiteness, Henselian rings or adic lifts; none asserts quasi-excellence lifting."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"QuasiExcellent\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-24",
+   "verdict": "no match: the returned statements concern ordinary Noetherian quotients, quasi-finiteness, Henselian rings or adic lifts; none asserts quasi-excellence lifting."
+  },
+  {
+   "tool": "grep",
+   "query": "quasi.?excellent|Nishimura|IsGRing",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-24",
+   "verdict": "no match: the returned statements concern ordinary Noetherian quotients, quasi-finiteness, Henselian rings or adic lifts; none asserts quasi-excellence lifting."
+  },
+  {
+   "tool": "leansearch",
+   "query": "lem-per-qe-complete-pair-lifting: A Noetherian rational algebra complete for an ideal is quasi excellent if and only if its quotient is quasi excellent",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"isNoetherian_quotient\", \"module\": \"Mathlib.RingTheory.Noetherian.Basic\", \"type\": \"{A M : Type*} [Ring A] [AddCommGroup M] [SMul R A] [Module R M] [Module A M] [IsScalarTower R A M] (N : Submodule A M)\\n  [IsNoetherian R M] : IsNoetherian R (M ⧸ N)\", \"doc\": \"If $ M $ is a Noetherian module over a ring $ R $ and $ N $ is a submodule of $ M $, then the quotient module $ M/N $ is also a Noetherian module over $ R $. This holds under the scalar tower compatib\"}\n  {\"name\": \"Ideal.Quotient.isNoetherianRing\", \"module\": \"Mathlib.RingTheory.Ideal.Quotient.Noetherian\", \"type\": \"{R : Type*} [CommRing R] [IsNoetherianRing R] (I : Ideal R) : IsNoetherianRing (R ⧸ I)\", \"doc\": \"For any Noetherian commutative ring $ R $ and any ideal $ I $ of $ R $, the quotient ring $ R/I $ is also Noetherian. This means that if every ideal of $ R $ is finitely generated, then every ideal of\"}\n  {\"name\": \"IsAdicComplete.StrictMono.mkQ_comp_lift\", \"module\": \"Mathlib.RingTheory.AdicCompletion.Basic\", \"type\": \"{n : ℕ} : mkQ (I ^ (a n) • ⊤ : Submodule R N) ∘ₗ (lift I ha f hf) = f n\", \"doc\": \"Given a commutative ring $ R $, an ideal $ I $, $ R $-modules $ M $ and $ N $, a strictly monotonic sequence $ a : \\\\mathbb{N} \\\\to \\\\mathbb{N} $, and a compatible family of $ R $-linear maps $ f_n : M \\\\\"}\n  {\"name\": \"QuotientMapQuotient.isNoetherian\", \"module\": \"Mathlib.RingTheory.Finiteness.Quotient\", \"type\": \"[IsNoetherian A B] : IsNoetherian (A ⧸ p) (B ⧸ p.map (algebraMap A B))\", \"doc\": \"If $ A $ is a Noetherian $ B $-module, then the quotient module $ A/p $ is Noetherian over the quotient ring $ B/\\text{image}(p) $, where $ p $ is an ideal of $ A $ and $ \\text{image}(p) $ denotes the i\"}\n  {\"name\": \"isNoetherian_iff_submodule_quotient\", \"module\": \"Mathlib.RingTheory.Noetherian.Basic\", \"type\": \"(S : Submodule R P) : IsNoetherian R P ↔ IsNoetherian R S ∧ IsNoetherian R (P ⧸ S)\", \"doc\": \"For any module $P$ over a ring $R$ and any submodule $S$ of $P$, the module $P$ is Noetherian if and only if both the submodule $S$ and the quotient module $P/S$ are Noetherian. This equivalence estab\"}\n  {\"name\": \"Algebra.FormallySmooth.exists_mkₐ_comp_eq_of_isAdicComplete\", \"module\": \"Mathlib.RingTheory.Smooth.AdicCompletion\", \"type\": \"{I : Ideal S} [IsAdicComplete I S] (f : A →ₐ[R] S ⧸ I) : ∃ (g : A →ₐ[R] S), (Ideal.Quotient.mkₐ _ _).comp g = f\", \"doc\": \"Let $ R $ be a commutative ring, $ A $ an $ R $-algebra, and $ S $ a commutative ring with an ideal $ I $. If $ S $ is adic complete with respect to $ I $, then for any $ R $-algebra homomorphism $ f \"}\n  {\"name\": \"StandardEtalePair.existsUnique_hasMap_of_hasMap_quotient_of_sq_eq_bot\", \"module\": \"Mathlib.RingTheory.Etale.StandardEtale\", \"type\": \"(I : Ideal S) (hI : I ^ 2 = ⊥) (x : S) (hx : P.HasMap (Ideal.Quotient.mk I x)) : ∃! ε, ε ∈ I ∧ P.HasMap (x + ε)\", \"doc\": \"Let $S$ be a commutative algebra over a commutative ring $R$, and let $I$ be an ideal of $S$ such that $I^2 = \\\\{0\\\\}$. Let $P$ be a standard étale pair over $R$. If the image of an element $x \\\\in S$ in\"}\n  {\"name\": \"IsAdicComplete.mk_liftRingHom\", \"module\": \"Mathlib.RingTheory.AdicCompletion.RingHom\", \"type\": \"(n : ℕ) (x : R) : Ideal.Quotient.mk (I ^ n) (liftRingHom I f hf x) = f n x\", \"doc\": \"For each natural number $n$ and element $x$ in the commutative ring $R$, the image of the lifted ring homomorphism $\\\\text{liftRingHom}(I, f, hf, x)$ under the canonical quotient map to $R/I^n$ is equa\"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: the returned statements concern ordinary Noetherian quotients, quasi-finiteness, Henselian rings or adic lifts; none asserts quasi-excellence lifting."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "lem-per-qe-complete-pair-lifting: Lifting quasi excellence from the closed fibre of an adically complete ring",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"IsAdicComplete.henselianRing\", \"module\": \"Mathlib/RingTheory/Henselian\", \"type\": \"∀ (R : Type u_1) [inst : CommRing R] (I : Ideal R) [IsAdicComplete I R], HenselianRing R I\", \"doc\": \"For any commutative ring $ R $ and ideal $ I $, if $ R $ is adic complete with respect to $ I $, then $ R $ is Henselian with respect to $ I $.\"}\n  {\"name\": \"Algebra.FormallySmooth.exists_mkₐ_comp_eq_of_isAdicComplete\", \"module\": \"Mathlib/RingTheory/Smooth/AdicCompletion\", \"type\": \"∀ {R : Type u_1} {A : Type u_2} [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A] {S : Type u_3}\\n  [inst_3 : CommRing S] [inst_4 : Algebra R S] [Algebra.FormallySmooth R A] {I : Ideal S} [IsAdicComplete I S]\\n  (f : A →ₐ[R] S ⧸ I), ∃ g, (Ideal.Quotient.mkₐ R I).comp g = f\", \"doc\": \"Let $ R $ be a commutative ring, $ A $ an $ R $-algebra, and $ S $ a commutative ring with an ideal $ I $. If $ S $ is adic complete with respect to $ I $, then for any $ R $-algebra homomorphism $ f \"}\n  {\"name\": \"IsAdicComplete.of_liftRingHom\", \"module\": \"Mathlib/RingTheory/AdicCompletion/RingHom\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} [inst : NonAssocSemiring R] [inst_1 : CommRing S] (I : Ideal S)\\n  [inst_2 : IsAdicComplete I S] (f : (n : ℕ) → R →+* S ⧸ I ^ n)\\n  (hf : ∀ {m n : ℕ} (hle : m ≤ n), (Ideal.Quotient.factorPow I hle).comp (f n) = f m) (x : R),\\n  (AdicCompletion.of I S) ((IsAdicComplete.li\", \"doc\": \"Given a commutative ring $ R $, an ideal $ I $ of $ R $, and an $ I $-adically complete commutative ring $ S $, this constructs a ring homomorphism $ R \\to S $ by composing the inverse of the canonical\"}\n  {\"name\": \"IsAdicComplete.liftRingHom\", \"module\": \"Mathlib/RingTheory/AdicCompletion/RingHom\", \"type\": \"{R : Type u_1} →\\n  {S : Type u_2} →\\n    [inst : NonAssocSemiring R] →\\n      [inst_1 : CommRing S] →\\n        (I : Ideal S) →\\n          [IsAdicComplete I S] →\\n            (f : (n : ℕ) → R →+* S ⧸ I ^ n) →\\n              (∀ {m n : ℕ} (hle : m ≤ n), (Ideal.Quotient.factorPow I hle).comp (f n) = f m) → R \", \"doc\": \"Given a commutative ring $ R $, an ideal $ I $ of $ R $, and an $ I $-adically complete commutative ring $ S $, this constructs a ring homomorphism $ R \\to+* S $ by composing the inverse of the canonic\"}\n  {\"name\": \"IsAdicComplete.of_lift\", \"module\": \"Mathlib/RingTheory/AdicCompletion/Basic\", \"type\": \"∀ {R : Type u_1} [inst : CommRing R] (I : Ideal R) {M : Type u_4} [inst_1 : AddCommGroup M] [inst_2 : Module R M]\\n  {N : Type u_5} [inst_3 : AddCommGroup N] [inst_4 : Module R N] [inst_5 : IsAdicComplete I N]\\n  (f : (n : ℕ) → M →ₗ[R] N ⧸ I ^ n • ⊤) (h : ∀ {m n : ℕ} (hle : m ≤ n), Submodule.factorPow\", \"doc\": \"The canonical $ R $-linear map sending each element $ m $ of an $ R $-module $ M $ to its image in the $ I $-adic completion of $ M $, defined as the inverse limit $ \\\\varprojlim M/I^nM $. This map con\"}\n  {\"name\": \"isLocalRing_of_isAdicComplete_maximal\", \"module\": \"Mathlib/RingTheory/AdicCompletion/LocalRing\", \"type\": \"∀ {R : Type u_1} [inst : CommRing R] (m : Ideal R) [hmax : m.IsMaximal] [IsAdicComplete m R], IsLocalRing R\", \"doc\": \"If a commutative ring $ R $ is adic complete with respect to a maximal ideal $ \\\\mathfrak{m} $, then $ R $ is a local ring.\"}\n  {\"name\": \"IsAdicComplete.StrictMono.liftRingHom\", \"module\": \"Mathlib/RingTheory/AdicCompletion/RingHom\", \"type\": \"{R : Type u_1} →\\n  {S : Type u_2} →\\n    [inst : NonAssocSemiring R] →\\n      [inst_1 : CommRing S] →\\n        (I : Ideal S) →\\n          {a : ℕ → ℕ} →\\n            (ha : StrictMono a) →\\n              (f : (n : ℕ) → R →+* S ⧸ I ^ a n) →\\n                (∀ {m : ℕ}, (Ideal.Quotient.factorPow I ⋯).comp (f (\", \"doc\": \"Given a commutative ring $ R $, an ideal $ I $, and an $ I $-adically complete commutative ring $ S $, this constructs a ring homomorphism $ R \\to+* S $ by composing the inverse of the canonical $ S $-\"}\n  {\"name\": \"IsAdicComplete.StrictMono.of_lift\", \"module\": \"Mathlib/RingTheory/AdicCompletion/Basic\", \"type\": \"∀ {R : Type u_1} [inst : CommRing R] (I : Ideal R) {M : Type u_4} [inst_1 : AddCommGroup M] [inst_2 : Module R M]\\n  {N : Type u_5} [inst_3 : AddCommGroup N] [inst_4 : Module R N] {a : ℕ → ℕ} (ha : StrictMono a)\\n  (f : (n : ℕ) → M →ₗ[R] N ⧸ I ^ a n • ⊤) (hf : ∀ {m : ℕ}, Submodule.factorPow I N ⋯ ∘ₗ f\", \"doc\": \"For natural numbers $ m \\\\leq n $, the composition of the canonical factor map $ M/I^nM \\\\to M/I^mM $ with the extension of a linear map $ f $ at level $ n $ equals the extension of $ f $ at level $ m $\"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: the returned statements concern ordinary Noetherian quotients, quasi-finiteness, Henselian rings or adic lifts; none asserts quasi-excellence lifting."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-per-small-divisor-formal-completion",
+  "date": "2026-10-24",
+  "group": "Q107"
+ },
+ "chapter": "sec-deligne-laumon-a1",
+ "unit": "sk-p-dl-a1-perverse",
+ "blueprint": {
+  "from": {
+   "node": "lem-per-artin-gabber-affine-curve",
+   "place": "Ancestor proof Step 3, regular local model and purity, through the small-singular-locus completion in Temkin Theorem 3.4.1: quasi-excellence of completed rational affine charts is supplied by Theorem 2.1.6.",
+   "via": [
+    "lem-per-small-divisor-formal-completion",
+    "lem-per-small-singular-locus-resolution",
+    "lem-per-qe-ordinary-regular-resolution",
+    "lem-per-characteristic-zero-log-resolution-independence",
+    "lem-per-complete-local-rigidification-comparison",
+    "lem-per-gabber-absolute-equivariant-modification",
+    "lem-per-gabber-log-smooth-equivariant-modification",
+    "lem-per-trait-prime-to-ell-log-alteration",
+    "lem-per-gabber-regular-pair-purity",
+    "lem-per-absolute-gysin-purity",
+    "lem-per-potential-dualizing-regular-unit",
+    "lem-per-finite-regular-reduction-dualizing",
+    "lem-per-qbar-generic-duality-model",
+    "lem-per-qbar-middle-tstructure"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-per-qe-complete-pair-lifting",
+  "worker": "stage1",
+  "summary": "Read ILO Exposé I §9 and the detailed Kurano–Shimomoto proof. Retained the statement; split five genuine auxiliary results (normal counterexample reduction, least formal defect, semilocal height comparisons, Rotthaus criterion, alteration neighbourhoods). Wrote the specialization, flat closed-fibre regularity and finite-boundary contradiction explicitly, reusing existing regularity nodes. Logged two semantic phrasings, Loogle and source grep for each new node; no Mathlib match. New source is obtained in the sandbox because the repository is read-only; requested bibliographic integration in report.",
+  "blueprint": "Refines ancestor lem-per-artin-gabber-affine-curve through the existing small-divisor completion route, specifically Ancestor proof Step 3, regular local model and purity, through the small-singular-locus completion in Temkin Theorem 3.4.1: quasi-excellence of completed rational affine charts is supplied by Theorem 2.1.6.",
+  "tool_uses": [
+   {
+    "node": "lem-sc-finite-minimal-primes-over-ideal",
+    "why": "Generic algebraic/topological tool used in the completion contradiction; it does not replace any step of the perverse/Fourier unit route."
+   },
+   {
+    "node": "lem-trf-closed-map-specializing",
+    "why": "Generic algebraic/topological tool used in the completion contradiction; it does not replace any step of the perverse/Fourier unit route."
+   },
+   {
+    "node": "lem-weil-pbc-finite-type-algebra-noetherian",
+    "why": "Generic algebraic/topological tool used in the completion contradiction; it does not replace any step of the perverse/Fourier unit route."
+   },
+   {
+    "node": "lem-weil-pbc-finite-type-over-g-ring",
+    "why": "Generic algebraic/topological tool used in the completion contradiction; it does not replace any step of the perverse/Fourier unit route."
+   },
+   {
+    "node": "lem-weil-pbc-flat-morphism-base-change",
+    "why": "Generic algebraic/topological tool used in the completion contradiction; it does not replace any step of the perverse/Fourier unit route."
+   },
+   {
+    "node": "lem-weil-pbc-flat-over-regular-with-regular-fibre",
+    "why": "Generic algebraic/topological tool used in the completion contradiction; it does not replace any step of the perverse/Fourier unit route."
+   },
+   {
+    "node": "lem-weil-pbc-flat-ring-map-iff-flat-affine",
+    "why": "Generic algebraic/topological tool used in the completion contradiction; it does not replace any step of the perverse/Fourier unit route."
+   },
+   {
+    "node": "lem-weil-pbc-flat-under-regular",
+    "why": "Generic algebraic/topological tool used in the completion contradiction; it does not replace any step of the perverse/Fourier unit route."
+   },
+   {
+    "node": "lem-weil-pbc-regular-local-localization",
+    "why": "Generic algebraic/topological tool used in the completion contradiction; it does not replace any step of the perverse/Fourier unit route."
+   },
+   {
+    "node": "lem-weil-pbc-surjective-base-change",
+    "why": "Generic algebraic/topological tool used in the completion contradiction; it does not replace any step of the perverse/Fourier unit route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sc-finite-minimal-primes-over-ideal",
+  "lem-trf-closed-map-specializing",
+  "lem-weil-pbc-finite-type-algebra-noetherian",
+  "lem-weil-pbc-finite-type-over-g-ring",
+  "lem-weil-pbc-flat-morphism-base-change",
+  "lem-weil-pbc-flat-over-regular-with-regular-fibre",
+  "lem-weil-pbc-flat-ring-map-iff-flat-affine",
+  "lem-weil-pbc-flat-under-regular",
+  "lem-weil-pbc-regular-local-localization",
+  "lem-weil-pbc-surjective-base-change"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q149-f9d665757",
+  "group": "Q149",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q149-f9d665757 (reviewer sub-agent of L); spot-checked: I read the item, all five new nodes and every cited statement in full, against ILO I §9 Th. 9.2 (p.17, from literature/) and against Kurano–Shimomoto arXiv:1609.09246v2, which I fetched myself: Def 3.2, Thm 3.3, Lemmas 4.2/4.4/4.5, Thm 4.1, Thm 5.1 Steps 1–3, Claims 5.2/5.4, Thm 5.3. Base: the item is unsplit live, with no repair note and no parallel split. The statement matches Th. 9.2 plus the Q-algebra hypothesis. Step 1 (QE ⇒ A/J QE via finite-type-over-G-ring and J-2) is correct. The reduction node is (A1)–(A4) plus the B_L facts. The minimal-formal-defect node is Step 2 / Claim 5.2 (h ≥ 2 because C is normal). The semilocal node is Claim 5.4 and the description of Δ; I checked both directions of that description and the height h+1 via Q̃ = QD_γ. The Rotthaus node is Thm 5.3; I checked the edge cases x = 0 and x a unit. The alteration node is Lemma 4.4 under stronger hypotheses (B_q excellent, B/J QE), and an integral, generically finite V can be obtained. I verified Steps 4–10 against the K–S p.13–14 argument, including the closed-fibre computation κ(ζ₁)⊗_B D_γ = κ(ζ₁) and the generic flatness of (D_γ)_{s_γ} → O_{η₂}. Step 9's height-minimality argument is correct. Step 10's hypotheses match the Rotthaus node's definitions literally. Duplicate scans (alteration, uniformization, Rotthaus, Nishimura, Greco, formal fibres, J-2, 07QU, complete + quasi-excellent) and a Mathlib grep found no duplicate or leaf. There are no SGA citations. The off-unit tool_uses are generic and accepted. Batch-5: lem-trf-closed-map-specializing is a point-set-topology Mathlib leaf outside the trace formula and Poincaré duality, so it is accepted. Maintainer note: the K–S PDF is not under literature/ and proof_origin and source.document use the author URL; the paper should be archived and the paths normalised (WANTED line in the report). coord/dag-sync.md is absent from the snapshot. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.QuasiExcellentCompletePair",
+  "declaration": "isQuasiExcellent_iff_quotient_of_isAdicComplete",
+  "file": "lean/Sheaf/RingTheory/QuasiExcellentCompletePair.lean",
+  "statement": "theorem isQuasiExcellent_iff_quotient_of_isAdicComplete (A : Type u) [CommRing A] [Algebra ℚ A] [IsNoetherianRing A] (J : Ideal A) [IsAdicComplete J A] : IsQuasiExcellent A ↔ IsQuasiExcellent (A ⧸ J)",
+  "branch": "newtargets-dag",
+  "by": "Q38",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-f80194ef7",
+  "group": "Q38",
+  "result": "pass",
+  "note": "Lean `isQuasiExcellent_iff_quotient_of_isAdicComplete (A : Type u) [CommRing A] [Algebra ℚ A] [IsNoetherianRing A] (J : Ideal A) [IsAdicComplete J A] : IsQuasiExcellent A ↔ IsQuasiExcellent (A ⧸ J)` matches the node clause by clause and ILO Exposé I Thm 9.2 p.17 (no char hypothesis, so the ℚ form is a specialization; converse is the finite-type argument). Deps checked: IsNoetherianRing, IsAdicComplete (equivalent to bijective AdicCompletion.of), IsQuasiExcellent in ExcellentRing (same universe u for A and A⧸J). Edge cases J=0, J=⊤ (zero ring), nilpotent J are covered; no extra hypotheses. No existing duplicate. sorry-only proof; docstrings carry the source, the blueprint id and all 10 steps; public imports are the statement deps and plain imports are the recorded proof-dep modules; record statement is verbatim; node diff is lean only; report sections present. Not recompiled per instruction."
+ }
+}

@@ -1,0 +1,175 @@
+{
+ "id": "lem-sfb-closed-test-scalar-universal-coherence",
+ "kind": "statement",
+ "title": "Universal scalar comparison equations",
+ "statement": "Let $\\Lambda,S$ be commutative condensed rings and $c:\\Lambda\\to S$ a morphism of ring objects [sk-def-sfb-condensed-ring, sk-def-sfb-coefficient-morphisms]. Use the specified exact restriction of scalars, universal right-derived comparisons and section arrows [def-sfb-closed-test-scalar-comparison-maps] and the specified models and comparison maps [def-sfb-closed-test-scalar-model-diagrams]. Then UniversalCoherence(c) holds: its five equations express normalization against the right-derived unit on every complex, compatibility with the derived adjunction unit and counit, compatibility with pullback composition, and compatibility with the unit-square-counit exchange for every commutative scheme square [def-sfb-closed-test-derived-exchange-maps]. No flatness or preservation of K-injectives by restriction is assumed; no direct-image comparison is inverted.",
+ "source": {
+  "document": "literature/stacks-project/derived.tex",
+  "place": "Tags 070I, 070Y, 09T5; sites-cohomology.tex Tags 07A6, 0D6F, 0FPI; proetale.tex Tag 09BL. Parent argument specialized to this step."
+ },
+ "stmt_deps": [
+  "sk-def-sfb-condensed-ring",
+  "sk-def-sfb-coefficient-morphisms",
+  "def-sfb-closed-test-scalar-comparison-maps",
+  "def-sfb-closed-test-scalar-model-diagrams",
+  "def-sfb-closed-test-derived-exchange-maps"
+ ],
+ "proof": [
+  {
+   "text": "Write $R_Y=\\Lambda_Y$, $S_Y=\\Lambda'_Y$, and $r_Y=\\operatorname{Res}_Y$. The coefficient square for any $b:Y'\\to Y$ commutes: $c_{Y'}\\alpha_{b,R}=\\alpha_{b,S}b^{-1}c_Y$, since $\\alpha_b$ is the component at the coefficient ring of one natural pullback-composition isomorphism. Pass to reconstructed section-ring modules. The internal/section equivalences preserve underlying sections, and identify scalar restriction, the specified geometric adjunctions, their derived resolution transformations and pullback compositors. Thus the hypotheses of the ring-sheaf change-adjunction lemma hold for these $R,S,c$. All subsequent equations can be checked there and transported back with their specified normalizations.",
+   "uses": [
+    "sk-def-sfb-coefficient-morphisms",
+    "lem-sfb-internal-section-scalar-adjunction",
+    "lem-pd-section-derived-pushpull-normalization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 07A6 (lemma-adjoint), 0FPI (lemma-adjoints-push-pull-compatibility); internal/section scalar identification as in the cited nodes."
+   }
+  },
+  {
+   "text": "Apply the exact-square right-derived-unit lemma with $F=b_{*,S}$, $G=b_{*,R}$, $U=r_{Y'}$, $V=r_Y$ and the ordinary sectionwise identity. It gives precisely $\\delta_b:r_YRb_{*,S}\\to Rb_{*,R}r_{Y'}$. Apply it also with $F=\\Gamma_S(W,-)$, $G=\\Gamma_R(W,-)$ and $V=\\mathrm{id}_{\\operatorname{Ab}}$, giving $\\gamma_W$. If $\\alpha^S,\\alpha^R$ denote computation units, their defining equations are $\\delta_{b,QP}\\,r_Y\\alpha^S_P=\\alpha^R_{r_{Y'}P}$ and $\\gamma_{W,QP}\\alpha^S_{W,P}=\\alpha^R_{W,r_YP}$, with the degreewise section identities understood. These equations characterize the comparisons uniquely. In particular, for an $S$-K-injective $J$ the comparison is computed by a further $R$-K-injective resolution of $rJ$ and its computation unit; $rJ$ is never declared K-injective. Exactness of restriction, not preservation of K-injectives, is the hypothesis used here.",
+   "uses": [
+    "lem-sfb-exact-square-right-derived-unit",
+    "def-sfb-right-derived-functor",
+    "sk-def-sfb-change-of-scalars"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 070Y (lemma-K-injective-defined); exact-square comparison with its universal computation-unit normalization."
+   }
+  },
+  {
+   "text": "Use the forward direct-image comparison $d$ of the ring-sheaf change-adjunction lemma. It is the derived comparison induced by the equal ordinary composites $r_Yb_{*,S}=b_{*,R}r_{Y'}$, so has the computation-unit normalization of step 2 and hence is $\\delta_b$, by that uniqueness. Use only its forward morphism. Suppress the canonical identification $r_{Y'}b_S^*\\cong b_R^*r_Y$ supplied by the same lemma. Apply its adjunct identity first to $t=\\mathrm{id}_{b_S^*M}$ and then to $t=\\varepsilon^S_{b,N}$. This gives respectively\n$$\\delta_{b,b_S^*M}\\,r_Y(\\eta^S_{b,M})=\\eta^R_{b,r_YM},\\qquad r_{Y'}(\\varepsilon^S_{b,N})=\\varepsilon^R_{b,r_{Y'}N}\\,b_R^*(\\delta_{b,N}).$$\nThese are the specified derived unit and counit equations. No inverse to a derived scalar comparison occurs.",
+   "uses": [
+    "lem-weil-pbc-ring-sheaf-change-adjunction",
+    "def-sfb-right-derived-functor"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 0D6D (lemma-derived-pullback-composition), 0D6E (lemma-derived-pushforward-composition), 07A6 (lemma-adjoint); forward comparison and its adjunct equation."
+   }
+  },
+  {
+   "text": "The ordinary pullback comparisons and their scalar-restriction squares commute before deriving: both paths apply the same inverse image to the same underlying sheaf map and identify the coefficient action using $\\alpha_{b,R},\\alpha_{b,S}$. For two composable maps this is the same geometric inverse-image compositor, with the coefficient square of step 1. The section-module scalar comparison leaves the underlying restriction map unchanged. Termwise exact descent therefore gives these same squares in the derived categories; the internal/section normalization identifies their pullback compositors with the specified derived ones. ",
+   "uses": [
+    "sk-def-sfb-coefficient-morphisms",
+    "lem-sfb-internal-section-scalar-adjunction",
+    "lem-pd-section-derived-pushpull-normalization"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Let $L_b=b_R^*$, $G_b=Rb_{*,R}$, and use primes for $S$-coefficients. Suppress the exact pullback/scalar identifications of step 4. The actual exchange is $\\operatorname{Ex}=G_{f_Z}(h^*\\varepsilon_f\\circ\\theta)\\circ\\eta_{f_Z}$, where $\\theta:f_Z^*s^*\\cong h^*f^*$. Start with $\\delta_{f_Z,h'^*N}\\,r_Z\\operatorname{Ex}'_N$. Naturality of $\\delta_{f_Z}$ moves it past $r_{X_Z}(h'^*\\varepsilon'_f\\circ\\theta')$. Substitute the counit equation of step 3 for $f$, the compositor square of step 4 for $\\theta'$, and the unit equation of step 3 for $f_Z$. Naturality of $\\eta_{f_Z}$ then yields\n$$\\delta_{f_Z,h'^*N}\\,r_Z\\operatorname{Ex}'_N=\\operatorname{Ex}_{r_XN}\\,s_R^*(\\delta_{f,N}).$$\nBoth sides go from $s_R^*r_URf_{*,S}N$ to $R(f_Z)_{*,R}h_R^*r_XN$. This is a substitution in the displayed unit--square--counit formula, and does not cancel either $\\delta$.",
+   "uses": [
+    "lem-weil-pbc-ring-sheaf-change-adjunction",
+    "lem-sfb-closed-test-chain-mate-restriction"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 07A6 (lemma-adjoint); expand the specified exchange as unit, pullback-square comparison, counit."
+   }
+  }
+ ],
+ "proof_deps": [
+  "sk-def-sfb-coefficient-morphisms",
+  "lem-sfb-internal-section-scalar-adjunction",
+  "lem-pd-section-derived-pushpull-normalization",
+  "lem-sfb-exact-square-right-derived-unit",
+  "def-sfb-right-derived-functor",
+  "sk-def-sfb-change-of-scalars",
+  "lem-weil-pbc-ring-sheaf-change-adjunction",
+  "lem-sfb-closed-test-chain-mate-restriction"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/derived.tex",
+  "place": "Tags 070I, 070Y and 09T5; assembly of parent proof steps."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Restriction of scalars commutes with universal derived comparison units and section models",
+   "results": "8 hits: RestrictScalars, AlgHom.restrictScalars, PresheafOfModules.restrictScalarsObj, ModuleCat.restrictScalars, Submodule.restrictScalars, ModuleCat.RestrictScalars.obj', LinearMap.restrictScalarsₗ, PresheafOfModules.restrictScalars",
+   "date": "2026-10-25",
+   "verdict": "No normalized closed-test derived comparison theorem."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"rightDerivedFunctorUnitQ\"",
+   "results": "0 hits",
+   "date": "2026-10-25",
+   "verdict": "No Mathlib total derived computation-unit API. The source library has the API used here."
+  },
+  {
+   "tool": "grep",
+   "query": "restrictScalars",
+   "results": "25 hits, primarily scalar towers and linear maps in number theory, no closed-test models.",
+   "date": "2026-10-25",
+   "verdict": "No exact match. Additional rg of Sheaf and WeilConjectures found the normalized-model predicates and rightDerivedPullback calculus."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.ClosedTestScalarModelCoherence",
+  "date": "2026-10-25",
+  "group": "S9"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "Paragraph (3), identify the closed-base-change mate with restriction on the full integral root tower; its geometric invertibility is proved separately; returned closed-test proof steps 10, 11: Universal coefficient comparison for closed-test models; Universal scalar comparison equations",
+   "via": [
+    "lem-sfb-closed-test-scalar-model-coherence",
+    "lem-sfb-closed-test-derived-exchange-model",
+    "lem-sfb-integral-lisse-closed-base-change",
+    "lem-sfb-root-tower-boundary-acyclicity",
+    "lem-sfb-tame-stratum-kummer-descent",
+    "lem-sfb-continuous-algcl-tame-boundary-comparison",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.ClosedTestScalarUniversalCoherence",
+  "file": "lean/Sheaf/Paper/ClosedTestScalarUniversalCoherence.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.ClosedTestScalarModelCoherence.closed_test_scalar_universal_coherence",
+  "statement": "theorem closed_test_scalar_universal_coherence : UniversalCoherence c",
+  "branch": "sheaf-dag",
+  "by": "S9",
+  "date": "2026-10-25"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S9",
+  "result": "pass",
+  "landing": "20261025T101407-L-3688871",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S9",
+  "result": "pass",
+  "landing": "20261025T101407-L-3688871",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

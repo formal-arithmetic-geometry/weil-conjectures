@@ -1,0 +1,285 @@
+{
+ "id": "lem-sfb-integral-quotient-resolution-normalization",
+ "kind": "statement",
+ "title": "Actual integral finite-quotient augmentation and perfect coefficient realization",
+ "statement": "Fix a prime $\\ell$, a finite extension $E/\\mathbf Q_\\ell$, its valuation ring $A=\\mathcal O_E$ and a chosen uniformizer $\\pi$ [def-weil-l-adic-coefficient-extension]. For any scheme $T$, use its small pro-etale site [def-weil-pbc-proetale-site] and put $R_T=p_T^*\\underline A$ [sk-def-sfb-pulled-back-coefficients]. For $j\\geq1$ let $S_{j,T}=(A/\\pi^j)_T$ be the constant finite ring sheaf, with the actual projection $q_{j,T}:R_T\\to S_{j,T}$ obtained by pulling back the condensed continuous quotient map [def-sfb-integral-quotient-coefficients]. Use internal module objects and their ordinary unbounded derived category [sk-def-sfb-module-objects, def-weil-abstract-derived-category], flat modules and K-flat complexes [def-pc-flat-sheaf-modules, def-pc-kflat-complex].\n\nThe ring $A$ is commutative Noetherian, $\\pi^j\\ne0$, and every $A/\\pi^j$ is finite and has the finite free $A$-resolution $[A\\xrightarrow{\\pi^j}A]$ in degrees $-1,0$. There is a canonical ring-sheaf isomorphism $R_T\\cong\\varprojlim_{j\\geq1}S_{j,T}$ identifying every finite projection with $q_{j,T}$. The sheaf $R_T$ is flat over the constant sheaf $\\underline A_T$, and multiplication by $\\pi^j$ on $R_T$ is injective. The actual map $q_{j,T}$ induces $R_T/\\pi^jR_T\\cong S_{j,T}$. The complex $C_{j,T}=[R_T\\xrightarrow{\\pi^j}R_T]$, in degrees $-1,0$, has flat terms and is K-flat; its augmentation $C_{j,T}\\to\\operatorname{Res}_{q_{j,T}}S_{j,T}[0]$ with degree-zero component exactly $q_{j,T}$ is a quasi-isomorphism. These statements hold internally and under the fixed internal/section module equivalence [def-weil-pbc-internal-abelian-sheaf-module-equivalence].",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sfb-proper-base-change/sk-thm-sfb-proper-base-change-integral.proof.md",
+  "place": "Paragraph (1), integral torsion-free cone argument; extracted old step 1. Stacks sites-modules.tex Tags 093M (lemma-completion-flat), 093J (lemma-constant-exact); sites-cohomology.tex Tag 06YQ (lemma-bounded-flat-K-flat)."
+ },
+ "stmt_deps": [
+  "def-weil-l-adic-coefficient-extension",
+  "def-weil-pbc-proetale-site",
+  "sk-def-sfb-pulled-back-coefficients",
+  "def-sfb-integral-quotient-coefficients",
+  "sk-def-sfb-module-objects",
+  "def-weil-abstract-derived-category",
+  "def-pc-flat-sheaf-modules",
+  "def-pc-kflat-complex",
+  "def-weil-pbc-internal-abelian-sheaf-module-equivalence",
+  "def-weil-pbc-constant-sheaf",
+  "def-weil-pbc-noetherian-ring",
+  "def-pur-sheaf-inverse-limit",
+  "def-pc-cochain-complex-modules",
+  "def-pc-quasi-iso-modules",
+  "def-pc-sheaf-restrict-scalars",
+  "def-weil-size-convention",
+  "def-weil-completed-integral-coefficients",
+  "def-pe-finite-discrete-presentation-encoding",
+  "def-sfb-section-scalar-map-data",
+  "def-sfb-coefficient-map"
+ ],
+ "proof": [
+  {
+   "text": "Use the recorded DVR structure to obtain the principal-ideal-ring instance and apply Mathlib Noetherianity of a PID. The chosen uniformizer generates the nonzero maximal ideal, so it and all its positive powers are nonzero. Use the finite coefficient-quotient theorem. Domain cancellation proves injectivity, and Ideal.span_singleton_pow and Ideal.mem_span_singleton identify the kernel of the actual quotient map with the image of multiplication; quotient surjectivity completes the arithmetic exact sequence.",
+   "uses": [
+    "lem-weil-l-adic-extension-integers-dvr",
+    "lem-weil-valued-dvr-finite-quotients"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Construct the short exact sequence first on continuous condensed coefficients. On each profinite test space, nonzero-scalar cancellation gives injectivity; a set-theoretic lift from the discrete finite quotient is continuous and gives surjectivity. Continuous uniformizer division identifies the kernel with the image. The sectionwise exactness and point-pullback finite-limit helpers from the proved derived-Nakayama module transfer this short exact sequence to the actual pulled-back maps. Reflect along the faithful exact internal-module forgetful functor. Thus the specified projection, rather than an abstract quotient isomorphism, is the cokernel of the specified multiplication.",
+   "uses": [
+    "lem-sfb-continuous-uniformizer-division",
+    "det-pe-derived-nakayama-resolution",
+    "def-sfb-integral-quotient-coefficients"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply the integral coefficient-limit theorem with its profinite normalization. Use the section-ring reconstruction helpers from the normalized-restriction-square module to lift its monoidal comparison to a commutative ring-sheaf isomorphism. Check the actual reduction map on the point-adjunction unit and use the theorem's normalization of every profinite quotient. Normalized finite-discrete encodings identify the finite section ring with the ordinary constant ring. Faithfulness of forgetting commutative ring structure proves the required projection square. Forget commutativity and invert the finite comparison to obtain exactly alpha and c in the statement.",
+   "uses": [
+    "det-prop-sfb-qlbar-colimit-x-integral-limit",
+    "lem-pe-integral-normalized-restriction-squares",
+    "lem-sf-finite-discrete-normalized-encoding",
+    "def-pe-finite-discrete-presentation-encoding"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Let I be the ideal generated by the lifted uniformizer in ULift A. The explicit quotient equivalence ULift A/I^(n+1) = ULift(A/(pi^(n+1))) intertwines the transition homomorphisms. It gives an isomorphism of the adic constant tower with the actual finite coefficient tower and hence of their limits, commuting with projections. The constant map has the canonical finite composites. Apply flat_presented_completion from the completed-constant-algebra theorem, using Noetherianity transported to ULift A. The fixed section equivalence carries the internal regular module to the unit section module; transport site-flatness along that isomorphism.",
+   "uses": [
+    "lem-weil-pbc-completed-constant-algebra-flat-quotients",
+    "lem-pe-internal-section-tensor-comparison",
+    "def-weil-pbc-internal-abelian-sheaf-module-equivalence"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The cone of the degree-zero multiplication has one regular module in degree -1, one in degree 0, and zero terms elsewhere, by the standard cone biproduct decomposition. Unit flatness and these identifications make every term flat. The same support gives strict bounds [-1,0]. Apply the proved source bounded-flat K-flat criterion internally. The internal/section tensor comparison gives site-flatness of the section terms, and the independent-universe bounded-above flat criterion gives their K-flatness.",
+   "uses": [
+    "lem-sfb-bounded-above-flat-kflat",
+    "lem-weil-pbc-independent-bounded-flat-kflat",
+    "lem-pe-internal-section-tensor-comparison"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply the degree-zero single functor to the short exact sequence of step 2. Mathlib mappingCone.descShortComplex is the augmentation, mappingCone.inr_descShortComplex gives its composite with the unshifted inclusion exactly equal to the given quotient map, and mappingCone.quasiIso_descShortComplex proves it is a quasi-isomorphism. The exact section equivalence preserves homology, hence preserves this quasi-isomorphism. This proves every assertion about the original cone and actual augmentation in the ordinary unbounded categories.",
+   "uses": [
+    "lem-pc-cone-short-exact-quasi-iso",
+    "def-weil-pbc-internal-abelian-sheaf-module-equivalence"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-l-adic-extension-integers-dvr",
+  "lem-weil-valued-dvr-finite-quotients",
+  "lem-sfb-continuous-uniformizer-division",
+  "det-pe-derived-nakayama-resolution",
+  "def-sfb-integral-quotient-coefficients",
+  "det-prop-sfb-qlbar-colimit-x-integral-limit",
+  "lem-pe-integral-normalized-restriction-squares",
+  "lem-sf-finite-discrete-normalized-encoding",
+  "def-pe-finite-discrete-presentation-encoding",
+  "lem-weil-pbc-completed-constant-algebra-flat-quotients",
+  "lem-pe-internal-section-tensor-comparison",
+  "def-weil-pbc-internal-abelian-sheaf-module-equivalence",
+  "lem-sfb-bounded-above-flat-kflat",
+  "lem-weil-pbc-independent-bounded-flat-kflat",
+  "lem-pc-cone-short-exact-quasi-iso"
+ ],
+ "proof_origin": {
+  "by": "F2",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sfb-proper-base-change/sk-thm-sfb-proper-base-change-integral.proof.md",
+  "place": "Paragraph (1), torsion-free coefficient cone. The Lean proof checks exactness on continuous sections, normalizes the actual projection through the integral-limit theorem, transports constant-completion flatness using an explicit ULift quotient-tower isomorphism, and uses the existing bounded-flat criteria and canonical short-exact cone augmentation."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For the ring of integers of a finite l-adic field extension, the actual finite quotient projection on pulled back condensed sheaves is augmented by the two term flat K-flat uniformizer power resolution and gives an admissible perfect finite coefficient system",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"BDeRhamPlus\", \"module\": \"Mathlib/RingTheory/Perfectoid/BDeRham\", \"type\": \"(R : Type u) →\\n  [inst : CommRing R] →\\n    (p : ℕ) → [Fact (Nat.Prime p)] → [Fact ¬IsUnit ↑p] → [IsAdicComplete (Ideal.span {↑p}) R] → Type u\", \"doc\": \"The adic completion of the kernel of the Fontaine theta homomorphism (which inverts the prime $ p $) in the localization of Witt vectors away from $ p $.\"}\n  {\"name\": \"instCommRingBDeRhamPlus\", \"module\": \"Mathlib/RingTheory/Perfectoid/BDeRham\", \"type\": \"(R : Type u) →\\n  [inst : CommRing R] →\\n    (p : ℕ) →\\n      [inst_1 : Fact (Nat.Prime p)] →\\n        [inst_2 : Fact ¬IsUnit ↑p] → [inst_3 : IsAdicComplete (Ideal.span {↑p}) R] → CommRing (BDeRhamPlus R p)\", \"doc\": \"The adic completion of the kernel of the Fontaine theta homomorphism (which inverts the prime $ p $) in the localization of Witt vectors away from $ p $ is equipped with a canonical commutative ring s\"}\n  {\"name\": \"BDeRham\", \"module\": \"Mathlib/RingTheory/Perfectoid/BDeRham\", \"type\": \"(R : Type u) →\\n  [inst : CommRing R] →\\n    (p : ℕ) → [Fact (Nat.Prime p)] → [Fact ¬IsUnit ↑p] → [IsAdicComplete (Ideal.span {↑p}) R] → Type u\", \"doc\": \"The ring $\\\\mathbb{B}_{\\\\mathrm{dR}}^+$ is constructed as the localization of the adic completion of the kernel of the Fontaine theta homomorphism $\\\\Theta: \\\\mathbb{W}(R^\\\\flat) \\\\to R$ (which inverts the \"}\n  {\"name\": \"WittVector.factorPowSucc_comp_fontaineThetaModPPow\", \"module\": \"Mathlib/RingTheory/Perfectoid/FontaineTheta\", \"type\": \"∀ {R : Type u} [inst : CommRing R] {p : ℕ} [inst_1 : Fact (Nat.Prime p)] [inst_2 : Fact ¬IsUnit ↑p]\\n  [IsAdicComplete (Ideal.span {↑p}) R] (n : ℕ),\\n  (Ideal.Quotient.factorPowSucc (Ideal.span {↑p}) (n + 1)).comp (WittVector.fontaineThetaModPPow R p (n + 1)) =\\n    WittVector.fontaineThetaModPPow R p \", \"doc\": \"For any natural number $n$, the composition of the canonical quotient homomorphism $R/(p^{n+2}) \\\\to R/(p^{n+1})$ with the Fontaine theta function $\\\\theta_{n+1}$ modulo $p^{n+1}$ equals the Fontaine th\"}\n  {\"name\": \"IsDedekindDomain.instDFunLikeFiniteAdeleRingHeightOneSpectrumAdicCompletion\", \"module\": \"Mathlib/RingTheory/DedekindDomain/FiniteAdeleRing\", \"type\": \"(R : Type u_1) →\\n  [inst : CommRing R] →\\n    [inst_1 : IsDedekindDomain R] →\\n      (K : Type u_2) →\\n        [inst_2 : Field K] →\\n          [inst_3 : Algebra R K] →\\n            [inst_4 : IsFractionRing R K] →\\n              DFunLike (IsDedekindDomain.FiniteAdeleRing R K) (IsDedekindDomain.HeightOneSpe\", \"doc\": \"The finite adele ring of a Dedekind domain $ R $ with fraction field $ K $ is canonically isomorphic to the dependent function space over the height one prime ideals of $ R $, where each component is \"}\n  {\"name\": \"PreTilt.exists_smodEq_untiltAux\", \"module\": \"Mathlib/RingTheory/Perfectoid/Untilt\", \"type\": \"∀ {O : Type u_1} [inst : CommRing O] {p : ℕ} [inst_1 : Fact (Nat.Prime p)] [inst_2 : Fact ¬IsUnit ↑p]\\n  [IsPrecomplete (Ideal.span {↑p}) O] (x : PreTilt O p),\\n  ∃ y, ∀ (n : ℕ), x.untiltAux n ≡ y [SMOD Ideal.span {↑p} ^ n • ⊤]\", \"doc\": \"For any element $ x $ in the pretilt $ \\\\mathrm{PreTilt}(O, p) $, there exists an element $ y $ such that for all natural numbers $ n $, the value $ \\\\text{untiltAux}(x, n) $ is congruent to $ y $ modul\"}\n  {\"name\": \"IsDedekindDomain.FiniteAdeleRing.instDFunLikeHeightOneSpectrumAdicCompletion\", \"module\": \"Mathlib/RingTheory/DedekindDomain/FiniteAdeleRing\", \"type\": \"(R : Type u_1) →\\n  [inst : CommRing R] →\\n    [inst_1 : IsDedekindDomain R] →\\n      (K : Type u_2) →\\n        [inst_2 : Field K] →\\n          [inst_3 : Algebra R K] →\\n            [inst_4 : IsFractionRing R K] →\\n              DFunLike (IsDedekindDomain.FiniteAdeleRing R K) (IsDedekindDomain.HeightOneSpe\", \"doc\": \"The finite adele ring of a Dedekind domain $ R $ is equipped with a dependent function structure over the set of height one prime ideals of $ R $, mapping each prime ideal to its adic completion of th\"}\n  {\"name\": \"PreTilt.mk_comp_untilt_eq_coeff_zero\", \"module\": \"Mathlib/RingTheory/Perfectoid/Untilt\", \"type\": \"∀ {O : Type u_1} [inst : CommRing O] {p : ℕ} [inst_1 : Fact (Nat.Prime p)] [inst_2 : Fact ¬IsUnit ↑p]\\n  [inst_3 : IsAdicComplete (Ideal.span {↑p}) O],\\n  ⇑(Ideal.Quotient.mk (Ideal.span {↑p})) ∘ ⇑PreTilt.untilt = ⇑(PreTilt.coeff 0)\", \"doc\": \"The composition of the canonical quotient ring homomorphism from $ O $ to $ O/(p) $ with the untilt homomorphism from the pretilt $ \\\\mathrm{PreTilt}(O, p) $ to $ O $ is equal to the 0th coefficient ho\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits are constituent ordinary module or formal mate constructions; they do not state this normalized unbounded internal-module comparison"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"mappingCone\", \"QuasiIso\", \"flat\"",
+   "results": "[loogle] OK 0 hit(s)",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits are constituent ordinary module or formal mate constructions; they do not state this normalized unbounded internal-module comparison"
+  },
+  {
+   "tool": "grep",
+   "query": "uniformizer|Uniformizer|coefficientExtensionRing",
+   "results": "[grep] OK 5 hit(s)\n  {\"file\": \"Mathlib/NumberTheory/NumberField/Completion/FinitePlace.lean\", \"line\": \"82\", \"text\": \"    obtain ⟨π, hπ⟩ := v.valuation_exists_uniformizer K\"}\n  {\"file\": \"Mathlib/NumberTheory/RatFunc/Ostrowski.lean\", \"line\": \"188\", \"text\": \"lemma uniformizingPolynomial_isUniformizer [hv : IsRankOneDiscrete v] :\"}\n  {\"file\": \"Mathlib/NumberTheory/RatFunc/Ostrowski.lean\", \"line\": \"189\", \"text\": \"    v.IsUniformizer πᵥ := by\"}\n  {\"file\": \"Mathlib/NumberTheory/RatFunc/Ostrowski.lean\", \"line\": \"191\", \"text\": \"  rw [IsUniformizer, ← hv.valueGroup_genLTOne_eq_generator, ← h0.isUnit.unit_spec, Units.val_inj]\"}\n  {\"file\": \"Mathlib/NumberTheory/RatFunc/Ostrowski.lean\", \"line\": \"219\", \"text\": \"      have hpi : v.IsUniformizer (pi : RatFunc K) := uniformizingPolynomial_isUniformizer hle\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits are constituent ordinary module or formal mate constructions; they do not state this normalized unbounded internal-module comparison"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The inverse limit of constant finite uniformizer quotients is flat over the constant DVR and its quotient has the canonically augmented two term free resolution",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AdicCompletion.flat_of_isNoetherian\", \"module\": \"Mathlib.RingTheory.AdicCompletion.AsTensorProduct\", \"type\": \"∀ {R : Type u} [inst : CommRing R] (I : Ideal R) [IsNoetherianRing R], Module.Flat R (AdicCompletion I R)\", \"doc\": \"If $ R $ is a Noetherian commutative ring and $ I $ is an ideal of $ R $, then the $ I $-adic completion of $ R $, defined as the inverse limit $ \\\\varprojlim R/I^n $, is a flat $ R $-module.\"}\n  {\"name\": \"ProfiniteGrp.isIso_toLimit\", \"module\": \"Mathlib.Topology.Algebra.Category.ProfiniteGrp.Limits\", \"type\": \"(P : ProfiniteGrp.{u}) : IsIso (toLimit P)\", \"doc\": \"For any profinite group $P$, the canonical continuous group homomorphism from $P$ to the inverse limit of its finite quotient groups (indexed by open normal subgroups) is an isomorphism. This establis\"}\n  {\"name\": \"Profinite.isIso_asLimitCone_lift\", \"module\": \"Mathlib.Topology.Category.Profinite.AsLimit\", \"type\": \": IsIso ((limitConeIsLimit.{u, u} X.diagram).lift X.asLimitCone)\", \"doc\": \"For any profinite space $X$, the canonical morphism from the cone exhibiting $X$ as the inverse limit of its discrete quotients to the limit cone in the category of profinite spaces is an isomorphism.\"}\n  {\"name\": \"Profinite.asLimit\", \"module\": \"Mathlib.Topology.Category.Profinite.AsLimit\", \"type\": \": CategoryTheory.Limits.IsLimit X.asLimitCone\", \"doc\": \"The profinite space $X$ is canonically isomorphic to the projective limit of its discrete quotient spaces in the category of profinite spaces, established by showing its limit cone is isomorphic to th\"}\n  {\"name\": \"Module.Flat.finsupp\", \"module\": \"Mathlib.RingTheory.Flat.Basic\", \"type\": \"(ι : Type v) : Flat R (ι →₀ R)\", \"doc\": \"For any index type $\\\\iota$, the module of finite support functions $\\\\iota \\\\to_0 R$ is flat over the commutative semiring $R$.\"}\n  {\"name\": \"Profinite.lim\", \"module\": \"Mathlib.Topology.Category.Profinite.AsLimit\", \"type\": \": Limits.LimitCone X.diagram\", \"doc\": \"The profinite space $ X $ is canonically isomorphic to the projective limit of its discrete quotient spaces in the category of profinite spaces, established by showing its limit cone is isomorphic to \"}\n  {\"name\": \"Profinite.asLimitConeIso\", \"module\": \"Mathlib.Topology.Category.Profinite.AsLimit\", \"type\": \": X.asLimitCone ≅ limitCone.{u, u} _\", \"doc\": \"The isomorphism between the limit cone of a profinite space $X$ and the canonical inverse limit construction of its discrete quotients in the category of profinite spaces, establishing that $X$ is can\"}\n  {\"name\": \"AdicCompletion\", \"module\": \"Mathlib.RingTheory.AdicCompletion.Basic\", \"type\": \"{R : Type u_1} → [inst : CommRing R] → Ideal R → (M : Type u_4) → [inst_1 : AddCommGroup M] → [Module R M] → Type u_4\", \"doc\": \"The adic completion of an $ R $-module $ M $ with respect to an ideal $ I $ of a commutative ring $ R $ is the inverse limit of the quotient modules $ M/I^nM $, where $ I^n $ denotes the $ n $th power\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits are constituent ordinary module or formal mate constructions; they do not state this normalized unbounded internal-module comparison"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A completed constant l-adic integral coefficient sheaf has finite perfect quotients resolved by the cone of uniformizer multiplication with the actual quotient augmentation",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"BDeRhamPlus\", \"module\": \"Mathlib/RingTheory/Perfectoid/BDeRham\", \"type\": \"(R : Type u) →\\n  [inst : CommRing R] →\\n    (p : ℕ) → [Fact (Nat.Prime p)] → [Fact ¬IsUnit ↑p] → [IsAdicComplete (Ideal.span {↑p}) R] → Type u\", \"doc\": \"The adic completion of the kernel of the Fontaine theta homomorphism (which inverts the prime $ p $) in the localization of Witt vectors away from $ p $.\"}\n  {\"name\": \"instCommRingBDeRhamPlus\", \"module\": \"Mathlib/RingTheory/Perfectoid/BDeRham\", \"type\": \"(R : Type u) →\\n  [inst : CommRing R] →\\n    (p : ℕ) →\\n      [inst_1 : Fact (Nat.Prime p)] →\\n        [inst_2 : Fact ¬IsUnit ↑p] → [inst_3 : IsAdicComplete (Ideal.span {↑p}) R] → CommRing (BDeRhamPlus R p)\", \"doc\": \"The adic completion of the kernel of the Fontaine theta homomorphism (which inverts the prime $ p $) in the localization of Witt vectors away from $ p $ is equipped with a canonical commutative ring s\"}\n  {\"name\": \"BDeRham\", \"module\": \"Mathlib/RingTheory/Perfectoid/BDeRham\", \"type\": \"(R : Type u) →\\n  [inst : CommRing R] →\\n    (p : ℕ) → [Fact (Nat.Prime p)] → [Fact ¬IsUnit ↑p] → [IsAdicComplete (Ideal.span {↑p}) R] → Type u\", \"doc\": \"The ring $\\\\mathbb{B}_{\\\\mathrm{dR}}^+$ is constructed as the localization of the adic completion of the kernel of the Fontaine theta homomorphism $\\\\Theta: \\\\mathbb{W}(R^\\\\flat) \\\\to R$ (which inverts the \"}\n  {\"name\": \"WittVector.isAdicCompleteIdealSpanP\", \"module\": \"Mathlib/RingTheory/WittVector/Complete\", \"type\": \"∀ {p : ℕ} [hp : Fact (Nat.Prime p)] {k : Type u_1} [inst : CommRing k] [inst_1 : CharP k p] [PerfectRing k p],\\n  IsAdicComplete (Ideal.span {↑p}) (WittVector p k)\", \"doc\": \"The Witt vectors over $ k $ are adic complete with respect to the ideal generated by the prime $ p $. This means that the ring of Witt vectors $ \\\\mathbb{W}(k) $ is complete in the topology defined by \"}\n  {\"name\": \"AdicCompletion.instCommRing\", \"module\": \"Mathlib/RingTheory/AdicCompletion/Algebra\", \"type\": \"{R : Type u_1} → [inst : CommRing R] → (I : Ideal R) → CommRing (AdicCompletion I R)\", \"doc\": \"The $I$-adic completion of a commutative ring $R$ with respect to an ideal $I$ forms a commutative ring under component-wise operations induced by the inverse limit of the quotient rings $R/I^n$. The \"}\n  {\"name\": \"AdicCompletion.exists_smodEq_pow_smul_top_and_mkQ_eq\", \"module\": \"Mathlib/RingTheory/AdicCompletion/Functoriality\", \"type\": \"∀ {R : Type u_1} [inst : CommRing R] {I : Ideal R} {M : Type u_2} [inst_1 : AddCommGroup M] [inst_2 : Module R M]\\n  {N : Type u_3} [inst_3 : AddCommGroup N] [inst_4 : Module R N] {f : M →ₗ[R] N},\\n  Function.Surjective ⇑((I • ⊤).mkQ ∘ₗ f) →\\n    ∀ {x : M} {n : ℕ} {y : N ⧸ I ^ n • ⊤} {y' : N ⧸ I ^ (n +\", \"doc\": \"Given a surjective composition of the canonical quotient map $ N \\\\to N/(I^n \\\\bullet \\\\top) $ with an $ R $-linear map $ f: M \\\\to N $, for any $ x \\\\in M $, $ n \\\\in \\\\mathbb{N} $, and compatible elements \"}\n  {\"name\": \"PreTilt.exists_smodEq_untiltAux\", \"module\": \"Mathlib/RingTheory/Perfectoid/Untilt\", \"type\": \"∀ {O : Type u_1} [inst : CommRing O] {p : ℕ} [inst_1 : Fact (Nat.Prime p)] [inst_2 : Fact ¬IsUnit ↑p]\\n  [IsPrecomplete (Ideal.span {↑p}) O] (x : PreTilt O p),\\n  ∃ y, ∀ (n : ℕ), x.untiltAux n ≡ y [SMOD Ideal.span {↑p} ^ n • ⊤]\", \"doc\": \"For any element $ x $ in the pretilt $ \\\\mathrm{PreTilt}(O, p) $, there exists an element $ y $ such that for all natural numbers $ n $, the value $ \\\\text{untiltAux}(x, n) $ is congruent to $ y $ modul\"}\n  {\"name\": \"AdicCompletion.exists_smodEq_pow_smul_top_and_smodEq_pow_add_one_smul_top\", \"module\": \"Mathlib/RingTheory/AdicCompletion/Functoriality\", \"type\": \"∀ {R : Type u_1} [inst : CommRing R] {I : Ideal R} {M : Type u_2} [inst_1 : AddCommGroup M] [inst_2 : Module R M]\\n  {N : Type u_3} [inst_3 : AddCommGroup N] [inst_4 : Module R N] {f : M →ₗ[R] N},\\n  Function.Surjective ⇑((I • ⊤).mkQ ∘ₗ f) →\\n    ∀ {x : M} {y : N} {n : ℕ},\\n      f x ≡ y [SMOD I ^ n • ⊤\", \"doc\": \"Given a surjective linear map $ f : M \\\\to N $ composed with the quotient map to $ N/(I^n \\\\cdot N) $, for any $ x \\\\in M $, $ y \\\\in N $, and natural number $ n $, if $ f(x) \\\\equiv y \\\\mod I^n \\\\cdot N $, \"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits are constituent ordinary module or formal mate constructions; they do not state this normalized unbounded internal-module comparison"
+  },
+  {
+   "tool": "grep",
+   "query": "KFlat|kFlat|completion.*flat",
+   "results": "[grep] OK 0 hit(s)",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits are constituent ordinary module or formal mate constructions; they do not state this normalized unbounded internal-module comparison"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AdicCompletion\", \"Flat\"",
+   "results": "AdicCompletion.flat_of_isNoetherian",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary adic-completion flatness or general profinite limits do not state the pulled-back ring-sheaf comparison with the actual finite quotient augmentation"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For l-adic integral continuous coefficient sheaves on a pro-etale site, completion is flat and the actual uniformizer quotient has a two term K-flat free resolution",
+   "results": "BDeRhamPlus; BDeRham; AdicCompletion.flat_of_isNoetherian; instCommRingBDeRhamPlus; Algebra.FormallySmooth.exists_adicCompletionEvalOneₐ_comp_eq; Algebra.Smooth.flat; Algebra.FormallySmooth.iff_injective_lTensor_residueField; Algebra.FormallySmooth.flat_of_algHom_of_isNoetherianRing",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary adic-completion flatness or general profinite limits do not state the pulled-back ring-sheaf comparison with the actual finite quotient augmentation"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The continuous integral coefficient ring sheaf is the inverse limit of finite uniformizer quotients with its actual projections and has a normalized two term free quotient resolution",
+   "results": "Profinite.asLimitCone; ProfiniteGrp.isIso_toLimit; Profinite.lim'; Profinite.asLimit'; ProfiniteGrp.toLimit_fun_continuous; ProfiniteGrp.continuousMulEquivLimittoFiniteQuotientFunctor; ProfiniteGrp.toLimit; Profinite.asLimitConeIso",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary adic-completion flatness or general profinite limits do not state the pulled-back ring-sheaf comparison with the actual finite quotient augmentation"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A flat algebra sheaf over the constant noetherian ring obtained as the inverse limit of finite quotients, with the canonical quotient augmentation of its two term complex",
+   "results": "AdicCompletion.flat_of_isNoetherian; Algebra.Smooth.flat_of_isNoetherianRing; Algebra.FormallySmooth.flat_of_algHom_of_isNoetherianRing; CondensedMod; localCohomology.diagram; Algebra.Smooth.flat; localCohomology.ringModIdeals; localCohomology",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary adic-completion flatness or general profinite limits do not state the pulled-back ring-sheaf comparison with the actual finite quotient augmentation"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-integral-quotient-direct-image-comparison",
+  "date": "2026-10-22",
+  "group": "NB"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sfb-proper-base-change",
+ "blueprint": {
+  "from": {
+   "node": "det-thm-sfb-proper-base-change-integral",
+   "place": "Paragraph (1), integral torsion-free cone argument; extracted old step 1.",
+   "via": [
+    "lem-sfb-integral-quotient-direct-image-comparison"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sfb-integral-quotient-resolution-normalization",
+  "worker": "stage1",
+  "summary": "Retained the statement. Used existing DVR, normalized ordinary coefficient-encoding, completed-constant flatness/quotient, cyclic-monomorphism and finite-free K-flat augmentation nodes. Read the normalized restriction square on the regular finite module at 1 to fix the actual projection. Used the exact tensor internal/section comparison for the final internal assertion. No new nodes.",
+  "blueprint": "det-thm-sfb-proper-base-change-integral, paragraph (1): expands the assertion that integral coefficients are uniformizer-torsion free and that finite reduction is the cone, with its actual quotient augmentation.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-l-adic-extension-integers-dvr",
+    "why": "Generic local-field structure theorem for the given coefficient ring; it does not replace the proper-base-change unit route."
+   },
+   {
+    "node": "lem-pe-integral-normalized-restriction-squares",
+    "why": "Ordinary coefficient presentation tool fixes the actual quotient maps for arbitrary schemes; the unit supplies no replacement for this coefficient comparison."
+   },
+   {
+    "node": "lem-weil-pbc-constant-completion-equivalence",
+    "why": "Only its degree-zero flatness and canonical quotient clauses are used as the generic Stacks 093M tool, not its derived-completeness equivalences."
+   },
+   {
+    "node": "lem-sfb-flat-scalar-cyclic-resolution",
+    "why": "Generic flat-algebra nonzero-scalar injectivity tool; it supplies no direct image or base-change conclusion."
+   },
+   {
+    "node": "lem-sfb-finite-free-mono-cokernel-kflat",
+    "why": "Generic coefficient or finite-free resolution tool below the unit proof; no replacement of a unit step."
+   },
+   {
+    "node": "lem-pe-internal-section-tensor-comparison",
+    "why": "Generic exact tensor equivalence transfers the displayed resolution between internal and section module conventions."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-l-adic-extension-integers-dvr",
+  "lem-pe-integral-normalized-restriction-squares",
+  "lem-pe-internal-section-tensor-comparison"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-N0-8b0c42711",
+  "group": "N0",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-N0-8b0c42711 (reviewer sub-agent of L); spot-checked: PASS, with no fixes and no dropped nodes. Checks before the maths: the item is still unsplit in live and side-live. It has no re-split repair note, and neither it nor any cited node is in the dropped list. Its statement is byte-identical to live. The 7 added stmt_deps are definitions of notions the statement uses. No cited node reaches the item, so there is no cycle. Source: the blueprint main-20261015 integral proper-base-change proof, paragraph (1), uses that the integral coefficient is π-torsion free so that reduction is the cone; the item is exactly this input. Stacks 093M (sites-modules.tex line 8261) gives flatness and the quotient for any site and Noetherian ring. Step 1: the DVR node (2)-(4), the PID-Noetherian node and the finite-quotients node apply; the coefficient-extension definition (1)-(3) supplies the nonarchimedean absolute value and the uniformizer hypotheses. Step 2: in the normalized restriction-squares theorem, the identity underlying map on the regular finite module, evaluated at 1, gives q = c∘pr∘α. c_j equals the constant comparison by the encoding's constant-scalar normalization, and n = j−1 is valid. Step 3: the constant-completion theorem applies on the small pro-étale site with I = (π); transporting the constant structure along α is naturality of the constant comparison and is acceptable. Step 4: the cyclic-resolution node's hypotheses (domain, a ≠ 0, flat) hold; only its injectivity clause is used. Step 5: the finite-free mono/cokernel node with m = n = 1 explicitly gives ε^0 = q, flat terms and K-flatness. Step 6: the internal/section tensor comparison explicitly preserves and reflects flatness, K-flatness and acyclicity, so the internal-category claim follows. Duplicate search: lem-pod-completed-integral-scalar-regular covers only the injectivity clause on B̂, and no node restates the item. Edge cases checked: T empty, j = 1, E = Q_ℓ, ramified E. The off-unit generic tool uses recorded in split_report.tool_uses are accepted."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.IntegralQuotientResolutionNormalization",
+  "declaration": "AlgebraicGeometry.ProEtale.IntegralQuotient.integral_quotient_resolution_normalization",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.IntegralQuotient.resolutionSectionRing",
+   "AlgebraicGeometry.ProEtale.IntegralQuotient.resolutionUnderlyingRing",
+   "AlgebraicGeometry.ProEtale.IntegralQuotient.resolutionFiniteRing",
+   "AlgebraicGeometry.ProEtale.IntegralQuotient.resolutionSectionEquivalence",
+   "AlgebraicGeometry.ProEtale.IntegralQuotient.resolutionConstantRing",
+   "AlgebraicGeometry.ProEtale.IntegralQuotient.integral_quotient_resolution_normalization"
+  ],
+  "file": "lean/Sheaf/Paper/IntegralQuotientResolutionNormalization.lean",
+  "statement": "theorem integral_quotient_resolution_normalization : IsNoetherianRing (Padic.coefficientExtensionIntegers l E) ∧ (∀ n : ℕ, Padic.coefficientExtensionUniformizer l E ^ (n + 1) ≠ 0 ∧ Finite (Padic.coefficientExtensionRing l E (n + 1)) ∧ Function.Injective (fun a : Padic.coefficientExtensionIntegers l E ↦ Padic.coefficientExtensionUniformizer l E ^ (n + 1) * a) ∧ Function.Exact (fun a : Padic.coefficientExtensionIntegers l E ↦ Padic.coefficientExtensionUniformizer l E ^ (n + 1) * a) (Ideal.Quotient.mk (Padic.coefficientExtensionIdeal l E (n + 1))) ∧ Function.Surjective (Ideal.Quotient.mk (Padic.coefficientExtensionIdeal l E (n + 1)))) ∧ ∀ T : Scheme.{u}, ∃ (α : resolutionUnderlyingRing l E T ≅ WeilConjectures.completedIntegralCoefficientSheafUnrestricted l E T) (c : ∀ n : ℕ, (sheafCompose (Scheme.ProEt.topology T) (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).obj (resolutionFiniteRing l E T n) ≅ WeilConjectures.integralCoefficientSheaf l E T n), (∀ (n : ℕ) (U : T.ProEtᵒᵖ) (a : ULift.{u + 1} (Padic.coefficientExtensionRing l E (n + 1))), (c n).inv.hom.app U ((toSheafify (Scheme.ProEt.topology T) ((Functor.const T.ProEtᵒᵖ).obj (CommRingCat.of (ULift.{u + 1} (Padic.coefficientExtensionRing l E (n + 1)))))).app U a) = (FiniteDiscreteOrdinary.canonicalAbelianMap (Padic.coefficientExtensionRing l E (n + 1)) T).hom.app U ((toSheafify (Scheme.ProEt.topology T) ((Functor.const T.ProEtᵒᵖ).obj (AddCommGrpCat.of (ULift.{u + 1} (Padic.coefficientExtensionRing l E (n + 1)))))).app U a)) ∧ (∀ n : ℕ, α.hom ≫ limit.π (WeilConjectures.integralCoefficientSheafSystem l E T) (op n) = (sheafCompose (Scheme.ProEt.topology T) (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).map (InternalAbelianSheafModule.sectionScalarMap.{u + 1, u + 1, u} (Scheme.ProEt.topology T) (coefficientMap (reduction l E n) T)) ≫ (c n).hom) ∧ SheafOfModules.IsFlatOnSite (J := Scheme.ProEt.topology T) (R := resolutionConstantRing l E T) ((SheafOfModules.restrictScalars (WeilConjectures.integralConstantToCompletionOfUniverses l E T ≫ α.inv)).obj ((resolutionSectionEquivalence l E T).functor.obj (Mod.regular (condensedRingObj (integral l E) T)))) ∧ ∀ n : ℕ, Mono (multiplication l E T n) ∧ (∃ h : multiplication l E T n ≫ projection l E T n = 0, Nonempty (IsColimit (CokernelCofork.ofπ (projection l E T n) h)) ∧ ((ShortComplex.mk (multiplication l E T n) (projection l E T n) h).map (resolutionSectionEquivalence l E T).functor).ShortExact) ∧ (∀ i : ℤ, exactFunctor _ _ (tensorRight ((resolution l E T n).X i))) ∧ (HomologicalComplex.quasiIso _ (.up ℤ)).kFlat (resolution l E T n) ∧ (∀ i : ℤ, SheafOfModules.IsFlatOnSite (J := Scheme.ProEt.topology T) (R := resolutionSectionRing l E T) ((resolutionSectionEquivalence l E T).functor.obj ((resolution l E T n).X i))) ∧ CochainComplex.IsKFlatIndependentCoefficients (((resolutionSectionEquivalence l E T).functor.mapHomologicalComplex (.up ℤ)).obj (resolution l E T n)) ∧ ∃ ε : resolution l E T n ⟶ (CochainComplex.singleFunctor _ 0).obj ((Mod.comap (coefficientMap (reduction l E n) T)).obj (Mod.regular (condensedRingObj (finite l E n) T))), CochainComplex.mappingCone.inr ((CochainComplex.singleFunctor _ 0).map (multiplication l E T n)) ≫ ε = (CochainComplex.singleFunctor _ 0).map (projection l E T n) ∧ QuasiIso ε ∧ QuasiIso (((resolutionSectionEquivalence l E T).functor.mapHomologicalComplex (.up ℤ)).map ε)",
+  "branch": "sheaf-dag",
+  "by": "NJ",
+  "date": "2026-10-22",
+  "existing": false,
+  "note": "The arithmetic resolution is the exact sequence A --pi^(n+1)--> A --> A/pi^(n+1), with both free terms literally A. Positive levels use n+1. The inverse-limit isomorphism and finite identifications are normalized by the actual quotient projections and constant-function maps. Flatness uses the constant scalar map transported along that normalized limit isomorphism. The existing internal cone and projection are retained, with the fixed section-action equivalence for all section assertions. Three already-landed statement dependencies expose the completed constant-scalar map, finite constant-function normalization, and reconstruction of the actual section-ring quotient map."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-b4225be8a",
+  "group": "NJ",
+  "result": "pass",
+  "note": "Re-delivery of the f4920bdbce7f RETURN (H2). The Lean module and lean record are byte-identical; the only node change is stmt_deps: the theorem lem-sfb-internal-section-scalar-adjunction is replaced by def-sfb-section-scalar-map-data (existing:true owner of the plain def sectionScalarMap), and def-sfb-coefficient-map (existing:true owner of coefficientMap) is added per the prior advisory. Both are on the base and in side-live. The side-live traversal finds no cycle. The item lean is still null live, with no repair note. Independent spot-check: j=n+1 indexing is consistent across finite/reduction/integralCoefficientSheaf/limit system; c n is pinned by the constant-section canonicalAbelianMap normalization and α by the limit projections = sectionScalarMap q ≫ c; constant-A flatness uses limit.lift ≫ α.inv; ε is pinned by mappingCone.inr ≫ ε = single(projection), with QuasiIso stated internally and on sections. Edge cases j=1, empty T, E=Q_l, l=2 are covered. Statement is verbatim, single sorry, docstrings OK, no hollow defs. No compile (nothing changed). Advisory: constant-A flatness and α are section-side only."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F2",
+  "result": "pass",
+  "landing": "20261025T011016-L-3634051",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

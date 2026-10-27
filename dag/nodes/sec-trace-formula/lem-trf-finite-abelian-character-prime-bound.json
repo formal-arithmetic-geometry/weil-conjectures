@@ -1,0 +1,304 @@
+{
+ "id": "lem-trf-finite-abelian-character-prime-bound",
+ "kind": "statement",
+ "title": "Prime-to-characteristic bound for finite abelian characters",
+ "statement": "Let $A$ be a finite abelian group, written multiplicatively, of order $n\\ge1$, and let $k$ be a field [def-weil-field]. Write $p=\\operatorname{char}(k)$. If $p>0$, put $n'$ equal to the largest divisor of $n$ relatively prime to $p$; if $p=0$, put $n'=n$. Let $X=\\operatorname{Hom}(A,k^\\times)$ be the group of group homomorphisms, with multiplication $(\\chi\\psi)(a)=\\chi(a)\\psi(a)$. Then $X$ is finite and $$|X|\\le n'.$$ No assumption that $k$ contains primitive roots of unity is imposed.",
+ "source": {
+  "document": "literature/gabber-ramero-almost-ring-theory-sixth-release.pdf",
+  "place": "Section 6.2.8, pairing (6.2.9), and Proposition 6.2.12, first paragraph on factoring characters through the maximal prime-to-p quotient (PDF pp.209–210, printed pp.207–208). General auxiliary finite-character bound extracted by the agent; local archival copy WANTED.",
+  "url": "https://pro.univ-lille.fr/fileadmin/user_upload/pages_pros/lorenzo_ramero/releaseLNM.pdf"
+ },
+ "stmt_deps": [
+  "def-weil-field"
+ ],
+ "proof": [
+  {
+   "text": "Apply [lem-trf-finite-abelian-cyclic-product] to choose $A\\simeq\\prod_{i\\in I}\\mathbf Z/d_i\\mathbf Z$ with $I$ finite and $d_i>1$. Let $g_i\\in A$ correspond to the tuple with entry $1\\bmod d_i$ in coordinate $i$ and $0$ elsewhere. Thus $g_i^{d_i}=1$, and every $a\\in A$ is $\\prod_i g_i^{b_i}$ for representatives $0\\le b_i<d_i$. Counting the tuples gives $n=\\prod_i d_i$.",
+   "uses": [
+    "lem-trf-finite-abelian-cyclic-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "Mathlib/GroupTheory/FiniteAbelian/Basic.lean",
+    "place": "CommGroup.equiv_prod_multiplicative_zmod_of_finite, lines 176–184; pinned source read in lean/.lake/packages/mathlib/Mathlib/GroupTheory/FiniteAbelian/Basic.lean."
+   }
+  },
+  {
+   "text": "In characteristic zero put $m_i=d_i$. In positive characteristic, $p$ is prime: $p\\neq1$ because $1_k\\neq0$ [def-weil-field], and a factorization $p=uv$ with $1<u,v<p$ would give $(u\\cdot1_k)(v\\cdot1_k)=0$ although neither factor is zero, contradicting the field property [def-weil-field]. Factor $d_i=p^{a_i}m_i$ with $a_i\\ge0$, $m_i\\ge1$ and $p\\nmid m_i$. The product is $n=p^{\\sum_i a_i}\\prod_i m_i$, with $\\prod_i m_i$ coprime to $p$. Hence $\\prod_i m_i=n'$: it divides $n$ and is coprime to $p$, and any divisor of $n$ coprime to $p$ divides $\\prod_i m_i$ by cancellation of the coprime factor $p^{\\sum_i a_i}$. In characteristic zero the same equality follows from $n'=n$.",
+   "uses": [
+    "def-weil-field"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-trace-formula/sk-i-curve-zero/lem-trf-local-term-locality.proof.md",
+    "place": "Inherited ramification auxiliary; the finite-character counting argument here is agent-written. Arithmetic inputs are the cited Mathlib leaves; root-count input is Stacks fields.tex, section-roots-of-1 (Tag 09HW), opening discussion."
+   }
+  },
+  {
+   "text": "For every character $\\chi$, $\\chi(g_i)^{d_i}=\\chi(g_i^{d_i})=1$. In positive characteristic [lem-trf-roots-of-unity-remove-characteristic-power] applied to $a_i,m_i$ implies $\\chi(g_i)^{m_i}=1$; in characteristic zero this already holds since $m_i=d_i$. Consequently evaluation gives a map $$X\\longrightarrow\\prod_i\\mu_{m_i}(k),\\qquad\\chi\\longmapsto(\\chi(g_i))_i.$$ It is injective: if two characters agree on all $g_i$, then for every tuple of representatives $(b_i)$ they both take $\\prod_i g_i^{b_i}$ to the same product $\\prod_i\\chi(g_i)^{b_i}$. These products exhaust $A$ by Step 1.",
+   "uses": [
+    "lem-trf-roots-of-unity-remove-characteristic-power"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "Mathlib/RingTheory/RootsOfUnity/Basic.lean",
+    "place": "mem_rootsOfUnity_prime_pow_mul_iff and its primed variant, lines 285–297. Field instances supply CommRing and IsReduced; Algebra/CharP/Defs.lean:332 supplies ExpChar from CharP and primality. Also compare Stacks fields.tex, section-roots-of-1, final observation on characteristic-power roots."
+   }
+  },
+  {
+   "text": "Each $m_i\\ge1$, so [lem-exc-field-roots-cyclic-bound] makes $\\mu_{m_i}(k)$ finite with at most $m_i$ elements. Its finite product therefore has at most $\\prod_i m_i=n'$ elements: list the choices in each coordinate and multiply their numbers. The injection in Step 3 identifies $X$ with a subset of this finite set, proving finiteness and $|X|\\le n'$. If $I$ is empty the product is a singleton and $n=n'=1$, so this also covers the trivial group.",
+   "uses": [
+    "lem-exc-field-roots-cyclic-bound"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/fields.tex",
+    "place": "Tag 09HW, section-roots-of-1, opening root-count discussion, as stated in lem-exc-field-roots-cyclic-bound; finite-product and injection count written out here."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-trf-finite-abelian-cyclic-product",
+  "def-weil-field",
+  "lem-trf-roots-of-unity-remove-characteristic-power",
+  "lem-exc-field-roots-cyclic-bound"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-trace-formula/sk-i-curve-zero/lem-trf-local-term-locality.proof.md",
+  "place": "Inherited ramification auxiliary; the finite-character counting argument here is agent-written. Arithmetic inputs are the cited Mathlib leaves; root-count input is Stacks fields.tex, section-roots-of-1 (Tag 09HW), opening discussion."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The number of group homomorphisms from a finite abelian group to the units of a field is at most the prime to characteristic part of the group order",
+   "results": "{\"t\": \"2026-10-24T13:57:01Z\", \"tool\": \"leanfinder\", \"query\": \"The number of group homomorphisms from a finite abelian group to the units of a field is at most the prime to characteristic part of the group order\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AddChar.card_addChar_le\", \"MulChar.card_eq_card_units_of_hasEnoughRootsOfUnity\", \"MulChar.finite\", \"MulChar.exists_mulChar_orderOf_eq_card_units\", \"CommGroup.exists_apply_ne_one_of_hasEnoughRootsOfUnity\", \"card_nthRoots_subgroup_units\", \"card_orderOf_eq_totient_aux₂\", \"MulChar.orderOf_dvd_card_sub_one\"], \"digest\": \"9770ce28e5f6f7b7\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: AddChar.card_addChar_le needs RCLike and cannot handle a field of positive characteristic; CommGroup.card_monoidHom_of_hasEnoughRootsOfUnity requires enough roots of unity, absent here. The latter was read at Duality.lean:58–97 and the former at Orthogonality.lean:59–99. MulChar results do not give this arbitrary-group, arbitrary-field prime-part bound. The general counting argument remains an unsplit node."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A finite abelian group has at most its order many homomorphisms to a field multiplicative group and in characteristic p all characters kill the p primary subgroup",
+   "results": "{\"t\": \"2026-10-24T13:57:33Z\", \"tool\": \"leanfinder\", \"query\": \"A finite abelian group has at most its order many homomorphisms to a field multiplicative group and in characteristic p all characters kill the p primary subgroup\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AddChar.card_addChar_le\", \"AddChar.instFintype\", \"MulChar.finite\", \"MulChar.card_eq_card_units_of_hasEnoughRootsOfUnity\", \"AddChar.card_eq\", \"CommGroup.exists_apply_ne_one_of_hasEnoughRootsOfUnity\", \"MulChar.exists_apply_ne_one_of_hasEnoughRootsOfUnity\", \"MulChar.pow_card_eq_one\"], \"digest\": \"5c8b8a0f6d7dd3d4\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: AddChar.card_addChar_le needs RCLike and cannot handle a field of positive characteristic; CommGroup.card_monoidHom_of_hasEnoughRootsOfUnity requires enough roots of unity, absent here. The latter was read at Duality.lean:58–97 and the former at Orthogonality.lean:59–99. MulChar results do not give this arbitrary-group, arbitrary-field prime-part bound. The general counting argument remains an unsplit node."
+  },
+  {
+   "tool": "loogle",
+   "query": "MonoidHom, Units, Nat.card",
+   "results": "{\"t\": \"2026-10-24T13:57:30Z\", \"tool\": \"loogle\", \"query\": \"MonoidHom, Units, Nat.card\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"IsCyclic.monoidHom_mulEquiv_rootsOfUnity\", \"IsCyclic.monoidHomMulEquivRootsOfUnityOfGenerator\", \"IsCyclic.monoidHom_equiv_self\", \"CommGroup.card_monoidHom_of_hasEnoughRootsOfUnity\", \"CommGroup.card_domRestrictHom_ker\", \"CommGroup.card_restrictHom_ker\", \"CommGroup.card_subgroupOrderIsoSubgroupMonoidHom\", \"modularCyclotomicCharacter\"], \"digest\": \"ad76654ad45ffef9\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: AddChar.card_addChar_le needs RCLike and cannot handle a field of positive characteristic; CommGroup.card_monoidHom_of_hasEnoughRootsOfUnity requires enough roots of unity, absent here. The latter was read at Duality.lean:58–97 and the former at Orthogonality.lean:59–99. MulChar results do not give this arbitrary-group, arbitrary-field prime-part bound. The general counting argument remains an unsplit node."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Number of characters of a finite abelian group over a field is bounded by the prime to characteristic part of its cardinality",
+   "results": "{\"t\": \"2026-10-24T13:57:30Z\", \"tool\": \"leansearch\", \"query\": \"Number of characters of a finite abelian group over a field is bounded by the prime to characteristic part of its cardinality\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AddChar.card_addChar_le\", \"AddChar.card_eq\", \"AddChar.sum_apply_eq_ite\", \"Cardinal.mk_abelianization_le\", \"FixedPoints.finrank_le_card\", \"MulChar.orderOf_dvd_card_sub_one\", \"FixedPoints.rank_le_card\", \"MulChar.finite\"], \"digest\": \"bac5e6a9996f742d\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: AddChar.card_addChar_le needs RCLike and cannot handle a field of positive characteristic; CommGroup.card_monoidHom_of_hasEnoughRootsOfUnity requires enough roots of unity, absent here. The latter was read at Duality.lean:58–97 and the former at Orthogonality.lean:59–99. MulChar results do not give this arbitrary-group, arbitrary-field prime-part bound. The general counting argument remains an unsplit node."
+  },
+  {
+   "tool": "grep",
+   "query": "card.*monoidHom|card.*MonoidHom|prime.*card|char.*card",
+   "results": "{\"t\": \"2026-10-24T13:58:07Z\", \"tool\": \"grep\", \"query\": \"card.*monoidHom|card.*MonoidHom|prime.*card|char.*card\", \"sub\": \"GroupTheory/FiniteAbelian\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"Mathlib/GroupTheory/FiniteAbelian/Duality.lean\", \"Mathlib/GroupTheory/FiniteAbelian/Duality.lean\", \"Mathlib/GroupTheory/FiniteAbelian/Duality.lean\", \"Mathlib/GroupTheory/FiniteAbelian/Duality.lean\", \"Mathlib/GroupTheory/FiniteAbelian/Duality.lean\"], \"digest\": \"f091ed5b1864df43\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: AddChar.card_addChar_le needs RCLike and cannot handle a field of positive characteristic; CommGroup.card_monoidHom_of_hasEnoughRootsOfUnity requires enough roots of unity, absent here. The latter was read at Duality.lean:58–97 and the former at Orthogonality.lean:59–99. MulChar results do not give this arbitrary-group, arbitrary-field prime-part bound. The general counting argument remains an unsplit node."
+  },
+  {
+   "tool": "loogle",
+   "query": "MonoidHom, Nat.card",
+   "results": {
+    "t": "2026-10-24T14:20:57Z",
+    "tool": "loogle",
+    "query": "MonoidHom, Nat.card",
+    "sub": "",
+    "ok": true,
+    "n_hits": 12,
+    "note": "",
+    "top": [
+     "Subgroup.card_map_of_injective",
+     "Subgroup.card_dvd_of_injective",
+     "Subgroup.card_comap_dvd_of_injective",
+     "Subgroup.card_range_dvd",
+     "Subgroup.index_ker",
+     "Subgroup.relIndex_ker",
+     "Subgroup.card_map_dvd",
+     "Subgroup.index_range"
+    ],
+    "digest": "6a559e5e7222fe91"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match for the whole item: AddChar.card_addChar_le assumes RCLike (read Orthogonality.lean:60–99) and duality cardinality assumes HasEnoughRootsOfUnity (read Duality.lean:58–97). Arbitrary-field finiteness exists in RootsOfUnity/Basic.lean:273–281, but does not give the prime-to-characteristic bound. The cyclic decomposition and characteristic-power root equivalence are separate Mathlib inputs, recorded as leaves."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a finite abelian group A and an arbitrary field k, the number of group homomorphisms A to k units is at most the prime to characteristic part of the order of A",
+   "results": {
+    "t": "2026-10-24T14:20:57Z",
+    "tool": "leanfinder",
+    "query": "For a finite abelian group A and an arbitrary field k, the number of group homomorphisms A to k units is at most the prime to characteristic part of the order of A",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "AddChar.card_addChar_le",
+     "MulChar.card_eq_card_units_of_hasEnoughRootsOfUnity",
+     "AddChar.card_eq",
+     "MulChar.finite",
+     "CommGroup.exists_apply_ne_one_of_hasEnoughRootsOfUnity",
+     "MulChar.exists_mulChar_orderOf_eq_card_units",
+     "AddChar.instFintype",
+     "MulChar.orderOf_dvd_card_sub_one"
+    ],
+    "digest": "9329c1d96ce8638b"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match for the whole item: AddChar.card_addChar_le assumes RCLike (read Orthogonality.lean:60–99) and duality cardinality assumes HasEnoughRootsOfUnity (read Duality.lean:58–97). Arbitrary-field finiteness exists in RootsOfUnity/Basic.lean:273–281, but does not give the prime-to-characteristic bound. The cyclic decomposition and characteristic-power root equivalence are separate Mathlib inputs, recorded as leaves."
+  },
+  {
+   "tool": "grep",
+   "query": "equiv.*[Zz][Mm]od|card.*monoidHom|rootsOfUnity.*card|card.*rootsOfUnity",
+   "results": {
+    "t": "2026-10-24T14:22:04Z",
+    "tool": "grep",
+    "query": "equiv.*[Zz][Mm]od|card.*monoidHom|rootsOfUnity.*card|card.*rootsOfUnity",
+    "sub": "GroupTheory/FiniteAbelian",
+    "ok": true,
+    "n_hits": 10,
+    "note": "",
+    "top": [
+     "Mathlib/GroupTheory/FiniteAbelian/Duality.lean",
+     "Mathlib/GroupTheory/FiniteAbelian/Duality.lean",
+     "Mathlib/GroupTheory/FiniteAbelian/Duality.lean",
+     "Mathlib/GroupTheory/FiniteAbelian/Duality.lean",
+     "Mathlib/GroupTheory/FiniteAbelian/Duality.lean",
+     "Mathlib/GroupTheory/FiniteAbelian/Basic.lean",
+     "Mathlib/GroupTheory/FiniteAbelian/Basic.lean",
+     "Mathlib/GroupTheory/FiniteAbelian/Basic.lean"
+    ],
+    "digest": "8e5df61996f3c251"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match for the whole item: AddChar.card_addChar_le assumes RCLike (read Orthogonality.lean:60–99) and duality cardinality assumes HasEnoughRootsOfUnity (read Duality.lean:58–97). Arbitrary-field finiteness exists in RootsOfUnity/Basic.lean:273–281, but does not give the prime-to-characteristic bound. The cyclic decomposition and characteristic-power root equivalence are separate Mathlib inputs, recorded as leaves."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Bounding the number of homomorphisms from a finite abelian group to the multiplicative group of any field by removing the characteristic primary part",
+   "results": {
+    "t": "2026-10-24T14:33:23Z",
+    "tool": "leanfinder",
+    "query": "Bounding the number of homomorphisms from a finite abelian group to the multiplicative group of any field by removing the characteristic primary part",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "AddChar.card_addChar_le",
+     "MulChar.card_eq_card_units_of_hasEnoughRootsOfUnity",
+     "MulChar.finite",
+     "AddChar.instFintype",
+     "MulChar.exists_apply_ne_one_of_hasEnoughRootsOfUnity",
+     "AddChar.card_eq",
+     "CommGroup.exists_apply_ne_one_of_hasEnoughRootsOfUnity",
+     "card_nthRoots_subgroup_units"
+    ],
+    "digest": "a4528f21eaef19f5"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match for the whole item: AddChar.card_addChar_le assumes RCLike (read Orthogonality.lean:60–99) and duality cardinality assumes HasEnoughRootsOfUnity (read Duality.lean:58–97). Arbitrary-field finiteness exists in RootsOfUnity/Basic.lean:273–281, but does not give the prime-to-characteristic bound. The cyclic decomposition and characteristic-power root equivalence are separate Mathlib inputs, recorded as leaves."
+  },
+  {
+   "tool": "grep",
+   "query": "card_monoidHom|card_addChar_le",
+   "results": {
+    "t": "2026-10-24T14:33:23Z",
+    "tool": "grep",
+    "query": "card_monoidHom|card_addChar_le",
+    "sub": "GroupTheory",
+    "ok": true,
+    "n_hits": 5,
+    "note": "",
+    "top": [
+     "Mathlib/GroupTheory/FiniteAbelian/Duality.lean",
+     "Mathlib/GroupTheory/FiniteAbelian/Duality.lean",
+     "Mathlib/GroupTheory/FiniteAbelian/Duality.lean",
+     "Mathlib/GroupTheory/FiniteAbelian/Duality.lean",
+     "Mathlib/GroupTheory/FiniteAbelian/Duality.lean"
+    ],
+    "digest": "18a9d7e9a38dc762"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match for the whole item: AddChar.card_addChar_le assumes RCLike (read Orthogonality.lean:60–99) and duality cardinality assumes HasEnoughRootsOfUnity (read Duality.lean:58–97). Arbitrary-field finiteness exists in RootsOfUnity/Basic.lean:273–281, but does not give the prime-to-characteristic bound. The cyclic decomposition and characteristic-power root equivalence are separate Mathlib inputs, recorded as leaves."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-valued-initial-form-automorphism-bound",
+  "date": "2026-10-24",
+  "group": "Q27"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Inherited semistable-modification/Temkin ramification auxiliary under lem-trf-local-term-locality, proof (1)--(2), through lem-trf-galois-graded-wild-kernel. The latest locality proof states the contracting-correspondence theorem and does not itself prove this auxiliary. Here: inertia pairing and the residue-embedding count bounding the action on initial forms. Supporting fact: Prime-to-characteristic bound for finite abelian characters.",
+   "via": [
+    "lem-trf-valued-initial-form-automorphism-bound",
+    "lem-trf-galois-graded-wild-kernel",
+    "lem-trf-valued-finite-ramification-calculus",
+    "lem-trf-analytic-type23-stability",
+    "lem-trf-analytic-uniformization",
+    "lem-trf-valued-curve-etale-parameter",
+    "lem-trf-valuation-strict-semistable-local-uniformization",
+    "lem-trf-valuation-stable-reduction",
+    "lem-trf-temkin-stable-modification",
+    "lem-trf-stable-modification-flat-curve-pair",
+    "lem-trf-dejong-relative-marked-semistable",
+    "lem-trf-relative-marked-nodal-reduction",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-trf-finite-abelian-character-prime-bound",
+  "worker": "stage1",
+  "summary": "Proved the character bound using a finite cyclic product decomposition, evaluation on its generators, removal of characteristic powers from roots of unity, and the existing finite root bound. Added two exact Mathlib leaves and no unsplit nodes. Kept the arbitrary-field statement, including the characteristic-zero convention, unchanged; no roots-of-unity existence assumption was introduced.",
+  "blueprint": "The nearest ancestor is lem-trf-local-term-locality, inherited proof (1)–(2) via the recorded ramification chain. The latest blueprint instead quotes the contracting-correspondence theorem and does not state this finite-character auxiliary. This split completes that inherited auxiliary without changing the unit or chapter route."
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-NR-2e12e81ce",
+  "group": "NR",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NR-2e12e81ce (reviewer sub-agent of L); spot-checked: I read all four steps, both new Mathlib leaves and every cited statement. Mathlib checks: CommGroup.equiv_prod_multiplicative_zmod_of_finite (FiniteAbelian/Basic.lean:179–181) states exactly a finite I, d_i>1 and the isomorphism, with I allowed to be empty. mem_rootsOfUnity_prime_pow_mul_iff (RootsOfUnity/Basic.lean:289–291) applies to a field because a field is reduced (GroupWithZero/Basic.lean:244) and expChar_prime (CharP/Defs.lean:332) supplies ExpChar, so the second leaf is a one-line specialization. lem-exc-field-roots-cyclic-bound gives |μ_m(k)|≤m for m≥1. It belongs to unit sk-prop-a1-kummer but is a Mathlib leaf, so no route or tool_use issue arises. Proof: step 2's arithmetic is correct (∏m_i is coprime to p and divides n=p^s∏m_i, and every prime-to-p divisor of n divides it, so ∏m_i=n'). Step 3's leaf hypotheses hold (a_i≥0, m_i≥1, p prime), and evaluation on the generators is injective. Step 4's count covers the empty I. Item tests: Z/6 over F_3 gives 2=2; Z/3 over Q gives 1≤3; (Z/2)^2 over Q gives 4≤4; a p-group in characteristic p gives 1. The statement is unchanged, and the citer lem-trf-valued-initial-form-automorphism-bound uses exactly this bound. The Gabber–Ramero copy is absent from literature, so WANTED and proof_origin=agent are correct. Stacks fields.tex section-roots-of-1, lines 2212–2230, matches the root bound. Duplicate search (rg -L over the DAG and a grep of blueprint main-20261015) found no existing node: lem-per-finite-character-annihilator-duality needs roots of unity, and lem-weil-pbc-torsion-cyclic-presentation and the lem-sbc torsion inductions state other things. Neither new node restates the item. FIX to the item proof: steps 2 and 4 wrote `n\\prime` instead of n', which I corrected (B4). Step 2 omitted that p≠1 because 1_k≠0, which I added. Nothing else changed.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.GroupTheory.FiniteAbelianCharacterPrimeBound",
+  "declaration": "CommGroup.finite_monoidHom_units_and_card_le_ordCompl",
+  "file": "lean/Sheaf/GroupTheory/FiniteAbelianCharacterPrimeBound.lean",
+  "statement": "theorem finite_monoidHom_units_and_card_le_ordCompl (A : Type u) [CommGroup A] [Finite A] (k : Type v) [Field k] : Finite (A →* kˣ) ∧ Nat.card (A →* kˣ) ≤ ordCompl[ringChar k] (Nat.card A)",
+  "branch": "newtargets-dag",
+  "by": "NS",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-4b1806129",
+  "group": "NS",
+  "result": "pass",
+  "note": "Statement CommGroup.finite_monoidHom_units_and_card_le_ordCompl (A : Type u, CommGroup, Finite; k : Type v, Field) concludes Finite (A →* kˣ) ∧ Nat.card ≤ ordCompl[ringChar k] (Nat.card A), matching every clause of the node. ordCompl gives the largest prime-to-p divisor for prime p, and ordCompl_of_not_prime gives n'=n in characteristic 0. No roots-of-unity, finiteness or characteristic assumption. Edge cases checked: trivial A, p-group in char p, Z/3 over Q (inequality, not equality), (Z/2)^2 over Q (bound attained). lean.statement verbatim in file; stmt_deps [def-weil-field] correct; only proof is sorry; no definitions; docstrings carry source place, blueprint tag and proof plan. No Mathlib or project duplicate (Mathlib versions need HasEnoughRootsOfUnity or RCLike). No file changed, so no compile. Note: the 'Second reading by NS' is a self-reread by the worker; this review is the independent reading."
+ }
+}

@@ -1,0 +1,118 @@
+{
+ "id": "lem-pur-etale-single-cochain-monoidal",
+ "kind": "statement",
+ "title": "Canonical strong monoidal structure on single cochain complexes",
+ "statement": "Let C be a symmetric closed monoidal Grothendieck abelian category with additive tensor. Write s for the functor placing an object in degree zero in cochain complexes. Let c(L,M):s(L) tensor s(M) isomorphic to s(L tensor M) be the composite of map₂HomologicalComplexObjSingleIso and singleMapHomologicalComplex. There exists a strong monoidal structure on s whose tensorator is exactly c(L,M).hom for every L,M. This is a statement about the explicit tensor comparison, not a choice of an arbitrary monoidal structure. The ambient derived-tensor construction is [def-kun-derived-tensor], whose cochain tensor is used here.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 06YQ (lemma-bounded-flat-K-flat) and 06YU (definition-derived-tor and signed symmetry immediately following it); degree-zero specialization of the canonical tensor localization."
+ },
+ "stmt_deps": [
+  "def-kun-derived-tensor"
+ ],
+ "proof": [
+  {
+   "text": "Define c by the two explicit single/bifunctor comparisons. Its inverse in degree zero is the inclusion of the (0,0) tensor summand. Naturality follows from the whisker/inclusion identities. Precompose the associator equation with the inverse double tensorators; the triple inclusion associator identity proves it. The degree-zero left and right unit inclusion identities prove both unit equations. Feed these isomorphisms and equations to CoreMonoidal.toMonoidal. Its tensorator is definitionally c.hom.",
+   "uses": [
+    "def-kun-derived-tensor"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-kun-derived-tensor"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Canonical single-complex specialization of the tensor localization and its functorial comparison; expanded into the component argument above."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The functor placing an object in degree zero in cochain complexes is strong monoidal with the canonical single tensor isomorphism",
+   "results": "8 hits giving generic single-complex functors and constructions of monoidal structures, with no existing monoidal structure on the single cochain functor having the prescribed tensor isomorphism. The component inclusion identities instead provide the construction.",
+   "date": "2026-10-26",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"single\", \"tensor\"",
+   "results": "12 hits: TensorProduct.single_tmul, TensorProduct.tmul_single, TensorProduct.finsuppScalarLeft_symm_apply_single, TensorProduct.finsuppRight_tmul_single, TensorProduct.finsuppScalarRight_symm_apply_single, finsuppTensorFinsuppLid_single_tmul_single, finsuppTensorFinsuppRid_single_tmul_single, TensorProduct.finsuppRight_symm_apply_single. None states the specified canonical single tensorator equation. The generic monoidal naturality and braided-functor lemmas are used as proof tools, not as a match for the whole statement.",
+   "date": "2026-10-26",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "single.*(monoidal|associativ|braiding)|map₂HomologicalComplexObjSingleIso",
+   "results": "25 hits: Mathlib/Algebra/SkewPolynomial/Basic.lean, Mathlib/Algebra/SkewPolynomial/Basic.lean, Mathlib/Algebra/SkewMonoidAlgebra/Single.lean, Mathlib/Algebra/SkewMonoidAlgebra/Support.lean, Mathlib/Algebra/SkewMonoidAlgebra/Support.lean, Mathlib/Algebra/SkewMonoidAlgebra/Support.lean, Mathlib/Algebra/SkewMonoidAlgebra/Basic.lean, Mathlib/Algebra/SkewMonoidAlgebra/Basic.lean. None states the specified canonical single tensorator equation. The generic monoidal naturality and braided-functor lemmas are used as proof tools, not as a match for the whole statement.",
+   "date": "2026-10-26",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The functor placing an object in degree zero in a derived category preserves tensor associativity and braiding and commutes with exact monoidal pullback",
+   "results": "8 hits: CategoryTheory.Functor.Braided.toMonoidal, CategoryTheory.shiftFunctorZero, CategoryTheory.shiftFunctorZero', CategoryTheory.HasShift.Induced.zero, CategoryTheory.Functor.toRightDerivedZero, CategoryTheory.Functor.leftDerivedZeroIsoSelf.congr_simp, CategoryTheory.instIsIsoFunctorToRightDerivedZero, CategoryTheory.Functor.CommShift.isoZero'. None states the specified canonical single tensorator equation. The generic monoidal naturality and braided-functor lemmas are used as proof tools, not as a match for the whole statement.",
+   "date": "2026-10-26",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.EtaleSingleFunctorMonoidalCompatibility",
+  "date": "2026-10-27",
+  "group": "F2"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-a1-kummer",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pur-frame-independence",
+   "place": "Canonical cochain tensor comparison and its unit/associator equations, extracted from the flat single associativity calculation to keep each file within the compilation limit.",
+   "via": [
+    "lem-pur-etale-single-tensorator-associativity",
+    "lem-pur-etale-single-functor-monoidal-compatibility",
+    "lem-pur-etale-closed-constant-tensor",
+    "lem-pur-supported-cup-functoriality"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.EtaleSingleCochainMonoidal",
+  "file": "lean/Sheaf/AlgebraicGeometry/EtaleSingleCochainMonoidal.lean",
+  "declaration": "AlgebraicGeometry.Etale.exists_singleCochainMonoidal",
+  "statement": "theorem exists_singleCochainMonoidal :\n    ∃ m : (HomologicalComplex.single C (.up ℤ) 0).Monoidal,\n      ∀ L M : C, letI := m\n        Functor.LaxMonoidal.μ (HomologicalComplex.single C (.up ℤ) 0) L M =\n          (singleCochainTensorIso L M).hom",
+  "branch": "sheaf-dag",
+  "by": "F2",
+  "date": "2026-10-27",
+  "declarations": [
+   "AlgebraicGeometry.Etale.singleCochainTensorIso",
+   "AlgebraicGeometry.Etale.exists_singleCochainMonoidal"
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-40375",
+  "group": "F2",
+  "result": "fix",
+  "landing": "20261026T222639-L-677900",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-40375",
+  "group": "F2",
+  "result": "fix",
+  "landing": "20261026T222639-L-677900",
+  "kind": "interface",
+  "note": "independent cc review: item proof and 8 new nodes vs Lean; moved data decls byte-identical to clone item; axioms via scratch #print axioms; 3 SLOW importers vs published baselines; original FTSPP vs delivered build"
+ }
+}

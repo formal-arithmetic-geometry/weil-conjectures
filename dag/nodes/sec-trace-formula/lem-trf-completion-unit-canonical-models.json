@@ -13,61 +13,48 @@
  },
  "proof": [
   {
-   "text": "Construct the ordinary simultaneous tensor system by the sequence projection theorem and strict-system/sequence-site equivalence. Its scalar-extension Hom bijections send b tensor x to b times the limit projection. Transport the right adjoint to the fixed coefficientSequenceRestriction followed by limit, using its sectionwise characterization. The unit is the family 1 tensor x; pure tensors determine the quotient transitions. Evaluation of the limit cone gives the termwise-limit comparison with the stated projections.",
-   "uses": [
-    "lem-coef-sequence-projection-derived-adjunction",
-    "lem-pur-system-ringed-sequence-site",
-    "def-coef-ringed-sequence-site"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "Choose S and its coherence from the coefficient-calculus existence theorem. Derive the ordinary adjunction on flat-term K-flat complexes and K-injectives. The normalized composition comparison identifies its right adjoint with the fixed coefficientSequenceLimit, without assuming restriction preserves K-injectives. Uniqueness of left adjoints compares its derived left adjoint with S.reduction, compatibly with the actual Hom equivalences. Transport the universal left-derived comparison and the resolving chain-map Hom equation along this isomorphism.",
+   "text": "Choose S and its coherence by coefficientDerivedSystemEvaluationCalculus and choose the ordinary tensor adjunction M by ordinaryModel_exists. These are independent inputs, not choices extracted into definitions.",
    "uses": [
     "lem-coef-derived-system-evaluation-calculus",
-    "lem-coef-sequence-projection-derived-adjunction",
-    "lem-coef-sequence-pushforward-limit-projections",
-    "lem-sfb-resolving-derived-adjunction-normalization",
-    "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
-    "prop-pur-kinjective-resolutions-exist"
+    "lem-trf-completion-unit-ordinary-adjunction"
    ],
    "elementary": false
   },
   {
-   "text": "Check the finite evaluation comparison by taking the adjunction mates of the evaluated counits. S.counit_projection and the sequence pushforward/limit projected counit compute the same total-limit projection. The finite derived scalar-extension normalization on a flat-term K-flat representative therefore gives reduction_evaluation. This is equality of mates, not detection of arbitrary derived maps by their level components; S and its original coherence are retained.",
+   "text": "Build the termwise-limit cone and prove it limiting by evaluation in each degree. Its unique comparison to the chosen limit is natural and has the prescribed projections. Whisker the canonical right-derived unit of lim with the inverse comparison. Cancel the homotopy localization factor isomorphisms and rightDerivedFunctorUnit to prove the K-injective normalization. Transport the K-injective derivability property through the comparison, obtaining the right-derived universal property.",
    "uses": [
-    "lem-coef-derived-system-evaluation-calculus",
-    "lem-coef-sequence-pushforward-limit-projections"
+    "lem-weil-pbc-ringed-topoi-derived-pushforward-composition"
    ],
    "elementary": false
   },
   {
-   "text": "The canonical unit of the right-derived constant-tower limit, transported through the degreewise limit comparison, gives limitUnit. Its K-injective normalization is the defining rightDerivedFunctorObjQIso equation. Exact countable pro-etale products give the strict Roos comparison; its unit normalization supplies roos_normalization. Derived composition gives systemUnit, its composition equation and invertibility on K-injectives. Assemble M and D. The same universal properties apply to zero inputs and unbounded complexes.",
+   "text": "Exact pro-etale products allow strictRoosDerivation. Uniqueness of right derived functors gives an isomorphism from its derived functor to the fixed coefficientConstantTowerLimit. Compose this with its localization isomorphism. The universal right-derived comparison equation gives Q(roos inclusion) followed by this isomorphism equal to the canonical unit.",
    "uses": [
     "det-pe-products-exact",
-    "lem-weil-strict-roos-comparison",
-    "lem-coef-sequence-pushforward-limit-projections",
-    "prop-pur-kinjective-resolutions-exist"
+    "lem-weil-strict-roos-derivation"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply derivedAdjunctionComparison_exists with S, its original coherence, M, the canonical termwise comparison and its normalized right-derived unit. Assemble its reduction comparison, evaluation and Hom equations with the proven tower and Roos comparisons into DerivedModel. The system unit is the actual composite systemLimitUnit; its composition field holds by the definition of the natural transformation.",
+   "uses": [
+    "lem-trf-completion-unit-derived-adjunction-comparison"
    ],
    "elementary": false
   }
  ],
  "proof_deps": [
-  "lem-coef-sequence-projection-derived-adjunction",
-  "lem-pur-system-ringed-sequence-site",
-  "def-coef-ringed-sequence-site",
   "lem-coef-derived-system-evaluation-calculus",
-  "lem-coef-sequence-pushforward-limit-projections",
-  "lem-sfb-resolving-derived-adjunction-normalization",
+  "lem-trf-completion-unit-ordinary-adjunction",
   "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
-  "prop-pur-kinjective-resolutions-exist",
   "det-pe-products-exact",
-  "lem-weil-strict-roos-comparison"
+  "lem-weil-strict-roos-derivation",
+  "lem-trf-completion-unit-derived-adjunction-comparison"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/sites-cohomology.tex",
-  "place": "Specialization of 07A6, 0D6E and 0941, with derived.tex 09T5; adjunction-compatible comparison normalization for the fixed coefficient calculus."
+  "place": "07A6, 0D6E, 0941 and derived.tex 09T5. P4 reduction: ordinary adjunction and normalized derived tensor comparison are separate steps; termwise limit, canonical unit normalization and strict Roos comparison are proved in Lean."
  },
  "mathlib_match": null,
  "mathlib_searches": [
@@ -137,13 +124,25 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-21",
+  "date": "2026-10-26",
   "by": "L",
-  "reviewer": "C-051a4",
-  "group": "J7",
+  "reviewer": "COMPILER",
+  "group": "P4",
   "result": "pass",
-  "landing": "20261021T140827-L-2759165",
+  "landing": "20261026T023704-L-594737",
   "kind": "interface",
-  "note": "independent cc review: item theorem statement byte-identical to live; moved model block diffed verbatim vs live (only blueprint ids differ); canonicalModels implied by the old item statement; axioms of the item = propext/Classical.choice/Quot.sound + sorryAx from canonicalModels only (scratch build, 50.5 s)"
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
  }
 }

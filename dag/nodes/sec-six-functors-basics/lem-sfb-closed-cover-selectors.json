@@ -1,0 +1,250 @@
+{
+ "id": "lem-sfb-closed-cover-selectors",
+ "kind": "statement",
+ "title": "Shrinking-partition neighborhoods and stabilizing least-index selectors",
+ "statement": "Let $S$ be a compact metric totally disconnected space in the universes of [def-weil-size-convention]. Let $A_j$ be closed subsets covering $S$, indexed by positive naturals. Suppose $P_i$ are refining finite partitions of $S$ with clopen atoms of diameter $<(1/2)^i$. Set $U_{j,i}$ to be the union of the atoms of $P_i$ meeting $A_j$. Then these sets are clopen, decrease in $i$, and have intersection $A_j$. There exist locally constant maps $k_i:S\\to\\{j:1\\le j\\le i\\}$ which select the least $j\\le i$ with $s\\in U_{j,i}$, or return 1 if none exists. For every point $s$, these maps are eventually equal to the least index $j_0$ with $s\\in A_{j_0}$. Empty $S$ and empty members of the cover are allowed.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+  "place": "Inherited scalar analytic expansion of paragraph (3), old steps 5–6, as written in lem-sfb-closed-cover-retractions-stabilizing-selectors. The current blueprint paragraph (3) no longer writes out this auxiliary argument; this node formalizes the retained parent proof, not a new assertion of the current blueprint."
+ },
+ "stmt_deps": [
+  "def-weil-size-convention"
+ ],
+ "proof": [
+  {
+   "text": "Define U_(j,i) by the stated finite union. It contains A_j, is clopen, and decreases because every fine atom lies in a coarse atom. For a point outside A_j choose a ball in the open complement and a level whose atom diameters are smaller than its radius. No atom containing that point meets A_j. This proves that the intersection of U_(j,i) is A_j.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Use PNat.find on the predicate j<=i and s in U_(j,i), or use the default 1 when the predicate has no witness. Its specification proves both selection clauses. On each open partition atom, all U-membership predicates are unchanged, by uniqueness of an atom containing a point. The least eligible index is thus constant on each open atom, and defines a locally constant map.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "The cover supplies a least index j_0 for each point. For every j<j_0 the intersection identity supplies some level excluding the point from U_(j,i). Decreasingness keeps it excluded at every larger level. Induction over the finite interval [1,j_0) gives a common exclusion bound. Beyond its maximum with j_0, j_0 is eligible and every smaller index is excluded; the least-index specification therefore forces k_i(s)=j_0. The finite interval can be empty, so the case j_0=1 is included.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "agent",
+  "document": "lean/Sheaf/Topology/ClosedCoverSelectors.lean",
+  "place": "Fully proved from the indicated Mathlib declarations and elementary set/order/metric arguments; no postponed proof."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "loogle",
+   "query": "PiNat.exists_retraction_subtype_of_isClosed",
+   "results": {
+    "t": "2026-10-26T06:38:59Z",
+    "tool": "loogle",
+    "query": "PiNat.exists_retraction_subtype_of_isClosed",
+    "sub": "",
+    "ok": true,
+    "n_hits": 1,
+    "note": "",
+    "top": [
+     "PiNat.exists_retraction_subtype_of_isClosed"
+    ],
+    "digest": "50851967af4b203e"
+   },
+   "date": "2026-10-26",
+   "verdict": "Partial ingredients found and inspected in the pinned Mathlib source; no exact match for this composite construction. The implementation uses finite clopen refinements, partition infima, compact closed embeddings, and the existing PiNat retraction leaf."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A compact totally disconnected metric space has refining finite clopen partitions of arbitrarily small diameter and embeds into a countable product of finite discrete spaces",
+   "results": {
+    "t": "2026-10-26T06:39:01Z",
+    "tool": "leanfinder",
+    "query": "A compact totally disconnected metric space has refining finite clopen partitions of arbitrarily small diameter and embeds into a countable product of finite discrete spaces",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "LightProfinite.of",
+     "exists_clopen_partition_of_clopen_cover",
+     "Metric.PiNatEmbed.toPiNatHomeo",
+     "cantorSetHomeomorphNatToBool",
+     "CompHaus.toProfiniteObj",
+     "Metric.PiNatEmbed.isHomeomorph_toPiNat",
+     "Metric.PiNatEmbed.exists_embedding_to_hilbert_cube",
+     "TopologicalSpace.IsOpenCover.exists_finite_clopen_cover"
+    ],
+    "digest": "7ac3ab30fd183ce7"
+   },
+   "date": "2026-10-26",
+   "verdict": "Partial ingredients found and inspected in the pinned Mathlib source; no exact match for this composite construction. The implementation uses finite clopen refinements, partition infima, compact closed embeddings, and the existing PiNat retraction leaf."
+  },
+  {
+   "tool": "grep",
+   "query": "(retract|selector|selection).*(closed|clopen)|(closed|clopen).*(retract|selector|selection)",
+   "results": {
+    "t": "2026-10-26T06:45:02Z",
+    "tool": "grep",
+    "query": "(retract|selector|selection).*(closed|clopen)|(closed|clopen).*(retract|selector|selection)",
+    "sub": "",
+    "ok": true,
+    "n_hits": 14,
+    "note": "",
+    "top": [
+     "Mathlib/Topology/MetricSpace/PiNat.lean",
+     "Mathlib/Topology/MetricSpace/PiNat.lean",
+     "Mathlib/Topology/MetricSpace/PiNat.lean",
+     "Mathlib/Topology/MetricSpace/PiNat.lean",
+     "Mathlib/Topology/MetricSpace/PiNat.lean",
+     "Mathlib/Topology/MetricSpace/HausdorffAlexandroff.lean",
+     "Mathlib/Topology/MetricSpace/HausdorffAlexandroff.lean",
+     "Mathlib/Topology/MetricSpace/HausdorffAlexandroff.lean"
+    ],
+    "digest": "cace69bdda7b2f78"
+   },
+   "date": "2026-10-26",
+   "verdict": "Partial ingredients found and inspected in the pinned Mathlib source; no exact match for this composite construction. The implementation uses finite clopen refinements, partition infima, compact closed embeddings, and the existing PiNat retraction leaf."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Refining finite clopen partitions with arbitrarily small diameters in a compact totally disconnected metric space",
+   "results": {
+    "t": "2026-10-26T06:46:25Z",
+    "tool": "leansearch",
+    "query": "Refining finite clopen partitions with arbitrarily small diameters in a compact totally disconnected metric space",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "exists_clopen_partition_of_clopen_cover",
+     "isTopologicalBasis_isClopen",
+     "compact_exists_isClopen_in_isOpen",
+     "loc_compact_Haus_tot_disc_of_zero_dim",
+     "TopologicalSpace.IsOpenCover.exists_finite_clopen_cover",
+     "exists_clopen_of_closed_subset_open",
+     "TopologicalSpace.IsOpenCover.exists_finite_nonempty_disjoint_clopen_cover",
+     "isClopen_iInter_of_finite"
+    ],
+    "digest": "634960ba258a67b8"
+   },
+   "date": "2026-10-26",
+   "verdict": "Partial ingredients found and inspected in the pinned Mathlib source; no exact match for this composite construction. The implementation uses finite clopen refinements, partition infima, compact closed embeddings, and the existing PiNat retraction leaf."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A locally constant least-index selector for shrinking clopen neighborhoods of a countable closed cover stabilizes pointwise",
+   "results": {
+    "t": "2026-10-26T06:54:46Z",
+    "tool": "leansearch",
+    "query": "A locally constant least-index selector for shrinking clopen neighborhoods of a countable closed cover stabilizes pointwise",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "IsLocallyConstant",
+     "IsLocallyConstant.eventually_eq",
+     "LocallyConstant",
+     "IsLocallyConstant.exists_open",
+     "LocallyConstant.ofIsClopen",
+     "LocallyConstant.unflip",
+     "LocallyConstant.flip",
+     "IsLocallyConstant.iff_eventually_eq"
+    ],
+    "digest": "4474cd205a7ed27a"
+   },
+   "date": "2026-10-26",
+   "verdict": "Only general locally constant functions, clopen indicator functions, and finite clopen approximation/refinement ingredients were found; none supplies pointwise stabilization for the countable closed cover. The selector and finite-exclusion argument are proved directly."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a countable closed cover and decreasing clopen neighborhoods cutting out its members, the least eligible bounded index is locally constant and stabilizes pointwise to the first covering index",
+   "results": {
+    "t": "2026-10-26T06:54:47Z",
+    "tool": "leanfinder",
+    "query": "For a countable closed cover and decreasing clopen neighborhoods cutting out its members, the least eligible bounded index is locally constant and stabilizes pointwise to the first covering index",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "exists_clopen_partition_of_clopen_cover",
+     "LocallyConstant.ofIsClopen",
+     "LocallyConstant.piecewise_apply_right",
+     "LocallyConstant.piecewise",
+     "LocallyConstant.indicator",
+     "LocallyConstant.piecewise_apply_left",
+     "LocallyConstant.piecewise'_apply_left",
+     "ContinuousMap.exists_disjoint_nonempty_clopen_cover_of_mem_nhds_diagonal"
+    ],
+    "digest": "49c80f67272ba663"
+   },
+   "date": "2026-10-26",
+   "verdict": "Only general locally constant functions, clopen indicator functions, and finite clopen approximation/refinement ingredients were found; none supplies pointwise stabilization for the countable closed cover. The selector and finite-exclusion argument are proved directly."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Topology.ClosedCoverStabilizingSelectors",
+  "date": "2026-10-26",
+  "group": "P1"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "same_as": [],
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "Inherited scalar analytic expansion of paragraph (3), old steps 5–6. This auxiliary construction has no recorded imported blueprint ancestor, as in its parent; the exact argument is preserved in the parent theorem docstring.",
+   "via": [
+    "lem-sfb-closed-cover-retractions-stabilizing-selectors",
+    "lem-sfb-parameter-cochain-completion-boundary-descent",
+    "lem-sfb-procyclic-scalar-cochain-evaluation",
+    "lem-sfb-ind-unipotent-procyclic-difference",
+    "lem-sfb-polynomial-translation-acyclic",
+    "lem-sfb-polynomial-derived-bar-comparison",
+    "lem-sfb-trivial-ladic-derived-exterior",
+    "lem-sfb-dense-lattice-derived-invariants-comparison",
+    "lem-sfb-tame-inertia-continuous-koszul",
+    "lem-sfb-continuous-algcl-tame-boundary-comparison",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Topology.ClosedCoverSelectors",
+  "file": "lean/Sheaf/Topology/ClosedCoverSelectors.lean",
+  "declaration": "TopologicalSpace.exists_closedCover_selectors",
+  "statement": "theorem exists_closedCover_selectors\n    (S : Type u) [MetricSpace S] [CompactSpace S] [TotallyDisconnectedSpace S]\n    (A : ℕ+ → Set S) (hclosed : ∀ j, IsClosed (A j))\n    (hcover : (⋃ j, A j) = Set.univ)\n    (P : ℕ+ → Finpartition (Set.univ : Set S))\n    (hclopen : ∀ i p, p ∈ (P i).parts → IsClopen p)\n    (hdiam : ∀ i p, p ∈ (P i).parts → Metric.diam p < (1 / 2 : ℝ) ^ (i : ℕ))\n    (hrefine : ∀ i, P (i + 1) ≤ P i) :\n    ∃ U : ℕ+ → ℕ+ → Set S,\n      (∀ j i, U j i = ⋃ (p : (P i).parts) (_ : (p.val ∩ A j).Nonempty), p.val) ∧\n      (∀ j i, IsClopen (U j i)) ∧\n      (∀ j i, U j (i + 1) ⊆ U j i) ∧\n      (∀ j, (⋂ i, U j i) = A j) ∧\n      ∃ k : ∀ i : ℕ+, LocallyConstant S {j : ℕ+ // j ≤ i},\n        (∀ i s,\n          ((∃ j : ℕ+, j ≤ i ∧ s ∈ U j i) →\n            s ∈ U (k i s).val i ∧\n              ∀ j : ℕ+, j ≤ i → s ∈ U j i → (k i s).val ≤ j) ∧\n          ((∀ j : ℕ+, j ≤ i → s ∉ U j i) → (k i s).val = 1)) ∧\n        ∀ s, ∃ j₀ : ℕ+,\n          s ∈ A j₀ ∧ (∀ j : ℕ+, s ∈ A j → j₀ ≤ j) ∧\n          ∃ i₀ : ℕ+, ∀ i : ℕ+, i₀ ≤ i → (k i s).val = j₀",
+  "branch": "sheaf-dag",
+  "by": "P1",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P1",
+  "result": "pass",
+  "landing": "20261026T082623-L-2197176",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P1",
+  "result": "pass",
+  "landing": "20261026T082623-L-2197176",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

@@ -3,78 +3,29 @@
  "unit": "sk-thm-sf-verdier-exchange",
  "proof": [
   {
-   "text": "Write E=j_! and R=j^* for the underived module functors. Work on the small site representatives in [lem-pd-module-ringed-topos-derived-comparison]; its exact equivalence identifies the relative tensors, the open adjunction and the actual lax tensor map with their ringed-topos counterparts. The coefficient comparison is invertible for every condensed ring by [lem-sfb-alpha-iso]. Thus [lem-weil-pbc-proetale-immersion-limit-preservation] makes R exact, and E is exact by [def-sfb-module-open-lower-shriek]. The adjunction of [def-sfb-module-open-lower-shriek-adjunction] lifts extension by zero and restriction: after the scalar identification alpha_j, its unit has underlying abelian-sheaf unit. That unit is invertible because the abelian extension by zero is fully faithful [sk-def-sfb-finite-lower-shriek]: for an adjunction $F\\dashv G$ with F fully faithful, lift $\\varepsilon_{FM}$ to $v:GFM\\to M$. Faithfulness and the first triangle identity give $v\\eta_M=1$; naturality gives $\\eta_Mv=G(Fv)\\eta_{GFM}=G(\\varepsilon_{FM})\\eta_{GFM}=1$ by the other triangle identity. Its inverse is module-linear: if u is an invertible linear map, u^{-1}(a m)=a u^{-1}(m) follows by applying u. Hence the module unit is an isomorphism. By [lem-weil-pbc-exact-functor-derived-factorization], E and R act termwise on representatives. The derived unit is the localization of this termwise unit (the comparison identifies the specified adjunction), so eta_K is an isomorphism for every K.",
+   "text": "Apply [lem-pd-open-module-balanced-projection] to the specified underived $E=j_!\\dashv R=j^*$: both functors are exact and the actual unit $u$ is invertible. The exact-functor factorization [lem-weil-pbc-exact-functor-derived-factorization] computes them termwise. The comparison [lem-pd-module-ringed-topos-derived-comparison] identifies the specified derived open adjunction, including its unit, with this localized adjunction. Thus $\\eta$ is the localization of the termwise invertible $u$, and its inverse is the localization of $u^{-1}$.",
    "uses": [
-    "lem-pd-module-ringed-topos-derived-comparison",
-    "lem-sfb-alpha-iso",
-    "lem-weil-pbc-proetale-immersion-limit-preservation",
-    "def-sfb-module-open-lower-shriek",
-    "def-sfb-module-open-lower-shriek-adjunction",
-    "sk-def-sfb-finite-lower-shriek",
-    "lem-weil-pbc-exact-functor-derived-factorization"
+    "lem-pd-open-module-balanced-projection",
+    "lem-weil-pbc-exact-functor-derived-factorization",
+    "lem-pd-module-ringed-topos-derived-comparison"
    ],
    "elementary": false,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-int-tensor/det-lem-int-tensor-projection.proof.md",
-    "place": "Open immersions, sheaves: the unit j^*j_!=id; exact open functors"
+    "place": "Open immersions, sheaves: localization of the normalized open unit"
    }
   },
   {
-   "text": "First pass the abelian projection formula to relative tensor products. For module sheaves M on U and N on Z, use the symmetric form of [lem-sfb-open-projection-formula] to identify E(M tensor R N) with E M tensor N, with these tensors temporarily over $\\mathbf Z$. The relative tensors are the coequalizers in [def-sfb-modobj-relative-tensor]. Under the abelian formula applied also with the extra coefficient-ring factor, the two arrows for the source coequalizer become exactly the two actions defining the target coequalizer: after alpha_j, both impose $(am)\\otimes n=m\\otimes(an)$. E preserves this coequalizer because it is a left adjoint [sk-def-sfb-module-lower-shriek, lem-weil-pbc-left-adjoint-preserves-colimits]. Taking coequalizers of the isomorphic parallel-arrow diagrams gives an isomorphism theta_{M,N}:$E(M\\otimes_{\\Lambda_U}RN)\\longrightarrow EM\\otimes_{\\Lambda_Z}N$. It is the canonical module mate: on the defining balanced bilinear map its transpose is (eta_M tensor 1) followed by the pullback tensor comparison. Thus the quotient construction proves invertibility of the specified map, not just of its endpoints.",
-   "uses": [
-    "lem-sfb-open-projection-formula",
-    "def-sfb-modobj-relative-tensor",
-    "sk-def-sfb-module-lower-shriek",
-    "lem-weil-pbc-left-adjoint-preserves-colimits",
-    "lem-sfb-alpha-iso",
-    "def-sfb-adjunction-has-projection-formula"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-int-tensor/det-lem-int-tensor-projection.proof.md",
-    "place": "Open immersions, sheaves: canonical adjoint-of-unit map; relative tensor coequalizer made explicit"
-   }
-  },
-  {
-   "text": "For complexes P on U and Q on Z, apply theta_{P^p,Q^q} in each bidegree. The functor E commutes with the direct sums in the total complex because it is a left adjoint [sk-def-sfb-module-lower-shriek, lem-weil-pbc-left-adjoint-preserves-colimits]. Hence these maps give an isomorphism E Tot(P tensor_{Lambda_U} R Q) -> Tot(E P tensor_{Lambda_Z} Q). With the convention of [def-pc-tensor-complex-sheaves], naturality in P^p makes theta commute with d_P tensor 1 and naturality in Q^q makes it commute with 1 tensor d_Q. Additivity preserves the scalar (-1)^p, so theta commutes with the sum d_P tensor 1+(-1)^p 1 tensor d_Q. Applying the inverse bidegree maps gives its chain inverse. This works for unbounded complexes because the total terms are direct sums, not products.",
-   "uses": [
-    "sk-def-sfb-module-lower-shriek",
-    "lem-weil-pbc-left-adjoint-preserves-colimits",
-    "def-pc-tensor-complex-sheaves"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-int-tensor/det-lem-int-tensor-projection.proof.md",
-    "place": "Derived version: sheaf formulas applied termwise to double complexes"
-   }
-  },
-  {
-   "text": "Choose flat-term K-flat representatives P for K and Q for L using [lem-pc-kflat-resolution], through the equivalence of Step 1. By [lem-weil-pbc-ringed-pullback-preserves-kflat], R Q is K-flat with flat terms. The total complex E P is also K-flat: for any acyclic C on Z, R C is acyclic by exactness, P tensor R C is acyclic by [def-pc-kflat-complex], and Step 3 identifies E(P tensor R C) with E P tensor C; exactness of E proves the latter acyclic. Each E(P^p) is flat as well: by Step 2, its tensor functor is E(P^p tensor R(-)), a composite of exact functors, so use [def-pc-flat-sheaf-modules]. The equivalence of [lem-pd-module-ringed-topos-derived-comparison] preserves these notions, so these conclusions hold for the specified module-object tensors.",
+   "text": "Choose flat-term K-flat representatives $P,Q$ of $K,L$ by [lem-pc-kflat-resolution], using the exact tensor equivalence of [lem-pd-module-ringed-topos-derived-comparison]. The chain-model lemma [lem-pd-open-module-kflat-projection-model] gives a chain isomorphism $\\Phi_{P,Q}$ and identifies its localization with the actual displayed $q_{j,K,L}$, including the actual $\\mu_j$, unit and counit. Localizing its chain inverse gives a two-sided inverse to $q$. This applies to every ambient $K,L$.",
    "uses": [
     "lem-pc-kflat-resolution",
-    "lem-weil-pbc-ringed-pullback-preserves-kflat",
-    "def-pc-kflat-complex",
-    "def-pc-flat-sheaf-modules",
-    "lem-pd-module-ringed-topos-derived-comparison"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-int-tensor/det-lem-int-tensor-projection.proof.md",
-    "place": "Derived version: K-flat models and inverse-image K-flatness; elementary preservation calculation"
-   }
-  },
-  {
-   "text": "Compute the displayed q on P,Q. By [lem-weil-pbc-site-derived-tensor-descent] and [sk-def-sfb-derived-tensor-hom], the total tensor complexes in Step 3 compute both derived tensor products, since P,R Q,E P,Q have the K-flat properties checked in Step 4. The unit and counit are the levelwise ones of Step 1. The canonical ringed-topos tensor comparison is [lem-weil-pbc-ringed-topoi-derived-tensor-pullback]; the precise transformation comparison in [lem-pd-module-ringed-topos-derived-comparison] identifies its inverse with the actual mu_j of the item. Consequently the representative of q is the direct-sum totalization of epsilon_{E(P^p) tensor Q^q} composed with E(mu_{E(P^p),Q^q}) composed with E(eta_{P^p} tensor 1). This is exactly theta in Step 2, by its adjoint-of-unit description. Step 3 supplies a chain inverse; localization therefore makes q_{j,K,L} invertible. All complexes in the statement admit the chosen resolutions, so this proves the ambient assertion without boundedness or constructibility.",
-   "uses": [
-    "lem-weil-pbc-site-derived-tensor-descent",
-    "sk-def-sfb-derived-tensor-hom",
-    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
-    "lem-pd-module-ringed-topos-derived-comparison"
+    "lem-pd-module-ringed-topos-derived-comparison",
+    "lem-pd-open-module-kflat-projection-model"
    ],
    "elementary": false,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-int-tensor/det-lem-int-tensor-projection.proof.md",
-    "place": "Derived version: identification of the termwise mate with the actual derived module-object transformation"
+    "place": "Derived version: localization of the canonical K-flat chain model"
    }
   },
   {
@@ -86,7 +37,7 @@
    "elementary": true,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-int-tensor/det-lem-int-tensor-projection.proof.md",
-    "place": "Open immersions, sheaves: the adjoint-of-unit definition; final sentence on naturality"
+    "place": "Open immersions, sheaves: adjoint-of-unit definition; final naturality sentence"
    }
   },
   {
@@ -100,40 +51,26 @@
    "elementary": true,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-int-tensor/det-lem-int-tensor-projection.proof.md",
-    "place": "Derived version, restriction to bounded constructible objects and the fixed Qlb coefficient"
+    "place": "Derived version: restriction to bounded constructible Qlb objects"
    }
   }
  ],
  "proof_deps": [
-  "def-pc-flat-sheaf-modules",
-  "def-pc-kflat-complex",
-  "def-pc-tensor-complex-sheaves",
   "def-sfb-adjunction-has-projection-formula",
   "def-sfb-dc-open-lower-shriek-adjunction",
-  "def-sfb-modobj-relative-tensor",
-  "def-sfb-module-open-lower-shriek",
-  "def-sfb-module-open-lower-shriek-adjunction",
   "lem-pc-kflat-resolution",
   "lem-pd-module-ringed-topos-derived-comparison",
-  "lem-sfb-alpha-iso",
-  "lem-sfb-open-projection-formula",
+  "lem-pd-open-module-balanced-projection",
+  "lem-pd-open-module-kflat-projection-model",
   "lem-weil-pbc-exact-functor-derived-factorization",
-  "lem-weil-pbc-left-adjoint-preserves-colimits",
-  "lem-weil-pbc-proetale-immersion-limit-preservation",
-  "lem-weil-pbc-ringed-pullback-preserves-kflat",
-  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
-  "lem-weil-pbc-site-derived-tensor-descent",
   "sk-def-sfb-bounded-constructible",
   "sk-def-sfb-dc-restricted-functors",
-  "sk-def-sfb-derived-tensor-hom",
-  "sk-def-sfb-finite-lower-shriek",
-  "sk-def-sfb-module-lower-shriek",
   "sk-def-sfb-qlbar-condensed"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-int-tensor/det-lem-int-tensor-projection.proof.md",
-  "place": "Open immersions, sheaves; Derived version. The blueprint is agent-written; relative-coequalizer and precise-map arguments supplied explicitly."
+  "place": "Open immersions, sheaves; Derived version. Short assembly from two separate normalized module lemmas; inherited naturality and constructible restriction arguments retained."
  },
  "stmt_deps": [
   "sk-def-sfb-dc-setting",
@@ -234,47 +171,19 @@
   "is": null
  },
  "split_report": {
-  "date": "2026-10-17",
+  "date": "2026-10-22",
   "item": "lem-pd-condensed-open-exceptional-projection-formula",
   "worker": "stage1",
-  "summary": "Retained the interrupted split and its searches; repaired the abelian-versus-relative tensor gap by the defining balanced coequalizer, verified K-flatness of both open pullback and extension by zero on the chosen models, and identified the actual unit/counit/lax-map composite before restricting to bounded constructibles. Reuses existing nodes only.",
-  "blueprint": "The open sheaf adjoint-of-unit argument and Derived version of det-lem-int-tensor-projection.proof.md are realized in Steps 1-6; Step 7 restricts to the required Qlb bounded constructibles. The seed has no imported ancestor, as blueprint_refs.py ancestor confirms; the existing from.node=null and via chain are retained.",
+  "summary": "Repair of the 2026-10-22 11:45 UTC landing return (returned head 371df2a2d12): rebuilt against the current server DAG through deliver.py. The released stage-1 repair order still applies; the current item statement and statement dependencies agree exactly with this retained split. Re-read all eight existing proof dependency statements and both retained new-node statements: all twelve recorded citation quotes equal the complete current statements, so no mathematical dependency adjustment is required. Retained the two statement-only tasks and four-step 2430-character assembly, with all seven original arguments preserved in report.md. The ordinary balanced unit/projection argument and signed K-flat model remain separate work items; localization, naturality, symmetry and the constructible restriction remain in the parent.",
+  "blueprint": "The Open immersions, sheaves paragraph and Derived version of det-lem-int-tensor-projection.proof.md are realized by assembly Steps 1-2 using the two new nodes: A realizes the ordinary unit and scalar-balanced projection, B the signed total chain model and exact canonical-map normalization. Assembly Step 3 gives the adjoint description, symmetry and naturality; Step 4 restricts to the required Qlb bounded constructibles. The seed has no imported ancestor; the existing from.node=null and via chain are retained.",
   "tool_uses": [
    {
     "node": "lem-pd-module-ringed-topos-derived-comparison",
     "why": "Identifies internal modules with ringed-topos modules, including the actual tensor transformation, without replacing any Verdier-exchange step. This is a generic tool; the Verdier unit supplies no such sheaf/tensor construction."
    },
    {
-    "node": "lem-sfb-alpha-iso",
-    "why": "Identifies the pulled-back coefficient ring for every condensed ring; the admissible-coefficient-only statement is insufficient here. This is a generic tool; the Verdier unit supplies no such sheaf/tensor construction."
-   },
-   {
-    "node": "lem-weil-pbc-proetale-immersion-limit-preservation",
-    "why": "Exact ringed-module restriction along an open immersion with an invertible coefficient comparison. This is a generic tool; the Verdier unit supplies no such sheaf/tensor construction."
-   },
-   {
-    "node": "lem-sfb-open-projection-formula",
-    "why": "Canonical abelian projection formula used on both arrows of the relative-tensor coequalizer. This is a generic tool; the Verdier unit supplies no such sheaf/tensor construction."
-   },
-   {
-    "node": "lem-weil-pbc-left-adjoint-preserves-colimits",
-    "why": "Preserves the defining coequalizer and the direct sums in total tensor complexes. This is a generic tool; the Verdier unit supplies no such sheaf/tensor construction."
-   },
-   {
     "node": "lem-pc-kflat-resolution",
     "why": "Flat-term K-flat representatives on each of the two ringed sites. This is a generic tool; the Verdier unit supplies no such sheaf/tensor construction."
-   },
-   {
-    "node": "lem-weil-pbc-ringed-pullback-preserves-kflat",
-    "why": "Pulls back a flat-term K-flat representative along the open immersion. This is a generic tool; the Verdier unit supplies no such sheaf/tensor construction."
-   },
-   {
-    "node": "lem-weil-pbc-site-derived-tensor-descent",
-    "why": "Computes the tensors and comparison maps on K-flat representatives. This is a generic tool; the Verdier unit supplies no such sheaf/tensor construction."
-   },
-   {
-    "node": "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
-    "why": "Canonical ringed-topos derived tensor comparison to which the actual module pullback map is compared. This is a generic tool; the Verdier unit supplies no such sheaf/tensor construction."
    }
   ]
  },
@@ -290,12 +199,12 @@
   "lem-weil-pbc-ringed-topoi-derived-tensor-pullback"
  ],
  "reviewed": {
-  "date": "2026-10-17",
+  "date": "2026-10-22",
   "by": "L",
-  "reviewer": "NT-cc-Q58-0ffe43317",
-  "group": "Q58",
+  "reviewer": "NT-cc-Q60-eae4bd544",
+  "group": "Q60",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q58-0ffe43317 (reviewer sub-agent of L); spot-checked: I read in full: the item and its 7 steps, the statement of every cited node (24 proof_deps, 11 stmt_deps), the whole blueprint proof det-lem-int-tensor-projection.proof.md, the unit sk-thm-sf-verdier-exchange, and step 2 of the citer nt-target-poincare-isiso. I also checked the master sources. In OpenImmersionProjection.lean, openImmersionProjectionComparison is the (D j_! ⊣ Lj^*).projectionMap with the lax μ of Lj^*; ProjectionMap.lean describes it as the transpose of δ∘(η⊗1). This matches the item's q = ε∘e(μ)∘e(η⊗1), in the same direction. The ℓ-adic algebraic-closure coefficient (Profinite.padicAlgClRingObj) means continuous maps into finite subextensions, which agrees with sk-def-sfb-qlbar-condensed. The category is module objects with the relative K-flat tensor; no coefficient categories are silently identified. The statement is unchanged and not weakened. Step checks: (1) the unit is invertible: α_j is iso for every condensed ring (lem-sfb-alpha-iso), so restriction is exact; abelian extension by zero is fully faithful (sk-def-sfb-finite-lower-shriek), the triangle-identity argument is written out, and derived functors act termwise. (2) This repairs the earlier C4 fault, which used the integer (⊗_Z) abelian formula as if it were the relative statement. The formula is now passed through the relative-tensor coequalizer: E preserves it as a left adjoint, the second arrow matches by naturality, and the first matches the action on EM, which is defined through the same formula. The coherence with an extra coefficient factor is brief but elementary. (3) The Tot isomorphism handles direct sums and the Koszul sign, so it works for unbounded complexes. (4) K-flatness and flat terms of RQ and EP, and transfer through the comparison lemma, are correct. (5) Derived q is identified with Tot θ using the comparison lemma's explicit μ_j and unit/counit clause. Step 5 does not name the K-flatness of R(EP), but it follows from the same pullback lemma, or because R(EP) ≅ P termwise. (6) The adjoint and symmetric form match def-sfb-adjunction-has-projection-formula. (7) The restriction to bounded constructible Qlb complexes is correct: tensor preservation is used only for Qlb, and the subcategory is full. Edge cases checked: U empty, j the identity, Λ=0, complexes in degree 0, unbounded K and L. Mechanical: proof_deps equals the union of uses, all ids exist, there is no cycle and no SGA, the blueprint fields are filled, and the searches are recorded. Duplicates: det-lem-int-tensor-projection asserts only an unspecified isomorphism; lem-sf-open-tensor-normalization is the ringed-sheaf analogue in another unit. Neither is a duplicate, and there are no new nodes. I accept the declared tool_uses (comparison, alpha-iso, immersion exactness, abelian open projection formula, left adjoints preserve colimits, K-flat resolution, K-flat pullback, tensor descent, ringed tensor pullback) as generic tools. No fixes were made."
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q60-eae4bd544 (reviewer sub-agent of L); spot-checked: Third push of the Q60 re-split, after 58d82028 FIX and 371df2a2 FIX. Both were refused at landing because the side completion was not promoted to the live DAG (coord/returns/Q60.md, 11:45 UTC). On clones/live and side-live the item still has its old 7-step proof, neither child node exists, and the stage-1 re-split note (human decision, keep_plan) is still released, so the split is still needed. Delta: both new nodes are sha256-identical to the 371df2a2 snapshot, so the B3 fix was lost again. The item changed only in split_report: its statement, stmt_deps, four steps and proof_deps are unchanged. All 25 cited statements match live. I re-read the item, both new nodes, every cited statement and the source (main-20261015 det-lem-int-tensor-projection.proof.md, 'Open immersions, sheaves' lines 15-21 and 'Derived version' lines 29-38). Conformity: old Steps 1-2 are node A (exact E and R, invertible linear unit, balanced-coequalizer θ as the adjoint-of-unit mate). Old Steps 3-5 are node B (signed direct-sum Tot isomorphism Φ with chain inverse, preservation of flat and K-flat, Q(Φ)=q). Old Steps 6-7 are the item's Steps 3-4 verbatim. The two nodes are comparable (about 2.6k and 2.5k characters of old work), the assembly is 2430 characters, and neither node restates the item. Step 1: A, exact-functor factorization, and the comparison node's clause for D(j_!)⊣Lj^* with unit, counit and μ_j give η=Q(u), invertible. Step 2: flat-term K-flat resolutions (lem-pc-kflat-resolution), transported by the comparison, which preserves and reflects flat and K-flat, plus B give q invertible for all unbounded K and L. Step 3 is formal against def-sfb-adjunction-has-projection-formula. Step 4: sk-def-sfb-dc-restricted-functors (⊗^L preserves D_cons for Q̄_ℓ), the restricted adjunction def-sfb-dc-open-lower-shriek-adjunction, and a full subcategory. Edge cases: j=id, U empty, Λ=0, N=Λ_Z, one- and two-degree sign check, unbounded direct sums. No duplicates (sfb-open-projection-formula, ringed-slice-extension-tensor, sf-ringed-open-total-tensor-kflat, sfb-open-immersion-derived-tensor-projection, det-lem-int-tensor-projection all differ). No SGA. tool_uses accepted. FIX (B3, re-applied from 371df2a2): A and B now define ν as the inverse of t_{A,B}: r(A⊗B)→rA⊗rB from def-sfb-condensed-pullback-tensor-comparison for f=j, and add that node to stmt_deps. The direction is correct, and there is no cycle (its 609-node closure contains no pd nodes). The fix files differ from the delivery only in statement and stmt_deps. Maintainer note: this fix has been lost at landing twice; please apply fixes/ when L promotes. The shorter support-projection route is still only advisory under keep_plan.; 2 file(s) fixed by the reviewer"
  },
  "lean": {
   "module": "Sheaf.Paper.CondensedOpenExceptionalProjectionFormula",
@@ -327,5 +236,16 @@
   "result": "pass",
   "note": "Read item, all 11 stmt_dep records, module, report, published sources (Derived/OpenImmersionLowerShriek:70-90, Derived/BoundedConstructible:326-347,460-545, Derived/Monoidal:743, Adjunction/ProjectionMap, ModuleObjects/ProjectionFormula:110-118). Setting, arbitrary commutative condensed Λ, D(j_!) via openImmersionLowerShriek, Lj^* via moduleObjectDerivedPullback, relative K-flat tensors, adjunction transported by (Lj^*≅D(j^*)).symm (same ambient adjunction the restricted dc adjunction restricts), μ = published strong monoidal structure. OpenProjectionFormulaClauses gives unit iso, iso of projectionMap = ε∘e(μ)∘e(η▷rL), two-variable naturality, homEquiv transpose, symmetric form via Koszul braiding = projectionFormulaMap; Q̄_ℓ restricted unit, component iso, naturality, .hom = ambient. Edge cases (empty U, identity, zero, unbounded, Λ=0) and single universe u ok; statement verbatim; one sorry; docstrings with source, blueprint tag and 7 steps; only lean field changed. nt_compile --json clean 29.7 s. Advisory: self-check second reading; framework decls monoidal_leftDerivedUpperStar/braidedCategory/projectionMap have no DAG owner; three redundant re-named instances; alias module of dc-open adjunction not imported (underlying decl used)."
  },
- "lean_audit": {}
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ }
 }

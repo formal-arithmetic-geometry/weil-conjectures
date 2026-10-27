@@ -1,0 +1,307 @@
+{
+ "id": "lem-sfb-space-proper-support-bounded-coherent-image",
+ "kind": "statement",
+ "title": "Bounded coherent direct image with proper supports on algebraic spaces",
+ "statement": "Work in the universes of [def-weil-size-convention]. Let $S$ be a scheme [def-pc-scheme], and use algebraic spaces over $S$ with their small etale structure sheaves [def-trf-algebraic-space]. Use module sheaves [def-weil-sheaf-of-modules-category], the unbounded derived categories $D(\\mathcal O_Z)$ [def-weil-abstract-derived-category], quasi-coherent modules [def-trf-space-quasi-coherent-module], and canonical module functors [def-trf-space-etale-module-functors]. Derived tensor and pullback use K-flat resolutions with flat terms; derived direct image uses K-injective resolutions. Noetherian means quasi-compact, quasi-separated and locally Noetherian on etale scheme charts. Coherent means quasi-coherent and, on Noetherian affine etale charts, associated to finitely generated modules. Proper means separated, of finite type and universally closed. The support of a cohomology module is its closed locus of nonzero geometric stalks; it is proper over a base if its reduced induced closed subspace is proper over that base. Let $f:X\\to Y$ be locally of finite type and let $Y$ be Noetherian. Let $E\\in D(\\mathcal O_X)$ have coherent cohomology sheaves, zero outside a finite interval, with each $\\operatorname{Supp}H^i(E)$ proper over $Y$. Then $Rf_*E$ has coherent cohomology sheaves, zero outside a finite interval. Neither properness nor quasi-compactness of $f$ is assumed.",
+ "source": {
+  "document": "literature/stacks-project/spaces-perfect.tex",
+  "place": "Tag 08GK (lemma-direct-image-coherent), full statement."
+ },
+ "stmt_deps": [
+  "def-weil-size-convention",
+  "def-pc-scheme",
+  "def-trf-algebraic-space",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-abstract-derived-category",
+  "def-trf-space-quasi-coherent-module",
+  "def-trf-space-etale-module-functors",
+  "def-sfb-space-derived-module-calculus",
+  "def-sfb-space-morphism-properties",
+  "def-sfb-space-module-support",
+  "def-sfb-reduced-algebraic-space",
+  "def-a1-space-point-topology",
+  "def-trf-space-module-scheme-restriction"
+ ],
+ "proof": [
+  {
+   "text": "Choose integers $a\\leq b$ with $H^q(E)=0$ outside $[a,b]$ (also for the zero object). By [def-sbc-standard-tstructure-derived-category], represent $E$ by a complex $K$ zero below $a$. The categories of modules on the small etale ringed sites are Grothendieck abelian by [lem-pur-ringed-site-grothendieck-abelian], with the common universe fixed in the statement. The canonical $f_*$ is additive and left exact: its defining section limits commute with kernels and finite products, or equivalently it is the module right adjoint of [def-trf-space-etale-module-functors]. Apply [thm-sp-truncation-e2] to this functor and $K$. It gives $E_2^{p,q}=R^pf_*H^q(E)\\Rightarrow H^{p+q}(Rf_*E)$, with $p\\geq0$, stabilization in each bidegree, and a finite filtration of each abutment with graded pieces $E_\\infty^{p,q}$. The K-injective derived functor here is the one in the statement.",
+   "uses": [
+    "def-sbc-standard-tstructure-derived-category",
+    "lem-pur-ringed-site-grothendieck-abelian",
+    "def-trf-space-etale-module-functors",
+    "thm-sp-truncation-e2"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-perfect.tex",
+    "place": "Tag 08GK (lemma-direct-image-coherent), spectral sequence paragraph; derived.tex Tag 015J (lemma-two-ss-complex-functor), expressed by the existing truncation spectral sequence."
+   }
+  },
+  {
+   "text": "First, $X$ is locally Noetherian: on compatible etale scheme charts apply [pqf-lem-locnoeth-lft] to the locally finite type map over locally Noetherian $Y$. Fix $q\\in[a,b]$ and put $M=H^q(E)$. Its coherent finite-module descriptions on those charts make it finite type and quasi-coherent. By [lem-sfb-space-module-proper-carrier-support], its quasi-coherent annihilator defines $i:Z_M\\hookrightarrow X$. On an affine etale chart, for a finite module $N$ and a prime $\\mathfrak p$, $N_{\\mathfrak p}=0$ exactly when one element outside $\\mathfrak p$ annihilates a finite generating set: multiply the finitely many denominators killing those generators. Thus $V(\\operatorname{Ann}N)=\\operatorname{Supp}N$, the Zariski support of $\\widetilde N$. By [lem-sfb-space-etale-chart-support] this Zariski support is the preimage of the geometric-stalk support $\\operatorname{Supp}M$ in the chart; since the charts cover $X$, $|Z_M|=\\operatorname{Supp}M$. By the equivalence for closed subspaces with the same point set in [lem-sfb-space-proper-support-closed-operations], $Z_M\\to Y$ is proper. The carrier equivalence in [lem-sfb-space-module-proper-carrier-support] now supplies a closed immersion $j:W\\hookrightarrow X$, a proper map $g=f\\circ j:W\\to Y$, and a finite type quasi-coherent module $G$ on $W$ with $j_*G\\simeq M$. This is done separately for each of the finitely many $q$.",
+   "uses": [
+    "pqf-lem-locnoeth-lft",
+    "lem-sfb-space-module-proper-carrier-support",
+    "lem-sfb-space-etale-chart-support",
+    "lem-sfb-space-proper-support-closed-operations"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-perfect.tex",
+    "place": "Tag 0CZI (lemma-module-support-proper-over-base), (1) implies (2) implies (3); the finite-generator localization calculation identifies the two underlying supports."
+   }
+  },
+  {
+   "text": "Since $g$ is locally of finite type and $Y$ is locally Noetherian, apply [pqf-lem-locnoeth-lft] on compatible etale scheme charts. Hence $W$ is locally Noetherian. On a Noetherian affine etale chart $V=\\operatorname{Spec}R\\to W$, the restriction of $G$ is quasi-coherent and etale locally finitely generated, so by [lem-trf-scheme-zariski-etale-quasi-coherent-equivalence] it is $H_{\\mathrm{et}}$ for a quasi-coherent Zariski module $H$ on $V$, which is of finite type by [lem-sfb-scheme-etale-module-exact-finiteness-comparison]. By [lem-weil-pbc-quasi-coherent-finite-type-affine](a), $N=H(V)$ is a finite $R$-module; [lem-weil-pbc-affine-tilde-gamma-adjunction](3) gives $H\\simeq\\widetilde N$, and [lem-weil-pbc-tilde-pullback-base-change] gives $H_{\\mathrm{et}}$ the value $B\\otimes_RN$ on $\\operatorname{Spec}B\\to V$. So $G$ is coherent by the convention in the statement. The representable closed immersion $j$ is affine: on every scheme test this is clause (b) of [lem-weil-pbc-closed-immersion-integral-separated-uc]. Therefore [lem-sfb-space-affine-module-higher-image-vanishing] gives $R^rj_*G=0$ for $r>0$.",
+   "uses": [
+    "pqf-lem-locnoeth-lft",
+    "lem-trf-scheme-zariski-etale-quasi-coherent-equivalence",
+    "lem-sfb-scheme-etale-module-exact-finiteness-comparison",
+    "lem-weil-pbc-quasi-coherent-finite-type-affine",
+    "lem-weil-pbc-affine-tilde-gamma-adjunction",
+    "lem-weil-pbc-tilde-pullback-base-change",
+    "lem-weil-pbc-closed-immersion-integral-separated-uc",
+    "lem-sfb-space-affine-module-higher-image-vanishing"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-perfect.tex",
+    "place": "Tag 08GC (lemma-support-proper-over-base-pushforward), proper carrier and closed-immersion acyclicity; spaces-morphisms.tex Tag 04ZK (lemma-locally-finite-type-locally-noetherian), reduced to scheme Tag 01T6 on charts."
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-ringed-topos-relative-leray] to $j,f,G$. Its page $R^pf_*(R^rj_*G)$ has only row $r=0$, so the finite filtration of the degree-$p$ abutment has a single possible nonzero graded piece. Consequently $R^pf_*M\\simeq R^pg_*G$ for all $p\\geq0$. By [lem-sfb-space-proper-coherent-higher-images], the right side is coherent: $g$ is proper, $Y$ is locally Noetherian, and $G$ is coherent. For boundedness, $g$ is quasi-compact by properness and quasi-separated because its diagonal is a representable closed immersion, affine on scheme tests by [lem-weil-pbc-closed-immersion-integral-separated-uc]. Since $Y$ is quasi-compact, [lem-sfb-space-derived-pushforward-upper-bound] applied to $G[0]$ supplies $N_q\\geq1$ with $R^pg_*G=0$ for $p\\geq N_q$. Thus every nonzero row of the page in Step 1 is coherent and vanishes for $p\\geq N_q$. The bound is applied only to the proper carrier map $g$.",
+   "uses": [
+    "lem-sfb-ringed-topos-relative-leray",
+    "lem-sfb-space-proper-coherent-higher-images",
+    "lem-weil-pbc-closed-immersion-integral-separated-uc",
+    "lem-sfb-space-derived-pushforward-upper-bound"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-perfect.tex",
+    "place": "Tag 08GC, relative Leray and proper coherence; Tag 08GK, final boundedness sentence, using spaces-cohomology.tex Tag 073G (lemma-vanishing-higher-direct-images), in the derived form of Tag 08FA."
+   }
+  },
+  {
+   "text": "All $E_2$ terms of Step 1 are coherent, including zero terms. By [lem-sfb-space-coherent-kernel-cokernel-extension] on the locally Noetherian target $Y$, kernels, cokernels and extensions of coherent modules are coherent. For every page, its differential is between coherent modules; its image is the kernel of its cokernel, and the next page is the quotient of its kernel by that image. Induction therefore makes every finite page coherent. The stabilization and finite abutment filtrations of [thm-sp-truncation-e2] identify each $E_\\infty$ term with a finite page and each graded piece with such a term. Starting at the zero end of each finite filtration and taking successive extensions proves coherence of every $H^n(Rf_*E)$. No closure under arbitrary submodules or infinite extensions is used.",
+   "uses": [
+    "lem-sfb-space-coherent-kernel-cokernel-extension",
+    "thm-sp-truncation-e2"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-perfect.tex",
+    "place": "Tag 08GK, coherence from the spectral sequence; spaces-cohomology.tex Tag 07UC (lemma-coherent-abelian-Noetherian), in the cited kernel/cokernel/extension form."
+   }
+  },
+  {
+   "text": "Let $N=\\max\\{N_q:a\\leq q\\leq b\\}$; this is a maximum of a finite nonempty family. The page $E_2^{p,q}$ is zero unless $p\\geq0$ and $a\\leq q\\leq b$, and is also zero when $p\\geq N$. Hence for $n<a$ or $n\\geq b+N$, every term with $p+q=n$ is zero: in the latter case $q\\leq b$ forces $p\\geq N$. All subsequent pages at these bidegrees remain zero. The finite, exhaustive, separated filtrations of [thm-sp-truncation-e2] then have every graded piece zero, so their abutments are zero by induction on filtration length. Thus $H^n(Rf_*E)=0$ outside $[a,b+N-1]$, proving boundedness as well as the coherence already established. If all cohomology modules vanish, choose the empty proper carrier and $N_q=1$ throughout; the same argument gives zero abutment.",
+   "uses": [
+    "thm-sp-truncation-e2"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-perfect.tex",
+    "place": "Tag 08GK, boundedness below and above, with the finite maximum and the zero graded-piece argument written explicitly."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sbc-standard-tstructure-derived-category",
+  "lem-pur-ringed-site-grothendieck-abelian",
+  "def-trf-space-etale-module-functors",
+  "thm-sp-truncation-e2",
+  "pqf-lem-locnoeth-lft",
+  "lem-sfb-space-module-proper-carrier-support",
+  "lem-sfb-space-etale-chart-support",
+  "lem-sfb-space-proper-support-closed-operations",
+  "lem-trf-scheme-zariski-etale-quasi-coherent-equivalence",
+  "lem-sfb-scheme-etale-module-exact-finiteness-comparison",
+  "lem-weil-pbc-quasi-coherent-finite-type-affine",
+  "lem-weil-pbc-affine-tilde-gamma-adjunction",
+  "lem-weil-pbc-tilde-pullback-base-change",
+  "lem-weil-pbc-closed-immersion-integral-separated-uc",
+  "lem-sfb-space-affine-module-higher-image-vanishing",
+  "lem-sfb-ringed-topos-relative-leray",
+  "lem-sfb-space-proper-coherent-higher-images",
+  "lem-sfb-space-derived-pushforward-upper-bound",
+  "lem-sfb-space-coherent-kernel-cokernel-extension"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/spaces-perfect.tex",
+  "place": "Tag 08GK (lemma-direct-image-coherent), with the proper-carrier proof of Tag 08GC and the uniform bound of spaces-cohomology.tex Tag 073G applied on each carrier."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A derived direct image has bounded coherent cohomology for a locally finite type morphism to a Noetherian algebraic space when every cohomology support is proper",
+   "results": "{\"t\": \"2026-10-23T15:32:01Z\", \"tool\": \"leanfinder\", \"query\": \"A derived direct image has bounded coherent cohomology for a locally finite type morphism to a Noetherian algebraic space when every cohomology support is proper\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.LocallyOfFiniteType.isLocallyNoetherian\", \"AlgebraicGeometry.IsProper.toLocallyOfFiniteType\", \"AlgebraicGeometry.LocallyOfFiniteType\", \"AlgebraicGeometry.quasiCompact_of_noetherianSpace_source\", \"AlgebraicGeometry.LocallyQuasiFinite\", \"AlgebraicGeometry.IsProper.instOfIsFinite\", \"AlgebraicGeometry.instIsStableUnderCompositionSchemeLocallyOfFiniteType\", \"AlgebraicGeometry.instIsMultiplicativeSchemeLocallyQuasiFinite\"], \"digest\": \"db8091ad8b4affd5\"}",
+   "date": "2026-10-23",
+   "verdict": "No match: the hits define ordinary module direct images and locally finite type scheme morphisms, not bounded coherent derived direct images on algebraic spaces."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Pushforward of a bounded coherent complex with proper support is bounded coherent on a Noetherian algebraic space",
+   "results": "{\"t\": \"2026-10-23T15:31:59Z\", \"tool\": \"leansearch\", \"query\": \"Pushforward of a bounded coherent complex with proper support is bounded coherent on a Noetherian algebraic space\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SheafOfModules.pushforward\", \"TopCat.Sheaf.pushforward\", \"AlgebraicGeometry.Scheme.Modules.pushforward\", \"TopCat.Sheaf.pushforward_sheaf_of_sheaf\", \"SheafOfModules.pushforwardSections\", \"PresheafOfModules.pushforward₀\", \"SheafOfModules.pushforward_obj_val\", \"AlgebraicGeometry.Scheme.Modules.pushforward_obj_obj\"], \"digest\": \"b3edbdcdd68112d7\"}",
+   "date": "2026-10-23",
+   "verdict": "No match: the hits define ordinary module direct images and locally finite type scheme morphisms, not bounded coherent derived direct images on algebraic spaces."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"coherent\"",
+   "results": "{\"t\": \"2026-10-23T15:31:59Z\", \"tool\": \"loogle\", \"query\": \"\\\"AlgebraicGeometry\\\", \\\"coherent\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 7, \"note\": \"\", \"top\": [\"_private.Mathlib.AlgebraicGeometry.Modules.Tilde.0.AlgebraicGeometry.QuasicoherentTilde.Aux.existence\", \"_private.Mathlib.AlgebraicGeometry.Modules.Tilde.0.AlgebraicGeometry.QuasicoherentTilde.Aux.uniqueness\", \"AlgebraicGeometry.instIsQuasicoherentOpensCarrierCarrierCommRingCatSpecTilde\", \"AlgebraicGeometry.instIsQuasicoherentOpensCarrierCarrierCommRingCatSpecObjModuleCatCarrierModulesFunctor\", \"AlgebraicGeometry.Scheme.Modules.isIso_fromTildeΓ_of_isQuasicoherent\", \"AlgebraicGeometry.isQuasicoherent_iff_isIso_fromTildeΓ\", \"AlgebraicGeometry.Scheme.Modules.isQuasicoherent_restrictFunctor\"], \"digest\": \"024f4977fd5685b4\"}",
+   "date": "2026-10-23",
+   "verdict": "No match: the hits define ordinary module direct images and locally finite type scheme morphisms, not bounded coherent derived direct images on algebraic spaces."
+  },
+  {
+   "tool": "grep",
+   "query": "directImage.*coherent|pushforward.*coherent|AlgebraicSpace",
+   "results": "{\"t\": \"2026-10-23T15:31:58Z\", \"tool\": \"grep\", \"query\": \"directImage.*coherent|pushforward.*coherent|AlgebraicSpace\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/Modules/Tilde.lean\"], \"digest\": \"9edb0d5e46224916\"}",
+   "date": "2026-10-23",
+   "verdict": "No match: the hits define ordinary module direct images and locally finite type scheme morphisms, not bounded coherent derived direct images on algebraic spaces."
+  },
+  {
+   "tool": "grep",
+   "query": "AlgebraicSpace|directImage.*coherent|pushforward.*coherent",
+   "results": "{\"t\": \"2026-10-23T18:44:24Z\", \"tool\": \"grep\", \"query\": \"AlgebraicSpace|directImage.*coherent|pushforward.*coherent\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/Modules/Tilde.lean\"], \"digest\": \"9edb0d5e46224916\"}",
+   "date": "2026-10-23",
+   "verdict": "No match: results concern scheme-level underived pushforward, locally finite type morphisms, or standard derived-category truncations; none states the proper-support algebraic-space coherent derived-image theorem. Read Mathlib/AlgebraicGeometry/Modules/Tilde.lean:566-587 and Algebra/Homology/DerivedCategory/TStructure.lean:180. No service was unavailable."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"coherent\"",
+   "results": "{\"t\": \"2026-10-23T18:44:25Z\", \"tool\": \"loogle\", \"query\": \"\\\"AlgebraicGeometry\\\", \\\"coherent\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 7, \"note\": \"\", \"top\": [\"_private.Mathlib.AlgebraicGeometry.Modules.Tilde.0.AlgebraicGeometry.QuasicoherentTilde.Aux.existence\", \"_private.Mathlib.AlgebraicGeometry.Modules.Tilde.0.AlgebraicGeometry.QuasicoherentTilde.Aux.uniqueness\", \"AlgebraicGeometry.instIsQuasicoherentOpensCarrierCarrierCommRingCatSpecTilde\", \"AlgebraicGeometry.instIsQuasicoherentOpensCarrierCarrierCommRingCatSpecObjModuleCatCarrierModulesFunctor\", \"AlgebraicGeometry.Scheme.Modules.isIso_fromTildeΓ_of_isQuasicoherent\", \"AlgebraicGeometry.isQuasicoherent_iff_isIso_fromTildeΓ\", \"AlgebraicGeometry.Scheme.Modules.isQuasicoherent_restrictFunctor\"], \"digest\": \"024f4977fd5685b4\"}",
+   "date": "2026-10-23",
+   "verdict": "No match: results concern scheme-level underived pushforward, locally finite type morphisms, or standard derived-category truncations; none states the proper-support algebraic-space coherent derived-image theorem. Read Mathlib/AlgebraicGeometry/Modules/Tilde.lean:566-587 and Algebra/Homology/DerivedCategory/TStructure.lean:180. No service was unavailable."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The derived pushforward of a complex with coherent cohomology and proper support is bounded coherent",
+   "results": "{\"t\": \"2026-10-23T18:44:25Z\", \"tool\": \"leansearch\", \"query\": \"The derived pushforward of a complex with coherent cohomology and proper support is bounded coherent\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SheafOfModules.pushforward_obj_val\", \"DerivedCategory.right_fac_of_isStrictlyLE\", \"SheafOfModules.pushforward\", \"DerivedCategory.TStructure.t\", \"DerivedCategory.exists_iso_Q_obj_of_isGE_of_isLE\", \"PresheafOfModules.pushforward₀_obj\", \"SheafOfModules.instIsRightAdjointPushforward\", \"SheafOfModules.pushforwardSections\"], \"digest\": \"a6dd94e86fe5717b\"}",
+   "date": "2026-10-23",
+   "verdict": "No match: results concern scheme-level underived pushforward, locally finite type morphisms, or standard derived-category truncations; none states the proper-support algebraic-space coherent derived-image theorem. Read Mathlib/AlgebraicGeometry/Modules/Tilde.lean:566-587 and Algebra/Homology/DerivedCategory/TStructure.lean:180. No service was unavailable."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A bounded coherent complex on an algebraic space whose cohomology supports are proper over a Noetherian base has bounded coherent derived direct image",
+   "results": "{\"t\": \"2026-10-23T18:44:26Z\", \"tool\": \"leanfinder\", \"query\": \"A bounded coherent complex on an algebraic space whose cohomology supports are proper over a Noetherian base has bounded coherent derived direct image\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Modules.instIsRightAdjointPushforward\", \"AlgebraicGeometry.Scheme.Modules.pushforward\", \"AlgebraicGeometry.exists_appTop_map_eq_zero_of_isLimit\", \"AlgebraicGeometry.exists_app_map_eq_zero_of_isLimit\", \"DerivedCategory.instIsGEObjCochainComplexIntQOfIsGE\", \"DerivedCategory.instIsLEObjCochainComplexIntQOfIsLE\", \"DerivedCategory.isGE_Q_obj_iff\", \"DerivedCategory.isLE_Q_obj_iff\"], \"digest\": \"4f9cd72dff85ee6b\"}",
+   "date": "2026-10-23",
+   "verdict": "No match: results concern scheme-level underived pushforward, locally finite type morphisms, or standard derived-category truncations; none states the proper-support algebraic-space coherent derived-image theorem. Read Mathlib/AlgebraicGeometry/Modules/Tilde.lean:566-587 and Algebra/Homology/DerivedCategory/TStructure.lean:180. No service was unavailable."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a locally finite type algebraic space morphism and a complex with finite coherent cohomology proper supports ensure finite coherent higher pushforwards",
+   "results": "{\"t\": \"2026-10-23T18:46:17Z\", \"tool\": \"leanfinder\", \"query\": \"For a locally finite type algebraic space morphism and a complex with finite coherent cohomology proper supports ensure finite coherent higher pushforwards\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsProper.toLocallyOfFiniteType\", \"AlgebraicGeometry.LocallyOfFiniteType\", \"AlgebraicGeometry.LocallyQuasiFinite\", \"AlgebraicGeometry.locallyOfFiniteType_of_comp\", \"AlgebraicGeometry.instLocallyQuasiFiniteOfIsFinite\", \"AlgebraicGeometry.instIsMultiplicativeSchemeLocallyOfFiniteType\", \"AlgebraicGeometry.instIsStableUnderCompositionSchemeLocallyOfFiniteType\", \"AlgebraicGeometry.locallyOfFiniteType_comp\"], \"digest\": \"9b6bb627ddb31418\"}",
+   "date": "2026-10-23",
+   "verdict": "No match: results concern scheme-level underived pushforward, locally finite type morphisms, or standard derived-category truncations; none states the proper-support algebraic-space coherent derived-image theorem. Read Mathlib/AlgebraicGeometry/Modules/Tilde.lean:566-587 and Algebra/Homology/DerivedCategory/TStructure.lean:180. No service was unavailable."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-space-bounded-coherent-finite-tor-image-perfect",
+  "date": "2026-10-23",
+  "group": "NJ"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Stable genus and smooth-family open loci in curve families. Supporting input: 0E76 proof, reduction to prestable curves, and 0E78 proof, decomposition by genus before imposing stability. Supporting input: 0E1J proof, perfectness and arbitrary derived base change before extracting the positive-degree perfect summand. Supporting input to this derived direct-image specialization: Tag 0A1P (lemma-base-change-tensor-perfect), perfectness assertion; perfect means sites-cohomology.tex Tag 08G5 (definition-perfect). Supporting input: Tag 0DKJ (lemma-tensor-perfect), based on Tag 08IS (lemma-perfect-direct-image). Supporting input: Tag 08IS, applied to the tensor object only after verifying all three hypotheses. Supporting input: Tag 08GK (lemma-direct-image-coherent), full statement.",
+   "via": [
+    "lem-sfb-space-bounded-coherent-finite-tor-image-perfect",
+    "lem-sfb-space-noetherian-tensor-perfect",
+    "lem-sfb-proper-support-tensor-perfect",
+    "lem-sfb-proper-flat-space-derived-base-change",
+    "lem-sfb-curve-h0-genus-strata",
+    "lem-sfb-stable-and-smooth-family-open-loci",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-space-proper-support-bounded-coherent-image",
+  "worker": "stage1",
+  "summary": "Verified the unchanged statement against Stacks 08GK and split its spectral-sequence proof using only existing DAG nodes. Expanded the proper closed-carrier reduction, the finite-generator support calculation, Leray collapse, coherence of finite pages and filtrations, and the finite maximum of carrier bounds. The original map need not be quasi-compact. No new nodes and no Lean attachment.",
+  "blueprint": "Retains the inherited from.place and via chain: supporting Tag 08GK input below Tag 08IS/0DKJ/0A1P to the alteration prerequisite in det-thm-sf-ctf-stability-direct-images (3). Read the current latest direct-images proof. Blueprint searches for 08GK, coherent direct image, 015J and proper support give no equivalent blueprint statement. This is a structure-sheaf tool below that route, not a change of coefficient layer or of the unit.",
+  "tool_uses": [
+   {
+    "node": "lem-pur-ringed-site-grothendieck-abelian",
+    "why": "Generic theorem that module sheaves on a small ringed site form a Grothendieck abelian category, needed for the spectral sequence."
+   },
+   {
+    "node": "thm-sp-truncation-e2",
+    "why": "Generic bounded-below hyper-derived-functor spectral sequence with stabilization and finite abutment filtration; no node in this unit supplies that abstract spectral-sequence theorem."
+   },
+   {
+    "node": "pqf-lem-locnoeth-lft",
+    "why": "Generic scheme-chart theorem that locally finite type over locally Noetherian is locally Noetherian, applied on charts of each proper carrier."
+   },
+   {
+    "node": "lem-weil-pbc-closed-immersion-integral-separated-uc",
+    "why": "Generic scheme closed-immersion affineness, applied on representable scheme tests to verify acyclicity and quasi-separatedness."
+   },
+   {
+    "node": "lem-trf-scheme-zariski-etale-quasi-coherent-equivalence",
+    "why": "Generic Zariski/etale quasi-coherent comparison on a scheme chart, used to read a finite type quasi-coherent module on a Noetherian affine chart as a finite module (reviewer FIX)."
+   },
+   {
+    "node": "lem-weil-pbc-quasi-coherent-finite-type-affine",
+    "why": "Generic affine finite-type criterion (Tag 01PB) for the same chart computation, with the tilde counit and tilde base-change nodes of the same unit (reviewer FIX)."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pur-ringed-site-grothendieck-abelian",
+  "thm-sp-truncation-e2",
+  "pqf-lem-locnoeth-lft",
+  "lem-weil-pbc-closed-immersion-integral-separated-uc",
+  "lem-trf-scheme-zariski-etale-quasi-coherent-equivalence",
+  "lem-weil-pbc-quasi-coherent-finite-type-affine"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-NS-a4d136926",
+  "group": "NS",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NS-a4d136926 (reviewer sub-agent of L); spot-checked: S1 first split of lem-sfb-space-proper-support-bounded-coherent-image (Stacks 08GK, read together with 08GC and 0CZI). There is no repair note, the item is still unsplit live, and the delivery has no new nodes and leaves the statement unchanged. The proof follows Stacks: the truncation spectral sequence (thm-sp-truncation-e2), then for each q a proper closed carrier via the annihilator, closed-operations equivalence and the 0CZI carrier node, then affine vanishing for the closed immersion, relative Leray with a single row, 08AR coherence and the 08FA bound applied only to the proper carrier g, then page-by-page coherence via 07UC and finite filtrations, and finally the finite-max bound. Every hypothesis checks out: X and W are locally Noetherian by 01T6 on charts; g is qc and qs from properness and an affine diagonal; Y is qc; E_2 vanishes for p<0. Edge cases E=0, a single shifted sheaf, empty support, f=id and a non-qc f all work. Two C1 faults were fixed in fixes/dag/nodes/sec-six-functors-basics/<item>.json. (1) Step 2 equated geometric-stalk support with Zariski support on the chart without a citation; it now cites lem-sfb-space-etale-chart-support (07TY). (2) Step 3 claimed without a citation that a finite type quasi-coherent G is given by a finite module on Noetherian affine charts; it now cites lem-trf-scheme-zariski-etale-quasi-coherent-equivalence, lem-sfb-scheme-etale-module-exact-finiteness-comparison, lem-weil-pbc-quasi-coherent-finite-type-affine (01PB), lem-weil-pbc-affine-tilde-gamma-adjunction(3) and lem-weil-pbc-tilde-pullback-base-change. proof_deps were recomputed (19), there are no cycles, and split_report.tool_uses gained 2 generic entries. Batch-5: none of the six flagged citations is a trace-formula or Poincare-duality statement or proof step. They are coherent-cohomology results on algebraic spaces whose closures reach only general trf foundations (def-trf-algebraic-space, quasi-coherent equivalence, fibre products). With the fix included, the delivery adds 0 nodes to the batch-5 closure, so all are accepted. No SGA reference. The blueprint from.node null is inherited from the base node.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SpaceProperSupportBoundedCoherentImage",
+  "declaration": "AlgebraicGeometry.AlgebraicSpace.derivedDirectImage_bounded_coherent_of_proper_support",
+  "file": "lean/Sheaf/AlgebraicGeometry/SpaceProperSupportBoundedCoherentImage.lean",
+  "statement": "theorem derivedDirectImage_bounded_coherent_of_proper_support {S : Scheme.{u}} {X Y : AlgebraicSpace S} [HasDerivedCategory.{w} X.SmallModules] [HasDerivedCategory.{w} Y.SmallModules] (f : X ⟶ Y) (hf : MapIsLocally (@LocallyOfFiniteType) f) (hYln : ∀ T : Y.EtaleSite, IsLocallyNoetherian (Y.etaleForget.obj T)) (hYqc : CompactSpace (Point Y.obj.obj)) (hYqs : ∀ (U V : Over S) (a : yoneda.obj U ⟶ Y.obj.obj) (b : yoneda.obj V ⟶ Y.obj.obj), IsAffine U.left → IsAffine V.left → CompactSpace (Point (Limits.pullback a b))) (E : X.DerivedModules) (hcoh : ∀ i : ℤ, (X.smallModuleEquivalence.inverse.obj ((DerivedCategory.homologyFunctor X.SmallModules i).obj E)).IsQuasicoherent ∧ ∀ T : X.EtaleSite, IsAffine (X.etaleForget.obj T) → Module.Finite Γ(X.etaleForget.obj T, ⊤) Γ((X.schemeRestriction T).obj (X.smallModuleEquivalence.inverse.obj ((DerivedCategory.homologyFunctor X.SmallModules i).obj E)), ⊤)) (hbounded : ∃ a b : ℤ, ∀ i : ℤ, i < a ∨ b < i → IsZero ((DerivedCategory.homologyFunctor X.SmallModules i).obj E)) (hsupport : ∀ i : ℤ, ∃ (Z : AlgebraicSpace S) (j : Z ⟶ X), IsRepresentableWith (fun _ _ p ↦ IsClosedImmersion p.left) j.hom.hom ∧ IsReduced Z ∧ pointImage j.hom.hom = moduleSupport (X.smallModuleEquivalence.inverse.obj ((DerivedCategory.homologyFunctor X.SmallModules i).obj E)) ∧ MapIsProper (j ≫ f)) : (∀ i : ℤ, (Y.smallModuleEquivalence.inverse.obj ((DerivedCategory.homologyFunctor Y.SmallModules i).obj ((derivedDirectImage f).obj E))).IsQuasicoherent ∧ ∀ T : Y.EtaleSite, IsAffine (Y.etaleForget.obj T) → Module.Finite Γ(Y.etaleForget.obj T, ⊤) Γ((Y.schemeRestriction T).obj (Y.smallModuleEquivalence.inverse.obj ((DerivedCategory.homologyFunctor Y.SmallModules i).obj ((derivedDirectImage f).obj E))), ⊤)) ∧ (∃ a b : ℤ, ∀ i : ℤ, i < a ∨ b < i → IsZero ((DerivedCategory.homologyFunctor Y.SmallModules i).obj ((derivedDirectImage f).obj E)))",
+  "branch": "sheaf-dag",
+  "by": "Q08",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "Uses the existing small ringed-model equivalence and canonical K-injective derived direct image. Coherence is site quasi-coherence and finite affine-chart sections; proper support is the reduced closed subspace with exactly the geometric-stalk support as point image. Noetherianity uses absolute quasi-separatedness tested by pairs of affine scheme charts, with no separation assumption on the base scheme. Added stmt_deps are already landed definition nodes; no new notion or corrected statement."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-e3660b0c1",
+  "group": "Q08",
+  "result": "pass",
+  "note": "Read node, Stacks 08GK/08GC/0CZI and the exact declarations (MapIsLocally/MapIsProper, moduleSupport, pointImage, IsReduced, schemeRestriction, derivedDirectImage, smallModuleEquivalence). Clause match: lft f via MapIsLocally (no qc/proper on f); Noetherian Y = hYln+hYqc+absolute-qs hYqs; coherence = IsQuasicoherent + Module.Finite sections on affine charts (equal to Noetherian affine charts since X, Y are locally Noetherian); bounded via ∃ interval; proper support = reduced closed subspace with point image = moduleSupport and MapIsProper (j ≫ f), unique so the reduced induced structure; conclusion has the same clauses for the canonical K-injective derivedDirectImage. Edge cases E=0, empty spaces, non-qc f, arbitrary S, any characteristic OK. Item differs from live only in lean and 6 added landed stmt_deps (allowed); dependency records identical to live; statement verbatim; sorry only, no defs; docstrings with source, blueprint and 6 steps; imports per §114. No compile (no file changed). Advisories: hYqs is a verbatim inline of IsAbsolutelyQuasiSeparated (not citable, since an S2 fix cannot add stmt_deps); SmallModules/smallModuleEquivalence owner def-sfb-space-small-ringed-model reached only via def-sfb-space-derived-module-calculus, like other landed citers; H11 second reading is a self-review under the dispatcher policy, Worker report clause-complete."
+ }
+}

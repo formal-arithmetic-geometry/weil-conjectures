@@ -1,0 +1,443 @@
+{
+ "id": "lem-sfb-top-degree-base-change",
+ "kind": "statement",
+ "title": "Universal base change and tensor formula in the highest cohomological degree",
+ "statement": "Let $h:X\\to Y$ be a morphism of schemes [def-pc-scheme], where $X,Y$ are quasi-compact and quasi-separated [def-pc-morphism-conventions]. Let $d\\geq0$ be an integer. Suppose $R^i h_*H=0$ for all $i>d$ and all quasi-coherent $\\mathcal O_X$-modules $H$ [pqf-def-coherent, pqf-def-cohomology]. For any morphism $b:Y'\\to Y$, form $X'=X\\times_Y Y'$ with projections $b_X:X'\\to X$ and $h':X'\\to Y'$ [def-pc-fibre-product]. Then (a) $R^i h'_*H'=0$ for every quasi-coherent $\\mathcal O_{X'}$-module $H'$ and $i>d$; (b) for every such $H'$ and quasi-coherent $\\mathcal O_{Y'}$-module $M'$, the canonical tensor projection map is an isomorphism $R^d h'_*H'\\otimes_{\\mathcal O_{Y'}}M'\\xrightarrow{\\sim}R^d h'_*(H'\\otimes_{\\mathcal O_{X'}}h'^*M')$ [def-pc-module-pullback]; (c) for every further morphism $c:Y''\\to Y'$, with induced $c_X:X''=X'\\times_{Y'}Y''\\to X'$ and $h'':X''\\to Y''$, the canonical degree-$d$ base-change map $c^*R^d h'_*H'\\to R^d h''_*c_X^*H'$ is an isomorphism. Here all higher direct images concern structure-sheaf modules and all unadorned pullbacks are ordinary tensor pullbacks.",
+ "source": {
+  "document": "literature/stacks-project/limits.tex",
+  "place": "Tag 0EX3, lemma-top-cohomology-functor, clauses (a)--(c), including the explanation of the canonical comparison in its proof."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-morphism-conventions",
+  "pqf-def-coherent",
+  "pqf-def-cohomology",
+  "def-pc-fibre-product",
+  "def-pc-module-pullback",
+  "def-pur-sheaf-tensor-product",
+  "def-pc-derived-category",
+  "def-sc-tensor-power-open-restriction-comparisons",
+  "def-sfb-top-base-change-canonical-maps",
+  "def-pc-derived-direct-image",
+  "def-pc-restricted-resolution-sections"
+ ],
+ "proof": [
+  {
+   "text": "First $h$ is quasi-compact and quasi-separated, and so are all its base changes, by [lem-weil-pbc-qcqs-morphism-permanence]. If $V\\subset Y$ is affine, $U=h^{-1}V$ is a quasi-compact open in the quasi-separated scheme $X$. Its inclusion is quasi-compact. Given a quasi-coherent module $N$ on $U$, apply [lem-weil-pbc-quasi-coherent-extension-qc-open] with the ambient module zero and the map $N\\to0$: it gives a quasi-coherent module on $X$ restricting to $N$. Higher-image open restriction [lem-pc-higher-direct-image-open-restriction] then transfers the assumed vanishing to $h|_U$. These same open-restriction identifications let us check all three conclusions on affine opens of $Y'$ and $Y''$ mapping into an affine open of $Y$. Hence in the calculations below the relevant bases are affine. The inverse images of those bases are qcqs, by the same permanence lemma. This is only a local reduction; $Y'$ and $Y''$ need not themselves be qcqs.",
+   "uses": [
+    "lem-weil-pbc-qcqs-morphism-permanence",
+    "lem-weil-pbc-quasi-coherent-extension-qc-open",
+    "lem-pc-higher-direct-image-open-restriction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/limits.tex",
+    "place": "Tag 0EX3, lemma-top-cohomology-functor, reduction to affine bases"
+   }
+  },
+  {
+   "text": "Assume $Y,Y'$ affine. The map $b$ is affine by [lem-weil-pbc-morphism-affine-schemes-affine], and $b_X$ is affine by [lem-weil-pbc-affine-morphism-permanence]. For quasi-coherent $H'$ the sheaf $b_{X,*}H'$ is quasi-coherent [lem-pc-affine-morphism-hi]. For $i>d$, the affine cohomology edge [lem-weil-pbc-affine-morphism-cohomology-edge] and the affine-base section comparison [lem-pc-affine-open-higher-direct-image-sections-iso] give\n$$H^i(X',H')\\cong H^i(X,b_{X,*}H')\\cong\\Gamma(Y,R^ih_*b_{X,*}H')=0.$$\nApply that section comparison to $h'$ as well: $\\Gamma(Y',R^ih'_*H')=0$. The higher image is quasi-coherent by [lem-pc-ordinary-higher-image-quasi-coherent], so the affine tilde/global-section equivalence [lem-weil-pbc-affine-tilde-gamma-adjunction] makes it zero. This proves (a) locally and hence globally. It applies to every quasi-coherent $H'$, not just pullbacks from $X$.",
+   "uses": [
+    "lem-pc-affine-morphism-hi",
+    "lem-weil-pbc-affine-morphism-cohomology-edge",
+    "lem-pc-affine-open-higher-direct-image-sections-iso",
+    "lem-pc-ordinary-higher-image-quasi-coherent",
+    "lem-weil-pbc-affine-tilde-gamma-adjunction",
+    "lem-weil-pbc-morphism-affine-schemes-affine",
+    "lem-weil-pbc-affine-morphism-permanence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/limits.tex",
+    "place": "Tag 0EX3, lemma-top-cohomology-functor, proof of (a)"
+   }
+  },
+  {
+   "text": "For (b), put $Y'=\\operatorname{Spec}R$ and fix $H'$. Define the $R$-linear functor $F(M)=H^d(X',E_M)$, where $E_M=H'\\otimes h'^*\\widetilde M$. The affine pullback formula [lem-weil-pbc-module-pullback-affine-sections] describes the pulled module on each affine chart as extension of scalars; thus it is quasi-coherent. Tensor quasi-coherence follows from [lem-weil-pbc-quasi-coherent-tensor-product-affine-sections]. The tilde functor preserves colimits [lem-weil-pbc-affine-tilde-gamma-adjunction], and tensor is right exact [lem-weil-pbc-tensor-right-exact]. Applying their affine formulas proves that an exact sequence $M_1\\to M_2\\to M_3\\to0$ gives $E_1\\to E_2\\to E_3\\to0$ exact. Put $K=\\ker(E_2\\to E_3)$ and $L=\\ker(E_1\\to E_2)$; both are quasi-coherent by [lem-weil-pbc-quasi-coherent-module-kernel]. The two short exact sequences $0\\to L\\to E_1\\to K\\to0$ and $0\\to K\\to E_2\\to E_3\\to0$ give long exact cohomology sequences [pqf-def-cohomology]. By (a) and the affine-base section comparison, $H^{d+1}(X',L)=H^{d+1}(X',K)=0$. Consequently $H^d(E_1)\\twoheadrightarrow H^d(K)$ and $H^d(K)\\to H^d(E_2)\\to H^d(E_3)\\to0$ are exact. Their composite proves right exactness of $F$. Linearity is the functorial $R$-action on the cohomology of the section complex.",
+   "uses": [
+    "lem-weil-pbc-module-pullback-affine-sections",
+    "lem-weil-pbc-quasi-coherent-tensor-product-affine-sections",
+    "lem-weil-pbc-affine-tilde-gamma-adjunction",
+    "lem-weil-pbc-tensor-right-exact",
+    "lem-weil-pbc-quasi-coherent-module-kernel",
+    "pqf-def-cohomology",
+    "lem-pc-affine-open-higher-direct-image-sections-iso"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/limits.tex",
+    "place": "Tag 0EX3, lemma-top-cohomology-functor, proof of (b), right exactness"
+   }
+  },
+  {
+   "text": "The three functors $M\\mapsto\\widetilde M$, $h'^*$, and $H'\\otimes-$ preserve arbitrary direct sums: they are left adjoints, respectively by [lem-weil-pbc-affine-tilde-gamma-adjunction], [def-pc-module-pullback] and [lem-pc-sheaf-modules-tensor-closed]. Finally $H^d(X',-)$ commutes with direct sums because $X'$ is qcqs [lem-weil-pbc-qcqs-cohomology-direct-sum]. Thus $F$ preserves arbitrary direct sums. Also $F(R)=H^d(X',H')$ by the tensor unit. Apply [lem-sfb-linear-right-exact-module-functor-tensor]: the isomorphism is the specified map\n$$H^d(X',H')\\otimes_RM\\longrightarrow H^d(X',H'\\otimes h'^*\\widetilde M),\\qquad x\\otimes m\\longmapsto H^d(H'\\xrightarrow{\\,s\\mapsto s\\otimes h'^*m\\,}E_M)(x).$$\nThis is the canonical tensor projection map on affine-base sections, since its restriction at each $m:R\\to M$ is that cohomology map. Both higher images are quasi-coherent [lem-pc-ordinary-higher-image-quasi-coherent]. The cocycle class maps $H^d(X',-)\\to\\Gamma(Y',R^dh'_*-)$ on quasi-coherent modules are bijective over the affine $Y'$ [lem-pc-affine-resolution-section-bijective], and they commute with the map induced by a module morphism, since it carries cocycles of a resolution to cocycles of a resolution. With the affine tensor-section formula [lem-weil-pbc-quasi-coherent-tensor-product-affine-sections] they identify the displayed map with the sections over $Y'$ of the canonical map of (b), which on a local section $m$ of $\\widetilde M$ is $R^dh'_*$ of $s\\mapsto s\\otimes h'^*m$. The tilde/global-section equivalence detects its invertibility. This proves (b) locally and hence globally.",
+   "uses": [
+    "lem-weil-pbc-affine-tilde-gamma-adjunction",
+    "def-pc-module-pullback",
+    "lem-pc-sheaf-modules-tensor-closed",
+    "lem-weil-pbc-qcqs-cohomology-direct-sum",
+    "lem-sfb-linear-right-exact-module-functor-tensor",
+    "lem-pc-ordinary-higher-image-quasi-coherent",
+    "lem-pc-affine-resolution-section-bijective",
+    "lem-weil-pbc-quasi-coherent-tensor-product-affine-sections"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/limits.tex",
+    "place": "Tag 0EX3, lemma-top-cohomology-functor, proof of (b), sums and the module-functor exercise"
+   }
+  },
+  {
+   "text": "For (c) work over $Y'=\\operatorname{Spec}R$, $Y''=\\operatorname{Spec}B$ and put $p=c_X$. There is an isomorphism\n$$p_*p^*H'\\cong H'\\otimes h'^*\\widetilde B.$$\nIndeed, on an affine $W=\\operatorname{Spec}A\\subset X'$ with $H'|_W=\\widetilde N$, [lem-weil-pbc-affine-chart-base-change-iso] identifies the inverse image with $\\operatorname{Spec}(A\\otimes_RB)$. The affine pullback formula identifies the left-hand module with $N\\otimes_A(A\\otimes_RB)$ and the right-hand module with $N\\otimes_A(A\\otimes_RB)$ by the affine tensor-section formula. Both identifications send the pullback unit of $n$ to $n\\otimes1$; their formulas commute with ring restriction and hence glue. The cited affine tilde equivalence identifies the sheaves from these modules. No flatness is used.",
+   "uses": [
+    "lem-weil-pbc-module-pullback-affine-sections",
+    "lem-weil-pbc-quasi-coherent-tensor-product-affine-sections",
+    "lem-weil-pbc-affine-tilde-gamma-adjunction",
+    "lem-weil-pbc-affine-chart-base-change-iso"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/limits.tex",
+    "place": "Tag 0EX3, lemma-top-cohomology-functor, proof of (c), affine-chart push-pull calculation"
+   }
+  },
+  {
+   "text": "Since $p$ is affine, its cohomology edge gives\n$$H^d(X'',p^*H')\\cong H^d(X',p_*p^*H')\\cong H^d(X',H'\\otimes h'^*\\widetilde B)\\cong H^d(X',H')\\otimes_R B.$$\nThe last arrow is the inverse of (b); the first is the inverse edge isomorphism of [lem-weil-pbc-affine-morphism-cohomology-edge]. Under these identifications the map in the forward direction sends $x\\otimes b$ to $b$ times the cohomological pullback of $x$ along the unit $H'\\to p_*p^*H'$. This follows from the normalization in the preceding step and the formula for (b): at $b=1$ it is the cohomology of that unit followed by the affine edge; $B$-linearity gives general $b$. Thus the ordinary cohomological unit comparison is invertible.",
+   "uses": [
+    "lem-weil-pbc-affine-morphism-cohomology-edge",
+    "def-weil-pbc-module-cohomology-fmap"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/limits.tex",
+    "place": "Tag 0EX3, lemma-top-cohomology-functor, proof of (c), final cohomology calculation"
+   }
+  },
+  {
+   "text": "We identify the canonical map of (c). Put $C=Rh'_*(H'[0])$; by (a) it has cohomology zero above $d$, and [lem-weil-pbc-derived-pullback-top-cohomology] gives $\\kappa_{c,C}:H^d(Lc^*C)\\xrightarrow{\\sim}c^*R^dh'_*H'$. Let $\\delta_c:Lc^*C\\to Rh''_*((p^*H')[0])$ be the canonical module base-change map: the derived base-change map [def-pc-derived-base-change-map] followed by the derived-to-ordinary pullback comparison on $H'$ [def-pc-derived-module-base-change-map]. The map of (c), as in the source, is $\\gamma=H^d(\\delta_c)\\kappa_{c,C}^{-1}:c^*R^dh'_*H'\\to R^dh''_*p^*H'$. Let $a:R^dh'_*H'\\to c_*R^dh''_*p^*H'$ be its ordinary adjoint [lem-pc-module-pullback-adjunction], so $a(s)=\\gamma(c^*s)$ on sections. Apply [lem-weil-pbc-top-base-change-presheaf] with $f=h'$, $F=H'$, $q=d$, $g=c$ and $V=Y'$; then $U=X'$, $W=Y''$, $U'=X''$ and $v_V=p$. It gives $\\Gamma(Y',a)\\theta_{Y'}=\\theta'_{Y''}p^*$, where $p^*$ is the cohomology map of the pullback unit $H'\\to p_*p^*H'$. As $h',h''$ are qcqs (step 1), $H'$ and $p^*H'$ are quasi-coherent and $Y',Y''$ are affine, both cocycle class maps $\\theta_{Y'}:H^d(X',H')\\to\\Gamma(Y',R^dh'_*H')$ and $\\theta'_{Y''}:H^d(X'',p^*H')\\to\\Gamma(Y'',R^dh''_*p^*H')$ are bijective [lem-pc-affine-resolution-section-bijective].",
+   "uses": [
+    "lem-weil-pbc-derived-pullback-top-cohomology",
+    "def-pc-derived-base-change-map",
+    "def-pc-derived-module-base-change-map",
+    "lem-pc-module-pullback-adjunction",
+    "lem-weil-pbc-top-base-change-presheaf",
+    "lem-pc-affine-resolution-section-bijective"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/limits.tex",
+    "place": "Tag 0EX3, lemma-top-cohomology-functor, explanation of the canonical map before the proof and final paragraph"
+   }
+  },
+  {
+   "text": "Since $R^dh'_*H'$ is quasi-coherent [lem-pc-ordinary-higher-image-quasi-coherent], the affine pullback formula [lem-weil-pbc-module-pullback-affine-sections] gives $\\Gamma(Y'',c^*R^dh'_*H')\\cong\\Gamma(Y',R^dh'_*H')\\otimes_RB$, $s\\otimes b\\mapsto b\\,c^*s$. By $B$-linearity and step 7, $\\Gamma(Y'',\\gamma)(s\\otimes b)=b\\,\\Gamma(Y',a)(s)$. Through the bijections $\\theta_{Y'}$ and $\\theta'_{Y''}$ of step 7 this is the map $x\\otimes b\\mapsto b\\,p^*x$ from $H^d(X',H')\\otimes_RB$ to $H^d(X'',p^*H')$, proved invertible in step 6. Source and target of $\\gamma$ are quasi-coherent, by the affine pullback formula and [lem-pc-ordinary-higher-image-quasi-coherent]. The affine tilde/global-section equivalence [lem-weil-pbc-affine-tilde-gamma-adjunction] therefore makes $\\gamma$ an isomorphism over $Y''$. The base-change construction restricts to opens [def-pc-derived-base-change-map], and open restriction of higher images [lem-pc-higher-direct-image-open-restriction] then proves (c) for arbitrary $c$.",
+   "uses": [
+    "lem-pc-ordinary-higher-image-quasi-coherent",
+    "lem-weil-pbc-module-pullback-affine-sections",
+    "lem-weil-pbc-affine-tilde-gamma-adjunction",
+    "def-pc-derived-base-change-map",
+    "lem-pc-higher-direct-image-open-restriction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/limits.tex",
+    "place": "Tag 0EX3, lemma-top-cohomology-functor, explanation of the canonical map before the proof and final paragraph"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-derived-base-change-map",
+  "def-pc-derived-module-base-change-map",
+  "def-pc-module-pullback",
+  "def-weil-pbc-module-cohomology-fmap",
+  "lem-pc-affine-morphism-hi",
+  "lem-pc-affine-open-higher-direct-image-sections-iso",
+  "lem-pc-affine-resolution-section-bijective",
+  "lem-pc-higher-direct-image-open-restriction",
+  "lem-pc-module-pullback-adjunction",
+  "lem-pc-ordinary-higher-image-quasi-coherent",
+  "lem-pc-sheaf-modules-tensor-closed",
+  "lem-sfb-linear-right-exact-module-functor-tensor",
+  "lem-weil-pbc-affine-chart-base-change-iso",
+  "lem-weil-pbc-affine-morphism-cohomology-edge",
+  "lem-weil-pbc-affine-morphism-permanence",
+  "lem-weil-pbc-affine-tilde-gamma-adjunction",
+  "lem-weil-pbc-derived-pullback-top-cohomology",
+  "lem-weil-pbc-module-pullback-affine-sections",
+  "lem-weil-pbc-morphism-affine-schemes-affine",
+  "lem-weil-pbc-qcqs-cohomology-direct-sum",
+  "lem-weil-pbc-qcqs-morphism-permanence",
+  "lem-weil-pbc-quasi-coherent-extension-qc-open",
+  "lem-weil-pbc-quasi-coherent-module-kernel",
+  "lem-weil-pbc-quasi-coherent-tensor-product-affine-sections",
+  "lem-weil-pbc-tensor-right-exact",
+  "lem-weil-pbc-top-base-change-presheaf",
+  "pqf-def-cohomology"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/limits.tex",
+  "place": "Tag 0EX3, lemma-top-cohomology-functor, complete proof, with its omitted module-functor exercise isolated as a statement-only prerequisite."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For a quasi compact quasi separated morphism with quasi coherent cohomological dimension at most d the top higher direct image commutes with arbitrary base change and tensor products",
+   "results": "OK: 8 hits; AlgebraicGeometry.quasiCompact_isStableUnderBaseChange, AlgebraicGeometry.Scheme.Modules.instIsRightAdjointPushforward, AlgebraicGeometry.quasiSeparated_isStableUnderBaseChange, AlgebraicGeometry.instIsStableUnderBaseChangeSchemeLocallyQuasiFinite, SheafOfModules.pushforwardComp, SheafOfModules.instIsRightAdjointPushforwardCompSheafRingCatMapSheafPushforwardContinuous, SheafOfModules.pullbackComp, AlgebraicGeometry.Scheme.Modules.pullbackPushforwardAdjunction",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits do not state this structure-module cohomology/pseudo-coherence assertion or a one-line generalization."
+  },
+  {
+   "tool": "leansearch",
+   "query": "For a quasi compact quasi separated morphism with quasi coherent cohomological dimension at most d the top higher direct image commutes with arbitrary base change and tensor products",
+   "results": "OK: 8 hits; AlgebraicGeometry.quasiCompact_isStableUnderBaseChange, KaehlerDifferential.cotangentComplexBaseChange_tmul, AlgebraicGeometry.quasiSeparated_isStableUnderBaseChange, AlgebraicGeometry.IsSeparated.isStableUnderBaseChange, Algebra.Extension.cotangentComplexBaseChange_eq_lTensor_cotangentComplex, IsBaseChange, AlgebraicGeometry.IsSeparated.instQuasiSeparated, AlgebraicGeometry.QuasiCompact",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits do not state this structure-module cohomology/pseudo-coherence assertion or a one-line generalization."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"cohomology\"",
+   "results": "OK: 3 hits; AlgebraicGeometry.Scheme.EllAdicCohomology, AlgebraicGeometry.Scheme.instAddCommGroupEllAdicCohomology, AlgebraicGeometry.Scheme.instSubsingletonEllAdicCohomologyOfIsEmptyCarrierCarrierCommRingCat",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits do not state this structure-module cohomology/pseudo-coherence assertion or a one-line generalization."
+  },
+  {
+   "tool": "grep",
+   "query": "higherDirectImage|topCohomology|cohomolog.*baseChange",
+   "results": "OK: 0 hits;  (Mathlib/AlgebraicGeometry)",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits do not state this structure-module cohomology/pseudo-coherence assertion or a one-line generalization."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "AlgebraicGeometry higher direct image in maximal cohomological degree projection formula arbitrary base change",
+   "results": "OK: 8 hits; CategoryTheory.Sheaf.cohomologyPresheafFunctor, CategoryTheory.Sheaf.cohomologyPresheaf, CategoryTheory.RanIsSheafOfIsCocontinuous.liftAux_map', CategoryTheory.RanIsSheafOfIsCocontinuous.liftAux_map, CategoryTheory.RanIsSheafOfIsCocontinuous.fac', CategoryTheory.Sheaf.H, SheafOfModules.instIsIsoPullbackObjUnitToUnitOfFinal, CategoryTheory.RanIsSheafOfIsCocontinuous.fac",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits do not state this structure-module cohomology/pseudo-coherence assertion or a one-line generalization."
+  },
+  {
+   "tool": "grep",
+   "query": "higherDirectImage|topCohomology|top_cohomology",
+   "results": "OK: 0 hits;  (Mathlib/AlgebraicGeometry)",
+   "date": "2026-10-23",
+   "verdict": "no match: no top-degree structure-module higher-direct-image tensor/base-change theorem; results concern underived geometry, module tensor products, or unrelated sheaf operations."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The highest higher direct image of a quasi coherent module commutes with arbitrary base change",
+   "results": "OK: 8 hits; IsBaseChange.directSum, IsBaseChange.toDualBaseChange, RingHom.IsStableUnderBaseChange, KaehlerDifferential.mapBaseChange, SheafOfModules.sheafificationCompPullback, KaehlerDifferential.tensorKaehlerEquivBase, IsBaseChange.directSumPow, AlgebraicGeometry.isAffineHom_isStableUnderBaseChange",
+   "date": "2026-10-23",
+   "verdict": "no match: no top-degree structure-module higher-direct-image tensor/base-change theorem; results concern underived geometry, module tensor products, or unrelated sheaf operations."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"higherDirectImage\"",
+   "results": "OK: 0 hits; ",
+   "date": "2026-10-23",
+   "verdict": "no match: no top-degree structure-module higher-direct-image tensor/base-change theorem; results concern underived geometry, module tensor products, or unrelated sheaf operations."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Top higher direct images of quasi coherent sheaves commute with arbitrary base change and tensor products under a uniform cohomological dimension bound",
+   "results": "OK: 8 hits; LightCondensed.instMonoidalClosedSheafLightProfiniteCoherentTopologyModuleCat, LightCondensed.instIsGrothendieckAbelianLightCondMod, SheafOfModules.pushforwardComp, SheafOfModules.pushforward_assoc, SheafOfModules.instIsRightAdjointPushforwardCompSheafRingCatMapSheafPushforwardContinuous, SheafOfModules.pullbackComp, SheafOfModules.pushforwardNatIso, CategoryTheory.Functor.sheafPushforwardCocontinuous",
+   "date": "2026-10-23",
+   "verdict": "no match: no top-degree structure-module higher-direct-image tensor/base-change theorem; results concern underived geometry, module tensor products, or unrelated sheaf operations."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A quasi compact quasi separated scheme morphism with vanishing higher direct images above d has universal cohomological dimension bound d",
+   "results": "OK: 8 hits; AlgebraicGeometry.instHasOfPostcompPropertySchemeQuasiCompactQuasiSeparated, AlgebraicGeometry.QuasiCompact.of_comp, AlgebraicGeometry.LocallyQuasiFinite, AlgebraicGeometry.QuasiSeparated.of_quasiSeparatedSpace, AlgebraicGeometry.quasiSeparatedSpace_of_quasiSeparated, AlgebraicGeometry.QuasiCompactCover.of_hom, AlgebraicGeometry.IsLocalAtTarget.descendsAlong_inf_quasiCompact, AlgebraicGeometry.QuasiSeparated.of_comp",
+   "date": "2026-10-23",
+   "verdict": "no match: no top-degree structure-module higher-direct-image tensor/base-change theorem; results concern underived geometry, module tensor products, or unrelated sheaf operations."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-relative-acyclic-direct-image",
+  "date": "2026-10-23",
+  "group": "Q81"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Knudsen forgetful morphism as the universal stable curve. Section 2, Lemma 2.5 (printed pp.178--179), using Section 1, Corollary 1.5 and Lemma 1.6: multiplication and the pushforward exact sequences, retaining the twist by minus the old-marking divisor. Lemma 2.5, first paragraph and final evaluation: Corollary 1.5 supplies vanishing, base-flat direct images, arbitrary base change and generation for the five divisor modules. Corollary 1.5, printed p.167: the general cohomology-and-base-change tool whose conditions (1) and (2) the exceptional-fibre calculation must verify. General tool for Corollary 1.5: top-degree base change and top-degree tensor projection, applied locally with d=1 before Nakayama and before lifting fibre sections.",
+   "via": [
+    "lem-sfb-relative-acyclic-direct-image",
+    "lem-sfb-rational-contraction-line-cohomology",
+    "lem-sfb-elementary-contraction-evaluation",
+    "lem-sfb-knudsen-pointed-forgetful-universal-curve",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-top-degree-base-change",
+  "worker": "stage1",
+  "summary": "Checked Stacks 0EX3 against all three clauses with arbitrary quasi-coherent modules and arbitrary base change. Reused existing module-cohomology tools, retained only quasi-separatedness, and isolated the source's right-exact-linear-functor exercise. Made the two-kernel right-exactness argument, affine push-pull unit formula, and derived-to-ordinary canonical-map normalization explicit. No statement change. Reviewer FIX (cc O2 review): step 7 split into steps 7-8 and re-cited through lem-weil-pbc-top-base-change-presheaf and lem-pc-affine-resolution-section-bijective; step 4 cites the bijective natural cocycle class map.",
+  "blueprint": "Preserves the inherited generic-tool provenance for det-thm-sf-ctf-stability-direct-images proof (3), through the marked-curve contraction and relative-acyclic-direct-image prerequisites; the latest blueprint direct-image route is unchanged. The existing ancestry command returns None; this is retained rather than inventing a new ancestor.",
+  "tool_uses": [
+   {
+    "node": "lem-pc-affine-morphism-hi",
+    "why": "Generic structure-module/cohomology tool used at steps 2 of the Stacks top-degree proof; this unit supplies no replacement statement, and the constructible direct-image route is unchanged."
+   },
+   {
+    "node": "lem-pc-affine-open-higher-direct-image-sections-iso",
+    "why": "Generic structure-module/cohomology tool used at steps 2, 3, 4 of the Stacks top-degree proof; this unit supplies no replacement statement, and the constructible direct-image route is unchanged."
+   },
+   {
+    "node": "lem-pc-higher-direct-image-open-restriction",
+    "why": "Generic structure-module/cohomology tool used at steps 1, 7 of the Stacks top-degree proof; this unit supplies no replacement statement, and the constructible direct-image route is unchanged."
+   },
+   {
+    "node": "lem-pc-ordinary-higher-image-quasi-coherent",
+    "why": "Generic structure-module/cohomology tool used at steps 2, 4, 7 of the Stacks top-degree proof; this unit supplies no replacement statement, and the constructible direct-image route is unchanged."
+   },
+   {
+    "node": "lem-pc-sheaf-modules-tensor-closed",
+    "why": "Generic structure-module/cohomology tool used at steps 4 of the Stacks top-degree proof; this unit supplies no replacement statement, and the constructible direct-image route is unchanged."
+   },
+   {
+    "node": "lem-weil-pbc-affine-morphism-cohomology-edge",
+    "why": "Generic structure-module/cohomology tool used at steps 2, 6 of the Stacks top-degree proof; this unit supplies no replacement statement, and the constructible direct-image route is unchanged."
+   },
+   {
+    "node": "lem-weil-pbc-affine-tilde-gamma-adjunction",
+    "why": "Generic structure-module/cohomology tool used at steps 2, 3, 4, 5, 7 of the Stacks top-degree proof; this unit supplies no replacement statement, and the constructible direct-image route is unchanged."
+   },
+   {
+    "node": "lem-weil-pbc-derived-pullback-top-cohomology",
+    "why": "Generic structure-module/cohomology tool used at steps 7 of the Stacks top-degree proof; this unit supplies no replacement statement, and the constructible direct-image route is unchanged."
+   },
+   {
+    "node": "lem-weil-pbc-module-pullback-affine-sections",
+    "why": "Generic structure-module/cohomology tool used at steps 3, 5 of the Stacks top-degree proof; this unit supplies no replacement statement, and the constructible direct-image route is unchanged."
+   },
+   {
+    "node": "lem-weil-pbc-qcqs-cohomology-direct-sum",
+    "why": "Generic structure-module/cohomology tool used at steps 4 of the Stacks top-degree proof; this unit supplies no replacement statement, and the constructible direct-image route is unchanged."
+   },
+   {
+    "node": "lem-weil-pbc-qcqs-morphism-permanence",
+    "why": "Generic structure-module/cohomology tool used at steps 1 of the Stacks top-degree proof; this unit supplies no replacement statement, and the constructible direct-image route is unchanged."
+   },
+   {
+    "node": "lem-weil-pbc-quasi-coherent-extension-qc-open",
+    "why": "Generic structure-module/cohomology tool used at steps 1 of the Stacks top-degree proof; this unit supplies no replacement statement, and the constructible direct-image route is unchanged."
+   },
+   {
+    "node": "lem-weil-pbc-quasi-coherent-module-kernel",
+    "why": "Generic structure-module/cohomology tool used at steps 3 of the Stacks top-degree proof; this unit supplies no replacement statement, and the constructible direct-image route is unchanged."
+   },
+   {
+    "node": "lem-weil-pbc-quasi-coherent-tensor-product-affine-sections",
+    "why": "Generic structure-module/cohomology tool used at steps 3, 4, 5 of the Stacks top-degree proof; this unit supplies no replacement statement, and the constructible direct-image route is unchanged."
+   },
+   {
+    "node": "lem-weil-pbc-tensor-right-exact",
+    "why": "Generic structure-module/cohomology tool used at steps 3 of the Stacks top-degree proof; this unit supplies no replacement statement, and the constructible direct-image route is unchanged."
+   },
+   {
+    "node": "lem-weil-pbc-morphism-affine-schemes-affine",
+    "why": "Generic affine scheme/permanence tool in the affine-local Stacks top-degree calculation; this unit has no replacement and the direct-image route is unchanged."
+   },
+   {
+    "node": "lem-weil-pbc-affine-morphism-permanence",
+    "why": "Generic affine scheme/permanence tool in the affine-local Stacks top-degree calculation; this unit has no replacement and the direct-image route is unchanged."
+   },
+   {
+    "node": "lem-weil-pbc-affine-chart-base-change-iso",
+    "why": "Generic affine scheme/permanence tool in the affine-local Stacks top-degree calculation; this unit has no replacement and the direct-image route is unchanged."
+   },
+   {
+    "node": "lem-weil-pbc-top-base-change-presheaf",
+    "why": "Generic structure-module/cohomology tool used at step 7: the ordinary adjoint of the top-degree module base-change map is the cohomological pullback on cocycle classes over each open of the base."
+   },
+   {
+    "node": "lem-pc-affine-resolution-section-bijective",
+    "why": "Generic structure-module/cohomology tool used at steps 4 and 7: the cocycle class map to sections of the higher direct image is bijective over affine opens for qcqs morphisms and quasi-coherent modules."
+   },
+   {
+    "node": "def-pc-derived-module-base-change-map",
+    "why": "Generic definition of the canonical module base-change map (derived base change followed by the derived-to-ordinary pullback comparison), used at step 7."
+   },
+   {
+    "node": "lem-pc-module-pullback-adjunction",
+    "why": "Generic ordinary pullback adjunction, used at step 7."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pc-affine-morphism-hi",
+  "lem-pc-affine-open-higher-direct-image-sections-iso",
+  "lem-pc-higher-direct-image-open-restriction",
+  "lem-pc-ordinary-higher-image-quasi-coherent",
+  "lem-pc-sheaf-modules-tensor-closed",
+  "lem-weil-pbc-affine-morphism-cohomology-edge",
+  "lem-weil-pbc-affine-tilde-gamma-adjunction",
+  "lem-weil-pbc-derived-pullback-top-cohomology",
+  "lem-weil-pbc-module-pullback-affine-sections",
+  "lem-weil-pbc-qcqs-cohomology-direct-sum",
+  "lem-weil-pbc-qcqs-morphism-permanence",
+  "lem-weil-pbc-quasi-coherent-extension-qc-open",
+  "lem-weil-pbc-quasi-coherent-module-kernel",
+  "lem-weil-pbc-quasi-coherent-tensor-product-affine-sections",
+  "lem-weil-pbc-tensor-right-exact",
+  "lem-weil-pbc-morphism-affine-schemes-affine",
+  "lem-weil-pbc-affine-morphism-permanence",
+  "lem-weil-pbc-affine-chart-base-change-iso",
+  "lem-weil-pbc-top-base-change-presheaf",
+  "lem-pc-affine-resolution-section-bijective",
+  "def-pc-derived-module-base-change-map",
+  "lem-pc-module-pullback-adjunction"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-O2-ce9e86601",
+  "group": "O2",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-O2-ce9e86601 (reviewer sub-agent of L); spot-checked: Read Stacks limits.tex Tag 0EX3 (lemma-top-cohomology-functor), the statement, the definition of gamma and the full proof. The item matches the source hypothesis by hypothesis: X and Y qcqs, top-degree vanishing on all quasi-coherent modules, arbitrary base change. Its map in (c) is def-pc-derived-module-base-change-map followed by kappa, which is the source's gamma. The statement is unchanged.\n\nSteps 1-3, 5 and 6 are correct against the cited statements:\n- step 1: quasi-coherent extension with F=0; the inclusion is quasi-compact because X is quasi-separated;\n- step 2: affine b and b_X, the edge map and the section comparison;\n- step 3: the two-kernel long exact sequence argument, with d=0 and a non-flat B=R/I checked;\n- step 5: affine push-pull, accepted as elementary;\n- step 6: unit pullback.\n\nNew node lem-sfb-linear-right-exact-module-functor-tensor (the Watts exercise of 0EX3 (b)) is true: tested on -⊗N, the zero functor, R=0 and infinite free modules. It is statement-only, has no duplicate in the DAG or Mathlib, and is strictly smaller than the item.\n\nFIX, two citation faults:\n1. Step 7 (C4/E5). It cited lem-sc-affine-derived-cohomology for invertibility of the specific edge e^q, but that node only asserts an abstract isomorphism. It also passed over the lambda/Theta identifications on affine sections. Rewritten as steps 7-8, citing the existing lem-weil-pbc-top-base-change-presheaf (Gamma(V,a)theta_V = theta'_W v^*) with lem-pc-affine-resolution-section-bijective, the affine pullback formula and lem-pc-module-pullback-adjunction.\n2. Step 4. Re-cited the canonical natural cocycle class map (lem-pc-affine-resolution-section-bijective) instead of the abstract section isomorphism.\n\nproof_deps and split_report tool_uses were recomputed.\n\nBatch-5: lem-weil-pbc-derived-adjunction-top-edge (and after the fix lem-weil-pbc-top-base-change-presheaf) reaches lem-trf-unbounded-direct-image-section-presheaf. That node is Stacks 0D5X, a general ringed-space description of R^q f_*. Also reached is lem-trf-localization-essentially-surjective (Categories 04VH). Both are generic and are not steps of the trace formula or of Poincare duality, so the citation is accepted. No SGA source is used.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.TopDegreeBaseChange",
+  "declaration": "AlgebraicGeometry.topDegree_base_change",
+  "declarations": [
+   "AlgebraicGeometry.topDegreeTensorSection",
+   "AlgebraicGeometry.IsTopDegreeTensorProjection",
+   "AlgebraicGeometry.topDegreeOrdinaryBaseChange",
+   "AlgebraicGeometry.topDegree_base_change"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/TopDegreeBaseChange.lean",
+  "statement": "theorem topDegree_base_change {X Y : Scheme.{u}} (f : X ⟶ Y) [CompactSpace X] [QuasiSeparatedSpace X] [CompactSpace Y] [QuasiSeparatedSpace Y] (d : ℕ) (hvan : ∀ (F : X.Modules), F.IsQuasicoherent → ∀ i : ℕ, d < i → IsZero (((pushforward f).rightDerived i).obj F)) : ∀ (Y' : Scheme.{u}) (b : Y' ⟶ Y), (∀ (F : (pullback b f).Modules), F.IsQuasicoherent → ∀ i : ℕ, d < i → IsZero (((pushforward (pullback.fst b f)).rightDerived i).obj F)) ∧ (∀ (F : (pullback b f).Modules), F.IsQuasicoherent → ∀ (M : Y'.Modules), M.IsQuasicoherent → ∃ φ : (((pushforward (pullback.fst b f)).rightDerived d).obj F) ⊗ M ⟶ ((pushforward (pullback.fst b f)).rightDerived d).obj (F ⊗ (tensorPullback (pullback.fst b f)).obj M), IsTopDegreeTensorProjection (pullback.fst b f) F M d φ ∧ IsIso φ) ∧ (∀ (F : (pullback b f).Modules), F.IsQuasicoherent → ∃ hC : ((schemeDerivedDirectImage (pullback.fst b f)).obj ((DerivedCategory.singleFunctor (SheafOfModules.{u} (moduleRings (pullback b f).toRingedSpace)) 0).obj F)).IsLE (d : ℤ), ∀ (Y'' : Scheme.{u}) (c : Y'' ⟶ Y'), IsIso (topDegreeOrdinaryBaseChange (pullback.fst b f) c F d hC))",
+  "branch": "newtargets-dag",
+  "by": "Q06",
+  "date": "2026-10-23",
+  "existing": false,
+  "note": "Clauses (a)--(c) of Stacks 0EX3 on the existing O-module carriers. Canonical tensor projection is specified by its local cocycle-class action; canonical further base change is the ordinary adjoint of topBaseChangeAdjoint, which is H^d(delta) kappa^{-1}. Reversed pullback argument order matches the existing normalized construction. The existential upper-bound proof in (c) is the vanishing assertion needed to type kappa; there is no extra mathematical hypothesis. All data definitions are actual constructions."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-62255ccfd",
+  "group": "Q06",
+  "result": "pass",
+  "note": "Re-delivery after RETURN 233246 (H2). Lean byte-identical to the returned head (substance already accepted and re-read against Stacks 0EX3: qcqs X,Y only; (a) all quasi-coherent F; (b) tensor projection pinned on cocycle classes x⊗m ↦ H^d(s↦s⊗f'^*m)x; (c) γ = adjoint of H^d(δ)κ⁻¹ with hC as a conclusion; d=0, identity/non-flat b and c, non-qcqs Y'/Y'' covered; universes u,w independent). The item node differs only in stmt_deps: the theorem lem-weil-pbc-top-base-change-presheaf is replaced by the new existing:true def node def-sfb-top-base-change-canonical-maps (topBaseChangeRestrictedUnit/Class/Delta/Adjoint in the landed TopBaseChangePresheaf; recorded signature verbatim, text matches the bodies, no move, no duplicate) and by def-pc-derived-direct-image and def-pc-restricted-resolution-sections; the theorem stays in proof_deps. The new node's theorem stmt_dep lem-weil-pbc-derived-pullback-top-cohomology is justified because topBaseChangeAdjoint takes IsIso κ from choose_spec of derivedPullback_topCohomology. tmulSection, homOfGlobalSection and restrictAppIso have no recording node. Advisory: def-pc-derived-base-change-map is reached only through def-pc-derived-module-base-change-map. The report has real Worker report and Second reading sections; no hollow definitions, only sorry, no SGA source, no pro-étale substitute, item not yet landed live. No recompile (no file changed)."
+ }
+}

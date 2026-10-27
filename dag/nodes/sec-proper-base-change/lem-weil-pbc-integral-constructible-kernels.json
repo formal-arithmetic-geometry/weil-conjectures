@@ -20,10 +20,11 @@
    "elementary": false
   },
   {
-   "text": "For a finite free cokernel presentation descended from a locally finitely presented module P on the noetherian base, use the proved lfp_extend helper to extend P to E. Apply exists_finiteFree_cover_of_condensedField_lfp, lifting E to ULift E for the scheme universe and transporting by liftCoefficientIso. Pull that free cover through both presentation covers. The proved scalar-extension/pullback comparison and extendScalarsComapSquareIso transport its local freeness to the actual coefficient ring on the covering scheme. Apply the matrix-kernel induction and transport back.",
+   "text": "For a finite free cokernel presentation descended from a locally finitely presented module P on the noetherian base, use the proved lfp_extend theorem to extend P to E. Apply exists_finiteFree_cover_of_condensedField_lfp, lifting E to ULift E for the scheme universe and transporting by liftCoefficientIso. Pull that free cover through both presentation covers. The proved scalar-extension/pullback comparison and extendScalarsComapSquareIso transport its local freeness to the actual coefficient ring on the covering scheme. Apply the matrix-kernel induction and transport back.",
    "uses": [
     "lem-weil-pbc-condensed-lfp-local-triviality",
-    "lem-weil-pbc-bounded-constructible-exact-scalar-extension"
+    "lem-sfb-locally-finitely-presented-extend-scalars",
+    "lem-sfb-pullback-extend-scalars-comparison"
    ],
    "elementary": false
   },
@@ -47,7 +48,8 @@
   "lem-weil-pbc-integral-matrix-pivot-cover",
   "def-weil-pbc-continuous-integral-coefficients",
   "lem-weil-pbc-condensed-lfp-local-triviality",
-  "lem-weil-pbc-bounded-constructible-exact-scalar-extension",
+  "lem-sfb-locally-finitely-presented-extend-scalars",
+  "lem-sfb-pullback-extend-scalars-comparison",
   "lem-weil-pbc-constructible-cokernels-extensions",
   "lem-weil-pbc-proetale-free-epi-local-splitting",
   "lem-weil-pbc-condensed-constructible-serre"
@@ -56,7 +58,7 @@
   "by": "agent",
   "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
   "place": "Section 6.8, Lemma 6.8.7 and Proposition 6.8.11(1), one-pivot reduction and augmented presentations",
-  "note": "H2: the original kernel-closure hole is reduced by a complete Lean proof to one local integral pivot chart. Strong induction, rational cokernel preservation under a pivot, scalar/pullback comparisons, the two exact cokernel calculations and constructible gluing are all proved. The remaining chart does not assert kernel finiteness or constructibility. Full finite-integral-model invariance and Smith diagonalization are pruned."
+  "note": "H2: the original kernel-closure hole is reduced by a complete Lean proof to one local integral pivot chart. Strong induction, rational cokernel preservation under a pivot, scalar/pullback comparisons, the two exact cokernel calculations and constructible gluing are all proved. The remaining chart does not assert kernel finiteness or constructibility. Full finite-integral-model invariance and Smith diagonalization are pruned. F4: the heart-level scalar-extension and pullback comparison are now factored out and used directly, removing the dependency on bounded derived triangulatedness. No statement or proof hole changed. Private isomorphisms are irreducible, pullback functor instances are cached, and equality of the two kernel maps is transported by kernelIsoOfEq instead of rewriting the local finite-presentation predicate."
  },
  "mathlib_searches": [
   {
@@ -162,5 +164,16 @@
   "sorry_before": [],
   "sorry_after": []
  },
- "lean_audit": {}
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ }
 }

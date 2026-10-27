@@ -1,0 +1,134 @@
+{
+ "id": "lem-coef-geometric-evaluation-mate-invertible",
+ "kind": "statement",
+ "title": "Invertibility of the canonical derived geometric evaluation mate",
+ "statement": "For a fixed GeometryOrdinary realization and target K-injective resolution instances, the right mate of the canonical localized inverse-image/evaluation square under the canonical derived geometric adjunctions is invertible at every index n.\n\nThe sites, coefficient tower and fixed ordinary realization are as in lem-coef-semilinear-geometric-derived-evaluation. The precise Lean statement, with the ambient parameter context, is:\n\nuniverse c v r\nopen CategoryTheory CategoryTheory.Limits Opposite\nnamespace WeilConjectures.SemilinearSections\nvariable {C : Type c} [Category.{v} C] (J : GrothendieckTopology C)\n  [EssentiallySmall.{max c v r} C]\n  (B : ℕ → Sheaf J CommRingCat.{max c v r})\n  (τ : ∀ n : ℕ, B (n + 1) ⟶ B n)variable\n  {C' : Type c} [Category.{v} C'] [EssentiallySmall.{max c v r} C']\n  (J' : GrothendieckTopology C')\n  (uInv : Sheaf J (Type (max c v r)) ⥤ Sheaf J' (Type (max c v r)))\n  (uPush : Sheaf J' (Type (max c v r)) ⥤ Sheaf J (Type (max c v r)))\n  (adjSet : uInv ⊣ uPush)variable (O : GeometryOrdinary.{c, v, r} J B τ J' uInv uPush adjSet)\n  [∀ n : ℕ, Abelian.HasKInjectiveResolutions (Mod.{c, v, max c v r} J' (O.coefficients n))]\n  [Abelian.HasKInjectiveResolutions\n    (Systems.{c, v, max c v r} J' O.coefficients O.coefficientTransition)]\ntheorem geometricEvaluationMate_isIso [PreservesFiniteLimits uInv] (n : ℕ) :\n    IsIso (mateEquiv O.ordinaryAdjunction.mapDerivedCategoryRightDerivedAdjunction\n      (O.levelAdjunction n).mapDerivedCategoryRightDerivedAdjunction\n      (TwoSquare.mk _ _ _ _\n        ((geometryPullEvaluation.{c, v, r} J B τ J' uInv uPush adjSet O) n).inv)).natTrans",
+ "stmt_deps": [
+  "lem-coef-semilinear-ordinary-geometric-realization"
+ ],
+ "source": {
+  "document": "literature/zheng-six-operations-lefschetz-verdier-DM-stacks_arXiv-1006.3810.pdf",
+  "place": "Construction 4.1, printed p. 21; paragraph before Lemma 4.10, printed p. 23."
+ },
+ "proof": [
+  {
+   "text": "Transport ordinary singleton extension across strictSystemSequenceEquivalence. The identity-on-sections evaluation transport identifies its right adjoint with the actual sequence-site evaluation. Exactness of the equivalence and systemSingle_preserves give quasi-isomorphism invariance on flat-term K-flat complexes. Apply nonempty_normalizedLeftExtension to obtain its normalized universal derived pair.",
+   "uses": [
+    "lem-pur-system-ringed-sequence-site",
+    "lem-pur-system-single-derived-extension",
+    "lem-pur-system-evaluation-topos",
+    "lem-pur-normalized-left-extension"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use the ordinary singleton mate isomorphism for these two ordinary singleton adjunctions. The exact-square localization factorization and the ordinary mate-unit equation are the normalized comparison hypotheses. The shared inverseImage_good helper preserves the common flat-term K-flat resolving class. Apply derivedExtensionMate_isIso to get invertibility of the derived singleton mate.",
+   "uses": [
+    "lem-coef-geometric-ordinary-evaluation-mate",
+    "lem-coef-geometric-coefficient-pullback-mate",
+    "lem-pur-extension-evaluation-comparison",
+    "lem-coef-semilinear-scalar-evaluation-transpose"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The iterated-mates identity expresses the canonical geometric right mate as the conjugate of that singleton mate under the two composite derived adjunctions. Conjugation preserves isomorphisms.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-coef-geometric-coefficient-pullback-mate",
+  "lem-coef-geometric-ordinary-evaluation-mate",
+  "lem-coef-semilinear-scalar-evaluation-transpose",
+  "lem-pur-extension-evaluation-comparison",
+  "lem-pur-normalized-left-extension",
+  "lem-pur-system-evaluation-topos",
+  "lem-pur-system-ringed-sequence-site",
+  "lem-pur-system-single-derived-extension"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/zheng-six-operations-lefschetz-verdier-DM-stacks_arXiv-1006.3810.pdf",
+  "place": "Construction 4.1, printed p. 21; paragraph before Lemma 4.10, printed p. 23. The unit and iterated-mates shortcut specializes Mathlib.CategoryTheory.Adjunction.Mates."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "An exact inverse image functor on systems of modules commutes with evaluation after right derivation of its right adjoint",
+   "results": "8 hits, including SheafOfModules.PullbackConstruction.adjunction, CategoryTheory.evaluationIsRightAdjoint and CategoryTheory.Functor.rightDerivedToHomotopyCategory. No normalized varying-coefficient comparison.",
+   "date": "2026-10-26",
+   "verdict": "Ordinary adjunction infrastructure only; use existing normalized singleton extension declarations for the unbounded derived step."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"iterated_mateEquiv_conjugateEquiv\"",
+   "results": "4 hits: CategoryTheory.iterated_mateEquiv_conjugateEquiv and its symm version, plus the two bicategorical versions, in Mathlib.CategoryTheory.Adjunction.Mates.",
+   "date": "2026-10-26",
+   "verdict": "This is the shorter categorical argument actually used: the ordinary push-evaluation normalization gives singleton invertibility by reflection under conjugation."
+  },
+  {
+   "tool": "grep",
+   "query": "mateEquiv.*[Ii]so|conjugateEquiv_of_iso",
+   "results": "8 hits, including CategoryTheory.conjugateEquiv_of_iso (Mates.lean:408), and ordinary monoidal-closed mate constructions.",
+   "date": "2026-10-26",
+   "verdict": "Use Mathlib conjugation and iterated mates. There is no complete specialized theorem about the GeometryOrdinary normalization and its unbounded derived evaluation."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.GeometricDerivedEvaluation",
+  "date": "2026-10-26",
+  "group": "F4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-coef-integral-exceptional-adjoint",
+   "place": "Proof paragraph 2: the finite coefficient-level derived adjunctions before R lim; geometric inverse image and direct image on the normalized ordinary semilinear system calculus. Derived evaluation and scalar comparisons for fixed ordinary geometric operations.",
+   "via": [
+    "lem-coef-semilinear-geometric-derived-evaluation",
+    "lem-coef-semilinear-geometric-operations-base-existence",
+    "lem-coef-semilinear-geometric-operations",
+    "lem-coef-semilinear-operations-existence",
+    "lem-coef-semilinear-derived-sections",
+    "lem-coef-finite-adjunction-diagram-realization"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.GeometricEvaluationMate",
+  "file": "lean/Sheaf/Paper/GeometricEvaluationMate.lean",
+  "declaration": "WeilConjectures.SemilinearSections.geometricEvaluationMate_isIso",
+  "statement": "theorem geometricEvaluationMate_isIso [PreservesFiniteLimits uInv] (n : ℕ) :\n    IsIso (mateEquiv O.ordinaryAdjunction.mapDerivedCategoryRightDerivedAdjunction\n      (O.levelAdjunction n).mapDerivedCategoryRightDerivedAdjunction\n      (TwoSquare.mk _ _ _ _\n        ((geometryPullEvaluation.{c, v, r} J B τ J' uInv uPush adjSet O) n).inv)).natTrans",
+  "branch": "sheaf-dag",
+  "by": "F4",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F4",
+  "result": "pass",
+  "landing": "20261026T100250-L-4166390",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F4",
+  "result": "pass",
+  "landing": "20261026T100250-L-4166390",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

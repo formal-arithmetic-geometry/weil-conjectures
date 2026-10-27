@@ -1,0 +1,260 @@
+{
+ "id": "lem-per-integrality-prime-neighbourhood",
+ "kind": "statement",
+ "title": "Integrality of a finite-type scheme near a prime localization",
+ "statement": "Let $R$ be a commutative Noetherian ring [def-weil-pbc-noetherian-ring], let $\\mathfrak p\\subset R$ be prime, and let $f:X\\to\\operatorname{Spec}R$ be a morphism of finite type [def-weil-affine-spectrum] [def-weil-finite-type-morphism]. Put $X_{\\mathfrak p}=X\\times_{\\operatorname{Spec}R}\\operatorname{Spec}R_{\\mathfrak p}$ [def-weil-pbc-localization-at-prime] [def-pc-fibre-product]. If $X_{\\mathfrak p}$ is integral [def-pc-integral-scheme], then there exists $a\\in R\\setminus\\mathfrak p$ such that $X_a=X\\times_{\\operatorname{Spec}R}\\operatorname{Spec}R[1/a]$ is integral [def-weil-ring-localization-away]. No separatedness, excellence, flatness, or domain hypothesis on $R$ is required.",
+ "source": {
+  "document": "literature/stacks-project/properties.tex",
+  "place": "Tag 01ON, lemma-characterize-integral, with its preceding affine-cover criteria: agent-formulated Noetherian localization consequence, not a verbatim assertion of that tag. The finite affine kernel argument is recorded in report.md; this fills the integrality detail in the spreading paragraph of Kurano–Shimomoto Lemma 4.4."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-noetherian-ring",
+  "def-weil-affine-spectrum",
+  "def-weil-finite-type-morphism",
+  "def-weil-pbc-localization-at-prime",
+  "def-pc-fibre-product",
+  "def-pc-integral-scheme",
+  "def-weil-ring-localization-away"
+ ],
+ "proof": [
+  {
+   "text": "By [def-weil-finite-type-morphism], choose a finite affine open covering $U_i=\\operatorname{Spec}B_i$ of $X$ with each $B_i$ a finite type $R$-algebra. Each $B_i$ is Noetherian by [lem-weil-pbc-finite-type-algebra-noetherian]. Write $S=R\\setminus\\mathfrak p$ and $C_i=S^{-1}B_i$. By [lem-weil-pbc-affine-chart-base-change-iso], the inverse images of the $U_i$ on $X_{\\mathfrak p}$ and $X_b$ are affine opens with rings $R_{\\mathfrak p}\\otimes_R B_i$ and $R[1/b]\\otimes_R B_i$, respectively, for any $b\\notin\\mathfrak p$. These opens cover because their underlying sets are inverse images of a covering.",
+   "uses": [
+    "def-weil-finite-type-morphism",
+    "lem-weil-pbc-finite-type-algebra-noetherian",
+    "lem-weil-pbc-affine-chart-base-change-iso"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00FN, lemma-Noetherian-permanence; Schemes Tags 01I4 and 01JR, affine base-change charts"
+   }
+  },
+  {
+   "text": "The tensor rings in Step 1 are $C_i$ and $B_i[1/b]$. Explicitly the first comparison sends $(r/s)\\otimes x$ to $rx/s$; its inverse sends $x/s$ to $(1/s)\\otimes x$. The second comparison has the same formulas with $s=b^n$. The fraction equality relations make these well defined: a relation killed by some denominator maps to zero since that denominator is invertible. On pure tensors and fractions both composites are the identity; the tensor balancing relation accounts for moving $r$ across. Thus these are ring isomorphisms compatible with the structural maps. Here $S^{-1}B_i$ means fractions with denominators from the image of $S$, using [def-weil-pbc-module-localization] on $B_i$ and its usual fraction multiplication.",
+   "uses": [
+    "def-weil-pbc-localization-at-prime",
+    "def-weil-ring-localization-away",
+    "def-weil-pbc-module-localization"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Tag 01I4, lemma-fibre-product-affine-schemes, with the explicit universal-property localization specialization"
+   }
+  },
+  {
+   "text": "Let $K_i=\\ker(B_i\\to C_i)$. Since $B_i$ is Noetherian, [def-weil-pbc-noetherian-ring] gives finitely many ideal generators $k_{it}$. The zero-fraction criterion in [def-weil-pbc-module-localization] gives $s_{it}\\in S$ with $s_{it}k_{it}=0$. Put $a=\\prod_{i,t}s_{it}$, taking an empty product to be $1$. Primality of $\\mathfrak p$ gives $a\\notin\\mathfrak p$. Each $s_{it}$ divides $a$, so $aK_i=0$ for every $i$. If $x/a^n$ maps to zero in $C_i$, its numerator lies in $K_i$, because $a$ maps to a unit there; then $ax=0$, hence $x/a^n=0$. Therefore every map $B_i[1/a]\\to C_i$ is injective.",
+   "uses": [
+    "def-weil-pbc-noetherian-ring",
+    "def-weil-pbc-module-localization",
+    "def-weil-ring-localization-away"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Elementary finite-generation argument from the definitions of Noetherian ring and localization"
+   }
+  },
+  {
+   "text": "Let $J$ consist of the indices for which $U_{i,\\mathfrak p}$ is nonempty. For $i\\in J$, integrality of $X_{\\mathfrak p}$ gives that $C_i$ is a domain by [def-pc-integral-scheme]. Its subring $B_i[1/a]$ is a domain: an injective unital map into a nonzero domain forces $1\\ne0$, and a zero product maps to a zero product. For $i\\notin J$, $C_i=0$: sections on an empty open form the one-element ring by the sheaf axiom for the empty covering. The injection of Step 3 then forces $B_i[1/a]=0$, so $U_{i,a}$ is empty (the zero ring has no prime ideals). Thus the opens $U_{i,a}$ for $i\\in J$ still cover $X_a$. Moreover $J$ is nonempty since $X_{\\mathfrak p}$ is nonempty and is covered by the $U_{i,\\mathfrak p}$.",
+   "uses": [
+    "def-pc-integral-scheme",
+    "def-weil-affine-spectrum"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/properties.tex",
+    "place": "Tag 01ON, lemma-characterize-integral, and definition-integral: affine domain condition; elementary zero-ring cases"
+   }
+  },
+  {
+   "text": "The space $X_{\\mathfrak p}$ is irreducible by [lem-pc-integral-scheme-irreducible]. Hence for any $i,j\\in J$, its nonempty opens $U_{i,\\mathfrak p}$ and $U_{j,\\mathfrak p}$ meet: if they were disjoint, their closed complements would be two proper closed subsets covering the space, contrary to [def-weil-irreducible-components]. Since $a\\notin\\mathfrak p$, the fraction map $R[1/a]\\to R_{\\mathfrak p}$ gives a projection $X_{\\mathfrak p}\\to X_a$ by [def-pc-fibre-product]. A point of that intersection maps into both $U_{i,a}$ and $U_{j,a}$, since their maps to $X$ are the same projections. Thus every pair $U_{i,a},U_{j,a}$ with $i,j\\in J$ meets. No intersection of affine opens is assumed affine.",
+   "uses": [
+    "lem-pc-integral-scheme-irreducible",
+    "def-weil-irreducible-components",
+    "def-pc-fibre-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/properties.tex",
+    "place": "Tag 01OM, lemma-characterize-irreducible: nonempty opens of an irreducible space meet; pullback projection from the universal property"
+   }
+  },
+  {
+   "text": "Apply [lem-per-integral-affine-cover-criterion] to $Y=X_a$ and the covering indexed by $J$. Step 4 gives the nonempty index set and domain coordinate rings, and Step 5 gives all pairwise nonempty intersections. Therefore $X_a$ is integral, with $a\\in R\\setminus\\mathfrak p$ as required.",
+   "uses": [
+    "lem-per-integral-affine-cover-criterion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/properties.tex",
+    "place": "Tags 01OL, 01OM, 01ON: combined affine-cover criterion"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-finite-type-morphism",
+  "lem-weil-pbc-finite-type-algebra-noetherian",
+  "lem-weil-pbc-affine-chart-base-change-iso",
+  "def-weil-pbc-localization-at-prime",
+  "def-weil-ring-localization-away",
+  "def-weil-pbc-module-localization",
+  "def-weil-pbc-noetherian-ring",
+  "def-pc-integral-scheme",
+  "def-weil-affine-spectrum",
+  "lem-pc-integral-scheme-irreducible",
+  "def-weil-irreducible-components",
+  "def-pc-fibre-product",
+  "lem-per-integral-affine-cover-criterion"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/properties.tex",
+  "place": "Agent-written finite affine localization-kernel argument, followed by the affine-cover criteria Tags 01OL, 01OM, 01ON; Noetherianity uses Algebra Tag 00FN."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "IsIntegral.*[Ll]ocal|[Ll]ocal.*IsIntegral|integral.*neighb|integral.*[Ss]pread",
+   "results": "OK: 21 hits; Mathlib/AlgebraicGeometry/Geometrically/Integral.lean, Mathlib/AlgebraicGeometry/Geometrically/Integral.lean, Mathlib/AlgebraicGeometry/Geometrically/Integral.lean, Mathlib/AlgebraicGeometry/Geometrically/Integral.lean, Mathlib/AlgebraicGeometry/Geometrically/Integral.lean, Mathlib/AlgebraicGeometry/OrderOfVanishing.lean, Mathlib/AlgebraicGeometry/Normalization.lean, Mathlib/AlgebraicGeometry/Morphisms/Integral.lean; Mathlib/AlgebraicGeometry",
+   "date": "2026-10-24",
+   "verdict": "no match: the scheme-integrality hits give integral opens or geometrically integral flat families; IsIntegralHom/localization hits concern integral ring maps, not an integral scheme near a prime. None gives eventual integrality of a supplied model."
+  },
+  {
+   "tool": "leansearch",
+   "query": "lem-per-integrality-prime-neighbourhood: If a scheme of finite type over a Noetherian ring has integral pullback over a prime localization then some principal open neighbourhood has integral pullback",
+   "results": "OK: 8 hits; AlgebraicGeometry.Scheme.Hom.isIntegral_app, IsLocalization.Away.isIntegral_of_isIntegral_map, AlgebraicGeometry.IsIntegralHom.hasAffineProperty, AlgebraicGeometry.IsIntegralHom.instMorphismRestrict, AlgebraicGeometry.isIntegral_of_isOpenImmersion, Algebra.ZariskisMainProperty.of_isIntegral, PrimeSpectrum.isClosed_comap_singleton_of_isIntegral, instIsIntegralAtPrimeLocalizationAlgebraMapSubmonoidPrimeCompl",
+   "date": "2026-10-24",
+   "verdict": "no match: the scheme-integrality hits give integral opens or geometrically integral flat families; IsIntegralHom/localization hits concern integral ring maps, not an integral scheme near a prime. None gives eventual integrality of a supplied model."
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.IsIntegral, IsLocalization",
+   "results": "OK: 0 hits; ",
+   "date": "2026-10-24",
+   "verdict": "no match: the scheme-integrality hits give integral opens or geometrically integral flat families; IsIntegralHom/localization hits concern integral ring maps, not an integral scheme near a prime. None gives eventual integrality of a supplied model."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "lem-per-integrality-prime-neighbourhood: A finite type scheme over a Noetherian ring which is integral after localization at a prime becomes integral on a principal neighbourhood of that prime",
+   "results": "OK: 8 hits; AlgebraicGeometry.instIsIntegralToSchemeOfNonemptyCarrierCarrierCommRingCat, AlgebraicGeometry.IsIntegral, AlgebraicGeometry.instIsIntegralSpecOfIsDomainCarrier, AlgebraicGeometry.IsIntegral.component_integral, AlgebraicGeometry.isIntegral_of_isAffine_of_isDomain, AlgebraicGeometry.affine_isIntegral_iff, AlgebraicGeometry.instIsDomainCarrierStalkCommRingCatPresheafOfIsIntegral, AlgebraicGeometry.isIntegral_of_irreducibleSpace_of_isReduced",
+   "date": "2026-10-24",
+   "verdict": "no match: the scheme-integrality hits give integral opens or geometrically integral flat families; IsIntegralHom/localization hits concern integral ring maps, not an integral scheme near a prime. None gives eventual integrality of a supplied model."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "lem-per-integrality-prime-neighbourhood: Eventual integrality of a scheme model over principal localizations using finitely generated kernels of coordinate ring localization maps",
+   "results": "OK: 8 hits; instIsIntegralAtPrimeLocalizationAlgebraMapSubmonoidPrimeCompl, RingHom.isIntegral_ofLocalizationSpan, Algebra.zariskisMainProperty_iff, IsIntegral.isAlmostIntegral_of_isLocalization, Algebra.ZariskisMainProperty, isIntegral_localization, AlgebraicGeometry.instIsIntegralSpecOfIsDomainCarrier, AlgebraicGeometry.isIntegral_of_isAffine_of_isDomain",
+   "date": "2026-10-24",
+   "verdict": "no match: the scheme-integrality hits give integral opens or geometrically integral flat families; IsIntegralHom/localization hits concern integral ring maps, not an integral scheme near a prime. None gives eventual integrality of a supplied model."
+  },
+  {
+   "tool": "grep",
+   "query": "IsIntegral.*local|local.*IsIntegral|integral.*neighb|integral.*spread",
+   "results": "OK: 21 hits; Mathlib/AlgebraicGeometry/Geometrically/Integral.lean, Mathlib/AlgebraicGeometry/Geometrically/Integral.lean, Mathlib/AlgebraicGeometry/Geometrically/Integral.lean, Mathlib/AlgebraicGeometry/Geometrically/Integral.lean, Mathlib/AlgebraicGeometry/Geometrically/Integral.lean, Mathlib/AlgebraicGeometry/Morphisms/Integral.lean, Mathlib/AlgebraicGeometry/Morphisms/Integral.lean, Mathlib/AlgebraicGeometry/Morphisms/Integral.lean; ",
+   "date": "2026-10-24",
+   "verdict": "no match: affine integrality, open restriction, and integral ring maps do not assert eventual integrality of a supplied finite type scheme."
+  },
+  {
+   "tool": "leansearch",
+   "query": "lem-per-integrality-prime-neighbourhood: A finite type scheme over a Noetherian ring integral after localization at a prime is integral on some principal neighbourhood of that prime",
+   "results": "OK: 8 hits; IsLocalization.isDomain_of_atPrime, AlgebraicGeometry.IsIntegral.mk, AlgebraicGeometry.StructureSheaf.Localizations, IsDedekindDomain.isPrincipalIdealRing_localization_over_prime, instIsIntegralAtPrimeLocalizationAlgebraMapSubmonoidPrimeCompl, AlgebraicGeometry.IsIntegral, AlgebraicGeometry.instIsGermInjectiveOfIsIntegral, AlgebraicGeometry.IsIntegralHom.instMorphismRestrict; ",
+   "date": "2026-10-24",
+   "verdict": "no match: affine integrality, open restriction, and integral ring maps do not assert eventual integrality of a supplied finite type scheme."
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.IsIntegral, IsLocalization",
+   "results": "OK: 0 hits; ; ",
+   "date": "2026-10-24",
+   "verdict": "no match: affine integrality, open restriction, and integral ring maps do not assert eventual integrality of a supplied finite type scheme."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "lem-per-integrality-prime-neighbourhood: spreading integrality from a prime localization to a principal open using a finite affine cover and Noetherian coordinate rings",
+   "results": "OK: 8 hits; AlgebraicGeometry.instIsIntegralToSchemeOfNonemptyCarrierCarrierCommRingCat, Algebra.ZariskisMainProperty.of_isIntegral, instIsIntegralAtPrimeLocalizationAlgebraMapSubmonoidPrimeCompl, IsAlmostIntegral.isIntegral, IsIntegral.isAlmostIntegral_of_isLocalization, AlgebraicGeometry.instIsIntegralSpecOfIsDomainCarrier, AlgebraicGeometry.IsIntegral.component_integral, Algebra.zariskisMainProperty_iff'; ",
+   "date": "2026-10-24",
+   "verdict": "no match: affine integrality, open restriction, and integral ring maps do not assert eventual integrality of a supplied finite type scheme."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-per-local-alteration-diagram-spreading",
+  "date": "2026-10-24",
+  "group": "Q97"
+ },
+ "chapter": "sec-deligne-laumon-a1",
+ "unit": "sk-p-dl-a1-perverse",
+ "blueprint": {
+  "from": {
+   "node": "lem-per-artin-gabber-affine-curve",
+   "place": "Ancestor proof Step 3, regular local model and purity, through the small-singular-locus completion in Temkin Theorem 3.4.1: quasi-excellence of completed rational affine charts is supplied by Theorem 2.1.6. Auxiliary completion proof: Lemma 4.4 and Definition 3.2, printed pp.3,5–6; specialization with excellent B_q and quasi-excellent B/J. This auxiliary lemma supplies Spreading a local alteration diagram with its proper covering witness. Finite-presentation spreading paragraph: integrality of the finitely many descended scheme models after further principal shrinking.",
+   "via": [
+    "lem-per-local-alteration-diagram-spreading",
+    "lem-per-qe-alteration-regular-neighbourhood",
+    "lem-per-qe-complete-pair-lifting",
+    "lem-per-small-divisor-formal-completion",
+    "lem-per-small-singular-locus-resolution",
+    "lem-per-qe-ordinary-regular-resolution",
+    "lem-per-characteristic-zero-log-resolution-independence",
+    "lem-per-complete-local-rigidification-comparison",
+    "lem-per-gabber-absolute-equivariant-modification",
+    "lem-per-gabber-log-smooth-equivariant-modification",
+    "lem-per-trait-prime-to-ell-log-alteration",
+    "lem-per-gabber-regular-pair-purity",
+    "lem-per-absolute-gysin-purity",
+    "lem-per-potential-dualizing-regular-unit",
+    "lem-per-finite-regular-reduction-dualizing",
+    "lem-per-qbar-generic-duality-model",
+    "lem-per-qbar-middle-tstructure"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-per-integrality-prime-neighbourhood",
+  "worker": "stage1",
+  "summary": "Retained the statement, supplied the finite affine localization-kernel proof with explicit denominator annihilation, empty-chart handling and overlap witnesses; reused finite type Noetherianity and affine-chart base change; created only the general affine domain-cover criterion.",
+  "blueprint": "Auxiliary integrality detail of the existing spreading route recorded in blueprint.from.place. The current ancestor proof is Artin–Gabber and does not itself state this auxiliary assertion; no chapter or unit route is changed.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-affine-chart-base-change-iso",
+    "why": "Generic projection-compatible affine base-change formula, used to identify the pulled-back coordinate rings; this auxiliary integrality argument has no same-unit replacement."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-affine-chart-base-change-iso"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q109-632c238ee",
+  "group": "Q109",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q109-632c238ee (reviewer sub-agent of L); spot-checked: I read the item, the new node, all 13 cited statements (with their blueprint_update) and Stacks properties.tex 186-276 (01OK/01OL/01OM/01ON, tags checked against tags/tags). This is a first split, not a re-split. The item's statement is unchanged and true; I tested it on Z[x]/(2x) at p=0 (a=2), on Spec Z ⊔ Spec F_2 (a=2 deletes the F_2 chart), on a field (a=1) and on k×k. Step 1: the finite affine cover comes from the finite-cover clause of finite type, the B_i are Noetherian by the cited finite-type node, and the base-change charts come from lem-weil-pbc-affine-chart-base-change-iso; that lemma is a generic tool from unit sk-thm-p1 and its tool_uses entry is accepted. Step 2: the tensor ring is identified with the localization, with formulas and well-definedness checked; it is elementary. Step 3: the finitely many kernel generators are each killed by some s in S, their product a lies outside p because p is prime, and B_i[1/a]→C_i is injective with no exactness assumption. Step 4: the nonempty charts have domain rings by def-pc-integral-scheme, the empty charts have C_i=0, which forces B_i[1/a]=0, and J is nonempty. Step 5: X_p is irreducible, so its nonempty opens meet; X_p→X_a lies over X by fibre-product functoriality, and no affine intersection is assumed. Step 6: every hypothesis of the criterion is met. The new node lem-per-integral-affine-cover-criterion is true: it is exactly 01OM (2)⇒(1) combined with 01OL and 01ON, I re-derived its density argument, and the nonempty-I and nonzero-domain edge cases are handled. It is statement-only and self-contained, records six searches of all three kinds, and has correct blueprint from/via. My scan of the DAG found no node that states it, and it is strictly smaller than the item (no base ring or localization). No cycle and no SGA source. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.IntegralityPrimeNeighbourhood",
+  "declaration": "AlgebraicGeometry.exists_isIntegral_localizationAway_of_isIntegral_atPrime",
+  "file": "lean/Sheaf/AlgebraicGeometry/IntegralityPrimeNeighbourhood.lean",
+  "statement": "theorem exists_isIntegral_localizationAway_of_isIntegral_atPrime (R : Type u) [CommRing R] [IsNoetherianRing R] (p : Ideal R) [p.IsPrime] (X : Scheme.{u}) (f : X ⟶ Spec (CommRingCat.of R)) [LocallyOfFiniteType f] [QuasiCompact f] (h : IsIntegral (pullback f (Spec.map (CommRingCat.ofHom (algebraMap R (Localization.AtPrime p)))))) : ∃ a : R, a ∉ p ∧ IsIntegral (pullback f (Spec.map (CommRingCat.ofHom (algebraMap R (Localization.Away a)))))",
+  "branch": "newtargets-dag",
+  "by": "Q127",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-ae5c096b5",
+  "group": "Q127",
+  "result": "pass",
+  "note": "Checked every clause against the node and the 7 statement-dependency records: Noetherian R, prime p, f of finite type (LocallyOfFiniteType+QuasiCompact, no separatedness), IsIntegral of the pullback along algebraMap R (Localization.AtPrime p), conclusion ∃ a ∉ p with IsIntegral of the pullback along Localization.Away a. No extra hypotheses; single universe u, all variables bound; lean.statement matches the file exactly; node changed only in its lean field; proof import AffineChartBaseChangeIso exists in side-live. Edge cases (empty X, a=1, k×k base, ℤ[x]/(2x) needing a=2) are fine and the statement is true. No definitions, sorry-only proof, docstrings carry the source place, blueprint tag and all 6 proof steps; no existing Mathlib or project match. Not recompiled (no file changed). No findings."
+ }
+}

@@ -1,0 +1,253 @@
+{
+ "id": "lem-sp-etale-sheaf-fold-scalar",
+ "kind": "statement",
+ "title": "Sheaf sum-adjunction fold counit and ordinary scalar extension",
+ "statement": "Let $e:U\\to V$ be a separated etale morphism of finite type of schemes, and let $\\varphi:A\\to B$ be a unital map of commutative rings [def-pc-scheme, def-weil-etale-morphism, def-weil-proper-morphism, def-weil-finite-type-morphism]. Work with ordinary constant-ring module sheaves on the small etale sites [def-weil-pbc-etale-site, def-weil-pbc-etale-sheaves]. Write $S_R=e_{\\Sigma!,R}$ for sheafified sum extension [def-weil-pbc-etale-sum-extension], and $e_R^*$ for exact constant-coefficient inverse image [prop-weil-pbc-inverse-image-modules-exact]. For $R=A,B$ there is a sheaf adjunction $S_R\\dashv e_R^*$ whose bijection sends a morphism $S_RH\\to F$ to the compatible family of maps $H(W,s)\\to F(W)$ on etale test objects $W\\to V$ and lifts $s:W\\to U$ over $V$. Its counit $v^0_{R,F}:S_Re_R^*F\\to F$ is induced by the fold $\\bigoplus_sF(W)\\to F(W)$, sending each $i_s(x)$ to $x$, under the restriction identification [lem-weil-pbc-etale-inverse-image-restriction].\nUse ordinary sheaf tensor [def-pur-sheaf-tensor-product] and write $F_B=F\\otimes_{A_V}B_V$. Let $a_F^0:(e_A^*F)\\otimes_{A_U}B_U\\xrightarrow{\\sim}e_B^*(F_B)$ be ordinary scalar/pullback reassociation and let $\\rho_H:(S_AH)\\otimes_{A_V}B_V\\to S_B(H\\otimes_{A_U}B_U)$ be induced locally by $i_s(x)\\otimes b\\mapsto i_s(x\\otimes b|_{(W,s)})$, using sheafification [def-weil-presheaf-modules-sheafification]. For every $A_V$-module sheaf $F$,\n$$v^0_{B,F_B}\\circ S_B(a_F^0)\\circ\\rho_{e_A^*F}=v^0_{A,F}\\otimes1_B.$$\nThese are natural $B_V$-linear sheaf maps. For a cochain complex $P$ on $V$, applying them in every degree yields equal $B_V$-linear chain maps $(S_Ae_A^*P)\\otimes_A B\\to P\\otimes_A B$ [def-pc-cochain-complex-modules]. No flatness, boundedness, constructibility, or finiteness of the rings is assumed.",
+ "source": {
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tag 03S3, definition-extension-zero, equation-j-p-shriek and exercise-jshriek-direct; ordinary tensor-generator consequence"
+ },
+ "stmt_deps": [
+  "def-pc-cochain-complex-modules",
+  "def-pc-scheme",
+  "def-pur-sheaf-tensor-product",
+  "def-weil-etale-morphism",
+  "def-weil-finite-type-morphism",
+  "def-weil-pbc-etale-sheaves",
+  "def-weil-pbc-etale-site",
+  "def-weil-pbc-etale-sum-extension",
+  "def-weil-presheaf-modules-sheafification",
+  "def-weil-proper-morphism",
+  "lem-weil-pbc-etale-inverse-image-restriction",
+  "prop-weil-pbc-inverse-image-modules-exact",
+  "def-pur-etale-projection-data",
+  "def-pur-scalar-pullback-representative-data",
+  "def-sp-etale-scalar-section-data",
+  "def-sf-etale-sheaf-scalar-extension"
+ ],
+ "proof": [
+  {
+   "text": "Use the existing etaleLowerShriekUpperStarAdjunction. Transport its homEquiv through upperStarIsoLocalizationRestriction, evaluate on a test W and x, and expand the sheafified left Kan-extension unit. This gives exactly the summand formula of etaleSheafSumFold. Evaluate it on the counit: the right triangle identity and the inverse/hom identity of the restriction isomorphism give the fold formula. Reuse the proved private etaleLiftSection_iso and projection_sum_unit from EtaleProjectionSectionNormalization through a proof-only import all; do not duplicate these statements in the item module.",
+   "uses": [
+    "def-weil-pbc-etale-sum-extension",
+    "lem-weil-pbc-etale-inverse-image-restriction",
+    "def-weil-presheaf-modules-sheafification",
+    "lem-pur-etale-projection-section-normalization"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Construct etaleSumScalarIso by uniqueness of left adjoints for the two composite sum/scalar adjunctions, transporting the second right adjoint along upperStarRestrictScalarsIsoSheaf.symm. Apply lem-sp-etale-scalar-section-normalization to obtain the two required local pure-tensor formulas for this fixed comparison.",
+   "uses": [
+    "lem-sp-etale-scalar-section-normalization"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The proved generic private scalarOpenInverseMate identifies the inverse sum/scalar comparison with the iterated inverse mate of the restriction/scalar square. The proved private ordinary_reverse_eq identifies its first inverse mate with the specified scalarSheafPullbackIso.inv. These helpers are reused from the source modules, without using their holed public theorems. Apply mateEquiv_counit_symm to the sum adjunctions and precompose with etaleSumScalarIso.hom. Cancel its hom/inv pair. Expanding the functor associators and unitors is precisely etaleScalarReassociatedFold = etaleScalarExtendedFold.",
+   "uses": [
+    "def-weil-pbc-etale-sum-extension",
+    "def-pur-scalar-pullback-representative-data",
+    "lem-coef-etale-open-tensor",
+    "lem-sfb-etale-proetale-scalar-mate"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Choose rho to be the hom of etaleSumScalarIso. Combine its local normalization formulas with the proved fold-counit equality. Apply congrArg to mapHomologicalComplex and evaluate at P for the actual cochain identity; no further construction, boundedness, or flatness is needed.",
+   "uses": [
+    "def-pc-cochain-complex-modules"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-etale-sum-extension",
+  "lem-weil-pbc-etale-inverse-image-restriction",
+  "def-weil-presheaf-modules-sheafification",
+  "lem-sp-etale-scalar-section-normalization",
+  "def-pur-scalar-pullback-representative-data",
+  "lem-coef-etale-open-tensor",
+  "lem-sfb-etale-proetale-scalar-mate",
+  "def-pc-cochain-complex-modules",
+  "lem-pur-etale-projection-section-normalization"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tags 03S3 and 03S4; adjunction-unit proof of the summand fold; canonical scalar comparison and generic mate/counit identities. Local tensor normalizations are isolated in lem-sp-etale-scalar-section-normalization, following sites-modules.tex Tags 03EL and 0GMW."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "counit.*tensor|tensor.*counit",
+   "results": "{\"t\": \"2026-10-22T06:51:54Z\", \"tool\": \"grep\", \"query\": \"counit.*tensor|tensor.*counit\", \"sub\": \"CategoryTheory\", \"ok\": true, \"n_hits\": 24, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Monoidal/End.lean\", \"Mathlib/CategoryTheory/Pi/Monoidal.lean\", \"Mathlib/CategoryTheory/Pi/Monoidal.lean\", \"Mathlib/CategoryTheory/Monoidal/Multifunctor.lean\", \"Mathlib/CategoryTheory/Monoidal/Multifunctor.lean\", \"Mathlib/CategoryTheory/Monoidal/Closed/Functor.lean\", \"Mathlib/CategoryTheory/Monoidal/Closed/Functor.lean\", \"Mathlib/CategoryTheory/Monoidal/Closed/Basic.lean\"], \"digest\": \"86b2b12d9ab52e84\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: general monoidal/constant-sheaf counits and free-generator transport do not identify the etale fold counit under change of coefficient rings"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction, \"counit\", \"tensor\"",
+   "results": "{\"t\": \"2026-10-22T06:51:54Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.Adjunction, \\\"counit\\\", \\\"tensor\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 2, \"note\": \"\", \"top\": [\"CategoryTheory.Adjunction.map_μ_comp_counit_app_tensor\", \"CategoryTheory.Adjunction.map_μ_comp_counit_app_tensor_assoc\"], \"digest\": \"ecc585f6831ffabb\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: general monoidal/constant-sheaf counits and free-generator transport do not identify the etale fold counit under change of coefficient rings"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The sheaf counit of etale extension by zero is summation on local lifts and commutes with tensor extension of scalars",
+   "results": "{\"t\": \"2026-10-22T06:51:54Z\", \"tool\": \"leansearch\", \"query\": \"The sheaf counit of etale extension by zero is summation on local lifts and commutes with tensor extension of scalars\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.constantSheafAdj_counit_app\", \"SheafOfModules.pushforwardPushforwardAdj_counit_app_val_app\", \"CategoryTheory.sheafificationAdjunction_counit_app_val\", \"CategoryTheory.Sheaf.adjunction_counit_app_val\", \"CompHausLike.LocallyConstant.counit\", \"ModuleCat.RestrictionCoextensionAdj.counit'\", \"CategoryTheory.constantSheafAdj_counit_w\", \"KaehlerDifferential.tensorKaehlerEquivOfFormallyEtale\"], \"digest\": \"d190c5e6b2b5e7db\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: general monoidal/constant-sheaf counits and free-generator transport do not identify the etale fold counit under change of coefficient rings"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For an etale morphism the evaluation counit of sheafified extension by direct sum is the fold map and commutes with ordinary change of coefficient rings",
+   "results": "{\"t\": \"2026-10-22T06:52:05Z\", \"tool\": \"leanfinder\", \"query\": \"For an etale morphism the evaluation counit of sheafified extension by direct sum is the fold map and commutes with ordinary change of coefficient rings\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"smoothSheafCommRing.ι_evalHom\", \"smoothSheafCommRing.ι_evalHom_apply\", \"smoothSheaf.ι_evalHom\", \"smoothSheafCommRing.forgetStalk_inv_comp_eval\", \"smoothSheafCommRing.forgetStalk_hom_comp_evalHom\", \"smoothSheafCommRing.forgetStalk_inv_comp_eval_apply\", \"smoothSheafCommRing.forgetStalk_hom_comp_evalHom_apply\", \"smoothSheaf.ι_evalHom_apply\"], \"digest\": \"135a7ba24d5763b2\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: general monoidal/constant-sheaf counits and free-generator transport do not identify the etale fold counit under change of coefficient rings"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The fold morphism from a sheafified direct sum indexed by lifts to an etale scheme commutes with tensor product by a second constant coefficient ring",
+   "results": "{\"t\": \"2026-10-22T06:52:26Z\", \"tool\": \"leanfinder\", \"query\": \"The fold morphism from a sheafified direct sum indexed by lifts to an etale scheme commutes with tensor product by a second constant coefficient ring\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SheafOfModules.Presentation.map_π_eq\", \"SheafOfModules.map_ιFree_mapFree_hom\", \"SheafOfModules.map_ιFree_mapFree_hom_assoc\", \"SheafOfModules.mapFree\", \"SheafOfModules.ιFree_freeMap_assoc\", \"SheafOfModules.ιFree_mapFree_inv_assoc\", \"KaehlerDifferential.tensorKaehlerEquivOfFormallyEtale_apply\", \"SheafOfModules.ιFree_freeMap\"], \"digest\": \"1d8774c948598c70\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: general monoidal/constant-sheaf counits and free-generator transport do not identify the etale fold counit under change of coefficient rings"
+  },
+  {
+   "tool": "grep",
+   "query": "(fold|sum).*counit|counit.*(fold|sum)",
+   "results": "{\"t\": \"2026-10-22T07:59:29Z\", \"tool\": \"grep\", \"query\": \"(fold|sum).*counit|counit.*(fold|sum)\", \"sub\": \"CategoryTheory\", \"ok\": true, \"n_hits\": 3, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Discrete/SumsProducts.lean\", \"Mathlib/CategoryTheory/Sums/Associator.lean\", \"Mathlib/CategoryTheory/Sums/Basic.lean\"], \"digest\": \"4585ea611057b255\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern general sheafification, categorical adjunctions or algebraic tensor maps; none states the etale sum fold counit and its ordinary coefficient identity"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Extension by zero for an etale morphism is left adjoint to inverse image and its summation counit commutes with change of rings",
+   "results": "{\"t\": \"2026-10-22T07:59:29Z\", \"tool\": \"leansearch\", \"query\": \"Extension by zero for an etale morphism is left adjoint to inverse image and its summation counit commutes with change of rings\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Function.ExtendByZero.hom\", \"Function.ExtendByZero.linearMap\", \"CategoryTheory.Functor.preservesZeroMorphisms_of_isLeftAdjoint\", \"SheafOfModules.pushforwardPushforwardAdj_counit_app_val_app\", \"CategoryTheory.Adjunction.homAddEquiv_symm_zero\", \"ModuleCat.ExtendRestrictScalarsAdj.Counit.map\", \"ModuleCat.ExtendRestrictScalarsAdj.counit_app\", \"PresheafOfModules.pullbackPushforwardAdjunction\"], \"digest\": \"4704f43c267f26be\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern general sheafification, categorical adjunctions or algebraic tensor maps; none states the etale sum fold counit and its ordinary coefficient identity"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction, \"counit\", \"sheaf\"",
+   "results": "{\"t\": \"2026-10-22T07:59:29Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.Adjunction, \\\"counit\\\", \\\"sheaf\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 4, \"note\": \"\", \"top\": [\"CategoryTheory.Adjunction.sheafPushforwardContinuous_counit_app_hom_app\", \"SheafOfModules.pushforwardPushforwardAdj_counit_app_val_app\", \"CategoryTheory.Sheaf.isConstant_iff_isIso_counit_app'\", \"CategoryTheory.Sheaf.adjunction_counit_app_hom\"], \"digest\": \"9d1202f1819e4d4b\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern general sheafification, categorical adjunctions or algebraic tensor maps; none states the etale sum fold counit and its ordinary coefficient identity"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For an etale morphism sheafified direct sum over lifts is left adjoint to restriction and its fold counit commutes with ordinary scalar extension",
+   "results": "{\"t\": \"2026-10-22T07:59:40Z\", \"tool\": \"leanfinder\", \"query\": \"For an etale morphism sheafified direct sum over lifts is left adjoint to restriction and its fold counit commutes with ordinary scalar extension\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"PresheafOfModules.toPresheaf_map_sheafificationAdjunction_unit_app\", \"PresheafOfModules.sheafificationAdjunction\", \"PresheafOfModules.sheafificationAdjunction_homEquiv_apply\", \"PresheafOfModules.comp_toPresheaf_map_sheafifyHomEquiv'_symm_hom\", \"AlgebraicGeometry.Scheme.Modules.restrictAdjunction_counit_app_app\", \"LightCondensed.freeForgetAdjunction\", \"PresheafOfModules.sheafifyHomEquiv'\", \"PresheafOfModules.toSheaf_map_sheafificationHomEquiv_symm\"], \"digest\": \"5a595fc98fb3359e\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern general sheafification, categorical adjunctions or algebraic tensor maps; none states the etale sum fold counit and its ordinary coefficient identity"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Tensor extension of coefficients commutes with the evaluation map from a coproduct of module sheaves indexed by local etale sections",
+   "results": "{\"t\": \"2026-10-22T07:59:40Z\", \"tool\": \"leanfinder\", \"query\": \"Tensor extension of coefficients commutes with the evaluation map from a coproduct of module sheaves indexed by local etale sections\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.Presentation.tensorModelOfHasCoeffsInv_aeval_val\", \"PresheafOfModules.Monoidal.tensorObj_map_tmul\", \"PresheafOfModules.Monoidal.tensorObjMap\", \"KaehlerDifferential.tensorKaehlerEquivOfFormallyEtale_apply\", \"KaehlerDifferential.tensorKaehlerEquivOfFormallyEtale\", \"PolynomialLaw.toFun_eq_rTensor_φ_toFun'\", \"KaehlerDifferential.tensorKaehlerEquivOfFormallyEtale_symm_D_algebraMap\", \"TensorProduct.fromDirectLimit_of_tmul\"], \"digest\": \"42ab9ac52e58c1e7\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern general sheafification, categorical adjunctions or algebraic tensor maps; none states the etale sum fold counit and its ordinary coefficient identity"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sp-etale-sum-counit-scalar",
+  "date": "2026-10-22",
+  "group": "N0"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-lem-sp-reduction",
+ "blueprint": {
+  "from": {
+   "node": "det-sp-reduction-exceptional",
+   "place": "Charts: integral summation over etale fibres; original item Steps 3 and 4 (sheaf fold adjunction and tensor-generator equality)",
+   "via": [
+    "lem-sp-etale-sum-counit-scalar"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sp-etale-sheaf-fold-scalar",
+  "worker": "stage1",
+  "group": "Q131",
+  "summary": "Gave the explicit finite-sum adjunction and fold, constructed scalar comparison by bilinear extension through sheafification, checked the identity on summand/pure-tensor generators, and derived the cochain clause from naturality. Reused existing general inverse-image tensor and bilinear sheafification nodes; no new nodes or statement changes. Normalized doubled TeX command escapes inherited from the imported statement, without changing its mathematical content.",
+  "blueprint": "det-sp-reduction-exceptional, Charts paragraph: summation over geometric fibres is integral and commutes with coefficient extension; realizes the ordinary sheaf and termwise-complex portion of lem-sp-etale-sum-counit-scalar.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-etale-inverse-image-restriction",
+    "why": "Identifies ordinary etale inverse image with restriction; the unit has no replacement for this generic site fact."
+   },
+   {
+    "node": "prop-weil-pbc-inverse-image-modules-exact",
+    "why": "Supplies the actual constant-ring identifications and transported module action for ordinary inverse image."
+   },
+   {
+    "node": "lem-pur-independent-inverse-image-tensor-comparison",
+    "why": "Supplies the ordinary algebraic inverse-image tensor isomorphism with its pure-tensor normalization; no derived comparison is substituted."
+   },
+   {
+    "node": "lem-pc-sites-module-sheafification-bilinear-extension",
+    "why": "Extends the explicitly defined balanced pairing through module sheafification; this is a general site tool, not a new geometric route."
+   },
+   {
+    "node": "lem-pc-sites-module-sheafification-bilinear-extension-uniqueness",
+    "why": "Tests the coefficient identity on original sum-presheaf sections without assuming equality on generators of global sheaf sections."
+   },
+   {
+    "node": "lem-pc-sites-sheaf-tensor-bilinear-universal",
+    "why": "Converts natural bilinear sheaf pairings to maps out of ordinary sheaf tensor, including the equality test."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-etale-inverse-image-restriction"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q131-9470ab577",
+  "group": "Q131",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q131-9470ab577 (reviewer sub-agent of L); spot-checked: Shape: one commit; only the item node and report changed; no new nodes. Statement and stmt_deps are byte-identical to N0's created item (b893f8f4 snapshot), with no doubled backslashes and no SGA. Not a 2026-10-21 re-split item. Source: Stacks etale-cohomology.tex 03S3 (definition-extension-zero, equation-j-p-shriek) and 03S4 (exercise-jshriek-direct, which asks for exactly the direct adjunction proof given in Step 2); tags 03CY, 03EL and 0GMW checked. Step checks: (1) the restriction lemma (e^{-1}G=G|_U) and module prop (1)/(2) give R_U(W,s)=R_V(W) and the action. (2)-(3) elementary: module sheafification turns sheaf maps into compatible families h_{W,s}, and arrows over U are exactly the needed g; the counit is the transpose of id, i.e. the fold. (4) lem-pur-independent-inverse-image-tensor-comparison with e_R=c from the prop; its pure-tensor clause plus restriction-lemma (2) give x⊗b ↦ [x⊗b]. (5) bilinear-extension node with O=O#=A_V, F=P_AH, G=B_V; balancing uses (ax)⊗b=x⊗φ(a)b; the tensor universal property gives ρ_H, and uniqueness gives B-linearity and naturality. (6) both composites send Σi_s(x_s)⊗b to Σ[x_s⊗b]; the uniqueness node with α=id is locally bijective. (7) the termwise chain-map equation from naturality. Edge cases tested: U empty, e=id, two copies, Z→Z/2 (not flat), zero ring. No duplicate: etale-restriction-injectives lacks the bijection formula; the other sum-extension nodes are derived, projection-formula or compact-support model nodes. No cycle among 208 transitive deps. All six split_report.tool_uses are generic site/sheaf tools, accepted. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.EtaleCohomology.Purity.Smooth.EtaleSheafFoldScalar",
+  "declaration": "AlgebraicGeometry.Etale.etaleSheafFoldScalar",
+  "declarations": [
+   "AlgebraicGeometry.Etale.etaleScalarExtendedFold",
+   "AlgebraicGeometry.Etale.etaleScalarReassociatedFold",
+   "AlgebraicGeometry.Etale.etaleSheafSumFold",
+   "AlgebraicGeometry.Etale.etaleSheafFoldScalar"
+  ],
+  "file": "lean/Sheaf/EtaleCohomology/Purity/Smooth/EtaleSheafFoldScalar.lean",
+  "statement": "theorem etaleSheafFoldScalar {A B : Type (u + 1)} [CommRing A] [CommRing B] (φ : A →+* B) {U V : Scheme.{u}} (e : U ⟶ V) [Etale e] [IsSeparated e] [LocallyOfFiniteType e] [QuasiCompact e] : ∃ ρ : etaleLowerShriek (ModuleCat.{u + 1} A) e inferInstance ⋙ ProEtale.etaleSheafExtendScalars φ V ⟶ ProEtale.etaleSheafExtendScalars φ U ⋙ etaleLowerShriek (ModuleCat.{u + 1} B) e inferInstance, (∀ (H : Sheaf U.smallEtaleTopology (ModuleCat.{u + 1} A)) (W : U.Etale) (x : H.obj.obj (op W)) (b : (scalarCoefficientSheaf φ V).obj.obj (op ((MorphismProperty.Over.map ⊤ (inferInstance : Etale e)).obj W))), (ρ.app H).hom.app (op ((MorphismProperty.Over.map ⊤ (inferInstance : Etale e)).obj W)) (compactificationScalarTensorSection φ _ ((MorphismProperty.Over.map ⊤ (inferInstance : Etale e)).obj W) (etaleSumSection A e H W x) b) = etaleSumSection B e ((ProEtale.etaleSheafExtendScalars φ U).obj H) W (compactificationScalarTensorSection φ H W x ((compactificationCoefficientPullbackIso φ e).hom.hom.app (op W) (etaleLiftSection A e (scalarCoefficientSheaf φ V) W b)))) ∧ (∀ (F : Sheaf V.smallEtaleTopology (ModuleCat.{u + 1} A)) (W : U.Etale) (x : F.obj.obj (op ((MorphismProperty.Over.map ⊤ (inferInstance : Etale e)).obj W))) (b : (scalarCoefficientSheaf φ V).obj.obj (op ((MorphismProperty.Over.map ⊤ (inferInstance : Etale e)).obj W))), ((scalarSheafPullbackIso φ e).inv.app F).hom.app (op W) (compactificationScalarTensorSection φ _ W (etaleLiftSection A e F W x) ((compactificationCoefficientPullbackIso φ e).hom.hom.app (op W) (etaleLiftSection A e (scalarCoefficientSheaf φ V) W b))) = etaleLiftSection B e ((ProEtale.etaleSheafExtendScalars φ V).obj F) W (compactificationScalarTensorSection φ F ((MorphismProperty.Over.map ⊤ (inferInstance : Etale e)).obj W) x b)) ∧ etaleScalarReassociatedFold φ e ρ = etaleScalarExtendedFold φ e ∧ (∀ P : CochainComplex (Sheaf V.smallEtaleTopology (ModuleCat.{u + 1} A)) ℤ, (NatTrans.mapHomologicalComplex (etaleScalarReassociatedFold φ e ρ) (.up ℤ)).app P = (NatTrans.mapHomologicalComplex (etaleScalarExtendedFold φ e) (.up ℤ)).app P)",
+  "branch": "sheaf-dag",
+  "by": "Q56",
+  "date": "2026-10-22",
+  "existing": false,
+  "note": "The two theorem declarations state the adjunction summand formula and fold, then the normalized natural scalar comparison and its sheaf and actual cochain identities. Reuses unchanged section helpers through def-pur-etale-projection-data, scalar/pullback comparison through def-pur-scalar-pullback-representative-data, ordinary scalar extension through def-sf-etale-sheaf-scalar-extension, and the existing scalar section definitions through def-sp-etale-scalar-section-data. Repairs RETURN fff5c452c523 H2/H3.3 by citing definition owners instead of the two theorem nodes. No mathematical statement or Lean declaration changed."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-484dbebab",
+  "group": "Q56",
+  "result": "pass",
+  "note": "Re-delivery after RETURN fff5c452c523 (H2/H3.3). The item Lean file is byte-identical to fff5; in the node only stmt_deps and lean.note changed; against live, only definition-node stmt_deps are added. (a) lem-pur-etale-sheaf-projection-map replaced by def-pur-etale-projection-data, which owns etaleSumSection/etaleLiftSection. (b) New def-sp-etale-scalar-section-data, existing:true on the unchanged module EtaleCompactificationSheafScalarMap, owns compactificationCoefficientPullbackIso/ScalarTensorSection. Both are plain real-data defs with no module variable binders; the record's statement equals the live signature verbatim and its prose matches the bodies; no hypotheses on e or the rings; its stmt_deps are all definition nodes; no cycle; no other live owner; the id is free. Advisory done: def-sf-etale-sheaf-scalar-extension (ordinary small-étale composeAndSheafify) added. Mathematics re-checked: hypotheses Etale/IsSeparated/LOFT/QC on arbitrary CommRing A B at u+1; homEquiv summand clause and fold counit; ρ fixed on lift-summand pure tensors with local b; a^0 = scalarSheafPullbackIso.inv; composite order ρ, S_B(a^0), v_B checked; chain clause via mapHomologicalComplex. Edge cases (empty U, e=id, B=0, non-flat ring map, unbounded complexes) covered. Advisory: scalarCoefficientSheaf/scalarSheafTensorMap come from the lem-pur-derived-change-of-rings module, reached via the landed def-pur-scalar-pullback-representative-data. No file changed, no compile (Lean identical; worker reports clean compiles)."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S4",
+  "result": "pass",
+  "landing": "20261024T020432-L-2603497",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

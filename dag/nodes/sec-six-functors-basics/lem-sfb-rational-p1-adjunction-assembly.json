@@ -1,0 +1,148 @@
+{
+ "id": "lem-sfb-rational-p1-adjunction-assembly",
+ "kind": "statement",
+ "title": "Supply the canonical diagonal data to the rational projective-line adjunction",
+ "statement": "Let ell be a prime and k a field of positive prime characteristic different from ell. Let Y be separated of finite type over k, and suppose Y, its projective line and the product of that line with itself over Y are noetherian. For either rational coefficient convention of [sk-def-sfb-condensed-ring], [sk-def-sfb-qlbar-condensed], the actual restricted direct-image functor push of [det-prop-p1-adjunction-rational-unit-counit] is left adjoint to its actual restricted pullback-Tate-twist-shift functor exceptional. These are functors on the bounded-constructible localizing categories of [def-sfb-rational-localizing-twist].",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-cor-affine-space-rational/sk-cor-affine-space-rational-line.md",
+  "place": "Proof (3): use the rational projective-line adjunction; diagonal data supplied by the preceding diagonal-tower unit."
+ },
+ "stmt_deps": [
+  "sk-def-sfb-condensed-ring",
+  "sk-def-sfb-qlbar-condensed",
+  "det-prop-p1-adjunction-rational-unit-counit",
+  "def-sfb-rational-localizing-twist"
+ ],
+ "proof": [
+  {
+   "text": "Since ell and the positive characteristic of k are distinct primes, ell is a unit in k and hence in the global sections of Y. All sequence categories of module sheaves used in the diagonal tower are Grothendieck abelian: evaluate maps on components and use the coproduct of evaluation-left-adjoint generators. The module-sheaf coefficient-universe theorem supplies the completed coefficient category. Thus the required derived localizations exist.",
+   "uses": [
+    "lem-pur-ringed-site-grothendieck-coefficient-universe"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply exists_diagonalTowerSystem to obtain a strict cycle system and its completion specification.",
+   "uses": [
+    "det-prop-diagonal-tower-system"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply diagonalTower_limit to the system, then completedLimit_exists to its specification. This extracts the unique completed arrow together with all finite normalization and completed compatibility data, exactly IsDiagonalLimit. The extraction is a fully proved generic witness rearrangement in a separate module; its native interface uses only the required category instances.",
+   "uses": [
+    "det-prop-diagonal-tower-limit",
+    "lem-sfb-diagonal-completed-limit-extraction"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply diagonalTower_coefficients to obtain the coefficient Family and a Reference tied to that completed arrow.",
+   "uses": [
+    "det-prop-diagonal-tower-coefficients"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply rationalP1_triangle to these data and retain the adjunction clause.",
+   "uses": [
+    "det-prop-p1-adjunction-rational-triangle"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-pur-ringed-site-grothendieck-coefficient-universe",
+  "det-prop-diagonal-tower-system",
+  "det-prop-diagonal-tower-limit",
+  "det-prop-diagonal-tower-coefficients",
+  "det-prop-p1-adjunction-rational-triangle",
+  "lem-sfb-diagonal-completed-limit-extraction"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-cor-affine-space-rational/sk-cor-affine-space-rational-line.md",
+  "place": "Proof (3): use the rational projective-line adjunction; diagonal data supplied by the preceding diagonal-tower unit. The remaining Lean work supplies the localization instances and the normalized diagonal limit and coefficient reference to the triangle theorem. C1 supplies the data by a continuation over abstract localization records and invokes the separately proved completed-limit extraction, with explicit native category instances and cached specification arguments."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "rational projective line pushforward adjoint to Tate twisted pullback shifted by two",
+   "date": "2026-10-26",
+   "results": {
+    "n_hits": 8,
+    "top": [
+     "AlgebraicGeometry.Scheme.Modules.pullbackPushforwardAdjunction"
+    ]
+   },
+   "verdict": "Only ordinary untwisted sheaf pullback adjunctions; use the existing projective-line triangle theorem."
+  },
+  {
+   "tool": "loogle",
+   "query": "ProjectiveLine",
+   "date": "2026-10-26",
+   "results": {
+    "n_hits": 0,
+    "note": "unknown identifier"
+   },
+   "verdict": "No Mathlib theorem for this library-specific projective-line adjunction."
+  },
+  {
+   "tool": "grep",
+   "query": "rationalP1.*adjunction",
+   "date": "2026-10-26",
+   "results": {
+    "n_hits": 0
+   },
+   "verdict": "No Mathlib match; the library triangle theorem has an adjunction clause but requires diagonal system data."
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Targets.AffineSpaceRationalLine",
+  "date": "2026-10-26",
+  "group": "R3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-cor-affine-space-rational-line",
+   "place": "Step 9: apply the rational projective-line adjunction with canonical diagonal data.",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-cor-affine-space-rational",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.AffineLineAdjunctionAssembly",
+  "file": "lean/Sheaf/Paper/AffineLineAdjunctionAssembly.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.RationalP1.rationalP1_adjunction_assembly",
+  "statement": "theorem rationalP1_adjunction_assembly\n    (ℓ : ℕ) [Fact ℓ.Prime] (c : Option (PadicAlgCl.FiniteIntermediateField ℓ))\n    (k : Type u) [Field k] [Fact (ringChar k).Prime] [Fact (ringChar k ≠ ℓ)]\n    (Y : Scheme.{u}) [Y.Over (Spec (.of k))]\n    [LocallyOfFiniteType (Y ↘ Spec (.of k))] [QuasiCompact (Y ↘ Spec (.of k))]\n    [IsSeparated (Y ↘ Spec (.of k))]\n    [IsNoetherian Y] [IsNoetherian (ProjectiveLine Y)] [IsNoetherian (diagonalSurface Y)] :\n    Nonempty (push ℓ c k (ringChar k) (Fact.out : ringChar k ≠ ℓ) Y ⊣\n      exceptional ℓ c k (ringChar k) (Fact.out : ringChar k ≠ ℓ) Y)",
+  "branch": "sheaf-dag",
+  "by": "R3",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-d1c3b",
+  "group": "R3",
+  "result": "pass",
+  "landing": "20261026T002443-L-88663",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-12803",
+  "group": "C1",
+  "result": "fix",
+  "landing": "20261026T235837-L-1460279",
+  "kind": "interface",
+  "note": "independent cc review: UnitInversionCondition/CounitInversionCondition bodies vs the old unitInversions/counitInversion conclusions (verbatim); Assembly signature vs the clone (identical); new node stmt_deps vs the owners of the declarations their statements use; unit realized (empty) vs the dropped CartesianCoefficients import"
+ }
+}

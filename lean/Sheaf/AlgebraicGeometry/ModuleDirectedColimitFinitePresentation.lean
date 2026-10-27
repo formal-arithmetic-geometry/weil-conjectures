@@ -8,6 +8,8 @@ module
 public import Mathlib.AlgebraicGeometry.Modules.Sheaf
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent
 public import Mathlib.CategoryTheory.Filtered.Basic
+import Mathlib.CategoryTheory.Presentable.Directed
+import Mathlib.CategoryTheory.Limits.Final
 import Sheaf.AlgebraicGeometry.ModuleFilteredColimitFinitePresentation
 
 /-! # Directed colimit by finite-presentation modules
@@ -29,10 +31,10 @@ presentation. Source: Stacks Project, Properties, Lemma 01PK (blueprint:
 lem-weil-pbc-module-directed-colimit-finite-presentation).
 (blueprint: lem-weil-pbc-module-directed-colimit-finite-presentation)
 
-The proof proceeds by applying the filtered-category version (01PJ), dualizing its colimit
-cone, and reindexing the resulting cofiltered limit by a directed set using Categories,
-Lemma 0032; the cocone axioms and colimit property are then transported back along the
-opposite-category equivalence.
+Apply the filtered-category version (01PJ), then Categories, Lemma 0032, to obtain a final
+functor from a nonempty directed partial order to the filtered index category. Precompose
+the diagram with this functor and whisker its cocone. Finite presentation holds termwise,
+and finality preserves the colimit property with the same vertex and selected cocone legs.
 -/
 theorem exists_directedColimit_finitePresentation
     (X : Scheme.{u}) [CompactSpace X] [QuasiSeparatedSpace X]
@@ -41,6 +43,12 @@ theorem exists_directedColimit_finitePresentation
       ∃ (D : I ⥤ X.Modules),
         (∀ i : I, (D.obj i).IsFinitePresentation) ∧
         ∃ (φ : D ⟶ (Functor.const I).obj F),
-          Nonempty (IsColimit (Cocone.mk F φ)) := by sorry
+          Nonempty (IsColimit (Cocone.mk F φ)) := by
+  obtain ⟨J, hJ, hfiltered, M, hfp, φ, ⟨hc⟩⟩ :=
+    exists_filteredColimit_of_isQuasicoherent X F
+  obtain ⟨I, horder, hdir, hne, G, hfinal⟩ := IsFiltered.exists_directed J
+  refine ⟨I, horder.toPreorder, hne, hdir, G ⋙ M, fun i ↦ hfp (G.obj i),
+    (Cocone.mk F φ).whisker G |>.ι, ?_⟩
+  exact ⟨(Functor.Final.isColimitWhiskerEquiv G (Cocone.mk F φ)).symm hc⟩
 
 end AlgebraicGeometry.Scheme.Modules

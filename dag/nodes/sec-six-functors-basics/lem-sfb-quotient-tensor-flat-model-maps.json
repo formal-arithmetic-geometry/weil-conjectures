@@ -1,0 +1,152 @@
+{
+ "id": "lem-sfb-quotient-tensor-flat-model-maps",
+ "kind": "statement",
+ "title": "Ordinary signed-total quotient tensor maps and invertible target computations",
+ "statement": "Let R,S be commutative condensed rings, a:R→S a monoid morphism, and f:X→Y an arbitrary scheme morphism. Use internal module derived categories and the actual D,L, scalar and pullback counits of [def-sfb-internal-derived-scalar-comparisons], and the scalar tensor normalization of [lem-sfb-quotient-section-tensor-normalization]. Define pullComplex and scalarComplex by applying ordinary pullback and extension termwise. Define totalPull and totalScalar by the signed direct-sum total tensorators, and totalBalance by prolonging pullIso(a,f).inv. Define ordinaryLeft(P,Q) = totalBalance(P tensor Q) then scalarComplex_X(totalPull(P,Q)) then totalScalar_X(f*P,f*Q); define ordinaryRight(P,Q) = pullComplex_S(totalScalar_Y(P,Q)) then totalPull_S(aP,aQ) then totalBalance(P) tensor totalBalance(Q). These maps agree for all integer-indexed complexes P,Q, without flatness. Define factorCompute(P) = D_X(computePull(P)) then compute_X(f*P), targetCompute(P,Q) as the tensor of these factor maps, sourceCompute(P,Q) = L_S D_Y(mu_Q(P,Q)) then L_S(compute_Y(P tensor Q)) then computePull(a(P tensor Q)), and targetLocalization(P,Q) = mu_Q(a(f*P),a(f*Q)). For the invertibility assertions, assume the section R-module category on every scheme admits the recorded derived category. Then targetCompute is invertible when P,Q are K-flat. If P,Q also have flat terms and bX is a TensorNormalized scalar tensor iso at X, targetLocalization is invertible. Under this last invertibility assumption define targetTensor as its inverse.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 06YY (lemma-derived-base-change), 07A4 (lemma-pullback-tensor-product), 0G7E (lemma-pullback-K-flat); ordinary balancing from sites-modules.tex Tag 03EL (lemma-tensor-product-pullback)."
+ },
+ "stmt_deps": [
+  "def-sfb-internal-derived-scalar-comparisons",
+  "lem-sfb-quotient-section-tensor-normalization",
+  "def-pc-kflat-complex",
+  "def-pc-flat-sheaf-modules"
+ ],
+ "proof": [
+  {
+   "text": "Use the already proved scalarPull_monoidal ordinary calculation: extension/restriction and geometric pull/push are monoidal adjunctions, and comapLowerStarIso is monoidal. Its conjugate pullIso.inv is monoidal. Functor.mapHomologicalComplexδNatTrans_naturality, expanded by mapHomologicalComplexδNatTrans_comp on both composites, proves ordinaryLeft=ordinaryRight on signed direct-sum totals. The ordinary helper is defined before, and does not use, the exact scalar-extension hypotheses in its source module. The totalPull definition selects the canonical monoidal_upperStar projection explicitly, rather than relying on inference through the reducible composite functor.",
+   "uses": [
+    "def-sfb-internal-scalar-tensor-comparison",
+    "sk-def-sfb-coefficient-morphisms",
+    "lem-sfb-coefficient-scalar-tensor-realization"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Geometric pullback preserves K-flat complexes and has an invertible computation counit. Scalar computation is invertible at the pulled-back K-flat complexes. Their tensors give invertibility of targetCompute. For targetLocalization use TensorNormalized at the pulled-back flat-term K-flat pair: its right side is an isomorphism, since tensoring preserves K-flatness and the scalar and ordinary tensor computation maps are invertible. The other two factors on the left are isomorphisms, so targetLocalization is an isomorphism. All maps are explicit constructions.",
+   "uses": [
+    "def-sfb-internal-derived-scalar-comparisons",
+    "lem-sfb-quotient-section-tensor-normalization",
+    "lem-pur-derived-change-of-rings",
+    "lem-sfb-internal-pull-normalization-existence",
+    "lem-derived-right-exact-tensor-comparison"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-sfb-internal-scalar-tensor-comparison",
+  "sk-def-sfb-coefficient-morphisms",
+  "lem-sfb-coefficient-scalar-tensor-realization",
+  "def-sfb-internal-derived-scalar-comparisons",
+  "lem-sfb-quotient-section-tensor-normalization",
+  "lem-pur-derived-change-of-rings",
+  "lem-sfb-internal-pull-normalization-existence",
+  "lem-derived-right-exact-tensor-comparison"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 06YY (lemma-derived-base-change), 07A4 (lemma-pullback-tensor-product), 0G7E (lemma-pullback-K-flat); ordinary balancing from sites-modules.tex Tag 03EL (lemma-tensor-product-pullback)."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The two composites of scalar extension and pullback tensorators on complexes agree after a monoidal natural isomorphism",
+   "results": "Eight hits, including ModuleCat.extendScalars_assoc, ModuleCat.extendScalarsComp_hom_app_one_tmul and PresheafOfModules.pullbackComp. They do not state the normalized internal-module cochain computation.",
+   "date": "2026-10-27",
+   "verdict": "No exact match. Reuse the repository monoidal naturality and composition lemmas."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"mapHomologicalComplexδNatTrans_naturality\"",
+   "results": "0 hits. Repository search finds the proved Functor.mapHomologicalComplexδNatTrans_naturality and mapHomologicalComplexδNatTrans_comp.",
+   "date": "2026-10-27",
+   "verdict": "No Mathlib match; the adopted source library supplies the ordinary complex calculus."
+  },
+  {
+   "tool": "grep",
+   "query": "mapHomologicalComplexδNatTrans|isIso_leftDerivedFunctorCounit_app_of_kFlat",
+   "results": "msearch grep: 0 hits. Local repository search finds the derived-counit and ordinary cochain comparison lemmas used in the maps module.",
+   "date": "2026-10-27",
+   "verdict": "No Mathlib exact match."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Localization counit equations compute tensor comparison for a derived functor on K flat cochain complexes with flat terms",
+   "results": "Eight hits, including CategoryTheory.Functor.totalLeftDerivedCounit and CategoryTheory.Adjunction.derived_counit; no tensor computation with the specified scalar and geometric normalizations.",
+   "date": "2026-10-27",
+   "verdict": "No exact match."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.QuotientPullbackTensorFlatModel",
+  "date": "2026-10-27",
+  "group": "T2"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sfb-proper-base-change",
+ "blueprint": {
+  "is": null,
+  "same_as": [],
+  "from": {
+   "node": "det-thm-sfb-proper-base-change-integral",
+   "place": "Paragraph (3), normalized coefficient quotient tensor calculation: Ordinary signed-total quotient tensor maps and invertible target computations.",
+   "via": [
+    "lem-sfb-quotient-pullback-tensor-flat-model",
+    "lem-sfb-quotient-pullback-tensor-coherence",
+    "lem-sfb-integral-quotient-projection-comparison"
+   ]
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.QuotientTensorFlatModelMaps",
+  "file": "lean/Sheaf/Paper/QuotientTensorFlatModelMaps.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.QuotientTensorFlatModel.ordinary_square",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.QuotientTensorFlatModel.pullComplex",
+   "AlgebraicGeometry.ProEtale.QuotientTensorFlatModel.scalarComplex",
+   "AlgebraicGeometry.ProEtale.QuotientTensorFlatModel.totalPull",
+   "AlgebraicGeometry.ProEtale.QuotientTensorFlatModel.totalBalance",
+   "AlgebraicGeometry.ProEtale.QuotientTensorFlatModel.ordinaryLeft",
+   "AlgebraicGeometry.ProEtale.QuotientTensorFlatModel.ordinaryRight",
+   "AlgebraicGeometry.ProEtale.QuotientTensorFlatModel.ordinary_square",
+   "AlgebraicGeometry.ProEtale.QuotientTensorFlatModel.factorCompute",
+   "AlgebraicGeometry.ProEtale.QuotientTensorFlatModel.targetCompute",
+   "AlgebraicGeometry.ProEtale.QuotientTensorFlatModel.sourceCompute",
+   "AlgebraicGeometry.ProEtale.QuotientTensorFlatModel.targetLocalization",
+   "AlgebraicGeometry.ProEtale.QuotientTensorFlatModel.targetTensor",
+   "AlgebraicGeometry.ProEtale.QuotientTensorFlatModel.targetCompute_isIso",
+   "AlgebraicGeometry.ProEtale.QuotientTensorFlatModel.targetLocalization_isIso"
+  ],
+  "statement": "theorem ordinary_square (P Q : CochainComplex (Modules R Y) ℤ) :\n    ordinaryLeft a f P Q = ordinaryRight a f P Q",
+  "branch": "sheaf-dag",
+  "by": "T2",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T2",
+  "result": "pass",
+  "landing": "20261027T094523-L-238743",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T2",
+  "result": "pass",
+  "landing": "20261027T094523-L-238743",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

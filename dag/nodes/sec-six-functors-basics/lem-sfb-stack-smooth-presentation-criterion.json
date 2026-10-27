@@ -1,0 +1,327 @@
+{
+ "id": "lem-sfb-stack-smooth-presentation-criterion",
+ "kind": "statement",
+ "title": "Smooth presentation criterion for general algebraic stack morphisms",
+ "statement": "Let $S$ be a scheme [def-pc-scheme] in the universes of [def-weil-size-convention], and let $f:\\mathcal X\\to\\mathcal Y$ be a morphism of algebraic stacks over $S$ [def-sfb-algebraic-moduli-stack]. Morphisms, $2$-commutative diagrams and $2$-fibre products use [def-sfb-stable-pointed-moduli-groupoids]. Algebraic spaces use [def-trf-algebraic-space]. A map of algebraic spaces is smooth when it is smooth on compatible etale scheme charts, using [def-sbc-smooth-morphisms]. A representable map of fibred groupoids is smooth when every scheme base change is a smooth algebraic-space projection. Surjective means that every object over a field lifts, up to isomorphism, after a field extension. Consider diagrams $U\\xrightarrow{q}V$ over $f$, with $U,V$ algebraic spaces and representable smooth vertical maps $a:U\\to\\mathcal X$ and $b:V\\to\\mathcal Y$. The following conditions are equivalent: (A) every such diagram for which the induced map $U\\to\\mathcal X\\times_{\\mathcal Y}V$ is representable smooth has smooth $q$; (B) some such diagram with $a$ surjective has smooth $q$. Requiring $U,V$ to be schemes in both conditions gives equivalent conditions. These are the smooth-chart definition of smoothness for $f$. If $\\mathcal X,\\mathcal Y$ are algebraic spaces, these conditions are equivalent to ordinary smoothness of their map. If $f$ is representable by algebraic spaces, these conditions are equivalent to smoothness of $\\mathcal X\\times_{\\mathcal Y}T\\to T$ for every scheme $T\\to\\mathcal Y$. No Deligne--Mumford, quasi-compactness, separation, Noetherian or finite-type hypothesis is imposed.",
+ "source": {
+  "document": "literature/stacks-project/stacks-morphisms.tex",
+  "place": "Tag 06FM (lemma-local-source-target), specialized to smooth; Tag 075U (definition-smooth) and its introductory verification of the hypotheses. Scheme-chart form by etale atlas refinement. The etale-stack convention is criteria.tex Tag 076V (lemma-stacks-etale)."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-size-convention",
+  "def-sfb-algebraic-moduli-stack",
+  "def-sfb-stable-pointed-moduli-groupoids",
+  "def-trf-algebraic-space",
+  "def-sbc-smooth-morphisms",
+  "def-weil-field",
+  "def-sfb-space-morphism-properties",
+  "def-sfb-dm-stack-morphism-properties",
+  "def-sfb-moduli-chart-normalization",
+  "def-sfb-surjective-moduli-map"
+ ],
+ "proof": [
+  {
+   "text": "First relate the two meanings of smoothness for a map $r:A\\to B$ of algebraic spaces. Ordinary smoothness implies representable smoothness: every scheme base change is an algebraic space and is ordinarily smooth by the space base-change lemma. Conversely suppose $r$ is representable smooth. Choose a surjective etale scheme atlas $V\\to B$ and a surjective etale scheme atlas $U\\to A\\times_BV$. The scheme-test hypothesis makes $A\\times_BV\\to V$ smooth. The etale presentation criterion, applied with target chart $\\mathrm{id}_V$, makes $U\\to V$ smooth. The etale covering calculus makes $U\\to A$ surjective etale. Apply the same presentation criterion to $U\\to V$ over $r$ to obtain ordinary smoothness of $r$. Its hypothesis that scheme smoothness is etale local on source-and-target is exactly the scheme locality lemma. This also identifies scheme smoothness with its algebraic-space extension. Thus below the representable calculus can be applied to ordinary smooth space maps, and its space-valued outputs can be read as ordinarily smooth. Finally relate the two meanings of surjectivity for a representable map $a:U\\to\\mathcal X$ from an algebraic space. If every scheme base change of $a$ is surjective on field-valued point classes, then for an object $x$ over a field $K$ the base change $U\\times_{\\mathcal X}\\operatorname{Spec}K$ is a nonempty space over $\\operatorname{Spec}K$; any field-valued point of it, over an extension $L\\supseteq K$, is a lift of $x|_L$ to $U$ up to isomorphism. Conversely, if objects over fields lift after extension, then for a scheme $T\\to\\mathcal X$ and a point $t\\in T$ the restriction to $\\kappa(t)$ lifts over some $L\\supseteq\\kappa(t)$, which is an $L$-valued point of $U\\times_{\\mathcal X}T$ above $t$. Thus the surjectivity of the statement, of the representable calculus and of the atlases of an algebraic stack agree.",
+   "uses": [
+    "def-trf-algebraic-space",
+    "lem-sfb-representable-pullback-over-space",
+    "lem-sfb-space-smooth-surjective-fppf-locality",
+    "lem-sfb-space-etale-presentation-property-criterion",
+    "lem-sfb-scheme-etale-source-target-properties",
+    "lem-trf-space-representable-etale-scheme-tests",
+    "lem-sfb-fibred-groupoid-representable-smooth-calculus",
+    "def-sfb-algebraic-moduli-stack"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/stacks-morphisms.tex",
+    "place": "Tag 06FM, representable-space comparison specialized to smooth; spaces-morphisms.tex Tag 03MJ (lemma-local-source-target), and spaces-descent.tex Tag 0429 with spaces-morphisms.tex Tag 03ZE"
+   }
+  },
+  {
+   "text": "Write $A_{\\rm sch},B_{\\rm sch}$ for the two tests restricted to schemes. Assume $A_{\\rm sch}$ (the same construction applies assuming A). Choose a representable smooth surjective scheme atlas $V\\to\\mathcal Y$. The stack $\\mathcal W=\\mathcal X\\times_{\\mathcal Y}V$ is algebraic by algebraicity of stack fibre products; a scheme is here a discrete algebraic stack with its identity atlas. Choose a representable smooth surjective scheme atlas $U\\to\\mathcal W$. Representable base change and composition show that $U\\to\\mathcal X$ is smooth and surjective, since $\\mathcal W\\to\\mathcal X$ is the base change of $V\\to\\mathcal Y$. The induced map $U\\to\\mathcal X\\times_{\\mathcal Y}V$ is precisely the chosen atlas, so this diagram is among those tested by $A_{\\rm sch}$. Its map $q:U\\to V$ is smooth. This proves $B_{\\rm sch}$ with both $U,V$ schemes.",
+   "uses": [
+    "def-sfb-algebraic-moduli-stack",
+    "def-sfb-stable-pointed-moduli-groupoids",
+    "def-trf-scheme-algebraic-space",
+    "lem-sfb-algebraic-stack-fibre-products",
+    "lem-sfb-fibred-groupoid-representable-smooth-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/stacks-morphisms.tex",
+    "place": "Tag 06FM (lemma-local-source-target), proof of (1) => (2); algebraic.tex Tag 04T2 (lemma-2-fibre-product)"
+   }
+  },
+  {
+   "text": "Assume B, witnessed by $q:U\\to V$, $a,b$, with $a$ smooth surjective and $q$ smooth. Let $q':U'\\to V'$, $a',b'$ be any diagram tested by A, and write $c':U'\\to\\mathcal X\\times_{\\mathcal Y}V'$ for its smooth induced map. Form the algebraic spaces $E=V\\times_{\\mathcal Y}V'$, $D=U\\times_{\\mathcal Y}V'$ and $P=U\\times_{\\mathcal X}U'$. They are spaces by representable pullback over a space, using respectively $b',b',a$. There is a cartesian square with top $P\\to U'$, bottom $D\\to\\mathcal X\\times_{\\mathcal Y}V'$, and right side $c'$. Indeed an object of its pullback is an object $u$ of $U$, an object $u'$ of $U'$, and an isomorphism $a(u)\\simeq a'(u')$; its $V'$-component and compatibility are supplied by $q'(u')$ and the image of that isomorphism in $\\mathcal Y$. Forgetting the redundant $V'$-component is inverse to inserting $q'(u')$. Thus $P\\to D$ is representable smooth. Also $D\\to E$ is the base change of $q$ by $E\\to V$, so it is ordinarily smooth. The projection $E\\to V'$ is the base change of $b$, hence representable smooth. By step 1 all three maps are ordinarily smooth.",
+   "uses": [
+    "def-sfb-stable-pointed-moduli-groupoids",
+    "lem-sfb-representable-pullback-over-space",
+    "lem-sfb-fibred-groupoid-representable-smooth-calculus",
+    "lem-sfb-space-smooth-surjective-fppf-locality"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/stacks-morphisms.tex",
+    "place": "Tag 06FM (lemma-local-source-target), proof of (2) => (1), the comparison diagram and its cartesian square"
+   }
+  },
+  {
+   "text": "The composite $P\\to D\\to E\\to V'$ is smooth by composition in the representable calculus and step 1. It equals $q'\\circ p$ for $p:P\\to U'$. The map $p$ is the base change of the smooth surjective map $a$, hence smooth surjective. For each point $u'$ of $U'$, choose a point $z$ of $P$ above it. The smooth-source point-locality lemma, applied to $q'$ and $p$ at $z$, gives that $q'$ is smooth at $u'$. These smooth neighbourhoods cover $U'$, so $q'$ is smooth: on any compatible etale scheme charts this is source locality of scheme smoothness, as supplied by the scheme locality lemma. Consequently B implies A. Only $a$ is required to be surjective; neither $b$ nor $b'$ has been assumed surjective.",
+   "uses": [
+    "lem-sfb-fibred-groupoid-representable-smooth-calculus",
+    "lem-sfb-space-smooth-source-point-locality",
+    "lem-sfb-scheme-etale-source-target-properties"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/stacks-morphisms.tex",
+    "place": "Tag 06FM (lemma-local-source-target), final descent in (2) => (1); spaces-descent.tex Tag 06F2 (lemma-smooth-smooth-local-source)"
+   }
+  },
+  {
+   "text": "A implies $A_{\\rm sch}$ by restricting its universal quantifier, $A_{\\rm sch}$ implies $B_{\\rm sch}$ by step 2, $B_{\\rm sch}$ implies B by allowing algebraic spaces, and B implies A by steps 3--4. These four implications prove all four conditions equivalent. Calling this condition smoothness is precisely the smooth-chart definition: it is independent of both the presentation and whether schemes or spaces are used.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/stacks-morphisms.tex",
+    "place": "Tag 075U (definition-smooth), using the equivalence of Tag 06FM"
+   }
+  },
+  {
+   "text": "If $\\mathcal X=X$ and $\\mathcal Y=Y$ are algebraic spaces and $f$ is ordinarily smooth, it is representable smooth by step 1. In any diagram of A the map $U\\to X\\times_YV$ and the projection $X\\times_YV\\to V$ are then representable smooth, so their composite $q$ is ordinarily smooth by the calculus and step 1. Conversely, if A holds, take $U=X$, $V=Y$, and both vertical maps identities. Identities are representable smooth (their scheme tests are identity maps, smooth directly from the scheme definition). The induced $X\\to X\\times_YY$ is an isomorphism, hence smooth for the same reason. The conclusion of A is exactly ordinary smoothness of $f$. This proves the algebraic-space comparison, without using a scheme atlas as if it were an identity.",
+   "uses": [
+    "lem-sfb-fibred-groupoid-representable-smooth-calculus",
+    "def-sbc-smooth-morphisms",
+    "def-sfb-stable-pointed-moduli-groupoids"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/stacks-morphisms.tex",
+    "place": "Tag 06FM (lemma-local-source-target), paragraph comparing with maps of algebraic spaces"
+   }
+  },
+  {
+   "text": "Suppose now that $f$ is representable and B holds. For an arbitrary scheme $T\\to\\mathcal Y$ put $W=\\mathcal X\\times_{\\mathcal Y}T$, $U_T=U\\times_{\\mathcal Y}T$, $V_T=V\\times_{\\mathcal Y}T$. These are spaces: $W$ by representability of $f$, $U_T$ by that of $f\\circ a$, and $V_T$ by that of $b$. The map $U_T\\to W$ is smooth surjective, being a base change of $a$, and $V_T\\to T$ is smooth, being a base change of $b$. Further $U_T\\to V_T$ is the base change of $q$. Explicitly, $U\\times_V(V\\times_{\\mathcal Y}T)\\simeq U\\times_{\\mathcal Y}T$: a triple $(u,v,t)$ with $q(u)=v$ and $b(v)\\simeq t$ is sent to $(u,t)$ with the composed isomorphism, and its inverse inserts $v=q(u)$. Therefore $U_T\\to V_T\\to T$ is smooth by the representable calculus and step 1. Smooth-source point locality along the smooth surjection $U_T\\to W$ shows that $W\\to T$ is smooth, just as in step 4. No cover of T, no quasi-compactness of any map, and no surjectivity of $V_T\\to T$ is used.",
+   "uses": [
+    "def-sfb-stable-pointed-moduli-groupoids",
+    "lem-sfb-fibred-groupoid-representable-smooth-calculus",
+    "lem-sfb-space-smooth-source-point-locality",
+    "lem-sfb-scheme-etale-source-target-properties"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/stacks-morphisms.tex",
+    "place": "Tag 06FM (lemma-local-source-target), final paragraph, specialized to smooth using smooth-source locality"
+   }
+  },
+  {
+   "text": "Conversely, if $f$ is representable and every scheme base change $\\mathcal X\\times_{\\mathcal Y}T\\to T$ is smooth, then $f$ is representable smooth by the definition in the statement. Given any diagram of A, its projection $\\mathcal X\\times_{\\mathcal Y}V\\to V$ is a representable smooth base change of $f$. Composing it with the stipulated representable smooth map from $U$ gives representable smooth $q:U\\to V$. Step 1 makes $q$ ordinarily smooth. Thus A holds, completing the representable comparison. All constructions and arguments used arbitrary algebraic stacks and arbitrary scheme tests throughout.",
+   "uses": [
+    "lem-sfb-fibred-groupoid-representable-smooth-calculus"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/stacks-morphisms.tex",
+    "place": "Tag 06FM (lemma-local-source-target), converse of the representable comparison; Tag 075U (definition-smooth)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sbc-smooth-morphisms",
+  "def-sfb-algebraic-moduli-stack",
+  "def-sfb-stable-pointed-moduli-groupoids",
+  "def-trf-algebraic-space",
+  "def-trf-scheme-algebraic-space",
+  "lem-sfb-algebraic-stack-fibre-products",
+  "lem-sfb-fibred-groupoid-representable-smooth-calculus",
+  "lem-sfb-representable-pullback-over-space",
+  "lem-sfb-scheme-etale-source-target-properties",
+  "lem-sfb-space-etale-presentation-property-criterion",
+  "lem-sfb-space-smooth-source-point-locality",
+  "lem-sfb-space-smooth-surjective-fppf-locality",
+  "lem-trf-space-representable-etale-scheme-tests"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/stacks-morphisms.tex",
+  "place": "Tags 06FM (lemma-local-source-target), 075U (definition-smooth). The proof follows the comparison 2-fibre products of 06FM; for smoothness its representable comparison uses smooth-source locality (spaces-descent.tex Tag 06F2) directly. Scheme charts are handled by the four-implication cycle in step 5."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Smoothness of morphisms of algebraic stacks is equivalent to smoothness on a smooth surjective scheme presentation",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.isSmooth_iff\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y),\\n  AlgebraicGeometry.IsSmooth f ↔\\n    ∀ (x : ↥X),\\n      ∃ U V,\\n        ∃ (_ : x ∈ ↑V) (e : ↑V ≤ (TopologicalSpace.Opens.map f.base).obj ↑U),\\n          (CommRingCat.Hom.hom (AlgebraicGeometry.Scheme.Hom.appLE f (↑U) (↑V) e)).IsStandardSmooth\", \"doc\": \"A morphism of schemes $f: X \\\\to Y$ is smooth if and only if for every point $x \\\\in X$, there exist open subsets $V$ of $X$ and $U$ of $Y$ such that $x \\\\in V$, $f(V) \\\\subseteq U$, and the induced ring \"}\n  {\"name\": \"AlgebraicGeometry.IsSmooth\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"A morphism $ f: X \\to Y $ of schemes is smooth.\"}\n  {\"name\": \"AlgebraicGeometry.IsSmoothOfRelativeDimension.isSmooth\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"∀ (n : ℕ) {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.IsSmoothOfRelativeDimension n f],\\n  AlgebraicGeometry.IsSmooth f\", \"doc\": \"If a morphism $ f: X \\\\to Y $ of schemes is smooth of relative dimension $ n $, then $ f $ is smooth.\"}\n  {\"name\": \"AlgebraicGeometry.instHasRingHomPropertyIsSmoothLocallyIsStandardSmooth\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"AlgebraicGeometry.HasRingHomProperty @AlgebraicGeometry.IsSmooth fun {R S} [CommRing R] [CommRing S] =>\\n  RingHom.Locally fun {R S} [CommRing R] [CommRing S] => RingHom.IsStandardSmooth\", \"doc\": \"A morphism of schemes is smooth if and only if it is locally standard smooth, meaning that for every point in the domain, there exists an open neighborhood where the morphism is isomorphic to a standa\"}\n  {\"name\": \"AlgebraicGeometry.IsEtale.instIsSmooth\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.IsEtale f], AlgebraicGeometry.IsSmooth f\", \"doc\": \"Every étale morphism of schemes is a smooth morphism. Specifically, if a morphism $ f: X \\to Y $ of schemes is étale (i.e., smooth of relative dimension 0), then it satisfies the conditions of being a \"}\n  {\"name\": \"AlgebraicGeometry.instLocallyOfFinitePresentationOfIsSmooth\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [hf : AlgebraicGeometry.IsSmooth f],\\n  AlgebraicGeometry.LocallyOfFinitePresentation f\", \"doc\": \"Every smooth morphism of schemes is locally of finite presentation.\"}\n  {\"name\": \"AlgebraicGeometry.instIsStableUnderCompositionSchemeIsSmooth\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"CategoryTheory.MorphismProperty.IsStableUnderComposition @AlgebraicGeometry.IsSmooth\", \"doc\": \"For any morphisms $ f: X \\\\to Y $ and $ g: Y \\\\to Z $ of schemes, if $ f $ and $ g $ are smooth, then their composition $ g \\\\circ f $ is also smooth.\"}\n  {\"name\": \"AlgebraicGeometry.isSmoothOfRelativeDimension_iff\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"∀ (n : ℕ) {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y),\\n  AlgebraicGeometry.IsSmoothOfRelativeDimension n f ↔\\n    ∀ (x : ↥X),\\n      ∃ U V,\\n        ∃ (_ : x ∈ ↑V) (e : ↑V ≤ (TopologicalSpace.Opens.map f.base).obj ↑U),\\n          RingHom.IsStandardSmoothOfRelativeDimension n\\n            (CommRingCat.Ho\", \"doc\": \"Let $n$ be a natural number and let $f: X \\\\to Y$ be a morphism of schemes. The morphism $f$ is smooth of relative dimension $n$ if and only if for every point $x \\\\in X$, there exist an open neighborho\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern smooth ring maps or schemes, not general algebraic stacks or independence of smooth presentations. Read Mathlib/AlgebraicGeometry/Morphisms/Smooth.lean lines 57-126; Smooth and its deprecated IsSmooth alias have scheme source and target."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An Artin stack morphism is smooth if one smooth atlas diagram has smooth horizontal map",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.instIsStableUnderCompositionSchemeIsSmooth\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"CategoryTheory.MorphismProperty.IsStableUnderComposition @AlgebraicGeometry.IsSmooth\", \"doc\": \"For any morphisms $ f: X \\\\to Y $ and $ g: Y \\\\to Z $ of schemes, if $ f $ and $ g $ are smooth, then their composition $ g \\\\circ f $ is also smooth.\"}\n  {\"name\": \"AlgebraicGeometry.IsSmooth\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"A morphism $ f: X \\to Y $ of schemes is smooth.\"}\n  {\"name\": \"AlgebraicGeometry.IsSmoothOfRelativeDimension.isSmooth\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"∀ (n : ℕ) {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.IsSmoothOfRelativeDimension n f],\\n  AlgebraicGeometry.IsSmooth f\", \"doc\": \"If a morphism $ f: X \\\\to Y $ of schemes is smooth of relative dimension $ n $, then $ f $ is smooth.\"}\n  {\"name\": \"AlgebraicGeometry.isSmooth_iff\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y),\\n  AlgebraicGeometry.IsSmooth f ↔\\n    ∀ (x : ↥X),\\n      ∃ U V,\\n        ∃ (_ : x ∈ ↑V) (e : ↑V ≤ (TopologicalSpace.Opens.map f.base).obj ↑U),\\n          (CommRingCat.Hom.hom (AlgebraicGeometry.Scheme.Hom.appLE f (↑U) (↑V) e)).IsStandardSmooth\", \"doc\": \"A morphism of schemes $f: X \\\\to Y$ is smooth if and only if for every point $x \\\\in X$, there exist open subsets $V$ of $X$ and $U$ of $Y$ such that $x \\\\in V$, $f(V) \\\\subseteq U$, and the induced ring \"}\n  {\"name\": \"AlgebraicGeometry.IsEtale.instIsSmooth\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.IsEtale f], AlgebraicGeometry.IsSmooth f\", \"doc\": \"Every étale morphism of schemes is a smooth morphism. Specifically, if a morphism $ f: X \\to Y $ of schemes is étale (i.e., smooth of relative dimension 0), then it satisfies the conditions of being a \"}\n  {\"name\": \"AlgebraicGeometry.instIsMultiplicativeSchemeIsSmoothOfRelativeDimensionOfNatNat\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"CategoryTheory.MorphismProperty.IsMultiplicative (@AlgebraicGeometry.IsSmoothOfRelativeDimension 0)\", \"doc\": \"The property of being a smooth morphism of relative dimension zero is multiplicative. That is, if $ f: X \\\\to Y $ and $ g: Y \\\\to Z $ are smooth morphisms of relative dimension zero, then their composit\"}\n  {\"name\": \"AlgebraicGeometry.IsSmoothOfRelativeDimension\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"ℕ → {X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"For a natural number $n$ and a morphism $f: X \\\\to Y$ of schemes, the proposition that $f$ is smooth of relative dimension $n$.\"}\n  {\"name\": \"AlgebraicGeometry.IsSmooth.exists_isStandardSmooth\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y} [self : AlgebraicGeometry.IsSmooth f] (x : ↥X),\\n  ∃ U V,\\n    ∃ (_ : x ∈ ↑V) (e : ↑V ≤ (TopologicalSpace.Opens.map f.base).obj ↑U),\\n      (CommRingCat.Hom.hom (AlgebraicGeometry.Scheme.Hom.appLE f (↑U) (↑V) e)).IsStandardSmooth\", \"doc\": \"Let $f: X \\\\to Y$ be a smooth morphism of schemes. For any point $x \\\\in X$, there exist an open neighborhood $V$ of $x$ and an open neighborhood $U$ of $f(x)$ with $f(V) \\\\subseteq U$, such that the rin\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern smooth ring maps or schemes, not general algebraic stacks or independence of smooth presentations. Read Mathlib/AlgebraicGeometry/Morphisms/Smooth.lean lines 57-126; Smooth and its deprecated IsSmooth alias have scheme source and target."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Smooth\", \"Stack\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern smooth ring maps or schemes, not general algebraic stacks or independence of smooth presentations. Read Mathlib/AlgebraicGeometry/Morphisms/Smooth.lean lines 57-126; Smooth and its deprecated IsSmooth alias have scheme source and target."
+  },
+  {
+   "tool": "grep",
+   "query": "AlgebraicStack|ArtinStack|smooth.*atlas|smooth.*presentation",
+   "results": "[grep] OK 25 hit(s)\n  {\"file\": \"Mathlib/RingTheory/Smooth/StandardSmoothCotangent.lean\", \"line\": \"350\", \"text\": \"  finitePresentation := (IsStandardSmoothOfRelativeDimension.isStandardSmooth 0).finitePresentation\"}\n  {\"file\": \"Mathlib/RingTheory/Smooth/StandardSmoothOfFree.lean\", \"line\": \"16\", \"text\": \"standard smooth: An `R`-algebra `S` of finite presentation is standard smooth if and only if\"}\n  {\"file\": \"Mathlib/RingTheory/Smooth/StandardSmoothOfFree.lean\", \"line\": \"50\", \"text\": \"theorem IsStandardSmooth.of_basis_kaehlerDifferential [FinitePresentation R S]\"}\n  {\"file\": \"Mathlib/RingTheory/Smooth/StandardSmoothOfFree.lean\", \"line\": \"82\", \"text\": \"theorem IsStandardSmooth.iff_exists_basis_kaehlerDifferential [FinitePresentation R S] :\"}\n  {\"file\": \"Mathlib/RingTheory/Smooth/StandardSmoothOfFree.lean\", \"line\": \"104\", \"text\": \"theorem IsSmoothAt.exists_notMem_isStandardSmooth [FinitePresentation R S] (p : Ideal S) [p.IsPrime]\"}\n  {\"file\": \"Mathlib/RingTheory/Smooth/Basic.lean\", \"line\": \"22\", \"text\": \"An `R`-algebra `A` is smooth if it is formally smooth and of finite presentation.\"}\n  {\"file\": \"Mathlib/RingTheory/Smooth/Basic.lean\", \"line\": \"189\", \"text\": \"instance [EssFiniteType R A] [FormallySmooth R A] : Module.FinitePresentation A Ω[A⁄R] :=\"}\n  {\"file\": \"Mathlib/RingTheory/Smooth/Basic.lean\", \"line\": \"536\", \"text\": \"/-- An `R` algebra `A` is smooth if it is formally smooth and of finite presentation. -/\"}\n  {\"file\": \"Mathlib/RingTheory/Smooth/Basic.lean\", \"line\": \"548\", \"text\": \"attribute [instance] formallySmooth finitePresentation\"}\n  {\"file\": \"Mathlib/RingTheory/Smooth/StandardSmooth.lean\", \"line\": \"13\", \"text\": \"A standard smooth algebra is an algebra that admits a `SubmersivePresentation`. A standard\"}\n  {\"file\": \"Mathlib/RingTheory/Smooth/StandardSmooth.lean\", \"line\": \"14\", \"text\": \"smooth algebra is of relative dimension `n` if it admits a submersive presentation of\"}\n  {\"file\": \"Mathlib/RingTheory/Smooth/StandardSmooth.lean\", \"line\": \"68\", \"text\": \"lemma SubmersivePresentation.isStandardSmooth [Finite ι] (P : SubmersivePresentation R S ι σ) :\"}\n  {\"file\": \"Mathlib/RingTheory/Smooth/StandardSmooth.lean\", \"line\": \"118\", \"text\": \"instance (priority := 100) IsStandardSmooth.finitePresentation [IsStandardSmooth R S] :\"}\n  {\"file\": \"Mathlib/RingTheory/Smooth/Locus.lean\", \"line\": \"77\", \"text\": \"lemma basicOpen_subset_smoothLocus_iff [FinitePresentation R A] {f : A} :\"}\n  {\"file\": \"Mathlib/RingTheory/Smooth/Locus.lean\", \"line\": \"93\", \"text\": \"lemma basicOpen_subset_smoothLocus_iff_smooth [FinitePresentation R A] {f : A} :\"}\n  {\"file\": \"Mathlib/RingTheory/Smooth/Locus.lean\", \"line\": \"100\", \"text\": \"lemma smoothLocus_eq_univ_iff [FinitePresentation R A] :\"}\n  {\"file\": \"Mathlib/RingTheory/Smooth/Locus.lean\", \"line\": \"124\", \"text\": \"lemma isOpen_smoothLocus [FinitePresentation R A] : IsOpen (smoothLocus R A) := by\"}\n  {\"file\": \"Mathlib/RingTheory/Smooth/Locus.lean\", \"line\": \"150\", \"text\": \"lemma IsSmoothAt.exists_notMem_smooth [FinitePresentation R A] (p : Ideal A) [p.IsPrime]\"}\n  {\"file\": \"Mathlib/RingTheory/Smooth/Fiber.lean\", \"line\": \"154\", \"text\": \"  We then apply `FormallySmooth.of_formallySmooth_residueField_tensor_aux` to this presentation.\"}\n  {\"file\": \"Mathlib/RingTheory/Smooth/Fiber.lean\", \"line\": \"239\", \"text\": \"lemma Smooth.of_formallySmooth_fiber [Algebra.FinitePresentation R S]\"}\n  {\"file\": \"Mathlib/RingTheory/RingHom/Smooth.lean\", \"line\": \"86\", \"text\": \"lemma smooth_def {f : R →+* S} : f.Smooth ↔ f.FormallySmooth ∧ f.FinitePresentation :=\"}\n  {\"file\": \"Mathlib/RingTheory/RingHom/Smooth.lean\", \"line\": \"98\", \"text\": \"lemma finitePresentation {f : R →+* S} (hf : f.Smooth) : f.FinitePresentation := by\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth.lean\", \"line\": \"240\", \"text\": \"/-- Smooth morphisms are locally of finite presentation. -/\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth.lean\", \"line\": \"241\", \"text\": \"instance (priority := 100) [hf : Smooth f] : LocallyOfFinitePresentation f := by\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth.lean\", \"line\": \"296\", \"text\": \"lemma Scheme.Hom.isOpen_smoothLocus [LocallyOfFinitePresentation f] :\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern smooth ring maps or schemes, not general algebraic stacks or independence of smooth presentations. Read Mathlib/AlgebraicGeometry/Morphisms/Smooth.lean lines 57-126; Smooth and its deprecated IsSmooth alias have scheme source and target."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Smoothness of algebraic stack maps can be tested on smooth scheme charts",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.IsSmooth.casesOn\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Smooth\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} →\\n  {f : X ⟶ Y} →\\n    {motive : AlgebraicGeometry.IsSmooth f → Sort u_1} →\\n      (t : AlgebraicGeometry.IsSmooth f) →\\n        ((exists_isStandardSmooth :\\n              ∀ (x : ↥X),\\n                ∃ U V,\\n                  ∃ (_ : x ∈ ↑V) (e : ↑V ≤ (TopologicalSpace.Ope\", \"doc\": \"A morphism $ f: X \\to Y $ of schemes is smooth.\"}\n  {\"name\": \"AlgebraicGeometry.IsSmooth\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Smooth\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"A morphism $ f: X \\to Y $ of schemes is smooth.\"}\n  {\"name\": \"AlgebraicGeometry.IsSmooth.recOn\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Smooth\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} →\\n  {f : X ⟶ Y} →\\n    {motive : AlgebraicGeometry.IsSmooth f → Sort u_1} →\\n      (t : AlgebraicGeometry.IsSmooth f) →\\n        ((exists_isStandardSmooth :\\n              ∀ (x : ↥X),\\n                ∃ U V,\\n                  ∃ (_ : x ∈ ↑V) (e : ↑V ≤ (TopologicalSpace.Ope\", \"doc\": \"A morphism $ f: X \\\\to Y $ of schemes is smooth if, for every point $ x \\\\in X $, there exist affine open neighborhoods $ U \\\\subseteq Y $ containing $ f(x) $ and $ V \\\\subseteq X $ containing $ x $ such \"}\n  {\"name\": \"AlgebraicGeometry.instLocallyOfFinitePresentationOfIsSmooth\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Smooth\", \"type\": \"[hf : IsSmooth f] : LocallyOfFinitePresentation f\", \"doc\": \"Every smooth morphism of schemes is locally of finite presentation.\"}\n  {\"name\": \"AlgebraicGeometry.isSmooth_iff\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Smooth\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y),\\n  AlgebraicGeometry.IsSmooth f ↔\\n    ∀ (x : ↥X),\\n      ∃ U V,\\n        ∃ (_ : x ∈ ↑V) (e : ↑V ≤ (TopologicalSpace.Opens.map f.base).obj ↑U),\\n          (CommRingCat.Hom.hom (AlgebraicGeometry.Scheme.Hom.appLE f (↑U) (↑V) e)).IsStandardSmooth\", \"doc\": \"A morphism of schemes $f: X \\\\to Y$ is smooth if and only if for every point $x \\\\in X$, there exist open subsets $V$ of $X$ and $U$ of $Y$ such that $x \\\\in V$, $f(V) \\\\subseteq U$, and the induced ring \"}\n  {\"name\": \"AlgebraicGeometry.IsSmooth.mk\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Smooth\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y},\\n  (∀ (x : ↥X),\\n      ∃ U V,\\n        ∃ (_ : x ∈ ↑V) (e : ↑V ≤ (TopologicalSpace.Opens.map f.base).obj ↑U),\\n          (CommRingCat.Hom.hom (AlgebraicGeometry.Scheme.Hom.appLE f (↑U) (↑V) e)).IsStandardSmooth) →\\n    AlgebraicGeometry.IsSmooth f\", \"doc\": \"A morphism of schemes $f: X \\\\to Y$ is smooth if for every point $x \\\\in X$, there exist open sets $U \\\\subseteq Y$ and $V \\\\subseteq X$ such that $x \\\\in V$, $f(V) \\\\subseteq U$, and the induced ring homom\"}\n  {\"name\": \"AlgebraicGeometry.IsSmooth.rec\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Smooth\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} →\\n  {f : X ⟶ Y} →\\n    {motive : AlgebraicGeometry.IsSmooth f → Sort u_1} →\\n      ((exists_isStandardSmooth :\\n            ∀ (x : ↥X),\\n              ∃ U V,\\n                ∃ (_ : x ∈ ↑V) (e : ↑V ≤ (TopologicalSpace.Opens.map f.base).obj ↑U),\\n                  (CommRing\", \"doc\": \"Let $f: X \\\\to Y$ be a morphism of schemes. This is the recursion principle for the property that $f$ is smooth. To prove a property $P$ for a smooth morphism $f$, it is sufficient to prove $P$ from th\"}\n  {\"name\": \"AlgebraicGeometry.IsEtale.instIsSmooth\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Etale\", \"type\": \"[IsEtale f] : IsSmooth f\", \"doc\": \"Every étale morphism of schemes is a smooth morphism. Specifically, if a morphism $ f: X \\to Y $ of schemes is étale (i.e., smooth of relative dimension 0), then it satisfies the conditions of being a \"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern smooth ring maps or schemes, not general algebraic stacks or independence of smooth presentations. Read Mathlib/AlgebraicGeometry/Morphisms/Smooth.lean lines 57-126; Smooth and its deprecated IsSmooth alias have scheme source and target."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A morphism of algebraic stacks is smooth if and only if it is smooth on a smooth presentation; independence of smooth charts",
+   "results": "{\"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.isSmooth_iff\", \"AlgebraicGeometry.instHasRingHomPropertyIsSmoothLocallyIsStandardSmooth\", \"AlgebraicGeometry.IsSmooth\", \"AlgebraicGeometry.IsSmoothOfRelativeDimension.isSmooth\", \"AlgebraicGeometry.instLocallyOfFinitePresentationOfIsSmooth\", \"AlgebraicGeometry.IsSmooth.exists_isStandardSmooth\", \"AlgebraicGeometry.IsEtale.instIsSmooth\", \"AlgebraicGeometry.isSmoothOfRelativeDimension_iff\"], \"digest\": \"3e299a0c05045bda\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: all hits concern smooth scheme or ring maps; no algebraic-stack smooth-presentation criterion. Read Mathlib/AlgebraicGeometry/Morphisms/Smooth.lean lines 57-70, 86-109: source and target are schemes."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Smooth\", \"Stack\"",
+   "results": "{\"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: all hits concern smooth scheme or ring maps; no algebraic-stack smooth-presentation criterion. Read Mathlib/AlgebraicGeometry/Morphisms/Smooth.lean lines 57-70, 86-109: source and target are schemes."
+  },
+  {
+   "tool": "grep",
+   "query": "AlgebraicStack|ArtinStack|smooth.*atlas|smooth.*presentation",
+   "results": "{\"ok\": true, \"n_hits\": 6, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/Morphisms/SmoothFiber.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/Smooth.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/Smooth.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/Smooth.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/Smooth.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/Smooth.lean\"], \"digest\": \"ff2f6f861f97bcda\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: all hits concern smooth scheme or ring maps; no algebraic-stack smooth-presentation criterion. Read Mathlib/AlgebraicGeometry/Morphisms/Smooth.lean lines 57-70, 86-109: source and target are schemes.",
+   "subdirectory": "AlgebraicGeometry"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Smooth morphism of algebraic stacks checked on smooth surjective charts",
+   "results": "{\"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsSmooth.casesOn\", \"AlgebraicGeometry.IsSmooth.recOn\", \"AlgebraicGeometry.IsSmooth\", \"AlgebraicGeometry.IsSmooth.mk\", \"AlgebraicGeometry.instLocallyOfFinitePresentationOfIsSmooth\", \"AlgebraicGeometry.IsSmoothOfRelativeDimension.mk\", \"AlgebraicGeometry.isSmoothOfRelativeDimension_comp\", \"AlgebraicGeometry.IsEtale.instIsSmooth\"], \"digest\": \"cab263b8ef752803\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: all hits concern smooth scheme or ring maps; no algebraic-stack smooth-presentation criterion. Read Mathlib/AlgebraicGeometry/Morphisms/Smooth.lean lines 57-70, 86-109: source and target are schemes."
+  },
+  {
+   "tool": "grep",
+   "query": "class Smooth|class IsSmooth|variable.*Scheme|AlgebraicStack|ArtinStack",
+   "results": "{\"ok\": true, \"n_hits\": 3, \"note\": \"\", \"top\": [\"57\", \"62\", \"135\"], \"digest\": \"c92dddde9b5f6d22\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: all hits concern smooth scheme or ring maps; no algebraic-stack smooth-presentation criterion. Read Mathlib/AlgebraicGeometry/Morphisms/Smooth.lean lines 57-70, 86-109: source and target are schemes.",
+   "subdirectory": "AlgebraicGeometry/Morphisms/Smooth.lean"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Independence of the choice of a smooth surjective atlas for smoothness of a morphism between Artin stacks",
+   "results": "{\"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.instIsStableUnderCompositionSchemeIsSmooth\", \"AlgebraicGeometry.isSmooth_iff\", \"AlgebraicGeometry.instHasRingHomPropertyIsSmoothLocallyIsStandardSmooth\", \"AlgebraicGeometry.IsSmooth\", \"AlgebraicGeometry.IsSmoothOfRelativeDimension.isSmooth\", \"AlgebraicGeometry.instIsMultiplicativeSchemeIsSmoothOfRelativeDimensionOfNatNat\", \"AlgebraicGeometry.instLocallyOfFinitePresentationOfIsSmooth\", \"AlgebraicGeometry.IsSmooth.exists_isStandardSmooth\"], \"digest\": \"3c247a1034f2a346\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: all hits concern smooth scheme or ring maps; no algebraic-stack smooth-presentation criterion. Read Mathlib/AlgebraicGeometry/Morphisms/Smooth.lean lines 57-70, 86-109: source and target are schemes."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-stack-smooth-permanence",
+  "date": "2026-10-23",
+  "group": "Q40"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Affine PGL quotients with closed orbits and zero-dimensional stabilizers. Supporting affine-quotient step: Finite diagonal from an affine adequate moduli space. Supporting input: the adequate moduli space for the product, before the finiteness criterion; Q44 product-affinization proof: composition of the product projections and the structural map; affine Y to Spec k; Proposition 4.2.1(1), proof first sentence: follows from Lemma 4.1.7, applied to g and the universally adequate map f_*A to f_*B; Smooth stack morphisms are preserved by composition and base change; input to the smooth-permanence split: independence of smooth presentations, Stacks 06FM specialized to smooth, before composition or base change. The creation chain has no resolvable blueprint ancestor; the current blueprint direct-images proof paragraph (3) supplies the inherited route.",
+   "via": [
+    "lem-sfb-stack-smooth-permanence",
+    "lem-sfb-adequate-algebra-pushforward",
+    "lem-sfb-adequately-affine-composition",
+    "lem-sfb-adequate-product-affinization",
+    "lem-sfb-adequate-quasifinite-diagonal-finite",
+    "lem-sfb-affine-pgl-finite-stabilizer-quotient",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-stack-smooth-presentation-criterion",
+  "worker": "stage1",
+  "summary": "Eight-step split with no new nodes. Checked Stacks 06FM and 075U, including the asymmetric extra smoothness condition in A and absence of target surjectivity in B. Expanded representable-versus-ordinary smoothness, the cartesian comparison, scheme charts, and the representable test. Reused existing general fibred-groupoid calculus and smooth-source locality, avoiding the parent stack permanence lemma and any cycle. Statement and statement dependencies unchanged; no exact project Lean attachment or Mathlib match.",
+  "blueprint": "Inherited supporting input to det-thm-sf-ctf-stability-direct-images, proof (3), through the recorded stable-curve/adequate-moduli creation chain: independence of smooth presentations, used before proving smooth composition and base change. Read the current latest blueprint unit and direct-images proof. The inherited blueprint ancestor is null; preserve its recorded place and via chain rather than invent an ancestor.",
+  "tool_uses": [
+   {
+    "node": "lem-trf-space-representable-etale-scheme-tests",
+    "why": "Generic etale scheme-chart composition and base-change calculus used only for the ordinary-versus-representable space comparison. The unit contains no separate statement of this foundation."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-trf-space-representable-etale-scheme-tests"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-NS-abb5fe687",
+  "group": "NS",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NS-abb5fe687 (reviewer sub-agent of L); spot-checked: Read Stacks 06FM (lemma-local-source-target; tags line 8256) with its full proof, and 075U (definition-smooth). The statement is unchanged from live and agrees with 06FM for P = smooth: the extra smooth induced map appears only in (A), only a must be surjective in (B), and the space and representable clauses are both present. The 8 steps cite 13 existing nodes, there are no new nodes and no cycle (the item is not in the 9926-node closure). Step 1 converts ordinary to representable smoothness of space maps via the space base-change lemma, the étale presentation criterion (clauses (1)/(2) and the scheme clause) and the trf étale calculus. Step 2 is 06FM (1)⇒(2) with stack fibre products and an atlas. Steps 3–4 check that P ≅ D×_{X×_YV'}U', that D→E is a base change of q and that E→V' is a base change of b, then descend along the surjective smooth P→U' by space smooth-source point locality. Steps 6–8 give the space and representable comparisons; step 7 uses no fppf base locality. Small cases checked: BG→Spec k with G smooth, Bμ_p in characteristic p, Spec k→BG, empty X. lem-sfb-stack-smooth-chart-comparison is DM-only, so it is not a duplicate; the parent smooth-permanence node is not used. Batch-5 flags: def-trf-scheme-algebraic-space and lem-trf-space-representable-etale-scheme-tests (03EC chart calculus) are generic foundations, and the six sfb nodes reach only def-trf-algebraic-space or lem-trf-smooth-composition. None is a step of the trace formula or of Poincaré duality, so all are accepted; the trf tool_use is accepted as generic. FIX: steps 2–4 and 7 use the calculus/atlas notion of surjective (scheme base changes surjective on points) while the statement defines it by lifting field-valued objects, and nothing related the two. I appended the two-line translation to step 1 and added the calculus and def-sfb-algebraic-moduli-stack to step 1's uses (both already in proof_deps).; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.StackSmoothPresentationCriterion",
+  "declaration": "CategoryTheory.stack_smooth_presentation_criterion",
+  "declarations": [
+   "CategoryTheory.SmoothModuliPresentation",
+   "CategoryTheory.SmoothSchemeModuliPresentation",
+   "CategoryTheory.IsSmoothOnModuliPresentations",
+   "CategoryTheory.HasSmoothModuliPresentation",
+   "CategoryTheory.IsSmoothOnSchemeModuliPresentations",
+   "CategoryTheory.HasSmoothSchemeModuliPresentation",
+   "CategoryTheory.stack_smooth_presentation_criterion",
+   "CategoryTheory.isSmoothOnModuliPresentations_iff_space_smooth",
+   "CategoryTheory.isSmoothOnModuliPresentations_iff_representable_smooth"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/StackSmoothPresentationCriterion.lean",
+  "statement": "theorem stack_smooth_presentation_criterion {S : Scheme.{u}} {X : BasedCategory.{v₁, w₁} (Over S)} {Y : BasedCategory.{v₂, w₂} (Over S)} (f : BasedFunctor X Y) (hX : IsAlgebraicModuliStack X) (hY : IsAlgebraicModuliStack Y) : (IsSmoothOnModuliPresentations f ↔ HasSmoothModuliPresentation f) ∧ (IsSmoothOnModuliPresentations f ↔ IsSmoothOnSchemeModuliPresentations f) ∧ (IsSmoothOnModuliPresentations f ↔ HasSmoothSchemeModuliPresentation f)",
+  "branch": "sheaf-dag",
+  "by": "Q58",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "Includes both space and scheme diagrams, the four chart predicates, their equivalences, the algebraic-space comparison and the representable scheme-test comparison. Diagram structures and predicates are helpers of this same presentation notion; the canonical 2-fibre comparison, scheme tests, chart extension and field-extension surjectivity are reused. stmt_deps gains four already landed nodes carrying these existing interfaces. Reviewer fix: condition A was renamed from IsSmoothModuliMap to IsSmoothOnModuliPresentations (and the two comparison theorems accordingly), because CategoryTheory.IsSmoothModuliMap is the declaration of the parallel definition node def-sfb-smooth-moduli-map (Q44, Q56 deliveries); mathematics unchanged.",
+  "fixed_by": "NT-stage2-cc-a7bf57427"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-a7bf57427",
+  "group": "Q58",
+  "result": "fix",
+  "note": "Statement matches node/Stacks 06FM+075U clause by clause: S:Scheme.{u}, two algebraic stacks with independent universes; diagrams with AlgebraicSpace U V, actual comm 2-iso, ModuliSpaceTest @Smooth vertical maps; A = every diagram with canonical moduliTwoFiberLift smooth → MapIsLocally @Smooth q; B = some diagram with IsSurjectiveModuliMap a (field-extension lifting) and smooth q, no b-surjectivity; scheme variants literal Over S/yoneda/Smooth q.left; A↔B, A↔A_sch, A↔B_sch; space and representable (every scheme T) comparisons; no DM/qc/sep/Noetherian/finite-type. H2 return repaired (def-sfb-surjective-moduli-map); 4 added stmt_deps are landed definition nodes owning MapIsLocally/ModuliSpaceTest/moduliTwoFiberLift/IsSurjectiveModuliMap. Edge cases empty/identity/BG fine; docstrings, sorry-only, no hollow defs. Fault H4/H9: CategoryTheory.IsSmoothModuliMap clashes with def-sfb-smooth-moduli-map's same-named declaration (pending Q44 2a6d FIX, Q56 8aa4 PASS; different body). Fixed: renamed to IsSmoothOnModuliPresentations and the two iff theorems; fixes/StackSmoothPresentationCriterion.lean + lean-record.json (statement, declarations, note). nt_compile --json rc 0, 17.1 s, clean."
+ }
+}

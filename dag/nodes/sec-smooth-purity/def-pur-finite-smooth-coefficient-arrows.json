@@ -16,9 +16,20 @@
   "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-thm-smooth-purity/_section.md",
   "place": "sk-thm-smooth-purity and proof: inverse diagonal orientation followed by the tensor map; sk-prop-sp-orientation.proof.md: diagonal, deformation, vector bundle; sk-lem-sp-reduction.proof.md and sk-lem-sp-reduction-compatibilities.proof.md: counit-defined coefficient comparisons and quotient cocycle. The ordinary-etale Noetherian formulation retains arbitrary ground fields."
  },
- "proof": [],
+ "proof": [
+  {
+   "text": "The scalar/single map is the existing adjunction transpose purityScalarSingleMap. Recover its original cochain formula by naturality of homEquiv in the target, the cochain adjunction unit, and naturality of the exact restriction/single comparison; the single/localization identifications are identities at degree zero. The generic equation scalarSingleMap_cochain specializes to the original right-hand side, so the compact presentation preserves the specified canonical map.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
  "proof_deps": [],
- "proof_origin": null,
+ "proof_origin": {
+  "kind": "proof",
+  "by": "T8",
+  "document": "Stacks 06YY",
+  "place": "Derived scalar counit on a sheaf in degree zero; canonical single/localization comparison"
+ },
  "mathlib_match": null,
  "mathlib_searches": [
   {
@@ -96,7 +107,18 @@
   },
   "same_as": []
  },
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
  "chapter": "sec-smooth-purity",
  "unit": "sk-thm-purity-transport",
  "lean": {
@@ -125,7 +147,8 @@
    "AlgebraicGeometry.Etale.FiniteSmoothPurity.ordinaryAssociator",
    "AlgebraicGeometry.Etale.FiniteSmoothPurity.ordinaryPullbackMap",
    "AlgebraicGeometry.Etale.FiniteSmoothPurity.finiteLambda",
-   "AlgebraicGeometry.Etale.FiniteSmoothPurity.finiteProLambda"
+   "AlgebraicGeometry.Etale.FiniteSmoothPurity.finiteProLambda",
+   "AlgebraicGeometry.Etale.FiniteSmoothPurity.scalarSingleMap_cochain"
   ],
   "file": "lean/Sheaf/Paper/FiniteSmoothCoefficientArrows.lean",
   "statement": "def proCoefficientMap [Finite A] [Finite B] (phi : A →+* B) {X Y : Scheme.{u}} (f : X ⟶ Y) [HasCompactification f] (K : proCategory A Y) : (proScalar phi X).obj ((exceptional A f).obj K) ⟶ (exceptional B f).obj ((proScalar phi Y).obj K)",
@@ -149,5 +172,15 @@
   "group": "Q07",
   "result": "pass",
   "note": "Re-delivery after the 68ed RETURN (H2: theorem stmt_deps supplying only plain defs). All five Lean modules are byte-identical to 68ed, whose content was accepted at 7b61. Two new existing:true def nodes, def-pur-finite-ring-section-data and def-pur-finite-smooth-comparison-coordinates, record the unchanged owner modules. Their lean.statement fields match the live source verbatim. Every owner-module declaration the delivered Lean uses is listed. The item, canonical-maps and adjunction-data cite the new nodes in place of the two theorems; the theorems stay in proof_deps. Compared with live, the item adds no theorem stmt_dep. Citations equal stmt_deps, there is no cycle, and the statement_change archive equals live. nt_compile --json on all five files: rc 0, no errors or warnings, 3.8-17.4 s each. Advisory: bundleAdjoint uses vectorBundlePurityAdjunction, whose owning node is not cited by the new record (inherited)."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T8",
+  "result": "pass",
+  "landing": "20261025T164404-L-1008539",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

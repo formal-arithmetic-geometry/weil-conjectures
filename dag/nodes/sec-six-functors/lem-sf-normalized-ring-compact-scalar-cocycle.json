@@ -1,0 +1,228 @@
+{
+ "id": "lem-sf-normalized-ring-compact-scalar-cocycle",
+ "kind": "statement",
+ "chapter": "sec-six-functors",
+ "unit": "sk-thm-sf-compatibility",
+ "title": "Normalized ring compact-support scalar comparison cocycles",
+ "statement": "Fix a prime $\\ell$, a finite-field datum $k=\\overline{\\mathbf F}_q$ of characteristic $p\\ne\\ell$, finite-type $k$-schemes $X,Y$ and a separated finite-type $k$-morphism $f:X\\to Y$ [def-weil-finite-field-fiber, def-weil-scheme-morphism-properties]. No absolute separatedness of the schemes is imposed. Use the small pro-etale coefficient categories $C_s(T)=D^b_{ctf}(T,s)$ [def-sf-categories], completed at integral stages and with positive finite levels $A_{E,n}=\\mathcal O_E/\\varpi_E^n$ ($E/\\mathbf Q_\\ell$ finite, $n\\ge1$) [def-weil-l-adic-coefficient-extension].\nFix a compactification $c=(j,p_c)$ [def-weil-compactifications-refinements]. Let $s$ range over finite and integral coefficient stages, with ring sheaves $R_{s,T}$, their compatible pull identifications, and compatible maps of these sheaves as in [def-pur-integral-compact-support-coefficient-data]. Put $H_s=Rp_{c,*,s}j_{!,s}$ and $S_a^T=-\\otimes^L_{R_{s,T}}R_{t,T}$ for a map $a:s\\to t$. Let $Q_a:S_a^YH_s\\to H_tS_a^X$ be the proper coefficient mate after the open tensor comparison specified there. Write $\\tau_T:S_b^TS_a^T\\cong S_d^T$ for balanced tensor associativity when $d=ba$, and $v_T:S_1^T\\cong1$ for multiplication.\n\nFor all composable compatible coefficient maps, including nonflat finite quotients and mixed integral/finite composites, the following equalities hold in the target ring's ordinary derived category:\n$$H_r(\\tau_X)Q_b(S_a^X)S_b^Y(Q_a)=Q_d\\tau_Y(H_s),\\qquad H_s(v_X)Q_1=v_Y(H_s).$$\nSuppose additionally that $I_{s,T}:C_s(T)\\to D(T_{\\mathrm{proet}},R_{s,T})$ is the full inclusion, $F_s:C_s(X)\\to C_s(Y)$ is realized by $r_s:I_{s,Y}F_s\\cong H_sI_{s,X}$, and $T_a^T:C_s(T)\\to C_t(T)$ is realized by $\\sigma_a^T:I_{t,T}T_a^T\\cong S_a^TI_{s,T}$. Suppose given $q_a:T_a^YF_s\\cong F_tT_a^X$ satisfying\n$$H_t(\\sigma_a^X)r_t(T_a^X)I_t(q_a)=Q_a(I_s)S_a^Y(r_s)\\sigma_a^Y(F_s).$$\nLet $\\alpha_T:T_b^TT_a^T\\cong T_d^T$ and $u_T:T_1^T\\cong1$ be isomorphisms whose realizations through $\\sigma$ are exactly $\\tau_T$ and $v_T$. Then the specified restricted maps satisfy\n$$F_r(\\alpha_{X,K})q_{b,T_a^XK}T_b^Y(q_{a,K})=q_{d,K}\\alpha_{Y,F_sK},\\qquad F_s(u_{X,K})q_{1,K}=u_{Y,F_sK}$$\nfor every $K\\in C_s(X)$. These equations depend only on the actual ring maps and the stated realizations, including when an allowed map has different proofs of being allowed. No invertibility of the ambient proper mate on arbitrary inputs is required.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-a1-kummer/def-weil-exceptional-inverse-image.md",
+  "place": "Derived inverse limits, rationalization, common-stage construction and refinement-compatible adjunction; extracted normalized coefficient argument, old steps 1,2,3"
+ },
+ "stmt_deps": [
+  "def-weil-finite-field-fiber",
+  "def-weil-scheme-morphism-properties",
+  "def-sf-categories",
+  "def-weil-l-adic-coefficient-extension",
+  "def-weil-compactifications-refinements",
+  "def-pur-integral-compact-support-coefficient-data",
+  "def-pur-finite-compact-support-scalar-data",
+  "def-weil-exceptional-inverse-image",
+  "def-sf-ring-scalar-multiplication-unit"
+ ],
+ "proof": [
+  {
+   "text": "Apply the already stated ordinary-derived comparison_composition and comparison_identity in [lem-pur-compact-support-integral-coefficient-comparison] to the three actual ring sheaf maps. Their signatures quantify over arbitrary coefficient systems and arbitrary derived objects, with no flatness, preservation, invertibility or absolute separatedness assumption. They give ambient_composition and ambient_identity exactly.",
+   "uses": [
+    "lem-pur-compact-support-integral-coefficient-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Existing compact-support scalar mate composition and identity, followed by faithful-realization calculations from the original node Steps 4–6."
+   }
+  },
+  {
+   "text": "For restricted composition, apply the faithful target full inclusion [def-sf-categories]. Postcompose both sides with the isomorphism r_D(T_d K) followed by H_r(sigma_d K). Naturality of r_D moves the restricted X-associator into H_r; Associator.normalized replaces its realization by the two successive sigma maps followed by tensorComposition. Substitute Normalized for q_b. Naturality of sigma_b^Y at q_a and of the ambient comparison for b at sigma_a^X lets functoriality collect Normalized for q_a. Substitute the ambient composition equation from Step 1. On the other side substitute Normalized for q_d and Associator.normalized on Y; naturality of the Y tensor associator at r_A identifies the resulting expressions. Cancel the realization isomorphism and use faithfulness.",
+   "uses": [
+    "def-sf-categories",
+    "lem-pur-compact-support-integral-coefficient-comparison"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Existing compact-support scalar mate composition and identity, followed by faithful-realization calculations from the original node Steps 4–6."
+   }
+  },
+  {
+   "text": "For each identity clause first use pointwise equality of maps and proof irrelevance of Change.square to identify the given compatible change with the explicitly constructed identity change. Equality transports then become reflexive. For the unit equation apply the faithful inclusion and postcompose with r_A(K). Naturality of r_A and Unit.normalized on X identify the left side with Normalized for q followed by H_s of scalar multiplication. Substitute Normalized and ambient_identity from Step 1. Naturality of the ambient tensor unitor at r_A identifies the result with Unit.normalized on Y followed by r_A. Cancel r_A. For uniqueness apply isomorphism and natural-transformation extensionality. At each K apply the faithful inclusion and postcompose by r_B(T_a K) followed by H_t(sigma_a K). The two Normalized hypotheses give identical composites, and that suffix is invertible.",
+   "uses": [
+    "def-sf-categories",
+    "lem-pur-compact-support-integral-coefficient-comparison"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Existing compact-support scalar mate composition and identity, followed by faithful-realization calculations from the original node Steps 4–6."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-pur-compact-support-integral-coefficient-comparison",
+  "def-sf-categories"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Existing compact-support scalar mate composition and identity, followed by faithful-realization calculations from the original node Steps 4–6."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Derived coefficient change for proper pushforward after open extension by zero satisfies composition and identity for arbitrary nonflat ring sheaf maps",
+   "results": "[leanfinder] OK 8 hit(s) Hits read: SheafOfModules.pushforwardComp_inv_app_val_app, SheafOfModules.pushforwardComp_hom_app_val_app, SheafOfModules.pushforward_assoc, AlgebraicGeometry.Scheme.Modules.pushforwardComp_hom_app_app, AlgebraicGeometry.Scheme.Modules.pushforwardComp_inv_app_app, SheafOfModules.pushforwardNatTrans_comp, AlgebraicGeometry.Scheme.Modules.pushforwardComp, SheafOfModules.pushforward_map_val. General mate/localization/limit or unrelated geometry results do not state the specified normalized constructible comparison assertion.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Normalized restricted compact support scalar comparisons inherit balanced tensor associativity and unit from ringed site proper and open mates",
+   "results": "[leanfinder] OK 8 hit(s) Hits read: AlgebraicGeometry.exists_eq_pow_mul_of_is_compact_of_quasi_separated_space_aux_aux, AlgebraicGeometry.Scheme.Modules.map_smul, LightCondensed.instMonoidalCategorySheafLightProfiniteCoherentTopologyModuleCat, LightCondensed.instMonoidalLightCondSetLightCondModFree, LightCondensed.instMonoidalFunctorOppositeLightProfiniteModuleCatSheafCoherentTopologyPresheafToSheaf, AlgebraicGeometry.exists_eq_pow_mul_of_is_compact_of_quasi_separated_space_aux, PresheafOfModules.Sheafify.mul_smul, PresheafOfModules.Sheafify.instNonemptySMulCandidate. General mate/localization/limit or unrelated geometry results do not state the specified normalized constructible comparison assertion.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.mateEquiv",
+   "results": "[loogle] OK 12 hit(s) Hits read: CategoryTheory.mateEquiv, CategoryTheory.mateEquiv_counit, CategoryTheory.mateEquiv_counit_symm, CategoryTheory.unit_mateEquiv, CategoryTheory.unit_mateEquiv_symm, CategoryTheory.conjugateEquiv_mateEquiv_vcomp, CategoryTheory.mateEquiv_conjugateEquiv_vcomp, CategoryTheory.mateEquiv_vcomp, CategoryTheory.mateEquiv_hcomp, CategoryTheory.iterated_mateEquiv_conjugateEquiv, CategoryTheory.iterated_mateEquiv_conjugateEquiv_symm, CategoryTheory.mateEquiv_apply. General mate/localization/limit or unrelated geometry results do not state the specified normalized constructible comparison assertion.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "compactSupport.*[Cc]ocycle|proper.*open.*coefficient|coefficient.*[Nn]ormaliz",
+   "results": "[grep] OK 7 hit(s) Hits read: Mathlib/Algebra/Vertex/VertexOperator.lean:18, Mathlib/Algebra/Vertex/VertexOperator.lean:51, Mathlib/FieldTheory/NormalizedTrace.lean:174, Mathlib/Tactic/Algebra/Basic.lean:26, Mathlib/Tactic/Algebra/Basic.lean:27, Mathlib/Tactic/Linarith/Frontend.lean:46, Mathlib/Tactic/Ring/Common.lean:201. General mate/localization/limit or unrelated geometry results do not state the specified normalized constructible comparison assertion.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Coherence of derived change of coefficient mates for compact support proper open functors",
+   "results": "[leansearch] OK 8 hit(s) Hits read: CategoryTheory.Adjunction.derivedη_fac_app_assoc, AlgebraicGeometry.Scheme.Modules.pseudofunctor_mapComp_hom_τl, TestFunction.coe_ofSupportedInCLM, CategoryTheory.Pseudofunctor.ObjectProperty.mapComp, CategoryTheory.LocalizerMorphism.rightDerivedFunctorComparison_fac_app, CategoryTheory.Functor.mapDerivedCategoryFactorsh, CategoryTheory.Adjunction.derivedε.congr_simp, AlgebraicGeometry.Scheme.Modules.restrictFunctorComp_hom_app_app. General mate/localization/limit or unrelated geometry results do not state the specified normalized constructible comparison assertion.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.mateEquiv_vcomp",
+   "results": "Hits read: CategoryTheory.mateEquiv_vcomp. General mate pasting and underived module-scalar unit laws do not state the proper/open ordinary-derived and constructible-realization assertion.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived compact support scalar coefficient comparisons satisfy composition cocycle and identity after faithful restriction",
+   "results": "Hits read: AlgebraicGeometry.exists_eq_pow_mul_of_is_compact_of_quasi_separated_space_aux_aux, CompactlySupportedContinuousMap.compLinearMap, CompactlySupportedContinuousMap.instIsScalarTower, CompactlySupportedContinuousMap.instModuleOfContinuousConstSMul, TestFunction.coe_ofSupportedInLM, TestFunction.coe_ofSupportedInCLM, ContDiffMapSupportedIn.structureMapLM_eq_of_scalars, CompactlySupportedContinuousMap.instSMulCommClass. General mate pasting and underived module-scalar unit laws do not state the proper/open ordinary-derived and constructible-realization assertion.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "compactSupport.*[Cc]ocycle|proper.*open.*coefficient|coefficient.*[Nn]ormaliz",
+   "results": "Hits read: Mathlib/Tactic/Algebra/Basic.lean, Mathlib/Tactic/Algebra/Basic.lean, Mathlib/Algebra/Vertex/VertexOperator.lean, Mathlib/Algebra/Vertex/VertexOperator.lean, Mathlib/Tactic/Ring/Common.lean, Mathlib/Tactic/Linarith/Frontend.lean, Mathlib/FieldTheory/NormalizedTrace.lean. General mate pasting and underived module-scalar unit laws do not state the proper/open ordinary-derived and constructible-realization assertion.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Composition and unit of derived coefficient change for proper pushforward and open extension by zero",
+   "results": "Hits read: CategoryTheory.ExponentiableMorphism.comp_pushforward, CategoryTheory.ExponentiableMorphism.unit_pushforwardComp_hom_assoc, SheafOfModules.pushforwardComp, CategoryTheory.ExponentiableMorphism.unit_pushforwardComp_hom, SheafOfModules.pushforwardNatTrans_comp, TopCat.Presheaf.Pushforward.comp, AlgebraicGeometry.Scheme.Modules.pushforwardComp_hom_app_app, CategoryTheory.ExponentiableMorphism.pushforwardComp_hom_counit_assoc. General mate pasting and underived module-scalar unit laws do not state the proper/open ordinary-derived and constructible-realization assertion.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Faithful inclusions reflect composition identities for natural transformations normalized through scalar extension realization isomorphisms",
+   "results": "Hits read: ModuleCat.extendScalars_comp_id, ModuleCat.extendScalars_comp_id_assoc, ModuleCat.extendScalars_id_comp_assoc, ModuleCat.extendScalars_id_comp, ModuleCat.restrictScalarsId'App_inv_naturality, ModuleCat.restrictScalarsId'App_hom_naturality, ModuleCat.homEquiv_extendScalarsComp, ModuleCat.restrictScalarsId'App_hom_naturality_assoc. General mate pasting and underived module-scalar unit laws do not state the proper/open ordinary-derived and constructible-realization assertion.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sf-constructible-exceptional-coefficient-coherence",
+  "date": "2026-10-22",
+  "group": "Q148"
+ },
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "sk-thm-sf-tensor-hom proof: the third Hom bijection for the constructible exceptional adjunction and final coefficient-compatibility assertion; normalized ring coefficient part extracted in lem-sf-constructible-exceptional-coefficient-coherence, old steps 1–3.",
+   "via": [
+    "lem-sf-constructible-exceptional-coefficient-coherence"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sf-normalized-ring-compact-scalar-cocycle",
+  "worker": "stage1",
+  "summary": "Q145: no new nodes. Reuses the arbitrary ring-sheaf proper coefficient cocycle, detects the open cocycle by normalized open restriction, writes the proper/open naturality interchange and the full faithful-realization composition and unit computations. Preserves the statement, nonflat/mixed domains and lack of absolute separatedness.",
+  "blueprint": "sk-thm-sf-tensor-hom proof: the third Hom bijection for the constructible exceptional adjunction and final coefficient-compatibility assertion; normalized ring coefficient part extracted in lem-sf-constructible-exceptional-coefficient-coherence, old steps 1–3.",
+  "tool_uses": [
+   {
+    "node": "lem-pur-ringed-coefficient-projection-cocycle",
+    "why": "General ordinary-derived mate cocycle for arbitrary ring-sheaf maps, applied to the proper factor; does not assume constructible preservation or invertibility."
+   },
+   {
+    "node": "lem-sf-open-tensor-normalization",
+    "why": "Generic open full-faithfulness and normalized ringed tensor comparison for the open factor, including arbitrary sheaf rings."
+   },
+   {
+    "node": "lem-pur-coefficient-pullback-coherence",
+    "why": "Generic associator/unit coherence of the already constructed restriction/scalar comparisons, used only after open restriction."
+   }
+  ]
+ },
+ "tool_uses": [],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q145-f27335a23",
+  "group": "Q145",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q145-f27335a23 (reviewer sub-agent of L); spot-checked: PASS: I read the item, all five cited statements and the blueprint place in full. The delivery has no new nodes; the statement and stmt_deps are byte-identical to the Q148 copy. Q148 created this item in its re-split of lem-sf-constructible-exceptional-coefficient-coherence, and it carries the parent's old steps 1-3 in full. There is no repair note for this item, so the re-split rule does not apply to it. Step 1 is correct. lem-sf-open-tensor-normalization applies with g=id and ring map a, so its beta is the item's beta_a, and it gives that the restricted beta is the identity and that j_! is fully faithful for arbitrary ring sheaves. Maps out of an object in the image of j_! are detected after restriction to the open, and the source is in that image. lem-pur-coefficient-pullback-coherence (setting def-pur-ringed-coefficient-projection-data, insertion-normalized comparisons) then makes the restricted maps commute with the associators and units. Step 2 is correct. The chi of lem-pur-ringed-coefficient-projection-cocycle is the item's counit mate. Its cocycle and unit equations match the ones displayed, and it assumes no flatness or invertibility. Steps 3-6 are elementary and I recomputed all of them. Step 3: naturality of chi_b at beta_a, then Steps 1 and 2, give Q_d tau_Y(H_s); the unit case also checks. Step 4: I typed A_ba and B_ba from source to target. Naturality of Q_b at sigma_a and of sigma_b at q_a gives the stated equation. Steps 5-6: the realization equations for alpha and u, plus naturality of r and tau, cancel the isomorphism A_d (or r_s); faithfulness comes from the full-inclusion hypothesis and def-sf-categories. The uniqueness formula q_a = A_a^{-1} Q_a B_a holds without inverting Q_a. Edge cases checked: j=id, p=id, a=1 or b=1, empty X, and Z/8->Z/4->Z/2. Duplicate candidates: lem-sp-proetale-open-scalar-cocycle and lem-sp-proetale-direct-image-scalar-cocycle cover only finite constant rings (advisory overlap). lem-pur-etale-compact-scalar-coherence covers a single etale ring change, lem-coef-compact-support-quotient-cocycle covers restriction-of-scalars towers, and lem-pur-topos-compact-scalar-site-pasting and lem-pur-compact-support-scalar-limit-reduction cover site transfer and tower limits. None is a duplicate. Route: the unit sk-thm-sf-compatibility uses sk-thm-purity-transport, so the declared tool_uses are within the route and accepted. No SGA, no cycle. Blueprint from.node is null, inherited from the broken ancestor chain that Q148 already recorded."
+ },
+ "lean": {
+  "module": "Sheaf.SixFunctors.NormalizedRingCompactScalarCocycle",
+  "declaration": "WeilConjectures.NormalizedRingCompactScalar.normalizedRingCompactScalarCocycle",
+  "declarations": [
+   "WeilConjectures.NormalizedRingCompactScalar.Support",
+   "WeilConjectures.NormalizedRingCompactScalar.Scalar",
+   "WeilConjectures.NormalizedRingCompactScalar.Normalized",
+   "WeilConjectures.NormalizedRingCompactScalar.Associator",
+   "WeilConjectures.NormalizedRingCompactScalar.Unit",
+   "WeilConjectures.NormalizedRingCompactScalar.Laws",
+   "WeilConjectures.NormalizedRingCompactScalar.normalizedRingCompactScalarCocycle"
+  ],
+  "file": "lean/Sheaf/SixFunctors/NormalizedRingCompactScalarCocycle.lean",
+  "statement": "theorem normalizedRingCompactScalarCocycle\n    (D : FiniteFieldDatum.{max u v}) (hl : l ≠ D.p)\n    [X.Over (Spec (.of D.k))] [Y.Over (Spec (.of D.k))]\n    [LocallyOfFiniteType (X ↘ Spec (.of D.k))] [QuasiCompact (X ↘ Spec (.of D.k))]\n    [LocallyOfFiniteType (Y ↘ Spec (.of D.k))] [QuasiCompact (Y ↘ Spec (.of D.k))]\n    [f.IsOver (Spec (.of D.k))] [IsSeparated f] [LocallyOfFiniteType f] [QuasiCompact f] :\n    Laws.{u, v} l Ω c",
+  "branch": "sheaf-dag",
+  "by": "Q60",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "Laws expands both ambient cocycles, both restricted cocycles, and uniqueness of a restricted comparison with the stipulated realization. Uses the existing finite/completed RingStage categories, full inclusions, coefficient sheaves, canonical comparison, tensorComposition and tensorIdentity; input-only records omit extra exactness, shift and adjunction data not assumed by this node. H2 repair of c7ea036e9a72: cites the landed definition owners of tensorComposition and RingStage/C/inclusion, and the new existing-definition node owning tensorIdentity with restrictIdentity_existsUnique. Lean module unchanged; no theorem dependency added."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-e14887af1",
+  "group": "Q60",
+  "result": "pass",
+  "note": "H2 repair complete: Lean byte-identical (sha d6cf…), statement/proof unchanged; stmt_deps add def-pur-finite-compact-support-scalar-data (tensorComposition), def-weil-exceptional-inverse-image (RingStage/C/inclusion) and new existing:true def-sf-ring-scalar-multiplication-unit owning tensorIdentity (+ proved restrictIdentity_existsUnique, choice pinned by ∃!; conjugate direction checked). No theorem stmt_deps, no owner race on main, maths as previously verified."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H8",
+  "result": "pass",
+  "landing": "20261027T050610-L-242829",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

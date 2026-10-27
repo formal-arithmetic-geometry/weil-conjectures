@@ -1,0 +1,119 @@
+{
+ "id": "def-fd-completed-scalar-shift-representative-property",
+ "kind": "definition",
+ "title": "Completed scalar shift chain equation and representative normalization predicates",
+ "status": "split",
+ "statement": "Fix a prime $\\ell$, finite extensions $E,L$ of $\\mathbf Q_\\ell$ in one coefficient universe, a $\\mathbf Q_\\ell$-embedding $\\iota:E\\to L$, and a scheme $Y$ in an independent universe. Use the completed coefficient sheaves $R_E,R_L$, ordinary tensor functor $A$, its termwise complex functor $A_c$, ordinary derived scalar extension $F$, strict Roos complex functor $C$, chain comparison $c:A_c\\to C$, derived comparison $\\chi:F\\to T$, and universal counit $\\epsilon_P:F(QP)\\to Q(A_cP)$ of [lem-weil-finite-free-completed-scalar-comparison]. Here $T$ is the strict derived scalar extension of [def-weil-integral-scalar-extension]. Write $Q$ for complex localization and $\\eta_{P,m}:Q(P[m])\\simeq(QP)[m]$ for its standard comparison [def-weil-abstract-derived-category]. A good complex is a K-flat complex with flat terms [def-a1-flat-term-kflat-complex]. Use the fixed product reindexing, signed mapping-cocone predicate $\\operatorname{ConeFormula}(e_C,P,m)$, strict derived normalization predicate $\\operatorname{IntegralNormalization}(e_C,e_T)$ and coherent integer shift convention of [def-pur-completed-scalar-shift-coordinates]. In particular, $P[m]^j=P^{j+m}$ and $d_{P[m]}^j=(-1)^m d_P^{j+m}$. The termwise tensor shift $a_{m,P}:A_c(P[m])\\simeq A_c(P)[m]$ is the canonical additive tensor reindexing.\n\nFor a coherent integer shift structure $e_C$ on $C$, define $\\operatorname{completedScalarShiftChainEquation}(e_C)$ to mean that for every complex $P$ of $R_E$-module sheaves and every integer $m$,\n$$c_P[m]\\circ a_{m,P}=e_{C,m,P}\\circ c_{P[m]}.$$\nBoth sides are chain maps $A_c(P[m])\\to C(P)[m]$.\n\nFor a coherent integer shift structure $e_F$ on $F$, define $\\operatorname{completedScalarShiftOrdinaryNormalization}(e_F)$ to mean that for every good complex $P$ and every integer $m$,\n$$\\epsilon_P[m]\\circ e_{F,m,QP}=\\eta_{A_cP,m}\\circ Q(a_{m,P})\\circ\\epsilon_{P[m]}\\circ F(\\eta_{P,m}^{-1}).$$\nBoth sides are morphisms $F((QP)[m])\\to Q(A_cP)[m]$.\n\nFor coherent integer shift structures $e_C,e_F,e_T$ on $C,F,T$, respectively, define $\\operatorname{completedScalarShiftRepresentativeProperty}(e_C,e_F,e_T)$ to be the conjunction of: $\\operatorname{ConeFormula}(e_C,P,m)$ for every complex $P$ and integer $m$; $\\operatorname{completedScalarShiftChainEquation}(e_C)$; $\\operatorname{completedScalarShiftOrdinaryNormalization}(e_F)$; $\\operatorname{IntegralNormalization}(e_C,e_T)$; and the natural-transformation shift square\n$$\\chi_K[m]\\circ e_{F,m,K}=e_{T,m,K}\\circ\\chi_{K[m]}$$\nfor every derived object $K$ and integer $m$. These are definitions of three predicates, with no assertion that compatible shift structures exist.",
+ "stmt_deps": [
+  "lem-weil-finite-free-completed-scalar-comparison",
+  "def-weil-integral-scalar-extension",
+  "def-weil-abstract-derived-category",
+  "def-a1-flat-term-kflat-complex",
+  "def-pur-completed-scalar-shift-coordinates"
+ ],
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-fourier-transform/sk-def-trace/def-fd-trace-function.md",
+  "place": "Final coefficient-category sentence, through lem-fd-normalized-integral-completion-comparison: definitions expressing its signed cone shift, chain equation and normalized derived shift square. These predicates are the existing definitions in Sheaf/Paper/CompletedScalarShift.lean, lines 44-93; their cochain and localization conventions follow Stacks homology.tex Tag 011G and sites-cohomology.tex Tags 06YS, 06YT, 06YU."
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Completed scalar shift chain equation ordinary counit normalization representative property",
+   "results": "8 hits: Coalgebra.sum_counit_tmul_eq, Associates.normalize_out, CategoryTheory.Adjunction.CommShift.CompatibilityCounit, CategoryTheory.Adjunction.commShiftIso_hom_app_counit_app_shift, CommSemiring.counit_apply, CategoryTheory.Adjunction.CommShift.commShift_counit, Coalgebra.sum_counit_smul, MvPolynomial.counitNat_C.",
+   "date": "2026-10-23",
+   "verdict": "Generic adjunction/counit predicates only; no completed scalar representative predicate."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Predicates specifying the signed cone shift chain comparison and counit normalized ordinary derived shift for completed scalar extension",
+   "results": "8 hits: DerivedCategory.IsGE, DerivedCategory.IsLE, CategoryTheory.CommShift₂Setup.int, DerivedCategory.exists_iso_Q_obj_of_isGE_of_isLE, DerivedCategory.instHasShiftInt, CategoryTheory.Shift.linear_of_localization, DerivedCategory.instCommShiftCochainComplexIntQ, DerivedCategory.TStructure.t.",
+   "date": "2026-10-23",
+   "verdict": "Generic shift and t-structure declarations only; no exact match."
+  },
+  {
+   "tool": "grep",
+   "query": "completedScalarShift(ChainEquation|OrdinaryNormalization|RepresentativeProperty)",
+   "results": "0 hits in Mathlib.",
+   "date": "2026-10-23",
+   "verdict": "No Mathlib match."
+  },
+  {
+   "tool": "rg",
+   "query": "completedScalarShift(ChainEquation|OrdinaryNormalization|RepresentativeProperty) in lean/WeilConjectures and lean/Sheaf; same names or shift representative property in dag/nodes",
+   "results": "No WeilConjectures hit. Three definitions in Sheaf/Paper/CompletedScalarShift.lean at lines 47, 58 and 78. The only DAG record naming them is lem-weil-point-completed-scalar-shift; def-pur-completed-scalar-shift-coordinates owns four different coordinate/normalization declarations.",
+   "date": "2026-10-23",
+   "verdict": "Attach the unchanged three existing predicates to a definition node; do not duplicate them or cite the theorem for their meaning."
+  },
+  {
+   "tool": "blueprint_refs.py search",
+   "query": "completed scalar shift",
+   "results": "0 blueprint nodes match 'completed scalar shift'; ancestor of lem-fd-normalized-integral-completion-comparison is def-fd-trace-function.",
+   "date": "2026-10-23",
+   "verdict": "No duplicate blueprint definition."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-fd-normalized-integral-completion-comparison",
+  "date": "2026-10-23",
+  "group": "Q88"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "def-fd-trace-function",
+   "place": "Final coefficient-category sentence: normalization predicates for the signed chain shift and ordinary derived counit in the integral completion comparison.",
+   "via": [
+    "lem-fd-normalized-integral-completion-comparison",
+    "lem-fd-completion-inverse-scalar-coherence",
+    "lem-fd-rational-coefficient-category-comparison"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-fourier-transform",
+ "unit": "sk-def-trace",
+ "lean": {
+  "module": "Sheaf.Paper.CompletedScalarShift",
+  "declaration": "WeilConjectures.completedScalarShiftRepresentativeProperty",
+  "declarations": [
+   "WeilConjectures.completedScalarShiftChainEquation",
+   "WeilConjectures.completedScalarShiftOrdinaryNormalization",
+   "WeilConjectures.completedScalarShiftRepresentativeProperty"
+  ],
+  "statement": "def completedScalarShiftRepresentativeProperty\n    (eC : (integralScalarComplexFunctor l E L ι Y).CommShift ℤ)\n    (eE : (completedDerivedScalarExtension l E L ι Y).CommShift ℤ)\n    (eL : (integralScalarExtensionOfUniverses l E L ι Y).CommShift ℤ) : Prop",
+  "branch": "sheaf-dag",
+  "by": "Q88",
+  "date": "2026-10-23",
+  "existing": true,
+  "note": "Owns the three existing plain predicates, with names, signatures and bodies unchanged. The theorem completedScalarComparison_commutesWithShift is neither the declaration nor a dependency of this definition node. The signed cone and strict normalization predicates are reused from def-pur-completed-scalar-shift-coordinates. No Lean module is written or modified for this existing:true attachment."
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-d43d64360",
+  "group": "Q88",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-d43d64360",
+  "group": "Q88",
+  "result": "pass",
+  "note": "Re-delivery of 4eb8 H2 RETURN. Item Lean byte-identical (sha 62963740…, single sorry); only delta: stmt_dep lem-weil-point-completed-scalar-shift → new def-fd-completed-scalar-shift-representative-property (existing:true on unchanged Sheaf.Paper.CompletedScalarShift: completedScalarShiftChainEquation/OrdinaryNormalization/RepresentativeProperty, theorem excluded) + lean.note + report sections. check_existing/check_new_node/check_record all clean; lean.statement verbatim; TeX matches the three Prop bodies (chain eq, counit normalization, 5-conjunct property); universes u coefficient/t scheme independent; body owners cited except integralScalarComplexFunctor (def-trf-integral-scalar-tower-functors), reached via the finite-free comparison as in the landed coordinates sibling → advisory. Added stmt_deps def-pur-coordinates/transport are landed with lean records; no base stmt_dep lost. Earlier clause-by-clause check (b=χ, sC/sU pinned, IsTriangulated, CommShift b/b⁻¹, quotient/zero coordinates, localization eq, E=L unit, FdCoefficientComparison chi lift) unaffected. Worker report and Second reading by Q88 present. No file changed, no compile."
+ }
+}

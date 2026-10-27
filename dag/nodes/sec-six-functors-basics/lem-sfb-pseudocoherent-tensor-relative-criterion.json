@@ -1,0 +1,395 @@
+{
+ "id": "lem-sfb-pseudocoherent-tensor-relative-criterion",
+ "kind": "statement",
+ "title": "Pseudo-coherent tensor tests imply relative pseudo-coherence",
+ "statement": "Let $A$ be a commutative ring and let $X\\to\\operatorname{Spec}A$ be a separated morphism of finite presentation [def-pc-scheme, def-pc-morphism-conventions]. Let $K\\in D_{\\mathrm{QCoh}}(\\mathcal O_X)$ [def-pc-derived-category]. If $R\\Gamma(X,E\\otimes^L_{\\mathcal O_X}K)$ is pseudo-coherent in $D(A)$ for every pseudo-coherent $E\\in D(\\mathcal O_X)$ [def-pur-pseudo-coherent-complex, def-pc-ring-pseudo-coherent-complex, def-pc-derived-direct-image, def-pc-scheme-derived-tensor-structure], then $K$ is pseudo-coherent relative to $\\operatorname{Spec}A$ [def-sfb-relative-pseudo-coherent-complex]. Flatness, properness and Noetherian hypotheses are not required.",
+ "source": {
+  "document": "literature/stacks-project/more-morphisms.tex",
+  "place": "Tag 0CSL, lemma-characterize-pseudo-coherent"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-derived-category",
+  "def-pc-morphism-conventions",
+  "def-pc-derived-direct-image",
+  "def-pc-scheme-derived-tensor-structure",
+  "def-pc-ring-pseudo-coherent-complex",
+  "def-pur-pseudo-coherent-complex",
+  "def-sfb-relative-pseudo-coherent-complex",
+  "def-pc-global-derived-rhom",
+  "def-pc-affine-global-hom-base-change-map"
+ ],
+ "proof": [
+  {
+   "text": "Fix $x\\in X$. Apply the derived Chow neighbourhood lemma, obtaining $U,n,V,Z,z,E$; write $T=X\\times_A P$, $P=\\mathbf P^n_A$, and $p:T\\to X$, $q:T\\to P$. In particular $E$ is pseudo-coherent, $b^{-1}U=c^{-1}V$, $b$ is an isomorphism there, and $E$ has the stated graph-kernel restriction over $V$.",
+   "uses": [
+    "lem-sfb-derived-chow-neighbourhood"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 0CSL, lemma-characterize-pseudo-coherent, choice of derived Chow neighbourhood"
+   }
+  },
+  {
+   "text": "The projection $p$ is proper: it is the base change of $P\\to\\operatorname{Spec}A$, which is proper by the projective-space properness lemma. The Proj chart description identifies $D_+(x_i)$ with the spectrum of the degree-zero localization; its ring is $A[x_j/x_i:j\\ne i]$, since every degree-zero fraction is a polynomial in these ratios and the monomials are independent. Formation of these rings over an affine base changes coefficients by tensor product. This also identifies this $P$ with the base-change projective-space interface used by the properness lemma. On a standard projective chart over any affine open $\\operatorname{Spec}B\\subset X$, $p$ is $\\operatorname{Spec}B[t_1,\\ldots,t_n]\\to\\operatorname{Spec}B$. Thus it is flat by polynomial-projection flatness and locally finitely presented (the indicated polynomial presentation has finitely many generators and no relations); properness supplies quasi-compactness and quasi-separatedness. The same chart calculation shows $P\\to\\operatorname{Spec}A$, and hence its restriction $V\\to\\operatorname{Spec}A$, is flat and locally finitely presented. The other projection $q$ is separated and of finite type by separated finite-type base change applied to $X\\to\\operatorname{Spec}A$; in particular $q$ is quasi-compact and quasi-separated.",
+   "uses": [
+    "lemma-nagata-projective-space-base-change-proper",
+    "lem-pc-proper-base-change",
+    "lem-nagata-polynomial-projection-flat",
+    "lem-pod-separated-finite-type-base-change",
+    "def-pc-projective-space-twist",
+    "def-pc-morphism-conventions",
+    "def-pc-proj",
+    "def-pc-fibre-product",
+    "def-nagata-projective-space-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 0CSL, lemma-characterize-pseudo-coherent, geometry of the projections"
+   }
+  },
+  {
+   "text": "Set $F=Rq_*(Lp^*K\\otimes^{\\mathbf L}E)$. It belongs to $D_{\\mathrm{QCoh}}(P)$: $E$ has quasi-coherent cohomology by pseudo-coherence; the affine-component pullback lemma gives quasi-coherence of $Lp^*K$ on every affine chart; choose a K-flat resolution of a representative of $Lp^*K$ and any representative of $E$; the recorded derived tensor is their total tensor complex, so the affine-component tensor lemma gives quasi-coherence of their derived tensor on every affine chart; and the qcqs direct-image lemma applies to $q$. The component assertions give the global ones because quasi-coherence is local, as in the definition of quasi-coherent cohomology.",
+   "uses": [
+    "lem-sc-pseudo-coherent-qcoh",
+    "lem-pc-derived-pullback-qcoh-component",
+    "lem-pc-derived-tensor-qcoh-component",
+    "lem-pc-derived-direct-image-preserves-qcoh",
+    "def-pc-derived-category",
+    "lem-pc-kflat-resolution",
+    "def-pc-scheme-derived-tensor-structure"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 0CSL, lemma-characterize-pseudo-coherent, domain of the projective-space criterion"
+   }
+  },
+  {
+   "text": "For $d=0,\\ldots,n$, put $B_d=E\\otimes^{\\mathbf L}Lq^*\\mathcal O_P(d)$ and $G_d=Rp_*B_d$. The pullback of the invertible twist is locally free of rank one: pull back a local trivialization of $\\mathcal O_P(d)$. Tensoring a local bounded-above finite-free representative of $E$ with this line bundle has the same finite-free terms after trivializing the line bundle. Hence $B_d$ is pseudo-coherent. Applying flat proper finitely presented direct-image preservation to $p$ proves that $G_d$ is pseudo-coherent on $X$.",
+   "uses": [
+    "def-pc-projective-space-twist",
+    "def-pur-pseudo-coherent-complex",
+    "lem-sfb-flat-proper-pseudocoherent-direct-image"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 0CSL, lemma-characterize-pseudo-coherent, pseudo-coherence of the test objects"
+   }
+  },
+  {
+   "text": "The projection formula for $q$, followed by composition of derived direct images, gives\n$$R\\Gamma(P,F\\otimes^{\\mathbf L}\\mathcal O_P(d))\\simeq R\\Gamma(T,Lp^*K\\otimes^{\\mathbf L}B_d).$$\nThe projection formula for $p$ and the same composition comparison give\n$$R\\Gamma(T,Lp^*K\\otimes^{\\mathbf L}B_d)\\simeq R\\Gamma(X,K\\otimes^{\\mathbf L}G_d).$$\nThe qcqs hypotheses for both projections were checked in step 2. All complexes used in these formulas have quasi-coherent cohomology: use the pseudo-coherent quasi-coherence lemma for $B_d,G_d$, and step 3 for the other factors. Associativity and symmetry of the recorded tensor put the factors in the displayed order. The hypothesis of the item, applied to $G_d$, makes the last object pseudo-coherent in $D(A)$; its invariance under isomorphism follows by composing the quasi-isomorphism from a bounded-above finite-free representative with the displayed isomorphism. The finite-twist criterion therefore shows $F$ is pseudo-coherent on $P$.",
+   "uses": [
+    "lem-pc-qcqs-derived-projection-iso-universes",
+    "lem-pc-derived-direct-image-composition",
+    "lem-sc-pseudo-coherent-qcoh",
+    "def-pc-scheme-derived-tensor-structure",
+    "def-pc-ring-pseudo-coherent-complex",
+    "lem-sfb-projective-space-pseudocoherence-twist-test"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 0CSL, lemma-characterize-pseudo-coherent, two projection-formula identifications and projective-space test"
+   }
+  },
+  {
+   "text": "The graph-kernel restriction lemma gives $F|_V\\simeq Rj_*(K|_U)$ in $D(\\mathcal O_V)$, where $j:U\\hookrightarrow V$ is the closed immersion induced by $c$ using $b^{-1}U\\simeq U$. Restricting a local bounded-above finite-free representative of $F$ proves $F|_V$ pseudo-coherent, and the displayed isomorphism proves the same for $Rj_*(K|_U)$. Since $V\\to\\operatorname{Spec}A$ is flat and locally finitely presented, the flat-ambient criterion implies $K|_U$ is pseudo-coherent relative to $A$. As $x$ was arbitrary, these $U$ cover $X$. Relative pseudo-coherence is local on the source: since $K|_U$ is pseudo-coherent relative to $\\operatorname{Spec}A$ for each $U$ of this open covering of $X$, and $X\\to\\operatorname{Spec}A$ is locally of finite type, $K$ is pseudo-coherent relative to $A$. (The charts of the different $U$ cannot simply be put together: the definition needs, over each member $V_a$ of one affine covering of $\\operatorname{Spec}A$, charts covering all of the preimage of $V_a$; this is the content of the locality lemma.)",
+   "uses": [
+    "lem-sfb-derived-chow-transform-restriction",
+    "def-pur-pseudo-coherent-complex",
+    "lem-sfb-flat-ambient-relative-pseudocoherence",
+    "lem-sfb-relative-pseudocoherence-local-on-source",
+    "def-sfb-relative-pseudo-coherent-complex"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 0CSL, lemma-characterize-pseudo-coherent, restriction over V and local relative pseudo-coherence"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-derived-chow-neighbourhood",
+  "lemma-nagata-projective-space-base-change-proper",
+  "lem-pc-proper-base-change",
+  "lem-nagata-polynomial-projection-flat",
+  "lem-pod-separated-finite-type-base-change",
+  "def-pc-projective-space-twist",
+  "def-pc-morphism-conventions",
+  "def-pc-proj",
+  "def-pc-fibre-product",
+  "def-nagata-projective-space-base-change",
+  "lem-sc-pseudo-coherent-qcoh",
+  "lem-pc-derived-pullback-qcoh-component",
+  "lem-pc-derived-tensor-qcoh-component",
+  "lem-pc-derived-direct-image-preserves-qcoh",
+  "def-pc-derived-category",
+  "lem-pc-kflat-resolution",
+  "def-pc-scheme-derived-tensor-structure",
+  "def-pur-pseudo-coherent-complex",
+  "lem-sfb-flat-proper-pseudocoherent-direct-image",
+  "lem-pc-qcqs-derived-projection-iso-universes",
+  "lem-pc-derived-direct-image-composition",
+  "def-pc-ring-pseudo-coherent-complex",
+  "lem-sfb-projective-space-pseudocoherence-twist-test",
+  "lem-sfb-derived-chow-transform-restriction",
+  "lem-sfb-flat-ambient-relative-pseudocoherence",
+  "lem-sfb-relative-pseudocoherence-local-on-source",
+  "def-sfb-relative-pseudo-coherent-complex"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/more-morphisms.tex",
+  "place": "Tag 0CSL, lemma-characterize-pseudo-coherent; correction of the final restriction from X times V to V using Tag 0CSK"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For a separated finitely presented scheme over a ring pseudo coherent tensor tests of global sections imply relative pseudo coherence of a quasi coherent complex",
+   "results": "OK: 8 hits; SheafOfModules.quasicoherentDataOfIsFinitePresentation, SheafOfModules.QuasicoherentData.IsFinitePresentation.isFinite_presentation, AlgebraicGeometry.IsFinite.instHasOfPostcompPropertySchemeIsSeparated, SheafOfModules.QuasicoherentData.IsFinitePresentation, SheafOfModules.IsFinitePresentation.exists_quasicoherentData, SheafOfModules.instIsQuasicoherentOfIsFinitePresentation, LightCondensed.free_internallyProjective_iff_tensor_condition, SheafOfModules.isFinitePresentation",
+   "date": "2026-10-23",
+   "verdict": "no match: these hits do not give the stated scheme-derived pseudo-coherence or tensor-test assertion."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"pseudoCoherent\"",
+   "results": "OK: 0 hits; ",
+   "date": "2026-10-23",
+   "verdict": "no match: these hits do not give the stated scheme-derived pseudo-coherence or tensor-test assertion."
+  },
+  {
+   "tool": "grep",
+   "query": "pseudoCoherent|PseudoCoherent|pseudo_coherent",
+   "results": "OK: 0 hits; ",
+   "date": "2026-10-23",
+   "verdict": "no match: these hits do not give the stated scheme-derived pseudo-coherence or tensor-test assertion."
+  },
+  {
+   "tool": "leansearch",
+   "query": "For a separated finitely presented scheme over a ring pseudo coherent tensor tests of global sections imply relative pseudo coherence of a quasi coherent complex",
+   "results": "OK: 8 hits; SheafOfModules.QuasicoherentData.IsFinitePresentation.mk, SheafOfModules.QuasicoherentData.IsFinitePresentation.isFinite_presentation, SheafOfModules.QuasicoherentData.IsFinitePresentation.recOn, SheafOfModules.QuasicoherentData.IsFinitePresentation, SheafOfModules.IsFinitePresentation.mk, SheafOfModules.IsFinitePresentation.exists_quasicoherentData, SheafOfModules.QuasicoherentData.IsFinitePresentation.casesOn, SheafOfModules.quasicoherentDataOfIsFinitePresentation",
+   "date": "2026-10-23",
+   "verdict": "no match: these hits do not give the stated scheme-derived pseudo-coherence or tensor-test assertion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A quasi coherent derived complex is pseudo coherent over the base if all pseudo coherent tensor tests have pseudo coherent cohomology on a separated scheme of finite presentation",
+   "results": "OK: 8 hits; SheafOfModules.QuasicoherentData.IsFinitePresentation, SheafOfModules.quasicoherentDataOfIsFinitePresentation, SheafOfModules.QuasicoherentData.IsFinitePresentation.isFinite_presentation, SheafOfModules.QuasicoherentData.presentation, SheafOfModules.instIsQuasicoherentOfIsFinitePresentation, SheafOfModules.IsFinitePresentation.exists_quasicoherentData, SheafOfModules.QuasicoherentData.X, SheafOfModules.IsFinitePresentation",
+   "date": "2026-10-23",
+   "verdict": "no match: these hits do not give the stated scheme-derived pseudo-coherence or tensor-test assertion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For separated finitely presented schemes pseudo coherent tensor tests of derived global sections imply relative pseudo coherence",
+   "results": "8 hits: AlgebraicGeometry.IsFinite.instHasOfPostcompPropertySchemeIsSeparated, AlgebraicGeometry.locallyOfFinitePresentation_isStableUnderBaseChange, AlgebraicGeometry.Flat, AlgebraicGeometry.instIsStableUnderBaseChangeSchemeLocallyQuasiFinite, AlgebraicGeometry.IsFinite.instIsStableUnderBaseChangeScheme, AlgebraicGeometry.instIsStableUnderCompositionSchemeLocallyOfFinitePresentation, AlgebraicGeometry.IsFinite.instIsMultiplicativeScheme, AlgebraicGeometry.quasiSeparated_isStableUnderBaseChange",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"PseudoCoherent\"",
+   "results": "0 hits: ",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "pseudo.?coherent|derived.chow|Fourier.Mukai",
+   "results": "0 hits: ",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Relative pseudo coherence detected by derived global sections of tensor products with pseudo coherent complexes",
+   "results": "8 hits: SheafOfModules.IsQuasicoherent.casesOn, SheafOfModules.isQuasicoherent, SheafOfModules.instIsQuasicoherentOfIsFinitePresentation, SheafOfModules.IsQuasicoherent.recOn, SheafOfModules.IsQuasicoherent.mk, SheafOfModules.QuasicoherentData.IsFinitePresentation, Algebra.Extension.cotangentComplexBaseChange_eq_lTensor_cotangentComplex, SheafOfModules.QuasicoherentData.I",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A complex on a finitely presented separated scheme is relatively pseudo coherent if every pseudo coherent tensor product has pseudo coherent derived global sections",
+   "results": "8 hits: AlgebraicGeometry.IsFinite.instHasOfPostcompPropertySchemeIsSeparated, AlgebraicGeometry.LocallyOfFinitePresentation, SheafOfModules.quasicoherentDataOfIsFinitePresentation, AlgebraicGeometry.Flat, AlgebraicGeometry.Scheme.Modules.instAbelian, AlgebraicGeometry.Scheme.Modules.pseudofunctor, SheafOfModules.IsFinitePresentation, SheafOfModules.QuasicoherentData.IsFinitePresentation",
+   "date": "2026-10-23",
+   "verdict": "no match: ordinary morphism properties and quasi-coherent presentation data do not assert the derived criterion."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-perfect-tests-detect-pseudocoherence",
+  "date": "2026-10-23",
+  "group": "Q74"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Knudsen forgetful morphism as the universal stable curve. Section 2, Lemma 2.5 (printed pp.178--179), using Section 1, Corollary 1.5 and Lemma 1.6: multiplication and the pushforward exact sequences, retaining the twist by minus the old-marking divisor. Lemma 2.5, first paragraph and final evaluation: Corollary 1.5 supplies vanishing, base-flat direct images, arbitrary base change and generation for the five divisor modules. Corollary 1.5, printed p.167: the general cohomology-and-base-change tool whose conditions (1) and (2) the exceptional-fibre calculation must verify. General tool for Corollary 1.5: finite presentation of the acyclic image: detect pseudo-coherence by perfect tensor tests on V, using proper-support perfect direct image for U -> S. Supporting tool: 0CSL (lemma-characterize-pseudo-coherent).",
+   "via": [
+    "lem-sfb-perfect-tests-detect-pseudocoherence",
+    "lem-sfb-relative-acyclic-direct-image",
+    "lem-sfb-rational-contraction-line-cohomology",
+    "lem-sfb-elementary-contraction-evaluation",
+    "lem-sfb-knudsen-pointed-forgetful-universal-curve",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-pseudocoherent-tensor-relative-criterion",
+  "worker": "stage1",
+  "summary": "Followed 0CSL through derived Chow neighbourhoods, two projection formulas, the existing finite-twist criterion and the existing flat-ambient relative criterion. Added three statement-only prerequisites (0CSJ, 0CSK, 0CSD). Checked hypotheses over arbitrary rings and corrected the source proof restriction typo without changing the item statement.",
+  "blueprint": "Generic tool supporting the inherited det-thm-sf-ctf-stability-direct-images proof (3) chain through pointed-curve contraction and pseudo-coherence tests. Implements the complete proof of 0CSL identified in blueprint.from.place. The ancestor command returns None; preserved the inherited null ancestor and via chain.",
+  "tool_uses": [
+   {
+    "node": "lemma-nagata-projective-space-base-change-proper",
+    "why": "Generic scheme or derived-category tool for Stacks 0CSL: Projective space is proper over its base. No step of the six-functor unit is replaced."
+   },
+   {
+    "node": "lem-pc-proper-base-change",
+    "why": "Generic scheme or derived-category tool for Stacks 0CSL: Proper and smooth morphisms are stable under base change. No step of the six-functor unit is replaced."
+   },
+   {
+    "node": "lem-nagata-polynomial-projection-flat",
+    "why": "Generic scheme or derived-category tool for Stacks 0CSL: Flatness of an arbitrary polynomial projection. No step of the six-functor unit is replaced."
+   },
+   {
+    "node": "lem-pod-separated-finite-type-base-change",
+    "why": "Generic scheme or derived-category tool for Stacks 0CSL: Separated finite-type morphisms are stable under base change. No step of the six-functor unit is replaced."
+   },
+   {
+    "node": "def-pc-projective-space-twist",
+    "why": "Generic scheme or derived-category tool for Stacks 0CSL: Twists on projective space over a ring. No step of the six-functor unit is replaced."
+   },
+   {
+    "node": "def-pc-morphism-conventions",
+    "why": "Generic scheme or derived-category tool for Stacks 0CSL: Morphism-theoretic conventions from file 02. No step of the six-functor unit is replaced."
+   },
+   {
+    "node": "def-pc-proj",
+    "why": "Generic scheme or derived-category tool for Stacks 0CSL: Projective spectrum and its standard opens. No step of the six-functor unit is replaced."
+   },
+   {
+    "node": "def-pc-fibre-product",
+    "why": "Generic scheme or derived-category tool for Stacks 0CSL: Fibre product of schemes. No step of the six-functor unit is replaced."
+   },
+   {
+    "node": "def-nagata-projective-space-base-change",
+    "why": "Generic scheme or derived-category tool for Stacks 0CSL: Projective space over a base scheme, by base change. No step of the six-functor unit is replaced."
+   },
+   {
+    "node": "lem-sc-pseudo-coherent-qcoh",
+    "why": "Generic scheme or derived-category tool for Stacks 0CSL: Pseudo-coherent complexes are quasi-coherent. No step of the six-functor unit is replaced."
+   },
+   {
+    "node": "lem-pc-derived-pullback-qcoh-component",
+    "why": "Generic scheme or derived-category tool for Stacks 0CSL: Affine-local cohomology of derived pullback. No step of the six-functor unit is replaced."
+   },
+   {
+    "node": "lem-pc-derived-tensor-qcoh-component",
+    "why": "Generic scheme or derived-category tool for Stacks 0CSL: Affine-local cohomology of derived tensor. No step of the six-functor unit is replaced."
+   },
+   {
+    "node": "lem-pc-derived-direct-image-preserves-qcoh",
+    "why": "Generic scheme or derived-category tool for Stacks 0CSL: Derived direct image along a qcqs morphism preserves quasi-coherent cohomology. No step of the six-functor unit is replaced."
+   },
+   {
+    "node": "def-pc-derived-category",
+    "why": "Generic scheme or derived-category tool for Stacks 0CSL: The derived category of $\\mathcal{O}_X$-modules. No step of the six-functor unit is replaced."
+   },
+   {
+    "node": "lem-pc-kflat-resolution",
+    "why": "Generic scheme or derived-category tool for Stacks 0CSL: Existence of K-flat resolutions on a ringed site. No step of the six-functor unit is replaced."
+   },
+   {
+    "node": "def-pc-scheme-derived-tensor-structure",
+    "why": "Generic scheme or derived-category tool for Stacks 0CSL: K-flat derived tensor structure on schemes. No step of the six-functor unit is replaced."
+   },
+   {
+    "node": "def-pur-pseudo-coherent-complex",
+    "why": "Generic scheme or derived-category tool for Stacks 0CSL: Pseudo-coherent complexes. No step of the six-functor unit is replaced."
+   },
+   {
+    "node": "lem-pc-qcqs-derived-projection-iso-universes",
+    "why": "Generic scheme or derived-category tool for Stacks 0CSL: Objectwise qcqs derived projection isomorphism. No step of the six-functor unit is replaced."
+   },
+   {
+    "node": "lem-pc-derived-direct-image-composition",
+    "why": "Generic scheme or derived-category tool for Stacks 0CSL: Composition of derived direct images. No step of the six-functor unit is replaced."
+   },
+   {
+    "node": "def-pc-ring-pseudo-coherent-complex",
+    "why": "Generic scheme or derived-category tool for Stacks 0CSL: Pseudo-coherent derived objects over a ring. No step of the six-functor unit is replaced."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lemma-nagata-projective-space-base-change-proper",
+  "lem-pc-proper-base-change",
+  "lem-nagata-polynomial-projection-flat",
+  "lem-pod-separated-finite-type-base-change",
+  "def-pc-projective-space-twist",
+  "def-pc-morphism-conventions",
+  "def-pc-proj",
+  "def-pc-fibre-product",
+  "def-nagata-projective-space-base-change",
+  "lem-sc-pseudo-coherent-qcoh",
+  "lem-pc-derived-pullback-qcoh-component",
+  "lem-pc-derived-tensor-qcoh-component",
+  "lem-pc-derived-direct-image-preserves-qcoh",
+  "def-pc-derived-category",
+  "lem-pc-kflat-resolution",
+  "def-pc-scheme-derived-tensor-structure",
+  "def-pur-pseudo-coherent-complex",
+  "lem-pc-qcqs-derived-projection-iso-universes",
+  "lem-pc-derived-direct-image-composition",
+  "def-pc-ring-pseudo-coherent-complex"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-O1-990561150",
+  "group": "O1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-O1-990561150 (reviewer sub-agent of L); spot-checked: Read in full: Stacks 0CSJ, 0CSK and 0CSL (more-morphisms l.20337-20546), 09UI, 09UJ and 09UU, plus perfect.tex 0CSD and 0CSG; also the item, the 3 new nodes and the statements of every cited node. The item statement matches 0CSL exactly. Hypotheses checked step by step: p is flat, proper and of finite presentation, as 0CSD needs; V->Spec A is flat and locally of finite presentation, as 09UU needs; q is qcqs; the 08EU projection formula is applied in the right orientation, with D_QCoh inputs, for both q and p; the twist test needs only d=0..n. The worker's correction of the 0CSL final display from |_{X x V} to |_V is right. The new nodes 0CSJ, 0CSK and 0CSD are faithful, self-contained and statement-only, and none duplicates an existing node or restates a clause of the item. One fault, C1/E5, in step 6: it claimed that the relative-pseudo-coherence witnesses on the opens U 'together witness' it on X, but definition 09UI needs one affine cover {V_a} of the base with charts over V_a covering all of f^-1(V_a); combining them is the locality lemma 09UJ, which no node carried. FIX: added the statement-only node lem-sfb-relative-pseudocoherence-local-on-source (Tag 09UJ, by reviewer, Mathlib greps recorded) and cited it in step 6; proof_deps updated. Batch-5 flag: lem-trf-bounded-above-acyclic-derived-computation, reached through the twist test, is generic homological algebra (derived.tex 0646/06XN, dual of 015E), not a step of the trace formula or Poincare duality; accepted. The declared tool_uses are generic scheme/derived tools; accepted. No SGA cited.; 2 file(s) fixed by the reviewer; 1 statement node(s) added by the reviewer (FIX more, RETURN less)"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.PseudoCoherentTensorRelativeCriterion",
+  "declaration": "AlgebraicGeometry.isPseudoCoherentRelativeTo_of_pseudoCoherent_tensor_tests",
+  "file": "lean/Sheaf/AlgebraicGeometry/PseudoCoherentTensorRelativeCriterion.lean",
+  "statement": "theorem isPseudoCoherentRelativeTo_of_pseudoCoherent_tensor_tests (A : CommRingCat.{u}) (X : Scheme.{u}) (f : X ⟶ Spec A) [IsSeparated f] [LocallyOfFinitePresentation f] [QuasiCompact f] [QuasiSeparated f] [∀ Y : Scheme.{u}, HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))] [∀ U : X.Opens, HasDerivedCategory.{w} (SheafOfModules.{u} ((moduleRings X.toRingedSpace).over U))] [HasDerivedCategory.{wΓ} (ModuleCat.{u} ((moduleRings X.toRingedSpace).obj.obj (op ⊤)))] [HasDerivedCategory.{wA} (ModuleCat.{u} A)] (K : schemeDerivedCategory X) (hK : schemeDerivedQCohProperty X K) (hTests : ∀ E : schemeDerivedCategory X, Scheme.IsPseudoCoherent X E → DerivedCategory.IsPseudoCoherent ((schemeDerivedGlobalSections X ⋙ (affineGlobalSectionsRestriction f).mapDerivedCategory).obj (E ⊗ K))) : Scheme.IsPseudoCoherentRelativeTo f K",
+  "branch": "sheaf-dag",
+  "by": "NR",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "Uses the recorded relative pseudo-coherence definition and the existing affine derived global sections composite. The composite is spelled out to retain independent localization universes for global-section modules and A-modules. Added the two landed definition nodes owning its functors; the mathematical statement is unchanged."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-0430afb3a",
+  "group": "NR",
+  "result": "pass",
+  "note": "Read node, Stacks 0CSL (more-morphisms l.20487-20495), module, report (Worker report + Second reading by NR), and the dependency declarations IsPseudoCoherentRelativeTo/IsMPseudoCoherentRelativeTo, Scheme.IsPseudoCoherent, DerivedCategory.IsPseudoCoherent, schemeDerivedGlobalSections, affineGlobalSectionsRestriction/affineDerivedGlobalSections. All clauses match: separated plus LocallyOfFinitePresentation+QuasiCompact+QuasiSeparated (the finite-presentation convention, not stronger); K quasi-coherent; tests over all pseudo-coherent E; RΓ(X, E⊗K) with the canonical A-action, verbatim the affineDerivedGlobalSections body with independent wΓ/wA; conclusion is the recorded relative predicate. No extra hypotheses, no universe identification, statement field verbatim, proof is only sorry, docstrings give source and blueprint plus the 6 proof steps. The stmt_deps gain only two landed owning nodes (def-pc-global-derived-rhom, def-pc-affine-global-hom-base-change-map), both used. Edge cases (empty X, zero ring, K=0, f=id, unbounded) are covered. No duplicate notion. No compile run (no changes). No findings."
+ }
+}

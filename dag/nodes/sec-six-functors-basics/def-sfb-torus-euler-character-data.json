@@ -1,0 +1,138 @@
+{
+ "id": "def-sfb-torus-euler-character-data",
+ "kind": "definition",
+ "title": "Integral torus Euler characters and canonical geometric realization predicates",
+ "status": "split",
+ "import_flags": [],
+ "statement": "Let $F$ be a field [def-weil-field]. Use the existing group-scheme characters $X=\\operatorname{Hom}(T,\\mathbf G_m)$, written additively, and $R=\\mathbf Z[X]$ [def-sfb-trivial-torus-coherent-data]. For an affine group scheme $T$ and a finite-dimensional rational coordinate comodule $(V,c)$ [def-sfb-rational-representation-gzero], put $V_\\chi=\\{v:c(v)=v\\otimes\\chi\\}$, with $\\chi$ evaluated on the universal point, and define $\\operatorname{ch}_T(V)=\\sum_\\chi(\\dim_F V_\\chi)e^\\chi$ and $D_T(V)=\\prod_\\chi(1-e^\\chi)^{\\dim_F V_\\chi}$. These are the finite-support sum and product (totalized by zero and one, respectively, outside finite support); weight decomposition will establish finite support for a split torus. Put $\\Sigma=\\langle1-e^\\chi:\\chi\\ne0\\rangle$ and $R_\\Sigma=\\Sigma^{-1}R$. Restriction of a rational $H$-module to a closed subgroup $T\\hookrightarrow H$ [def-sfb-equivariant-coherent-groups] is characterized, up to linear comodule isomorphism, by applying $F[H]\\to F[T]$ to every coefficient of its coaction. For an equivariant coherent sheaf $E$ on an $H$-scheme, a realization of its rational cohomology in degree $q$ is a rational module associated to a coherent sheaf on $\\operatorname{Spec}F$ whose underlying sheaf is $R^qf_*E$ for the structure map and whose linearization is the all-degree base-change linearization [lem-sfb-equivariant-coherent-proper-pushforward]; record also its vector-space identification with the existing Zariski cohomology. For an equivariant coherent $E$ on a $T$-scheme $Z$ and a fixed rational point $p$, a fibre pair consists of rational modules associated to the equivariant pullbacks of $E$ and of the ideal of $p$, respectively, using the existing normalized operation predicates [def-sfb-equivariant-coherent-gzero]. The latter pullback is $\\mathfrak m_p/\\mathfrak m_p^2$, with the dual derivative action. These are explicit definitions and predicates, with no existence assertion or choice of a representation.",
+ "stmt_deps": [
+  "def-weil-field",
+  "def-sfb-trivial-torus-coherent-data",
+  "def-sfb-rational-representation-gzero",
+  "def-sfb-equivariant-coherent-groups",
+  "lem-sfb-equivariant-coherent-proper-pushforward",
+  "def-sfb-equivariant-coherent-gzero"
+ ],
+ "source": {
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Section 22d, proof of Theorem 22.50, p.480: general fixed-point input, stated here in its integral equivariant form; Example 22.36, pp.473--474, for formal characters. WANTED: Nielsen 1974 general fixed-point theorem and Iversen 1976, 9.4; neither document is present. The integral formulation is an agent-supplied supporting statement."
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Integer formal character of a rational split torus comodule as sum of dimensions of character weight spaces and localization at one minus nonzero characters",
+   "results": "8 hits: CharacterModule.int, LieModule.weightSpace, CharacterModule, LieModule.genWeightSpace, LieModule.traceForm_eq_sum_finrank_nsmul', FDRep.char_one, LieModule.weightSpaceOfIsLieTower, LieModule.traceForm_eq_sum_finrank_nsmul. Digest aaa7bb094516a95f.",
+   "date": "2026-10-24",
+   "verdict": "No exact match. Lie algebra weight spaces and field-valued finite-group traces differ from group-scheme character comodules and integral formal characters."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Define weight subspace of an affine algebraic group character by the equalizer of its coordinate coaction and v tensor chi, and the integral formal character",
+   "results": "8 hits: LieModule.weightSpaceOfIsLieTower, LieModule.weightSpace, LieModule.genWeightSpace, LieModule.mem_weightSpace, LieModule.Weight.ker, LieModule.weightSpace_le_genWeightSpace, LieModule.coe_genWeightSpace_of_top, LieModule.genWeightSpaceOf. Digest 24625de275d6c12c.",
+   "date": "2026-10-24",
+   "verdict": "No exact match. Lie algebra weight spaces and field-valued finite-group traces differ from group-scheme character comodules and integral formal characters."
+  },
+  {
+   "tool": "grep",
+   "query": "formalCharacter|characterCoefficient|eulerSystem|IsFixedFibrePair",
+   "results": "0 hits: . Digest 4f53cda18c2baa0c.",
+   "date": "2026-10-24",
+   "verdict": "No exact match. Lie algebra weight spaces and field-valued finite-group traces differ from group-scheme character comodules and integral formal characters."
+  },
+  {
+   "tool": "grep",
+   "query": "formalCharacter|characterCoefficient|eulerSystem|IsFixedFibrePair|TorusEulerCharacter in lean/WeilConjectures and lean/Sheaf; formal character in dag/nodes and tools/blueprint_refs.py search",
+   "results": "No matching construction. Existing TrivialTorusCoherent.Character/CharacterRing/characterValue, EquivariantCoherent.Representation/IsAssociated/IsPullback/IsIdeal, and ProperPushforwardData geometry were found and reused. GmRepresentation.weightSpace is only the integer-weight Laurent-polynomial special case.",
+   "date": "2026-10-24",
+   "verdict": "reuse the existing notions; add only the missing general-character equalizer, formal sums, localization and normalized realization predicates"
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-torus-coherent-fixed-point-formula",
+  "date": "2026-10-24",
+  "group": "Q54"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "The integral character ring, weight multiplicities, localized Euler factors and normalized fibre/cohomology representations in the supporting torus coherent fixed-point formula.",
+   "via": [
+    "lem-sfb-torus-coherent-fixed-point-formula",
+    "lem-sfb-flag-line-euler-alternant",
+    "lem-sfb-induced-weyl-dimension-formula",
+    "lem-sfb-steinberg-induced-module-irreducible",
+    "lem-sfb-rho-section-self-duality",
+    "lem-sfb-steinberg-endomorphism-detection",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.TorusEulerCharacterData",
+  "declaration": "AlgebraicGeometry.TorusEulerCharacter.weightSpace",
+  "declarations": [
+   "AlgebraicGeometry.TorusEulerCharacter.characterCoefficient",
+   "AlgebraicGeometry.TorusEulerCharacter.weightSpace",
+   "AlgebraicGeometry.TorusEulerCharacter.formalCharacter",
+   "AlgebraicGeometry.TorusEulerCharacter.eulerSystem",
+   "AlgebraicGeometry.TorusEulerCharacter.LocalizedRing",
+   "AlgebraicGeometry.TorusEulerCharacter.eulerFactor",
+   "AlgebraicGeometry.TorusEulerCharacter.IsRestrictedRepresentation",
+   "AlgebraicGeometry.TorusEulerCharacter.IsCohomologyRepresentation",
+   "AlgebraicGeometry.TorusEulerCharacter.IsFixedFibrePair"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/TorusEulerCharacterData.lean",
+  "statement": "def weightSpace (T : Grp (Over (Spec (.of F)))) [IsAffine T.X.left] (V : Representation F T.X) (χ : Character T) : Submodule F V.space",
+  "branch": "newtargets-dag",
+  "by": "Q54",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-73b7a41f0",
+  "group": "Q54",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-73b7a41f0",
+  "group": "Q54",
+  "result": "pass",
+  "note": "Read item, new node def-sfb-torus-euler-character-data, all stmt_dep records, both modules and the live dependency Lean (EquivariantCoherentGroups/GZero/ProperPushforward, RationalRepresentationGZero, TrivialTorusCoherentData, ToriMultiplicativeType, Projective). All node clauses rendered: alg. closed F; affine finite-type H; closed subgroup T with iso to splitTorus F r (r=0 ok); Smooth+IsProjective Z; fixed subscheme as closed P = Fin n coproduct of Spec F representing the T-fixed functor after every A→B; coherent locally free linearized E; cohomology V q pinned by IsHigherPushforward+IsAssociated+iso to Zariski H^q, finite, eventually zero; coefficientwise T-restriction; weight decomposition of every rational T-module; cotangent via the equivariant ideal pulled back (m/m^2), no zero weight; integral identity in Localization(eulerSystem) with Ring.inverse of a unit. Existentials pinned up to iso; convention consistent (Koszul λ_{-1}(I/I^2)). Edge cases n=0, r=0, zero bundle, dim 0, char p, universes ok. H4: no existing comodule weight space/formal character (TorusCharacterTangent, SplitTorus, Gm weightSpace differ). H12 new-node fields ok; deps reachable via new node stmt_deps; item changed only lean+stmt_deps; statements verbatim; docstrings/proof steps present; only sorry; lines ≤100. Not recompiled (no change); delivery dry run OK."
+ }
+}

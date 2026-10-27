@@ -1,0 +1,107 @@
+{
+ "id": "lem-sf-p1-constant-unit-pullback",
+ "kind": "statement",
+ "title": "Inverse image respects the specified constant-unit comparison",
+ "statement": "For finite commutative A and f:X -> Y, ordinaryFiniteUnitPullback.hom followed by constantUnit X.hom equals ordinaryFinitePullback f applied to constantUnit Y.hom, followed by leftDerivedUpperStarDerivedTensorUnitIso f.hom [def-sf-p1-integral-transport-data].",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-geo-p1-adjunction/thm-amb-p1-adjunction.proof.md",
+  "place": "First-coordinate constant-object and unit comparisons."
+ },
+ "stmt_deps": [
+  "def-sf-p1-integral-transport-data"
+ ],
+ "proof": [
+  {
+   "text": "Use constantUnit_hom and unitPullback_native_hom to replace the specified maps by their native single-degree unit and constant comparisons. The source-library formula leftDerivedUpperStar_map_singleFunctorObjUnitIso_inv_comp identifies the paths after composing with the inverses of the single-degree unit comparisons. A generic cancellation of these two isomorphisms proves the displayed equation.",
+   "uses": [
+    "lem-sf-p1-constant-unit-hom",
+    "lem-sf-p1-unit-pullback-native-hom"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-sf-p1-constant-unit-hom",
+  "lem-sf-p1-unit-pullback-native-hom"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-geo-p1-adjunction/thm-amb-p1-adjunction.proof.md",
+  "place": "Proved constant-unit normalization used in the first-coordinate tail."
+ },
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.SfP1ProjectionTraceFalseTail",
+  "date": "2026-10-27",
+  "group": "N2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sf-p1-projection-trace-transport-false",
+   "place": "The constant-object unit normalization in the first triangle.",
+   "via": [
+    "lem-sf-p1-projection-trace-transport-false-tail",
+    "lem-sf-p1-projection-trace-transport-false"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-prop-sf-rf-shriek-preservation",
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Derived pullback of a constant sheaf at the monoidal unit agrees with the monoidal unit comparison",
+   "results": "Eight hits for sheaf-module pullback of units and cartesian-monoidal sheafToPresheaf. No equality for these concrete unbounded etale constant comparisons.",
+   "date": "2026-10-27",
+   "verdict": "No exact match; reuse the source library and functor laws."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.map_id",
+   "results": "Found CategoryTheory.Functor.map_id in Mathlib.CategoryTheory.Functor.Basic, plus unrelated monad and module-presheaf lemmas.",
+   "date": "2026-10-27",
+   "verdict": "Generic identity preservation supplies the elementary normalization."
+  },
+  {
+   "tool": "grep",
+   "query": "constantSheaf.*unit|unit.*constantSheaf",
+   "results": "Nine hits for constantSheafAdj counits and condensed discrete constants; no native derived single-degree comparison formula.",
+   "date": "2026-10-27",
+   "verdict": "No exact match."
+  }
+ ],
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.SfP1ConstantUnitPullback",
+  "file": "lean/Sheaf/AlgebraicGeometry/SfP1ConstantUnitPullback.lean",
+  "declaration": "AlgebraicGeometry.Etale.SfP1Transport.constantUnit_pullback",
+  "statement": "theorem constantUnit_pullback\n    (A : Type (u + 1)) [CommRing A] [Finite A]\n    {X Y : Scheme.{u}} (f : X ⟶ Y) :\n    (ordinaryFiniteUnitPullback A f).hom ≫ (constantUnit A X).hom =\n      (ordinaryFinitePullback A f).map (constantUnit A Y).hom ≫\n        (leftDerivedUpperStarDerivedTensorUnitIso f).hom",
+  "branch": "sheaf-dag",
+  "by": "N2",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "N2",
+  "result": "pass",
+  "landing": "20261027T034715-L-3677373",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-b59d1",
+  "group": "E1",
+  "result": "pass",
+  "landing": "20261027T054555-L-964137",
+  "kind": "interface",
+  "note": "independent cc review: item proof + presentationExchange sorry vs nodes lem-sf-p1-projection-trace-transport-true / lem-sf-p1-presentation-exchange; trace refactor vs change record sf-p1-trace-factorization and clone; forced adaptation ProjectiveLineTraceNormalization vs clone diff; all 11 direct importers compiled OK against the delivered set"
+ }
+}

@@ -1,0 +1,291 @@
+{
+ "id": "lem-sfb-solvable-normal-subgroup-products",
+ "kind": "statement",
+ "title": "Products and dimension growth of smooth connected solvable normal subgroups",
+ "statement": "Let $k$ be a field [def-weil-field]. All group schemes below are affine group schemes [def-sc-group-scheme] of finite type [def-weil-finite-type-morphism] over $k$, and all subgroup schemes are closed [def-sc-group-scheme-subgroup]. Smoothness is as in [def-sbc-smooth-morphisms], and connectedness as in [def-weil-connected-scheme]; geometrically connected means connected after extension to an algebraic closure $\\bar k$ of $k$. A group scheme is solvable if it has a finite descending series of closed subgroup schemes, each normal in its predecessor, with commutative group-scheme quotients. Let $G$ be smooth and geometrically connected and let $H,N\\subseteq G$ be smooth connected normal solvable subgroup schemes. Their product is represented by a smooth connected normal solvable subgroup $HN\\subseteq G$, containing both $H$ and $N$, with the pointwise description that $x\\in(HN)(A)$ if and only if $x\\in H(B)N(B)$ after some faithfully flat finitely presented $A$-algebra $B$. A smooth connected group scheme over a field remains smooth and connected after every field extension, and a solvable group scheme remains solvable after every field extension. For a closed inclusion $J\\subsetneq L$ of smooth connected group schemes one has $\\dim J<\\dim L$; these dimensions are nonnegative integers, bounded above by $\\dim G$ for subgroup schemes of $G$. Here dimension is topological Krull dimension [def-kun-topological-krull-dimension].",
+ "source": {
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Section 5(f), product construction and Theorem 5.52, printed pp.111--112; Proposition 6.27, printed p.131; Lemma 6.41 and the greatest-dimension argument in Proposition 6.42, printed p.134; Propositions 1.34--1.36 and 1.62, on connected group varieties and field extension."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-sc-group-scheme",
+  "def-weil-finite-type-morphism",
+  "def-sc-group-scheme-subgroup",
+  "def-sbc-smooth-morphisms",
+  "def-weil-connected-scheme",
+  "def-kun-topological-krull-dimension"
+ ],
+ "proof": [
+  {
+   "text": "Form $q:G\\to Q=G/N$ by [lem-sfb-affine-normal-quotient-geometry]. Factor $q|_H$ as a faithfully flat finitely presented homomorphism $r:H\\to I$ followed by a closed immersion $I\\hookrightarrow Q$, using [lem-sfb-algebraic-group-homomorphism-factorization]. Its kernel is the scheme-theoretic intersection $K=H\\times_GN$, so $I\\simeq H/K$ as fppf sheaves. In particular $I$ is affine of finite type, since it is closed in the affine scheme $Q$. Put $P=q^{-1}(I)$. The quotient node gives a closed subgroup $P\\subseteq G$ and an exact sequence $1\\to N\\to P\\to I\\to1$. The kernel $K$ need not be smooth; no such hypothesis was used.",
+   "uses": [
+    "lem-sfb-affine-normal-quotient-geometry",
+    "lem-sfb-algebraic-group-homomorphism-factorization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Theorem 5.39, p.108; Section 5(f), Theorem 5.52 and Proposition 5.54, pp.111–112."
+   }
+  },
+  {
+   "text": "For a commutative $k$-algebra $A$, a point $x\\in P(A)$ has $q(x)\\in I(A)$. The affine fibre product $H\\times_{I,q(x)}\\operatorname{Spec}A=\\operatorname{Spec}B$ is the base change of $r$, so $B$ is a faithfully flat finitely presented $A$-algebra. Its tautological point is $h\\in H(B)$ with $q(h)=q(x_B)$. Hence $h^{-1}x_B\\in N(B)$ by the kernel assertion for $q$, giving $x_B\\in H(B)N(B)$. Conversely, if $x_B=h n$, then $q(x)_B=q(h)\\in I(B)$, and the defining closed-subscheme equations of $I$ vanish already over $A$, since $A\\to B$ is injective. Hence $x\\in P(A)$. This also shows $H,N\\subseteq P$. For $g\\in G(A)$, conjugating the displayed factorization gives $g_Bx_Bg_B^{-1}=(g_Bhg_B^{-1})(g_Bng_B^{-1})\\in H(B)N(B)$ by normality of both subgroups. The converse just proved gives $gxg^{-1}\\in P(A)$; applying it to $g^{-1}$ proves equality. Thus $P$ is normal in $G$, and we define $HN=P$.",
+   "uses": [
+    "lem-sfb-affine-normal-quotient-geometry",
+    "lem-sfb-algebraic-group-homomorphism-factorization"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Section 5(f), product functor preceding Theorem 5.52, p.111; Proposition 5.54, p.112."
+   }
+  },
+  {
+   "text": "By [lem-sbc-connected-rational-point-geometrically-connected], the identity section makes connected $H$ geometrically connected. Apply the quotient assertions of [lem-sfb-affine-normal-quotient-geometry] to $H/K\\simeq I$: the quotient $I$ is smooth and geometrically connected. Apply the inverse-image assertion of that same node to $P=q^{-1}(I)$, with the smooth connected groups $N$ and $I$. It follows that $P$ is smooth and connected. This proves the geometric properties without assuming the intersection $K$ smooth.",
+   "uses": [
+    "lem-sbc-connected-rational-point-geometrically-connected",
+    "lem-sfb-affine-normal-quotient-geometry"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Propositions 1.34–1.36, pp.16–17; Proposition 1.62, p.24; Proposition 5.59, p.114; Lemma 6.41, p.134."
+   }
+  },
+  {
+   "text": "Choose a solvable series $H=H_0\\triangleright H_1\\triangleright\\cdots\\triangleright H_a=1$. For each $i$, factor $H_i\\to I$ through its closed image $I_i$, using [lem-sfb-algebraic-group-homomorphism-factorization]. Thus $I_0=I$, $I_a=1$, and points of $I_i$ lift fppf locally to $H_i$. For $u\\in I_i(A)$ and $v\\in I_{i+1}(A)$, lift both over a common fppf cover. Normality of $H_{i+1}$ in $H_i$ puts $uvu^{-1}$ in $I_{i+1}$ after the cover, hence over $A$ by its closed equations. So $I_{i+1}\\triangleleft I_i$. Form $I_i/I_{i+1}$ with [lem-sfb-affine-normal-quotient-geometry]. Any two sections of this quotient lift fppf locally first to $I_i$ and then to $H_i$. Their commutator then lies in $H_{i+1}$ because $H_i/H_{i+1}$ is commutative, and so its image in $I_i/I_{i+1}$ is the identity. Sheaf descent proves that the quotient is commutative. Consequently $(I_i)$ is a solvable series for $I$.",
+   "uses": [
+    "lem-sfb-algebraic-group-homomorphism-factorization",
+    "lem-sfb-affine-normal-quotient-geometry"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 6.27, p.131 (image of a solvable series); Theorem 5.55, p.113."
+   }
+  },
+  {
+   "text": "Let $P_i$ be the inverse image of $I_i$ under $P\\to I=P/N$. The correspondence assertion of [lem-sfb-affine-normal-quotient-geometry] gives $P_{i+1}\\triangleleft P_i$ and $P_i/P_{i+1}\\simeq I_i/I_{i+1}$. Thus $P=P_0\\triangleright\\cdots\\triangleright P_a=N$ has commutative successive quotients. Append the given solvable series of $N$. This is a finite series ending in $1$, proving $HN=P$ solvable, including when either initial series has length zero.",
+   "uses": [
+    "lem-sfb-affine-normal-quotient-geometry"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 6.27, p.131 (inverse-image and concatenation argument); Lemma 6.41, p.134."
+   }
+  },
+  {
+   "text": "Let $L$ be any smooth connected group scheme occurring in the statement and let $K/k$ be a field extension. Its identity is a rational section, so [lem-sbc-connected-rational-point-geometrically-connected] gives connectedness of $L_K$. Clause (2) of [lem-pc-proper-base-change] gives smoothness of $L_K$. For any solvable affine finite-type group $S$, base change a chosen finite solvable series. Closed immersions remain closed immersions because on affine coordinate algebras they are surjections and tensor product preserves surjections; normality and commutativity are identities on the functors of points and remain so after restriction to $K$-algebras. By the field-extension assertion of [lem-sfb-affine-normal-quotient-geometry], each new successive quotient is the base change of the old commutative quotient. The series still ends in $1$, so $S_K$ is solvable.",
+   "uses": [
+    "lem-sbc-connected-rational-point-geometrically-connected",
+    "lem-pc-proper-base-change",
+    "lem-sfb-affine-normal-quotient-geometry"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 1.34 and Summary 1.36, pp.16–17; Corollary 6.31, p.132; smooth base change: Stacks 01VB, morphisms.tex lemma-base-change-smooth."
+   }
+  },
+  {
+   "text": "For a closed inclusion $J\\subsetneq L$ as in the statement, [lem-wf-smooth-components-disjoint] identifies the irreducible components of the smooth affine finite-type scheme $L$ with its connected components. Since $L$ is connected, it is irreducible. It is reduced by [sbc-lem-smooth-geometrically-reduced]. Write $L=\\operatorname{Spec}R$ and $J=\\operatorname{Spec}(R/\\mathfrak a)$. If their underlying spaces were equal, every element of $\\mathfrak a$ would belong to every prime of $R$, hence would be nilpotent; reducedness of $R$ forces $\\mathfrak a=0$, contrary to proper inclusion. Therefore $|J|\\subsetneq|L|$ is a proper closed subset of the irreducible affine variety $L$. Apply [lem-wf-affine-dimension-drop] to obtain $\\dim J<\\dim L$.",
+   "uses": [
+    "lem-wf-smooth-components-disjoint",
+    "sbc-lem-smooth-geometrically-reduced",
+    "lem-wf-affine-dimension-drop"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Corollary 1.35 and dimension discussion, pp.17–18; greatest-dimension argument of Proposition 6.42, p.134."
+   }
+  },
+  {
+   "text": "Every group scheme in question is nonempty, since it has its identity point. Its dimension is therefore at least zero by the definition [def-kun-topological-krull-dimension]. It is finite by [lem-kun-dimension-finite-type], hence is a nonnegative integer. If $S\\subseteq G$ is a closed subgroup, any strict chain of nonempty irreducible closed subsets of $S$ is also such a chain in $G$, because $S$ is closed. Taking suprema proves $\\dim S\\le\\dim G$. These observations give all dimension bounds in the statement.",
+   "uses": [
+    "def-kun-topological-krull-dimension",
+    "lem-kun-dimension-finite-type"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Dimension discussion, pp.17–18; Proposition 6.42, p.134."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-affine-normal-quotient-geometry",
+  "lem-sfb-algebraic-group-homomorphism-factorization",
+  "lem-sbc-connected-rational-point-geometrically-connected",
+  "lem-pc-proper-base-change",
+  "lem-wf-smooth-components-disjoint",
+  "sbc-lem-smooth-geometrically-reduced",
+  "lem-wf-affine-dimension-drop",
+  "def-kun-topological-krull-dimension",
+  "lem-kun-dimension-finite-type"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Section 5(f) and Proposition 5.54; Lemma 6.41 using the quotient/extension argument of Proposition 6.27; Proposition 6.42 dimension maximality. The image/preimage construction writes out the isomorphism theorem argument."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The product of smooth connected normal solvable algebraic subgroups is smooth connected normal and solvable",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"solvable_prod\", \"module\": \"Mathlib/GroupTheory/Solvable\", \"type\": \"∀ {G : Type u_1} [inst : Group G] {G' : Type u_3} [inst_1 : Group G'] [IsSolvable G] [IsSolvable G'],\\n  IsSolvable (G × G')\", \"doc\": \"Given two solvable groups $G$ and $G'$, their direct product $G \\\\times G'$ is also a solvable group. This follows from the component-wise group structure on $G \\\\times G'$ and the solvability of the in\"}\n  {\"name\": \"isNilpotent_prod\", \"module\": \"Mathlib/GroupTheory/Nilpotent\", \"type\": \"∀ {G₁ : Type u_2} {G₂ : Type u_3} [inst : Group G₁] [inst_1 : Group G₂] [Group.IsNilpotent G₁] [Group.IsNilpotent G₂],\\n  Group.IsNilpotent (G₁ × G₂)\", \"doc\": \"Given two nilpotent groups $G_1$ and $G_2$, their direct product $G_1 \\\\times G_2$ is also a nilpotent group. This follows from the fact that the direct product preserves the existence of a central ser\"}\n  {\"name\": \"Prod.instLieGroup\", \"module\": \"Mathlib/Geometry/Manifold/Algebra/LieGroup\", \"type\": \"∀ {𝕜 : Type u_1} [inst : NontriviallyNormedField 𝕜] {n : WithTop ℕ∞} {H : Type u_2} [inst_1 : TopologicalSpace H]\\n  {E : Type u_3} [inst_2 : NormedAddCommGroup E] [inst_3 : NormedSpace 𝕜 E] {I : ModelWithCorners 𝕜 E H} {G : Type u_4}\\n  [inst_4 : TopologicalSpace G] [inst_5 : ChartedSpace H G] [inst_\", \"doc\": \"Given two Lie groups $G$ and $G'$ modeled on $H$ and $H'$ with models with corners $I$ and $I'$ over a nontrivially normed field $\\\\mathbb{K}$, their product $G \\\\times G'$ is equipped with a canonical \"}\n  {\"name\": \"subgroup_solvable_of_solvable\", \"module\": \"Mathlib/GroupTheory/Solvable\", \"type\": \"∀ {G : Type u_1} [inst : Group G] (H : Subgroup G) [IsSolvable G], IsSolvable ↥H\", \"doc\": \"Every subgroup of a solvable group is itself solvable. That is, if $G$ is a solvable group and $H$ is a subgroup of $G$, then $H$ is also a solvable group.\"}\n  {\"name\": \"Prod.instLieAddGroup\", \"module\": \"Mathlib/Geometry/Manifold/Algebra/LieGroup\", \"type\": \"∀ {𝕜 : Type u_1} [inst : NontriviallyNormedField 𝕜] {n : WithTop ℕ∞} {H : Type u_2} [inst_1 : TopologicalSpace H]\\n  {E : Type u_3} [inst_2 : NormedAddCommGroup E] [inst_3 : NormedSpace 𝕜 E] {I : ModelWithCorners 𝕜 E H} {G : Type u_4}\\n  [inst_4 : TopologicalSpace G] [inst_5 : ChartedSpace H G] [inst_\", \"doc\": \"Given a nontrivially normed field $\\\\mathbb{K}$, model with corners $I : H \\\\to E$ and $I' : H' \\\\to E'$, and additive Lie groups $G$ and $G'$ modeled on $H$ and $H'$ with corners, the product space $G \\\\\"}\n  {\"name\": \"isNilpotent_pi\", \"module\": \"Mathlib/GroupTheory/Nilpotent\", \"type\": \"∀ {η : Type u_2} {Gs : η → Type u_3} [inst : (i : η) → Group (Gs i)] [Finite η] [∀ (i : η), Group.IsNilpotent (Gs i)],\\n  Group.IsNilpotent ((i : η) → Gs i)\", \"doc\": \"The direct product of a finite family of nilpotent groups is itself a nilpotent group.\"}\n  {\"name\": \"Subgroup.prod_subgroupOf_prod_normal\", \"module\": \"Mathlib/Algebra/Group/Subgroup/Basic\", \"type\": \"∀ {G : Type u_1} [inst : Group G] {N : Type u_5} [inst_1 : Group N] {H₁ K₁ : Subgroup G} {H₂ K₂ : Subgroup N}\\n  [h₁ : (H₁.subgroupOf K₁).Normal] [h₂ : (H₂.subgroupOf K₂).Normal], ((H₁.prod H₂).subgroupOf (K₁.prod K₂)).Normal\", \"doc\": \"If $ H_1 \\\\cap K_1 $ is a normal subgroup of $ K_1 $ and $ H_2 \\\\cap K_2 $ is a normal subgroup of $ K_2 $, then their product $ (H_1 \\\\cap K_1) \\\\times (H_2 \\\\cap K_2) $ is a normal subgroup of $ K_1 \\\\tim\"}\n  {\"name\": \"Subgroup.prod_normal\", \"module\": \"Mathlib/Algebra/Group/Subgroup/Basic\", \"type\": \"∀ {G : Type u_1} [inst : Group G] {N : Type u_5} [inst_1 : Group N] (H : Subgroup G) (K : Subgroup N) [hH : H.Normal]\\n  [hK : K.Normal], (H.prod K).Normal\", \"doc\": \"If $ H $ is a normal subgroup of a group $ G $ and $ K $ is a normal subgroup of a group $ N $, then their Cartesian product $ H \\\\times K $ is a normal subgroup of the product group $ G \\\\times N $. Th\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: abstract solvable-group products and Lie groups do not construct the scheme-theoretic product or prove its geometric dimension growth"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A proper closed inclusion of smooth connected algebraic groups strictly increases dimension",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"LieGroup.of_le\", \"module\": \"Mathlib/Geometry/Manifold/Algebra/LieGroup\", \"type\": \"∀ {𝕜 : Type u_1} [inst : NontriviallyNormedField 𝕜] {H : Type u_2} [inst_1 : TopologicalSpace H] {E : Type u_3}\\n  [inst_2 : NormedAddCommGroup E] [inst_3 : NormedSpace 𝕜 E] {I : ModelWithCorners 𝕜 E H} {G : Type u_4}\\n  [inst_4 : TopologicalSpace G] [inst_5 : ChartedSpace H G] [inst_6 : Group G] {m n\", \"doc\": \"If $ G $ is a Lie group with model space $ n $ in the extended natural numbers $ \\\\mathbb{N}^\\\\top $, and $ m \\\\leq n $, then $ G $ is also a Lie group with model space $ m $. This follows from the compa\"}\n  {\"name\": \"LieAddGroup.of_le\", \"module\": \"Mathlib/Geometry/Manifold/Algebra/LieGroup\", \"type\": \"∀ {𝕜 : Type u_1} [inst : NontriviallyNormedField 𝕜] {H : Type u_2} [inst_1 : TopologicalSpace H] {E : Type u_3}\\n  [inst_2 : NormedAddCommGroup E] [inst_3 : NormedSpace 𝕜 E] {I : ModelWithCorners 𝕜 E H} {G : Type u_4}\\n  [inst_4 : TopologicalSpace G] [inst_5 : ChartedSpace H G] [inst_6 : AddGroup G] {\", \"doc\": \"Given a nontrivially normed field $\\\\mathbb{K}$, a topological space $H$, a normed vector space $E$ over $\\\\mathbb{K}$, a model with corners $I$ on $E$ and $H$, and a topological space $G$ with a charte\"}\n  {\"name\": \"instLieGroupOfTopWithTopENat\", \"module\": \"Mathlib/Geometry/Manifold/Algebra/LieGroup\", \"type\": \"∀ {𝕜 : Type u_1} [inst : NontriviallyNormedField 𝕜] {H : Type u_2} [inst_1 : TopologicalSpace H] {E : Type u_3}\\n  [inst_2 : NormedAddCommGroup E] [inst_3 : NormedSpace 𝕜 E] {I : ModelWithCorners 𝕜 E H} {G : Type u_4}\\n  [inst_4 : TopologicalSpace G] [inst_5 : ChartedSpace H G] [inst_6 : Group G] {a :\", \"doc\": \"If $ G $ is a Lie group modeled on a structure $ I $ with model space $ \\\\omega $, then $ G $ also admits a Lie group structure when the model space is extended to include a top element $ \\\\top $, formi\"}\n  {\"name\": \"instLieGroupOfNatWithTopENat\", \"module\": \"Mathlib/Geometry/Manifold/Algebra/LieGroup\", \"type\": \"∀ {𝕜 : Type u_1} [inst : NontriviallyNormedField 𝕜] {H : Type u_2} [inst_1 : TopologicalSpace H] {E : Type u_3}\\n  [inst_2 : NormedAddCommGroup E] [inst_3 : NormedSpace 𝕜 E] {I : ModelWithCorners 𝕜 E H} {G : Type u_4}\\n  [inst_4 : TopologicalSpace G] [inst_5 : ChartedSpace H G] [inst_6 : Group G] [Lie\", \"doc\": \"The extended natural numbers $\\\\mathbb{N}^\\\\top$ are equipped with a Lie group structure, modeled on a topological space $H$, where the group operations are smooth maps compatible with the charted space\"}\n  {\"name\": \"instLieGroupOfSomeENatTopOfLEInfty\", \"module\": \"Mathlib/Geometry/Manifold/Algebra/LieGroup\", \"type\": \"∀ {𝕜 : Type u_1} [inst : NontriviallyNormedField 𝕜] {H : Type u_2} [inst_1 : TopologicalSpace H] {E : Type u_3}\\n  [inst_2 : NormedAddCommGroup E] [inst_3 : NormedSpace 𝕜 E] {I : ModelWithCorners 𝕜 E H} {G : Type u_4}\\n  [inst_4 : TopologicalSpace G] [inst_5 : ChartedSpace H G] [inst_6 : Group G] {a :\", \"doc\": \"If $ G $ is a Lie group with respect to a model $ I $ and the extended natural number $ \\\\infty $, then for any extended natural number $ a $ satisfying $ a \\\\leq \\\\infty $, $ G $ is also a Lie group wit\"}\n  {\"name\": \"instLieGroupOfNatWithTopENatOfIsTopologicalGroup\", \"module\": \"Mathlib/Geometry/Manifold/Algebra/LieGroup\", \"type\": \"∀ {𝕜 : Type u_1} [inst : NontriviallyNormedField 𝕜] {H : Type u_2} [inst_1 : TopologicalSpace H] {E : Type u_3}\\n  [inst_2 : NormedAddCommGroup E] [inst_3 : NormedSpace 𝕜 E] {I : ModelWithCorners 𝕜 E H} {G : Type u_4}\\n  [inst_4 : TopologicalSpace G] [inst_5 : ChartedSpace H G] [inst_6 : Group G] [IsT\", \"doc\": \"Any topological group $G$ admits a Lie group structure modeled on the extended natural numbers $\\\\mathbb{N}^\\\\top$, where the group operations (multiplication and inversion) are smooth maps compatible w\"}\n  {\"name\": \"instLieAddGroupOfTopWithTopENat\", \"module\": \"Mathlib/Geometry/Manifold/Algebra/LieGroup\", \"type\": \"∀ {𝕜 : Type u_1} [inst : NontriviallyNormedField 𝕜] {H : Type u_2} [inst_1 : TopologicalSpace H] {E : Type u_3}\\n  [inst_2 : NormedAddCommGroup E] [inst_3 : NormedSpace 𝕜 E] {I : ModelWithCorners 𝕜 E H} {G : Type u_4}\\n  [inst_4 : TopologicalSpace G] [inst_5 : ChartedSpace H G] [inst_6 : AddGroup G] {\", \"doc\": \"Given a nontrivially normed field $\\\\mathbb{K}$, a normed vector space $E$ over $\\\\mathbb{K}$, a model with corners $I$ on $E$ and a topological space $H$, if a topological space $G$ equipped with an ad\"}\n  {\"name\": \"LieGroup\", \"module\": \"Mathlib/Geometry/Manifold/Algebra/LieGroup\", \"type\": \"{𝕜 : Type u_1} →\\n  [inst : NontriviallyNormedField 𝕜] →\\n    {H : Type u_2} →\\n      [inst_1 : TopologicalSpace H] →\\n        {E : Type u_3} →\\n          [inst_2 : NormedAddCommGroup E] →\\n            [inst_3 : NormedSpace 𝕜 E] →\\n              ModelWithCorners 𝕜 E H →\\n                WithTop ℕ∞ → (G : Ty\", \"doc\": \"A Lie group is a group $G$ equipped with a topological space structure and a charted space structure modeled on $H$, such that the group operations (multiplication and inversion) are smooth maps compa\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: abstract solvable-group products and Lie groups do not construct the scheme-theoretic product or prove its geometric dimension growth"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsSolvable\", \"Subgroup\"",
+   "results": "[loogle] OK 8 hit(s)\n  {\"name\": \"AddGroup.instIsSolvableQuotientAddSubgroup\", \"module\": \"Mathlib.GroupTheory.Solvable\", \"type\": \" {G : Type u_1} [AddGroup G] (H : AddSubgroup G) [H.Normal] [AddGroup.IsSolvable G] : AddGroup.IsSolvable (G ⧸ H)\", \"doc\": \"\"}\n  {\"name\": \"Group.instIsSolvableQuotientSubgroup\", \"module\": \"Mathlib.GroupTheory.Solvable\", \"type\": \" {G : Type u_1} [Group G] (H : Subgroup G) [H.Normal] [Group.IsSolvable G] : Group.IsSolvable (G ⧸ H)\", \"doc\": \"\"}\n  {\"name\": \"AddGroup.instIsSolvableSubtypeMemAddSubgroup\", \"module\": \"Mathlib.GroupTheory.Solvable\", \"type\": \" {G : Type u_1} [AddGroup G] (H : AddSubgroup G) [AddGroup.IsSolvable G] : AddGroup.IsSolvable ↥H\", \"doc\": \"\"}\n  {\"name\": \"Group.instIsSolvableSubtypeMemSubgroup\", \"module\": \"Mathlib.GroupTheory.Solvable\", \"type\": \" {G : Type u_1} [Group G] (H : Subgroup G) [Group.IsSolvable G] : Group.IsSolvable ↥H\", \"doc\": \"\"}\n  {\"name\": \"AddGroup.isSolvable_of_addSubgroup_quotient\", \"module\": \"Mathlib.GroupTheory.Solvable\", \"type\": \" {G : Type u_1} [AddGroup G] (H : AddSubgroup G) [H.Normal] [AddGroup.IsSolvable ↥H] [AddGroup.IsSolvable (G ⧸ H)] : AddGroup.IsSolvable G\", \"doc\": \"\"}\n  {\"name\": \"Group.isSolvable_of_subgroup_quotient\", \"module\": \"Mathlib.GroupTheory.Solvable\", \"type\": \" {G : Type u_1} [Group G] (H : Subgroup G) [H.Normal] [Group.IsSolvable ↥H] [Group.IsSolvable (G ⧸ H)] : Group.IsSolvable G\", \"doc\": \"\"}\n  {\"name\": \"AddGroup.isSolvable_iff_addSubgroup_quotient\", \"module\": \"Mathlib.GroupTheory.Solvable\", \"type\": \" {G : Type u_1} [AddGroup G] (H : AddSubgroup G) [H.Normal] : AddGroup.IsSolvable G ↔ AddGroup.IsSolvable ↥H ∧ AddGroup.IsSolvable (G ⧸ H)\", \"doc\": \"\"}\n  {\"name\": \"Group.isSolvable_iff_subgroup_quotient\", \"module\": \"Mathlib.GroupTheory.Solvable\", \"type\": \" {G : Type u_1} [Group G] (H : Subgroup G) [H.Normal] : Group.IsSolvable G ↔ Group.IsSolvable ↥H ∧ Group.IsSolvable (G ⧸ H)\", \"doc\": \"\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: abstract solvable-group products and Lie groups do not construct the scheme-theoretic product or prove its geometric dimension growth"
+  },
+  {
+   "tool": "grep",
+   "query": "solvable.*(group scheme|algebraic group)|group.*dimension",
+   "results": "[grep] OK 25 hit(s)\n  {\"file\": \"Mathlib/FieldTheory/KrullTopology.lean\", \"line\": \"88\", \"text\": \"    refine ⟨(E1 ⊔ E2).fixingSubgroup.carrier, ⟨_, ⟨_, E1.finiteDimensional_sup E2, rfl⟩, rfl⟩, ?_⟩\"}\n  {\"file\": \"Mathlib/FieldTheory/Galois/IsGaloisGroup.lean\", \"line\": \"96\", \"text\": \"theorem finiteDimensional [Finite G] [IsGaloisGroup G K L] : FiniteDimensional K L :=\"}\n  {\"file\": \"Mathlib/LinearAlgebra/Matrix/FiniteDimensional.lean\", \"line\": \"51\", \"text\": \"variable {V : Type*} [AddCommGroup V] [Module K V] [FiniteDimensional K V]\"}\n  {\"file\": \"Mathlib/LinearAlgebra/Matrix/FiniteDimensional.lean\", \"line\": \"52\", \"text\": \"variable {W : Type*} [AddCommGroup W] [Module K W] [FiniteDimensional K W]\"}\n  {\"file\": \"Mathlib/FieldTheory/Galois/Basic.lean\", \"line\": \"23\", \"text\": \"- `intermediateFieldEquivSubgroup` where `E/F` is finite dimensional and Galois\"}\n  {\"file\": \"Mathlib/FieldTheory/Galois/Basic.lean\", \"line\": \"27\", \"text\": \"- `IntermediateField.fixingSubgroup_fixedField` : If `E/F` is finite dimensional (but not\"}\n  {\"file\": \"Mathlib/FieldTheory/Galois/Basic.lean\", \"line\": \"29\", \"text\": \"- `IsGalois.fixedField_fixingSubgroup`: If `E/F` is finite dimensional and Galois\"}\n  {\"file\": \"Mathlib/FieldTheory/Galois/Basic.lean\", \"line\": \"128\", \"text\": \"/-- A galois extension with finite galois group is finite dimensional.\"}\n  {\"file\": \"Mathlib/FieldTheory/Galois/Basic.lean\", \"line\": \"273\", \"text\": \"theorem fixingSubgroup_fixedField [FiniteDimensional F E] : fixingSubgroup (fixedField H) = H := by\"}\n  {\"file\": \"Mathlib/FieldTheory/Galois/Infinite.lean\", \"line\": \"242\", \"text\": \"    IsOpen L.fixingSubgroup.carrier ↔ FiniteDimensional k L := by\"}\n  {\"file\": \"Mathlib/LinearAlgebra/Coevaluation.lean\", \"line\": \"39\", \"text\": \"variable (V : Type v) [AddCommGroup V] [Module K V] [FiniteDimensional K V]\"}\n  {\"file\": \"Mathlib/Geometry/Diffeology/Basic.lean\", \"line\": \"377\", \"text\": \"    [NormedAddCommGroup X] [NormedSpace ℝ X] [FiniteDimensional ℝ X] :\"}\n  {\"file\": \"Mathlib/Geometry/Diffeology/Basic.lean\", \"line\": \"396\", \"text\": \"instance {X : Type*} [NormedAddCommGroup X] [NormedSpace ℝ X] [FiniteDimensional ℝ X] :\"}\n  {\"file\": \"Mathlib/Geometry/Diffeology/Basic.lean\", \"line\": \"401\", \"text\": \"    [NormedAddCommGroup X] [NormedSpace ℝ X] [FiniteDimensional ℝ X] [d : DiffeologicalSpace X] :\"}\n  {\"file\": \"Mathlib/Geometry/Diffeology/Basic.lean\", \"line\": \"406\", \"text\": \"instance {X : Type*} [NormedAddCommGroup X] [NormedSpace ℝ X] [FiniteDimensional ℝ X] :\"}\n  {\"file\": \"Mathlib/Geometry/Manifold/SmoothApprox.lean\", \"line\": \"75\", \"text\": \"  [NormedAddCommGroup E] [NormedSpace ℝ E] [FiniteDimensional ℝ E]\"}\n  {\"file\": \"Mathlib/Geometry/Manifold/SmoothApprox.lean\", \"line\": \"119\", \"text\": \"  [NormedAddCommGroup E] [NormedSpace ℝ E] [FiniteDimensional ℝ E]\"}\n  {\"file\": \"Mathlib/Geometry/Manifold/Algebra/LieGroup.lean\", \"line\": \"20\", \"text\": \"that Lie groups here are not necessarily finite dimensional.\"}\n  {\"file\": \"Mathlib/Geometry/Manifold/Algebra/LeftInvariantDerivation.lean\", \"line\": \"23\", \"text\": \"(see `instLieAlgebraGroupLieAlgebra`). For finite-dimensional `C^∞` real manifolds, the space of\"}\n  {\"file\": \"Mathlib/Geometry/Manifold/Algebra/SMul.lean\", \"line\": \"32\", \"text\": \"Lie group `G` on a finite-dimensional manifold `M` is `C^n` provided it is `C^n` in the\"}\n  {\"file\": \"Mathlib/LinearAlgebra/FiniteDimensional/Basic.lean\", \"line\": \"434\", \"text\": \"variable {V' : Type*} [AddCommGroup V'] [Module K V'] [FiniteDimensional K V']\"}\n  {\"file\": \"Mathlib/Geometry/Manifold/Bordism.lean\", \"line\": \"111\", \"text\": \"    {E H : Type*} [NormedAddCommGroup E] [NormedSpace ℝ E] [FiniteDimensional ℝ E]\"}\n  {\"file\": \"Mathlib/Geometry/Manifold/Bordism.lean\", \"line\": \"131\", \"text\": \"  {E H M : Type*} [NormedAddCommGroup E] [NormedSpace ℝ E] [FiniteDimensional ℝ E]\"}\n  {\"file\": \"Mathlib/Geometry/Manifold/Bordism.lean\", \"line\": \"148\", \"text\": \"    {E H : Type*} [NormedAddCommGroup E] [NormedSpace ℝ E] [FiniteDimensional ℝ E]\"}\n  {\"file\": \"Mathlib/Geometry/Manifold/IsManifold/Basic.lean\", \"line\": \"81\", \"text\": \"  `variable {E : Type*} [NormedAddCommGroup E] [NormedSpace ℝ E] [FiniteDimensional ℝ E]\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: abstract solvable-group products and Lie groups do not construct the scheme-theoretic product or prove its geometric dimension growth"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The product of smooth connected normal solvable algebraic subgroups is smooth connected normal and solvable",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"Subgroup.prod_subgroupOf_prod_normal\", \"module\": \"Mathlib.Algebra.Group.Subgroup.Basic\", \"type\": \"{H₁ K₁ : Subgroup G} {H₂ K₂ : Subgroup N} [h₁ : (H₁.subgroupOf K₁).Normal] [h₂ : (H₂.subgroupOf K₂).Normal] :\\n  ((H₁.prod H₂).subgroupOf (K₁.prod K₂)).Normal\", \"doc\": \"If $ H_1 \\\\cap K_1 $ is a normal subgroup of $ K_1 $ and $ H_2 \\\\cap K_2 $ is a normal subgroup of $ K_2 $, then their product $ (H_1 \\\\cap K_1) \\\\times (H_2 \\\\cap K_2) $ is a normal subgroup of $ K_1 \\\\tim\"}\n  {\"name\": \"solvable_prod\", \"module\": \"Mathlib.GroupTheory.Solvable\", \"type\": \"{G' : Type*} [Group G'] [IsSolvable G] [IsSolvable G'] : IsSolvable (G × G')\", \"doc\": \"Given two solvable groups $G$ and $G'$, their direct product $G \\\\times G'$ is also a solvable group. This follows from the component-wise group structure on $G \\\\times G'$ and the solvability of the in\"}\n  {\"name\": \"subgroup_solvable_of_solvable\", \"module\": \"Mathlib.GroupTheory.Solvable\", \"type\": \"(H : Subgroup G) [IsSolvable G] : IsSolvable H\", \"doc\": \"Every subgroup of a solvable group is itself solvable. That is, if $G$ is a solvable group and $H$ is a subgroup of $G$, then $H$ is also a solvable group.\"}\n  {\"name\": \"Subgroup.prod_normal\", \"module\": \"Mathlib.Algebra.Group.Subgroup.Basic\", \"type\": \"(H : Subgroup G) (K : Subgroup N) [hH : H.Normal] [hK : K.Normal] : (H.prod K).Normal\", \"doc\": \"If $ H $ is a normal subgroup of a group $ G $ and $ K $ is a normal subgroup of a group $ N $, then their Cartesian product $ H \\\\times K $ is a normal subgroup of the product group $ G \\\\times N $. Th\"}\n  {\"name\": \"AddSubgroup.prod_addSubgroupOf_prod_normal\", \"module\": \"Mathlib.Algebra.Group.Subgroup.Basic\", \"type\": \"∀ {G : Type u_1} [inst : AddGroup G] {N : Type u_5} [inst_1 : AddGroup N] {H₁ K₁ : AddSubgroup G}\\n  {H₂ K₂ : AddSubgroup N} [h₁ : (H₁.addSubgroupOf K₁).Normal] [h₂ : (H₂.addSubgroupOf K₂).Normal],\\n  ((H₁.prod H₂).addSubgroupOf (K₁.prod K₂)).Normal\", \"doc\": \"If $H_1$ is a normal subgroup of $K_1$ in additive group $G$ and $H_2$ is a normal subgroup of $K_2$ in additive group $N$, then the product subgroup $H_1 \\times H_2$ is a normal subgroup of the produc\"}\n  {\"name\": \"AddSubgroup.prod_normal\", \"module\": \"Mathlib.Algebra.Group.Subgroup.Basic\", \"type\": \"∀ {G : Type u_1} [inst : AddGroup G] {N : Type u_5} [inst_1 : AddGroup N] (H : AddSubgroup G) (K : AddSubgroup N)\\n  [hH : H.Normal] [hK : K.Normal], (H.prod K).Normal\", \"doc\": \"If $ H $ is a normal additive subgroup of an additive group $ G $ and $ K $ is a normal additive subgroup of an additive group $ N $, then the product subgroup $ H \\\\times K $ is a normal additive subg\"}\n  {\"name\": \"Subgroup.prod\", \"module\": \"Mathlib.Algebra.Group.Subgroup.Basic\", \"type\": \"(H : Subgroup G) (K : Subgroup N) : Subgroup (G × N)\", \"doc\": \"Given subgroups $ H $ of a group $ G $ and $ K $ of a group $ N $, their Cartesian product $ H \\\\times K $ forms a subgroup of the product group $ G \\\\times N $. This subgroup contains the identity elem\"}\n  {\"name\": \"Prod.instLieGroup\", \"module\": \"Mathlib.Geometry.Manifold.Algebra.LieGroup\", \"type\": \"{𝕜 : Type*} [NontriviallyNormedField 𝕜] {n : WithTop ℕ∞} {H : Type*} [TopologicalSpace H] {E : Type*}\\n  [NormedAddCommGroup E] [NormedSpace 𝕜 E] {I : ModelWithCorners 𝕜 E H} {G : Type*} [TopologicalSpace G]\\n  [ChartedSpace H G] [Group G] [LieGroup I n G] {E' : Type*} [NormedAddCommGroup E'] [NormedS\", \"doc\": \"Given two Lie groups $G$ and $G'$ modeled on $H$ and $H'$ with models with corners $I$ and $I'$ over a nontrivially normed field $\\\\mathbb{K}$, their product $G \\\\times G'$ is equipped with a canonical \"}",
+   "date": "2026-10-23",
+   "verdict": "no match: abstract solvable-group products and Lie groups do not construct the scheme-theoretic product or prove its geometric dimension growth"
+  },
+  {
+   "tool": "grep",
+   "query": "unipotent|reductive|torus|centralizer|solvable|groupScheme|GroupScheme",
+   "results": "[grep] OK 0 hit(s)",
+   "date": "2026-10-23",
+   "verdict": "no match: abstract solvable-group products and Lie groups do not construct the scheme-theoretic product or prove its geometric dimension growth"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Products of smooth connected normal solvable subgroup schemes are smooth connected solvable and proper smooth connected subgroups have smaller dimension",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"solvable_prod\", \"module\": \"Mathlib/GroupTheory/Solvable\", \"type\": \"∀ {G : Type u_1} [inst : Group G] {G' : Type u_3} [inst_1 : Group G'] [IsSolvable G] [IsSolvable G'],\\n  IsSolvable (G × G')\", \"doc\": \"Given two solvable groups $G$ and $G'$, their direct product $G \\\\times G'$ is also a solvable group. This follows from the component-wise group structure on $G \\\\times G'$ and the solvability of the in\"}\n  {\"name\": \"IsSolvable\", \"module\": \"Mathlib/GroupTheory/Solvable\", \"type\": \"(G : Type u_1) → [Group G] → Prop\", \"doc\": \"A group $ G $ is solvable.\"}\n  {\"name\": \"IsSolvable.commutator_lt_of_ne_bot\", \"module\": \"Mathlib/GroupTheory/Solvable\", \"type\": \"∀ {G : Type u_1} [inst : Group G] [IsSolvable G] {H : Subgroup G}, H ≠ ⊥ → ⁅H, H⁆ < H\", \"doc\": \"In a solvable group $ G $, if $ H $ is a non-trivial subgroup, then the commutator subgroup $[H, H]$ is properly contained in $ H $.\"}\n  {\"name\": \"IsSolvable.commutator_lt_top_of_nontrivial\", \"module\": \"Mathlib/GroupTheory/Solvable\", \"type\": \"∀ (G : Type u_1) [inst : Group G] [hG : IsSolvable G] [Nontrivial G], commutator G < ⊤\", \"doc\": \"For any nontrivial solvable group $G$, the commutator subgroup $[G, G]$ is a proper subgroup of $G$, i.e., $[G, G] \\\\subsetneq G$.\"}\n  {\"name\": \"IsSolvable.solvable\", \"module\": \"Mathlib/GroupTheory/Solvable\", \"type\": \"∀ {G : Type u_1} {inst : Group G} [self : IsSolvable G], ∃ n, derivedSeries G n = ⊥\", \"doc\": \"For any solvable group $ G $, there exists a natural number $ n $ such that the $ n $-th term of the derived series of $ G $ equals the trivial subgroup $\\\\{e\\\\}$, i.e., $\\\\mathrm{derivedSeries}(G, n) = \"}\n  {\"name\": \"LieAlgebra.derivedSeries_lt_top_of_solvable\", \"module\": \"Mathlib/Algebra/Lie/Solvable\", \"type\": \"∀ (R : Type u) (L : Type v) [inst : CommRing R] [inst_1 : LieRing L] [inst_2 : LieAlgebra R L] [LieAlgebra.IsSolvable L]\\n  [Nontrivial L], LieAlgebra.derivedSeries R L 1 < ⊤\", \"doc\": \"For any nontrivial solvable Lie algebra $\\\\mathfrak{g}$ over a commutative ring $R$, the first term $\\\\mathfrak{g}^{(1)} = [\\\\mathfrak{g}, \\\\mathfrak{g}]$ in its derived series is a proper Lie subalgebra \"}\n  {\"name\": \"isSolvable_iff_commutator_lt\", \"module\": \"Mathlib/GroupTheory/Solvable\", \"type\": \"∀ {G : Type u_1} [inst : Group G] [WellFoundedLT (Subgroup G)], IsSolvable G ↔ ∀ (H : Subgroup G), H ≠ ⊥ → ⁅H, H⁆ < H\", \"doc\": \"For a group $ G $, if the subgroup lattice of $ G $ is well-founded under inclusion, then $ G $ is solvable if and only if for every non-trivial subgroup $ H $ of $ G $, the commutator subgroup $ [H, \"}\n  {\"name\": \"LieAlgebra.IsSolvable.solvable_int\", \"module\": \"Mathlib/Algebra/Lie/Solvable\", \"type\": \"∀ {L : Type v} {inst : LieRing L} [self : LieAlgebra.IsSolvable L], ∃ k, LieAlgebra.derivedSeries ℤ L k = ⊥\", \"doc\": \"Every solvable Lie algebra $\\\\mathfrak{g}$ over the integers $\\\\mathbb{Z}$ has a derived series $\\\\mathfrak{g}^{(k)}$ that terminates at the zero submodule $\\\\{0\\\\}$ after finitely many steps, i.e., there \"}",
+   "date": "2026-10-23",
+   "verdict": "no match: abstract solvable groups, closed topological subgroups and vector-space dimension do not state this group-scheme conjunction"
+  },
+  {
+   "tool": "grep",
+   "query": "solvable|GroupScheme|groupScheme",
+   "results": "[grep] OK 0 hit(s)",
+   "date": "2026-10-23",
+   "verdict": "no match: abstract solvable groups, closed topological subgroups and vector-space dimension do not state this group-scheme conjunction"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A proper closed subgroup of a smooth connected algebraic group has strictly smaller dimension",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"Submodule.finrank_lt_finrank_of_lt\", \"module\": \"Mathlib.LinearAlgebra.FiniteDimensional.Lemmas\", \"type\": \"{s t : Submodule K V} [FiniteDimensional K t] (hst : s < t) : finrank K s < finrank K t\", \"doc\": \"Let $ K $ be a division ring and $ V $ a vector space over $ K $. For submodules $ s $ and $ t $ of $ V $, if $ t $ is finite-dimensional and $ s $ is a proper submodule of $ t $ (i.e., $ s < t $), th\"}\n  {\"name\": \"ClosedSubgroup.ctorIdx\", \"module\": \"Mathlib.Topology.Algebra.Group.ClosedSubgroup\", \"type\": \"{G : Type u} → {inst : Group G} → {inst_1 : TopologicalSpace G} → ClosedSubgroup G → ℕ\", \"doc\": \"A closed subgroup of a topological group $G$ is a subgroup $H$ of $G$ that is closed in the topology of $G$.\"}\n  {\"name\": \"Submodule.finrank_lt\", \"module\": \"Mathlib.LinearAlgebra.FiniteDimensional.Lemmas\", \"type\": \"[FiniteDimensional K V] {s : Submodule K V} (h : s ≠ ⊤) : finrank K s < finrank K V\", \"doc\": \"For a finite-dimensional vector space $ V $ over a division ring $ K $, if $ s $ is a proper submodule of $ V $ (i.e., $ s \\neq V $), then the finite rank (dimension) of $ s $ is strictly less than the\"}\n  {\"name\": \"ClosedSubgroup.recOn\", \"module\": \"Mathlib.Topology.Algebra.Group.ClosedSubgroup\", \"type\": \"{G : Type u} →\\n  [inst : Group G] →\\n    [inst_1 : TopologicalSpace G] →\\n      {motive : ClosedSubgroup G → Sort u_1} →\\n        (t : ClosedSubgroup G) →\\n          ((toSubgroup : Subgroup G) →\\n              (isClosed' : IsClosed toSubgroup.carrier) → motive { toSubgroup := toSubgroup, isClosed' := isC\", \"doc\": \"A closed subgroup of a topological group $ G $ is a subgroup $ H $ of $ G $ that is closed in the topology of $ G $, meaning its underlying subset of $ G $ is a closed set in the topological space str\"}\n  {\"name\": \"ClosedSubgroup.mk.injEq\", \"module\": \"Mathlib.Topology.Algebra.Group.ClosedSubgroup\", \"type\": \"∀ {G : Type u} [inst : Group G] [inst_1 : TopologicalSpace G] (toSubgroup : Subgroup G)\\n  (isClosed' : IsClosed toSubgroup.carrier) (toSubgroup_1 : Subgroup G) (isClosed'_1 : IsClosed toSubgroup_1.carrier),\\n  ({ toSubgroup := toSubgroup, isClosed' := isClosed' } = { toSubgroup := toSubgroup_1, isClo\", \"doc\": \"For any topological group $ G $, two closed subgroups are equal if and only if their underlying subgroups are equal.\"}\n  {\"name\": \"ClosedSubgroup.isClosed'\", \"module\": \"Mathlib.Topology.Algebra.Group.ClosedSubgroup\", \"type\": \"∀ {G : Type u} [inst : Group G] [inst_1 : TopologicalSpace G] (self : ClosedSubgroup G), IsClosed (↑self).carrier\", \"doc\": \"For any topological group $ G $, the underlying set of a closed subgroup $ H $ of $ G $ is closed in the topology of $ G $.\"}\n  {\"name\": \"ClosedSubgroup\", \"module\": \"Mathlib.Topology.Algebra.Group.ClosedSubgroup\", \"type\": \"(G : Type u) → [Group G] → [TopologicalSpace G] → Type u\", \"doc\": \"A closed subgroup of a topological group $G$ is a subgroup $H$ of $G$ that is closed in the topology of $G$.\"}\n  {\"name\": \"ClosedSubgroup.ext\", \"module\": \"Mathlib.Topology.Algebra.Group.ClosedSubgroup\", \"type\": \"∀ {G : Type u} {inst : Group G} {inst_1 : TopologicalSpace G} {x y : ClosedSubgroup G},\\n  (↑x).carrier = (↑y).carrier → x = y\", \"doc\": \"For any topological group $G$, if two closed subgroups $x$ and $y$ have equal underlying sets (i.e., $(\\\\uparrow x).\\\\text{carrier} = (\\\\uparrow y).\\\\text{carrier}$), then the closed subgroups themselves \"}",
+   "date": "2026-10-23",
+   "verdict": "no match: abstract solvable groups, closed topological subgroups and vector-space dimension do not state this group-scheme conjunction"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsSolvable\", \"Subgroup\"",
+   "results": "[loogle] OK 8 hit(s)\n  {\"name\": \"AddGroup.instIsSolvableQuotientAddSubgroup\", \"module\": \"Mathlib.GroupTheory.Solvable\", \"type\": \" {G : Type u_1} [AddGroup G] (H : AddSubgroup G) [H.Normal] [AddGroup.IsSolvable G] : AddGroup.IsSolvable (G ⧸ H)\", \"doc\": \"\"}\n  {\"name\": \"Group.instIsSolvableQuotientSubgroup\", \"module\": \"Mathlib.GroupTheory.Solvable\", \"type\": \" {G : Type u_1} [Group G] (H : Subgroup G) [H.Normal] [Group.IsSolvable G] : Group.IsSolvable (G ⧸ H)\", \"doc\": \"\"}\n  {\"name\": \"AddGroup.instIsSolvableSubtypeMemAddSubgroup\", \"module\": \"Mathlib.GroupTheory.Solvable\", \"type\": \" {G : Type u_1} [AddGroup G] (H : AddSubgroup G) [AddGroup.IsSolvable G] : AddGroup.IsSolvable ↥H\", \"doc\": \"\"}\n  {\"name\": \"Group.instIsSolvableSubtypeMemSubgroup\", \"module\": \"Mathlib.GroupTheory.Solvable\", \"type\": \" {G : Type u_1} [Group G] (H : Subgroup G) [Group.IsSolvable G] : Group.IsSolvable ↥H\", \"doc\": \"\"}\n  {\"name\": \"AddGroup.isSolvable_of_addSubgroup_quotient\", \"module\": \"Mathlib.GroupTheory.Solvable\", \"type\": \" {G : Type u_1} [AddGroup G] (H : AddSubgroup G) [H.Normal] [AddGroup.IsSolvable ↥H] [AddGroup.IsSolvable (G ⧸ H)] : AddGroup.IsSolvable G\", \"doc\": \"\"}\n  {\"name\": \"Group.isSolvable_of_subgroup_quotient\", \"module\": \"Mathlib.GroupTheory.Solvable\", \"type\": \" {G : Type u_1} [Group G] (H : Subgroup G) [H.Normal] [Group.IsSolvable ↥H] [Group.IsSolvable (G ⧸ H)] : Group.IsSolvable G\", \"doc\": \"\"}\n  {\"name\": \"AddGroup.isSolvable_iff_addSubgroup_quotient\", \"module\": \"Mathlib.GroupTheory.Solvable\", \"type\": \" {G : Type u_1} [AddGroup G] (H : AddSubgroup G) [H.Normal] : AddGroup.IsSolvable G ↔ AddGroup.IsSolvable ↥H ∧ AddGroup.IsSolvable (G ⧸ H)\", \"doc\": \"\"}\n  {\"name\": \"Group.isSolvable_iff_subgroup_quotient\", \"module\": \"Mathlib.GroupTheory.Solvable\", \"type\": \" {G : Type u_1} [Group G] (H : Subgroup G) [H.Normal] : Group.IsSolvable G ↔ Group.IsSolvable ↥H ∧ Group.IsSolvable (G ⧸ H)\", \"doc\": \"\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: abstract solvable groups, closed topological subgroups and vector-space dimension do not state this group-scheme conjunction"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-reductive-radical-quotient",
+  "date": "2026-10-23",
+  "group": "Q02"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Reductive group-scheme structure of PGL. Supporting input: Corollary 17.62(b)--(d), printed pp.372--373; Sections 6.44--6.46, printed p.135, and Chapter 19(a)--(b), printed pp.397--400. The quotient is by the smooth central torus, with the usual algebraic-group quotient of Theorem 5.28 and Propositions 5.24--5.27. Supporting lemma: Products and dimension growth of smooth connected solvable normal subgroups.",
+   "via": [
+    "lem-sfb-reductive-radical-quotient",
+    "lem-sfb-pgl-reductive-structure",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-solvable-normal-subgroup-products",
+  "worker": "stage1",
+  "summary": "Statement unchanged. Constructed HN as the preimage of the closed image of H in G/N; checked its single-algebra fppf local-points description and normality, quotient and extension geometry, solvable series, arbitrary field extension and strict dimension growth. Reused all prerequisites, including the existing general homomorphism-factorization node; no new nodes.",
+  "blueprint": "Retains the inherited null ancestor and full via chain (blueprint_refs.py ancestor prints None). Serves the recorded radical existence input in the alteration/moduli support route for det-thm-sf-ctf-stability-direct-images (3). Read the current latest unit and direct-images proof; no unit or chapter route is replaced.",
+  "tool_uses": [
+   {
+    "node": "lem-sbc-connected-rational-point-geometrically-connected",
+    "why": "Generic scheme geometry used for connectedness, smooth base change, reduced components or finite dimension; this algebraic-group support item has no unit-local replacement."
+   },
+   {
+    "node": "lem-pc-proper-base-change",
+    "why": "Generic scheme geometry used for connectedness, smooth base change, reduced components or finite dimension; this algebraic-group support item has no unit-local replacement."
+   },
+   {
+    "node": "lem-wf-smooth-components-disjoint",
+    "why": "Generic scheme geometry used for connectedness, smooth base change, reduced components or finite dimension; this algebraic-group support item has no unit-local replacement."
+   },
+   {
+    "node": "sbc-lem-smooth-geometrically-reduced",
+    "why": "Generic scheme geometry used for connectedness, smooth base change, reduced components or finite dimension; this algebraic-group support item has no unit-local replacement."
+   },
+   {
+    "node": "lem-wf-affine-dimension-drop",
+    "why": "Generic scheme geometry used for connectedness, smooth base change, reduced components or finite dimension; this algebraic-group support item has no unit-local replacement."
+   },
+   {
+    "node": "lem-kun-dimension-finite-type",
+    "why": "Generic scheme geometry used for connectedness, smooth base change, reduced components or finite dimension; this algebraic-group support item has no unit-local replacement."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sbc-connected-rational-point-geometrically-connected",
+  "lem-pc-proper-base-change",
+  "lem-wf-smooth-components-disjoint",
+  "sbc-lem-smooth-geometrically-reduced",
+  "lem-wf-affine-dimension-drop",
+  "lem-kun-dimension-finite-type"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q06-beaccf1a2",
+  "group": "Q06",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q06-beaccf1a2 (reviewer sub-agent of L); spot-checked: Read in full. The item is unchanged, and the delivery has no new nodes and no fixes; proof_deps equals the union of the step uses (9 nodes). There is no re-split repair note and no SGA citation. I checked the route against Milne iAG2017 in the literature PDF: Thm 5.52, Prop 5.54, Prop 6.27, Lemma 6.41 and Prop 6.42. The steps write out 6.41 and 6.27 over an arbitrary field. Step 1: HN=q^{-1}(I), where I is the closed image of H in G/N given by the factorization node; affine implies separated, and the kernel is H x_G N. Step 2: B = H x_I Spec A is faithfully flat and finitely presented over A; the iff holds for every faithfully flat B, and normality follows by conjugating h and n separately. Step 3: 04KV plus the quotient node's smooth/geometrically connected clause and its inverse-image clause; K=H∩N is not assumed smooth. Step 4: the image series is checked with common faithfully flat lifts and the kernel clause. Step 5: correspondence clause plus N's series. Step 6: base change of connectedness (04KV), smoothness (proper-base-change clause 2) and solvable series (quotient node's field-extension clause). Step 7: smooth gives regular local rings, so L is irreducible, and L is reduced, so a proper J has a proper underlying closed set; then affine dimension drop. Step 8: dimension is finite and nonnegative, and chains in a closed S are chains in G. Edge cases checked: trivial H or N, H=N, series of length 0, G_a^2 with kernel α_p, and α_p ⊇ 1 for why reducedness is needed. These match what the citer lem-sfb-reductive-radical-quotient uses. No duplicate in the DAG. The six generic-geometry tool_uses are accepted. One advisory: step 7 does not write out the one-line identification of prime-chain dimension with topological Krull dimension."
+ }
+}

@@ -1,0 +1,351 @@
+{
+ "id": "lem-trf-automorphism-tensor-reduction-comparison",
+ "kind": "statement",
+ "title": "Automorphism tensor comparison on arbitrary quotient-semilinear systems",
+ "statement": "Fix a prime $\\ell$, a finite extension $E/\\mathbf Q_\\ell$, its valuation ring $R$, a uniformizer $\\varpi$, and $A_n=R/\\varpi^n$ for $n\\ge1$ [def-weil-l-adic-coefficient-extension]. Let $S$ be a scheme on which $\\ell$ is invertible and $g:S\\to S$ an automorphism [def-weil-scheme-morphism-properties]. On its small pro-etale site [def-weil-pbc-proetale-site] put $B_n=(A_n)_S$, $\\rho_n:B_{n+1}\\to B_n$, and $\\widehat R_S=\\lim_n B_n$, with projections $\\pi_n$ [def-weil-completed-integral-coefficients]. Write $F=g^{-1}$ and $c_n:FB_n\\xrightarrow{\\sim}B_n$, $c_{\\widehat R}:F\\widehat R_S\\xrightarrow{\\sim}\\widehat R_S$ for the canonical coefficient isomorphisms [lem-weil-proetale-isomorphism-inverse-image, def-weil-inverse-image-pullback-comparison]. On $FM$ transport the $B_n$ action by $c_n^{-1}$. Let $\\mathscr S_S$ be the abelian category of strict $B_n$-module systems, whose maps $v_n:M_{n+1}\\to\\operatorname{Res}_{\\rho_n}M_n$ are quotient-linear and whose kernels and cokernels are componentwise [lem-coef-semilinear-derived-sections]. Use ordinary unbounded complexes [def-weil-abstract-derived-category] and sheafified tensor products [def-pur-sheaf-tensor-product].\n\nFor every such system complex $M$, the termwise comparison\n$$j_{n,M}:FM_n\\longrightarrow T_nM_n:=FM_n\\otimes_{FB_n}B_n,\\qquad x\\longmapsto x\\otimes1$$\nis an isomorphism of complexes of $B_n$-module sheaves, natural in $M_n$, with inverse on local tensor generators $x\\otimes a\\mapsto c_n^{-1}(a)x$. The maps on local generators\n$$\\tau_n:T_{n+1}M_{n+1}\\longrightarrow\\operatorname{Res}_{\\rho_n}T_nM_n,\\qquad x\\otimes a\\longmapsto F(v_n)(x)\\otimes\\rho_n(a)$$\ndefine quotient-linear transitions and satisfy\n$$\\tau_nj_{n+1,M}=j_{n,M}F(v_n),\\qquad x\\otimes1\\longmapsto F(v_n)(x)\\otimes\\rho_n(1)=F(v_n)(x)\\otimes1.$$\nThese isomorphisms and transitions commute with differentials and all system chain maps. They remain linear after restriction through the completed coefficient projections, with the actual squares\n$$\\rho_nc_{n+1}=c_nF(\\rho_n),\\qquad \\pi_nc_{\\widehat R}=c_nF(\\pi_n).$$\nThus $j$ is a natural isomorphism between the levelwise inverse-image and tensor-pullback functors on strict system complexes. The underlying module-system functor $G:M\\mapsto(FM_n,Fv_n)_n$ is exact. No flatness, cartesianness, boundedness or finite Tor-amplitude condition on $M$ is required.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-d-weil/prop-trf-rational-frobenius-integral-model.proof.md",
+  "place": "Clause (3), point-factor prerequisite: extracted old steps 2-3 (balanced tensor inverse and actual quotient transition squares) and inverse-image exactness in old step 5; agent formulation from the inverse-image recipe, using the canonical inverse-image construction."
+ },
+ "stmt_deps": [
+  "def-weil-l-adic-coefficient-extension",
+  "def-weil-scheme-morphism-properties",
+  "def-weil-pbc-proetale-site",
+  "def-weil-completed-integral-coefficients",
+  "lem-weil-proetale-isomorphism-inverse-image",
+  "def-weil-inverse-image-pullback-comparison",
+  "lem-coef-semilinear-derived-sections",
+  "def-weil-abstract-derived-category",
+  "def-pur-sheaf-tensor-product"
+ ],
+ "proof": [
+  {
+   "text": "Construction laws in Lean: continuity of the product site transport follows by restricting to every vertical slice and applying pro-etale postcomposition continuity. The coefficient morphism is an isomorphism because its components become the recorded invertible finite coefficient maps after forgetting commutativity; both forgetting functors reflect isomorphisms. The scalar-extension identity and composition laws specialize the existing scalarExtension_map_id and scalarExtension_map_comp. Inverse-image additivity is sectionwise. Tensor additivity follows sectionwise from the extension/restriction adjunction and then from additivity of module sheafification. These construction laws do not replace any of the seven comparison steps below. Raw continuous module transport uses PresheafOfModules.pushforward₀ directly, with continuity supplying its sheaf condition. Its exactness is proved with abstract ring sheaves before specializing to the coefficient system, keeping concrete coefficient constructions folded.",
+   "uses": [
+    "def-coef-ringed-sequence-site",
+    "lem-weil-proetale-isomorphism-inverse-image",
+    "lem-sp-scalar-extension-binary-coherence",
+    "lem-trf-automorphism-coefficient-component-vertical",
+    "lem-trf-automorphism-coefficient-component-horizontal"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tags 03EK, 03CY; vertical slice construction, Tag 0941; pro-etale postcomposition, Tag 09A5. Agent-written specialization to the recorded sequence site."
+   }
+  },
+  {
+   "text": "By [lem-weil-proetale-isomorphism-inverse-image] (3), the maps $c_n:FB_n\\to B_n$ are ring-sheaf isomorphisms. Apply its ring-homomorphism naturality to $A_{n+1}\\to A_n$ to get $\\rho_nc_{n+1}=c_nF(\\rho_n)$. The completed structure isomorphism of [def-weil-inverse-image-pullback-comparison] is defined by its components, so $\\pi_nc_{\\widehat R}=c_nF(\\pi_n)$. This gives the actual two coefficient squares in the statement, not merely abstract identifications of coefficient objects. The limit projections of [def-weil-completed-integral-coefficients] also satisfy $\\pi_n=\\rho_n\\pi_{n+1}$ by the defining cone equation. Inverting the $c$'s in these squares gives $F(\\rho_n)c_{n+1}^{-1}=c_n^{-1}\\rho_n$ and $F(\\pi_n)c_{\\widehat R}^{-1}=c_n^{-1}\\pi_n$. Lean implementation: apply the coefficient-component naturality theorem to the adjacent horizontal arrow and identify the sequence-ring restriction with the actual quotient transition. The completed square is limit.lift_π for the recorded inverseImageCompletedCoefficientMap.",
+   "uses": [
+    "lem-weil-proetale-isomorphism-inverse-image",
+    "def-weil-inverse-image-pullback-comparison",
+    "def-weil-completed-integral-coefficients"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03CZ (sites-modules-lemma-adjointness-tensor-restrict), preceding change-of-rings construction; Tag 03EK (sites-modules-section-tensor-product). Agent-written specialization and quotient-system compatibility calculations; pro-etale background: proetale.tex, Tag 09A5 (proetale-section-morphism)."
+   }
+  },
+  {
+   "text": "Fix a degree $q$ and level $n$. The inverse-image construction [def-weil-proetale-inverse-image] gives $FM_n^q$ its $FB_n$-module structure. Apply [lem-weil-sheaf-scalar-extension-ring-iso] with ring sheaves $R'=FB_n$, $S'=B_n$, $c=c_n$, and module $FM_n^q$. Its target is exactly the transported action in the item, and its inverse is $j_n^q:x\\mapsto x\\otimes1$. Its forward map $\\theta_n^q=(j_n^q)^{-1}$ sends a local tensor $x\\otimes a$ to $c_n^{-1}(a)x$. Here a local tensor denotes its image under the presheaf-to-sheafification unit, exactly as in that lemma. Naturality of that lemma applied to $F(d^q)$ gives $(F(d^q)\\otimes1)j_n^q=j_n^{q+1}F(d^q)$. Thus the $j_n^q$ and their inverses are chain maps and give the required natural isomorphism $j_{n,M}:FM_n\\cong T_nM_n$. Lean implementation: apply exists_scalarExtensionRingIso directly on the vertical sequence site to the system coefficient isomorphism and the raw module system. This assembles every finite-level comparison at once. Its target is raw site transport followed by scalar restriction through the inverse coefficient map. The inverse coefficient component is identified with c_n inverse by uniqueness of inverses.",
+   "uses": [
+    "def-weil-proetale-inverse-image",
+    "lem-weil-sheaf-scalar-extension-ring-iso"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03CZ (sites-modules-lemma-adjointness-tensor-restrict), preceding change-of-rings construction; Tag 03EK (sites-modules-section-tensor-product). Agent-written specialization and quotient-system compatibility calculations; pro-etale background: proetale.tex, Tag 09A5 (proetale-section-morphism)."
+   }
+  },
+  {
+   "text": "Write $w_n=F(v_n)$. Applying inverse image to the action equation for the quotient-linear map $v_n$ [def-weil-proetale-inverse-image] gives $w_n(rx)=F(\\rho_n)(r)w_n(x)$ for local $r\\in FB_{n+1}$. For $a\\in B_{n+1}$, the first inverted coefficient square of Step 1 therefore gives\n$$w_n(c_{n+1}^{-1}(a)x)=F(\\rho_n)(c_{n+1}^{-1}(a))w_n(x)=c_n^{-1}(\\rho_n(a))w_n(x).$$\nThis is precisely $B_{n+1}$-linearity into the restriction along $\\rho_n$ of the transported $B_n$-module [def-pc-sheaf-restrict-scalars]. Hence the unchanged underlying maps $w_n$ define strict quotient-linear system transitions. Identities, composites and the system-morphism equations are preserved by the functor $F$, so this constructs the functor $G$ on module systems.",
+   "uses": [
+    "def-weil-proetale-inverse-image",
+    "def-pc-sheaf-restrict-scalars"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03CZ (sites-modules-lemma-adjointness-tensor-restrict), preceding change-of-rings construction; Tag 03EK (sites-modules-section-tensor-product). Agent-written specialization and quotient-system compatibility calculations; pro-etale background: proetale.tex, Tag 09A5 (proetale-section-morphism)."
+   }
+  },
+  {
+   "text": "Define the sheaf map $\\tau_n=j_{n,M}\\,w_n\\,\\theta_{n+1}$, restricting the target scalars along $\\rho_n$. It is quotient-linear by Step 3 and the $B_n$-linear isomorphisms of Step 2. The normalized inverse formula of [lem-weil-sheaf-scalar-extension-ring-iso] gives, on every local tensor,\n$$\\tau_n(x\\otimes a)=j_nw_n(c_{n+1}^{-1}(a)x)=j_n(c_n^{-1}(\\rho_n(a))w_n(x))=w_n(x)\\otimes\\rho_n(a).$$\nThus it has exactly the proposed formula and is a globally defined sheaf morphism; its definition needs no assumption that a section of a sheafified tensor is globally pure. In particular $\\tau_nj_{n+1}=j_nw_n$, since $\\theta_{n+1}j_{n+1}=1$, and on $x$ this reads $w_n(x)\\otimes\\rho_n(1)=w_n(x)\\otimes1$. In the sequence-site implementation the tensor object already has restriction maps. scalarExtensionSection_naturality proves their displayed local-generator formula, and naturality of the comparison sheaf morphism proves the tensor-unit transition square. Hence these restrictions agree with the conjugated transition just described.",
+   "uses": [
+    "lem-weil-sheaf-scalar-extension-ring-iso"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03CZ (sites-modules-lemma-adjointness-tensor-restrict), preceding change-of-rings construction; Tag 03EK (sites-modules-section-tensor-product). Agent-written specialization and quotient-system compatibility calculations; pro-etale background: proetale.tex, Tag 09A5 (proetale-section-morphism)."
+   }
+  },
+  {
+   "text": "The maps $w_n$ commute with differentials because $v_n$ are transitions of a system complex. The $j_n$ and $\\theta_n$ are chain maps by Step 2, so their composite defining $\\tau_n$ is a chain map. For a system chain map $h:M\\to N$, put $h'_n=F(h_n)$ and $h^T_n=F(h_n)\\otimes1$. Naturality in Step 2 gives $h^T_nj_{n,M}=j_{n,N}h'_n$ and $\\theta_{n,N}h^T_n=h'_n\\theta_{n,M}$. Consequently\n$$h^T_n\\tau_{n,M}=j_{n,N}h'_nw_{n,M}\\theta_{n+1,M}=j_{n,N}w_{n,N}h'_{n+1}\\theta_{n+1,M}=\\tau_{n,N}h^T_{n+1}.$$\nThe middle equality is the image under $F$ of the system-morphism equation for $h$. These equalities prove that $j$ is a natural isomorphism on strict system complexes, in the ordinary sense of chain maps of [def-weil-abstract-derived-category]. Transitions over several levels are composites of the adjacent ones; cancellation of $\\theta_kj_k$ proves the same compatibility for them. Lean implementation: NatIso.ofComponents assembles the natural scalar-extension comparisons on module systems; NatIso.mapHomologicalComplex then gives the natural isomorphism on ordinary unbounded cochain complexes.",
+   "uses": [
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03CZ (sites-modules-lemma-adjointness-tensor-restrict), preceding change-of-rings construction; Tag 03EK (sites-modules-section-tensor-product). Agent-written specialization and quotient-system compatibility calculations; pro-etale background: proetale.tex, Tag 09A5 (proetale-section-morphism)."
+   }
+  },
+  {
+   "text": "The completed coefficient square of [def-weil-inverse-image-pullback-comparison], inverted as in Step 1, says $F(\\pi_n)(c_{\\widehat R}^{-1}(b))=c_n^{-1}(\\pi_n(b))$ for each local completed scalar $b$. Hence the action on $FM_n$ obtained by first restricting $M_n$ along $\\pi_n$, applying $F$, and transporting along $c_{\\widehat R}$ is exactly its transported $B_n$-action restricted along $\\pi_n$: both act by $c_n^{-1}(\\pi_n(b))$. Thus $j_n$ and $\\theta_n$, already $B_n$-linear, are linear for these actual completed actions [def-pc-sheaf-restrict-scalars]. Moreover, the cone equation $\\rho_n\\pi_{n+1}=\\pi_n$ of [def-weil-completed-integral-coefficients] and quotient-linearity give $\\tau_n(\\pi_{n+1}(b)z)=\\pi_n(b)\\tau_n(z)$; the identical calculation with $w_n$ proves its completed linearity. All squares established above therefore remain squares of completed-module maps, with the specified coefficient projections. Lean implementation: apply map_smul to the comparison at (n,U) with the scalar π_n(b), and identify its transported action with c_n inverse(π_n(b)). The completed coefficient square is proved independently as in Step 1.",
+   "uses": [
+    "def-weil-inverse-image-pullback-comparison",
+    "def-pc-sheaf-restrict-scalars",
+    "def-weil-completed-integral-coefficients"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03CZ (sites-modules-lemma-adjointness-tensor-restrict), preceding change-of-rings construction; Tag 03EK (sites-modules-section-tensor-product). Agent-written specialization and quotient-system compatibility calculations; pro-etale background: proetale.tex, Tag 09A5 (proetale-section-morphism)."
+   }
+  },
+  {
+   "text": "The strict system category is the recorded category of module sheaves on the vertical sequence site [def-coef-ringed-sequence-site]. Form the product of the identity equivalence on the natural-number index category with the pro-etale site equivalence [lem-weil-proetale-isomorphism-inverse-image]. Continuous pushforward and its inverse give an equivalence H on abelian sheaves on this sequence site. Forgetting the transported coefficient action of the inverse-system functor G gives H: at each (n,U), both underlying groups and underlying maps are those of M at (n,gU). The identity maps on these groups give the comparison after forgetting coefficients. The forgetful functor from module sheaves to abelian sheaves preserves finite limits and colimits and reflects them [def-weil-sheaf-of-modules-category]. Therefore G preserves finite limits and colimits and is exact. This implements inverse-image exactness on the entire sequence site directly, avoiding a separate componentwise kernel/cokernel argument. All constructions are degreewise, with arbitrary module sheaves and arbitrary transitions; no flatness, cartesianness, boundedness or Tor-amplitude hypothesis is used.",
+   "uses": [
+    "def-coef-ringed-sequence-site",
+    "lem-weil-proetale-isomorphism-inverse-image",
+    "def-weil-sheaf-of-modules-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03CZ (sites-modules-lemma-adjointness-tensor-restrict), preceding change-of-rings construction; Tag 03EK (sites-modules-section-tensor-product). Agent-written specialization and quotient-system compatibility calculations; pro-etale background: proetale.tex, Tag 09A5 (proetale-section-morphism)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-coef-ringed-sequence-site",
+  "def-pc-sheaf-restrict-scalars",
+  "def-weil-abstract-derived-category",
+  "def-weil-completed-integral-coefficients",
+  "def-weil-inverse-image-pullback-comparison",
+  "def-weil-proetale-inverse-image",
+  "def-weil-sheaf-of-modules-category",
+  "lem-sp-scalar-extension-binary-coherence",
+  "lem-weil-proetale-isomorphism-inverse-image",
+  "lem-weil-sheaf-scalar-extension-ring-iso",
+  "lem-trf-automorphism-coefficient-component-vertical",
+  "lem-trf-automorphism-coefficient-component-horizontal"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tag 03CZ (sites-modules-lemma-adjointness-tensor-restrict), preceding change-of-rings construction; Tag 03EK (sites-modules-section-tensor-product). Agent-written specialization and quotient-system compatibility calculations; pro-etale background: proetale.tex, Tag 09A5 (proetale-section-morphism).",
+  "note": "N1, 2026-10-25: the preliminary construction-law step records the implemented continuity, invertibility, tensor functoriality and additivity proofs. The seven original comparison steps are preserved. S1, 2026-10-26: automorphismTensorReductionComparison implements the seven comparison steps using scalar extension and the module equivalence on the whole sequence site; coefficient naturality and finite tensor evaluation remain the original named unfinished statements. P3, 2026-10-27: arbitrary-arrow naturality is proved by factoring a sequence-site arrow into the new vertical and horizontal clauses; those clauses remain split."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "pullback.*[Ii]so|[Ii]so.*pullback|restrictScalars.*[Ii]so",
+   "results": "25 hits; Mathlib/CategoryTheory/Sites/PseudofunctorSheafOver.lean, Mathlib/CategoryTheory/Sites/PseudofunctorSheafOver.lean, Mathlib/CategoryTheory/Sites/PseudofunctorSheafOver.lean, Mathlib/CategoryTheory/Sites/PseudofunctorSheafOver.lean, Mathlib/CategoryTheory/Sites/PseudofunctorSheafOver.lean, Mathlib/CategoryTheory/Sites/IsSheafFor.lean, Mathlib/CategoryTheory/Sites/Precoverage.lean, Mathlib/CategoryTheory/Sites/PrecoverageToGrothendieck.lean. The free/unit pullback isomorphisms and abstract pullback/sheafification comparison do not give the specified inverse on arbitrary modules together with the strict quotient and completed-scalar squares.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules.pullback, SheafOfModules.restrictScalars",
+   "results": "0 hits; . The free/unit pullback isomorphisms and abstract pullback/sheafification comparison do not give the specified inverse on arbitrary modules together with the strict quotient and completed-scalar squares.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For an automorphism of a scheme, the sheaf module tensor unit map from inverse image with transported scalars to module pullback is an isomorphism natural in semilinear coefficient reductions",
+   "results": "8 hits; AlgebraicGeometry.Scheme.Pullback.Triplet.tensorCongr_inv, AlgebraicGeometry.Scheme.Pullback.Triplet.tensorCongr_refl, AlgebraicGeometry.Scheme.Pullback.Triplet.tensorCongr_symm, AlgebraicGeometry.Scheme.Modules.pullbackId, SheafOfModules.pullbackObjFreeIso_hom_naturality, SheafOfModules.pullbackObjFreeIso_hom_naturality_assoc, SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom, SheafOfModules.pullbackObjFreeIso. The free/unit pullback isomorphisms and abstract pullback/sheafification comparison do not give the specified inverse on arbitrary modules together with the strict quotient and completed-scalar squares.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "isIso|Iso|tensor.*unit",
+   "results": "25 hits; Mathlib/Algebra/Category/ModuleCat/Sheaf/LocallyFree.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/LocallyFree.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/LocallyFree.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/LocallyFree.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/LocallyFree.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/Colimits.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/Colimits.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/Colimits.lean. The free/unit pullback isomorphisms and abstract pullback/sheafification comparison do not give the specified inverse on arbitrary modules together with the strict quotient and completed-scalar squares.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The sheafified tensor unit comparison for module inverse image along a scheme automorphism is invertible and respects quotient coefficient transitions",
+   "results": "8 hits; SheafOfModules.instIsIsoPullbackObjUnitToUnitOfFinal, AlgebraicGeometry.Scheme.Modules.instIsIsoAbApp, AlgebraicGeometry.Scheme.Hom.inv_app, SheafOfModules.sheafificationCompPullback, SheafOfModules.pullbackObjUnitToUnit, CategoryTheory.GrothendieckTopology.isoSheafify_inv, AlgebraicGeometry.Scheme.Modules.pushforwardId_inv_app_app, PresheafOfModules.sheafifyMap. The free/unit pullback isomorphisms and abstract pullback/sheafification comparison do not give the specified inverse on arbitrary modules together with the strict quotient and completed-scalar squares.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Extension of scalars along an isomorphism of sheaves of rings is naturally isomorphic to transporting the module action, and the tensor generator formula commutes with ring homomorphisms",
+   "results": "8 hits; ModuleCat.extendRestrictScalarsAdj_homEquiv_apply, SheafOfModules.pushforwardCongr, SheafOfModules.freeFunctorCompPullbackIso, SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom, ModuleCat.ExtendRestrictScalarsAdj.HomEquiv.fromExtendScalars_hom_apply, SheafOfModules.pullbackObjFreeIso, SheafOfModules.unitHomEquiv_symm_freeHomEquiv_apply, SheafOfModules.pullbackObjFreeIso_hom_naturality_assoc. The free/unit pullback isomorphisms and abstract pullback/sheafification comparison do not give the specified inverse on arbitrary modules together with the strict quotient and completed-scalar squares.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "def restriction|instIsIsoPullbackObjUnitToUnitOfFinal|def pullbackObjFreeIso",
+   "results": "2 hits; Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackFree.lean, Mathlib/Algebra/Category/ModuleCat/Presheaf.lean. The free/unit pullback isomorphisms and abstract pullback/sheafification comparison do not give the specified inverse on arbitrary modules together with the strict quotient and completed-scalar squares.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "pullback.*[Ii]so|[Ii]so.*pullback|restrictScalars.*[Ii]so",
+   "results": "10 hits; Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackFree.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackFree.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackFree.lean.  Read the returned signatures and relevant PullbackContinuous.lean:106-125, PullbackFree.lean:88-121 and ChangeOfRings.lean definitions. The hits concern carrier tensors, free/unit pullbacks, or scalar restriction, not arbitrary strict quotient systems together with the specified completed coefficient squares.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Inverse image along a scheme isomorphism agrees with tensor extension along the coefficient ring isomorphism on arbitrary strict systems of module sheaves",
+   "results": "8 hits; AlgebraicGeometry.Scheme.Hom.instIsIsoCommRingCatApp, AlgebraicGeometry.Scheme.Hom.inv_image, AlgebraicGeometry.Scheme.Modules.pullbackCongr, AlgebraicGeometry.Scheme.Hom.inv_app, AlgebraicGeometry.Scheme.Modules.inv_app, AlgebraicGeometry.Scheme.inv_appTop, AlgebraicGeometry.Scheme.inv_app, AlgebraicGeometry.Scheme.Hom.inv_appTop.  Read the returned signatures and relevant PullbackContinuous.lean:106-125, PullbackFree.lean:88-121 and ChangeOfRings.lean definitions. The hits concern carrier tensors, free/unit pullbacks, or scalar restriction, not arbitrary strict quotient systems together with the specified completed coefficient squares.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules.pullback, SheafOfModules.restrictScalars",
+   "results": "0 hits; .  Read the returned signatures and relevant PullbackContinuous.lean:106-125, PullbackFree.lean:88-121 and ChangeOfRings.lean definitions. The hits concern carrier tensors, free/unit pullbacks, or scalar restriction, not arbitrary strict quotient systems together with the specified completed coefficient squares.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a scheme automorphism, tensor pullback is naturally isomorphic to inverse image with transported coefficients, compatibly with semilinear quotient transitions and completed coefficient projections",
+   "results": "8 hits; AlgebraicGeometry.Scheme.Pullback.Triplet.tensorCongr_inv, AlgebraicGeometry.Scheme.Pullback.tensorCongr_SpecTensorTo, AlgebraicGeometry.Scheme.Pullback.Triplet.tensorCongr_symm, AlgebraicGeometry.Scheme.Pullback.Triplet.tensorCongr_refl, AlgebraicGeometry.Scheme.Pullback.Triplet.tensorCongr_trans, AlgebraicGeometry.Scheme.Pullback.Triplet.tensorCongr_trans_hom_assoc, AlgebraicGeometry.Scheme.Pullback.Triplet.tensorCongr, AlgebraicGeometry.Scheme.Pullback.tensorCongr_SpecTensorTo_assoc.  Read the returned signatures and relevant PullbackContinuous.lean:106-125, PullbackFree.lean:88-121 and ChangeOfRings.lean definitions. The hits concern carrier tensors, free/unit pullbacks, or scalar restriction, not arbitrary strict quotient systems together with the specified completed coefficient squares.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Extension of scalars along an isomorphism of sheaves of commutative rings equals restriction of scalars along its inverse, naturally on module sheaves and changing coefficient rings",
+   "results": "8 hits; SheafOfModules.pushforwardCongr, SheafOfModules.pullbackObjFreeIso, SheafOfModules.freeFunctorCompPullbackIso, SheafOfModules.restrictScalars, SheafOfModules.pullbackObjFreeIso_hom_naturality, SheafOfModules.restrictScalars_obj_val, SheafOfModules.pullbackObjFreeIso_hom_naturality_assoc, SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom.  Read the returned signatures and relevant PullbackContinuous.lean:106-125, PullbackFree.lean:88-121 and ChangeOfRings.lean definitions. The hits concern carrier tensors, free/unit pullbacks, or scalar restriction, not arbitrary strict quotient systems together with the specified completed coefficient squares.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-point-system-transport-descent",
+  "date": "2026-10-22",
+  "group": "Q131"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-thm-trace-transport",
+ "blueprint": {
+  "from": {
+   "node": "thm-trf-l-function-euler-product",
+   "place": "Step 1, Global powers: the naturality assertion g^*_{gamma,c} RΓ_c(X,f)=RΓ_c(X,Lg^*_gamma f) g^*_{gamma,c}; prerequisite point-factor construction in prop-trf-rational-frobenius-integral-model proof (3), extracted old item steps 1-3. Extraction: Clause (3), point-factor prerequisite: extracted old steps 2-3 (balanced tensor inverse and actual quotient transition squares) and inverse-image exactness in old step 5; agent formulation from the inverse-image recipe, with Stacks proetale.tex Tag 09A5 (proetale-section-morphism) as background for inverse image only.",
+   "via": [
+    "lem-trf-point-system-transport-descent",
+    "lem-trf-integral-point-transport-tower-powers",
+    "lem-trf-integral-compact-transport-recurrence"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-trf-automorphism-tensor-reduction-comparison",
+  "worker": "stage1",
+  "group": "Q84",
+  "summary": "Preserved the full arbitrary-system statement. Reused the existing scalar-extension ring-isomorphism lemma with its normalized tensor inverse; proved both coefficient squares, quotient-linearity, the actual tensor transition formula, chain-map naturality, completed scalar compatibility and componentwise exactness. No new nodes. New item searches supplement and preserve the imported searches.",
+  "blueprint": "Realizes the finite-reduction compatibility prerequisite in prop-trf-rational-frobenius-integral-model.proof.md (2)-(3), serving thm-trf-l-function-euler-product Step 1 Global powers through the recorded point-system ancestry. The construction is an agent-written expansion below the fixed trace-transport unit; no unit or chapter route is replaced.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-proetale-isomorphism-inverse-image",
+    "why": "Generic automorphism inverse-image equivalence and naturality of constant coefficient structure maps; used for the reduction squares and exactness, not to replace a trace-transport unit step."
+   },
+   {
+    "node": "lem-weil-sheaf-scalar-extension-ring-iso",
+    "why": "Generic ring-sheaf isomorphism scalar-extension comparison, with its explicit inverse and naturality; specializes to FB_n to B_n on the pro-etale site."
+   },
+   {
+    "node": "lem-coef-semilinear-derived-sections",
+    "why": "Only the first-paragraph componentwise exactness of the ordinary strict system category is used, a categorical tool for the exactness conclusion; none of its enhanced or derived comparison claims is used."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-proetale-isomorphism-inverse-image",
+  "lem-weil-sheaf-scalar-extension-ring-iso",
+  "lem-coef-semilinear-derived-sections"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q84-9cf141ae0",
+  "group": "Q84",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q84-9cf141ae0 (reviewer sub-agent of L); spot-checked: I read the item, all 7 steps and every cited statement in full; there are no new nodes. The statement and stmt_deps are identical to the Q131 import and to live/side-live, where the item is still unsplit, so nothing was weakened or superseded. There is no repair note and the item is in no dropped list. Source checked: main-20261015 prop-trf-rational-frobenius-integral-model.proof.md (2) l.14-22, (3) l.68 ('exact monoidal equivalence fixing the constant coefficient sheaves ... commutes with the reductions'); proof_origin=agent is correct. No SGA; Stacks 03CZ/03EK/09A5 tag-label pairs confirmed in tags/tags. Step 1: lem-weil-proetale-isomorphism-inverse-image (3) applied to A_{n+1}->A_n gives rho c_{n+1}=c_n F(rho); the completed square is the defining identity of def-weil-inverse-image-pullback-comparison; I checked the inversions. Step 2: lem-weil-sheaf-scalar-extension-ring-iso with R=FB_n, S=B_n, c=c_n; M^(c) is the transported action, its inverse is j, and naturality on F(d) makes j a chain map. Step 3: F of the action square plus the inverted square gives B_{n+1}-linearity into Res_rho; rho is never inverted. Step 4: recomputed tau=j w theta on eta(x⊗a) as eta(w x⊗rho a); no pure-tensor assumption; tau j=j w. Steps 5-6: chain and system naturality checked, and completed linearity via pi_n=rho_n pi_{n+1}. Step 7: exactness from lemma (2), module kernels/cokernels, and componentwise exactness in paragraph 1 of lem-coef-semilinear-derived-sections. Edge cases: g=id, zero transitions, non-flat torsion modules, n=1, unbounded complexes, empty S. Duplicate search with rg -L: the nearest nodes (lem-trf-isomorphism-multiplication-cone-descent, lem-a1-balanced-finite-tower-generator-comparison) are different, larger statements. Accepted tool_uses: the two generic sk-def-sf-admissible lemmas and lem-coef-semilinear-derived-sections (exactness only); none replaces a trace-transport route step. Inherited and not a fault: def-weil-completed-integral-coefficients is phrased under the finite-field datum, as in the existing comparison def."
+ },
+ "lean": {
+  "module": "Sheaf.TraceFormula.AutomorphismTensorReductionComparison",
+  "declaration": "WeilConjectures.trfAutomorphismCoefficientComponent_horizontal",
+  "declarations": [
+   "WeilConjectures.trfAutomorphismSystemSite",
+   "WeilConjectures.trfAutomorphismSystemSite_continuous",
+   "WeilConjectures.trfAutomorphismRawRing",
+   "WeilConjectures.trfAutomorphismCoefficientComponent",
+   "WeilConjectures.trfAutomorphismCoefficientComponent_naturality",
+   "WeilConjectures.trfAutomorphismCoefficientMap",
+   "WeilConjectures.trfAutomorphismCoefficientMap_isIso",
+   "WeilConjectures.trfRawModuleTransport",
+   "WeilConjectures.trfAutomorphismRawModules",
+   "WeilConjectures.trfAutomorphismSystemInverse",
+   "WeilConjectures.trfAutomorphismTensor_laws",
+   "WeilConjectures.trfAutomorphismTensorExtension",
+   "WeilConjectures.trfAutomorphismSystemTensor",
+   "WeilConjectures.trfAutomorphismSystem_additive",
+   "WeilConjectures.trfAutomorphismSystemInverse_additive",
+   "WeilConjectures.trfAutomorphismSystemTensor_additive",
+   "WeilConjectures.trfAutomorphismTensorSection",
+   "WeilConjectures.trfAutomorphismFiniteCoefficientMap",
+   "WeilConjectures.trfAutomorphismFiniteRaw",
+   "WeilConjectures.trfAutomorphismFiniteTensor",
+   "WeilConjectures.trfAutomorphismTensorEvaluation",
+   "WeilConjectures.trfAutomorphismSystemStep",
+   "WeilConjectures.automorphismTensorReductionComparison",
+   "WeilConjectures.trfAutomorphismCoefficientComponent_vertical",
+   "WeilConjectures.trfAutomorphismCoefficientComponent_horizontal"
+  ],
+  "file": "lean/Sheaf/TraceFormula/AutomorphismTensorReductionComparison.lean",
+  "statement": "theorem automorphismTensorReductionComparison (_hS : ∀ x : S, IsUnit (l : S.presheaf.stalk x)) : PreservesFiniteLimits (trfAutomorphismSystemInverse l E g) ∧ PreservesFiniteColimits (trfAutomorphismSystemInverse l E g) ∧ (∀ n : ℕ, inverseImageFiniteCoefficientMap l E g (n + 1) ≫ integralCoefficientSheafTransition l E S n = (isoSectionwiseInverseImage g RingCat.{max u (t + 1)}).map (integralCoefficientSheafTransition l E S n) ≫ inverseImageFiniteCoefficientMap l E g n) ∧ (∀ n : ℕ, inverseImageCompletedCoefficientMap l E g ≫ limit.π (integralCoefficientSheafSystem l E S) (op n) = (isoSectionwiseInverseImage g RingCat.{max u (t + 1)}).map (limit.π (integralCoefficientSheafSystem l E S) (op n)) ≫ inverseImageFiniteCoefficientMap l E g n) ∧ ∃ j : (trfAutomorphismSystemInverse l E g).mapHomologicalComplex (.up ℤ) ≅ (trfAutomorphismSystemTensor l E g).mapHomologicalComplex (.up ℤ), (∀ (M : CochainComplex (coefficientSequenceModules l E S) ℤ) (q : ℤ) (n : ℕ) (U : S.ProEt) (x : (M.X q).val.obj (op (n, (proEtaleIsoPostcompose g).obj U))), ((j.hom.app M).f q).val.app (op (n, U)) x = trfAutomorphismTensorSection l E g (M.X q) n U x 1) ∧ (∀ (M : CochainComplex (coefficientSequenceModules l E S) ℤ) (q : ℤ) (n : ℕ) (U : S.ProEt) (x : (M.X q).val.obj (op (n, (proEtaleIsoPostcompose g).obj U))) (a : (integralCoefficientSheaf l E S n).obj.obj (op U)), ((j.inv.app M).f q).val.app (op (n, U)) (trfAutomorphismTensorSection l E g (M.X q) n U x a) = (inv (inverseImageFiniteCoefficientMap l E g n)).hom.app (op U) a • x) ∧ (∀ (M : CochainComplex (coefficientSequenceModules l E S) ℤ) (q : ℤ) (n : ℕ) (U : S.ProEt) (x : (M.X q).val.obj (op (n + 1, (proEtaleIsoPostcompose g).obj U))) (a : (integralCoefficientSheaf l E S (n + 1)).obj.obj (op U)), (((trfAutomorphismSystemTensor l E g).obj (M.X q)).val.presheaf.map (trfAutomorphismSystemStep n U)) (trfAutomorphismTensorSection l E g (M.X q) (n + 1) U x a) = trfAutomorphismTensorSection l E g (M.X q) n U ((M.X q).val.presheaf.map (trfAutomorphismSystemStep n ((proEtaleIsoPostcompose g).obj U)) x) ((integralCoefficientSheafTransition l E S n).hom.app (op U) a)) ∧ (∀ (M : CochainComplex (coefficientSequenceModules l E S) ℤ) (q : ℤ) (n : ℕ) (U : S.ProEt) (x : (M.X q).val.obj (op (n + 1, (proEtaleIsoPostcompose g).obj U))), (((trfAutomorphismSystemTensor l E g).obj (M.X q)).val.presheaf.map (trfAutomorphismSystemStep n U)) (((j.hom.app M).f q).val.app (op (n + 1, U)) x) = ((j.hom.app M).f q).val.app (op (n, U)) ((M.X q).val.presheaf.map (trfAutomorphismSystemStep n ((proEtaleIsoPostcompose g).obj U)) x)) ∧ (∀ (M : CochainComplex (coefficientSequenceModules l E S) ℤ) (q : ℤ) (n : ℕ) (U : S.ProEt) (b : (completedIntegralCoefficientSheafUnrestricted l E S).obj.obj (op U)) (x : (M.X q).val.obj (op (n, (proEtaleIsoPostcompose g).obj U))), ((j.hom.app M).f q).val.app (op (n, U)) ((inv (inverseImageFiniteCoefficientMap l E g n)).hom.app (op U) ((limit.π (integralCoefficientSheafSystem l E S) (op n)).hom.app (op U) b) • x) = (limit.π (integralCoefficientSheafSystem l E S) (op n)).hom.app (op U) b • ((j.hom.app M).f q).val.app (op (n, U)) x)",
+  "branch": "sheaf-dag",
+  "by": "N8",
+  "date": "2026-10-22",
+  "existing": false,
+  "note": "The recorded strict system category is realized on its existing vertical sequence site. The system coefficient map has precisely the canonical c_n components; tensor is the existing sheafified change of rings. TensorEvaluation identifies its slices with the actual finite tensor sheaves, normalized on local generators. The main comparison is an isomorphism on ordinary unbounded system complexes, with actual quotient and completed squares, local inverse/transition formulas, and exactness. All definitions have real data; every postponed theorem is a clause or construction law of this node."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-e3efd89de",
+  "group": "N8",
+  "result": "pass",
+  "note": "First stage-2 delivery; item node differs from side-live only in lean; lean.statement verbatim; declarations equal the file set. All clauses matched: F = isoSectionwiseInverseImage (sections at g∘U); action transported by inv c (pushforward, φ = inv c); T = changeOfRingsOfUniverses along c on the sequence site, slice identified with the finite tensor by trfAutomorphismTensorEvaluation (pinned on generators); j a NatIso on CochainComplex(coefficientSequenceModules), fixed on every section by x ↦ tmul x 1, so not arbitrary; inverse formula c_n^{-1}(a)•x; τ formula with the actual horizontal restrictions and ρ_n(a); τ j = j F(v); actual squares c_{n+1}≫ρ_n = Fρ_n≫c_n and c_R̂≫π_n = Fπ_n≫c_n; G exact via PreservesFiniteLimits/Colimits; ℓ-invertibility and IsIso g present; no extra hypotheses; universes t,u independent at max u (t+1). Definitions have real data, all theorems are sorry, source/blueprint docstrings present, main docstring carries the 7 steps, actual ProEt site. Edge cases g=id, n=0, all integer degrees, nonflat/noncartesian, empty S. No compile (no file changed; worker scompile clean ~18 s). Advisories: (1) final completed-linearity clause is Lean-redundant (linearity of j); content carried by the π square, which together implies the node's form, as in node Step 6; (2) coefficientSequenceModules (def-coef-ringed-sequence-site, via lem-coef-semilinear-derived-sections), scalarExtensionRingIsoTmul (def-sfb-scalar-extension-pure-tensor-section) and coefficientEvaluationSection (eqToHom, auxiliary theorem only) come from non-stmt_dep nodes; S2 cannot add existing stmt_deps."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F1",
+  "result": "pass",
+  "landing": "20261026T222638-L-677595",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)",
+  "sorry_before": [
+   "WeilConjectures.trfAutomorphismCoefficientComponent_horizontal",
+   "WeilConjectures.trfAutomorphismCoefficientComponent_vertical",
+   "WeilConjectures.trfAutomorphismTensorEvaluation"
+  ],
+  "sorry_after": [
+   "WeilConjectures.trfAutomorphismTensorEvaluation"
+  ]
+ }
+}

@@ -1,0 +1,204 @@
+{
+ "id": "lem-sf-weil-native-exceptional-forgetful",
+ "kind": "statement",
+ "title": "Forgetting the native Weil exceptional adjoint",
+ "statement": "Fix a finite field $k_0$, an algebraic closure $k$ of $k_0$, a prime $\\ell\\ne\\operatorname{char}k_0$, and $\\Omega=\\overline{\\mathbf Q}_\\ell$ [def-weil-finite-field-fiber]. For a separated finite-type $k_0$-scheme $T_0$ put $T=T_0\\times_{k_0}k$ and let $g_T$ be geometric Frobenius [def-weil-frobenius-detailed]. On the small pro-etale site of $T$, let $R_T$ be the coefficient sheaf whose sections on a quasi-compact object $V$ are continuous functions $|V|\\to\\Omega$ with values in one finite intermediate extension of $\\mathbf Q_\\ell$; on general objects impose this condition locally [sk-def-sfb-qlbar-condensed, sk-prop-sfb-qlbar-colimit-x]. Write $\\mathcal A_T=\\operatorname{Mod}(R_T)$ for its module sheaves [def-weil-sheaf-of-modules-category] and $\\mathcal B_T$ for pairs $(F,\\theta:g_T^*F\\xrightarrow{\\sim}F)$ in $\\mathcal A_T$, with intertwining morphisms [def-weil-endofunctor-fixed-pair-category]. Derived categories mean localization of complexes at quasi-isomorphisms [def-weil-abstract-derived-category]. Let $\\mathcal W(T_0)\\subset D(\\mathcal B_T)$ be the full subcategory with bounded cohomology whose underlying cohomology sheaves admit a finite locally closed stratification with pro-etale locally finite free restrictions over $R_T$. This is the native category `AlgebraicGeometry.WeilComplex`, not the category of fixed pairs in $D(\\mathcal A_T)$.\n\nLet $f_0:X_0\\to Y_0$ be a separated finite-type $k_0$-morphism between separated finite-type $k_0$-schemes and let $f:X\\to Y$ be its geometric fiber. Use the exact forgetful functors $U_T$ induced termwise by $\\mathcal B_T\\to\\mathcal A_T$, restricted to the native bounded constructible subcategories, and the coefficient realizations $\\rho_T$ of [lem-sf-adic-qbar-constructible-realization]. Let $F_f^{\\mathrm W}:\\mathcal W(X_0)\\to\\mathcal W(Y_0)$ be the native derived compact-support functor `AlgebraicGeometry.WeilComplex.derivedLowerShriek`, formed from equivariant open extension by zero and proper direct image along a compactification [def-compact-support-direct-image-detailed]. Suppose $F_f^{\\mathrm W}$ has a right adjoint $G_f^{\\mathrm W}$ on these native constructible categories. Let $F_f=Rf_!$ and $G_f=Rf^!$ be the common-stage constructible functors of [def-weil-integral-rational-qbar-compact-support, def-weil-exceptional-inverse-image].\n\nThere are natural isomorphisms of functors into the ordinary module derived categories\n$$U_YF_f^{\\mathrm W}\\cong\\rho_YF_f\\rho_X^{-1}U_X,\\qquad U_XG_f^{\\mathrm W}\\cong\\rho_XG_f\\rho_Y^{-1}U_Y.$$\nThey identify the adjunction units and counits, using the scalar-unit-normalized coefficient realizations. At the point $s_0=\\operatorname{Spec}k_0$, forgetting the native constant Weil sheaf gives the ordinary module coefficient unit $R_s[0]\\cong\\rho_s(\\Omega)$. In particular for $f_0=a_{X_0}:X_0\\to s_0$ they identify $U_X(G_{a_{X_0}}^{\\mathrm W}\\Omega^{\\mathrm W})$ with $\\rho_X(Ra_X^!\\Omega)$, where $a_X:X\\to\\operatorname{Spec}k$. This asserts compatibility for the actual derived category of equivariant sheaves, including its extension morphisms; it asserts no equivalence between that category and Frobenius pairs in the ordinary derived category.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/cor-coef-verdier-weil-equivariance.proof.md",
+  "place": "Exceptional-adjunction assertion and equivariant units and counits; Q10 native derived comparison obligation for lean/WeilConjectures/WeilSheaf/VerdierDual.lean lines 62-113 and LowerShriek.lean (the comparison is not obtained by identifying derived Weil sheaves with fixed pairs)."
+ },
+ "stmt_deps": [
+  "def-sf-native-exceptional-forgetful-data"
+ ],
+ "proof": [
+  {
+   "text": "Choose simultaneous forgetful models and the normalized left comparisons with representing counit triples.",
+   "uses": [
+    "lem-sf-native-exceptional-left-models"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply forgetful_representingPair_rightMate to these triples and each assumed native adjunction. The resulting asIso is the right comparison. Its unit equation is the theorem's unit equation; cancel the left-comparison hom in its counit equation to obtain Comparison.counit.",
+   "uses": [
+    "lem-sf-forgetful-representing-pair-right-mate"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Obtain the ordinary native point unit. Compose it with ForgetModel.realization and the specified unitRealization. Full faithfulness of rho lifts this composite to commonUnit; map_preimage is exactly unit_normalization. Evaluate the same right comparison at the constant and apply G to commonUnit. Applying rho gives specialization; its equality is the definition of this composite.",
+   "uses": [
+    "lem-sf-native-exceptional-point-unit",
+    "lem-sf-adic-qbar-constructible-realization"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Choose an ordinary coefficient system and compactification of the geometric model structure map. Compose specialization with ordinary structural exceptional unit transport to obtain actualSpecialization at literal Spec(k).",
+   "uses": [
+    "lem-sf-native-exceptional-structural-transport",
+    "lem-sf-constructible-exceptional-adjunction-coefficients"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sf-native-exceptional-left-models",
+  "lem-sf-forgetful-representing-pair-right-mate",
+  "lem-sf-native-exceptional-point-unit",
+  "lem-sf-adic-qbar-constructible-realization",
+  "lem-sf-native-exceptional-structural-transport",
+  "lem-sf-constructible-exceptional-adjunction-coefficients"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-package/cor-coef-verdier-weil-equivariance.proof.md",
+  "place": "Lean assembly using normalized representing lifts, the existing right-mate theorem, full-faithful unit lifting and the separate ordinary structural transport."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Forgetting Weil structure commutes with exceptional inverse image right adjoint of compact support on constructible sheaves",
+   "results": "8 hits: TopCat.Sheaf.pushforward_forget, TopCat.Sheaf.pushforwardForgetIso, AlgebraicGeometry.Scheme.Modules.instIsLeftAdjointRestrictFunctor, CondensedSet.compactlyGeneratedAdjunction, LightCondMod.LocallyConstant.adjunction, CondensedSet.instIsIsoFunctorCompactlyGeneratedCounitCompactlyGeneratedAdjunction, TopCat.Sheaf.pullbackPushforwardAdjunction, LightCondSet.LocallyConstant.adjunction; none states the native derived comparison for constructible Weil sheaves.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"upperShriek\"",
+   "results": "0 hits: ; none states the native derived comparison for constructible Weil sheaves.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "upperShriek|exceptional.*adjoint|Weil.*[Ff]orget",
+   "results": "0 hits: ; none states the native derived comparison for constructible Weil sheaves.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "equivariant exceptional direct image right adjoint underlying sheaf comparison Frobenius",
+   "results": "8 hits: CategoryTheory.frobeniusMorphism_iso_of_expComparison_iso, CategoryTheory.frobeniusMorphism_mate, WittVector.IsocrystalEquiv.frob_equivariant, SheafOfModules.pullbackPushforwardAdjunction_homEquiv_symm_unitToPushforwardObjUnit, SheafOfModules.instIsRightAdjointPushforward, CategoryTheory.frobeniusMorphism, SheafOfModules.PullbackConstruction.adjunction, AlgebraicGeometry.Scheme.Modules.instIsRightAdjointPushforward; none states the native derived comparison for constructible Weil sheaves.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Forgetting Frobenius structure on derived Weil sheaves commutes with the exceptional inverse image right adjoint to compact support",
+   "results": "{\"t\": \"2026-10-22T04:29:40Z\", \"tool\": \"leanfinder\", \"query\": \"Forgetting Frobenius structure on derived Weil sheaves commutes with the exceptional inverse image right adjoint to compact support\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Modules.instIsRightAdjointPushforward\", \"AlgebraicGeometry.Scheme.Modules.pseudofunctor_map_adj\", \"SheafOfModules.instIsRightAdjointPushforwardCompSheafRingCatMapSheafPushforwardContinuous\", \"SheafOfModules.pushforwardPushforwardAdj\", \"TopCat.Sheaf.pushforwardForgetIso\", \"TopCat.Sheaf.pushforward_forget\", \"SheafOfModules.instIsRightAdjointPushforward\", \"AlgebraicGeometry.Scheme.Modules.pullbackPushforwardAdjunction\"], \"digest\": \"1ed126e648c1d85b\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary sheaf adjunction and homological equivalence results do not state the native exceptional comparison."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"upperShriek\"",
+   "results": "{\"t\": \"2026-10-22T04:29:58Z\", \"tool\": \"loogle\", \"query\": \"\\\"upperShriek\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary sheaf adjunction and homological equivalence results do not state the native exceptional comparison."
+  },
+  {
+   "tool": "grep",
+   "query": "upperShriek|WeilComplex|exceptional.*adjoint",
+   "results": "{\"t\": \"2026-10-22T04:29:58Z\", \"tool\": \"grep\", \"query\": \"upperShriek|WeilComplex|exceptional.*adjoint\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary sheaf adjunction and homological equivalence results do not state the native exceptional comparison."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Underlying ordinary complex of a native equivariant exceptional inverse image is the ordinary exceptional inverse image of the underlying Weil complex",
+   "results": "{\"t\": \"2026-10-22T04:29:58Z\", \"tool\": \"leansearch\", \"query\": \"Underlying ordinary complex of a native equivariant exceptional inverse image is the ordinary exceptional inverse image of the underlying Weil complex\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Equivalence.mapHomologicalComplex_inverse\", \"CategoryTheory.Idempotents.karoubiCochainComplexEquivalence_inverse_obj_X_X\", \"HomologicalComplex.opEquivalence_inverse\", \"HomologicalComplex.unopEquivalence_inverse\", \"HomologicalComplex₂.total.mapIso_inv\", \"HomologicalComplex.instQuasiIsoAtOppositeMapSymmOpFunctorOp\", \"HomologicalComplex.Hom.isoApp_inv\", \"CategoryTheory.Idempotents.KaroubiHomologicalComplexEquivalence.inverse_map\"], \"digest\": \"009c43679df14086\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary sheaf adjunction and homological equivalence results do not state the native exceptional comparison."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sf-weil-verdier-biduality",
+  "date": "2026-10-22",
+  "group": "Q10"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "The parent is a maintainer-created native Lean obligation with no created.item ancestor (blueprint_refs.py ancestor prints None). Its supplied textual provenance is lem-a1-local-boundary-duality, using Weil biduality, and the evaluation and biduality sentence of thm-coef-qbar-verdier; this comparison realizes that sentence in the native derived category.",
+   "via": [
+    "lem-sf-weil-verdier-biduality"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sf-weil-native-exceptional-forgetful",
+  "worker": "stage1",
+  "summary": "Q88 repair of the human 2026-10-21 re-split order. Statement and statement dependencies unchanged. Four separate statement-only obligations retain old Steps 1–2, 3–4, 5–6 and 7–8; the item assembles them and retains the point-unit specialization. All nine original arguments are preserved verbatim with their allocation in report.md. New obligations carry fresh logged Mathlib searches; existing generic cyclic and fixed-pair nodes are reused.",
+  "blueprint": "The supplied source has no imported blueprint ancestor (ancestor prints None). Steps 1–3 supply the native interpretation of paragraph 1; Steps 4–8 realize the final sentence on equivariant units and counits while retaining extension morphisms; Step 9 supplies the point-unit specialization.",
+  "tool_uses": [
+   {
+    "node": "lem-sf-cyclic-derived-hom-exact-sequence",
+    "why": "Generic derived fixed-pair Hom exact sequence, including compatibility with exact open and right-derived proper lifts; this supplies the representability criterion hypothesis."
+   }
+  ]
+ },
+ "tool_uses": [],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q88-64c6255fd",
+  "group": "Q88",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q88-64c6255fd (reviewer sub-agent of L); spot-checked: Read the whole delivery. The item statement and stmt_deps are byte-identical to live. All 9 old steps (11342 chars) appear verbatim in the report and are split as follows: old 1-2 -> lem-sf-native-weil-open-proper-forgetting (3861), old 3-4 -> lem-sf-native-weil-scalar-frobenius-counit (2582), old 5-6 -> lem-sf-cyclic-derived-lifted-counit-represents (2078), old 7-8 -> lem-sf-forgetful-representing-pair-right-mate (1862). Old 9 is now the elementary assembly Step 4. The 4-step assembly is 2153 chars. The nodes are of comparable size, none restates the item or one of its clauses, and no argument was dropped. Checks: B_{T_0}=R_T (a finite span lies in a finite compositum); lem-sf-fixed-pair-derived-forget-comparison gives c^0 as the identity on K-injectives; j_! is exact by lem-pur-site-restriction-module-adjunction-exact; the hypotheses of the compact-support condensed realization and the rho realization hold (separated finite type, ell invertible); the mate transpose eps_{QL}F(b)=Q(eps)a^{-1} and the counit invariance were checked by hand; in C, T-equivariance of the adjunction bijections in degrees -1 and 0 plus the five lemma give Psi_K bijective (P=id case: Ext^1 survives); in D, beta=e_L U(h_L) and the unit identity were checked by transposition. Fixes: (1) B3/C4 in scalar-frobenius-counit: F_f -| G_f was used without citing lem-sf-constructible-exceptional-adjunction-coefficients (added; no cycle). (2) B3 in open-proper-forgetting: 'Grothendieck abelian' now cites def-sp-grothendieck-abelian. (3) E1 in lifted-counit-represents: C_X, C_Y must be closed under isomorphisms so that H_L lies in U^{-1}(C_X) (added). Batch-5: both flagged citations were already cited by the base item's old Step 3, so the closure is unchanged. lem-pod-derived-automorphism-hom-evaluation is a generic iso-pullback internal-Hom comparison, and lem-trf-adjoint-composition-coherence is pure category theory; neither is a step of the trace formula or of Poincare duality, so both are accepted. Advisory: the alpha clause overlaps Q06 lem-sf-locally-finite-adic-compact-support-realization, which is not a duplicate. The item's node-level tool_uses are stale. No SGA source is used.; 3 file(s) fixed by the reviewer"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "lean": {
+  "module": "Sheaf.WeilSheaf.NativeExceptionalForgetful",
+  "declaration": "WeilConjectures.NativeExceptionalForgetful.native_exceptional_forgetful",
+  "file": "lean/Sheaf/WeilSheaf/NativeExceptionalForgetful.lean",
+  "statement": "theorem native_exceptional_forgetful (R : Family l D) : Nonempty (Package D l R)",
+  "branch": "newtargets-dag",
+  "by": "Q50",
+  "date": "2026-10-25",
+  "existing": false,
+  "declarations": [
+   "WeilConjectures.NativeExceptionalForgetful.native_exceptional_forgetful"
+  ],
+  "note": "The interface declarations are reexported verbatim from NativeExceptionalForgetfulData; the theorem has a complete proof from two strict geometric obligations and the proved point-unit lemma and the existing generic representing-pair right-mate theorem.",
+  "fixed_by": "NT-stage2-cc-efda9869c"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-efda9869c",
+  "group": "Q50",
+  "result": "fix",
+  "note": "Re-delivery of Q52 3a0b repairing both RETURN faults: uses the in-place generalized ConstructibleExceptionalCoefficients.System.{u,0} (Omega=PadicAlgCl l : Type, Scheme.{u}; no copy, no record rebind) and proves Fact (ringChar k0 != l) inline from the D cardinality (theorem stmt_dep lem-dl-a1 dropped). Clause check: native WeilComplex in D(IsoAlgebra pairs); U = WeilComplex.forget then exact transport along the genuine closureMap then sectionDerived; rho from Family; nativeShriek = derivedLowerShriek; right adjoint quantified as hypothesis; forall S sound since closed-stage F/G pinned via CommonSystem/rationalLeft; left/right comparisons plus leftOrdinary/rightOrdinary; unit/counit mate identities verified by type; point unit via unitRealization; specialization_eq pinned to the same right mate. Edge cases (empty, identity, arbitrary closure, Ext terms, independent universes) ok. One sorry; docstrings ok; lean.statement verbatim; node differs from live only in lean. Mechanical fault: lean record dropped declarations/note → fixes/lem-sf-weil-native-exceptional-forgetful.lean-record.json restores 39 declarations + note; no Lean change, no compile needed (worker dry run 2026-10-25 OK). Advisory: nativeUnit/actualSpecialization are bare isos (scalar ambiguity only)."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-a9e6c",
+  "group": "A2",
+  "result": "pass",
+  "landing": "20261025T122433-L-1771219",
+  "kind": "interface",
+  "note": "independent cc review: Data module vs published item block (byte-identical diff); item theorem signature vs published; left-models output vs forgetful_representingPair_rightMate hypotheses; node proof_deps vs Lean proof; 5 delivered modules + 2 direct importers compiled (exit 0)"
+ }
+}

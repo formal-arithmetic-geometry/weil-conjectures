@@ -11,6 +11,7 @@ import Sheaf.CategoryTheory.SystemEvaluationTopos
 import all Sheaf.Paper.KFlatRingedToposPullback
 import Sheaf.CategoryTheory.SystemScalarCoherence
 import all Sheaf.Paper.ConstantCompletionEquivalence
+import all Sheaf.Paper.ConstantCompletionCore
 import all Sheaf.CategoryTheory.SystemRingedSequenceSite
 
 /-! # The ordinary flat model for strict quotient reduction

@@ -1,0 +1,304 @@
+{
+ "id": "lem-sfb-field-reductive-quotient",
+ "kind": "statement",
+ "title": "Reductivity is inherited by smooth connected quotient groups over a field",
+ "statement": "Let $k$ be an algebraically closed field [def-weil-field] [def-weil-algebraic-closure], and let $H,J$ be smooth connected affine $k$-group schemes of finite type [def-sc-group-scheme] [def-sbc-smooth-morphisms] [def-weil-connected-scheme] [def-weil-finite-type-morphism]. A group here is reductive if it has no nontrivial smooth connected normal unipotent closed subgroup; unipotent means admitting a faithful matrix representation by unipotent matrices. If $q:H\\to J$ is a faithfully flat homomorphism and $H$ is reductive, then $J$ is reductive. No condition of centrality, connectedness or smoothness is imposed on the scheme-theoretic kernel.",
+ "source": {
+  "document": "https://math.stanford.edu/~conrad/papers/luminysga3smf.pdf",
+  "place": "Section 1.1, discussion of unipotent radicals and surjections adjacent to Definition 1.1.11, printed pp.10--11: images of reductive groups are reductive, including surjections with nonsmooth kernels. WANTED locally as literature/conrad-reductive-group-schemes.pdf."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-weil-algebraic-closure",
+  "def-sc-group-scheme",
+  "def-sbc-smooth-morphisms",
+  "def-weil-connected-scheme",
+  "def-weil-finite-type-morphism",
+  "def-sfb-reductive-torus-centralizer-terminology"
+ ],
+ "proof": [
+  {
+   "text": "Let $U\\subseteq J$ be any smooth connected normal unipotent closed subgroup. Form $P=H\\times_JU$ with projections $p:P\\to H$ and $r:P\\to U$ by [def-pc-fibre-product]. The map $p$ is a closed immersion by [lem-weil-pbc-closed-immersion-base-change]; thus $P$ is affine of finite type, since its coordinate ring is a quotient of $k[H]$ by [def-weil-closed-immersion]. On every $k$-algebra $A$, $P(A)$ identifies with $\\{h\\in H(A):q(h)\\in U(A)\\}$, a normal subgroup of $H(A)$ because $U(A)$ is normal in $J(A)$ [def-sc-group-scheme-subgroup]. This also constructs its group structure and both projection homomorphisms. Since $J$ is smooth and $q$ is faithfully flat, [lem-sfb-affine-group-homomorphism-image] makes $H(k)\\to J(k)$ surjective. For each $u\\in U(k)$ choose $h$ with $q(h)=u$; the pair $(h,u)$ gives an element of $P(k)$ mapping to $u$. Hence $r:P(k)\\to U(k)$ is surjective, even if $P$ or $\\ker q$ is nonreduced.",
+   "uses": [
+    "def-pc-fibre-product",
+    "lem-weil-pbc-closed-immersion-base-change",
+    "def-weil-closed-immersion",
+    "def-sc-group-scheme-subgroup",
+    "lem-sfb-affine-group-homomorphism-image"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 5.47, p.110, rational-point surjectivity; inverse-image subgroup construction. Agent assembly, using Stacks Tag 01QR (morphisms-lemma-base-change-closed-immersion)."
+   }
+  },
+  {
+   "text": "Put $C=P^0$ and $M=C_{\\mathrm{red}}$. By [lem-sfb-locally-algebraic-group-identity-component], $C$ is open and closed in $P$, and $M$ is a smooth connected integral group scheme of finite type with $|M|=|C|$. Both are closed in $P$, so $M$ is a closed subgroup of $H$ and is affine: on affine coordinates the successive inclusions are quotient maps, whose composite is again a quotient [def-weil-closed-immersion]. For $h\\in H(k)$, normality of $P$ makes conjugation by $h$ an automorphism of $P$ fixing its identity. Such an automorphism preserves its identity component and its open-subscheme structure, and preserves the nilradical on every affine chart. It therefore preserves $M$ as a closed subgroup scheme. Since $H$ is smooth and $k$ is algebraically closed, [lem-sfb-smooth-ambient-normality-geometric] implies that $M$ is normal in $H$ as a subgroup scheme, on all test algebras. No smoothness of $P$ was used.",
+   "uses": [
+    "lem-sfb-locally-algebraic-group-identity-component",
+    "def-weil-closed-immersion",
+    "lem-sfb-smooth-ambient-normality-geometric"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 1.34, pp.16--17; reduced identity subgroup as in Stacks Tags 0B7R, 047R and 047P/047N; preservation by conjugation is the agent argument written here."
+   }
+  },
+  {
+   "text": "By [lem-sfb-connected-normal-subgroup-reductive], $M$ is reductive: it is a smooth connected closed normal subgroup of the reductive group $H$. Restrict $r$ to $f:M\\to U$. The unipotence assumed for $U$ gives, by [lem-sfb-geometric-unipotence-unitriangular-embedding], a closed embedding of $U$ into an upper unitriangular group. Let $T$ be any maximal $k$-torus of $M$. Since $k$ is algebraically closed, $T\\simeq\\mathbf G_m^d=D_k(\\mathbf Z^d)$; the last identification sends the group-algebra basis monomials to Laurent monomials. Apply [lem-sfb-diagonalizable-to-unipotent-trivial] to $f|_T$ and that embedding of $U$. It gives $f|_T=1$ as a homomorphism of group schemes, not just on rational points.",
+   "uses": [
+    "lem-sfb-connected-normal-subgroup-reductive",
+    "lem-sfb-geometric-unipotence-unitriangular-embedding",
+    "lem-sfb-diagonalizable-to-unipotent-trivial"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Corollary 21.53, p.441, normal-subgroup reductivity; Corollary 14.12 and Theorem 14.5, pp.281--283, unitriangular form; Corollary 14.18(b), p.284, vanishing of multiplicative-to-unipotent homomorphisms."
+   }
+  },
+  {
+   "text": "Let $K=\\ker(f)\\subseteq M$, a closed subgroup with $K(A)=\\ker(f(A))$ by [lem-sc-kernel-subgroup]. Step 3 says every maximal torus $T$ of $M$ is contained in $K$. By [lem-sfb-reductive-torus-self-centralizer], $C_M(T)=T$ scheme-theoretically for every such $T$. The algebraically closed field $k$ is infinite: if it were finite, $1+\\prod_{a\\in k}(X-a)$ would be a nonconstant polynomial without a root. All hypotheses of [lem-sfb-cartan-subgroups-generate] hold for the smooth connected affine finite-type group $M$ over $k$; geometric connectedness is connectedness here because $k$ is algebraically closed. Every Cartan subgroup $C_M(T)$ is contained in $K$, so that node gives $K=M$. Thus $f=1$ on every test algebra. This includes $M=1$ and the rank-zero case.",
+   "uses": [
+    "lem-sc-kernel-subgroup",
+    "lem-sfb-reductive-torus-self-centralizer",
+    "lem-sfb-cartan-subgroups-generate"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 17.61(a), p.372, self-centralizer; Theorem 17.91, p.381, generation by Cartan subgroups. Agent application to the closed kernel, with no reductivity-of-quotients input."
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-group-neutral-component-translates] to $P$. There are finitely many components, each a translate $g_iC$ for a point $g_i\\in P(k)$. Every $k$-point of $C$ factors through its reduction $M$: its map from an affine coordinate ring to the field $k$ kills all nilpotents. Conversely every $M(k)$-point is a $C(k)$-point, so $C(k)=M(k)$. On $P(k)$ the homomorphism $r$ is therefore constant on each component: if $x=g_im$ with $m\\in M(k)$, then $r(x)=r(g_i)f(m)=r(g_i)$ by step 4. Thus $r(P(k))$ is finite. Step 1 gives $r(P(k))=U(k)$, so $U(k)$ is finite. This passage uses the components of the possibly nonreduced inverse image $P$, not a smoothness assumption on its kernel.",
+   "uses": [
+    "lem-sfb-group-neutral-component-translates"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 1.34 and Corollary 1.35, pp.16--18, finitely many translates of the identity component; elementary reduction and rational-point calculation."
+   }
+  },
+  {
+   "text": "Write $A=k[U]$. Smoothness implies reducedness by [sbc-lem-smooth-geometrically-reduced] and [def-pc-reduced-scheme]. Since $U$ is connected, $U^0=U$; [lem-sfb-locally-algebraic-group-identity-component] therefore identifies $U=(U^0)_{\\mathrm{red}}$ as integral. Thus $A$ is a domain. The finite set $S=U(k)$ is nonempty because it contains the identity. For any $a\\in A$, form $b=\\prod_{s\\in S}(a-a(s))\\in A$, with $a(s)\\in k$ viewed as scalars. The function $b$ vanishes at every $k$-point, so $b=0$ by [lem-wf-affine-nullstellensatz-vanishing], which applies to the finitely generated reduced $k$-algebra $A$. A product in a domain is zero only if one factor is zero; hence $a=a(s)$ for some $s$. Every element of $A$ is therefore scalar. The identity point splits $k\\to A$, so $A=k$ and $U=\\operatorname{Spec}k$ is the trivial subgroup. Every smooth connected normal unipotent closed subgroup of $J$ is trivial; together with the stated smoothness, connectedness, affineness and finite type, this is exactly reductivity of $J$.",
+   "uses": [
+    "sbc-lem-smooth-geometrically-reduced",
+    "def-pc-reduced-scheme",
+    "lem-sfb-locally-algebraic-group-identity-component",
+    "lem-wf-affine-nullstellensatz-vanishing"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Propositions 1.10--1.12, pp.8--9, density/vanishing of functions at rational points; smooth connected reduction as in Stacks 0B7R, 047R and 047P/047N; smooth reducedness Tag 056T. Agent finite-point argument."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-fibre-product",
+  "lem-weil-pbc-closed-immersion-base-change",
+  "def-weil-closed-immersion",
+  "def-sc-group-scheme-subgroup",
+  "lem-sfb-affine-group-homomorphism-image",
+  "lem-sfb-locally-algebraic-group-identity-component",
+  "lem-sfb-smooth-ambient-normality-geometric",
+  "lem-sfb-connected-normal-subgroup-reductive",
+  "lem-sfb-geometric-unipotence-unitriangular-embedding",
+  "lem-sfb-diagonalizable-to-unipotent-trivial",
+  "lem-sc-kernel-subgroup",
+  "lem-sfb-reductive-torus-self-centralizer",
+  "lem-sfb-cartan-subgroups-generate",
+  "lem-sfb-group-neutral-component-translates",
+  "sbc-lem-smooth-geometrically-reduced",
+  "def-pc-reduced-scheme",
+  "lem-wf-affine-nullstellensatz-vanishing"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Assembly from Proposition 5.47; Corollary 21.53; Proposition 17.61(a); Theorem 17.91; Corollary 14.18(b). The inverse-image reduced-neutral-component proof is supplied by Q104, not attributed to the unavailable proof cited by Conrad."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "reductive|semisimple.*quotient",
+   "results": "{\"t\": \"2026-10-24T08:18:23Z\", \"tool\": \"grep\", \"query\": \"reductive|semisimple.*quotient\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: returned declarations concern abstract groups, topological tori, or general scheme properties; none states this group-scheme assertion."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A quotient of a connected reductive algebraic group by a normal subgroup is reductive",
+   "results": "{\"t\": \"2026-10-24T08:18:24Z\", \"tool\": \"leansearch\", \"query\": \"A quotient of a connected reductive algebraic group by a normal subgroup is reductive\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"IsPGroup.to_quotient\", \"QuotientGroup.instIsTopologicalGroup\", \"QuotientGroup.Quotient.group\", \"nilpotent_quotient_of_nilpotent\", \"solvable_quotient_of_solvable\", \"Rep.quotientToInvariants\", \"QuotientGroup.Quotient.commGroup\", \"Representation.quotientToInvariants\"], \"digest\": \"a57f182f823f9ecd\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: returned declarations concern abstract groups, topological tori, or general scheme properties; none states this group-scheme assertion."
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.IsReductive",
+   "results": "{\"t\": \"2026-10-24T08:18:24Z\", \"tool\": \"loogle\", \"query\": \"AlgebraicGeometry.IsReductive\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"loogle: unknown identifier 'AlgebraicGeometry.IsReductive'\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: returned declarations concern abstract groups, topological tori, or general scheme properties; none states this group-scheme assertion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Surjective homomorphism of reductive algebraic groups has reductive image",
+   "results": "{\"t\": \"2026-10-24T08:18:28Z\", \"tool\": \"leanfinder\", \"query\": \"Surjective homomorphism of reductive algebraic groups has reductive image\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Function.Surjective.isEngelian\", \"solvable_of_surjective\", \"Function.Surjective.lieAlgebra_isSolvable\", \"IsSimpleGroup.isSimpleGroup_of_surjective\", \"nilpotent_of_surjective\", \"Group.rank_le_of_surjective\", \"IsZGroup.of_surjective\", \"Group.fg_of_surjective\"], \"digest\": \"dd4cb3a928188486\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: returned declarations concern abstract groups, topological tori, or general scheme properties; none states this group-scheme assertion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Images of reductive groups under faithfully flat homomorphisms are reductive over an algebraically closed field",
+   "results": "{\"t\": \"2026-10-24T08:39:30Z\", \"tool\": \"leanfinder\", \"query\": \"Images of reductive groups under faithfully flat homomorphisms are reductive over an algebraically closed field\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.IsGeometricallyReduced.of_injective\", \"Algebra.IsGeometricallyReduced\", \"Algebra.IsGeometricallyReduced.isReduced_algebraicClosure_tensorProduct\", \"RingHom.FaithfullyFlat.isStableUnderBaseChange\", \"Algebra.isGeometricallyReduced_iff\", \"RingHom.FaithfullyFlat\", \"RingHom.FaithfullyFlat.stableUnderComposition\", \"IsReduced.tensorProduct_of_flat_of_forall_fg\"], \"digest\": \"9113c1c7f9368c1a\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: returned declarations concern abstract groups, topological tori, or general scheme properties; none states this group-scheme assertion."
+  },
+  {
+   "tool": "grep",
+   "query": "reductive|[Uu]nipotent[Rr]adical|[Ii]sReductive",
+   "results": "{\"t\": \"2026-10-24T09:27:14Z\", \"tool\": \"grep\", \"query\": \"reductive|[Uu]nipotent[Rr]adical|[Ii]sReductive\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern flat modules, scheme surjectivity, abstract solvable/nilpotent quotients, or Lie-algebra radicals; none asserts reductivity of a quotient group scheme."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A faithfully flat quotient of a smooth connected reductive algebraic group is reductive even with a nonreduced kernel",
+   "results": "{\"t\": \"2026-10-24T09:27:15Z\", \"tool\": \"leansearch\", \"query\": \"A faithfully flat quotient of a smooth connected reductive algebraic group is reductive even with a nonreduced kernel\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Module.FaithfullyFlat.toFlat\", \"RingHom.FaithfullyFlat\", \"Module.Flat.of_flat_tensorProduct\", \"Module.FaithfullyFlat.iff_flat_and_rTensor_reflects_triviality\", \"Module.FaithfullyFlat.recOn\", \"Module.FaithfullyFlat.iff_flat_and_lTensor_reflects_triviality\", \"AlgebraicGeometry.Flat.flat_and_surjective_iff_faithfullyFlat_of_isAffine\", \"Algebra.Smooth.flat\"], \"digest\": \"123ea29e639768e4\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern flat modules, scheme surjectivity, abstract solvable/nilpotent quotients, or Lie-algebra radicals; none asserts reductivity of a quotient group scheme."
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.IsReductive",
+   "results": "{\"t\": \"2026-10-24T09:27:15Z\", \"tool\": \"loogle\", \"query\": \"AlgebraicGeometry.IsReductive\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"loogle: unknown identifier 'AlgebraicGeometry.IsReductive'\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern flat modules, scheme surjectivity, abstract solvable/nilpotent quotients, or Lie-algebra radicals; none asserts reductivity of a quotient group scheme."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Surjective homomorphisms of connected reductive affine group schemes have reductive targets",
+   "results": "{\"t\": \"2026-10-24T09:27:16Z\", \"tool\": \"leanfinder\", \"query\": \"Surjective homomorphisms of connected reductive affine group schemes have reductive targets\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.AffineSpace.instSurjectiveOverSchemeInferInstanceOverClass\", \"AlgebraicGeometry.Scheme.Hom.surjective\", \"CategoryTheory.PreGaloisCategory.surjective_of_nonempty_fiber_of_isConnected\", \"AlgebraicGeometry.Surjective.surj\", \"CategoryTheory.PreGaloisCategory.isPretransitive_of_surjective\", \"AlgebraicGeometry.Surjective.of_comp\", \"AlgebraicGeometry.pointsPi_surjective_of_isAffine\", \"AlgebraicGeometry.IsClosedImmersion.of_surjective_of_isAffine\"], \"digest\": \"ac9427608baf3386\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern flat modules, scheme surjectivity, abstract solvable/nilpotent quotients, or Lie-algebra radicals; none asserts reductivity of a quotient group scheme."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Quotient of a connected reductive algebraic group by an arbitrary normal subgroup scheme has trivial unipotent radical",
+   "results": "{\"t\": \"2026-10-24T09:27:54Z\", \"tool\": \"leanfinder\", \"query\": \"Quotient of a connected reductive algebraic group by an arbitrary normal subgroup scheme has trivial unipotent radical\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"RootPairing.GeckConstruction.instHasTrivialRadical\", \"solvable_quotient_of_solvable\", \"nilpotent_quotient_of_nilpotent\", \"LieAlgebra.hasTrivialRadical_of_isIrreducible_of_isFaithful\", \"of_quotient_center_nilpotent\", \"LieAlgebra.HasTrivialRadical\", \"nilpotencyClass_quotient_le\", \"CategoryTheory.PreGaloisCategory.has_decomp_quotients\"], \"digest\": \"9a23a6c90e4ec34c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern flat modules, scheme surjectivity, abstract solvable/nilpotent quotients, or Lie-algebra radicals; none asserts reductivity of a quotient group scheme."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-relative-central-multiplicative-quotient",
+  "date": "2026-10-24",
+  "group": "Q39"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Haboush symmetric-power lifting for a trivial quotient representation. Supporting representation-theoretic input: Steinberg endomorphisms detect a nonzero fixed vector. Supporting Self-duality of rho section modules at characteristic-dependent weights. Supporting input: Positive-characteristic simplicity step, using irreducibility of the Steinberg induced module rather than assuming self-duality. Numerical input to the dimension comparison: Weyl dimension of the induced module. Supporting Kempf vanishing for dominant flag line bundles. Positive-characteristic Andersen–Haboush argument: trivial pushforward of M_((p^r-1)rho), before the Serre twisting calculation. Supporting input: Lemma 2.3, second assertion, and Lemma 2.1, printed pp.153--155: H^0(u,V(lambda))=K v_lambda for p-restricted dominant lambda. With roots positive in Lie(B), V(lambda)=Gamma(M_{-w0 lambda}). Supporting input: Simple-root distributions and infinitesimal subalgebra calculus. Supporting input: pinning-compatible integral-to-geometric distribution comparison, with all positive root divided powers, before simple-root generation. Integral-root-model prerequisite before the comparison: integral Chevalley construction and a positive-root coordinate chart; integral matrix-closure construction: the big cell and its Weyl translates, before identifying the special fibre. Supporting input: Integral closure atlas, exhaustion of each special fibre: exclude extra components using the generic and special identity-component big-cell dimensions. Supporting input: Lemma 3.7 (first assertion, the Iwahori--Matsumoto maximal-boundedness statement) and its application in Proposition 4.3, second paragraph, printed pp.7-8; Cartan double-coset input used to prove the maximal-boundedness prerequisite, before the torus-powers argument. Supporting input: Theorem 4.1, proof, printed p.7: Bruhat cells and approximation by integral root-group coordinates. Agent strengthening of that approximation input to all split reductive points over a local quotient; proof plan retained in report.md, with no proof stored in this unsplit node. Supporting relative structural input: a finite open atlas by affine-space times split-torus charts, before quotient-coordinate lifting. Relative structural prerequisite: constant roots, trivial root lines and normalizer representatives over the local base, before forming the open cell. Specific prerequisite: Conrad, Reductive group schemes, Lemma 4.1.3 (rank-one centralizer), Theorem 4.2.6, pp.120-121 (perfect opposite-root pairing and coroot), and Corollary 5.1.9(1), printed pp.140-141 (three-exponential normalizer element and reflection formula).  Supporting structural classification before the opposite-root matrix calculation: Conrad Theorem 5.1.8, printed pp.139-140. Supporting input to the matrix-model proof: the saturated root-kernel torus and its semisimple quotient, before either centre case. General structural input: Relative quotient by a central subgroup of multiplicative type. Supporting prerequisite: Reductivity is inherited by smooth connected quotient groups over a field. Section 1.1, discussion of unipotent radicals and surjections adjacent to Definition 1.1.11, printed pp.10--11: images of reductive groups are reductive, including surjections with nonsmooth kernels.",
+   "via": [
+    "lem-sfb-relative-central-multiplicative-quotient",
+    "lem-sfb-relative-rank-one-central-quotient",
+    "lem-sfb-relative-rank-one-local-matrix-model",
+    "lem-sfb-relative-opposite-root-reflection-map",
+    "lem-sfb-local-split-root-data-weyl-lifts",
+    "lem-sfb-split-reductive-local-gauss-atlas",
+    "lem-sfb-split-reductive-local-quotient-points",
+    "lem-sfb-split-reductive-dvr-cartan-decomposition",
+    "lem-sfb-split-reductive-integral-maximal-bounded",
+    "lem-sfb-quasi-reductive-special-connectedness",
+    "lem-sfb-integral-chevalley-weyl-atlas",
+    "lem-sfb-chevalley-integral-root-model",
+    "lem-sfb-borel-kostant-distribution-comparison",
+    "lem-sfb-borel-simple-root-distribution-calculus",
+    "lem-sfb-restricted-induced-infinitesimal-invariants",
+    "lem-sfb-flag-frobenius-rho-pushforward",
+    "lem-sfb-dominant-flag-line-kempf-vanishing",
+    "lem-sfb-induced-weyl-dimension-formula",
+    "lem-sfb-steinberg-induced-module-irreducible",
+    "lem-sfb-rho-section-self-duality",
+    "lem-sfb-steinberg-endomorphism-detection",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-field-reductive-quotient",
+  "worker": "stage1",
+  "summary": "Q104 gives a six-step proof with no new nodes and no statement change. Reduce the inverse image of an arbitrary target normal unipotent subgroup to its smooth neutral component; prove that component reductive, kill its map using tori and Cartan generation, and use finite components and the Nullstellensatz to kill the target subgroup. No condition is imposed on the scheme-theoretic kernel. Existing searches and source metadata are retained; fresh logged searches were added.",
+  "blueprint": "The inherited blueprint.from.place is retained in full: the relative-central-multiplicative-quotient prerequisite in the alteration/moduli chain serving det-thm-sf-ctf-stability-direct-images proof (3). Read latest sk-thm-sf-ctf-stability/_section.md and its direct-images proof (3). blueprint_refs ancestor reports None for this inherited chain; no ancestor is invented and no unit or chapter route is changed. Whole-blueprint searches for reductive, radical, reductive quotient and Cartan found no duplicate of this field assertion.",
+  "tool_uses": [
+   {
+    "node": "lem-sc-kernel-subgroup",
+    "why": "Generic group-scheme kernel construction needed to apply Cartan generation to the restriction; the unit has no alternative construction."
+   },
+   {
+    "node": "sbc-lem-smooth-geometrically-reduced",
+    "why": "Generic smooth-over-a-field reducedness tool for the final coordinate-ring calculation."
+   },
+   {
+    "node": "lem-wf-affine-nullstellensatz-vanishing",
+    "why": "Generic affine Nullstellensatz tool killing a function vanishing at all rational points, used only in the final finite-point argument."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sc-kernel-subgroup",
+  "sbc-lem-smooth-geometrically-reduced",
+  "lem-wf-affine-nullstellensatz-vanishing"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q104-4b26f48c2",
+  "group": "Q104",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q104-4b26f48c2 (reviewer sub-agent of L); spot-checked: Six-step proof with no new nodes and no change to the statement or stmt_deps; I read the whole item and every cited statement. Step 1: P=H×_J U is closed in H (Stacks 01QR) and normal on all algebras; faithful flatness gives H(k)→J(k) surjective (Milne 5.47, read), so P(k)→U(k) is surjective. Step 2: M=(P^0)_red is smooth, connected and closed in H; conjugation by H(k) preserves it as a subscheme, and smooth-ambient normality makes it normal. Step 3: M is reductive (Milne 21.53, read). U embeds as a closed subgroup of the unitriangular group, so maximal tori of M map trivially, scheme-theoretically. Step 4: C_M(T)=T (Milne 17.61(a), read) and Cartan generation (Milne 17.91, read; non-smooth subgroup allowed) give ker f=M. Step 5: finitely many translates of P^0 and C(k)=M(k) make U(k) finite. Step 6: U smooth and connected, so k[U] is a domain; the Nullstellensatz product argument gives U=1. Edge cases checked: SL2 Frobenius, SL2→PGL2 in characteristic 2, product projections, H=J=1, M=1. No existing node duplicates the statement (checked subdirect-product, finite-cover, radical-quotient and exact-permanence nodes). Accepted off-unit tool_uses: kernel subgroup, smooth⇒reduced, Nullstellensatz, closed-immersion base change. No SGA source. Batch-5 flags: the five cited sfb nodes are algebraic-group structure theory; their closure reaches only generic sec-trace-formula lemmas (flat tensor injectivity, fpqc smooth descent, split torus smoothness), which are not steps of the trace formula or Poincaré duality. The citations are outside the assumptions and are kept. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.GroupScheme.FieldReductiveQuotient",
+  "declaration": "AlgebraicGeometry.isReductive_of_faithfullyFlat",
+  "file": "lean/Sheaf/AlgebraicGeometry/GroupScheme/FieldReductiveQuotient.lean",
+  "statement": "theorem isReductive_of_faithfullyFlat {k : Type u} [Field k] [IsAlgClosed k] (H J : Grp (Over (Spec (.of k)))) [Smooth H.X.hom] [ConnectedSpace H.X.left] [IsAffine H.X.left] [LocallyOfFiniteType H.X.hom] [QuasiCompact H.X.hom] [Smooth J.X.hom] [ConnectedSpace J.X.left] [IsAffine J.X.left] [LocallyOfFiniteType J.X.hom] [QuasiCompact J.X.hom] (q : H ⟶ J) [Flat q.hom.hom.left] [Surjective q.hom.hom.left] (hH : ReductiveTorusCentralizer.IsReductive H) : ReductiveTorusCentralizer.IsReductive J",
+  "branch": "sheaf-dag",
+  "by": "Q135",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-5bd3c033e",
+  "group": "Q135",
+  "result": "pass",
+  "note": "Clause-by-clause match. Hypotheses: algebraically closed k; H, J Grp(Over Spec k) with Smooth/ConnectedSpace/IsAffine/LocallyOfFiniteType+QuasiCompact; q : H ⟶ J; Flat+Surjective on q.hom.hom.left = faithfully flat; no kernel binder. Conclusion reuses landed ReductiveTorusCentralizer.IsReductive (Q23 reviewed_lean pass); its kbar quantification equals the node's k-condition since k is algebraically closed; IsUnipotent contains smoothness and a faithful unipotent GL_n embedding; same predicate as ConnectedNormalSubgroupReductive. Item diff vs side-live: lean record plus one added landed stmt_dep (allowed by brief §5). Statement verbatim; one sorry; no definitions; docstrings carry Conrad §1.1 pp.10-11, the blueprint id and 6 proof steps; 15 imports resolve. Edge cases: trivial groups, product projections, Frobenius of SL2, SL2→PGL2 in char 2; no characteristic or universe restriction. No changes, so no compile."
+ }
+}

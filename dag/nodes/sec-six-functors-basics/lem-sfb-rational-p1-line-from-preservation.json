@@ -1,0 +1,121 @@
+{
+ "id": "lem-sfb-rational-p1-line-from-preservation",
+ "kind": "lemma",
+ "title": "Recover the shifted line from preservation on the coefficient unit",
+ "status": "split",
+ "statement": "Let Λ be a commutative condensed ring, f : X → S a morphism of schemes with S quasi-compact and quasi-separated, and L an internal Λ_X-module. Use the ordinary unbounded derived module categories and finite-constant-model Dbc of [sk-def-sfb-constructible]. If Lf* followed by tensor with single(L) and shift by two preserves the localizing closures of Dbc, then single(L)[2] belongs to Loc(Dbc(X,Λ)). The functor is exactly the twist of [def-sfb-tate-twisted-projection-comparison], and the closure is [sk-def-localizing-closure]. No finite-presentation assumption on L is added.",
+ "stmt_deps": [
+  "sk-def-sfb-module-derived-pushpull",
+  "sk-def-sfb-constructible",
+  "sk-def-localizing-closure",
+  "def-sfb-tate-twisted-projection-comparison",
+  "def-sfb-projective-diagonal-pullback"
+ ],
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-p1-adjunction-rational/sk-prop-p1-adjunction-rational-unit-counit.proof.md",
+  "place": "Well-definedness (3), proof step 11; coefficient-unit argument in step 5"
+ },
+ "proof": [
+  {
+   "text": "Give the regular coefficient module its rank-one finite presentation and the zero module its zero presentation. On the one-stratum partition, the identity cover and monoidal inverse-image unit comparisons identify these modules with their finite scalar models. The degree-zero coefficient unit has that regular module as H^0 and zero other cohomology; it is bounded and constructible. The existing constructibility well-definedness theorem transports the models along the homology comparison isomorphisms.",
+   "uses": [
+    "sk-def-sfb-constructible",
+    "det-def-sfb-constructible-tor-amplitude"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The assumed preservation applies to this generator of Loc(Dbc(S)). Exact pullback commutes with single, and its monoidal unit comparison identifies the pullback of the coefficient unit with the coefficient unit on X. The derived single/unit comparison and the tensor left unitor therefore identify its tensor with single(L) with single(L). Shift this isomorphism by two. Repleteness in the defining intersection for the localizing closure transports membership to single(L)[2]. This works also for empty schemes and for L=0.",
+   "uses": [
+    "sk-def-sfb-module-derived-pushpull",
+    "sk-def-localizing-closure",
+    "def-sfb-projective-diagonal-pullback",
+    "def-sfb-tate-twisted-projection-comparison"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "sk-def-sfb-constructible",
+  "det-def-sfb-constructible-tor-amplitude",
+  "sk-def-sfb-module-derived-pushpull",
+  "sk-def-localizing-closure",
+  "def-sfb-projective-diagonal-pullback",
+  "def-sfb-tate-twisted-projection-comparison"
+ ],
+ "proof_origin": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-p1-adjunction-rational/sk-prop-p1-adjunction-rational-unit-counit.proof.md",
+  "place": "Well-definedness (3), proof step 11; coefficient-unit argument in step 5"
+ },
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "proper rational localizing projection formula Tate line counit is isomorphism",
+   "results": "8 hits; localization_unit_isIso', localization_unit_isIso, AlgebraicGeometry.ProjectiveSpectrum.Proj.isIso_toSpec, AlgebraicGeometry.projIsoSpecTopComponent, AlgebraicGeometry.projIsoSpec",
+   "date": "2026-10-27",
+   "verdict": "No direct theorem for the fixed rational counit. Use existing internal-module projection and constructibility interfaces."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.IsIso",
+   "results": "12 hits; CategoryTheory.IsIso, CategoryTheory.IsIso.id, CategoryTheory.Iso.isIso_hom, CategoryTheory.Iso.isIso_inv, CategoryTheory.asIso",
+   "date": "2026-10-27",
+   "verdict": "No direct theorem for the fixed rational counit. Use existing internal-module projection and constructibility interfaces."
+  },
+  {
+   "tool": "grep",
+   "query": "Tate.*[Cc]onstruct|[Cc]onstruct.*Tate",
+   "results": "15 hits; Mathlib/NumberTheory/LSeries/RiemannZeta.lean, Mathlib/RingTheory/Spectrum/Prime/ChevalleyComplexity.lean, Mathlib/RingTheory/Spectrum/Prime/ChevalleyComplexity.lean, Mathlib/Control/Fold.lean, Mathlib/CategoryTheory/Enriched/Limits/HasConicalLimits.lean",
+   "date": "2026-10-27",
+   "verdict": "No direct theorem for the fixed rational counit. Use existing internal-module projection and constructibility interfaces."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.RationalP1UnitCounit",
+  "date": "2026-10-27",
+  "group": "C1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-prop-p1-adjunction-rational-unit-counit",
+   "place": "proof steps 5 and 11",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-prop-p1-adjunction-rational",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.RationalP1LineFromPreservation",
+  "file": "lean/Sheaf/Paper/RationalP1LineFromPreservation.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.RationalP1.line_localizing_of_preservation",
+  "statement": "theorem line_localizing_of_preservation\n    {X S : Scheme.{u}} [CompactSpace S] [QuasiSeparatedSpace S]\n    (f : X ⟶ S) (L : Modules Λ X)\n    (h : ∀ K, CategoryTheory.localizingClosure\n        (constantModelBoundedConstructible Λ S) K →\n      CategoryTheory.localizingClosure (constantModelBoundedConstructible Λ X)\n        ((moduleObjectDerivedPullback Λ f ⋙ twist Λ X L).obj K)) :\n    CategoryTheory.localizingClosure (constantModelBoundedConstructible Λ X)\n      (((DerivedCategory.singleFunctor (Modules Λ X) 0).obj L) ⟦(2 : ℤ)⟧)",
+  "branch": "sheaf-dag",
+  "by": "C1",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C1",
+  "result": "pass",
+  "landing": "20261027T012815-L-2333665",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C1",
+  "result": "pass",
+  "landing": "20261027T012815-L-2333665",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

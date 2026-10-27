@@ -1,0 +1,126 @@
+{
+ "id": "lem-sf-integral-finite-extension-reduction-pairing",
+ "kind": "statement",
+ "title": "Integral scalar extension respects signed biduality and finite Hom reductions",
+ "statement": "Fix D,l,E⊂L,X,wE,wL and the canonical maps of [def-sf-integral-finite-extension-core]. For normalized source/target tensor presentations a,b, their signed Koszul symmetries sE,sL and normalized quotient presentations mE,mL [def-sf-integral-hom-reduction-models; def-sf-integral-verdier-models], assume both swaps are natural and that the evaluations of a, b and of every finite target presentation of mE, mL are natural in the first tensor variable. Then scalar extension commutes with the actual signed double-dual morphism via beta, with the finite evaluation-defined internal-Hom comparison via v, and with the finite Verdier comparison via beta. The finite equations use exactly quotient, homMap and finiteU, at every exponent n+1 including intervening ramified levels. Inputs are integral bounded constructible; no invertibility or identity/composition conclusion is included.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-tower/lem-coef-integral-finite-extension.proof.md",
+  "place": "Paragraphs 5-7: transpose scalar evaluation, the double-dual square and finite quotient equations."
+ },
+ "stmt_deps": [
+  "def-sf-integral-finite-extension-core",
+  "def-sf-integral-hom-reduction-models",
+  "def-sf-integral-verdier-models",
+  "def-weil-derived-complete-integral-detailed"
+ ],
+ "proof": [
+  {
+   "text": "Use simultaneous signed tensor-Hom models and their normalized evaluations. The scalar tensorator multiplies degree-zero coefficient factors and therefore commutes with the Koszul swap. Transpose scalar evaluation in each input; the two double-dual composites have the same transpose, giving the actual delta square.",
+   "uses": [
+    "lem-sf-integral-verdier-signed-calculus",
+    "lem-weil-pbc-ringed-internal-hom-exact-restriction",
+    "lem-pur-rhom-global-sections",
+    "def-sf-integral-finite-extension-core"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Tensor the same evaluation representative with every finite quotient. Tensor balancing identifies its transpose with the finite homMap conjugated by quotient. This is the v equation; no freeness of the intervening quotient is needed. Postcompose with finiteU and use u_reduction and Hom naturality to obtain the beta equation. Simultaneous localization preserves these equations, so no faithfulness claim for separate finite evaluations is used.",
+   "uses": [
+    "lem-coef-integral-hom-reduction",
+    "thm-coef-finite-hom",
+    "lem-coef-semilinear-derived-sections",
+    "lem-pur-compact-support-integral-coefficient-comparison",
+    "def-sf-integral-finite-extension-core"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-sf-integral-finite-extension-core",
+  "lem-coef-integral-hom-reduction",
+  "lem-coef-semilinear-derived-sections",
+  "lem-pur-compact-support-integral-coefficient-comparison",
+  "lem-pur-rhom-global-sections",
+  "lem-sf-integral-verdier-signed-calculus",
+  "lem-weil-pbc-ringed-internal-hom-exact-restriction",
+  "thm-coef-finite-hom"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-tower/lem-coef-integral-finite-extension.proof.md",
+  "place": "Paragraphs 5-7: transpose scalar evaluation, the double-dual square and finite quotient equations."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Finite free scalar extension of derived sheaves commutes with internal Hom, evaluation, identity and composition",
+   "results": "8 results: ModuleCat.extendScalarsComp, ordinary extension/restriction adjunction, free sheaves, pullback free generators. None states completed derived sheaf Hom, signed biduality or finite dualizing comparisons.",
+   "date": "2026-10-26",
+   "verdict": "generic ingredients only"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"SheafOfModules\", \"tensor\", \"hom\"",
+   "results": "3 PresheafOfModulesOfCommRing tensorHom declarations; these give tensor on ordinary morphisms, not derived Hom scalar compatibility. LeanFinder additionally returned light condensed internal-Hom section formulas, not the completed coefficient theorem.",
+   "date": "2026-10-26",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "derivedInternalHom|Verdier|dualizing",
+   "results": "msearch: generic triangulated/Verdier references only; no completed coefficient comparison. Project rg finds the existing Models, scalar Hom comparison, finite coefficient calculus and signedCalculus. They supply ingredients but not these three completed comparison conclusions. Blueprint search for finite extension internal Hom found no separate node.",
+   "date": "2026-10-26",
+   "verdict": "no duplicate"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.SixFunctors.CoefIntegralFiniteExtension",
+  "date": "2026-10-26",
+  "group": "T8"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-coef-integral-finite-extension",
+   "place": "Paragraphs 5-7: transpose scalar evaluation, the double-dual square and finite quotient equations.",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "lean": {
+  "module": "Sheaf.SixFunctors.CoefIntegralFiniteExtensionReductionPairing",
+  "file": "lean/Sheaf/SixFunctors/CoefIntegralFiniteExtensionReductionPairing.lean",
+  "declaration": "WeilConjectures.IntegralFiniteExtension.reductionPairing",
+  "statement": "theorem reductionPairing (a : IntegralHom.TensorPresentation.{u, u} X (completedIntegralCommRingSheafUnrestricted l E X)) (b : IntegralHom.TensorPresentation.{u, u} X (completedIntegralCommRingSheafUnrestricted l L X)) (sE : IntegralVerdier.SignedSymmetry X _ a) (sL : IntegralVerdier.SignedSymmetry X _ b) (mE : ∀ n : ℕ, IntegralHom.ReductionPresentation l E X D hl a n) (mL : ∀ n : ℕ, IntegralHom.ReductionPresentation l L X D hl b n) (hnatE : ∀ (K M K' M' : IntegralVerdier.Ambient l E X) (f : K ⟶ K') (g : M ⟶ M'), a.tensor.map (Prod.mkHom f g) ≫ (sE.swap K' M').hom = (sE.swap K M).hom ≫ a.tensor.map (Prod.mkHom g f)) (hnatL : ∀ (K M K' M' : IntegralVerdier.Ambient l L X) (f : K ⟶ K') (g : M ⟶ M'), b.tensor.map (Prod.mkHom f g) ≫ (sL.swap K' M').hom = (sL.swap K M).hom ≫ b.tensor.map (Prod.mkHom g f)) (hevalE : ∀ (K K' M : IntegralVerdier.Ambient l E X) (f : K' ⟶ K), a.tensor.map (Prod.mkHom (𝟙 K') ((IntegralHom.hom.{u, u} X (completedIntegralCommRingSheafUnrestricted l E X)).map (Prod.mkHom f.op (𝟙 M)))) ≫ (a.adjunction K').counit.app M = a.tensor.map (Prod.mkHom f (𝟙 _)) ≫ (a.adjunction K).counit.app M) (hevalL : ∀ (K K' M : IntegralVerdier.Ambient l L X) (f : K' ⟶ K), b.tensor.map (Prod.mkHom (𝟙 K') ((IntegralHom.hom.{u, u} X (completedIntegralCommRingSheafUnrestricted l L X)).map (Prod.mkHom f.op (𝟙 M)))) ≫ (b.adjunction K').counit.app M = b.tensor.map (Prod.mkHom f (𝟙 _)) ≫ (b.adjunction K).counit.app M) (hfinE : ∀ (n : ℕ) (K K' W : DerivedCategory (scalarReductionTarget l E X n)) (f : K' ⟶ K), (mE n).target.tensor.map (Prod.mkHom (𝟙 K') ((IntegralHom.hom.{u, u} X (integralCoefficientCommRingSheaf l E X n)).map (Prod.mkHom f.op (𝟙 W)))) ≫ ((mE n).target.adjunction K').counit.app W = (mE n).target.tensor.map (Prod.mkHom f (𝟙 _)) ≫ ((mE n).target.adjunction K).counit.app W) (hfinL : ∀ (n : ℕ) (K K' W : DerivedCategory (scalarReductionTarget l L X n)) (f : K' ⟶ K), (mL n).target.tensor.map (Prod.mkHom (𝟙 K') ((IntegralHom.hom.{u, u} X (integralCoefficientCommRingSheaf l L X n)).map (Prod.mkHom f.op (𝟙 W)))) ≫ ((mL n).target.adjunction K').counit.app W = (mL n).target.tensor.map (Prod.mkHom f (𝟙 _)) ≫ ((mL n).target.adjunction K).counit.app W) : let T := integralScalarExtensionOfUniverses l E L ι X let HE := IntegralHom.hom.{u, u} X (completedIntegralCommRingSheafUnrestricted l E X) let DE := IntegralVerdier.dual l E X wE.omega.obj let DL := IntegralVerdier.dual l L X wL.omega.obj (∀ K : sfIntegralConstructibleCategory l E X, IntegralVerdier.delta X b sL wL.omega.obj (T.obj K.obj) ≫ DL.map (beta l E L ι X D hl wE wL a b K.obj K.property.1).op = T.map (IntegralVerdier.delta X a sE wE.omega.obj K.obj) ≫ beta l E L ι X D hl wE wL a b (DE.obj (op K.obj)) (scalarInternalHom_complete l E X K.obj wE.omega.obj wE.omega.property.1)) ∧ (∀ (n : ℕ) (K M : sfIntegralConstructibleCategory l E X), let rE := scalarReductionDerivedExtension l E X n let rL := scalarReductionDerivedExtension l L X n let F := pbcDerivedExtend (integralScalarQuotientSheafMap l E L ι X n) let Hn := IntegralHom.hom.{u, u} X (integralCoefficientCommRingSheaf l L X n) rL.map (v l E L ι X a b K.obj M.obj K.property.1 M.property.1) ≫ IntegralHom.comparison l L X D hl (mL n) (T.obj K.obj) (T.obj M.obj) = (quotient l E L ι X n (HE.obj (op K.obj, M.obj)) (scalarInternalHom_complete l E X K.obj M.obj M.property.1)).hom ≫ F.map (IntegralHom.comparison l E X D hl (mE n) K.obj M.obj) ≫ homMap X (integralScalarQuotientSheafMap l E L ι X n) (mE n).target (mL n).target (rE.obj K.obj) (rE.obj M.obj) ≫ Hn.map (Prod.mkHom (quotient l E L ι X n K.obj K.property.1).hom.op (quotient l E L ι X n M.obj M.property.1).inv)) ∧ (∀ (n : ℕ) (K : sfIntegralConstructibleCategory l E X), let rE := scalarReductionDerivedExtension l E X n let rL := scalarReductionDerivedExtension l L X n let F := pbcDerivedExtend (integralScalarQuotientSheafMap l E L ι X n) let Hn := IntegralHom.hom.{u, u} X (integralCoefficientCommRingSheaf l L X n) rL.map (beta l E L ι X D hl wE wL a b K.obj K.property.1) ≫ IntegralVerdier.comparison l L X D hl (mL n) wL.omega wL.reduction (T.obj K.obj) = (quotient l E L ι X n (DE.obj (op K.obj)) (scalarInternalHom_complete l E X K.obj wE.omega.obj wE.omega.property.1)).hom ≫ F.map (IntegralVerdier.comparison l E X D hl (mE n) wE.omega wE.reduction K.obj) ≫ homMap X (integralScalarQuotientSheafMap l E L ι X n) (mE n).target (mL n).target (rE.obj K.obj) (integralDualizingFiniteTerm l E D X n) ≫ Hn.map (Prod.mkHom (quotient l E L ι X n K.obj K.property.1).hom.op (finiteU l E L ι X D n)))",
+  "existing": false,
+  "branch": "sheaf-dag",
+  "by": "T8",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-50c18",
+  "group": "T8",
+  "result": "fix",
+  "landing": "20261025T203301-L-2800049",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-50c18",
+  "group": "T8",
+  "result": "fix",
+  "landing": "20261025T203301-L-2800049",
+  "kind": "interface",
+  "note": "independent cc review: item lem-coef-integral-finite-extension + 3 new sorried lemmas and Core relocation against clone (diffed verbatim), TensorPresentation/ReductionPresentation/SignedSymmetry fields and signedCalculus conjuncts"
+ }
+}

@@ -1,0 +1,133 @@
+{
+ "id": "lem-sf-native-action-site-hom-comparison",
+ "kind": "statement",
+ "title": "Lifting ordinary Hom comparisons to native Weil structures",
+ "statement": "Let k₀ be a finite field and l a prime different from ringChar k₀, and let X be a scheme over Spec k₀. Fix a NativeFrobeniusRingedModel A and a twisted action-site presentation P of its site, translation and coefficient ring. Define K from P's action-site modules to native Weil sheaves by restriction P.modules.functor followed by IsoAlgebra.mapOfNatIso of A.comparison. Then internal sheaf Hom followed by K is naturally isomorphic to native ihomBifunctor after K in both arguments. Neither existence of A or P nor equivalence of K is asserted by this Hom compatibility lemma.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-package/cor-coef-verdier-weil-equivariance.proof.md",
+  "place": "Internal-Hom comparison and naturality of evaluation paragraph; underived small-site and fixed-pair parts of the native ringed presentation."
+ },
+ "stmt_deps": [
+  "lem-sf-native-frobenius-ringed-model",
+  "def-sf-native-weil-closed-models",
+  "lem-sf-twisted-action-ringed-site"
+ ],
+ "proof": [
+  {
+   "text": "For ordinary modules M,N with invertible structure maps tM,tN, expand native ihom_obj_str for their transported structures c_M followed by E(tM) and c_N followed by E(tN). Naturality of precomposition commutes it with postcomposition. Apply A.hom_frobenius to the resulting initial four arrows and A.hom_naturality to the two remaining action arrows. This proves ordinary_hom_action.",
+   "uses": [
+    "lem-sf-native-frobenius-ringed-model",
+    "def-sf-native-weil-closed-models"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For action-site modules take the underlying isomorphism E(P.hom) followed by A.hom. Naturality of c, P.hom_action, and ordinary_hom_action show that it intertwines the native structure maps. Lift this actual isomorphism by Algebra.isoMk and ObjectProperty.isoMk. P.hom_naturality and A.hom_naturality give the bifunctor naturality square; assemble the components with NatIso.ofComponents.",
+   "uses": [
+    "lem-sf-native-frobenius-ringed-model",
+    "lem-sf-twisted-action-ringed-site",
+    "def-weil-endofunctor-fixed-pair-category"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-sf-native-weil-closed-models",
+  "def-weil-endofunctor-fixed-pair-category",
+  "lem-sf-native-frobenius-ringed-model",
+  "lem-sf-twisted-action-ringed-site"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-package/cor-coef-verdier-weil-equivariance.proof.md",
+  "place": "Internal-Hom comparison and naturality of evaluation paragraph; underived small-site and fixed-pair parts of the native ringed presentation."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "An equivalence from internal module sheaves to sectionwise module sheaves intertwines pullback and internal Hom for a site automorphism",
+   "results": "Eight sheaf pullback, sheafCongr and sheafHom results; none compares the actual native adic module pullback with a small ringed-site model.",
+   "date": "2026-10-27",
+   "verdict": "No exact match."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An equivalence intertwining endofunctors induces an equivalence between categories of algebras with invertible structure maps",
+   "results": "Monad algebra equivalence and Endofunctor.Algebra.isoMk; no native Frobenius or sectionwise Hom comparison.",
+   "date": "2026-10-27",
+   "verdict": "Use source-library IsoAlgebra transport and prove the categorical glue."
+  },
+  {
+   "tool": "grep",
+   "query": "mapOfNatIso|equivalenceOfNatIso; sectionModule.*Hom|ambient.*Hom|comparisonModuleFunctor",
+   "results": "Mathlib search gives no native comparison. Project search finds fullyFaithfulMapOfNatIso and the proved adicModuleHomComparisonCore, but no Frobenius-compatible small-site composite.",
+   "date": "2026-10-27",
+   "verdict": "The ordinary comparisons exist separately; the displayed Frobenius square is new."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.NativeWeilRingedPresentation",
+  "date": "2026-10-27",
+  "group": "V2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "cor-coef-verdier-weil-equivariance",
+   "place": "Internal-Hom comparison and naturality of evaluation paragraph; underived small-site and fixed-pair parts of the native ringed presentation.",
+   "via": [
+    "lem-sf-native-weil-ringed-presentation",
+    "lem-sf-native-weil-hom-closed-structure",
+    "lem-sf-native-weil-hom-right-adjoint",
+    "lem-sf-native-weil-tensor-adjoints",
+    "lem-sf-native-weil-tensor-lift",
+    "lem-sf-weil-native-tensor-transport",
+    "lem-sf-weil-native-closed-forgetful"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.NativeActionSiteHomComparison",
+  "file": "lean/Sheaf/Paper/NativeActionSiteHomComparison.lean",
+  "declaration": "AlgebraicGeometry.ProEtaleWeilSheaf.native_action_site_hom_comparison",
+  "statement": "theorem native_action_site_hom_comparison\n    {k₀ : Type u} [Field k₀] [Finite k₀] {l : ℕ} [Fact l.Prime]\n    [Fact (ringChar k₀ ≠ l)] {X : Scheme.{u}}\n    [X.Over (Spec (CommRingCat.of k₀))]\n    (A : NativeFrobeniusRingedModel k₀ l X)\n    (P : Presentation A.J A.s A.R A.a) :\n    letI := P.category\n    Nonempty\n      (Functor.uncurry.obj (SheafOfModules.homFunctor (R := P.coefficient)) ⋙ A.toWeil P ≅\n        ((A.toWeil P).op.prod (A.toWeil P)) ⋙\n          Functor.uncurry.obj (ihomBifunctor k₀ l X))",
+  "branch": "sheaf-dag",
+  "by": "V2",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V2",
+  "result": "pass",
+  "landing": "20261027T034759-L-3686129",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V2",
+  "result": "pass",
+  "landing": "20261027T034759-L-3686129",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

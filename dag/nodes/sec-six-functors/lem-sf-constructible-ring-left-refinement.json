@@ -1,0 +1,126 @@
+{
+ "id": "lem-sf-constructible-ring-left-refinement",
+ "kind": "statement",
+ "title": "Ring proper/open refinement with its integral scalar square",
+ "statement": "Fix a prime l, an algebraic closure Omega of Q_l, a finite-field datum D with l different from its characteristic, finite-type D.k-schemes X,Y, and a separated finite-type D.k-morphism f:X to Y. Let R be CoefficientConstructionRing, with every left realization shift compatible [def-sf-constructible-exceptional-coefficient-construction-data, def-sf-constructible-exceptional-assembly-data]. For any proper compactification refinement r:c to d there is a family alpha_s:(R.operation c s).F isomorphic to (R.operation d s).F at finite and integral ring stages. Every alpha_s preserves shifts and has the specified open-unit/proper-compositor normalization RingRefinementNormalized. For every finite coefficient-field extension E to L the integral family satisfies TY(alpha_E) followed by q_d equals q_c followed by alpha_L(TX(-)), for the specified completed scalars and q maps of R. No rational or closed refinement is asserted.",
+ "stmt_deps": [
+  "def-sf-constructible-exceptional-coefficient-construction-data",
+  "def-sf-constructible-exceptional-assembly-data"
+ ],
+ "source": {
+  "document": "literature/zheng-six-operations-lefschetz-verdier-DM-stacks_arXiv-1006.3810.pdf",
+  "place": "Section 5, Lemma 5.13 and Constructions 5.14--5.15; normalized refinement construction step 6."
+ },
+ "proof": [
+  {
+   "text": "Choose the natural normalized open-unit comparison at each ring stage. Form beta by the explicit inverse proper compositor and proper pushforward of its inverse. Conjugate beta by R.left and lift the resulting natural isomorphism through the fully faithful output inclusion.",
+   "uses": [
+    "lem-sf-ring-open-refinement"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Reflect shift compatibility through the faithful inclusion. The assumed shift-compatible realizations, their inverses and beta commute with shifts, hence so does the lifted alpha. Substitution and cancellation give RingRefinementNormalized with the chosen open-unit components.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Apply the ordinary scalar-refinement square to the lifted scalar object using its realization isomorphism as the vertex transport e. Map the desired exceptional scalar equation into the ordinary category and cancel the output realization followed by the image of e. Use scalar-realization naturality, the two comparison_normalized equations and the formula for the lifted alpha. The remaining terms cancel by the inverse identities of e and R.left.",
+   "uses": [
+    "lem-sf-ring-refinement-scalar-word"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sf-ring-open-refinement",
+  "lem-sf-ring-refinement-scalar-word"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/more-etale.tex",
+  "place": "Explicit full-subcategory lifting, faithful shift reflection and a calculation conjugating the ordinary scalar word by R.left and the scalar realizations. The geometric open-unit and ordinary scalar-word steps are split off separately."
+ },
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "natural isomorphism of compact support pushforward functors along a proper refinement of compactifications",
+   "results": "8 hits, including lightProfiniteToLightCondSetIsoTopCatToLightCondSet, compactumToCompHausCompForget and TopCat.Presheaf.Pushforward.comp_inv_app. None states a coefficient-stage refinement.",
+   "date": "2026-10-27",
+   "verdict": "No geometric coefficient-stage refinement theorem."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.NatIso.ofComponents",
+   "results": "12 hits, including CategoryTheory.NatIso.ofComponents and its component lemmas.",
+   "date": "2026-10-27",
+   "verdict": "Generic assembly tool, not the geometric or localization comparison."
+  },
+  {
+   "tool": "grep",
+   "query": "naturalIso_of_integral|RingRefinementNormalized",
+   "results": "[grep] OK 0 hit(s)",
+   "date": "2026-10-27",
+   "verdict": "No Mathlib statement of the coefficient-normalized comparison."
+  },
+  {
+   "tool": "leansearch",
+   "query": "proper open compact support refinement natural isomorphism scalar extension localization",
+   "results": "8 hits, including Module.FinitePresentation.isLocalizedModule_mapExtendScalars and LinearMap.extendScalarsOfIsLocalizationEquiv.",
+   "date": "2026-10-27",
+   "verdict": "No compact-support refinement theorem; ordinary localization tools only."
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.ConstructibleExceptionalLeftRefinements",
+  "date": "2026-10-27",
+  "group": "Y6"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "sk-thm-sf-tensor-hom",
+   "place": "Exceptional construction step 6: Ring proper/open refinement with its integral scalar square",
+   "via": [
+    "lem-sf-constructible-exceptional-left-refinements",
+    "lem-sf-constructible-exceptional-coefficient-construction"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-thm-sf-compatibility",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.ConstructibleRingLeftRefinement",
+  "file": "lean/Sheaf/Paper/ConstructibleRingLeftRefinement.lean",
+  "declaration": "WeilConjectures.ConstructibleExceptionalCoefficients.exists_ring_left_refinement",
+  "statement": "theorem exists_ring_left_refinement (hR : ∀ (c : Compactification f) (s : RingStage.{max u v} l), letI := (R.operation c (s.stage l)).leftShift letI := constructionInclusionShift.{u, v} l Ω X s letI := constructionInclusionShift.{u, v} l Ω Y s (R.left c s).hom.CommShift ℤ) {c d : Compactification f} (r : c.Refinement d) : ∃ α : ∀ s : RingStage.{max u v} l, (R.operation c (s.stage l)).F ≅ (R.operation d (s.stage l)).F, ∃ hα : ∀ s, letI := (R.operation c (s.stage l)).leftShift letI := (R.operation d (s.stage l)).leftShift (α s).hom.CommShift ℤ, (∀ s, RingRefinementNormalized.{u, v} l Ω r s (R.left c s) (R.left d s) (refinementComparisonOfLeft.{u, v} l Ω _ _ (α s) (hα s))) ∧ ∀ (E L : FieldStage.{max u v} l) (i : E.carrier →ₐ[Padic l] L.carrier) (K : C.{u, v} l Ω X (.integral E)), let a := PurCompactSupport.completedChange l E.carrier L.carrier i let ha := Allowed.integral E L i (R.scalar (s := .integral E) (t := .integral L) a ha false).functor.map ((α (.integral E)).hom.app K) ≫ (Scalar.counitQ.{u, v} l Ω (R.scalar (s := .integral E) (t := .integral L) a ha true) (R.scalar (s := .integral E) (t := .integral L) a ha false) (R.comparison d (s := .integral E) (t := .integral L) a ha)).hom.app K = (Scalar.counitQ.{u, v} l Ω (R.scalar (s := .integral E) (t := .integral L) a ha true) (R.scalar (s := .integral E) (t := .integral L) a ha false) (R.comparison c (s := .integral E) (t := .integral L) a ha)).hom.app K ≫ (α (.integral L)).hom.app ((R.scalar (s := .integral E) (t := .integral L) a ha true).functor.obj K)",
+  "branch": "sheaf-dag",
+  "by": "Y6",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Y6",
+  "result": "pass",
+  "landing": "20261027T013012-L-2357707",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S3",
+  "result": "pass",
+  "landing": "20261027T034737-L-3681035",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

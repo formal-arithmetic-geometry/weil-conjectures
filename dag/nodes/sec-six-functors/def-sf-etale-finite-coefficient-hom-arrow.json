@@ -13,9 +13,30 @@
   "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-tower/thm-coef-finite-hom.proof.md",
   "place": "opening paragraph: tensor evaluation, reassociate and transpose"
  },
- "proof": [],
+ "proof": [
+  {
+   "text": "For the closed-normalization clause, construct the closed record from the published monoidal structure, the specified Koszul-braided right-tensor adjunction and finiteHomEvaluation_naturality. Share the derived internal Hom, adjunction and normalization at the generic coefficient category before specializing to etale sheaves. This is the same normalization, with its definition bodies factored.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "For uniqueness of the normalized closed record, eliminate equality of the monoidal field, apply function extensionality and eq_of_heq to the adjunction fields, and use proof irrelevance for evaluation naturality. The canonical comparison arrow and scalar associators remain as stated.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "For representative data, first apply congrArg to the monoidal-field equality of the canonical closed normalization. Combine this with the quotient-family closed-field normalization to identify each closed tensor with the native derived tensor. The local generators are the existing sheafified pure tensors followed by signed-total summand inclusions. The model maps are the existing native localization tensorators, transported along the tensor-family equality. Equality elimination constructs the representative record and proves its heterogeneous normalization. For any other normalized record, eq_of_heq and dependent function extensionality identify both its generator and model fields with those of this record, proving uniqueness.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
  "proof_deps": [],
- "proof_origin": null,
+ "proof_origin": {
+  "by": "worker",
+  "group": "Y3",
+  "date": "2026-10-26",
+  "note": "Complete the remaining representative-data construction and uniqueness by transport of the native tensorator and field extensionality. Retain the existing closed-normalization proof and the unit route. Share the actual cochain category, its category instance, signed total tensor and localization in the native tensor record, so all representative fields use the same real constructions. The representative normalization is boxed generically, preserving exactly the generator and model clauses. Bundle each source category, tensor and localization together before forming the representative family. Give the same signed-total inclusion its native projected codomain before etale specialization, avoiding expanded tensor-object comparisons."
+ },
  "mathlib_match": null,
  "mathlib_searches": [
   {
@@ -120,7 +141,18 @@
   },
   "same_as": []
  },
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
  "chapter": "sec-six-functors",
  "unit": "sk-prop-sf-biduality-general",
  "lean": {
@@ -175,7 +207,32 @@
    "WeilConjectures.finiteHomEtaleRepresentativeData_existsUnique",
    "WeilConjectures.finiteHomEtaleRepresentativeData",
    "WeilConjectures.finiteHomEtaleTotalSection",
-   "WeilConjectures.finiteHomEtaleTensorModel"
+   "WeilConjectures.finiteHomEtaleTensorModel",
+   "WeilConjectures.finiteHomEtaleInternalHomGeneral",
+   "WeilConjectures.finiteHomCochainTensorGeneral",
+   "WeilConjectures.finiteHomLocalizationTensorModelGeneral",
+   "WeilConjectures.finiteHomEtaleLocalizationTensorModelGeneral",
+   "WeilConjectures.finiteHomEtaleCanonicalTensorSection",
+   "WeilConjectures.FiniteHomEtaleModelNormalizationGeneral",
+   "WeilConjectures.finiteHomEtaleCanonicalTensorSectionGeneral",
+   "WeilConjectures.FiniteHomGeneratorNormalizationAux",
+   "WeilConjectures.finiteHomEtaleDerivedTensorGeneral",
+   "WeilConjectures.finiteHomDerivedTensorGeneral",
+   "WeilConjectures.FiniteHomNativeTensorData",
+   "WeilConjectures.finiteHomNativeTensorDataGeneral",
+   "WeilConjectures.finiteHomDerivedRightAdjunctionGeneral",
+   "WeilConjectures.finiteHomDerivedInternalHomGeneral",
+   "WeilConjectures.FiniteHomDerivedClosedNormalization",
+   "WeilConjectures.finiteHomEtaleTotalObjectGeneral",
+   "WeilConjectures.finiteHomEtaleNativeTensorDataGeneral",
+   "WeilConjectures.finiteHomEtaleCochainGeneral",
+   "WeilConjectures.finiteHomEtaleCochainCategoryGeneral",
+   "WeilConjectures.FiniteHomQuotientClosedData.Representatives.Normalization",
+   "WeilConjectures.FiniteHomTensorSourceData",
+   "WeilConjectures.finiteHomEtaleTensorSourceGeneral",
+   "WeilConjectures.FiniteHomQuotientClosedData.Representatives.fromSources",
+   "WeilConjectures.finiteHomNativeTensorInclusionGeneral",
+   "WeilConjectures.finiteHomEtaleTensorInclusionGeneral"
   ],
   "file": "lean/Sheaf/Paper/EtaleFiniteCoefficientHomArrow.lean",
   "statement": "abbrev etaleFiniteHomCanonical {n m : ℕ} (h : m ≤ n) (K M : finiteHomEtale l E X n) : (finiteHomEtaleReduction l E X h).obj ((finiteHomEtaleInternalHom l E X n).obj (op K, M)) ⟶ (finiteHomEtaleInternalHom l E X m).obj (op ((finiteHomEtaleReduction l E X h).obj K), (finiteHomEtaleReduction l E X h).obj M)",
@@ -183,7 +240,7 @@
   "by": "NQ",
   "date": "2026-10-18",
   "existing": false,
-  "note": "Section 1(B), transitive prerequisite repair: the published module repeatedly times out at 60 seconds before this item can load its statement dependencies. Retain every declaration and definition body, including all canonical normalizations and source proof docstrings. Let Lean infer the two final representative-projection result types from their already typed record fields, avoiding redundant comparison of the expanded specialized monoidal categories; their inferred types are definitionally the former result types. Also make the two backward.isDefEq.respectTransparency settings explicit. No limit or linter is disabled, no file is split, and no mathematical statement changes."
+  "note": "Section 1(B), transitive prerequisite repair: the published module repeatedly times out at 60 seconds before this item can load its statement dependencies. Retain every declaration and definition body, including all canonical normalizations and source proof docstrings. Let Lean infer the two final representative-projection result types from their already typed record fields, avoiding redundant comparison of the expanded specialized monoidal categories; their inferred types are definitionally the former result types. Also make the two backward.isDefEq.respectTransparency settings explicit. No limit or linter is disabled, no file is split, and no mathematical statement changes. Y7: share the same published uncurried internal Hom before coefficient specialization; prove the existing total tensor existence instance from small coproducts. All mathematical definitions and statements are unchanged. Y7: explicit total-tensor functor shares native object and map data before specialization. Y7: share the same localization tensorator before specializing the representative model normalization. Y7: package the same native derived tensor and localization map together before specialization. The explicit total tensor requires only the additive structure, zero object and small colimits; no unused Grothendieck universe enters this constructor. Q5: prove the existing closed normalization theorem by generic closed-record construction and extensionality. Factor the same published internal Hom, specified right adjunction and normalization through three generic definitions, definitionally equal to the former bodies. The signed-total inclusion needs only preadditivity; its body is unchanged. The representative-data theorem remains the sole original sorry. Y3: complete representative-data existence and uniqueness by equality transport and field extensionality. Store the same actual cochain category, category instance, total tensor and localization functor in the shared native tensor record, and share its etale specialization before coefficient specialization. Existing concrete types, mathematical data, maps and normalization conditions remain unchanged. The same two normalization clauses are stored in a generic proof record, with the etale normalization abbreviated to that record and dot projections giving the same equalities."
  },
  "reviewed": {
   "date": "2026-10-18",
@@ -200,5 +257,15 @@
   "group": "NQ",
   "result": "fix",
   "note": "Item module and node byte-identical to PASSed 5f0862896f26 (landing return was an unrelated PbcScalarExtension 60 s load timeout); re-checked hypotheses (p≠l, N=m+1≥j=n+1, separated finite-type X0, Over endomorphism h without properness, arbitrary alg. closed Omega, y≫h=y), iota = eqToIso(hy.symm)≪≫sfIntrinsicDerivedPullbackComp with node direction, sigma pinned componentwise (tau ≫ counit-compatible presentation iso ≫ S(mu_y)), final square r(iota_A)≫sigma_{H_A K}≫S_B(mu_h)=sigma_K≫iota_B; gates OK. New DerivedPullbackTensorHom options repair has no effect (back to back live 37.6/35.8 s vs delivered 37.0/35.0 s) and only adds landing risk on a 100+-importer module → FIX fixes/DerivedPullbackTensorHom.lean = current live text (record statement verbatim in it, all declarations present). Dep record def-weil-derived-pullback-tensor-hom note/by rewritten (same declarations; maintainer may --revert-nodes). IntegralCompactSupportCoefficientData line wraps accepted (live gives 2 longLine warnings). EtaleFiniteCoefficientHomArrow repair unchanged, accepted. nt_compile --json: delivery as is rc=0 clean (DPTH 45.0, ICSC 8.4, EFCHA 29.5, item 4.7 s); with fix rc=0 clean (36.4/8.0/27.9/5.3 s). Land at lower load."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-7c6a0",
+  "group": "Y3",
+  "result": "pass",
+  "landing": "20261026T003251-L-157414",
+  "kind": "interface",
+  "note": "independent cc review: Delivered EtaleFiniteCoefficientHomArrow (finiteHomEtaleRepresentativeData_existsUnique proved; native cochain/tensor/localization record refactor) against the clone, node def-sf-etale-finite-coefficient-hom-arrow, the change record, #print axioms, and sandbox compiles of the item + 7 direct importers + 6 intermediate dependents (all clean)"
  }
 }

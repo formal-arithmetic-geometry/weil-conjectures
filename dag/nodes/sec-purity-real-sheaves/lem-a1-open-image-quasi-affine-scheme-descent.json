@@ -1,0 +1,279 @@
+{
+ "id": "lem-a1-open-image-quasi-affine-scheme-descent",
+ "kind": "statement",
+ "title": "Quasi-affine scheme descent over the open image of an affine etale map",
+ "statement": "Let $S$ be a scheme [def-pc-scheme], let $a:T'\\to T$ be an etale morphism [def-weil-etale-morphism] between affine $S$-schemes, let $X$ be an algebraic space over $S$ [def-trf-algebraic-space] with a morphism $X\\to T$, and let $W\\subseteq X$ be an open subspace, meaning that its inclusion becomes an open immersion on every scheme base change [def-weil-open-immersion]. For an algebraic space $Y$, $|Y|$ is its set of field-valued point classes, two maps from field spectra being identified when they agree over a common field extension. Let $B\\subseteq T$ be the open subscheme with $|B|=\\operatorname{im}(|T'|\\to|T|)$, and suppose the image of $|W|\\to|T|$ is contained in $|B|$. Suppose $P=W\\times_TT'$ [def-pc-fibre-product] is represented by a scheme whose structure map $P\\to T'$ is quasi-affine [def-nagata-quasi-affine-morphism], meaning that the inverse image of each affine open is a quasi-compact open subscheme of an affine scheme. Then $W\\to T$ factors through $B$, and the induced map $p:T'\\to B$ is affine [pqf-def-affine-morphism], surjective etale and both a singleton fpqc covering [def-weil-pbc-fpqc-covering] and an fppf covering [def-pc-fppf-site]. The functor on schemes over $B$ sending $Q\\to B$ to the $S$-morphisms $Q\\to W$ over $B$ is an fppf sheaf, and its pullback along $p$ is represented by $P=W\\times_BT'$. The canonical comparison $P\\times_BT'\\simeq T'\\times_BP$, identifying both with $T'\\times_BW\\times_BT'$ and retaining the same $W$-section and ordered base coordinates, is a scheme descent datum [def-pd-descent-datum]: on the triple overlap it satisfies $\\phi_{02}=\\phi_{12}\\circ\\phi_{01}$. This datum is effective, and there is a $B$-scheme representing the specified sheaf $W$. No affineness assumption on the open scheme $B$ is made.",
+ "source": {
+  "document": "literature/stacks-project/spaces-morphisms.tex",
+  "place": "Tag 03XW (lemma-neighbourhood-scheme), proof, final paragraph: open image base, covering checks, sheaf descent datum, cocycle and effective descent"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-etale-morphism",
+  "def-trf-algebraic-space",
+  "def-weil-open-immersion",
+  "def-pc-fibre-product",
+  "def-nagata-quasi-affine-morphism",
+  "pqf-def-affine-morphism",
+  "def-weil-pbc-fpqc-covering",
+  "def-pc-fppf-site",
+  "def-pd-descent-datum",
+  "def-a1-space-open-subspace",
+  "def-a1-space-point-topology"
+ ],
+ "proof": [
+  {
+   "text": "By [def-a1-space-open-subspace], $W$ is an algebraic space. The image of $a$ is open by [lem-weil-pbc-etale-morphism-open-map], so it defines the stated open subscheme $B\\subseteq T$. Regard schemes as their algebraic spaces using [def-trf-scheme-algebraic-space]. Apply [lem-a1-space-open-factor-scheme-tests] to $W\\to T$ and to $a:T\\prime\\to T$ with open subspace $B$: the assumed point-image containment gives the unique factorization $W\\to B$, and the point-image equality gives a factorization $p:T\\prime\\to B$ which is representable surjective etale. The scheme-test comparison in that lemma identifies $W\\times_BT\\prime$ with $W\\times_TT\\prime=P$.",
+   "uses": [
+    "def-a1-space-open-subspace",
+    "lem-weil-pbc-etale-morphism-open-map",
+    "def-trf-scheme-algebraic-space",
+    "lem-a1-space-open-factor-scheme-tests"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-morphisms.tex",
+    "place": "Tag 03XW, lemma-neighbourhood-scheme, final proof paragraph; expanded using Tags 03IE, 01S8, 01SD, 022C, 02W5 and 0247"
+   }
+  },
+  {
+   "text": "The one-member affine open cover $\\{T\\}$ of $T$ has inverse image $T\\prime$, which is affine. Thus [pqf-lem-affine-local-target] gives that $a$ is affine. Since $a$ factors through $B$, its pullback along $B\\hookrightarrow T$ is $p:T\\prime\\to B$: the inverse comparison to $T\\prime\\times_TB\\to T\\prime$ sends $t$ to $(t,p(t))$, by the fibre-product universal property [def-pc-fibre-product]. Base-change stability of affine morphisms [lem-weil-pbc-affine-morphism-permanence](1) makes $p$ affine (and clause (3) also makes it quasi-compact). This argument uses no affineness of $B$.",
+   "uses": [
+    "pqf-lem-affine-local-target",
+    "def-pc-fibre-product",
+    "lem-weil-pbc-affine-morphism-permanence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-morphisms.tex",
+    "place": "Tag 03XW, lemma-neighbourhood-scheme, final proof paragraph; expanded using Tags 03IE, 01S8, 01SD, 022C, 02W5 and 0247"
+   }
+  },
+  {
+   "text": "By [def-weil-etale-morphism], the etale morphism $p$ is flat and locally of finite presentation. Together with its surjectivity from Step 1, these are exactly the covering conditions of [def-pc-fppf-site], so $\\{p\\}$ is an fppf covering. Applying [lem-trf-fppf-covering-is-fpqc] to this singleton family proves that it is also an fpqc covering in the stated sense.",
+   "uses": [
+    "def-weil-etale-morphism",
+    "def-pc-fppf-site",
+    "lem-trf-fppf-covering-is-fpqc"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-morphisms.tex",
+    "place": "Tag 03XW, lemma-neighbourhood-scheme, final proof paragraph; expanded using Tags 03IE, 01S8, 01SD, 022C, 02W5 and 0247"
+   }
+  },
+  {
+   "text": "By [def-a1-space-open-subspace], $W$ is an algebraic space; by [def-trf-algebraic-space] its functor on $S$-schemes is an fppf sheaf. Let $F$ on $B$-schemes be the functor of maps to $W$ over $B$. Given compatible such maps on an fppf covering of a $B$-scheme $Q$, first glue their underlying $S$-maps uniquely in $W$. Their composites to $B$ equal the fixed structure map of $Q$ locally, hence globally because $h_B$ is the representable fppf sheaf of [def-trf-scheme-algebraic-space]. The glued map is therefore over $B$. This proves the sheaf condition for exactly the functor $F$ in the statement, without replacing it by a different sheaf.",
+   "uses": [
+    "def-a1-space-open-subspace",
+    "def-trf-algebraic-space",
+    "def-trf-scheme-algebraic-space"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-morphisms.tex",
+    "place": "Tag 03XW, lemma-neighbourhood-scheme, final proof paragraph; expanded using Tags 03IE, 01S8, 01SD, 022C, 02W5 and 0247"
+   }
+  },
+  {
+   "text": "The representation $P=W\\times_BT\\prime$ of the pullback of $F$ follows on tests: over a map $t:Q\\to T\\prime$, a map into $P$ is exactly a map $w:Q\\to W$ with the same composite to $B$. Apply [lem-trf-fppf-sheaf-representability-descent-data] to $F$ and the fppf covering $\\{p\\}$. Its comparison maps give scheme descent data on the representing scheme $P$. Explicitly, the comparison sends $((w,t_0),t_1)$ to $(t_0,(w,t_1))$; its inverse retains the same $w,t_0,t_1$ and regroups them in the other order. Thus it is the comparison specified in the statement, with the same ordered base coordinates. On a triple overlap, both $\\phi_{02}$ and $\\phi_{12}\\circ\\phi_{01}$ retain $w,t_0,t_1,t_2$ and change only the distinguished coordinate from $t_0$ to $t_2$. These natural maps coincide on every test scheme, so the cocycle has the required direction.",
+   "uses": [
+    "lem-trf-fppf-sheaf-representability-descent-data"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-morphisms.tex",
+    "place": "Tag 03XW, lemma-neighbourhood-scheme, final proof paragraph; expanded using Tags 03IE, 01S8, 01SD, 022C, 02W5 and 0247"
+   }
+  },
+  {
+   "text": "Apply [lem-trf-quasi-affine-fpqc-effective-descent] with its $(A,B,V,\\phi)$ equal to $(T\\prime,B,P,\\phi)$. Step 3 supplies its singleton fpqc covering, the hypothesis of this item supplies precisely the quasi-affine morphism $P\\to T\\prime$, and Step 5 supplies the scheme descent datum and cocycle. It gives a $B$-scheme $V_0$ and an isomorphism $V_0\\times_BT\\prime\\simeq P$ inducing this datum. The cited theorem permits arbitrary scheme base $B$.",
+   "uses": [
+    "lem-trf-quasi-affine-fpqc-effective-descent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-morphisms.tex",
+    "place": "Tag 03XW, lemma-neighbourhood-scheme, final proof paragraph; expanded using Tags 03IE, 01S8, 01SD, 022C, 02W5 and 0247"
+   }
+  },
+  {
+   "text": "The datum in Step 5 is the datum associated to the specified fppf sheaf $F$. It is effective by Step 6. The final representability criterion of [lem-trf-fppf-sheaf-representability-descent-data] therefore says that $F$ itself is represented by a $B$-scheme. This identifies the descended object with the original functor $Q\\mapsto\\operatorname{Mor}_B(Q,W)$, and proves the last assertion.",
+   "uses": [
+    "lem-trf-fppf-sheaf-representability-descent-data"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-morphisms.tex",
+    "place": "Tag 03XW, lemma-neighbourhood-scheme, final proof paragraph; expanded using Tags 03IE, 01S8, 01SD, 022C, 02W5 and 0247"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-a1-space-open-subspace",
+  "lem-weil-pbc-etale-morphism-open-map",
+  "def-trf-scheme-algebraic-space",
+  "lem-a1-space-open-factor-scheme-tests",
+  "pqf-lem-affine-local-target",
+  "def-pc-fibre-product",
+  "lem-weil-pbc-affine-morphism-permanence",
+  "def-weil-etale-morphism",
+  "def-pc-fppf-site",
+  "lem-trf-fppf-covering-is-fpqc",
+  "def-trf-algebraic-space",
+  "lem-trf-fppf-sheaf-representability-descent-data",
+  "lem-trf-quasi-affine-fpqc-effective-descent"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/spaces-morphisms.tex",
+  "place": "Tag 03XW, lemma-neighbourhood-scheme, final proof paragraph; expanded using Tags 03IE, 01S8, 01SD, 022C, 02W5 and 0247"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "AlgebraicSpace|[Qq]uasi[Aa]ffine.*[Dd]escent|[Dd]escent.*[Qq]uasi[Aa]ffine",
+   "results": "{\"t\": \"2026-10-22T07:56:13Z\", \"tool\": \"grep\", \"query\": \"AlgebraicSpace|[Qq]uasi[Aa]ffine.*[Dd]escent|[Dd]escent.*[Qq]uasi[Aa]ffine\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: hits give only scheme permanence/gluing or general morphism descent, not the complete stated argument"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Effective descent of a quasi affine scheme along the affine surjective etale map to its open image represents the original algebraic space",
+   "results": "{\"t\": \"2026-10-22T07:56:13Z\", \"tool\": \"leansearch\", \"query\": \"Effective descent of a quasi affine scheme along the affine surjective etale map to its open image represents the original algebraic space\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.HasAffineProperty.descendsAlong_of_affineAnd\", \"AlgebraicGeometry.Scheme.IsQuasiAffine.of_isAffineHom\", \"AlgebraicGeometry.descendsAlong_isomorphisms_surjective_inf_flat_inf_quasicompact\", \"AlgebraicGeometry.Scheme.instIsQuasiAffineOfIsAffine\", \"AlgebraicGeometry.Scheme.preimage_opensRange_toSpecΓ\", \"AlgebraicGeometry.Scheme.instIsOpenImmersionToSpecΓOfIsQuasiAffine\", \"AlgebraicGeometry.instDescendsAlongSchemeMinMorphismPropertySurjectiveFlatLocallyOfFinitePresentationOfQuasiCompactOfIsZariskiLocalAtTarget\", \"AlgebraicGeometry.descendsAlong_isOpenImmersion_surjective_inf_flat_inf_quasicompact'\"], \"digest\": \"1081b5ab55ac6d27\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: hits give only scheme permanence/gluing or general morphism descent, not the complete stated argument"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Etale\", \"IsAffineHom\"",
+   "results": "{\"t\": \"2026-10-22T07:56:13Z\", \"tool\": \"loogle\", \"query\": \"\\\"Etale\\\", \\\"IsAffineHom\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: hits give only scheme permanence/gluing or general morphism descent, not the complete stated argument"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The open image of a morphism of affine schemes that is etale is an fpqc base for canonical descent of an algebraic space supported on that image",
+   "results": "{\"t\": \"2026-10-22T07:56:24Z\", \"tool\": \"leanfinder\", \"query\": \"The open image of a morphism of affine schemes that is etale is an fpqc base for canonical descent of an algebraic space supported on that image\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified\", \"AlgebraicGeometry.IsEtale.of_comp\", \"AlgebraicGeometry.Scheme.instCategoryEtale\", \"AlgebraicGeometry.Scheme.Etale\", \"AlgebraicGeometry.Scheme.etaleTopology\", \"AlgebraicGeometry.IsEtale\", \"AlgebraicGeometry.IsEtale.instHasOfPostcompPropertyScheme\", \"AlgebraicGeometry.Scheme.etalePretopology\"], \"digest\": \"b0d540fc89c24cf0\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: hits give only scheme permanence/gluing or general morphism descent, not the complete stated argument"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A quasi compact open algebraic subspace whose pullback to an affine etale chart is a quasi affine scheme descends to a scheme over the open image of the chart",
+   "results": "{\"t\": \"2026-10-22T07:56:25Z\", \"tool\": \"leanfinder\", \"query\": \"A quasi compact open algebraic subspace whose pullback to an affine etale chart is a quasi affine scheme descends to a scheme over the open image of the chart\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.ExistsHomHomCompEqCompAux.h𝒰S\", \"AlgebraicGeometry.Scheme.IsQuasiAffine\", \"AlgebraicGeometry.Scheme.Hom.instIsOpenImmersionMapAffineZariskiSiteCompOppositeCommRingCatRightOpOpensOpToOpensFunctorNormalizationDiagramSpec\", \"AlgebraicGeometry.LocallyRingedSpace.IsOpenImmersion.scheme\", \"AlgebraicGeometry.Scheme.IsQuasiAffine.toIsImmersion\", \"AlgebraicGeometry.Scheme.instIsOpenImmersionToSpecΓOfIsQuasiAffine\", \"AlgebraicGeometry.Scheme.Etale\", \"AlgebraicGeometry.Scheme.exists_affine_mem_range_and_range_subset\"], \"digest\": \"6e8e03d8cb9328ff\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: hits give only scheme permanence/gluing or general morphism descent, not the complete stated argument"
+  },
+  {
+   "tool": "grep",
+   "query": "AlgebraicSpace|quasi.affine.*descent|descent.*quasi.affine",
+   "results": "{\"t\": \"2026-10-23T04:11:05Z\", \"tool\": \"grep\", \"query\": \"AlgebraicSpace|quasi.affine.*descent|descent.*quasi.affine\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern scheme Zariski local representability, absolute quasi-affineness or descent of morphism properties, not this algebraic-space sheaf and its canonical effective datum"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsQuasiAffine\", \"descent\"",
+   "results": "{\"t\": \"2026-10-23T04:11:06Z\", \"tool\": \"loogle\", \"query\": \"\\\"IsQuasiAffine\\\", \\\"descent\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern scheme Zariski local representability, absolute quasi-affineness or descent of morphism properties, not this algebraic-space sheaf and its canonical effective datum"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Effective descent of quasi affine schemes identifies an algebraic space with a scheme",
+   "results": "{\"t\": \"2026-10-23T04:11:06Z\", \"tool\": \"leansearch\", \"query\": \"Effective descent of quasi affine schemes identifies an algebraic space with a scheme\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.AffineScheme\", \"AlgebraicGeometry.Scheme.IsQuasiAffine.of_isAffineHom\", \"AlgebraicGeometry.HasAffineProperty.descendsAlong_of_affineAnd\", \"AlgebraicGeometry.Scheme.instIsOpenImmersionToSpecΓOfIsQuasiAffine\", \"AlgebraicGeometry.Scheme.instIsQuasiAffineOfIsAffine\", \"AlgebraicGeometry.Scheme.IsQuasiAffine\", \"AlgebraicGeometry.Scheme.IsQuasiAffine.toIsImmersion\", \"AlgebraicGeometry.Scheme.instIsSeparatedOfIsQuasiAffine\"], \"digest\": \"81bddeeda17057e4\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern scheme Zariski local representability, absolute quasi-affineness or descent of morphism properties, not this algebraic-space sheaf and its canonical effective datum"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A quasi affine scheme with descent datum for a faithfully flat cover represents the original algebraic space over the open image",
+   "results": "{\"t\": \"2026-10-23T04:11:08Z\", \"tool\": \"leanfinder\", \"query\": \"A quasi affine scheme with descent datum for a faithfully flat cover represents the original algebraic space over the open image\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.ExistsHomHomCompEqCompAux.𝒰D\", \"AlgebraicGeometry.descendsAlong_isOpenImmersion_surjective_inf_flat_inf_quasicompact'\", \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.h𝒰S\", \"AlgebraicGeometry.Scheme.LocalRepresentability.representableBy\", \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.𝒰D₀\", \"AlgebraicGeometry.Scheme.LocalRepresentability.isRepresentable\", \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.h𝒰X\", \"AlgebraicGeometry.Scheme.OpenCover.fromAffineRefinement\"], \"digest\": \"90e9922580814a5d\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern scheme Zariski local representability, absolute quasi-affineness or descent of morphism properties, not this algebraic-space sheaf and its canonical effective datum"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An fppf sheaf represented by quasi affine schemes after a faithfully flat cover is representable by a scheme",
+   "results": "{\"t\": \"2026-10-23T04:12:30Z\", \"tool\": \"leanfinder\", \"query\": \"An fppf sheaf represented by quasi affine schemes after a faithfully flat cover is representable by a scheme\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.LocalRepresentability.representableBy\", \"AlgebraicGeometry.Scheme.LocalRepresentability.isRepresentable\", \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.h𝒰S\", \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.𝒰D\", \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.h𝒰X\", \"AlgebraicGeometry.Scheme.AffineCover\", \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.𝒰D₀\", \"AlgebraicGeometry.Scheme.exists_isQuasiAffine_of_isLimit\"], \"digest\": \"2f3c5386d8e6e79c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern scheme Zariski local representability, absolute quasi-affineness or descent of morphism properties, not this algebraic-space sheaf and its canonical effective datum"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-a1-etale-quasi-affine-image-scheme",
+  "date": "2026-10-22",
+  "group": "Q126"
+ },
+ "chapter": "sec-purity-real-sheaves",
+ "unit": "sk-p-real-rankin",
+ "blueprint": {
+  "from": {
+   "node": "lem-a1-affine-hc0",
+   "place": "Historical 03XX representability ingredient beneath lem-a1-affine-hc0; 03XW proof, final paragraph: open image base, covering checks, sheaf descent datum, cocycle and effective descent",
+   "via": [
+    "lem-a1-etale-quasi-affine-image-scheme",
+    "lem-a1-separated-locally-qf-space-representable",
+    "lem-a1-separated-etale-space-scheme"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-a1-open-image-quasi-affine-scheme-descent",
+  "worker": "stage1",
+  "summary": "Expanded the final paragraph of Stacks Tag 03XW into seven steps: point-image factorization, affineness by base change, both covering conditions, the actual sheaf over B, coordinate-preserving descent comparison and cocycle, quasi-affine fpqc effectivity, and representability of that same sheaf. Reused existing nodes only; the statement is unchanged and B need not be affine. Searched the project and Mathlib without an exact finished match.",
+  "blueprint": "Historical Tag 03XX/03XW representability support below lem-a1-affine-hc0, through lem-a1-separated-etale-space-scheme, lem-a1-separated-locally-qf-space-representable and lem-a1-etale-quasi-affine-image-scheme: this split supplies precisely the final paragraph of Tag 03XW, not a replacement for the unit Rankin–Selberg route.",
+  "tool_uses": [
+   {
+    "node": "lem-trf-fppf-sheaf-representability-descent-data",
+    "why": "Generic Tag 02W5 equivalence and representability criterion for the actual fppf sheaf; no node in sk-p-real-rankin gives this scheme descent tool."
+   },
+   {
+    "node": "lem-trf-quasi-affine-fpqc-effective-descent",
+    "why": "Generic Tag 0247 effectivity for quasi-affine morphisms over an arbitrary scheme base, exactly the black box used in Tag 03XW; no equivalent node in this unit."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-trf-fppf-sheaf-representability-descent-data",
+  "lem-trf-quasi-affine-fpqc-effective-descent"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q03-4325add30",
+  "group": "Q03",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q03-4325add30 (reviewer sub-agent of L); spot-checked: I read the final paragraph of Stacks 03XW (spaces-morphisms.tex, lemma-neighbourhood-scheme) and 02W5 (descent-data-sheaves). The statement is unchanged and faithful to that paragraph: the separatedness and quasi-finiteness that 03XW uses earlier only produce quasi-affineness, which this item assumes. The item is still unsplit in live and side-live, and this is its first delivery. There are no new nodes. The 7 steps checked against the cited statements: (1) 03WT gives the open image B. lem-a1-space-open-factor-scheme-tests with J=h_B gives the factorization W→B, gives p representable étale and surjective on every base change, and gives the comparison W×_B T'≅W×_T T'=P. (2) 01S8 on the cover {T} makes a affine. Since B→T is a monomorphism, p is the base change of a, so permanence clause (1) makes p affine, and no affineness of B is used. (3) Étale plus surjective gives an fppf covering, and 022C makes it fpqc. (4) The sheaf property of F=Mor_B(-,W) is genuinely elementary. (5) h_{T'}×F=h_P. 02W5 gives φ in the direction P×_B T'→T'×_B P, matching def-pd-descent-datum, and the explicit cocycle check is correct. (6) 0247 applies with A=T', V=P: the singleton cover is fpqc, P→T' is quasi-affine by hypothesis, and step 5 gives the cocycle. (7) The 02W5 iff gives that F itself is representable. Edge cases T'=∅, a non-surjective, B non-affine and W non-quasi-compact all work. proof_deps equals the union of the uses, there is no cycle and no SGA is cited. I accept the declared tool_uses (the 02W5 and 0247 trf nodes): 03XW itself invokes exactly these lemmas and no node of the unit gives them. Batch-5 flag: I computed the closure of each listed citation. def-a1-space-open-subspace and def-trf-scheme-algebraic-space are general definitions. lem-a1-space-open-factor-scheme-tests is a generic algebraic-space open-subspace lemma whose trf closure is only atlas and fibre-product foundations. lem-trf-fppf-covering-is-fpqc is a Mathlib leaf (022C). The 02W5 and 0247 nodes are generic descent lemmas. None of their closures reaches a trace-formula or Poincaré theorem, sk-thm-trace-transport or a batch-4 target, and none is given by either assumption, so all are accepted. Minor point, not changed: the statement writes the open-subspace meaning inline and cites def-weil-open-immersion rather than def-a1-space-open-subspace."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.OpenImageQuasiAffineSchemeDescent",
+  "declaration": "AlgebraicGeometry.AlgebraicSpace.openImageQuasiAffineSchemeDescent",
+  "declarations": [
+   "AlgebraicGeometry.AlgebraicSpace.openImageSectionPresheaf",
+   "AlgebraicGeometry.AlgebraicSpace.openImageQuasiAffineSchemeDescent"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/OpenImageQuasiAffineSchemeDescent.lean",
+  "statement": "theorem openImageQuasiAffineSchemeDescent {S : Scheme.{u}} (T T' : Over S) [IsAffine T.left] [IsAffine T'.left] (a : T' ⟶ T) [Etale a.left] (X : AlgebraicSpace S) (f : X.obj.obj ⟶ yoneda.obj T) (W : OpenSubspace X) (B : Over S) (j : B ⟶ T) [IsOpenImmersion j.left] (hB : pointImage (yoneda.map j) = pointImage (yoneda.map a)) (hW : pointImage (W.val.ι ≫ f) ⊆ pointImage (yoneda.map j)) (P : Over S) (v : P ⟶ T') (q : yoneda.obj P ⟶ W.val.toFunctor) (hP : IsPullback q (yoneda.map v) (W.val.ι ≫ f) (yoneda.map a)) [IsQuasiAffineHom v.left] : ∃ (b : W.val.toFunctor ⟶ yoneda.obj B) (p : T' ⟶ B), b ≫ yoneda.map j = W.val.ι ≫ f ∧ p ≫ j = a ∧ IsAffineHom p.left ∧ Surjective p.left ∧ Etale p.left ∧ Presieve.singleton p.left ∈ Scheme.fpqcPrecoverage B.left ∧ Presieve.singleton p.left ∈ Scheme.fppfPrecoverage B.left ∧ IsPullback q (yoneda.map v) b (yoneda.map p) ∧ Presheaf.IsSheaf (Scheme.fppfTopology.over B.left) (openImageSectionPresheaf B b) ∧ Nonempty (((Over.map p.left).op ⋙ openImageSectionPresheaf B b).RepresentableBy (Over.mk v.left)) ∧ (∃ D : Over.DescentDatum p.left (Over.mk v.left), (∀ (Q : Over S) (m0 m1 : Q ⟶ P) (h : (m0 ≫ v) ≫ p = (m1 ≫ v) ≫ p), (D.transport (m0.left ≫ v.left) (m1.left ≫ v.left) (congrArg (fun k ↦ k.left) h) (Over.homMk m0.left rfl)).left = m1.left ↔ q.app (op Q) m0 = q.app (op Q) m1) ∧ D.IsEffective) ∧ (openImageSectionPresheaf B b).IsRepresentable",
+  "branch": "newtargets-dag",
+  "by": "Q09",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "The helper is the existing restrictedYonedaObj composed with the canonical iterated-slice scheme-test functor. The theorem retains the actual W, both covering claims, the pullback representation, coordinate-preserving canonical descent datum, its effectivity and representability of the specified sheaf over an arbitrary open base B."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-277952adc",
+  "group": "Q09",
+  "result": "pass",
+  "note": "Read the item against Stacks 03XW (final paragraph) and all 12 stmt_dep records/declarations (Over.DescentDatum transport form, OpenSubspace, pointImage, IsQuasiAffineHom, fpqc/fppf precoverages). Every hypothesis matches with none stronger: B is an arbitrary open immersion with pointImage equality and is not assumed affine; W's point-image containment; P with its pullback square over T and IsQuasiAffineHom v. Every conclusion is present: factorization b and p, p affine/surjective/etale, singleton fpqc+fppf, P = W×_B T', the sheaf condition for the real Mor_B(-,W) helper (restrictedYonedaObj ∘ iterated slice, real data), RepresentableBy P, D with an iff clause that pins the canonical ((w,t0),t1)->(t0,(w,t1)) transport (unique via hP plus p≫j=a), the cocycle field, effectivity, and representability. The stmt_deps gain only the landed def-a1-space-open-subspace and def-a1-space-point-topology (allowed by §5). Edge cases checked: empty T', empty W, non-surjective a, non-affine B, a single universe u. Proof is sorry only, with source/blueprint docstrings and all 7 proof steps; no supersession. Advisory: the second reading was by the same worker; the RepresentableBy clause is a bare Nonempty, acceptable because q pins D. No compile run (no change made)."
+ }
+}

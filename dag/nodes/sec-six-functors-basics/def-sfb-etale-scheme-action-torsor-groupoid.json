@@ -1,0 +1,135 @@
+{
+ "id": "def-sfb-etale-scheme-action-torsor-groupoid",
+ "kind": "definition",
+ "title": "Etale locally trivial scheme-action torsor groupoid",
+ "status": "split",
+ "statement": "Let $S$ be a scheme [def-pc-scheme], $G$ a group scheme over $S$ and $V$ an $S$-scheme with a left $G$-action. Use the action groupoid, scheme-torsor objects, cartesian equivariant arrows, and specified trivial-torsor functor of [def-sfb-scheme-action-torsor-groupoids]. An object $(P\\to T,f:P\\to V)$ is etale locally trivial when there is a covering sieve $R$ for jointly surjective etale families [def-weil-etale-morphism] on $T$ such that for every $b:W\\to T$ in $R$ there is an equivariant map $q:G\\times_S W\\to P$ whose square with $P\\to T$ and $W\\to T$ is cartesian; equivariance means $q(gh,w)=gq(h,w)$ on every test scheme. Define the etale torsor category $\\mathcal T^{et}_V$ to be the full subcategory of these objects in the existing scheme-torsor category, with its actual projection to schemes over $S$, in the conventions of [def-sfb-stable-pointed-moduli-groupoids]. Etale local triviality implies the fppf local triviality already recorded in those objects. Every specified trivial object $(G\\times_S T,(h,t)\\mapsto h u(t))$ satisfies this etale local condition, by the maximal covering sieve and the cartesian equivariant maps $(h,w)\\mapsto(h,b(w))$. The trivial-torsor functor therefore factors through $\\mathcal T^{et}_V$ with exactly the same objects and arrows (right translation by the inverse label); this defines its canonical etale version. No stack property or effectivity theorem is asserted in this definition.",
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-sfb-scheme-action-torsor-groupoids",
+  "def-weil-etale-morphism",
+  "def-sfb-stable-pointed-moduli-groupoids"
+ ],
+ "source": {
+  "document": "literature/stacks-project/examples-stacks.tex",
+  "place": "Situation 04WL and Proposition 04WM, scheme torsors and the trivial-torsor functor, with etale local trivializations as in lem-sfb-finite-constant-torsor-map-etale-stack."
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "The category of scheme torsors trivialized by etale coverings with equivariant maps to a scheme",
+   "results": "OK; 8 hits: AlgebraicGeometry.Scheme.smallEtaleTopology, AlgebraicGeometry.Scheme.etaleTopology, AlgebraicGeometry.Scheme.etalePretopology, CategoryTheory.Pretopology.trivial, AlgebraicGeometry.Scheme.Etale, AlgebraicGeometry.Scheme.smallEtalePretopology, AlgebraicGeometry.Scheme.instCategoryEtale, AlgebraicGeometry.IsEtale",
+   "date": "2026-10-24",
+   "verdict": "No match: etale-site objects and set actions do not define the etale locally trivial scheme-torsor category with equivariant maps.",
+   "digest": "9cd6873a0d45a4a3"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The etale locally trivial equivariant scheme torsor groupoid and its trivial torsor functor",
+   "results": "OK; 8 hits: AlgebraicGeometry.Scheme.Etale.forget, AlgebraicGeometry.Scheme.Etale.forgetFullyFaithful, AlgebraicGeometry.Scheme.instFullEtaleOverForget, AlgebraicGeometry.Scheme.instCategoryEtale, AlgebraicGeometry.Scheme.etaleTopology, AlgebraicGeometry.Scheme.smallEtaleTopology, CategoryTheory.ActionCategory.instGroupoid, IsFreeGroupoid.actionGroupoidIsFree",
+   "date": "2026-10-24",
+   "verdict": "No match: etale-site objects and set actions do not define the etale locally trivial scheme-torsor category with equivariant maps.",
+   "digest": "a35e72138299a39c"
+  },
+  {
+   "tool": "grep",
+   "query": "IsEtaleLocallyTrivial|etaleTorsorGroupoid|EtaleTorsorObject",
+   "results": "OK; 0 hits: ",
+   "date": "2026-10-24",
+   "verdict": "No match: etale-site objects and set actions do not define the etale locally trivial scheme-torsor category with equivariant maps.",
+   "digest": "4f53cda18c2baa0c"
+  },
+  {
+   "tool": "grep",
+   "query": "IsEtaleLocallyTrivial|etaleTorsorGroupoid|EtaleTorsorObject in lean/WeilConjectures and lean/Sheaf",
+   "results": "0 hits. SchemeActionTorsorGroupoids defines fppf local triviality only; its TorsorObject, arrows and trivial-torsor functor are reused.",
+   "date": "2026-10-24",
+   "verdict": "No existing etale specialization."
+  },
+  {
+   "tool": "grep",
+   "query": "etale.*torsor.*groupoid|étale.*torsor.*groupoid in dag/nodes/sec-six-functors-basics; tools/blueprint_refs.py search \"etale torsor\"",
+   "results": "DAG hits include the assigned quotient criterion and finite-constant-torsor-map-etale-stack, plus fppf-action and formal quotient results. Blueprint search returns lem-sc-h1-gm-pic and lemma-weil-pbc-h1-torsor-comparison. None defines the etale torsor category; the fppf construction node is reused.",
+   "date": "2026-10-24",
+   "verdict": "New definition needed for the etale locally trivial subcategory, with existing actions, schemes and arrows."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-action-groupoid-quotient-criterion",
+  "date": "2026-10-24",
+  "group": "Q55"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "Action-groupoid quotient criterion, statement and proof steps 4-6: the actual groupoid of etale locally trivial scheme torsors and its specified trivial-torsor functor.",
+   "via": [
+    "lem-sfb-action-groupoid-quotient-criterion",
+    "lem-sfb-finite-formal-quotient-pullback",
+    "lem-sfb-dm-finite-normalization-charts",
+    "lem-sfb-stable-abelian-level-normalization",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.EtaleSchemeActionTorsorGroupoid",
+  "declaration": "AlgebraicGeometry.SchemeAction.etaleTorsorGroupoid",
+  "file": "lean/Sheaf/AlgebraicGeometry/EtaleSchemeActionTorsorGroupoid.lean",
+  "statement": "def etaleTorsorGroupoid : BasedCategory (Over S)",
+  "branch": "newtargets-dag",
+  "by": "Q55",
+  "date": "2026-10-24",
+  "existing": false,
+  "declarations": [
+   "AlgebraicGeometry.SchemeAction.IsEtaleLocallyTrivial",
+   "AlgebraicGeometry.SchemeAction.etaleTorsorGroupoid",
+   "AlgebraicGeometry.SchemeAction.trivialObject_isEtaleLocallyTrivial",
+   "AlgebraicGeometry.SchemeAction.etaleTrivialTorsorFunctor"
+  ]
+ },
+ "import_flags": [],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-1d48783ee",
+  "group": "Q55",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-1d48783ee",
+  "group": "Q55",
+  "result": "pass",
+  "note": "Read the item, all stmt_dep records, the new def node, both modules, and the dependency Lean (SchemeActionTorsorGroupoids, StablePointedModuliGroupoids, Mathlib BasedCategory). H_S is a coproduct cofan with unit/mul equations, which fix the group law. A bundles a and alpha (label convention gh gives the cocycle). hrel (full and faithful fibre functor) equals the node's discrete 2-fibre-product iso, non-constant labels included. hlift = etale covering sieve with arrows over b. etaleTorsorGroupoid = full subcategory of the existing torsorGroupoid by IsEtaleLocallyTrivial; the fppf field is redundant. Conclusion: equivalence via based isos with vertical components, epsilon on the whole action groupoid, unique compatible 2-iso for any C' (checked true). R_{h^-1} sign matches 04WM. Edge cases (empty, H=1, non-free, disconnected T, char | |H|, universes) OK. New node fields, no duplicate, not hollow, sorry'd law true. Item changed only in lean/stmt_deps (+new node); statement verbatim; lines <=100; docstrings and proof steps present; import is the proof_dep module. Advisory: actionGroupoid reached via the new node, as H2 forbids adding base stmt_deps. No file changed, no compile."
+ }
+}

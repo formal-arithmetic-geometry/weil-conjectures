@@ -14,70 +14,43 @@
  ],
  "proof": [
   {
-   "text": "Put $D=Q'\\oplus Q$ [def-weil-pbc-direct-sum-modules], $\\delta:P\\to D$, $\\delta(x)=(b(x),-a(x))$, and $E=D/\\delta(P)$ with quotient $\\pi:D\\to E$ [def-weil-pbc-quotient-module]. Define $j(y)=\\pi(y,0)$ and $k(z)=\\pi(0,z)$. Then $jb=ka$. For maps $u:Q'\\to T$, $v:Q\\to T$ satisfying $ub=va$, the linear map $(y,z)\\mapsto u(y)+v(z)$ kills $\\delta(P)$, so descends uniquely to $E\\to T$ with restrictions $u,v$; uniqueness holds because every class is $j(y)+k(z)$. Thus $E$ has the pushout universal property, the colimit of the finite span [def-weil-pbc-category-colimit]. The unique comparison $E\\to Q''$ preserving both legs is an isomorphism: the reverse comparison exists by the same property, and both composites fix the two legs, hence are identities. Under this isomorphism $j$ is the given $b'$. Also $P\\xrightarrow{\\delta}D\\xrightarrow{\\pi}E\\to0$ is exact since $\\pi$ is surjective with kernel $\\delta(P)$.",
+   "text": "Apply [lem-trf-module-pushout-quotient-presentation] to $a,b$. It supplies $D=Q'\\oplus Q$, $\\delta(x)=(b(x),-a(x))$, $E=D/\\delta(P)$, the quotient $\\pi$, and $j(y)=\\pi(y,0)$. Its statement gives $\\pi$ surjective, $\\ker\\pi=\\operatorname{im}\\delta$, and a linear isomorphism $e:E\\simeq Q''$ with $ej=b'$, identifying the specified $Q'$ leg.",
    "uses": [
-    "def-weil-pbc-direct-sum-modules",
-    "def-weil-pbc-quotient-module",
-    "def-weil-pbc-category-colimit"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Tag 0AUM, lemma-domination-universally-injective, proof: explicit quotient pushout and its tensor-kernel sequence."
-   }
-  },
-  {
-   "text": "Fix an arbitrary $R$-module $L$ and write $h_L=h\\otimes_R\\mathrm{id}_L$ for every linear map $h$. The tensor universal property [def-weil-pbc-module-tensor-product] gives inverse linear maps $F:D\\otimes_RL\\to(Q'\\otimes_RL)\\oplus(Q\\otimes_RL)$ and $G$ by $F((y,z)\\otimes l)=(y\\otimes l,z\\otimes l)$ and $G(s,t)=(\\iota_1)_L(s)+(\\iota_2)_L(t)$, where $\\iota_1(y)=(y,0)$ and $\\iota_2(z)=(0,z)$. The composites are identities on pure tensors by $(y,z)=(y,0)+(0,z)$, and therefore everywhere by generation by pure tensors. In these coordinates $F\\delta_L(w)=(b_L(w),-a_L(w))$ and $\\pi_LG(s,0)=j_L(s)$; these identities follow on pure tensors and extend linearly.",
-   "uses": [
-    "def-weil-pbc-module-tensor-product",
-    "def-weil-pbc-direct-sum-modules"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Tag 0AUM, lemma-domination-universally-injective, proof: explicit quotient pushout and its tensor-kernel sequence."
-   }
-  },
-  {
-   "text": "Apply tensor right exactness [lem-weil-pbc-tensor-right-exact] to the exact sequence $P\\xrightarrow{\\delta}D\\xrightarrow{\\pi}E\\to0$ of Step 1 and the arbitrary module $L$. It gives $\\ker\\pi_L=\\operatorname{im}\\delta_L$. Its hypotheses are exactly the surjectivity and kernel equality already checked; it requires neither $L$ flat nor $\\delta$ injective.",
-   "uses": [
-    "lem-weil-pbc-tensor-right-exact"
+    "lem-trf-module-pushout-quotient-presentation"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/algebra.tex",
-    "place": "Tag 0AUM, lemma-domination-universally-injective, tensoring the pushout; Tag 00DF, lemma-tensor-product-exact, used to justify the tensor-kernel computation."
+    "place": "Tag 0AUM, lemma-domination-universally-injective, proof first paragraph: quotient of the direct sum by the image of (g,-f), expanded into its universal property and exact sequence."
    }
   },
   {
-   "text": "We compute $\\ker j_L=b_L(\\ker a_L)$. If $j_L(s)=0$, Step 2 gives $\\pi_LG(s,0)=0$, and Step 3 supplies $w\\in P\\otimes_RL$ with $G(s,0)=\\delta_L(w)$. Applying $F$ yields $(s,0)=(b_L(w),-a_L(w))$, so $a_L(w)=0$ and $s=b_L(w)$. Conversely, if $a_L(w)=0$, Step 2 gives $G(b_L(w),0)=\\delta_L(w)$, and applying $\\pi_L$ gives $j_Lb_L(w)=0$ because $\\pi\\delta=0$. This proves both inclusions directly, without identifying $\\ker(a_L)$ with $(\\ker a)\\otimes_RL$.",
+   "text": "Fix an arbitrary $R$-module $L$, and write $h_L=h\\otimes_R\\mathrm{id}_L$. The exact presentation of Step 1 meets both hypotheses on $\\pi$ in [lem-trf-quotient-pair-tensor-kernel], which gives $\\ker j_L=b_L(\\ker a_L)$. If $\\ker a_L\\subseteq\\ker b_L$, every element of $\\ker j_L$ is $b_L(w)=0$ for some $w\\in\\ker a_L$, so $j_L$ is injective. Conversely, if $j_L$ is injective and $w\\in\\ker a_L$, the kernel identity places $b_L(w)$ in $\\ker j_L=0$; hence $w\\in\\ker b_L$. Thus $j_L$ is injective exactly when $\\ker a_L\\subseteq\\ker b_L$. No flatness of $L$ or injectivity of $\\delta$ is required.",
+   "uses": [
+    "lem-trf-quotient-pair-tensor-kernel"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 0AUM, lemma-domination-universally-injective, proof: tensoring the quotient pushout and its kernel sequence; Tag 00DF, lemma-tensor-product-exact, for right exactness."
+   }
+  },
+  {
+   "text": "Quantifying the kernel inclusion over every $L$ is precisely domination as defined in the item. Tensoring $e$ and its inverse gives inverse maps, by compatibility with composition and identities [def-weil-pbc-module-tensor-product]; the identity $ej=b'$ gives $e_Lj_L=(b')_L$. Thus $j_L$ is injective exactly when $(b')_L$ is. The bilinear swap $V\\otimes_RL\\to L\\otimes_RV$, $v\\otimes l\\mapsto l\\otimes v$, extends uniquely by the same tensor universal property, and the reverse swap is its inverse on generators. On pure tensors these swaps intertwine $b'\\otimes\\mathrm{id}_L$ with $\\mathrm{id}_L\\otimes b'$. Hence injectivity of the former for every $L$ is exactly the universal injectivity in the item. This proves both directions.",
    "uses": [
     "def-weil-pbc-module-tensor-product"
    ],
    "elementary": true,
    "source": {
     "document": "literature/stacks-project/algebra.tex",
-    "place": "Tag 0AUM, lemma-domination-universally-injective, proof: explicit quotient pushout and its tensor-kernel sequence."
-   }
-  },
-  {
-   "text": "For this $L$, Step 4 says $j_L$ is injective if and only if $b_L(w)=0$ for every $w\\in\\ker a_L$, equivalently $\\ker a_L\\subseteq\\ker b_L$. Quantifying over every $R$-module $L$ makes the latter condition exactly the definition of domination in the statement. The isomorphism $E\\simeq Q''$ from Step 1 remains an isomorphism after tensoring, since tensoring preserves compositions and identities [def-weil-pbc-module-tensor-product], so $j_L$ is injective exactly when $b'\\otimes\\mathrm{id}_L$ is. Finally the bilinear swap $V\\otimes_RL\\to L\\otimes_RV$, $v\\otimes l\\mapsto l\\otimes v$, has the reverse swap as inverse; on pure tensors it intertwines $b'\\otimes\\mathrm{id}_L$ and $\\mathrm{id}_L\\otimes b'$. Thus these injectivity tests are precisely the left-tensor tests for universal injectivity stated in the item. This proves both directions.",
-   "uses": [
-    "def-weil-pbc-module-tensor-product"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Tag 0AUM, lemma-domination-universally-injective, proof: explicit quotient pushout and its tensor-kernel sequence."
+    "place": "Tag 0AUM, lemma-domination-universally-injective"
    }
   }
  ],
  "proof_deps": [
-  "def-weil-pbc-direct-sum-modules",
-  "def-weil-pbc-quotient-module",
-  "def-weil-pbc-category-colimit",
-  "def-weil-pbc-module-tensor-product",
-  "lem-weil-pbc-tensor-right-exact"
+  "lem-trf-module-pushout-quotient-presentation",
+  "lem-trf-quotient-pair-tensor-kernel",
+  "def-weil-pbc-module-tensor-product"
  ],
  "proof_origin": {
   "by": "document",
@@ -185,19 +158,19 @@
   "is": null
  },
  "split_report": {
-  "date": "2026-10-18",
+  "date": "2026-10-23",
   "item": "lem-trf-domination-pushout-universal-injective",
   "worker": "stage1",
-  "summary": "Statement unchanged. Expanded Stacks Tag 0AUM using the explicit quotient pushout, a two-factor tensor comparison, existing Mathlib tensor right exactness, and both inclusions in the tensor-kernel identity. No new node: quotient and comparison calculations are elementary steps, not additional lemmas. No exact project attachment or Mathlib match for the whole equivalence was found.",
-  "blueprint": "Supporting algebraic input in the existing ancestry of lem-trf-local-term-locality (semistable-alteration/projectivity branch): realizes parent lem-trf-mittag-leffler-faithfully-flat-descent steps 4 and 6, which invoke Tag 0AUM. Steps 1-4 expand the quotient and tensor-kernel paragraphs of that source, and Step 5 expands its final equivalence. Historical from.node and via chain retained; no unit or chapter route changed."
+  "summary": "Current-base repair of L's 2026-10-22 16:27 UTC landing return, returned head 9fb3f333e30. Initial server dry run passed at f43c5f0a228. Compared every parent field with the current repository: only proof, proof_deps and split_report differ, and both auxiliary nodes remain absent. Re-read all cited statements, Stacks Tags 0AUM/00DF, retained search results and Mathlib candidates. Expanded Step 2's two implications explicitly, retained the complete original argument and both independent statement-only tasks, and added individual duplicate comparisons for the additional shared-00DF nodes now in the DAG. All citation quotes remain exact; no statement or search question changed. The original statement, statement dependencies, Lean/audit records, unit/chapter route and blueprint ancestry are preserved. Final server dry run and direct push follow this refreshed repair record.",
+  "blueprint": "Same ancestry and unit/chapter route as the returned head: supporting Tag 0AUM algebra for lem-trf-mittag-leffler-faithfully-flat-descent below lem-trf-local-term-locality. New nodes separate the first quotient paragraph and the tensor-kernel paragraph of 0AUM; assembly realizes the final domination equivalence. No route change."
  },
  "reviewed": {
-  "date": "2026-10-17",
+  "date": "2026-10-22",
   "by": "L",
-  "reviewer": "NT-Codex-Q77-28234640d",
-  "group": "Q77",
+  "reviewer": "NT-cc-Q82-11996625e",
+  "group": "Q82",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q77-28234640d (reviewer sub-agent of L); spot-checked: Read all required instructions, packet/report, item, cited nodes, unit/chapter route, and Stacks Tags 0AUM and 00DF. The quotient-pushout proof is correct; hypotheses, tensor order, base-change leg, edge cases, duplicates, searches, and route restrictions check out. No new nodes or repairs are needed. Full review written to review.md."
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q82-11996625e (reviewer sub-agent of L); spot-checked: PASS, no fixes. Source check: Stacks Tag 0AUM (algebra.tex, lemma-domination-universally-injective; tags/tags:13655) and Tag 00DF (tags/tags:495). With a=f, b=g and b' as the M'-leg f', the item statement matches the source. The source's relation ker f'_Q = g_Q(ker f_Q) is exactly the conclusion of lem-trf-quotient-pair-tensor-kernel. Diff against the previous head 9fb3: both new nodes are byte-identical; in the item only the Step 2 text changed (both directions of the zero-kernel criterion written out) plus the split_report. Live and side-live clones still hold the old 5-step proof and lack both nodes, so nothing is superseded. The earlier landing refusals were side-promotion faults, not faults of the split. Node 1 (lem-trf-module-pushout-quotient-presentation): the quotient D/(b,-a)P with surjective π, ker π = im δ, jb=ka, the universal property h(π(y,z))=u(y)+v(z), and the unique iso e (ej=b', ek=c) to any chosen pushout; all checked; it carries old Step 1 (908 characters). Node 2 (lem-trf-quotient-pair-tensor-kernel): F and G inverse, Fδ_L=(b_L,-a_L), π_LG(s,0)=j_L(s), right exactness through 00DF, and ker j_L = b_L(ker a_L) with both inclusions checked, for arbitrary L and no flatness; it carries old Steps 2-4 (1460 characters) and is independent of node 1. Edge cases tested on both nodes: a=0, b=0, a=id, P=0, L=0, the zero ring, and Z with a=2, b=id, L=Z/2 (where j_L=0 and ker a_L ≠ (ker a)⊗L); all agree. Assembly (1665 characters): Step 1 cites node 1's statement and Step 2 cites node 2's statement, each for exactly what that statement says (C3 OK). Step 3 is elementary from def-weil-pbc-module-tensor-product: functoriality for e_L, and the swap from the universal property and generation by pure tensors. Re-split: no argument was dropped or blurred; two comparable nodes, neither restating the item. Duplicates and Mathlib: rg over the snapshot finds no duplicate (biproduct-cokernel-cofork, tensor-kernel-factorization and tensor-right-exact all differ); Mathlib has no explicit module pushout quotient, so unsplit is correct. Searches are honest, with LeanSearch recorded as unavailable. Route: same unit sk-i-curve-zero, no tool uses. Advisory: the inherited stmt_dep lem-trf-universal-injective-finite-test is used only for terminology. Landing still needs L to promote the side completion."
  },
  "lean": {
   "module": "Sheaf.TraceFormula.DominationPushoutUniversalInjective",
@@ -218,5 +191,16 @@
   "result": "fix",
   "note": "Node, deps, Stacks 0AUM, module, report and record read. pushout.inr is the Q' leg; lTensor L b' matches 'L ⊗ b''; no hollow defs, sorry only, docstrings, conventions and record fields OK; no Mathlib or project duplicate. Fixes in fixes/DominationPushoutUniversalInjective.lean: (1) H3 universe restriction: P Q Q' were forced into Type u (R's universe); generalized to Type w, which compiles; (2) domination now uses a.rTensor L / b.rTensor L (a ⊗ id_L as node and Stacks write it) instead of lTensor; (3) H8: docstring now carries the node's 5 proof steps. nt_compile: delivered and fixed modules both clean (1.8 s); wrapper confirmed to surface warnings other than sorry."
  },
- "lean_audit": {}
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ }
 }

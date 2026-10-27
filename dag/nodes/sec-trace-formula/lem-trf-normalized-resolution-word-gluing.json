@@ -1,0 +1,228 @@
+{
+ "id": "lem-trf-normalized-resolution-word-gluing",
+ "kind": "statement",
+ "title": "Gluing dimension-normalized Hilbert--Samuel and marked-ideal words",
+ "statement": "Over $\\mathbf Q$, consider all closed embeddings $X\\hookrightarrow P$ with $X$ reduced and $P$ smooth, separated and of finite type, including empty schemes and finite disjoint unions [def-weil-closed-immersion, def-pc-reduced-scheme, def-sbc-smooth-morphisms, def-weil-proper-morphism, def-weil-finite-type-morphism]. Fix the simultaneous marked-ideal numerical word assignment of [lem-trf-marked-ideal-numerical-resolution-engine]. For a point $x$ of a strict transform, put $h_x(n)=\\operatorname{length}(\\mathcal O_{X_H,x}/\\mathfrak m_x^{n+1})$, let $q_x$ be the minimum dimension of its local irreducible components and $c_x$ the number of distinct such dimensions, and set $A_x=(c_x,\\Delta^{q_x}h_x)$, where $\\Delta f(0)=f(0)$ and $\\Delta f(n+1)=f(n+1)-f(n)$ [lem-trf-hilbert-samuel-smooth-dimension-profile]. At a singular point take a maximal-order codimension-zero presentation in a minimal smooth envelope [lem-trf-hilbert-samuel-local-presentations]. Delete the leading entry $1$ of its marked-ideal word, retaining its remaining tail $t_x$, the ordered earlier center ideals, and the birth stages of the exceptional components. For each chosen presentation, distinguish its recorded earlier history from its test boundary: the latter starts empty when the presentation is chosen and records only divisors subsequently created by its test operations. Set $w_H(x)=(A_x,t_x)$ at singular points, and $w_H(x)=\\bot$ at regular points.\n\nThese prescriptions define one simultaneous assignment in a fixed totally ordered lexicographic word space with a new least element $\\bot$, on finite admissible histories relative to this assignment [def-trf-admissible-embedded-history], without assuming those histories terminate. In particular, the local prescriptions agree on overlaps and under equivalent minimal-envelope presentations. At transformed stages the controlled transforms of the presenting marked ideals give this same word on the scheme-theoretic strict transforms. For every finite-type stage $X_H$, the function $w_H$ has finite image, and each upper level set $\\{x:w_H(x)\\geq v\\}$ is closed. It equals $\\bot$ exactly at regular points. For every fixed $D\\geq\\dim X_H$, replacing the second entry of every head by $\\Lambda^D\\Delta^{q_x}h_x$, where $\\Lambda f(n)=\\sum_{i=0}^nf(i)$, preserves all comparisons and equality strata. The value space and the prescription for $w_H$ do not depend on this auxiliary $D$.",
+ "source": {
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "ILO VIII 2.3.11 and 2.3.13, pp.93--94; normalized head and local marked-ideal word gluing, corresponding to old proof steps 1--2 and the finite-image/closedness part of step 3. Detailed BMT sections 6.1--6.3 WANTED; no Stacks tag states this resolution input."
+ },
+ "stmt_deps": [
+  "def-weil-closed-immersion",
+  "def-pc-reduced-scheme",
+  "def-sbc-smooth-morphisms",
+  "def-weil-proper-morphism",
+  "def-weil-finite-type-morphism",
+  "def-trf-admissible-embedded-history",
+  "def-nagata-global-blowup",
+  "def-nagata-strict-transform",
+  "def-weil-regular-scheme",
+  "lem-trf-hilbert-samuel-smooth-dimension-profile",
+  "lem-trf-hilbert-samuel-local-presentations",
+  "lem-trf-marked-ideal-numerical-resolution-engine",
+  "def-weil-pbc-module-length",
+  "def-weil-pbc-krull-dimension-ring",
+  "def-trf-chronological-history-boundary"
+ ],
+ "proof": [
+  {
+   "text": "Use the coherent-prescription theorem to obtain one simultaneous ν with charts at every singular point, equality with every chart word, and bottom exactly at regular points. This is an existential elimination inside a proof, not a data definition choosing an arbitrary witness.",
+   "uses": [
+    "lem-trf-resolution-word-coherent-prescription"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For every chart C, its final marked ideal has maximal order by C.maximalStages. Apply the fixed engine normalized field to C.history, C.admissible and its final cosupport point. This supplies the leading rational one independently of the coherent-prescription lemma.",
+   "uses": [
+    "lem-trf-marked-ideal-numerical-resolution-engine",
+    "def-trf-resolution-word-charts"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Apply the finite-local-upper-bound theorem to the prescribed family at H, using exactly the chart availability, chart-word equality and regularity clauses from the first step. This proves finite image.",
+   "uses": [
+    "lem-trf-resolution-word-finite-local-upper-bounds"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For any threshold v and any x outside its upper level, choose the open neighborhood U on which ν H y ≤ ν H x. If v ≤ ν H y held for a y in U, transitivity would give v ≤ ν H x, a contradiction. Therefore the complement is open; the upper level is closed.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "The integer_operators theorem preserves and reflects strict order under any iterated integer summation. Expand the lexicographic head order to obtain sumHead D a < sumHead D b iff a < b. Strict monotonicity implies injectivity, hence equality reflection. Expanding the lexicographic head/tail order and checking both bottom cases gives the full-word ≤ equivalence. Express equality as the conjunction of the two inequalities. These arguments work for every D and all words, so in particular for the dimension bounds and the prescribed values in the statement.",
+   "uses": [
+    "lem-trf-hilbert-samuel-smooth-dimension-profile",
+    "def-trf-resolution-word-charts"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-trf-resolution-word-coherent-prescription",
+  "lem-trf-marked-ideal-numerical-resolution-engine",
+  "def-trf-resolution-word-charts",
+  "lem-trf-resolution-word-finite-local-upper-bounds",
+  "lem-trf-hilbert-samuel-smooth-dimension-profile"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "Assembly of the original ILO VIII 2.3.11--2.3.13 plan: geometric steps 2--7 split into coherent prescription and finite local upper bounds; leading-one normalization, closedness, and word-order comparison proved in Lean."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "HilbertSamuel|Hilbert.Samuel|Bierstone|desingulari",
+   "results": "{\"t\": \"2026-10-22T06:14:50Z\", \"tool\": \"grep\", \"query\": \"HilbertSamuel|Hilbert.Samuel|Bierstone|desingulari\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: returned signatures concern general smoothness, descent, group or homological words, Hilbert spaces or unrelated termination; none states this normalized Hilbert--Samuel/marked-ideal assertion"
+  },
+  {
+   "tool": "leansearch",
+   "query": "lem-trf-normalized-resolution-word-gluing: Global well-defined finite upper semicontinuous invariant formed by prefixing normalized Hilbert Samuel function to marked ideal resolution word",
+   "results": "{\"t\": \"2026-10-22T06:14:51Z\", \"tool\": \"leansearch\", \"query\": \"lem-trf-normalized-resolution-word-gluing: Global well-defined finite upper semicontinuous invariant formed by prefixing normalized Hilbert Samuel function to marked ideal resolution word\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Monoid.PushoutI.NormalWord.mk.injEq\", \"Monoid.PushoutI.NormalWord.cons_eq_smul\", \"Monoid.PushoutI.NormalWord.mk.congr_simp\", \"Monoid.PushoutI.NormalWord.cons.congr_simp\", \"Monoid.PushoutI.NormalWord.mk.inj\", \"Monoid.PushoutI.NormalWord.base_smul_def\", \"AlgebraicGeometry.Scheme.Hom.toNormalization\", \"Monoid.PushoutI.NormalWord.prod_cons\"], \"digest\": \"ab10249fa218e803\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: returned signatures concern general smoothness, descent, group or homological words, Hilbert spaces or unrelated termination; none states this normalized Hilbert--Samuel/marked-ideal assertion"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"HilbertSamuel\"",
+   "results": "{\"t\": \"2026-10-22T06:14:51Z\", \"tool\": \"loogle\", \"query\": \"\\\"HilbertSamuel\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: returned signatures concern general smoothness, descent, group or homological words, Hilbert spaces or unrelated termination; none states this normalized Hilbert--Samuel/marked-ideal assertion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "lem-trf-normalized-resolution-word-gluing: Glue local desingularization invariant words from dimension-normalized Hilbert Samuel heads and maximal order marked ideal tails, independently of local presentation",
+   "results": "{\"t\": \"2026-10-22T06:15:01Z\", \"tool\": \"leanfinder\", \"query\": \"lem-trf-normalized-resolution-word-gluing: Glue local desingularization invariant words from dimension-normalized Hilbert Samuel heads and maximal order marked ideal tails, independently of local presentation\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"StandardEtalePair.existsUnique_hasMap_of_hasMap_quotient_of_sq_eq_bot\", \"Algebra.IsSmoothAt.exists_notMem_isStandardSmooth\", \"Algebra.Smooth.exists_span_eq_top_isStandardSmooth\", \"Algebra.IsSmoothAt.exists_notMem_smooth\", \"PowerSeries.weierstrassDistinguished_mul\", \"Ideal.quotientToQuotientRangePowQuotSuccAux_mk\", \"PowerSeries.IsWeierstrassDivisorAt.mod'_mk_eq_mod\", \"PowerSeries.IsWeierstrassDivisorAt.mk_mod'_eq_self\"], \"digest\": \"9fe1c7f75739030f\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: returned signatures concern general smoothness, descent, group or homological words, Hilbert spaces or unrelated termination; none states this normalized Hilbert--Samuel/marked-ideal assertion"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Hilbert\"",
+   "results": "{\"t\": \"2026-10-22T06:17:15Z\", \"tool\": \"loogle\", \"query\": \"\\\"Hilbert\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"Metric.PiNatEmbed.exists_embedding_to_hilbert_cube\", \"HilbertSpace\", \"HilbertSpace.mk\", \"HilbertBasis\", \"HilbertBasis.instFunLike\", \"HilbertBasis.toOrthonormalBasis\", \"HilbertBasis.toSchauderBasis\", \"HilbertBasis.toUnconditionalSchauderBasis\"], \"digest\": \"a29075003a41958e\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: returned signatures concern general smoothness, descent, group or homological words, Hilbert spaces or unrelated termination; none states this normalized Hilbert--Samuel/marked-ideal assertion"
+  },
+  {
+   "tool": "grep",
+   "query": "Hilbert.?Samuel|semicoherent|markedIdeal|desingularization",
+   "results": "{\"t\": \"2026-10-23T09:32:11Z\", \"tool\": \"grep\", \"query\": \"Hilbert.?Samuel|semicoherent|markedIdeal|desingularization\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: general semicontinuity definitions, prime-spectrum chains, adic completions and local-cohomology diagrams do not construct the specified Hilbert--Samuel/marked-ideal invariant"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Upper semicontinuous resolution invariant of a reduced rational variety defined by Hilbert Samuel functions and coefficient marked ideals",
+   "results": "{\"t\": \"2026-10-23T09:32:12Z\", \"tool\": \"leansearch\", \"query\": \"Upper semicontinuous resolution invariant of a reduced rational variety defined by Hilbert Samuel functions and coefficient marked ideals\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"UpperSemicontinuousOn\", \"UpperSemicontinuous\", \"UpperSemicontinuousWithinAt\", \"UpperHemicontinuous\", \"upperSemicontinuousOn_iff_limsup_le\", \"UpperSemicontinuousAt\", \"UpperSemicontinuous.upperSemicontinuousAt\", \"UpperHemicontinuousOn\"], \"digest\": \"7096bc782cb2f02e\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: general semicontinuity definitions, prime-spectrum chains, adic completions and local-cohomology diagrams do not construct the specified Hilbert--Samuel/marked-ideal invariant"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"HilbertSamuel\", \"Ideal\"",
+   "results": "{\"t\": \"2026-10-23T09:32:12Z\", \"tool\": \"loogle\", \"query\": \"\\\"HilbertSamuel\\\", \\\"Ideal\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: general semicontinuity definitions, prime-spectrum chains, adic completions and local-cohomology diagrams do not construct the specified Hilbert--Samuel/marked-ideal invariant"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Gluing Hilbert Samuel normalized invariant heads with test equivalent marked ideal resolution invariant tails upper semicontinuity",
+   "results": "{\"t\": \"2026-10-23T09:32:16Z\", \"tool\": \"leanfinder\", \"query\": \"Gluing Hilbert Samuel normalized invariant heads with test equivalent marked ideal resolution invariant tails upper semicontinuity\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"PrimeSpectrum.exist_ltSeries_mem_one_of_mem_last\", \"Hausdorffification\", \"localCohomology.ideal_powers_initial\", \"AdicCompletion.exists_smodEq_pow_smul_top_and_mkQ_eq\", \"AdicCompletion.exists_smodEq_pow_smul_top_and_smodEq_pow_add_one_smul_top\", \"AdicCompletion.exists_smodEq_pow_add_one_smul\", \"localCohomology\", \"Hausdorffification.induction_on\"], \"digest\": \"d3b94d062866a905\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: general semicontinuity definitions, prime-spectrum chains, adic completions and local-cohomology diagrams do not construct the specified Hilbert--Samuel/marked-ideal invariant"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An intrinsic desingularization invariant is obtained by prepending a dimension corrected Hilbert Samuel function to the canonical invariant of a maximal order marked ideal",
+   "results": "{\"t\": \"2026-10-23T09:34:47Z\", \"tool\": \"leanfinder\", \"query\": \"An intrinsic desingularization invariant is obtained by prepending a dimension corrected Hilbert Samuel function to the canonical invariant of a maximal order marked ideal\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.IsStandardSmoothOfRelativeDimension\", \"Algebra.IsSmoothAt\", \"Polynomial.IsDistinguishedAt.isWeierstrassDivisorAt'\", \"ringKrullDim_le_ringKrullDim_quotSMulTop_succ\", \"ringKrullDim_quotient_span_singleton_succ_eq_ringKrullDim\", \"PowerSeries.IsWeierstrassFactorizationAt.degree_eq_coe_lift_order_map_of_ne_top\", \"ringKrullDim_quotient_span_singleton_succ_eq_ringKrullDim_of_mem_nonZeroDivisors\", \"PowerSeries.IsWeierstrassFactorizationAt.natDegree_eq_toNat_order_map_of_ne_top\"], \"digest\": \"87481c2ab6a8556a\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: general semicontinuity definitions, prime-spectrum chains, adic completions and local-cohomology diagrams do not construct the specified Hilbert--Samuel/marked-ideal invariant"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-hilbert-samuel-resolution-invariant-calculus",
+  "date": "2026-10-22",
+  "group": "Q153"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Historical nearby-duality/alteration branch of lem-trf-local-term-locality, proof (1)--(2), through lem-trf-log-regular-desingularization: monoidal resolution used for the regular modification of nodal pairs; ILO VIII 3.3.15, pp.109--110. Expose VIII, Theorems 3.1.27 and 3.2.20, and Remark 3.2.21, pp.102,106; construction in 3.2.19 over k=Q. Supporting source: Expose VIII, Theorem 2.3.10, normalized restriction in 2.3.9 and Remark 2.3.12(i), equivariance in Corollary 2.3.17, printed pp.93--95; application in 3.2.19, p.106. Refinement in this split: Expose VIII, Theorem 2.3.10 restricted to finite-type Q-schemes, with tower conventions 2.1.4, 2.3.1, 2.3.4 and Remark 2.3.5(i), printed pp.87,91--93. This is ordinary resolution, not the normalized toric conclusion; no Stacks tag states this characteristic-zero resolution theorem. Lower input: embedded characteristic-zero resolution and invariant synchronization discussed in ILO VIII 2.3.11 and 2.3.13; the intrinsic gluing argument is supplied in this item. Lower input: Expose VIII 2.3.11 and 2.3.13, pp.93--94: local invariant input underlying the cited strong embedded algorithm; BMT sections 6.1--6.3, especially local embedding independence and the correction of synchronization for arbitrary smooth morphisms. Re-split: ILO VIII 2.3.11 and 2.3.13, pp.93--94; normalized head and local marked-ideal word gluing, corresponding to old proof steps 1--2 and the finite-image/closedness part of step 3. Detailed BMT sections 6.1--6.3 WANTED; no Stacks tag states this resolution input.",
+   "via": [
+    "lem-trf-hilbert-samuel-resolution-invariant-calculus",
+    "lem-trf-embedded-resolution-ambient-comparison",
+    "lem-trf-smooth-functorial-ordinary-resolution",
+    "lem-trf-toric-normalized-desingularization",
+    "lem-trf-functorial-fan-desingularization",
+    "lem-trf-monoidal-resolution-tower",
+    "lem-trf-log-regular-desingularization",
+    "lem-trf-nodal-pair-projective-resolution",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-trf-normalized-resolution-word-gluing",
+  "worker": "stage1",
+  "summary": "Assembled the normalized head, minimal-envelope presentation comparisons and the fixed marked-ideal engine, without creating duplicate clause nodes. Wrote the finite-prefix compatibility, finite-image and local upper-bound arguments explicitly; checked empty/regular inputs, nonclosed strata, negative finite differences, dropped levels, and recorded-versus-test boundary conventions. No statement change.",
+  "blueprint": "The recorded historical resolution branch of lem-trf-local-term-locality, through the invariant-calculus node: local word construction and finite-image/closedness input formerly in invariant-calculus steps 1--3. The current latest blueprint uses contracting correspondences; this split changes neither that route nor its unit/chapter.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-NR-77c88ae89",
+  "group": "NR",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NR-77c88ae89 (reviewer sub-agent of L); spot-checked: I read the whole item, its 9 steps and every cited statement: the profile, local-presentations, engine, minimal-envelope-comparison and admissible-history nodes, plus def-trf-labeled-embedded-resolution, def-nagata-strict-transform and the Mathlib leaves. The source ILO VIII 2.3.11/2.3.13 (PDF pp.99-100) only refers the reader to BM/BMT, so proof_origin=agent and BMT as WANTED are correct. No SGA is used. The delivery creates no new nodes and leaves the statement unchanged; it is byte-identical to the 292973ab snapshot. stmt_deps gains the length and Krull-dimension definitions, which the statement uses. No repair note exists for this item, so the 2026-10-21 re-split rules do not apply. Advisory: the proof is 7.3k characters, so a later batch re-split is possible. There is no cycle and every citation is either in unit sk-i-curve-zero or a Mathlib leaf; no tool_uses are needed. Checks: steps 1 and 9, Λ^D as a lexicographic order isomorphism, hold with negative entries. Step 2: the regular head (1,(1,1,...)) is right; at the node xy=0, h=1,3,5,... and Δh=(1,2,2,...); plane∪line gives c=2. Step 3: equal support dimension (embedding dimension plus trdeg κ(a)) meets the engine hypothesis. Steps 4, 5, 7 and 8 are correct. In step 5, the controlled-transform clause is asserted after test operations; permissibility of maximum extensions is proved in progress-termination, which cites this item, so there is no cycle. Two faults were repaired. (1) E1/C1: steps 2-5 apply the profile and presentation nodes at later stages, which needs X_H reduced and of finite type, but the admissible-history definition assumes neither and the item never proved it. Borrowing it from progress-termination or finite-history-comparison would be circular. Step 2 now proves it by induction on the length. Finite type: P_H is Noetherian [lem-weil-pbc-finite-type-over-noetherian], the Rees-algebra charts [def-nagata-affine-blowup, def-nagata-global-blowup] are of finite type, and smooth comparisons pull the center ideals back. Reduced: the strict transform is the closure of a reduced open [def-nagata-strict-transform, lem-trf-reduced-scheme-image]. (2) C1: in step 6 the compact-subsets leaf needs a Noetherian underlying space, but the cited node gives only a Noetherian scheme. Step 6 now goes through finite affine pieces [lem-sc-affine-noetherian-underlying-space]. The corrected file is fixes/dag/nodes/sec-trace-formula/lem-trf-normalized-resolution-word-gluing.json, with proof_deps set to the union of uses.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.NormalizedResolutionWordGluing",
+  "declaration": "AlgebraicGeometry.EmbeddedResolutionHistory.normalized_resolution_word_gluing",
+  "declarations": [
+   "AlgebraicGeometry.EmbeddedResolutionHistory.normalized_resolution_word_gluing"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/NormalizedResolutionWordGluing.lean",
+  "statement": "theorem normalized_resolution_word_gluing (R : MarkedIdeal.NumericalResolution.{u}) : ∃ ν : ValueFamily.{u} HilbertSamuel.ResolutionWord, ∀ {A : EmbeddedResolutionPair.{u}} {n : ℕ} (H : EmbeddedResolutionHistory A n), Admissible ν H → (∀ x : H.X, ¬ IsRegularLocalRing (H.X.presheaf.stalk x) → Nonempty (ResolutionWordChart R H x)) ∧ (∀ (x : H.X) (C : ResolutionWordChart R H x), (R.value C.history ⟨C.supportPoint, C.cosupport⟩).head? = some (MarkedIdeal.rational 1) ∧ ν H x = C.word) ∧ (Set.range (ν H)).Finite ∧ (∀ v : HilbertSamuel.ResolutionWord, IsClosed {x : H.X | v ≤ ν H x}) ∧ (∀ x : H.X, ν H x = ⊥ ↔ IsRegularLocalRing (H.X.presheaf.stalk x)) ∧ ∀ (D : ℕ) (_hD : topologicalKrullDim H.X ≤ (D : WithBot ℕ∞)) (x y : H.X), (HilbertSamuel.sumResolutionWord D (ν H x) ≤ HilbertSamuel.sumResolutionWord D (ν H y) ↔ ν H x ≤ ν H y) ∧ (HilbertSamuel.sumResolutionWord D (ν H x) = HilbertSamuel.sumResolutionWord D (ν H y) ↔ ν H x = ν H y)",
+  "branch": "sheaf-dag",
+  "by": "O1",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "The original chart and alphabet definitions are re-exported verbatim from NormalizedResolutionWordCharts and attached to def-trf-resolution-word-charts. The theorem signature is unchanged."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-9ba181542",
+  "group": "O1",
+  "result": "pass",
+  "note": "Re-delivery after RETURN H2 of 1add4b55f2dc. Lean module byte-identical to the reviewed head; the only item change is in stmt_deps: the theorem lem-trf-minimal-envelope-coefficient-comparison is replaced by the new definition node def-trf-chronological-history-boundary, and the theorem stays in proof_deps. New node: its statement matches the Fin.induction body of coefficientHistoryBoundary (MinimalEnvelopeCoefficientComparison.lean:403; strict-transform kernel ideals plus the appended extended center ideal, identity stages kept, no admissibility assumption). Its stmt_deps are three definition nodes (admissible history, strict transform, global blowup). Its lean record is existing:true on the unchanged module, with the statement verbatim and the §5 fields and searches present. Clause check of the unchanged module: engine binder, charts, leading-1 drop, agreement for every chart, finite range, closed upper levels, ⊥ iff regular, ΛD preserves and reflects ≤ and = for every D at least the dimension; edge cases and universes OK. Advisory: DimensionHead, normalizedHead and sumHead are still owned by the base profile theorem node. No file changed, nothing compiled."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-bd753",
+  "group": "A3",
+  "result": "pass",
+  "landing": "20261026T091036-L-3301601",
+  "kind": "interface",
+  "note": "independent cc review: item proof vs lem-trf-normalized-resolution-word-gluing node; moved defs vs published item module (identical text apart from blueprint tags); 2 new sorry statements vs item conjuncts; 3 direct importers compiled against delivered modules"
+ }
+}

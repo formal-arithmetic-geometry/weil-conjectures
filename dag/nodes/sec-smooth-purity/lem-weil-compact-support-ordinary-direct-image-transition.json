@@ -1,0 +1,119 @@
+{
+ "id": "lem-weil-compact-support-ordinary-direct-image-transition",
+ "kind": "statement",
+ "title": "Ordinary direct image respects horizontal coefficient maps",
+ "statement": "Let l be prime, E/Q_l finite, f:X→Y a scheme morphism, and M any ordinary coefficient system on X. Use native direct image P_f, ordinary evaluations e_k, and the specified positive coefficient rings A_k [def-sp-varying-ring-operations, def-weil-compact-support-native-system-evaluation]. For n≤m, let τ_W:e_m^W→e_n^W⋙Res_W be the actual horizontal coefficient transition [lem-weil-compact-support-coefficient-transition]. Write ε_k:P_f⋙e_k^Y≅e_k^X⋙P_(f,k) for moduleEvalP. Let d:P_(f,n)⋙Res_Y≅Res_X⋙P_(f,m) be the section-normalized scalar direct-image square [lem-weil-compact-support-open-restriction-scalar]. Then τ_Y,P_f(M) ≫ Res_Y(ε_n,M) ≫ d_(e_n^X(M)) = ε_m,M ≫ P_(f,m)(τ_X,M).",
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tags 03DA and 03D3, naturality under adjunction of module inverse and direct images; Tag 0941, sequence-site horizontal maps. The first transpose in the assigned ordinary-open transition argument."
+ },
+ "stmt_deps": [
+  "def-sp-varying-ring-operations",
+  "def-weil-compact-support-native-system-evaluation",
+  "lem-weil-compact-support-coefficient-transition",
+  "lem-weil-compact-support-open-restriction-scalar"
+ ],
+ "proof": [
+  {
+   "text": "Postcompose both proposed composites with compactSupportDirectModel at level m, evaluated on the restriction of e_n(M). Unfold compactSupportScalarDirectImage, cancel the inverse and forward model comparisons, and use naturality of the level-m model comparison. Both resulting composites are exactly the two sides of compactSupportOrdinaryDirectTransition after expanding compactSupportOrdinaryDirectEvaluation. Apply that proved square and cancel the postcomposed isomorphism.",
+   "uses": [
+    "lem-weil-compact-support-ordinary-direct-transition",
+    "def-weil-compact-support-native-system-evaluation",
+    "lem-weil-compact-support-open-restriction-scalar"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-compact-support-ordinary-direct-transition",
+  "def-weil-compact-support-native-system-evaluation",
+  "lem-weil-compact-support-open-restriction-scalar"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tags 03DA and 03D3; transport of the already proved ordinary direct-evaluation square through its specified direct-image model comparison."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Extension by zero of module sheaves commutes with evaluation and coefficient restriction in a sequence site",
+   "results": "8 hits, including SheafOfModules.evaluation and SheafOfModules.over. None states horizontal compatibility of the sequence-site open extension.",
+   "date": "2026-10-27",
+   "verdict": "No matching theorem."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Exact extension by zero evaluation commutes with horizontal coefficient transitions",
+   "results": "8 hits on Profinite.Nobeling and HomologicalComplex.extend. No sequence-site module statement.",
+   "date": "2026-10-27",
+   "verdict": "No matching theorem."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.mateEquiv",
+   "results": "12 hits, including mateEquiv, its unit equations and composition lemmas. These give generic mate calculus, not the geometric coefficient square.",
+   "date": "2026-10-27",
+   "verdict": "Generic infrastructure only."
+  },
+  {
+   "tool": "grep",
+   "query": "evalJ.*[Tt]ransition|moduleEvalG.*naturality|[Tt]ransition.*[Oo]pen",
+   "results": "3 Mathlib hits: Gluing.lean, FiberBundle/Basic.lean and OpenPartialHomeomorph/Constructions.lean. None concerns module-sheaf evaluation. Local project search finds the assigned derived statement and different-coordinate transition statements, but no ordinary native theorem.",
+   "date": "2026-10-27",
+   "verdict": "No matching ordinary theorem."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.CompactSupportOrdinaryOpenTransition",
+  "date": "2026-10-27",
+  "group": "Q2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-compact-support-ordinary-pullback-transition",
+   "place": "The direct-image section square before transposition.",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-def-sf-operations",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.CompactSupportOrdinaryDirectImageTransition",
+  "file": "lean/Sheaf/Paper/CompactSupportOrdinaryDirectImageTransition.lean",
+  "declaration": "WeilConjectures.compactSupportOrdinaryDirectImageTransition",
+  "declarations": [
+   "WeilConjectures.compactSupportOrdinaryDirectImageTransition"
+  ],
+  "statement": "theorem compactSupportOrdinaryDirectImageTransition {X Y : Scheme.{u}} (f : X ⟶ Y)\n    {m n : ℕ} (h : n ≤ m) (M : coefficientSequenceModules.{u, u} l E X) :\n    (compactSupportOrdinaryCoefficientTransition l E Y h).app\n        ((ProEtale.VaryingRing.push (compactSupportSystemLevel l E)\n          (compactSupportSystemQuotient l E) f).obj M) ≫\n      (proEtaleCoefficientRestrictScalars Y (compactSupportLevelQuotient l E m n h)).map\n        ((ProEtale.VaryingRing.moduleEvalP (compactSupportSystemLevel l E)\n          (compactSupportSystemQuotient l E) f n).hom.app M) ≫\n      (compactSupportScalarDirectImage f (compactSupportLevelQuotient l E m n h)).hom.app\n        ((coefficientSequenceEvaluation l E X n).obj M) =\n    (ProEtale.VaryingRing.moduleEvalP (compactSupportSystemLevel l E)\n          (compactSupportSystemQuotient l E) f m).hom.app M ≫\n      (ProEtale.StrictTower.moduleDirectImage\n        (compactSupportSystemLevel l E m) f).map\n          ((compactSupportOrdinaryCoefficientTransition l E X h).app M)",
+  "branch": "sheaf-dag",
+  "by": "Q2",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q2",
+  "result": "pass",
+  "landing": "20261027T112419-L-1581712",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "N3",
+  "result": "pass",
+  "landing": "20261027T123509-L-2311123",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

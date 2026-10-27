@@ -1,0 +1,241 @@
+{
+ "id": "lem-sfb-surjective-cofactor-compatibility",
+ "kind": "statement",
+ "title": "Kernel-first surjective comparison of cofactor maps",
+ "statement": "Let $A$ be a commutative ring, $c,c'\\geq0$, and let $E=[P\\xrightarrow{u}Q]$, $E'=[P'\\xrightarrow{u'}Q']$ be complexes in degrees $-1,0$ whose terms are finite projective $A$-modules [def-weil-pbc-projective-module], of ranks $c,c+1$ and $c',c'+1$ at every prime. Let $f=(f^{-1},f^0):E\\to E'$ be a degreewise surjective quasi-isomorphism [def-weil-abstract-derived-category], so $f^0u=u'f^{-1}$. Put $C_E=Q/u(P)$, $D_E=(\\bigwedge^cP)^\\vee\\otimes_A\\bigwedge^{c+1}Q$, and likewise $C_{E'},D_{E'}$, with exterior powers [def-weil-pbc-exterior-algebra] and $V^\\vee=\\operatorname{Hom}_A(V,A)$. Suppose given linear maps $w_E:C_E\\to D_E$ and $w_{E'}:C_{E'}\\to D_{E'}$ whose restrictions to every common finite standard free localization satisfy the cofactor formula\n$$w_E(\\bar v)=(p_1\\wedge\\cdots\\wedge p_c)^\\vee\\otimes(u(p_1)\\wedge\\cdots\\wedge u(p_c)\\wedge v),$$\nand the analogous formula for $E'$, for any ordered source basis and any lift $v$.\nLet $N^{-1}=\\ker f^{-1}$, $N^0=\\ker f^0$, and let $d_N:N^{-1}\\xrightarrow{\\sim}N^0$ and $T_f:D_E\\xrightarrow{\\sim}D_{E'}$ be the kernel differential and determinant comparison of [lem-trf-surjective-two-term-determinant-calculus], expressed in dual-first order by ordinary tensor symmetry. On a common free localization choose a basis $k_1,\\ldots,k_r$ of $N^{-1}$, put $l_i=d_N(k_i)$, choose bases $p'_1,\\ldots,p'_{c'}$ and $q'_1,\\ldots,q'_{c'+1}$, and choose linear sections of $f^{-1},f^0$ giving lifts $\\widetilde p_j,\\widetilde q_j$. Write $k,l,\\widetilde p,\\widetilde q,p',q'$ for their ordered wedges. These are kernel-first bases of $P,Q$, with $c=r+c'$ on each nonzero chart, and the comparison satisfies\n$$T_f\\bigl((k\\wedge\\widetilde p)^\\vee\\otimes(l\\wedge\\widetilde q)\\bigr)=(p')^\\vee\\otimes q'.$$\nFor every $v\\in Q$ one has\n$$T_f(w_E(\\bar v))=w_{E'}(\\overline{f^0v}),\\qquad T_f\\circ w_E=w_{E'}\\circ H^0(f).$$\nThe equation has sign $+1$ in this kernel-first convention, independently of all splittings and bases. It includes empty kernel and quotient source blocks, characteristic two and the zero ring; neither differential is required to be injective.",
+ "source": {
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tag 0FJM (lemma-determinant-two-term-complexes), preceding kernel-first comparison construction; duality.tex Tag 0E9Y (lemma-determinant), displayed cofactor formula; algebra.tex Tag 00EK (lemma-cover-module). Agent-formulated compatibility of these two constructions."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-projective-module",
+  "def-weil-pbc-exterior-algebra",
+  "def-weil-abstract-derived-category",
+  "lem-trf-surjective-two-term-determinant-calculus"
+ ],
+ "proof": [
+  {
+   "text": "By [lem-trf-surjective-two-term-determinant-calculus], the kernel terms are finite projective and $d_N$ is an isomorphism. Projectivity of $P',Q'$ gives sections $s^{-1},s^0$ of the two surjections [def-weil-pbc-projective-module]. Thus $P=N^{-1}\\oplus s^{-1}(P')$ and $Q=N^0\\oplus s^0(Q')$: explicitly $x=(x-s^if^ix)+s^if^ix$, and the intersection is zero by applying $f^i$. Apply [lem-weil-pbc-finite-projective-standard-free-cover] to $N^{-1},P',Q'$. Products of their covering elements give a common finite standard cover, still generating the unit ideal (multiply the three expressions for $1$). On each chart choose $k,p',q'$ as in the statement; $l=d_N(k)$ is a basis of $N^0$, and the direct sums give the displayed kernel-first bases of $P,Q$. On a nonzero chart reduce these bases modulo any maximal ideal: their lengths give $c=r+c'$ and $c+1=r+c'+1$. Zero charts require no rank assertion.",
+   "uses": [
+    "lem-trf-surjective-two-term-determinant-calculus",
+    "def-weil-pbc-projective-module",
+    "lem-weil-pbc-finite-projective-standard-free-cover"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0FJI (section-determinants-complexes), kernel-first comparison construction preceding Tag 0FJJ; duality.tex Tag 0E9Y (lemma-determinant), displayed cofactor formula. Agent-written compatibility calculation."
+   }
+  },
+  {
+   "text": "Write $e=(k\\wedge\\widetilde p)^\\vee\\otimes(l\\wedge\\widetilde q)$ and $e'=(p')^\\vee\\otimes q'$ on one chart. The exact-sequence maps of [lem-trf-projective-determinant-exact-sequence] send $k\\otimes p'$ to $k\\wedge\\widetilde p$ and $l\\otimes q'$ to $l\\wedge\\widetilde q$. The differential determinant is $\\delta_N=k^\\vee\\otimes l$ in dual-first order. Therefore the definition of $\\Gamma_f$ in [lem-trf-surjective-two-term-determinant-calculus] gives $\\Gamma_f(e'\\otimes\\delta_N)=e$, and its normalization gives $T_f(e)=e'$. These are computations of the localized global maps: [lem-trf-projective-exterior-scalar-comparisons] identifies the exterior powers, their duals, evaluation and tensor symmetry under scalar extension, and identifies the scalar-extended exact-sequence maps. The global splitting from Step 1 identifies the localized kernels with the kernels of the localized maps. The formula for $\\delta_N$, and hence for $\\Gamma_f$ and its inverse $T_f$, consequently localizes to the formula just calculated.",
+   "uses": [
+    "lem-trf-projective-determinant-exact-sequence",
+    "lem-trf-surjective-two-term-determinant-calculus",
+    "lem-trf-projective-exterior-scalar-comparisons"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0FJI (section-determinants-complexes), kernel-first comparison construction preceding Tag 0FJJ; duality.tex Tag 0E9Y (lemma-determinant), displayed cofactor formula. Agent-written compatibility calculation."
+   }
+  },
+  {
+   "text": "Work on this chart, with $v$ any element of $Q$ on the chart. Put $v'=f^0(v)$ and $x_j=u'(p'_j)$. The chain equation gives $u(\\widetilde p_j)=s^0(x_j)+b_j$ with $b_j\\in N^0$, and $v=s^0(v')+b$ with $b\\in N^0$. Also $u(k_i)=l_i$. By multilinearity and alternation [def-weil-pbc-exterior-algebra],\n$$u(k_1)\\wedge\\cdots\\wedge u(k_r)\\wedge u(\\widetilde p_1)\\wedge\\cdots\\wedge u(\\widetilde p_{c'})\\wedge v\n=l\\wedge s^0(x_1)\\wedge\\cdots\\wedge s^0(x_{c'})\\wedge s^0(v').$$\nIndeed each discarded summand contains $l_1,\\ldots,l_r$ and some $b_j$ or $b$; expand that vector in the basis $l_i$, so each term has a repeated factor and is zero. This uses $z\\wedge z=0$, not division by $2$. No factor is permuted.",
+   "uses": [
+    "def-weil-pbc-exterior-algebra"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0FJI (section-determinants-complexes), kernel-first comparison construction preceding Tag 0FJJ; duality.tex Tag 0E9Y (lemma-determinant), displayed cofactor formula. Agent-written compatibility calculation."
+   }
+  },
+  {
+   "text": "There is a unique coefficient $a$ with $x_1\\wedge\\cdots\\wedge x_{c'}\\wedge v'=a q'$: this top exterior power is free with generator $q'$ by the determinant exact-sequence statement [lem-trf-projective-determinant-exact-sequence] (or its determinant-line definition). Applying the exterior power of the section $s^0$ and wedging $l$ gives the right hand side of Step 3 as $a(l\\wedge\\widetilde q)$. Thus the assumed cofactor formulas give $w_E(\\bar v)=a e$ and $w_{E'}(\\overline{v'})=a e'$. Step 2 and linearity imply $T_f(w_E(\\bar v))=a e'=w_{E'}(\\overline{f^0v})$. This proves the desired equation on every chart, including for arbitrary localized $v$; no injectivity of $u$ or $u'$ was used.",
+   "uses": [
+    "lem-trf-projective-determinant-exact-sequence"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0FJI (section-determinants-complexes), kernel-first comparison construction preceding Tag 0FJJ; duality.tex Tag 0E9Y (lemma-determinant), displayed cofactor formula. Agent-written compatibility calculation."
+   }
+  },
+  {
+   "text": "For a global $v\\in Q$, let $z=T_f(w_E(\\bar v))-w_{E'}(\\overline{f^0v})\\in D_{E'}$. Its localization on every chart is zero by Steps 2--4 and the given local cofactor formulas. The injectivity clause of [lem-weil-pbc-cover-module-exact] gives $z=0$. The chain equation makes $H^0(f):Q/u(P)\\to Q'/u'(P')$, $\\bar v\\mapsto\\overline{f^0v}$, well-defined; every cokernel element has a representative, so the elementwise equality is the equality of maps. The calculation works for every choice of sections and bases, while $T_f$ is the fixed normalized map of [lem-trf-surjective-two-term-determinant-calculus], so the equation is independent of these choices. With $r=0$ all kernel wedges are $1$; with $c'=0$ the quotient source wedge is $1$ and Step 3 simply removes the kernel component of $v$. These formulas still have sign $+1$. Over the zero ring all modules and maps are zero and every asserted equality is unique. The alternation argument already covers characteristic two.",
+   "uses": [
+    "lem-weil-pbc-cover-module-exact",
+    "lem-trf-surjective-two-term-determinant-calculus"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00EK (lemma-cover-module), injectivity; more-algebra.tex Tag 0FJI (section-determinants-complexes), normalization; agent-written assembly and empty-block checks."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-trf-surjective-two-term-determinant-calculus",
+  "def-weil-pbc-projective-module",
+  "lem-weil-pbc-finite-projective-standard-free-cover",
+  "lem-trf-projective-determinant-exact-sequence",
+  "lem-trf-projective-exterior-scalar-comparisons",
+  "def-weil-pbc-exterior-algebra",
+  "lem-weil-pbc-cover-module-exact"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tag 0FJI (section-determinants-complexes), kernel-first comparison construction preceding Tag 0FJJ; duality.tex Tag 0E9Y (lemma-determinant), displayed cofactor formula. Agent-written compatibility calculation."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Cofactor wedge maps commute with projection from a split two term extension by an acyclic isomorphism complex using kernel first determinant generators",
+   "results": "{\"t\": \"2026-10-23T04:15:45Z\", \"tool\": \"leanfinder\", \"query\": \"Cofactor wedge maps commute with projection from a split two term extension by an acyclic isomorphism complex using kernel first determinant generators\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CochainComplex.mappingConeHomOfDegreewiseSplitXIso\", \"CochainComplex.mappingCone.triangleRotateShortComplexSplitting\", \"CochainComplex.mappingCone.triangleRotateShortComplexSplitting_r\", \"CochainComplex.mappingConeHomOfDegreewiseSplitIso_inv_comp_triangle_mor₃\", \"HomologicalComplex.homotopyCofiber.inlX_fstX_assoc\", \"CochainComplex.mappingCone.triangleRotateShortComplexSplitting_s\", \"HomologicalComplex.homotopyCofiber.inlX_sndX_assoc\", \"HomologicalComplex.homotopyCofiber.inlX_fstX\"], \"digest\": \"1ee2d4bcdc7e1cf5\"} Read Matrix.det_fromBlocks_zero₂₁ at Mathlib/LinearAlgebra/Matrix/Determinant/Basic.lean:675, exteriorPower.cofactorToLeft at Mathlib/Algebra/Module/StablyFree/FreeOfInvertible.lean:33, and exteriorPower.alternatingMapToDual_apply_ιMulti at Mathlib/LinearAlgebra/ExteriorPower/Pairing.lean:57. Block determinant and pairing identities do not construct the kernel-normalized comparison on projective complexes or prove its compatibility with the supplied cokernel maps.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a degreewise surjective quasi-isomorphism of two term finite projective complexes the kernel normalized determinant map intertwines the cofactor maps from cokernels",
+   "results": "{\"t\": \"2026-10-23T04:16:29Z\", \"tool\": \"leanfinder\", \"query\": \"For a degreewise surjective quasi-isomorphism of two term finite projective complexes the kernel normalized determinant map intertwines the cofactor maps from cokernels\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.ProjectiveResolution.iso_hom_naturality_assoc\", \"CategoryTheory.ProjectiveResolution.iso_inv_naturality_assoc\", \"AlgebraicTopology.DoldKan.factors_normalizedMooreComplex_PInfty\", \"CategoryTheory.ProjectiveResolution.instQuasiIsoIntπ'\", \"CategoryTheory.ProjectiveResolution.Hom.hom'_f_assoc\", \"Rep.standardComplex.instQuasiIsoNatεToSingle₀\", \"CategoryTheory.ProjectiveResolution.Hom.hom'_f\", \"Rep.standardComplex.quasiIso_forget₂_εToSingle₀\"], \"digest\": \"772226cb74126fea\"} Read Matrix.det_fromBlocks_zero₂₁ at Mathlib/LinearAlgebra/Matrix/Determinant/Basic.lean:675, exteriorPower.cofactorToLeft at Mathlib/Algebra/Module/StablyFree/FreeOfInvertible.lean:33, and exteriorPower.alternatingMapToDual_apply_ιMulti at Mathlib/LinearAlgebra/ExteriorPower/Pairing.lean:57. Block determinant and pairing identities do not construct the kernel-normalized comparison on projective complexes or prove its compatibility with the supplied cokernel maps.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "For a block upper triangular map with invertible kernel block the rectangular cofactor wedge equals the quotient cofactor wedge times the determinant of the kernel block",
+   "results": "{\"t\": \"2026-10-23T04:15:37Z\", \"tool\": \"leansearch\", \"query\": \"For a block upper triangular map with invertible kernel block the rectangular cofactor wedge equals the quotient cofactor wedge times the determinant of the kernel block\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Matrix.twoBlockTriangular_det'\", \"Matrix.det_fromBlocks₁₁\", \"LinearMap.det_eq_det_mul_det\", \"Matrix.det_fromBlocks_zero₁₂\", \"Matrix.det_fromBlocks_zero₂₁\", \"Matrix.det_fromBlocks₂₂\", \"Matrix.twoBlockTriangular_det\", \"Matrix.BlockTriangular.det_fintype\"], \"digest\": \"638916217658e428\"} Read Matrix.det_fromBlocks_zero₂₁ at Mathlib/LinearAlgebra/Matrix/Determinant/Basic.lean:675, exteriorPower.cofactorToLeft at Mathlib/Algebra/Module/StablyFree/FreeOfInvertible.lean:33, and exteriorPower.alternatingMapToDual_apply_ιMulti at Mathlib/LinearAlgebra/ExteriorPower/Pairing.lean:57. Block determinant and pairing identities do not construct the kernel-normalized comparison on projective complexes or prove its compatibility with the supplied cokernel maps.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"ExteriorAlgebra\", \"prod\"",
+   "results": "{\"t\": \"2026-10-23T04:15:37Z\", \"tool\": \"loogle\", \"query\": \"\\\"ExteriorAlgebra\\\", \\\"prod\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"ExteriorAlgebra.ι_mul_prod_list\", \"exteriorPower.instInnerProductSpaceRealSubtypeExteriorAlgebraMemSubmoduleExteriorPower\", \"ExteriorAlgebra.prodEquivTensor\", \"ExteriorAlgebra.prodEquivTensorForward\", \"ExteriorAlgebra.prodEquivTensorInverse\", \"ExteriorAlgebra.prodEquivTensor_inverse_comp_forward\", \"ExteriorAlgebra.prodEquivTensorInverse_one_tmul_ι\", \"ExteriorAlgebra.prodEquivTensorInverse_ι_tmul_one\"], \"digest\": \"41000d76b53a8033\"} Read Matrix.det_fromBlocks_zero₂₁ at Mathlib/LinearAlgebra/Matrix/Determinant/Basic.lean:675, exteriorPower.cofactorToLeft at Mathlib/Algebra/Module/StablyFree/FreeOfInvertible.lean:33, and exteriorPower.alternatingMapToDual_apply_ιMulti at Mathlib/LinearAlgebra/ExteriorPower/Pairing.lean:57. Block determinant and pairing identities do not construct the kernel-normalized comparison on projective complexes or prove its compatibility with the supplied cokernel maps.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "ιMulti.*(add|prod)|cofactor|det.*fromBlocks",
+   "results": "{\"t\": \"2026-10-23T04:15:36Z\", \"tool\": \"grep\", \"query\": \"ιMulti.*(add|prod)|cofactor|det.*fromBlocks\", \"sub\": \"LinearAlgebra\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/LinearAlgebra/Vandermonde.lean\", \"Mathlib/LinearAlgebra/SymplecticGroup.lean\", \"Mathlib/LinearAlgebra/SymplecticGroup.lean\", \"Mathlib/LinearAlgebra/SymplecticGroup.lean\", \"Mathlib/LinearAlgebra/SymplecticGroup.lean\", \"Mathlib/LinearAlgebra/SymplecticGroup.lean\", \"Mathlib/LinearAlgebra/Matrix/SchurComplement.lean\", \"Mathlib/LinearAlgebra/Matrix/SchurComplement.lean\"], \"digest\": \"bdc9d64a6d89a462\"} Read Matrix.det_fromBlocks_zero₂₁ at Mathlib/LinearAlgebra/Matrix/Determinant/Basic.lean:675, exteriorPower.cofactorToLeft at Mathlib/Algebra/Module/StablyFree/FreeOfInvertible.lean:33, and exteriorPower.alternatingMapToDual_apply_ιMulti at Mathlib/LinearAlgebra/ExteriorPower/Pairing.lean:57. Block determinant and pairing identities do not construct the kernel-normalized comparison on projective complexes or prove its compatibility with the supplied cokernel maps.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "ιMulti.*(add|prod)|cofactor|det.*fromBlocks",
+   "results": "{\"t\": \"2026-10-23T09:54:04Z\", \"tool\": \"grep\", \"query\": \"ιMulti.*(add|prod)|cofactor|det.*fromBlocks\", \"sub\": \"LinearAlgebra\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/LinearAlgebra/Matrix/Adjugate.lean\", \"Mathlib/LinearAlgebra/Matrix/Adjugate.lean\", \"Mathlib/LinearAlgebra/Matrix/Adjugate.lean\", \"Mathlib/LinearAlgebra/Matrix/SchurComplement.lean\", \"Mathlib/LinearAlgebra/Matrix/SchurComplement.lean\", \"Mathlib/LinearAlgebra/Matrix/SchurComplement.lean\", \"Mathlib/LinearAlgebra/Matrix/SchurComplement.lean\", \"Mathlib/LinearAlgebra/Matrix/SchurComplement.lean\"], \"digest\": \"778c8f7d0be3f8b9\"}. Read returned types. Matrix.det_fromBlocks_zero₂₁ (Mathlib/LinearAlgebra/Matrix/Determinant/Basic.lean:675) is a block determinant identity, and ExteriorAlgebra.ιMulti_apply (Mathlib/LinearAlgebra/ExteriorAlgebra/Basic.lean:300) expands wedges. Neither supplies the projective kernel-normalized comparison or its cofactor compatibility. Other hits concern mapping cones, projective resolutions or exterior algebra product structures, not this statement.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "For a block upper triangular map with invertible kernel block the rectangular cofactor wedge equals the quotient cofactor wedge times the determinant of the kernel block",
+   "results": "{\"t\": \"2026-10-23T09:54:05Z\", \"tool\": \"leansearch\", \"query\": \"For a block upper triangular map with invertible kernel block the rectangular cofactor wedge equals the quotient cofactor wedge times the determinant of the kernel block\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Matrix.twoBlockTriangular_det'\", \"Matrix.det_fromBlocks₁₁\", \"LinearMap.det_eq_det_mul_det\", \"Matrix.det_fromBlocks_zero₁₂\", \"Matrix.det_fromBlocks_zero₂₁\", \"Matrix.det_fromBlocks₂₂\", \"Matrix.twoBlockTriangular_det\", \"Matrix.BlockTriangular.det_fintype\"], \"digest\": \"638916217658e428\"}. Read returned types. Matrix.det_fromBlocks_zero₂₁ (Mathlib/LinearAlgebra/Matrix/Determinant/Basic.lean:675) is a block determinant identity, and ExteriorAlgebra.ιMulti_apply (Mathlib/LinearAlgebra/ExteriorAlgebra/Basic.lean:300) expands wedges. Neither supplies the projective kernel-normalized comparison or its cofactor compatibility. Other hits concern mapping cones, projective resolutions or exterior algebra product structures, not this statement.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"ExteriorAlgebra\", \"prod\"",
+   "results": "{\"t\": \"2026-10-23T09:54:05Z\", \"tool\": \"loogle\", \"query\": \"\\\"ExteriorAlgebra\\\", \\\"prod\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"ExteriorAlgebra.ι_mul_prod_list\", \"exteriorPower.instInnerProductSpaceRealSubtypeExteriorAlgebraMemSubmoduleExteriorPower\", \"ExteriorAlgebra.prodEquivTensor\", \"ExteriorAlgebra.prodEquivTensorForward\", \"ExteriorAlgebra.prodEquivTensorInverse\", \"ExteriorAlgebra.prodEquivTensor_inverse_comp_forward\", \"ExteriorAlgebra.prodEquivTensorInverse_one_tmul_ι\", \"ExteriorAlgebra.prodEquivTensorInverse_ι_tmul_one\"], \"digest\": \"41000d76b53a8033\"}. Read returned types. Matrix.det_fromBlocks_zero₂₁ (Mathlib/LinearAlgebra/Matrix/Determinant/Basic.lean:675) is a block determinant identity, and ExteriorAlgebra.ιMulti_apply (Mathlib/LinearAlgebra/ExteriorAlgebra/Basic.lean:300) expands wedges. Neither supplies the projective kernel-normalized comparison or its cofactor compatibility. Other hits concern mapping cones, projective resolutions or exterior algebra product structures, not this statement.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a degreewise surjective quasi-isomorphism of two term finite projective complexes the kernel normalized determinant map intertwines the cofactor maps from cokernels",
+   "results": "{\"t\": \"2026-10-23T09:54:09Z\", \"tool\": \"leanfinder\", \"query\": \"For a degreewise surjective quasi-isomorphism of two term finite projective complexes the kernel normalized determinant map intertwines the cofactor maps from cokernels\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.ProjectiveResolution.iso_hom_naturality_assoc\", \"CategoryTheory.ProjectiveResolution.iso_inv_naturality_assoc\", \"AlgebraicTopology.DoldKan.factors_normalizedMooreComplex_PInfty\", \"CategoryTheory.ProjectiveResolution.instQuasiIsoIntπ'\", \"CategoryTheory.ProjectiveResolution.Hom.hom'_f_assoc\", \"Rep.standardComplex.instQuasiIsoNatεToSingle₀\", \"CategoryTheory.ProjectiveResolution.Hom.hom'_f\", \"Rep.standardComplex.quasiIso_forget₂_εToSingle₀\"], \"digest\": \"772226cb74126fea\"}. Read returned types. Matrix.det_fromBlocks_zero₂₁ (Mathlib/LinearAlgebra/Matrix/Determinant/Basic.lean:675) is a block determinant identity, and ExteriorAlgebra.ιMulti_apply (Mathlib/LinearAlgebra/ExteriorAlgebra/Basic.lean:300) expands wedges. Neither supplies the projective kernel-normalized comparison or its cofactor compatibility. Other hits concern mapping cones, projective resolutions or exterior algebra product structures, not this statement.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Cofactor wedge maps commute with projection from a split two term extension by an acyclic isomorphism complex using kernel first determinant generators",
+   "results": "{\"t\": \"2026-10-23T09:55:29Z\", \"tool\": \"leanfinder\", \"query\": \"Cofactor wedge maps commute with projection from a split two term extension by an acyclic isomorphism complex using kernel first determinant generators\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CochainComplex.mappingConeHomOfDegreewiseSplitXIso\", \"CochainComplex.mappingCone.triangleRotateShortComplexSplitting\", \"CochainComplex.mappingCone.triangleRotateShortComplexSplitting_r\", \"CochainComplex.mappingConeHomOfDegreewiseSplitIso_inv_comp_triangle_mor₃\", \"HomologicalComplex.homotopyCofiber.inlX_fstX_assoc\", \"CochainComplex.mappingCone.triangleRotateShortComplexSplitting_s\", \"HomologicalComplex.homotopyCofiber.inlX_sndX_assoc\", \"HomologicalComplex.homotopyCofiber.inlX_fstX\"], \"digest\": \"1ee2d4bcdc7e1cf5\"}. Read returned types. Matrix.det_fromBlocks_zero₂₁ (Mathlib/LinearAlgebra/Matrix/Determinant/Basic.lean:675) is a block determinant identity, and ExteriorAlgebra.ιMulti_apply (Mathlib/LinearAlgebra/ExteriorAlgebra/Basic.lean:300) expands wedges. Neither supplies the projective kernel-normalized comparison or its cofactor compatibility. Other hits concern mapping cones, projective resolutions or exterior algebra product structures, not this statement.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-two-term-cofactor-naturality",
+  "date": "2026-10-23",
+  "group": "Q27"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong §3.8, last paragraph, printed pp.608--609: finite unramified Isom for unordered stable marked curves, and extension over a normal base. This is rigidity of stable pointed curves themselves, independent of any modification map.; rigidity input: Log dualizing polarization and reconstruction of marked nodal families; local adjunction normalization: the conormal determinant fundamental class, before the marking twist or any ampleness argument; algebra input for invariance of the conormal cofactor map under the determinant comparisons of two presentations; returned proof steps 4--5: acyclic kernel bases, normalized determinant generator, kernel-correction wedge calculation and local-to-global equality",
+   "via": [
+    "lem-sfb-two-term-cofactor-naturality",
+    "lem-sfb-lci-curve-fundamental-class",
+    "lem-sfb-nodal-log-canonical-reconstruction",
+    "lem-sfb-stable-pointed-isom-finite",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-surjective-cofactor-compatibility",
+  "worker": "stage1",
+  "summary": "Expanded the kernel-first cofactor calculation into common free charts, the normalized determinant generator, explicit removal of kernel correction terms by alternation, coefficient comparison, and localization detection. Reused existing DAG tools; no new nodes, statement changes, or Lean attachment. Checked empty blocks, noninjective differentials, characteristic two and the zero ring.",
+  "blueprint": "Realizes the algebra prerequisite specified in blueprint.from.place for det-thm-sf-ctf-stability-direct-images proof (3); current latest blueprint proof (3) read. This compatibility calculation is an agent-written downstream prerequisite, not a claim that the current blueprint itself contains the calculation.",
+  "tool_uses": [
+   {
+    "node": "lem-trf-surjective-two-term-determinant-calculus",
+    "why": "Uses the prescribed kernel determinant comparison, not the trace-formula proof route. No statement of this unit supplies this generic module-theoretic tool."
+   },
+   {
+    "node": "lem-weil-pbc-finite-projective-standard-free-cover",
+    "why": "Uses the generic finite-projective free-cover theorem to choose charts. No statement of this unit supplies this generic module-theoretic tool."
+   },
+   {
+    "node": "lem-trf-projective-determinant-exact-sequence",
+    "why": "Uses the kernel-first wedge map and its localization formula. No statement of this unit supplies this generic module-theoretic tool."
+   },
+   {
+    "node": "lem-trf-projective-exterior-scalar-comparisons",
+    "why": "Uses scalar extension of exterior powers, duals, and exact-sequence determinants to interpret chart calculations. No statement of this unit supplies this generic module-theoretic tool."
+   },
+   {
+    "node": "lem-weil-pbc-cover-module-exact",
+    "why": "Uses only injectivity of localization on a finite standard cover to detect equality. No statement of this unit supplies this generic module-theoretic tool."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-trf-surjective-two-term-determinant-calculus",
+  "lem-weil-pbc-finite-projective-standard-free-cover",
+  "lem-trf-projective-determinant-exact-sequence",
+  "lem-trf-projective-exterior-scalar-comparisons",
+  "lem-weil-pbc-cover-module-exact"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q55-67feb52b1",
+  "group": "Q55",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q55-67feb52b1 (reviewer sub-agent of L); spot-checked: I read the item and all five steps in full; there are no new nodes, no re-split note and no change to the statement. Sources checked: the cofactor formula t^vee ⊗ alpha(t)∧s~ of duality.tex 0E9Y (l.7510) matches w_E in dual-first order, and the det(a) definition by gamma^0 ⊗ (gamma^-1)^-1 and delta(Ker a) of more-algebra.tex 0FJI (l.36890) matches Gamma_a/T_a of lem-trf-surjective-two-term-determinant-calculus. Steps: (1) the sections exist by projectivity; the direct-sum splitting and a common free cover from 00NX applied to N^-1, P', Q' give kernel-first bases, with c=r+c' on nonzero charts. (2) gamma^i on kernel-first wedges, the inverse dual of gamma^-1, and delta_N = l⊗k^vee give Gamma(e'⊗delta_N)=e, so T(e)=e'; ordinary symmetry introduces no sign, and localization comes from the scalar-comparisons node. (3) u(k_i)=l_i, and every correction term lies in N^0 = span(l), so it dies by alternation without division by 2. (4) a is the coefficient on the top exterior power generator q' and q~=s^0(q'); the generator fact is only implicit in the cited 0FJB node, but it is elementary. (5) The injectivity clause of 00EK gives the global equation, and H^0(f) is well defined. Edge cases r=0, c'=0, the zero ring, characteristic 2 and non-injective u all hold. No duplicate: cofactor-local-descent, good-two-term-surjective-diagrams and the conormal determinant nodes state something else. The parent two-term-cofactor-naturality cites the item, not the other way, so there is no cycle. Batch-5 flags: lem-trf-projective-determinant-exact-sequence (0FJB) and lem-trf-projective-exterior-scalar-comparisons (0FJ9/0FJY) are generic module-determinant algebra. Their dependency closure contains only def-trf-projective-determinant-module, chart-descent, split-exterior-localization and pbc definitions: no trace-formula theorem, no Poincare-duality node and no assumption leaf. They are not steps of either assumed proof, so the citations are acceptable. I accept all five tool_uses."
+ }
+}

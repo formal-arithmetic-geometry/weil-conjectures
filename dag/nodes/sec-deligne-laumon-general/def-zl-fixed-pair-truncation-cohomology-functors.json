@@ -1,0 +1,88 @@
+{
+ "id": "def-zl-fixed-pair-truncation-cohomology-functors",
+ "kind": "definition",
+ "title": "Canonical shift, truncation and cohomology functors on fixed pairs",
+ "status": "split",
+ "import_flags": [],
+ "statement": "Let $\\mathcal C$ be a triangulated category [def-weil-triangulated-category] with a $t$-structure $t$ [def-weil-t-structure], and let $P:\\mathcal C\\to\\mathcal C$ be an exact functor with coherent shift comparison $s_{K,r}:P(K[r])\\simeq(PK)[r]$, preserving both halves in every degree. In the fixed-pair category $\\mathcal C^P$ [def-weil-endofunctor-fixed-pair-category], write $c^-_{m,K}:P\\tau^{\\le m}K\\simeq\\tau^{\\le m}PK$ and $c^+_{m,K}:P\\tau^{\\ge m}K\\simeq\\tau^{\\ge m}PK$ for the canonical comparisons normalized by the truncation counit and unit. Define the shift functor on fixed pairs by $(K,\\theta)[r]=(K[r],\\theta[r]\\circ s_{K,r})$ and $u\\mapsto u[r]$. Define the lifted upper and lower truncation functors by $(K,\\theta)\\mapsto(\\tau^{\\le m}K,\\tau^{\\le m}(\\theta)\\circ c^-_{m,K})$ and $(K,\\theta)\\mapsto(\\tau^{\\ge m}K,\\tau^{\\ge m}(\\theta)\\circ c^+_{m,K})$, with maps the corresponding truncations of $u$. Define the lifted cohomology functor in degree $i\\in\\mathbf Z$ as the composite of lifted $\\tau^{\\le i}$, lifted $\\tau^{\\ge i}$, and lifted shift $[i]$, with carrier $(\\tau^{\\ge i}\\tau^{\\le i}K)[i]$ and carrier map $(\\tau^{\\ge i}\\tau^{\\le i}u)[i]$. These are functors of fixed pairs only; no triangulated structure on $\\mathcal C^P$ is part of the definition.",
+ "stmt_deps": [
+  "def-weil-triangulated-category",
+  "def-weil-t-structure",
+  "def-weil-endofunctor-fixed-pair-category"
+ ],
+ "source": {
+  "document": "literature/bbd-faisceaux-pervers_Asterisque-100-1982.pdf",
+  "place": "Proposition 1.3.3 and paragraphs 1.3.4–1.3.5, printed pp. 29–31; canonical fixed-pair transport of these functors as in the auxiliary proof steps 2–3 of lem-zl-texact-fixed-pair-heart-cohomology."
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Lift truncation and shifted cohomology functors to pairs with an invertible endofunctor structure using t-exact truncation comparisons",
+   "results": "8 hits: ChainComplex.truncate, CochainComplex.truncate, CategoryTheory.Triangulated.TStructure.ge_shift, ComplexShape.Embedding.truncGEFunctor, CategoryTheory.Triangulated.TStructure.truncLT, CochainComplex.truncate_map_f, ComplexShape.Embedding.truncLEFunctor, ChainComplex.truncateAugment; local project search found only these four definitions in FixedPairPostnikovIdentifications, now moved unchanged; no DAG definition node owns them.",
+   "date": "2026-10-24",
+   "verdict": "no independent match; existing definitions extracted unchanged"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Canonical shift truncation and cohomology functors on the category of fixed pairs for a t-exact endofunctor",
+   "results": "8 hits: CategoryTheory.Functor.IsHomological.mk', CategoryTheory.Triangulated.TStructure.truncLT, CategoryTheory.Functor.map_distinguished_exact, CategoryTheory.Triangulated.TStructure.truncGE, CategoryTheory.Triangulated.TStructure.truncLTι, CategoryTheory.Triangulated.TStructure.truncGEδLT, CategoryTheory.Functor.instIsHomologicalCompOfIsTriangulated, CategoryTheory.Triangulated.TStructure.truncGEπ; local project search found only these four definitions in FixedPairPostnikovIdentifications, now moved unchanged; no DAG definition node owns them.",
+   "date": "2026-10-24",
+   "verdict": "no independent match; existing definitions extracted unchanged"
+  },
+  {
+   "tool": "grep",
+   "query": "fixedPairShift|fixedPairTruncLE|fixedPairTruncGE|fixedPairCohomology",
+   "results": "0 hits: ; local project search found only these four definitions in FixedPairPostnikovIdentifications, now moved unchanged; no DAG definition node owns them.",
+   "date": "2026-10-24",
+   "verdict": "no independent match; existing definitions extracted unchanged"
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-zl-texact-fixed-pair-heart-cohomology",
+  "date": "2026-10-24",
+  "group": "Q26"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-zl-morphism-open-closed-reduction",
+   "place": "Restriction paragraph, “Applied to cohomology sheaves”; Part 2 sheaf form, “the pullbacks ... are exact, so taking cohomology”; generic equivariant heart and cohomology justification.",
+   "via": [
+    "lem-zl-texact-fixed-pair-heart-cohomology",
+    "lem-zl-immersion-weil-local-behavior"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-deligne-laumon-general",
+ "unit": "sk-l-dl-general-excision",
+ "lean": {
+  "module": "Sheaf.CategoryTheory.Triangulated.FixedPairTruncationCohomologyFunctors",
+  "declaration": "CategoryTheory.Triangulated.TStructure.fixedPairCohomology",
+  "declarations": [
+   "CategoryTheory.Triangulated.TStructure.fixedPairShift",
+   "CategoryTheory.Triangulated.TStructure.fixedPairTruncLE",
+   "CategoryTheory.Triangulated.TStructure.fixedPairTruncGE",
+   "CategoryTheory.Triangulated.TStructure.fixedPairCohomology"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/Triangulated/FixedPairTruncationCohomologyFunctors.lean",
+  "statement": "abbrev fixedPairCohomology (t : TStructure C) (P : C ⥤ C)\n    [P.CommShift ℤ] [P.IsTriangulated] [P.IsTExact t t] (i : ℤ) :\n    IsoAlgebra P ⥤ IsoAlgebra P",
+  "branch": "newtargets-dag",
+  "by": "Q26",
+  "date": "2026-10-24",
+  "existing": false
+ }
+}

@@ -1,0 +1,184 @@
+{
+ "id": "lem-sfb-representable-flat-lfp-fppf-descent",
+ "kind": "statement",
+ "title": "Flat locally finitely presented representable maps descend fppf",
+ "statement": "Let $S$ be a scheme [def-pc-scheme], let $\\mathcal A,\\mathcal B,\\mathcal C$ be algebraic stacks over $S$ [def-sfb-algebraic-moduli-stack], and let $f:\\mathcal A\\to\\mathcal B$ and $g:\\mathcal C\\to\\mathcal B$ be morphisms representable by algebraic spaces [def-trf-algebraic-space, def-sfb-stable-pointed-moduli-groupoids]. Assume $g$ is surjective, flat and locally of finite presentation. If the projection $f_{\\mathcal C}:\\mathcal A\\times_{\\mathcal B}\\mathcal C\\to\\mathcal C$ is flat and locally of finite presentation, then $f$ is flat and locally of finite presentation. Flatness and local finite presentation of representable morphisms are tested after scheme base change on etale scheme charts, using [def-weil-flat-morphism, def-sbc-locally-finite-presentation]. Surjectivity means that every field-valued object of the target lifts up to isomorphism after a field extension [def-weil-field]. No quasi-compactness or Noetherian assumption is imposed.",
+ "source": {
+  "document": "literature/stacks-project/stacks-morphisms.tex",
+  "place": "Tags 06PZ (lemma-descent-flat) and 06Q8 (lemma-descent-finite-presentation), each restricted to representable morphisms."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-sfb-algebraic-moduli-stack",
+  "def-trf-algebraic-space",
+  "def-sfb-stable-pointed-moduli-groupoids",
+  "def-weil-flat-morphism",
+  "def-sbc-locally-finite-presentation",
+  "def-weil-field"
+ ],
+ "proof": [
+  {
+   "text": "Fix an arbitrary scheme $T$ and an object $b$ of $\\mathcal B$ over $T$, i.e. a map $T\\to\\mathcal B$ [def-sfb-stable-pointed-moduli-groupoids]. Representability of $f$ and $g$ gives algebraic spaces $X=\\mathcal A\\times_{\\mathcal B}T$ and $Y=\\mathcal C\\times_{\\mathcal B}T$; an object of $Y$ over a $T$-scheme $W$ is a pair $(c,\\psi)$ with $c\\in\\mathcal C(W)$ and $\\psi:g(c)\\simeq b|_W$, and similarly for $X$. By base-change stability of flatness, local finite presentation and surjectivity in [lem-sfb-stack-chartwise-smooth-etale-calculus], applied to $g$ along $T\\to\\mathcal B$, the projection $q:Y\\to T$ is surjective, flat and locally of finite presentation. It is representable by algebraic spaces: for a scheme $T^{\\prime}\\to T$, the functor $(c,\\psi)\\mapsto(c,\\psi)$ identifies $Y\\times_TT^{\\prime}$ with $\\mathcal C\\times_{\\mathcal B}T^{\\prime}$ (for $T^{\\prime}\\to T\\to\\mathcal B$), compatibly with arrows and restrictions, and the latter is an algebraic space because $g$ is representable.",
+   "uses": [
+    "def-sfb-stable-pointed-moduli-groupoids",
+    "lem-sfb-stack-chartwise-smooth-etale-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/stacks-morphisms.tex",
+    "place": "Tags 06PZ (lemma-descent-flat) and 06Q8 (lemma-descent-finite-presentation), proof, first paragraph: reduction of the cover to an algebraic space; here by scheme base change of g"
+   }
+  },
+  {
+   "text": "Let $P$ be flatness or local finite presentation; the two cases are separate. Write $X_Y=X\\times_TY$. On a test scheme $W$ an object of $X_Y$ is $(a,\\phi,c,\\psi)$ with $\\phi:f(a)\\simeq b|_W$ and $\\psi:g(c)\\simeq b|_W$ over one map $W\\to T$. An object of $(\\mathcal A\\times_{\\mathcal B}\\mathcal C)\\times_{\\mathcal C}Y$ is $((a,c^{\\prime},\\chi),(c,\\psi),\\epsilon)$ with $\\chi:f(a)\\simeq g(c^{\\prime})$ and $\\epsilon:c^{\\prime}\\simeq c$. Send it to $(a,\\psi\\circ g(\\epsilon)\\circ\\chi,c,\\psi)$; in the other direction send $(a,\\phi,c,\\psi)$ to $((a,c,\\psi^{-1}\\phi),(c,\\psi),\\mathrm{id})$. The composite in $X_Y$ is the identity, the other composite is isomorphic to the identity via $(\\mathrm{id}_a,\\epsilon)$, and both functors act on arrows componentwise and commute with restriction by the definition of 2-fibre products [def-sfb-stable-pointed-moduli-groupoids]. So $X_Y\\to Y$ is, over $Y$, the pullback of $f_{\\mathcal C}$ along $Y\\to\\mathcal C$. Choose a surjective etale scheme atlas $V\\to Y$ and a surjective etale scheme atlas $U\\to X_Y\\times_YV$ [def-trf-algebraic-space]. By the same identification, $X_Y\\times_YV\\to V$ is the scheme base change of $f_{\\mathcal C}$ along $V\\to Y\\to\\mathcal C$, so by the hypothesis on $f_{\\mathcal C}$ and the scheme-test meaning of $P$ for representable maps, the scheme map $U\\to V$ has $P$. Now [lem-sfb-space-local-properties-chart-test], with target chart $V\\to Y$ and source chart $U$, gives $P(X_Y\\to Y)$.",
+   "uses": [
+    "def-sfb-stable-pointed-moduli-groupoids",
+    "def-trf-algebraic-space",
+    "lem-sfb-space-local-properties-chart-test"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/stacks-morphisms.tex",
+    "place": "Tags 06PZ and 06Q8, proof: the base change of the given projection along the new cover is again flat (lemma-base-change-flat), with 2-fibre-product associativity written out"
+   }
+  },
+  {
+   "text": "Regard $T$ as an algebraic space by its representable sheaf [def-trf-scheme-algebraic-space]. By Step 1, $q:Y\\to T$ is a representable surjective flat locally finitely presented morphism from an algebraic space, and by Step 2 the base change $X\\times_TY\\to Y$ of the morphism of algebraic spaces $X\\to T$ has $P$. The assertion for morphisms of algebraic spaces in [lem-sfb-representable-fppf-etale-open-descent] (each property separately, target-local along such a cover) gives $P(X\\to T)$. Since $T\\to\\mathcal B$ was an arbitrary scheme test, $f$ is flat and locally of finite presentation by the scheme-test meaning of these properties for representable morphisms. No quasi-compactness of $g$ or $Y\\to T$ is used, and the empty cases ($T$ or $Y$ empty) are covered by the cited statement.",
+   "uses": [
+    "def-trf-scheme-algebraic-space",
+    "lem-sfb-representable-fppf-etale-open-descent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/stacks-morphisms.tex",
+    "place": "Tags 06PZ and 06Q8, proof, remaining paragraphs: descent along a surjective flat lfp cover by an algebraic space (spaces-descent.tex 041W, 041T)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sfb-stable-pointed-moduli-groupoids",
+  "lem-sfb-stack-chartwise-smooth-etale-calculus",
+  "def-trf-algebraic-space",
+  "lem-sfb-space-local-properties-chart-test",
+  "def-trf-scheme-algebraic-space",
+  "lem-sfb-representable-fppf-etale-open-descent"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/stacks-morphisms.tex",
+  "place": "Tags 06PZ (lemma-descent-flat), 06Q8 (lemma-descent-finite-presentation): the cover is replaced by an algebraic space (here the scheme base change Y of g), then descent along a flat lfp surjective cover by a space"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Flatness and local finite presentation of a representable morphism of algebraic stacks descend along a surjective flat locally finitely presented base change",
+   "results": "8 hits; AlgebraicGeometry.instDescendsAlongSchemeMinMorphismPropertySurjectiveFlatLocallyOfFinitePresentationOfQuasiCompactOfIsZariskiLocalAtTarget, AlgebraicGeometry.locallyOfFinitePresentation_isStableUnderBaseChange, AlgebraicGeometry.Flat.surjective_descendsAlong_surjective_inf_flat_inf_quasicompact, AlgebraicGeometry.UniversallyOpen.of_flat, AlgebraicGeometry.descendsAlong_universallyOpen_surjective_inf_flat_inf_quasicompact, AlgebraicGeometry.descendsAlong_isOpenImmersion_surjective_inf_flat_inf_quasicompact', AlgebraicGeometry.descendsAlong_isomorphisms_surjective_inf_flat_inf_quasicompact, AlgebraicGeometry.descendsAlong_universallyInjective_surjective_inf_flat_inf_quasicompact",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme morphisms or ordinary categorical stacks, not this assertion for algebraic stacks"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Fppf descent of locally finitely presented flat morphisms of algebraic stacks",
+   "results": "8 hits; AlgebraicGeometry.instDescendsAlongSchemeMinMorphismPropertySurjectiveFlatLocallyOfFinitePresentationOfQuasiCompactOfIsZariskiLocalAtTarget, CategoryTheory.Pseudofunctor.isEquivalence_toDescentData, AlgebraicGeometry.instLocallyOfFinitePresentationOfIsSmooth, AlgebraicGeometry.HasAffineProperty.descendsAlong_of_affineAnd, AlgebraicGeometry.LocallyOfFinitePresentation, AlgebraicGeometry.LocallyOfFinitePresentation.recOn, AlgebraicGeometry.instLocallyOfFinitePresentationMorphismRestrict, AlgebraicGeometry.Flat.casesOn",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme morphisms or ordinary categorical stacks, not this assertion for algebraic stacks"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicStack\", \"Flat\"",
+   "results": "0 hits; none",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme morphisms or ordinary categorical stacks, not this assertion for algebraic stacks"
+  },
+  {
+   "tool": "grep",
+   "query": "AlgebraicStack|AlgebraicSpace.*[Dd]escent",
+   "results": "0 hits; none",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme morphisms or ordinary categorical stacks, not this assertion for algebraic stacks"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Fppf descent of flat and locally finitely presented morphisms of algebraic stacks",
+   "results": "8 hits; AlgebraicGeometry.instDescendsAlongSchemeMinMorphismPropertySurjectiveFlatLocallyOfFinitePresentationOfQuasiCompactOfIsZariskiLocalAtTarget, CategoryTheory.Pseudofunctor.isEquivalence_toDescentData, AlgebraicGeometry.LocallyOfFinitePresentation, AlgebraicGeometry.instLocallyOfFinitePresentationOfIsSmooth, AlgebraicGeometry.HasAffineProperty.descendsAlong_of_affineAnd, AlgebraicGeometry.LocallyOfFinitePresentation.recOn, AlgebraicGeometry.instLocallyOfFiniteTypeOfLocallyOfFinitePresentation, AlgebraicGeometry.Flat.flat_appLE",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern scheme morphisms or categorical stack descent, not flat and locally finitely presented representable maps of algebraic stacks"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Flat locally finitely presented representable morphisms of algebraic stacks descend along surjective flat locally finitely presented base change",
+   "results": "8 hits; AlgebraicGeometry.instDescendsAlongSchemeMinMorphismPropertySurjectiveFlatLocallyOfFinitePresentationOfQuasiCompactOfIsZariskiLocalAtTarget, AlgebraicGeometry.Flat.surjective_descendsAlong_surjective_inf_flat_inf_quasicompact, AlgebraicGeometry.descendsAlong_universallyOpen_surjective_inf_flat_inf_quasicompact, AlgebraicGeometry.descendsAlong_isOpenImmersion_surjective_inf_flat_inf_quasicompact', AlgebraicGeometry.descendsAlong_isomorphisms_surjective_inf_flat_inf_quasicompact, AlgebraicGeometry.descendsAlong_universallyInjective_surjective_inf_flat_inf_quasicompact, AlgebraicGeometry.UniversallyOpen.of_flat, AlgebraicGeometry.descendsAlong_universallyClosed_surjective_inf_flat_inf_quasicompact",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern scheme morphisms or categorical stack descent, not flat and locally finitely presented representable maps of algebraic stacks"
+  },
+  {
+   "tool": "grep",
+   "query": "DescendsAlong|descendsAlong|descends_along",
+   "results": "5 hits; 20, 22, 24, 26, 28; directory AlgebraicGeometry/Morphisms/FlatDescent.lean",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern scheme morphisms or categorical stack descent, not flat and locally finitely presented representable maps of algebraic stacks"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Properties of morphisms representable by algebraic spaces are local on the target for the fppf topology, in particular flatness and local finite presentation",
+   "results": "8 hits; AlgebraicGeometry.IsLocalAtTarget, AlgebraicGeometry.LocallyOfFinitePresentation, AlgebraicGeometry.IsLocalAtSource, AlgebraicGeometry.UniversallyOpen.of_flat, AlgebraicGeometry.instDescendsAlongSchemeMinMorphismPropertySurjectiveFlatLocallyOfFinitePresentationOfQuasiCompactOfIsZariskiLocalAtTarget, AlgebraicGeometry.Flat, AlgebraicGeometry.IsZariskiLocalAtTarget, AlgebraicGeometry.universally_isLocalAtTarget",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern scheme morphisms or categorical stack descent, not flat and locally finitely presented representable maps of algebraic stacks"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-noetherian-singleton-gerbe",
+  "date": "2026-10-23",
+  "group": "Q38"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Affine PGL quotients with closed orbits and zero-dimensional stabilizers. Supporting affine-quotient step: Finite diagonal from an affine adequate moduli space. Supporting input: closed-point hypothesis (c) of Lemma 8.3.1; Residual-gerbe reduction of the closed singleton: a reduced singleton stack locally of finite type over a field is universally homeomorphic to a finite field spectrum; supporting input: Reduced locally Noetherian singleton gerbe before imposing local finite type over the ground field. Supporting input: Tag 06QK, first paragraph: descend flatness and local finite presentation of inertia from the field atlas.",
+   "via": [
+    "lem-sfb-noetherian-singleton-gerbe",
+    "lem-sfb-singleton-stack-finite-field-homeomorphism",
+    "lem-sfb-stack-diagonal-closed-points",
+    "lem-sfb-adequate-quasifinite-diagonal-finite",
+    "lem-sfb-affine-pgl-finite-stabilizer-quotient",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-representable-flat-lfp-fppf-descent",
+  "worker": "stage1",
+  "group": "Q158",
+  "summary": "Kept the statement. The proof follows Stacks 06PZ/06Q8: for each scheme test T->B the base change Y->T of g is a representable surjective flat lfp cover by an algebraic space, the base change of X->T along it is the pullback of f_C (2-fibre-product identification written out), and the existing reviewed node lem-sfb-representable-fppf-etale-open-descent, which already proves target-local descent of flatness and local finite presentation along such covers, gives X->T flat and lfp. Reviewer FIX (Q158 maintainer reader): the delivered five-step proof re-derived that node's target-local argument (finite affine fppf refinement, atlas, scheme fpqc descent, etale locality) inline; it now cites it. No new nodes; no off-unit tool uses.",
+  "blueprint": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Affine PGL quotients with closed orbits and zero-dimensional stabilizers. Supporting affine-quotient step: Finite diagonal from an affine adequate moduli space. Supporting input: closed-point hypothesis (c) of Lemma 8.3.1; Residual-gerbe reduction of the closed singleton: a reduced singleton stack locally of finite type over a field is universally homeomorphic to a finite field spectrum; supporting input: Reduced locally Noetherian singleton gerbe before imposing local finite type over the ground field. Supporting input: Tag 06QK, first paragraph: descend flatness and local finite presentation of inertia from the field atlas. The five steps supply precisely this supporting representable property descent; the inherited nearest imported blueprint ancestor is null and is retained. Read the current latest sk-thm-sf-ctf-stability and direct-images proof, without changing their route.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q158-ac7ec4cfc",
+  "group": "Q158",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q158-ac7ec4cfc (reviewer sub-agent of L); spot-checked: Read Stacks 06PZ/06Q8 (stacks-morphisms.tex 5176ff). The item's statement and stmt_deps are unchanged and match the representable case: g surjective, flat and lfp; f_C flat and lfp; no quasi-compactness. The delivered five-step proof is correct; I checked it step by step: refinement roles, gluing r, the 2-pullback identification, U'=U_V x_V V', and the open-immersion etale locality. Fault (C5): Steps 2-5 re-derive inline the target-local descent already proved by lem-sfb-representable-fppf-etale-open-descent. That node is in the same unit, split and reviewed PASS by Q146 on 2026-10-23, so it is on the base. It covers flat and lfp descent along a representable surjective flat lfp cover by an algebraic space, including the case of morphisms of algebraic spaces. Its closure does not contain the item, so there is no cycle. The report's no-duplicates search missed it. FIX in fixes/dag/nodes/sec-six-functors-basics/lem-sfb-representable-flat-lfp-fppf-descent.json changes only the proof. It follows the 06PZ route in 3 steps: (1) for each scheme T->B, Y=C x_B T -> T is a representable surjective flat lfp cover by the calculus node; (2) the equivalence X x_T Y = (A x_B C) x_C Y is written out in both directions, and an atlas plus the chart-test node gives P(X_Y->Y); (3) the space assertion of the existing node gives P(X->T). proof_deps is the union of the step uses, and split_report.tool_uses is now [] because no off-unit statements remain. Batch-5: calculus, chart-test, refinement, trf representable-etale tests and scheme etale source-target are generic foundations (def-trf-algebraic-space, 03MJ, smooth composition), not trace formula or Poincare duality. The new citations, the existing descent node and def-trf-scheme-algebraic-space (a definition), are also generic. Accepted. No new nodes and no SGA.; 1 file(s) fixed by the reviewer"
+ }
+}

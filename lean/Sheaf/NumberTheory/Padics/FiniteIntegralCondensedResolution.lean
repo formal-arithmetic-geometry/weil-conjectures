@@ -11,12 +11,15 @@ public import Sheaf.Topology.ProfiniteCondensedRing
 public import Sheaf.Topology.ProfiniteSectionsFiniteQuotient
 public import Mathlib.LinearAlgebra.Matrix.ToLin
 public import Mathlib.Topology.Algebra.Ring.Basic
-import Mathlib.LinearAlgebra.FreeModule.PID
+public import Mathlib.LinearAlgebra.FreeModule.PID
 import Mathlib.GroupTheory.OrderOfElement
 import Mathlib.Topology.Homeomorph.Lemmas
 import WeilConjectures.CategoryTheory.Sites.MonObj
-import WeilConjectures.CategoryTheory.Monoidal.Mod.Abelian
+public import WeilConjectures.CategoryTheory.Monoidal.Mod.Abelian
 import Mathlib.CategoryTheory.Preadditive.Biproducts
+public import Mathlib.Combinatorics.Quiver.ReflQuiver
+public import WeilConjectures.CategoryTheory.ModuleObjects.Abelian
+public import WeilConjectures.Mathlib.CategoryTheory.Monoidal.Mod
 
 /-!
 # Finite integral coefficients have a condensed finite free resolution

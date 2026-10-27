@@ -1,0 +1,214 @@
+{
+ "id": "lem-trf-simplicial-normalized-acyclic-compatible-boundary",
+ "kind": "statement",
+ "title": "Normalized acyclicity fills compatible simplicial abelian boundaries",
+ "statement": "Let $G:\\Delta^{\\mathrm{op}}\\to\\mathrm{Ab}$ be a simplicial abelian group with face maps $d_i$ [def-weil-pbc-simplicial-object]. Define $N(G)_0=G_0$ and $N(G)_m=\\bigcap_{i=1}^m\\ker(d_i:G_m\\to G_{m-1})$ for $m>0$, with differential $\\partial_m=d_0$ for $m>0$ and $\\partial_0:G_0\\to0$. Assume $\\ker\\partial_m=\\operatorname{im}\\partial_{m+1}$ for every $m\\geq0$. For every $n\\geq1$ and every family $a_0,\\ldots,a_n\\in G_{n-1}$ satisfying $d_i a_j=d_{j-1}a_i$ for $0\\leq i<j\\leq n$ when $n\\geq2$ (no compatibility equations when $n=1$), there exists $v\\in G_n$ with $d_i v=a_i$ for every $0\\leq i\\leq n$.",
+ "source": {
+  "document": "literature/stacks-project/simplicial.tex",
+  "place": "Tag 08P1 (lemma-qis-simplicial-abelian-groups), third proof paragraph: horn filler and residual normalized cycle, using Tag 08NZ (lemma-simplicial-group-kan). Omit face 0 for the positive-face/d_0 normalization. Returned proof Steps 5-6."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-simplicial-object"
+ ],
+ "proof": [
+  {
+   "text": "Fix $n\\geq1$ and the given compatible boundary. Discard $a_0$ and apply [lem-trf-simplicial-abelian-horn-filling] with missing index $k=0$. Its compatibility hypotheses are the given equations restricted to $1\\leq i<j\\leq n$; for $n=1$ both sets of equations are empty. Obtain $u\\in G_n$ with $d_i u=a_i$ for $1\\leq i\\leq n$. Set $r=a_0-d_0u\\in G_{n-1}$.",
+   "uses": [
+    "lem-trf-simplicial-abelian-horn-filling"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/simplicial.tex",
+    "place": "Tag 08NZ (lemma-simplicial-group-kan), compatible-face horn-filling statement, used with missing face 0; Tag 08P1 third proof paragraph."
+   }
+  },
+  {
+   "text": "For $n\\geq2$, contravariant functoriality of [def-weil-pbc-simplicial-object] applied to [lem-weil-pbc-simplex-face-face-identity] gives $d_jd_0=d_0d_{j+1}$ for $0\\leq j\\leq n-1$. The boundary equation for the pair $(0,j+1)$ is $d_j a_0=d_0a_{j+1}$. Since the face maps are homomorphisms, for every such $j$ we get $$d_j r=d_j a_0-d_jd_0u=d_0a_{j+1}-d_0d_{j+1}u=0.$$ Thus the positive faces $d_1r,\\ldots,d_{n-1}r$ vanish, so $r\\in N(G)_{n-1}$, and $\\partial_{n-1}r=d_0r=0$.",
+   "uses": [
+    "def-weil-pbc-simplicial-object",
+    "lem-weil-pbc-simplex-face-face-identity"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/simplicial.tex",
+    "place": "Tag 08P1 (lemma-qis-simplicial-abelian-groups), third proof paragraph, with face 0 omitted to match the positive-face/d_0 normalization; Tag 08NZ (lemma-simplicial-group-kan) supplies the horn filler."
+   }
+  },
+  {
+   "text": "For $n=1$, $r\\in G_0=N(G)_0$ and $\\partial_0r=0$, since $\\partial_0$ has target zero. This uses no face map out of $G_0$ and no boundary compatibility equation. Hence in every degree under consideration, $r\\in\\ker\\partial_{n-1}$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/simplicial.tex",
+    "place": "Tag 08P1 (lemma-qis-simplicial-abelian-groups), third proof paragraph, with face 0 omitted to match the positive-face/d_0 normalization; Tag 08NZ (lemma-simplicial-group-kan) supplies the horn filler."
+   }
+  },
+  {
+   "text": "Apply the assumed equality $\\ker\\partial_{n-1}=\\operatorname{im}\\partial_n$ to $r$. By the definition of image there is $w\\in N(G)_n$ with $\\partial_n w=d_0w=r$. By the stated definition of $N(G)_n$, $d_iw=0$ for $1\\leq i\\leq n$. Set $v=u+w\\in G_n$. Additivity of the face homomorphisms [def-weil-pbc-simplicial-object] gives $d_0v=d_0u+r=a_0$ and $d_iv=a_i+0=a_i$ for $1\\leq i\\leq n$. These are all the required faces.",
+   "uses": [
+    "def-weil-pbc-simplicial-object"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/simplicial.tex",
+    "place": "Tag 08P1 (lemma-qis-simplicial-abelian-groups), third proof paragraph, with face 0 omitted to match the positive-face/d_0 normalization; Tag 08NZ (lemma-simplicial-group-kan) supplies the horn filler."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-trf-simplicial-abelian-horn-filling",
+  "def-weil-pbc-simplicial-object",
+  "lem-weil-pbc-simplex-face-face-identity"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/simplicial.tex",
+  "place": "Tag 08P1 (lemma-qis-simplicial-abelian-groups), third proof paragraph, with face 0 omitted to match the positive-face/d_0 normalization; Tag 08NZ (lemma-simplicial-group-kan) supplies the horn filler. The residual calculation and degree-one case are written explicitly."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "boundar|horn|fill|acyclic [sub=AlgebraicTopology]",
+   "results": "25 hits; top=['Mathlib/AlgebraicTopology/EilenbergSteenrod.lean', 'Mathlib/AlgebraicTopology/EilenbergSteenrod.lean', 'Mathlib/AlgebraicTopology/EilenbergSteenrod.lean', 'Mathlib/AlgebraicTopology/EilenbergSteenrod.lean', 'Mathlib/AlgebraicTopology/SimplicialSet/Path.lean', 'Mathlib/AlgebraicTopology/SimplicialSet/Path.lean', 'Mathlib/AlgebraicTopology/SimplicialSet/Path.lean', 'Mathlib/AlgebraicTopology/SimplicialSet/Path.lean']; note=; digest=c0b02bb8f13f7d11. Full returned types read in the tool outputs; relevant sources MooreComplex.lean:64-110, DoldKan/Normalized.lean:85-143, SimplicialSet/CategoryWithFibrations.lean:36-100, and the exactAt/horn declarations were inspected.",
+   "date": "2026-10-22",
+   "verdict": "no match: hornFilling fills a horn under a KanComplex hypothesis, not all faces from normalized acyclicity. The Moore-complex declarations define terms or comparison maps; horn colimits and projection identities do not supply the normalized primitive correcting the missing face."
+  },
+  {
+   "tool": "leansearch",
+   "query": "In a simplicial abelian group vanishing normalized homology implies every compatible simplex boundary has a filler",
+   "results": "8 hits; top=['SSet.KanComplex.hornFilling', 'SSet.quasicategory_of_filler', 'AlgebraicTopology.NormalizedMooreComplex.obj_X', 'AlgebraicTopology.DoldKan.HigherFacesVanish.comp_Hσ_eq_zero', 'AlgebraicTopology.NormalizedMooreComplex.objX', 'AlgebraicTopology.NormalizedMooreComplex.d_squared', 'CategoryTheory.Idempotents.DoldKan.N', 'AlgebraicTopology.NormalizedMooreComplex.objX_add_one']; note=; digest=bdfd2d572313b9ef. Full returned types read in the tool outputs; relevant sources MooreComplex.lean:64-110, DoldKan/Normalized.lean:85-143, SimplicialSet/CategoryWithFibrations.lean:36-100, and the exactAt/horn declarations were inspected.",
+   "date": "2026-10-22",
+   "verdict": "no match: hornFilling fills a horn under a KanComplex hypothesis, not all faces from normalized acyclicity. The Moore-complex declarations define terms or comparison maps; horn colimits and projection identities do not supply the normalized primitive correcting the missing face."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"SimplicialObject\", \"HasLiftingProperty\"",
+   "results": "0 hits; top=[]; note=; digest=4f53cda18c2baa0c. Full returned types read in the tool outputs; relevant sources MooreComplex.lean:64-110, DoldKan/Normalized.lean:85-143, SimplicialSet/CategoryWithFibrations.lean:36-100, and the exactAt/horn declarations were inspected.",
+   "date": "2026-10-22",
+   "verdict": "no match: hornFilling fills a horn under a KanComplex hypothesis, not all faces from normalized acyclicity. The Moore-complex declarations define terms or comparison maps; horn colimits and projection identities do not supply the normalized primitive correcting the missing face."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A simplicial abelian group with acyclic normalized Moore complex fills every compatible family of faces of a simplex",
+   "results": "8 hits; top=['AlgebraicTopology.NormalizedMooreComplex.objX', 'AlgebraicTopology.NormalizedMooreComplex.obj', 'AlgebraicTopology.normalizedMooreComplex_obj', 'AlgebraicTopology.NormalizedMooreComplex.objX_zero', 'AlgebraicTopology.DoldKan.HigherFacesVanish.inclusionOfMooreComplexMap', 'AlgebraicTopology.NormalizedMooreComplex.objX_add_one', 'AlgebraicTopology.DoldKan.PInftyToNormalizedMooreComplex_f', 'AlgebraicTopology.DoldKan.factors_normalizedMooreComplex_PInfty']; note=; digest=0e62853291129899. Full returned types read in the tool outputs; relevant sources MooreComplex.lean:64-110, DoldKan/Normalized.lean:85-143, SimplicialSet/CategoryWithFibrations.lean:36-100, and the exactAt/horn declarations were inspected.",
+   "date": "2026-10-22",
+   "verdict": "no match: hornFilling fills a horn under a KanComplex hypothesis, not all faces from normalized acyclicity. The Moore-complex declarations define terms or comparison maps; horn colimits and projection identities do not supply the normalized primitive correcting the missing face."
+  },
+  {
+   "tool": "grep",
+   "query": "(theorem|lemma|def).*([Bb]oundary|[Hh]orn|[Ff]ill)|[Aa]cyclic [sub=AlgebraicTopology/MooreComplex.lean]",
+   "results": "0 hits; top=[]; note=; digest=4f53cda18c2baa0c. Full returned types read in the tool outputs; relevant sources MooreComplex.lean:64-110, DoldKan/Normalized.lean:85-143, SimplicialSet/CategoryWithFibrations.lean:36-100, and the exactAt/horn declarations were inspected.",
+   "date": "2026-10-22",
+   "verdict": "no match: hornFilling fills a horn under a KanComplex hypothesis, not all faces from normalized acyclicity. The Moore-complex declarations define terms or comparison maps; horn colimits and projection identities do not supply the normalized primitive correcting the missing face."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Vanishing Moore homology of an abelian simplicial group permits correction of a horn filler to prescribe the remaining face",
+   "results": "8 hits; top=['AlgebraicTopology.DoldKan.HigherFacesVanish.inclusionOfMooreComplexMap', 'SSet.horn.multicoequalizerDiagram', 'SSet.KanComplex.hornFilling', 'SSet.modelCategoryQuillen.horn_ι_mem_J', 'SSet.horn.ι_ι', 'SSet.horn.faceι_ι', 'AlgebraicTopology.DoldKan.degeneracy_comp_PInfty', 'AlgebraicTopology.DoldKan.comp_P_eq_self_iff']; note=; digest=8dac736ac32d3e34. Full returned types read in the tool outputs; relevant sources MooreComplex.lean:64-110, DoldKan/Normalized.lean:85-143, SimplicialSet/CategoryWithFibrations.lean:36-100, and the exactAt/horn declarations were inspected.",
+   "date": "2026-10-22",
+   "verdict": "no match: hornFilling fills a horn under a KanComplex hypothesis, not all faces from normalized acyclicity. The Moore-complex declarations define terms or comparison maps; horn colimits and projection identities do not supply the normalized primitive correcting the missing face."
+  },
+  {
+   "tool": "grep",
+   "query": "boundary|horn|acyclic [sub=AlgebraicTopology/MooreComplex.lean]",
+   "results": "{\"t\": \"2026-10-23T14:14:44Z\", \"tool\": \"grep\", \"query\": \"boundary|horn|acyclic\", \"sub\": \"AlgebraicTopology/MooreComplex.lean\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the returned Moore-complex definitions, projection identities and horn colimits do not assert compatible-boundary filling from normalized acyclicity. KanComplex.hornFilling assumes the Kan property and prescribes only a horn. Sources read: MooreComplex.lean:64-115, DoldKan/Normalized.lean:80-145, SimplicialSet/KanComplex.lean:35-70."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Vanishing normalized homology of a simplicial abelian group implies every compatible boundary has a filler",
+   "results": "{\"t\": \"2026-10-23T14:14:45Z\", \"tool\": \"leansearch\", \"query\": \"Vanishing normalized homology of a simplicial abelian group implies every compatible boundary has a filler\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicTopology.NormalizedMooreComplex.objX\", \"AlgebraicTopology.DoldKan.HigherFacesVanish.comp_Hσ_eq_zero\", \"AlgebraicTopology.NormalizedMooreComplex.d_squared\", \"Homotopy.nullHomotopy\", \"CategoryTheory.ShortComplex.liftCycles_leftHomologyπ_eq_zero_of_boundary\", \"CategoryTheory.Abelian.DoldKan.N\", \"AlgebraicTopology.DoldKan.HigherFacesVanish.inclusionOfMooreComplexMap\", \"Homotopy.nullHomotopy'\"], \"digest\": \"cfc74ce047c4c3bd\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the returned Moore-complex definitions, projection identities and horn colimits do not assert compatible-boundary filling from normalized acyclicity. KanComplex.hornFilling assumes the Kan property and prescribes only a horn. Sources read: MooreComplex.lean:64-115, DoldKan/Normalized.lean:80-145, SimplicialSet/KanComplex.lean:35-70."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"SimplicialObject\", \"HasLiftingProperty\"",
+   "results": "{\"t\": \"2026-10-23T14:14:45Z\", \"tool\": \"loogle\", \"query\": \"\\\"SimplicialObject\\\", \\\"HasLiftingProperty\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the returned Moore-complex definitions, projection identities and horn colimits do not assert compatible-boundary filling from normalized acyclicity. KanComplex.hornFilling assumes the Kan property and prescribes only a horn. Sources read: MooreComplex.lean:64-115, DoldKan/Normalized.lean:80-145, SimplicialSet/KanComplex.lean:35-70."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A simplicial abelian group with acyclic normalized Moore complex fills every compatible family of faces of a simplex",
+   "results": "{\"t\": \"2026-10-23T14:14:46Z\", \"tool\": \"leanfinder\", \"query\": \"A simplicial abelian group with acyclic normalized Moore complex fills every compatible family of faces of a simplex\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicTopology.DoldKan.factors_normalizedMooreComplex_PInfty\", \"AlgebraicTopology.NormalizedMooreComplex.objX_zero\", \"AlgebraicTopology.NormalizedMooreComplex.objX\", \"AlgebraicTopology.DoldKan.HigherFacesVanish.inclusionOfMooreComplexMap\", \"AlgebraicTopology.DoldKan.PInftyToNormalizedMooreComplex\", \"AlgebraicTopology.NormalizedMooreComplex.obj\", \"AlgebraicTopology.normalizedMooreComplex_obj\", \"AlgebraicTopology.normalizedMooreComplex\"], \"digest\": \"975f040b0b1f1e6b\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the returned Moore-complex definitions, projection identities and horn colimits do not assert compatible-boundary filling from normalized acyclicity. KanComplex.hornFilling assumes the Kan property and prescribes only a horn. Sources read: MooreComplex.lean:64-115, DoldKan/Normalized.lean:80-145, SimplicialSet/KanComplex.lean:35-70."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Vanishing Moore homology of an abelian simplicial group permits correction of a horn filler to prescribe the remaining face",
+   "results": "{\"t\": \"2026-10-23T14:15:09Z\", \"tool\": \"leanfinder\", \"query\": \"Vanishing Moore homology of an abelian simplicial group permits correction of a horn filler to prescribe the remaining face\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicTopology.DoldKan.HigherFacesVanish.inclusionOfMooreComplexMap\", \"SSet.horn₃₂.exists_desc\", \"SSet.horn₃₁.exists_desc\", \"SSet.KanComplex.hornFilling\", \"SSet.Quasicategory.hornFilling\", \"SSet.quasicategory_of_filler\", \"AlgebraicTopology.DoldKan.comp_P_eq_self_iff\", \"SSet.Quasicategory.hornFilling'\"], \"digest\": \"c0b59f852510bcdd\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the returned Moore-complex definitions, projection identities and horn colimits do not assert compatible-boundary filling from normalized acyclicity. KanComplex.hornFilling assumes the Kan property and prescribes only a horn. Sources read: MooreComplex.lean:64-115, DoldKan/Normalized.lean:80-145, SimplicialSet/KanComplex.lean:35-70."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-simplicial-abelian-surjective-quasi-iso-boundary-lifting",
+  "date": "2026-10-22",
+  "group": "NH"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Proof (1)--(2), semistable-alteration input in the nearby-cycle branch: ILO Exposé X, Theorem 3.4, Step 3, invoking Temkin 2010, Theorems 1.5 and 1.1 for a semistable multipointed modification. Temkin proof component: Marked dualizing line bundle and contracted-component degrees. Auxiliary input: Local complete-intersection determinant adjunction underlying the marked dualizing construction, before the marking is inserted. Supporting ring/sheaf input: Functorial standard resolutions and comparison with arbitrary polynomial resolutions. Direct simplicial abelian-group input: termwise surjective quasi-isomorphism has boundary lifting (Stacks 08P1). Extracted argument: Tag 08P1 (lemma-qis-simplicial-abelian-groups), third proof paragraph: horn filler and residual normalized cycle, using Tag 08NZ (lemma-simplicial-group-kan). Omit face 0 for the positive-face/d_0 normalization. Returned proof Steps 5-6.",
+   "via": [
+    "lem-trf-simplicial-abelian-surjective-quasi-iso-boundary-lifting",
+    "lem-trf-cotangent-resolution-coherence",
+    "lem-trf-lci-cotangent-presentation",
+    "lem-trf-flat-lci-canonical-adjunction",
+    "lem-trf-marked-nodal-dualizing-degrees",
+    "lem-trf-temkin-stable-modification",
+    "lem-trf-stable-modification-flat-curve-pair",
+    "lem-trf-dejong-relative-marked-semistable",
+    "lem-trf-relative-marked-nodal-reduction",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-trf-simplicial-normalized-acyclic-compatible-boundary",
+  "worker": "stage1",
+  "summary": "Q126 checked Stacks 08P1 and 08NZ, retained the statement and normalization, and used the existing abelian horn-filling node. Four steps explicitly compute the residual normalized cycle, isolate degree one and correct by the acyclicity hypothesis. No new nodes: the residual computation and image argument are elementary. Current project source has no exact attachment. Fresh logged searches in all required services found no Mathlib match.",
+  "blueprint": "Auxiliary simplicial boundary-lifting input in the existing ancestry of lem-trf-local-term-locality, proof (1)--(2); implements the horn-and-residual argument of Stacks 08P1 within the cotangent-resolution coherence branch. The current latest blueprint ancestor statement and proof were read; no unit or chapter route changes.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q126-6cc0b9423",
+  "group": "Q126",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q126-6cc0b9423 (reviewer sub-agent of L); spot-checked: I read the item, its 4 steps, every cited statement (horn-filling, the face-face identity, the simplicial-object definition) and Stacks simplicial.tex 08NZ (line 5755) and 08P1 (lines 5837-5883); both tags are confirmed. The proof is the third paragraph of 08P1 in the positive-face, d_0 normalization: horn filler with k=0, residual r=a_0-d_0u, correction w in N_n with d_0w=r. Step 2 applies the face identity with n-1, i=0, j+1 to get d_jd_0=d_0d_{j+1}; I checked every j from 0 to n-1, including the last face. The n=1 case uses the degree-0 hypothesis. Small cases: n=1, n=2, the zero group, and constant Z (fails degree-0 acyclicity, as it should). The delivery has 0 new nodes and the statement is unchanged against the live base (only the proof-related fields differ). No repair note, no supersession, no SGA. Duplicate search found no equal statement (checked the cbc moore-homotopy and horn-disk nodes and the trf siblings). proof_deps equals the union of uses, there is no cycle, and the searches are logged. No changes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicTopology.SimplicialNormalizedAcyclicBoundary",
+  "declaration": "CategoryTheory.SimplicialObject.exists_boundary_filler_of_normalized_acyclic",
+  "file": "lean/Sheaf/AlgebraicTopology/SimplicialNormalizedAcyclicBoundary.lean",
+  "statement": "theorem exists_boundary_filler_of_normalized_acyclic (G : SimplicialObject AddCommGrpCat.{u}) (hacyclic : ((AlgebraicTopology.normalizedMooreComplex AddCommGrpCat).obj G).Acyclic) (n : ℕ) (a : Fin (n + 2) → G _⦋n⦌) (hcompat : match n, a with | 0, _ => True | m + 1, a => ∀ (i j : Fin (m + 2)), i ≤ j → G.δ i (a j.succ) = G.δ j (a i.castSucc)) : ∃ v : G _⦋n + 1⦌, ∀ i : Fin (n + 2), G.δ i v = a i",
+  "branch": "sheaf-dag",
+  "by": "Q15",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-3c8bf1dac",
+  "group": "Q15",
+  "result": "pass",
+  "note": "Node, stmt_dep def-weil-pbc-simplicial-object, module, report and Mathlib MooreComplex/ExactAt read. G : SimplicialObject AddCommGrpCat.{u}, no universe restriction. normalizedMooreComplex: objX 0=top, objX(n+1)=intersection of ker δ k.succ, d=δ0, so it is exactly the node's N(G) with ∂0=0 (ChainComplex ℕ). Acyclic = ExactAt in every degree including 0, matching ker=im for all m≥0. Indexing: dimension n+1, a : Fin(n+2)→G_n. hcompat: n=0 True; else i≤j in Fin(m+2) with δ i (a j.succ)=δ j (a i.castSucc) gives every pair I<J with d_I a_J=d_{J-1}a_I, adjacent pairs included, same encoding as landed exists_horn_filler. Conclusion prescribes all faces. Edge cases dim 1/2, zero group, constant group checked. lean.statement verbatim in file; node differs from live only in lean; no hollow defs; sorry only; docstrings have source place, blueprint id and 4 proof steps; report has Worker report and Second reading by Q15 (declared self-review). No compile rerun; no files changed. No findings."
+ }
+}

@@ -1,0 +1,180 @@
+{
+ "id": "def-sfb-restricted-groupoid-middle-maps",
+ "kind": "definition",
+ "title": "Middle projection and composable-pair map for a restricted scheme relation",
+ "status": "split",
+ "import_flags": [],
+ "statement": "Let $S$ be a scheme [def-pc-scheme], in the universes of [def-weil-size-convention]. Let $R,U,U'$ be schemes over $S$, and let $s,t:R\\to U$ and $q:U'\\to U$ be morphisms over $S$. Write $R'=U'\\times_{q,U,s}R\\times_{t,U,q}U'$ with endpoint maps $s',t':R'\\to U'$ as in [def-sfb-restricted-groupoid-relation], using the scheme fibre products of [def-pc-fibre-product]. The middle projection $m:R'\\to R$ sends $(x,r,y)$ to $r$ on every test-scheme point. Concretely, for $R'=(U'\\times_{q,U,s}R)\\times_{t\\circ\\operatorname{pr}_R,U,q}U'$, it is the composite of the projection to the first factor $U'\\times_U R$ and the projection from that factor to $R$. The canonical map on composable pairs $\\kappa:R'\\times_{s',U',t'}R'\\to R\\times_{s,U,t}R$ is induced by $m$ on both factors: $\\operatorname{pr}_1\\circ\\kappa=m\\circ\\operatorname{pr}_1$ and $\\operatorname{pr}_2\\circ\\kappa=m\\circ\\operatorname{pr}_2$. Thus it sends a composable pair of triples to the pair of their middle coordinates. These maps are defined for arbitrary $s,t,q$; no groupoid, monicity, etaleness or covering hypothesis is imposed.",
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-size-convention",
+  "def-sfb-restricted-groupoid-relation",
+  "def-pc-fibre-product"
+ ],
+ "source": {
+  "document": "literature/stacks-project/groupoids.tex",
+  "place": "Tag 02VB, lemma-restrict-groupoid: the restriction diagram R′ → R and the induced map on composable pairs; section-restrict-groupoid, the canonical functor from a restriction to the original groupoid."
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "restriction of a scheme groupoid middle projection and induced map on composable pairs",
+   "results": {
+    "t": "2026-10-24T11:25:31Z",
+    "tool": "leansearch",
+    "query": "restriction of a scheme groupoid middle projection and induced map on composable pairs",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "AlgebraicGeometry.Scheme.Hom.resLE_comp_resLE",
+     "AlgebraicGeometry.pullbackRestrictIsoRestrict_hom_morphismRestrict_assoc",
+     "AlgebraicGeometry.Scheme.Hom.resLE_comp_ι_assoc",
+     "StructureGroupoid.trans_restricted",
+     "AlgebraicGeometry.Scheme.Hom.map_resLE_assoc",
+     "AlgebraicGeometry.pullbackRestrictIsoRestrict_hom_morphismRestrict",
+     "AlgebraicGeometry.Scheme.Hom.map_resLE",
+     "AlgebraicGeometry.Scheme.Hom.resLE_comp_resLE_assoc"
+    ],
+    "digest": "51e24c9e364f69d4"
+   },
+   "date": "2026-10-24",
+   "verdict": "No Mathlib match. Reuse the exact two published plain project definitions, with a new definition node owning their construction."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The restricted relation V times U R times U V has a middle projection to R and a canonical map of composable pairs to the original composable pairs",
+   "results": {
+    "t": "2026-10-24T11:25:34Z",
+    "tool": "leanfinder",
+    "query": "The restricted relation V times U R times U V has a middle projection to R and a canonical map of composable pairs to the original composable pairs",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "compRel",
+     "ComplexShape.rel_π₂",
+     "Relation.Comp",
+     "ComplexShape.rel_π₁",
+     "prodMk_mem_compRel",
+     "CategoryTheory.RelCat.Hom.rel_comp_apply₂",
+     "TotalComplexShape.rel₂",
+     "SetRel.comp"
+    ],
+    "digest": "2d1d0fdb94764bc7"
+   },
+   "date": "2026-10-24",
+   "verdict": "No Mathlib match. Reuse the exact two published plain project definitions, with a new definition node owning their construction."
+  },
+  {
+   "tool": "grep",
+   "query": "restrictedGroupoidMiddle|restrictedGroupoidComposableMap",
+   "results": {
+    "t": "2026-10-24T11:25:30Z",
+    "tool": "grep",
+    "query": "restrictedGroupoidMiddle|restrictedGroupoidComposableMap",
+    "sub": "AlgebraicGeometry",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-24",
+   "verdict": "No Mathlib match. Reuse the exact two published plain project definitions, with a new definition node owning their construction."
+  },
+  {
+   "tool": "grep",
+   "query": "rg -n restrictedGroupoidMiddle|restrictedGroupoidComposableMap|restricted-groupoid-middle dag/nodes lean/Sheaf/AlgebraicGeometry; rg -n restrictedGroupoidMiddle|restrictedGroupoidComposableMap lean/WeilConjectures",
+   "results": "DAG hits are only the theorem node lem-sfb-fppf-groupoid-restriction-quotient (declarations and signature); no definition node owns either map. Exact plain definitions are in Sheaf.AlgebraicGeometry.FppfGroupoidRestrictionQuotient. No WeilConjectures match.",
+   "date": "2026-10-24",
+   "verdict": "Use existing:true for the exact project definitions; do not duplicate them or narrow the theorem node record."
+  },
+  {
+   "tool": "grep",
+   "query": "python3 tools/blueprint_refs.py search \"restricted groupoid\"; python3 tools/blueprint_refs.py ancestor lem-sfb-finite-flat-groupoid-quotient-open-geometry",
+   "results": "0 blueprint nodes match 'restricted groupoid'; a node created for lem-sfb-finite-flat-groupoid-quotient-open-geometry has blueprint.from.node = None",
+   "date": "2026-10-24",
+   "verdict": "Add definition ownership with item provenance and the null ancestor returned by the tool."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-finite-flat-groupoid-quotient-open-geometry",
+  "date": "2026-10-24",
+  "group": "NQ"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Scheme representability of the stable abelian-level normalization. Supporting input: passage from an inertia-free finite stack cover to a scheme finite over the coarse scheme. Coarse-morphism input to the finite inertia-free cover argument, before composing with the finite cover. Finite-inertia categorical quotient used before deriving finite type and discrete fibres. Keel--Mori construction: Stabilizer-preserving etale local finite flat affine covers. Supporting input: Finite-flat groupoid presentations and their invariant open substacks. Restricted relation maps used to normalize the induced identity, inverse and composition on an invariant open (Stacks 02VB).",
+   "via": [
+    "lem-sfb-finite-flat-groupoid-quotient-open-geometry",
+    "lem-sfb-finite-inertia-local-affine-covers",
+    "lem-sfb-keel-mori-finite-inertia-quotient",
+    "lem-sfb-dm-coarse-proper-locally-quasifinite",
+    "lem-sfb-inertia-free-finite-cover-coarse",
+    "lem-sfb-stable-abelian-level-normalization",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.FppfGroupoidRestrictionQuotient",
+  "declaration": "AlgebraicGeometry.AlgebraicSpace.restrictedGroupoidMiddle",
+  "declarations": [
+   "AlgebraicGeometry.AlgebraicSpace.restrictedGroupoidMiddle",
+   "AlgebraicGeometry.AlgebraicSpace.restrictedGroupoidComposableMap"
+  ],
+  "statement": "def restrictedGroupoidMiddle {S : Scheme.{u}} {R U U' : Over S}\n    (s t : R ⟶ U) (q : U' ⟶ U) : restrictedEtaleRelation s t q ⟶ R",
+  "branch": "sheaf-dag",
+  "by": "NQ",
+  "date": "2026-10-24",
+  "existing": true,
+  "note": "Definition ownership requested by immutable-head H2 review of 6d52852e716f. Both maps are existing plain pullback constructions, defined without groupoid or covering hypotheses and without choosing data from a theorem. Reused unchanged; the Q59 theorem node and its declarations list are not edited."
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-d66920359",
+  "group": "NQ",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-d66920359",
+  "group": "NQ",
+  "result": "pass",
+  "note": "Re-delivery after RETURN H2 of 6d52852e: Lean tree byte-identical to 6d52 (statement maths accepted there; re-read clause table and edge cases, agree). Only item changes: stmt_deps swaps theorem lem-sfb-fppf-groupoid-restriction-quotient for new def node def-sfb-restricted-groupoid-middle-maps, plus lean.note. New node: existing:true on live FppfGroupoidRestrictionQuotient; restrictedGroupoidMiddle and restrictedGroupoidComposableMap are real pullback constructions matching the node text (Stacks 02VB); statement verbatim modulo noncomputable, as in the landed def-sfb-restricted-groupoid-relation; stmt_deps exist on live; no other owner on side-live; Q59 theorem record untouched. Item lean.statement verbatim in file; single sorry; docstrings with source/blueprint; no hollow defs. No compile (no file changed)."
+ }
+}

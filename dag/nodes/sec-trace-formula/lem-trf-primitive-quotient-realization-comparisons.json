@@ -1,0 +1,416 @@
+{
+ "id": "lem-trf-primitive-quotient-realization-comparisons",
+ "kind": "statement",
+ "title": "Primitive realization comparisons on simultaneous K-flat quotient complexes",
+ "chapter": "sec-trace-formula",
+ "unit": "sk-thm-trace-transport",
+ "statement": "Fix a prime $\\ell$ and finite extensions $E\\subset L\\subset M$ of $\\mathbf Q_\\ell$ in a fixed algebraic closure, allowing equality, with valuation rings $\\mathcal O_F$, uniformizers $\\varpi_F$, and $A_{F,n}=\\mathcal O_F/\\varpi_F^n$ for $n\\ge1$ [def-weil-l-adic-coefficient-extension]. All schemes considered have $\\ell$ invertible [def-weil-scheme-morphism-properties]. On fixed small skeletons of their pro-etale sites [def-weil-pbc-proetale-site, def-weil-size-convention], put $R_{F,W}=\\lim_n(A_{F,n})_W$ [def-weil-completed-integral-coefficients]. Use ordinary unbounded derived module categories [def-weil-abstract-derived-category]. Write $\\mathscr S_F(W)$ for strict quotient-module systems with quotient-linear transitions, $\\mathcal R_{F,W}$ for derived reduction, and $\\mathcal L_{F,W}=R\\lim\\operatorname{Res}$ for realization, with their specified whole-system adjunction $\\mathcal R\\dashv\\mathcal L$ and actual unit $u$ and counit $e$ [lem-coef-derived-system-evaluation-calculus].\n\nLet $f:X\\to Y$ be any scheme map. Use the whole-system inverse images $U_{f,F}$ and scalar changes $S_{L/E,W}$ [def-trf-integral-comparison-sequence-systems], and the completed operations $\\widehat U_{f,F}=Lf_F^*$ and $\\widehat S_{L/E,W}=T_{L/E,W}$ [def-pur-integral-derived-operations, def-weil-integral-scalar-extension]. Fix the normalized natural strict Roos comparison $\\rho:H\\xrightarrow{\\sim}R\\lim$ of [lem-weil-strict-roos-comparison], with $H(D)=\\operatorname{Cone}(1-s_D)[-1]$ and actual transitions.\n\nFor all ambient $K\\in D(R_{F,Y})$, respectively $K\\in D(R_{E,W})$, the following constructions give the primitive realization isomorphisms on flat-term K-flat representatives [lem-pc-kflat-resolution]:\n$$\\alpha_{f,F,K}:\\widehat U_{f,F}K\\xrightarrow{\\sim}\\mathcal L_{F,X}U_{f,F}\\mathcal R_{F,Y}K,\\qquad\n\\beta_{L/E,W,K}:\\widehat S_{L/E,W}K\\xrightarrow{\\sim}\\mathcal L_{L,W}S_{L/E,W}\\mathcal R_{E,W}K.$$\nMore precisely, if $P\\to K$ is such a representative, then $P_{F,n}=P\\otimes_{R_{F,Y}}(A_{F,n})_Y$ is flat-term K-flat over $(A_{F,n})_Y$, represents $\\mathcal R_{F,Y}K$ with actual quotient maps, and $(f_n^*P_{F,n})_n$ represents $U_{f,F}\\mathcal R_{F,Y}K$. Its transitions are $f_n^*$ applied to the quotient transitions, with restriction of scalars understood. Exact finite constant-coefficient inverse image computes this derived whole-system inverse image. The defining Roos model of $\\widehat U_{f,F}K$ is precisely $H(\\operatorname{Res}(f_n^*P_{F,n})_n)$, and $\\alpha$ is $\\rho$ on this same tower. No interchange of inverse image with an infinite product is used.\n\nFor the scalar construction on $W$, write $P_{E,n}=P\\otimes_{R_{E,W}}(A_{E,n})_W$. The whole scalar system is represented by $(P_{E,n}\\otimes_{(A_{E,n})_W}(A_{L,n})_W)_n$. The simultaneous association isomorphism\n$$a_{P,n}:(P\\otimes_{R_{E,W}}(A_{E,n})_W)\\otimes_{(A_{E,n})_W}(A_{L,n})_W\\xrightarrow{\\sim}P\\otimes_{R_{E,W}}(A_{L,n})_W,\\quad (x\\otimes a)\\otimes b\\longmapsto x\\otimes ab$$\nis an isomorphism of strict quotient-system complexes; the displayed tensors compute derived extension because $P_{E,n}$ is K-flat over $(A_{E,n})_W$. The left side's Roos cone is identified by $H(a_P)$ with the defining Roos cone of $\\widehat S_{L/E,W}K$, and $\\beta=\\rho\\circ H(a_P)^{-1}$ on that defining cone. The transition square commutes since both paths send $(x\\otimes a)\\otimes b$ to $x\\otimes\\overline{ab}$. Under $E\\subset L\\subset M$, both associations send $((x\\otimes a)\\otimes b)\\otimes c$ to $x\\otimes abc$; equal fields give the unit multiplication map. All fields and maps use this same normalization. No flatness or finite Tor-amplitude of $A_{E,n}\\to A_{L,n}$ is assumed.",
+ "source": {
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Tag 099N, lemma-pushforward-Noetherian-case (2),(5); K-flat construction also sites-cohomology.tex Tags 06YS (lemma-K-flat-resolution), 0G7E (lemma-pullback-K-flat), 0D6D (lemma-derived-pullback-composition); old steps 3,4 of lem-trf-effective-comparison-realization-models"
+ },
+ "stmt_deps": [
+  "def-weil-l-adic-coefficient-extension",
+  "def-weil-scheme-morphism-properties",
+  "def-weil-pbc-proetale-site",
+  "def-weil-size-convention",
+  "def-weil-completed-integral-coefficients",
+  "def-weil-abstract-derived-category",
+  "lem-coef-derived-system-evaluation-calculus",
+  "def-trf-integral-comparison-sequence-systems",
+  "def-pur-integral-derived-operations",
+  "def-weil-integral-scalar-extension",
+  "lem-weil-strict-roos-comparison",
+  "lem-pc-kflat-resolution",
+  "def-trf-integral-comparison-realization-models"
+ ],
+ "proof": [
+  {
+   "text": "Choose one flat-term K-flat representative $P\\to K$ by [lem-pc-kflat-resolution], over $R_{F,Y}$ in the pullback case and $R_{E,W}$ in the scalar case. Apply [lem-pur-kflat-change-of-rings-independent] to each coefficient projection: $P_{F,n}=P\\otimes_{R_{F,Y}}(A_{F,n})_Y$ (and $P_{E,n}$ on $W$) is flat-term K-flat over the corresponding quotient sheaf. These are precisely the strict quotient-system representatives of $\\mathcal R K$ supplied by [lem-coef-derived-system-evaluation-calculus]. The maps for $m\\ge n$ are induced by the actual quotient ring maps, so their composition agrees with direct reduction; no independent choice of level resolutions is made. The Lean proof of primitiveQuotientReductionGood applies the independent-coefficient theorem to the actual reduction functor with its object and map equations. The site tensor/monoidal tensor natural isomorphism transports degreewise flatness in both directions.",
+   "uses": [
+    "lem-pc-kflat-resolution",
+    "lem-pur-kflat-change-of-rings-independent",
+    "lem-coef-derived-system-evaluation-calculus",
+    "def-pur-site-sheaf-tensor-presentation-data"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 06YS (lemma-K-flat-resolution), 0G7E (lemma-pullback-K-flat); the cited derived-system calculus supplies simultaneous quotient representatives."
+   }
+  },
+  {
+   "text": "Each $A_{F,n}$ is finite by [def-weil-l-adic-coefficient-extension]. Hence [prop-weil-pbc-proetale-constant-exact] makes $f_n^*$ exact. Exactness of strict systems is componentwise, as stated in [lem-coef-derived-system-evaluation-calculus]. By [lem-coef-semilinear-derived-sections], the inverse image of quotient systems along the morphism of pro-etale topoi is the exact levelwise inverse image $V$, left adjoint to levelwise direct image, with $e_nV=u^{-1}e_n$; since $u^{-1}(A_{F,n})_Y=(A_{F,n})_X$, the levelwise functor is the module inverse image $f_n^*$. So the whole-system inverse image of [def-trf-integral-comparison-sequence-systems] is computed termwise by $(f_n^*P_{F,n})_n$; its transitions are the images of those in Step 1. Restrict this tower to $R_{F,X}$-modules and call it $D_f$. By [def-pur-integral-derived-operations], the chosen model of $\\widehat U_{f,F}K$ is $H(D_f)$. Countable products of these module sheaves are exact by [lem-weil-proetale-countable-products-exact], so [lem-weil-strict-roos-comparison] applies and gives $\\alpha=\\rho_{D_f}:H(D_f)\\xrightarrow{\\sim}R\\lim D_f=\\mathcal L_{F,X}U_{f,F}\\mathcal R_{F,Y}K$. Products have only been taken after inverse image.",
+   "uses": [
+    "def-weil-l-adic-coefficient-extension",
+    "prop-weil-pbc-proetale-constant-exact",
+    "lem-coef-derived-system-evaluation-calculus",
+    "lem-coef-semilinear-derived-sections",
+    "def-trf-integral-comparison-sequence-systems",
+    "def-pur-integral-derived-operations",
+    "lem-weil-proetale-countable-products-exact",
+    "lem-weil-strict-roos-comparison",
+    "lem-trf-primitive-quotient-pullback-model-existence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 099N (lemma-pushforward-Noetherian-case), (5), motivates the defining quotient formula; the all-ambient formula here is the cited definition, not an application of 099N outside its derived-complete hypotheses."
+   }
+  },
+  {
+   "text": "For scalars abbreviate $R=R_{E,W}$, $A_n=(A_{E,n})_W$ and $B_n=(A_{L,n})_W$. The compatible maps $R\\to A_n\\to B_n$ are supplied by [def-weil-integral-scalar-extension]. On the sheaf tensors of [def-pur-sheaf-tensor-product], define $a_{P,n}$ by $(x\\otimes a)\\otimes b\\mapsto x\\otimes ab$ and its inverse by $x\\otimes b\\mapsto(x\\otimes1)\\otimes b$. The balancing relations over $R$ and $A_n$ make both maps well-defined; their composites are identities since $(x\\otimes a)\\otimes b=(x\\otimes1)\\otimes ab$. These local formulas commute with restrictions and hence sheafify. They commute with differentials because they act only on coefficient factors in degree zero. Thus they give chain isomorphisms. Under reduction from $m$ to $n$, both paths send $(x\\otimes a)\\otimes b$ to $x\\otimes\\overline{ab}$. Consequently $a_P$ is an isomorphism of strict quotient-system complexes, with quotient-linear transitions. In Lean, construct the association by uniqueness of left adjoints to the canonically identified composite restriction functor, using the ordinary scalar adjunction normalized on 1 tensor x. Its transpose formula proves the displayed product formula and uniqueness. The ordinary and derived finite models retain exactly their existing definitions.",
+   "uses": [
+    "def-weil-integral-scalar-extension",
+    "def-pur-sheaf-tensor-product",
+    "lem-pur-sheaf-ring-coefficient-ordinary-adjunction",
+    "def-weil-pbc-system-scalar-coherence",
+    "def-trf-integral-scalar-tower-functors",
+    "lem-trf-primitive-quotient-scalar-model-existence"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03EK (section-tensor-product), sheafified tensor construction and associativity; the balanced maps, inverses and transition equations are written out here."
+   }
+  },
+  {
+   "text": "By [lem-pur-derived-change-of-rings], the K-flatness established in Step 1 means that $P_{E,n}\\otimes_{A_n}B_n$ computes derived extension at level $n$. The system complex $(P_{E,n})_n$ is K-flat on the ringed sequence site: systems are modules over the ring object $A_\\bullet$ in the topos of inverse sequences with componentwise exactness [lem-coef-semilinear-derived-sections], and a sieve covers $(n,U)$ exactly when its slice at $n$ covers $U$ [def-coef-ringed-sequence-site], so the sheafified tensor product of systems is computed componentwise; each $P_{E,n}$ being K-flat, $(P_{E,n})_n\\otimes N$ is acyclic for every acyclic system complex $N$. Hence the derived extension of scalars of systems along $A_\\bullet\\to B_\\bullet$ in [lem-coef-semilinear-derived-sections] is computed by the termwise tensor $(P_{E,n}\\otimes_{A_n}B_n)_n$ with the actual transitions. This is the cochain-normalized whole scalar system specified by [def-trf-integral-comparison-sequence-systems]. Let $D_S$ be its restriction to $R_{L,W}$-modules, and let $D_T=(\\operatorname{Res}^L_n(P\\otimes_R B_n))_n$. Step 3 gives $a_P:D_S\\xrightarrow{\\sim}D_T$. By [def-weil-integral-scalar-extension], $H(D_T)$ is the defining scalar-extension model. Apply the functor $H$ and then the normalized comparison of [lem-weil-strict-roos-comparison] to obtain\n$$\\beta=\\rho_{D_S}\\circ H(a_P)^{-1}:H(D_T)\\xrightarrow{\\sim}R\\lim D_S=\\mathcal L_{L,W}S_{L/E,W}\\mathcal R_{E,W}K.$$\nThe exact-product hypothesis is again [lem-weil-proetale-countable-products-exact]. K-flatness of the input complex, rather than flatness of $A_n\\to B_n$, justifies the derived tensor computation. The completed Lean helper primitiveQuotientSystemGood uses exactness detected by ordinary component evaluation, coefficientEvaluationTensorIso on total complexes, and transport along the supplied level isomorphisms. To prove degreewise flatness, apply the same K-flat argument to M[0], transport finite flatness to its evaluations, and use the natural collapse of total tensor with M[0] to termwise tensor. Preservation of quasi-isomorphisms gives exactness of tensorRight M. The universal scalar cochain counit is invertible on this K-flat system. This part does not use the presentation equation involving e.",
+   "uses": [
+    "lem-pur-derived-change-of-rings",
+    "lem-coef-semilinear-derived-sections",
+    "def-coef-ringed-sequence-site",
+    "def-trf-integral-comparison-sequence-systems",
+    "def-weil-integral-scalar-extension",
+    "lem-weil-strict-roos-comparison",
+    "lem-weil-proetale-countable-products-exact",
+    "lem-pur-flat-single-derived-normalization",
+    "lem-pur-kflat-tensor-quasiiso-independent",
+    "lem-weil-pbc-ringed-topos-kflat-pullback",
+    "def-pur-site-sheaf-tensor-presentation-data"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 0G7E (lemma-pullback-K-flat), 0D6D (lemma-derived-pullback-composition), 0941 (lemma-derived-limit-is-ok), with the explicit scalar-extension definition."
+   }
+  },
+  {
+   "text": "For $E\\subset L\\subset M$, the coefficient maps of [def-weil-integral-scalar-extension] compose. The two composites of the maps in Step 3 on the successive tensors send $((x\\otimes a)\\otimes b)\\otimes c$ to $x\\otimes abc$, so they agree on tensor generators, hence after sheafification and in every complex degree. For an identity coefficient map the formula is multiplication $(x\\otimes a)\\mapsto ax$, with inverse $x\\mapsto x\\otimes1$. These equalities respect all quotient transitions by the same reduction calculation as in Step 3. They are therefore identities of strict-system chain maps before applying $H$. Functoriality of $H$ and naturality of the fixed $\\rho$ in [lem-weil-strict-roos-comparison] preserve these identities. This is the asserted common normalization; it does not identify completed scalar extension on arbitrary ambient inputs with an uncompleted identity functor. The Lean witnesses use a fixed quotientAssociation a at each level, the finite three-field left-adjoint comparison c, and b = a_EL inverse, then c, then a_EM. Naturality of pure tensors gives both generator equations, and functoriality plus cancellation of a_EL and its inverse gives the square. The unit comparison is constructed the same way from the identity restriction adjunction.",
+   "uses": [
+    "def-weil-integral-scalar-extension",
+    "lem-weil-strict-roos-comparison",
+    "lem-pur-sheaf-ring-coefficient-ordinary-adjunction",
+    "def-weil-pbc-system-scalar-coherence"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0D6D (lemma-derived-pullback-composition), association on one flat-term K-flat representative; explicit generator calculation for identity and three coefficient fields."
+   }
+  },
+  {
+   "text": "It remains to check that these are comparisons on derived objects, not just chosen complexes. For a cochain map $h:P\\to Q$, tensor association commutes with $h$: both routes send $(x\\otimes a)\\otimes b$ to $h(x)\\otimes ab$. Pullback and quotient maps commute with $h$ by functoriality. For quasi-isomorphisms between flat-term K-flat inputs, all quotient and scalar tensors are quasi-isomorphisms by [lem-pur-derived-change-of-rings], and finite-level pullback preserves them by [prop-weil-pbc-proetale-constant-exact]. Apply [lem-pur-flat-roos-functor-descent] with one input, first to $D_f(P)$ and then to $D_T(P)$: its smallness hypotheses are the fixed skeleton conventions in the statement, and exact products are supplied by [lem-weil-proetale-countable-products-exact]. It gives naturality of the Roos comparisons for every derived morphism and compatibility with replacement of good representatives. Step 3 identifies $D_S$ with $D_T$ naturally, so the same conclusion holds for $\\beta$. Thus the displayed $\\alpha,\\beta$ are independent of resolutions through the prescribed representative identifications and use the fixed normalized $\\rho$. STATUS: this final realization theorem remains unproved and is STATEMENT-DISPUTED. CoefficientReductionPresentation fixes e only after finite derived evaluation; the conclusion fixes its total-limit action for every such e. A nonzero infinitely p-divisible element in a derived-complete, nonseparated Z_p-module gives an automorphism 1+delta whose finite derived reductions are identities but whose completed realization is not. Thus the finite equations do not imply the required whole-system normalization. The six helper theorems are proved without this step; report.md records the explicit example and needed interface coherence. No theorem statement has been changed.",
+   "uses": [
+    "lem-pur-derived-change-of-rings",
+    "prop-weil-pbc-proetale-constant-exact",
+    "lem-pur-flat-roos-functor-descent",
+    "lem-weil-proetale-countable-products-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0941 (lemma-derived-limit-is-ok), natural total-limit comparison; good-representative descent is the cited agent-formulated general tool, not an additional assertion of the tag."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-kflat-resolution",
+  "lem-pur-kflat-change-of-rings-independent",
+  "lem-coef-derived-system-evaluation-calculus",
+  "def-pur-site-sheaf-tensor-presentation-data",
+  "def-weil-l-adic-coefficient-extension",
+  "prop-weil-pbc-proetale-constant-exact",
+  "lem-coef-semilinear-derived-sections",
+  "def-trf-integral-comparison-sequence-systems",
+  "def-pur-integral-derived-operations",
+  "lem-weil-proetale-countable-products-exact",
+  "lem-weil-strict-roos-comparison",
+  "def-weil-integral-scalar-extension",
+  "def-pur-sheaf-tensor-product",
+  "lem-pur-sheaf-ring-coefficient-ordinary-adjunction",
+  "def-weil-pbc-system-scalar-coherence",
+  "def-trf-integral-scalar-tower-functors",
+  "lem-pur-derived-change-of-rings",
+  "def-coef-ringed-sequence-site",
+  "lem-pur-flat-single-derived-normalization",
+  "lem-pur-kflat-tensor-quasiiso-independent",
+  "lem-weil-pbc-ringed-topos-kflat-pullback",
+  "lem-pur-flat-roos-functor-descent",
+  "lem-trf-primitive-quotient-pullback-model-existence",
+  "lem-trf-primitive-quotient-scalar-model-existence"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "T6 stage 3, 2026-10-25: six helper proofs use independent-coefficient change of rings, normalized ordinary adjunction uniqueness and componentwise total tensor. Original realization descent plan retained but disputed for its finite-evaluation-only presentation normalization; see delivery report and Stacks Tags 07JQ, 09AT."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "completedPullback|scalarRealization|quotient.*KFlat|KFlat.*quotient|ramified",
+   "results": "25 hits: Mathlib/RingTheory/TotallySplit.lean, Mathlib/RingTheory/TotallySplit.lean, Mathlib/RingTheory/TotallySplit.lean, Mathlib/RingTheory/Frobenius.lean, Mathlib/RingTheory/Frobenius.lean, Mathlib/RingTheory/Frobenius.lean, Mathlib/RingTheory/Frobenius.lean, Mathlib/RingTheory/Frobenius.lean",
+   "date": "2026-10-24",
+   "verdict": "no match: ordinary sheaf pullback composition or ring cotangent/base-change facts only; no completed strict-system primitive realization with ramified quotient transitions"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.DerivedCategory, TensorProduct.assoc",
+   "results": "0 hits: ; loogle: unknown identifier 'CategoryTheory.DerivedCategory'",
+   "date": "2026-10-24",
+   "verdict": "invalid query: unknown identifier; replaced by the successful SheafOfModules.pullbackComp search"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Primitive completed pullback and integral scalar realization isomorphisms on whole quotient systems",
+   "results": "8 hits: RingCon.comapQuotientEquivRangeₐ, RingCon.comapQuotientEquivOfSurj, CategoryTheory.Limits.CategoricalPullback.iso, CategoryTheory.Limits.pullback.congrHom, CategoryTheory.IsPullback.of_iso', CategoryTheory.Limits.Types.pullbackIsoPullback, Setoid.comapQuotientEquiv, RingCon.comapQuotientEquivRangeS",
+   "date": "2026-10-24",
+   "verdict": "no match: ordinary sheaf pullback composition or ring cotangent/base-change facts only; no completed strict-system primitive realization with ramified quotient transitions"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Completed pullback and ramified scalar extension quotient complexes K flat representative Roos realization tensor reassociation compatible transitions",
+   "results": "8 hits: Algebra.Extension.tensorH1Cotangent, Algebra.Extension.tensorCotangent, Algebra.FormallyUnramified.flat_of_restrictScalars, KaehlerDifferential.cotangentComplexBaseChange, Algebra.Extension.tensorCotangentInvFun, KaehlerDifferential.tensorKaehlerEquiv, Algebra.Extension.tensorCotangentSpace, Algebra.Extension.cotangentComplexBaseChange_eq_lTensor_cotangentComplex",
+   "date": "2026-10-24",
+   "verdict": "no match: ordinary sheaf pullback composition or ring cotangent/base-change facts only; no completed strict-system primitive realization with ramified quotient transitions"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived pullback realization from strict quotient systems and scalar extension tensor association on K flat complexes sheaves",
+   "results": "8 hits: SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom_assoc, SheafOfModules.pullbackComp, SheafOfModules.pullbackObjFreeIso, SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom, SheafOfModules.pullback_assoc, SheafOfModules.pullbackIso, SheafOfModules.freeFunctorCompPullbackIso, SheafOfModules.pullbackObjUnitToUnit",
+   "date": "2026-10-24",
+   "verdict": "no match: ordinary sheaf pullback composition or ring cotangent/base-change facts only; no completed strict-system primitive realization with ramified quotient transitions"
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules.pullbackComp",
+   "results": "5 hits: SheafOfModules.pullbackComp, SheafOfModules.pullback_comp_id, SheafOfModules.pullback_id_comp, SheafOfModules.pullback_assoc, SheafOfModules.conjugateEquiv_pullbackComp_inv",
+   "date": "2026-10-24",
+   "verdict": "no match: ordinary sheaf pullback composition or ring cotangent/base-change facts only; no completed strict-system primitive realization with ramified quotient transitions"
+  },
+  {
+   "tool": "grep",
+   "query": "KFlat|derived.*tensor|completed.*scalar",
+   "results": "0 hits:  (subdirectory Algebra/Category/ModuleCat)",
+   "date": "2026-10-24",
+   "verdict": "no match: ordinary sheaf pullback composition or ring cotangent/base-change facts only; no completed strict-system primitive realization with ramified quotient transitions"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Completed pullback and coefficient extension of sheaf complexes via quotient towers K flat Roos realization comparisons",
+   "results": "8 hits: SheafOfModules.Presentation.map_π_eq, SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom, SheafOfModules.pullbackObjFreeIso, SheafOfModules.freeFunctorCompPullbackIso, SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom_assoc, SheafOfModules.conjugateEquiv_pullbackComp_inv, SheafOfModules.instIsIsoPullbackObjUnitToUnitOfFinal, SheafOfModules.pullbackIso",
+   "date": "2026-10-24",
+   "verdict": "no match: ordinary sheaf pullback composition, ordinary inverse systems, or underived adic module completion; none states this whole-system completed realization comparison"
+  },
+  {
+   "tool": "grep",
+   "query": "completedPullback|scalarRealization|Roos|KFlat.*quotient",
+   "results": "0 hits: ",
+   "date": "2026-10-24",
+   "verdict": "no match: ordinary sheaf pullback composition, ordinary inverse systems, or underived adic module completion; none states this whole-system completed realization comparison"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived inverse limit realization of quotient coefficient systems and completed pullback on K flat complexes",
+   "results": "8 hits: InverseSystem.isNatEquiv_piEquivLim, InverseSystem.limit, InverseSystem.invLimEquiv.congr_simp, InverseSystem.invLimEquiv_symm_apply_coe, InverseSystem.invLimEquiv_apply_coe, InverseSystem.invLimEquiv, InverseSystem.piEquivLim, ProfiniteGrp.isIso_toLimit",
+   "date": "2026-10-24",
+   "verdict": "no match: ordinary sheaf pullback composition, ordinary inverse systems, or underived adic module completion; none states this whole-system completed realization comparison"
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules.pullbackComp",
+   "results": "5 hits: SheafOfModules.pullbackComp, SheafOfModules.pullback_comp_id, SheafOfModules.pullback_id_comp, SheafOfModules.pullback_assoc, SheafOfModules.conjugateEquiv_pullbackComp_inv",
+   "date": "2026-10-24",
+   "verdict": "no match: ordinary sheaf pullback composition, ordinary inverse systems, or underived adic module completion; none states this whole-system completed realization comparison"
+  },
+  {
+   "tool": "grep",
+   "query": "pullbackComp|pullback_assoc",
+   "results": "5 hits: Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean (subdirectory Algebra/Category/ModuleCat/Sheaf)",
+   "date": "2026-10-24",
+   "verdict": "no match: ordinary sheaf pullback composition, ordinary inverse systems, or underived adic module completion; none states this whole-system completed realization comparison"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Natural comparison between completed scalar extension and derived inverse limit of scalar extended reductions of module sheaves",
+   "results": "8 hits: IsAdicComplete.StrictMono.of_lift, IsAdicComplete.StrictMono.of_comp_lift, AdicCompletion.module, AdicCompletion.map, AdicCompletion.instIsScalarTower_1, AdicCompletion.instModuleOfIsScalarTower, AdicCompletion.instIsScalarTower, AdicCompletion.ofTensorProduct_naturality",
+   "date": "2026-10-24",
+   "verdict": "no match: ordinary sheaf pullback composition, ordinary inverse systems, or underived adic module completion; none states this whole-system completed realization comparison"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-effective-comparison-realization-models",
+  "date": "2026-10-24",
+  "group": "NI"
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-trf-primitive-quotient-realization-comparisons",
+  "worker": "stage1",
+  "group": "NX",
+  "summary": "Proved the primitive comparisons using existing flat-term K-flat resolution, base change, exact finite coefficient inverse image, and strict Roos descent tools. Wrote balanced tensor association and its inverse, quotient-transition equations, and triple/equal-field normalizations explicitly. No new nodes, statement correction, or additional flatness hypothesis. Retained the inherited arguments as source history.",
+  "blueprint": "Final sentence of prop-trf-karoubi-independence: common-stage Frobenius transport; integral normalized comparison construction. This refinement carries former model-existence steps 3, 4. Ancestor was removed from latest blueprint; current trace-transport proof uses sk-thm-tf-uniform-formula; no rerouting.",
+  "retained_arguments": [
+   {
+    "old_step": 3,
+    "text": "Choose a flat-term K-flat representative $P\\to K$ using [lem-pc-kflat-resolution]. Its quotient complexes $P_{F,n}=P\\otimes_{R_{F,Y}}(A_{F,n})_Y$ are flat-term K-flat over the quotient rings by [lem-pur-kflat-change-of-rings]. They represent $\\mathcal R_{F,Y}K$ with the actual quotient maps by [lem-coef-derived-system-evaluation-calculus]. The whole-system inverse image of [def-trf-integral-comparison-sequence-systems] is represented here by $(f_n^*P_{F,n})_n$: finite constant-coefficient inverse image is exact by [prop-weil-pbc-proetale-constant-exact], and its transitions are the images of $P_{F,m}\\to P_{F,n}$. The defining formula of [def-pur-integral-derived-operations] for $\\widehat U_{f,F}K$ is exactly the Roos realization of this restricted tower. Apply $\\rho$ of Step 1 to this same tower. This gives the primitive isomorphism $\\widehat U_{f,F}K\\simeq\\mathcal L_{F,X}U_{f,F}\\mathcal R_{F,Y}K$ with the prescribed quotient-complex representative, without interchanging inverse image with an infinite product.",
+    "uses": [
+     "lem-pc-kflat-resolution",
+     "lem-pur-kflat-change-of-rings",
+     "lem-coef-derived-system-evaluation-calculus",
+     "def-trf-integral-comparison-sequence-systems",
+     "prop-weil-pbc-proetale-constant-exact",
+     "def-pur-integral-derived-operations"
+    ],
+    "elementary": false,
+    "source": {
+     "document": "literature/stacks-project/proetale.tex",
+     "place": "Tag 099N, lemma-pushforward-Noetherian-case (5), completed pullback as quotient realization; representative construction uses sites-cohomology.tex Tags 06YS and 0G7E"
+    }
+   },
+   {
+    "old_step": 4,
+    "text": "For a coefficient inclusion $E\\subset L$ and the same kind of representative $P$, the scalar-changed whole system of [def-trf-integral-comparison-sequence-systems] is represented at level $n$ by $(P\\otimes_{R_{E,X}}(A_{E,n})_X)\\otimes_{(A_{E,n})_X}(A_{L,n})_X$. The simultaneous scalar-association isomorphism in [lem-pur-coefficient-extension-reduction-model] identifies this, with all its transitions, with $P\\otimes_{R_{E,X}}(A_{L,n})_X$ by $(x\\otimes a)\\otimes b\\mapsto x\\otimes ab$. These tensors compute derived extension even for ramified inclusions: the first quotient complex is K-flat over $(A_{E,n})_X$ by [lem-pur-kflat-change-of-rings]. By [def-weil-integral-scalar-extension], its Roos cone is the defining value of $\\widehat S_{L/E,X}K$. Compose the identification of cones with $\\rho$ of Step 1 to obtain the scalar primitive isomorphism. The association map commutes with $n+1\\to n$ since both paths send $(x\\otimes a)\\otimes b$ to $x\\otimes\\overline{ab}$. For a third field $M$, both associations send $((x\\otimes a)\\otimes b)\\otimes c$ to $x\\otimes abc$; for equal fields multiplication gives the unit comparison. Hence all inclusions use the same simultaneous quotient normalization.",
+    "uses": [
+     "def-trf-integral-comparison-sequence-systems",
+     "lem-pur-coefficient-extension-reduction-model",
+     "lem-pur-kflat-change-of-rings",
+     "def-weil-integral-scalar-extension"
+    ],
+    "elementary": false,
+    "source": {
+     "document": "literature/stacks-project/sites-cohomology.tex",
+     "place": "Tags 0G7E, lemma-pullback-K-flat, and 0D6D, lemma-derived-pullback-composition; scalar quotient construction in the cited reduction-model node"
+    }
+   }
+  ],
+  "tool_uses": [
+   {
+    "node": "lem-pc-kflat-resolution",
+    "why": "Generic resolution existence on a ringed site; used for ambient unbounded inputs."
+   },
+   {
+    "node": "lem-pur-kflat-change-of-rings",
+    "why": "Generic preservation of flat-term K-flatness under an arbitrary coefficient ring map."
+   },
+   {
+    "node": "lem-coef-derived-system-evaluation-calculus",
+    "why": "The stipulated whole-system derived reduction and componentwise exactness, not effectivity."
+   },
+   {
+    "node": "lem-coef-semilinear-derived-sections",
+    "why": "Generic system calculus: whole-system inverse image is exact levelwise inverse image, and system tensor/derived scalar extension are componentwise, so levelwise K-flat quotient complexes compute the whole-system operations."
+   },
+   {
+    "node": "prop-weil-pbc-proetale-constant-exact",
+    "why": "Generic exact inverse image for the finite constant quotient coefficients."
+   },
+   {
+    "node": "lem-weil-proetale-countable-products-exact",
+    "why": "Exact products of module sheaves needed for the strict Roos theorem."
+   },
+   {
+    "node": "lem-weil-strict-roos-comparison",
+    "why": "The fixed normalized natural strict-cone comparison used in the statement."
+   },
+   {
+    "node": "lem-pur-derived-change-of-rings",
+    "why": "Generic computation and quasi-isomorphism invariance of derived scalar extension on K-flat inputs."
+   },
+   {
+    "node": "lem-pur-flat-roos-functor-descent",
+    "why": "Generic descent of a quasi-isomorphism-preserving quotient tower construction; supplies naturality for all derived maps, with no unit-level route replacement."
+   }
+  ]
+ },
+ "blueprint": {
+  "from": {
+   "node": "prop-trf-karoubi-independence",
+   "place": "Final sentence of prop-trf-karoubi-independence: common-stage Frobenius transport; integral normalized comparison construction. This refinement carries former model-existence steps 3, 4. Ancestor was removed from latest blueprint; current trace-transport proof uses sk-thm-tf-uniform-formula; no rerouting.",
+   "via": [
+    "lem-trf-effective-comparison-realization-models",
+    "lem-trf-integral-pullback-comparison-realization",
+    "lem-trf-local-frobenius-transport-normalization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "tool_uses": [
+  "lem-pc-kflat-resolution",
+  "lem-pur-kflat-change-of-rings",
+  "lem-coef-derived-system-evaluation-calculus",
+  "lem-coef-semilinear-derived-sections",
+  "prop-weil-pbc-proetale-constant-exact",
+  "lem-weil-proetale-countable-products-exact",
+  "lem-weil-strict-roos-comparison",
+  "lem-pur-derived-change-of-rings",
+  "lem-pur-flat-roos-functor-descent"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-NX-1c0cec5d0",
+  "group": "NX",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NX-1c0cec5d0 (reviewer sub-agent of L); spot-checked: Read the item in full: 6 steps and 0 new nodes. Its statement and stmt_deps are identical to live, where it is unsplit (NI child of effective-comparison-realization-models). There is no repair note and no SGA citation, and adding the dependencies creates no cycle. I read Stacks 099N(5); it is used only as motivation, because def-pur-integral-derived-operations defines Lf^*K=Rlim Res_n f^*(P_n) for arbitrary K. I checked every cited statement against its use. Step 1: kflat-resolution, kflat-change-of-rings and the calculus representative (Q⊗B_n)_n. Step 2: A_{F,n} are finite, so constant-exact applies; the strict-roos hypotheses (small site, exact products) hold, and alpha=rho_{D_f} points the right way. Step 3: the association map and its inverse are elementary transitivity of change of rings. Step 4: beta=rho_{D_S}∘H(a_P)^{-1}: H(D_T)→Rlim D_S points the right way, and D_T is P_{L,m} of def-weil-integral-scalar-extension. Step 5: strict-level identities, with no claim that S_{E/E}=id. Step 6: flat-roos-functor-descent applies with r=1, since qis go to levelwise qis by derived-change-of-rings(1), exact f_n^* and exact Res. I repaired two C4 citation gaps in fixes/dag/nodes/sec-trace-formula/lem-trf-primitive-quotient-realization-comparisons.json. (a) Step 2 identified the whole-system inverse image (defined as a left adjoint) with levelwise f_n^* only from 'componentwise exactness'. It now cites lem-coef-semilinear-derived-sections: V=u^{-1}_• is exact and levelwise, e_nV=u^{-1}e_n, and u^{-1}(A_n)_Y=(A_n)_X. (b) Step 4 went from the level-n derived tensor to the whole-system scalar change without system K-flatness. It now adds the argument that the system tensor is componentwise (sequence topos plus vertical coverings, citing def-coef-ringed-sequence-site), so a levelwise K-flat system is K-flat and the system scalar extension is the termwise tensor. proof_deps now equal the union of the uses, and lem-coef-semilinear-derived-sections is added to tool_uses. I accept the 8 declared generic tool_uses. Small cases tested: P=0, n=1, f=id, E=L=M, and ramified Q_3⊂Q_3(√3) at n=2 (Z/9→F_3[ε]/ε², not flat and never assumed flat). Advisory: alpha coincides with r_F of the existing node lem-pur-completed-primitive-counit-comparison; the maintainer may consider merging the two nodes.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.Paper.PrimitiveQuotientRealizationComparisons",
+  "declaration": "WeilConjectures.primitiveQuotientRealizationComparisons",
+  "declarations": [
+   "WeilConjectures.primitiveQuotientReductionGood",
+   "WeilConjectures.primitiveQuotientFiniteScalarModel",
+   "WeilConjectures.primitiveQuotientFiniteTensorSection",
+   "WeilConjectures.PrimitiveQuotientAssociation",
+   "WeilConjectures.primitiveQuotientScalarAssociation",
+   "WeilConjectures.primitiveQuotientSystemGood",
+   "WeilConjectures.primitiveQuotientScalarTransition",
+   "WeilConjectures.primitiveQuotientScalarTriple",
+   "WeilConjectures.primitiveQuotientScalarUnit",
+   "WeilConjectures.primitiveQuotientRealizationComparisons"
+  ],
+  "file": "lean/Sheaf/Paper/PrimitiveQuotientRealizationComparisons.lean",
+  "statement": "theorem primitiveQuotientRealizationComparisons {X Y : Scheme.{t}} (f : X ⟶ Y) (W : Scheme.{t}) (_hlX : ∀ x : X, IsUnit (l : X.residueField x)) (_hlY : ∀ y : Y, IsUnit (l : Y.residueField y)) (_hlW : ∀ x : W, IsUnit (l : W.residueField x)) (SY : CoefficientDerivedSystemCalculus l E Y) (SW : CoefficientDerivedSystemCalculus l E W) (ρX : IntegralComparisonRoosModel l E X) (ρW : IntegralComparisonRoosModel l L W) : Nonempty (IntegralComparisonPullbackModel l E f SY ρX) ∧ Nonempty (IntegralComparisonScalarModel l E L ι W SW ρW)",
+  "branch": "sheaf-dag",
+  "by": "Q23",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "The main theorem supplies both natural realization models for fixed reduction calculi and normalized Roos comparisons. The other declarations state the same node’s quotient K-flatness, whole-system K-flat computation, balanced scalar association, strict transition formula, three-field association square and identity multiplication square. The already landed realization-interface definition is added to stmt_deps; no statement correction or new notion is needed."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-f72cde33f",
+  "group": "Q23",
+  "result": "pass",
+  "note": "Delivery changes only the item node (lean + stmt_deps gaining the landed def-trf-integral-comparison-realization-models, allowed by §5), the new module and the report; the item has no live Lean. lean.statement is verbatim and the 10 declarations match the file. Main theorem = Nonempty of the landed normalized Pullback/Scalar realization models, whose normalizations pin alpha=rho on the termwise pullback tower and beta=rho∘H(a_P)^{-1} for every good P and every presentation (q fixed on generators), so each model is unique and Nonempty loses nothing; codomains R⋙U⋙L and R⋙S⋙L give the node's orientation. Helper theorems state quotient K-flat/flat terms, system K-flatness + IsIso ε, ∃! balanced association, transition square, three-field square and unit square; each equation checked by hand on generators. No flatness of A_E→A_L, exact ℓ-invertibility, independent universes t,u; edge cases P=0, n=0, empty schemes, f=id, E=L=M, ramified Q_3(√3) checked. Sorry-only proofs, source and blueprint docstrings, no hollow data (Classical.choice of a fully pinned DerivedChangeOfRingsCochainModel, landed pattern). No recompile, by instruction; worker scompile clean and dry run OK. Advisories only: primitiveQuotientFiniteScalarModel is the same term as canonicalDerivedChangeOfRingsModel (reuse needs a stmt_dep, so stage 3 abbrev); parallel association exists for the SemilinearSections model in lem-pur-coefficient-extension-reduction-model; alpha ~ r_F of lem-pur-completed-primitive-counit-comparison (possible merge); some decls owned by def nodes outside stmt_deps, reached through the cited interface."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S6",
+  "result": "pass",
+  "landing": "20261026T002659-L-107679",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)",
+  "sorry_before": [
+   "WeilConjectures.primitiveQuotientRealizationComparisons"
+  ],
+  "sorry_after": []
+ }
+}

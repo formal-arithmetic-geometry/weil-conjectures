@@ -1,0 +1,60 @@
+{
+ "id": "sk-prop-tf-nearby-external-kunneth",
+ "kind": "unit",
+ "chapter": "sec-trace-formula",
+ "title": "Nearby-cycle external Künneth",
+ "lean": [],
+ "uses": [
+  "sk-lem-sf-kunneth-star"
+ ],
+ "statement": "Let $S$ be an excellent strictly henselian trait, with separably closed residue field $k$, generic\npoint $\\eta$ and a chosen geometric generic point $\\bar\\eta$, and let $A$ be a finite commutative\n$\\ell$-primary ring with $\\ell$ invertible on $S$. For $X$ separated of finite type over $S$, let\n$R\\Psi_{X/S}L=\\bar i^*R\\bar j_{X*}L_{\\bar\\eta}$ be the geometric nearby cycles of $L$ on $X_\\eta$,\nwhere $\\bar i$ and $\\bar j_X$ are the inclusions of the special fibre and of the geometric generic\nfibre. For $X,Y$ separated of finite type over $S$, $L$ on $X_\\eta$ and $M$ on $Y_\\eta$, the\ncomparison map $\\Pi_{L,M}$ is the restriction to the special fibre of the map\n\n$$\nR\\bar j_{X*}L_{\\bar\\eta}\\boxtimes R\\bar j_{Y*}M_{\\bar\\eta}\n\\longrightarrow\nR\\bar j_{X\\times Y,*}(L_{\\bar\\eta}\\boxtimes M_{\\bar\\eta})\n$$\n\ndefined by the pullback exchanges and the lax tensor map of direct image.\n\nLet $X,Y$ be separated of finite type over $S$, and let $L\\in D^b_{\\mathrm{ctf}}(X_\\eta,A)$ and\n$M\\in D^b_{\\mathrm{ctf}}(Y_\\eta,A)$. The comparison map\n\n$$\n\\Pi_{L,M}:R\\Psi_{X/S}L\\boxtimes R\\Psi_{Y/S}M\n\\longrightarrow\nR\\Psi_{(X\\times_SY)/S}(L\\boxtimes M)\n\\tag{1}\n$$\n\nis an isomorphism in $D^b_c((X_s\\times_kY_s)_{\\mathrm{\\acute et}},A)$.",
+ "steps": [
+  {
+   "text": "We follow the dimension argument of (Illusie, *Autour du théorème de monodromie locale*,\nTheorem 4.7, pp. 51–53), on the classical étale site. Let $p$ be the characteristic exponent of\n$k$. Ordinary external Künneth over the geometric fibres is [sk-lem-sf-kunneth-star]; it applies\nover the separably closed field $k$ because passing to an algebraic closure is a purely inseparable\nextension and does not change the étale topos."
+  },
+  {
+   "text": "*Facts about traits.* Two further facts are used, both from (SGA 4½, *Théorèmes de finitude*,\n§§3.4 and 3.7). First, geometric nearby cycles are invariant under extension of traits, with the\ncorresponding restriction of inertia action. Second, they have a generic-slicing description. Let\n$s'$ be a geometric generic point of the special fibre $\\mathbf A^1_k$ of $\\mathbf A^1_S$, and let\n$S'=(\\mathbf A^1_S)_{(s')}$ be the strict localization of $\\mathbf A^1_S$ at $s'$. This is a\nstrictly henselian trait with the same uniformizer as $S$. With compatible geometric generic\npoints, its inertia group fits into\n\n$$\n1\\longrightarrow P\\longrightarrow I'\\longrightarrow I\\longrightarrow1,\n$$\n\nwhere $P$ is pro-$p$ (and is trivial when $p=1$). For $a:W\\to\\mathbf A^1_S$, put\n$W'=W\\times_{\\mathbf A^1_S}S'$ and let $N'$ be the pullback of $N\\in D^b_{\\mathrm{ctf}}(W_\\eta,A)$.\nThere is a canonical identification\n\n$$\n(R\\Psi_{W/S}N)|_{W_s\\times_{\\mathbf A^1_k}s'}\\simeq(R\\Psi_{W'/S'}N')^P.\n\\tag{2}\n$$\n\nHere $(-)^P=R\\Gamma(P,-)$ is exact on the discrete prime-to-$p$ torsion coefficients under\nconsideration. The formula comes from factoring the geometric generic-fibre map through the\ngeometric generic point of $S'$, which lies over $\\bar\\eta$; the Galois group of the second step is\n$P$. The kernel is pro-$p$ because the common uniformizer identifies the tame inertia quotients.\nThe formula is compatible with the pullback exchanges and product maps obtained from\n$\\bar i^*R\\bar j_*$: factor the generic-fibre maps first and use the composition law for their\ndirect-image adjunctions."
+  },
+  {
+   "text": "The invariant functor commutes with tensoring by an object on which $P$ acts trivially: for a\ncomplex $E$ with continuous $P$-action and a complex $B$ with trivial $P$-action, the projection map\nis an isomorphism\n\n$$\n(E\\mathbin{\\otimes_A^{\\mathbf L}}B)^P\\simeq E^P\\mathbin{\\otimes_A^{\\mathbf L}}B.\n\\tag{3}\n$$\n\nThe reason is that $P$-invariants are exact on discrete torsion $A$-modules. On a finite quotient\n$G$ of $P$, invariants are the image of the averaging idempotent $|G|^{-1}\\sum_{g\\in G}g$, since\nthe $p$-power $|G|$ is invertible in $A$; this idempotent commutes with tensoring by $B$.\nContinuity passes from the finite quotients to $P$, and resolving $B$ by flat $A$-modules gives the\nderived identity."
+  },
+  {
+   "text": "*Outline.* The cone $C$ of $\\Pi_{L,M}$ has zero global sections when $X$ and $Y$ are projective, by\nthe ordinary Künneth formula on the two fibres; generic slicing and induction on dimension show\nthat $C$ has finite support, and a complex with finite support and zero global sections vanishes.\nThe global-sections statement rests on the compatibility of $\\Pi$ with proper direct images in the\ntwo factors."
+  },
+  {
+   "text": "*Proper direct images.* For proper $f:X\\to X_1$ and $g:Y\\to Y_1$, identify product direct images\nusing ordinary Künneth and identify nearby direct images using proper exchange. Then\n$R(f_s\\times g_s)_*\\Pi_{L,M}$ becomes\n\n$$\n\\Pi_{Rf_{\\eta*}L,Rg_{\\eta*}M}.\n$$\n\nTo verify this equality, expand the two product maps as the tensor maps of $R\\bar j_*$, commute\nproper direct image past those generic open maps, and take the adjoints of the ordinary Künneth\narrows. Both adjoints are $f_\\eta^*Rf_{\\eta*}L\\boxtimes g_\\eta^*Rg_{\\eta*}M\\to L\\boxtimes M$, the\ntensor of the two counits. The identities of the adjunctions and their composition law therefore\nidentify the maps themselves."
+  },
+  {
+   "text": "*Reduction to projective flat families.* Induct simultaneously for all such traits on\n$n=\\dim(X_{\\bar\\eta}\\times_{\\bar\\eta}Y_{\\bar\\eta})$. The assertion is local on $X_s\\times_kY_s$. On\naffine neighbourhoods of the two factors, take projective closures over $S$ and extend the\ncoefficients by zero on their generic fibres. Nearby-cycle open pullback identifies the restriction\nwith the original map. Thus we may assume $X,Y$ projective. Using proper exchange for the closed\nimmersions of the closures of their generic fibres, and nilpotent invariance, we may also assume\nthey are reduced and their generic fibres are dense. They are then flat over the trait. These\nreductions do not increase $n$."
+  },
+  {
+   "text": "*Global sections.* Proper exchange for the structure maps, the compatibility with proper direct\nimages, and ordinary Künneth on the geometric generic fibres give, for the cone $C$ of (1),\n\n$$\nR\\Gamma(X_s\\times_kY_s,C)=0.\n\\tag{4}\n$$\n\nUnder these identifications the map of global complexes is the Künneth isomorphism\n\n$$\nR\\Gamma(X_{\\bar\\eta},L)\\otimes_A^{\\mathbf L}R\\Gamma(Y_{\\bar\\eta},M)\n\\xrightarrow{\\sim}\nR\\Gamma(X_{\\bar\\eta}\\times Y_{\\bar\\eta},L\\boxtimes M).\n$$\n\n*Finite support.* It remains to show that $C$ has finite support. When $n=0$, flatness gives\nzero-dimensional special fibres and this is automatic."
+  },
+  {
+   "text": "For $n>0$, work on small neighbourhoods with quasi-finite coordinate maps\n\n$$\nb:X\\longrightarrow\\mathbf A^q_S,\\qquad c:Y\\longrightarrow\\mathbf A^r_S,\\qquad q+r\\leq n.\n$$\n\nSuch local relative coordinate maps exist for flat finite-type schemes over a trait. Flatness\nbounds the dimensions of the special fibres by the corresponding generic dimensions. Choose local\nparameter functions on the special fibres, lift them to the total spaces, and shrink to the\nquasi-finite loci of the resulting maps. If the sum is smaller than $n$, induction already applies,\nso consider $q+r=n$. Suppose first $q>0$ and compose $b$ with any one coordinate projection\n$\\mathbf A^q_S\\to\\mathbf A^1_S$. Use its generic slice $S'$ as above, and put\n\n$$\nX'=X\\times_{\\mathbf A^1_S}S',\\qquad Y'=Y\\times_SS',\\qquad\nL'=L|_{X'_{\\eta'}},\\quad M'=M|_{Y'_{\\eta'}}.\n$$\n\nThe generic dimensions satisfy\n\n$$\n\\dim X'_{\\bar\\eta'}\\leq q-1,\\qquad \\dim Y'_{\\bar\\eta'}\\leq r.\n$$\n\nThe product $X'_{\\bar\\eta'}\\times Y'_{\\bar\\eta'}$ therefore has dimension at most $n-1$, and\ninduction makes $\\Pi_{L',M'}$ an isomorphism. The slicing calculation, ordinary trait-change\ninvariance in the second factor, and the same slicing calculation on $X\\times_SY$ identify the\nrestrictions to this slice as\n\n$$\n\\begin{aligned}\nR\\Psi_{X/S}L|_{s'}&\\simeq(R\\Psi_{X'/S'}L')^P,\\\\\nR\\Psi_{Y/S}M|_{s'}&\\simeq R\\Psi_{Y'/S'}M',\\\\\nR\\Psi_{(X\\times Y)/S}(L\\boxtimes M)|_{s'}&\\simeq(R\\Psi_{(X'\\times Y')/S'}(L'\\boxtimes M'))^P.\n\\end{aligned}\n$$\n\nIn the middle line $P$ acts trivially: the nearby-cycle complex comes by restriction from $I$, and\n$P$ is the kernel of $I'\\to I$. Apply $(-)^P$ to $\\Pi_{L',M'}$ and use (3). The result is the\nrestriction of (1), by the composition compatibility in (2). It is therefore an isomorphism."
+  },
+  {
+   "text": "Thus $C$ restricts to zero over $s'$, so its support has no point over the generic point of this\nspecial-fibre coordinate line. Its image in that line is constructible and omits the generic point,\nso is a finite set of closed points. Repeat this argument for each of the $q$ coordinates of $b$\nand, interchanging the factors, for each of the $r$ coordinates of $c$. The support is contained in\nthe inverse image under $b_s\\times c_s$ of a finite product of finite sets. This inverse image is\nfinite because $b_s\\times c_s$ is quasi-finite. A finite cover of $X_s\\times Y_s$ by these\nneighbourhoods proves that the support of $C$ is finite globally."
+  },
+  {
+   "text": "A bounded constructible complex supported on a finite set of closed points over a separably closed\nfield is the direct image of its stalk complexes on that finite closed reduced subscheme. Its\nglobal sections are their finite direct sum and hence detect vanishing. Equation (4) therefore\ngives $C=0$, completing the induction."
+  }
+ ],
+ "source": "literature/blueprint/main-20261023/blueprint/sec-trace-formula/sk-prop-tf-nearby-external-kunneth/_section.md",
+ "realized": {
+  "statement": [],
+  "steps": [
+   [],
+   [],
+   [],
+   [],
+   [],
+   [],
+   [],
+   [],
+   [],
+   []
+  ]
+ },
+ "realized_by": null
+}

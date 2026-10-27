@@ -1,0 +1,238 @@
+{
+ "id": "lem-sfb-space-relative-dimension-base-change",
+ "kind": "statement",
+ "title": "Geometric fibre dimension bounds for algebraic spaces under base change",
+ "statement": "Algebraic spaces and their morphisms are as in [def-trf-algebraic-space], over schemes [def-pc-scheme] in the universes of [def-weil-size-convention]. Let $f:X\\to T$ be a morphism from an algebraic space to a scheme, locally of finite type on etale scheme charts [def-weil-finite-type-morphism] and quasi-separated (its diagonal $X\\to X\\times_TX$ is quasi-compact), and let $d\\geq0$ be an integer. Write $P_d(f)$ for the condition that every geometric fibre has topological Krull dimension at most $d$ [def-kun-topological-krull-dimension]. A geometric fibre here is the algebraic-space fibre product $X\\times_T\\operatorname{Spec}\\Omega$ for a map from the spectrum of an algebraically closed field $\\Omega$ [def-weil-field, def-weil-algebraic-closure, def-weil-affine-spectrum, lem-trf-space-fibre-products-etale-covers]; the dimension is that of its underlying topological space. Quasi-separatedness makes every geometric fibre a quasi-separated, hence decent, algebraic space, so this topological dimension is the dimension computed on etale charts. If $P_d(f)$ holds, then $P_d(X\\times_TT'\\to T')$ holds for every scheme map $T'\\to T$. Conversely, for any jointly surjective family of scheme maps $\\{T_i\\to T\\}_{i\\in I}$, if $P_d(X\\times_TT_i\\to T_i)$ holds for every $i$, then $P_d(f)$ holds. Joint surjectivity means every point of $T$ is in the image of some $T_i$.",
+ "source": {
+  "document": "literature/stacks-project/spaces-morphisms.tex",
+  "place": "Tag 04NS, spaces-morphisms-lemma-dimension-fibre-after-base-change (1), with Tag 06LR, spaces-morphisms-definition-relative-dimension; the bound formulation used verbatim in quot.tex, Tag 0D52, proof of lemma-curves-stack. Topological and chart dimensions agree on the (quasi-separated, hence decent) geometric fibres by decent-spaces.tex Tag 0A4J, lemma-dimension-decent-space."
+ },
+ "stmt_deps": [
+  "def-trf-algebraic-space",
+  "def-pc-scheme",
+  "def-weil-size-convention",
+  "def-weil-finite-type-morphism",
+  "def-kun-topological-krull-dimension",
+  "def-weil-field",
+  "def-weil-algebraic-closure",
+  "def-weil-affine-spectrum",
+  "lem-trf-space-fibre-products-etale-covers",
+  "def-a1-space-point-topology",
+  "def-sfb-proper-curve-moduli"
+ ],
+ "proof": [
+  {
+   "text": "First note that the geometric fibres used below remain quasi-separated and locally of finite type over their fields. Indeed the diagonal of $X\\times_TZ\\to Z$ is the pullback of $\\Delta_{X/T}$ along $(X\\times_TZ)\\times_Z(X\\times_TZ)\\to X\\times_TX$. After any scheme test this is a base change of a quasi-compact scheme morphism, hence is quasi-compact by [lem-pc-quasi-compact-base-change]. Pulling back an etale atlas gives an etale atlas by [lem-trf-space-fibre-products-etale-covers]. The chart morphisms to $Z$ are base changes of the original locally finite type chart morphisms, and remain locally of finite type by [lem-weil-pbc-lft-base-change]. This works for every scheme $Z\\to T$, including field spectra; no condition on $Z\\to T$ is used.",
+   "uses": [
+    "lem-pc-quasi-compact-base-change",
+    "lem-trf-space-fibre-products-etale-covers",
+    "lem-weil-pbc-lft-base-change"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-morphisms.tex",
+    "place": "Tags 03KL (lemma-base-change-separated), diagonal argument, and 03XH (lemma-base-change-finite-type); chart definition of locally finite type"
+   }
+  },
+  {
+   "text": "Let $T'\\to T$ and $\\operatorname{Spec}\\Omega\\to T'$ be arbitrary, with $\\Omega$ algebraically closed. The universal property of the sheaf fibre products gives $(X\\times_TT')\\times_{T'}\\operatorname{Spec}\\Omega\\cong X\\times_T\\operatorname{Spec}\\Omega$: on every test scheme both sides are pairs of compatible maps to $X$ and $\\operatorname{Spec}\\Omega$. The right hand side is one of the geometric fibres quantified over in $P_d(f)$, so has dimension at most $d$. The isomorphism identifies the atlas topologies and hence their chains of irreducible closed subsets. This proves the base-change implication.",
+   "uses": [
+    "lem-trf-space-fibre-products-etale-covers",
+    "def-kun-topological-krull-dimension"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/quot.tex",
+    "place": "Tag 0D52 (lemma-curves-stack), base-change direction; lemma-curves-fibred-in-groupoids"
+   }
+  },
+  {
+   "text": "We need a field-extension comparison for the converse. Let $Y$ be a quasi-separated algebraic space locally of finite type over a field $k$, and $L/k$ any extension. Choose a surjective etale scheme atlas $U\\to Y$. Its pullback $U_L\\to Y_L$ is again such an atlas, and $Y_L$ is quasi-separated by Step 1. By [lem-sfb-quasiseparated-space-atlas-dimension], $\\dim|Y|=\\dim U$ and $\\dim|Y_L|=\\dim U_L$. The chart $U\\to\\operatorname{Spec}k$ is locally of finite type. Apply [lem-sc-fibre-dimension-after-base-change] to $U\\to\\operatorname{Spec}k$ and $\\operatorname{Spec}L\\to\\operatorname{Spec}k$. Both bases have one point with residue fields $k$ and $L$, so its two scheme fibres are exactly $U$ and $U_L$. It gives $\\dim_{u'}U_L=\\dim_uU$ for every $u'\\mapsto u$. These are the local topological dimensions used in the supremum formula: both [def-kun-dimension] and [def-kun-topological-dimension-at-point] define them as the minimum dimensions of open neighbourhoods, not dimensions of local rings. The projection $U_L\\to U$ is surjective by [lem-pc-field-extension-surjective] and [lem-weil-pbc-surjective-base-change]. Thus the two sets of attained local dimensions coincide. Taking their suprema by [lem-weil-pbc-dimension-supremum-local-dimensions] gives $\\dim U_L=\\dim U$, hence $\\dim|Y_L|=\\dim|Y|$. For empty atlases both suprema are $-\\infty$.",
+   "uses": [
+    "def-trf-algebraic-space",
+    "lem-trf-space-fibre-products-etale-covers",
+    "lem-sfb-quasiseparated-space-atlas-dimension",
+    "lem-sc-fibre-dimension-after-base-change",
+    "lem-pc-field-extension-surjective",
+    "lem-weil-pbc-surjective-base-change",
+    "lem-weil-pbc-dimension-supremum-local-dimensions",
+    "def-kun-dimension",
+    "def-kun-topological-dimension-at-point"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-morphisms.tex",
+    "place": "Tag 04NS (lemma-dimension-fibre-after-base-change), chart reduction in the proof of (1); scheme comparison Tag 02FY (morphisms-lemma-dimension-fibre-after-base-change); decent-spaces.tex Tag 0A4J"
+   }
+  },
+  {
+   "text": "Assume all the $P_d(f_i)$ and fix $\\bar t:\\operatorname{Spec}\\Omega\\to T$, with $\\Omega$ algebraically closed and image $t$. Joint surjectivity gives $i$ and $t_i\\in T_i$ over $t$. The residue-field maps make both $\\Omega$ and $\\kappa(t_i)$ extensions of $\\kappa(t)$ [def-weil-residue-field]. By [lem-weil-common-extension-fields] embed them over $\\kappa(t)$ in a common field $M$; by [def-weil-algebraic-closure] enlarge $M$ to an algebraically closed field $L$. The induced $\\operatorname{Spec}L\\to T_i$ and $\\operatorname{Spec}L\\to\\operatorname{Spec}\\Omega\\to T$ have equal composites to $T$, since both factor through $\\operatorname{Spec}\\kappa(t)$ with the same field map. Fibre-product associativity therefore identifies $X_{\\bar t}\\times_\\Omega L$ with the geometric fibre $(X\\times_TT_i)\\times_{T_i}\\operatorname{Spec}L$. Its dimension is at most $d$ by $P_d(f_i)$. Apply Step 3 to the quasi-separated locally finite type $\\Omega$-space $X_{\\bar t}$ to conclude $\\dim|X_{\\bar t}|\\leq d$. Since $\\bar t$ was arbitrary, $P_d(f)$ follows. If the covering family is empty, joint surjectivity forces $T$ empty and there are no geometric points to check.",
+   "uses": [
+    "def-weil-residue-field",
+    "lem-weil-common-extension-fields",
+    "def-weil-algebraic-closure",
+    "lem-trf-space-fibre-products-etale-covers"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/quot.tex",
+    "place": "Tag 0D52 (lemma-curves-stack), covering detection, with fields.tex Tag 0H7K (lemma-common-extension-field); the proof works for any jointly surjective scheme family"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-quasi-compact-base-change",
+  "lem-trf-space-fibre-products-etale-covers",
+  "lem-weil-pbc-lft-base-change",
+  "def-kun-topological-krull-dimension",
+  "def-trf-algebraic-space",
+  "lem-sfb-quasiseparated-space-atlas-dimension",
+  "lem-sc-fibre-dimension-after-base-change",
+  "lem-pc-field-extension-surjective",
+  "lem-weil-pbc-surjective-base-change",
+  "lem-weil-pbc-dimension-supremum-local-dimensions",
+  "def-kun-dimension",
+  "def-kun-topological-dimension-at-point",
+  "def-weil-residue-field",
+  "lem-weil-common-extension-fields",
+  "def-weil-algebraic-closure"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/spaces-morphisms.tex",
+  "place": "Tag 04NS (lemma-dimension-fibre-after-base-change), proof of (1), and quot.tex Tag 0D52 (lemma-curves-stack); field amalgamation spells out covering detection"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Relative dimension of locally finite type algebraic space morphisms is invariant under arbitrary base change",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.locallyOfFiniteType_isStableUnderBaseChange\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FiniteType\", \"type\": \"CategoryTheory.MorphismProperty.IsStableUnderBaseChange @AlgebraicGeometry.LocallyOfFiniteType\", \"doc\": \"The property of a morphism of schemes being locally of finite type is stable under base change. That is, if a morphism $ f: X \\to Y $ is locally of finite type, then any base change (pullback) of $ f $\"}\n  {\"name\": \"AlgebraicGeometry.IsFinite.instIsStableUnderBaseChangeScheme\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Finite\", \"type\": \"CategoryTheory.MorphismProperty.IsStableUnderBaseChange @AlgebraicGeometry.IsFinite\", \"doc\": \"The property of being a finite morphism of schemes is stable under base change. That is, if $ f : X \\to Y $ is a finite morphism of schemes and $ Y' \\to Y $ is any morphism of schemes, then the base cha\"}\n  {\"name\": \"AlgebraicGeometry.instIsStableUnderBaseChangeSchemeLocallyQuasiFinite\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiFinite\", \"type\": \"CategoryTheory.MorphismProperty.IsStableUnderBaseChange @AlgebraicGeometry.LocallyQuasiFinite\", \"doc\": \"The property of being a locally quasi-finite morphism of schemes is stable under base change. That is, if a morphism $ f: X \\\\to Y $ is locally quasi-finite, then any base change (pullback) of $ f $ is\"}\n  {\"name\": \"AlgebraicGeometry.locallyOfFinitePresentation_isStableUnderBaseChange\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation\", \"type\": \"CategoryTheory.MorphismProperty.IsStableUnderBaseChange @AlgebraicGeometry.LocallyOfFinitePresentation\", \"doc\": \"The property of a morphism of schemes being locally of finite presentation is stable under base change. That is, if $ f: X \\to Y $ is a morphism of schemes that is locally of finite presentation, then \"}\n  {\"name\": \"AlgebraicGeometry.isSmoothOfRelativeDimension_isStableUnderBaseChange\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"∀ (n : ℕ), CategoryTheory.MorphismProperty.IsStableUnderBaseChange (@AlgebraicGeometry.IsSmoothOfRelativeDimension n)\", \"doc\": \"For any morphism $ f: X \\\\to Y $ of schemes, if $ f $ is smooth of relative dimension $ n $, then any base change (pullback) of $ f $ is also smooth of relative dimension $ n $.\"}\n  {\"name\": \"AlgebraicGeometry.IsPreimmersion.instIsStableUnderBaseChangeScheme\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Preimmersion\", \"type\": \"CategoryTheory.MorphismProperty.IsStableUnderBaseChange @AlgebraicGeometry.IsPreimmersion\", \"doc\": \"The property of being a preimmersion of schemes is stable under base change; that is, any base change (pullback) of a preimmersion is also a preimmersion.\"}\n  {\"name\": \"AlgebraicGeometry.HasRingHomProperty.isStableUnderBaseChange\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/RingHomProperties\", \"type\": \"∀ {P : CategoryTheory.MorphismProperty AlgebraicGeometry.Scheme}\\n  {Q : {R S : Type u} → [inst : CommRing R] → [inst_1 : CommRing S] → (R →+* S) → Prop}\\n  [AlgebraicGeometry.HasRingHomProperty P Q],\\n  (RingHom.IsStableUnderBaseChange fun {R S} [CommRing R] [CommRing S] => Q) → P.IsStableUnderBaseCha\", \"doc\": \"If a ring homomorphism property $ Q $ is stable under base change, then the corresponding scheme morphism property $ P $, defined via ring homomorphisms between commutative rings, is also stable under\"}\n  {\"name\": \"AlgebraicGeometry.FormallyUnramified.instIsStableUnderBaseChangeScheme\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FormallyUnramified\", \"type\": \"CategoryTheory.MorphismProperty.IsStableUnderBaseChange @AlgebraicGeometry.FormallyUnramified\", \"doc\": \"The property of being formally unramified is stable under base change. That is, if $ f: X \\to Y $ is a formally unramified morphism of schemes, then any base change (pullback) of $ f $ also satisfies t\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern schemes, Zariski gluing, abstract stack criteria, or smooth relative dimension; none supplies the stated theorem for algebraic spaces"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Bounds on geometric fibre dimensions of algebraic spaces descend along surjective covers",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.IsJointlySurjectivePreserving\", \"module\": \"Mathlib/AlgebraicGeometry/Sites/MorphismProperty\", \"type\": \"CategoryTheory.MorphismProperty AlgebraicGeometry.Scheme → Prop\", \"doc\": \"A predicate on morphism properties in the category of schemes, asserting that the property is preserved under jointly surjective families of morphisms.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.isJointlySurjectivePreserving\", \"module\": \"Mathlib/AlgebraicGeometry/PullbackCarrier\", \"type\": \"∀ (P : CategoryTheory.MorphismProperty AlgebraicGeometry.Scheme),\\n  AlgebraicGeometry.Scheme.IsJointlySurjectivePreserving P\", \"doc\": \"In the category of schemes, a morphism property is preserved under jointly surjective families of morphisms. This means that if a property holds for each morphism in a jointly surjective family, then \"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.cover_I₀\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/UnderlyingMap\", \"type\": \"∀ {P : CategoryTheory.MorphismProperty AlgebraicGeometry.Scheme} {X S : AlgebraicGeometry.Scheme} (f : X ⟶ S) (hf : P f)\\n  [inst : AlgebraicGeometry.Surjective f], (AlgebraicGeometry.Scheme.Hom.cover f hf).I₀ = PUnit.{v + 1}\", \"doc\": \"Given a surjective morphism $ f: X \\to S $ of schemes that satisfies a morphism property $ P $, the zeroth component $ I_0 $ of the covering sieve $\\\\{f\\\\}$ generated by $ f $ in the precoverage combinin\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.IsJointlySurjectivePreserving.exists_preimage_snd_triplet_of_prop\", \"module\": \"Mathlib/AlgebraicGeometry/Sites/MorphismProperty\", \"type\": \"∀ {P : CategoryTheory.MorphismProperty AlgebraicGeometry.Scheme}\\n  [AlgebraicGeometry.Scheme.IsJointlySurjectivePreserving P] {X Y S : AlgebraicGeometry.Scheme} {f : X ⟶ S} {g : Y ⟶ S}\\n  [inst : CategoryTheory.Limits.HasPullback f g],\\n  P f →\\n    ∀ (x : ↥X) (y : ↥Y),\\n      (CategoryTheory.ConcreteCa\", \"doc\": \"Given a jointly surjective preserving morphism property $P$, schemes $X,Y,S$ with morphisms $f:X\\\\to S$ and $g:Y\\\\to S$ satisfying $P(f)$, and points $x\\\\in X$, $y\\\\in Y$ such that $f(x)=g(y)$, there exis\"}\n  {\"name\": \"AlgebraicGeometry.instSurjectiveDescI₀SchemeF\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/UnderlyingMap\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} {P : CategoryTheory.MorphismProperty AlgebraicGeometry.Scheme}\\n  (𝒰 : AlgebraicGeometry.Scheme.Cover (AlgebraicGeometry.Scheme.precoverage P) X),\\n  AlgebraicGeometry.Surjective (CategoryTheory.Limits.Sigma.desc fun i => 𝒰.f i)\", \"doc\": \"For any scheme $ X $ and a cover $ \\\\mathcal{U} $ of $ X $ defined by a precoverage $ P $, the morphism obtained by taking the coproduct (disjoint union) of the morphisms $ \\\\mathcal{U}.f(i) $ in the co\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.JointlySurjective.exists_eq\", \"module\": \"Mathlib/AlgebraicGeometry/Cover/MorphismProperty\", \"type\": \"∀ {K : CategoryTheory.Precoverage AlgebraicGeometry.Scheme} [self : AlgebraicGeometry.Scheme.JointlySurjective K]\\n  {X : AlgebraicGeometry.Scheme},\\n  ∀ S ∈ K.coverings X, ∀ (x : ↥X), ∃ Y g, S g ∧ x ∈ Set.range ⇑(CategoryTheory.ConcreteCategory.hom g.base)\", \"doc\": \"For any scheme $X$ and any covering sieve $S$ assigned by a jointly surjective precoverage $K$ on $X$, every point $x$ in $X$ lies in the image of the underlying continuous map of some morphism $g$ in\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.IsJointlySurjectivePreserving.exists_preimage_fst_triplet_of_prop\", \"module\": \"Mathlib/AlgebraicGeometry/Sites/MorphismProperty\", \"type\": \"∀ {P : CategoryTheory.MorphismProperty AlgebraicGeometry.Scheme}\\n  [self : AlgebraicGeometry.Scheme.IsJointlySurjectivePreserving P] {X Y S : AlgebraicGeometry.Scheme} {f : X ⟶ S}\\n  {g : Y ⟶ S} [inst : CategoryTheory.Limits.HasPullback f g],\\n  P g →\\n    ∀ (x : ↥X) (y : ↥Y),\\n      (CategoryTheory.Con\", \"doc\": \"Given a morphism property $ P $ preserved under jointly surjective families in the category of schemes, if $ P $ holds for a morphism $ g : Y \\\\to S $, then for any points $ x \\\\in X $ and $ y \\\\in Y $ w\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.cover_X\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/UnderlyingMap\", \"type\": \"∀ {P : CategoryTheory.MorphismProperty AlgebraicGeometry.Scheme} {X S : AlgebraicGeometry.Scheme} (f : X ⟶ S) (hf : P f)\\n  [inst : AlgebraicGeometry.Surjective f] (x : PUnit.{v + 1}), (AlgebraicGeometry.Scheme.Hom.cover f hf).X x = X\", \"doc\": \"For a surjective morphism $ f: X \\to S $ of schemes satisfying a morphism property $ P $, the $ X $-component of the covering sieve $\\\\{f\\\\}$ in the precoverage defined by jointly surjective families and\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern schemes, Zariski gluing, abstract stack criteria, or smooth relative dimension; none supplies the stated theorem for algebraic spaces"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"relativeDimension\"",
+   "results": "[loogle] OK 12 hit(s)\n  {\"name\": \"AlgebraicGeometry.smoothOfRelativeDimension_isStableUnderBaseChange\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Smooth\", \"type\": \" (n : ℕ) : CategoryTheory.MorphismProperty.IsStableUnderBaseChange (@AlgebraicGeometry.SmoothOfRelativeDimension n)\", \"doc\": \"Smooth of relative dimension `n` is stable under base change.\"}\n  {\"name\": \"AlgebraicGeometry.instIsMultiplicativeSchemeSmoothOfRelativeDimensionOfNatNat\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Smooth\", \"type\": \" : CategoryTheory.MorphismProperty.IsMultiplicative (@AlgebraicGeometry.SmoothOfRelativeDimension 0)\", \"doc\": \"Smooth of relative dimension `0` is multiplicative.\"}\n  {\"name\": \"AlgebraicGeometry.SmoothOfRelativeDimension\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Smooth\", \"type\": \" (n : ℕ) {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) : Prop\", \"doc\": \"A morphism of schemes `f : X ⟶ Y` is smooth of relative dimension `n` if for each `x : X` there\\nexists an affine open neighborhood `V` of `x` and an affine open neighborhood `U` of\\n`f.base x` with `V \"}\n  {\"name\": \"AlgebraicGeometry.SmoothOfRelativeDimension.smooth\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Smooth\", \"type\": \" (n : ℕ) {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.SmoothOfRelativeDimension n f] : AlgebraicGeometry.Smooth f\", \"doc\": \"If `f` is smooth of any relative dimension, it is smooth.\"}\n  {\"name\": \"AlgebraicGeometry.instSmoothOfRelativeDimensionOfNatNatOfIsOpenImmersion\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Smooth\", \"type\": \" {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.IsOpenImmersion f] : AlgebraicGeometry.SmoothOfRelativeDimension 0 f\", \"doc\": \"Open immersions are smooth of relative dimension `0`.\"}\n  {\"name\": \"AlgebraicGeometry.instHasRingHomPropertySmoothOfRelativeDimensionLocallyIsStandardSmoothOfRelativeDimension\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Smooth\", \"type\": \" (n : ℕ) : AlgebraicGeometry.HasRingHomProperty (@AlgebraicGeometry.SmoothOfRelativeDimension n) fun {R S} [CommRing R] [CommRing S] => RingHom.Locally fun {R S} [CommRing R] [CommRing S] => RingHom.IsStandardSmoothOfRelativeDimension n\", \"doc\": \"The property of scheme morphisms `SmoothOfRelativeDimension n` is associated with the ring\\nhomomorphism property `Locally (IsStandardSmoothOfRelativeDimension n)`.\"}\n  {\"name\": \"AlgebraicGeometry.smoothOfRelativeDimension_comp\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Smooth\", \"type\": \" (n m : ℕ) {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) {Z : AlgebraicGeometry.Scheme} (g : Y ⟶ Z) [hf : AlgebraicGeometry.SmoothOfRelativeDimension n f] [hg : AlgebraicGeometry.SmoothOfRelativeDimension m g] : AlgebraicGeometry.SmoothOfRelativeDimension (n + m) (CategoryTheory.CategoryStruct.comp f\", \"doc\": \"If `f` is smooth of relative dimension `n` and `g` is smooth of relative dimension\\n`m`, then `f ≫ g` is smooth of relative dimension `n + m`.\"}\n  {\"name\": \"AlgebraicGeometry.instSmoothOfRelativeDimensionOfNatNatCompScheme\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Smooth\", \"type\": \" {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) {Z : AlgebraicGeometry.Scheme} (g : Y ⟶ Z) [AlgebraicGeometry.SmoothOfRelativeDimension 0 f] [AlgebraicGeometry.SmoothOfRelativeDimension 0 g] : AlgebraicGeometry.SmoothOfRelativeDimension 0 (CategoryTheory.CategoryStruct.comp f g)\", \"doc\": \"\"}\n  {\"name\": \"AlgebraicGeometry.instSmoothOfRelativeDimensionFstScheme\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Smooth\", \"type\": \" (n : ℕ) {X Y S : AlgebraicGeometry.Scheme} (f : X ⟶ S) (g : Y ⟶ S) [AlgebraicGeometry.SmoothOfRelativeDimension n g] : AlgebraicGeometry.SmoothOfRelativeDimension n (CategoryTheory.Limits.pullback.fst f g)\", \"doc\": \"\"}\n  {\"name\": \"AlgebraicGeometry.instSmoothOfRelativeDimensionSndScheme\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Smooth\", \"type\": \" (n : ℕ) {X Y S : AlgebraicGeometry.Scheme} (f : X ⟶ S) (g : Y ⟶ S) [AlgebraicGeometry.SmoothOfRelativeDimension n f] : AlgebraicGeometry.SmoothOfRelativeDimension n (CategoryTheory.Limits.pullback.snd f g)\", \"doc\": \"\"}\n  {\"name\": \"AlgebraicGeometry.SmoothOfRelativeDimension.exists_isStandardSmoothOfRelativeDimension\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Smooth\", \"type\": \" {n : ℕ} {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y} [self : AlgebraicGeometry.SmoothOfRelativeDimension n f] (x : ↥X) : ∃ U, ∃ (_ : AlgebraicGeometry.IsAffineOpen U), ∃ V, ∃ (_ : AlgebraicGeometry.IsAffineOpen V) (_ : x ∈ V) (e : V ≤ (TopologicalSpace.Opens.map f.base).obj U), RingHom.IsStandardSm\", \"doc\": \"\"}\n  {\"name\": \"AlgebraicGeometry.SmoothOfRelativeDimension.mk\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Smooth\", \"type\": \" {n : ℕ} {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y} (exists_isStandardSmoothOfRelativeDimension : ∀ (x : ↥X), ∃ U, ∃ (_ : AlgebraicGeometry.IsAffineOpen U), ∃ V, ∃ (_ : AlgebraicGeometry.IsAffineOpen V) (_ : x ∈ V) (e : V ≤ (TopologicalSpace.Opens.map f.base).obj U), RingHom.IsStandardSmoothOfRela\", \"doc\": \"\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern schemes, Zariski gluing, abstract stack criteria, or smooth relative dimension; none supplies the stated theorem for algebraic spaces"
+  },
+  {
+   "tool": "grep",
+   "query": "AlgebraicSpace|relativeDimension|fiber.*[dD]im|[dD]im.*[fF]iber",
+   "results": "[grep] OK 11 hit(s)\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth.lean\", \"line\": \"26\", \"text\": \"- `AlgebraicGeometry.SmoothOfRelativeDimension`: A morphism of schemes `f : X ⟶ Y` is smooth of\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth.lean\", \"line\": \"135\", \"text\": \"class SmoothOfRelativeDimension : Prop where\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth.lean\", \"line\": \"136\", \"text\": \"  exists_isStandardSmoothOfRelativeDimension : ∀ (x : X), ∃ (U : Y.Opens) (_ : IsAffineOpen U)\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth.lean\", \"line\": \"138\", \"text\": \"    IsStandardSmoothOfRelativeDimension n (f.appLE U V e).hom\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth.lean\", \"line\": \"140\", \"text\": \"@[deprecated (since := \\\"2026-02-09\\\")] alias IsSmoothOfRelativeDimension := SmoothOfRelativeDimension\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale.lean\", \"line\": \"23\", \"text\": \"- `AlgebraicGeometry.Etale.iff_smoothOfRelativeDimension_zero`: Etale is equivalent to\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale.lean\", \"line\": \"99\", \"text\": \"lemma eq_smoothOfRelativeDimension_zero : @Etale = @SmoothOfRelativeDimension 0 := by\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale.lean\", \"line\": \"102\", \"text\": \"  have : @RingHom.Etale = @RingHom.IsStandardSmoothOfRelativeDimension 0 := by\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale.lean\", \"line\": \"103\", \"text\": \"    ext; apply RingHom.etale_iff_isStandardSmoothOfRelativeDimension_zero\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale.lean\", \"line\": \"108\", \"text\": \"lemma iff_smoothOfRelativeDimension_zero : Etale f ↔ SmoothOfRelativeDimension 0 f := by\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiFinite.lean\", \"line\": \"271\", \"text\": \"  have : IsClosedImmersion (f.fiberToSpecResidueField x) :=\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern schemes, Zariski gluing, abstract stack criteria, or smooth relative dimension; none supplies the stated theorem for algebraic spaces"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Geometric fibre dimension bounds for algebraic spaces are preserved and detected by base change",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.isSmoothOfRelativeDimension_isStableUnderBaseChange\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Smooth\", \"type\": \": MorphismProperty.IsStableUnderBaseChange (@IsSmoothOfRelativeDimension n)\", \"doc\": \"For any morphism $ f: X \\\\to Y $ of schemes, if $ f $ is smooth of relative dimension $ n $, then any base change (pullback) of $ f $ is also smooth of relative dimension $ n $.\"}\n  {\"name\": \"AlgebraicGeometry.isSmooth_isStableUnderBaseChange\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Smooth\", \"type\": \": MorphismProperty.IsStableUnderBaseChange @IsSmooth\", \"doc\": \"The property of being a smooth morphism is stable under base change. That is, if $ f: X \\\\to Y $ is a smooth morphism of schemes, then any base change of $ f $ is also smooth.\"}\n  {\"name\": \"AlgebraicGeometry.HasAffineProperty.affineAnd_isStableUnderBaseChange\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.AffineAnd\", \"type\": \"{P : MorphismProperty Scheme.{u}} (_ : HasAffineProperty P (affineAnd Q)) (hQi : RingHom.RespectsIso Q)\\n  (hQb : RingHom.IsStableUnderBaseChange Q) : P.IsStableUnderBaseChange\", \"doc\": \"If $ Q $ is a ring homomorphism property that is invariant under ring isomorphisms and stable under base change, then the property of a morphism of schemes with affine target being affine and satisfyi\"}\n  {\"name\": \"AlgebraicGeometry.universallyClosed_isStableUnderBaseChange\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.UniversallyClosed\", \"type\": \": IsStableUnderBaseChange @UniversallyClosed\", \"doc\": \"The property of being a universally closed morphism of schemes is stable under base change. That is, if $ f: X \\to Y $ is a universally closed morphism and $ Y' \\to Y $ is any morphism of schemes, then \"}\n  {\"name\": \"Algebra.QuasiFinite.baseChange\", \"module\": \"Mathlib.RingTheory.QuasiFinite.Basic\", \"type\": \"[QuasiFinite R S] {A : Type*} [CommRing A] [Algebra R A] : QuasiFinite A (A ⊗[R] S)\", \"doc\": \"Let $R, S, A$ be commutative rings, and let $S$ and $A$ be $R$-algebras. If $S$ is a quasi-finite $R$-algebra, then the tensor product $A \\\\otimes_R S$ is a quasi-finite $A$-algebra.\"}\n  {\"name\": \"AlgebraicGeometry.AffineTargetMorphismProperty.IsStableUnderBaseChange\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Basic\", \"type\": \"(P : AffineTargetMorphismProperty) : Prop\", \"doc\": \"A morphism property $ P $ with affine target is stable under base change if, whenever $ g: Y \\to S $ has property $ P $ and there is a pullback square involving $ g $, then the induced morphism $ g': Z\"}\n  {\"name\": \"AlgebraicGeometry.HasAffineProperty.isStableUnderBaseChange\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Basic\", \"type\": \"(hP' : Q.IsStableUnderBaseChange) : P.IsStableUnderBaseChange\", \"doc\": \"If a morphism property $ Q $ with affine target is stable under base change, then any property $ P $ implied by $ Q $ is also stable under base change. Specifically, whenever $ g: Y \\\\to S $ satisfies \"}\n  {\"name\": \"AlgebraicGeometry.IsFinite.instIsStableUnderBaseChangeScheme\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Finite\", \"type\": \": IsStableUnderBaseChange @IsFinite\", \"doc\": \"The property of being a finite morphism of schemes is stable under base change. That is, if $ f : X \\to Y $ is a finite morphism of schemes and $ Y' \\to Y $ is any morphism of schemes, then the base cha\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern schemes, Zariski gluing, abstract stack criteria, or smooth relative dimension; none supplies the stated theorem for algebraic spaces"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-curve-descent-isom-spaces",
+  "date": "2026-10-22",
+  "group": "Q65"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Algebraicity and smoothness of the stack of all nodal curves. Supporting input: Tags 0D52 (lemma-curves-stack) and 0D53 (lemma-curves-diagonal), with situation-curves. Supporting input: Relative-dimension base-change and covering detection in quot-lemma-curves-fibred-in-groupoids and quot-lemma-curves-stack.",
+   "via": [
+    "lem-sfb-curve-descent-isom-spaces",
+    "lem-sfb-nodal-curve-stack-smooth",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-space-relative-dimension-base-change",
+  "worker": "stage1",
+  "summary": "Checked both implications and the topological/chart dimension distinction. Forward implication is fibre-product associativity; covering detection is reduced through common algebraically closed overfields to scheme local-dimension invariance and surjectivity. One new statement-only atlas comparison, all other facts existing. Corrected the unbraced TeX prime notation only. Repair of the promotion refusal: compared the retained 72f69bf9491 receipt with the current live unsplit node, re-read every proof citation against its current full statement, and verified that all 16 saved citation entries remain identical. The delivery is rebuilt on current origin/sheaf-dag; prior side-project completion is not used as evidence of live completion. On the renewed repair, re-read the current DAG and both local-dimension definitions; made the field-spectrum specialization and agreement of the two local topological dimension conventions explicit in Step 3, with direct citations. All 18 citation entries now quote the current statements verbatim. Initial renewed dry run fd6a547d497 passed before this clarification.",
+  "blueprint": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Algebraicity and smoothness of the stack of all nodal curves. Supporting input: Tags 0D52 (lemma-curves-stack) and 0D53 (lemma-curves-diagonal), with situation-curves. Supporting input: Relative-dimension base-change and covering detection in quot-lemma-curves-fibred-in-groupoids and quot-lemma-curves-stack.",
+  "tool_uses": [
+   {
+    "node": "lem-trf-space-fibre-products-etale-covers",
+    "why": "Algebraic-space fibre products and etale atlas pullbacks are generic geometry tools; this unit contains no replacement."
+   },
+   {
+    "node": "lem-sc-fibre-dimension-after-base-change",
+    "why": "Scheme local fibre dimension invariance is the chart input explicitly used in Tag 04NS, not an alternate six-functor route."
+   },
+   {
+    "node": "lem-weil-pbc-dimension-supremum-local-dimensions",
+    "why": "General topological supremum identity converts equality of chart local dimensions to global dimension."
+   },
+   {
+    "node": "lem-weil-common-extension-fields",
+    "why": "Common field embeddings compare two geometric fibres over the same point; no unit-specific replacement."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-trf-space-fibre-products-etale-covers",
+  "lem-sc-fibre-dimension-after-base-change",
+  "lem-weil-pbc-dimension-supremum-local-dimensions",
+  "lem-weil-common-extension-fields"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q83-eb55f9a2f",
+  "group": "Q83",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q83-eb55f9a2f (reviewer sub-agent of L); spot-checked: This is the third delivery of the item, after L's promotion refusal. Against the PASSed head 84f36b58bc18 the new node is identical. The only change in the item is that Step 3 now names the one-point bases Spec k and Spec L, so the two scheme fibres are U and U_L. It also adds def-kun-dimension and def-kun-topological-dimension-at-point to the uses and proof_deps, both of which define dim_x as a minimum over open neighbourhoods. So this is not an A6 byte-identical re-push. No repair note exists, so the re-split rule does not apply. I read everything in full. Item: the statement is the base text with only T\\prime -> T', and matches Stacks 04NS(1)/06LR and quot 0D52. Step 1: the diagonal of X_Z -> Z is a pullback of the quasi-compact diagonal (01K5), and the atlas and lft property pull back (02X2, 01T4). Correct. Step 2: fibre-product associativity proves the base-change clause. Correct. Step 3: the new node is used on U and U_L. Morphisms 02FY(1), read at morphisms.tex line 5425 and needing only lft, applied over the one-point bases gives dim_{u'} U_L = dim_u U. U_L -> U is surjective, so the suprema (0B7I) are equal. Correct. Step 4: a common algebraically closed field L over kappa(t) (0H7K) makes (X_tbar)_L a geometric fibre of f_i, and Step 3 brings the bound back to X_tbar. The empty family forces T empty. Correct. proof_deps equals the union of uses, every step is under 2000 characters, and there is no SGA. New node lem-sfb-quasiseparated-space-atlas-dimension: true by decent-spaces 0A4J (line 2728, read in full), 04N5 (line 1205), 03JX (quasi-separated implies decent) and 0B7I. The 04N5 infinite-product counterexample is not quasi-separated, so the hypothesis is the needed one. I tested A^1 with a two-copy atlas, a finite separable point, the empty space and an infinite-dimensional scheme. It does not restate the parent, and searching for 0A4J, 03JX, 04N6 and atlas/dimension found no duplicate. Batch 5: def-trf-algebraic-space (Stacks 025Y, the definition of algebraic space) and def-a1-space-point-topology (03BU/03BX, the point topology, which reaches the former only through that definition) are general definitions. Neither is part of the trace formula or Poincare duality or their proofs, so both are accepted. lem-trf-space-fibre-products-etale-covers was already cited by the base item and is generic. The four generic tool_uses are accepted. Maintainer note: the base-era lem-sfb-space-fibre-dimension-base-change overlaps the item's forward clause, which is not this delivery's fault. No changes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SpaceRelativeDimensionBaseChange",
+  "declaration": "AlgebraicGeometry.AlgebraicSpace.geometricFibreDimensionLE_baseChange_and_descent",
+  "declarations": [
+   "AlgebraicGeometry.AlgebraicSpace.GeometricFibreDimensionLE",
+   "AlgebraicGeometry.AlgebraicSpace.geometricFibreDimensionLE_baseChange_and_descent"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/SpaceRelativeDimensionBaseChange.lean",
+  "statement": "theorem geometricFibreDimensionLE_baseChange_and_descent {S : Scheme.{u}} (X : AlgebraicSpace S) (T : Over S) (f : X.obj.obj ⟶ yoneda.obj T) (hft : MapToSchemeIsLocally (@LocallyOfFiniteType) X T f) (hqs : MapIsQuasiCompact (Limits.pullback.diagonal f)) (d : ℕ) : (GeometricFibreDimensionLE T f d → ∀ (T' : Over S) (g : T' ⟶ T), GeometricFibreDimensionLE T' (Limits.pullback.snd f (yoneda.map g)) d) ∧ (∀ (I : Type w) (Tᵢ : I → Over S) (g : ∀ i : I, Tᵢ i ⟶ T), (∀ t : T.left, ∃ (i : I) (tᵢ : (Tᵢ i).left), (g i).left tᵢ = t) → (∀ i : I, GeometricFibreDimensionLE (Tᵢ i) (Limits.pullback.snd f (yoneda.map (g i))) d) → GeometricFibreDimensionLE T f d)",
+  "branch": "sheaf-dag",
+  "by": "N9",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "The helper is exactly the P_d predicate explicitly introduced in this node, using actual presheaf fibre products and the existing point-class topology. The theorem is the conjunction of arbitrary scheme base-change preservation and detection by arbitrary jointly surjective scheme families. It uses the published chartwise finite-type and diagonal quasi-compactness predicates."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-97b348908",
+  "group": "N9",
+  "result": "pass",
+  "note": "Every hypothesis and conclusion clause matches the node and Stacks 04NS(1)/06LR/0D52: lft on étale charts (MapToSchemeIsLocally), quasi-compact relative diagonal (MapIsQuasiCompact), d : ℕ, base-change implication over arbitrary T' ⟶ T, detection by any jointly surjective family with index universe w and no nonemptiness. GeometricFibreDimensionLE is the node's own P_d, quantified over algebraically closed fields in Type u, on the actual presheaf fibre product with the 03BX point topology; it is not hollow and matches the IsProperCurveFamily formula; no duplicate found. Edge cases (empty X/T/I, d=0, infinite dimension) correct; no universe equated. Statement verbatim; sorry only; source/blueprint docstrings with four proof steps; imports exist; the two added stmt_deps are landed defs and create no cycle. Second reading is the standard post-10-17 placeholder. Advisories: Point owner def-a1-algebraic-space-point-classes reached only through def-a1-space-point-topology; older forward-only node overlaps (already flagged at stage 1). No compile run, file unchanged."
+ }
+}

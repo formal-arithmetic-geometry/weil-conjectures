@@ -1,0 +1,271 @@
+{
+ "id": "lem-sfb-generic-point-fp-closed-interior",
+ "kind": "statement",
+ "title": "A generic point in a finitely presented closed subscheme is interior",
+ "statement": "Let $X$ be a scheme [def-pc-scheme], let $i:Z\\hookrightarrow X$ be a closed immersion [def-weil-closed-immersion] of finite presentation [def-weil-pbc-scheme-conventions], and let $\\xi\\in X$ be a generic point [def-sc-generic-point] of an irreducible component [def-weil-irreducible-components] of $X$. If $\\xi\\in |i|(|Z|)$, there exists an open subscheme $N\\subseteq X$ [def-weil-open-immersion] with $\\xi\\in N$ and $|N|\\subseteq |i|(|Z|)$. This is an assertion about underlying sets; it does not assert that $N\\to X$ factors scheme-theoretically through $Z$. No reducedness, Noetherian or quasi-separatedness hypothesis on $X$ is imposed.",
+ "source": {
+  "document": "literature/stacks-project/properties.tex",
+  "place": "Tag 0AAW (lemma-generic-point-in-constructible), part (1), applied to the image of a finitely presented closed immersion, as in the proof of More on Groupoids Tag 0ABB."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-closed-immersion",
+  "def-weil-pbc-scheme-conventions",
+  "def-sc-generic-point",
+  "def-weil-irreducible-components",
+  "def-weil-open-immersion"
+ ],
+ "proof": [
+  {
+   "text": "Choose an affine open $U\\subseteq X$ containing $\\xi$, and put $W=i^{-1}(U)$. By the affine description of a closed immersion, $W$ is affine. The original $i$ is locally of finite presentation, so the affine-opens finite-presentation lemma applied to $W\\subseteq Z$ and $U\\subseteq X$ gives a finitely presented ring map $\\Gamma(U,\\mathcal O_X)\\to\\Gamma(W,\\mathcal O_Z)$. Thus $j:W\\to U$ is locally of finite presentation by the definition (these two affine neighbourhoods work at every point of $W$). For every affine open $V\\subseteq U$, $j^{-1}(V)=i^{-1}(V)$ is affine by the same closed-immersion description, hence quasi-compact by the affine-scheme lemma. This proves that $j$ is quasi-compact. The affine-scheme lemma also makes $U$ quasi-compact and quasi-separated, and the qcqs-spectral lemma therefore makes $|U|$ spectral.",
+   "uses": [
+    "def-pc-scheme",
+    "def-weil-closed-immersion",
+    "def-weil-pbc-scheme-conventions",
+    "lem-weil-pbc-lfp-affine-opens-finite-presentation",
+    "def-sbc-locally-finite-presentation",
+    "lem-weil-pbc-affine-scheme-qcqs",
+    "lem-weil-pbc-qcqs-scheme-spectral"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/properties.tex",
+    "place": "Tag 0AAW (lemma-generic-point-in-constructible), affine reduction; Tag 01TQ (lemma-locally-finite-presentation-characterize), (1) implies (2); Tag 054J (lemma-chevalley), checking its hypotheses"
+   }
+  },
+  {
+   "text": "Apply Chevalley to $j:W\\to U$ and the whole source: $E=j(W)=|i|(|Z|)\\cap U$ is constructible in $U$. The constructible-subset definition says these subsets form a Boolean algebra, so $F=U\\setminus E$ is constructible too. The hypothesis gives $\\xi\\notin F$.",
+   "uses": [
+    "lem-weil-pbc-chevalley-constructible-image",
+    "def-weil-constructible-subset"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 054J (lemma-chevalley), whole-source clause, as used in Tag 0ABB; Tag 0AAW, passage to the complement"
+   }
+  },
+  {
+   "text": "No point $e\\in U$ other than $\\xi$ specializes to $\\xi$. Indeed, such a specialization also holds in $X$, and gives $C=\\overline{\\{\\xi\\}}^{X}\\subseteq\\overline{\\{e\\}}^{X}$. The closure of a singleton is irreducible: if two closed sets cover it, one contains the point and hence its whole closure. Maximality of the component $C$ forces equality of these two closures. Intersecting with $U$ gives equality of the singleton closures in $U$. Since $U$ is spectral, it is sober, and the uniqueness of the generic point of this irreducible closed subset gives $e=\\xi$.",
+   "uses": [
+    "def-sc-generic-point",
+    "def-weil-irreducible-components",
+    "def-weil-spectral-space"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/properties.tex",
+    "place": "Tag 0AAW, final sentence: no different point specializes to the component generic point"
+   }
+  },
+  {
+   "text": "If $\\xi\\in\\overline F^{U}$, apply the spectral proconstructible closure-specialization lemma with the singleton family whose sole member is the constructible subset $F$ of the spectral space $U$. It produces $e\\in F$ with $\\xi\\in\\overline{\\{e\\}}^{U}$. Step 3 forces $e=\\xi$, contradicting $\\xi\\notin F$. Hence $\\xi\\notin\\overline F^{U}$.",
+   "uses": [
+    "lem-weil-pbc-spectral-proconstructible-closure-specialization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/topology.tex",
+    "place": "Tag 0903 (lemma-constructible-stable-specialization-closed), part (1), exactly the use in the proof of Tag 0AAW"
+   }
+  },
+  {
+   "text": "Set $N=U\\setminus\\overline F^{U}$, endowed with its open subscheme structure. It contains $\\xi$. Since $F\\subseteq\\overline F^{U}$, its underlying set is contained in $U\\setminus F=E\\subseteq |i|(|Z|)$. This subset is open in $U$ and $U$ is open in $X$, so $N$ is an open subscheme of $X$ as required. Only underlying sets were used in this last inclusion.",
+   "uses": [
+    "def-pc-scheme",
+    "def-weil-open-immersion"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/properties.tex",
+    "place": "Tag 0AAW (lemma-generic-point-in-constructible), complement of the closure neighbourhood"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-scheme",
+  "def-weil-closed-immersion",
+  "def-weil-pbc-scheme-conventions",
+  "lem-weil-pbc-lfp-affine-opens-finite-presentation",
+  "def-sbc-locally-finite-presentation",
+  "lem-weil-pbc-affine-scheme-qcqs",
+  "lem-weil-pbc-qcqs-scheme-spectral",
+  "lem-weil-pbc-chevalley-constructible-image",
+  "def-weil-constructible-subset",
+  "def-sc-generic-point",
+  "def-weil-irreducible-components",
+  "def-weil-spectral-space",
+  "lem-weil-pbc-spectral-proconstructible-closure-specialization",
+  "def-weil-open-immersion"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/properties.tex",
+  "place": "Tag 0AAW (lemma-generic-point-in-constructible), proof of (2) and complementation, with Morphisms Tag 054J (lemma-chevalley) on the affine restriction as in More on Groupoids Tag 0ABB."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "generic.*(constructible|interior)|minimal.*prime.*(open|interior)|zeroLocus.*[Ff][Gg]|[Ff][Gg].*zeroLocus",
+   "results": "[grep] OK 3 hit(s)\n  {\"file\": \"Mathlib/RingTheory/Spectrum/Prime/Chevalley.lean\", \"line\": \"49\", \"text\": \"    exact isRetrocompact_zeroLocus_compl_of_fg hf'\"}\n  {\"file\": \"Mathlib/RingTheory/Spectrum/Prime/Topology.lean\", \"line\": \"1009\", \"text\": \"    IsCompact s ∧ IsOpen s ↔ ∃ I : Ideal R, I.FG ∧ (zeroLocus I)ᶜ = s := by\"}\n  {\"file\": \"Mathlib/RingTheory/Spectrum/Prime/Topology.lean\", \"line\": \"1136\", \"text\": \"lemma isRetrocompact_zeroLocus_compl_of_fg {I : Ideal R} (hI : I.FG) :\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: the returned declarations do not give this scheme-groupoid rank filtration or the asserted generic-point neighbourhood; basic finite-presentation, zero-locus and irreducible-component facts alone require further arguments"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A generic point of an irreducible component of a scheme lying in the image of a finitely presented closed immersion has an open neighbourhood contained in that image",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.genericPoint_eq_of_isOpenImmersion\", \"module\": \"Mathlib/AlgebraicGeometry/FunctionField\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.IsOpenImmersion f] [hX : IrreducibleSpace ↥X]\\n  [inst : IrreducibleSpace ↥Y], (CategoryTheory.ConcreteCategory.hom f.base) (genericPoint ↥X) = genericPoint ↥Y\", \"doc\": \"If $ f: X \\to Y $ is an open immersion between irreducible schemes $ X $ and $ Y $, then the image of the generic point of $ X $ under $ f $ coincides with the generic point of $ Y $. This follows from\"}\n  {\"name\": \"AlgebraicGeometry.isOpenMap_of_generalizingMap\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/UniversallyOpen\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.LocallyOfFinitePresentation f],\\n  GeneralizingMap ⇑(CategoryTheory.ConcreteCategory.hom f.base) →\\n    IsOpenMap ⇑(CategoryTheory.ConcreteCategory.hom f.base)\", \"doc\": \"If a morphism of schemes is locally of finite presentation and a generalizing map, then it is an open map.\"}\n  {\"name\": \"AlgebraicGeometry.instQuasiSoberCarrierCarrierCommRingCat\", \"module\": \"Mathlib/AlgebraicGeometry/Properties\", \"type\": \"∀ (X : AlgebraicGeometry.Scheme), QuasiSober ↥X\", \"doc\": \"The underlying topological space of a scheme is quasi-sober, meaning every irreducible closed subset is the closure of exactly one point.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.PartialMap.mem_domain_ofFromSpecStalk\", \"module\": \"Mathlib/AlgebraicGeometry/RationalMap\", \"type\": \"∀ {X Y S : AlgebraicGeometry.Scheme} (sX : X ⟶ S) (sY : Y ⟶ S) [inst : IrreducibleSpace ↥X]\\n  [inst_1 : AlgebraicGeometry.LocallyOfFiniteType sY] {x : ↥X} [inst_2 : X.IsGermInjectiveAt x]\\n  (φ : AlgebraicGeometry.Spec (X.presheaf.stalk x) ⟶ Y)\\n  (h : CategoryTheory.CategoryStruct.comp φ sY = Categor\", \"doc\": \"Given schemes $X,Y,S$ with morphisms $s_X:X\\\\to S$ and $s_Y:Y\\\\to S$ locally of finite type, a point $x\\\\in X$ where the germ map is injective, and a morphism $\\\\phi:\\\\operatorname{Spec}(\\\\mathcal{O}_{X,x})\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.coborderRange\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Immersion\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (f : X ⟶ Y) → [AlgebraicGeometry.IsImmersion f] → Y.Opens\", \"doc\": \"Given an immersion $ f : X \\to Y $ of schemes, this defines the open subset of $ Y $ obtained as the cobord of the image of $ f $, which is the complement of the set difference between the closure of $\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.range_fromSpecStalk\", \"module\": \"Mathlib/AlgebraicGeometry/Stalk\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} {x : ↥X},\\n  Set.range ⇑(CategoryTheory.ConcreteCategory.hom (X.fromSpecStalk x).base) = {y | y ⤳ x}\", \"doc\": \"For a scheme $X$ and a point $x \\\\in X$, the image of the morphism $\\\\operatorname{Spec}(\\\\mathcal{O}_{X,x}) \\\\to X$ is the set of all points $y \\\\in X$ that specialize to $x$, i.e., $\\\\{y \\\\in X \\\\mid y \\\\tex\"}\n  {\"name\": \"genericPoints.isGenericPoint_ofComponent\", \"module\": \"Mathlib/Topology/Sober\", \"type\": \"∀ {α : Type u_1} [inst : TopologicalSpace α] [inst_1 : QuasiSober α] (x : ↑(irreducibleComponents α)),\\n  IsGenericPoint ↑(genericPoints.ofComponent x) ↑x\", \"doc\": \"In a quasi-sober topological space, for every irreducible component $ C $, the unique point $ x $ mapped by the generic point function satisfies that the closure of $ \\\\{x\\\\} $ is exactly $ C $.\"}\n  {\"name\": \"AlgebraicGeometry.specializingMap_isZariskiLocalAtTarget\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/UnderlyingMap\", \"type\": \"AlgebraicGeometry.IsZariskiLocalAtTarget (AlgebraicGeometry.topologically @SpecializingMap)\", \"doc\": \"The property of being a specializing map for scheme morphisms is Zariski local at the target. This means that if a morphism $ f : X \\to Y $ of schemes has the property that its underlying continuous ma\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: the returned declarations do not give this scheme-groupoid rank filtration or the asserted generic-point neighbourhood; basic finite-presentation, zero-locus and irreducible-component facts alone require further arguments"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A finitely generated ideal contained in a minimal prime has zero locus containing an open neighborhood of that minimal prime in the prime spectrum",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"PrimeSpectrum.zeroLocus\", \"module\": \"Mathlib.RingTheory.Spectrum.Prime.Basic\", \"type\": \"(s : Set R) : Set (PrimeSpectrum R)\", \"doc\": \"The zero locus of a subset $ S $ of a commutative semiring $ R $ is the set of all prime ideals in the prime spectrum of $ R $ that contain $ S $ as a subset of their underlying ideal.\"}\n  {\"name\": \"PrimeSpectrum.zeroLocus_eq_singleton\", \"module\": \"Mathlib.RingTheory.Spectrum.Prime.Basic\", \"type\": \"(m : Ideal R) [m.IsMaximal] : zeroLocus m = {⟨m, inferInstance⟩}\", \"doc\": \"For a commutative semiring $ R $ and a maximal ideal $ \\\\mathfrak{m} $ of $ R $, the zero locus of $ \\\\mathfrak{m} $ in the prime spectrum of $ R $ is the singleton set containing the prime ideal $ \\\\mat\"}\n  {\"name\": \"PrimeSpectrum.zeroLocus_ideal_mem_irreducibleComponents\", \"module\": \"Mathlib.RingTheory.Spectrum.Prime.Topology\", \"type\": \"{I : Ideal R} : zeroLocus I ∈ irreducibleComponents (PrimeSpectrum R) ↔ I.radical ∈ minimalPrimes R\", \"doc\": \"For a commutative semiring $ R $ and an ideal $ I $ of $ R $, the zero locus $ V(I) $ is an irreducible component of the prime spectrum $ \\\\operatorname{Spec}(R) $ if and only if the radical $ \\\\sqrt{I}\"}\n  {\"name\": \"PrimeSpectrum.zeroLocus_minimalPrimes\", \"module\": \"Mathlib.RingTheory.Spectrum.Prime.Topology\", \"type\": \": zeroLocus ∘ (↑) '' minimalPrimes R = irreducibleComponents (PrimeSpectrum R)\", \"doc\": \"The irreducible components of the prime spectrum $\\\\operatorname{Spec}(R)$ of a commutative semiring $R$ coincide with the zero loci of the minimal prime ideals of $R$. Specifically, the image of the m\"}\n  {\"name\": \"PrimeSpectrum.isRetrocompact_zeroLocus_compl_of_fg\", \"module\": \"Mathlib.RingTheory.Spectrum.Prime.Topology\", \"type\": \"{I : Ideal R} (hI : I.FG) : IsRetrocompact (zeroLocus (I : Set R))ᶜ\", \"doc\": \"For a finitely generated ideal $I$ in a commutative semiring $R$, the complement of the zero locus $V(I)$ in the prime spectrum $\\\\operatorname{Spec}(R)$ equipped with the Zariski topology is a retroco\"}\n  {\"name\": \"PrimeSpectrum.zeroLocus_radical\", \"module\": \"Mathlib.RingTheory.Spectrum.Prime.Basic\", \"type\": \"(I : Ideal R) : zeroLocus (I.radical : Set R) = zeroLocus I\", \"doc\": \"For any ideal $ I $ in a commutative semiring $ R $, the zero locus of the radical of $ I $ is equal to the zero locus of $ I $ itself. Symbolically, $ V(\\\\sqrt{I}) = V(I) $, where $ V(I) $ denotes the\"}\n  {\"name\": \"PrimeSpectrum.zeroLocus_span\", \"module\": \"Mathlib.RingTheory.Spectrum.Prime.Basic\", \"type\": \"(s : Set R) : zeroLocus (Ideal.span s : Set R) = zeroLocus s\", \"doc\": \"For any subset $ S $ of a commutative semiring $ R $, the zero locus of the ideal generated by $ S $ is equal to the zero locus of $ S $ itself. That is, the set of prime ideals containing the ideal $\"}\n  {\"name\": \"PrimeSpectrum.subset_zeroLocus_vanishingIdeal\", \"module\": \"Mathlib.RingTheory.Spectrum.Prime.Basic\", \"type\": \"(t : Set (PrimeSpectrum R)) : t ⊆ zeroLocus (vanishingIdeal t)\", \"doc\": \"For any subset $ t $ of the prime spectrum of a commutative semiring $ R $, it holds that $ t \\\\subseteq V(I(t)) $, where $ I(t) $ denotes the vanishing ideal of $ t $ (the intersection of all prime id\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: the returned declarations do not give this scheme-groupoid rank filtration or the asserted generic-point neighbourhood; basic finite-presentation, zero-locus and irreducible-component facts alone require further arguments"
+  },
+  {
+   "tool": "loogle",
+   "query": "PrimeSpectrum.zeroLocus, IsOpen",
+   "results": "[loogle] OK 4 hit(s)\n  {\"name\": \"PrimeSpectrum.isOpen_iff\", \"module\": \"Mathlib.RingTheory.Spectrum.Prime.Topology\", \"type\": \" {R : Type u} [CommSemiring R] (U : Set (PrimeSpectrum R)) : IsOpen U ↔ ∃ s, Uᶜ = PrimeSpectrum.zeroLocus s\", \"doc\": \"\"}\n  {\"name\": \"PrimeSpectrum.isCompact_isOpen_iff\", \"module\": \"Mathlib.RingTheory.Spectrum.Prime.Topology\", \"type\": \" {R : Type u} [CommSemiring R] {s : Set (PrimeSpectrum R)} : IsCompact s ∧ IsOpen s ↔ ∃ t, (PrimeSpectrum.zeroLocus ↑t)ᶜ = s\", \"doc\": \"\"}\n  {\"name\": \"PrimeSpectrum.isCompact_isOpen_iff_ideal\", \"module\": \"Mathlib.RingTheory.Spectrum.Prime.Topology\", \"type\": \" {R : Type u} [CommSemiring R] {s : Set (PrimeSpectrum R)} : IsCompact s ∧ IsOpen s ↔ ∃ I, I.FG ∧ (PrimeSpectrum.zeroLocus ↑I)ᶜ = s\", \"doc\": \"\"}\n  {\"name\": \"Polynomial.isOpen_image_comap_of_monic\", \"module\": \"Mathlib.RingTheory.Spectrum.Prime.Polynomial\", \"type\": \" {R : Type u_1} [CommRing R] (f g : Polynomial R) (hg : g.Monic) : IsOpen (PrimeSpectrum.comap Polynomial.C '' (PrimeSpectrum.zeroLocus {g} \\\\ PrimeSpectrum.zeroLocus {f}))\", \"doc\": \"\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: the returned declarations do not give this scheme-groupoid rank filtration or the asserted generic-point neighbourhood; basic finite-presentation, zero-locus and irreducible-component facts alone require further arguments"
+  },
+  {
+   "tool": "grep",
+   "query": "generic.*construct|construct.*generic|minimal.*[Ii]nterior",
+   "results": "[grep] OK 2 hit(s)\n  {\"file\": \"Mathlib/Topology/Order/DenselyOrdered.lean\", \"line\": \"147\", \"text\": \"  (closure_minimal interior_subset isClosed_Icc).antisymm <|\"}\n  {\"file\": \"Mathlib/Topology/Sets/BaseChangeNhds.lean\", \"line\": \"83\", \"text\": \"      (closure_minimal interior_subset (IsCompact.isClosed h1)),\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: the returned declarations do not give this scheme-groupoid rank filtration or the asserted generic-point neighbourhood; basic finite-presentation, zero-locus and irreducible-component facts alone require further arguments"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "In the prime spectrum a finitely generated ideal inside a minimal prime vanishes on a neighborhood of that prime",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"PrimeSpectrum.vanishingIdeal_irreducibleComponents\", \"module\": \"Mathlib/RingTheory/Spectrum/Prime/Topology\", \"type\": \"∀ (R : Type u) [inst : CommSemiring R],\\n  PrimeSpectrum.vanishingIdeal '' irreducibleComponents (PrimeSpectrum R) = minimalPrimes R\", \"doc\": \"The image of the irreducible components of the prime spectrum $\\\\operatorname{Spec}(R)$ under the vanishing ideal map is equal to the set of minimal prime ideals of the commutative semiring $R$.\"}\n  {\"name\": \"PrimeSpectrum.isRetrocompact_zeroLocus_compl_of_fg\", \"module\": \"Mathlib/RingTheory/Spectrum/Prime/Topology\", \"type\": \"∀ {R : Type u} [inst : CommSemiring R] {I : Ideal R}, I.FG → IsRetrocompact (PrimeSpectrum.zeroLocus ↑I)ᶜ\", \"doc\": \"For a finitely generated ideal $I$ in a commutative semiring $R$, the complement of the zero locus $V(I)$ in the prime spectrum $\\\\operatorname{Spec}(R)$ equipped with the Zariski topology is a retroco\"}\n  {\"name\": \"PrimeSpectrum.zeroLocus_ideal_mem_irreducibleComponents\", \"module\": \"Mathlib/RingTheory/Spectrum/Prime/Topology\", \"type\": \"∀ {R : Type u} [inst : CommSemiring R] {I : Ideal R},\\n  PrimeSpectrum.zeroLocus ↑I ∈ irreducibleComponents (PrimeSpectrum R) ↔ I.radical ∈ minimalPrimes R\", \"doc\": \"For a commutative semiring $ R $ and an ideal $ I $ of $ R $, the zero locus $ V(I) $ is an irreducible component of the prime spectrum $ \\\\operatorname{Spec}(R) $ if and only if the radical $ \\\\sqrt{I}\"}\n  {\"name\": \"Ideal.exists_mul_mem_of_mem_minimalPrimes\", \"module\": \"Mathlib/RingTheory/Ideal/MinimalPrime/Localization\", \"type\": \"∀ {R : Type u_1} [inst : CommSemiring R] {I p : Ideal R}, p ∈ I.minimalPrimes → ∀ {x : R}, x ∈ p → ∃ y ∉ I, x * y ∈ I\", \"doc\": \"For any ideal $ I $ in a semiring $ R $ and a minimal prime ideal $ p $ containing $ I $, if an element $ x \\\\in p $, then there exists an element $ y \\\\notin I $ such that $ x \\\\cdot y \\\\in I $.\"}\n  {\"name\": \"PrimeSpectrum.finite_setOf_isMin\", \"module\": \"Mathlib/RingTheory/Spectrum/Prime/Noetherian\", \"type\": \"∀ (R : Type u) [inst : CommSemiring R] [IsNoetherianRing R], {x | IsMin x}.Finite\", \"doc\": \"In a Noetherian ring $ R $, the set of minimal prime ideals in the prime spectrum of $ R $ is finite.\"}\n  {\"name\": \"PrimeSpectrum.isCompact_isOpen_iff_ideal\", \"module\": \"Mathlib/RingTheory/Spectrum/Prime/Topology\", \"type\": \"∀ {R : Type u} [inst : CommSemiring R] {s : Set (PrimeSpectrum R)},\\n  IsCompact s ∧ IsOpen s ↔ ∃ I, I.FG ∧ (PrimeSpectrum.zeroLocus ↑I)ᶜ = s\", \"doc\": \"A subset $ s $ of the prime spectrum $ \\\\operatorname{Spec}(R) $ of a commutative semiring $ R $ is both compact and open in the Zariski topology if and only if there exists a finitely generated ideal \"}\n  {\"name\": \"Ideal.mem_minimalPrimes_span_of_mem_minimalPrimes_span_insert\", \"module\": \"Mathlib/RingTheory/Ideal/KrullsHeightTheorem\", \"type\": \"∀ {R : Type u_1} [inst : CommRing R] [IsNoetherianRing R] {q p : Ideal R} [q.IsPrime],\\n  q < p →\\n    ∀ (x : R) (s : Set R),\\n      p ∈ (Ideal.span (insert x s)).minimalPrimes →\\n        ∀ t ⊆ ↑q, s ⊆ ↑(Ideal.span (insert x t)).radical → q ∈ (Ideal.span t).minimalPrimes\", \"doc\": \"If $ q $ is a prime ideal properly contained in $ p $, and $ p $ is a minimal prime of the ideal generated by $ x $ and $ s $, then under the conditions that $ t \\\\subseteq q $, $ s $ is contained in t\"}\n  {\"name\": \"Algebra.QuasiFiniteAt.exists_basicOpen_eq_singleton\", \"module\": \"Mathlib/RingTheory/QuasiFinite/Basic\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S] (p : Ideal S)\\n  [inst_3 : p.IsPrime] [IsArtinianRing R] [Algebra.EssFiniteType R S] [Algebra.QuasiFiniteAt R p],\\n  ∃ f ∉ p, ↑(PrimeSpectrum.basicOpen f) = {{ asIdeal := p, isPrime := inst_3 }}\", \"doc\": \"Let $ R $ be an Artinian ring, $ S $ a commutative ring of essential finite type over $ R $, and $ \\\\mathfrak{p} $ a prime ideal of $ S $ such that $ S $ is quasi-finite at $ \\\\mathfrak{p} $. Then there\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: the returned declarations do not give this scheme-groupoid rank filtration or the asserted generic-point neighbourhood; basic finite-presentation, zero-locus and irreducible-component facts alone require further arguments"
+  },
+  {
+   "tool": "grep",
+   "query": "constructible.*(specializ|closure|interior)|IsConstructible.*(specializ|closure|interior)|[Cc]onstructible.*[Gg]eneric",
+   "results": "Hits read: Mathlib/Topology/Constructible.lean",
+   "date": "2026-10-23",
+   "verdict": "no match: candidates concern generic-point definitions, minimal-prime correspondences or constructible sets stable under generalization; none states this neighbourhood theorem"
+  },
+  {
+   "tool": "loogle",
+   "query": "IsConstructible, closure",
+   "results": "Hits read: . loogle: unknown identifier 'IsConstructible'",
+   "date": "2026-10-23",
+   "verdict": "no match: candidates concern generic-point definitions, minimal-prime correspondences or constructible sets stable under generalization; none states this neighbourhood theorem"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A generic point of an irreducible component lying in the image of a finitely presented closed immersion has an open neighborhood contained in that image",
+   "results": "Hits read: genericPoints, genericPoints.ofComponent, genericPoints.component, genericPoints.isGenericPoint, AlgebraicGeometry.IsLocalIso.exists_isOpenImmersion, genericPoints.isGenericPoint_ofComponent, AlgebraicGeometry.genericPoint_eq_of_isOpenImmersion, AlgebraicGeometry.locallyOfFinitePresentation_of_isOpenImmersion",
+   "date": "2026-10-23",
+   "verdict": "no match: candidates concern generic-point definitions, minimal-prime correspondences or constructible sets stable under generalization; none states this neighbourhood theorem"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A generic point of an irreducible component contained in a constructible subset of a scheme lies in its interior",
+   "results": "Hits read: genericPoints.isGenericPoint_ofComponent, genericPoints.isGenericPoint, genericPoints.ofComponent, IsIrreducible.isGenericPoint_genericPoint, PrimeSpectrum.isOpen_of_stableUnderGeneralization_of_isConstructible, genericPoints.component, genericPoints.component_ofComponent, IsIrreducible.genericPoint",
+   "date": "2026-10-23",
+   "verdict": "no match: candidates concern generic-point definitions, minimal-prime correspondences or constructible sets stable under generalization; none states this neighbourhood theorem"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a finitely generated ideal contained in a minimal prime, its zero locus contains a neighborhood of the minimal prime",
+   "results": "Hits read: PrimeSpectrum.instQuasiSoberElemZeroLocus, PrimeSpectrum.zeroLocus_minimalPrimes, PrimeSpectrum.quasiSober, PrimeSpectrum.stableUnderGeneralization_singleton, PrimeSpectrum.zeroLocus_ideal_mem_irreducibleComponents, PrimeSpectrum.vanishingIdeal_mem_minimalPrimes, Ideal.exists_mul_mem_of_mem_minimalPrimes, PrimeSpectrum.vanishingIdeal_irreducibleComponents",
+   "date": "2026-10-23",
+   "verdict": "no match: candidates concern generic-point definitions, minimal-prime correspondences or constructible sets stable under generalization; none states this neighbourhood theorem"
+  },
+  {
+   "tool": "loogle",
+   "query": "Topology.IsConstructible, interior",
+   "results": "Hits read: ",
+   "date": "2026-10-23",
+   "verdict": "no match: candidates concern generic-point definitions, minimal-prime correspondences or constructible sets stable under generalization; none states this neighbourhood theorem"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-finite-groupoid-generic-affine-flat-thickening",
+  "date": "2026-10-23",
+  "group": "Q12"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Algebraicity and smoothness of the stack of all nodal curves. Supporting input: Tag 0ADD (lemma-codim-1-point-in-schematic-locus), applied at every point; a locally finite-type space over a field is locally Noetherian and dimension at most one bounds all local dimensions. Supporting input: the invariant affine neighbourhood W in the second paragraph of the proof of Tag 0ADD. Proof of Tag 0ABI: lemma-find-almost-invariant-function. Supporting Tag 0ABF, first paragraph: apply Tag 0ABC before choosing the boundary ideal J; final paragraph: norm and clearing denominators. The affine invariant pair V′ ⊂ V with finite locally free restricted arrows. Supporting Tag 0ABC via Tag 0ABB: generic points in finitely presented closed strata have neighbourhoods inside their underlying sets. Split realizes the neighbourhood assertion by affine restriction, Chevalley, and Tag 0903; latest blueprint sk-thm-sf-ctf-stability-direct-images.proof.md (3) supplies the direct-image finiteness route above this supporting input.",
+   "via": [
+    "lem-sfb-finite-groupoid-generic-affine-flat-thickening",
+    "lem-sfb-finite-groupoid-almost-invariant-function",
+    "lem-sfb-finite-groupoid-codimension-one-invariant-affine",
+    "lem-sfb-separated-space-dimension-one-scheme",
+    "lem-sfb-nodal-curve-stack-smooth",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-generic-point-fp-closed-interior",
+  "worker": "stage1",
+  "summary": "Checked the assertion against Stacks 0AAW and its use in 0ABB. Five steps prove it, using only existing nodes: an affine restriction with all finiteness and spectral hypotheses verified, Chevalley and complement, maximality of the component plus sobriety to exclude strict generalizations, 0903 to exclude closure of the complement, then the open neighbourhood. No new nodes; no change to the statement. Searched the project source and Mathlib with no exact attachment or leaf found.",
+  "blueprint": "The inherited supporting place is the generic-point neighbourhood in finitely presented closed strata in 0ABB, used by 0ABC on the existing alteration/finiteness branch. The current latest sk-thm-sf-ctf-stability-direct-images.proof.md, (3), retains the direct-image finiteness route. blueprint_refs.py ancestor returns None for this existing broken ancestry chain; preserved its null node and via list rather than inventing an ancestor. Whole-blueprint searches generic point, constructible interior, closure specialization and Chevalley reveal no identical statement.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-spectral-proconstructible-closure-specialization",
+    "why": "General spectral-space closure tool, applied to one constructible subset F exactly as in Stacks 0AAW; the current unit has no replacement for Tag 0903(1)."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-spectral-proconstructible-closure-specialization"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-N7-93006acab",
+  "group": "N7",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-N7-93006acab (reviewer sub-agent of L); spot-checked: Read the item in full, all 14 cited statements, and the sources at the cited places: Stacks properties.tex 0AAW, more-groupoids.tex 0ABB(2), topology.tex 0903(1) and the Chevalley node 054J. The delivery is one commit with the item and the report, has no new nodes, and leaves statement and stmt_deps unchanged. The item is still unsplit in live and side-live and has no repair note. Step 1: the affine U gives an affine W by 01QO; the 01TQ leaf on the single pair (W,U) verifies the pointwise lfp definition for j; j is quasi-compact because preimages of affines are affine; U is qcqs and hence spectral. Step 2: Chevalley (all hypotheses checked) shows E = image ∩ U is constructible, and its complement F is constructible by the Boolean-algebra clause. Step 3: a short argument from component maximality and sobriety shows no other point of U specializes to ξ; I checked the direction of the inclusion. Step 4: the spectral closure lemma applied to the singleton family {F} plus step 3 gives ξ outside the closure of F. Step 5: N = U minus the closure of F is open, contains ξ and lies in E. Edge cases checked: empty X, the identity, a nilpotent thickening (which is why the statement is set-theoretic), and non-Noetherian X with infinitely many components. Finite presentation is used in step 2. No duplicate: searched for 0AAW, generic-point-in-constructible and the generic-point/constructible/neighbourhood statement scan. Mathlib Topology/Constructible.lean has no closure or specialization lemma for IsConstructible. Accepted tool_use: lem-weil-pbc-spectral-proconstructible-closure-specialization (0903(1), a generic spectral-space tool, used the same way 0AAW uses it); the other sk-thm-p1 citations are mathlib leaves. blueprint.from.node is null because of the inherited ancestry chain, which was preserved; this is not a delivery fault. coord/dag-sync.md is absent from the snapshot. No SGA source is used."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.GenericPointFpClosedInterior",
+  "declaration": "AlgebraicGeometry.IsClosedImmersion.exists_open_subset_range_of_isGenericPoint",
+  "file": "lean/Sheaf/AlgebraicGeometry/GenericPointFpClosedInterior.lean",
+  "statement": "theorem exists_open_subset_range_of_isGenericPoint {X Z : AlgebraicGeometry.Scheme.{u}} (i : Z ⟶ X) [AlgebraicGeometry.IsClosedImmersion i] [AlgebraicGeometry.LocallyOfFinitePresentation i] [AlgebraicGeometry.QuasiCompact i] [AlgebraicGeometry.QuasiSeparated i] {C : Set X} (hC : C ∈ irreducibleComponents X) {ξ : X} (hξ : IsGenericPoint ξ C) (hξi : ξ ∈ Set.range i) : ∃ N : X.Opens, ξ ∈ N ∧ (N : Set X) ⊆ Set.range i",
+  "branch": "newtargets-dag",
+  "by": "Q83",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-3f98a88db",
+  "group": "Q83",
+  "result": "pass",
+  "note": "Node diff vs side-live: only lean added; lean.statement verbatim in file. Clauses match: IsClosedImmersion i; finite presentation = LocallyOfFinitePresentation + QuasiCompact + QuasiSeparated on i per def-weil-pbc-scheme-conventions (Stacks 01TP), and qc/qs hold automatically for closed immersions, so nothing stronger is assumed; C ∈ irreducibleComponents X with IsGenericPoint ξ C; ξ ∈ Set.range i; ∃ N : X.Opens, ξ ∈ N ∧ ↑N ⊆ Set.range i (set-theoretic, no factorization); no hypotheses on X. Edge cases (empty X/Z, identity, nilpotent thickening, reducible/non-Noetherian X) covered; single universe u, autoImplicit false. No defs, proof sorry, docstrings give 0AAW/0ABB, blueprint id and the five proof steps; proof-only import ProconstructibleClosureSpecialization exists. No existing statement found. Report has Worker report and Second reading sections (self-pass, disclosed). No changes, no compile needed."
+ }
+}

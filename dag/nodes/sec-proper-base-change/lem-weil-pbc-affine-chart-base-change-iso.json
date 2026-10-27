@@ -105,7 +105,32 @@
  },
  "chapter": "sec-proper-base-change",
  "unit": "sk-thm-p1",
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": [
+    "AlgebraicGeometry.exists_affineChart_baseChangeIso"
+   ]
+  },
+  "slopmaster2": {
+   "state": "closed",
+   "decls": [
+    {
+     "name": "AlgebraicGeometry.exists_affineChart_baseChangeIso",
+     "module": "WeilConjectures.AlgebraicGeometry.AffineChartBaseChangeIso",
+     "lines": [
+      29,
+      121
+     ],
+     "kind": "theorem",
+     "sorry": false
+    }
+   ],
+   "missing": [],
+   "open": []
+  }
+ },
  "lean": {
   "existing": false,
   "module": "WeilConjectures.AlgebraicGeometry.AffineChartBaseChangeIso",
@@ -135,5 +160,27 @@
   "landing": "20261012T085256-L-21781",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ },
+ "blueprint_update": {
+  "snapshot": "main-20261023-1620",
+  "commit": "7284bb09daf97437d544c51882b325f9c52cd345",
+  "changed": [
+   "statement",
+   "proof"
+  ],
+  "statement": "Let $z:Z\\to S$ and $t:T\\to S$ be morphisms of schemes [def-pc-scheme]. Let $W\\subset S$, $V\\subset Z$ be opens with $V\\subset z^{-1}(W)$. Let $R$ be a commutative ring and $A,B$ commutative $R$-algebras. Suppose $e_0:W\\cong\\operatorname{Spec}R$, $e_B:V\\cong\\operatorname{Spec}B$ and $e:t^{-1}(W)\\cong\\operatorname{Spec}A$ are isomorphisms commuting with the maps to $W$ and the specified structure maps to $\\operatorname{Spec}R$. Write $p:Z\\times_ST\\to Z$, $q:Z\\times_ST\\to T$ for the projections. There is an isomorphism $i:p^{-1}(V)\\cong\\operatorname{Spec}(A\\otimes_R B)$ such that $p\\circ\\iota\\circ i^{-1}=\\iota_V\\circ e_B^{-1}\\circ\\operatorname{Spec}(b\\mapsto1\\otimes b)$ and $q\\circ\\iota\\circ i^{-1}=\\iota_{t^{-1}(W)}\\circ e^{-1}\\circ\\operatorname{Spec}(a\\mapsto a\\otimes1)$, where $\\iota$ denotes the open-subscheme inclusion. Zero rings and empty opens are allowed.",
+  "proof": [
+   {
+    "text": "Map the affine fibre product $\\operatorname{Spec}B\\times_{\\operatorname{Spec}R}\\operatorname{Spec}A$ to $Z\\times_ST$ using the specified presentations and the chart inclusions. The two compatibility equations make this a map of diagrams. It is an open immersion with image $p^{-1}(V)\\cap q^{-1}(t^{-1}(W))$, by the open fibre-product lemma. The containment $V\\subseteq z^{-1}(W)$ and $z\\circ p=t\\circ q$ imply $p^{-1}(V)\\subseteq q^{-1}(t^{-1}(W))$; hence the image is $p^{-1}(V)$. The two open immersions with this same image give an isomorphism with the inverse-image open subscheme.",
+    "uses": [],
+    "elementary": null
+   },
+   {
+    "text": "Compose the inverse of the open-subscheme isomorphism with the symmetry of the fibre product and the identification $\\operatorname{Spec}A\\times_{\\operatorname{Spec}R}\\operatorname{Spec}B\\cong\\operatorname{Spec}(A\\otimes_RB)$. The projection equations of the induced map of fibre products and of this identification show that its inverse projects to $\\iota_V\\circ e_B^{-1}\\circ\\operatorname{Spec}(b\\mapsto1\\otimes b)$ and $\\iota_{t^{-1}(W)}\\circ e^{-1}\\circ\\operatorname{Spec}(a\\mapsto a\\otimes1)$, respectively. No nonzero-ring or nonempty-chart hypothesis is used.",
+    "uses": [],
+    "elementary": null
+   }
+  ],
+  "note": "the current blueprint (main-20261023-1620, weil-conjectures-blueprint 7284bb09da) states or proves this differently; the node is proved in Lean: recorded 2026-10-23, not reopened"
  }
 }

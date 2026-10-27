@@ -1,0 +1,147 @@
+{
+ "id": "lem-pbc-scalar-operation-unit-coherence",
+ "kind": "statement",
+ "title": "Identity coherence of scalar operation comparisons",
+ "statement": "Let l be prime. Coefficient fields are finite extensions of Q_l with specified Q_l-algebra embeddings. Use the actual completed coefficient sheaves and raw rationalizations of [def-weil-l-adic-coefficient-extension] and [def-weil-pbc-rational-category]. Schemes supporting a constructible rational category are assumed noetherian, finite-dimensional, with l invertible; ambient operation comparisons are for arbitrary scheme morphisms g : X → Y in the actual ambient derived categories. For a finite coefficient-field embedding, the direct-image and ordinary-pullback scalar comparison transformations for an identity scheme morphism respect the canonical derived operation units. The completed-pullback comparison likewise respects the fixed completed identity isomorphism, with completion units retained.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-proper-base-change/sk-thm-properbasechange/prop-weil-pbc-scalar-extension.md",
+  "place": "Order 1307; existing scalar-extension component, relocated without changing signatures or proofs."
+ },
+ "stmt_deps": [
+  "lem-pbc-scalar-ambient-operation-comparisons",
+  "def-weil-l-adic-coefficient-extension",
+  "def-weil-pbc-rational-category"
+ ],
+ "proof": [
+  {
+   "text": "For the identity morphism, compose the identity-on-sections scalar/restriction comparison with the ordinary direct-image identity comparison. The section formula for each coefficient datum shows this equals restriction of the target direct-image identity comparison. Apply conjugateEquiv to the two composite adjunctions. Conjugation of whiskering, composition and the unitors then gives the ordinary scalar/pullback identity equation.",
+   "uses": [
+    "def-weil-pbc-normalized-scalar-restriction",
+    "def-weil-pbc-ambient-ringed-exchange",
+    "lem-weil-pbc-mate-pasting"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Evaluate on a flat-term K-flat complex P. Its scalar extension is again flat-term K-flat. Postcompose the desired derived pullback identity with the invertible scalar cochain counit. Naturality of this counit, the defining scalar comparison equation, and the two derived identity normalization equations reduce it to the ordinary identity equation from the first step, applied degreewise. Resolve an arbitrary derived object by such a complex and use naturality along the resulting isomorphism to obtain the identity on every object.",
+   "uses": [
+    "def-weil-pbc-normalized-scalar-restriction",
+    "def-weil-pbc-ambient-ringed-exchange",
+    "lem-pc-kflat-resolution",
+    "lem-pur-kflat-change-of-rings-independent"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The direct-image comparison is the actual mate of the ordinary-derived pullback comparison. Expand the mate into unit, right-adjoint image of the square and counit. Naturality of the conjugate identity comparison moves it across the last two factors. The unit/conjugate equation and the pullback identity equation cancel the identity isomorphism and yield the direct-image identity equation. Specialize the two equations to the actual finite coefficient inclusion.",
+   "uses": [
+    "lem-weil-pbc-mate-pasting",
+    "lem-pbc-scalar-ambient-operation-comparisons"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Keep the existing completed identity proof: precompose both routes with the completion unit. Naturality and the unit-normalized scalar completion comparison reduce them to the ordinary-derived identity equation. The reflection-unit hom extensionality property cancels the unit, since the target is complete.",
+   "uses": [
+    "lem-pbc-scalar-ambient-operation-comparisons",
+    "def-weil-pbc-ambient-ringed-exchange"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-normalized-scalar-restriction",
+  "def-weil-pbc-ambient-ringed-exchange",
+  "lem-weil-pbc-mate-pasting",
+  "lem-pc-kflat-resolution",
+  "lem-pur-kflat-change-of-rings-independent",
+  "lem-pbc-scalar-ambient-operation-comparisons"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 0D6D (lemma-derived-pullback-composition), with the ordinary section and adjunction normalizations already specified in PbcActualScalarPullback and PbcActualRingedExchange; identity specialization and explicit mate calculation by K3, 2026-10-27."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "finite extension of l adic coefficient fields on constructible derived sheaves commutes with direct image and base change",
+   "results": "8 hits: IsDedekindDomain.HeightOneSpectrum algebraMap_adicCompletion, adicCompletion algebra structures, BDeRhamPlus and BDeRham. These concern coefficient rings, not constructible derived sheaf functors.",
+   "date": "2026-10-14",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.MonoidalCategory.associator, CategoryTheory.Functor.CommShift",
+   "results": "0 hits; unknown identifier CategoryTheory.MonoidalCategory.associator",
+   "date": "2026-10-14",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "scalarExtension|changeOfRings|ChangeOfRings",
+   "results": "0 hits in Mathlib/CategoryTheory",
+   "date": "2026-10-14",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "derived scalar extension for constructible adic sheaves and coherent base change",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-14",
+   "verdict": "unavailable"
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.PbcScalarExtension",
+  "date": "2026-10-27",
+  "group": "E5"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-weil-pbc-scalar-extension",
+   "place": "Existing companion declarations; compilation partition"
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "module": "Sheaf.Paper.PbcScalarOperationIdentity",
+  "file": "lean/Sheaf/Paper/PbcScalarOperationIdentity.lean",
+  "declaration": "AlgebraicGeometry.Scheme.pbcScalarCompletedPull_identity",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.pbcScalarOperations_identity",
+   "AlgebraicGeometry.Scheme.pbcScalarCompletedPull_identity"
+  ],
+  "statement": "theorem pbcScalarCompletedPull_identity (W : Scheme.{u}) (K : ObjectProperty.FullSubcategory (PbcIsIntrinsicallyComplete W (pbcIntegralDatum l E))) : (pbcScalarCompletedPullIso l E F i (𝟙 W)).hom.app K.obj ≫ (pbcEmbeddingAmbientTensor l E F i W).map ((pbcActualCompletedPullIdIso (pbcIntegralDatum l E) W).hom.app K) = (pbcActualCompletedPullIdIso (pbcIntegralDatum l F) W).hom.app ⟨(pbcEmbeddingAmbientTensor l E F i W).obj K.obj, pbcScalarPreservesComplete l E F i W K⟩",
+  "branch": "sheaf-dag",
+  "by": "E5",
+  "date": "2026-10-27",
+  "existing": false,
+  "note": "Existing declarations moved verbatim from PbcScalarExtension, with local reducibility scope and import changes only. No new mathematical statement or proof hole."
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-196ec",
+  "group": "E5",
+  "result": "fix",
+  "landing": "20261027T021315-L-2755681",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K3",
+  "result": "pass",
+  "landing": "20261027T034705-L-3674574",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

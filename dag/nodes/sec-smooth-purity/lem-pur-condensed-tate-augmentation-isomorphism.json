@@ -1,0 +1,184 @@
+{
+ "id": "lem-pur-condensed-tate-augmentation-isomorphism",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "sk-thm-purity-transport",
+   "place": "Step 2, reconstruction of the integral Tate tower",
+   "via": [
+    "lem-pur-condensed-tate-realization"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "The projection-normalized Tate derived augmentation is invertible",
+ "statement": "Let $k$ be a field of positive prime characteristic different from the prime $\\ell$ and $X$ a separated finite-type $k$-scheme [def-weil-pbc-scheme-conventions]. Choose normalized realization data $r$ [def-weil-pbc-condensed-e-realization-records]. Put $R_X=p_X^*C(-,\\mathbf Z_\\ell)$ and $Z_X=\\varprojlim_n\\mu_{\\ell^n,X}$ with root-power transitions [def-pur-condensed-tate-twists]. For $d\\geq0$ put $P_d=Z_X^{\\otimes_{R_X}d}$ with $P_0=R_X$, and form the strict positive finite tower $H_{n,d}$ using quotient and root-power maps. Encode it over the completed integral ring by the normalized coefficient equivalence [lem-pur-condensed-tate-integral-comparison, def-weil-pbc-internal-abelian-sheaf-module-equivalence]. Then the morphism $P_d[0]\\to R\\varprojlim_n H_{n,d}[0]$ obtained by transposing the tensor projection cone through the constant-tower/derived-limit adjunction [lem-weil-pbc-ringed-strict-tower-homotopy-limit, def-pur-completed-rlim-functor] is an isomorphism. This is the actual morphism derivedAugmentation, with the specified projections and quotient unit at $d=0$.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-thm-purity-transport/sk-thm-purity-transport.proof.md",
+  "place": "Step 2, reconstruction of the integral Tate tower"
+ },
+ "stmt_deps": [
+  "def-pur-condensed-tate-twists",
+  "def-weil-pbc-condensed-e-realization-records",
+  "def-weil-pbc-internal-abelian-sheaf-module-equivalence",
+  "def-weil-pbc-adic-coefficient-datum",
+  "lem-pur-condensed-tate-integral-comparison",
+  "def-pur-condensed-tate-realization-constructions",
+  "def-pur-completed-rlim-functor",
+  "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
+  "def-weil-pbc-scheme-conventions"
+ ],
+ "proof": [
+  {
+   "text": "Use the normalized coefficient isomorphism to work over $R_X=A_X$. The actual finite quotient maps are unchanged.",
+   "uses": [
+    "lem-pur-condensed-tate-integral-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-thm-purity-transport/sk-thm-purity-transport.proof.md",
+    "place": "Steps 2 and 4, integral reconstruction and coefficient transport"
+   }
+  },
+  {
+   "text": "Put $H_n=\\mu_{\\ell^n,X}$. It is killed by $\\ell^n$ by [def-pur-roots-of-unity-sheaf]. In the sheaf tensor product of [def-pur-sheaf-tensor-product] define $a_n:R\\otimes_{\\mathbf Z}H_n\\to H_n$ by $r\\otimes z\\mapsto\\rho_n(r)z$, with inverse $z\\mapsto1\\otimes z$. To check the other composite, locally lift $\\rho_n(r)$ to an integer $a$ and write $r-a=\\ell^n b$ locally using Step 1; then $(r-a)\\otimes z=b\\otimes\\ell^n z=0$. These local identities prove the equality of sheaf maps. For the root-power map $t_n:H_{n+1}\\to H_n$, one has $t_n(\\rho_{n+1}(r)z)=\\rho_n(r)t_n(z)$; hence $a_n(1\\otimes t_n)=t_na_{n+1}$. At $n=0$, $H_0=\\mu_{1,X}$ has only the identity section, so is the zero abelian sheaf and $R\\otimes_{\\mathbf Z}H_0=0$.",
+   "uses": [
+    "def-pur-roots-of-unity-sheaf",
+    "def-pur-sheaf-tensor-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03EK, section-tensor-product: sheafified tensor and balanced maps; the finite-level construction is also in the archived Tate source exhibit in coord/reports/maintenance/nt-target-smooth-purity-qbar.md"
+   }
+  },
+  {
+   "text": "The internal-module/section-ring equivalence [def-weil-pbc-internal-abelian-sheaf-module-equivalence] preserves the underlying sheaves. By the sectionwise limit construction [def-pur-sheaf-inverse-limit], the compatible isomorphisms $a_n$ give $T_X\\cong Z_X$ as $R$-modules. This also handles the index $0$ in [def-pur-condensed-tate-twists]: a compatible family $(z_n)_{n\\geq1}$ extends uniquely by $z_0=0$, and forgetting $z_0$ is its inverse. The comparison respects all positive-index projections, so the action of $R=\\lim A_n$ on $Z_X$ is the one induced by the finite actions.",
+   "uses": [
+    "def-weil-pbc-internal-abelian-sheaf-module-equivalence",
+    "def-pur-sheaf-inverse-limit",
+    "def-pur-condensed-tate-twists"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03DB, lemma-limits-colimits; sectionwise limits and the cone universal property"
+   }
+  },
+  {
+   "text": "For $d\\geq0$ put $P_d=Z_X^{\\otimes_R d}$, with $P_0=R$, and $H_{n,d}=H_n^{\\otimes_{A_n}d}$, with $H_{n,0}=A_n$. Let $p_n:Z_X\\to H_n$ be the limit projections; by Step 3 they are $R$-linear for the action of $R$ on $H_n$ through $\\rho_n$, so $\\varphi_n:Z_X\\otimes_RA_n\\to H_n$, $z\\otimes\\bar a\\mapsto\\bar a\\,p_n(z)$, is well defined (balanced). Clause 1 of [lem-pur-twist-sheaf-locally-free] makes the transitions $H_{n+1}\\to H_n$ epimorphisms, so $p_n$ is an epimorphism by [det-pe-replete-epimorphism], and hence so is $\\varphi_n$. Clause 2, with $E=\\mathbf Q_\\ell$ and its ring $\\varprojlim_rA_r=R$ (Step 1), gives a pro-etale cover $\\{V\\}$ with $Z_X|_V\\cong R|_V$, generated by a section $e$, and an abstract isomorphism $Z_X\\otimes_RA_n\\cong H_n$; restricted to $V$ both source and target of $\\varphi_n$ are free of rank one over $A_n$. An $A_n$-linear epimorphism $A_n\\to A_n$ is multiplication by a section $a$ with $1$ locally a multiple of $a$; so $a$ is locally, hence globally, a unit, and $\\varphi_n|_V$ is an isomorphism. Thus $\\varphi_n$ is an isomorphism and $p_n(e)$ generates $H_n|_V$. Tensoring the $\\varphi_n$ gives $P_d\\otimes_RA_n\\to H_{n,d}$, $(z_1\\otimes\\cdots\\otimes z_d)\\otimes\\bar a\\mapsto\\bar a\\,p_n(z_1)\\otimes\\cdots\\otimes p_n(z_d)$; on $V$ it sends the generator $e^{\\otimes d}\\otimes1$ to the generator $p_n(e)^{\\otimes d}$, so it is an isomorphism. It commutes with transitions because $t_np_{n+1}=p_n$. Trivializing $H_{n,d}|_V$ by these compatible generators, the map $P_d\\to\\lim_nH_{n,d}$ becomes $R\\to\\lim_nA_n$ on $V$, an isomorphism by Step 1; restriction to $V$ commutes with these sectionwise limits, so $P_d\\cong\\lim_nH_{n,d}$ globally. The transitions $H_{n+1,d}\\to H_{n,d}$ are epimorphisms: on $V$ they are the quotient maps $A_{n+1}\\to A_n$. The positive-index tensor projections commute with these transitions by induction on d: at d=0 use the defining cokernel-map equation, and at a successor tensor the induction equality with the actual Tate-limit cone equation. Applying the integral encoding functor gives the naturality equation for the augmentation.",
+   "uses": [
+    "lem-pur-twist-sheaf-locally-free",
+    "det-pe-replete-epimorphism",
+    "def-pur-sheaf-tensor-product",
+    "def-pur-sheaf-inverse-limit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Proposition 3.1.10 (repleteness), Lemma 6.8.2(1) and Proposition 6.8.4(1); the local generator argument is written out here"
+   }
+  },
+  {
+   "text": "Apply [lem-weil-proetale-surjective-tower-derived-limit], clauses 1-2, to the strict tower $(H_{n,d})_{n\\geq1}$ of $R$-module sheaves; its epimorphism hypothesis was verified in Step 4. So $\\lim_nH_{n,d}\\cong P_d$ (Step 4) in degree zero, with the map to $\\prod_nH_{n,d}$ given by the projections, is a derived limit: it has a Roos triangle on $1-s$, and $\\prod_nH_{n,d}$ in degree zero is the product in $D(R)$. The functorial derived limit of [lem-weil-pbc-ringed-strict-tower-homotopy-limit] has its natural Roos triangle on the same map $1-s$ of the same product. Applying (TR3) of [def-weil-triangulated-category] to the rotated triangles with the identities of $\\prod_nH_{n,d}$ gives $\\psi:P_d\\to R\\lim_nH_{n,d}$ compatible with both maps to the product and with the connecting maps; by [lemma-weil-pbc-r-lim-levelwise-isomorphism] (all $u_n$ identities) $\\psi$ is an isomorphism. It is the only morphism compatible with the projections: the difference of two such factors through a morphism $P_d\\to(\\prod_nH_{n,d})[-1]$, and the last clause of [lem-weil-proetale-surjective-tower-derived-limit] says there is none but $0$ between sheaves placed in degrees $0$ and $1$. The exact functor of [lem-weil-pbc-ringed-strict-tower-homotopy-limit] commutes with shifts, giving the required $R$-linear isomorphism $M_d\\cong P_d[2d]$, determined by the compatible projections $P_d\\to H_{n,d}$.",
+   "uses": [
+    "lem-weil-proetale-surjective-tower-derived-limit",
+    "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
+    "def-weil-triangulated-category",
+    "lemma-weil-pbc-r-lim-levelwise-isomorphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Proposition 3.1.10, with Propositions 3.2.3(1) and 4.2.8 for the pro-etale site; strict derived-limit exactness: Stacks 0941"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-pur-condensed-tate-integral-comparison",
+  "def-pur-roots-of-unity-sheaf",
+  "def-pur-sheaf-tensor-product",
+  "def-weil-pbc-internal-abelian-sheaf-module-equivalence",
+  "def-pur-sheaf-inverse-limit",
+  "def-pur-condensed-tate-twists",
+  "lem-pur-twist-sheaf-locally-free",
+  "det-pe-replete-epimorphism",
+  "lem-weil-proetale-surjective-tower-derived-limit",
+  "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
+  "def-weil-triangulated-category",
+  "lemma-weil-pbc-r-lim-levelwise-isomorphism"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-thm-purity-transport/thm-pur-rational-and-qbar-purity.proof.md",
+  "place": "The indicated portion of the existing nine-step realization proof, isolated without changing its argument; current unit Steps 2 and 4."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "The positive tower of finite Tate twists on a scheme proetale site has derived limit the tensor power of the integral Tate module",
+   "results": "{\"t\": \"2026-10-26T15:44:45Z\", \"tool\": \"leansearch\", \"query\": \"The positive tower of finite Tate twists on a scheme proetale site has derived limit the tensor power of the integral Tate module\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Modules.instHasLimits\", \"PresheafOfModules.isLimitLimitCone\", \"PresheafOfModules.hasFiniteLimits\", \"Profinite.asLimit\", \"TensorProduct.directLimitLeft\", \"Algebra.FormallyEtale.instTensorProduct\", \"TensorProduct.directLimitRight\", \"Profinite.isoAsLimitConeLift\"], \"digest\": \"7d5fe32fa1adfdcf\"}",
+   "date": "2026-10-26",
+   "verdict": "no match: the returned declarations do not state this normalized pro-etale Tate comparison; only general algebra or categorical tools occur."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The canonical augmentation from the integral Tate module tensor power to the derived limit of its finite root of unity quotients is an isomorphism",
+   "results": "{\"t\": \"2026-10-26T15:45:32Z\", \"tool\": \"leanfinder\", \"query\": \"The canonical augmentation from the integral Tate module tensor power to the derived limit of its finite root of unity quotients is an isomorphism\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AdicCompletion.coe_ofTensorProductEquivOfFiniteNoetherian\", \"AdicCompletion.ofTensorProductEquivOfFiniteNoetherian_symm_of\", \"AdicCompletion.ofTensorProductEquivOfFiniteNoetherian_apply\", \"AdicCompletion.ofTensorProduct_bijective_of_pi_of_fintype\", \"AdicCompletion.tensor_map_id_left_eq_map\", \"AdicCompletion.ofTensorProductEquivOfPiFintype\", \"AdicCompletion.ofTensorProduct_tmul\", \"AdicCompletion.ofTensorProductEquivOfFiniteNoetherian\"], \"digest\": \"46e8e1df3fc5c8bc\"}",
+   "date": "2026-10-26",
+   "verdict": "no match: the returned declarations do not state this normalized pro-etale Tate comparison; only general algebra or categorical tools occur."
+  },
+  {
+   "tool": "grep",
+   "query": "tateModuleSystem|tateTwistDerived|derivedAugmentation",
+   "results": "{\"t\": \"2026-10-26T15:44:45Z\", \"tool\": \"grep\", \"query\": \"tateModuleSystem|tateTwistDerived|derivedAugmentation\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-26",
+   "verdict": "no match: the returned declarations do not state this normalized pro-etale Tate comparison; only general algebra or categorical tools occur."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.CondensedTateRealization",
+  "date": "2026-10-26",
+  "group": "J3"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-thm-purity-transport",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.CondensedTateAugmentation",
+  "file": "lean/Sheaf/Paper/CondensedTateAugmentation.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.CondensedTateRealization.derivedAugmentation_isIso",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.CondensedTateRealization.derivedAugmentation_isIso"
+  ],
+  "statement": "theorem derivedAugmentation_isIso (k : Type u) [Field k] [Fact (ringChar k).Prime] [Fact (ringChar k ≠ l)] (T : Base k) (r : At l (LiftedQ.{u} l) T.scheme) (d : ℕ) : IsIso (derivedAugmentation T.scheme l r d)",
+  "branch": "sheaf-dag",
+  "by": "J3",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-15d74",
+  "group": "J3",
+  "result": "fix",
+  "landing": "20261026T195529-L-3035476",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-15d74",
+  "group": "J3",
+  "result": "fix",
+  "landing": "20261026T195529-L-3035476",
+  "kind": "interface",
+  "note": "independent cc review: item statement byte-identical to clone; Data modules = verbatim relocation of the old item module (diff); 2 new sorry statements read against WeilConjectures.TateTwist.ProEtale defs and their nodes (both true); new private helper axioms clean via scratch lcompile; item has no importers in clone"
+ }
+}

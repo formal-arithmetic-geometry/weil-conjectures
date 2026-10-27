@@ -1,0 +1,85 @@
+{
+ "id": "lem-trf-prime-binomial-irreducible",
+ "kind": "statement",
+ "title": "Prime binomials without a root are irreducible in any characteristic",
+ "statement": "Let $F$ be any field [def-weil-field], $p$ a prime number and $t\\in F$. If there is no $u\\in F$ with $u^p=t$, then $X^p-t\\in F[X]$ [def-weil-polynomial-ring] is irreducible: it is a nonzero nonunit and every factorization has a unit factor. There is no assumption on the characteristic of $F$.",
+ "source": {
+  "document": "lean/.lake/packages/mathlib/Mathlib/FieldTheory/KummerPolynomial.lean",
+  "place": "Mathlib/FieldTheory/KummerPolynomial.lean:99–126, X_pow_sub_C_irreducible_of_prime; the characteristic-free generalization of Stacks 09HF."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-weil-polynomial-ring"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For any field K and prime p the polynomial X pow p minus a is irreducible if a is not a pth power",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"X_pow_sub_C_irreducible_of_prime\", \"module\": \"Mathlib/FieldTheory/KummerPolynomial\", \"type\": \"∀ {K : Type u} [inst : Field K] {p : ℕ},\\n  Nat.Prime p → ∀ {a : K}, (∀ (b : K), b ^ p ≠ a) → Irreducible (Polynomial.X ^ p - Polynomial.C a)\", \"doc\": \"For a prime number $p$ and an element $a$ in a field $K$ such that $a$ is not a $p$-th power in $K$, the polynomial $X^p - a$ is irreducible in the polynomial ring $K[X]$.\"}\n  {\"name\": \"X_pow_sub_C_irreducible_iff_of_prime\", \"module\": \"Mathlib/FieldTheory/KummerPolynomial\", \"type\": \"∀ {K : Type u} [inst : Field K] {p : ℕ},\\n  Nat.Prime p → ∀ {a : K}, Irreducible (Polynomial.X ^ p - Polynomial.C a) ↔ ∀ (b : K), b ^ p ≠ a\", \"doc\": \"Let $K$ be a field, let $p$ be a prime number, and let $a \\\\in K$. The polynomial $X^p - a$ is irreducible over $K$ if and only if $a$ has no $p$-th root in $K$ (that is, there is no $b \\\\in K$ such tha\"}\n  {\"name\": \"X_pow_sub_C_irreducible_of_prime_pow\", \"module\": \"Mathlib/FieldTheory/KummerExtension\", \"type\": \"∀ {K : Type u} [inst : Field K] {p : ℕ},\\n  Nat.Prime p → p ≠ 2 → ∀ (n : ℕ) {a : K}, (∀ (b : K), b ^ p ≠ a) → Irreducible (Polynomial.X ^ p ^ n - Polynomial.C a)\", \"doc\": \"Let $p$ be a prime number with $p \\\\neq 2$, $n$ a natural number, and $a$ an element of a field $K$. If no element $b \\\\in K$ satisfies $b^p = a$, then the polynomial $X^{p^n} - a$ is irreducible over $\"}\n  {\"name\": \"X_pow_sub_C_irreducible_iff_of_prime_pow\", \"module\": \"Mathlib/FieldTheory/KummerExtension\", \"type\": \"∀ {K : Type u} [inst : Field K] {p : ℕ},\\n  Nat.Prime p →\\n    p ≠ 2 → ∀ {n : ℕ}, n ≠ 0 → ∀ {a : K}, Irreducible (Polynomial.X ^ p ^ n - Polynomial.C a) ↔ ∀ (b : K), b ^ p ≠ a\", \"doc\": \"Let $K$ be a field, $p$ an odd prime, $n$ a positive integer, and $a \\\\in K$. The polynomial $X^{p^n} - a$ in $K[X]$ is irreducible if and only if for every $b \\\\in K$, $b^p \\\\neq a$.\"}\n  {\"name\": \"X_pow_sub_C_irreducible_of_odd\", \"module\": \"Mathlib/FieldTheory/KummerExtension\", \"type\": \"∀ {K : Type u} [inst : Field K] {n : ℕ},\\n  Odd n →\\n    ∀ {a : K}, (∀ (p : ℕ), Nat.Prime p → p ∣ n → ∀ (b : K), b ^ p ≠ a) → Irreducible (Polynomial.X ^ n - Polynomial.C a)\", \"doc\": \"If $n$ is an odd natural number and for every prime $p$ dividing $n$ there is no element $b$ in the field $K$ such that $b^p = a$, then the polynomial $X^n - a$ is irreducible over $K$.\"}\n  {\"name\": \"X_pow_sub_C_irreducible_iff_forall_prime_of_odd\", \"module\": \"Mathlib/FieldTheory/KummerExtension\", \"type\": \"∀ {K : Type u} [inst : Field K] {n : ℕ},\\n  Odd n →\\n    ∀ {a : K}, Irreducible (Polynomial.X ^ n - Polynomial.C a) ↔ ∀ (p : ℕ), Nat.Prime p → p ∣ n → ∀ (b : K), b ^ p ≠ a\", \"doc\": \"The polynomial $X^n - a$ is irreducible over a field $K$ if and only if for every prime divisor $p$ of the odd integer $n$, there does not exist an element $b \\\\in K$ such that $b^p = a$.\"}\n  {\"name\": \"X_pow_sub_C_irreducible_iff_of_odd\", \"module\": \"Mathlib/FieldTheory/KummerExtension\", \"type\": \"∀ {K : Type u} [inst : Field K] {n : ℕ},\\n  Odd n → ∀ {a : K}, Irreducible (Polynomial.X ^ n - Polynomial.C a) ↔ ∀ (d : ℕ), d ∣ n → d ≠ 1 → ∀ (b : K), b ^ d ≠ a\", \"doc\": \"For an odd natural number $ n $ and an element $ a $ in a field $ K $, the polynomial $ X^n - a $ is irreducible over $ K $ if and only if for every divisor $ d $ of $ n $ with $ d \\\\neq 1 $, there doe\"}\n  {\"name\": \"pow_ne_of_irreducible_X_pow_sub_C\", \"module\": \"Mathlib/FieldTheory/KummerPolynomial\", \"type\": \"∀ {K : Type u} [inst : Field K] {n : ℕ} {a : K},\\n  Irreducible (Polynomial.X ^ n - Polynomial.C a) → ∀ {m : ℕ}, m ∣ n → m ≠ 1 → ∀ (b : K), b ^ m ≠ a\", \"doc\": \"If the polynomial $X^n - a$ is irreducible over a field $K$, and $m$ is a nontrivial divisor of $n$ (i.e., $m \\\\mid n$ and $m \\\\neq 1$), then there does not exist an element $b \\\\in K$ such that $b^m = a\"}\n",
+   "date": "2026-10-24",
+   "verdict": "match: X_pow_sub_C_irreducible_of_prime, read Mathlib/FieldTheory/KummerPolynomial.lean:99–126"
+  },
+  {
+   "tool": "loogle",
+   "query": "X_pow_sub_C_irreducible_of_prime",
+   "results": "[loogle] OK 1 hit(s)\n  {\"name\": \"X_pow_sub_C_irreducible_of_prime\", \"module\": \"Mathlib.FieldTheory.KummerPolynomial\", \"type\": \" {K : Type u} [Field K] {p : ℕ} (hp : Nat.Prime p) {a : K} (ha : ∀ (b : K), b ^ p ≠ a) : Irreducible (Polynomial.X ^ p - Polynomial.C a)\", \"doc\": \"Let `p` be a prime number. Let `K` be a field.\\nLet `t ∈ K` be an element which does not have a `p`th root in `K`.\\nThen the polynomial `x ^ p - t` is irreducible over `K`.\"}\n",
+   "date": "2026-10-24",
+   "verdict": "match: X_pow_sub_C_irreducible_of_prime, read Mathlib/FieldTheory/KummerPolynomial.lean:99–126"
+  },
+  {
+   "tool": "grep",
+   "query": "theorem X_pow_sub_C_irreducible(_iff)?_of_prime",
+   "results": "[grep] OK 4 hit(s)\n  {\"file\": \"Mathlib/FieldTheory/KummerPolynomial.lean\", \"line\": \"99\", \"text\": \"theorem X_pow_sub_C_irreducible_of_prime {p : ℕ} (hp : p.Prime) {a : K} (ha : ∀ b : K, b ^ p ≠ a) :\"}\n  {\"file\": \"Mathlib/FieldTheory/KummerPolynomial.lean\", \"line\": \"124\", \"text\": \"theorem X_pow_sub_C_irreducible_iff_of_prime {p : ℕ} (hp : p.Prime) {a : K} :\"}\n  {\"file\": \"Mathlib/FieldTheory/KummerExtension.lean\", \"line\": \"145\", \"text\": \"theorem X_pow_sub_C_irreducible_of_prime_pow\"}\n  {\"file\": \"Mathlib/FieldTheory/KummerExtension.lean\", \"line\": \"152\", \"text\": \"theorem X_pow_sub_C_irreducible_iff_of_prime_pow\"}\n",
+   "date": "2026-10-24",
+   "verdict": "match: X_pow_sub_C_irreducible_of_prime, read Mathlib/FieldTheory/KummerPolynomial.lean:99–126"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The binomial X power p minus a is irreducible over a field if p is prime and a has no pth root",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"X_pow_sub_C_irreducible_iff_of_prime\", \"module\": \"Mathlib.FieldTheory.KummerPolynomial\", \"type\": \"{p : ℕ} (hp : p.Prime) {a : K} : Irreducible (X ^ p - C a) ↔ ∀ b, b ^ p ≠ a\", \"doc\": \"Let $K$ be a field, let $p$ be a prime number, and let $a \\\\in K$. The polynomial $X^p - a$ is irreducible over $K$ if and only if $a$ has no $p$-th root in $K$ (that is, there is no $b \\\\in K$ such tha\"}\n  {\"name\": \"X_pow_sub_C_irreducible_of_prime\", \"module\": \"Mathlib.FieldTheory.KummerPolynomial\", \"type\": \"{p : ℕ} (hp : p.Prime) {a : K} (ha : ∀ b : K, b ^ p ≠ a) : Irreducible (X ^ p - C a)\", \"doc\": \"For a prime number $p$ and an element $a$ in a field $K$ such that $a$ is not a $p$-th power in $K$, the polynomial $X^p - a$ is irreducible in the polynomial ring $K[X]$.\"}\n  {\"name\": \"X_pow_sub_C_irreducible_of_prime_pow\", \"module\": \"Mathlib.FieldTheory.KummerExtension\", \"type\": \"{p : ℕ} (hp : p.Prime) (hp' : p ≠ 2) (n : ℕ) {a : K} (ha : ∀ b : K, b ^ p ≠ a) : Irreducible (X ^ (p ^ n) - C a)\", \"doc\": \"Let $p$ be a prime number with $p \\\\neq 2$, $n$ a natural number, and $a$ an element of a field $K$. If no element $b \\\\in K$ satisfies $b^p = a$, then the polynomial $X^{p^n} - a$ is irreducible over $\"}\n  {\"name\": \"X_pow_sub_C_irreducible_iff_of_prime_pow\", \"module\": \"Mathlib.FieldTheory.KummerExtension\", \"type\": \"{p : ℕ} (hp : p.Prime) (hp' : p ≠ 2) {n} (hn : n ≠ 0) {a : K} : Irreducible (X ^ p ^ n - C a) ↔ ∀ b, b ^ p ≠ a\", \"doc\": \"Let $K$ be a field, $p$ an odd prime, $n$ a positive integer, and $a \\\\in K$. The polynomial $X^{p^n} - a$ in $K[X]$ is irreducible if and only if for every $b \\\\in K$, $b^p \\\\neq a$.\"}\n  {\"name\": \"X_pow_sub_C_irreducible_iff_forall_prime_of_odd\", \"module\": \"Mathlib.FieldTheory.KummerExtension\", \"type\": \"{n : ℕ} (hn : Odd n) {a : K} : Irreducible (X ^ n - C a) ↔ (∀ p : ℕ, p.Prime → p ∣ n → ∀ b : K, b ^ p ≠ a)\", \"doc\": \"The polynomial $X^n - a$ is irreducible over a field $K$ if and only if for every prime divisor $p$ of the odd integer $n$, there does not exist an element $b \\\\in K$ such that $b^p = a$.\"}\n  {\"name\": \"X_pow_sub_C_irreducible_of_odd\", \"module\": \"Mathlib.FieldTheory.KummerExtension\", \"type\": \"{n : ℕ} (hn : Odd n) {a : K} (ha : ∀ p : ℕ, p.Prime → p ∣ n → ∀ b : K, b ^ p ≠ a) : Irreducible (X ^ n - C a)\", \"doc\": \"If $n$ is an odd natural number and for every prime $p$ dividing $n$ there is no element $b$ in the field $K$ such that $b^p = a$, then the polynomial $X^n - a$ is irreducible over $K$.\"}\n  {\"name\": \"X_pow_mul_sub_C_irreducible\", \"module\": \"Mathlib.FieldTheory.KummerExtension\", \"type\": \"{n m : ℕ} {a : K} (hm : Irreducible (X ^ m - C a))\\n  (hn :\\n    ∀ (E : Type u) [Field E] [Algebra K E] (x : E) (_ : minpoly K x = X ^ m - C a),\\n      Irreducible (X ^ n - C (AdjoinSimple.gen K x))) :\\n  Irreducible (X ^ (n * m) - C a)\", \"doc\": \"If the polynomial $ X^m - a $ is irreducible over a field $ K $, and for every field extension $ E $ of $ K $ and every element $ x \\\\in E $ with minimal polynomial $ X^m - a $, the polynomial $ X^n - \"}\n  {\"name\": \"X_pow_sub_C_irreducible_iff_of_odd\", \"module\": \"Mathlib.FieldTheory.KummerExtension\", \"type\": \"{n : ℕ} (hn : Odd n) {a : K} : Irreducible (X ^ n - C a) ↔ (∀ d, d ∣ n → d ≠ 1 → ∀ b : K, b ^ d ≠ a)\", \"doc\": \"For an odd natural number $ n $ and an element $ a $ in a field $ K $, the polynomial $ X^n - a $ is irreducible over $ K $ if and only if for every divisor $ d $ of $ n $ with $ d \\\\neq 1 $, there doe\"}\n",
+   "date": "2026-10-24",
+   "verdict": "match: X_pow_sub_C_irreducible_of_prime, read Mathlib/FieldTheory/KummerPolynomial.lean:99–126"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "X_pow_sub_C_irreducible_of_prime",
+  "file": "Mathlib/FieldTheory/KummerPolynomial.lean",
+  "line": 99,
+  "how": "exact: lines 99–126, with F as K, the given prime p and a=t; the no-root hypothesis is exactly ha."
+ },
+ "status": "mathlib",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-analytic-immediate-rationality",
+  "date": "2026-10-24",
+  "group": "Q46"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Proof (1)--(2), semistable-alteration input in the nearby-cycle branch: ILO Exposé X, Theorem 3.4, Step 3, invoking Temkin 2010, Theorems 1.5 and 1.1 for a semistable multipointed modification. Temkin proof component: Stable reduction over finite-height separably closed valuation fields. Input: Proposition 4.3.3, pp. 29--30; applied componentwise when the smooth generic fibre is disconnected Supporting input: Theorem 2.1.8 and Lemmas 2.1.1, 2.1.2, 2.1.6, pp. 7--10; smooth-centre formulation used in the first substantive paragraph of the proof of Proposition 4.3.3, pp. 29--30. Supporting lemma: Theorem 2.1.10(i)--(iii), printed p. 10; etale form of unramifiedness by Lemma 2.1.6, same page. Supporting input: Proof of Theorem 6.3.1(i), type 4 argument, printed p. 50, specialized to algebraically closed k: every finite extension is immediate, and the proof constructs a topological generator. Supporting fact: Mathlib/FieldTheory/KummerPolynomial.lean:99–126, X_pow_sub_C_irreducible_of_prime; the characteristic-free generalization of Stacks 09HF.",
+   "via": [
+    "lem-trf-analytic-immediate-rationality",
+    "lem-trf-analytic-uniformization",
+    "lem-trf-valued-curve-etale-parameter",
+    "lem-trf-valuation-strict-semistable-local-uniformization",
+    "lem-trf-valuation-stable-reduction",
+    "lem-trf-temkin-stable-modification",
+    "lem-trf-stable-modification-flat-curve-pair",
+    "lem-trf-dejong-relative-marked-semistable",
+    "lem-trf-relative-marked-nodal-reduction",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ }
+}

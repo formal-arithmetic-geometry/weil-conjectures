@@ -1,0 +1,236 @@
+{
+ "id": "lem-sfb-hopf-augmentation-monomial-pairing",
+ "kind": "statement",
+ "title": "Hopf augmentation monomial basis and factorial convolution pairing",
+ "statement": "Let $k$ be a field [def-weil-field]. Let $C$ be a finitely generated commutative unital $k$-algebra with algebra maps $\\Delta:C\\to C\\otimes_k C$, $\\varepsilon:C\\to k$ and a $k$-linear map $S:C\\to C$. Assume $\\Delta$ is coassociative with counit $\\varepsilon$ and\n$$m(S\\otimes1)\\Delta=m(1\\otimes S)\\Delta=\\eta\\varepsilon,$$\nwhere $m$ and $\\eta:k\\to C$ are multiplication and unit. Thus these are the coordinate Hopf algebra axioms, with no cocommutativity assumption on $\\Delta$. Put $I=\\ker\\varepsilon$. The vector space $I/I^2$ is finite-dimensional. Choose $x_1,\\ldots,x_d\\in I$ whose classes form a basis, allowing $d=0$, and let $v_i:C\\to k$ be the linear functional with $v_i(1)=0$, $v_i(I^2)=0$, $v_i(x_j)=\\delta_{ij}$, using $C=k\\oplus I$. For linear functionals define convolution by $a*b=(a\\otimes b)\\Delta$. For $n\\geq0$ with $n!\\ne0$ in $k$, the classes\n$$x^b=x_1^{b_1}\\cdots x_d^{b_d},\\qquad b\\in\\mathbf N^d,\\quad |b|=n,$$\nform a $k$-basis of $I^n/I^{n+1}$, where $I^0=C$. For $a\\in\\mathbf N^d$ put $V^a=v_1^{*a_1}*\\cdots*v_d^{*a_d}$, with the empty product equal to $\\varepsilon$. For $|a|=|b|=n$,\n$$V^a(x^b)=\\begin{cases}\\prod_{i=1}^d a_i!&a=b,\\\\0&a\\ne b.\\end{cases}$$\nEach $V^a$ annihilates $I^{|a|+1}$. For $d=0$, the degree-zero basis is $1$, and the degree-$n$ basis is empty for $n>0$.",
+ "source": {
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Lemma 11.27, printed p.218, with the degree-n evaluation pairing from its proof; Sections 11e, 11.24--11.26, printed pp.216--218. The derivation iteration in the printed proof is interpreted after evaluation at the identity, not as an equality of global functions."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-weil-pbc-associated-graded-ring"
+ ],
+ "proof": [
+  {
+   "text": "Choose algebra generators $y_1,\\ldots,y_s$ of $C$ and put $z_j=y_j-\\varepsilon(y_j)1\\in I$. They also generate $C$ as a $k$-algebra. Expand any polynomial in the $z_j$ into its constant, linear and degree-at-least-two terms. If its value is in $I$, its constant term is zero (apply $\\varepsilon$), and its higher terms are in $I^2$. Thus the finitely many classes of $z_j$ span $I/I^2$, proving finite-dimensionality. The splitting $c=\\varepsilon(c)1+(c-\\varepsilon(c)1)$ and the dual coordinate maps of the chosen basis of $I/I^2$ give exactly the stated $v_i$. For $c=\\alpha1+u$, $e=\\beta1+w$ with $u,w\\in I$, the term $uw\\in I^2$ is killed, so $v_i(ce)=\\alpha v_i(e)+\\beta v_i(c)$. Hence each $v_i$ is a derivation at the counit.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Lemma 11.27, printed p.218; counit derivations as in 11.24, printed p.216. Product-rule details are supplied by the agent, with evaluation at the identity."
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-convolution-linear-map-algebra] with $R=B=k$. The given coassociativity and counit identities are precisely its coalgebra hypotheses. It makes the full linear dual an associative convolution algebra with unit $\\varepsilon$, so the ordered words $V^a$ and their empty-product convention are well defined. No interchange of adjacent $v_i$ is used.",
+   "uses": [
+    "lem-sfb-convolution-linear-map-algebra"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Lemma 11.27, printed p.218; counit derivations as in 11.24, printed p.216. Product-rule details are supplied by the agent, with evaluation at the identity."
+   }
+  },
+  {
+   "text": "For $r=|a|$, list $a_1$ copies of $v_1$, then $a_2$ copies of $v_2$, and so on. Apply [lem-sfb-bialgebra-counit-word-product-rule] to this list and $m=r+1$ elements $c_j\\in I$. Every assignment of $r$ positions to $r+1$ factors leaves a factor empty; its contribution contains $W_\\varnothing(c_j)=\\varepsilon(c_j)=0$. Thus $V^a$ kills each such product, including $r=0$, where it is simply $\\varepsilon$. An element of $I^{r+1}$ is a finite sum of these products: a coefficient in $C$ can be absorbed into one of the $I$ factors. Linearity proves $V^a(I^{r+1})=0$.",
+   "uses": [
+    "lem-sfb-bialgebra-counit-word-product-rule"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Lemma 11.27, printed p.218; counit derivations as in 11.24, printed p.216. Product-rule details are supplied by the agent, with evaluation at the identity."
+   }
+  },
+  {
+   "text": "Let $n=|a|=|b|>0$ and write $x^b$ as a product of $n$ labelled factors, with $b_i$ copies of $x_i$. In the product rule of [lem-sfb-bialgebra-counit-word-product-rule], any non-bijection from the $n$ word positions to these $n$ factors leaves a factor empty and contributes zero. A bijection contributes the product of the numbers $v_i(x_j)=\\delta_{ij}$. It contributes $1$ precisely when each position bearing $v_i$ is sent to a factor bearing $x_i$. There are no such bijections if $a\\ne b$; if $a=b$, each of the $a_i$ positions may be bijected to its $a_i$ matching factors in $a_i!$ ways, independently for each $i$. Their number is $\\prod_i a_i!$. This gives the displayed pairing without any commutation assertion for convolution.",
+   "uses": [
+    "lem-sfb-bialgebra-counit-word-product-rule"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Lemma 11.27, printed p.218; counit derivations as in 11.24, printed p.216. Product-rule details are supplied by the agent, with evaluation at the identity."
+   }
+  },
+  {
+   "text": "For $n\\geq1$, write each of $n$ factors in $I$ as $\\sum_i\\lambda_i x_i+q$ with $q\\in I^2$, using the chosen quotient basis. Expanding their product, every term containing such a $q$ lies in $I^{n+1}$; the remaining terms are scalar multiples of the degree-$n$ monomials. Products of $n$ elements of $I$ span $I^n$ over $k$: absorb any ideal-multiplication coefficient into one factor. Thus the displayed monomials span $I^n/I^{n+1}$. If $\\sum_{|b|=n}c_bx^b\\in I^{n+1}$, Step 3 allows applying $V^a$ and Step 4 gives $c_a\\prod_i a_i!=0$. Since each $a_i\\leq n$ and $n!\\ne0$, all factors $a_i!$ are nonzero in the field $k$, and their product is invertible. Hence every $c_a=0$, proving independence.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Lemma 11.27, printed p.218; counit derivations as in 11.24, printed p.216. Product-rule details are supplied by the agent, with evaluation at the identity."
+   }
+  },
+  {
+   "text": "For $n=0$, the sole exponent vector is zero and its monomial is $1$. The splitting $C=k\\oplus I$ identifies $C/I$ with $k$, so this is a basis; $V^0=\\varepsilon$ evaluates it to $1$, the empty factorial product. If $d=0$, then $I/I^2=0$, so $I=I^2$ and $I^n=I^{n+1}$ for all $n\\geq1$. Each positive-degree quotient is zero and the indicated empty family is its basis. The only word in that case is $V^0$, which kills $I$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Lemma 11.27, printed p.218; counit derivations as in 11.24, printed p.216. Product-rule details are supplied by the agent, with evaluation at the identity."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-convolution-linear-map-algebra",
+  "lem-sfb-bialgebra-counit-word-product-rule"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Lemma 11.27, printed p.218: preserves its monomial-spanning and factorial-separation route, replacing its incorrectly global derivation equalities by the ordered counit product rule."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "augmentation|cotangent|Cotangent|monomial|Monomial|[Ss]ymmetric",
+   "results": "{\"t\": \"2026-10-24T00:19:03Z\", \"tool\": \"grep\", \"query\": \"augmentation|cotangent|Cotangent|monomial|Monomial|[Ss]ymmetric\", \"sub\": \"RingTheory/HopfAlgebra\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: Algebra.SubmersivePresentation.basisCotangent and Algebra.Generators.cotangentSpaceBasis concern a presentation cotangent module, not powers of a Hopf augmentation ideal. IsLocalRing.basisQuotient concerns a supplied finite free module basis. Group-like independence in RingTheory/Coalgebra/GroupLike.lean is unrelated to augmentation monomials. None gives the factorial convolution pairing or the asserted basis; returned signatures and relevant source files were read."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The associated graded algebra of the augmentation ideal of a commutative Hopf algebra in characteristic zero is a symmetric algebra on the cotangent space",
+   "results": "{\"t\": \"2026-10-24T00:19:04Z\", \"tool\": \"leansearch\", \"query\": \"The associated graded algebra of the augmentation ideal of a commutative Hopf algebra in characteristic zero is a symmetric algebra on the cotangent space\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"TensorAlgebra.gradedAlgebra\", \"Algebra.Extension.Cotangent\", \"Ideal.instModuleCotangentOfAlgebra\", \"GradedAlgebra\", \"SymmetricAlgebra.algebraMapInv\", \"ExteriorAlgebra.gradedAlgebra\", \"HopfAlgCat.instHopfAlgebra\", \"AddMonoidAlgebra.grade.gradedAlgebra\"], \"digest\": \"4b5e0c147fa2eab3\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: Algebra.SubmersivePresentation.basisCotangent and Algebra.Generators.cotangentSpaceBasis concern a presentation cotangent module, not powers of a Hopf augmentation ideal. IsLocalRing.basisQuotient concerns a supplied finite free module basis. Group-like independence in RingTheory/Coalgebra/GroupLike.lean is unrelated to augmentation monomials. None gives the factorial convolution pairing or the asserted basis; returned signatures and relevant source files were read."
+  },
+  {
+   "tool": "loogle",
+   "query": "HopfAlgebra, SymmetricAlgebra",
+   "results": "{\"t\": \"2026-10-24T00:19:04Z\", \"tool\": \"loogle\", \"query\": \"HopfAlgebra, SymmetricAlgebra\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: Algebra.SubmersivePresentation.basisCotangent and Algebra.Generators.cotangentSpaceBasis concern a presentation cotangent module, not powers of a Hopf augmentation ideal. IsLocalRing.basisQuotient concerns a supplied finite free module basis. Group-like independence in RingTheory/Coalgebra/GroupLike.lean is unrelated to augmentation monomials. None gives the factorial convolution pairing or the asserted basis; returned signatures and relevant source files were read."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a finitely generated commutative Hopf algebra over a field with n factorial nonzero the degree n monomials in a basis of the augmentation ideal modulo its square form a basis modulo the next power",
+   "results": "{\"t\": \"2026-10-24T00:19:06Z\", \"tool\": \"leanfinder\", \"query\": \"For a finitely generated commutative Hopf algebra over a field with n factorial nonzero the degree n monomials in a basis of the augmentation ideal modulo its square form a basis modulo the next power\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.SubmersivePresentation.basisCotangent\", \"Algebra.Generators.cotangentSpaceBasis\", \"Ideal.adic_basis\", \"Algebra.SubmersivePresentation.basisCotangent_apply\", \"IsLocalRing.basisQuotient\", \"Algebra.SubmersivePresentation.basisDeriv\", \"IsLocalRing.basisQuotient_apply\", \"Algebra.Generators.cotangentSpaceBasis_apply\"], \"digest\": \"e0d1d426df2af49d\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: Algebra.SubmersivePresentation.basisCotangent and Algebra.Generators.cotangentSpaceBasis concern a presentation cotangent module, not powers of a Hopf augmentation ideal. IsLocalRing.basisQuotient concerns a supplied finite free module basis. Group-like independence in RingTheory/Coalgebra/GroupLike.lean is unrelated to augmentation monomials. None gives the factorial convolution pairing or the asserted basis; returned signatures and relevant source files were read."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Cartier theorem on the tangent cone of a commutative Hopf algebra: powers of an augmentation cotangent basis are linearly independent in every degree less than the characteristic",
+   "results": "{\"t\": \"2026-10-24T00:19:34Z\", \"tool\": \"leanfinder\", \"query\": \"Cartier theorem on the tangent cone of a commutative Hopf algebra: powers of an augmentation cotangent basis are linearly independent in every degree less than the characteristic\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"linearIndep_groupLikeVal\", \"linearIndepOn_isGroupLikeElem\", \"LinearIndependent.map_pow_expChar_pow_of_isSeparable\", \"Algebra.SubmersivePresentation.basisCotangent\", \"LinearIndependent.map_pow_expChar_pow_of_isSeparable'\", \"linearIndependent_pow\", \"Algebra.SubmersivePresentation.basisCotangent_apply\", \"Algebra.Generators.cotangentSpaceBasis\"], \"digest\": \"fd247849377f2d84\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: Algebra.SubmersivePresentation.basisCotangent and Algebra.Generators.cotangentSpaceBasis concern a presentation cotangent module, not powers of a Hopf augmentation ideal. IsLocalRing.basisQuotient concerns a supplied finite free module basis. Group-like independence in RingTheory/Coalgebra/GroupLike.lean is unrelated to augmentation monomials. None gives the factorial convolution pairing or the asserted basis; returned signatures and relevant source files were read."
+  },
+  {
+   "tool": "grep",
+   "query": "augmentation|factorial|[Dd]erivation|monomial",
+   "results": "{\"t\": \"2026-10-24T00:53:14Z\", \"tool\": \"grep\", \"query\": \"augmentation|factorial|[Dd]erivation|monomial\", \"sub\": \"RingTheory/HopfAlgebra\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: HopfAlgebra.Quotient.instQuotientIdeal constructs quotient Hopf algebras; antipode identities and LaurentPolynomial.comul_T do not state an augmentation pairing. Cotangent presentation bases concern presentation kernels; Module.Basis.symmetricAlgebra and polynomial monomial bases do not identify the augmentation graded quotients. Returned signatures and the corresponding quotient, cotangent and symmetric-algebra sources were read."
+  },
+  {
+   "tool": "loogle",
+   "query": "HopfAlgebra, Ideal",
+   "results": "{\"t\": \"2026-10-24T00:53:15Z\", \"tool\": \"loogle\", \"query\": \"HopfAlgebra, Ideal\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"HopfAlgebra.Quotient.instQuotientIdeal\"], \"digest\": \"77c19f21b743d77f\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: HopfAlgebra.Quotient.instQuotientIdeal constructs quotient Hopf algebras; antipode identities and LaurentPolynomial.comul_T do not state an augmentation pairing. Cotangent presentation bases concern presentation kernels; Module.Basis.symmetricAlgebra and polynomial monomial bases do not identify the augmentation graded quotients. Returned signatures and the corresponding quotient, cotangent and symmetric-algebra sources were read."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Factorial pairing of augmentation monomials with convolution products of tangent functionals in a commutative Hopf algebra",
+   "results": "{\"t\": \"2026-10-24T00:53:15Z\", \"tool\": \"leanfinder\", \"query\": \"Factorial pairing of augmentation monomials with convolution products of tangent functionals in a commutative Hopf algebra\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"LaurentPolynomial.antipode_C_mul_T\", \"HopfAlgebra.sum_mul_antipode_eq_smul\", \"LaurentPolynomial.comul_T\", \"HopfAlgebra.sum_antipode_mul_eq_smul\", \"HopfAlgebra.sum_mul_antipode_eq_algebraMap_counit\", \"LaurentPolynomial.antipode_T\", \"HopfAlgebra.sum_antipode_mul_eq_algebraMap_counit\", \"LaurentPolynomial.comul_C_mul_T_self\"], \"digest\": \"a19fd469658f3035\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: HopfAlgebra.Quotient.instQuotientIdeal constructs quotient Hopf algebras; antipode identities and LaurentPolynomial.comul_T do not state an augmentation pairing. Cotangent presentation bases concern presentation kernels; Module.Basis.symmetricAlgebra and polynomial monomial bases do not identify the augmentation graded quotients. Returned signatures and the corresponding quotient, cotangent and symmetric-algebra sources were read."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Monomial basis of powers of the augmentation ideal modulo the next power of a commutative Hopf algebra using factorial convolution pairing",
+   "results": "{\"t\": \"2026-10-24T00:56:24Z\", \"tool\": \"leansearch\", \"query\": \"Monomial basis of powers of the augmentation ideal modulo the next power of a commutative Hopf algebra using factorial convolution pairing\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Module.Basis.symmetricAlgebra\", \"Polynomial.basisMonomials\", \"MvPolynomial.basisMonomials\", \"Module.Basis.PowerBasis\", \"MvPolynomial.coe_basisMonomials\", \"DividedPowers.RatAlgebra.dividedPowers\", \"Bialgebra.comul_pow\", \"AddMonoidAlgebra.antipode_single\"], \"digest\": \"702fad995c2e0578\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: HopfAlgebra.Quotient.instQuotientIdeal constructs quotient Hopf algebras; antipode identities and LaurentPolynomial.comul_T do not state an augmentation pairing. Cotangent presentation bases concern presentation kernels; Module.Basis.symmetricAlgebra and polynomial monomial bases do not identify the augmentation graded quotients. Returned signatures and the corresponding quotient, cotangent and symmetric-algebra sources were read."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The powers of lifts of a basis of the cotangent space of a finitely generated Hopf algebra are independent modulo the next augmentation power in degrees with nonzero factorial",
+   "results": "{\"t\": \"2026-10-24T00:56:25Z\", \"tool\": \"leanfinder\", \"query\": \"The powers of lifts of a basis of the cotangent space of a finitely generated Hopf algebra are independent modulo the next augmentation power in degrees with nonzero factorial\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.Generators.exists_presentation_of_basis_cotangent\", \"Algebra.Generators.exists_presentation_of_free_cotangent\", \"Algebra.SubmersivePresentation.basisCotangent\", \"Algebra.SubmersivePresentation.basisCotangent_apply\", \"Algebra.Generators.cotangentSpaceBasis\", \"linearIndep_groupLikeVal\", \"Algebra.Generators.toKaehler_cotangentSpaceBasis\", \"Algebra.SubmersivePresentation.sectionCotangent_zero_of_notMem_range\"], \"digest\": \"7b1ad3eae2ddcd77\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: HopfAlgebra.Quotient.instQuotientIdeal constructs quotient Hopf algebras; antipode identities and LaurentPolynomial.comul_T do not state an augmentation pairing. Cotangent presentation bases concern presentation kernels; Module.Basis.symmetricAlgebra and polynomial monomial bases do not identify the augmentation graded quotients. Returned signatures and the corresponding quotient, cotangent and symmetric-algebra sources were read."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-characteristic-zero-distribution-enveloping",
+  "date": "2026-10-24",
+  "group": "Q81"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Haboush symmetric-power lifting for a trivial quotient representation. Supporting representation-theoretic input: Steinberg endomorphisms detect a nonzero fixed vector. Supporting Self-duality of rho section modules at characteristic-dependent weights. Supporting input: Positive-characteristic simplicity step, using irreducibility of the Steinberg induced module rather than assuming self-duality. Numerical input to the dimension comparison: Weyl dimension of the induced module. Supporting Kempf vanishing for dominant flag line bundles. Positive-characteristic Andersen–Haboush argument: trivial pushforward of M_((p^r-1)rho), before the Serre twisting calculation. Supporting input: Lemma 2.3, second assertion, and Lemma 2.1, printed pp.153--155: H^0(u,V(lambda))=K v_lambda for p-restricted dominant lambda. With roots positive in Lie(B), V(lambda)=Gamma(M_{-w0 lambda}). Supporting input: Simple-root distributions and infinitesimal subalgebra calculus. Supporting input: pinning-compatible integral-to-geometric distribution comparison, with all positive root divided powers, before simple-root generation. Rational comparison prerequisite: tangent distributions realize the rational enveloping algebra before integral restriction; supporting input: Lemma 11.27, printed p.218, with the degree-n evaluation pairing from its proof; Sections 11e, 11.24--11.26, printed pp.216--218. The derivation iteration in the printed proof is interpreted after evaluation at the identity, not as an equality of global functions.",
+   "via": [
+    "lem-sfb-characteristic-zero-distribution-enveloping",
+    "lem-sfb-borel-kostant-distribution-comparison",
+    "lem-sfb-borel-simple-root-distribution-calculus",
+    "lem-sfb-restricted-induced-infinitesimal-invariants",
+    "lem-sfb-flag-frobenius-rho-pushforward",
+    "lem-sfb-dominant-flag-line-kempf-vanishing",
+    "lem-sfb-induced-weyl-dimension-formula",
+    "lem-sfb-steinberg-induced-module-irreducible",
+    "lem-sfb-rho-section-self-duality",
+    "lem-sfb-steinberg-endomorphism-detection",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-hopf-augmentation-monomial-pairing",
+  "worker": "stage1",
+  "summary": "Checked Milne Lemma 11.27 and the project declarations; no exact attachment. Retained the statement and all inherited metadata. Proved finite-dimensionality, spanning, annihilation, factorial pairing and edge cases, isolating only the general ordered convolution product rule as a statement-only prerequisite. The source global derivative identity is used only after evaluation at the counit.",
+  "blueprint": "Realizes the inherited det-thm-sf-ctf-stability-direct-images proof (3) supporting chain, at the characteristic-zero distribution/enveloping comparison prerequisite: Milne Lemma 11.27. No unit route is replaced. The ancestor search returns null for this inherited created-node chain; that value and the full existing via chain are retained."
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q34-258431bb3",
+  "group": "Q34",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q34-258431bb3 (reviewer sub-agent of L); spot-checked: I read the item and its new node lem-sfb-bialgebra-counit-word-product-rule in full, and the cited Mathlib leaf lem-sfb-convolution-linear-map-algebra (R=B=k). The item's statement and source are byte-identical to live, and the item is still unsplit live. There is no re-split note. Source: Milne iAG2017 Lemma 11.27, printed p.218. Its hypotheses match the item's: finitely generated Hopf algebra, n! nonzero. The source's global identity D_i(x_j)=delta_ij holds only after evaluation at the counit (G_m example checked). The route evaluates functionals instead of using that identity. Steps 1, 5 and 6 are genuinely elementary: span of shifted generators, Leibniz from uw in I^2, spanning modulo I^{n+1}, independence via each a_i! dividing n!, and the cases n=0 and d=0. Step 3: a map [r]->[r+1] leaves an empty fibre, which gives a factor eps(c_j)=0, so V^a kills I^{|a|+1}. Step 4: non-bijections vanish, and the label-matching bijections number prod a_i!. The new node is true: the iterated coproduct is an algebra map, the slotwise counit Leibniz rule applies, and counit cancellation finishes it. I checked it by hand at r=0, m=1 and r=m=2, and on G_a and G_m. It is statement-only and self-contained, strictly smaller than the item, and not a clause of it. Searching the DAG for Hopf, bialgebra, convolution and derivation nodes found no duplicate (distribution-tangent-calculus, graded-bialgebra nodes, restricted differentiation and Borel distribution nodes all differ). No SGA source is used and there is no cycle. The blueprint from.node is null, inherited from the base chain. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.HopfAlgebra.AugmentationMonomialPairing",
+  "declaration": "HopfAlgebra.augmentation_monomial_pairing",
+  "file": "lean/Sheaf/RingTheory/HopfAlgebra/AugmentationMonomialPairing.lean",
+  "statement": "theorem augmentation_monomial_pairing (k : Type u) (C : Type v) [Field k] [CommRing C] [HopfAlgebra k C] [Algebra.FiniteType k C] (I : Ideal C) (hI : I = RingHom.ker (Bialgebra.counitAlgHom k C)) : FiniteDimensional k I.Cotangent ∧ ∀ (d : ℕ) (x : Fin d → I) (b : Module.Basis (Fin d) k I.Cotangent), (∀ i : Fin d, b i = I.toCotangent (x i)) → ∃ v : Fin d → C →ₗ[k] k, (∀ v' : Fin d → C →ₗ[k] k, ((∀ i : Fin d, v' i 1 = 0) ∧ (∀ (i : Fin d) (c : C), c ∈ I ^ 2 → v' i c = 0) ∧ (∀ i j : Fin d, v' i (x j) = if i = j then 1 else 0)) ↔ v' = v) ∧ (∀ n : ℕ, (n.factorial : k) ≠ 0 → ∃ B : Module.Basis {a : Fin d → ℕ // ∑ i, a i = n} k (Ideal.associatedGradedPiece I n), ∀ a : {a : Fin d → ℕ // ∑ i, a i = n}, ∃ ha : (∏ i, (x i : C) ^ a.val i) ∈ I ^ n, B a = Submodule.Quotient.mk (⟨∏ i, (x i : C) ^ a.val i, ha⟩ : (I ^ n : Ideal C))) ∧ (∀ a b : Fin d → ℕ, (∑ i, a i) = ∑ i, b i → (List.ofFn (fun i : Fin d ↦ WithConv.toConv (v i) ^ a i)).prod (∏ i, (x i : C) ^ b i) = if a = b then ∏ i, (Nat.factorial (a i) : k) else 0) ∧ (∀ (a : Fin d → ℕ) (c : C), c ∈ I ^ ((∑ i, a i) + 1) → (List.ofFn (fun i : Fin d ↦ WithConv.toConv (v i) ^ a i)).prod c = 0)",
+  "branch": "sheaf-dag",
+  "by": "Q39",
+  "date": "2026-10-24",
+  "existing": false,
+  "fixed_by": "NT-stage2-cc-c4f0a8f4f"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-c4f0a8f4f",
+  "group": "Q39",
+  "result": "fix",
+  "note": "Q39 lem-sfb-hopf-augmentation-monomial-pairing c4f0a8f4. Hypotheses match the node and Milne Lemma 11.27 (p.218): Field k; CommRing + HopfAlgebra + FiniteType C, no cocommutativity, independent universes; I = ker counit named via hI; FiniteDimensional I.Cotangent; basis lifts x : Fin d -> I with d = 0 allowed; basis pinned to monomial classes in associatedGradedPiece I n (= I^n/I^(n+1), def-weil-pbc-associated-graded-ring, landed and imported); ordered WithConv list-product words with unit ε; annihilation for all a. H3 findings, fixed: (1) `∃! v, (3 defining conditions) ∧ pairing ∧ annihilation` gave uniqueness only among families also meeting the later clauses; replaced by the iff form `∃ v, (∀ v', conditions ↔ v' = v) ∧ ...`. (2) The factorial pairing V^a(x^b) was stated only for n! ≠ 0; Milne's proof and node Step 4 give it in every degree, so it is now an unconditional clause for |a| = |b| (strict strengthening, true in every characteristic). Edge cases n = 0, d = 0, C = k and characteristic p checked. No definitions (nothing hollow), proof is sorry, source/blueprint docstrings present, no duplicate notion. fixes/AugmentationMonomialPairing.lean plus the lean-record.json with the verbatim statement; nt_compile --json clean, 2.5 s, exit 0."
+ }
+}

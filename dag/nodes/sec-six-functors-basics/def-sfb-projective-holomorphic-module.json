@@ -1,0 +1,135 @@
+{
+ "id": "def-sfb-projective-holomorphic-module",
+ "kind": "definition",
+ "title": "Standard analytic projective holomorphic module over constant complex coefficients",
+ "statement": "For $n\\in\\mathbf N$, let $Q_n=\\operatorname{Projectivization}_{\\mathbf C}(\\mathbf C^{n+1})$ be the quotient of nonzero vectors by nonzero complex scalar multiplication. For $j\\in\\{0,\\ldots,n\\}$ and $w\\in\\mathbf C^n$, let $v_j(w)$ insert $1$ into position $j$ of $w$, and put $s_j(w)=[v_j(w)]$; the vector $v_j(w)$ is nonzero. A presentation of the standard analytic projective holomorphic module consists of a ringed space $(X,C_X)$ [def-weil-locally-ringed-space-morphism], an identification $e:X\\simeq Q_n$ for which $z\\mapsto e^{-1}[z]$ is a quotient map from $\\mathbf C^{n+1}\\setminus\\{0\\}$, and, on every open $U$, a ring isomorphism $C_X(U)\\simeq\\operatorname{LocallyConstant}(U,\\mathbf C)$ compatible with restriction, using the locally constant functions of [def-weil-pbc-locally-constant-maps-presheaf]. It also consists of a sheaf $\\mathcal O$ of $C_X$-modules [def-weil-sheaf-of-modules-category], with injective additive evaluation maps $\\mathcal O(U)\\to\\{f:U\\to\\mathbf C\\}$. Their ranges are exactly the functions for which, for every $j$ and every $w$ with $e^{-1}s_j(w)\\in U$, the coordinate function $w^{\\prime}\\mapsto f(e^{-1}s_j(w^{\\prime}))$ is complex analytic at $w$. This coordinate function is extended by zero when its argument is outside $U$; only germs inside the coordinate domain are tested. Evaluation respects restriction and satisfies $(a f)(x)=a(x)f(x)$ under the coefficient identification. Thus $C_X$ is the constant complex ring sheaf, and $\\mathcal O$ is the usual holomorphic function sheaf with its specified scalar action. The zero-dimensional case is included.",
+ "source": {
+  "document": "literature/serre-gaga.pdf",
+  "place": "Serre, GAGA, nos. 1--2 (holomorphic function sheaves) and 13, Lemma 4, printed pp.3--5 and 20--21; read online https://www.numdam.org/article/AIF_1956__6__1_0.pdf."
+ },
+ "stmt_deps": [
+  "def-weil-locally-ringed-space-morphism",
+  "def-weil-pbc-locally-constant-maps-presheaf",
+  "def-weil-sheaf-of-modules-category"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Complex projective space quotient topology standard affine charts holomorphic function sheaf constant complex coefficient sheaf",
+   "results": "OK 8 hits: CategoryTheory.constantSheaf, CategoryTheory.Sheaf.IsConstant.mk, CondensedMod.LocallyConstant.instFullSheafCompHausCoherentTopologyTypeConstantSheaf, CondensedMod.LocallyConstant.instFullModuleCatSheafCompHausCoherentTopologyConstantSheaf, CondensedMod.LocallyConstant.instFaithfulSheafCompHausCoherentTopologyTypeConstantSheaf, LightCondensed.IsDiscrete, Complex.isQuotientMap_re, AlgebraicGeometry.PresheafedSpace.const",
+   "date": "2026-10-24",
+   "verdict": "no exact match: constant sheaves and algebraic Proj do not give the standard analytic projective holomorphic module; Mathlib Projectivization and AnalyticAt are reused."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The sheaf of holomorphic functions on complex projective space as a module over locally constant complex functions",
+   "results": "OK 8 hits: AlgebraicGeometry.ProjectiveSpectrum.Proj.structureSheaf, AlgebraicGeometry.ProjectiveSpectrum.StructureSheaf.structureSheafInType, AlgebraicGeometry.ProjectiveSpectrum.StructureSheaf.structurePresheafInCommRing_obj_carrier, AlgebraicGeometry.Proj.toSheafedSpace, AlgebraicGeometry.ProjectiveSpectrum.StructureSheaf.structurePresheafInCommRing, CompHausLike.LocallyConstantModule.functorToPresheaves_obj_obj_isModule, AlgebraicGeometry.ProjectiveSpectrum.StructureSheaf.commRingStructureSheafInTypeObj, AlgebraicGeometry.Proj.mul_apply",
+   "date": "2026-10-24",
+   "verdict": "no exact match: constant sheaves and algebraic Proj do not give the standard analytic projective holomorphic module; Mathlib Projectivization and AnalyticAt are reused."
+  },
+  {
+   "tool": "grep",
+   "query": "Projectivization|holomorphic|Holomorphic",
+   "results": "OK 5 hits: Mathlib/Geometry/Manifold/Complex.lean, Mathlib/Geometry/Manifold/Complex.lean, Mathlib/Geometry/Manifold/Complex.lean, Mathlib/Geometry/Manifold/Complex.lean, Mathlib/Geometry/Manifold/Complex.lean",
+   "date": "2026-10-24",
+   "verdict": "no exact match: constant sheaves and algebraic Proj do not give the standard analytic projective holomorphic module; Mathlib Projectivization and AnalyticAt are reused."
+  },
+  {
+   "tool": "grep",
+   "query": "rg -n projectiveChartPoint|projectiveSectionCoordinates|ProjectiveHolomorphicModule|analytic_projective_structure_cohomology lean/Sheaf lean/WeilConjectures dag/lean_names_upstream.json",
+   "results": "No occurrences. Broader holomorphic search finds SmoothAnalytic.Atlas, IsHolomorphic and FunctionSheaf in Sheaf.AlgebraicGeometry.SmoothAnalyticData; these describe general analytic atlases and holomorphic ringed spaces, not projective quotient topology and holomorphic modules over the constant coefficient sheaf.",
+   "date": "2026-10-24",
+   "verdict": "no match; generic interfaces read and distinguished"
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-analytic-projective-structure-cohomology",
+  "date": "2026-10-24",
+  "group": "NQ"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), supporting GAGA input in the Kodaira/Kempf prerequisite chain; Analytic structure-sheaf vanishing on projective space. Definition of its analytic projective space, standard coordinate germs, constant coefficient ring and holomorphic module.",
+   "via": [
+    "lem-sfb-analytic-projective-structure-cohomology",
+    "lem-sfb-gaga-derived-coherent-sections",
+    "lem-sfb-algebraic-dolbeault-derivative-comparison",
+    "lem-sfb-hodge-first-differential-zero",
+    "lem-sfb-kollar-smooth-divisor-injectivity",
+    "lem-sfb-kodaira-vanishing",
+    "lem-sfb-dominant-flag-line-kempf-vanishing",
+    "lem-sfb-induced-weyl-dimension-formula",
+    "lem-sfb-steinberg-induced-module-irreducible",
+    "lem-sfb-rho-section-self-duality",
+    "lem-sfb-steinberg-endomorphism-detection",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "lean": {
+  "module": "Sheaf.Geometry.Complex.ProjectiveHolomorphicModule",
+  "declaration": "ComplexGeometry.ProjectiveHolomorphicModule",
+  "file": "lean/Sheaf/Geometry/Complex/ProjectiveHolomorphicModule.lean",
+  "statement": "structure ProjectiveHolomorphicModule (n : ℕ)",
+  "branch": "sheaf-dag",
+  "by": "NQ",
+  "date": "2026-10-24",
+  "existing": false,
+  "declarations": [
+   "ComplexGeometry.projectiveChartVector_ne_zero",
+   "ComplexGeometry.projectiveChartPoint",
+   "ComplexGeometry.projectiveSectionCoordinates",
+   "ComplexGeometry.ProjectiveHolomorphicModule"
+  ]
+ },
+ "import_flags": [],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-0e70f69e4",
+  "group": "NQ",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-0e70f69e4",
+  "group": "NQ",
+  "result": "pass",
+  "note": "Item stmt matches node and Serre GAGA §13 Lemme 4: ∃! constant for global sections via actual eval; ∀ q>0 IsZero of RingedSpace.moduleCohomology over the constant-ℂ ringed space (ℂ-vector-space sheaf cohomology, recorded dep decl). Base diff: only lean + stmt_deps adding the new def node. New def-sfb-projective-holomorphic-module: exact-section presentation (Projectivization carrier, quotient topology, LocallyConstant coefficients with restriction, sections = functions analytic in all standard charts insertNth j 1, smul/restrict pinned); determined up to unique iso, exists in every universe via ULift, not hollow (only sorry is Prop chart-vector ≠ 0 with docstring proof); H12 fields OK; no duplicate on live (SmoothAnalytic.Atlas/IsHolomorphic generic, FunctionSheaf is a ring presentation). Edge cases n=0, q>n, empty opens, universe u OK. Statements verbatim, docstrings/steps, ≤100 cols, report sections present. Advisory only: moduleRings owner (def-trf-ringed-derived-open-hom-restriction) uncited, same as def-sc-ringed-space-module-cohomology. No compile (no change)."
+ }
+}

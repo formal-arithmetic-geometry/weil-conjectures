@@ -1,0 +1,548 @@
+{
+ "id": "lem-sp-composite-projection-coefficients",
+ "kind": "statement",
+ "title": "Projection coherence and domains at finite and tower coefficients",
+ "statement": "Fix $k=\\overline{\\mathbf F}_q$ of characteristic $p$ and a prime $\\ell\\ne p$ [def-weil-finite-field-fiber]. Let $X\\xrightarrow fY\\xrightarrow gZ$ be smooth separated morphisms of pure relative dimensions $d,e\\geq0$ between separated finite-type $k$-schemes, and put $h=gf$ [def-weil-finite-type-morphism, def-weil-proper-morphism, def-sbc-smooth-morphisms].\n\nUse either a finite commutative ring $B=A$ killed by a power of $\\ell$, with the ordinary constant-$A$ pro-etale derived categories and bounded constructible finite-Tor subcategories of [det-sp-finite-general-ring], or $B=(\\mathcal O_E/\\ell^n)_{n\\ge1}$ for a finite extension $E/\\mathbf Q_\\ell$, in the ordinary derived categories of varying-coefficient towers [sk-def-sp-coefficient-towers, det-sp-coefficient-towers-abelian]. In the latter case $\\mathcal C_T(B)$ is the full subcategory with cohomology and Tor intervals uniform in $n$ [sk-def-sp-normalized-towers]; input towers need not be normalized. All tensors are ordinary derived tensors over $B$, with derived pullback, shifts and twists [def-weil-derived-pullback-tensor-hom, def-weil-derived-tensor, def-coefficient-twists-detailed].\n\nFor $u=f,g,h$ use $F_u=Ru_{!,B}\\dashv G_u=u_B^!$, its counit $\\varepsilon_u$, and $\\omega_u=G_uB_{\\mathrm{target}(u)}$ [def-pur-co-smoothness, det-sp-finite-general-ring, det-sp-tower-gluing, det-sp-tower-gamma]. Let $\\alpha:F_gF_f\\simeq F_h$ and $c:G_h\\simeq G_fG_g$ be the counit-preserving comparisons [det-sp-composition-comparisons].\n\nThe schemes are Noetherian and the maps $f,g,h$ admit compactifications. The composite has relative dimension $d+e$. For every $K\\in\\mathcal C_Z(B)$ the objects $\\omega_g$, $G_gK$ and $W=f^*\\omega_g\\otimes\\omega_f$ lie in the corresponding constructible finite-Tor categories. Each $\\omega_u$ is isomorphic to $B(d_u)[2d_u]$; tensoring with its unshifted Tate line preserves any Tor interval $[a,b]$, and the shift changes it to $[a-2d_u,b-2d_u]$, uniformly for towers.\n\nWrite $P_{u,M,L}:F_uM\\otimes L\\to F_u(M\\otimes u^*L)$ for the canonical compactification projection, obtained from open extension and the proper counit projection. On the displayed constructible finite-Tor inputs these maps are invertible, natural, unital, and satisfy\n$$P_{h,M,L}(\\alpha_M\\otimes1)=\\alpha_{M\\otimes f^*g^*L}\\,F_g(P_{f,M,g^*L})P_{g,F_fM,L},$$\n$$P_{u,M,L\\otimes L'}=P_{u,M\\otimes u^*L,L'}(P_{u,M,L}\\otimes1),$$\nwith the canonical pullback and tensor associators. Both equalities hold in the coefficient derived categories themselves, before tower evaluation. At finite $A$, they use the pro-etale maps transported from the ordinary etale compactification maps; the site comparison preserves this same $\\alpha$ and the counits. At towers they use the simultaneous section-model maps with their actual quotient transitions. Under $(\\varpi_E^{en})=(\\ell^n)$, where $e$ is the ramification index, restriction of the uniformizer-indexed models to indices $en$ identifies their projection and composition maps with these $\\ell$-indexed maps.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sp-composition/sk-prop-sp-composition-factors.proof.md",
+  "place": "proof (2), projection formula for gf is the composite; former Steps 1-2 and tensor associativity in Step 3"
+ },
+ "stmt_deps": [
+  "def-weil-finite-field-fiber",
+  "def-weil-finite-type-morphism",
+  "def-weil-proper-morphism",
+  "def-sbc-smooth-morphisms",
+  "det-sp-finite-general-ring",
+  "sk-def-sp-coefficient-towers",
+  "det-sp-coefficient-towers-abelian",
+  "sk-def-sp-normalized-towers",
+  "def-weil-derived-pullback-tensor-hom",
+  "def-weil-derived-tensor",
+  "def-coefficient-twists-detailed",
+  "def-pur-co-smoothness",
+  "det-sp-tower-gluing",
+  "det-sp-tower-gamma",
+  "det-sp-composition-comparisons",
+  "def-sp-coefficient-tower-shriek-interfaces",
+  "def-sf-compact-support-site-comparison-construction",
+  "def-coef-semilinear-system-models",
+  "def-coef-ringed-tensor-hom-model",
+  "def-pur-finite-ring-site-tensor-transport-data",
+  "def-sf-integral-system-operations",
+  "def-sf-integral-system-realization-data",
+  "def-sp-adjoint-compositor-data",
+  "lem-sp-finite-orientation-reduction"
+ ],
+ "proof": [
+  {
+   "text": "Apply [lem-weil-pbc-finite-type-over-noetherian] to the structure maps to $\\operatorname{Spec}k$; a field is Noetherian since its only ideals are $0$ and $k$. Thus $X,Y,Z$ are Noetherian. The setting of [sk-def-sfb-dc-setting] applies verbatim and supplies compactifications, with separated finite-type middle schemes, of every map used here. By [lem-sbc-smooth-relative-dimension-permanence](2), $h$ is smooth of dimension $d+e$, including on empty schemes. Fix these compactifications and the comparisons of [det-sp-composition-comparisons]. Their normalization is precisely the proper/open compositor and its adjunction comparison, with composite counit $\\varepsilon_gF_g(\\varepsilon_fG_g)$; it is not an independently chosen isomorphism. Lean geometry is proved directly: isNoetherian_of_locallyOfFiniteType gives the three Noetherian instances; the published compactifiability theorem [def-asd-compactifiable] gives the three compactifications; Mathlib's smoothOfRelativeDimension_comp supplies dimension d+e. No chosen comparison is needed for this geometric conjunction.",
+   "uses": [
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "sk-def-sfb-dc-setting",
+    "lem-sbc-smooth-relative-dimension-permanence",
+    "det-sp-composition-comparisons",
+    "def-asd-compactifiable"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sp-composition/sk-prop-sp-composition-factors.proof.md",
+    "place": "(2), geometry and fixed composite adjunction"
+   }
+  },
+  {
+   "text": "For finite $A$, [det-sp-finite-general-ring](1),(3), applied to $f,g,h$, identifies $\\omega_u$ with $A(d_u)[2d_u]$ and $G_gK$ with $g^*K(e)[2e]$. The Tate lines of [lem-asd-etale-finite-twist-pullback] are locally free of rank one; their pro-etale realizations remain locally free. The finite pullback assertion of [lem-sp-proetale-ctf-pullback-domains] gives constructibility and boundedness of $f^*\\omega_g$. Locally tensoring with a Tate line is tensoring with $A$, hence is exact and preserves the Tor interval of every tensor test. Applying the inverse line proves preservation in both directions. Since $H^i(C[s])=H^{i+s}(C)$, a shift by $2d_u$ subtracts $2d_u$ from both endpoints. Thus $W=f^*\\omega_g\\otimes\\omega_f$ is a shifted tensor product of two locally free rank-one constructible sheaves, hence is constructible finite-Tor. This also verifies the domain for $G_gK$; no DVR presentation of $A$ is used. The restricted adjunction of [sk-prop-sf-rf-shriek-preservation] also ensures that every finite compact-support image, in particular $F_fM$ in the composite formula, is ctf. Lean finite_domains uses the proved private ordinary-origin, comparison, and smooth-exceptional preservation helpers in [lem-pur-finite-smooth-level-of-orientation]. The ordinary coefficient unit is transported through smoothPurityUnitIso and the exact comparison. Applying smooth-exceptional preservation for g gives omega_g and G_g K. The proved smooth tensor-domain helper of [lem-sp-proetale-ctf-pullback-domains], applied to f with input omega_g, gives W. This needs no new orientation calculation. The orientation/Tor-interval clause itself retains the preceding plan and remains unproved in this delivery.",
+   "uses": [
+    "det-sp-finite-general-ring",
+    "lem-asd-etale-finite-twist-pullback",
+    "lem-sp-proetale-ctf-pullback-domains",
+    "sk-prop-sf-rf-shriek-preservation",
+    "lem-pur-finite-smooth-level-of-orientation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sp-composition/sk-prop-sp-composition-factors.proof.md",
+    "place": "(2), finite-coefficient domains and orientation"
+   }
+  },
+  {
+   "text": "For towers, use [det-sp-tower-gamma](1),(2) for the actual orientation isomorphisms and $G_gK\\simeq g^*K(e)[2e]$. The tower clause of [lem-sp-proetale-ctf-pullback-domains] preserves the common cohomological and Tor intervals under pullback, without normalization. The line calculation in Step 2 applies at every $n$ with the same interval endpoints and the same shift. Consequently $\\omega_g$, $G_gK$ and $W$ have common cohomological and Tor bounds and constructible levels. For example $\\omega_u$ has Tor interval $[-2d_u,-2d_u]$ and $W$ has $[-2(d+e),-2(d+e)]$. These are statements about intervals containing the support; no nonzero cohomology is asserted for an empty scheme or zero object. The uniform tower category is exactly the full subcategory specified in [sk-def-sp-normalized-towers]. The tower functors in [det-sp-composition-comparisons](3) are defined on these uniform ctf subcategories, so the intermediate compact-support inputs in the composite identity also stay in that domain. Lean tower_domains needs only the full-subcategory membership of the outputs of the supplied right adjoints: transport their property fields through the unit of the fixed realization equivalence. Pullback membership follows from the proved tower_pullback_mem helper in [lem-sp-proetale-ctf-pullback-domains]. Apply [lem-sp-uniform-tower-tensor-closure] to the pulled-back omega_g and omega_f, then transport the tensor through the realization counit. This proves all three domain assertions without normalization or smooth orientation. The explicit orientation and interval clause retains the preceding plan and remains unproved.",
+   "uses": [
+    "det-sp-tower-gamma",
+    "lem-sp-proetale-ctf-pullback-domains",
+    "sk-def-sp-normalized-towers",
+    "det-sp-composition-comparisons",
+    "lem-sp-uniform-tower-tensor-closure"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sp-composition/sk-prop-sp-composition-factors.proof.md",
+    "place": "(2), uniform tower domains"
+   }
+  },
+  {
+   "text": "In the finite case [lem-sp-finite-ring-compact-support-projection] constructs $P$ as the proper counit projection followed by the open tensor map, and proves its invertibility and naturality on bounded constructible inputs. To compare with etale maps, choose bounded constructible etale origins by [lem-weil-pbc-finite-ring-constructible-derived-origin]. Clause (2) of [lem-pur-finite-ring-site-tensor-transpose] identifies the actual projection arrows through the compact-support comparison, and clause (1) identifies the counits. The composition equation of [lem-sp-finite-compact-site-coherence] identifies that comparison with the very same proper/open $\\alpha$ fixed in Step 1. Thus this transport changes neither the projection nor the compositor. Substituting these comparisons into [lem-amb-compactification-projection-composition] gives the first displayed identity, with exactly $\\alpha_{M\\otimes f^*g^*L}$ on the right. The latter lemma holds for arbitrary finite $A$ and arbitrary unbounded etale inputs, so all our witnesses satisfy its hypotheses.",
+   "uses": [
+    "lem-sp-finite-ring-compact-support-projection",
+    "lem-weil-pbc-finite-ring-constructible-derived-origin",
+    "lem-pur-finite-ring-site-tensor-transpose",
+    "lem-sp-finite-compact-site-coherence",
+    "lem-amb-compactification-projection-composition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sp-composition/sk-prop-sp-composition-factors.proof.md",
+    "place": "(2), finite projection/composition identity"
+   }
+  },
+  {
+   "text": "For tower inputs use [lem-sp-strict-compactification-comparison-realization]: $P^c=G_p(\\gamma)\\pi_p$ is an actual transformation on ordinary unbounded varying-coefficient towers; $\\pi_p$ is the counit transpose and $\\gamma$ has the open-unit normalization. This is the same word as the finite $P$, with the actual quotient transitions. On the stated uniform ctf inputs it is invertible by [det-sp-tower-shriek-levels](2a). Indeed the towers are bounded below; every finite ring $A_n$ is Noetherian, and [det-pe-finite-tor-comparison-noetherian] supplies bounded constructible finite-Tor etale origins for their levels on our qcqs Noetherian schemes. No compatible choice of these origins is required by (2a). The arbitrary-strict-system clause of [lem-sf-composition-projection-mate] now gives the first displayed equality directly in the system derived category. Its proper/open maps are the same simultaneous maps: [lem-sp-varying-ring-proper-open-pasting] specifies them as the clopen-projector mates, with their horizontal and vertical pastings before evaluation. The system category here is literally the semilinear category of [lem-coef-semilinear-derived-sections]; no normalized-system restriction is made in the cited composition clause. Its compositor is the geometric one of Step 1, not a lift chosen from its evaluations.",
+   "uses": [
+    "lem-sp-strict-compactification-comparison-realization",
+    "det-sp-tower-shriek-levels",
+    "det-pe-finite-tor-comparison-noetherian",
+    "lem-sf-composition-projection-mate",
+    "lem-sp-varying-ring-proper-open-pasting",
+    "lem-coef-semilinear-derived-sections"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sp-composition/sk-prop-sp-composition-factors.proof.md",
+    "place": "(2), actual tower projection/composition identity"
+   }
+  },
+  {
+   "text": "Here is the tensor-variable identity in either coefficient case. Apply [lem-sfb-ringed-projection-tensor-composition] on the ordinary ringed site, or on its ringed sequence site, whose module category is [lem-pur-system-ringed-sequence-site]. It gives the tensor-associativity equation for $\\pi_p$. For the open factor, [lem-sf-open-tensor-normalization] makes $j^*\\gamma$ the identity and makes $j_!$ fully faithful. Both iterated open tensor maps are therefore the same: apply $j^*$ and the canonical associators to obtain the identity on $M\\otimes j^*N\\otimes j^*N'$. Their sources are in the image of $j_!$ via $\\gamma$, so full faithfulness applies. Write $P_{M,L}=Rp_*(\\gamma_{M,p^*L})\\pi_{p,j_!M,L}$. In the product $P_{M\\otimes j^*p^*L,L'}(P_{M,L}\\otimes1)$, naturality of $\\pi_p$ at $\\gamma_{M,p^*L}$ moves this open map inside $Rp_*$. The proper tensor-associativity equation combines the two $\\pi_p$ factors, and the just-proved open equation combines the two $\\gamma$ factors. The result is $Rp_*(\\gamma_{M,p^*(L\\otimes L')})\\pi_{p,j_!M,L\\otimes L'}=P_{M,L\\otimes L'}$. Pullback tensor comparisons and associators are the canonical monoidal ones of [lem-sfb-ringed-derived-monoidal-comparisons]. This proves the second displayed identity on actual system maps, rather than testing equality after evaluation.",
+   "uses": [
+    "lem-sfb-ringed-projection-tensor-composition",
+    "lem-pur-system-ringed-sequence-site",
+    "lem-sf-open-tensor-normalization",
+    "lem-sfb-ringed-derived-monoidal-comparisons"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sp-composition/sk-prop-sp-composition-factors.proof.md",
+    "place": "(2), associativity of tensor products and open/proper factors"
+   }
+  },
+  {
+   "text": "Naturality of $P$ follows from naturality of its two factors. For its coefficient-unit constraint, the transpose of $\\pi_{p,E,1}$, after the canonical pullback/unit identifications of [lem-sfb-ringed-derived-monoidal-comparisons], is $\\varepsilon_{p,E}$. The adjunct of $1_{Rp_*E}$ is the same counit, so injectivity of adjunction transposition gives $\\pi_{p,E,1}=1$. The open-unit normalization of [lem-sf-open-tensor-normalization] likewise gives $\\gamma_{M,1}=1$ after unit identifications. Hence $P_{u,M,1}=1$. This proves the asserted unitality in the finite and sequence sites alike.",
+   "uses": [
+    "lem-sfb-ringed-derived-monoidal-comparisons",
+    "lem-sf-open-tensor-normalization"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sp-composition/sk-prop-sp-composition-factors.proof.md",
+    "place": "(2), naturality and coefficient-unit constraints"
+   }
+  },
+  {
+   "text": "It remains to check the arithmetic index convention on these maps. Write the ramification index as $r$ here, to distinguish it from the relative dimension of $g$. Let $U$ retain indices $rn$ of the $\\varpi_E$-system. By [lem-sp-arithmetic-system-right-adjoint], $U$ has the exact floor-extension right adjoint $J$ with $UJ=1$. Restriction is exact and computes its own derived functor; [lem-pur-system-derived-subsequence] identifies its cochain localization and selected evaluations. It is monoidal before derivation, since tensor and its relations are componentwise. It also preserves K-flat complexes: for an acyclic selected-system complex $C$, $JC$ is acyclic, and $U(P\\otimes JC)=UP\\otimes C$; thus the right side is acyclic when $P$ is K-flat. Consequently the derived tensor/pullback comparisons restrict with their actual associators. Here $U$ is also ringed direct image for the index-selection morphism of sequence topoi (its underlying left adjoint is ceiling-index extension). The two composites with a geometric direct image are identical already on sheaves. Apply [lem-weil-pbc-ringed-topoi-derived-pushforward-composition] to these two factorizations to obtain $U Rp_*\\simeq Rp_* U$. Open extension and geometric inverse image commute termwise with $U$. The adjunction-compatibility and monoidal-composition clauses of [lem-sfb-ringed-derived-monoidal-comparisons] identify these as counit-preserving comparisons, so they carry the defining word $Rp_*(\\gamma)\\pi_p$ and the proper/open compositor to the corresponding restricted words. Thus they identify projection and composition as actual derived transformations.",
+   "uses": [
+    "lem-sp-arithmetic-system-right-adjoint",
+    "lem-pur-system-derived-subsequence",
+    "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
+    "lem-sfb-ringed-derived-monoidal-comparisons"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sp-composition/sk-prop-sp-composition-factors.proof.md",
+    "place": "(2), uniformizer-indexed simultaneous models and arithmetic restriction"
+   }
+  },
+  {
+   "text": "Finally $\\ell=u\\varpi_E^r$ implies equality of ideals $(\\ell^n)=(\\varpi_E^{rn})$. The identity on $\\mathcal O_E$ therefore identifies their quotient rings and every quotient transition; explicitly both reductions send the class of $x$ to the class of $x$. This is the commuting quotient diagram of [lem-sp-cofinal-coefficient-projection-cocone], with $q_{n,rn}$ an isomorphism. Applying this ring-system identification to Step 8 gives precisely the $\\ell$-indexed simultaneous models of [lem-sp-strict-compactification-comparison-realization]. The projection and composition words are unchanged. All tower equalities above were proved in their derived categories; joint evaluation conservativity was used only for invertibility where the cited projection theorem uses it, never for equality of maps.",
+   "uses": [
+    "lem-sp-cofinal-coefficient-projection-cocone",
+    "lem-sp-strict-compactification-comparison-realization"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sp-composition/sk-prop-sp-composition-factors.proof.md",
+    "place": "(2), equality of the ramified quotient models"
+   }
+  },
+  {
+   "text": "Compactification choices. Steps 4 and 5 form $P_h$ and the compositor with the composite compactification of $h$, whereas Step 1 fixed $c_h$; the two are compared through a common refinement [lem-cbc-compactifiable-cofiltered], and the $\\alpha$ of [det-sp-composition-comparisons] includes exactly these refinement comparisons. At finite $A$, [lem-amb-shriek-tensor-composition] states the first displayed identity for the compactification-independent etale functors and their tower-normalized compositor, including compatibility with the refinement comparisons; the refinement equation of [lem-sp-finite-compact-site-coherence] and the transport of Step 4 carry it to the pro-etale maps, tensor symmetry ordering the factors. For towers, [lem-sf-refinement-projection-counit] gives $C_u(K\\otimes P_hL)\\,\\mathrm{PF}^{c_2}_{K,L}=\\mathrm{PF}^{c_1}_{K,L}(C_uK\\otimes1)$ for every refinement $u$, in the system category before evaluation. On our bounded-below inputs $C_u$ is invertible: its evaluations are the finite refinement isomorphisms [lem-amb-unbounded-compact-support-comparisons, lem-sp-finite-compact-site-coherence] and evaluation is conservative [det-sp-tower-shriek-levels](3). Conjugating the identity of Step 5 by these $C_u$ gives it for $c_h$; Steps 8 and 9 carry the refinement maps to the $\\ell$-indexed models with the other proper/open words. Steps 6 and 7 hold for each compactification separately.",
+   "uses": [
+    "lem-cbc-compactifiable-cofiltered",
+    "det-sp-composition-comparisons",
+    "lem-amb-shriek-tensor-composition",
+    "lem-sp-finite-compact-site-coherence",
+    "lem-sf-refinement-projection-counit",
+    "lem-amb-unbounded-compact-support-comparisons",
+    "det-sp-tower-shriek-levels"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sp-composition/sk-prop-sp-composition-factors.proof.md",
+    "place": "(2), composition isomorphism for R(-)_! with the fixed compactification of gf"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-asd-compactifiable",
+  "det-pe-finite-tor-comparison-noetherian",
+  "det-sp-composition-comparisons",
+  "det-sp-finite-general-ring",
+  "det-sp-tower-gamma",
+  "det-sp-tower-shriek-levels",
+  "lem-amb-compactification-projection-composition",
+  "lem-amb-shriek-tensor-composition",
+  "lem-amb-unbounded-compact-support-comparisons",
+  "lem-asd-etale-finite-twist-pullback",
+  "lem-cbc-compactifiable-cofiltered",
+  "lem-coef-semilinear-derived-sections",
+  "lem-pur-finite-ring-site-tensor-transpose",
+  "lem-pur-finite-smooth-level-of-orientation",
+  "lem-pur-system-derived-subsequence",
+  "lem-pur-system-ringed-sequence-site",
+  "lem-sbc-smooth-relative-dimension-permanence",
+  "lem-sf-composition-projection-mate",
+  "lem-sf-open-tensor-normalization",
+  "lem-sf-refinement-projection-counit",
+  "lem-sfb-ringed-derived-monoidal-comparisons",
+  "lem-sfb-ringed-projection-tensor-composition",
+  "lem-sp-arithmetic-system-right-adjoint",
+  "lem-sp-cofinal-coefficient-projection-cocone",
+  "lem-sp-finite-compact-site-coherence",
+  "lem-sp-finite-ring-compact-support-projection",
+  "lem-sp-proetale-ctf-pullback-domains",
+  "lem-sp-strict-compactification-comparison-realization",
+  "lem-sp-uniform-tower-tensor-closure",
+  "lem-sp-varying-ring-proper-open-pasting",
+  "lem-weil-pbc-finite-ring-constructible-derived-origin",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
+  "sk-def-sfb-dc-setting",
+  "sk-def-sp-normalized-towers",
+  "sk-prop-sf-rf-shriek-preservation"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sp-composition/sk-prop-sp-composition-factors.proof.md",
+  "place": "Proof (2), expanded using the existing ordinary finite-ring and ringed-system projection lemmas; Stacks Tags 0B56, 0E48, 0F7B, 0F7J, 0F0G; S6 stage-3 partial proof 2026-10-27: geometry, finite_domains and tower_domains completed from existing declarations, with exact realization unit/counit transport; the other ten theorem clauses retain their original plans."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Compact support projection formula respects composition for finite ring sheaves and ordinary varying coefficient towers",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"Profinite.NobelingProof.projRestricts_eq_comp\", \"module\": \"Mathlib/Topology/Category/Profinite/Nobeling/Basic\", \"type\": \"∀ {I : Type u} (C : Set (I → Bool)) {J K L : I → Prop} [inst : (i : I) → Decidable (J i)]\\n  [inst_1 : (i : I) → Decidable (K i)] [inst_2 : (i : I) → Decidable (L i)] (hJK : ∀ (i : I), J i → K i)\\n  (hKL : ∀ (i : I), K i → L i),\\n  Profinite.NobelingProof.ProjRestricts C hJK ∘ Profinite.NobelingProof.P\", \"doc\": \"For subsets $J \\\\subseteq K \\\\subseteq L$ of an index set $I$, the composition of the projection restriction maps $\\\\text{ProjRestricts}(C, J \\\\subseteq K)$ and $\\\\text{ProjRestricts}(C, K \\\\subseteq L)$ eq\"}\n  {\"name\": \"SheafOfModules.Presentation.map_π_eq\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent\", \"type\": \"∀ {C : Type u'} [inst : CategoryTheory.Category.{v', u'} C] {J : CategoryTheory.GrothendieckTopology C}\\n  {R : CategoryTheory.Sheaf J RingCat} [inst_1 : CategoryTheory.HasSheafify J AddCommGrpCat]\\n  [inst_2 : J.WEqualsLocallyBijective AddCommGrpCat]\\n  [inst_3 : J.HasSheafCompose (CategoryTheory.forg\", \"doc\": \"Given a category $\\\\mathcal{C}$ with a Grothendieck topology $J$, a sheaf $R$ of rings on $\\\\mathcal{C}$, and a colimit-preserving functor $F$ between module categories, the generator morphism of the pr\"}\n  {\"name\": \"LightProfinite.proj_comp_transitionMap'\", \"module\": \"Mathlib/Topology/Category/LightProfinite/AsLimit\", \"type\": \"∀ (S : LightProfinite) (n : ℕ),\\n  ⇑(CategoryTheory.ConcreteCategory.hom (S.transitionMap n)) ∘ ⇑(CategoryTheory.ConcreteCategory.hom (S.proj (n + 1))) =\\n    ⇑(CategoryTheory.ConcreteCategory.hom (S.proj n))\", \"doc\": \"For any natural number $n$ and a light profinite space $S$ constructed as an inverse limit of finite discrete spaces, the composition of the transition map $S_{n+1} \\to S_n$ with the projection $S \\to S\"}\n  {\"name\": \"Profinite.NobelingProof.projRestricts_comp_projRestrict\", \"module\": \"Mathlib/Topology/Category/Profinite/Nobeling/Basic\", \"type\": \"∀ {I : Type u} (C : Set (I → Bool)) {J K : I → Prop} [inst : (i : I) → Decidable (J i)]\\n  [inst_1 : (i : I) → Decidable (K i)] (h : ∀ (i : I), J i → K i),\\n  Profinite.NobelingProof.ProjRestricts C h ∘ Profinite.NobelingProof.ProjRestrict C K =\\n    Profinite.NobelingProof.ProjRestrict C J\", \"doc\": \"For any subset relation $ J \\\\subseteq K $, the composition of the homeomorphism-induced map from $ \\\\pi(C, K) $ to $ \\\\pi(C, J) $ with the Nobeling projection restricted to $ K $ is equal to the Nobelin\"}\n  {\"name\": \"AlgebraicGeometry.Proj.awayMap_awayToSection\", \"module\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Basic\", \"type\": \"∀ {σ : Type u_1} {A : Type u} [inst : CommRing A] [inst_1 : SetLike σ A] [inst_2 : AddSubgroupClass σ A] (𝒜 : ℕ → σ)\\n  [inst_3 : GradedRing 𝒜] {f : A} {m' : ℕ} {g : A} (g_deg : g ∈ 𝒜 m') {x : A} (hx : x = f * g),\\n  CategoryTheory.CategoryStruct.comp (CommRingCat.ofHom (HomogeneousLocalization.awayMa\", \"doc\": \"For a graded ring $\\\\mathcal{A}$ and homogeneous elements $f,g$ where $f$ divides $g$, the composition of the ring homomorphism $\\\\mathcal{A}_{(g)} \\\\to \\\\mathcal{A}_{(f)}$ (induced by localization) follo\"}\n  {\"name\": \"LightProfinite.proj_comp_transitionMapLE'\", \"module\": \"Mathlib/Topology/Category/LightProfinite/AsLimit\", \"type\": \"∀ (S : LightProfinite) {n m : ℕ} (h : n ≤ m),\\n  ⇑(CategoryTheory.ConcreteCategory.hom (S.transitionMapLE h)) ∘ ⇑(CategoryTheory.ConcreteCategory.hom (S.proj m)) =\\n    ⇑(CategoryTheory.ConcreteCategory.hom (S.proj n))\", \"doc\": \"For natural numbers $n, m$ with $n \\\\leq m$, the composition of the transition map $S_m \\\\to S_n$ with the projection $S \\\\to S_m$ equals the direct projection $S \\\\to S_n$ in the inverse limit diagram of\"}\n  {\"name\": \"LightProfinite.proj_comp_transitionMapLE\", \"module\": \"Mathlib/Topology/Category/LightProfinite/AsLimit\", \"type\": \"∀ (S : LightProfinite) {n m : ℕ} (h : n ≤ m),\\n  CategoryTheory.CategoryStruct.comp (S.proj m) (S.diagram.map (Opposite.op (CategoryTheory.homOfLE h))) = S.proj n\", \"doc\": \"For any natural numbers $n$ and $m$ with $n \\\\leq m$, the composition of the projection from a light profinite space $S$ to its $m$-th finite approximation followed by the transition map from the $m$-t\"}\n  {\"name\": \"SheafOfModules.ιFree_freeMap\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Free\", \"type\": \"∀ {C : Type u'} [inst : CategoryTheory.Category.{v', u'} C] {J : CategoryTheory.GrothendieckTopology C}\\n  {R : CategoryTheory.Sheaf J RingCat} [inst_1 : CategoryTheory.HasWeakSheafify J AddCommGrpCat]\\n  [inst_2 : J.WEqualsLocallyBijective AddCommGrpCat]\\n  [inst_3 : J.HasSheafCompose (CategoryTheory.\", \"doc\": \"Given a sheaf of rings $ R $ on a category $ \\\\mathcal{C} $ with Grothendieck topology $ J $, and a function $ f : I \\\\to J $ between index types, the composition of the canonical inclusion map $ \\\\iota_\"}",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.comp, CategoryTheory.MonoidalCategory",
+   "results": "[loogle] OK 1 hit(s)\n  {\"name\": \"CategoryTheory.Adjunction.isMonoidal_comp\", \"module\": \"Mathlib.CategoryTheory.Monoidal.Functor\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] [CategoryTheory.MonoidalCategory C] {D : Type u₂} [CategoryTheory.Category.{v₂, u₂} D] [CategoryTheory.MonoidalCategory D] {E : Type u₃} [CategoryTheory.Category.{v₃, u₃} E] [CategoryTheory.MonoidalCategory E] {F : CategoryTheory.Functor C D} {G : \", \"doc\": \"\"}",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "projectionFormula.*comp|projection.*composition|projection.*tensor.*assoc",
+   "results": "[grep] OK 5 hit(s)\n  {\"file\": \"Mathlib/Dynamics/SymbolicDynamics/Basic.lean\", \"line\": \"173\", \"text\": \"  -- coordinate projections are continuous; composition preserves continuity\"}\n  {\"file\": \"Mathlib/AlgebraicTopology/DoldKan/SplitSimplicialObject.lean\", \"line\": \"36\", \"text\": \"/-- The projection on a summand of the coproduct decomposition given\"}\n  {\"file\": \"Mathlib/Tactic/Simps/Basic.lean\", \"line\": \"393\", \"text\": \"  projection (or a composition of multiple projections).\"}\n  {\"file\": \"Mathlib/Tactic/Simps/Basic.lean\", \"line\": \"1075\", \"text\": \"`toApply` is non-empty after a custom projection that is a composition of multiple projections\"}\n  {\"file\": \"Mathlib/CategoryTheory/Limits/Shapes/Preorder/TransfiniteCompositionOfShape.lean\", \"line\": \"61\", \"text\": \"initialize_simps_projections TransfiniteCompositionOfShape (-isColimit)\"}",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Composition coherence of compactly supported pushforward projection formula on proetale coefficient systems",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"CategoryTheory.Functor.sheafPushforwardContinuousComp'_hom_app_val_app\", \"module\": \"Mathlib.CategoryTheory.Sites.Continuous\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [inst_1 : CategoryTheory.Category.{v₂, u₂} D]\\n  {E : Type u₃} [inst_2 : CategoryTheory.Category.{v₃, u₃} E] {F : CategoryTheory.Functor C D}\\n  {G : CategoryTheory.Functor D E} {FG : CategoryTheory.Functor C E} (eFG : F.comp G \", \"doc\": \"Given continuous functors $ F : \\\\mathcal{C} \\\\to \\\\mathcal{D} $ and $ G : \\\\mathcal{D} \\\\to \\\\mathcal{E} $ between sites with Grothendieck topologies $ J, K, L $, the composition of the sheaf pushforward f\"}\n  {\"name\": \"SheafOfModules.pushforwardComp\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.PushforwardContinuous\", \"type\": \":\\n  pushforward.{v} ψ ⋙ pushforward.{v} φ ≅\\n    pushforward.{v} (F := F ⋙ G) (φ ≫ (F.sheafPushforwardContinuous RingCat.{u} J K).map ψ)\", \"doc\": \"Given categories $\\\\mathcal{C}, \\\\mathcal{D}, \\\\mathcal{E}$ with Grothendieck topologies $J, K$, continuous functors $F : \\\\mathcal{C} \\\\to \\\\mathcal{D}$, $G : \\\\mathcal{D} \\\\to \\\\mathcal{E}$, and ring sheaf m\"}\n  {\"name\": \"TopCat.Presheaf.Pushforward.comp_eq\", \"module\": \"Mathlib.Topology.Sheaves.Presheaf\", \"type\": \"{X Y Z : TopCat.{w}} (f : X ⟶ Y) (g : Y ⟶ Z) (ℱ : X.Presheaf C) : (f ≫ g) _* ℱ = g _* (f _* ℱ)\", \"doc\": \"For continuous maps $f : X \\\\to Y$ and $g : Y \\\\to Z$ between topological spaces and a presheaf $\\\\mathcal{F}$ on $X$, the pushforward of $\\\\mathcal{F}$ along the composition $f \\\\circ g$ equals the compos\"}\n  {\"name\": \"CategoryTheory.Functor.sheafPushforwardContinuousComp\", \"module\": \"Mathlib.CategoryTheory.Sites.Continuous\", \"type\": \"[IsContinuous.{t} G K L] :\\n  letI := isContinuous_comp F G J K L\\n  sheafPushforwardContinuous G A K L ⋙ sheafPushforwardContinuous F A J K ≅ sheafPushforwardContinuous (F ⋙ G) A J L\", \"doc\": \"Given continuous functors $ F : \\\\mathcal{C} \\\\to \\\\mathcal{D} $ and $ G : \\\\mathcal{D} \\\\to \\\\mathcal{E} $ between sites with Grothendieck topologies $ J, K, L $, the composition of the sheaf pushforward f\"}\n  {\"name\": \"CategoryTheory.ExponentiableMorphism.comp_pushforward\", \"module\": \"Mathlib.CategoryTheory.LocallyCartesianClosed.ExponentiableMorphism\", \"type\": \"{I J K : C} (f : I ⟶ J) (g : J ⟶ K) [ChosenPullbacksAlong f] [ChosenPullbacksAlong g] [ChosenPullbacksAlong (f ≫ g)]\\n  [ExponentiableMorphism f] [ExponentiableMorphism g] : (comp f g).pushforward = pushforward f ⋙ pushforward g\", \"doc\": \"For exponentiable morphisms $ f: I \\\\to J $ and $ g: J \\\\to K $ in a category $ \\\\mathcal{C} $, the pushforward functor associated with the composition $ f \\\\circ g $ is equal to the composition of the pu\"}\n  {\"name\": \"CategoryTheory.Functor.sheafPushforwardContinuousComp'\", \"module\": \"Mathlib.CategoryTheory.Sites.Continuous\", \"type\": \"[IsContinuous.{t} G K L] [IsContinuous.{t} FG J L] :\\n  sheafPushforwardContinuous G A K L ⋙ sheafPushforwardContinuous F A J K ≅ sheafPushforwardContinuous FG A J L\", \"doc\": \"Given continuous functors $ F : \\\\mathcal{C} \\\\to \\\\mathcal{D} $ and $ G : \\\\mathcal{D} \\\\to \\\\mathcal{E} $ between sites with Grothendieck topologies $ J, K, L $, the composition of the sheaf pushforward f\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.pushforwardComp_hom_app_app\", \"module\": \"Mathlib.AlgebraicGeometry.Modules.Sheaf\", \"type\": \"(U) : ((pushforwardComp f g).hom.app M).app U = 𝟙 _\", \"doc\": \"For any open subset $U \\\\subseteq Z$, the component of the natural isomorphism between the pushforward functors composed along $g \\\\circ f$ and the composition of pushforwards along $g$ and $f$, evaluat\"}\n  {\"name\": \"SheafOfModules.pushforwardNatTrans_comp\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.PushforwardContinuous\", \"type\": \"(α : F ⟶ G) (β : G ⟶ H) (φ : T ⟶ (H.sheafPushforwardContinuous RingCat.{u} J K).obj S) :\\n  pushforwardNatTrans φ (α ≫ β) =\\n    pushforwardNatTrans φ β ≫ pushforwardNatTrans _ α ≫ (pushforwardCongr (by cat_disch)).hom\", \"doc\": \"Given categories $\\\\mathcal{C}$ and $\\\\mathcal{D}$ with Grothendieck topologies $J$ and $K$, continuous functors $F, G, H : \\\\mathcal{C} \\\\to \\\\mathcal{D}$, natural transformations $\\\\alpha : F \\\\Rightarrow \"}",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Canonical projection maps for two compactifiable maps satisfy the composite projection identity before evaluating a tower",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"Profinite.NobelingProof.projRestricts_eq_comp\", \"module\": \"Mathlib/Topology/Category/Profinite/Nobeling/Basic\", \"type\": \"∀ {I : Type u} (C : Set (I → Bool)) {J K L : I → Prop} [inst : (i : I) → Decidable (J i)]\\n  [inst_1 : (i : I) → Decidable (K i)] [inst_2 : (i : I) → Decidable (L i)] (hJK : ∀ (i : I), J i → K i)\\n  (hKL : ∀ (i : I), K i → L i),\\n  Profinite.NobelingProof.ProjRestricts C hJK ∘ Profinite.NobelingProof.P\", \"doc\": \"For subsets $J \\\\subseteq K \\\\subseteq L$ of an index set $I$, the composition of the projection restriction maps $\\\\text{ProjRestricts}(C, J \\\\subseteq K)$ and $\\\\text{ProjRestricts}(C, K \\\\subseteq L)$ eq\"}\n  {\"name\": \"Profinite.IndexFunctor.map_comp_π_app\", \"module\": \"Mathlib/Topology/Category/Profinite/Product\", \"type\": \"∀ {ι : Type u} {X : ι → Type} [inst : (i : ι) → TopologicalSpace (X i)] (C : Set ((i : ι) → X i)) {J K : ι → Prop}\\n  (h : ∀ (i : ι), J i → K i),\\n  ⇑(Profinite.IndexFunctor.map C h) ∘ ⇑(Profinite.IndexFunctor.π_app C K) = ⇑(Profinite.IndexFunctor.π_app C J)\", \"doc\": \"For predicates $J,K$ on an index set $\\\\iota$ and a function $h: \\\\forall i, J i \\\\to K i$, the composition of the continuous map induced by precomposition with $h$ and the restriction map to $K$-indexed\"}\n  {\"name\": \"Profinite.NobelingProof.proj_comp_of_subset\", \"module\": \"Mathlib/Topology/Category/Profinite/Nobeling/Basic\", \"type\": \"∀ {I : Type u} (J K : I → Prop) [inst : (i : I) → Decidable (J i)] [inst_1 : (i : I) → Decidable (K i)],\\n  (∀ (i : I), J i → K i) →\\n    Profinite.NobelingProof.Proj J ∘ Profinite.NobelingProof.Proj K = Profinite.NobelingProof.Proj J\", \"doc\": \"If $ J \\\\subseteq K $, then the composition of the Nobeling projections $ \\\\text{Proj}_J $ and $ \\\\text{Proj}_K $ satisfies $ \\\\text{Proj}_J \\\\circ \\\\text{Proj}_K = \\\\text{Proj}_J $.\"}\n  {\"name\": \"LightProfinite.proj_comp_transitionMap'\", \"module\": \"Mathlib/Topology/Category/LightProfinite/AsLimit\", \"type\": \"∀ (S : LightProfinite) (n : ℕ),\\n  ⇑(CategoryTheory.ConcreteCategory.hom (S.transitionMap n)) ∘ ⇑(CategoryTheory.ConcreteCategory.hom (S.proj (n + 1))) =\\n    ⇑(CategoryTheory.ConcreteCategory.hom (S.proj n))\", \"doc\": \"For any natural number $n$ and a light profinite space $S$ constructed as an inverse limit of finite discrete spaces, the composition of the transition map $S_{n+1} \\to S_n$ with the projection $S \\to S\"}\n  {\"name\": \"Profinite.NobelingProof.coe_πs'\", \"module\": \"Mathlib/Topology/Category/Profinite/Nobeling/Basic\", \"type\": \"∀ {I : Type u} (C : Set (I → Bool)) [inst : LinearOrder I] [inst_1 : WellFoundedLT I] {o₁ o₂ : Ordinal.{u}}\\n  (h : o₁ ≤ o₂) (f : LocallyConstant ↑(Profinite.NobelingProof.π C fun x => Profinite.NobelingProof.ord I x < o₁) ℤ),\\n  ((Profinite.NobelingProof.πs' C h) f).toFun = f.toFun ∘ Profinite.Nobeli\", \"doc\": \"For ordinals $o_1 \\\\leq o_2$, the underlying function of the ℤ-linear map $\\\\pi_s'$ between spaces of locally constant integer-valued functions on $\\\\pi(C, \\\\text{ord}_I^{-1}(<o_1))$ and $\\\\pi(C, \\\\text{ord\"}\n  {\"name\": \"Profinite.NobelingProof.projRestricts_comp_projRestrict\", \"module\": \"Mathlib/Topology/Category/Profinite/Nobeling/Basic\", \"type\": \"∀ {I : Type u} (C : Set (I → Bool)) {J K : I → Prop} [inst : (i : I) → Decidable (J i)]\\n  [inst_1 : (i : I) → Decidable (K i)] (h : ∀ (i : I), J i → K i),\\n  Profinite.NobelingProof.ProjRestricts C h ∘ Profinite.NobelingProof.ProjRestrict C K =\\n    Profinite.NobelingProof.ProjRestrict C J\", \"doc\": \"For any subset relation $ J \\\\subseteq K $, the composition of the homeomorphism-induced map from $ \\\\pi(C, K) $ to $ \\\\pi(C, J) $ with the Nobeling projection restricted to $ K $ is equal to the Nobelin\"}\n  {\"name\": \"LightProfinite.proj_comp_transitionMapLE'\", \"module\": \"Mathlib/Topology/Category/LightProfinite/AsLimit\", \"type\": \"∀ (S : LightProfinite) {n m : ℕ} (h : n ≤ m),\\n  ⇑(CategoryTheory.ConcreteCategory.hom (S.transitionMapLE h)) ∘ ⇑(CategoryTheory.ConcreteCategory.hom (S.proj m)) =\\n    ⇑(CategoryTheory.ConcreteCategory.hom (S.proj n))\", \"doc\": \"For natural numbers $n, m$ with $n \\\\leq m$, the composition of the transition map $S_m \\\\to S_n$ with the projection $S \\\\to S_m$ equals the direct projection $S \\\\to S_n$ in the inverse limit diagram of\"}\n  {\"name\": \"DiscreteQuotient.map_comp_proj\", \"module\": \"Mathlib/Topology/DiscreteQuotient\", \"type\": \"∀ {X : Type u_2} {Y : Type u_3} [inst : TopologicalSpace X] [inst_1 : TopologicalSpace Y] {f : C(X, Y)}\\n  {A : DiscreteQuotient X} {B : DiscreteQuotient Y} (cond : DiscreteQuotient.LEComap f A B),\\n  DiscreteQuotient.map f cond ∘ A.proj = B.proj ∘ ⇑f\", \"doc\": \"Given a continuous function $ f : X \\\\to Y $ and a discrete quotient $ A $ of $ X $ that is coarser than the pullback of a discrete quotient $ B $ of $ Y $ along $ f $, the composition of the induced m\"}",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "projectionFormula|projectionMap.*comp|projection.*tensor.*assoc",
+   "results": "Actual search hits: ; ",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived compactly supported pushforward projection maps are associative and compatible with composition for sheaves of finite ring modules",
+   "results": "Actual search hits: SheafOfModules.pushforward_assoc, PresheafOfModules.pushforward_assoc, SheafOfModules.pullback_assoc, PresheafOfModules.map_comp_assoc, CategoryTheory.Functor.sheafPushforwardContinuousComp, SheafOfModules.comp_val_assoc, SheafOfModules.pushforward_map_val, CategoryTheory.Functor.sheafPushforwardContinuousComp'; ",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction, CategoryTheory.MonoidalCategory",
+   "results": "Actual search hits: CategoryTheory.Adjunction.leftAdjointOplaxMonoidal, CategoryTheory.Adjunction.rightAdjointLaxMonoidal, CategoryTheory.Adjunction.IsMonoidal, CategoryTheory.Adjunction.laxMonoidalEquivOplaxMonoidal, CategoryTheory.Adjunction.instIsMonoidal, CategoryTheory.Adjunction.instIsMonoidal_1, CategoryTheory.Adjunction.isMonoidal_comp, CategoryTheory.Adjunction.IsMonoidal.leftAdjoint_ε; ",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Compact support projection formula is compatible with composition and tensor associativity on derived categories of coefficient towers",
+   "results": "Actual search hits: LightCondensed.instMonoidalCategoryLightCondMod, LightCondensed.ihomPoints_symm_comp, LightCondensed.instMonoidalLightCondSetLightCondModFree, LightCondensed.internallyProjective_iff_tensor_condition', HomologicalComplex.HasGoodTensor₂₃, LightCondensed.internallyProjective_iff_tensor_condition, LightCondensed.free_lightProfinite_internallyProjective_iff_tensor_condition', LightCondensed.free_lightProfinite_internallyProjective_iff_tensor_condition; ",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "projection.*[Ff]ormula|[Pp]rojection[Mm]ap",
+   "results": "Actual search hits: Mathlib/RingTheory/WittVector/Identities.lean, Mathlib/RingTheory/WittVector/Identities.lean, Mathlib/Geometry/Manifold/VectorBundle/CovariantDerivative/Basic.lean; ",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Projection morphisms of monoidal adjunctions and extension by zero commute with composition and tensor products",
+   "results": "Actual search hits: CategoryTheory.Adjunction.ε_comp_map_ε_assoc, CategoryTheory.Adjunction.unit_app_tensor_comp_map_δ, CategoryTheory.Adjunction.ε_comp_map_ε, CategoryTheory.Adjunction.map_μ_comp_counit_app_tensor, CategoryTheory.Adjunction.map_μ_comp_counit_app_tensor_assoc, CategoryTheory.Adjunction.unit_app_tensor_comp_map_δ_assoc, CategoryTheory.Adjunction.map_ε_comp_counit_app_unit, CategoryTheory.tensorLeftAdjunction; ",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "det-sp-composition-factors",
+  "date": "2026-10-22",
+  "group": "NH"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sp-composition",
+ "blueprint": {
+  "from": {
+   "node": "det-sp-composition-factors",
+   "place": "Proof (2): projection formula for gf is the composite of those for f and g; tensor associativity; unit proof tower tensor transposition",
+   "via": []
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sp-composite-projection-coefficients",
+  "worker": "Q76",
+  "summary": "Expanded projection coherence and domains with existing nodes only. Checked arbitrary finite primary rings separately from DVR quotients; retained nonnormalized tower inputs and actual simultaneous-map equalities. Proved open tensor/unit pasting and arithmetic-index model identification explicitly. No statement change and no new nodes.",
+  "blueprint": "det-sp-composition-factors proof (2), projection formula for gf and tensor associativity; sk-prop-sp-composition unit tensor-map and tower paragraphs.",
+  "tool_uses": [
+   {
+    "node": "det-pe-finite-tor-comparison-noetherian",
+    "why": "Generic ordinary finite-ring, ringed-topos or strict-system tool used for projection coherence or its domains; supplies the named statement in the proof without replacing the unit tensor-transposition route."
+   },
+   {
+    "node": "det-sp-finite-general-ring",
+    "why": "Generic ordinary finite-ring, ringed-topos or strict-system tool used for projection coherence or its domains; supplies the named statement in the proof without replacing the unit tensor-transposition route."
+   },
+   {
+    "node": "det-sp-tower-gamma",
+    "why": "Generic ordinary finite-ring, ringed-topos or strict-system tool used for projection coherence or its domains; supplies the named statement in the proof without replacing the unit tensor-transposition route."
+   },
+   {
+    "node": "det-sp-tower-shriek-levels",
+    "why": "Generic ordinary finite-ring, ringed-topos or strict-system tool used for projection coherence or its domains; supplies the named statement in the proof without replacing the unit tensor-transposition route."
+   },
+   {
+    "node": "lem-amb-compactification-projection-composition",
+    "why": "Generic ordinary finite-ring, ringed-topos or strict-system tool used for projection coherence or its domains; supplies the named statement in the proof without replacing the unit tensor-transposition route."
+   },
+   {
+    "node": "lem-asd-etale-finite-twist-pullback",
+    "why": "Generic ordinary finite-ring, ringed-topos or strict-system tool used for projection coherence or its domains; supplies the named statement in the proof without replacing the unit tensor-transposition route."
+   },
+   {
+    "node": "lem-coef-semilinear-derived-sections",
+    "why": "Generic ordinary finite-ring, ringed-topos or strict-system tool used for projection coherence or its domains; supplies the named statement in the proof without replacing the unit tensor-transposition route."
+   },
+   {
+    "node": "lem-pur-finite-ring-site-tensor-transpose",
+    "why": "Generic ordinary finite-ring, ringed-topos or strict-system tool used for projection coherence or its domains; supplies the named statement in the proof without replacing the unit tensor-transposition route."
+   },
+   {
+    "node": "lem-pur-system-derived-subsequence",
+    "why": "Generic ordinary finite-ring, ringed-topos or strict-system tool used for projection coherence or its domains; supplies the named statement in the proof without replacing the unit tensor-transposition route."
+   },
+   {
+    "node": "lem-pur-system-ringed-sequence-site",
+    "why": "Generic ordinary finite-ring, ringed-topos or strict-system tool used for projection coherence or its domains; supplies the named statement in the proof without replacing the unit tensor-transposition route."
+   },
+   {
+    "node": "lem-sbc-smooth-relative-dimension-permanence",
+    "why": "Generic ordinary finite-ring, ringed-topos or strict-system tool used for projection coherence or its domains; supplies the named statement in the proof without replacing the unit tensor-transposition route."
+   },
+   {
+    "node": "lem-sf-composition-projection-mate",
+    "why": "Generic ordinary finite-ring, ringed-topos or strict-system tool used for projection coherence or its domains; supplies the named statement in the proof without replacing the unit tensor-transposition route."
+   },
+   {
+    "node": "lem-sf-open-tensor-normalization",
+    "why": "Generic ordinary finite-ring, ringed-topos or strict-system tool used for projection coherence or its domains; supplies the named statement in the proof without replacing the unit tensor-transposition route."
+   },
+   {
+    "node": "lem-sfb-ringed-derived-monoidal-comparisons",
+    "why": "Generic ordinary finite-ring, ringed-topos or strict-system tool used for projection coherence or its domains; supplies the named statement in the proof without replacing the unit tensor-transposition route."
+   },
+   {
+    "node": "lem-sfb-ringed-projection-tensor-composition",
+    "why": "Generic ordinary finite-ring, ringed-topos or strict-system tool used for projection coherence or its domains; supplies the named statement in the proof without replacing the unit tensor-transposition route."
+   },
+   {
+    "node": "lem-sp-arithmetic-system-right-adjoint",
+    "why": "Generic ordinary finite-ring, ringed-topos or strict-system tool used for projection coherence or its domains; supplies the named statement in the proof without replacing the unit tensor-transposition route."
+   },
+   {
+    "node": "lem-sp-cofinal-coefficient-projection-cocone",
+    "why": "Generic ordinary finite-ring, ringed-topos or strict-system tool used for projection coherence or its domains; supplies the named statement in the proof without replacing the unit tensor-transposition route."
+   },
+   {
+    "node": "lem-sp-finite-compact-site-coherence",
+    "why": "Generic ordinary finite-ring, ringed-topos or strict-system tool used for projection coherence or its domains; supplies the named statement in the proof without replacing the unit tensor-transposition route."
+   },
+   {
+    "node": "lem-sp-finite-ring-compact-support-projection",
+    "why": "Generic ordinary finite-ring, ringed-topos or strict-system tool used for projection coherence or its domains; supplies the named statement in the proof without replacing the unit tensor-transposition route."
+   },
+   {
+    "node": "lem-sp-proetale-ctf-pullback-domains",
+    "why": "Generic ordinary finite-ring, ringed-topos or strict-system tool used for projection coherence or its domains; supplies the named statement in the proof without replacing the unit tensor-transposition route."
+   },
+   {
+    "node": "lem-sp-strict-compactification-comparison-realization",
+    "why": "Generic ordinary finite-ring, ringed-topos or strict-system tool used for projection coherence or its domains; supplies the named statement in the proof without replacing the unit tensor-transposition route."
+   },
+   {
+    "node": "lem-sp-varying-ring-proper-open-pasting",
+    "why": "Generic ordinary finite-ring, ringed-topos or strict-system tool used for projection coherence or its domains; supplies the named statement in the proof without replacing the unit tensor-transposition route."
+   },
+   {
+    "node": "lem-weil-pbc-finite-ring-constructible-derived-origin",
+    "why": "Generic ordinary finite-ring, ringed-topos or strict-system tool used for projection coherence or its domains; supplies the named statement in the proof without replacing the unit tensor-transposition route."
+   },
+   {
+    "node": "lem-weil-pbc-finite-type-over-noetherian",
+    "why": "Generic ordinary finite-ring, ringed-topos or strict-system tool used for projection coherence or its domains; supplies the named statement in the proof without replacing the unit tensor-transposition route."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
+    "why": "Generic ordinary finite-ring, ringed-topos or strict-system tool used for projection coherence or its domains; supplies the named statement in the proof without replacing the unit tensor-transposition route."
+   },
+   {
+    "node": "sk-prop-sf-rf-shriek-preservation",
+    "why": "Finite-primary-ring restricted adjunction ensures the intermediate compact-support images remain constructible finite-Tor."
+   },
+   {
+    "node": "lem-sf-refinement-projection-counit",
+    "why": "Generic system/finite-level refinement compatibility of the counit-defined projection map; the unit gives no refinement statement for projection maps (reviewer FIX)."
+   },
+   {
+    "node": "lem-cbc-compactifiable-cofiltered",
+    "why": "Generic existence of common refinements of compactifications, used only to compare the fixed and composite compactifications of gf (reviewer FIX)."
+   }
+  ]
+ },
+ "tool_uses": [
+  "det-pe-finite-tor-comparison-noetherian",
+  "det-sp-finite-general-ring",
+  "det-sp-tower-gamma",
+  "det-sp-tower-shriek-levels",
+  "lem-amb-compactification-projection-composition",
+  "lem-asd-etale-finite-twist-pullback",
+  "lem-coef-semilinear-derived-sections",
+  "lem-pur-finite-ring-site-tensor-transpose",
+  "lem-pur-system-derived-subsequence",
+  "lem-pur-system-ringed-sequence-site",
+  "lem-sbc-smooth-relative-dimension-permanence",
+  "lem-sf-composition-projection-mate",
+  "lem-sf-open-tensor-normalization",
+  "lem-sfb-ringed-derived-monoidal-comparisons",
+  "lem-sfb-ringed-projection-tensor-composition",
+  "lem-sp-arithmetic-system-right-adjoint",
+  "lem-sp-cofinal-coefficient-projection-cocone",
+  "lem-sp-finite-compact-site-coherence",
+  "lem-sp-finite-ring-compact-support-projection",
+  "lem-sp-proetale-ctf-pullback-domains",
+  "lem-sp-strict-compactification-comparison-realization",
+  "lem-sp-varying-ring-proper-open-pasting",
+  "lem-weil-pbc-finite-ring-constructible-derived-origin",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
+  "sk-prop-sf-rf-shriek-preservation",
+  "lem-sf-refinement-projection-counit",
+  "lem-cbc-compactifiable-cofiltered"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q76-2a11bc8f8",
+  "group": "Q76",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q76-2a11bc8f8 (reviewer sub-agent of L); spot-checked: Read the item in full: statement unchanged against live (unsplit), stmt_deps unchanged, 9 steps, 0 new nodes, no repair note. Also read the parent det-sp-composition-factors Step 1, unit sk-prop-sp-composition, blueprint main-20261015 sk-prop-sp-composition-factors.proof (2), and the statements of all 29 cited nodes. Steps 1-3 (domains, Tor intervals, shifts, arbitrary finite A, uniform non-normalized towers) are correct. Step 6 (π_p associativity, plus the open part via j^*γ=id and full faithfulness of j_!), Step 7 (unit by transposition), Step 8 (exact J with UJ=1, U preserves K-flats, U is the direct image of the index-selection geometric morphism) and Step 9 are correct. Gap (C4/E5): Steps 4 and 5 prove the composite identity only for the composite compactification. lem-amb-compactification-projection-composition and lem-sf-composition-projection-mate both use the triangle bj. The item's F_h and α use the fixed c_h of Step 1, and α includes refinement comparisons, so compatibility of P with refinement was missing. Repaired with a new Step 10 that cites existing nodes: lem-cbc-compactifiable-cofiltered (common refinement); lem-amb-shriek-tensor-composition (finite étale identity including refinement, unit sk-prop-an on route), transported by the refinement equation of lem-sp-finite-compact-site-coherence; lem-sf-refinement-projection-counit (system case before evaluation), with C_u invertible by lem-amb-unbounded-compact-support-comparisons, finite-compact-site-coherence and tower-shriek-levels (3). proof_deps updated and 2 tool_uses added. Step sources and proof_origin repointed from the moving literature/blueprint/latest symlink to the identical main-20261015 file. Batch 5: every flagged citation (tower-shriek-levels, finite-ring-site-tensor-transpose, composition-projection-mate, finite-compact-site-coherence, finite-ring-compact-support-projection, varying-ring-proper-open-pasting) reaches only generic pod/trf nodes (lisse module objects, pullback-stalk coherence, constant-coefficient composition, derived exact-square composition). None is part of the trace formula or Poincaré duality or their proofs, so all are kept; the added nodes reach the same generic nodes. There is no SGA and no cycle.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.Paper.CompositeProjectionCoefficients",
+  "declaration": "AlgebraicGeometry.ProEtale.CompositeProjectionCoefficients.finite_composition",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.CompositeProjectionCoefficients.ProjectionLaws",
+   "AlgebraicGeometry.ProEtale.CompositeProjectionCoefficients.finiteProjection",
+   "AlgebraicGeometry.ProEtale.CompositeProjectionCoefficients.finitePullTensor",
+   "AlgebraicGeometry.ProEtale.CompositeProjectionCoefficients.finitePullUnit",
+   "AlgebraicGeometry.ProEtale.CompositeProjectionCoefficients.geometry",
+   "AlgebraicGeometry.ProEtale.CompositeProjectionCoefficients.finite_domains",
+   "AlgebraicGeometry.ProEtale.CompositeProjectionCoefficients.finite_composition",
+   "AlgebraicGeometry.ProEtale.CompositeProjectionCoefficients.finite_projection_laws",
+   "AlgebraicGeometry.ProEtale.CompositeProjectionCoefficients.finite_orientation_and_tor",
+   "AlgebraicGeometry.ProEtale.CompositeProjectionCoefficients.finite_site_projection",
+   "AlgebraicGeometry.ProEtale.CompositeProjectionCoefficients.monoidalPullUnit",
+   "AlgebraicGeometry.ProEtale.CompositeProjectionCoefficients.monoidalPullTensor",
+   "AlgebraicGeometry.ProEtale.CompositeProjectionCoefficients.towerCtf",
+   "AlgebraicGeometry.ProEtale.CompositeProjectionCoefficients.towerTorIn",
+   "AlgebraicGeometry.ProEtale.CompositeProjectionCoefficients.towerCohIn",
+   "AlgebraicGeometry.ProEtale.CompositeProjectionCoefficients.towerProjectionLaws",
+   "AlgebraicGeometry.ProEtale.CompositeProjectionCoefficients.tower_projection_laws",
+   "AlgebraicGeometry.ProEtale.CompositeProjectionCoefficients.towerCompositor",
+   "AlgebraicGeometry.ProEtale.CompositeProjectionCoefficients.towerCompositionLaw",
+   "AlgebraicGeometry.ProEtale.CompositeProjectionCoefficients.tower_composition",
+   "AlgebraicGeometry.ProEtale.CompositeProjectionCoefficients.tower_domains",
+   "AlgebraicGeometry.ProEtale.CompositeProjectionCoefficients.tower_orientation_and_intervals",
+   "AlgebraicGeometry.ProEtale.CompositeProjectionCoefficients.ArithmeticRestriction",
+   "AlgebraicGeometry.ProEtale.CompositeProjectionCoefficients.ArithmeticRestriction.derived",
+   "AlgebraicGeometry.ProEtale.CompositeProjectionCoefficients.deriveExactSquare",
+   "AlgebraicGeometry.ProEtale.CompositeProjectionCoefficients.uniformizerTensorModel",
+   "AlgebraicGeometry.ProEtale.CompositeProjectionCoefficients.ArithmeticComparisons",
+   "AlgebraicGeometry.ProEtale.CompositeProjectionCoefficients.ArithmeticComparisons.support",
+   "AlgebraicGeometry.ProEtale.CompositeProjectionCoefficients.uniformizerCtf",
+   "AlgebraicGeometry.ProEtale.CompositeProjectionCoefficients.arithmetic_restriction_ctf",
+   "AlgebraicGeometry.ProEtale.CompositeProjectionCoefficients.ArithmeticComparisons.ProjectionLaw",
+   "AlgebraicGeometry.ProEtale.CompositeProjectionCoefficients.arithmetic_projection",
+   "AlgebraicGeometry.ProEtale.CompositeProjectionCoefficients.ArithmeticComparisons.CompositionLaw",
+   "AlgebraicGeometry.ProEtale.CompositeProjectionCoefficients.arithmetic_composition"
+  ],
+  "file": "lean/Sheaf/Paper/CompositeProjectionCoefficients.lean",
+  "statement": "theorem finite_composition (ell : ℕ) [Fact ell.Prime] (_hne : ell ≠ D.p) (A : Type (u + 1)) [CommRing A] [Finite A] (_hA : ∃ n : ℕ, 0 < n ∧ ((ell ^ n : ℕ) : A) = 0) [QuasiCompact f] [QuasiCompact g] (cf : Compactification f) (cg : Compactification g) (ch : Compactification (f ≫ g)) (M : Etale.FiniteSmoothPurity.proCategory A X) (L : Etale.FiniteSmoothPurity.proCategory A Z) (_hM : Etale.FiniteSmoothPurity.IsCtf A X M) (_hL : Etale.FiniteSmoothPurity.IsCtf A Z L) : ∃ hM : DerivedCategory.plusEtaleOrigin (ModuleCat.{u + 1} A) X M, ∃ hT : DerivedCategory.plusEtaleOrigin (ModuleCat.{u + 1} A) X (M ⊗ (Etale.FiniteSmoothPurity.proPullback A f).obj ((Etale.FiniteSmoothPurity.proPullback A g).obj L)), ((SpTowerCalculus.finiteCanonicalComposition A f g cf cg ch).hom.app ⟨M, hM⟩ ▷ L) ≫ finiteProjection A ch M L ≫ (rightDerivedLowerShriekOfCompactification (ModuleCat.{u + 1} A) ch).map (M ◁ (leftDerivedUpperStarComp (ModuleCat.{u + 1} A) f g).hom.app L) = finiteProjection A cg ((rightDerivedLowerShriekOfCompactification (ModuleCat.{u + 1} A) cf).obj M) L ≫ (rightDerivedLowerShriekOfCompactification (ModuleCat.{u + 1} A) cg).map (finiteProjection A cf M ((Etale.FiniteSmoothPurity.proPullback A g).obj L)) ≫ (SpTowerCalculus.finiteCanonicalComposition A f g cf cg ch).hom.app ⟨_, hT⟩",
+  "branch": "newtargets-dag",
+  "by": "NB",
+  "date": "2026-10-27",
+  "existing": false,
+  "note": "Repair of immutable head 58b658965b49: inline the identical exceptional-unit and proper/open compositor construction words; cite the actual definition owners, including Pair. No mathematical statement or canonical map changes. The genuine coefficient-unit membership theorem is used only to type the full-subcategory object."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-265aa46ec",
+  "group": "NB",
+  "result": "pass",
+  "note": "Re-delivery of 58b6 fixes the H2 return. finiteOmega/towerOmega are inlined verbatim; the tower membership proof is the same unit_tower_mem that the published tower_unit uses. completedShriekF/A are inlined factor by factor (F = systemInterpretation.compactSupport = shriek c.i ⋙ push c.g; the open transport is eqToHom along the same T.i_q equation instead of subst/Iso.refl; same quasi-compactness words). Owner swaps done: def-pur-finite-ring-site-tensor-transport-data, def-sf-integral-system-operations, def-sf-integral-system-realization-data, def-sp-adjoint-compositor-data. The theorem modules still needed are non-public proof imports; CompletedShriekCompositionLaws is no longer imported. Stale SfP1ChartMapComposition dropped. The second reading now gives clause verdicts (it is a self-reading). Mechanical finding: lem-sp-finite-orientation-reduction is used only for the proof unit_tower_mem, which is needed to form ⟨originalUnit, mem⟩ in the full ctf subcategory that SpTowerGamma.exceptional acts on. That is a genuine dependence on the conclusion; no definition from that module is used; no cycle → PASS on that point. Only lean and stmt_deps differ from the live node; lean.statement is verbatim; 34 declarations exist; 13 sorry. The 58b6 mathematics reading is unaffected. Advisories: the docstring still cites 'current blueprint' rather than main-20261015; def-sp-tower-gamma-data, def-sp-tower-shriek-data and def-sfb-unbounded-direct-image-mate are reached only transitively; NI aef3 (PASS) of the same item has not landed, so this needs a rebind if it lands first. No compile reproduced, no files changed."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-8c340",
+  "group": "S6",
+  "result": "pass",
+  "landing": "20261027T034740-L-3681403",
+  "kind": "proof",
+  "note": "independent cc review: delivered CompositeProjectionCoefficients.lean and node lem-sp-composite-projection-coefficients against the live clone: unit sk-prop-sp-composition (realized empty, route not through rf-shriek-preservation), helper bodies in FiniteSmoothLevelOfOrientation/ProEtaleCtfPullbackDomains/CompactifiableOverField, UniformTowerTensorClosure.tensor_mem statement"
+ }
+}

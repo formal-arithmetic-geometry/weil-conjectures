@@ -6,39 +6,15 @@ Authors: SHEAF group Q120
 module
 
 public import Sheaf.Paper.CohomologicalSmoothnessComparison
+public import Sheaf.Paper.SmoothTensorCompositionEquation
 public import Mathlib.AlgebraicGeometry.Morphisms.Smooth
 public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekComposition
 public import WeilConjectures.SixFunctors.Etale.Derived.UpperStarMonoidal
 public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekProjectionBaseChange
-import Sheaf.Paper.PurityFiniteSetting
-import WeilConjectures.Compactification.NagataCompactification
-import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.FiniteType
-import Sheaf.NumberTheory.Padics.CoefficientExtensionFinite
-import Sheaf.AlgebraicGeometry.AffineSpaceAmbientAdjunction
-import Sheaf.Paper.ProEtaleConstructibleOrigin
-import Sheaf.AlgebraicGeometry.SmoothTensorDuality
-import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.InternalHom
-import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.EtalePoint
-import Sheaf.Paper.RingedTopoiCanonicalTensorPullbackOfUniverses
-import Sheaf.Paper.ComparisonTorAmplitude
-import Sheaf.AlgebraicGeometry.SupportComparisonPullbackCoherence
-import Sheaf.AlgebraicGeometry.SmoothExceptionalBaseChange
-import Sheaf.Paper.CohomologicalSmoothComposition
-import Sheaf.CategoryTheory.CompositeTensorTranspose
-import Sheaf.Paper.ExchangeProjectionSuppliedDomains
-import Sheaf.Paper.FiniteCompactSupportConstructibility
-import Sheaf.AlgebraicGeometry.CanonicalCompactSupportSiteComparison
-import Sheaf.AlgebraicGeometry.CompactSupportComparisonUnit
-import Sheaf.AlgebraicGeometry.ProjectionComparisonEtaleOrigin
-import Sheaf.AlgebraicGeometry.SpecifiedExceptionalClassHom
-import Sheaf.Paper.CanonicalFiniteLevelCompactSupportBaseChange
-import Sheaf.Paper.CanonicalOriginCompactSupportComposition
 import Sheaf.Paper.CohomologicalSmoothnessFiniteComparison
-import Sheaf.Paper.ConstructibleExceptionalAdjunctionCoefficients
-import Sheaf.Paper.DerivedPullbackTensorIso
-import Sheaf.Paper.ProjectionFormulaCoefficientCoherence
-import Sheaf.Paper.PurityAffineLineOrientationUniqueness
-import Sheaf.Paper.SmoothExceptionalBaseChangeStatement
+import WeilConjectures.SixFunctors.Etale.Derived.SmoothDuality.SmoothBaseChange
+import Sheaf.Paper.ShiftedLineSiteInverse
+import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.Perfect
 
 /-!
 # Cohomological smoothness for smooth morphisms
@@ -57,66 +33,143 @@ universe u
 open CategoryTheory CategoryTheory.Limits MonoidalCategory
 open AlgebraicGeometry
 
+section
+
+attribute [-instance] CategoryTheory.sheafToPresheaf_isRightAdjoint
+  ModuleCat.hasColimitsOfShape ModuleCat.hasColimitsOfSize
+
+namespace AlgebraicGeometry.Etale.CanonicalSmoothBaseChange
+open scoped CategoryTheory.Functor
+
+private lemma unit_tensor_base_change
+    {Cx Cy Cx' Cy' : Type*} [Category* Cx] [Category* Cy]
+    [Category* Cx'] [Category* Cy']
+    [MonoidalCategory Cx] [MonoidalCategory Cy]
+    [MonoidalCategory Cx'] [MonoidalCategory Cy']
+    (F R : Cy ⥤ Cx) (F' R' : Cy' ⥤ Cx') (Ga : Cx ⥤ Cx') (Gb : Cy ⥤ Cy')
+    (τ : ∀ M N : Cy, R.obj M ⊗ F.obj N ⟶ R.obj (M ⊗ N))
+    (τ' : ∀ M N : Cy', R'.obj M ⊗ F'.obj N ⟶ R'.obj (M ⊗ N))
+    (β : R ⋙ Ga ⟶ Gb ⋙ R')
+    (δa : ∀ M N : Cx, Ga.obj (M ⊗ N) ⟶ Ga.obj M ⊗ Ga.obj N)
+    (δb : ∀ M N : Cy, Gb.obj (M ⊗ N) ⟶ Gb.obj M ⊗ Gb.obj N)
+    (κ : ∀ N : Cy, Ga.obj (F.obj N) ⟶ F'.obj (Gb.obj N))
+    (e : Gb.obj (𝟙_ Cy) ⟶ 𝟙_ Cy')
+    (hτ : ∀ M N : Cy,
+      Ga.map (τ M N) ≫ β.app (M ⊗ N) ≫ R'.map (δb M N) =
+        δa (R.obj M) (F.obj N) ≫ β.app M ▷ Ga.obj (F.obj N) ≫
+          R'.obj (Gb.obj M) ◁ κ N ≫ τ' (Gb.obj M) (Gb.obj N))
+    (hτ' : ∀ {M M' : Cy'} (φ : M ⟶ M') (N : Cy'),
+      R'.map φ ▷ F'.obj N ≫ τ' M' N = τ' M N ≫ R'.map (φ ▷ N))
+    (he : ∀ N : Cy, δb (𝟙_ Cy) N ≫ e ▷ Gb.obj N ≫ (λ_ (Gb.obj N)).hom =
+      Gb.map (λ_ N).hom) (N : Cy) :
+    Ga.map (τ (𝟙_ Cy) N ≫ R.map (λ_ N).hom) ≫ β.app N =
+      δa (R.obj (𝟙_ Cy)) (F.obj N) ≫
+        (β.app (𝟙_ Cy) ≫ R'.map e) ▷ Ga.obj (F.obj N) ≫
+        R'.obj (𝟙_ Cy') ◁ κ N ≫ τ' (𝟙_ Cy') (Gb.obj N) ≫
+        R'.map (λ_ (Gb.obj N)).hom := by
+  rw [Ga.map_comp, Category.assoc]
+  erw [β.naturality]
+  change Ga.map (τ (𝟙_ Cy) N) ≫ β.app (𝟙_ Cy ⊗ N) ≫
+    R'.map (Gb.map (λ_ N).hom) = _
+  rw [← he, R'.map_comp, R'.map_comp]
+  rw [reassoc_of% (hτ (𝟙_ Cy) N)]
+  rw [← reassoc_of% (hτ' e (Gb.obj N))]
+  rw [← whisker_exchange_assoc, ← comp_whiskerRight_assoc, whisker_exchange_assoc]
+
+private lemma exceptional_tensor_base_change
+    (A : Type (u + 1)) [CommRing A] [Finite A]
+    {X S X' S' : Scheme.{u}} {f : X ⟶ S} {f' : X' ⟶ S'}
+    {a : X' ⟶ X} {g : S' ⟶ S}
+    [HasCompactification f] [HasCompactification f'] [QuasiCompact f']
+    (sq : IsPullback a f' f g) (M N : DerivedCategoryModule A S) :
+    (upperStar (ModuleCat.{u + 1} A) a).leftDerivedFunctor.map
+        (rightDerivedUpperShriekTensorMap f M N) ≫
+      (rightDerivedUpperShriekBaseChangeMap A sq).app
+        (M ⊗ N) ≫
+      (rightDerivedUpperShriek (ModuleCat.{u + 1} A) f').map
+        (leftDerivedUpperStarTensorIso (ModuleCat.{u + 1} A) g M N).hom =
+    (leftDerivedUpperStarTensorIso (ModuleCat.{u + 1} A) a
+      ((rightDerivedUpperShriek (ModuleCat.{u + 1} A) f).obj M)
+      ((upperStar (ModuleCat.{u + 1} A) f).leftDerivedFunctor.obj N)).hom ≫
+      (rightDerivedUpperShriekBaseChangeMap A sq).app M ▷
+        ((upperStar (ModuleCat.{u + 1} A) a).leftDerivedFunctor.obj
+          ((upperStar (ModuleCat.{u + 1} A) f).leftDerivedFunctor.obj N)) ≫
+      ((rightDerivedUpperShriek (ModuleCat.{u + 1} A) f').obj
+        ((upperStar (ModuleCat.{u + 1} A) g).leftDerivedFunctor.obj M)) ◁
+          (derivedSquareUpperStarIsoInvApp (ModuleCat.{u + 1} A)
+            sq.toCommSq N) ≫
+      rightDerivedUpperShriekTensorMap f'
+        ((upperStar (ModuleCat.{u + 1} A) g).leftDerivedFunctor.obj M)
+        ((upperStar (ModuleCat.{u + 1} A) g).leftDerivedFunctor.obj N) := by
+  have := isIso_rightDerivedLowerShriekBaseChangeMap A sq
+  have hlib := projectionMap_rightDerivedLowerShriekBaseChangeMap A
+    sq
+  simp only [← leftDerivedUpperStarTensorIso_hom] at hlib
+  exact Adjunction.projectionTensorMap_mateEquiv
+    (rightDerivedUpperShriekAdjunction (ModuleCat.{u + 1} A) f)
+    (rightDerivedUpperShriekAdjunction (ModuleCat.{u + 1} A) f')
+    (fun M N ↦ ((projectionMap (ModuleCat.{u + 1} A) f).app M).app N)
+    (fun M N ↦ ((projectionMap (ModuleCat.{u + 1} A) f').app M).app N)
+    (fun φ N ↦ NatTrans.congr_app
+      ((projectionMap (ModuleCat.{u + 1} A) f').naturality φ) N)
+    (fun M M' ↦ (leftDerivedUpperStarTensorIso (ModuleCat.{u + 1} A)
+      a M M').hom)
+    (fun N N' ↦ (leftDerivedUpperStarTensorIso (ModuleCat.{u + 1} A) g N N').hom)
+    (fun φ N'' ↦ leftDerivedUpperStarTensorIso_hom_naturality_left g φ N'')
+    (fun N ↦ derivedSquareUpperStarIsoInvApp (ModuleCat.{u + 1} A)
+      sq.toCommSq N)
+    (rightDerivedLowerShriekBaseChangeMap A sq)
+    (inv (rightDerivedLowerShriekBaseChangeMap A sq))
+    (fun M ↦ by simp [NatIso.isIso_inv_app]) hlib M N
+
+private lemma dualizing_tensor_base_change
+    (A : Type (u + 1)) [CommRing A] [Finite A]
+    {X S X' S' : Scheme.{u}} {f : X ⟶ S} {f' : X' ⟶ S'}
+    {a : X' ⟶ X} {g : S' ⟶ S}
+    [HasCompactification f] [HasCompactification f'] [QuasiCompact f']
+    (sq : IsPullback a f' f g) (K : DerivedCategoryModule A S) :
+    (upperStar (ModuleCat.{u + 1} A) a).leftDerivedFunctor.map
+        (dualizingComplexTensorMap A f K) ≫
+      (rightDerivedUpperShriekBaseChangeMap A sq).app K =
+    (leftDerivedUpperStarTensorIso (ModuleCat.{u + 1} A) a
+      (dualizingComplex (ModuleCat.{u + 1} A) f)
+      ((upperStar (ModuleCat.{u + 1} A) f).leftDerivedFunctor.obj K)).hom ≫
+      (dualizingComplexBaseChangeMap A sq) ▷
+        ((upperStar (ModuleCat.{u + 1} A) a).leftDerivedFunctor.obj
+          ((upperStar (ModuleCat.{u + 1} A) f).leftDerivedFunctor.obj K)) ≫
+      (dualizingComplex (ModuleCat.{u + 1} A) f') ◁
+        (derivedSquareUpperStarIsoInvApp (ModuleCat.{u + 1} A)
+          sq.toCommSq K) ≫
+      dualizingComplexTensorMap A f'
+        ((upperStar (ModuleCat.{u + 1} A) g).leftDerivedFunctor.obj K) := by
+  exact unit_tensor_base_change
+    (upperStar (ModuleCat.{u + 1} A) f).leftDerivedFunctor
+    (rightDerivedUpperShriek (ModuleCat.{u + 1} A) f)
+    (upperStar (ModuleCat.{u + 1} A) f').leftDerivedFunctor
+    (rightDerivedUpperShriek (ModuleCat.{u + 1} A) f')
+    (upperStar (ModuleCat.{u + 1} A) a).leftDerivedFunctor
+    (upperStar (ModuleCat.{u + 1} A) g).leftDerivedFunctor
+    (rightDerivedUpperShriekTensorMap f)
+    (rightDerivedUpperShriekTensorMap f')
+    (rightDerivedUpperShriekBaseChangeMap A sq)
+    (fun M N ↦ (leftDerivedUpperStarTensorIso (ModuleCat.{u + 1} A)
+      a M N).hom)
+    (fun M N ↦ (leftDerivedUpperStarTensorIso (ModuleCat.{u + 1} A) g M N).hom)
+    (fun N ↦ derivedSquareUpperStarIsoInvApp (ModuleCat.{u + 1} A)
+      sq.toCommSq N)
+    (leftDerivedUpperStarUnitIso (ModuleCat.{u + 1} A) g).hom
+    (exceptional_tensor_base_change A sq)
+    (Adjunction.projectionTensorMap_naturality_left
+      (rightDerivedUpperShriekAdjunction (ModuleCat.{u + 1} A) f')
+      (fun M N ↦ ((projectionMap (ModuleCat.{u + 1} A) f').app M).app N)
+      (fun φ N ↦ NatTrans.congr_app
+      ((projectionMap (ModuleCat.{u + 1} A) f').naturality φ) N))
+    (leftDerivedUpperStarTensorComparison_leftUnitor_hom (ModuleCat.{u + 1} A) g) K
+
+end AlgebraicGeometry.Etale.CanonicalSmoothBaseChange
+
 namespace AlgebraicGeometry.ProEtale
 
-/-- The compact-support composition comparison, constructed from the compatible
-compactifications and the common-refinement comparisons, rather than chosen from a
-Nonempty assertion. The compatible compactification is the closure of X in the product
-of the chosen compactifications of g and fg.
-Source: blueprint thm-pur-cohomological-smoothness, clause 4 and proof Step 9;
-thm-sf-comp-composition, triangle construction
-(blueprint: thm-pur-cohomological-smoothness). -/
-noncomputable def smoothCompactSupportCompIso
-    (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ]
-    {X Y Z : Scheme.{u}} (f : X ⟶ Y) (g : Y ⟶ Z)
-    [HasCompactification f] [HasCompactification g] [HasCompactification (f ≫ g)]
-    [QuasiCompact f] [QuasiCompact g] [QuasiCompact (f ≫ g)] :
-    Etale.rightDerivedLowerShriek (ModuleCat.{u + 1} Λ) (f ≫ g) ≅
-      Etale.rightDerivedLowerShriek (ModuleCat.{u + 1} Λ) f ⋙
-        Etale.rightDerivedLowerShriek (ModuleCat.{u + 1} Λ) g :=
-  let c := HasCompactification.compactification g
-  let b := (HasCompactification.compactification (f ≫ g)).ofComp c
-  (Etale.rightDerivedLowerShriekIso Λ (c.comp b)).symm ≪≫
-    (Etale.rightDerivedLowerShriekOfCompactificationCompIso Λ c b).symm ≪≫
-    Functor.isoWhiskerRight (Etale.rightDerivedLowerShriekIso Λ b.restrict) _ ≪≫
-    Functor.isoWhiskerLeft _ (Etale.rightDerivedLowerShriekIso Λ c)
-
-/-- The adjunction-compatible exceptional composition comparison. Its counit is
-ε_g followed in adjunction order by g_! ε_f, through the displayed compact-support
-comparison, since this is rightAdjointUniq for precisely that composite adjunction.
-Source: blueprint thm-pur-cohomological-smoothness, clause 4, proof Step 9
-(blueprint: thm-pur-cohomological-smoothness). -/
-noncomputable def smoothExceptionalCompIso
-    (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ]
-    {X Y Z : Scheme.{u}} (f : X ⟶ Y) (g : Y ⟶ Z)
-    [HasCompactification f] [HasCompactification g] [HasCompactification (f ≫ g)]
-    [QuasiCompact f] [QuasiCompact g] [QuasiCompact (f ≫ g)] :
-    Etale.rightDerivedUpperShriek (ModuleCat.{u + 1} Λ) (f ≫ g) ≅
-      Etale.rightDerivedUpperShriek (ModuleCat.{u + 1} Λ) g ⋙
-        Etale.rightDerivedUpperShriek (ModuleCat.{u + 1} Λ) f :=
-  Adjunction.rightAdjointUniq
-    ((Etale.rightDerivedUpperShriekAdjunction (ModuleCat.{u + 1} Λ) (f ≫ g)).ofNatIsoLeft
-      (smoothCompactSupportCompIso Λ f g))
-    ((Etale.rightDerivedUpperShriekAdjunction (ModuleCat.{u + 1} Λ) f).comp
-      (Etale.rightDerivedUpperShriekAdjunction (ModuleCat.{u + 1} Λ) g))
-
-/-- The specified dualizing comparison q = θ_(f,ω_g) followed by c_Λ⁻¹.
-Its invertibility is asserted below; its data use only the existing tensor mate
-and the adjunction-induced composition comparison.
-Source: blueprint thm-pur-cohomological-smoothness, clause 4, proof Step 9
-(blueprint: thm-pur-cohomological-smoothness). -/
-noncomputable def smoothDualizingCompMap
-    (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ]
-    {X Y Z : Scheme.{u}} (f : X ⟶ Y) (g : Y ⟶ Z)
-    [HasCompactification f] [HasCompactification g] [HasCompactification (f ≫ g)]
-    [QuasiCompact f] [QuasiCompact g] [QuasiCompact (f ≫ g)] :
-    ((Etale.derivedTensor (ModuleCat.{u + 1} Λ) X).obj
-      (Etale.dualizingComplex (ModuleCat.{u + 1} Λ) f)).obj
-        ((Etale.upperStar (ModuleCat.{u + 1} Λ) f).leftDerivedFunctor.obj
-          (Etale.dualizingComplex (ModuleCat.{u + 1} Λ) g)) ⟶
-      Etale.dualizingComplex (ModuleCat.{u + 1} Λ) (f ≫ g) :=
-  Etale.dualizingComplexTensorMap Λ f (Etale.dualizingComplex (ModuleCat.{u + 1} Λ) g) ≫
-    (smoothExceptionalCompIso Λ f g).inv.app (𝟙_ _)
 
 /-- Equality of the canonical tensor maps under base change, in comparison coordinates.
 The left side is u*θ followed by β_K. The right side uses the monoidal pullback
@@ -368,7 +421,80 @@ theorem isCohomologicallySmooth_of_smooth
         [QuasiCompact g]
         (e : ℕ)
         [SmoothOfRelativeDimension e g],
-        comparedSmoothCompositionCoherence P f g := by
-  sorry
+        comparedSmoothCompositionCoherence P f g  := by
+  let : HasInvertibleExponent P.Coefficient X :=
+    P.finiteComparedInvertibleExponent (X ↘ Spec (.of P.field.k))
+  let : IsLocallyNoetherian Y :=
+    LocallyOfFiniteType.isLocallyNoetherian (Y ↘ Spec (.of P.field.k))
+  let : CompactSpace Y :=
+    QuasiCompact.compactSpace_of_compactSpace (Y ↘ Spec (.of P.field.k))
+  let : HasCompactification f :=
+    (P.comparedCompactification f (Y ↘ Spec (.of P.field.k))).hasCompactification
+  obtain ⟨L, hL, hs, ⟨eL⟩, hTensor⟩ :=
+    Etale.exists_dualizingComplex_iso_and_tensor P.Coefficient f d
+  refine ⟨⟨?_, ?_, ?_⟩, ?_, ?_⟩
+  · have := hL
+    have hω := Etale.DerivedCategory.isInvertible.of_iso eL.symm
+      (Etale.isInvertible_shift_singleFunctor_obj_of_isLocallyConstantSheaf L hs
+        (2 * (d : ℤ)))
+    obtain ⟨M, ⟨a⟩, ⟨b⟩⟩ := hω
+    let V := (comparisonUpperStar (ModuleCat.{u + 1} P.Coefficient) X).mapDerivedCategory
+    let a' : ((derivedTensor (ModuleCat.{u + 1} P.Coefficient) X).obj
+        (V.obj (Etale.dualizingComplex (ModuleCat.{u + 1} P.Coefficient) f))).obj
+          (V.obj M) ≅ 𝟙_ _ :=
+      (derivedTensorObjCompMapDerivedCategoryComparisonUpperStarIso
+        (ModuleCat.{u + 1} P.Coefficient) _).symm.app M ≪≫
+      V.mapIso a ≪≫ ShiftedLineSiteInverse.unitComparison _ X
+    let b' : ((derivedTensor (ModuleCat.{u + 1} P.Coefficient) X).obj
+        (V.obj M)).obj
+          (V.obj (Etale.dualizingComplex (ModuleCat.{u + 1} P.Coefficient) f)) ≅ 𝟙_ _ :=
+      (derivedTensorObjCompMapDerivedCategoryComparisonUpperStarIso
+        (ModuleCat.{u + 1} P.Coefficient) M).symm.app _ ≪≫
+      V.mapIso b ≪≫ ShiftedLineSiteInverse.unitComparison _ X
+    let : IsNoetherian X :=
+      { toIsLocallyNoetherian :=
+          LocallyOfFiniteType.isLocallyNoetherian (X ↘ Spec (.of P.field.k))
+        toCompactSpace :=
+          QuasiCompact.compactSpace_of_compactSpace (X ↘ Spec (.of P.field.k)) }
+    exact ⟨V.obj M, DerivedCategory.constructibleFiniteTor_of_isDualizable P.Coefficient
+      (isDualizable_of_tensorIso b' a'), ⟨a'⟩, ⟨b'⟩⟩
+  · intro K _hK
+    have := hTensor K
+    infer_instance
+  · intro X' Y' _ _ _ _ _ _ u' f' v _ _ _ sq
+    let := ((HasCompactification.compactification f).ofIsPullback sq).hasCompactification
+    let : QuasiCompact f' := MorphismProperty.of_isPullback (P := @QuasiCompact) sq
+      inferInstance
+    have := Etale.isIso_rightDerivedUpperShriekBaseChangeMap_of_smoothOfRelativeDimension
+      P.Coefficient f d sq
+    have := (Etale.isIso_dualizingComplexBaseChangeMap_iff P.Coefficient sq).mpr
+      (by infer_instance)
+    infer_instance
+  · intro X' Y' _ _ _ _ _ _ u' f' v _ _ _ sq K _hK
+    let := ((HasCompactification.compactification f).ofIsPullback sq).hasCompactification
+    let : QuasiCompact f' := MorphismProperty.of_isPullback (P := @QuasiCompact) sq
+      inferInstance
+    apply congrArg ((comparisonUpperStar
+      (ModuleCat.{u + 1} P.Coefficient) X').mapDerivedCategory.map)
+    simpa only [Etale.derivedTensor, curriedTensor] using
+      Etale.CanonicalSmoothBaseChange.dualizing_tensor_base_change P.Coefficient sq K
+  · intro Z _ _ _ g _ _ _ _ e _
+    let : HasCompactification g :=
+      (P.comparedCompactification g (Z ↘ Spec (.of P.field.k))).hasCompactification
+    let : HasCompactification (f ≫ g) :=
+      (P.comparedCompactification (f ≫ g) (Z ↘ Spec (.of P.field.k))).hasCompactification
+    change smoothTensorCompositionCoherence P.Coefficient f g
+    refine ⟨?_, ?_⟩
+    · have := hTensor (Etale.dualizingComplex (ModuleCat.{u + 1} P.Coefficient) g)
+      have : IsIso (smoothDualizingCompMap P.Coefficient f g) := by
+        dsimp only [smoothDualizingCompMap]
+        infer_instance
+      infer_instance
+    · intro K _hK
+      apply congrArg ((comparisonUpperStar
+        (ModuleCat.{u + 1} P.Coefficient) X).mapDerivedCategory.map)
+      exact smoothTensorCompositionEquation P.Coefficient f g K
 
 end AlgebraicGeometry.ProEtale
+
+end

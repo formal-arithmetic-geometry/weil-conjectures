@@ -1,0 +1,420 @@
+{
+ "id": "lem-sfb-normed-point-finite-model-trivialization",
+ "kind": "statement",
+ "title": "Pull a specified finite constant model to a geometric point",
+ "statement": "Work in compatible small-site and coefficient universes. Let $F$ be a normed field with totally disconnected metric topology, put $C_F(P)=C(P,F)$ for profinite $P$ [def-sfb-continuous-map-condensed-ring], and put $F_T=p_T^*C_F$ for every scheme $T$ [sk-def-sfb-pulled-back-coefficients]. Modules mean internal $F_T$-modules [sk-def-sfb-module-objects], with module inverse images as in [sk-def-sfb-module-pushforward-pullback]. Let $i:S\\hookrightarrow T$ be an immersion of schemes [def-weil-closed-immersion], let $M$ be an $F_S$-module, and fix a pro-etale covering $(v_j:U_j\\to S)_j$ with isomorphisms $v_j^*M\\cong F_{U_j}\\otimes_F P_j$, where each $P_j$ is a finitely presented abstract $F$-module [det-def-sfb-constructible-local-model]. Let $x:s=\\operatorname{Spec}k\\to T$ be a geometric point with $k$ algebraically closed and image in $i(S)$ [def-weil-geometric-point]. There is a unique factorization $x=i y$ through $S$, and there exist an index $j$, an $S$-morphism $z:s\\to U_j$ with $v_jz=y$, an integer $r\\geq0$, and an $F$-linear isomorphism $F^r\\cong P_j$. Pullback of the specified model and this basis along $z$ gives an isomorphism $y^*M\\cong F_s^{\\oplus r}$. Under constant sections $\\Gamma(s,F_s)=F$, it gives $\\Gamma(s,y^*M)\\cong F^r$. The conclusion allows $r=0$; neither Noetherianity of $T$ nor completeness of $F$ is assumed.",
+ "source": {
+  "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
+  "place": "Section 3 and Lemma 4.1(2); agent finite-model lifting at an algebraically closed point (old step 5)."
+ },
+ "stmt_deps": [
+  "def-sfb-continuous-map-condensed-ring",
+  "sk-def-sfb-pulled-back-coefficients",
+  "sk-def-sfb-module-objects",
+  "sk-def-sfb-module-pushforward-pullback",
+  "def-weil-closed-immersion",
+  "det-def-sfb-constructible-local-model",
+  "def-weil-geometric-point"
+ ],
+ "proof": [
+  {
+   "text": "The immersion factorization lemma, applied to $i$ and the field-valued point $x$ whose image lies in $i(S)$, gives exactly one $y:s\\to S$ with $iy=x$. Its field is the original algebraically closed $k$, so $y$ is a geometric point.",
+   "uses": [
+    "lem-weil-pbc-field-point-factors-through-immersion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Tags 01J9 (lemma-characterize-points, preceding discussion) and 01L7 (lemma-immersions-monomorphisms); application of the existing field-point factorization lemma."
+   }
+  },
+  {
+   "text": "Put $V_j=s\\times_S U_j$ and $w_j:V_j\\to s$. The given covering is fpqc with weakly etale members. Arbitrary scheme base change preserves the fpqc covering and each weakly etale member, so $(w_j)_j$ is a covering of $s_{\\mathrm{proet}}$. Form its generated covering sieve. The point-cover lemma puts $\\mathrm{id}_s$ in this sieve. Membership in a generated sieve means that $\\mathrm{id}_s$ factors as $w_j\\sigma$ for some original index $j$ and $\\sigma:s\\to V_j$. Set $z=\\operatorname{pr}_{U_j}\\sigma$. The fibre-product equation gives $v_jz=y$. This does not assume that $y:s\\to S$ is itself an object of $S_{\\mathrm{proet}}$.",
+   "uses": [
+    "def-weil-pbc-proetale-covering",
+    "lem-weil-pbc-fpqc-covering-axioms",
+    "sk-lem-pe-weakly-etale-stability",
+    "lem-trf-point-cover-identity"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tags 022D (topologies.tex, lemma-fpqc (3)), 094U (more-morphisms.tex, lemma-base-change-weakly-etale (2)); 0982 and 098H explain the point-cover property, also proved in AlgClosedFieldSite.lean, id_mem_of_mem_topology_of_iso."
+   }
+  },
+  {
+   "text": "Apply the field clause of the scalar finite-free resolutions lemma to the selected finitely presented abstract $F$-module $P_j$. It supplies $r\\geq0$ and a basis $p_1,\\ldots,p_r$, with $\\beta:F^r\\xrightarrow{\\sim}P_j$, $c\\mapsto\\sum_a c_ap_a$. Write $\\lambda_a:P_j\\to F$ for the coordinate functions of $\\beta^{-1}$. The same clause explicitly includes $P_j=0$ and $r=0$.",
+   "uses": [
+    "lem-sfb-scalar-finite-free-resolutions"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Field specialization in the existing Mathlib leaf lem-sfb-scalar-finite-free-resolutions; Module.finBasis (Mathlib/LinearAlgebra/Dimension/Free.lean:334) and Basis.equivFun. No DVR or completeness hypothesis is used."
+   }
+  },
+  {
+   "text": "Use the constant-extension interpretation of the specified local model. On $U_j$ the basis gives inverse module maps $B:F_{U_j}^{\\oplus r}\\to F_{U_j}\\otimes_F P_j$ and $A$ in the reverse direction: $B((t_a))=\\sum_a t_a\\otimes p_a$ and $A(t\\otimes p)=(t\\lambda_a(p))_a$. Here each $\\lambda_a(p)$ acts through constant scalars. These balanced formulas induce maps on the sheafified tensor coequalizer. The identities $\\lambda_a(p_b)=\\delta_{ab}$ and $p=\\sum_a\\lambda_a(p)p_a$ give $AB=1$ and $BA=1$. Thus the given model isomorphism followed by $A$ gives $v_j^*M\\cong F_{U_j}^{\\oplus r}$. For $r=0$ the empty sums are zero and $P_j=0$.",
+   "uses": [
+    "det-def-sfb-constructible-local-model",
+    "def-sfb-modobj-extension"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
+    "place": "Section 3, Remark 3.2 and Definition 3.5, printed pp.6--7; agent finite-basis calculation for the ordinary constant-extension local model."
+   }
+  },
+  {
+   "text": "Apply $z^*$ to that particular isomorphism. The composition isomorphism identifies $z^*v_j^*M$ with $y^*M$ since $v_jz=y$. The module pullback formula and coefficient isomorphism give $z^*F_{U_j}\\cong F_s$: on the relative tensor the maps are $a\\otimes b\\mapsto a\\alpha_z(b)$ and $a\\mapsto a\\otimes1$. The additive functor $z^*$ preserves the finite biproduct identities $\\pi_a\\iota_b=\\delta_{ab}$ and $\\sum_a\\iota_a\\pi_a=1$; hence $z^*(F_{U_j}^{\\oplus r})\\cong F_s^{\\oplus r}$ with those pulled-back columns. Composing gives the required isomorphism $y^*M\\cong F_s^{\\oplus r}$ obtained from the specified model and the chosen basis.",
+   "uses": [
+    "sk-def-sfb-module-pushforward-pullback",
+    "def-sfb-module-upper-star",
+    "lem-sfb-alpha-iso"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-module-pushforward-pullback/_section.md",
+    "place": "Pullback formula and composition isomorphisms; def-sfb-module-upper-star.md for additivity. Agent regular-module tensor-unit and finite-biproduct calculation."
+   }
+  },
+  {
+   "text": "The canonical continuous-function realization identifies $\\Gamma(s,F_s)$ with $C(|s|,F)$. Since $|s|$ has one point, value at that point is inverse to the constant-section ring map $F\\to\\Gamma(s,F_s)$. Taking sections of the preceding basis isomorphism gives $\\Gamma(s,y^*M)\\cong F^r$: apply sections to its injections and projections; their identities remain $\\pi_a\\iota_b=\\delta_{ab}$ and $\\sum_a\\iota_a\\pi_a=1$, so the coordinates are precisely $r$ copies of $\\Gamma(s,F_s)=F$. All maps are linear for these constant scalars. For $r=0$ this is $0\\cong F^0$. No step required Noetherianity or completeness.",
+   "uses": [
+    "lem-weil-pbc-condensed-field-continuous-realization"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
+    "place": "Example 3.1, printed p.6: coefficient sheaf U maps to continuous functions on |U|. Agent evaluation at the one-point space and finite-biproduct calculation."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-field-point-factors-through-immersion",
+  "def-weil-pbc-proetale-covering",
+  "lem-weil-pbc-fpqc-covering-axioms",
+  "sk-lem-pe-weakly-etale-stability",
+  "lem-trf-point-cover-identity",
+  "lem-sfb-scalar-finite-free-resolutions",
+  "det-def-sfb-constructible-local-model",
+  "def-sfb-modobj-extension",
+  "sk-def-sfb-module-pushforward-pullback",
+  "def-sfb-module-upper-star",
+  "lem-sfb-alpha-iso",
+  "lem-weil-pbc-condensed-field-continuous-realization"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
+  "place": "Example 3.1 and Section 3 (constant models); explicit ordinary-module proof assembled with Stacks 022D, 094U, 0982, 098H and existing DAG tools. Lemma 4.1(2) is context, not used as an ordinary-heart equivalence."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A pro etale cover with finite constant module models over a totally disconnected normed field lifts a chosen model to any algebraically closed geometric point",
+   "results": {
+    "t": "2026-10-22T06:03:55Z",
+    "tool": "leanfinder",
+    "query": "A pro etale cover with finite constant module models over a totally disconnected normed field lifts a chosen model to any algebraically closed geometric point",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "StandardEtalePair.homEquiv",
+     "StandardEtalePair.homEquiv_symm_apply",
+     "StandardEtalePair.instFormallyEtaleRing",
+     "StandardEtalePair.lift_X",
+     "Algebra.FormallyEtale.iff_exists_algEquiv_prod",
+     "StandardEtalePresentation.lift_bijective",
+     "Algebra.Etale.iff_exists_algEquiv_prod",
+     "AlgebraicGeometry.IsEtale.instFormallyUnramified"
+    ],
+    "digest": "825b344c48d91428"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: free-module pullback is only a component; these hits do not split a pro-etale cover over the point or select and identify the given local model."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Finite locally free continuous coefficient sheaves pull back to finite free modules over the pro etale site of an algebraically closed field",
+   "results": {
+    "t": "2026-10-22T06:03:43Z",
+    "tool": "leansearch",
+    "query": "Finite locally free continuous coefficient sheaves pull back to finite free modules over the pro etale site of an algebraically closed field",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "SheafOfModules.pullbackObjFreeIso_hom_naturality_assoc",
+     "SheafOfModules.pullbackObjFreeIso.congr_simp",
+     "SheafOfModules.pullbackObjFreeIso_hom_naturality",
+     "SheafOfModules.pullbackObjFreeIso",
+     "SheafOfModules.pullback",
+     "SheafOfModules.pullbackPushforwardAdjunction",
+     "SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom",
+     "SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom_assoc"
+    ],
+    "digest": "55a9041ce8ca0e15"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: free-module pullback is only a component; these hits do not split a pro-etale cover over the point or select and identify the given local model."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Sheaf\", \"locallyConstant\"",
+   "results": {
+    "t": "2026-10-22T06:03:44Z",
+    "tool": "loogle",
+    "query": "\"Sheaf\", \"locallyConstant\"",
+    "sub": "",
+    "ok": true,
+    "n_hits": 12,
+    "note": "",
+    "top": [
+     "CompHausLike.LocallyConstant.instIsIsoFunctorTypeUnitSheafCoherentTopologyAdjunction",
+     "CompHausLike.LocallyConstant.presheaf_ext",
+     "Condensed.locallyConstantPresheaf",
+     "LightCondensed.locallyConstantPresheaf",
+     "LightCondensed.isColimitLocallyConstantPresheafDiagram",
+     "Condensed.isColimitLocallyConstantPresheaf",
+     "Condensed.isColimitLocallyConstantPresheafDiagram",
+     "LightCondensed.isColimitLocallyConstantPresheaf"
+    ],
+    "digest": "404cdd4a5ca452a2"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: free-module pullback is only a component; these hits do not split a pro-etale cover over the point or select and identify the given local model."
+  },
+  {
+   "tool": "grep",
+   "query": "finite.*(constant|free).*([Ff]iber|[Ff]ibre)|([Ff]iber|[Ff]ibre).*locallyConstant",
+   "results": {
+    "t": "2026-10-22T06:03:43Z",
+    "tool": "grep",
+    "query": "finite.*(constant|free).*([Ff]iber|[Ff]ibre)|([Ff]iber|[Ff]ibre).*locallyConstant",
+    "sub": "AlgebraicGeometry",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: free-module pullback is only a component; these hits do not split a pro-etale cover over the point or select and identify the given local model."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A cover of a weakly contractible algebraically closed point has a section selecting a finite free local module model",
+   "results": {
+    "t": "2026-10-22T06:03:55Z",
+    "tool": "leanfinder",
+    "query": "A cover of a weakly contractible algebraically closed point has a section selecting a finite free local module model",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "Algebra.FormallyUnramified.bijective_of_isAlgClosed_of_isLocalRing",
+     "Algebra.FormallyUnramified.isField_of_isAlgClosed_of_isLocalRing",
+     "AlgebraicGeometry.isFinite_iff_locallyOfFiniteType_of_jacobsonSpace",
+     "Algebra.QuasiFiniteAt",
+     "Algebra.quasiFinite_iff",
+     "Algebra.QuasiFiniteAt.exists_basicOpen_eq_singleton",
+     "AlgebraicGeometry.isClosed_singleton_iff_locallyOfFiniteType",
+     "AlgebraicGeometry.Scheme.affineOpenCover_X"
+    ],
+    "digest": "fde7833f98108198"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: free-module pullback is only a component; these hits do not split a pro-etale cover over the point or select and identify the given local model."
+  },
+  {
+   "tool": "grep",
+   "query": "finite.*constant.*model|normed.*geometric|geometric.*normed",
+   "results": {
+    "t": "2026-10-22T12:04:45Z",
+    "tool": "grep",
+    "query": "finite.*constant.*model|normed.*geometric|geometric.*normed",
+    "sub": "AlgebraicGeometry",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: the returned general free-sheaf pullback or etale/local-generator declarations do not assert the specified-model lift, immersion factorization, and normalized continuous coefficient sections together."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Pullback of a pro etale locally finite constant module over a normed field to an algebraically closed geometric point is finite free",
+   "results": {
+    "t": "2026-10-22T12:04:45Z",
+    "tool": "leansearch",
+    "query": "Pullback of a pro etale locally finite constant module over a normed field to an algebraically closed geometric point is finite free",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "AlgebraicGeometry.Scheme.Modules.pullback",
+     "SheafOfModules.pullbackObjFreeIso",
+     "SheafOfModules.pullbackObjFreeIso_hom_naturality",
+     "SheafOfModules.pullbackObjFreeIso.congr_simp",
+     "SheafOfModules.pullbackObjFreeIso_hom_naturality_assoc",
+     "LocallyConstant.freeOfProfinite",
+     "LocallyConstant.comapₗ",
+     "AlgebraicGeometry.Scheme.Modules.instIsLeftAdjointPullback"
+    ],
+    "digest": "69e1228ed50fd3a0"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: the returned general free-sheaf pullback or etale/local-generator declarations do not assert the specified-model lift, immersion factorization, and normalized continuous coefficient sections together."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"SheafOfModules.pullbackObjFreeIso\"",
+   "results": {
+    "t": "2026-10-22T12:04:45Z",
+    "tool": "loogle",
+    "query": "\"SheafOfModules.pullbackObjFreeIso\"",
+    "sub": "",
+    "ok": true,
+    "n_hits": 3,
+    "note": "",
+    "top": [
+     "SheafOfModules.pullbackObjFreeIso",
+     "SheafOfModules.pullbackObjFreeIso_hom_naturality",
+     "SheafOfModules.pullbackObjFreeIso_hom_naturality_assoc"
+    ],
+    "digest": "46b40e2aef1abb33"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: the returned general free-sheaf pullback or etale/local-generator declarations do not assert the specified-model lift, immersion factorization, and normalized continuous coefficient sections together."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A pro etale covering of a scheme lifts a specified finite constant module model to an algebraically closed geometric point",
+   "results": {
+    "t": "2026-10-22T12:04:55Z",
+    "tool": "leanfinder",
+    "query": "A pro etale covering of a scheme lifts a specified finite constant module model to an algebraically closed geometric point",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "AlgebraicGeometry.IsEtale.of_comp",
+     "AlgebraicGeometry.IsEtale.instFormallyUnramified",
+     "StandardEtalePair.instFormallyEtaleRing",
+     "AlgebraicGeometry.Scheme.Etale",
+     "AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified",
+     "Algebra.Etale.formallyEtale",
+     "Algebra.Etale.exists_subalgebra_fg",
+     "AlgebraicGeometry.Scheme.instCategoryEtale"
+    ],
+    "digest": "c0a3099f82c483eb"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: the returned general free-sheaf pullback or etale/local-generator declarations do not assert the specified-model lift, immersion factorization, and normalized continuous coefficient sections together."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A finite constant local model becomes a finite free sheaf on the spectrum of an algebraically closed field by splitting the cover",
+   "results": {
+    "t": "2026-10-22T12:04:56Z",
+    "tool": "leanfinder",
+    "query": "A finite constant local model becomes a finite free sheaf on the spectrum of an algebraically closed field by splitting the cover",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "SheafOfModules.IsFiniteType.exists_localGeneratorsData",
+     "SheafOfModules.LocalGeneratorsData.IsFiniteType.isFiniteType",
+     "SheafOfModules.localGeneratorsDataOfIsFiniteType",
+     "SheafOfModules.GeneratingSections.IsFiniteType.finite",
+     "SheafOfModules.LocalGeneratorsData.IsFiniteType",
+     "SheafOfModules.GeneratingSections.IsFiniteType",
+     "SheafOfModules.IsFiniteType",
+     "AlgebraicGeometry.IsFinite.finite_app"
+    ],
+    "digest": "5e19b1b6ea87101c"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: the returned general free-sheaf pullback or etale/local-generator declarations do not assert the specified-model lift, immersion factorization, and normalized continuous coefficient sections together."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-constructible-normed-geometric-fibres",
+  "date": "2026-10-22",
+  "group": "Q33"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "Paragraph (3), geometric norm-coefficient projection: Exact geometric fibres and constructible detection for continuous normed-field coefficients. Subargument: Section 3 and Lemma 4.1(2); agent finite-model lifting at an algebraically closed point (old step 5).",
+   "via": [
+    "lem-sfb-constructible-normed-geometric-fibres",
+    "lem-sfb-supported-lattice-norm-projection",
+    "lem-sfb-geometric-condensed-finite-scalar-model",
+    "lem-sfb-norm-algcl-cohomology-topology-comparison",
+    "lem-sfb-supported-finite-stage-topology-defect",
+    "lem-sfb-constructible-algcl-topology-comparison",
+    "lem-sfb-continuous-algcl-proper-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sfb-normed-point-finite-model-trivialization",
+  "worker": "stage1",
+  "summary": "Q56: factored the field-valued point through the immersion, pulled the covering back along an arbitrary scheme morphism, split its covering sieve over the algebraically closed point, selected a finite basis of the specified original local model, and wrote its tensor, pullback and section coordinates. Reused every ingredient; no new nodes. Normalized inherited doubled TeX escapes without changing the statement.",
+  "blueprint": "Realizes the finite-model lifting subargument (old step 5) of lem-sfb-constructible-normed-geometric-fibres, in Paragraph (3), geometric norm-coefficient projection, of sk-thm-sf-ctf-stability-direct-images.proof.md. The inherited ancestor command returns None because created.item ends at Sheaf.SixFunctors.CtfStabilityDirectImages, a non-node; retain its existing provenance chain and explicit place.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-field-point-factors-through-immersion",
+    "why": "Generic field-point factorization through an immersion; needed to reach the stratum, without replacing the unit direct-image route."
+   },
+   {
+    "node": "sk-lem-pe-weakly-etale-stability",
+    "why": "Generic arbitrary scheme base-change stability, needed because the geometric point need not be a site object; the unit has no such geometry lemma."
+   },
+   {
+    "node": "lem-trf-point-cover-identity",
+    "why": "Generic small pro-etale point-cover splitting over any algebraically closed field, independent of trace coefficients; used only to select one original model."
+   },
+   {
+    "node": "lem-weil-pbc-condensed-field-continuous-realization",
+    "why": "Canonical coefficient ring realization for every totally disconnected normed field and every scheme; used only to compute constant sections at the point."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-field-point-factors-through-immersion",
+  "sk-lem-pe-weakly-etale-stability",
+  "lem-trf-point-cover-identity",
+  "lem-weil-pbc-condensed-field-continuous-realization"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q56-eab29790e",
+  "group": "Q56",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q56-eab29790e (reviewer sub-agent of L); spot-checked: Read the item in full plus every cited node's statement. First split of a base-unsplit node; statement unchanged apart from removing doubled backslashes; no new nodes; no repair note; no SGA. Step 1: field-point factorization through an immersion (Stacks 01J9, 01L7) gives a unique y. Step 2: base change of the pro-étale covering along y (Stacks 022D(3) for fpqc, 094U(2) for weakly étale) gives a covering of s_proet. The point-cover lemma puts id_s in the generated sieve, so id_s = w_j σ; with z = pr σ, v_j z = y holds. Step 3: field clause of the Mathlib leaf lem-sfb-scalar-finite-free-resolutions gives a basis, r=0 allowed. Step 4: explicit inverse maps B/A on the constant extension Λ_U⊗_{Λ(*)_U}P_U, balanced, identities check out. Step 5: composition isomorphism, z^*F_U≅F_s by scalar extension of the rank-one module, additivity carries the biproduct. Step 6: continuous-function realization (HRS Example 3.1, p.6, read) gives Γ(s,F_s)=F, and Γ is additive. Edge cases r=0, S empty, empty or infinite covers, nilpotent immersions: all fine. No duplicates (det-pe-wcb-split-cover, lem-pe-finite-coefficient-model-comparison, lem-sfb-normed-locally-free-geometric-matrix-test and others read). Batch-5 flag on lem-trf-point-cover-identity: a generic pro-étale site fact (covering sieves over Spec of an algebraically closed field contain the identity) with no proof_deps. It is not part of the trace-formula or Poincaré-duality proofs, so it is accepted. Off-unit tool uses accepted as generic: field-point factorization, weakly-étale stability, point cover, condensed-field realization. Cosmetic only: step 2's source document field says proetale.tex but the place field names the correct files."
+ }
+}

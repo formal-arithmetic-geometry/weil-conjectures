@@ -1,0 +1,259 @@
+{
+ "id": "lem-sfb-torus-normalizer-components",
+ "kind": "statement",
+ "title": "Normalizer and centralizer of a torus have the same identity component",
+ "statement": "Let $F$ be an algebraically closed field [def-weil-field, def-weil-algebraic-closure]. All groups are affine group schemes [def-sc-group-scheme] of finite type [def-weil-finite-type-morphism], and subgroups are closed subgroup schemes [def-sc-group-scheme-subgroup]. Use reductivity, maximal tori, and scheme-theoretic centralizer points as in [def-sfb-reductive-torus-centralizer-terminology]. A torus is a group isomorphic to $\\mathbf G_m^r$ for an integer $r\\geq0$, where $\\mathbf G_m(A)=A^\\times$ [def-sc-gm-ga]. Let $G$ be smooth [def-sbc-smooth-morphisms] and connected [def-weil-connected-scheme], and let $S\\subseteq G$ be any torus. Define $N_G(S)(A)$ to be the elements of $G(A)$ whose conjugation preserves $S_{A\\prime}$ as a subgroup functor after every commutative $A$-algebra extension $A\\prime$. Then $N_G(S)$ and $C_G(S)$ are represented by smooth closed subgroup schemes of finite type and $$N_G(S)^\\circ=C_G(S)^\\circ.$$ The superscript $\\circ$ denotes the connected component of the identity. In particular $N_G(S)(F)/C_G(S)(F)$ is a finite group.",
+ "source": {
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Corollary 12.40, printed p.244 (same identity component); Corollary 13.10, printed p.257 (smooth normalizer and centralizer); Corollary 13.11, printed p.257 (geometric-point descriptions). Finiteness follows from the finitely many components of a finite-type scheme."
+ },
+ "stmt_deps": [
+  "def-weil-algebraic-closure",
+  "def-weil-field",
+  "def-sc-group-scheme",
+  "def-weil-finite-type-morphism",
+  "def-sc-group-scheme-subgroup",
+  "def-sfb-reductive-torus-centralizer-terminology",
+  "def-sc-gm-ga",
+  "def-sbc-smooth-morphisms",
+  "def-weil-connected-scheme"
+ ],
+ "proof": [
+  {
+   "text": "Let $f:S\\times_FG\\to G$ be $f(s,g)=gsg^{-1}$. Apply [lem-sfb-constant-source-closed-factorization-locus] with source $S$, parameter scheme $G$, target $G$, and closed subscheme $S\\hookrightarrow G$. The separatedness hypotheses hold by [lem-weil-pbc-affine-source-morphism-separated], since both schemes are affine. This gives a closed subscheme $L\\subseteq G$ whose $A$-points are exactly those $g$ for which conjugation sends $S_A$ into $S_A$. This is equivalent to $g_{A'}S(A')g_{A'}^{-1}\\subseteq S(A')$ for every $A$-algebra $A'$: the forward implication follows by evaluating the factorization; for the converse, test with the coordinate algebra of $S_A$ and its universal point. The defining ideal of $S_A$ then pulls back to zero, giving the factorization by the affine quotient-ring criterion in [def-weil-closed-immersion]. Pull back $L$ by inversion and intersect with $L$, obtaining $N=L\\times_G\\operatorname{inv}^{-1}(L)$. The fibre-product property [def-pc-fibre-product] and [lem-weil-pbc-closed-immersion-base-change] give this intersection. Explicitly, if $G=\\operatorname{Spec}B$ and $L$ is cut out by $I\\subseteq B$, the intersection is cut out by $I+\\operatorname{inv}^*I$, so it is closed in $G$. Its test condition is the preceding inclusion for both $g$ and $g^{-1}$, which is precisely equality $gS_Ag^{-1}=S_A$. Thus $N$ represents the normalizer functor $N_G(S)$ defined in the statement.",
+   "uses": [
+    "lem-sfb-constant-source-closed-factorization-locus",
+    "lem-weil-pbc-affine-source-morphism-separated",
+    "def-weil-closed-immersion",
+    "def-pc-fibre-product",
+    "lem-weil-pbc-closed-immersion-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 1.79 and Proposition 1.83, printed pp.30--31; the closed-family construction is Theorem 1.105, pp.37--38."
+   }
+  },
+  {
+   "text": "The identity preserves $S$; if $g$ and $h$ preserve $S$ after every algebra extension, then $gh$ does, because $(gh)s(gh)^{-1}=g(hsh^{-1})g^{-1}$; the inverse condition is built into $N$. Hence $N(A)$ is a subgroup of $G(A)$ naturally in $A$, so [def-sc-group-scheme-subgroup] makes $N$ a closed subgroup scheme. By [def-weil-closed-immersion], its coordinate ring is a quotient of the finitely generated $F$-algebra of $G$. The images of a finite generating set still generate the quotient, so $N$ is affine of finite type. By [lem-sfb-torus-centralizer-smooth-connected], applied over the algebraically closed field $F$ to the given smooth connected $G$ and the torus $S$, $C=C_G(S)$ is a smooth closed subgroup scheme of $G$. It too is affine of finite type by the same quotient argument. Every point centralizing $S$ preserves $S$, so $C\\subseteq N$ on all test algebras.",
+   "uses": [
+    "def-sc-group-scheme-subgroup",
+    "def-weil-closed-immersion",
+    "lem-sfb-torus-centralizer-smooth-connected"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 1.83, pp.31--32; Corollary 13.10, p.257 (only its centralizer assertion is used here)."
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-group-neutral-component-translates] to $N$ and $C$, writing $N^\\circ,C^\\circ$ for their identity components with their open subscheme structures. They are connected open-and-closed subgroup schemes. In particular $N^\\circ$ is affine of finite type, being closed in the affine finite-type scheme $N$. Conjugation restricts to a morphism $\\phi:N^\\circ\\times_FS\\to S$: the universal property defining $L$ gives the factorization, and conjugation by the inverse gives its inverse in the $S$ variable. For each algebra and parameter point this is a group homomorphism, by the identity $g(s_1s_2)g^{-1}=(gs_1g^{-1})(gs_2g^{-1})$. Choose the given splitting $S\\simeq\\mathbf G_m^r$. The Laurent monomials $t_1^{m_1}\\cdots t_r^{m_r}$ identify its coordinate Hopf algebra with $F[\\mathbf Z^r]$: multiplication adds exponent vectors, comultiplication repeats the monomial in both factors, and the counit evaluates it at $1$. Thus [lem-sfb-diagonalizable-hom-family-rigidity] applies with $X=N^\\circ$, $D_1=D_2=S$, and $x_0=e$. It requires no smoothness or reducedness of $X$. It gives $\\phi(g,s)=\\phi(e,s)=s$ on every algebra. Consequently $N^\\circ\\subseteq C$ as subgroup schemes, including their possibly nonreduced structures.",
+   "uses": [
+    "lem-sfb-group-neutral-component-translates",
+    "lem-sfb-diagonalizable-hom-family-rigidity",
+    "def-weil-closed-immersion",
+    "def-sc-gm-ga"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Theorem 12.36 and proof of Corollary 12.40, printed pp.243--244."
+   }
+  },
+  {
+   "text": "Since the connected scheme $C^\\circ$ maps into $N$ and contains its identity, its image lies in the identity component of $N$; [lem-weil-pbc-morphism-factors-through-open-subscheme] factors $C^\\circ\\to N$ through the open subscheme $N^\\circ$. Conversely, the inclusion $N^\\circ\\subseteq C$ from Step 3 has connected image containing the identity, so its image lies in $C^\\circ$, and the same open-factorization statement factors it through $C^\\circ$. These two maps compose to the identity: after their subgroup inclusions in $G$, both composites are the original inclusions, which are injective on every algebra's points. Hence $N^\\circ=C^\\circ$ as subgroup schemes of $G$, with their open subscheme structures. The inclusions and open structures used here are precisely those supplied by [lem-sfb-group-neutral-component-translates].",
+   "uses": [
+    "lem-weil-pbc-morphism-factors-through-open-subscheme",
+    "lem-sfb-group-neutral-component-translates"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Corollary 12.40, p.244; identity-component inclusions and their induced scheme structures."
+   }
+  },
+  {
+   "text": "By [lem-weil-pbc-smooth-restrict-open-subschemes], the open subscheme $C^\\circ$ of the smooth scheme $C$ is smooth. The equality in Step 4 therefore makes $N^\\circ$ smooth. By [lem-sfb-group-neutral-component-translates], every connected component $D$ of $N$ has its open subscheme structure and is isomorphic over $F$ to $N^\\circ$ by translation by some $n_D\\in N(F)$. Smoothness is unchanged under such an isomorphism by clause (c) of [lem-weil-pbc-smooth-restrict-open-subschemes]. The components cover $N$, so [lem-weil-pbc-smooth-local-on-source] makes $N$ smooth. This proves smoothness without having assumed it when applying rigidity.",
+   "uses": [
+    "lem-weil-pbc-smooth-restrict-open-subschemes",
+    "lem-sfb-group-neutral-component-translates",
+    "lem-weil-pbc-smooth-local-on-source"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Corollary 13.10, printed p.257: deduce normalizer smoothness from its identity component and translation."
+   }
+  },
+  {
+   "text": "The centralizer is normal in $N$: for $n\\in N(A)$, $c\\in C(A)$ and $s\\in S(A')$ after any $A$-algebra extension, put $t=n^{-1}sn\\in S(A')$. Then $(ncn^{-1})s=nctn^{-1}=ntcn^{-1}=s(ncn^{-1})$. Thus $ncn^{-1}\\in C(A)$, and in particular $N(F)/C(F)$ is a group. There are only finitely many connected components of $N$ by [lem-sfb-group-neutral-component-translates]; choose its representatives $n_D$ from that same statement. Every $n\\in N(F)$ in component $D$ has $n_D^{-1}n\\in N^\\circ(F)=C^\\circ(F)\\subseteq C(F)$. Therefore every coset of $C(F)$ is represented by one of the finitely many $n_D$, and the quotient group is finite.",
+   "uses": [
+    "lem-sfb-group-neutral-component-translates"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Corollary 12.40, p.244, and Proposition 1.34/Corollary 1.35, printed pp.16--17, for the finite component/coset argument."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-constant-source-closed-factorization-locus",
+  "lem-weil-pbc-affine-source-morphism-separated",
+  "def-weil-closed-immersion",
+  "def-pc-fibre-product",
+  "lem-weil-pbc-closed-immersion-base-change",
+  "def-sc-group-scheme-subgroup",
+  "lem-sfb-torus-centralizer-smooth-connected",
+  "lem-sfb-group-neutral-component-translates",
+  "lem-sfb-diagonalizable-hom-family-rigidity",
+  "def-sc-gm-ga",
+  "lem-weil-pbc-morphism-factors-through-open-subscheme",
+  "lem-weil-pbc-smooth-restrict-open-subschemes",
+  "lem-weil-pbc-smooth-local-on-source"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Propositions 1.79 and 1.83, Theorem 12.36, Corollaries 12.40 and 13.10; finite components from Proposition 1.34 and Corollary 1.35."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The normalizer of a torus in a smooth affine algebraic group is smooth and its identity component centralizes the torus so normalizer modulo centralizer is finite",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"Subgroup.normalizerMonoidHom_ker\", \"module\": \"Mathlib/GroupTheory/Subgroup/Centralizer\", \"type\": \"∀ {G : Type u_1} [inst : Group G] (H : Subgroup G),\\n  H.normalizerMonoidHom.ker = (Subgroup.centralizer ↑H).subgroupOf H.normalizer\", \"doc\": \"The kernel of the group homomorphism from the normalizer of a subgroup $ H $ to the automorphism group $ \\\\mathrm{Aut}(H) $, defined by conjugation action, is equal to the centralizer of $ H $ consider\"}\n  {\"name\": \"Subgroup.normal_centralizer\", \"module\": \"Mathlib/GroupTheory/Subgroup/Centralizer\", \"type\": \"∀ {G : Type u_1} [inst : Group G] {H : Subgroup G} [H.Normal], (Subgroup.centralizer ↑H).Normal\", \"doc\": \"If $ H $ is a normal subgroup of a group $ G $, then the centralizer of $ H $ in $ G $ is also a normal subgroup of $ G $. The centralizer consists of all elements in $ G $ that commute with every ele\"}\n  {\"name\": \"Field.absoluteGaloisGroup.commutator_closure_isNormal\", \"module\": \"Mathlib/FieldTheory/AbsoluteGaloisGroup\", \"type\": \"∀ (K : Type u_1) [inst : Field K], (commutator (Field.absoluteGaloisGroup K)).topologicalClosure.Normal\", \"doc\": \"The topological closure of the commutator subgroup of the absolute Galois group $\\\\text{Gal}(\\\\overline{K}/K)$ is a normal subgroup under the Krull topology. This means that for any field $K$, the closu\"}\n  {\"name\": \"LieAlgebra.zeroRootSubalgebra_normalizer_eq_self\", \"module\": \"Mathlib/Algebra/Lie/Weights/Cartan\", \"type\": \"∀ (R : Type u_1) (L : Type u_2) [inst : CommRing R] [inst_1 : LieRing L] [inst_2 : LieAlgebra R L]\\n  (H : LieSubalgebra R L) [inst_3 : LieRing.IsNilpotent ↥H],\\n  (LieAlgebra.zeroRootSubalgebra R L H).normalizer = LieAlgebra.zeroRootSubalgebra R L H\", \"doc\": \"For a Lie algebra $ L $ over a commutative ring $ R $ and a nilpotent Lie subalgebra $ \\\\mathfrak{h} \\\\subseteq L $, the normalizer of the zero root subalgebra $ \\\\mathfrak{g}_0(\\\\mathfrak{h}) $ in $ L $ \"}\n  {\"name\": \"LieSubalgebra.IsCartanSubalgebra.self_normalizing\", \"module\": \"Mathlib/Algebra/Lie/CartanSubalgebra\", \"type\": \"∀ {R : Type u} {L : Type v} {inst : CommRing R} {inst_1 : LieRing L} {inst_2 : LieAlgebra R L} {H : LieSubalgebra R L}\\n  [self : H.IsCartanSubalgebra], H.normalizer = H\", \"doc\": \"If $ \\\\mathfrak{h} $ is a Cartan subalgebra of a Lie algebra $ \\\\mathfrak{g} $ over a commutative ring $ R $, then the normalizer of $ \\\\mathfrak{h} $ in $ \\\\mathfrak{g} $ is $ \\\\mathfrak{h} $ itself. This\"}\n  {\"name\": \"Sylow.normalizer_le_centralizer_or_le_commutator\", \"module\": \"Mathlib/GroupTheory/SpecificGroups/ZGroup\", \"type\": \"∀ {G : Type u_1} [inst : Group G] {p : ℕ} [Fact (Nat.Prime p)] [Finite G] (P : Sylow p G) [IsCyclic ↥↑P],\\n  (↑P).normalizer ≤ Subgroup.centralizer ↑P ∨ ↑P ≤ commutator G\", \"doc\": \"For a Sylow $ p $-subgroup $ P $ of a group $ G $, the normalizer of $ P $ in $ G $ is either contained in the centralizer of $ P $ or $ P $ itself is contained in the commutator subgroup $ [G, G] $ o\"}\n  {\"name\": \"LieSubalgebra.normalizer_eq_self_of_isCartanSubalgebra\", \"module\": \"Mathlib/Algebra/Lie/CartanSubalgebra\", \"type\": \"∀ {R : Type u} {L : Type v} [inst : CommRing R] [inst_1 : LieRing L] [inst_2 : LieAlgebra R L] (H : LieSubalgebra R L)\\n  [H.IsCartanSubalgebra], H.toLieSubmodule.normalizer = H.toLieSubmodule\", \"doc\": \"If $ \\\\mathfrak{h} $ is a Cartan subalgebra of a Lie algebra $ \\\\mathfrak{g} $ over a commutative ring $ R $, then the normalizer of $ \\\\mathfrak{h} $ in $ \\\\mathfrak{g} $ is equal to $ \\\\mathfrak{h} $ its\"}\n  {\"name\": \"LieModule.genWeightSpace_zero_normalizer_eq_self\", \"module\": \"Mathlib/Algebra/Lie/Weights/Basic\", \"type\": \"∀ (R : Type u_2) (L : Type u_3) (M : Type u_4) [inst : CommRing R] [inst_1 : LieRing L] [inst_2 : LieAlgebra R L]\\n  [inst_3 : AddCommGroup M] [inst_4 : Module R M] [inst_5 : LieRingModule L M] [inst_6 : LieModule R L M]\\n  [inst_7 : LieRing.IsNilpotent L], (LieModule.genWeightSpace M 0).normalizer = \", \"doc\": \"For a nilpotent Lie algebra $\\\\mathfrak{g}$ over a commutative ring $R$ acting on a Lie module $M$, the normalizer of the generalized weight space associated with the zero weight function $\\\\chi = 0 : \\\\\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern abstract groups, Lie algebras, topological tori, or matrix definitions; none asserts the algebraic-group-scheme theorem in all characteristics"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Algebraic group scheme normalizer torus identity component centralizer finite Weyl group",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"Subgroup.normalizer\", \"module\": \"Mathlib.Algebra.Group.Subgroup.Defs\", \"type\": \": Subgroup G\", \"doc\": \"For a group $G$ and a subgroup $H$, the normalizer of $H$ in $G$ is the subgroup consisting of all elements $g \\\\in G$ that preserve the set $H$ under conjugation. The underlying set is defined as $\\\\{g\"}\n  {\"name\": \"Subgroup.setNormalizer\", \"module\": \"Mathlib.Algebra.Group.Subgroup.Defs\", \"type\": \"(S : Set G) : Subgroup G\", \"doc\": \"For any subset $ S \\\\subseteq G $, the normalizer of $ S $ in $ G $ is the subgroup consisting of all elements $ g \\\\in G $ such that conjugation by $ g $ preserves $ S $, i.e., $ g S g^{-1} = S $. This\"}\n  {\"name\": \"Subgroup.normalizerMonoidHom_ker\", \"module\": \"Mathlib.GroupTheory.Subgroup.Centralizer\", \"type\": \": H.normalizerMonoidHom.ker = (Subgroup.centralizer H).subgroupOf H.normalizer\", \"doc\": \"The kernel of the group homomorphism from the normalizer of a subgroup $ H $ to the automorphism group $ \\\\mathrm{Aut}(H) $, defined by conjugation action, is equal to the centralizer of $ H $ consider\"}\n  {\"name\": \"RootPairing.weylGroup\", \"module\": \"Mathlib.LinearAlgebra.RootSystem.WeylGroup\", \"type\": \": Subgroup (Aut P)\", \"doc\": \"The Weyl group of a root pairing $ P $ is the subgroup of the automorphism group $ \\\\text{Aut}(P) $ generated by the image of the reflection automorphisms. It consists of all automorphisms that can be \"}\n  {\"name\": \"AddSubgroup.normalizer\", \"module\": \"Mathlib.Algebra.Group.Subgroup.Defs\", \"type\": \"{G : Type u_1} → [inst : AddGroup G] → AddSubgroup G → AddSubgroup G\", \"doc\": \"For an additive group $G$ and an additive subgroup $H \\\\subseteq G$, the normalizer of $H$ in $G$ is the additive subgroup consisting of all elements $a \\\\in G$ such that for every $n \\\\in G$, $n \\\\in H$ \"}\n  {\"name\": \"NormalizerCondition\", \"module\": \"Mathlib.Algebra.Group.Subgroup.Basic\", \"type\": \"(G : Type u_1) → [Group G] → Prop\", \"doc\": \"A group $ G $ satisfies the normalizer condition if every proper subgroup $ H $ of $ G $ is properly contained in its normalizer, i.e., $ H < N_G(H) $, where $ N_G(H) $ denotes the normalizer of $ H $\"}\n  {\"name\": \"Subgroup.mem_normalizer_iff'\", \"module\": \"Mathlib.Algebra.Group.Subgroup.Defs\", \"type\": \"{g : G} : g ∈ H.normalizer ↔ ∀ n, n * g ∈ H ↔ g * n ∈ H\", \"doc\": \"An element $ g $ of the group $ G $ belongs to the normalizer of the subgroup $ H $ if and only if for every element $ n $ in $ G $, the product $ n g $ lies in $ H $ precisely when the product $ g n \"}\n  {\"name\": \"Subgroup.subgroupOf_normalizer_eq\", \"module\": \"Mathlib.Algebra.Group.Subgroup.Basic\", \"type\": \"{H N : Subgroup G} (h : H ≤ N) : H.normalizer.subgroupOf N = (H.subgroupOf N).normalizer\", \"doc\": \"For subgroups $ H $ and $ N $ of a group $ G $, if $ H $ is contained in $ N $, then the normalizer of $ H $ in $ N $ is equal to the intersection of the normalizer of $ H $ in $ G $ with $ N $.\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern abstract groups, Lie algebras, topological tori, or matrix definitions; none asserts the algebraic-group-scheme theorem in all characteristics"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"normalizer\"",
+   "results": "[loogle] OK 12 hit(s)\n  {\"name\": \"Lean.Compiler.LCNF.NormalizerM\", \"module\": \"Lean.Compiler.LCNF.CompilerM\", \"type\": \" (pu : Lean.Compiler.LCNF.Purity) (_translator : Bool) (α : Type) : Type\", \"doc\": \"\"}\n  {\"name\": \"Lean.Compiler.LCNF.instMonadFVarSubstNormalizerM\", \"module\": \"Lean.Compiler.LCNF.CompilerM\", \"type\": \" {pu : Lean.Compiler.LCNF.Purity} {t : Bool} : Lean.Compiler.LCNF.MonadFVarSubst (Lean.Compiler.LCNF.NormalizerM pu t) pu t\", \"doc\": \"\"}\n  {\"name\": \"Lean.Meta.Grind.backward.grind.normalizer\", \"module\": \"Lean.Meta.Tactic.Grind.Types\", \"type\": \" : Lean.Option Bool\", \"doc\": \"\"}\n  {\"name\": \"Lean.Meta.Grind.isLegacyNormalizer\", \"module\": \"Lean.Meta.Tactic.Grind.Simp\", \"type\": \" : Lean.CoreM Bool\", \"doc\": \"Returns `true` if the legacy `simp`-based normalizer is selected (`backward.grind.normalizer`).\"}\n  {\"name\": \"AddSubgroup.normalizer\", \"module\": \"Mathlib.Algebra.Group.Subgroup.Defs\", \"type\": \" {G : Type u_1} [AddGroup G] (S : Set G) : AddSubgroup G\", \"doc\": \"The `normalizer` of `S` is the subgroup of `G` whose elements satisfy `g + S - g = S`.\\nWhen `S` is a subgroup, this is the largest subgroup of `G` inside which `S` is normal.\"}\n  {\"name\": \"Subgroup.normalizer\", \"module\": \"Mathlib.Algebra.Group.Subgroup.Defs\", \"type\": \" {G : Type u_1} [Group G] (S : Set G) : Subgroup G\", \"doc\": \"The `normalizer` of `S` is the subgroup of `G` whose elements satisfy `g * S * g⁻¹ = S`.\\nWhen `S` is a subgroup, this is the largest subgroup of `G` inside which `S` is normal.\"}\n  {\"name\": \"AddSubgroup.le_normalizer\", \"module\": \"Mathlib.Algebra.Group.Subgroup.Defs\", \"type\": \" {G : Type u_1} [AddGroup G] {H : AddSubgroup G} : H ≤ AddSubgroup.normalizer ↑H\", \"doc\": \"\"}\n  {\"name\": \"Subgroup.le_normalizer\", \"module\": \"Mathlib.Algebra.Group.Subgroup.Defs\", \"type\": \" {G : Type u_1} [Group G] {H : Subgroup G} : H ≤ Subgroup.normalizer ↑H\", \"doc\": \"\"}\n  {\"name\": \"AddSubgroup.mem_set_normalizer_iff'\", \"module\": \"Mathlib.Algebra.Group.Subgroup.Defs\", \"type\": \" {G : Type u_1} [AddGroup G] {S : Set G} {g : G} : g ∈ AddSubgroup.normalizer S ↔ ∀ (h : G), h + g ∈ S ↔ g + h ∈ S\", \"doc\": \"\"}\n  {\"name\": \"Subgroup.mem_set_normalizer_iff'\", \"module\": \"Mathlib.Algebra.Group.Subgroup.Defs\", \"type\": \" {G : Type u_1} [Group G] {S : Set G} {g : G} : g ∈ Subgroup.normalizer S ↔ ∀ (h : G), h * g ∈ S ↔ g * h ∈ S\", \"doc\": \"\"}\n  {\"name\": \"AddSubgroup.mem_set_normalizer_iff\", \"module\": \"Mathlib.Algebra.Group.Subgroup.Defs\", \"type\": \" {G : Type u_1} [AddGroup G] {S : Set G} {g : G} : g ∈ AddSubgroup.normalizer S ↔ ∀ (h : G), h ∈ S ↔ g + h + -g ∈ S\", \"doc\": \"\"}\n  {\"name\": \"AddSubgroup.mem_set_normalizer_iff''\", \"module\": \"Mathlib.Algebra.Group.Subgroup.Defs\", \"type\": \" {G : Type u_1} [AddGroup G] {S : Set G} {g : G} : g ∈ AddSubgroup.normalizer S ↔ ∀ (h : G), h ∈ S ↔ -g + h + g ∈ S\", \"doc\": \"\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern abstract groups, Lie algebras, topological tori, or matrix definitions; none asserts the algebraic-group-scheme theorem in all characteristics"
+  },
+  {
+   "tool": "grep",
+   "query": "[Nn]ormalizer.*[Tt]orus|[Tt]orus.*[Nn]ormalizer|weylGroup|WeylGroup",
+   "results": "[grep] OK 0 hit(s)",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern abstract groups, Lie algebras, topological tori, or matrix definitions; none asserts the algebraic-group-scheme theorem in all characteristics"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The normalizer of a torus in a smooth affine algebraic group is smooth and its identity component centralizes the torus so normalizer modulo centralizer is finite",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"Subgroup.normalizerMonoidHom_ker\", \"module\": \"Mathlib/GroupTheory/Subgroup/Centralizer\", \"type\": \"∀ {G : Type u_1} [inst : Group G] (H : Subgroup G),\\n  H.normalizerMonoidHom.ker = (Subgroup.centralizer ↑H).subgroupOf H.normalizer\", \"doc\": \"The kernel of the group homomorphism from the normalizer of a subgroup $ H $ to the automorphism group $ \\\\mathrm{Aut}(H) $, defined by conjugation action, is equal to the centralizer of $ H $ consider\"}\n  {\"name\": \"Subgroup.normal_centralizer\", \"module\": \"Mathlib/GroupTheory/Subgroup/Centralizer\", \"type\": \"∀ {G : Type u_1} [inst : Group G] {H : Subgroup G} [H.Normal], (Subgroup.centralizer ↑H).Normal\", \"doc\": \"If $ H $ is a normal subgroup of a group $ G $, then the centralizer of $ H $ in $ G $ is also a normal subgroup of $ G $. The centralizer consists of all elements in $ G $ that commute with every ele\"}\n  {\"name\": \"Field.absoluteGaloisGroup.commutator_closure_isNormal\", \"module\": \"Mathlib/FieldTheory/AbsoluteGaloisGroup\", \"type\": \"∀ (K : Type u_1) [inst : Field K], (commutator (Field.absoluteGaloisGroup K)).topologicalClosure.Normal\", \"doc\": \"The topological closure of the commutator subgroup of the absolute Galois group $\\\\text{Gal}(\\\\overline{K}/K)$ is a normal subgroup under the Krull topology. This means that for any field $K$, the closu\"}\n  {\"name\": \"LieAlgebra.zeroRootSubalgebra_normalizer_eq_self\", \"module\": \"Mathlib/Algebra/Lie/Weights/Cartan\", \"type\": \"∀ (R : Type u_1) (L : Type u_2) [inst : CommRing R] [inst_1 : LieRing L] [inst_2 : LieAlgebra R L]\\n  (H : LieSubalgebra R L) [inst_3 : LieRing.IsNilpotent ↥H],\\n  (LieAlgebra.zeroRootSubalgebra R L H).normalizer = LieAlgebra.zeroRootSubalgebra R L H\", \"doc\": \"For a Lie algebra $ L $ over a commutative ring $ R $ and a nilpotent Lie subalgebra $ \\\\mathfrak{h} \\\\subseteq L $, the normalizer of the zero root subalgebra $ \\\\mathfrak{g}_0(\\\\mathfrak{h}) $ in $ L $ \"}\n  {\"name\": \"LieSubalgebra.IsCartanSubalgebra.self_normalizing\", \"module\": \"Mathlib/Algebra/Lie/CartanSubalgebra\", \"type\": \"∀ {R : Type u} {L : Type v} {inst : CommRing R} {inst_1 : LieRing L} {inst_2 : LieAlgebra R L} {H : LieSubalgebra R L}\\n  [self : H.IsCartanSubalgebra], H.normalizer = H\", \"doc\": \"If $ \\\\mathfrak{h} $ is a Cartan subalgebra of a Lie algebra $ \\\\mathfrak{g} $ over a commutative ring $ R $, then the normalizer of $ \\\\mathfrak{h} $ in $ \\\\mathfrak{g} $ is $ \\\\mathfrak{h} $ itself. This\"}\n  {\"name\": \"Sylow.normalizer_le_centralizer_or_le_commutator\", \"module\": \"Mathlib/GroupTheory/SpecificGroups/ZGroup\", \"type\": \"∀ {G : Type u_1} [inst : Group G] {p : ℕ} [Fact (Nat.Prime p)] [Finite G] (P : Sylow p G) [IsCyclic ↥↑P],\\n  (↑P).normalizer ≤ Subgroup.centralizer ↑P ∨ ↑P ≤ commutator G\", \"doc\": \"For a Sylow $ p $-subgroup $ P $ of a group $ G $, the normalizer of $ P $ in $ G $ is either contained in the centralizer of $ P $ or $ P $ itself is contained in the commutator subgroup $ [G, G] $ o\"}\n  {\"name\": \"LieSubalgebra.normalizer_eq_self_of_isCartanSubalgebra\", \"module\": \"Mathlib/Algebra/Lie/CartanSubalgebra\", \"type\": \"∀ {R : Type u} {L : Type v} [inst : CommRing R] [inst_1 : LieRing L] [inst_2 : LieAlgebra R L] (H : LieSubalgebra R L)\\n  [H.IsCartanSubalgebra], H.toLieSubmodule.normalizer = H.toLieSubmodule\", \"doc\": \"If $ \\\\mathfrak{h} $ is a Cartan subalgebra of a Lie algebra $ \\\\mathfrak{g} $ over a commutative ring $ R $, then the normalizer of $ \\\\mathfrak{h} $ in $ \\\\mathfrak{g} $ is equal to $ \\\\mathfrak{h} $ its\"}\n  {\"name\": \"LieModule.genWeightSpace_zero_normalizer_eq_self\", \"module\": \"Mathlib/Algebra/Lie/Weights/Basic\", \"type\": \"∀ (R : Type u_2) (L : Type u_3) (M : Type u_4) [inst : CommRing R] [inst_1 : LieRing L] [inst_2 : LieAlgebra R L]\\n  [inst_3 : AddCommGroup M] [inst_4 : Module R M] [inst_5 : LieRingModule L M] [inst_6 : LieModule R L M]\\n  [inst_7 : LieRing.IsNilpotent L], (LieModule.genWeightSpace M 0).normalizer = \", \"doc\": \"For a nilpotent Lie algebra $\\\\mathfrak{g}$ over a commutative ring $R$ acting on a Lie module $M$, the normalizer of the generalized weight space associated with the zero weight function $\\\\chi = 0 : \\\\\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: returned abstract-group normalizers, root-system reflection groups, Lie-algebra normalizers, compiler internals or Galois topology; none supplies representability, smoothness and equality of identity components for these algebraic group schemes"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Algebraic group scheme normalizer torus identity component centralizer finite Weyl group",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"Subgroup.normalizer\", \"module\": \"Mathlib.Algebra.Group.Subgroup.Defs\", \"type\": \": Subgroup G\", \"doc\": \"For a group $G$ and a subgroup $H$, the normalizer of $H$ in $G$ is the subgroup consisting of all elements $g \\\\in G$ that preserve the set $H$ under conjugation. The underlying set is defined as $\\\\{g\"}\n  {\"name\": \"Subgroup.setNormalizer\", \"module\": \"Mathlib.Algebra.Group.Subgroup.Defs\", \"type\": \"(S : Set G) : Subgroup G\", \"doc\": \"For any subset $ S \\\\subseteq G $, the normalizer of $ S $ in $ G $ is the subgroup consisting of all elements $ g \\\\in G $ such that conjugation by $ g $ preserves $ S $, i.e., $ g S g^{-1} = S $. This\"}\n  {\"name\": \"Subgroup.normalizerMonoidHom_ker\", \"module\": \"Mathlib.GroupTheory.Subgroup.Centralizer\", \"type\": \": H.normalizerMonoidHom.ker = (Subgroup.centralizer H).subgroupOf H.normalizer\", \"doc\": \"The kernel of the group homomorphism from the normalizer of a subgroup $ H $ to the automorphism group $ \\\\mathrm{Aut}(H) $, defined by conjugation action, is equal to the centralizer of $ H $ consider\"}\n  {\"name\": \"RootPairing.weylGroup\", \"module\": \"Mathlib.LinearAlgebra.RootSystem.WeylGroup\", \"type\": \": Subgroup (Aut P)\", \"doc\": \"The Weyl group of a root pairing $ P $ is the subgroup of the automorphism group $ \\\\text{Aut}(P) $ generated by the image of the reflection automorphisms. It consists of all automorphisms that can be \"}\n  {\"name\": \"AddSubgroup.normalizer\", \"module\": \"Mathlib.Algebra.Group.Subgroup.Defs\", \"type\": \"{G : Type u_1} → [inst : AddGroup G] → AddSubgroup G → AddSubgroup G\", \"doc\": \"For an additive group $G$ and an additive subgroup $H \\\\subseteq G$, the normalizer of $H$ in $G$ is the additive subgroup consisting of all elements $a \\\\in G$ such that for every $n \\\\in G$, $n \\\\in H$ \"}\n  {\"name\": \"NormalizerCondition\", \"module\": \"Mathlib.Algebra.Group.Subgroup.Basic\", \"type\": \"(G : Type u_1) → [Group G] → Prop\", \"doc\": \"A group $ G $ satisfies the normalizer condition if every proper subgroup $ H $ of $ G $ is properly contained in its normalizer, i.e., $ H < N_G(H) $, where $ N_G(H) $ denotes the normalizer of $ H $\"}\n  {\"name\": \"Subgroup.mem_normalizer_iff'\", \"module\": \"Mathlib.Algebra.Group.Subgroup.Defs\", \"type\": \"{g : G} : g ∈ H.normalizer ↔ ∀ n, n * g ∈ H ↔ g * n ∈ H\", \"doc\": \"An element $ g $ of the group $ G $ belongs to the normalizer of the subgroup $ H $ if and only if for every element $ n $ in $ G $, the product $ n g $ lies in $ H $ precisely when the product $ g n \"}\n  {\"name\": \"Subgroup.subgroupOf_normalizer_eq\", \"module\": \"Mathlib.Algebra.Group.Subgroup.Basic\", \"type\": \"{H N : Subgroup G} (h : H ≤ N) : H.normalizer.subgroupOf N = (H.subgroupOf N).normalizer\", \"doc\": \"For subgroups $ H $ and $ N $ of a group $ G $, if $ H $ is contained in $ N $, then the normalizer of $ H $ in $ N $ is equal to the intersection of the normalizer of $ H $ in $ G $ with $ N $.\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: returned abstract-group normalizers, root-system reflection groups, Lie-algebra normalizers, compiler internals or Galois topology; none supplies representability, smoothness and equality of identity components for these algebraic group schemes"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"normalizer\"",
+   "results": "[loogle] OK 12 hit(s)\n  {\"name\": \"Lean.Compiler.LCNF.NormalizerM\", \"module\": \"Lean.Compiler.LCNF.CompilerM\", \"type\": \" (pu : Lean.Compiler.LCNF.Purity) (_translator : Bool) (α : Type) : Type\", \"doc\": \"\"}\n  {\"name\": \"Lean.Compiler.LCNF.instMonadFVarSubstNormalizerM\", \"module\": \"Lean.Compiler.LCNF.CompilerM\", \"type\": \" {pu : Lean.Compiler.LCNF.Purity} {t : Bool} : Lean.Compiler.LCNF.MonadFVarSubst (Lean.Compiler.LCNF.NormalizerM pu t) pu t\", \"doc\": \"\"}\n  {\"name\": \"Lean.Meta.Grind.backward.grind.normalizer\", \"module\": \"Lean.Meta.Tactic.Grind.Types\", \"type\": \" : Lean.Option Bool\", \"doc\": \"\"}\n  {\"name\": \"Lean.Meta.Grind.isLegacyNormalizer\", \"module\": \"Lean.Meta.Tactic.Grind.Simp\", \"type\": \" : Lean.CoreM Bool\", \"doc\": \"Returns `true` if the legacy `simp`-based normalizer is selected (`backward.grind.normalizer`).\"}\n  {\"name\": \"AddSubgroup.normalizer\", \"module\": \"Mathlib.Algebra.Group.Subgroup.Defs\", \"type\": \" {G : Type u_1} [AddGroup G] (S : Set G) : AddSubgroup G\", \"doc\": \"The `normalizer` of `S` is the subgroup of `G` whose elements satisfy `g + S - g = S`.\\nWhen `S` is a subgroup, this is the largest subgroup of `G` inside which `S` is normal.\"}\n  {\"name\": \"Subgroup.normalizer\", \"module\": \"Mathlib.Algebra.Group.Subgroup.Defs\", \"type\": \" {G : Type u_1} [Group G] (S : Set G) : Subgroup G\", \"doc\": \"The `normalizer` of `S` is the subgroup of `G` whose elements satisfy `g * S * g⁻¹ = S`.\\nWhen `S` is a subgroup, this is the largest subgroup of `G` inside which `S` is normal.\"}\n  {\"name\": \"AddSubgroup.le_normalizer\", \"module\": \"Mathlib.Algebra.Group.Subgroup.Defs\", \"type\": \" {G : Type u_1} [AddGroup G] {H : AddSubgroup G} : H ≤ AddSubgroup.normalizer ↑H\", \"doc\": \"\"}\n  {\"name\": \"Subgroup.le_normalizer\", \"module\": \"Mathlib.Algebra.Group.Subgroup.Defs\", \"type\": \" {G : Type u_1} [Group G] {H : Subgroup G} : H ≤ Subgroup.normalizer ↑H\", \"doc\": \"\"}\n  {\"name\": \"AddSubgroup.mem_set_normalizer_iff'\", \"module\": \"Mathlib.Algebra.Group.Subgroup.Defs\", \"type\": \" {G : Type u_1} [AddGroup G] {S : Set G} {g : G} : g ∈ AddSubgroup.normalizer S ↔ ∀ (h : G), h + g ∈ S ↔ g + h ∈ S\", \"doc\": \"\"}\n  {\"name\": \"Subgroup.mem_set_normalizer_iff'\", \"module\": \"Mathlib.Algebra.Group.Subgroup.Defs\", \"type\": \" {G : Type u_1} [Group G] {S : Set G} {g : G} : g ∈ Subgroup.normalizer S ↔ ∀ (h : G), h * g ∈ S ↔ g * h ∈ S\", \"doc\": \"\"}\n  {\"name\": \"AddSubgroup.mem_set_normalizer_iff\", \"module\": \"Mathlib.Algebra.Group.Subgroup.Defs\", \"type\": \" {G : Type u_1} [AddGroup G] {S : Set G} {g : G} : g ∈ AddSubgroup.normalizer S ↔ ∀ (h : G), h ∈ S ↔ g + h + -g ∈ S\", \"doc\": \"\"}\n  {\"name\": \"AddSubgroup.mem_set_normalizer_iff''\", \"module\": \"Mathlib.Algebra.Group.Subgroup.Defs\", \"type\": \" {G : Type u_1} [AddGroup G] {S : Set G} {g : G} : g ∈ AddSubgroup.normalizer S ↔ ∀ (h : G), h ∈ S ↔ -g + h + g ∈ S\", \"doc\": \"\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: returned abstract-group normalizers, root-system reflection groups, Lie-algebra normalizers, compiler internals or Galois topology; none supplies representability, smoothness and equality of identity components for these algebraic group schemes"
+  },
+  {
+   "tool": "grep",
+   "query": "[Nn]ormalizer.*[Tt]orus|[Tt]orus.*[Nn]ormalizer|weylGroup|WeylGroup",
+   "results": "[grep] OK 10 hit(s)\n  {\"file\": \"Mathlib/LinearAlgebra/RootSystem/Irreducible.lean\", \"line\": \"9\", \"text\": \"public import Mathlib.LinearAlgebra.RootSystem.WeylGroup\"}\n  {\"file\": \"Mathlib/LinearAlgebra/RootSystem/Irreducible.lean\", \"line\": \"18\", \"text\": \"* `RootPairing.isSimpleModule_weylGroupRootRep_iff`: a criterion for the representation of the Weyl\"}\n  {\"file\": \"Mathlib/LinearAlgebra/RootSystem/Irreducible.lean\", \"line\": \"125\", \"text\": \"lemma isSimpleModule_weylGroupRootRep_iff [Nontrivial M] :\"}\n  {\"file\": \"Mathlib/LinearAlgebra/RootSystem/Irreducible.lean\", \"line\": \"126\", \"text\": \"    IsSimpleModule R[P.weylGroup] P.weylGroupRootRep.asModule ↔\"}\n  {\"file\": \"Mathlib/LinearAlgebra/RootSystem/Irreducible.lean\", \"line\": \"128\", \"text\": \"  rw [isSimpleModule_iff, ← P.weylGroupRootRep.mapSubmodule.isSimpleOrder_iff]\"}\n  {\"file\": \"Mathlib/LinearAlgebra/RootSystem/WeylGroup.lean\", \"line\": \"25\", \"text\": \"* `RootPairing.weylGroup` : The group of automorphisms generated by reflections.\"}\n  {\"file\": \"Mathlib/LinearAlgebra/RootSystem/WeylGroup.lean\", \"line\": \"26\", \"text\": \"* `RootPairing.weylGroupToPerm` : The permutation representation of the Weyl group on roots.\"}\n  {\"file\": \"Mathlib/LinearAlgebra/RootSystem/WeylGroup.lean\", \"line\": \"29\", \"text\": \"* `RootPairing.range_weylGroup_weightHom` : The image of the weight space representation is equal\"}\n  {\"file\": \"Mathlib/LinearAlgebra/RootSystem/WeylGroup.lean\", \"line\": \"31\", \"text\": \"* `RootPairing.range_weylGroup_coweightHom` : The image of the coweight space representation is\"}\n  {\"file\": \"Mathlib/LinearAlgebra/RootSystem/WeylGroup.lean\", \"line\": \"33\", \"text\": \"* `RootPairing.range_weylGroupToPerm` : The image of the permutation representation is equal to the\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: returned abstract-group normalizers, root-system reflection groups, Lie-algebra normalizers, compiler internals or Galois topology; none supplies representability, smoothness and equality of identity components for these algebraic group schemes"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A connected family of automorphisms of a diagonalizable algebraic group is constant and the torus centralizer is open in its scheme normalizer",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"CategoryTheory.PreGaloisCategory.exists_set_ker_evaluation_subset_of_isOpen\", \"module\": \"Mathlib/CategoryTheory/Galois/Topology\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{u₂, u₁} C] (F : CategoryTheory.Functor C FintypeCat)\\n  [inst_1 : CategoryTheory.GaloisCategory C] [CategoryTheory.PreGaloisCategory.FiberFunctor F]\\n  {H : Set (CategoryTheory.Aut F)},\\n  1 ∈ H →\\n    IsOpen H →\\n      ∃ I x,\\n        (∀ X ∈ I, CategoryThe\", \"doc\": \"In a pre-Galois category $\\\\mathcal{C}$ with a fiber functor $F : \\\\mathcal{C} \\\\to \\\\text{FintypeCat}$, if $H \\\\subseteq \\\\mathrm{Aut}(F)$ is an open subset containing the identity automorphism, then there\"}\n  {\"name\": \"IntermediateField.fixingSubgroup_isOpen\", \"module\": \"Mathlib/FieldTheory/KrullTopology\", \"type\": \"∀ {K : Type u_1} {L : Type u_2} [inst : Field K] [inst_1 : Field L] [inst_2 : Algebra K L] (E : IntermediateField K L)\\n  [FiniteDimensional K ↥E], IsOpen ↑E.fixingSubgroup\", \"doc\": \"For any finite intermediate field extension $E/K$ within $L/K$, the subgroup of the Galois group $\\\\text{Gal}(L/K)$ consisting of automorphisms that fix every element of $E$ is an open set in the Krull\"}\n  {\"name\": \"InfiniteGalois.isOpen_mulEquivToLimit_image_fixingSubgroup\", \"module\": \"Mathlib/FieldTheory/Galois/Profinite\", \"type\": \"∀ {k : Type u_3} {K : Type u_4} [inst : Field k] [inst_1 : Field K] [inst_2 : Algebra k K] [inst_3 : IsGalois k K]\\n  (L : FiniteGaloisIntermediateField k K), IsOpen (⇑(InfiniteGalois.mulEquivToLimit k K) '' ↑L.fixingSubgroup)\", \"doc\": \"In an infinite Galois extension $ K/k $, the image of the fixing subgroup of a finite Galois intermediate field $ L $ under the isomorphism to the inverse limit of profinite Galois groups is an open s\"}\n  {\"name\": \"Field.absoluteGaloisGroup.commutator_closure_isNormal\", \"module\": \"Mathlib/FieldTheory/AbsoluteGaloisGroup\", \"type\": \"∀ (K : Type u_1) [inst : Field K], (commutator (Field.absoluteGaloisGroup K)).topologicalClosure.Normal\", \"doc\": \"The topological closure of the commutator subgroup of the absolute Galois group $\\\\text{Gal}(\\\\overline{K}/K)$ is a normal subgroup under the Krull topology. This means that for any field $K$, the closu\"}\n  {\"name\": \"krullTopology_mem_nhds_one_iff_of_normal\", \"module\": \"Mathlib/FieldTheory/KrullTopology\", \"type\": \"∀ (K : Type u_1) (L : Type u_2) [inst : Field K] [inst_1 : Field L] [inst_2 : Algebra K L] [Normal K L]\\n  (s : Set Gal(L/K)), s ∈ nhds 1 ↔ ∃ E, FiniteDimensional K ↥E ∧ Normal K ↥E ∧ ↑E.fixingSubgroup ⊆ s\", \"doc\": \"For a normal field extension $ L/K $, a subset $ s $ of the Galois group $ \\\\text{Gal}(L/K) $ belongs to the neighborhood filter at the identity element $ 1 $ in the Krull topology if and only if there\"}\n  {\"name\": \"Sylow.conj_eq_normalizer_conj_of_mem_centralizer\", \"module\": \"Mathlib/GroupTheory/Sylow\", \"type\": \"∀ {p : ℕ} {G : Type u_1} [inst : Group G] [Fact (Nat.Prime p)] [Finite (Sylow p G)] (P : Sylow p G) (x g : G),\\n  x ∈ Subgroup.centralizer ↑P → g⁻¹ * x * g ∈ Subgroup.centralizer ↑P → ∃ n ∈ (↑P).normalizer, g⁻¹ * x * g = n⁻¹ * x * n\", \"doc\": \"For a prime $ p $ and finite group $ G $, if $ P $ is a Sylow $ p $-subgroup of $ G $, and $ x,g \\\\in G $ satisfy $ x \\\\in C_G(P) $ (the centralizer of $ P $) and $ g^{-1}xg \\\\in C_G(P) $, then there exi\"}\n  {\"name\": \"LieAlgebra.zeroRootSubalgebra_normalizer_eq_self\", \"module\": \"Mathlib/Algebra/Lie/Weights/Cartan\", \"type\": \"∀ (R : Type u_1) (L : Type u_2) [inst : CommRing R] [inst_1 : LieRing L] [inst_2 : LieAlgebra R L]\\n  (H : LieSubalgebra R L) [inst_3 : LieRing.IsNilpotent ↥H],\\n  (LieAlgebra.zeroRootSubalgebra R L H).normalizer = LieAlgebra.zeroRootSubalgebra R L H\", \"doc\": \"For a Lie algebra $ L $ over a commutative ring $ R $ and a nilpotent Lie subalgebra $ \\\\mathfrak{h} \\\\subseteq L $, the normalizer of the zero root subalgebra $ \\\\mathfrak{g}_0(\\\\mathfrak{h}) $ in $ L $ \"}\n  {\"name\": \"CategoryTheory.PreGaloisCategory.stabilizer_normal_of_isGalois\", \"module\": \"Mathlib/CategoryTheory/Galois/GaloisObjects\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{u₂, u₁} C] [inst_1 : CategoryTheory.GaloisCategory C]\\n  (F : CategoryTheory.Functor C FintypeCat) [CategoryTheory.PreGaloisCategory.FiberFunctor F] (X : C)\\n  [CategoryTheory.PreGaloisCategory.IsGalois X] (x : (F.obj X).carrier),\\n  (MulAction.stabilize\", \"doc\": \"In a pre-Galois category satisfying the Galois axioms, for any Galois object $X$ and element $x$ in the image of $X$ under a fiber functor $F$, the stabilizer subgroup of $x$ under the action of the a\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: returned abstract-group normalizers, root-system reflection groups, Lie-algebra normalizers, compiler internals or Galois topology; none supplies representability, smoothness and equality of identity components for these algebraic group schemes"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-reductive-rank-one-reflections",
+  "date": "2026-10-23",
+  "group": "Q69"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Haboush symmetric-power lifting for a trivial quotient representation. Supporting representation-theoretic input: Steinberg endomorphisms detect a nonzero fixed vector. Supporting Borel pairs and actual rho section modules. Supporting input: Borel-pair structure and proper flag quotient supporting the rho section modules in the Steinberg endomorphism detection input. Supporting step: Construct the finite integral root datum from rank-one SL2 coroots, normalizer reflections and finite W, rather than presupposing the root datum. Supporting lemma: Normalizer and centralizer of a torus have the same identity component.",
+   "via": [
+    "lem-sfb-reductive-rank-one-reflections",
+    "lem-sfb-reductive-borel-pair-structure",
+    "lem-sfb-rho-section-modules",
+    "lem-sfb-steinberg-endomorphism-detection",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-torus-normalizer-components",
+  "worker": "stage1",
+  "group": "Q80",
+  "summary": "Proved representability by the existing closed factorization locus, used the existing centralizer smoothness theorem, applied diagonalizable-family rigidity to the possibly nonsmooth identity component, compared open component structures, and deduced smoothness by translation and finiteness by explicit coset representatives. All inputs already have nodes, so no new nodes. Added the two field-definition dependencies already cited in the unchanged statement.",
+  "blueprint": "Continues the inherited auxiliary chain through rank-one reflections and Borel-pair structure to the direct-image/alteration input of sk-thm-sf-ctf-stability. The current latest blueprint has no torus normalizer or rigidity node with this statement; whole-blueprint searches found no same_as. blueprint_refs.py ancestor reports null, consistent with the inherited from.node. This is a node-level supporting lemma; the chapter and unit route are unchanged."
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q80-61efda01d",
+  "group": "Q80",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q80-61efda01d (reviewer sub-agent of L); spot-checked: Read the item in full, all 13 cited statements and Milne iAG2017 Theorem 12.36, Corollary 12.40 and Corollary 13.10. The statement is unchanged. The added stmt_deps def-weil-field and def-weil-algebraic-closure were already cited in its text. There are no new nodes. The item is unsplit in clones/live and clones/side-live, so the delivery is not superseded. A closure check finds no cycle. All cited nodes are same-unit sfb lemmas, Mathlib leaves or definitions, so no tool_uses are needed. No SGA source is cited. Step 1: the factorization-locus hypotheses hold (affine finite type, hence separated), and L ∩ inv⁻¹L represents gSg⁻¹ = S. Step 2: the centralizer lemma applies, since connected equals geometrically connected over an algebraically closed F and its centralizer functor equals the terminology node's C_i. Step 3: Milne 12.40 via the rigidity node, with X = N° affine, connected, possibly nonreduced and pointed at e, and S = Spec F[Z^r]; this correctly avoids using smoothness of N before it is proved. Step 4: elementary equality N° = C° through open-immersion lifts. Step 5: Milne 13.10 smoothness, via the open-restriction clauses (a)/(c) and smoothness being local on the source. Step 6: normality of C in N and the count of cosets through component representatives n_D ∈ N(F). Tested r=0, G a torus, and diagonal S in SL2 (quotient Z/2, also in characteristic 2). Batch-5 flag: lem-trf-connected-point-geometrically-connected, reached through lem-sfb-torus-centralizer-smooth-connected, is a generic criterion for geometric connectedness. It is neither the trace formula nor Poincaré duality, nor a step of their proofs, so it is not a RETURN reason."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.GroupScheme.TorusNormalizerComponents",
+  "declaration": "AlgebraicGeometry.torus_normalizer_centralizer_components",
+  "file": "lean/Sheaf/AlgebraicGeometry/GroupScheme/TorusNormalizerComponents.lean",
+  "statement": "theorem torus_normalizer_centralizer_components (F : Type u) [Field F] [IsAlgClosed F] (G S : Grp (Over (Spec (.of F)))) [IsAffine G.X.left] [LocallyOfFiniteType G.X.hom] [QuasiCompact G.X.hom] [Smooth G.X.hom] [ConnectedSpace G.X.left] (i : S ⟶ G) [IsClosedSubgroupScheme i.hom.hom] (hS : ∃ r : ℕ, Nonempty (S ≅ MultiplicativeType.splitTorus F r)) : ∃ (N C : Grp (Over (Spec (.of F)))) (iN : N ⟶ G) (iC : C ⟶ G), IsClosedSubgroupScheme iN.hom.hom ∧ IsClosedSubgroupScheme iC.hom.hom ∧ IsAffine N.X.left ∧ IsAffine C.X.left ∧ ∃ (_ : LocallyOfFiniteType N.X.hom) (_ : QuasiCompact N.X.hom) (_ : LocallyOfFiniteType C.X.hom) (_ : QuasiCompact C.X.hom), Smooth N.X.hom ∧ Smooth C.X.hom ∧ (∀ (A : Type u) [CommRing A] [Algebra F A], Set.range (fun n : StandardGroupSchemes.affine F A ⟶ N.X ↦ n ≫ iN.hom.hom) = {g : StandardGroupSchemes.affine F A ⟶ G.X | ∀ (B : Type u) [CommRing B] [Algebra F B] (f : A →ₐ[F] B), (fun s : StandardGroupSchemes.affine F B ⟶ G.X ↦ (StandardGroupSchemes.map F f ≫ g) * s * (StandardGroupSchemes.map F f ≫ g)⁻¹) '' Set.range (fun s : StandardGroupSchemes.affine F B ⟶ S.X ↦ s ≫ i.hom.hom) = Set.range (fun s : StandardGroupSchemes.affine F B ⟶ S.X ↦ s ≫ i.hom.hom)}) ∧ (∀ (A : Type u) [CommRing A] [Algebra F A], Set.range (fun c : StandardGroupSchemes.affine F A ⟶ C.X ↦ c ≫ iC.hom.hom) = ReductiveTorusCentralizer.centralizerPoints i A) ∧ (∃ e : GrpObj.identityComponent N.X ≅ GrpObj.identityComponent C.X, e.hom ≫ GrpObj.identityComponentι C.X ≫ iC.hom.hom = GrpObj.identityComponentι N.X ≫ iN.hom.hom) ∧ ∃ j : C ⟶ N, j ≫ iN = iC ∧ IsNormalSubgroupScheme j.hom.hom ∧ Finite ((𝟙_ (Over (Spec (.of F))) ⟶ N.X) ⧸ (IsMonHom.monoidHom j.hom.hom (𝟙_ (Over (Spec (.of F))))).range)",
+  "branch": "newtargets-dag",
+  "by": "Q11",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-99748f874",
+  "group": "Q11",
+  "result": "fix",
+  "note": "Lean statement exact against node and Milne 12.40/13.10/13.11: alg-closed F; G affine finite-type smooth connected; S closed split torus of any rank r>=0; N represents g S(B) g^-1 = S(B) for all A->B; C = recorded centralizerPoints; both closed, affine, finite type, smooth; N° ≅ C° over G with open structures; j normal with N(F)/C(F) finite, denominator pinned by j≫iN=iC. Edge cases r=0, G a torus, SL2 diagonal in char 2. No duplicate (RankOneRoots.normalizer is rational points only). Records verbatim, proof sorry. Sole fault H11 (worker self-check second reading) -> fixes/lem-sfb-torus-normalizer-components.report.md keeps the worker report verbatim and adds an independent clause-by-clause second reading. Advisory: uncited owners def-wf-algebraic-components (identityComponent) and def-sfb-tori-multiplicative-type (splitTorus, reached through the terminology node)."
+ }
+}

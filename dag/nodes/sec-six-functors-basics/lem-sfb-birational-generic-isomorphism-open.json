@@ -1,0 +1,222 @@
+{
+ "id": "lem-sfb-birational-generic-isomorphism-open",
+ "kind": "statement",
+ "title": "Generic isomorphism open of a proper birational map",
+ "statement": "Let $X$ be a Noetherian scheme, meaning locally Noetherian [pqf-def-locnoeth] and quasi-compact (every open cover has a finite subcover). Let $f:Y\\to X$ be a proper birational morphism of schemes [def-pc-scheme, def-weil-proper-morphism]. Birational means that $f$ maps the generic points of the irreducible components of $Y$ bijectively onto those of $X$ and induces isomorphisms $\\mathcal O_{X,f(\\eta)}\\to\\mathcal O_{Y,\\eta}$ at all these points [def-sc-generic-point, def-weil-locally-ringed-space-morphism]. Then there is a dense open $V\\subseteq X$ containing every generic point of every irreducible component of $X$, such that $f^{-1}(V)\\to V$ is an isomorphism.",
+ "source": {
+  "document": "literature/stacks-project/varieties.tex",
+  "place": "Tag 0BFP, lemma-modification-normal-iso-over-codimension-1, proof (1), using Morphisms Tag 0BAJ (lemma-birational-isomorphism-over-dense-open)."
+ },
+ "stmt_deps": [
+  "pqf-def-locnoeth",
+  "def-pc-scheme",
+  "def-weil-proper-morphism",
+  "def-sc-generic-point",
+  "def-weil-locally-ringed-space-morphism"
+ ],
+ "proof": [
+  {
+   "text": "By [def-weil-proper-morphism], $f$ is separated and of finite type. By [def-weil-finite-type-morphism], it is therefore locally of finite type. Since $X$ is locally Noetherian by hypothesis, [pqf-lem-lft-fp-locnoeth] makes $f$ locally of finite presentation. No reducedness hypothesis is needed.",
+   "uses": [
+    "def-weil-proper-morphism",
+    "def-weil-finite-type-morphism",
+    "pqf-lem-lft-fp-locnoeth"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tags 01W1 (definition-proper) and 01TX (lemma-noetherian-finite-type-finite-presentation), part (1); hypotheses for 0BAJ."
+   }
+  },
+  {
+   "text": "By [lem-weil-pbc-noetherian-finite-components], $X$ has finitely many irreducible components. By [lem-sc-scheme-sober], components of either scheme correspond bijectively to their generic points: each has exactly one, and its closure recovers that component. The assumed bijection of component generic points consequently gives a bijection between the components of $Y$ and those of $X$. Thus $Y$ also has finitely many irreducible components.",
+   "uses": [
+    "lem-weil-pbc-noetherian-finite-components",
+    "lem-sc-scheme-sober"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/properties.tex",
+    "place": "Tag 0BA8 (lemma-Noetherian-irreducible-components); Schemes Tag 01IS (lemma-scheme-sober); finite-component hypotheses in Morphisms 0BAJ."
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-birational-isomorphism-dense-open] to the given morphism $f$: separatedness and local finite presentation are Step 1, finiteness of the two component sets is Step 2, and the bijection and generic-local-ring isomorphisms are precisely the birationality hypotheses of the item. This yields a dense open $V\\subseteq X$ such that the entire inverse-image restriction $f^{-1}(V)\\to V$ is an isomorphism.",
+   "uses": [
+    "lem-sfb-birational-isomorphism-dense-open"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 0BAJ (lemma-birational-isomorphism-over-dense-open), separated and locally-finite-presentation alternatives; Varieties 0BFP, proof (1)."
+   }
+  },
+  {
+   "text": "Fix an irreducible component $C$ of $X$ with generic point $\\xi$ [def-sc-generic-point, def-weil-irreducible-components]. Write $C_1,\\ldots,C_r$ for the other components and put $O=X\\setminus\\bigcup_jC_j$. Distinct components cannot contain $\\xi$: being closed, they would then contain $\\overline{\\{\\xi\\}}=C$, contradicting maximality. Hence $O$ is open and contains $\\xi$. Every point lies on a component by [lem-sc-irreducible-components-cover], so $O\\subseteq C$. Density of $V$ gives $z\\in O\\cap V$. Since $z\\in C=\\overline{\\{\\xi\\}}$, the open neighbourhood $V$ of $z$ meets $\\{\\xi\\}$; thus $\\xi\\in V$. This proves the additional generic-point clause. For $X=\\varnothing$, the empty open is dense, Step 3 still applies, and the clause is vacuous.",
+   "uses": [
+    "def-sc-generic-point",
+    "def-weil-irreducible-components",
+    "lem-sc-irreducible-components-cover"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/topology.tex",
+    "place": "Tag 0052 (lemma-Noetherian), finite-component open-piece argument; Tag 004W (lemma-irreducible), part (4); elementary closure argument for Varieties 0BFP(1)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sc-generic-point",
+  "def-weil-finite-type-morphism",
+  "def-weil-irreducible-components",
+  "def-weil-proper-morphism",
+  "lem-sc-irreducible-components-cover",
+  "lem-sc-scheme-sober",
+  "lem-sfb-birational-isomorphism-dense-open",
+  "lem-weil-pbc-noetherian-finite-components",
+  "pqf-lem-lft-fp-locnoeth"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/varieties.tex",
+  "place": "Tag 0BFP (lemma-modification-normal-iso-over-codimension-1), proof (1), via Morphisms 0BAJ; finite presentation by 01TX and explicit elementary generic-point argument."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A proper birational morphism to a Noetherian scheme is an isomorphism over a dense open containing all generic points",
+   "results": "{\"t\": \"2026-10-22T07:39:21Z\", \"tool\": \"leanfinder\", \"query\": \"A proper birational morphism to a Noetherian scheme is an isomorphism over a dense open containing all generic points\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsLocalIso\", \"AlgebraicGeometry.IsDominant\", \"AlgebraicGeometry.IsProper.instIsZariskiLocalAtTarget\", \"AlgebraicGeometry.Scheme.Hom.instIsDominantToNormalization\", \"AlgebraicGeometry.IsDominant.respectsIso\", \"AlgebraicGeometry.Scheme.Hom.instIsIsoToNormalizationOfIsIntegralHom\", \"AlgebraicGeometry.IsProper.instRespectsIsoScheme\", \"AlgebraicGeometry.Scheme.RationalMap.dense_domain\"], \"digest\": \"698a4dfb9c07acc7\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the partial-isomorphism definition of birational schemes is not a theorem about this given component-birational morphism; stalkwise isomorphism criteria need global topological hypotheses."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry.IsProper\", \"AlgebraicGeometry.IsGenericPoint\"",
+   "results": "{\"t\": \"2026-10-22T07:39:22Z\", \"tool\": \"loogle\", \"query\": \"\\\"AlgebraicGeometry.IsProper\\\", \\\"AlgebraicGeometry.IsGenericPoint\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the partial-isomorphism definition of birational schemes is not a theorem about this given component-birational morphism; stalkwise isomorphism criteria need global topological hypotheses."
+  },
+  {
+   "tool": "grep",
+   "query": "birational.*[Ii]so|[Ii]so.*birational|genericPoint.*[Dd]ense",
+   "results": "{\"t\": \"2026-10-22T07:39:22Z\", \"tool\": \"grep\", \"query\": \"birational.*[Ii]so|[Ii]so.*birational|genericPoint.*[Dd]ense\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 6, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/Birational/Birational.lean\", \"Mathlib/AlgebraicGeometry/Birational/Birational.lean\", \"Mathlib/AlgebraicGeometry/Birational/Birational.lean\", \"Mathlib/AlgebraicGeometry/Birational/Birational.lean\", \"Mathlib/AlgebraicGeometry/Birational/Birational.lean\", \"Mathlib/AlgebraicGeometry/Birational/RationalMap.lean\"], \"digest\": \"08e1a6ff2e8ba247\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the partial-isomorphism definition of birational schemes is not a theorem about this given component-birational morphism; stalkwise isomorphism criteria need global topological hypotheses."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A proper birational morphism to a Noetherian scheme is an isomorphism over a dense open containing all generic points",
+   "results": "{\"t\": \"2026-10-22T07:39:22Z\", \"tool\": \"leansearch\", \"query\": \"A proper birational morphism to a Noetherian scheme is an isomorphism over a dense open containing all generic points\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsDominant\", \"AlgebraicGeometry.IsProper\", \"AlgebraicGeometry.isProper_eq\", \"AlgebraicGeometry.IsProper.mk\", \"AlgebraicGeometry.Scheme.PartialMap.mk\", \"AlgebraicGeometry.isProper_iff\", \"AlgebraicGeometry.IsDominant.mk\", \"AlgebraicGeometry.Scheme.PartialMap.Opens.isDominant_homOfLE\"], \"digest\": \"78eb604d6cde817d\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the partial-isomorphism definition of birational schemes is not a theorem about this given component-birational morphism; stalkwise isomorphism criteria need global topological hypotheses."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A separated finite presentation morphism bijective on component generic points with isomorphic generic stalks has an isomorphism open containing those points",
+   "results": "{\"t\": \"2026-10-22T07:42:14Z\", \"tool\": \"leanfinder\", \"query\": \"A separated finite presentation morphism bijective on component generic points with isomorphic generic stalks has an isomorphism open containing those points\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.isomorphisms_eq_stalkwise\", \"AlgebraicGeometry.instIsZariskiLocalAtTargetStalkwiseBijectiveCoeRingHom\", \"AlgebraicGeometry.IsLocalIso\", \"AlgebraicGeometry.IsLocalIso.exists_isOpenImmersion\", \"AlgebraicGeometry.isomorphisms_eq_isOpenImmersion_inf_surjective\", \"AlgebraicGeometry.isLocalIso_iff\", \"AlgebraicGeometry.isOpenImmersion_eq_inf\", \"AlgebraicGeometry.IsOpenImmersion.of_stalk_iso\"], \"digest\": \"660c0604d29971e3\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the partial-isomorphism definition of birational schemes is not a theorem about this given component-birational morphism; stalkwise isomorphism criteria need global topological hypotheses."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A proper birational morphism to a Noetherian scheme is an isomorphism over a dense open containing all component generic points",
+   "results": "{\"t\": \"2026-10-23T09:38:08Z\", \"tool\": \"leanfinder\", \"query\": \"A proper birational morphism to a Noetherian scheme is an isomorphism over a dense open containing all component generic points\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsLocalIso\", \"AlgebraicGeometry.IsDominant\", \"AlgebraicGeometry.Scheme.Hom.instIsDominantToNormalization\", \"AlgebraicGeometry.IsProper.instIsZariskiLocalAtTarget\", \"AlgebraicGeometry.IsDominant.respectsIso\", \"AlgebraicGeometry.Scheme.Hom.instIsIsoToNormalizationOfIsIntegralHom\", \"AlgebraicGeometry.IsProper.instRespectsIsoScheme\", \"AlgebraicGeometry.Scheme.RationalMap.dense_domain\"], \"digest\": \"8b14d8ca396147df\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: partial isomorphisms define a different birational notion; the stalk criteria require a homeomorphism or hypotheses at all points, not just component generic points."
+  },
+  {
+   "tool": "grep",
+   "query": "birational.*[Ii]so|[Ii]so.*birational|stacks 0BAJ",
+   "results": "{\"t\": \"2026-10-23T09:39:48Z\", \"tool\": \"grep\", \"query\": \"birational.*[Ii]so|[Ii]so.*birational|stacks 0BAJ\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/Birational/Birational.lean\", \"Mathlib/AlgebraicGeometry/Birational/Birational.lean\", \"Mathlib/AlgebraicGeometry/Birational/Birational.lean\", \"Mathlib/AlgebraicGeometry/Birational/Birational.lean\", \"Mathlib/AlgebraicGeometry/Birational/Birational.lean\"], \"digest\": \"e158112e259f5476\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: partial isomorphisms define a different birational notion; the stalk criteria require a homeomorphism or hypotheses at all points, not just component generic points."
+  },
+  {
+   "tool": "leansearch",
+   "query": "proper birational morphism Noetherian schemes isomorphism dense open generic points",
+   "results": "{\"t\": \"2026-10-23T09:39:48Z\", \"tool\": \"leansearch\", \"query\": \"proper birational morphism Noetherian schemes isomorphism dense open generic points\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsProper.mk\", \"AlgebraicGeometry.IsProper\", \"AlgebraicGeometry.genericPoint_eq_of_isOpenImmersion\", \"AlgebraicGeometry.isProper_iff\", \"AlgebraicGeometry.Scheme.PartialMap.mk\", \"AlgebraicGeometry.Scheme.Hom.isoImage\", \"AlgebraicGeometry.IsDominant.mk\", \"AlgebraicGeometry.IsDominant\"], \"digest\": \"1eeea4f55b10780f\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: partial isomorphisms define a different birational notion; the stalk criteria require a homeomorphism or hypotheses at all points, not just component generic points."
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.IsProper, AlgebraicGeometry.Scheme.PartialIso",
+   "results": "{\"t\": \"2026-10-23T09:39:49Z\", \"tool\": \"loogle\", \"query\": \"AlgebraicGeometry.IsProper, AlgebraicGeometry.Scheme.PartialIso\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: partial isomorphisms define a different birational notion; the stalk criteria require a homeomorphism or hypotheses at all points, not just component generic points."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A separated finitely presented morphism inducing bijections on irreducible component generic points and isomorphisms on generic stalks restricts to an isomorphism on a dense open",
+   "results": "{\"t\": \"2026-10-23T09:40:45Z\", \"tool\": \"leanfinder\", \"query\": \"A separated finitely presented morphism inducing bijections on irreducible component generic points and isomorphisms on generic stalks restricts to an isomorphism on a dense open\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.isomorphisms_eq_stalkwise\", \"AlgebraicGeometry.IsLocalIso\", \"AlgebraicGeometry.instRespectsIsoSchemeTopologicallyGeneralizingMap\", \"AlgebraicGeometry.isIso_iff_stalk_iso\", \"AlgebraicGeometry.IsDominant.respectsIso\", \"AlgebraicGeometry.isIso_iff_isIso_stalkMap\", \"AlgebraicGeometry.genericPoint_eq_of_isOpenImmersion\", \"AlgebraicGeometry.ext_of_isDominant_of_isSeparated\"], \"digest\": \"158e9ece728d76c9\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: partial isomorphisms define a different birational notion; the stalk criteria require a homeomorphism or hypotheses at all points, not just component generic points."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-normal-modification-codimension-one",
+  "date": "2026-10-22",
+  "group": "Q08"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong §§3.9--3.12, Claim 3.10 and Lemma 3.13, printed p.609. Agent-formulated version: the proof of Lemma 3.13 uses only that rational exceptional curves have constant image in each target fibre; this property replaces its genus-at-least-two and pure-curve target hypotheses. This statement does not assert existence of a semistable source.; de Jong Lemma 3.13, rational exceptional-curve geometry before contraction; Step 5: isomorphism near every codimension-zero and codimension-one point of the regular resolution before applying point-blowup domination.; Old step 1: properness, finite-presentation and finite-component reductions and the component-generic density argument.",
+   "via": [
+    "lem-sfb-normal-modification-codimension-one",
+    "lem-sfb-nodal-trait-rational-domination",
+    "lem-sfb-high-genus-hom-closure",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-birational-generic-isomorphism-open",
+  "worker": "stage1",
+  "summary": "Statement unchanged. Four steps discharge the hypotheses of the existing separated locally-finitely-presented dense-isomorphism theorem and prove the generic-point clause explicitly. Reused every input; no new nodes, no Lean writing or compilation.",
+  "blueprint": "Realizes the inherited from.place: 0BFP(1), the generic isomorphism prerequisite for the normal-modification step in the alteration branch of det-thm-sf-ctf-stability-direct-images proof (3). Current latest blueprint unit and chapter read; no unit route changed. blueprint_refs ancestor returns null; inherited from.node and via retained. Whole-blueprint birational search found no equivalent imported node.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q102-8cfc2752a",
+  "group": "Q102",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q102-8cfc2752a (reviewer sub-agent of L); spot-checked: No new nodes and no changes. The item statement matches clones/live, where the item is still unsplit; this is not a re-split delivery, and nothing cites SGA. Sources read: Stacks varieties.tex 0BFP part (1) and morphisms.tex 0BAJ, whose locally-finite-presentation case needs no reducedness, so not assuming Y reduced is correct. Step 1: proper gives separated and finite type (def-weil-proper-morphism), hence locally of finite type (def-weil-finite-type-morphism), hence locally of finite presentation over the locally Noetherian X (pqf-lem-lft-fp-locnoeth, a Mathlib leaf). Step 2: X has finitely many components (lem-weil-pbc-noetherian-finite-components). Each component has a unique generic point whose closure gives back the component (lem-sc-scheme-sober), so the generic-point bijection makes Y's components finite too. Step 3: lem-sfb-birational-isomorphism-dense-open is in the same unit and does not depend on the item, so there is no cycle. Steps 1 and 2 plus the item's hypotheses give exactly its hypotheses, and its conclusion covers the whole f^{-1}(V). Step 4 is marked elementary and checked line by line: O = X minus the other components is open, contains xi and lies inside C; density of V gives a point z in O and V; z is in the closure of xi, so xi is in V. Small cases checked: X empty; Spec k[x]/(x^2) with the identity; normalization of a nodal cubic; Y = X plus an extra point (excluded by the bijection hypothesis); Y_red -> Y (excluded by the local-ring hypothesis). The citer lem-sfb-normal-modification-codimension-one step 1 uses exactly the generic-point clause. The lem-per-* copies belong to another unit; no lem-sfb node duplicates the item. tool_uses is empty and none is needed."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.BirationalGenericIsomorphismOpen",
+  "declaration": "AlgebraicGeometry.exists_dense_open_isIso_of_proper_birational",
+  "file": "lean/Sheaf/AlgebraicGeometry/BirationalGenericIsomorphismOpen.lean",
+  "statement": "theorem exists_dense_open_isIso_of_proper_birational {X Y : Scheme.{u}} [IsNoetherian X] (f : Y ⟶ X) [IsProper f] (hgeneric : Set.BijOn f (genericPoints Y) (genericPoints X)) (hstalk : ∀ η : Y, η ∈ genericPoints Y → IsIso (f.stalkMap η)) : ∃ V : X.Opens, Dense (V : Set X) ∧ genericPoints X ⊆ (V : Set X) ∧ IsIso (f ∣_ V)",
+  "branch": "newtargets-dag",
+  "by": "Q09",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-55b6ce5dd",
+  "group": "Q09",
+  "result": "pass",
+  "note": "Lean statement matches the node clause by clause: IsNoetherian X (= IsLocallyNoetherian + CompactSpace), IsProper f, Set.BijOn f (genericPoints Y) (genericPoints X), IsIso (f.stalkMap η) at source generic points (direction O_{X,f(η)}→O_{Y,η}); conclusion ∃ V dense, genericPoints X ⊆ V, IsIso (f ∣_ V) on the whole f⁻¹ᵁV. No extra hypotheses (no reducedness, consistent with 0BAJ lfp case via 01TX). Node differs from side-live only in the lean record; lean.statement verbatim; docstrings carry source, blueprint id and 4 proof steps; sorry only; no defs; no name clash; landed sibling exists_dense_open_isIso_of_separated_birational is the proof input, not a duplicate. Edge cases (empty X, non-reduced identity, extra components, Y_red→Y, nodal normalization) are fine. Advisory: second reading is a self-reading (dispatcher limit); genericPoints not listed in the def-sc-generic-point record but in the same Mathlib.Topology.Sober module. No compile needed (no file changed)."
+ }
+}

@@ -1,0 +1,415 @@
+{
+ "id": "lem-sfb-smooth-group-relative-adjoint",
+ "kind": "statement",
+ "title": "Relative adjoint representation of a smooth group without an affineness hypothesis",
+ "statement": "Let $A$ be a nonzero commutative Noetherian ring and $S=\\operatorname{Spec}A$ [def-weil-affine-spectrum]. Let $p:G\\to S$ be a smooth [def-sbc-smooth-morphisms] separated group scheme of finite presentation [def-sbc-locally-finite-presentation], with identity $e:S\\to G$. A group scheme here has multiplication, inverse and identity over $S$ satisfying the group diagrams; separated means that its diagonal is a closed immersion. Define $\\omega=e^*\\Omega^1_{G/S}$ using relative differentials [def-sc-relative-differential-sheaf] and module pullback [def-pc-module-pullback], and put $E=\\operatorname{Hom}_{\\mathcal O_S}(\\omega,\\mathcal O_S)$. Then $E$ is a finite projective $A$-module, meaning a direct summand of $A^n$ for some finite $n$. The functor $R\\mapsto\\operatorname{Aut}_R(E\\otimes_A R)$ on commutative $A$-algebras is represented by a smooth separated affine $S$-group scheme $\\operatorname{GL}_S(E)$ of finite presentation. Affine has the meaning of [pqf-def-affine-morphism]. Differentiation of conjugation defines an $S$-group homomorphism $\\operatorname{Ad}_G:G\\to\\operatorname{GL}_S(E)$, and this morphism is of finite type [def-weil-finite-type-morphism]. For every commutative $A$-algebra $R$ there is a canonical $R$-linear identification\n$$E\\otimes_A R\\cong\\ker\\bigl(G(R[\\epsilon]/(\\epsilon^2))\\to G(R)\\bigr),$$\nwhere addition on the right is the group law and scalar multiplication is induced by $\\epsilon\\mapsto a\\epsilon$. Under this identification $\\operatorname{Ad}_G(g)$ sends a tangent point $v$ to $gvg^{-1}$, with $g\\in G(R)$ viewed over the dual numbers by the constant inclusion. Formation of this tangent module, the representing general linear group, and the adjoint homomorphism commutes with arbitrary base change $A\\to R$, compatibly with successive base changes. For every base change $A\\to R$, the group $G_R$ is again smooth, separated and of finite presentation over $R$. In particular, for every map $A\\to k$ to an algebraically closed field, $(\\operatorname{Ad}_G)_k$ is the usual adjoint representation of $G_k$ on $T_eG_k$. No affineness or reductivity of $G$ is assumed, and $E=0$ is allowed.",
+ "source": {
+  "document": "https://math.stanford.edu/~conrad/papers/luminysga3smf.pdf",
+  "place": "Relative version of the adjoint action used in the first sentence of the proof of Proposition 6.3.16, printed p.229; background on Lie functors, p.2. Supporting local inputs read in literature/stacks-project: Tag 02G1 (morphisms-lemma-smooth-omega-finite-locally-free) and Tag 022W (groupoids-example-general-linear-group). The arbitrary finite-projective tangent module and base-change formulation is agent-supplied. Conrad PDF read online; WANTED locally as literature/conrad-reductive-group-schemes.pdf."
+ },
+ "stmt_deps": [
+  "def-weil-affine-spectrum",
+  "def-sbc-smooth-morphisms",
+  "def-sbc-locally-finite-presentation",
+  "def-sc-relative-differential-sheaf",
+  "def-pc-module-pullback",
+  "pqf-def-affine-morphism",
+  "def-weil-finite-type-morphism"
+ ],
+ "proof": [
+  {
+   "text": "By lem-ag-smooth-relative-differentials-finite-locally-free, $\\Omega^1_{G/S}$ is finite locally free, with varying ranks allowed. Pulling back a local frame along $e$ gives local frames of $\\omega$ by the tensor formula in def-pc-module-pullback. Thus $\\omega$ is locally finitely presented and quasi-coherent by lem-weil-pbc-quasi-coherent-finite-type-affine. Put $W=\\Gamma(S,\\omega)$. Refine the frame cover to principal opens by lem-weil-pbc-spec-localization-away-basic-open and take a finite subcover by lem-weil-pbc-spec-basic-opens-unit-ideal-quasi-compact. The corresponding elements $f_i$ generate the unit ideal. The affine sections pullback formula identifies $W_{f_i}$ with the finite free sections of $\\omega|_{D(f_i)}$. Lem-sc-affine-standard-cover-finite-projective now makes $W$ finite projective. Its dual is $E$: a sheaf map $\\omega\\to\\mathcal O_S$ is determined on these local frames by its global-section map, and an $A$-linear $W\\to A$ localizes to such maps; the affine sections formula and module-map gluing give mutually inverse assignments. Lem-sf-finite-projective-dual makes $E$ finite projective as well.",
+   "uses": [
+    "lem-ag-smooth-relative-differentials-finite-locally-free",
+    "def-pc-module-pullback",
+    "lem-weil-pbc-quasi-coherent-finite-type-affine",
+    "lem-weil-pbc-spec-localization-away-basic-open",
+    "lem-weil-pbc-spec-basic-opens-unit-ideal-quasi-compact",
+    "lem-weil-pbc-module-pullback-affine-sections",
+    "lem-sc-affine-standard-cover-finite-projective",
+    "lem-weil-pbc-glue-sheaves-of-modules",
+    "lem-sf-finite-projective-dual"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00NX (lemma-finite-projective), together with morphisms.tex Tag 02G1 and modules.tex local frames"
+   }
+  },
+  {
+   "text": "Choose finitely many generators of $E$. They give a surjection $A^n\\to E$, which splits by the lifting-property characterization in def-weil-pbc-projective-module. Write $i:E\\to A^n$ and $r:A^n\\to E$ with $ri=1$, and put $P=ir$, so $P^2=P$. Tensoring these equations with any $A$-algebra $B$ gives the same splitting of $E_B=E\\otimes_A B$. An endomorphism $u$ of $E_B$ is uniquely encoded by the matrix $X=i_Bur_B$ satisfying $P_BX=X=XP_B$; conversely such a matrix gives $r_BXi_B$. Composition corresponds to matrix multiplication and identity to $P_B$. These assertions follow by inserting $r_Bi_B=1$. The same construction with the dual splitting shows directly that $\\operatorname{Hom}_A(W,A)\\otimes_A B\\to\\operatorname{Hom}_B(W\\otimes_A B,B)$, $\\lambda\\otimes b\\mapsto(w\\otimes c\\mapsto bc\\lambda(w))$, is an isomorphism: it is the restriction of the coordinatewise free-module isomorphism to the images of the transposed idempotents. For a tower $A\\to B\\to C$ these maps send $(\\lambda\\otimes b)\\otimes c$ to the same function as $\\lambda\\otimes bc$.",
+   "uses": [
+    "def-weil-pbc-projective-module"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00NX, finite generators and a split finite free surjection; explicit idempotent calculations"
+   }
+  },
+  {
+   "text": "Let $C$ be the quotient of the polynomial $A$-algebra on two $n\\times n$ matrices $X,Y$ by the entries of\n$$PX-X,\\quad XP-X,\\quad PY-Y,\\quad YP-Y,\\quad XY-P,\\quad YX-P.$$\nPolynomial evaluation and passage to a quotient identify $\\operatorname{Hom}_{A\\text{-alg}}(C,B)$ with pairs of corner matrices that are mutual inverses. By the preceding step this is exactly $\\operatorname{Aut}_B(E_B)$; the second matrix is uniquely the inverse of the first. Define $H=\\operatorname{Spec}C$. It is affine and finitely presented over $S$, since there are finitely many displayed generators and relations. The same equations with the coefficients of $P$ mapped to $B$ give $B\\otimes_A C$ and represent $\\operatorname{Aut}(E_B)$ over $B$: the maps in each direction send every matrix variable to the identically named variable. Hence the representation is compatible with arbitrary, and successive, base changes. If $E=0$, take $n=0$; then $C=A$ and the functor is the one-element group. A different splitting gives the canonical isomorphism by encoding the same automorphism in the other corner; the resulting coordinate substitutions are polynomial and inverse by $ri=1$.",
+   "uses": [
+    "def-weil-pbc-mv-polynomial-ring",
+    "def-weil-pbc-algebra-hom-quotient",
+    "def-weil-affine-spectrum",
+    "def-sbc-locally-finite-presentation",
+    "lem-weil-pbc-fibre-product-affine-spectra"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/groupoids.tex",
+    "place": "Tag 022W (example-general-linear-group), agent corner-matrix extension to finite projective modules"
+   }
+  },
+  {
+   "text": "On pairs $(X,Y)$ the multiplication, identity and inverse are\n$$(X,Y)(X',Y')=(XX',Y'Y),\\qquad (P,P),\\qquad (Y,X).$$\nThe corner equations and $XY=YX=P$ show these formulas respect all relations; for example $(XX')(Y'Y)=X P Y=P$. They are polynomial maps, so give scheme morphisms by the affine spectrum correspondence and the affine fibre-product formula. Associativity is matrix associativity; the two unit equations use $PX=XP=X$, and the inverse equations use $XY=YX=P$. The ring maps therefore satisfy the group diagrams, checked on every polynomial generator. Thus $H$ is the representing group scheme $\\operatorname{GL}_S(E)$. Its structural morphism is separated by lem-weil-pbc-affine-source-morphism-separated. It is affine in the relative sense: for any affine open $V\\subset S$, its inverse image is the affine fibre product $V\\times_S H$.",
+   "uses": [
+    "def-weil-affine-spectrum",
+    "lem-weil-pbc-fibre-product-affine-spectra",
+    "lem-weil-pbc-affine-source-morphism-separated"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/groupoids.tex",
+    "place": "Tag 022W, multiplication on coordinates; schemes.tex Tag 01KN (lemma-affine-separated)"
+   }
+  },
+  {
+   "text": "To prove smoothness, test a square-zero quotient $B'\\twoheadrightarrow B=B'/J$ of arbitrary commutative $A$-algebras. Given inverse corner matrices $X,Y$ over $B$, lift their entries arbitrarily and replace the lifts by $U=P\\widetilde X P$, $V=P\\widetilde Y P$ over $B'$. Put $D=UV-P$ and $F=VU-P$. Their entries lie in $J$, so $D^2=F^2=0$. In the corner ring, whose identity is $P$, $P-D$ is inverse to $P+D=UV$, and $P-F$ is inverse to $P+F=VU$. Consequently $V(P-D)$ is a right inverse of $U$, and $(P-F)V$ a left inverse. A left and a right inverse coincide since $L=L(UR)=(LU)R=R$. Their common value reduces to $Y$. This gives a lift of the pair $(X,Y)$ and therefore of every affine test map into $H$. By def-sbc-formally-smooth $H\\to S$ is formally smooth; its finite polynomial presentation gives local finite presentation. By def-sbc-smooth-morphisms it is smooth. No rank, flatness, or Noetherian hypothesis on the test rings was used.",
+   "uses": [
+    "def-sbc-formally-smooth",
+    "def-sbc-locally-finite-presentation",
+    "def-sbc-smooth-morphisms"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tags 02H0 (definition-formally-smooth), 02H6 (lemma-smooth-formally-smooth); explicit square-zero matrix lifting"
+   }
+  },
+  {
+   "text": "Fix an $A$-algebra $B$ and the split square-zero thickening $\\operatorname{Spec}B\\subset\\operatorname{Spec}B[\\epsilon]/(\\epsilon^2)$, with ideal $B\\epsilon$. Apply lem-sfb-group-space-square-zero-kernel-module to $G$, regarded as its representable group algebraic space by def-trf-scheme-algebraic-space, and its identity section. This identifies its point kernel additively with the sheaf Hom from the identity pullback of differentials into $B\\epsilon$. By lem-sfb-scheme-etale-relative-differentials-comparison, applied to $p:G\\to S$, the etale differential module is the associated etale module $(\\Omega^1_{G/S})_{\\mathrm{et}}$ of the Zariski one, with the same universal derivation. The Zariski--etale quasi-coherent equivalence, its comparison $(e_0^*\\Omega^1_{G/S})_{\\mathrm{et}}\\simeq e_{0,\\mathrm{et}}^*(\\Omega^1_{G/S})_{\\mathrm{et}}$ and its full faithfulness on the quasi-coherent target $\\widetilde{B\\epsilon}$ identify this Hom with the Zariski Hom used here. By lem-trf-relative-differential-sheaf-base-change and the affine pullback sections formula the identity cotangent module is $W\\otimes_A B$. Thus the kernel is canonically $\\operatorname{Hom}_B(W\\otimes_A B,B)=E\\otimes_A B$, using step 2. Explicitly a point $b$ maps to the derivation $D_b$ defined by $b^\\sharp=e^\\sharp+\\epsilon D_b$. Under $\\epsilon\\mapsto a\\epsilon$ this becomes $aD_b$, so the scalar action is exactly the one stated. For a homomorphism $B\\to B'$ the same equation has coefficients mapped to $B'$, establishing the claimed naturality even for nonflat maps.",
+   "uses": [
+    "lem-sfb-group-space-square-zero-kernel-module",
+    "lem-trf-scheme-zariski-etale-quasi-coherent-equivalence",
+    "lem-sfb-scheme-etale-relative-differentials-comparison",
+    "lem-trf-relative-differential-sheaf-base-change",
+    "lem-weil-pbc-module-pullback-affine-sections",
+    "def-trf-scheme-algebraic-space"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-more-morphisms.tex",
+    "place": "Tags 0618 (lemma-difference-derivation), 04D0 (lemma-action-by-derivations); groupoids.tex 0BF5; descent.tex 03DX,03LC; morphisms.tex 01V0"
+   }
+  },
+  {
+   "text": "For $g\\in G(B)$, conjugation $c_g$ is a $B$-scheme automorphism of $G_B$ fixing the identity, with inverse $c_{g^{-1}}$, by the group diagrams. Lem-sfb-space-square-zero-lift-linearization says its action on the derivations of step 6 is the $B$-linear map $D\\mapsto D\\circ c_g^\\sharp$. It is invertible, and its action on points is precisely $v\\mapsto gvg^{-1}$ with $g$ extended constantly to the dual numbers. This defines $\\alpha_B(g)\\in\\operatorname{Aut}_B(E_B)$. Since $c_{gh}=c_g\\circ c_h$, functoriality in that lemma gives $\\alpha_B(gh)=\\alpha_B(g)\\alpha_B(h)$ and $\\alpha_B(1)=1$. Under a ring map $B\\to B'$ the equations defining multiplication, inverse, constant extension and $b^\\sharp=e^\\sharp+\\epsilon D_b$ all undergo the same coefficient map; hence $\\alpha_{B'}(g_{B'})=\\alpha_B(g)\\otimes_B B'$. This constructs a natural homomorphism on affine tests without any affineness assumption on $G$.",
+   "uses": [
+    "lem-sfb-space-square-zero-lift-linearization",
+    "lem-trf-relative-differential-sheaf-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-more-morphisms.tex",
+    "place": "Tags 0618, 04D0, postcomposition of difference derivations; morphisms.tex Tag 01V0"
+   }
+  },
+  {
+   "text": "We now produce the scheme morphism, rather than just functions on points. For each affine open $U=\\operatorname{Spec}B\\subset G$, evaluate step 7 at the point $u:U\\to G$ given by inclusion. The matrix pair encoding $\\alpha_B(u)$ is an $A$-algebra map $C\\to B$, hence an $S$-morphism $a_U:U\\to H$. For an affine open $V\\subset U$, naturality in step 7 identifies $a_U|_V$ with $a_V$. On an overlap $U\\cap U'$, take an affine open covering; the two restrictions coincide there by that same equation. The uniqueness and existence parts of lem-weil-pbc-scheme-morphism-gluing give $\\operatorname{Ad}_G:G\\to H$. More generally, for any $t:\\operatorname{Spec}B\\to G$, cover its source by affine opens mapping into affine opens of $G$. The same naturality proves $\\operatorname{Ad}_G\\circ t=\\alpha_B(t)$ on this cover, hence globally. The group-homomorphism diagrams follow by testing on affine opens of $G\\times_SG$ and $G$, where they are exactly $\\alpha_B(gh)=\\alpha_B(g)\\alpha_B(h)$ and the identity equation of step 7.",
+   "uses": [
+    "def-weil-affine-spectrum",
+    "lem-weil-pbc-affine-opens-basis",
+    "lem-weil-pbc-scheme-morphism-gluing"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Tags 01IT (affine opens form a basis), 01JA (glueing schemes); explicit affine-test construction"
+   }
+  },
+  {
+   "text": "The composite $G\\xrightarrow{\\operatorname{Ad}_G}H\\to S$ is locally of finite type since $G\\to S$ is finitely presented. Lem-weil-pbc-proper-fp-permanence(f) therefore makes $\\operatorname{Ad}_G$ locally of finite type. Also $G$ is quasi-compact: $G\\to S$ is quasi-compact by finite presentation and $S$ is affine, hence quasi-compact. The target $H$ is affine and thus quasi-separated, so lem-weil-pbc-qcqs-morphism-permanence(1) makes $\\operatorname{Ad}_G$ quasi-compact. By def-weil-finite-type-morphism it is of finite type. This argument applies even when $G$ is nonaffine.",
+   "uses": [
+    "lem-weil-pbc-proper-fp-permanence",
+    "lem-weil-pbc-affine-scheme-qcqs",
+    "lem-weil-pbc-qcqs-morphism-permanence",
+    "def-weil-finite-type-morphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 01T8 (lemma-permanence-finite-type); schemes.tex quasi-compactness permanence"
+   }
+  },
+  {
+   "text": "For every $A\\to B$, relative differential base change gives $\\omega_{G_B/B}\\cong\\omega\\otimes_A B$, and lem-ag-pullback-dual-finite-locally-free gives its dual $E_B\\cong E\\otimes_A B$. These are the comparisons used in step 6. For $A\\to B\\to D$, the differential comparisons send $dx$ to $d(1\\otimes x)$ in either order, and the dual comparisons are characterized by evaluation $\\lambda(w)$; both composites therefore agree. Step 3 gives the same tower compatibility for $H$: it maps each coordinate variable to itself. The base change of $\\operatorname{Ad}_G$ and the adjoint map constructed for $G_B$ have identical functions on every affine $B$-test, since each sends $(g,v)$ to $gvg^{-1}$ under these very comparisons. The affine-open argument of step 8 makes them equal as scheme morphisms. Smoothness of $G_B$ follows from lem-pc-proper-base-change(2), separatedness from lem-weil-pbc-separated-lqf-base-change(1), and finite presentation from lem-weil-pbc-qcqs-morphism-permanence(3). These lemmas allow arbitrary base morphisms, including non-Noetherian and zero target rings. At $B=k$ algebraically closed, the same dual-number description is the usual identity tangent space and conjugation differential, so the resulting adjoint representation is the usual one.",
+   "uses": [
+    "lem-trf-relative-differential-sheaf-base-change",
+    "lem-ag-pullback-dual-finite-locally-free",
+    "lem-pc-proper-base-change",
+    "lem-weil-pbc-separated-lqf-base-change",
+    "lem-weil-pbc-qcqs-morphism-permanence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tags 01V0, 02G1; modules.tex 0FNV; morphisms.tex smooth base change; schemes.tex 01KU"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-ag-smooth-relative-differentials-finite-locally-free",
+  "def-pc-module-pullback",
+  "lem-weil-pbc-quasi-coherent-finite-type-affine",
+  "lem-weil-pbc-spec-localization-away-basic-open",
+  "lem-weil-pbc-spec-basic-opens-unit-ideal-quasi-compact",
+  "lem-weil-pbc-module-pullback-affine-sections",
+  "lem-sc-affine-standard-cover-finite-projective",
+  "lem-weil-pbc-glue-sheaves-of-modules",
+  "lem-sf-finite-projective-dual",
+  "def-weil-pbc-projective-module",
+  "def-weil-pbc-mv-polynomial-ring",
+  "def-weil-pbc-algebra-hom-quotient",
+  "def-weil-affine-spectrum",
+  "def-sbc-locally-finite-presentation",
+  "lem-weil-pbc-fibre-product-affine-spectra",
+  "lem-weil-pbc-affine-source-morphism-separated",
+  "def-sbc-formally-smooth",
+  "def-sbc-smooth-morphisms",
+  "lem-sfb-group-space-square-zero-kernel-module",
+  "lem-sfb-scheme-etale-relative-differentials-comparison",
+  "lem-trf-scheme-zariski-etale-quasi-coherent-equivalence",
+  "lem-trf-relative-differential-sheaf-base-change",
+  "def-trf-scheme-algebraic-space",
+  "lem-sfb-space-square-zero-lift-linearization",
+  "lem-weil-pbc-affine-opens-basis",
+  "lem-weil-pbc-scheme-morphism-gluing",
+  "lem-weil-pbc-proper-fp-permanence",
+  "lem-weil-pbc-affine-scheme-qcqs",
+  "lem-weil-pbc-qcqs-morphism-permanence",
+  "def-weil-finite-type-morphism",
+  "lem-ag-pullback-dual-finite-locally-free",
+  "lem-pc-proper-base-change",
+  "lem-weil-pbc-separated-lqf-base-change"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/groupoids.tex",
+  "place": "Tag 022W and the explicit corner-matrix extension, with Tags 02G1, 00NX, 01V0, 0618, 04D0 and 0BF5. Agent completion of the adjoint-action prerequisite used in Conrad Proposition 6.3.16; no SGA source used."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The adjoint representation of a smooth group scheme over a ring acts on its finite projective Lie algebra and commutes with base change",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"instLieAlgebraGroupLieAlgebra\", \"module\": \"Mathlib/Geometry/Manifold/GroupLieAlgebra\", \"type\": \"{𝕜 : Type u_1} →\\n  [inst : NontriviallyNormedField 𝕜] →\\n    {H : Type u_2} →\\n      [inst_1 : TopologicalSpace H] →\\n        {E : Type u_3} →\\n          [inst_2 : NormedAddCommGroup E] →\\n            [inst_3 : NormedSpace 𝕜 E] →\\n              {I : ModelWithCorners 𝕜 E H} →\\n                {G : Type u_4}\", \"doc\": \"For a Lie group $ G $ modeled on a nontrivially normed field $ \\\\mathbb{K} $, the tangent space $ \\\\mathfrak{g} = T_eG $ at the identity element $ e $ is equipped with a $ \\\\mathbb{K} $-Lie algebra struc\"}\n  {\"name\": \"instLieRingGroupLieAlgebra\", \"module\": \"Mathlib/Geometry/Manifold/GroupLieAlgebra\", \"type\": \"{𝕜 : Type u_1} →\\n  [inst : NontriviallyNormedField 𝕜] →\\n    {H : Type u_2} →\\n      [inst_1 : TopologicalSpace H] →\\n        {E : Type u_3} →\\n          [inst_2 : NormedAddCommGroup E] →\\n            [inst_3 : NormedSpace 𝕜 E] →\\n              {I : ModelWithCorners 𝕜 E H} →\\n                {G : Type u_4}\", \"doc\": \"The Lie algebra $\\\\mathfrak{g} = T_eG$ of a Lie group $G$ is equipped with a Lie ring structure. The Lie bracket $[v, w]$ for $v, w \\\\in \\\\mathfrak{g}$ is defined by taking the Lie bracket of the corresp\"}\n  {\"name\": \"LieAlgebra.conj_ad_apply\", \"module\": \"Mathlib/Algebra/Lie/OfAssociative\", \"type\": \"∀ {R : Type u_1} {L : Type u_2} {L' : Type u_3} [inst : CommRing R] [inst_1 : LieRing L] [inst_2 : LieAlgebra R L]\\n  [inst_3 : LieRing L'] [inst_4 : LieAlgebra R L'] (e : L ≃ₗ⁅R⁆ L') (x : L),\\n  e.toLinearEquiv.conj ((LieAlgebra.ad R L) x) = (LieAlgebra.ad R L') (e x)\", \"doc\": \"For a Lie algebra isomorphism $ e : L \\\\simeq_{\\\\mathfrak{L}} L' $ over a commutative ring $ R $ and an element $ x \\\\in L $, the conjugation of the adjoint operator $ \\\\mathrm{ad}_L(x) $ by the linear eq\"}\n  {\"name\": \"GroupLieAlgebra\", \"module\": \"Mathlib/Geometry/Manifold/GroupLieAlgebra\", \"type\": \"{𝕜 : Type u_1} →\\n  [inst : NontriviallyNormedField 𝕜] →\\n    {H : Type u_2} →\\n      [inst_1 : TopologicalSpace H] →\\n        {E : Type u_3} →\\n          [inst_2 : NormedAddCommGroup E] →\\n            [inst_3 : NormedSpace 𝕜 E] →\\n              ModelWithCorners 𝕜 E H →\\n                (G : Type u_4) → [in\", \"doc\": \"The Lie algebra of a group $ G $, defined as the tangent space at the identity element $ 1 $, modeled on the normed vector space $ E $ via the model with corners $ I $.\"}\n  {\"name\": \"LieAlgebra.ad\", \"module\": \"Mathlib/Algebra/Lie/OfAssociative\", \"type\": \"(R : Type u) →\\n  (L : Type v) → [inst : CommRing R] → [inst_1 : LieRing L] → [inst_2 : LieAlgebra R L] → L →ₗ⁅R⁆ Module.End R L\", \"doc\": \"The adjoint representation of a Lie algebra $ \\\\mathfrak{g} $ over a commutative ring $ R $ is the Lie algebra homomorphism $ \\\\mathrm{ad}: \\\\mathfrak{g} \\\\to \\\\mathrm{End}_R(\\\\mathfrak{g}) $, where each el\"}\n  {\"name\": \"LeftInvariantDerivation.instLieAlgebra\", \"module\": \"Mathlib/Geometry/Manifold/Algebra/LeftInvariantDerivation\", \"type\": \"{𝕜 : Type u_1} →\\n  [inst : NontriviallyNormedField 𝕜] →\\n    {E : Type u_2} →\\n      [inst_1 : NormedAddCommGroup E] →\\n        [inst_2 : NormedSpace 𝕜 E] →\\n          {H : Type u_3} →\\n            [inst_3 : TopologicalSpace H] →\\n              {I : ModelWithCorners 𝕜 E H} →\\n                {G : Type u_4}\", \"doc\": \"The space of left-invariant derivations on a charted group $ G $, modeled over a model with corners $ I $, forms a Lie algebra over the nontrivially normed field $ \\\\mathbb{K} $. This structure combine\"}\n  {\"name\": \"GroupLieAlgebra.bracket_def\", \"module\": \"Mathlib/Geometry/Manifold/GroupLieAlgebra\", \"type\": \"∀ {𝕜 : Type u_1} [inst : NontriviallyNormedField 𝕜] {H : Type u_2} [inst_1 : TopologicalSpace H] {E : Type u_3}\\n  [inst_2 : NormedAddCommGroup E] [inst_3 : NormedSpace 𝕜 E] {I : ModelWithCorners 𝕜 E H} {G : Type u_4}\\n  [inst_4 : TopologicalSpace G] [inst_5 : ChartedSpace H G] [inst_6 : Group G] (v w\", \"doc\": \"For any elements $ v $ and $ w $ in the Lie algebra $ \\\\mathfrak{g} $ of a Lie group $ G $, the Lie bracket $[v, w]$ is defined as the Lie bracket of the corresponding left-invariant vector fields eval\"}\n  {\"name\": \"instLieAlgebraAddGroupLieAlgebra\", \"module\": \"Mathlib/Geometry/Manifold/GroupLieAlgebra\", \"type\": \"{𝕜 : Type u_1} →\\n  [inst : NontriviallyNormedField 𝕜] →\\n    {H : Type u_2} →\\n      [inst_1 : TopologicalSpace H] →\\n        {E : Type u_3} →\\n          [inst_2 : NormedAddCommGroup E] →\\n            [inst_3 : NormedSpace 𝕜 E] →\\n              {I : ModelWithCorners 𝕜 E H} →\\n                [inst_4 : Comp\", \"doc\": \"For a nontrivially normed field $\\\\mathbb{K}$, a normed vector space $E$ over $\\\\mathbb{K}$, a model with corners $I$ on $E$, and a charted space $G$ modeled on $I$ equipped with an additive group struc\"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits give Lie algebras of analytic groups, Lie-algebra adjoint maps, or projectivity of Kahler differentials of a smooth algebra. None represents the automorphism functor of the relative tangent module and constructs the base-change-compatible adjoint homomorphism of a possibly nonaffine group scheme."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a smooth separated finitely presented group scheme G over Spec A, dual of identity pullback of relative differentials is finite projective and conjugation defines G to GL of this module",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"Algebra.instFiniteH1CotangentOfFinitePresentationOfProjectiveKaehlerDifferential\", \"module\": \"Mathlib/RingTheory/Extension/Cotangent/Basic\", \"type\": \"∀ {R : Type u} {S : Type v} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S]\\n  [Algebra.FinitePresentation R S] [Module.Projective S Ω[S⁄R]], Module.Finite S (Algebra.H1Cotangent R S)\", \"doc\": \"If $ S $ is a finitely presented $ R $-algebra and the module of Kähler differentials $ \\\\Omega_{S/R} $ is projective over $ S $, then the first cotangent cohomology module $ H^1_{\\\\text{cotangent}}(R, \"}\n  {\"name\": \"Algebra.FormallySmooth.projective_kaehlerDifferential\", \"module\": \"Mathlib/RingTheory/Smooth/Basic\", \"type\": \"∀ {R : Type u} {A : Type v} {inst : CommRing R} {inst_1 : CommRing A} {inst_2 : Algebra R A}\\n  [self : Algebra.FormallySmooth R A], Module.Projective A Ω[A⁄R]\", \"doc\": \"Let $ R $ be a commutative ring and $ A $ a commutative $ R $-algebra. If $ A $ is formally smooth over $ R $, then the module of Kähler differentials $ \\\\Omega_{A/R} $ is a projective $ A $-module.\"}\n  {\"name\": \"Algebra.FormallySmooth.instFinitePresentationKaehlerDifferentialOfEssFiniteType\", \"module\": \"Mathlib/RingTheory/Smooth/Basic\", \"type\": \"∀ {R : Type u} {A : Type v} [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A] [Algebra.EssFiniteType R A]\\n  [Algebra.FormallySmooth R A], Module.FinitePresentation A Ω[A⁄R]\", \"doc\": \"If $ A $ is an $ R $-algebra that is essentially of finite type and formally smooth over a commutative ring $ R $, then the module of Kähler differentials $ \\\\Omega_{A/R} $ is finitely presented as an \"}\n  {\"name\": \"Algebra.H1Cotangent\", \"module\": \"Mathlib/RingTheory/Extension/Cotangent/Basic\", \"type\": \"(R : Type u) → (S : Type v) → [inst : CommRing R] → [inst_1 : CommRing S] → [Algebra R S] → Type (max u v)\", \"doc\": \"The first cohomology group of the cotangent complex for an $ R $-algebra $ S $, constructed using the algebra's own elements as generators in the extension $ R \\to S $.\"}\n  {\"name\": \"Algebra.instFinitePresentationKaehlerDifferentialOfFinitePresentation\", \"module\": \"Mathlib/RingTheory/Extension/Cotangent/Basic\", \"type\": \"∀ {R : Type u} {S : Type v} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S]\\n  [Algebra.FinitePresentation R S], Module.FinitePresentation S Ω[S⁄R]\", \"doc\": \"If an $ R $-algebra $ S $ is finitely presented over $ R $, then the module of Kähler differentials $ \\\\Omega_{S/R} $ is finitely presented as an $ S $-module.\"}\n  {\"name\": \"Algebra.smoothLocus_eq_compl_support_inter\", \"module\": \"Mathlib/RingTheory/Smooth/Locus\", \"type\": \"∀ {R : Type u_1} {A : Type u_2} [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A]\\n  [Algebra.EssFiniteType R A],\\n  Algebra.smoothLocus R A = (Module.support A (Algebra.H1Cotangent R A))ᶜ ∩ Module.freeLocus A Ω[A⁄R]\", \"doc\": \"For a commutative $ R $-algebra $ A $ of essential finite type, the smooth locus $ \\\\operatorname{smoothLocus}_R(A) $ coincides with the intersection of the complement of the support of the first cotan\"}\n  {\"name\": \"KaehlerDifferential.endEquivAuxEquiv\", \"module\": \"Mathlib/RingTheory/Kaehler/Basic\", \"type\": \"(R : Type u) →\\n  (S : Type v) →\\n    [inst : CommRing R] →\\n      [inst_1 : CommRing S] →\\n        [inst_2 : Algebra R S] →\\n          { f //\\n              (Ideal.Quotient.mkₐ R (KaehlerDifferential.ideal R S).cotangentIdeal).comp f =\\n                IsScalarTower.toAlgHom R S\\n                  ((Tensor\", \"doc\": \"Let $R$ and $S$ be commutative rings, where $S$ is an $R$-algebra. Let $I$ be the kernel of the multiplication map $m: S \\\\otimes_R S \\\\to S$. This theorem establishes a bijection between two sets of $R\"}\n  {\"name\": \"Algebra.IsStandardSmooth.iff_exists_basis_kaehlerDifferential\", \"module\": \"Mathlib/RingTheory/Smooth/StandardSmoothOfFree\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S]\\n  [Algebra.FinitePresentation R S],\\n  Algebra.IsStandardSmooth R S ↔\\n    Subsingleton (Algebra.H1Cotangent R S) ∧ ∃ I b, Set.range ⇑b ⊆ Set.range ⇑(KaehlerDifferential.D R S)\", \"doc\": \"An $ R $-algebra $ S $ of finite presentation is standard smooth if and only if the first cohomology group $ H^1 $ of its cotangent complex is trivial (a subsingleton) and there exists a basis for the\"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits give Lie algebras of analytic groups, Lie-algebra adjoint maps, or projectivity of Kahler differentials of a smooth algebra. None represents the automorphism functor of the relative tangent module and constructs the base-change-compatible adjoint homomorphism of a possibly nonaffine group scheme."
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.GrpObj, Module.Projective",
+   "results": "[loogle] OK 0 hit(s) | loogle: unknown identifier 'AlgebraicGeometry.GrpObj'\n",
+   "date": "2026-10-24",
+   "verdict": "invalid query: Loogle reported an unknown identifier; replaced by the valid query also recorded here"
+  },
+  {
+   "tool": "loogle",
+   "query": "Module.Projective, LinearEquiv",
+   "results": "[loogle] OK 12 hit(s)\n  {\"name\": \"Module.Projective.of_equiv'\", \"module\": \"Mathlib.Algebra.Module.Projective\", \"type\": \" {R : Type u_1} [Semiring R] {P : Type u_2} [AddCommMonoid P] [Module R P] {M : Type u_3} [AddCommMonoid M] [Module R M] [Module.Projective R M] (e : M ≃ₗ[R] P) : Module.Projective R P\", \"doc\": \"\"}\n  {\"name\": \"Module.Projective.of_equiv\", \"module\": \"Mathlib.Algebra.Module.Projective\", \"type\": \" {R : Type u_8} {S : Type u_9} [Semiring R] [Semiring S] {M : Type u_10} {N : Type u_11} [AddCommMonoid M] [AddCommMonoid N] [Module R M] [Module S N] {σ : R →+* S} {σ' : S →+* R} [RingHomInvPair σ σ'] [RingHomInvPair σ' σ] (e₂ : M ≃ₛₗ[σ] N) [Module.Projective R M] : Module.Projective S N\", \"doc\": \"\"}\n  {\"name\": \"dualTensorHomEquiv\", \"module\": \"Mathlib.LinearAlgebra.Contraction\", \"type\": \" (R : Type u_2) (M : Type u_3) (N : Type u_4) [CommSemiring R] [AddCommMonoid M] [AddCommMonoid N] [Module R M] [Module R N] [Module.Finite R M] [Module.Projective R M] : TensorProduct R (Module.Dual R M) N ≃ₗ[R] M →ₗ[R] N\", \"doc\": \"If `M` is finite projective, the natural map $M^* ⊗ N → Hom(M, N)$ is an equivalence.\"}\n  {\"name\": \"dualTensorHomEquivOfBasis_eq_dualTensorHomEquiv\", \"module\": \"Mathlib.LinearAlgebra.Contraction\", \"type\": \" {ι : Type u_1} {R : Type u_2} {M : Type u_3} {N : Type u_4} [CommSemiring R] [AddCommMonoid M] [AddCommMonoid N] [Module R M] [Module R N] [Module.Finite R M] [Module.Projective R M] [DecidableEq ι] [Fintype ι] (b : Module.Basis ι R M) : dualTensorHomEquivOfBasis b = dualTensorHomEquiv R M N\", \"doc\": \"\"}\n  {\"name\": \"lTensorHomEquivHomLTensor\", \"module\": \"Mathlib.LinearAlgebra.Contraction\", \"type\": \" (R : Type u_2) (M : Type u_3) (P : Type u_5) (Q : Type u_6) [CommSemiring R] [AddCommMonoid M] [AddCommMonoid P] [AddCommMonoid Q] [Module R M] [Module R P] [Module R Q] [Module.Projective R M] [Module.Finite R M] : TensorProduct R P (M →ₗ[R] Q) ≃ₗ[R] M →ₗ[R] TensorProduct R P Q\", \"doc\": \"When `M` is a finite projective module, the map `lTensorHomToHomLTensor` is an equivalence. Note\\nthat `lTensorHomEquivHomLTensor` is not defined directly in terms of\\n`lTensorHomToHomLTensor`, but the \"}\n  {\"name\": \"rTensorHomEquivHomRTensor\", \"module\": \"Mathlib.LinearAlgebra.Contraction\", \"type\": \" (R : Type u_2) (M : Type u_3) (P : Type u_5) (Q : Type u_6) [CommSemiring R] [AddCommMonoid M] [AddCommMonoid P] [AddCommMonoid Q] [Module R M] [Module R P] [Module R Q] [Module.Projective R M] [Module.Finite R M] : TensorProduct R (M →ₗ[R] P) Q ≃ₗ[R] M →ₗ[R] TensorProduct R P Q\", \"doc\": \"When `M` is a finite projective module, the map `rTensorHomToHomRTensor` is an equivalence. Note\\nthat `rTensorHomEquivHomRTensor` is not defined directly in terms of\\n`rTensorHomToHomRTensor`, but the \"}\n  {\"name\": \"TensorProduct.dualDistribEquiv\", \"module\": \"Mathlib.LinearAlgebra.Contraction\", \"type\": \" (R : Type u_2) (M : Type u_3) (N : Type u_4) [CommSemiring R] [AddCommMonoid M] [AddCommMonoid N] [Module R M] [Module R N] [Module.Finite R M] [Module.Finite R N] [Module.Projective R M] [Module.Projective R N] : TensorProduct R (Module.Dual R M) (Module.Dual R N) ≃ₗ[R] Module.Dual R (TensorProduc\", \"doc\": \"A linear equivalence between `Dual M ⊗ Dual N` and `Dual (M ⊗ N)` when `M` and `N` are finite\\nprojective modules. It sends `f ⊗ g` to the composition of `TensorProduct.map f g` with the natural\\nisomor\"}\n  {\"name\": \"homTensorHomEquiv\", \"module\": \"Mathlib.LinearAlgebra.Contraction\", \"type\": \" (R : Type u_2) (M : Type u_3) (N : Type u_4) (P : Type u_5) (Q : Type u_6) [CommSemiring R] [AddCommMonoid M] [AddCommMonoid N] [AddCommMonoid P] [AddCommMonoid Q] [Module R M] [Module R N] [Module R P] [Module R Q] [Module.Projective R M] [Module.Finite R M] [Module.Projective R N] [Module.Finite \", \"doc\": \"When `M` and `N` are finite projective `R` modules, the map `homTensorHomMap` is an equivalence.\"}\n  {\"name\": \"dualTensorHomEquiv_tmul\", \"module\": \"Mathlib.LinearAlgebra.Contraction\", \"type\": \" {R : Type u_2} {M : Type u_3} {N : Type u_4} [CommSemiring R] [AddCommMonoid M] [AddCommMonoid N] [Module R M] [Module R N] [Module.Finite R M] [Module.Projective R M] (f : Module.Dual R M) (m : M) (n : N) : ((dualTensorHomEquiv R M N) (f ⊗ₜ[R] n)) m = f m • n\", \"doc\": \"\"}\n  {\"name\": \"dualTensorHom_dualTensorHomEquiv_symm\", \"module\": \"Mathlib.LinearAlgebra.Contraction\", \"type\": \" {R : Type u_2} {M : Type u_3} {N : Type u_4} [CommSemiring R] [AddCommMonoid M] [AddCommMonoid N] [Module R M] [Module R N] [Module.Finite R M] [Module.Projective R M] (x : M →ₗ[R] N) : (dualTensorHom R M N) ((dualTensorHomEquiv R M N).symm x) = x\", \"doc\": \"\"}\n  {\"name\": \"dualTensorHomEquiv_symm_dualTensorHom\", \"module\": \"Mathlib.LinearAlgebra.Contraction\", \"type\": \" {R : Type u_2} {M : Type u_3} {N : Type u_4} [CommSemiring R] [AddCommMonoid M] [AddCommMonoid N] [Module R M] [Module R N] [Module.Finite R M] [Module.Projective R M] (x : TensorProduct R (Module.Dual R M) N) : (dualTensorHomEquiv R M N).symm ((dualTensorHom R M N) x) = x\", \"doc\": \"\"}\n  {\"name\": \"TensorProduct.dualDistribEquiv_tmul_tmul\", \"module\": \"Mathlib.LinearAlgebra.Contraction\", \"type\": \" {R : Type u_2} {M : Type u_3} {N : Type u_4} [CommSemiring R] [AddCommMonoid M] [AddCommMonoid N] [Module R M] [Module R N] [Module.Finite R M] [Module.Finite R N] [Module.Projective R M] [Module.Projective R N] (f : Module.Dual R M) (g : Module.Dual R N) (m : M) (n : N) : ((TensorProduct.dualDistr\", \"doc\": \"\"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits give Lie algebras of analytic groups, Lie-algebra adjoint maps, or projectivity of Kahler differentials of a smooth algebra. None represents the automorphism functor of the relative tangent module and constructs the base-change-compatible adjoint homomorphism of a possibly nonaffine group scheme."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Smooth group scheme adjoint representation on the finite locally free Lie algebra over a ring and its base change",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"LieAlgebra.ad\", \"module\": \"Mathlib.Algebra.Lie.OfAssociative\", \"type\": \": L →ₗ⁅R⁆ Module.End R L\", \"doc\": \"The adjoint representation of a Lie algebra $ \\\\mathfrak{g} $ over a commutative ring $ R $ is the Lie algebra homomorphism $ \\\\mathrm{ad}: \\\\mathfrak{g} \\\\to \\\\mathrm{End}_R(\\\\mathfrak{g}) $, where each el\"}\n  {\"name\": \"LieDerivation.ad\", \"module\": \"Mathlib.Algebra.Lie.Derivation.AdjointAction\", \"type\": \": L →ₗ⁅R⁆ LieDerivation R L L\", \"doc\": \"The linear map $ \\\\mathrm{ad} : L \\\\to \\\\mathrm{Der}(L) $ that sends each element $ x \\\\in L $ to the adjoint derivation $ \\\\mathrm{ad}_x $, defined by $ \\\\mathrm{ad}_x(y) = [x, y] $ for all $ y \\\\in L $. Th\"}\n  {\"name\": \"LieAlgebra.ad_apply\", \"module\": \"Mathlib.Algebra.Lie.OfAssociative\", \"type\": \"(x y : L) : LieAlgebra.ad R L x y = ⁅x, y⁆\", \"doc\": \"For any elements $x$ and $y$ in a Lie algebra $L$ over a commutative ring $R$, the adjoint action of $x$ on $y$ is equal to the Lie bracket of $x$ and $y$, i.e., $\\\\mathrm{ad}(x)(y) = [x, y]$.\"}\n  {\"name\": \"LieAlgebra.ad_eq_lmul_left_sub_lmul_right\", \"module\": \"Mathlib.Algebra.Lie.OfAssociative\", \"type\": \"(A : Type v) [Ring A] [Algebra R A] : (ad R A : A → Module.End R A) = LinearMap.mulLeft R - LinearMap.mulRight R\", \"doc\": \"For any associative algebra $ A $ over a commutative ring $ R $, the adjoint representation of the Lie algebra associated to $ A $ is given by the difference between left multiplication and right mult\"}\n  {\"name\": \"LieDerivation.ad_apply_apply\", \"module\": \"Mathlib.Algebra.Lie.Derivation.AdjointAction\", \"type\": \"∀ (R : Type u_1) (L : Type u_2) [inst : CommRing R] [inst_1 : LieRing L] [inst_2 : LieAlgebra R L] (a a_1 : L),\\n  ((LieDerivation.ad R L) a) a_1 = ⁅a, a_1⁆\", \"doc\": \"For any commutative ring $ R $, Lie algebra $ L $ over $ R $, and elements $ a, a_1 \\\\in L $, the adjoint derivation $ \\\\mathrm{ad}_a $ applied to $ a_1 $ yields the Lie bracket $ [a, a_1] $. This defin\"}\n  {\"name\": \"LieSubalgebra.coe_ad\", \"module\": \"Mathlib.Algebra.Lie.OfAssociative\", \"type\": \"(H : LieSubalgebra R L) (x y : H) : (ad R H x y : L) = ad R L x y\", \"doc\": \"For any elements $x$ and $y$ in a Lie subalgebra $H$ of a Lie algebra $L$ over a commutative ring $R$, the adjoint action of $x$ on $y$ in $H$, when coerced to $L$, equals the adjoint action of $x$ on\"}\n  {\"name\": \"LieAlgebra.ad_lie\", \"module\": \"Mathlib.Algebra.Lie.OfAssociative\", \"type\": \"(x y z : L) : (ad R L x) ⁅y, z⁆ = ⁅ad R L x y, z⁆ + ⁅y, ad R L x z⁆\", \"doc\": \"For any elements $x, y, z$ in a Lie algebra $\\\\mathfrak{g}$ over a commutative ring $R$, the adjoint action $\\\\mathrm{ad}(x)$ satisfies the Leibniz identity: $\\\\mathrm{ad}(x)([y, z]) = [\\\\mathrm{ad}(x)(y)\"}\n  {\"name\": \"LieDerivation.coe_ad_apply_eq_ad_apply\", \"module\": \"Mathlib.Algebra.Lie.Derivation.AdjointAction\", \"type\": \"(x : L) : ad R L x = LieAlgebra.ad R L x\", \"doc\": \"For any element $x$ in a Lie algebra $\\\\mathfrak{g}$ over a commutative ring $R$, the adjoint derivation $\\\\mathrm{ad}_x : \\\\mathfrak{g} \\\\to \\\\mathfrak{g}$ defined by $\\\\mathrm{ad}_x(y) = [x, y]$ is equal \"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits give Lie algebras of analytic groups, Lie-algebra adjoint maps, or projectivity of Kahler differentials of a smooth algebra. None represents the automorphism functor of the relative tangent module and constructs the base-change-compatible adjoint homomorphism of a possibly nonaffine group scheme."
+  },
+  {
+   "tool": "grep",
+   "query": "[Aa]djoint|[Ll]ie[Aa]lgebra|[Gg]eneral[Ll]inear",
+   "results": "[grep] OK 13 hit(s)\n  {\"file\": \"Mathlib/AlgebraicGeometry/Modules/Sheaf.lean\", \"line\": \"69\", \"text\": \"instance : (toPresheafOfModules X).IsRightAdjoint :=\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Modules/Sheaf.lean\", \"line\": \"70\", \"text\": \"  (PresheafOfModules.sheafificationAdjunction (𝟙 X.ringCatSheaf.obj)).isRightAdjoint\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Modules/Sheaf.lean\", \"line\": \"188\", \"text\": \"is left adjoint to the pushforward functor. -/\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Modules/Sheaf.lean\", \"line\": \"198\", \"text\": \"instance : (pullback f).IsLeftAdjoint := (pullbackPushforwardAdjunction f).isLeftAdjoint\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Modules/Sheaf.lean\", \"line\": \"199\", \"text\": \"instance : (pushforward f).IsRightAdjoint := (pullbackPushforwardAdjunction f).isRightAdjoint\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Modules/Tilde.lean\", \"line\": \"24\", \"text\": \"* `AlgebraicGeometry.tilde.adjunction` : `~` is left adjoint to taking global sections.\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Modules/Tilde.lean\", \"line\": \"384\", \"text\": \"instance : (tilde.functor R).IsLeftAdjoint := tilde.adjunction.isLeftAdjoint\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Modules/Tilde.lean\", \"line\": \"587\", \"text\": \"  exact SheafOfModules.isQuasicoherent_pushforward_of_isLeftAdjoint.{u}\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/OpenImmersion.lean\", \"line\": \"95\", \"text\": \"instance : f.opensFunctor.IsLeftAdjoint :=\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/OpenImmersion.lean\", \"line\": \"96\", \"text\": \"  f.opensFunctorAdjunction.isLeftAdjoint\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/GammaSpecAdjunction.lean\", \"line\": \"604\", \"text\": \"instance : LocallyRingedSpace.Γ.IsRightAdjoint :=\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/GammaSpecAdjunction.lean\", \"line\": \"605\", \"text\": \"  ΓSpec.locallyRingedSpaceAdjunction.rightOp.isRightAdjoint\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/GammaSpecAdjunction.lean\", \"line\": \"607\", \"text\": \"instance : Scheme.Γ.IsRightAdjoint := ΓSpec.adjunction.rightOp.isRightAdjoint\"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits give Lie algebras of analytic groups, Lie-algebra adjoint maps, or projectivity of Kahler differentials of a smooth algebra. None represents the automorphism functor of the relative tangent module and constructs the base-change-compatible adjoint homomorphism of a possibly nonaffine group scheme."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A smooth group scheme over any commutative ring has a finite locally free Lie module and a base change compatible adjoint representation into its general linear group",
+   "results": "{\"t\": \"2026-10-24T11:25:41Z\", \"tool\": \"leanfinder\", \"query\": \"A smooth group scheme over any commutative ring has a finite locally free Lie module and a base change compatible adjoint representation into its general linear group\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"instLieRingGroupLieAlgebra\", \"instLieAlgebraGroupLieAlgebra\", \"GroupLieAlgebra\", \"instLieRingAddGroupLieAlgebra\", \"instLieAlgebraAddGroupLieAlgebra\", \"instBracketGroupLieAlgebra\", \"instLieGroupOfNatWithTopENatOfIsTopologicalGroup\", \"AddGroupLieAlgebra\"], \"digest\": \"8db1a9e9851aef6c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: analytic Lie groups, adjunctions, Galois automorphism functors and smooth base-change lemmas do not construct this relative adjoint representation of a possibly nonaffine group scheme."
+  },
+  {
+   "tool": "grep",
+   "query": "adjoint|adjointRepresentation|lieAlgebra|GeneralLinearGroup",
+   "results": "{\"t\": \"2026-10-24T11:26:24Z\", \"tool\": \"grep\", \"query\": \"adjoint|adjointRepresentation|lieAlgebra|GeneralLinearGroup\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 13, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/OpenImmersion.lean\", \"Mathlib/AlgebraicGeometry/OpenImmersion.lean\", \"Mathlib/AlgebraicGeometry/GammaSpecAdjunction.lean\", \"Mathlib/AlgebraicGeometry/GammaSpecAdjunction.lean\", \"Mathlib/AlgebraicGeometry/GammaSpecAdjunction.lean\", \"Mathlib/AlgebraicGeometry/Modules/Sheaf.lean\", \"Mathlib/AlgebraicGeometry/Modules/Sheaf.lean\", \"Mathlib/AlgebraicGeometry/Modules/Sheaf.lean\"], \"digest\": \"a7b17c1bda6233bd\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: analytic Lie groups, adjunctions, Galois automorphism functors and smooth base-change lemmas do not construct this relative adjoint representation of a possibly nonaffine group scheme."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Adjoint homomorphism of a smooth group scheme on its relative tangent space compatible with arbitrary base change",
+   "results": "{\"t\": \"2026-10-24T11:26:25Z\", \"tool\": \"leansearch\", \"query\": \"Adjoint homomorphism of a smooth group scheme on its relative tangent space compatible with arbitrary base change\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"LieAlgebra.ad\", \"AlgebraicGeometry.isSmooth_isStableUnderBaseChange\", \"Algebra.Smooth.baseChange\", \"AlgebraicGeometry.IsSmooth.recOn\", \"RingHom.Smooth\", \"hfdifferential\", \"LeftInvariantDerivation.coeFnAddMonoidHom_apply\", \"AlgebraicGeometry.IsEtale.instIsStableUnderBaseChangeScheme\"], \"digest\": \"61fc67e9cac0b3a0\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: analytic Lie groups, adjunctions, Galois automorphism functors and smooth base-change lemmas do not construct this relative adjoint representation of a possibly nonaffine group scheme."
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Scheme, Module.Projective",
+   "results": "{\"t\": \"2026-10-24T11:26:25Z\", \"tool\": \"loogle\", \"query\": \"AlgebraicGeometry.Scheme, Module.Projective\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: analytic Lie groups, adjunctions, Galois automorphism functors and smooth base-change lemmas do not construct this relative adjoint representation of a possibly nonaffine group scheme."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Automorphism group functor of a finite projective module represented by a smooth affine scheme and differentiation of conjugation for nonaffine group schemes",
+   "results": "{\"t\": \"2026-10-24T11:27:29Z\", \"tool\": \"leanfinder\", \"query\": \"Automorphism group functor of a finite projective module represented by a smooth affine scheme and differentiation of conjugation for nonaffine group schemes\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.PreGaloisCategory.autGaloisSystem\", \"CategoryTheory.PreGaloisCategory.AutGalois\", \"CategoryTheory.PreGaloisCategory.autGaloisSystem_obj_coe\", \"CategoryTheory.PreGaloisCategory.autEmbedding\", \"CategoryTheory.PreGaloisCategory.autMulEquivAutGalois_π\", \"CategoryTheory.PreGaloisCategory.AutGalois.π\", \"CategoryTheory.PreGaloisCategory.autGaloisSystem_map\", \"CategoryTheory.PreGaloisCategory.instGroupAutGalois\"], \"digest\": \"c6ad695f8e84e4fa\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: analytic Lie groups, adjunctions, Galois automorphism functors and smooth base-change lemmas do not construct this relative adjoint representation of a possibly nonaffine group scheme."
+  },
+  {
+   "tool": "grep",
+   "query": "adjointRepresentation|adjointRep|generalLinearGroup|lieAlgebra",
+   "results": "{\"t\": \"2026-10-24T11:30:21Z\", \"tool\": \"grep\", \"query\": \"adjointRepresentation|adjointRep|generalLinearGroup|lieAlgebra\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: analytic Lie groups, adjunctions, Galois automorphism functors and smooth base-change lemmas do not construct this relative adjoint representation of a possibly nonaffine group scheme."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-relative-semisimple-affineness",
+  "date": "2026-10-24",
+  "group": "Q149"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Haboush symmetric-power lifting for a trivial quotient representation. Supporting representation-theoretic input: Steinberg endomorphisms detect a nonzero fixed vector. Supporting Self-duality of rho section modules at characteristic-dependent weights. Supporting input: Positive-characteristic simplicity step, using irreducibility of the Steinberg induced module rather than assuming self-duality. Numerical input to the dimension comparison: Weyl dimension of the induced module. Supporting Kempf vanishing for dominant flag line bundles. Positive-characteristic Andersen–Haboush argument: trivial pushforward of M_((p^r-1)rho), before the Serre twisting calculation. Supporting input: Lemma 2.3, second assertion, and Lemma 2.1, printed pp.153--155: H^0(u,V(lambda))=K v_lambda for p-restricted dominant lambda. With roots positive in Lie(B), V(lambda)=Gamma(M_{-w0 lambda}). Supporting input: Simple-root distributions and infinitesimal subalgebra calculus. Supporting input: pinning-compatible integral-to-geometric distribution comparison, with all positive root divided powers, before simple-root generation. Integral-root-model prerequisite before the comparison: integral Chevalley construction and a positive-root coordinate chart; integral matrix-closure construction: the big cell and its Weyl translates, before identifying the special fibre. Supporting input: Integral closure atlas, exhaustion of each special fibre: exclude extra components using the generic and special identity-component big-cell dimensions. Supporting input: Lemma 3.7 (first assertion, the Iwahori--Matsumoto maximal-boundedness statement) and its application in Proposition 4.3, second paragraph, printed pp.7-8; Cartan double-coset input used to prove the maximal-boundedness prerequisite, before the torus-powers argument. Supporting input: Theorem 1.3, implication (1) to (3), printed pp.1, 6; Definition 3.4 and Lemma 3.6, printed pp.5-6. The complete-DVR cocharacter form, before the non-complete descent of Theorem 4.1. Supporting input: Section 2, Claim 2, printed p.2; Section 3, proof of Theorem 1.3, (1) implies (2), printed p.6, removes the residue-field and splitness restrictions. Supporting input: Claim 2: choose a linear embedding and use reductivity to make the homogeneous quotient affine. Supporting input: Alper, Adequate moduli spaces and geometrically reductive group schemes, Theorem 9.7.5, Proposition 9.3.1(i), Lemma 9.2.5(2),(3), printed pp.522,524,527--528. WANTED local copy; read https://content.algebraicgeometry.nl/2014-4/2014-4-022.pdf. Supporting input: Theorem 9.7.5, reductive-to-geometrically-reductive direction, reductions preceding the final determinant argument, printed p.527; use Lemma 9.2.5(2),(5), Proposition 9.3.1 (base change and descent), Proposition 9.5.1 (quotients and extensions). The result is the conditional reduction, not the geometric reductivity theorem itself; no SGA source is invoked. Supporting input: Theorem 9.7.5 reduction paragraph: etale splitting followed by descent from split groups over the integers. Supporting input: Theorem 6.1.16(2), printed p.196, and Theorem 6.1.17 (Isomorphism Theorem), p.197; pinnings as in Definition 6.1.1, p.186; supporting input for existence in Theorem 6.1.17: Integral prolongation of a given split rational reductive group Supporting input: Proof of Proposition 6.3.16, printed p.229: adjoint representation with finite geometric kernels and affineness of quasi-finite homomorphisms of separated flat finite-type groups over a Dedekind base; the argument is independent of the root-cell construction Supporting input: Relative adjoint representation of a smooth group without an affineness hypothesis.",
+   "via": [
+    "lem-sfb-relative-semisimple-affineness",
+    "lem-sfb-rational-split-integral-prolongation",
+    "lem-sfb-pinned-split-root-classification",
+    "lem-sfb-reductive-etale-integral-models",
+    "lem-sfb-reductive-symmetric-power-dvr-reduction",
+    "lem-sfb-reductive-ring-invariant-power-lifting",
+    "lem-sfb-dvr-reductive-linear-affine-quotient",
+    "lem-sfb-reductive-nodal-equivariant-torsor-extension",
+    "lem-sfb-complete-dvr-cocharacter-cartan",
+    "lem-sfb-split-reductive-dvr-cartan-decomposition",
+    "lem-sfb-split-reductive-integral-maximal-bounded",
+    "lem-sfb-quasi-reductive-special-connectedness",
+    "lem-sfb-integral-chevalley-weyl-atlas",
+    "lem-sfb-chevalley-integral-root-model",
+    "lem-sfb-borel-kostant-distribution-comparison",
+    "lem-sfb-borel-simple-root-distribution-calculus",
+    "lem-sfb-restricted-induced-infinitesimal-invariants",
+    "lem-sfb-flag-frobenius-rho-pushforward",
+    "lem-sfb-dominant-flag-line-kempf-vanishing",
+    "lem-sfb-induced-weyl-dimension-formula",
+    "lem-sfb-steinberg-induced-module-irreducible",
+    "lem-sfb-rho-section-self-duality",
+    "lem-sfb-steinberg-endomorphism-detection",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-smooth-group-relative-adjoint",
+  "worker": "stage1",
+  "summary": "Constructed GL(E) by inverse corner matrices of a finite free summand; proved smoothness by explicit square-zero lifting; identified dual-number kernels with relative differential duals and constructed the conjugation homomorphism by affine-open gluing. Existing general nodes supply all non-elementary inputs; no new nodes, no affineness assumption on G, no change to the statement.",
+  "blueprint": "Realizes the relative adjoint prerequisite of Conrad Proposition 6.3.16 in the recorded created.item chain, ultimately the alteration input of det-thm-sf-ctf-stability-direct-images, proof (3). The current latest direct-image proof was read. The inherited blueprint.from.node is null (the ancestor tool also returns None); its precise inherited place and via chain are retained.",
+  "tool_uses": [
+   {
+    "node": "lem-ag-smooth-relative-differentials-finite-locally-free",
+    "why": "Generic scheme/module tool used exactly for its stated conclusion in the proof; the unit has no replacement for this algebraic geometry input."
+   },
+   {
+    "node": "lem-weil-pbc-quasi-coherent-finite-type-affine",
+    "why": "Generic scheme/module tool used exactly for its stated conclusion in the proof; the unit has no replacement for this algebraic geometry input."
+   },
+   {
+    "node": "lem-weil-pbc-module-pullback-affine-sections",
+    "why": "Generic scheme/module tool used exactly for its stated conclusion in the proof; the unit has no replacement for this algebraic geometry input."
+   },
+   {
+    "node": "lem-sc-affine-standard-cover-finite-projective",
+    "why": "Generic scheme/module tool used exactly for its stated conclusion in the proof; the unit has no replacement for this algebraic geometry input."
+   },
+   {
+    "node": "lem-weil-pbc-glue-sheaves-of-modules",
+    "why": "Generic scheme/module tool used exactly for its stated conclusion in the proof; the unit has no replacement for this algebraic geometry input."
+   },
+   {
+    "node": "lem-trf-scheme-zariski-etale-quasi-coherent-equivalence",
+    "why": "Generic scheme/module tool used exactly for its stated conclusion in the proof; the unit has no replacement for this algebraic geometry input."
+   },
+   {
+    "node": "lem-trf-relative-differential-sheaf-base-change",
+    "why": "Generic scheme/module tool used exactly for its stated conclusion in the proof; the unit has no replacement for this algebraic geometry input."
+   },
+   {
+    "node": "lem-ag-pullback-dual-finite-locally-free",
+    "why": "Generic scheme/module tool used exactly for its stated conclusion in the proof; the unit has no replacement for this algebraic geometry input."
+   },
+   {
+    "node": "lem-pc-proper-base-change",
+    "why": "Generic scheme/module tool used exactly for its stated conclusion in the proof; the unit has no replacement for this algebraic geometry input."
+   },
+   {
+    "node": "lem-weil-pbc-separated-lqf-base-change",
+    "why": "Generic scheme/module tool used exactly for its stated conclusion in the proof; the unit has no replacement for this algebraic geometry input."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-ag-smooth-relative-differentials-finite-locally-free",
+  "lem-weil-pbc-quasi-coherent-finite-type-affine",
+  "lem-weil-pbc-module-pullback-affine-sections",
+  "lem-sc-affine-standard-cover-finite-projective",
+  "lem-weil-pbc-glue-sheaves-of-modules",
+  "lem-trf-scheme-zariski-etale-quasi-coherent-equivalence",
+  "lem-trf-relative-differential-sheaf-base-change",
+  "lem-ag-pullback-dual-finite-locally-free",
+  "lem-pc-proper-base-change",
+  "lem-weil-pbc-separated-lqf-base-change"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q84-6a129b534",
+  "group": "Q84",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q84-6a129b534 (reviewer sub-agent of L); spot-checked: Read the item in full: the statement is unchanged and there are 0 new nodes. Read all 10 steps and the statements of all 32 cited nodes, and Stacks 022W, 0BF5 and 02G1; Conrad is not local, the proof is marked agent-written, and no SGA is used. Steps 1-5 and 7-10 are correct: the corner-matrix GL(E) presentation, the square-zero lift (U=PX~P, V=PY~P, (P+D)(P-D)=P, left inverse = right inverse), the conjugation linearization via (c_g)_*, affine-open gluing, finite type via proper-fp-permanence (f) and qcqs-permanence (1)/(2), and base change via pc-proper-base-change (2), separated-lqf (1) and qcqs (3). Edge cases E=0, varying rank and the zero ring are covered. Fault C1/C4: step 6 identified the etale Omega of lem-sfb-group-space-square-zero-kernel-module with the Zariski Omega^1_{G/S} by an uncited claim ('same universal derivation on an affine etale chart'). FIX: cite the existing same-unit node lem-sfb-scheme-etale-relative-differentials-comparison (F_et ≅ Omega^et with matching derivations, no hypotheses) in the step and in proof_deps, together with the equivalence's pullback comparison and full faithfulness. The closure check finds no cycle. No duplicate found: the affine-only lem-sfb-smooth-affine-adjoint-kernel-calculus is a special case. Batch-5 flags are all accepted: def-trf-scheme-algebraic-space, lem-trf-scheme-zariski-etale-quasi-coherent-equivalence, lem-trf-relative-differential-sheaf-base-change and the two sfb square-zero space lemmas are general foundations, not steps of the trace formula or Poincare duality. All 10 declared generic tool_uses are accepted.; 1 file(s) fixed by the reviewer"
+ }
+}

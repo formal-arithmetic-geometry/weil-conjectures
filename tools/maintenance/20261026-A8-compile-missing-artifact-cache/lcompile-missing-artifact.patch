@@ -1,0 +1,23 @@
+--- a/lcompile.py
++++ b/lcompile.py
+@@ -329,8 +329,10 @@
+     return CA.digest(CA.published_stamp(), *sig)
+ NO_ANSWER = "no answer from the compile server"
+ def cacheable(result):
+-    # a timeout is not stored (server load can cause it); it still reaches every caller attached to the request
++    # Timeouts and missing build artifacts depend on the live environment, not just the published stamp.
++    # A mirror may restore an object without a new publication. Still return the result to attached callers.
+     return not any(rc == 124 or "cannot read the source" in (t or "") or "replaced local_artifacts" in (t or "")
++                   or re.search(r"error: object file [^\n]+ does not exist", t or "")
+                    for rc, t in result)
+ def _runner_jobs(args, sources):
+     """compile_attach runner: compile the caller's snapshot (sources) as remote_jobs does."""
+@@ -348,6 +350,8 @@
+     dep = _dep(jobs, root, lb)
+     n = len(jobs)
+     def valid(result):
++        # Apply the current policy to old entries too; they may predate this exclusion.
++        if not cacheable(result): return False
+         for (f, o, p), (rc, _t) in zip(jobs, result):
+             if o and not p and rc == 0 and not (pathlib.Path(o) / f.relative_to(root).with_suffix(".olean")).is_file(): return False
+         return True

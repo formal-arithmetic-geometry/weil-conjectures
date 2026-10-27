@@ -26,34 +26,52 @@
  ],
  "proof": [
   {
-   "text": "For a cartesian square, apply the sheaf support normalization and restrict along i.\nUnder the open-unit identifications the ordinary exchange sends i*theta followed by the\nopen unit to r* of the other open unit. Resolve k!J by a K-injective I. Exact restriction\npreserves the resolution, and k*I is K-injective because restriction is right adjoint to\nexact extension by zero. The exchange representative formula and naturality along the\nresolution show that the displayed lambda, followed by the adjunct of Gamma, is identity.\nThe representative normalization makes Gamma an isomorphism. The open unit is also an\nisomorphism, so the adjunct is invertible. Its inverse is lambda. Descend the resulting\nnatural isomorphism and apply the inverse adjunction formula to get the asserted counit\nexpression. This works for unbounded J because no truncation occurs.",
+   "text": "Transpose the assumed support-normalization identity using the canonical open comparison, its identity transpose, and the horizontal mate identity for ordinary base change. Cancel the invertible open unit to obtain eta_i followed by i^*(theta) followed by ordinary exchange equals r_*(eta_k). This is the private support_exchange calculation.",
+   "uses": [
+    "lem-weil-pbc-extension-by-zero-adjunction",
+    "def-kun-unbounded-exchange"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Restriction k^* preserves K-injective complexes because it is right adjoint to exact extension by zero. Apply derivedExchangeModuleTermwise with the identity replacement of k^*I. Cancel its comparison isomorphisms to compute the prescribed unbounded exchange on QI. The canonical exact-derived unit formula identifies the derived open unit with the localized termwise unit.",
    "uses": [
     "lem-weil-pbc-derived-exchange-module-termwise",
-    "lem-cbc-proper-support-sheaf-composition",
-    "lem-weil-pbc-extension-by-zero-adjunction",
-    "lem-weil-pbc-extension-by-zero-exact",
-    "lem-weil-pbc-kinjective-total-derived",
-    "lem-weil-pbc-kinjective-hom-derived",
     "lem-weil-pbc-right-adjoint-preserves-kinjective",
-    "def-kun-unbounded-exchange"
+    "lem-weil-pbc-extension-by-zero-exact",
+    "lem-weil-pbc-extension-by-zero-adjunction"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For K=QJ with J K-injective choose a K-injective resolution rho:k!J -> I. Set q=eta_k,J followed by k^*rho. The degreewise identity of step 1 and naturality of ordinary exchange show that eta_i followed by i^*theta, i^*p_*rho and exchange on I is r_*q. Apply Q, the assumed representative normalization of Gamma, step 2, and naturality of the canonical direct-image comparison. Cancel the invertible comparison induced by rho to obtain adjunct(Gamma) followed by the specified exchange equals Rr_*(eta_k). Transport this equality along a K-injective representative isomorphism for arbitrary K.",
+   "uses": [
+    "lem-weil-pbc-kinjective-total-derived",
+    "lem-weil-pbc-derived-exchange-module-termwise",
+    "lem-weil-pbc-extension-by-zero-adjunction"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Define alpha as the adjunct of Gamma and lambda as the specified exchange followed by Rr_* of the inverse open unit. Step 3 gives alpha followed by lambda equal to identity. Alpha is invertible since Gamma and the open unit are invertible. Therefore lambda=alpha inverse, yielding the required natural isomorphism with exactly the specified hom. The inverse adjunction Hom formula gives Gamma=Di_!(lambda inverse) followed by the counit.",
+   "uses": [
+    "lem-weil-pbc-extension-by-zero-adjunction"
    ],
    "elementary": false
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-derived-exchange-module-termwise",
-  "lem-cbc-proper-support-sheaf-composition",
   "lem-weil-pbc-extension-by-zero-adjunction",
-  "lem-weil-pbc-extension-by-zero-exact",
-  "lem-weil-pbc-kinjective-total-derived",
-  "lem-weil-pbc-kinjective-hom-derived",
+  "def-kun-unbounded-exchange",
+  "lem-weil-pbc-derived-exchange-module-termwise",
   "lem-weil-pbc-right-adjoint-preserves-kinjective",
-  "def-kun-unbounded-exchange"
+  "lem-weil-pbc-extension-by-zero-exact",
+  "lem-weil-pbc-kinjective-total-derived"
  ],
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/more-etale.tex",
-  "place": "Tags 0F7B(b); the normalized unbounded representative calculation of the parent proof."
+  "place": "Tag 0F7B, lemma-shriek-proper-and-open, representative construction; its open adjunction normalization formalized by R2."
  },
  "mathlib_searches": [
   {
@@ -124,14 +142,25 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-20",
+  "date": "2026-10-24",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "S2",
+  "group": "R2",
   "result": "pass",
-  "landing": "20261020T221342-L-4177350",
-  "kind": "interface",
+  "landing": "20261024T015903-L-2462495",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  },
- "lean_audit": {}
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ }
 }

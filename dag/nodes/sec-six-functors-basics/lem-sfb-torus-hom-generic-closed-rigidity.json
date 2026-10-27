@@ -1,0 +1,250 @@
+{
+ "id": "lem-sfb-torus-hom-generic-closed-rigidity",
+ "kind": "statement",
+ "title": "Generic closedness rigidity for an existing torus homomorphism",
+ "statement": "Let $S$ be a normal integral locally Noetherian scheme with generic point $\\eta$. Let $P\\to S$ be a torus, meaning a smooth affine commutative group scheme of finite presentation which is fppf locally isomorphic to $\\mathbf G_m^r$ for a finite $r\\geq0$. Let $G\\to S$ be smooth, separated, commutative and of finite presentation, with semiabelian geometric fibres. If an $S$-group homomorphism $f:P\\to G$ is already given and $f_\\eta:P_\\eta\\to G_\\eta$ is a closed immersion, then $f$ is a closed immersion. The scheme, normality, finite-presentation, group, fibre, torus and topology conventions are [def-pc-scheme] [def-pc-integral-scheme] [pqf-def-locnoeth] [def-weil-pbc-normal-ring] [def-sc-group-scheme] [def-sbc-smooth-morphisms] [def-sbc-locally-finite-presentation] [def-sfb-semiabelian-geometric-fibres] [def-weil-pbc-scheme-conventions] [def-pc-base-change] [def-sc-gm-ga] [def-sfb-tori-multiplicative-type] [def-weil-closed-immersion] [def-pc-fppf-site].",
+ "source": {
+  "document": "literature/lan-structures-semi-abelian-schemes.pdf",
+  "place": "Propositions 3.3.1.5 and 3.3.1.7, and §3.1.1; Faltings–Chai I, Propositions 2.7 and 2.9. Local source WANTED; Lan online text read. Abstract-model and existing-homomorphism consequences formulated separately."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-integral-scheme",
+  "pqf-def-locnoeth",
+  "def-weil-pbc-normal-ring",
+  "def-sc-group-scheme",
+  "def-sbc-smooth-morphisms",
+  "def-sbc-locally-finite-presentation",
+  "def-sfb-semiabelian-geometric-fibres",
+  "def-weil-pbc-scheme-conventions",
+  "def-pc-base-change",
+  "def-sc-gm-ga",
+  "def-sfb-tori-multiplicative-type",
+  "def-weil-closed-immersion",
+  "def-pc-fppf-site",
+  "def-sfb-relative-torus"
+ ],
+ "proof": [
+  {
+   "text": "Fix $s\\in S$ and put $R=\\mathcal O_{S,s}$, $F=\\kappa(\\eta)$. The ring $R$ is a Noetherian local domain: choose a Noetherian affine neighbourhood and use [lem-weil-pbc-localization-noetherian]. Use [lem-trf-fppf-covering-base-change] to pull back an fppf splitting cover of $P$ to $\\operatorname{Spec}R$ and choose a point over its closed point. Let $B$ be the local ring there and $k$ its residue field. By [def-pc-fppf-site] and [def-weil-flat-morphism], $B$ is a nonzero flat local $R$-algebra and $P_B$ is split. Choose the cover chart affine of finite presentation; [lem-weil-pbc-finite-type-over-noetherian] and [lem-weil-pbc-localization-noetherian] make $B$ Noetherian. Apply [lem-sfb-split-local-special-kernel-lifting] to $f_B$. It gives $M=\\mathbf Z^r/L$ and a closed subgroup $H=D_B(M)\\subset P_B$ killed by $f_B$, with $H_k=\\ker(f_k)$.",
+   "uses": [
+    "lem-weil-pbc-localization-noetherian",
+    "lem-trf-fppf-covering-base-change",
+    "def-pc-fppf-site",
+    "def-weil-flat-morphism",
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "lem-sfb-split-local-special-kernel-lifting"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://math.stanford.edu/~conrad/papers/luminysga3smf.pdf",
+    "place": "Agent assembly of the local special-kernel lifting consequence of Remark B.1.2 and Corollary B.2.7 with Theorem 5.3.5; Lan Proposition 3.3.1.7 supplies the semiabelian context, not an additional black box."
+   }
+  },
+  {
+   "text": "Put $C=B\\otimes_RF$. For every $0\\ne a\\in R$, tensoring the injection $R\\xrightarrow{a}R$ with $B$ shows that multiplication by $a$ on $B$ is injective [def-weil-pbc-flat-ring-map]. Thus $B\\to C$ is injective (a localized element is zero only if a denominator kills it), and $C\\ne0$. The map $f_C$ is a base change of the given closed immersion $f_\\eta$, hence a closed immersion by [lem-weil-pbc-closed-immersion-base-change]. Its kernel is therefore the identity, so the subgroup $H_C=D_C(M)$ killed by $f_C$ is the identity. A nonzero group element $m\\in M$ would give the nonzero element $e_m-e_0$ in the kernel of the augmentation $C[M]\\to C$, by linear independence of the group-algebra basis and $C\\ne0$. Consequently $M=0$, so $\\ker(f_k)=1$. If $A_s$ is the coordinate algebra of $\\ker(f_{\\kappa(s)})$, every element of its augmentation ideal becomes zero in $A_s\\otimes_{\\kappa(s)}k$. The injectivity in [lem-sfb-field-extension-tensor-injective] forces this ideal to vanish. Thus $\\ker(f_{\\kappa(s)})=1$ for every $s$.",
+   "uses": [
+    "def-weil-pbc-flat-ring-map",
+    "lem-weil-pbc-closed-immersion-base-change",
+    "lem-sfb-field-extension-tensor-injective"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://math.stanford.edu/~conrad/papers/luminysga3smf.pdf",
+    "place": "Agent assembly of the local special-kernel lifting consequence of Remark B.1.2 and Corollary B.2.7 with Theorem 5.3.5; Lan Proposition 3.3.1.7 supplies the semiabelian context, not an additional black box."
+   }
+  },
+  {
+   "text": "Form $K=P\\times_{G,e_G}S$. The unit $e_G$ is a closed immersion by [lem-weil-pbc-section-separated-closed-immersion], since $G\\to S$ is separated. Its base change makes $K\\hookrightarrow P$ closed [lem-weil-pbc-closed-immersion-base-change]. Since $P$ is affine over $S$, the affine description in [def-weil-closed-immersion] writes $K$ over any Noetherian affine base $\\operatorname{Spec}A$ as $\\operatorname{Spec}E$ for a finite-type $A$-algebra $E$. The ring $E$ is Noetherian by [lem-weil-pbc-finite-type-over-noetherian]. Let $J=\\ker(E\\xrightarrow{e_K^*}A)$. The structure map splits this augmentation, so $E=A\\oplus J$ as $A$-modules. Step 2 gives $J\\otimes_A\\kappa(\\mathfrak p)=0$ for every prime $\\mathfrak p$ of $A$. For a prime $\\mathfrak q$ of $E$ lying over $\\mathfrak p$, this implies $J_{\\mathfrak q}=\\mathfrak pE_{\\mathfrak q}J_{\\mathfrak q}$. This ideal is finitely generated because $E$ is Noetherian, and $\\mathfrak pE_{\\mathfrak q}$ is contained in the maximal ideal of $E_{\\mathfrak q}$. Apply [lem-weil-pbc-nakayama-jacobson] to get $J_{\\mathfrak q}=0$. An element nonzero in $J$ has proper annihilator contained in some maximal ideal, where its localization remains nonzero. Hence $J=0$ and $K\\simeq S$.",
+   "uses": [
+    "lem-weil-pbc-section-separated-closed-immersion",
+    "lem-weil-pbc-closed-immersion-base-change",
+    "def-weil-closed-immersion",
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "lem-weil-pbc-nakayama-jacobson"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://math.stanford.edu/~conrad/papers/luminysga3smf.pdf",
+    "place": "Agent assembly of the local special-kernel lifting consequence of Remark B.1.2 and Corollary B.2.7 with Theorem 5.3.5; Lan Proposition 3.3.1.7 supplies the semiabelian context, not an additional black box."
+   }
+  },
+  {
+   "text": "For any $S$-scheme $T$ and $x,y\\in P(T)$ with $f(x)=f(y)$, the element $xy^{-1}$ belongs to $K(T)=\\{1\\}$, so $x=y$. Thus $f$ is a monomorphism on every test scheme, including nonreduced ones. Apply [lem-sfb-relative-torus-monomorphism-closed] to $P$, $G$ and this already given $f$; $P$ is a torus and $G$ is separated of finite presentation by hypothesis. It follows that $f$ is a closed immersion.",
+   "uses": [
+    "lem-sfb-relative-torus-monomorphism-closed"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://math.stanford.edu/~conrad/papers/luminysga3smf.pdf",
+    "place": "Agent assembly of the local special-kernel lifting consequence of Remark B.1.2 and Corollary B.2.7 with Theorem 5.3.5; Lan Proposition 3.3.1.7 supplies the semiabelian context, not an additional black box."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-localization-noetherian",
+  "lem-trf-fppf-covering-base-change",
+  "def-pc-fppf-site",
+  "def-weil-flat-morphism",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-sfb-split-local-special-kernel-lifting",
+  "def-weil-pbc-flat-ring-map",
+  "lem-weil-pbc-closed-immersion-base-change",
+  "lem-sfb-field-extension-tensor-injective",
+  "lem-weil-pbc-section-separated-closed-immersion",
+  "def-weil-closed-immersion",
+  "lem-weil-pbc-nakayama-jacobson",
+  "lem-sfb-relative-torus-monomorphism-closed"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://math.stanford.edu/~conrad/papers/luminysga3smf.pdf",
+  "place": "Agent assembly of the local special-kernel lifting consequence of Remark B.1.2 and Corollary B.2.7 with Theorem 5.3.5; Lan Proposition 3.3.1.7 supplies the semiabelian context, not an additional black box."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "multiplicative.type|torus.*kernel|kernel.*torus",
+   "results": "3 hits; ; returned names/files: Mathlib/Algebra/Group/TypeTags/Hom.lean, Mathlib/Tactic/Translate/ToAdditive.lean, Mathlib/Tactic/Translate/ToAdditive.lean",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected the returned signatures. The hits concern abstract group/Galois theory, coordinate-ring quotients, general scheme descent or properties of already closed immersions, not the stated relative torus theorem. A second semantic phrasing was also searched."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Kernels of homomorphisms from algebraic tori in families are etale locally diagonalizable and a faithful torus homomorphism is a closed immersion",
+   "results": "8 hits; ; returned names/files: AlgebraicGeometry.Scheme.Hom.ker, MonoidHom.ker, AlgebraicGeometry.IsClosedImmersion.instIsAffineHom, AlgebraicGeometry.IsIntegralHom.instOfIsClosedImmersion, AlgebraicGeometry.IsClosedImmersion.isIso_iff_ker_eq_bot, AlgebraicGeometry.isClosedImmersion_diagonal_restrict_diagonalCoverDiagonalRange, RingHom.Etale, AlgebraicGeometry.Scheme.IdealSheafData.ker_fst_of_isClosedImmersion",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected the returned signatures. The hits concern abstract group/Galois theory, coordinate-ring quotients, general scheme descent or properties of already closed immersions, not the stated relative torus theorem. A second semantic phrasing was also searched."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"IsClosedImmersion\"",
+   "results": "12 hits; ; returned names/files: AlgebraicGeometry.IsClosedImmersion.isZariskiLocalAtTarget, AlgebraicGeometry.IsClosedImmersion.instIsMultiplicativeScheme, AlgebraicGeometry.IsClosedImmersion.isStableUnderBaseChange, AlgebraicGeometry.IsClosedImmersion.respectsIso, AlgebraicGeometry.IsClosedImmersion.instSubschemeι, AlgebraicGeometry.IsClosedImmersion, AlgebraicGeometry.instLocallyOfFiniteTypeOfIsClosedImmersion, AlgebraicGeometry.IsClosedImmersion.instIsAffineHom",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected the returned signatures. The hits concern abstract group/Galois theory, coordinate-ring quotients, general scheme descent or properties of already closed immersions, not the stated relative torus theorem. A second semantic phrasing was also searched."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The kernel of a homomorphism from a torus to a semiabelian scheme is a finitely presented group of multiplicative type, and a monomorphism is a closed immersion",
+   "results": "8 hits; ; returned names/files: AlgebraicGeometry.Scheme.kerFunctor_obj, AlgebraicGeometry.Scheme.ker_toSpecΓ, AlgebraicGeometry.IsClosedImmersion.isIso_of_ker_eq, AlgebraicGeometry.IsClosedImmersion.lift, AlgebraicGeometry.Scheme.kerFunctor, AlgebraicGeometry.IsClosedImmersion.isIso_iff_ker_eq_bot, AlgebraicGeometry.isPullback_of_isClosedImmersion, AlgebraicGeometry.IsClosedImmersion.isIso_lift",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected the returned signatures. The hits concern abstract group/Galois theory, coordinate-ring quotients, general scheme descent or properties of already closed immersions, not the stated relative torus theorem. A second semantic phrasing was also searched."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Rigidity of the relative diagonalizable kernel of a torus homomorphism into a semiabelian group scheme",
+   "results": "8 hits; ; returned names/files: AlgebraicGeometry.AffineTargetMorphismProperty.diagonal_respectsIso, AlgebraicGeometry.AffineTargetMorphismProperty.diagonal, AlgebraicGeometry.IsImmersion.instDiagonalScheme, AlgebraicGeometry.HasAffineProperty.diagonal_affineProperty_isLocal, AlgebraicGeometry.instHasAffinePropertyDiagonalSchemeDiagonal, AlgebraicGeometry.FormallyUnramified.instOfIsOpenImmersionDiagonalScheme, AlgebraicGeometry.HasAffineProperty.diagonal_of_openCover, AlgebraicGeometry.HasAffineProperty.diagonal_iff",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected the returned signatures. The hits concern abstract group/Galois theory, coordinate-ring quotients, general scheme descent or properties of already closed immersions, not the stated relative torus theorem. A second semantic phrasing was also searched."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A homomorphism from an S torus to a semiabelian scheme over a normal integral locally Noetherian base is a closed immersion if its generic fibre is a closed immersion",
+   "results": "8 hits; ; returned names/files: AlgebraicGeometry.IsClosedImmersion, AlgebraicGeometry.instIsClosedImmersionLiftCoborder, AlgebraicGeometry.IsClosedImmersion.of_isPreimmersion, AlgebraicGeometry.IsClosedImmersion.hasAffineProperty, AlgebraicGeometry.IsClosedImmersion.iff_isPreimmersion, AlgebraicGeometry.isClosedImmersion_of_comp_eq_id, AlgebraicGeometry.IsClosedImmersion.isClosedEmbedding, AlgebraicGeometry.Scheme.Hom.isClosedEmbedding",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected the returned signatures. The hits concern abstract group/Galois theory, coordinate-ring quotients, general scheme descent or properties of already closed immersions, not the stated relative torus theorem. A second semantic phrasing was also searched."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A homomorphism from a torus to a separated semiabelian group scheme which is a closed immersion generically is a closed immersion over a normal integral base",
+   "results": "8 hits; ; returned names/files: AlgebraicGeometry.instHasOfPostcompPropertySchemeIsClosedImmersionIsSeparated, AlgebraicGeometry.instIsClosedImmersionLiftCoborder, AlgebraicGeometry.IsSeparated.instIsClosedImmersionLiftSchemeId, AlgebraicGeometry.Scheme.instIsClosedImmersionLiftIdOfIsSeparated, AlgebraicGeometry.IsClosedImmersion.of_isPreimmersion, AlgebraicGeometry.IsIntegralHom.instOfIsClosedImmersion, AlgebraicGeometry.IsSeparated.instIsClosedImmersionMapDescScheme, AlgebraicGeometry.IsClosedImmersion.of_comp",
+   "date": "2026-10-24",
+   "verdict": "no match: only general closed-immersion criteria, base-change properties and separated-diagonal lemmas; none proves the asserted torus rigidity. Two related semantic searches were read."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"IsClosedImmersion\"",
+   "results": "12 hits; ; returned names/files: AlgebraicGeometry.IsClosedImmersion.isZariskiLocalAtTarget, AlgebraicGeometry.IsClosedImmersion.instIsMultiplicativeScheme, AlgebraicGeometry.IsClosedImmersion.isStableUnderBaseChange, AlgebraicGeometry.IsClosedImmersion.respectsIso, AlgebraicGeometry.IsClosedImmersion.instSubschemeι, AlgebraicGeometry.IsClosedImmersion, AlgebraicGeometry.instLocallyOfFiniteTypeOfIsClosedImmersion, AlgebraicGeometry.IsClosedImmersion.instIsAffineHom",
+   "date": "2026-10-24",
+   "verdict": "no match: only general closed-immersion criteria, base-change properties and separated-diagonal lemmas; none proves the asserted torus rigidity. Two related semantic searches were read."
+  },
+  {
+   "tool": "grep",
+   "query": "torus|semiabelian|multiplicative.type",
+   "results": "0 hits; ; returned names/files: ; Mathlib/AlgebraicGeometry/ searched",
+   "date": "2026-10-24",
+   "verdict": "no match: only general closed-immersion criteria, base-change properties and separated-diagonal lemmas; none proves the asserted torus rigidity. Two related semantic searches were read."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Generic injectivity of a torus homomorphism to a semiabelian scheme implies closed immersion",
+   "results": "8 hits; ; returned names/files: AlgebraicGeometry.IsClosedImmersion.mk, AlgebraicGeometry.IsClosedImmersion, AlgebraicGeometry.IsClosedImmersion.of_isPreimmersion, AlgebraicGeometry.IsClosedImmersion.isIso_of_injective_of_isAffine, AlgebraicGeometry.IsClosedImmersion.iff_isPreimmersion, AlgebraicGeometry.IsClosedImmersion.casesOn, AlgebraicGeometry.isClosedImmersion_iff_isAffineHom, AlgebraicGeometry.IsClosedImmersion.instOfIsIsoScheme",
+   "date": "2026-10-24",
+   "verdict": "no match: only general closed-immersion criteria, base-change properties and separated-diagonal lemmas; none proves the asserted torus rigidity. Two related semantic searches were read."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-normal-semiabelian-generic-torus-quotient",
+  "date": "2026-10-24",
+  "group": "NW"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "Inherited generic torus quotient input: closedness of the homomorphism after the abstract torus model and generic-homomorphism extension, before identifying its image with schematic closure.",
+   "via": [
+    "lem-sfb-normal-semiabelian-generic-torus-quotient",
+    "lem-sfb-symmetric-line-power-prolongation",
+    "lem-sfb-normal-symmetric-cubical-extension",
+    "lem-sfb-symmetric-ample-power-extension",
+    "lem-sfb-regular-group-generic-ampleness",
+    "lem-sfb-stable-picard-theta-ampleness",
+    "lem-sfb-stable-relative-picard-kummer",
+    "lem-sfb-stable-level-versal-branch-freeness",
+    "lem-sfb-stable-abelian-level-normalization",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-torus-hom-generic-closed-rigidity",
+  "worker": "stage1",
+  "summary": "Kept the statement; replaced the empty proof by a four-step local-kernel argument. Two genuine group-scheme inputs are stated separately: lifting the special kernel over a Noetherian local ring and closedness of a monic relative torus homomorphism. Generic detection is a group-algebra basis calculation; the passage from trivial fibres to a trivial total kernel is written using Nakayama, including nonreduced test schemes. No SGA sources, Lean edits or compilation.",
+  "blueprint": "Realizes the inherited generic torus quotient input: after abstract torus construction and extension of its generic homomorphism, prove the extended map is closed before identifying its image with schematic closure. The latest sk-thm-sf-ctf-stability unit and chapter were read; this is a supporting node below their route, not a change of that route. blueprint_refs.py ancestor reports None; the inherited from.node and via chain are retained.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q22-84140d08e",
+  "group": "Q22",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q22-84140d08e (reviewer sub-agent of L); spot-checked: Read the item, both new nodes and every cited statement. The item statement and stmt_deps are byte-equal to live, and live still has the item unsplit. Proof: step 1 pulls the fppf splitting cover back to O_{S,s} (fppf-covering-base-change), takes the flat Noetherian local ring B there and applies the new lifting node. Step 2 uses flatness (B is R-torsion-free, so B⊗F≠0), the generic closed immersion (so H_C=1) and the group-algebra basis to get M=0; the special kernel and the κ(s)-kernel are then trivial (field-extension-tensor-injective). Step 3: e_G is closed, K=Spec E, E=A⊕J, J_q=pE_qJ_q, and Nakayama gives J=0. Step 4: monic on all T, then the new monic-torus node. All checked against the cited statements. New node lem-sfb-split-local-special-kernel-lifting is true: I checked it myself (field subgroups of D_k(Z^r) are D_k(Z^r/L); a hom trivial modulo a square-zero ideal is trivial for any target group, by comparing degree-m parts; coefficientwise Krull intersection). Tested on [n] with μ_p kernel, the constant map, r=0 and nonreduced R. New node lem-sfb-relative-torus-monomorphism-closed is Conrad, Reductive group schemes, Thm 5.3.5 specialized to tori, over any S with a separated finitely presented target. The Conrad PDF is not in literature/, so I judged it from my knowledge of the theorem. Neither new node restates the item or duplicates an existing node: the existing monic⇒closed and subgroup-classification nodes are field-level, and rg found no relative node. Batch-5 flag: lem-trf-fppf-covering-base-change is a generic Mathlib-leaf topology fact (fppf coverings are stable under base change), not a statement of the trace formula or Poincaré duality nor a step of their proofs, so accepted. No SGA 4 anywhere. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.TorusHomGenericClosedRigidity",
+  "declaration": "AlgebraicGeometry.torusHom_generic_closed_rigidity",
+  "file": "lean/Sheaf/AlgebraicGeometry/TorusHomGenericClosedRigidity.lean",
+  "statement": "theorem torusHom_generic_closed_rigidity {S : Scheme.{u}} [IsIntegral S] [IsLocallyNoetherian S] (hnormal : ∀ s : S, IsDomain (S.presheaf.stalk s) ∧ IsIntegrallyClosed (S.presheaf.stalk s)) (P G : Grp (Over S)) [IsCommMonObj P.X] [IsCommMonObj G.X] [Smooth P.X.hom] [IsAffineHom P.X.hom] [LocallyOfFinitePresentation P.X.hom] [QuasiCompact P.X.hom] [QuasiSeparated P.X.hom] (hP : IsRelativeTorus P.X) [Smooth G.X.hom] [IsSeparated G.X.hom] [LocallyOfFinitePresentation G.X.hom] [QuasiCompact G.X.hom] [QuasiSeparated G.X.hom] (hG : HasSemiabelianGeometricFibres G) (f : P ⟶ G) (hgeneric : IsClosedImmersion (((Over.pullback (S.fromSpecResidueField (genericPoint S))).map f.hom.hom).left)) : IsClosedImmersion f.hom.hom.left",
+  "branch": "sheaf-dag",
+  "by": "NS",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-d19aff71f",
+  "group": "NS",
+  "result": "pass",
+  "note": "Statement matches node clause by clause: normal integral locally Noetherian S (IsIntegral, IsLocallyNoetherian, inline stalk normality), P : Grp (Over S) commutative smooth affine LFP+QC+QS with landed IsRelativeTorus (owner def-sfb-relative-torus, no copy), G commutative smooth separated LFP+QC+QS with HasSemiabelianGeometricFibres, f a Grp morphism; generic hypothesis is the actual Over.pullback of f along fromSpecResidueField (genericPoint S); conclusion IsClosedImmersion f.hom.hom.left. Node vs live: only lean and the added landed stmt_dep def-sfb-relative-torus; lean.statement verbatim. No defs, proof only sorry, source/blueprint docstrings with 4 proof steps, single universe u; edge cases (empty base excluded by integrality, rank 0, non-split, any characteristic) covered. Proof-dep imports exist in live; relative_torus_monomorphism_closed signature fits step 4. Both report sections present. No fixes, nothing compiled."
+ }
+}

@@ -1,0 +1,147 @@
+{
+ "id": "lem-trf-strict-local-parameter-descent",
+ "kind": "statement",
+ "title": "Descent of a specified parameter sublist from a strict local ring",
+ "statement": "Let W be any locally Noetherian scheme [pqf-def-locnoeth], w a point and t:Spec(Omega)->W a geometric point above w [def-weil-geometric-point]. Let a be an ordered finite list of global regular functions. Map these functions to the recorded strict henselization [def-weil-pbc-strict-henselization-limit] by the canonical geometric germs [def-trf-log-regular-pair] and ring comparison [def-trf-log-etale-restriction-stalk-comparison]. Suppose the strict henselization is local and Noetherian and that this image list extends to a regular system of parameters [def-weil-pbc-regular-system-of-parameters]. Then the ordinary germs of exactly the given list a, in the same order, extend to a regular system of parameters of O_(W,w).",
+ "source": {
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tag 06LN (lemma-henselization-regular), proof using minimal generators and residue extension; Tag 07QM; algebra.tex Tags 00KU and 00DV. Specified-prefix consequence used in steps 5--6 of lem-trf-free-log-chart-ordinary-parameters."
+ },
+ "stmt_deps": [
+  "pqf-def-locnoeth",
+  "def-weil-geometric-point",
+  "def-weil-pbc-strict-henselization-limit",
+  "def-trf-log-regular-pair",
+  "def-trf-log-etale-restriction-stalk-comparison",
+  "def-weil-pbc-regular-system-of-parameters"
+ ],
+ "proof": [
+  {
+   "text": "Choose a Noetherian affine neighbourhood of w and use the ordinary-stalk localization and affine strict-local comparison, preserving the canonical maps of all specified functions. Thus A is the algebraic strict henselization of B=O_(W,w).",
+   "uses": [
+    "lem-weil-pbc-affine-open-stalk-localization",
+    "lem-weil-pbc-localization-noetherian",
+    "lem-exc-affine-strict-local-ring-comparison"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "A full list of dim A generators of the maximal ideal makes A regular: its spanFinrank is at most the list length, and Krull dimension is at most spanFinrank. Its cotangent classes span and have cardinality equal to their vector-space dimension, so are a basis. In particular the specified prefix classes are independent.",
+   "uses": [
+    "lem-weil-pbc-regular-local-cotangent-dimension",
+    "def-weil-pbc-regular-system-of-parameters"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Regularity descends from A to B. The canonical cotangent base-change map carries each prescribed class tensored with 1 to the corresponding class in A. Faithfulness of the residue-field extension descends their linear independence.",
+   "uses": [
+    "lem-sc-strict-henselization-regular",
+    "lem-sc-strict-henselization-cotangent-dimension"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Extend these independent classes to a basis of the finite-dimensional cotangent space of B and lift the added vectors to m_B. Nakayama makes the concatenated list generate m_B. By regularity its length is dim B, so it is a regular system of parameters with precisely the prescribed prefix. The empty prefix and dimension-zero case are included.",
+   "uses": [
+    "lem-weil-pbc-nakayama-local-generators",
+    "lem-weil-pbc-regular-local-cotangent-dimension",
+    "def-weil-pbc-regular-system-of-parameters"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-affine-open-stalk-localization",
+  "lem-weil-pbc-localization-noetherian",
+  "lem-exc-affine-strict-local-ring-comparison",
+  "lem-weil-pbc-regular-local-cotangent-dimension",
+  "def-weil-pbc-regular-system-of-parameters",
+  "lem-sc-strict-henselization-regular",
+  "lem-sc-strict-henselization-cotangent-dimension",
+  "lem-weil-pbc-nakayama-local-generators"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tag 06LN (lemma-henselization-regular), proof using minimal generators and residue extension; Tag 07QM; algebra.tex Tags 00KU and 00DV. Specified-prefix consequence used in steps 5--6 of lem-trf-free-log-chart-ordinary-parameters."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "In a log regular scheme with a free monoid chart, the nonunit coordinates extend to a regular system of parameters in each ordinary local ring",
+   "results": "8 hits, including Algebra.IsSmoothAt.exists_notMem_isStandardSmooth, IsLocalRing.isRegular_iff_isWeaklyRegular_of_subset_maximalIdeal and RingTheory.Sequence.IsWeaklyRegular.isRegular_of_isLocalization_of_mem. These concern smooth algebras or regular sequences, not logarithmic charts or descent of prescribed parameter sublists.",
+   "date": "2026-10-26",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "IsRegularLocalRing",
+   "results": "12 hits. Inspected IsRegularLocalRing.of_spanFinrank_maximalIdeal_le, IsRegularLocalRing.of_ringEquiv, IsRegularLocalRing.of_isRegularRing_of_isLocalRing, and isRegularLocalRing_iff. These establish regularity from generators or transport through an isomorphism; none supplies the free log chart presentation, etale restriction, or specified strict-local parameter descent.",
+   "date": "2026-10-26",
+   "verdict": "individual tools only"
+  },
+  {
+   "tool": "grep",
+   "query": "IsRegularSystemOfParameters; etaleRestrict|IsLogRegular|trivialityLocus; strictHenselization.*parameter|parameters.*strictHenselization",
+   "results": "msearch grep returned zero hits for the combined parameter search. Local rg inspected FineSaturatedLogBlowup, LogConditionFineChartLocality, LogEtaleRestrictionStalkComparison, the strict-henselization regularity and cotangent comparison modules, RegularLocalQuotientKernelParameters, and Mathlib RegularLocalRing/Defs. No existing theorem gives any of the three exact intermediate conclusions. The definitions of the four chart functions occur only in the assigned item and are moved verbatim to their definition module.",
+   "date": "2026-10-26",
+   "verdict": "no duplicate; existing ingredients retained"
+  },
+  {
+   "tool": "leansearch",
+   "query": "An ordered subset of a regular system of parameters in a strict henselization descends to a regular parameter subset of the original local ring",
+   "results": "8 hits: instHenselianRingMaximalIdeal, HenselianLocalRing.casesOn, HenselianLocalRing.toIsLocalRing, HenselianLocalRing.recOn, RingTheory.Sequence.IsWeaklyRegular.isRegular_of_isLocalization_of_mem, HenselianLocalRing, Field.henselian, HenselianLocalRing.mk. Inspected returned types; none supplies this exact statement. The parameter queries return regular-sequence, characteristic-p, character or henselian structure results; the coordinate query also returns TopCat.Presheaf.Γgerm, which supplies only the ordinary germ, and unrelated affine-space coordinates.",
+   "date": "2026-10-26",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.FreeLogChartOrdinaryParameters",
+  "date": "2026-10-26",
+  "group": "V2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-trf-free-log-chart-ordinary-parameters",
+   "place": "Steps of the ordinary-parameter proof, factored without changing its statement or the unit route."
+  },
+  "same_as": []
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.StrictLocalParameterDescent",
+  "file": "lean/Sheaf/AlgebraicGeometry/StrictLocalParameterDescent.lean",
+  "declaration": "AlgebraicGeometry.strictLocal_parameters_descent",
+  "statement": "theorem strictLocal_parameters_descent\n    (W : Scheme.{u}) [IsLocallyNoetherian W]\n    (w : W) (Ω : Type u) [Field Ω] [IsAlgClosed Ω]\n    (t : Spec (.of Ω) ⟶ W) (ht : (Scheme.SpecToEquivOfField Ω W t).1 = w)\n    (a : List Γ(W, ⊤))\n    (ha : ∃ (_ : IsLocalRing (Scheme.strictHenselizationRing t))\n        (_ : IsNoetherianRing (Scheme.strictHenselizationRing t)),\n      ∃ b : List (Scheme.strictHenselizationRing t),\n        IsLocalRing.IsRegularSystemOfParameters\n          (a.map (fun f ↦ (strictLocalRingStrictHenselizationIso W t).hom\n            (strictLocalGerm W t (Scheme.Etale.mk (𝟙 W))\n              (CategoryTheory.Over.homMk t (by simp)) f)) ++ b)) :\n    ∃ b : List (W.presheaf.stalk w),\n        IsLocalRing.IsRegularSystemOfParameters\n          (a.map (fun f ↦ W.presheaf.germ ⊤ w (by trivial) f) ++ b)",
+  "branch": "sheaf-dag",
+  "by": "V2",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-a8667",
+  "group": "V2",
+  "result": "fix",
+  "landing": "20261026T083242-L-2306608",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-a8667",
+  "group": "V2",
+  "result": "fix",
+  "landing": "20261026T083242-L-2306608",
+  "kind": "interface",
+  "note": "independent cc review: item theorem signature vs clone + node lean.statement (byte-identical); moved FreeLogChart.* defs vs clone (verbatim, re-exported, 0 importers/users); 3 new sorry statements vs FineSaturatedLogBlowup defs, ILO VI 1.1-1.2/1.6-1.7 and Stacks 06LN/07QM; node stmt_deps vs declaration owners"
+ }
+}

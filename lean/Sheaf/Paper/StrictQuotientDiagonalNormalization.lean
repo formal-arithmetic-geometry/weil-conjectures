@@ -8,6 +8,7 @@ module
 public import Sheaf.Paper.StrictQuotientDiagonalPresentation
 import Sheaf.Paper.StrictQuotientOrdinaryFlatPresentation
 import all Sheaf.Paper.ConstantCompletionEquivalence
+import all Sheaf.Paper.ConstantCompletionCore
 import Sheaf.CategoryTheory.RingedSiteKInjectiveResolutionsOfUniverses
 import Mathlib.CategoryTheory.Localization.Predicate
 import Mathlib.CategoryTheory.Abelian.FunctorCategory

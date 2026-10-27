@@ -1,0 +1,372 @@
+{
+ "id": "lem-sfb-ultrametric-one-vector-extension",
+ "kind": "statement",
+ "title": "Compact admissible balls and bound-preserving one-vector extension",
+ "statement": "Let $K$ be a field [def-weil-field] with a multiplicative absolute value $|\\cdot|:K\\to\\mathbf R_{\\geq0}$, meaning $|a|=0$ exactly when $a=0$, $|1|=1$, and $|ab|=|a||b|$. Assume $|a+b|\\leq\\max(|a|,|b|)$, and assume every closed ball $\\{b\\in K:|b-c|\\leq r\\}$, for $c\\in K$ and $r\\geq0$, is compact for $d(a,b)=|a-b|$. Let $V$ be a $K$-vector space with a norm $\\|\\cdot\\|:V\\to\\mathbf R_{\\geq0}$ satisfying $\\|v\\|=0$ exactly when $v=0$, $\\|av\\|=|a|\\|v\\|$, and $\\|v+w\\|\\leq\\max(\\|v\\|,\\|w\\|)$. Let $U\\subseteq V$ be any linear subspace, $C>0$ a real number, $g:U\\to K$ a $K$-linear map with $|g(u)|\\leq C\\|u\\|$ for every $u\\in U$, and $x\\in V\\setminus U$. For $u\\in U$ put $R_u=C\\|x-u\\|$ and $B_u=\\{b\\in K:|b-g(u)|\\leq R_u\\}$. Each $B_u$ is nonempty and closed, and $R_u\\leq R_v$ implies $B_u\\subseteq B_v$. For every finite $F\\subseteq U$, the set $B_0\\cap\\bigcap_{u\\in F}B_u$ is nonempty, including $F=\\varnothing$, and $\\bigcap_{u\\in U}B_u\\ne\\varnothing$. For every $b$ in this last intersection, the formula $G(u+ax)=g(u)+ab$ ($u\\in U$, $a\\in K$) defines a $K$-linear map $G:U+Kx\\to K$, where $Kx=\\{ax:a\\in K\\}$ and $U+Kx=\\{u+ax:u\\in U,\\ a\\in K\\}$. It restricts to $g$ and satisfies $|G(y)|\\leq C\\|y\\|$ for every $y\\in U+Kx$. No closedness or completeness of $U$ or $V$, and no nontriviality of the scalar absolute value, is required. Linearity means additivity and preservation of scalar multiplication.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+  "place": "Paragraph (3), agent scalar-extension expansion, old proof steps 2–4: admissible balls, finite intersections inside the compact ball B_0, and the explicit one-vector extension formula. Extracted from the seven-step argument of lem-sfb-proper-ultrametric-scalar-extension; this argument is absent from the blueprint itself. Ingleton scalar-valued Hahn–Banach reference WANTED."
+ },
+ "stmt_deps": [
+  "def-weil-field"
+ ],
+ "proof": [
+  {
+   "text": "From [def-weil-field], $(-1)^2=1$; multiplicativity and nonnegativity give $|-1|=1$, so $|-a|=|a|$ and $\\|-v\\|=\\|v\\|$. The ultrametric inequality implies the ordinary triangle inequality. Each radius $R_u$ is nonnegative, and $g(u)\\in B_u$. To check closedness, if $z\\notin B_u$, put $\\epsilon=|z-g(u)|-R_u>0$. Whenever $|w-z|<\\epsilon$, the triangle inequality gives $|w-g(u)|\\geq |z-g(u)|-|w-z|>R_u$. Thus the complement is open.",
+   "uses": [
+    "def-weil-field"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), agent scalar-extension expansion: nonempty closed admissible balls; direct metric calculation"
+   }
+  },
+  {
+   "text": "For $u,v\\in U$, linearity and the bound on $g$ give\n$$|g(u)-g(v)|\\leq C\\|u-v\\|\\leq C\\max(\\|x-u\\|,\\|x-v\\|)=\\max(R_u,R_v).$$\nIf $R_u\\leq R_v$ and $b\\in B_u$, then\n$$|b-g(v)|\\leq\\max(|b-g(u)|,|g(u)-g(v)|)\\leq R_v.$$\nTherefore $B_u\\subseteq B_v$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), agent scalar-extension expansion: ultrametric nesting calculation"
+   }
+  },
+  {
+   "text": "For finite $F\\subseteq U$, the finite nonempty set $F\\cup\\{0\\}$ has an index $u_*$ of least radius. The preceding inclusion gives $B_{u_*}\\subseteq B_0\\cap\\bigcap_{u\\in F}B_u$, so $g(u_*)$ lies in that intersection. This includes $F=\\varnothing$: choose $u_*=0$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), agent scalar-extension expansion: finite intersections, including the empty family"
+   }
+  },
+  {
+   "text": "Give $B_0$ its subspace topology and put $C_u=B_0\\cap B_u$, viewed as a subset of $B_0$. The compact-ball hypothesis says every open cover of this subspace has a finite subcover. Each $C_u$ is closed there: its complement is the intersection of $B_0$ with the open complement of $B_u$. Step 3 gives every finite intersection of the $C_u$, including the empty intersection $B_0$, a point. Apply [lem-sfb-compact-closed-finite-intersection] with $X=B_0$ and $I=U$. Its conclusion is a point of $B_0\\cap\\bigcap_{u\\in U}B_u$, hence of $\\bigcap_{u\\in U}B_u$.",
+   "uses": [
+    "lem-sfb-compact-closed-finite-intersection"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/topology.tex",
+    "place": "Tag 005D, lemma-intersection-closed-in-quasi-compact; applied to the compact subspace B_0"
+   }
+  },
+  {
+   "text": "Fix any $b\\in\\bigcap_{u\\in U}B_u$. Every element of $U+Kx$ has a unique expression $u+ax$: if $u+ax=v+cx$ and $a\\ne c$, the inverse supplied by [def-weil-field] gives $x=(a-c)^{-1}(v-u)\\in U$, a contradiction; thus $a=c$ and $u=v$. Hence $G(u+ax)=g(u)+ab$ is well-defined. Addition of pairs $(u,a)$ and scalar multiplication of pairs give, respectively, $G(y+z)=G(y)+G(z)$ and $G(ty)=tG(y)$ by linearity of $g$ and distributivity. The pair $(u,0)$ gives $G(u)=g(u)$.",
+   "uses": [
+    "def-weil-field"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), agent scalar-extension expansion: uniqueness of coordinates and explicit linear extension"
+   }
+  },
+  {
+   "text": "For $y=u+ax$, if $a=0$ the required bound is that of $g$. If $a\\ne0$, put $v=-a^{-1}u\\in U$, using [def-weil-field]. Then $y=a(x-v)$ and $g(u)=-ag(v)$, so admissibility of $b$ gives\n$$|G(y)|=|a|\\,|b-g(v)|\\leq |a|C\\|x-v\\|=C\\|y\\|.$$\nThis holds for every admissible $b$. The proof uses neither a scalar of absolute value strictly between zero and one nor any closedness or completeness of $U$ or $V$.",
+   "uses": [
+    "def-weil-field"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), agent scalar-extension expansion: norm bound, separately for zero and nonzero scalar"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-field",
+  "lem-sfb-compact-closed-finite-intersection"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+  "place": "Paragraph (3), scalar-extension obligation extracted from the parent; explicit admissible-ball argument supplied by Q117, using Stacks Tag 005D for compactness. This argument is absent from the blueprint; Ingleton reference WANTED."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Over an ultrametric normed field with compact closed balls extend a bounded linear functional from U to U plus K x with the same bound C",
+   "results": {
+    "t": "2026-10-22T06:10:10Z",
+    "tool": "leanfinder",
+    "query": "Over an ultrametric normed field with compact closed balls extend a bounded linear functional from U to U plus K x with the same bound C",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "exists_extension_norm_eq",
+     "Real.exists_extension_norm_eq",
+     "exists_extension_of_le_sublinear",
+     "riesz_lemma_of_norm_lt",
+     "LinearMap.extendOfNorm",
+     "BoundedContinuousFunction.exists_norm_eq_restrict_eq",
+     "LinearMap.norm_extendOfNorm_apply_le",
+     "LinearMap.extendOfNorm_eq"
+    ],
+    "digest": "e1d95c8dc26b08d9"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: read Mathlib/Analysis/Normed/Module/HahnBanach.lean:40-46 (IsRCLikeNormedField), Analysis/Convex/Cone/Extension.lean:160-164 (real scalars), Analysis/Normed/Operator/Extend.lean:17-23,51-56,89-91 (dense embedding), and LinearAlgebra/Basis/VectorSpace.lean:289-296 (no bound). None states bound-preserving extension by one vector over a general ultrametric field. The algebraic extension formula is only a component of this compact-ball lemma."
+  },
+  {
+   "tool": "grep",
+   "query": "one.*(dimensional|vector).*extension|ultrametric.*extend|exists_extension_of_le_sublinear",
+   "results": {
+    "t": "2026-10-22T06:10:22Z",
+    "tool": "grep",
+    "query": "one.*(dimensional|vector).*extension|ultrametric.*extend|exists_extension_of_le_sublinear",
+    "sub": "Analysis",
+    "ok": true,
+    "n_hits": 6,
+    "note": "",
+    "top": [
+     "Mathlib/Analysis/LocallyConvex/HahnBanach.lean",
+     "Mathlib/Analysis/LocallyConvex/Separation.lean",
+     "Mathlib/Analysis/Convex/Cone/Extension.lean",
+     "Mathlib/Analysis/Convex/Cone/Extension.lean",
+     "Mathlib/Analysis/Normed/Unbundled/InvariantExtension.lean",
+     "Mathlib/Analysis/Normed/Unbundled/InvariantExtension.lean"
+    ],
+    "digest": "ab4e6f35a7b2b5fe"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: read Mathlib/Analysis/Normed/Module/HahnBanach.lean:40-46 (IsRCLikeNormedField), Analysis/Convex/Cone/Extension.lean:160-164 (real scalars), Analysis/Normed/Operator/Extend.lean:17-23,51-56,89-91 (dense embedding), and LinearAlgebra/Basis/VectorSpace.lean:289-296 (no bound). None states bound-preserving extension by one vector over a general ultrametric field. The algebraic extension formula is only a component of this compact-ball lemma."
+  },
+  {
+   "tool": "leansearch",
+   "query": "In an ultrametric normed vector space over a field with compact closed balls a bounded scalar linear functional extends to the span of one additional vector preserving its bound",
+   "results": {
+    "t": "2026-10-22T06:10:23Z",
+    "tool": "leansearch",
+    "query": "In an ultrametric normed vector space over a field with compact closed balls a bounded scalar linear functional extends to the span of one additional vector preserving its bound",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "Real.exists_extension_norm_eq",
+     "exists_extension_norm_eq",
+     "ContinuousLinearMap.norm_extendTo𝕜'_bound",
+     "ContinuousLinearMap.extendTo𝕜",
+     "ContinuousLinearMap.norm_extendTo𝕜",
+     "ContinuousLinearMap.norm_extendTo𝕜'",
+     "LinearMap.mem_span_iff_bound",
+     "Bornology.IsVonNBounded.extend_scalars"
+    ],
+    "digest": "a6e99ae3f8bb088f"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: read Mathlib/Analysis/Normed/Module/HahnBanach.lean:40-46 (IsRCLikeNormedField), Analysis/Convex/Cone/Extension.lean:160-164 (real scalars), Analysis/Normed/Operator/Extend.lean:17-23,51-56,89-91 (dense embedding), and LinearAlgebra/Basis/VectorSpace.lean:289-296 (no bound). None states bound-preserving extension by one vector over a general ultrametric field. The algebraic extension formula is only a component of this compact-ball lemma."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"LinearMap\", \"exists\", \"extend\"",
+   "results": {
+    "t": "2026-10-22T06:10:23Z",
+    "tool": "loogle",
+    "query": "\"LinearMap\", \"exists\", \"extend\"",
+    "sub": "",
+    "ok": true,
+    "n_hits": 2,
+    "note": "",
+    "top": [
+     "LinearMap.exists_extend",
+     "LinearMap.exists_extend_of_notMem"
+    ],
+    "digest": "d2721ccaccc9741c"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: read Mathlib/Analysis/Normed/Module/HahnBanach.lean:40-46 (IsRCLikeNormedField), Analysis/Convex/Cone/Extension.lean:160-164 (real scalars), Analysis/Normed/Operator/Extend.lean:17-23,51-56,89-91 (dense embedding), and LinearAlgebra/Basis/VectorSpace.lean:289-296 (no bound). None states bound-preserving extension by one vector over a general ultrametric field. The algebraic extension formula is only a component of this compact-ball lemma."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Bound preserving one dimensional extension nonarchimedean Hahn Banach choose the value at x from intersection of balls centered at g u of radius C norm x minus u",
+   "results": {
+    "t": "2026-10-22T06:11:40Z",
+    "tool": "leanfinder",
+    "query": "Bound preserving one dimensional extension nonarchimedean Hahn Banach choose the value at x from intersection of balls centered at g u of radius C norm x minus u",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "RieszExtension.step",
+     "exists_extension_of_le_sublinear",
+     "RieszExtension.exists_top",
+     "riesz_extension",
+     "geometric_hahn_banach_point_point",
+     "RCLike.geometric_hahn_banach_point_point",
+     "riesz_lemma_of_norm_lt",
+     "Real.exists_extension_norm_eq"
+    ],
+    "digest": "8a49f2706d7262cd"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: read Mathlib/Analysis/Normed/Module/HahnBanach.lean:40-46 (IsRCLikeNormedField), Analysis/Convex/Cone/Extension.lean:160-164 (real scalars), Analysis/Normed/Operator/Extend.lean:17-23,51-56,89-91 (dense embedding), and LinearAlgebra/Basis/VectorSpace.lean:289-296 (no bound). None states bound-preserving extension by one vector over a general ultrametric field. The algebraic extension formula is only a component of this compact-ball lemma."
+  },
+  {
+   "tool": "grep",
+   "query": "theorem.*(nonempty_iInter|inter_iInter_nonempty)|lemma.*(nonempty_iInter|inter_iInter_nonempty)",
+   "results": {
+    "t": "2026-10-22T11:48:41Z",
+    "tool": "grep",
+    "query": "theorem.*(nonempty_iInter|inter_iInter_nonempty)|lemma.*(nonempty_iInter|inter_iInter_nonempty)",
+    "sub": "Topology",
+    "ok": true,
+    "n_hits": 11,
+    "note": "",
+    "top": [
+     "Mathlib/Topology/MetricSpace/Bounded.lean",
+     "Mathlib/Topology/MetricSpace/Bounded.lean",
+     "Mathlib/Topology/Compactness/Compact.lean",
+     "Mathlib/Topology/Compactness/Compact.lean",
+     "Mathlib/Topology/Compactness/Compact.lean",
+     "Mathlib/Topology/Compactness/Lindelof.lean",
+     "Mathlib/Topology/Compactness/CompactSystem.lean",
+     "Mathlib/Topology/Compactness/CompactSystem.lean"
+    ],
+    "digest": "228fd76a2158b6a2"
+   },
+   "date": "2026-10-22",
+   "verdict": "match for the existing compactness dependency, not for the item: CompactSpace.iInter_nonempty (Mathlib/Topology/Compactness/Compact.lean:825–829) and IsCompact.inter_iInter_nonempty (295–300); reused lem-sfb-compact-closed-finite-intersection, no new node."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A compact set and a family of closed sets whose every finite intersection meets the compact set have a common point",
+   "results": {
+    "t": "2026-10-22T11:48:42Z",
+    "tool": "leansearch",
+    "query": "A compact set and a family of closed sets whose every finite intersection meets the compact set have a common point",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "IsCompact.inter_iInter_nonempty",
+     "isCompact_iff_finite_subfamily_closed",
+     "CompactSpace.iInter_nonempty",
+     "isCompact_of_finite_subfamily_closed",
+     "compactSpace_of_finite_subfamily_closed",
+     "IsCompact.elim_finite_subfamily_isClosed_subtype",
+     "IsCompact.elim_finite_subfamily_closed",
+     "IsCompact.elim_directed_family_closed"
+    ],
+    "digest": "ad6979a23858f372"
+   },
+   "date": "2026-10-22",
+   "verdict": "match for the existing compactness dependency, not for the item: CompactSpace.iInter_nonempty (Mathlib/Topology/Compactness/Compact.lean:825–829) and IsCompact.inter_iInter_nonempty (295–300); reused lem-sfb-compact-closed-finite-intersection, no new node."
+  },
+  {
+   "tool": "loogle",
+   "query": "IsCompact, \"iInter\", \"Nonempty\"",
+   "results": {
+    "t": "2026-10-22T11:48:42Z",
+    "tool": "loogle",
+    "query": "IsCompact, \"iInter\", \"Nonempty\"",
+    "sub": "",
+    "ok": true,
+    "n_hits": 3,
+    "note": "",
+    "top": [
+     "IsCompact.nonempty_iInter_of_directed_nonempty_isCompact_isClosed",
+     "IsCompact.nonempty_iInter_of_sequence_nonempty_isCompact_isClosed",
+     "IsCompact.inter_iInter_nonempty"
+    ],
+    "digest": "7aa1ab991bd37501"
+   },
+   "date": "2026-10-22",
+   "verdict": "match for the existing compactness dependency, not for the item: CompactSpace.iInter_nonempty (Mathlib/Topology/Compactness/Compact.lean:825–829) and IsCompact.inter_iInter_nonempty (295–300); reused lem-sfb-compact-closed-finite-intersection, no new node."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A family of closed sets with the finite intersection property inside a compact set has nonempty intersection",
+   "results": {
+    "t": "2026-10-22T11:48:43Z",
+    "tool": "leanfinder",
+    "query": "A family of closed sets with the finite intersection property inside a compact set has nonempty intersection",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "CompactSpace.iInter_nonempty",
+     "IsCompact.inter_iInter_nonempty",
+     "IsCompact.nonempty_iInter_of_sequence_nonempty_isCompact_isClosed",
+     "IsCompact.elim_finite_subfamily_closed",
+     "IsCompact.nonempty_sInter_of_directed_nonempty_isCompact_isClosed",
+     "isCompact_iff_finite_subfamily_closed",
+     "IsCompact.nonempty_iInter_of_directed_nonempty_isCompact_isClosed",
+     "IsCompact.elim_finite_subfamily_isClosed_subtype"
+    ],
+    "digest": "77c4595544f27413"
+   },
+   "date": "2026-10-22",
+   "verdict": "match for the existing compactness dependency, not for the item: CompactSpace.iInter_nonempty (Mathlib/Topology/Compactness/Compact.lean:825–829) and IsCompact.inter_iInter_nonempty (295–300); reused lem-sfb-compact-closed-finite-intersection, no new node."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-proper-ultrametric-scalar-extension",
+  "date": "2026-10-22",
+  "group": "Q139"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, Paragraph (3), arithmetic coefficient-topology expansion supporting finite-field boundary detection; old proof steps 2–4: admissible balls, finite intersections inside the compact ball B_0, and the explicit one-vector extension formula",
+   "via": [
+    "lem-sfb-proper-ultrametric-scalar-extension",
+    "lem-sfb-finite-subfield-continuous-linear-retraction",
+    "lem-sfb-profinite-algcl-derived-invariants-comparison",
+    "lem-sfb-norm-algcl-cohomology-topology-comparison",
+    "lem-sfb-supported-finite-stage-topology-defect",
+    "lem-sfb-constructible-algcl-topology-comparison",
+    "lem-sfb-continuous-algcl-proper-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sfb-ultrametric-one-vector-extension",
+  "worker": "stage1",
+  "summary": "Preserved the statement and all inherited metadata. Supplied six explicit proof steps: ball closedness, nesting, finite intersections, compactness in B_0, unique coordinates and linearity, and the bound for each admissible value. Reused the existing compact finite-intersection Mathlib leaf; no new nodes. Checked empty families, equal radii, zero scalar, trivial absolute values, arbitrary subspaces, every cited statement, local project declarations and inherited Mathlib candidates.",
+  "blueprint": "det-thm-sf-ctf-stability-direct-images proof paragraph (3), arithmetic coefficient-topology expansion supporting finite-field boundary detection; extracted parent old steps 2–4. This scalar argument is not in the blueprint. Whole-blueprint searches for ultrametric, Hahn, finite intersection property, closed sets and scalar extension found no equivalent blueprint node. blueprint_refs ancestor returns None, so inherited blueprint.from.node null and via are preserved; the actual textual anchor is recorded here and in inherited from.place."
+ },
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q117-bb6732018",
+  "group": "Q117",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q117-bb6732018 (reviewer sub-agent of L); spot-checked: I read the whole item and its six steps. There are no new nodes. Step 4 uses only the existing Mathlib leaf lem-sfb-compact-closed-finite-intersection (Stacks 005D, topology.tex:1723; CompactSpace.iInter_nonempty, Compact.lean:825), which is in the same unit, and it applies it to the compact subspace B_0 with C_u = B_0∩B_u, which are relatively closed. Steps 1–3 and 5–6 are elementary from def-weil-field and the hypotheses, and I checked each one. |−1|=1 gives the symmetry. ‖u−v‖≤max(‖x−u‖,‖x−v‖) gives |g(u)−g(v)|≤max(R_u,R_v), so the balls nest the right way. The least radius on F∪{0} handles F=∅. The coordinates are unique because x=(a−c)^{-1}(v−u) would lie in U. With v=−a^{-1}u we get y=a(x−v) and G(y)=a(b−g(v)), so |G(y)|≤C‖y‖ with the same C. The statement is self-contained and matches what the parent lem-sfb-proper-ultrametric-scalar-extension step 2 uses, which is exactly the local extension condition of lem-sfb-bounded-extension-zorn. It does not restate a clause of the parent. Blueprint main-20261015 direct-images paragraph (3) has no such argument, and proof_origin=agent is honest about that. Small cases check out: Q_p² with the max norm, U=Q_p e1, g=first coordinate, C=1, x=e2 gives b=0; U=0 works; trivial absolute value means a finite field. A scan of the DAG for Hahn, ultrametric, spherically and one-vector found no duplicate. No SGA, no repair note, no tool_uses. Advisory: the Ingleton reference called WANTED is not listed in literature/LIST.md."
+ },
+ "lean": {
+  "module": "Sheaf.Analysis.Normed.Module.UltrametricOneVectorExtension",
+  "declaration": "LinearMap.exists_one_vector_extension_of_isCompact_closedBall",
+  "file": "lean/Sheaf/Analysis/Normed/Module/UltrametricOneVectorExtension.lean",
+  "statement": "theorem exists_one_vector_extension_of_isCompact_closedBall {K : Type u} [NormedField K] (hK : ∀ a b : K, ‖a + b‖ ≤ max ‖a‖ ‖b‖) (hcompact : ∀ (c : K) (r : ℝ), 0 ≤ r → IsCompact (Metric.closedBall c r)) {V : Type v} [NormedAddCommGroup V] [NormedSpace K V] (hV : ∀ y z : V, ‖y + z‖ ≤ max ‖y‖ ‖z‖) (U : Submodule K V) (C : ℝ) (hC : 0 < C) (g : U →ₗ[K] K) (hg : ∀ u : U, ‖g u‖ ≤ C * ‖(u : V)‖) (x : V) (hx : x ∉ U) : (∀ u : U, (Metric.closedBall (g u) (C * ‖x - (u : V)‖)).Nonempty ∧ IsClosed (Metric.closedBall (g u) (C * ‖x - (u : V)‖))) ∧ (∀ u w : U, C * ‖x - (u : V)‖ ≤ C * ‖x - (w : V)‖ → Metric.closedBall (g u) (C * ‖x - (u : V)‖) ⊆ Metric.closedBall (g w) (C * ‖x - (w : V)‖)) ∧ (∀ F : Finset U, (Metric.closedBall (g 0) (C * ‖x - ((0 : U) : V)‖) ∩ ⋂ u ∈ F, Metric.closedBall (g u) (C * ‖x - (u : V)‖)).Nonempty) ∧ (⋂ u : U, Metric.closedBall (g u) (C * ‖x - (u : V)‖)).Nonempty ∧ (∀ b ∈ ⋂ u : U, Metric.closedBall (g u) (C * ‖x - (u : V)‖), ∃ G : ↥(U ⊔ Submodule.span K {x}) →ₗ[K] K, (∀ (u : U) (a : K) (y : ↥(U ⊔ Submodule.span K {x})), (y : V) = (u : V) + a • x → G y = g u + a * b) ∧ G.comp (Submodule.inclusion le_sup_left) = g ∧ ∀ y : ↥(U ⊔ Submodule.span K {x}), ‖G y‖ ≤ C * ‖(y : V)‖)",
+  "branch": "newtargets-dag",
+  "by": "Q122",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-3f3f7d5b1",
+  "group": "Q122",
+  "result": "pass",
+  "note": "Clause-by-clause match. NormedField/NormedSpace render the node's multiplicative ultrametric absolute value and norm (triangle inequality follows from the ultrametric one; norm_smul is an equality over a field). Hypotheses hK, hcompact (all centers, r>=0), hV, arbitrary Submodule U, C>0, linear g with bound, x not in U, with no nontriviality, completeness or closedness assumed. Conclusions: balls nonempty and closed; R_u<=R_w implies B_u⊆B_w; for every Finset F, B_0 ∩ ⋂_F B_u nonempty (F empty included); total intersection nonempty; for every b in it, a linear G on U ⊔ span{x} with formula G(u+a•x)=g u+a*b, restriction to g and bound C. Edge cases checked: F empty, U=0, a=0, trivial absolute value, radius 0. Universes u,v independent. lean.statement verbatim equals the file signature; node differs from live only in lean; stmt_deps def-weil-field is enough. No defs, proof sorry only, docstrings carry source place, blueprint tag and six proof steps; report has Worker report and Second reading sections. Neighbouring AdmissibleScalarBalls and ContractiveExtensionFromAdmissibleValues are different weaker nodes, not duplicates. Not recompiled (no change); report records a clean scompile."
+ }
+}

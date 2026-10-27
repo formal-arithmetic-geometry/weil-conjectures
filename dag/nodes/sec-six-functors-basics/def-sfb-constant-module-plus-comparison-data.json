@@ -1,0 +1,107 @@
+{
+ "id": "def-sfb-constant-module-plus-comparison-data",
+ "kind": "definition",
+ "title": "Bounded-below constant-module comparison data",
+ "status": "split",
+ "statement": "For the normalized derived constant-module comparisons [def-sfb-constant-module-derived-comparison-data] of a geometric constant-module datum [def-sfb-constant-module-geometric-comparison-data], define PlusIdentification to consist of inverse-image and right-derived direct-image comparison isomorphisms on $D^+$, where $D^+$ is the full subcategory of the ordinary derived category [def-weil-abstract-derived-category] whose cohomology vanishes below some integer. Require that both isomorphisms commute with the inclusions into the unbounded derived categories and with the canonical bounded-below/unbounded right-derived direct-image comparisons. Require the full bounded-below Hom adjunction equation and equality of each included bounded-below counit with the corresponding unbounded counit, using those canonical comparison isomorphisms. This defines a package of equations, without asserting existence or restricting the unbounded tensor inputs.",
+ "stmt_deps": [
+  "def-sfb-constant-module-derived-comparison-data",
+  "def-sfb-constant-module-geometric-comparison-data",
+  "def-weil-abstract-derived-category"
+ ],
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 07A4 (lemma-pullback-tensor-product) and 07A6 (lemma-adjoint), comparison and normalization of the constructions; bounded-below comparison uses derived.tex Tags 013K and 070J."
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "constant.*(adjunction|derived)|Constant.*(Adjunction|Derived)",
+   "results": "{\"ok\": true, \"n_hits\": 7, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Sites/ConstantSheaf.lean\", \"Mathlib/CategoryTheory/Sites/ConstantSheaf.lean\", \"Mathlib/CategoryTheory/Sites/ConstantSheaf.lean\", \"Mathlib/CategoryTheory/Sites/ConstantSheaf.lean\", \"Mathlib/CategoryTheory/Sites/GlobalSections.lean\", \"Mathlib/CategoryTheory/Sites/GlobalSections.lean\", \"Mathlib/CategoryTheory/Sites/LocalSite.lean\"], \"digest\": \"931c4648b1454937\"}",
+   "date": "2026-10-22",
+   "verdict": "no exact match; existing components reused"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Data for constant scalar geometric module adjunctions normalized on underlying sheaves, and derived comparison data with localization squares, tensor maps and bounded below counits",
+   "results": "{\"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.constantSheafAdj_counit_app\", \"SheafOfModules.PullbackConstruction.adjunction\", \"CategoryTheory.constantSheafΓAdj\", \"SheafOfModules.pushforwardPushforwardAdj\", \"CategoryTheory.Sheaf.isConstant_iff_isIso_counit_app\", \"Condensed.discreteUnderlyingAdj\", \"ModuleCat.extendRestrictScalarsAdj\", \"CategoryTheory.constantSheafAdj\"], \"digest\": \"c12b48843392bca4\"}",
+   "date": "2026-10-22",
+   "verdict": "no exact match; existing components reused"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Geometric constant module scalar restriction derived identification with normalized Hom bijections and bounded below inclusion squares",
+   "results": "{\"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"ContinuousLinearMap.coe_restrictScalarsIsometry\", \"ContinuousLinearMap.restrictScalarsIsometry\", \"ContinuousMultilinearMap.norm_restrictScalars\", \"ContinuousLinearMap.coe_restrictScalarsL\", \"ContinuousLinearMap.isEmbedding_restrictScalars\", \"NormedSpace.restrictScalars_eq\", \"ContinuousLinearMap.coe_restrict_scalarsL'\", \"ContinuousAlternatingMap.norm_restrictScalars\"], \"digest\": \"aa193a5990967bf0\"}",
+   "date": "2026-10-22",
+   "verdict": "no exact match; existing components reused"
+  },
+  {
+   "tool": "grep",
+   "query": "rg -n \"TensorSquare|ProjectionSquare|TensorNormalization|GeometricData|OrdinaryIdentification|DerivedIdentification|PlusIdentification\" lean/WeilConjectures lean/Sheaf dag/nodes",
+   "results": "No existing declaration supplies these normalized comparison predicates. Existing ordinary scalar adjunctions, derived scalar tensors, canonical tensor pullback and adjunction projection maps are reused, not redefined. Blueprint search found no node for these packages.",
+   "date": "2026-10-22",
+   "verdict": "no exact match"
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-constant-module-derived-projection-identification",
+  "date": "2026-10-22",
+  "group": "Q03"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-thm-sfb-proper-base-change-finite",
+   "place": "Proof paragraph (3): canonical projection map transport, not only its endpoints; equality of the tensor and counit constructions in returned item steps 2-4.",
+   "via": [
+    "lem-sfb-constant-module-derived-projection-identification",
+    "lem-sfb-projection-comparison-etale-proetale"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sfb-proper-base-change",
+ "lean": {
+  "module": "Sheaf.CategoryTheory.ConstantModulePlusComparisonData",
+  "declaration": "CategoryTheory.ConstantModuleDerivedProjection.PlusIdentification",
+  "declarations": [
+   "CategoryTheory.ConstantModuleDerivedProjection.PlusIdentification"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/ConstantModulePlusComparisonData.lean",
+  "statement": "structure PlusIdentification (d : GeometricData J K A) (x : ExactData d) (o : OrdinaryIdentification d) (t : FixedTensorData d) (cJ : DerivedComparison.{u, v, w, w} J A) (cK : DerivedComparison.{u, v, w, w} K A) (e : DerivedIdentification d x o t cJ cK)",
+  "branch": "newtargets-dag",
+  "by": "Q03",
+  "date": "2026-10-22",
+  "existing": false
+ },
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-df5e8cb69",
+  "group": "Q03",
+  "result": "fix",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-df5e8cb69",
+  "group": "Q03",
+  "result": "fix",
+  "note": "Re-delivery after RETURN 6574ec19 (H13). Both dependency node files are now byte-identical to live; the three OfUniverses helpers moved into the def-sfb-constant-module-geometric-comparison-data module (bodies identical to the deleted helper modules); item, derived, plus and squares modules unchanged since the fully reviewed previous delivery. New fault H4/H9/H12: CategoryTheory.RingedToposMorphismOfUniverses is already landed in Sheaf.Paper.SequenceSiteCompletionProjection, owned by def-pur-ringed-topos-morphism-of-universes (Q111, on the base since 2026-10-21 13:57 UTC; EssentiallySmall.{r}, same fields), so the delivery's copy clashes by full name and duplicates the notion. FIX: geometric module imports the landed structure and uses it as @RingedToposMorphismOfUniverses D C _ _ (essentiallySmallSelf.{v} D) (essentiallySmallSelf.{v} C) K J; item module adds file-local attribute [-instance] WeilConjectures.SemilinearSections.hasDerived, because that imported global instance hijacked etale HasDerivedCategory synthesis (7 errors); #synth confirms ofIsGrothendieckAbelian as before. Geometric node json adds stmt_dep def-pur-ringed-topos-morphism-of-universes, cites it in its statement and drops the removed declaration; item lean-record pins the verbatim statement; report gets an appended maintainer section. nt_compile --json of all 5 siblings clean: 4.6/19.0/48.5/4.4/7.9 s."
+ }
+}

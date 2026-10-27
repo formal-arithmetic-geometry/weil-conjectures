@@ -1,0 +1,130 @@
+{
+ "id": "lem-sf-native-weil-representative-uncurry",
+ "kind": "statement",
+ "title": "Forgetting inverse transposition on native representatives",
+ "statement": "Fix the tensor presentation N of [def-sf-native-weil-tensor-presentation] for the closed structures S,W and tensor comparison t, together with native adjunction normalization hW and a Hom comparison χ satisfying NativeHomRepresentativeCompatibility. If P,Q are NativeTensorKFlat and I is K-injective, then for every chain map φ:Q→Hom(P,I), put f=Q(φ);M.weilRepresentatives.model(P,I).inv. Forgetting the inverse W-transpose of f equals t at (Q(Q),Q(P)) followed by the inverse S-transpose of F(f);χ at (Q(P),Q(I)). This asserts compatibility on specified representatives, not existence of a closed structure or evaluation on all derived objects.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-package/cor-coef-verdier-weil-equivariance.proof.md",
+  "place": "Native tensor model, evaluation compatibility in step 3; Stacks 08J9, 0A97; ringed_forget_normalized_uncurry"
+ },
+ "stmt_deps": [
+  "def-sf-native-weil-tensor-presentation"
+ ],
+ "proof": [
+  {
+   "text": "Apply the Hom comparison square for an unrestricted source to P,I, obtaining a projection-normalized chain isomorphism c and K-injectivity of UI. Normalize φ by hW and its forgotten curried map Uφ;c by N.ordinaryNormalization.",
+   "uses": [
+    "lem-sf-native-hom-evaluation-square-all-sources",
+    "def-sf-native-weil-tensor-presentation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-package/cor-coef-verdier-weil-equivariance.proof.md",
+    "place": "Native tensor model, evaluation compatibility in step 3; Stacks 08J9, 0A97; ringed_forget_normalized_uncurry"
+   }
+  },
+  {
+   "text": "On each ordinary (p,q) tensor summand, N.chain_summand identifies composition with N.chain.inv with N.underived.inv followed by the forgotten native inclusion. The projection equation for c and N.underived_uncurry identify the two uncurried component maps. The coproduct universal property yields equality of the total chain maps. Localize and paste the Hom square, the two normalization equations, and N.model_forget. Naturality of inverse transposition under the localization factorization gives the required equality.",
+   "uses": [
+    "def-sf-native-weil-tensor-presentation",
+    "lem-sf-native-weil-chain-uncurry-forget"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-package/cor-coef-verdier-weil-equivariance.proof.md",
+    "place": "Native tensor model, evaluation compatibility in step 3; Stacks 08J9, 0A97; ringed_forget_normalized_uncurry"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sf-native-hom-evaluation-square-all-sources",
+  "def-sf-native-weil-tensor-presentation",
+  "lem-sf-native-weil-chain-uncurry-forget"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-package/cor-coef-verdier-weil-equivariance.proof.md",
+  "place": "Native tensor model, evaluation compatibility in step 3; Stacks 08J9, 0A97; ringed_forget_normalized_uncurry"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "NativeHomRepresentativeCompatibility|NativeAdjunctionNormalization|uncurry.*naturality",
+   "results": "Mathlib/CategoryTheory/Monoidal/Closed/Ideal.lean; Mathlib/CategoryTheory/Monoidal/Closed/Basic.lean; Mathlib/CategoryTheory/Monoidal/Closed/FunctorCategory/Basic.lean",
+   "date": "2026-10-27",
+   "verdict": "generic tools only; no exact native representative statement"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"homEquiv_naturality_right_symm\"",
+   "results": "CategoryTheory.Adjunction.homEquiv_naturality_right_symm; CategoryTheory.Adjunction.CoreHomEquiv.homEquiv_naturality_right_symm; CategoryTheory.Sheaf.ΓHomEquiv_naturality_right_symm",
+   "date": "2026-10-27",
+   "verdict": "generic tools only; no exact native representative statement"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Extend a derived internal Hom comparison from K-injective source complexes to arbitrary source complexes by naturality and K-injective replacement",
+   "results": "CategoryTheory.InjectiveResolution.extMk_hom; CategoryTheory.InjectiveResolution.rightDerived_app_eq; CategoryTheory.Functor.rightDerived_map_eq; CategoryTheory.InjectiveResolution.rightDerivedToHomotopyCategory_app_eq; CategoryTheory.InjectiveResolution.isoRightDerivedObj_hom_naturality; CategoryTheory.InjectiveResolution.toRightDerivedZero'; CategoryTheory.InjectiveResolution.isoRightDerivedObj_hom_naturality_assoc; CategoryTheory.InjectiveResolution.toRightDerivedZero_eq",
+   "date": "2026-10-27",
+   "verdict": "generic tools only; no exact native representative statement"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.NativeWeilTensorEvaluation",
+  "date": "2026-10-27",
+  "group": "E3"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sf-native-weil-tensor-evaluation",
+   "place": "Native tensor model, evaluation compatibility in step 3; Stacks 08J9, 0A97; ringed_forget_normalized_uncurry",
+   "via": [
+    "lem-sf-native-weil-tensor-evaluation"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.NativeWeilRepresentativeUncurry",
+  "file": "lean/Sheaf/Paper/NativeWeilRepresentativeUncurry.lean",
+  "declaration": "AlgebraicGeometry.ProEtaleWeilSheaf.native_weil_representative_uncurry",
+  "statement": "theorem native_weil_representative_uncurry\n    (M : NativeClosedHomModels k₀ l X)\n    (S : CoefficientClosedStructure M.ordinaryHom)\n    (W : CoefficientClosedStructure M.weilHom)\n    (t : W.tensor ⋙ nativeForget k₀ l X ≅\n      (nativeForget k₀ l X).prod (nativeForget k₀ l X) ⋙ S.tensor)\n    (N : NativeWeilTensorPresentation k₀ l X M S W.monoidal t)\n    (hW : NativeAdjunctionNormalization (ihomBifunctor k₀ l X) N.tensor\n      (fun P ↦ N.adjunction.adj P) M.weilHom M.weilRepresentatives W\n      (NativeTensorKFlat k₀ l X N.tensor) N.model)\n    (χ : M.weilHom ⋙ nativeForget k₀ l X ≅\n      (nativeForget k₀ l X).op.prod (nativeForget k₀ l X) ⋙ M.ordinaryHom)\n    (hχ : NativeHomRepresentativeCompatibility (ihomBifunctor k₀ l X)\n      (ordinaryIhomBifunctor l (X ↘ Spec (CommRingCat.of k₀)).geometricFiber)\n      M.weilHom M.ordinaryHom M.weilRepresentatives M.ordinaryRepresentatives\n      (Endofunctor.IsoAlgebra.forget (WeilSheaf.frobeniusPullback k₀ l X)) χ)\n    (P Q I : CochainComplex (ProEtaleWeilSheaf k₀ l X) ℤ)\n    (hP : NativeTensorKFlat k₀ l X N.tensor P)\n    (hQ : NativeTensorKFlat k₀ l X N.tensor Q) (hI : I.IsKInjective)\n    (φ : Q ⟶ CochainComplex.bifunctorHomObj (ihomBifunctor k₀ l X) P I) :\n    let f := DerivedCategory.Q.map φ ≫ (M.weilRepresentatives.model P I hI).inv\n    (nativeForget k₀ l X).map\n        ((W.transpose (DerivedCategory.Q.obj Q) (DerivedCategory.Q.obj P)\n          (DerivedCategory.Q.obj I)).symm f) =\n      t.hom.app (DerivedCategory.Q.obj Q, DerivedCategory.Q.obj P) ≫\n        (S.transpose ((nativeForget k₀ l X).obj (DerivedCategory.Q.obj Q))\n          ((nativeForget k₀ l X).obj (DerivedCategory.Q.obj P))\n          ((nativeForget k₀ l X).obj (DerivedCategory.Q.obj I))).symm\n          ((nativeForget k₀ l X).map f ≫\n            χ.hom.app (op (DerivedCategory.Q.obj P), DerivedCategory.Q.obj I))",
+  "branch": "sheaf-dag",
+  "by": "E3",
+  "date": "2026-10-27"
+ },
+ "split_report": {
+  "date": "2026-10-27",
+  "item": "Sheaf.Paper.NativeWeilTensorEvaluation",
+  "worker": "stage3",
+  "summary": "Forgetting inverse transposition on native representatives; fully proved, no remaining hole.",
+  "blueprint": "Native tensor model, evaluation compatibility in step 3; Stacks 08J9, 0A97; ringed_forget_normalized_uncurry"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E3",
+  "result": "pass",
+  "landing": "20261027T094350-L-218332",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E3",
+  "result": "pass",
+  "landing": "20261027T094350-L-218332",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

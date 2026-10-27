@@ -1,0 +1,260 @@
+{
+ "id": "lem-pur-transport-integral-counit-realization",
+ "kind": "statement",
+ "title": "Integral tower realization with the fixed explicit counit",
+ "statement": "Fix $k=\\overline{\\mathbf F}_q$ of characteristic $p$, a prime $\\ell\\ne p$, and an algebraic closure $\\Qlb$ of $\\mathbf Q_\\ell$ [def-pur-conventions]. Let $X,Y$ be separated finite-type $k$-schemes and $f:X\\to Y$ smooth separated of pure relative dimension $d\\geq0$ [sk-def-sfb-dc-setting, def-sbc-smooth-morphisms]. Write $\\mathcal C_T(\\Lambda)=\\Dctf(T,\\Lambda)$ for the bounded constructible finite-Tor pro-etale condensed-module category [sk-def-sfb-constructible], $F_{f,\\Lambda}=Rf_{!,\\Lambda}$, $G_{f,\\Lambda}=f^!_\\Lambda$ with its specified restricted adjunction $F_{f,\\Lambda}\\dashv G_{f,\\Lambda}$ and counit $\\varepsilon_{f,\\Lambda}$ [sk-thm-existence], and $J_{f,\\Lambda}=f^*_\\Lambda(-)(d)[2d]$ with the Tate twists of [def-coefficient-twists-detailed].\n\nFor every finite $E/\\mathbf Q_\\ell$ in $\\Qlb$, use the completed coefficient sheaf $R_{E,T}=\\varprojlim_n(\\mathcal O_E/\\ell^n)_T$, derived-complete integral constructible category and comparison with condensed integral modules [sk-lem-integral-models]. Put $r_TK=(K\\otimes^L_{R_{E,T}}(\\mathcal O_E/\\ell^n)_T)_n$, with normalized towers and $L_T=R\\varprojlim$ as in [det-sp-normalized-equivalence]. Let $H_{f,E}=L_Xf^!_\\bullet r_Y$ with counit $\\varepsilon^H$, and $\\gamma^H=L_X\\gamma_{f,\\bullet}r_Y:J_{f,\\mathcal O_E}\\xrightarrow{\\sim}H_{f,E}$, using the actual tower morphism and realized adjunction of [det-sp-tower-gamma, det-sp-integral-adjunction-bijection]. Identify the left adjoint with the ambient compactification composite $R\\bar f_*j_!$ by [det-sp-integral-direct-image-tower]. Let $\\delta_E:H_{f,E}\\xrightarrow{\\sim}G_{f,\\mathcal O_E}$ be the counit-preserving comparison [det-sp-unique-right-adjoint], and put $\\gamma^T_E=\\delta_E\\gamma^H$.\n\nThen the tower Hom adjunction, transported by $r_T\\dashv L_T$ and postcomposition with $(\\gamma^H)^{-1}$, defines an adjunction $F_{f,\\mathcal O_E}\\dashv J_{f,\\mathcal O_E}$ on the condensed categories with counit\n$$t^E_K=\\varepsilon^H_K\\circ F_{f,\\mathcal O_E}(\\gamma^H_K)=\\varepsilon_{f,\\mathcal O_E,K}\\circ F_{f,\\mathcal O_E}(\\gamma^T_{E,K}).$$\nIts reductions are exactly the finite adjunctions and counits. The actual map $\\gamma^T_E$ equals the coherent trace-transpose family of [lem-pur-tower-trace-purity-comparison]; its trace, composition and Cartesian base-change equations are those reconstructed simultaneously in [prop-pur-adic-reconstruction-trace-coherence]. For every finite $E\\subset F$, completed scalar extension $-\\otimes^L_{R_{E,T}}R_{F,T}$ carries these actual adjunctions, units, counits and maps to their $F$ counterparts by the tower comparisons of [det-sp-field-extension-towers], transitively for $E\\subset F\\subset L$. These assertions include uniformizer reductions via the canonical cofinal comparison with the $\\ell$-power tower. On affine charts the counit is the realization of fibre sum followed by iterated projective-line integration, with the precise local tower counits of [det-sp-tower-gluing].",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-thm-purity-transport/sk-thm-purity-transport.proof.md",
+  "place": "Step 2: normalized-tower realization and its comparison to condensed integral coefficients; Steps 1 and 5: coherent maps and counits",
+  "note": "Agent interface lemma extracted from the returned 13-step proof; the full argument assigned to this node is retained verbatim in report.md."
+ },
+ "stmt_deps": [
+  "def-pur-conventions",
+  "sk-def-sfb-dc-setting",
+  "def-sbc-smooth-morphisms",
+  "sk-def-sfb-constructible",
+  "sk-thm-existence",
+  "def-coefficient-twists-detailed",
+  "sk-lem-integral-models",
+  "det-sp-normalized-equivalence",
+  "det-sp-tower-gamma",
+  "det-sp-integral-adjunction-bijection",
+  "det-sp-integral-direct-image-tower",
+  "det-sp-unique-right-adjoint",
+  "lem-pur-tower-trace-purity-comparison",
+  "prop-pur-adic-reconstruction-trace-coherence",
+  "det-sp-field-extension-towers",
+  "det-sp-tower-gluing",
+  "def-pur-integral-smooth-adjunction-presentation",
+  "def-pur-integral-counit-realization-data",
+  "def-pur-tower-composition-reassociation",
+  "def-pur-tower-purity-base-change-words",
+  "def-sp-composition-orientation-arrow-data",
+  "def-sp-adjoint-compositor-data",
+  "def-pur-purity-base-change-sources",
+  "def-sp-coefficient-tower-shriek-interfaces",
+  "def-sp-p1-level-words",
+  "def-pur-tower-trace-comparison-data"
+ ],
+ "proof": [
+  {
+   "text": "The unchanged public integral stage, scalar comparison, condensed realization, chart and composition declarations are proved in separate modules and publicly re-exported here. Their proofs and geometric inputs are recorded in the respective nodes. This is a file split to separate kernel checking, linting and serialization; it adds no hole.",
+   "uses": [
+    "lem-pur-integral-stage-construction",
+    "lem-pur-condensed-stage-realization",
+    "lem-pur-integral-chart-realization",
+    "lem-pur-integral-composition-realization",
+    "lem-pur-integral-base-change-realization"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For each finite field in this simultaneous trace system choose integral_stage and condensed_stage. The fixed-counit factorization follows from gammaH_eq and the definition of the tower map; all its factors are isomorphisms. Retain the integral trace and scalar-trace equations of lem-pur-normalized-integral-trace-data, and apply fixed_presentation_uniformizer_reductions using its prescribed unit reductions and trace-transpose equality. The resulting data are the required simultaneous witnesses.",
+   "uses": [
+    "lem-pur-normalized-integral-trace-data",
+    "lem-pur-fixed-presentation-uniformizer-reductions"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-pur-integral-stage-construction",
+  "lem-pur-condensed-stage-realization",
+  "lem-pur-integral-chart-realization",
+  "lem-pur-integral-composition-realization",
+  "lem-pur-integral-base-change-realization",
+  "lem-pur-normalized-integral-trace-data",
+  "lem-pur-fixed-presentation-uniformizer-reductions"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-thm-purity-transport/sk-thm-purity-transport.proof.md",
+  "place": "Steps 2--4, expanded using the existing tower and fixed-adjoint interfaces; the original extracted argument is retained in coord/reports/Q64/sk-thm-purity-transport.md, integral argument dossier. G7 makes the integral-stage Hom transport, scalar comparison conjugation, and functorial realization of composition and base change explicit in Lean; the remaining clauses retain the original plan. J3 writes the condensed adjunction transport, actual tower gamma/chart-counit cancellation, and simultaneous trace assembly in Lean. Three strictly smaller geometric normalization lemmas retain the remaining proof obligations. The previously proved base-change clause is extracted intact into its own proved module for compilation, publicly re-exported with the same name and statement. The existing trace comparison is specialized in a separate proved helper, which drops the unused rational/common-stage clauses from final assembly. The integral stage and coefficient, condensed, chart and composition proofs are likewise split into publicly re-exported modules, retaining all original names and signatures."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Realize a coherent normalized tower of smooth etale purity adjunctions as an integral constructible condensed module adjunction with trace and coefficient extension compatibility",
+   "results": "; AlgebraicGeometry.Scheme.Hom.normalizationDiagram, Algebra.Etale.comp, Algebra.FormallyEtale.comp, Condensed.freeForgetAdjunction, CondensedMod.LocallyConstant.adjunction, LightCondensed.freeForgetAdjunction, Algebra.Etale.exists_subalgebra_fg, AlgebraicGeometry.Scheme.Modules.instIsRightAdjointPresheafOfModulesToPresheafOfModules",
+   "date": "2026-10-22",
+   "verdict": "no match: generic categorical or algebraic hits do not identify the specified sheaf operations, purity families and coherent counits"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction, CategoryTheory.Equivalence",
+   "results": "; CategoryTheory.Equivalence.toAdjunction, CategoryTheory.Equivalence.toAdjunction', CategoryTheory.Equivalence.trans_toAdjunction, CategoryTheory.Adjunction.toEquivalence, CategoryTheory.Equivalence.transportSheafificationAdjunction, CategoryTheory.Endofunctor.Adjunction.algebraCoalgebraEquiv",
+   "date": "2026-10-22",
+   "verdict": "no match: generic categorical or algebraic hits do not identify the specified sheaf operations, purity families and coherent counits"
+  },
+  {
+   "tool": "grep",
+   "query": "NormalizedTower|normalized.*tower|adic.*purity|purity.*adic",
+   "results": "; Mathlib/FieldTheory/NormalizedTrace.lean, Mathlib/FieldTheory/NormalizedTrace.lean, Mathlib/FieldTheory/NormalizedTrace.lean",
+   "date": "2026-10-22",
+   "verdict": "no match: generic categorical or algebraic hits do not identify the specified sheaf operations, purity families and coherent counits"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived inverse limit of compatible purity adjunctions between normalized adic towers with counit and geometric coherence",
+   "results": "; CategoryTheory.Adjunction.derived_counit, CategoryTheory.Adjunction.derivedε.congr_simp, CategoryTheory.Adjunction.derivedε, CategoryTheory.Adjunction.derivedη.congr_simp, CategoryTheory.Adjunction.derived'_counit, CategoryTheory.Adjunction.derived, CategoryTheory.Adjunction.derivedε_fac_app_assoc, CategoryTheory.Adjunction.derived_unit",
+   "date": "2026-10-22",
+   "verdict": "no match: generic categorical or algebraic hits do not identify the specified sheaf operations, purity families and coherent counits"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Compare the right adjoint obtained by derived inverse limit of finite coefficient towers with the chosen exceptional inverse image and its reconstructed trace",
+   "results": "; Condensed.profiniteSolidCounit, CondensedMod.LocallyConstant.adjunction, LightCondMod.LocallyConstant.adjunction, Condensed.profiniteSolidification, Condensed.freeForgetAdjunction, LightCondensed.freeForgetAdjunction, LightCondMod.LocallyConstant.instIsIsoLightCondSetMapForgetAppLightCondensedModuleCatCounitDiscreteUnderlyingAdjObjFunctor, Condensed.setAbAdjunction",
+   "date": "2026-10-22",
+   "verdict": "no match: generic categorical or algebraic hits do not identify the specified sheaf operations, purity families and coherent counits"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Realize normalized finite coefficient purity adjunctions over completed integral sheaves with fixed counit and scalar extension",
+   "results": "AlgebraicGeometry.Scheme.Hom.normalizationDiagram; AlgebraicGeometry.Scheme.Hom.toNormalization_normalizationDesc_assoc; AlgebraicGeometry.Scheme.Hom.normalizationDiagramMap; AlgebraicGeometry.Scheme.Hom.normalizationDesc; AlgebraicGeometry.Scheme.Hom.ι_toNormalization; AlgebraicGeometry.Scheme.Hom.toNormalization_normalizationDesc; AlgebraicGeometry.Scheme.Hom.normalizationDesc_comp; AlgebraicGeometry.Scheme.Hom.toNormalization_app_preimage",
+   "date": "2026-10-23",
+   "verdict": "no match: the geometric normalized-tower adjunction and specified purity/counit comparisons are not stated by these generic hits"
+  },
+  {
+   "tool": "grep",
+   "query": "NormalizedTower|normalized.*tower|purity.*counit|counit.*purity",
+   "results": "Mathlib/FieldTheory/NormalizedTrace.lean; Mathlib/FieldTheory/NormalizedTrace.lean; Mathlib/FieldTheory/NormalizedTrace.lean",
+   "date": "2026-10-23",
+   "verdict": "no match: the geometric normalized-tower adjunction and specified purity/counit comparisons are not stated by these generic hits"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction, CategoryTheory.NatIso",
+   "results": "loogle: unknown identifier 'CategoryTheory.NatIso'",
+   "date": "2026-10-23",
+   "verdict": "invalid query: unknown identifier CategoryTheory.NatIso; corrected by the subsequent ofNatIsoRight query"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Transport a normalized adic tower adjunction to completed integral constructible sheaves preserving its specified counit",
+   "results": "CategoryTheory.Sheaf.adjunction_counit_app_val; CategoryTheory.Functor.sheafAdjunctionCocontinuous_counit_app_val; CategoryTheory.constantSheafAdj_counit_app; CategoryTheory.plusPlusAdjunction_counit_app_val; CategoryTheory.isIso_sheafificationAdjunction_counit; SheafOfModules.pushforwardPushforwardAdj; SheafOfModules.pushforwardPushforwardAdj_counit_app_val_app; SheafOfModules.PullbackConstruction.adjunction",
+   "date": "2026-10-23",
+   "verdict": "no match: the geometric normalized-tower adjunction and specified purity/counit comparisons are not stated by these generic hits"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Adjunction transported along natural isomorphism of right adjoint functors has counit given by composing with the isomorphism",
+   "results": "CategoryTheory.Adjunction.rightAdjointUniq_hom_app_counit; CategoryTheory.Adjunction.rightAdjointUniq_hom_counit; CategoryTheory.Adjunction.ofNatIsoRight; CategoryTheory.Adjunction.natIsoOfRightAdjointNatIso; CategoryTheory.Adjunction.leftAdjointIdIso_hom_app; CategoryTheory.Adjunction.leftAdjointUniq_hom_counit; CategoryTheory.Adjunction.leftAdjointUniq_hom_app_counit; CategoryTheory.Adjunction.rightAdjointUniq_hom_app_counit_assoc",
+   "date": "2026-10-23",
+   "verdict": "no match: the geometric normalized-tower adjunction and specified purity/counit comparisons are not stated by these generic hits"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.ofNatIsoRight",
+   "results": "CategoryTheory.Adjunction.ofNatIsoRight; CategoryTheory.Adjunction.ofNatIsoRight_counit; CategoryTheory.Adjunction.ofNatIsoRight_unit; CategoryTheory.Adjunction.homEquiv_ofNatIsoRight_apply; CategoryTheory.Adjunction.homEquiv_ofNatIsoRight_symm_apply",
+   "date": "2026-10-23",
+   "verdict": "no match: the geometric normalized-tower adjunction and specified purity/counit comparisons are not stated by these generic hits"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "sk-thm-purity-transport",
+  "date": "2026-10-22",
+  "group": "Q64"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-thm-purity-transport",
+ "blueprint": {
+  "from": {
+   "node": "sk-thm-purity-transport",
+   "place": "Step 2: normalized-tower realization and its comparison to condensed integral coefficients; Steps 1 and 5: coherent maps and counits",
+   "via": []
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-pur-transport-integral-counit-realization",
+  "worker": "stage1",
+  "summary": "No statement change and no new nodes. Realize the given tower adjunction on the completed condensed integral category; explicitly write both transported Hom maps, unit and counit; compare with the fixed right adjoint; use actual trace-family equality, coefficient-mate conjugation, arithmetic cofinal maps and the precise chart adjunction.",
+  "blueprint": "Latest sk-thm-purity-transport proof Step 2 integral case, Step 3 fixed counit comparison and Step 4 coefficient/normalization compatibility; recorded unit Step 2 is realized by this item.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-finite-type-over-noetherian",
+    "why": "Noetherian hypothesis of the normalized constructible equivalence, applied to finite-type schemes over a field."
+   },
+   {
+    "node": "lem-sp-strict-tower-arithmetic-restriction",
+    "why": "Canonical arithmetic cofinality of total derived limits, including actual quotient-cone units."
+   },
+   {
+    "node": "lem-pur-tower-trace-purity-comparison",
+    "why": "Existing equality of the actual integral tower purity map and the simultaneous trace-transpose family."
+   },
+   {
+    "node": "lem-pur-tower-purity-realized-transpose",
+    "why": "Specified finite and uniformizer reductions of the actual counit-preserving realized tower map."
+   },
+   {
+    "node": "sk-lem-integral-models",
+    "why": "Identify the integral condensed constructible category with the completed derived-complete category."
+   },
+   {
+    "node": "sk-thm-existence",
+    "why": "Specified ambient exceptional adjunction restricted to the same constructible categories."
+   },
+   {
+    "node": "lem-pur-diagonal-dnc-chart-normalization",
+    "why": "Actual finite diagonal orientation on arbitrary coefficient charts, used solely to identify the specified chart normalization."
+   },
+   {
+    "node": "lem-sp-orientation-scalar-tower-transport",
+    "why": "Joint injectivity restricted to equally shifted sheaf towers, identifying two unit orientations without asserting general derived faithfulness."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sp-strict-tower-arithmetic-restriction",
+  "lem-pur-tower-trace-purity-comparison",
+  "lem-pur-tower-purity-realized-transpose",
+  "sk-lem-integral-models",
+  "sk-thm-existence"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-N5-c42ff09b6",
+  "group": "N5",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-N5-c42ff09b6 (reviewer sub-agent of L); spot-checked: I read the item and every cited statement in full. The delivery has no new nodes. The statement, stmt_deps and source are unchanged from the base, so no target is weakened. There are no cycles and the item is still unsplit live (Q31 is a parallel delivery of the same item). The proof follows the integral route of the main-20261015 sk-thm-purity-transport proof (Steps 2 and 5) and covers every obligation in the Q64 dossier. Step checks: (1) Noetherian schemes via lem-weil-pbc-finite-type-over-noetherian; sk-lem-integral-models(1)-(3); the normalized equivalence; Rf_! = R f̄_* j_! from direct-image-tower(2). (2) The Hom maps Φ = g⁻¹B and Φ⁻¹(a) = ε^H F(g a) have the right types; the counit is ε^H F(g) and the unit is g⁻¹η^H. (3) det-sp-unique-right-adjoint gives δ: H→G in the correct direction, so ε F(δg) = t^E. (4) Reductions come from integral-adjunction-bijection and tower-gamma(2); γ^tr = γ^T and t_E come from lem-pur-tower-trace-purity-comparison, so the step does not need uniqueness of a lift. (5) I recomputed t^F F(a) b = C_Y(t^E) and s_G C_X(γ^T_E) = γ^T_F a using field-extension-towers(2) and unique-adjoint-coefficients. (6) The ℓ-power tower is the en subsequence of the uniformizer tower; arithmetic restriction is natural on D(Tow), and realized-transpose states the uniformizer-level assertion. (7) dnc-chart-normalization covers any E and exponent en; the step's identification of the chart comparison with ε_u⁻¹ Lu*Γ is implicit but follows from the cited normalization; joint injectivity is used only on a single-degree line tower (orientation-scalar-tower-transport(2)). (8) The p1 counit id⊗Tr and the coordinate composite match the tensor transpose of tower-gamma(2). Batch-5 flags: realized-transpose is integral smooth purity, an input to the Poincaré-duality assumption rather than part of its proof, and is already in proof_deps of the base stmt_dep trace-purity-comparison. lem-trf-section-rees-base-change-etale (Rees base change) and lem-trf-proetale-pullback-stalk-coherence (pro-étale stalk coherence) are generic and already reached from base stmt_deps such as det-sp-tower-gamma and det-sp-tower-gluing. No step of the trace formula or Poincaré duality is involved. The tool_uses are accepted and no SGA source is cited."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.TransportIntegralCounitRealization",
+  "declaration": "AlgebraicGeometry.ProEtale.TransportIntegralCounit.integral_counit_realization",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.TransportIntegralCounit.integral_counit_realization"
+  ],
+  "file": "lean/Sheaf/Paper/TransportIntegralCounitRealization.lean",
+  "statement": "theorem integral_counit_realization [SmoothOfRelativeDimension d (j ≫ p)] [IsNoetherian X] [IsNoetherian Y] [QuasiCompact (j ≫ p)] [IsSeparated (j ≫ p)] [LocallyOfFiniteType (j ≫ p)] [∀ x : X, Invertible (P.coefficients.l : X.residueField x)] [∀ y : Y, Invertible (P.coefficients.l : Y.residueField y)] (S : ConstructibleExceptionalCoefficients.System P.coefficients.l P.coefficients.Qbar P.field P.coefficients.different (f := j ≫ p)) : ∃ (M : FieldShriekSystem.Models P) (R : FieldExtensionTowers.Result P M j p d) (T : ∀ E : FieldShriekSystem.Index P, TowerTracePurityComparison.Stage P j p d S.ring M E (R.model E)) (A : ∀ E : FieldShriekSystem.Index P, Stage P M j p d E (R.model E)) (_C : ∀ E : FieldShriekSystem.Index P, CondensedStage P M j p d E (R.model E) (A E)), ∀ E : FieldShriekSystem.Index P, TowerTracePurityComparison.PrescribedUnitReductions P j p d S.ring M E (R.model E) (T E) (TowerTracePurityComparison.orientation P j p d S.ring M E (R.model E) (T E)) ∧ IsIso (TowerTracePurityComparison.orientation P j p d S.ring M E (R.model E) (T E)) ∧ TowerTracePurityComparison.extendedTrace P j p d S.ring M E (R.model E) (T E) (TowerTracePurityComparison.counitTrace P j p d S.ring M (TowerTracePurityComparison.base P) (R.model (TowerTracePurityComparison.base P)) (T (TowerTracePurityComparison.base P)) (TowerTracePurityComparison.orientation P j p d S.ring M (TowerTracePurityComparison.base P) (R.model (TowerTracePurityComparison.base P)) (T (TowerTracePurityComparison.base P)))) = TowerTracePurityComparison.counitTrace P j p d S.ring M E (R.model E) (T E) (TowerTracePurityComparison.orientation P j p d S.ring M E (R.model E) (T E)) ∧ (∀ K : finiteTorConstructibleIntegralCategory P.coefficients.l E.val Y, TowerTracePurityComparison.tower P j p d S.ring M E (R.model E) (T E) K = (R.model E).sourceNormalization.exactSource.hom.app ((PurCompactSupport.finiteTorIntegralInclusion P.coefficients.l E.val Y).obj K) ≫ ((A E).gammaH.hom.app ((PurCompactSupport.finiteTorIntegralInclusion P.coefficients.l E.val Y).obj K)).hom ≫ (((WeilConjectures.RealizedTowerPurity.restrictedAdjunction P.coefficients.l E.val (SpTowerGamma.factorization j p) (R.model E).realization.support_closed _ (R.model E).realization.adjunction (T E).supportClosed (T E).rightClosed).rightAdjointUniq (WeilConjectures.RealizedTowerPurity.specifiedAdjunction P.field P.coefficients E.val (j ≫ p) S.ring (SpTowerGamma.factorization j p) (T E).supportClosed)).hom.app K).hom ∧ IsIso (TowerTracePurityComparison.tower P j p d S.ring M E (R.model E) (T E) K) ∧ TowerTracePurityComparison.tracePurity P j p d S.ring M E (R.model E) (T E) (TowerTracePurityComparison.counitTrace P j p d S.ring M E (R.model E) (T E) (TowerTracePurityComparison.orientation P j p d S.ring M E (R.model E) (T E))) K = TowerTracePurityComparison.tower P j p d S.ring M E (R.model E) (T E) K) ∧ ∃ e : ∀ K : finiteTorConstructibleIntegralCategory P.coefficients.l E.val Y, (((S.ring.operation (SpTowerGamma.factorization j p) (.integral {carrier := E.val})).G.obj K).obj) ≅ purAdicTarget P.field P.coefficients E.val (j ≫ p) K.obj, (∀ (K : finiteTorConstructibleIntegralCategory P.coefficients.l E.val Y) (n : ℕ), (scalarReductionDerivedExtension P.coefficients.l E.val X n).map (e K).hom ≫ purAdicTargetReduction P.field P.coefficients E.val (j ≫ p) d K.obj K.property n = WeilConjectures.RealizedTowerPurity.finiteReduction P.field P.coefficients E.val (j ≫ p) S.ring (SpTowerGamma.factorization j p) (T E).normal K n) ∧ ∀ (K : finiteTorConstructibleIntegralCategory P.coefficients.l E.val Y) (n : ℕ), (scalarReductionDerivedExtension P.coefficients.l E.val X n).map (TowerTracePurityComparison.tower P j p d S.ring M E (R.model E) (T E) K ≫ (e K).hom) ≫ purAdicTargetReduction P.field P.coefficients E.val (j ≫ p) d K.obj K.property n = purAdicSourceReduction P.field P.coefficients E.val (j ≫ p) d K.obj K.property n ≫ (purAdicFiniteArrow P.field P.coefficients E.val (j ≫ p) d K.obj K.property n).hom",
+  "branch": "newtargets-dag",
+  "by": "NG",
+  "date": "2026-10-26",
+  "existing": false,
+  "note": "The declarations jointly retain the explicit integral Hom transport, normalized condensed encodings, specified counit, finite/uniformizer reductions, actual trace-transpose equality, scalar transport, local chart counits and whole-system geometric equations. The tower words are cited through definition nodes, including two existing:true records of already-published helpers. No statement correction. Proof-only imports and the out-of-scope coefficient-mate dependency repair of returned head 816fcd3953a7 are removed."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-ff34d10bf",
+  "group": "NG",
+  "result": "pass",
+  "note": "Re-delivery after 816f RETURN (H2). Lean bodies byte-identical to 816f (diffed); only imports changed plus a local hasSheafify instance priority. Item stmt_deps: the three theorem nodes (composition-factors, purity-bc-factors, normalized-reconstruction calculus) are replaced by definition owners: new existing:true def-pur-tower-composition-reassociation (towerReassociate) and def-pur-tower-purity-base-change-words (nine words), reused def-sp-composition-orientation-arrow-data for TowerSplitNormalized, plus six live def owners. Both new node statements match the source defs, and their lean.statement is verbatim. The det-sp-unique-adjoint-coefficients record rewrite and CounitCoefficientMate are removed. Proof-only imports are dropped. Second reading by NG is a real 13-point reading. Main theorem spot-checked: M/R/T/A/C existentials before for-all E; gammaT against the specified adjunction; trace-transpose and extendedTrace equations; uniformizer clause for every n; scalar, chart and whole-system coherence clauses. All owners are in the stmt_dep closure. Compile: worker dry run OK and two-file compile clean (37.4 s / 45.5 s); not recompiled because no file was changed. Advisory: S3 M4 def-sp-purity-base-change-tower-maps (proving lane) will duplicate the base-change-words owner when the trees merge; docstring prose mentions reconstruction calculus, which is not in proof_deps."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-1ef65",
+  "group": "J3",
+  "result": "fix",
+  "landing": "20261027T034700-L-3673858",
+  "kind": "interface",
+  "note": "independent cc review: delivered item + 9 new modules against clone main (integral_counit_realization statement identical; relocated decls same names/namespaces/variable binders; item public-imports them; 0 importers); new holes against CondensedStage fields, tower_gluing and FiniteNormalization"
+ }
+}

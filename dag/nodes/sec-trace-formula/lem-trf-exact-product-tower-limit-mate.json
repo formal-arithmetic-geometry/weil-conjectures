@@ -1,0 +1,136 @@
+{
+ "id": "lem-trf-exact-product-tower-limit-mate",
+ "kind": "statement",
+ "title": "Invertibility of the canonical total-limit mate for an exact product-preserving functor",
+ "statement": "Let A and B be Grothendieck abelian categories (with generators small in their respective hom universes) [def-sp-grothendieck-abelian] admitting countable products and limits of towers indexed by the opposite natural numbers. Suppose countable products are exact in B. Fix derived categories of A, B and their tower categories, with K-injective resolutions of both tower categories, and the additive ordinary limit functors [def-weil-abstract-derived-category, def-weil-derived-limit]. Let F:A→B be additive, preserve finite limits and finite colimits, and preserve countable products; its induced termwise tower functor is also exact. Write c_A,c_B for constant towers, W for postcomposition by F, and L_A,L_B for the total right derived limits. Localize exact functors as specified by [lem-sf-exact-functor-derived-triangulated]. The natural isomorphism F_D c_B,D ≅ c_A,D W_D is the composition of the inverse derived-composition comparison, the localization of the ordinary constant-tower identity F c_B ≅ c_A W, and the derived-composition comparison. Its mate, under the specified derived adjunctions c_A,D ⊣ L_A and c_B,D ⊣ L_B, is invertible. Equivalently the actual counit-normalized natural transformation (L_A ⋙ F_D) → (W_D ⋙ L_B) is an isomorphism, not merely some isomorphism between its endpoints. No boundedness, constructibility or completeness condition is imposed.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "section-derived-limits, lemma-derived-limit-is-ok and lemma-RGamma-commutes-with-Rlim (Tags 0940 and 0941); agent generalization of the exact-product normalized Roos argument, prerequisite step 5 of lem-trf-integral-point-transport-tower-powers. Also literature/stacks-project/derived.tex, lemma-products (Tag 07KC)."
+ },
+ "stmt_deps": [
+  "def-weil-abstract-derived-category",
+  "def-weil-derived-limit",
+  "lem-sf-exact-functor-derived-triangulated",
+  "def-sp-grothendieck-abelian"
+ ],
+ "proof": [
+  {
+   "text": "Countable products and finite limits suffice to compute tower limits by an equalizer, so preservation of these products implies preservation of ordinary tower limits. The ordinary mate of the constant-tower identity is the canonical limit comparison: after every limit projection its counit equation says exactly F of that projection. Thus the ordinary mate is an isomorphism.",
+   "uses": [
+    "lem-cbc-exact-product-functor-strict-limit"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Choose a K-injective resolution with injective terms in the Grothendieck abelian source tower category. Every transition of an injective tower is split epimorphic. An additive functor preserves the splitting. The split-transition Roos short exact sequence therefore shows that the ordinary-limit inclusion into the target Roos fibre is a quasi-isomorphism after termwise F. The normalized exact-products Roos comparison identifies this inclusion with the canonical cochain unit of the target right derived limit, so that unit is invertible on this image. Express the cochain unit by transport from the existing homotopy-level derived unit.",
+   "uses": [
+    "prop-pur-kinjective-resolutions-exist",
+    "lem-coef-sequence-sections-limit-comparison",
+    "lem-weil-pbc-exact-products-roos-comparison",
+    "lem-derived-exact-equivalence-squares",
+    "lem-weil-pbc-ringed-strict-tower-homotopy-limit"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply the proved localized_mate_cochain_normalization identity to the two constant/limit adjunctions and the ordinary constant-tower comparison. Its right side is the localization of the ordinary mate, followed by the target cochain unit on the termwise image; both are invertible by the preceding steps. The other factors on the left side are exact-localization factor isomorphisms and F of the source cochain unit, invertible because the source resolution is K-injective. Cancelling these factors proves invertibility of the actual derived mate at that resolution. This identity uses the entire derived counit.",
+   "uses": [
+    "lem-sbc-unbounded-exact-adjunction-square"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Every derived tower object is isomorphic to the localization of a chosen K-injective resolution with injective terms: take a complex preimage under Q, then its functorial resolution. Naturality of the mate conjugates its component to the already invertible component on that resolution. Therefore every component, and hence the natural transformation, is invertible.",
+   "uses": [
+    "prop-pur-kinjective-resolutions-exist"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-cbc-exact-product-functor-strict-limit",
+  "prop-pur-kinjective-resolutions-exist",
+  "lem-coef-sequence-sections-limit-comparison",
+  "lem-weil-pbc-exact-products-roos-comparison",
+  "lem-derived-exact-equivalence-squares",
+  "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
+  "lem-sbc-unbounded-exact-adjunction-square"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Agent formalization of the source normalized Roos computation: ordinary mate, acyclicity of the termwise image of an injective-term resolution, the existing cochain mate normalization, and transport along the resolution isomorphism. The private normalized Roos comparison repeats the existing proved construction with independent derived-category universes; all helpers and the mate theorem are proved without new holes."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "An exact additive functor preserving countable products commutes with the total right derived inverse limit of towers, through the mate of its constant tower comparison",
+   "results": "8 hits: Functor.mapDerivedCategoryFactorsh, Functor.mapDerivedCategoryFactors, Functor.mapDerivedCategorySingleFunctor, Abelian.Ext.mapExactFunctor_hom, Functor.rightDerivedZeroIsoSelf_inv_hom_id_assoc, Functor.mapDerivedCategoryFactorsh_hom_app, Functor.rightDerivedZeroIsoSelf_inv_hom_id_app_assoc, Functor.leftDerivedZeroIsoSelf_inv_hom_id_assoc. None asserts invertibility of this total-limit mate.",
+   "date": "2026-10-27",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.mateEquiv",
+   "results": "12 hits, including mateEquiv, mateEquiv_counit, mateEquiv_counit_symm, unit_mateEquiv, unit_mateEquiv_symm and mateEquiv_vcomp. The counit identity supplies the normalization after invertibility is established, but no returned result proves this mate invertible.",
+   "date": "2026-10-27",
+   "verdict": "ingredients only"
+  },
+  {
+   "tool": "grep",
+   "query": "mateEquiv.*isIso|isIso.*mateEquiv",
+   "results": "0 Mathlib hits. The project has an equivalence-only mate argument and a ringed-site normalized strict-limit comparison; neither directly supplies the point-sections-to-ordinary-modules instance.",
+   "date": "2026-10-27",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.IntegralPointTransportTowerPowers",
+  "date": "2026-10-27",
+  "group": "D3"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-thm-trace-transport",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-trf-integral-point-transport-tower-powers",
+   "place": "Existence part of sectionsLimitComparison_existsUnique, original proof step 5.",
+   "via": []
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.ExactProductTowerLimitMate",
+  "file": "lean/Sheaf/Paper/ExactProductTowerLimitMate.lean",
+  "declaration": "CategoryTheory.exactProductTowerLimitMate_isIso",
+  "statement": "theorem exactProductTowerLimitMate_isIso\n    {A : Type a} [Category.{av} A] [Abelian A]\n    {B : Type b} [Category.{bv} B] [Abelian B]\n    [IsGrothendieckAbelian.{av} A] [IsGrothendieckAbelian.{bv} B]\n    [HasDerivedCategory.{da} A] [HasDerivedCategory.{db} B]\n    [HasDerivedCategory.{dat} (ℕᵒᵖ ⥤ A)] [HasDerivedCategory.{dbt} (ℕᵒᵖ ⥤ B)]\n    [Abelian.HasKInjectiveResolutions (ℕᵒᵖ ⥤ A)]\n    [Abelian.HasKInjectiveResolutions (ℕᵒᵖ ⥤ B)]\n    [HasLimitsOfShape ℕᵒᵖ A] [HasLimitsOfShape ℕᵒᵖ B]\n    [HasCountableProducts A] [HasCountableProducts B]\n    [HasExactLimitsOfShape (Discrete ℕ) B]\n    [(lim : (ℕᵒᵖ ⥤ A) ⥤ A).Additive]\n    [(lim : (ℕᵒᵖ ⥤ B) ⥤ B).Additive]\n    (F : A ⥤ B) [F.Additive] [PreservesFiniteLimits F] [PreservesFiniteColimits F]\n    [PreservesLimitsOfShape (Discrete ℕ) F]\n    [PreservesFiniteLimits ((Functor.whiskeringRight ℕᵒᵖ A B).obj F)]\n    [PreservesFiniteColimits ((Functor.whiskeringRight ℕᵒᵖ A B).obj F)] :\n    IsIso (mateEquiv\n      ((constLimAdj : (Functor.const ℕᵒᵖ : A ⥤ _) ⊣ lim).mapDerivedCategoryRightDerivedAdjunction)\n      ((constLimAdj : (Functor.const ℕᵒᵖ : B ⥤ _) ⊣ lim).mapDerivedCategoryRightDerivedAdjunction)\n      ((Functor.mapDerivedCategoryCompIso F (Functor.const ℕᵒᵖ)).symm ≪≫\n        Functor.mapDerivedCategoryNatIso (Functor.compConstIso ℕᵒᵖ F) ≪≫\n        Functor.mapDerivedCategoryCompIso (Functor.const ℕᵒᵖ)\n          ((Functor.whiskeringRight ℕᵒᵖ A B).obj F)).hom).natTrans",
+  "branch": "sheaf-dag",
+  "by": "D3",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-2a140",
+  "group": "D3",
+  "result": "fix",
+  "landing": "20261027T021306-L-2753286",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-2a140",
+  "group": "D3",
+  "result": "fix",
+  "landing": "20261027T021306-L-2753286",
+  "kind": "interface",
+  "note": "independent cc review: moved comparison block vs clone item file (verbatim apart from the two proofs and the order), 4 delivered modules + 3 direct importers compiled in sandbox (all OK), axioms of the proved declarations, item/new node JSON vs Lean"
+ }
+}

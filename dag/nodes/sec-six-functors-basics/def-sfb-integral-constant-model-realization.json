@@ -1,0 +1,133 @@
+{
+ "id": "def-sfb-integral-constant-model-realization",
+ "kind": "definition",
+ "title": "Normalized exact integral section realization",
+ "statement": "For a prime l, a finite extension E of Q_l and a scheme X, let B be the pulled-back continuous condensed valuation ring [det-prop-sfb-qlbar-colimit-x-integral-limit]. There is a specified exact equivalence from internal B-modules to ordinary module sheaves over the inverse limit of the constant positive valuation-ring quotients [def-sfb-adic-stratified-perfect-data]. It is restriction along the spectral/absolute point identification, the section-action equivalence, and restriction along the finite-projection-normalized coefficient isomorphisms. Its derived equivalence localizes this same functor termwise.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-lem-integral-models/_section.md",
+  "place": "Proof (1)–(2): coefficient-presentation comparison in det-lem-integral-models-stacks"
+ },
+ "stmt_deps": [
+  "det-prop-sfb-qlbar-colimit-x-integral-limit",
+  "def-weil-pbc-internal-abelian-sheaf-module-equivalence",
+  "det-prop-integral-criterion-reductions",
+  "lem-weil-pbc-integral-stratified-perfect-characterization",
+  "def-sfb-adic-stratified-perfect-data"
+ ],
+ "proof": [
+  {
+   "text": "The spectral and absolute coefficient topologies agree. Apply the resulting equality in monoid objects and pull it back to X. Restriction along this coefficient isomorphism is an equivalence.",
+   "uses": [
+    "det-prop-integral-criterion-reductions"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Compose the actual section-action functor with the two restrictions along the normalized coefficient isomorphisms. Each is an additive equivalence, so their composite and its termwise derived localization are equivalences.",
+   "uses": [
+    "def-weil-pbc-internal-abelian-sheaf-module-equivalence",
+    "det-prop-integral-criterion-reductions",
+    "lem-weil-pbc-integral-stratified-perfect-characterization"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "det-prop-integral-criterion-reductions",
+  "def-weil-pbc-internal-abelian-sheaf-module-equivalence",
+  "lem-weil-pbc-integral-stratified-perfect-characterization"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Definition 6.8.10, Proposition 6.8.11(3), and the projection-normalized coefficient comparison; Stacks 099C, 099M, 09C1, 09C2 and 09AL as applicable."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Finite constant stratified models under isomorphism of completed coefficient sheaves",
+   "date": "2026-10-24",
+   "results": "8 hits: CategoryTheory.Sheaf.isConstant_congr, CategoryTheory.Sheaf.isConstant_of_iso, CategoryTheory.Sheaf.isConstant_iff_isIso_counit_app, CategoryTheory.Sheaf.isConstant_iff_isIso_counit_app', CategoryTheory.Sheaf.mem_essImage_of_isConstant, CategoryTheory.Sheaf.IsConstant.mem_essImage, CategoryTheory.Sheaf.isConstant_of_isIso_counit_app, CategoryTheory.Sheaf.isConstant_iff_mem_essImage",
+   "verdict": "No exact match for the specified coefficient presentation comparison; generic constant-sheaf, scalar-restriction or etale declarations do not identify these local predicates."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finite constant stratified models under isomorphism of completed coefficient sheaves",
+   "date": "2026-10-24",
+   "results": "8 hits: FirstOrder.Language.Structure.FG.mem_age_of_equiv, RingHom.EssFiniteType.respectsIso, FirstOrder.Language.Hereditary.is_equiv_invariant_of_fg, Algebra.IsStandardSmooth.hcongr_5, FirstOrder.Language.age.is_equiv_invariant, AlgebraicGeometry.instIsIsoSchemeSigmaSpecOfFinite, AlgebraicGeometry.IsFinite.instOfIsIsoScheme, FirstOrder.Language.Equiv.fg_iff",
+   "verdict": "No exact match: these generic Mathlib declarations do not give the specified integral coefficient presentation comparison."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"restrictScalars\", \"IsEquivalence\"",
+   "date": "2026-10-24",
+   "results": "3 hits: AlgCat.instIsEquivalenceRestrictScalarsToRingHom, AlgCat.instIsEquivalenceRestrictScalarsToRingHomSymm, ModuleCat.restrictScalars_isEquivalence_of_ringEquiv",
+   "verdict": "No exact match: these generic Mathlib declarations do not give the specified integral coefficient presentation comparison."
+  },
+  {
+   "tool": "grep",
+   "query": "stratif.*[Cc]omplet|[Cc]omplet.*stratif",
+   "date": "2026-10-24",
+   "results": "0 hits: ",
+   "verdict": "No exact match: these generic Mathlib declarations do not give the specified integral coefficient presentation comparison."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.IntegralModelsStacks",
+  "date": "2026-10-24",
+  "group": "W6"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-lem-integral-models-stacks",
+   "place": "Unit proof (1)–(2): Normalized exact integral section realization",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-lem-integral-models",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.IntegralConstantModelRealization",
+  "file": "lean/Sheaf/AlgebraicGeometry/IntegralConstantModelRealization.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.IntegralConstantModel.modulesFunctor",
+  "statement": "def modulesFunctor (X : Scheme.{u}) :\n    Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})\n        (condensedRingObj (sfbCondensedIntegers l E).X X) ⥤\n      Scheme.proEtaleRingModules X\n        (Scheme.adicLisseCompletedRing X (Scheme.pbcIntegralDatum l E).ideal)",
+  "branch": "sheaf-dag",
+  "by": "W6",
+  "date": "2026-10-24",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.IntegralConstantModel.pointEquality",
+   "AlgebraicGeometry.ProEtale.IntegralConstantModel.pointComparison",
+   "AlgebraicGeometry.ProEtale.IntegralConstantModel.modulesFunctor",
+   "AlgebraicGeometry.ProEtale.IntegralConstantModel.modulesFunctor_isEquivalence",
+   "AlgebraicGeometry.ProEtale.IntegralConstantModel.modulesFunctor_additive",
+   "AlgebraicGeometry.ProEtale.IntegralConstantModel.derived",
+   "AlgebraicGeometry.ProEtale.IntegralConstantModel.modulesFunctor_obj"
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "C-bcd0e",
+  "group": "W6",
+  "result": "fix",
+  "landing": "20261024T021935-L-2879228",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "C-bcd0e",
+  "group": "W6",
+  "result": "fix",
+  "landing": "20261024T021935-L-2879228",
+  "kind": "interface",
+  "note": "independent cc review: item statement vs live clone (identical); moved Data block vs original item block (verbatim); new sorry statements vs blueprint unit steps (1)-(2) and Stacks 099C/099M/09C2/09AL; item node proof_deps vs Lean proof; both direct importers compiled against the delivery"
+ }
+}

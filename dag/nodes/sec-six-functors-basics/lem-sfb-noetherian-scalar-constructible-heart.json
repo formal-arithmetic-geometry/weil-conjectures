@@ -1,0 +1,339 @@
+{
+  "id": "lem-sfb-noetherian-scalar-constructible-heart",
+  "kind": "statement",
+  "title": "Noetherian finite scalar-model constructible heart for all coefficient cases",
+  "chapter": "sec-six-functors-basics",
+  "unit": "sk-prop-sf-comp-coherence",
+  "statement": "Fix a prime $\\ell$, a finite extension $E/\\mathbf Q_\\ell$ in a fixed algebraic closure $\\overline{\\mathbf Q}_\\ell$, and a finite commutative ring $A$ killed by a power of $\\ell$. Let $\\Lambda$ be one of $A,\\mathbf Z_\\ell,\\mathcal O_E,\\mathbf Q_\\ell,E$, discrete for $A$ and norm-topological otherwise. Its condensed ring is $P\\mapsto C(P,\\Lambda)$ on profinite sets [sk-def-localizing-closure]. Let $X$ be a Noetherian scheme, meaning locally Noetherian [pqf-def-locnoeth] and quasi-compact [def-weil-pbc-quasi-compact-scheme]. On the small pro-etale site [def-weil-pbc-proetale-site], in the universes of [def-weil-size-convention], set $\\Lambda_X=p_X^*\\Lambda$ and let $\\mathcal A_X=\\operatorname{Mod}_{\\Lambda_X}$ be the ordinary uncompleted internal module category [sk-def-sfb-module-derived-pushpull]. Let $\\mathcal C_X$ be its full replete subcategory of finite constant scalar-model constructible modules [sk-def-sfb-constructible]; in particular finitely presented integral torsion scalar models are allowed. Then $\\mathcal C_X$ is essentially small in the specified indexing universe, contains zero, and is closed in $\\mathcal A_X$ under kernels and cokernels of all maps between its objects and under every ambient extension. Thus it is an abelian category with exact inclusion. No condition on the characteristic or dimension of $X$ is imposed; the empty scheme and zero coefficient ring are included.",
+  "source": {
+    "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
+    "place": "Theorem 6.2(3), Lemma 6.10, Corollary 6.11 and the finite scalar-model interpretation of the heart; discrete Noetherian coefficients: Stacks Tags 09B5 and 03RZ. Essential smallness follows from small-site finite descent data. Agent formulation combining the coefficient cases; no claim about arbitrary non-Noetherian schemes."
+  },
+  "stmt_deps": [
+    "sk-def-localizing-closure",
+    "pqf-def-locnoeth",
+    "def-weil-pbc-quasi-compact-scheme",
+    "def-weil-pbc-proetale-site",
+    "def-weil-size-convention",
+    "sk-def-sfb-module-derived-pushpull",
+    "sk-def-sfb-constructible"
+  ],
+  "proof": [
+    {
+      "text": "Work in the ordinary ambient abelian category: [def-weil-pbc-internal-abelian-sheaf-module-equivalence] identifies internal modules with sectionwise module sheaves, and [def-weil-sheaf-of-modules-category] supplies its abelian structure on the fixed small site. By [det-def-sfb-constructible-local-model], every finite constant scalar model is locally finitely presented. Thus each object of $\\mathcal C_X$ lies in the essentially small class of [lem-sfb-constructible-module-objects-essentially-small], applied to the ring object $\\Lambda_X$ and our quasi-compact locally Noetherian $X$. Take the subfamily of its small representatives satisfying our scalar-model predicate. Repleteness makes this a small representative family for $\\mathcal C_X$, in exactly the universe of [def-weil-size-convention]. This implication only uses scalar-model implies local finite presentation, never its false converse.",
+      "uses": [
+        "def-weil-pbc-internal-abelian-sheaf-module-equivalence",
+        "def-weil-sheaf-of-modules-category",
+        "det-def-sfb-constructible-local-model",
+        "lem-sfb-constructible-module-objects-essentially-small",
+        "def-weil-size-convention"
+      ],
+      "elementary": false,
+      "source": {
+        "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-lem-brown-hypotheses/sk-lem-brown-hypotheses-small.proof.md",
+        "place": "Essentially small paragraph; restrict the existing local-finite-presentation small family to finite scalar-model objects"
+      }
+    },
+    {
+      "text": "Since $X$ is locally Noetherian, [lem-weil-pbc-locally-noetherian-quasi-separated] makes it quasi-separated; together with the assumed quasi-compactness this permits the global finite-stratification convention. The underlying space of $X$ is Noetherian by [lem-weil-pbc-noetherian-scheme-closed-subsets-minimal]. Every subspace is Noetherian: an increasing chain of relative opens is represented by ambient opens, whose successive finite unions give a stabilizing increasing ambient chain. Consequently every locally closed stratum is topologically Noetherian, and [lem-sc-noetherian-finite-irreducible-components] gives finitely many irreducible components on it and on its open subspaces. For any pair of constructible objects take the finite common stratification formed by fibre products in [lem-weil-pbc-constructible-stratification-intersection]. Finite scalar models persist on a further restriction: pull back the scalar finite matrix presentation of [det-def-sfb-constructible-local-model]; the exact pullback of [det-prop-sfb-module-pullback-exact-main] preserves its cokernel and finite free terms, with the same scalar entries. The composition comparisons of [sk-def-sfb-module-pushforward-pullback] identify this with restriction from $X$. Thus both objects have finite scalar models on every common stratum. Exactness also identifies restrictions of ambient kernels, cokernels and short exact sequences with those computed on the stratum.",
+      "uses": [
+        "lem-weil-pbc-locally-noetherian-quasi-separated",
+        "lem-weil-pbc-noetherian-scheme-closed-subsets-minimal",
+        "lem-sc-noetherian-finite-irreducible-components",
+        "lem-weil-pbc-constructible-stratification-intersection",
+        "det-def-sfb-constructible-local-model",
+        "det-prop-sfb-module-pullback-exact-main",
+        "sk-def-sfb-module-pushforward-pullback"
+      ],
+      "elementary": false,
+      "source": {
+        "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
+        "place": "Theorem 6.2 proof, restriction to strata and their finite-component hypothesis; scalar-matrix refinement argument"
+      }
+    },
+    {
+      "text": "First treat $\\Lambda\\in\\{\\mathbf Z_\\ell,\\mathcal O_E,\\mathbf Q_\\ell,E,\\Omega\\}$. Every field has only the ideals $0$ and the unit ideal. The valuation rings here are principal ideal domains by [def-weil-l-adic-numbers] for $\\mathbf Z_\\ell$ and [lem-weil-l-adic-extension-integers-dvr] for $\\mathcal O_E$. In a domain multiplication by a nonzero generator identifies any nonzero principal ideal with the free rank-one module; the zero ideal is projective too. Hence all finitely generated ideals of each of the five scalar rings are projective. Their norm topologies are metric, so singletons are closed. Apply [lem-sfb-semihereditary-topological-coefficients-admissible] to obtain regular coherence and flatness over every extremally disconnected profinite set. These are precisely the two hypotheses required in [lem-zl-t-admissible-dualizable-truncations], including for $C(-,\\Omega)$ with all continuous functions. This argument imposes no finite-subextension or completeness condition on $\\Omega$.",
+      "uses": [
+        "def-weil-l-adic-numbers",
+        "lem-weil-l-adic-extension-integers-dvr",
+        "lem-sfb-semihereditary-topological-coefficients-admissible",
+        "lem-zl-t-admissible-dualizable-truncations"
+      ],
+      "elementary": false,
+      "source": {
+        "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
+        "place": "Lemma 6.10 and Corollary 6.11(1), fields and discrete valuation rings; Theorem 6.2(2) hypotheses"
+      }
+    },
+    {
+      "text": "On a common stratum $T$, take the full dualizable subcategory of $D(\\operatorname{Mod}_{\\Lambda_T})$. It is strictly full and triangulated by [lem-zl-condensed-dualizable-local-perfect-models]. The finite-component condition proved in step 2 and the coefficient hypotheses of step 3 permit [lem-zl-t-admissible-dualizable-truncations]: all standard truncations stay dualizable, and its degree-zero objects are exactly the finite constant scalar models. In particular its cohomology objects, placed in degree zero, are again dualizable. Apply [lem-sfb-derived-degree-zero-abelian-criterion] to this full triangulated subcategory. It follows that finite scalar models on $T$ contain zero and are closed under all ambient kernels, cokernels and extensions. Concretely, for a map of models, the two cohomology sheaves of its dualizable cone give its kernel and cokernel; for an ambient short exact sequence its triangle and closure under cones give the middle model. These statements apply to integral torsion models as well as finite free field models. By step 2 every restriction of an ambient kernel, cokernel or extension of constructible sheaves has this form on the finite common stratification. That stratification therefore witnesses constructibility of the resulting sheaf, by [sk-def-sfb-constructible].",
+      "uses": [
+        "lem-zl-condensed-dualizable-local-perfect-models",
+        "lem-zl-t-admissible-dualizable-truncations",
+        "lem-sfb-derived-degree-zero-abelian-criterion",
+        "sk-def-sfb-constructible"
+      ],
+      "elementary": false,
+      "source": {
+        "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
+        "place": "Definition 3.3 and stability observation; Theorem 6.2(2)-(3); ordinary derived degree-zero closure criterion"
+      }
+    },
+    {
+      "text": "For the remaining case $\\Lambda=A$, [lem-sf-module-object-ordinary-coefficient-equivalence] gives an exact equivalence between $\\mathcal A_X$ and the category of ordinary module sheaves over the constant ring sheaf $A_X$. An exact equivalence of abelian categories preserves and reflects kernels, cokernels and short exact sequences. Since $X$ is Noetherian and $A$ is a finite commutative ring, [lem-pe-finite-coefficient-model-comparison] shows that a $\\Lambda_X$-module lies in $\\mathcal C_X$ if and only if its image is constructible in the locally constant finite-stalk sense of [def-weil-proetale-constructible-sheaf]. The same finite constructible stratifications serve, and the comparison supplies both the finiteness of the stalks and the converse passage from finite locally constant values back to finitely presented scalar models. Let $f$ be a morphism in $\\mathcal C_X$, or let $0\\to M\\to L\\to N\\to0$ be an ambient short exact sequence with $M,N\\in\\mathcal C_X$. Apply [lem-weil-proetale-constructible-exact-closure] to the image under the equivalence: the images of $\\ker f$, $\\operatorname{coker}f$ and $L$ are constructible in that sense. By the comparison again, $\\ker f$, $\\operatorname{coker}f$ and $L$ belong to $\\mathcal C_X$. No regularity or finite projective dimension of $A$ is used. In particular $A=\\mathbf Z/\\ell^2$ is handled here, not by the topological t-admissibility argument; the empty scheme and $A=0$ are included in both cited statements.",
+      "uses": [
+        "lem-sf-module-object-ordinary-coefficient-equivalence",
+        "lem-pe-finite-coefficient-model-comparison",
+        "def-weil-proetale-constructible-sheaf",
+        "lem-weil-proetale-constructible-exact-closure"
+      ],
+      "elementary": false,
+      "source": {
+        "document": "literature/stacks-project/proetale.tex",
+        "place": "Tag 09B5 (lemma-constructible-serre), using Tag 03RZ (lemma-constructible-abelian)(3); finite scalar encoding"
+      }
+    },
+    {
+      "text": "The zero scalar module gives a zero object of $\\mathcal C_X$ on the one-stratum stratification, also when $X$ is empty or $A=0$. The preceding two cases prove ambient kernel, cokernel and extension closure for every permitted coefficient. Finite biproducts belong to $\\mathcal C_X$ by applying extension closure to the split sequence $0\\to F\\to F\\oplus G\\to G\\to0$. Apply [lem-weil-pbc-abelian-full-subcategory-exact] to the full replete subcategory $\\mathcal C_X\\subseteq\\mathcal A_X$: it is abelian with the ambient kernels and cokernels, and its inclusion is exact. Together with step 1 this gives every asserted clause. The only conditions on $X$ used were local Noetherianity and quasi-compactness; there was no dimension or characteristic restriction.",
+      "uses": [
+        "lem-weil-pbc-abelian-full-subcategory-exact"
+      ],
+      "elementary": false,
+      "source": {
+        "document": "literature/stacks-project/homology.tex",
+        "place": "Tag 0754 (lemma-characterize-weak-serre-subcategory) and the remark after Definition 02MO (definition-serre-subcategory)"
+      }
+    }
+  ],
+  "proof_deps": [
+    "def-weil-pbc-internal-abelian-sheaf-module-equivalence",
+    "def-weil-sheaf-of-modules-category",
+    "det-def-sfb-constructible-local-model",
+    "lem-sfb-constructible-module-objects-essentially-small",
+    "def-weil-size-convention",
+    "lem-weil-pbc-locally-noetherian-quasi-separated",
+    "lem-weil-pbc-noetherian-scheme-closed-subsets-minimal",
+    "lem-sc-noetherian-finite-irreducible-components",
+    "lem-weil-pbc-constructible-stratification-intersection",
+    "det-prop-sfb-module-pullback-exact-main",
+    "sk-def-sfb-module-pushforward-pullback",
+    "def-weil-l-adic-numbers",
+    "lem-weil-l-adic-extension-integers-dvr",
+    "lem-sfb-semihereditary-topological-coefficients-admissible",
+    "lem-zl-t-admissible-dualizable-truncations",
+    "lem-zl-condensed-dualizable-local-perfect-models",
+    "lem-sfb-derived-degree-zero-abelian-criterion",
+    "sk-def-sfb-constructible",
+    "lem-sf-module-object-ordinary-coefficient-equivalence",
+    "lem-pe-finite-coefficient-model-comparison",
+    "def-weil-proetale-constructible-sheaf",
+    "lem-weil-proetale-constructible-exact-closure",
+    "lem-weil-pbc-abelian-full-subcategory-exact"
+  ],
+  "proof_origin": {
+    "by": "agent",
+    "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
+    "place": "Lemma 6.10; Corollary 6.11(1); Theorem 6.2(2)-(3), assembled with existing ordinary smallness and finite-discrete encoding/exact-closure nodes; no completed-category comparison."
+  },
+  "mathlib_searches": [
+    {
+      "tool": "leanfinder",
+      "query": "On a topologically Noetherian scheme finite constant scalar model constructible sheaves for continuous l adic rings and a finite discrete ring form an essentially small weak Serre subcategory",
+      "results": "8 hits; [\"AlgebraicGeometry.IsNoetherian\", \"LightCondensed.instIsGrothendieckAbelianLightCondMod\", \"AlgebraicGeometry.IsLocallyNoetherian\", \"Condensed.finFree\", \"CondensedMod\", \"LightCondMod.LocallyConstant.instHasSheafifyLightProfiniteCoherentTopologyModuleCat\", \"Condensed.instAB5CondensedMod\", \"CondensedMod.IsSolid\"]",
+      "date": "2026-10-24",
+      "verdict": "no match: generic sheaf, condensed Grothendieck and finite-presentation results do not assert finite scalar-model constructible weak Serre closure and smallness"
+    },
+    {
+      "tool": "leansearch",
+      "query": "Kernels cokernels and extensions of constructible sheaves over topological l adic coefficient rings on a Noetherian space remain constructible",
+      "results": "8 hits; [\"TopModuleCat.isColimitCoker\", \"ModuleCat.cokernelIsColimit\", \"SheafOfModules.relationsOfIsCokernelFree_s\", \"TopModuleCat.coker\", \"CategoryTheory.Abelian.epiIsCokernelOfKernel\", \"CategoryTheory.NonPreadditiveAbelian.epiIsCokernelOfKernel\", \"CategoryTheory.ComposableArrows.Exact.cokerToKer'\", \"CategoryTheory.NonPreadditiveAbelian.monoIsKernelOfCokernel\"]",
+      "date": "2026-10-24",
+      "verdict": "no match: generic sheaf, condensed Grothendieck and finite-presentation results do not assert finite scalar-model constructible weak Serre closure and smallness"
+    },
+    {
+      "tool": "loogle",
+      "query": "\"constructible\", CategoryTheory.Sheaf",
+      "results": "0 hits; []",
+      "date": "2026-10-24",
+      "verdict": "no match: generic sheaf, condensed Grothendieck and finite-presentation results do not assert finite scalar-model constructible weak Serre closure and smallness"
+    },
+    {
+      "tool": "grep",
+      "query": "IsConstantModelConstructible|IsConstructibleSheaf|constructible.*[Ss]erre|constructible.*[Kk]ernel",
+      "results": "0 hits; []",
+      "date": "2026-10-24",
+      "verdict": "no match: generic sheaf, condensed Grothendieck and finite-presentation results do not assert finite scalar-model constructible weak Serre closure and smallness"
+    },
+    {
+      "tool": "leanfinder",
+      "query": "Finite scalar model constructible sheaves with finite discrete or continuous l adic coefficients are the heart of constructible derived sheaves on a Noetherian scheme and form a small abelian extension closed category",
+      "results": "8 hits; [\"LightCondensed.instIsGrothendieckAbelianLightCondMod\", \"Condensed.finFree\", \"CondensedMod\", \"instAbelianCondensedMod\", \"Condensed.instAB4CondensedMod\", \"CategoryTheory.Sheaf.isGrothendieckAbelian_of_essentiallySmall\", \"Condensed.instAB5CondensedMod\", \"LightCondensed.instCountableAB4StarLightCondMod\"]",
+      "date": "2026-10-24",
+      "verdict": "no match: generic sheaf, condensed Grothendieck and finite-presentation results do not assert finite scalar-model constructible weak Serre closure and smallness"
+    },
+    {
+      "tool": "grep",
+      "query": "IsConstantModelConstructible|constructible.*[Kk]ernel|constructible.*[Ss]erre",
+      "results": "0 hits: ",
+      "date": "2026-10-24",
+      "verdict": "no match: generic abelian sheaf and condensed module instances do not assert finite scalar-model constructible closure or smallness"
+    },
+    {
+      "tool": "loogle",
+      "query": "\"constructible\", CategoryTheory.Sheaf",
+      "results": "0 hits: ",
+      "date": "2026-10-24",
+      "verdict": "no match: generic abelian sheaf and condensed module instances do not assert finite scalar-model constructible closure or smallness"
+    },
+    {
+      "tool": "leanfinder",
+      "query": "Finite scalar model constructible sheaves over continuous l adic rings on a Noetherian scheme form an essentially small abelian subcategory closed under ambient extensions",
+      "results": "8 hits: LightCondensed.instIsGrothendieckAbelianLightCondMod, CondensedMod, instAbelianCondensedMod, Condensed.finFree, CategoryTheory.Sheaf.isGrothendieckAbelian_of_essentiallySmall, Condensed.instAB4CondensedMod, Condensed.instAB5CondensedMod, CondensedMod.IsSolid",
+      "date": "2026-10-24",
+      "verdict": "no match: generic abelian sheaf and condensed module instances do not assert finite scalar-model constructible closure or smallness"
+    },
+    {
+      "tool": "leansearch",
+      "query": "An essentially small abelian category of constructible module sheaves on a Noetherian pro etale site with continuous topological coefficients",
+      "results": "8 hits: CategoryTheory.Sheaf.isGrothendieckAbelian_of_essentiallySmall, SheafOfModules.instAbelian, CategoryTheory.Sheaf.instIsGrothendieckAbelian, CategoryTheory.sheafIsAbelian, CategoryTheory.hasLimitsEssentiallySmallSite, AlgebraicGeometry.Scheme.Modules.instAbelian, SheafOfModules.hasLimit, LightCondensed.instIsGrothendieckAbelianLightCondMod",
+      "date": "2026-10-24",
+      "verdict": "no match: generic abelian sheaf and condensed module instances do not assert finite scalar-model constructible closure or smallness"
+    }
+  ],
+  "mathlib_match": null,
+  "status": "split",
+  "created": {
+    "by": "worker",
+    "item": "lem-sfb-finite-complex-heart-filtered-approximation",
+    "date": "2026-10-24",
+    "group": "NN"
+  },
+  "blueprint": {
+    "from": {
+      "node": "det-sf-comp-coherence-cocycle",
+      "place": "Refinement proof (2), preservation of direct sums on the localizing hull: corrected Noetherian heart route; finite scalar-model heart closure and essential smallness.",
+      "via": [
+        "lem-sfb-finite-complex-heart-filtered-approximation",
+        "lem-sfb-torsion-cd-topological-serre-transfer",
+        "lem-sfb-affine-profinite-family-serre-cd",
+        "lem-sfb-profinite-geometric-family-heart-cd",
+        "lem-sfb-qcqs-proper-serre-heart-bound",
+        "lem-sfb-qcqs-proper-hull-tail-bound",
+        "lem-sfb-qcqs-proper-localizing-coproducts",
+        "lem-sfb-qcqs-proper-open-boundary-vanishing"
+      ]
+    },
+    "same_as": [],
+    "is": null
+  },
+  "split_report": {
+    "date": "2026-10-24",
+    "item": "lem-sfb-noetherian-scalar-constructible-heart",
+    "worker": "stage1",
+    "summary": "Kept the statement exactly. Separated finite discrete coefficients from topological t-admissible coefficients; proved closure by common stratification and the existing dualizable-truncation/degree-zero criterion, and smallness by the existing larger local-finite-presentation small class. One new coefficient-only lemma (HRS Lemma 6.10) is left unsplit. All-continuous Omega, integral torsion models, arbitrary characteristic and dimension, empty scheme and zero ring retained.",
+    "blueprint": "Nearest imported ancestor det-sf-comp-coherence-cocycle: refinement/direct-sum preservation obligation, through the recorded chain of localizing coproduct and Noetherian heart refinements. The current ancestor delegates refinement isomorphisms to det-sf-comp-coherence-refinement; this is a coefficient-heart input below that route, not a new compactification argument.",
+    "tool_uses": [
+      {
+        "node": "lem-sfb-constructible-module-objects-essentially-small",
+        "why": "Generic Constructible module objects form an essentially small class input used only for coefficient-heart closure, geometric restriction, or smallness; it does not replace any step of compactification coherence."
+      },
+      {
+        "node": "lem-weil-pbc-constructible-stratification-intersection",
+        "why": "Generic Common refinement of two stratifications with constructible strata input used only for coefficient-heart closure, geometric restriction, or smallness; it does not replace any step of compactification coherence."
+      },
+      {
+        "node": "det-prop-sfb-module-pullback-exact-main",
+        "why": "Generic Exactness of pullback on module objects input used only for coefficient-heart closure, geometric restriction, or smallness; it does not replace any step of compactification coherence."
+      },
+      {
+        "node": "lem-weil-l-adic-extension-integers-dvr",
+        "why": "Generic The valuation ring of a finite extension of $\\mathbf Q_\\ell$ is a discrete valuation ring with finite residue field input used only for coefficient-heart closure, geometric restriction, or smallness; it does not replace any step of compactification coherence."
+      },
+      {
+        "node": "lem-zl-t-admissible-dualizable-truncations",
+        "why": "Generic Truncation and heart theorem for t-admissible condensed coefficients input used only for coefficient-heart closure, geometric restriction, or smallness; it does not replace any step of compactification coherence."
+      },
+      {
+        "node": "lem-zl-condensed-dualizable-local-perfect-models",
+        "why": "Generic Local scalar perfect models for dualizable condensed sheaves input used only for coefficient-heart closure, geometric restriction, or smallness; it does not replace any step of compactification coherence."
+      },
+      {
+        "node": "lem-sfb-derived-degree-zero-abelian-criterion",
+        "why": "Generic An abelian degree-zero category from cohomology closure in a derived subcategory input used only for coefficient-heart closure, geometric restriction, or smallness; it does not replace any step of compactification coherence."
+      },
+      {
+        "node": "lem-weil-proetale-constructible-exact-closure",
+        "why": "Generic Exactness closure of globally constructible pro-etale module sheaves input used only for coefficient-heart closure, geometric restriction, or smallness; it does not replace any step of compactification coherence."
+      },
+      {
+        "node": "lem-sf-module-object-ordinary-coefficient-equivalence",
+        "why": "Generic exact equivalence between internal finite-discrete coefficient modules and ordinary constant-ring module sheaves, used only for finite-coefficient heart closure; it does not replace any step of compactification coherence."
+      },
+      {
+        "node": "lem-pe-finite-coefficient-model-comparison",
+        "why": "Generic identification of finite constant-model constructibility with locally constant finite-stalk constructibility on a Noetherian scheme, used only for finite-coefficient heart closure; it does not replace any step of compactification coherence."
+      }
+    ]
+  },
+  "tool_uses": [
+    "lem-sfb-constructible-module-objects-essentially-small",
+    "lem-weil-pbc-constructible-stratification-intersection",
+    "det-prop-sfb-module-pullback-exact-main",
+    "lem-weil-l-adic-extension-integers-dvr",
+    "lem-zl-t-admissible-dualizable-truncations",
+    "lem-zl-condensed-dualizable-local-perfect-models",
+    "lem-sfb-derived-degree-zero-abelian-criterion",
+    "lem-weil-proetale-constructible-exact-closure",
+    "lem-sf-module-object-ordinary-coefficient-equivalence",
+    "lem-pe-finite-coefficient-model-comparison"
+  ],
+  "reviewed": {
+    "date": "2026-10-23",
+    "by": "L",
+    "reviewer": "NT-cc-N5-2d0a45427",
+    "group": "N5",
+    "result": "pass",
+    "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-N5-2d0a45427 (reviewer sub-agent of L); spot-checked: Read the whole item, the new node, every cited statement and the HRS sources (Def 6.1, Thm 6.2(2)-(3) and proof, Lemma 6.7(1), Lemma 6.10 and proof, Cor 6.11, Remark 6.9 on Z/ℓ²). The statement is unchanged from live, and the item is still unsplit in live and side-live. No cycle, no SGA. Steps 1-4 and 6 are correct. Step 1: scalar model ⇒ locally finitely presented, then the u+1-small class. Step 2: 01OY gives qcqs, 01OZ gives a Noetherian space, subspaces are Noetherian, the strata have finitely many components, the strata are fibre products, and exact pullback keeps the scalar matrices. Step 3: fields and the PIDs Z_ℓ and O_E are semihereditary; all five rings are metric, so T1. Step 4: dualizable subcategory stable, then HRS truncation with heart = finite scalar models, then the degree-zero criterion gives ambient kernels, cokernels and extensions on each stratum. Step 6: weak Serre criterion. New node lem-sfb-semihereditary-topological-coefficients-admissible is true and matches HRS Lemma 6.10 with 6.7(1). Checks: f.p. modules have projective resolutions of length ≤1, C(P,R) ⊂ R^P is torsionless hence flat by Chase, Z/ℓ² is correctly excluded. B1-B3 hold, it is not a clause of the item, and no duplicate exists (searched semihereditary, Prüfer, torsionless, t-admissible, regular coherent, HRS 6.10/6.11). FIX (C4/E5) in step 5, finite A: from the encoding, scalar-constant-model and pullback nodes the step asserted equality with the 09B5 intrinsic constructibility (locally constant with finite geometric stalks). That skipped the stalk finiteness (lem-weil-pbc-proetale-finite-model-stalks) and the way back to scalar models. Step 5 now cites lem-sf-module-object-ordinary-coefficient-equivalence, lem-pe-finite-coefficient-model-comparison, def-weil-proetale-constructible-sheaf and lem-weil-proetale-constructible-exact-closure. proof_deps are now the union of the step uses, tool_uses are adjusted, and neither added node has the item or any trf/pd node in its closure. Batch-5: lem-zl-t-admissible-dualizable-truncations and lem-zl-condensed-dualizable-local-perfect-models are general HRS coefficient theorems, not parts of the trace formula or Poincaré duality. Against the base closure they add only three generic nodes: lem-trf-geometric-inverse-image-exact (04JC), lem-trf-henselian-smooth-algebra-lifting and lem-pod-derived-exact-square-composition. Accepted.; 1 file(s) fixed by the reviewer"
+  },
+  "lean": {
+    "module": "Sheaf.Paper.NoetherianScalarConstructibleHeart",
+    "declaration": "AlgebraicGeometry.ProEtale.noetherian_scalar_constructible_heart",
+    "file": "lean/Sheaf/Paper/NoetherianScalarConstructibleHeart.lean",
+    "statement": "theorem noetherian_scalar_constructible_heart (ℓ : ℕ) [Fact ℓ.Prime] (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ] [IsCommMonObj Λ] (hΛ : (∃ (A : Type) (_ : CommRing A) (_ : TopologicalSpace A) (_ : DiscreteTopology A) (_ : IsTopologicalRing A), Finite A ∧ (∃ n : ℕ, ∀ a : A, (ℓ ^ n) • a = 0) ∧ Nonempty (Mon.mk Λ ≅ Mon.mk (Profinite.continuousMapRingObj A))) ∨ Nonempty (Mon.mk Λ ≅ Mon.mk (Profinite.continuousMapRingObj ℤ_[ℓ])) ∨ (∃ E : PadicAlgCl.FiniteIntermediateField ℓ, Nonempty (Mon.mk Λ ≅ Mon.mk (Profinite.padicIntegersRingObj ℓ E))) ∨ Nonempty (Mon.mk Λ ≅ Mon.mk (Profinite.continuousMapRingObj ℚ_[ℓ])) ∨ (∃ E : PadicAlgCl.FiniteIntermediateField ℓ, Nonempty (Mon.mk Λ ≅ Mon.mk (Profinite.continuousMapRingObj E)))) (X : Scheme.{u}) [IsLocallyNoetherian X] [CompactSpace X] : EssentiallySmall.{u + 1} (ConstantModelConstructible Λ X) ∧ ObjectProperty.IsClosedUnderIsomorphisms (IsConstantModelConstructible Λ X) ∧ ObjectProperty.ContainsZero (IsConstantModelConstructible Λ X) ∧ ObjectProperty.IsClosedUnderKernels (IsConstantModelConstructible Λ X) ∧ ObjectProperty.IsClosedUnderCokernels (IsConstantModelConstructible Λ X) ∧ ObjectProperty.IsClosedUnderExtensions (IsConstantModelConstructible Λ X) ∧ Nonempty (Abelian (ConstantModelConstructible Λ X)) ∧ PreservesFiniteLimits (ObjectProperty.ι (IsConstantModelConstructible Λ X)) ∧ PreservesFiniteColimits (ObjectProperty.ι (IsConstantModelConstructible Λ X))",
+    "branch": "newtargets-dag",
+    "by": "NC",
+    "date": "2026-10-23",
+    "existing": false,
+    "note": "All six coefficient alternatives are written explicitly: IsLocalizingAdmissibleCoefficient also admits a distinct finite-subextension-valued algebraic closure, whereas this node specifically requires continuousMapRingObj (PadicAlgCl ell). The ordinary internal module category and the recorded finite scalar-model constructibility predicate are unchanged. The conclusion includes repleteness, zero, ambient kernel/cokernel/extension closure, essential smallness in u+1, abelianness and preservation of finite limits and colimits by the full inclusion."
+  },
+  "reviewed_lean": {
+    "date": "2026-10-23",
+    "by": "L",
+    "reviewer": "NT-stage2-cc-7630baff4",
+    "group": "NC",
+    "result": "pass",
+    "note": "Six hΛ disjuncts = the node's coefficient cases (all-continuous Ω via continuousMapRingObj (PadicAlgCl ℓ), recorded predicate's extra padicAlgClRingObj case correctly omitted); IsLocallyNoetherian+CompactSpace = recorded Noetherian deps (qcqs → stratified branch); IsCommMonObj required by the predicate and implied by hΛ; conclusions EssentiallySmall.{u+1}, replete, ContainsZero, kernels/cokernels/extensions closure, Abelian, exact ι match the node; edge cases (empty X, A=0, any char/dim) covered; lean.statement verbatim; stmt_dep records identical to live; no new defs, sorry only, docstrings and report sections OK; no existing full match. Advisory: proof-dep module Sheaf.Topology.SemihereditaryContinuousCoefficients landed after base (2026-10-24 06:03), stage 3 should import it."
+  },
+  "statement_change": {
+    "date": "2026-10-25",
+    "by": "L maintenance (coefficient removal, follow-up of 66b1ce0e791)",
+    "old_statement": "Fix a prime $\\ell$, a finite extension $E/\\mathbf Q_\\ell$ in a fixed algebraic closure $\\Omega=\\overline{\\mathbf Q}_\\ell$, and a finite commutative ring $A$ killed by a power of $\\ell$. Let $\\Lambda$ be one of $A,\\mathbf Z_\\ell,\\mathcal O_E,\\mathbf Q_\\ell,E,\\Omega$, discrete for $A$ and norm-topological otherwise. Its condensed ring is $P\\mapsto C(P,\\Lambda)$ on profinite sets; for $\\Omega$ this means all continuous functions, with no finite-subextension restriction [sk-def-localizing-closure]. Let $X$ be a Noetherian scheme, meaning locally Noetherian [pqf-def-locnoeth] and quasi-compact [def-weil-pbc-quasi-compact-scheme]. On the small pro-etale site [def-weil-pbc-proetale-site], in the universes of [def-weil-size-convention], set $\\Lambda_X=p_X^*\\Lambda$ and let $\\mathcal A_X=\\operatorname{Mod}_{\\Lambda_X}$ be the ordinary uncompleted internal module category [sk-def-sfb-module-derived-pushpull]. Let $\\mathcal C_X$ be its full replete subcategory of finite constant scalar-model constructible modules [sk-def-sfb-constructible]; in particular finitely presented integral torsion scalar models are allowed. Then $\\mathcal C_X$ is essentially small in the specified indexing universe, contains zero, and is closed in $\\mathcal A_X$ under kernels and cokernels of all maps between its objects and under every ambient extension. Thus it is an abelian category with exact inclusion. No condition on the characteristic or dimension of $X$ is imposed; the empty scheme and zero coefficient ring are included.",
+    "what": "Decision of the human, 2026-10-25: the ring of all continuous maps to the algebraic closure (continuousMapRingObj (PadicAlgCl l)) is no longer an admissible coefficient (commit 66b1ce0e791, coord/changes/L-coefficient-allcontinuous-removal.md). That commit narrowed the roots of this chain (weak-Serre generation, torsion-cd Serre transfer) to A, Z_l, O_E, Q_l, E, but this statement still listed the all-continuous case. It is dropped here and from the Lean hypothesis (landing L 20261025T093525); the remaining coefficients are unchanged. No citer uses the dropped case.",
+    "source": {
+      "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-localizing-closure/_section.md",
+      "place": "coefficient list A, Z_l, O_E, Q_l, E, Qbar_l, with Qbar_l read as sk-def-sfb-qlbar-condensed"
+    },
+    "citers": [
+      {
+        "id": "lem-sfb-qcqs-finite-complex-heart-filtered-closure",
+        "holds": true,
+        "note": "cites it only for A, Z_l, O_E, Q_l, E; the all-continuous algebraic-closure coefficient is not admissible any more"
+      },
+      {
+        "id": "lem-sfb-supported-image-koszul-comparison-nonpositive",
+        "holds": true,
+        "note": "cites it only for A, Z_l, O_E, Q_l, E; the all-continuous algebraic-closure coefficient is not admissible any more"
+      }
+    ]
+  }
+}

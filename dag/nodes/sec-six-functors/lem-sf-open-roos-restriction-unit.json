@@ -1,0 +1,400 @@
+{
+ "id": "lem-sf-open-roos-restriction-unit",
+ "kind": "statement",
+ "title": "Restriction of the open Roos comparison through the canonical unit",
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-pf-coherence",
+ "statement": "Fix the finite-field datum $k=\\overline{\\mathbf F}_q$, a prime $\\ell\\ne\\operatorname{char}k$, a finite extension $E/\\mathbf Q_\\ell$, its valuation ring $R=\\mathcal O_E$, a uniformizer $t$, and $A_n=R/t^n$ for $n\\ge1$ [def-weil-finite-field-fiber, def-weil-l-adic-coefficient-extension]. On each small pro-etale site put $B_W=\\lim_n(A_n)_W$ [def-weil-pbc-proetale-site, def-weil-completed-integral-coefficients] and use the ordinary unbounded module derived category $D(B_W)$ [def-weil-sheaf-of-modules-category, def-weil-abstract-derived-category]. Open extension and restriction mean exact ringed-slice functors $e_!\\dashv e^*$, applied termwise [lem-pur-site-restriction-module-adjunction-exact].\nLet $j:U\\hookrightarrow X$ be an open immersion of finite-type $k$-schemes [def-weil-scheme-morphism-properties, def-weil-open-immersion]. Work with sites small in the fixed module universe; all tower indices are $\\mathbf N_{\\geq1}^{\\mathrm{op}}$. Write $L_W=R\\lim$ for total right derived inverse limit on strict towers of $B_W$-modules and use its normalized signed Roos model [lem-cbc-exact-product-functor-strict-limit]. A strict tower complex $M_\\bullet$ has termwise product $P_M=\\prod_nM_n$, transition shift $s((x_n)_n)=(d_nx_{n+1})_n$, and signed fiber $\\mathsf H(M)^a=P_M^a\\oplus P_M^{a-1}$ with differential $(x,y)\\mapsto(dx,(1-s)x-dy)$. Here $d_n:M_{n+1}\\to M_n$ are the tower transitions. Denote termwise extension by $J$ and termwise restriction by $G$; the same open operations on derived categories are written $j_!$ and $j^*$.\nUse the comparisons $\\lambda_M:j_!L_UM_\\bullet\\xrightarrow{\\sim}L_XJM_\\bullet$ of [lem-sf-open-roos-extension-comparison]. Let $u:1\\xrightarrow{\\sim}j^*j_!$ be the actual open adjunction unit, section-normalized to the identity over the open, also termwise on strict systems [lem-sf-open-tensor-normalization].\nRestriction canonically identifies $j^*B_X=B_U$ and $j^*(A_n)_X=(A_n)_U$, preserving every quotient projection. It is exact and its canonical countable-product comparison is invertible and is the identity on sections over every object $V/U$. There is a specified natural isomorphism\n$$\\rho_N:j^*L_XN_\\bullet\\xrightarrow{\\sim}L_UGN_\\bullet$$\nfor every strict tower complex $N_\\bullet$ of $B_X$-modules, represented by restriction on both signed Roos summands. For every strict augmentation $c:\\Delta D\\to N_\\bullet$ one has $\\rho_N\\circ j^*a_c=a_{Gc}$, with the same quotient-unit normalization when $c$ is a quotient augmentation.\nFor every strict tower complex $M_\\bullet$ of $B_U$-modules, the following equality holds in $D(B_U)$:\n$$\\rho_{JM}\\circ j^*(\\lambda_M)\\circ u_{L_UM}=L_U(u_{M_\\bullet}).$$\nOn the normalized signed Roos models this is the equality with the product of the units $u_{M_n}$ on each of the two summands; the equality preserves all strict augmentations. No tensor factors or constructibility conditions are imposed on the tower complexes.",
+ "source": {
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Tag 09BP, lemma-j-shriek-limits, together with the localized ringed-site section formula; agent-formulated two-functor signed Roos/open-unit calculation from original item proof steps 7–8."
+ },
+ "stmt_deps": [
+  "def-weil-abstract-derived-category",
+  "def-weil-completed-integral-coefficients",
+  "def-weil-finite-field-fiber",
+  "def-weil-l-adic-coefficient-extension",
+  "def-weil-open-immersion",
+  "def-weil-pbc-proetale-site",
+  "def-weil-scheme-morphism-properties",
+  "def-weil-sheaf-of-modules-category",
+  "lem-cbc-exact-product-functor-strict-limit",
+  "lem-pur-site-restriction-module-adjunction-exact",
+  "lem-sf-open-roos-extension-comparison",
+  "lem-sf-open-tensor-normalization"
+ ],
+ "proof": [
+  {
+   "text": "Use the canonical localized-system adjunction to obtain preservation of countable products by its right adjoint. The equation piComparison_comp_π, evaluated on a section over V/U, is exactly the asserted tuple-projection identity. Use sf_clopen_coefficient_comparison for the finite and completed coefficient comparisons, including quotient projections.",
+   "uses": [
+    "lem-pur-site-restriction-module-adjunction-exact",
+    "lem-weil-pbc-module-sheaves-limits-sectionwise",
+    "lem-sf-clopen-coefficient-comparison"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "An open immersion is a monomorphism. Any two maps V to U over X agree after composition with U to X; cancellation proves that U is subterminal in the pro-etale site. Thus the direct sum defining extension on an object V over U has exactly its structure-arrow summand. The summand injection is an isomorphism. Restriction of that presheaf is the underlying slice sheaf, and cocontinuity of Over.forget commutes its sheafification with restriction. The uniquely normalized actual adjunction unit is this summand injection followed by sheafification, hence invertible. The localization-unit formula gives invertibility of the actual derived unit, first on Q of each complex and then on every object by essential surjectivity. Reuse the proved subterminal module local-calculus unit theorem for this canonical localized adjunction.",
+   "uses": [
+    "lem-pur-site-restriction-module-adjunction-exact",
+    "lem-sp-subterminal-module-local-calculus"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Take the shared signed Roos functors, coordinates, normalization isomorphisms, forward comparison, and forward augmentation laws from the open-extension comparison. Its geometry_products supplies exact countable products in both module categories. Apply exactProductFunctorRoosChainMaps to restriction, with these same models in reverse order; this supplies psiG, kappaG, both projection formulas, and naturality. Conjugation by the existing theta isomorphisms followed by full faithfulness of whiskering along Q descends the natural chain comparison to rho. Apply exactProductFunctorRoosCompatibility to get the restriction augmentation law for that rho.",
+   "uses": [
+    "lem-sf-open-roos-extension-comparison",
+    "lem-cbc-exact-product-functor-roos-chain-maps",
+    "lem-cbc-exact-product-functor-roos-compatibility"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "For each signed coordinate and product projection, composing the two diagonal comparison formulas with the actual unit gives GJ(projection) after the unit. Unit naturality identifies this with the projected termwise tower unit. The Roos-map coordinate law identifies the latter with HA of the tower unit. Joint monicity of degreewise product projections and biproduct projections proves the chain-map equality. For every augmentation, the same projection calculation on its coordinates (gamma,0) proves J(b) kappaJ=bJ and G(b) kappaG=bG.",
+   "uses": [
+    "lem-sf-open-roos-extension-comparison",
+    "lem-cbc-exact-product-functor-roos-chain-maps"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Postcompose the desired derived-unit identity with the isomorphism from the two tower-localization comparisons and thetaA. Naturality of rho moves the first tower comparison, and the two normalized Roos squares cancel the middle thetaB. Unit naturality moves thetaA past the actual derived unit. The explicit localization-unit formula, naturality of mapDerivedCategoryFactors, and the chain-map identity of the preceding step leave thetaA followed by Q(HA(tower unit)). Naturality of thetaA and the localized tower-unit formula identify this with the right-hand side. Cancel the postcomposed isomorphism.",
+   "uses": [
+    "lem-sf-open-roos-extension-comparison",
+    "lem-pur-site-restriction-module-adjunction-exact"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-cbc-exact-product-functor-roos-chain-maps",
+  "lem-cbc-exact-product-functor-roos-compatibility",
+  "lem-pur-site-restriction-module-adjunction-exact",
+  "lem-sf-clopen-coefficient-comparison",
+  "lem-sf-open-roos-extension-comparison",
+  "lem-sp-subterminal-module-local-calculus",
+  "lem-weil-pbc-module-sheaves-limits-sectionwise"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 0941, normalized signed Roos calculation; sites-modules.tex Tags 04IX and 03DJ. Lean proof by X7 uses the existing shared extension model and chain-level exact-product comparison, with explicit localization unit and projection calculations."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Restriction and extension by zero commute with normalized Roos inverse limits compatibly with the canonical adjunction unit on both signed coordinates",
+   "results": {
+    "ok": true,
+    "n_hits": 8,
+    "top": [
+     "InverseSystem.globalEquiv_naturality",
+     "CategoryTheory.SmallObject.SuccStruct.extendToSuccRestrictionLEIso",
+     "InverseSystem.invLimEquiv_apply_coe",
+     "ComplexShape.Embedding.homRestrict_comp_extendMap",
+     "ComplexShape.Embedding.liftExtend_homRestrict",
+     "LightProfinite.proj_comp_transitionMapLE",
+     "CategoryTheory.SmallObject.SuccStruct.extendToSuccRestrictionLEIso_hom_app",
+     "InverseSystem.invLimEquiv"
+    ],
+    "note": "",
+    "digest": "9a70a79f3d54006c"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: preservesLimitIso_hom_π/inv_π (Limits/Preserves/Limits.lean:58/63) are ordinary limit comparisons. restrictAdjunction_unit_app_app (Modules/Sheaf.lean:442) concerns Zariski structure-modules. Adjunction.hasExactLimitsOfShape (GrothendieckAxioms/Basic.lean:201) and derived-unit descent do not compare the two normalized signed Roos maps with the open unit."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.unit, CategoryTheory.preservesLimitIso",
+   "results": {
+    "ok": true,
+    "n_hits": 0,
+    "top": [],
+    "note": "",
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: preservesLimitIso_hom_π/inv_π (Limits/Preserves/Limits.lean:58/63) are ordinary limit comparisons. restrictAdjunction_unit_app_app (Modules/Sheaf.lean:442) concerns Zariski structure-modules. Adjunction.hasExactLimitsOfShape (GrothendieckAxioms/Basic.lean:201) and derived-unit descent do not compare the two normalized signed Roos maps with the open unit."
+  },
+  {
+   "tool": "grep",
+   "query": "preservesLimitIso_hom_π|preservesLimitIso_inv_π|restrictAdjunction_unit_app_app",
+   "results": {
+    "ok": true,
+    "n_hits": 18,
+    "top": [
+     "Mathlib/Algebra/Category/ModuleCat/Presheaf/Limits.lean",
+     "Mathlib/Algebra/Category/ModuleCat/Presheaf/Limits.lean",
+     "Mathlib/Algebra/Category/ModuleCat/Presheaf/Limits.lean",
+     "Mathlib/CategoryTheory/Limits/Preserves/Limits.lean",
+     "Mathlib/CategoryTheory/Limits/Preserves/Limits.lean",
+     "Mathlib/CategoryTheory/Limits/Preserves/Limits.lean",
+     "Mathlib/CategoryTheory/Limits/Preserves/Limits.lean",
+     "Mathlib/CategoryTheory/Limits/Preserves/Presheaf.lean"
+    ],
+    "note": "",
+    "digest": "766b17bf4371da72"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: preservesLimitIso_hom_π/inv_π (Limits/Preserves/Limits.lean:58/63) are ordinary limit comparisons. restrictAdjunction_unit_app_app (Modules/Sheaf.lean:442) concerns Zariski structure-modules. Adjunction.hasExactLimitsOfShape (GrothendieckAxioms/Basic.lean:201) and derived-unit descent do not compare the two normalized signed Roos maps with the open unit."
+  },
+  {
+   "tool": "leansearch",
+   "query": "An exact adjunction with invertible unit and product preserving functors commutes with homotopy inverse limit compatibly with its unit",
+   "results": {
+    "ok": true,
+    "n_hits": 8,
+    "top": [
+     "CategoryTheory.Limits.constLimAdj",
+     "CategoryTheory.Adjunction.CoreHomEquivUnitCounit.mk.congr_simp",
+     "CategoryTheory.Adjunction.unitAsIsoOfIso",
+     "CategoryTheory.evaluationAdjunctionLeft_unit_app_app",
+     "CategoryTheory.Adjunction.mkOfHomEquiv_unit_app",
+     "CategoryTheory.Adjunction.functorCategory_inverseImage_isomorphisms_unit",
+     "CategoryTheory.Adjunction.CoreHomEquivUnitCounit.homEquiv_unit",
+     "CategoryTheory.Adjunction.CoreHomEquivUnitCounit.mk.sizeOf_spec"
+    ],
+    "note": "",
+    "digest": "53ceb49826ff7f64"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: preservesLimitIso_hom_π/inv_π (Limits/Preserves/Limits.lean:58/63) are ordinary limit comparisons. restrictAdjunction_unit_app_app (Modules/Sheaf.lean:442) concerns Zariski structure-modules. Adjunction.hasExactLimitsOfShape (GrothendieckAxioms/Basic.lean:201) and derived-unit descent do not compare the two normalized signed Roos maps with the open unit."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a fully faithful exact left adjoint and its exact right adjoint preserving products the natural homotopy limit comparison is compatible with the adjunction unit",
+   "results": {
+    "ok": true,
+    "n_hits": 8,
+    "top": [
+     "CategoryTheory.Adjunction.hasExactLimitsOfShape",
+     "CategoryTheory.Adjunction.derived'_unit",
+     "CategoryTheory.Adjunction.derivedε_fac_app",
+     "CategoryTheory.Adjunction.derived_unit",
+     "CategoryTheory.comp_comparison_hasLimit",
+     "CategoryTheory.Adjunction.hasExactColimitsOfShape",
+     "CategoryTheory.comp_comparison_forget_hasLimit",
+     "CategoryTheory.Localization.HasProductsOfShapeAux.adj"
+    ],
+    "note": "",
+    "digest": "29fac7a883c63534"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: preservesLimitIso_hom_π/inv_π (Limits/Preserves/Limits.lean:58/63) are ordinary limit comparisons. restrictAdjunction_unit_app_app (Modules/Sheaf.lean:442) concerns Zariski structure-modules. Adjunction.hasExactLimitsOfShape (GrothendieckAxioms/Basic.lean:201) and derived-unit descent do not compare the two normalized signed Roos maps with the open unit."
+  },
+  {
+   "tool": "grep",
+   "query": "preservesLimitIso_hom_π|preservesLimitIso_inv_π|restrictAdjunction_unit_app_app",
+   "results": {
+    "ok": true,
+    "n_hits": 18,
+    "top": [
+     "Mathlib/AlgebraicGeometry/Modules/Sheaf.lean",
+     "Mathlib/CategoryTheory/Limits/Preserves/Limits.lean",
+     "Mathlib/CategoryTheory/Limits/Preserves/Limits.lean",
+     "Mathlib/CategoryTheory/Limits/Preserves/Limits.lean",
+     "Mathlib/CategoryTheory/Limits/Preserves/Limits.lean",
+     "Mathlib/CategoryTheory/Limits/Preserves/Presheaf.lean",
+     "Mathlib/CategoryTheory/Limits/Preserves/Grothendieck.lean",
+     "Mathlib/CategoryTheory/Limits/Preserves/Grothendieck.lean"
+    ],
+    "note": "",
+    "digest": "96e545aeb1281ee5"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: product/ordinary-limit projection equations, complex-shape extension, or derived adjunction descent only; none states the section-normalized open-unit identity for both signed Roos summands and all strict augmentations."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.unit, CategoryTheory.preservesLimitIso",
+   "results": {
+    "ok": true,
+    "n_hits": 0,
+    "top": [],
+    "note": "",
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: product/ordinary-limit projection equations, complex-shape extension, or derived adjunction descent only; none states the section-normalized open-unit identity for both signed Roos summands and all strict augmentations."
+  },
+  {
+   "tool": "leansearch",
+   "query": "An exact adjunction with invertible unit and product preserving functors commutes with homotopy inverse limit compatibly with its unit",
+   "results": {
+    "ok": true,
+    "n_hits": 8,
+    "top": [
+     "CategoryTheory.Limits.constLimAdj",
+     "CategoryTheory.Adjunction.CoreHomEquivUnitCounit.mk.congr_simp",
+     "CategoryTheory.Adjunction.unitAsIsoOfIso",
+     "CategoryTheory.evaluationAdjunctionLeft_unit_app_app",
+     "CategoryTheory.Adjunction.mkOfHomEquiv_unit_app",
+     "CategoryTheory.Adjunction.functorCategory_inverseImage_isomorphisms_unit",
+     "CategoryTheory.Adjunction.CoreHomEquivUnitCounit.homEquiv_unit",
+     "CategoryTheory.Adjunction.CoreHomEquivUnitCounit.mk.sizeOf_spec"
+    ],
+    "note": "",
+    "digest": "53ceb49826ff7f64"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: product/ordinary-limit projection equations, complex-shape extension, or derived adjunction descent only; none states the section-normalized open-unit identity for both signed Roos summands and all strict augmentations."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Restriction and extension by zero commute with normalized Roos inverse limits compatibly with the canonical adjunction unit on both signed coordinates",
+   "results": {
+    "ok": true,
+    "n_hits": 8,
+    "top": [
+     "Profinite.NobelingProof.GoodProducts.square_commutes",
+     "ComplexShape.Embedding.homRestrict_comp_extendMap",
+     "ComplexShape.Embedding.homRestrict_comp_extendMap_assoc",
+     "ComplexShape.Embedding.homRestrict_liftExtend",
+     "ComplexShape.Embedding.liftExtend_homRestrict",
+     "ComplexShape.Embedding.homRestrict.f_eq",
+     "Profinite.NobelingProof.spanFunctorIsoIndexFunctor",
+     "ComplexShape.Embedding.homRestrict_f"
+    ],
+    "note": "",
+    "digest": "8605d9451c764ba5"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: product/ordinary-limit projection equations, complex-shape extension, or derived adjunction descent only; none states the section-normalized open-unit identity for both signed Roos summands and all strict augmentations."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a fully faithful exact left adjoint and its exact right adjoint preserving products the natural homotopy limit comparison is compatible with the adjunction unit",
+   "results": {
+    "ok": true,
+    "n_hits": 8,
+    "top": [
+     "CategoryTheory.Adjunction.hasExactLimitsOfShape",
+     "CategoryTheory.Adjunction.derived'_unit",
+     "CategoryTheory.Adjunction.derivedε_fac_app",
+     "CategoryTheory.Adjunction.derived_unit",
+     "CategoryTheory.comp_comparison_hasLimit",
+     "CategoryTheory.Adjunction.hasExactColimitsOfShape",
+     "CategoryTheory.comp_comparison_forget_hasLimit",
+     "CategoryTheory.Localization.HasProductsOfShapeAux.adj"
+    ],
+    "note": "",
+    "digest": "29fac7a883c63534"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: product/ordinary-limit projection equations, complex-shape extension, or derived adjunction descent only; none states the section-normalized open-unit identity for both signed Roos summands and all strict augmentations."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sf-open-projection-roos-completion",
+  "date": "2026-10-22",
+  "group": "Q158"
+ },
+ "blueprint": {
+  "from": {
+   "node": "prop-sf-pf-coherence",
+   "place": "Open-factor paragraph: both composites restrict to the identity. Work package: original lem-sf-open-projection-roos-completion steps 7–8, restriction of coefficients/products and compatibility of extension/restriction Roos comparisons with the actual open unit.",
+   "via": [
+    "lem-sf-open-projection-roos-completion",
+    "lem-sf-pf-open-factor-coherence"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sf-open-roos-restriction-unit",
+  "worker": "stage1",
+  "summary": "Reused the existing slice, constant-coefficient, sectionwise-limit and normalized exact-product Roos nodes. Constructed restriction comparison with its actual augmentation, proved product-unit compatibility by every projection on both signed summands, and conjugated by the normalized Roos isomorphisms. No new nodes, statement change, Lean writing or compilation.",
+  "blueprint": "prop-sf-pf-coherence proof, open-factor paragraph: both composites restrict to the identity; specifically the restriction/unit work package in original lem-sf-open-projection-roos-completion steps 7–8.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-proetale-weakly-etale-localization",
+    "why": "Generic identification of the pro-etale site of an open with the slice and its constant ring; no node of this projection-coherence unit states that site equivalence."
+   },
+   {
+    "node": "def-pur-sheaf-inverse-limit",
+    "why": "Sectionwise compatible-family definition for ring limits, used to identify the completed coefficient sheaf and its projections."
+   },
+   {
+    "node": "lem-pur-site-restriction-module-adjunction-exact",
+    "why": "Generic exact restriction on localized ringed sites, used to check the exact-product comparison hypotheses."
+   },
+   {
+    "node": "lem-weil-pbc-module-sheaves-limits-sectionwise",
+    "why": "Generic sectionwise module limits, used solely to compute the canonical product comparison over the open."
+   },
+   {
+    "node": "lem-cbc-exact-product-functor-strict-limit",
+    "why": "Generic normalized signed Roos comparison for an exact product-preserving functor, including resolution independence and strict augmentations."
+   },
+   {
+    "node": "lem-weil-strict-roos-comparison",
+    "why": "Generic natural normalized Roos isomorphism and actual strict-augmentation coordinates, used for the final conjugation calculation."
+   },
+   {
+    "node": "lem-sf-open-tensor-normalization",
+    "why": "Only the actual section-normalized open adjunction unit, termwise on complexes and strict systems, is used to pin the Roos/unit equality; the projection-coherence unit has no alternative construction of that unit."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-proetale-weakly-etale-localization",
+  "def-pur-sheaf-inverse-limit",
+  "lem-pur-site-restriction-module-adjunction-exact",
+  "lem-weil-pbc-module-sheaves-limits-sectionwise",
+  "lem-cbc-exact-product-functor-strict-limit",
+  "lem-weil-strict-roos-comparison",
+  "lem-sf-open-tensor-normalization"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-NF-d4e9de416",
+  "group": "NF",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NF-d4e9de416 (reviewer sub-agent of L); spot-checked: Shape: one commit; only the item and its report changed, and the report has its review section. No new nodes. Statement and stmt_deps are identical to the Q158 statement-only node (C), the node created by the accepted Q158 fe40f672 re-split. No SGA. No cycle: the item is cited only by its parent. Search coverage: ten Mathlib searches of all kinds. proof_deps equals the union of the step uses. Proof: the six steps write out old parent steps 7-8 (Q140) in full. Step 1: the coefficient identification follows from the weakly-etale localization (1)-(2), naturality of constant-sheaf restriction and the sectionwise ring limit (def-weil-completed-integral-coefficients). Step 2: the product comparison psi is the identity on tuples by the localized-site section formula and sectionwise limits. Exact countable products are an explicit clause of lem-sf-open-roos-extension-comparison. Step 3: every hypothesis of lem-cbc-exact-product-functor-strict-limit holds. I rechecked that psi commutes with the transition shift s. Step 4: the augmentation coordinates ((c_n),0) and the cbc augmentation clause give rho j^*a_c=a_{Gc} directly. Step 5: I recomputed pr_n psi G(phi) u_P = GJ(pr_n) u_P = u_{M_n} pr_n. Step 6: I recomputed the theta-conjugation; it cancels to theta^{-1} H(u_M) theta_M, which is L_U(u_M) by naturality of the strict Roos comparison. Edge cases U empty, j=id and unbounded or zero towers all pass. Sources read: Stacks 09BP (proetale.tex l.5185), 0941, 00XR, and the tag map for 04IX, 03DB and 03DJ. lem-sp-slice-restriction-strict-derived-limit and lem-sf-open-roos-unit-adjunction only partly overlap with the item; neither is a duplicate. The seven declared tool uses are generic black boxes and are accepted. No changes."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.SfOpenRoosRestrictionUnit",
+  "declaration": "WeilConjectures.SfOpenRoos.restriction_unit",
+  "declarations": [
+   "WeilConjectures.SfOpenRoos.restrictionUnitDerivedAdjunction",
+   "WeilConjectures.SfOpenRoos.restrictionUnitTowerDerivedAdjunction",
+   "WeilConjectures.SfOpenRoos.RestrictionUnitAssertions",
+   "WeilConjectures.SfOpenRoos.restrictionUnitAdditive",
+   "WeilConjectures.SfOpenRoos.restrictionUnitLimits",
+   "WeilConjectures.SfOpenRoos.restrictionUnitColimits",
+   "WeilConjectures.SfOpenRoos.restriction_unit"
+  ],
+  "file": "lean/Sheaf/Paper/SfOpenRoosRestrictionUnit.lean",
+  "statement": "theorem restriction_unit (D : FiniteFieldDatum.{t}) (_hl : l ≠ D.p) (aX : X ⟶ Spec (CommRingCat.of D.k)) [LocallyOfFiniteType aX] [QuasiCompact aX] [LocallyOfFiniteType (U.hom ≫ aX)] [QuasiCompact (U.hom ≫ aX)] [IsOpenImmersion U.hom] [HasDerivedCategory.{wA} (modulesU l E X U)] [HasDerivedCategory.{wA} (ℕᵒᵖ ⥤ modulesU l E X U)] [HasDerivedCategory.{wB} (modulesX l E X)] [HasDerivedCategory.{wB} (ℕᵒᵖ ⥤ modulesX l E X)] (LA : DerivedCategory.{wA} (ℕᵒᵖ ⥤ modulesU l E X U) ⥤ DerivedCategory.{wA} (modulesU l E X U)) (LB : DerivedCategory.{wB} (ℕᵒᵖ ⥤ modulesX l E X) ⥤ DerivedCategory.{wB} (modulesX l E X)) (etaA : HomologicalComplex.complexOfFunctorsToFunctorToComplex ⋙ (lim : (ℕᵒᵖ ⥤ CochainComplex (modulesU l E X U) ℤ) ⥤ CochainComplex (modulesU l E X U) ℤ) ⋙ DerivedCategory.Q.{wA} ⟶ DerivedCategory.Q.{wA} ⋙ LA) (_hLA : LA.IsRightDerivedFunctor etaA (HomologicalComplex.quasiIso (ℕᵒᵖ ⥤ modulesU l E X U) (ComplexShape.up ℤ))) (etaB : HomologicalComplex.complexOfFunctorsToFunctorToComplex ⋙ (lim : (ℕᵒᵖ ⥤ CochainComplex (modulesX l E X) ℤ) ⥤ CochainComplex (modulesX l E X) ℤ) ⋙ DerivedCategory.Q.{wB} ⟶ DerivedCategory.Q.{wB} ⋙ LB) (_hLB : LB.IsRightDerivedFunctor etaB (HomologicalComplex.quasiIso (ℕᵒᵖ ⥤ modulesX l E X) (ComplexShape.up ℤ))) : (∀ M : ℕ → modulesX l E X, IsIso (piComparison (restriction l E X U) M)) ∧ (∀ (M : ℕ → modulesX l E X) (V : Over U) (x : (((restriction l E X U).obj (∏ᶜ M)).val.obj (op V))) (n : ℕ), ((Pi.π (fun k : ℕ ↦ (restriction l E X U).obj (M k)) n).val.app (op V)) ((piComparison (restriction l E X U) M).val.app (op V) x) = (Pi.π M n).val.app (op V.left) x) ∧ Nonempty (SfClopenCoefficientRestriction l E X U.hom.opensRange) ∧ (∀ M : modulesU l E X U, IsIso ((SheafOfModules.localizedSystemAdjunction.{t + 1, t, u} (completedIntegralCommRingSheafUnrestricted l E X) U).unit.app M)) ∧ (∀ M : DerivedCategory.{wA} (modulesU l E X U), IsIso ((restrictionUnitDerivedAdjunction (SheafOfModules.localizedSystemAdjunction.{t + 1, t, u} (completedIntegralCommRingSheafUnrestricted l E X) U) : (extension l E X U).mapDerivedCategory ⊣ (restriction l E X U).mapDerivedCategory).unit.app M)) ∧ RestrictionUnitAssertions (extension l E X U) (restriction l E X U) (SheafOfModules.localizedSystemAdjunction.{t + 1, t, u} (completedIntegralCommRingSheafUnrestricted l E X) U) LA LB etaA etaB",
+  "branch": "newtargets-dag",
+  "by": "Q153",
+  "date": "2026-10-23",
+  "existing": false,
+  "note": "Uses the published ringed-slice extension/restriction and its uniquely section-normalized adjunction. The assertion expands simultaneous normalized forward/reverse Roos comparisons, their actual derived unit identity and every strict augmentation. Localization helpers preserve independent category and localization universes; no new mathematical notion or dependency repair."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-40182e5bc",
+  "group": "Q153",
+  "result": "pass",
+  "note": "Only the item lean field changed; the statement is verbatim and only sorry. Clause by clause: D/_hl/E coefficients, slice open immersion with finite type on X and U, LA/LB as right derived lim. The Roos models HA/HB, chi, theta, psi, kappa and lambda are fixed exactly as in the stmt_dep ComparisonAssertions, so lambda is the dep's. rho is fixed by psiG, kappaG and its conjugation square. The unit is the actual localizedSystemAdjunction descended by Adjunction.localization, termwise for towers. Main equation rho∘G(lambda)∘u = LA(u) checked, with the chain-level product-of-units clause and the (c,0)/(Gc,0) augmentation clauses. Product comparison is iso and the identity on sections. Coefficient clause Nonempty SfClopenCoefficientRestriction(opensRange) is fixed by finite_constant and projection, so not hollow. Edge cases (empty U, j=id, zero towers, level 1, all degrees) and independent universes OK. Not compiled (no FIX); worker reports a clean compile. Advisories: owner def-sf-clopen-restriction-data not in stmt_deps; public duplicate of the private exactDerivedAdjunction; second-reading section is the dispatcher-policy stub."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "X7",
+  "result": "pass",
+  "landing": "20261024T233326-L-2451791",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

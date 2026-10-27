@@ -1,0 +1,239 @@
+{
+ "id": "lem-sfb-space-relative-pseudocoherence-etale-locality",
+ "kind": "statement",
+ "title": "Relative pseudo-coherence is detected on jointly surjective etale charts",
+ "statement": "Work in the universes of [def-weil-size-convention]. Use schemes [def-pc-scheme], algebraic spaces with their small etale structure sheaves [def-trf-algebraic-space], module sheaves [def-weil-sheaf-of-modules-category] and their unbounded derived categories [def-weil-abstract-derived-category]. Write $D_{\\mathrm{QCoh}}(\\mathcal O_Z)$ for objects with quasi-coherent cohomology [def-trf-space-quasi-coherent-module]. Derived pullback and tensor use K-flat resolutions [def-pc-kflat-complex]; derived direct image uses K-injective resolutions [def-pur-kinjective-complex]. Let $g:X\\to Y$ be a locally finite type morphism of algebraic spaces over a scheme $S$ [def-sfb-space-morphism-properties], let $K\\in D_{\\mathrm{QCoh}}(\\mathcal O_X)$, and fix $m\\in\\mathbf Z$. Define $K$ to be $m$-pseudo-coherent relative to $Y$ when for every commutative square $U\\to V$, $U\\to X$, $V\\to Y$ with $U,V$ schemes and the vertical maps etale, the corresponding object $K|_U$ of the scheme derived category is $m$-pseudo-coherent relative to $V$ [def-sfb-relative-pseudo-coherent-complex]. The corresponding scheme object is obtained from etale restriction by the equivalence [lem-sfb-derived-etale-zariski-equivalence]. Let $I$ be a set, let $\\{u_i:U_i\\to X\\}_{i\\in I}$ be a jointly surjective family of etale maps from schemes, let $v_i:V_i\\to Y$ be etale maps from schemes, and let $a_i:U_i\\to V_i$ satisfy $v_i\\circ a_i=g\\circ u_i$. Then $K$ is $m$-pseudo-coherent relative to $Y$ if and only if, for every $i$, $K|_{U_i}$ is $m$-pseudo-coherent relative to $V_i$. Consequently if these scheme restrictions are pseudo-coherent relative to their $V_i$ for every $i$, then $K$ is pseudo-coherent relative to $Y$, meaning $m$-pseudo-coherent for every integer $m$. Covers may depend on $m$; no finite covering or global cohomological bound is required.",
+ "source": {
+  "document": "literature/stacks-project/spaces-more-morphisms.tex",
+  "place": "Tag 0CSX, lemma-qcoh-relative-pseudo-coherence-characterize, equivalence of (1) and (2), applied to the disjoint union of the covering squares; Definition 0CSY, definition-relative-pseudo-coherence."
+ },
+ "stmt_deps": [
+  "def-weil-size-convention",
+  "def-pc-scheme",
+  "def-trf-algebraic-space",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-abstract-derived-category",
+  "def-trf-space-quasi-coherent-module",
+  "def-sfb-relative-pseudo-coherent-complex",
+  "lem-sfb-derived-etale-zariski-equivalence",
+  "def-sfb-space-morphism-properties",
+  "def-pc-kflat-complex",
+  "def-pur-kinjective-complex"
+ ],
+ "proof": [
+  {
+   "text": "If $K$ is $m$-pseudo-coherent relative to $Y$, apply the defining universal quantifier to each given square $(U_i,V_i)$. This proves the forward implication.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-more-morphisms.tex",
+    "place": "Tag 0CSX, lemma-qcoh-relative-pseudo-coherence-characterize, proof of (2) implies (1), applied componentwise; Definition 0CSY"
+   }
+  },
+  {
+   "text": "For the converse fix an arbitrary test square $a:U\\to V$ over $g$, with $U\\to X$ and $V\\to Y$ etale. For each $i$ form $W_i=U_i\\times_XU$ and $T_i=V_i\\times_YV$. These are schemes because the arrows to $X,Y$ are representable etale. Write $p_i:W_i\\to U_i$ and $q_i:W_i\\to U$ for the projections. The maps $q_i$ form a jointly surjective etale family; $p_i$ and both projections from $T_i$ are etale. The pair $(a_i p_i,a q_i)$ defines $b_i:W_i\\to T_i$. Etale composition makes $W_i\\to X$ and $T_i\\to Y$ etale. The chart test for local finite type applied to $g$ therefore gives local finite type of $a_i,a,b_i,W_i\\to V_i$, and $W_i\\to V$.",
+   "uses": [
+    "lem-trf-space-fibre-products-etale-covers",
+    "lem-trf-space-chartwise-etale-permanence",
+    "def-sfb-space-morphism-properties"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-more-morphisms.tex",
+    "place": "Tag 0CSX, lemma-qcoh-relative-pseudo-coherence-characterize, proof of (2) implies (1), applied componentwise; Definition 0CSY"
+   }
+  },
+  {
+   "text": "Let $E_i,E_U,E_{W_i}$ be the corresponding scheme derived objects of $K|_{U_i},K|_U,K|_{W_i}$. Etale restriction is exact and preserves quasi-coherent cohomology by the chart-calculus statement. The etale-to-Zariski equivalence puts these objects in the scheme $D_{\\mathrm{QCoh}}$. Its pullback comparison and the associative pullback comparison identify $Lp_i^*E_i\\cong E_{W_i}\\cong Lq_i^*E_U$: both maps to $X$ equal $u_i p_i=u q_i$. These are derived isomorphisms, not only cohomology identifications.",
+   "uses": [
+    "lem-sfb-space-derived-etale-chart-calculus",
+    "lem-sfb-derived-etale-zariski-equivalence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-more-morphisms.tex",
+    "place": "Tag 0CSX, lemma-qcoh-relative-pseudo-coherence-characterize, proof of (2) implies (1), applied componentwise; Definition 0CSY"
+   }
+  },
+  {
+   "text": "By hypothesis $E_i$ is $m$-pseudo-coherent relative to $V_i$. Etale means flat and locally of finite presentation. Thus $\\{\\mathrm{id}_{U_i},p_i:W_i\\to U_i\\}$ is an fppf covering, since its identity member already covers $U_i$. Apply the forward implication of the fixed-base scheme fppf-descent theorem to this covering, the locally finite type map $a_i:U_i\\to V_i$ and the quasi-coherent object $E_i$. It gives $E_{W_i}\\cong Lp_i^*E_i$ $m$-pseudo-coherent relative to $V_i$. No surjectivity of $p_i$ is asserted.",
+   "uses": [
+    "def-weil-etale-morphism",
+    "def-pc-fppf-site",
+    "lem-sfb-relative-pseudocoherence-fppf-descent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-more-morphisms.tex",
+    "place": "Tag 0CSX, lemma-qcoh-relative-pseudo-coherence-characterize, proof of (2) implies (1), applied componentwise; Definition 0CSY"
+   }
+  },
+  {
+   "text": "For each projection $t:T_i\\to V_i$ or $t:T_i\\to V$, etaleness gives flatness and local finite presentation. The flat-lfp structure theorem makes $\\mathcal O_{T_i}[0]$ pseudo-coherent relative to the respective target. Apply the composition theorem first to $W_i\\xrightarrow{b_i}T_i\\to V_i$ and then to $W_i\\xrightarrow{b_i}T_i\\to V$. Its local-finite-type hypotheses for $b_i$ and the composites were checked in step 2; the projections are locally of finite type since they are etale. It yields the chain of equivalences: $E_{W_i}$ is $m$-pseudo-coherent relative to $V_i$ if and only if it is so relative to $T_i$, if and only if it is so relative to $V$. Hence all $Lq_i^*E_U$ have the property relative to $V$.",
+   "uses": [
+    "def-weil-etale-morphism",
+    "lem-sfb-flat-lfp-structure-relative-pseudocoherence",
+    "lem-sfb-relative-pseudocoherence-composition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-more-morphisms.tex",
+    "place": "Tag 0CSX, lemma-qcoh-relative-pseudo-coherence-characterize, proof of (2) implies (1), applied componentwise; Definition 0CSY"
+   }
+  },
+  {
+   "text": "The family $\\{q_i:W_i\\to U\\}$ is jointly surjective etale, hence an fppf covering. Apply the reverse implication of scheme fppf descent with base $V$, source $U$, complex $E_U$ and degree $m$. The local finite type of $a$ and quasi-coherence of $E_U$ were checked in steps 2 and 3. Step 5 supplies every pullback hypothesis. Thus $E_U$ is $m$-pseudo-coherent relative to $V$. Since the test square was arbitrary, this is precisely the required universal condition on $K$.",
+   "uses": [
+    "def-weil-etale-morphism",
+    "def-pc-fppf-site",
+    "lem-sfb-relative-pseudocoherence-fppf-descent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-more-morphisms.tex",
+    "place": "Tag 0CSX, lemma-qcoh-relative-pseudo-coherence-characterize, proof of (2) implies (1), applied componentwise; Definition 0CSY"
+   }
+  },
+  {
+   "text": "Finally fix any integer $m$. If every given chart restriction is pseudo-coherent relative to its base, its defining condition supplies $m$-pseudo-coherence there. Apply the equivalence just proved and then quantify over $m$. The same reasoning permits a separate covering for each $m$: neither the fixed-$m$ proof nor this quantification chooses a finite subcover or a uniform cohomological bound. If the indexing family is empty, joint surjectivity forces $X$ empty, and the fppf-descent statement on the empty test schemes gives the same conclusion.",
+   "uses": [
+    "def-sfb-relative-pseudo-coherent-complex"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-more-morphisms.tex",
+    "place": "Tag 0CSX, lemma-qcoh-relative-pseudo-coherence-characterize, proof of (2) implies (1), applied componentwise; Definition 0CSY"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-trf-space-fibre-products-etale-covers",
+  "lem-trf-space-chartwise-etale-permanence",
+  "def-sfb-space-morphism-properties",
+  "lem-sfb-space-derived-etale-chart-calculus",
+  "lem-sfb-derived-etale-zariski-equivalence",
+  "def-weil-etale-morphism",
+  "def-pc-fppf-site",
+  "lem-sfb-relative-pseudocoherence-fppf-descent",
+  "lem-sfb-flat-lfp-structure-relative-pseudocoherence",
+  "lem-sfb-relative-pseudocoherence-composition",
+  "def-sfb-relative-pseudo-coherent-complex"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/spaces-more-morphisms.tex",
+  "place": "Tag 0CSX, lemma-qcoh-relative-pseudo-coherence-characterize, proof of (2) implies (1), applied componentwise; Definition 0CSY"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Relative m pseudo coherence of a derived quasi coherent object on algebraic spaces is detected by a surjective etale scheme chart",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.IsEtale.instHasOfPostcompPropertyScheme\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"CategoryTheory.MorphismProperty.HasOfPostcompProperty @AlgebraicGeometry.IsEtale @AlgebraicGeometry.IsEtale\", \"doc\": \"The composition of two étale morphisms of schemes is also an étale morphism.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Etale\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"AlgebraicGeometry.Scheme → Type (u + 1)\", \"doc\": \"The property of being an étale morphism to a fixed scheme $X$, defined as morphisms that are smooth of relative dimension 0, constructed via the morphism property lifting over $X$.\"}\n  {\"name\": \"AlgebraicGeometry.IsLocalAtTarget.descendsAlong_inf_quasiCompact\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Descent\", \"type\": \"∀ (P P' : CategoryTheory.MorphismProperty AlgebraicGeometry.Scheme) [P'.IsStableUnderBaseChange]\\n  [P'.IsStableUnderComposition] [P.IsStableUnderBaseChange],\\n  @AlgebraicGeometry.IsLocalIso ⊓ @AlgebraicGeometry.Surjective ≤ P' →\\n    ∀ [AlgebraicGeometry.IsZariskiLocalAtTarget P],\\n      (∀ {R S : Com\", \"doc\": \"Let $\\\\mathcal{P}$ and $\\\\mathcal{P}'$ be morphism properties of schemes where $\\\\mathcal{P}'$ is stable under base change and composition, and $\\\\mathcal{P}$ is stable under base change. If the intersect\"}\n  {\"name\": \"AlgebraicGeometry.descendsAlong_isomorphisms_surjective_inf_flat_inf_quasicompact\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FlatDescent\", \"type\": \"(CategoryTheory.MorphismProperty.isomorphisms AlgebraicGeometry.Scheme).DescendsAlong\\n  (@AlgebraicGeometry.Surjective ⊓ @AlgebraicGeometry.Flat ⊓ @AlgebraicGeometry.QuasiCompact)\", \"doc\": \"In the category of schemes, the property of being an isomorphism descends along morphisms that are simultaneously surjective, flat, and quasi-compact. This means that if a morphism $ f: X \\to Y $ is su\"}\n  {\"name\": \"AlgebraicGeometry.descendsAlong_isOpenImmersion_surjective_inf_flat_inf_quasicompact'\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FlatDescent\", \"type\": \"AlgebraicGeometry.IsOpenImmersion.DescendsAlong\\n  (@AlgebraicGeometry.Surjective ⊓ @AlgebraicGeometry.Flat ⊓ @AlgebraicGeometry.QuasiCompact)\", \"doc\": \"In the category of schemes, the property of being an open immersion descends along morphisms that are simultaneously surjective, flat, and quasi-compact. This means that if a morphism becomes an open \"}\n  {\"name\": \"AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"CategoryTheory.MorphismProperty.HasOfPostcompProperty (@AlgebraicGeometry.IsEtale)\\n  (@AlgebraicGeometry.LocallyOfFiniteType ⊓ @AlgebraicGeometry.FormallyUnramified)\", \"doc\": \"For any category of schemes, the composition of a morphism that is locally of finite type and a morphism that is formally unramified results in an étale morphism. This instance asserts that the proper\"}\n  {\"name\": \"AlgebraicGeometry.IsEtale\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"A morphism $ f: X \\\\to Y $ of schemes is étale if it is smooth of relative dimension 0.\"}\n  {\"name\": \"AlgebraicGeometry.instDescendsAlongSchemeMinMorphismPropertySurjectiveFlatLocallyOfFinitePresentationOfQuasiCompactOfIsZariskiLocalAtTarget\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FlatDescent\", \"type\": \"∀ (P : CategoryTheory.MorphismProperty AlgebraicGeometry.Scheme)\\n  [P.DescendsAlong (@AlgebraicGeometry.Surjective ⊓ @AlgebraicGeometry.Flat ⊓ @AlgebraicGeometry.QuasiCompact)]\\n  [AlgebraicGeometry.IsZariskiLocalAtTarget P],\\n  P.DescendsAlong\\n    (@AlgebraicGeometry.Surjective ⊓ @AlgebraicGeometry.F\", \"doc\": \"If a morphism property $ P $ is Zariski local at the target and descends along morphisms that are surjective, flat, and quasi-compact, then $ P $ also descends along morphisms that are surjective, fla\"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected hits; only ordinary scheme morphisms, underived sheaf functors, general derived-category existence, or pseudofunctors; none states this algebraic-space theorem or a one-line specialization."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Descent of relative pseudo coherent complexes from etale neighbourhoods covering an algebraic space",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.Etale\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"AlgebraicGeometry.Scheme → Type (u + 1)\", \"doc\": \"The property of being an étale morphism to a fixed scheme $X$, defined as morphisms that are smooth of relative dimension 0, constructed via the morphism property lifting over $X$.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.smallEtaleTopology\", \"module\": \"Mathlib/AlgebraicGeometry/Sites/Etale\", \"type\": \"(X : AlgebraicGeometry.Scheme) → CategoryTheory.GrothendieckTopology X.Etale\", \"doc\": \"For a scheme $X$, the Grothendieck topology on the category of étale morphisms to $X$, constructed by inducing the standard Grothendieck topology on the over category via the forgetful functor. Coveri\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.etaleTopology\", \"module\": \"Mathlib/AlgebraicGeometry/Sites/Etale\", \"type\": \"CategoryTheory.GrothendieckTopology AlgebraicGeometry.Scheme\", \"doc\": \"The Grothendieck topology on the category of schemes generated by the étale pretopology, which uses étale morphisms (smooth morphisms of relative dimension 0) as covering families. This topology is co\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.smallEtalePretopology\", \"module\": \"Mathlib/AlgebraicGeometry/Sites/Etale\", \"type\": \"(X : AlgebraicGeometry.Scheme) → CategoryTheory.Pretopology X.Etale\", \"doc\": \"The Grothendieck pretopology on the category of schemes over a base scheme $ X $, defined by covering families consisting of jointly surjective étale morphisms. This pretopology uses the étale propert\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.etalePretopology\", \"module\": \"Mathlib/AlgebraicGeometry/Sites/Etale\", \"type\": \"CategoryTheory.Pretopology AlgebraicGeometry.Scheme\", \"doc\": \"The Grothendieck pretopology on the category of schemes generated by étale morphisms (smooth morphisms of relative dimension 0). This pretopology is constructed by intersecting the jointly surjective \"}\n  {\"name\": \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.𝒰D₀\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"{I : Type u} →\\n  [inst : CategoryTheory.Category.{u, u} I] →\\n    {S X : AlgebraicGeometry.Scheme} →\\n      {D : CategoryTheory.Functor I AlgebraicGeometry.Scheme} →\\n        {t : D ⟶ (CategoryTheory.Functor.const I).obj S} →\\n          {f : X ⟶ S} →\\n            [inst_1 : ∀ (i : I), CompactSpace ↥(D.obj\", \"doc\": \"For a diagram $D: \\\\mathcal{I} \\\\to \\\\text{Sch}$ of schemes, a natural transformation from $D$ to the constant diagram at $S$, and a morphism $X \\\\to S$, this constructs an open cover of the object $D(i')\"}\n  {\"name\": \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.𝒰D\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"{I : Type u} →\\n  [inst : CategoryTheory.Category.{u, u} I] →\\n    {S X : AlgebraicGeometry.Scheme} →\\n      {D : CategoryTheory.Functor I AlgebraicGeometry.Scheme} →\\n        {t : D ⟶ (CategoryTheory.Functor.const I).obj S} →\\n          {f : X ⟶ S} →\\n            [inst_1 : ∀ (i : I), CompactSpace ↥(D.obj\", \"doc\": \"The open cover of the diagram object $ D(i') $ formed by refining the open cover $ \\\\mathcal{U}_{D₀} $ with affine open immersions, ensuring each point lies in an affine open subscheme and compatibilit\"}\n  {\"name\": \"AlgebraicGeometry.IsEtale.instHasOfPostcompPropertyScheme\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"CategoryTheory.MorphismProperty.HasOfPostcompProperty @AlgebraicGeometry.IsEtale @AlgebraicGeometry.IsEtale\", \"doc\": \"The composition of two étale morphisms of schemes is also an étale morphism.\"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected hits; only ordinary scheme morphisms, underived sheaf functors, general derived-category existence, or pseudofunctors; none states this algebraic-space theorem or a one-line specialization."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Relative m pseudo coherence of a derived quasi coherent object on algebraic spaces is detected by a surjective etale scheme chart",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"SheafOfModules.IsQuasicoherent.casesOn\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent\", \"type\": \"{C : Type u'} →\\n  [inst : CategoryTheory.Category.{v', u'} C] →\\n    {J : CategoryTheory.GrothendieckTopology C} →\\n      {R : CategoryTheory.Sheaf J RingCat} →\\n        [inst_1 : ∀ (X : C), (J.over X).HasSheafCompose (CategoryTheory.forget₂ RingCat AddCommGrpCat)] →\\n          [inst_2 : ∀ (X : C), Cate\", \"doc\": \"A case analysis principle for quasicoherence of a sheaf of modules over a ring sheaf, enabling definitions or proofs by recursion on the quasicoherence structure established via sheaf composition, wea\"}\n  {\"name\": \"SheafOfModules.IsQuasicoherent.recOn\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent\", \"type\": \"{C : Type u'} →\\n  [inst : CategoryTheory.Category.{v', u'} C] →\\n    {J : CategoryTheory.GrothendieckTopology C} →\\n      {R : CategoryTheory.Sheaf J RingCat} →\\n        [inst_1 : ∀ (X : C), (J.over X).HasSheafCompose (CategoryTheory.forget₂ RingCat AddCommGrpCat)] →\\n          [inst_2 : ∀ (X : C), Cate\", \"doc\": \"A recursor that enables definitions or proofs by recursion on the quasicoherence structure of a sheaf of modules over a ring sheaf, which is established via sheaf composition properties, weak sheafifi\"}\n  {\"name\": \"SheafOfModules.IsQuasicoherent.mk\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent\", \"type\": \"∀ {C : Type u'} [inst : CategoryTheory.Category.{v', u'} C] {J : CategoryTheory.GrothendieckTopology C}\\n  {R : CategoryTheory.Sheaf J RingCat}\\n  [inst_1 : ∀ (X : C), (J.over X).HasSheafCompose (CategoryTheory.forget₂ RingCat AddCommGrpCat)]\\n  [inst_2 : ∀ (X : C), CategoryTheory.HasWeakSheafify (J.ov\", \"doc\": \"Given a category $\\\\mathcal{C}$ with a Grothendieck topology $J$, a sheaf $\\\\mathcal{R}$ of rings on $\\\\mathcal{C}$, and a sheaf $\\\\mathcal{M}$ of $\\\\mathcal{R}$-modules, this constructor establishes that \"}\n  {\"name\": \"SheafOfModules.QuasicoherentData.IsFinitePresentation\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent\", \"type\": \"{C : Type u'} →\\n  [inst : CategoryTheory.Category.{v', u'} C] →\\n    {J : CategoryTheory.GrothendieckTopology C} →\\n      {R : CategoryTheory.Sheaf J RingCat} →\\n        [inst_1 : ∀ (X : C), (J.over X).HasSheafCompose (CategoryTheory.forget₂ RingCat AddCommGrpCat)] →\\n          [inst_2 : ∀ (X : C), Cate\", \"doc\": \"A proposition asserting that a quasicoherent sheaf $\\\\mathcal{M}$ over a ring sheaf $\\\\mathcal{O}$ on a site $(\\\\mathcal{C}, J)$ satisfies the finite presentation condition: for every object $X \\\\in \\\\math\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Etale\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Etale\", \"type\": \"(X : Scheme.{u}) : Type _\", \"doc\": \"The property of being an étale morphism to a fixed scheme $X$, defined as morphisms that are smooth of relative dimension 0, constructed via the morphism property lifting over $X$.\"}\n  {\"name\": \"SheafOfModules.IsQuasicoherent\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent\", \"type\": \"{C : Type u'} →\\n  [inst : CategoryTheory.Category.{v', u'} C] →\\n    {J : CategoryTheory.GrothendieckTopology C} →\\n      {R : CategoryTheory.Sheaf J RingCat} →\\n        [∀ (X : C), (J.over X).HasSheafCompose (CategoryTheory.forget₂ RingCat AddCommGrpCat)] →\\n          [∀ (X : C), CategoryTheory.HasWeak\", \"doc\": \"Given a category $\\\\mathcal{C}$ with a Grothendieck topology $J$ and a sheaf $\\\\mathcal{R}$ of rings on $\\\\mathcal{C}$, this property asserts that a sheaf of $\\\\mathcal{R}$-modules is quasicoherent if, fo\"}\n  {\"name\": \"SheafOfModules.QuasicoherentData.I\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent\", \"type\": \"{C : Type u'} →\\n  [inst : CategoryTheory.Category.{v', u'} C] →\\n    {J : CategoryTheory.GrothendieckTopology C} →\\n      {R : CategoryTheory.Sheaf J RingCat} →\\n        [inst_1 : ∀ (X : C), (J.over X).HasSheafCompose (CategoryTheory.forget₂ RingCat AddCommGrpCat)] →\\n          [inst_2 : ∀ (X : C), Cate\", \"doc\": \"Given a category $\\\\mathcal{C}$ with a Grothendieck topology $J$ and a sheaf $\\\\mathcal{O}$ of rings on $\\\\mathcal{C}$, this constructs the indexed data type for quasicoherent sheaves over $\\\\mathcal{O}$.\"}\n  {\"name\": \"AlgebraicGeometry.IsEtale.instIsSmooth\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Etale\", \"type\": \"[IsEtale f] : IsSmooth f\", \"doc\": \"Every étale morphism of schemes is a smooth morphism. Specifically, if a morphism $ f: X \\to Y $ of schemes is étale (i.e., smooth of relative dimension 0), then it satisfies the conditions of being a \"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected hits; only ordinary scheme morphisms, underived sheaf functors, general derived-category existence, or pseudofunctors; none states this algebraic-space theorem or a one-line specialization."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"pseudo\"",
+   "results": "[loogle] OK 12 hit(s)\n  {\"name\": \"Lean.Compiler.LCNF.Simp.ConstantFold.mkPseudoArrayLiteral\", \"module\": \"Lean.Compiler.LCNF.Simp.ConstantFold\", \"type\": \" (elements : Array Lean.FVarId) (typ : Lean.Expr) (typLevel : Lean.Level) : Lean.Compiler.LCNF.Simp.ConstantFold.FolderM (Lean.Compiler.LCNF.LetValue Lean.Compiler.LCNF.Purity.pure)\", \"doc\": \"Turn an `#[a, b, c]` into:\\n```\\nlet _x.12 := 3\\nlet _x.8 := @Array.mkEmpty _ _x.12\\nlet _x.22 := @Array.push _ _x.8 x\\nlet _x.24 := @Array.push _ _x.22 y\\nlet _x.26 := @Array.push _ _x.24 z\\n_x.26\\n```\"}\n  {\"name\": \"Lean.Compiler.LCNF.Simp.ConstantFold.getPseudoListLiteral\", \"module\": \"Lean.Compiler.LCNF.Simp.ConstantFold\", \"type\": \" (fvarId : Lean.FVarId) : Lean.Compiler.LCNF.CompilerM (Option (List Lean.FVarId × Lean.Expr × Lean.Level))\", \"doc\": \"Turns an expression chain of the form\\n```\\nlet _x.1 := @List.nil _\\nlet _x.2 := @List.cons _ a _x.1\\nlet _x.3 := @List.cons _ b _x.2\\nlet _x.4 := @List.cons _ c _x.3\\nlet _x.5 := @List.cons _ d _x.4\\nlet _x\"}\n  {\"name\": \"CategoryTheory.LaxFunctor.PseudoCore\", \"module\": \"Mathlib.CategoryTheory.Bicategory.Functor.Lax\", \"type\": \" {B : Type u₁} [CategoryTheory.Bicategory B] {C : Type u₂} [CategoryTheory.Bicategory C] (F : CategoryTheory.LaxFunctor B C) : Type (max (max u₁ v₁) w₂)\", \"doc\": \"A structure on a lax functor that promotes a lax functor to a pseudofunctor.\\n\\nSee `Pseudofunctor.mkOfLax`.\"}\n  {\"name\": \"CategoryTheory.LaxFunctor.PseudoCore.mapIdIso\", \"module\": \"Mathlib.CategoryTheory.Bicategory.Functor.Lax\", \"type\": \" {B : Type u₁} [CategoryTheory.Bicategory B] {C : Type u₂} [CategoryTheory.Bicategory C] {F : CategoryTheory.LaxFunctor B C} (self : F.PseudoCore) (a : B) : F.map (CategoryTheory.CategoryStruct.id a) ≅ CategoryTheory.CategoryStruct.id (F.obj a)\", \"doc\": \"The isomorphism giving rise to the lax unity constraint\"}\n  {\"name\": \"CategoryTheory.LaxFunctor.PseudoCore.mapCompIso\", \"module\": \"Mathlib.CategoryTheory.Bicategory.Functor.Lax\", \"type\": \" {B : Type u₁} [CategoryTheory.Bicategory B] {C : Type u₂} [CategoryTheory.Bicategory C] {F : CategoryTheory.LaxFunctor B C} (self : F.PseudoCore) {a b c : B} (f : a ⟶ b) (g : b ⟶ c) : F.map (CategoryTheory.CategoryStruct.comp f g) ≅ CategoryTheory.CategoryStruct.comp (F.map f) (F.map g)\", \"doc\": \"The isomorphism giving rise to the lax functoriality constraint\"}\n  {\"name\": \"CategoryTheory.LaxFunctor.PseudoCore.mapIdIso_inv\", \"module\": \"Mathlib.CategoryTheory.Bicategory.Functor.Lax\", \"type\": \" {B : Type u₁} [CategoryTheory.Bicategory B] {C : Type u₂} [CategoryTheory.Bicategory C] {F : CategoryTheory.LaxFunctor B C} (self : F.PseudoCore) {a : B} : (self.mapIdIso a).inv = F.mapId a\", \"doc\": \"`mapIdIso` gives rise to the lax unity constraint\"}\n  {\"name\": \"CategoryTheory.LaxFunctor.PseudoCore.mapCompIso_inv\", \"module\": \"Mathlib.CategoryTheory.Bicategory.Functor.Lax\", \"type\": \" {B : Type u₁} [CategoryTheory.Bicategory B] {C : Type u₂} [CategoryTheory.Bicategory C] {F : CategoryTheory.LaxFunctor B C} (self : F.PseudoCore) {a b c : B} (f : a ⟶ b) (g : b ⟶ c) : (self.mapCompIso f g).inv = F.mapComp f g\", \"doc\": \"`mapCompIso` gives rise to the lax functoriality constraint\"}\n  {\"name\": \"CategoryTheory.LaxFunctor.PseudoCore.mk\", \"module\": \"Mathlib.CategoryTheory.Bicategory.Functor.Lax\", \"type\": \" {B : Type u₁} [CategoryTheory.Bicategory B] {C : Type u₂} [CategoryTheory.Bicategory C] {F : CategoryTheory.LaxFunctor B C} (mapIdIso : (a : B) → F.map (CategoryTheory.CategoryStruct.id a) ≅ CategoryTheory.CategoryStruct.id (F.obj a)) (mapCompIso : {a b c : B} → (f : a ⟶ b) → (g : b ⟶ c) → F.map (C\", \"doc\": \"\"}\n  {\"name\": \"CategoryTheory.OplaxFunctor.PseudoCore\", \"module\": \"Mathlib.CategoryTheory.Bicategory.Functor.Oplax\", \"type\": \" {B : Type u₁} [CategoryTheory.Bicategory B] {C : Type u₂} [CategoryTheory.Bicategory C] (F : CategoryTheory.OplaxFunctor B C) : Type (max (max u₁ v₁) w₂)\", \"doc\": \"A structure on an oplax functor that promotes an oplax functor to a pseudofunctor.\\n\\nSee `Pseudofunctor.mkOfOplax`.\"}\n  {\"name\": \"CategoryTheory.OplaxFunctor.PseudoCore.mapIdIso\", \"module\": \"Mathlib.CategoryTheory.Bicategory.Functor.Oplax\", \"type\": \" {B : Type u₁} [CategoryTheory.Bicategory B] {C : Type u₂} [CategoryTheory.Bicategory C] {F : CategoryTheory.OplaxFunctor B C} (self : F.PseudoCore) (a : B) : F.map (CategoryTheory.CategoryStruct.id a) ≅ CategoryTheory.CategoryStruct.id (F.obj a)\", \"doc\": \"The isomorphism giving rise to the oplax unity constraint\"}\n  {\"name\": \"CategoryTheory.OplaxFunctor.PseudoCore.mapCompIso\", \"module\": \"Mathlib.CategoryTheory.Bicategory.Functor.Oplax\", \"type\": \" {B : Type u₁} [CategoryTheory.Bicategory B] {C : Type u₂} [CategoryTheory.Bicategory C] {F : CategoryTheory.OplaxFunctor B C} (self : F.PseudoCore) {a b c : B} (f : a ⟶ b) (g : b ⟶ c) : F.map (CategoryTheory.CategoryStruct.comp f g) ≅ CategoryTheory.CategoryStruct.comp (F.map f) (F.map g)\", \"doc\": \"The isomorphism giving rise to the oplax functoriality constraint\"}\n  {\"name\": \"CategoryTheory.OplaxFunctor.PseudoCore.mapIdIso_hom\", \"module\": \"Mathlib.CategoryTheory.Bicategory.Functor.Oplax\", \"type\": \" {B : Type u₁} [CategoryTheory.Bicategory B] {C : Type u₂} [CategoryTheory.Bicategory C] {F : CategoryTheory.OplaxFunctor B C} (self : F.PseudoCore) {a : B} : (self.mapIdIso a).hom = F.mapId a\", \"doc\": \"`mapIdIso` gives rise to the oplax unity constraint\"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected hits; only ordinary scheme morphisms, underived sheaf functors, general derived-category existence, or pseudofunctors; none states this algebraic-space theorem or a one-line specialization."
+  },
+  {
+   "tool": "grep",
+   "query": "pseudo.?coher|Fourier.?Mukai|derived.?Chow",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected hits; only ordinary scheme morphisms, underived sheaf functors, general derived-category existence, or pseudofunctors; none states this algebraic-space theorem or a one-line specialization."
+  },
+  {
+   "tool": "grep",
+   "query": "[Pp]seudo[Cc]oherent|[Pp]seudo.?coheren",
+   "results": "0 hits; . ",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected hits; no relative pseudo-coherence of derived objects on algebraic spaces."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-space-pseudocoherent-tests-relative",
+  "date": "2026-10-24",
+  "group": "Q102"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Stable genus and smooth-family open loci in curve families. Supporting input: 0E76 proof via lemma-stable: the relative dualizing sheaf used to detect fibrewise stability by ampleness. Supporting input: Derived coherent duality for proper flat algebraic spaces. Construction input: Relative perfection and endomorphisms of the affine adjoint unit. Supporting input: Relative-perfection criterion used in the first paragraph of the proof of Tag 0E5V. Proof of Tag 0GFL: Perfect pseudo-coherent tensor tests on flat algebraic spaces. Supporting input: Tag 0CTT, lemma-characterize-pseudo-coherent. Supporting proof input: 0CTT proof, first paragraph: etale neighbourhoods of all x suffice.",
+   "via": [
+    "lem-sfb-space-pseudocoherent-tests-relative",
+    "lem-sfb-space-perfect-tests-pseudocoherence",
+    "lem-sfb-space-perfect-test-relative-perfection",
+    "lem-sfb-affine-adjoint-unit-properties",
+    "lem-sfb-proper-flat-space-derived-duality",
+    "lem-sfb-nodal-relative-dualizing-line",
+    "lem-sfb-stable-and-smooth-family-open-loci",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-space-relative-pseudocoherence-etale-locality",
+  "worker": "stage1",
+  "summary": "Expanded the overlap argument of Stacks 0CSX, with one fixed-base scheme fppf-descent node (0CSN). Source pullback is its forward implication on {identity,p}; base comparison uses the existing flat-lfp structure and composition nodes. Checked arbitrary and empty covers, all chart local-finite-type hypotheses, quasi-coherence and the derived site comparisons. No mathematical statement changed; added explicit definition references.",
+  "blueprint": "Supports the inherited direct-image prerequisite chain: 0CTT first paragraph, etale neighbourhoods of all points suffice. The latest blueprint direct-image proof paragraph (3) retains direct-image stability as its goal. This split proves the supporting chart-locality input, without replacing the unit route. The ancestor tool prints blueprint.from.node = None for this inherited chain; retained the inherited from field.",
+  "tool_uses": [
+   {
+    "node": "lem-trf-space-fibre-products-etale-covers",
+    "why": "Generic etale chart, derived comparison or relative pseudo-coherence tool in the overlap proof; the unit route has no replacement for this input."
+   },
+   {
+    "node": "lem-trf-space-chartwise-etale-permanence",
+    "why": "Generic etale chart, derived comparison or relative pseudo-coherence tool in the overlap proof; the unit route has no replacement for this input."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-trf-space-fibre-products-etale-covers",
+  "lem-trf-space-chartwise-etale-permanence"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q11-8687286fa",
+  "group": "Q11",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q11-8687286fa (reviewer sub-agent of L); spot-checked: The mathematics is correct; the only fault is metadata on the new node. Item vs Stacks 0CSX (2)=>(1) and Definition 0CSY: hypotheses match (g locally of finite type, K in D_QCoh, the family V_i need not be surjective, equivalent to one surjective U through the disjoint union). The new node lem-sfb-relative-pseudocoherence-fppf-descent matches 0CSN hypothesis by hypothesis, including the QCoh hypothesis. It has a fixed base, so it is strictly smaller than the item and restates none of its clauses. Steps: (1) instance of the definition. (2) The overlaps are schemes and {q_i} is jointly surjective etale by the trf fibre-product lemma; the composites are etale by chartwise permanence; a_i, a, b_i, W_i->V_i and W_i->V are locally of finite type because each is the top of a square with etale vertical maps and def-sfb-space-morphism-properties tests every such square. (3) The derived isomorphisms Lp_i^*E_i = E_{W_i} = Lq_i^*E_U come from the chart calculus and the etale-Zariski comparison. (4) The forward half of 0CSN on {id, p_i} stands in for Stacks' 09US + 0695. (5) The composition iff 09UT with flat-lfp 0695 stands in for 0CSP; all hypotheses and structure maps were checked. (6) The reverse half of 0CSN over V for an arbitrary test square. (7) Quantification over m; the empty case is vacuous. Duplicate search (rg -L for 0CSN, 0CSP, 09US, and pseudo-coherence with fppf; read 0DII, 09UJ, 09UU, 09UR, the local-on-source node, the Noetherian criterion node and the parent 0CTT node): none. Tool uses accepted: lem-trf-space-fibre-products-etale-covers and lem-trf-space-chartwise-etale-permanence, generic algebraic-space foundations. Batch-5 check: all four listed citations are general definitions or foundational space lemmas (02X2, 03FT-03FV, the derived etale restriction calculus), not parts of the statement or proof of the trace formula or of Poincare duality, so no assumption leaf is needed. FIX: the new node's created field held only item, and it had no lean_audit. The whole corrected file is in fixes/dag/nodes/sec-six-functors-basics/ with created.by=worker, date 2026-10-24, group Q11, and lean_audit set to none/none; the statement is unchanged.; 1 file(s) fixed by the reviewer"
+ }
+}

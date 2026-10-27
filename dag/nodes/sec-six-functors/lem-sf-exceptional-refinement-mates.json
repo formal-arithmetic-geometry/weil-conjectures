@@ -1,0 +1,205 @@
+{
+ "id": "lem-sf-exceptional-refinement-mates",
+ "kind": "statement",
+ "title": "Exceptional coefficient construction: refinement mates",
+ "chapter": "sec-six-functors",
+ "unit": "sk-thm-sf-compatibility",
+ "statement": "Fix a finite-field datum $D=(p,a,q,k_0,k)$ with $k=\\overline{k_0}$, a prime $\\ell\\ne p$, and finite extensions $E/\\mathbf Q_\\ell$ with valuation rings $R_E$, uniformizers $\\varpi_E$, and $A_{E,n}=R_E/\\varpi_E^n$ for $n\\ge1$ [def-weil-finite-field-fiber, def-weil-l-adic-coefficient-extension]. Let $X,Y$ be finite-type $k$-schemes and $f:X\\to Y$ a separated finite-type $k$-morphism; neither $X$ nor $Y$ is assumed separated over $k$ [def-weil-scheme-morphism-properties]. Fix a compactification $c=(X\\xrightarrow j\\overline X\\xrightarrow{p_c}Y)$ [def-weil-compactifications-refinements]. Let $d=(X\\xrightarrow{j_d}\\overline X_d\\xrightarrow{p_d}Y)$ be a second compactification and $u:c\\to d$ a proper refinement. For each finite stage use the exact constructible adjunction $F^c_A\\dashv G^c_A$ transported from the ordinary etale compact-support adjunction. At integral stages use its actual normalized-system reduction/limit transport with prescribed compact-support realization $r_{c,R}$; at rational stages use raw localization; at an algebraic closure $\\Omega/\\mathbf Q_\\ell$ use common finite fields [def-weil-derived-complete-integral-detailed, def-weil-rationalization-karoubi, def-weil-algebraically-closed-coefficients, def-weil-integral-rational-qbar-compact-support]. All units, counits and shift structures are those of these transported adjunctions. Then at every stage $s$ there are shift-compatible natural isomorphisms\n$$\\alpha_{u,s}:F^c_s\\xrightarrow{\\sim}F^d_s,\\qquad\\rho_{u,s}:G^d_s\\xrightarrow{\\sim}G^c_s$$\nsatisfying both equations\n$$\\epsilon^d_L\\circ\\alpha_{u,s,G^d_sL}=\\epsilon^c_L\\circ F^c_s(\\rho_{u,s,L}),\\qquad\n\\rho_{u,s,F^d_sK}\\circ\\eta^d_K=G^c_s(\\alpha_{u,s,K})\\circ\\eta^c_K.$$\nAt finite stages $\\alpha$ is exactly the open-unit-normalized inverse of $j_{d!}\\cong Ru_*j_{c!}$ followed by proper direct-image composition, under the canonical site comparisons. At integral stages it is the actual total-limit realization of that system map; under $r_{c,R},r_{d,R}$ it is the same ambient proper/open refinement comparison, with matching termwise and Roos-cone shifts. This equality holds for actual system maps before total limit. The right map is the transpose of $\\epsilon^d\\circ\\alpha_{G^d}$, with inverse the corresponding transpose of $\\alpha^{-1}$.\n\nAt rational stages $\\alpha,\\rho$ are the localized integral maps on the same representatives. At the closed stage they are their common-field images. If $J_E$ is a common-field inclusion and $q^c,q^d$ its compact-support comparisons, then\n$$\\alpha_{u,\\Omega,J_EK}=q^d_K\\circ J_E(\\alpha_{u,E,K})\\circ(q^c_K)^{-1}.$$\nThe refinement equations and shift compatibility refer throughout to these same choices, with no new adjunction or compact-support representative.",
+ "source": {
+  "document": "literature/zheng-six-operations-lefschetz-verdier-DM-stacks_arXiv-1006.3810.pdf",
+  "place": "Propositions 2.23, 2.29, 3.16; Section 5, especially Lemma 5.22 and Proposition 5.24; blueprint exceptional inverse-image construction. Specific obligation: returned construction steps 20–21, preserved verbatim in the delivery report."
+ },
+ "stmt_deps": [
+  "def-weil-finite-field-fiber",
+  "def-weil-l-adic-coefficient-extension",
+  "def-weil-scheme-morphism-properties",
+  "def-weil-compactifications-refinements",
+  "def-weil-derived-complete-integral-detailed",
+  "def-weil-rationalization-karoubi",
+  "def-weil-algebraically-closed-coefficients",
+  "def-weil-integral-rational-qbar-compact-support",
+  "def-sf-exceptional-refinement-left-data",
+  "def-sf-exceptional-refinement-system-data"
+ ],
+ "proof": [
+  {
+   "text": "Obtain only the normalized left family N from exceptional_refinement_left_construction. Complete its stagewise left isomorphism to a RefinementComparison using the existing proved refinementComparisonOfLeft. Its construction gives both adjunction equations and the right shift square. The conjugate isomorphism and its inverse have exactly the two stated Hom transposes.",
+   "uses": [
+    "lem-sf-exceptional-refinement-left-construction",
+    "def-sf-constructible-exceptional-refinement-mate",
+    "def-weil-pbc-adjunction-conjugate",
+    "lem-sf-exceptional-refinement-right-square"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Prove coefficient descent of any two counit-normalized right comparisons from the left square. Cancel the source right coefficient isomorphism and apply injectivity of the inverse Hom equivalence. Its two transposes are equal: use the two coefficient counit equations, naturality of q inverse, the refinement counit equation and the left coefficient square, then naturality of the target left comparison. Apply this calculation to localization and to each common-field inclusion; the left squares are precisely N.rational and N.common. The remaining normalization and left descent fields are N fields verbatim.",
+   "uses": [
+    "def-weil-pbc-adjunction-conjugate",
+    "lem-sf-exceptional-refinement-right-square"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For the resulting Mates P apply exceptional_refinement_system_realization separately at every field E with the supplied o(E),R(E). Pair P with these Nonempty realization conclusions.",
+   "uses": [
+    "lem-sf-exceptional-refinement-system-realization"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-sf-exceptional-refinement-left-construction",
+  "def-sf-constructible-exceptional-refinement-mate",
+  "def-weil-pbc-adjunction-conjugate",
+  "lem-sf-exceptional-refinement-right-square",
+  "lem-sf-exceptional-refinement-system-realization"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/zheng-six-operations-lefschetz-verdier-DM-stacks_arXiv-1006.3810.pdf",
+  "place": "Assembly by explicit inverse-Hom transposition; geometric left construction and strict-system realization retain original steps 1--8."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "refinement.*adjunction|RingRefinementNormalized|refinementRational",
+   "results": "[grep] OK 0 hit(s)",
+   "date": "2026-10-22",
+   "verdict": "no match: generic categorical, algebraic or module tools do not state these geometric coefficient constructions"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Proper open unit normalized compactification refinement and conjugate right adjoint comparison including both adjunction equations",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"CompHausLike.LocallyConstant.adjunction_left_triangle\", \"module\": \"Mathlib/Condensed/Discrete/LocallyConstant\", \"type\": \"∀ (P : TopCat → Prop) [inst : ∀ (S : CompHausLike P) (p : ↑S.toTop → Prop), CompHausLike.HasProp P (Subtype p)]\\n  [inst_1 : CompHausLike.HasProp P PUnit.{u + 1}] [inst_2 : CompHausLike.HasExplicitFiniteCoproducts P]\\n  [inst_3 : CompHausLike.HasExplicitPullbacks P]\\n  (hs :\\n    ∀ ⦃X Y : CompHausLike P\", \"doc\": \"The composition of the unit natural transformation followed by the counit natural transformation equals the identity morphism on the locally constant sheaf functor, i.e., $\\\\text{functorToPresheaves.ma\"}\n  {\"name\": \"Compactum.adj\", \"module\": \"Mathlib/Topology/Category/Compactum\", \"type\": \"Compactum.free ⊣ Compactum.forget\", \"doc\": \"The free functor from sets to compact Hausdorff spaces (constructing free compact Hausdorff spaces via the ultrafilter monad) is left adjoint to the forgetful functor that maps compact Hausdorff space\"}\n  {\"name\": \"CompHausLike.LocallyConstant.adjunction_unit\", \"module\": \"Mathlib/Condensed/Discrete/LocallyConstant\", \"type\": \"∀ (P : TopCat → Prop) [inst : ∀ (S : CompHausLike P) (p : ↑S.toTop → Prop), CompHausLike.HasProp P (Subtype p)]\\n  [inst_1 : CompHausLike.HasProp P PUnit.{u + 1}] [inst_2 : CompHausLike.HasExplicitFiniteCoproducts P]\\n  [inst_3 : CompHausLike.HasExplicitPullbacks P]\\n  (hs :\\n    ∀ ⦃X Y : CompHausLike P\", \"doc\": \"Under the assumption that effective epimorphisms are surjective, the unit of the adjunction between the functor constructing sheaves of locally constant functions on compact Hausdorff-like spaces and \"}\n  {\"name\": \"Profinite.toProfiniteAdjToCompHaus\", \"module\": \"Mathlib/Topology/Category/Profinite/Basic\", \"type\": \"CompHaus.toProfinite ⊣ profiniteToCompHaus\", \"doc\": \"The adjunction where the profinite completion functor $\\\\mathsf{CompHaus} \\\\to \\\\mathsf{Profinite}$ (obtained by quotienting connected components) is left adjoint to the inclusion functor $\\\\mathsf{Profin\"}\n  {\"name\": \"CondensedSet.compactlyGeneratedAdjunction\", \"module\": \"Mathlib/Condensed/TopCatAdjunction\", \"type\": \"CondensedSet.condensedSetToCompactlyGenerated ⊣ CondensedSet.compactlyGeneratedToCondensedSet\", \"doc\": \"The adjunction between the category of compactly generated spaces and the category of condensed sets, obtained by restricting the adjunction between topological spaces and condensed sets through the f\"}\n  {\"name\": \"CategoryTheory.LiftRightAdjoint.otherMap\", \"module\": \"Mathlib/CategoryTheory/Adjunction/Lifting/Right\", \"type\": \"{A : Type u₁} →\\n  {B : Type u₂} →\\n    {C : Type u₃} →\\n      [inst : CategoryTheory.Category.{v₁, u₁} A] →\\n        [inst_1 : CategoryTheory.Category.{v₂, u₂} B] →\\n          [inst_2 : CategoryTheory.Category.{v₃, u₃} C] →\\n            {U : CategoryTheory.Functor A B} →\\n              {F : CategoryTheory\", \"doc\": \"For an object $X$ in category $\\\\mathcal{B}$, this morphism is defined as the composition of the unit of adjunction $\\\\text{adj}_2$ applied to $X$, followed by the action of functor $U'$ on the morphism\"}\n  {\"name\": \"Stonean.stoneCechAdjunction\", \"module\": \"Mathlib/Topology/Category/Stonean/Adjunctions\", \"type\": \"typeToStonean ⊣ CategoryTheory.forget Stonean\", \"doc\": \"The adjunction between the Stone-Čech compactification functor from discrete spaces to Stonean spaces and the forgetful functor from Stonean spaces to sets, established by the natural bijection betwee\"}\n  {\"name\": \"CompHausLike.LocallyConstant.adjunction_counit\", \"module\": \"Mathlib/Condensed/Discrete/LocallyConstant\", \"type\": \"∀ (P : TopCat → Prop) [inst : ∀ (S : CompHausLike P) (p : ↑S.toTop → Prop), CompHausLike.HasProp P (Subtype p)]\\n  [inst_1 : CompHausLike.HasProp P PUnit.{u + 1}] [inst_2 : CompHausLike.HasExplicitFiniteCoproducts P]\\n  [inst_3 : CompHausLike.HasExplicitPullbacks P]\\n  (hs :\\n    ∀ ⦃X Y : CompHausLike P\", \"doc\": \"Under the assumption that effective epimorphisms are surjective and given the existence of explicit finite coproducts and pullbacks in the category of compact Hausdorff-like spaces, the counit of the \"}",
+   "date": "2026-10-22",
+   "verdict": "no match: generic categorical, algebraic or module tools do not state these geometric coefficient constructions"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Compactification refinement maps of constructible exceptional adjunctions preserve unit counit and shifts through integral rational and common coefficient stages",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"CategoryTheory.Adjunction.CommShift.CompatibilityCounit\", \"module\": \"Mathlib/CategoryTheory/Shift/Adjunction\", \"type\": \"{C : Type u_1} →\\n  {D : Type u_2} →\\n    [inst : CategoryTheory.Category.{v_1, u_1} C] →\\n      [inst_1 : CategoryTheory.Category.{v_2, u_2} D] →\\n        {F : CategoryTheory.Functor C D} →\\n          {G : CategoryTheory.Functor D C} →\\n            (F ⊣ G) →\\n              {A : Type u_3} →\\n               \", \"doc\": \"Given categories $\\\\mathcal{C}$ and $\\\\mathcal{D}$, an adjunction $F \\\\dashv G$ between functors $F : \\\\mathcal{C} \\\\to \\\\mathcal{D}$ and $G : \\\\mathcal{D} \\\\to \\\\mathcal{C}$, and an additive monoid $A$ with s\"}\n  {\"name\": \"CategoryTheory.Adjunction.CommShift.CompatibilityUnit\", \"module\": \"Mathlib/CategoryTheory/Shift/Adjunction\", \"type\": \"{C : Type u_1} →\\n  {D : Type u_2} →\\n    [inst : CategoryTheory.Category.{v_1, u_1} C] →\\n      [inst_1 : CategoryTheory.Category.{v_2, u_2} D] →\\n        {F : CategoryTheory.Functor C D} →\\n          {G : CategoryTheory.Functor D C} →\\n            (F ⊣ G) →\\n              {A : Type u_3} →\\n               \", \"doc\": \"For categories $\\\\mathcal{C}$ and $\\\\mathcal{D}$ with shift functors parameterized by an additive monoid $A$, and an adjunction $F \\\\dashv G$ between functors $F : \\\\mathcal{C} \\\\to \\\\mathcal{D}$ and $G : \\\\\"}\n  {\"name\": \"CategoryTheory.Adjunction.CommShift.compatibilityCounit_of_compatibilityUnit\", \"module\": \"Mathlib/CategoryTheory/Shift/Adjunction\", \"type\": \"∀ {C : Type u_1} {D : Type u_2} [inst : CategoryTheory.Category.{v_1, u_1} C]\\n  [inst_1 : CategoryTheory.Category.{v_2, u_2} D] {F : CategoryTheory.Functor C D} {G : CategoryTheory.Functor D C}\\n  (adj : F ⊣ G) {A : Type u_3} [inst_2 : AddMonoid A] [inst_3 : CategoryTheory.HasShift C A]\\n  [inst_4 : C\", \"doc\": \"Given categories $\\\\mathcal{C}$ and $\\\\mathcal{D}$ with shift functors parameterized by an additive monoid $A$, and an adjunction $F \\\\dashv G$ between functors $F : \\\\mathcal{C} \\\\to \\\\mathcal{D}$ and $G :\"}\n  {\"name\": \"CategoryTheory.Adjunction.CommShift.compatibilityCounit_left\", \"module\": \"Mathlib/CategoryTheory/Shift/Adjunction\", \"type\": \"∀ {C : Type u_1} {D : Type u_2} [inst : CategoryTheory.Category.{v_1, u_1} C]\\n  [inst_1 : CategoryTheory.Category.{v_2, u_2} D] {F : CategoryTheory.Functor C D} {G : CategoryTheory.Functor D C}\\n  (adj : F ⊣ G) {A : Type u_3} [inst_2 : AddMonoid A] [inst_3 : CategoryTheory.HasShift C A]\\n  [inst_4 : C\", \"doc\": \"Given categories $\\\\mathcal{C}$ and $\\\\mathcal{D}$, an adjunction $F \\\\dashv G$ between functors $F : \\\\mathcal{C} \\\\to \\\\mathcal{D}$ and $G : \\\\mathcal{D} \\\\to \\\\mathcal{C}$, and an additive monoid $A$ with s\"}\n  {\"name\": \"CategoryTheory.Adjunction.commShiftIso_hom_app_counit_app_shift\", \"module\": \"Mathlib/CategoryTheory/Shift/Adjunction\", \"type\": \"∀ {C : Type u_1} {D : Type u_2} [inst : CategoryTheory.Category.{v_1, u_1} C]\\n  [inst_1 : CategoryTheory.Category.{v_2, u_2} D] {F : CategoryTheory.Functor C D} {G : CategoryTheory.Functor D C}\\n  (adj : F ⊣ G) (A : Type u_3) [inst_2 : AddMonoid A] [inst_3 : CategoryTheory.HasShift C A]\\n  [inst_4 : C\", \"doc\": \"For an adjunction between functors $ F $ and $ G $ between categories $ \\\\mathcal{C} $ and $ \\\\mathcal{D} $ equipped with shift operations parameterized by an additive monoid $ A $, and for any $ a \\\\in \"}\n  {\"name\": \"CategoryTheory.Adjunction.derivedε_fac_app\", \"module\": \"Mathlib/CategoryTheory/Functor/Derived/Adjunction\", \"type\": \"∀ {C₁ : Type u_1} {C₂ : Type u_2} {D₁ : Type u_3} {D₂ : Type u_4} [inst : CategoryTheory.Category.{v_1, u_1} C₁]\\n  [inst_1 : CategoryTheory.Category.{v_2, u_2} C₂] [inst_2 : CategoryTheory.Category.{v_3, u_3} D₁]\\n  [inst_3 : CategoryTheory.Category.{v_4, u_4} D₂] {G : CategoryTheory.Functor C₁ C₂} {\", \"doc\": \"For any object $X_2$ in category $\\\\mathcal{C}_2$, the composition of $G'$ applied to $\\\\beta_{X_2}$ with the derived counit $\\\\varepsilon'$ evaluated at $L_2(X_2)$ equals the composition of $\\\\alpha_{F(X\"}\n  {\"name\": \"CategoryTheory.Adjunction.commShiftIso_inv_app_counit_app\", \"module\": \"Mathlib/CategoryTheory/Shift/Adjunction\", \"type\": \"∀ {C : Type u_1} {D : Type u_2} [inst : CategoryTheory.Category.{v_1, u_1} C]\\n  [inst_1 : CategoryTheory.Category.{v_2, u_2} D] {F : CategoryTheory.Functor C D} {G : CategoryTheory.Functor D C}\\n  (adj : F ⊣ G) (A : Type u_3) [inst_2 : AddMonoid A] [inst_3 : CategoryTheory.HasShift C A]\\n  [inst_4 : C\", \"doc\": \"For an adjunction between functors $ F : \\\\mathcal{C} \\\\to \\\\mathcal{D} $ and $ G : \\\\mathcal{D} \\\\to \\\\mathcal{C} $ commuting with shift operations parameterized by an additive monoid $ A $, the inverse of\"}\n  {\"name\": \"CategoryTheory.Adjunction.CommShift.instComp\", \"module\": \"Mathlib/CategoryTheory/Shift/Adjunction\", \"type\": \"∀ {C : Type u_1} {D : Type u_2} [inst : CategoryTheory.Category.{v_1, u_1} C]\\n  [inst_1 : CategoryTheory.Category.{v_2, u_2} D] {F : CategoryTheory.Functor C D} {G : CategoryTheory.Functor D C}\\n  (adj : F ⊣ G) (A : Type u_3) [inst_2 : AddMonoid A] [inst_3 : CategoryTheory.HasShift C A]\\n  [inst_4 : C\", \"doc\": \"Given two adjunctions between categories equipped with shift operations parameterized by an additive monoid $A$, where both adjunctions' functors commute with the shift, their composition forms an adj\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: generic categorical, algebraic or module tools do not state these geometric coefficient constructions"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Compactification refinement maps of constructible exceptional adjunctions preserve unit counit and shifts through integral rational and common coefficient stages",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"CategoryTheory.Adjunction.CommShift.compatibilityUnit_right\", \"module\": \"Mathlib.CategoryTheory.Shift.Adjunction\", \"type\": \"(h : CompatibilityUnit adj e₁ e₂) (Y : D) :\\n  e₂.inv.app Y = adj.unit.app _ ≫ G.map (e₁.hom.app _) ≫ G.map ((adj.counit.app _)⟦a⟧')\", \"doc\": \"For categories $\\\\mathcal{C}$ and $\\\\mathcal{D}$ with shift functors parameterized by an additive monoid $A$, and an adjunction $F \\\\dashv G$ between functors $F : \\\\mathcal{C} \\\\to \\\\mathcal{D}$ and $G : \\\\\"}\n  {\"name\": \"CategoryTheory.Adjunction.CommShift.compatibilityCounit_left\", \"module\": \"Mathlib.CategoryTheory.Shift.Adjunction\", \"type\": \"(h : CompatibilityCounit adj e₁ e₂) (X : C) :\\n  e₁.hom.app X = F.map ((adj.unit.app X)⟦a⟧') ≫ F.map (e₂.inv.app _) ≫ adj.counit.app _\", \"doc\": \"Given categories $\\\\mathcal{C}$ and $\\\\mathcal{D}$, an adjunction $F \\\\dashv G$ between functors $F : \\\\mathcal{C} \\\\to \\\\mathcal{D}$ and $G : \\\\mathcal{D} \\\\to \\\\mathcal{C}$, and an additive monoid $A$ with s\"}\n  {\"name\": \"CategoryTheory.Adjunction.CommShift.compatibilityCounit_of_compatibilityUnit\", \"module\": \"Mathlib.CategoryTheory.Shift.Adjunction\", \"type\": \"(h : CompatibilityUnit adj e₁ e₂) : CompatibilityCounit adj e₁ e₂\", \"doc\": \"Given categories $\\\\mathcal{C}$ and $\\\\mathcal{D}$ with shift functors parameterized by an additive monoid $A$, and an adjunction $F \\\\dashv G$ between functors $F : \\\\mathcal{C} \\\\to \\\\mathcal{D}$ and $G :\"}\n  {\"name\": \"CategoryTheory.Adjunction.CommShift.compatibilityUnit_unique_right\", \"module\": \"Mathlib.CategoryTheory.Shift.Adjunction\", \"type\": \"(h : CompatibilityUnit adj e₁ e₂) (h' : CompatibilityUnit adj e₁ e₂') : e₂ = e₂'\", \"doc\": \"For categories $\\\\mathcal{C}$ and $\\\\mathcal{D}$ equipped with shift functors parameterized by an additive monoid $A$, and an adjunction $F \\\\dashv G$ between functors $F : \\\\mathcal{C} \\\\to \\\\mathcal{D}$ a\"}\n  {\"name\": \"CategoryTheory.Adjunction.CommShift.commShift_unit\", \"module\": \"Mathlib.CategoryTheory.Shift.Adjunction\", \"type\": \"∀ {C : Type u_1} {D : Type u_2} {inst : CategoryTheory.Category.{v_1, u_1} C}\\n  {inst_1 : CategoryTheory.Category.{v_2, u_2} D} {F : CategoryTheory.Functor C D} {G : CategoryTheory.Functor D C}\\n  {adj : F ⊣ G} {A : Type u_3} {inst_2 : AddMonoid A} {inst_3 : CategoryTheory.HasShift C A}\\n  {inst_4 : C\", \"doc\": \"Given an adjunction between functors $F : \\\\mathcal{C} \\\\to \\\\mathcal{D}$ and $G : \\\\mathcal{D} \\\\to \\\\mathcal{C}$ where categories $\\\\mathcal{C}$ and $\\\\mathcal{D}$ are equipped with shift operations paramet\"}\n  {\"name\": \"CategoryTheory.Adjunction.shift_unit_app\", \"module\": \"Mathlib.CategoryTheory.Shift.Adjunction\", \"type\": \"[adj.CommShift A] (a : A) (X : C) :\\n  (adj.unit.app X)⟦a⟧' =\\n    adj.unit.app (X⟦a⟧) ≫ G.map ((F.commShiftIso a).hom.app X) ≫ (G.commShiftIso a).hom.app (F.obj X)\", \"doc\": \"For any element $a$ in an additive monoid $A$ and object $X$ in category $\\\\mathcal{C}$, the unit component of the adjunction $\\\\eta_X$ at the $a$-shifted object $X[a]$ satisfies $\\\\eta_{X[a]} = \\\\eta_{X[\"}\n  {\"name\": \"CategoryTheory.Adjunction.commShiftIso_inv_app_counit_app\", \"module\": \"Mathlib.CategoryTheory.Shift.Adjunction\", \"type\": \"[adj.CommShift A] (a : A) (Y : D) : ((G ⋙ F).commShiftIso a).inv.app Y ≫ adj.counit.app (Y⟦a⟧) = (adj.counit.app Y)⟦a⟧'\", \"doc\": \"For an adjunction between functors $ F : \\\\mathcal{C} \\\\to \\\\mathcal{D} $ and $ G : \\\\mathcal{D} \\\\to \\\\mathcal{C} $ commuting with shift operations parameterized by an additive monoid $ A $, the inverse of\"}\n  {\"name\": \"CategoryTheory.Adjunction.CommShift.commShift_counit\", \"module\": \"Mathlib.CategoryTheory.Shift.Adjunction\", \"type\": \"∀ {C : Type u_1} {D : Type u_2} {inst : CategoryTheory.Category.{v_1, u_1} C}\\n  {inst_1 : CategoryTheory.Category.{v_2, u_2} D} {F : CategoryTheory.Functor C D} {G : CategoryTheory.Functor D C}\\n  {adj : F ⊣ G} {A : Type u_3} {inst_2 : AddMonoid A} {inst_3 : CategoryTheory.HasShift C A}\\n  {inst_4 : C\", \"doc\": \"Given categories $\\\\mathcal{C}$ and $\\\\mathcal{D}$ with shift operations parameterized by an additive monoid $A$, and an adjunction $F \\\\dashv G$ between functors $F : \\\\mathcal{C} \\\\to \\\\mathcal{D}$ and $G\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: generic categorical, algebraic or module tools do not state these geometric coefficient constructions"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction, CategoryTheory.Functor.rightAdjointUniq",
+   "results": "[loogle] OK 0 hit(s) | loogle: unknown identifier 'CategoryTheory.Functor.rightAdjointUniq'",
+   "date": "2026-10-22",
+   "verdict": "no match: generic categorical, algebraic or module tools do not state these geometric coefficient constructions"
+  },
+  {
+   "tool": "grep",
+   "query": "exceptional.*refinement|refinement.*adjunction|compactification.*coefficient",
+   "results": "OK: 0 hits; ",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits do not state the derived semilinear proper/open scalar square or the geometric multistage exceptional refinement theorem"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Compactification refinement maps preserve exceptional adjunction units counits and shifts after adic completion and scalar localization",
+   "results": "OK: 8 hits; CategoryTheory.Adjunction.localization_unit_app, CategoryTheory.Adjunction.Localization.ε, CategoryTheory.Adjunction.Localization.η, CategoryTheory.Adjunction.CommShift.compatibilityCounit_of_compatibilityUnit, CategoryTheory.Adjunction.localization, AdicCompletion.module, CategoryTheory.Adjunction.CommShift.compatibilityUnit_unique_right, CondensedSet.compactlyGeneratedAdjunction",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits do not state the derived semilinear proper/open scalar square or the geometric multistage exceptional refinement theorem"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Compactification refinement isomorphisms of exceptional adjunctions over finite integral rational and algebraically closed coefficient rings",
+   "results": "OK: 8 hits; AlgebraicGeometry.isIso_of_comp_eq_sigmaSpec, AlgebraicGeometry.isIso_ΓSpec_adjunction_unit_app_basicOpen, AlgebraicGeometry.AffineSpace.toSpecMvPolyIntEquiv_apply, AlgebraicGeometry.AffineSpace.toSpecMvPolyIntEquiv, AlgebraicGeometry.Scheme.SpecToEquivOfField, AlgebraicGeometry.AffineSpace.SpecIso_inv_over, AlgebraicGeometry.ProjectiveSpectrum.Proj.isIso_toSpec, AlgebraicGeometry.AffineSpace.SpecIso_hom_appTop",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits do not state the derived semilinear proper/open scalar square or the geometric multistage exceptional refinement theorem"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.conjugateEquiv",
+   "results": "OK: 12 hits; CategoryTheory.conjugateEquiv, CategoryTheory.conjugateEquiv_id, CategoryTheory.conjugateEquiv_iso, CategoryTheory.conjugateEquiv_of_iso, CategoryTheory.conjugateEquiv_symm_id, CategoryTheory.conjugateEquiv_symm_iso, CategoryTheory.conjugateEquiv_symm_of_iso, CategoryTheory.conjugateEquiv_adjunction_id",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits do not state the derived semilinear proper/open scalar square or the geometric multistage exceptional refinement theorem"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sf-constructible-exceptional-coefficient-construction",
+  "date": "2026-10-22",
+  "group": "Q154"
+ },
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "sk-thm-sf-tensor-hom, third Hom bijection and coefficient compatibility; exceptional inverse-image paragraph; returned construction steps 20–21.",
+   "via": [
+    "lem-sf-constructible-exceptional-coefficient-construction"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sf-exceptional-refinement-mates",
+  "worker": "stage1",
+  "summary": "Constructed the normalized finite and whole-system refinement arrows, proved their integral realization and shifts, derived both adjunction equations by transposition, and verified raw/common-field descent. Added one statement-only semilinear finite-free scalar square without absolute separatedness; no statement change.",
+  "blueprint": "Preserves ancestor construction returned steps 20–21: proper/open normalization, actual integral realization, transpose equations and raw/common-stage images; new scalar square supplies the compatibility required for natural common-field maps.",
+  "tool_uses": [
+   {
+    "node": "prop-compactification-coherence-detailed",
+    "why": "Generic Compactification coherence used for the normalized proper/open refinement, its realization or adjunction calculus; this does not replace the exceptional construction route."
+   },
+   {
+    "node": "lem-coef-semilinear-derived-sections",
+    "why": "Generic Derived semilinear sections and coefficient-linear geometric operations used for the normalized proper/open refinement, its realization or adjunction calculus; this does not replace the exceptional construction route."
+   }
+  ]
+ },
+ "tool_uses": [],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-NF-36ffc50ad",
+  "group": "NF",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NF-36ffc50ad (reviewer sub-agent of L); spot-checked: I read the item, all 8 steps, the new node and every cited statement. The item statement and stmt_deps are identical to the base (Q154 snapshot). Steps 1–7 check out. Step 1: compactification coherence (ℓ invertible, etale-origin input) and lem-sp-refinement-coefficient-mate (Noetherian, proper u, u j_c = j_d, no Cartesian or separatedness hypothesis) give C_u = compositor∘Rp_{d*}e_u, with α = C_u^{-1}. Step 2: Q_u = (j_c, j_d, 1_X, u) satisfies pk = ir. Evaluations detect only invertibility, and the intermediate S_u J_{j_c} is bounded as the compact support of j_d. Step 5: I recomputed both transposes; they reduce to α_K by naturality and the triangle identities. Step 6: the new node with r = 1, whiskered by S_{p_d}, plus χ composition gives α_L q^c = q^d T(α_E); integral-scalar-mates and mate-pasting 3 give the ρ square. New node lem-sf-system-proper-open-scalar-square: it is true by mate pasting, since Γ_Q is the mate of α_Q and T commutes with P, J, the open base change and the clopen projector. Finite-freeness is not even needed. Checked cases: rank 1, U empty, p = id. It is not a duplicate. lem-coef-system-scalar-projection-identification has the refinement square but only for separated W and normalized finite-Tor M, while the item allows non-separated X and Y. The fixed-ring nodes (sf-proper-open-coefficient-refinement, sp-refinement-coefficient-mate) are on D^+. Zheng 5.13–5.15 (pp. 34–35) is checked. FIX 1, item step 8: it cited prop-weil-pbc-descent-functors, which is stated on the PBC pair category P_T, not on the sf common-stage category C_{T,Ω} of field-descent. The sf analogue, lem-sf-package-common-stage-transport, needs separated schemes. The descent argument is already written in the step, so I re-cited def-weil-algebraically-closed-coefficients plus field-descent, reworded the first sentence, and updated proof_deps and the stale tool_uses entry. FIX 2: the new node now cites lem-sf-open-tensor-normalization for the open tensor balancing β (added to stmt_deps). Batch 5: all three flagged chains (system-realization, realization-shift-coherence, semilinear-proper-open-mate-pasting) end at lem-trf-adjoint-composition-coherence, a Mathlib leaf (leftAdjointCompIso_assoc) that is pure category theory. The 8 further trf/pod nodes the closure gains (e.g. bounded-below adjunction, frobenius-open-square, sieve-dense-subsite) are all generic, not trace-formula or Poincaré-duality steps, so I accepted them. No SGA source is cited. blueprint.from.node = null matches what tools/blueprint_refs.py returns (the chain breaks at the maintenance-created parent).; 2 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.Paper.ExceptionalRefinementMates",
+  "declaration": "WeilConjectures.ExceptionalRefinement.exceptional_refinement_mates",
+  "declarations": [
+   "WeilConjectures.ExceptionalRefinement.exceptional_refinement_mates"
+  ],
+  "file": "lean/Sheaf/Paper/ExceptionalRefinementMates.lean",
+  "statement": "theorem exceptional_refinement_mates (A : Transport.{u, v} l Ω D hl c) (B : Transport.{u, v} l Ω D hl d) (r : c.Refinement d) (o : ∀ E : FieldStage.{max u v} l, Operations l E.carrier) (R : ∀ E : FieldStage.{max u v} l, Realizations l E.carrier D (o E)) : ∃ P : Mates.{u, v} l Ω D hl A B r, ∀ E : FieldStage.{max u v} l, Nonempty (SystemRealization.{u, v} l Ω D hl A B r P E (o E) (R E))",
+  "branch": "newtargets-dag",
+  "by": "Q24",
+  "date": "2026-10-25",
+  "existing": false,
+  "note": "The theorem keeps its literal signature. Its input Transport is repaired to retain normalized scalar maps and the closed action on cross-field transition arrows. The existing public records and construction maps move into ExceptionalRefinementTransportData, ExceptionalRefinementMatesData and ExceptionalRefinementSystemData and are publicly re-exported by the item. The categorical right-square proof is isolated in ExceptionalRefinementRightSquare."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-964593509",
+  "group": "Q24",
+  "result": "pass",
+  "note": "Re-delivery after RETURN of 6aa171c4 (H6/H13+H7). The commit touches only the item module, node and report. OpenImmersionLocalizing and det-proper-image-localizing-open are not delivered, so the live proved lemma stays intact. Item proof_deps equal base; the node differs from live only in lean; the sole module change is removal of the unused OpenImmersionLocalizing import. Maths re-checked: RefinementComparison counit/unit equal the node's two equations; RingRefinementNormalized gives α as the inverse of compositor∘p_d*(ε) in the F^c→F^d direction; transpose/inverseTranspose fix ρ and ρ⁻¹; rational and common formulas, including q^d∘J_E(α)∘(q^c)⁻¹, are exact; SystemRealization word/integralMap/shift are pinned to the same P, A.left and B.left; Good outputs are conclusions as in step 2. Universes are v and max u v, independent. One sorry, no hollow helper, docstrings complete, lean.statement verbatim. Advisory only: owners of system-realization defs are not among stmt_deps (family precedent). No compile run because no file was changed; worker scompile and dry run OK."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-d2c5d",
+  "group": "Z6",
+  "result": "fix",
+  "landing": "20261027T013016-L-2358323",
+  "kind": "interface",
+  "note": "independent cc review: item exceptional_refinement_mates assembly vs node lem-sf-exceptional-refinement-mates; new sorry statements and Transport repair vs change record, the λ(field)-conjugation counterexample and the existing commonTransitionNatural practice; new node stmt_deps vs owners of the definitions used"
+ }
+}

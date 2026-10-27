@@ -1,0 +1,135 @@
+{
+ "id": "def-sf-native-weil-scalar-counit-categories",
+ "kind": "definition",
+ "title": "Ordinary native scalar counit categories and canonical mate formulas",
+ "status": "split",
+ "import_flags": [],
+ "statement": "Fix the prime $\\ell$, the finite-field datum $D$, and the normalized realization family of [def-sf-adic-realization-isomorphism-data]. For a geometric space $T$ let $\\mathcal C_T$ be the full bounded constructible subcategory in its ordinary module derived category and let $\\rho_T$ be the restriction of the recorded scalar realization to that essential image. For an underlying-scheme isomorphism $g$ use its actual function-normalized module pullback $P$ and the abelian fixed-pair category [def-weil-endofunctor-fixed-pair-category]. The termwise derived forgetful functor $U$ on ordinary derived categories [def-weil-abstract-derived-category] and $\\mathcal W=U^{-1}\\mathcal C_T$ are the section presentations of [def-sf-native-weil-derived-framework]. Their structure isomorphism $UP\\cong U$ is the localization of the actual fixed-pair structure transformation. Restrict pullbacks and compact support to full constructible subcategories when their preservation witnesses have been supplied. The ambient compact-support functor is the actual sectionwise $Rp_*j_!$ with its canonical native coefficient identifications [lem-sf-locally-finite-adic-compact-support-realization]. Use the actual geometric fiber and compactification of [def-weil-frobenius-square-exchange]. An equivalence datum consists of an equivalence with forward functor exactly $\\rho_T$; its realization bridge is this equality followed by the full-subcategory inclusion. For $F\\dashv G$ and $a:QF\\cong FP$, define $b:PG\\to GQ$ by [def-weil-pbc-adjunction-mate] applied to $a^{-1}$. Define the mate-counit predicate by $\\epsilon_{QL}F(b_L)=Q(\\epsilon_L)a_{GL}^{-1}$, and the invariant-counit predicate by invertibility of $v=G(\\theta)b_L$ and $\\epsilon_LF(v)a_{GL}=\\theta Q(\\epsilon_L)$. Transport the adjunction through the two equivalences with their actual units and counits. Inverse reindexing cancellation is the localization of the family's function-normalized composition and identity comparisons, restricted to the full subcategory.",
+ "stmt_deps": [
+  "def-sf-native-weil-derived-framework",
+  "def-weil-endofunctor-fixed-pair-category",
+  "def-weil-abstract-derived-category",
+  "def-weil-pbc-adjunction-mate",
+  "def-weil-frobenius-square-exchange",
+  "def-sf-adic-realization-isomorphism-data",
+  "lem-sf-locally-finite-adic-compact-support-realization"
+ ],
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-package/cor-coef-verdier-weil-equivariance.proof.md",
+  "place": "Final paragraph, native expansion Steps 12–17: actual ordinary categories, canonical derived forgetting and scalar counit mates."
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "native Frobenius derived fixed pair forgetful functor constructible scalar realization counit",
+   "results": "OK 8 hits: generic adjunction counits, scalar restriction/extension, comonoid forgetting and monoidal Frobenius morphism; no native package.",
+   "date": "2026-10-24",
+   "verdict": "No exact packaged notion; reuse the listed component APIs."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.mateEquiv, CategoryTheory.Endofunctor.IsoAlgebra",
+   "results": "OK 0 hits; unknown identifier CategoryTheory.Endofunctor.IsoAlgebra (project definition, not Mathlib).",
+   "date": "2026-10-24",
+   "verdict": "Mathlib mateEquiv is reused; no duplicate mate construction."
+  },
+  {
+   "tool": "grep",
+   "query": "IsoAlgebra|mateEquiv_counit; CategoryTheory",
+   "results": "OK 4 hits: Mathlib/CategoryTheory/Adjunction/Mates.lean lines 123,128,132 and Monoidal/Closed/Functor.lean line 88.",
+   "date": "2026-10-24",
+   "verdict": "Reuse actual mateEquiv; full native package absent."
+  },
+  {
+   "tool": "rg",
+   "query": "def-sf-native-weil-scalar-counit-categories|constructibleCancel|NativeWeilScalar in dag/nodes, lean/WeilConjectures and lean/Sheaf; blueprint_refs ancestor",
+   "results": "No matching node or declaration. ancestor is None. Existing realized-category, module and Frobenius APIs imported.",
+   "date": "2026-10-24",
+   "verdict": "New wrappers only; existing coefficient and categorical objects are reused."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-sf-native-weil-scalar-frobenius-counit",
+  "date": "2026-10-24",
+  "group": "Q27"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "Final paragraph, native expansion Steps 12–17: actual ordinary categories, canonical derived forgetting and scalar counit mates.",
+   "via": [
+    "lem-sf-native-weil-scalar-frobenius-counit",
+    "lem-sf-weil-native-exceptional-forgetful",
+    "lem-sf-weil-verdier-biduality"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "lean": {
+  "module": "Sheaf.Paper.NativeWeilScalarCounitCategories",
+  "declaration": "WeilConjectures.NativeWeilScalar.Weil",
+  "declarations": [
+   "WeilConjectures.NativeWeilScalar.Constructible",
+   "WeilConjectures.NativeWeilScalar.rho",
+   "WeilConjectures.NativeWeilScalar.pull",
+   "WeilConjectures.NativeWeilScalar.Pairs",
+   "WeilConjectures.NativeWeilScalar.forget",
+   "WeilConjectures.NativeWeilScalar.Weil",
+   "WeilConjectures.NativeWeilScalar.theta",
+   "WeilConjectures.NativeWeilScalar.compact",
+   "WeilConjectures.NativeWeilScalar.mate",
+   "WeilConjectures.NativeWeilScalar.MateCounit",
+   "WeilConjectures.NativeWeilScalar.InvariantCounit",
+   "WeilConjectures.NativeWeilScalar.fiberSpace",
+   "WeilConjectures.NativeWeilScalar.commonPull",
+   "WeilConjectures.NativeWeilScalar.EquivalenceData",
+   "WeilConjectures.NativeWeilScalar.realizationBridge",
+   "WeilConjectures.NativeWeilScalar.restrictPull",
+   "WeilConjectures.NativeWeilScalar.forgetConstructible",
+   "WeilConjectures.NativeWeilScalar.constructibleTheta",
+   "WeilConjectures.NativeWeilScalar.pullCancel",
+   "WeilConjectures.NativeWeilScalar.constructibleCancel",
+   "WeilConjectures.NativeWeilScalar.restrictCompact",
+   "WeilConjectures.NativeWeilScalar.transportAdjunction"
+  ],
+  "file": "lean/Sheaf/Paper/NativeWeilScalarCounitCategories.lean",
+  "statement": "abbrev Weil (D : FiniteFieldDatum.{u}) (R : Family l D) (T : GeometricSpace D) (g : T.base.left ≅ T.base.left) [HasDerivedCategory.{u + 1} (Pairs l D R T g)]",
+  "branch": "newtargets-dag",
+  "by": "Q27",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "Named wrappers and explicit formulas around the recorded ordinary categories. No new coefficient sheaf, localization, arbitrary choice, or postponed proof."
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-2a55a163f",
+  "group": "Q27",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-2a55a163f",
+  "group": "Q27",
+  "result": "pass",
+  "note": "Re-delivery after the 54763e88 RETURN (H3). The categories and theorem modules are byte-identical to 54763e88; only ScalarNormalization changed in substance. stage_normalized is gone; a bridge iso S.leftSystem.functor ≅ stage.system.functor takes its place, and bridge_normalized fixes its component at every ⟨E,K⟩ to inclusion.map of P.ring.rationalLeft.inv. functor_obj is rfl, leftStages makes Φ the literal sfCompactSupportFiniteFunctor and StageAction.finite makes the stage functor P's operation, so the clause is satisfiable for any valid P. sections composes J(bridge) ≫ nativeAlpha. On integral inputs the inverse rationalLeft cancels the forward one in IntegralNormalization and operationTransport.inv cancels .hom, leaving the node's a_{f,E,K} then the Ω projection. Bridge naturality across field transitions is a true proof obligation: both β families are normalized to the canonical integral scalar comparison. common_normalization holds: leftStages is literally rationalLeft, the compact branch of modelRationalFunctor is the same functor, IsUnit proofs are irrelevant, and commonPull objects are commonStagePullbackObject. Both new nodes now cite def-sf-adic-realization-isomorphism-data, the existing:true owner of Family. Against live the item differs only in lean and the added stmt_deps; lean.statement is verbatim. The only sorry is the main theorem; docstrings and the 17 proof steps are present. Advisory: the data module compiles in 52.1 s of the 60 s limit; the Q27 second reading is a self-review. No compile run (no changes)."
+ }
+}

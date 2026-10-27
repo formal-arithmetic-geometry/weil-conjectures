@@ -1,0 +1,284 @@
+{
+ "id": "lem-trf-nodal-limit-lci-pure-stage",
+ "kind": "statement",
+ "title": "Local-complete-intersection and pure-one-dimensional finite stages of a nodal limit",
+ "statement": "Let $I$ be a nonempty directed set and $(S_i)_{i\\in I}$ an inverse system of quasi-compact quasi-separated schemes [def-pc-scheme, def-weil-pbc-scheme-conventions] with affine transition morphisms [pqf-def-affine-morphism] and limit $S$ [lem-weil-pbc-limit-affine-transition]. Fix $a\\in I$ and a finitely presented morphism $g_a:X_a\\to S_a$ with $X_a$ quasi-compact and quasi-separated. Put $X_i=X_a\\times_{S_a}S_i$, $g_i:X_i\\to S_i$ for $i\\ge a$, and $h:X=X_a\\times_{S_a}S\\to S$ [def-pc-fibre-product]. Here finitely presented means locally of finite presentation [def-sbc-locally-finite-presentation], quasi-compact and quasi-separated. Assume $h$ is flat [def-weil-flat-morphism]. For every algebraically closed field $\\Omega$ and geometric point $y:\\operatorname{Spec}\\Omega\\to S$ [def-weil-geometric-point], assume its geometric fibre $X_y$ [def-weil-geometric-fibre] is empty or pure of dimension $1$ [def-weil-pure-dimension], and at every point where $X_y\\to\\operatorname{Spec}\\Omega$ is not smooth [def-sbc-smooth-morphisms], its completed local ring [def-weil-pbc-adic-completion] is isomorphic to $\\Omega[[u,v]]/(uv)$ [def-weil-pbc-multivariate-power-series]. Then there exists $c\\ge a$ such that for every $i\\ge c$, $g_i$ is flat and locally of finite presentation; every nonempty ordinary fibre [def-pc-scheme-fibre] of $g_i$ is pure of dimension $1$; and for every algebraically closed $\\Omega$ and geometric point $\\operatorname{Spec}\\Omega\\to S_i$, the geometric fibre is empty or both pure of dimension $1$ and a local complete intersection over $\\Omega$. A scheme locally of finite type over a field $k$ is a local complete intersection over $k$ if it admits an affine open cover by spectra of finitely generated $k$-algebras which are local complete intersections as defined in [def-weil-pbc-complete-intersection-over-field]; the empty scheme is allowed.",
+ "source": {
+  "document": "literature/stacks-project/curves.tex",
+  "place": "Tag 0C5F (lemma-descend-nodal-family), first proof paragraph through relative-dimension descent; Tag 0C4E (lemma-nodal-lci). Expanded using limits.tex Tags 0C3L (lemma-descend-syntomic) and 0EY2 (lemma-descend-dimension-d), and morphisms.tex Tag 02FY (lemma-dimension-fibre-after-base-change)."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-flat-morphism",
+  "def-sbc-locally-finite-presentation",
+  "def-weil-geometric-point",
+  "def-weil-geometric-fibre",
+  "def-weil-pure-dimension",
+  "def-pc-fibre-product",
+  "def-weil-pbc-scheme-conventions",
+  "def-weil-pbc-complete-intersection-over-field",
+  "def-sbc-smooth-morphisms",
+  "def-weil-pbc-adic-completion",
+  "def-weil-pbc-multivariate-power-series",
+  "pqf-def-affine-morphism",
+  "lem-weil-pbc-limit-affine-transition",
+  "def-pc-scheme-fibre"
+ ],
+ "proof": [
+  {
+   "text": "Every base change of $g_a$, in particular $h$, is locally of finite presentation. Indeed on a finite-presentation affine chart $B=A[t_1,\\ldots,t_n]/(f_1,\\ldots,f_m)$, scalar extension to an affine base chart $A\\to A\\prime$ gives $A\\prime[t_1,\\ldots,t_n]/(f_1\\prime,\\ldots,f_m\\prime)$; these pulled-back charts cover the base change. The cited finite-presentation base-change result justifies this presentation. Such a presentation is also finitely generated, so all the morphisms and their field fibres in what follows are locally of finite type.",
+   "uses": [
+    "def-sbc-locally-finite-presentation",
+    "lem-weil-pbc-finite-presentation-base-change-composition"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 01TP (definition-finite-presentation); affine base-change calculation, algebra.tex Tag 05G5"
+   }
+  },
+  {
+   "text": "Fix a geometric point $y:\\operatorname{Spec}\\Omega\\to S$. If $X_y$ is empty, its empty affine cover gives the local-complete-intersection condition. Otherwise it is locally of finite type over $\\Omega$ by Step 1 and pure of dimension $1$ by hypothesis. Every closed point is smooth or has the stated nodal completion. Apply the forward implication of the nodal-curve lci criterion with $k=\\Omega$: since $\\Omega$ is already algebraically closed, take its algebraic closure to be itself, so the completed geometric local ring in that criterion is exactly the one in the hypothesis. It follows that $X_y$ is a local complete intersection over $\\Omega$. The additional unramified-singular-subscheme conclusion of the criterion is not needed.",
+   "uses": [
+    "lem-trf-nodal-curve-lci-criterion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/curves.tex",
+    "place": "Tag 0C4E (lemma-nodal-lci), implication (1) to (2)"
+   }
+  },
+  {
+   "text": "Apply complete-intersection-fibres limit descent with $i_0=a$, $U_0=X_a$, $V_0=S_a$ and $g_0=g_a$, where $V_0$ has its identity $S_a$-structure. Its base changes are exactly $g_i$ and $h$. The required qcqs hypotheses are those on $X_a,S_a$; the affine transition and limit hypotheses are given; $g_a$ is locally finitely presented by hypothesis; $h$ is flat by hypothesis; and Step 2 supplies every geometric lci fibre. Thus there is $b\\ge a$ such that for every $i\\ge b$, $g_i$ is flat and locally finitely presented and every geometric fibre is a local complete intersection.",
+   "uses": [
+    "lem-trf-complete-intersection-fibres-limit-descent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/limits.tex",
+    "place": "Tag 0C3L (lemma-descend-syntomic), as used in curves.tex Tag 0C5F first proof paragraph"
+   }
+  },
+  {
+   "text": "For each $s\\in S$ put $k=\\kappa(s)$ and $F=X_s$, and choose an algebraic closure $\\bar k$ of $k$. The associated geometric point has fibre $F_{\\bar k}$. The field-extension spectrum map is surjective and remains so after base change; hence $p:F_{\\bar k}\\to F$ is surjective. If $F$ is nonempty, so is $F_{\\bar k}$, which is pure of dimension $1$ by hypothesis. The equidimensional-open local-dimension lemma with the whole open $F_{\\bar k}$ gives $\\dim_z F_{\\bar k}=1$ at every point $z$. Given $x\\in F$, choose $z$ above it; the field-extension local-dimension formula gives $\\dim_x F=\\dim_z F_{\\bar k}=1$. The same field-extension lemma applied to the identity extension $k/k$ shows that $F$ is locally Noetherian. The constant-local-dimension component lemma, with the whole open $F$, now shows every component of $F$ has dimension $1$. Thus every nonempty ordinary fibre of $h$ is pure of dimension $1$. Empty fibres cause no restriction.",
+   "uses": [
+    "def-weil-geometric-point",
+    "def-weil-algebraic-closure",
+    "lem-pc-field-extension-surjective",
+    "lem-weil-pbc-surjective-base-change",
+    "lem-sbc-equidimensional-open-local-dimension",
+    "lem-trf-field-extension-component-local-dimension",
+    "lem-sbc-constant-local-dimension-components"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 02FY (lemma-dimension-fibre-after-base-change), part (1); varieties.tex Tag 0A21 (lemma-dimension-locally-algebraic), parts (3),(5); morphisms.tex Tag 01S1"
+   }
+  },
+  {
+   "text": "Apply pure-relative-dimension finite-stage descent with $i_0=a$, $Y_0=X_a$, $Z_0=S_a$, $f_0=g_a$ and $d=1$. These are qcqs schemes over $S_a$, the initial morphism is locally of finite presentation, and Step 4 is exactly its pure ordinary-fibre hypothesis at the limit. Obtain $d_0\\ge a$ such that every nonempty ordinary fibre of every $g_i$ for $i\\ge d_0$ is pure of dimension $1$.",
+   "uses": [
+    "lem-trf-pure-relative-dimension-finite-stage"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/limits.tex",
+    "place": "Tag 0EY2 (lemma-descend-dimension-d)"
+   }
+  },
+  {
+   "text": "Choose a common upper bound $c$ of $b$ and $d_0$. For $i\\ge c$ Step 3 supplies flatness, local finite presentation and geometric lci fibres, while Step 5 supplies pure-one-dimensional ordinary fibres. Apply relative-dimension base change to $g_i$ and any geometric point $\\operatorname{Spec}\\Omega\\to S_i$. Its base change has base a field, whose unique ordinary fibre is the geometric fibre in question. Consequently each nonempty such fibre is pure of dimension $1$, and it is lci by Step 3. These are all the required conclusions, simultaneously for every $i\\ge c$.",
+   "uses": [
+    "lem-trf-relative-dimension-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 02NK (lemma-base-change-relative-dimension-d)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sbc-locally-finite-presentation",
+  "def-weil-algebraic-closure",
+  "def-weil-geometric-point",
+  "lem-pc-field-extension-surjective",
+  "lem-sbc-constant-local-dimension-components",
+  "lem-sbc-equidimensional-open-local-dimension",
+  "lem-trf-complete-intersection-fibres-limit-descent",
+  "lem-trf-field-extension-component-local-dimension",
+  "lem-trf-nodal-curve-lci-criterion",
+  "lem-trf-pure-relative-dimension-finite-stage",
+  "lem-trf-relative-dimension-base-change",
+  "lem-weil-pbc-finite-presentation-base-change-composition",
+  "lem-weil-pbc-surjective-base-change"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/curves.tex",
+  "place": "Tag 0C5F (lemma-descend-nodal-family), first paragraph, with Tag 0C4E; relative-dimension descent packaged by limits.tex Tag 0EY2 and geometric-to-ordinary dimensions by morphisms.tex Tag 02FY"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "syntomic|nodal|completeIntersection|pureDimension",
+   "results": "[grep] OK 0 hit(s)",
+   "date": "2026-10-22",
+   "verdict": "no match: related definitions, smooth/etale facts or ordinary descent tools; none states this nodal/Fitting finite-stage assertion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A flat finitely presented morphism with one dimensional nodal geometric fibres over an inverse limit eventually has flat local complete intersection geometric fibres of pure dimension one",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.IsSmoothOfRelativeDimension\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"ℕ → {X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"For a natural number $n$ and a morphism $f: X \\\\to Y$ of schemes, the proposition that $f$ is smooth of relative dimension $n$.\"}\n  {\"name\": \"AlgebraicGeometry.Flat\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Flat\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"The property that a morphism $ f : X \\to Y $ of schemes is flat.\"}\n  {\"name\": \"AlgebraicGeometry.isSmoothOfRelativeDimension_iff\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"∀ (n : ℕ) {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y),\\n  AlgebraicGeometry.IsSmoothOfRelativeDimension n f ↔\\n    ∀ (x : ↥X),\\n      ∃ U V,\\n        ∃ (_ : x ∈ ↑V) (e : ↑V ≤ (TopologicalSpace.Opens.map f.base).obj ↑U),\\n          RingHom.IsStandardSmoothOfRelativeDimension n\\n            (CommRingCat.Ho\", \"doc\": \"Let $n$ be a natural number and let $f: X \\\\to Y$ be a morphism of schemes. The morphism $f$ is smooth of relative dimension $n$ if and only if for every point $x \\\\in X$, there exist an open neighborho\"}\n  {\"name\": \"AlgebraicGeometry.UniversallyOpen.of_flat\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/UniversallyOpen\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.Flat f]\\n  [AlgebraicGeometry.LocallyOfFinitePresentation f], AlgebraicGeometry.UniversallyOpen f\", \"doc\": \"A morphism of schemes that is flat and locally of finite presentation is universally open. This means that for any base change $ Y' \\to Y $, the induced morphism $ X \\times_Y Y' \\to Y' $ is an open map o\"}\n  {\"name\": \"AlgebraicGeometry.instLocallyOfFinitePresentationOfIsSmooth\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [hf : AlgebraicGeometry.IsSmooth f],\\n  AlgebraicGeometry.LocallyOfFinitePresentation f\", \"doc\": \"Every smooth morphism of schemes is locally of finite presentation.\"}\n  {\"name\": \"AlgebraicGeometry.IsSmoothOfRelativeDimension.exists_isStandardSmoothOfRelativeDimension\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"∀ {n : ℕ} {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y} [self : AlgebraicGeometry.IsSmoothOfRelativeDimension n f]\\n  (x : ↥X),\\n  ∃ U V,\\n    ∃ (_ : x ∈ ↑V) (e : ↑V ≤ (TopologicalSpace.Opens.map f.base).obj ↑U),\\n      RingHom.IsStandardSmoothOfRelativeDimension n\\n        (CommRingCat.Hom.hom (Algebraic\", \"doc\": \"For every point $x$ in $X$, there exist open neighborhoods $U$ of $f(x)$ in $Y$ and $V$ of $x$ in $X$ such that $V$ is contained in the preimage of $U$ under $f$, and the induced ring homomorphism on \"}\n  {\"name\": \"AlgebraicGeometry.Flat.instHasRingHomPropertyFlat\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Flat\", \"type\": \"AlgebraicGeometry.HasRingHomProperty @AlgebraicGeometry.Flat fun {R S} [CommRing R] [CommRing S] => RingHom.Flat\", \"doc\": \"The property of being a flat morphism of schemes is characterized by the flatness of the corresponding ring homomorphism. Specifically, a morphism of schemes is flat if and only if the associated ring\"}\n  {\"name\": \"AlgebraicGeometry.instHasRingHomPropertyIsSmoothOfRelativeDimensionLocallyIsStandardSmoothOfRelativeDimension\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"∀ (n : ℕ),\\n  AlgebraicGeometry.HasRingHomProperty (@AlgebraicGeometry.IsSmoothOfRelativeDimension n)\\n    fun {R S} [CommRing R] [CommRing S] =>\\n    RingHom.Locally fun {R S} [CommRing R] [CommRing S] => RingHom.IsStandardSmoothOfRelativeDimension n\", \"doc\": \"For any natural number $ n $ and a morphism $ f: X \\to Y $ of schemes, the morphism $ f $ is smooth of relative dimension $ n $ if and only if it is locally standard smooth of relative dimension $ n $.\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: related definitions, smooth/etale facts or ordinary descent tools; none states this nodal/Fitting finite-stage assertion"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Local complete intersection geometric fibres and pure relative dimension descend along inverse limits of schemes",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.IsLocalAtTarget.descendsAlong\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Descent\", \"type\": \"∀ (P P' : CategoryTheory.MorphismProperty AlgebraicGeometry.Scheme) [AlgebraicGeometry.IsZariskiLocalAtTarget P]\\n  [P'.IsStableUnderBaseChange],\\n  (∀ {R : CommRingCat} {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ AlgebraicGeometry.Spec R)\\n      (g : Y ⟶ AlgebraicGeometry.Spec R), P' f → P (CategoryTheo\", \"doc\": \"Let $\\\\mathcal{P}$ and $\\\\mathcal{P}'$ be morphism properties in the category of schemes. If $\\\\mathcal{P}$ is Zariski local at the target and $\\\\mathcal{P}'$ is stable under base change, then for any com\"}\n  {\"name\": \"AlgebraicGeometry.IsZariskiLocalAtTarget.descendsAlong_inf_quasiCompact\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Descent\", \"type\": \"[IsZariskiLocalAtTarget P]\\n  (H :\\n    ∀ {R S : CommRingCat.{u}} {Y : Scheme.{u}} (φ : R ⟶ S) (g : Y ⟶ Spec R),\\n      P' (Spec.map φ) → P (pullback.fst (Spec.map φ) g) → P g) :\\n  P.DescendsAlong (P' ⊓ @QuasiCompact)\", \"doc\": \"If $ P $ is a morphism property that is Zariski local at the target, and for any ring homomorphism $ \\\\phi : R \\\\to S $ and morphism $ g : Y \\\\to \\\\operatorname{Spec}(R) $, the conditions $ P'(\\\\operatorna\"}\n  {\"name\": \"AlgebraicGeometry.IsZariskiLocalAtTarget.descendsAlong\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Descent\", \"type\": \"[IsZariskiLocalAtTarget P] [P'.IsStableUnderBaseChange]\\n  (H :\\n    ∀ {R : CommRingCat.{u}} {X Y : Scheme.{u}} (f : X ⟶ Spec R) (g : Y ⟶ Spec R), P' f → P (pullback.fst f g) → P g) :\\n  P.DescendsAlong P'\", \"doc\": \"Let $\\\\mathcal{P}$ and $\\\\mathcal{P}'$ be morphism properties on schemes. If $\\\\mathcal{P}'$ is stable under base change, and for every commutative ring $R$ and morphisms $f : X \\\\to \\\\operatorname{Spec}(R\"}\n  {\"name\": \"AlgebraicGeometry.IsLocalAtTarget.descendsAlong_inf_quasiCompact\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Descent\", \"type\": \"∀ (P P' : CategoryTheory.MorphismProperty AlgebraicGeometry.Scheme) [P'.IsStableUnderBaseChange]\\n  [P'.IsStableUnderComposition] [P.IsStableUnderBaseChange],\\n  @AlgebraicGeometry.IsLocalIso ⊓ @AlgebraicGeometry.Surjective ≤ P' →\\n    ∀ [AlgebraicGeometry.IsZariskiLocalAtTarget P],\\n      (∀ {R S : Com\", \"doc\": \"Let $\\\\mathcal{P}$ and $\\\\mathcal{P}'$ be morphism properties of schemes where $\\\\mathcal{P}'$ is stable under base change and composition, and $\\\\mathcal{P}$ is stable under base change. If the intersect\"}\n  {\"name\": \"AlgebraicGeometry.instLocallyOfFinitePresentationOfIsSmooth\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Smooth\", \"type\": \"[hf : IsSmooth f] : LocallyOfFinitePresentation f\", \"doc\": \"Every smooth morphism of schemes is locally of finite presentation.\"}\n  {\"name\": \"AlgebraicGeometry.instDescendsAlongSchemeMinMorphismPropertySurjectiveFlatLocallyOfFinitePresentationOfQuasiCompactOfIsZariskiLocalAtTarget\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.FlatDescent\", \"type\": \"(P : MorphismProperty Scheme) [P.DescendsAlong (@Surjective ⊓ @Flat ⊓ @QuasiCompact)] [IsZariskiLocalAtTarget P] :\\n  P.DescendsAlong (@Surjective ⊓ @Flat ⊓ @LocallyOfFinitePresentation)\", \"doc\": \"If a morphism property $ P $ is Zariski local at the target and descends along morphisms that are surjective, flat, and quasi-compact, then $ P $ also descends along morphisms that are surjective, fla\"}\n  {\"name\": \"AlgebraicGeometry.IsProper.toLocallyOfFiniteType\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Proper\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y} [self : AlgebraicGeometry.IsProper f],\\n  AlgebraicGeometry.LocallyOfFiniteType f\", \"doc\": \"If $ f: X \\\\to Y $ is a proper morphism of schemes, then $ f $ is locally of finite type.\"}\n  {\"name\": \"AlgebraicGeometry.LocallyOfFinitePresentation\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"A morphism $ f: X \\\\to Y $ of schemes is locally of finite presentation, meaning that for every point in $ X $, there exists an open neighborhood such that the restriction of $ f $ to this neighborhood\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: related definitions, smooth/etale facts or ordinary descent tools; none states this nodal/Fitting finite-stage assertion"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Flat, AlgebraicGeometry.LocallyOfFinitePresentation",
+   "results": "[loogle] OK 12 hit(s)\n  {\"name\": \"AlgebraicGeometry.UniversallyOpen.of_flat\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.UniversallyOpen\", \"type\": \" {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.Flat f] [AlgebraicGeometry.LocallyOfFinitePresentation f] : AlgebraicGeometry.UniversallyOpen f\", \"doc\": \"A flat morphism, locally of finite presentation is universally open.\"}\n  {\"name\": \"AlgebraicGeometry.Etale.of_formallyUnramified_of_flat\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Etale\", \"type\": \" {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.Flat f] [AlgebraicGeometry.FormallyUnramified f] [AlgebraicGeometry.LocallyOfFinitePresentation f] : AlgebraicGeometry.Etale f\", \"doc\": \"\"}\n  {\"name\": \"AlgebraicGeometry.Etale.iff_flat_and_formallyUnramified\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Etale\", \"type\": \" {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y} : AlgebraicGeometry.Etale f ↔ AlgebraicGeometry.Flat f ∧ AlgebraicGeometry.FormallyUnramified f ∧ AlgebraicGeometry.LocallyOfFinitePresentation f\", \"doc\": \"\"}\n  {\"name\": \"AlgebraicGeometry.instFaithfulOverSchemePullbackOfSurjectiveOfFlatOfLocallyOfFinitePresentation\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.FlatDescent\", \"type\": \" {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.Surjective f] [AlgebraicGeometry.Flat f] [AlgebraicGeometry.LocallyOfFinitePresentation f] : (CategoryTheory.Over.pullback f).Faithful\", \"doc\": \"\"}\n  {\"name\": \"AlgebraicGeometry.instDescendsAlongSchemeMinMorphismPropertySurjectiveFlatLocallyOfFinitePresentationOfQuasiCompactOfIsZariskiLocalAtTarget\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.FlatDescent\", \"type\": \" (P : CategoryTheory.MorphismProperty AlgebraicGeometry.Scheme) [P.DescendsAlong (@AlgebraicGeometry.Surjective ⊓ @AlgebraicGeometry.Flat ⊓ @AlgebraicGeometry.QuasiCompact)] [AlgebraicGeometry.IsZariskiLocalAtTarget P] : P.DescendsAlong (@AlgebraicGeometry.Surjective ⊓ @AlgebraicGeometry.Flat ⊓ @Alg\", \"doc\": \"fpqc descent implies fppf descent\"}\n  {\"name\": \"AlgebraicGeometry.instDescendsAlongSchemeLocallyOfFinitePresentationMinMorphismPropertySurjectiveFlatQuasiCompact\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.LocalFlatDescent\", \"type\": \" : CategoryTheory.MorphismProperty.DescendsAlong (@AlgebraicGeometry.LocallyOfFinitePresentation) (@AlgebraicGeometry.Surjective ⊓ @AlgebraicGeometry.Flat ⊓ @AlgebraicGeometry.QuasiCompact)\", \"doc\": \"\"}\n  {\"name\": \"AlgebraicGeometry.IsOpenImmersion.of_flat_of_mono\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.FlatMono\", \"type\": \" {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.Flat f] [AlgebraicGeometry.LocallyOfFinitePresentation f] [CategoryTheory.Mono f] : AlgebraicGeometry.IsOpenImmersion f\", \"doc\": \"Flat monomorphisms that are locally of finite presentation are open immersions. In particular,\\nevery smooth monomorphism is an open immersion.\\nThe converse holds by `inferInstance`.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.isLocallyConstant_finrank\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.FlatRank\", \"type\": \" {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.Flat f] [AlgebraicGeometry.IsFinite f] [AlgebraicGeometry.LocallyOfFinitePresentation f] : IsLocallyConstant (AlgebraicGeometry.Scheme.Hom.finrank f)\", \"doc\": \"The rank of a finite flat locally finitely presented morphism is locally constant.\"}\n  {\"name\": \"AlgebraicGeometry.Smooth.of_smooth_fiberToSpecResidueField\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.SmoothFiber\", \"type\": \" {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.LocallyOfFinitePresentation f] [AlgebraicGeometry.Flat f] (h : ∀ (y : ↥Y), AlgebraicGeometry.Smooth (AlgebraicGeometry.Scheme.Hom.fiberToSpecResidueField f y)) : AlgebraicGeometry.Smooth f\", \"doc\": \"If `f : X ⟶ Y` is locally of finite presentation, flat and has smooth fibers, then `f` is\\nsmooth.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.fppfPrecoverage_eq_inf\", \"module\": \"Mathlib.AlgebraicGeometry.Sites.Fpqc\", \"type\": \" : AlgebraicGeometry.Scheme.fppfPrecoverage = AlgebraicGeometry.Scheme.precoverage @AlgebraicGeometry.Flat ⊓ AlgebraicGeometry.Scheme.precoverage @AlgebraicGeometry.LocallyOfFinitePresentation\", \"doc\": \"\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.instEffectiveEpiOfLocallyOfFinitePresentationOfSurjectiveOfFlat\", \"module\": \"Mathlib.AlgebraicGeometry.Sites.Fpqc\", \"type\": \" {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.LocallyOfFinitePresentation f] [AlgebraicGeometry.Surjective f] [AlgebraicGeometry.Flat f] : CategoryTheory.EffectiveEpi f\", \"doc\": \"Any surjective, flat morphism locally of finite presentation is an effective epimorphism.\\nIn particular, étale surjections satisfy this.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.singleton_mem_fppfPrecoverage\", \"module\": \"Mathlib.AlgebraicGeometry.Sites.Fpqc\", \"type\": \" {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.Flat f] [AlgebraicGeometry.Surjective f] [AlgebraicGeometry.LocallyOfFinitePresentation f] : CategoryTheory.Presieve.singleton f ∈ AlgebraicGeometry.Scheme.fppfPrecoverage.coverings Y\", \"doc\": \"\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: related definitions, smooth/etale facts or ordinary descent tools; none states this nodal/Fitting finite-stage assertion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Descent of syntomic morphisms and equidimensional fibres to a finite stage of an affine inverse system",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.exists_index\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"∀ {I : Type u} [inst : CategoryTheory.Category.{u, u} I] {S X : AlgebraicGeometry.Scheme}\\n  {D : CategoryTheory.Functor I AlgebraicGeometry.Scheme} {t : D ⟶ (CategoryTheory.Functor.const I).obj S} {f : X ⟶ S}\\n  [∀ (i : I), CompactSpace ↥(D.obj i)] [CategoryTheory.IsCofiltered I]\\n  [∀ {i j : I} (f : \", \"doc\": \"Given a category $\\\\mathcal{I}$, a diagram $D: \\\\mathcal{I} \\\\to \\\\text{Sch}$ of schemes, a natural transformation from $D$ to the constant diagram at $S$, and a morphism $X \\\\to S$, there exists an index \"}\n  {\"name\": \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.hii'\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"{I : Type u} →\\n  [inst : CategoryTheory.Category.{u, u} I] →\\n    {S X : AlgebraicGeometry.Scheme} →\\n      {D : CategoryTheory.Functor I AlgebraicGeometry.Scheme} →\\n        {t : D ⟶ (CategoryTheory.Functor.const I).obj S} →\\n          {f : X ⟶ S} →\\n            [inst_1 : ∀ (i : I), CompactSpace ↥(D.obj\", \"doc\": \"A morphism $ i' \\to i $ in the index category $\\\\mathcal{I}$, chosen to ensure compatibility of the induced morphism $X \\to \\\\varprojlim D$ with the diagonal cover's open subsets. This morphism satisfies \"}\n  {\"name\": \"AlgebraicGeometry.Scheme.exists_hom_hom_comp_eq_comp_of_locallyOfFiniteType\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"∀ {I : Type u} [inst : CategoryTheory.Category.{u, u} I] {S X : AlgebraicGeometry.Scheme}\\n  (D : CategoryTheory.Functor I AlgebraicGeometry.Scheme) (t : D ⟶ (CategoryTheory.Functor.const I).obj S) (f : X ⟶ S)\\n  (c : CategoryTheory.Limits.Cone D) (hc : CategoryTheory.Limits.IsLimit c) [∀ (i : I), Com\", \"doc\": \"Given a diagram of schemes locally of finite type, if two morphisms from objects in the diagram to a scheme $X$ satisfy compatibility conditions with respect to a cone, then there exists an index $k$ \"}\n  {\"name\": \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.exists_eq\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"∀ {I : Type u} [inst : CategoryTheory.Category.{u, u} I] {S X : AlgebraicGeometry.Scheme}\\n  {D : CategoryTheory.Functor I AlgebraicGeometry.Scheme} {t : D ⟶ (CategoryTheory.Functor.const I).obj S} {f : X ⟶ S}\\n  [inst_1 : ∀ (i : I), CompactSpace ↥(D.obj i)] [AlgebraicGeometry.LocallyOfFiniteType f]\\n \", \"doc\": \"Given a diagram $ D: \\\\mathcal{I} \\\\to \\\\text{Sch} $ of schemes, a natural transformation from $ D $ to the constant diagram at $ S $, and a morphism $ X \\\\to S $, there exists an index $ j $ in the refin\"}\n  {\"name\": \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.i'\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"{I : Type u} →\\n  [inst : CategoryTheory.Category.{u, u} I] →\\n    {S X : AlgebraicGeometry.Scheme} →\\n      {D : CategoryTheory.Functor I AlgebraicGeometry.Scheme} →\\n        {t : D ⟶ (CategoryTheory.Functor.const I).obj S} →\\n          {f : X ⟶ S} →\\n            [∀ (i : I), CompactSpace ↥(D.obj i)] →\\n  \", \"doc\": \"Given a category $\\\\mathcal{I}$, a diagram $D: \\\\mathcal{I} \\\\to \\\\text{Sch}$ of schemes, a natural transformation from $D$ to the constant diagram at $S$, and a morphism $X \\\\to S$, this function returns \"}\n  {\"name\": \"AlgebraicGeometry.Scheme.exists_hom_comp_eq_comp_of_locallyOfFiniteType\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"∀ {I : Type u} [inst : CategoryTheory.Category.{u, u} I] {S X : AlgebraicGeometry.Scheme}\\n  (D : CategoryTheory.Functor I AlgebraicGeometry.Scheme) (t : D ⟶ (CategoryTheory.Functor.const I).obj S) (f : X ⟶ S)\\n  (c : CategoryTheory.Limits.Cone D) (hc : CategoryTheory.Limits.IsLimit c) [∀ (i : I), Com\", \"doc\": \"Given a diagram of schemes with a morphism locally of finite type, if two morphisms from an object in the diagram to a scheme agree after composition with the diagram's morphism and a cone's projectio\"}\n  {\"name\": \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.h𝒰S\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"∀ {I : Type u} [inst : CategoryTheory.Category.{u, u} I] {S X : AlgebraicGeometry.Scheme}\\n  {D : CategoryTheory.Functor I AlgebraicGeometry.Scheme} {t : D ⟶ (CategoryTheory.Functor.const I).obj S} {f : X ⟶ S}\\n  (self : AlgebraicGeometry.ExistsHomHomCompEqCompAux D t f) (i : self.𝒰S.I₀), AlgebraicGeo\", \"doc\": \"Given a category $\\\\mathcal{I}$, a diagram $D:\\\\mathcal{I}\\\\to\\\\text{Sch}$ of schemes, a natural transformation from $D$ to the constant diagram at $S$, and a morphism $X\\\\to S$, every element of the zerot\"}\n  {\"name\": \"AlgebraicGeometry.HasAffineProperty.descendsAlong_of_affineAnd\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Descent\", \"type\": \"∀ (P P' : CategoryTheory.MorphismProperty AlgebraicGeometry.Scheme)\\n  (Q Q' : {R S : Type u} → [inst : CommRing R] → [inst_1 : CommRing S] → (R →+* S) → Prop) [P'.IsStableUnderBaseChange]\\n  [P'.IsStableUnderComposition] [P.IsStableUnderBaseChange],\\n  @AlgebraicGeometry.IsLocalIso ⊓ @AlgebraicGeometr\", \"doc\": \"If a morphism property $ P $ is defined by requiring the source scheme to be affine and satisfying a ring-theoretic condition $ Q $, and if $ Q $ is invariant under ring isomorphisms and satisfies a c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: related definitions, smooth/etale facts or ordinary descent tools; none states this nodal/Fitting finite-stage assertion"
+  },
+  {
+   "tool": "grep",
+   "query": "Fitting|fittingIdeal|syntomic|localCompleteIntersection|unramified.*colimit",
+   "results": "[grep] OK 2 hit(s)\n  {\"file\": \"Mathlib/RingTheory/Artinian/Module.lean\", \"line\": \"314\", \"text\": \"/-- This is the Fitting decomposition of the module `M` with respect to the endomorphism `f`.\"}\n  {\"file\": \"Mathlib/RingTheory/Artinian/Module.lean\", \"line\": \"323\", \"text\": \"/-- This is the Fitting decomposition of the module `M` with respect to the endomorphism `f`.\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: related definitions, smooth/etale facts or ordinary descent tools; none states this nodal/Fitting finite-stage assertion"
+  },
+  {
+   "tool": "grep",
+   "query": "syntomic|nodal|IsPureDimension|IsLocalCompleteIntersection",
+   "results": "0 hits: ; digest=4f53cda18c2baa0c. Grep restricted to AlgebraicGeometry. Read hits: smooth relative dimension assumes smoothness, general descent-along morphism properties is not inverse-limit descent, and finite-presentation factorization does not give geometric lci or pure fibre dimensions. Lagrange nodal maps are interpolation nodes, unrelated to nodal curves.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Syntomic morphisms and relative dimension descend to a finite stage of an inverse system of schemes",
+   "results": "8 hits: AlgebraicGeometry.IsSmoothOfRelativeDimension.isSmooth, AlgebraicGeometry.IsFinite.recOn, AlgebraicGeometry.IsSmoothOfRelativeDimension, AlgebraicGeometry.IsEtale, AlgebraicGeometry.Scheme.Etale, AlgebraicGeometry.isSmoothOfRelativeDimension_comp, AlgebraicGeometry.isSmoothOfRelativeDimension_isStableUnderBaseChange, AlgebraicGeometry.IsSmooth; digest=5eb9837cbae49197. Read hits: smooth relative dimension assumes smoothness, general descent-along morphism properties is not inverse-limit descent, and finite-presentation factorization does not give geometric lci or pure fibre dimensions. Lagrange nodal maps are interpolation nodes, unrelated to nodal curves.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Flat, AlgebraicGeometry.LocallyOfFinitePresentation",
+   "results": "12 hits: AlgebraicGeometry.UniversallyOpen.of_flat, AlgebraicGeometry.Etale.of_formallyUnramified_of_flat, AlgebraicGeometry.Etale.iff_flat_and_formallyUnramified, AlgebraicGeometry.instFaithfulOverSchemePullbackOfSurjectiveOfFlatOfLocallyOfFinitePresentation, AlgebraicGeometry.instDescendsAlongSchemeMinMorphismPropertySurjectiveFlatLocallyOfFinitePresentationOfQuasiCompactOfIsZariskiLocalAtTarget, AlgebraicGeometry.instDescendsAlongSchemeLocallyOfFinitePresentationMinMorphismPropertySurjectiveFlatQuasiCompact, AlgebraicGeometry.IsOpenImmersion.of_flat_of_mono, AlgebraicGeometry.Scheme.Hom.isLocallyConstant_finrank; digest=2c507d8605ee08b2. Read hits: smooth relative dimension assumes smoothness, general descent-along morphism properties is not inverse-limit descent, and finite-presentation factorization does not give geometric lci or pure fibre dimensions. Lagrange nodal maps are interpolation nodes, unrelated to nodal curves.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A flat finitely presented scheme morphism with nodal pure one dimensional geometric fibres over an inverse limit eventually has local complete intersection pure one dimensional geometric fibres",
+   "results": "8 hits: AlgebraicGeometry.IsSmoothOfRelativeDimension, AlgebraicGeometry.Flat, AlgebraicGeometry.IsSmooth, AlgebraicGeometry.UniversallyOpen.of_flat, AlgebraicGeometry.instLocallyOfFinitePresentationOfIsSmooth, AlgebraicGeometry.instHasRingHomPropertyIsSmoothLocallyIsStandardSmooth, AlgebraicGeometry.IsSmoothOfRelativeDimension.exists_isStandardSmoothOfRelativeDimension, AlgebraicGeometry.IsEtale; digest=184e497ee83bdfe8. Read hits: smooth relative dimension assumes smoothness, general descent-along morphism properties is not inverse-limit descent, and finite-presentation factorization does not give geometric lci or pure fibre dimensions. Lagrange nodal maps are interpolation nodes, unrelated to nodal curves.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Syntomicity descends from a filtered colimit of commutative rings and pure relative fibre dimension descends along affine inverse limits",
+   "results": "8 hits: AlgebraicGeometry.HasAffineProperty.descendsAlong_of_affineAnd, RingHom.EssFiniteType.exists_comp_map_eq_of_isColimit, AlgebraicGeometry.HasRingHomProperty.descendsAlong, AlgebraicGeometry.Scheme.exists_hom_hom_comp_eq_comp_of_locallyOfFiniteType, RingHom.EssFiniteType.exists_eq_comp_ι_app_of_isColimit, AlgebraicGeometry.instHasRingHomPropertyIsSmoothOfRelativeDimensionLocallyIsStandardSmoothOfRelativeDimension, AlgebraicGeometry.Scheme.exists_hom_comp_eq_comp_of_locallyOfFiniteType, AlgebraicGeometry.of_pullback_fst_Spec_of_codescendsAlong; digest=ff189ea86cbe6d0e. Read hits: smooth relative dimension assumes smoothness, general descent-along morphism properties is not inverse-limit descent, and finite-presentation factorization does not give geometric lci or pure fibre dimensions. Lagrange nodal maps are interpolation nodes, unrelated to nodal curves.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "descend.*(dimension|syntomic)|nodal|syntomic",
+   "results": "5 hits: Mathlib/LinearAlgebra/Lagrange.lean, Mathlib/LinearAlgebra/Lagrange.lean, Mathlib/LinearAlgebra/Lagrange.lean, Mathlib/LinearAlgebra/Lagrange.lean, Mathlib/LinearAlgebra/Lagrange.lean; digest=bdf58c07673b6aea. Read hits: smooth relative dimension assumes smoothness, general descent-along morphism properties is not inverse-limit descent, and finite-presentation factorization does not give geometric lci or pure fibre dimensions. Lagrange nodal maps are interpolation nodes, unrelated to nodal curves.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-nodal-family-noetherian-approximation",
+  "date": "2026-10-22",
+  "group": "Q11"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Historical nodal local-equation input under lem-trf-local-term-locality proof (1)--(2), via 0CBY first proof first paragraph: the 0C5F syntomic and relative-dimension descent arguments; returned approximation proof steps 3--4.",
+   "via": [
+    "lem-trf-nodal-family-noetherian-approximation",
+    "lem-trf-nodal-family-etale-local-model",
+    "lem-trf-nodal-etale-chart",
+    "lem-trf-nodal-log-regularity",
+    "lem-trf-nodal-pair-projective-resolution",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-trf-nodal-limit-lci-pure-stage",
+  "worker": "stage1",
+  "summary": "Six-step assembly using existing nodal-lci, syntomic/geometric-lci limit descent and pure-relative-dimension descent nodes. The geometric-to-ordinary purity argument is explicit, using surjective scalar extension and local topological dimensions. No new nodes and no statement changes.",
+  "blueprint": "Historical nodal-local-equation input in lem-trf-local-term-locality proof (1)--(2), through the existing approximation ancestry: realizes 0C5F first paragraph, deriving geometric lci from 0C4E and descending relative dimension via 0EY2. The current main-20261015 blueprint no longer spells out this historical nodal branch; the existing item remains the assigned generic approximation tool.",
+  "tool_uses": [
+   {
+    "node": "lem-sbc-equidimensional-open-local-dimension",
+    "why": "Converts pure dimension of a locally algebraic geometric fibre to constant local topological dimension; no statement of this unit gives this direction in the required generality."
+   },
+   {
+    "node": "lem-sbc-constant-local-dimension-components",
+    "why": "Converts constant finite local topological dimension on an ordinary locally Noetherian fibre to purity; generic dimension tool, not a replacement of the unit route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sbc-equidimensional-open-local-dimension",
+  "lem-sbc-constant-local-dimension-components"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q89-ece88860c",
+  "group": "Q89",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q89-ece88860c (reviewer sub-agent of L); spot-checked: I read the delivery in full: the item is unchanged, there are no new nodes and the proof has six steps. Sources read: curves.tex 0C5F (proof paragraph 1) and 0C4E; limits.tex 0EY2 and 0C3L. The 0C5F relative-dimension argument is replaced by the existing 0EY2 node, and 0EY2's own proof is that same 02FY/constructible argument, so nothing is lost. S1: lfp base change of a polynomial chart is elementary and correctly marked. S2: the nodal-lci criterion (1)⇒(2) applies with k=Ω and k̄=Ω, so C_{k̄}≅C and the completion matches the item's hypothesis; an empty fibre has the empty cover. S3: the complete-intersection-fibres limit descent applies with U_0=X_a and V_0=S_a under the identity structure; its qcqs, lfp, flatness and geometric-lci hypotheses all hold. S4: the geometric point Spec k̄→S, surjectivity via the field-extension and base-change nodes, local dimension 1 upstairs from equidimensional-open-local-dimension, transferred down by the field-extension local-dimension node (any L/k; with L=k it also gives local Noetherianity), then constant-local-dimension-components gives purity. S5: pure-relative-dimension finite stage with Z_0=S_a and d=1; it needs no flatness. S6: a common upper bound, then relative-dimension base change along Spec Ω gives geometric purity. proof_deps equals the union of uses. No SGA citation. The DAG search for 0C5F/0EY2/0C3L found no duplicate. The citer lem-trf-nodal-family-noetherian-approximation uses exactly the stated clauses. Edge cases (empty S or X, characteristic 2 node, imperfect residue fields, non-proper families) are all OK. I accept the two off-unit tool uses (lem-sbc-equidimensional-open-local-dimension, lem-sbc-constant-local-dimension-components) as generic dimension facts the 02FY route needs; the maintainer should record them."
+ },
+ "lean": {
+  "module": "Sheaf.TraceFormula.NodalLimitLCIPureStage",
+  "declaration": "AlgebraicGeometry.nodal_limit_lci_pure_stage",
+  "file": "lean/Sheaf/TraceFormula/NodalLimitLCIPureStage.lean",
+  "statement": "theorem nodal_limit_lci_pure_stage {I : Type u} [Preorder I] [IsDirected I (· ≤ ·)] [Nonempty I] (D : Iᵒᵖ ⥤ Scheme.{u}) [∀ i : Iᵒᵖ, CompactSpace (D.obj i)] [∀ i : Iᵒᵖ, QuasiSeparatedSpace (D.obj i)] [∀ {i j : Iᵒᵖ} (f : i ⟶ j), IsAffineHom (D.map f)] (c : Cone D) (hc : IsLimit c) (a : I) (Xₐ : Scheme.{u}) [CompactSpace Xₐ] [QuasiSeparatedSpace Xₐ] (gₐ : Xₐ ⟶ D.obj (op a)) [LocallyOfFinitePresentation gₐ] [QuasiCompact gₐ] [QuasiSeparated gₐ] (hflat : Flat (pullback.snd gₐ (c.π.app (op a)))) (hfib : ∀ (Ω : Type u) [Field Ω] [IsAlgClosed Ω] (y : Spec (.of Ω) ⟶ c.pt), IsEmpty (pullback (C := Scheme.{u}) (pullback.snd gₐ (c.π.app (op a))) y) ∨ ((pullback (C := Scheme.{u}) (pullback.snd gₐ (c.π.app (op a))) y).IsPureDimension 1 ∧ ∀ z : pullback (C := Scheme.{u}) (pullback.snd gₐ (c.π.app (op a))) y, z ∉ (pullback.snd (pullback.snd gₐ (c.π.app (op a))) y).smoothLocus → Nonempty (AdicCompletion (IsLocalRing.maximalIdeal ((pullback (pullback.snd gₐ (c.π.app (op a))) y).presheaf.stalk z)) ((pullback (pullback.snd gₐ (c.π.app (op a))) y).presheaf.stalk z) ≃+* (MvPowerSeries (Fin 2) Ω ⧸ Ideal.span {(MvPowerSeries.X 0 : MvPowerSeries (Fin 2) Ω) * (MvPowerSeries.X 1 : MvPowerSeries (Fin 2) Ω)})))) : ∃ b : I, ∃ hab : a ≤ b, ∀ (i : I) (hbi : b ≤ i), Flat (pullback.snd gₐ (D.map (homOfLE (hab.trans hbi)).op)) ∧ LocallyOfFinitePresentation (pullback.snd gₐ (D.map (homOfLE (hab.trans hbi)).op)) ∧ (∀ s : D.obj (op i), Nonempty ((pullback.snd gₐ (D.map (homOfLE (hab.trans hbi)).op)).fiber s) → ((pullback.snd gₐ (D.map (homOfLE (hab.trans hbi)).op)).fiber s).IsPureDimension 1) ∧ (∀ (Ω : Type u) [Field Ω] [IsAlgClosed Ω] (y : Spec (.of Ω) ⟶ D.obj (op i)), IsEmpty (pullback (C := Scheme.{u}) (pullback.snd gₐ (D.map (homOfLE (hab.trans hbi)).op)) y) ∨ ((pullback (C := Scheme.{u}) (pullback.snd gₐ (D.map (homOfLE (hab.trans hbi)).op)) y).IsPureDimension 1 ∧ ∀ z : pullback (C := Scheme.{u}) (pullback.snd gₐ (D.map (homOfLE (hab.trans hbi)).op)) y, ∃ U : (pullback (C := Scheme.{u}) (pullback.snd gₐ (D.map (homOfLE (hab.trans hbi)).op)) y).affineOpens, z ∈ U.1 ∧ ∃ ft : @Algebra.FiniteType Ω _ _ _ (((pullback.snd (pullback.snd gₐ (D.map (homOfLE (hab.trans hbi)).op)) y).appLE ⊤ U.1 (by simp)).hom.comp (Scheme.ΓSpecIso (.of Ω)).inv.hom).toAlgebra, @Algebra.IsLocalCompleteIntersection Ω _ _ _ (((pullback.snd (pullback.snd gₐ (D.map (homOfLE (hab.trans hbi)).op)) y).appLE ⊤ U.1 (by simp)).hom.comp (Scheme.ΓSpecIso (.of Ω)).inv.hom).toAlgebra ft))",
+  "branch": "sheaf-dag",
+  "by": "Q76",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-d1031ff44",
+  "group": "Q76",
+  "result": "pass",
+  "note": "Node unchanged apart from lean, and lean.statement matches the file verbatim with proof sorry only. Clause-by-clause match: qcqs directed system with affine transitions plus IsLimit cone; finitely presented gₐ as LFP+QC+QS with qcqs Xₐ; Flat on the base change to the limit; geometric-fibre hypothesis IsEmpty ∨ (IsPureDimension 1 ∧ ring-iso completion ≅ Ω[[X0,X1]]/(X0X1) at every z ∉ smoothLocus), same rendering as nodal_curve_lci_criterion; conclusion ∃ b ≥ a, ∀ i ≥ b: Flat, LFP, nonempty ordinary fibres pure of dimension 1, geometric fibres empty or pure of dimension 1 with pointwise affine finite-type lci neighbourhoods using the actual Ω-structure (equivalent to the node's cover definition, empty cover allowed). Ω : Type u per the def-weil-geometric-point record. Edge cases (empty Xₐ or S, empty or smooth fibres, singleton I) covered. No hollow definitions; source and blueprint docstrings and the six-step proof docstring present; Worker report and Second reading sections present. No file changed, so nothing compiled. Non-blocking: complete-intersection descent node uses Ω : Type (max u v); proof instantiates v := u."
+ }
+}

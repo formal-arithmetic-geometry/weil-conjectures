@@ -1,0 +1,129 @@
+{
+ "kind": "statement",
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tag 0E8I, lemma-j-shriek-and-tensor; sites-cohomology.tex Tag 0GL1, lemma-j-shriek-and-tensor. Agent-formulated consecutive-quotient normalization of the strict comparison recorded in lem-sf-integral-open-reduction-comparison, expanding parent proof Step 1."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Naturality of derived reduction quotient transitions under evaluation of module systems",
+   "results": "8 hits, including AdicCompletion transition naturality and evaluation lemmas, Module.Dual.eval_naturality, and CategoryTheory.Quotient.natTransLift; no open-sheaf K-flat tensor square or strict-model evaluation formula.",
+   "date": "2026-10-27",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"restrictScalars\", \"extensionByZero\"",
+   "results": "0 hits.",
+   "date": "2026-10-27",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "quotientSquare|restrictionComparison|scalar.*comparison",
+   "results": "10 hits in Mathlib ideal cotangent square files; none concerns open extension on module sheaves. Local rg found the existing comparison, calculus, and RingedOpenScalar interfaces, but neither of the two specialized model statements.",
+   "date": "2026-10-27",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.SixFunctors.IntegralOpenReductionQuotientSquare",
+  "date": "2026-10-27",
+  "group": "T3"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-def-sf-operations",
+ "id": "lem-sf-integral-open-tensor-quotient-model",
+ "title": "The open scalar quotient square on explicit K-flat tensor models",
+ "statement": "Fix a prime $\\ell$, a finite extension $E/\\mathbf Q_\\ell$, independent scheme and coefficient universes, an open immersion $j:X\\hookrightarrow V$, coefficient transports and exact open operations $o$, and a generator-normalized ordinary open tensor comparison $\\theta$ [lem-sf-integral-open-reduction-comparison]. Set $B_{W,n}=(\\mathcal O_E/\\varpi^{n+1})_W$, $S_n^W=\\operatorname{Res}_{B_{W,n+1}\\to B_{W,n}}$, and let $J_n$ be finite extension by zero [def-coef-normalized-dvr-tower, def-trf-compact-support-system-evaluation-diagram]. There are ordinary natural isomorphisms $e_n:S_n^XJ_{n+1}\\cong J_nS_n^V$, in diagrammatic composition order, carrying each extension generator to the generator with the same underlying section. For every unbounded K-flat complex $Q$ on $X$ and every proof that its termwise completed open extension $JQ$ is K-flat [def-pc-kflat-complex], let $\\beta_n(Q)$ be the explicit localization of $\\theta_n$ through the K-flat finite-reduction and exact-localization factors [lem-sf-integral-open-tensor-representative]. Let $d_n^W(H):H_{n+1}\\to S_n^WH_n$ be the transpose under the specified finite scalar adjunction of the smaller-level scalar unit followed by inverse successive restriction [lem-coef-derived-system-evaluation-calculus]. Then $d_n^V(j_!\\mathbf Q(Q))\\,S_n^V\\beta_n(Q)=\\beta_{n+1}(Q)\\,J_{n+1}(d_n^X(\\mathbf Q(Q)))\\,D(e_n)_{(\\mathbf Q(Q))_n}$. No reduction-system calculus, completeness assumption, or strict comparison r is supplied or used.",
+ "proof": [
+  {
+   "text": "Use the proved generator-normalized ordinary open scalar restriction comparison. Its construction is the horizontal system ring-map square, continuous module pushforward composition and congruence, and the inverse scalar/open comparison, with explicit coefficient-forgetting identities.",
+   "uses": [
+    "lem-sf-integral-open-scalar-restriction-comparison"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply the ordinary module quotient square at the constructed generator-normalized comparison to Q. This is an equality before localization, without any flatness hypothesis.",
+   "uses": [
+    "lem-sf-integral-open-tensor-module-quotient-square"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Localize the ordinary square. The proved exact-square factor identity identifies the localized comparison with mapDerivedCategorySquareIso. Apply the single-site K-flat quotient-model formula at X and at V; naturality moves the completed open exact-localization factor through the scalar quotient. Conjugate the localized square by the four finite-reduction isomorphisms and the open factors. The resulting composite is exactly integralOpenTensorRepresentativeIso, giving the required equation.",
+   "uses": [
+    "lem-coef-integral-reduction-quotient-model",
+    "lem-sf-integral-open-tensor-representative"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sf-integral-open-scalar-restriction-comparison",
+  "lem-sf-integral-open-tensor-module-quotient-square",
+  "lem-coef-integral-reduction-quotient-model",
+  "lem-sf-integral-open-tensor-representative"
+ ],
+ "stmt_deps": [
+  "lem-sf-integral-open-reduction-comparison",
+  "def-trf-compact-support-system-evaluation-diagram",
+  "def-pc-kflat-complex",
+  "lem-sf-integral-open-tensor-representative",
+  "def-coef-normalized-dvr-tower",
+  "lem-coef-derived-system-evaluation-calculus"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tag 0E8I and sites-cohomology.tex Tag 0GL1. M7 2026-10-27: explicit ordinary comparison from systemMap naturality and RingedOpenScalar; quotient square reduced to its ordinary-chain and single-site K-flat normalization steps, with proved exact-localization and conjugation glue."
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "def-weil-integral-rational-qbar-compact-support",
+   "place": "Integral construction: the specified compact-support quotient transitions equal those for the proper image after open extension, parent Step 1, the strict open-comparison quotient square. Finite tensor quotient-model square.",
+   "via": [
+    "lem-sf-integral-open-reduction-quotient-square",
+    "lem-sf-compact-support-proper-image-tower",
+    "lem-sf-integral-compact-support-constructible"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.SixFunctors.IntegralOpenTensorQuotientModel",
+  "file": "lean/Sheaf/SixFunctors/IntegralOpenTensorQuotientModel.lean",
+  "declaration": "WeilConjectures.integralOpenTensorQuotientModel",
+  "statement": "theorem integralOpenTensorQuotientModel\n    (tensor : IntegralOpenReduction.TensorComparison l E j o) :\n    ∃ ordinary : ∀ n : ℕ,\n      normalizedDVRModuleRes l E X (Nat.le_succ n) ⋙\n          IntegralOpenReduction.finiteExtension l E j o (n + 1) ≅\n        IntegralOpenReduction.finiteExtension l E j o n ⋙\n          normalizedDVRModuleRes l E V (Nat.le_succ n),\n      (∀ (n : ℕ) (M : normalizedDVRModules l E X n) (W : V.ProEt)\n        (a : W ⟶ IntegralOpenReduction.openObject j),\n        HEq (fun x : ((normalizedDVRModuleRes l E X (Nat.le_succ n)).obj M).val.obj\n            (op ((IntegralOpenReduction.sliceSite j).obj (Over.mk a))) ↦\n          ((ordinary n).hom.app M).val.app (op W)\n            (IntegralOpenReduction.finiteExtensionSection l E j o (n + 1)\n              ((normalizedDVRModuleRes l E X (Nat.le_succ n)).obj M) W a x))\n          (fun x : M.val.obj (op ((IntegralOpenReduction.sliceSite j).obj (Over.mk a))) ↦\n            IntegralOpenReduction.finiteExtensionSection l E j o n M W a x)) ∧\n      let openRestriction (n : ℕ) :\n          normalizedDVRRes l E X (Nat.le_succ n) ⋙\n              compactSupportCanonicalJLevel l E j o (n + 1) ≅\n            compactSupportCanonicalJLevel l E j o n ⋙\n              normalizedDVRRes l E V (Nat.le_succ n) := by\n        -- Supply the witnesses over the recorded standard categories directly.\n        exact @Functor.mapDerivedCategorySquareIso\n          _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _\n          (normalizedDVRModuleRes_additive l E X (Nat.le_succ n))\n          (normalizedDVRModuleRes_limits l E X (Nat.le_succ n))\n          (normalizedDVRModuleRes_colimits l E X (Nat.le_succ n))\n          (IntegralOpenReduction.finiteExtensionAdditive l E j o (n + 1))\n          (compactSupportFiniteExtensionPreservesFiniteLimits l E j o (n + 1))\n          (compactSupportFiniteExtensionPreservesFiniteColimits l E j o (n + 1))\n          (IntegralOpenReduction.finiteExtensionAdditive l E j o n)\n          (compactSupportFiniteExtensionPreservesFiniteLimits l E j o n)\n          (compactSupportFiniteExtensionPreservesFiniteColimits l E j o n)\n          (normalizedDVRModuleRes_additive l E V (Nat.le_succ n))\n          (normalizedDVRModuleRes_limits l E V (Nat.le_succ n))\n          (normalizedDVRModuleRes_colimits l E V (Nat.le_succ n))\n          (ordinary n)\n      ∀ (Q : CochainComplex (scalarReductionSource l E X) ℤ)\n        (hQ : CochainComplex.IsKFlatIndependentCoefficients\n          (J := ProEt.topology X) (R := completedIntegralCommRingSheafUnrestricted l E X) Q)\n        (hJQ : CochainComplex.IsKFlatIndependentCoefficients\n          (J := ProEt.topology V) (R := completedIntegralCommRingSheafUnrestricted l E V)\n          (((IntegralOpenReduction.extension l E j o).mapHomologicalComplex (.up ℤ)).obj Q))\n        (n : ℕ),\n      (integralOpenReductionStep l E V n).app\n          ((IntegralOpenReduction.shriek l E j o).obj (DerivedCategory.Q.obj Q)) ≫\n        (normalizedDVRRes l E V (Nat.le_succ n)).map\n          (integralOpenTensorRepresentativeIso l E j o tensor Q hQ hJQ n).hom =\n      (integralOpenTensorRepresentativeIso l E j o tensor Q hQ hJQ (n + 1)).hom ≫\n        (compactSupportCanonicalJLevel l E j o (n + 1)).map\n          ((integralOpenReductionStep l E X n).app (DerivedCategory.Q.obj Q)) ≫\n        (openRestriction n).hom.app\n          ((coefficientFiniteDerivedExtension l E X n).obj (DerivedCategory.Q.obj Q))",
+  "branch": "sheaf-dag",
+  "by": "T3",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T3",
+  "result": "pass",
+  "landing": "20261026T222758-L-695038",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M7",
+  "result": "pass",
+  "landing": "20261027T050623-L-245985",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

@@ -1,0 +1,289 @@
+{
+ "id": "lem-sfb-bounded-double-graph-hilbert-locus",
+ "kind": "statement",
+ "title": "Bounded double graph open in a projective Hilbert scheme",
+ "statement": "Let $U$ be a Noetherian affine scheme, meaning affine and locally Noetherian [def-pc-scheme, pqf-def-locnoeth]. Let $X\\to U$ and $Y\\to U$ be proper, flat and finitely presented morphisms [def-weil-proper-morphism, def-weil-flat-morphism, def-sbc-locally-finite-presentation]. Suppose that $E=X\\times_UY$ has a specified closed immersion $j:E\\hookrightarrow\\mathbf P^m_U$ for some $m\\ge0$ [def-pc-fibre-product, def-weil-closed-immersion, def-kun-projective]. Let $R\\in\\mathbf Q[n]$ be a numerical polynomial (integer-valued on integers). Assume that for every geometric point $t:\\operatorname{Spec}\\Omega\\to U$, with $\\Omega$ algebraically closed, and every isomorphism $f:X_t\\simeq Y_t$, the closed graph of $f$ has coordinate Hilbert polynomial $R$ for $j_t$ [def-sfb-projective-coordinate-hilbert-polynomial]. Let $\\operatorname{Hilb}_{E/U}$ assign to a $U$-scheme $T$ the closed subschemes $D\\subset E_T$ flat and finitely presented over $T$, with pullback as transition maps; since $E$ is projective, these are proper [def-sfb-proper-hilbert-presheaf]. This functor has a representative $H=\\coprod_P H_P$ with $H_P$ representing the families whose geometric fibres have polynomial $P$, each $H_P$ projective over $U$. There are open subschemes $H_X,H_Y\\subset H$ [def-weil-open-immersion] characterized, on every $U$-scheme $T$, by invertibility respectively of the projections $D\\to X_T$ and $D\\to Y_T$ of the corresponding universal closed family. Their intersection $J=H_X\\cap H_Y$ factors through $H_R$ as an open subscheme, is Noetherian and quasi-compact, and $J\\to U$ is separated and of finite presentation (locally of finite presentation, quasi-compact and quasi-separated). For every $T\\to U$, its points are naturally exactly the closed subschemes $D\\subset X_T\\times_TY_T$ with both projections $p_X,p_Y$ invertible; such a $D$ is the graph of the isomorphism $p_Y\\circ p_X^{-1}$ and every isomorphism has exactly this graph. The representative, its universal graph, the two projection identities, and these inverse bijections commute with every base change of test schemes, including nonreduced ones, and with arbitrary $U'\\to U$ by pulling back $J$ and $H_R$; $U'$ need not be Noetherian. No bound on fibre dimension is assumed beyond the stated fixed-polynomial hypothesis.",
+ "source": {
+  "document": "literature/stacks-project/moduli-curves.tex",
+  "place": "Tag 0DSQ (lemma-curves-diagonal-separated-fp), final bounded-open argument; quot.tex Tags 0D1A (lemma-Mor-into-Hilb), 0D1B (lemma-Mor-into-Hilb-open); the projective Hilbert scheme realization and Noetherian permanence in parent steps 3, 4 and 6."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "pqf-def-locnoeth",
+  "def-weil-proper-morphism",
+  "def-weil-flat-morphism",
+  "def-sbc-locally-finite-presentation",
+  "def-pc-fibre-product",
+  "def-weil-closed-immersion",
+  "def-kun-projective",
+  "def-sfb-projective-coordinate-hilbert-polynomial",
+  "def-sfb-proper-hilbert-presheaf",
+  "def-weil-open-immersion",
+  "def-sfb-relative-morphisms-presheaf",
+  "def-sfb-projective-fibre-hilbert-polynomial"
+ ],
+ "proof": [
+  {
+   "text": "Apply [lem-sfb-projective-hilbert-polynomial-representability] to the given embedding over the Noetherian scheme $U$. It gives $H=\\coprod_P H_P$, each $H_P$ projective, its stated fibre-polynomial subfunctor, and the universal closed family with arbitrary base change. These are also the proper Hilbert families: $E\\to X$ is a base change of the proper map $Y\\to U$, so $E\\to U$ is proper by [lem-weil-pbc-proper-base-change, lem-weil-pbc-proper-composition]. For every $T\\to U$, $E_T\\to T$ remains proper; every closed $D\\subset E_T$ is proper over $T$ by [lem-weil-pbc-closed-immersion-proper]. Thus the Hilbert functor here equals the proper Hilbert functor to which the graph theorem applies.",
+   "uses": [
+    "lem-sfb-projective-hilbert-polynomial-representability",
+    "lem-weil-pbc-proper-base-change",
+    "lem-weil-pbc-proper-composition",
+    "lem-weil-pbc-closed-immersion-proper"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/quot.tex",
+    "place": "Tags 0CZY (situation-hilb), 0D1A (lemma-Mor-into-Hilb); projective representative supplied by the cited Hilbert node; proper permanence Tags 01W4, 01W3, 01W5"
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-graphs-open-in-hilbert] with $(Z,X)=(X,Y)$: $X\\to U$ is proper, flat and finitely presented, and $Y\\to U$ is separated because it is proper. On the universal family this gives $H_X\\subset H$, characterized for every $T\\to H$ by invertibility of $p_X:D\\to X_T$. Apply the same theorem with $(Z,X)=(Y,X)$, identifying $Y\\times_U X$ with $E$ by swapping the projections. It gives $H_Y\\subset H$, characterized by invertibility of $p_Y$. Both are open subschemes; restricting the structure sheaf of $H$ to their set-theoretic intersection defines the open subscheme $J=H_X\\cap H_Y$. Its $T$-points impose both conditions on the same closed family.",
+   "uses": [
+    "lem-sfb-graphs-open-in-hilbert"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/quot.tex",
+    "place": "Tags 0D1A and 0D1B (lemma-Mor-into-Hilb and lemma-Mor-into-Hilb-open), applied twice"
+   }
+  },
+  {
+   "text": "For $D$ classified by a $T$-point of $J$, set $f=p_Y\\circ p_X^{-1}$; it is an isomorphism, with inverse $p_X\\circ p_Y^{-1}$. If $i:D\\hookrightarrow X_T\\times_TY_T$ is its inclusion, then $i\\circ p_X^{-1}$ has components $\\mathrm{id}_{X_T}$ and $f$, so it equals $(\\mathrm{id},f)$ by the fibre-product mapping property. Hence $D$ is exactly the graph of $f$ as a closed subscheme. Conversely [lem-sfb-graphs-open-in-hilbert] assigns every isomorphism $f$ its graph, on which the projections are $\\mathrm{id}$ and $f$ and therefore invertible. These operations are inverse: recovering $f$ gives $f$, and recovering $D$ gives the same closed immersion via $p_X$. This also proves uniqueness of the graph.",
+   "uses": [
+    "lem-sfb-graphs-open-in-hilbert"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/quot.tex",
+    "place": "Tag 0D1A (lemma-Mor-into-Hilb), final proof paragraph, and Tag 0D1B, graph criterion"
+   }
+  },
+  {
+   "text": "For any point $a\\in J$ choose an algebraic closure $\\Omega$ of its residue field and the geometric point $\\bar a:\\operatorname{Spec}\\Omega\\to J$. Step 3 identifies its universal family with an isomorphism graph over the geometric point $\\operatorname{Spec}\\Omega\\to U$. By the fixed-polynomial hypothesis its polynomial is $R$. The stratum characterization in [lem-sfb-projective-hilbert-polynomial-representability] therefore puts $a$ in $H_R$. Consequently the inverse image in $J$ of the open complement $\\coprod_{P\\ne R}H_P$ is empty. Restricting the map $J\\to H$ to the open $H_R$ gives a unique factorization, and $J\\to H_R$ is the inclusion of the same open subset with its restricted structure sheaf. This uses factorization through an open, so it holds with the full scheme structures, including nilpotents.",
+   "uses": [
+    "lem-sfb-projective-hilbert-polynomial-representability"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/moduli-curves.tex",
+    "place": "Tag 0DSQ (lemma-curves-diagonal-separated-fp), final bounded-open argument, with the fixed coordinate-polynomial assumption replacing the preceding curve calculation"
+   }
+  },
+  {
+   "text": "The morphism $H_R\\to U$ is of finite type by [lem-sfb-projective-hilbert-polynomial-representability]. Since $U$ is Noetherian, [lem-weil-pbc-finite-type-over-noetherian] makes $H_R$ Noetherian. Its open subscheme $J$ is Noetherian, hence quasi-compact, by [lem-weil-pbc-noetherian-open-subscheme-noetherian]. Both $J$ and $U$ are locally Noetherian, hence quasi-separated schemes by [lem-weil-pbc-locally-noetherian-quasi-separated]. Apply [lem-weil-pbc-qcqs-morphism-permanence](1) to $J\\to U$: its source is quasi-compact and target quasi-separated, so this map is quasi-compact; its source is quasi-separated, so the map is quasi-separated.",
+   "uses": [
+    "lem-sfb-projective-hilbert-polynomial-representability",
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "lem-weil-pbc-noetherian-open-subscheme-noetherian",
+    "lem-weil-pbc-locally-noetherian-quasi-separated",
+    "lem-weil-pbc-qcqs-morphism-permanence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/moduli-curves.tex",
+    "place": "Tag 0DSQ (lemma-curves-diagonal-separated-fp), final paragraph; permanence Tags 01T6, 01OW, 01OZ, 01OY, 03GI, 01KV"
+   }
+  },
+  {
+   "text": "The diagonal of $J\\to U$ is the pullback of the diagonal of $H_R\\to U$ along $J\\times_UJ\\to H_R\\times_UH_R$: a pair of maps to $J$ has equal images in $H_R$ precisely when the maps are equal, since an open inclusion is injective on maps, with the same restricted sheaf. The Hilbert node says $H_R\\to U$ is separated, so its diagonal is a closed immersion. By [lem-weil-pbc-closed-immersion-base-change] the displayed pullback is a closed immersion. This proves that $J\\to U$ is separated.",
+   "uses": [
+    "lem-sfb-projective-hilbert-polynomial-representability",
+    "lem-weil-pbc-closed-immersion-base-change"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Tag 01KK (definition-separated), diagonal restricted to an open source; Tag 01JY (lemma-base-change-immersion), closed case"
+   }
+  },
+  {
+   "text": "To verify local finite presentation without any finiteness assumption on test schemes, take an affine base open $V=\\operatorname{Spec}A$ from a Noetherian-ring affine cover of $U$. The finite-type assertion for $H_R\\to U$ in [lem-sfb-projective-hilbert-polynomial-representability] gives an affine cover over $V$ by $W=\\operatorname{Spec}B$ with $B$ a finite-type $A$-algebra. For each point of $J\\cap W$ choose a distinguished open $D(s)\\subseteq J\\cap W$ containing it. If $B=A[b_1,\\ldots,b_r]$, then $B_s$ is generated over $A$ by $b_1,\\ldots,b_r,s^{-1}$. Since $A$ is Noetherian, [lem-weil-pbc-finite-type-noetherian-finite-presentation] says $B_s$ is finitely presented over $A$. These neighbourhoods verify exactly local finite presentation as defined by [def-sbc-locally-finite-presentation]. Combined with the quasi-compactness and quasi-separatedness from step 5, this is finite presentation of $J\\to U$.",
+   "uses": [
+    "lem-sfb-projective-hilbert-polynomial-representability",
+    "lem-weil-pbc-finite-type-noetherian-finite-presentation",
+    "def-sbc-locally-finite-presentation"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00FP (lemma-Noetherian-finite-type-is-finite-presentation), algebra assertion; morphisms.tex Tag 01TP (definition-finite-presentation)"
+   }
+  },
+  {
+   "text": "Let $h:T'\\to T$ be any change of test scheme. The universal Hilbert family pulls back by [lem-sfb-projective-hilbert-polynomial-representability], and the two projection opens have the universal base-change property of [lem-sfb-graphs-open-in-hilbert]. Under the canonical iterated-fibre-product identifications their projections are $(p_X)_{T'}$ and $(p_Y)_{T'}$. The inverse of $(p_X)_{T'}$ is $(p_X^{-1})_{T'}$, since pulling back $p_Xp_X^{-1}=\\mathrm{id}$ and $p_X^{-1}p_X=\\mathrm{id}$ verifies both inverse identities. Thus $(p_Y\\circ p_X^{-1})_{T'}=(p_Y)_{T'}\\circ((p_X)_{T'})^{-1}$, and pulling back $(\\mathrm{id},f)$ gives $(\\mathrm{id},f_{T'})$ by its two components. The projection identities and the inverse graph bijections therefore pull back exactly, for identities and composites too. For arbitrary $U'\\to U$, the same Hilbert theorem supplies $H_R\\times_UU'$ and the universal family, and the same open characterization supplies $J\\times_UU'$. Equivalently, maps from a $U'$-scheme into this pullback are exactly its $U$-maps into $J$. No argument here requires $T,T'$ or $U'$ to be reduced or Noetherian; the Noetherian hypothesis was used only in steps 1, 5 and 7 over $U$.",
+   "uses": [
+    "lem-sfb-projective-hilbert-polynomial-representability",
+    "lem-sfb-graphs-open-in-hilbert"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/quot.tex",
+    "place": "Tags 0D1A and 0D1B, base-change and universal open assertions; arbitrary base change of the Hilbert representative as in the cited node"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-projective-hilbert-polynomial-representability",
+  "lem-weil-pbc-proper-base-change",
+  "lem-weil-pbc-proper-composition",
+  "lem-weil-pbc-closed-immersion-proper",
+  "lem-sfb-graphs-open-in-hilbert",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-weil-pbc-noetherian-open-subscheme-noetherian",
+  "lem-weil-pbc-locally-noetherian-quasi-separated",
+  "lem-weil-pbc-qcqs-morphism-permanence",
+  "lem-weil-pbc-closed-immersion-base-change",
+  "lem-weil-pbc-finite-type-noetherian-finite-presentation",
+  "def-sbc-locally-finite-presentation"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/moduli-curves.tex",
+  "place": "Tag 0DSQ, bounded-open argument; quot.tex Tags 0D1A and 0D1B; explicit diagonal, affine finite-presentation and graph base-change assembly from existing nodes."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The open locus in the projective Hilbert scheme where both projections are isomorphisms is separated and finitely presented if every graph has a fixed Hilbert polynomial",
+   "results": "{\"t\": \"2026-10-22T05:56:20Z\", \"tool\": \"leanfinder\", \"query\": \"The open locus in the projective Hilbert scheme where both projections are isomorphisms is separated and finitely presented if every graph has a fixed Hilbert polynomial\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Proj.isSeparated\", \"AlgebraicGeometry.Proj.instIsSeparated\", \"AlgebraicGeometry.Proj.instUniversallyClosedToSpecZeroOfFiniteTypeSubtypeMemOfNatNat\", \"AlgebraicGeometry.Proj.instIsProperToSpecZeroOfFiniteTypeSubtypeMemOfNatNat\", \"AlgebraicGeometry.Proj.pullbackAwayιIso\", \"AlgebraicGeometry.Proj.fromOfGlobalSections\", \"AlgebraicGeometry.IsSeparated.instMap\", \"AlgebraicGeometry.Scheme.isSeparated_iff_isClosedImmersion_prod_lift\"], \"digest\": \"45fe4f5440e7a5d4\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: Proj permanence and base-change of open immersions do not construct or bound a Hilbert graph locus."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A bounded graph locus in a projective Hilbert scheme over a Noetherian affine base is an open quasi compact scheme of finite presentation",
+   "results": "{\"t\": \"2026-10-22T05:56:20Z\", \"tool\": \"leanfinder\", \"query\": \"A bounded graph locus in a projective Hilbert scheme over a Noetherian affine base is an open quasi compact scheme of finite presentation\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Proj.instQuasiCompactToSpecZeroOfFiniteTypeSubtypeMemOfNatNat\", \"AlgebraicGeometry.Proj.instLocallyOfFiniteTypeToSpecZeroOfFiniteTypeSubtypeMemOfNatNat\", \"AlgebraicGeometry.Proj.instIsProperToSpecZeroOfFiniteTypeSubtypeMemOfNatNat\", \"AlgebraicGeometry.Proj.instUniversallyClosedToSpecZeroOfFiniteTypeSubtypeMemOfNatNat\", \"AlgebraicGeometry.AffineSpace.instLocallyOfFinitePresentationOverSchemeInferInstanceOverClassOfFinite\", \"AlgebraicGeometry.Proj\", \"AlgebraicGeometry.Proj.isSeparated\", \"AlgebraicGeometry.Proj.instIsSeparated\"], \"digest\": \"c0f0b4057afb10df\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: Proj permanence and base-change of open immersions do not construct or bound a Hilbert graph locus."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"Hilbert\"",
+   "results": "{\"t\": \"2026-10-22T05:56:20Z\", \"tool\": \"loogle\", \"query\": \"\\\"AlgebraicGeometry\\\", \\\"Hilbert\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: Proj permanence and base-change of open immersions do not construct or bound a Hilbert graph locus."
+  },
+  {
+   "tool": "grep",
+   "query": "HilbertScheme|isomFunctor|isomScheme|IsomScheme|graph.*[Hh]ilbert|[Hh]ilbert.*graph",
+   "results": "{\"t\": \"2026-10-22T05:56:19Z\", \"tool\": \"grep\", \"query\": \"HilbertScheme|isomFunctor|isomScheme|IsomScheme|graph.*[Hh]ilbert|[Hh]ilbert.*graph\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: Proj permanence and base-change of open immersions do not construct or bound a Hilbert graph locus."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The intersection of the two isomorphism projection opens in a Hilbert polynomial stratum represents invertible graphs and commutes with base change",
+   "results": "{\"t\": \"2026-10-22T05:56:20Z\", \"tool\": \"leansearch\", \"query\": \"The intersection of the two isomorphism projection opens in a Hilbert polynomial stratum represents invertible graphs and commutes with base change\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.isOpenImmersion_stableUnderBaseChange\", \"AlgebraicGeometry.UniversallyOpen.instRespectsIsoScheme\", \"AlgebraicGeometry.Scheme.OpenCover.pullbackCoverAffineRefinementObjIso_inv_pullbackHom\", \"CategoryTheory.MorphismProperty.IsStableUnderBaseChange.isomorphisms\", \"AlgebraicGeometry.isOpenImmersion_respectsIso\", \"AlgebraicGeometry.IsClosedImmersion.isStableUnderBaseChange\", \"AlgebraicGeometry.IsOpenImmersion.of_isIso\", \"AlgebraicGeometry.IsPreimmersion.instIsStableUnderBaseChangeScheme\"], \"digest\": \"d16d9e3d15e26328\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: Proj permanence and base-change of open immersions do not construct or bound a Hilbert graph locus."
+  },
+  {
+   "tool": "grep",
+   "query": "HilbertScheme|isomFunctor|isomScheme|[Hh]ilbert.*graph|graph.*[Hh]ilbert",
+   "results": "{\"t\": \"2026-10-23T04:09:06Z\", \"tool\": \"grep\", \"query\": \"HilbertScheme|isomFunctor|isomScheme|[Hh]ilbert.*graph|graph.*[Hh]ilbert\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern Proj, open immersions or individual morphisms, not the Hilbert graph representing scheme with the fixed-polynomial bound."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The isomorphism functor of proper flat finitely presented projective schemes is an open locus of a Hilbert scheme",
+   "results": "{\"t\": \"2026-10-23T04:09:07Z\", \"tool\": \"leansearch\", \"query\": \"The isomorphism functor of proper flat finitely presented projective schemes is an open locus of a Hilbert scheme\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsOpenImmersion.of_flat_of_mono\", \"AlgebraicGeometry.Scheme.Hom.opensRange_of_isIso\", \"AlgebraicGeometry.UniversallyOpen.of_flat\", \"AlgebraicGeometry.isomorphisms_eq_isOpenImmersion_inf_surjective\", \"AlgebraicGeometry.IsOpenImmersion.of_isIso\", \"AlgebraicGeometry.isOpenImmersion_respectsIso\", \"AlgebraicGeometry.instIsIsoSchemeMorphismRestrict\", \"AlgebraicGeometry.Flat.isIso_of_surjective_of_mono\"], \"digest\": \"dfd227f5b36f04af\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern Proj, open immersions or individual morphisms, not the Hilbert graph representing scheme with the fixed-polynomial bound."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"Hilbert\"",
+   "results": "{\"t\": \"2026-10-23T04:09:07Z\", \"tool\": \"loogle\", \"query\": \"\\\"AlgebraicGeometry\\\", \\\"Hilbert\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern Proj, open immersions or individual morphisms, not the Hilbert graph representing scheme with the fixed-polynomial bound."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An open subfunctor of the Hilbert scheme represents isomorphisms of projective schemes with bounded Hilbert polynomial",
+   "results": "{\"t\": \"2026-10-23T04:09:12Z\", \"tool\": \"leanfinder\", \"query\": \"An open subfunctor of the Hilbert scheme represents isomorphisms of projective schemes with bounded Hilbert polynomial\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Proj\", \"AlgebraicGeometry.Proj.instIsOpenImmersionAwayι\", \"ProjectiveSpectrum.top\", \"AlgebraicGeometry.ProjIsoSpecTopComponent.fromSpec\", \"AlgebraicGeometry.projIsoSpecTopComponent\", \"AlgebraicGeometry.Proj.instIsSeparated\", \"AlgebraicGeometry.projIsoSpec\", \"AlgebraicGeometry.Proj.openCoverOfMapIrrelevantEqTop\"], \"digest\": \"c7f80f7816ab59e8\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern Proj, open immersions or individual morphisms, not the Hilbert graph representing scheme with the fixed-polynomial bound."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Graphs whose two projections are isomorphisms form an open quasi compact subscheme of a fixed projective Hilbert polynomial stratum",
+   "results": "{\"t\": \"2026-10-23T04:09:13Z\", \"tool\": \"leanfinder\", \"query\": \"Graphs whose two projections are isomorphisms form an open quasi compact subscheme of a fixed projective Hilbert polynomial stratum\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Proj.pullbackAwayιIso\", \"AlgebraicGeometry.Proj.instQuasiCompactToSpecZeroOfFiniteTypeSubtypeMemOfNatNat\", \"AlgebraicGeometry.Proj\", \"AlgebraicGeometry.projIsoSpecTopComponent\", \"AlgebraicGeometry.projIsoSpec\", \"AlgebraicGeometry.ProjIsoSpecTopComponent.fromSpec\", \"AlgebraicGeometry.Proj.isSeparated\", \"AlgebraicGeometry.Proj.instUniversallyClosedToSpecZeroOfFiniteTypeSubtypeMemOfNatNat\"], \"digest\": \"8540541c1e19216e\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern Proj, open immersions or individual morphisms, not the Hilbert graph representing scheme with the fixed-polynomial bound."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-projective-curve-isom-graphs",
+  "date": "2026-10-22",
+  "group": "NB"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong §3.8, last paragraph, printed pp.608--609: finite unramified Isom for unordered stable marked curves, and extension over a normal base. This is rigidity of stable pointed curves themselves, independent of any modification map.; rigidity input: Isomorphism graphs of projective flat curves; Tag 0DSQ (lemma-curves-diagonal-separated-fp), final bounded-open argument; quot.tex Tags 0D1A (lemma-Mor-into-Hilb), 0D1B (lemma-Mor-into-Hilb-open); the projective Hilbert scheme realization and Noetherian permanence in parent steps 3, 4 and 6.",
+   "via": [
+    "lem-sfb-projective-curve-isom-graphs",
+    "lem-sfb-stable-pointed-isom-finite",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-bounded-double-graph-hilbert-locus",
+  "worker": "stage1",
+  "summary": "Eight explicit steps using existing Hilbert representability, graph-open and Mathlib permanence nodes; no new nodes. Statement unchanged. Checked the nonreduced graph inverse, open factorization through the polynomial stratum, Noetherian finiteness and arbitrary base change.",
+  "blueprint": "Inherited null blueprint ancestor confirmed by blueprint_refs.py ancestor. Realizes the bounded Hilbert-locus input of the recorded det-thm-sf-ctf-stability-direct-images proof (3) alteration prerequisite; parent projective-curve-isom-graphs old steps 3, 4 and 6. Same Stacks 0DSQ bounded-open route; no change of unit route.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q06-fe4c64380",
+  "group": "Q06",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q06-fe4c64380 (reviewer sub-agent of L); spot-checked: I read the item, its 8 steps and the statement of every cited node; the delivery has no new nodes. Statement and stmt_deps are unchanged from the NB delivery that created the item, and the parent lem-sfb-projective-curve-isom-graphs step 2 uses only clauses the item states. There is no repair note, so the re-split rule does not apply. Sources read: quot.tex 0D1A/0D1B (graph into Hilb, open where pr_1|_Y is an isomorphism for all T'→T) and moduli-curves.tex 0DSQ, last paragraph (Isom is an intersection of opens inside a fixed-polynomial piece of finite presentation over a Noetherian affine U). The item takes the fixed polynomial R as a hypothesis, which agrees with Remark 0DSR. Step 1: the Hilbert node's hypotheses hold (affine plus locally Noetherian gives Noetherian; j is given), and properness of every family follows from the proper base-change, composition and closed-immersion-proper(c) leaves. Step 2: graphs-open is applied to the proper, flat, fp universal family, once directly and once with factors swapped. Step 3: D is the graph of p_Y p_X^{-1} and the two operations are inverse; elementary. Step 4: the geometric point ā gives polynomial R by hypothesis, so ā lies in H_R; the factorization is through an open, so it holds with nilpotents. Step 5: finite type over Noetherian U, then open-Noetherian, then locally Noetherian implies quasi-separated, then qcqs-permanence(1); all hypotheses are present. Step 6: the diagonal is a pullback along a monomorphism, plus closed-immersion base change. Step 7: B_s is of finite type over Noetherian A, so 00FP and the definition of locally finite presentation give finite presentation. Step 8: base change by components; arbitrary U'→U by the mapping property, with no Noetherian claim on U'. Edge cases (empty families, J empty, nonreduced T, disconnected U, surfaces under fixed R) found no fault. Route: the Hilbert and graph nodes are in the item's own unit, the permanence nodes are Mathlib leaves, no tool_uses are needed, and no step cites SGA. Batch-5 check: lem-sfb-projective-hilbert-polynomial-representability (Grothendieck Hilbert representability; its closure reaches only the general definition def-trf-schematically-dense-open) and lem-sfb-graphs-open-in-hilbert (Stacks 0D1B; its closure reaches the generic lemma lem-trf-unramified-locus-base-change, Tag 0475) are general algebraic geometry. They are neither the trace formula nor Poincaré duality nor steps of their proofs, and they serve the finiteness/constructibility unit, so both are accepted. No changes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.BoundedDoubleGraphHilbertLocus",
+  "declaration": "AlgebraicGeometry.exists_bounded_double_graph_hilbert_locus",
+  "declarations": [
+   "AlgebraicGeometry.doubleGraphSecondProjection",
+   "AlgebraicGeometry.doubleGraphRelativeMorphism",
+   "AlgebraicGeometry.doubleGraphMap",
+   "AlgebraicGeometry.doubleGraphBaseChangeEmbedding",
+   "AlgebraicGeometry.exists_bounded_double_graph_hilbert_locus"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/BoundedDoubleGraphHilbertLocus.lean",
+  "statement": "theorem exists_bounded_double_graph_hilbert_locus {U X Y : Scheme.{u}} [IsAffine U] [IsLocallyNoetherian U] (x : X ⟶ U) (y : Y ⟶ U) [IsProper x] [IsProper y] [Flat x] [Flat y] [LocallyOfFinitePresentation x] [LocallyOfFinitePresentation y] (m : ℕ) (j : pullback x y ⟶ ℙ(ULift.{u} (Fin (m + 1)); U)) [IsClosedImmersion j] (hj : j ≫ (ℙ(ULift.{u} (Fin (m + 1)); U) ↘ U) = pullback.fst x y ≫ x) (R : NumericalHilbertPolynomial) (hR : ∀ (Ω : Type u) [Field Ω] [IsAlgClosed Ω] (t : Spec (.of Ω) ⟶ U) (f : Over.mk (pullback.fst t x) ≅ Over.mk (pullback.fst t y)), ProjectiveHilbertPolynomial.IsCoordinatePolynomial Ω m (doubleGraphMap x y (Over.mk t) f ≫ doubleGraphBaseChangeEmbedding (pullback.fst x y ≫ x) m j hj t) R.1) : ∃ (H : Over U) (eH : (properHilbertPresheaf (pullback.fst x y ≫ x)).RepresentableBy H) (HP : NumericalHilbertPolynomial → Over U) (ι : ∀ P, HP P ⟶ H), Nonempty (IsColimit (Cofan.mk H ι)) ∧ (∀ P, IsOpenImmersion (ι P).left ∧ IsHProjective (HP P).hom) ∧ (∀ (P : NumericalHilbertPolynomial) (T : Over U) (a : T ⟶ H), HasProjectiveFibreHilbertPolynomial (pullback.fst x y ≫ x) j T (eH.homEquiv a).1 P.1 ↔ ∃! b : T ⟶ HP P, b ≫ ι P = a) ∧ ∃ (HX HY J : Over U) (iX : HX ⟶ H) (iY : HY ⟶ H) (pX : J ⟶ HX) (pY : J ⟶ HY) (iJ : J ⟶ H) (r : J ⟶ HP R), IsOpenImmersion iX.left ∧ IsOpenImmersion iY.left ∧ IsPullback pX pY iX iY ∧ pX ≫ iX = iJ ∧ r ≫ ι R = iJ ∧ IsOpenImmersion r.left ∧ IsNoetherian J.left ∧ CompactSpace J.left ∧ IsSeparated J.hom ∧ LocallyOfFinitePresentation J.hom ∧ QuasiCompact J.hom ∧ QuasiSeparated J.hom ∧ (∀ (T : Over U) (a : T ⟶ H), (IsIso ((eH.homEquiv a).1.subschemeι ≫ graphFirstProjection x y T) ↔ ∃! b : T ⟶ HX, b ≫ iX = a) ∧ (IsIso ((eH.homEquiv a).1.subschemeι ≫ doubleGraphSecondProjection x y T) ↔ ∃! b : T ⟶ HY, b ≫ iY = a)) ∧ (∀ (T : Over U) (D : (properHilbertPresheaf (pullback.fst x y ≫ x)).obj (op T)), (IsIso (D.1.subschemeι ≫ graphFirstProjection x y T) ∧ IsIso (D.1.subschemeι ≫ doubleGraphSecondProjection x y T)) ↔ ∃! a : T ⟶ J, eH.homEquiv (a ≫ iJ) = D) ∧ ∃ eJ : ∀ T : Over U, (T ⟶ J) ≃ (Over.mk (pullback.fst T.hom x) ≅ Over.mk (pullback.fst T.hom y)), (∀ (T : Over U) (a : T ⟶ J), IsClosedImmersion (doubleGraphMap x y T (eJ T a)) ∧ (eH.homEquiv (a ≫ iJ)).1 = (doubleGraphMap x y T (eJ T a)).ker ∧ ∃ (p : (eH.homEquiv (a ≫ iJ)).1.subscheme ≅ pullback T.hom x) (q : (eH.homEquiv (a ≫ iJ)).1.subscheme ≅ pullback T.hom y), p.hom = (eH.homEquiv (a ≫ iJ)).1.subschemeι ≫ graphFirstProjection x y T ∧ q.hom = (eH.homEquiv (a ≫ iJ)).1.subschemeι ≫ doubleGraphSecondProjection x y T ∧ p.inv ≫ q.hom = (eJ T a).hom.left) ∧ (∀ (T' T : Over U) (h : T' ⟶ T) (a : T ⟶ J), ((Over.pullback x).map h).left ≫ (eJ T a).hom.left = (eJ T' (h ≫ a)).hom.left ≫ ((Over.pullback y).map h).left) ∧ (∀ (T' T : Over U) (h : T' ⟶ T) (a : T ⟶ J), (eH.homEquiv ((h ≫ a) ≫ iJ)).1 = (eH.homEquiv (a ≫ iJ)).1.comap (baseChangeMap (pullback.fst x y ≫ x) h)) ∧ (∀ (U' : Scheme.{u}) (g : U' ⟶ U), ∃ eb : ((Over.map g).op ⋙ properHilbertPresheaf (pullback.fst x y ≫ x)).RepresentableBy ((Over.pullback g).obj H), (∀ (T : Over U') (a : T ⟶ (Over.pullback g).obj H), eb.homEquiv a = eH.homEquiv (((Over.mapPullbackAdj g).homEquiv T H).symm a)) ∧ (∀ (P : NumericalHilbertPolynomial) (T : Over U') (a : T ⟶ (Over.pullback g).obj H), HasProjectiveFibreHilbertPolynomial (pullback.fst x y ≫ x) j ((Over.map g).obj T) (eb.homEquiv a).1 P.1 ↔ ∃! b : T ⟶ (Over.pullback g).obj (HP P), b ≫ (Over.pullback g).map (ι P) = a) ∧ ∃ ebJ : ∀ T : Over U', (T ⟶ (Over.pullback g).obj J) ≃ (Over.mk (pullback.fst (T.hom ≫ g) x) ≅ Over.mk (pullback.fst (T.hom ≫ g) y)), ∀ (T : Over U') (a : T ⟶ (Over.pullback g).obj J), ebJ T a = eJ ((Over.map g).obj T) (((Over.mapPullbackAdj g).homEquiv T J).symm a))",
+  "branch": "sheaf-dag",
+  "by": "Q91",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-6d131d9d1",
+  "group": "Q91",
+  "result": "pass",
+  "note": "Read the item node, all 13 stmt_dep records/declarations (properHilbertPresheaf, relativeMorphismsPresheaf/graph projections, HasProjectiveFibreHilbertPolynomial/NumericalHilbertPolynomial, IsCoordinatePolynomial/baseChangeEmbedding), the cited theorems exists_projective_hilbert_polynomial_representation and graphs_open_in_hilbert, and Stacks 0DSQ/0D1A/0D1B. Delivery changes only the new module, the item lean record and two used def-node stmt_deps; the statement field is verbatim. Every hypothesis matches the node and none is stronger (hR over all alg. closed Ω : Type u and all over-isos, coordinate polynomial of the actual graph composed with the base-changed j). The conclusion covers the representing H with coproduct strata (open, IsHProjective, fibre-polynomial iff), H_X/H_Y open with projection-invertibility iffs, J as IsPullback with open factorization through H_R, Noetherian/compact/separated/lfp/qc/qs, the points iff, pinned eJ (ker of the actual graph, p.inv≫q.hom = f), test base-change naturality and arbitrary U' via the canonical mapPullbackAdj. Helpers are canonical with docstrings. doubleGraphBaseChangeEmbedding equals the def node's baseChangeEmbedding up to pullback.congrHom hj and is accepted as a typing adapter. No extra assumptions; one sorry; no compile needed (no change)."
+ }
+}

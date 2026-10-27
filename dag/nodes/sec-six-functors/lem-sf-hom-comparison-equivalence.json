@@ -1,0 +1,122 @@
+{
+ "id": "lem-sf-hom-comparison-equivalence",
+ "kind": "statement",
+ "title": "Reverse Hom comparisons and compose component naturality squares",
+ "statement": "For categories A,B and bifunctors HA:A.op product A -> A, HB:B.op product B -> B, a comparison HB followed by an equivalence E:B≌A with its two-variable transport determines the reverse comparison along E.inverse. Also, a functor F sends any commuting square f followed by e prime = e followed by g to a commuting square. Composing this with a second square F(g) followed by i prime = i followed by h gives the naturality of F.mapIso(e) followed by i. All isomorphisms and equations are specified, not chosen.",
+ "source": {
+  "document": "lean/.lake/packages/mathlib/Mathlib/CategoryTheory/Equivalence.lean",
+  "place": "Equivalence.unitIso, counitIso and trans; NatIso.op, NatIso.prod, and the whiskering isomorphisms; Hom-comparison application motivated by Stacks 03EO."
+ },
+ "stmt_deps": [],
+ "proof": [
+  {
+   "text": "Whisker the forward comparison with E.inverse in each argument and its value; cancel the forward functor by the counit in the arguments and by the unit in the value. This is inverseHomComparison.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Expand the hom of a composite isomorphism. Use F.map_comp to map the first given square, then reassociate and substitute the second square. This gives mapIso_comp_naturality.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "agent",
+  "document": "lean/.lake/packages/mathlib/Mathlib/CategoryTheory/Equivalence.lean",
+  "place": "Equivalence.unitIso, counitIso and trans; NatIso.op, NatIso.prod, and the whiskering isomorphisms; Hom-comparison application motivated by Stacks 03EO."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Restriction along an equivalence of sites preserves the internal Hom of sheaves of modules",
+   "results": "sheafHom, restrictScalars, IsCoverDense.restrictHomEquivHom, sheafCongr component formulas, sheafifyHomEquiv, and PullbackConstruction.adjunction. None is the normalized module-slice Hom or native Frobenius comparison.",
+   "date": "2026-10-27",
+   "verdict": "Use existing pushforward equivalence and construct the module-slice comparison."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An equivalence of sheaves of modules induced by a site equivalence intertwines the pullback by a site automorphism and internal Hom",
+   "results": "sheafCongr, transportIsoSheafToPresheaf, pullbackIso, pushforwardCongr, and conjugateEquiv_pullbackComp_inv. No native module comparison.",
+   "date": "2026-10-27",
+   "verdict": "No complete match; ordinary restriction is available."
+  },
+  {
+   "tool": "grep",
+   "query": "comparisonModuleFunctor|adicLowerStarCompIhomIso",
+   "results": "Remote grep returned zero hits. Local rg finds adicSectionModuleEquivalence, adicModuleHomComparisonCore and native adicLowerStarCompIhomIso; no Frobenius-compatible composite small model.",
+   "date": "2026-10-27",
+   "verdict": "Reuse the explicit native comparison and construct only the missing transport."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.NativeFrobeniusRingedModel",
+  "date": "2026-10-27",
+  "group": "F8"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "cor-coef-verdier-weil-equivariance",
+   "place": "Internal-Hom comparison and naturality of evaluation paragraph; ordinary small-site restriction and Frobenius translation.",
+   "via": [
+    "lem-sf-native-frobenius-ringed-model",
+    "lem-sf-native-weil-ringed-presentation",
+    "lem-sf-native-weil-hom-closed-structure",
+    "lem-sf-native-weil-hom-right-adjoint",
+    "lem-sf-native-weil-tensor-adjoints",
+    "lem-sf-native-weil-tensor-lift",
+    "lem-sf-weil-native-tensor-transport",
+    "lem-sf-weil-native-closed-forgetful"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.HomComparisonEquivalence",
+  "file": "lean/Sheaf/CategoryTheory/HomComparisonEquivalence.lean",
+  "declaration": "CategoryTheory.HomComparison.inverseHomComparison",
+  "declarations": [
+   "CategoryTheory.HomComparison.inverseHomComparison",
+   "CategoryTheory.HomComparison.mapIso_comp_naturality"
+  ],
+  "statement": "def inverseHomComparison {A B : Type*} [Category A] [Category B] (E : B ≌ A)\n    (HA : Aᵒᵖ × A ⥤ A) (HB : Bᵒᵖ × B ⥤ B)\n    (h : HB ⋙ E.functor ≅ E.functor.op.prod E.functor ⋙ HA) :\n    HA ⋙ E.inverse ≅ E.inverse.op.prod E.inverse ⋙ HB",
+  "branch": "sheaf-dag",
+  "by": "F8",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F8",
+  "result": "pass",
+  "landing": "20261027T064449-L-2182596",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F8",
+  "result": "pass",
+  "landing": "20261027T064449-L-2182596",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

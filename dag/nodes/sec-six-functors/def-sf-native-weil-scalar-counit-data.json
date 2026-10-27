@@ -1,0 +1,127 @@
+{
+ "id": "def-sf-native-weil-scalar-counit-data",
+ "kind": "definition",
+ "title": "Normalized scalar and Frobenius counit conclusion data",
+ "status": "split",
+ "import_flags": [],
+ "statement": "Fix the normalized scalar realization family of [def-sf-adic-realization-isomorphism-data], the separated finite-type models and chosen geometric compactification of [def-weil-frobenius-square-exchange], and the actual ordinary categories and canonical mate predicates of [def-sf-native-weil-scalar-counit-categories]. Use the coefficient construction [def-sf-constructible-exceptional-coefficient-construction-data], the common-field functors and normalized adjunction [lem-sf-exceptional-field-descent], and actual native section operations [lem-sf-locally-finite-adic-compact-support-realization]. Define conclusion data, not an existence assertion: two equivalences whose forward functors equal the recorded realization; a natural scalar compact-support comparison; its constructible preservation and left-adjoint identification normalized by that comparison and equivalence counit; preservation under both Frobenius pullbacks and their inverses; forward and inverse exchange isomorphisms satisfying the canonical cancellation square; invertibility of their actual right mate, its explicit counit equation and the invariant equation for every native derived Weil object. Define its Frobenius normalization by equality with the recorded common-stage geometric comparison and the typed realization and restriction squares. Define its scalar normalization by the actual integral proper/open mate normalization, specified source and target scalar maps, a bridge from the fixed common compact-support functor to its coefficient-construction stage action whose components are the inverses of the recorded rationalLeft comparisons at every finite coefficient stage, the canonical section transport equality composed through that bridge, and shift compatibility. The coefficient changes and separately derived proper/open image are those of [def-pur-integral-compact-support-coefficient-data]. All these fields are data/properties to be supplied as conclusions; none asserts an unrestricted ambient exceptional adjoint.",
+ "stmt_deps": [
+  "def-sf-adic-realization-isomorphism-data",
+  "def-weil-frobenius-square-exchange",
+  "def-sf-native-weil-scalar-counit-categories",
+  "def-sf-constructible-exceptional-coefficient-construction-data",
+  "lem-sf-exceptional-field-descent",
+  "lem-sf-locally-finite-adic-compact-support-realization",
+  "def-pur-integral-compact-support-coefficient-data"
+ ],
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-package/cor-coef-verdier-weil-equivariance.proof.md",
+  "place": "Final paragraph, native expansion Steps 1–17: normalized scalar realization, actual Frobenius square and explicit mate counit equations."
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "normalized scalar realization Frobenius exchange constructible adjunction conclusion data",
+   "results": "OK 8 generic hits: frobeniusMorphism, scalar extension/restriction adjunctions, and matrix Frobenius norm; no native conclusion package.",
+   "date": "2026-10-24",
+   "verdict": "No exact packaged notion; reuse the listed component APIs."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.mateEquiv, CategoryTheory.Endofunctor.IsoAlgebra",
+   "results": "OK 0 hits; unknown identifier CategoryTheory.Endofunctor.IsoAlgebra (project definition, not Mathlib).",
+   "date": "2026-10-24",
+   "verdict": "Mathlib mateEquiv is reused; no duplicate mate construction."
+  },
+  {
+   "tool": "grep",
+   "query": "IsoAlgebra|mateEquiv_counit; CategoryTheory",
+   "results": "OK 4 hits: Mathlib/CategoryTheory/Adjunction/Mates.lean lines 123,128,132 and Monoidal/Closed/Functor.lean line 88.",
+   "date": "2026-10-24",
+   "verdict": "Reuse actual mateEquiv; full native package absent."
+  },
+  {
+   "tool": "rg",
+   "query": "NativeWeilScalar|ScalarNormalization|FrobeniusNormalization|def-sf-native-weil-scalar-counit-data in DAG and both Lean trees",
+   "results": "No recorded node or declaration with this package; component normalized operations reused.",
+   "date": "2026-10-24",
+   "verdict": "New wrappers only; existing coefficient and categorical objects are reused."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-sf-native-weil-scalar-frobenius-counit",
+  "date": "2026-10-24",
+  "group": "Q27"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "Final paragraph, native expansion Steps 12–17: actual ordinary categories, canonical derived forgetting and scalar counit mates.",
+   "via": [
+    "lem-sf-native-weil-scalar-frobenius-counit",
+    "lem-sf-weil-native-exceptional-forgetful",
+    "lem-sf-weil-verdier-biduality"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "lean": {
+  "module": "Sheaf.Paper.NativeWeilScalarCounitData",
+  "declaration": "WeilConjectures.NativeWeilScalar.ScalarNormalization",
+  "declarations": [
+   "WeilConjectures.NativeWeilScalar.fiberSourceFinite",
+   "WeilConjectures.NativeWeilScalar.fiberTargetFinite",
+   "WeilConjectures.NativeWeilScalar.fiberSourceQc",
+   "WeilConjectures.NativeWeilScalar.fiberTargetQc",
+   "WeilConjectures.NativeWeilScalar.rawSourceFinite",
+   "WeilConjectures.NativeWeilScalar.rawTargetFinite",
+   "WeilConjectures.NativeWeilScalar.rawSourceQc",
+   "WeilConjectures.NativeWeilScalar.rawTargetQc",
+   "WeilConjectures.NativeWeilScalar.fiberRelativeSeparated",
+   "WeilConjectures.NativeWeilScalar.fiberRelativeFinite",
+   "WeilConjectures.NativeWeilScalar.fiberRelativeQc",
+   "WeilConjectures.NativeWeilScalar.CounitData",
+   "WeilConjectures.NativeWeilScalar.FrobeniusNormalization",
+   "WeilConjectures.NativeWeilScalar.ScalarNormalization"
+  ],
+  "file": "lean/Sheaf/Paper/NativeWeilScalarCounitData.lean",
+  "statement": "structure ScalarNormalization (P : ConstructibleExceptionalCoefficients.CoefficientConstruction l (ULift.{u} (PadicAlgCl l)) D hl (f := FrobeniusExchange.fiberMap D f₀)) [G : LocallyFiniteAdicCompactSupport.NativeGeometry.{u} l] (A : CounitData l D R f₀ c₀ S.leftSystem.functor S.rightSystem.functor O.adjunction G)",
+  "branch": "newtargets-dag",
+  "by": "Q27",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "Conclusion records only. H3 repair: the coefficient stage presentation is compared by a bridge with inverse rationalLeft components, never forced equal to the fixed common-stage functor. Sections composes through this bridge. Frobenius normalization retains only the literal representatives already pinned by CommonStageData.leftStages. No postponed proof."
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-2a55a163f",
+  "group": "Q27",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-2a55a163f",
+  "group": "Q27",
+  "result": "pass",
+  "note": "Re-delivery after the 54763e88 RETURN (H3). The categories and theorem modules are byte-identical to 54763e88; only ScalarNormalization changed in substance. stage_normalized is gone; a bridge iso S.leftSystem.functor ≅ stage.system.functor takes its place, and bridge_normalized fixes its component at every ⟨E,K⟩ to inclusion.map of P.ring.rationalLeft.inv. functor_obj is rfl, leftStages makes Φ the literal sfCompactSupportFiniteFunctor and StageAction.finite makes the stage functor P's operation, so the clause is satisfiable for any valid P. sections composes J(bridge) ≫ nativeAlpha. On integral inputs the inverse rationalLeft cancels the forward one in IntegralNormalization and operationTransport.inv cancels .hom, leaving the node's a_{f,E,K} then the Ω projection. Bridge naturality across field transitions is a true proof obligation: both β families are normalized to the canonical integral scalar comparison. common_normalization holds: leftStages is literally rationalLeft, the compact branch of modelRationalFunctor is the same functor, IsUnit proofs are irrelevant, and commonPull objects are commonStagePullbackObject. Both new nodes now cite def-sf-adic-realization-isomorphism-data, the existing:true owner of Family. Against live the item differs only in lean and the added stmt_deps; lean.statement is verbatim. The only sorry is the main theorem; docstrings and the 17 proof steps are present. Advisory: the data module compiles in 52.1 s of the 60 s limit; the Q27 second reading is a self-review. No compile run (no changes)."
+ }
+}

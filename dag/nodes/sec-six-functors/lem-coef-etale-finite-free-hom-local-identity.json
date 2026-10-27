@@ -1,0 +1,135 @@
+{
+ "id": "lem-coef-etale-finite-free-hom-local-identity",
+ "kind": "statement",
+ "title": "Finite-free coefficient Hom is the identity in evaluation coordinates",
+ "statement": "Fix a prime l, a finite extension E/Q_l, nonnegative indices m≤n, and an arbitrary scheme T. Let A and B be the lifted coefficient rings at positive exponents n+1 and m+1, with canonical quotient φ [def-weil-l-adic-coefficient-extension, def-sf-etale-finite-coefficient-hom-arrow]. Work in the ordinary small-etale unbounded module derived categories [def-weil-pbc-derived-categories]. For arbitrary objects K,N, the canonical evaluation-transpose comparison v satisfies LisseHomLocalFreeCalculationRing [def-sf-finite-free-hom-local-calculation]: for every finite-free degree-zero trivialization of K and every bounded flat representative P of N, the source and target evaluation coordinates are invertible and v followed by target coordinates equals source coordinates. This includes rank zero and identity quotients. The existential arrow is required to be heterogeneously equal to the specified canonical arrow, so asserts no choice of data.",
+ "stmt_deps": [
+  "def-weil-l-adic-coefficient-extension",
+  "def-sf-etale-finite-coefficient-hom-arrow",
+  "def-weil-pbc-derived-categories",
+  "def-sf-finite-free-hom-local-calculation"
+ ],
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-tower/thm-coef-finite-hom.proof.md",
+  "place": "Paragraph 3: internal Hom from the site-perfect stratum input commutes with coefficient change; evaluation compatibility"
+ },
+ "proof": [
+  {
+   "text": "For a supplied trivialization K=A^t[0], its standard basis displays K as the finite coproduct of units. Tensoring on the right preserves that coproduct. The tensor-Hom adjunction therefore displays Hom(K,N) as the product of t copies of N, with precisely the evaluation coordinates of [def-sf-finite-free-hom-evaluation-coordinates].",
+   "uses": [
+    "def-sf-finite-free-hom-evaluation-coordinates"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-tower/thm-coef-finite-hom.proof.md",
+    "place": "Paragraph 3: internal Hom from the site-perfect stratum input commutes with coefficient change; evaluation compatibility"
+   }
+  },
+  {
+   "text": "Bounded flat P is K-flat by [lem-pc-bounded-above-flat-kflat-site]. The canonical derived scalar counit on P is invertible [lem-pur-derived-change-of-rings]. Scalar extension is additive and hence preserves finite products. Thus all model maps in the source coordinates are invertible. The reduced basis is again a coproduct basis because scalar extension preserves coproducts and the scalar unit is invertible.",
+   "uses": [
+    "lem-pc-bounded-above-flat-kflat-site",
+    "lem-pur-derived-change-of-rings"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-tower/thm-coef-finite-hom.proof.md",
+    "place": "Paragraph 3: internal Hom from the site-perfect stratum input commutes with coefficient change; evaluation compatibility"
+   }
+  },
+  {
+   "text": "Compose the required identity with each product projection. By [def-sf-etale-finite-coefficient-hom-arrow], v is the transpose of reduced evaluation. Naturality of the tensorator in the chosen basis vector and its unit constraint identify this component with scalar extension of evaluation at that vector, followed by the representative map. Product uniqueness proves the identity. The empty family gives the unique map between zero objects.",
+   "uses": [
+    "def-sf-etale-finite-coefficient-hom-arrow"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-tower/thm-coef-finite-hom.proof.md",
+    "place": "Paragraph 3: internal Hom from the site-perfect stratum input commutes with coefficient change; evaluation compatibility"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sf-finite-free-hom-evaluation-coordinates",
+  "lem-pc-bounded-above-flat-kflat-site",
+  "lem-pur-derived-change-of-rings",
+  "def-sf-etale-finite-coefficient-hom-arrow"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-tower/thm-coef-finite-hom.proof.md",
+  "place": "Paragraph 3: internal Hom from the site-perfect stratum input commutes with coefficient change; evaluation compatibility"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Finite free internal Hom comparison under derived scalar extension is identity on evaluation coordinates",
+   "results": "8 hits about ordinary ModuleCat evaluation and scalar adjunctions; no derived etale normalized-coordinate statement.",
+   "date": "2026-10-25",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"MonoidalClosed\", \"IsColimit\"",
+   "results": "0 hits.",
+   "date": "2026-10-25",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "ihomComparison|piComparison",
+   "results": "25 results on generic closed and finite-product comparison maps; no theorem tying the published coefficient transpose to its prescribed coordinates.",
+   "date": "2026-10-25",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.EtaleLisseHomReduction",
+  "date": "2026-10-25",
+  "group": "E8"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-coef-etale-lisse-hom-reduction",
+   "place": "Paragraph 3: internal Hom from the site-perfect stratum input commutes with coefficient change; evaluation compatibility",
+   "via": []
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.EtaleFiniteFreeHomLocalIdentity",
+  "file": "lean/Sheaf/Paper/EtaleFiniteFreeHomLocalIdentity.lean",
+  "declaration": "WeilConjectures.etaleFiniteFreeHomLocalIdentity",
+  "statement": "theorem etaleFiniteFreeHomLocalIdentity (T : Scheme.{u}) {n m : ℕ} (h : m ≤ n)\n    (K N : finiteHomEtale l E T n) :\n    ∃ v : LisseHomComparisonType\n      (ULift.{u + 1, u} (Padic.coefficientExtensionRing l E (n + 1)))\n      (ULift.{u + 1, u} (Padic.coefficientExtensionRing l E (m + 1)))\n      (finiteHomQuotient l E h) T K N,\n      HEq v (etaleFiniteHomCanonical l E T h K N) ∧\n      LisseHomLocalFreeCalculationRing _ _ (finiteHomQuotient l E h) T K N v",
+  "branch": "sheaf-dag",
+  "by": "E8",
+  "date": "2026-10-25"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-aed7c",
+  "group": "E8",
+  "result": "fix",
+  "landing": "20261026T065553-L-3086827",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-aed7c",
+  "group": "E8",
+  "result": "fix",
+  "landing": "20261026T065553-L-3086827",
+  "kind": "interface",
+  "note": "independent cc review: 6 new item-module theorems + 3 new modules + FFHEC abbrev adaptation + 10 nodes vs packet/clone (item and target statements unchanged, FFHLC importer compiled against adapted FFHEC); private helpers vs public sorry statements; EndpointBounds vs counterexample dS=-1"
+ }
+}

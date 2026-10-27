@@ -1,0 +1,122 @@
+{
+ "id": "def-sf-integral-projection-finite-evaluation-data",
+ "kind": "definition",
+ "title": "Explicit finite-evaluation endpoints for the system projection",
+ "statement": "For the normalized integral datum of [def-fix-six-functor-datum], define TensorComparison to be a natural isomorphism from the uncurried integral tensor followed by finite reduction to the finite partial tensor of the two reduced inputs. Its components give TensorCoordinates of [def-sf-integral-projection-reduction-coordinates]. Define evaluation and the full finite inclusion, and reductionEvaluation from the recorded coefficient calculus. Define systemSource and systemTarget to be the actual endpoints of the coefficient-system compactification projection from [def-sf-integral-system-realization-data]. Define properViaSupport by conjugating the actual proper counit projection with the two components of properIdentity. All maps and objects are explicit; none is chosen from a mere existence assertion.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-rem-sf-pf-done/fix-prop-projection-formula.proof.md",
+  "place": "Compatibility of the specified maps under successive coefficient reductions; integral reconstruction and proper counit normalization"
+ },
+ "stmt_deps": [
+  "def-sf-integral-projection-reduction-coordinates",
+  "def-sf-integral-system-realization-data"
+ ],
+ "proof": [
+  {
+   "text": "Take natural-isomorphism components, abbreviate the specified functors and system projection endpoints, and compose the tensor of properIdentity, the proper counit map and the inverse target properIdentity. The reductionEvaluation component is exactly the quotient scalar-extension comparison already recorded in the calculus.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-rem-sf-pf-done/fix-prop-projection-formula.proof.md",
+    "place": "Compatibility of the specified maps under successive coefficient reductions; integral reconstruction and proper counit normalization"
+   }
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-rem-sf-pf-done/fix-prop-projection-formula.proof.md",
+  "place": "Compatibility of the specified maps under successive coefficient reductions; integral reconstruction and proper counit normalization"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Derived scalar extension tensor product natural isomorphism commutes with proper direct image projection counit",
+   "results": "Eight sheaf-module counit/adjunction results; no normalized integral-to-finite projection comparison.",
+   "date": "2026-10-27",
+   "verdict": "Use the existing project system square and isolate its finite-evaluation and proper-counit steps."
+  },
+  {
+   "tool": "loogle",
+   "query": "Functor.uncurry",
+   "results": "Zero hits: unknown identifier in the search service. Local Mathlib source contains CategoryTheory.Functor.uncurry and its naturality API.",
+   "date": "2026-10-27",
+   "verdict": "Use uncurry naturality for the two input naturality clauses, rather than adding naturality obligations."
+  },
+  {
+   "tool": "grep",
+   "query": "scalarTensor|projection_scalar_square",
+   "results": "Ten tensor-algebra hits, no specialized coefficient projection square. Project rg found IntegralProjectionReductionNormalization and the explicit system coordinates.",
+   "date": "2026-10-27",
+   "verdict": "Reuse the whole-system square, with explicit finite endpoint evaluation."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A natural tensor comparison for scalar extension commutes with a projection map formed from an adjunction counit",
+   "results": "Eight hits on module scalar-extension adjunctions and tensor linearity, including ModuleCat.ExtendRestrictScalarsAdj.Counit.map_hom_apply, ModuleCat.ExtendRestrictScalarsAdj.counit_app and ModuleCat.extendRestrictScalarsAdj_homEquiv_apply. No derived integral-to-finite sheaf projection comparison.",
+   "date": "2026-10-27",
+   "verdict": "Use the existing project normalization square and isolate the finite-evaluation and proper-system normalization steps."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.IntegralProjectionReductionCoordinates",
+  "date": "2026-10-27",
+  "group": "C7"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "fix-prop-projection-formula",
+   "place": "Compatibility of the specified maps under successive coefficient reductions; integral reconstruction and proper counit normalization",
+   "via": [
+    "lem-sf-integral-projection-reduction-coordinates"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-rem-sf-pf-done",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.IntegralProjectionFiniteEvaluationData",
+  "file": "lean/Sheaf/Paper/IntegralProjectionFiniteEvaluationData.lean",
+  "declaration": "WeilConjectures.IntegralProjectionReduction.TensorComparison",
+  "statement": "abbrev TensorComparison",
+  "branch": "sheaf-dag",
+  "by": "C7",
+  "date": "2026-10-27",
+  "declarations": [
+   "WeilConjectures.IntegralProjectionReduction.TensorComparison",
+   "WeilConjectures.IntegralProjectionReduction.tensorCoordinates",
+   "WeilConjectures.IntegralProjectionReduction.evaluation",
+   "WeilConjectures.IntegralProjectionReduction.finiteInclusion",
+   "WeilConjectures.IntegralProjectionReduction.reductionEvaluation",
+   "WeilConjectures.IntegralProjectionReduction.systemSource",
+   "WeilConjectures.IntegralProjectionReduction.systemTarget",
+   "WeilConjectures.IntegralProjectionReduction.properViaSupport"
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C7",
+  "result": "pass",
+  "landing": "20261026T222604-L-671250",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C7",
+  "result": "pass",
+  "landing": "20261026T222604-L-671250",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

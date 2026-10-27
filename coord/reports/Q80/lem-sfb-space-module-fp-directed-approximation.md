@@ -1,0 +1,43 @@
+## Worker report
+
+Files written:
+- dag/nodes/sec-six-functors-basics/lem-sfb-space-module-fp-directed-approximation.json: item split into three steps; statement unchanged; no Mathlib match.
+- dag/nodes/sec-six-functors-basics/lem-sfb-space-affine-noetherian-module-approximation.json: new statement-only prerequisite, Stacks 07UW; no Mathlib match.
+- citations.json: every step/node pair has a verbatim quotation of the cited statement.
+
+Attachments: none. Searched lean/WeilConjectures for the exact blueprint tag, AlgebraicSpace, finite-presentation colimit terminology, and affine/Noetherian approximation terminology. The project hits concern schemes or ordinary modules; no declaration states this item for algebraic spaces.
+
+WANTED: none.
+
+The item had no proof. Its statement agrees with Stacks 07V9 (spaces-limits.tex, lemma-colimit-finitely-presented). The source proof passes through absolute Noetherian approximation, affine limit projections, and 07UW. The first two already have DAG nodes and are reused. The new node is the restricted affine-over-Noetherian input 07UW, not a copy of the arbitrary-qcqs-space conclusion; the item carries the reduction that makes this input applicable. The existing base-change-to-integers node supplies the change of base and the identification of small etale ringed sites, avoiding an uncited invariance claim. The inherited blueprint ancestor is null (blueprint_refs ancestor reports None); its explicit place and via chain are retained, and the new node prepends this item to the via chain.
+
+No statement dispute and no unfinished part of this one-level split. No Lean was written, compiled or built. All writes were confined to the sandbox.
+
+## New nodes
+
+lem-sfb-space-affine-noetherian-module-approximation: statement, unsplit, no Mathlib match. The statement spells out affineness, Noetherianity, finite presentation, universes and the ambient module-sheaf colimit. Its proof and proof_deps are empty. Its source is Tag 07UW (lemma-direct-colimit-finite-presentation), spaces-cohomology.tex. The argument for its future splitter is the source's two-presentation construction: express the affine pushforward as a union of coherent submodules, pull back to obtain a surjection, do the same for its kernel, and form a filtered system of finite-presentation cokernels using finite-presentation Hom continuity. None of this argument has been placed inside the new node's statement.
+
+## Not duplicates
+
+lem-sfb-space-affine-noetherian-module-approximation vs lem-sfb-space-module-fp-directed-approximation: the new node assumes an affine map to a specified Noetherian space; the item assumes only qcqs and constructs such a map by absolute approximation.
+lem-sfb-space-affine-noetherian-module-approximation vs lem-sfb-space-coherent-filtered-union: the existing node assumes the space itself Noetherian and uses coherent submodules; the new node permits a non-Noetherian source and arbitrary noninjective finite-presentation approximants.
+lem-sfb-space-affine-noetherian-module-approximation vs lem-weil-pbc-module-filtered-colimit-finite-presentation: the existing node concerns schemes and Zariski modules, not algebraic spaces with small etale module sheaves.
+lem-sfb-space-affine-noetherian-module-approximation vs lem-sfb-space-absolute-noetherian-approximation: the existing node constructs an inverse system of spaces; it makes no module approximation assertion.
+
+Whole-DAG searches for 07UW and lemma-direct-colimit-finite-presentation found no existing node. Whole-blueprint searches for 07UW, 07V9, affine Noetherian module, coherent colimit and colimit finitely presented found no equal statement. Other blueprint hits for Noetherian approximation and affine Noetherian concern schemes or Chow modifications. These are not duplicates of the new lemma.
+
+## Review by Q80
+
+I read the complete statement and proof of Stacks 07V9 in spaces-limits.tex (lemma-colimit-finitely-presented), including its reduction to Spec Z, and the statement and full proof of 07UW in spaces-cohomology.tex (lemma-direct-colimit-finite-presentation). I also read 07SU (proposition-approximate) and 07SF (lemma-directed-inverse-system-has-limit) to check what the already-existing nodes package. I read the latest blueprint's sk-thm-sf-ctf-stability unit and direct-images.proof.md, particularly (3); this delivery supplies the inherited supporting-input chain and changes no chapter or unit route. The latest proof has a compactification assembly rather than repeating the old detailed alteration subroute; this node is a prerequisite inherited from that detailed subroute, not a rewrite of the new unit.
+
+Step 1 uses the actual statement of lem-sfb-space-change-base-to-integers. Its clauses (1) and (3) assert algebraicity over the smaller base and identification of the small etale sites and structure sheaves. I checked that these are statements, not constructions borrowed from its proof. The same underlying atlas gives the same point classes, opens and topology by def-a1-space-point-topology, whose statement I read; hence qc is unchanged. The item's qs hypothesis is already absolute, so no relative-to-S separatedness assumption is silently used. Identical ringed sites give identical module diagrams, finite presentations and colimit universal properties.
+
+Step 2 uses exactly lem-sfb-space-absolute-noetherian-approximation: its statement assumes the absolute qcqs space over Spec Z and gives a small nonempty directed system, affine transitions and Noetherian stages. I deliberately did not claim that finite-type stages were finitely presented by an uncited theorem; the existing node already gives the Noetherian conclusion needed here. The statement of lem-sfb-space-affine-limits-schematic-stages explicitly gives that each limit projection is affine, in addition to its schematic-stage assertions; only that first conclusion is used. Nonemptiness supplies an actual index, without invoking any further limit descent result.
+
+Step 3 uses the new 07UW node with the precise affine projection and its Noetherian target from step 2. I compared the source hypotheses one by one: any base scheme; affine morphism; target Noetherian; source module quasi-coherent. Neither the source nor our node demands finite type of the morphism, finite generation of the module or Noetherianity of its source. The source concludes a filtered colimit of finite-presentation module sheaves. Such modules are quasi-coherent by their displayed local presentation, so the explicit quasi-coherence clause in our statement adds no hypothesis or stronger requirement. The module-sheaf interpretation is retained throughout; there is no passage from a colimit only in QCoh to an unjustified colimit in all modules.
+
+I checked every citation against the opened node's statement and copied it verbatim into citations.json. The new node is self-contained, has definition dependencies for each non-inline notion, uses TeX with single escaped commands in decoded strings, cites a stable Stacks tag and its tex label, and contains no proof or proof dependencies. All three item steps are shorter than 2000 characters and no new inline sublemma is concealed. No cycle is introduced: the reused nodes have no dependency path back to this item, and the new node has only statement-definition dependencies.
+
+Small cases: for X empty the sole module is zero, and a one-object constant zero diagram is filtered and gives the conclusion; no nonempty-space hypothesis is used. For M=0 the same check applies. For f the identity of a Noetherian space the new node reduces to coherent approximation, consistent with existing 07UV. For a non-Noetherian affine scheme Spec B over Spec Z, 07UW applies without making the false assertion that B is Noetherian; allowing noninjective transition maps is essential. No finite-type or separatedness hypothesis was inserted. These tests required no statement correction.
+
+I ran the required msearch commands, read their returned hits, and tried two semantic phrasings for the new node and the item. The log is searches.jsonl; mathlib_searches entries copy its exact tool/query pairs and actual result summaries. No service failure was recorded as an absence result. I read Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent.lean lines 233-285: the hits define local finite presentation and infer quasi-coherence, not global filtered approximation. The other hits are scheme affineness/finite-presentation properties or colimit existence. Thus no exact or one-line-specialization Mathlib leaf was missed among these hits. I corrected the initial proof plan by explicitly citing base-change ringed-site invariance, rather than treating change of ambient base as an unproved convention.

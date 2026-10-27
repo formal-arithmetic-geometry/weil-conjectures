@@ -1,0 +1,137 @@
+{
+ "id": "def-sfb-trait-rational-map",
+ "kind": "definition",
+ "title": "Base-dense rational maps and maximal domains",
+ "status": "split",
+ "import_flags": [],
+ "statement": "Let $f:X\\to S$ and $g:Y\\to S$ be morphisms of schemes [def-pc-scheme]. An open $U\\subseteq X$ is base-dense if its inverse image in every scheme-theoretic fibre is dense [def-pc-base-change]. For the smooth separated trait models [def-sfb-smooth-trait-model], a base-rational map is an ordinary rational map which has a representative on a base-dense open, with representative map over $S$. Equivalently its representatives are identified by agreement on a base-dense common open. Its maximal representative has domain the union of all representative domains and is over $S$. A generic isomorphism is an isomorphism of the specified common generic fibre whose composite with the target inclusion agrees with a representative after lifting the source generic inclusion through that representative domain. Birational over $S$ means represented by an isomorphism of base-dense open subschemes.",
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-base-change",
+  "def-sfb-smooth-trait-model"
+ ],
+ "source": {
+  "document": "literature/bosch-lutkebohmert-raynaud-neron-models.pdf",
+  "place": "BLR 4.3 order construction and Lemma 1, printed pp.104-105 (PDF pp.110-111); 2.5 rational maps and 4.2 invariant differentials; primary scan https://www.math.stonybrook.edu/~kamenova/homepage_files/Bosch_Raynaud_Neron_Model_tc.pdf"
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "smooth separated finite type model with given generic fibre over fraction field",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.IsSmooth.casesOn\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Smooth\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} →\\n  {f : X ⟶ Y} →\\n    {motive : AlgebraicGeometry.IsSmooth f → Sort u_1} →\\n      (t : AlgebraicGeometry.IsSmooth f) →\\n        ((exists_isStandardSmooth :\\n              ∀ (x : ↥X),\\n                ∃ U V,\\n                  ∃ (_ : x ∈ ↑V) (e : ↑V ≤ (TopologicalSpace.Ope\", \"doc\": \"A morphism $ f: X \\to Y $ of schemes is smooth.\"}\n  {\"name\": \"AlgebraicGeometry.IsSmooth.mk\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Smooth\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y},\\n  (∀ (x : ↥X),\\n      ∃ U V,\\n        ∃ (_ : x ∈ ↑V) (e : ↑V ≤ (TopologicalSpace.Opens.map f.base).obj ↑U),\\n          (CommRingCat.Hom.hom (AlgebraicGeometry.Scheme.Hom.appLE f (↑U) (↑V) e)).IsStandardSmooth) →\\n    AlgebraicGeometry.IsSmooth f\", \"doc\": \"A morphism of schemes $f: X \\\\to Y$ is smooth if for every point $x \\\\in X$, there exist open sets $U \\\\subseteq Y$ and $V \\\\subseteq X$ such that $x \\\\in V$, $f(V) \\\\subseteq U$, and the induced ring homom\"}\n  {\"name\": \"AlgebraicGeometry.IsSmooth.recOn\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Smooth\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} →\\n  {f : X ⟶ Y} →\\n    {motive : AlgebraicGeometry.IsSmooth f → Sort u_1} →\\n      (t : AlgebraicGeometry.IsSmooth f) →\\n        ((exists_isStandardSmooth :\\n              ∀ (x : ↥X),\\n                ∃ U V,\\n                  ∃ (_ : x ∈ ↑V) (e : ↑V ≤ (TopologicalSpace.Ope\", \"doc\": \"A morphism $ f: X \\\\to Y $ of schemes is smooth if, for every point $ x \\\\in X $, there exist affine open neighborhoods $ U \\\\subseteq Y $ containing $ f(x) $ and $ V \\\\subseteq X $ containing $ x $ such \"}\n  {\"name\": \"AlgebraicGeometry.IsSmooth\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Smooth\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"A morphism $ f: X \\to Y $ of schemes is smooth.\"}\n  {\"name\": \"RingHom.smooth_def\", \"module\": \"Mathlib.RingTheory.RingHom.Smooth\", \"type\": \"{f : R →+* S} : f.Smooth ↔ f.FormallySmooth ∧ f.FinitePresentation\", \"doc\": \"A ring homomorphism $ f : R \\\\to S $ is smooth if and only if it is formally smooth and finitely presented as an $ R $-algebra. This means $ S $ must satisfy the formal smoothness lifting property, be \"}\n  {\"name\": \"AlgebraicGeometry.isProper_eq\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Proper\", \"type\": \": @IsProper = (@IsSeparated ⊓ @UniversallyClosed : MorphismProperty Scheme) ⊓ @LocallyOfFiniteType\", \"doc\": \"A morphism of schemes is proper if and only if it is separated, universally closed, and locally of finite type.\"}\n  {\"name\": \"Algebra.Smooth.flat\", \"module\": \"Mathlib.RingTheory.Smooth.Flat\", \"type\": \"[Smooth R A] : Module.Flat R A\", \"doc\": \"If $ A $ is a smooth $ R $-algebra, then $ A $ is a flat $ R $-module.\"}\n  {\"name\": \"AlgebraicGeometry.instLocallyOfFinitePresentationOfIsSmooth\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Smooth\", \"type\": \"[hf : IsSmooth f] : LocallyOfFinitePresentation f\", \"doc\": \"Every smooth morphism of schemes is locally of finite presentation.\"}\n",
+   "date": "2026-10-24",
+   "verdict": "no exact match; ordinary rational maps are reused, fibrewise density and top-form order are absent"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Fibrewise dense rational maps over a trait and integer order of a top differential form at a special fibre generic point",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.RationalMap.dense_domain\", \"module\": \"Mathlib/AlgebraicGeometry/RationalMap\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X.RationalMap Y), Dense ↑f.domain\", \"doc\": \"For any rational map $ f $ between schemes $ X $ and $ Y $, the domain of $ f $ is a dense subset of $ X $.\"}\n  {\"name\": \"WeierstrassCurve.valuation_Δ_aux\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Reduction\", \"type\": \"(R : Type u_1) →\\n  [inst : CommRing R] →\\n    [inst_1 : IsDomain R] →\\n      [IsDiscreteValuationRing R] →\\n        {K : Type u_2} →\\n          [inst_3 : Field K] → [inst_4 : Algebra R K] → [IsFractionRing R K] → WeierstrassCurve K → { v // v ≤ 1 }\", \"doc\": \"For a discrete valuation ring $ R $ with fraction field $ K $, and an integral Weierstrass curve $ W $ over $ K $, the valuation at the unique maximal ideal of $ R $ of the discriminant $ \\\\Delta(W) $ \"}\n  {\"name\": \"AlgebraicGeometry.Scheme.PartialMap.exists_restrict_isOver\", \"module\": \"Mathlib/AlgebraicGeometry/RationalMap\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (S : AlgebraicGeometry.Scheme) [inst : X.Over S] [inst_1 : Y.Over S]\\n  (f : X.PartialMap Y) [AlgebraicGeometry.Scheme.RationalMap.IsOver S f.toRationalMap],\\n  ∃ U, ∃ (hU : Dense ↑U) (hU' : U ≤ f.domain), AlgebraicGeometry.Scheme.PartialMap.IsOver S (f.restrict U hU\", \"doc\": \"If a rational map from a scheme $X$ to a scheme $Y$ is compatible with a base scheme $S$, then there exists an open subset $U \\\\subseteq X$ such that the restriction of the corresponding partial map to\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.RationalMap.fromFunctionField\", \"module\": \"Mathlib/AlgebraicGeometry/RationalMap\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} →\\n  [inst : IrreducibleSpace ↥X] → X.RationalMap Y → (AlgebraicGeometry.Spec X.functionField ⟶ Y)\", \"doc\": \"For irreducible schemes $X$ and $Y$, this function constructs a morphism $\\\\operatorname{Spec}(K(X)) \\\\to Y$ from a rational map $X \\\\dashrightarrow Y$, where $K(X)$ is the function field of $X$. It is d\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.PartialMap.dense_domain\", \"module\": \"Mathlib/AlgebraicGeometry/RationalMap\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (self : X.PartialMap Y), Dense ↑self.domain\", \"doc\": \"For any partial map between schemes $X$ and $Y$, the open subset of $X$ on which the partial map is defined is dense in $X$.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.RationalMap.ofFunctionField\", \"module\": \"Mathlib/AlgebraicGeometry/RationalMap\", \"type\": \"{X Y S : AlgebraicGeometry.Scheme} →\\n  (sX : X ⟶ S) →\\n    (sY : Y ⟶ S) →\\n      [inst : AlgebraicGeometry.IsIntegral X] →\\n        [AlgebraicGeometry.LocallyOfFiniteType sY] →\\n          (f : AlgebraicGeometry.Spec X.functionField ⟶ Y) →\\n            CategoryTheory.CategoryStruct.comp f sY =\\n           \", \"doc\": \"Given an integral scheme $X$, a scheme $Y$ with a morphism $s_Y:Y\\\\to S$ locally of finite type, and a morphism $f:\\\\operatorname{Spec}(K(X))\\\\to Y$ from the spectrum of $X$'s function field $K(X)$ satis\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.PartialMap.fromFunctionField\", \"module\": \"Mathlib/AlgebraicGeometry/RationalMap\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} →\\n  [inst : IrreducibleSpace ↥X] → X.PartialMap Y → (AlgebraicGeometry.Spec X.functionField ⟶ Y)\", \"doc\": \"Given an irreducible scheme $X$ and a partial map $f : X \\to Y$ to a scheme $Y$, this constructs the morphism $\\\\operatorname{Spec}(K(X)) \\to Y$ where $K(X)$ is the function field of $X$. The constructio\"}\n  {\"name\": \"FunctionField.inftyValuationDef\", \"module\": \"Mathlib/NumberTheory/FunctionField\", \"type\": \"(Fq : Type u_1) → [inst : Field Fq] → [DecidableEq (RatFunc Fq)] → RatFunc Fq → WithZero (Multiplicative ℤ)\", \"doc\": \"The function defines the infinite valuation on rational functions over a finite field. For a non-zero rational function $ r $, it returns the integer obtained by subtracting the degree of its normaliz\"}\n",
+   "date": "2026-10-24",
+   "verdict": "no exact match; ordinary rational maps are reused, fibrewise density and top-form order are absent"
+  },
+  {
+   "tool": "grep",
+   "query": "SmoothTraitModel|IsBaseDense|IsTraitVolumeOrder|IsTopDifferentialMap",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-24",
+   "verdict": "no exact match; ordinary rational maps are reused, fibrewise density and top-form order are absent"
+  },
+  {
+   "tool": "rg",
+   "query": "SmoothTraitModel|IsBaseDense|IsTraitVolumeOrder|IsTopDifferentialMap|IsLeftInvariantTopForm in lean/WeilConjectures, lean/Sheaf, dag/lean_names_upstream.json; definition-node concept search; blueprint_refs.py search volume, base-dense, smooth model, top form",
+   "results": "No matching declarations. No blueprint node matches volume or base-dense; smooth model has one unrelated real-compactification node. Definition-node hits concern unrelated real smooth bundles and analytic operators. Ordinary Mathlib Scheme.RationalMap is reused.",
+   "date": "2026-10-24",
+   "verdict": "no exact match"
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-smooth-model-volume-order-comparison",
+  "date": "2026-10-24",
+  "group": "NZ"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "BLR 4.3 order construction and Lemma 1: trait models, base-dense domains, normalized top forms, and componentwise unit-multiplier hypotheses",
+   "via": [
+    "lem-sfb-smooth-model-volume-order-comparison",
+    "lem-sfb-bounded-group-translation-model",
+    "lem-sfb-bounded-group-local-neron-criterion",
+    "lem-sfb-abelian-neron-model",
+    "lem-sfb-semiabelian-neron-lft-existence",
+    "lem-sfb-trait-semiabelian-hom-extension",
+    "lem-sfb-semiabelian-generic-graph-proper",
+    "lem-sfb-normal-semiabelian-hom-extension",
+    "lem-sfb-symmetric-line-power-prolongation",
+    "lem-sfb-normal-symmetric-cubical-extension",
+    "lem-sfb-symmetric-ample-power-extension",
+    "lem-sfb-regular-group-generic-ampleness",
+    "lem-sfb-stable-picard-theta-ampleness",
+    "lem-sfb-stable-relative-picard-kummer",
+    "lem-sfb-stable-level-versal-branch-freeness",
+    "lem-sfb-stable-abelian-level-normalization",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.TraitRationalMap",
+  "declaration": "AlgebraicGeometry.IsBaseDense",
+  "declarations": [
+   "AlgebraicGeometry.IsBaseDense",
+   "AlgebraicGeometry.IsTraitRationalMap",
+   "AlgebraicGeometry.IsMaximalTraitRepresentative",
+   "AlgebraicGeometry.HasGenericModelIso",
+   "AlgebraicGeometry.IsTraitBirational"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/TraitRationalMap.lean",
+  "statement": "def IsBaseDense {X S : Scheme.{u}} (f : X ⟶ S) (U : X.Opens) : Prop",
+  "branch": "newtargets-dag",
+  "by": "NZ",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-68e033586",
+  "group": "NZ",
+  "result": "fix",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-68e033586",
+  "group": "NZ",
+  "result": "fix",
+  "note": "Item, 18 stmt_deps, 3 new def nodes and 4 modules read clause by clause against BLR 4.3 Lemma 1: DVR/π/Frac, R^sh at a geometric closed point, models with generic iso, base-dense rational maps equal Mathlib RationalMap classes and domain on reduced/separated models, IsLeftInvariantTopForm relative to pr1 (correct), IsTraitVolumeOrder equivalent to stalk generation with unique n, HasTraitUnitSection = v(a(x))=0, clause 3 asserts existence of the maximal representative with nN<=nM and iff, clause 4 open immersion on the whole domain; edge cases d=0, empty special fibre, disconnected G, negative orders OK; one sorry, no hollow defs, docstrings OK, statements verbatim. H4 fixed: traitStrictBase rebuilt the landed Scheme.strictHenselizationStructuralMap (def-weil-pbc-strict-henselization-structural-map, on base since 10-17); fixes/SmoothTraitModel.lean makes it an abbrev of the landed map, fixes/def-sfb-smooth-trait-model.json adds the stmt_dep. nt_compile --json of fix plus 3 importers clean, broken control errors; check_lean_text/check_record clean. Maintainer note: parallel Q47 a3c9112b4 delivery of the same item (PASS, unlanded, other def node def-sfb-smooth-trait-volume-data): only one may land, the other must rebind."
+ }
+}

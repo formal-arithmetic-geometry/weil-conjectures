@@ -92,6 +92,31 @@
     "lem-pc-kflat-resolution"
    ],
    "elementary": true
+  },
+  {
+   "text": "Transport the exact derived constant square through the unique counit-normalized identifications of both chosen left-derived pullbacks. The factorization laws give normalization on every complex. Cancel the invertible exact tower counit on a K-flat representative and use naturality to prove uniqueness.",
+   "uses": [
+    "def-weil-pbc-exact-pullback-interface",
+    "lem-pc-kflat-resolution"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Evaluation commutes with exact termwise pullback. Compose this exact derived square with the published reduction-evaluation comparison and the restriction/pullback coefficient-change square.",
+   "uses": [
+    "def-weil-pbc-adic-coefficient-datum",
+    "lem-weil-pbc-local-derived-restriction-comparisons"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Use the existing normalized strict reduction/pullback comparison, including its augmentation equation. Conjugate it by the chosen exact-derived presentations to identify the pulled-back reduction tower with reduction of ordinary pullback. Counit normalization of the constant square and naturality identify the specified augmentation. Apply Rlim and the inverse unit-compatible Koszul/quotient comparison to obtain intrinsic completion with its exact unit.",
+   "uses": [
+    "def-weil-pbc-exact-pullback-interface",
+    "lem-weil-pbc-stratum-completion-unit-restriction",
+    "lem-weil-pbc-completed-koszul-quotient-comparison"
+   ],
+   "elementary": true
   }
  ],
  "proof_deps": [
@@ -103,12 +128,14 @@
   "def-weil-pbc-four-corners",
   "lem-weil-pbc-local-derived-restriction-comparisons",
   "def-weil-pbc-bounded-constructible-tower",
-  "lem-pc-kflat-resolution"
+  "lem-pc-kflat-resolution",
+  "def-weil-pbc-exact-pullback-interface",
+  "lem-weil-pbc-stratum-completion-unit-restriction"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-lem-pe-derived-nakayama/prop-weil-pbc-koszul-reconstruction.md",
-  "place": "H6: supplementary proof route of CompletedPullback exactness and completeness equivalence; definition and Qbar declaration attachment unchanged; M1: supporting CompletedTowerPullback coefficient, exact-derived-pair, strict-unit and constant-complex proofs. Existing construction signatures and bodies stay unchanged."
+  "place": "H6: supplementary proof route of CompletedPullback exactness and completeness equivalence; definition and Qbar declaration attachment unchanged; M1: supporting CompletedTowerPullback coefficient, exact-derived-pair, strict-unit and constant-complex proofs. Existing construction signatures and bodies stay unchanged. J1: constant comparison, finite evaluation and unit-compatible completion proof; augmentation and exact-tower interface extracted unchanged to acyclic supporting modules. A4: recover the returned J1 proof packet, retain current-base metadata, and verify both global-build consumers on the repaired interface."
  },
  "mathlib_searches": [
   {
@@ -180,7 +207,18 @@
    "cites": []
   }
  ],
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
  "chapter": "sec-proper-base-change",
  "unit": "sk-thm-properbasechange",
  "split_report": {
@@ -233,11 +271,11 @@
  "reviewed_proof": {
   "date": "2026-10-22",
   "by": "L",
-  "reviewer": "C-177da",
-  "group": "M1",
-  "result": "fix",
-  "landing": "20261022T002420-L-1927389",
+  "reviewer": "C-ceb87",
+  "group": "A4",
+  "result": "pass",
+  "landing": "20261022T113806-L-249289",
   "kind": "interface",
-  "note": "independent cc review: item strictTowerComparison (statement byte-identical to live) vs node lem-weil-pbc-pulled-reduction-strict-tower-comparison; strictModelComparison = item conjuncts 1-5; moved decls = live text; CompletedTowerPullback public decl hashes = published; 18 direct importers rc 0"
+  "note": "independent cc review: ceb877bf vs PASSed head 3303661f (9 Lean modules sha256-identical, packet diffs hash-identical, nodes differ only in lean_audit = live); Users table vs 66 computed users + the 4 landing-gate users; prior /tmp/a4sb importer compiles (38 direct importers, sources still = live, no new importers)"
  }
 }

@@ -1,0 +1,155 @@
+{
+ "id": "lem-sf-compact-scalar-evaluation-square",
+ "kind": "statement",
+ "title": "The proper/open scalar word commutes with finite evaluation on arbitrary systems",
+ "statement": "Fix a prime l, finite extensions E and L of Q_l, an embedding iota:E -> L and n >= 0. Let A=O_E/(pi_E^(n+1)), B=O_L/(pi_L^(n+1)) and phi the recorded quotient map. For any scheme morphism with compactification c [def-weil-compactifications-refinements], there are natural scalar evaluation isomorphisms s_W:ev_L,n S_W ~= (ev_E,n -) tensor_A^L B for every scheme W, and for every derived strict system N [def-trf-integral-comparison-sequence-systems] the following square commutes: evaluation of the actual systemCompactScalar [def-weil-system-operation-exchange-realization], followed by compact-support evaluation and compact support of s_X, equals s_Y followed by scalar extension of compact-support evaluation and the intrinsic finite scalar transpose [lem-sf-finite-compact-scalar-constructible]. The compact-support evaluation is exactly the composite of the specified proper evaluation mate and the inverse open evaluation mate. This is an equality of the specified arrows, for arbitrary unbounded systems, with no constructibility, Noetherian, complete or cartesian-system hypotheses.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-sf-pf-reduction/lem-fix-operation-reduction.proof.md",
+  "place": "Compact-support and final paragraphs; normalized scalar isomorphisms proof steps 2, 3, 4"
+ },
+ "stmt_deps": [
+  "def-weil-compactifications-refinements",
+  "def-trf-integral-comparison-sequence-systems",
+  "def-weil-system-operation-exchange-realization",
+  "lem-sf-finite-compact-scalar-constructible"
+ ],
+ "proof": [
+  {
+   "text": "Use ScalarSystems.evaluation for the actual compatible quotient maps. Transport its system model to integralComparisonSequenceScalarModel by uniqueness of the universal cochain left-derived pair and its level models to pbcDerivedExtend. This constructs the natural isomorphisms s_W from identity-on-sections restriction evaluation and retains their tensor and unit/counit normalization.",
+   "uses": [
+    "lem-coef-semilinear-derived-sections",
+    "lem-pur-derived-change-of-rings",
+    "def-trf-integral-comparison-sequence-systems"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-sf-pf-reduction/lem-fix-operation-reduction.proof.md",
+    "place": "Compact-support and final paragraphs; normalized scalar isomorphisms proof steps 2, 3, 4"
+   }
+  },
+  {
+   "text": "Expand systemDirectScalar as its geometric unit, scalar/pullback comparison and geometric counit. Apply SemilinearSections.evaluation_mate with the specified proper evaluation comparisons and their unit/counit equations. The evaluated word is the corresponding finite proper scalar mate.",
+   "uses": [
+    "lem-coef-semilinear-derived-sections",
+    "def-weil-system-operation-exchange-realization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-sf-pf-reduction/lem-fix-operation-reduction.proof.md",
+    "place": "Compact-support and final paragraphs; normalized scalar isomorphisms proof steps 2, 3, 4"
+   }
+  },
+  {
+   "text": "Apply the same computation to the exact open adjunction. Inverting the invertible open scalar mate commutes with evaluation. The finite map is therefore the scalar transpose of the specified open restriction comparison. Paste this with the proper calculation. Scalar mate pasting identifies their composite with the transpose of sfCompactSupportRestriction, namely intrinsicCompactScalar. Move s_X and s_Y to the endpoints by naturality. The displayed square results on the actual derived system category, with no use of faithfulness of evaluation on derived morphisms.",
+   "uses": [
+    "lem-coef-semilinear-derived-sections",
+    "def-weil-system-operation-exchange-realization",
+    "lem-sf-compact-support-restriction-of-scalars"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-sf-pf-reduction/lem-fix-operation-reduction.proof.md",
+    "place": "Compact-support and final paragraphs; normalized scalar isomorphisms proof steps 2, 3, 4"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-coef-semilinear-derived-sections",
+  "lem-pur-derived-change-of-rings",
+  "def-trf-integral-comparison-sequence-systems",
+  "def-weil-system-operation-exchange-realization",
+  "lem-sf-compact-support-restriction-of-scalars"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-sf-pf-reduction/lem-fix-operation-reduction.proof.md",
+  "place": "The proper/open scalar word commutes with finite evaluation on arbitrary systems; explicit refinement of the assigned node proof"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Derived scalar extension commutes with proper direct image on bounded constructible etale complexes over finite coefficient rings",
+   "results": "8 results: ordinary ModuleCat extension/restriction/coextension adjunctions, localization linear equivalences, formal etaleness and AlgHom.extendScalars. None supplies the intrinsic compact scalar mate or the system evaluation square.",
+   "date": "2026-10-27",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Evaluation of derived compact support scalar change is an isomorphism for bounded constructible finite coefficient sheaves",
+   "results": "8 results on condensed module solidification and locally constant module realization; no compact-support scalar evaluation result.",
+   "date": "2026-10-27",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.IsIso, CategoryTheory.NatTrans.app",
+   "results": "12 generic natural-isomorphism and naturality results, including NatIso.hom_app_isIso and NatTrans.isIso_iff_isIso_app. These supply isomorphism calculus only.",
+   "date": "2026-10-27",
+   "verdict": "generic assembly only"
+  },
+  {
+   "tool": "grep",
+   "query": "compact.*[Ss]calar|[Ss]calar.*compact",
+   "results": "8 Mathlib hits concern compact spectra, Haar scalars and derivatives. No sheaf comparison. Project search finds proved FiniteCompactSupportScalarTransport and generic SemilinearSections.evaluation_mate but no intrinsic bounded-constructible specialization or unconditional systemCompactScalar evaluation square. Whole-blueprint search returns 0 matching nodes.",
+   "date": "2026-10-27",
+   "verdict": "reuse existing transport and calculus; new specialization and evaluation square needed"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.CompactSupportSystemScalarFiniteInvertible",
+  "date": "2026-10-27",
+  "group": "R3"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-def-sf-operations",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-compact-support-finite-field-independence",
+   "place": "Compact-support and final paragraphs: The proper/open scalar word commutes with finite evaluation on arbitrary systems",
+   "via": [
+    "lem-sf-compact-support-system-scalar-finite-invertible",
+    "lem-sf-compact-support-coefficient-exchange-invertible",
+    "lem-weil-compact-support-normalized-scalar-isomorphisms"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.CompactSupportScalarEvaluationSquare",
+  "file": "lean/Sheaf/Paper/CompactSupportScalarEvaluationSquare.lean",
+  "declaration": "WeilConjectures.FrobeniusExchange.systemCompactScalar_evaluation_square",
+  "declarations": [
+   "WeilConjectures.FrobeniusExchange.systemCompactScalar_evaluation_square",
+   "WeilConjectures.FrobeniusExchange.systemCompactEvaluation"
+  ],
+  "statement": "theorem systemCompactScalar_evaluation_square (l : ℕ) [Fact l.Prime] (E L : Type u) [Field E] [Field L] [Algebra (Padic l) E] [Algebra (Padic l) L] [FiniteDimensional (Padic l) E] [FiniteDimensional (Padic l) L] (ι : E →ₐ[Padic l] L) {X Y : Scheme.{u}} {f : X ⟶ Y} (c : Compactification f) (n : ℕ) : letI := Padic.finite_coefficientExtensionRing l E (n + 1) (Nat.succ_pos n) letI := Padic.finite_coefficientExtensionRing l L (n + 1) (Nat.succ_pos n) ∃ s : ∀ W : Scheme.{u}, integralComparisonDerivedSequenceScalar l E L ι W ⋙ coefficientSequenceDerivedEvaluation l L W n ≅ coefficientSequenceDerivedEvaluation l E W n ⋙ pbcDerivedExtend (scalarRingMap (integralScalarQuotientMap l E L ι n) W), ∀ N : coefficientSequenceDerived l E X, (coefficientSequenceDerivedEvaluation l L Y n).map ((systemCompactScalar l E L ι c).app N) ≫ (systemCompactEvaluation l L c n).hom.app ((integralComparisonDerivedSequenceScalar l E L ι X).obj N) ≫ (sfIntrinsicCompactSupport c (Padic.coefficientExtensionRing l L (n + 1))).map ((s X).hom.app N) = (s Y).hom.app ((systemDerivedOpen l E c.i ⋙ systemDirect l E c.g).obj N) ≫ (pbcDerivedExtend (scalarRingMap (integralScalarQuotientMap l E L ι n) Y)).map ((systemCompactEvaluation l E c n).hom.app N) ≫ (intrinsicCompactScalar (integralScalarQuotientMap l E L ι n) c).app ((coefficientSequenceDerivedEvaluation l E X n).obj N)",
+  "branch": "sheaf-dag",
+  "by": "R3",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R3",
+  "result": "pass",
+  "landing": "20261027T034734-L-3680588",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R3",
+  "result": "pass",
+  "landing": "20261027T034734-L-3680588",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

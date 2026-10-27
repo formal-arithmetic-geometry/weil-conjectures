@@ -1,0 +1,244 @@
+{
+ "id": "lem-sfb-representable-lfp-object-limit-test",
+ "kind": "statement",
+ "title": "Relative object descent characterizes representable local finite presentation",
+ "statement": "Let $S$ be a scheme [def-pc-scheme] with universes as in [def-weil-size-convention]. Let $p:\\mathcal F\\to\\mathcal G$ be a morphism of categories fibred in groupoids on $S$-schemes: each has groupoid fibres and cartesian lifts along every base morphism, and $p$ commutes with pullback up to the cartesian isomorphisms. Suppose $p$ is representable by algebraic spaces [def-trf-algebraic-space], meaning that for each $S$-scheme $B$ and $y\\in\\mathcal G(B)$ the groupoid of pairs $(x,\\gamma:p(x)\\xrightarrow{\\sim}y|_V)$ over $V\\to B$ is represented by an algebraic space $W_y\\to B$. Then all $W_y\\to B$ are locally of finite presentation on etale scheme charts [def-sbc-locally-finite-presentation] if and only if the following relative object-descent property holds. For every small nonempty directed inverse system of affine $S$-schemes $(T_i)$ with limit $T$, every index $i$, every $y_i\\in\\mathcal G(T_i)$, every $x\\in\\mathcal F(T)$ and every isomorphism $\\gamma:p(x)\\xrightarrow{\\sim}y_i|_T$, there exist $j\\ge i$, $x_j\\in\\mathcal F(T_j)$ and isomorphisms $\\alpha:x_j|_T\\xrightarrow{\\sim}x$, $\\beta:p(x_j)\\xrightarrow{\\sim}y_i|_{T_j}$ such that $\\beta|_T=\\gamma\\circ p(\\alpha)$ under the cartesian pullback identifications. No stack or finiteness assumption on $\\mathcal F$ or $\\mathcal G$ is required.",
+ "source": {
+  "document": "literature/stacks-project/criteria.tex",
+  "place": "Tag 06CX (lemma-representable-by-spaces-limit-preserving), with limit preservation on objects written out as in section-limit-preserving."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-size-convention",
+  "def-trf-algebraic-space",
+  "def-sbc-locally-finite-presentation",
+  "def-sfb-stable-pointed-moduli-groupoids",
+  "def-sfb-dm-stack-morphism-properties"
+ ],
+ "proof": [
+  {
+   "text": "Unpack the representing space in the hypothesis. For $y\\in\\mathcal G(B)$ and $v:V\\to B$, points of $W_y(V)$ correspond to isomorphism classes of pairs $(a,\\delta)$ with $a\\in\\mathcal F(V)$ and $\\delta:p(a)\\xrightarrow{\\sim}v^*y$. An arrow from $(a,\\delta)$ to $(a',\\delta')$ is an isomorphism $u:a\\to a'$ with $\\delta=\\delta'\\circ p(u)$. Indeed these are precisely the objects and arrows of the represented groupoid specified in the statement. Its equivalence with the discrete groupoid of points identifies two pairs exactly when such an arrow exists. Restriction of points is pullback of pairs, by naturality of the representation. Thus equality of represented points supplies the compatible isomorphism, rather than merely an isomorphism between their underlying objects. The use of points as evaluations of a sheaf is the convention of [def-trf-algebraic-space].",
+   "uses": [
+    "def-trf-algebraic-space"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/criteria.tex",
+    "place": "Tag 06CX (lemma-representable-by-spaces-limit-preserving), both uses of the 2-Yoneda identification; expanded using the explicit representation hypothesis."
+   }
+  },
+  {
+   "text": "Fix a small nonempty directed inverse system of affine $S$-schemes $(T_k)$ with limit $T$, an index $i$, $y_i\\in\\mathcal G(T_i)$, $x\\in\\mathcal F(T)$ and an isomorphism $\\gamma:p(x)\\xrightarrow{\\sim}y_i|_T$. Restrict to the tail $J=\\{j:j\\ge i\\}$. This is small, nonempty and directed, since any common upper bound of two of its indices remains in $J$. It has limit $T$, also over $T_i$. Explicitly a cone on the tail extends to an index $k$ by choosing $j\\ge i,k$ and composing its map to $T_j$ with $T_j\\to T_k$. A common upper bound proves independence of $j$ and compatibility with transition maps. This extension is inverse to restriction of cones. The same argument with structure maps proves the assertion over $T_i$. No geometric property of transition maps or hypothesis on $S$ is added.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/criteria.tex",
+    "place": "Tag 06CX, forward implication, restriction to indices j at least i; elementary cone verification."
+   }
+  },
+  {
+   "text": "Suppose every representing map is locally of finite presentation. In particular $W_{y_i}\\to T_i$ is so. Apply [lem-sfb-space-relative-affine-limit-criterion] with base scheme $T_i$, source $W_{y_i}$, target $T_i$, and the tail system of step 2. All maps to the target over $T_i$ are unique. The displayed bijection therefore gives a class in $\\operatorname{colim}_{j\\ge i}\\operatorname{Mor}_{T_i}(T_j,W_{y_i})$ mapping to the point represented by $(x,\\gamma)$. By [lem-weil-pbc-filtered-colimit-sets-elementwise](1) choose a representative $g_j:T_j\\to W_{y_i}$. Step 1 represents it by $(x_j,\\beta)$ with $\\beta:p(x_j)\\xrightarrow{\\sim}y_i|_{T_j}$. Equality of its restriction with $(x,\\gamma)$ supplies an arrow $\\alpha:x_j|_T\\xrightarrow{\\sim}x$ of pairs. Its defining equation is $\\beta|_T=\\gamma\\circ p(\\alpha)$, exactly the requested condition.",
+   "uses": [
+    "lem-sfb-space-relative-affine-limit-criterion",
+    "lem-weil-pbc-filtered-colimit-sets-elementwise"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/criteria.tex",
+    "place": "Tag 06CX, forward implication, using spaces-limits.tex Tags 04AK and 06BC to factor the point through a stage."
+   }
+  },
+  {
+   "text": "Conversely assume relative object descent. Fix any $S$-scheme $B$ and $y\\in\\mathcal G(B)$. Take any small nonempty directed affine inverse system $(V_k)$ over $B$ with limit $V$. Forgetting to $S$ retains this limit: for a cone over $S$, the unique scheme factorization respects its structure map by composition with any projection, and that same argument applies to $B$. Given $g:V\\to W_y$ over $B$, step 1 represents it by $(x,\\delta:p(x)\\xrightarrow{\\sim}y|_V)$. Choose any index $k$, put $y_k=y|_{V_k}$, and apply the descent hypothesis. It gives $l\\ge k$ and $(x_l,\\beta)$ with an isomorphism to $(x,\\delta)$ after restriction. By step 1 this pair gives $g_l:V_l\\to W_y$ whose restriction equals $g$. Hence every map $V\\to W_y$ over $B$ descends to a stage. Apply [lem-sfb-space-surjective-affine-limit-criterion] with base $B$, source $W_y$ and target $B$: its target Hom sets are singletons, so the comparison is just the surjective map established above. It follows that $W_y\\to B$ is locally of finite presentation. Since $B,y$ were arbitrary, this proves the converse without any descent or finiteness assumption on the two fibred categories.",
+   "uses": [
+    "lem-sfb-space-surjective-affine-limit-criterion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/criteria.tex",
+    "place": "Tag 06CX, reverse implication, reduction to surjectivity followed by spaces-limits.tex Tag 0CM6 (lemma-surjection-is-enough)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-trf-algebraic-space",
+  "lem-sfb-space-relative-affine-limit-criterion",
+  "lem-sfb-space-surjective-affine-limit-criterion",
+  "lem-weil-pbc-filtered-colimit-sets-elementwise"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/criteria.tex",
+  "place": "Tag 06CX (lemma-representable-by-spaces-limit-preserving), both implications; representability is unpacked explicitly."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A morphism of categories fibred in groupoids representable by algebraic spaces is locally of finite presentation if and only if it is limit preserving on objects",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.LocallyOfFinitePresentation\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"A morphism $ f: X \\\\to Y $ of schemes is locally of finite presentation, meaning that for every point in $ X $, there exists an open neighborhood such that the restriction of $ f $ to this neighborhood\"}\n  {\"name\": \"AlgebraicGeometry.locallyOfFinitePresentation_iff\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y),\\n  AlgebraicGeometry.LocallyOfFinitePresentation f ↔\\n    ∀ {U : Y.Opens},\\n      AlgebraicGeometry.IsAffineOpen U →\\n        ∀ {V : X.Opens},\\n          AlgebraicGeometry.IsAffineOpen V →\\n            ∀ (e : V ≤ (TopologicalSpace.Opens.map f.base).obj U),\\n \", \"doc\": \"A morphism of schemes $ f: X \\\\to Y $ is locally of finite presentation if and only if for every affine open subset $ U \\\\subseteq Y $ and every affine open subset $ V \\\\subseteq X $ contained in $ f^{-1\"}\n  {\"name\": \"AlgebraicGeometry.locallyOfFinitePresentation_isStableUnderBaseChange\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation\", \"type\": \"CategoryTheory.MorphismProperty.IsStableUnderBaseChange @AlgebraicGeometry.LocallyOfFinitePresentation\", \"doc\": \"The property of a morphism of schemes being locally of finite presentation is stable under base change. That is, if $ f: X \\to Y $ is a morphism of schemes that is locally of finite presentation, then \"}\n  {\"name\": \"AlgebraicGeometry.instIsStableUnderCompositionSchemeLocallyOfFinitePresentation\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation\", \"type\": \"CategoryTheory.MorphismProperty.IsStableUnderComposition @AlgebraicGeometry.LocallyOfFinitePresentation\", \"doc\": \"The property of being locally of finite presentation for morphisms of schemes is stable under composition. That is, if $ f: X \\\\to Y $ and $ g: Y \\\\to Z $ are morphisms of schemes that are locally of fi\"}\n  {\"name\": \"AlgebraicGeometry.instLocallyOfFiniteTypeOfLocallyOfFinitePresentation\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [hf : AlgebraicGeometry.LocallyOfFinitePresentation f],\\n  AlgebraicGeometry.LocallyOfFiniteType f\", \"doc\": \"Every morphism of schemes that is locally of finite presentation is also locally of finite type.\"}\n  {\"name\": \"AlgebraicGeometry.instHasRingHomPropertyLocallyOfFinitePresentationFinitePresentation\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation\", \"type\": \"AlgebraicGeometry.HasRingHomProperty @AlgebraicGeometry.LocallyOfFinitePresentation\\n  fun {R S} [CommRing R] [CommRing S] => RingHom.FinitePresentation\", \"doc\": \"A morphism of schemes is locally of finite presentation if and only if the corresponding ring homomorphism is finitely presented. This instance establishes that the scheme-theoretic property of being \"}\n  {\"name\": \"AlgebraicGeometry.locallyOfFinitePresentation_comp\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation\", \"type\": \"∀ {X Y Z : AlgebraicGeometry.Scheme} (f : X ⟶ Y) (g : Y ⟶ Z) [hf : AlgebraicGeometry.LocallyOfFinitePresentation f]\\n  [hg : AlgebraicGeometry.LocallyOfFinitePresentation g],\\n  AlgebraicGeometry.LocallyOfFinitePresentation (CategoryTheory.CategoryStruct.comp f g)\", \"doc\": \"The composition of two morphisms of schemes that are locally of finite presentation is itself a morphism that is locally of finite presentation. This follows from the fact that the property of being l\"}\n  {\"name\": \"AlgebraicGeometry.locallyOfFinitePresentation_of_isOpenImmersion\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.IsOpenImmersion f],\\n  AlgebraicGeometry.LocallyOfFinitePresentation f\", \"doc\": \"Every open immersion of schemes is locally of finite presentation.\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme finite-presentation and ordinary representability/limit results do not state the relative object-descent criterion for fibred groupoids or the algebraic-stack criterion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A representable morphism of stacks is locally finitely presented precisely when objects with a fixed target descend through affine limits",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.locallyOfFinitePresentation_iff\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y),\\n  AlgebraicGeometry.LocallyOfFinitePresentation f ↔\\n    ∀ {U : Y.Opens},\\n      AlgebraicGeometry.IsAffineOpen U →\\n        ∀ {V : X.Opens},\\n          AlgebraicGeometry.IsAffineOpen V →\\n            ∀ (e : V ≤ (TopologicalSpace.Opens.map f.base).obj U),\\n \", \"doc\": \"A morphism of schemes $ f: X \\\\to Y $ is locally of finite presentation if and only if for every affine open subset $ U \\\\subseteq Y $ and every affine open subset $ V \\\\subseteq X $ contained in $ f^{-1\"}\n  {\"name\": \"AlgebraicGeometry.LocallyOfFinitePresentation\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"A morphism $ f: X \\\\to Y $ of schemes is locally of finite presentation, meaning that for every point in $ X $, there exists an open neighborhood such that the restriction of $ f $ to this neighborhood\"}\n  {\"name\": \"AlgebraicGeometry.LocallyOfFinitePresentation.finitePresentation_appLE\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [self : AlgebraicGeometry.LocallyOfFinitePresentation f] {U : Y.Opens},\\n  AlgebraicGeometry.IsAffineOpen U →\\n    ∀ {V : X.Opens},\\n      AlgebraicGeometry.IsAffineOpen V →\\n        ∀ (e : V ≤ (TopologicalSpace.Opens.map f.base).obj U),\\n          (CommRing\", \"doc\": \"For a morphism $ f: X \\\\to Y $ of schemes that is locally of finite presentation, if $ U \\\\subseteq Y $ is an affine open subset and $ V \\\\subseteq X $ is an affine open subset contained in $ f^{-1}(U) $\"}\n  {\"name\": \"AlgebraicGeometry.instHasRingHomPropertyLocallyOfFinitePresentationFinitePresentation\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation\", \"type\": \"AlgebraicGeometry.HasRingHomProperty @AlgebraicGeometry.LocallyOfFinitePresentation\\n  fun {R S} [CommRing R] [CommRing S] => RingHom.FinitePresentation\", \"doc\": \"A morphism of schemes is locally of finite presentation if and only if the corresponding ring homomorphism is finitely presented. This instance establishes that the scheme-theoretic property of being \"}\n  {\"name\": \"AlgebraicGeometry.instLocallyOfFiniteTypeOfLocallyOfFinitePresentation\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [hf : AlgebraicGeometry.LocallyOfFinitePresentation f],\\n  AlgebraicGeometry.LocallyOfFiniteType f\", \"doc\": \"Every morphism of schemes that is locally of finite presentation is also locally of finite type.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.finitePresentation_appLE\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [self : AlgebraicGeometry.LocallyOfFinitePresentation f] {U : Y.Opens},\\n  AlgebraicGeometry.IsAffineOpen U →\\n    ∀ {V : X.Opens},\\n      AlgebraicGeometry.IsAffineOpen V →\\n        ∀ (e : V ≤ (TopologicalSpace.Opens.map f.base).obj U),\\n          (CommRing\", \"doc\": \"Let $f: X \\\\to Y$ be a morphism of schemes that is locally of finite presentation. Let $U$ be an affine open subset of $Y$ and $V$ be an affine open subset of $X$ such that $V$ is contained in the prei\"}\n  {\"name\": \"AlgebraicGeometry.instIsStableUnderCompositionSchemeLocallyOfFinitePresentation\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation\", \"type\": \"CategoryTheory.MorphismProperty.IsStableUnderComposition @AlgebraicGeometry.LocallyOfFinitePresentation\", \"doc\": \"The property of being locally of finite presentation for morphisms of schemes is stable under composition. That is, if $ f: X \\\\to Y $ and $ g: Y \\\\to Z $ are morphisms of schemes that are locally of fi\"}\n  {\"name\": \"AlgebraicGeometry.LocallyOfFinitePresentation.finitePresentation_of_affine_subset\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [self : AlgebraicGeometry.LocallyOfFinitePresentation f] {U : Y.Opens},\\n  AlgebraicGeometry.IsAffineOpen U →\\n    ∀ {V : X.Opens},\\n      AlgebraicGeometry.IsAffineOpen V →\\n        ∀ (e : V ≤ (TopologicalSpace.Opens.map f.base).obj U),\\n          (CommRing\", \"doc\": \"Let $f: X \\\\to Y$ be a morphism of schemes which is locally of finite presentation. If $U \\\\subseteq Y$ and $V \\\\subseteq X$ are affine open subsets such that $f(V) \\\\subseteq U$, then the ring homomorphi\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme finite-presentation and ordinary representability/limit results do not state the relative object-descent criterion for fibred groupoids or the algebraic-stack criterion."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Representable morphisms of categories fibered in groupoids are locally of finite presentation if and only if they preserve limits on objects",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"CategoryTheory.MorphismProperty.isFinitelyPresentable\", \"module\": \"Mathlib.CategoryTheory.Presentable.Finite\", \"type\": \": MorphismProperty C\", \"doc\": \"A morphism $ f $ in a category $ \\\\mathcal{C} $ is said to be finitely presentable if the corresponding object $ (Y, f) $ in the under category $ \\\\mathcal{C}\\\\downarrow X $ is finitely presentable, mean\"}\n  {\"name\": \"CategoryTheory.Functor.representable_preservesLimits\", \"module\": \"Mathlib.CategoryTheory.Limits.Yoneda\", \"type\": \": PreservesLimitsOfSize.{t, w} F\", \"doc\": \"For any category $\\\\mathcal{C}$ and a representable functor $F: \\\\mathcal{C} \\\\to \\\\mathrm{Type}\\\\, v$, the functor $F$ preserves limits of a specified size. This means that if $\\\\mathcal{C}$ has limits of \"}\n  {\"name\": \"CategoryTheory.Functor.representable_preservesLimit\", \"module\": \"Mathlib.CategoryTheory.Limits.Yoneda\", \"type\": \"(G : J ⥤ Cᵒᵖ) : PreservesLimit G F\", \"doc\": \"Every representable contravariant functor from a category $\\\\mathcal{C}$ to the category of types preserves limits of diagrams in $\\\\mathcal{C}$. This means that if a diagram in $\\\\mathcal{C}$ has a limi\"}\n  {\"name\": \"CategoryTheory.Limits.PreservesLimits.preservesFiniteLimits\", \"module\": \"Mathlib.CategoryTheory.Limits.Preserves.Finite\", \"type\": \"(F : C ⥤ D) [PreservesLimits F] : PreservesFiniteLimits F\", \"doc\": \"If a functor $ F: C \\to D $ preserves limits of a given size, then it preserves finite limits.\"}\n  {\"name\": \"CategoryTheory.preservesFiniteLimits_iff_flat\", \"module\": \"Mathlib.CategoryTheory.Functor.Flat\", \"type\": \"[HasFiniteLimits C] (F : C ⥤ D) : RepresentablyFlat F ↔ PreservesFiniteLimits F\", \"doc\": \"For a category $ C $ with finite limits and a functor $ F : C \\\\to D $, $ F $ is representably flat if and only if $ F $ preserves finite limits.\"}\n  {\"name\": \"CategoryTheory.Limits.PreservesFiniteLimits\", \"module\": \"Mathlib.CategoryTheory.Limits.Preserves.Finite\", \"type\": \"{C : Type u₁} →\\n  [inst : CategoryTheory.Category.{v₁, u₁} C] →\\n    {D : Type u₂} → [inst_1 : CategoryTheory.Category.{v₂, u₂} D] → CategoryTheory.Functor C D → Prop\", \"doc\": \"Given categories $ C $ and $ D $, and a functor $ F : C \\\\to D $, the proposition that $ F $ preserves finite limits.\"}\n  {\"name\": \"CategoryTheory.preservesFiniteLimits_of_flat\", \"module\": \"Mathlib.CategoryTheory.Functor.Flat\", \"type\": \"(F : C ⥤ D) [RepresentablyFlat F] : PreservesFiniteLimits F\", \"doc\": \"If $ F : C \\to D $ is a representably flat functor between categories $ C $ and $ D $, then $ F $ preserves finite limits.\"}\n  {\"name\": \"CategoryTheory.Functor.relativelyRepresentable\", \"module\": \"Mathlib.CategoryTheory.MorphismProperty.Representable\", \"type\": \": MorphismProperty D\", \"doc\": \"A morphism $ f : X \\to Y $ in category $ \\\\mathcal{D} $ is relatively representable with respect to a functor $ F : \\\\mathcal{C} \\to \\\\mathcal{D} $ if for every object $ a $ in $ \\\\mathcal{C} $ and every mo\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme finite-presentation and ordinary representability/limit results do not state the relative object-descent criterion for fibred groupoids or the algebraic-stack criterion."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Representable\", \"FinitePresentation\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme finite-presentation and ordinary representability/limit results do not state the relative object-descent criterion for fibred groupoids or the algebraic-stack criterion."
+  },
+  {
+   "tool": "grep",
+   "query": "[Rr]epresentable.*[Ll]imit|[Ll]imit.*[Rr]epresentable|[Ss]tack.*[Ff]inite[Pp]resentation",
+   "results": "[grep] OK 25 hit(s)\n  {\"file\": \"Mathlib/CategoryTheory/Adjunction/PartialAdjoint.lean\", \"line\": \"154\", \"text\": \"noncomputable def corepresentableByCompCoyonedaObjOfIsColimit {J : Type*} [Category* J]\"}\n  {\"file\": \"Mathlib/CategoryTheory/Adjunction/PartialAdjoint.lean\", \"line\": \"185\", \"text\": \"  (corepresentableByCompCoyonedaObjOfIsColimit\"}\n  {\"file\": \"Mathlib/CategoryTheory/Adjunction/PartialAdjoint.lean\", \"line\": \"186\", \"text\": \"    (R := ObjectProperty.lift _ R h) hc (colimit.isColimit _)).isCorepresentable\"}\n  {\"file\": \"Mathlib/CategoryTheory/Adjunction/PartialAdjoint.lean\", \"line\": \"304\", \"text\": \"noncomputable def representableByCompYonedaObjOfIsLimit {J : Type*} [Category* J]\"}\n  {\"file\": \"Mathlib/CategoryTheory/Adjunction/PartialAdjoint.lean\", \"line\": \"335\", \"text\": \"  (representableByCompYonedaObjOfIsLimit\"}\n  {\"file\": \"Mathlib/CategoryTheory/MorphismProperty/Representable.lean\", \"line\": \"588\", \"text\": \"lemma of_diag {X : D} (h : F.relativelyRepresentable (Limits.diag X))\"}\n  {\"file\": \"Mathlib/CategoryTheory/MorphismProperty/Representable.lean\", \"line\": \"641\", \"text\": \"    F.relativelyRepresentable (Limits.diag X) := by\"}\n  {\"file\": \"Mathlib/CategoryTheory/MorphismProperty/Representable.lean\", \"line\": \"671\", \"text\": \"    F.relativelyRepresentable (Limits.diag X) ↔\"}\n  {\"file\": \"Mathlib/CategoryTheory/Limits/ConcreteCategory/Basic.lean\", \"line\": \"67\", \"text\": \"    [(forget C).IsCorepresentable] {J : Type w} [Category.{t} J] (G : J ⥤ C) [HasLimit G] :\"}\n  {\"file\": \"Mathlib/CategoryTheory/Limits/HasLimits.lean\", \"line\": \"370\", \"text\": \"  HasLimit.mk ⟨_, IsLimit.ofRepresentableBy ((limit.isLimit F).representableBy.ofIso h)⟩\"}\n  {\"file\": \"Mathlib/CategoryTheory/Limits/HasLimits.lean\", \"line\": \"728\", \"text\": \"  HasColimit.mk ⟨_, IsColimit.ofCorepresentableBy ((colimit.isColimit F).corepresentableBy.ofIso h)⟩\"}\n  {\"file\": \"Mathlib/CategoryTheory/Limits/IsLimit.lean\", \"line\": \"625\", \"text\": \"def ofRepresentableBy {X : C} (h : F.cones.RepresentableBy X) : IsLimit (limitCone h) where\"}\n  {\"file\": \"Mathlib/CategoryTheory/Limits/IsLimit.lean\", \"line\": \"642\", \"text\": \"/-- Given a limit cone, `F.cones` is representable by the point of the cone. -/\"}\n  {\"file\": \"Mathlib/CategoryTheory/Limits/IsLimit.lean\", \"line\": \"643\", \"text\": \"def representableBy (hc : IsLimit t) : F.cones.RepresentableBy t.pt where\"}\n  {\"file\": \"Mathlib/CategoryTheory/Limits/IsLimit.lean\", \"line\": \"769\", \"text\": \"/-- Given a colimit cocone, `F.cocones` is corepresentable by the point of the cocone. -/\"}\n  {\"file\": \"Mathlib/CategoryTheory/Limits/IsLimit.lean\", \"line\": \"770\", \"text\": \"def corepresentableBy (hc : IsColimit t) : F.cocones.CorepresentableBy t.pt where\"}\n  {\"file\": \"Mathlib/CategoryTheory/Limits/Presheaf.lean\", \"line\": \"15\", \"text\": \"# Colimit of representables\"}\n  {\"file\": \"Mathlib/CategoryTheory/Limits/Presheaf.lean\", \"line\": \"18\", \"text\": \"is a colimit of representables. This result is also known as the density theorem,\"}\n  {\"file\": \"Mathlib/CategoryTheory/Limits/Presheaf.lean\", \"line\": \"20\", \"text\": \"* `colimitOfRepresentable` uses the category of elements of a functor to types;\"}\n  {\"file\": \"Mathlib/CategoryTheory/Limits/Presheaf.lean\", \"line\": \"47\", \"text\": \"colimit, representable, presheaf, free cocompletion\"}\n  {\"file\": \"Mathlib/CategoryTheory/Limits/Presheaf.lean\", \"line\": \"258\", \"text\": \"`colimitOfRepresentable P` that this cocone is a colimit: that is, we have exhibited an arbitrary\"}\n  {\"file\": \"Mathlib/CategoryTheory/Elements.lean\", \"line\": \"332\", \"text\": \"    Limits.IsInitial (initialOfRepresentableBy h) :=\"}\n  {\"file\": \"Mathlib/CategoryTheory/Elements.lean\", \"line\": \"347\", \"text\": \"    Limits.IsInitial (initialOfCorepresentableBy h) :=\"}\n  {\"file\": \"Mathlib/CategoryTheory/Sites/LocalSite.lean\", \"line\": \"108\", \"text\": \"    (colimitOfDiagramTerminal (Functor.Elements.isInitialOfCorepresentableBy\"}\n  {\"file\": \"Mathlib/CategoryTheory/Limits/Indization/IndObject.lean\", \"line\": \"19\", \"text\": \"of `A` as a small filtered colimit of representable presheaves and define the predicate\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme finite-presentation and ordinary representability/limit results do not state the relative object-descent criterion for fibred groupoids or the algebraic-stack criterion."
+  },
+  {
+   "tool": "grep",
+   "query": "AlgebraicSpace|limit.preserving|fibred in groupoids|fibered in groupoids",
+   "results": "Logged 4 hits; top results: Mathlib/Topology/Sheaves/SheafCondition/UniqueGluing.lean, Mathlib/CategoryTheory/Monoidal/DayConvolution/DayFunctor.lean, Mathlib/CategoryTheory/Limits/Presheaf.lean, Mathlib/CategoryTheory/Limits/Preserves/Presheaf.lean. ",
+   "date": "2026-10-23",
+   "verdict": "no match: inspected scheme finite-presentation definitions in Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation.lean:45-105; these and the ordinary category-theory hits do not give an algebraic-space surjective affine-limit criterion or relative object descent for fibred groupoids."
+  },
+  {
+   "tool": "leansearch",
+   "query": "An algebraic space over a scheme is locally of finite presentation if maps from directed affine limits always descend to a finite stage, with no uniqueness assumption",
+   "results": "Logged 8 hits; top results: AlgebraicGeometry.LocallyOfFinitePresentation, RingHom.FinitePresentation, AlgebraicGeometry.instLocallyOfFinitePresentationOfIsSmooth, AlgHom.FinitePresentation, AlgebraicGeometry.instLocallyOfFiniteTypeOfLocallyOfFinitePresentation, AlgebraicGeometry.LocallyOfFinitePresentation.mk, AlgebraicGeometry.LocallyOfFiniteType, AlgebraicGeometry.locallyOfFinitePresentation_iff. ",
+   "date": "2026-10-23",
+   "verdict": "no match: inspected scheme finite-presentation definitions in Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation.lean:45-105; these and the ordinary category-theory hits do not give an algebraic-space surjective affine-limit criterion or relative object descent for fibred groupoids."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicSpace\", \"FinitePresentation\"",
+   "results": "Logged 0 hits; none. ",
+   "date": "2026-10-23",
+   "verdict": "no match: inspected scheme finite-presentation definitions in Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation.lean:45-105; these and the ordinary category-theory hits do not give an algebraic-space surjective affine-limit criterion or relative object descent for fibred groupoids."
+  },
+  {
+   "tool": "grep",
+   "query": "surjection_is_enough|surjectiv.*[Ff]inite[Pp]resentation|[Ff]inite[Pp]resentation.*surjectiv",
+   "results": "Logged 6 hits; top results: Mathlib/AlgebraicGeometry/ZariskisMainTheorem.lean, Mathlib/AlgebraicGeometry/Sites/Fpqc.lean, Mathlib/AlgebraicGeometry/Morphisms/FlatDescent.lean, Mathlib/AlgebraicGeometry/Morphisms/FlatDescent.lean, Mathlib/AlgebraicGeometry/Morphisms/FlatDescent.lean, Mathlib/AlgebraicGeometry/Morphisms/LocalFlatDescent.lean. ",
+   "date": "2026-10-23",
+   "verdict": "no match: inspected scheme finite-presentation definitions in Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation.lean:45-105; these and the ordinary category-theory hits do not give an algebraic-space surjective affine-limit criterion or relative object descent for fibred groupoids."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Relative objects in the fibre of a representable morphism descend to finite stages exactly when the morphism is locally finitely presented",
+   "results": "Logged 8 hits; top results: AlgebraicGeometry.LocallyOfFinitePresentation, AlgebraicGeometry.instLocallyOfFiniteTypeOfLocallyOfFinitePresentation, CategoryTheory.MorphismProperty.isFinitelyPresentable, CategoryTheory.MorphismProperty.exists_hom_of_isFinitelyPresentable, AlgebraicGeometry.locallyOfFinitePresentation_iff, isFinitelyPresentable, AlgebraicGeometry.instHasRingHomPropertyLocallyOfFinitePresentationFinitePresentation, AlgebraicGeometry.instLocallyOfFinitePresentationFstScheme. ",
+   "date": "2026-10-23",
+   "verdict": "no match: inspected scheme finite-presentation definitions in Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation.lean:45-105; these and the ordinary category-theory hits do not give an algebraic-space surjective affine-limit criterion or relative object descent for fibred groupoids."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a morphism of algebraic spaces, surjectivity alone of the relative comparison map from filtered colimits of points on affine schemes implies local finite presentation",
+   "results": "Logged 8 hits; top results: AlgebraicGeometry.LocallyOfFinitePresentation, AlgebraicGeometry.locallyOfFinitePresentation_iff, AlgebraicGeometry.instLocallyOfFiniteTypeOfLocallyOfFinitePresentation, AlgebraicGeometry.instHasRingHomPropertyLocallyOfFinitePresentationFinitePresentation, AlgebraicGeometry.instDescendsAlongSchemeMinMorphismPropertySurjectiveFlatLocallyOfFinitePresentationOfQuasiCompactOfIsZariskiLocalAtTarget, AlgebraicGeometry.LocallyOfFinitePresentation.finitePresentation_appLE, AlgebraicGeometry.Scheme.Hom.finitePresentation_appLE, AlgebraicGeometry.LocallyOfFinitePresentation.finitePresentation_of_affine_subset. ",
+   "date": "2026-10-23",
+   "verdict": "no match: inspected scheme finite-presentation definitions in Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation.lean:45-105; these and the ordinary category-theory hits do not give an algebraic-space surjective affine-limit criterion or relative object descent for fibred groupoids."
+  },
+  {
+   "tool": "leansearch",
+   "query": "For a morphism of algebraic spaces, surjectivity alone of the relative comparison map from filtered colimits of points on affine schemes implies local finite presentation",
+   "results": "Logged 8 hits; top results: AlgebraicGeometry.instLocallyOfFinitePresentationOfIsSmooth, AlgebraicGeometry.instLocallyOfFiniteTypeOfLocallyOfFinitePresentation, AlgebraicGeometry.LocallyOfFinitePresentation, AlgebraicGeometry.LocallyOfFinitePresentation.mk, AlgebraicGeometry.locallyOfFinitePresentation_of_isOpenImmersion, CategoryTheory.MorphismProperty.isFinitelyPresentable, AlgebraicGeometry.LocallyOfFinitePresentation.recOn, CategoryTheory.IsGrothendieckAbelian.IsPresentable.surjectivity.epi_f. ",
+   "date": "2026-10-23",
+   "verdict": "no match: inspected scheme finite-presentation definitions in Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation.lean:45-105; these and the ordinary category-theory hits do not give an algebraic-space surjective affine-limit criterion or relative object descent for fibred groupoids."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"LocallyOfFinitePresentation\"",
+   "results": "Logged 12 hits; top results: AlgebraicGeometry.instIsStableUnderCompositionSchemeLocallyOfFinitePresentation, AlgebraicGeometry.locallyOfFinitePresentation_isStableUnderBaseChange, AlgebraicGeometry.LocallyOfFinitePresentation, AlgebraicGeometry.instHasRingHomPropertyLocallyOfFinitePresentationFinitePresentation, AlgebraicGeometry.instLocallyOfFiniteTypeOfLocallyOfFinitePresentation, AlgebraicGeometry.locallyOfFinitePresentation_of_isOpenImmersion, AlgebraicGeometry.LocallyOfFinitePresentation.SpecMap_iff, AlgebraicGeometry.locallyOfFinitePresentation_comp. ",
+   "date": "2026-10-23",
+   "verdict": "no match: inspected scheme finite-presentation definitions in Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation.lean:45-105; these and the ordinary category-theory hits do not give an algebraic-space surjective affine-limit criterion or relative object descent for fibred groupoids."
+  },
+  {
+   "tool": "grep",
+   "query": "LocallyOfFinitePresentation|[Ff]inite[Pp]resentation.*[Cc]olimit|[Cc]olimit.*[Ff]inite[Pp]resentation",
+   "results": "Logged 25 hits; top results: Mathlib/AlgebraicGeometry/ZariskisMainTheorem.lean, Mathlib/AlgebraicGeometry/Morphisms/SmoothFiber.lean, Mathlib/AlgebraicGeometry/Noetherian.lean, Mathlib/AlgebraicGeometry/Noetherian.lean, Mathlib/AlgebraicGeometry/Noetherian.lean, Mathlib/AlgebraicGeometry/AffineSpace.lean, Mathlib/AlgebraicGeometry/AffineSpace.lean, Mathlib/AlgebraicGeometry/AffineSpace.lean. ",
+   "date": "2026-10-23",
+   "verdict": "no match: inspected scheme finite-presentation definitions in Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation.lean:45-105; these and the ordinary category-theory hits do not give an algebraic-space surjective affine-limit criterion or relative object descent for fibred groupoids."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-stack-limit-preserving-lfp",
+  "date": "2026-10-23",
+  "group": "Q14"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Algebraicity and smoothness of the stack of all nodal curves. Supporting input: Tag 0DZX (lemma-big-smooth-part-curves), clauses (1) and (3), with the open substack lci+ in the statement. This is the full isolated-lci locus, not the nodal locus. Supporting input for the intersection construction and smoothness argument of Tag 0DZX: Smooth points of the stack of curves detected by unobstructed deformations. Supporting input for Tag 0DZU: the local finite presentation input in the first paragraph, obtained from the existing curve limit-preservation theorem rather than duplicated as a curve-specific lemma. Substep: Relative object descent characterizes representable local finite presentation.",
+   "via": [
+    "lem-sfb-stack-limit-preserving-lfp",
+    "lem-sfb-curve-smooth-locus-deformation-test",
+    "lem-sfb-isolated-lci-curve-smooth-open",
+    "lem-sfb-nodal-curve-stack-smooth",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-representable-lfp-object-limit-test",
+  "worker": "stage1",
+  "summary": "Split the representable relative object criterion into the explicit groupoid-of-pairs interpretation, directed tail reindexing, forward factorization by the existing algebraic-space affine-limit criterion, and reverse surjectivity via one new geometric input (0CM6). Preserve the statement and earlier searches. No Lean attachment or Mathlib match.",
+  "blueprint": "Latest sk-thm-sf-ctf-stability-direct-images.proof.md (of det-thm-sf-ctf-stability-direct-images), proof (3), supporting the inherited marked-curve moduli route through the local-finite-presentation step of 0DZU. The computed ancestor is None, as inherited; preserve from.node=null and the explicit place and via chain.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-NC-3f479956b",
+  "group": "NC",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NC-3f479956b (reviewer sub-agent of L); spot-checked: I read the whole delivery and changed nothing. The item, lem-sfb-representable-lfp-object-limit-test, is still unsplit in live and side-live, and it has no repair note, so it is not superseded and the re-split rule does not apply. Its statement matches Stacks 06CX (criteria.tex, lemma-representable-by-spaces-limit-preserving) together with the 'limit preserving on objects' square of section-limit-preserving: the condition beta|_T = gamma∘p(alpha) is Stacks' gamma_{i'}|_U = gamma∘p(beta) with the letters swapped, and nothing is weakened. Step 1 unpacks the groupoid of pairs; I checked that the arrow convention delta = delta'∘p(u) follows from Stacks' alpha' = p(u)∘alpha with delta = alpha^{-1}, so marking it elementary is fine. Step 2, the restriction to indices j >= i with the cone argument written out, is elementary and correct. Step 3 applies the existing bijective criterion lem-sfb-space-relative-affine-limit-criterion (04AK/06BC, for an arbitrary morphism of algebraic spaces with no qcqs assumption) with base and target T_i, where the Hom sets into T_i are singletons; clause (1) of the filtered-colimit Mathlib leaf then gives a finite-stage representative, and step 1 turns it into (x_j, beta, alpha). Step 4 checks that the limit over B is also the limit over S, descends each map V -> W_y to a stage, and applies the new node with base and target B; this is exactly Stacks' reverse argument. The new node lem-sfb-space-surjective-affine-limit-criterion states Stacks 0CM6 (spaces-limits.tex, lemma-surjection-is-enough; the tag table confirms it) word for word, with local finite presentation written as the 03XP chart condition in the same words as the existing node. It is statement-only and self-contained, with the same statement dependencies as the existing bijective node and four recorded searches. It is not a duplicate: searching dag/nodes for 0CM6, 0CM0 and the label finds only this delivery, and surjectivity cannot be obtained from the bijective node. It does not restate the item, since it involves no fibred categories and needs 0CM0 and 04AK. Small cases (X = Y, X empty, p = id, F empty, a one-index system) all hold, no stack, finiteness or qcqs hypothesis is used, and everything stays in the item's unit sk-thm-sf-ctf-stability (sk-thm-sf-ctf-stability). Batch-5 check: the citation of lem-sfb-space-relative-affine-limit-criterion reaches sec-trace-formula only through the general definition def-trf-algebraic-space, and the new node cites that definition directly. Neither is the trace formula, Poincaré duality or a step of their proofs, so both citations are accepted. No SGA is cited."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.RepresentableLfpObjectLimitTest",
+  "declaration": "CategoryTheory.representable_lfp_iff_relative_objects_descend",
+  "file": "lean/Sheaf/AlgebraicGeometry/RepresentableLfpObjectLimitTest.lean",
+  "statement": "theorem representable_lfp_iff_relative_objects_descend {S : Scheme.{u}} {F : BasedCategory.{v₁, w₁} (Over S)} {G : BasedCategory.{v₂, w₂} (Over S)} (p : BasedFunctor F G) (_hF : IsFibredInGroupoids F) (_hG : IsFibredInGroupoids G) (_hp : IsRepresentableByAlgebraicSpaces p) : ModuliSpaceTest @LocallyOfFinitePresentation p ↔ ∀ (I : Type u) [Preorder I] [IsDirected I (· ≤ ·)] [Nonempty I] (D : Iᵒᵖ ⥤ Over S) (c : Cone D), (∀ i : I, IsAffine (D.obj (op i)).left) → Nonempty (IsLimit c) → ∀ (i : I) (yi : Functor.Fiber G.p (D.obj (op i))) (x : Functor.Fiber F.p c.pt) (γ : p.obj x.val ⟶ yi.val), G.p.IsHomLift (c.π.app (op i)) γ → ∃ (j : I) (hij : i ≤ j) (xj : Functor.Fiber F.p (D.obj (op j))) (α : x.val ⟶ xj.val) (β : p.obj xj.val ⟶ yi.val), F.p.IsHomLift (c.π.app (op j)) α ∧ G.p.IsHomLift (D.map (homOfLE hij).op) β ∧ p.map α ≫ β = γ",
+  "branch": "sheaf-dag",
+  "by": "Q35",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-439094544",
+  "group": "Q35",
+  "result": "pass",
+  "note": "Read node, Stacks 06CX/section-limit-preserving, module, report (Worker report + Second reading by Q35 present), and dep declarations IsFibredInGroupoids, IsRepresentableByAlgebraicSpaces/HasSpaceBaseChange, ModuliSpaceTest, LocallyOfFinitePresentation. Node diff vs side-live: only lean record + two landed definition stmt_deps added; lean.statement verbatim equals file signature. Clause check: ModuliSpaceTest @LocallyOfFinitePresentation = all W_y->B lfp on etale charts (exists-presentation equivalent by uniqueness); directed affine system encoding identical to landed FibredGroupoidLimit.ObjectsDescend (omitted IsAffine c.pt automatic); gamma/alpha/beta as total-category arrows over pi_i, pi_j, D.map(homOfLE) with alpha inverse-encoded, p.map alpha >> beta = gamma equals beta|_T = gamma o p(alpha_0); quantifier order and inverse-system direction correct; no stack/finiteness/universe restriction. Edge cases (one index, empty schemes, empty F/G, identity p) agree. No relative object-descent def exists (only absolute), so inlining is fine. No new defs, sorry only, docstrings with source and blueprint. Not recompiled (no change)."
+ }
+}

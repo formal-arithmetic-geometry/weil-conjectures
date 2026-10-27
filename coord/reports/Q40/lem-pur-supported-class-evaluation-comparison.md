@@ -1,0 +1,89 @@
+## Worker report
+
+The module Sheaf.Paper.SupportedClassEvaluationComparison states the entire supported-class comparison in ordinary fixed-coefficient pro-etale module sheaves. Only supportedClassEvaluationComparison has a postponed proof. Its property definition expands all normalized maps and every conclusion; its helper definitions contain actual maps. The accepted stage-1 statement, proof and proof dependencies are unchanged. The current stage brief's 2026-10-22 handoff explicitly authorizes continuing this stage-2 assignment after the inherited stage-1 unchanged-item rejection. This repair addresses the immutable-head return at 39d14b165f14 point by point; no mathematical statement correction is needed.
+
+Hypotheses, one by one:
+
+- The finite-field datum, ell distinct from the characteristic, finite coefficient extension, and positive level are bundled by WeilConjectures.PurityFiniteSetting P. Its existing Coefficient is the canonical size lift of O_E/(varpi^n), and its constant Z is the exact comparison pullback of the etale constant module.
+- The finite-type k-schemes are aZ and aX with LocallyOfFiniteType and QuasiCompact instances. The equation _hi says i is over k. No separatedness hypothesis on the structure maps is added.
+- The closed immersion is i with IsClosedImmersion; the complementary quasi-compact open is j with IsOpenImmersion, QuasiCompact and hPair : IsCompl (Set.range i) (Set.range j). Thus an arbitrary presentation of the open complement is allowed, rather than only a selected open subscheme.
+- Ordinary module sheaves use Sheaf (Scheme.ProEt.topology T) (ModuleCat.{u+1} P.Coefficient). All modules are allowed. The small site retains object universe u+1, morphism universe u. K is in DerivedCategory.Plus, with no upper bound and no etale-origin hypothesis.
+- R is exactly finiteClosedUpperShriek.rightDerivedFunctorPlus, hence B0 is the bounded-below right derived closed inverse image of the supported kernel. supportedEvaluationAdjunction selects its actual support adjunction from supportLocalizationTriangle; that theorem fixes the counit on injective models.
+- The two assumptions are Nonempty ((R.obj K).obj[2] ≅ A0) and DerivedCategory.constructibleFiniteTor applied to that same shifted object. A0 is the existing constant sheaf in degree zero. F is exactly sfFiniteExceptionalAt at Compactification.ofIsProper i, whose open part is id_Z; B is F.obj K.obj and C is B[2]. The local compactness and Noetherian instances follow from aX; coefficient finiteness is constructed inline from Padic.finite_coefficientExtensionRing and inferInstanceAs (Finite (ULift.{u+1} P.Ring)), without a new main-theorem hypothesis.
+
+Conclusions and formulas, one by one:
+
+- hB and WB assert that B is bounded below with an actual retained etale antecedent. phi : B0 ≅ B is a derived isomorphism. The first displayed equality is i_*(phi) followed by epsilon equals epsilon0. Here epsilon is the inverse specifiedExceptionalHomEquiv on id_B, after the canonical closedSupportCompactIso; epsilon0 is adj.counit.app K. This is the counit of the relative exceptional Hom bijection, not an ambient pro-etale right adjoint.
+- The next quantified equality covers EVERY bounded-below test T with FixedEtaleOriginWitness W and EVERY map f : T → B0. It says the relative exceptional transpose of the inverse support transpose is f followed by phi. It both identifies the two adjunctions and characterizes phi uniquely (evaluate on id_B0 after supplying B0's constant etale antecedent). The result therefore specifies a canonical comparison, without choosing an arbitrary isomorphism from Nonempty.
+- Applying shiftFunctor 2 to phi identifies C0 with C. The property explicitly gives Nonempty (C ≅ A0), constructibleFiniteTor C, vanishing of H^r(C) for every r ≠ 0, and Nonempty (H^0(C) ≅ P.constant Z). These are exactly degree-zero concentration, constant rank one, and finite-Tor constructibility.
+- eta is an additive equivalence from supportHypercohomology i P.Coefficient 2 K to Hom(A0,C). The equality for all b fixes eta to supportedEvaluationEta. That helper uses the normalized supported-Hom map chi, the exact termwise single comparison, unshifting via the fully faithful shiftFunctor, the support adjunction at the single object in degree 2 (A_Z[-2]), shifting back, and postcomposition with phi.hom[2]. The shift single isomorphisms have indices 2,0,2 and cochain convention H^r(K[2])=H^(r+2)(K). The universal adjunction agreement includes this etale-origin test.
+- chi is not selected from the bare Nonempty in supported_cohomology_hom. The published supportedHom_pullback supplies Identification, whose naturality and value on every injective cocycle uniquely determine the same comparison. supportedEvaluationChi retains that normalized identification. The choice contains only uniquely determined map data and proof fields. This uses the already landed node lem-pur-supported-hom-pullback, rather than restating a definition or a theorem.
+- ev is an additive equivalence from Hom(A0,C) to the actual sections of H^0(C) at op (Scheme.ProEt.mk (id Z)). Its formula is supportedEvaluation: use the inverse single-cohomology comparison, apply H^0(m), and evaluate at 1 using the constant-sheaf adjunction. comparisonUpperStarConstantSheafIso gives the canonical comparison between P.constant Z and the site's ordinary constant sheaf.
+- For every section v, ev.symm v is singleFunctor.map of supportedEvaluationSectionMap followed by goodTruncationNormalization.inv. The sheaf map is constructed by the inverse constant-sheaf adjunction on LinearMap.toSpanSingleton v. Its sectionwise formula is a times v restricted to the test object, including locally constant scalars. No arbitrary sheaf map is assumed. goodTruncationNormalization is the unique map inducing identity on H^0.
+- Consequently (eta.trans ev).symm is the asserted canonical additive isomorphism from global sections to H^2_Z. The last quantified clause writes both identities for the boundary b=(delta 1).app K alpha: evaluation equals the composite, and the inverse composite recovers b. It is valid for every supplied boundary, hence in particular the canonical boundary in thm-pur-with-support-exactness. Alpha is H^1 on the canonical open-complement object of the X site; this is the localized-site realization of H^1(V,j^*K) already used by that dependency. No choice of a boundary or additional exactness hypothesis is needed for these identities of inverse maps.
+
+Dependency declarations used:
+
+- Sheaf.Paper.PurityFiniteSetting: WeilConjectures.PurityFiniteSetting, Coefficient, constant.
+- Mathlib.AlgebraicGeometry.Morphisms.FiniteType: LocallyOfFiniteType, QuasiCompact; Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion: IsClosedImmersion; Mathlib.AlgebraicGeometry.OpenImmersion: IsOpenImmersion.
+- Sheaf.AlgebraicGeometry.ProEtalePairFlasque and its public supported-section module: finiteClosedUpperShriek (the recorded supported-kernel construction); Sheaf.AlgebraicGeometry.SupportLocalizationTriangle: supportClosedDerivedPlus, supportLocalizationTriangle.
+- Sheaf.AlgebraicGeometry.ProEtaleFiniteModules: the recorded equivalence between fixed-ring module sheaves and modules over the actual coefficient ring sheaf, used by the existing support and comparison interfaces.
+- Sheaf.Paper.FiniteTorAmplitudeSites: the recorded native pro-etale DerivedCategory.constructibleFiniteTor. No Tor predicate or constructibility predicate is redefined.
+- The finite declaration recorded in def-weil-exceptional-inverse-image.lean.declarations is AlgebraicGeometry.ProEtale.sfFiniteExceptionalAt, declared in Sheaf.AlgebraicGeometry.FixedFiniteExceptionalAt and reexported through the recorded coefficient-system module. Import its smaller public dependency closure rather than the unrelated integral/rational System interface.
+- Sheaf.AlgebraicGeometry.SpecifiedExceptionalClassHom: specifiedExceptionalHomEquiv and specifiedExceptionalEtale_boundedBelow; Sheaf.AlgebraicGeometry.FixedEtaleOriginWitness: Scheme.FixedEtaleOriginWitness.
+- Sheaf.AlgebraicGeometry.SupportCohomology: supportHypercohomology, derivedSupportSections, supportRestrictionArrow; Sheaf.AlgebraicGeometry.SupportLongExact: sectionHypercohomologyFunctor, SupportSequenceBoundary and exists_support_longExact.
+- Sheaf.Paper.SupportedCohomologyHom: supported_cohomology_hom, normalized using Sheaf.Paper.SupportedHomPullback: proEtaleSupportHomPair, SupportHomPair.Identification and supportedHom_pullback. The import of Sheaf.Paper.SupportedHomAdjunctionTranspose is removed. The three internal support helpers take a Finite P.Coefficient instance, supplied by the property’s inline canonical construction; the main theorem adds no finiteness assumption.
+- Mathlib.Algebra.Homology.DerivedCategory.HomologySequence: DerivedCategory.homologyFunctor; Mathlib's singleFunctorCompHomologyFunctorIso; Sheaf.CategoryTheory.DerivedCategory.GoodTruncationNormalization: goodTruncationNormalization.
+- Sheaf.AlgebraicGeometry.ClosedSupportExceptionalComparison: closedSupportCompactIso. This already published helper is used directly; no copy of the compact-support identification is made.
+- The stated proof dependencies are imported for stage 3, including the finite-type dimension bound, comparison exactness, comparison unit, and ringed module category. The normalized supported-Hom map uses the genuine theorem node lem-pur-supported-hom-pullback. The plain closed-support and truncation definitions now have owning definition nodes. The two new definition-node records below own the already published maps; there are no new or repaired dependency modules.
+
+Edge cases checked: empty Z (all maps and section groups are zero/singletons), Z=X with empty complement, disconnected Z (actual constant sheaf and sections, not a rank-only predicate), K unbounded above, alpha=0, and finite coefficient level 1. No nonemptiness, connectedness, upper bound on K, etale origin of K, or ambient exceptional adjunction is imposed. The inverse sheaf map is natural on every object because the constant-sheaf adjunction glues locally constant scalar multiples, including on the empty object.
+
+Searches: msearch leanfinder, query "Counit normalized comparison of closed support and exceptional inverse image with evaluation of degree zero morphisms at one", returned 8 generic differential-object, single-functor and fraction results; none states this comparison. Loogle query "DerivedCategory.singleFunctor, CategoryTheory.Adjunction.homEquiv" returned 0 hits. Mathlib grep query "supportedClassEvaluation|supported_class_evaluation|supportExceptionalComparison" returned 0 hits. The exact wrapper outputs are retained in searches.jsonl. Repository rg on support/exceptional/evaluation located ClosedSupportExceptionalComparison, SupportedHomAdjunctionTranspose, SupportedHomPullback and GoodTruncationNormalization, which are reused. The requested upstream grep of the item id returned no declaration. No existing declaration combines the support/exceptions comparison, shifted supported-Hom formula, evaluation inverse and boundary identity of this node.
+
+No STATEMENT-DISPUTED issue or statement correction is needed. No git commands or edits were made in the shared read clone. All writes are in the assigned sandbox, and every compiler invocation uses scompile.py.
+
+Validation of the returned version: the original module compiled through scompile.py in sandbox and library mode (29.4 s and 29.0 s). The repair is separately compiled and dry-run below. The retained draft had a missing pair of parentheses around the shifted finite-Tor argument, which parsed as a shift of Prop; that syntax is repaired. The two backward.isDefEq.respectTransparency options avoid expensive unfolding of the published derived-category constructions during elaboration, without changing any statement or construction.
+
+
+## Return repair
+
+The initial saved-packet dry run passed mechanically at 8dcdd5e566a, but inspection confirmed all three H2 findings from the immutable-head return still required repair. The packet was retained and updated against the current read clone; only the item's lean/stmt_deps and the added definition records change.
+
+1. Removed lem-pur-closed-support-exceptional-comparison from the stage-2-added statement dependencies. Added def-pur-closed-support-compact-identification, which owns the existing closedSupportIdentityExtension and closedSupportCompactIso definitions via existing:true. The statement uses their explicit maps, not the exceptional-comparison theorem or a choice of it. Its original Lean import remains because it is the module declaring those maps.
+2. Removed lem-pur-good-truncation-exact-normalization from the stage-2-added statement dependencies. Added def-pur-good-truncation-normalization, owning the existing goodTruncationNormalization via existing:true. This definition selects the unique isomorphism of lem-amb-derived-degree-zero-normalization; that genuine uniqueness theorem is a statement dependency of the new definition node. The exact-normalization theorem stays a proof dependency of the item, as in the accepted stage-1 split.
+3. Removed lem-pur-supported-hom-adjunction-transpose from stmt_deps and removed its public import. The property defines Finite P.Ring using Padic.finite_coefficientExtensionRing, then defines Finite P.Coefficient using exactly inferInstanceAs (Finite (ULift.{u+1} P.Ring)). The three internal support helpers take a Finite P.Coefficient instance, which the property supplies from this inline construction; the main theorem gains no hypothesis.
+
+The return explicitly passed the choice of supportedEvaluationChi from supportedHom_pullback; that genuine dependency remains. The main theorem's signature and all mathematical hypotheses and conclusions are unchanged. No source-statement correction or citer audit is required for this dependency-ownership repair.
+
+## New nodes
+
+**def-pur-closed-support-compact-identification** records the already published identity extension-by-zero normalization and the closed compact-support identification in Sheaf.AlgebraicGeometry.ClosedSupportExceptionalComparison (declarations AlgebraicGeometry.ProEtale.closedSupportIdentityExtension and AlgebraicGeometry.ProEtale.closedSupportCompactIso). The finite commutative ring, arbitrary schemes, closed immersion, quasi-compact complementary open and small-site size convention match its signature exactly. The identity extension is constructed by left-adjoint uniqueness; the second map is the explicit derived identity-extension composite followed by the canonical exact direct-image comparison. The source is the first paragraph of the current Gysin proof and the recorded closed-support comparison's step 2. The three fresh msearch calls (LeanSearch, Loogle, Mathlib grep) found only generic compact-support/adjunction ingredients, while repository rg found the exact Sheaf definitions but no owning definition node. blueprint_refs search returned 40 broad closed-support/comparison nodes and no owning definition. The new node therefore uses existing:true, with no copied module or data.
+
+**def-pur-good-truncation-normalization** records DerivedCategory.goodTruncationNormalization in Sheaf.CategoryTheory.DerivedCategory.GoodTruncationNormalization. Its arbitrary abelian category and independent object, morphism and localization universes are inherited unchanged from the existing signature. Its sole object hypothesis is vanishing away from degree zero; its output is K isomorphic to the single of H0(K), chosen from the genuine uniqueness theorem with identity H0 normalization. Sources are Stacks Tags 0118 and 06XS(2) and the Gysin proof's second paragraph. Fresh LeanSearch, Loogle and Mathlib grep found generic single/homology comparisons only; rg found the exact Sheaf definition attached to a theorem node and one consumer, no owning definition node, and no upstream WeilConjectures match. blueprint_refs search returned three unrelated integral/levelwise truncation nodes. This node uses existing:true and adds no Lean declaration.
+
+Fresh searches are retained verbatim in searches.jsonl and in each new node's mathlib_searches. The finite ring and coefficient lift preserve all previously checked edge cases. The two existing maps are also meaningful on empty schemes, and the unique good-truncation normalization includes the zero abelian category. No additional theorem or sorry is introduced.
+
+
+## Final repair self-check
+
+The retained packet contains all three requested H2 repairs. Compared with the current
+read-clone node, only lean and the authorized added statement dependencies differ;
+statement, proof and proof_deps are verbatim. The two new existing:true definition
+records were checked against the published definitions and their source docstrings.
+The main theorem signature matches lean.statement verbatim, all eight declarations
+are listed, autoImplicit is disabled, every line is at most 100 characters, and the
+only sorry is the named main theorem.
+
+The initial repaired-packet dry run exposed a compile timeout. Profiling identified
+the coefficient-lift instance search as the expensive elaboration. The property now
+first constructs Finite (ULift P.Ring) by Mathlib's Finite.of_equiv with Equiv.ulift.symm,
+then uses exactly inferInstanceAs (Finite (ULift P.Ring)) for Finite P.Coefficient.
+This is the same canonical finite lift, supplied inline without a new theorem or
+hypothesis; it prevents repeated instance-search unfolding of the coefficient quotient.
+The final module passed scompile.py in both sandbox and library modes, with no errors
+or warnings except the expected main-theorem sorry warning. No timeout limit was changed.
+
+## Second reading by Q40
+
+No second reading by a worker: since 2026-10-17 the worker delivers directly and the maintainer's independent review is the only review.

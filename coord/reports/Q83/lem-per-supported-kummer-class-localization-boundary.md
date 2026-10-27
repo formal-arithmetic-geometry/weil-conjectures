@@ -1,0 +1,46 @@
+## Files written
+
+- `dag/nodes/sec-deligne-laumon-a1/lem-per-supported-kummer-class-localization-boundary.json`: item, statement, split in five steps; no Mathlib match.
+- No new nodes and no Mathlib leaves. `citations.json` contains verbatim statement quotations for every step citation. The search command's `searches.jsonl` is retained.
+
+## Attachments
+
+None. I searched `lean/WeilConjectures/` for the exact blueprint tag, supported Kummer constructions, the localization boundary and the Kummer class. `EtaleCohomology/Purity/Smooth/KummerClass.lean` defines `kummerBoundary` for an abstract HasKummerClass datum; it does not prove that the actual normalized Cartier torsor-extension class equals that boundary. Its `supportedClassMap_bijective` is only an adjunction bijection. `KummerBoundaryComparison.lean` compares the Kummer class of a unit with the classical boundary, not the supported Cartier class. Neither is an attachment for the item.
+
+## WANTED
+
+None.
+
+## What needed correction
+
+The item had no proof. Its arbitrary-scheme statement is retained verbatim, including the unspecified overall sign. I read ILO XVI 3.4.8 on printed p.247 together with the preceding regular strict-local setup on pp.246–247. That context has stronger hypotheses than this item; the proof here instead gives the formal relative-extension argument on arbitrary schemes, marked agent-written. I also read the current blueprint through `literature/blueprint/latest/`: the Cartier-Kummer proof under `sk-lem-geo-cartier`, and the current ancestor `lem-per-artin-gabber-affine-curve` and its unit/chapter. The item's blueprint provenance refers to the historical purity input of that ancestor; I preserve that provenance, without treating the current ancestor's different proof as a new direct occurrence of the item.
+
+Two errors were avoided while constructing the split. Merely comparing the ordinary Chern class would forget the specified lift and could not prove equality with support. Also, equality of forgotten abelian maps alone would not justify equality in the module derived category. The actual split keeps the framed extension and uses the existing integral DerivedUnit and restriction-kernel comparison. A sign in the relative torsor convention matters: the extension normalized to send the section h to zero is the negative of the pushout along h. Step 2 writes the quotient and the map inducing that negative explicitly. The result still asks only for one global sign.
+
+## Unfinished work
+
+None for this split. Existing child nodes remain separate tasks; they have not been split or changed here. No Lean was written and no compiler or build was run.
+
+## Not duplicates
+
+No new nodes were created. I searched the entire DAG for Kummer, relative cones, framed line bundles, supported Yoneda localization and the source place; I also ran `tools/blueprint_refs.py search 'Kummer'` and the more specific supported-principal-divisor search. This found the reusable `lem-per-supported-yoneda-localization`, the unrestricted relative torsor-extension normalization, the integral derived-unit interface and the module restriction-kernel comparison. The existing `lem-per-cartier-gysin-kummer-boundary` assumes a Noetherian excellent regular affine ambient and regular divisor and concerns the regular Gysin class; it does not cover this item's unrestricted Cartier statement. The finite-field/pro-etale nodes `lem-pur-cartier-relative-boundary-realization` and `lem-pur-divisor-normalized-realization` likewise have stronger coefficient/base restrictions, so I did not cite them for the general case.
+
+## Review by Q83
+
+I read delivery-errors B–E in full and checked the five proof steps against their cited statements. For the source I read ILO XVI 3.4.8 and its proof, printed p.247, not just the source sentence in the imported JSON. I also opened the Stacks TeX at Tag 03PL (`etale-cohomology.tex`, `lemma-kummer-sequence`), Tag 0A45 (`lemma-cohomology-with-support-triangle`), Tag 03AJ (`sites-cohomology.tex`, `lemma-torsors-h1`), and Tags 06XP/06XU (`derived.tex`, `section-ext`/`lemma-yoneda-extension`). The relative sign and comparison refinements are supplied by the cited existing DAG statements; they are not falsely attributed verbatim to these tags.
+
+Step 1 uses precisely the definition `O(D)=I_D^vee`. The isomorphism given by multiplication by f and its dual show that the canonical divisor section has coordinate f, not f inverse. This works on nonaffine T as well as affine T because f is global and injectivity is a sheaf hypothesis.
+
+Step 2 uses the pushout e_h as stated in `lem-per-supported-yoneda-localization` and the uniqueness and equivariance conditions in `lem-sp-relative-torsor-extension`. I checked the quotient relation for e_{-h}: [(h,1)] is zero over U. The displayed map of extensions has end maps -1 and identity, exactly the hypotheses of `lem-sc-p1-ext-class-naturality`, so it gives e_{-h}=-e_h. This is a direct pushout calculation, not an additional unstated comparison lemma. In multiplicative G_m notation, -h means h inverse, never a negative regular function.
+
+Step 3 uses the actual normalized supported-boundary predicate `def-asd-ordinary-supported-kummer-boundary`, not just a definition of a twist. That predicate states the equality with the Yoneda product after integral realization. `lem-asd-ordinary-supported-kummer` supplies its canonical map. `lem-amb-kummer-any-base` supplies exactness because ell is invertible; neither G_m term is treated as an F_ell-module. `lem-per-supported-yoneda-localization` explicitly allows nontorsion G_2 and G_3, and states the signed splice/localization identity on arbitrary schemes. It thus applies with both equal to G_m and needs no purity theorem. I checked that this dependency does not depend on the current item.
+
+Step 4 is necessary to detect the module morphism. `lem-sp-etale-supported-integral-derived-unit` supplies the DerivedUnit for the normalized integral generator for every finite ring killed by n, and `def-sp-exact-functor-derived-unit` states that the resulting map on all derived Hom sets is a bijection. I checked n=ell>0 and A=F_ell. The statement of `lem-pur-module-restriction-kernel-comparison` provides all three comparison maps as a morphism of restriction-kernel short exact sequences and makes them quasi-isomorphisms. Applying its chain maps to the explicit signed pairs from `lem-pur-divisor-relative-cone` verifies compatibility with the boundary, rather than assuming it from equality of absolute cohomology. `lem-amb-closed-support-hom` is the derived-complex identification used here. K is a sheaf in degree zero, hence lies in the bounded-below range of the kernel-comparison theorem; the arbitrary-complex DerivedUnit needs no further boundedness.
+
+Step 5 uses `lem-exc-closed-support-triangle` for the triangle with the specified counit and open unit, `lem-pur-divisor-relative-cone` for its kernel/cone boundary, and `lem-amb-closed-support-hom` for the supported Hom object. `lem-exc-closed-ambient` supplies the right adjunction. I checked the sources and targets: lambda has source A_T, beta has source A_D and target Ri^!K[2], and counit composed with i_*beta has source i_*A_D and target K[2]. The adjunction identity lambda=(i_*beta)u_D gives precisely the boundary definition in the item. Transposing the supported class gives the claimed eta_D identity. This uses the whole supported class, not its image under precomposition by u_D; the bijection in Step 4 already detects it before the final adjunction. The sign is single and global from the fixed shift/cone convention, not a locally varying choice.
+
+I tested the empty scheme and the case f a unit (D empty, both supported morphisms zero), and a principal divisor cut out by a nonzerodivisor in a nonreduced nonregular ring, for example T=Spec(k[x,e]/(e^2)), f=x, with ell invertible in k. The argument only uses f being a nonzerodivisor; it does not invoke regularity or an isomorphism of the Gysin map. For ell=2 the two signs coincide, with no change to the argument. A zero function on a nonempty scheme is excluded by the stated injectivity hypothesis. No hidden Noetherian, excellence, smoothness or finite-type hypothesis is used.
+
+Every cited node was opened and its statement read. `citations.json` quotes those statements verbatim, including the exact relevant clauses. Every step is shorter than 2000 characters. The only elementary step is the explicit dual-ideal calculation. No new node restates the item, and no new notion is introduced without an existing interface. Off-unit formal inputs are declared under `split_report.tool_uses`; this does not change the perverse unit route. I retained the imported search record as history and appended only the queries actually executed by the required search command. Both natural-language phrasings, Loogle and source grep were read; their hits concern other mathematical objects and yield no match. The source searches and the Lean declaration searches supply no basis for a Mathlib leaf or attachment.
+
+Dry-run repair: the first preflight rejected the context-dependent wording in Step 5. I replaced it with the explicitly named boundary and adjunction. No mathematical statement or citation changed.

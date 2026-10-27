@@ -1,0 +1,445 @@
+{
+ "id": "lem-sfb-normal-unipotent-subgroup-spreading",
+ "kind": "statement",
+ "title": "Spreading a specified normal unipotent subgroup with nontrivial geometric fibres",
+ "statement": "Let $F$ be a field and $K/F$ an algebraically closed field extension [def-weil-field, def-pc-field-extension, def-weil-algebraic-closure]. Let $J$ be a smooth affine $F$-group scheme of finite type [def-sc-group-scheme, def-sbc-smooth-morphisms, pqf-def-affine-morphism, def-weil-finite-type-morphism]. Put $J_K=J\\times_{\\operatorname{Spec}F}\\operatorname{Spec}K$ [def-pc-fibre-product]. Suppose $N\\hookrightarrow J_K$ is a nontrivial smooth connected closed normal subgroup scheme [def-sc-group-scheme-subgroup, def-weil-connected-scheme, def-weil-closed-immersion] which is unipotent: it admits a faithful finite-dimensional matrix representation in which every point over every algebraically closed extension has nilpotent difference from the identity matrix. Nontrivial means not isomorphic to the identity group scheme $1=\\operatorname{Spec}K$ with its unique group law. There exist a finitely generated $F$-subalgebra $A\\subseteq K$ and a smooth affine group scheme $\\mathcal N$ of finite presentation over $\\operatorname{Spec}A$ [def-sbc-locally-finite-presentation], with a closed normal inclusion $\\mathcal N\\hookrightarrow J_A=J\\times_F\\operatorname{Spec}A$, such that its base change to $K$ identifies with the given inclusion $N\\hookrightarrow J_K$. Here normality over $A$ means that the image on points is a normal subgroup of $J_A(B)$ for every commutative $A$-algebra $B$. For every algebraically closed field $E$ and homomorphism $A\\to E$, the closed normal subgroup $\\mathcal N_E\\subseteq J_E$ is nontrivial, smooth, connected and unipotent in the matrix sense just specified. No connectedness or reductivity assumption on $J$, and no perfectness assumption on $F$, is imposed.",
+ "source": {
+  "document": "literature/conrad-reductive-group-schemes.pdf; literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Conrad, Reductive group schemes, Exercise 3.4.1(i)-(ii), printed p.104, applied to the specified normal unipotent subgroup (no reductivity hypothesis is needed for the spreading assertion); Milne Corollary 16.24, printed p.332, and Section 6.45, printed p.135, for additive series over an algebraically closed field and extension closure. No Stacks tag states this combined normal-unipotent model assertion. Conrad local PDF WANTED; read online https://math.stanford.edu/~conrad/papers/luminysga3smf.pdf."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-pc-field-extension",
+  "def-weil-algebraic-closure",
+  "def-sc-group-scheme",
+  "def-sbc-smooth-morphisms",
+  "pqf-def-affine-morphism",
+  "def-weil-finite-type-morphism",
+  "def-pc-fibre-product",
+  "def-sc-group-scheme-subgroup",
+  "def-weil-connected-scheme",
+  "def-weil-closed-immersion",
+  "def-sbc-locally-finite-presentation",
+  "def-sfb-solvable-group-structure"
+ ],
+ "proof": [
+  {
+   "text": "The field $K$ is perfect: an algebraic extension of an algebraically closed field is trivial. Apply the perfect-field additive-series theorem to $N$. It is affine of finite type, since a closed subscheme of the affine finite-type $J_K$ has a finitely generated quotient coordinate algebra. Obtain $N=N_0\\supseteq\\cdots\\supseteq N_m=1$, with smooth connected terms and specified quotient isomorphisms $N_j/N_{j+1}\\simeq\\mathbf G_{a,K}$. Here $m\\geq1$, since $m=0$ would give $N=1$. The affine normal-quotient theorem supplies faithfully flat finitely presented quotient maps $q_j:N_j\\to\\mathbf G_{a,K}$ with the specified kernel $N_{j+1}$. All terms have finitely presented coordinate algebras: a field is Noetherian (its only ideals are $0$ and $K$), so apply finite-type implies finite-presentation. The same argument applies to $J$ over $F$.",
+   "uses": [
+    "lem-sfb-perfect-unipotent-additive-series",
+    "lem-sfb-affine-normal-quotient-geometry",
+    "lem-weil-pbc-finite-type-noetherian-finite-presentation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Corollary 16.24, printed p.331; Theorem 5.28 and quotient discussion, pp.104--105; finite-presentation input: Stacks Algebra Tag 00FP, lemma-Noetherian-finite-type-is-finite-presentation"
+   }
+  },
+  {
+   "text": "Index by the set of finitely generated $F$-subalgebras $A\\subseteq K$, ordered by inclusion. It is nonempty, directed (adjoin both finite generating sets), and has union $K$ (adjoin a given element). Thus $\\operatorname{Spec}K=\\varprojlim_A\\operatorname{Spec}A$ by the affine-limit theorem. These bases are affine, hence qcqs, and every transition is affine. Descend the finite family $N_j$ to finite-presentation qcqs models at a common stage using family descent. Apply affineness descent to their structure maps, and pass to a common larger stage, to make all models affine. Keep $N_m=1_A$, $\\mathbf G_{a,A}=\\operatorname{Spec}A[t]$, and $J_A$ as their specified models. Products are the actual fibre products of these models. Finite presentation of their coordinate algebras follows from the tensor-product base-change and composition clauses.",
+   "uses": [
+    "lem-weil-pbc-limit-affine-transition",
+    "lem-weil-pbc-finite-presentation-family-descent",
+    "lem-weil-pbc-descend-affine",
+    "lem-weil-pbc-finite-presentation-base-change-composition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/limits.tex",
+    "place": "Tags 01YW, lemma-directed-inverse-system-has-limit; 01ZM(1), lemma-descend-finite-presentation; 01ZN, lemma-descend-affine-finite-presentation; affine tensor presentation"
+   }
+  },
+  {
+   "text": "Use the arrow and equality clauses of spreading out on the chosen affine models and their actual products. Descend multiplication, inverse and unit on every $N_j$, the inclusions $N_{j+1}\\to N_j$ and $i:N_0\\to J_A$, and $q_j:N_j\\to\\mathbf G_{a,A}$. Impose associativity, both unit and inverse identities and the homomorphism identities as equalities on products with at most three factors. Include the conjugation map $c:J_K\\times_KN\\to N$ and its equality $i(c(g,n))=g\\,i(n)g^{-1}$. This map exists because the given normality on every algebra gives a natural map into $N$; representability identifies it with a morphism. Descend that map and equality as well. There are finitely many arrows and identities, so successive applications of the two clauses and a common refinement suffice. In particular all identities hold as scheme morphisms, not only on field-valued points; the model of $J$ retains its original group law.",
+   "uses": [
+    "thm-pd-spreading-out",
+    "lem-galois-yoneda-fully-faithful"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/limits.tex",
+    "place": "Tag 01ZM(2),(3), lemma-descend-finite-presentation, applied to group operations, homomorphisms, and the specified conjugation factorization"
+   }
+  },
+  {
+   "text": "Preserve the kernel assertions, rather than only the equations $q_j i_{j+1}=0$. At the stage just chosen form the actual affine fibre product $T_j=N_j\\times_{\\mathbf G_a}1_A$. It is finitely presented over $A$: if $N_j=\\operatorname{Spec}B_j$, its algebra is $B_j/(q_j^*t)$. The inclusion induces $a_j:N_{j+1}\\to T_j$. Over $K$, $a_j$ is an isomorphism by the kernel assertion in step 1. Descend its specified inverse $b_j:(T_j)_K\\to(N_{j+1})_K$ by the arrow clause of spreading out, and descend $a_jb_j=1$ and $b_ja_j=1$ by its equality clause. After finitely many refinements, $N_{j+1}$ is exactly the scheme-theoretic kernel of $q_j$ at the stage. This construction uses actual fibre products throughout, so the kernel identities persist under every base change.",
+   "uses": [
+    "thm-pd-spreading-out"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/limits.tex",
+    "place": "Tag 01ZM(2),(3), lemma-descend-finite-presentation: inverse arrows and both inverse identities for the kernel comparison maps"
+   }
+  },
+  {
+   "text": "Apply eventual smoothness to each structure map $N_j\\to\\operatorname{Spec}A$, eventual closed immersion to all subgroup inclusions including $i:N_0\\to J_A$, and eventual flatness and eventual surjectivity to each $q_j$. Their limit maps have these properties by step 1 and the given inclusion. Every map is of finite presentation: for affine models $C=A[x]/(f)$, $B=A[y]/(g)$, a map $C\\to B$ sending $x_i$ to $p_i(y)$ presents $B$ as $C[y]/(g(y),x_i-p_i(y))$. Thus the required local finite type or local finite presentation hypotheses hold, and all sources, targets and bases are affine qcqs. Refine successively to retain all the finitely many properties; smoothness, closed immersion, flatness and surjectivity persist by their base-change lemmas. Call the resulting ring $A$ and put $\\mathcal N=N_0$. For every $A$-algebra $B$, the conjugation identity of step 3 shows $g\\,i(N_0(B))g^{-1}\\subseteq i(N_0(B))$ for every $g\\in J_A(B)$; applying it to $g^{-1}$ gives equality. Closed immersion gives injectivity on all these points. Hence $\\mathcal N$ is a closed normal subgroup of $J_A$.",
+   "uses": [
+    "lem-weil-pbc-descend-smooth-qcqs",
+    "lem-weil-pbc-descend-closed-immersion",
+    "lem-weil-pbc-descend-flat-finite-presentation",
+    "lem-weil-pbc-descend-surjective",
+    "lem-pc-proper-base-change",
+    "lem-weil-pbc-closed-immersion-base-change",
+    "lem-weil-pbc-flat-morphism-base-change",
+    "lem-weil-pbc-surjective-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/limits.tex",
+    "place": "Tags 01ZP, 04AI, 07RR, labels lemma-descend-closed-immersion-finite-presentation, lemma-descend-flat-finite-presentation, lemma-descend-surjective; lemma-descend-smooth; permanence: Morphisms base-change lemmas"
+   }
+  },
+  {
+   "text": "Fix an algebraically closed field $E$ and $A\\to E$. Base change gives smooth affine finite-type groups $(N_j)_E$, closed inclusions, and flat surjective finitely presented homomorphisms $(q_j)_E:(N_j)_E\\to\\mathbf G_{a,E}$ with kernel $(N_{j+1})_E$. Use the cited base-change clauses for smoothness, closed immersion, flatness, surjectivity and finite presentation. Products, units and inverse equalities in steps 3--4 give the asserted kernel after this base change. For completeness these maps represent the fppf quotients: for any $E$-scheme $T\\to\\mathbf G_a$, the pullback of $(q_j)_E$ is itself a flat surjective finitely presented covering on which the section lifts. Two lifts $x,y$ have the same image precisely when $x^{-1}y$ belongs to the specified kernel, since $q_j$ is a homomorphism and the kernel square is cartesian. Representable presheaves are fppf sheaves: every fppf covering is fpqc by the cited covering theorem, and compatible maps glue uniquely by representable fpqc descent. Thus the sheaf of right cosets is the represented sheaf of $\\mathbf G_a$. This checks the exactness hypotheses needed in the next step without assuming surjectivity on every algebra's points.",
+   "uses": [
+    "lem-pc-proper-base-change",
+    "lem-weil-pbc-closed-immersion-base-change",
+    "lem-weil-pbc-flat-morphism-base-change",
+    "lem-weil-pbc-surjective-base-change",
+    "lem-weil-pbc-qcqs-morphism-permanence",
+    "def-pc-fppf-site",
+    "lem-trf-fppf-covering-is-fpqc",
+    "lem-weil-pbc-fpqc-representable-descent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/limits.tex",
+    "place": "Conrad Exercise 3.4.1(ii), explicit base-change verification using Morphisms base-change lemmas; quotient verification from the covering and cartesian kernel"
+   }
+  },
+  {
+   "text": "Induct downwards on $j$, starting with $(N_m)_E=1_E$, which is connected and unipotent. The additive group is smooth by affine-space smoothness and connected by connectedness of the affine-line fibre over $\\operatorname{Spec}E$. It is unipotent in the required matrix sense via the faithful closed representation $z\\mapsto\\left(\\begin{smallmatrix}1&z\\\\0&1\\end{smallmatrix}\\right)$; its difference from the identity squares to zero over every extension field. If $(N_{j+1})_E$ is connected and unipotent, the exact sequence verified in step 6 and algebraic-group property permanence imply that $(N_j)_E$ is connected. The smooth unipotent-extension theorem then implies that $(N_j)_E$ is unipotent in precisely the matrix sense in the item. Its hypotheses hold: $E$ is algebraically closed, all three groups are smooth affine of finite type, the kernel is a closed normal subgroup, and the quotient is the represented fppf quotient of step 6. This proves connectedness and unipotence of $\\mathcal N_E$.",
+   "uses": [
+    "def-sc-gm-ga",
+    "sbc-lem-affine-space-smooth",
+    "lem-pur-affine-projection-connected-fibres",
+    "lem-sfb-exact-algebraic-group-property-permanence",
+    "lem-sfb-smooth-unipotent-extension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 8.1(a), printed p.149; Section 6.45, printed p.135, extension closure; affine-line inputs are the existing scheme-geometric lemmas"
+   }
+  },
+  {
+   "text": "Finally $m\\geq1$, so $(q_0)_E:\\mathcal N_E\\to\\mathbf G_{a,E}$ is surjective. If $\\mathcal N_E$ were the identity group, every group homomorphism from it to $\\mathbf G_{a,E}$ would be its zero section, whose image misses the point $1\\ne0$. This contradicts surjectivity. Thus every geometric fibre is nontrivial. The ring $A$ is a finitely generated $F$-subalgebra of $K$ by its choice of index, and the finite-stage comparison isomorphisms identify $\\mathcal N_K\\hookrightarrow J_K$ with the given inclusion, since that arrow and its relations were descended together. No argument used connectedness or reductivity of $J$, or perfectness of $F$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Assembly of the positive-length series and the preserved comparison with the given subgroup"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-perfect-unipotent-additive-series",
+  "lem-sfb-affine-normal-quotient-geometry",
+  "lem-weil-pbc-finite-type-noetherian-finite-presentation",
+  "lem-weil-pbc-limit-affine-transition",
+  "lem-weil-pbc-finite-presentation-family-descent",
+  "lem-weil-pbc-descend-affine",
+  "lem-weil-pbc-finite-presentation-base-change-composition",
+  "thm-pd-spreading-out",
+  "lem-galois-yoneda-fully-faithful",
+  "lem-weil-pbc-descend-smooth-qcqs",
+  "lem-weil-pbc-descend-closed-immersion",
+  "lem-weil-pbc-descend-flat-finite-presentation",
+  "lem-weil-pbc-descend-surjective",
+  "lem-pc-proper-base-change",
+  "lem-weil-pbc-closed-immersion-base-change",
+  "lem-weil-pbc-flat-morphism-base-change",
+  "lem-weil-pbc-surjective-base-change",
+  "lem-weil-pbc-qcqs-morphism-permanence",
+  "def-pc-fppf-site",
+  "lem-trf-fppf-covering-is-fpqc",
+  "lem-weil-pbc-fpqc-representable-descent",
+  "def-sc-gm-ga",
+  "sbc-lem-affine-space-smooth",
+  "lem-pur-affine-projection-connected-fibres",
+  "lem-sfb-exact-algebraic-group-property-permanence",
+  "lem-sfb-smooth-unipotent-extension"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf; literature/stacks-project/limits.tex",
+  "place": "Q37 explicit assembly of Milne Corollary 16.24 and Section 6.45 with Stacks limit descent; follows the route of Conrad Exercise 3.4.1(ii), whose local PDF is WANTED."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "group.*descend|descend.*group|normalSubgroupScheme",
+   "results": "{\"t\": \"2026-10-24T12:01:23Z\", \"tool\": \"grep\", \"query\": \"group.*descend|descend.*group|normalSubgroupScheme\", \"sub\": \"\", \"ok\": true, \"n_hits\": 11, \"note\": \"\", \"top\": [\"Mathlib/GroupTheory/Nilpotent.lean\", \"Mathlib/GroupTheory/Nilpotent.lean\", \"Mathlib/GroupTheory/Nilpotent.lean\", \"Mathlib/GroupTheory/Nilpotent.lean\", \"Mathlib/GroupTheory/Nilpotent.lean\", \"Mathlib/GroupTheory/QuotientGroup/Defs.lean\", \"Mathlib/GroupTheory/QuotientGroup/Defs.lean\", \"Mathlib/GroupTheory/QuotientGroup/Defs.lean\"], \"digest\": \"2cf9263a9cf89161\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: smooth-algebra descent is only part of the assertion; none of the hits gives a specified closed normal subgroup model with nontrivial connected unipotent geometric fibres. Abstract group and module descent hits concern different objects."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Spread out finitely many smooth affine group schemes and exact sequences with additive group quotients from a field extension to a finite type subalgebra",
+   "results": "{\"t\": \"2026-10-24T12:01:23Z\", \"tool\": \"leansearch\", \"query\": \"Spread out finitely many smooth affine group schemes and exact sequences with additive group quotients from a field extension to a finite type subalgebra\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.AffineScheme\", \"AlgebraicGeometry.instIsAffineSigmaObjScheme\", \"AddGroupExtension\", \"AlgebraicGeometry.instLocallyOfFinitePresentationOfIsSmooth\", \"Algebra.Smooth.exists_finiteType\", \"AlgebraicGeometry.isAffine_affineScheme\", \"AddGroupExtension.Equiv.instAddEquivClass\", \"AddGroupExtension.recOn\"], \"digest\": \"645c971f5eb2d41b\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: smooth-algebra descent is only part of the assertion; none of the hits gives a specified closed normal subgroup model with nontrivial connected unipotent geometric fibres. Abstract group and module descent hits concern different objects."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"IsSmooth\"",
+   "results": "{\"t\": \"2026-10-24T12:01:23Z\", \"tool\": \"loogle\", \"query\": \"\\\"AlgebraicGeometry\\\", \\\"IsSmooth\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: smooth-algebra descent is only part of the assertion; none of the hits gives a specified closed normal subgroup model with nontrivial connected unipotent geometric fibres. Abstract group and module descent hits concern different objects."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A finite diagram of smooth affine group schemes, closed normal subgroups and faithfully flat quotient homomorphisms descends from a field extension to a finitely generated subalgebra",
+   "results": "{\"t\": \"2026-10-24T12:01:25Z\", \"tool\": \"leanfinder\", \"query\": \"A finite diagram of smooth affine group schemes, closed normal subgroups and faithfully flat quotient homomorphisms descends from a field extension to a finitely generated subalgebra\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.Smooth.exists_subalgebra_fg\", \"Algebra.Smooth.exists_subalgebra_finiteType\", \"Algebra.Smooth.exists_finiteType\", \"Algebra.IsStandardSmoothOfRelativeDimension.exists_subalgebra_fg\", \"Algebra.Etale.exists_subalgebra_fg\", \"exists_finite_inj_algHom_of_fg\", \"instFiniteObjOpenNormalSubgroupStabilizerHomSurjectiveAuxFunctor\", \"Ideal.Quotient.exists_algHom_fixedPoint_quotient_under\"], \"digest\": \"f6b214332f5227d3\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: smooth-algebra descent is only part of the assertion; none of the hits gives a specified closed normal subgroup model with nontrivial connected unipotent geometric fibres. Abstract group and module descent hits concern different objects."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A nontrivial smooth connected normal unipotent subgroup of a group over a field extension spreads to a finitely generated subalgebra with nontrivial smooth connected unipotent geometric fibres",
+   "results": "{\"t\": \"2026-10-24T12:05:01Z\", \"tool\": \"leanfinder\", \"query\": \"A nontrivial smooth connected normal unipotent subgroup of a group over a field extension spreads to a finitely generated subalgebra with nontrivial smooth connected unipotent geometric fibres\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.Smooth.exists_subalgebra_fg\", \"Algebra.IsStandardSmoothOfRelativeDimension.exists_subalgebra_fg\", \"Algebra.Smooth.exists_subalgebra_finiteType\", \"Algebra.Smooth.exists_finiteType\", \"Algebra.Etale.exists_subalgebra_fg\", \"Algebra.FormallySmooth.of_perfectField\", \"Field.absoluteGaloisGroup.commutator_closure_isNormal\", \"krullTopology_mem_nhds_one_iff_of_normal\"], \"digest\": \"4e46f0eefff3f3d1\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: smooth-algebra descent is only part of the assertion; none of the hits gives a specified closed normal subgroup model with nontrivial connected unipotent geometric fibres. Abstract group and module descent hits concern different objects."
+  },
+  {
+   "tool": "grep",
+   "query": "unipotent.*(subgroup|spread)|normalSubgroupScheme|group.*descend",
+   "results": "{\"t\": \"2026-10-24T12:36:02Z\", \"tool\": \"grep\", \"query\": \"unipotent.*(subgroup|spread)|normalSubgroupScheme|group.*descend\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: abstract closed subgroups, affine-limit sections, and smooth-algebra models do not state descent of the specified normal subgroup with all required geometric-fibre properties."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A closed normal unipotent subgroup scheme spreads out preserving nontrivial smooth connected geometric fibres",
+   "results": "{\"t\": \"2026-10-24T12:36:02Z\", \"tool\": \"leansearch\", \"query\": \"A closed normal unipotent subgroup scheme spreads out preserving nontrivial smooth connected geometric fibres\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Subgroup.normal_unop\", \"Subgroup.normalCore_isClosed\", \"ClosedSubgroup.ctorIdx\", \"Subgroup.normalClosure_normal\", \"ClosedSubgroup\", \"AlgebraicGeometry.FormallyUnramified.casesOn\", \"AlgebraicGeometry.FormallyUnramified.recOn\", \"AlgebraicGeometry.spread_out_unique_of_isGermInjective'\"], \"digest\": \"6a4f8acb4ccf09fc\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: abstract closed subgroups, affine-limit sections, and smooth-algebra models do not state descent of the specified normal subgroup with all required geometric-fibre properties."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"IsSmooth\"",
+   "results": "{\"t\": \"2026-10-24T12:36:02Z\", \"tool\": \"loogle\", \"query\": \"\\\"AlgebraicGeometry\\\", \\\"IsSmooth\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: abstract closed subgroups, affine-limit sections, and smooth-algebra models do not state descent of the specified normal subgroup with all required geometric-fibre properties."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A specified smooth connected normal unipotent subgroup over an algebraically closed field extension spreads to a finitely generated subalgebra with nontrivial unipotent geometric fibres",
+   "results": "{\"t\": \"2026-10-24T12:36:05Z\", \"tool\": \"leanfinder\", \"query\": \"A specified smooth connected normal unipotent subgroup over an algebraically closed field extension spreads to a finitely generated subalgebra with nontrivial unipotent geometric fibres\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.Smooth.exists_subalgebra_fg\", \"Algebra.IsStandardSmoothOfRelativeDimension.exists_subalgebra_fg\", \"Algebra.Smooth.exists_subalgebra_finiteType\", \"Algebra.IsStandardSmooth.out\", \"Algebra.Smooth.exists_finiteType\", \"Algebra.Etale.exists_subalgebra_fg\", \"Algebra.IsStandardSmoothOfRelativeDimension.out\", \"Algebra.FormallySmooth.of_perfectField\"], \"digest\": \"3bd1a6e83f379291\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: abstract closed subgroups, affine-limit sections, and smooth-algebra models do not state descent of the specified normal subgroup with all required geometric-fibre properties."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Descend an affine group scheme with a finite normal series and additive group quotients along a filtered colimit of rings",
+   "results": "{\"t\": \"2026-10-24T12:36:06Z\", \"tool\": \"leanfinder\", \"query\": \"Descend an affine group scheme with a finite normal series and additive group quotients along a filtered colimit of rings\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.AffineScheme.hasColimits\", \"AlgebraicGeometry.exists_appTop_map_eq_zero_of_isAffine_of_isLimit\", \"AddCommGrpCat.FilteredColimits.G\", \"CommGrpCat.FilteredColimits.G\", \"RingHom.EssFiniteType.exists_comp_map_eq_of_isColimit\", \"AlgebraicGeometry.exists_appTop_map_eq_zero_of_isLimit\", \"AlgebraicGeometry.nonempty_isColimit_Γ_mapCocone\", \"AlgebraicGeometry.Scheme.exists_isAffine_of_isLimit\"], \"digest\": \"a62bcf12f02e3627\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: abstract closed subgroups, affine-limit sections, and smooth-algebra models do not state descent of the specified normal subgroup with all required geometric-fibre properties."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-geometric-neutral-reductivity-field-invariance",
+  "date": "2026-10-24",
+  "group": "Q107"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Haboush symmetric-power lifting for a trivial quotient representation. Supporting representation-theoretic input: Steinberg endomorphisms detect a nonzero fixed vector. Supporting Self-duality of rho section modules at characteristic-dependent weights. Supporting input: Positive-characteristic simplicity step, using irreducibility of the Steinberg induced module rather than assuming self-duality. Numerical input to the dimension comparison: Weyl dimension of the induced module. Supporting Kempf vanishing for dominant flag line bundles. Positive-characteristic Andersen–Haboush argument: trivial pushforward of M_((p^r-1)rho), before the Serre twisting calculation. Supporting input: Lemma 2.3, second assertion, and Lemma 2.1, printed pp.153--155: H^0(u,V(lambda))=K v_lambda for p-restricted dominant lambda. With roots positive in Lie(B), V(lambda)=Gamma(M_{-w0 lambda}). Supporting input: Simple-root distributions and infinitesimal subalgebra calculus. Supporting input: pinning-compatible integral-to-geometric distribution comparison, with all positive root divided powers, before simple-root generation. Integral-root-model prerequisite before the comparison: integral Chevalley construction and a positive-root coordinate chart; integral matrix-closure construction: the big cell and its Weyl translates, before identifying the special fibre. Supporting input: Integral closure atlas, exhaustion of each special fibre: exclude extra components using the generic and special identity-component big-cell dimensions. Supporting input: Lemma 3.7 (first assertion, the Iwahori--Matsumoto maximal-boundedness statement) and its application in Proposition 4.3, second paragraph, printed pp.7-8; Cartan double-coset input used to prove the maximal-boundedness prerequisite, before the torus-powers argument. Supporting input: Theorem 1.3, implication (1) to (3), printed pp.1, 6; Definition 3.4 and Lemma 3.6, printed pp.5-6. The complete-DVR cocharacter form, before the non-complete descent of Theorem 4.1. Supporting input: Section 2, Claim 2, printed p.2; Section 3, proof of Theorem 1.3, (1) implies (2), printed p.6, removes the residue-field and splitness restrictions. Supporting input: Claim 2: choose a linear embedding and use reductivity to make the homogeneous quotient affine. Supporting input: Alper, Adequate moduli spaces and geometrically reductive group schemes, Theorem 9.7.5, Proposition 9.3.1(i), Lemma 9.2.5(2),(3), printed pp.522,524,527--528. WANTED local copy; read https://content.algebraicgeometry.nl/2014-4/2014-4-022.pdf. Supporting input: Theorem 9.7.5, reductive-to-geometrically-reductive direction, reductions preceding the final determinant argument, printed p.527; use Lemma 9.2.5(2),(5), Proposition 9.3.1 (base change and descent), Proposition 9.5.1 (quotients and extensions). The result is the conditional reduction, not the geometric reductivity theorem itself; no SGA source is invoked. Supporting input: Theorem 9.7.5 reduction paragraph: etale splitting followed by descent from split groups over the integers. Supporting input: Theorem 6.1.16(2), printed p.196, and Theorem 6.1.17 (Isomorphism Theorem), p.197; pinnings as in Definition 6.1.1, p.186; supporting input for existence in Theorem 6.1.17: Rational split realization of a finite reduced root datum; Spreading the given split complex triple in Conrad Proposition 6.2.12, first proof paragraph, printed p.211; include a chosen base and generators before specializing. Supporting limit-property input: Conrad Corollary 3.1.11, reductivity of a fixed smooth affine model descends to a stage; used before recovering the split torus and pinning. Supporting field-theoretic input to the reductive-locus pullback identity in Conrad Corollary 3.1.11: Milne Proposition 1.34 and Conrad Exercise 3.4.1, before the closed-complement limit argument. Supporting input: Conrad Exercise 3.4.1(i)-(ii), spreading a specified normal unipotent subgroup with positive-length additive composition series before rational specialization.",
+   "via": [
+    "lem-sfb-geometric-neutral-reductivity-field-invariance",
+    "lem-sfb-reductivity-eventual-ring-colimit",
+    "lem-sfb-split-reductive-finite-type-spreading",
+    "lem-sfb-rational-split-root-realization",
+    "lem-sfb-pinned-split-root-classification",
+    "lem-sfb-reductive-etale-integral-models",
+    "lem-sfb-reductive-symmetric-power-dvr-reduction",
+    "lem-sfb-reductive-ring-invariant-power-lifting",
+    "lem-sfb-dvr-reductive-linear-affine-quotient",
+    "lem-sfb-reductive-nodal-equivariant-torsor-extension",
+    "lem-sfb-complete-dvr-cocharacter-cartan",
+    "lem-sfb-split-reductive-dvr-cartan-decomposition",
+    "lem-sfb-split-reductive-integral-maximal-bounded",
+    "lem-sfb-quasi-reductive-special-connectedness",
+    "lem-sfb-integral-chevalley-weyl-atlas",
+    "lem-sfb-chevalley-integral-root-model",
+    "lem-sfb-borel-kostant-distribution-comparison",
+    "lem-sfb-borel-simple-root-distribution-calculus",
+    "lem-sfb-restricted-induced-infinitesimal-invariants",
+    "lem-sfb-flag-frobenius-rho-pushforward",
+    "lem-sfb-dominant-flag-line-kempf-vanishing",
+    "lem-sfb-induced-weyl-dimension-formula",
+    "lem-sfb-steinberg-induced-module-irreducible",
+    "lem-sfb-rho-section-self-duality",
+    "lem-sfb-steinberg-endomorphism-detection",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-normal-unipotent-subgroup-spreading",
+  "worker": "stage1",
+  "summary": "Q37: retained the statement; assembled the existing perfect-field additive-series theorem, affine quotient geometry, limit descent of objects/arrows/identities and morphism properties, and fibrewise extension permanence. No new nodes: the DAG already contains every non-elementary input. Kernel comparison inverses and conjugation factorization are explicitly descended; positivity of series length proves nontriviality after every specialization.",
+  "blueprint": "Supports the inherited ancestry from det-thm-sf-ctf-stability-direct-images proof (3), specifically Conrad Exercise 3.4.1(ii) in the geometric-neutral-reductivity field-invariance prerequisite. Read latest/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/{_section.md,sk-thm-sf-ctf-stability.proof.md,sk-thm-sf-ctf-stability-direct-images.proof.md}; the latest direct-images text does not itself state this supporting algebraic-group lemma. Existing null ancestor retained as printed by blueprint_refs.py ancestor; no chapter or unit route changed.",
+  "tool_uses": [
+   {
+    "node": "lem-galois-yoneda-fully-faithful",
+    "why": "Turns the given natural conjugation-on-algebra-points factorization into its scheme morphism. This is a general scheme-theoretic tool, not a replacement of the unit route."
+   },
+   {
+    "node": "lem-trf-fppf-covering-is-fpqc",
+    "why": "The general topology comparison permits applying representable fpqc descent to fppf coverings; no trace-formula assertion is used. This is a general scheme-theoretic tool, not a replacement of the unit route."
+   },
+   {
+    "node": "lem-weil-pbc-fpqc-representable-descent",
+    "why": "Verifies that the represented additive-group presheaf is an fppf sheaf before identifying the quotient. This is a general scheme-theoretic tool, not a replacement of the unit route."
+   },
+   {
+    "node": "lem-weil-pbc-finite-type-noetherian-finite-presentation",
+    "why": "Converts finite-type affine algebras over the fields F and K to finite presentations. This is a general scheme-theoretic tool, not a replacement of the unit route."
+   },
+   {
+    "node": "lem-weil-pbc-limit-affine-transition",
+    "why": "Identifies Spec K with the affine inverse limit of the finite-type subalgebra bases. This is a general scheme-theoretic tool, not a replacement of the unit route."
+   },
+   {
+    "node": "lem-weil-pbc-finite-presentation-family-descent",
+    "why": "Supplies object models before any arrow descent is used. This is a general scheme-theoretic tool, not a replacement of the unit route."
+   },
+   {
+    "node": "lem-weil-pbc-descend-affine",
+    "why": "Makes the descended finite family of object models affine. This is a general scheme-theoretic tool, not a replacement of the unit route."
+   },
+   {
+    "node": "lem-weil-pbc-finite-presentation-base-change-composition",
+    "why": "Supplies finite presentation of the affine product models. This is a general scheme-theoretic tool, not a replacement of the unit route."
+   },
+   {
+    "node": "thm-pd-spreading-out",
+    "why": "Supplies arbitrary finitely presented arrow and equality descent, not merely etale descent. This is a general scheme-theoretic tool, not a replacement of the unit route."
+   },
+   {
+    "node": "lem-weil-pbc-descend-smooth-qcqs",
+    "why": "Makes the descended structure maps smooth at a common stage. This is a general scheme-theoretic tool, not a replacement of the unit route."
+   },
+   {
+    "node": "lem-weil-pbc-descend-closed-immersion",
+    "why": "Makes the specified inclusions closed immersions at a stage. This is a general scheme-theoretic tool, not a replacement of the unit route."
+   },
+   {
+    "node": "lem-weil-pbc-descend-flat-finite-presentation",
+    "why": "Makes the additive quotient maps flat at a stage. This is a general scheme-theoretic tool, not a replacement of the unit route."
+   },
+   {
+    "node": "lem-weil-pbc-descend-surjective",
+    "why": "Makes the additive quotient maps surjective at a stage. This is a general scheme-theoretic tool, not a replacement of the unit route."
+   },
+   {
+    "node": "lem-pc-proper-base-change",
+    "why": "Only its smoothness clause is used to retain smoothness under refinement and specialization. This is a general scheme-theoretic tool, not a replacement of the unit route."
+   },
+   {
+    "node": "lem-weil-pbc-closed-immersion-base-change",
+    "why": "Retains closed inclusions under refinement and specialization. This is a general scheme-theoretic tool, not a replacement of the unit route."
+   },
+   {
+    "node": "lem-weil-pbc-flat-morphism-base-change",
+    "why": "Retains flat quotient maps under refinement and specialization. This is a general scheme-theoretic tool, not a replacement of the unit route."
+   },
+   {
+    "node": "lem-weil-pbc-surjective-base-change",
+    "why": "Retains surjective quotient maps under refinement and specialization. This is a general scheme-theoretic tool, not a replacement of the unit route."
+   },
+   {
+    "node": "lem-weil-pbc-qcqs-morphism-permanence",
+    "why": "Its finite-presentation base-change clause verifies that specialized quotient maps are fppf. This is a general scheme-theoretic tool, not a replacement of the unit route."
+   },
+   {
+    "node": "sbc-lem-affine-space-smooth",
+    "why": "Verifies smoothness of the additive quotient in the fibrewise induction. This is a general scheme-theoretic tool, not a replacement of the unit route."
+   },
+   {
+    "node": "lem-pur-affine-projection-connected-fibres",
+    "why": "Verifies connectedness of the affine line over E in the fibrewise induction. This is a general scheme-theoretic tool, not a replacement of the unit route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-galois-yoneda-fully-faithful",
+  "lem-trf-fppf-covering-is-fpqc",
+  "lem-weil-pbc-fpqc-representable-descent",
+  "lem-weil-pbc-finite-type-noetherian-finite-presentation",
+  "lem-weil-pbc-limit-affine-transition",
+  "lem-weil-pbc-finite-presentation-family-descent",
+  "lem-weil-pbc-descend-affine",
+  "lem-weil-pbc-finite-presentation-base-change-composition",
+  "thm-pd-spreading-out",
+  "lem-weil-pbc-descend-smooth-qcqs",
+  "lem-weil-pbc-descend-closed-immersion",
+  "lem-weil-pbc-descend-flat-finite-presentation",
+  "lem-weil-pbc-descend-surjective",
+  "lem-pc-proper-base-change",
+  "lem-weil-pbc-closed-immersion-base-change",
+  "lem-weil-pbc-flat-morphism-base-change",
+  "lem-weil-pbc-surjective-base-change",
+  "lem-weil-pbc-qcqs-morphism-permanence",
+  "sbc-lem-affine-space-smooth",
+  "lem-pur-affine-projection-connected-fibres"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q37-3f6a50a8c",
+  "group": "Q37",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q37-3f6a50a8c (reviewer sub-agent of L); spot-checked: First split with the statement unchanged. 8 steps, no new nodes, proof_deps = union of the step uses. I read all 26 cited statements, plus def-sc-group-scheme-subgroup and def-sfb-solvable-group-structure. Source checked: Milne iAG2017 Cor. 16.24, with 16.22-16.23 before it. The cited limit tags (01ZM/01ZN/01ZP/07RR/01YW) were checked against their node statements. Step by step: (1) K perfect; the additive series gives m>=1 for nontrivial N; normal-quotient geometry gives fppf q_j with kernel N_{j+1}. (2) The index of finitely generated F-subalgebras is directed with colimit K, and family descent plus affine descent give the models. (3) Spreading-out clauses 2 and 3 descend arrows and identities; conjugation is a morphism by def-sc-group-scheme-subgroup normality on all algebras plus Yoneda. (4) The kernel is an actual fibre product B_j/(q_j*t) with a descended inverse, so it survives base change. (5) All four property-descent hypotheses hold; I verified the fp-of-maps presentation by hand; normality holds on all A-algebras. (6) The fppf-quotient hypothesis of def-sfb-solvable-group-structure is exactly flat, surjective, lfp and kernel. (7) Exact-permanence gives connectedness and the smooth-unipotent-extension theorem gives unipotence; G_a is smooth, connected and unipotent via [[1,z],[0,1]]. (8) Surjectivity of q_0 gives nontriviality. Batch-5 flags: perfect-unipotent-additive-series, affine-normal-quotient-geometry, exact-algebraic-group-property-permanence and smooth-unipotent-extension reach sec-trace-formula only through general definitions and general fpqc descent (def-trf-scheme-algebraic-space, def-trf-scheme-cover-descent-datum, lem-trf-smooth-fpqc-base-descent). lem-trf-fppf-covering-is-fpqc is just the fppf-is-fpqc comparison. None is part of the trace formula or Poincare duality or their proofs, so all are accepted. All 20 declared tool_uses accepted. Minor, unchanged: source.place prints Milne 16.24 as p.332; the report and steps say p.331, and I did not check the printed page."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.GroupScheme.NormalUnipotentSubgroupSpreading",
+  "declaration": "AlgebraicGeometry.NormalUnipotentSubgroupSpreading.exists_model",
+  "declarations": [
+   "AlgebraicGeometry.NormalUnipotentSubgroupSpreading.scalarChange",
+   "AlgebraicGeometry.NormalUnipotentSubgroupSpreading.projection",
+   "AlgebraicGeometry.NormalUnipotentSubgroupSpreading.IdentifiesInclusion",
+   "AlgebraicGeometry.NormalUnipotentSubgroupSpreading.exists_model"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/GroupScheme/NormalUnipotentSubgroupSpreading.lean",
+  "statement": "theorem exists_model {F K : Type u} [Field F] [Field K] [Algebra F K] [IsAlgClosed K] (J : Grp (Over (Spec (.of F)))) [Smooth J.X.hom] [IsAffineHom J.X.hom] [LocallyOfFiniteType J.X.hom] [QuasiCompact J.X.hom] (N : Grp (Over (Spec (.of K)))) (i : N ⟶ (scalarChange (algebraMap F K)).obj J) [IsClosedSubgroupScheme i.hom.hom] [IsNormalSubgroupScheme i.hom.hom] [Smooth N.X.hom] [ConnectedSpace N.X.left] (hN : SolvableGroupStructure.IsUnipotent N) (hne : ¬ Nonempty (N ≅ Grp.trivial (Over (Spec (.of K))))) : ∃ (A : Subalgebra F K), A.FG ∧ ∃ (M : Grp (Over (Spec (.of A)))) (j : M ⟶ (scalarChange (algebraMap F A)).obj J), Smooth M.X.hom ∧ IsAffineHom M.X.hom ∧ LocallyOfFinitePresentation M.X.hom ∧ IsClosedImmersion j.hom.hom.left ∧ (∀ (B : Type u) [CommRing B] [Algebra A B], (IsMonHom.monoidHom j.hom.hom (Over.mk (Spec.map (CommRingCat.ofHom (algebraMap A B))))).range.Normal) ∧ IdentifiesInclusion J N i A M j ∧ ∀ (E : Type u) [Field E] [IsAlgClosed E] (a : A →+* E), ¬ Nonempty ((scalarChange a).obj M ≅ Grp.trivial (Over (Spec (.of E)))) ∧ Smooth ((scalarChange a).obj M).X.hom ∧ ConnectedSpace ((scalarChange a).obj M).X.left ∧ SolvableGroupStructure.IsUnipotent ((scalarChange a).obj M) ∧ IsClosedSubgroupScheme ((scalarChange a).map j).hom.hom ∧ IsNormalSubgroupScheme ((scalarChange a).map j).hom.hom",
+  "branch": "sheaf-dag",
+  "by": "Q149",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-80c164849",
+  "group": "Q149",
+  "result": "pass",
+  "note": "Node diff vs side-live: only lean (new record, statement verbatim in file) and stmt_deps (+def-sfb-solvable-group-structure, landed, allowed). Every hypothesis matches the node with nothing stronger (recorded IsClosedSubgroupScheme/IsNormalSubgroupScheme on i, Smooth, ConnectedSpace, recorded SolvableGroupStructure.IsUnipotent = node's matrix unipotence, nontriviality as ¬Nonempty(N ≅ Grp.trivial); no assumption on J's connectedness/reductivity or F's perfectness). Conclusion complete: A.FG subalgebra; M smooth + IsAffineHom + LocallyOfFinitePresentation; j closed immersion; normality written out for all A-algebras B (upstream class is field-only); IdentifiesInclusion = group iso M_K ≅ N over K with equal composites to J, which fixes the map into J_K; for all algebraically closed E and all a : A →+* E, the fibre is nontrivial, smooth, connected, IsUnipotent and still closed and normal. Edge cases (trivial N, F=K, transcendental K/F, imperfect F, disconnected J) covered; one universe u, forced by scheme fibre products; no unbound variables. Helpers scalarChange/projection are abbrevs of Mathlib constructions, IdentifiesInclusion is a real Prop; only the main theorem has sorry; docstrings have source place, blueprint tag and all 8 proof steps; all 25 imports exist; no pro-etale substitute. Not recompiled (no file changed). Minor note: scalarChange at a field is the same definition as MultiplicativeType.baseChange, but the version over a general ring is needed for A and A→E."
+ }
+}

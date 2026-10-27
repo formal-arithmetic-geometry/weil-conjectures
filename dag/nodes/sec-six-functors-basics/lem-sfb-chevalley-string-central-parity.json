@@ -1,0 +1,230 @@
+{
+ "id": "lem-sfb-chevalley-string-central-parity",
+ "kind": "statement",
+ "title": "Central root-string brackets and integral half-sums after orienting a root pair",
+ "statement": "Let $\\mathfrak g$ be a finite-dimensional split semisimple Lie algebra over $\\mathbf Q$ [def-wf-lie-algebra], [def-wf-semisimple-lie-algebra], with splitting Cartan subalgebra $\\mathfrak h$ and reduced crystallographic root system $R\\subset\\mathfrak h^\\vee$. Fix a Chevalley basis: $h_i$ are the simple coroots, the $e_\\gamma$ are nonzero root vectors ($[h,e_\\gamma]=\\gamma(h)e_\\gamma$ for $h\\in\\mathfrak h$), $[e_\\gamma,e_{-\\gamma}]=h_\\gamma$, where $h_\\gamma\\in\\mathfrak h$ is the coroot of $\\gamma$, the element of $[\\mathfrak g_\\gamma,\\mathfrak g_{-\\gamma}]$ with $\\gamma(h_\\gamma)=2$ for the root spaces $\\mathfrak g_{\\pm\\gamma}=\\{x\\in\\mathfrak g:[h,x]=\\pm\\gamma(h)x\\text{ for all }h\\in\\mathfrak h\\}$, and for $\\gamma+\\delta\\in R$ one has $[e_\\gamma,e_\\delta]=\\pm(p_{\\gamma,\\delta}+1)e_{\\gamma+\\delta}$, where $p_{\\gamma,\\delta}=\\max\\{p\\ge0:\\delta-p\\gamma\\in R\\}$; the bracket is zero if the sum is neither a root nor zero. Let $u,v\\in R$ be distinct and not opposite. There is an ordering $(a,b)$ of $(u,v)$ for which the following assertions hold. The roots $a,b$ are linearly independent over $\\mathbf Q$. Define $\\operatorname{ad}(x)(y)=[x,y]$, $Y_k=(\\operatorname{ad}e_a)^k(e_b)/k!$, and\n$$p=\\max\\{i\\geq0:b-ia\\in R\\},\\qquad q=\\max\\{i\\geq0:b+ia\\in R\\}.$$\nThen $p+q\\leq3$, $Y_0=e_b$, $Y_k=0$ for $k>q$, and for $0\\leq k\\leq q$ there is an integer $c_k$ with\n$$Y_k=c_k e_{b+ka},\\qquad |c_k|=\\binom{p+k}{k}.$$\nEvery $[Y_i,Y_j]$ commutes in the Lie sense with every $Y_k$: $[[Y_i,Y_j],Y_k]=0$ for $0\\leq i,j,k\\leq q$. For $1\\leq d\\leq2q$ put\n$$C_d=\\frac12\\sum_{\\substack{0\\leq i<j\\leq q\\\\ i+j=d}}[Y_i,Y_j].$$\nIf $2b+da\\notin R$, then $C_d=0$. Otherwise $C_d=z_d e_{2b+da}$ for some $z_d\\in\\mathbf Z$. Empty sums are zero. No assertion about divided powers in an enveloping algebra is part of this statement.",
+ "source": {
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Appendix C, section g, rank-two classification, table (180) and the four diagrams, printed pp.621--622; Section 23h, Theorem 23.71, pp.508--509. Agent-stated local bracket/parity consequence of these sources, not a theorem explicitly stated there."
+ },
+ "stmt_deps": [
+  "def-wf-lie-algebra",
+  "def-wf-semisimple-lie-algebra"
+ ],
+ "proof": [
+  {
+   "text": "Reducedness gives $R\\cap\\mathbf Qu=\\{u,-u\\}$, so distinct nonopposite $u,v$ are independent. Put $W=\\mathbf Qu+\\mathbf Qv$ and $S=R\\cap W$. This is finite, spans $W$, excludes zero and remains reduced. For $r\\in S$ restrict its coroot functional to $W$. The reflection $x\\mapsto x-c_r(x)r$ preserves $W$ and $R$; it is an involution, so permutes $S$, and $c_r(S)\\subseteq\\mathbf Z$, $c_r(r)=2$. Thus $S$ satisfies the rank-two classification hypotheses. Every root membership test below involves vectors in $W$, so membership in $R$ is exactly membership in $S$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Appendix C.12--C.18 and section g, table (180), four diagrams, printed pp.610--611,621--622; Theorem 23.71, printed pp.508--509. Agent calculation from the coordinate lists and the assumed Chevalley bracket normalization."
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-rank-two-root-coordinate-classification] to $S\\subset W$, using its basis $(s,t)$. For coordinates $(x,y)$ set $L=x^2+y^2$ in $A_1\\times A_1$, $L=x^2-xy+y^2$ in $A_2$, $L=x^2-2xy+2y^2$ in $B_2$, and $L=x^2-3xy+3y^2$ in $G_2$. Choose $(a,b)$ from $(u,v)$ with $L(a)\\le L(b)$; ties can be ordered either way. The following table is obtained by substituting the signed coordinate vectors of the four displayed sets into $b+ka$. It lists all possible $(p,q)$:\n$$\\begin{array}{c|l}\nA_1\\times A_1&(0,0)\\\\\nA_2&(1,0),(0,1)\\\\\nB_2&(0,0),(2,0),(0,2),(1,1)\\\\\nG_2&(1,0),(3,0),(0,0),(0,1),(0,3),(2,1),(1,2).\n\\end{array}$$\nFor each pair the integers $k$ giving roots are exactly $-p,-p+1,\\ldots,q$; hence $p+q\\le3$. This is a finite membership calculation: run over all signed roots $a,b$, discard $b=\\pm a$ and $L(a)>L(b)$, and compare the two integer coordinates of $b+ka$ with each signed vector in the relevant list. No conjugacy or transitivity of root pairs is being assumed.",
+   "uses": [
+    "lem-sfb-rank-two-root-coordinate-classification"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Appendix C.12--C.18 and section g, table (180), four diagrams, printed pp.610--611,621--622; Theorem 23.71, printed pp.508--509. Agent calculation from the coordinate lists and the assumed Chevalley bracket normalization."
+   }
+  },
+  {
+   "text": "Write $r_k=b+ka$. The interval just computed gives $p_{a,r_k}=p+k$ for $0\\le k<q$, since $r_k-ja=b+(k-j)a$. Thus the assumed Chevalley formula gives $[e_a,e_{r_k}]=\\varepsilon_k(p+k+1)e_{r_{k+1}}$ with $\\varepsilon_k\\in\\{1,-1\\}$. Repeated substitution, starting from $Y_0=e_b$, yields\n$$Y_k=\\left(\\prod_{j=0}^{k-1}\\varepsilon_j\\right)\\frac{(p+1)\\cdots(p+k)}{k!}e_{r_k}=\\left(\\prod_{j=0}^{k-1}\\varepsilon_j\\right)\\binom{p+k}{k}e_{r_k}.$$\nThe coefficient is an integer of the required absolute value (empty products are one). Since $b+(q+1)a$ is neither a root nor zero, $[e_a,e_{r_q}]=0$. Hence $Y_{q+1}=0$ and all higher $Y_k$ vanish by applying $\\operatorname{ad}e_a$ again.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Appendix C.12--C.18 and section g, table (180), four diagrams, printed pp.610--611,621--622; Theorem 23.71, printed pp.508--509. Agent calculation from the coordinate lists and the assumed Chevalley bracket normalization."
+   }
+  },
+  {
+   "text": "Continue the finite coordinate check from [lem-sfb-rank-two-root-coordinate-classification]. For $0\\le i<j\\le q$ the only cases in which $r_i+r_j=2b+(i+j)a$ is a root are the following:\n$$\\begin{array}{c|c|c|c|c}\n\\text{type}&(p,q)&(i,j)&p_{r_i,r_j}&\\text{root sum}\\\\\nG_2&(0,3)&(0,3)&0&2b+3a\\\\\nG_2&(0,3)&(1,2)&2&2b+3a\\\\\nG_2&(1,2)&(0,1)&2&2b+a.\n\\end{array}$$\nTo compute the fourth column compare $r_j-hr_i$ with the same signed coordinate list for successive nonnegative $h$. For the first two rows, $3b+(3+k)a$ is absent for every $0\\le k\\le3$; for the last row, $3b+(1+k)a$ is absent for every $0\\le k\\le2$. These exclusions use the same two-coordinate comparison. Thus the table also records every possible nonzero bracket and the absence of every root obtained by adding a further $r_k$ to its weight. All these sums are nonzero by independence of $a,b$.",
+   "uses": [
+    "lem-sfb-rank-two-root-coordinate-classification"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Appendix C.12--C.18 and section g, table (180), four diagrams, printed pp.610--611,621--622; Theorem 23.71, printed pp.508--509. Agent calculation from the coordinate lists and the assumed Chevalley bracket normalization."
+   }
+  },
+  {
+   "text": "Bilinearity and the Chevalley zero-bracket rule show that all brackets omitted in step 4 vanish. Also $[Y_i,Y_i]=0$ by alternation and reversed pairs change the sign. For a listed pair its bracket is a scalar multiple of $e_{2b+(i+j)a}$, and the final exclusions in step 4 give $[[Y_i,Y_j],Y_k]=0$ for all $k$. This proves centrality. In particular all cases outside the two listed $G_2$ string types have $C_d=0$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Appendix C.12--C.18 and section g, table (180), four diagrams, printed pp.610--611,621--622; Theorem 23.71, printed pp.508--509. Agent calculation from the coordinate lists and the assumed Chevalley bracket normalization."
+   }
+  },
+  {
+   "text": "It remains to check integrality for the listed pairs; no compatibility of the Chevalley signs is needed. In the $(p,q)=(0,3)$ case, the absolute values of $(c_0,c_1,c_2,c_3)$ are $(1,1,1,1)$. The table and the Chevalley formula give bracket coefficients of absolute values $1$ for $(0,3)$ and $3$ for $(1,2)$. Both contribute only to $C_3$, whose coefficient is $(\\pm1\\pm3)/2\\in\\mathbf Z$. In the $(p,q)=(1,2)$ case the absolute values are $(1,2,3)$; the sole pair $(0,1)$ has bracket coefficient of absolute value $1\\cdot2\\cdot3=6$, so $C_1=\\pm3e_{2b+a}$. Every other $C_d$ is zero. A sum whose weight $2b+da$ is not a root has no nonzero summand by step 4; no weight here is zero. These observations give the required integers $z_d$, with $z_d=0$ whenever the root exists but its bracket sum is empty or zero. If $q=0$, the range $1\\le d\\le2q$ is empty, as required.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Appendix C.12--C.18 and section g, table (180), four diagrams, printed pp.610--611,621--622; Theorem 23.71, printed pp.508--509. Agent calculation from the coordinate lists and the assumed Chevalley bracket normalization."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-rank-two-root-coordinate-classification"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Q26 finite root-coordinate and Chevalley-bracket calculation; Appendix C section g, pp.621--622 supplies the four coordinate lists, Theorem 23.71, pp.508--509 the bracket magnitudes. The centrality and half-sum consequence is not asserted as a theorem of Milne."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "parity|even|commutator|factorial|binom",
+   "results": "{\"t\": \"2026-10-23T23:02:38Z\", \"tool\": \"grep\", \"query\": \"parity|even|commutator|factorial|binom\", \"sub\": \"LinearAlgebra/RootSystem\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"Mathlib/LinearAlgebra/RootSystem/Basic.lean\", \"Mathlib/LinearAlgebra/RootSystem/Finite/G2.lean\", \"Mathlib/LinearAlgebra/RootSystem/BaseExists.lean\", \"Mathlib/LinearAlgebra/RootSystem/Defs.lean\", \"Mathlib/LinearAlgebra/RootSystem/Defs.lean\"], \"digest\": \"d2a32d55987e175b\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: GeckConstruction.e_lie_v_ne (Basic.lean:351) gives a single bracket in a specific representation. RootPairing.chainBotCoeff_add_chainTopCoeff_le_three (Chain.lean:475) bounds string length, and EmbeddedG2.allRoots_eq_map_allCoeffs (Finite/G2.lean:312) lists coordinates. None gives centrality and integral half-sums for arbitrary Chevalley root vectors; those are not one-line specializations."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Chevalley root string divided adjoint coefficients binomial p plus k choose k and even commutator sums in G2",
+   "results": "{\"t\": \"2026-10-23T23:02:38Z\", \"tool\": \"leansearch\", \"query\": \"Chevalley root string divided adjoint coefficients binomial p plus k choose k and even commutator sums in G2\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"RootPairing.EmbeddedG2.allCoeffs\", \"RootPairing.EmbeddedG2.threeShortAddTwoLongRoot_eq\", \"RootPairing.EmbeddedG2.pairing_short_long\", \"RootPairing.EmbeddedG2.pairingIn_threeShortAddTwoLong_left\", \"RootPairing.EmbeddedG2.pairingIn_short_long\", \"RootPairing.EmbeddedG2.shortAddLongRoot_eq\", \"RootPairing.EmbeddedG2.threeShortAddLongRoot\", \"RootPairing.EmbeddedG2.allRoots_eq_map_allCoeffs\"], \"digest\": \"88955d2d3a7544ee\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: GeckConstruction.e_lie_v_ne (Basic.lean:351) gives a single bracket in a specific representation. RootPairing.chainBotCoeff_add_chainTopCoeff_le_three (Chain.lean:475) bounds string length, and EmbeddedG2.allRoots_eq_map_allCoeffs (Finite/G2.lean:312) lists coordinates. None gives centrality and integral half-sums for arbitrary Chevalley root vectors; those are not one-line specializations."
+  },
+  {
+   "tool": "loogle",
+   "query": "RootPairing.chainBotCoeff, RootPairing.chainTopCoeff",
+   "results": "{\"t\": \"2026-10-23T23:02:38Z\", \"tool\": \"loogle\", \"query\": \"RootPairing.chainBotCoeff, RootPairing.chainTopCoeff\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"RootPairing.chainBotCoeff_add_chainTopCoeff_le_three\", \"RootPairing.chainBotCoeff_reflectionPerm_left\", \"RootPairing.chainBotCoeff_reflectionPerm_right\", \"RootPairing.chainTopCoeff_reflectionPerm_left\", \"RootPairing.chainTopCoeff_reflectionPerm_right\", \"RootPairing.chainBotCoeff_chainTopIdx\", \"RootPairing.chainCoeff_chainTopIdx_aux\", \"RootPairing.chainBotCoeff_sub_chainTopCoeff\"], \"digest\": \"0990ad2828c2a81b\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: GeckConstruction.e_lie_v_ne (Basic.lean:351) gives a single bracket in a specific representation. RootPairing.chainBotCoeff_add_chainTopCoeff_le_three (Chain.lean:475) bounds string length, and EmbeddedG2.allRoots_eq_map_allCoeffs (Finite/G2.lean:312) lists coordinates. None gives centrality and integral half-sums for arbitrary Chevalley root vectors; those are not one-line specializations."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For Chevalley root vectors orient the shorter root first then iterated adjoints divided by factorial have integral coefficients and pairwise brackets are central with even grouped sums",
+   "results": "{\"t\": \"2026-10-23T23:02:39Z\", \"tool\": \"leanfinder\", \"query\": \"For Chevalley root vectors orient the shorter root first then iterated adjoints divided by factorial have integral coefficients and pairwise brackets are central with even grouped sums\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"RootPairing.GeckConstruction.f_lie_v_ne\", \"RootPairing.GeckConstruction.e_lie_v_ne\", \"RootPairing.GeckConstruction.isSl2Triple\", \"RootPairing.GeckConstruction.h'\", \"RootPairing.GeckConstruction.h_mem_lieAlgebra\", \"RootPairing.GeckConstruction.lie_e_f_ne\", \"RootPairing.GeckConstruction.lie_e_lie_f_apply\", \"RootPairing.GeckConstruction.lie_h_h\"], \"digest\": \"be86271f03751e20\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: GeckConstruction.e_lie_v_ne (Basic.lean:351) gives a single bracket in a specific representation. RootPairing.chainBotCoeff_add_chainTopCoeff_le_three (Chain.lean:475) bounds string length, and EmbeddedG2.allRoots_eq_map_allCoeffs (Finite/G2.lean:312) lists coordinates. None gives centrality and integral half-sums for arbitrary Chevalley root vectors; those are not one-line specializations."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "In a Chevalley basis the alpha string through beta with alpha no longer than beta is nilpotent of class two and half the grouped bracket sums are integral",
+   "results": "{\"t\": \"2026-10-23T23:02:40Z\", \"tool\": \"leanfinder\", \"query\": \"In a Chevalley basis the alpha string through beta with alpha no longer than beta is nilpotent of class two and half the grouped bracket sums are integral\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"RootPairing.GeckConstruction.isNilpotent_e\", \"RootPairing.GeckConstruction.f_lie_v_ne\", \"RootPairing.GeckConstruction.e_lie_v_ne\", \"RootPairing.GeckConstruction.isNilpotent_f\", \"RootPairing.GeckConstruction.isSl2Triple\", \"LieAlgebra.IsKilling.chainBotCoeff_le_chainLength\", \"RootPairing.GeckConstruction.lie_e_lie_f_apply\", \"LieAlgebra.IsKilling.chainLength_nsmul\"], \"digest\": \"84c5aabf113eb33f\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: GeckConstruction.e_lie_v_ne (Basic.lean:351) gives a single bracket in a specific representation. RootPairing.chainBotCoeff_add_chainTopCoeff_le_three (Chain.lean:475) bounds string length, and EmbeddedG2.allRoots_eq_map_allCoeffs (Finite/G2.lean:312) lists coordinates. None gives centrality and integral half-sums for arbitrary Chevalley root vectors; those are not one-line specializations."
+  },
+  {
+   "tool": "grep",
+   "query": "central|parity|even|binom|factorial",
+   "results": "{\"t\": \"2026-10-23T23:42:29Z\", \"tool\": \"grep\", \"query\": \"central|parity|even|binom|factorial\", \"sub\": \"LinearAlgebra/RootSystem\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"Mathlib/LinearAlgebra/RootSystem/Basic.lean\", \"Mathlib/LinearAlgebra/RootSystem/BaseExists.lean\", \"Mathlib/LinearAlgebra/RootSystem/Defs.lean\", \"Mathlib/LinearAlgebra/RootSystem/Defs.lean\", \"Mathlib/LinearAlgebra/RootSystem/Finite/G2.lean\"], \"digest\": \"03e69488099e4e2f\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: chainBotCoeff_add_chainTopCoeff_le_three (Mathlib/LinearAlgebra/RootSystem/Chain.lean:475) bounds string length only; GeckConstruction.e_lie_v_ne (GeckConstruction/Basic.lean:351) is a single bracket in its specific model. Neither gives centrality or integral half-sums for an arbitrary Chevalley basis."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Chevalley Lie brackets root string divided adjoints binomial coefficients",
+   "results": "{\"t\": \"2026-10-23T23:42:29Z\", \"tool\": \"leansearch\", \"query\": \"Chevalley Lie brackets root string divided adjoints binomial coefficients\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"LieAlgebra.ad_pow_lie\", \"RootPairing.GeckConstruction.lie_h_e\", \"RootPairing.GeckConstruction.e_lie_v_ne\", \"LieModule.toEnd_pow_lie\", \"RootPairing.GeckConstruction.lie_h_f\", \"LieAlgebra.IsKilling.lie_eq_killingForm_smul_of_mem_rootSpace_of_mem_rootSpace_neg_aux\", \"LieAlgebra.lie_mem_genWeightSpace_of_mem_genWeightSpace\", \"RootPairing.GeckConstruction.e_lie_u\"], \"digest\": \"c30b4e4bb7b9520a\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: chainBotCoeff_add_chainTopCoeff_le_three (Mathlib/LinearAlgebra/RootSystem/Chain.lean:475) bounds string length only; GeckConstruction.e_lie_v_ne (GeckConstruction/Basic.lean:351) is a single bracket in its specific model. Neither gives centrality or integral half-sums for an arbitrary Chevalley basis."
+  },
+  {
+   "tool": "loogle",
+   "query": "RootPairing.chainBotCoeff, RootPairing.chainTopCoeff",
+   "results": "{\"t\": \"2026-10-23T23:42:29Z\", \"tool\": \"loogle\", \"query\": \"RootPairing.chainBotCoeff, RootPairing.chainTopCoeff\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"RootPairing.chainBotCoeff_add_chainTopCoeff_le_three\", \"RootPairing.chainBotCoeff_reflectionPerm_left\", \"RootPairing.chainBotCoeff_reflectionPerm_right\", \"RootPairing.chainTopCoeff_reflectionPerm_left\", \"RootPairing.chainTopCoeff_reflectionPerm_right\", \"RootPairing.chainBotCoeff_chainTopIdx\", \"RootPairing.chainCoeff_chainTopIdx_aux\", \"RootPairing.chainBotCoeff_sub_chainTopCoeff\"], \"digest\": \"0990ad2828c2a81b\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: chainBotCoeff_add_chainTopCoeff_le_three (Mathlib/LinearAlgebra/RootSystem/Chain.lean:475) bounds string length only; GeckConstruction.e_lie_v_ne (GeckConstruction/Basic.lean:351) is a single bracket in its specific model. Neither gives centrality or integral half-sums for an arbitrary Chevalley basis."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Chevalley root string divided adjoint coefficients and central pairwise brackets with integral half sums",
+   "results": "{\"t\": \"2026-10-23T23:42:30Z\", \"tool\": \"leanfinder\", \"query\": \"Chevalley root string divided adjoint coefficients and central pairwise brackets with integral half sums\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"LieAlgebra.IsKilling.chainLength_smul\", \"RootPairing.GeckConstruction.f_lie_v_ne\", \"LieAlgebra.IsKilling.lie_eq_killingForm_smul_of_mem_rootSpace_of_mem_rootSpace_neg_aux\", \"RootPairing.GeckConstruction.e_lie_v_ne\", \"LieAlgebra.IsKilling.chainBotCoeff_of_eq_zsmul_add\", \"LieAlgebra.IsKilling.chainLength_nsmul\", \"LieAlgebra.IsKilling.chainTopCoeff_of_eq_zsmul_add\", \"LieAlgebra.IsKilling.apply_coroot_eq_cast'\"], \"digest\": \"defecf1c928e79e1\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: chainBotCoeff_add_chainTopCoeff_le_three (Mathlib/LinearAlgebra/RootSystem/Chain.lean:475) bounds string length only; GeckConstruction.e_lie_v_ne (GeckConstruction/Basic.lean:351) is a single bracket in its specific model. Neither gives centrality or integral half-sums for an arbitrary Chevalley basis."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Iterated brackets of two root vectors divided by factorial form a root string whose generated Lie algebra is two step nilpotent and correction coefficients are integers",
+   "results": "{\"t\": \"2026-10-23T23:43:32Z\", \"tool\": \"leanfinder\", \"query\": \"Iterated brackets of two root vectors divided by factorial form a root string whose generated Lie algebra is two step nilpotent and correction coefficients are integers\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"RootPairing.GeckConstruction.e_lie_v_ne\", \"RootPairing.GeckConstruction.f_lie_v_ne\", \"LieAlgebra.IsKilling.chainLength\", \"LieAlgebra.IsKilling.chainLength_nsmul\", \"LieAlgebra.IsKilling.chainLength_smul\", \"LieModule.chainBotCoeff\", \"LieAlgebra.IsKilling.le_chainBotCoeff_of_rootSpace_ne_top\", \"LieAlgebra.IsKilling.chainBotCoeff_of_eq_zsmul_add\"], \"digest\": \"1c58fbddb4d10d4d\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: chainBotCoeff_add_chainTopCoeff_le_three (Mathlib/LinearAlgebra/RootSystem/Chain.lean:475) bounds string length only; GeckConstruction.e_lie_v_ne (GeckConstruction/Basic.lean:351) is a single bracket in its specific model. Neither gives centrality or integral half-sums for an arbitrary Chevalley basis."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-chevalley-rank-two-straightening",
+  "date": "2026-10-24",
+  "group": "Q146"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Haboush symmetric-power lifting for a trivial quotient representation. Supporting representation-theoretic input: Steinberg endomorphisms detect a nonzero fixed vector. Supporting Borel pairs and actual rho section modules. Supporting input: Integrality of the half sum of positive roots supporting the rho section modules in the Steinberg endomorphism detection input. Supporting lattice proof: Appendix C.35, printed p.615; Theorem 23.55 and Corollary 23.56, printed p.501; Theorem 23.9, printed p.487; Proposition 23.5, printed pp.485--486, centrality and isomorphism criteria. Theorem 23.55: realize the explicitly constructed reduced root datum on L. Supporting proof of root-datum realization: Section 23h, Theorem 23.63 and its rational-field extension, pp.503--508; Chevalley bases and Theorem 23.71, pp.508--509; admissible lattice and equation (152), p.510; full-weight choice in Corollary 23.73, p.511. Supporting input: Section 23h, printed p.510, admissible-lattice existence before equation (152), whose enveloping-algebra input is Kostant integral PBW. Full source WANTED: Kostant, Groups over Z (1966), integral enveloping-algebra basis theorem; also Steinberg, Lectures on Chevalley Groups, initial integral-form construction. Supporting calculation: Section 23h, Theorem 23.71, pp.508--509, supplies the normalization assumed here, but not the divided-power identity. Full source WANTED: Steinberg, Lectures on Chevalley Groups, initial integral-form construction, rank-two divided-power commutation in types A1 x A1, A2, B2 and G2; or Kostant, Groups over Z (1966), divided-power straightening calculations. Supporting calculation: Appendix C, section g, rank-two classification, table (180) and the four diagrams, printed pp.621--622; Section 23h, Theorem 23.71, pp.508--509. Agent-stated local bracket/parity consequence of these sources, not a theorem explicitly stated there.",
+   "via": [
+    "lem-sfb-chevalley-rank-two-straightening",
+    "lem-sfb-kostant-integral-pbw",
+    "lem-sfb-chevalley-admissible-representation",
+    "lem-sfb-root-datum-realization",
+    "lem-sfb-central-lattice-enlargement",
+    "lem-sfb-simply-connected-character-lattice",
+    "lem-sfb-rho-section-modules",
+    "lem-sfb-steinberg-endomorphism-detection",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-chevalley-string-central-parity",
+  "worker": "stage1",
+  "summary": "Retained the statement and all inherited records. Proved the root-string formula directly from the assumed Chevalley constants and reduced the remaining claims to explicit rank-two coordinate membership tables. Only the general coordinate classification is a new statement-only dependency. Checked all signed root pairs and arbitrary Chevalley sign choices, including both exceptional G2 string types.",
+  "blueprint": "Supporting rank-two root geometry in the inherited direct-image alteration/moduli/integral-Chevalley chain; specifically the Appendix C section g classification underlying the bracket normalization/straightening prerequisite. Current latest blueprint has no separate Chevalley or root-plane classification node; ancestor command returns None, retained in blueprint.from.node."
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q26-42d43770a",
+  "group": "Q26",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q26-42d43770a (reviewer sub-agent of L); spot-checked: I read the item, its six steps and the one new node (lem-sfb-rank-two-root-coordinate-classification) in full. The new node matches Milne App. C §g, table (180) and the four diagrams on printed pp.621-622 (PDF 633-634), with s=α short in B2 and G2. Its hypotheses are RS1-RS3 (C.12) plus reducedness. It is statement-only, self-contained and unsplit; Mathlib's EmbeddedG2 and p+q<=3 bounds do not give the classification; no DAG node duplicates it (checked root-string interval/endpoint/length-ratio, chevalley-root-normalization, opposition bracket norm and others), and it does not restate a clause of the item. I re-enumerated all oriented pairs with L(a)<=L(b) by script: 8/24/32/84 pairs; the (p,q) rows match step 2 exactly; every string is contiguous and p+q<=3. The only root sums r_i+r_j are G2 (0,3) pairs (0,3) with p=0 and (1,2) with p=2, and G2 (1,2) pair (0,1) with p=2; the step-4 exclusions of 3b+...a hold for every k. Hand checks: |c_k|=binom(p+k,k) by the recursion; C_3=(±1±3)/2; C_1=±3. Step 1 restriction of the reflections and coroots to W is correct. Same unit, no tool_uses, no cycle, no SGA; not a re-split order. Review in review.md; no fixes."
+ },
+ "lean": {
+  "module": "Sheaf.Algebra.Lie.ChevalleyStringCentralParity",
+  "declaration": "LieAlgebra.chevalley_string_central_parity",
+  "file": "lean/Sheaf/Algebra/Lie/ChevalleyStringCentralParity.lean",
+  "statement": "theorem chevalley_string_central_parity (L : Type u) [LieRing L] [LieAlgebra ℚ L] [FiniteDimensional ℚ L] [HasTrivialRadical ℚ L] (H : LieSubalgebra ℚ L) [H.IsCartanSubalgebra] [LieModule.IsTriangularizable ℚ H L] (I : Type v) [Finite I] (P : RootPairing I ℚ (Module.Dual ℚ H) H) [P.IsRootSystem] [P.IsCrystallographic] [P.IsReduced] (heval : ∀ (f : Module.Dual ℚ H) (h : H), P.toLinearMap f h = f h) (Δ : P.Base) (e : I → L) (he : ∀ i : I, e i ∈ LieModule.weightSpace L (P.root i) ∧ e i ≠ 0) (hopp : ∀ i : I, ⁅e i, e (P.reflectionPerm i i)⁆ = (P.coroot i : L)) (hadd : ∀ i j k : I, P.root i + P.root j = P.root k → ∃ ε : ℤ, (ε = 1 ∨ ε = -1) ∧ ⁅e i, e j⁆ = ((ε : ℚ) * (P.chainBotCoeff i j + 1)) • e k) (hzero : ∀ i j : I, P.root i + P.root j ∉ Set.range P.root → P.root i + P.root j ≠ 0 → ⁅e i, e j⁆ = 0) (B : Module.Basis (Δ.support ⊕ I) ℚ L) (Bh : ∀ i : Δ.support, B (Sum.inl i) = (P.coroot i : L)) (Be : ∀ i : I, B (Sum.inr i) = e i) (α β : I) (hne : α ≠ β) (hnopp : P.root α ≠ -P.root β) : ∃ a b : I, ((a = α ∧ b = β) ∨ (a = β ∧ b = α)) ∧ LinearIndependent ℚ ![P.root a, P.root b] ∧ let p := P.chainBotCoeff a b let q := P.chainTopCoeff a b let Y : ℕ → L := fun k ↦ ((k.factorial : ℚ)⁻¹) • ((ad ℚ L (e a)) ^ k) (e b) let C : ℕ → L := fun d ↦ (1 / 2 : ℚ) • ∑ i ∈ Finset.range (q + 1), ∑ j ∈ (Finset.range (q + 1)).filter (fun j ↦ i < j ∧ i + j = d), ⁅Y i, Y j⁆ p + q ≤ 3 ∧ Y 0 = e b ∧ (∀ k : ℕ, q < k → Y k = 0) ∧ (∀ k : ℕ, k ≤ q → ∃ (r : I) (c : ℤ), P.root r = P.root b + k • P.root a ∧ Y k = (c : ℚ) • e r ∧ c.natAbs = (p + k).choose k) ∧ (∀ i j k : ℕ, i ≤ q → j ≤ q → k ≤ q → ⁅⁅Y i, Y j⁆, Y k⁆ = 0) ∧ (∀ d : ℕ, 1 ≤ d → d ≤ 2 * q → (2 • P.root b + d • P.root a ∉ Set.range P.root → C d = 0) ∧ (∀ r : I, P.root r = 2 • P.root b + d • P.root a → ∃ z : ℤ, C d = (z : ℚ) • e r))",
+  "branch": "newtargets-dag",
+  "by": "NB",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-53b64b11d",
+  "group": "NB",
+  "result": "pass",
+  "note": "Lean statement matches the node clause by clause. The basis forces P to be the actual root system, and hopp/heval make the P coroots the actual h_γ. chainBotCoeff i j = max n with root j − n·root i a root (Chain.lean:120), the node's p_{γ,δ}; p and q are in the right order. The conclusion covers ordering, independence, p+q≤3, Y_0, vanishing for k>q, |c_k|=C(p+k,k), centrality for all i,j,k≤q, and both C_d cases over 1≤d≤2q. G2 (0,3)/(1,2) and B2 cases hand-checked. Hypothesis block is the same as the landed ChevalleyRankTwoStraightening and ChevalleyRootNormalization (H4 OK). stmt_deps def-wf-lie-algebra/semisimple are used through their Mathlib records. lean.statement is verbatim and the node differs from live only in lean. No collision, no hollow definitions, sorry only, docstrings have the source place, blueprint tag and all six proof steps. Report sections present. No compile run (no FIX); the clean compile is the worker's report."
+ }
+}

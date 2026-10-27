@@ -1,0 +1,104 @@
+{
+ "id": "lem-sf-direct-image-input-transition-adjacent",
+ "kind": "statement",
+ "title": "The adjacent completed input reduction is the canonical derived transition",
+ "statement": "For a prime l, finite extension E/Q_l, scheme X, derived completed coefficient object K, and n≥0, the restriction of the compact-support quotient reduction from n+1 to n followed by its restriction compositor equals the canonical adjacent derived reduction transition.",
+ "source": {
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Definition 3.5.2 and the compatibility calculation preceding Definition 6.7.6; Stacks Tags 06YY and 07A6"
+ },
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.SfDirectImageTransitionPresentation",
+  "date": "2026-10-27",
+  "group": "C6"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sf-direct-image-adjacent-presentation",
+   "place": "proof step 2",
+   "via": [
+    "lem-coef-compact-support-input-tower-compatibility"
+   ]
+  },
+  "same_as": []
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "sfDirectImageTransition|normalized_cube|compactSupportInput_completed_tower",
+   "results": "0 hits: ",
+   "date": "2026-10-27",
+   "verdict": "General naturality tools only; the specified normalized coefficient comparison still requires the resolution calculation."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.homEquiv_naturality_left_symm",
+   "results": "1 hits: CategoryTheory.Adjunction.homEquiv_naturality_left_symm",
+   "date": "2026-10-27",
+   "verdict": "General naturality tools only; the specified normalized coefficient comparison still requires the resolution calculation."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Naturality of a composite derived direct image coefficient restriction comparison on K-injective representatives",
+   "results": "8 hits: CategoryTheory.InjectiveResolution.toRightDerivedZero'_naturality, CategoryTheory.InjectiveResolution.toRightDerivedZero'_naturality_assoc, CategoryTheory.InjectiveResolution.isoRightDerivedObj_inv_naturality, CategoryTheory.InjectiveResolution.isoRightDerivedObj_hom_naturality, CategoryTheory.InjectiveResolution.isoRightDerivedObj_inv_naturality_assoc, CategoryTheory.InjectiveResolution.isoRightDerivedObj_hom_naturality_assoc, CategoryTheory.InjectiveResolution.toRightDerivedZero'_comp_iCycles, CategoryTheory.InjectiveResolution.iso_inv_naturality",
+   "date": "2026-10-27",
+   "verdict": "General naturality tools only; the specified normalized coefficient comparison still requires the resolution calculation."
+  }
+ ],
+ "mathlib_match": null,
+ "stmt_deps": [
+  "lem-coef-compact-support-input-tower-compatibility"
+ ],
+ "proof": [
+  {
+   "text": "Specialize compactSupportInput_completed_tower to m=n+1 and use the successor map equation for sfIntegralReductionTower.",
+   "uses": [
+    "lem-coef-compact-support-input-tower-compatibility"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-coef-compact-support-input-tower-compatibility"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Definition 3.5.2 and Stacks Tags 06YY, 07A6"
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.SfDirectImageInputTransitionAdjacent",
+  "file": "lean/Sheaf/Paper/SfDirectImageInputTransitionAdjacent.lean",
+  "declaration": "WeilConjectures.sfDirectImageInputTransition_adjacent",
+  "statement": "theorem sfDirectImageInputTransition_adjacent\n    (K : DerivedCategory (scalarReductionSource l E X)) (n : ℕ) :\n    (scalarReductionDerivedRestriction l E X (n + 1)).map\n          (compactSupportReductionMap l E X (n + 1) n (Nat.le_succ n) K) ≫\n        (compactSupportRestrictionComp l E X (n + 1) n (Nat.le_succ n)).hom.app\n          ((scalarReductionDerivedExtension l E X n).obj K) =\n      (sfDerivedReductionTransition l E X n).app K",
+  "branch": "sheaf-dag",
+  "by": "C6",
+  "date": "2026-10-27"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-def-sf-operations",
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C6",
+  "result": "pass",
+  "landing": "20261027T021301-L-2752709",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C6",
+  "result": "pass",
+  "landing": "20261027T021301-L-2752709",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

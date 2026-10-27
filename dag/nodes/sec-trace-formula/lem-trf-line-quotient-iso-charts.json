@@ -1,0 +1,127 @@
+{
+ "id": "lem-trf-line-quotient-iso-charts",
+ "kind": "statement",
+ "title": "Fraction coefficients under isomorphisms of quotient lines",
+ "statement": "Let $h:T\\to S$ be a morphism of schemes [def-pc-scheme], $\\mathcal E$ quasi-coherent [pqf-def-coherent], $L$ invertible [def-sc-invertible-module], $q:h^*\\mathcal E\\to L$ an epimorphism, and $\\psi$ a graded extension [lem-trf-line-quotient-homogeneous-fraction-map]. For an isomorphism $v:L\\xrightarrow{\\sim}L'$, a quotient $q'=q;v$, and any graded extension $\\psi'$ of $q'$, all degree-$d$ scalar coefficients of $\\psi$ and $\\psi'$ coincide in the corresponding frames $l$ and $v(l)$, on every affine $W$ over an affine $U$ and for every homogeneous $c\\in\\operatorname{Sym}^d(\\mathcal E(U))$. Every morphism $F$ satisfying $\\mathrm{HasQuotientFractionCharts}$ for $(\\psi,q)$ satisfies the same predicate for $(\\psi',q')$. The coefficient functions and chart predicate are those of [lem-trf-line-quotient-homogeneous-fraction-map].",
+ "source": {
+  "document": "literature/stacks-project/constructions.tex",
+  "place": "Tags 01OA (section-projective-bundle) and 01O4 (lemma-apply-relative); inverse quotient constructions and their arbitrary-pullback compatibility, with the explicit degree-one chart calculations."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "pqf-def-coherent",
+  "def-trf-canonical-symmetric-graded-algebra",
+  "def-nagata-relative-proj",
+  "def-sc-invertible-module",
+  "def-pc-module-pullback",
+  "def-per-projective-bundle-quotient-data",
+  "lem-trf-line-quotient-homogeneous-fraction-map",
+  "def-trf-line-quotient-chart-inverse-data"
+ ],
+ "proof": [
+  {
+   "text": "The degree-one extension equations and quotient compatibility identify the components after the tensor power of v. Induct on the right-generated powers of the degree-one symmetric submodule: structural scalars use the unit, sums use additivity, and products use the tensor-power addition comparison. Tensor powers of v carry the frame l to the frame v(l); both frame scalar maps are injective, so all homogeneous coefficients agree. The same argument in degree one identifies the generator coefficients. On each affine W every frame of the target is the image of a unique source frame. Transport the seven conjuncts of HasQuotientFractionCharts along these equalities, using linearity of v for frame changes and naturality of v for restrictions. The localization domains, fraction values, scalar maps, scheme equations and overlap units coincide. This proves chart compatibility without appealing to the fraction-map existence or uniqueness theorem.",
+   "uses": [
+    "lem-trf-line-quotient-homogeneous-fraction-map"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/constructions.tex",
+    "place": "Tags 01OA (section-projective-bundle) and 01O4 (lemma-apply-relative); inverse quotient constructions and their arbitrary-pullback compatibility, with the explicit degree-one chart calculations."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-trf-line-quotient-homogeneous-fraction-map"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/constructions.tex",
+  "place": "Tag 01OA, isomorphism classes of quotient pairs; explicit symmetric-degree induction and injectivity of multiplication by a frame, formalized in LineQuotientIsoCharts."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Isomorphic quotient line bundles have equal scalar coefficients and the same projective morphism",
+   "results": "{\"t\": \"2026-10-23T11:29:42Z\", \"tool\": \"leansearch\", \"query\": \"Isomorphic quotient line bundles have equal scalar coefficients and the same projective morphism\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"LinearMap.quotientInfEquivSupQuotient\", \"QuotSMulTop.congr\", \"CategoryTheory.Quotient.Linear.smul\", \"Submodule.quotEquivOfEq\", \"Submodule.Quotient.restrictScalarsEquiv\", \"ModuleCon.quotientKerEquivOfSurjective\", \"Submodule.piQuotientLift.congr_simp\", \"FiniteDimensional.LinearEquiv.quotEquivOfQuotEquiv\"], \"digest\": \"9a026aabd59657d0\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern absolute Proj charts, vector-space projectivization or general quotient modules; none states this normalized relative quotient comparison."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Isomorphic quotient line bundles have equal scalar coefficients and the same projective morphism",
+   "results": "{\"t\": \"2026-10-23T11:29:47Z\", \"tool\": \"leanfinder\", \"query\": \"Isomorphic quotient line bundles have equal scalar coefficients and the same projective morphism\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Projectivization.mk_eq_mk_iff'\", \"Projectivization.mk_eq_mk_iff\", \"Projectivization.mk'_eq_mk\", \"projectivizationSetoid\", \"AlgebraicGeometry.Proj.ext\", \"Projectivization\", \"AlgebraicGeometry.Proj.ext_iff\", \"Projectivization.mk_rep\"], \"digest\": \"a9a719104c2df067\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern absolute Proj charts, vector-space projectivization or general quotient modules; none states this normalized relative quotient comparison."
+  },
+  {
+   "tool": "grep",
+   "query": "HasQuotientFractionCharts|ExtendsLineQuotient|quotientCoefficient|lineQuotient|tautologicalGenerator",
+   "results": "{\"t\": \"2026-10-23T12:24:25Z\", \"tool\": \"grep\", \"query\": \"HasQuotientFractionCharts|ExtendsLineQuotient|quotientCoefficient|lineQuotient|tautologicalGenerator\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: zero occurrences in Mathlib; these fraction-chart predicates are project declarations."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.LineQuotientChartInversePullback",
+  "date": "2026-10-23",
+  "group": "G3"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Historical ancestor lem-trf-local-term-locality, proof (1)--(2), specialization-to-the-normal-cone route: the fibrewise-ampleness/projectivity tool in lem-trf-proper-fibrewise-ample-projective, Step 4. This prerequisite supplies the projective-bundle quotient geometry used to construct the canonical evaluation immersion in the proof of 01VR, not a new claim about local terms. Re-split of lem-trf-projective-bundle-quotient-geometry, old steps 7--8 and arbitrary-pullback part of step 9. Intermediate Fraction coefficients under isomorphisms of quotient lines.",
+   "via": [
+    "lem-trf-line-quotient-chart-inverse-pullback",
+    "lem-trf-projective-bundle-quotient-geometry",
+    "lem-trf-relative-ample-very-ample",
+    "lem-trf-proper-fibrewise-ample-projective",
+    "lem-trf-temkin-stable-modification",
+    "lem-trf-stable-modification-flat-curve-pair",
+    "lem-trf-dejong-relative-marked-semistable",
+    "lem-trf-relative-marked-nodal-reduction",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.LineQuotientIsoCharts",
+  "file": "lean/Sheaf/AlgebraicGeometry/LineQuotientIsoCharts.lean",
+  "declaration": "AlgebraicGeometry.ProjectiveBundleQuotientGeometry.lineQuotient_iso_charts",
+  "statement": "theorem lineQuotient_iso_charts {S T : Scheme.{u}} (h : T ⟶ S) (E : S.Modules) [E.IsQuasicoherent] (L : T.Modules) [L.IsInvertible] (q : (tensorPullback h).obj E ⟶ L) [Epi q] (ψ : RelativeGradedLineMap h (SymmetricAlgebraSheaf.gradedAlgebraData E) L) (hψ : ψ.ExtendsLineQuotient h E L q) (L' : T.Modules) (v : L ≅ L') (q' : (tensorPullback h).obj E ⟶ L') (hq : q ≫ v.hom = q') (ψ' : RelativeGradedLineMap h (SymmetricAlgebraSheaf.gradedAlgebraData E) L') (hψ' : ψ'.ExtendsLineQuotient h E L' q') : (∀ (U : S.affineOpens) (W : T.affineOpens) (hWU : W.1 ≤ h ⁻¹ᵁ U.1) (l : Γ(L, W.1)), IsFreeGenerator l → ∀ (d : ℕ) (c : (SymmetricAlgebraSheaf.gradedAlgebraData E).grading U d), ψ'.quotientCoefficient U W hWU (v.hom.app W.1 l) d c = ψ.quotientCoefficient U W hWU l d c) ∧ ∀ F : T ⟶ (SymmetricAlgebraSheaf.gradedAlgebraData E).relProj, ψ.HasQuotientFractionCharts h E L q F → ψ'.HasQuotientFractionCharts h E L' q' F",
+  "branch": "sheaf-dag",
+  "by": "G3",
+  "date": "2026-10-23",
+  "existing": false
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "C-c58e7",
+  "group": "G3",
+  "result": "pass",
+  "landing": "20261024T185801-L-3673567",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "C-c58e7",
+  "group": "G3",
+  "result": "pass",
+  "landing": "20261024T185801-L-3673567",
+  "kind": "interface",
+  "note": "independent cc review: c58e7f70 vs prior af9d4180 files (diff -r: only helper removal → invertible_pullback_tensor, node cite lem-weil-pbc-invertible-pullback-tensor, report text) and vs live clone (7 defs verbatim, theorem statement identical); 3 sorry halves checked against HasQuotientFractionCharts/ExtendsLineQuotient/pulledQuotient; 6 delivered modules + importers ProjectiveBundleQuotientGeometry, ProjectiveBundleRelativeAmple compiled rc 0; #print axioms item (sorryAx from declared halves) and iso_charts (clean)"
+ }
+}

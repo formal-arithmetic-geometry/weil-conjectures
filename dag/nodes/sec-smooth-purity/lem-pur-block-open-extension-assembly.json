@@ -1,0 +1,104 @@
+{
+ "id": "lem-pur-block-open-extension-assembly",
+ "kind": "statement",
+ "title": "Assembly and normalization of the block open-extension comparison",
+ "statement": "For a finite-block coefficient repetition R and a functor Q on the open slice whose evaluation functors equal the original evaluations at t(m), and whose restriction maps are reindexed by t, there exist section-normalized ordinary open extension adjunction packages O and OD, and a unique natural system isomorphism Q followed by OD.extension ≅ O.extension followed by R.repetition. Its composite with the R and O extension evaluation comparisons is heterogeneously equal to the OD extension evaluation. This is the proved assembly of the explicit components whose horizontal compatibility is lem-pur-block-open-extension-transitions.",
+ "source": {
+  "document": "literature/zheng-six-operations-lefschetz-verdier-DM-stacks_arXiv-1006.3810.pdf",
+  "place": "Construction 4.1, ordinary levelwise operations; agent finite-block open-localization consequence, with Stacks sites-modules.tex Tags 03DI--03DJ."
+ },
+ "stmt_deps": [
+  "lem-coef-semilinear-derived-sections",
+  "lem-pur-system-block-constructions"
+ ],
+ "proof": [
+  {
+   "text": "Choose the existing ordinary open-extension adjunctions. Normalize their restriction evaluations by the canonical section identities and their extension evaluations by inverse mates; the sequence-module pullback evaluation theorem makes the mates invertible, and the mate unit/counit equations verify the required package fields. Define the natural coefficient-level comparison by whiskering the four evaluation isomorphisms, inserting explicit functor associators. The equality hypothesis on Q evaluation makes its component comparison an equality transport. Apply the horizontal-compatibility theorem to the explicit components and systemIsoOfEvaluation_exists to assemble them objectwise. Joint faithfulness of the ordinary evaluations proves naturality from the natural coefficient-level comparison. Cancel the inverse evaluation isomorphisms to obtain the full heterogeneous normalization equation. Joint faithfulness and cancellation also prove uniqueness. All assembly, normalization and uniqueness steps are Lean proofs, with no additional sorry.",
+   "uses": [
+    "lem-coef-semilinear-derived-sections",
+    "lem-coef-open-restriction-evaluation-sections",
+    "lem-sf-sequence-module-pullback-evaluation",
+    "lem-pur-block-open-extension-transitions",
+    "lem-coef-system-iso-assembly"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-coef-semilinear-derived-sections",
+  "lem-coef-open-restriction-evaluation-sections",
+  "lem-sf-sequence-module-pullback-evaluation",
+  "lem-pur-block-open-extension-transitions",
+  "lem-coef-system-iso-assembly"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/zheng-six-operations-lefschetz-verdier-DM-stacks_arXiv-1006.3810.pdf",
+  "place": "Construction 4.1, ordinary levelwise operations; agent finite-block open-localization consequence, with Stacks sites-modules.tex Tags 03DI--03DJ."
+ },
+ "mathlib_searches": [],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.SystemBlockRepetition",
+  "date": "2026-10-27",
+  "group": "E4"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-def-sf-operations",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "def-weil-exceptional-inverse-image",
+   "place": "Adic-stage paragraph: compatible finite-level functors before inverse limits; open-localization consequence of lem-pur-system-block-repetition, proof step 4.",
+   "via": [
+    "lem-pur-system-block-repetition",
+    "lem-pur-etale-system-cofinal-mate",
+    "lem-pur-etale-coefficient-system-adjoint"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.BlockOpenExtensionAssembly",
+  "file": "lean/Sheaf/Paper/BlockOpenExtensionAssembly.lean",
+  "declaration": "WeilConjectures.SemilinearSections.blockOpenExtensionComparison",
+  "declarations": [
+   "WeilConjectures.SemilinearSections.blockOpenExtensionComparison"
+  ],
+  "statement": "theorem blockOpenExtensionComparison\n    (R : SystemBlockRepetition J B₀ τ₀ t)\n    (Q : Systems (J.over U) (openRings.{c, v, r} J B₀ U)\n        (openTransitions.{c, v, r} J B₀ τ₀ U) ⥤\n      Systems (J.over U) (openRings.{c, v, r} J (blockCoefficients B₀ t) U)\n        (openTransitions.{c, v, r} J (blockCoefficients B₀ t)\n          (blockTransitions J B₀ τ₀ t) U))\n    (qequal : ∀ m : ℕ,\n      Q ⋙ evaluation (J.over U) (openRings.{c, v, r} J (blockCoefficients B₀ t) U)\n          (openTransitions.{c, v, r} J (blockCoefficients B₀ t)\n            (blockTransitions J B₀ τ₀ t) U) m =\n        evaluation (J.over U) (openRings.{c, v, r} J B₀ U)\n          (openTransitions.{c, v, r} J B₀ τ₀ U) (t.index m))\n    (hQ : ∀ (M : Systems (J.over U) (openRings.{c, v, r} J B₀ U)\n        (openTransitions.{c, v, r} J B₀ τ₀ U))\n      {V W : (ℕ × Over U)ᵒᵖ} (f : V ⟶ W),\n      HEq (fun x ↦ (Q.obj M).val.map f x)\n        (fun x ↦ M.val.map ((blockSite (C := Over U) t.index).map f.unop).op x)) :\n    ∃ (O : OpenSystems.{c, v, r} J B₀ τ₀ U)\n      (OD : OpenSystems.{c, v, r} J (blockCoefficients B₀ t) (blockTransitions J B₀ τ₀ t) U),\n    (∀ (n : ℕ) N V x, HEq (((O.restrictionEvaluation n).hom.app N).val.app V x) x) ∧\n    (∀ (n : ℕ) N V x, HEq (((OD.restrictionEvaluation n).hom.app N).val.app V x) x) ∧\n    ∃! ξ : Q ⋙ OD.extension ≅ O.extension ⋙ R.repetition,\n      ∀ (m : ℕ)\n        (P : Systems (J.over U) (openRings.{c, v, r} J B₀ U)\n          (openTransitions.{c, v, r} J B₀ τ₀ U)),\n        HEq ((evaluation J (blockCoefficients B₀ t) (blockTransitions J B₀ τ₀ t) m).map\n            (ξ.hom.app P) ≫ (R.evaluation m).hom.app (O.extension.obj P) ≫\n            (O.extensionEvaluation (t.index m)).hom.app P)\n          ((OD.extensionEvaluation m).hom.app\n            (Q.obj P))",
+  "branch": "sheaf-dag",
+  "by": "E4",
+  "date": "2026-10-27"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E4",
+  "result": "pass",
+  "landing": "20261027T012821-L-2335438",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E4",
+  "result": "pass",
+  "landing": "20261027T012821-L-2335438",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

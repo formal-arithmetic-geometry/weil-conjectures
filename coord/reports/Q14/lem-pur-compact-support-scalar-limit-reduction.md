@@ -1,0 +1,56 @@
+# Stage-1 delivery: lem-pur-compact-support-scalar-limit-reduction
+
+## Files written
+
+- `dag/nodes/sec-smooth-purity/lem-pur-compact-support-scalar-limit-reduction.json`: item, statement unchanged, seven proof steps, status `split`; no exact Mathlib match.
+- `citations.json`: 24 step/node entries, each copied verbatim from the current cited statement.
+- `searches.jsonl`: the search command's original records; five searches run for this item, including two semantic phrasings.
+- `report.md`: this report.
+
+No new DAG nodes and no new Mathlib leaves. The sandbox initially contained only dispatcher markers; there was no earlier split to overwrite. The original item's source, blueprint ancestry, existing search records and other fields have been preserved.
+
+## Attachments
+
+None. Searches in `lean/WeilConjectures/` for the exact blueprint tag and for compact-support/scalar/limit terminology found no declaration stating every clause. Existing finite-coefficient and point-cohomology results do not state this strict-tower integral comparison with its specified finite reductions. No compilation or Lean changes were performed.
+
+## WANTED
+
+None.
+
+## Corrections and scope
+
+The imported statement is unchanged. It was an unsplit auxiliary extracted from the returned integral comparison. I read its retained argument, returned Steps 5 and 6, in `coord/reports/Q13/lem-pur-compact-support-integral-coefficient-comparison.md`. I replaced those compressed paragraphs by an explicit projection equation and its tensor/restriction transpose. In particular the proof does not infer an equality of integral morphisms from equality of reductions, or identify derived strict-tower objects just because their evaluations agree.
+
+The chapter is fixed. I read `dag/chapters/sec-smooth-purity.json`, `dag/units/sk-thm-sf-compatibility.json`, SETUP's three levels, and the current available `main-20261015` purity-transport proof and rational/Qbar-purity proof. The unit record's newer source path is absent locally, but its full statement and proof are recorded in the JSON and were read there. The argument implements the existing coefficient-independence route; no unit/chapter record is changed. Off-unit foundational tools are explained in `split_report.tool_uses`.
+
+## Search results and reuse
+
+The five fresh queries in `searches.jsonl` were run with `batch2/msearch.py`, and their exact tool/query text and actual outputs were appended to the item's existing search records. LeanFinder returned ordinary adic module-completion and completion/tensor naturality results. Loogle returned tensor/direct-limit declarations. LeanSearch returned supported-function and finite-support module statements. The grep returned three occurrences in `FieldTheory/NormalizedTrace.lean`. None states a derived strict compact-support inverse-limit map with projection-adjoint reductions. I read the returned signatures and the relevant source passages in `RingTheory/AdicCompletion/AsTensorProduct.lean` and `LinearAlgebra/TensorProduct/DirectLimit.lean`. No service was unavailable.
+
+Whole-DAG and blueprint searches included compact-support coefficient/reduction, normalized DVR towers, scalar limits, finite-free limit comparisons, and Stacks tags 0941 and 0GL6. `blueprint_refs.py ancestor` identifies `thm-pur-rational-and-qbar-purity`; the item's existing precise `from.place` and `via` remain appropriate. Whole-blueprint searches for `compact support scalar`, `scalar limit` and `compact support coefficient` found no exact blueprint statement; the normalized-DVR search found the existing normalization definition and effectivity lemma, which are reused. No new definition, elementary subclaim, duplicate, or renamed clause was introduced.
+
+## Review by Q14
+
+I read delivery-errors B–E and checked the actual statement and each cited node's statement, not merely its title or proof. I read Stacks `sites-cohomology.tex`, Tag 0941 at `lemma-derived-limit-is-ok`, including the K-injective tower, exact evaluation left adjoint and product-cone comparison. I also read `more-etale.tex`, Tag 0GL6 at `remark-Rf-lower-shriek-change-of-rings`: it distinguishes restriction from derived extension of coefficients and concerns ordinary etale compact support. Accordingly the proof uses existing pro-etale normalized-realization and strict-scalar statements for the required pro-etale assertions, rather than attributing them directly to 0GL6. I read the blueprint normalized-effectivity statement and proof and the current compact-support integral proof, whose second paragraph normalizes the finite compact-support tower. For exact products I read `det-pe-products-exact` and its blueprint proof through weakly contractible sections. There are no new nodes requiring separate source checks.
+
+Step 1 uses `lem-pur-compact-support-coefficient-models` for the complete, bounded constructible, uniform-Tor input over F. `lem-coef-compact-support-normalized-realization` explicitly gives both invertible transition adjuncts and their quotient cocycle, for precisely the compact-support quotient maps at issue. `lem-weil-compact-support-reduction-tower-functor` says the specified lift has those evaluated transitions; `def-coef-normalized-dvr-tower` requires that property plus a coherent lift, already supplied. Both coefficient fields meet the finite-extension hypotheses; f is separated finite type and c is a fixed compactification. The F application uses every positive v-power, without treating t as an F-uniformizer. This checks normalization of the given lift without claiming an isomorphism to an independently chosen lift.
+
+Step 2 applies `lem-coef-normalized-dvr-effectivity` only after normalization has been established. Its statement gives coherent canonical counit isomorphisms and completeness with no extra boundedness requirement. The reduction adjunction node explicitly supplies the natural Hom bijection and quotient-induced unit, for E at n and F at a. Thus the epsilon maps used later are adjoints of the actual projections.
+
+Step 3 checks the extra exact-product hypothesis of `lem-weil-strict-roos-comparison` using `det-pe-products-exact` with the two constant integral ring sheaves. The comparison statement explicitly preserves projections and zero-component augmentations. The coefficient-models node explicitly identifies quotient diagrams and their actual total derived limits and specifies the normalization of chi. These are all statements of the nodes cited; the constant/completed transport is not inferred from a bare finite-freeness assertion.
+
+Step 4 uses finite freeness of B supplied by the coefficient-models statement, and the Roos-cofinality statement supplies both canonical tensor/product interchange and the arithmetic restriction map. The strict-scalar-mate statement expressly says its tower map is invertible, natural and B-linear; its evaluated map is q_n, not an unspecified coefficient isomorphism. The total-limit node supplies an actual functor, so it preserves that isomorphism. The construction therefore has exactly the statement's order r_e inverse, R(q), tau. The augmentation and scalar claims follow from those same maps and the full constant/completed equivalence on complete objects.
+
+Step 5 records the typed projection equation. I checked that the Roos first product coordinate selects the retained index en; the block-sum coordinate is on the other cone component and does not alter the projection. Tensor/product interchange is the coordinatewise tensor map. `lem-weil-strict-roos-comparison` supplies preservation of the projection through the total-limit identification, and `lem-pur-compact-support-strict-scalar-mate` explicitly identifies the evaluation with q_n. Thus no equality in a derived diagram category is being deduced solely from equal evaluations: the equation follows by applying projection naturality to the already specified strict-tower morphism.
+
+Step 6 transposes that equation using the named reduction adjunction. Both sides have source `(C_Y L_E) tensor_S^L B_n` and target `U_F,en`. The tensor associator identifies the source with `C_Y^(n)(L_E tensor_R^L A_n)`; this identification and the unit comparison are explicitly covered by the coefficient-models statement. Naturality of the adjunction makes the left transpose epsilon_F times the reduced gamma, and the right transpose q_n times the scalar-extended epsilon_E. Effectivity makes the epsilons invertible. The displayed formula is the precise claim that reduction of this gamma is q_n under the specified identifications.
+
+Step 7 uses effectivity's coherent counits, the strict mate's pre-limit quotient squares, and the coefficient-models node's quotient and associator compatibility. The proper/open factorization is expressly the pasted mate with composite-adjunction normalization in the strict-mate statement. The general mate-pasting node's clauses (1) and (2) give the two pasted mates; the common balanced tensor associator cancels. Quotient representatives have the same image on both paths of a commuting coefficient square. This proves the actual comparison equations and the further-reduction cocycle, without an unmentioned coefficient-flatness hypothesis.
+
+For B1–B10 no new nodes are needed, the TeX is single-escaped in the decoded strings, and no unrun searches are recorded. For C1–C8 every non-elementary fact is a cited statement, every `uses` is in `proof_deps`, and quotes are literal substrings. I traversed available local statement/proof dependencies of each proposed cited node and found no path back to the item. Some unrelated transitive records are absent from the read clone; the required server preflight passed on its complete delivery tree. For D1–D5 the argument is carried by seven proof steps, including explicit projection and adjunction equations; it is not moved to a new clause node. For E1–E6 I checked coefficient rings, categories, small sites, exact products and all hypotheses as described above.
+
+Small cases: M=0 gives zero towers and the same zero comparison; E=F and e=1 reduce tau/r_e to their canonical unit comparisons, with the projection formula unchanged; n=m is the identity quotient square; n=1 allows nonflat quotient maps and uses derived tensors throughout; an empty X gives the zero compact-support towers. For e>1 the full F normalization supplies all v-levels and only the subsequent Roos map restricts to en. A unit in t=u v^e changes no ideal or quotient map. Every proof step has fewer than 2000 characters, and each inline calculation is either a projection-coordinate calculation or formal transposition/pasting from the cited statements.
+
+## Outstanding work and validation
+
+No mathematical subtask remains in this one-level split. Existing unsplit dependencies remain separately assigned DAG tasks. The original server dry run exited 0 with `OK (not pushed)` at commit `a06d457be0d`. On resumption, the required fresh dry run also exited 0 with `OK (not pushed)` at commit `71c941504dd`; server preflight passed. I retained the completed split and logged searches, reread every proof dependency statement and the cited Stacks passages, and verified all 24 exact citation quotes and complete step coverage. Only this report was updated; final validation and direct push follow.

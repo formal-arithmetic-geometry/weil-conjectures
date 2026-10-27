@@ -2,7 +2,7 @@
  "id": "lem-sbc-raw-scalar-coefficient-square",
  "kind": "statement",
  "title": "The shifted coefficient factors of scalar forgetting commute with pullback",
- "statement": "Let $\\Lambda$ be a commutative ring in $\\operatorname{Type}(u+1)$, $W$ a scheme in universe $u$, $G$ an etale $\\Lambda$-module sheaf on $W$, $q\\in\\mathbf Z$, $A,B\\in\\operatorname{Over}(W)$ and $f:A\\to B$. Let $M=D^+f^*_{\\Lambda}$, $H=D^+f^*_{\\mathbf{Ab}}$, $V_A=D^+V_{A.left}$, $V_B=D^+V_{B.left}$ and $\\epsilon:M\\gg V_A\\cong V_B\\gg H$ be the real derived scalar comparison of [lem-sbc-raw-scalar-source-square]. Put $F_i=i.hom^*_{\\Lambda}G$. Let $b_i$ be the shift comparison for $V_i$ on $F_i[0]$, followed by the shifted composite of its single comparison and singleFunctor of the inverse scalar coefficient comparison. Let $m_T$ be the shift comparison for $M$ on $F_B[0]$, followed by the shifted composite of the module inverse-image single comparison and singleFunctor of upperStarComp inverse for $(f.left,B.hom,A.hom)$ at $G$. Let $a_T$ be the corresponding abelian tail on $V_WG$ [lem-weil-pbc-inverse-image-composition]. Then $\\epsilon^{-1}_{F_B[0][q]}\\gg V_A(m_T)\\gg b_A=H(b_B)\\gg a_T$. This involves no base scheme, represented free source sheaf, or cohomology class.",
+ "statement": "Let $\\Lambda$ be a commutative ring in $\\operatorname{Type}(u+1)$, $W$ a scheme in universe $u$, $G$ an etale $\\Lambda$-module sheaf on $W$, $q\\in\\mathbf Z$, $A,B\\in\\operatorname{Over}(W)$ and $f:A\\to B$. Let $M=D^+f^*_{\\Lambda}$, $H=D^+f^*_{\\mathbf{Ab}}$, $V_A=D^+V_{A.left}$, $V_B=D^+V_{B.left}$ and $\\epsilon:M\\gg V_A\\cong V_B\\gg H$ be the real derived scalar comparison of [def-sbc-raw-scalar-derived-pullback-iso]. Put $F_i=i.hom^*_{\\Lambda}G$. Let $b_i$ be the shift comparison for $V_i$ on $F_i[0]$, followed by the shifted composite of its single comparison and singleFunctor of the inverse scalar coefficient comparison. Let $m_T$ be the shift comparison for $M$ on $F_B[0]$, followed by the shifted composite of the module inverse-image single comparison and singleFunctor of upperStarComp inverse for $(f.left,B.hom,A.hom)$ at $G$. Let $a_T$ be the corresponding abelian tail on $V_WG$ [lem-weil-pbc-inverse-image-composition]. Then $\\epsilon^{-1}_{F_B[0][q]}\\gg V_A(m_T)\\gg b_A=H(b_B)\\gg a_T$. This involves no base scheme, represented free source sheaf, or cohomology class.",
  "source": {
   "document": "Stacks Project; proof of lem-sbc-raw-module-abelian-hom-map-naturality",
   "place": "Tags 03D7 and 03Q8; shift and inverse coefficient comparison factors"
@@ -10,7 +10,7 @@
  "stmt_deps": [
   "def-sbc-raw-module-scalar-pullback-comparison",
   "lem-weil-pbc-inverse-image-composition",
-  "lem-sbc-raw-scalar-source-square"
+  "def-sbc-raw-scalar-derived-pullback-iso"
  ],
  "proof": [
   {
@@ -79,13 +79,24 @@
  },
  "chapter": "sec-smooth-base-change",
  "unit": "sk-lem-failure-field",
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
  "lean": {
-  "existing": false,
-  "module": "Sheaf.AlgebraicGeometry.RawModuleScalarCoefficientSquare",
-  "file": "lean/Sheaf/AlgebraicGeometry/RawModuleScalarCoefficientSquare.lean",
+  "existing": true,
+  "module": "WeilConjectures.AlgebraicGeometry.RawModuleScalarCoefficientSquare",
+  "file": "lean/WeilConjectures/AlgebraicGeometry/RawModuleScalarCoefficientSquare.lean",
   "declaration": "AlgebraicGeometry.Etale.rawModuleScalar_coefficient_square",
-  "statement": "theorem rawModuleScalar_coefficient_square\n    (Λ : Type (u + 1)) [CommRing Λ] {W : Scheme.{u}}\n    (G : Sheaf W.smallEtaleTopology (ModuleCat.{u + 1} Λ)) (q : ℤ)\n    (A B : Over W) (f : A ⟶ B) :\n  let VA := (RawModuleScalarComparison.forget Λ A.left).mapDerivedCategoryPlus\n  let H := (upperStar AddCommGrpCat.{u + 1} f.left).mapDerivedCategoryPlus\n  let FB := (upperStar (ModuleCat.{u + 1} Λ) B.hom).obj G\n  let bA := scalarCoefficientFactor Λ A.hom G q\n  let bB := scalarCoefficientFactor Λ B.hom G q\n  let mT := moduleCoefficientFactor Λ G q A B f\n  let aT := abelianCoefficientFactor ((RawModuleScalarComparison.forget Λ W).obj G) q A B f\n  (RawModuleScalarComparison.derivedPullbackIso Λ f.left).inv.app\n      (((DerivedCategory.Plus.singleFunctor _ 0).obj FB)⟦q⟧) ≫\n    VA.map mT ≫ bA = H.map bB ≫ aT",
+  "statement": "theorem rawModuleScalar_coefficient_square (Λ : Type (u + 1)) [CommRing Λ] {W : Scheme.{u}} (G : Sheaf W.smallEtaleTopology (ModuleCat.{u + 1} Λ)) (q : ℤ) (A B : Over W) (f : A ⟶ B) : let VA := (moduleAbelianForget Λ A.left).mapDerivedCategoryPlus let H := (upperStar AddCommGrpCat.{u + 1} f.left).mapDerivedCategoryPlus let FB := (upperStar (ModuleCat.{u + 1} Λ) B.hom).obj G let bA := scalarCoefficientFactor Λ A.hom G q let bB := scalarCoefficientFactor Λ B.hom G q let mT := moduleCoefficientFactor Λ G q A B f let aT := abelianCoefficientFactor ((moduleAbelianForget Λ W).obj G) q A B f (moduleAbelianDerivedUpperStarIso Λ f.left).hom.app (((DerivedCategory.Plus.singleFunctor _ 0).obj FB)⟦q⟧) ≫ VA.map mT ≫ bA = H.map bB ≫ aT",
   "branch": "sheaf-dag",
   "by": "S2",
   "date": "2026-10-14",
@@ -93,7 +104,7 @@
    "AlgebraicGeometry.Etale.scalarCoefficientFactor",
    "AlgebraicGeometry.Etale.rawModuleScalar_coefficient_square"
   ],
-  "note": "The module and abelian coefficient factors are defined in RawModuleScalarCoefficientFactors and publicly re-exported here; the scalar factor and current shift-transport proof remain unchanged."
+  "note": "P2 reexports the existing proved canonical square. The historical derived comparison is the canonical forward comparison inverse, with equality to its old formula proved by derivedPullbackIsoImpl_eq_formula. No statement or mathematical obligation changes."
  },
  "reviewed": {
   "date": "2026-10-13",
@@ -106,13 +117,60 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-14",
+  "date": "2026-10-24",
   "by": "L",
-  "reviewer": "X-4376a",
-  "group": "W4",
-  "result": "pass",
-  "landing": "20261014T164643-L-2302992",
+  "reviewer": "C-67703",
+  "group": "P2",
+  "result": "fix",
+  "landing": "20261024T015347-L-2367834",
   "kind": "interface",
-  "note": "independent Codex review: Delivered packet, DAG nodes, Lean files, proofs, forced adaptations, and reader importers matched and compiled against the changed overlay."
+  "note": "independent cc review: 677039e4ec2e delivered files vs d62288e2e4cb delivered files + its reviewer fixes (Lean and nodes byte-identical, same base blobs; fixes dropped again); 15 delivered modules + 29 live direct importers compiled in sandbox /tmp/rv_P2_6770 (all rc=0; ClassMorphisms rechecked alone rc=0)"
+ },
+ "statement_change": {
+  "date": "2026-10-21",
+  "by": "P2 stage 2",
+  "old_statement": "Let $\\Lambda$ be a commutative ring in $\\operatorname{Type}(u+1)$, $W$ a scheme in universe $u$, $G$ an etale $\\Lambda$-module sheaf on $W$, $q\\in\\mathbf Z$, $A,B\\in\\operatorname{Over}(W)$ and $f:A\\to B$. Let $M=D^+f^*_{\\Lambda}$, $H=D^+f^*_{\\mathbf{Ab}}$, $V_A=D^+V_{A.left}$, $V_B=D^+V_{B.left}$ and $\\epsilon:M\\gg V_A\\cong V_B\\gg H$ be the real derived scalar comparison of [lem-sbc-raw-scalar-source-square]. Put $F_i=i.hom^*_{\\Lambda}G$. Let $b_i$ be the shift comparison for $V_i$ on $F_i[0]$, followed by the shifted composite of its single comparison and singleFunctor of the inverse scalar coefficient comparison. Let $m_T$ be the shift comparison for $M$ on $F_B[0]$, followed by the shifted composite of the module inverse-image single comparison and singleFunctor of upperStarComp inverse for $(f.left,B.hom,A.hom)$ at $G$. Let $a_T$ be the corresponding abelian tail on $V_WG$ [lem-weil-pbc-inverse-image-composition]. Then $\\epsilon^{-1}_{F_B[0][q]}\\gg V_A(m_T)\\gg b_A=H(b_B)\\gg a_T$. This involves no base scheme, represented free source sheaf, or cohomology class.",
+  "what": "Correct the location of the derived comparison definition. The old source-square node still listed derivedPullbackIso in its Lean declarations although its current module has no such definition. The actual derived construction is def-sbc-raw-scalar-derived-pullback-iso, with the historical public name in RawModuleScalarCoefficientUnshifted. Only the citation and dependency change; every functor, comparison component, hypothesis and conclusion is unchanged. The canonical coefficient proofs use the generic core directly and never use the concrete source-square theorem.",
+  "source": {
+   "document": "WeilConjectures.AlgebraicGeometry.RawModuleScalarCoefficientUnshifted and RawModuleScalarCoefficientSquare",
+   "place": "Canonical comparison and generic-core coefficient proofs; RawModuleScalarDerivedPullbackIso construction"
+  },
+  "citers": [
+   {
+    "id": "lem-sbc-raw-module-abelian-hom-map-naturality",
+    "holds": true,
+    "note": "The coefficient square has exactly the same comparison, hypotheses and conclusion; only its definition citation is corrected."
+   },
+   {
+    "id": "lem-sbc-raw-module-abelian-hom-source-formula",
+    "holds": true,
+    "note": "The coefficient square has exactly the same comparison, hypotheses and conclusion; only its definition citation is corrected."
+   },
+   {
+    "id": "lem-sbc-raw-module-abelian-hom-target-formula",
+    "holds": true,
+    "note": "The coefficient square has exactly the same comparison, hypotheses and conclusion; only its definition citation is corrected."
+   },
+   {
+    "id": "lem-sbc-raw-module-scalar-hom-composite-formula",
+    "holds": true,
+    "note": "The coefficient square has exactly the same comparison, hypotheses and conclusion; only its definition citation is corrected."
+   },
+   {
+    "id": "lem-sbc-raw-scalar-hom-evaluation",
+    "holds": true,
+    "note": "The coefficient square has exactly the same comparison, hypotheses and conclusion; only its definition citation is corrected."
+   },
+   {
+    "id": "lem-sbc-raw-scalar-pullback-module-formula",
+    "holds": true,
+    "note": "The coefficient square has exactly the same comparison, hypotheses and conclusion; only its definition citation is corrected."
+   }
+  ],
+  "old_stmt_deps": [
+   "def-sbc-raw-module-scalar-pullback-comparison",
+   "lem-weil-pbc-inverse-image-composition",
+   "lem-sbc-raw-scalar-source-square"
+  ]
  }
 }

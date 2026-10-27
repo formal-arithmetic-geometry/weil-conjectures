@@ -1,0 +1,139 @@
+{
+ "id": "lem-sf-compact-support-term-hom-finite",
+ "kind": "statement",
+ "title": "Finite shifted Hom groups into finite compact-support terms",
+ "statement": "Let D be a finite-field datum and B its allowable coefficient datum [def-weil-finite-field-fiber]. Let E be a finite extension of Q_l. Let f:X→Y be a separated finite-type morphism between quasi-compact finite-type D.k-schemes, and c a compactification. For integral bounded constructible derived-complete M on Y and K on X [def-weil-derived-complete-integral-detailed], and each n≥0, the set Hom(M[1], Res_(n+1) Rc.g_* c.i_! (K⊗^L A_(n+1))) is finite. The target is the specified sfCompactSupportTerm [lem-sf-integral-compact-support-constructible]. No separatedness of Y is assumed.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-verdier-exchange/sk-thm-sf-verdier-exchange.proof.md",
+  "place": "Step 1, integral realization; constructible Ext finiteness as used in the existing docstring of constructibleIntegralSupport_eq; SGA 4½, Th. finitude"
+ },
+ "stmt_deps": [
+  "def-weil-finite-field-fiber",
+  "def-weil-derived-complete-integral-detailed",
+  "lem-sf-integral-compact-support-constructible"
+ ],
+ "proof": [
+  {
+   "text": "Shift the integral object M, then use reduction--restriction adjunction. The integral predicate gives bounded constructibility of the reductions; [lem-coef-integral-residue-tor] upgrades their residue intervals to finite Tor intervals.",
+   "uses": [
+    "lem-weil-derived-scalar-extension-restriction-adjunction",
+    "lem-coef-integral-residue-tor"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply the dense-refinement uniform compact-support bound at the chosen positive level. Its original-compactification clause supplies intrinsic bounded constructibility and a finite Tor interval for the target.",
+   "uses": [
+    "lem-coef-finite-compact-support-uniform-tor"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use finite-ring derived etale origin, reflect Tor intervals along the comparison, and convert the explicit cohomology bound into the t-structure convention. The existing finite-Tor internal-Hom theorem makes RHom bounded constructible. Finite-type direct-image finiteness gives bounded constructibility after pushforward to the algebraically closed point, without an absolute separatedness assumption. Exact fully faithful point sections and the two Hom adjunctions identify the original Hom with its finite degree-zero section module.",
+   "uses": [
+    "lem-weil-pbc-finite-ring-constructible-derived-origin",
+    "lem-sf-comparison-tor-amplitude",
+    "sbc-thm-finiteness-finite-type",
+    "thm-sf-hom-ctf"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Transport the finite witness through the fully faithful comparison and scalar-adjunction Hom equivalences. Zero objects and empty schemes are included.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-derived-scalar-extension-restriction-adjunction",
+  "lem-coef-integral-residue-tor",
+  "lem-coef-finite-compact-support-uniform-tor",
+  "lem-weil-pbc-finite-ring-constructible-derived-origin",
+  "lem-sf-comparison-tor-amplitude",
+  "sbc-thm-finiteness-finite-type",
+  "thm-sf-hom-ctf"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "SGA 4½ Th. finitude; adopted source-library modules Etale.Derived.Stability.DerivedHom, Etale.Derived.Finiteness.DirectImage, Etale.Derived.Point and PoincareDuality.Frobenius.CompositionPairing",
+  "place": "D8 complete Lean proof using boundedConstructible_derivedHom, boundedConstructible_rightDerivedLowerStar_of_locallyOfFiniteType, finite_Γ_of_isConstructibleSheaf and the internal-Hom, pushforward and scalar-extension adjunctions."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "finite morphisms between bounded constructible derived etale complexes over finite coefficient rings",
+   "results": "8 unrelated scheme finiteness/etale results; no compact-support coefficient compositor or constructible derived Hom result.",
+   "date": "2026-10-25",
+   "verdict": "No applicable Mathlib statement; use the recorded source-library and project declarations."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The morphism groups between bounded constructible etale complexes with finite coefficients over an algebraically closed field are finite.",
+   "results": "8 unrelated finiteness results, including finite Hom from connected objects of a Galois category.",
+   "date": "2026-10-25",
+   "verdict": "No matching derived constructible Hom finiteness declaration."
+  },
+  {
+   "tool": "loogle",
+   "query": "Finite (_ ⟶ _)",
+   "results": "3 hits: FintypeCat.instFiniteHom, SimplexCategory.instFiniteHom, PreGaloisCategory.instFiniteHomOfIsConnected.",
+   "date": "2026-10-25",
+   "verdict": "None applies to ordinary derived categories of module sheaves."
+  },
+  {
+   "tool": "grep",
+   "query": "Finite.*Hom|[Ff]inite.*[Ee]xt",
+   "results": "No applicable Mathlib geometric Ext finiteness result; repository search found Milnor finiteness for units only.",
+   "date": "2026-10-25",
+   "verdict": "Need a separate geometric finiteness theorem."
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.ConstructibleExceptionalCompositor",
+  "date": "2026-10-25",
+  "group": "D8"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sf-constructible-exceptional-compositor",
+   "place": "Integral support normalization, proof step 3",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-thm-sf-verdier-exchange",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.CompactSupportTermHomFinite",
+  "file": "lean/Sheaf/Paper/CompactSupportTermHomFinite.lean",
+  "declaration": "WeilConjectures.compactSupportTerm_hom_finite",
+  "statement": "theorem compactSupportTerm_hom_finite\n    (D : FiniteFieldDatum.{u}) (B : D.CoefficientDatum)\n    (E : Type u) [Field E] [Algebra (Padic B.l) E]\n    [FiniteDimensional (Padic B.l) E]\n    {X Y : SixFunctorSpace D} (f : X ⟶ Y)\n    [IsSeparated f.hom.left] [LocallyOfFiniteType f.hom.left] [QuasiCompact f.hom.left]\n    (c : Compactification f.hom.left)\n    (M : sfIntegralConstructibleCategory B.l E Y.obj.left)\n    (K : sfIntegralConstructibleCategory B.l E X.obj.left) (n : ℕ) :\n    Finite (M.obj⟦(1 : ℤ)⟧ ⟶ sfCompactSupportTerm B.l E c K.obj n)",
+  "branch": "sheaf-dag",
+  "by": "D8",
+  "date": "2026-10-25"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-4a1ee",
+  "group": "D8",
+  "result": "fix",
+  "landing": "20261025T122737-L-1801866",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-4a1ee",
+  "group": "D8",
+  "result": "fix",
+  "landing": "20261025T122737-L-1801866",
+  "kind": "interface",
+  "note": "independent cc review: lem-sf-constructible-exceptional-compositor + 5 nodes vs delivered Lean (item, Data, LeftCompositorCoherence, CompactSupportTermHomFinite) and published module; universe params [u] verified; 3 direct importers compiled"
+ }
+}

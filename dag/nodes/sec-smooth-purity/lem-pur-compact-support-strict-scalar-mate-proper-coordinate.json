@@ -1,0 +1,91 @@
+{
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-thm-sf-compatibility",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Agent auxiliary: returned comparison Steps 3-4; Stacks Tags 07A6 (lemma-adjoint), 0B56 (equation-projection-formula-map), 0940 (section-derived-limits); sites-modules.tex Tag 0E8I (lemma-j-shriek-and-tensor).",
+  "note": "New statement-only task extracted under the human re-split decision of 2026-10-21; no numbered source is claimed to state the entire auxiliary. Full original argument and its source/node citations are preserved verbatim in report.md."
+ },
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Original 8-step plan, with existing stage-3 refinements retained. C1: canonical evaluation data relocated unchanged for an acyclic Step-7 split; final conjunction assembled from factor isomorphisms, the Step-7 equation, and transition naturality. F8 proves the existing pulledBasis_existsUnique obligation by finite-product transport and the canonical ordinary restriction/pullback mate; the two proper-coordinate obligations remain unchanged."
+ },
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.CompactSupportStrictScalarMate",
+  "date": "2026-10-27",
+  "group": "S3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pur-compact-support-strict-scalar-mate",
+   "place": "Step 4 finite-free proper mate column calculation",
+   "via": []
+  },
+  "same_as": []
+ },
+ "stmt_deps": [
+  "lem-pur-diagram-ring-restriction-pushforward",
+  "lem-pur-finite-free-scalar-extension",
+  "def-pur-finite-scalar-coordinate-data"
+ ],
+ "proof_deps": [
+  "lem-pur-diagram-ring-restriction-pushforward",
+  "lem-pur-finite-free-scalar-extension",
+  "def-pur-finite-scalar-coordinate-data"
+ ],
+ "mathlib_searches": [],
+ "tool_uses": [],
+ "proof": [
+  {
+   "text": "Choose a finite basis and transpose each basis column under the proper geometric adjunction. The counit and the normalized derived coordinate map identify the resulting column with the corresponding projection of the target coordinate isomorphism. This is proved in the derived category, before any evaluation.",
+   "uses": [
+    "lem-pur-diagram-ring-restriction-pushforward",
+    "lem-pur-finite-free-scalar-extension",
+    "def-pur-finite-scalar-coordinate-data"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0B56, equation-projection-formula-map; Tag 0944, lemma-projection-formula"
+   }
+  }
+ ],
+ "id": "lem-pur-compact-support-strict-scalar-mate-proper-coordinate",
+ "kind": "statement",
+ "title": "proper_biproduct_coordinate",
+ "statement": "For a finite coefficient basis at W and a transported basis at Z, every projection of the proper scalar mate followed by the normalized direct-image and coordinate maps equals the corresponding projection of the target derived coordinate isomorphism.",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.ProperBiproductCoordinate",
+  "file": "lean/Sheaf/Paper/ProperBiproductCoordinate.lean",
+  "declaration": "WeilConjectures.PurStrictScalar.proper_biproduct_coordinate",
+  "statement": "theorem proper_biproduct_coordinate {R S : PurCompactSupport.Coefficients.{u}}\n    (a : PurCompactSupport.Change R S) {Z W : Scheme.{u}} (g : Z ⟶ W) (d : ℕ)\n    (bW : (∏ᶜ fun _ : Fin d ↦ SheafOfModules.unit ((adicLisseForget W).obj (R.ring W))) ≅\n      (pbcRestrict (a.map W)).obj\n        (SheafOfModules.unit ((adicLisseForget W).obj (S.ring W))))\n    (bZ : (∏ᶜ fun _ : Fin d ↦ SheafOfModules.unit ((adicLisseForget Z).obj (R.ring Z))) ≅\n      (pbcRestrict (a.map Z)).obj\n        (SheafOfModules.unit ((adicLisseForget Z).obj (S.ring Z))))\n    (N : DerivedCategory (pbcModules Z (R.ring Z))) (j : Fin d) :\n    (pbcDerivedRestrict (a.map W)).map ((PurCompactSupport.properComparison a g).app N) ≫\n        (proEtaleRingRestrictionDerivedDirectImage g\n          (R.ring W) (S.ring W) (R.ring Z) (S.ring Z)\n          (a.map W) (a.map Z) (R.pull g) (S.pull g) (a.square g)).hom.app\n            ((pbcDerivedExtend (a.map Z)).obj N) ≫\n        (proEtaleRingDerivedDirectImage g (R.ring W) (R.ring Z) (R.pull g)).map\n          ((derivedCoordinates Z (a.map Z) d bZ).hom.app N) ≫\n        piComparison\n          (proEtaleRingDerivedDirectImage g (R.ring W) (R.ring Z) (R.pull g))\n          (fun _ : Fin d ↦ N) ≫\n        Pi.π (fun _ : Fin d ↦\n          (proEtaleRingDerivedDirectImage g (R.ring W) (R.ring Z) (R.pull g)).obj N) j =\n      (derivedCoordinates W (a.map W) d bW).hom.app\n        ((proEtaleRingDerivedDirectImage g (R.ring W) (R.ring Z) (R.pull g)).obj N) ≫\n        Pi.π (fun _ : Fin d ↦\n          (proEtaleRingDerivedDirectImage g (R.ring W) (R.ring Z) (R.pull g)).obj N) j",
+  "branch": "sheaf-dag",
+  "by": "S3",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S3",
+  "result": "pass",
+  "landing": "20261026T201255-L-3371792",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S3",
+  "result": "pass",
+  "landing": "20261026T201255-L-3371792",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

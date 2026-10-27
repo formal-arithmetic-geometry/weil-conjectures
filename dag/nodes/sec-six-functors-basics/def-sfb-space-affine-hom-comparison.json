@@ -1,0 +1,159 @@
+{
+ "id": "def-sfb-space-affine-hom-comparison",
+ "kind": "definition",
+ "title": "Canonical affine global Hom comparison for algebraic spaces",
+ "status": "split",
+ "statement": "For schemes [def-pc-scheme] and algebraic spaces [def-trf-algebraic-space], use the fixed small ringed module models, canonical internal Hom and K-injective direct image [def-sfb-space-derived-module-calculus], the shared total left derived tensor pullback and counit [def-sfb-space-derived-pullback], its representative-normalized tensor comparison [def-sfb-space-pullback-tensor-comparison], and the original tensor-pullback adjunction [def-trf-space-etale-module-functors]. Represent a scheme by its canonical algebraic space [def-trf-scheme-algebraic-space]; its identity is the terminal etale chart by [lem-trf-space-representable-etale-scheme-tests], with each source chart mapping to it by the Yoneda preimage of its composite with the structure map. Work in the unbounded categories [def-weil-abstract-derived-category] and sizes [def-weil-size-convention]. For $Y\\cong\\operatorname{Spec}A$ and $f:X\\to Y$, define $\\Gamma_{A,f}$ by the fixed basis equivalence, actual module direct image along $f$, evaluation at the terminal chart, and restriction along $A\\cong\\Gamma(Y,\\mathcal O_Y)$. This is additive. Define $G_{A,f}=R\\Gamma_{A,f}$ and $H_{A,f}(P,Q)=G_{A,f}(R\\mathcal Hom(P,Q))$. Its degree-$j$ cohomology is canonically the additive group $\\operatorname{Hom}(P,Q[j])$. For any commuting square $hf=f'g$ over affine $Y,Y'$, define $\\rho:A\\to B$ using the affine section identifications. The actual global-sections comparison $\\Gamma_{A,f}h_*\\cong\\operatorname{Res}_{\\rho}\\Gamma_{B,f'}$ is the unique one whose projection on every chart is the iterated direct-image projection. Its derived comparison $G_{A,f}Rh_*\\cong\\operatorname{Res}_{\\rho}G_{B,f'}$ is the unique one satisfying the square with that ordinary comparison and the fixed right-derived units on every K-injective representative. The derived adjunction $Lh^*\\dashv Rh_*$ is the unique one whose unit, followed by $Rh_*$ of the shared left-derived counit, equals the ordinary adjunction unit followed by the fixed right-derived unit on complexes. Define $Lh^*R\\mathcal Hom(P,Q)\\to R\\mathcal Hom(Lh^*P,Lh^*Q)$ as the transpose of pulled evaluation after the inverse normalized tensor comparison. Define the $A$-linear global-Hom pullback map by applying $G_{A,f}$ to the $h$-unit, using the specified sections comparison, and then applying $G_{B,f'}$ to this internal-Hom map. Define its $B$-linear extension by the extension/restriction adjunction of [def-zl-ring-derived-scalar-extension]. These arrows are natural in both variables. No isomorphism of this last arrow, perfectness, boundedness, flatness, or quasi-coherence is asserted in this definition.",
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-trf-algebraic-space",
+  "def-sfb-space-derived-module-calculus",
+  "def-sfb-space-derived-pullback",
+  "def-sfb-space-pullback-tensor-comparison",
+  "def-trf-space-etale-module-functors",
+  "def-trf-scheme-algebraic-space",
+  "lem-trf-space-representable-etale-scheme-tests",
+  "def-zl-ring-derived-scalar-extension",
+  "def-weil-abstract-derived-category",
+  "def-weil-size-convention"
+ ],
+ "source": {
+  "document": "literature/stacks-project/spaces-perfect.tex",
+  "place": "Tag 0E4S, lemma-affine-morphism-and-hom-out-of-perfect, preceding global-Hom construction and first paragraph of proof; sites-cohomology.tex Tags 07A6, 08JA and 0D6E."
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Canonical global derived Hom pullback for algebraic spaces followed by derived scalar extension to an affine base change",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"PresheafOfModules.pullback\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Presheaf.Pullback\", \"type\": \": PresheafOfModules.{v} S ⥤ PresheafOfModules.{v} R\", \"doc\": \"Given a natural transformation $\\\\phi: R \\\\to S$ between presheaves of rings on a category $\\\\mathcal{C}$, this functor is the left adjoint to the pushforward operation. For a presheaf of modules $\\\\mathc\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Pullback.base_affine_hasPullback\", \"module\": \"Mathlib.AlgebraicGeometry.Pullbacks\", \"type\": \"{C : CommRingCat} {X Y : Scheme} (f : X ⟶ Spec C) (g : Y ⟶ Spec C) : HasPullback f g\", \"doc\": \"For any commutative ring $C$, and any two schemes $X$ and $Y$ with morphisms $f: X \\\\to \\\\operatorname{Spec}(C)$ and $g: Y \\\\to \\\\operatorname{Spec}(C)$, the pullback of $f$ and $g$ exists in the category\"}\n  {\"name\": \"AlgebraicGeometry.AffineSpace.isPullback_map\", \"module\": \"Mathlib.AlgebraicGeometry.AffineSpace\", \"type\": \"{S T : Scheme.{max u v}} (f : S ⟶ T) : IsPullback (map n f) (𝔸(n; S) ↘ S) (𝔸(n; T) ↘ T) f\", \"doc\": \"Given a morphism $f: S \\\\to T$ of schemes, the induced morphism $\\\\mathbb{A}^n_S \\\\to \\\\mathbb{A}^n_T$ between affine spaces forms a pullback square with the canonical projections $\\\\mathbb{A}^n_S \\\\to S$ a\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.canonicallyOverPullback\", \"module\": \"Mathlib.AlgebraicGeometry.Pullbacks\", \"type\": \": (pullback (M ↘ S) f).CanonicallyOver T\", \"doc\": \"For any scheme $M$ equipped with a morphism to a base scheme $S$, and for any morphism $f : T \\to S$ between schemes, the cospan diagram formed by $M \\to S$ and $T \\to S$ admits a pullback in the categor\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Cover.pullbackHom_map_assoc\", \"module\": \"Mathlib.AlgebraicGeometry.Cover.MorphismProperty\", \"type\": \"∀ {P : CategoryTheory.MorphismProperty AlgebraicGeometry.Scheme} [inst : P.IsStableUnderBaseChange]\\n  [inst_1 : AlgebraicGeometry.Scheme.IsJointlySurjectivePreserving P] {X W : AlgebraicGeometry.Scheme}\\n  (𝒰 : AlgebraicGeometry.Scheme.Cover (AlgebraicGeometry.Scheme.precoverage P) X) (f : W ⟶ X)\\n  [\", \"doc\": \"Given a morphism property $ P $ on schemes that is stable under base change and preserved by jointly surjective families, for any scheme cover $ \\\\mathcal{U} $ of $ X $, morphism $ f : W \\\\to X $, index\"}\n  {\"name\": \"PresheafOfModules.pullbackPushforwardAdjunction\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Presheaf.Pullback\", \"type\": \": pullback.{v} φ ⊣ pushforward.{v} φ\", \"doc\": \"Given a natural transformation $\\\\phi: R \\\\to S$ between presheaves of rings on a category $\\\\mathcal{C}$, this functor is the left adjoint to the pushforward operation. For a presheaf of modules $\\\\mathc\"}\n  {\"name\": \"algHomEquivSigma\", \"module\": \"Mathlib.RingTheory.AlgebraTower\", \"type\": \": (C →ₐ[A] D) ≃ Σ f : B →ₐ[A] D, @AlgHom B C D _ _ _ _ f.toRingHom.toAlgebra\", \"doc\": \"An equivalence establishing that A-algebra homomorphisms from C to D correspond bijectively to pairs consisting of a B-algebra homomorphism from B to D and a compatible extension of scalars, leveragin\"}\n  {\"name\": \"AlgHom.extendScalars\", \"module\": \"Mathlib.RingTheory.AlgebraTower\", \"type\": \": @AlgHom B C D _ _ _ _ (f.restrictDomain B).toRingHom.toAlgebra\", \"doc\": \"Given an algebra homomorphism $ f : C \\to D $ over a commutative semiring $ A $, and a scalar tower $ A \\to B \\to C $, this constructs the extended algebra homomorphism over $ B $ by composing $ f $ with\"}",
+   "date": "2026-10-23",
+   "verdict": "No algebraic-space global-Hom comparison: ordinary scheme or presheaf pullback and affine scheme products only."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Canonical tensor pullback of algebraic-space module sheaves, normalized on local pure tensors, and global Hom affine base change",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.pullback\", \"module\": \"Mathlib/AlgebraicGeometry/Modules/Sheaf\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → CategoryTheory.Functor Y.Modules X.Modules\", \"doc\": \"Given a morphism $ f : X \\to Y $ of schemes, this defines the pullback functor from the category of sheaves of modules over $ Y $'s structure sheaf to the category of sheaves of modules over $ X $'s st\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Pullback.Triplet.tensor\", \"module\": \"Mathlib/AlgebraicGeometry/PullbackCarrier\", \"type\": \"{X Y S : AlgebraicGeometry.Scheme} →\\n  {f : X ⟶ S} → {g : Y ⟶ S} → AlgebraicGeometry.Scheme.Pullback.Triplet f g → CommRingCat\", \"doc\": \"For a pullback triplet in the category of schemes with morphisms $f: X \\\\to S$ and $g: Y \\\\to S$, this constructs the pushout in the category of commutative rings formed by composing the inverse residue\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.instIsLeftAdjointPullback\", \"module\": \"Mathlib/AlgebraicGeometry/Modules/Sheaf\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y), (AlgebraicGeometry.Scheme.Modules.pullback f).IsLeftAdjoint\", \"doc\": \"For any morphism $ f : X \\to Y $ of schemes, the pullback functor from the category of sheaves of modules over $ Y $'s structure sheaf to the category of sheaves of modules over $ X $'s structure sheaf\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Pullback.Triplet.tensorInl\", \"module\": \"Mathlib/AlgebraicGeometry/PullbackCarrier\", \"type\": \"{X Y S : AlgebraicGeometry.Scheme} →\\n  {f : X ⟶ S} → {g : Y ⟶ S} → (T : AlgebraicGeometry.Scheme.Pullback.Triplet f g) → X.residueField T.x ⟶ T.tensor\", \"doc\": \"Given a pullback triplet in the category of schemes with morphisms $f: X \\to S$ and $g: Y \\to S$, this morphism maps the residue field $\\\\kappa(T.x)$ at the $X$-component of the triplet to the pushout ob\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.pullbackPushforwardAdjunction\", \"module\": \"Mathlib/AlgebraicGeometry/Modules/Sheaf\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} →\\n  (f : X ⟶ Y) → AlgebraicGeometry.Scheme.Modules.pullback f ⊣ AlgebraicGeometry.Scheme.Modules.pushforward f\", \"doc\": \"For any morphism $ f : X \\to Y $ of schemes, the pullback functor from the category of sheaves of modules over $ Y $'s structure sheaf to the category of sheaves of modules over $ X $'s structure sheaf\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Pullback.Triplet.SpecTensorTo\", \"module\": \"Mathlib/AlgebraicGeometry/PullbackCarrier\", \"type\": \"{X Y S : AlgebraicGeometry.Scheme} →\\n  {f : X ⟶ S} →\\n    {g : Y ⟶ S} →\\n      (T : AlgebraicGeometry.Scheme.Pullback.Triplet f g) →\\n        AlgebraicGeometry.Spec T.tensor ⟶ CategoryTheory.Limits.pullback f g\", \"doc\": \"The morphism from the spectrum of the pushout ring $ T.tensor $ to the pullback scheme of morphisms $ f: X \\to S $ and $ g: Y \\to S $, constructed by lifting the compositions of $ \\\\operatorname{Spec}(T.\"}\n  {\"name\": \"PresheafOfModules.Monoidal.tensorObjMap\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Presheaf/Monoidal\", \"type\": \"{C : Type u_1} →\\n  [inst : CategoryTheory.Category.{v_1, u_1} C] →\\n    {R : CategoryTheory.Functor Cᵒᵖ CommRingCat} →\\n      (M₁ M₂ : PresheafOfModules (R.comp (CategoryTheory.forget₂ CommRingCat RingCat))) →\\n        {X Y : Cᵒᵖ} →\\n          (f : X ⟶ Y) →\\n            CategoryTheory.MonoidalCategoryStr\", \"doc\": \"For a presheaf of modules $ M_1, M_2 $ over a presheaf of commutative rings $ R $ on a category $ \\\\mathcal{C} $, and a morphism $ f: X \\\\to Y $ in $ \\\\mathcal{C}^\\\\text{op} $, this defines the $ R(X) $-l\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Pullback.tensorCongr_SpecTensorTo\", \"module\": \"Mathlib/AlgebraicGeometry/PullbackCarrier\", \"type\": \"∀ {X Y S : AlgebraicGeometry.Scheme} {f : X ⟶ S} {g : Y ⟶ S} {T T' : AlgebraicGeometry.Scheme.Pullback.Triplet f g}\\n  (h : T = T'),\\n  CategoryTheory.CategoryStruct.comp\\n      (AlgebraicGeometry.Spec.map (AlgebraicGeometry.Scheme.Pullback.Triplet.tensorCongr h).hom) T.SpecTensorTo =\\n    T'.SpecTensor\", \"doc\": \"Given two pullback triplets $ T $ and $ T' $ for morphisms $ f: X \\\\to S $ and $ g: Y \\\\to S $ in the category of schemes, if $ T = T' $, then the composition of the morphism $ \\\\operatorname{Spec}(T.ten\"}",
+   "date": "2026-10-23",
+   "verdict": "No algebraic-space global-Hom comparison: ordinary scheme or presheaf pullback and affine scheme products only."
+  },
+  {
+   "tool": "grep",
+   "query": "globalHom|derivedPullback|tensorPullback",
+   "results": "[grep] OK 0 hit(s)",
+   "date": "2026-10-23",
+   "verdict": "No algebraic-space global-Hom comparison: ordinary scheme or presheaf pullback and affine scheme products only."
+  },
+  {
+   "tool": "grep",
+   "query": "spaceGlobalHom|spaceAffineSections|SpaceDerivedAdjunctionNormalized|spaceAffineHomBaseChange in lean/WeilConjectures and lean/Sheaf; affine/global Hom comparison in dag/nodes; blueprint_refs.py search global Hom",
+   "results": "No such declarations in either Lean tree. Scheme-only GlobalDerivedHom/AffineGlobalHomBaseChangeMap cannot accept algebraic spaces. Existing space tensor pullback, its counit, and normalized tensor comparison found and reused. blueprint search: 0 blueprint nodes match global Hom. Existing nodes define the scheme-only version and do not define this space-valued map.",
+   "date": "2026-10-23",
+   "verdict": "Missing space global-Hom canonical comparison; reuse all landed constituent notions."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-space-affine-perfect-hom-base-change",
+  "date": "2026-10-23",
+  "group": "Q98"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "Canonical map in Tag 0E4S: global Hom pullback and scalar-extension adjunction.",
+   "via": [
+    "lem-sfb-space-affine-perfect-hom-base-change",
+    "lem-sfb-affine-flat-proper-adjoint-base-change",
+    "lem-sfb-proper-flat-space-derived-duality",
+    "lem-sfb-nodal-relative-dualizing-line",
+    "lem-sfb-stable-and-smooth-family-open-loci",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SpaceAffineHomComparison",
+  "declaration": "AlgebraicGeometry.AlgebraicSpace.spaceAffineHomBaseChangeNat",
+  "declarations": [
+   "AlgebraicGeometry.AlgebraicSpace.spaceInternalHomPullback",
+   "AlgebraicGeometry.AlgebraicSpace.affineIdentityChart",
+   "AlgebraicGeometry.AlgebraicSpace.affineModuleChart_triangle",
+   "AlgebraicGeometry.AlgebraicSpace.affineModuleChart",
+   "AlgebraicGeometry.AlgebraicSpace.spaceAffineSections",
+   "AlgebraicGeometry.AlgebraicSpace.spaceAffineSections_additive",
+   "AlgebraicGeometry.AlgebraicSpace.spaceAffineDerivedSections",
+   "AlgebraicGeometry.AlgebraicSpace.spaceGlobalHom",
+   "AlgebraicGeometry.AlgebraicSpace.spaceAffineSectionAt",
+   "AlgebraicGeometry.AlgebraicSpace.spaceAffineRingMap",
+   "AlgebraicGeometry.AlgebraicSpace.SpaceSectionsCompositionNormalized",
+   "AlgebraicGeometry.AlgebraicSpace.spaceSectionsComposition_existsUnique",
+   "AlgebraicGeometry.AlgebraicSpace.spaceSectionsComposition",
+   "AlgebraicGeometry.AlgebraicSpace.spaceSmallTensorAdjunction",
+   "AlgebraicGeometry.AlgebraicSpace.spaceRightDerivedComplexUnit",
+   "AlgebraicGeometry.AlgebraicSpace.SpaceDerivedAdjunctionNormalized",
+   "AlgebraicGeometry.AlgebraicSpace.spaceDerivedAdjunction_existsUnique",
+   "AlgebraicGeometry.AlgebraicSpace.spaceDerivedAdjunction",
+   "AlgebraicGeometry.AlgebraicSpace.SpaceDerivedSectionsCompositionNormalized",
+   "AlgebraicGeometry.AlgebraicSpace.spaceDerivedSectionsComposition_existsUnique",
+   "AlgebraicGeometry.AlgebraicSpace.spaceDerivedSectionsComposition",
+   "AlgebraicGeometry.AlgebraicSpace.spaceGlobalHomPullback",
+   "AlgebraicGeometry.AlgebraicSpace.spaceAffineHomBaseChange",
+   "AlgebraicGeometry.AlgebraicSpace.spaceAffineHomSource",
+   "AlgebraicGeometry.AlgebraicSpace.spaceAffineHomTarget",
+   "AlgebraicGeometry.AlgebraicSpace.spaceAffineHomBaseChange_naturality",
+   "AlgebraicGeometry.AlgebraicSpace.spaceAffineHomBaseChangeNat",
+   "AlgebraicGeometry.AlgebraicSpace.spaceGlobalHom_cohomology"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/SpaceAffineHomComparison.lean",
+  "statement": "def spaceAffineHomBaseChangeNat {A B : Type u} [CommRing A] [CommRing B] [HasDerivedCategory.{w} (ModuleCat.{u} A)] [HasDerivedCategory.{w} (ModuleCat.{u} B)] {Y Y' : Over S} (e : Y.left ≅ Spec (.of A)) (e' : Y'.left ≅ Spec (.of B)) (g : Y' ⟶ Y) {X X' : AlgebraicSpace S} (f : X ⟶ schemeSpace Y) (h : X' ⟶ X) (f' : X' ⟶ schemeSpace Y') (sq : h ≫ f = f' ≫ (ObjectProperty.homMk ((Scheme.fppfTopology.over S).yoneda.map g) : schemeSpace Y' ⟶ schemeSpace Y)) : spaceAffineHomSource e e' g f ⟶ spaceAffineHomTarget e' h f'",
+  "branch": "sheaf-dag",
+  "by": "Q72",
+  "date": "2026-10-23",
+  "existing": false,
+  "note": "§1(B): the recorded derived-adjunction helper inherited an unnecessary ambient all-spaces localization instance. Generalize only its normalization, existence theorem and selected adjunction to the two participating localizations; keep all names and data. All other declarations, including SingleComplex.derivedTensorComparison consumption and the affine Hom comparison, retain their original ambient interface."
+ },
+ "import_flags": [],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-bb5cf83ce",
+  "group": "Q98",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-d3377a85b",
+  "group": "Q72",
+  "result": "pass",
+  "note": "Re-delivery of cf4805e1eb31 (H13 RETURN): all 5 requested corrections applied exactly (diff -rq vs cf4805 snapshot): SpaceModuleTensorComposition.lean dropped; def-sfb-space-module-tensor-composition record byte-identical to live; SpaceFlatDirectImageBaseChange.lean and its theorem record no longer delivered; SpaceDerivedPullback import restored (only line changed); unused theorem stmt_dep lem-sfb-space-flat-direct-image-base-change removed (all stmt_deps now def nodes). Dep repairs SpaceDerivedPullback/SpaceAffineHomComparison vs live = per-space HasDerivedCategory binders only, live files predate base; importers use ambient family (still resolves). Item vs 0A1K: qcqs via MapIsQuasiCompact (+diagonal), unbounded E with derivedQCohProperty, bounded-above qcoh G with ModuleIsFlatOver f, IsPullback square, exchange = spaceDerivedAdjunction f' transpose of pulled counit, then moduleDerivedPullbackTensor and 1⊗(Lh*G→h*G), IsIso; no extra hypotheses/universe restriction; edge cases E=0,G=0,empty X',id g,k[eps] ok. New node unchanged since a6aec PASS, ∃!-pinned/actual data. lean.statement verbatim for item, new node and both dep records. No compile run (no file changed); cf4805 review compiled this exact configuration clean (7.6/11.9/27.6/13.8 s). Advisories: Q17/Q115 tensor bridge for the parent; second reading is a self-check."
+ }
+}

@@ -254,16 +254,14 @@
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q35-914e8ac27 (reviewer sub-agent of L); spot-checked: Item statement matches ILO XIV Prop 2.5.4, pp.217-218 (regular morphism of excellent schemes, δ_Y = δ_X∘f − dim O_{Y_{f(y)},y}): unchanged, sign correct, no finite-type hypothesis added. New node lem-per-dimension-functions-strict-localization is true. ⇐: take t̄ = v̄; T_(v̄) is strictly local. ⇒: ind-étale invariance of strict localization, as in ILO XIV 2.1.8. It is statement-only, not a duplicate of any existing dimension-function node, strictly smaller than the item, and its blueprint ancestor matches the tool output. Steps checked: (1) the local-model node gives regular local f, excellence and equal fibre dimensions, and A→B is flat at the closed point. (2) The saturated-chain formula d(v)−d(w)=dim O_{Z,w} uses catenarity plus the criterion's clause (a) and its consequently clause. (3) Integral geometric fibre (XVII 4.3.2.3, proved without XIV 2.5.4, so no cycle); a linear retraction makes F_p a domain. (4) Flat base change and torsion-freeness give B/pB ⊂ F_p, so pB is prime over p and is the fibre's generic point. (5) The 00ON height formula on A/p→B/pB at mB/pB gives dim A/p. (6) Elementary subtraction. (7) Stacks 0HA1 gives B_q/pB_q = O_{Y_p,q}. (8) The result is d plus a constant; descend to P with the new lemma. I found no cycle in the closures of the cited nodes. Tool use of lem-sbc-scheme-fibre-stalk-quotient is accepted as a generic Stacks 0HA1 identification. Batch-5 flags: the criterion's closure reaches only generic algebra nodes in sec-trace-formula (ind-etale-strict-local-invariance / 05WR, henselian permanence, closed-immersion cartesian, ind-etale-local-henselian-integral, bounded-below derived adjunction, def henselization-at-prime). lem-trf-flat-module-torsionfree-domain is a Mathlib leaf for flat ⇒ torsion-free. None of these is part of the trace formula or Poincaré duality, so both flags are accepted. No SGA source is cited. No fixes."
  },
- "lean": {
+ "lean": null,
+ "lean_removed": {
+  "commit": "e7ce5f35a7d",
+  "path": "lean/Sheaf/AlgebraicGeometry/RegularDimensionFunctionPullback.lean",
   "module": "Sheaf.AlgebraicGeometry.RegularDimensionFunctionPullback",
   "declaration": "AlgebraicGeometry.Scheme.regular_pullback_isGeometricDimensionFunction",
-  "file": "lean/Sheaf/AlgebraicGeometry/RegularDimensionFunctionPullback.lean",
-  "statement": "theorem regular_pullback_isGeometricDimensionFunction {P X : Scheme.{u}} (r : P ⟶ X) [IsNoetherian P] [IsNoetherian X] (hP : ∀ U : P.affineOpens, IsExcellent Γ(P, U)) (hX : ∀ U : X.affineOpens, IsExcellent Γ(X, U)) [Flat r] (hregular : ∀ (x : X) (L : Type u) [Field L] [Algebra (X.residueField x) L] [Module.Finite (X.residueField x) L], IsRegularScheme (pullback (r.fiberToSpecResidueField x) (Spec.map (CommRingCat.ofHom (algebraMap (X.residueField x) L))))) (δX : X → ℤ) (hδX : IsGeometricDimensionFunction X δX) : ∃ b : P → ℕ, (∀ p : P, ringKrullDim ((r.fiber (r p)).presheaf.stalk (r.asFiber p)) = (b p : WithBot ℕ∞)) ∧ IsGeometricDimensionFunction P (fun p ↦ δX (r p) - (b p : ℤ))",
-  "branch": "newtargets-dag",
-  "by": "Q29",
-  "date": "2026-10-18",
-  "existing": false,
-  "note": "2026-10-20 (U): module Sheaf.AlgebraicGeometry.RegularDimensionFunctionPullback deleted (dead: no target reaches it); this node is not reached either."
+  "reason": "module deleted as dead (no target reaches it by imports; this node is not reached either); the declaration does not live on elsewhere, so the node has no Lean statement",
+  "former_note": "2026-10-20 (U): module Sheaf.AlgebraicGeometry.RegularDimensionFunctionPullback deleted (dead: no target reaches it); this node is not reached either."
  },
  "reviewed_lean": {
   "date": "2026-10-18",
@@ -273,5 +271,16 @@
   "result": "pass",
   "note": "Item Lean matches node and ILO XIV 2.5.4 clause by clause: Noetherian, excellent on affine opens, Flat, fibres regular after every finite residue extension, negative sign, no finite-type assumption; b pinned to the actual fibre-stalk ringKrullDim, which is finite. New def node def-per-geometric-dimension-function matches ILO XIV 2.1.1/2.1.2/2.1.8, uses the recorded strict localization, structural map and topologicalKrullDim, is not hollow, all fields correct, no duplicate on side/Mathlib/other runs. Item changed only in lean+stmt_deps; dependency nodes byte-identical; docstrings carry all 8 steps; plain imports = stated proof_deps modules; statement verbatim; max line 95. nt_compile --json: both files clean 2.2 s, controls with injected errors fail as expected. Advisory: the node's 'Noetherian' (quasi-compact) is stronger than ILO's locally Noetherian 'excellent'; the Lean follows the node."
  },
- "lean_audit": {}
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ }
 }

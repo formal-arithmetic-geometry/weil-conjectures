@@ -1,0 +1,245 @@
+{
+ "id": "lem-sfb-separably-closed-lisse-split-trivialization",
+ "kind": "statement",
+ "title": "Split trivializing covers over a separably closed point for arbitrary condensed coefficients",
+ "statement": "Let $\\Omega$ be a separably closed field (every nonconstant separable polynomial over $\\Omega$ has a root), $X=\\operatorname{Spec}\\Omega$ [def-pc-scheme], and $\\Lambda$ any commutative condensed ring [sk-def-sfb-condensed-ring]. Put $R=p_X^*\\Lambda$ [sk-def-sfb-pulled-back-coefficients] on the small pro-etale site of $X$ [def-weil-pbc-proetale-site], and use internal $R$-modules [sk-def-sfb-module-objects]. For every lisse $R$-module $L$ [def-sfb-lisse-coefficient-module] and every trivializing cover $\\{u_i:U_i\\to X\\}$ equipped with isomorphisms $\\tau_i:L|_{U_i}\\cong(R|_{U_i})^{\\oplus n_i}$ on the slice sites [def-pur-localized-ringed-site], there exist an index $i$ and a morphism $s:X\\to U_i$ of this site with $u_i\\circ s=1_X$. Relocalizing $\\tau_i$ along $s$ yields an isomorphism of internal modules on the whole site $L\\cong R^{\\oplus n_i}$; under the equivalence with sectionwise module sheaves [def-weil-pbc-internal-abelian-sheaf-module-equivalence] its component at $V$ is the component of $\\tau_i$ at $(V\\to X\\xrightarrow{s}U_i)$. The finite rank $n_i=0$ is allowed. There is no topology, completeness or field assumption on the coefficient ring $\\Lambda$.",
+ "source": {
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Bhatt–Scholze Section 2.4 (Lemma 2.4.8) and Example 7.3.5; Stacks proetale.tex Tag 0982 (lemma-w-local-strictly-henselian-extremally-disconnected); agent restriction of a slice trivialization along a splitting section. Returned item proof steps 6–7."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "sk-def-sfb-condensed-ring",
+  "sk-def-sfb-pulled-back-coefficients",
+  "def-weil-pbc-proetale-site",
+  "sk-def-sfb-module-objects",
+  "def-sfb-lisse-coefficient-module",
+  "def-pur-localized-ringed-site",
+  "def-weil-pbc-internal-abelian-sheaf-module-equivalence"
+ ],
+ "proof": [
+  {
+   "text": "The residue map from Ω to its residue field is bijective: it is surjective for any local ring and injective for a field. Transport separable closedness through this ring equivalence. Fields are henselian, so Ω is strictly henselian [def-weil-pbc-henselian-terminology]. The existing theorem IsStrictlyHenselianLocalRing.isWContractibleRing verifies the maximal-localization and component-space clauses of [det-pe-wlocal-strict-contractible], giving w-contractibility without repeating those constructions.",
+   "uses": [
+    "def-weil-pbc-henselian-terminology",
+    "det-pe-wlocal-strict-contractible"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 0982, lemma-w-local-strictly-henselian-extremally-disconnected, condition (3); elementary verification for a separably closed field"
+   }
+  },
+  {
+   "text": "Apply [det-pe-wcb-clopen-partition] to the given covering of the final object $X$ of its small pro-etale site. It gives a finite clopen partition of $X$ and $X$-morphisms from its pieces into covering members. Since $X$ has exactly one point, one piece is the whole open subscheme $X$; the partition cannot be empty. Its associated map is $s:X\\to U_i$ with $u_i\\circ s=1_X$. By [def-weil-pbc-proetale-site], site morphisms are all $X$-morphisms, so this section is a morphism of the site.",
+   "uses": [
+    "det-pe-wcb-clopen-partition",
+    "def-weil-pbc-proetale-site"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 098F, lemma-w-contractible-proetale-cover, implication (1) to (2), specialized to a one-point target"
+   }
+  },
+  {
+   "text": "Let E be the section-module equivalence [def-weil-pbc-internal-abelian-sheaf-module-equivalence]. Every site object V has its unique structural arrow c_V to the final object X. Put b_V = c_V followed by s. Evaluate tau_i on (V,b_V) to obtain an isomorphism of the section modules E(L)(V) and E(R^{n_i})(V); this uses the unchanged section rings in localization [def-pur-localized-ringed-site]. For f:V to Vprime, uniqueness gives f followed by b_Vprime = b_V; tau_i naturality on that slice arrow gives the required naturality equation. PresheafOfModules.isoMk constructs the presheaf-module isomorphism, which lifts through the fully faithful sheaf forgetful functor and then through E. Functor.map_preimage gives the exact component formula; any supplied v equals c_V. The free module itself is never unfolded, so the construction applies unchanged to rank zero and arbitrary condensed coefficients.",
+   "uses": [
+    "def-weil-pbc-internal-abelian-sheaf-module-equivalence",
+    "def-pur-localized-ringed-site"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Tag 03EH, lemma-relocalize; sites-modules.tex Tag 04IX, definition-localize-ringed-site; explicit restriction of the given isomorphism and its inverse"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-henselian-terminology",
+  "det-pe-wlocal-strict-contractible",
+  "det-pe-wcb-clopen-partition",
+  "def-weil-pbc-proetale-site",
+  "def-weil-pbc-internal-abelian-sheaf-module-equivalence",
+  "def-pur-localized-ringed-site"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Tags 0982 and 098F via the stated nodes and IsStrictlyHenselianLocalRing.isWContractibleRing; explicit sectionwise restriction and fully faithful lifting, using sites.tex Tag 03EH and sites-modules.tex Tag 04IX. Lean proof by J3, 2026-10-25."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Every pro etale covering of a separably closed field has a member with a section and pulling a local finite free module trivialization along it gives global freeness for any condensed ring",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"Algebra.FormallyEtale.iff_exists_algEquiv_prod\", \"module\": \"Mathlib/RingTheory/Etale/Field\", \"type\": \"∀ (K : Type u_1) (A : Type u) [inst : Field K] [inst_1 : CommRing A] [inst_2 : Algebra K A] [Algebra.EssFiniteType K A],\\n  Algebra.FormallyEtale K A ↔ ∃ I, ∃ (_ : Finite I), ∃ Ai x x_1 x_2, ∀ (i : I), Algebra.IsSeparable K (Ai i)\", \"doc\": \"A finitely generated algebra $ A $ over a field $ K $ is formally étale if and only if there exists a finite index set $ I $ and a family of field extensions $ \\\\{A_i\\\\}_{i \\\\in I} $, each separable over\"}\n  {\"name\": \"Algebra.Etale.iff_exists_algEquiv_prod\", \"module\": \"Mathlib/RingTheory/Etale/Field\", \"type\": \"∀ (K : Type u_1) (A : Type u) [inst : Field K] [inst_1 : CommRing A] [inst_2 : Algebra K A],\\n  Algebra.Etale K A ↔\\n    ∃ I, ∃ (_ : Finite I), ∃ Ai x x_1 x_2, ∀ (i : I), Module.Finite K (Ai i) ∧ Algebra.IsSeparable K (Ai i)\", \"doc\": \"An algebra $ A $ over a field $ K $ is étale if and only if there exists a finite index set $ I $ and a family of fields $ \\\\{A_i\\\\}_{i \\\\in I} $, each equipped with a $ K $-algebra structure, such that \"}\n  {\"name\": \"Algebra.FormallyEtale.instForallOfFinite\", \"module\": \"Mathlib/RingTheory/Etale/Pi\", \"type\": \"∀ {R : Type u_1} {I : Type u_2} (A : I → Type u_3) [inst : CommRing R] [inst_1 : (i : I) → CommRing (A i)]\\n  [inst_2 : (i : I) → Algebra R (A i)] [Finite I] [∀ (i : I), Algebra.FormallyEtale R (A i)],\\n  Algebra.FormallyEtale R ((i : I) → A i)\", \"doc\": \"If $ I $ is a finite set and each algebra $ A_i $ over a commutative ring $ R $ is formally étale, then the product algebra $ \\\\prod_{i \\\\in I} A_i $ is also formally étale over $ R $.\"}\n  {\"name\": \"Algebra.Etale.exists_subalgebra_fg\", \"module\": \"Mathlib/RingTheory/Smooth/NoetherianDescent\", \"type\": \"∀ (R : Type u_1) [inst : CommRing R] (A : Type u) (B : Type u_2) [inst_1 : CommRing A] [inst_2 : Algebra R A]\\n  [inst_3 : CommRing B] [inst_4 : Algebra A B] [Algebra.Etale A B],\\n  ∃ A₀ B₀ x x_1, A₀.FG ∧ Algebra.Etale (↥A₀) B₀ ∧ Nonempty (B ≃ₐ[A] TensorProduct (↥A₀) A B₀)\", \"doc\": \"For any étale algebra $ B $ over a commutative ring $ A $, there exists a finitely generated $ R $-subalgebra $ A_0 \\\\subseteq A $, an étale $ A_0 $-algebra $ B_0 $, and an isomorphism of $ A $-algebra\"}\n  {\"name\": \"AlgebraicGeometry.IsEtale.of_comp\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) {Z : AlgebraicGeometry.Scheme} (g : Y ⟶ Z)\\n  [AlgebraicGeometry.IsEtale (CategoryTheory.CategoryStruct.comp f g)] [AlgebraicGeometry.LocallyOfFiniteType g]\\n  [AlgebraicGeometry.FormallyUnramified g], AlgebraicGeometry.IsEtale f\", \"doc\": \"If the composition of a morphism $ f: X \\to Y $ with a morphism $ g: Y \\to Z $ is étale, and $ g $ is locally of finite type and formally unramified, then $ f $ is an étale morphism.\"}\n  {\"name\": \"Algebra.Etale.formallyEtale\", \"module\": \"Mathlib/RingTheory/Etale/Basic\", \"type\": \"∀ {R : Type u} {A : Type v} {inst : CommRing R} {inst_1 : CommRing A} {inst_2 : Algebra R A} [self : Algebra.Etale R A],\\n  Algebra.FormallyEtale R A\", \"doc\": \"If $ A $ is an étale algebra over a commutative ring $ R $, then $ A $ is formally étale over $ R $. This establishes that the property of being étale implies formal étaleness in the context of commut\"}\n  {\"name\": \"Algebra.etaleLocus_eq_univ_iff\", \"module\": \"Mathlib/RingTheory/Etale/Locus\", \"type\": \"∀ {R : Type u_1} {A : Type u_2} [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A],\\n  Algebra.etaleLocus R A = Set.univ ↔ Algebra.FormallyEtale R A\", \"doc\": \"The étale locus of an algebra $ A $ over a commutative ring $ R $ is equal to the universal set of prime ideals in $ \\\\operatorname{Spec}(A) $ if and only if $ A $ is formally étale over $ R $.\"}\n  {\"name\": \"Algebra.etaleLocus_eq_univ_iff_etale\", \"module\": \"Mathlib/RingTheory/Etale/Locus\", \"type\": \"∀ {R : Type u_1} {A : Type u_2} [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A]\\n  [Algebra.FinitePresentation R A], Algebra.etaleLocus R A = Set.univ ↔ Algebra.Etale R A\", \"doc\": \"The étale locus of an algebra $ A $ over a commutative ring $ R $ is equal to the universal set (i.e., the entire prime spectrum $ \\\\operatorname{Spec}(A) $) if and only if $ A $ is étale over $ R $.\"}",
+   "date": "2026-10-22",
+   "verdict": "no exact match: formal etaleness and locally free definitions do not give a split trivializing cover and its relocalized internal-module trivialization"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A lisse module on the small pro etale site of a separably closed point is globally finite free via w contractibility and restriction along a splitting section",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"Condensed.finFree\", \"module\": \"Mathlib/Condensed/Solid\", \"type\": \"(R : Type (u + 1)) → [inst : Ring R] → CategoryTheory.Functor FintypeCat (CondensedMod R)\", \"doc\": \"The functor from the category of finite types to the category of condensed $ R $-modules, constructed by composing the embedding of finite types into profinite spaces (via indiscrete topology), the in\"}\n  {\"name\": \"Algebra.Etale.exists_subalgebra_fg\", \"module\": \"Mathlib/RingTheory/Smooth/NoetherianDescent\", \"type\": \"∀ (R : Type u_1) [inst : CommRing R] (A : Type u) (B : Type u_2) [inst_1 : CommRing A] [inst_2 : Algebra R A]\\n  [inst_3 : CommRing B] [inst_4 : Algebra A B] [Algebra.Etale A B],\\n  ∃ A₀ B₀ x x_1, A₀.FG ∧ Algebra.Etale (↥A₀) B₀ ∧ Nonempty (B ≃ₐ[A] TensorProduct (↥A₀) A B₀)\", \"doc\": \"For any étale algebra $ B $ over a commutative ring $ A $, there exists a finitely generated $ R $-subalgebra $ A_0 \\\\subseteq A $, an étale $ A_0 $-algebra $ B_0 $, and an isomorphism of $ A $-algebra\"}\n  {\"name\": \"Algebra.FormallyEtale.iff_exists_algEquiv_prod\", \"module\": \"Mathlib/RingTheory/Etale/Field\", \"type\": \"∀ (K : Type u_1) (A : Type u) [inst : Field K] [inst_1 : CommRing A] [inst_2 : Algebra K A] [Algebra.EssFiniteType K A],\\n  Algebra.FormallyEtale K A ↔ ∃ I, ∃ (_ : Finite I), ∃ Ai x x_1 x_2, ∀ (i : I), Algebra.IsSeparable K (Ai i)\", \"doc\": \"A finitely generated algebra $ A $ over a field $ K $ is formally étale if and only if there exists a finite index set $ I $ and a family of field extensions $ \\\\{A_i\\\\}_{i \\\\in I} $, each separable over\"}\n  {\"name\": \"Algebra.Etale.formallyEtale\", \"module\": \"Mathlib/RingTheory/Etale/Basic\", \"type\": \"∀ {R : Type u} {A : Type v} {inst : CommRing R} {inst_1 : CommRing A} {inst_2 : Algebra R A} [self : Algebra.Etale R A],\\n  Algebra.FormallyEtale R A\", \"doc\": \"If $ A $ is an étale algebra over a commutative ring $ R $, then $ A $ is formally étale over $ R $. This establishes that the property of being étale implies formal étaleness in the context of commut\"}\n  {\"name\": \"Algebra.FormallyUnramified.finite_of_free\", \"module\": \"Mathlib/RingTheory/Unramified/Finite\", \"type\": \"∀ (R : Type u_1) (S : Type u_2) [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S]\\n  [Algebra.FormallyUnramified R S] [Algebra.EssFiniteType R S] [Module.Free R S], Module.Finite R S\", \"doc\": \"Let $ R $ and $ S $ be commutative rings with $ S $ equipped with an $ R $-algebra structure. If $ S $ is formally unramified over $ R $ and $ S $ is a free $ R $-module, then $ S $ is finitely genera\"}\n  {\"name\": \"Algebra.Etale.iff_exists_algEquiv_prod\", \"module\": \"Mathlib/RingTheory/Etale/Field\", \"type\": \"∀ (K : Type u_1) (A : Type u) [inst : Field K] [inst_1 : CommRing A] [inst_2 : Algebra K A],\\n  Algebra.Etale K A ↔\\n    ∃ I, ∃ (_ : Finite I), ∃ Ai x x_1 x_2, ∀ (i : I), Module.Finite K (Ai i) ∧ Algebra.IsSeparable K (Ai i)\", \"doc\": \"An algebra $ A $ over a field $ K $ is étale if and only if there exists a finite index set $ I $ and a family of fields $ \\\\{A_i\\\\}_{i \\\\in I} $, each equipped with a $ K $-algebra structure, such that \"}\n  {\"name\": \"Algebra.FormallyEtale.instForallOfFinite\", \"module\": \"Mathlib/RingTheory/Etale/Pi\", \"type\": \"∀ {R : Type u_1} {I : Type u_2} (A : I → Type u_3) [inst : CommRing R] [inst_1 : (i : I) → CommRing (A i)]\\n  [inst_2 : (i : I) → Algebra R (A i)] [Finite I] [∀ (i : I), Algebra.FormallyEtale R (A i)],\\n  Algebra.FormallyEtale R ((i : I) → A i)\", \"doc\": \"If $ I $ is a finite set and each algebra $ A_i $ over a commutative ring $ R $ is formally étale, then the product algebra $ \\\\prod_{i \\\\in I} A_i $ is also formally étale over $ R $.\"}\n  {\"name\": \"SheafOfModules.IsFiniteType\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Generators\", \"type\": \"{C : Type u'} →\\n  [inst : CategoryTheory.Category.{v', u'} C] →\\n    {J : CategoryTheory.GrothendieckTopology C} →\\n      {R : CategoryTheory.Sheaf J RingCat} →\\n        [∀ (X : C), CategoryTheory.HasWeakSheafify (J.over X) AddCommGrpCat] →\\n          [∀ (X : C), (J.over X).WEqualsLocallyBijective AddCo\", \"doc\": \"Given a category $\\\\mathcal{C}$ with a Grothendieck topology $J$ and a sheaf $\\\\mathcal{R}$ of rings on $\\\\mathcal{C}$, this predicate asserts that a sheaf of $\\\\mathcal{R}$-modules $\\\\mathcal{F}$ is of fi\"}",
+   "date": "2026-10-22",
+   "verdict": "no exact match: formal etaleness and locally free definitions do not give a split trivializing cover and its relocalized internal-module trivialization"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsSepClosed\", \"Sheaf\"",
+   "results": "[loogle] OK 0 hit(s)",
+   "date": "2026-10-22",
+   "verdict": "no exact match: formal etaleness and locally free definitions do not give a split trivializing cover and its relocalized internal-module trivialization"
+  },
+  {
+   "tool": "grep",
+   "query": "(IsSepClosed|[Ww][Cc]ontractible).*([Ll]isse|[Ff]ree|[Ss]ection)|([Ll]isse|[Ff]ree).*(IsSepClosed|[Ww][Cc]ontractible)",
+   "results": "[grep] OK 0 hit(s)",
+   "date": "2026-10-22",
+   "verdict": "no exact match: formal etaleness and locally free definitions do not give a split trivializing cover and its relocalized internal-module trivialization"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Locally free finite rank modules over a condensed coefficient ring are trivial over separably closed fields by split pro etale covers",
+   "results": "[leansearch] UNAVAILABLE 0 hit(s) | service unavailable: {\"error\":\"Rate limit exceeded: 60 per 1 minute\"}\n  This kind of search is not available now. It is recorded as unavailable; use the other kinds and grep, and do not write a verdict for it.",
+   "date": "2026-10-22",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "grep",
+   "query": "(IsSepClosed|[Ww][Cc]ontractible).*([Ll]isse|[Ff]ree|[Ss]ection)|([Ll]isse|[Ff]ree).*(IsSepClosed|[Ww][Cc]ontractible)",
+   "results": "0 hits: none",
+   "date": "2026-10-22",
+   "verdict": "no exact match: the returned definitions, free-sheaf constructions and finite-generation results do not split pro-etale covers or give this trivialization for arbitrary internal condensed coefficients"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsSepClosed\", \"Sheaf\"",
+   "results": "0 hits: none",
+   "date": "2026-10-22",
+   "verdict": "no exact match: the returned definitions, free-sheaf constructions and finite-generation results do not split pro-etale covers or give this trivialization for arbitrary internal condensed coefficients"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Split covering trivializes finite free sheaves on a separably closed geometric point for condensed coefficients",
+   "results": "8 hits: IsSepClosed.factors_of_separable, IsSepClosed.splits_of_separable, Condensed.free, SheafOfModules.ιFree, SheafOfModules.free, IsSepClosed.casesOn, LightCondensed, instHasFiniteColimitsCondensedOfHasWeakSheafifyCompHausCoherentTopology",
+   "date": "2026-10-22",
+   "verdict": "no exact match: the returned definitions, free-sheaf constructions and finite-generation results do not split pro-etale covers or give this trivialization for arbitrary internal condensed coefficients"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Every lisse internal module over an arbitrary condensed ring on the pro etale site of a separably closed field is trivial by restricting along a section of a covering member",
+   "results": "8 hits: CondensedMod.LocallyConstant.instFaithfulModuleCatSheafCompHausCoherentTopologyConstantSheaf, CondensedMod.IsSolid, CondensedMod.isDiscrete_tfae, CondensedMod.LocallyConstant.functor, CondensedMod.LocallyConstant.functorIsoDiscreteAux₁, LightCondMod.LocallyConstant.instFaithfulModuleCatSheafLightProfiniteCoherentTopologyConstantSheaf, CondensedMod, LightCondMod.isDiscrete_tfae",
+   "date": "2026-10-22",
+   "verdict": "no exact match: the returned definitions, free-sheaf constructions and finite-generation results do not split pro-etale covers or give this trivialization for arbitrary internal condensed coefficients"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A finite locally free sheaf on a ringed site with a split covering is globally free by precomposing the local isomorphism with the splitting section",
+   "results": "8 hits: SheafOfModules.LocalGeneratorsData.IsFiniteType.isFiniteType, SheafOfModules.LocalGeneratorsData.IsFiniteType, SheafOfModules.free, SheafOfModules.isFinitePresentation, SheafOfModules.localGeneratorsDataOfIsFiniteType, SheafOfModules.generatorsOfIsCokernelFree, SheafOfModules.IsFiniteType.exists_localGeneratorsData, SheafOfModules.freeFunctor_obj",
+   "date": "2026-10-22",
+   "verdict": "no exact match: the returned definitions, free-sheaf constructions and finite-generation results do not split pro-etale covers or give this trivialization for arbitrary internal condensed coefficients"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-field-separable-cech-coordinates",
+  "date": "2026-10-22",
+  "group": "Q55"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images proof (3), open direct image for continuous coefficients: generic-field Cech coordinates used by lem-sfb-normal-continuous-algcl-monodromy before finite coefficient models; field-coordinate subargument: Bhatt–Scholze Section 2.4 (Lemma 2.4.8) and Example 7.3.5; Stacks proetale.tex Tag 0982 (lemma-w-local-strictly-henselian-extremally-disconnected); agent restriction of a slice trivialization along a splitting section. Returned item proof steps 6–7.",
+   "via": [
+    "lem-sfb-field-separable-cech-coordinates",
+    "lem-sfb-normal-continuous-algcl-monodromy",
+    "lem-sfb-continuous-algcl-stratified-finite-models",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sfb-separably-closed-lisse-split-trivialization",
+  "worker": "stage1",
+  "summary": "Unchanged statement. Verified the separably closed field is w-contractible directly from existing definitions, applied the existing clopen-refinement theorem to select a single covering member, and wrote both inverse component maps of the global trivialization. Zero new nodes; preserved inherited source and search records and added Q49 logged searches.",
+  "blueprint": "The existing from.place identifies det-thm-sf-ctf-stability-direct-images clause (3), through the continuous-coefficient open-image branch: these three steps realize returned field-coordinate proof steps 6–7 and step 4 of lem-sfb-field-separable-cech-coordinates. The ancestor command reports null; inherited from.node and via are retained.",
+  "tool_uses": [
+   {
+    "node": "def-weil-pbc-henselian-terminology",
+    "why": "Definition used only to check henselianity of the field via the zero ideal."
+   },
+   {
+    "node": "det-pe-wlocal-strict-contractible",
+    "why": "Definition of w-contractibility used to check the one-point field case."
+   },
+   {
+    "node": "det-pe-wcb-clopen-partition",
+    "why": "General clopen-refinement theorem supplies the geometric split cover; it is a tool within the prescribed field-coordinate argument, not a replacement of the direct-image route."
+   },
+   {
+    "node": "def-weil-pbc-proetale-site",
+    "why": "Site definition identifies the final object and makes the splitting X-morphism a site arrow."
+   },
+   {
+    "node": "def-weil-pbc-internal-abelian-sheaf-module-equivalence",
+    "why": "General equivalence keeps sections, actions and restrictions, allowing the explicit component calculation."
+   },
+   {
+    "node": "def-pur-localized-ringed-site",
+    "why": "General localization definition supplies componentwise restrictions and the relocalization functor."
+   }
+  ]
+ },
+ "tool_uses": [
+  "def-weil-pbc-henselian-terminology",
+  "det-pe-wlocal-strict-contractible",
+  "det-pe-wcb-clopen-partition",
+  "def-weil-pbc-proetale-site",
+  "def-weil-pbc-internal-abelian-sheaf-module-equivalence",
+  "def-pur-localized-ringed-site"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q49-6cc281b26",
+  "group": "Q49",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q49-6cc281b26 (reviewer sub-agent of L); spot-checked: I read the item and its three steps in full. There are no new nodes and the statement is unchanged; the delivery is one commit with only the item and its report. The statement is true and matches the only citer, lem-sfb-field-separable-cech-coordinates (Λ=A, n=0 allowed). Step 1: I opened det-pe-wlocal-strict-contractible and def-weil-pbc-henselian-terminology. Spec Ω is a single point, so it is w-local and its component space is extremally disconnected. (Ω,0) is henselian because B/0B=B, and the residue field is separably closed, so Ω is w-contractible. This is a correct elementary instance and agrees with Stacks 0982 (proetale.tex l.1870) and Bhatt–Scholze 2.4.8 / Ex. 7.3.5. Step 2: det-pe-wcb-clopen-partition (Stacks 098F, l.2781) gives a finite clopen partition with X-maps into the original covering members. Because X is a single nonempty point, one piece is all of X, which gives the section s. That node is stated on the unbounded weakly-étale site, but a covering of the bounded def-weil-pbc-proetale-site covers there too, with the same fpqc condition, and the step cites the site definition, so this is fine. Step 3: def-pur-localized-ringed-site gives sectionwise restriction and relocalization, and the module equivalence keeps sections. The components are τ_i at (V, s∘v); naturality, linearity and the inverse all hold, and finite biproducts are sectionwise. Edge cases checked: n=0, Λ=0, empty cover members, empty index set. Duplicate search with rg -L over all statements combining lisse with contractible or separably closed found no duplicate; the candidates are general w-contractible evaluation or rigidity nodes, or the étale site. No SGA is cited. Accepted tool_uses: det-pe-wcb-clopen-partition is a generic geometric lemma from a chapter this chapter uses (sec-proetale-coefficients), and the other five entries are definitions. The worker wrote tool_uses themselves (C8 reserves that to the lead), but the entries are correct, so I kept them. The null from.node is inherited from the base node. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.SeparablyClosedLisseSplitTrivialization",
+  "declaration": "AlgebraicGeometry.ProEtale.separablyClosed_lisse_split_trivialization",
+  "file": "lean/Sheaf/Paper/SeparablyClosedLisseSplitTrivialization.lean",
+  "statement": "theorem separablyClosed_lisse_split_trivialization (Ω : Type u) [Field Ω] [IsSepClosed Ω] (Λ : Profinite.CondensedRing.{u}) [IsCommMonObj Λ.X] (L : Mod (Sheaf (Scheme.ProEt.topology (Spec (.of Ω))) Ab.{u + 1}) (condensedRingObj Λ.X (Spec (.of Ω)))) (hL : IsLisseCoefficientModule Λ.X L) (I : Type v) (U : I → (Spec (.of Ω)).ProEt) (a : ∀ i : I, U i ⟶ Scheme.ProEt.mk (𝟙 (Spec (.of Ω)))) (hcover : Presieve.ofArrows U a ∈ Scheme.ProEt.precoverage (Spec (.of Ω)) (Scheme.ProEt.mk (𝟙 (Spec (.of Ω))))) (n : I → ℕ) (τ : ∀ i : I, ((sectionModuleEquivalence (Scheme.ProEt.topology (Spec (.of Ω))) (condensedRingObj Λ.X (Spec (.of Ω)))).functor.obj L).over (U i) ≅ ((sectionModuleEquivalence (Scheme.ProEt.topology (Spec (.of Ω))) (condensedRingObj Λ.X (Spec (.of Ω)))).functor.obj (Mod.finiteFree (condensedRingObj Λ.X (Spec (.of Ω))) (n i))).over (U i)) : ∃ (i : I) (s : Scheme.ProEt.mk (𝟙 (Spec (.of Ω))) ⟶ U i), s ≫ a i = 𝟙 _ ∧ ∃ φ : L ≅ Mod.finiteFree (condensedRingObj Λ.X (Spec (.of Ω))) (n i), ∀ (V : (Spec (.of Ω)).ProEt) (v : V ⟶ Scheme.ProEt.mk (𝟙 (Spec (.of Ω)))), (((sectionModuleEquivalence (Scheme.ProEt.topology (Spec (.of Ω))) (condensedRingObj Λ.X (Spec (.of Ω)))).functor.map φ.hom).val.app (op V)).hom = ((τ i).hom.val.app (op (Over.mk (v ≫ s)))).hom",
+  "branch": "newtargets-dag",
+  "by": "Q103",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-30bdb7b75",
+  "group": "Q103",
+  "result": "pass",
+  "note": "Every node clause matches the Lean: separably closed Ω, Spec Ω, arbitrary commutative Profinite.CondensedRing with IsCommMonObj, condensedRingObj = p_X^*Λ, internal Mod over ProEt.topology, IsLisseCoefficientModule, arbitrary cover in Mathlib ProEt.precoverage with free index universe v, varying ranks including 0, τ as slice isos via sectionModuleEquivalence + SheafOfModules.over (target (R^n)|U is canonically (R|U)^n). Conclusion ∃ i, site section s (s ≫ a i = 𝟙 holds automatically since the target is terminal, as in the node), ∃ φ : L ≅ finiteFree R (n i) with the component at every V equal to τ_i at Over.mk (v ≫ s): this pins φ and states the relocalization formula; the statement is true. Edge cases: empty I is impossible for a cover of nonempty Spec Ω, rank 0, Λ = 0, any characteristic, universes fine. Only the lean field changed; record complete and statement verbatim; only sorry; source/blueprint docstrings with proof steps; lines ≤ 100; imports exist; no pro-étale substitute; no parallel delivery. Advisory: Mod.finiteFree is owned by def-sfb-finitely-presented-module, not cited (upstream abbrev = finite sum of regular modules, as in the cited lisse def; a stage-2 fix cannot add stmt_deps); hL is not used by the conclusion but the node states it. No recompile (no change); worker's scompile was clean."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J3",
+  "result": "pass",
+  "landing": "20261025T050817-L-3845665",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

@@ -1,0 +1,307 @@
+{
+ "id": "lem-pur-affine-line-boundary-realization",
+ "kind": "statement",
+ "title": "Affine-line support classes: finite-Tor realization and exceptional transpose",
+ "statement": "Fix the finite purity datum [def-pur-conventions]: $k=\\overline{\\mathbf F}_q$ of characteristic $p$, a prime $\\ell\\ne p$, a finite extension $E/\\mathbf Q_\\ell$ with ring of integers $\\mathcal O_E$ and uniformizer $\\varpi_E$, and $n\\geq1$. Put $A=\\mathcal O_E/\\varpi_E^n$, assume $e=e(E/\\mathbf Q_\\ell)\\mid n$, and put $N=n/e\\geq1$ and $m=\\ell^N$, so $mA=0$. Let $Y$ be a separated finite-type $k$-scheme. In the affine-line datum [def-pur-affine-line-datum] write $X=\\mathbf A^1_Y$, $s:Y\\hookrightarrow X$ for the zero section, $U=\\mathbf G_{m,Y}$ for its complement, $j:U\\hookrightarrow X$, and $F=A_X(1)$. The coefficient comparison is $\\theta_T:A_T(1)\\xrightarrow{\\sim}\\mu_{m,T}\\otimes_{\\mathbf Z/m}A$, and $\\varphi_T(u)=\\theta_T^{-1}(u\\otimes1_A)$.\n\nUse small etale and pro-etale sites, supported cohomology [def-pur-support-cohomology], finite Tor amplitude and its full category $D^b_{ctf}$ [def-weil-finite-tor-amplitude], and the transported exceptional functor [def-weil-exceptional-inverse-image]. There is an integer $d\\geq0$ bounding $\\dim X$, with $d=0$ allowed if $X$ is empty; $j$ is quasi-compact and $(U,X)$ satisfies the ordinary etale open-complement condition [def-exc-open-complement-bound] with $c=2d$. The etale closed direct image has an ambient right adjoint $Rs_e^!$ without any open-complement hypothesis. This adjoint preserves bounded constructibility and finite Tor amplitude under the stated condition. The etale model $F_e=\\mu_{m,X}^{\\mathrm{et}}\\otimes_{\\mathbf Z/m}A$ and $F=\\nu_X^*F_e$ are locally constant finite rank-one $A$-sheaves with Tor amplitude $[0,0]$. Both $A_Y$ and $K=Rs^!F[2]$ belong to $D^b_{ctf}(Y,A)$, and $K$ is concentrated in degree zero.\n\nLet $\\chi:H^2_{s(Y)}(X,F)\\xrightarrow{\\sim}\\operatorname{Hom}(s_*A_Y,F[2])$ be the supported-Hom identification [lem-pur-supported-hom]. For every $\\alpha\\in H^2_{s(Y)}(X,F)$ there is a unique morphism $u_\\alpha:A_Y\\to K$ whose degree-zero section under the Gysin identification [lem-pur-gysin-structure] corresponds to $\\alpha$. With $\\varepsilon:s_*K\\to F[2]$ the exceptional counit on etale-origin objects, the identifications agree by\n$$\\chi(\\alpha)=\\varepsilon\\circ s_*u_\\alpha.$$\nIn particular, for $\\alpha=\\partial\\kappa(t)$, where $\\partial$ is the support boundary [thm-pur-with-support-exactness] and $\\kappa(t)$ is the datum's coefficient-extended Kummer class, the degree-zero sheaf map of $u_\\alpha$ sends $1$ to the section corresponding to $\\partial\\kappa(t)$. All morphisms here are obtained from their ordinary etale models by the site comparison; no adjunction on all pro-etale complexes is asserted.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-a1-kummer/thm-pur-affine-line-orientation.proof.md",
+  "place": "Proof, first paragraph: 'The Kummer boundary defines the global morphism'; ambient qualifications in the statement; returned proof steps 1-2 and the Gysin-adjunction identification in step 5.",
+  "external": [
+   {
+    "document": "literature/milne-lectures-on-etale-cohomology_LEC.pdf",
+    "place": "Theorem 9.4 and Ext description, Example 9.5, pp. 65-67; closed-support adjunction preceding Theorem 16.7, pp. 111-112; relative coefficient and site refinements are agent-written."
+   }
+  ]
+ },
+ "stmt_deps": [
+  "def-pur-conventions",
+  "def-pur-affine-line-datum",
+  "def-pur-support-cohomology",
+  "def-weil-finite-tor-amplitude",
+  "def-weil-exceptional-inverse-image",
+  "def-exc-open-complement-bound",
+  "lem-pur-supported-hom",
+  "lem-pur-gysin-structure",
+  "thm-pur-with-support-exactness"
+ ],
+ "proof": [
+  {
+   "text": "By [lem-pur-zero-support-retraction-triangle], $A$ is finite, $X,U,Y$ are Noetherian and finite type over $k$, and $j$ is quasi-compact. By [lem-kun-dimension-finite-type] choose a finite integer $d\\geq0$ bounding $\\dim X$; take $d=0$ when $X$ is empty. The coefficient-level statement [lem-pur-finite-kummer-level] gives $\\ell^NA=0$. Thus [lem-exc-open-complement-known] applies to $(U,X,A)$ and gives precisely the two open-complement conditions with $c=2d$.",
+   "uses": [
+    "lem-pur-zero-support-retraction-triangle",
+    "lem-kun-dimension-finite-type",
+    "lem-pur-finite-kummer-level",
+    "lem-exc-open-complement-known"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-a1-kummer/thm-pur-affine-line-orientation.proof.md",
+    "place": "Ambient qualifications; verification of the finite-dimensional closed/open pair."
+   }
+  },
+  {
+   "text": "Apply [lem-asd-finite-etale-twist-line] with exponent $m$, invertible on $X$, and $mA=0$: $F_e=\\mu^{\\mathrm{et}}_{m,X}\\otimes A$ is a locally constant finite rank-one flat $A$-sheaf. The pro-etale line has the same properties by [lem-pur-twist-sheaf-locally-free](1),(3), with the coefficient identification of [lem-pur-finite-kummer-level]. The comparison $\\nu_X^*F_e=F$ is the roots-and-tensor comparison of the affine-line datum, with its local formula also on $X$: on a trivializing etale cover choose a primitive root $\\zeta$; both roots sheaves are trivialized by $a\\mapsto\\zeta^a$, and both tensor lines by $\\zeta^a\\otimes b\\mapsto ab$. On an overlap $\\zeta'=\\zeta^v$, both formulas change by the same multiplication by $v$, hence glue and identify $u\\otimes1$ with $\\varphi_X(u)$. Exact comparison preserves the constant coefficient sheaf by [lem-sf-comparison-pullback-exact]. Locally tensor with either line is tensor with $A$, hence exact; its degree-zero flat representative has Tor interval $[0,0]$. The constant $A_Y$ has the same interval since $A_Y\\otimes_A^LM=M$; its single constant finite stratum makes it constructible. Thus $A_Y\\in D^b_{ctf}(Y,A)$.",
+   "uses": [
+    "lem-asd-finite-etale-twist-line",
+    "lem-pur-twist-sheaf-locally-free",
+    "lem-pur-finite-kummer-level",
+    "def-pur-affine-line-datum",
+    "lem-sf-comparison-pullback-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-a1-kummer/lem-pur-gysin-structure.proof.md",
+    "place": "Finite coefficient and site refinements of the twist input; local trivializations from the affine-line datum."
+   }
+  },
+  {
+   "text": "The ambient ordinary etale adjoint $Rs_e^!$ exists by [lem-exc-closed-ambient], independently of step 1's open-complement bound. Under that bound [lem-exc-closed-amplitude] sends a bounded constructible interval $[a,b]$ into $[a,b+2d+1]$, and [prop-exc-closed-tor] gives that same interval as a Tor bound for a bounded constructible input of Tor interval $[a,b]$. This proves the claimed preservation on the etale site without confusing bounded constructibility with finite Tor amplitude.",
+   "uses": [
+    "lem-exc-closed-ambient",
+    "lem-exc-closed-amplitude",
+    "prop-exc-closed-tor"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-a1-kummer/thm-pur-affine-line-orientation.proof.md",
+    "place": "Ambient etale existence and preservation qualifications."
+   }
+  },
+  {
+   "text": "Put $B_0=Rs_0^!F$, the classical support value. The triangle in [lem-pur-zero-support-retraction-triangle] has second arrow exactly derived restriction, so [lem-pur-kummer-triangle-concentration] applies and supplies a derived isomorphism $A_Y[0]\\cong C_0=B_0[2]$, with $C_0\\in D^b_{ctf}$ and no cohomology outside degree zero. Its stated hypotheses are the original affine-line datum, not a purity isomorphism to be proved. Apply [lem-pur-supported-class-evaluation-comparison] to $i=s$ and input $F$: step 1 verifies the finite-type closed pair and quasi-compact complement, while the preceding isomorphism verifies both hypotheses on $C_0$. It gives $\\phi[2]:C_0\\cong K=Rs^!F[2]$, preserving concentration and finite-Tor constructibility, and gives isomorphisms $\\eta:H^2_{s(Y)}(X,F)\\cong\\operatorname{Hom}(A_Y,K)$ and $\\mathrm{ev}:\\operatorname{Hom}(A_Y,K)\\cong\\Gamma(Y,\\mathcal H^0K)$.",
+   "uses": [
+    "lem-pur-zero-support-retraction-triangle",
+    "lem-pur-kummer-triangle-concentration",
+    "lem-pur-supported-class-evaluation-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-a1-kummer/lem-pur-gysin-structure.proof.md",
+    "place": "Localization and concentration, followed by the counit-normalized support/exceptional identification."
+   }
+  },
+  {
+   "text": "For every $\\alpha$ define $u_\\alpha=\\eta(\\alpha)$. The evaluation comparison states that $(\\mathrm{ev}\\eta)^{-1}$ is the canonical section-to-support identification; this is the Gysin identification of [lem-pur-gysin-structure]. It follows that the section of $u_\\alpha$ corresponds to $\\alpha$, and uniqueness follows from the bijectivity of $\\mathrm{ev}$ and $\\eta$. More explicitly, the formula for $\\eta$ in [lem-pur-supported-class-evaluation-comparison] is $\\chi$ of [lem-pur-supported-hom], followed by support adjunction, shifts, and $\\phi[2]$. That lemma identifies this with the relative exceptional adjunction. The inverse adjunct of $u_\\alpha$ is therefore $\\varepsilon\\circ s_*u_\\alpha$; applying the inverse bijection to $\\eta(\\alpha)$ gives exactly $\\chi(\\alpha)=\\varepsilon\\circ s_*u_\\alpha$. This fixes the counit and shift normalization, rather than choosing an arbitrary isomorphism of the two Hom groups.",
+   "uses": [
+    "lem-pur-supported-class-evaluation-comparison",
+    "lem-pur-gysin-structure",
+    "lem-pur-supported-hom"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-a1-kummer/lem-pur-gysin-structure.proof.md",
+    "place": "Second paragraph: the supported Hom isomorphism and degree-zero section identification."
+   }
+  },
+  {
+   "text": "All the maps just used have ordinary etale representatives. Indeed step 2 gives $F=\\nu_X^*F_e$, and the ambient etale adjoint value of $F_e$ is bounded below by step 3. Full faithfulness of [thm-weil-pbc-site-comparison] identifies maps between these etale-origin objects, including every $u_\\alpha$, with their unique etale maps. The more precise statement [lem-coef-site-closed-counit-transport], with $H=F_e[2]$, $i=s$ and $L=A_Y$, gives $E\\,s_*(\\alpha_H)\\,\\delta_{IH}=\\nu_X^*(e_H)$ and identifies the transported adjunct of an etale map with $\\alpha_H\\nu_Y^*(\\widehat f)$. Its finite-field, separated finite-type and bounded-below hypotheses hold by the datum and steps 1-3. Hence the equation of step 5 uses exactly the etale counit transported by the canonical closed direct-image comparison. The exact comparison commutes with the displayed shifts. This proves the site-origin qualification without extending the adjunction to arbitrary pro-etale inputs.",
+   "uses": [
+    "thm-weil-pbc-site-comparison",
+    "lem-coef-site-closed-counit-transport"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-a1-kummer/thm-pur-affine-line-orientation.proof.md",
+    "place": "Final site-comparison sentence, restricted to etale-origin objects and the specified counit."
+   }
+  },
+  {
+   "text": "Finally [def-pur-affine-line-datum] defines the coefficient-extended class $\\kappa(t)$ on $U$, and [thm-pur-with-support-exactness] gives $\\partial\\kappa(t)\\in H^2_{s(Y)}(X,F)$. Substitute this class for $\\alpha$ in step 5. Evaluation is explicitly $u\\mapsto\\mathcal H^0(u)(1)$ by [lem-pur-supported-class-evaluation-comparison]; thus its degree-zero sheaf map sends $1$ to the section corresponding to $\\partial\\kappa(t)$, as required.",
+   "uses": [
+    "def-pur-affine-line-datum",
+    "thm-pur-with-support-exactness",
+    "lem-pur-supported-class-evaluation-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-a1-kummer/thm-pur-affine-line-orientation.proof.md",
+    "place": "First paragraph: the Kummer boundary defines the global morphism."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-pur-zero-support-retraction-triangle",
+  "lem-kun-dimension-finite-type",
+  "lem-pur-finite-kummer-level",
+  "lem-exc-open-complement-known",
+  "lem-asd-finite-etale-twist-line",
+  "lem-pur-twist-sheaf-locally-free",
+  "def-pur-affine-line-datum",
+  "lem-sf-comparison-pullback-exact",
+  "lem-exc-closed-ambient",
+  "lem-exc-closed-amplitude",
+  "prop-exc-closed-tor",
+  "lem-pur-kummer-triangle-concentration",
+  "lem-pur-supported-class-evaluation-comparison",
+  "lem-pur-gysin-structure",
+  "lem-pur-supported-hom",
+  "thm-weil-pbc-site-comparison",
+  "lem-coef-site-closed-counit-transport",
+  "thm-pur-with-support-exactness"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-a1-kummer/thm-pur-affine-line-orientation.proof.md",
+  "place": "First paragraph and final site comparison; ambient refinements follow Milne Theorem 9.4, Example 9.5 and the closed-support adjunction preceding Theorem 16.7, with the existing DAG comparisons."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For the zero section of the affine line over a finite type scheme, the finite Tate twist has constructible finite Tor exceptional inverse image and supported degree two classes are realized as its exceptional adjoints.",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.exists_appTop_map_eq_zero_of_isAffine_of_isLimit\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"∀ {I : Type u} [inst : CategoryTheory.Category.{u, u} I] (D : CategoryTheory.Functor I AlgebraicGeometry.Scheme)\\n  (c : CategoryTheory.Limits.Cone D) (hc : CategoryTheory.Limits.IsLimit c) [CategoryTheory.IsCofiltered I]\\n  [∀ (i : I), AlgebraicGeometry.IsAffine (D.obj i)] (i : I) (s : ↑((D.obj i).pr\", \"doc\": \"Given a cofiltered diagram of affine schemes with a limit cone, if a global section of the structure sheaf of some object in the diagram maps to zero under the projection to the limit, then there exis\"}\n  {\"name\": \"AlgebraicGeometry.exists_appTop_map_eq_zero_of_isLimit\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"∀ {I : Type u} [inst : CategoryTheory.Category.{u, u} I] (D : CategoryTheory.Functor I AlgebraicGeometry.Scheme)\\n  (c : CategoryTheory.Limits.Cone D) (hc : CategoryTheory.Limits.IsLimit c) [CategoryTheory.IsCofiltered I]\\n  [∀ {i j : I} (f : i ⟶ j), AlgebraicGeometry.IsAffineHom (D.map f)] {i : I} [C\", \"doc\": \"Given a cofiltered diagram of schemes with affine transition morphisms and compact topological spaces, if a global section becomes zero under the limit cone's projection map, then there exists a morph\"}\n  {\"name\": \"AlgebraicGeometry.exists_app_map_eq_zero_of_isLimit\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"∀ {I : Type u} [inst : CategoryTheory.Category.{u, u} I] (D : CategoryTheory.Functor I AlgebraicGeometry.Scheme)\\n  (c : CategoryTheory.Limits.Cone D) (hc : CategoryTheory.Limits.IsLimit c) [CategoryTheory.IsCofiltered I]\\n  [∀ {i j : I} (f : i ⟶ j), AlgebraicGeometry.IsAffineHom (D.map f)] {i : I} {U\", \"doc\": \"Given a cofiltered diagram of schemes where all transition morphisms are affine, for any compact open subset $ U $ of a scheme in the diagram and a section $ s $ of the structure sheaf over $ U $ that\"}\n  {\"name\": \"DerivedCategory.exists_iso_singleFunctor_obj_of_isGE_of_isLE\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/TStructure\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Abelian C]\\n  [inst_2 : HasDerivedCategory C] (X : DerivedCategory C) (n : ℤ) [X.IsGE n] [X.IsLE n],\\n  ∃ Y, Nonempty (X ≅ (DerivedCategory.singleFunctor C n).obj Y)\", \"doc\": \"For an object $ X $ in the derived category of an abelian category $ \\\\mathcal{C} $ and integer $ n $, if $ X $ is cohomologically supported in degree $ n $ (i.e., satisfies both $ \\\\mathcal{G}_n $ and \"}\n  {\"name\": \"DerivedCategory.exists_iso_Q_obj_of_isGE_of_isLE\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/TStructure\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Abelian C]\\n  [inst_2 : HasDerivedCategory C] (X : DerivedCategory C) (a b : ℤ) [X.IsGE a] [X.IsLE b],\\n  ∃ K, ∃ (_ : K.IsStrictlyGE a) (_ : K.IsStrictlyLE b), Nonempty (X ≅ DerivedCategory.Q.obj K)\", \"doc\": \"For any object $X$ in the derived category of an abelian category $\\\\mathcal{C}$, if $X$ is cohomologically bounded below by integer $a$ and above by integer $b$ (i.e., $X \\\\in \\\\mathcal{G}_a \\\\cap \\\\mathc\"}\n  {\"name\": \"DerivedCategory.instIsGEObjSingleFunctor\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/TStructure\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Abelian C]\\n  [inst_2 : HasDerivedCategory C] (X : C) (n : ℤ), ((DerivedCategory.singleFunctor C n).obj X).IsGE n\", \"doc\": \"For any object $X$ in an abelian category $\\\\mathcal{C}$ and integer $n$, the image of $X$ under the single-term complex functor concentrated in degree $n$ (mapping to the derived category) satisfies t\"}\n  {\"name\": \"DerivedCategory.from_singleFunctor_obj_eq_zero_of_projective\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/Ext/EnoughProjectives\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Abelian C]\\n  [inst_2 : HasDerivedCategory C] {P : C} [CategoryTheory.Projective P] {L : CochainComplex C ℤ} {i : ℤ}\\n  (φ : DerivedCategory.Q.obj ((CochainComplex.singleFunctor C i).obj P) ⟶ DerivedCategory.Q.obj L),\\n  \", \"doc\": \"In an abelian category with enough projectives, for any projective object $ P $, cochain complex $ L $, and integer $ i $, every morphism in the derived category from the single complex concentrated a\"}\n  {\"name\": \"DerivedCategory.instIsLEObjSingleFunctor\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/TStructure\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Abelian C]\\n  [inst_2 : HasDerivedCategory C] (X : C) (n : ℤ), ((DerivedCategory.singleFunctor C n).obj X).IsLE n\", \"doc\": \"An object $ X $ in the derived category belongs to the subcategory $ \\\\mathcal{L}_n $, which consists of objects isomorphic to cochain complexes strictly supported in degrees $ \\\\leq n $, as defined by \"}",
+   "date": "2026-10-22",
+   "verdict": "no match: hits do not state this etale/pro-etale supported-cohomology comparison or its coefficient and exceptional-adjunction assertions"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"exceptional\"",
+   "results": "[loogle] OK 2 hit(s)\n  {\"name\": \"LinearEquiv.IsExceptional\", \"module\": \"Mathlib.LinearAlgebra.Transvection.Generation\", \"type\": \" {K : Type u_1} [DivisionRing K] {V : Type u_2} [AddCommGroup V] [Module K V] (e : V ≃ₗ[K] V) : Prop\", \"doc\": \"A linear equivalence `u : V ≃ₗ[K] V` is exceptional if\\nit is a nontrivial homothety modulo `u.fixedSubmodule`.\"}\n  {\"name\": \"LinearEquiv.mem_transvections_pow_mul_dilatransvections_of_not_isExceptional\", \"module\": \"Mathlib.LinearAlgebra.Transvection.Generation\", \"type\": \" {K : Type u_1} [DivisionRing K] {V : Type u_2} [AddCommGroup V] [Module K V] [Module.Finite K V] {e : V ≃ₗ[K] V} (he : ¬e.IsExceptional) : e ∈ LinearEquiv.transvections K V ^ (Module.finrank K (V ⧸ (↑e).fixedSubmodule) - 1) * LinearEquiv.dilatransvections K V\", \"doc\": \"If an element `e : V ≃ₗ[K] V` is not exceptional,\\nthen it is the product of at most `finrank K (V ⧸ e.fixedSubmodule)` dilatransvections.\\n\\nThis is the non-exceptional case in Dieudonné's theorem.\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: hits do not state this etale/pro-etale supported-cohomology comparison or its coefficient and exceptional-adjunction assertions"
+  },
+  {
+   "tool": "grep",
+   "query": "kummerBoundary|supportedClass|TateTwist|upperShriek",
+   "results": "[grep] OK 0 hit(s)",
+   "date": "2026-10-22",
+   "verdict": "no match: hits do not state this etale/pro-etale supported-cohomology comparison or its coefficient and exceptional-adjunction assertions"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Etale affine line zero section exceptional inverse image Kummer boundary constructible finite Tor amplitude",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.isoSpec_inv_image_zeroLocus\", \"module\": \"Mathlib.AlgebraicGeometry.AffineScheme\", \"type\": \"[IsAffine X] (s : Set Γ(X, ⊤)) : X.isoSpec.inv '' PrimeSpectrum.zeroLocus s = X.zeroLocus s\", \"doc\": \"For any affine scheme $X$ and a set $s$ of global sections of $X$, the inverse image of the zero locus of $s$ in the prime spectrum of the global sections ring $\\\\Gamma(X)$ under the canonical isomorph\"}\n  {\"name\": \"AlgebraicGeometry.IsAffineOpen.fromSpec_preimage_zeroLocus\", \"module\": \"Mathlib.AlgebraicGeometry.AffineScheme\", \"type\": \"{X : Scheme.{u}} {U : X.Opens} (hU : IsAffineOpen U) (s : Set Γ(X, U)) :\\n  hU.fromSpec ⁻¹' X.zeroLocus s = PrimeSpectrum.zeroLocus s\", \"doc\": \"For an affine open subset $ U $ of a scheme $ X $ and a set $ s $ of sections of the structure sheaf over $ U $, the preimage of the zero locus of $ s $ in $ X $ under the inclusion morphism $ \\\\operat\"}\n  {\"name\": \"Algebra.Etale.iff_isStandardSmoothOfRelativeDimension_zero\", \"module\": \"Mathlib.RingTheory.Smooth.StandardSmoothOfFree\", \"type\": \": Etale R S ↔ IsStandardSmoothOfRelativeDimension 0 R S\", \"doc\": \"An $ R $-algebra $ S $ is étale if and only if it is a standard smooth algebra of relative dimension $ 0 $ over $ R $.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.isoSpec_inv_preimage_zeroLocus\", \"module\": \"Mathlib.AlgebraicGeometry.AffineScheme\", \"type\": \"[IsAffine X] (s : Set Γ(X, ⊤)) : X.isoSpec.inv ⁻¹' X.zeroLocus s = PrimeSpectrum.zeroLocus s\", \"doc\": \"For an affine scheme $X$ and a subset $s$ of its ring of global sections $\\\\Gamma(X)$, the preimage of the zero locus $X.\\\\text{zeroLocus}(s)$ under the inverse of the canonical isomorphism $X \\\\cong \\\\op\"}\n  {\"name\": \"AlgebraicGeometry.IsEtale\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Etale\", \"type\": \"{X Y : Scheme.{u}} (f : X ⟶ Y)\", \"doc\": \"A morphism $ f: X \\\\to Y $ of schemes is étale if it is smooth of relative dimension 0.\"}\n  {\"name\": \"AlgebraicGeometry.IsFinite.instHasAffinePropertyAndIsAffineFiniteCarrierObjOppositeOpensCarrierCarrierCommRingCatPresheafOpOpensTopHomAppTop\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Finite\", \"type\": \": HasAffineProperty @IsFinite (fun X _ f _ ↦ IsAffine X ∧ RingHom.Finite (f.appTop).hom)\", \"doc\": \"A morphism of schemes with affine target is finite if and only if the source is affine and the induced ring homomorphism on global sections is finite (i.e., the target ring is finitely generated as a \"}\n  {\"name\": \"Algebra.instEtaleOfIsStandardSmoothOfRelativeDimensionOfNatNat\", \"module\": \"Mathlib.RingTheory.Smooth.StandardSmoothCotangent\", \"type\": \"[IsStandardSmoothOfRelativeDimension 0 R S] : Etale R S\", \"doc\": \"If $ S $ is a standard smooth algebra of relative dimension 0 over a commutative ring $ R $, then $ S $ is an étale algebra over $ R $.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Etale\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Etale\", \"type\": \"(X : Scheme.{u}) : Type _\", \"doc\": \"The property of being an étale morphism to a fixed scheme $X$, defined as morphisms that are smooth of relative dimension 0, constructed via the morphism property lifting over $X$.\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: hits do not state this etale/pro-etale supported-cohomology comparison or its coefficient and exceptional-adjunction assertions"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The degree zero Gysin identification of cohomology with supports agrees with evaluation on one followed by the closed immersion exceptional adjunction.",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.restrictFunctorAdjCounitIso\", \"module\": \"Mathlib/AlgebraicGeometry/Modules/Sheaf\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} →\\n  (f : X ⟶ Y) →\\n    [inst : AlgebraicGeometry.IsOpenImmersion f] →\\n      (AlgebraicGeometry.Scheme.Modules.pushforward f).comp (AlgebraicGeometry.Scheme.Modules.restrictFunctor f) ≅\\n        CategoryTheory.Functor.id X.Modules\", \"doc\": \"For a morphism $ f : X \\to Y $ of schemes, the composition of the pushforward functor along $ f $ followed by the restriction functor induced by $ f $ is naturally isomorphic to the identity functor on\"}\n  {\"name\": \"AlgebraicGeometry.IsOpenImmersion.app_ΓIso_hom_apply\", \"module\": \"Mathlib/AlgebraicGeometry/OpenImmersion\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [inst : AlgebraicGeometry.IsOpenImmersion f] (U : Y.Opens)\\n  (x : CategoryTheory.ToType (Y.presheaf.obj (Opposite.op U))),\\n  (CategoryTheory.ConcreteCategory.hom (AlgebraicGeometry.IsOpenImmersion.ΓIso f U).hom)\\n      ((CategoryTheory.ConcreteCategory.h\", \"doc\": \"Let $f: X \\\\to Y$ be an open immersion of schemes, and let $U$ be an open subset of $Y$. Let $s \\\\in \\\\Gamma(U, \\\\mathcal{O}_Y)$ be a section. The pullback of $s$ via $f$ is a section $f^\\\\#(s) \\\\in \\\\Gamma(\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.restrictAdjunction_counit_app_app\", \"module\": \"Mathlib/AlgebraicGeometry/Modules/Sheaf\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [inst : AlgebraicGeometry.IsOpenImmersion f] (M : X.Modules)\\n  (U : X.Opens),\\n  AlgebraicGeometry.Scheme.Modules.Hom.app ((AlgebraicGeometry.Scheme.Modules.restrictAdjunction f).counit.app M) U =\\n    M.presheaf.map (CategoryTheory.eqToHom ⋯).op\", \"doc\": \"Let $f: X \\\\to Y$ be an open immersion of schemes. Let $f^*: \\\\mathbf{Mod}(\\\\mathcal{O}_Y) \\\\to \\\\mathbf{Mod}(\\\\mathcal{O}_X)$ and $f_*: \\\\mathbf{Mod}(\\\\mathcal{O}_X) \\\\to \\\\mathbf{O}_Y)$ be the restriction and\"}\n  {\"name\": \"AlgebraicGeometry.IsOpenImmersion.map_ΓIso_hom\", \"module\": \"Mathlib/AlgebraicGeometry/OpenImmersion\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [inst : AlgebraicGeometry.IsOpenImmersion f] (U : Y.Opens),\\n  CategoryTheory.CategoryStruct.comp (AlgebraicGeometry.Scheme.Hom.app f U)\\n      (AlgebraicGeometry.IsOpenImmersion.ΓIso f U).hom =\\n    Y.presheaf.map (CategoryTheory.homOfLE ⋯).op\", \"doc\": \"Let $f: X \\\\to Y$ be an open immersion of schemes, and let $U$ be an open subset of $Y$. Let $\\\\text{Im}(f)$ be the image of $f$, which is an open subset of $Y$. The theorem states that the composition \"}\n  {\"name\": \"AlgebraicGeometry.IsOpenImmersion.app_ΓIso_hom\", \"module\": \"Mathlib/AlgebraicGeometry/OpenImmersion\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [inst : AlgebraicGeometry.IsOpenImmersion f] (U : Y.Opens),\\n  CategoryTheory.CategoryStruct.comp (AlgebraicGeometry.Scheme.Hom.app f U)\\n      (AlgebraicGeometry.IsOpenImmersion.ΓIso f U).hom =\\n    Y.presheaf.map (CategoryTheory.homOfLE ⋯).op\", \"doc\": \"For an open immersion $ f: X \\to Y $ of schemes and an open subset $ U $ of $ Y $, the composition of the sheaf morphism component $ f_{\\\\#}(U) $ with the homomorphism part of the section isomorphism $ \"}\n  {\"name\": \"AlgebraicGeometry.IsOpenImmersion.map_ΓIso_inv\", \"module\": \"Mathlib/AlgebraicGeometry/OpenImmersion\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [inst : AlgebraicGeometry.IsOpenImmersion f] (U : Y.Opens),\\n  CategoryTheory.CategoryStruct.comp (Y.presheaf.map (CategoryTheory.homOfLE ⋯).op)\\n      (AlgebraicGeometry.IsOpenImmersion.ΓIso f U).inv =\\n    AlgebraicGeometry.Scheme.Hom.app f U\", \"doc\": \"Let $f: X \\\\to Y$ be an open immersion of schemes, and let $U$ be an open subset of $Y$. Let $\\\\text{Im}(f)$ denote the image of $f$. The map on sections, $f.\\\\text{app}(U): \\\\Gamma(Y, U) \\\\to \\\\Gamma(X, f^\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.restrictFunctorΓ\", \"module\": \"Mathlib/AlgebraicGeometry/Restrict\", \"type\": \"{X : AlgebraicGeometry.Scheme} →\\n  X.restrictFunctor.op.comp ((CategoryTheory.Over.forget X).op.comp AlgebraicGeometry.Scheme.Γ) ≅ X.presheaf\", \"doc\": \"The composition of the opposite restriction functor from open subsets of a scheme $X$ to the over category $\\\\mathcal{T}/X$, followed by the opposite forgetful functor to topological spaces and the glo\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.restrictAdjunction_unit_app_app\", \"module\": \"Mathlib/AlgebraicGeometry/Modules/Sheaf\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [inst : AlgebraicGeometry.IsOpenImmersion f] (M : Y.Modules)\\n  (U : Y.Opens),\\n  AlgebraicGeometry.Scheme.Modules.Hom.app ((AlgebraicGeometry.Scheme.Modules.restrictAdjunction f).unit.app M) U =\\n    M.presheaf.map (CategoryTheory.homOfLE ⋯).op\", \"doc\": \"Let $f: X \\\\to Y$ be an open immersion of schemes. Let $f^*: \\\\text{Mod}(Y) \\\\to \\\\text{Mod}(X)$ be the restriction functor and $f_*: \\\\text{Mod}(X) \\\\to \\\\text{Mod}(Y)$ be the pushforward functor on sheaves\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: hits do not state this etale/pro-etale supported-cohomology comparison or its coefficient and exceptional-adjunction assertions"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Supported cohomology closed immersion exceptional adjunction and evaluation on one",
+   "results": "8 hits; AlgebraicGeometry.IsClosedImmersion.instIsIsoSchemeToImage, AlgebraicGeometry.IsClosedImmersion.instIsAffineHom, AlgebraicGeometry.IsClosedImmersion.of_isPreimmersion, AlgebraicGeometry.isClosedImmersion_iff, AlgebraicGeometry.IsClosedImmersion.casesOn, AlgebraicGeometry.IsClosedImmersion.isAffine_surjective_of_isAffine, AlgebraicGeometry.IsClosedImmersion, AlgebraicGeometry.IsClosedImmersion.mk",
+   "date": "2026-10-22",
+   "verdict": "no match: affine-limit, abstract derived t-structure, closed immersion geometry, condensed locally constant counit and transvection results do not give the supported exceptional adjunction and finite-coefficient site normalization here."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Affine line zero section finite Tate twist exceptional inverse image is bounded constructible finite Tor and supported cohomology classes are exceptional adjoints",
+   "results": "8 hits; AlgebraicGeometry.exists_app_map_eq_zero_of_isLimit, DerivedCategory.exists_iso_Q_obj_of_isGE_of_isLE, AlgebraicGeometry.exists_appTop_map_eq_zero_of_isLimit, DerivedCategory.isGE_Q_obj_iff, DerivedCategory.exists_iso_singleFunctor_obj_of_isGE_of_isLE, AlgebraicGeometry.exists_appTop_map_eq_zero_of_isAffine_of_isLimit, DerivedCategory.instIsGEObjSingleFunctor, DerivedCategory.isLE_Q_obj_iff",
+   "date": "2026-10-22",
+   "verdict": "no match: affine-limit, abstract derived t-structure, closed immersion geometry, condensed locally constant counit and transvection results do not give the supported exceptional adjunction and finite-coefficient site normalization here."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Etale cohomology with closed supports equals maps from the constant sheaf to the exceptional inverse image, compatibly with the counit",
+   "results": "8 hits; CompHausLike.LocallyConstant.counit_app_val, CompHausLike.LocallyConstant.counit, CompHausLike.LocallyConstant.counitApp, CategoryTheory.Equivalence.sheafCongrPrecoherent_counitIso_hom_app_val_app, TopCat.Sheaf.extend_hom_app, AlgebraicGeometry.SheafedSpace.ofRestrict_hom_c_app, CategoryTheory.typeEquiv_counitIso_inv_app_val_app, CategoryTheory.constantSheafAdj_counit_w",
+   "date": "2026-10-22",
+   "verdict": "no match: affine-limit, abstract derived t-structure, closed immersion geometry, condensed locally constant counit and transvection results do not give the supported exceptional adjunction and finite-coefficient site normalization here."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "thm-pur-affine-line-orientation",
+  "date": "2026-10-22",
+  "group": "Q156"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-a1-kummer",
+ "blueprint": {
+  "from": {
+   "node": "thm-pur-affine-line-orientation",
+   "place": "Proof, first paragraph: 'The Kummer boundary defines the global morphism'; ambient qualifications in the statement; returned proof steps 1-2 and the Gysin-adjunction identification in step 5.",
+   "via": []
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-pur-affine-line-boundary-realization",
+  "worker": "stage1",
+  "summary": "Checked the ambient etale bounds separately from finite-Tor concentration; reused existing localization, concentration and counit-normalized evaluation nodes, creating no nodes. Kept the statement, coefficient level and etale-origin restrictions unchanged.",
+  "blueprint": "thm-pur-affine-line-orientation.proof.md first paragraph (the Kummer boundary defines the global morphism) and final site-comparison sentence; its Gysin subargument is in lem-pur-gysin-structure.proof.md.",
+  "tool_uses": [
+   {
+    "node": "lem-kun-dimension-finite-type",
+    "why": "Generic finite-dimensionality for the finite-type ambient affine line; no affine-line-unit node states this general dimension fact."
+   },
+   {
+    "node": "lem-exc-closed-ambient",
+    "why": "Ordinary etale ambient closed adjoint, independent of any purity theorem or open-complement bound."
+   },
+   {
+    "node": "lem-asd-finite-etale-twist-line",
+    "why": "Generic ordinary etale roots tensor line and its flatness; the affine-line unit uses these coefficients but does not supply the general etale-line theorem."
+   },
+   {
+    "node": "lem-pur-twist-sheaf-locally-free",
+    "why": "Generic local freeness of the pro-etale finite twist, needed for its explicit degree-zero Tor bound."
+   },
+   {
+    "node": "lem-sf-comparison-pullback-exact",
+    "why": "Generic exact coefficient-site pullback, identifying constant coefficient sheaves and shifts."
+   },
+   {
+    "node": "lem-coef-site-closed-counit-transport",
+    "why": "Generic finite closed-adjoint counit and Hom transport, used only on the bounded-below etale representatives already established."
+   },
+   {
+    "node": "thm-weil-pbc-site-comparison",
+    "why": "Full faithfulness on bounded-below etale objects, ensuring that all indicated morphisms have ordinary etale models."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-kun-dimension-finite-type",
+  "lem-exc-closed-ambient",
+  "lem-asd-finite-etale-twist-line",
+  "lem-pur-twist-sheaf-locally-free",
+  "lem-sf-comparison-pullback-exact",
+  "lem-coef-site-closed-counit-transport",
+  "thm-weil-pbc-site-comparison"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q98-a75ecaacb",
+  "group": "Q98",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q98-a75ecaacb (reviewer sub-agent of L); spot-checked: Ordinary first split of a statement-only node: the statement is unchanged against side-live, live and side-live are both still unsplit, there is no repair note, no new nodes, no cycle and no SGA citation. I read the blueprint main-20261015 thm-pur-affine-line-orientation proof (first paragraph and final site-comparison sentence) and Milne LEC Thm 9.4, Ex 9.5 and the i^! adjunction before Thm 16.7. Step-by-step checks: (1) zero-support triangle gives finiteness, Noetherian, finite type and quasi-compact j; kun-dimension gives d (d=0 if X is empty); finite-kummer-level gives l^N A=0; together these are exactly the hypotheses of exc-open-complement-known, which gives c=2d. (2) asd twist line with N=m invertible and mA=0, the pro-etale line from twist-locally-free(1),(3), and the datum's root-trivialization gluing written out on X; Tor [0,0] is elementary. (3) closed-ambient, closed-amplitude ([a,b+2d+1]) and closed-tor are cited separately. (4) The restriction-arrow triangle feeds kummer-triangle-concentration, which supplies both C_0 hypotheses of the evaluation-comparison; that node gives phi[2], eta and ev. (5) Uniqueness follows from the bijections, and the counit formula from the stated agreement of eta with the relative exceptional adjunction on A_Z[-2]. (6) site-closed-counit-transport applies with H=F_e[2] (IH is bounded below by step 3), together with D^+ full faithfulness. (7) Substitution of the boundary class. Edge cases tested: Y empty, Y=Spec k, n=e, ramified E, disconnected or nonreduced Y. Batch-5 findings: lem-pur-finite-kummer-level (already in the statement closure via the datum; it reaches only the generic local triviality of roots of unity in lem-poincare-compatible-primitive-roots) and lem-exc-open-complement-known (the R^qj_* vanishing and constructibility finiteness input, in the blueprint parent's uses; it reaches only the commutative-algebra lemma that regular rings are universally catenary) are outside the trace-formula and Poincare-duality assumptions, so both are accepted. The 8 declared tool_uses are accepted. Advisory, not a return (C3): lem-pur-gysin-structure(2) only states 'a canonical identification', and step 5 reads it as (ev eta)^{-1}, which is how that node's own step 3 builds it from the same evaluation-comparison node. A later statement revision of lem-pur-gysin-structure could pin this. No changes."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.PurityAffineLineBoundaryRealization",
+  "declaration": "WeilConjectures.PurityFiniteSetting.affine_line_boundary_realization",
+  "declarations": [
+   "WeilConjectures.PurityFiniteSetting.boundaryClosedPresentation",
+   "WeilConjectures.PurityFiniteSetting.boundaryClosedExact",
+   "WeilConjectures.PurityFiniteSetting.boundaryEtaleValue",
+   "WeilConjectures.PurityFiniteSetting.boundaryExceptionalComparison",
+   "WeilConjectures.PurityFiniteSetting.boundaryImageComparison",
+   "WeilConjectures.PurityFiniteSetting.boundaryEtaleCounit",
+   "WeilConjectures.PurityFiniteSetting.BoundarySupportedHom",
+   "WeilConjectures.PurityFiniteSetting.AffineLineBoundaryRealization",
+   "WeilConjectures.PurityFiniteSetting.affine_line_boundary_realization"
+  ],
+  "file": "lean/Sheaf/Paper/PurityAffineLineBoundaryRealization.lean",
+  "statement": "theorem affine_line_boundary_realization (P : PurityFiniteSetting.{u}) (h : P.ramificationIndex ∣ P.level) (Y : Scheme.{u}) (a : Y ⟶ Spec (CommRingCat.of P.field.k)) [IsSeparated a] [LocallyOfFiniteType a] [QuasiCompact a] : (1 ≤ P.kummerLevel ∧ (P.exponent : P.Coefficient) = 0) ∧ (∃ (d : ℕ) (hj : QuasiCompact (openImmersion Y)), topologicalKrullDim (Line Y) ≤ (d : WithBot ℕ∞) ∧ @Scheme.HasOpenComplementCondition P.Coefficient inferInstance inferInstance (Punctured Y) (Line Y) (openImmersion Y) inferInstance hj (2 * d)) ∧ ((Etale.lowerStar (Modules P) (zeroSection Y)).rightDerivedFunctor.IsLeftAdjoint) ∧ (∀ M : DerivedCategory (EtSheaves P (Line Y)), Etale.DerivedCategory.isBoundedConstructible P.Coefficient (Line Y) M → Etale.DerivedCategory.isBoundedConstructible P.Coefficient Y ((etClosed P (zeroSection Y)).obj M) ∧ (finiteTorConstructibleEtale P.coefficients.l P.extension P.level P.level_pos (Line Y) M → finiteTorConstructibleEtale P.coefficients.l P.extension P.level P.level_pos Y ((etClosed P (zeroSection Y)).obj M))) ∧ (∃ V : Scheme.Cover.{u} Scheme.etalePrecoverage (Line Y), ∀ i : V.I₀, Nonempty ((Etale.upperStar (Modules P) (V.f i)).obj (P.twistEtale h (Line Y)) ≅ P.constantEtale (V.X i)) ∧ Nonempty ((upperStar (Modules P) (V.f i)).obj (P.twist h (Line Y)) ≅ P.constant (V.X i))) ∧ Etale.DerivedCategory.hasTorAmplitudeIn P.Coefficient (Line Y) 0 0 (P.gysinEtaleInput h Y).obj ∧ Scheme.HasProEtaleTorAmplitude (Line Y) P.Ring ((finiteCoefficientIntrinsicRealization (Line Y) P.Ring).mapDerivedCategory.obj (P.gysinInput h Y).obj) 0 0 ∧ finiteTorConstructible P.coefficients.l P.extension P.level P.level_pos Y ((finiteCoefficientIntrinsicRealization Y P.Ring).mapDerivedCategory.obj (P.derivedSheaf h Y false)) ∧ finiteTorConstructible P.coefficients.l P.extension P.level P.level_pos Y ((finiteCoefficientIntrinsicRealization Y P.Ring).mapDerivedCategory.obj (P.gysinValue h Y)) ∧ (∀ q : ℤ, q ≠ 0 → IsZero ((DerivedCategory.homologyFunctor (ProSheaves P Y) q).obj (P.gysinValue h Y))) ∧ P.AffineLineBoundaryRealization h Y a",
+  "branch": "newtargets-dag",
+  "by": "Q117",
+  "date": "2026-10-22",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-b28f0af61",
+  "group": "Q117",
+  "result": "pass",
+  "note": "Read item node, 9 stmt_deps, source place, delivered module, report, and the live PurityGysinStructure, RetractedSupportLocalizationComparison and PurityFiniteSetting sources. Node diff vs side-live: lean record only; dep copies identical; lean.statement verbatim and all 9 decls present; report has Worker report and Second reading sections. Clauses: datum, N>=1 and mA=0; sep+LFT+QC; d bound (empty X gives d=0), qc j, HasOpenComplementCondition with 2d; unconditional ambient etale IsLeftAdjoint; separate constructibility and finite-Tor preservation; common etale cover trivializing F_e and F=nu^*F_e (definitional); Tor [0,0] on both sites; A_Y and K in finiteTorConstructible; K concentrated in degree 0; exists-unique u_alpha via the verbatim GysinSupportIdentification normalizations; chi(alpha)=eps∘s_*u_alpha for all alpha; eps uniquely fixed by canonical d/eK and the transported etale counit; unique etale model of each u_alpha; boundary-class specialization. chi is fixed before forall c, but e is c-independent: edge, complement, boundary and first are pinned, and supportIso is pinned in degree 2 since H^2_Z->H^2(A^1_Y) is zero. Edge cases (empty Y, Spec k, n=e, ramified E, nonreduced Y, single universe u) OK. No hollow defs, docstrings OK, only a typing instance proved. Advisories: A1 chi existential, inherited from Nonempty lem-pur-supported-hom, pinned up to units of Gamma(Y,A); A2 RetractedSupport decls owned by a non-stmt_dep theorem, reached through lem-pur-gysin-structure; A3 delta free, inherited verbatim; A4 three proof-only nodes have no Lean. No file changed, no compile run."
+ }
+}

@@ -130,5 +130,33 @@
   ],
   "old_proof_deps": []
  },
- "lean_audit": {}
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "blueprint_update": {
+  "snapshot": "main-20261023-1620",
+  "commit": "7284bb09daf97437d544c51882b325f9c52cd345",
+  "changed": [
+   "statement",
+   "proof"
+  ],
+  "statement": "Let $g:T\\to S$, the separably closed fields $k,k'$, the algebraically closed field $\\Omega$, and\n$\\sigma,\\tau,\\iota,\\nu$ with $\\sigma\\circ\\iota=g\\circ\\tau$ be as in [compatible-strict-henselization-core-data],\nwith geometric points $\\bar s=\\sigma\\iota\\nu$ and $\\bar t=\\tau\\nu$ (no integrality hypothesis is needed). Let $A$\nand $B$ be henselian local rings with separably closed residue fields $\\kappa_A,\\kappa_B$, with isomorphisms\n$e_A:\\operatorname{Spec}A\\xrightarrow{\\sim}S_{(\\bar s)}$ and $e_B:\\operatorname{Spec}B\\xrightarrow{\\sim}T_{(\\bar t)}$, and\nlet $\\rho_A:\\operatorname{Spec}k\\to\\operatorname{Spec}\\kappa_A$ and $\\rho_B:\\operatorname{Spec}k'\\to\\operatorname{Spec}\\kappa_B$\nsatisfy\n$\\pi_{\\bar s}\\circ e_A\\circ\\operatorname{Spec}(A\\to\\kappa_A)\\circ\\rho_A=\\sigma$ and\n$\\pi_{\\bar t}\\circ e_B\\circ\\operatorname{Spec}(B\\to\\kappa_B)\\circ\\rho_B=\\tau$.\nThen there exists a local homomorphism $\\varphi:A\\to B$ such that\n$\\pi_{\\bar s}\\circ e_A\\circ\\operatorname{Spec}\\varphi=g\\circ\\pi_{\\bar t}\\circ e_B$ and the induced residue map\n$\\bar\\varphi:\\kappa_A\\to\\kappa_B$ satisfies\n\n$$\n\\operatorname{Spec}(\\bar\\varphi)\\circ\\rho_B=\\rho_A\\circ\\iota .\n$$\n\nThis asserts the existence of one compatible $\\varphi$, not the compatibility of every such map.",
+  "proof": [
+   {
+    "text": "The maps $\\rho_A$ and $\\rho_B$ correspond to field embeddings $\\kappa_A\\to k$ and $\\kappa_B\\to k'$. The image of\nthe composite $\\kappa_A\\to k\\to k'$ lies in the image of $\\kappa_B$, so there is a unique embedding\n$r:\\kappa_A\\to\\kappa_B$ whose composite with $\\kappa_B\\to k'$ is $\\kappa_A\\to k\\to k'$; its ring laws follow from\ninjectivity of $\\kappa_B\\to k'$, and $\\operatorname{Spec}(r)\\circ\\rho_B=\\rho_A\\circ\\iota$ follows since\n$\\operatorname{Spec}$ is fully faithful. Lift $r$ through the universal property of strict henselization (Stacks\nProject, Tags 04GU and 04HX) to a ring map $\\varphi:A\\to B$ compatible with the structure maps, which gives the\nfirst equality. The ring residue diagram commutes and field embeddings and residue projections are local, so\n$\\varphi$ is local. Surjectivity of $B\\to\\kappa_B$ identifies $r$ with the residue map $\\bar\\varphi$.",
+    "uses": [],
+    "elementary": null
+   }
+  ],
+  "note": "the current blueprint (main-20261023-1620, weil-conjectures-blueprint 7284bb09da) states or proves this differently; the node is proved in Lean: recorded 2026-10-23, not reopened"
+ }
 }

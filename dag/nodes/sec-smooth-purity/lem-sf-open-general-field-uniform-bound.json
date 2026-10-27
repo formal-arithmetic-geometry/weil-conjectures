@@ -1,0 +1,283 @@
+{
+ "id": "lem-sf-open-general-field-uniform-bound",
+ "kind": "statement",
+ "title": "Uniform open direct-image vanishing from the base-field torsion bound",
+ "statement": "Let $k$ be a field, let $c\\ge0$ be an integer with $\\operatorname{cd}_{\\rm tor}(k)\\le c$ [def-sc-etale-torsion-cd], let $\\ell$ be a prime invertible in $k$, and let $j:U\\hookrightarrow X$ be an open immersion with $X$ separated of finite type over $k$ [def-weil-scheme-morphism-properties]. Put $d=\\dim U$ if $U\\ne\\varnothing$ and $d=0$ otherwise, with topological Krull dimension [def-kun-topological-krull-dimension]. Let $A$ be any finite commutative ring annihilated by a power of $\\ell$. On the small etale sites, for every sheaf $M$ of $A$-modules and integer $q>2d+c$,\n$$R^qj_*M=0.$$\nHere $Rj_*$ is the ordinary module-sheaf derived direct image [def-weil-pbc-derived-categories, def-weil-pbc-direct-image]. The integer bound depends only on $U,k,c$, and works for all such $A$, hence for all $A_{E,n}$ at once. More explicitly, every affine etale $V\\to X$ has $V\\times_XU$ finite type over $k$ of dimension at most $d$, and its etale torsion cohomology with every $\\ell$-primary coefficient sheaf vanishes in degrees $>2d+c$. The higher module direct-image sheaves agree with the corresponding higher abelian direct-image sheaves after forgetting the coefficient action. If $U=\\varnothing$ all these cohomology and direct-image objects are zero. No separable-closedness hypothesis on $k$ is imposed.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sf-localization/prop-sf-localization-all-stages.proof.md",
+  "place": "Finite Tor amplitude, general-field 2d+c higher-direct-image bound; returned step 16"
+ },
+ "stmt_deps": [
+  "def-sc-etale-torsion-cd",
+  "def-weil-scheme-morphism-properties",
+  "def-kun-topological-krull-dimension",
+  "def-weil-pbc-derived-categories",
+  "def-weil-pbc-direct-image",
+  "def-weil-pbc-primary-torsion"
+ ],
+ "proof": [
+  {
+   "text": "Finite type over the field makes X locally Noetherian. The open immersion j is quasi-compact over a locally Noetherian target, so j followed by the structure morphism is finite type. Apply lem-kun-dimension-finite-type and the elementary WithBot/ENat conversion to obtain dim U <= d = ((dim U).unbotD 0).toNat, with equality when U is nonempty.",
+   "uses": [
+    "def-weil-finite-type-morphism",
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "lem-weil-pbc-noetherian-open-subscheme-noetherian",
+    "lem-kun-dimension-finite-type"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For affine etale V over X, compactness of V and quasi-separatedness of X give quasi-compactness of V -> X. Base change and composition give finite type of W = V x_X U over k. Its projection to U is etale. Use the already proved source theorem Scheme.Hom.topologicalKrullDim_le_of_etale: discrete fibres imply that distinct specializing points have distinct images, so strict specialization chains map to strict chains. Thus dim W <= dim U <= d; no local-ring dimension calculation is needed.",
+   "uses": [
+    "def-pc-fibre-product",
+    "def-weil-etale-morphism",
+    "def-weil-finite-type-morphism",
+    "lem-weil-pbc-etale-scheme-base-change",
+    "def-kun-topological-krull-dimension"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For nonempty W its dimension is a natural number e <= d. The finite-type torsion cohomological bound gives cd_tor(W) <= 2e+c <= 2d+c. For empty W every sheaf is zero by the empty etale covering, hence every cohomology group is zero. This proves cd_tor(W) <= 2d+c uniformly. A primary torsion module sheaf has torsion geometric stalks since powers of the prime are positive; the stalkwise characterization of torsion makes its underlying abelian sheaf locally torsion. A requested integer degree q is positive and equals the cast of q.toNat, so the bound gives the affine-test cohomology clause.",
+   "uses": [
+    "thm-sc-finite-type-torsion-cd",
+    "def-sc-etale-torsion-cd",
+    "def-weil-pbc-primary-torsion",
+    "def-weil-pbc-etale-sheaves",
+    "def-weil-pbc-etale-site",
+    "def-weil-pbc-abelian-etale-sheaves"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Every module over the finite ring A is torsion as an additive group. Apply the source finite-ring torsion lemma on geometric stalks and isTorsionModuleSheaf_iff_isTorsion. Apply lem-sfb-higher-direct-image-affine-etale-bound to the underlying abelian sheaf with the test bound of the preceding step. This theorem supplies the sheafification and affine-cover argument and gives zero abelian higher direct image above 2d+c.",
+   "uses": [
+    "def-weil-pbc-etale-sheaves",
+    "lem-sfb-higher-direct-image-affine-etale-bound"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply lem-weil-pbc-module-abelian-derived-direct-image-comparison to M[0]. Compose its degree-q homology isomorphism with the exact-forgetting homology and single-complex isomorphisms. This is the requested coefficient comparison. Faithfulness of forgetting reflects a zero identity, so the zero abelian higher direct image implies zero module higher direct image.",
+   "uses": [
+    "lem-weil-pbc-module-abelian-derived-direct-image-comparison"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "If U is empty the empty covering forces every module or abelian sheaf on U to be zero. Additive single, derived direct-image, cohomology and homology functors preserve zero objects, in every integer degree. For each test pullback its projection to U makes it empty, so its cohomology is zero as well. The bound only uses U and c; neither finite ring A nor its specified prime-power annihilator changes it.",
+   "uses": [
+    "def-weil-pbc-etale-site",
+    "def-weil-pbc-abelian-etale-sheaves"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-kun-topological-krull-dimension",
+  "def-pc-fibre-product",
+  "def-sc-etale-torsion-cd",
+  "def-weil-etale-morphism",
+  "def-weil-finite-type-morphism",
+  "def-weil-pbc-abelian-etale-sheaves",
+  "def-weil-pbc-etale-sheaves",
+  "def-weil-pbc-etale-site",
+  "def-weil-pbc-primary-torsion",
+  "lem-kun-dimension-finite-type",
+  "lem-sfb-higher-direct-image-affine-etale-bound",
+  "lem-weil-pbc-etale-scheme-base-change",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-weil-pbc-module-abelian-derived-direct-image-comparison",
+  "lem-weil-pbc-noetherian-open-subscheme-noetherian",
+  "thm-sc-finite-type-torsion-cd"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sf-localization/prop-sf-localization-all-stages.proof.md",
+  "place": "Finite Tor amplitude, general-field 2d+c higher-direct-image bound; returned step 16; Lean proof by F8 using existing affine-etale bound and source specialization-chain dimension inequality"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Etale open immersion higher direct image all finite torsion module sheaves vanishes above twice dimension plus cohomological dimension field",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"Algebra.etaleLocus_eq_compl_support\", \"module\": \"Mathlib/RingTheory/Etale/Locus\", \"type\": \"∀ {R : Type u_1} {A : Type u_2} [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A],\\n  Algebra.etaleLocus R A = (Module.support A Ω[A⁄R])ᶜ ∩ (Module.support A (Algebra.H1Cotangent R A))ᶜ\", \"doc\": \"The étale locus of an $ R $-algebra $ A $ is equal to the intersection of the complements of the supports of the module of Kähler differentials $ \\\\Omega_{A/R} $ and the first cotangent cohomology modu\"}\n  {\"name\": \"AlgebraicGeometry.IsEtale.of_comp\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) {Z : AlgebraicGeometry.Scheme} (g : Y ⟶ Z)\\n  [AlgebraicGeometry.IsEtale (CategoryTheory.CategoryStruct.comp f g)] [AlgebraicGeometry.LocallyOfFiniteType g]\\n  [AlgebraicGeometry.FormallyUnramified g], AlgebraicGeometry.IsEtale f\", \"doc\": \"If the composition of a morphism $ f: X \\to Y $ with a morphism $ g: Y \\to Z $ is étale, and $ g $ is locally of finite type and formally unramified, then $ f $ is an étale morphism.\"}\n  {\"name\": \"Algebra.basicOpen_subset_etaleLocus_iff\", \"module\": \"Mathlib/RingTheory/Etale/Locus\", \"type\": \"∀ {R : Type u_1} {A : Type u_2} [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A] {f : A},\\n  ↑(PrimeSpectrum.basicOpen f) ⊆ Algebra.etaleLocus R A ↔ Algebra.FormallyEtale R (Localization.Away f)\", \"doc\": \"For a commutative ring $ R $ and an $ R $-algebra $ A $, the basic open set $ D(f) $ in the Zariski topology on $ \\\\operatorname{Spec}(A) $ is contained in the étale locus of $ A $ over $ R $ if and on\"}\n  {\"name\": \"AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"CategoryTheory.MorphismProperty.HasOfPostcompProperty (@AlgebraicGeometry.IsEtale)\\n  (@AlgebraicGeometry.LocallyOfFiniteType ⊓ @AlgebraicGeometry.FormallyUnramified)\", \"doc\": \"For any category of schemes, the composition of a morphism that is locally of finite type and a morphism that is formally unramified results in an étale morphism. This instance asserts that the proper\"}\n  {\"name\": \"AlgebraicGeometry.IsEtale.instFormallyUnramified\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.IsEtale f], AlgebraicGeometry.FormallyUnramified f\", \"doc\": \"If a morphism $ f: X \\to Y $ of schemes is étale, then it is formally unramified. This means that every étale morphism satisfies the infinitesimal lifting property characterizing formal unramification,\"}\n  {\"name\": \"Algebra.FormallyEtale.instForallOfFinite\", \"module\": \"Mathlib/RingTheory/Etale/Pi\", \"type\": \"∀ {R : Type u_1} {I : Type u_2} (A : I → Type u_3) [inst : CommRing R] [inst_1 : (i : I) → CommRing (A i)]\\n  [inst_2 : (i : I) → Algebra R (A i)] [Finite I] [∀ (i : I), Algebra.FormallyEtale R (A i)],\\n  Algebra.FormallyEtale R ((i : I) → A i)\", \"doc\": \"If $ I $ is a finite set and each algebra $ A_i $ over a commutative ring $ R $ is formally étale, then the product algebra $ \\\\prod_{i \\\\in I} A_i $ is also formally étale over $ R $.\"}\n  {\"name\": \"Algebra.etaleLocus_eq_univ_iff\", \"module\": \"Mathlib/RingTheory/Etale/Locus\", \"type\": \"∀ {R : Type u_1} {A : Type u_2} [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A],\\n  Algebra.etaleLocus R A = Set.univ ↔ Algebra.FormallyEtale R A\", \"doc\": \"The étale locus of an algebra $ A $ over a commutative ring $ R $ is equal to the universal set of prime ideals in $ \\\\operatorname{Spec}(A) $ if and only if $ A $ is formally étale over $ R $.\"}\n  {\"name\": \"Algebra.Etale.formallyEtale\", \"module\": \"Mathlib/RingTheory/Etale/Basic\", \"type\": \"∀ {R : Type u} {A : Type v} {inst : CommRing R} {inst_1 : CommRing A} {inst_2 : Algebra R A} [self : Algebra.Etale R A],\\n  Algebra.FormallyEtale R A\", \"doc\": \"If $ A $ is an étale algebra over a commutative ring $ R $, then $ A $ is formally étale over $ R $. This establishes that the property of being étale implies formal étaleness in the context of commut\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the returned declarations supply only component category, scheme, scalar or adjunction facts, not this coefficient-category comparison and all its specified maps"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Sheaf, CategoryTheory.Functor.rightDerived",
+   "results": "[loogle] OK 0 hit(s)",
+   "date": "2026-10-22",
+   "verdict": "no match: the returned declarations supply only component category, scheme, scalar or adjunction facts, not this coefficient-category comparison and all its specified maps"
+  },
+  {
+   "tool": "grep",
+   "query": "(cohomological.?dimension|cohomologicalDimension).*(etale|field)|etale.*vanish",
+   "results": "[grep] OK 1 hit(s)\n  {\"file\": \"Mathlib/RingTheory/Etale/Basic.lean\", \"line\": \"16\", \"text\": \"An `R`-algebra `A` is formally etale if `Ω[A⁄R]` and `H¹(L_{A/R})` both vanish.\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the returned declarations supply only component category, scheme, scalar or adjunction facts, not this coefficient-category comparison and all its specified maps"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Uniform torsion etale higher direct image open immersion bound two dimension plus torsion cohomological dimension arbitrary field",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.restrict_obj\", \"module\": \"Mathlib.AlgebraicGeometry.Modules.Sheaf\", \"type\": \"(M : Y.Modules) (f : X ⟶ Y) [IsOpenImmersion f] (U) : Γ(M.restrict f, U) = Γ(M, f ''ᵁ U)\", \"doc\": \"For any open subset $U$ of $X$, the sections of the restricted module sheaf over $U$ are equal to the sections of the original module sheaf over the image $f(U)$ in $Y$, where $f : X \\to Y$ is an open \"}\n  {\"name\": \"AlgebraicGeometry.IsOpenImmersion.ΓIsoTop\", \"module\": \"Mathlib.AlgebraicGeometry.OpenImmersion\", \"type\": \"{X Y : Scheme.{u}} (f : X ⟶ Y) [IsOpenImmersion f] : Γ(X, ⊤) ≅ Γ(Y, f.opensRange)\", \"doc\": \"For an open immersion $ f: X \\to Y $ of schemes, there is an isomorphism between the global sections of the structure sheaf on $ X $ and the global sections of the open subset $ f(X) $ in $ Y $. This i\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.appIso\", \"module\": \"Mathlib.AlgebraicGeometry.OpenImmersion\", \"type\": \"(U) : Γ(Y, f ''ᵁ U) ≅ Γ(X, U)\", \"doc\": \"For an open immersion of schemes $f: X \\\\to Y$ and an open subset $U$ of $X$, this defines the isomorphism of rings $\\\\Gamma(Y, f(U)) \\\\cong \\\\Gamma(X, U)$, where $\\\\Gamma(S, V)$ denotes the ring of sectio\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.coe_image\", \"module\": \"Mathlib.AlgebraicGeometry.OpenImmersion\", \"type\": \"{U : X.Opens} : f ''ᵁ U = f '' U\", \"doc\": \"For any open subset $ U $ of a scheme $ X $, the image of $ U $ under the open immersion $ f: X \\to Y $, when considered through the induced functor on open subsets, is equal to the direct image of $ U\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.ofRestrict_appLE\", \"module\": \"Mathlib.AlgebraicGeometry.OpenImmersion\", \"type\": \"(V W e) :\\n  (X.ofRestrict h).appLE V W e =\\n    X.presheaf.map (homOfLE (show X.ofRestrict h ''ᵁ _ ≤ _ by exact Set.image_subset_iff.mpr e)).op\", \"doc\": \"Given a scheme $X$, an open subset $U$ of its underlying topological space, and an open immersion $h: U \\to X$, the morphism from the restricted scheme $X|_U$ to $X$ constructed via $h$ is an open imme\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.restrictFunctorCongr_hom_app_app\", \"module\": \"Mathlib.AlgebraicGeometry.Modules.Sheaf\", \"type\": \"{f g : X ⟶ Y} (hf : f = g) [IsOpenImmersion f] [IsOpenImmersion g] (M : Y.Modules) :\\n  ((restrictFunctorCongr hf).hom.app M).app U = M.presheaf.map (eqToHom (by simp [hf])).op\", \"doc\": \"For schemes $X$ and $Y$, given two equal open immersions $f,g:X\\\\to Y$ and a sheaf of modules $M$ over $Y$, the component of the natural isomorphism between the restriction functors $f^*$ and $g^*$ at \"}\n  {\"name\": \"AlgebraicGeometry.IsOpenImmersion.ΓIso\", \"module\": \"Mathlib.AlgebraicGeometry.OpenImmersion\", \"type\": \"{X Y : Scheme.{u}} (f : X ⟶ Y) [IsOpenImmersion f] (U : Y.Opens) : Γ(X, f ⁻¹ᵁ U) ≅ Γ(Y, f.opensRange ⊓ U)\", \"doc\": \"Let $f: X \\\\to Y$ be an open immersion of schemes and let $U$ be an open subset of $Y$. This definition provides a canonical isomorphism of rings between the ring of sections of $X$ over the preimage $\"}\n  {\"name\": \"AlgebraicGeometry.IsOpenImmersion.map_ΓIso_hom\", \"module\": \"Mathlib.AlgebraicGeometry.OpenImmersion\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [inst : AlgebraicGeometry.IsOpenImmersion f] (U : Y.Opens),\\n  CategoryTheory.CategoryStruct.comp (AlgebraicGeometry.Scheme.Hom.app f U)\\n      (AlgebraicGeometry.IsOpenImmersion.ΓIso f U).hom =\\n    Y.presheaf.map (CategoryTheory.homOfLE ⋯).op\", \"doc\": \"Let $f: X \\\\to Y$ be an open immersion of schemes, and let $U$ be an open subset of $Y$. Let $\\\\text{Im}(f)$ be the image of $f$, which is an open subset of $Y$. The theorem states that the composition \"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the returned declarations supply only component category, scheme, scalar or adjunction facts, not this coefficient-category comparison and all its specified maps"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Affine etale neighborhoods dimension bound yields R q j star zero for q greater than 2 dim U plus cd k",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"Algebra.basicOpen_subset_etaleLocus_iff\", \"module\": \"Mathlib/RingTheory/Etale/Locus\", \"type\": \"∀ {R : Type u_1} {A : Type u_2} [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A] {f : A},\\n  ↑(PrimeSpectrum.basicOpen f) ⊆ Algebra.etaleLocus R A ↔ Algebra.FormallyEtale R (Localization.Away f)\", \"doc\": \"For a commutative ring $ R $ and an $ R $-algebra $ A $, the basic open set $ D(f) $ in the Zariski topology on $ \\\\operatorname{Spec}(A) $ is contained in the étale locus of $ A $ over $ R $ if and on\"}\n  {\"name\": \"Algebra.etaleLocus_eq_compl_support\", \"module\": \"Mathlib/RingTheory/Etale/Locus\", \"type\": \"∀ {R : Type u_1} {A : Type u_2} [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A],\\n  Algebra.etaleLocus R A = (Module.support A Ω[A⁄R])ᶜ ∩ (Module.support A (Algebra.H1Cotangent R A))ᶜ\", \"doc\": \"The étale locus of an $ R $-algebra $ A $ is equal to the intersection of the complements of the supports of the module of Kähler differentials $ \\\\Omega_{A/R} $ and the first cotangent cohomology modu\"}\n  {\"name\": \"Algebra.IsStandardSmoothOfRelativeDimension.exists_etale_mvPolynomial\", \"module\": \"Mathlib/RingTheory/RingHom/StandardSmooth\", \"type\": \"∀ (n : ℕ) (R : Type u) (S : Type v) [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S]\\n  [Algebra.IsStandardSmoothOfRelativeDimension n R S], ∃ g, g.Etale\", \"doc\": \"If $ S $ is a standard smooth algebra of relative dimension $ n $ over a commutative ring $ R $, then there exists an étale algebra homomorphism $ g : R[x_1, \\\\dots, x_n] \\\\to S $ from the polynomial ri\"}\n  {\"name\": \"Algebra.instEtaleOfIsStandardSmoothOfRelativeDimensionOfNatNat\", \"module\": \"Mathlib/RingTheory/Smooth/StandardSmoothCotangent\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S]\\n  [Algebra.IsStandardSmoothOfRelativeDimension 0 R S], Algebra.Etale R S\", \"doc\": \"If $ S $ is a standard smooth algebra of relative dimension 0 over a commutative ring $ R $, then $ S $ is an étale algebra over $ R $.\"}\n  {\"name\": \"Algebra.basicOpen_subset_etaleLocus_iff_etale\", \"module\": \"Mathlib/RingTheory/Etale/Locus\", \"type\": \"∀ {R : Type u_1} {A : Type u_2} [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A]\\n  [Algebra.FinitePresentation R A] {f : A},\\n  ↑(PrimeSpectrum.basicOpen f) ⊆ Algebra.etaleLocus R A ↔ Algebra.Etale R (Localization.Away f)\", \"doc\": \"For a commutative ring $ R $ and an $ R $-algebra $ A $, the basic open set $ D(f) $ in $ \\\\operatorname{Spec}(A) $ is contained in the étale locus of $ A $ over $ R $ if and only if the localization $\"}\n  {\"name\": \"Algebra.etaleLocus_eq_univ_iff\", \"module\": \"Mathlib/RingTheory/Etale/Locus\", \"type\": \"∀ {R : Type u_1} {A : Type u_2} [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A],\\n  Algebra.etaleLocus R A = Set.univ ↔ Algebra.FormallyEtale R A\", \"doc\": \"The étale locus of an algebra $ A $ over a commutative ring $ R $ is equal to the universal set of prime ideals in $ \\\\operatorname{Spec}(A) $ if and only if $ A $ is formally étale over $ R $.\"}\n  {\"name\": \"Algebra.Etale.iff_isStandardSmoothOfRelativeDimension_zero\", \"module\": \"Mathlib/RingTheory/Smooth/StandardSmoothOfFree\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S],\\n  Algebra.Etale R S ↔ Algebra.IsStandardSmoothOfRelativeDimension 0 R S\", \"doc\": \"An $ R $-algebra $ S $ is étale if and only if it is a standard smooth algebra of relative dimension $ 0 $ over $ R $.\"}\n  {\"name\": \"StandardEtalePair.instFormallyEtaleRing\", \"module\": \"Mathlib/RingTheory/Etale/StandardEtale\", \"type\": \"∀ {R : Type u_1} [inst : CommRing R] (P : StandardEtalePair R), Algebra.FormallyEtale R P.Ring\", \"doc\": \"For any commutative ring $ R $ and standard étale pair $ P $ over $ R $, the ring $ P.\\\\text{Ring} $ is a formally étale $ R $-algebra. This instance asserts that the standard étale ring extension, con\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the returned declarations supply only component category, scheme, scalar or adjunction facts, not this coefficient-category comparison and all its specified maps"
+  },
+  {
+   "tool": "grep",
+   "query": "(cohomological.?dimension|cohomologicalDimension).*(etale|field)|etale.*vanish",
+   "results": "1 hits: Mathlib/RingTheory/Etale/Basic.lean",
+   "date": "2026-10-22",
+   "verdict": "no match: hits do not state the simultaneous geometric, torsion cohomology and coefficient comparison clauses"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Uniform cohomological bound on etale cohomology of finite type schemes over a field",
+   "results": "8 hits: AlgebraicGeometry.Scheme.smallEtaleTopology, AlgebraicGeometry.IsEtale, AlgebraicGeometry.Scheme.Etale, AlgebraicGeometry.Scheme.etaleTopology, AlgebraicGeometry.finite_appTop_of_universallyClosed, Algebra.formallyEtale_iff, AlgebraicGeometry.Scheme.zariskiTopology_le_etaleTopology, AlgebraicGeometry.Scheme.etalePretopology",
+   "date": "2026-10-22",
+   "verdict": "no match: hits do not state the simultaneous geometric, torsion cohomology and coefficient comparison clauses"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Sheaf, CategoryTheory.Functor.rightDerived",
+   "results": "0 hits: ",
+   "date": "2026-10-22",
+   "verdict": "no match: hits do not state the simultaneous geometric, torsion cohomology and coefficient comparison clauses"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Etale open immersion higher direct image torsion module sheaves vanishes above twice dimension plus cohomological dimension of field",
+   "results": "8 hits: Algebra.etaleLocus_eq_compl_support, Algebra.basicOpen_subset_etaleLocus_iff, DerivedCategory.to_singleFunctor_obj_eq_zero_of_injective, Algebra.formallyEtale_iff, DerivedCategory.isZero_of_isLE, DerivedCategory.isZero_of_isGE, Algebra.FormallyEtale.subsingleton_h1Cotangent, Algebra.smoothLocus_eq_compl_support_inter",
+   "date": "2026-10-22",
+   "verdict": "no match: hits do not state the simultaneous geometric, torsion cohomology and coefficient comparison clauses"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Etale sheaf cohomology on affine neighborhoods gives higher pushforward sheafification vanishing bound",
+   "results": "8 hits: AlgebraicGeometry.exists_appTop_map_eq_zero_of_isAffine_of_isLimit, AlgebraicGeometry.exists_appTop_map_eq_zero_of_isLimit, AlgebraicGeometry.exists_app_map_eq_zero_of_isLimit, AlgebraicGeometry.exists_pow_mul_eq_zero_of_res_basicOpen_eq_zero_of_isAffineOpen, AlgebraicGeometry.FormallyUnramified.formallyUnramified_appLE, AlgebraicGeometry.IsEtale.instFormallyUnramified, AlgebraicGeometry.exists_lift_of_germInjective, AlgebraicGeometry.Scheme.etaleTopology",
+   "date": "2026-10-22",
+   "verdict": "no match: hits do not state the simultaneous geometric, torsion cohomology and coefficient comparison clauses"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "prop-sf-localization-all-stages",
+  "date": "2026-10-22",
+  "group": "Q35"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sf-localization",
+ "blueprint": {
+  "from": {
+   "node": "prop-sf-localization-all-stages",
+   "place": "Finite Tor amplitude, general-field 2d+c higher-direct-image bound; returned step 16",
+   "via": []
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sf-open-general-field-uniform-bound",
+  "worker": "NH",
+  "summary": "Expanded the general-field neighbourhood cohomology argument, checked finite type and dimension of the test schemes and the empty case, and used the canonical coefficient comparison. All ingredients already exist: no new nodes.",
+  "blueprint": "prop-sf-localization-all-stages.proof.md, (1′) at the finite stage: higher direct images vanish for q>2d+c; the general-field application of thm-sc-finite-type-torsion-cd.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-finite-type-over-noetherian",
+    "why": "Finite type over the field makes X and the affine etale test scheme Noetherian; this is a generic scheme geometry tool. The localization unit supplies no substitute for this generic input."
+   },
+   {
+    "node": "lem-weil-pbc-noetherian-open-subscheme-noetherian",
+    "why": "The inverse-image open W and U are quasi-compact, needed to apply finite-type cohomological bounds. The localization unit supplies no substitute for this generic input."
+   },
+   {
+    "node": "lem-weil-pbc-etale-scheme-base-change",
+    "why": "Base change of V to U is etale, needed to compare local dimensions. The localization unit supplies no substitute for this generic input."
+   },
+   {
+    "node": "lem-sc-etale-local-dimension",
+    "why": "The local rings at a point and its image have equal Krull dimension for an etale map. The localization unit supplies no substitute for this generic input."
+   },
+   {
+    "node": "lem-pc-scheme-dimension-local-rings",
+    "why": "The supremum of the local ring dimensions converts the local equality into dim W <= dim U. The localization unit supplies no substitute for this generic input."
+   },
+   {
+    "node": "thm-sc-finite-type-torsion-cd",
+    "why": "The blueprint explicitly calls for this general-field torsion cohomological bound, applied to W, rather than a separably closed hypothesis. The localization unit supplies no substitute for this generic input."
+   },
+   {
+    "node": "sbc-lem-higher-direct-image-presheaf",
+    "why": "Converts the computed neighbourhood cohomology vanishing into abelian higher direct-image vanishing. The localization unit supplies no substitute for this generic input."
+   },
+   {
+    "node": "lem-weil-pbc-affine-etale-essentially-small-cover",
+    "why": "Affine etale objects cover every small-etale object, so vanishing on those tests suffices after sheafification. The localization unit supplies no substitute for this generic input."
+   },
+   {
+    "node": "lem-weil-pbc-site-sheafification-sections-local",
+    "why": "Provides local presheaf representatives of sections of the higher-image sheafification. The localization unit supplies no substitute for this generic input."
+   },
+   {
+    "node": "lem-weil-pbc-module-abelian-derived-direct-image-comparison",
+    "why": "The canonical comparison after forgetting coefficients gives exactly the module higher-image claim without requiring preservation of injectives. The localization unit supplies no substitute for this generic input."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-weil-pbc-noetherian-open-subscheme-noetherian",
+  "lem-weil-pbc-etale-scheme-base-change",
+  "thm-sc-finite-type-torsion-cd",
+  "lem-weil-pbc-module-abelian-derived-direct-image-comparison"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-NH-f53be2ec3",
+  "group": "NH",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NH-f53be2ec3 (reviewer sub-agent of L); spot-checked: Read the item, all 19 cited statements and the blueprint source (main-20261015 prop-sf-localization-all-stages.proof.md, (1') at the finite stage, lines 109-118). That paragraph says the algebraically closed proof applies verbatim with thm-sc-finite-type-torsion-cd at the given c, and the 7 steps write exactly that out. Step 1 handles the empty open and shows the coefficient sheaf is torsion (l^r m = 0). Steps 2-3 show W = V x_X U is of finite type with dim W <= d, using lfp generators plus Noetherian/quasi-compact, then 02GO base change, etale local-dimension equality and the sup of local dimensions (empty case -inf). Step 4 applies thm-sc-finite-type-torsion-cd to W with e <= d. Step 5 uses 03Q8 sheafification, 00WK local representatives and affine cover-density. Step 6 uses the canonical module/abelian derived comparison (an iso, forgetful functor exact) on M[0], so no claim that forgetting preserves injectives is needed. Step 7 notes the bound is independent of A. Edge cases checked: U empty, W empty with U nonempty, d=0, c=0, A=0, p-torsion. No new nodes. No general-field duplicate: lem-sf-etale-direct-image-vanishing, lem-kun-relative-torsion-direct-image-dimension-bound, lem-sfb-etale-module-affine-bound, lem-kun-proper-torsion-cd-bound, lem-kun-0f10 and fin4-lem-fibrewise-cohomological-dimension all need an algebraically/separably closed (or finite) field, properness, or give only finiteness. No SGA. The worker wrote tool_uses itself (C8 form slip only); I accept all 10 entries as generic black-box tools. Batch-5 check: thm-sc-finite-type-torsion-cd is the classical cd_tor(X) <= 2 dim X + cd(k) bound. Its closure reaches only the general definition def-trf-schematically-dense-open via Nagata/Chow/Stein lemmas, it is neither trace formula nor Poincare duality nor a step of their proofs, and the parent already cites it on the base, so accepted. Step 2's refinement over finite-type charts (composition of finite type) is brief but elementary. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.OpenGeneralFieldUniformBound",
+  "declaration": "AlgebraicGeometry.Etale.openImmersion_generalField_uniformBound",
+  "file": "lean/Sheaf/AlgebraicGeometry/OpenGeneralFieldUniformBound.lean",
+  "statement": "theorem openImmersion_generalField_uniformBound (k : Type u) [Field k] (c : ℕ) (hc : Scheme.HasTorsionEtaleCohomologicalDimensionLE (Spec (.of k)) c) (ℓ : ℕ) (hℓ : ℓ.Prime) (hℓk : IsUnit (ℓ : k)) {U X : Scheme.{u}} (aX : X ⟶ Spec (.of k)) [LocallyOfFiniteType aX] [QuasiCompact aX] [IsSeparated aX] (j : U ⟶ X) [IsOpenImmersion j] (A : Type (u + 1)) [CommRing A] [Finite A] (hA : ∃ r : ℕ, (ℓ : A) ^ r = 0) : (∀ (M : Sheaf U.smallEtaleTopology (ModuleCat.{u + 1} A)) (q : ℤ), (2 * ((topologicalKrullDim U).unbotD 0).toNat + c : ℕ) < q → IsZero (higherDirectImage A j q M)) ∧ (∀ (V : X.Etale) [IsAffine V.left], LocallyOfFiniteType (pullback.fst V.hom j ≫ V.hom ≫ aX) ∧ QuasiCompact (pullback.fst V.hom j ≫ V.hom ≫ aX) ∧ topologicalKrullDim (pullback V.hom j : Scheme.{u}) ≤ (((topologicalKrullDim U).unbotD 0).toNat : WithBot ℕ∞) ∧ ∀ (F : Sheaf (pullback V.hom j).smallEtaleTopology (ModuleCat.{u + 1} (ULift.{u + 1} ℤ))), Scheme.IsPrimaryTorsionSheaf (ULift.{u + 1} ℤ) F ℓ → ∀ q : ℤ, (2 * ((topologicalKrullDim U).unbotD 0).toNat + c : ℕ) < q → IsZero ((cohomology AddCommGrpCat.{u + 1} (pullback V.hom j) q).obj ((_root_.DerivedCategory.singleFunctor _ 0).obj ((moduleAbelianForget (ULift.{u + 1} ℤ) (pullback V.hom j)).obj F)))) ∧ (∀ (M : Sheaf U.smallEtaleTopology (ModuleCat.{u + 1} A)) (q : ℤ), Nonempty ((moduleAbelianForget A X).obj (higherDirectImage A j q M) ≅ (_root_.DerivedCategory.Plus.homologyFunctor _ q).obj ((lowerStar AddCommGrpCat.{u + 1} j).rightDerivedFunctorPlus.obj ((_root_.DerivedCategory.Plus.singleFunctor _ 0).obj ((moduleAbelianForget A U).obj M))))) ∧ (IsEmpty U → (∀ (M : Sheaf U.smallEtaleTopology (ModuleCat.{u + 1} A)) (q : ℤ), IsZero (higherDirectImage A j q M)) ∧ (∀ (F : Sheaf U.smallEtaleTopology AddCommGrpCat.{u + 1}) (q : ℤ), IsZero ((cohomology AddCommGrpCat.{u + 1} U q).obj ((_root_.DerivedCategory.singleFunctor _ 0).obj F))) ∧ (∀ (V : X.Etale) [IsAffine V.left] (F : Sheaf (pullback V.hom j).smallEtaleTopology AddCommGrpCat.{u + 1}) (q : ℤ), IsZero ((cohomology AddCommGrpCat.{u + 1} (pullback V.hom j) q).obj ((_root_.DerivedCategory.singleFunctor _ 0).obj F))) ∧ (∀ (F : Sheaf U.smallEtaleTopology AddCommGrpCat.{u + 1}) (q : ℤ), IsZero ((_root_.DerivedCategory.Plus.homologyFunctor _ q).obj ((lowerStar AddCommGrpCat.{u + 1} j).rightDerivedFunctorPlus.obj ((_root_.DerivedCategory.Plus.singleFunctor _ 0).obj F)))))",
+  "branch": "newtargets-dag",
+  "by": "Q124",
+  "date": "2026-10-22",
+  "existing": false,
+  "note": "All clauses: uniform module higher-direct-image vanishing, affine etale test finite type/dimension/primary cohomology bound, module-abelian higher-direct-image comparison, and all-degree empty-open vanishing. The additional statement dependency is the existing upstream primary-torsion definition, used with lifted integer coefficients to express arbitrary primary abelian sheaves."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-28d3e6687",
+  "group": "Q124",
+  "result": "pass",
+  "note": "Matched every hypothesis and conclusion clause (torsion cd of Spec k, ℓ prime and invertible, X separated finite type, j open, finite A with ℓ^r A=0, d=unbotD 0 of topologicalKrullDim U, R^q j_* M=0 for q>2d+c, affine étale test W finite type with dim≤d and ℓ-primary cohomology vanishing above 2d+c, module/abelian agreement, empty-U all-degree vanishing) against the dependency declarations (HasTorsionEtaleCohomologicalDimensionLE, Etale.higherDirectImage, Etale.cohomology, IsPrimaryTorsionSheaf); no extra hypotheses and no universe loss (A in Type (u+1) is the coefficient convention). Item node changed only in lean and stmt_deps; the added def-weil-pbc-primary-torsion has a lean record. Recorded statement matches the file verbatim; all 20 imports exist; no name collision; sorry only as the proof; docstrings complete. Not recompiled per instructions; worker compiled clean, then added proof-only imports, all of which exist. Advisories: module/abelian clause is a bare Nonempty (node says 'agree'; a proved canonical comparison exists); moduleAbelianForget owner not in stmt_deps; curve-worded primary-torsion node; unused proof imports."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F8",
+  "result": "pass",
+  "landing": "20261023T102728-L-2960533",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

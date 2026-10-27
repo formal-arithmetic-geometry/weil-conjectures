@@ -1,0 +1,307 @@
+{
+ "id": "lem-sf-relative-product-base-change-factor-squares",
+ "kind": "statement",
+ "title": "Cartesian base-change squares for the individual relative-product factors",
+ "statement": "Fix distinct primes $p,\\ell$, integers $a,n\\geq1$, $k=\\overline{\\mathbf F}_{p^a}$, a finite extension $E/\\mathbf Q_\\ell$ inside $\\overline{\\mathbf Q}_\\ell$, its valuation ring $\\mathcal O_E$ and a uniformizer $\\varpi_E$. Put $A_{E,n}=\\mathcal O_E/\\varpi_E^n$, choose $\\Lambda\\in\\{A_{E,n},\\mathcal O_E,E,\\overline{\\mathbf Q}_\\ell\\}$, and fix the six-functor datum [def-sf-datum] for these parameters. Integral pullbacks and tensors are completed; field coefficients use rationalization and a common finite coefficient field. Let $B$ be a separated finite-type $k$-scheme, let $f:X\\to B$ and $g:Y\\to B$ be separated finite-type morphisms, and let $K\\in D^b_{ctf}(X,\\Lambda)$ and $L\\in D^b_{ctf}(Y,\\Lambda)$. Write $T=X\\times_BY$, $u:T\\to X$, $v:T\\to Y$, $h=fu=gv$, $P=Lu^*K$, $Q=Rf_!K$ and $H=P\\otimes^L_\\Lambda Lv^*L$. Define the following objects of $D^b_{ctf}(B,\\Lambda)$:\n$$\\begin{aligned}\nD_0&=Rh_!H,&D_1&=Rg_!Rv_!H,\\\\\nD_2&=Rg_!(Rv_!P\\otimes^L L),&D_3&=Rg_!(Lg^*Q\\otimes^L L),\\\\\nD_4&=Rg_!(L\\otimes^L Lg^*Q),&D_5&=Rg_!L\\otimes^L Q,\\\\\nD_6&=Q\\otimes^L Rg_!L.\n\\end{aligned}$$\nLet $d_i:D_i\\to D_{i+1}$, for $0\\leq i<6$, be, in order,\n$$\\alpha_{g,v,H}^{-1},\\quad Rg_!(\\operatorname{PF}_{v,P,L}^{-1}),\\quad Rg_!(\\operatorname{Ex}_{!,K}^{-1}\\otimes1_L),\\quad Rg_!(\\sigma_{Lg^*Q,L}),\\quad\\operatorname{PF}_{g,L,Q}^{-1},\\quad\\sigma_{Rg_!L,Q}.$$\nHere $\\alpha$ is the supplied composition comparison (A4), $\\operatorname{Ex}_{!,K}:Lg^*Rf_!K\\to Rv_!Lu^*K$ is (A2) for $(u,v,f,g)$, $\\operatorname{PF}$ is [def-sf-pf], and $\\sigma$ is tensor symmetry. Let $b:B'\\to B$ be a morphism with $B'$ separated finite type over $k$. Write $X'=X\\times_BB'$, $Y'=Y\\times_BB'$, $T'=T\\times_BB'\\cong X'\\times_{B'}Y'$, with maps $x:X'\\to X$, $y:Y'\\to Y$, $t:T'\\to T$, and base-changed maps $f',g',u',v',h'$. Form $D_i',d_i'$ by these maps and $K'=Lx^*K$, $L'=Ly^*L$. For each $i$, let\n$$\\beta_i:Lb^*D_i\\xrightarrow{\\sim}D_i'$$\nbe the comparison obtained by exchanging pullback past every displayed compact-support image, distributing pullback over tensor, and using pullback composition; in particular $Lt^*H\\cong Lu'^*K'\\otimes^L Lv'^*L'$ and $Lb^*Q\\cong Rf'_!K'$. The comparison $\\beta_0$ is $\\operatorname{Ex}_{!,h}$ followed by the monoidal identification of $Lt^*H$. In $\\beta_1$, exchange past $g$ first and then past $v$. In $\\beta_2$, exchange past $g$, distribute $Ly^*$ over tensor, and exchange past $v$ on $P$. In $\\beta_3$, exchange past $g$, distribute over tensor, identify $Ly^*Lg^*Q=Lg'^*Lb^*Q$, and use the exchange for $f$; $\\beta_4$ has the same comparisons in the swapped tensor order. Finally $\\beta_5$ distributes $Lb^*$ over tensor and uses the exchanges for $g,f$ in that order, and $\\beta_6$ does so in the order $f,g$. All pullback-composition comparisons here are the canonical ones. Then every individual factor square commutes on the witnessed finite domains (complexes equipped with étale-origin witnesses [def-weil-pbc-etale-origin-witness] at $\\Lambda=A_{E,n}$) and their completed and transported coefficient domains:\n$$\\beta_{i+1}\\circ Lb^*(d_i)=d_i'\\circ\\beta_i\\qquad(0\\leq i<6).$$",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-kunneth-relative/_section.md",
+  "place": "Coherence clause (iii), base change, with the displayed six factors; returned proof step 7"
+ },
+ "stmt_deps": [
+  "def-sf-datum",
+  "def-pc-fibre-product",
+  "def-sf-pf",
+  "def-weil-pbc-etale-origin-witness",
+  "def-sf-rational-common-tensor-symmetries",
+  "def-sf-constructible-projection-mates",
+  "lem-weil-structure-direct-images-constructible",
+  "def-sf-ctf-coefficient-stage-selectors",
+  "def-pur-localized-derived-tensor-braiding",
+  "def-pur-completed-pullback-tensor-comparison",
+  "def-pod-integral-tensor-constraints"
+ ],
+ "proof": [
+  {
+   "text": "Auxiliary domain and inverse checks in the Lean presentation: extract each coefficient-stage coherence record directly from the six-functor datum. For the finite tensor, carry both intrinsic Tor intervals through the canonical coefficient realization to fixed-module derived categories using lem-exc-intrinsic-tor-amplitude-transport; apply DerivedCategory.torAmplitudeIn_tensor to add their endpoints and carry the resulting interval back. Constructibility is already part of the recorded partial tensor. At integral coefficients use the equality between the integral constructible and finite-Tor predicates in lem-coef-integral-residue-tor; the two field-domain predicates impose no extra condition. The exchange arrows are conjugates of the invertible components asserted by the corresponding axioms of def-sf-datum, so they are invertible, since full inclusions reflect isomorphisms. The finite projection component is invertible by fix-prop-projection-formula; its higher-stage analogues are invertible by the datum axioms. Every map from a scheme separated over the base is separated, by cancellation of separatedness from its composite with the structure map. These checks leave the six factor-square equations below unchanged.",
+   "uses": [
+    "def-sf-datum",
+    "lem-exc-intrinsic-tor-amplitude-transport",
+    "lem-coef-integral-residue-tor",
+    "fix-prop-projection-formula"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-kunneth-relative/_section.md",
+    "place": "The seven displayed finite-Tor objects and the inverses in the six factor arrows"
+   }
+  },
+  {
+   "text": "Write $E_{r,c}:Lc^*Rr_!\\to Rr'_!Lc_r^*$ for exchange across the pullback of $r$ along $c$, and $\\mu_c$ for tensor distribution. All equations below insert the canonical pullback-composition maps. At finite coefficients these maps are natural and monoidal, and $\\mu_c$ respects signed symmetry, by [lem-sfb-ringed-derived-monoidal-comparisons], applied to the constant-coefficient ringed topoi. At integral coefficients the symmetry and composition equations hold already on the actual strict quotient towers and then under functorial derived limit, by [lem-pur-integral-coherence-tower]. The latter explicitly identifies the resulting equations with the completed-operation equations; we do not infer equality of integral morphisms from equality of their separate reductions. By [def-weil-derived-pullback-tensor-hom], rational pullbacks and tensors act linearly on integral morphisms, and algebraically closed coefficients use common finite fields: applying these functors to the equations gives the same equations at both field stages. Thus tensor distribution, pullback composition and signed symmetry can be used coherently at every stage in the remaining steps. Axioms (A2),(A3),(A4) of [def-sf-datum] give the displayed inverses. All schemes and maps here lie in the finite-type separated setting of the datum, and we work on the witnessed/completed/transported domains in the statement.",
+   "uses": [
+    "lem-sfb-ringed-derived-monoidal-comparisons",
+    "lem-pur-integral-coherence-tower",
+    "def-weil-derived-pullback-tensor-hom",
+    "def-sf-datum"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-kunneth-relative/_section.md",
+    "place": "Coherence (iii), canonical monoidality and composition comparisons"
+   }
+  },
+  {
+   "text": "For $i=0$, apply the vertical-pasting equation and composition compatibility of [fix-lem-exchanges] to $T\\xrightarrow{v}Y\\xrightarrow{g}B$ and their pullbacks over $b$. Before identifying $Lt^*H$ with $H'$, this is exactly\n$$ (\\alpha_{g',v'})^{-1}E_{h,b}=R g'_!(E_{v,y})\\,E_{g,b}\\,Lb^*(\\alpha_{g,v}^{-1}). $$\nEvaluate at $H$. Naturality of $\\alpha$ and the exchanges allows the final identification $Lt^*H\\cong H'$ on both sides. The right-hand exchange order is first $g$, then $v$, exactly the specified $\\beta_1$, and the left is $\\beta_0$ followed by $d'_0$. This gives $\\beta_1 Lb^*d_0=d'_0\\beta_0$. The cited statement supplies this equation also on completed and transported domains, not merely at finite level.",
+   "uses": [
+    "fix-lem-exchanges"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-kunneth-relative/_section.md",
+    "place": "Coherence (iii), vertical pasting over b for g and v"
+   }
+  },
+  {
+   "text": "For $i=1$, apply the base-change square of [prop-sf-pf-coherence] to $v:T\\to Y$ along $y:Y'\\to Y$, with inputs $(P,L)$. Its top map is $Ly^*\\operatorname{PF}_{v,P,L}$; its vertical maps distribute pullback, exchange past $v$, and identify $Lt^*Lv^*L$ with $Lv'^*L'$. In a commuting square $B a=a' A$ with $a,a'$ invertible, multiplication by their inverses gives $A a^{-1}=a'^{-1}B$. Apply this to reverse the two projection arrows. Apply $Rg'_!$ to this reversed square. Naturality of $E_{g,b}$ at the morphism $\\operatorname{PF}_{v,P,L}^{-1}$, supplied by [fix-lem-exchanges], identifies its top route with $Lb^*Rg_!(\\operatorname{PF}_{v,P,L}^{-1})$. The remaining vertical comparisons are exactly those defining $\\beta_1,\\beta_2$. Hence $\\beta_2 Lb^*d_1=d'_1\\beta_1$.",
+   "uses": [
+    "prop-sf-pf-coherence",
+    "fix-lem-exchanges"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-kunneth-relative/_section.md",
+    "place": "Coherence (iii), projection formula for v along y"
+   }
+  },
+  {
+   "text": "For $i=2$, horizontally paste the square $(u,v,f,g)$ with its base change along $y$, and compare with the pasting of the $f$-square over $b$ and the square $(u',v',f',g')$. Both outer squares have bottom map $gy=bg'$. The horizontal-pasting and square-comparison clauses of [fix-lem-exchanges] therefore give, on $K$,\n$$ E_{v,y}\\,Ly^*(E_{f,g})=E_{f',g'}\\,Lg'^*(E_{f,b}) $$\nunder the canonical comparisons $Ly^*Lg^*Q\\cong Lg'^*Lb^*Q$ and $Lt^*Lu^*K\\cong Lu'^*K'$. Inverting just $E_{f,g}$ and $E_{f',g'}$ rewrites this as\n$$ Lg'^*(E_{f,b})\\,Ly^*(E_{f,g}^{-1})=E_{f',g'}^{-1}E_{v,y}. $$\nTensor this equality with $1_{L'}$. Naturality of tensor distribution identifies it with the comparison of the inner arrows in $d_2,d'_2$. Apply $Rg'_!$ and naturality of $E_{g,b}$ at $E_{f,g}^{-1}\\otimes1_L$. The left and right vertical routes are precisely $\\beta_3$ and $\\beta_2$, respectively. This proves $\\beta_3 Lb^*d_2=d'_2\\beta_2$; no assertion that exchange is a monoidal transformation is needed.",
+   "uses": [
+    "fix-lem-exchanges"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-kunneth-relative/_section.md",
+    "place": "Coherence (iii), two horizontal pastings of the Cartesian cube"
+   }
+  },
+  {
+   "text": "For $i=3$, use the pullback-symmetry equation of step 1 on $(Lg^*Q,L)$:\n$$\\mu_y^{\\mathrm{sw}}Ly^*\\sigma_{Lg^*Q,L}=\\sigma_{Ly^*Lg^*Q,L'}\\mu_y.$$\nPut $a:Ly^*Lg^*Q\\xrightarrow{\\sim}Lg'^*Rf'_!K'$ for pullback composition followed by $Lg'^*E_{f,b}$. Naturality of symmetry gives $(1_{L'}\\otimes a)\\sigma_{Ly^*Lg^*Q,L'}=\\sigma_{Lg'^*Rf'_!K',L'}(a\\otimes1_{L'})$. Composing these two equations gives the inner square with exactly the two orders used in $\\beta_3$ and $\\beta_4$. Apply $Rg'_!$ and naturality of $E_{g,b}$ at $\\sigma_{Lg^*Q,L}$ from [fix-lem-exchanges]. This yields $\\beta_4 Lb^*d_3=d'_3\\beta_3$. All signs are the Koszul signs of the same symmetry.",
+   "uses": [
+    "lem-sfb-ringed-derived-monoidal-comparisons",
+    "lem-pur-integral-coherence-tower",
+    "def-weil-derived-pullback-tensor-hom",
+    "fix-lem-exchanges"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-kunneth-relative/_section.md",
+    "place": "Coherence (iii), internal tensor symmetry"
+   }
+  },
+  {
+   "text": "For $i=4$, apply [prop-sf-pf-coherence] to $g:Y\\to B$ along $b$, with inputs $(L,Q)$. Reverse its projection arrows by the inverse-square calculation in step 3. This first gives a square whose bottom second input is $Lb^*Q$. Now postcompose that second input with $e=E_{f,b}:Lb^*Q\\to Rf'_!K'$. Naturality in the second input of the same cited projection transformation gives\n$$ (1_{Rg'_!L'}\\otimes e)\\operatorname{PF}_{g',L',Lb^*Q}^{-1}\n=\\operatorname{PF}_{g',L',Rf'_!K'}^{-1}\\,Rg'_!(1_{L'}\\otimes Lg'^*e). $$\nIts source comparison is exactly the swapped-order $\\beta_4$, and its target comparison distributes $Lb^*$ then exchanges past $g$ and $f$, exactly $\\beta_5$. Thus $\\beta_5 Lb^*d_4=d'_4\\beta_4$. The object $Q$ is in the supplied finite-Tor category, so this application has the required second-input domain.",
+   "uses": [
+    "prop-sf-pf-coherence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-kunneth-relative/_section.md",
+    "place": "Coherence (iii), projection formula for g along b and naturality in Q"
+   }
+  },
+  {
+   "text": "For $i=5$, set $A=Rg_!L$, $F=Rf_!K$, $a=E_{g,b}:Lb^*A\\to Rg'_!L'$ and $e=E_{f,b}:Lb^*F\\to Rf'_!K'$. The symmetry/pullback equation of step 1 and naturality of symmetry give\n$$ (e\\otimes a)\\mu_b^{\\mathrm{sw}}Lb^*(\\sigma_{A,F})\n=(e\\otimes a)\\sigma_{Lb^*A,Lb^*F}\\mu_b\n=\\sigma_{Rg'_!L',Rf'_!K'}(a\\otimes e)\\mu_b. $$\nThe extreme vertical maps are exactly $\\beta_6$ and $\\beta_5$, with exchanges in the orders $f,g$ and $g,f$. Hence $\\beta_6 Lb^*d_5=d'_5\\beta_5$. Together the six proved equations are the assertion. Each uses the already specified comparisons, so no unspecified choice of comparison or faithfulness of coefficient transport enters.",
+   "uses": [
+    "lem-sfb-ringed-derived-monoidal-comparisons",
+    "lem-pur-integral-coherence-tower",
+    "def-weil-derived-pullback-tensor-hom"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-kunneth-relative/_section.md",
+    "place": "Coherence (iii), final tensor symmetry"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sf-datum",
+  "def-weil-derived-pullback-tensor-hom",
+  "fix-lem-exchanges",
+  "lem-pur-integral-coherence-tower",
+  "lem-sfb-ringed-derived-monoidal-comparisons",
+  "prop-sf-pf-coherence",
+  "lem-exc-intrinsic-tor-amplitude-transport",
+  "lem-coef-integral-residue-tor",
+  "fix-prop-projection-formula"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-kunneth-relative/_section.md",
+  "place": "R5: auxiliary domain, invertibility and separatedness proofs; the original six-factor coherence argument remains to be proved."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Base change factor diagrams for composition compact support exchange inverse projection formula in Cartesian fibre product",
+   "results": "[leanfinder] OK 8 hit(s); AlgebraicGeometry.Scheme.Pullback.t'_fst_snd [Mathlib/AlgebraicGeometry/Pullbacks]; AlgebraicGeometry.Scheme.Pullback.t'_snd_fst_fst [Mathlib/AlgebraicGeometry/Pullbacks]; AlgebraicGeometry.Scheme.Pullback.t'_snd_fst_snd [Mathlib/AlgebraicGeometry/Pullbacks]; AlgebraicGeometry.Scheme.Pullback.t'_fst_fst_snd [Mathlib/AlgebraicGeometry/Pullbacks]; AlgebraicGeometry.Scheme.Pullback.t_fst_snd [Mathlib/AlgebraicGeometry/Pullbacks]; AlgebraicGeometry.Scheme.Pullback.t'_snd_snd [Mathlib/AlgebraicGeometry/Pullbacks]; AlgebraicGeometry.Scheme.Pullback.t'_fst_fst_fst [Mathlib/AlgebraicGeometry/Pullbacks]; AlgebraicGeometry.Scheme.Pullback.t_fst_fst [Mathlib/AlgebraicGeometry/Pullbacks]",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary pullback identities and module base-change composition do not identify these six derived compact-support factor squares"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"baseChange\", \"comp\"",
+   "results": "[loogle] OK 12 hit(s); LinearMap.baseChange_comp [Mathlib.LinearAlgebra.TensorProduct.Tower]; TensorProduct.AlgebraTensorModule.ker_baseChange_comp_cancelBaseChange_symm [Mathlib.LinearAlgebra.TensorProduct.Tower]; TensorProduct.AlgebraTensorModule.baseChange_comp_cancelBaseChange_symm_self [Mathlib.LinearAlgebra.TensorProduct.Tower]; TensorProduct.AlgebraTensorModule.lTensor_comp_cancelBaseChange [Mathlib.LinearAlgebra.TensorProduct.Tower]; LinearMap.liftBaseChange_comp [Mathlib.LinearAlgebra.TensorProduct.Lift]; IsBaseChange.comp_equiv [Mathlib.RingTheory.IsTensorProduct]; IsBaseChange.lift_comp [Mathlib.RingTheory.IsTensorProduct]; IsBaseChange.comp [Mathlib.RingTheory.IsTensorProduct]; IsBaseChange.of_comp [Mathlib.RingTheory.IsTensorProduct]; IsBaseChange.comp_iff [Mathlib.RingTheory.IsTensorProduct]; Algebra.IsPushout.cancelBaseChange_symm_comp_lTensor [Mathlib.RingTheory.IsTensorProduct]; CategoryTheory.MorphismProperty.IsStableUnderBaseChange.hasOfPostcompProperty_monomorphisms [Mathlib.CategoryTheory.MorphismProperty.Limits]",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary pullback identities and module base-change composition do not identify these six derived compact-support factor squares"
+  },
+  {
+   "tool": "grep",
+   "query": "baseChange.*[Pp]asting|exchange.*[Cc]omposition|projection.*[Bb]ase[Cc]hange",
+   "results": "[grep] OK 0 hit(s); ; Mathlib/CategoryTheory",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary pullback identities and module base-change composition do not identify these six derived compact-support factor squares"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Cartesian cube compatibility of compact support composition exchange and projection formula factors",
+   "results": "[leansearch] OK 8 hit(s); HasCompactSupport.comp_homeomorph [Mathlib.Topology.Algebra.Support]; Function.support_comp_eq_preimage [Mathlib.Algebra.Notation.Support]; HasCompactSupport.comp₂_left [Mathlib.Topology.Algebra.Support]; CompactlySupportedContinuousMap.comp [Mathlib.Topology.ContinuousMap.CompactlySupported]; Function.support_prod_mk' [Mathlib.Algebra.Notation.Support]; HasCompactSupport.comp_left [Mathlib.Topology.Algebra.Support]; HasCompactMulSupport.comp_homeomorph [Mathlib.Topology.Algebra.Support]; HasCompactSupport.comp_isClosedEmbedding [Mathlib.Topology.Algebra.Support]",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary pullback identities and module base-change composition do not identify these six derived compact-support factor squares"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Commutativity of relative product comparison intermediate factor squares under arbitrary base pullback",
+   "results": "[leanfinder] OK 8 hit(s); CategoryTheory.Limits.pullbackComparison_comp_fst_assoc [Mathlib/CategoryTheory/Limits/Shapes/Pullback/HasPullback]; CategoryTheory.Limits.pullbackComparison_comp_snd_assoc [Mathlib/CategoryTheory/Limits/Shapes/Pullback/HasPullback]; CategoryTheory.Limits.map_lift_pullbackComparison_assoc [Mathlib/CategoryTheory/Limits/Shapes/Pullback/HasPullback]; CategoryTheory.Limits.pullbackComparison_comp_fst [Mathlib/CategoryTheory/Limits/Shapes/Pullback/HasPullback]; CategoryTheory.Limits.map_lift_pullbackComparison [Mathlib/CategoryTheory/Limits/Shapes/Pullback/HasPullback]; CategoryTheory.Limits.pullbackComparison_comp_snd [Mathlib/CategoryTheory/Limits/Shapes/Pullback/HasPullback]; CategoryTheory.Limits.CategoricalPullback.CatCommSqOver.w_app [Mathlib/CategoryTheory/Limits/Shapes/Pullback/Categorical/Basic]; CategoryTheory.Limits.CategoricalPullback.Hom.w [Mathlib/CategoryTheory/Limits/Shapes/Pullback/Categorical/Basic]",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary pullback identities and module base-change composition do not identify these six derived compact-support factor squares"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Base change compatibility of the six factors of the relative derived compact support Kunneth map",
+   "results": "8 hits: LightCondensed.ihomPoints_symm_comp; HomologicalComplex.HasGoodTensor₁₂; CategoryTheory.ExponentiableMorphism.pushforwardComp_hom_counit_assoc; CategoryTheory.ExponentiableMorphism.unit_pushforwardComp_hom_assoc; CategoryTheory.ExponentiableMorphism.pushforwardComp_hom_counit; CategoryTheory.ExponentiableMorphism.unit_pushforwardComp_hom; CategoryTheory.ExponentiableMorphism.comp_pushforward; HomologicalComplex.HasGoodTensor₂₃",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern ordinary module base change, Cartesian-category braidings or compactly supported functions, not these six derived compact-support factor squares"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Symmetric monoidal derived inverse image carries braiding and projection formula exchange through Cartesian base change",
+   "results": "8 hits: CategoryTheory.Over.braiding_inv_left; CategoryTheory.Dial.braiding_inv_F; CategoryTheory.CartesianMonoidalCategory.braiding_inv_fst; CategoryTheory.CartesianMonoidalCategory.braiding_inv_snd; CategoryTheory.MonoidalCategory.externalProductSwap_inv_app_app; CategoryTheory.Dial.braiding_inv_f; CategoryTheory.Over.braiding_hom_left; CategoryTheory.CartesianMonoidalCategory.braiding_inv_fst_assoc",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern ordinary module base change, Cartesian-category braidings or compactly supported functions, not these six derived compact-support factor squares"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "thm-sf-kunneth-relative",
+  "date": "2026-10-22",
+  "group": "Q102"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-thm-sf-kunneth-relative",
+ "blueprint": {
+  "from": {
+   "node": "thm-sf-kunneth-relative",
+   "place": "Coherence clause (iii), base change, with the displayed six factors; returned proof step 7",
+   "via": []
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sf-relative-product-base-change-factor-squares",
+  "worker": "stage1",
+  "summary": "Expanded the six individual base-change squares using existing vertical/horizontal exchange pasting, inverse projection squares and signed pullback symmetry. No new node is needed; all completed identities use existing strict-tower coherence rather than levelwise faithfulness. Statement unchanged.",
+  "blueprint": "thm-sf-kunneth-relative coherence (iii): its six displayed factors, with the v/y and g/b projection squares and the two horizontal pastings of the Cartesian cube.",
+  "tool_uses": [
+   {
+    "node": "lem-sfb-ringed-derived-monoidal-comparisons",
+    "why": "Generic ringed-topos monoidality and signed symmetry of canonical derived pullback; the relative-product unit does not reprove this tensor calculus."
+   },
+   {
+    "node": "lem-pur-integral-coherence-tower",
+    "why": "Generic strict-quotient-tower symmetry and pullback-composition coherence, explicitly giving completed equations before any relative-product calculation."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sfb-ringed-derived-monoidal-comparisons",
+  "lem-pur-integral-coherence-tower"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q146-6f50bfa59",
+  "group": "Q146",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q146-6f50bfa59 (reviewer sub-agent of L); spot-checked: No new nodes and no statement or stmt_dep change. I read all 7 steps against the unit's coherence-(iii) route: PF base change for v along y and for g along b, plus pasting of Ex_! over b. The steps follow it, and I checked each square's arrows. Step 2: the vertical-pasting law of fix-lem-exchanges with alpha inverted gives the exchange order g then v, which is beta1. Step 3: the PF base-change square of prop-sf-pf-coherence, with the invertible PF arrows reversed, plus Ex_{g,b} naturality. Step 4: the two horizontal pastings of the Cartesian cube (both bottoms gy=bg') give E_{v,y}Ly*E_{f,g} = E_{f',g'}Lg'*E_{f,b}; inverting E_{f,g} and E_{f',g'} gives the d2 square, and the directions are right. Steps 5 and 7: signed pullback symmetry plus naturality of sigma give the beta3/beta4 and beta5/beta6 orders. Step 6: the PF square for g along b plus second-input naturality at E_{f,b}. The operations of def-sf-datum are those of def-fix-six-functor-datum, so the pasting laws of fix-lem-exchanges apply, on the same witnessed, completed and transported domains. Edge cases b=id, f=id, g=id and zero inputs all hold. Batch-5: lem-pur-integral-coherence-tower and prop-sf-pf-coherence reach sec-poincare-duality only through lem-pod-derived-exact-square-composition, a generic derived-category lemma about exact-functor compositors that is not part of Poincare duality or the trace formula, so both citations are accepted. Accepted tool_uses: lem-sfb-ringed-derived-monoidal-comparisons and lem-pur-integral-coherence-tower (generic tensor/pullback calculus; no node of the unit gives it). Maintainer note: lem-sf-middle-exchange-projection-base-change (O1, unsplit) states the composite of factor squares 1 and 2 and is implied by this item, not a duplicate of it. lem-sf-kunneth-coherence (iii) also covers whole-composite base change and could cite this item."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.RelativeProductBaseChangeFactorSquares",
+  "declaration": "WeilConjectures.RelativeProductBaseChange.factor_squares",
+  "declarations": [
+   "WeilConjectures.RelativeProductBaseChange.Ctf",
+   "WeilConjectures.RelativeProductBaseChange.operations",
+   "WeilConjectures.RelativeProductBaseChange.coherence",
+   "WeilConjectures.RelativeProductBaseChange.pull",
+   "WeilConjectures.RelativeProductBaseChange.support",
+   "WeilConjectures.RelativeProductBaseChange.tensorValue",
+   "WeilConjectures.RelativeProductBaseChange.tensor_domain",
+   "WeilConjectures.RelativeProductBaseChange.tensor",
+   "WeilConjectures.RelativeProductBaseChange.composition",
+   "WeilConjectures.RelativeProductBaseChange.pullSquare",
+   "WeilConjectures.RelativeProductBaseChange.residueInvertible",
+   "WeilConjectures.RelativeProductBaseChange.transportTensorPull",
+   "WeilConjectures.RelativeProductBaseChange.finitePullCoordinates",
+   "WeilConjectures.RelativeProductBaseChange.tensorPull",
+   "WeilConjectures.RelativeProductBaseChange.symmetry",
+   "WeilConjectures.RelativeProductBaseChange.compactifiedSquare",
+   "WeilConjectures.RelativeProductBaseChange.higherExchange",
+   "WeilConjectures.RelativeProductBaseChange.exchange",
+   "WeilConjectures.RelativeProductBaseChange.exchange_isIso",
+   "WeilConjectures.RelativeProductBaseChange.exchangeIso",
+   "WeilConjectures.RelativeProductBaseChange.projection",
+   "WeilConjectures.RelativeProductBaseChange.projection_isIso",
+   "WeilConjectures.RelativeProductBaseChange.projectionIso",
+   "WeilConjectures.RelativeProductBaseChange.Product",
+   "WeilConjectures.RelativeProductBaseChange.mapSeparated",
+   "WeilConjectures.RelativeProductBaseChange.Change",
+   "WeilConjectures.RelativeProductBaseChange.externalComparison",
+   "WeilConjectures.RelativeProductBaseChange.first",
+   "WeilConjectures.RelativeProductBaseChange.image",
+   "WeilConjectures.RelativeProductBaseChange.external",
+   "WeilConjectures.RelativeProductBaseChange.object",
+   "WeilConjectures.RelativeProductBaseChange.factor",
+   "WeilConjectures.RelativeProductBaseChange.imagePullComparison",
+   "WeilConjectures.RelativeProductBaseChange.beta",
+   "WeilConjectures.RelativeProductBaseChange.Witness",
+   "WeilConjectures.RelativeProductBaseChange.factor_squares"
+  ],
+  "file": "lean/Sheaf/Paper/RelativeProductBaseChangeFactorSquares.lean",
+  "statement": "theorem factor_squares (s : PodCoefficientStage) (G G' : Product D) (A : Change G G') (K : Ctf S s G.X) (L : Ctf S s G.Y) (_wK : Witness S s G.X K) (_wL : Witness S s G.Y L) (i : Fin 6) : (pull S s A.b).map (factor S s G K L i) ≫ (beta S s A K L i.succ).hom = (beta S s A K L i.castSucc).hom ≫ factor S s G' ((pull S s A.x).obj K) ((pull S s A.y).obj L) i",
+  "branch": "newtargets-dag",
+  "by": "Q18",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "Repair of returned immutable head 191b54044d2f, H2. Selectors are extracted unchanged into the new definition-owned CtfCoefficientStageSelectors module; the former owning theorem module imports it. Finite symmetry now uses the definitionally identical CategoryTheory.derivedTensorKoszulSymmetry. Canonical completed/rational/common pullback tensor comparisons and integral braiding cite their definition owners directly. The theorem lem-pur-derived-pullback-tensor-iso remains a genuine dependence for its uniquely determined rational/common braidings, as does finiteFieldDatumPrimeUnit for residue invertibility. All objects, factor directions, beta routes, witnesses, hypotheses and conclusion are unchanged."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-0b1c075e2",
+  "group": "Q18",
+  "result": "pass",
+  "note": "Re-delivery of 2e392df64ebd (RETURN H2). The requested stmt_dep swap lem-pur-derived-pullback-tensor-iso -> def-sf-rational-common-tensor-symmetries was made exactly. That node is on the base and owns pullbackTensorRational/CommonBraiding existing:true (symmetry l.267/275). pullbackTensorIntegralBraiding is owned by def-pod-integral-tensor-constraints, which is cited. The Lean module is byte-identical to 2e39, whose maths (D0-D6, d0-d5 directions, beta0-beta6 exchange orders, Fin 6 conclusion, finite witness data) was fully verified. The node JSON differs only in that stmt_dep. Mechanical finding on lem-weil-structure-direct-images-constructible: genuine. finiteFieldDatumPrimeUnit is a theorem whose IsUnit conclusion builds the residueInvertible instances (l.130) that type the integral, rational and common operations, so the statement needs the theorem's conclusion: PASS on this point. lean.statement is verbatim and all sorrys are in postponed theorems. Advisory: lean.note sentence about lem-pur-derived-pullback-tensor-iso is stale. No compile (no file changed)."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R5",
+  "result": "pass",
+  "landing": "20261025T204847-L-3026125",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

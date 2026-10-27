@@ -12,48 +12,49 @@
  ],
  "proof": [
   {
-   "text": "Use the proved source theorem exists_distTriang_openClosed, recorded by lem-fin-module-open-closed-triangle, on M=q* K tensor A_P(1)[2]. Apply the triangulated proper direct image. Identify the closed vertex with B=K tensor A_S(1)[2], using exact finite direct image, composition q i=id and the canonical inverse-image comparisons. Its first arrow is exactly q* of the open counit, including the comparison from derived to exact inverse image.",
+   "text": "Let q be the projective projection, j its standard affine chart and i the infinity section. Tensor the given normalized projective-line decomposition with K. The additive tensor functor preserves biproducts. Combine its inverse biproduct comparison, tensoring the decomposition, the tensor-unit comparison and the proper projection isomorphism to obtain b₀:B₀⊕K≅Rq_*M with B₀=K tensor A_S(1)[2]. The datum counit normalization, functoriality, and biproduct identities give b₀ followed by the actual projective counit equal to second projection.",
+   "uses": [
+    "def-asd-ordinary-finite-p1-data",
+    "lem-etale-proper-projection-formula-finite"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The proved tensorProjectionAdjunct calculation identifies the first injection followed by b₀ with the adjoint of the canonical pullback/tensor/shifted-line isomorphism q*B₀≅M. This uses the defining first component of the decomposition and the inverse-image adjunction identity.",
+   "uses": [
+    "lem-amb-tensor-projection-adjunct",
+    "def-asd-ordinary-finite-p1-arrows"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Keep the closed vertex B=Rq_*Ri_*i*M and let r=Rq_* of the closed adjunction unit at M. The source-library leftDerivedUpperStarCompSectionIso and exact/derived inverse-image comparison identify q* then i* with identity, since i≫q=id. The composite adjunction therefore has invertible unit. Naturality of the closed unit rewrites the first injection followed by b₀ and r as this composite unit followed by direct image of i* of the isomorphism q*B₀≅M. Thus this first-coordinate map B₀→B is invertible. Precompose b₀ by the biproduct of its inverse with identity on K. This gives b:B⊕K≅Rq_*M and both required coordinate equations; it needs no explicit finite-direct-image composition comparison.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Apply exists_distTriang_openClosed to j and i, complementary by ProjectiveLine.range_infinity. The infinity section is a closed immersion because its composite with the separated projection is identity. Apply the triangulated direct image Rq_* to the distinguished triangle. Transport the first vertex through the exact/derived open inverse-image comparison and the shift of its inverse at the connecting morphism. The ofNatIsoRight counit formula identifies the transported first arrow with Rq_* of the specified affineTraceOpenAdjunction counit. Return this triangle and the normalized b from the preceding steps.",
    "uses": [
     "lem-fin-module-open-closed-triangle",
     "lem-pc-right-derived-functor-triangulated",
-    "lem-weil-pbc-closed-immersion-finite",
-    "lemma-weil-pbc-finite-direct-image-exact",
-    "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
-    "lem-asd-etale-finite-twist-pullback"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-an/lem-amb-affine-space-top-trace.md",
-    "place": "Proof paragraph 1: extension-by-zero triangle, twisted and shifted"
-   }
-  },
-  {
-   "text": "Tensor the normalized projective-line decomposition with K and use the proper projection isomorphism to obtain b:B⊕K≅q* M. Under the canonical restriction map r to the closed vertex, the first injection becomes identity: this is restriction of the inverse-image adjunction unit along q i=id. The proper projection map is the adjoint of tensoring the counit, so the same triangle identity applies after tensoring by K. The projective datum counit normalization gives b followed by the projective counit equal to the second projection. No equality for the second component of r is required; the consumer removes it by a triangular automorphism. The unbounded open tensor comparison and the proper projection formula apply to arbitrary K.",
-   "uses": [
-    "lem-asd-ordinary-finite-p1-adjunction",
-    "lem-amb-proper-coproducts-projection",
-    "lem-pur-etale-open-derived-tensor",
-    "prop-weil-open-closed-recollement-adjunctions"
+    "def-amb-affine-trace-construction"
    ],
    "elementary": false
   }
  ],
  "proof_deps": [
+  "def-asd-ordinary-finite-p1-data",
+  "lem-etale-proper-projection-formula-finite",
+  "lem-amb-tensor-projection-adjunct",
+  "def-asd-ordinary-finite-p1-arrows",
   "lem-fin-module-open-closed-triangle",
   "lem-pc-right-derived-functor-triangulated",
-  "lem-weil-pbc-closed-immersion-finite",
-  "lemma-weil-pbc-finite-direct-image-exact",
-  "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
-  "lem-asd-etale-finite-twist-pullback",
-  "lem-asd-ordinary-finite-p1-adjunction",
-  "lem-amb-proper-coproducts-projection",
-  "lem-pur-etale-open-derived-tensor",
-  "prop-weil-open-closed-recollement-adjunctions"
+  "def-amb-affine-trace-construction"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-an/lem-amb-affine-space-top-trace.md",
-  "place": "The normalized localization triangle, steps 2, 3 and 6 of the detailed source proof; separated from the categorical isomorphism criterion."
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-an/lem-amb-affine-space-top-trace.proof.md",
+  "place": "Z7: source affine-line localization argument, tensor/projection adjunct calculation, and composite-adjunction normalization. Retain the actual pushed closed vertex and normalize its first coordinate rather than explicitly computing finite direct-image composition."
  },
  "mathlib_searches": [
   {
@@ -127,14 +128,25 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-20",
+  "date": "2026-10-25",
   "by": "L",
-  "reviewer": "C-4d8ad",
-  "group": "G1",
+  "reviewer": "COMPILER",
+  "group": "Z7",
   "result": "pass",
-  "landing": "20261020T051303-L-1621396",
+  "landing": "20261025T071306-L-183331",
   "kind": "interface",
-  "note": "independent cc review: exists_affineSpaceTopTrace statement byte-identical to live; moved construction defs (abbrev/irreducible refactor, proved equal to Adjunction.comp / original components) against change record and all 15 users (13 direct importers + 2 transitive users, all compile); two sorry leaves (line localization ⇔ (restriction,trace) iso; open-counit mate square) against their new nodes"
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  },
- "lean_audit": {}
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ }
 }

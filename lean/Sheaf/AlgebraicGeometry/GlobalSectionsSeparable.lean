@@ -7,7 +7,6 @@ module
 
 public import WeilConjectures.AlgebraicGeometry.Curve.SmoothProjective
 public import Sheaf.AlgebraicGeometry.ProperGeometricallyReducedGlobalSectionsSeparable
-import WeilConjectures.AlgebraicGeometry.ProjectiveSpace
 import WeilConjectures.Mathlib.AlgebraicGeometry.Geometrically.Reduced
 
 /-!
@@ -45,6 +44,6 @@ theorem globalSections_isSeparable_of_isSmoothProjectiveCurve
     (hA : IsField Γ(X, ⊤)) :
     @Algebra.IsSeparableExtension k Γ(X, ⊤) _ hA.toField
       (Scheme.globalSectionsRingHom k (X := X)).toAlgebra := by
-  sorry
+  exact proper_geometricallyReduced_globalSections_isSeparable k X hA
 
 end AlgebraicGeometry

@@ -1,0 +1,237 @@
+{
+ "id": "lem-sfb-etale-local-moduli-gluing",
+ "kind": "statement",
+ "title": "Effectivity of compatible local stack-moduli presentations",
+ "statement": "Let $k$ be a field and $\\mathcal X/k$ an algebraic stack. Let $(g_j:\\mathcal X_j\\to\\mathcal X)_{j\\in J}$ be a small jointly surjective family of representable separated etale stabilizer-preserving morphisms. For each $j$ let $f_j:\\mathcal X_j\\to M_j$ be a uniform categorical morphism to an affine $k$-scheme, quasi-compact, quasi-separated and a universal homeomorphism, inducing a bijection $\\pi_0(\\mathcal X_j(\\Omega))\\simeq M_j(\\Omega)$ for every algebraically closed extension $\\Omega/k$. Suppose that, for each pair $(i,j)$, the overlap $\\mathcal X_{ij}=\\mathcal X_i\\times_{\\mathcal X}\\mathcal X_j$ has a uniform categorical morphism $f_{ij}:\\mathcal X_{ij}\\to M_{ij}$ to a $k$-scheme, and that its two projection squares with $f_i,f_j$ are 2-cartesian, with separated etale bottom maps $M_{ij}\\to M_i,M_j$. Then the induced maps from $V=\\coprod_{i,j}M_{ij}$ to $W=\\coprod_j M_j$ define an etale equivalence relation. Its fppf sheaf quotient $Q=W/V$ is an algebraic space; $M_j\\to Q$ form an etale surjective cover and $M_i\\times_Q M_j\\simeq M_{ij}$. There is a morphism $q:\\mathcal X\\to Q$, with $qg_j$ equal to $f_j$ followed by $M_j\\to Q$, whose squares with every $f_j$ are 2-cartesian. The morphism $q$ is quasi-compact, quasi-separated and a universal homeomorphism, and $\\pi_0(\\mathcal X(\\Omega))\\to Q(\\Omega)$ is bijective for every algebraically closed extension $\\Omega/k$. Stabilizer-preserving means that the map on inertia is an isomorphism after pullback, where inertia parametrizes objects with automorphisms. Algebraic stacks have the meaning in [def-sfb-algebraic-moduli-stack], and algebraic spaces have the meaning in [def-trf-algebraic-space]. Stacks in groupoids and 2-fibre products use [def-sfb-stable-pointed-moduli-groupoids]; a 2-fibre product retains the specified isomorphism between the two images of an object. Work in the universes of [def-weil-size-convention], large enough for the small coproducts, and interpret $\\pi_0$ as isomorphism classes in the indicated fibre groupoid. Algebraically closed extensions use [def-weil-algebraic-closure]. The point space of an algebraic stack consists of field-valued objects up to isomorphism and common field extension, with topology detected by a smooth surjective scheme atlas. A morphism is a universal homeomorphism if every base change by an algebraic stack induces a homeomorphism of these point spaces. Quasi-compact and quasi-separated morphisms have the meaning of [def-sfb-stack-qcqs-morphism]; in particular quasi-separatedness requires a quasi-compact and quasi-separated relative diagonal, tested on scheme charts. A morphism $f:\\mathcal Z\\to M$ to an algebraic space is uniform categorical if, for every flat algebraic-space map $M'\\to M$ and every algebraic space $T/k$, composition with $f_{M'}$ is a bijection from $\\operatorname{Mor}_k(M',T)$ to $\\operatorname{Mor}_k(\\mathcal Z\\times_M M',T)$. Etale and separated are tested on scheme charts [def-weil-etale-morphism, def-weil-proper-morphism], and flatness uses [def-weil-flat-morphism]. The sheaf quotient is the fppf sheafification [def-weil-pbc-sheafification] of $T\\mapsto W(T)/V(T)$.",
+ "source": {
+  "document": "literature/stacks-project/stacks-more-morphisms.tex",
+  "place": "Tag 0DUT (theorem-keel-mori), gluing argument starting with the overlap diagrams and ending with equation-fundamental-diagram (Tag 0DUU); groupoids.tex Tag 0DT7 (lemma-etale-equivalence-relation), spaces.tex Tag 02WW (theorem-presentation), stacks-morphisms.tex Tag 0DUD (lemma-etale-iso) and Tags 06TZ, 0DTL, 0DTQ for descent of separatedness, quasi-compactness and universal homeomorphism."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-trf-algebraic-space",
+  "def-pc-scheme",
+  "def-weil-affine-spectrum",
+  "def-pc-fppf-site",
+  "def-weil-etale-morphism",
+  "def-weil-proper-morphism",
+  "def-weil-flat-morphism",
+  "def-weil-pbc-sheafification",
+  "def-sfb-algebraic-moduli-stack",
+  "def-sfb-stable-pointed-moduli-groupoids",
+  "def-sfb-stack-qcqs-morphism",
+  "def-weil-size-convention",
+  "def-weil-algebraic-closure"
+ ],
+ "proof": [
+  {
+   "text": "Fix $i,j,k$. Write $P_{ijk}=M_{ij}\\times_{M_j}M_{jk}$ and $\\mathcal X_{ijk}=\\mathcal X_i\\times_{\\mathcal X}\\mathcal X_j\\times_{\\mathcal X}\\mathcal X_k$. These are algebraic stacks by [lem-sfb-algebraic-stack-fibre-products]. The assumed cartesian squares identify $\\mathcal X_{ijk}$ with $\\mathcal X_{ij}\\times_{M_{ij}}P_{ijk}$: both describe a triple together with its two consecutive isomorphisms. The map $P_{ijk}\\to M_{ij}$ is etale, hence flat, by [lem-sfb-stack-chartwise-smooth-etale-calculus]. Thus the definition of uniform categorical applied to $f_{ij}$ supplies a categorical map $\\mathcal X_{ijk}\\to P_{ijk}$. Compose the outer projection with $f_{ik}$ and factor uniquely to obtain $c_{ijk}:P_{ijk}\\to M_{ik}$. Uniqueness makes its two maps to $M_i,M_k$ the outer projections. Likewise factor $\\mathcal X_i\\to\\mathcal X_{ii}\\to M_{ii}$ through $f_i$ to obtain $e_i:M_i\\to M_{ii}$, and factor $\\mathcal X_{ij}\\to\\mathcal X_{ji}\\to M_{ji}$ through $f_{ij}$ to obtain the flip. Their endpoint equalities follow by precomposition with the categorical maps. Take the small scheme coproducts of these maps using [lem-weil-pbc-scheme-coproduct-family]. They give $e:W\\to V$, $i:V\\to V$, and $c:V\\times_{t,W,s}V\\to V$ over the diagonal, flip and outer projection. The two maps $s,t:V\\to W$ are etale, since this is their given property on each open component.",
+   "uses": [
+    "lem-sfb-algebraic-stack-fibre-products",
+    "lem-sfb-stack-chartwise-smooth-etale-calculus",
+    "lem-weil-pbc-scheme-coproduct-family"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/stacks-more-morphisms.tex",
+    "place": "Tag 0DUT (theorem-keel-mori), equivalence-relation claim and Tag 0DUU (equation-fundamental-diagram)"
+   }
+  },
+  {
+   "text": "For an algebraically closed extension $\\Omega/k$, objects of $\\mathcal X_{ij}(\\Omega)$ are $(x_i,x_j,\\alpha:g_ix_i\\simeq g_jx_j)$. Their isomorphism classes map onto $\\pi_0\\mathcal X_i(\\Omega)\\times_{\\pi_0\\mathcal X(\\Omega)}\\pi_0\\mathcal X_j(\\Omega)$: equality of classes is exactly existence of $\\alpha$. This map is injective: first use isomorphisms of $x_i,x_j$ to fix both objects; two choices $\\alpha,\\beta$ then differ by $\\beta^{-1}\\alpha\\in\\operatorname{Aut}(g_ix_i)$, which lifts to $\\operatorname{Aut}(x_i)$ by stabilizer preservation. This gives an isomorphism of the triples. The cartesian identification $\\mathcal X_{ij}\\simeq\\mathcal X_i\\times_{M_i}M_{ij}$ and the assumed bijection for $f_i$ also give $\\pi_0\\mathcal X_{ij}(\\Omega)\\simeq M_{ij}(\\Omega)$: the fibre groupoid at a fixed $m_{ij}$ is the nonempty single-isomorphism-class fibre of $f_i$. Consequently $V(\\Omega)=W(\\Omega)\\times_{\\pi_0\\mathcal X(\\Omega)}W(\\Omega)$ as a subset of $W(\\Omega)^2$. It is the kernel equivalence relation of a function, including when some schemes are empty.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/stacks-more-morphisms.tex",
+    "place": "Tag 0DUT (theorem-keel-mori), equivalence-relation claim and Tag 0DUU (equation-fundamental-diagram)"
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-unramified-geometric-equivalence-relation] over $\\operatorname{Spec}k$: step 1 supplies the endpoint-compatible $e,i,c$ and etale projections, and step 2 supplies the required geometric equivalence relation. Thus $V\\to W\\times_kW$ is a monomorphism and an equivalence relation on all scheme-valued points. Apply [lem-trf-etale-relation-quotient] to this small scheme relation. Its fppf sheaf quotient $Q$ is an algebraic space, $W\\to Q$ is etale surjective, and $V\\simeq W\\times_QW$. Restricting this last isomorphism to the open components indexed by $(i,j)$ gives precisely $M_{ij}\\simeq M_i\\times_QM_j$, with the specified two maps. The component maps $M_j\\to Q$ therefore form a jointly surjective etale family.",
+   "uses": [
+    "lem-sfb-unramified-geometric-equivalence-relation",
+    "lem-trf-etale-relation-quotient"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/stacks-more-morphisms.tex",
+    "place": "Tag 0DUT (theorem-keel-mori), equivalence-relation claim and Tag 0DUU (equation-fundamental-diagram)"
+   }
+  },
+  {
+   "text": "For $a\\in\\mathcal X(T)$, pull back the covering $\\mathcal X_j\\to\\mathcal X$ to obtain jointly surjective representable etale algebraic-space maps $T_j\\to T$. Refine these by etale scheme charts; base change, composition and surjectivity are supplied by [lem-sfb-stack-chartwise-smooth-etale-calculus]. On each such scheme $E\\to T_j$ the tautological lift $a_j$ gives $E\\to M_j\\to Q$. For two lifts the specified isomorphism to $a$ gives a map from their scheme overlap to $\\mathcal X_{ij}$; its map to $M_{ij}$ shows that the two $Q$-sections agree. Since $Q$ is an fppf sheaf [def-trf-algebraic-space], these sections glue uniquely to $q(a)\\in Q(T)$. An isomorphism $a\\simeq a'$ identifies the two constructions on a common covering refinement, so gives the same section. Pulling back along $T'\\to T$ pulls back this entire compatible family; uniqueness of sheaf gluing gives $q(a)|_{T'}=q(a|_{T'})$. Thus $q$ is a morphism of stacks to the discrete groupoid $Q$. When $a$ comes from $\\mathcal X_i$, its given $f_i$-section agrees with the constructed local sections on this cover, so $qg_i=(M_i\\to Q)f_i$.",
+   "uses": [
+    "lem-sfb-stack-chartwise-smooth-etale-calculus",
+    "def-trf-algebraic-space"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/stacks-more-morphisms.tex",
+    "place": "Tag 0DUT (theorem-keel-mori), equivalence-relation claim and Tag 0DUU (equation-fundamental-diagram)"
+   }
+  },
+  {
+   "text": "Set $\\mathcal Y_i=\\mathcal X\\times_Q M_i$ and let $h_i:\\mathcal X_i\\to\\mathcal Y_i$ be the comparison from step 4. Pull it back along $\\mathcal X_j\\to\\mathcal X$. By step 3 its target becomes $\\mathcal X_j\\times_{M_j}M_{ij}$, and its source is $\\mathcal X_i\\times_{\\mathcal X}\\mathcal X_j=\\mathcal X_{ij}$. The resulting map is the equivalence in the assumed projection square, respecting the specified maps. These pullbacks cover every object of $\\mathcal Y_i$ on an etale scheme cover, by the chart calculus. Hence $h_i$ is fully faithful on each fibre: on such a cover its maps of isomorphism sheaves are bijections; local inverse isomorphisms glue uniquely because both sides are stacks: $\\mathcal X_i$ by [def-sfb-algebraic-moduli-stack], and $\\mathcal Y_i$ because the algebraic space $Q$, regarded as a discrete fibred groupoid with its etale scheme atlas, is an algebraic stack, so the 2-fibre product $\\mathcal X\\times_QM_i$ is an algebraic stack by [lem-sfb-algebraic-stack-fibre-products]. The same local equivalences give local essential surjectivity. Applying [lem-sfb-stack-fully-faithful-local-equivalence] to these etale stacks proves $h_i$ an equivalence over schemes. This proves each required 2-cartesian square; it does not assume that the diagonal of $\\mathcal X$ is separated.",
+   "uses": [
+    "lem-sfb-stack-chartwise-smooth-etale-calculus",
+    "def-sfb-algebraic-moduli-stack",
+    "lem-sfb-algebraic-stack-fibre-products",
+    "lem-sfb-stack-fully-faithful-local-equivalence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/stacks-more-morphisms.tex",
+    "place": "Tag 0DUT (theorem-keel-mori), equivalence-relation claim and Tag 0DUU (equation-fundamental-diagram)"
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-stack-etale-local-qcqs-homeomorphism] to $q$ and the small jointly surjective etale family $M_i\\to Q$ from step 3. Step 5 identifies each pullback with the given $f_i$. Each $f_i$ is quasi-compact, quasi-separated and a universal homeomorphism by hypothesis, using exactly the definitions in the locality lemma. Therefore $q$ has these same three properties. No assertion of finite inertia, separatedness or adequacy is used.",
+   "uses": [
+    "lem-sfb-stack-etale-local-qcqs-homeomorphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/stacks-more-morphisms.tex",
+    "place": "Tag 0DUT (theorem-keel-mori), equivalence-relation claim and Tag 0DUU (equation-fundamental-diagram)"
+   }
+  },
+  {
+   "text": "Fix an algebraically closed extension $\\Omega/k$. A jointly surjective representable etale family has lifts of $\\Omega$-points over the same field: take etale scheme charts of its algebraic-space pullbacks to $\\operatorname{Spec}\\Omega$ and use [lem-weil-pbc-etale-cover-geometric-point-lift]. Apply this first to $M_i\\to Q$. Every point of $Q(\\Omega)$ lifts to $M_i(\\Omega)$ and then to an object of $\\mathcal X_i(\\Omega)$ by the hypothesis on $f_i$; hence it lies in the image of $q$. For injectivity, lift two objects of $\\mathcal X(\\Omega)$ to $\\mathcal X_i(\\Omega)$ and $\\mathcal X_j(\\Omega)$ in the same manner, using the cover $g_i$. If their $q$-images coincide, step 3 gives a unique point of $M_{ij}(\\Omega)$ with the two prescribed local images. Step 2 identifies this with an isomorphism class in $\\mathcal X_{ij}(\\Omega)$ with those local classes, and hence with an isomorphism between the two original objects in $\\mathcal X(\\Omega)$. This proves the claimed bijection.",
+   "uses": [
+    "lem-weil-pbc-etale-cover-geometric-point-lift"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/stacks-more-morphisms.tex",
+    "place": "Tag 0DUT (theorem-keel-mori), equivalence-relation claim and Tag 0DUU (equation-fundamental-diagram)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sfb-algebraic-moduli-stack",
+  "def-trf-algebraic-space",
+  "lem-sfb-algebraic-stack-fibre-products",
+  "lem-sfb-stack-chartwise-smooth-etale-calculus",
+  "lem-sfb-stack-etale-local-qcqs-homeomorphism",
+  "lem-sfb-stack-fully-faithful-local-equivalence",
+  "lem-sfb-unramified-geometric-equivalence-relation",
+  "lem-trf-etale-relation-quotient",
+  "lem-weil-pbc-etale-cover-geometric-point-lift",
+  "lem-weil-pbc-scheme-coproduct-family"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/stacks-more-morphisms.tex",
+  "place": "Tag 0DUT gluing argument through equation-fundamental-diagram, with an explicit cover-local proof of the cartesian comparison instead of its separated etale-isomorphism criterion."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Glue cartesian uniform categorical moduli spaces over a stabilizer preserving etale cover of an algebraic stack",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.GlueData\", \"module\": \"Mathlib/AlgebraicGeometry/Gluing\", \"type\": \"Type (u_1 + 1)\", \"doc\": \"An inductive type representing the data required to glue schemes together, typically involving open subsets and isomorphisms between their intersections.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.GlueData.toGlueData\", \"module\": \"Mathlib/AlgebraicGeometry/Gluing\", \"type\": \"AlgebraicGeometry.Scheme.GlueData → CategoryTheory.GlueData AlgebraicGeometry.Scheme\", \"doc\": \"The function maps the inductive type representing gluing data for schemes (involving open subsets and isomorphisms) to the categorical gluing data structure for the category of schemes, enabling the u\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Cover.gluedCover\", \"module\": \"Mathlib/AlgebraicGeometry/Gluing\", \"type\": \"{X : AlgebraicGeometry.Scheme} → X.OpenCover → AlgebraicGeometry.Scheme.GlueData\", \"doc\": \"This definition constructs gluing data for schemes using an open cover $\\\\mathcal{U}$ of a scheme $X$. It specifies: (1) an index set $I_0$ for the cover, (2) a functor assigning each index to a scheme\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Cover.RelativeGluingData.glued\", \"module\": \"Mathlib/AlgebraicGeometry/RelativeGluing\", \"type\": \"{S : AlgebraicGeometry.Scheme} →\\n  {𝒰 : S.OpenCover} →\\n    [inst : CategoryTheory.Category.{u_2, u_1} 𝒰.I₀] →\\n      [inst_1 : AlgebraicGeometry.Scheme.Cover.LocallyDirected 𝒰] →\\n        AlgebraicGeometry.Scheme.Cover.RelativeGluingData 𝒰 →\\n          [Small.{u, u_1} 𝒰.I₀] → [Quiver.IsThin 𝒰.I₀] → Alg\", \"doc\": \"Given a scheme $ S $ with an open cover $ \\\\mathcal{U} $, where the zeroth component $ \\\\mathcal{U}_0 $ forms a small, thin category equipped with a locally directed structure, this is the colimit of th\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.LocalRepresentability.glueData\", \"module\": \"Mathlib/AlgebraicGeometry/Sites/Representability\", \"type\": \"{F : CategoryTheory.Sheaf AlgebraicGeometry.Scheme.zariskiTopology (Type u)} →\\n  {ι : Type u} →\\n    {X : ι → AlgebraicGeometry.Scheme} →\\n      {f : (i : ι) → CategoryTheory.yoneda.obj (X i) ⟶ F.val} →\\n        (∀ (i : ι), AlgebraicGeometry.IsOpenImmersion.presheaf (f i)) → AlgebraicGeometry.Scheme.Gl\", \"doc\": \"The structure defines gluing data for schemes using open immersions in the Zariski topology. It consists of an index type $\\\\iota$, a family of schemes $X_i$, and for each pair of indices $i,j$, a sche\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.LocalRepresentability.glueData_t'\", \"module\": \"Mathlib/AlgebraicGeometry/Sites/Representability\", \"type\": \"∀ {F : CategoryTheory.Sheaf AlgebraicGeometry.Scheme.zariskiTopology (Type u)} {ι : Type u}\\n  {X : ι → AlgebraicGeometry.Scheme} {f : (i : ι) → CategoryTheory.yoneda.obj (X i) ⟶ F.val}\\n  (hf : ∀ (i : ι), AlgebraicGeometry.IsOpenImmersion.presheaf (f i)) (i j k : ι),\\n  (AlgebraicGeometry.Scheme.Local\", \"doc\": \"For a sheaf $ F $ on the category of schemes with the Zariski topology and a family of open immersions $ f_i : \\text{Hom}(-, X_i) \\to F $, the $ t' $ morphism in the gluing data for indices $ i,j,k $ is\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Cover.RelativeGluingData.functor\", \"module\": \"Mathlib/AlgebraicGeometry/RelativeGluing\", \"type\": \"{S : AlgebraicGeometry.Scheme} →\\n  {𝒰 : S.OpenCover} →\\n    [inst : CategoryTheory.Category.{u_2, u_1} 𝒰.I₀] →\\n      [inst_1 : AlgebraicGeometry.Scheme.Cover.LocallyDirected 𝒰] →\\n        AlgebraicGeometry.Scheme.Cover.RelativeGluingData 𝒰 → CategoryTheory.Functor 𝒰.I₀ AlgebraicGeometry.Scheme\", \"doc\": \"Given a scheme $S$ with an open cover $\\\\mathcal{U}$, a category structure on the zeroth component $\\\\mathcal{U}_0$, and a locally directed cover structure on $\\\\mathcal{U}$, this functor maps the catego\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.GlueData.gluedScheme\", \"module\": \"Mathlib/AlgebraicGeometry/Gluing\", \"type\": \"AlgebraicGeometry.Scheme.GlueData → AlgebraicGeometry.Scheme\", \"doc\": \"The scheme constructed by gluing the data in $ D $, defined as the colimit of the corresponding locally ringed space gluing diagram. This involves converting scheme gluing data to locally ringed space\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern scheme morphisms, ordinary categorical groupoids, or sheaves on a site; none states this theorem about algebraic stacks and their algebraic-space moduli morphisms"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Etale equivalence relation gluing local coarse quotient stack spaces and cartesian squares",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.GlueData.Rel\", \"module\": \"Mathlib/AlgebraicGeometry/Gluing\", \"type\": \"(D : AlgebraicGeometry.Scheme.GlueData) → (i : D.J) × ↥(D.U i) → (i : D.J) × ↥(D.U i) → Prop\", \"doc\": \"A binary relation on the disjoint union of carrier sets of objects $U(i)$ in the gluing data diagram, where two elements $(i,a)$ and $(j,b)$ are related if there exists an element $x$ in the intersect\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.GlueData\", \"module\": \"Mathlib/AlgebraicGeometry/Gluing\", \"type\": \"Type (u_1 + 1)\", \"doc\": \"An inductive type representing the data required to glue schemes together, typically involving open subsets and isomorphisms between their intersections.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.smallEtalePretopology\", \"module\": \"Mathlib/AlgebraicGeometry/Sites/Etale\", \"type\": \"(X : AlgebraicGeometry.Scheme) → CategoryTheory.Pretopology X.Etale\", \"doc\": \"The Grothendieck pretopology on the category of schemes over a base scheme $ X $, defined by covering families consisting of jointly surjective étale morphisms. This pretopology uses the étale propert\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.etalePretopology\", \"module\": \"Mathlib/AlgebraicGeometry/Sites/Etale\", \"type\": \"CategoryTheory.Pretopology AlgebraicGeometry.Scheme\", \"doc\": \"The Grothendieck pretopology on the category of schemes generated by étale morphisms (smooth morphisms of relative dimension 0). This pretopology is constructed by intersecting the jointly surjective \"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Cover.gluedCover\", \"module\": \"Mathlib/AlgebraicGeometry/Gluing\", \"type\": \"{X : AlgebraicGeometry.Scheme} → X.OpenCover → AlgebraicGeometry.Scheme.GlueData\", \"doc\": \"This definition constructs gluing data for schemes using an open cover $\\\\mathcal{U}$ of a scheme $X$. It specifies: (1) an index set $I_0$ for the cover, (2) a functor assigning each index to a scheme\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.instCategoryEtale\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"(X : AlgebraicGeometry.Scheme) → CategoryTheory.Category.{u, u + 1} X.Etale\", \"doc\": \"For any scheme $X$, the collection of étale morphisms to $X$ forms a category, where objects are schemes equipped with an étale morphism to $X$ and morphisms are commutative triangles between such obj\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Etale.forget\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"(X : AlgebraicGeometry.Scheme) → CategoryTheory.Functor X.Etale (CategoryTheory.Over X)\", \"doc\": \"The forgetful functor from the category of étale schemes over $X$ to the over category over $X$, which sends each étale morphism to its underlying morphism into $X$ and each commutative triangle of ét\"}\n  {\"name\": \"AlgebraicGeometry.LocallyRingedSpace.GlueData\", \"module\": \"Mathlib/Geometry/RingedSpace/PresheafedSpace/Gluing\", \"type\": \"Type (u_1 + 1)\", \"doc\": \"An inductive type representing the data required to glue locally ringed spaces, typically involving open covers and compatible transition maps between local pieces.\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern scheme morphisms, ordinary categorical groupoids, or sheaves on a site; none states this theorem about algebraic stacks and their algebraic-space moduli morphisms"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Groupoid\", \"IsEtale\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern scheme morphisms, ordinary categorical groupoids, or sheaves on a site; none states this theorem about algebraic stacks and their algebraic-space moduli morphisms"
+  },
+  {
+   "tool": "grep",
+   "query": "moduli.*glue|glue.*moduli|coarse.moduli|uniform.categorical",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern scheme morphisms, ordinary categorical groupoids, or sheaves on a site; none states this theorem about algebraic stacks and their algebraic-space moduli morphisms"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Etale gluing of local categorical moduli algebraic spaces",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.LocallyRingedSpace.GlueData.recOn\", \"module\": \"Mathlib.Geometry.RingedSpace.PresheafedSpace.Gluing\", \"type\": \"{motive : AlgebraicGeometry.LocallyRingedSpace.GlueData → Sort u} →\\n  (t : AlgebraicGeometry.LocallyRingedSpace.GlueData) →\\n    ((toGlueData : CategoryTheory.GlueData AlgebraicGeometry.LocallyRingedSpace) →\\n        (f_open : ∀ (i j : toGlueData.J), AlgebraicGeometry.LocallyRingedSpace.IsOpenImmersio\", \"doc\": \"A recursion principle for gluing data structures in locally ringed spaces, enabling the definition of functions by specifying their action on the underlying category-theoretic gluing data and the open\"}\n  {\"name\": \"AlgebraicGeometry.SheafedSpace.GlueData.recOn\", \"module\": \"Mathlib.Geometry.RingedSpace.PresheafedSpace.Gluing\", \"type\": \"{C : Type u} →\\n  [inst : CategoryTheory.Category.{v, u} C] →\\n    {motive : AlgebraicGeometry.SheafedSpace.GlueData C → Sort u_1} →\\n      (t : AlgebraicGeometry.SheafedSpace.GlueData C) →\\n        ((toGlueData : CategoryTheory.GlueData (AlgebraicGeometry.SheafedSpace C)) →\\n            (f_open : ∀ (i j\", \"doc\": \"A recursion principle for the inductive type of gluing data of sheafed spaces over a category $\\\\mathcal{C}$. Given a property $P$ defined on such gluing data, it suffices to define $P$ for a base case\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.LocalRepresentability.glueData\", \"module\": \"Mathlib.AlgebraicGeometry.Sites.Representability\", \"type\": \": GlueData\", \"doc\": \"The structure defines gluing data for schemes using open immersions in the Zariski topology. It consists of an index type $\\\\iota$, a family of schemes $X_i$, and for each pair of indices $i,j$, a sche\"}\n  {\"name\": \"AlgebraicGeometry.LocallyRingedSpace.GlueData.mk.noConfusion\", \"module\": \"Mathlib.Geometry.RingedSpace.PresheafedSpace.Gluing\", \"type\": \"{P : Sort u} →\\n  {toGlueData : CategoryTheory.GlueData AlgebraicGeometry.LocallyRingedSpace} →\\n    {f_open : ∀ (i j : toGlueData.J), AlgebraicGeometry.LocallyRingedSpace.IsOpenImmersion (toGlueData.f i j)} →\\n      {toGlueData' : CategoryTheory.GlueData AlgebraicGeometry.LocallyRingedSpace} →\\n       \", \"doc\": \"For gluing data structures of locally ringed spaces, if two instances are equal, then their underlying category-theoretic gluing data and open immersion conditions must be equal. This ensures that equ\"}\n  {\"name\": \"AlgebraicGeometry.LocallyRingedSpace.GlueData.casesOn\", \"module\": \"Mathlib.Geometry.RingedSpace.PresheafedSpace.Gluing\", \"type\": \"{motive : AlgebraicGeometry.LocallyRingedSpace.GlueData → Sort u} →\\n  (t : AlgebraicGeometry.LocallyRingedSpace.GlueData) →\\n    ((toGlueData : CategoryTheory.GlueData AlgebraicGeometry.LocallyRingedSpace) →\\n        (f_open : ∀ (i j : toGlueData.J), AlgebraicGeometry.LocallyRingedSpace.IsOpenImmersio\", \"doc\": \"A case analysis principle for gluing data structures of locally ringed spaces, which allows defining functions on such gluing data by specifying their behavior on the underlying category-theoretic glu\"}\n  {\"name\": \"AlgebraicGeometry.LocallyRingedSpace.GlueData.mk.inj\", \"module\": \"Mathlib.Geometry.RingedSpace.PresheafedSpace.Gluing\", \"type\": \"∀ {toGlueData : CategoryTheory.GlueData AlgebraicGeometry.LocallyRingedSpace}\\n  {f_open : ∀ (i j : toGlueData.J), AlgebraicGeometry.LocallyRingedSpace.IsOpenImmersion (toGlueData.f i j)}\\n  {toGlueData_1 : CategoryTheory.GlueData AlgebraicGeometry.LocallyRingedSpace}\\n  {f_open_1 : ∀ (i j : toGlueData\", \"doc\": \"If two gluing data structures for locally ringed spaces are equal, then their underlying category-theoretic gluing data must be equal. Specifically, given two instances of gluing data with open immers\"}\n  {\"name\": \"AlgebraicGeometry.LocallyRingedSpace.GlueData.noConfusion\", \"module\": \"Mathlib.Geometry.RingedSpace.PresheafedSpace.Gluing\", \"type\": \"{P : Sort u} →\\n  {t t' : AlgebraicGeometry.LocallyRingedSpace.GlueData} →\\n    t = t' → AlgebraicGeometry.LocallyRingedSpace.GlueData.noConfusionType P t t'\", \"doc\": \"An inductive type representing the data required to glue locally ringed spaces, typically involving open covers and compatible transition maps between local pieces.\"}\n  {\"name\": \"AlgebraicGeometry.LocallyRingedSpace.GlueData\", \"module\": \"Mathlib.Geometry.RingedSpace.PresheafedSpace.Gluing\", \"type\": \"Type (u_1 + 1)\", \"doc\": \"An inductive type representing the data required to glue locally ringed spaces, typically involving open covers and compatible transition maps between local pieces.\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern scheme morphisms, ordinary categorical groupoids, or sheaves on a site; none states this theorem about algebraic stacks and their algebraic-space moduli morphisms"
+  },
+  {
+   "tool": "grep",
+   "query": "uniform.categorical|stabilizer.preserving|coarse.moduli",
+   "results": "{\"t\": \"2026-10-23T09:46:58Z\", \"tool\": \"grep\", \"query\": \"uniform.categorical|stabilizer.preserving|coarse.moduli\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme Zariski gluing is not etale categorical-moduli gluing for algebraic stacks."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Glue uniform categorical moduli maps of algebraic stacks along cartesian etale overlap schemes to an algebraic space quotient",
+   "results": "{\"t\": \"2026-10-23T09:47:09Z\", \"tool\": \"leanfinder\", \"query\": \"Glue uniform categorical moduli maps of algebraic stacks along cartesian etale overlap schemes to an algebraic space quotient\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.LocalRepresentability.glueData\", \"AlgebraicGeometry.Scheme.LocalRepresentability.toGlued\", \"AlgebraicGeometry.Scheme.Cover.fromGlued\", \"AlgebraicGeometry.Scheme.Cover.glueMorphisms\", \"AlgebraicGeometry.Scheme.GlueData.gluedScheme\", \"AlgebraicGeometry.Scheme.GlueData.glued\", \"AlgebraicGeometry.Scheme.GlueData\", \"AlgebraicGeometry.Scheme.GlueData.toGlueData\"], \"digest\": \"e1954e4cd98f0c53\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme Zariski gluing is not etale categorical-moduli gluing for algebraic stacks."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-finite-inertia-adequate-coarse-space",
+  "date": "2026-10-22",
+  "group": "NL"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Affine PGL quotients with closed orbits and zero-dimensional stabilizers. Supporting affine-quotient step: Finite inertia gives an adequate coarse moduli space. Supporting input to the finite-inertia coarse-space construction: Effectivity and the cartesian comparison in the gluing argument; this lemma assumes compatible local moduli maps and does not assume finite inertia or assert adequacy.",
+   "via": [
+    "lem-sfb-finite-inertia-adequate-coarse-space",
+    "lem-sfb-affine-pgl-finite-stabilizer-quotient",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-etale-local-moduli-gluing",
+  "worker": "stage1",
+  "summary": "Checked Stacks 0DUT/0DUU gluing and all cited statements. Reused the geometric relation criterion, sheaf quotient theorem and stack equivalence criterion. Constructed e,i,c by uniform categorical uniqueness; wrote geometric stabilizer argument and functorial sheaf descent explicitly. Proved cartesianness after the original etale cover, avoiding an unassumed separated diagonal. Added one general-stack qcqs/homeomorphism locality input because the existing locality node is DM-only. Corrected the incomplete quasi-separated convention to the source/project definition; removed irrelevant affine-groupoid vocabulary.",
+  "blueprint": "The current latest det-thm-sf-ctf-stability-direct-images proof (3) supplies the ancestor context; this lower auxiliary realizes the Keel--Mori overlap, relation quotient, fundamental diagram and local-property paragraphs named in blueprint.from.place. The recorded created.item chain currently ends with no blueprint ancestor (blueprint_refs ancestor prints None); retained its inherited from.node and exact via chain.",
+  "tool_uses": [
+   {
+    "node": "lem-trf-etale-relation-quotient",
+    "why": "Generic presentation theorem for any etale scheme equivalence relation; used to represent this constructed quotient, not to replace a step in the six-functor unit route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-trf-etale-relation-quotient"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q58-c6e899050",
+  "group": "Q58",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q58-c6e899050 (reviewer sub-agent of L); spot-checked: I read Stacks 0DUT (stacks-more-morphisms.tex:3637-3830) from the overlap squares through 0DUU and the cartesian claim. I also read the cited tags 06TZ/0DTL/0DTQ/050F/050V/0CI8 in stacks-morphisms.tex; all are stated for arbitrary algebraic stacks. Steps 1-7 check out against the cited statements: uniform categoricity applied to f_ij over the flat P_ijk gives c; the stabilizer-lift argument for injectivity in step 2 is correct; step 3 meets the e/i/c and K-point hypotheses of the unramified-relation node and uses the kernel pair from lem-trf-etale-relation-quotient; the q construction in step 4 and the cartesian square in step 5 are proved by pulling back along X_j->X, which avoids the source's separated-diagonal 0DUD route (the same argument as Q60's DM node); steps 6-7 use the new locality node and the point lift over the same field Omega. One FIX: step 5 said X x_Q M_i is a stack citing only def-sfb-algebraic-moduli-stack; it now cites lem-sfb-algebraic-stack-fibre-products, which was already in proof_deps. The new node lem-sfb-stack-etale-local-qcqs-homeomorphism is true (family version via the coproduct cover), self-contained and not a restatement of the item. It is not a duplicate of lem-sfb-stack-coarse-properties-etale-locality, which is DM-only and covers separated, not quasi-separated. The statement change (quasi-separated = qc+qs diagonal, per def-sfb-stack-qcqs-morphism; unused groupoid text dropped) is named in the report and accepted: the citer lem-sfb-finite-inertia-adequate-coarse-space needs the strong convention for adequacy in its step 9. Maintainer note: that citer's step 2 source, lem-sfb-finite-flat-affine-groupoid-moduli, still uses the weak qs convention. Its diagonal is affine, so the gap is trivially closable; the delivery moves a pre-existing gap rather than creating one. Batch-5: def-sfb-algebraic-moduli-stack, def-sfb-stable-pointed-moduli-groupoids and def-trf-algebraic-space are definitions; the chartwise calculus is generic and reaches only definitions; lem-trf-etale-relation-quotient is the generic Spaces 02WW presentation theorem, used as a tool and not a step of the trace formula or Poincare duality. Accepted tool_use: lem-trf-etale-relation-quotient.; 1 file(s) fixed by the reviewer"
+ }
+}

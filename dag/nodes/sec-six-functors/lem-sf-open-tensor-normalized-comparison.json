@@ -1,0 +1,153 @@
+{
+ "id": "lem-sf-open-tensor-normalized-comparison",
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-pf-coherence",
+ "kind": "statement",
+ "title": "Normalized ordinary and coefficient open total tensor comparisons",
+ "statement": "Under the hypotheses and concrete definitions of def-sf-open-tensor-scalar-unit-data, for any strict algebra tower A and any e : StrictTotals R V A, there are natural chain isomorphisms gammaBase from the source total tensor to extension of the slice source total tensor, and gamma from e.T to extension of e.S. On every homogeneous extension-presheaf generator gammaBase sends [x]_f tensor y to [x tensor y]_f. At coefficient level n, gamma sends ([x]_f scalar-extended with a) tensor (y scalar-extended with b) to the extension of the corresponding slice generator with the same independent coefficient entries a,b. The latter isomorphism is natural for the prescribed transitions of e. No scalar-unit map or augmentation square is part of this statement.",
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tags 03EK, 03DI and 0E8I; sites-cohomology.tex Tag 0GL1. Extracted construction from lem-sf-open-tensor-scalar-unit-augmentation."
+ },
+ "stmt_deps": [
+  "def-sf-open-tensor-scalar-unit-data"
+ ],
+ "proof": [
+  {
+   "text": "We use the sheaf tensor universal property and bilinear sheafification uniqueness, not surjectivity on sections. A map from $j_{B!}M\\otimes_BN$ is determined by $[x]_f\\otimes y$: compare the two associated bilinear pairings after precomposition by $P_M\\times N$; the formulas agree on each summand, hence on finite sums, and uniqueness of bilinear extension and the tensor universal property give equality. For the iterated source $((j_{B!}M)\\otimes_B A_n)\\otimes_{A_n}(N\\otimes_B A_n)$, apply the tensor universal property first to the outer tensor, then to each inner tensor, and the same bilinear-extension uniqueness to $P_M$. It suffices to test $([x]_f\\otimes a)\\otimes(y\\otimes b)$ for original sections over each $W$. On the slice the same argument omits $P_M$. These are repeated universal-property applications. Finally a map from a total direct sum is determined by its summand composites. Extension $j_{B!}$ preserves these sums since it is a left adjoint; the discrete indexing sets $\\{(p,q):p+q=d\\}$ are small. Thus these tests apply degreewise also to extended totals.",
+   "uses": [
+    "lem-pc-sites-sheaf-tensor-bilinear-universal",
+    "lem-pc-sites-module-sheafification-bilinear-extension",
+    "def-weil-extension-by-zero-presheaf",
+    "lem-pur-site-restriction-module-adjunction-exact",
+    "lem-weil-pbc-left-adjoint-preserves-colimits",
+    "def-pc-tensor-complex-sheaves"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tags 03EK (section-tensor-product) and 0GMW (lemma-sheafification-tensor), uniqueness; categories.tex Tag 0038 (lemma-adjoint-exact), coproduct preservation"
+   }
+  },
+  {
+   "text": "Apply the coefficient-linear slice comparison to $L=Q$ and $S=A_n$. It gives the specified $r_{Q,n}$, a chain isomorphism with an $A_n$-linear lift, and its stated formula $[x]_f\\otimes a\\mapsto[x\\otimes a|_{(W,f)}]_f$. Tensor its inverse and forward map with $1_{F_n}$ and totalize; their composites are identities by tensor functoriality. Next build $\\gamma^{A_n}_{Q_n,F_n}$ (and likewise $\\gamma^B$) from the generator-normalized slice isomorphisms $\\psi_{Q_n^p,F_n^q}:j_{A_n!}Q_n^p\\otimes_{A_n}F_n^q\\xrightarrow\\sim j_{A_n!}(Q_n^p\\otimes_{A_{n,V}}j^*F_n^q)$, whose statement fixes $[x]_f\\otimes c\\mapsto[x\\otimes c|_{(W,f)}]_f$ and whose inverse is the actual open-unit transpose. In total degree $d$ the target $j_{A_n!}S_n^d$ is $j_{A_n!}$ of a small direct sum over $p+q=d$, which $j_{A_n!}$ preserves as a left adjoint; so the $\\psi$'s assemble to a degreewise isomorphism. Naturality of $\\psi$ in both module morphisms gives $\\psi(d\\otimes1)=j_!(d\\otimes1)\\psi$ and $\\psi(1\\otimes d)=j_!(1\\otimes j^*d)\\psi$, and the sign $(-1)^p$ is the same on both sides since $\\psi$ keeps $(p,q)$; hence this is a chain isomorphism. We do not use the unnormalized components of the total-tensor comparison of the K-flat lemma, whose statement does not fix the generator formula. Composing with $\\operatorname{Tot}(r_{Q,n}\\otimes1)$ and the identity-on-summands scalar-restriction identification gives exactly $\\gamma_n:T_n\\xrightarrow\\sim j_{B!}S_n$. For $x\\in Q^p(W,f)$, $y\\in F^q(W)$, and $a,b\\in A_n(W)$ its formula is\n$$([x]_f\\otimes a)\\otimes(y\\otimes b)\\longmapsto[(x\\otimes a|_{(W,f)})\\otimes(j^*y\\otimes b|_{(W,f)})]_f.$$\nHere restriction of the second coefficient tensor is read through the pure-tensor restriction comparison. This formula is for presheaf generators followed by sheafification.",
+   "uses": [
+    "lem-sf-cbc-slice-tensor-generator-coherence",
+    "lem-sf-ringed-slice-tensor-generators",
+    "lem-weil-pbc-left-adjoint-preserves-colimits",
+    "lem-pur-site-restriction-module-adjunction-exact",
+    "lem-sfb-localized-site-tensor-restriction",
+    "def-pc-tensor-complex-sheaves"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 0E8I (lemma-j-shriek-and-tensor), with generator-normalized coefficient lift; sites-cohomology.tex Tag 0GL1, ordinary total-complex realization"
+   }
+  },
+  {
+   "text": "Let $m\\ge n$. On $([x]_f\\otimes a)\\otimes(y\\otimes b)$ at level $m$, transition then $\\gamma_n$ gives\n$$[(x\\otimes q_{m,n}(a)|_{(W,f)})\\otimes(j^*y\\otimes q_{m,n}(b)|_{(W,f)})]_f.$$\nApplying $\\gamma_m$ first and $j_{B!}$ of the slice transition next gives the same expression: restriction of a ring-sheaf map is its map on the same sections, and the extension functor applies a module map on each summand. Step 1 upgrades this to equality of sheaf maps on each bidegree and hence on each total degree. Therefore $\\gamma_\\bullet$ is a morphism of strict towers. Every component is an isomorphism; multiplying its transition square by the two component inverses proves the inverse transition square, so these inverses give a strict tower inverse. The chain condition already follows from step 3; explicitly the generator formula keeps $(p,q)$, so the two differential terms on both sides are the same expressions with $x$ replaced by $dx$ and $y$ by $dy$, with coefficient $(-1)^p$ on the latter. Neither coefficient has a nonzero differential.",
+   "uses": [
+    "def-pur-localized-ringed-site",
+    "def-weil-extension-by-zero-presheaf",
+    "def-weil-inverse-system",
+    "def-pc-tensor-complex-sheaves"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tags 03DI (lemma-extension-by-zero) and 03EK (section-tensor-product); agent strict transition and signed differential calculation"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-tensor-complex-sheaves",
+  "def-pur-localized-ringed-site",
+  "def-weil-extension-by-zero-presheaf",
+  "def-weil-inverse-system",
+  "lem-pc-sites-module-sheafification-bilinear-extension",
+  "lem-pc-sites-sheaf-tensor-bilinear-universal",
+  "lem-pur-site-restriction-module-adjunction-exact",
+  "lem-sf-cbc-slice-tensor-generator-coherence",
+  "lem-sf-ringed-slice-tensor-generators",
+  "lem-sfb-localized-site-tensor-restriction",
+  "lem-weil-pbc-left-adjoint-preserves-colimits"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tags 03EK, 03DI and 0E8I; sites-cohomology.tex Tag 0GL1. Extracted construction from lem-sf-open-tensor-scalar-unit-augmentation."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Extension by zero of sheaves of modules commutes with tensor scalar unit maps in strict coefficient towers of complexes",
+   "results": "Eight hits including SheafOfModules.map_ιFree_mapFree_hom_assoc, SheafOfModules.unitHomEquiv_comp_apply, ModuleCat.extendScalarsComp_hom_app_one_tmul and ModuleCat.extendRestrictScalarsAdj_unit_app_apply; no strict open total-tensor tower construction.",
+   "date": "2026-10-25",
+   "verdict": "No direct match; use the sheaf tensor universal properties and totalization."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"SheafOfModules\", \"tensor\"",
+   "results": "Ten hits on PresheafOfModulesOfCommRing tensor definitions and naturality; no strict scalar-unit tower or normalized open total comparison.",
+   "date": "2026-10-25",
+   "verdict": "No direct match. Existing project module comparisons are the relevant inputs."
+  },
+  {
+   "tool": "grep",
+   "query": "mapBifunctorComparison|scalarUnits|StrictTotals|targetLevel|sliceTargetLevel",
+   "results": "Mathlib search for mapBifunctorComparison returned no hits. Project rg found generic mapBifunctorComparison in the adopted library and the StrictTotals/targetLevel declarations only in the assigned module.",
+   "date": "2026-10-25",
+   "verdict": "Generic totalization can lift natural module pairings; the two required strict constructions are not already stated."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Algebra.Homology.OpenTensorScalarUnitAugmentation",
+  "date": "2026-10-25",
+  "group": "W9"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sf-open-tensor-scalar-unit-augmentation",
+   "place": "The scalar-unit construction and normalized comparison steps; unchanged unit route."
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Algebra.Homology.OpenTensorNormalizedComparison",
+  "file": "lean/Sheaf/Algebra/Homology/OpenTensorNormalizedComparison.lean",
+  "declaration": "SheafOfModules.OpenTensorAugmentation.normalizedComparison_exists",
+  "declarations": [
+   "SheafOfModules.OpenTensorAugmentation.NormalizedComparison",
+   "SheafOfModules.OpenTensorAugmentation.normalizedComparison_exists"
+  ],
+  "statement": "theorem normalizedComparison_exists (A : AlgebraTowers.{c, v, r} R)\n    (e : StrictTotals.{c, v, r} R V A) :\n    Nonempty (NormalizedComparison.{c, v, r} R V A e)",
+  "branch": "sheaf-dag",
+  "by": "W9",
+  "date": "2026-10-25"
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "C-e7691",
+  "group": "W9",
+  "result": "fix",
+  "landing": "20261024T191653-L-461485",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "C-e7691",
+  "group": "W9",
+  "result": "fix",
+  "landing": "20261024T191653-L-461485",
+  "kind": "interface",
+  "note": "independent cc review: item augmentation_exists proof vs node lem-sf-open-tensor-scalar-unit-augmentation; relocated OpenTensorScalarUnitData vs clone's OpenTensorScalarUnitAugmentation (diff: tags only); ScalarUnits/NormalizedComparison leaves vs old Augmentation fields and their new nodes"
+ }
+}

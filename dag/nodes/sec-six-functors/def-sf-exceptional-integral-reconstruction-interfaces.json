@@ -1,0 +1,162 @@
+{
+ "id": "def-sf-exceptional-integral-reconstruction-interfaces",
+ "kind": "definition",
+ "title": "Interfaces for integral reconstruction and normalized exceptional realization",
+ "chapter": "sec-six-functors",
+ "unit": "sk-thm-sf-compatibility",
+ "statement": "Fix a prime l and a finite extension E/Q_l and a scheme T. Define normalized strict coefficient systems by normalized transition adjuncts and common finite constructible cohomological and Tor intervals [def-sf-integral-system-expression-domain]. Define Reconstruction to record an equivalence from the full integral finite-Tor category to this normalized full subcategory, comparison isomorphisms with the actual reduction and total-limit functors, and their ambient unit/counit equations, together with the actual resolution and shift data. For a compactification c of f:X→Y, define Systems to record the ordinary exceptional adjoint, actual site comparisons and proper/open transport; SystemAdjunction records preservation of the normalized predicates, the restricted adjunction, origins and its specified transpose equation. Define the integral left/right operations by conjugation with reconstruction, and their adjunction by composition. Their finite evaluations are the actual reconstruction counits followed by system evaluations. Define Realization by its normalized proper/open system comparison, uniform bounds, exactness and coherent shifts, the lift of the prescribed compact-support functor, the primitive ambient realization equation and the equation I(u)=r followed by the inverse prescribed realization. These are the verbatim data previously in the integral reconstruction module; no definition or property changes. The withTransport construction copies the normalized adjunction fields while replacing only transport shift data on the same system functors. Coefficient and scheme conventions, the completed finite-Tor category, strict system operations, actual comparison and resolution data, and all shift conventions are precisely those of [def-weil-finite-field-fiber], [def-weil-l-adic-coefficient-extension], [def-weil-scheme-morphism-properties], [def-weil-compactifications-refinements], [def-weil-derived-complete-integral-detailed], [def-weil-finite-tor-amplitude], [lem-coef-derived-system-evaluation-calculus], [def-weil-integral-rational-qbar-compact-support], [def-sf-integral-system-operations], [def-sf-integral-system-expression-domain], [def-pur-adic-exceptional-system-realization], [def-coef-reduction-limit-shift-data], [def-pur-sequence-adjoint-resolution-data], [def-pur-integral-operation-shift-data], [def-sf-strict-etale-exceptional-adjoint-interfaces], [def-sf-exceptional-system-interfaces], [def-sf-sequence-adjoint-shift-interfaces], [def-per-strict-etale-system-interfaces], [def-sf-integral-system-canonical-bridge], [def-pur-adic-proetale-realization], [def-pur-adic-derived-site-realization], [def-pur-adic-support-realization], [def-sf-intrinsic-compact-support-realization], [def-sf-compact-support-site-comparison-construction], [lem-pur-integral-ctf-shift-closure].",
+ "stmt_deps": [
+  "def-weil-finite-field-fiber",
+  "def-weil-l-adic-coefficient-extension",
+  "def-weil-scheme-morphism-properties",
+  "def-weil-compactifications-refinements",
+  "def-weil-derived-complete-integral-detailed",
+  "def-weil-finite-tor-amplitude",
+  "lem-coef-derived-system-evaluation-calculus",
+  "def-weil-integral-rational-qbar-compact-support",
+  "def-sf-integral-system-operations",
+  "def-sf-integral-system-expression-domain",
+  "def-pur-adic-exceptional-system-realization",
+  "def-coef-reduction-limit-shift-data",
+  "def-pur-sequence-adjoint-resolution-data",
+  "def-pur-integral-operation-shift-data",
+  "def-sf-strict-etale-exceptional-adjoint-interfaces",
+  "def-sf-exceptional-system-interfaces",
+  "def-sf-sequence-adjoint-shift-interfaces",
+  "def-per-strict-etale-system-interfaces",
+  "def-sf-integral-system-canonical-bridge",
+  "def-pur-adic-proetale-realization",
+  "def-pur-adic-derived-site-realization",
+  "def-pur-adic-support-realization",
+  "def-sf-intrinsic-compact-support-realization",
+  "def-sf-compact-support-site-comparison-construction",
+  "lem-pur-integral-ctf-shift-closure"
+ ],
+ "source": {
+  "document": "literature/zheng-six-operations-lefschetz-verdier-DM-stacks_arXiv-1006.3810.pdf",
+  "place": "Propositions 2.23, 2.29, 3.16; Section 5, especially Lemma 5.22 and Proposition 5.24; blueprint exceptional inverse-image construction. Integral reconstruction steps in the existing exceptional coefficient construction."
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "An adjunction restricts to an equivalence of full subcategories when its unit and counit are isomorphisms",
+   "results": "8 hits: Adjunction.toEquivalence, Functor.isEquivalence_of_isRightAdjoint, toEquivalence unit/counit and functor/inverse equations, map_restrictFullyFaithful_unit_app, and instIsIsoFunctorCounitOfIsEquivalence. The categorical restriction and upgrade are used in the proved reconstruction; none supplies the geometric normalization or realization.",
+   "date": "2026-10-27",
+   "verdict": "Use the abstract adjunction APIs; retain the geometric obligations as source-specific steps."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived reduction and total inverse limit restrict to an equivalence on normalized constructible coefficient systems with uniform Tor bounds",
+   "results": "8 hits, including InverseSystem.globalEquiv, InverseSystem.pEquivOnLim, InverseSystem.invLimEquiv and AdicCompletion.transitionMap_comp_reduceModIdeal; none concerns derived sheaf coefficient systems.",
+   "date": "2026-10-27",
+   "verdict": "No geometric match; reuse the existing project reconstruction declarations."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.toEquivalence; CategoryTheory.Adjunction.restrictFullyFaithful; CategoryTheory.Adjunction.ofNatIsoLeft",
+   "results": "toEquivalence upgrades an adjunction with invertible unit/counit; restrictFullyFaithful supplies restriction and its map equations; ofNatIsoLeft transports an adjunction. These carry the categorical steps but not geometric bounds, origins or actual proper/open normalization.",
+   "date": "2026-10-27",
+   "verdict": "Use these abstract categorical results where their hypotheses have been verified."
+  },
+  {
+   "tool": "grep",
+   "query": "(exceptionalIntegral|IntegralReconstruction|LevelBounds)",
+   "results": "msearch Mathlib grep: 0 hits. Repository rg finds the assigned theorem and its structures; generic actual reconstruction is in PurNormalizedReconstructionAdjunctionCalculus; exceptional transport is in ExceptionalSystemTransport. LevelBounds and primitive realization interfaces are project-specific.",
+   "date": "2026-10-27",
+   "verdict": "No duplicate of the fixed-coordinate restriction/assembly; preserve the existing interfaces verbatim."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.SixFunctors.ExceptionalIntegralReconstruction",
+  "date": "2026-10-27",
+  "group": "Z7"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "Interfaces for integral reconstruction and normalized exceptional realization; existing integral reconstruction proof, without changing the compatibility unit route.",
+   "via": [
+    "lem-sf-exceptional-integral-reconstruction",
+    "lem-sf-constructible-exceptional-coefficient-construction"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "module": "Sheaf.SixFunctors.ExceptionalIntegralReconstructionInterfaces",
+  "file": "lean/Sheaf/SixFunctors/ExceptionalIntegralReconstructionInterfaces.lean",
+  "declaration": "WeilConjectures.ExceptionalIntegralReconstruction.Reconstruction",
+  "declarations": [
+   "WeilConjectures.ExceptionalIntegralReconstruction.integralTriangulated",
+   "WeilConjectures.ExceptionalIntegralReconstruction.normalized",
+   "WeilConjectures.ExceptionalIntegralReconstruction.coordinates",
+   "WeilConjectures.ExceptionalIntegralReconstruction.coordinateShift",
+   "WeilConjectures.ExceptionalIntegralReconstruction.coordinateInverseShift",
+   "WeilConjectures.ExceptionalIntegralReconstruction.Reconstruction",
+   "WeilConjectures.ExceptionalIntegralReconstruction.Systems",
+   "WeilConjectures.ExceptionalIntegralReconstruction.Systems.left",
+   "WeilConjectures.ExceptionalIntegralReconstruction.Systems.exceptional",
+   "WeilConjectures.ExceptionalIntegralReconstruction.systemLeftShift",
+   "WeilConjectures.ExceptionalIntegralReconstruction.systemRightShift",
+   "WeilConjectures.ExceptionalIntegralReconstruction.SystemAdjunction",
+   "WeilConjectures.ExceptionalIntegralReconstruction.SystemAdjunction.F",
+   "WeilConjectures.ExceptionalIntegralReconstruction.SystemAdjunction.G",
+   "WeilConjectures.ExceptionalIntegralReconstruction.integralLeft",
+   "WeilConjectures.ExceptionalIntegralReconstruction.integralRight",
+   "WeilConjectures.ExceptionalIntegralReconstruction.integralAdjunction",
+   "WeilConjectures.ExceptionalIntegralReconstruction.leftComposite",
+   "WeilConjectures.ExceptionalIntegralReconstruction.rightComposite",
+   "WeilConjectures.ExceptionalIntegralReconstruction.Systems.leftEvaluation",
+   "WeilConjectures.ExceptionalIntegralReconstruction.Systems.rightEvaluation",
+   "WeilConjectures.ExceptionalIntegralReconstruction.leftEvaluation",
+   "WeilConjectures.ExceptionalIntegralReconstruction.rightEvaluation",
+   "WeilConjectures.ExceptionalIntegralReconstruction.UniformBounds",
+   "WeilConjectures.ExceptionalIntegralReconstruction.prescribed",
+   "WeilConjectures.ExceptionalIntegralReconstruction.prescribedRealization",
+   "WeilConjectures.ExceptionalIntegralReconstruction.ambientShift",
+   "WeilConjectures.ExceptionalIntegralReconstruction.Realization",
+   "WeilConjectures.ExceptionalIntegralReconstruction.Realization.prescribedAdjunction",
+   "WeilConjectures.ExceptionalIntegralReconstruction.Systems.siteRealization",
+   "WeilConjectures.ExceptionalIntegralReconstruction.Systems.etaleInput",
+   "WeilConjectures.ExceptionalIntegralReconstruction.Systems.supportMap",
+   "WeilConjectures.ExceptionalIntegralReconstruction.Systems.supportProjection",
+   "WeilConjectures.ExceptionalIntegralReconstruction.SystemAdjunction.withTransport"
+  ],
+  "statement": "structure Reconstruction (T : Scheme.{u})",
+  "branch": "sheaf-dag",
+  "by": "Z7",
+  "date": "2026-10-27",
+  "existing": false
+ },
+ "split_report": {
+  "blueprint": "Interfaces for integral reconstruction and normalized exceptional realization; existing integral reconstruction proof, without changing the compatibility unit route.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-d6d43",
+  "group": "Z7",
+  "result": "fix",
+  "landing": "20261027T013018-L-2358518",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-d6d43",
+  "group": "Z7",
+  "result": "fix",
+  "landing": "20261027T013018-L-2358518",
+  "kind": "interface",
+  "note": "independent cc review: delivered Interfaces module vs clone item module (verbatim move + withTransport), item theorem signature vs clone, new/changed node records vs Lean declarations and owner nodes"
+ }
+}

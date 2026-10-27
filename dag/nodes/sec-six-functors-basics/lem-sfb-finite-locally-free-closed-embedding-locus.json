@@ -1,0 +1,373 @@
+{
+ "id": "lem-sfb-finite-locally-free-closed-embedding-locus",
+ "kind": "statement",
+ "title": "Quasi-compact open locus of closed embeddings from a finite locally free source",
+ "statement": "Let $P$ be a scheme [def-pc-scheme], let $D\\to P$ be finite locally free [def-pc-finite-locally-free], let $X\\to P$ be affine [pqf-def-affine-morphism] and of finite presentation, and let $f:D\\to X$ be a $P$-morphism. Finite presentation means locally of finite presentation [def-sbc-locally-finite-presentation], quasi-compact and quasi-separated [def-weil-pbc-scheme-conventions]. There is a quasi-compact open immersion $V\\hookrightarrow P$ [def-weil-open-immersion] such that for every scheme $T$ and morphism $t:T\\to P$, $t$ factors through $V$ if and only if the base change $f_T:D\\times_PT\\to X\\times_PT$ is a closed immersion [def-weil-closed-immersion, def-pc-fibre-product]. Equivalently, $|V|$ is the set of $p\\in P$ where $f_{\\kappa(p)}$ is a closed immersion [def-weil-residue-field]. This description commutes with arbitrary base change on $P$. The rank-zero source, empty bases, and nonreduced bases are allowed; no Noetherian hypothesis is imposed.",
+ "source": {
+  "document": "https://math.stanford.edu/~conrad/papers/luminysga3smf.pdf",
+  "place": "Lemma 2.3.4, proof, printed p.70, open monicity locus. The stated general finite-source version and quasi-compactness over arbitrary rings are the finite-coordinate/minor formulation of this input, agent-stated; source proof uses a Noetherian reduction. Read online; WANTED locally as literature/conrad-reductive-group-schemes.pdf."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-finite-locally-free",
+  "pqf-def-affine-morphism",
+  "def-sbc-locally-finite-presentation",
+  "def-weil-pbc-scheme-conventions",
+  "def-weil-open-immersion",
+  "def-weil-closed-immersion",
+  "def-pc-fibre-product",
+  "def-weil-residue-field"
+ ],
+ "proof": [
+  {
+   "text": "Put $E=(D\\to P)_*\\mathcal O_D$. By [def-pc-finite-locally-free] and [lem-sc-finite-pushforward-locally-free], $E$ is locally free of finite, locally varying rank. Choose affine opens $U=\\operatorname{Spec}A$ trivializing $E$. The definition [def-weil-finite-integral-morphism] of finiteness makes $D_U$ affine, and [pqf-def-affine-morphism] makes $X_U$ affine; write $D_U=\\operatorname{Spec}B$, $X_U=\\operatorname{Spec}C$ using [def-weil-affine-spectrum]. Here $B$ is free of rank $n$ over $A$. By [lem-weil-pbc-lfp-affine-opens-finite-presentation], $C=A[x_1,\\ldots,x_m]/(r_1,\\ldots,r_l)$ for finite $m,l$. The given map is an $A$-algebra map $\\phi:C\\to B$. Write $b_i=\\phi(x_i)$. If $n=0$, then $B=0$ and every scalar extension of $\\phi$ is surjective; set the local locus equal to $U$. For the next five steps assume $n>0$.",
+   "uses": [
+    "def-pc-finite-locally-free",
+    "def-weil-finite-integral-morphism",
+    "lem-sc-finite-pushforward-locally-free",
+    "pqf-def-affine-morphism",
+    "def-weil-affine-spectrum",
+    "lem-weil-pbc-lfp-affine-opens-finite-presentation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "02KB (lemma-finite-flat); 01TQ (lemma-locally-finite-presentation-characterize); affine setup for the finite-coordinate argument"
+   }
+  },
+  {
+   "text": "For each $i$, apply [lem-weil-cayley-hamilton-free-module] to the $A$-linear endomorphism $z\\mapsto b_i z$ of $B$. Evaluating its monic degree-$n$ characteristic-polynomial relation at $1_B$ gives $b_i^n=-\\sum_{j<n}a_{ij}b_i^j$ for coefficients $a_{ij}\\in A$. Thus any monomial with some exponent $e_i\\ge n$ is a sum of monomials of strictly smaller total degree, by substituting this relation after multiplying it by $b_i^{e_i-n}\\prod_{h\\ne i}b_h^{e_h}$. Induction on total degree shows that $\\operatorname{im}\\phi$ is the $A$-linear span of the finite list $w_e=\\prod_i b_i^{e_i}$ with $0\\le e_i<n$. The converse inclusion holds because each $w_e$ is the image of $\\prod_i x_i^{e_i}$. The empty product when $m=0$ is $1_B$. This is direct polynomial reduction, with no claim that a submodule of a finite module must be finite.",
+   "uses": [
+    "lem-weil-cayley-hamilton-free-module"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "00DX (lemma-charpoly): apply the matrix relation to multiplication by each image generator, then reduce monomials"
+   }
+  },
+  {
+   "text": "Let $N$ be the length of the list $(w_e)$, let $H:A^{\\oplus N}\\to B$ send the basis vector indexed by $e$ to $w_e$, and set $Q=B/\\operatorname{im}H$. For every $A$-algebra $R$, [lem-weil-pbc-tensor-right-exact] identifies $Q\\otimes_A R$ with the cokernel of $H_R:R^{\\oplus N}\\to B\\otimes_A R$. The image of $\\phi_R:C\\otimes_A R\\to B\\otimes_A R$ is exactly the $R$-span of $w_e\\otimes1$: each pure tensor maps to $\\phi(c)\\otimes r$, and Step 2 expresses $\\phi(c)$ as an $A$-linear combination of the $w_e$; conversely $w_e\\otimes r$ is the image of $(\\prod_i x_i^{e_i})\\otimes r$. Consequently $\\phi_R$ is surjective if and only if $Q\\otimes_A R=0$. No tensor-product injection or flatness of $R$ is used.",
+   "uses": [
+    "lem-weil-pbc-tensor-right-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "00DF (lemma-tensor-product-exact): cokernel of the finite monomial matrix after arbitrary scalar extension"
+   }
+  },
+  {
+   "text": "The quotient $Q$ is generated by the images of an $A$-basis of $B$, so $\\widetilde Q$ is finite type and quasi-coherent by [lem-weil-pbc-spec-module-tilde-sections]: the same finite generating family generates after each localization. Apply [lem-trf-fitting-ideal-generate-locally] with $\\mathcal F=\\widetilde Q$ and $r=0$. It supplies an open subscheme $W_U\\subseteq U$ such that $h:T\\to U$ factors through $W_U$ exactly when $h^*\\widetilde Q=0$ (being locally generated by zero sections means zero). For an affine test $T=\\operatorname{Spec}R$, [lem-trf-fitting-sheaf-arbitrary-pullback] identifies that pullback with $\\widetilde{R\\otimes_A Q}$. It vanishes exactly when $R\\otimes_A Q=0$, since its global sections are that module by [lem-weil-pbc-spec-module-tilde-sections] at $D(1)$. Interchanging the two tensor factors, Step 3 therefore gives $h$ factors through $W_U$ if and only if $\\phi_R$ is surjective.",
+   "uses": [
+    "lem-weil-pbc-spec-module-tilde-sections",
+    "lem-trf-fitting-ideal-generate-locally",
+    "lem-trf-fitting-sheaf-arbitrary-pullback"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/divisors.tex",
+    "place": "0C3F (lemma-fitting-ideal-generate-locally); 05P8 (lemma-locally-free-rank-r-pullback)(2) at r=0; 0C3D (lemma-base-change-fitting-ideal)"
+   }
+  },
+  {
+   "text": "Write $M$ for the $n\\times N$ matrix of $H$ in the chosen basis of $B$. By [lem-trf-fitting-ideal-sheaf-affine-sections], the ideal $J=\\operatorname{Fit}_0(\\widetilde Q)(U)$ is generated by the determinants of all $n$ rows from $\\ker(A^{\\oplus n}\\twoheadrightarrow Q)=\\operatorname{im}M$. It is already generated by the finite list of determinants $\\det(M_{e_1},\\ldots,M_{e_n})$, where each $M_e$ is a column of $M$ and repetitions are allowed. Indeed write each selected kernel vector as $z_i=\\sum_e c_{ie}M_e$; substituting in the Leibniz formula [def-weil-pbc-matrix-determinant] and distributing the finite products gives $\\det(z_1,\\ldots,z_n)=\\sum_{e_1,\\ldots,e_n}(\\prod_i c_{ie_i})\\det(M_{e_1},\\ldots,M_{e_n})$. Conversely each displayed column is in the kernel; the row convention gives the same determinant by transposing the Leibniz sum. Hence $W_U=\\bigcup_\\delta D(\\delta)$ for this finite determinant list, by the stalk criterion of [lem-trf-fitting-ideal-generate-locally]. No basis of the image module or finite generation of an arbitrary kernel is assumed.",
+   "uses": [
+    "lem-trf-fitting-ideal-sheaf-affine-sections",
+    "def-weil-pbc-matrix-determinant",
+    "lem-trf-fitting-ideal-generate-locally"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "07Z8 (lemma-fitting-ideal), presentation matrix description; 07ZA (lemma-fitting-ideal-basics)(4), finite generation by minors, with the finite expansion written out"
+   }
+  },
+  {
+   "text": "Each $D(\\delta)$ is homeomorphic to $\\operatorname{Spec}A_\\delta$ by [lem-weil-pbc-spec-localization-away-basic-open], and this spectrum is quasi-compact by [lem-weil-pbc-spec-basic-opens-unit-ideal-quasi-compact]. A finite union of quasi-compact subspaces is quasi-compact: restrict any open cover to each subspace and take the union of its finitely many finite subcovers. Thus $W_U$ is quasi-compact, including when the determinant list is empty. In rank zero $W_U=U$ is quasi-compact by the same spectrum lemma.",
+   "uses": [
+    "lem-weil-pbc-spec-localization-away-basic-open",
+    "lem-weil-pbc-spec-basic-opens-unit-ideal-quasi-compact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "00E4 (lemma-standard-open); 00E8 (lemma-quasi-compact)"
+   }
+  },
+  {
+   "text": "For every affine test $\\operatorname{Spec}R\\to U$, [lem-weil-pbc-fibre-product-affine-spectra] identifies the base-changed map $f_R$ with $\\operatorname{Spec}(\\phi_R)$, since both its projection composites are the maps induced by the tensor inclusions. By the affine criterion of [def-weil-closed-immersion], it is a closed immersion exactly when $\\phi_R$ is surjective. Steps 3-4 (and Step 1 in rank zero) prove the required equivalence on affine tests. In particular $p\\in W_U$ if and only if $f_{\\kappa(p)}$ is a closed immersion. This intrinsic condition shows that the opens $W_U$ coincide on overlaps. Their union is an open subset $V$ of $P$, and [def-weil-open-immersion] equips it with the restricted structure sheaf and its open immersion into $P$.",
+   "uses": [
+    "lem-weil-pbc-fibre-product-affine-spectra",
+    "def-weil-closed-immersion",
+    "def-weil-open-immersion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "01I4 (lemma-fibre-product-affine-schemes), 01JQ (lemma-fibre-product-affines); morphisms.tex 01QO (lemma-closed-immersion); intrinsic gluing of the opens"
+   }
+  },
+  {
+   "text": "To check that $V\\hookrightarrow P$ is quasi-compact, take any affine open $A_0\\subseteq P$. Refine the local trivializations of $E|_{A_0}$ by principal opens of $A_0$, using the basis clause of [lem-weil-pbc-spec-localization-away-basic-open]. By quasi-compactness of $A_0$ from [lem-weil-pbc-spec-basic-opens-unit-ideal-quasi-compact], finitely many such principal opens cover $A_0$. Each selected principal open is quasi-compact by Step 6's topology argument. Apply [lem-pqf-finite-affine-cover-qc-open] to obtain a finite affine open cover of each one. The resulting finite family covers $A_0$ and trivializes $E$, so Steps 1-7 apply on each member, with its own rank and finite generator list. The intrinsic fibre criterion in Step 7 identifies its constructed locus with $V$ intersected with that chart. Step 6 makes each intersection quasi-compact. Their finite union $V\\cap A_0$ is quasi-compact by the open-cover argument in Step 6. This is exactly quasi-compactness of the immersion in [def-weil-finite-type-morphism]. This is a statement relative to $P$ and does not require $P$ itself to be quasi-compact.",
+   "uses": [
+    "lem-weil-pbc-spec-localization-away-basic-open",
+    "lem-weil-pbc-spec-basic-opens-unit-ideal-quasi-compact",
+    "def-weil-finite-type-morphism",
+    "lem-pqf-finite-affine-cover-qc-open"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "00E0 (lemma-Zariski-topology), basic-open basis; 00E4 (lemma-standard-open); 00E8 (lemma-quasi-compact); finite principal refinement on each affine base"
+   }
+  },
+  {
+   "text": "For arbitrary $t:T\\to P$, cover $T$ by affine opens $T_a$ mapping into some chart $U$. Factoring through the open subscheme $V$ is equivalent to factoring locally through its restrictions $W_U$, by [def-weil-open-immersion]. Step 7 says this is equivalent to each $f_{T_a}$ being a closed immersion. These tests imply that $f_T$ is a closed immersion by the topological and sheaf definition [def-weil-closed-immersion]: the inverse images in $X_T$ of the $T_a$ are an open cover; the image of $D_T$ is closed on each of them, hence closed globally; the map is injective and a homeomorphism to its image because these assertions hold on that cover; and surjectivity of the structure-sheaf map is local on that cover. Conversely a closed immersion restricts to one on every target open by the same definition. This proves the equivalence for every $T$, as well as the stated residue-field description.",
+   "uses": [
+    "def-weil-open-immersion",
+    "def-weil-closed-immersion"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "01QO (lemma-closed-immersion), affine-local description; explicit local-to-global check from the definition"
+   }
+  },
+  {
+   "text": "Finally let $P'\\to P$ be arbitrary. Give the inverse-image open subset $V'\\subseteq P'$ its restricted structure sheaf [def-weil-open-immersion]. A morphism $T\\to P'$ factors through $V'$ if and only if its composite to $P$ factors through $V$. By Step 9 this is equivalent to $f_T$ being a closed immersion. The universal property [def-pc-fibre-product] identifies this $f_T$ with the base change to $T$ of $D\\times_P P'\\to X\\times_P P'$. Thus $V'$ represents the required locus after base change; its fibre-product identification with $V\\times_P P'$ follows from the same universal property. The locus is unique since its point set is fixed by the residue-field tests. The empty base gives the empty locus; a rank-zero chart gives the whole chart; the tensor and determinant calculations never used reducedness or Noetherianity.",
+   "uses": [
+    "def-weil-open-immersion",
+    "def-pc-fibre-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "01JP (definition-fibre-product); open-subscheme universal property, applied to the represented condition"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-finite-locally-free",
+  "def-weil-finite-integral-morphism",
+  "lem-sc-finite-pushforward-locally-free",
+  "pqf-def-affine-morphism",
+  "def-weil-affine-spectrum",
+  "lem-weil-pbc-lfp-affine-opens-finite-presentation",
+  "lem-weil-cayley-hamilton-free-module",
+  "lem-weil-pbc-tensor-right-exact",
+  "lem-weil-pbc-spec-module-tilde-sections",
+  "lem-trf-fitting-ideal-generate-locally",
+  "lem-trf-fitting-sheaf-arbitrary-pullback",
+  "lem-trf-fitting-ideal-sheaf-affine-sections",
+  "def-weil-pbc-matrix-determinant",
+  "lem-weil-pbc-spec-localization-away-basic-open",
+  "lem-weil-pbc-spec-basic-opens-unit-ideal-quasi-compact",
+  "lem-weil-pbc-fibre-product-affine-spectra",
+  "def-weil-closed-immersion",
+  "def-weil-open-immersion",
+  "def-weil-finite-type-morphism",
+  "lem-pqf-finite-affine-cover-qc-open",
+  "def-pc-fibre-product"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Finite-coordinate proof of the open monicity input in Conrad Lemma 2.3.4, printed p.70, using Stacks 00DX, 02KB, 01TQ, 07Z8, 07ZA, 0C3F and 05P8 rather than the source Noetherian reduction."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Closed embeddings from a finite locally free scheme into an affine finitely presented scheme form a quasi compact open parameter locus",
+   "results": "{\"t\": \"2026-10-24T11:35:31Z\", \"tool\": \"leansearch\", \"query\": \"Closed embeddings from a finite locally free scheme into an affine finitely presented scheme form a quasi compact open parameter locus\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.instQuasiCompactOfIsLocallyNoetherianOfIsOpenImmersion\", \"AlgebraicGeometry.IsClosedImmersion.mk\", \"AlgebraicGeometry.IsClosedImmersion.instIsAffineHom\", \"AlgebraicGeometry.IsImmersion.instOfIsClosedImmersion\", \"AlgebraicGeometry.IsClosedImmersion\", \"AlgebraicGeometry.IsImmersion.isImmersion_iff_exists_of_quasiCompact\", \"AlgebraicGeometry.IsImmersion.instIsOpenImmersionToImageOfQuasiCompact\", \"AlgebraicGeometry.instLocallyOfFiniteTypeOfIsClosedImmersion\"], \"digest\": \"0ccd9cf9fa2b096a\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: AlgebraicGeometry.instQuasiCompactOfIsLocallyNoetherianOfIsOpenImmersion, AlgebraicGeometry.IsClosedImmersion.mk, AlgebraicGeometry.IsClosedImmersion.instIsAffineHom, AlgebraicGeometry.IsImmersion.instOfIsClosedImmersion, AlgebraicGeometry.IsClosedImmersion, AlgebraicGeometry.IsImmersion.isImmersion_iff_exists_of_quasiCompact, AlgebraicGeometry.IsImmersion.instIsOpenImmersionToImageOfQuasiCompact, AlgebraicGeometry.instLocallyOfFiniteTypeOfIsClosedImmersion; none states this scheme-theoretic assertion or a one-line specialization of it"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsClosedImmersion\", \"open\"",
+   "results": "{\"t\": \"2026-10-24T11:35:31Z\", \"tool\": \"loogle\", \"query\": \"\\\"IsClosedImmersion\\\", \\\"open\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: no hits; none states this scheme-theoretic assertion or a one-line specialization of it"
+  },
+  {
+   "tool": "grep",
+   "query": "immersion.*locus|locus.*immersion|surjectiv.*locus|locus.*surjectiv",
+   "results": "{\"t\": \"2026-10-24T11:35:30Z\", \"tool\": \"grep\", \"query\": \"immersion.*locus|locus.*immersion|surjectiv.*locus|locus.*surjectiv\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 2, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/ZariskisMainTheorem.lean\", \"Mathlib/AlgebraicGeometry/ZariskisMainTheorem.lean\"], \"digest\": \"0de7ed75e1048518\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: Mathlib/AlgebraicGeometry/ZariskisMainTheorem.lean, Mathlib/AlgebraicGeometry/ZariskisMainTheorem.lean; none states this scheme-theoretic assertion or a one-line specialization of it"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Families of maps with finite flat source: the fibrewise closed immersion locus is represented by a quasi compact open subscheme",
+   "results": "{\"t\": \"2026-10-24T11:35:33Z\", \"tool\": \"leanfinder\", \"query\": \"Families of maps with finite flat source: the fibrewise closed immersion locus is represented by a quasi compact open subscheme\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.descendsAlong_isOpenImmersion_surjective_inf_flat_inf_quasicompact'\", \"AlgebraicGeometry.Flat\", \"AlgebraicGeometry.descendsAlong_universallyClosed_surjective_inf_flat_inf_quasicompact\", \"AlgebraicGeometry.Flat.surjective_descendsAlong_surjective_inf_flat_inf_quasicompact\", \"AlgebraicGeometry.Flat.instFstScheme\", \"AlgebraicGeometry.instIsPreimmersionFiberι\", \"AlgebraicGeometry.Flat.instSndScheme\", \"AlgebraicGeometry.descendsAlong_universallyInjective_surjective_inf_flat_inf_quasicompact\"], \"digest\": \"129c4cb7b78f9b77\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: AlgebraicGeometry.descendsAlong_isOpenImmersion_surjective_inf_flat_inf_quasicompact', AlgebraicGeometry.Flat, AlgebraicGeometry.descendsAlong_universallyClosed_surjective_inf_flat_inf_quasicompact, AlgebraicGeometry.Flat.surjective_descendsAlong_surjective_inf_flat_inf_quasicompact, AlgebraicGeometry.Flat.instFstScheme, AlgebraicGeometry.instIsPreimmersionFiberι, AlgebraicGeometry.Flat.instSndScheme, AlgebraicGeometry.descendsAlong_universallyInjective_surjective_inf_flat_inf_quasicompact; none states this scheme-theoretic assertion or a one-line specialization of it"
+  },
+  {
+   "tool": "grep",
+   "query": "surjectiv.*minor|minor.*surjectiv|maximalMinor|fittingIdeal|FittingIdeal",
+   "results": "{\"t\": \"2026-10-24T11:54:19Z\", \"tool\": \"grep\", \"query\": \"surjectiv.*minor|minor.*surjectiv|maximalMinor|fittingIdeal|FittingIdeal\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"Mathlib/Analysis/Normed/Group/SemiNormedGrp/Kernels.lean\"], \"digest\": \"c2aec590f68b5737\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: only an unrelated normed-group cokernel hit"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A finite rectangular matrix is surjective if and only if its maximal minors generate the unit ideal",
+   "results": "{\"t\": \"2026-10-24T11:54:19Z\", \"tool\": \"leansearch\", \"query\": \"A finite rectangular matrix is surjective if and only if its maximal minors generate the unit ideal\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"surjective_of_isLocalized_maximal\", \"Matrix.mulVec_surjective_of_invertible\", \"Matrix.vecMul_surjective_of_invertible\", \"Matrix.mulVec_surjective_iff_isUnit\", \"Matrix.vecMul_surjective_iff_isUnit\", \"Matrix.vecMul_surjective_iff_exists_left_inverse\", \"surjective_of_localized_maximal\", \"Matrix.isTotallyUnimodular_iff_fintype\"], \"digest\": \"64526523577bde91\"}",
+   "date": "2026-10-24",
+   "verdict": "no match for the item: matrix inverse and local-surjectivity results only"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"surjective\", \"det\"",
+   "results": "{\"t\": \"2026-10-24T11:54:20Z\", \"tool\": \"loogle\", \"query\": \"\\\"surjective\\\", \\\"det\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 2, \"note\": \"\", \"top\": [\"Matrix.GeneralLinearGroup.det_surjective\", \"Algebra.IsStandardEtale.of_surjective\"], \"digest\": \"c25587b040c50f57\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: general linear determinant surjectivity and standard-etale quotient do not state the item"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The locus where an algebra homomorphism into a finite free algebra is surjective is quasi compact open and commutes with base change",
+   "results": "{\"t\": \"2026-10-24T11:54:20Z\", \"tool\": \"leanfinder\", \"query\": \"The locus where an algebra homomorphism into a finite free algebra is surjective is quasi compact open and commutes with base change\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.FiniteType.baseChangeAux_surj\", \"Algebra.QuasiFinite.of_surjective_algHom\", \"Algebra.QuasiFiniteAt.of_surjectiveOnStalks\", \"RingHom.SurjectiveOnStalks.baseChange\", \"Algebra.QuasiFiniteAt.of_surjectiveOnStalks_of_liesOver\", \"Algebra.QuasiFiniteAt.baseChange\", \"RingHom.SurjectiveOnStalks.baseChange'\", \"Algebra.QuasiFinite.of_forall_exists_mul_mem_range\"], \"digest\": \"75652d03272acb1c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: tensor-surjectivity and quasi-finite algebra results do not construct the universal closed-immersion locus"
+  },
+  {
+   "tool": "grep",
+   "query": "closedImmersionLocus|closed_immersion_locus|isClosedImmersion.*[Oo]pen|[Oo]pen.*isClosedImmersion",
+   "results": "{\"t\": \"2026-10-24T11:59:49Z\", \"tool\": \"grep\", \"query\": \"closedImmersionLocus|closed_immersion_locus|isClosedImmersion.*[Oo]pen|[Oo]pen.*isClosedImmersion\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 7, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/Morphisms/Immersion.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/Immersion.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/Finite.lean\", \"Mathlib/AlgebraicGeometry/ZariskisMainTheorem.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/ClosedImmersion.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/ClosedImmersion.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/ClosedImmersion.lean\"], \"digest\": \"82ddd7f04255d0f6\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: immersion factorization, target locality and restriction results, no parameter-locus theorem"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A morphism from a finite locally free scheme to an affine finitely presented scheme has a quasi compact open locus of closed immersion fibres",
+   "results": "{\"t\": \"2026-10-24T11:59:49Z\", \"tool\": \"leansearch\", \"query\": \"A morphism from a finite locally free scheme to an affine finitely presented scheme has a quasi compact open locus of closed immersion fibres\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.instQuasiCompactOfIsLocallyNoetherianOfIsOpenImmersion\", \"AlgebraicGeometry.IsImmersion.isImmersion_iff_exists_of_quasiCompact\", \"AlgebraicGeometry.instLocallyQuasiFiniteOfIsFinite\", \"AlgebraicGeometry.IsClosedImmersion.iff_isFinite_and_mono\", \"AlgebraicGeometry.QuasiCompact.mk\", \"AlgebraicGeometry.instLocallyOfFiniteTypeOfLocallyOfFinitePresentation\", \"AlgebraicGeometry.locallyQuasiFinite_iff\", \"AlgebraicGeometry.IsClosedImmersion.instIsAffineHom\"], \"digest\": \"69b948665d2d151e\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the quasi-compact open-immersion result assumes a locally Noetherian base; the finite monomorphism criterion does not construct this locus"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsClosedImmersion\", \"locus\"",
+   "results": "{\"t\": \"2026-10-24T11:59:49Z\", \"tool\": \"loogle\", \"query\": \"\\\"IsClosedImmersion\\\", \\\"locus\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: zero hits"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-finite-diagonalizable-subgroup-parameter",
+  "date": "2026-10-24",
+  "group": "Q01"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Haboush symmetric-power lifting for a trivial quotient representation. Supporting representation-theoretic input: Steinberg endomorphisms detect a nonzero fixed vector. Supporting Self-duality of rho section modules at characteristic-dependent weights. Supporting input: Positive-characteristic simplicity step, using irreducibility of the Steinberg induced module rather than assuming self-duality. Numerical input to the dimension comparison: Weyl dimension of the induced module. Supporting Kempf vanishing for dominant flag line bundles. Positive-characteristic Andersen–Haboush argument: trivial pushforward of M_((p^r-1)rho), before the Serre twisting calculation. Supporting input: Lemma 2.3, second assertion, and Lemma 2.1, printed pp.153--155: H^0(u,V(lambda))=K v_lambda for p-restricted dominant lambda. With roots positive in Lie(B), V(lambda)=Gamma(M_{-w0 lambda}). Supporting input: Simple-root distributions and infinitesimal subalgebra calculus. Supporting input: pinning-compatible integral-to-geometric distribution comparison, with all positive root divided powers, before simple-root generation. Integral-root-model prerequisite before the comparison: integral Chevalley construction and a positive-root coordinate chart; integral matrix-closure construction: the big cell and its Weyl translates, before identifying the special fibre. Supporting input: Integral closure atlas, exhaustion of each special fibre: exclude extra components using the generic and special identity-component big-cell dimensions. Supporting input: Lemma 3.7 (first assertion, the Iwahori--Matsumoto maximal-boundedness statement) and its application in Proposition 4.3, second paragraph, printed pp.7-8; Cartan double-coset input used to prove the maximal-boundedness prerequisite, before the torus-powers argument. Supporting input: Theorem 1.3, implication (1) to (3), printed pp.1, 6; Definition 3.4 and Lemma 3.6, printed pp.5-6. The complete-DVR cocharacter form, before the non-complete descent of Theorem 4.1. Supporting input: Section 2, Claim 2, printed p.2; Section 3, proof of Theorem 1.3, (1) implies (2), printed p.6, removes the residue-field and splitness restrictions. Supporting input: Claim 2: choose a linear embedding and use reductivity to make the homogeneous quotient affine. Supporting input: Alper, Adequate moduli spaces and geometrically reductive group schemes, Theorem 9.7.5, Proposition 9.3.1(i), Lemma 9.2.5(2),(3), printed pp.522,524,527--528. WANTED local copy; read https://content.algebraicgeometry.nl/2014-4/2014-4-022.pdf. Supporting input: Theorem 9.7.5, reductive-to-geometrically-reductive direction, reductions preceding the final determinant argument, printed p.527; use Lemma 9.2.5(2),(5), Proposition 9.3.1 (base change and descent), Proposition 9.5.1 (quotients and extensions). The result is the conditional reduction, not the geometric reductivity theorem itself; no SGA source is invoked. Supporting input: Theorem 9.7.5 reduction paragraph: etale splitting followed by descent from split groups over the integers. Supporting input: Lemma 5.1.3 and Proposition 5.1.6, printed pp.136-138; Definition 6.1.1 and its following paragraph, p.186; affine localization of the etale neighborhoods; Theorem 3.2.6 and Corollary 3.2.7, printed pp.94-95; reductive specialization of the smooth surjective scheme of maximal tori, before choosing etale-local sections. No imported blueprint ancestor exists (blueprint_refs.py ancestor returns None). Supporting input to this split: Theorem 2.3.1, printed pp.67-71, normalizer-quotient assertion specialized to a split torus; smoothness of the quotient map is stated in Remark 2.3.5, printed p.71, using Proposition 2.1.2. Supporting input: Lemma 2.3.4 and proof, printed pp.69-70. The functor is written using fppf forms of H; the source equivalently uses multiplicative-type subgroups geometrically isomorphic to H. The proof constructs it from the open embedding locus in Hom(H,G) modulo the finite constant automorphism group; no assertion about the conjugacy orbit or a homogeneous quotient is included here. Supporting input: Conrad Lemma 2.3.4, open V inside the affine Hom scheme, before quotienting by automorphisms.",
+   "via": [
+    "lem-sfb-finite-diagonalizable-subgroup-parameter",
+    "lem-sfb-split-torus-normalizer-quasi-affine-quotient",
+    "lem-sfb-maximal-torus-parameter-scheme",
+    "lem-sfb-reductive-etale-pinned-splitting",
+    "lem-sfb-reductive-etale-integral-models",
+    "lem-sfb-reductive-symmetric-power-dvr-reduction",
+    "lem-sfb-reductive-ring-invariant-power-lifting",
+    "lem-sfb-dvr-reductive-linear-affine-quotient",
+    "lem-sfb-reductive-nodal-equivariant-torsor-extension",
+    "lem-sfb-complete-dvr-cocharacter-cartan",
+    "lem-sfb-split-reductive-dvr-cartan-decomposition",
+    "lem-sfb-split-reductive-integral-maximal-bounded",
+    "lem-sfb-quasi-reductive-special-connectedness",
+    "lem-sfb-integral-chevalley-weyl-atlas",
+    "lem-sfb-chevalley-integral-root-model",
+    "lem-sfb-borel-kostant-distribution-comparison",
+    "lem-sfb-borel-simple-root-distribution-calculus",
+    "lem-sfb-restricted-induced-infinitesimal-invariants",
+    "lem-sfb-flag-frobenius-rho-pushforward",
+    "lem-sfb-dominant-flag-line-kempf-vanishing",
+    "lem-sfb-induced-weyl-dimension-formula",
+    "lem-sfb-steinberg-induced-module-irreducible",
+    "lem-sfb-rho-section-self-duality",
+    "lem-sfb-steinberg-endomorphism-detection",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-finite-locally-free-closed-embedding-locus",
+  "worker": "stage1",
+  "summary": "Statement unchanged. Proved the universal closed-immersion locus and relative quasi-compactness by a finite Cayley-Hamilton monomial matrix, its cokernel and existing Fitting-locus nodes. All prerequisites already exist; no new nodes. Handles arbitrary scalar extension, locally varying source ranks, rank zero, empty schemes and nonreduced bases. No Lean attachment found.",
+  "blueprint": "Latest blueprint sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md, (3), is the current context. The historical alteration prerequisite chain recorded by the item has no imported blueprint ancestor (blueprint_refs.py ancestor returns None). This split realizes the specifically recorded Conrad Lemma 2.3.4 open embedding-locus input of lem-sfb-finite-diagonalizable-subgroup-parameter; no alteration or unit route is replaced.",
+  "tool_uses": [
+   {
+    "node": "lem-sc-finite-pushforward-locally-free",
+    "why": "The equivalence finite flat locally finitely presented => locally free structure-algebra pushforward, for arbitrary base and locally varying rank; the unit has no such commutative-algebra/scheme input."
+   },
+   {
+    "node": "lem-trf-fitting-ideal-generate-locally",
+    "why": "Universal open locus where a finite-type quasi-coherent cokernel is generated by zero sections; a generic Fitting-ideal tool, independent of curve or six-functor geometry."
+   },
+   {
+    "node": "lem-trf-fitting-sheaf-arbitrary-pullback",
+    "why": "Affine tensor description of arbitrary pullback of the finite-type quasi-coherent cokernel; no flatness assumption. This unit supplies no replacement for that generic module tool."
+   },
+   {
+    "node": "lem-trf-fitting-ideal-sheaf-affine-sections",
+    "why": "Affine kernel-minor description of the Fitting ideal, used to prove finite generation from the explicit monomial matrix. This is generic commutative algebra and not a replacement of the unit route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sc-finite-pushforward-locally-free",
+  "lem-trf-fitting-ideal-generate-locally",
+  "lem-trf-fitting-sheaf-arbitrary-pullback",
+  "lem-trf-fitting-ideal-sheaf-affine-sections"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q98-c62659d83",
+  "group": "Q98",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q98-c62659d83 (reviewer sub-agent of L); spot-checked: PASS with no fixes. I read the whole item. The statement and stmt_deps are unchanged and there are no new nodes. The statement is true: on charts where B is free, the closed-immersion locus is D(Fit_0(B/im φ)), and Cayley–Hamilton makes im φ a finitely generated A-module, so Fit_0 has finitely many generators and the locus is a quasi-compact open. I checked each of the ten steps against the exact statements of the nodes it cites: lem-sc-finite-pushforward-locally-free, Cayley–Hamilton, tensor right exactness, the tilde module node, Fitting clause (1) at r=0 together with the stalk criterion (2) (checked at Stacks divisors.tex l.1352), the trf arbitrary-pullback and affine-sections nodes, the Leibniz determinant expansion, D(f)≅Spec A_f, spectrum compactness, affine fibre products, the affine closed-immersion criterion, and finite affine covers of quasi-compact opens. Each says what the step takes from it. Steps 9 and 10, which are local on the target and use universal properties, are genuinely elementary. Small cases check out: B=0; B=A×A with x↦(0,a) gives D(a), which is empty for a=ε over k[ε] and behaves correctly when ℤ is reduced to 𝔽₂ and 𝔽₃; m=0; P empty. No Noetherian, reduced or flat hypothesis is used. Batch-5 flags: lem-trf-fitting-ideal-generate-locally, lem-trf-fitting-sheaf-arbitrary-pullback and lem-trf-fitting-ideal-sheaf-affine-sections are generic Fitting-ideal algebra (Stacks 07Z6/0C3D/0C3F), outside both the trace formula and Poincaré duality, so all three are accepted. All four declared tool_uses are accepted as generic tools. The Conrad source is not local (already recorded as WANTED), and the proof is an agent-written Stacks route. Advisory: the existing same-unit node lem-sfb-universal-closed-immersion-open (Q18) already gives existence of V, but not quasi-compactness or the fibre description. The item is pre-existing, so this is not a duplicate fault, though the report's claim that no node gives the locus is slightly off."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.FiniteLocallyFreeClosedEmbeddingLocus",
+  "declaration": "AlgebraicGeometry.exists_finiteLocallyFree_closedEmbeddingLocus",
+  "file": "lean/Sheaf/AlgebraicGeometry/FiniteLocallyFreeClosedEmbeddingLocus.lean",
+  "statement": "theorem exists_finiteLocallyFree_closedEmbeddingLocus {P D X : Scheme.{u}} (d : D ⟶ P) (x : X ⟶ P) (f : D ⟶ X) (hf : f ≫ x = d) [d.IsFiniteLocallyFree] [IsAffineHom x] [LocallyOfFinitePresentation x] [QuasiCompact x] [QuasiSeparated x] : ∃ V : P.Opens, QuasiCompact V.ι ∧ (∀ (T : Scheme.{u}) (t : T ⟶ P), (∃ l : T ⟶ V.toScheme, l ≫ V.ι = t) ↔ IsClosedImmersion (pullback.map d t x t f (𝟙 T) (𝟙 P) (by simpa only [Category.comp_id] using hf.symm) (by simp))) ∧ (∀ p : P, p ∈ V ↔ IsClosedImmersion (pullback.map d (P.fromSpecResidueField p) x (P.fromSpecResidueField p) f (𝟙 (Spec (P.residueField p))) (𝟙 P) (by simpa only [Category.comp_id] using hf.symm) (by simp))) ∧ (∀ (P' : Scheme.{u}) (b : P' ⟶ P), QuasiCompact (b ⁻¹ᵁ V).ι ∧ ∀ (T : Scheme.{u}) (t : T ⟶ P'), (∃ l : T ⟶ (b ⁻¹ᵁ V).toScheme, l ≫ (b ⁻¹ᵁ V).ι = t) ↔ IsClosedImmersion (pullback.map (pullback.snd d b) t (pullback.snd x b) t (pullback.map d b x b f (𝟙 P') (𝟙 P) (by simpa only [Category.comp_id] using hf.symm) (by simp)) (𝟙 T) (𝟙 P') (by simp [pullback.map]) (by simp)))",
+  "branch": "newtargets-dag",
+  "by": "Q06",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-83ca8abd4",
+  "group": "Q06",
+  "result": "pass",
+  "note": "Lean statement matches node clause by clause: IsFiniteLocallyFree (finite+flat+lfp, no rank), IsAffineHom, lfp+qc+qs (redundant qc/qs not stronger), hf : f ≫ x = d; QuasiCompact V.ι (relative); factorization ↔ IsClosedImmersion of pullback.map d t x t f (argument order checked); residue-field clause via fromSpecResidueField; base-change clause with b⁻¹ᵁV and iterated pullback.map. lean.statement verbatim; only the lean record changed; no new nodes or defs; proof sorry; docstrings carry Conrad Lemma 2.3.4 p.70, the blueprint tag and 10 proof steps; proof-only imports exist on base. Statement true (Cayley-Hamilton gives finite presentation of the cokernel, so the Fit_0 locus is quasi-compact and stable under base change); edge cases rank 0, empty P, m=0, nilpotent D(a) fine. Existing exists_universalClosedImmersionOpen is a different node with weaker content and different hypotheses: advisory only. Not recompiled (no file changed)."
+ }
+}

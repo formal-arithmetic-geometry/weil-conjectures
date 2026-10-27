@@ -1,0 +1,424 @@
+{
+ "id": "lem-sfb-branch-multiplicity-tangent-criterion",
+ "kind": "statement",
+ "title": "Branch multiplicity, component degree, and the double-point tangent criterion",
+ "statement": "Let $k$ be algebraically closed [def-weil-field], $r\\ge2$, and let $D\\subset\\mathbf P^{r-1}_k$ be a reduced closed subscheme of pure dimension one [def-pc-reduced-scheme, def-weil-closed-immersion, def-weil-pure-dimension]. Let $p\\in D(k)$ be closed and write $\\nu:\\coprod_i C_i\\to D$ for the componentwise normalization [def-sc-normalization], with $C_i$ smooth proper connected and $e_i=\\deg(\\nu^*\\mathcal O_D(1)|_{C_i})$ [def-pc-projective-space-twist, def-pc-degree-line-bundle]. For $q\\in\\nu^{-1}(p)$, define $b_q$ by\n$$\\mathfrak m_p\\mathcal O_{C_i,q}=\\mathfrak m_q^{b_q},\\qquad b_q\\in\\mathbf Z_{\\ge1},$$\nwhere $q\\in C_i$. Orders are those of the discrete valuation local rings [def-sc-divisor]. Let $t_p$ be the leading coefficient of the eventually linear function $n\\mapsto\\operatorname{length}(\\mathcal O_{D,p}/\\mathfrak m_p^{n+1})$ [def-weil-pbc-module-length]. Then\n$$t_p=\\sum_{q\\in\\nu^{-1}(p)}b_q,\\qquad \\sum_{q\\in C_i\\cap\\nu^{-1}(p)}b_q\\le e_i.$$\nThe tangent map from $C_i$ into projective space at $q$ is zero if and only if $b_q\\ge2$ [def-sc-scheme-tangent-space]. If $t_p=2$ and all these tangent maps are nonzero, then $\\nu^{-1}(p)$ has exactly two points $q_1,q_2$, with $b_{q_1}=b_{q_2}=1$. Their one-dimensional tangent images determine projective lines through $p$. They are distinct if and only if\n$$\\widehat{\\mathcal O}_{D,p}\\cong k[[u,v]]/(uv)$$\nas complete local $k$-algebras [def-weil-pbc-adic-completion, def-weil-pbc-multivariate-power-series]. If these lines coincide with a line $T$, every ambient linear form vanishing on $T$ pulls back to order at least two at both $q_1$ and $q_2$.",
+ "source": {
+  "document": "literature/morrison-git-stable-curves-arXiv-0810.2340.pdf",
+  "place": "Section 3.2, Theorem 8 proof steps (4)--(6), printed pp.14--15, local branch inputs to the jet flags. Compare Stacks curves.tex Tags 0C1U (equation-multicross), 0C1V (lemma-multicross-algebra), 0C1W (definition-multicross); the multiplicity and tangent criterion here are an agent expansion, not a claim that these tags state the entire result. Local PDF WANTED; source read online at https://arxiv.org/pdf/0810.2340. Agent formulation of the supporting estimate."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-pc-scheme",
+  "def-pc-reduced-scheme",
+  "def-weil-closed-immersion",
+  "def-weil-pure-dimension",
+  "def-sc-normalization",
+  "def-pc-projective-space-twist",
+  "def-pc-degree-line-bundle",
+  "def-sc-divisor",
+  "def-weil-pbc-module-length",
+  "def-sc-scheme-tangent-space",
+  "def-weil-pbc-adic-completion",
+  "def-weil-pbc-multivariate-power-series",
+  "def-weil-pbc-reduced-normalization",
+  "def-sfb-stable-pointed-curve",
+  "def-pc-module-pullback"
+ ],
+ "proof": [
+  {
+   "text": "Put $A=\\mathcal O_{D,p}$, $\\mathfrak m=\\mathfrak m_p$, $B=(\\nu_*\\mathcal O_{\\coprod C_i})_p$, and $H=\\widehat A$. The standard affine charts of the given projective embedding present $D$ by quotients of polynomial rings in finitely many variables, so $D$ is finite type over $k$. The curve completion data apply: $A$ is reduced Noetherian local of dimension one with structural residue field $k$, $B$ is finite over $A$, and $B/A$ has finite length $\\delta$. The fibre is finite and nonempty with residue field $k$ at every point. The branch-coordinate node identifies $B\\otimes_AH$ with $\\prod_q k[[t_q]]$, compatibly with the completed local maps, and identifies $H$ with a subring whose tuples have equal constant coefficients. Each $R_q=\\mathcal O_{C_i,q}$ is a DVR. Apply the finite-quotient comparison to $R=A$, $S=B$, $\\mathfrak p=\\mathfrak m$: its local ideals $K_q=\\mathfrak mR_q$ satisfy $\\mathfrak m_q^{c_q}\\subset K_q\\subset\\mathfrak m_q$. Thus $K_q$ is a nonzero proper ideal in the DVR, uniquely $\\mathfrak m_q^{b_q}$ with $b_q\\ge1$.",
+   "uses": [
+    "lem-trf-curve-delta-completion-data",
+    "lem-trf-normalized-curve-branch-coordinates",
+    "lem-weil-pbc-completion-localized-algebra-finite-quotients"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tags 0C1R (lemma-prepare-delta-invariant), 0C3V (lemma-normalization-same-after-completion); algebra.tex Tag 07N9 (lemma-completion-finite-extension), finite-quotient comparison."
+   }
+  },
+  {
+   "text": "For every $N\\ge1$ the same finite-quotient comparison gives\n$$B/\\mathfrak m^NB\\cong\\prod_q R_q/\\mathfrak m_q^{Nb_q}.$$\nFilter each factor by successive powers of its uniformizer. There are exactly $Nb_q$ nonzero quotients, each the residue field $k$ with the structural $A$-action. This simple-module filtration and length additivity give\n$$\\operatorname{length}_A(B/\\mathfrak m^NB)=N\\sum_qb_q.$$\nWrite $s=\\sum_qb_q$. No residue-field weights occur, since all residue fields here are $k$.",
+   "uses": [
+    "lem-weil-pbc-completion-localized-algebra-finite-quotients",
+    "lem-weil-pbc-length-additive-short-exact"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 07N9 (lemma-completion-finite-extension), finite-level product; Tag 00IV (lemma-length-additive)."
+   }
+  },
+  {
+   "text": "Apply the finite-colength completion comparison to $A\\hookrightarrow B$ and a simple filtration of $B/A$ of length $\\delta$. It gives $\\mathfrak m^\\delta(B/A)=0$. Choose $c=\\max(1,\\delta)$, so $\\mathfrak m^cB\\subset A$. Put $h(N)=\\operatorname{length}_A(A/\\mathfrak m^N)$. For $N>c$, multiplication of this inclusion gives\n$$\\mathfrak m^NA\\subseteq\\mathfrak m^NB\\subseteq\\mathfrak m^{N-c}A\\subset A.$$\nThe exact sequence $0\\to A/\\mathfrak m^NB\\to B/\\mathfrak m^NB\\to B/A\\to0$ and the two quotient surjections therefore give\n$$\\delta+h(N-c)\\le sN\\le\\delta+h(N).$$\nThe growth-dimension node applies to the nonzero one-dimensional Noetherian local ring $A$: eventually $h(N)=t_pN+a$ (shifting $N=n+1$ preserves the slope). Divide both inequalities by $N$ and let $N$ tend to infinity. Both outside expressions tend to $t_p$, proving $t_p=s$. This writes out the finite-colength comparison of Stacks 00KB in this particular case.",
+   "uses": [
+    "lem-trf-finite-colength-completion-comparison",
+    "lem-trf-hilbert-samuel-growth-dimension",
+    "lem-weil-pbc-length-additive-short-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tags 00KB (lemma-differ-finite-chi), 00K8 (proposition-hilbert-function-polynomial), 00KQ (proposition-dimension), 00IV (lemma-length-additive); varieties.tex Tag 0C1R(4),(9)."
+   }
+  },
+  {
+   "text": "Fix a component $C_i$ and put $E_i=\\sum_{q\\in C_i\\cap\\nu^{-1}(p)}b_q[q]$, an effective divisor. Choose an ambient linear form $l$ vanishing at $p$ whose restriction to the image component is not identically zero. Such a form exists: on a chart $X_0(p)\\ne0$, if every $X_j-p_jX_0$ vanished on the component, it would be contained in the single point $p$, contradicting its dimension one. In the frame $X_0$ the germ $l/X_0$ lies in $\\mathfrak m_p$, so its pullback has order at least $b_q$ at every point above $p$. Thus the nonzero pulled-back section of $L_i=\\nu^*\\mathcal O_D(1)|_{C_i}$ belongs to $H^0(C_i,L_i(-E_i))$. Apply the smooth-curve section-degree cap with $A=L_i$, $m=q=1$, $B=E_i$. Its negative-degree vanishing would make this section zero if $\\deg E_i>e_i$. Hence $\\sum_{q\\in C_i\\cap\\nu^{-1}(p)}b_q\\le e_i$. If that fibre subset is empty, take $E_i=0$ and any nonzero restricted coordinate section; the same argument proves $0\\le e_i$.",
+   "uses": [
+    "lem-sfb-smooth-curve-section-degree-cap"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/curves.tex",
+    "place": "Tag 0CCS (lemma-grd-inequalities), nonzero-section argument; varieties.tex Tag 0AYY (lemma-degree-effective-Cartier-divisor)."
+   }
+  },
+  {
+   "text": "At a normalized point $q$, choose the same affine projective chart through $p$ and coordinates $z_j=X_j/X_0-p_j$. Their images generate $\\mathfrak m_p$, since $D$ is a closed subscheme of this affine chart. The cotangent map to the DVR is zero exactly when every $z_j$ maps into $\\mathfrak m_q^2$, equivalently when $\\mathfrak m_pR_q\\subseteq\\mathfrak m_q^2$, equivalently $b_q\\ge2$. Rational tangent/cotangent duality applies to $C_i\\to\\mathbf P^{r-1}_k$ because both points have residue field $k$. It identifies the tangent map with the dual of this coordinate cotangent map. A linear map to the one-dimensional space $\\mathfrak m_q/\\mathfrak m_q^2$ is zero if and only if its dual is zero (test a nonzero coefficient against a basis functional). This proves the asserted tangent criterion. When $b_q=1$, its dual is injective with one-dimensional image, determining the stated projective line through $p$.",
+   "uses": [
+    "lem-sc-rational-tangent-cotangent-duality"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tags 0B2E (lemma-tangent-space-rational-point), 0B2F (lemma-map-tangent-spaces)."
+   }
+  },
+  {
+   "text": "Suppose $t_p=2$ and every tangent map is nonzero. The preceding criterion gives $b_q=1$ at each point, and the multiplicity formula gives exactly two points $q_1,q_2$. Put $P=\\{(f,g)\\in k[[t_1]]\\times k[[t_2]]:f(0)=g(0)\\}$. The completed normalization embedding of Step 1 factors as $H\\hookrightarrow P$. The axes node identifies $P\\cong k[[U,V]]/(UV)$. Its maximal ideal is generated by $(t_1,0)$ and $(0,t_2)$, and its square consists of pairs of orders at least two. Consequently $\\mathfrak n_P/\\mathfrak n_P^2\\cong k^2$, with coordinates the two linear coefficients. The power-series structure node and the complete-local quotient node show that $P$ is Noetherian complete local with structural residue field $k$. The same properties for $H$ were supplied in Step 1.",
+   "uses": [
+    "lem-trf-coordinate-axes-normalization",
+    "lem-weil-pbc-power-series-field-cohen-regular-complete",
+    "lem-weil-pbc-complete-local-quotient"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/curves.tex",
+    "place": "Tag 0C1U (equation-multicross) and its coordinate presentation; algebra.tex Tags 032C and 0325 (lemma-quotient-complete-local)."
+   }
+  },
+  {
+   "text": "Assume the two projective tangent lines are distinct. Their corresponding one-dimensional vector subspaces in $T_{\\mathbf P^{r-1}/k,p}$ are distinct, so their nonzero generating tangent vectors are linearly independent. By rational tangent/cotangent duality, the ambient cotangent map to the two branch cotangents $k\\oplus k$ is surjective: its two component linear functionals are independent. This map factors through $\\mathfrak m_A/\\mathfrak m_A^2$, hence through $\\mathfrak m_H/\\mathfrak m_H^2$. Indeed completion modulo powers and the local-completion maximal-ideal formula identify these latter cotangent spaces canonically. Under Step 6 the resulting map $\\mathfrak m_H/\\mathfrak m_H^2\\to\\mathfrak n_P/\\mathfrak n_P^2$ is exactly the map of the inclusion $H\\hookrightarrow P$. That inclusion is a continuous local $k$-algebra homomorphism: residues agree and powers of its maximal ideal map into the corresponding powers in $P$. Apply complete-local cotangent surjectivity with coefficient base $C=k$, $R=H$, $S=P$. All rings are complete Noetherian local with residue $k$ by Steps 1 and 6. The inclusion is surjective, hence $H=P\\cong k[[U,V]]/(UV)$.",
+   "uses": [
+    "lem-sc-rational-tangent-cotangent-duality",
+    "lem-weil-pbc-adic-completion-mod-power",
+    "lem-weil-pbc-local-completion-local-ring",
+    "lem-sfb-complete-local-cotangent-surjectivity"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/formal-defos.tex",
+    "place": "Tag 06GZ (lemma-surjective-cotangent-space); varieties.tex Tags 0B2E, 0B2F; algebra.tex Tags 05GG, 05GI."
+   }
+  },
+  {
+   "text": "Conversely, suppose $H\\cong k[[u,v]]/(uv)$ as complete local $k$-algebras. The split-node normalization node applies: $A$ is reduced, essentially of finite type over $k$, one-dimensional and has this specified completion by Step 1. It identifies the two completed branch maps with $u\\mapsto t,v\\mapsto0$ and $u\\mapsto0,v\\mapsto t$. Thus the map from the cotangent space of $H$ to the two branch cotangents is the coordinate isomorphism $k^2\\to k^2$. Completion modulo powers and the local maximal-ideal formula identify it with the map from $\\mathfrak m_A/\\mathfrak m_A^2$. Ambient affine coordinates generate $\\mathfrak m_A$, so the ambient cotangent surjects onto this space and then onto the two branch cotangents. By tangent/cotangent duality, the two tangent vectors are linearly independent in the ambient tangent space. Hence their projective lines are distinct. This includes the case that the two points lie on the same global component.",
+   "uses": [
+    "lem-trf-split-node-component-normalization",
+    "lem-weil-pbc-adic-completion-mod-power",
+    "lem-weil-pbc-local-completion-local-ring",
+    "lem-sc-rational-tangent-cotangent-duality"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/curves.tex",
+    "place": "Tag 0CBW (lemma-split-node), varieties.tex Tag 0C3V; tangent duality Tags 0B2E, 0B2F."
+   }
+  },
+  {
+   "text": "Finally suppose the lines coincide with $T$. For a linear form $l$ vanishing on $T$, its ratio $l/X_0$ has value zero at $p$, and its differential annihilates the tangent direction of $T$. Both branch tangent maps have this image. Their pullbacks therefore have zero value and zero linear coefficient, so they lie in $\\mathfrak m_{q_1}^2$ and $\\mathfrak m_{q_2}^2$. This is precisely order at least two in the local frame $X_0$. The assertion includes an identically zero pullback, whose order is infinite. All calculations concern the first coefficient and work in every characteristic; no differentiation of a higher power was used.",
+   "uses": [
+    "lem-sc-rational-tangent-cotangent-duality"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tags 0B2E, 0B2F; coordinate interpretation of zero differential."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-trf-curve-delta-completion-data",
+  "lem-trf-normalized-curve-branch-coordinates",
+  "lem-weil-pbc-completion-localized-algebra-finite-quotients",
+  "lem-weil-pbc-length-additive-short-exact",
+  "lem-trf-finite-colength-completion-comparison",
+  "lem-trf-hilbert-samuel-growth-dimension",
+  "lem-sfb-smooth-curve-section-degree-cap",
+  "lem-sc-rational-tangent-cotangent-duality",
+  "lem-trf-coordinate-axes-normalization",
+  "lem-weil-pbc-power-series-field-cohen-regular-complete",
+  "lem-weil-pbc-complete-local-quotient",
+  "lem-weil-pbc-adic-completion-mod-power",
+  "lem-weil-pbc-local-completion-local-ring",
+  "lem-sfb-complete-local-cotangent-surjectivity",
+  "lem-trf-split-node-component-normalization"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/curves.tex",
+  "place": "Agent expansion of the local inputs to Morrison Section 3.2 Theorem 8(4)--(6), using varieties.tex Tags 0C1R, 0C3V and 0B2E/0B2F, algebra.tex Tags 07N9, 00KB, 00K8, 00KQ, and formal-defos.tex Tag 06GZ. Morrison local PDF WANTED; online source read."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The multiplicity of a reduced curve is the sum of orders of its maximal ideal on the normalized branches",
+   "results": "8 hits: KummerDedekind.emultiplicity_factors_map_eq_emultiplicity, WeierstrassCurve.valuation_Δ_aux, WeierstrassCurve.valuation_Δ_aux_eq_of_isIntegral, WeierstrassCurve.IsGoodReduction.goodReduction, Ideal.IsDedekindDomain.ramificationIdx_eq_multiplicity, WeierstrassCurve.IsMinimal, WeierstrassCurve.isGoodReduction_iff, WeierstrassCurve.minimal",
+   "date": "2026-10-23",
+   "verdict": "no match: Dedekind ramification indices, Weierstrass nonsingularity and reduction, analytic orders and the reduced-normalization instance do not state these branch multiplicity and tangent assertions."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An unramified normalization at a double point gives two smooth branches, and distinct tangent lines characterize an ordinary node",
+   "results": "8 hits: WeierstrassCurve.Affine.Nonsingular, WeierstrassCurve.IsMinimal, WeierstrassCurve.Projective.Point.nonsingular, WeierstrassCurve.IsGoodReduction, WeierstrassCurve.Jacobian.nonsingularLift_zero, WeierstrassCurve.Projective.Point.toAffine_of_singular, WeierstrassCurve.Projective.nonsingularLift_zero, Algebra.etaleLocus_eq_unramfiedLocus_inter_smoothLocus",
+   "date": "2026-10-23",
+   "verdict": "no match: Dedekind ramification indices, Weierstrass nonsingularity and reduction, analytic orders and the reduced-normalization instance do not state these branch multiplicity and tangent assertions."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"multiplicity\"",
+   "results": "0 hits: ",
+   "date": "2026-10-23",
+   "verdict": "no match: Dedekind ramification indices, Weierstrass nonsingularity and reduction, analytic orders and the reduced-normalization instance do not state these branch multiplicity and tangent assertions."
+  },
+  {
+   "tool": "grep",
+   "query": "branch.*multiplicity|multiplicity.*branch|ordinary.*node|distinct.*tangent",
+   "results": "0 hits: ",
+   "date": "2026-10-23",
+   "verdict": "no match: Dedekind ramification indices, Weierstrass nonsingularity and reduction, analytic orders and the reduced-normalization instance do not state these branch multiplicity and tangent assertions."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Reduced curve multiplicity normalization branch orders tangent lines ordinary double point",
+   "results": "8 hits: AlgebraicGeometry.Scheme.Hom.instIsReducedNormalization, analyticOrderAt_smul, Polynomial.derivative_rootMultiplicity_of_root_of_mem_nonZeroDivisors, WeierstrassCurve.IsShortNF, WeierstrassCurve.IsGoodReduction.goodReduction, analyticOrderNatAt_mul, WeierstrassCurve.b₄_of_isCharNeTwoNF, WeierstrassCurve.b₂_of_isCharNeTwoNF",
+   "date": "2026-10-23",
+   "verdict": "no match: Dedekind ramification indices, Weierstrass nonsingularity and reduction, analytic orders and the reduced-normalization instance do not state these branch multiplicity and tangent assertions."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Multiplicity of a reduced algebraic curve equals the sum of the maximal ideal orders on its normalization branches",
+   "results": "8 hits: KummerDedekind.emultiplicity_factors_map_eq_emultiplicity, WeierstrassCurve.valuation_Δ_aux_eq_of_isIntegral, WeierstrassCurve.valuation_Δ_aux, WeierstrassCurve.IsGoodReduction.goodReduction, Ideal.sum_ramification_inertia, NumberField.Ideal.ramificationIdx_primesOverSpanEquivMonicFactorsMod_symm_apply', Ideal.IsDedekindDomain.ramificationIdx_eq_multiplicity, Ideal.ramificationIdx_le_finrank",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern Dedekind ramification, Weierstrass preparation, module support dimension or abstract polynomial HilbertPoly, not the stated local curve branch assertions."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A finite length cokernel inclusion of finite modules over a Noetherian local ring has Hilbert Samuel functions differing by a bounded quantity in dimension one",
+   "results": "8 hits: Module.supportDim_le_supportDim_quotSMulTop_succ, Module.supportDim_quotSMulTop_succ_eq_supportDim, Module.supportDim_add_length_eq_supportDim_of_isRegular, ringKrullDim_le_ringKrullDim_add_spanFinrank, Module.supportDim_quotSMulTop_succ_eq_of_notMem_minimalPrimes_of_mem_maximalIdeal, ringKrullDim_le_ringKrullDim_add_card, isFiniteLength_quotient_span_singleton, Module.supportDim_le_supportDim_quotSMulTop_succ_of_mem_jacobson",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern Dedekind ramification, Weierstrass preparation, module support dimension or abstract polynomial HilbertPoly, not the stated local curve branch assertions."
+  },
+  {
+   "tool": "grep",
+   "query": "branch.*multiplicity|multiplicity.*branch|ordinary.*node|distinct.*tangent",
+   "results": "0 hits: ",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern Dedekind ramification, Weierstrass preparation, module support dimension or abstract polynomial HilbertPoly, not the stated local curve branch assertions."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Hilbert Samuel multiplicity of reduced curve normalization branches tangent ordinary node",
+   "results": "8 hits: emultiplicity_eq_emultiplicity_span, count_span_normalizedFactors_eq_of_normUnit, Polynomial.natDegree_hilbertPoly_of_ne_zero_of_rootMultiplicity_lt, Polynomial.natDegree_hilbertPoly_of_ne_zero, Ideal.ramificationIdx_eq_one_of_map_localization, Ideal.IsDedekindDomain.ramificationIdx_eq_multiplicity, multiplicity, count_span_normalizedFactors_eq",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern Dedekind ramification, Weierstrass preparation, module support dimension or abstract polynomial HilbertPoly, not the stated local curve branch assertions."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"multiplicity\"",
+   "results": "0 hits: ",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern Dedekind ramification, Weierstrass preparation, module support dimension or abstract polynomial HilbertPoly, not the stated local curve branch assertions."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Two smooth branches of a reduced curve with independent tangent directions have completed local ring k power series u v modulo u v",
+   "results": "8 hits: PowerSeries.weierstrassDiv, PowerSeries.weierstrassMod, PowerSeries.IsWeierstrassFactorization, PowerSeries.IsWeierstrassDivision, PowerSeries.IsWeierstrassFactorizationAt, PowerSeries.weierstrassDistinguished, PowerSeries.algEquivQuotientWeierstrassDistinguished, PowerSeries.isWeierstrassFactorization_weierstrassDistinguished_weierstrassUnit",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern Dedekind ramification, Weierstrass preparation, module support dimension or abstract polynomial HilbertPoly, not the stated local curve branch assertions."
+  },
+  {
+   "tool": "grep",
+   "query": "hilbert.?samuel|hilbert.*(length|colength)|length.*hilbert",
+   "results": "0 hits: ",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern Dedekind ramification, Weierstrass preparation, module support dimension or abstract polynomial HilbertPoly, not the stated local curve branch assertions."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Finite colength submodules of one dimensional modules have equal Hilbert Samuel multiplicity",
+   "results": "8 hits: Module.length_eq_one, IsFiniteLength.rec, Submodule.finiteDimensional_of_le, Submodule.finrank_le, Submodule.spanFinrank, Submodule.colon_finsetInf, Submodule.finiteDimensional_finset_sup, Module.length_submodule",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern Dedekind ramification, Weierstrass preparation, module support dimension or abstract polynomial HilbertPoly, not the stated local curve branch assertions."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"HilbertSamuel\"",
+   "results": "0 hits: ",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern Dedekind ramification, Weierstrass preparation, module support dimension or abstract polynomial HilbertPoly, not the stated local curve branch assertions."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finite colength submodule has the same Hilbert Samuel polynomial leading coefficient when the modules have dimension at most one",
+   "results": "8 hits: Module.supportDim_le_supportDim_quotSMulTop_succ, Module.supportDim_quotSMulTop_succ_eq_supportDim, ringKrullDim_le_ringKrullDim_add_spanFinrank, Module.supportDim_add_length_eq_supportDim_of_isRegular, PowerSeries.spanFinrank_le_spanFinrank_map_constantCoeff_add_one_of_isPrime, Module.supportDim_quotSMulTop_succ_eq_of_notMem_minimalPrimes_of_mem_maximalIdeal, PowerSeries.spanFinrank_eq_spanFinrank_map_constantCoeff_of_X_notMem_of_fg_of_isPrime, Ideal.rank_pow_quot_aux",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern Dedekind ramification, Weierstrass preparation, module support dimension or abstract polynomial HilbertPoly, not the stated local curve branch assertions."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-singular-point-jet-weight-bounds",
+  "date": "2026-10-23",
+  "group": "Q100"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Gieseker stability and closedness of the ten-canonical locus. This input serves Section 3.2, Definition 7 and Theorem 8, printed pp.13--15, and equation (6) in Section 3.3. Local PDF WANTED; read online. Supporting estimate: Section 3.2, Theorem 8 proof steps (4)--(6) and the cusp/tangent-line calculations, printed pp.14--15. Coefficients here are a_F=e_F/2, not e_F. The two tangent-line cases are also in Gieseker Proposition 1.0.6, printed pp.49--55. Local PDFs WANTED. Supporting input: Section 3.2, Theorem 8 proof steps (4)--(6), printed pp.14--15, local branch inputs to the jet flags. Compare Stacks curves.tex Tags 0C1U (equation-multicross), 0C1V (lemma-multicross-algebra), 0C1W (definition-multicross); the multiplicity and tangent criterion here are an agent expansion, not a claim that these tags state the entire result.",
+   "via": [
+    "lem-sfb-singular-point-jet-weight-bounds",
+    "lem-sfb-gieseker-potential-stability",
+    "lem-sfb-gieseker-ten-canonical-hilbert-stability",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-branch-multiplicity-tangent-criterion",
+  "worker": "stage1",
+  "summary": "Nine-step proof using existing normalization, finite-quotient, length, Hilbert growth, section-degree and cotangent nodes; no new nodes. Wrote the finite-colength slope sandwich and the complete-local cotangent argument explicitly. Statement unchanged; no attachment in the live project Lean.",
+  "blueprint": "Inherited det-thm-sf-ctf-stability-direct-images proof (3) alteration prerequisite chain, specifically Morrison Section 3.2 Theorem 8(4)--(6): normalized branch multiplicities for the point/ramification flags and the distinct/common tangent alternatives. Latest blueprint renamed its visible file sk-thm-sf-ctf-stability-direct-images.proof.md, retaining of = det-thm-sf-ctf-stability-direct-images.",
+  "tool_uses": [
+   {
+    "node": "lem-trf-curve-delta-completion-data",
+    "why": "Finite normalization and completed local curve data, used only as generic local curve algebra for this unit's jet flags."
+   },
+   {
+    "node": "lem-trf-normalized-curve-branch-coordinates",
+    "why": "Actual normalization fibre points and their structural power-series coordinates; generic local algebra, not a replacement of the unit route."
+   },
+   {
+    "node": "lem-weil-pbc-completion-localized-algebra-finite-quotients",
+    "why": "Finite algebra quotient product and cofinal local ideals, applied to the semilocal normalization; no same-unit node supplies it."
+   },
+   {
+    "node": "lem-weil-pbc-length-additive-short-exact",
+    "why": "Generic module-length additivity for finite simple filtrations and quotient sequences."
+   },
+   {
+    "node": "lem-trf-finite-colength-completion-comparison",
+    "why": "Only the explicit annihilation m^delta(B/A)=0 is used for the elementary slope sandwich."
+   },
+   {
+    "node": "lem-trf-hilbert-samuel-growth-dimension",
+    "why": "Generic eventual polynomial and dimension theorem gives the linear slope at a curve point."
+   },
+   {
+    "node": "lem-sc-rational-tangent-cotangent-duality",
+    "why": "Generic natural tangent/cotangent duality at rational points, needed to read branch linear coefficients."
+   },
+   {
+    "node": "lem-trf-coordinate-axes-normalization",
+    "why": "Generic equal-constant power-series ring and its axes presentation, used as the comparison target."
+   },
+   {
+    "node": "lem-weil-pbc-power-series-field-cohen-regular-complete",
+    "why": "Generic complete Noetherian local structure of k[[U,V]], needed for the existing cotangent surjectivity tool."
+   },
+   {
+    "node": "lem-weil-pbc-complete-local-quotient",
+    "why": "Generic completeness and Noetherianity of the proper quotient k[[U,V]]/(UV)."
+   },
+   {
+    "node": "lem-weil-pbc-adic-completion-mod-power",
+    "why": "Generic finite quotient comparison identifies the local and completed cotangent spaces."
+   },
+   {
+    "node": "lem-weil-pbc-local-completion-local-ring",
+    "why": "Generic maximal-ideal formula for completion, used with its finite quotient comparison."
+   },
+   {
+    "node": "lem-trf-split-node-component-normalization",
+    "why": "Generic explicit branch maps of a split node for the reverse tangent implication; not the new implication proved here."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-trf-curve-delta-completion-data",
+  "lem-trf-normalized-curve-branch-coordinates",
+  "lem-weil-pbc-completion-localized-algebra-finite-quotients",
+  "lem-weil-pbc-length-additive-short-exact",
+  "lem-trf-finite-colength-completion-comparison",
+  "lem-trf-hilbert-samuel-growth-dimension",
+  "lem-sc-rational-tangent-cotangent-duality",
+  "lem-trf-coordinate-axes-normalization",
+  "lem-weil-pbc-power-series-field-cohen-regular-complete",
+  "lem-weil-pbc-complete-local-quotient",
+  "lem-weil-pbc-adic-completion-mod-power",
+  "lem-weil-pbc-local-completion-local-ring",
+  "lem-trf-split-node-component-normalization"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q69-8ff90e643",
+  "group": "Q69",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q69-8ff90e643 (reviewer sub-agent of L); spot-checked: I read the item, all nine steps and all 15 cited statements in full; the delivery has no new nodes. The statement and stmt_deps are byte-identical to live, so nothing is weakened. The item is still unsplit with an empty proof in live and side-live, so no other group has split it, and there is no repair note. proof_deps equals the union of the step uses, and there is no cycle. Step checks: S1 applies finite-quotients with R=A, S=B, p=m, so M_q^c⊂K_q⊂M_q and b_q is finite and at least 1. S2 counts Nb_q simple quotients, each k with A acting through its residue field. S3 combines m^δB⊂A from the finite-colength node with c=max(1,δ) to give δ+h(N−c)≤sN≤δ+h(N), and the degree-1 Hilbert polynomial then gives t_p=Σb_q. S4: the forms X_j−p_jX_0 vanish together only at p, so some form through p is nonzero on the component; the section-degree cap with m=q=1 then gives the bound, and the empty case is covered. S5: m_pR_q⊂m_q² iff b_q≥2, by tangent/cotangent duality. S6–S7: H⊂P≅k[[U,V]]/(UV); I checked the cotangent-surjectivity node against Stacks 06GZ (1)⇔(3) with C=k, which gives H=P. S8: the split-node lemma's branch maps make the cotangent map an isomorphism, so the tangents are independent. S9: first-order coefficient argument. Small cases tested: smooth point, cusp, node, tacnode (also in char 2), line and conic. I searched the DAG for duplicates (Hilbert–Samuel, tangent, uv terms) and found none. Batch-5: all seven flagged trf citations (0C1R/0C3V curve data, branch coordinates, finite-colength completion, 00K8 Hilbert growth, 0C1U axes, 0CBW split node, degree additivity reached through the section-degree cap) are generic local or curve algebra, not trace formula or Poincaré duality statements or their proof steps, and the item's closure contains no nt-assume leaf. I accept the tool_uses. Advisory: the inherited statement cites def-sc-normalization for 'componentwise normalization', which by definition is the same object as def-weil-pbc-reduced-normalization; Morrison is absent locally and remains WANTED."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.BranchMultiplicityTangentCriterion",
+  "declaration": "AlgebraicGeometry.ProjectiveCurveBranches.branch_multiplicity_tangent_criterion",
+  "declarations": [
+   "AlgebraicGeometry.ProjectiveCurveBranches.Ambient",
+   "AlgebraicGeometry.ProjectiveCurveBranches.Component",
+   "AlgebraicGeometry.ProjectiveCurveBranches.Branch",
+   "AlgebraicGeometry.ProjectiveCurveBranches.localMap",
+   "AlgebraicGeometry.ProjectiveCurveBranches.branchIdeal",
+   "AlgebraicGeometry.ProjectiveCurveBranches.componentDegree",
+   "AlgebraicGeometry.ProjectiveCurveBranches.HasMultiplicity",
+   "AlgebraicGeometry.ProjectiveCurveBranches.tangentImage",
+   "AlgebraicGeometry.ProjectiveCurveBranches.linearGerm",
+   "AlgebraicGeometry.ProjectiveCurveBranches.lineEquations",
+   "AlgebraicGeometry.ProjectiveCurveBranches.HasOrderAtLeastTwo",
+   "AlgebraicGeometry.ProjectiveCurveBranches.HasSplitNodeCompletion",
+   "AlgebraicGeometry.ProjectiveCurveBranches.branch_multiplicity_tangent_criterion"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/BranchMultiplicityTangentCriterion.lean",
+  "statement": "theorem branch_multiplicity_tangent_criterion (k : Type u) [Field k] [IsAlgClosed k] (r : ℕ) (hr : 2 ≤ r) (D : Scheme.{u}) [IsReduced D] (i : D ⟶ Ambient k r) [IsClosedImmersion i] (hpure : D.IsPureDimension 1) (p : D) (hp : IsClosed ({p} : Set D)) (hprational : Function.Bijective ((StructureSheaf.toStalk k ((i ≫ (Ambient k r ↘ Spec (.of k))) p) ≫ (i ≫ (Ambient k r ↘ Spec (.of k))).stalkMap p ≫ D.residue p).hom)) (hnormal : ∀ Z : irreducibleComponents D, Smooth ((D.normalizedComponentMap Z ≫ i) ≫ (Ambient k r ↘ Spec (.of k))) ∧ IsProper ((D.normalizedComponentMap Z ≫ i) ≫ (Ambient k r ↘ Spec (.of k))) ∧ ConnectedSpace (Component D Z)) (t : ℕ) (ht : HasMultiplicity D p t) : ∃ (b : Branch D p → ℕ) (s : Finset (Branch D p)), (∀ q : Branch D p, q ∈ s) ∧ (∀ q : Branch D p, 1 ≤ b q ∧ branchIdeal D p q = IsLocalRing.maximalIdeal ((Component D q.1).presheaf.stalk q.2.1) ^ b q) ∧ t = ∑ q ∈ s, b q ∧ (∀ Z : irreducibleComponents D, (∑ q ∈ s, @ite ℤ (q.1 = Z) (Classical.propDecidable _) (b q : ℤ) 0) ≤ componentDegree k r D i Z) ∧ (∀ q : Branch D p, tangentImage k r D i p q = {0} ↔ 2 ≤ b q) ∧ (t = 2 → (∀ q : Branch D p, tangentImage k r D i p q ≠ {0}) → ∃ q₁ q₂ : Branch D p, q₁ ≠ q₂ ∧ (∀ q : Branch D p, q = q₁ ∨ q = q₂) ∧ b q₁ = 1 ∧ b q₂ = 1 ∧ (∀ q : Branch D p, Module.finrank ((Ambient k r).residueField (i p)) (Submodule.span ((Ambient k r).residueField (i p)) (tangentImage k r D i p q)) = 1 ∧ ∃ W : Submodule k (ULift.{u} (Fin r) → k), (W : Set (ULift.{u} (Fin r) → k)) = lineEquations k r D i p q ∧ Module.finrank k ((ULift.{u} (Fin r) → k) ⧸ W) = 2) ∧ (lineEquations k r D i p q₁ ≠ lineEquations k r D i p q₂ ↔ HasSplitNodeCompletion k r D i p) ∧ (lineEquations k r D i p q₁ = lineEquations k r D i p q₂ → ∀ a : ULift.{u} (Fin r) → k, a ∈ lineEquations k r D i p q₁ → HasOrderAtLeastTwo k r D i p q₁ a ∧ HasOrderAtLeastTwo k r D i p q₂ a))",
+  "branch": "sheaf-dag",
+  "by": "Q95",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "Componentwise normalization and its canonical component map use the landed declarations of def-weil-pbc-reduced-normalization and def-sfb-stable-pointed-curve. Auxiliary definitions only unpack the notions in this statement. Projective tangent lines are represented by their codimension-two subspaces of vanishing homogeneous linear forms. The completion isomorphism explicitly preserves the structural k-map."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-17b74b2bb",
+  "group": "Q95",
+  "result": "pass",
+  "note": "Read the node, the 9-step proof, the module, the report and the source of every dependency declaration used (reducedNormalizationComponent, normalizedComponentMap, Modules.degree, tensorPullback, schemeTangentSpace/schemeTangentMap, coordRatio/standardOpen, IsPureDimension). All clauses match: closed rational p, componentwise normalization with smooth/proper/connected over the induced k-structure, e_i = degree of the pullback of twist 1, b_q>=1 with branchIdeal = m^b, t = sum over a Finset containing every branch, per-component bound over all Z, tangentImage={0} iff b>=2, the t=2 case with two exponent-one branches, finrank-1 tangent images and codimension-2 line equations, distinct lines iff k-compatible ring iso of the completion with k[[u,v]]/(uv), coincident lines give m_q^2 membership in every chart. HasMultiplicity is the n+1 slope; t is unique and exists by the Hilbert-Samuel node. hprational and hnormal follow from the other hypotheses, so they are not stronger. lean.statement is verbatim; one sorry; docstrings present. The 3 added stmt_deps are existing def nodes owning the declarations used; no dependency record changed. H4 search found no existing multiplicity definition. Edge cases checked: empty/disconnected D, self-node, cusp, tacnode, r=2, any characteristic, universes. Not recompiled per instructions. Advisory: the Second reading by Q95 is the worker's own reading."
+ }
+}

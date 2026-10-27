@@ -12,77 +12,57 @@
  ],
  "proof": [
   {
-   "text": "Put $P=\\pi_0(T)$ and $Q=\\pi_0(S)$. If $C$ is a connected component of $T$, then $f(C)$ is connected: a separation of its image by relatively open sets would pull back to a separation of $C$. Thus $f(C)$ lies in a unique connected component of $S$. Define $h:P\\to Q$ by that component. This is independent of the representative, and $h q_T=q_S f$ holds pointwise. For an open $W\\subseteq Q$, the set $q_T^{-1}(h^{-1}(W))=f^{-1}(q_S^{-1}(W))$ is open. The quotient topology on $P$ therefore makes $h$ continuous. Surjectivity of $q_T$ also proves uniqueness of a map satisfying the normalization.",
-   "uses": [],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/topology.tex",
-    "place": "Agent quotient-topology argument, with the component quotient used in Tag 0906 (lemma-spectral-pi0)."
-   }
-  },
-  {
-   "text": "Both $T$ and $S$ are spectral by hypothesis. Apply [lem-pe-spectral-components-profinite] to each: $P$ and $Q$ are compact Hausdorff totally disconnected spaces. In particular the clopen-basis theorem [lem-weil-pbc-profinite-clopen-basis] applies to both $P$ and $Q$. No assertion that individual components of $T$ or $S$ are open is needed.",
+   "text": "Apply [lem-sfb-component-quotient-clopen-naturality] to the given continuous map $f:T\\to S$. With $P=\\pi_0(T)$ and $Q=\\pi_0(S)$ it supplies the continuous map $h:P\\to Q$ sending the component of $t$ to that of $f(t)$, with $h q_T=q_S f$. Its natural clopen equivalence transfers the assumed bijectivity of $f^{-1}$ on clopens to bijectivity of $h^{-1}:\\operatorname{Clop}(Q)\\to\\operatorname{Clop}(P)$.",
    "uses": [
-    "lem-pe-spectral-components-profinite",
-    "lem-weil-pbc-profinite-clopen-basis"
+    "lem-sfb-component-quotient-clopen-naturality"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/topology.tex",
-    "place": "Tag 0906 (lemma-spectral-pi0), and Tag 08ZZ (lemma-profinite-refine-open-covering)."
+    "place": "Agent component-quotient functoriality and natural clopen descent, expanding the clopen-saturation passage in Tag 0900 (lemma-pi0-profinite), proof. This statement does not claim the profiniteness conclusion of that tag."
    }
   },
   {
-   "text": "For any space $Z$, every clopen subset $U$ is a union of connected components: a component meeting both $U$ and its complement would be separated by their intersections with it. Consequently $q_Z^{-1}(q_Z(U))=U$. The quotient topology shows that $q_Z(U)$ is clopen, since its preimage and the preimage of its complement are open. Conversely the preimage of a clopen subset under $q_Z$ is clopen, by the same quotient-topology criterion. As $q_Z$ is surjective, these operations are inverse bijections between $\\operatorname{Clop}(Z)$ and $\\operatorname{Clop}(\\pi_0(Z))$. The normalization in step 1 gives $q_T^{-1}(h^{-1}(V))=f^{-1}(q_S^{-1}(V))$ for every clopen $V\\subseteq Q$. Conjugating the assumed bijection $f^{-1}$ by these two quotient-preimage bijections proves that $h^{-1}:\\operatorname{Clop}(Q)\\to\\operatorname{Clop}(P)$ is bijective.",
+   "text": "Apply [lem-pe-spectral-components-profinite] separately to the spectral spaces $T$ and $S$. It gives compactness, Hausdorffness and total disconnectedness of $P$ and $Q$, exactly the space hypotheses of the next step; it requires no spectral-map hypothesis on $f$.",
+   "uses": [
+    "lem-pe-spectral-components-profinite"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/topology.tex",
+    "place": "Tag 0906 (lemma-spectral-pi0)."
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-profinite-clopen-pullback-bijective-open] to $h$, with continuity and the clopen inverse-image bijection from step 1 and both profinite-space hypotheses from step 2. It gives that $h$ is bijective and open, including when a space is empty.",
+   "uses": [
+    "lem-sfb-profinite-clopen-pullback-bijective-open"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/topology.tex",
+    "place": "Agent separation and finite-subcover consequence of Tag 08ZZ (lemma-profinite-refine-open-covering), using its pointwise clopen-basis consequence. This statement is not the finite-refinement assertion of the tag."
+   }
+  },
+  {
+   "text": "The set-theoretic inverse $h^{-1}:Q\\to P$ is continuous: for every open $O\\subseteq P$, its inverse image under this inverse function is $h(O)$, open by step 3. Thus $h$ is a homeomorphism. Step 1 identifies this very map with $\\pi_0(f)$ and retains the required normalization. No point was chosen from an empty space.",
    "uses": [],
    "elementary": true,
    "source": {
     "document": "literature/stacks-project/topology.tex",
-    "place": "Elementary clopen saturation argument appearing in the proof of Tag 0900 (lemma-pi0-profinite), expanded for the two component quotients."
-   }
-  },
-  {
-   "text": "To prove injectivity, suppose $a,b\\in P$ are distinct. As $P$ is Hausdorff, $P\\setminus\\{b\\}$ is an open neighbourhood of $a$. By [lem-weil-pbc-profinite-clopen-basis], choose a clopen $U$ with $a\\in U\\subseteq P\\setminus\\{b\\}$. Surjectivity of the clopen inverse-image map in step 3 gives a clopen $V\\subseteq Q$ with $U=h^{-1}(V)$. Then $h(a)\\in V$ and $h(b)\\notin V$, so $h(a)\\ne h(b)$. Thus $h$ is injective.",
-   "uses": [
-    "lem-weil-pbc-profinite-clopen-basis"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/topology.tex",
-    "place": "Tag 08ZZ (lemma-profinite-refine-open-covering), pointwise clopen-basis consequence; agent separation argument."
-   }
-  },
-  {
-   "text": "To prove surjectivity, suppose $y\\in Q$ is outside $h(P)$. For every $x\\in P$, the open set $Q\\setminus\\{y\\}$ contains $h(x)$, since $Q$ is Hausdorff and $h(x)\\ne y$. By [lem-weil-pbc-profinite-clopen-basis], choose a clopen $V_x$ with $h(x)\\in V_x$ and $y\\notin V_x$. The open sets $h^{-1}(V_x)$ cover compact $P$, so finitely many suffice. Their corresponding finite union $V\\subseteq Q$ is clopen, contains $h(P)$, and excludes $y$. Hence $h^{-1}(V)=P=h^{-1}(Q)$. Injectivity of the clopen inverse-image map from step 3 gives $V=Q$, contrary to $y\\notin V$. Therefore $h$ is surjective. This includes $P=\\varnothing$: the finite subcover can be empty, so $V=\\varnothing$ and the same contradiction applies to any proposed $y\\in Q$.",
-   "uses": [
-    "lem-weil-pbc-profinite-clopen-basis"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/topology.tex",
-    "place": "Tag 08ZZ (lemma-profinite-refine-open-covering), clopen-basis consequence; agent finite-subcover argument using compactness from Tag 0906."
-   }
-  },
-  {
-   "text": "For a clopen $U\\subseteq P$, step 3 gives a clopen $V\\subseteq Q$ with $U=h^{-1}(V)$. Bijectivity of $h$ implies $h(U)=V$: one inclusion is immediate, and for $y\\in V$ choose $x$ with $h(x)=y$, obtaining $x\\in U$. Every open subset $O\\subseteq P$ is a union of clopen subsets $U\\subseteq O$ by [lem-weil-pbc-profinite-clopen-basis]. Its image is the union of the open sets $h(U)$, so $h$ is open. The inverse of the continuous bijection $h$ is therefore continuous, since its inverse image of any open $O\\subseteq P$ is $h(O)$. Thus $h=\\pi_0(f)$ is a homeomorphism with precisely the normalization in step 1. If $Q$ is empty then the map $h:P\\to Q$ forces $P$ empty; together with step 5 this covers all empty-space cases.",
-   "uses": [
-    "lem-weil-pbc-profinite-clopen-basis"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/topology.tex",
-    "place": "Tag 08ZZ (lemma-profinite-refine-open-covering), basis consequence; agent open-map argument."
+    "place": "Agent assembly: open continuous bijections have continuous inverses, directly by the definition of continuity."
    }
   }
  ],
  "proof_deps": [
+  "lem-sfb-component-quotient-clopen-naturality",
   "lem-pe-spectral-components-profinite",
-  "lem-weil-pbc-profinite-clopen-basis"
+  "lem-sfb-profinite-clopen-pullback-bijective-open"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/topology.tex",
-  "place": "Clopen-preimage criterion derived explicitly from Tag 0906 (lemma-spectral-pi0), the clopen-saturation argument of Tag 0900 (lemma-pi0-profinite), and Tag 08ZZ (lemma-profinite-refine-open-covering)."
+  "place": "Assembly of natural clopen descent, Tag 0906 (lemma-spectral-pi0), and the clopen separation / finite-subcover argument based on Tag 08ZZ (lemma-profinite-refine-open-covering)."
  },
  "mathlib_searches": [
   {
@@ -217,15 +197,15 @@
   "is": null
  },
  "split_report": {
-  "date": "2026-10-21",
+  "date": "2026-10-22",
   "item": "lem-sfb-spectral-clopen-component-homeomorphism",
   "worker": "stage1",
-  "summary": "Unchanged statement. Constructed the normalized quotient map, identified clopens of a space with clopens of its component quotient, and used the existing spectral-component and profinite-clopen-basis nodes to prove injectivity, surjectivity by a finite subcover, and openness. No new nodes, no Lean changes.",
-  "blueprint": "Realizes the inherited ancestry place: det-thm-sf-ctf-stability-direct-images paragraph (3), generic restriction of continuous coefficient sections on normal schemes, through lem-sfb-normal-generic-continuous-sections step 4. The ancestor tool returns None for this inherited chain; from.node and via are preserved. Whole-blueprint searches for clopen, connected component, and component homeomorphism found no duplicate criterion.",
+  "summary": "Repair of the human re-split return: the statement is unchanged. Extracted two independent, self-contained statement-only lemmas carrying all arguments of old steps 1/3 and 4/5/6, respectively; retained old step 2 as a citation of the existing spectral-component theorem. The parent is now a short assembly. Both new lemmas have genuine logged searches and no proof steps. The complete original proof is retained verbatim in report.md for the future workers.",
+  "blueprint": "Preserves the inherited null blueprint ancestor and its via chain, as confirmed by blueprint_refs ancestor. Realizes the inherited det-thm-sf-ctf-stability-direct-images paragraph (3) obligation, through lem-sfb-normal-generic-continuous-sections step 4: compare component quotients after generic clopen extension. New helper A carries original steps 1/3, helper B original steps 4/5/6; the parent retains original step 2.",
   "tool_uses": [
    {
     "node": "lem-pe-spectral-components-profinite",
-    "why": "Generic topological tool giving compact Hausdorff totally disconnected component quotients for spectral spaces; no node in this unit supplies that statement. It supports, rather than replaces, the inherited normal generic restriction route."
+    "why": "Generic topology tool giving the exact compact Hausdorff totally disconnected hypotheses for spectral component quotients. It supports the existing normal-generic-section route and replaces no coefficient argument."
    }
   ]
  },
@@ -233,12 +213,12 @@
   "lem-pe-spectral-components-profinite"
  ],
  "reviewed": {
-  "date": "2026-10-21",
+  "date": "2026-10-22",
   "by": "L",
-  "reviewer": "NT-cc-O2-6e2bf8832",
-  "group": "O2",
+  "reviewer": "NT-cc-NO-7d2b01272",
+  "group": "NO",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-O2-6e2bf8832 (reviewer sub-agent of L); spot-checked: I read the item in full. The statement is unchanged and is true. I tested it on the empty cases, on connected spaces, on a point mapping into two points (the hypothesis fails, as it should) and on a product of two fields mapping to one field. The delivery has 0 new nodes. Step 1 builds pi0(f) from the image of a connected set being connected, with continuity from the quotient topology and the normalization. Step 2 cites lem-pe-spectral-components-profinite for T and S, which are spectral by hypothesis (f does not need to be spectral), so P and Q are compact Hausdorff totally disconnected. Step 3 is the clopen-saturation bijection Clop(Z)=Clop(pi0 Z), the same argument as in the proof of Stacks 0900 (topology.tex l.4232); with the normalization it makes h^{-1} bijective on clopens. Step 4 (injectivity) separates points with the pointwise clopen-basis leaf (isTopologicalBasis_isClopen, Profinite.lean:66). Step 5 (surjectivity) uses a finite subcover and injectivity on clopens, including the case P empty. Step 6 shows h is open, so its inverse is continuous, without the compact-to-T2 theorem. I checked 08ZZ, 0900, 0906 and 005F in topology.tex. The hypotheses match the parent lem-sfb-normal-generic-continuous-sections step 4. A DAG grep for clopen together with pi0 or homeomorph found no duplicate. I accept the tool use of lem-pe-spectral-components-profinite (generic topology, not a change of route). The item is not dropped, the live node is still unsplit, there is no re-split note and no SGA citation. No changes."
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NO-7d2b01272 (reviewer sub-agent of L); spot-checked: This delivery correctly answers the human's re-split note of 2026-10-21 (released 2026-10-22): the old 6-step, 3650-character proof is redistributed with no step shortened or dropped. Old steps 1 and 3 (the component map h, clopen saturation giving Clop(Z) = Clop(pi0 Z), the naturality square and the transfer of bijectivity) are now new node lem-sfb-component-quotient-clopen-naturality, which holds for arbitrary spaces. Old steps 4-6 (injectivity by clopen separation, surjectivity by a finite subcover including the empty case, clopen images and openness) are now new node lem-sfb-profinite-clopen-pullback-bijective-open, which holds for compact Hausdorff totally disconnected spaces. Old step 2 (lem-pe-spectral-components-profinite) stays in the parent. The parent proof is a 1237-character assembly whose last step (open bijection => homeomorphism) is truly elementary. The two nodes are of comparable size and neither restates the item: A has no spectrality hypothesis and no homeomorphism conclusion; B never mentions components. Both statements are true; I tested them on empty spaces, Sierpinski space, Q, spaces where components differ from quasi-components, 2 points -> 1 point, 1 point -> 2 points, Cantor set -> point, and finite discrete spaces. Sources are Tag 0900 (lemma-pi0-profinite: the saturation passage in its proof, topology.tex l.4232) and Tag 08ZZ (l.4207), both honestly labelled as agent consequences. Both nodes are statement-only with inline definitions, logged searches of three kinds (one leansearch recorded as unavailable), fresh ids, and blueprint fields inherited from the item's chain with a null ancestor. A statement scan of the whole DAG found no duplicates. The item is not dropped, the live item is not yet re-split by anyone else, there is no SGA citation, and the item statement is unchanged, so its citer and the Lean statement are unaffected. Accepted tool use: lem-pe-spectral-components-profinite. No changes."
  },
  "lean": {
   "module": "Sheaf.Topology.SpectralSpace.ClopenComponentHomeomorphism",
@@ -257,5 +237,31 @@
   "group": "NL",
   "result": "pass",
   "note": "Only the item node's lean field changed, and lean.statement matches the file verbatim. Clause by clause: SpectralSpace T/S in independent universes u v, Continuous f, Function.Bijective of the actual Clopens inverse-image map S→T, the canonical hf.connectedComponentsMap, IsHomeomorph plus the explicit normalization π₀(f)∘q_T = q_S∘f, no Nonempty. The statement is true (0906 profinite π₀, clopen saturation, Stone duality). Edge cases checked: empty source and/or target, connected spaces, point→two points, two points→point. Docstrings carry the source, blueprint id and 6 proof steps; there are no definitions and the proof is sorry only. No duplicate in Mathlib or live lean/Sheaf. Not dropped, no repair note, no prior stage-2 landing. Advisory: two plain imports serve only the stage-3 proof. Not recompiled per instruction; the worker reports a clean scompile."
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "reviewed_proof": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "AUTO",
+  "group": "M1",
+  "result": "pass",
+  "landing": "20261023T090713-L-700039",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)",
+  "sorry_before": [
+   "isHomeomorph_connectedComponentsMap_of_bijective_clopen_preimage"
+  ],
+  "sorry_after": []
  }
 }

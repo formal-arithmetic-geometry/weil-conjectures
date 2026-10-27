@@ -1,0 +1,184 @@
+{
+ "id": "lem-pur-scalar-limit-constraint-shift",
+ "kind": "statement",
+ "title": "Shift compatibility of normalized scalar limit constraints",
+ "statement": "Fix a prime l, finite extensions E⊆F of Q_l with embedding i, a compactification c of X→Y, an E whole-system reduction calculus S on X, and e∈N. In the setup of [def-pur-compact-support-scalar-limit-maps] with the shifts of [def-pur-compact-support-scalar-shift-structures], each specified natural transformation commutes with every integer shift: scalarCompletion(l,E,F,i,Y).hom (ordinary/complete scalar balancing), scalarLimitTensor(l,E,F,i,Y).hom (the tensor/total-limit constraint), scalarLimitRestriction(l,E,Y,e) (forward arithmetic restriction, with no e≥1 hypothesis), and scalarSupportLimit(l,E,c,S).hom (completed support restricted to constants compared to the actual strict total limit). Composite shifts are the indicated canonical composite structures, in particular the target of scalarCompletion uses normalized completed scalar extension followed by exact constant restriction. Underlying definitions are those of [def-pur-compact-support-scalar-limit-maps], [def-pur-compact-support-scalar-shift-structures]. For positive e and ramification data, the actual scalarLimitArrow component commutes with integer shifts, after composing the tensor/limit constraint with the strict arrow and inverse cofinal restriction.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 05SU, 06YU, 07A6, 0B56, 0941, 099I, 099L; retained canonical scalar-shift argument of lem-pur-compact-support-scalar-shift-normalization."
+ },
+ "stmt_deps": [
+  "def-pur-compact-support-scalar-limit-maps",
+  "def-pur-compact-support-scalar-shift-structures"
+ ],
+ "proof": [
+  {
+   "text": "Total derived inverse limit is an exact functor by [lem-weil-pbc-ringed-strict-tower-homotopy-limit]. Its unit-normalized composition constraints commute with shifts on K-injective representatives; [lem-weil-pbc-commshift-nattrans-comp-whisker] then gives compatibility of their whiskered composites. Its canonical comparison can be computed by shifting a K-injective tower resolution: [lem-weil-pbc-kinjective-shift] ensures that this is again such a resolution, and termwise inverse limit commutes with $[r]$. For the explicit Roos realization, countable products are exact on the pro-etale module site by [lem-weil-proetale-countable-products-exact]. The zigzag of [lem-sf-strict-roos-derived-limit-comparison] has arrows applying the resolution map to both cone coordinates and the augmentation from the termwise limit with zero extra coordinate. The former commutes with the signed cone shift because it is diagonal; the latter does because its signed coordinate is zero, by [lem-weil-roos-comm-shift]. Thus the explicit Roos shift and the canonical total-derived-limit shift coincide under this zigzag. No uniqueness of a cone in a triangulated category is used.",
+   "uses": [
+    "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
+    "lem-weil-pbc-commshift-nattrans-comp-whisker",
+    "lem-weil-pbc-kinjective-shift",
+    "lem-weil-proetale-countable-products-exact",
+    "lem-sf-strict-roos-derived-limit-comparison",
+    "lem-weil-roos-comm-shift"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0941, lemma-derived-limit-is-ok; derived.tex Tags 070H (definition-K-injective), 014E (definition-cone), 08TC (definition-derived-limit); signed zigzag calculation"
+   }
+  },
+  {
+   "text": "Consider the specified cofinal map and tensor/product map in [lem-pur-compact-support-roos-cofinality]. The former has product-arrow components $a_e(x)_n=x_{en}$ and $b_e(y)_n=\\sum_{i=en}^{e(n+1)-1}t_{en}\\cdots t_{i-1}y_i$. Both are degree-zero maps commuting with the termwise shift: each summand has the same coefficient and transition before and after shifting. The product comparison is characterized by its projections as in [lem-weil-product-comm-shift]. On the unshifted-product coordinate $x$ the Roos shift is this product comparison, and on the extra shifted-product coordinate $y$ it is $(-1)^r$ times this comparison, by [lem-weil-roos-comm-shift]. Consequently the square for $r_e$ is diagonal with identical signs on its two routes. The finite-free tensor/product comparison has projections $\\mathrm{pr}_n\\otimes1_B$; tensoring by degree-zero $B$ and these projections commute with $[r]$. On its two cone summands the same diagonal sign calculation gives its shift square. Since $r_e$ is invertible in the derived category, compose its square with $r_e^{-1}$ on both appropriate sides to obtain the square for the specified inverse.",
+   "uses": [
+    "lem-pur-compact-support-roos-cofinality",
+    "lem-weil-product-comm-shift",
+    "lem-weil-roos-comm-shift"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0941, lemma-derived-limit-is-ok; homology.tex Tag 011G and derived.tex Tag 014E; explicit block and tensor/product maps from the cited cofinality statement"
+   }
+  },
+  {
+   "text": "For the remaining ordinary/completed scalar comparison, [lem-weil-finite-free-completed-scalar-comparison] identifies the actual $\\chi_{F/E,N}$ on a K-flat representative $P$ with its compatible quotient product map and zero extra Roos coordinate. Apply [lem-weil-completed-scalar-chain-shift] to this very quotient map. Its product coordinate commutes with shift by the degree-zero tensor formula, and its other coordinate remains zero after multiplication by $(-1)^r$. It follows that $\\chi$ commutes with the prescribed shifts, including the cone sign. The shift on its strict-tower target is the one in [lem-weil-integral-scalar-extension-well-defined]; the scalar comparison on its source is the one of Step 1, since its K-flat computation has exactly that counit square. Thus this calculation compares the chosen morphisms, with the normalized source and target structures, on all resolving representatives and hence in the derived category.",
+   "uses": [
+    "lem-weil-finite-free-completed-scalar-comparison",
+    "lem-weil-completed-scalar-chain-shift",
+    "lem-weil-integral-scalar-extension-well-defined"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 06YU, definition-derived-tor; Tag 0941, lemma-derived-limit-is-ok; homology.tex Tag 011G and derived.tex Tag 014E; quotient-product/zero-coordinate comparison specified in the cited nodes"
+   }
+  },
+  {
+   "text": "The actual scalarSupportLimit is the composite of scalarCompletedLimitRestriction and scalarSystemRestrictionComp whiskered by the native support functor. The first is constructed from the normalized derived-composite maps and the ordinary exact restriction/limit map; the second is the exact derived composition iso. On shifted resolutions every constituent has the same degreewise restriction and composition square, and the unique normalized descents give these squares for the specified maps. Compose and whisker them to obtain the support/limit square.",
+   "uses": [
+    "lem-weil-pbc-commshift-nattrans-comp-whisker",
+    "lem-weil-pbc-ringed-strict-tower-homotopy-limit"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply [lem-pur-strict-scalar-mate-shift] to the actual strict arrow. Whisker by total limit and compose with the tensor/limit square and inverse arithmetic restriction. The associators have identity components; hence the composed transformation has exactly scalarLimitArrow as its component. Cancel intermediate shift comparisons to obtain the displayed total-limit square.",
+   "uses": [
+    "lem-pur-strict-scalar-mate-shift",
+    "lem-weil-pbc-commshift-nattrans-comp-whisker"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-pur-compact-support-roos-cofinality",
+  "lem-pur-strict-scalar-mate-shift",
+  "lem-sf-strict-roos-derived-limit-comparison",
+  "lem-weil-completed-scalar-chain-shift",
+  "lem-weil-finite-free-completed-scalar-comparison",
+  "lem-weil-integral-scalar-extension-well-defined",
+  "lem-weil-pbc-commshift-nattrans-comp-whisker",
+  "lem-weil-pbc-kinjective-shift",
+  "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
+  "lem-weil-product-comm-shift",
+  "lem-weil-proetale-countable-products-exact",
+  "lem-weil-roos-comm-shift"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Expanded retained comparison Steps 12--13; detailed proof in the Lean docstring."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Natural transformations of derived scalar extension commute with shifts, uniquely normalized by the localization counit",
+   "results": "Functor.commShiftOfLocalization; mapDerivedCategoryFactors CommShift; useful for the proved tensor uniqueness clause.",
+   "date": "2026-10-25",
+   "verdict": "Component results only; no statement for the specified canonical maps."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Restriction of scalars along a flat completion map is fully faithful on derived complete modules",
+   "results": "ModuleCat.instFaithfulRestrictScalars and ordinary sheaf restriction; does not apply directly to derived morphisms.",
+   "date": "2026-10-25",
+   "verdict": "Component results only; no statement for the specified canonical maps."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"CommShift\", \"unique\"",
+   "results": "Adjunction.CommShift.compatibilityUnit_unique_left/right; no combined proper/open or Roos constraint lemma.",
+   "date": "2026-10-25",
+   "verdict": "Component results only; no statement for the specified canonical maps."
+  },
+  {
+   "tool": "grep",
+   "query": "scalarCommShift_existsUnique|scalarLimitArrow|originalScalarMateShift|completeScalarRestrictionFaithful",
+   "results": "Existing scalarCommShift_existsUnique is reused; original-site and diagram-site factor equations and complete Hom injectivity are not separately stated. Blueprint scalar shift and complete restriction searches found no exact match.",
+   "date": "2026-10-25",
+   "verdict": "Component results only; no statement for the specified canonical maps."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.CompactSupportScalarShiftNormalization",
+  "date": "2026-10-25",
+  "group": "Q2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-pur-rational-and-qbar-purity",
+   "place": "Imported Proof Step 2 (Qbar-stage), independence of finite coefficient extension; unit sk-thm-purity-transport Step 3, transitivity in coefficient extensions; auxiliary Canonical shifts of scalar proper/open mates and scalar limit maps (returned comparison Steps 12, 13); substep: Shift compatibility of normalized scalar limit constraints",
+   "via": [
+    "lem-pur-compact-support-scalar-shift-normalization",
+    "lem-pur-compact-support-integral-coefficient-comparison",
+    "lem-pur-adic-purity-scalar-naturality"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-thm-sf-compatibility",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.ScalarLimitConstraintShift",
+  "file": "lean/Sheaf/Paper/ScalarLimitConstraintShift.lean",
+  "declaration": "WeilConjectures.PurStrictScalar.scalarLimitConstraintShift",
+  "statement": "theorem scalarLimitConstraintShift {X Y : Scheme.{u}} {f : X ⟶ Y} (c : Compactification f) (S : CoefficientDerivedSystemCalculus.{u, u} l E X) (e : ℕ) : @NatTrans.CommShift _ _ _ _ _ _ (scalarCompletion l E F i Y).hom ℤ _ _ _ inferInstance (scalarCompletionTargetCommShift l E F i Y) ∧ NatTrans.CommShift (scalarLimitTensor l E F i Y).hom ℤ ∧ NatTrans.CommShift (scalarLimitRestriction l E Y e) ℤ ∧ @NatTrans.CommShift _ _ _ _ _ _ (scalarSupportLimit l E c S).hom ℤ _ _ _ (by letI := scalarSupportCommShift l E c S letI := constantRestrictionCommShift l E Y exact Functor.CommShift.comp (A := ℤ) _ _) (by letI := supportCommShift l E c S exact Functor.CommShift.comp (A := ℤ) _ _) ∧ (∀ (S' : CoefficientDerivedSystemCalculus.{u, u} l F X) (he : PurCompactSupport.Ramification l E F i e) (hepos : 1 ≤ e) (K : DerivedCategory (scalarReductionSource l E X)) (r : ℤ), scalarLimitArrow l E F i c S S' e he hepos (K⟦r⟧) ≫ ((pbcDerivedExtend (completedCoefficientMap l E F i X) ⋙ support l F c S' ⋙ scalarLimit l F Y).commShiftIso r).hom.app K = ((support l E c S ⋙ scalarLimit l E Y ⋙ baseTensor l E F i Y).commShiftIso r).hom.app K ≫ (scalarLimitArrow l E F i c S S' e he hepos K)⟦r⟧')",
+  "branch": "sheaf-dag",
+  "by": "Q2",
+  "date": "2026-10-25"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-bb474",
+  "group": "Q2",
+  "result": "fix",
+  "landing": "20261025T164128-L-956705",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-bb474",
+  "group": "Q2",
+  "result": "fix",
+  "landing": "20261025T164128-L-956705",
+  "kind": "interface",
+  "note": "independent cc review: item theorem signature vs published (identical); moved instance block vs clone (identical but one docstring line); split lemmas vs item conjuncts; witness clauses vs strictScalarMateShift/scalarLimitConstraintShift conclusions; attachment nodes vs scalarCommShift_existsUnique/integralTriangulated"
+ }
+}

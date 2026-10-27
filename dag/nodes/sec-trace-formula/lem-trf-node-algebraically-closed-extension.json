@@ -37,47 +37,40 @@
  ],
  "proof": [
   {
-   "text": "If $y\\in C_\\Omega$ is a point where $C_\\Omega\\to\\operatorname{Spec}\\Omega$ is not smooth, let $x$ be its image in $C$. If $C\\to\\operatorname{Spec}k$ were smooth on an open neighbourhood $U$ of $x$, its base change $U\\times_{\\operatorname{Spec}k}\\operatorname{Spec}\\Omega\\to\\operatorname{Spec}\\Omega$, which is the open inverse image of $U$ in $C_\\Omega$ and contains $y$, would be smooth by clause (2) of [lem-pc-proper-base-change]. Hence $x$ is nonsmooth, and by hypothesis there is a ring isomorphism $\\varphi:\\widehat A\\cong k[[u,v]]/(uv)$, where $A=\\mathcal O_{C,x}$ with maximal ideal $\\mathfrak m$ and $\\widehat A$ is its $\\mathfrak m$-adic completion. The isomorphism is only a ring isomorphism, so the residue field is identified as follows. The ring $k[[u,v]]/(uv)$ is local with residue field $k$ (a power series with nonzero constant term is a unit). The map $\\widehat A\\to A/\\mathfrak m$, $(x_n)\\mapsto x_1$, of [def-weil-pbc-adic-completion] is surjective, since its composite with $A\\to\\widehat A$ is the quotient map. Its kernel is therefore a maximal ideal, and since $\\widehat A\\cong k[[u,v]]/(uv)$ is local, it is the maximal ideal of $\\widehat A$. Thus $\\kappa(x)=A/\\mathfrak m$ is isomorphic as a field to $k$, so $\\kappa(x)$ is algebraically closed. Choose an affine open neighbourhood $U=\\operatorname{Spec}S$ of $x$ with $S$ a finitely generated $k$-algebra [def-weil-finite-type-morphism], and let $\\mathfrak p\\subset S$ be the prime of $x$. Then $\\kappa(x)=\\operatorname{Frac}(S/\\mathfrak p)$ is a finitely generated field extension of $k$. Suppose it had transcendence degree $d\\ge1$. Choose a transcendence basis $t_1,\\dots,t_d$ among the generators, so that $e=[\\kappa(x):k(t_1,\\dots,t_d)]$ is finite. Take a prime $\\ell>e$ different from the characteristic. The polynomial $X^\\ell-t_1$ is irreducible over $k(t_1,\\dots,t_d)$ by Eisenstein's criterion at the prime $t_1$ of $k[t_1,\\dots,t_d]$ and Gauss's lemma. It has a root in the algebraically closed field $\\kappa(x)$, so $\\ell\\le e$, a contradiction. Hence $\\operatorname{trdeg}_k\\kappa(x)=0$. By [lem-kun-closed-point-field](a), applied to the finite-type $k$-scheme $U$, the point $x$ is closed in $U$ (so $\\mathfrak p$ is a maximal ideal of $S$) and $\\kappa(x)$ is finite over $k$. Since $k$ is algebraically closed, the structure map $k\\to\\kappa(x)=S/\\mathfrak p$ is an isomorphism.",
+   "text": "Let $y\\in C_\\Omega$ be nonsmooth and let $x$ be its image in $C$. A smooth open neighbourhood of $x$ would pull back to a smooth open neighbourhood of $y$, by clause (2) of [lem-pc-proper-base-change]. Thus $x$ is nonsmooth and the hypothesis gives $\\widehat{\\mathcal O}_{C,x}\\cong k[[u,v]]/(uv)$ as rings. By [lem-trf-nodal-completion-rational-point], $x$ is closed and the structure map $k\\to\\kappa(x)$ is an isomorphism.",
    "uses": [
-    "def-weil-finite-type-morphism",
-    "def-sbc-smooth-morphisms",
-    "def-weil-pbc-adic-completion",
-    "def-weil-pbc-multivariate-power-series",
     "lem-pc-proper-base-change",
-    "lem-kun-closed-point-field"
+    "lem-trf-nodal-completion-rational-point"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/curves.tex",
-    "place": "Tag 0C56 (lemma-node-field-extension), proof, first paragraph: reduction to closed points and residue fields; closedness via Zariski's lemma"
+    "place": "Tag 0C56, lemma-node-field-extension, closed-point reduction; abstract ring-isomorphism refinement extracted to the rational-point node."
    }
   },
   {
-   "text": "With $U=\\operatorname{Spec}S$ and the maximal ideal $\\mathfrak p$ of Step 1, $S/\\mathfrak p=k$. By the affine fibre-product identification, the open inverse image of $U$ in $C_\\Omega$ is $U_\\Omega=\\operatorname{Spec}(S\\otimes_k\\Omega)$. The fibre of $U_\\Omega\\to U$ over $x$ is $\\operatorname{Spec}(\\kappa(x)\\otimes_k\\Omega)=\\operatorname{Spec}\\Omega$, a single point, namely the prime $\\mathfrak q=\\ker(S\\otimes_k\\Omega\\to\\Omega)$, $s\\otimes\\lambda\\mapsto\\bar s\\lambda$. Therefore $y$ is this point. Put $A=S_{\\mathfrak p}$ and $B=(S\\otimes_k\\Omega)_{\\mathfrak q}$, so that $A=\\mathcal O_{C,x}$ and $B=\\mathcal O_{C_\\Omega,y}$.",
+   "text": "Choose an affine open $U=\\operatorname{Spec}S$ containing $x$, with $S$ finitely generated over $k$ [def-weil-finite-type-morphism]. Its prime $\\mathfrak p$ is maximal and $S/\\mathfrak p=k$ by Step 1. By [lem-weil-pbc-fibre-product-affine-spectra], $U_\\Omega=\\operatorname{Spec}(S\\otimes_k\\Omega)$. The primes over $\\mathfrak p$ are those of $(S/\\mathfrak p)\\otimes_k\\Omega=\\Omega$, hence there is exactly one: $\\mathfrak q=\\ker(S\\otimes_k\\Omega\\to\\Omega)$, $s\\otimes\\lambda\\mapsto\\bar s\\lambda$. It represents $y$. Set $A=S_{\\mathfrak p}$ and $B=(S\\otimes_k\\Omega)_{\\mathfrak q}$. By [lem-weil-pbc-affine-open-stalk-localization], these identify with $\\mathcal O_{C,x}$ and $\\mathcal O_{C_\\Omega,y}$ via the germ maps.",
    "uses": [
     "def-weil-finite-type-morphism",
-    "def-pc-fibre-product",
-    "lem-weil-pbc-fibre-product-affine-spectra"
+    "lem-weil-pbc-fibre-product-affine-spectra",
+    "lem-weil-pbc-affine-open-stalk-localization"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/curves.tex",
-    "place": "Tag 0C56, proof: localizing at the points over the closed point and identifying the scalar-extension local ring"
+    "place": "Tag 0C56, affine scalar-extension argument, and varieties.tex Tag 0C54, lemma-base-change-complete-local-ring."
    }
   },
   {
-   "text": "Apply [lem-trf-separable-closed-point-formal-presentation] to $S$, $\\mathfrak p$ and $A$. Its hypothesis holds because $F=S/\\mathfrak p=k$, which is trivially finite separable over $k$. It supplies a presentation: a $k$-algebra section $\\sigma:k\\to\\widehat A$, necessarily the structure map, and a continuous surjection of $k$-algebras $T=k[[t_1,\\ldots,t_n]]\\twoheadrightarrow\\widehat A$ with $n\\ge2$ and kernel $I=(f_1,\\ldots,f_s)\\subseteq(t_1,\\ldots,t_n)$. Thus $\\widehat A\\cong T/I$ as $k$-algebras. Combined with $\\varphi$ of Step 1, $T/I$ is isomorphic as a ring to $k[[u,v]]/(uv)=k[[u,v]]/(au^2+buv+cv^2)$ with $a=c=0$, $b=1$ and $b^2-4ac=1\\ne0$. Clause (c)$\\Rightarrow$(b) of [lem-trf-formal-jacobian-quadratic-criterion] (with $F=k$) gives a complete local $k$-algebra isomorphism $T/I\\cong k[[u,v]]/(q)$, where $q=a'u^2+b'uv+c'v^2$ with $b'^2-4a'c'\\ne0$. Since $k$ is algebraically closed, $q=\\ell_1\\ell_2$ with $\\ell_1=\\alpha u+\\beta v$ and $\\ell_2=\\gamma u+\\delta v$. If $a'\\ne0$, factor using the roots of $a'z^2+b'z+c'$; if $a'=0$, take $q=v(b'u+c'v)$. Then $b'^2-4a'c'=(\\alpha\\delta+\\beta\\gamma)^2-4\\alpha\\beta\\gamma\\delta=(\\alpha\\delta-\\beta\\gamma)^2$ in every characteristic, so $\\alpha\\delta-\\beta\\gamma\\ne0$. The $k$-linear substitution $u\\mapsto\\ell_1$, $v\\mapsto\\ell_2$ is therefore a continuous $k$-algebra automorphism of $k[[u,v]]$ carrying $(uv)$ onto $(q)$. Composing gives a $k$-algebra isomorphism $k[[u,v]]/(uv)\\cong\\widehat A$; it is continuous because it carries the maximal ideal onto the maximal ideal. Hence $k[[u,v]]\\twoheadrightarrow\\widehat A$, with $\\sigma$ the structure map, is a presentation with $n=2$ and single relation $f_1=uv\\in(u,v)$. The base-change clause of the same node, for the extension field $K=\\Omega$ with the given inclusion $k=F\\hookrightarrow\\Omega$ [def-pc-field-extension], holds for every presentation. It gives $\\widehat B\\cong\\Omega[[u,v]]/(uv)$ as complete local $\\Omega$-algebras, in particular as rings. This is the required conclusion at $y$.",
+   "text": "Apply [lem-trf-rational-nodal-completion-algebra] to $S,\\mathfrak p,A$: it replaces the abstract ring isomorphism by a continuous $k$-algebra presentation $k[[u,v]]\\twoheadrightarrow\\widehat A$ with kernel $(uv)$. Apply the base-change clause of [lem-trf-separable-closed-point-formal-presentation] to this presentation, with $F=S/\\mathfrak p=k$, $K=\\Omega$, $n=2$, and $f_1=uv$. The residue-field hypothesis is satisfied because $k/k$ is finite separable; the coefficient section is the structure map. That clause applies to every presentation and to exactly the prime $\\mathfrak q$ of Step 2. It gives $\\widehat B\\cong\\Omega[[u,v]]/(uv)$ as complete local $\\Omega$-algebras, hence as rings, as required.",
    "uses": [
-    "lem-trf-separable-closed-point-formal-presentation",
-    "lem-trf-formal-jacobian-quadratic-criterion",
-    "def-weil-pbc-adic-completion",
-    "def-weil-pbc-multivariate-power-series",
-    "def-pc-field-extension"
+    "lem-trf-rational-nodal-completion-algebra",
+    "lem-trf-separable-closed-point-formal-presentation"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/curves.tex",
-    "place": "Tag 0C56 (lemma-node-field-extension), proof, second paragraph: a k-algebra presentation (Varieties 0C54, lemma-base-change-complete-local-ring) and the comparison k[[x]]/(g) = k[[s,t]]/(st) iff K[[x]]/(g) = K[[s,t]]/(st), here via the presentation k[[u,v]]/(uv) itself"
+    "place": "Tag 0C56, formal-presentation argument; coefficient rectification extracted to its own node and varieties.tex Tag 0C54 used for scalar extension."
    }
   },
   {
@@ -91,16 +84,12 @@
   }
  ],
  "proof_deps": [
-  "def-pc-fibre-product",
-  "def-pc-field-extension",
-  "def-sbc-smooth-morphisms",
   "def-weil-finite-type-morphism",
-  "def-weil-pbc-adic-completion",
-  "def-weil-pbc-multivariate-power-series",
-  "lem-kun-closed-point-field",
   "lem-pc-proper-base-change",
-  "lem-trf-formal-jacobian-quadratic-criterion",
+  "lem-trf-nodal-completion-rational-point",
+  "lem-trf-rational-nodal-completion-algebra",
   "lem-trf-separable-closed-point-formal-presentation",
+  "lem-weil-pbc-affine-open-stalk-localization",
   "lem-weil-pbc-fibre-product-affine-spectra"
  ],
  "proof_origin": {
@@ -149,12 +138,23 @@
  },
  "chapter": "sec-trace-formula",
  "unit": "sk-i-curve-zero",
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
  "split_report": {
-  "date": "2026-10-18",
+  "date": "2026-10-22",
   "item": "lem-trf-node-algebraically-closed-extension",
   "worker": "stage1",
-  "summary": "Audited the imported statement against Stacks Tag 0C56. No finished Lean declaration exists. The proof is split into the pointwise smoothness/closed-point reduction, affine scalar-extension local-ring identification, and application of the existing completed-local-ring base-change presentation with the presentation k[[u,v]]/(uv); the empty case is vacuous. No new node was needed. The statement and hypotheses are unchanged. Maintainer-review repair (2026-10-18): the hypothesis is a ring isomorphism, not a k-algebra isomorphism, so Step 1 now derives kappa(x)=k and closedness of x (residue field of the completion, transcendence-degree argument, Zariski's lemma via lem-kun-closed-point-field). Step 3 now turns the ring isomorphism into a k-algebra presentation k[[u,v]]/(uv) through lem-trf-formal-jacobian-quadratic-criterion (c)=>(b) and a linear change of variables, before applying the base-change clause.",
+  "summary": "Audited the imported statement against Stacks Tag 0C56. No finished Lean declaration exists. The proof is split into the pointwise smoothness/closed-point reduction, affine scalar-extension local-ring identification, and application of the existing completed-local-ring base-change presentation with the presentation k[[u,v]]/(uv); the empty case is vacuous. No new node was needed. The statement and hypotheses are unchanged. Maintainer-review repair (2026-10-18): the hypothesis is a ring isomorphism, not a k-algebra isomorphism, so Step 1 now derives kappa(x)=k and closedness of x (residue field of the completion, transcendence-degree argument, Zariski's lemma via lem-kun-closed-point-field). Step 3 now turns the ring isomorphism into a k-algebra presentation k[[u,v]]/(uv) through lem-trf-formal-jacobian-quadratic-criterion (c)=>(b) and a linear change of variables, before applying the base-change clause. Re-split repair by N9 on 2026-10-22: old Step 1 residue-field/closed-point argument and old Step 3 coefficient rectification are now two independent statement-only unsplit nodes. The parent only assembles smoothness base change, rationality, affine scalar extension, and completion base change. Every old argument is preserved verbatim and assigned in report.md; the item statement is unchanged.",
   "blueprint": "Realizes the ancestor lem-trf-local-term-locality proof route at the clause ‘nodal geometric fibres over the chosen algebraic closure give nodal fibres over every algebraically closed field’, specifically the semistable alteration input and arbitrary-base-change paragraph.",
   "tool_uses": [
    {
@@ -162,22 +162,23 @@
     "why": "Step 1 uses the generic scheme-theoretic fact that smoothness is preserved by arbitrary base change; the trace-formula unit has no replacement node for this foundational property."
    },
    {
-    "node": "lem-kun-closed-point-field",
-    "why": "Step 1 uses Zariski's lemma (a point of a finite-type scheme over a field is closed iff its residue field has transcendence degree 0, equivalently is finite) as a generic black box; no node of sk-i-curve-zero states it, and other sec-trace-formula nodes already use it this way."
+    "node": "lem-weil-pbc-affine-open-stalk-localization",
+    "why": "Step 2 uses the generic affine-open stalk/localization identification for both local rings. This foundational comparison does not replace a step of the trace-formula unit route."
    }
   ]
  },
  "tool_uses": [
   "lem-pc-proper-base-change",
-  "lem-kun-closed-point-field"
+  "lem-kun-closed-point-field",
+  "lem-weil-pbc-affine-open-stalk-localization"
  ],
  "reviewed": {
-  "date": "2026-10-17",
+  "date": "2026-10-22",
   "by": "L",
-  "reviewer": "NT-cc-Q13-ac6fdabcd",
-  "group": "Q13",
+  "reviewer": "NT-cc-N9-cee2b013b",
+  "group": "N9",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q13-ac6fdabcd (reviewer sub-agent of L); spot-checked: I read the item in full; the delivery creates no new nodes. I read every cited node's statement, the parent's two citing steps, and the sources: Stacks curves.tex 0C56 (lemma-node-field-extension) with its proof, 0C4A (lemma-nodal), and Varieties 0C54 (lemma-base-change-complete-local-ring). The statement is unchanged and true. It takes Stacks 0C56 (1)=>(2) for algebraically closed k inside Omega, with the weaker hypothesis of a ring isomorphism instead of a k-algebra one. I tested it on the node, on (uv=0)xA^1 at a non-closed point, on the tacnode and on the empty scheme. Two proof faults, repaired in fixes/dag/nodes/sec-trace-formula/lem-trf-node-algebraically-closed-extension.json. (1) E5/C2, Step 1: 'the isomorphism identifies residue fields, so kappa(x)=k, so x is closed' does not follow from a ring isomorphism, and Zariski's lemma was uncited. The repaired step shows kappa(x) is the residue field of the completion, hence abstractly isomorphic to k and so algebraically closed. Transcendence degree 0 follows from an Eisenstein argument with X^l - t_1. Then lem-kun-closed-point-field(a) gives a maximal ideal with kappa(x)=k; I declared it as a generic tool use. (2) E1/E5, Step 3: the ring isomorphism to k[[u,v]]/(uv) was used as if it were a k-algebra presentation. The repaired step takes any presentation from lem-trf-separable-closed-point-formal-presentation. It applies clause (c)=>(b) of lem-trf-formal-jacobian-quadratic-criterion (same unit, reviewed) to get a nondegenerate quadric q. Over algebraically closed k, q factors as l1*l2 with (alpha*delta - beta*gamma)^2 equal to the discriminant in every characteristic. A linear change of variables then gives a genuine presentation k[[u,v]]/(uv), and the base-change clause yields Omega[[u,v]]/(uv). proof_deps was updated; I checked that the change adds no cycle. I accept the tool uses lem-pc-proper-base-change (clause 2, smooth base change) and lem-kun-closed-point-field. No SGA is cited and I found no duplicate node.; 1 file(s) fixed by the reviewer"
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-N9-cee2b013b (reviewer sub-agent of L); spot-checked: Re-split that answers the released human note of 2026-10-22: the old proof of 5292 chars (steps 2370/628/2010/284) becomes a parent assembly of 2131 chars plus two statement-only unsplit nodes of comparable size. Item statement is byte-identical to live, and the live proof still equals the old text in the report. Node A (lem-trf-nodal-completion-rational-point) carries all of old Step 1 after the smoothness prelude: level-1 residue map, so κ(x)≅k abstractly and is algebraically closed; a field finitely generated over k with an Eisenstein X^ℓ−t₁ argument gives trdeg 0; Zariski gives closed and k≅κ(x), and closedness is global for X locally of finite type. True; checked on the generic point of the node, on non-closed points of (uv)×A¹ and on the empty case. Node B (lem-trf-rational-nodal-completion-algebra) carries old Step 3's rectification: Cohen presentation via lem-trf-separable-closed-point-formal-presentation, then (c)⇒(b) of lem-trf-formal-jacobian-quadratic-criterion, then splitting the nondegenerate quadratic (discriminant=(αδ−βγ)², valid in char 2), a linear substitution and continuity. True. Not a duplicate of lem-trf-rational-node-quadratic-completion (needs dim 1, non-split) or of lem-sfb-separable-node-quadratic-completion. Parent steps checked: lem-pc-proper-base-change(2) is a declared tool; Step 2 handles the fibre over p, the unique prime q and the stalk identification via lem-weil-pbc-affine-open-stalk-localization; Step 3 shows B's presentation satisfies the base-change clause (F=k, σ=structure map, n=2, f₁=uv, K=Ω), giving B̂≅Ω[[u,v]]/(uv). Neither new node restates a parent clause, nothing is dropped (old text kept as handoff), and no SGA is cited. Sources Stacks 0C56 (curves.tex:4388), 0C49 (:3873) and 0C52 (varieties.tex:4044) exist. None of the cited nodes is dropped, and the searches are of three kinds. Maintainer note: the node-level tool_uses still lists lem-kun-closed-point-field, which the parent no longer cites; this is harmless."
  },
  "reviewed_lean": {
   "date": "2026-10-17",

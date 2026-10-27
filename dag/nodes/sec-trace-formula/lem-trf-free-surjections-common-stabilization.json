@@ -1,0 +1,211 @@
+{
+ "id": "lem-trf-free-surjections-common-stabilization",
+ "kind": "statement",
+ "title": "Common zero stabilization of finite free generating surjections",
+ "statement": "Let $R$ be a commutative ring, let $M$ be an $R$-module, let $n,m\\ge0$, and put $F=R^{\\oplus n}$ and $G=R^{\\oplus m}$ [def-weil-pbc-free-module]. Let $\\pi:F\\twoheadrightarrow M$ and $\\pi':G\\twoheadrightarrow M$ be surjective $R$-linear maps. There exist $R$-linear maps $f:G\\to F$ and $g:F\\to G$ such that $\\pi f=\\pi'$ and $\\pi'g=\\pi$. For any such $f,g$, the map\n$$U:F\\oplus G\\longrightarrow G\\oplus F,\\qquad U(x,y)=(y+g(x-fy),x-fy)$$\nis an $R$-linear isomorphism with inverse\n$$U^{-1}(a,b)=(b+f(a-gb),a-gb).$$\nWriting $p(x,y)=\\pi(x)$ and $q(a,b)=\\pi'(a)$, one has $q\\circ U=p$ and $U(\\ker\\pi\\oplus G)=\\ker\\pi'\\oplus F$.",
+ "source": {
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tag 07Z8 (lemma-fitting-ideal), final proof paragraph: the commuting isomorphism between zero-stabilized free presentations; here made explicit by lifts of standard basis vectors and the displayed invertible shears, rather than an abstract isomorphism of kernels."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-free-module"
+ ],
+ "proof": [
+  {
+   "text": "By [def-weil-pbc-free-module], the standard bases make $F$ and $G$ free. By [lem-weil-pbc-free-module-projective] both are projective. Apply the lifting-along-surjections characterization in [def-weil-pbc-projective-module] first with projective domain $G$, surjection $\\pi:F\\twoheadrightarrow M$, and map $\\pi\\prime:G\\to M$, obtaining $f:G\\to F$ with $\\pi f=\\pi\\prime$. Apply it again with projective domain $F$, surjection $\\pi\\prime$, and map $\\pi$, obtaining $g:F\\to G$ with $\\pi\\prime g=\\pi$.",
+   "uses": [
+    "def-weil-pbc-free-module",
+    "lem-weil-pbc-free-module-projective",
+    "def-weil-pbc-projective-module"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 05CE (definition-projective), following paragraph: surjectivity of Hom along surjections; Tag 05CF (lemma-characterize-projective), proof of (2) implies (1): free modules are projective"
+   }
+  },
+  {
+   "text": "Fix any such $f,g$. Define $V(a,b)=(b+f(a-gb),a-gb)$. Each coordinate of $U$ and $V$ is a sum or difference of composites of linear maps and coordinate projections, so both preserve addition and scalar multiplication. To check $VU=1$, put $b=x-fy$ and $a=y+gb$. Then $a-gb=y$ and $b+f(a-gb)=x-fy+fy=x$. Conversely, for arbitrary $(a,b)$ put $y=a-gb$ and $x=b+fy$. Then $x-fy=b$ and $y+g(x-fy)=a-gb+gb=a$, so $UV=1$. Thus $U$ is a linear isomorphism with inverse $V$, exactly as displayed in the statement.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 07Z8 (lemma-fitting-ideal), final proof paragraph; explicit linear-lift and shear expansion of the commuting stabilized comparison"
+   }
+  },
+  {
+   "text": "For all $(x,y)$, linearity and the two lift equations give $qU(x,y)=\\pi\\prime(y+g(x-fy))=\\pi\\prime y+\\pi(x-fy)=\\pi\\prime y+\\pi x-\\pi fy=\\pi x=p(x,y)$. Therefore $q\\circ U=p$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 07Z8 (lemma-fitting-ideal), final proof paragraph; explicit linear-lift and shear expansion of the commuting stabilized comparison"
+   }
+  },
+  {
+   "text": "By definition, $\\ker p=\\ker\\pi\\oplus G$ and $\\ker q=\\ker\\pi\\prime\\oplus F$: membership on either side says that the first coordinate maps to zero. If $z\\in\\ker p$, then $q(Uz)=p(z)=0$, so $Uz\\in\\ker q$. Conversely, for $w\\in\\ker q$ take $z=Vw$. The inverse equations and $qU=p$ give $p(z)=q(UVw)=q(w)=0$, and $Uz=UVw=w$. This proves both inclusions $U(\\ker\\pi\\oplus G)=\\ker\\pi\\prime\\oplus F$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 07Z8 (lemma-fitting-ideal), final proof paragraph; explicit linear-lift and shear expansion of the commuting stabilized comparison"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-free-module",
+  "lem-weil-pbc-free-module-projective",
+  "def-weil-pbc-projective-module"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tag 07Z8 (lemma-fitting-ideal), final proof paragraph; explicit linear-lift and shear expansion of the commuting stabilized comparison"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "schanuel|surjective.*prod.*equiv|equiv.*prod.*surjective",
+   "results": "18 hit(s); Mathlib/Algebra/Category/ModuleCat/Biproducts.lean, Mathlib/Algebra/Category/ModuleCat/Biproducts.lean, Mathlib/Probability/Independence/InfinitePi.lean, Mathlib/Probability/Independence/InfinitePi.lean, Mathlib/LinearAlgebra/Projection.lean, Mathlib/LinearAlgebra/Projection.lean, Mathlib/LinearAlgebra/Projection.lean, Mathlib/LinearAlgebra/Projection.lean",
+   "date": "2026-10-22",
+   "verdict": "no match: projective lifting and product equivalences are ingredients; no hit supplies the commuting stabilized presentation isomorphism and its stated formulas"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Given surjective linear maps p F to M and q G to M with finite free domains, there is an invertible map F times G to G times F satisfying (q,0) U = (p,0)",
+   "results": "8 hit(s); LinearMap.coe_equivProdOfSurjectiveOfIsCompl, LinearEquiv.prodComm, LinearEquiv.prodComm_apply, ContinuousLinearEquiv.prodComm_symm, TensorProduct.map_bijective, LinearEquiv.skewSwap, QuadraticMap.IsometryEquiv.prodComm_invFun, LinearMap.prodMap_apply",
+   "date": "2026-10-22",
+   "verdict": "no match: projective lifting and product equivalences are ingredients; no hit supplies the commuting stabilized presentation isomorphism and its stated formulas"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Schanuel\"",
+   "results": "0 hit(s); ",
+   "date": "2026-10-22",
+   "verdict": "no match: projective lifting and product equivalences are ingredients; no hit supplies the commuting stabilized presentation isomorphism and its stated formulas"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Two surjections from finite free modules F and G onto the same module admit an isomorphism F direct sum G to G direct sum F commuting with the surjections that are zero on the second summands, using lifts and invertible shears",
+   "results": "8 hit(s); Submodule.quotientEquivDirectSum, Module.Finite.exists_free_surjective, Module.Finite.exists_comp_eq_id_of_projective, Module.Finite.reprEquivₛ, Module.Finite.reprEquiv, LinearMap.splittingOfFunOnFintypeSurjective, LinearMap.exists_linearEquiv_eq_graph, LinearMap.splittingOfFunOnFintypeSurjective_splits",
+   "date": "2026-10-22",
+   "verdict": "no match: projective lifting and product equivalences are ingredients; no hit supplies the commuting stabilized presentation isomorphism and its stated formulas"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Stable equivalence of epimorphisms from projective modules: given surjections p F to M and q G to M choose f G to F and g F to G, the map (x,y) to (y+g(x-f(y)),x-f(y)) is an isomorphism commuting with p and q",
+   "results": "8 hit(s); Module.Projective.of_lifting_property, Module.projective_lifting_property, Module.Projective.of_lifting_property', ModuleCat.projective_of_categoryTheory_projective, Module.Projective.of_lifting_property'', ModuleCat.projective_of_module_projective, IsProjective.iff_projective, ModuleCat.enoughProjectives",
+   "date": "2026-10-22",
+   "verdict": "no match: projective lifting and product equivalences are ingredients; no hit supplies the commuting stabilized presentation isomorphism and its stated formulas"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Two finite free surjections onto the same module have an invertible common zero stabilization commuting with the quotient maps and identifying their kernels",
+   "results": "8 hit(s); Module.Finite.exists_free_surjective, Module.finitePresentation_of_free_of_surjective, Module.Finite.exists_comp_eq_id_of_projective, Module.exists_surjective_quotient_of_finite, orzechProperty_iff, Module.End.injective_of_surjective, OrzechProperty.bijective_of_surjective_endomorphism, LinearMap.leftInverse_splittingOfFunOnFintypeSurjective",
+   "date": "2026-10-23",
+   "verdict": "no match: inspected hits concern single splittings, free projective modules, skew products or abstract product decompositions; none states both lifts and the explicit stabilized formulas, quotient compatibility and kernel-image equality"
+  },
+  {
+   "tool": "grep",
+   "query": "skewSwap|projective_lifting_property|equivProdOfSurjectiveOfIsCompl",
+   "results": "14 hit(s); Mathlib/LinearAlgebra/Matrix/ToLin.lean, Mathlib/LinearAlgebra/Projection.lean, Mathlib/LinearAlgebra/Projection.lean, Mathlib/LinearAlgebra/Projection.lean, Mathlib/LinearAlgebra/Projection.lean, Mathlib/LinearAlgebra/Projection.lean, Mathlib/LinearAlgebra/Matrix/InvariantBasisNumber.lean, Mathlib/LinearAlgebra/Prod.lean",
+   "date": "2026-10-23",
+   "verdict": "no match: inspected hits concern single splittings, free projective modules, skew products or abstract product decompositions; none states both lifts and the explicit stabilized formulas, quotient compatibility and kernel-image equality"
+  },
+  {
+   "tool": "leansearch",
+   "query": "An explicit isomorphism between zero stabilized surjective maps from two finite free modules to a common module using two linear lifts",
+   "results": "8 hit(s); LinearMap.splittingOfFinsuppSurjective, ModuleCon.quotientKerEquivOfSurjective, LinearMap.extendScalarsOfSurjectiveEquiv, Function.Exact.linearEquivOfSurjective, Module.Free.constr, LinearMap.codLift, Function.Exact.splitSurjectiveEquiv, LinearMap.ofIsComplProdEquiv",
+   "date": "2026-10-23",
+   "verdict": "no match: inspected hits concern single splittings, free projective modules, skew products or abstract product decompositions; none states both lifts and the explicit stabilized formulas, quotient compatibility and kernel-image equality"
+  },
+  {
+   "tool": "loogle",
+   "query": "LinearEquiv.skewSwap, LinearEquiv.prodComm",
+   "results": "0 hit(s); ",
+   "date": "2026-10-23",
+   "verdict": "no match: inspected hits concern single splittings, free projective modules, skew products or abstract product decompositions; none states both lifts and the explicit stabilized formulas, quotient compatibility and kernel-image equality"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Given linear lifts f G to F and g F to G the formula U(x,y)=(y+g(x-f(y)),x-f(y)) is a linear equivalence F times G to G times F with inverse (a,b) to (b+f(a-g(b)),a-g(b))",
+   "results": "8 hit(s); LinearEquiv.skewProd, LinearEquiv.skewSwap, LinearMap.prodEquiv, LinearEquiv.prodComm, LinearEquiv.prodCongr, LinearEquiv.skewProd_symm_apply, LinearEquiv.skewProd_apply, LinearMap.prodEquiv_symm_apply",
+   "date": "2026-10-23",
+   "verdict": "no match: inspected hits concern single splittings, free projective modules, skew products or abstract product decompositions; none states both lifts and the explicit stabilized formulas, quotient compatibility and kernel-image equality"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-fitting-ideal-independence-base-change",
+  "date": "2026-10-22",
+  "group": "Q80"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "First-Fitting well-definedness/gluing input below the nodal-family geometry branch of lem-trf-local-term-locality; Tag 07Z8 (lemma-fitting-ideal), final proof paragraph: the commuting isomorphism between zero-stabilized free presentations; here made explicit by lifts of standard basis vectors and the displayed invertible shears, rather than an abstract isomorphism of kernels.",
+   "via": [
+    "lem-trf-fitting-ideal-independence-base-change",
+    "def-trf-first-fitting-singular-subscheme",
+    "lem-trf-projective-nodal-family-geometry",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-trf-free-surjections-common-stabilization",
+  "worker": "stage1",
+  "summary": "Statement retained. The two linear lifts use the three existing Mathlib leaves for free modules, free implies projective, and the projective lifting characterization. Three elementary steps verify linearity and both inverse equations, quotient compatibility, and both kernel-image inclusions. No new nodes are needed. Checked zero ranks and zero module/ring without imposing nontriviality.",
+  "blueprint": "Serves the existing blueprint.from chain from lem-trf-local-term-locality through the nodal-family first-Fitting construction: the common zero-stabilization comparison in the final paragraph of Tag 07Z8, realized in the parent fitting-ideal-independence-base-change Step 2. Does not alter the trace-formula chapter or unit route."
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-NK-77d78e170",
+  "group": "NK",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NK-77d78e170 (reviewer sub-agent of L); spot-checked: I read the full delivery: one commit that changes only the item and the report. The statement, stmt_deps and blueprint are identical to live. The item is unsplit on live and side-live, so the delivery is not superseded, and there is no repair note, so this is an ordinary split. Typing checks: f:G→F, g:F→G, and U, V land in G⊕F and F⊕G. Step 1 cites three mathlib leaves of sk-thm-p1: def-weil-pbc-free-module, lem-weil-pbc-free-module-projective (Module.Projective.of_free) and def-weil-pbc-projective-module, which states the lift-along-surjections form. They give f with πf=π′ and g with π′g=π. Leaves are exempt from the route check, so no tool_uses entry is needed. Source checked: Stacks algebra.tex Tags 05CE/05CF. I recomputed Steps 2–4: VU=UV=1 by additive cancellation; qU=π′y+πx−πfy=πx; and both kernel inclusions via z=Vw. Edge cases hold: n or m equal to 0 forces M=0, the zero ring works, characteristic 2 works, and the ℤ example gives U(x,y)=(x,x−y). Tag 07Z8 matches more-algebra-lemma-fitting-ideal, and its final paragraph is exactly the commuting-isomorphism input. The item is the explicit form of the 'more precisely' diagram in Stacks Schanuel (algebra-lemma-Schanuel). It is not a duplicate of lem-weil-pbc-schanuel, which states only the abstract kernel isomorphism. The parent lem-trf-fitting-ideal-independence-base-change Step 2 uses exactly U, qU=p and the kernel identification. proof_deps equals the union of the step uses. The ten Mathlib searches have sound no-match verdicts. No changes."
+ },
+ "lean": {
+  "module": "Sheaf.LinearAlgebra.FreeSurjectionsCommonStabilization",
+  "declaration": "Module.free_surjections_common_stabilization",
+  "file": "lean/Sheaf/LinearAlgebra/FreeSurjectionsCommonStabilization.lean",
+  "statement": "theorem free_surjections_common_stabilization (R : Type u) [CommRing R] (M : Type v) [AddCommGroup M] [Module R M] (n m : ℕ) (π : (Fin n → R) →ₗ[R] M) (π' : (Fin m → R) →ₗ[R] M) (hπ : Function.Surjective π) (hπ' : Function.Surjective π') : (∃ (f : (Fin m → R) →ₗ[R] (Fin n → R)) (g : (Fin n → R) →ₗ[R] (Fin m → R)), π.comp f = π' ∧ π'.comp g = π) ∧ (∀ (f : (Fin m → R) →ₗ[R] (Fin n → R)) (g : (Fin n → R) →ₗ[R] (Fin m → R)), π.comp f = π' → π'.comp g = π → ∃ U : ((Fin n → R) × (Fin m → R)) ≃ₗ[R] ((Fin m → R) × (Fin n → R)), (∀ (x : Fin n → R) (y : Fin m → R), U (x, y) = (y + g (x - f y), x - f y)) ∧ (∀ (a : Fin m → R) (b : Fin n → R), U.symm (a, b) = (b + f (a - g b), a - g b)) ∧ (π'.comp (LinearMap.fst R (Fin m → R) (Fin n → R))).comp U.toLinearMap = π.comp (LinearMap.fst R (Fin n → R) (Fin m → R)) ∧ Submodule.map U.toLinearMap ((LinearMap.ker π).prod ⊤) = (LinearMap.ker π').prod ⊤)",
+  "branch": "newtargets-dag",
+  "by": "Q73",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-18798f543",
+  "group": "Q73",
+  "result": "pass",
+  "note": "Only the item's lean field changed (live lean null); statement verbatim; no name clash. Each clause matches the node: R CommRing, M module (AddCommGroup is harmless over a ring), F,G = Fin n/m → R, surjective π,π'; existence of lifts f,g; for all lifts, ∃ U : F×G ≃ₗ G×F pinned by its forward formula, with stated U.symm formula, (π'∘fst)∘U = π∘fst, and map U ((ker π).prod ⊤) = (ker π').prod ⊤. Algebra recomputed by hand. Edge cases n=0, m=0, M=0, zero ring, char 2 and the ℤ example all fine; universes u,v independent and bound. Source Stacks 07Z8 final paragraph and 00O3 explicit diagram checked. Not a duplicate of the abstract Module.schanuel. No defs, proof is sorry, docstrings carry source, blueprint and the 4 proof steps, imports Mathlib only, lines ≤80. Only remark: the Second reading section is the standard placeholder."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "AUTO",
+  "group": "R1",
+  "result": "pass",
+  "landing": "20261026T002332-L-76965",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)",
+  "sorry_before": [
+   "Module.free_surjections_common_stabilization"
+  ],
+  "sorry_after": []
+ }
+}

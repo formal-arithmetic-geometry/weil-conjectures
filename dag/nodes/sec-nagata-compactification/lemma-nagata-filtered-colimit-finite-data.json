@@ -114,7 +114,18 @@
    "where": "statement"
   }
  ],
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
  "chapter": "sec-nagata-compactification",
  "unit": "sk-prop-nagata-sketch-approximation",
  "split_report": {
@@ -152,18 +163,23 @@
   "note": "AUTO: landed after the second Codex reading and the tool's mechanical checks and compile; not read by a reviewer (tiered review, decision of the human 2026-10-11)"
  },
  "blueprint_update": {
-  "snapshot": "main-20261015",
-  "statement": "Let $(A_i)_{i\\in I}$ be a directed system of rings with colimit $A$. Given\nfinitely many elements of $A$ and finitely many equalities between ring\nexpressions in those elements, there exists one stage $i$ and lifts of all\nselected elements to $A_i$ for which all selected equalities hold. Once\nthey hold at $i$, they hold after every transition $A_i\\to A_j$.",
+  "snapshot": "main-20261023",
+  "commit": "c9b5f3ad18a6654dbbee6f7d7b4b4af85e01463f",
+  "changed": [
+   "statement",
+   "proof"
+  ],
+  "statement": "Let $(A_i)_{i\\in I}$ be a filtered diagram of commutative rings (for\ninstance a directed system) with colimit $A$. Given finitely many elements\n$x_1,\\ldots,x_n$ of $A$ and finitely many equalities $P_l(x)=Q_l(x)$ with\n$P_l,Q_l\\in\\mathbf Z[X_1,\\ldots,X_n]$, there exist one stage $i$ and lifts\n$y_1,\\ldots,y_n\\in A_i$ of the $x_k$ such that every equality\n$P_l=Q_l$ holds for the images of the $y_k$ under every transition\n$A_i\\to A_j$ (in particular for the $y_k$ themselves).",
   "proof": [
    {
-    "text": "Choose a representative stage for each selected element. Directedness and\n[lemma-nagata-directed-finite-upper-bound] place all representatives at\none common stage. Equality of two representatives in a filtered colimit is\nwitnessed at a later stage. There are only finitely many equalities, so a\nsecond finite upper bound makes them all true simultaneously. Ring\nhomomorphisms preserve the equalities at every later stage.",
+    "text": "Every element of a filtered colimit of rings comes from some stage, and\nfilteredness (for a directed system,\n[lemma-nagata-directed-finite-upper-bound]) moves finitely many\nrepresentatives to one common stage $i_0$. The finitely many differences\n$P_l(y)-Q_l(y)$ vanish in $A$, and an element of a stage that vanishes in\na filtered colimit vanishes at a later stage; filteredness again gives one\nstage $i$ past $i_0$ at which all of them vanish. Ring homomorphisms\npreserve polynomial identities with integer coefficients, so the\nequalities persist after every transition $A_i\\to A_j$.",
     "uses": [
      "lemma-nagata-directed-finite-upper-bound"
     ],
     "elementary": false
    }
   ],
-  "note": "the current blueprint (aligned 2026-10-15 with the six-functors notes) states or proves this differently; a worker who touches the node follows it"
+  "note": "the current blueprint (main-20261023, weil-conjectures-blueprint c9b5f3ad18) states or proves this differently; the node is proved in Lean: recorded 2026-10-23, not reopened"
  },
  "reviewed_proof": {
   "date": "2026-10-18",

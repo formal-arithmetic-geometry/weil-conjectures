@@ -1,0 +1,228 @@
+{
+ "id": "lem-sfb-additive-subgroup-commutative-extensions-witt",
+ "kind": "statement",
+ "title": "Commutative extensions of additive subgroups are Witt pullbacks",
+ "statement": "Let $k$ be a perfect field [def-weil-field] of characteristic $p>0$, meaning every element of $k$ is a $p$-th power. Let $Q\\hookrightarrow\\mathbf G_a$ be a closed subgroup scheme [def-sc-group-scheme-subgroup, def-sc-gm-ga], and let $0\\to\\mathbf G_a\\xrightarrow{i}E\\xrightarrow{q}Q\\to0$ be an exact sequence of commutative affine finite-type $k$-group schemes [def-sc-group-scheme, def-weil-finite-type-morphism]. Exact means $i$ identifies $\\mathbf G_a$ with the scheme-theoretic kernel of $q$ and $q$ is faithfully flat and finitely presented, equivalently the sequence of represented fppf sheaves is short exact for faithfully flat finitely presented coverings of commutative $k$-algebras. Let $j,\\tau,W_{2,k}$ denote the two-coordinate Witt extension of [lem-sfb-length-two-witt-extension-verschiebung]. There exist a group-scheme homomorphism $h:Q\\to\\mathbf G_a$ and an isomorphism of extensions $E\\simeq Q\\times_{\\mathbf G_a,h,\\tau}W_{2,k}$ [def-pc-fibre-product], inducing the identity on the kernel $\\mathbf G_a$ and quotient $Q$. In particular the second projection gives $a:E\\to W_{2,k}$ with $\\tau a=hq$ and $ai=j$. The zero homomorphism $h=0$ is allowed, so this includes split extensions. No smoothness or connectedness of $Q$ or $E$ is assumed.",
+ "source": {
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Proposition 15.27, printed p.316, including its displayed extension (113). The perfect-field restriction is sufficient for its use in the proof of Proposition 14.48, printed p.296."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-sc-group-scheme-subgroup",
+  "def-sc-gm-ga",
+  "def-sc-group-scheme",
+  "def-weil-finite-type-morphism",
+  "lem-sfb-length-two-witt-extension-verschiebung",
+  "def-pc-fibre-product"
+ ],
+ "proof": [
+  {
+   "text": "Translation by the kernel makes $q:E\\to Q$ an additive torsor. Indeed, $(e,t)\\mapsto(e,e+i(t))$ has inverse $(e,e')\\mapsto(e,i^{-1}(e'-e))$ on $E\\times_QE$: the difference belongs to the scheme-theoretic kernel, so its factorization through $i$ is unique and is a morphism. Apply [lem-sfb-additive-affine-torsor-section] to the affine base $Q$. Its covering hypotheses are exactly the stipulated faithful flatness and finite presentation of $q$. Choose a section $s$, and replace it by $s-i(s(0))$ to arrange $s(0)=0$ (here $s(0)$ is identified with its unique kernel coordinate). The maps $(t,x)\\mapsto i(t)+s(x)$ and $e\\mapsto(i^{-1}(e-s(q(e))),q(e))$ are inverse scheme morphisms. Thus $E$ has coordinates $\\mathbf G_a\\times Q$, preserving the specified kernel and quotient.",
+   "uses": [
+    "def-sc-group-scheme",
+    "def-pc-fibre-product",
+    "lem-sfb-additive-affine-torsor-section"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 15.27, first two sentences; Example 2.72; Proposition 15.10, choice of section."
+   }
+  },
+  {
+   "text": "In these coordinates define $f:Q\\times Q\\to\\mathbf G_a$ by $s(x)+s(y)=i(f(x,y))+s(x+y)$. Commutativity, associativity, and $s(0)=0$ give, respectively,\n$$f(x,y)=f(y,x),\\quad f(y,z)-f(x+y,z)+f(x,y+z)-f(x,y)=0,\\quad f(x,0)=f(0,x)=0.$$\nThe group law is $(t,x)+(u,y)=(t+u+f(x,y),x+y)$. These are identities of morphisms, hence of regular functions, not just of $k$-points. The affine-spectrum and polynomial universal properties identify regular functions on $Q^m$ with the corresponding coordinate polynomials modulo its defining ideal in each variable: maps to the product are tuples of algebra maps agreeing on $k$, which is exactly the universal property of that polynomial quotient. If $Q=\\mathbf G_a$, this gives a normalized symmetric polynomial cocycle $F=f\\in k[X,Y]$.",
+   "uses": [
+    "def-sc-group-scheme",
+    "def-weil-affine-spectrum",
+    "def-weil-pbc-mv-polynomial-ring"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 15.10 and Corollary 15.11, pp.308-309; Proposition 15.27, Hochschild-extension reduction."
+   }
+  },
+  {
+   "text": "If $Q\\ne\\mathbf G_a$, apply [lem-sfb-additive-subgroup-polynomial-quotient] to get $k[Q]=k[T]/(P)$ with $P$ monic of degree $n>0$ and $P(0)=0$. The monic quotient basis [lem-weil-pbc-monic-quotient-free], successively in each variable over the other coefficient rings, gives a unique representative $F\\in k[X,Y]$ of $f$ with both variable degrees $<n$. Symmetry and normalization hold before reduction: swapping variables, or setting one to zero, preserves these degree bounds, and uniqueness of remainders applies. Put $D=F(Y,Z)-F(X+Y,Z)+F(X,Y+Z)-F(X,Y)$. Each variable in $D$ has degree $<n$, since substituting $X+Y$ into a monomial of exponent $<n$ never gives either variable an exponent $\\geq n$. Its residue modulo $(P(X),P(Y),P(Z))$ is zero by step 2. Successive uniqueness of monic remainders implies $D=0$ in $k[X,Y,Z]$. Thus in both cases a normalized symmetric polynomial cocycle $F$ on the whole additive line restricts to $f$ on $Q^2$. This argument includes nonreduced $Q$.",
+   "uses": [
+    "lem-sfb-additive-subgroup-polynomial-quotient",
+    "lem-weil-pbc-monic-quotient-free"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 15.27, last four sentences, pp.316-317: the bounded-degree lift in U tensor U."
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-symmetric-polynomial-cocycle-normal-form] to $F$. Obtain $F=\\sum_{i=0}^r a_i c_p(X,Y)^{p^i}+\\delta b$, where $\\delta b=b(X)+b(Y)-b(X+Y)$ and $b(0)=0$. This is a polynomial identity over $k$; restrict it to $Q^2$. Choose $b_i\\in k$ with $b_i^p=a_i$, using perfectness, and set $h(T)=\\sum_{i=0}^r b_i T^{p^i}$. The binomial identity in characteristic $p$ shows $h(X+Y)=h(X)+h(Y)$, so its restriction to $Q$ is a group-scheme homomorphism $Q\\to\\mathbf G_a$.",
+   "uses": [
+    "lem-sfb-symmetric-polynomial-cocycle-normal-form",
+    "def-sc-gm-ga",
+    "def-weil-affine-spectrum",
+    "def-weil-pbc-mv-polynomial-ring"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Lemma 15.26 and Proposition 15.27, the End(G_a) step, using 14.40; perfect-field specialization."
+   }
+  },
+  {
+   "text": "Use the commutative group law of [lem-sfb-length-two-witt-extension-verschiebung]. Define a polynomial $B(T)$ by the finite sum in $W_{2,k}$\n$$\\sum_{i=0}^r (b_iT^{p^i},0)=(h(T),B(T));$$\nit is obtained by repeated substitution in the displayed polynomial law and $B(0)=0$. Regrouping the sum of these vectors at $X$ and $Y$ in two ways gives\n$$B(X)+B(Y)+c_p(h(X),h(Y))=B(X+Y)+\\sum_i a_i c_p(X,Y)^{p^i}.$$\nIndeed, for each $i$ the paired summands have first coordinate $b_i(X+Y)^{p^i}$ and second coordinate $c_p(b_iX^{p^i},b_iY^{p^i})=b_i^p c_p(X,Y)^{p^i}$: $c_p$ is homogeneous of degree $p$ with coefficients in the prime field. The extra second coordinates add because $(0,v)$ is central and its addition has no cross term. Therefore $F=c_p(h(X),h(Y))+\\delta(b+B)$. This supplies the correction term rather than identifying an arbitrary linear combination of Witt classes with a single pullback without justification.",
+   "uses": [
+    "lem-sfb-length-two-witt-extension-verschiebung"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 15.27, the implication from Lemma 15.26 via End(G_a); explicit addition of the displayed Witt extension (113)."
+   }
+  },
+  {
+   "text": "Let $u=(b+B)|_Q$. The fibre product in the conclusion has points $(x,(h(x),v))$, with group law on its $(v,x)$ coordinates given by $c_p(h(x),h(y))$. The identity from step 5 restricted to $Q^2$ says $f(x,y)=c_p(h(x),h(y))+u(x)+u(y)-u(x+y)$. Thus\n$$i(t)+s(x)\\longmapsto (x,(h(x),t+u(x)))$$\nis a homomorphism to that fibre product: the two second-coordinate expressions agree by this identity. It has the regular inverse $(x,(h(x),v))\\mapsto i(v-u(x))+s(x)$. The affine-spectrum and fibre-product universal properties make these scheme morphisms and prove that their composites are identities. Since $h(0)=u(0)=0$, this isomorphism is the identity on the specified kernel and quotient. Its second projection is $a$, so $\\tau a=hq$ and $ai=j$. Zero coefficients give $h=0$, covering split extensions; the proof made no smoothness or connectedness assumption.",
+   "uses": [
+    "def-pc-fibre-product",
+    "def-weil-affine-spectrum",
+    "lem-sfb-length-two-witt-extension-verschiebung"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 15.27, conclusion as an isomorphism of extensions; explicit coboundary change of the section in Proposition 15.10."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sc-group-scheme",
+  "def-pc-fibre-product",
+  "lem-sfb-additive-affine-torsor-section",
+  "def-weil-affine-spectrum",
+  "def-weil-pbc-mv-polynomial-ring",
+  "lem-sfb-additive-subgroup-polynomial-quotient",
+  "lem-weil-pbc-monic-quotient-free",
+  "lem-sfb-symmetric-polynomial-cocycle-normal-form",
+  "def-sc-gm-ga",
+  "lem-sfb-length-two-witt-extension-verschiebung"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Proposition 15.27, printed pp.316-317, using Lemma 15.26 and the explicit section construction of Proposition 15.10. The bounded-degree and Witt-sum calculations are written out."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Every commutative algebraic group extension of a closed subgroup of Ga by Ga over a perfect field is the pullback of the length two Witt vector extension along a homomorphism to Ga",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"WittVector.isocrystal_classification\", \"module\": \"Mathlib/RingTheory/WittVector/Isocrystal\", \"type\": \"∀ (p : ℕ) [inst : Fact (Nat.Prime p)] (k : Type u_2) [inst_1 : Field k] [inst_2 : IsAlgClosed k] [inst_3 : CharP k p]\\n  (V : Type u_3) [inst_4 : AddCommGroup V] [inst_5 : WittVector.Isocrystal p k V],\\n  Module.finrank (FractionRing (WittVector p k)) V = 1 →\\n    ∃ m, Nonempty (WittVector.IsocrystalEq\", \"doc\": \"For any algebraically closed field $ k $ of characteristic $ p $, every one-dimensional isocrystal over $ k $ is isomorphic to the standard one-dimensional isocrystal (constructed as the field of frac\"}\n  {\"name\": \"WittVector.instIsocrystalStandardOneDimIsocrystal\", \"module\": \"Mathlib/RingTheory/WittVector/Isocrystal\", \"type\": \"(p : ℕ) →\\n  [inst : Fact (Nat.Prime p)] →\\n    (k : Type u_1) →\\n      [inst_1 : CommRing k] →\\n        [IsDomain k] →\\n          [inst_3 : CharP k p] →\\n            [inst_4 : PerfectRing k p] → (m : ℤ) → WittVector.Isocrystal p k (WittVector.StandardOneDimIsocrystal p k m)\", \"doc\": \"For any prime $ p $, field $ k $ of characteristic $ p $, and integer $ m $, the standard one-dimensional isocrystal (constructed as the field of fractions of Witt vectors over $ k $) is equipped with\"}\n  {\"name\": \"WittVector.RecursionBase.solution\", \"module\": \"Mathlib/RingTheory/WittVector/FrobeniusFractionField\", \"type\": \"(p : ℕ) →\\n  [hp : Fact (Nat.Prime p)] → {k : Type u_1} → [inst : Field k] → [IsAlgClosed k] → WittVector p k → WittVector p k → k\", \"doc\": \"Given two Witt vectors $\\\\mathbf{a}_1$ and $\\\\mathbf{a}_2$ over an algebraically closed field $k$ of characteristic $p$, this function returns an element $x \\\\in k$ such that $x^{p-1} = \\\\frac{\\\\mathbf{a}_\"}\n  {\"name\": \"WittVector.instAddCommGroupStandardOneDimIsocrystal\", \"module\": \"Mathlib/RingTheory/WittVector/Isocrystal\", \"type\": \"(p : ℕ) →\\n  [inst : Fact (Nat.Prime p)] →\\n    (k : Type u_1) → [inst_1 : CommRing k] → (_m : ℤ) → AddCommGroup (WittVector.StandardOneDimIsocrystal p k _m)\", \"doc\": \"For any prime $ p $, commutative ring $ k $ of characteristic $ p $, and integer $ m $, the standard one-dimensional isocrystal $ \\text{WittVector.StandardOneDimIsocrystal}(p, k, m) $ (defined as the f\"}\n  {\"name\": \"Algebra.Extension.H1Cotangent.map_toInfinitesimal_bijective\", \"module\": \"Mathlib/RingTheory/Smooth/Kaehler\", \"type\": \"∀ {R : Type u_1} {S : Type u_3} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S]\\n  (P : Algebra.Extension R S), Function.Bijective ⇑(Algebra.Extension.H1Cotangent.map P.toInfinitesimal)\", \"doc\": \"The linear map from the first cotangent cohomology module $ H^1(P) $ to $ H^1(P/I^2) $, induced by the infinitesimal extension homomorphism $ P \\to P/I^2 $, is bijective.\"}\n  {\"name\": \"Algebra.Extension.H1Cotangent.map_comp\", \"module\": \"Mathlib/RingTheory/Extension/Cotangent/Basic\", \"type\": \"∀ {R : Type u} {S : Type v} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S] {R' : Type u'}\\n  {S' : Type v'} [inst_3 : CommRing R'] [inst_4 : CommRing S'] [inst_5 : Algebra R' S'] {P' : Algebra.Extension R' S'}\\n  [inst_6 : Algebra R R'] [inst_7 : Algebra S S'] [inst_8 : Algebra R S']\", \"doc\": \"Let $f : P \\\\to P'$ and $g : P' \\\\to P''$ be two composable homomorphisms of algebra extensions. This theorem states that the map on the first cotangent cohomology module, $H^1$, is functorial. Specific\"}\n  {\"name\": \"WittVector.exists_frobenius_solution_fractionRing\", \"module\": \"Mathlib/RingTheory/WittVector/FrobeniusFractionField\", \"type\": \"∀ (p : ℕ) [hp : Fact (Nat.Prime p)] {k : Type u_1} [inst : Field k] [inst_1 : CharP k p] [inst_2 : IsAlgClosed k]\\n  {a : FractionRing (WittVector p k)},\\n  a ≠ 0 → ∃ b, b ≠ 0 ∧ ∃ m, (IsFractionRing.ringEquivOfRingEquiv (WittVector.frobeniusEquiv p k)) b * a = ↑p ^ m * b\", \"doc\": \"For any non-zero element $ a $ in the fraction field of Witt vectors over a perfect field $ k $ of characteristic $ p $, there exist a non-zero element $ b $ and an integer $ m $ such that $ \\\\varphi(b\"}\n  {\"name\": \"Field.absoluteGaloisGroupAbelianization\", \"module\": \"Mathlib/FieldTheory/AbsoluteGaloisGroup\", \"type\": \"(K : Type u_1) → [Field K] → Type u_1\", \"doc\": \"The topological abelianization of the absolute Galois group $\\\\text{Gal}(\\\\overline{K}/K)$ is the quotient of the group by the closure of its commutator subgroup, equipped with the quotient topology ind\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: abstract AddGroupExtension, isocrystals and algebra cotangent modules do not classify commutative algebraic group extensions as the specified pullbacks."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"WittVector\", \"pullback\"",
+   "results": "[loogle] OK 0 hit(s)",
+   "date": "2026-10-24",
+   "verdict": "no match: abstract AddGroupExtension, isocrystals and algebra cotangent modules do not classify commutative algebraic group extensions as the specified pullbacks."
+  },
+  {
+   "tool": "grep",
+   "query": "Witt.*extension|extension.*Witt|symmetric.*cocycle",
+   "results": "[grep] OK 0 hit(s)",
+   "date": "2026-10-24",
+   "verdict": "no match: abstract AddGroupExtension, isocrystals and algebra cotangent modules do not classify commutative algebraic group extensions as the specified pullbacks."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Classification of commutative group scheme extensions of additive subgroups by Ga using Witt vectors of length two",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AddGroupExtension\", \"module\": \"Mathlib.GroupTheory.GroupExtension.Defs\", \"type\": \"(N : Type u_1) →\\n  (E : Type u_2) → (G : Type u_3) → [AddGroup N] → [AddGroup E] → [AddGroup G] → Type (max (max u_1 u_2) u_3)\", \"doc\": \"The structure of an additive group extension, representing a short exact sequence $0 \\\\to N \\\\to E \\\\to G \\\\to 0$ where $N$, $E$, and $G$ are additive groups with $N$ a normal subgroup of $E$ and $G$ the \"}\n  {\"name\": \"WittVector.instCommRing\", \"module\": \"Mathlib.RingTheory.WittVector.Basic\", \"type\": \": CommRing (𝕎 R)\", \"doc\": \"For any commutative ring $ R $ and prime $ p $, the Witt vectors over $ R $, equipped with addition, multiplication, and other operations defined via recursive $ p $-adic Witt polynomials, form a comm\"}\n  {\"name\": \"TrivSqZeroExt.addCommGroup\", \"module\": \"Mathlib.Algebra.TrivSqZeroExt\", \"type\": \"[AddCommGroup R] [AddCommGroup M] : AddCommGroup (tsze R M)\", \"doc\": \"Given additive commutative groups $ R $ and $ M $, the trivial square-zero extension $ R \\times M $ forms an additive commutative group under component-wise addition $(r_1, m_1) + (r_2, m_2) = (r_1 + r\"}\n  {\"name\": \"WittVector.instInhabited\", \"module\": \"Mathlib.RingTheory.WittVector.Defs\", \"type\": \": Inhabited (𝕎 R)\", \"doc\": \"For any ring $ R $, the Witt vectors over $ R $, denoted $ \\\\mathbb{W}(R) $, are equipped with a canonical commutative ring structure. This structure is defined using the recursive properties of Witt p\"}\n  {\"name\": \"WittVector.wittAdd\", \"module\": \"Mathlib.RingTheory.WittVector.Defs\", \"type\": \": ℕ → MvPolynomial (Fin 2 × ℕ) ℤ\", \"doc\": \"The function constructs the $n$-th Witt polynomial for addition in the context of Witt vectors over $\\\\mathbb{Z}$. For a given natural number $n$, it applies the Witt structure recursion to the sum of \"}\n  {\"name\": \"AddGroupExtension.Section\", \"module\": \"Mathlib.GroupTheory.GroupExtension.Defs\", \"type\": \"{N : Type u_1} →\\n  {E : Type u_2} →\\n    {G : Type u_3} →\\n      [inst : AddGroup N] → [inst_1 : AddGroup E] → [inst_2 : AddGroup G] → AddGroupExtension N E G → Type (max u_2 u_3)\", \"doc\": \"The type of sections of an additive group extension, i.e., homomorphisms $s : G \\to E$ such that the composition of $s$ with the projection $E \\to G$ is the identity map on $G$.\"}\n  {\"name\": \"AddGroupExtension.mk\", \"module\": \"Mathlib.GroupTheory.GroupExtension.Defs\", \"type\": \"{N : Type u_1} →\\n  {E : Type u_2} →\\n    {G : Type u_3} →\\n      [inst : AddGroup N] →\\n        [inst_1 : AddGroup E] →\\n          [inst_2 : AddGroup G] →\\n            (inl : N →+ E) →\\n              (rightHom : E →+ G) →\\n                Function.Injective ⇑inl →\\n                  inl.range = rightHom.ker\", \"doc\": \"Given additive groups $N$, $E$, $G$, and additive group homomorphisms $\\\\text{inl}: N \\\\to E$ and $\\\\text{rightHom}: E \\\\to G$ such that $\\\\text{inl}$ is injective, the image of $\\\\text{inl}$ equals the ker\"}\n  {\"name\": \"AddGroupExtension.Equiv.instAddEquivClass\", \"module\": \"Mathlib.GroupTheory.GroupExtension.Defs\", \"type\": \"∀ {N : Type u_1} {E : Type u_2} {G : Type u_3} [inst : AddGroup N] [inst_1 : AddGroup E] [inst_2 : AddGroup G]\\n  {S : AddGroupExtension N E G} {E' : Type u_4} [inst_3 : AddGroup E'] {S' : AddGroupExtension N E' G},\\n  AddEquivClass (S.Equiv S') E E'\", \"doc\": \"Given additive groups $N$, $E$, $G$, and $E'$ with short exact sequences $0 \\\\to N \\\\to E \\\\to G \\\\to 0$ and $0 \\\\to N \\\\to E' \\\\to G \\\\to 0$, the equivalence between these extensions is an additive equivalen\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: abstract AddGroupExtension, isocrystals and algebra cotangent modules do not classify commutative algebraic group extensions as the specified pullbacks."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The Ext group of a subgroup of the additive algebraic group by Ga is generated by pullbacks of the Witt symmetric polynomial cocycle",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"Algebra.Generators.H1Cotangent.δ\", \"module\": \"Mathlib/RingTheory/Kaehler/JacobiZariski\", \"type\": \"{R : Type u₁} →\\n  {S : Type u₂} →\\n    [inst : CommRing R] →\\n      [inst_1 : CommRing S] →\\n        [inst_2 : Algebra R S] →\\n          {T : Type u₃} →\\n            [inst_3 : CommRing T] →\\n              [inst_4 : Algebra R T] →\\n                [inst_5 : Algebra S T] →\\n                  [IsScalarTower R \", \"doc\": \"The linear map $\\\\delta: H^1(Q) \\\\to T \\\\otimes_S \\\\Omega_{S/R}$ in the Jacobi-Zariski exact sequence, constructed via the Snake Lemma from the commutative diagram of cotangent complexes associated to com\"}\n  {\"name\": \"Algebra.Generators.H1Cotangent.δ_map\", \"module\": \"Mathlib/RingTheory/Kaehler/JacobiZariski\", \"type\": \"∀ {R : Type u₁} {S : Type u₂} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S] {T : Type u₃}\\n  [inst_3 : CommRing T] [inst_4 : Algebra R T] [inst_5 : Algebra S T] [inst_6 : IsScalarTower R S T] {ι : Type w₁}\\n  {ι' : Type w₃} {σ : Type w₂} {σ' : Type w₄} (Q : Algebra.Generators S T ι)\", \"doc\": \"The linear map $\\\\delta: \\\\mathrm{H}^1(Q) \\\\to T \\\\otimes_S \\\\Omega_{S/R}$ in the Jacobi-Zariski exact sequence, constructed via the Snake Lemma from the commutative diagram of cotangent complexes associat\"}\n  {\"name\": \"Algebra.Extension.instAddCommGroupH1Cotangent\", \"module\": \"Mathlib/RingTheory/Extension/Cotangent/Basic\", \"type\": \"{R : Type u} →\\n  {S : Type v} →\\n    [inst : CommRing R] →\\n      [inst_1 : CommRing S] → [inst_2 : Algebra R S] → {P : Algebra.Extension R S} → AddCommGroup P.H1Cotangent\", \"doc\": \"For a commutative ring extension $ S $ over $ R $, the first cotangent cohomology module $ H^1 $ (defined as the quotient $ \\\\ker(\\\\phi)/\\\\ker(\\\\phi)^2 $ of the kernel of the canonical homomorphism $ \\\\phi\"}\n  {\"name\": \"Algebra.Generators.H1Cotangent.δ_eq_δAux\", \"module\": \"Mathlib/RingTheory/Kaehler/JacobiZariski\", \"type\": \"∀ {R : Type u₁} {S : Type u₂} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S] {T : Type u₃}\\n  [inst_3 : CommRing T] [inst_4 : Algebra R T] [inst_5 : Algebra S T] [inst_6 : IsScalarTower R S T] {ι : Type w₁}\\n  {σ : Type w₂} (Q : Algebra.Generators S T ι) (P : Algebra.Generators R S σ\", \"doc\": \"For any element $ x $ in the kernel $ Q.\\\\text{ker} $ with proof $ hx $, the connecting homomorphism $ \\\\delta $ applied to the quotient element $ \\\\langle x, hx \\\\rangle $ equals the auxiliary map $ \\\\del\"}\n  {\"name\": \"Algebra.H1Cotangent\", \"module\": \"Mathlib/RingTheory/Extension/Cotangent/Basic\", \"type\": \"(R : Type u) → (S : Type v) → [inst : CommRing R] → [inst_1 : CommRing S] → [Algebra R S] → Type (max u v)\", \"doc\": \"The first cohomology group of the cotangent complex for an $ R $-algebra $ S $, constructed using the algebra's own elements as generators in the extension $ R \\to S $.\"}\n  {\"name\": \"Algebra.H1Cotangent.map\", \"module\": \"Mathlib/RingTheory/Extension/Cotangent/Basic\", \"type\": \"(R : Type u) →\\n  (S : Type v) →\\n    [inst : CommRing R] →\\n      [inst_1 : CommRing S] →\\n        [inst_2 : Algebra R S] →\\n          (S' : Type u_2) →\\n            [inst_3 : CommRing S'] →\\n              [inst_4 : Algebra R S'] →\\n                (T : Type w) →\\n                  [inst_5 : CommRing T] →\\n \", \"doc\": \"The $ S' $-linear map from the first cotangent cohomology module of $ R \\to S' $ to that of $ S \\to T $, induced by the canonical algebra homomorphism between the generator-based extensions of $ S' $ an\"}\n  {\"name\": \"Algebra.Extension.H1Cotangent.map\", \"module\": \"Mathlib/RingTheory/Extension/Cotangent/Basic\", \"type\": \"{R : Type u} →\\n  {S : Type v} →\\n    [inst : CommRing R] →\\n      [inst_1 : CommRing S] →\\n        [inst_2 : Algebra R S] →\\n          {R' : Type u'} →\\n            {S' : Type v'} →\\n              [inst_3 : CommRing R'] →\\n                [inst_4 : CommRing S'] →\\n                  [inst_5 : Algebra R' S'] \", \"doc\": \"The linear map from the first cotangent cohomology module $ H^1(P) $ to $ H^1(P') $, induced by an algebra extension homomorphism $ f: P \\to P' $, which preserves the $ S $-module structure through sca\"}\n  {\"name\": \"Algebra.Generators.H1Cotangent.δ_eq\", \"module\": \"Mathlib/RingTheory/Kaehler/JacobiZariski\", \"type\": \"∀ {R : Type u₁} {S : Type u₂} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S] {T : Type u₃}\\n  [inst_3 : CommRing T] [inst_4 : Algebra R T] [inst_5 : Algebra S T] [inst_6 : IsScalarTower R S T] {ι : Type w₁}\\n  {σ : Type w₂} (Q : Algebra.Generators S T ι) (P : Algebra.Generators R S σ\", \"doc\": \"The connecting homomorphism $\\\\delta: H^1(Q) \\\\to T \\\\otimes_S \\\\Omega_{S/R}$ in the Jacobi-Zariski exact sequence is constructed via the Snake Lemma from the commutative diagram of cotangent complexes as\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: abstract AddGroupExtension, isocrystals and algebra cotangent modules do not classify commutative algebraic group extensions as the specified pullbacks."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-zero-verschiebung-primitive-generation",
+  "date": "2026-10-24",
+  "group": "Q12"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Haboush symmetric-power lifting for a trivial quotient representation. Supporting representation-theoretic input: Central covering of a reductive group by a torus and a simply connected semisimple group. Milne central-cover construction: Multiplication by a central torus with semisimple quotient and the derived group. Supporting input: Semisimple algebraic groups are perfect. Root-subgroup structure and the torus conjugation formula used to realize the rank-one commutator calculation in Milne Corollary 21.50. Supporting lemma: A one-dimensional smooth connected unipotent group is additive. Supporting structural ingredient for the one-dimensional classification: Milne Corollary 14.55 (positive characteristic) and the central-series argument preceding the induction in Proposition 14.32 (characteristic zero). Supporting lemma: Smooth connected commutative exponent-p groups over a perfect field are vector groups. Supporting the first sentence of Milne Proposition 14.54: 14.49 gives the closed embedding meant by elementary unipotent (14.45). Supporting Proposition 14.48, printed pp.295-296, together with the equivalent coordinate-algebra characterization in Definition 14.45, printed p.295. This is the primitive-generation consequence of the Verschiebung criterion, for arbitrary commutative affine algebraic groups. Present split: Commutative extensions of additive subgroups are Witt pullbacks. Proposition 15.27, printed p.316, including its displayed extension (113). The perfect-field restriction is sufficient for its use in the proof of Proposition 14.48, printed p.296.",
+   "via": [
+    "lem-sfb-zero-verschiebung-primitive-generation",
+    "lem-sfb-smooth-p-torsion-additive-embedding",
+    "lem-sfb-perfect-exponent-p-vector-group",
+    "lem-sfb-unipotent-central-additive-subgroup",
+    "lem-sfb-one-dimensional-unipotent-additive",
+    "lem-sfb-reductive-root-subgroup-parametrizations",
+    "lem-sfb-semisimple-group-perfect",
+    "lem-sfb-central-torus-semisimple-derived-product",
+    "lem-sfb-reductive-torus-simply-connected-cover",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-additive-subgroup-commutative-extensions-witt",
+  "worker": "stage1",
+  "summary": "Read Milne 15.10, 15.11, 15.26 and 15.27; retained the item statement exactly. Used the existing affine additive torsor and additive subgroup polynomial quotient nodes. Wrote the bounded-degree lift proof also for nonreduced subgroups, and the explicit Witt-sum correction using p-th roots of coefficients. One new statement-only node records the polynomial cocycle normal form. Project searches found no attachment; six logged Mathlib searches for the new node found no match.",
+  "blueprint": "Latest blueprint sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md, (3), via the inherited alteration/algebraic-group support chain in blueprint.from. The ancestor command returns None; keep inherited from.node=null and via chain. No whole-blueprint match for Witt, symmetric cocycle, polynomial cocycle, Lazard, or additive subgroup."
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q72-03b7f11b9",
+  "group": "Q72",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q72-03b7f11b9 (reviewer sub-agent of L); spot-checked: First split, not a re-split. The statement and stmt_deps are identical to live and side-live, where the item is still unsplit. Read Milne iAG Lemma 15.26 and Prop 15.27 (printed pp.315-317). c_p is Milne's f_1 and gives the W_2 law; the perfect-field hypothesis is kept, and the parent zero-verschiebung (steps 5-6, perfect K) uses exactly h, a, τa=hq', ai=j and the h=0 split case. Step-by-step check: (1) the torsor-section hypotheses hold (Q affine, q faithfully flat and finitely presented, action isomorphism), and normalizing s by s(0) is valid. (2) The associativity, commutativity and unit relations re-derived from the section give the displayed cocycle. (3) Bounded-degree lift: the monic remainder basis is used twice, Y=0 is legitimate because P(0)=0, and X↦X+Y is well defined by additivity of P; the defect has degrees below n, so D=0; this also holds for nonreduced Q. (4) The new node gives the normal form; perfectness gives b_i^p=a_i, and h is additive. (5) The Witt-sum identity was re-derived by hand with the sign checked, and verified numerically over F_p for p=2,3,5. (6) The fibre-product isomorphism is a homomorphism exactly by the restricted identity, its inverse is explicit, and it is the identity on kernel and quotient. New node lem-sfb-symmetric-polynomial-cocycle-normal-form (Lazard/Milne 15.26 existence clause, statement only, six searches recorded) is true over any field of characteristic p: over F_p the space of normalized symmetric cocycles has dimension 1 in each total degree 2..2p^2+1 (p=2,3,5), spanned by δT^d or by c_p^{p^(e-1)} when d=p^e, and the result extends to any k by base change. It is not a restatement of the item. An rg -L search of the snapshot, live and side-live DAGs found no duplicate. Route: everything is in the unit sk-thm-sf-ctf-stability apart from Mathlib leaves and definitions; no SGA. Batch-5: both flagged citations (torsor-section, and polynomial-quotient via the kernel-pair descent lemma) reach only lem-trf-fppf-covering-is-fpqc, the generic Stacks 022C Mathlib leaf. It is outside the trace-formula and Poincaré assumptions and their proofs, so both are accepted. Advisory only: the new node writes 'prime characteristic' without citing def-pc-field-characteristic, as the sibling Witt node does. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.AdditiveSubgroupCommutativeExtensionsWitt",
+  "declaration": "AlgebraicGeometry.StandardGroupSchemes.additive_subgroup_commutative_extensions_witt",
+  "file": "lean/Sheaf/AlgebraicGeometry/AdditiveSubgroupCommutativeExtensionsWitt.lean",
+  "statement": "theorem additive_subgroup_commutative_extensions_witt (k : Type u) [Field k] (p : ℕ) [Fact p.Prime] [CharP k p] (hperfect : ∀ x : k, ∃ y : k, y ^ p = x) (Q E : Over (Spec (.of k))) [GrpObj Q] [GrpObj E] [IsCommMonObj Q] [IsCommMonObj E] [IsAffine Q.left] [IsAffine E.left] [LocallyOfFiniteType Q.hom] [QuasiCompact Q.hom] [LocallyOfFiniteType E.hom] [QuasiCompact E.hom] (ι : Q ⟶ additive k) [IsClosedSubgroupScheme ι] (i : additive k ⟶ E) (q : E ⟶ Q) [IsMonHom i] [IsMonHom q] (hkernel : ∃ e : additive k ≅ GrpObj.ker q, e.hom ≫ GrpObj.kerι q = i) [Flat q.left] [Surjective q.left] [LocallyOfFinitePresentation q.left] [QuasiCompact q.left] [QuasiSeparated q.left] : ∃ (h : Q ⟶ additive k) (a : E ⟶ LengthTwoWitt.scheme k p), IsMonHom h ∧ IsMonHom a ∧ ∃ e : E ≅ pullback h (LengthTwoWitt.truncation k p), e.hom ≫ pullback.fst h (LengthTwoWitt.truncation k p) = q ∧ e.hom ≫ pullback.snd h (LengthTwoWitt.truncation k p) = a ∧ a ≫ LengthTwoWitt.truncation k p = q ≫ h ∧ i ≫ a = LengthTwoWitt.inclusion k p",
+  "branch": "newtargets-dag",
+  "by": "Q19",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-ec0f6e907",
+  "group": "Q19",
+  "result": "pass",
+  "note": "Read the item node, the 7 stmt_dep records and their Lean source (LengthTwoWitt scheme/group/inclusion/truncation/extension, StandardGroupSchemes.additive, IsClosedSubgroupScheme, GrpObj.ker/kerι, pullback). Every hypothesis matches: perfect field via hperfect, Fact p.Prime + CharP, closed subgroup ι, commutative affine finite-type Q/E, scheme-theoretic kernel via hkernel, q flat+surjective+LFP+QC+QS. Conclusion: ∃ h, a homs, e : E ≅ pullback h τ with fst∘e=q, snd∘e=a, τa=hq, ai=j, so e respects the pullback group law and is the identity on kernel and quotient; h=0 is allowed. lean.statement matches the file verbatim; the node is unchanged from live apart from its lean record; imports are the stmt/proof-dep modules; no new defs, proof is sorry, docstrings carry source and blueprint; searches show no existing statement. No findings, no fixes."
+ }
+}

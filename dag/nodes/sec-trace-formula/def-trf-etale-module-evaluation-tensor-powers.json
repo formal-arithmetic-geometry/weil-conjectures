@@ -1,0 +1,203 @@
+{
+ "id": "def-trf-etale-module-evaluation-tensor-powers",
+ "kind": "definition",
+ "title": "Canonical etale module evaluation and tensor-power constructions",
+ "status": "split",
+ "import_flags": [],
+ "statement": "Let $S$ be a scheme [def-pc-scheme], and let $f:X\\to Y$ be a morphism of algebraic spaces over $S$ with their small etale module categories [def-trf-algebraic-space]. Use the specified module direct image, tensor pullback and adjunction [def-trf-space-etale-module-functors]. For a module $M$ on $X$, define its evaluation $f^*f_*M\\to M$ to be the counit of this adjunction. Here a cofan is a cocone on a discrete diagram, with colimiting meaning the colimit universal property [def-weil-pbc-category-colimit]. Given cofans $c$ of $(f_*B_d)_{d\\geq0}$ and $b$ of $(B_d)_{d\\geq0}$, their pulled cofan has vertex $f^*(c.pt)$ and injections $f^*(c.inj_d)$. When this pulled cofan is colimiting, define total evaluation $f^*(c.pt)\\to b.pt$ by its composites with these injections: the degree-$d$ counit followed by $b.inj_d$. On the small affine etale ringed model with restriction equivalence [def-sfb-space-small-ringed-model], use the existing sheaf tensor [def-pur-sheaf-tensor-product]. For any module $L$ on $X$, define $P_0=\\mathcal O$ and $P_{n+1}=L|_{small}\\otimes P_n$ on this model, and define $L^{\\otimes n}$ on the original site by the inverse restriction equivalence applied to $P_n$. Use the unitors and associator of a monoidal category [def-sfb-monoidal-category], namely those of the sheaf tensor of module sheaves on the small model with unit $\\mathcal O$: on local pure tensors [def-pur-module-pure-tensor] the left unitor sends $r\\otimes s$ to $rs$ and the associator sends $(s\\otimes t)\\otimes u$ to $s\\otimes(t\\otimes u)$, which determines them by the bilinear universal property of the sheaf tensor [lem-pc-sites-sheaf-tensor-bilinear-universal]. Concatenation $P_{m+n}\\simeq P_m\\otimes P_n$ is recursively given by the inverse left unitor for $m=0$, and by tensoring the preceding comparison with $L|_{small}$ then the inverse associator for the successor step. For module sheaves $M,N$ on the small model, an object $V$ of it and sections $s\\in M(V)$, $t\\in N(V)$, the local pure-tensor section $s\\otimes t\\in(M\\otimes N)(V)$ is the existing canonical pure-tensor section [def-pur-module-pure-tensor]: the sectionwise tensor $s\\otimes_{\\mathcal O(V)}t$ mapped through the presheaf-to-sheafification unit [def-weil-presheaf-modules-sheafification] and the inverse of the tensor/sheafification identification. These constructions include all degrees, arbitrary modules, all module-sheaf cofans, and the original coefficient universe.",
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-trf-algebraic-space",
+  "def-trf-space-etale-module-functors",
+  "def-sfb-space-small-ringed-model",
+  "def-pur-sheaf-tensor-product",
+  "def-weil-presheaf-modules-sheafification",
+  "def-weil-pbc-category-colimit",
+  "def-sfb-monoidal-category",
+  "def-pur-module-pure-tensor",
+  "lem-pc-sites-sheaf-tensor-bilinear-universal"
+ ],
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex; literature/stacks-project/spaces-descent.tex; literature/stacks-project/sites.tex",
+  "place": "Tags 03D7, 03EK and 03EL; Tag 0D3C, the maps psi_d and psi; Tag 039Z, affine-site comparison"
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Sheaf module adjunction counit homogeneous coproduct evaluation tensor powers on algebraic space etale site",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"SheafOfModules.pushforwardPushforwardAdj_counit_app_val_app\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.PushforwardContinuous\", \"type\": \"(M U x) : ((pushforwardPushforwardAdj adj φ ψ H₁ H₂).counit.app M).val.app U x = M.val.map (adj.unit.app U.unop).op x\", \"doc\": \"For any sheaf $ M $ of modules over a ring sheaf $ R $, the counit of the adjunction between the pushforward functors $ F_* $ and $ G_* $ evaluated at $ M $, an object $ U $ in the site $ \\\\mathcal{C} \"}\n  {\"name\": \"SheafOfModules.PullbackConstruction.adjunction\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.PullbackContinuous\", \"type\": \": (forget S ⋙ PresheafOfModules.pullback.{v} φ.val ⋙ PresheafOfModules.sheafification (𝟙 R.val)) ⊣ pushforward.{v} φ\", \"doc\": \"Given categories $\\\\mathcal{C}$ and $\\\\mathcal{D}$ with Grothendieck topologies $J$ and $K$, a continuous functor $F : \\\\mathcal{C} \\\\to \\\\mathcal{D}$, and sheaves of rings $S$ on $\\\\mathcal{C}$ and $R$ on \"}\n  {\"name\": \"CategoryTheory.plusPlusAdjunction_counit_app_val\", \"module\": \"Mathlib.CategoryTheory.Sites.ConcreteSheafification\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] (J : CategoryTheory.GrothendieckTopology C) (D : Type w)\\n  [inst_1 : CategoryTheory.Category.{w', w} D] {FD : D → D → Type u_1} {CD : D → Type t}\\n  [inst_2 : (X Y : D) → FunLike (FD X Y) (CD X) (CD Y)] [instCC : CategoryTheory.ConcreteCategory\", \"doc\": \"For any sheaf $ Y $ on a category $ \\\\mathcal{C} $ with respect to a Grothendieck topology $ J $, the counit of the sheafification adjunction evaluated at $ Y $ is the natural transformation obtained b\"}\n  {\"name\": \"CategoryTheory.constantSheafAdj_counit_app\", \"module\": \"Mathlib.CategoryTheory.Sites.ConstantSheaf\", \"type\": \"∀ {C : Type u_1} [inst : CategoryTheory.Category.{v_1, u_1} C] (J : CategoryTheory.GrothendieckTopology C)\\n  (D : Type u_2) [inst_1 : CategoryTheory.Category.{v_2, u_2} D] [inst_2 : CategoryTheory.HasWeakSheafify J D] {T : C}\\n  (hT : CategoryTheory.Limits.IsTerminal T) (X : CategoryTheory.Sheaf J D)\", \"doc\": \"For a category $\\\\mathcal{C}$ with terminal object $T$, a category $\\\\mathcal{D}$, and a sheaf $X$ on $\\\\mathcal{C}$ with values in $\\\\mathcal{D}$, the counit of the adjunction between the constant sheaf \"}\n  {\"name\": \"SheafOfModules.pushforwardPushforwardAdj\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.PushforwardContinuous\", \"type\": \": pushforward.{v} φ ⊣ pushforward.{v} ψ\", \"doc\": \"Given categories $\\\\mathcal{C}$ and $\\\\mathcal{D}$ with Grothendieck topologies $J$ and $K$, and continuous functors $F : \\\\mathcal{C} \\\\to \\\\mathcal{D}$ and $G : \\\\mathcal{D} \\\\to \\\\mathcal{C}$ forming an ad\"}\n  {\"name\": \"CategoryTheory.Functor.sheafAdjunctionCocontinuous_counit_app_val\", \"module\": \"Mathlib.CategoryTheory.Sites.CoverLifting\", \"type\": \"(F : Sheaf J A) : ((G.sheafAdjunctionCocontinuous A J K).counit.app F).val = (G.op.ranAdjunction A).counit.app F.val\", \"doc\": \"For a cocontinuous functor $ G : \\\\mathcal{C} \\\\to \\\\mathcal{D} $ between sites with Grothendieck topologies $ J $ and $ K $, the counit of the adjunction between the continuous and cocontinuous sheaf pu\"}\n  {\"name\": \"CategoryTheory.Sheaf.adjunction_counit_app_val\", \"module\": \"Mathlib.CategoryTheory.Sites.Adjunction\", \"type\": \"[HasWeakSheafify J D] [HasSheafCompose J F] (adj : G ⊣ F) (Y : Sheaf J D) :\\n  ((adjunction J adj).counit.app Y).val = sheafifyLift J (((adj.whiskerRight Cᵒᵖ).counit.app Y.val)) Y.cond\", \"doc\": \"For a sheaf $Y$ on a category $\\\\mathcal{C}$ with values in a category $\\\\mathcal{D}$, the counit of the adjunction between sheaf functors evaluated at $Y$ satisfies the condition that its underlying pr\"}\n  {\"name\": \"CategoryTheory.sheafificationAdjunction_counit_app_val\", \"module\": \"Mathlib.CategoryTheory.Sites.Sheafification\", \"type\": \"(P : Sheaf J D) : ((sheafificationAdjunction J D).counit.app P).val = sheafifyLift J (𝟙 P.val) P.cond\", \"doc\": \"For any sheaf $P$ with respect to a Grothendieck topology $J$, the counit of the sheafification adjunction evaluated at $P$, when expressed as a presheaf, coincides with the unique morphism obtained b\"}\n",
+   "date": "2026-10-24",
+   "verdict": "No matching standalone definition node. Existing category and tensor primitives are reused; project helper declarations are extracted without duplication as required by the H2 return."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Tensor powers of sheaves of modules on the small etale site and evaluation by direct image pullback adjunction counit",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"PresheafOfModules.Monoidal.tensorObjMap\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Presheaf/Monoidal\", \"type\": \"{C : Type u_1} →\\n  [inst : CategoryTheory.Category.{v_1, u_1} C] →\\n    {R : CategoryTheory.Functor Cᵒᵖ CommRingCat} →\\n      (M₁ M₂ : PresheafOfModules (R.comp (CategoryTheory.forget₂ CommRingCat RingCat))) →\\n        {X Y : Cᵒᵖ} →\\n          (f : X ⟶ Y) →\\n            CategoryTheory.MonoidalCategoryStr\", \"doc\": \"For a presheaf of modules $ M_1, M_2 $ over a presheaf of commutative rings $ R $ on a category $ \\\\mathcal{C} $, and a morphism $ f: X \\\\to Y $ in $ \\\\mathcal{C}^\\\\text{op} $, this defines the $ R(X) $-l\"}\n  {\"name\": \"SheafOfModules.pullbackObjUnitToUnit\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackFree\", \"type\": \"{C : Type u₁} →\\n  [inst : CategoryTheory.Category.{v₁, u₁} C] →\\n    {D : Type u₂} →\\n      [inst_1 : CategoryTheory.Category.{v₂, u₂} D] →\\n        {J : CategoryTheory.GrothendieckTopology C} →\\n          {K : CategoryTheory.GrothendieckTopology D} →\\n            {F : CategoryTheory.Functor C D} →\\n     \", \"doc\": \"Given categories $\\\\mathcal{C}$ and $\\\\mathcal{D}$ with Grothendieck topologies $J$ and $K$, a continuous functor $F : \\\\mathcal{C} \\\\to \\\\mathcal{D}$, and a natural transformation $\\\\phi : S \\\\to F_*R$ betw\"}\n  {\"name\": \"PresheafOfModules.Monoidal.tensorObj\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Presheaf/Monoidal\", \"type\": \"{C : Type u_1} →\\n  [inst : CategoryTheory.Category.{v_1, u_1} C] →\\n    {R : CategoryTheory.Functor Cᵒᵖ CommRingCat} →\\n      PresheafOfModules (R.comp (CategoryTheory.forget₂ CommRingCat RingCat)) →\\n        PresheafOfModules (R.comp (CategoryTheory.forget₂ CommRingCat RingCat)) →\\n          PresheafOf\", \"doc\": \"For a category $\\\\mathcal{C}$ and a presheaf $R : \\\\mathcal{C}^{\\\\text{op}} \\\\to \\\\text{CommRing}$, the tensor product operation in the monoidal category of presheaves of modules over $R$ is defined object\"}\n  {\"name\": \"SheafOfModules.unitToPushforwardObjUnit\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackFree\", \"type\": \"{C : Type u₁} →\\n  [inst : CategoryTheory.Category.{v₁, u₁} C] →\\n    {D : Type u₂} →\\n      [inst_1 : CategoryTheory.Category.{v₂, u₂} D] →\\n        {J : CategoryTheory.GrothendieckTopology C} →\\n          {K : CategoryTheory.GrothendieckTopology D} →\\n            {F : CategoryTheory.Functor C D} →\\n     \", \"doc\": \"Given categories $\\\\mathcal{C}$ and $\\\\mathcal{D}$ with Grothendieck topologies $J$ and $K$, a continuous functor $F : \\\\mathcal{C} \\\\to \\\\mathcal{D}$, sheaves of rings $S$ on $\\\\mathcal{C}$ and $R$ on $\\\\ma\"}\n  {\"name\": \"LightCondensed.instMonoidalClosedSheafLightProfiniteCoherentTopologyModuleCat\", \"module\": \"Mathlib/Condensed/Light/Monoidal\", \"type\": \"(R : Type u) →\\n  [inst : CommRing R] →\\n    CategoryTheory.MonoidalClosed (CategoryTheory.Sheaf (CategoryTheory.coherentTopology LightProfinite) (ModuleCat R))\", \"doc\": \"For any commutative ring $ R $, the category of sheaves on light profinite spaces (compact Hausdorff, totally disconnected, second-countable topological spaces) equipped with the coherent Grothendieck\"}\n  {\"name\": \"LightCondensed.instMonoidalFunctorOppositeLightProfiniteModuleCatSheafCoherentTopologyPresheafToSheaf\", \"module\": \"Mathlib/Condensed/Light/Monoidal\", \"type\": \"(R : Type u) →\\n  [inst : CommRing R] →\\n    (CategoryTheory.presheafToSheaf (CategoryTheory.coherentTopology LightProfinite) (ModuleCat R)).Monoidal\", \"doc\": \"The sheafification functor from presheaves to sheaves on the coherent topology of light profinite spaces (compact, Hausdorff, totally disconnected, second-countable topological spaces) with values in \"}\n  {\"name\": \"LightCondensed.instMonoidalCategorySheafLightProfiniteCoherentTopologyModuleCat\", \"module\": \"Mathlib/Condensed/Light/Monoidal\", \"type\": \"(R : Type u) →\\n  [inst : CommRing R] →\\n    CategoryTheory.MonoidalCategory\\n      (CategoryTheory.Sheaf (CategoryTheory.coherentTopology LightProfinite) (ModuleCat R))\", \"doc\": \"For any commutative ring $ R $, the category of light condensed $ R $-modules forms a monoidal category. This structure is defined by equipping the category of sheaves on light profinite spaces (compa\"}\n  {\"name\": \"PresheafOfModules.Monoidal.tensorObj_obj\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Presheaf/Monoidal\", \"type\": \"∀ {C : Type u_1} [inst : CategoryTheory.Category.{v_1, u_1} C] {R : CategoryTheory.Functor Cᵒᵖ CommRingCat}\\n  (M₁ M₂ : PresheafOfModules (R.comp (CategoryTheory.forget₂ CommRingCat RingCat))) (X : Cᵒᵖ),\\n  (PresheafOfModules.Monoidal.tensorObj M₁ M₂).obj X =\\n    CategoryTheory.MonoidalCategoryStruct.\", \"doc\": \"For a category $\\\\mathcal{C}$ and a presheaf $R : \\\\mathcal{C}^{\\\\text{op}} \\\\to \\\\text{CommRing}$, the tensor product of two presheaves of modules $M_1$ and $M_2$ over $R$ is defined object-wise. For each\"}\n",
+   "date": "2026-10-24",
+   "verdict": "No matching standalone definition node. Existing category and tensor primitives are reused; project helper declarations are extracted without duplication as required by the H2 return."
+  },
+  {
+   "tool": "grep",
+   "query": "evaluationCounit|evaluationLinePower|evaluationPowerAddIso|tensorPowNat",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-24",
+   "verdict": "No matching standalone definition node. Existing category and tensor primitives are reused; project helper declarations are extracted without duplication as required by the H2 return."
+  },
+  {
+   "tool": "grep",
+   "query": "rg -n evaluationCounit|evaluationLinePower|evaluationPowerAddIso lean/WeilConjectures lean/Sheaf; rg -n evaluationCounit|evaluationLinePower dag/nodes; python3 tools/blueprint_refs.py search graded evaluation",
+   "results": "The exact AlgebraicGeometry.AlgebraicSpace declarations occur only in Sheaf.TraceFormula.GradedEvaluationZariskiEtaleComparison and its theorem node record. No definition node owns the bundle; blueprint search graded evaluation has no matching node. Other evaluationCounit hits use unrelated namespaces (quotient systems and reduction towers).",
+   "date": "2026-10-24",
+   "verdict": "Extract these existing definitions from their theorem owner, as explicitly requested by L on returned immutable head 0982992948d1; do not create second copies."
+  },
+  {
+   "tool": "grep",
+   "query": "evaluationCounit|evaluationSmallPower|tensorPowNat|Cofan.IsColimit.desc|tensorObjIsoSheafification",
+   "results": "Search log 31b384be65884899; 25 hits; Mathlib/AlgebraicTopology/SimplicialObject/Split.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/Free.lean, Mathlib/CategoryTheory/Adhesive/Basic.lean, Mathlib/CategoryTheory/GradedObject.lean, Mathlib/CategoryTheory/GradedObject.lean, Mathlib/CategoryTheory/GradedObject.lean, Mathlib/CategoryTheory/GradedObject/Trifunctor.lean, Mathlib/CategoryTheory/GradedObject/Trifunctor.lean. ",
+   "date": "2026-10-26",
+   "verdict": "no match: the algebraic-space evaluation bundle is not supplied by this result; existing categorical primitives are reused through the statement dependencies."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Natural tensor powers of module sheaves evaluation via pullback pushforward counit and coproduct descent",
+   "results": "Search log 31d62bffeb71a293; 8 hits; SheafOfModules.pushforwardPushforwardAdj_counit_app_val_app, TensorPower, SheafOfModules.PullbackConstruction.adjunction, SheafOfModules.pullback, AlgebraicGeometry.Scheme.Modules.pullbackPushforwardAdjunction, SheafOfModules.pushforwardNatTrans_app_val_app_apply, SheafOfModules.pullbackPushforwardAdjunction, TensorPower.mulEquiv. ",
+   "date": "2026-10-26",
+   "verdict": "no match: the algebraic-space evaluation bundle is not supplied by this result; existing categorical primitives are reused through the statement dependencies."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.counit, CategoryTheory.Limits.Cofan",
+   "results": "Search log 4f53cda18c2baa0c; 0 hits; . ",
+   "date": "2026-10-26",
+   "verdict": "no match: the algebraic-space evaluation bundle is not supplied by this result; existing categorical primitives are reused through the statement dependencies."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Adjunction counit evaluation direct image pullback module sheaves tensor powers and coproduct cofan descent",
+   "results": "Search log 7af169fbf6501258; 8 hits; SheafOfModules.pushforwardPushforwardAdj_counit_app_val_app, SheafOfModules.PullbackConstruction.adjunction, SheafOfModules.pullbackObjUnitToUnit, SheafOfModules.pullbackPushforwardAdjunction_homEquiv_pullbackObjUnitToUnit, SheafOfModules.pullbackPushforwardAdjunction_homEquiv_symm_unitToPushforwardObjUnit, SheafOfModules.unitToPushforwardObjUnit, AlgebraicGeometry.Scheme.Modules.restrictAdjunction_counit_app_app, SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom. ",
+   "date": "2026-10-26",
+   "verdict": "no match: the algebraic-space evaluation bundle is not supplied by this result; existing categorical primitives are reused through the statement dependencies."
+  },
+  {
+   "tool": "grep",
+   "query": "def desc|def mk|def counit|tensorObjIsoSheafification|tensorPowNat",
+   "results": "Search log 4f53cda18c2baa0c; 0 hits; . Subdirectory: CategoryTheory/Limits/Shapes/Products.lean. ",
+   "date": "2026-10-26",
+   "verdict": "no match: the algebraic-space evaluation bundle is not supplied by this result; existing categorical primitives are reused through the statement dependencies."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Limits.Cofan.IsColimit.desc",
+   "results": "Search log 98b99c2c0f5d90e0; 12 hits; CategoryTheory.Limits.Cofan.IsColimit.desc, CategoryTheory.Limits.Cofan.IsColimit.fac, CategoryTheory.Limits.Cofan.IsColimit.fac_assoc, CategoryTheory.Limits.Multicofork.toSigmaCofork_π, CategoryTheory.Limits.Multicofork.sigma_condition, CategoryTheory.Limits.Multicofork.sigma_condition_assoc, CategoryTheory.Limits.MultispanIndex.multicoforkEquivSigmaCofork_functor_obj_ι_app, CategoryTheory.Limits.MonoCoprod.mono_of_injective. ",
+   "date": "2026-10-26",
+   "verdict": "generalization: the colimit descent primitive is already covered by def-weil-pbc-category-colimit; not the full bundle."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "In a monoidal category define powers recursively by unit and tensoring on the left and concatenate via associators",
+   "results": "Search log 04d9b410a7f3da4c; 8 hits; CategoryTheory.MonObj.comp_pow, CategoryTheory.MonoidalCategory.term_⊗ᵢ_, CategoryTheory.Mon_Class.comp_pow, CategoryTheory.MonObj.comp_pow_assoc, CategoryTheory.MonObj.pow_comp_assoc, CategoryTheory.MonObj.pow_comp, CategoryTheory.MonoidalCategoryStruct.tensorObj, CategoryTheory.Mon_Class.pow_comp. ",
+   "date": "2026-10-26",
+   "verdict": "no match: the algebraic-space evaluation bundle is not supplied by this result; existing categorical primitives are reused through the statement dependencies."
+  },
+  {
+   "tool": "grep",
+   "query": "protected def IsColimit.desc|theorem IsColimit.fac|def Cofan|abbrev Cofan",
+   "results": "Search log 71030b0a117ec5b2; 5 hits; 56, 67, 78, 147, 158. Subdirectory: CategoryTheory/Limits/Shapes/Products.lean. ",
+   "date": "2026-10-26",
+   "verdict": "no match: the algebraic-space evaluation bundle is not supplied by this result; existing categorical primitives are reused through the statement dependencies."
+  },
+  {
+   "tool": "grep",
+   "query": "counit :|def counit|tensorObjIsoSheafification|tensorPowNat",
+   "results": "Search log a2059ecea68b195a; 23 hits; Mathlib/CategoryTheory/Adjunction/Unique.lean, Mathlib/CategoryTheory/Adjunction/Unique.lean, Mathlib/CategoryTheory/Adjunction/Lifting/Left.lean, Mathlib/CategoryTheory/Adjunction/Basic.lean, Mathlib/CategoryTheory/Adjunction/Basic.lean, Mathlib/CategoryTheory/Adjunction/Basic.lean, Mathlib/CategoryTheory/Adjunction/Basic.lean, Mathlib/CategoryTheory/Adjunction/Basic.lean. Subdirectory: CategoryTheory/Adjunction. ",
+   "date": "2026-10-26",
+   "verdict": "generalization: Adjunction.counit supplies the counit primitive, used with the adjunction of def-trf-space-etale-module-functors; not the full bundle."
+  },
+  {
+   "tool": "grep",
+   "query": "Cofan.IsColimit.desc|Cofan.IsColimit.fac|abbrev Cofan",
+   "results": "Search log a25fb390235402ef; 21 hits; Mathlib/CategoryTheory/Limits/Shapes/Pullback/IsPullback/Basic.lean, Mathlib/CategoryTheory/Limits/Shapes/Pullback/IsPullback/Basic.lean, Mathlib/CategoryTheory/Limits/Shapes/Multiequalizer.lean, Mathlib/CategoryTheory/Limits/Shapes/Multiequalizer.lean, Mathlib/CategoryTheory/Limits/Shapes/Multiequalizer.lean, Mathlib/CategoryTheory/Limits/Shapes/Multiequalizer.lean, Mathlib/CategoryTheory/Limits/Shapes/Multiequalizer.lean, Mathlib/CategoryTheory/Limits/Shapes/CombinedProducts.lean. Subdirectory: CategoryTheory/Limits/Shapes. ",
+   "date": "2026-10-26",
+   "verdict": "generalization: Cofan and Cofan.IsColimit.desc/fac supply the cofan primitive, already covered by def-weil-pbc-category-colimit; they do not define the complete bundle."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-graded-pushforward-etale-restriction",
+  "date": "2026-10-24",
+  "group": "Q65"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Historical polarized-descent section-algebra foundation, Stacks 0D3C: actual counits psi_d and their coproduct psi, and actual tensor powers for etale restriction. Definition ownership extracted under the H2 return on 0982992948d1.",
+   "via": [
+    "lem-trf-graded-pushforward-etale-restriction",
+    "lem-trf-space-section-algebra-etale-base-change",
+    "lem-trf-algebraic-space-ample-local",
+    "lem-trf-polarized-scheme-etale-descent",
+    "lem-trf-polarized-fine-log-etale-descent",
+    "lem-trf-coherent-log-ideal-chart-construction",
+    "lem-trf-log-blowup-normalization",
+    "lem-trf-log-regular-desingularization",
+    "lem-trf-nodal-pair-projective-resolution",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "lean": {
+  "module": "Sheaf.TraceFormula.EtaleModuleEvaluationTensorPowers",
+  "declaration": "AlgebraicGeometry.AlgebraicSpace.evaluationCounit",
+  "declarations": [
+   "AlgebraicGeometry.AlgebraicSpace.evaluationCounit",
+   "AlgebraicGeometry.AlgebraicSpace.evaluationPullbackCofan",
+   "AlgebraicGeometry.AlgebraicSpace.evaluationTotal",
+   "AlgebraicGeometry.AlgebraicSpace.evaluationSmallModulesMonoidal",
+   "AlgebraicGeometry.AlgebraicSpace.evaluationSmallPower",
+   "AlgebraicGeometry.AlgebraicSpace.evaluationLinePower",
+   "AlgebraicGeometry.AlgebraicSpace.evaluationPowerAddIso",
+   "AlgebraicGeometry.AlgebraicSpace.evaluationSmallTmul"
+  ],
+  "file": "lean/Sheaf/TraceFormula/EtaleModuleEvaluationTensorPowers.lean",
+  "statement": "def evaluationCounit {X Y : AlgebraicSpace S} (f : X ⟶ Y) (M : X.Modules) :\n    (moduleTensorPullback f).obj ((moduleDirectImage f).obj M) ⟶ M",
+  "branch": "newtargets-dag",
+  "by": "Q65",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "H2 ownership extraction requested by maintainer L. These eight definitions and the monoidal instance are moved verbatim, retaining their names, signatures, bodies and universe parameters, from GradedEvaluationZariskiEtaleComparison. That theorem module publicly imports this module and removes the definitions. There is exactly one declaration of each name; no theorem conclusion is used as a definition premise. The moved monoidal instance is registered at priority 100 to avoid unfolding algebraic-space small models in unrelated tensor instance searches; its data is unchanged."
+ },
+ "split_report": {
+  "date": "2026-10-26",
+  "item": "def-trf-etale-module-evaluation-tensor-powers",
+  "worker": "stage1",
+  "summary": "Audited this definition bundle against its existing eight Sheaf implementations and Stacks. Retained all constructions, arbitrary modules/cofans, degree zero and the section universe. Added the existing colimit and monoidal-category definition dependencies to expose cofans, their universal property, unitors and associators. Corrected the generic site-comparison source from section tag 039Z to lemma tag 03A0 and supplied exact labels. No new nodes or proof steps: this is a definition, with all data given by counit, colimit descent, recursion and the specified restriction equivalence. Preserved Q65 search evidence and Lean ownership records; appended NF searches.",
+  "blueprint": "Nearest ancestor lem-trf-local-term-locality, through the retained historical polarized-descent chain: Stacks 0D3C section-algebra construction of psi_d and psi. The current latest ancestor proof does not itself mention this helper; it remains a definition used by the existing graded-pushforward branch, not a replacement for the contracting-correspondence argument."
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "NT-cc-NF-1938e65f0",
+  "group": "NF",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NF-1938e65f0 (reviewer sub-agent of L); spot-checked: I read the item in full; the delivery adds no new nodes. Mathematics: every clause is correct. (1) Evaluation is the counit of the adjunction in def-trf-space-etale-module-functors, which is psi_d in Stacks 0D3C (proof, around spaces-descent.tex l.2172), via 03D7. (2) Total evaluation descends along the pulled cofan, which is the only one assumed colimiting; types and the discrete index check, and Lean Cofan.IsColimit.desc agrees. (3) P_0=O, P_{n+1}=L|small⊗P_n is the same recursion as tensorPowNat. (4) Concatenation checked at m=0, at the successor step and at m=n=0, and agrees with evaluationPowerAddIso. (5) The pure-tensor direction agrees with tensorObjIsoSheafification.inv. Three repairs, written as a whole corrected item JSON under fixes/dag/nodes/sec-trace-formula/. (a) The report and split_report say the source was corrected from Tag 039Z (only a section) to 03A0 (lemma-equivalence) with exact labels, but the delivered source still read 039Z. I rewrote the source with 03D7, 03EK, 03EL, 0D3C (proof, psi_d/psi) and 03A0, each with its label checked in tags/tags. (b) The pure-tensor clause duplicated the existing def-pur-module-pure-tensor and def-sfb-sheaf-tensor-pure-section, the latter with a Lean body identical to evaluationSmallTmul. The clause now cites def-pur-module-pure-tensor and introduces M, N, V, s and t itself. (c) The unitors and associator cited only the abstract notion def-sfb-monoidal-category. I pinned them as those of the sheaf tensor with unit O, given on local pure tensors (r⊗s↦rs, (s⊗t)⊗u↦s⊗(t⊗u)) and determined by lem-pc-sites-sheaf-tensor-bilinear-universal (Stacks 03EK). This does not change the construction, since Lean's SheafOfModules.monoidalCategory is that structure. Added stmt_deps: def-pur-module-pure-tensor and lem-pc-sites-sheaf-tensor-bilinear-universal. Hypotheses and the universe are unchanged. No SGA source, and no other duplicate powers construction exists (the def-pur-sheaf-tensor-product and def-sp-scalar-tensor-comparison-data powers use different recursions).; 1 file(s) fixed by the reviewer"
+ }
+}

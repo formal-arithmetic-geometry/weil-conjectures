@@ -1,0 +1,165 @@
+{
+ "id": "lem-sf-site-pullback-tensor-generators",
+ "kind": "statement",
+ "title": "Ordinary tensor comparison and flat representatives on a ringed site",
+ "statement": "For essentially small sites C,D with independent coefficient universe containing both site universes, let U:C→D be continuous and representably flat. Let R,S be commutative ring sheaves and a:R→U_*S a structural ring map. For any specified additive left adjoint F⊣a_*, F preserves K-flat complexes having flat terms. There is a unique family of ordinary tensor isomorphisms F(M⊗N)≅FM⊗FN, natural in M,N and sending each restricted scalar multiple of the adjunction-unit image of a pure tensor to the tensor of the two corresponding unit generators. No derived category or total chain comparison is asserted. [def-coef-semilinear-system-models] Equivalently this is unique ordinary comparison data [def-sf-ordinary-tensor-pullback-data], whose remaining fields are propositions.",
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tag 03EL (lemma-tensor-product-pullback); sites-cohomology.tex Tag 0G7E (lemma-pullback-K-flat)."
+ },
+ "stmt_deps": [
+  "def-coef-semilinear-system-models",
+  "def-sf-ordinary-tensor-pullback-data"
+ ],
+ "proof": [
+  {
+   "text": "Construct geometric inverse image using representable flatness; transfer ring and module operations and extend scalars along the adjunct of a. The two tensor maps send (x⊗y)⊗r to (x⊗r)⊗(y⊗1) and (x⊗r)⊗(y⊗s) to (x⊗y)⊗rs. Balancing, commutativity and sheafification show that they are inverse. Uniqueness of left adjoints transports this construction to the specified adjunction, preserving its unit. Keep the scalar-extension functor abstract through its exact object and morphism presentation when transporting its tensor and flatness properties. Retain the concrete geometric lift through its ring and module presentation before forming the structural ring map.",
+   "uses": [
+    "def-pur-cochain-coefficient-arrows",
+    "lem-pur-independent-composite-algebraic-image",
+    "lem-pur-independent-inverse-image-tensor-comparison",
+    "lem-pur-independent-ringed-tensorator-existence",
+    "lem-pur-varying-ring-tensor-comparison",
+    "lem-weil-pbc-geometric-module-construction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03EL (lemma-tensor-product-pullback); sites-cohomology.tex Tag 0G7E (lemma-pullback-K-flat)."
+   }
+  },
+  {
+   "text": "Evaluate the set-sheaf adjunction unit on a pure tensor. Naturality with the pure pairing and both projections gives the ordinary module unit formula after cancelling the transported comparison. Restrict this equality to every site arrow and multiply by a local scalar. The module adjunction and pure-tensor generation prove uniqueness; naturality transports along the same comparison. Pure-section extensionality is the generic sheafification lemma in the tensorator construction, so the coefficient-specialized ordinary reduction is not needed. Evaluate the inverse-image pairing and scalar linearity first as section lemmas with abstract modules; reuse them after pullback specialization.",
+   "uses": [
+    "def-coef-semilinear-system-models"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03EL (lemma-tensor-product-pullback); sites-cohomology.tex Tag 0G7E (lemma-pullback-K-flat)."
+   }
+  },
+  {
+   "text": "Apply ringed-topos pullback preservation of K-flat complexes with flat terms, then transport across the same left-adjoint isomorphism.",
+   "uses": [
+    "lem-weil-pbc-ringed-pullback-preserves-kflat"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03EL (lemma-tensor-product-pullback); sites-cohomology.tex Tag 0G7E (lemma-pullback-K-flat)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-coef-semilinear-system-models",
+  "def-pur-cochain-coefficient-arrows",
+  "lem-pur-independent-composite-algebraic-image",
+  "lem-pur-independent-inverse-image-tensor-comparison",
+  "lem-pur-independent-ringed-tensorator-existence",
+  "lem-pur-varying-ring-tensor-comparison",
+  "lem-weil-pbc-geometric-module-construction",
+  "lem-weil-pbc-ringed-pullback-preserves-kflat"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tag 03EL (lemma-tensor-product-pullback); sites-cohomology.tex Tag 0G7E (lemma-pullback-K-flat). Independent-universe specialization of the linear adjunction construction in VaryingRingTensorComparison and the normalized tensorator and K-flat pullback declarations; the Lean proof constructs the structural ring map and normalizes the supplied adjunction explicitly."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "pullback.*tensor|tensor.*pullback",
+   "results": "Mathlib/CategoryTheory/LocallyCartesianClosed/Over.lean; Mathlib/CategoryTheory/Dialectica/Monoidal.lean; Mathlib/CategoryTheory/Monoidal/Cartesian/Over.lean; Mathlib/CategoryTheory/Monoidal/Cartesian/Over.lean; Mathlib/CategoryTheory/Monoidal/PushoutProduct.lean; Mathlib/CategoryTheory/Monoidal/PushoutProduct.lean; Mathlib/AlgebraicGeometry/PullbackCarrier.lean; Mathlib/AlgebraicGeometry/PullbackCarrier.lean",
+   "date": "2026-10-25",
+   "verdict": "Categorical pullback API found; no independent-universe ordinary/total/derived normalization theorem."
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules.pullback",
+   "results": "SheafOfModules.pullbackId; SheafOfModules.pullback; SheafOfModules.instIsLeftAdjointPullback; SheafOfModules.pullbackPushforwardAdjunction; SheafOfModules.pullbackComp; SheafOfModules.pullback_comp_id; SheafOfModules.pullback_id_comp; SheafOfModules.pullbackIso",
+   "date": "2026-10-25",
+   "verdict": "Categorical pullback API found; no independent-universe ordinary/total/derived normalization theorem."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A left adjoint module pullback on a ringed site preserves tensor products with pure tensor normalization",
+   "results": "SheafOfModules.instIsLeftAdjointPullback; PresheafOfModules.pullback; SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom; SheafOfModules.pullbackObjFreeIso; SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom_assoc; AlgebraicGeometry.Scheme.Modules.instIsLeftAdjointPullback; SheafOfModules.PullbackConstruction.adjunction; SheafOfModules.pullbackObjUnitToUnit",
+   "date": "2026-10-25",
+   "verdict": "Categorical pullback API found; no independent-universe ordinary/total/derived normalization theorem."
+  },
+  {
+   "tool": "grep",
+   "query": "cochain_tensor_model_rigidity|TensorComparisonModel|tensorPullbackTotal",
+   "results": "No matching declarations.",
+   "date": "2026-10-25",
+   "verdict": "No exact independent-coefficient ordinary/total/derived model normalization statement."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A natural ordinary tensor comparison descends from K-flat complexes to derived categories and determines the chain and derived comparison uniquely",
+   "results": "HasDerivedCategory.standard; Module.Flat.rTensor_shortComplex_exact; CommRingCat.Under.instPreservesFiniteLimitsUnderTensorProdOfFlatCarrier; Module.Flat.lTensor_shortComplex_exact; CategoryTheory.Functor.mapDerivedCategorySingleFunctor; HomologicalComplex.tensorHom; LinearMap.tensorEqLocusEquiv; Module.Flat.iff_rTensor_preserves_shortComplex_exact",
+   "date": "2026-10-25",
+   "verdict": "No exact independent-coefficient ordinary/total/derived model normalization statement."
+  },
+  {
+   "tool": "loogle",
+   "query": "NatIso.ofComponents",
+   "results": "No matching declarations.",
+   "date": "2026-10-25",
+   "verdict": "No exact independent-coefficient ordinary/total/derived model normalization statement."
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.AmbientPullbackTensorCoherence",
+  "date": "2026-10-25",
+  "group": "Y9"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "fix-prop-projection-formula",
+   "place": "The composition, refinement, exchange and proper-coincidence identities are [prop-sf-pf-coherence]: ambient pullback tensor normalization and representative comparison.",
+   "via": [
+    "lem-sf-ambient-pullback-tensor-coherence",
+    "lem-sf-ambient-proper-open-pasting",
+    "lem-sf-composition-projection-mate"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-rem-sf-pf-done",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.SitePullbackTensorGenerators",
+  "file": "lean/Sheaf/Paper/SitePullbackTensorGenerators.lean",
+  "declaration": "WeilConjectures.SemilinearSections.sitePullbackTensorGenerators",
+  "statement": "theorem sitePullbackTensorGenerators\n    {C D : Type c} [Category.{v} C] [Category.{v} D]\n    [EssentiallySmall.{r} C] [EssentiallySmall.{r} D]\n    (J : GrothendieckTopology C) (K : GrothendieckTopology D)\n    (U : C ⥤ D) [U.IsContinuous J K] [RepresentablyFlat U]\n    (R : Sheaf J CommRingCat.{r}) (S : Sheaf K CommRingCat.{r})\n    (φ : R ⟶ (U.sheafPushforwardContinuous CommRingCat.{r} J K).obj S)\n    (F : SemilinearSections.Mod.{c, v, r} J R ⥤\n      SemilinearSections.Mod.{c, v, r} K S) [F.Additive]\n    (adj : F ⊣ SheafOfModules.pushforward.{r}\n      ((sheafCompose J (forget₂ CommRingCat.{r} RingCat.{r})).map φ)) :\n    ∃! _data : OrdinaryTensorPullbackData.{c, v, r} J K U R S φ F adj, True",
+  "branch": "sheaf-dag",
+  "by": "Y9",
+  "date": "2026-10-25"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-16698",
+  "group": "Y9",
+  "result": "fix",
+  "landing": "20261026T071609-L-3954447",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-16698",
+  "group": "Y9",
+  "result": "fix",
+  "landing": "20261026T071609-L-3954447",
+  "kind": "interface",
+  "note": "independent cc review: item node lem-sf-ambient-pullback-tensor-coherence and 6 new nodes vs delivered Lean (tensorData_existsUnique proved via sitePullbackTensorGenerators/modelOfOrdinary/tensorComparisonModel_unique, axioms clean); TensorData abbrev and pure rewrite vs change records and the original structure/tensorSection; both direct importers compiled against the sandbox-built delivery"
+ }
+}

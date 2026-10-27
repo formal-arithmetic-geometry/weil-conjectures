@@ -1,0 +1,220 @@
+{
+ "id": "lem-route-sp-twists-common-cover",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-thm-int-restriction-line",
+   "via": [
+    "lem-sfb-integral-tate-line-constructible"
+   ],
+   "place": "det-thm-int-restriction-line.proof.md paragraph (3), the invertible integral Tate object used for constructibility; explicit common-cover calculation for the constructed twists of sk-def-sp-tate-twist"
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "A single pro-etale covering carries compatible root generators and trivializes all the constructed integral, rational and algebraic-closure coefficien",
+ "statement": "Fix a prime $\\ell$, a scheme $X$ on which $\\ell$ is invertible in every residue field, and an algebraic closure $\\overline{\\mathbf Q}_\\ell$ of $\\mathbf Q_\\ell$. Use the universe convention [def-weil-size-convention] and the small pro-etale site $C=X_{\\mathrm{pro\\acute et}}$ [def-weil-pbc-proetale-site]. Write $M_n=\\mu_{\\ell^{n+1},X}$, with its $(\\mathbf Z/\\ell^{n+1})_X$-module structure and power transition $t_n:M_{n+1}\\to M_n$ [def-pur-roots-of-unity-sheaf]. Use precisely the constructed finite, integral, rational and sheafified-colimit twists $A_X(1)$, $\\mathcal O_{E,X}(1)$, $E_X(1)$ and $\\overline{\\mathbf Q}_{\\ell,X}(1)$ of [sk-def-sp-tate-twist], where $E$ ranges over all finite intermediate extensions of $\\mathbf Q_\\ell$ in the fixed algebraic closure. Internal modules are read as sectionwise module sheaves through [def-weil-pbc-internal-abelian-sheaf-module-equivalence]. The notation $F|_U$ means restriction to $C/U$ [def-pur-localized-ringed-site].\n\nThere exist an index type $I$ in the site universe, objects $U_i$ of $C$, arrows $f_i:U_i\\to X$ forming a pro-etale covering family, sections $\\zeta_{n,i}\\in M_n(U_i)$ for every $n\\geq0$, and isomorphisms\n$$e_{n,i}:(\\mathbf Z/\\ell^{n+1})_X|_{U_i}\\xrightarrow{\\sim}M_n|_{U_i}$$\nsuch that:\n1. $t_n(\\zeta_{n+1,i})=\\zeta_{n,i}$, and for every $v:V\\to U_i$ and every $a\\in(\\mathbf Z/\\ell^{n+1})_X(V)$ the component of $e_{n,i}$ sends $a$ to $a\\cdot v^*\\zeta_{n,i}$ (additive module notation for exponentiation of roots).\n2. For every finite commutative ring $A$, every $r\\geq0$ with $\\ell^{r+1}=0$ in $A$, and every $i$, there is an $A_X|_{U_i}$-linear isomorphism $A_X(1)|_{U_i}\\cong A_X|_{U_i}$; the finite twist here uses the unique unital scalar map $\\mathbf Z/\\ell^{r+1}\\to A$.\n3. For every finite intermediate field $E$ and every $i$, there are isomorphisms $\\mathcal O_{E,X}(1)|_{U_i}\\cong\\mathcal O_{E,X}|_{U_i}$ and $E_X(1)|_{U_i}\\cong E_X|_{U_i}$, linear over their respective restricted coefficient rings.\n4. For every $i$ there is a $\\overline{\\mathbf Q}_{\\ell,X}|_{U_i}$-linear isomorphism $\\overline{\\mathbf Q}_{\\ell,X}(1)|_{U_i}\\cong\\overline{\\mathbf Q}_{\\ell,X}|_{U_i}$.\nThe same family $U_i$ works for all the quantified coefficients and indices. No quasi-compactness hypothesis is imposed on $X$.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-int-restriction/sk-thm-int-restriction-line.proof.md",
+  "place": "lem-sfb-integral-tate-line-constructible: the Lean of this node (its declaration uses) reaches AlgebraicGeometry.ProEtale.spTwists_commonCover, a sorry on the sorry route of batch3, batch4 with no node; Lean: SHEAF file lean/Sheaf/Paper/ProEtaleTateTwists.lean, declaration AlgebraicGeometry.ProEtale.spTwists_commonCover (module Sheaf.Paper.ProEtaleTateTwists, lines 557-600, proof `sorry`)"
+ },
+ "stmt_deps": [
+  "def-weil-size-convention",
+  "def-weil-pbc-proetale-site",
+  "def-pur-roots-of-unity-sheaf",
+  "sk-def-sp-tate-twist",
+  "def-weil-pbc-internal-abelian-sheaf-module-equivalence",
+  "def-pur-localized-ringed-site"
+ ],
+ "proof": [
+  {
+   "text": "Apply Scheme.tateTwist_finite_locallyFree to obtain one covering family U_i, compatible root sections zeta_n,i, normalized root basis isomorphisms e_n,i, and the finite coefficient clause. Keep the cover and both normalization identities verbatim. For each finite A killed by ell^(r+1), its nsmul vanishing follows by nsmul_eq_mul. The quotient scalar homomorphism returned by the finite theorem equals the displayed ZMod.castHom by subsingleton uniqueness. Specialize its signed-line local triviality to degree one; scalarTensorPower at one is the original line. This proves precisely the finite twist clause, including A the zero ring.",
+   "uses": [
+    "det-def-sp-tate-twist-locally-free"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For every finite intermediate E and every i, apply lem-sp-integral-rational-root-basis on W=U_i to the sections and normalized isomorphisms supplied by the first step. Their compatibility and normalization hypotheses are exactly the corresponding two clauses of that step. This gives both integral and rational signed-degree-one to signed-degree-zero isomorphisms on that same cover.",
+   "uses": [
+    "lem-sp-integral-rational-root-basis"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For each i apply lem-sp-qbar-root-basis to the very same supplied root sections, isomorphisms and identities on W=U_i. It gives the algebraic-closure local isomorphism on that same cover. Package these clauses with the original covering, sections, root identities and finite isomorphisms.",
+   "uses": [
+    "lem-sp-qbar-root-basis"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "det-def-sp-tate-twist-locally-free",
+  "lem-sp-integral-rational-root-basis",
+  "lem-sp-qbar-root-basis"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-an/sk-def-sp-tate-twist-locally-free.proof.md",
+  "place": "clauses (1)-(3); existing finite common-root theorem plus two explicit one-slice nonfinite coefficient subproblems"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "grep -rlw 'spTwists_commonCover' lean/.lake/packages/mathlib/Mathlib/",
+   "results": "none",
+   "date": "2026-10-25",
+   "verdict": "no match",
+   "note": "name grep by tools/route_nodes.py only; the stage-1 worker adds LeanSearch / Loogle / LeanFinder searches"
+  },
+  {
+   "tool": "grep",
+   "query": "TateTwist|tateTwist|compatible.*rootsOfUnity|rootsOfUnity.*(cover|trivial)",
+   "results": "3 hits: Mathlib/NumberTheory/DirichletCharacter/Orthogonality.lean, Mathlib/NumberTheory/MulChar/Duality.lean, Mathlib/NumberTheory/NumberField/Ideal/Basic.lean",
+   "date": "2026-10-25",
+   "verdict": "no match: only algebraic roots-of-unity/cyclotomic or etale-site infrastructure; no common-cover theorem for the constructed coefficient twists",
+   "subdirectory": ""
+  },
+  {
+   "tool": "leansearch",
+   "query": "A common pro-etale cover trivializes all coefficient Tate twist lines by compatible primitive roots of unity",
+   "results": "8 hits: Polynomial.cyclotomic.roots_to_finset_eq_primitiveRoots, Algebra.FormallyEtale.subsingleton_h1Cotangent, Algebra.Etale.formallyEtale, IsPrimitiveRoot.primitiveRootsPowEquivOfCoprime_apply_coe, IsPrimitiveRoot.primitiveRootsPowEquivOfCoprime, AlgebraicGeometry.Scheme.smallEtaleTopology, IsPrimitiveRoot.powerBasis.congr_simp, IsPrimitiveRoot.is_roots_of_minpoly",
+   "date": "2026-10-25",
+   "verdict": "no match: only algebraic roots-of-unity/cyclotomic or etale-site infrastructure; no common-cover theorem for the constructed coefficient twists",
+   "subdirectory": ""
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Scheme.ProEt, SheafOfModules",
+   "results": "0 hits: ",
+   "date": "2026-10-25",
+   "verdict": "no match: no matching declaration",
+   "subdirectory": ""
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A single pro-etale covering of a scheme with ell invertible trivializes every finite torsion Tate twist and all integral rational and algebraic closure coefficient Tate lines using compatible roots of unity",
+   "results": "8 hits: AlgebraicGeometry.Scheme.etaleTopology, AlgebraicGeometry.Scheme.smallEtaleTopology, AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified, AlgebraicGeometry.IsEtale.instFormallyUnramified, StandardEtalePair.instFormallyEtaleRing, AlgebraicGeometry.IsEtale.of_comp, Algebra.FormallyEtale.iff_exists_algEquiv_prod, StandardEtalePair.homEquiv",
+   "date": "2026-10-25",
+   "verdict": "no match: only algebraic roots-of-unity/cyclotomic or etale-site infrastructure; no common-cover theorem for the constructed coefficient twists",
+   "subdirectory": ""
+  },
+  {
+   "tool": "grep",
+   "query": "rootsOfUnitySheaf|tateModule|proEtaleRoots|purTwist|spIntegralTwist",
+   "results": "0 hits: ",
+   "date": "2026-10-25",
+   "verdict": "no match: no matching declaration",
+   "subdirectory": "AlgebraicGeometry"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a scheme on which l is invertible choose compatible primitive l power roots of unity on one proetale cover and identify inverse limits and scalar extensions of the root sheaves with their coefficient rings",
+   "results": "8 hits: cyclotomicCharacter.spec, cyclotomicCharacter.toFun_spec, Perfection.pthRoot, autAdjoinRootXPowSubCEquiv, AdjoinRootXPowSubCEquivToRootsOfUnity, adjoinRootXPowSubCEquiv_symm_eq_root, StandardEtalePair.homEquiv_symm_apply, cyclotomicCharacter.toFun",
+   "date": "2026-10-25",
+   "verdict": "no match: only algebraic roots-of-unity/cyclotomic or etale-site infrastructure; no common-cover theorem for the constructed coefficient twists",
+   "subdirectory": ""
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "maintainer",
+  "item": "lem-sfb-integral-tate-line-constructible",
+  "date": "2026-10-25",
+  "tool": "tools/route_nodes.py",
+  "why": "PROVISIONAL: sorried declaration on the sorry route (local/sorry-route.json) with no DAG node, recorded automatically after the route recompute (the human, 2026-10-23: every proof-related upstream sorry gets a node, and a node without a written proof goes to stage 1). The statement is only the Lean signature and docstring: the stage-1 worker writes it in words with [node] citations and stmt_deps, does the Mathlib searches (LeanSearch, Loogle or LeanFinder, local grep), fills blueprint.same_as, and splits it"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-int-restriction",
+ "lean": {
+  "existing": true,
+  "module": "Sheaf.Paper.ProEtaleTateTwists",
+  "file": "lean/Sheaf/Paper/ProEtaleTateTwists.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.spTwists_commonCover",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.spTwists_commonCover"
+  ],
+  "statement": "theorem spTwists_commonCover\n    [∀ x : X, Invertible (ℓ : X.residueField x)] :\n    ∃ (I : Type (u + 1)) (U : I → X.ProEt)\n      (f : ∀ i : I, U i ⟶ Scheme.ProEt.mk (𝟙 X))\n      (ζ : ∀ (n : ℕ) (i : I), (Scheme.purTwistRootsModule X ℓ n).val.obj (op (U i)))\n      (e : ∀ (n : ℕ) (i : I),\n        (SheafOfModules.unit (Scheme.purTwistRing X (Scheme.purTwistFiniteRing X ℓ n))).over\n            (U i) ≅ (Scheme.purTwistRootsModule X ℓ n).over (U i)),\n      Presieve.ofArrows U f ∈ (Scheme.ProEt.precoverage X).coverings _ ∧\n      (∀ (n : ℕ) (i : I),\n        (Scheme.proEtaleRootsOfUnityTransition X (ℓ ^ (n + 1)) (ℓ ^ (n + 2))\n          (pow_pos (Fact.out : ℓ.Prime).pos _) (pow_pos (Fact.out : ℓ.Prime).pos _)\n          (pow_dvd_pow ℓ (Nat.le_succ (n + 1)))).hom.app (op (U i))\n            (ζ (n + 1) i) = ζ n i) ∧\n      (∀ (n : ℕ) (i : I) (V : (Over (U i))ᵒᵖ)\n        (a : ((Scheme.purTwistRing X (Scheme.purTwistFiniteRing X ℓ n)).over (U i)).obj.obj V),\n        (e n i).hom.val.app V a =\n          a • (Scheme.purTwistRootsModule X ℓ n).val.map V.unop.hom.op (ζ n i)) ∧\n      (∀ (A : Type (u + 1)) [CommRing A] [Finite A] (r : ℕ)\n        (hA : (ℓ ^ (r + 1) : A) = 0) (i : I),\n        Nonempty ((spFiniteTwist X ℓ A r hA).over (U i) ≅\n          (SheafOfModules.unit\n            (Scheme.purTwistRing X (Scheme.tateFiniteCoefficient X A))).over (U i))) ∧\n      (∀ (E : PadicAlgCl.FiniteIntermediateField ℓ) (i : I),\n        Nonempty ((spSignedTwist X _ (spIntegralTwist X ℓ E) 1).over (U i) ≅\n          (spSignedTwist X _ (spIntegralTwist X ℓ E) 0).over (U i)) ∧\n        Nonempty ((spSignedTwist X _ (spRationalTwist X ℓ E) 1).over (U i) ≅\n          (spSignedTwist X _ (spRationalTwist X ℓ E) 0).over (U i))) ∧\n      ∀ i : I, Nonempty ((spSignedTwist X _ (spQbarTwist X ℓ) 1).over (U i) ≅\n        (spSignedTwist X _ (spQbarTwist X ℓ) 0).over (U i)) := by\n  sorry",
+  "by": "maintainer",
+  "date": "2026-10-25",
+  "note": "SHEAF declaration attached as it stands, proof still `sorry`; recorded by tools/route_nodes.py"
+ },
+ "split_report": {
+  "date": "2026-10-25",
+  "item": "lem-route-sp-twists-common-cover",
+  "worker": "stage1",
+  "group": "NY",
+  "summary": "Replaced the machine-made provisional signature/docstring by a self-contained statement preserving every quantified clause, and expanded the common-root construction into nine cited proof steps. Reused existing nodes throughout; no new nodes. Checked the actual finite internal levels, positive indexing, compatible reductions, cofinal integral coefficient comparison, finite-extension normalization and sheafified colimit action. No common-stage coefficient category is used. All proof steps are shorter than 2000 characters.",
+  "blueprint": "Carries the local Tate-line input of det-thm-int-restriction-line paragraph (3), via lem-sfb-integral-tate-line-constructible; realizes the finite/integral/rational/colimit construction of current sk-def-sp-tate-twist using only the compatible-root clause of det-def-sp-tate-twist-locally-free. The latter has additional older coefficient-category clauses and is not an exact attachment for this item.",
+  "tool_uses": [
+   {
+    "node": "det-def-sp-tate-twist-locally-free",
+    "why": "Only clause 1 supplies compatible primitive roots and their normalized finite basis maps; no clause about other coefficient categories is used. This generic root cover is the explicit tool used by the recorded constructed-twist route."
+   },
+   {
+    "node": "lem-sp-module-slice-sheafification-independent-ring",
+    "why": "Generic sheafification/restriction comparison on the slice, including independent universes; no node in the integral-restriction unit states this site calculus."
+   },
+   {
+    "node": "lem-weil-pbc-site-abelian-sheaves-filtered-colimits-exact",
+    "why": "Only existence and the sheafified sectionwise description of small abelian-sheaf colimits; no new cohomological exactness argument is used."
+   },
+   {
+    "node": "lem-sp-ell-quotient-finite-discrete",
+    "why": "Finiteness and continuity for the actual positive ell-power quotient coefficients of spIntegralTwist."
+   },
+   {
+    "node": "lem-weil-pbc-finite-discrete-condensed-ring-constant",
+    "why": "Generic finite-discrete coefficient identification at the point, needed to compare the actual internal finite levels with constant coefficients."
+   },
+   {
+    "node": "lem-weil-pbc-finite-discrete-scheme-ring-constant",
+    "why": "Generic scheme pullback of that ring-object identification, with the original finite coefficient labels."
+   },
+   {
+    "node": "det-prop-sfb-qlbar-colimit-x-integral-limit",
+    "why": "Only the canonical ring-sheaf limit comparison; the change to ell-power indices is written out in the proof."
+   },
+   {
+    "node": "det-prop-sfb-qlbar-colimit-x-invert-ell",
+    "why": "Identifies the specified coefficient map used for rational scalar extension with localization."
+   },
+   {
+    "node": "sk-prop-sfb-qlbar-colimit-x",
+    "why": "Only the coefficient-colimit isomorphism with its specified finite-field transition maps, required to identify the twist colimit as a free rank-one module."
+   }
+  ]
+ },
+ "tool_uses": [
+  "det-def-sp-tate-twist-locally-free",
+  "lem-sp-module-slice-sheafification-independent-ring",
+  "lem-weil-pbc-site-abelian-sheaves-filtered-colimits-exact",
+  "lem-sp-ell-quotient-finite-discrete",
+  "lem-weil-pbc-finite-discrete-condensed-ring-constant",
+  "lem-weil-pbc-finite-discrete-scheme-ring-constant",
+  "det-prop-sfb-qlbar-colimit-x-integral-limit",
+  "det-prop-sfb-qlbar-colimit-x-invert-ell",
+  "sk-prop-sfb-qlbar-colimit-x"
+ ],
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "NT-cc-NY-005adcc0c",
+  "group": "NY",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NY-005adcc0c (reviewer sub-agent of L); spot-checked: I read the item in full; it has 9 steps and no new nodes. The statement matches the attached Lean spTwists_commonCover clause by clause: index type in the site universe, a pro-etale covering family, ζ in μ_{ℓ^{n+1}} with t_n(ζ_{n+1})=ζ_n and e(a)=a·v^*ζ, every finite A with ℓ^{r+1}=0 using the unique castHom, every finite intermediate E for the integral and rational clauses, degree 1 vs degree 0 for Q̄. It also matches the sk-def-sp-tate-twist objects after the n↔n+1 index shift. Nothing is weakened. Step 1 uses only clause 1 of det-def-sp-tate-twist-locally-free with E=Q_ℓ. I checked blueprint proof (1): X̃=lim P_n is weakly étale and bounded, so it is an object of X_proét. Step 2: the slice projection is continuous and cocontinuous (def-pur-localized-ringed-site), which is what lem-sp-module-slice-sheafification-independent-ring needs; tensor, colimit and limit are sectionwise before sheafification, per their nodes. Steps 3 and 7 are genuinely elementary: an explicit inverse b⊗z ↦ b·e^{-1}(z), and a transition u⊗a ↦ u⊗i(a) using the same ζ for every E. Step 5 writes out the change from π^n to ℓ^k indices (ℓ=vπ^e, index ek, ramified case included) before applying integral-limit clause 3. Step 6 uses invert-ell. Step 8 uses sk-prop-sfb-qlbar-colimit-x, and its common-H linearity calculation matches spQbarTwistAction. Edge cases checked: empty X, A=0, n=r=0, ℓ=2, E=Q_ℓ, ramified E, non-quasi-compact X. No duplicate: def-coefficient-twists-detailed and lem-pur-twist-sheaf-locally-free concern other objects (completed constant sheaf, Q̄ at a common stage). No cycle (checked by DFS) and no SGA. The union of step uses equals proof_deps, and stmt citations equal stmt_deps. I accept the 9 recorded tool_uses as generic infrastructure that does not replace the unit's route (route: det-thm-int-restriction-line ¶(3) via the parent). Advisory C3, not changed: step 4 attributes the ⊗_Z form of the finite level to sk-def, which actually states ⊗_{(Z/ℓ^n)_X}; the step itself proves the two agree, so the conclusion stands."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-a7a45",
+  "group": "P4",
+  "result": "pass",
+  "landing": "20261026T200332-L-3306344",
+  "kind": "interface",
+  "note": "independent cc review: delivered Levels+Constructions+item concatenation vs published ProEtaleTateTwists.lean (verbatim, only headers + commonCover proof); new sorry lemmas vs node statements and tateTwist_finite_locallyFree clauses; 14 moved node lean.module/file vs physical location; 7 direct importers compiled OK against delivered set"
+ }
+}

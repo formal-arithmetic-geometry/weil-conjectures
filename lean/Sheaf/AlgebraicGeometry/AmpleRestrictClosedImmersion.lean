@@ -11,7 +11,7 @@ public import WeilConjectures.AlgebraicGeometry.TensorPullback
 public import WeilConjectures.AlgebraicGeometry.Modules.Invertible
 public import Sheaf.AlgebraicGeometry.TensorPullbackSectionAdjunction
 public import WeilConjectures.AlgebraicGeometry.Modules.InvertiblePullbackTensor
-import WeilConjectures.AlgebraicGeometry.Modules.TensorPowerSectionNonvanishingPullback
+import WeilConjectures.AlgebraicGeometry.AmplePullback
 
 /-! # Ampleness restricts to closed subschemes
 
@@ -47,6 +47,6 @@ theorem isAmple_tensorPullback_of_isClosedImmersion
     {Y : Scheme.{u}} (M : Y.Modules) [M.IsInvertible] (hM : IsAmple Y M)
     {X : Scheme.{u}} (i : X ⟶ Y) [IsClosedImmersion i] :
     @IsAmple X ((tensorPullback i).obj M) ((invertible_pullback_tensor i).1 M).2 := by
-  sorry
+  exact isAmple_tensorPullback_of_isAffineHom i M hM
 
 end AlgebraicGeometry.Scheme.Modules

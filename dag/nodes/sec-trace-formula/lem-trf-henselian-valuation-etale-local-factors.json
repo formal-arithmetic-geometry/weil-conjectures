@@ -1,0 +1,305 @@
+{
+ "id": "lem-trf-henselian-valuation-etale-local-factors",
+ "kind": "statement",
+ "title": "Local etale valuation factors and their residue generators",
+ "statement": "Let $R$ be a henselian valuation domain [def-trf-valuation-ring, def-weil-pbc-henselian-terminology], with fraction field $K$ [def-weil-field], maximal ideal $\\mathfrak m$, and residue field $k=R/\\mathfrak m$. Let $D$ be a commutative $R$-algebra with $\\operatorname{Spec}D\\to\\operatorname{Spec}R$ etale [def-weil-etale-morphism], and let $\\mathfrak n\\subset D$ be prime with $\\mathfrak n\\cap R=\\mathfrak m$. Then $S=D_{\\mathfrak n}$ is a direct factor of $D$ as an $R$-algebra, is finite etale over $R$, and is a valuation domain. Its fraction field $L$ is finite separable over $K$ [def-weil-pbc-separable-algebraic-extension]. The ring $S$ is the integral closure of $R$ in $L$ [def-weil-pbc-integral-closure] and the unique valuation ring of $L$ extending $R$. Its maximal ideal is $\\mathfrak mS$, its residue field $l=S/\\mathfrak mS$ is finite separable over $k$, and $S$ is free of rank $[L:K]=[l:k]$ over $R$. For every $y\\in S$ such that $l=k(\\bar y)$, one has $S=R[y]$ and $L=K(y)$. The monic minimal polynomial $g\\in K[T]$ of $y$ belongs to $R[T]$, has degree $[l:k]$, reduces to the minimal polynomial of $\\bar y$ over $k$, and $g'(y)$ is a unit of $S$. No Noetherian or discrete-valuation hypothesis is imposed.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tags 04GH (lemma-finite-over-henselian) and 04GK (lemma-henselian-cat-finite-etale), valuation-ring specialization and residue-power-basis calculation used in Temkin Proposition 2.2.1, proof, pp. 11--12."
+ },
+ "stmt_deps": [
+  "def-trf-valuation-ring",
+  "def-weil-pbc-henselian-terminology",
+  "def-weil-field",
+  "def-weil-etale-morphism",
+  "def-weil-pbc-separable-algebraic-extension",
+  "def-weil-pbc-integral-closure",
+  "def-weil-pbc-localization-at-prime",
+  "def-weil-pbc-free-module",
+  "def-weil-polynomial-ring",
+  "def-weil-simple-field-extension"
+ ],
+ "proof": [
+  {
+   "text": "$D$ is a finitely generated $R$-algebra by [lem-weil-pbc-etale-algebra-finite-presentation-localization]. Apply [lem-weil-pbc-henselian-finite-type-product-decomposition] to write $D\\simeq A_1\\times\\cdots\\times A_t\\times B$, where each $A_i$ is local and finite over $R$ and $B$ has no quasi-finite prime over $\\mathfrak m$. Each displayed factor is the localization $D_e$ at its identity idempotent $e$, hence is etale over $R$ by the same localization lemma. By [lem-weil-pbc-etale-quotient-base-change] and [lem-weil-pbc-etale-algebra-over-field-product], its quotient by $\\mathfrak m$ is a finite product of finite separable $k$-fields. Each prime of such a product is isolated: its singleton is the basic open of the corresponding identity idempotent. Thus every prime of $B$ above $\\mathfrak m$ would be quasi-finite by [def-weil-pbc-ring-map-quasi-finite-at-prime], a contradiction. The prime $\\mathfrak n$ therefore occurs in one $A_i$.",
+   "uses": [
+    "lem-weil-pbc-etale-algebra-finite-presentation-localization",
+    "lem-weil-pbc-henselian-finite-type-product-decomposition",
+    "lem-weil-pbc-etale-quotient-base-change",
+    "lem-weil-pbc-etale-algebra-over-field-product",
+    "def-weil-pbc-ring-map-quasi-finite-at-prime"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tags 04GJ (lemma-mop-up), 04GH (lemma-finite-over-henselian), proof of (3), and 00U3 (lemma-etale-over-field); finite-type product decomposition and exclusion of the residual factor."
+   }
+  },
+  {
+   "text": "The prime of $A_i$ corresponding to $\\mathfrak n$ contains $\\mathfrak mA_i$, so $A_i/\\mathfrak mA_i$ is nonzero. It is local, being a proper quotient of a local ring. The field-product description in step 1 forces this quotient to have exactly one factor, hence to be a field. Consequently the prime in question is $\\mathfrak mA_i$, the maximal ideal of $A_i$. Localizing a local ring at its maximal ideal changes nothing, since all the denominators are already units. Localizing the product at $\\mathfrak n$ kills the other identity idempotents. Therefore the canonical localization $D\\to S=D_{\\mathfrak n}$ is, under this product decomposition, the projection to $A_i$. In particular $S$ is a direct factor, is finite etale over $R$, and $\\mathfrak mS$ is its maximal ideal; the quotient $l$ is finite separable over $k$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tags 04GH and 04GK (lemma-henselian-cat-finite-etale), initial proof paragraph: identification of a local factor and its residue field. Explicit product and localization calculation."
+   }
+  },
+  {
+   "text": "Apply [lem-trf-etale-localization-valuation-domain] directly to $R\\to D$ and $\\mathfrak n$. Its hypotheses hold because $R$ is a valuation domain and the contraction of $\\mathfrak n$ is exactly its maximal ideal. It gives an injective local map $R\\to S$ and makes $S$ a valuation domain. In particular we may regard both rings as subrings of $L=\\operatorname{Frac}(S)$ and embed $K=\\operatorname{Frac}(R)$ into $L$.",
+   "uses": [
+    "lem-trf-etale-localization-valuation-domain"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0ASJ, lemma-etale-extension-valuation-ring, valuation-domain assertion."
+   }
+  },
+  {
+   "text": "By [lem-weil-pbc-etale-algebra-flat], $S$ is flat over $R$. Apply [lem-trf-valuation-finite-type-module-presentation] with $A=B=R$ and $M=S$: the identity ring map is of finite type, $S$ is a finite $R$-module by step 2, and its flatness is established. Thus $S$ is finitely presented as an $R$-module. It is torsion-free because $R\\to S$ is injective and $S$ is a domain. By [lem-sc-valuation-fp-torsionfree-free] it is free of a finite rank $r$. Reducing any such basis gives a basis of $S/\\mathfrak mS=l$ over $k$: the isomorphism $S\\simeq R^r$ quotients to $l\\simeq k^r$. Thus $r=[l:k]\\ge1$.",
+   "uses": [
+    "lem-weil-pbc-etale-algebra-flat",
+    "lem-trf-valuation-finite-type-module-presentation",
+    "lem-sc-valuation-fp-torsionfree-free"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 053E(2), lemma-flat-finite-type-valuation-ring-finite-presentation, specialized to the identity algebra; finite free reduction calculation."
+   }
+  },
+  {
+   "text": "Let $C=(R\\setminus\\{0\\})^{-1}S=K\\otimes_RS$. Step 3 makes this a subring of $L$ and a domain. Localizing the basis of step 4 gives a $K$-basis of $C$ of size $r$. For $0\\ne c\\in C$, multiplication by $c$ is an injective endomorphism of this finite-dimensional space, hence surjective; in particular $cd=1$ for some $d\\in C$. Thus $C$ is a field containing $S$, so $C=L$ by the fraction-field universal property. It follows that $[L:K]=r=[l:k]$. By [lem-weil-pbc-etale-ring-base-change], $C$ is etale over $K$; [lem-weil-pbc-etale-algebra-over-field-product] then identifies this nonzero field with one finite separable field factor. Hence $L/K$ is finite separable.",
+   "uses": [
+    "lem-weil-pbc-etale-ring-base-change",
+    "lem-weil-pbc-etale-algebra-over-field-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00U3 (lemma-etale-over-field), generic-fibre application after base change; fraction-field identification by finite-dimensional multiplication."
+   }
+  },
+  {
+   "text": "For any $s\\in S$, apply [lem-weil-cayley-hamilton-free-module] to multiplication by $s$ on the rank-$r$ free module $S$. Evaluating the resulting endomorphism identity at $1$ gives a monic polynomial in $R[T]$ annihilating $s$. Thus all of $S$ is integral over $R$. Conversely, if $z\\in L$ is integral over $R$, its monic equation also has coefficients in $S$, so it is integral over $S$. By [lem-weil-pbc-valuation-ring-normal] applied to the valuation domain $S$, one has $z\\in S$. These two inclusions identify $S$ with the integral closure of $R$ in $L$. Applying the same normality lemma to $R$ also gives $S\\cap K=R$: an element of that intersection is integral over $R$ and lies in its fraction field.",
+   "uses": [
+    "lem-weil-cayley-hamilton-free-module",
+    "lem-weil-pbc-valuation-ring-normal"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00DX (lemma-charpoly), and Tag 00IC (lemma-valuation-ring-normal): integrality via the multiplication endomorphism and the two inclusions for integral closure."
+   }
+  },
+  {
+   "text": "Let $W\\subseteq L$ be any valuation ring extending $R$, meaning $W\\cap K=R$. Every element of $S$ is integral over $R\\subseteq W$, so normality of $W$ from [lem-weil-pbc-valuation-ring-normal] implies $S\\subseteq W$. Moreover $\\mathfrak m_W\\cap R=\\mathfrak m$: a unit of $R$ stays a unit, whereas if $0\\ne a\\in\\mathfrak m$ were a unit in $W$, then $a^{-1}\\in W\\cap K=R$, a contradiction. Hence the proper prime $\\mathfrak m_W\\cap S$ contains the maximal ideal $\\mathfrak mS$ and equals it. If $z\\in W\\setminus S$, the valuation property of $S$ gives $z^{-1}\\in S$; it cannot be a unit in $S$, so $z^{-1}\\in\\mathfrak mS\\subseteq\\mathfrak m_W$. This contradicts $z\\in W$. Thus $W=S$, proving uniqueness without a discreteness or height assumption.",
+   "uses": [
+    "lem-weil-pbc-valuation-ring-normal"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00IC (lemma-valuation-ring-normal) and the defining inverse alternative for a valuation ring; explicit uniqueness argument for the integral finite local factor."
+   }
+  },
+  {
+   "text": "Fix $y\\in S$ with $l=k(\\bar y)$ and write $r=[l:k]$. By [lem-weil-pbc-simple-algebraic-extension-power-basis], $1,\\bar y,\\ldots,\\bar y^{r-1}$ is a $k$-basis of $l$. The module $S$ is finite and $R$ is local, so [lem-weil-pbc-nakayama-local-generators] implies that $1,y,\\ldots,y^{r-1}$ spans $S$ over $R$. It is actually a basis: in a chosen rank-$r$ basis of $S$ its column matrix reduces to an invertible matrix over $k$; its determinant is therefore outside $\\mathfrak m$ and a unit in $R$, so the adjugate gives an inverse over $R$. Consequently $S=R[y]$. Localizing gives $L=K\\otimes_RS=K[y]$, and thus $L=K(y)$.",
+   "uses": [
+    "lem-weil-pbc-simple-algebraic-extension-power-basis",
+    "lem-weil-pbc-nakayama-local-generators"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00DV (lemma-NAK), (8); the residue power basis and determinant calculation for its lifts. This supplies the residue-generator computation mentioned in the item source."
+   }
+  },
+  {
+   "text": "Write $y^r=-\\sum_{j<r}a_jy^j$ in this basis, with $a_j\\in R$, and set $h=T^r+\\sum_{j<r}a_jT^j\\in R[T]$. Its coefficientwise image in $K[T]$ annihilates $y$. No nonzero polynomial of degree below $r$ can do so, since the localized powers are a $K$-basis of $L$. Monic division by $h$ therefore shows that this image is exactly the monic minimal polynomial $g$ of $y$ over $K$. Reducing the displayed relation and using the residue power basis shows that $\\bar h$ is the monic minimal polynomial of $\\bar y$ over $k$, also of degree $r$. This polynomial is separable because $l/k$ is separable [def-weil-pbc-separable-algebraic-extension]. By [def-pc-separable-polynomial], there exist $U,V\\in k[T]$ with $U\\bar h+V\\bar h^{\\prime}=1$. Evaluating at $\\bar y$ proves $\\bar h^{\\prime}(\\bar y)\\ne0$. The residue of $h^{\\prime}(y)$ is this value, since reduction commutes termwise with differentiation and evaluation. Thus $g^{\\prime}(y)=h^{\\prime}(y)$ lies outside the maximal ideal of the local ring $S$ and is a unit. This proves every polynomial clause.",
+   "uses": [
+    "def-weil-pbc-separable-algebraic-extension",
+    "def-pc-separable-polynomial"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Fields, Tag 09H1 (definition-separable), and Algebra, Tag 00U3 (lemma-etale-over-field), power-basis/minimal-polynomial calculation."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-etale-algebra-finite-presentation-localization",
+  "lem-weil-pbc-henselian-finite-type-product-decomposition",
+  "lem-weil-pbc-etale-quotient-base-change",
+  "lem-weil-pbc-etale-algebra-over-field-product",
+  "def-weil-pbc-ring-map-quasi-finite-at-prime",
+  "lem-trf-etale-localization-valuation-domain",
+  "lem-weil-pbc-etale-algebra-flat",
+  "lem-trf-valuation-finite-type-module-presentation",
+  "lem-sc-valuation-fp-torsionfree-free",
+  "lem-weil-pbc-etale-ring-base-change",
+  "lem-weil-cayley-hamilton-free-module",
+  "lem-weil-pbc-valuation-ring-normal",
+  "lem-weil-pbc-simple-algebraic-extension-power-basis",
+  "lem-weil-pbc-nakayama-local-generators",
+  "def-weil-pbc-separable-algebraic-extension",
+  "def-pc-separable-polynomial"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Assembly of Tags 04GJ, 04GH and 00U3 with more-algebra.tex Tags 0ASJ and 053E(2), and the explicit residue-power-basis calculation; Temkin is not locally available."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "An etale algebra over a henselian valuation ring localized at a prime over the maximal ideal is a finite etale valuation ring with degree equal to residue field degree",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"Algebra.exists_etale_bijective_residueFieldMap_and_map_eq_mul_and_isCoprime\", \"module\": \"Mathlib/RingTheory/Polynomial/UniversalFactorizationRing\", \"type\": \"∀ {R : Type u} [inst : CommRing R] (P : Ideal R) [inst_1 : P.IsPrime] (p : Polynomial R)\\n  (f g : Polynomial P.ResidueField),\\n  p.Monic →\\n    f.Monic →\\n      g.Monic →\\n        Polynomial.map (algebraMap R P.ResidueField) p = f * g →\\n          IsCoprime f g →\\n            ∃ R' x x_1,\\n              ∃ (\", \"doc\": \"Given a ring homomorphism $ f : A → B $ between commutative rings and prime ideals $ I ⊆ A $, $ J ⊆ B $ such that $ I $ is the preimage of $ J $ under $ f $, there exists a unique $ R $-algebra homomo\"}\n  {\"name\": \"Algebra.IsEtaleAt\", \"module\": \"Mathlib/RingTheory/Etale/Locus\", \"type\": \"(R : Type u_1) →\\n  {A : Type u_2} → [inst : CommRing R] → [inst_1 : CommRing A] → [Algebra R A] → (q : Ideal A) → [q.IsPrime] → Prop\", \"doc\": \"An algebra $ A $ over a commutative ring $ R $ is said to be étale at a prime ideal $ q $ if the localization of $ A $ at $ q $ is formally étale, meaning the localized algebra satisfies the infinites\"}\n  {\"name\": \"Algebra.exists_etale_of_isEtaleAt\", \"module\": \"Mathlib/RingTheory/Etale/Locus\", \"type\": \"∀ {R : Type u_1} {A : Type u_2} [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A]\\n  [Algebra.FinitePresentation R A] (P : Ideal A) [inst_4 : P.IsPrime] [Algebra.IsEtaleAt R P],\\n  ∃ f ∉ P, Algebra.Etale R (Localization.Away f)\", \"doc\": \"If an $ R $-algebra $ A $ is étale at a prime ideal $ \\\\mathfrak{p} $, then there exists an element $ f \\\\notin \\\\mathfrak{p} $ such that the localization of $ A $ away from $ f $ is an étale $ R $-algeb\"}\n  {\"name\": \"Algebra.Etale.of_isLocalizationAway\", \"module\": \"Mathlib/RingTheory/Etale/Basic\", \"type\": \"∀ {R : Type u} {A : Type v} [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A] (r : R)\\n  [IsLocalization.Away r A], Algebra.Etale R A\", \"doc\": \"If $ A $ is the localization of a commutative ring $ R $ at an element $ r $, then $ A $ is an étale $ R $-algebra.\"}\n  {\"name\": \"Algebra.Etale.of_isLocalization_Away\", \"module\": \"Mathlib/RingTheory/Etale/Basic\", \"type\": \"∀ {R : Type u} {A : Type v} [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A] (r : R)\\n  [IsLocalization.Away r A], Algebra.Etale R A\", \"doc\": \"If $ A $ is the localization of a commutative ring $ R $ at an element $ r $, then $ A $ is an étale $ R $-algebra. This follows from the universal property of localization, where inverting powers of \"}\n  {\"name\": \"Algebra.isUnramifiedAt_iff_map_eq\", \"module\": \"Mathlib/RingTheory/Unramified/LocalRing\", \"type\": \"∀ (R : Type u_1) {S : Type u_2} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S]\\n  [Algebra.EssFiniteType R S] (p : Ideal R) [inst_4 : p.IsPrime] (q : Ideal S) [inst_5 : q.IsPrime]\\n  [inst_6 : q.LiesOver p],\\n  Algebra.IsUnramifiedAt R q ↔\\n    Algebra.IsSeparable p.ResidueField q.Resi\", \"doc\": \"Given local rings $ R $ and $ S $ where the maximal ideal of $ S $ lies over the maximal ideal of $ R $, the residue field of $ S $ is equipped with an algebra structure over the residue field of $ R \"}\n  {\"name\": \"Algebra.instEtaleOfIsStandardEtale\", \"module\": \"Mathlib/RingTheory/Etale/StandardEtale\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S]\\n  [Algebra.IsStandardEtale R S], Algebra.Etale R S\", \"doc\": \"Every standard étale algebra over a commutative ring is an étale algebra. Specifically, if an algebra $ S $ over a commutative ring $ R $ is isomorphic to a localization of a polynomial ring over $ R \"}\n  {\"name\": \"Algebra.instFiniteResidueFieldOfFormallyUnramified\", \"module\": \"Mathlib/RingTheory/Unramified/LocalRing\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S]\\n  [inst_3 : IsLocalRing R] [inst_4 : IsLocalRing S] [inst_5 : IsLocalHom (algebraMap R S)] [Algebra.EssFiniteType R S]\\n  [Algebra.FormallyUnramified R S], Module.Finite (IsLocalRing.ResidueField R) (IsLo\", \"doc\": \"If $ S $ is a formally unramified $ R $-algebra, then the residue field of $ S $ is a finitely generated module over the residue field of $ R $.\"}",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "In a finite local etale algebra over a henselian valuation ring a lift of a primitive residue element generates the algebra and its minimal polynomial derivative is a unit",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"HenselianLocalRing.TFAE\", \"module\": \"Mathlib/RingTheory/Henselian\", \"type\": \"∀ (R : Type u) [inst : CommRing R] [inst_1 : IsLocalRing R],\\n  [HenselianLocalRing R,\\n      ∀ (f : Polynomial R),\\n        f.Monic →\\n          ∀ (a₀ : IsLocalRing.ResidueField R),\\n            (Polynomial.aeval a₀) f = 0 →\\n              (Polynomial.aeval a₀) (Polynomial.derivative f) ≠ 0 → ∃ a, f.IsRo\", \"doc\": \"For a commutative local ring $ R $, the following are equivalent: \\n1. $ R $ is a Henselian local ring;\\n2. For every monic polynomial $ f \\\\in R[X] $, if $ a_0 \\\\in \\\\text{ResidueField}(R) $ satisfies $ \\\\\"}\n  {\"name\": \"StandardEtalePair.HasMap.isUnit_derivative_f\", \"module\": \"Mathlib/RingTheory/Etale/StandardEtale\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S]\\n  (P : StandardEtalePair R) {x : S}, P.HasMap x → IsUnit ((Polynomial.aeval x) (Polynomial.derivative P.f))\", \"doc\": \"Let $ R $ be a commutative ring, and let $ (f, g) $ be a standard étale pair over $ R $. If $ x $ is an element of a ring $ S $ such that $ f(x) = 0 $ and $ g(x) $ is invertible in $ S $, then the der\"}\n  {\"name\": \"Algebra.IsStandardEtale\", \"module\": \"Mathlib/RingTheory/Etale/StandardEtale\", \"type\": \"(R : Type u_4) → (S : Type u_5) → [inst : CommRing R] → [inst_1 : CommRing S] → [Algebra R S] → Prop\", \"doc\": \"The property that an algebra $ S $ over a commutative ring $ R $ is standard étale, meaning it is isomorphic to a localization of a polynomial ring over $ R $ modulo a monic polynomial whose derivativ\"}\n  {\"name\": \"Algebra.exists_etale_bijective_residueFieldMap_and_map_eq_mul_and_isCoprime\", \"module\": \"Mathlib/RingTheory/Polynomial/UniversalFactorizationRing\", \"type\": \"∀ {R : Type u} [inst : CommRing R] (P : Ideal R) [inst_1 : P.IsPrime] (p : Polynomial R)\\n  (f g : Polynomial P.ResidueField),\\n  p.Monic →\\n    f.Monic →\\n      g.Monic →\\n        Polynomial.map (algebraMap R P.ResidueField) p = f * g →\\n          IsCoprime f g →\\n            ∃ R' x x_1,\\n              ∃ (\", \"doc\": \"Given a ring homomorphism $ f : A → B $ between commutative rings and prime ideals $ I ⊆ A $, $ J ⊆ B $ such that $ I $ is the preimage of $ J $ under $ f $, there exists a unique $ R $-algebra homomo\"}\n  {\"name\": \"StandardEtalePair\", \"module\": \"Mathlib/RingTheory/Etale/StandardEtale\", \"type\": \"(R : Type u_1) → [CommRing R] → Type u_1\", \"doc\": \"A structure for a commutative ring $ R $ equipped with data defining a standard étale pair, used in the context of étale morphisms in algebraic geometry.\"}\n  {\"name\": \"HenselianLocalRing.is_henselian\", \"module\": \"Mathlib/RingTheory/Henselian\", \"type\": \"∀ {R : Type u_1} {inst : CommRing R} [self : HenselianLocalRing R] (f : Polynomial R),\\n  f.Monic →\\n    ∀ (a₀ : R),\\n      Polynomial.eval a₀ f ∈ IsLocalRing.maximalIdeal R →\\n        IsUnit (Polynomial.eval a₀ (Polynomial.derivative f)) → ∃ a, f.IsRoot a ∧ a - a₀ ∈ IsLocalRing.maximalIdeal R\", \"doc\": \"Let $ R $ be a Henselian local ring with maximal ideal $ \\\\mathfrak{m} $. If $ f $ is a monic polynomial in $ R[X] $, $ a_0 \\\\in R $ satisfies $ f(a_0) \\\\in \\\\mathfrak{m} $, and the derivative $ f'(a_0) $\"}\n  {\"name\": \"StandardEtalePresentation.hasMap\", \"module\": \"Mathlib/RingTheory/Etale/StandardEtale\", \"type\": \"∀ {R : Type u_4} {S : Type u_5} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S]\\n  (self : StandardEtalePresentation R S), self.HasMap self.x\", \"doc\": \"For any commutative rings $ R $ and $ S $ with an $ R $-algebra structure on $ S $, and a standard étale presentation of $ S $ over $ R $, the element $ x $ in $ S $ corresponding to the polynomial va\"}\n  {\"name\": \"StandardEtalePresentation.P\", \"module\": \"Mathlib/RingTheory/Etale/StandardEtale\", \"type\": \"{R : Type u_4} →\\n  {S : Type u_5} →\\n    [inst : CommRing R] →\\n      [inst_1 : CommRing S] → [inst_2 : Algebra R S] → StandardEtalePresentation R S → StandardEtalePair R\", \"doc\": \"Given a standard étale presentation of an algebra $ S $ over a commutative ring $ R $, this function constructs the corresponding standard étale pair, which encodes the polynomial ring over $ R $, a l\"}",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "HenselianLocalRing, Algebra.Etale",
+   "results": "[loogle] OK 0 hit(s)",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "[Ee]tale.*[Vv]aluation|[Vv]aluation.*[Ee]tale|[Hh]enselian.*[Ee]tale",
+   "results": "[grep] OK 0 hit(s)",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "An etale algebra over a henselian local valuation ring has finite local etale factors that are valuation rings of finite separable extensions",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"Algebra.FormallyEtale.iff_exists_algEquiv_prod\", \"module\": \"Mathlib.RingTheory.Etale.Field\", \"type\": \"[EssFiniteType K A] :\\n  FormallyEtale K A ↔\\n    ∃ (I : Type u) (_ : Finite I) (Ai : I → Type u) (_ : ∀ i, Field (Ai i)) (_ : ∀ i, Algebra K (Ai i)) (_ :\\n      A ≃ₐ[K] Π i, Ai i), ∀ i, Algebra.IsSeparable K (Ai i)\", \"doc\": \"A finitely generated algebra $ A $ over a field $ K $ is formally étale if and only if there exists a finite index set $ I $ and a family of field extensions $ \\\\{A_i\\\\}_{i \\\\in I} $, each separable over\"}\n  {\"name\": \"Algebra.Etale.iff_exists_algEquiv_prod\", \"module\": \"Mathlib.RingTheory.Etale.Field\", \"type\": \":\\n  Etale K A ↔\\n    ∃ (I : Type u) (_ : Finite I) (Ai : I → Type u) (_ : ∀ i, Field (Ai i)) (_ : ∀ i, Algebra K (Ai i)) (_ :\\n      A ≃ₐ[K] Π i, Ai i), ∀ i, Module.Finite K (Ai i) ∧ Algebra.IsSeparable K (Ai i)\", \"doc\": \"An algebra $ A $ over a field $ K $ is étale if and only if there exists a finite index set $ I $ and a family of fields $ \\\\{A_i\\\\}_{i \\\\in I} $, each equipped with a $ K $-algebra structure, such that \"}\n  {\"name\": \"Algebra.Etale.formallyEtale\", \"module\": \"Mathlib.RingTheory.Etale.Basic\", \"type\": \"∀ {R : Type u} {A : Type v} {inst : CommRing R} {inst_1 : CommRing A} {inst_2 : Algebra R A} [self : Algebra.Etale R A],\\n  Algebra.FormallyEtale R A\", \"doc\": \"If $ A $ is an étale algebra over a commutative ring $ R $, then $ A $ is formally étale over $ R $. This establishes that the property of being étale implies formal étaleness in the context of commut\"}\n  {\"name\": \"Algebra.Etale\", \"module\": \"Mathlib.RingTheory.Etale.Basic\", \"type\": \"(R : Type u) → (A : Type v) → [inst : CommRing R] → [inst_1 : CommRing A] → [Algebra R A] → Prop\", \"doc\": \"The property of an algebra $ A $ over a commutative ring $ R $ being étale.\"}\n  {\"name\": \"Algebra.Etale.finitePresentation\", \"module\": \"Mathlib.RingTheory.Etale.Basic\", \"type\": \"∀ {R : Type u} {A : Type v} {inst : CommRing R} {inst_1 : CommRing A} {inst_2 : Algebra R A} [self : Algebra.Etale R A],\\n  Algebra.FinitePresentation R A\", \"doc\": \"Let $ R $ and $ A $ be commutative rings with an $ R $-algebra structure on $ A $. If $ A $ is étale over $ R $, then $ A $ is finitely presented as an $ R $-algebra.\"}\n  {\"name\": \"Algebra.Etale.recOn\", \"module\": \"Mathlib.RingTheory.Etale.Basic\", \"type\": \"{R : Type u} →\\n  {A : Type v} →\\n    [inst : CommRing R] →\\n      [inst_1 : CommRing A] →\\n        [inst_2 : Algebra R A] →\\n          {motive : Algebra.Etale R A → Sort u_1} →\\n            (t : Algebra.Etale R A) →\\n              ((formallyEtale : Algebra.FormallyEtale R A) →\\n                  (finitePre\", \"doc\": \"Given commutative rings $ R $ and $ A $ with an $ R $-algebra structure on $ A $, this recursor allows defining functions on the property that $ A $ is étale over $ R $ by specifying their behavior on\"}\n  {\"name\": \"Algebra.FormallyEtale.of_isSeparable_aux\", \"module\": \"Mathlib.RingTheory.Etale.Field\", \"type\": \"[Algebra.IsSeparable K L] [EssFiniteType K L] : FormallyEtale K L\", \"doc\": \"If $ L $ is a separable algebra over a field $ K $ and is finitely generated as a $ K $-algebra, then $ L $ is formally étale over $ K $.\"}\n  {\"name\": \"RingHom.Etale.propertyIsLocal\", \"module\": \"Mathlib.RingTheory.RingHom.Etale\", \"type\": \": PropertyIsLocal Etale\", \"doc\": \"The property of a ring homomorphism between commutative rings being étale is local, meaning it can be checked after localization or on an open cover.\"}",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "etale.*valuation|valuation.*etale|henselian.*etale",
+   "results": "OK 0 hit(s): ",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A residue field generator lifts to an algebra generator of a finite local etale algebra over a henselian valuation domain",
+   "results": "OK 8 hit(s): Ideal.ResidueField.liftₐ, Ideal.ResidueField.liftₐ_algebraMap, IsLocalRing.ResidueField.lift, Ideal.ResidueField.lift, instIsAlgebraicResidueFieldOfIsIntegral, IsLocalRing.ResidueField.lift_residue_apply, PowerBasis.lift_gen, Algebra.exists_etale_isIdempotentElem_forall_liesOver_eq",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "HenselianLocalRing, Algebra.Etale",
+   "results": "OK 0 hit(s): ",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A finite local etale algebra over a henselian valuation ring is a valuation domain with a power basis lifting a primitive residue field element",
+   "results": "OK 8 hit(s): Tilt, HenselianLocalRing, HenselianLocalRing.TFAE, Algebra.IsStandardEtale, Field.henselian, Algebra.exists_etale_bijective_residueFieldMap_and_map_eq_mul_and_isCoprime, HenselianLocalRing.toIsLocalRing, instHenselianRingMaximalIdeal",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Local finite etale algebras over a henselian valuation domain have equal generic and residue degrees and any primitive residue lift generates",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"Algebra.exists_etale_bijective_residueFieldMap_and_map_eq_mul_and_isCoprime\", \"module\": \"Mathlib/RingTheory/Polynomial/UniversalFactorizationRing\", \"type\": \"∀ {R : Type u} [inst : CommRing R] (P : Ideal R) [inst_1 : P.IsPrime] (p : Polynomial R)\\n  (f g : Polynomial P.ResidueField),\\n  p.Monic →\\n    f.Monic →\\n      g.Monic →\\n        Polynomial.map (algebraMap R P.ResidueField) p = f * g →\\n          IsCoprime f g →\\n            ∃ R' x x_1,\\n              ∃ (\", \"doc\": \"Given a ring homomorphism $ f : A → B $ between commutative rings and prime ideals $ I ⊆ A $, $ J ⊆ B $ such that $ I $ is the preimage of $ J $ under $ f $, there exists a unique $ R $-algebra homomo\"}\n  {\"name\": \"HenselianLocalRing.TFAE\", \"module\": \"Mathlib/RingTheory/Henselian\", \"type\": \"∀ (R : Type u) [inst : CommRing R] [inst_1 : IsLocalRing R],\\n  [HenselianLocalRing R,\\n      ∀ (f : Polynomial R),\\n        f.Monic →\\n          ∀ (a₀ : IsLocalRing.ResidueField R),\\n            (Polynomial.aeval a₀) f = 0 →\\n              (Polynomial.aeval a₀) (Polynomial.derivative f) ≠ 0 → ∃ a, f.IsRo\", \"doc\": \"For a commutative local ring $ R $, the following are equivalent: \\n1. $ R $ is a Henselian local ring;\\n2. For every monic polynomial $ f \\\\in R[X] $, if $ a_0 \\\\in \\\\text{ResidueField}(R) $ satisfies $ \\\\\"}\n  {\"name\": \"Field.henselian\", \"module\": \"Mathlib/RingTheory/Henselian\", \"type\": \"∀ (K : Type u_1) [inst : Field K], HenselianLocalRing K\", \"doc\": \"Any field $ K $ is a Henselian local ring. This follows because a field trivially satisfies Hensel's lemma: its maximal ideal is zero, and the residue field coincides with $ K $ itself, making root li\"}\n  {\"name\": \"Algebra.instFiniteResidueFieldOfFormallyUnramified\", \"module\": \"Mathlib/RingTheory/Unramified/LocalRing\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S]\\n  [inst_3 : IsLocalRing R] [inst_4 : IsLocalRing S] [inst_5 : IsLocalHom (algebraMap R S)] [Algebra.EssFiniteType R S]\\n  [Algebra.FormallyUnramified R S], Module.Finite (IsLocalRing.ResidueField R) (IsLo\", \"doc\": \"If $ S $ is a formally unramified $ R $-algebra, then the residue field of $ S $ is a finitely generated module over the residue field of $ R $.\"}\n  {\"name\": \"Algebra.instFormallyUnramifiedResidueField\", \"module\": \"Mathlib/RingTheory/Unramified/LocalRing\", \"type\": \"∀ {S : Type u_2} [inst : CommRing S] [inst_1 : IsLocalRing S], Algebra.FormallyUnramified S (IsLocalRing.ResidueField S)\", \"doc\": \"For any commutative local ring $ S $, its residue field (obtained by quotienting $ S $ by its unique maximal ideal) is formally unramified over $ S $ as an $ S $-algebra. This means the canonical quot\"}\n  {\"name\": \"Algebra.instIsSeparableResidueFieldOfFormallyUnramified\", \"module\": \"Mathlib/RingTheory/Unramified/LocalRing\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S]\\n  [inst_3 : IsLocalRing R] [inst_4 : IsLocalRing S] [inst_5 : IsLocalHom (algebraMap R S)] [Algebra.EssFiniteType R S]\\n  [Algebra.FormallyUnramified R S], Algebra.IsSeparable (IsLocalRing.ResidueField R)\", \"doc\": \"For any local rings $ R $ and $ S $ where $ S $ is formally unramified over $ R $, the residue field of $ S $ is a separable algebra over the residue field of $ R $.\"}\n  {\"name\": \"Algebra.isUnramifiedAt_iff_map_eq\", \"module\": \"Mathlib/RingTheory/Unramified/LocalRing\", \"type\": \"∀ (R : Type u_1) {S : Type u_2} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S]\\n  [Algebra.EssFiniteType R S] (p : Ideal R) [inst_4 : p.IsPrime] (q : Ideal S) [inst_5 : q.IsPrime]\\n  [inst_6 : q.LiesOver p],\\n  Algebra.IsUnramifiedAt R q ↔\\n    Algebra.IsSeparable p.ResidueField q.Resi\", \"doc\": \"Given local rings $ R $ and $ S $ where the maximal ideal of $ S $ lies over the maximal ideal of $ R $, the residue field of $ S $ is equipped with an algebra structure over the residue field of $ R \"}\n  {\"name\": \"Algebra.FormallyUnramified.iff_map_maximalIdeal_eq\", \"module\": \"Mathlib/RingTheory/Unramified/LocalRing\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S]\\n  [inst_3 : IsLocalRing R] [inst_4 : IsLocalRing S] [inst_5 : IsLocalHom (algebraMap R S)] [Algebra.EssFiniteType R S],\\n  Algebra.FormallyUnramified R S ↔\\n    Algebra.IsSeparable (IsLocalRing.ResidueFiel\", \"doc\": \"An algebra $ S $ over a commutative ring $ R $ is formally unramified if and only if the residue field of $ S $ is separable over the residue field of $ R $, and the image of the maximal ideal of $ R \"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-valued-decompletion-etale",
+  "date": "2026-10-24",
+  "group": "Q81"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Proof (1)--(2), semistable-alteration input in the nearby-cycle branch: ILO Exposé X, Theorem 3.4, Step 3, invoking Temkin 2010, Theorems 1.5 and 1.1 for a semistable multipointed modification. Temkin proof component: Stable reduction over finite-height separably closed valuation fields. Input: Proposition 4.3.3, pp. 29--30; applied componentwise when the smooth generic fibre is disconnected Supporting input: Theorem 2.1.8 and Lemmas 2.1.1, 2.1.2, 2.1.6, pp. 7--10; smooth-centre formulation used in the first substantive paragraph of the proof of Proposition 4.3.3, pp. 29--30. Supporting lemma: Proposition 2.2.1 and its proof, printed p. 11; preliminary facts on completions used there; Lemma 2.1.6 for the etale terminology. Supporting decompletion input: Tags 04GH (lemma-finite-over-henselian) and 04GK (lemma-henselian-cat-finite-etale), valuation-ring specialization and residue-power-basis calculation used in Temkin Proposition 2.2.1, proof, pp. 11--12.",
+   "via": [
+    "lem-trf-valued-decompletion-etale",
+    "lem-trf-valued-curve-etale-parameter",
+    "lem-trf-valuation-strict-semistable-local-uniformization",
+    "lem-trf-valuation-stable-reduction",
+    "lem-trf-temkin-stable-modification",
+    "lem-trf-stable-modification-flat-curve-pair",
+    "lem-trf-dejong-relative-marked-semistable",
+    "lem-trf-relative-marked-nodal-reduction",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-trf-henselian-valuation-etale-local-factors",
+  "worker": "stage1",
+  "summary": "Kept the statement, proved the finite local factor by 04GJ and its field fibre, cited the general nonhenselian 0ASJ valuation input, derived finite freeness without Noetherianity, and wrote the integral-closure, valuation uniqueness and residue-power-basis arguments explicitly. One statement-only general valuation lemma is new; every other substantive fact already has a DAG node.",
+  "blueprint": "Supports the existing semistable-uniformization branch below lem-trf-local-term-locality, via lem-trf-valued-decompletion-etale: the 04GH/04GK finite-local-factor and residue-generator input recorded in blueprint.from.place. The current latest ancestor proof is the contracting-correspondence argument; no chapter or unit route is changed.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-henselian-finite-type-product-decomposition",
+    "why": "Generic henselian finite-type decomposition used to isolate the finite local algebra factor in step 1; the valuation-unit branch contains no separate version of this general decomposition."
+   },
+   {
+    "node": "lem-weil-pbc-valuation-ring-normal",
+    "why": "Generic integrally closedness of a valuation domain, used for S and R in step 6 and for W in step 7; the unit has no separate node stating this ring-theoretic fact."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-henselian-finite-type-product-decomposition",
+  "lem-weil-pbc-valuation-ring-normal"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q33-f7596d81b",
+  "group": "Q33",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q33-f7596d81b (reviewer sub-agent of L); spot-checked: I read the item, the new node, all 20 cited statements, and the sources: Stacks 04GJ lemma-mop-up and 0ASJ lemma-etale-extension-valuation-ring (more-algebra.tex). The item statement is unchanged and correct for a henselian valuation domain. Edge cases checked: R a field, degree one, and D=0 or an empty closed fibre (vacuous). Step 1: the 04GJ decomposition plus the field-product fibre makes every prime of the residual factor B over m isolated, so none exists. Step 2 (elementary): A_i/mA_i is a single field, so D_n = A_i. Step 3 meets every hypothesis of the new node. Step 4 applies 053E with A=B=R, then finitely presented torsion-free over a valuation ring gives free of rank [l:k]. Step 5: a finite-dimensional domain is a field, so K⊗S = L, and L/K is separable by étale base change. Step 6: Cayley–Hamilton gives integrality and normality gives the integral closure and S∩K=R. Step 7: uniqueness needs no height or discreteness assumption. Step 8: Nakayama gives the span and a unit determinant makes it a basis. Step 9 (elementary): minimal and separable polynomials from the definitions. New node lem-trf-etale-localization-valuation-domain: exactly the first assertion of 0ASJ (injective, local, valuation domain), without the weakly-unramified clause. It is statement-only, self-contained and recorded with three search kinds; my own Mathlib grep also found nothing. Not a duplicate: value-group-torsion, algebraic-height, composed-valuation-etale, a1-flat-valuation-lifting, primitive-element-separated-valuations and strict-henselization-dvr each state something else. It is a general result, not a restated clause of the item. Small cases: A a field, B=A. The two declared tool_uses (henselian-finite-type-product-decomposition, valuation-ring-normal, both sk-thm-p1) are generic black boxes and accepted; every other off-unit citation is a Mathlib leaf. No SGA citation. No changes."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.HenselianValuationEtaleLocalFactors",
+  "declaration": "AlgebraicGeometry.henselian_valuation_etale_local_factors",
+  "file": "lean/Sheaf/RingTheory/HenselianValuationEtaleLocalFactors.lean",
+  "statement": "theorem henselian_valuation_etale_local_factors (R D : Type u) [CommRing R] [IsDomain R] [ValuationRing R] [HenselianLocalRing R] [CommRing D] [Algebra R D] [Etale (Spec.map (CommRingCat.ofHom (algebraMap R D)))] (n : Ideal D) [n.IsPrime] (hn : n.comap (algebraMap R D) = IsLocalRing.maximalIdeal R) (S : Type v) [CommRing S] [Algebra D S] [Algebra R S] [IsScalarTower R D S] [IsLocalization.AtPrime S n] : ∃ (_ : IsDomain S) (_ : ValuationRing S) (_ : IsLocalHom (algebraMap R S)) (_ : Algebra (FractionRing R) (FractionRing S)) (_ : IsScalarTower R (FractionRing R) (FractionRing S)), (∃ (T : CommAlgCat.{u} R) (e : D ≃ₐ[R] S × T), ∀ d : D, (e d).1 = algebraMap D S d) ∧ Module.Finite R S ∧ Algebra.Etale R S ∧ Module.Finite (FractionRing R) (FractionRing S) ∧ Algebra.IsSeparable (FractionRing R) (FractionRing S) ∧ (integralClosure R (FractionRing S)).toSubring = (algebraMap S (FractionRing S)).range ∧ ((algebraMap S (FractionRing S)).range).comap (algebraMap (FractionRing R) (FractionRing S)) = (algebraMap R (FractionRing R)).range ∧ (∀ W : ValuationSubring (FractionRing S), W.toSubring.comap (algebraMap (FractionRing R) (FractionRing S)) = (algebraMap R (FractionRing R)).range → W.toSubring = (algebraMap S (FractionRing S)).range) ∧ IsLocalRing.maximalIdeal S = (IsLocalRing.maximalIdeal R).map (algebraMap R S) ∧ Module.Finite (IsLocalRing.ResidueField R) (IsLocalRing.ResidueField S) ∧ Algebra.IsSeparable (IsLocalRing.ResidueField R) (IsLocalRing.ResidueField S) ∧ Module.Free R S ∧ Module.finrank R S = Module.finrank (FractionRing R) (FractionRing S) ∧ Module.finrank (FractionRing R) (FractionRing S) = Module.finrank (IsLocalRing.ResidueField R) (IsLocalRing.ResidueField S) ∧ ∀ y : S, IntermediateField.adjoin (IsLocalRing.ResidueField R) {IsLocalRing.residue S y} = ⊤ → Algebra.adjoin R {y} = ⊤ ∧ IntermediateField.adjoin (FractionRing R) {algebraMap S (FractionRing S) y} = ⊤ ∧ ∃ g : Polynomial R, g.Monic ∧ g.map (algebraMap R (FractionRing R)) = minpoly (FractionRing R) (algebraMap S (FractionRing S) y) ∧ g.natDegree = Module.finrank (IsLocalRing.ResidueField R) (IsLocalRing.ResidueField S) ∧ g.map (IsLocalRing.residue R) = minpoly (IsLocalRing.ResidueField R) (IsLocalRing.residue S y) ∧ IsUnit (Polynomial.aeval y g.derivative)",
+  "branch": "newtargets-dag",
+  "by": "NL",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-89aca111d",
+  "group": "NL",
+  "result": "pass",
+  "note": "Read node, report, module, all 10 stmt_dep records and the Mathlib declarations. Each hypothesis matches the node (henselian valuation domain via IsDomain/ValuationRing/HenselianLocalRing; scheme-level AlgebraicGeometry.Etale on Spec.map; comap n = m; any IsLocalization.AtPrime model S) with nothing stronger. All conclusion clauses present: direct factor with canonical projection, finite etale, valuation domain, L/K finite separable (existential Algebra K L pinned by IsScalarTower), integral closure, S∩K=R plus uniqueness over all ValuationSubrings, max ideal mS, l/k finite separable, free with finrank equalities, S=R[y], L=K(y), g in R[T] monic/minpoly/degree/reduction/unit derivative. IsLocalRing S comes from the bound ValuationRing (AtPrime.isLocalRing is not an instance); Prop, so no diamond. R and D share universe u as Spec.map requires; S in its own universe v; nothing unbound. lean.statement verbatim (diff). Edge cases: field R, vacuous D=0, degree one, y=0. No hollow defs, only sorry, docstrings with source and blueprint and 9 steps, proof imports exist in side-live, report has both sections. No findings; no compile needed."
+ }
+}

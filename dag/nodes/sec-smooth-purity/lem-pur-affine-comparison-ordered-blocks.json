@@ -1,0 +1,151 @@
+{
+ "id": "lem-pur-affine-comparison-ordered-blocks",
+ "kind": "statement",
+ "title": "Ordered affine comparison in two consecutive coordinate blocks",
+ "statement": "Fix the finite purity data [def-pur-conventions], coefficient ring $A$, a separated finite-type $k$-scheme $Y$, and a bounded-below complex $K$ equipped with a bounded constructible finite-Tor ordinary etale antecedent $K_e$ and an isomorphism $\\nu^*K_e\\cong K$. Let $a,b\\geq1$. Under the actual tower identification $i:X_a(X_b(Y))\\cong X_{b+a}(Y)$ over $Y$, the transport of the ordered affine comparison [def-pur-affine-space-comparison] defined by [def-pur-affine-comparison-coordinate-maps] is equal to the ordered block composite: source reassociation followed by $F_{p_a}(\\Gamma_{b,K})$, then $\\Gamma_{a,Rp_b^!K}$, then the inverse adjunction-preserving exceptional compositor. The coordinates retain their order throughout; this statement makes no coordinate-interchange assertion.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-composition/prop-pur-affine-space-composition-law.proof.md",
+  "place": "Steps 1--2: identify and regroup the same ordered composite, before coordinate interchange"
+ },
+ "stmt_deps": [
+  "def-pur-affine-comparison-coordinate-maps",
+  "def-pur-affine-space-comparison",
+  "def-pur-conventions"
+ ],
+ "proof": [
+  {
+   "text": "The geometric and stage-applicability lemmas of [def-pur-affine-space-comparison] give separated finite-type tower bases and finite-Tor etale antecedents of the intermediate exceptional inputs. Restrict compact support, exceptional pullback and twisted ordinary pullback to these classes. Naturality of the line comparison follows by transposing its natural projection-formula augmentation through the bounded-origin Hom bijection.",
+   "uses": [
+    "def-pur-affine-space-comparison",
+    "thm-sf-preservation-class",
+    "thm-sf-ctf-stability",
+    "thm-sf-ambient-adjoint-class",
+    "def-pur-affine-line-purity-comparison",
+    "lem-weil-finite-compact-projection-formula"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use canonical compact-support composition for alpha and its conjugate for c. The latter agrees with compositionInverse because both transpose the pasted counit. Form phi from the actual blockSourceIso: pullback composition, actionAddIso and shifted-line pullback. Its pentagon and units follow from the canonical pullback/tensor compatibilities and ordered tensor associators.",
+   "uses": [
+    "thm-sf-comp-composition",
+    "lem-pur-derived-pullback-tensor-iso",
+    "def-pur-affine-comparison-coordinate-maps"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply orderedAdjointTower_regrouping. Identify its adjacent maps with lineComparison and its recursion with comparisonStep via uniqueness in sourceReassociation_existsUnique, exceptionalComposite_existsUnique and positiveComparison_existsUnique. Evaluate its block formula at K and cut after b factors. Pull back along blockSchemeEq and use blockProjection; the resulting two sides are the transported total comparison and blockComposite by the specified source and exceptional coordinate identifications.",
+   "uses": [
+    "lem-pur-ordered-adjoint-tower-regrouping",
+    "def-pur-affine-space-comparison",
+    "def-pur-affine-comparison-coordinate-maps"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pur-affine-space-comparison",
+  "thm-sf-preservation-class",
+  "thm-sf-ctf-stability",
+  "thm-sf-ambient-adjoint-class",
+  "def-pur-affine-line-purity-comparison",
+  "lem-weil-finite-compact-projection-formula",
+  "thm-sf-comp-composition",
+  "lem-pur-derived-pullback-tensor-iso",
+  "def-pur-affine-comparison-coordinate-maps",
+  "lem-pur-ordered-adjoint-tower-regrouping"
+ ],
+ "proof_origin": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-composition/prop-pur-affine-space-composition-law.proof.md",
+  "place": "Steps 1--2: identify and regroup the same ordered composite, before coordinate interchange",
+  "by": "agent"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "affine space purity comparison is compatible with ordered block composition and invariant under permutation of coordinates",
+   "results": "Eight hits on affine independence, affine equivalences and AffineSpace.map_comp. No derived compact-support purity comparison, ordered block equation or coordinate-invariance statement.",
+   "date": "2026-10-26",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A recursively composed natural transformation between twisted pullbacks and exceptional inverse images respects consecutive blocks and coordinate permutations",
+   "results": "Eight hits on GlueData, pullback-shift natural isomorphisms, categorical pullbacks and simplicial splitting. No match for the specified exceptional-purity comparison.",
+   "date": "2026-10-26",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.conjugateEquiv",
+   "results": "Twelve conjugation and unitor lemmas in Adjunction.Mates; these supply generic mate operations, not the actual scheme-coordinate comparison equations.",
+   "date": "2026-10-26",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "affine.*(composition|regroup)|ordered.*regroup",
+   "results": "Five Mathlib hits: a Euclidean-volume decomposition and affine morphism composition instances. None is a purity comparison or its coordinate transport.",
+   "date": "2026-10-26",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.AffineSpacePurityComposition",
+  "date": "2026-10-26",
+  "group": "A2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-pur-affine-space-composition-law",
+   "place": "Steps 1--2: identify and regroup the same ordered composite, before coordinate interchange",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-an",
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.AffineSpacePurityOrderedBlocks",
+  "file": "lean/Sheaf/Paper/AffineSpacePurityOrderedBlocks.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.AffineSpacePurity.affineSpacePurity_orderedBlockEquation",
+  "statement": "theorem affineSpacePurity_orderedBlockEquation (P : WeilConjectures.PurityFiniteSetting.{u}) (Y : Scheme.{u}) (aY : Y ⟶ Spec (.of P.field.k)) [LocallyOfFiniteType aY] [QuasiCompact aY] [IsSeparated aY] (K : Plus (Ring P) Y) (Ke : Etale.DerivedCategoryModule (Ring P) Y) (hKe : etaleFiniteTor (Ring P) Y Ke) (eK : (comparison (Ring P) Y).obj Ke ≅ K.obj) (d e : ℕ) : HEq (transportedComparison P Y aY K Ke hKe eK ((e + 1) + d) (eqToIso (blockSchemeEq Y (e + 1) (d + 1))) (iteratedAffineLineProj (iteratedAffineLine Y (e + 1)) (d + 1) ≫ iteratedAffineLineProj Y (e + 1)) (hg' := blockProjectionCompactification Y (d + 1) (e + 1)) (blockProjection Y (d + 1) (e + 1))) (blockComposite P Y aY K Ke hKe eK d e)",
+  "branch": "sheaf-dag",
+  "by": "A2",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-6dc2c",
+  "group": "A2",
+  "result": "fix",
+  "landing": "20261025T211934-L-4162362",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-6dc2c",
+  "group": "A2",
+  "result": "fix",
+  "landing": "20261025T211934-L-4162362",
+  "kind": "interface",
+  "note": "independent cc review: item theorem statement vs clone (identical); moved Maps defs vs old item bodies (verbatim); two sorry lemmas vs item conjuncts 1 and 3 and their nodes; item node vs Lean (statement uses decls owned by def-pur-affine-comparison-coordinate-maps)"
+ }
+}

@@ -1,0 +1,341 @@
+{
+ "id": "lem-sfb-smooth-projective-torus-invariant-affine-cover",
+ "kind": "statement",
+ "title": "Invariant affine cover for a smooth projective torus scheme",
+ "statement": "Let $F$ be an algebraically closed field [def-weil-field, def-weil-algebraic-closure], $T\\simeq\\mathbf G_m^r$ a split torus of finite rank $r\\geq0$ [def-sc-group-scheme, def-sc-gm-ga], and $Y$ a smooth projective $F$-scheme [def-pc-scheme, def-sbc-smooth-morphisms, def-pc-projective-morphism]. Let $a:T\\times_FY\\to Y$ be a group action, meaning a morphism satisfying the identity and associativity identities on all commutative test algebras [def-pc-fibre-product]. There is a finite family of affine open subschemes $U_j\\subseteq Y$ [def-weil-affine-spectrum, def-weil-open-immersion] covering $Y$ such that $a|_{T\\times_FU_j}$ factors through $U_j$ for each $j$. Thus each $U_j$ carries the restricted algebraic $T$-action. The empty scheme and the trivial torus are allowed.",
+ "source": {
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Agent-formulated prerequisite for Section 13f, Definition 13.45 and Lemma 13.46, printed p.272. Lemma 13.46 supplies invariant affine charts only for a linear action; it does not prove this general statement. WANTED: Sumihiro, Equivariant completion, J. Math. Kyoto Univ. 14 (1974), 1--28, invariant affine neighbourhood theorem for normal torus varieties and its projective smooth special case."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-weil-algebraic-closure",
+  "def-sc-group-scheme",
+  "def-sc-gm-ga",
+  "def-pc-scheme",
+  "def-sbc-smooth-morphisms",
+  "def-pc-projective-morphism",
+  "def-pc-fibre-product",
+  "def-weil-affine-spectrum",
+  "def-weil-open-immersion",
+  "def-sfb-tori-multiplicative-type"
+ ],
+ "proof": [
+  {
+   "text": "If $Y$ is empty, take the empty family; every assertion is vacuous. Henceforth assume $Y$ is nonempty. By [lem-pc-projective-proper] its structure morphism is proper, hence separated, of finite type and quasi-compact by [def-weil-proper-morphism, def-weil-finite-type-morphism]. These are exactly the separation and finiteness hypotheses needed below. By [sbc-lem-smooth-geometrically-reduced], $Y$ is reduced: the fibre of $Y\\to\\operatorname{Spec}F$ is $Y$ itself, and geometric reducedness includes reducedness over $F$.",
+   "uses": [
+    "lem-pc-projective-proper",
+    "def-weil-proper-morphism",
+    "def-weil-finite-type-morphism",
+    "sbc-lem-smooth-geometrically-reduced"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 01WC, lemma-locally-projective-proper; Tag 01W1, definition-proper. Reducedness: varieties.tex Tag 056T, lemma-smooth-geometrically-normal."
+   }
+  },
+  {
+   "text": "By [def-pc-projective-morphism], choose a closed immersion $j:Y\\hookrightarrow\\mathbf P_F^N$. Let $L=j^*\\mathcal O(1)$, using [def-pc-projective-space-twist, def-pc-module-pullback]. It is invertible: pulling back each local rank-one frame of $\\mathcal O(1)$ gives a local rank-one frame of $L$ [def-sc-invertible-module]. Write $x_0,\\ldots,x_N$ for the coordinate sections of $\\mathcal O(1)$ and $t_i=j^*x_i$. On $D_+(x_i)$ the section $x_i$ is the frame of $\\mathcal O(1)$; on overlaps its ratio to $x_j$ is $x_i/x_j$, precisely the transition rule in the twist definition. Thus the $t_i$ generate $L$: the opens $Y_{t_i}=j^{-1}D_+(x_i)$ cover $Y$. Here $Y_s$ means the open where the image of the section $s$ in the one-dimensional residue fibre of $L$ is nonzero.",
+   "uses": [
+    "def-pc-projective-morphism",
+    "def-pc-projective-space-twist",
+    "def-pc-module-pullback",
+    "def-sc-invertible-module"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/constructions.tex",
+    "place": "Projective-space coordinate opens and twisting sheaves; agent unpacking of the transition rule in def-pc-projective-space-twist."
+   }
+  },
+  {
+   "text": "Put $p:T\\times_FY\\to Y$ and let $e:Y\\to T\\times_FY$ insert $1_T$. The projection is the trivial split-torus torsor: the action on its first factor is multiplication, and $(t,y,u)\\mapsto((t,y),(tu,y))$ is an isomorphism onto $(T\\times_FY)\\times_Y(T\\times_FY)$ with inverse $((t,y),(v,y))\\mapsto(t,y,t^{-1}v)$. The coordinate Laurent presentation on an affine base $\\operatorname{Spec}R$ is $R[z_1,w_1,\\ldots,z_r,w_r]/(z_iw_i-1)_i$, so $p$ is affine of finite presentation and separated (the affine diagonal is given by the surjective multiplication map of coordinate rings). By [lem-trf-split-lattice-torus-projection] with lattice $\\mathbf Z^r$, $p$ is smooth and surjective; [lem-pc-smooth-flat] gives flatness. Thus $p$ is faithfully flat. Its geometric fibres are connected: after every field extension $K/F$ they are spectra of the integral domains $K[\\mathbf Z^r]$, by the same lattice lemma. This also verifies all hypotheses of [lem-sfb-relative-group-unit-axis-factorization] for the commutative group scheme $T\\times_FY\\to Y$: its base is reduced by step 1. These assertions include $r=0$, when $p$ is the identity.",
+   "uses": [
+    "lem-trf-split-lattice-torus-projection",
+    "lem-pc-smooth-flat",
+    "def-sc-group-scheme",
+    "def-sc-gm-ga",
+    "lem-sfb-relative-group-unit-axis-factorization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Definition 12.14, printed p.236; explicit trivial-torsor coordinates. Smooth projection supplied by the existing lattice-torus lemma; flatness: Stacks Tag 01VF, morphisms-lemma-smooth-flat."
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-split-torus-torsor-line-pullback] to this torsor and the invertible module $a^*L$ on $T\\times_FY$. Its base $Y$ is smooth, separated and of finite type by the hypotheses and step 1. Obtain an invertible module $M$ on $Y$ and an isomorphism $p^*M\\simeq a^*L$. Pull back along $e$. Because $pe=\\operatorname{id}_Y=ae$, the composition and identity isomorphisms of [lem-pc-module-pullback-identity-composition] identify this with an isomorphism $M\\simeq L$. Transporting along it gives an isomorphism $\\theta:p^*L\\to a^*L$. Its identity restriction $c=e^*\\theta$ is an automorphism of $L$. Replace $\\theta$ by $\\theta\\circ p^*(c^{-1})$; its restriction along $e$ is now the identity. No cocycle identity has yet been assumed.",
+   "uses": [
+    "lem-sfb-split-torus-torsor-line-pullback",
+    "lem-pc-module-pullback-identity-composition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/divisors.tex",
+    "place": "Tag 0BD9, lemma-extend-invertible-module, through the existing split-torus-torsor line-pullback theorem; composition: sheaves.tex Tag 0097, lemma-push-pull-composition-modules. Agent normalization at the identity."
+   }
+  },
+  {
+   "text": "On $T\\times_FT\\times_FY$, compare the two isomorphisms from $L_y$ to $L_{ghy}$, namely $\\theta_{gh,y}$ and $\\theta_{g,hy}\\theta_{h,y}$, with pullbacks identified by [lem-pc-module-pullback-identity-composition]. Their ratio is an automorphism of an invertible module, hence multiplication by a unique global unit $u$. Indeed, in a rank-one local frame an automorphism is multiplication by a unit, and changing the frame leaves that scalar unchanged, so these units glue. Restricting to $g=1$ gives $u=1$ because $\\theta_{1,hy}$ is the identity. Restricting to $h=1$ gives $u=1$ because $\\theta_{1,y}$ is the identity. Apply [lem-sfb-relative-group-unit-axis-factorization] with base $Y$, group $T\\times_FY$, and $n=2$; step 3 checked smoothness, separation, finite presentation and geometrically connected fibres, and step 1 checked the reduced-base alternative. Its axis-trivial conclusion gives $u=1$. Therefore $\\theta_{gh,y}=\\theta_{g,hy}\\theta_{h,y}$ as sheaf maps on the product, so $L$ is $T$-linearized, including over nonreduced test algebras.",
+   "uses": [
+    "lem-pc-module-pullback-identity-composition",
+    "lem-sfb-relative-group-unit-axis-factorization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 12.48, identity (79), and Remark 12.50, printed pp.246--247; relative axis-factorization theorem as stated in its existing DAG node. Agent cocycle calculation."
+   }
+  },
+  {
+   "text": "Set $V=\\Gamma(Y,L)$. The degree-one assertion of [lem-sfb-projective-polarization-section-algebra] makes $V$ finite-dimensional: $Y$ is projective of finite type, and $L$ itself is the pullback of $\\mathcal O(1)$ along $j$. It is nonzero because the finitely many sections $t_i\\in V$ generate a line at every point of the nonempty $Y$. Apply [lem-sfb-linearized-qcoherent-cohomology-coaction] in degree zero to $G=T$, $\\mathcal E=L$. Its hypotheses hold: $T$ is affine of finite type by its Laurent presentation, $Y$ is quasi-compact separated, $L$ is quasi-coherent since it is invertible, and step 5 gives the linearization. Obtain $c_0:V\\to V\\otimes_FF[T]$ with counit and coassociativity. In a finite basis its coefficients form a matrix over $F[T]$; these identities say its evaluation at $1$ is the identity and its evaluation at $gh$ is the product of its evaluations at $g,h$. Evaluation at $g^{-1}$ is therefore its inverse. Thus these matrices define a rational group-scheme representation $T\\to\\operatorname{GL}(V)$. Its action on sections is exactly $(g s)(y)=\\theta_{g,g^{-1}y}s(g^{-1}y)$, by the cited degree-zero formula.",
+   "uses": [
+    "lem-sfb-projective-polarization-section-algebra",
+    "lem-sfb-linearized-qcoherent-cohomology-coaction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/coherent.tex",
+    "place": "Tag 0B5T, lemma-coherent-proper-ample, finite-dimensional degree-one sections; Tag 02KH, lemma-flat-base-change-cohomology, through the existing cohomology-coaction theorem. Agent matrix realization of its degree-zero coaction."
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-split-torus-representation-weight-decomposition] to $V$. Choose bases of its finitely many nonzero character spaces and concatenate them, obtaining eigenvectors $s_1,\\ldots,s_m$ forming an $F$-basis. The cited statement gives the eigenvector identities after every commutative algebra extension, not merely on $F$-points. Put $U_i=Y_{s_i}$. These opens cover $Y$: if a point $y$ were in none, every $s_i$ would be zero in $L\\otimes\\kappa(y)$, so every $F$-linear combination of them would be zero there; in particular all $t_0,\\ldots,t_N$ would vanish, contradicting step 2. Each $U_i$ is affine by [lem-sfb-projective-polarization-section-algebra] applied to the homogeneous degree-one section $s_i$.",
+   "uses": [
+    "lem-sfb-split-torus-representation-weight-decomposition",
+    "lem-sfb-projective-polarization-section-algebra"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Theorem 12.12, printed pp.234--235; Lemma 13.46, printed p.272, eigenvector-chart construction. Affineness for an ample-line section: Stacks morphisms.tex Tag 0EKE, lemma-proper-ample-delete-affine, through the existing polarization-section-algebra node."
+   }
+  },
+  {
+   "text": "Let $s_i$ have character $\\chi_i$. For any commutative $F$-algebra $A$, $g\\in T(A)$ and $y\\in Y(A)$, substitute $gy$ for the argument in the degree-zero action formula of step 6 and use the eigenvector identity of step 7. It gives\n$$\\theta_{g,y}(s_i(y))=\\chi_i(g)\\,s_i(gy).$$\nThe scalar $\\chi_i(g)$ is a unit and $\\theta_{g,y}$ is an isomorphism of the pulled-back lines. Consequently $s_i(y)$ generates its line if and only if $s_i(gy)$ does. Apply this to the universal test point on $T\\times_FU_i$ (or on an affine cover thereof): $s_i(y)$ generates there by the definition of $U_i$, so $s_i(gy)$ does too. The action therefore maps this entire scheme into the open $U_i$, and the universal property of restriction to an open gives the required factorization $T\\times_FU_i\\to U_i$. The restricted identity and associativity follow from those of $a$: composing with the open immersion into $Y$ gives those identities, and an open immersion is a monomorphism. The family has $m<\\infty$ members. For $r=0$ the preceding proof remains valid with only the trivial character; no nontrivial weight or positive-dimensional torus was used.",
+   "uses": [
+    "def-weil-open-immersion",
+    "lem-sfb-linearized-qcoherent-cohomology-coaction",
+    "lem-sfb-split-torus-representation-weight-decomposition"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Lemma 13.46, printed p.272: eigen-sections have invariant nonvanishing opens; the displayed calculation verifies this on all test algebras. Agent restriction of the action identities."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-projective-proper",
+  "def-weil-proper-morphism",
+  "def-weil-finite-type-morphism",
+  "sbc-lem-smooth-geometrically-reduced",
+  "def-pc-projective-morphism",
+  "def-pc-projective-space-twist",
+  "def-pc-module-pullback",
+  "def-sc-invertible-module",
+  "lem-trf-split-lattice-torus-projection",
+  "lem-pc-smooth-flat",
+  "def-sc-group-scheme",
+  "def-sc-gm-ga",
+  "lem-sfb-relative-group-unit-axis-factorization",
+  "lem-sfb-split-torus-torsor-line-pullback",
+  "lem-pc-module-pullback-identity-composition",
+  "lem-sfb-projective-polarization-section-algebra",
+  "lem-sfb-linearized-qcoherent-cohomology-coaction",
+  "lem-sfb-split-torus-representation-weight-decomposition",
+  "def-weil-open-immersion"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Lemma 13.46, printed p.272, motivates the eigen-section construction. The needed linearization is constructed here from the existing split-torus-torsor line-pullback and relative unit-axis-factorization lemmas; it is not attributed to Milne 13.46 or to an unavailable Sumihiro source."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A smooth projective scheme over an algebraically closed field with an action of a split torus has a finite cover by invariant affine open subschemes",
+   "results": "{\"t\": \"2026-10-23T23:44:20Z\", \"tool\": \"leanfinder\", \"query\": \"A smooth projective scheme over an algebraically closed field with an action of a split torus has a finite cover by invariant affine open subschemes\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Proj.affineOpenCover\", \"AlgebraicGeometry.Scheme.AffineCover\", \"AlgebraicGeometry.instIsAffineXSchemeFiniteSubcover\", \"AlgebraicGeometry.Scheme.affineCover\", \"AlgebraicGeometry.Scheme.instInhabitedOpenCover\", \"AlgebraicGeometry.instIsAffineXSchemeAffineCover\", \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.h𝒰S\", \"AlgebraicGeometry.Proj.affineOpenCoverOfIrrelevantLESpan\"], \"digest\": \"0a384f79320ac267\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: returned signatures concern ordinary affine covers, modules, representations or nilpotent ring elements; none states this equivariant coherent-sheaf result or specializes to it in one line"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Sumihiro theorem every normal variety with an algebraic torus action has invariant affine open neighborhoods",
+   "results": "{\"t\": \"2026-10-23T23:49:35Z\", \"tool\": \"leanfinder\", \"query\": \"Sumihiro theorem every normal variety with an algebraic torus action has invariant affine open neighborhoods\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.ExistsHomHomCompEqCompAux.h𝒰S\", \"AlgebraicGeometry.exists_isAffineOpen_mem_and_subset\", \"AlgebraicGeometry.Scheme.affineOpenCover_X\", \"AlgebraicGeometry.instIsAffineXSchemeAffineCover\", \"AlgebraicGeometry.reduce_to_affine_nbhd\", \"AlgebraicGeometry.Scheme.exists_isOpenCover_and_isAffine\", \"AlgebraicGeometry.Scheme.local_affine\", \"AlgebraicGeometry.Scheme.IsQuasiAffine.of_forall_exists_mem_basicOpen\"], \"digest\": \"1a16e4a66ec08ac7\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: returned signatures concern ordinary affine covers, modules, representations or nilpotent ring elements; none states this equivariant coherent-sheaf result or specializes to it in one line"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A smooth projective scheme with split torus action admits invariant affine neighborhoods",
+   "results": "{\"t\": \"2026-10-23T23:44:12Z\", \"tool\": \"leansearch\", \"query\": \"A smooth projective scheme with split torus action admits invariant affine neighborhoods\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.exists_isAffineOpen_mem_and_subset\", \"AlgebraicGeometry.Scheme.local_affine\", \"AlgebraicGeometry.Scheme.mk.noConfusion\", \"AlgebraicGeometry.Scheme.exists_affine_mem_range_and_range_subset\", \"AlgebraicGeometry.IsSmooth.casesOn\", \"AlgebraicGeometry.IsSmooth.recOn\", \"AlgebraicGeometry.IsAffine.recOn\", \"AlgebraicGeometry.IsAffineOpen\"], \"digest\": \"b9580fe8d4b563c1\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: returned signatures concern ordinary affine covers, modules, representations or nilpotent ring elements; none states this equivariant coherent-sheaf result or specializes to it in one line"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsAffineOpen\", \"invariant\"",
+   "results": "{\"t\": \"2026-10-23T23:44:57Z\", \"tool\": \"loogle\", \"query\": \"\\\"IsAffineOpen\\\", \\\"invariant\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: returned signatures concern ordinary affine covers, modules, representations or nilpotent ring elements; none states this equivariant coherent-sheaf result or specializes to it in one line"
+  },
+  {
+   "tool": "grep",
+   "query": "invariant.*affine|affine.*invariant|Sumihiro",
+   "results": "{\"t\": \"2026-10-23T23:44:56Z\", \"tool\": \"grep\", \"query\": \"invariant.*affine|affine.*invariant|Sumihiro\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: returned signatures concern ordinary affine covers, modules, representations or nilpotent ring elements; none states this equivariant coherent-sheaf result or specializes to it in one line"
+  },
+  {
+   "tool": "grep",
+   "query": "Sumihiro|torus.*(affine|lineariz)|equivariant.*ample",
+   "results": "{\"t\": \"2026-10-23T23:49:27Z\", \"tool\": \"grep\", \"query\": \"Sumihiro|torus.*(affine|lineariz)|equivariant.*ample\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: returned signatures concern ordinary affine covers, modules, representations or nilpotent ring elements; none states this equivariant coherent-sheaf result or specializes to it in one line"
+  },
+  {
+   "tool": "grep",
+   "query": "Sumihiro|torus.*(affine|lineariz)|invariant.*affine",
+   "results": "{\"t\": \"2026-10-24T00:16:17Z\", \"tool\": \"grep\", \"query\": \"Sumihiro|torus.*(affine|lineariz)|invariant.*affine\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected hits give ordinary affine covers or homogeneous Proj charts, local affine reductions, and a topological discrete-group action; none supplies a scheme-theoretic invariant cover for an arbitrary split-torus action"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Sumihiro theorem smooth projective torus scheme invariant affine open cover",
+   "results": "{\"t\": \"2026-10-24T00:16:17Z\", \"tool\": \"leansearch\", \"query\": \"Sumihiro theorem smooth projective torus scheme invariant affine open cover\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.affineOpenCover\", \"AlgebraicGeometry.Scheme.affineCover\", \"AlgebraicGeometry.Scheme.AffineOpenCover.openCover\", \"AlgebraicGeometry.Scheme.AffineOpenCover\", \"AlgebraicGeometry.Proj.affineOpenCover\", \"AlgebraicGeometry.Scheme.openCover_affineOpenCover\", \"AlgebraicGeometry.Scheme.isAffine_affineOpenCover\", \"AlgebraicGeometry.Proj.openCoverOfISupEqTop\"], \"digest\": \"0153337fb192345d\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected hits give ordinary affine covers or homogeneous Proj charts, local affine reductions, and a topological discrete-group action; none supplies a scheme-theoretic invariant cover for an arbitrary split-torus action"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsAffineOpen\", \"invariant\"",
+   "results": "{\"t\": \"2026-10-24T00:16:18Z\", \"tool\": \"loogle\", \"query\": \"\\\"IsAffineOpen\\\", \\\"invariant\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected hits give ordinary affine covers or homogeneous Proj charts, local affine reductions, and a topological discrete-group action; none supplies a scheme-theoretic invariant cover for an arbitrary split-torus action"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A smooth projective scheme with an action of a split torus admits a finite covering by invariant affine open subschemes",
+   "results": "{\"t\": \"2026-10-24T00:16:20Z\", \"tool\": \"leanfinder\", \"query\": \"A smooth projective scheme with an action of a split torus admits a finite covering by invariant affine open subschemes\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Proj.affineOpenCover\", \"AlgebraicGeometry.Proj.affineOpenCoverOfIrrelevantLESpan\", \"AlgebraicGeometry.Scheme.affineCover\", \"AlgebraicGeometry.instIsAffineXSchemeFiniteSubcover\", \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.h𝒰S\", \"AlgebraicGeometry.Scheme.instInhabitedOpenCover\", \"AlgebraicGeometry.instIsAffineXSchemeAffineCover\", \"AlgebraicGeometry.Scheme.exists_isOpenCover_and_isAffine\"], \"digest\": \"60c7db72dc73987d\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected hits give ordinary affine covers or homogeneous Proj charts, local affine reductions, and a topological discrete-group action; none supplies a scheme-theoretic invariant cover for an arbitrary split-torus action"
+  },
+  {
+   "tool": "grep",
+   "query": "Sumihiro|torus.*(lineariz|invariant)|lineariz.*(ample|invertible)",
+   "results": "{\"t\": \"2026-10-24T00:17:18Z\", \"tool\": \"grep\", \"query\": \"Sumihiro|torus.*(lineariz|invariant)|lineariz.*(ample|invertible)\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected hits give ordinary affine covers or homogeneous Proj charts, local affine reductions, and a topological discrete-group action; none supplies a scheme-theoretic invariant cover for an arbitrary split-torus action"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Every algebraic action of a split torus on a smooth projective variety has affine invariant neighborhoods using a linearized ample line bundle",
+   "results": "{\"t\": \"2026-10-24T00:17:20Z\", \"tool\": \"leanfinder\", \"query\": \"Every algebraic action of a split torus on a smooth projective variety has affine invariant neighborhoods using a linearized ample line bundle\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.ExistsHomHomCompEqCompAux.h𝒰S\", \"AlgebraicGeometry.Proj.affineOpenCover\", \"AlgebraicGeometry.reduce_to_affine_nbhd\", \"AlgebraicGeometry.Proj.isAffineOpen_basicOpen\", \"AlgebraicGeometry.Proj.affineOpenCoverOfIrrelevantLESpan\", \"AlgebraicGeometry.exists_affineOpens_le_appLE_of_appLE\", \"ProperlyDiscontinuousSMul.exists_nhds_image_smul_eq_self\", \"AlgebraicGeometry.Scheme.exists_isOpenCover_and_isAffine\"], \"digest\": \"f9abedf44a5476f8\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected hits give ordinary affine covers or homogeneous Proj charts, local affine reductions, and a topological discrete-group action; none supplies a scheme-theoretic invariant cover for an arbitrary split-torus action"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-torus-fixed-euler-unit",
+  "date": "2026-10-24",
+  "group": "Q13"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Haboush symmetric-power lifting for a trivial quotient representation. Supporting representation-theoretic input: Steinberg endomorphisms detect a nonzero fixed vector. Supporting Self-duality of rho section modules at characteristic-dependent weights. Supporting input: Positive-characteristic simplicity step, using irreducibility of the Steinberg induced module rather than assuming self-duality. Numerical input to the dimension comparison: Weyl dimension of the induced module. Supporting Integral Euler character of arbitrary flag line bundles. Section 22d, proof of Theorem 22.50, p.480: general fixed-point input, stated here in its integral equivariant form; Example 22.36, pp.473--474, for formal characters. WANTED: Nielsen 1974 general fixed-point theorem and Iversen 1976, 9.4; neither document is present. The integral formulation is an agent-supplied supporting statement. Supporting input: Section 22d, proof of Theorem 22.50, p.480: agent-supplied concentration prerequisite, not the numerical fixed-point formula itself. WANTED: Thomason, Une formule de Lefschetz en K-theorie equivariante algebrique, Duke Math. J. 53 (1986), concentration theorem; not present locally. No proof of concentration is claimed to occur in Milne. Supporting step: The regular fixed-immersion and conormal Euler-factor step in the proof of the item. Supporting input: Affine localization of the fixed-locus geometry; no equivariant projective embedding is assumed in the item.",
+   "via": [
+    "lem-sfb-torus-fixed-euler-unit",
+    "lem-sfb-torus-coherent-concentration",
+    "lem-sfb-torus-coherent-fixed-point-formula",
+    "lem-sfb-flag-line-euler-alternant",
+    "lem-sfb-induced-weyl-dimension-formula",
+    "lem-sfb-steinberg-induced-module-irreducible",
+    "lem-sfb-rho-section-self-duality",
+    "lem-sfb-steinberg-endomorphism-detection",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-smooth-projective-torus-invariant-affine-cover",
+  "worker": "stage1",
+  "summary": "Constructed a linearization of the projective hyperplane line using the existing split-torus-torsor Picard surjectivity and relative unit-axis-factorization statements, then formed the finite invariant affine opens from a weight basis of its global sections. No statement change and no new nodes. Checked all cited statements, hypotheses, all-test-algebra equivariance, empty Y, rank zero, disconnected Y and positive characteristic.",
+  "blueprint": "Realizes the inherited affine-localization prerequisite in blueprint.from.place below det-thm-sf-ctf-stability-direct-images proof (3). Read the latest unit and direct-image proof; neither states this auxiliary torus result. blueprint_refs.py ancestor reports None; the inherited null from.node and existing via chain are retained, with same_as=[] after whole-blueprint searches.",
+  "tool_uses": [
+   {
+    "node": "lem-pc-projective-proper",
+    "why": "Projective implies proper, providing separatedness and finite type for generic scheme inputs."
+   },
+   {
+    "node": "sbc-lem-smooth-geometrically-reduced",
+    "why": "Smoothness over a field gives the reduced base needed for the unit-factorization cocycle argument."
+   },
+   {
+    "node": "lem-trf-split-lattice-torus-projection",
+    "why": "Smoothness, surjectivity and geometric integrality of a split-torus projection, a generic torus-coordinate tool."
+   },
+   {
+    "node": "lem-pc-module-pullback-identity-composition",
+    "why": "Canonical identity and composition isomorphisms of module pullback, needed when restricting the chosen line isomorphism and comparing its cocycle."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pc-projective-proper",
+  "sbc-lem-smooth-geometrically-reduced",
+  "lem-trf-split-lattice-torus-projection",
+  "lem-pc-module-pullback-identity-composition"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q86-cc8e9cd94",
+  "group": "Q86",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q86-cc8e9cd94 (reviewer sub-agent of L); spot-checked: The statement is byte-identical to the base, and the node is still unsplit on live/side-live, so no group has superseded it; there are no new nodes. The 8-step proof is a genuine argument that reduces Sumihiro's theorem to Milne iAG2017 Lemma 13.46 (pdf checked, printed p.272), which handles only the linear case, by linearizing L=j^*O(1). Steps 3-4: the trivial torsor T×Y→Y plus lem-sfb-split-torus-torsor-line-pullback give θ:p^*L≅a^*L, normalized at e using pe=ae=id and lem-pc-module-pullback-identity-composition; all torsor-lemma hypotheses hold. Step 5: the cocycle defect is a unit u with a_1^*u=a_2^*u=1, so lem-sfb-relative-group-unit-axis-factorization (S=Y reduced by step 1, G=T×Y smooth, separated, fp, geometrically connected fibres via lem-trf-split-lattice-torus-projection, n=2) gives u=1; I checked the formula. Step 6: the polarization lemma (S_1 finite-dimensional; def-kun-projective uses the same H-projective convention) and the degree-0 coaction lemma give T→GL(V). Step 7: weight decomposition gives an eigenbasis, the opens cover via the t_j, and Y_{s_i} is affine by the polarization lemma. Step 8: the substitution gives θ_{g,y}(s_i(y))=χ_i(g)s_i(gy), so T×U_i maps into U_i; I verified this. Edge cases checked: empty Y, r=0, disconnected Y, a point, characteristic p. No duplicates found: the torus-extreme-weight, fixed-weight, attracting-cells and invariant-affine-filtration nodes all assume an embedding or an invariant open. Batch 5: I recomputed the full closures. The trf torus projection reaches only monoid/log algebra; the unit-axis lemma reaches def-trf-schematically-dense-open and limit descent; the torsor line-pullback reaches algebraic-space/Proj foundations, invertible-module descent and UFD/regular local rings; the polarization lemma reaches lem-trf-proj-separated. All are generic, and none is the trace formula, Poincaré duality or a step of their proofs, so all are accepted. No SGA is cited, and the tool_uses are generic. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SmoothProjectiveTorusInvariantAffineCover",
+  "declaration": "AlgebraicGeometry.smooth_projective_torus_invariant_affine_cover",
+  "file": "lean/Sheaf/AlgebraicGeometry/SmoothProjectiveTorusInvariantAffineCover.lean",
+  "statement": "theorem smooth_projective_torus_invariant_affine_cover (F : Type u) [Field F] [IsAlgClosed F] (T : Grp (Over (Spec (.of F)))) (r : ℕ) (_hT : Nonempty (T ≅ MultiplicativeType.splitTorus F r)) (Y : Over (Spec (.of F))) [Smooth Y.hom] [IsProjective Y.hom] (a : ModObj T.X Y) : ∃ (n : ℕ) (U : Fin n → Y.left.Opens), (⨆ j, U j) = ⊤ ∧ ∀ j : Fin n, IsAffineOpen (U j) ∧ ∃ aU : ModObj T.X (Over.mk ((U j).ι ≫ Y.hom)), aU.smul ≫ (Over.homMk (U j).ι) = (T.X ◁ (Over.homMk (U j).ι)) ≫ a.smul",
+  "branch": "newtargets-dag",
+  "by": "Q37",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-af38e12c1",
+  "group": "Q37",
+  "result": "pass",
+  "note": "Statement matches node clause by clause: IsAlgClosed F; T ≅ splitTorus F r as a group-scheme iso; Smooth and IsProjective on Y.hom; ModObj action with laws as morphism identities; Fin n affine opens with supremum ⊤; restricted ModObj pinned to a.smul through the open immersion, equivalent to the node since an open immersion is mono. Only node deltas: lean record and added stmt_dep def-sfb-tori-multiplicative-type, landed on base (record identical to side-live) and used via splitTorus. Edge cases empty Y (n=0), r=0, disconnected Y, char p and single universe u all hold. Docstrings carry Milne p.272 source, blueprint id and all 8 steps; lean.statement verbatim; only sorry; plain imports are exactly the recorded proof-dep modules; ModObj convention consistent with landed torus modules; no duplicate found. No changes, so no compile."
+ }
+}

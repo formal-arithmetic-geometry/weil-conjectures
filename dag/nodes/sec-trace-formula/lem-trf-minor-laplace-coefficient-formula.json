@@ -1,0 +1,205 @@
+{
+ "id": "lem-trf-minor-laplace-coefficient-formula",
+ "kind": "statement",
+ "title": "Laplace coefficient formula for a selected column set",
+ "statement": "Let $R$ be a commutative ring, $q\\ge0$, and $Q$ a $q\\times q$ matrix over $R$ [def-weil-matrix]. Write $[q]=\\{1,\\ldots,q\\}$. For subsets $I,T\\subseteq[q]$ of the same cardinality, $Q_{I,T}$ denotes the square submatrix with its rows and columns in increasing order [def-weil-submatrix], and $\\det$ denotes [def-weil-pbc-matrix-determinant]. For every $0\\le s\\le q$ and every $s$-element column set $T\\subseteq[q]$, one has the coefficient identity\n$$\\det Q=\\sum_{\\substack{I\\subseteq[q]\\\\|I|=s}}(-1)^{\\sum_{i\\in I}i+\\sum_{j\\in T}j}\\det(Q_{I,T})\\det(Q_{[q]\\setminus I,[q]\\setminus T}).$$\nAll signs are mapped from $\\mathbf Z$ to $R$. Complements and all submatrices retain increasing order; no permutation sign is suppressed. This includes $s=0$, $s=q$, and $q=0$, with empty determinant and empty product equal to $1$. Thus this is an identity giving specified complementary-minor coefficients, for an arbitrary retained column set, rather than an assertion of membership in an ideal.",
+ "source": {
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tag 07Z7 (lemma-ideals-generated-by-minors), proof hint: expansion along a column or row; cofactor calculation underlying part (1), generalized to a retained column subset (agent-supplied details)."
+ },
+ "stmt_deps": [
+  "def-weil-matrix",
+  "def-weil-submatrix",
+  "def-weil-pbc-matrix-determinant"
+ ],
+ "proof": [
+  {
+   "text": "Expand $\\det Q$ as $\\sum_{\\sigma\\in S_q}\\operatorname{sgn}(\\sigma)\\prod_{j=1}^qQ_{\\sigma(j),j}$ using [def-weil-pbc-matrix-determinant]. Fix $T=(t_1<\\cdots<t_s)$ and list its complement as $(u_1<\\cdots<u_{q-s})$. Reindex the finite sum by $I=\\sigma(T)$ and two permutations $\\alpha\\in S_s$, $\\beta\\in S_{q-s}$. Indeed, if $I=(i_1<\\cdots<i_s)$ and $I^c=(v_1<\\cdots<v_{q-s})$, the inverse sends $(I,\\alpha,\\beta)$ to the map $t_a\\mapsto i_{\\alpha(a)}$, $u_b\\mapsto v_{\\beta(b)}$. Its two restrictions are bijective onto disjoint complementary sets, so it is a permutation. Each restriction recovers its unique $\\alpha$ or $\\beta$; thus the constructions are inverse and every term occurs exactly once.",
+   "uses": [
+    "def-weil-pbc-matrix-determinant"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 07Z7, lemma-ideals-generated-by-minors, expansion hint; explicit agent-supplied Leibniz grouping, step 1"
+   }
+  },
+  {
+   "text": "For the permutation indexed by $(I,\\alpha,\\beta)$, apply [lem-trf-ordered-block-permutation-sign] with the increasing lists just chosen. Its hypothesis $\\sigma(T)=I$ holds by construction, and it gives $\\operatorname{sgn}(\\sigma)=\\epsilon(I,T)\\operatorname{sgn}(\\alpha)\\operatorname{sgn}(\\beta)$, where $\\epsilon(I,T)=(-1)^{\\sum I+\\sum T}$. Apply the canonical ring map $\\mathbf Z\\to R$ to this integer equality.",
+   "uses": [
+    "lem-trf-ordered-block-permutation-sign"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 07Z7, lemma-ideals-generated-by-minors, expansion hint; explicit agent-supplied Leibniz grouping, step 2"
+   }
+  },
+  {
+   "text": "Split each product over the disjoint sets $T$ and $T^c$. The contribution for fixed $I$ is therefore\n$$\\epsilon(I,T)\\left(\\sum_{\\alpha\\in S_s}\\operatorname{sgn}(\\alpha)\\prod_{a=1}^s Q_{i_{\\alpha(a)},t_a}\\right)\\left(\\sum_{\\beta\\in S_{q-s}}\\operatorname{sgn}(\\beta)\\prod_{b=1}^{q-s}Q_{v_{\\beta(b)},u_b}\\right).$$\nThis is finite distributivity: multiplying the two sums chooses each pair $(\\alpha,\\beta)$ once, and commutativity of $R$ permits the displayed grouping. By [def-weil-submatrix] and [def-weil-pbc-matrix-determinant], the two parentheses are precisely $\\det(Q_{I,T})$ and $\\det(Q_{I^c,T^c})$, with increasing orders. Summing these contributions over $I$ gives the claimed formula.",
+   "uses": [
+    "def-weil-submatrix",
+    "def-weil-pbc-matrix-determinant"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 07Z7, lemma-ideals-generated-by-minors, expansion hint; explicit agent-supplied Leibniz grouping, step 3"
+   }
+  },
+  {
+   "text": "For $s=0$ the only row set is empty; its sign exponent is $0$, and its determinant is $1$ by [def-weil-pbc-matrix-determinant], so the term is $\\det Q$. For $s=q$ the only row set is $[q]$; the exponent is $2\\sum_{i=1}^qi$ and hence even, while the complementary determinant is $1$. If $q=0$, necessarily $s=0$, all the sums over permutations have one term, all products are empty, and both sides are $1$. These calculations require no cancellation or invertibility in $R$.",
+   "uses": [
+    "def-weil-pbc-matrix-determinant"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 07Z7, lemma-ideals-generated-by-minors, expansion hint; explicit agent-supplied Leibniz grouping, step 4"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-matrix-determinant",
+  "lem-trf-ordered-block-permutation-sign",
+  "def-weil-submatrix"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tag 07Z7, lemma-ideals-generated-by-minors, proof omitted with row/column expansion hint; ordered-subset Leibniz proof supplied by Q67."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Laplace expansion of a determinant along an arbitrary subset of columns as a signed sum of products of complementary minors",
+   "results": "Returned Matrix.det_succ_column, Matrix.det_succ_row, Matrix.det_eq_sum_row_mul_submatrix_succAbove_succAbove_det, Matrix.det_eq_sum_column_mul_submatrix_succAbove_succAbove_det, Matrix.submatrix_succAbove_det_eq_negOnePow_submatrix_succAbove_det, Matrix.det_succ_column_zero, Matrix.submatrix_succAbove_det_eq_negOnePow_submatrix_succAbove_det', Matrix.det_succ_row_zero.",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits give single-column expansion or square-matrix primitives, not the stated multi-index identity"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A determinant expanded along a fixed subset of r columns equals the sum over r row subsets of signed products of the two complementary minors",
+   "results": "Returned Matrix.det_succ_column, Matrix.det_succ_row, Matrix.det_eq_sum_row_mul_submatrix_succAbove_succAbove_det, Matrix.det_eq_sum_column_mul_submatrix_succAbove_succAbove_det, Matrix.det_succ_column_zero, Matrix.cramerMap, Matrix.det_succ_row_zero, Matrix.det_eq_sum_mul_adjugate_col.",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits give single-column expansion or square-matrix primitives, not the stated multi-index identity"
+  },
+  {
+   "tool": "loogle",
+   "query": "Matrix.det, \"laplace\"",
+   "results": "No hits.",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits give single-column expansion or square-matrix primitives, not the stated multi-index identity"
+  },
+  {
+   "tool": "grep",
+   "query": "laplace|Laplace|complementary.*minor|minor.*complement",
+   "results": "Returned Mathlib/LinearAlgebra/Matrix/Determinant/Bird/Correctness.lean, Mathlib/LinearAlgebra/Matrix/Determinant/Bird/Correctness.lean, Mathlib/LinearAlgebra/Matrix/SemiringInverse.lean.",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits give single-column expansion or square-matrix primitives, not the stated multi-index identity"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Generalized Laplace determinant expansion along several columns using complementary row subsets",
+   "results": "Returned Matrix.det_succ_column_zero, Matrix.det_succ_row_zero, Matrix.det_eq_sum_mul_adjugate_col, Matrix.det, Matrix.det_eq_sum_mul_adjugate_row, Matrix.det_succ_column, Matrix.det_toBlock, Matrix.det_succ_row.",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits give single-column expansion or square-matrix primitives, not the stated multi-index identity"
+  },
+  {
+   "tool": "grep",
+   "query": "laplace|complementary.*minor|minor.*complement",
+   "results": "Hits: Mathlib/LinearAlgebra/Matrix/SemiringInverse.lean, Mathlib/LinearAlgebra/Matrix/Determinant/Bird/Correctness.lean, Mathlib/LinearAlgebra/Matrix/Determinant/Bird/Correctness.lean",
+   "date": "2026-10-23",
+   "verdict": "no match: single-column or single-row expansion, principal submatrices and reindexing do not give the arbitrary retained-column identity"
+  },
+  {
+   "tool": "loogle",
+   "query": "Matrix.det, \"submatrix\"",
+   "results": "Hits: Matrix.det_submatrix_equiv_self, Matrix.abs_det_submatrix_equiv_equiv, Matrix.adjugate_fin_succ_eq_det_submatrix, Matrix.det_piecewise_one_eq_submatrix_det, Matrix.submatrix_succAbove_det_eq_negOnePow_submatrix_succAbove_det', Matrix.submatrix_succAbove_det_eq_negOnePow_submatrix_succAbove_det, Matrix.det_eq_sum_column_mul_submatrix_succAbove_succAbove_det, Matrix.det_eq_sum_row_mul_submatrix_succAbove_succAbove_det",
+   "date": "2026-10-23",
+   "verdict": "no match: single-column or single-row expansion, principal submatrices and reindexing do not give the arbitrary retained-column identity"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Determinant expansion along several fixed columns by complementary minors",
+   "results": "Hits: Matrix.det_succ_row_zero, Matrix.det_eq_sum_mul_adjugate_col, Matrix.det_eq_sum_mul_adjugate_row, Matrix.det_succ_column, Matrix.det_succ_column_zero, Matrix.det, Matrix.det_succ_row, Matrix.det_toBlock",
+   "date": "2026-10-23",
+   "verdict": "no match: single-column or single-row expansion, principal submatrices and reindexing do not give the arbitrary retained-column identity"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Laplace determinant expansion along a subset of columns as a signed sum of complementary minors",
+   "results": "Hits: Matrix.det_succ_column, Matrix.det_eq_sum_row_mul_submatrix_succAbove_succAbove_det, Matrix.submatrix_succAbove_det_eq_negOnePow_submatrix_succAbove_det, Matrix.det_succ_row, Matrix.det_eq_sum_column_mul_submatrix_succAbove_succAbove_det, Matrix.submatrix_succAbove_det_eq_negOnePow_submatrix_succAbove_det', Matrix.det_succ_column_zero, Matrix.det_succ_row_zero",
+   "date": "2026-10-23",
+   "verdict": "no match: single-column or single-row expansion, principal submatrices and reindexing do not give the arbitrary retained-column identity"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Generalized Laplace expansion determinant fixed column subset sum over row subsets product of minors",
+   "results": "Hits: Matrix.det_succ_column, Matrix.det_succ_row, Matrix.det_succ_column_zero, Matrix.det_eq_sum_column_mul_submatrix_succAbove_succAbove_det, Matrix.cramerMap, Matrix.det_eq_sum_row_mul_submatrix_succAbove_succAbove_det, Matrix.det_eq_sum_mul_adjugate_col, Matrix.det_succ_row_zero",
+   "date": "2026-10-23",
+   "verdict": "no match: single-column or single-row expansion, principal submatrices and reindexing do not give the arbitrary retained-column identity"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-fitting-ideal-minor-inclusions",
+  "date": "2026-10-22",
+  "group": "Q81"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "General determinant-ideal calculation used in the first-Fitting well-definedness dependency of the nodal-family geometry route; the nearest blueprint ancestor has no separate Fitting clause. Stacks 07Z8 invokes 07Z7 for stabilization and change of free coordinates. Re-split of lem-trf-fitting-ideal-minor-inclusions: cofactor expansion in former step 2, made precise for arbitrary retained columns.",
+   "via": [
+    "lem-trf-fitting-ideal-minor-inclusions",
+    "lem-trf-fitting-ideal-independence-base-change",
+    "def-trf-first-fitting-singular-subscheme",
+    "lem-trf-projective-nodal-family-geometry",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-trf-minor-laplace-coefficient-formula",
+  "worker": "stage1",
+  "summary": "Q67 checked the latest blueprint and Stacks 07Z7, found no exact project attachment or Mathlib match, and supplied the finite Leibniz reindexing and factorization. One new matrix-free ordered-block sign node isolates the non-elementary sign calculation; empty cases are explicit. Statement unchanged.",
+  "blueprint": "Retains the existing nodal-family/Fitting dependency route below lem-trf-local-term-locality. Its latest blueprint proof contains no determinant calculation: these are agent-supplied details of Stacks 07Z7 used by the existing Fitting dependency, not a replacement for a step of the unit."
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q67-6e81ec36f",
+  "group": "Q67",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q67-6e81ec36f (reviewer sub-agent of L); spot-checked: I read Stacks 07Z7 lemma-ideals-generated-by-minors (more-algebra.tex l.1326-1352). Its proof is omitted, with only a hint to expand along a row or column. The split writes the omitted details, the item's statement and stmt_deps are unchanged, and the agent origin is stated honestly. Step 1 reindexes the Leibniz sum by the bijection sigma <-> (I=sigma(T), alpha, beta), with the inverse written out. Step 2 applies the new node lem-trf-ordered-block-permutation-sign with its hypothesis sigma(T)=I and maps the integer identity to R. Step 3 factors the sum by distributivity (R commutative) and identifies the two factors with det Q_{I,T} and det Q_{I^c,T^c} under the column-index convention of def-weil-pbc-matrix-determinant and the increasing order of def-weil-submatrix. Step 4 covers s=0, s=q and q=0. The new node is statement-only and self-contained; sgn comes from the determinant definition. It is true: sigma = e_I(alpha+beta)e_T^{-1} with sgn e_U = (-1)^{sum U - s(s+1)/2}. A brute-force check of all 4283 (sigma,T) cases for q<=5 and random integer matrices for q<=4 found no failures. It is a matrix-free lemma, not a clause of the item, and generalizes the one-index lem-pc-signed-face-permutation without duplicating it. Checked against the shuffle sfb nodes, pc sorting nodes and trf Fitting/minor nodes: no duplicate. Mathlib's sign_sumCongr does not give the exponent, so unsplit is right. The parent's uses (s=r, and s=1 with T={q}) match. No SGA citation; live and side-live still have the item unsplit. No fixes, no tool_uses."
+ },
+ "lean": {
+  "module": "Sheaf.LinearAlgebra.Matrix.MinorLaplaceCoefficientFormula",
+  "declaration": "Matrix.det_eq_sum_complementaryMinors",
+  "file": "lean/Sheaf/LinearAlgebra/Matrix/MinorLaplaceCoefficientFormula.lean",
+  "statement": "theorem det_eq_sum_complementaryMinors {R : Type u} [CommRing R] {q s : ℕ} (_hs : s ≤ q) (Q : Matrix (Fin q) (Fin q) R) (T : Finset (Fin q)) (hT : T.card = s) : Q.det = ∑ I : {I : Finset (Fin q) // I.card = s}, (((-1 : ℤ) ^ ((∑ i ∈ I.val, (i.val + 1)) + ∑ j ∈ T, (j.val + 1))) : R) * (Q.submatrix (I.val.orderEmbOfFin I.property) (T.orderEmbOfFin hT)).det * (Q.submatrix ((I.valᶜ).orderEmbOfFin (k := q - s) (by simp [Finset.card_compl, I.property])) ((Tᶜ).orderEmbOfFin (k := q - s) (by simp [Finset.card_compl, hT]))).det",
+  "branch": "sheaf-dag",
+  "by": "Q13",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-0c980a089",
+  "group": "Q13",
+  "result": "pass",
+  "note": "The node is identical to side-live apart from the added lean record. Clause by clause: CommRing R at a free universe u with no extra instances; s≤q; Q : Matrix (Fin q) (Fin q) R; arbitrary T with card s; sum over the subtype {I // I.card = s}, one term per subset; sign ((-1:ℤ)^(Σ(i+1)+Σ(j+1)) : R) with one-based labels; both minors via increasing orderEmbOfFin, complements at k := q-s; conclusion is equality with Q.det. Edge cases s=0, s=q, q=0 hold, and a hand check of q=2, T={2} is correct. No definitions; the owners are Mathlib Matrix, submatrix and det; no duplicate in Mathlib or the side-live lean trees. Proof is sorry only. Docstrings give the source (Stacks 07Z7, agent-supplied) and the blueprint tag and carry all 4 proof steps. lean.statement matches the signature verbatim. The non-public import of the proof dep OrderedBlockPermutationSign exists in side-live. The report has both required sections. Not recompiled (no change)."
+ }
+}

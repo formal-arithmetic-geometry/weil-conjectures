@@ -1,0 +1,143 @@
+{
+ "id": "lem-pur-affine-diagonal-graded-coordinates",
+ "kind": "statement",
+ "title": "Ordered degree-one coordinates trivialize the intrinsic affine-diagonal cone",
+ "statement": "Let Y be any scheme and d a natural number. Write X for the ordered affine d-space tower over Y, p:X→Y for its projection [def-amb-affine-trace-tower, def-sbc-affine-space], W=X×_Y X, and s:X→W for the diagonal. For each i in Fin d let b_i be a section of the first power of the diagonal ideal whose inclusion into Γ(W,O_W) is p₂*(x_i)−p₁*(x_i). Form the homogeneous degree-one classes of these representatives in the actual conormal graded algebra [lem-pur-conormal-graded-algebra]. Use the affine-morphism counit [def-pur-rees-cone-normalization, lem-weil-pbc-affine-morphism-relative-spec] to view them as functions on the intrinsic relative-Spec normal cone [def-pur-normal-bundle]. The morphism from this cone to affine d-space over X with base map the cone projection and these ordered functions as coordinates is an isomorphism. This includes d=0, arbitrary rings of affine base charts, and empty Y. No extended-Rees comparison q or integration map occurs in this assertion.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-thm-smooth-purity/lem-pur-projection-purity-agreement.proof.md",
+  "place": "Agreement on the model: the diagonal has the trivial normal bundle in ordered difference coordinates; expanded polynomial calculation of parent proof step 5"
+ },
+ "stmt_deps": [
+  "def-amb-affine-trace-tower",
+  "def-sbc-affine-space",
+  "lem-pur-conormal-graded-algebra",
+  "def-pur-normal-bundle",
+  "def-pur-rees-cone-normalization",
+  "lem-weil-pbc-affine-morphism-relative-spec"
+ ],
+ "proof": [
+  {
+   "text": "At each point z of the affine tower choose the ambient affine neighborhood where the actual ordered coordinate differences regularly generate the diagonal ideal. Restrict the supplied representatives b_i to that neighborhood; naturality of powerInclusion and their prescribed global values give exactly these generators.",
+   "uses": [
+    "lem-pur-affine-diagonal-regular-differences",
+    "lem-pur-conormal-graded-algebra"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use presentation.affineChart to identify the conormal algebra on the inverse-image affine with gr_J(R). The quotient-ring isomorphism for the surjective closed-immersion section map identifies R/J with the base sections. The regular-sequence graded-polynomial theorem makes evaluation at the homogeneous degree-one classes bijective. Compare constants using presentation.constants and degree-one variables using the affineChart representative formula; reindex Fin d by ULift. This is affineChart_eval_bijective.",
+   "uses": [
+    "lem-pur-conormal-graded-algebra",
+    "lem-pur-regular-sequence-graded-polynomial"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Naturality of homogeneousClass and the relative-Spec counit identifies these local algebra coordinates with restrictions of the exact global cone functions in the conclusion. Transport the bijective polynomial evaluation along coneAlgebraIso and the open-section topIso maps. On an affine scheme, isoOfIsAffine and Gamma-Spec naturality make homOfVector an isomorphism whenever its polynomial evaluation is bijective.",
+   "uses": [
+    "def-pur-normal-bundle",
+    "def-pur-rees-cone-normalization",
+    "lem-weil-pbc-affine-morphism-relative-spec",
+    "def-sbc-affine-space",
+    "lem-pur-conormal-graded-algebra"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The chosen inverse-image opens cover the diagonal source pointwise. Their affine spaces form an open cover of the target. The restriction of the global homOfVector is the local coordinate morphism by comp_homOfVector and homOfVector_comp_map. Each local map is an isomorphism by the previous step, so the Zariski-local isomorphism criterion proves the global map is an isomorphism. No assumption of a nonempty base or positive dimension was introduced.",
+   "uses": [
+    "def-sbc-affine-space",
+    "def-pur-normal-bundle"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-pur-affine-diagonal-regular-differences",
+  "lem-pur-conormal-graded-algebra",
+  "lem-pur-regular-sequence-graded-polynomial",
+  "def-pur-normal-bundle",
+  "def-pur-rees-cone-normalization",
+  "lem-weil-pbc-affine-morphism-relative-spec",
+  "def-sbc-affine-space"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-thm-smooth-purity/lem-pur-projection-purity-agreement.proof.md",
+  "place": "Agreement on the model; regular-sequence graded-polynomial theorem and explicit affine-cover proof by R1"
+ },
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "The normal cone of the diagonal of affine space is affine space with degree one difference coordinates",
+   "results": "8 hits concerning diagonal immersions, affine properties and gluing. None identifies this relative-Spec conormal algebra or its specified degree-one coordinates.",
+   "date": "2026-10-25",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The normal cone of the diagonal in affine space has polynomial coordinates given by the degree one classes of y minus x",
+   "results": "8 hits on Weierstrass X/Y ideals and affine curves; no normal-cone coordinate theorem.",
+   "date": "2026-10-25",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "associatedGraded.*[Pp]olynomial|[Pp]olynomial.*associatedGraded|normalConeChartRingIso",
+   "results": "0 Mathlib hits. Local source search finds NormalBundleRegular.normalConeChartRingIso for the extended-Rees cone. That theorem is not the displayed intrinsic relative-Spec map. Existing ConormalGradedAlgebra.presentation.affineChart supplies the graded affine chart and is used in the proof plan. Blueprint search normal coordinates finds 0 nodes; normal cone and standard pair searches give definitions and DNC geometry, not this ordered intrinsic coordinate assertion.",
+   "date": "2026-10-25",
+   "verdict": "no exact existing declaration or blueprint node"
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.AffineDiagonalIntegrationOrientation",
+  "date": "2026-10-25",
+  "group": "F9"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pur-projection-purity-agreement",
+   "place": "Proof: normal bundle of the standard diagonal; parent expanded proof step 5, gr_(y-x)=R[x,v]",
+   "via": [
+    "lem-pur-affine-diagonal-integration-orientation"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-thm-smooth-purity",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.AffineDiagonalGradedCoordinates",
+  "file": "lean/Sheaf/Paper/AffineDiagonalGradedCoordinates.lean",
+  "declaration": "AlgebraicGeometry.PurityNormalBundle.affineDiagonalGradedCoordinates_isIso",
+  "statement": "theorem affineDiagonalGradedCoordinates_isIso (Y : Scheme.{u}) (d : ℕ)\n    (b : (i : Fin d) → (ConormalGradedAlgebra.power\n      (pullback.diagonal (affineTraceProjection Y d)) 1).val.obj (op ⊤))\n    (_hb : ∀ i, (ConormalGradedAlgebra.powerInclusion\n        (pullback.diagonal (affineTraceProjection Y d)) 1).val.app (op ⊤) (b i) =\n      (pullback.snd (affineTraceProjection Y d) (affineTraceProjection Y d)).appTop\n          (affineTraceCoordinate Y d i) -\n        (pullback.fst (affineTraceProjection Y d) (affineTraceProjection Y d)).appTop\n          (affineTraceCoordinate Y d i)) :\n    let s := pullback.diagonal (affineTraceProjection Y d)\n    let A := (ConormalGradedAlgebra.presentation s).algebra\n    IsIso (AffineSpace.homOfVector (projection s)\n      (fun i : ULift.{u} (Fin d) ↦\n        let c := ConormalGradedAlgebra.homogeneousClass s A\n          (ConormalGradedAlgebra.presentation s).inclusion 1 ⊤ (b i.down)\n        let c' := A.right.obj.map (homOfLE (by simp)).op c\n        (normalCone s).presheaf.map (homOfLE (by simp)).op\n          ((Etale.FiniteSmoothPurity.coneAlgebraIso s).hom.right.hom.app (op ⊤) c')))",
+  "branch": "sheaf-dag",
+  "by": "F9",
+  "date": "2026-10-25"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F9",
+  "result": "pass",
+  "landing": "20261025T122928-L-1819143",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R1",
+  "result": "pass",
+  "landing": "20261025T180956-L-4060089",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

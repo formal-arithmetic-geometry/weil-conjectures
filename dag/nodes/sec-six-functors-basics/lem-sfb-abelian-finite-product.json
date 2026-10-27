@@ -1,0 +1,283 @@
+{
+ "id": "lem-sfb-abelian-finite-product",
+ "kind": "statement",
+ "title": "Finite products and the zero abelian variety",
+ "statement": "Let $k$ be a field [def-weil-field], let $J$ be a finite set, and let $A_j/k$ for $j\\in J$ be abelian varieties [def-sc-abelian-variety]. Their scheme product $P=\\prod_{j\\in J}A_j$ over $k$, with componentwise group operations [def-sc-group-scheme, def-pc-fibre-product], is an abelian variety and $\\dim P=\\sum_{j\\in J}\\dim A_j$. For $J=\\varnothing$ the product is the trivial group scheme $\\operatorname{Spec}k$. Conversely every zero-dimensional abelian variety over $k$ is isomorphic, as a $k$-group scheme, to $\\operatorname{Spec}k$.",
+ "source": {
+  "document": "literature/stacks-project/varieties.tex",
+  "place": "Tag 0B2M, lemma-dimension-product-locally-algebraic; Groupoid Schemes Tags 03RO (definition-abelian-variety), 0B7Q (lemma-connected-group-scheme-over-field-irreducible), 0BFC (lemma-abelian-variety-smooth). Products use stability of properness and smoothness and geometric connectedness; the zero-dimensional case is smooth and geometrically integral with a rational identity."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-sc-abelian-variety",
+  "def-sc-group-scheme",
+  "def-pc-fibre-product",
+  "def-pc-dimension"
+ ],
+ "proof": [
+  {
+   "text": "The empty product in $k$-schemes is $\\operatorname{Spec}k$: a test $k$-scheme has exactly one morphism to it, its structure map. Its multiplication, inverse and unit are the unique possible $k$-maps, so all group diagrams commute. Its structure morphism is the identity, which is proper and smooth directly from their definitions, and its underlying space is a singleton. It is therefore an abelian variety by [def-sc-abelian-variety]. Its only local ring is $k$, whose only prime ideal is $(0)$, so its dimension is $0$ [def-pc-dimension]. This is also the empty sum.",
+   "uses": [
+    "def-sc-group-scheme",
+    "def-sc-abelian-variety",
+    "def-weil-proper-morphism",
+    "def-sbc-smooth-morphisms",
+    "def-pc-dimension"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/groupoids.tex",
+    "place": "Tag 03RO, definition-abelian-variety; empty product and identity morphism checked from the definitions"
+   }
+  },
+  {
+   "text": "For two factors $A,B$, form $P=A\\times_kB$ by [def-pc-fibre-product]. Define $m_P$ by its two components $m_A\\circ(p_A,p_A)$ and $m_B\\circ(p_B,p_B)$, where each pair uses the corresponding projections from the two copies of $P$; define $i_P=(i_Ap_A,i_Bp_B)$ and $e_P=(e_A,e_B)$. Each group diagram becomes the corresponding diagram in $A$ or $B$ after either projection and hence commutes by uniqueness in the fibre-product property [def-sc-group-scheme]. The projection $P\\to B$ is the base change of $A\\to\\operatorname{Spec}k$, so it is proper and smooth by [lem-pc-proper-base-change]. Composing with $B\\to\\operatorname{Spec}k$ is proper by [lem-weil-pbc-proper-composition] and smooth by [lem-trf-smooth-composition].",
+   "uses": [
+    "def-pc-fibre-product",
+    "def-sc-group-scheme",
+    "lem-pc-proper-base-change",
+    "lem-weil-pbc-proper-composition",
+    "lem-trf-smooth-composition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tags 01W3 (lemma-composition-proper), 01W4 (lemma-base-change-proper), 01VA (lemma-composition-smooth), 01VB (lemma-base-change-smooth); product group construction from Groupoid Schemes Tag 022S (definition-group-scheme)."
+   }
+  },
+  {
+   "text": "By [lem-sc-abelian-variety-characterization], $A$ is geometrically integral. By [def-pc-geometrically-irreducible, def-pc-integral-scheme], every field extension of $A$ is nonempty and irreducible, hence connected, so $A$ is geometrically connected. Apply [lem-weil-pbc-geometrically-connected-product-components] with $X=A,Y=B$. Since $B$ is nonempty and connected, it has one connected component; therefore $P$ has exactly one nonempty connected component and is connected. Together with the preceding step, the definition [def-sc-abelian-variety] makes $P$ an abelian variety.",
+   "uses": [
+    "lem-sc-abelian-variety-characterization",
+    "def-pc-geometrically-irreducible",
+    "def-pc-integral-scheme",
+    "lem-weil-pbc-geometrically-connected-product-components",
+    "def-sc-abelian-variety"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/groupoids.tex",
+    "place": "Tag 0B7Q, lemma-connected-group-scheme-over-field-irreducible; Tag 03RO; Varieties connected-component projection argument; Varieties Tag 0385 (lemma-bijection-connected-components)."
+   }
+  },
+  {
+   "text": "Induct on the cardinality of the finite set $J$. The base case is step 1. For $J=I\\amalg\\{j\\}$, the universal property [def-pc-fibre-product] identifies the $J$-product, with its coordinate group operations, with $(\\prod_{i\\in I}A_i)\\times_kA_j$. The induction hypothesis and steps 2–3 make it an abelian variety. Both factors are nonempty and finite type, since abelian varieties are connected and proper. Apply [lem-sfb-scheme-product-dimension] to obtain $\\dim P=\\dim(\\prod_{i\\in I}A_i)+\\dim A_j=\\sum_{i\\in I}\\dim A_i+\\dim A_j$. Thus the induction establishes both the abelian-variety assertion and the stated dimension equality for every finite $J$.",
+   "uses": [
+    "def-pc-fibre-product",
+    "def-sc-abelian-variety",
+    "def-weil-proper-morphism",
+    "lem-sfb-scheme-product-dimension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 0B2M, lemma-dimension-product-locally-algebraic, clause (2); finite-set induction"
+   }
+  },
+  {
+   "text": "Now let $A/k$ be an abelian variety with $\\dim A=0$. Properness includes finite type [def-weil-proper-morphism]. Thus [lem-pc-algebraic-dim-zero-affine-finite] makes $A$ affine. It is geometrically integral by [lem-sc-abelian-variety-characterization]. Apply clause (2) of [lem-pc-h0-proper-variety] to the proper geometrically integral $k$-scheme $A$: the structural map $k\\to\\Gamma(A,\\mathcal O_A)$ is an isomorphism of $k$-algebras. Since both $A$ and $\\operatorname{Spec}k$ are affine, [lem-sc-affine-global-sections-iso] makes the structure map $f:A\\to\\operatorname{Spec}k$ an isomorphism of $k$-schemes.",
+   "uses": [
+    "def-weil-proper-morphism",
+    "lem-pc-algebraic-dim-zero-affine-finite",
+    "lem-sc-abelian-variety-characterization",
+    "lem-pc-h0-proper-variety",
+    "lem-sc-affine-global-sections-iso"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 06LH, lemma-algebraic-scheme-dim-0; Tag 0BUG, lemma-proper-geometrically-reduced-global-sections, clause (8); Tag 04L2, lemma-regular-functions-proper-variety, clause (4)"
+   }
+  },
+  {
+   "text": "The map $f$ of step 5 is a homomorphism to the trivial group scheme: its multiplication-compatibility diagram consists of two $k$-maps $A\\times_k A\\to\\operatorname{Spec}k$, which are equal by uniqueness of the structure map. Its inverse is the identity section $e_A$, since $f e_A=1$ and $f$ is invertible. To check that this inverse is a homomorphism, compose $m_A(e_A\\times e_A)$ and $e_A m_{\\operatorname{Spec}k}$ with the isomorphism $f$; both composites are the unique $k$-map to $\\operatorname{Spec}k$, so cancellation gives equality. Thus $f$ is an isomorphism as $k$-group schemes [def-sc-group-scheme], as required.",
+   "uses": [
+    "def-sc-group-scheme"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/groupoids.tex",
+    "place": "Tag 03RO and Groupoid Schemes Tag 022S, definition-group-scheme; uniqueness of maps to the terminal k-scheme"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sc-group-scheme",
+  "def-sc-abelian-variety",
+  "def-weil-proper-morphism",
+  "def-sbc-smooth-morphisms",
+  "def-pc-dimension",
+  "def-pc-fibre-product",
+  "lem-pc-proper-base-change",
+  "lem-weil-pbc-proper-composition",
+  "lem-trf-smooth-composition",
+  "lem-sc-abelian-variety-characterization",
+  "def-pc-geometrically-irreducible",
+  "def-pc-integral-scheme",
+  "lem-weil-pbc-geometrically-connected-product-components",
+  "lem-sfb-scheme-product-dimension",
+  "lem-pc-algebraic-dim-zero-affine-finite",
+  "lem-pc-h0-proper-variety",
+  "lem-sc-affine-global-sections-iso"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/varieties.tex",
+  "place": "Assembly from Tags 0B2M, 06LH and 0BUG and the existing proper/smooth permanence and abelian-variety characterization nodes; group structures and finite induction written out by Q101."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "AbelianVariety|dim.*prod|prod.*dim",
+   "results": "5 hits; ; logged results: Mathlib/AlgebraicGeometry/Morphisms/Separated.lean, Mathlib/AlgebraicGeometry/Morphisms/Separated.lean, Mathlib/AlgebraicGeometry/Morphisms/Separated.lean, Mathlib/AlgebraicGeometry/Morphisms/Separated.lean, Mathlib/AlgebraicGeometry/Morphisms/Separated.lean; Mathlib/AlgebraicGeometry",
+   "date": "2026-10-23",
+   "verdict": "no match: abstract categorical products, Lie group products and module dimensions do not give the complete abelian-variety statement; smooth relative dimension composition alone is insufficient"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"prod\", \"IsProper\"",
+   "results": "0 hits; ; logged results: ",
+   "date": "2026-10-23",
+   "verdict": "no match: abstract categorical products, Lie group products and module dimensions do not give the complete abelian-variety statement; smooth relative dimension composition alone is insufficient"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The product of two complete smooth connected group varieties has dimension the sum",
+   "results": "8 hits; ; logged results: Module.length_prod, SSet.hasDimensionLE_prod, SSet.hasDimensionLT_prod, Algebra.PreSubmersivePresentation.dimension_comp_eq_dimension_add_dimension, Prod.instLieGroup, rank_prod', AlgebraicGeometry.isSmoothOfRelativeDimension_comp, SSet.instHasDimensionLETensorObjHAddNat",
+   "date": "2026-10-23",
+   "verdict": "no match: abstract categorical products, Lie group products and module dimensions do not give the complete abelian-variety statement; smooth relative dimension composition alone is insufficient"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A finite product of abelian varieties is an abelian variety and its dimension is the sum of dimensions",
+   "results": "8 hits; ; logged results: CategoryTheory.Abelian.has_finite_products, FiniteDimensional.finiteDimensional_pi', CategoryTheory.NonPreadditiveAbelian.has_finite_products, Module.finrank_prod, Module.finrank_pi_fintype, Prod.instAddTorsor, AffineEquiv.prodCongr, Pi.instAddTorsor",
+   "date": "2026-10-23",
+   "verdict": "no match: abstract categorical products, Lie group products and module dimensions do not give the complete abelian-variety statement; smooth relative dimension composition alone is insufficient"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Product of smooth proper geometrically connected group schemes over a field is smooth proper connected with additive dimension",
+   "results": "8 hits; ; logged results: Prod.instLieGroup, Prod.instLieAddGroup, Algebra.FormallySmooth.instForallOfFinite, Algebra.FormallySmooth.pi_iff, ProfiniteAddGrp.pi, AlgebraicGeometry.instIsMultiplicativeSchemeIsSmoothOfRelativeDimensionOfNatNat, AlgebraicGeometry.instCartesianMonoidalCategoryScheme, ProfiniteGrp.pi",
+   "date": "2026-10-23",
+   "verdict": "no match: abstract categorical products, Lie group products and module dimensions do not give the complete abelian-variety statement; smooth relative dimension composition alone is insufficient"
+  },
+  {
+   "tool": "grep",
+   "query": "AbelianVariety|dimension.*prod|prod.*dimension",
+   "results": "{\"t\": \"2026-10-23T11:30:30Z\", \"tool\": \"grep\", \"query\": \"AbelianVariety|dimension.*prod|prod.*dimension\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the returned polynomial/module/presentation dimensions and pullback finiteness facts do not assert the scheme product dimension formula"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A zero dimensional abelian variety over a field is the trivial group scheme",
+   "results": "{\"t\": \"2026-10-23T11:30:30Z\", \"tool\": \"leansearch\", \"query\": \"A zero dimensional abelian variety over a field is the trivial group scheme\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AddCommGrpCat.isZero_iff_subsingleton\", \"CommGrpCat.isZero_iff_subsingleton\", \"GrpCat.isZero_iff_subsingleton\", \"CommGrpCat.subsingleton_of_isZero\", \"AlgebraicGeometry.AffineSpace.instIsIsoSchemeOverInferInstanceOverClassOfIsEmpty\", \"CommGrpCat.isZero_of_subsingleton\", \"AddCommGrpCat.subsingleton_of_isZero\", \"nilpotencyClass_zero_iff_subsingleton\"], \"digest\": \"9ade46df0d8bf3af\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the returned polynomial/module/presentation dimensions and pullback finiteness facts do not assert the scheme product dimension formula"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"IsAbelianVariety\"",
+   "results": "{\"t\": \"2026-10-23T11:30:31Z\", \"tool\": \"loogle\", \"query\": \"\\\"AlgebraicGeometry\\\", \\\"IsAbelianVariety\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the returned polynomial/module/presentation dimensions and pullback finiteness facts do not assert the scheme product dimension formula"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finite products of abelian varieties and zero dimensional abelian varieties are trivial",
+   "results": "{\"t\": \"2026-10-23T11:30:31Z\", \"tool\": \"leanfinder\", \"query\": \"Finite products of abelian varieties and zero dimensional abelian varieties are trivial\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Abelian.has_finite_products\", \"Equiv.Perm.VectorsProdEqOne.zero_eq\", \"CommGrpCat.subsingleton_of_isZero\", \"Equiv.Perm.VectorsProdEqOne.zeroUnique\", \"FreeAbelianGroup.pemptyUnique\", \"CommGrpCat.isZero_of_subsingleton\", \"CommGrpCat.isZero_iff_subsingleton\", \"AlgebraicGeometry.AffineSpace.instIsIsoSchemeOverInferInstanceOverClassOfIsEmpty\"], \"digest\": \"6bb86b8c4997b7a3\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the returned polynomial/module/presentation dimensions and pullback finiteness facts do not assert the scheme product dimension formula"
+  },
+  {
+   "tool": "grep",
+   "query": "instance.*[Cc]omp|lemma.*[Cc]omp|theorem.*[Cc]omp|StableUnderComposition",
+   "results": "{\"t\": \"2026-10-23T11:42:37Z\", \"tool\": \"grep\", \"query\": \"instance.*[Cc]omp|lemma.*[Cc]omp|theorem.*[Cc]omp|StableUnderComposition\", \"sub\": \"AlgebraicGeometry/Morphisms/Smooth.lean\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"96\", \"105\", \"106\", \"109\", \"122\"], \"digest\": \"284d1cbae224b852\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the returned polynomial/module/presentation dimensions and pullback finiteness facts do not assert the scheme product dimension formula"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-simple-isogeny-decomposition",
+  "date": "2026-10-23",
+  "group": "Q16"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Smooth-curve abelian level rigidification. Geometric stabilizer input for the smooth full-level cover; restrict to geometric curves before passing to families. Auxiliary input: Prime-to-characteristic level rigidity for polarized abelian varieties. Supporting input in the level-rigidity proof: Chapter I, Theorem 10.15, printed p.49 (finite free Hom conclusion); §10 endomorphism-ring convention, printed pp.42–43. Supporting argument: Chapter I, Proposition 10.1 and the simple-factor discussion following Remark 10.2, printed pp.42–43; Remark 8.6, printed p.36 (quasi-inverse isogenies). Auxiliary for this split: Finite products and the zero abelian variety.",
+   "via": [
+    "lem-sfb-simple-isogeny-decomposition",
+    "lem-sfb-abelian-hom-finite-free",
+    "lem-sfb-polarized-abelian-odd-level-rigidity",
+    "lem-sfb-geometric-curve-level-faithfulness",
+    "lem-sfb-smooth-curve-abelian-level-rigidification",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-abelian-finite-product",
+  "worker": "stage1",
+  "summary": "Checked the live source for attachments (no declaration states all clauses); split by binary products, finite-set induction and affine global sections in dimension zero. Reused all existing permanence, connected-component and global-section inputs; created only the general binary scheme-dimension lemma, after recorded searches. Statement unchanged; added its dimension definition dependency.",
+  "blueprint": "Supporting finite-product input along the inherited det-thm-sf-ctf-stability-direct-images auxiliary chain: steps 1–4 give the finite-product and dimension facts needed for the simple-isogeny induction; steps 5–6 justify its zero-dimensional stopping case. Read the current latest blueprint direct-images proof (3); no change to that unit route. The ancestry tool reports no imported ancestor (from.node=null), retained rather than inventing a blueprint id.",
+  "tool_uses": [
+   {
+    "node": "lem-pc-algebraic-dim-zero-affine-finite",
+    "why": "Generic finite-type zero-dimensional scheme affineness (Stacks 06LH), used in step 5. No node in this unit gives this scheme-theoretic tool."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pc-algebraic-dim-zero-affine-finite"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q101-1dad76ada",
+  "group": "Q101",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q101-1dad76ada (reviewer sub-agent of L); spot-checked: I read the item, the new node and the statement of every cited node in full. The item's statement is unchanged and true over any field. Edge cases checked: empty J (Spec k, dimension 0), a single factor, and α_p and μ_p, which are excluded because they are not smooth. Step 1 (Spec k is an abelian variety of dimension 0) is elementary and follows from the definitions. Step 2: the group law on the product comes from the fibre-product universal property. lem-pc-proper-base-change clauses (1) and (2) apply as stated, since (2) does not assume properness, and the two composition leaves finish it (Stacks 01W3, 01W4, 01VA, 01VB checked in tags/tags). Step 3: geometric integrality from lem-sc-abelian-variety-characterization gives geometric connectedness. lem-weil-pbc-geometrically-connected-product-components then gives the product exactly one component, so it is nonempty and connected. Step 4: the induction on |J| is set up properly, and the new node's hypotheses hold because the factors are nonempty (connected) and of finite type (proper). Step 5: affineness from Stacks 06LH, Γ = k from Stacks 0BUG(8) via lem-pc-h0-proper-variety (2), then lem-sc-affine-global-sections-iso. Step 6: the group-homomorphism check is elementary. New node lem-sfb-scheme-product-dimension: it is Stacks varieties.tex Tag 0B2M clause (2), read, restricted to nonempty finite-type schemes. It is true with def-pc-dimension, because that dimension agrees with Stacks' topological dimension for locally Noetherian schemes. All three search kinds are recorded, and my own Mathlib grep found no match. rg -L over dag/nodes found no duplicate and no restatement of the item. Route: lem-pc-algebraic-dim-zero-affine-finite is a declared tool use, accepted. The other off-unit nodes are Mathlib leaves or have closed slopmaster2 audits. Batch 5: lem-trf-smooth-composition is a generic smooth-composition leaf. lem-pc-h0-proper-variety reaches only a general definition (def-trf-schematically-dense-open). Neither is part of the trace-formula or Poincaré-duality assumptions or their proofs, so both are accepted. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.AbelianFiniteProduct",
+  "declaration": "AlgebraicGeometry.finite_product_isAbelianVariety_and_dim",
+  "declarations": [
+   "AlgebraicGeometry.finite_product_isAbelianVariety_and_dim",
+   "AlgebraicGeometry.empty_product_abelian_is_trivial",
+   "AlgebraicGeometry.zero_dimensional_abelian_is_trivial"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/AbelianFiniteProduct.lean",
+  "statement": "theorem finite_product_isAbelianVariety_and_dim {k : Type u} [Field k] {J : Type v} [Fintype J] (A : J → Over (Spec (CommRingCat.of k))) [∀ j, GrpObj (A j)] [∀ j, IsAbelianVariety (A j)] : ∃ (_ : GrpObj (piObj A)), (∀ j, IsMonHom (Pi.π A j)) ∧ IsAbelianVariety (piObj A) ∧ (piObj A).left.dim = ∑ j, (A j).left.dim",
+  "branch": "newtargets-dag",
+  "by": "Q101",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-ddc136f6b",
+  "group": "Q101",
+  "result": "pass",
+  "note": "Only change is the item's lean record plus one module and the report; statement verbatim; report sections present; no superseding live delivery. Clauses match: field k, Fintype J in its own universe (empty allowed), A_j with GrpObj+IsAbelianVariety; product = piObj in Over (Spec k), with an existential GrpObj fixed by requiring every projection to be IsMonHom (componentwise law); IsAbelianVariety of the product; dim sum via the recorded Scheme.dim (def-pc-dimension); empty-J theorem gives a group-scheme iso to the unit 𝟙_ = Spec k; zero-dimensional converse gives an iso to Spec k that is IsMonHom both ways. Edge cases (empty J, imperfect fields, alpha_p/mu_p excluded by smoothness, nonemptiness from ConnectedSpace) are fine. No defs, sorry-only proofs, docstrings carry source, blueprint id and 6 steps; plain imports are the existing proof-dependency modules. Not recompiled (no file changed). Advisory: binary-product citers need the piObj over Fin 2 vs pullback comparison at stage 3."
+ }
+}

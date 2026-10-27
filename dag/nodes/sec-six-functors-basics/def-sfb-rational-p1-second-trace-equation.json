@@ -1,0 +1,138 @@
+{
+ "kind": "definition",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-p1-adjunction-rational/sk-prop-p1-adjunction-rational-triangle.proof.md",
+  "place": "Second identity, before integration."
+ },
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-p1-adjunction-rational/sk-prop-p1-adjunction-rational-triangle.proof.md",
+  "place": "Second identity, before integration."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "The projection formula for a section identifies the pushforward of the diagonal class tensored with an object with the object tensored with the diagonal integral",
+   "results": "8 hits, including pullback.diagonal_fst, diagonalObjPullbackFstIso_inv_snd_fst, Scheme.Modules.pushforward_obj_obj and LinearMap.proj_comp_single. They concern ordinary pullback geometry, sheaf sections or linear algebra, not the derived section/projection or trace-tail equations.",
+   "date": "2026-10-27",
+   "verdict": "No matching derived identity."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "In a symmetric monoidal category the diagonal kernel unit followed by pullback of the trace counit is identity tensor the diagonal integral",
+   "results": "8 hits: Functor.diag tensor coherences, Dial.triangle, ExactPairing.coevaluation_evaluation and externalProductCompDiagIso components. None addresses geometric diagonal insertion or trace base change.",
+   "date": "2026-10-27",
+   "verdict": "No matching theorem."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"projection\", \"counit\"",
+   "results": "0 hits.",
+   "date": "2026-10-27",
+   "verdict": "No matching theorem."
+  },
+  {
+   "tool": "grep",
+   "query": "unitComponent|counitComponent|section.*(projection|tensor)",
+   "results": "RationalP1AmbientComposites defines the maps but proves no contraction. The tower modules TowerP1TriangleFactorization, TowerP1SecondTraceReordering and TowerP1DiagonalProjectionFactor supply an analogous decomposition on a different tower-system category. The generic ringed section/projection and exchange/tensor theorems need normalization transport to the present internal-module category.",
+   "date": "2026-10-27",
+   "verdict": "Use the canonical ambient maps and split the insertion and trace-tail equations."
+  },
+  {
+   "tool": "grep",
+   "query": "projection.*(section|counit)|diagonal.*contraction",
+   "results": "msearch Mathlib grep returned 12 hits: Condensed.Discrete.LocallyConstant projection of counit, group-functor section projections, extra degeneracies, hypercovers and Nobeling. None gives the derived geometric contraction or its two component equations.",
+   "date": "2026-10-27",
+   "verdict": "No direct match."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.RationalP1SecondAmbientContraction",
+  "date": "2026-10-27",
+  "group": "H5"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sfb-rational-p1-second-ambient-contraction",
+   "place": "Second identity, before integration."
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-prop-p1-adjunction-rational",
+ "id": "def-sfb-rational-p1-second-trace-equation",
+ "title": "Generic interface for the exact second trace equality",
+ "statement": "For a commutative condensed coefficient Lambda, a scheme Y, Tate family L, normalized Diagram d, second shifted-line comparison e, a derived object M on the projective line over Y, an arrow f from twist(q*Rq_*M) to M, and a forward-projection-shaped arrow J, define SecondTraceEquation to be the proposition structure with one field: for every pair of invertibility proofs hb,hp, J followed by the class-free unitTail and f equals identity_M tensor the canonically transported second trace, followed by the right unitor. This is exactly the literal trace equality, without extra data or assumptions. The proved helper assemble_second_unit composes any insertion equation with this trace field to obtain the literal unit contraction; it introduces no geometric hypothesis or proof hole.",
+ "stmt_deps": [
+  "def-sfb-projective-ambient-unit-counit-composites",
+  "def-sfb-diagonal-coefficient-category",
+  "def-sfb-rational-p1-second-pull-comparison",
+  "def-sfb-rational-p1-ambient-tail"
+ ],
+ "proof": [
+  {
+   "text": "Define a proposition structure whose sole field is the exact trace-tail equality for every pair of proofs of invertibility of its fixed exchange and projection arrows. Retain the specified canonical second direct-image comparison and coefficient unitor. Use the object M and post-tail arrow f as explicit parameters, so the interface does not expand a selected coefficient, its site or a composite functor. This provides an interface only and makes no choice of map data.",
+   "uses": [
+    "def-sfb-projective-ambient-unit-counit-composites",
+    "def-sfb-diagonal-coefficient-category",
+    "def-sfb-rational-p1-second-pull-comparison",
+    "def-sfb-rational-p1-ambient-tail"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Given the insertion factorization and a SecondTraceEquation, factor the literal ambient unit with unitComponent_factor, substitute those two equations, combine the two tensor whiskerings, and cancel the canonical second direct-image comparison with its inverse. This proves assemble_second_unit in the generic coefficient interface without unfolding a selected coefficient or its site.",
+   "uses": [
+    "def-sfb-projective-ambient-unit-counit-composites",
+    "def-sfb-diagonal-coefficient-category",
+    "def-sfb-rational-p1-second-pull-comparison",
+    "def-sfb-rational-p1-ambient-tail"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-sfb-projective-ambient-unit-counit-composites",
+  "def-sfb-diagonal-coefficient-category",
+  "def-sfb-rational-p1-second-pull-comparison",
+  "def-sfb-rational-p1-ambient-tail"
+ ],
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.RationalP1SecondTraceEquation",
+  "file": "lean/Sheaf/Paper/RationalP1SecondTraceEquation.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.RationalP1.SecondTraceEquation",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.RationalP1.SecondTraceEquation",
+   "AlgebraicGeometry.ProEtale.RationalP1.assemble_second_unit"
+  ],
+  "statement": "structure SecondTraceEquation (d : Diagram Λ Y L) (e : (moduleObjectDerivedPullback Λ (secondProjection Y)).obj (((DerivedCategory.singleFunctor (Modules Λ (ProjectiveLine Y)) 0).obj (L (ProjectiveLine Y))) ⟦(2 : ℤ)⟧) ≅ ((DerivedCategory.singleFunctor (Modules Λ (diagonalSurface Y)) 0).obj (L (diagonalSurface Y))) ⟦(2 : ℤ)⟧) (M : DerivedCategory (Modules Λ (ProjectiveLine Y))) (f : (twist Λ (ProjectiveLine Y) (L (ProjectiveLine Y))).obj ((moduleObjectDerivedPullback Λ (ProjectiveLine Y ↘ Y)).obj ((moduleObjectDerivedPushforward Λ (ProjectiveLine Y ↘ Y)).obj M)) ⟶ M) (J : M ⊗ (moduleObjectDerivedPushforward Λ (secondProjection Y)).obj (((DerivedCategory.singleFunctor (Modules Λ (diagonalSurface Y)) 0).obj (L (diagonalSurface Y))) ⟦(2 : ℤ)⟧) ⟶ (moduleObjectDerivedPushforward Λ (secondProjection Y)).obj ((twist Λ (diagonalSurface Y) (L (diagonalSurface Y))).obj ((moduleObjectDerivedPullback Λ (firstProjection Y)).obj M))) : Prop",
+  "branch": "sheaf-dag",
+  "by": "H5",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H5",
+  "result": "pass",
+  "landing": "20261026T222712-L-684121",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H5",
+  "result": "pass",
+  "landing": "20261026T222712-L-684121",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

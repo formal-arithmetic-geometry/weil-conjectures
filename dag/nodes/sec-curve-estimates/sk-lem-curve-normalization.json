@@ -75,5 +75,62 @@
  "blueprint_snapshot": "main-20261015",
  "chapter": "sec-curve-estimates",
  "unit": "sk-lem-curve-normalization",
- "lean_audit": {}
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "blueprint_update": {
+  "snapshot": "main-20261023-1620",
+  "commit": "7284bb09daf97437d544c51882b325f9c52cd345",
+  "changed": [
+   "proof"
+  ],
+  "statement": "Let $C$ be a reduced curve of finite type over an algebraically closed field\nand $a\\colon C^{\\mathrm{nor}}\\to C$ its normalization. For a finite abelian\ngroup $M$, the natural map\n\n$$\n\\underline M_C\\longrightarrow a_*\\underline M_{C^{\\mathrm{nor}}}\n$$\n\nis injective with cokernel supported on finitely many points; at a point with\n$b$ geometric branches its cokernel is $M^b/\\Delta M$. These cokernels and\nthe resulting exact sequences commute with algebraically closed field\nextension.",
+  "proof": [
+   {
+    "text": "Normalization is finite for reduced schemes of finite type over a field. On\neach one-dimensional component its normal model is regular, hence smooth over\nthe perfect field; isolated components of dimension zero are algebraically\nclosed points. The normalization is an isomorphism over a dense open of each\ncomponent, so its nonisomorphism locus is finite.",
+    "uses": [],
+    "elementary": null
+   },
+   {
+    "text": "By the stalk calculation of [sk-lem-curve-finite-support], the displayed map\nat a geometric point is the diagonal $M\\to M^b$, with $b\\geq1$. Thus its\nkernel is zero and its cokernel has the asserted form. More generally, any\nmap between the two constructible sheaves which is an isomorphism over their\ndense regular open has kernel and cokernel supported in the finite\ncomplement.",
+    "uses": [
+     "sk-lem-curve-finite-support"
+    ],
+    "elementary": false
+   },
+   {
+    "text": "The normalization remains smooth after algebraically closed extension and is\na finite birational normal model of the reduced base change; hence it is its\nnormalization. Finite base change identifies the fibres and their branch\nsets, so the diagonal maps and their cokernels are the scalar-extended ones.",
+    "uses": [],
+    "elementary": null
+   },
+   {
+    "text": "*Consequence.* First, the calculations on smooth curves give the assertions\nfor constant coefficients there ([thm-sc-main]). For the constant sheaf\n$\\mathbf F_r$ with $r\\neq\\operatorname{char}k$,\n[sk-thm-curveestimate] and [sk-prop-curve-affine-kummer] give the assertions\n$(C_1)$–$(C_8)$ of [def-weil-pbc-eight-curve-assertions] on smooth curves. A\nprimitive $r$th root of unity identifies $\\mathbf F_r$ with $\\mu_r$; keeping\nthe twist makes the pullback maps independent of that choice. For $(C_8)$, an\nopen in a smooth connected proper curve is either the whole curve or an\naffine curve, with $H^2=0$; an open in a smooth affine curve is affine. For\nconstant $\\mathbf F_p$ on smooth curves, [sk-prop-curve-artin-schreier] and\n[sk-lem-curve-affine-artin-schreier] prove $(C_1)$, $(C_2)$, $(C_3)$,\n$(C_5)$ and $(C_7)$ in their respective scopes, and $(C_8)$ follows from\n$H^2=0$. The statements $(C_4)$ and $(C_6)$ concern torsion prime to the\ncharacteristic and say nothing in this case.",
+    "uses": [
+     "thm-sc-main",
+     "def-weil-pbc-eight-curve-assertions",
+     "sk-lem-curve-affine-artin-schreier"
+    ],
+    "elementary": false
+   },
+   {
+    "text": "Next, using the normalization sequence, we reduce the case of\nconstant coefficients on a reduced curve to the smooth case. By\n[sk-lem-curve-finite-support], the cokernel term has finite sections,\nunchanged under field extension, and no positive cohomology, while\n$H^q(C,a_*\\underline M)=H^q(C^{\\mathrm{nor}},\\underline M)$. Therefore the\nlong exact sequence yields isomorphisms\n$H^q(C,\\underline M)\\simeq H^q(C^{\\mathrm{nor}},\\underline M)$ for $q\\geq2$,\nand a natural exact sequence relating degrees zero and one on $C$ and on\n$C^{\\mathrm{nor}}$ whose remaining term is a finite group. Along these\nsequences, vanishing and finiteness pass from $C^{\\mathrm{nor}}$ to $C$, and\nby the five lemma so does invariance under field extension. As the\nnormalization of an affine or proper curve is again affine or proper, all\nassertions $(C_1)$–$(C_8)$ of [def-weil-pbc-eight-curve-assertions] for\nconstant $\\mathbf F_r$ follow from the calculations on smooth curves\n([sk-thm-curveestimate], [sk-prop-curve-affine-kummer],\n[sk-prop-curve-artin-schreier], [sk-lem-curve-affine-artin-schreier]). For\n$(C_8)$ apply this comparison to $C$ and to the inverse image of an open\nsubset; the restriction square then reduces surjectivity to the smooth\ncomponents.",
+    "uses": [
+     "sk-lem-curve-finite-support",
+     "def-weil-pbc-eight-curve-assertions",
+     "sk-lem-curve-affine-artin-schreier"
+    ],
+    "elementary": false
+   }
+  ],
+  "note": "the current blueprint (main-20261023-1620, weil-conjectures-blueprint 7284bb09da) states or proves this differently; a worker who touches the node follows it"
+ }
 }

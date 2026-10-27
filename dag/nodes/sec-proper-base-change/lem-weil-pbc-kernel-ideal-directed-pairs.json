@@ -1,0 +1,211 @@
+{
+ "id": "lem-weil-pbc-kernel-ideal-directed-pairs",
+ "kind": "statement",
+ "title": "Directed pairs of generated kernel ideals",
+ "statement": "Let $X$ be a quasi-compact quasi-separated scheme [def-pc-scheme, def-weil-pbc-scheme-conventions]. Let $I$ be a nonempty directed preordered set, $(\\mathcal S_i,\\sigma_{ji})_{i\\le j}$ a diagram of quasi-coherent commutative $\\mathcal O_X$-algebras [def-weil-pbc-quasi-coherent-algebra], and $\\mathcal J_i\\subseteq\\mathcal S_i$ quasi-coherent sheaves of ideals, with $\\sigma_{ji}(\\mathcal J_i)\\subseteq\\mathcal J_j$. For each $i$, let $K_i$ be a nonempty directed preordered set and $(\\mathcal E_{ik},\\eta_{lk})_{k\\le l}$ a diagram of $\\mathcal O_X$-modules [def-weil-sheaf-of-modules-category] of finite presentation, meaning locally cokernels of maps between finite free modules. Suppose compatible maps $\\varepsilon_{ik}:\\mathcal E_{ik}\\to\\mathcal J_i$ exhibit $\\mathcal J_i$ as their colimit in modules [def-weil-pbc-category-colimit]. Put $\\mathcal I_{ik}=(\\varepsilon_{ik}(\\mathcal E_{ik}))$, the smallest sheaf of ideals of $\\mathcal S_i$ containing that image, and $\\mathcal Q_{ik}=\\mathcal S_i/\\mathcal I_{ik}$, the sheaf quotient. Define $P=\\{(i,k):i\\in I,\\ k\\in K_i\\}$ by $(i,k)\\preceq(j,l)$ if $i\\le j$ and $\\sigma_{ji}(\\mathcal I_{ik})\\subseteq\\mathcal I_{jl}$. Then $P$ is a small nonempty directed preorder. Its projection to $I$ is monotone, and $k\\le l$ in $K_i$ implies $(i,k)\\preceq(i,l)$. For every $i\\le j$ and $k\\in K_i$ there is $l\\in K_j$ with $(i,k)\\preceq(j,l)$. The quotient maps induced by $\\sigma_{ji}$ make $\\mathcal Q$ a diagram of quasi-coherent algebras over $P$, with $\\alpha_{(j,l),(i,k)}q_{ik}=q_{jl}\\sigma_{ji}$, where $q_{ik}:\\mathcal S_i\\to\\mathcal Q_{ik}$ is the quotient map.",
+ "source": {
+  "document": "literature/stacks-project/properties.tex",
+  "place": "Properties, Tag 0817, lemma-integral-algebra-directed-colimit-finite, proof: the lifting square for E_ik to E_i′k′ using Modules 01BS; and Tag 05JS, lemma-algebra-directed-colimit-finite-presentation, proof: the ideal-containment relation on pairs."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-pbc-quasi-coherent-algebra",
+  "def-weil-pbc-category-colimit",
+  "def-weil-pbc-scheme-conventions",
+  "def-weil-sheaf-of-modules-category"
+ ],
+ "proof": [
+  {
+   "text": "Each E_ik is quasi-coherent by Mathlib SheafOfModules.instIsQuasicoherentOfIsFinitePresentation. Apply (b) of [lem-weil-pbc-quasi-coherent-algebra-kernel-image-ideal] to E_ik → J_i → S_i. Choose the generated ideals and quotient algebras with their universal properties. The affine kernel formula extends to all opens: the ideal inclusion followed by q is zero on affine opens, hence zero as a module morphism; conversely ker(q) followed by the cokernel of the ideal inclusion is zero on affines, hence zero globally. Sections of kernels and the fact that a mono is the kernel of its cokernel give equality of ideals on every open.",
+   "uses": [
+    "lem-weil-pbc-quasi-coherent-algebra-kernel-image-ideal"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Tag 01IC, lemma-kernel-cokernel-quasi-coherent; Section 01LA, section-quasi-coherent, items (5),(8); Properties Tags 05JS and 0817, generated-ideal quotients"
+   }
+  },
+  {
+   "text": "Fix i ≤ j and k. Sectionwise ideal compatibility and injectivity of J_j → S_j factor J_i → S_j through J_j, using that a monomorphism is the kernel of its cokernel in the abelian category of modules. Apply [lem-weil-pbc-finite-presentation-hom-directed-colimit] to factor E_ik → J_j through E_jl. The composite S_i → S_j → Q_jl then kills E_ik. Its module kernel represents an ideal subsheaf containing E_ik, so minimality of the generated ideal makes it contain I_ik. The kernel formula from step 1 gives the required ideal containment and extension to row j.",
+   "uses": [
+    "lem-weil-pbc-finite-presentation-hom-directed-colimit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/properties.tex",
+    "place": "Tag 0817, lemma-integral-algebra-directed-colimit-finite, proof (2), lifting square; Modules Tag 01BS, lemma-finite-presentation-quasi-compact-colimit"
+   }
+  },
+  {
+   "text": "Reflexivity follows from $\\sigma_{ii}=1$. If $(i,k)\\preceq(j,l)\\preceq(h,m)$, then $i\\le h$ and $\\sigma_{hi}(\\mathcal I_{ik})=\\sigma_{hj}(\\sigma_{ji}(\\mathcal I_{ik}))\\subseteq\\sigma_{hj}(\\mathcal I_{jl})\\subseteq\\mathcal I_{hm}$, proving transitivity. The projection is monotone by definition. If $k\\le l$, compatibility $\\varepsilon_{ik}=\\varepsilon_{il}\\eta_{lk}$ gives $\\mathcal I_{ik}\\subseteq\\mathcal I_{il}$ by minimality of generated ideals, hence row monotonicity. The set $P=\\coprod_{i\\in I}K_i$ is small and nonempty. For $(i,k),(j,l)$ choose $h\\ge i,j$. Step 2 moves both to $(h,a),(h,b)$; choose $c\\ge a,b$ in $K_h$. Row monotonicity and transitivity make $(h,c)$ a common upper bound.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/properties.tex",
+    "place": "Tag 05JS, lemma-algebra-directed-colimit-finite-presentation, proof, relation on pairs; Tag 0817, lifting square"
+   }
+  },
+  {
+   "text": "For $p=(i,k)\\preceq r=(j,l)$, $q_{jl}\\sigma_{ji}$ kills $\\varepsilon_{ik}$ by ideal containment. The quotient universal property in [lem-weil-pbc-quasi-coherent-algebra-kernel-image-ideal](b) gives a unique algebra map $\\alpha_{r,p}$ with $\\alpha_{r,p}q_{ik}=q_{jl}\\sigma_{ji}$. For $p\\preceq r\\preceq s=(h,m)$, both $\\alpha_{s,r}\\alpha_{r,p}$ and $\\alpha_{s,p}$ have composite $q_{hm}\\sigma_{hi}$ with $q_p$; uniqueness makes them equal. Likewise $\\alpha_{p,p}=1$. Step 1 supplies quasi-coherence of every object, so these maps define the claimed diagram.",
+   "uses": [
+    "lem-weil-pbc-quasi-coherent-algebra-kernel-image-ideal"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/properties.tex",
+    "place": "Tag 0817, lemma-integral-algebra-directed-colimit-finite, proof (2), induced quotient map; the quotient universal property is supplied by the cited generated-ideal quotient node, with quasi-coherence from Schemes 01IC/01LA"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-quasi-coherent-algebra-kernel-image-ideal",
+  "lem-weil-pbc-finite-presentation-hom-directed-colimit"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "group": "W5",
+  "date": "2026-10-23",
+  "document": "literature/stacks-project/properties.tex",
+  "place": "Tags 0817(2) and 05JS, following the original four-step argument; Mathlib supplies finite-presentation quasi-coherence and sectionwise kernels. The Lean proof uses the kernel of the later quotient for the inverse-image ideal."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "[Gg]rothendieck|[Ff]iber.*[Cc]olimit|[Ff]ibre.*[Cc]olimit",
+   "results": "16 hits: Mathlib/CategoryTheory/Limits/Preserves/Grothendieck.lean, Mathlib/CategoryTheory/Limits/Preserves/Grothendieck.lean, Mathlib/CategoryTheory/Limits/Preserves/Grothendieck.lean, Mathlib/CategoryTheory/Limits/Preserves/Grothendieck.lean, Mathlib/CategoryTheory/Limits/Preserves/Grothendieck.lean, Mathlib/CategoryTheory/Limits/Final.lean, Mathlib/CategoryTheory/Limits/Final.lean, Mathlib/CategoryTheory/Limits/Final.lean (searched CategoryTheory/Limits)",
+   "date": "2026-10-22",
+   "verdict": "no match: filtered-preorder instances and module systems do not construct the sheaf-ideal pair diagram"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Directed kernel ideal approximations define a directed set of quotient sheaf algebras",
+   "results": "service unavailable: {\"error\":\"Rate limit exceeded: 60 per 1 minute\"}",
+   "date": "2026-10-22",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.IsFiltered, Preorder",
+   "results": "7 hits: CategoryTheory.IsFiltered.isDirectedOrder, CategoryTheory.isFiltered_of_directed_le_nonempty, CategoryTheory.Limits.IsFiltered.sequentialFunctor_obj, CategoryTheory.Limits.IsFiltered.sequentialFunctor, CategoryTheory.Limits.IsFiltered.sequentialFunctor_map, CategoryTheory.Limits.IsFiltered.sequentialFunctor_final, CategoryTheory.Limits.IsFiltered.sequentialFunctor_final_aux",
+   "date": "2026-10-22",
+   "verdict": "no match: filtered-preorder instances and module systems do not construct the sheaf-ideal pair diagram"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Directed pairs of ideals generated by finitely presented modules in kernels form a filtered preorder with quotient algebra transition maps",
+   "results": "8 hits: Module.fgSystem.instDirectedSystemSubtypeSubmoduleFGMemValCoeLinearMapId, localCohomology.hasColimitDiagram, IdealFilter.isPFilter_gabrielComposition, localCohomology.ofDiagram, localCohomology, Ideal.Filtration, IdealFilter.gabrielComposition, Ideal.Filtration.Stable",
+   "date": "2026-10-22",
+   "verdict": "no match: filtered-preorder instances and module systems do not construct the sheaf-ideal pair diagram"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A compatible diagram of quasi-coherent ideals with finitely presented module approximations gives a directed preorder of generated-ideal quotients",
+   "results": "8 hits: localCohomology.ofDiagram, localCohomology.hasColimitDiagram, Module.fgSystem.instDirectedSystemSubtypeSubmoduleFGMemValCoeLinearMapId, localCohomology, Module.DirectLimit.exists_of₂, Module.DirectLimit.exists_of, localCohomology.ofSelfLERadical, localCohomology.idealPowersDiagram",
+   "date": "2026-10-22",
+   "verdict": "no match: filtered-preorder instances and module systems do not construct the sheaf-ideal pair diagram"
+  },
+  {
+   "tool": "grep",
+   "query": "generatedIdeal|QuasicoherentAlgebra|QuasiCoherentAlgebra|ideal.*[Dd]irected",
+   "results": "8 hits: Mathlib/Algebra/Homology/LocalCohomology.lean, Mathlib/Order/CountableDenseLinearOrder.lean, Mathlib/Order/CountableDenseLinearOrder.lean, Mathlib/Order/Ideal.lean, Mathlib/Order/Ideal.lean, Mathlib/Order/Ideal.lean, Mathlib/Order/Ideal.lean, Mathlib/Order/Ideal.lean",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern module colimits, local cohomology, finite-presentation predicates or ring quotients, not this sheaf-ideal pair construction"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Quotients of quasi coherent algebra sheaves by ideals generated by finite presentation modules form a filtered diagram",
+   "results": "8 hits: Algebra.FinitePresentation.quotient, SheafOfModules.QuasicoherentData.IsFinitePresentation.mk, SheafOfModules.QuasicoherentData.IsFinitePresentation, SheafOfModules.quasicoherentDataOfIsFinitePresentation, SheafOfModules.IsQuasicoherent.mk, SheafOfModules.instIsQuasicoherentOfIsFinitePresentation, SheafOfModules.QuasicoherentData.IsFinitePresentation.isFinite_presentation, SheafOfModules.IsFinitePresentation.mk",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern module colimits, local cohomology, finite-presentation predicates or ring quotients, not this sheaf-ideal pair construction"
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules.IsFinitePresentation, CategoryTheory.IsFiltered",
+   "results": "0 hits: ",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern module colimits, local cohomology, finite-presentation predicates or ring quotients, not this sheaf-ideal pair construction"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Directed pairs of generated ideal sheaves from finitely presented module approximations form a directed preorder and quotient algebra diagram",
+   "results": "8 hits: Module.fgSystem.instDirectedSystemSubtypeSubmoduleFGMemValCoeLinearMapId, Module.DirectLimit.exists_of₂, localCohomology.hasColimitDiagram, Module.DirectLimit.exists_of, localCohomology.ofDiagram, ModuleCat.directLimitCocone, Submodule.FG.directedSystem, Submodule.FG.directLimit",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern module colimits, local cohomology, finite-presentation predicates or ring quotients, not this sheaf-ideal pair construction"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A filtered system of sheaves of ideals with finite presentation module generators has a filtered preorder of pairs under image containment",
+   "results": "8 hits: SheafOfModules.QuasicoherentData.IsFinitePresentation.isFinite_presentation, localCohomology.ofDiagram, SheafOfModules.Presentation.IsFinite, SheafOfModules.isFinitePresentation, SheafOfModules.IsFinitePresentation, SheafOfModules.QuasicoherentData.IsFinitePresentation, localCohomology.hasColimitDiagram, CategoryTheory.Limits.IndObjectPresentation.instIsFilteredI",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern module colimits, local cohomology, finite-presentation predicates or ring quotients, not this sheaf-ideal pair construction"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-integral-algebra-directed-colimit-finite",
+  "date": "2026-10-22",
+  "group": "Q27"
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "blueprint": {
+  "from": {
+   "node": "lemma-weil-pbc-h1-constructible-representation",
+   "place": "The finite-pushforward approximation in the current main-20261015 proof of lemma-weil-pbc-h1-constructible-representation, paragraph 3: \"The finite-pushforward lemma gives a monomorphism\". This algebra approximation supplies the integral-to-finite approximation below that lemma, through the recorded via chain; its source is Stacks Properties, Tag 0817. Technical subargument: Directed pairs of generated kernel ideals.",
+   "via": [
+    "lem-weil-pbc-integral-algebra-directed-colimit-finite",
+    "lem-weil-pbc-integral-morphism-limit-of-finite",
+    "lem-weil-pbc-constructible-module-finite-pushforward-noetherian",
+    "lem-weil-pbc-constructible-module-finite-pushforward-embedding"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-weil-pbc-kernel-ideal-directed-pairs",
+  "worker": "stage1",
+  "summary": "Four steps expand the directed-pair subargument of Stacks 0817 and 05JS. Reused the existing finite-presentation quasi-coherence, Hom-colimit factorization, and generated-ideal quotient nodes; no new nodes. Checked all clauses, the quotient functor laws, arbitrary noninjective transitions, and empty-scheme/zero-module cases. Statement unchanged. Repair of returned head e78df3fa3c7: rebased onto the current live unsplit node, reread all three current proof-dependency statements and retained their literal citation passages, and expanded transitivity and row monotonicity explicitly. Current statement, source, blueprint metadata and statement dependencies preserved.",
+  "blueprint": "Realizes the technical directed-pair construction below the integral-algebra approximation serving the finite-pushforward paragraph of lemma-weil-pbc-h1-constructible-representation in main-20261015. Retains the recorded ancestor and via chain; no unit-route change."
+ },
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q141-23f1b4cb4",
+  "group": "Q141",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q141-23f1b4cb4 (reviewer sub-agent of L); spot-checked: Re-delivery of e78df3fa3c7, which was PASSed and then returned at landing because the side-project completion had not been promoted to the live DAG. I compared the item field by field with the e78df snapshot. The statement, stmt_deps, proof_deps, source, created, blueprint and unit sk-thm-p1 are identical, and so are steps 1, 2 and 4. The only changes are step 3, which now writes out the transitivity chain σ_hi(I_ik)=σ_hj σ_ji(I_ik)⊆σ_hj(I_jl)⊆I_hm and row monotonicity by minimality of generated ideals, and the split_report. There are no new nodes, no repair note and no SGA citation. The three proof_deps are byte-identical to the prior snapshot and all lie in sk-thm-p1. I reread every step. Step 1: clause (0) of quasi-coherent-finite-type-affine makes E_ik quasi-coherent, and clause (b) of kernel-image-ideal then gives quasi-coherent I_ik and Q_ik and the universal property of q. Step 2: hom-directed-colimit applies (X qcqs, K_j nonempty directed, J_j a module colimit, E_ik finitely presented), so h=ε_jl u; σ_ji^{-1}(I_jl) is an ideal sheaf containing ε_ik(E_ik), hence it contains I_ik. Step 3 is elementary: reflexivity, transitivity, row monotonicity from ε_ik=ε_il η_lk, and directedness through step 2 plus an upper bound in the row. Step 4: q_jl σ_ji kills e, since its kernel on affines is I_jl and affines form a basis; uniqueness in (b) then gives α, the composition law and α_pp=1. I checked this against Stacks properties.tex l.3318-3337 (05JS order on pairs) and l.3424ff (0817(2) lifting square via 01BS). Edge cases checked: X empty, E or J zero (rows become indiscrete), singleton I and K, repeated preorder indices, non-injective σ and η, zero quotient."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.KernelIdealDirectedPairs",
+  "declaration": "AlgebraicGeometry.Scheme.CommAlgebraSheaf.kernelIdeal_directed_pairs",
+  "file": "lean/Sheaf/AlgebraicGeometry/KernelIdealDirectedPairs.lean",
+  "statement": "theorem kernelIdeal_directed_pairs (X : Scheme.{u}) [CompactSpace X] [QuasiSeparatedSpace X] (I : Type u) [Preorder I] [Nonempty I] [IsDirected I (· ≤ ·)] (S : I ⥤ X.CommAlgebraSheaf) (hS : ∀ i : I, (S.obj i).toModule.IsQuasicoherent) (K : I → Type u) [∀ i : I, Preorder (K i)] [∀ i : I, Nonempty (K i)] [∀ i : I, IsDirected (K i) (· ≤ ·)] (E : ∀ i : I, K i ⥤ X.Modules) [∀ (i : I) (k : K i), SheafOfModules.IsFinitePresentation.{u} (R := X.ringCatSheaf) ((E i).obj k)] (c : ∀ i : I, Cocone (E i)) (hc : ∀ i : I, IsColimit (c i)) (j : ∀ i : I, (c i).pt ⟶ (S.obj i).toModule) (J : ∀ (i : I) (U : X.Opens), Ideal ((S.obj i).right.obj.obj (op U))) (hJ : ∀ (i : I) (U : X.Opens), Function.Injective ((j i).app U) ∧ Set.range ((j i).app U) = (J i U : Set ((S.obj i).right.obj.obj (op U)))) (hJqc : ∀ i : I, (c i).pt.IsQuasicoherent) (hσ : ∀ (i i' : I) (h : i ≤ i') (U : X.Opens) (s : (S.obj i).right.obj.obj (op U)), s ∈ J i U → (S.map (homOfLE h)).right.hom.app (op U) s ∈ J i' U) : ∃ (M : (Σ i : I, K i) → X.Modules) (m : ∀ p : Σ i : I, K i, M p ⟶ (S.obj p.1).toModule) (L : ∀ (p : Σ i : I, K i) (U : X.Opens), Ideal ((S.obj p.1).right.obj.obj (op U))), (∀ (p : Σ i : I, K i) (U : X.Opens), Function.Injective ((m p).app U) ∧ Set.range ((m p).app U) = (L p U : Set ((S.obj p.1).right.obj.obj (op U)))) ∧ (∀ (p : Σ i : I, K i) (U : X.Opens), Set.range ((((c p.1).ι.app p.2) ≫ j p.1).app U) ⊆ (L p U : Set ((S.obj p.1).right.obj.obj (op U)))) ∧ (∀ (p : Σ i : I, K i) (N : X.Modules) (n : N ⟶ (S.obj p.1).toModule) (H : ∀ U : X.Opens, Ideal ((S.obj p.1).right.obj.obj (op U))), (∀ U : X.Opens, Function.Injective (n.app U) ∧ Set.range (n.app U) = (H U : Set ((S.obj p.1).right.obj.obj (op U)))) → (∀ U : X.Opens, Set.range ((((c p.1).ι.app p.2) ≫ j p.1).app U) ⊆ (H U : Set ((S.obj p.1).right.obj.obj (op U)))) → ∀ U : X.Opens, L p U ≤ H U) ∧ ∃ pairOrder : Preorder (Σ i : I, K i), (∀ p r : Σ i : I, K i, p ≤ r ↔ ∃ h : p.1 ≤ r.1, ∀ (U : X.Opens) (s : (S.obj p.1).right.obj.obj (op U)), s ∈ L p U → (S.map (homOfLE h)).right.hom.app (op U) s ∈ L r U) ∧ Nonempty (Σ i : I, K i) ∧ IsDirected (Σ i : I, K i) (· ≤ ·) ∧ Monotone (fun p : Σ i : I, K i ↦ p.1) ∧ (∀ (i : I) (k l : K i), k ≤ l → (⟨i, k⟩ : Σ i : I, K i) ≤ ⟨i, l⟩) ∧ (∀ (i i' : I) (h : i ≤ i') (k : K i), ∃ l : K i', (⟨i, k⟩ : Σ i : I, K i) ≤ ⟨i', l⟩) ∧ ∃ (Q : (Σ i : I, K i) ⥤ X.CommAlgebraSheaf) (q : ∀ p : Σ i : I, K i, S.obj p.1 ⟶ Q.obj p), (∀ p : Σ i : I, K i, (Q.obj p).toModule.IsQuasicoherent) ∧ (∀ (p : Σ i : I, K i) (U : X.Opens), RingHom.ker ((q p).right.hom.app (op U)).hom = L p U) ∧ (∀ (p : Σ i : I, K i) (C : X.CommAlgebraSheaf) (χ : S.obj p.1 ⟶ C), (∀ (U : X.Opens) (s : ((E p.1).obj p.2).val.obj (op U)), χ.right.hom.app (op U) ((((c p.1).ι.app p.2) ≫ j p.1).app U s) = 0) → ∃! χbar : Q.obj p ⟶ C, q p ≫ χbar = χ) ∧ (∀ (p r : Σ i : I, K i) (f : p ⟶ r) (h : p.1 ≤ r.1), q p ≫ Q.map f = S.map (homOfLE h) ≫ q r)",
+  "branch": "newtargets-dag",
+  "by": "Q142",
+  "date": "2026-10-22",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-efc30b725",
+  "group": "Q142",
+  "result": "pass",
+  "note": "Clause-by-clause match of node and Lean: X qcqs; I and K_i nonempty directed in Type u; S a functor to CommAlgebraSheaf with quasi-coherent objects; J_i given by an injective inclusion with ideal ranges plus quasi-coherence; hσ; E_ik finitely presented with an IsColimit cocone; generated ideal L given by range, containment and minimality; pair preorder with the iff characterization; nonempty, directed, projection-monotone, row-monotone and extension clauses; Q functor with quasi-coherent objects, kernel = L on every open (true for the sheaf quotient), unique factorization universal property, and q_p ≫ Q.map f = S.map ≫ q_r. Scratch probe (nt_compile --json, 9.6 s, clean) shows ≤ in the ∃ pairOrder clauses resolves to the bound Preorder, not Mathlib's global Sigma order. lean.statement is verbatim; one sorry; source and blueprint docstrings with 4 proof steps; node diff is the lean record only; no duplicate declaration; edge cases and universes fine. Advisory: the sheaf-of-modules stmt_dep import is not referenced directly."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "W5",
+  "result": "pass",
+  "landing": "20261023T132222-L-2236838",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

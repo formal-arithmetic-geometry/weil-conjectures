@@ -1,0 +1,291 @@
+{
+ "id": "lem-sfb-finite-cover-stack-algebraic",
+ "kind": "statement",
+ "title": "Algebraicity of the stack of finite locally free covers of fixed degree",
+ "statement": "Let $S$ be a scheme [def-pc-scheme], with universes as in [def-weil-size-convention], and let $d\\geq1$ be an integer. On the big fppf site $(\\mathit{Sch}/S)_{fppf}$ [def-pc-fppf-site], let $\\mathcal C_d(T)$ be the groupoid whose objects are finite locally free morphisms $Z\\to T$ of degree $d$ [def-pc-finite-locally-free] and whose arrows are $T$-isomorphisms of these schemes. Pullback is scheme base change [def-pc-fibre-product]; an arrow above $T'\\to T$ is a cartesian map of the covers. Thus $\\mathcal C_d=\\mathcal H_d(\\operatorname{id}_{h_S})$ in [def-sfb-relative-finite-hilbert-groupoids], with $h_S$ the discrete groupoid represented by $S$. Then $\\mathcal C_d$ is an algebraic stack [def-sfb-algebraic-moduli-stack]. This holds over arbitrary $S$, without Noetherian or characteristic hypotheses.",
+ "source": {
+  "document": "literature/stacks-project/criteria.tex",
+  "place": "Tag 05YQ (proposition-finite-hilbert-point), criteria.tex; its H_d is C_d over the fixed scheme S."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-size-convention",
+  "def-pc-fppf-site",
+  "def-pc-finite-locally-free",
+  "def-pc-fibre-product",
+  "def-sfb-relative-finite-hilbert-groupoids",
+  "def-sfb-algebraic-moduli-stack"
+ ],
+ "proof": [
+  {
+   "text": "Apply [lem-sfb-unit-framed-algebra-smooth-groupoid] over the given $S$, obtaining $X$, $G$ and the smooth groupoid whose point groupoids are $FA_d$. Its fppf stackification $Q$ is algebraic by [lem-sfb-smooth-groupoid-fppf-quotient]. This applies directly over arbitrary $S$: the arrow space is the scheme $G\\times_SX$, and both source and target are smooth. No smoothness of $X/S$ is asserted or needed.",
+   "uses": [
+    "lem-sfb-unit-framed-algebra-smooth-groupoid",
+    "lem-sfb-smooth-groupoid-fppf-quotient"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/criteria.tex",
+    "place": "Tag 05YP and the paragraph before Tag 05YQ"
+   }
+  },
+  {
+   "text": "Define $F:FA_d\\to\\mathcal C_d$ by $m\\mapsto\\underline{\\operatorname{Spec}}_T(\\mathcal O_T^d,m)$ using [lem-weil-pbc-affine-morphism-relative-spec]. On each affine open this is the spectrum of a free rank-$d$ algebra, finite locally free by [lem-weil-pbc-finite-free-algebra-spectrum]; on every residue field its vector-space dimension is $d$, so it has degree $d$ [def-pc-finite-locally-free]. These affine tests establish the required local properties on $T$. An arrow labelled $g:m\\to m'$ is an algebra map $(\\mathcal O_T^d,m')\\to(\\mathcal O_T^d,m)$, hence gives the scheme arrow $F(m)\\to F(m')$. Relative spectrum commutes with arbitrary pullback by [lem-weil-pbc-relative-spec-base-change]; the map on the pulled-back free modules applies the base morphism to the entries of $m$ and $g$. Thus $F$ is a pullback-compatible functor, with the indicated arrow direction.",
+   "uses": [
+    "lem-weil-pbc-affine-morphism-relative-spec",
+    "lem-weil-pbc-finite-free-algebra-spectrum",
+    "def-pc-finite-locally-free",
+    "lem-weil-pbc-relative-spec-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/criteria.tex",
+    "place": "Tag 05YQ, construction of Spec"
+   }
+  },
+  {
+   "text": "The functor $F$ is fully faithful on every fibre. Indeed [lem-weil-pbc-affine-morphism-relative-spec](3) identifies all $T$-isomorphisms between its two relative spectra with algebra isomorphisms in the reverse direction. A map $\\mathcal O_T^d\\to\\mathcal O_T^d$ is determined by the $d$ images of the standard sections, so is exactly a matrix over $\\Gamma(T,\\mathcal O_T)$. It is invertible precisely when its inverse is another such matrix. The unit condition is $g(e_1)=e_1$, and compatibility with multiplication is $m'=g^{-1}m(g\\otimes g)$. These are precisely the arrows defining $FA_d$, including composition, and the identification respects restriction.",
+   "uses": [
+    "lem-weil-pbc-affine-morphism-relative-spec"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/criteria.tex",
+    "place": "Tag 05YQ, check (1)"
+   }
+  },
+  {
+   "text": "Every cover $p:Z\\to T$ is locally in the image of $F$. By [lem-pc-flf-properties], $\\mathcal A=p_*\\mathcal O_Z$ is locally free of rank $d$, with residue algebra equal to the fibre algebra. At $t\\in T$ this algebra has dimension $d>0$, so its unit is nonzero: a zero unit would make the entire algebra zero. Choose an affine neighbourhood where $\\mathcal A$ is free and write $1=(u_1,\\ldots,u_d)$. Some coordinate $u_j$ is nonzero modulo $t$; shrink to $D(u_j)$. The ordered columns $(1,e_1,\\ldots,\\widehat{e_j},\\ldots,e_d)$ have determinant $\\pm u_j$, a unit, hence are a basis with first vector $1$. In this basis multiplication is a commutative associative bilinear law with unit $e_1$, an object of $FA_d$. The map $p$ is affine since it is finite [def-weil-finite-integral-morphism]. The anti-equivalence [lem-weil-pbc-affine-morphism-relative-spec] therefore identifies $Z$ with the relative spectrum of this algebra. These neighbourhoods cover $T$ and are fppf coverings [def-pc-fppf-site].",
+   "uses": [
+    "lem-pc-flf-properties",
+    "def-weil-finite-integral-morphism",
+    "lem-weil-pbc-affine-morphism-relative-spec",
+    "def-pc-fppf-site"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/criteria.tex",
+    "place": "Tag 05YQ, check (2); determinant argument for the unit-adapted basis"
+   }
+  },
+  {
+   "text": "By [lem-sfb-finite-hilbert-stack-descent] with $F=\\operatorname{id}_{h_S}$, $\\mathcal C_d$ is an fppf stack. Extend the functor of step 2 to $\\bar F:Q\\to\\mathcal C_d$ using [lem-sfb-groupoid-stackification-local-description]. For two objects of $Q$, choose a common fppf cover on which both come from $FA_d$. On this cover step 3 identifies their isomorphism sheaves: in $Q$ they are the sheafification of the $FA_d$ isomorphism presheaves, which step 3 identifies with the already-sheaves in $\\mathcal C_d$. Hence the local identification glues to an identification globally. Thus $\\bar F$ is fully faithful. Step 4 gives local lifts of any $\\mathcal C_d$ object to $Q$. Full faithfulness lifts their overlap comparisons uniquely; their cocycle equations follow from uniqueness. Stack descent in $Q$ glues these lifts, and descent of the comparison arrows in $\\mathcal C_d$ gives an isomorphism of its image with the prescribed object. Thus $\\bar F$ is essentially surjective as well. The equivalence $Q\\simeq\\mathcal C_d$ transfers the representable diagonal and smooth surjective atlas furnished in step 1, so $\\mathcal C_d$ is algebraic [def-sfb-algebraic-moduli-stack].",
+   "uses": [
+    "lem-sfb-finite-hilbert-stack-descent",
+    "lem-sfb-groupoid-stackification-local-description",
+    "def-sfb-algebraic-moduli-stack"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/criteria.tex",
+    "place": "Tag 05YQ, stackification argument; stacks.tex Tags 02ZP and 0436"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-unit-framed-algebra-smooth-groupoid",
+  "lem-sfb-smooth-groupoid-fppf-quotient",
+  "lem-weil-pbc-affine-morphism-relative-spec",
+  "lem-weil-pbc-finite-free-algebra-spectrum",
+  "def-pc-finite-locally-free",
+  "lem-weil-pbc-relative-spec-base-change",
+  "lem-pc-flf-properties",
+  "def-weil-finite-integral-morphism",
+  "def-pc-fppf-site",
+  "lem-sfb-finite-hilbert-stack-descent",
+  "lem-sfb-groupoid-stackification-local-description",
+  "def-sfb-algebraic-moduli-stack"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/criteria.tex",
+  "place": "Tag 05YQ (proposition-finite-hilbert-point), proof, with the unit-adapted basis and stackification descent checks written out; Tag 05YP for the coordinate groupoid."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The stack of degree d finite locally free schemes is algebraic",
+   "results": "8 hits: AlgebraicGeometry.AffineSpace.instLocallyOfFinitePresentationOverSchemeInferInstanceOverClassOfFinite; AlgebraicGeometry.IsFinite.instHasAffinePropertyAndIsAffineFiniteCarrierObjOppositeOpensCarrierCarrierCommRingCatPresheafOpOpensTopHomAppTop; AlgebraicGeometry.IsFinite.instContainsIdentitiesScheme; AlgebraicGeometry.IsFinite.instIsMultiplicativeScheme; AlgebraicGeometry.instIsMultiplicativeSchemeLocallyOfFiniteType; AlgebraicGeometry.IsFinite.instLocallyOfFiniteType; AlgebraicGeometry.IsFinite; AlgebraicGeometry.Proj.instLocallyOfFiniteTypeToSpecZeroOfFiniteTypeSubtypeMemOfNatNat",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme finiteness, finite-type algebra skeletons and module rank lemmas do not give an algebraic moduli stack"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Moduli of commutative unital algebras free of rank d has a general linear group quotient algebraic stack",
+   "results": "8 hits: instEssentiallySmallFGAlgCat; Algebra.FiniteType.exists_fgAlgCatSkeleton; FGAlgCat; FGAlgCatSkeleton; AlgebraicGeometry.AffineSpace; FGAlgCatSkeleton.n; FGAlgCatSkeleton.eval; AlgebraicGeometry.AffineSpace.instLocallyOfFinitePresentationOverSchemeInferInstanceOverClassOfFinite",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme finiteness, finite-type algebra skeletons and module rank lemmas do not give an algebraic moduli stack"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Algebraic moduli stack of finite flat algebras of fixed positive rank",
+   "results": "8 hits: Module.free_of_flat_of_finrank_eq; Module.nonempty_basis_of_flat_of_finrank_eq; Module.isLocallyConstant_rankAtStalk; Module.rankAtStalk_pi; Algebra.IsAlgebraic.finrank_of_isFractionRing; Module.rank_lt_aleph0_iff; Algebra.QuasiFinite.recOn; Module.FaithfullyFlat.casesOn",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme finiteness, finite-type algebra skeletons and module rank lemmas do not give an algebraic moduli stack"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"Finite\", \"stack\"",
+   "results": "0 hits: ",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme finiteness, finite-type algebra skeletons and module rank lemmas do not give an algebraic moduli stack"
+  },
+  {
+   "tool": "grep",
+   "query": "finite.*algebraicStack|finite.*hilbertStack|algebra.*moduli",
+   "results": "0 hits: ",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme finiteness, finite-type algebra skeletons and module rank lemmas do not give an algebraic moduli stack"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"Stack\"",
+   "results": "0 hits: ",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme finiteness, finite-type algebra skeletons and module rank lemmas do not give an algebraic moduli stack"
+  },
+  {
+   "tool": "grep",
+   "query": "HilbertStack|hilbert_stack|finite.?Hilbert|AlgebraicStack",
+   "results": "1 hits: Mathlib/Analysis/InnerProductSpace/l2Space.lean",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme finiteness, finite-type algebra skeletons and module rank lemmas do not give an algebraic moduli stack"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finite locally free covers of fixed positive degree form an algebraic stack",
+   "results": "{\"t\": \"2026-10-23T19:01:17Z\", \"tool\": \"leanfinder\", \"query\": \"Finite locally free covers of fixed positive degree form an algebraic stack\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Cover\", \"AlgebraicGeometry.IsFinite.instLocallyOfFiniteType\", \"AlgebraicGeometry.QuasiCompactCover.of_finite\", \"AlgebraicGeometry.Scheme.precoverage\", \"AlgebraicGeometry.IsFinite\", \"AlgebraicGeometry.AffineSpace.instLocallyOfFinitePresentationOverSchemeInferInstanceOverClassOfFinite\", \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.𝒰D\", \"AlgebraicGeometry.LocallyOfFiniteType\"], \"digest\": \"ea2277ed91589b4a\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern scheme smoothness, bases, algebra skeletons or manifold groups; none represents the unit-framed algebra-law groupoid or proves algebraicity of the finite-cover stack"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"Stack\"",
+   "results": "{\"t\": \"2026-10-23T19:01:18Z\", \"tool\": \"loogle\", \"query\": \"\\\"AlgebraicGeometry\\\", \\\"Stack\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern scheme smoothness, bases, algebra skeletons or manifold groups; none represents the unit-framed algebra-law groupoid or proves algebraicity of the finite-cover stack"
+  },
+  {
+   "tool": "grep",
+   "query": "HilbertStack|algebraicStack|AlgebraicStack|finiteCoverStack",
+   "results": "{\"t\": \"2026-10-23T19:01:18Z\", \"tool\": \"grep\", \"query\": \"HilbertStack|algebraicStack|AlgebraicStack|finiteCoverStack\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern scheme smoothness, bases, algebra skeletons or manifold groups; none represents the unit-framed algebra-law groupoid or proves algebraicity of the finite-cover stack"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Moduli of finite flat commutative algebras of rank d is an Artin algebraic stack",
+   "results": "{\"t\": \"2026-10-23T19:01:18Z\", \"tool\": \"leansearch\", \"query\": \"Moduli of finite flat commutative algebras of rank d is an Artin algebraic stack\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Module.free_of_flat_of_finrank_eq\", \"Algebra.QuasiFinite.recOn\", \"Module.Finite.of_quasiFinite\", \"Algebra.QuasiFinite.iff_of_isArtinianRing\", \"Algebra.QuasiFinite.casesOn\", \"Module.isLocallyConstant_rankAtStalk\", \"RingHom.Flat\", \"Module.nonempty_basis_of_flat_of_finrank_eq\"], \"digest\": \"630cdf1f22a1dea9\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern scheme smoothness, bases, algebra skeletons or manifold groups; none represents the unit-framed algebra-law groupoid or proves algebraicity of the finite-cover stack"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Moduli stack of rank d finite flat algebras is the quotient of multiplication tables by the unit stabilizer",
+   "results": "{\"t\": \"2026-10-23T19:02:00Z\", \"tool\": \"leanfinder\", \"query\": \"Moduli stack of rank d finite flat algebras is the quotient of multiplication tables by the unit stabilizer\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"instEssentiallySmallFGAlgCat\", \"Algebra.FiniteType.exists_fgAlgCatSkeleton\", \"FGAlgCatSkeleton\", \"FGAlgCatSkeleton.n\", \"FGAlgCatSkeleton.eval\", \"FGAlgCat\", \"FGModuleRepr.repr\", \"FGAlgCatSkeleton.I\"], \"digest\": \"378f96e8d86b132a\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern scheme smoothness, bases, algebra skeletons or manifold groups; none represents the unit-framed algebra-law groupoid or proves algebraicity of the finite-cover stack"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-relative-finite-hilbert-algebraic",
+  "date": "2026-10-24",
+  "group": "Q132"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Power lifting implies universal submersiveness of an affine invariant quotient. Fppf presentation used after the affine invariant quotient construction. Supporting input: Apply the flat-groupoid algebraicity theorem to the action groupoid; unlike the smooth-groupoid theorem this does not require H smooth. Algebraicity step: criteria.tex Tag 06FI applies the general bootstrap theorem Tag 06DC to the flat locally finitely presented quotient presentation. Supporting input: Tag 06CI (lemma-hilbert-stack-relative-space); finite Hilbert construction in examples-stacks.tex Tag 05WC. Input to the Tag 06CI proof: Algebraicity of the stack of finite locally free covers of fixed degree.",
+   "via": [
+    "lem-sfb-relative-finite-hilbert-algebraic",
+    "lem-sfb-fppf-stack-algebraicity-bootstrap",
+    "lem-sfb-flat-groupoid-algebraic-quotient",
+    "lem-sfb-flat-affine-action-stack-presentation",
+    "lem-sfb-power-lifting-quotient-submersive",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-finite-cover-stack-algebraic",
+  "worker": "stage1",
+  "summary": "Followed 05YQ via the unit-framed algebra-law smooth groupoid 05YP; reused smooth-groupoid algebraicity, relative Spec anti-equivalence/base change, finite free spectrum, finite-cover stack descent and locally free pushforward. Wrote the unit-basis determinant and descent equivalence checks. One new statement-only coordinate-groupoid node; statement unchanged.",
+  "blueprint": "Inherited null ancestor/via chain retained; latest sk-thm-sf-ctf-stability-direct-images.proof.md (3) is compactification assembly. This is the existing algebraic-moduli prerequisite reached through the recorded alteration/moduli chain, not a replacement of the unit route. Searches of all blueprint nodes for 05YQ, 05YP, multiplication table, finite locally free algebra, commutative algebra laws and unit stabilizer found no equivalent blueprint statement.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-affine-morphism-relative-spec",
+    "why": "Generic scheme or relative-spectrum tool used in the 05YQ finite-cover proof; no alternate six-functor route is used."
+   },
+   {
+    "node": "lem-weil-pbc-finite-free-algebra-spectrum",
+    "why": "Generic scheme or relative-spectrum tool used in the 05YQ finite-cover proof; no alternate six-functor route is used."
+   },
+   {
+    "node": "lem-weil-pbc-relative-spec-base-change",
+    "why": "Generic scheme or relative-spectrum tool used in the 05YQ finite-cover proof; no alternate six-functor route is used."
+   },
+   {
+    "node": "lem-pc-flf-properties",
+    "why": "Generic scheme or relative-spectrum tool used in the 05YQ finite-cover proof; no alternate six-functor route is used."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-affine-morphism-relative-spec",
+  "lem-weil-pbc-finite-free-algebra-spectrum",
+  "lem-weil-pbc-relative-spec-base-change",
+  "lem-pc-flf-properties"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-N6-13cffeb4c",
+  "group": "N6",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-N6-13cffeb4c (reviewer sub-agent of L); spot-checked: I read the whole delivery against Stacks criteria.tex section-hilbert-point (05YP, 05YQ and its proof); it follows that route correctly. Item statement and stmt_deps are identical to live, which is still unsplit. New node lem-sfb-unit-framed-algebra-smooth-groupoid checks out: (1) the structure-constant relations are exactly associativity, commutativity and e_1 as unit; (2) the arrow convention m'=g^{-1}m(g⊗g) makes g an algebra map m'→m, and composites are labelled gh; (3) source, target, inverse and composition satisfy def-sfb-algebraic-space-groupoid; (4) s is the base change of G→S, which is open in affine space, and t=s∘inv, so both are smooth; (5) the cases d=1 (X=G=S) and d=2 are correct. No duplicate in the DAG (rg -L for 05YP, 05YQ, FAd, multiplication table, structure constants, GL_d), and the node restates no clause of the item. Item steps are sound: step 2 (degree d, arrow direction, base change); step 3 (elementary given anti-equivalence (3)); step 4 (det(1,e_1,…,ê_j,…,e_d)=±u_j, finite⇒affine, Zariski covers are fppf); step 5 (h_S is terminal so C_d is a stack via finite-hilbert descent; full faithfulness from the sheafified Isom; essential surjectivity by gluing with cocycles from uniqueness; algebraicity transported through the equivalence). The four off-unit tool_uses (affine-morphism-relative-spec, finite-free-algebra-spectrum, relative-spec-base-change, pc-flf-properties) are generic scheme tools and are accepted. Batch-5: def-trf-algebraic-space, def-trf-projective-bundle-morphism and lem-trf-sieve-set-sheafification-exists are general definitions or foundations, not steps of the trace formula or Poincaré duality proofs, so they are accepted. No SGA. FIX (B3): the new node wrote 'open subscheme D(det b) of affine space' with no node cited. It now reads G=S×_Z Spec(Z[b_ij][1/det b]) [def-weil-ring-localization-away], the open subscheme of A^{d(d-1)}_S [def-sbc-affine-space]; both ids are added to stmt_deps and the content is unchanged.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.FiniteCoverStackAlgebraic",
+  "declaration": "AlgebraicGeometry.finiteCoverStack_isAlgebraic",
+  "declarations": [
+   "AlgebraicGeometry.finiteCoverStack",
+   "AlgebraicGeometry.finiteCoverStack_isAlgebraic"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/FiniteCoverStackAlgebraic.lean",
+  "statement": "theorem finiteCoverStack_isAlgebraic (S : Scheme.{u}) (d : ℕ+) : IsAlgebraicModuliStack (finiteCoverStack S d)",
+  "branch": "sheaf-dag",
+  "by": "NL",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "The finiteCoverStack helper is H_d(id_{h_S}), built directly from the recorded RelativeFiniteHilbert.base projection. It is definitionally the same BasedCategory as RelativeFiniteHilbert.groupoid at this identity whenever its proof arguments are supplied; the base projection does not require those proofs. No extra hypothesis that the represented h_S is an fppf stack is imposed."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-34c0ceba0",
+  "group": "NL",
+  "result": "pass",
+  "note": "Read node, 7 stmt_deps, Stacks criteria 05YQ, delivered module and report, and the dependency Lean (RelativeFiniteHilbert structure/Hom/base/groupoid/pullback, discreteModuli, IsModuliStack, HasAlgebraicSpaceDiagonal, IsAlgebraicModuliStack). finiteCoverStack = BasedCategory.ofFunctor (RelativeFiniteHilbert.base at BasedFunctor.id of discreteModuli(yoneda (Over.mk (𝟙 S))) and d), definitionally RelativeFiniteHilbert.groupoid since its stack proofs are unused. The y/x/comparison/a/b data over the terminal h_S are unique, so the fibre is the groupoid of degree-d finite locally free covers with cartesian (T-iso) arrows, all automorphisms kept. S : Scheme.{u} arbitrary; d : ℕ+ = d≥1. Conclusion is the exact recorded algebraic-stack predicate (étale stack, algebraic-space diagonal, smooth surjective atlas), not smoothness. Statement verbatim; record differs from live/side-live only in lean (live lean null, not superseded); both declarations listed with source/blueprint docstrings; 5-step proof docstring; only sorry; imports exist in side-live; no duplicate found by rg; edge cases d=1, empty S/T, any characteristic, universes ok. No file changed, no compile run."
+ }
+}

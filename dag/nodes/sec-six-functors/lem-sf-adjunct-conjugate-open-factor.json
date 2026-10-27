@@ -191,5 +191,34 @@
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q37-5e66410fd (reviewer sub-agent of L); spot-checked: Read the full delivery (item only, no new nodes, statement byte-identical to live; still unsplit on live and side-live, so not superseded; not a re-split; created 2026-10-21, so not in the 10-19 dropped list). I checked all four steps against the cited statements with explicit typing. Step 1: the mate is the L_p-transpose of J_k(eps_r) after alpha (def-weil-pbc-adjunction-mate), and the composite Hom-bijection (Adjunction.comp) gives h = adj_{A1}(a). Step 2: clause 3(a) of lem-weil-pbc-mate-pasting (checked against Mathlib Mates.lean 485-502, mateEquiv_conjugateEquiv_vcomp) with G=id, H=J_k, A2=J_bL_q⊣R_qP_b and tau=beta^{-1}:L3->L2. Then tau^c:P_iR_p->R_qP_b is exactly c, with the right direction, so c_Y∘h = adj_{A2}(a∘beta^{-1}). Step 3: substituting the hypothesis and using the composite unit gives R_q(P_b d ∘ P_bJ_b f ∘ u_b)∘eta_q, well typed. Step 4: z_M cancels P_b(d), unit naturality and the assumed invertibility of u_b at J_sM leave R_q(f)∘eta_q = adj(f). This is correct, and only the stated invertibility is used. Edge cases (identity beta/d, terminal categories, vacuous case) checked. No duplicate in the DAG: lem-weil-pbc-conjugate-iso-unit-equation, lem-sfb-open-scalar-conjugate-normalization and lem-sc-global-sections-base-change-mate all differ. Mathlib searches are real; none states the whole item. All deps are Mathlib leaves: no route issue, no tool_uses, no SGA. The citer's step 2 use matches the statement. Advisory only: the stmt_dep lem-weil-pbc-adjunction-of-natural-bijection was added for the adj notation but is not cited in the statement text. No fixes."
  },
- "lean_audit": {}
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.AdjunctConjugateOpenFactor",
+  "declaration": "adjunct_transport",
+  "statement": "theorem adjunct_transport\n    {A B D E F : Type*}\n    [Category A] [Category B] [Category D] [Category E] [Category F]\n    {Lr : D ⥤ A} {Rr : A ⥤ D} {Lp : E ⥤ B} {Rp : B ⥤ E}\n    {Ji : D ⥤ E} {Pi : E ⥤ D} {Jb : F ⥤ B} {Pb : B ⥤ F}\n    {Lq : D ⥤ F} {Rq : F ⥤ D} {Js : A ⥤ F} {Jk : A ⥤ B}\n    (ar : Lr ⊣ Rr) (ap : Lp ⊣ Rp) (ai : Ji ⊣ Pi)\n    (ab : Jb ⊣ Pb) (aq : Lq ⊣ Rq) [IsIso ab.unit]\n    (β : Ji ⋙ Lp ≅ Lq ⋙ Jb) (d : Js ⋙ Jb ≅ Jk)\n    (α : Ji ⋙ Lp ⟶ Lr ⋙ Jk) (M : A)\n    (f : Lq.obj (Rr.obj M) ⟶ Js.obj M)\n    (hα : β.inv.app (Rr.obj M) ≫ α.app (Rr.obj M) ≫\n      Jk.map (ar.counit.app M) = Jb.map f ≫ d.hom.app M) :\n    ai.homEquiv _ _ ((mateEquiv ar ap α).app M) ≫\n      (conjugateIsoEquiv (ai.comp ap) (aq.comp ab) β.symm).hom.app (Jk.obj M) ≫\n      Rq.map (Pb.map (d.inv.app M) ≫ inv (ab.unit.app (Js.obj M))) =\n        aq.homEquiv _ _ f",
+  "branch": "newtargets-dag",
+  "by": "NJ",
+  "date": "2026-10-22",
+  "existing": true,
+  "note": "Exact public theorem already present in the live library, extracted from SemilinearProperOpenMatePasting. Server source checked with scompile.py --source on 2026-10-22. All five adjunctions, invertible open unit, factorization, specified conjugate and mate, and adjunct equation agree with the node."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-68a85e579",
+  "group": "NJ",
+  "result": "pass",
+  "note": "existing:true attachment to the live public theorem adjunct_transport (Sheaf.CategoryTheory.AdjunctConjugateOpenFactor, published olean present, live = side-live). lean.statement occurs verbatim once in the file; only the lean field differs from the live node. Clause check: β : Ji⋙Lp ≅ Lq⋙Jb, d : Js⋙Jb ≅ Jk, c = conjugateIsoEquiv (ai.comp ap) (aq.comp ab) β.symm (input β⁻¹, output Rp⋙Pi ≅ Pb⋙Rq), γ = mateEquiv ar ap α, hα is the factorization in diagrammatic order, z = Pb.map d.inv ≫ inv u_b, conclusion has the node's order. Type* categories, no extra assumptions. All 4 stmt_deps are Mathlib leaves supplied by the Adjunction.Mates import. No duplicate declaration; docstrings carry source and blueprint; report sections present. No compile needed (no change). Advisory only: the natural-bijection stmt_dep is used just for adj notation."
+ }
 }

@@ -1,0 +1,150 @@
+{
+ "id": "def-pur-finite-coefficient-adjoint-data",
+ "kind": "definition",
+ "title": "Fixed finite-stage exceptional adjunction and coefficient interfaces",
+ "statement": "For the actual finite coefficient stages of [def-coef-finite-coefficient-stages] and a compactification, retain the fixed constructible-finite-Tor derived categories, the etale exceptional adjoint transported through site comparison, and the restricted functors. AdjointDatum records their preservation and adjunction with its specified geometric counit. Change records tensor preservation, the specified normalized projection isomorphism and its counit-transpose mate and unit equation. RefinementDatum records specified lower compactification refinement and its adjoint conjugate. System bundles these data with scalar identity, composition, and refinement equations. These are the existing interfaces, relocated verbatim into an importable data module; the stage and arrow definitions and the two arithmetic stage theorems relocated with them remain owned by their own nodes [def-coef-finite-coefficient-stages, def-weil-proetale-tor-amplitude, def-weil-compactifications-refinements, def-weil-pbc-etale-origin-witness].",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-reduction/sk-lem-sp-reduction-exceptional.proof.md",
+  "place": "Parent lem-pur-finite-coefficient-adjoint-comparisons, numbered proof steps; general separated finite-type extension via ordinary-etale closed support as recorded there."
+ },
+ "stmt_deps": [
+  "def-coef-finite-coefficient-stages",
+  "def-weil-proetale-tor-amplitude",
+  "def-weil-compactifications-refinements",
+  "def-weil-pbc-etale-origin-witness",
+  "def-weil-pbc-scheme-conventions",
+  "def-weil-l-adic-coefficient-extension",
+  "def-weil-proetale-constructible-sheaf",
+  "def-compact-support-direct-image-detailed",
+  "def-weil-pbc-site-comparison-morphism",
+  "thm-amb-etale-exceptional-adjoint",
+  "thm-weil-pbc-site-comparison",
+  "lem-sf-class-compact-support-comparison"
+ ],
+ "proof": [
+  {
+   "text": "The definitions are constructions: the derived categories, the ctf property, scalar extension, the site comparisons, compact support for the given compactification, the etale exceptional right adjoint and its adjunction, the transported right adjoint, the restricted functors, and the records AdjointDatum, Change, RefinementDatum, System and FiniteTypeSystem with their specified normalizations.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "etaleLeftAdjoint: the proper map of the compactification is of finite type over the Noetherian target, so the etale adjoint-existence theorem applies to this compactification and these finite coefficients.",
+   "uses": [
+    "thm-amb-etale-exceptional-adjoint"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "finiteTypeNoetherian and finiteTypeMorphismProperties: Spec k is Noetherian, so a scheme locally of finite type and quasi-compact over it is Noetherian. A k-morphism f composed with the target structure map is the source structure map; separatedness and local finite type descend from that composite, and f is quasi-compact because its source is quasi-compact and its target quasi-separated.",
+   "uses": [
+    "lem-weil-pbc-finite-type-over-noetherian"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "thm-amb-etale-exceptional-adjoint"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-reduction/sk-lem-sp-reduction-exceptional.proof.md",
+  "place": "Stage-3 extraction of the parent argument; normalization uniqueness is by extensionality and injectivity of adjunction transposes."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Adjunction on constructible finite Tor derived sheaves transported from etale to proetale with coefficient change mates",
+   "results": "8 general sheaf pullback adjunction hits; none supplies the normalized exceptional coefficient system.",
+   "date": "2026-10-26",
+   "verdict": "Use geometric preservation, site transport, and mate arguments from the parent proof."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A finite coefficient exceptional adjunction has a unique counit normalized coefficient change mate satisfying scalar composition and refinement coherence",
+   "results": "8 generic adjunction counit and rightAdjointUniq hits.",
+   "date": "2026-10-26",
+   "verdict": "These formal results do not establish the geometric preservation and normalized comparisons."
+  },
+  {
+   "tool": "grep",
+   "query": "Adjunction.*counit|mateEquiv.*vcomp",
+   "results": "25 generic counit and mate-composition hits via msearch; local source search found no existing assembly in these fixed coefficient categories.",
+   "date": "2026-10-26",
+   "verdict": "Generic categorical results are ingredients for the separate coherence step, not a replacement for the geometry."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.FiniteCoefficientAdjointComparisons",
+  "group": "F8",
+  "date": "2026-10-26"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pur-finite-coefficient-adjoint-comparisons",
+   "place": "Fixed finite-stage exceptional adjunction and coefficient interfaces",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-thm-purity-transport",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.FiniteCoefficientAdjointData",
+  "file": "lean/Sheaf/Paper/FiniteCoefficientAdjointData.lean",
+  "declaration": "AlgebraicGeometry.FiniteCoefficientAdjoints.AdjointDatum",
+  "statement": "structure AdjointDatum (A : Type (u + 1)) [CommRing A] [Finite A] [IsNoetherian X] [IsNoetherian Y] (c : Compactification f)",
+  "branch": "sheaf-dag",
+  "by": "F8",
+  "date": "2026-10-26",
+  "declarations": [
+   "AlgebraicGeometry.FiniteCoefficientAdjoints.D",
+   "AlgebraicGeometry.FiniteCoefficientAdjoints.ctf",
+   "AlgebraicGeometry.FiniteCoefficientAdjoints.tensor",
+   "AlgebraicGeometry.FiniteCoefficientAdjoints.nu",
+   "AlgebraicGeometry.FiniteCoefficientAdjoints.rnu",
+   "AlgebraicGeometry.FiniteCoefficientAdjoints.lower",
+   "AlgebraicGeometry.FiniteCoefficientAdjoints.etaleLeftAdjoint",
+   "AlgebraicGeometry.FiniteCoefficientAdjoints.etaleUpper",
+   "AlgebraicGeometry.FiniteCoefficientAdjoints.etaleAdjunction",
+   "AlgebraicGeometry.FiniteCoefficientAdjoints.upper",
+   "AlgebraicGeometry.FiniteCoefficientAdjoints.restrict",
+   "AlgebraicGeometry.FiniteCoefficientAdjoints.AdjointDatum",
+   "AlgebraicGeometry.FiniteCoefficientAdjoints.AdjointDatum.unit",
+   "AlgebraicGeometry.FiniteCoefficientAdjoints.AdjointDatum.counit",
+   "AlgebraicGeometry.FiniteCoefficientAdjoints.projectionAtWitness",
+   "AlgebraicGeometry.FiniteCoefficientAdjoints.Change",
+   "AlgebraicGeometry.FiniteCoefficientAdjoints.refinementAtWitness",
+   "AlgebraicGeometry.FiniteCoefficientAdjoints.RefinementDatum",
+   "AlgebraicGeometry.FiniteCoefficientAdjoints.System",
+   "AlgebraicGeometry.FiniteCoefficientAdjoints.finiteTypeNoetherian",
+   "AlgebraicGeometry.FiniteCoefficientAdjoints.finiteTypeMorphismProperties",
+   "AlgebraicGeometry.FiniteCoefficientAdjoints.FiniteTypeSystem"
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-529dd",
+  "group": "F8",
+  "result": "fix",
+  "landing": "20261025T202009-L-2662190",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-529dd",
+  "group": "F8",
+  "result": "fix",
+  "landing": "20261025T202009-L-2662190",
+  "kind": "interface",
+  "note": "independent cc review: 529d Data relocation (pp.all #print of 38 decls + item identical published vs sandbox) and 3 new ∃! sorry lemmas against the item's own clauses/normalizations; 11 direct importers compiled rc 0"
+ }
+}

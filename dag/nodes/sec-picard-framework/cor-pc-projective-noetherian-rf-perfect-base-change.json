@@ -147,7 +147,30 @@
   "pqf-def-coherent"
  ],
  "proof_split_by": "paragraphs",
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "closed",
+   "decls": [
+    {
+     "name": "AlgebraicGeometry.Scheme.Modules.isPerfect_Q_cechModuleComplex_baseChange_of_isClosedImmersion",
+     "module": "WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.RfPerfect",
+     "lines": [
+      233,
+      259
+     ],
+     "kind": "theorem",
+     "sorry": false
+    }
+   ],
+   "missing": [],
+   "open": []
+  }
+ },
  "chapter": "sec-picard-framework",
  "unit": "sk-thm-picard-semicon",
  "split_report": {
@@ -200,5 +223,26 @@
   "group": "NO",
   "result": "pass",
   "note": "Wrote review.md. Checked all statement dependencies, source, exact declarations, hypotheses, conclusions, edge cases, docstrings, and verbatim statement field. Server-only compile reproduced cleanly in 2.5 seconds. No delivery defects found; branch and clones unchanged."
+ },
+ "blueprint_update": {
+  "snapshot": "main-20261023-1620",
+  "commit": "7284bb09daf97437d544c51882b325f9c52cd345",
+  "changed": [
+   "statement",
+   "proof"
+  ],
+  "statement": "Let $S=\\operatorname{Spec}(A)$ be an affine scheme with $A$ Noetherian,\nlet $f:X\\to S$ be\nprojective, let\n$\\mathcal G$ be a coherent\n$\\mathcal O_X$-module flat over $S$, and let $\\mathcal U$ be a finite cover\nof $X$ by affine opens.\nFor any morphism $g:T\\to S$ from an affine scheme\n$T=\\operatorname{Spec}(B)$, without a Noetherian hypothesis on\n$B$, the canonical base-change map of [lem-pc-rf-base-change-flat-module]\n\n$$\nLg^*(Rf_*\\mathcal G)\\longrightarrow Rf_{T,*}\\mathcal G_T\n$$\n\nis an isomorphism in $D(B)$, and both sides are perfect objects of\n$D(B)$. Here $Rf_*\\mathcal G$ and $Rf_{T,*}\\mathcal G_T$ are represented by\nthe Cech complexes of $\\mathcal U$ and of its pullback to $X_T$, and\n$Lg^*$ denotes the derived pullback.",
+  "proof": [
+   {
+    "text": "The isomorphism is [lem-pc-rf-base-change-flat-module].\nBy [lem-pc-projective-noetherian-rf-perfect], $Rf_*\\mathcal G$ is perfect\nin $D(A)$: it is isomorphic to a bounded complex $P$ of finite projective\n$A$-modules, as in [def-pc-perfect-complex]. Both $P$ and the bounded flat\nrepresentative $K$ of [lem-pc-rf-base-change-flat-module] are bounded\ncomplexes of flat modules, so they compute the derived pullback, and\n$Lg^*Rf_*\\mathcal G\\cong P\\otimes_AB$. Tensoring preserves finite\nprojective modules: a finite projective module is the image of an\nidempotent on a finite free module, and tensoring preserves that\nidempotent decomposition. Hence the derived pullback is perfect,\nand the isomorphic right side is perfect as well.",
+    "uses": [
+     "lem-pc-rf-base-change-flat-module",
+     "lem-pc-projective-noetherian-rf-perfect",
+     "def-pc-perfect-complex"
+    ],
+    "elementary": false
+   }
+  ],
+  "note": "the current blueprint (main-20261023-1620, weil-conjectures-blueprint 7284bb09da) states or proves this differently; the node is proved in Lean: recorded 2026-10-23, not reopened"
  }
 }

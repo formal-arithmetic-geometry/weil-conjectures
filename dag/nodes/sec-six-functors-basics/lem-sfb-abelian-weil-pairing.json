@@ -1,0 +1,324 @@
+{
+ "id": "lem-sfb-abelian-weil-pairing",
+ "kind": "statement",
+ "title": "Functorial Weil pairing and alternating polarization form",
+ "statement": "Let $k$ be an algebraically closed field [def-weil-field, def-weil-algebraic-closure] and $A,B,C$ abelian varieties over $k$ [def-sc-abelian-variety], with dual varieties and pullback homomorphisms of [lem-sfb-abelian-polarization-calculus]. For group-scheme homomorphisms [def-sc-group-scheme], pullback is additive and contravariant: $(a+b)^\\vee=a^\\vee+b^\\vee$, $(ba)^\\vee=a^\\vee b^\\vee$, and $1_A^\\vee=1_{A^\\vee}$. These identities extend $\\mathbf Q$-linearly to rational homomorphisms [def-weil-pbc-module-tensor-product]. For each prime $\\ell\\ne\\operatorname{char}k$, put $\\mathbf Q_\\ell(1)=(\\varprojlim_n\\mu_{\\ell^n}(k))\\otimes_{\\mathbf Z_\\ell}\\mathbf Q_\\ell$, where $\\mu_{\\ell^n}(k)=\\{z\\in k^\\times:z^{\\ell^n}=1\\}$ and transitions are $z\\mapsto z^\\ell$, using [def-weil-l-adic-numbers]. This is a one-dimensional $\\mathbf Q_\\ell$-space. There are perfect bilinear pairings $e_{A,\\ell}:V_\\ell A\\times V_\\ell A^\\vee\\to\\mathbf Q_\\ell(1)$ [sk-def-av-tate]; perfect means each induced map to the linear dual of the other factor, with values in this line, is an isomorphism. They obey $e_{B,\\ell}(V_\\ell(a)x,y)=e_{A,\\ell}(x,V_\\ell(a^\\vee)y)$ for every rational homomorphism $a:A\\to B$. For every invertible sheaf $L$ [def-sc-invertible-module] and $\\lambda=\\phi_L:A\\to A^\\vee$, the form $e^L_\\ell(x,y)=e_{A,\\ell}(x,V_\\ell(\\lambda)y)$ is alternating. If $\\lambda$ is an isogeny [def-sc-isogeny], this form is nondegenerate.",
+ "source": {
+  "document": "literature/milne-abelian-varieties_AV.pdf",
+  "place": "Chapter I, Remark 8.5, printed p.36; §9 opening, p.41; §13 pp.57–58, Lemma 13.1 and Proposition 13.2(a),(d): Weil pairings, passage to the inverse limit, functoriality and skew symmetry; nondegeneracy from the perfect finite Weil pairings and an isogeny on rational Tate modules."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-weil-algebraic-closure",
+  "def-sc-abelian-variety",
+  "def-sc-group-scheme",
+  "lem-sfb-abelian-polarization-calculus",
+  "sk-def-av-tate",
+  "def-weil-pbc-module-tensor-product",
+  "def-weil-l-adic-numbers",
+  "def-sc-invertible-module",
+  "def-sc-isogeny",
+  "def-sfb-abelian-rational-duality-data",
+  "def-sfb-abelian-rational-hom",
+  "def-sfb-abelian-dual-poincare-datum",
+  "sk-d-ab-tate"
+ ],
+ "proof": [
+  {
+   "text": "Take $S=\\operatorname{Spec}k$ in [lem-sfb-abelian-space-poincare-calculus]. An abelian variety $X$ over $k$ is commutative [lem-sc-av-commutative], proper and of finite presentation over the Noetherian base, smooth and hence geometrically reduced [sbc-lem-smooth-geometrically-reduced], and connected, hence geometrically connected because $k$ is separably closed [lem-weil-separably-closed-geometrically-connected]; so $A,B,C$ and their geometric fibres satisfy that node's hypotheses, and on schemes its line modules are the invertible sheaves. Its dual $D_X$ represents, on $k$-schemes $T$, exactly the functor of rigidified, fibrewise algebraically trivial families that $X^\\vee$ represents in [lem-sfb-abelian-polarization-calculus] (same algebraic-equivalence relation, same rigidification). The Yoneda lemma gives an isomorphism $\\psi_X:X^\\vee\\to D_X$ pulling the universal family of $D_X$ back to $\\mathcal P_X$ with its rigidification. Both universal sheaves are trivial on $X\\times0$, so $\\psi_X(0)=0$. Apply [lem-sc-rigidity] to $G(u,v)=\\psi_X^{-1}(\\psi_X(u+v)-\\psi_X(u)-\\psi_X(v))$ on $X^\\vee\\times_kX^\\vee$ with values in $X^\\vee$ (here $X^\\vee$ is proper, geometrically connected and geometrically reduced by the same two citations, and separated of finite type): $G$ maps $X^\\vee\\times0$ to $0$, hence $G=g\\circ\\mathrm{pr}_2$ with $g(v)=G(0,v)=0$. So $\\psi_X$ is an isomorphism of group schemes. Since $c^\\vee$ in both nodes classifies the pulled-back family $(c\\times1)^*\\mathcal P$, the $\\psi$'s carry the duals of homomorphisms to each other. Hence the two biadditivity isomorphisms and $(c\\times1)^*\\mathcal P_Y\\cong(1\\times c^\\vee)^*\\mathcal P_X$ for $c:X\\to Y$, axis trivializations included, hold for the duals and Poincare sheaves of [lem-sfb-abelian-polarization-calculus].",
+   "uses": [
+    "lem-sfb-abelian-space-poincare-calculus",
+    "lem-sfb-abelian-polarization-calculus",
+    "lem-sc-av-commutative",
+    "sbc-lem-smooth-geometrically-reduced",
+    "lem-weil-separably-closed-geometrically-connected",
+    "lem-sc-rigidity"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-abelian-varieties_AV.pdf",
+    "place": "I §8 Remark 8.5, p.36, and the universal Poincare sheaf of §8; §9 opening, p.41 (dual homomorphism); rigidity, I §1."
+   }
+  },
+  {
+   "text": "For $a,b:A\\to B$, pull the first biadditivity $(m_B,1)^*\\mathcal P_B\\cong p_{13}^*\\mathcal P_B\\otimes p_{23}^*\\mathcal P_B$ of step 1 back along $(a,b,1):A\\times B^\\vee\\to B\\times B\\times B^\\vee$. Since $a+b=m_B\\circ(a,b)$, tensor pullback [lem-weil-pbc-module-pullback-tensor] and the composite and identity comparisons of [def-pc-module-pullback] give $((a+b)\\times1)^*\\mathcal P_B\\cong(a\\times1)^*\\mathcal P_B\\otimes(b\\times1)^*\\mathcal P_B$, that is, by step 1, $(1\\times(a+b)^\\vee)^*\\mathcal P_A\\cong(1\\times a^\\vee)^*\\mathcal P_A\\otimes(1\\times b^\\vee)^*\\mathcal P_A$. Pulling the second biadditivity $(1,m_{A^\\vee})^*\\mathcal P_A\\cong p_{12}^*\\mathcal P_A\\otimes p_{13}^*\\mathcal P_A$ back along $(1,a^\\vee,b^\\vee):A\\times B^\\vee\\to A\\times A^\\vee\\times A^\\vee$ identifies the right side with $(1\\times(a^\\vee+b^\\vee))^*\\mathcal P_A$. All isomorphisms keep the axis trivializations, so the representing property of [lem-sfb-abelian-polarization-calculus] gives $(a+b)^\\vee=a^\\vee+b^\\vee$ as morphisms. For $b:B\\to C$, $((ba)\\times1)^*\\mathcal P_C\\cong(a\\times1)^*(1\\times b^\\vee)^*\\mathcal P_B=(1\\times b^\\vee)^*(a\\times1)^*\\mathcal P_B\\cong(1\\times a^\\vee b^\\vee)^*\\mathcal P_A$, so $(ba)^\\vee=a^\\vee b^\\vee$; $1^*\\cong1$ gives $1_A^\\vee=1_{A^\\vee}$. Additivity allows a unique $\\mathbf Q$-linear extension on $\\operatorname{Hom}\\otimes\\mathbf Q$ by [def-weil-pbc-module-tensor-product]; the composition and identity identities persist by expansion on pure tensors.",
+   "uses": [
+    "lem-sfb-abelian-polarization-calculus",
+    "lem-weil-pbc-module-pullback-tensor",
+    "def-pc-module-pullback",
+    "def-weil-pbc-module-tensor-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-abelian-varieties_AV.pdf",
+    "place": "I Remark 8.5, p.36; §9 opening, p.41."
+   }
+  },
+  {
+   "text": "Put $R=\\mathbf Z_\\ell$ and $U=\\varprojlim_n\\mu_{\\ell^n}(k)$. Choose a primitive $\\ell$th root $\\zeta_1$ by [lem-sc-primitive-root]. Inductively choose $\\zeta_{n+1}$ with $\\zeta_{n+1}^{\\ell}=\\zeta_n$, using algebraic closedness [def-weil-algebraic-closure]. Its order is $\\ell^{n+1}$: its $\\ell^{n+1}$st power is one and its $\\ell^n$th power equals $\\zeta_n^{\\ell^{n-1}}\\ne1$. Thus exponents identify each root group with $\\mathbf Z/\\ell^n$ and the power transition with reduction. By [lem-exc-padic-residue-universal-property], $R\\cong\\varprojlim_n\\mathbf Z/\\ell^n$: apply its universal property to the ring of compatible residues and its projections; the inverse is the residue map, and both composites are identities by coordinate equality and residue separation. Hence $U=R\\zeta$ is free of rank one, and $U\\otimes_R\\mathbf Q_\\ell$ is a one-dimensional line. The action is $(c u)_n=u_n^{c\\bmod\\ell^n}$; this construction is independent of the chosen basis.",
+   "uses": [
+    "lem-sc-primitive-root",
+    "def-weil-algebraic-closure",
+    "lem-exc-padic-residue-universal-property"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-abelian-varieties_AV.pdf",
+    "place": "I §13, pp.57–58, definition of Z_ell(1)."
+   }
+  },
+  {
+   "text": "Use [sk-def-av-tate] for the actual torsion-coordinate inverse limits. By [lem-sfb-finite-torsion-weil-pairing] the formula $E_A(x,y)_n=w_{A,n}(x_n,y_n)$ is a compatible root sequence, since $w_{A,n+1}(x_{n+1},y_{n+1})^\\ell=w_{A,n}(\\ell x_{n+1},\\ell y_{n+1})=w_{A,n}(x_n,y_n)$. Finite bilinearity makes this $R$-bilinear, with scalar $c$ acting at coordinate $n$ through its residue modulo $\\ell^n$. Using the tensor universal property [def-weil-pbc-module-tensor-product], extend it to $e_{A,\\ell}$ on the rational Tate modules by\n$$e_{A,\\ell}(x\\otimes a,y\\otimes b)=E_A(x,y)\\otimes ab.$$\nBalancing holds because $E_A(cx,y)=cE_A(x,y)=E_A(x,cy)$; extending separately in the two tensor factors gives a unique bilinear map.",
+   "uses": [
+    "sk-def-av-tate",
+    "lem-sfb-finite-torsion-weil-pairing",
+    "def-weil-pbc-module-tensor-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-abelian-varieties_AV.pdf",
+    "place": "I Lemma 13.1 and the inverse-limit definition, pp.57–58; rational scalar extension written out."
+   }
+  },
+  {
+   "text": "By [thm-av-final], the point groups of $A$ and $A^\\vee$ are divisible and their integral Tate modules are finite free. The projection $T_\\ell D\\to D[\\ell^n](k)$ is surjective for $D=A,A^\\vee$: start with a given level-$n$ point, lift it successively under $[\\ell]$ using divisibility, and define lower coordinates by multiplication by powers of $\\ell$. Suppose $E_A(x,y)=0$ for all integral $y$. At level $n$, projection surjectivity and perfectness of $w_{A,n}$ in [lem-sfb-finite-torsion-weil-pairing] force $x_n=0$; hence $x=0$. Interchanging the arguments proves the other vanishing implication. These implications persist after rationalization: finite freeness identifies each Tate module with $R^r$, so a rational vector is $\\ell^{-b}x$ for an integral $x$, and the maps from both the integral modules and $U\\cong R$ into their rationalizations are injective. If the rational vector pairs to zero with every rational vector, evaluating on integral vectors gives $E_A(x,y)=0$ and therefore $x=0$. Trivialize $U\\otimes\\mathbf Q_\\ell$ by the basis of step 3. Apply [lem-sfb-finite-dimensional-perfect-pairing], with finite-dimensionality from [thm-av-final], to get both isomorphisms to the linear duals. Composing with the inverse trivialization gives the required line-valued perfectness.",
+   "uses": [
+    "thm-av-final",
+    "lem-sfb-finite-torsion-weil-pairing",
+    "lem-sfb-finite-dimensional-perfect-pairing"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-abelian-varieties_AV.pdf",
+    "place": "I §13, pp.57–58, finite nondegeneracy and passage to rational Tate modules; I §7 p.34 for Tate ranks."
+   }
+  },
+  {
+   "text": "For an integral homomorphism $a:A\\to B$, [lem-sfb-finite-torsion-weil-pairing] gives $w_{B,n}(a x_n,y_n)=w_{A,n}(x_n,a^\\vee y_n)$ for each $n$. Thus equality of inverse-limit coordinates gives $E_B(T_\\ell(a)x,y)=E_A(x,T_\\ell(a^\\vee)y)$, with the componentwise maps of [sk-def-av-tate]. Extend to rational vectors by the formula of step 4. Componentwise addition gives $T_\\ell(a+b)=T_\\ell(a)+T_\\ell(b)$, so its rational action extends $\\mathbf Q$-linearly as in step 2. For a rational homomorphism $a=f/N$ with $N>0$, both sides of the adjoint identity are $N^{-1}$ times the identity for $f$; every element of $\\operatorname{Hom}\\otimes\\mathbf Q$ has such a common-denominator expression by the tensor relations [def-weil-pbc-module-tensor-product]. This proves functoriality with exactly the rational dual of step 2.",
+   "uses": [
+    "lem-sfb-finite-torsion-weil-pairing",
+    "sk-def-av-tate",
+    "def-weil-pbc-module-tensor-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-abelian-varieties_AV.pdf",
+    "place": "I Proposition 13.2(a), p.58; rational extension by bilinearity."
+   }
+  },
+  {
+   "text": "For $\\lambda=\\phi_L$, the finite skew identity in [lem-sfb-finite-torsion-weil-pairing] gives $E_A(x,T_\\ell(\\lambda)y)=-E_A(y,T_\\ell(\\lambda)x)$ at every coordinate (the target is now written additively). It persists on rational vectors. Taking $y=x$ gives $2e^L_\\ell(x,x)=0$, hence $e^L_\\ell(x,x)=0$ because $\\mathbf Q_\\ell$ has characteristic zero [def-weil-l-adic-numbers]. This includes $\\ell=2$. If $\\lambda$ is an isogeny, [lem-sfb-simple-isogeny-decomposition] supplies $g$ and $N>0$ with $g\\lambda=[N]_A$ and $\\lambda g=[N]_{A^\\vee}$. On rational Tate modules their componentwise actions therefore have composites $N\\,1$, so $V_\\ell(\\lambda)$ has inverse $N^{-1}V_\\ell(g)$. Perfectness of $e_{A,\\ell}$ now gives nondegeneracy of $e^L_\\ell$: vanishing in the first variable can be tested on every vector of $V_\\ell A^\\vee$ by this surjectivity; vanishing in the second forces $V_\\ell(\\lambda)y=0$ and then $y=0$. No assumption that $N$ or the isogeny degree is prime to $\\ell$ is needed.",
+   "uses": [
+    "lem-sfb-finite-torsion-weil-pairing",
+    "def-weil-l-adic-numbers",
+    "lem-sfb-simple-isogeny-decomposition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-abelian-varieties_AV.pdf",
+    "place": "I Proposition 13.2(d), p.58; Remark 8.6, p.36 (isogeny multiple inverse)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-module-pullback",
+  "def-weil-algebraic-closure",
+  "def-weil-l-adic-numbers",
+  "def-weil-pbc-module-tensor-product",
+  "lem-exc-padic-residue-universal-property",
+  "lem-sc-av-commutative",
+  "lem-sc-primitive-root",
+  "lem-sc-rigidity",
+  "lem-sfb-abelian-polarization-calculus",
+  "lem-sfb-abelian-space-poincare-calculus",
+  "lem-sfb-finite-dimensional-perfect-pairing",
+  "lem-sfb-finite-torsion-weil-pairing",
+  "lem-sfb-simple-isogeny-decomposition",
+  "lem-weil-pbc-module-pullback-tensor",
+  "lem-weil-separably-closed-geometrically-connected",
+  "sbc-lem-smooth-geometrically-reduced",
+  "sk-def-av-tate",
+  "thm-av-final"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/milne-abelian-varieties_AV.pdf",
+  "place": "Chapter I Remark 8.5, §9 opening, §13 pp.57–58; coordinate and rationalization details supplied in steps."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "WeilPairing|Rosati|AbelianVariety|abelian.variety",
+   "results": "0 hits; top: ",
+   "date": "2026-10-23",
+   "verdict": "no match: abstract perfect pairings and root pairings do not construct the geometric Weil pairing or its compatibility with dual abelian homomorphisms"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The Weil pairing between the Tate modules of an abelian variety and its dual is perfect and functorial",
+   "results": "8 hits; top: LinearMap.IsPerfPair.dualEval, LinearMap.IsPerfPair, LinearMap.IsPerfectCompl, LinearMap.IsPerfPair.mk, LinearMap.IsPerfPair.congr, LinearMap.dualPairing_nondegenerate, LinearMap.IsPerfPair.of_injective, LinearMap.IsPerfPair.compl₁₂",
+   "date": "2026-10-23",
+   "verdict": "no match: abstract perfect pairings and root pairings do not construct the geometric Weil pairing or its compatibility with dual abelian homomorphisms"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"WeilPairing\"",
+   "results": "0 hits; top: ",
+   "date": "2026-10-23",
+   "verdict": "no match: abstract perfect pairings and root pairings do not construct the geometric Weil pairing or its compatibility with dual abelian homomorphisms"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a polarized abelian variety the prime to characteristic Weil pairing on the rational Tate module is perfect alternating and the dual homomorphism is adjoint",
+   "results": "8 hits; top: RootPairing.PolarizationIn, RootPairing.PolarizationIn_eq, RootPairing.toLinearMap_apply_PolarizationIn, RootPairing.CoPolarizationIn, RootPairing.Polarization, RootPairing.PolarizationIn_apply, RootPairing.isPerfPair_toLinearMap, RootPairing.Hom.weight_coweight_transpose",
+   "date": "2026-10-23",
+   "verdict": "no match: abstract perfect pairings and root pairings do not construct the geometric Weil pairing or its compatibility with dual abelian homomorphisms"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For abelian varieties pullback on dual varieties is an additive contravariant functor and the polarization induces a nondegenerate alternating l-adic pairing",
+   "results": "8 hits; top: AlgebraicGeometry.Scheme.Modules.instAdditivePullback, RootPairing.CoPolarizationIn, RootPairing.PolarizationIn_eq, RootPairing.polarizationEquiv_apply, RootPairing.polarizationEquiv_toLinearMap, RootPairing.CoPolarization_eq, AlgebraicGeometry.Scheme.Modules.pseudofunctor_map_l, RootPairing.CoPolarization",
+   "date": "2026-10-23",
+   "verdict": "no match: abstract perfect pairings and root pairings do not construct the geometric Weil pairing or its compatibility with dual abelian homomorphisms"
+  },
+  {
+   "tool": "leansearch",
+   "query": "For an abelian variety the finite Weil pairing on prime to characteristic torsion is perfect bilinear and compatible with multiplication",
+   "results": "8 hits; top: LinearMap.IsPerfPair.of_injective, LinearMap.IsPerfPair.compl₁₂, LinearMap.IsPerfPair.dualEval, LinearMap.IsPerfPair.congr, LinearMap.IsPerfPair, LinearMap.IsPerfPair.mk, LinearMap.IsPerfectCompl, RootPairing.isPerfPair_toLinearMap",
+   "date": "2026-10-23",
+   "verdict": "no match for the item: finite abstract perfect pairings and root systems do not give its geometric rational Tate pairing and duality clauses"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finite torsion Weil pairing abelian variety dual functoriality and inverse limit compatibility",
+   "results": "8 hits; top: RootPairing.CoPolarizationIn, RootDatum, RootPairing.Hom.weight_coweight_transpose_apply, RootPairing.Hom.weight_coweight_transpose, RootPairing.CoPolarizationIn_eq, CharacterModule.dual, CharacterModule.dual_apply, RootPairing.Hom.coroot_coweightMap",
+   "date": "2026-10-23",
+   "verdict": "no match for the item: finite abstract perfect pairings and root systems do not give its geometric rational Tate pairing and duality clauses"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"WeilPairing\"",
+   "results": "0 hits; top: ",
+   "date": "2026-10-23",
+   "verdict": "no match for the item: finite abstract perfect pairings and root systems do not give its geometric rational Tate pairing and duality clauses"
+  },
+  {
+   "tool": "grep",
+   "query": "AbelianVariety|PicardVariety|AlgebraicallyTrivial|WeilPairing",
+   "results": "0 hits; top: ",
+   "date": "2026-10-23",
+   "verdict": "no match for the item: finite abstract perfect pairings and root systems do not give its geometric rational Tate pairing and duality clauses"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-rosati-trace-positive",
+  "date": "2026-10-23",
+  "group": "Q11"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Smooth-curve abelian level rigidification. Geometric stabilizer input for the smooth full-level cover; restrict to geometric curves before passing to families. Auxiliary input: Prime-to-characteristic level rigidity for polarized abelian varieties. Supporting input in the level-rigidity proof: Chapter I, Proposition 14.4(a), printed p.62; polarization convention in I §11, printed p.53. Supporting fact for Proposition 14.4(a): Chapter I §14, printed p.61 (Rosati formula and involution), Theorem 14.3, printed p.62 (positive trace form); §11 p.53 (polarization isogeny); Proposition 10.20, printed pp.50–52 (trace on Tate modules). Supporting input: Chapter I, Remark 8.5, printed p.36; §9 opening, p.41; §13 pp.57–58, Lemma 13.1 and Proposition 13.2(a),(d): Weil pairings, passage to the inverse limit, functoriality and skew symmetry; nondegeneracy from the perfect finite Weil pairings and an isogeny on rational Tate modules.",
+   "via": [
+    "lem-sfb-rosati-trace-positive",
+    "lem-sfb-polarized-abelian-automorphisms-finite",
+    "lem-sfb-polarized-abelian-odd-level-rigidity",
+    "lem-sfb-geometric-curve-level-faithfulness",
+    "lem-sfb-smooth-curve-abelian-level-rigidification",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-abelian-weil-pairing",
+  "worker": "stage1",
+  "summary": "Kept the statement. Derived additive duality from the universal primitive-family identity; constructed the Tate line and rational pairing coordinatewise from finite pairings; proved two-sided nondegeneracy, rational adjunction, alternation including ell=2, and isogeny nondegeneracy. Two geometric statement-only nodes and one exact Mathlib linear-algebra leaf. Maintainer review: the primitive-family node was a specialization of the existing lem-sfb-abelian-space-poincare-calculus and is dropped; step 1 now identifies the two dual constructions as groups (Yoneda plus rigidity), which supplies the missing link between the group law of the dual and tensor products used for additivity.",
+  "blueprint": "Latest direct-images proof (3), inherited alteration/level-rigidity/Rosati supporting chain; the present prerequisite realizes Milne I 8.5 and 13.1–13.2 through finite torsion and rationalization. The imported ancestor chain has no blueprint_kind terminal: blueprint_refs.py ancestor returns None; inherited null ancestry is retained.",
+  "tool_uses": [
+   {
+    "node": "thm-av-final",
+    "why": "Generic geometric torsion divisibility and Tate freeness used to lift torsion coordinates and to test rational vanishing; no statement of this six-functor unit gives these abelian-variety facts."
+   },
+   {
+    "node": "lem-sc-primitive-root",
+    "why": "Generic prime-to-characteristic root-group calculation supplies a basis for the actual root tower over arbitrary algebraically closed k."
+   },
+   {
+    "node": "lem-weil-pbc-module-pullback-tensor",
+    "why": "Generic tensor-pullback compatibility used to pull back the primitive-family identity; the unit gives no alternative ordinary invertible-sheaf tensor formula."
+   },
+   {
+    "node": "lem-sc-rigidity",
+    "why": "Generic rigidity lemma (morphism constant on one slice factors through the projection) used to show the Yoneda identification of the two dual constructions is a group isomorphism; no node of this unit states it."
+   },
+   {
+    "node": "lem-sc-av-commutative",
+    "why": "Generic commutativity of abelian varieties, a hypothesis of the relative Poincare node; no node of this unit states it."
+   },
+   {
+    "node": "sbc-lem-smooth-geometrically-reduced",
+    "why": "Generic: smooth over a field implies geometrically reduced, a hypothesis of the rigidity lemma and of the fibre condition."
+   },
+   {
+    "node": "lem-weil-separably-closed-geometrically-connected",
+    "why": "Generic: over a separably closed field connected equals geometrically connected, a hypothesis of the rigidity lemma and of the fibre condition."
+   }
+  ]
+ },
+ "tool_uses": [
+  "thm-av-final",
+  "lem-sc-primitive-root",
+  "lem-weil-pbc-module-pullback-tensor",
+  "lem-sc-rigidity",
+  "lem-sc-av-commutative",
+  "sbc-lem-smooth-geometrically-reduced",
+  "lem-weil-separably-closed-geometrically-connected"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q108-793aa93a7",
+  "group": "Q108",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q108-793aa93a7 (reviewer sub-agent of L); spot-checked: Read Milne I Prop 8.4/Rem 8.5 (p.36), Rem 8.6, §13 pp.57-58 (construction of e_m, Lemma 13.1 e_{mn}(a,a')^n=e_m(na,na') giving the exponent-ℓ transition, Prop 13.2(a) adjunction, 13.2(d) skew for every L). The item statement matches and is not weakened. New nodes: (1) lem-sfb-finite-dimensional-perfect-pairing = exact leaf IsPerfPair.of_injective (PerfectPairing/Basic.lean:116, class at 40-42; field plus FiniteDimensional M plus injectivity of p and p.flip); no duplicate leaf. (2) lem-sfb-finite-torsion-weil-pairing is self-contained and statement-only. Its perfectness, transition, finite adjunction and finite skew all match §13. It is strictly below the item: the rational line, rationalisation, alternation and isogeny nondegeneracy stay in the item's steps. The DAG hits for Weil/perfect pairing are only cohomological, so it is not a duplicate. (3) lem-sfb-picard-zero-primitive-family is DROPPED (C5): the existing same-unit node lem-sfb-abelian-space-poincare-calculus (Q131, on the base) with S=Spec k states the universal identity (m_A,1)^*P≅p13^*P⊗p23^*P, which is all the old step 1 used. Fault repaired (C3/E5): old step 1 went from ((a+b)×1)^*P_B≅(a×1)^*P_B⊗(b×1)^*P_B straight to (a+b)^∨=a^∨+b^∨. That needs the group law of A^∨ to correspond to ⊗, and polarization-calculus does not state it. The fix adds a new step 1. It checks the hypotheses of the space node (lem-sc-av-commutative, sbc-lem-smooth-geometrically-reduced, lem-weil-separably-closed-geometrically-connected). It builds the Yoneda isomorphism ψ between the two duals, with ψ(0)=0. It applies lem-sc-rigidity to ψ^{-1}(ψ(u+v)-ψu-ψv) to show ψ is a homomorphism. New step 2 pulls the first biadditivity back along (a,b,1) and the second along (1,a^∨,b^∨); composition and identity cases are written out. Old steps 2-6 are renumbered 3-7; their mathematics checked and unchanged: primitive-root tower order, Z_ℓ≅lim Z/ℓ^n via the residue universal property, coordinatewise E_A, perfectness from thm-av-final (c)(d) by projection surjectivity and integral→rational injectivity, adjunction for f/N, finite skew giving 2e=0 and so e=0 in char 0 (including ℓ=2), and the isogeny inverse from the last sentence of simple-isogeny-decomposition. Edge cases checked: A=0, L trivial, ℓ=2, char k=2, ℓ dividing the degree. Accepted the 3 declared off-unit tools; the 4 generic tools added by the fix are in split_report.tool_uses. Batch-5: simple-isogeny→lem-trf-smooth-composition, thm-av-final→def-trf-schematically-dense-open and polarization-calculus→lem-trf-projective-bundle-quotient-geometry are all generic geometry or definitions, not part of the trace formula or Poincaré duality. The space node reaches only def-trf-algebraic-space, a general definition. The added tools reach neither chapter (BFS) and no new edge reaches the item.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.AbelianVariety.WeilPairing",
+  "declaration": "AlgebraicGeometry.IsAbelianVariety.exists_functorial_weilPairing",
+  "declarations": [
+   "AlgebraicGeometry.IsAbelianVariety.exists_functorial_weilPairing"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/AbelianVariety/WeilPairing.lean",
+  "statement": "theorem IsAbelianVariety.exists_functorial_weilPairing (k : Type u) [Field k] [IsAlgClosed k] (ℓ : ℕ) [Fact ℓ.Prime] (hℓ : ℓ ≠ ringChar k) : ∃ (d : ∀ A B : AbelianVarietyWithDual k, abelianHom A.variety B.variety →+ abelianHom B.datum.dual A.datum.dual) (dQ : ∀ A B : AbelianVarietyWithDual k, abelianRationalHom A.variety B.variety →ₗ[ℚ] abelianRationalHom B.datum.dual A.datum.dual) (cQ : ∀ A B C : AbelianVarietyWithDual k, abelianRationalHom A.variety B.variety →ₗ[ℚ] abelianRationalHom B.variety C.variety →ₗ[ℚ] abelianRationalHom A.variety C.variety) (cD : ∀ A B C : AbelianVarietyWithDual k, abelianRationalHom C.datum.dual B.datum.dual →ₗ[ℚ] abelianRationalHom B.datum.dual A.datum.dual →ₗ[ℚ] abelianRationalHom C.datum.dual A.datum.dual), (∀ (A B : AbelianVarietyWithDual k) (f : abelianHom A.variety B.variety) (g : abelianHom B.datum.dual A.datum.dual), A.dualHomClassifies B f g ↔ g = d A B f) ∧ (∀ (A B C : AbelianVarietyWithDual k) (f : abelianHom A.variety B.variety) (g : abelianHom B.variety C.variety), d A C (Additive.ofMul (f.toMul ≫ g.toMul)) = Additive.ofMul ((d B C g).toMul ≫ (d A B f).toMul)) ∧ (∀ A : AbelianVarietyWithDual k, d A A (Additive.ofMul (𝟙 (Grp.mk A.variety))) = Additive.ofMul (𝟙 (Grp.mk A.datum.dual))) ∧ (∀ (A B : AbelianVarietyWithDual k) (q : ℚ) (f : abelianHom A.variety B.variety), dQ A B (q ⊗ₜ[ℤ] f) = q ⊗ₜ[ℤ] d A B f) ∧ (∀ (A B C : AbelianVarietyWithDual k) (q r : ℚ) (f : abelianHom A.variety B.variety) (g : abelianHom B.variety C.variety), cQ A B C (q ⊗ₜ[ℤ] f) (r ⊗ₜ[ℤ] g) = (q * r) ⊗ₜ[ℤ] Additive.ofMul (f.toMul ≫ g.toMul)) ∧ (∀ (A B C : AbelianVarietyWithDual k) (q r : ℚ) (g : abelianHom C.datum.dual B.datum.dual) (f : abelianHom B.datum.dual A.datum.dual), cD A B C (q ⊗ₜ[ℤ] g) (r ⊗ₜ[ℤ] f) = (q * r) ⊗ₜ[ℤ] Additive.ofMul (g.toMul ≫ f.toMul)) ∧ (∀ (A B C : AbelianVarietyWithDual k) (f : abelianRationalHom A.variety B.variety) (g : abelianRationalHom B.variety C.variety), dQ A C (cQ A B C f g) = cD A B C (dQ B C g) (dQ A B f)) ∧ (∀ A : AbelianVarietyWithDual k, dQ A A ((1 : ℚ) ⊗ₜ[ℤ] Additive.ofMul (𝟙 (Grp.mk A.variety))) = (1 : ℚ) ⊗ₜ[ℤ] Additive.ofMul (𝟙 (Grp.mk A.datum.dual))) ∧ Nonempty (AddCommGroup.rationalTateModule ℓ (Additive kˣ) ≃ₗ[ℚ_[ℓ]] ℚ_[ℓ]) ∧ ∃ (v : ∀ A B : AbelianVarietyWithDual k, abelianRationalHom A.variety B.variety →+ (rationalTateModule ℓ A.variety →ₗ[ℚ_[ℓ]] rationalTateModule ℓ B.variety)) (vD : ∀ A B : AbelianVarietyWithDual k, abelianRationalHom B.datum.dual A.datum.dual →+ (rationalTateModule ℓ B.datum.dual →ₗ[ℚ_[ℓ]] rationalTateModule ℓ A.datum.dual)) (e : ∀ A : AbelianVarietyWithDual k, rationalTateModule ℓ A.variety →ₗ[ℚ_[ℓ]] rationalTateModule ℓ A.datum.dual →ₗ[ℚ_[ℓ]] AddCommGroup.rationalTateModule ℓ (Additive kˣ)), (∀ (A B : AbelianVarietyWithDual k) (q : ℚ) (f : abelianHom A.variety B.variety), v A B (q ⊗ₜ[ℤ] f) = (q : ℚ_[ℓ]) • rationalTateModuleMap f.toMul.hom.hom) ∧ (∀ (A B : AbelianVarietyWithDual k) (q : ℚ) (f : abelianHom B.datum.dual A.datum.dual), vD A B (q ⊗ₜ[ℤ] f) = (q : ℚ_[ℓ]) • rationalTateModuleMap f.toMul.hom.hom) ∧ (∀ A : AbelianVarietyWithDual k, Function.Bijective (e A) ∧ Function.Bijective (e A).flip) ∧ (∀ (A B : AbelianVarietyWithDual k) (f : abelianRationalHom A.variety B.variety) (x : rationalTateModule ℓ A.variety) (y : rationalTateModule ℓ B.datum.dual), e B (v A B f x) y = e A x (vD A B (dQ A B f) y)) ∧ (∀ (A : AbelianVarietyWithDual k) (L : A.variety.left.Modules), L.IsInvertible → ∀ φ : A.variety ⟶ A.datum.dual, ClassifiesAbelianDifference A.datum L φ → ∃ hφ : IsMonHom φ, (∀ x : rationalTateModule ℓ A.variety, e A x (@rationalTateModuleMap k _ ℓ _ A.variety _ _ A.datum.dual _ _ φ hφ x) = 0) ∧ (IsIsogeny φ → (∀ x : rationalTateModule ℓ A.variety, (∀ y : rationalTateModule ℓ A.variety, e A x (@rationalTateModuleMap k _ ℓ _ A.variety _ _ A.datum.dual _ _ φ hφ y) = 0) → x = 0) ∧ (∀ y : rationalTateModule ℓ A.variety, (∀ x : rationalTateModule ℓ A.variety, e A x (@rationalTateModuleMap k _ ℓ _ A.variety _ _ A.datum.dual _ _ φ hφ y) = 0) → y = 0)))",
+  "branch": "newtargets-dag",
+  "by": "Q33",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-06a19816c",
+  "group": "Q33",
+  "result": "pass",
+  "note": "Re-delivery of 87cab2c205a9 (returned H4/H12/H9). RationalDualityData now public-imports the landed RationalHom (def-sfb-abelian-rational-hom, N9) and declares only AbelianVarietyWithDual + dualHomClassifies (using abelianHom). The item changes only abelianIntegralHom->abelianHom and adds owner public imports. The new node's statement/stmt_deps/declarations are narrowed and cite def-sfb-abelian-rational-hom. Item stmt_deps add rational-hom, dual-poincare-datum and sk-d-ab-tate (all on base; base 04:26 UTC > landing 04:12 UTC). Both lean.statement fields verbatim; no duplicate names in live lean; no lines >100; report has Worker report + Second reading by Q33. Item node otherwise identical to live. Math re-checked vs node and Milne I 8.5/§9/§13: d pinned by the Poincare-pullback iff; dQ/cQ/cD/v/vD pinned on pure tensors; Q_l(1) = rationalTateModule l (Additive k^x), 1-dim; e existential as in the node, bijective + flip bijective, rational adjoint; alternation for every invertible L via ClassifiesAbelianDifference; two-sided nondegeneracy under IsIsogeny. Edge cases A=0, l=2, char 0, trivial L, l | deg. No compile (no file changed); relied on the worker's per-file compiles and joint-import probe with PolarizationCalculusOverField."
+ }
+}

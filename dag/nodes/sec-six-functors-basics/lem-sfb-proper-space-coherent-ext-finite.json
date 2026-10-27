@@ -1,0 +1,306 @@
+{
+ "id": "lem-sfb-proper-space-coherent-ext-finite",
+ "kind": "statement",
+ "title": "Finiteness of global Ext between coherent complexes on proper algebraic spaces",
+ "statement": "Let $A$ be a commutative Noetherian ring [def-weil-pbc-noetherian-ring] and $X$ a proper algebraic space over $\\operatorname{Spec}A$ [def-trf-algebraic-space, def-weil-affine-spectrum]. Proper means separated, of finite type, and universally closed: the diagonal is a closed immersion, the morphism is quasi-compact and locally of finite type on etale scheme charts [def-weil-finite-type-morphism], and every algebraic-space base change is closed on underlying spaces. On the small etale site of $X$, work in $D(\\mathcal O_X)$ [def-weil-sheaf-of-modules-category, def-weil-abstract-derived-category]. A module sheaf is coherent if on every Noetherian affine etale chart it is associated to a finitely generated module; association on a chart $\\operatorname{Spec}R$ gives the etale sheaf with value $B\\otimes_RN$ on affine etale charts $\\operatorname{Spec}B\\to\\operatorname{Spec}R$. Let $E$ have coherent cohomology vanishing in all sufficiently large degrees, and let $F$ have coherent cohomology vanishing in all sufficiently negative degrees. For every integer $n$ the $A$-module\n$$\\operatorname{Ext}^n_{\\mathcal O_X}(E,F):=\\operatorname{Hom}_{D(\\mathcal O_X)}(E,F[n])$$\nis finitely generated. The $A$-action is induced by the structure morphism $X\\to\\operatorname{Spec}A$.",
+ "source": {
+  "document": "literature/stacks-project/spaces-perfect.tex",
+  "place": "Tag 0D0T (lemma-ext-finite), for K in D^-_Coh and L in D^+_Coh."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-noetherian-ring",
+  "def-trf-algebraic-space",
+  "def-weil-affine-spectrum",
+  "def-weil-finite-type-morphism",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-abstract-derived-category",
+  "def-sfb-space-morphism-properties",
+  "def-sfb-space-small-ringed-model",
+  "def-sfb-space-derived-module-calculus",
+  "def-sfb-space-affine-global-sections",
+  "def-trf-space-quasi-coherent-module",
+  "def-weil-finitely-generated-module"
+ ],
+ "proof": [
+  {
+   "text": "Put $Y=\\operatorname{Spec}A$ and let $f:X\\to Y$ be the structure morphism. The single affine chart makes $Y$ locally Noetherian, and [lem-weil-pbc-affine-scheme-qcqs] makes $Y$ quasi-compact. To check local Noetherianity of $X$, take an etale scheme atlas and refine it to affine charts $U_i=\\operatorname{Spec}B_i$ on which the map to $Y$ is given by a finitely generated $A$-algebra, as in the definition of locally finite type on charts. Each $B_i$ is Noetherian by [lem-weil-pbc-finite-type-algebra-noetherian]. These charts form a locally Noetherian atlas, which is precisely local Noetherianity of $X$. This is the chartwise argument of Tag 04ZK, not an extra assertion about a specified global scheme cover.",
+   "uses": [
+    "def-trf-algebraic-space",
+    "def-weil-finite-type-morphism",
+    "lem-weil-pbc-finite-type-algebra-noetherian",
+    "pqf-def-locnoeth",
+    "lem-weil-pbc-affine-scheme-qcqs"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-morphisms.tex",
+    "place": "Tag 04ZK (lemma-locally-finite-type-locally-noetherian), proof by scheme charts; algebra.tex Tag 00FN."
+   }
+  },
+  {
+   "text": "Form $G=R\\mathcal Hom_{\\mathcal O_X}(E,F)$. The local Noetherianity just proved, the coherent cohomology of both arguments, the upper cohomological bound on $E$, and the lower bound on $F$ are exactly the hypotheses of [lem-sfb-space-coherent-derived-internal-hom]. Hence $G$ has coherent cohomology and lies in $D^+(\\mathcal O_X)$. No perfectness of $E$ and no bound above on $F$ is used.",
+   "uses": [
+    "lem-sfb-space-coherent-derived-internal-hom"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-perfect.tex",
+    "place": "Tags 0D0T (lemma-ext-finite), proof, and 0D0S (lemma-coherent-internal-hom)."
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-proper-space-coherent-derived-image] to $f:X\\to Y$ and $G$. The target is the Noetherian scheme $Y=\\operatorname{Spec}A$, $f$ is proper by the item hypothesis, and $G$ is bounded below with coherent cohomology by step 2. Thus $T=Rf_*G$ is bounded below with coherent cohomology on $Y_{\\mathrm{et}}$. In the cited Stacks lemma the auxiliary base scheme is taken to be $S=Y$, so the support condition concerns properness over the actual target.",
+   "uses": [
+    "lem-sfb-proper-space-coherent-derived-image"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-perfect.tex",
+    "place": "Tags 0D0T and 0D0R (lemma-direct-image-coherent-bdd-below), with S=Y=Spec(A)."
+   }
+  },
+  {
+   "text": "By the closed structure of [lem-sf-ringed-derived-closed-symmetric-monoidal], for every $L\\in D(\\mathcal O_X)$ the functor $R\\mathcal Hom_{\\mathcal O_X}(L,-)$ is right adjoint to $-\\otimes^{\\mathbf L}_{\\mathcal O_X}L$; composing with its symmetry $\\sigma$, $M\\mapsto R\\mathcal Hom_{\\mathcal O_X}(E,M)$ is a right adjoint $H_E$ of $E\\otimes^{\\mathbf L}_{\\mathcal O_X}-$, as the sections model requires. Use [lem-sfb-derived-internal-hom-sections-model] for this $H_E$ on $(X_{\\mathrm{et}},\\mathcal O_X)$: for every integer $n$ it gives $\\operatorname{Hom}_{D(\\mathcal O_X)}(E,F[n])\\cong H^nR\\Gamma(X,G)$. Let $h$ be the morphism from $(Y_{\\mathrm{et}},\\mathcal O_Y)$ to the point ringed by $A=\\Gamma(Y,\\mathcal O_Y)$. Its module direct image is global sections with this $A$-action, and $(hf)_*=h_*f_*$ is global sections on $X$ with its structure-morphism action. Apply [lem-weil-pbc-ringed-topoi-derived-pushforward-composition] to $f,h$. More explicitly, take a K-injective representative $I$ of $G$ and a K-injective resolution $j:f_*I\\to J$ on $Y$. The cited normalization says that $h_*j:\\Gamma(X,I)\\to\\Gamma(Y,J)$ is a quasi-isomorphism representing $\\kappa_{h,f,G}$. Both complexes and this map carry the $A$-action through $h$, so this is the comparison $R\\Gamma(X,G)\\cong R\\Gamma(Y,T)$ in $D(A)$, with $T=Rf_*G$. All sites are small in a common containing universe. Taking cohomology identifies the desired Ext group with $H^nR\\Gamma(Y,T)$; compatibility of the first identification with scalars is checked in step 6.",
+   "uses": [
+    "lem-sf-ringed-derived-closed-symmetric-monoidal",
+    "lem-sfb-derived-internal-hom-sections-model",
+    "lem-weil-pbc-ringed-topoi-derived-pushforward-composition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 08JA (lemma-section-RHom-over-U), with shifts, and Tag 0D6E (lemma-derived-pushforward-composition); these realize the displayed equalities in 0D0T."
+   }
+  },
+  {
+   "text": "Choose $a\\in\\mathbf Z$ with $\\mathcal H^q(T)=0$ for $q<a$, and a bounded-below representative, using [def-sbc-standard-tstructure-derived-category]. Module sheaves on the small ringed site and $A$-modules are Grothendieck abelian by [lem-pur-ringed-site-grothendieck-abelian] and [lem-weil-pbc-ring-modules-grothendieck-abelian]. Global sections is additive and left exact, since kernels and finite products of sheaves are computed on sections. Therefore [thm-sp-truncation-e2], applied to this functor with values in $A$-modules, gives the convergent spectral sequence $E_2^{p,q}=H^p(Y_{\\mathrm{et}},\\mathcal H^q(T))\\Rightarrow H^{p+q}R\\Gamma(Y,T)$ with $p\\geq0,q\\geq a$. For fixed total degree $n$, only $0\\leq p\\leq n-a$ can contribute. Its abutment filtration satisfies $F^0H^n=H^n$, $F^pH^n=0$ for $p\\geq n-a+1$, and $F^pH^n/F^{p+1}H^n\\cong E_\\infty^{p,n-p}$. Each $\\mathcal H^q(T)$ is, on the affine chart $Y$ itself, the etale sheaf associated to a finite $A$-module $M_q$, by the coherence convention. Its values $B\\otimes_AM_q$ on affine etale $\\operatorname{Spec}B\\to Y$ are those of the associated sheaf $(\\widetilde{M_q})_{\\mathrm{et}}$, so it is the etale sheaf of a quasi-coherent module and [lem-sc-etale-affine-qcoherent] kills its abelian etale cohomology in positive degrees. The derived functors $R^p\\Gamma$ in the spectral sequence are computed by injective module resolutions; after forgetting the $A$-action they are $R^p$ of evaluation at the terminal object $Y$ on $\\Mod(\\mathcal O_Y)$, which has enough injectives by [lem-sp-grothendieck-enough-injectives], and [lem-pe-ringed-site-derived-evaluation-slice] with $W=Y$ (whose slice site is $Y_{\\mathrm{et}}$) identifies them with abelian etale cohomology of the underlying abelian sheaf. Hence $E_2^{p,q}=0$ for $p>0$, while $E_2^{0,q}=\\Gamma(Y,\\mathcal H^q(T))=M_q$.",
+   "uses": [
+    "def-sbc-standard-tstructure-derived-category",
+    "lem-pur-ringed-site-grothendieck-abelian",
+    "lem-weil-pbc-ring-modules-grothendieck-abelian",
+    "thm-sp-truncation-e2",
+    "lem-sc-etale-affine-qcoherent",
+    "lem-sp-grothendieck-enough-injectives",
+    "lem-pe-ringed-site-derived-evaluation-slice"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 015J (lemma-two-ss-complex-functor), second spectral sequence; spaces-cohomology.tex Tag 07UB (lemma-coherent-Noetherian); etale affine acyclicity as in lem-sc-etale-affine-qcoherent."
+   }
+  },
+  {
+   "text": "Only the column $p=0$ survives in step 5: every differential into or out of that column has zero other endpoint. Put $H^n=H^nR\\Gamma(Y,T)$. For $n\\geq a$, start at the zero filtration term $F^{n-a+1}H^n$ and descend: each positive-$p$ graded piece vanishes, hence $F^pH^n=F^{p+1}H^n$ for $p\\geq1$ and $F^1H^n=0$. Thus $H^n=F^0H^n/F^1H^n\\cong E_\\infty^{0,n}=E_2^{0,n}=M_n$. For $n<a$, the bound $F^pH^n=0$ for $p\\geq n-a+1$ already applies at $p=0$, so $H^n=0=M_n$. These are isomorphisms of $A$-modules: step 5 takes place in $A$-modules and the Leray comparison in step 4 is in $D(A)$. For scalar compatibility in the global-Hom comparison, represent $F$ by a K-injective complex $J$. For each $r\\in A$, multiplication $r\\,\\mathrm{id}_J$ is a chain map representing $r\\,\\mathrm{id}_F$. The naturality in K-injective target complexes stated in [lem-sfb-derived-internal-hom-sections-model] identifies postcomposition by this map with multiplication by $r$ on $\\operatorname{Hom}^\\bullet(E^\\bullet,J)$. Thus the induced isomorphism on cohomology respects exactly the structure-morphism action on Ext. Hence step 4 identifies the desired Ext module with the finite module $M_n$. Transporting a finite generating set along this $A$-linear isomorphism proves the claim.",
+   "uses": [
+    "lem-sfb-derived-internal-hom-sections-model"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-perfect.tex",
+    "place": "Tag 0D0T (lemma-ext-finite), conclusion, with the single-column degeneration and scalar compatibility spelled out."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-trf-algebraic-space",
+  "def-weil-finite-type-morphism",
+  "lem-weil-pbc-finite-type-algebra-noetherian",
+  "pqf-def-locnoeth",
+  "lem-weil-pbc-affine-scheme-qcqs",
+  "lem-sfb-space-coherent-derived-internal-hom",
+  "lem-sfb-proper-space-coherent-derived-image",
+  "lem-sf-ringed-derived-closed-symmetric-monoidal",
+  "lem-sfb-derived-internal-hom-sections-model",
+  "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
+  "def-sbc-standard-tstructure-derived-category",
+  "lem-pur-ringed-site-grothendieck-abelian",
+  "lem-weil-pbc-ring-modules-grothendieck-abelian",
+  "thm-sp-truncation-e2",
+  "lem-sc-etale-affine-qcoherent",
+  "lem-sp-grothendieck-enough-injectives",
+  "lem-pe-ringed-site-derived-evaluation-slice"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/spaces-perfect.tex",
+  "place": "Tag 0D0T (lemma-ext-finite), proof; affine final step expanded by 015J and affine etale acyclicity."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Ext groups between bounded coherent complexes on a proper algebraic space over a noetherian ring are finite modules",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"CategoryTheory.Abelian.Ext\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/Ext/Basic\", \"type\": \"{C : Type u} →\\n  [inst : CategoryTheory.Category.{v, u} C] →\\n    [inst_1 : CategoryTheory.Abelian C] → [CategoryTheory.HasExt C] → C → C → ℕ → Type w\", \"doc\": \"For objects $ X $ and $ Y $ in an abelian category $ \\\\mathcal{C} $, the Ext group in degree $ n $ is defined as the hom-set in the derived category between the $ n $-shifted single-term cochain comple\"}\n  {\"name\": \"instHasExtModuleCatOfSmall\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Ext/HasExt\", \"type\": \"∀ (R : Type u) [inst : Ring R] [Small.{v, u} R], CategoryTheory.HasExt (ModuleCat R)\", \"doc\": \"For any small ring $ R $, the category of left $ R $-modules satisfies the property that localized hom-sets between single-term cochain complexes concentrated at degree 0 (with respect to quasi-isomor\"}\n  {\"name\": \"CategoryTheory.Abelian.Ext.instModule\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/Ext/Linear\", \"type\": \"{R : Type t} →\\n  [inst : Ring R] →\\n    {C : Type u} →\\n      [inst_1 : CategoryTheory.Category.{v, u} C] →\\n        [inst_2 : CategoryTheory.Abelian C] →\\n          [CategoryTheory.Linear R C] →\\n            [inst_4 : CategoryTheory.HasExt C] → {X Y : C} → {n : ℕ} → Module R (CategoryTheory.Abelian.Ext \", \"doc\": \"For objects $X$ and $Y$ in an abelian category $\\\\mathcal{C}$, the Ext group $\\\\operatorname{Ext}^n(X,Y)$ in degree $n$ is equipped with a canonical $R$-module structure. This structure arises from the \"}\n  {\"name\": \"CategoryTheory.IsGrothendieckAbelian.hasExt\", \"module\": \"Mathlib/CategoryTheory/Abelian/GrothendieckCategory/HasExt\", \"type\": \"∀ (C : Type u) [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Abelian C]\\n  [CategoryTheory.IsGrothendieckAbelian.{w, v, u} C], CategoryTheory.HasExt C\", \"doc\": \"Every Grothendieck abelian category has the property that the localized hom-sets between single-term cochain complexes in its derived category form small sets, ensuring the derived category has well-d\"}\n  {\"name\": \"CategoryTheory.hasExt_of_hasDerivedCategory\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/Ext/Basic\", \"type\": \"∀ (C : Type u) [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Abelian C] [HasDerivedCategory C],\\n  CategoryTheory.HasExt C\", \"doc\": \"If an abelian category $\\\\mathcal{C}$ has a derived category, then for any objects $X$ and $Y$, the localized hom-sets between single-term cochain complexes concentrated at degree 0 (with respect to qu\"}\n  {\"name\": \"CategoryTheory.HasExt.standard\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/Ext/Basic\", \"type\": \"∀ (C : Type u) [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Abelian C], CategoryTheory.HasExt C\", \"doc\": \"For any objects $X$ and $Y$ in category $\\\\mathcal{C}$, the localized hom-sets between single-term cochain complexes concentrated at degree 0 (constructed via $\\\\text{CochainComplex.singleFunctor}$) wit\"}\n  {\"name\": \"CategoryTheory.HasExt\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/Ext/Basic\", \"type\": \"(C : Type u) → [inst : CategoryTheory.Category.{v, u} C] → [CategoryTheory.Abelian C] → Prop\", \"doc\": \"For any objects $X$ and $Y$ in category $\\\\mathcal{C}$, the localized hom-sets between single-term cochain complexes concentrated at degree 0 (constructed via $\\\\text{CochainComplex.singleFunctor}$) wit\"}\n  {\"name\": \"isZero_Ext_succ_of_projective\", \"module\": \"Mathlib/CategoryTheory/Abelian/Ext\", \"type\": \"∀ {R : Type u_1} [inst : Ring R] {C : Type u_2} [inst_1 : CategoryTheory.Category.{v_1, u_2} C]\\n  [inst_2 : CategoryTheory.Abelian C] [inst_3 : CategoryTheory.Linear R C] [inst_4 : CategoryTheory.EnoughProjectives C]\\n  (X Y : C) [CategoryTheory.Projective X] (n : ℕ),\\n  CategoryTheory.Limits.IsZero (\", \"doc\": \"For any projective object $ X $ in an abelian $ R $-linear category $ \\\\mathcal{C} $ with enough projectives, and for any object $ Y $ in $ \\\\mathcal{C} $, the $(n + 1)$-th extension group $\\\\text{Ext}^{\"}\n",
+   "date": "2026-10-22",
+   "verdict": "No match: ModuleCat.finite_ext is for finite modules over a Noetherian ring, not coherent complexes on a proper algebraic space; existence and scalar structures on Ext give no finiteness."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Proper pushforward and coherent derived internal Hom imply finite dimensional global Ext over a field",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"CategoryTheory.hasExt_of_hasDerivedCategory\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/Ext/Basic\", \"type\": \"∀ (C : Type u) [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Abelian C] [HasDerivedCategory C],\\n  CategoryTheory.HasExt C\", \"doc\": \"If an abelian category $\\\\mathcal{C}$ has a derived category, then for any objects $X$ and $Y$, the localized hom-sets between single-term cochain complexes concentrated at degree 0 (with respect to qu\"}\n  {\"name\": \"CategoryTheory.hasExt_iff\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/Ext/Basic\", \"type\": \"∀ (C : Type u) [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Abelian C]\\n  [inst_2 : HasDerivedCategory C],\\n  CategoryTheory.HasExt C ↔\\n    ∀ (X Y : C) (n : ℤ),\\n      0 ≤ n →\\n        Small.{w, w'}\\n          ((DerivedCategory.singleFunctor C 0).obj X ⟶\\n            (CategoryTheory.\", \"doc\": \"For an abelian category $\\\\mathcal{C}$ with a derived category, the property $\\\\text{HasExt}$ holds if and only if for all objects $X, Y \\\\in \\\\mathcal{C}$ and non-negative integers $n$, the hom-set betwe\"}\n  {\"name\": \"CategoryTheory.HasExt.standard\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/Ext/Basic\", \"type\": \"∀ (C : Type u) [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Abelian C], CategoryTheory.HasExt C\", \"doc\": \"For any objects $X$ and $Y$ in category $\\\\mathcal{C}$, the localized hom-sets between single-term cochain complexes concentrated at degree 0 (constructed via $\\\\text{CochainComplex.singleFunctor}$) wit\"}\n  {\"name\": \"CategoryTheory.IsGrothendieckAbelian.hasExt\", \"module\": \"Mathlib/CategoryTheory/Abelian/GrothendieckCategory/HasExt\", \"type\": \"∀ (C : Type u) [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Abelian C]\\n  [CategoryTheory.IsGrothendieckAbelian.{w, v, u} C], CategoryTheory.HasExt C\", \"doc\": \"Every Grothendieck abelian category has the property that the localized hom-sets between single-term cochain complexes in its derived category form small sets, ensuring the derived category has well-d\"}\n  {\"name\": \"CategoryTheory.HasInjectiveDimensionLT.subsingleton'\", \"module\": \"Mathlib/CategoryTheory/Abelian/Injective/Dimension\", \"type\": \"∀ {C : Type u} {inst : CategoryTheory.Category.{v, u} C} {inst_1 : CategoryTheory.Abelian C} {X : C} {n : ℕ}\\n  [self : CategoryTheory.HasInjectiveDimensionLT X n] (i : ℕ),\\n  n ≤ i → ∀ ⦃Y : C⦄, Subsingleton (CategoryTheory.Abelian.Ext Y X i)\", \"doc\": \"If an object $X$ in an abelian category has injective dimension less than $n$, then for all integers $i \\\\geq n$ and for any object $Y$ in the category, the Ext group $\\\\operatorname{Ext}^i(Y, X)$ is tr\"}\n  {\"name\": \"CategoryTheory.HasProjectiveDimensionLT.subsingleton'\", \"module\": \"Mathlib/CategoryTheory/Abelian/Projective/Dimension\", \"type\": \"∀ {C : Type u} {inst : CategoryTheory.Category.{v, u} C} {inst_1 : CategoryTheory.Abelian C} {X : C} {n : ℕ}\\n  [self : CategoryTheory.HasProjectiveDimensionLT X n] (i : ℕ),\\n  n ≤ i → ∀ ⦃Y : C⦄, Subsingleton (CategoryTheory.Abelian.Ext X Y i)\", \"doc\": \"If an object $X$ in an abelian category has projective dimension strictly less than $n$, then for all $i \\\\geq n$ and any object $Y$, the Ext group $\\\\operatorname{Ext}^i(X, Y)$ is trivial (a subsinglet\"}\n  {\"name\": \"CategoryTheory.HasInjectiveDimensionLT.subsingleton\", \"module\": \"Mathlib/CategoryTheory/Abelian/Injective/Dimension\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Abelian C]\\n  [inst_2 : CategoryTheory.HasExt C] (X : C) (n : ℕ) [hX : CategoryTheory.HasInjectiveDimensionLT X n] (i : ℕ),\\n  n ≤ i → ∀ (Y : C), Subsingleton (CategoryTheory.Abelian.Ext Y X i)\", \"doc\": \"If an object $ X $ in an abelian category $ \\\\mathcal{C} $ has injective dimension less than $ n $, then for every natural number $ i \\\\geq n $ and every object $ Y $ in $ \\\\mathcal{C} $, the Ext group $\"}\n  {\"name\": \"isZero_Ext_succ_of_projective\", \"module\": \"Mathlib/CategoryTheory/Abelian/Ext\", \"type\": \"∀ {R : Type u_1} [inst : Ring R] {C : Type u_2} [inst_1 : CategoryTheory.Category.{v_1, u_2} C]\\n  [inst_2 : CategoryTheory.Abelian C] [inst_3 : CategoryTheory.Linear R C] [inst_4 : CategoryTheory.EnoughProjectives C]\\n  (X Y : C) [CategoryTheory.Projective X] (n : ℕ),\\n  CategoryTheory.Limits.IsZero (\", \"doc\": \"For any projective object $ X $ in an abelian $ R $-linear category $ \\\\mathcal{C} $ with enough projectives, and for any object $ Y $ in $ \\\\mathcal{C} $, the $(n + 1)$-th extension group $\\\\text{Ext}^{\"}\n",
+   "date": "2026-10-22",
+   "verdict": "No match: ModuleCat.finite_ext is for finite modules over a Noetherian ring, not coherent complexes on a proper algebraic space; existence and scalar structures on Ext give no finiteness."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Ext\", \"Finite\"",
+   "results": "[loogle] OK 12 hit(s)\n  {\"name\": \"Cardinal.extend_function_finite\", \"module\": \"Mathlib.SetTheory.Cardinal.Arithmetic\", \"type\": \" {α : Type u} {β : Type v} [Finite α] {s : Set α} (f : ↑s ↪ β) (h : Nonempty (α ≃ β)) : ∃ g, ∀ (x : ↑s), g ↑x = f x\", \"doc\": \"\"}\n  {\"name\": \"Module.instFintypeElemExtendOfFiniteSubtypeMemSubmoduleSpan\", \"module\": \"Mathlib.LinearAlgebra.Dimension.StrongRankCondition\", \"type\": \" {R : Type u_2} {M : Type u_3} [DivisionRing R] [AddCommGroup M] [Module R M] {s t : Set M} [Module.Finite R ↥(Submodule.span R t)] (hs : LinearIndepOn R id s) (hst : s ⊆ t) : Fintype ↑(hs.extend hst)\", \"doc\": \"\"}\n  {\"name\": \"Algebra.instFiniteOfIsQuadraticExtension\", \"module\": \"Mathlib.LinearAlgebra.Dimension.Free\", \"type\": \" (R : Type u_2) (S : Type u_3) [CommSemiring R] [StrongRankCondition R] [Semiring S] [Algebra R S] [Algebra.IsQuadraticExtension R S] : Module.Finite R S\", \"doc\": \"\"}\n  {\"name\": \"AddSubgroup.instFiniteIndexTop\", \"module\": \"Mathlib.GroupTheory.Index\", \"type\": \" {G : Type u_1} [AddGroup G] : ⊤.FiniteIndex\", \"doc\": \"\"}\n  {\"name\": \"Subgroup.instFiniteIndexTop\", \"module\": \"Mathlib.GroupTheory.Index\", \"type\": \" {G : Type u_1} [Group G] : ⊤.FiniteIndex\", \"doc\": \"\"}\n  {\"name\": \"CategoryTheory.ObjectProperty.instIsClosedUnderExtensionsInverseImageOfPreservesZeroMorphismsOfPreservesFiniteLimitsOfPreservesFiniteColimits\", \"module\": \"Mathlib.CategoryTheory.ObjectProperty.Extensions\", \"type\": \" {C : Type u} [CategoryTheory.Category.{v, u} C] {D : Type u'} [CategoryTheory.Category.{v', u'} D] (P : CategoryTheory.ObjectProperty C) [CategoryTheory.Limits.HasZeroMorphisms C] [P.IsClosedUnderExtensions] (F : CategoryTheory.Functor D C) [CategoryTheory.Limits.HasZeroMorphisms D] [F.PreservesZer\", \"doc\": \"\"}\n  {\"name\": \"IsIntegralClosure.isFractionRing_of_finite_extension\", \"module\": \"Mathlib.RingTheory.Localization.Integral\", \"type\": \" (A : Type u_3) (K : Type u_4) [CommRing A] (L : Type u_5) [Field K] [Field L] [Algebra A K] [Algebra A L] [IsFractionRing A K] (C : Type u_6) [CommRing C] [IsDomain C] [Algebra C L] [IsIntegralClosure C A L] [Algebra A C] [IsScalarTower A C L] [IsDomain A] [Algebra K L] [IsScalarTower A K L] [Finit\", \"doc\": \"If the field `L` is a finite extension of the fraction field of the integral domain `A`,\\nthe integral closure `C` of `A` in `L` has fraction field `L`.\"}\n  {\"name\": \"integralClosure.isFractionRing_of_finite_extension\", \"module\": \"Mathlib.RingTheory.Localization.Integral\", \"type\": \" {A : Type u_3} (K : Type u_4) [CommRing A] (L : Type u_5) [Field K] [Field L] [Algebra A K] [IsFractionRing A K] [IsDomain A] [Algebra A L] [Algebra K L] [IsScalarTower A K L] [FiniteDimensional K L] : IsFractionRing (↥(integralClosure A L)) L\", \"doc\": \"If the field `L` is a finite extension of the fraction field of the integral domain `A`,\\nthe integral closure of `A` in `L` has fraction field `L`.\"}\n  {\"name\": \"Algebra.EssFiniteType.algHom_ext\", \"module\": \"Mathlib.RingTheory.EssentialFiniteness\", \"type\": \" {R : Type u_1} {S : Type u_2} (T : Type u_3) [CommRing R] [CommRing S] [CommRing T] [Algebra R S] [Algebra R T] [Algebra.EssFiniteType R S] (f g : S →ₐ[R] T) (H : ∀ s ∈ Algebra.EssFiniteType.finset R S, f s = g s) : f = g\", \"doc\": \"\"}\n  {\"name\": \"RingHom.EssFiniteType.ext\", \"module\": \"Mathlib.RingTheory.EssentialFiniteness\", \"type\": \" {R : Type u_1} {S : Type u_2} {T : Type u_3} [CommRing R] [CommRing S] [CommRing T] {f : R →+* S} (hf : f.EssFiniteType) {g₁ g₂ : S →+* T} (h₁ : g₁.comp f = g₂.comp f) (h₂ : ∀ x ∈ hf.finset, g₁ x = g₂ x) : g₁ = g₂\", \"doc\": \"\"}\n  {\"name\": \"ModuleCat.preservesFiniteLimits_extendScalars_of_flat\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Descent\", \"type\": \" {A B : Type u} [CommRing A] [CommRing B] {f : A →+* B} (hf : f.Flat) : CategoryTheory.Limits.PreservesFiniteLimits (ModuleCat.extendScalars f)\", \"doc\": \"\"}\n  {\"name\": \"ModuleCat.finite_ext\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Ext.Finite\", \"type\": \" (R : Type u) [CommRing R] [Small.{v, u} R] [IsNoetherianRing R] (N M : ModuleCat R) [Module.Finite R ↑N] [Module.Finite R ↑M] (i : ℕ) : Module.Finite R (CategoryTheory.Abelian.Ext N M i)\", \"doc\": \"\"}\n",
+   "date": "2026-10-22",
+   "verdict": "No match: ModuleCat.finite_ext is for finite modules over a Noetherian ring, not coherent complexes on a proper algebraic space; existence and scalar structures on Ext give no finiteness."
+  },
+  {
+   "tool": "grep",
+   "query": "[Ee]xt.*[Ff]inite|[Ff]inite.*[Ee]xt|[Cc]oherent.*[Hh]om",
+   "results": "[grep] OK 9 hit(s)\n  {\"file\": \"Mathlib/AlgebraicGeometry/Geometrically/Reduced.lean\", \"line\": \"102\", \"text\": \"    (FinitaryPreExtensive.isUniversal_finiteCoproducts (coproductIsCoproduct _))\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Sites/BigZariski.lean\", \"line\": \"157\", \"text\": \"    (FinitaryExtensive.isVanKampen_finiteCoproducts (coproductIsCoproduct _)).isUniversal]\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/AlgClosed/Basic.lean\", \"line\": \"101\", \"text\": \"lemma ext_of_apply_eq {f g : X ⟶ Y} (i : Y ⟶ Spec (.of K)) [IsSeparated i] [LocallyOfFiniteType i]\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Artinian.lean\", \"line\": \"112\", \"text\": \"-- This can be extended to locally quasi-finite morphisms.\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/Proper.lean\", \"line\": \"42\", \"text\": \"class IsProper : Prop extends IsSeparated f, UniversallyClosed f, LocallyOfFiniteType f where\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/Proper.lean\", \"line\": \"160\", \"text\": \"then `Γ(X, ⊤)` is a finite field extension over `K`. -/\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/Finite.lean\", \"line\": \"39\", \"text\": \"class IsFinite {X Y : Scheme} (f : X ⟶ Y) : Prop extends IsAffineHom f where\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/Finite.lean\", \"line\": \"115\", \"text\": \"  ext; exact IsFinite.iff_isIntegralHom_and_locallyOfFiniteType _\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/Finite.lean\", \"line\": \"142\", \"text\": \"  ext; exact IsClosedImmersion.iff_isFinite_and_mono _\"}\n",
+   "date": "2026-10-22",
+   "verdict": "No match: ModuleCat.finite_ext is for finite modules over a Noetherian ring, not coherent complexes on a proper algebraic space; existence and scalar structures on Ext give no finiteness."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Global Ext groups on a proper algebraic space are finite modules over the noetherian base ring",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"CategoryTheory.Abelian.Ext.instModule\", \"module\": \"Mathlib.Algebra.Homology.DerivedCategory.Ext.Linear\", \"type\": \": Module R (Ext X Y n)\", \"doc\": \"For objects $X$ and $Y$ in an abelian category $\\\\mathcal{C}$, the Ext group $\\\\operatorname{Ext}^n(X,Y)$ in degree $n$ is equipped with a canonical $R$-module structure. This structure arises from the \"}\n  {\"name\": \"CategoryTheory.Abelian.Ext.smul_comp\", \"module\": \"Mathlib.Algebra.Homology.DerivedCategory.Ext.Linear\", \"type\": \"{X Y Z : C} {a b : ℕ} (α : Ext X Y a) (β : Ext Y Z b) {c : ℕ} (h : a + b = c) (r : R) :\\n  (r • α).comp β h = r • α.comp β h\", \"doc\": \"For objects $X$ and $Y$ in an abelian category $\\\\mathcal{C}$, the Ext group $\\\\operatorname{Ext}^n(X,Y)$ in degree $n$ is equipped with a canonical $R$-module structure. This structure arises from the \"}\n  {\"name\": \"CategoryTheory.Abelian.Ext.smul_eq_comp_mk₀\", \"module\": \"Mathlib.Algebra.Homology.DerivedCategory.Ext.Linear\", \"type\": \"(x : Ext X Y n) (r : R) : r • x = x.comp (mk₀ (r • 𝟙 Y)) (add_zero _)\", \"doc\": \"For objects $X$ and $Y$ in an abelian category $\\\\mathcal{C}$, the Ext group $\\\\operatorname{Ext}^n(X,Y)$ in degree $n$ is equipped with a canonical $R$-module structure. This structure arises from the \"}\n  {\"name\": \"CategoryTheory.Abelian.Ext.mk₀_smul\", \"module\": \"Mathlib.Algebra.Homology.DerivedCategory.Ext.Linear\", \"type\": \"(r : R) (f : X ⟶ Y) : mk₀ (r • f) = r • mk₀ f\", \"doc\": \"For objects $X$ and $Y$ in an abelian category $\\\\mathcal{C}$, the Ext group $\\\\operatorname{Ext}^n(X,Y)$ in degree $n$ is equipped with a canonical $R$-module structure. This structure arises from the \"}\n  {\"name\": \"CategoryTheory.Sheaf.H\", \"module\": \"Mathlib.CategoryTheory.Sites.SheafCohomology.Basic\", \"type\": \"(n : ℕ) : Type w'\", \"doc\": \"For a sheaf $ F $ on a site with Grothendieck topology $ J $, the $ n $-th sheaf cohomology group is defined as the Ext group $ \\\\mathrm{Ext}^n $ between the constant sheaf associated to the integers $\"}\n  {\"name\": \"AlgebraicGeometry.finite_appTop_of_universallyClosed\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Proper\", \"type\": \"(f : X ⟶ (Spec <| .of K)) [IsIntegral X] [UniversallyClosed f] [LocallyOfFiniteType f] : f.appTop.hom.Finite\", \"doc\": \"Let $K$ be a field, and let $f: X \\\\to \\\\operatorname{Spec}(K)$ be a morphism from an integral scheme $X$. If $f$ is universally closed and locally of finite type, then the ring of global sections of $X\"}\n  {\"name\": \"CategoryTheory.Abelian.Ext\", \"module\": \"Mathlib.Algebra.Homology.DerivedCategory.Ext.Basic\", \"type\": \"(X Y : C) (n : ℕ) : Type w\", \"doc\": \"For objects $ X $ and $ Y $ in an abelian category $ \\\\mathcal{C} $, the Ext group in degree $ n $ is defined as the hom-set in the derived category between the $ n $-shifted single-term cochain comple\"}\n  {\"name\": \"CategoryTheory.ProjectiveResolution.extMk.congr_simp\", \"module\": \"Mathlib.CategoryTheory.Abelian.Projective.Ext\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Abelian C]\\n  [inst_2 : CategoryTheory.HasExt C] {X Y : C} (R : CategoryTheory.ProjectiveResolution X) {n : ℕ}\\n  (f f_1 : R.complex.X n ⟶ Y) (e_f : f = f_1) (m m_1 : ℕ) (e_m : m = m_1) (hm : n + 1 = m)\\n  (hf : CategoryT\", \"doc\": \"For objects $ X $ and $ Y $ in an abelian category $ \\\\mathcal{C} $, the Ext group $ \\\\operatorname{Ext}^n(X, Y) $ is defined as the hom-set in the derived category between the $ n $-shifted single-term\"}\n",
+   "date": "2026-10-22",
+   "verdict": "No match: ModuleCat.finite_ext is for finite modules over a Noetherian ring, not coherent complexes on a proper algebraic space; existence and scalar structures on Ext give no finiteness."
+  },
+  {
+   "tool": "grep",
+   "query": "Ext.*[Ff]inite|[Ff]inite.*Ext|[Cc]oherent.*[Hh]om",
+   "results": "{\"t\": \"2026-10-22T06:25:38Z\", \"tool\": \"grep\", \"query\": \"Ext.*[Ff]inite|[Ff]inite.*Ext|[Cc]oherent.*[Hh]om\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 9, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/Geometrically/Reduced.lean\", \"Mathlib/AlgebraicGeometry/AlgClosed/Basic.lean\", \"Mathlib/AlgebraicGeometry/Sites/BigZariski.lean\", \"Mathlib/AlgebraicGeometry/Artinian.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/Proper.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/Proper.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/Finite.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/Finite.lean\"], \"digest\": \"aa8e4b37740a15cc\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: generic Ext smallness and Hom complexes do not imply proper-space coherent Ext finiteness. Read ModuleCat.finite_ext in Mathlib/Algebra/Category/ModuleCat/Ext/Finite.lean:27-35: finite modules over a Noetherian ring, not sheaf complexes on a proper algebraic space."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Global derived Hom between coherent complexes on a proper algebraic space has finitely generated cohomology over the base ring",
+   "results": "{\"t\": \"2026-10-22T06:25:39Z\", \"tool\": \"leansearch\", \"query\": \"Global derived Hom between coherent complexes on a proper algebraic space has finitely generated cohomology over the base ring\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CochainComplex.HomComplex.CohomologyClass\", \"CategoryTheory.IsGrothendieckAbelian.hasExt\", \"CochainComplex.HomComplex.CohomologyClass.mk\", \"CochainComplex.HomComplex.instModuleCochain\", \"CochainComplex.HomComplex_X\", \"CochainComplex.HomComplex\", \"HomologicalComplex.isGrothendieckAbelian\", \"CategoryTheory.ShortComplex.ShortExact.instHasSmallLocalizedShiftedHomHomologicalComplexIntUpQuasiIsoX₃CochainComplexMapSingleFunctorOfNatX₁\"], \"digest\": \"2f2f3d00520f3aa0\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: generic Ext smallness and Hom complexes do not imply proper-space coherent Ext finiteness. Read ModuleCat.finite_ext in Mathlib/Algebra/Category/ModuleCat/Ext/Finite.lean:27-35: finite modules over a Noetherian ring, not sheaf complexes on a proper algebraic space."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Ext\", \"Finite\"",
+   "results": "{\"t\": \"2026-10-22T06:25:39Z\", \"tool\": \"loogle\", \"query\": \"\\\"Ext\\\", \\\"Finite\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"Cardinal.extend_function_finite\", \"Module.instFintypeElemExtendOfFiniteSubtypeMemSubmoduleSpan\", \"Algebra.instFiniteOfIsQuadraticExtension\", \"AddSubgroup.instFiniteIndexTop\", \"Subgroup.instFiniteIndexTop\", \"CategoryTheory.ObjectProperty.instIsClosedUnderExtensionsInverseImageOfPreservesZeroMorphismsOfPreservesFiniteLimitsOfPreservesFiniteColimits\", \"IsIntegralClosure.isFractionRing_of_finite_extension\", \"integralClosure.isFractionRing_of_finite_extension\"], \"digest\": \"6f4e77e71704b69f\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: generic Ext smallness and Hom complexes do not imply proper-space coherent Ext finiteness. Read ModuleCat.finite_ext in Mathlib/Algebra/Category/ModuleCat/Ext/Finite.lean:27-35: finite modules over a Noetherian ring, not sheaf complexes on a proper algebraic space."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Ext groups between bounded above and bounded below coherent complexes on a proper algebraic space are finite modules over a Noetherian base ring",
+   "results": "{\"t\": \"2026-10-22T06:25:49Z\", \"tool\": \"leanfinder\", \"query\": \"Ext groups between bounded above and bounded below coherent complexes on a proper algebraic space are finite modules over a Noetherian base ring\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.HasExt.hasSmallLocalizedShiftedHom_of_isLE_of_isGE\", \"CategoryTheory.hasExt_iff\", \"CategoryTheory.HasExt.instHasSmallLocalizedShiftedHomHomologicalComplexIntUpQuasiIsoOfIsGEOfIsLEOfNat\", \"CategoryTheory.IsGrothendieckAbelian.hasExt\", \"CategoryTheory.hasInjectiveDimensionLT_iff\", \"CategoryTheory.HasInjectiveDimensionLT.subsingleton\", \"CategoryTheory.HasInjectiveDimensionLT.subsingleton'\", \"CategoryTheory.ShortComplex.ShortExact.instHasSmallLocalizedShiftedHomHomologicalComplexIntUpQuasiIsoX₃CochainComplexMapSingleFunctorOfNatX₁\"], \"digest\": \"babbecffec52181d\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: generic Ext smallness and Hom complexes do not imply proper-space coherent Ext finiteness. Read ModuleCat.finite_ext in Mathlib/Algebra/Category/ModuleCat/Ext/Finite.lean:27-35: finite modules over a Noetherian ring, not sheaf complexes on a proper algebraic space."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finiteness of global Ext on proper spaces follows from coherent sheaf Hom and coherent proper pushforward",
+   "results": "{\"t\": \"2026-10-22T06:28:39Z\", \"tool\": \"leanfinder\", \"query\": \"Finiteness of global Ext on proper spaces follows from coherent sheaf Hom and coherent proper pushforward\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"LightCondensed.instIsGrothendieckAbelianLightCondMod\", \"SheafOfModules.IsFiniteType\", \"CategoryTheory.Sheaf.H\", \"instAbelianLightCondMod\", \"CategoryTheory.HasExt.hasSmallLocalizedShiftedHom_of_isLE_of_isGE\", \"CategoryTheory.Sheaf.isGrothendieckAbelian_of_essentiallySmall\", \"CategoryTheory.hasExt_iff\", \"CategoryTheory.HasExt.instHasSmallLocalizedShiftedHomHomologicalComplexIntUpQuasiIsoOfIsGEOfIsLEOfNat\"], \"digest\": \"52ee309a2374bd2c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: generic Ext smallness and Hom complexes do not imply proper-space coherent Ext finiteness. Read ModuleCat.finite_ext in Mathlib/Algebra/Category/ModuleCat/Ext/Finite.lean:27-35: finite modules over a Noetherian ring, not sheaf complexes on a proper algebraic space."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-curve-tangent-finiteness",
+  "date": "2026-10-22",
+  "group": "Q70"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Algebraicity and smoothness of the stack of all nodal curves. Supporting input: Tag 0D57 (lemma-curves-tangent-space), both clauses (finite type fields over Z and arbitrary fields). Tangent-finiteness proof: Tag 0D0T (lemma-ext-finite), for K in D^-_Coh and L in D^+_Coh.",
+   "via": [
+    "lem-sfb-curve-tangent-finiteness",
+    "lem-sfb-nodal-curve-stack-smooth",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-proper-space-coherent-ext-finite",
+  "worker": "stage1",
+  "summary": "Unchanged statement. Followed Stacks 0D0T via coherent internal Hom (new 0D0S input), proper derived coherence (new 0D0R input with S equal to the scheme target), normalized ringed-topos Leray, and affine etale hypercohomology degeneration. Kept chartwise Noetherianity and single-column degeneration elementary. Checked every cited statement and all boundedness and scalar hypotheses. Two new statement-only non-Mathlib nodes. Promotion-return repair: retained the source route and both inputs, re-read all current cited statements and checked their verbatim quotations, and made scalar compatibility explicit on a K-injective target representative. Repackage on the current live DAG rather than relying on the side-project completion. Current promotion-return repair (returned head 73afc8ea9d4): checked the still-unsplit live item and all current dependency statements, and expanded step 4 using the existing composition theorem's normalized K-injective comparison in D(A). Updated the citation to include that normalization; retained both geometric input statements and all actual search records. Return at 0a82af680dc: rechecked the current live unsplit item and all dependency statements. Expanded steps 5–6 to use the spectral-sequence statement’s precise finite-filtration bounds, explicitly descend from the zero positive filtration terms, and handle n<a directly. Expanded the spectral-sequence quote to its page, bounds, filtration and abutment clauses. The current-origin delivery overlay retains live metadata; the two geometric inputs and all logged searches are reused.",
+  "blueprint": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Algebraicity and smoothness of the stack of all nodal curves. Supporting input: Tag 0D57 (lemma-curves-tangent-space), both clauses (finite type fields over Z and arbitrary fields). Tangent-finiteness proof: Tag 0D0T (lemma-ext-finite), for K in D^-_Coh and L in D^+_Coh. The six steps realize the supporting proper coherent Ext finiteness input: 0D0T, its two coherence lemmas and its derived-sections identities. The inherited ancestor is null (blueprint_refs.py ancestor agrees); no chapter or unit route is changed.",
+  "tool_uses": [
+   {
+    "node": "lem-sfb-derived-internal-hom-sections-model",
+    "why": "Generic small-ringed-site derived Hom/sections comparison, in all integer degrees; the current unit has no substitute."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
+    "why": "Generic ringed-topos total-derived composition, specialized to the global-sections morphism; scheme-only Leray nodes cannot serve an algebraic space."
+   },
+   {
+    "node": "lem-pur-ringed-site-grothendieck-abelian",
+    "why": "Generic Grothendieck property for module sheaves on the small ringed site, needed to apply the existing spectral-sequence theorem."
+   },
+   {
+    "node": "thm-sp-truncation-e2",
+    "why": "Generic bounded-below hypercohomology spectral sequence with finite abutment filtration, used only for affine degeneration."
+   },
+   {
+    "node": "lem-sc-etale-affine-qcoherent",
+    "why": "Generic affine etale quasi-coherent acyclicity on the target scheme, used to kill positive spectral-sequence columns."
+   },
+   {
+    "node": "lem-sf-ringed-derived-closed-symmetric-monoidal",
+    "why": "Generic ringed-site closedness of the derived category: exhibits derived internal Hom as the right adjoint required by the sections model; the current unit has no substitute."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sfb-derived-internal-hom-sections-model",
+  "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
+  "lem-pur-ringed-site-grothendieck-abelian",
+  "thm-sp-truncation-e2",
+  "lem-sc-etale-affine-qcoherent",
+  "lem-sf-ringed-derived-closed-symmetric-monoidal"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q06-ff378800b",
+  "group": "Q06",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q06-ff378800b (reviewer sub-agent of L); spot-checked: Fourth delivery of this split. Earlier heads: 47735be2 FIX, 73afc8ea FIX re-applied, 0a82af68 FIX re-applied. This head was rebuilt again without those fixes. The item statement and both new nodes are byte-identical to the reviewed versions. The only new content is the filtration text in steps 5-6, which I checked against thm-sp-truncation-e2: part 3 (0<=p<=n-a), part 5 (F^pH^n=H^n for p<=0, F^pH^n=0 for p>=n-a+1) and part 6 (gr^p iso E_inf). The descent to F^1=0 and the n<a case are correct, so I kept the text. Sources read: Stacks spaces-perfect l.1193-1275 (lemma-direct-image-coherent, 0D0R, 0D0S, 0D0T with its proof). The item matches 0D0T exactly (E in D^-_Coh, F in D^+_Coh, A acting through the structure map) and is not weakened. The 0D0S node is true; tested on O[u], O[v], the empty space and infinite tails. The 0D0R node with S=Y is a true special case, since a proper f makes every coherent support proper over Y. Neither new node is a duplicate (rg -L for 0D0R/0D0S/0D0T finds only citers) or a restated clause of the item. No SGA. Batch-5 check: def-trf-algebraic-space is the general definition of an algebraic space, not part of the trace-formula or Poincare-duality proofs, and the base item already cites it, so accepted. Fault 1 (C1/C4), step 4: the sections model needs H_E to be a right adjoint of E tensor -, and nothing was cited for RHom(E,-). Re-applied the citation of lem-sf-ringed-derived-closed-symmetric-monoidal (closedness plus symmetry) and its tool_use; its closure reaches only the pure-category lem-trf-localization-essentially-surjective. Fault 2 (C1/C4), step 5: R^p Gamma on Mod(O_Y) was used as abelian etale cohomology with no comparison. Re-applied lem-sp-grothendieck-enough-injectives and lem-pe-ringed-site-derived-evaluation-slice with W=Y (unit sk-prop-sf-comparison, on route) and the (M_q~)_et identification, merged with the new filtration sentence (1842 chars). proof_deps equals the union of the step uses, there is no cycle, and every step is under 2000 characters. The whole corrected item is in fixes/dag/nodes/sec-six-functors-basics/.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.ProperSpaceCoherentExtFinite",
+  "declaration": "AlgebraicGeometry.AlgebraicSpace.properSpace_coherent_ext_finite",
+  "declarations": [
+   "AlgebraicGeometry.AlgebraicSpace.properSpaceExtModule",
+   "AlgebraicGeometry.AlgebraicSpace.properSpace_coherent_ext_finite"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/ProperSpaceCoherentExtFinite.lean",
+  "statement": "theorem properSpace_coherent_ext_finite (A : Type u) [CommRing A] [IsNoetherianRing A] (X : AlgebraicSpace (Spec (.of A))) (f : X ⟶ schemeSpace (Over.mk (𝟙 (Spec (.of A))))) (hf : MapIsProper f) [HasDerivedCategory.{w} X.SmallModules] (E F : X.DerivedModules) (hE : ∀ q : ℤ, ((DerivedCategory.homologyFunctor X.SmallModules q).obj E).IsQuasicoherent ∧ ((DerivedCategory.homologyFunctor X.SmallModules q).obj E).IsFiniteType) (hF : ∀ q : ℤ, ((DerivedCategory.homologyFunctor X.SmallModules q).obj F).IsQuasicoherent ∧ ((DerivedCategory.homologyFunctor X.SmallModules q).obj F).IsFiniteType) (hE_upper : ∃ a : ℤ, ∀ q : ℤ, a < q → IsZero ((DerivedCategory.homologyFunctor X.SmallModules q).obj E)) (hF_lower : ∃ b : ℤ, ∀ q : ℤ, q < b → IsZero ((DerivedCategory.homologyFunctor X.SmallModules q).obj F)) (n : ℤ) : @Module.Finite A (E ⟶ F⟦n⟧) _ _ (properSpaceExtModule A X f E F n)",
+  "branch": "newtargets-dag",
+  "by": "NJ",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "Uses the existing equivalent small affine etale model, with arbitrary derived morphism universe w. Coherent cohomology is the existing quasi-coherent and finite-type predicates on this locally Noetherian ringed site. The helper restricts the standard derived global-function action along the recorded structure-morphism scalar map; no arbitrary module action is assumed."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-93648c1c7",
+  "group": "NJ",
+  "result": "pass",
+  "note": "New NJ lean record (live lean null; only item lean+stmt_deps differ from side-live). Statement matches node and Stacks 0D0T (spaces-perfect l.1256): A CommRing+IsNoetherianRing; X : AlgebraicSpace (Spec A) with f to terminal represented base, hf : MapIsProper f = separated ∧ (quasi-compact ∧ chartwise locally finite type) ∧ universally closed; DerivedModules = D(SmallModules), w free; hE/hF IsQuasicoherent ∧ IsFiniteType in all degrees (intrinsic, Stacks 03DN, equals node's coherence on Noetherian charts, Tag 07UB); E bounded above, F bounded below; n : ℤ; Module.Finite of (E ⟶ F⟦n⟧) with properSpaceExtModule = homLinear sections action, localized, restricted along affineGlobalScalar (canonical structure-morphism action, no sorry, parallels the scheme coherentExtModule). Edge cases A=0/empty X, zero objects, negative n, opposite tails OK; no universe equality. 6 added stmt_deps exist, landed, acyclic, all used; imported proof-dep modules exist. No duplicate (grep affineGlobalScalar users, space Ext modules). Docstrings carry source+blueprint+six steps; only sorry; report has Worker report and Second reading by NJ. No change, so no compile; relied on the worker's scompile and dry run."
+ }
+}

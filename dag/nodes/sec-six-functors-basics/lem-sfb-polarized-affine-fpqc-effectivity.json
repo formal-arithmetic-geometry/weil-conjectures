@@ -1,0 +1,397 @@
+{
+ "id": "lem-sfb-polarized-affine-fpqc-effectivity",
+ "kind": "statement",
+ "title": "Effective affine fpqc descent of schemes with a compatible ample module",
+ "statement": "Let $B\\to C$ be a faithfully flat homomorphism of commutative rings [def-weil-pbc-faithfully-flat-ring-map], and set $S=\\operatorname{Spec}B$, $S'=\\operatorname{Spec}C$ [def-weil-affine-spectrum]. Let $X'\\to S'$ be a quasi-compact scheme morphism (inverse images of affine opens are quasi-compact) [def-pc-scheme, def-weil-finite-type-morphism], with descent datum $\\alpha$ relative to $S'/S$ [def-pd-descent-datum]. Let $M'$ be an ample invertible $\\mathcal O_{X'}$-module [def-sc-invertible-module, def-weil-pbc-ample-invertible-module]. Suppose $\\alpha$ is equipped with an isomorphism from $p_0^*M'$ to the pullback of $p_1^*M'$ along $\\alpha$, on $p_0^*X'$, whose two composites agree over $S'\\times_SS'\\times_SS'$ [def-pc-module-pullback, def-pc-fibre-product]. Then there are an $S$-scheme $X$, an invertible module $M$ on $X$, and an isomorphism $(X,M)\\times_SS'\\simeq(X',M')$ inducing both prescribed data [def-pc-base-change]. The module $M$ is ample. No Noetherian, finite-presentation or properness assumption is made.",
+ "source": {
+  "document": "literature/bosch-lutkebohmert-raynaud-neron-models.pdf",
+  "place": "BLR 6.1 Theorem 7 and its graded-section-algebra proof, printed p.138 (PDF p.144), affine-base specialization. Compatible invertible modules, rather than projectivity without a polarization, are the input. Local PDF WANTED; primary scan read online.",
+  "url": "https://www.math.stonybrook.edu/~kamenova/homepage_files/Bosch_Raynaud_Neron_Model_tc.pdf"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-faithfully-flat-ring-map",
+  "def-weil-affine-spectrum",
+  "def-pc-scheme",
+  "def-weil-finite-type-morphism",
+  "def-pd-descent-datum",
+  "def-sc-invertible-module",
+  "def-weil-pbc-ample-invertible-module",
+  "def-pc-module-pullback",
+  "def-pc-fibre-product",
+  "def-pc-base-change"
+ ],
+ "proof": [
+  {
+   "text": "Put $p:S'\\to S$. Faithful flatness implies flatness of $B\\to C$ by its definition. The affine flatness criterion and surjectivity of the spectrum map show that $p$ is flat and surjective. It is affine, hence quasi-compact; thus its singleton is fpqc. More explicitly, over any affine open $V\\subset S$, its inverse image is affine and surjects onto $V$, so this one affine open witnesses the fpqc covering condition. Ampleness makes $X'$ separated by [lem-weil-pbc-ample-scheme-separated]. Together with quasi-compactness of $X'\\to S'$ and affineness of $S'$, this gives the quasi-compact, quasi-separated hypotheses needed for flat base change. The projections from the double and triple products of $S'$ over $S$ are fpqc, and in particular flat, by [lem-weil-pbc-fpqc-covering-axioms].",
+   "uses": [
+    "def-weil-pbc-faithfully-flat-ring-map",
+    "lem-weil-pbc-flat-ring-map-iff-flat-affine",
+    "lem-weil-pbc-faithfully-flat-surjective-spectrum",
+    "def-weil-pbc-fpqc-covering",
+    "lem-weil-pbc-ample-scheme-separated",
+    "lem-weil-pbc-fpqc-covering-axioms"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/topologies.tex",
+    "place": "Tag 022B (definition-fpqc-covering); properties.tex Tag 09MP (lemma-ample-separated)"
+   }
+  },
+  {
+   "text": "For each $n\\geq0$ put $E'_n=f'_*((M')^{\\otimes n})$, where $f':X'\\to S'$. These are quasi-coherent by [lem-pc-finite-support-hi], since tensor powers of an invertible module are locally free of rank one. Apply [lem-pc-flat-base-change-cohom] in degree zero to each projection $S'\\times_SS'\\to S'$. It identifies $p_i^*E'_n$ with the direct image of the corresponding tensor pullback of $(M')^{\\otimes n}$. The specified scheme isomorphism $\\alpha$ and the $n$th tensor power of its module isomorphism therefore induce $p_0^*E'_n\\simeq p_1^*E'_n$. On the triple product both composites send a pulled-back section to the section obtained by the corresponding composite of the prescribed module isomorphisms. Their equality is exactly the assumed module cocycle; the base-change maps here are the canonical maps, so are obtained by pulling back sections. Thus these are descent data on $E'_n$. By [lem-pc-fpqc-descent] obtain quasi-coherent $E_n$ on $S$ and compatible isomorphisms $p^*E_n\\simeq E'_n$. By [lem-weil-pbc-module-pullback-affine-sections], putting $A_n=\\Gamma(S,E_n)$ gives $C\\otimes_B A_n\\simeq\\Gamma(X',(M')^{\\otimes n})$, sending $c\\otimes a$ to $c\\widetilde a$. The section $\\widetilde a$ is invariant under the prescribed pair datum, as an equality of sections on the double pullback.",
+   "uses": [
+    "def-weil-pbc-ample-invertible-module",
+    "lem-pc-finite-support-hi",
+    "lem-pc-flat-base-change-cohom",
+    "lem-pc-fpqc-descent",
+    "lem-weil-pbc-module-pullback-affine-sections"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/coherent.tex",
+    "place": "Tag 02KH (lemma-flat-base-change-cohomology), i=0; descent.tex Tag 023T (proposition-fpqc-descent-quasi-coherent)"
+   }
+  },
+  {
+   "text": "We check the geometry of nonvanishing opens before using the invariant sections. Put $G=\\Gamma_*(X',M')$. By [lem-sc-ample-finite-affine-cover] choose a finite cover by affine $X'_{s_j}$ for positive-degree homogeneous $s_j$. The morphism $r:X'\\to\\operatorname{Proj}(G)$ of [lem-sc-ample-proj-local-chart] has $r^{-1}D_+(s_j)=X'_{s_j}$ and is an isomorphism on each such chart. These isomorphisms glue with the restrictions of $r$ to an isomorphism onto the open union $\\bigcup_jD_+(s_j)$: on an overlap both inverses are inverses to that same restricted morphism. Hence $r$ is an open immersion. The map is over $S'$: the constants $C\\to G_0$ act by the structural sections on $X'$, and the chart localization maps send each constant to that structural section.",
+   "uses": [
+    "def-sc-invertible-section-ring",
+    "lem-sc-ample-finite-affine-cover",
+    "lem-sc-ample-proj-local-chart"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/properties.tex",
+    "place": "Tags 01PZ (lemma-map-into-proj), 01Q1 (lemma-ample-immersion-into-proj), proof by the finite affine section charts"
+   }
+  },
+  {
+   "text": "For any $n>0$ and $s\\in\\Gamma(X',(M')^{\\otimes n})$, the preceding map embeds $X'_s$ as an open in the affine $C$-scheme $D_+(s)=\\operatorname{Spec}(G_{(s)})$. The opens $X'_{s_j}\\cap X'_s$ are affine by [lem-sc-affine-cap-section-open] and form a finite cover of $X'_s$, so $X'_s$ is quasi-compact. This is a quasi-compact open immersion into an affine $S'$-scheme. Apply the reverse implication of [lem-trf-quasi-affine-relative-spec-embedding] (the affine $C$-algebra $G_{(s)}$ supplies the quasi-coherent algebra on $S'$) to see that $X'_s\\to S'$ is quasi-affine. In particular this holds for every invariant $\\widetilde a$ from Step 2. No claim that an arbitrary $X'_s$ is affine is needed.",
+   "uses": [
+    "def-pc-proj",
+    "lem-sc-affine-cap-section-open",
+    "lem-trf-quasi-affine-relative-spec-embedding"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/properties.tex",
+    "place": "Tags 01PZ and 01Q1; Tag 01PV (lemma-affine-cap-s-open); morphisms.tex characterization of quasi-affine morphisms by an open immersion into an affine morphism (Tag 01SM, lemma-characterize-quasi-affine)"
+   }
+  },
+  {
+   "text": "For every $x\\in X'$, ampleness gives $n>0$ and a section $s$ of $(M')^{\\otimes n}$ nonvanishing at $x$. Step 2 expresses $s=\\sum_{j=1}^t c_j\\widetilde a_j$ with $c_j\\in C$ and $a_j\\in A_n$. If all $\\widetilde a_j$ vanished in the one-dimensional residue-field fibre of $(M')^{\\otimes n}$ at $x$, this sum would vanish there too. Thus $x\\in X'_{\\widetilde a_j}$ for some $j$. The opens $U_{n,a}=X'_{\\widetilde a}$, for all $n>0$ and $a\\in A_n$, consequently cover $X'$. Invariance of $\\widetilde a$ makes these opens stable under $\\alpha$: pullback preserves whether a section generates a rank-one module, and a module isomorphism preserves generation. Restricting $\\alpha$ therefore gives an isomorphism between the two pullbacks of $U_{n,a}$; its cocycle is the restriction of the given cocycle. For every test scheme the inclusion $U_{n,a}\\to X'$ intertwines transport, because that restricted isomorphism is obtained by factoring the original isomorphism through the same open subschemes.",
+   "uses": [
+    "def-weil-pbc-ample-invertible-module",
+    "def-pd-descent-datum"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/bosch-lutkebohmert-raynaud-neron-models.pdf",
+    "place": "BLR 6.1 Theorem 7, printed p.138, finite linear combination and invariant nonvanishing-open argument; local PDF WANTED, primary scan read online at the URL of the item source."
+   }
+  },
+  {
+   "text": "Step 4 makes every $U_{n,a}\\to S'$ quasi-affine, and Step 5 supplies its restricted descent datum. Apply [lem-trf-quasi-affine-fpqc-effective-descent] to $p:S'\\to S$ and each such datum. Its hypotheses require only a singleton fpqc cover and a quasi-affine morphism, not finite presentation. Apply [lem-pd-effective-invariant-open-cover] to these effective restricted data and their transport-compatible inclusions from Step 5. It gives an $S$-scheme $X$ and an isomorphism $X\\times_SS'\\simeq X'$ inducing exactly $\\alpha$. This gluing step includes all overlaps; no affine-intersection assumption on the cover of $X'$ has been introduced.",
+   "uses": [
+    "lem-trf-quasi-affine-fpqc-effective-descent",
+    "lem-pd-effective-invariant-open-cover"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/descent.tex",
+    "place": "Tags 0247 (lemma-quasi-affine) and 0AP4 (lemma-effective-for-fpqc-is-local-upstairs)"
+   }
+  },
+  {
+   "text": "Under the chosen effective identification, the map $q:X'\\to X$ is the base change of $p$. It is an fpqc covering by [lem-weil-pbc-fpqc-covering-axioms]. The fibre product $X'\\times_X X'$ identifies with $X'\\times_SS'$, using $\\alpha$ to identify the second $X'$ projection. Consequently the prescribed module isomorphism is an ordinary descent datum for $M'$ along $q$, and its cocycle is exactly the one in the hypothesis. Clause (3) of [lem-pc-fpqc-descent] supplies an invertible $M$ on $X$ and $q^*M\\simeq M'$ compatible with that specified datum. Combined with Step 6, this gives the required pair isomorphism inducing both prescribed data.",
+   "uses": [
+    "lem-weil-pbc-fpqc-covering-axioms",
+    "lem-pc-fpqc-descent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/descent.tex",
+    "place": "Tag 023T (proposition-fpqc-descent-quasi-coherent) and descent of locally free modules of rank one; topologies.tex fpqc base-change axiom"
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-space-relative-ampleness-fpqc-descent] to the scheme $X\\to S$, regarded as an algebraic space, with its ordinary invertible module $M$, and the singleton fpqc covering $S'\\to S$. The cited statement explicitly includes the ordinary-scheme interpretation of line modules and requires neither properness nor Noetherianity. On the cover its pullback is $M'$, ample on $X'$. Since $X'\\to S'$ is quasi-compact with $S'$ affine, [lem-trf-affine-base-ample-canonical-data] shows that $M'$ restricted to the inverse image of every affine open $W\\subseteq S'$ is ample, i.e. $M'$ is relatively ample over $S'$ in the sense of the cited descent statement. Thus $M$ is relatively ample over $S$. Since $S=\\operatorname{Spec}B$ is affine, the definition of relative ampleness in that cited statement says that $M$ is ample on $X$. Empty schemes, including the zero-ring base case, are covered by the same construction: the section-cover argument is vacuous and the effective gluing is empty.",
+   "uses": [
+    "lem-sfb-space-relative-ampleness-fpqc-descent",
+    "lem-trf-affine-base-ample-canonical-data"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-descent.tex",
+    "place": "Tag 0D3C (lemma-descending-property-ample), scheme specialization; descent.tex Tag 0D2P (lemma-descending-property-ample)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-faithfully-flat-ring-map",
+  "lem-weil-pbc-flat-ring-map-iff-flat-affine",
+  "lem-weil-pbc-faithfully-flat-surjective-spectrum",
+  "def-weil-pbc-fpqc-covering",
+  "lem-weil-pbc-ample-scheme-separated",
+  "lem-weil-pbc-fpqc-covering-axioms",
+  "def-weil-pbc-ample-invertible-module",
+  "lem-pc-finite-support-hi",
+  "lem-pc-flat-base-change-cohom",
+  "lem-pc-fpqc-descent",
+  "lem-weil-pbc-module-pullback-affine-sections",
+  "def-sc-invertible-section-ring",
+  "lem-sc-ample-finite-affine-cover",
+  "lem-sc-ample-proj-local-chart",
+  "def-pc-proj",
+  "lem-sc-affine-cap-section-open",
+  "lem-trf-quasi-affine-relative-spec-embedding",
+  "def-pd-descent-datum",
+  "lem-trf-quasi-affine-fpqc-effective-descent",
+  "lem-pd-effective-invariant-open-cover",
+  "lem-sfb-space-relative-ampleness-fpqc-descent",
+  "lem-trf-affine-base-ample-canonical-data"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+  "place": "Clause (3), supporting descent input; assembly follows BLR 6.1 Theorem 7 (printed p.138, online primary scan) using local Stacks 02KH, 023T, 0247, 0AP4, 01PZ, 01Q1 and 0D3C. BLR PDF not locally present: WANTED in report."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Effective fpqc descent for a scheme with an ample invertible sheaf carrying compatible descent datum along a faithfully flat ring map",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.descendsAlong_isomorphisms_surjective_inf_flat_inf_quasicompact\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FlatDescent\", \"type\": \"(CategoryTheory.MorphismProperty.isomorphisms AlgebraicGeometry.Scheme).DescendsAlong\\n  (@AlgebraicGeometry.Surjective ⊓ @AlgebraicGeometry.Flat ⊓ @AlgebraicGeometry.QuasiCompact)\", \"doc\": \"In the category of schemes, the property of being an isomorphism descends along morphisms that are simultaneously surjective, flat, and quasi-compact. This means that if a morphism $ f: X \\to Y $ is su\"}\n  {\"name\": \"AlgebraicGeometry.descendsAlong_universallyOpen_surjective_inf_flat_inf_quasicompact\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FlatDescent\", \"type\": \"CategoryTheory.MorphismProperty.DescendsAlong (@AlgebraicGeometry.UniversallyOpen)\\n  (@AlgebraicGeometry.Surjective ⊓ @AlgebraicGeometry.Flat ⊓ @AlgebraicGeometry.QuasiCompact)\", \"doc\": \"The property of being universally open descends along morphisms that are simultaneously surjective, flat, and quasi-compact. This means that if a morphism becomes universally open after base change al\"}\n  {\"name\": \"AlgebraicGeometry.descendsAlong_isOpenImmersion_surjective_inf_flat_inf_quasicompact'\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FlatDescent\", \"type\": \"AlgebraicGeometry.IsOpenImmersion.DescendsAlong\\n  (@AlgebraicGeometry.Surjective ⊓ @AlgebraicGeometry.Flat ⊓ @AlgebraicGeometry.QuasiCompact)\", \"doc\": \"In the category of schemes, the property of being an open immersion descends along morphisms that are simultaneously surjective, flat, and quasi-compact. This means that if a morphism becomes an open \"}\n  {\"name\": \"AlgebraicGeometry.HasAffineProperty.descendsAlong_of_affineAnd\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Descent\", \"type\": \"∀ (P P' : CategoryTheory.MorphismProperty AlgebraicGeometry.Scheme)\\n  (Q Q' : {R S : Type u} → [inst : CommRing R] → [inst_1 : CommRing S] → (R →+* S) → Prop) [P'.IsStableUnderBaseChange]\\n  [P'.IsStableUnderComposition] [P.IsStableUnderBaseChange],\\n  @AlgebraicGeometry.IsLocalIso ⊓ @AlgebraicGeometr\", \"doc\": \"If a morphism property $ P $ is defined by requiring the source scheme to be affine and satisfying a ring-theoretic condition $ Q $, and if $ Q $ is invariant under ring isomorphisms and satisfies a c\"}\n  {\"name\": \"AlgebraicGeometry.instDescendsAlongSchemeMinMorphismPropertySurjectiveFlatLocallyOfFinitePresentationOfQuasiCompactOfIsZariskiLocalAtTarget\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FlatDescent\", \"type\": \"∀ (P : CategoryTheory.MorphismProperty AlgebraicGeometry.Scheme)\\n  [P.DescendsAlong (@AlgebraicGeometry.Surjective ⊓ @AlgebraicGeometry.Flat ⊓ @AlgebraicGeometry.QuasiCompact)]\\n  [AlgebraicGeometry.IsZariskiLocalAtTarget P],\\n  P.DescendsAlong\\n    (@AlgebraicGeometry.Surjective ⊓ @AlgebraicGeometry.F\", \"doc\": \"If a morphism property $ P $ is Zariski local at the target and descends along morphisms that are surjective, flat, and quasi-compact, then $ P $ also descends along morphisms that are surjective, fla\"}\n  {\"name\": \"AlgebraicGeometry.Flat.surjective_descendsAlong_surjective_inf_flat_inf_quasicompact\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FlatDescent\", \"type\": \"CategoryTheory.MorphismProperty.DescendsAlong (@AlgebraicGeometry.Surjective)\\n  (@AlgebraicGeometry.Surjective ⊓ @AlgebraicGeometry.Flat ⊓ @AlgebraicGeometry.QuasiCompact)\", \"doc\": \"The property of being a surjective morphism of schemes descends along morphisms that are simultaneously surjective, flat, and quasi-compact. In other words, if a morphism becomes surjective after a ba\"}\n  {\"name\": \"AlgebraicGeometry.descendsAlong_universallyInjective_surjective_inf_flat_inf_quasicompact\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FlatDescent\", \"type\": \"CategoryTheory.MorphismProperty.DescendsAlong (@AlgebraicGeometry.UniversallyInjective)\\n  (@AlgebraicGeometry.Surjective ⊓ @AlgebraicGeometry.Flat ⊓ @AlgebraicGeometry.QuasiCompact)\", \"doc\": \"The property of being universally injective descends along morphisms that are simultaneously surjective, flat, and quasi-compact. Specifically, if a morphism $ f: X \\to Y $ of schemes is surjective, fl\"}\n  {\"name\": \"AlgebraicGeometry.Flat.instDescScheme\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Flat\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} {ι : Type v} [inst : Small.{u, v} ι] {Y : ι → AlgebraicGeometry.Scheme}\\n  {f : (i : ι) → Y i ⟶ X} [∀ (i : ι), AlgebraicGeometry.Flat (f i)],\\n  AlgebraicGeometry.Flat (CategoryTheory.Limits.Sigma.desc f)\", \"doc\": \"Given a scheme $X$ and a small family of schemes $\\\\{Y_i\\\\}$ indexed by $i : Ι$, if each morphism $f_i : Y_i \\to X$ is flat, then the coproduct morphism $\\\\coprod f_i : \\\\coprod Y_i \\to X$ is also flat. Thi\"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected hits concern morphism-property descent, affine-transition limits, closed subschemes or topological groups, and do not state this scheme-effectivity/geometric assertion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A polarized quasi compact scheme descends over a faithfully flat affine cover by descending its graded section algebra and Proj open immersion",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.descendsAlong_isOpenImmersion_surjective_inf_flat_inf_quasicompact'\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FlatDescent\", \"type\": \"AlgebraicGeometry.IsOpenImmersion.DescendsAlong\\n  (@AlgebraicGeometry.Surjective ⊓ @AlgebraicGeometry.Flat ⊓ @AlgebraicGeometry.QuasiCompact)\", \"doc\": \"In the category of schemes, the property of being an open immersion descends along morphisms that are simultaneously surjective, flat, and quasi-compact. This means that if a morphism becomes an open \"}\n  {\"name\": \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.𝒰D\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"{I : Type u} →\\n  [inst : CategoryTheory.Category.{u, u} I] →\\n    {S X : AlgebraicGeometry.Scheme} →\\n      {D : CategoryTheory.Functor I AlgebraicGeometry.Scheme} →\\n        {t : D ⟶ (CategoryTheory.Functor.const I).obj S} →\\n          {f : X ⟶ S} →\\n            [inst_1 : ∀ (i : I), CompactSpace ↥(D.obj\", \"doc\": \"The open cover of the diagram object $ D(i') $ formed by refining the open cover $ \\\\mathcal{U}_{D₀} $ with affine open immersions, ensuring each point lies in an affine open subscheme and compatibilit\"}\n  {\"name\": \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.𝒰D₀\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"{I : Type u} →\\n  [inst : CategoryTheory.Category.{u, u} I] →\\n    {S X : AlgebraicGeometry.Scheme} →\\n      {D : CategoryTheory.Functor I AlgebraicGeometry.Scheme} →\\n        {t : D ⟶ (CategoryTheory.Functor.const I).obj S} →\\n          {f : X ⟶ S} →\\n            [inst_1 : ∀ (i : I), CompactSpace ↥(D.obj\", \"doc\": \"For a diagram $D: \\\\mathcal{I} \\\\to \\\\text{Sch}$ of schemes, a natural transformation from $D$ to the constant diagram at $S$, and a morphism $X \\\\to S$, this constructs an open cover of the object $D(i')\"}\n  {\"name\": \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.hii'\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"{I : Type u} →\\n  [inst : CategoryTheory.Category.{u, u} I] →\\n    {S X : AlgebraicGeometry.Scheme} →\\n      {D : CategoryTheory.Functor I AlgebraicGeometry.Scheme} →\\n        {t : D ⟶ (CategoryTheory.Functor.const I).obj S} →\\n          {f : X ⟶ S} →\\n            [inst_1 : ∀ (i : I), CompactSpace ↥(D.obj\", \"doc\": \"A morphism $ i' \\to i $ in the index category $\\\\mathcal{I}$, chosen to ensure compatibility of the induced morphism $X \\to \\\\varprojlim D$ with the diagonal cover's open subsets. This morphism satisfies \"}\n  {\"name\": \"AlgebraicGeometry.Proj.fromOfGlobalSections\", \"module\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Basic\", \"type\": \"{σ : Type u_1} →\\n  {A : Type u} →\\n    [inst : CommRing A] →\\n      [inst_1 : SetLike σ A] →\\n        [inst_2 : AddSubgroupClass σ A] →\\n          (𝒜 : ℕ → σ) →\\n            [inst_3 : GradedRing 𝒜] →\\n              {X : AlgebraicGeometry.Scheme} →\\n                (f : A →+* ↑(X.presheaf.obj (Opposite.op ⊤\", \"doc\": \"Given a graded ring $\\\\mathcal{A}$ and a global section $f$ satisfying certain conditions, this morphism $X \\\\to \\\\operatorname{Proj}(\\\\mathcal{A})$ is constructed by gluing local morphisms defined on ope\"}\n  {\"name\": \"AlgebraicGeometry.descendsAlong_isomorphisms_surjective_inf_flat_inf_quasicompact\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FlatDescent\", \"type\": \"(CategoryTheory.MorphismProperty.isomorphisms AlgebraicGeometry.Scheme).DescendsAlong\\n  (@AlgebraicGeometry.Surjective ⊓ @AlgebraicGeometry.Flat ⊓ @AlgebraicGeometry.QuasiCompact)\", \"doc\": \"In the category of schemes, the property of being an isomorphism descends along morphisms that are simultaneously surjective, flat, and quasi-compact. This means that if a morphism $ f: X \\to Y $ is su\"}\n  {\"name\": \"AlgebraicGeometry.descendsAlong_universallyOpen_surjective_inf_flat_inf_quasicompact\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FlatDescent\", \"type\": \"CategoryTheory.MorphismProperty.DescendsAlong (@AlgebraicGeometry.UniversallyOpen)\\n  (@AlgebraicGeometry.Surjective ⊓ @AlgebraicGeometry.Flat ⊓ @AlgebraicGeometry.QuasiCompact)\", \"doc\": \"The property of being universally open descends along morphisms that are simultaneously surjective, flat, and quasi-compact. This means that if a morphism becomes universally open after base change al\"}\n  {\"name\": \"AlgebraicGeometry.Proj\", \"module\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Scheme\", \"type\": \"{A : Type u_1} →\\n  {σ : Type u_2} →\\n    [inst : CommRing A] →\\n      [inst_1 : SetLike σ A] → [inst_2 : AddSubgroupClass σ A] → (𝒜 : ℕ → σ) → [GradedRing 𝒜] → AlgebraicGeometry.Scheme\", \"doc\": \"The projective spectrum $\\\\operatorname{Proj}(\\\\mathcal{A})$ of a graded ring $\\\\mathcal{A}$ is constructed as a scheme by equipping it with a locally ringed space structure. For every point $x \\\\in \\\\oper\"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected hits concern morphism-property descent, affine-transition limits, closed subschemes or topological groups, and do not state this scheme-effectivity/geometric assertion."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"DescentDatum\", \"IsAmple\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected hits concern morphism-property descent, affine-transition limits, closed subschemes or topological groups, and do not state this scheme-effectivity/geometric assertion."
+  },
+  {
+   "tool": "grep",
+   "query": "descent.*(ample|projective)|(?:ample|projective).*descent",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected hits concern morphism-property descent, affine-transition limits, closed subschemes or topological groups, and do not state this scheme-effectivity/geometric assertion."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Effective fpqc descent for a scheme with an ample invertible sheaf carrying compatible descent datum along a faithfully flat ring map",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.HasRingHomProperty.descendsAlong\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Descent\", \"type\": \"[HasRingHomProperty P Q] (hQQ' : RingHom.CodescendsAlong Q Q') : P.DescendsAlong (P' ⊓ @QuasiCompact)\", \"doc\": \"If a ring homomorphism property $ Q $ codescends along another property $ Q' $, then any property $ P $ descends along the intersection of $ P' $ and quasi-compact morphisms.\"}\n  {\"name\": \"AlgebraicGeometry.IsZariskiLocalAtTarget.descendsAlong_inf_quasiCompact\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Descent\", \"type\": \"[IsZariskiLocalAtTarget P]\\n  (H :\\n    ∀ {R S : CommRingCat.{u}} {Y : Scheme.{u}} (φ : R ⟶ S) (g : Y ⟶ Spec R),\\n      P' (Spec.map φ) → P (pullback.fst (Spec.map φ) g) → P g) :\\n  P.DescendsAlong (P' ⊓ @QuasiCompact)\", \"doc\": \"If $ P $ is a morphism property that is Zariski local at the target, and for any ring homomorphism $ \\\\phi : R \\\\to S $ and morphism $ g : Y \\\\to \\\\operatorname{Spec}(R) $, the conditions $ P'(\\\\operatorna\"}\n  {\"name\": \"AlgebraicGeometry.descendsAlong_isomorphisms_surjective_inf_flat_inf_quasicompact\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.FlatDescent\", \"type\": \": (isomorphisms Scheme.{u}).DescendsAlong (@Surjective ⊓ @Flat ⊓ @QuasiCompact)\", \"doc\": \"In the category of schemes, the property of being an isomorphism descends along morphisms that are simultaneously surjective, flat, and quasi-compact. This means that if a morphism $ f: X \\to Y $ is su\"}\n  {\"name\": \"AlgebraicGeometry.HasAffineProperty.descendsAlong_of_affineAnd\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Descent\", \"type\": \"(hP : HasAffineProperty P (affineAnd Q)) [MorphismProperty.DescendsAlong (@IsAffineHom) P']\\n  (hQ : RingHom.RespectsIso Q) (hQQ' : RingHom.CodescendsAlong Q Q') : P.DescendsAlong (P' ⊓ @QuasiCompact)\", \"doc\": \"If a morphism property $ P $ is defined by requiring the source scheme to be affine and satisfying a ring-theoretic condition $ Q $, and if $ Q $ is invariant under ring isomorphisms and satisfies a c\"}\n  {\"name\": \"AlgebraicGeometry.Flat.flat_and_surjective_iff_faithfullyFlat_of_isAffine\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Flat\", \"type\": \"[IsAffine X] [IsAffine Y] : Flat f ∧ Surjective f ↔ f.appTop.hom.FaithfullyFlat\", \"doc\": \"For affine schemes $X$ and $Y$, a morphism $f : X \\to Y$ is flat and surjective if and only if the induced ring homomorphism on global sections $f_{\\text{appTop}}$ is faithfully flat.\"}\n  {\"name\": \"AlgebraicGeometry.instDescendsAlongSchemeMinMorphismPropertySurjectiveFlatLocallyOfFinitePresentationOfQuasiCompactOfIsZariskiLocalAtTarget\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.FlatDescent\", \"type\": \"(P : MorphismProperty Scheme) [P.DescendsAlong (@Surjective ⊓ @Flat ⊓ @QuasiCompact)] [IsZariskiLocalAtTarget P] :\\n  P.DescendsAlong (@Surjective ⊓ @Flat ⊓ @LocallyOfFinitePresentation)\", \"doc\": \"If a morphism property $ P $ is Zariski local at the target and descends along morphisms that are surjective, flat, and quasi-compact, then $ P $ also descends along morphisms that are surjective, fla\"}\n  {\"name\": \"AlgebraicGeometry.Flat.surjective_descendsAlong_surjective_inf_flat_inf_quasicompact\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.FlatDescent\", \"type\": \": DescendsAlong @Surjective (@Surjective ⊓ @Flat ⊓ @QuasiCompact)\", \"doc\": \"The property of being a surjective morphism of schemes descends along morphisms that are simultaneously surjective, flat, and quasi-compact. In other words, if a morphism becomes surjective after a ba\"}\n  {\"name\": \"AlgebraicGeometry.affineAnd\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.AffineAnd\", \"type\": \": AffineTargetMorphismProperty\", \"doc\": \"A morphism of schemes $ f : X \\to Y $ with affine target $ Y $ satisfies this property if the scheme $ X $ is affine and the condition $ Q $ holds for the ring homomorphism induced by $ f $ on the glob\"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected hits concern morphism-property descent, affine-transition limits, closed subschemes or topological groups, and do not state this scheme-effectivity/geometric assertion."
+  },
+  {
+   "tool": "grep",
+   "query": "descent.*(ample|polariz)|(?:ample|polariz).*descent",
+   "results": "{\"t\": \"2026-10-24T09:58:23Z\", \"tool\": \"grep\", \"query\": \"descent.*(ample|polariz)|(?:ample|polariz).*descent\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}; Read the returned hits: morphism-property descent and covering constructions do not construct an effective scheme with the prescribed ample-module datum.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"DescentDatum\", \"IsAmple\"",
+   "results": "{\"t\": \"2026-10-24T09:58:23Z\", \"tool\": \"loogle\", \"query\": \"\\\"DescentDatum\\\", \\\"IsAmple\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}; Read the returned hits: morphism-property descent and covering constructions do not construct an effective scheme with the prescribed ample-module datum.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Effective fpqc descent for a quasi compact scheme with a compatible ample invertible module",
+   "results": "{\"t\": \"2026-10-24T09:58:24Z\", \"tool\": \"leansearch\", \"query\": \"Effective fpqc descent for a quasi compact scheme with a compatible ample invertible module\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.HasAffineProperty.descendsAlong_of_affineAnd\", \"AlgebraicGeometry.instDescendsAlongSchemeMinMorphismPropertySurjectiveFlatLocallyOfFinitePresentationOfQuasiCompactOfIsZariskiLocalAtTarget\", \"AlgebraicGeometry.HasRingHomProperty.descendsAlong\", \"AlgebraicGeometry.descendsAlong_isomorphisms_surjective_inf_flat_inf_quasicompact\", \"AlgebraicGeometry.IsZariskiLocalAtTarget.descendsAlong_inf_quasiCompact\", \"AlgebraicGeometry.IsLocalAtTarget.descendsAlong_inf_quasiCompact\", \"AlgebraicGeometry.quasiCompact_isStableUnderBaseChange\", \"AlgebraicGeometry.Flat.surjective_descendsAlong_surjective_inf_flat_inf_quasicompact\"], \"digest\": \"14876055bb8b56e9\"}; Read the returned hits: morphism-property descent and covering constructions do not construct an effective scheme with the prescribed ample-module datum.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A scheme with ample line bundle and descent datum descends along a faithfully flat ring map",
+   "results": "{\"t\": \"2026-10-24T09:58:24Z\", \"tool\": \"leanfinder\", \"query\": \"A scheme with ample line bundle and descent datum descends along a faithfully flat ring map\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.descendsAlong_isomorphisms_surjective_inf_flat_inf_quasicompact\", \"AlgebraicGeometry.descendsAlong_isOpenImmersion_surjective_inf_flat_inf_quasicompact'\", \"AlgebraicGeometry.descendsAlong_universallyOpen_surjective_inf_flat_inf_quasicompact\", \"AlgebraicGeometry.HasRingHomProperty.descendsAlong\", \"AlgebraicGeometry.Flat.surjective_descendsAlong_surjective_inf_flat_inf_quasicompact\", \"AlgebraicGeometry.descendsAlong_universallyInjective_surjective_inf_flat_inf_quasicompact\", \"AlgebraicGeometry.HasAffineProperty.descendsAlong_of_affineAnd\", \"AlgebraicGeometry.Flat\"], \"digest\": \"92026e4a1f739078\"}; Read the returned hits: morphism-property descent and covering constructions do not construct an effective scheme with the prescribed ample-module datum.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Effective fpqc descent for a quasi compact scheme with a compatible ample invertible module",
+   "results": "{\"t\": \"2026-10-24T09:58:26Z\", \"tool\": \"leanfinder\", \"query\": \"Effective fpqc descent for a quasi compact scheme with a compatible ample invertible module\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.descendsAlong_isomorphisms_surjective_inf_flat_inf_quasicompact\", \"AlgebraicGeometry.descendsAlong_universallyOpen_surjective_inf_flat_inf_quasicompact\", \"AlgebraicGeometry.descendsAlong_isOpenImmersion_surjective_inf_flat_inf_quasicompact'\", \"AlgebraicGeometry.IsLocalAtTarget.descendsAlong_inf_quasiCompact\", \"AlgebraicGeometry.IsZariskiLocalAtTarget.descendsAlong_inf_quasiCompact\", \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.𝒰D\", \"AlgebraicGeometry.QuasiCompactCover.homCover\", \"AlgebraicGeometry.instDescendsAlongSchemeMinMorphismPropertySurjectiveFlatLocallyOfFinitePresentationOfQuasiCompactOfIsZariskiLocalAtTarget\"], \"digest\": \"768b7cf5fedb5c07\"}; Read the returned hits: morphism-property descent and covering constructions do not construct an effective scheme with the prescribed ample-module datum.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-smooth-group-field-trait-descent",
+  "date": "2026-10-24",
+  "group": "Q150"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": "det-thm-sf-ctf-stability-direct-images",
+   "place": "Clause (3), direct-image constructibility: alteration and curve-reduction auxiliary input through lem-sfb-admissible-direct-image; within the recorded via chain, BLR 6.1 Theorem 7, invariant quasi-affine opens and effective descent in the proof of smooth-group field/trait descent.",
+   "via": [
+    "lem-sfb-smooth-group-field-trait-descent",
+    "lem-sfb-strict-birational-law-realization",
+    "lem-sfb-trait-birational-group-envelope",
+    "lem-sfb-bounded-group-local-neron-criterion",
+    "lem-sfb-abelian-neron-model",
+    "lem-sfb-semiabelian-neron-lft-existence",
+    "lem-sfb-trait-semiabelian-hom-extension",
+    "lem-sfb-semiabelian-generic-graph-proper",
+    "lem-sfb-normal-semiabelian-hom-extension",
+    "lem-sfb-symmetric-line-power-prolongation",
+    "lem-sfb-normal-symmetric-cubical-extension",
+    "lem-sfb-symmetric-ample-power-extension",
+    "lem-sfb-regular-group-generic-ampleness",
+    "lem-sfb-stable-picard-theta-ampleness",
+    "lem-sfb-stable-relative-picard-kummer",
+    "lem-sfb-stable-level-versal-branch-freeness",
+    "lem-sfb-stable-abelian-level-normalization",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-polarized-affine-fpqc-effectivity",
+  "worker": "stage1",
+  "summary": "Kept the statement unchanged. Wrote the BLR invariant-section cover argument using existing module base change, fpqc module descent, canonical Proj charts, quasi-affine descent, invariant-open gluing and fpqc reflection of relative ampleness. No duplicate or elementary child nodes created. Repaired the null blueprint ancestor using the existing ancestry chain.",
+  "blueprint": "Clause (3), direct-image constructibility: alteration and curve-reduction auxiliary input through lem-sfb-admissible-direct-image; within the recorded via chain, BLR 6.1 Theorem 7, invariant quasi-affine opens and effective descent in the proof of smooth-group field/trait descent.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-flat-ring-map-iff-flat-affine",
+    "why": "Generic Spec of a ring map is flat iff the ring map is flat input for polarized fpqc descent; the constructibility unit supplies no substitute for this algebraic-geometry tool."
+   },
+   {
+    "node": "lem-weil-pbc-faithfully-flat-surjective-spectrum",
+    "why": "Generic A faithfully flat ring map is surjective on spectra input for polarized fpqc descent; the constructibility unit supplies no substitute for this algebraic-geometry tool."
+   },
+   {
+    "node": "lem-weil-pbc-ample-scheme-separated",
+    "why": "Generic A scheme carrying an ample invertible module is separated input for polarized fpqc descent; the constructibility unit supplies no substitute for this algebraic-geometry tool."
+   },
+   {
+    "node": "lem-pc-finite-support-hi",
+    "why": "Generic Finite support of higher direct images input for polarized fpqc descent; the constructibility unit supplies no substitute for this algebraic-geometry tool."
+   },
+   {
+    "node": "lem-pc-flat-base-change-cohom",
+    "why": "Generic Cohomology and flat base change input for polarized fpqc descent; the constructibility unit supplies no substitute for this algebraic-geometry tool."
+   },
+   {
+    "node": "lem-pc-fpqc-descent",
+    "why": "Generic FPQC descent for quasi-coherent modules input for polarized fpqc descent; the constructibility unit supplies no substitute for this algebraic-geometry tool."
+   },
+   {
+    "node": "lem-weil-pbc-module-pullback-affine-sections",
+    "why": "Generic Sections of the pullback of a quasi-coherent module over an affine open input for polarized fpqc descent; the constructibility unit supplies no substitute for this algebraic-geometry tool."
+   },
+   {
+    "node": "lem-sc-ample-finite-affine-cover",
+    "why": "Generic An ample invertible module has a finite affine principal-open cover input for polarized fpqc descent; the constructibility unit supplies no substitute for this algebraic-geometry tool."
+   },
+   {
+    "node": "lem-sc-ample-proj-local-chart",
+    "why": "Generic The canonical Proj map identifies an affine principal chart input for polarized fpqc descent; the constructibility unit supplies no substitute for this algebraic-geometry tool."
+   },
+   {
+    "node": "lem-sc-affine-cap-section-open",
+    "why": "Generic Intersecting an affine open with a line-bundle nonvanishing locus is affine input for polarized fpqc descent; the constructibility unit supplies no substitute for this algebraic-geometry tool."
+   },
+   {
+    "node": "lem-trf-quasi-affine-relative-spec-embedding",
+    "why": "Generic Relative-spectrum characterization of quasi-affine morphisms input for polarized fpqc descent; the constructibility unit supplies no substitute for this algebraic-geometry tool."
+   },
+   {
+    "node": "lem-trf-quasi-affine-fpqc-effective-descent",
+    "why": "Generic Effective fpqc descent for quasi-affine scheme morphisms input for polarized fpqc descent; the constructibility unit supplies no substitute for this algebraic-geometry tool."
+   },
+   {
+    "node": "lem-pd-effective-invariant-open-cover",
+    "why": "Generic Effective descent glues along compatible invariant opens input for polarized fpqc descent; the constructibility unit supplies no substitute for this algebraic-geometry tool."
+   },
+   {
+    "node": "lem-weil-pbc-fpqc-covering-axioms",
+    "why": "Generic Fpqc coverings satisfy the site covering axioms input for polarized fpqc descent; the constructibility unit supplies no substitute for this algebraic-geometry tool."
+   },
+   {
+    "node": "lem-sfb-space-relative-ampleness-fpqc-descent",
+    "why": "Generic Relative ampleness of spaces descends fpqc locally input for polarized fpqc descent; the constructibility unit supplies no substitute for this algebraic-geometry tool."
+   },
+   {
+    "node": "lem-trf-affine-base-ample-canonical-data",
+    "why": "Generic: an ample module on a quasi-compact scheme over an affine base restricts to ample modules over every affine open of the base (Stacks Morphisms, relatively ample over affine base); needed to verify the relative-ampleness hypothesis of the fpqc ampleness descent on the cover; the constructibility unit supplies no substitute."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-flat-ring-map-iff-flat-affine",
+  "lem-weil-pbc-faithfully-flat-surjective-spectrum",
+  "lem-weil-pbc-ample-scheme-separated",
+  "lem-pc-finite-support-hi",
+  "lem-pc-flat-base-change-cohom",
+  "lem-pc-fpqc-descent",
+  "lem-weil-pbc-module-pullback-affine-sections",
+  "lem-sc-ample-finite-affine-cover",
+  "lem-sc-ample-proj-local-chart",
+  "lem-sc-affine-cap-section-open",
+  "lem-trf-quasi-affine-relative-spec-embedding",
+  "lem-trf-quasi-affine-fpqc-effective-descent",
+  "lem-pd-effective-invariant-open-cover",
+  "lem-weil-pbc-fpqc-covering-axioms",
+  "lem-sfb-space-relative-ampleness-fpqc-descent",
+  "lem-trf-affine-base-ample-canonical-data"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q04-429d4b8b7",
+  "group": "Q04",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q04-429d4b8b7 (reviewer sub-agent of L); spot-checked: I read the item, all 8 steps, the statement of every cited node and the Stacks sources 0AP4 (descent.tex l.8928), 0247 (l.9233) and 0D3C (spaces-descent l.2125); tags 01PV, 01PZ, 01Q1 and 0D2P checked in tags/tags. The statement is unchanged and true: it is the affine-base case of BLR 6.1 Thm 7, with no finite-presentation or Noetherian hypothesis. Steps 1-7 are correct: fpqc singleton cover; descent of f'_*M'^n via flat base change and 023T; Γ_* and Proj open immersion (01PZ/01Q1); quasi-affine X'_s (01PV with 01SM ⇐); cover by invariant sections via the rank-one residue fibre; 0247 then 0AP4 gluing; 023T(3) for the invertible module. One gap, fixed: Step 8 applies 0D3C, but the cover hypothesis 'relatively ample over S'' needs ampleness over every affine open of S', not only on X'. I added a citation to the existing lem-trf-affine-base-ample-canonical-data (01VJ) in Step 8 text and uses, proof_deps and tool_uses. No new nodes and no duplicates (ample/effective DAG search). Batch 5: the 01SM, 0247 and 0D3C citations and the added 01VJ one are generic scheme, algebraic-space and descent tools whose closures contain no trace-formula or Poincaré-duality proof node, so they are genuinely outside the assumptions. No cycle. Edge cases checked: B=0, B=C, P^1 with O(1).; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.PolarizedAffineFpqcEffectivity",
+  "declaration": "AlgebraicGeometry.exists_polarized_affine_fpqc_descent",
+  "file": "lean/Sheaf/AlgebraicGeometry/PolarizedAffineFpqcEffectivity.lean",
+  "statement": "theorem exists_polarized_affine_fpqc_descent {B C : Type u} [CommRing B] [CommRing C] (φ : B →+* C) (hφ : φ.FaithfullyFlat) (V : Over (Spec (CommRingCat.of C))) [QuasiCompact V.hom] (D : Over.DescentDatum (Spec.map (CommRingCat.ofHom φ)) V) (M' : V.left.Modules) [M'.IsInvertible] (hM' : Scheme.Modules.IsAmple V.left M') (ell : ∀ {T : Scheme.{u}} (f₀ f₁ : T ⟶ Spec (CommRingCat.of C)) (h : f₀ ≫ Spec.map (CommRingCat.ofHom φ) = f₁ ≫ Spec.map (CommRingCat.ofHom φ)) (a : Over.mk f₀ ⟶ V), (Scheme.Modules.tensorPullback a.left).obj M' ≅ (Scheme.Modules.tensorPullback (D.transport f₀ f₁ h a).left).obj M') (hell_natural : ∀ {T T' : Scheme.{u}} (g : T' ⟶ T) (f₀ f₁ : T ⟶ Spec (CommRingCat.of C)) (h : f₀ ≫ Spec.map (CommRingCat.ofHom φ) = f₁ ≫ Spec.map (CommRingCat.ofHom φ)) (a : Over.mk f₀ ⟶ V), HEq ((Scheme.Modules.tensorPullbackSectionComp g a.left).app M' ≪≫ (Scheme.Modules.tensorPullback g).mapIso (ell f₀ f₁ h a) ≪≫ ((Scheme.Modules.tensorPullbackSectionComp g (D.transport f₀ f₁ h a).left).app M').symm) (ell (g ≫ f₀) (g ≫ f₁) (by rw [Category.assoc, Category.assoc, h]) ((Over.homMk g : Over.mk (g ≫ f₀) ⟶ Over.mk f₀) ≫ a))) (hell_cocycle : ∀ {T : Scheme.{u}} (f₀ f₁ f₂ : T ⟶ Spec (CommRingCat.of C)) (h₀₁ : f₀ ≫ Spec.map (CommRingCat.ofHom φ) = f₁ ≫ Spec.map (CommRingCat.ofHom φ)) (h₁₂ : f₁ ≫ Spec.map (CommRingCat.ofHom φ) = f₂ ≫ Spec.map (CommRingCat.ofHom φ)) (a : Over.mk f₀ ⟶ V), HEq ((ell f₀ f₁ h₀₁ a) ≪≫ (ell f₁ f₂ h₁₂ (D.transport f₀ f₁ h₀₁ a))) (ell f₀ f₂ (h₀₁.trans h₁₂) a)) : ∃ (X : Over (Spec (CommRingCat.of B))) (q : V.left ⟶ X.left) (M : X.left.Modules) (hM : M.IsInvertible) (e : (Scheme.Modules.tensorPullback q).obj M ≅ M'), @Scheme.Modules.IsAmple X.left M hM ∧ IsPullback q V.hom X.hom (Spec.map (CommRingCat.ofHom φ)) ∧ (∀ {T : Scheme.{u}} (f₀ f₁ : T ⟶ Spec (CommRingCat.of C)) (h : f₀ ≫ Spec.map (CommRingCat.ofHom φ) = f₁ ≫ Spec.map (CommRingCat.ofHom φ)) (a : Over.mk f₀ ⟶ V), (D.transport f₀ f₁ h a).left ≫ q = a.left ≫ q) ∧ (∀ {T : Scheme.{u}} (f₀ f₁ : T ⟶ Spec (CommRingCat.of C)) (h : f₀ ≫ Spec.map (CommRingCat.ofHom φ) = f₁ ≫ Spec.map (CommRingCat.ofHom φ)) (a : Over.mk f₀ ⟶ V), HEq ((Scheme.Modules.tensorPullbackSectionComp a.left q).app M ≪≫ (Scheme.Modules.tensorPullback a.left).mapIso e ≪≫ ell f₀ f₁ h a) ((Scheme.Modules.tensorPullbackSectionComp (D.transport f₀ f₁ h a).left q).app M ≪≫ (Scheme.Modules.tensorPullback (D.transport f₀ f₁ h a).left).mapIso e))",
+  "branch": "newtargets-dag",
+  "by": "Q128",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "The module datum is expressed in the Yoneda-equivalent natural test-scheme transport form over the recorded Over.DescentDatum. HEq only identifies pullbacks along equal scheme maps from its naturality/cocycle and the effective square. Canonical comparisons use the recorded section-normalized tensorPullbackSectionComp."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-ac67ee060",
+  "group": "Q128",
+  "result": "pass",
+  "note": "Read the item node, all 10 stmt_deps (Over.DescentDatum transport form and IsEffective, Scheme.Modules.IsAmple = Stacks 01PS, tensorPullbackSectionComp g h : (g≫h)^* ≅ h^* ⋙ g^*, RingHom.FaithfullyFlat, QuasiCompact, Spec), the module and the report. Every hypothesis and conclusion clause matches: ell gives p0*M' → α*p1*M' on test points; hell_natural, normalized by the canonical comparisons, makes it one overlap iso; hell_cocycle is the triple-overlap cocycle, and the identity law follows from it; the conclusion is IsPullback plus q-invariance (verbatim IsEffective) plus module compatibility with the same e, and M is ample. HEq only across transport_homMk_comp, transport_transport and q-invariance. No extra assumptions; edge cases (empty scheme, zero ring, coinciding lifts, single universe u) covered. Statement field verbatim; docstrings give BLR 6.1 Thm 7 and the blueprint tag; sorry only; no duplicate (PolarizedSchemeEtaleDescent is the étale-family notion). Not compiled: no file changed; worker reports a clean server compile."
+ }
+}

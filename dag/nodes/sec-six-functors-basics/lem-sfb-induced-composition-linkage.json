@@ -1,0 +1,348 @@
+{
+ "id": "lem-sfb-induced-composition-linkage",
+ "kind": "statement",
+ "title": "Composition factors and affine linkage for dominant induced modules",
+ "statement": "Let $F$ be an algebraically closed field [def-weil-field, def-weil-algebraic-closure]. Let $S$ be a semisimple simply connected $F$-group scheme [def-sc-group-scheme]: it is smooth, connected, affine and of finite type, has no nontrivial smooth connected solvable normal subgroup, and every surjective homomorphism from a semisimple group with finite central kernel is an isomorphism. Solvable means that successive commutator subgroup schemes become trivial; finite central means finite-dimensional coordinate algebra and commuting after every scalar extension. Fix a split maximal torus $T\\subseteq S$ and a Borel subgroup $B\\supseteq T$ with unipotent radical $U$, with these notions as in [lem-sfb-rho-section-modules]. Use the character lattice $X=X^*(T)$, roots $\\Phi$, positive roots $\\Phi^+$ in $\\operatorname{Lie}(B)$, simple roots $\\Delta$, coroots and integer pairing of [lem-sfb-reductive-borel-pair-structure]. Put $\\rho=\\tfrac12\\sum_{\\alpha\\in\\Phi^+}\\alpha\\in X$ as in [lem-sfb-rho-section-modules]. A rational $S$-module is an $F$-vector space $V$ with coaction $c_V:V\\to V\\otimes_F F[S]$ satisfying coassociativity and the counit identity. A submodule is a linear subspace stable under this coaction, and simple means nonzero with only zero and itself as submodules. Write $V^U$ for the vectors whose restricted coaction is $v\\mapsto v\\otimes1$. A finite-dimensional simple module has highest weight $\\eta\\in X$ if $V^U$ is one-dimensional and $t v=\\eta(t)v$ on this line after every commutative $F$-algebra extension. Write $\\dim_F$ for ordinary vector-space dimension, an integer rather than its image in $F$. Assume $\\operatorname{char}F=p>0$. Let $W=N_S(T)(F)/T(F)$ act on $X$ by $(w\\chi)(t)=\\chi(n_w^{-1}tn_w)$ for a normalizer representative, let $w_0\\Phi^+=-\\Phi^+$, and put $Q=\\sum_{\\alpha\\in\\Phi}\\mathbf Z\\alpha$. Write $\\mu<\\eta$ if $\\eta-\\mu$ is a nonzero integral nonnegative combination of simple roots. A character is dominant if its pairing with every simple coroot is nonnegative. For any dominant $\\eta\\in X$, extend $w_0\\eta$ to $\\widetilde{w_0\\eta}:B\\to\\mathbf G_m$ through the projection $B\\to T$, and define the actual regular-function module\n$$I(\\eta)=\\{f\\in F[S]: f(gb)=\\widetilde{w_0\\eta}(b)^{-1}f(g)\\text{ after every commutative }F\\text{-algebra extension}\\},\\qquad (sf)(g)=f(s^{-1}g).$$\nIt is nonzero finite-dimensional and admits a finite composition series, meaning a strictly increasing finite filtration by rational submodules from zero to $I(\\eta)$ with nonzero simple successive quotients. In every such series exactly one quotient has highest weight $\\eta$. Every other quotient has a dominant highest weight $\\mu<\\eta$ and satisfies\n$$\\mu+\\rho=w(\\eta+\\rho)+p\\gamma\\quad\\text{for some }w\\in W,\\ \\gamma\\in Q.$$\nThis assertion has no restriction on the positive prime characteristic and includes reducible and empty root systems.",
+ "source": {
+  "document": "literature/jantzen-representations-of-algebraic-groups-2003.pdf",
+  "place": "Part II, Chapter 2 (highest-weight structure of induced modules) and Chapter 6 (linkage principle); book WANTED, not local. Corroboration read online: Andersen, The Steinberg linkage class for a reductive algebraic group, arXiv:1706.00590v2, sections 2.2 and 2.8, printed pp.2 and 5; Williamson, Algebraic representations and constructible sheaves, arXiv:1610.06261v1, sections 1.2 and 1.9, pp.4--5 and 12. Our positive Borel convention is implemented by E_B(w_0 eta). Milne 22.21--22.27 gives the actual regular-function convention. No Steinberg simplicity or tensor product theorem is included."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-weil-algebraic-closure",
+  "def-sc-group-scheme",
+  "lem-sfb-rho-section-modules",
+  "lem-sfb-reductive-borel-pair-structure",
+  "def-sfb-rational-composition-series",
+  "def-sfb-rational-highest-weight-data",
+  "def-sfb-rank-one-root-interfaces",
+  "def-sfb-affine-weight-order-action"
+ ],
+ "proof": [
+  {
+   "text": "Put $\\chi=w_0\\eta$ and $\\lambda=-w_0\\eta$. The longest-element statement [lem-sfb-rho-regular-weyl-orbit] gives $w_0^2=1$. Since $-w_0$ carries the positive roots onto themselves, it permutes their indecomposable elements, the simple roots, and their corresponding coroots. Thus $\\lambda$ is dominant: its simple-coroot pairings are the simple-coroot pairings of $\\eta$ in a permuted order. Here roots, coroots and their pairing are those of [lem-sfb-reductive-borel-pair-structure]. The regular-function space in the item is literally $I(\\eta)=E_B(-\\widetilde\\lambda)$, with the same left translation. The finite-dimensionality assertion of [lem-sfb-induced-weyl-dimension-formula] applies. For nonvanishing, [lem-sfb-dominant-character-highest-line] supplies a finite-dimensional rational module $V$ and a nonzero $B$-eigenvector $v$ of character $\\widetilde\\lambda$. Choose an $F$-linear functional $\\ell$ with $\\ell(v)=1$. The matrix coefficient $f(g)=\\ell(gv)$ is regular, satisfies $f(gb)=\\widetilde\\lambda(b)f(g)$ over every $F$-algebra, and has $f(1)=1$. Hence $I(\\eta)\\ne0$.",
+   "uses": [
+    "lem-sfb-rho-regular-weyl-orbit",
+    "lem-sfb-reductive-borel-pair-structure",
+    "lem-sfb-induced-weyl-dimension-formula",
+    "lem-sfb-dominant-character-highest-line"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Definition 22.21, Proposition 22.27(a), pp.468--470; nonvanishing by the matrix-coefficient construction; dimension formula only used for finiteness."
+   }
+  },
+  {
+   "text": "Finite-dimensional rational modules have finite composition series by induction on their vector-space dimension. A nonzero module has a rational submodule of least positive dimension, which is simple. Its quotient has smaller dimension; lift an inductively chosen composition series of the quotient and prepend this simple submodule. The zero-dimensional case has the empty series. We will also use exactness of torus weight spaces, directly from the split-torus coaction: identify $F[T]$ with a Laurent polynomial algebra and write $c(v)=\\sum_\\nu v_\\nu\\otimes z^\\nu$. Coassociativity and the counit say that $v=\\sum_\\nu v_\\nu$ is the unique decomposition into weight vectors. An equivariant map preserves these coefficients. In a surjection, extract the $\\nu$-component of any lift of a $\\nu$-weight vector; this proves surjectivity on that weight space. Consequently weight dimensions add in every short exact sequence of rational modules.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Finite-dimensional linear algebra and coefficient extraction in the split-torus coaction; compare section 12 on diagonalizable groups."
+   }
+  },
+  {
+   "text": "Write $D=I(\\eta)^\\vee$ with $(g\\ell)(f)=\\ell(g^{-1}f)$. The inverse-transpose of the regular action matrix gives its rational coaction. Put $e(f)=f(1)$. The matrix coefficient constructed in step 1 has $e(f)=1$, so $e\\ne0$. For $b\\in B(A)$, $(be)(f)=f(b)=\\widetilde\\chi(b)^{-1}f(1)$, so $e$ is a $B$-eigenvector of weight $\\lambda=-w_0\\eta$. Let $C$ be the smallest rational submodule of $D$ containing $e$. Its annihilator $C^\\perp\\subseteq I(\\eta)$ is rational: the identity $\\ell(gf)=(g^{-1}\\ell)(f)$ proves stability over every algebra. If $f\\in C^\\perp$, then $f(g)=(ge)(f)=0$ universally, since $ge\\in C\\otimes_F A$. Taking $A=F[S]$ and the universal point shows that this is the zero regular function. Thus $C^\\perp=0$, and finite-dimensional duality gives $C=D$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Definition 22.21 and the evaluation map in 22.29, pp.468 and 470; explicit dual cyclicity by annihilators, without Frobenius reciprocity or a density theorem."
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-primitive-cyclic-weight-bound] to the rational module $D$ generated by the $B$-eigenvector $e$ of weight $\\lambda$. It gives $\\dim_FD_\\lambda=1$ and $\\lambda-\\delta\\in\\sum_{\\alpha\\in\\Delta}\\mathbf N\\alpha$ for every weight $\\delta$ of $D$. For any rational module $M$ and normalizer representative $n_w$, the equality $t(n_wm)=n_w(n_w^{-1}tn_w)m$ gives $M_\\nu\\cong M_{w\\nu}$. Dualization negates weights, by evaluating the dual action on a weight basis. Hence, for a weight $\\nu$ of $I(\\eta)$, $-w_0\\nu$ is a weight of $D$, and $w_0(\\nu-\\eta)=\\lambda-(-w_0\\nu)$ is a nonnegative simple-root sum. Apply $-w_0$, which permutes the simple roots as in step 1, to obtain $\\eta-\\nu\\in\\sum_{\\alpha\\in\\Delta}\\mathbf N\\alpha$. Also $w_0\\lambda=-\\eta$ by [lem-sfb-rho-regular-weyl-orbit], so $\\dim_F I(\\eta)_\\eta=\\dim_FD_{-\\eta}=\\dim_FD_\\lambda=1$.",
+   "uses": [
+    "lem-sfb-primitive-cyclic-weight-bound",
+    "lem-sfb-rho-regular-weyl-orbit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 22.17, p.467, applied to the cyclic dual; Proposition 22.15, p.467, normalizer calculation written explicitly; contragredient weight calculation, p.471."
+   }
+  },
+  {
+   "text": "Fix any composition series and a simple quotient $L$ in it. By [lem-sfb-simple-module-dual-highest-weight], $L^U$ is a one-dimensional $T$-eigenline of some weight $\\mu$. Because $B=U\\rtimes T$ by [lem-sfb-reductive-borel-pair-structure], a nonzero vector $v$ on this line is a $B$-eigenvector of the extension of $\\mu$; simplicity says that it generates $L$. The cyclic weight bound [lem-sfb-primitive-cyclic-weight-bound] gives $L_\\mu=Fv$ and all weights of $L$ at most $\\mu$. The simple roots form a basis of $X\\otimes_{\\mathbf Z}\\mathbf Q$ by [lem-sfb-simply-connected-character-lattice], so every character lies in the rational root span. For each simple root $\\alpha$, the reflection $s_\\alpha$ has a normalizer representative by [lem-sfb-weyl-reflection-realization]. Thus $s_\\alpha\\mu$ is also a weight, by the calculation of step 4, so $\\mu-s_\\alpha\\mu=\\langle\\mu,\\alpha^\\vee\\rangle\\alpha$ is a nonnegative simple-root sum. Linear independence of the simple roots makes $\\langle\\mu,\\alpha^\\vee\\rangle\\ge0$. Thus $\\mu$ is dominant. Exactness on weight spaces (step 2) and the weight bound for $I(\\eta)$ (step 4) give $\\mu\\le\\eta$.",
+   "uses": [
+    "lem-sfb-simple-module-dual-highest-weight",
+    "lem-sfb-reductive-borel-pair-structure",
+    "lem-sfb-primitive-cyclic-weight-bound",
+    "lem-sfb-weyl-reflection-realization",
+    "lem-sfb-simply-connected-character-lattice"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Theorem 22.18, pp.467--468; dominance deduced explicitly as in Proposition 22.17 from the weight bound and simple reflections."
+   }
+  },
+  {
+   "text": "Take the $\\eta$-weight space of every short exact sequence in the chosen series. By step 2 its dimension adds, and the sum of the dimensions of the factors' $\\eta$-weight spaces is $\\dim_F I(\\eta)_\\eta=1$. A factor of highest weight $\\mu$ can have an $\\eta$-weight only if $\\eta\\le\\mu$, by step 5; since also $\\mu\\le\\eta$, the pointed simple-root cone forces $\\mu=\\eta$. In that case its $\\eta$-weight space has dimension one by step 5. Therefore exactly one factor has highest weight $\\eta$. All other factors have dominant highest weight $\\mu<\\eta$. This works for the arbitrary chosen series, with no appeal to a change-of-series theorem.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Dimension additivity on torus weight spaces and the simple-root partial order; cf. Milne Theorem 22.18 and Proposition 22.27(c)."
+   }
+  },
+  {
+   "text": "By [lem-sfb-induced-module-primitive-line] applied to $E_B(\\widetilde\\chi)$, its nonzero $U$-fixed subspace is one-dimensional. The weight there is $w_0\\chi=\\eta$, using [lem-sfb-rho-regular-weyl-orbit]. Suppose $I(\\eta)=A\\oplus B'$ for nonzero rational submodules. A least-positive-dimension submodule of $A$, and one of $B'$, are simple. Each has a nonzero $U$-fixed line by [lem-sfb-simple-module-dual-highest-weight]. Their inclusions give two independent $U$-fixed vectors in $I(\\eta)$, a contradiction. Consequently $I(\\eta)$ is indecomposable as a rational module.",
+   "uses": [
+    "lem-sfb-induced-module-primitive-line",
+    "lem-sfb-rho-regular-weyl-orbit",
+    "lem-sfb-simple-module-dual-highest-weight"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 22.22 and Theorem 22.18, pp.467--469; indecomposability follows from the primitive line, not from simplicity of the induced module."
+   }
+  },
+  {
+   "text": "To prove linkage use the opposite Borel $B^-=nB n^{-1}$, with $n$ representing $w_0$. Write $H^i(x)=H^i(S/B^-,\\mathcal L(F_x))$ in the notation of [lem-sfb-flag-cohomology-finite-exact]. Its degree-zero identification gives an explicit isomorphism $H^0(\\eta)\\to I(\\eta)$: $f\\mapsto(g\\mapsto f(gn))$. Indeed $bn=n(n^{-1}bn)$, and the $B^-$-character $\\eta(n^{-1}bn)$ is the $B$-character $w_0\\eta(b)$. Right translation by $n^{-1}$ is the inverse, and both maps commute with left translation. This changes no weights or group action. In what follows, simple constituents have highest weights as in [lem-sfb-simple-module-dual-highest-weight].",
+   "uses": [
+    "lem-sfb-flag-cohomology-finite-exact",
+    "lem-sfb-simple-module-dual-highest-weight"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/andersen-strong-linkage-principle-1980.pdf",
+    "place": "p.55, homogeneous bundles and H^0 convention; explicit change of Borel by right translation."
+   }
+  },
+  {
+   "text": "We prove the stronger simultaneous claim $P(x)$ for every $x\\in D=\\{x:x+\\rho\\text{ is dominant}\\}$: every simple constituent of every $H^i(w\\mathbin\\cdot x)$, $w\\in W$, $i\\ge0$, has highest weight $\\nu\\uparrow x$. Use the well-founded strict order on $D$ and the unique dot-dominant representative from [lem-sfb-affine-reflection-dominant-descent]. Assume $P(y)$ for all $y<x$. Within this outer induction we will induct on $\\ell(w)$. The rank-one computation [lem-sfb-minimal-parabolic-line-cohomology] includes the zero fibre at pairing $-1$ and the acyclicity of a $P_\\alpha$-module tensored with $F_{-\\rho}$, since $\\langle-\\rho,\\alpha^\\vee\\rangle=-1$. The reflection sequences [lem-sfb-demazure-reflection-sequences] apply also at $\\langle y+\\rho,\\alpha^\\vee\\rangle=0$; there is no omitted wall or small-prime case.",
+   "uses": [
+    "lem-sfb-affine-reflection-dominant-descent",
+    "lem-sfb-minimal-parabolic-line-cohomology",
+    "lem-sfb-demazure-reflection-sequences",
+    "lem-sfb-rho-regular-weyl-orbit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/andersen-strong-linkage-principle-1980.pdf",
+    "place": "pp.56--57, Lemma 3, Corollary 2, and outer induction in the proof of Theorem 1."
+   }
+  },
+  {
+   "text": "First isolate the error terms used in both induction branches. Let $y=w\\mathbin\\cdot x$ and $\\ell(s_\\alpha w)=\\ell(w)+1$. The error modules $C,Q'$ in [lem-sfb-demazure-reflection-sequences] have only weights $z=s_\\alpha\\mathbin\\cdot y+kp\\alpha$ with $0<kp<\\langle y+\\rho,\\alpha^\\vee\\rangle$. By [lem-sfb-flag-cohomology-finite-exact], a constituent of any $H^j(C)$ or $H^j(Q')$ occurs in $H^j(z)$ for one such weight. By [lem-sfb-affine-reflection-dominant-descent], $z=v\\mathbin\\cdot d(z)$, $d(z)<x$, and $d(z)\\uparrow x$. Apply the already available outer hypothesis $P(d(z))$ to get $\\nu\\uparrow d(z)$. Concatenate its chain with $d(z)\\uparrow x$ to obtain $\\nu\\uparrow x$. The second exact segment in the reflection node makes $H^{i+1}(E)$ an extension of subquotients of $H^{i+1}(C)$ and $H^i(Q')$; hence all its constituents satisfy this conclusion, too. If the error-weight range is empty, those modules are zero. This uses outer induction only, before any assertion at $x$ has been proved.",
+   "uses": [
+    "lem-sfb-demazure-reflection-sequences",
+    "lem-sfb-flag-cohomology-finite-exact",
+    "lem-sfb-affine-reflection-dominant-descent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/andersen-strong-linkage-principle-1980.pdf",
+    "place": "p.57, alternatives b), b-prime and b-double-prime; p.58, Lemma 5. Error-term argument written separately to make both inductions noncircular."
+   }
+  },
+  {
+   "text": "For the inner base $w=1$, choose simple reflections along a reduced path $w_j=s_{\\beta_j}w_{j-1}$, $w_0'=1$, $w_N=w_0$, $\\ell(w_j)=j$, and put $x_j=w_j\\mathbin\\cdot x$. The first reflection segment gives maps $H^{i+j}(x_j)\\to H^{i+j-1}(x_{j-1})$ whose cokernels are subquotients of the error cohomology just treated. Iterating, the quotient of $H^i(x)$ by the image of the composite $H^{i+N}(w_0\\mathbin\\cdot x)\\to H^i(x)$ has only constituents $\\nu\\uparrow x$: for two composable maps the cokernel of their composite is an extension of the second cokernel by a quotient of the first, and induction repeats this. When $i>0$ the source is zero by the dimension-vanishing assertion [lem-sfb-flag-cohomology-finite-exact]. When $i=0$ and $x$ is not dominant, $H^0(x)=0$ by [lem-sfb-top-bottom-cohomology-simple-image]. When $i=0$ and $x$ is dominant, that same node says that the composite has image either zero or $L(x)$; that constituent has weight $x\\uparrow x$ (the empty chain). Thus $P(x)$ holds for $w=1$ in every degree, including an outer-minimal $x$ for which no smaller error representative exists.",
+   "uses": [
+    "lem-sfb-demazure-reflection-sequences",
+    "lem-sfb-affine-reflection-dominant-descent",
+    "lem-sfb-flag-cohomology-finite-exact",
+    "lem-sfb-top-bottom-cohomology-simple-image"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/andersen-strong-linkage-principle-1980.pdf",
+    "place": "pp.57--58, reduced-word composite, dimension cutoff, and Lemma 4. The composite is not assumed nonzero."
+   }
+  },
+  {
+   "text": "For the inner step take $\\ell(w)>0$, choose a left descent $\\alpha$ and put $v=s_\\alpha w$, so $\\ell(v)=\\ell(w)-1$ and $y=v\\mathbin\\cdot x$. The first long exact sequence of [lem-sfb-demazure-reflection-sequences] contains\n$$H^{i-1}(E)\\longrightarrow H^i(w\\mathbin\\cdot x)\\longrightarrow H^{i-1}(v\\mathbin\\cdot x).$$\nThe left term's constituents satisfy $\\nu\\uparrow x$ by the outer-induction error argument, and the right term's by the inner hypothesis. Kernel/image exactness gives the claim for the middle term. In degree zero the negative cohomology terms are zero by convention. This completes both inductions. Applying $P(\\eta)$ at $w=1,i=0$ and the explicit isomorphism of step 8 proves strong linkage for each factor of $I(\\eta)$.",
+   "uses": [
+    "lem-sfb-demazure-reflection-sequences",
+    "lem-sfb-affine-reflection-dominant-descent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/andersen-strong-linkage-principle-1980.pdf",
+    "place": "p.58, final paragraph of the proof of Theorem 1; shorter left-descent formulation of the same length induction."
+   }
+  },
+  {
+   "text": "A step in the chain $\\nu\\uparrow\\eta$ has the form $z'=s_\\beta(z+\\rho)-\\rho+np\\beta$. Thus it is a transformation $z\\mapsto w(z+\\rho)-\\rho+p\\gamma$ with $\\gamma\\in Q$. Such transformations are closed under composition: the product of $(w,\\gamma)$ and $(v,\\delta)$ is $(wv,\\gamma+w\\delta)$, and $WQ=Q$. A finite chain therefore gives $\\nu+\\rho=w(\\eta+\\rho)+p\\gamma$ for some $w\\in W$, $\\gamma\\in Q$, exactly as required. Steps 5--6 already give dominance, strict decrease for the other factors and multiplicity one in every composition series. The argument used every positive prime, and the root-system input includes products and rank zero. In rank zero there is no lower factor by step 6, so linkage has no extra case.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/andersen-strong-linkage-principle-1980.pdf",
+    "place": "Definition 1, p.54; direct multiplication of affine-root transformations."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-rho-regular-weyl-orbit",
+  "lem-sfb-reductive-borel-pair-structure",
+  "lem-sfb-induced-weyl-dimension-formula",
+  "lem-sfb-dominant-character-highest-line",
+  "lem-sfb-primitive-cyclic-weight-bound",
+  "lem-sfb-simple-module-dual-highest-weight",
+  "lem-sfb-weyl-reflection-realization",
+  "lem-sfb-simply-connected-character-lattice",
+  "lem-sfb-induced-module-primitive-line",
+  "lem-sfb-flag-cohomology-finite-exact",
+  "lem-sfb-affine-reflection-dominant-descent",
+  "lem-sfb-minimal-parabolic-line-cohomology",
+  "lem-sfb-demazure-reflection-sequences",
+  "lem-sfb-top-bottom-cohomology-simple-image"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/andersen-strong-linkage-principle-1980.pdf",
+  "place": "Steps 1--7 retained from the checked Milne assembly. Steps 8--13 explicitly carry Andersen Theorem 1, pp.57--58, using separate rank-one, reflection-sequence, root-descent, cohomology and simple-image lemmas. Original article read online at GDZ (PPN243919689_0315, scans 57--63); local PDF WANTED. No rational block decomposition is an input."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "linkage|baby.?Verma|WeylModule|costandard|induced.*highest|highest.*induced",
+   "results": "0 hits: . ",
+   "date": "2026-10-23",
+   "verdict": "no match: returned declarations concern abstract group induction, root-system reflection representations, Lie-module weight strings or Schur Hom spaces; none gives composition-factor linkage for rational algebraic-group modules or the Steinberg dimension"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Composition factors of an induced rational representation have highest weights in the same affine Weyl group orbit and strictly lower weights except for the highest weight factor of multiplicity one",
+   "results": "8 hits: Representation.IndV, Representation.ind, Representation.IndV.mk, Rep.indFunctor_obj, Rep.ind, Rep.coindToInd.congr_simp, Rep.indFunctor, Rep.indCoindIso.congr_simp. ",
+   "date": "2026-10-23",
+   "verdict": "no match: returned declarations concern abstract group induction, root-system reflection representations, Lie-module weight strings or Schur Hom spaces; none gives composition-factor linkage for rational algebraic-group modules or the Steinberg dimension"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Representation\", \"Ind\"",
+   "results": "12 hits: Representation.coindV, Representation.coind, Representation.coind', Representation.coe_coindV, Representation.mem_coindV, Representation.coindMap, Representation.coindMap_coe_apply_apply, Representation.coindMap_coe_apply. ",
+   "date": "2026-10-23",
+   "verdict": "no match: returned declarations concern abstract group induction, root-system reflection representations, Lie-module weight strings or Schur Hom spaces; none gives composition-factor linkage for rational algebraic-group modules or the Steinberg dimension"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Linkage principle for composition factors of induced rational algebraic group modules affine Weyl group dot action",
+   "results": "8 hits: RootPairing.weylGroup.induction', RootPairing.weylGroupRootRep, RootPairing.weylGroup.induction, RootPairing.isSimpleModule_weylGroupRootRep, RootPairing.weylGroupCorootRep, RootPairing.span_orbit_eq_top, RootPairing.GeckConstruction.mem_ωConjLieSubmodule_iff, RootPairing.weylGroup_apply_root. ",
+   "date": "2026-10-23",
+   "verdict": "no match: returned declarations concern abstract group induction, root-system reflection representations, Lie-module weight strings or Schur Hom spaces; none gives composition-factor linkage for rational algebraic-group modules or the Steinberg dimension"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The highest weight occurs once in a costandard module and all other simple composition factors have strictly lower dominant weights linked under the affine Weyl dot action",
+   "results": "8 hits: LieModule.chainTop, LieModule.chainTopCoeff, LieModule.chainTop_zero, LieModule.chainTop_isNonZero, LieModule.genWeightSpace_add_chainTop, LieModule.chainBot, LieModule.coe_chainTop, LieModule.coe_chainTop'. ",
+   "date": "2026-10-23",
+   "verdict": "no match: returned declarations concern abstract group induction, root-system reflection representations, Lie-module weight strings or Schur Hom spaces; none gives composition-factor linkage for rational algebraic-group modules or the Steinberg dimension"
+  },
+  {
+   "tool": "grep",
+   "query": "def coindV|abbrev IndV|isSimpleModule_weylGroupRootRep|finrank_hom_simple_simple",
+   "results": "19 hits: Mathlib/CategoryTheory/Preadditive/Schur.lean, Mathlib/CategoryTheory/Preadditive/Schur.lean, Mathlib/CategoryTheory/Preadditive/Schur.lean, Mathlib/CategoryTheory/Preadditive/Schur.lean, Mathlib/CategoryTheory/Preadditive/Schur.lean, Mathlib/LinearAlgebra/RootSystem/Irreducible.lean, Mathlib/LinearAlgebra/RootSystem/Irreducible.lean, Mathlib/LinearAlgebra/RootSystem/Irreducible.lean. ",
+   "date": "2026-10-23",
+   "verdict": "no match: returned declarations concern abstract group induction, root-system reflection representations, Lie-module weight strings or Schur Hom spaces; none gives composition-factor linkage for rational algebraic-group modules or the Steinberg dimension"
+  },
+  {
+   "tool": "grep",
+   "query": "linkage|WeylModule|costandard|highest.?weight|algebraicGroup",
+   "results": "0 hits: ",
+   "date": "2026-10-23",
+   "verdict": "no match: Lie-algebra weight spaces, abstract-group representations, finite-group semisimplicity and matrix block decompositions do not give affine-linkage summands for rational algebraic-group modules in positive characteristic"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Composition factors of dominant induced rational algebraic group modules have highest weights linked by the affine Weyl dot action",
+   "results": "8 hits: RootPairing.isSimpleModule_weylGroupRootRep_iff, RootPairing.weylGroup.ofIdx_smul, RootPairing.weylGroup_apply_root, RootPairing.span_orbit_eq_top, RootPairing.isSimpleModule_weylGroupRootRep, RootPairing.weylGroup.induction', RootPairing.weylGroup.induction, RootPairing.weylGroup",
+   "date": "2026-10-23",
+   "verdict": "no match: Lie-algebra weight spaces, abstract-group representations, finite-group semisimplicity and matrix block decompositions do not give affine-linkage summands for rational algebraic-group modules in positive characteristic"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Representation\", \"ind\"",
+   "results": "12 hits: Representation.coindV, Representation.coind, Representation.coind', Representation.coe_coindV, Representation.mem_coindV, Representation.coindMap, Representation.coindMap_coe_apply_apply, Representation.coindMap_coe_apply",
+   "date": "2026-10-23",
+   "verdict": "no match: Lie-algebra weight spaces, abstract-group representations, finite-group semisimplicity and matrix block decompositions do not give affine-linkage summands for rational algebraic-group modules in positive characteristic"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Linkage principle composition factors of induced rational algebraic group representations highest weight affine Weyl orbit",
+   "results": "8 hits: RootPairing.Equiv.comp_weightMap_apply, RootPairing.Hom.comp_weightMap_apply, RootPairing.isSimpleModule_weylGroupRootRep, LieModule.genWeightSpace_chainTopCoeff_add_one_zsmul_add, LieModule.exists_forall_mem_corootSpace_smul_add_eq_zero, LieModule.genWeightSpace_chainTopCoeff_add_one_nsmul_add, LieModule.genWeightSpace_chainBotCoeff_sub_one_zsmul_sub, LieModule.coe_chainTop",
+   "date": "2026-10-23",
+   "verdict": "no match: Lie-algebra weight spaces, abstract-group representations, finite-group semisimplicity and matrix block decompositions do not give affine-linkage summands for rational algebraic-group modules in positive characteristic"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-restricted-rho-simple-dimension",
+  "date": "2026-10-24",
+  "group": "Q57"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Haboush symmetric-power lifting for a trivial quotient representation. Supporting representation-theoretic input: Steinberg endomorphisms detect a nonzero fixed vector. Supporting Self-duality of rho section modules at characteristic-dependent weights. Supporting input: Positive-characteristic simplicity step, using irreducibility of the Steinberg induced module rather than assuming self-duality. Numerical input to the dimension comparison: Dimension of the simple module at the first restricted rho weight. Supporting general input: dominant induced-module composition factors, multiplicity one at the highest weight and affine linkage; used to exclude all lower factors at (p-1)rho.",
+   "via": [
+    "lem-sfb-restricted-rho-simple-dimension",
+    "lem-sfb-steinberg-induced-module-irreducible",
+    "lem-sfb-rho-section-self-duality",
+    "lem-sfb-steinberg-endomorphism-detection",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-induced-composition-linkage",
+  "worker": "stage1",
+  "summary": "Repair D2/D4/D1: removed the stronger block decomposition input and its new node. Retained checked steps 1--7; replaced step 8 with explicit double induction for strong linkage, with five smaller statement-only lemmas from Andersen pp.54--58. Preserved the item statement and inherited searches/metadata.",
+  "blueprint": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Haboush symmetric-power lifting for a trivial quotient representation. Supporting representation-theoretic input: Steinberg endomorphisms detect a nonzero fixed vector. Supporting Self-duality of rho section modules at characteristic-dependent weights. Supporting input: Positive-characteristic simplicity step, using irreducibility of the Steinberg induced module rather than assuming self-duality. Numerical input to the dimension comparison: Dimension of the simple module at the first restricted rho weight. Supporting general input: dominant induced-module composition factors, multiplicity one at the highest weight and affine linkage; used to exclude all lower factors at (p-1)rho. The latest blueprint direct-image proof (3) uses compactification; this node remains the inherited supporting representation-theoretic prerequisite through alteration, stable moduli and geometric reductivity. No change to that route or any unit record. Repair uses the original strong-linkage proof rather than a categorical block decomposition, preserving the representation-theoretic prerequisite route."
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-O2-14796a49c",
+  "group": "O2",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-O2-14796a49c (reviewer sub-agent of L); spot-checked: This re-delivery repairs the 2b6a96b2de09 RETURN (D2/D4). The circular block-decomposition node is gone, and the item now runs Andersen's strong-linkage proof. The item statement and steps 1-7 are byte-identical to the earlier delivery and were re-read. Steps 8-13 are checked. Step 8: f↦f(·n) maps H^0(η) onto I(η) because n^{-1}bn∈B^- and η(n^{-1}tn)=(w_0η)(t). Step 9 states P(x) and sets up an outer induction on the well-founded (D,<) and an inner induction on ℓ(w). Step 10 handles the error weights z=s_α·y+kpα: z=v·d(z) with d(z)<x, P(d(z)), and concatenation of ↑ chains. Step 11 is the inner base, along a reduced path to w_0: cokernels embed in error cohomology, H^{i+N}=0 for i>0, and for i=0 the image of H^N(w_0·x)→H^0(x) is 0 or L(x). Step 12 is the inner step, from the long exact sequence at v·x with s_α·(v·x)=w·x. Step 13 composes the affine maps to give w(η+ρ)+pγ with γ∈Q. New nodes, all true. Minimal-parabolic: ω=L(F_{-α}), so H^1(x)≅H^0(-x-α)^∨; the binomial formula was checked on the SL2 model; ⟨μ,α^∨⟩=-1 gives acyclicity. Demazure: d is B^--linear by jC(i,j)=iC(i-1,j-1); kernel and cokernel are the weights at i=kp with 0<kp<r; I re-derived both exact sequences after ⊗F_{-ρ}, including r=0 and r=1. Flag cohomology: finiteness, vanishing above N, long exact sequences, Lie-Kolchin filtrations and the H^0 identification are standard. It is broader than, not a duplicate of, homogeneous-line-bundle-sections and flag-line-euler-alternant. Descent: d(z)<x holds by strict convexity. The node's ↑ allows only n≥0, which is narrower than Jantzen's relation, but d(z)↑x held in all 16.6k computed cases (A1, A2, B2, G2; p=2,3,5; walls included). Top-bottom: V(x) has head L(x) and H^0(x) has socle L(x) with multiplicity one, so the image is L(x). Form: B1-B9 hold; the DAG search found no existing node for any of the five statements; there is no cycle, no SGA citation and no restated clause; the work is spread across five comparable nodes and the induction itself is in the item. Source: Andersen 1980 is WANTED and not local, so I checked the statements against the standard theory and by computation instead. Batch-5 flags: every flagged citation ends in a generic trf lemma (021O fppf base change, 01XZ proper-coherent, split torus smooth, 01VA smooth composition), outside the trace formula and Poincaré duality; accepted. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.GroupScheme.InducedCompositionLinkage",
+  "declaration": "AlgebraicGeometry.induced_composition_linkage",
+  "declarations": [
+   "AlgebraicGeometry.dominantInducedModule",
+   "AlgebraicGeometry.IsRegularLeftTranslation",
+   "AlgebraicGeometry.induced_composition_linkage"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/GroupScheme/InducedCompositionLinkage.lean",
+  "statement": "theorem induced_composition_linkage {F : Type u} [Field F] [IsAlgClosed F] (p : ℕ) [Fact p.Prime] [CharP F p] (S T B : Grp (Over (Spec (.of F)))) (hS : IsSemisimpleGroupScheme S.X) (hsc : ∀ (S' : Over (Spec (.of F))) [GrpObj S'], IsSemisimpleGroupScheme S' → ∀ (f : S' ⟶ S.X) [IsMonHom f], Surjective f.left → IsFinite (GrpObj.ker f).hom → (∀ (A : Type u) [CommRing A] [Algebra F A] (x : StandardGroupSchemes.affine F A ⟶ GrpObj.ker f) (s : StandardGroupSchemes.affine F A ⟶ S'), (x ≫ GrpObj.kerι f) * s = s * (x ≫ GrpObj.kerι f)) → IsIso f) (iT : T ⟶ S) (iB : B ⟶ S) (j : T ⟶ B) (hTB : IsRhoBorelPair iT iB j) [IsCommMonObj T.X] [IsCommMonObj (StandardGroupSchemes.multiplicative F)] (aS : ModObj T.X S.X) (aB : ModObj T.X B.X) (Φ : Finset (Additive (T ⟶ Grp.mk (StandardGroupSchemes.multiplicative F)))) (P : RootDatum Φ (Additive (T ⟶ Grp.mk (StandardGroupSchemes.multiplicative F))) (Additive (Grp.mk (StandardGroupSchemes.multiplicative F) ⟶ T))) (b : P.Base) [P.IsReduced] (hconjS : aS.smul = (iT.hom.hom ⊗ₘ 𝟙 S.X) ≫ GrpObj.conj S.X) (hconjB : aB.smul = (j.hom.hom ⊗ₘ 𝟙 B.X) ≫ GrpObj.conj B.X) (hroot : ∀ α : Φ, P.root α = α.val) (hpair : ∀ (χ : Additive (T ⟶ Grp.mk (StandardGroupSchemes.multiplicative F))) (ν : Additive (Grp.mk (StandardGroupSchemes.multiplicative F) ⟶ T)), ν.toMul.hom.hom ≫ χ.toMul.hom.hom = (𝟙 (StandardGroupSchemes.multiplicative F)) ^ (P.toLinearMap χ ν)) (hweights : ∀ χ : Additive (T ⟶ Grp.mk (StandardGroupSchemes.multiplicative F)), χ ∈ Φ ↔ χ ≠ 0 ∧ @TorusCharacterTangent.weightSpace F _ T S aS χ.toMul ≠ ⊥) (hpos : ∀ α : Φ, b.IsPos α ↔ @TorusCharacterTangent.weightSpace F _ T B aB α.val.toMul ≠ ⊥) (ρ : Additive (T ⟶ Grp.mk (StandardGroupSchemes.multiplicative F))) (hρ : (2 : ℤ) • ρ = ∑ β ∈ (@Finset.filter Φ b.IsPos (Classical.decPred _) Finset.univ), P.root β) [IsAffine S.X.left] [IsAffine T.X.left] (U : Grp (Over (Spec (.of F)))) [IsAffine U.X.left] (iU : U ⟶ B) (hUclosed : IsClosedSubgroupScheme iU.hom.hom) (hUnormal : IsNormalSubgroupScheme iU.hom.hom) (hUsmooth : Smooth U.X.hom) (hUconnected : ConnectedSpace U.X.left) (hUunipotent : SolvableGroupStructure.IsUnipotent U) (hUmax : ∀ (N : Grp (Over (Spec (.of F)))) (iN : N ⟶ B), IsClosedSubgroupScheme iN.hom.hom → IsNormalSubgroupScheme iN.hom.hom → Smooth N.X.hom → ConnectedSpace N.X.left → SolvableGroupStructure.IsUnipotent N → ∃ f : N ⟶ U, f ≫ iU = iN) (pB : B ⟶ T) (hpB : j ≫ pB = 𝟙 T) (hker : IsPullback iU.hom.hom (toUnit U.X) pB.hom.hom η[T.X]) (act : RankOneRoots.Weyl iT →* Aut T) (hact : ∀ (n : RankOneRoots.normalizer iT) (A : CommAlgCat.{u} F) (t : StandardGroupSchemes.affine F A ⟶ T.X), t ≫ (act (QuotientGroup.mk n)).hom.hom.hom ≫ iT.hom.hom = (toUnit (StandardGroupSchemes.affine F A) ≫ n.val) * (t ≫ iT.hom.hom) * (toUnit (StandardGroupSchemes.affine F A) ≫ n.val)⁻¹) (w₀ : RankOneRoots.Weyl iT) (hlongest : Set.image (fun β : Φ ↦ AffineWeight.characterAction iT act w₀ β.val) {β : Φ | b.IsPos β} = Set.image (fun β : Φ ↦ -β.val) {β : Φ | b.IsPos β}) (lam : Additive (T ⟶ Grp.mk (StandardGroupSchemes.multiplicative F))) (hlam : ∀ α ∈ b.support, 0 ≤ P.toLinearMap lam (P.coroot α)) : Nontrivial (dominantInducedModule S T B iB pB (act w₀) lam.toMul) ∧ Module.Finite F (dominantInducedModule S T B iB pB (act w₀) lam.toMul) ∧ ∃ c : dominantInducedModule S T B iB pB (act w₀) lam.toMul →ₗ[F] dominantInducedModule S T B iB pB (act w₀) lam.toMul ⊗[F] RationalHighestWeight.coordinateAlgebra S, HopfAction.Coassociative F (RationalHighestWeight.coordinateAlgebra S) _ c ∧ HopfAction.Counital F (RationalHighestWeight.coordinateAlgebra S) _ c ∧ IsRegularLeftTranslation S _ c ∧ Nonempty (RationalHighestWeight.RationalCompositionSeries c) ∧ ∀ q : RationalHighestWeight.RationalCompositionSeries c, (∃! k : Fin q.length, RationalHighestWeight.HasHighestWeight (q.factorCoaction k) iT (iU ≫ iB) lam.toMul) ∧ ∀ k : Fin q.length, ¬ RationalHighestWeight.HasHighestWeight (q.factorCoaction k) iT (iU ≫ iB) lam.toMul → ∃ mu : Additive (T ⟶ Grp.mk (StandardGroupSchemes.multiplicative F)), RationalHighestWeight.HasHighestWeight (q.factorCoaction k) iT (iU ≫ iB) mu.toMul ∧ (∀ α ∈ b.support, 0 ≤ P.toLinearMap mu (P.coroot α)) ∧ AffineWeight.LT P b mu lam ∧ ∃ (w : RankOneRoots.Weyl iT) (gamma : P.rootSpan ℤ), mu + ρ = AffineWeight.characterAction iT act w (lam + ρ) + (p : ℤ) • gamma.val",
+  "branch": "sheaf-dag",
+  "by": "Q38",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-1257597d2",
+  "group": "Q38",
+  "result": "fix",
+  "note": "Repair of 31cd H2 RETURN. Item module only imports changed vs 31cd; RationalCompositionSeries identical; item node only stmt_deps (theorem node -> new def-sfb-affine-weight-order-action). Statement re-checked against node (alg. closed F, any prime p, sc semisimple S, pinned T/B/U/root datum/W action, integral rho, every composition series: exists-unique eta factor, others dominant mu<eta with mu+rho=w(eta+rho)+p*gamma, gamma in rootSpan Z); rank 0/reducible/p=2 included. New def node statement matches the 8 verbatim-moved AffineWeight defs (Andersen 1980 Def.1; Milne 21.1-21.2). Mechanical: nt_parallel2 Preparation never drops names a delivered module removes, so the move would be refused under import_prune check 3. FIX in the Q97 shape: fixes/AffineReflectionDominantDescent.lean = live text (cmp identical); fixes/AffineWeightOrderAction.lean = public re-export + abbrev AffineWeight.normalizerCharacterAction with docstrings; fixes/def-sfb-affine-weight-order-action.json lean primary = alias, declarations = alias + 8 re-exported names (check_lean_text []); report with Reviewer fix section. nt_compile --json: AffineWeightOrderAction 15.7 s, RationalCompositionSeries 16.1 s, InducedCompositionLinkage 19.1 s, no errors. Land with --revert-nodes lem-sfb-affine-reflection-dominant-descent to keep the live dep record."
+ }
+}

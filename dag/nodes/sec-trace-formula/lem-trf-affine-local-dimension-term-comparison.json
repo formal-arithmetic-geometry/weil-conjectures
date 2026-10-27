@@ -1,0 +1,271 @@
+{
+ "id": "lem-trf-affine-local-dimension-term-comparison",
+ "kind": "statement",
+ "title": "Affine comparison of local dimension and both transcendence-degree terms",
+ "statement": "Let $f:X\\to S$ be a dominant morphism of integral schemes [def-pc-integral-scheme], where dominant means that $f(X)$ is dense in $S$. Let $U\\subseteq S$ and $V\\subseteq X$ be nonempty affine opens with $f(V)\\subseteq U$, put $A=\\Gamma(U,\\mathcal O_S)$, $B=\\Gamma(V,\\mathcal O_X)$, and let $\\varphi:A\\to B$ be the induced ring map [def-weil-affine-spectrum]. For $x\\in V$ and $s=f(x)$ let $\\mathfrak q\\subset B$ and $\\mathfrak p\\subset A$ be their corresponding primes. Write $\\operatorname{ht}(\\mathfrak r)$ for the supremum of lengths of strict chains of primes ending at $\\mathfrak r$; $A_{\\mathfrak p},B_{\\mathfrak q}$ are localizations at primes [def-weil-pbc-localization-at-prime]. Then $\\varphi^{-1}(\\mathfrak q)=\\mathfrak p$, and the canonical germ isomorphisms\n$$A_{\\mathfrak p}\\xrightarrow{\\sim}\\mathcal O_{S,s},\\qquad B_{\\mathfrak q}\\xrightarrow{\\sim}\\mathcal O_{X,x}$$\nintertwine the localization map induced by $\\varphi$ with the stalk map of $f$ [def-weil-pbc-module-stalk]. Consequently [def-weil-pbc-krull-dimension-ring],\n$$\\dim\\mathcal O_{S,s}=\\operatorname{ht}(\\mathfrak p),\\qquad\\dim\\mathcal O_{X,x}=\\operatorname{ht}(\\mathfrak q).$$\nThe quotient maps of these local rings induce field isomorphisms\n$$\\kappa(s)\\simeq\\operatorname{Frac}(A/\\mathfrak p)=\\kappa(\\mathfrak p),\\qquad\\kappa(x)\\simeq\\operatorname{Frac}(B/\\mathfrak q)=\\kappa(\\mathfrak q)$$\nwhich intertwine the residue-field map of $f$ with the field map induced by $\\varphi$ [def-weil-residue-field]. For algebra transcendence degree [def-kun-transcendence-degree], including the $A$-algebra $B$, these identifications give\n$$\\operatorname{trdeg}_{\\kappa(s)}\\kappa(x)=\\operatorname{trdeg}_{\\kappa(\\mathfrak p)}\\kappa(\\mathfrak q),\\qquad\\operatorname{trdeg}_A B=\\operatorname{trdeg}_{R(S)}R(X).$$\nHere $R(S)=\\mathcal O_{S,\\eta_S}$ and $R(X)=\\mathcal O_{X,\\eta_X}$, for the generic points [def-sc-generic-point], and the field extension is the actual generic stalk map of $f$. No Noetherian or finite-type hypothesis is needed for these comparisons.",
+ "source": {
+  "document": "literature/stacks-project/morphisms.tex",
+  "place": "Tag 02JU (lemma-dimension-formula), reduction to the algebra dimension formula: the prime contraction and stalk identifications from former step 1, and all local dimension, residue-field naturality and domain-transcendence-degree comparisons from former step 2 of lem-trf-local-dimension-formula. Blueprint ancestor lem-trf-local-term-locality, proof (1)--(2), normal-cone dimension bound."
+ },
+ "stmt_deps": [
+  "def-pc-integral-scheme",
+  "def-weil-affine-spectrum",
+  "def-weil-pbc-localization-at-prime",
+  "def-weil-pbc-module-stalk",
+  "def-weil-pbc-krull-dimension-ring",
+  "def-weil-residue-field",
+  "def-kun-transcendence-degree",
+  "def-sc-generic-point",
+  "def-weil-locally-ringed-space-morphism"
+ ],
+ "proof": [
+  {
+   "text": "Let $g_s:A\\to\\mathcal O_{S,s}$ and $g_x:B\\to\\mathcal O_{X,x}$ be the germ maps. Apply [lem-weil-pbc-affine-open-stalk-localization](c) to the two given affine opens to obtain the canonical isomorphisms $e_s:A_{\\mathfrak p}\\simeq\\mathcal O_{S,s}$ and $e_x:B_{\\mathfrak q}\\simeq\\mathcal O_{X,x}$, with $e_s(a/t)=(g_s a)(g_s t)^{-1}$ and the analogous formula for $e_x$. Under them the maximal ideals correspond to $\\mathfrak pA_{\\mathfrak p}$ and $\\mathfrak qB_{\\mathfrak q}$. In particular $g_s^{-1}(\\mathfrak m_s)=\\mathfrak p$ and $g_x^{-1}(\\mathfrak m_x)=\\mathfrak q$: for example $a/1\\in\\mathfrak pA_{\\mathfrak p}$ iff $a\\in\\mathfrak p$, indeed membership gives $a/1=b/t$ with $b\\in\\mathfrak p$, $t\\notin\\mathfrak p$, so $u(ta-b)=0$ for some $u\\notin\\mathfrak p$; hence $uta=ub\\in\\mathfrak p$ and primality gives $a\\in\\mathfrak p$. The converse follows from $a/1$ being a generator of the extended ideal. By the definition of a morphism of locally ringed spaces, $h=f^\\sharp_x$ commutes with germs, $h g_s=g_x\\varphi$, and is local. Its inverse image of $\\mathfrak m_x$ is $\\mathfrak m_s$: it sends $\\mathfrak m_s$ into $\\mathfrak m_x$, while an element outside $\\mathfrak m_s$ is a unit and its image is a unit. Taking inverse images in this germ square therefore gives $\\varphi^{-1}(\\mathfrak q)=\\mathfrak p$.",
+   "uses": [
+    "lem-weil-pbc-affine-open-stalk-localization",
+    "def-weil-pbc-localization-at-prime",
+    "def-weil-locally-ringed-space-morphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Tags 01HV (lemma-spec-sheaves), part (6), and 01HY (lemma-morphism-into-affine-where-point-goes), proof: the commutative germ square and localness."
+   }
+  },
+  {
+   "text": "If $t\\notin\\mathfrak p$, the contraction just proved gives $\\varphi(t)\\notin\\mathfrak q$, so the map $\\varphi_{\\mathfrak q}:A_{\\mathfrak p}\\to B_{\\mathfrak q}$ is $a/t\\mapsto\\varphi(a)/\\varphi(t)$. For every such fraction the germ square gives\n$$h(e_s(a/t))=h(g_sa)h(g_st)^{-1}=g_x(\\varphi(a))g_x(\\varphi(t))^{-1}=e_x(\\varphi_{\\mathfrak q}(a/t)).$$\nEvery element of $A_{\\mathfrak p}$ has this form. Thus $h e_s=e_x\\varphi_{\\mathfrak q}$, proving the required naturality of the local-ring identifications.",
+   "uses": [
+    "def-weil-pbc-localization-at-prime",
+    "def-weil-locally-ringed-space-morphism"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Tag 01HY (lemma-morphism-into-affine-where-point-goes), commutative square, and Tag 01HV(6); the calculation is on fractions."
+   }
+  },
+  {
+   "text": "A ring isomorphism sends prime ideals bijectively to prime ideals, preserves and reflects strict inclusion, and hence identifies their sets of chain lengths. Thus the isomorphisms in step 1 preserve Krull dimension. By [lem-weil-pbc-localization-dimension-chains-below-prime], $\\dim A_{\\mathfrak p}$ is the supremum of chain lengths with last prime contained in $\\mathfrak p$. This equals the supremum with last prime equal to $\\mathfrak p$: append $\\mathfrak p$ to a chain whose last prime is strictly smaller; conversely every chain ending at $\\mathfrak p$ is already counted. This argument also applies when lengths are unbounded. It yields $\\dim\\mathcal O_{S,s}=\\operatorname{ht}(\\mathfrak p)$; the identical argument for $B,\\mathfrak q$ yields $\\dim\\mathcal O_{X,x}=\\operatorname{ht}(\\mathfrak q)$.",
+   "uses": [
+    "lem-weil-pbc-localization-dimension-chains-below-prime",
+    "def-weil-pbc-krull-dimension-ring"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tags 00E3 (lemma-spec-localization) and 00KF (definition-height); apply the existing localization-chain comparison to both rings."
+   }
+  },
+  {
+   "text": "The ring isomorphisms $e_s,e_x$ send the unique maximal ideals to one another. Passing to their quotients gives $\\kappa(s)\\simeq A_{\\mathfrak p}/\\mathfrak pA_{\\mathfrak p}=\\kappa(\\mathfrak p)$ and $\\kappa(x)\\simeq B_{\\mathfrak q}/\\mathfrak qB_{\\mathfrak q}=\\kappa(\\mathfrak q)$. By [lem-weil-pbc-prime-residue-field-algebra](b), these latter fields are canonically fraction fields of $A/\\mathfrak p$ and $B/\\mathfrak q$, respectively. The square in step 2 descends to the quotient square: on the residue of $a/t$ its map is the residue of $\\varphi(a)/\\varphi(t)$. This is exactly the map $\\operatorname{Frac}(A/\\mathfrak p)\\to\\operatorname{Frac}(B/\\mathfrak q)$ induced by the injective map $A/\\mathfrak p\\to B/\\mathfrak q$ (injective by contraction). Thus the field identifications intertwine the actual residue-field map of $f$.",
+   "uses": [
+    "def-weil-residue-field",
+    "def-weil-pbc-localization-at-prime",
+    "lem-weil-pbc-prime-residue-field-algebra"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Local rings, paragraph identifying the residue field of R_p with Frac(R/p), via Tag 00CT (proposition-localize-quotient), and the following paragraph r/g maps to phi(r)/phi(g)."
+   }
+  },
+  {
+   "text": "The commuting field isomorphisms of step 4 preserve algebraic independence: transport each coefficient of a polynomial relation through the base-field isomorphism, and each member of the family through the extension-field isomorphism. Commutativity makes evaluation agree, and injectivity makes a nonzero polynomial remain nonzero. The inverse field isomorphisms give the converse. This bijects the algebraically independent subsets without changing their cardinalities, so their suprema give $\\operatorname{trdeg}_{\\kappa(s)}\\kappa(x)=\\operatorname{trdeg}_{\\kappa(\\mathfrak p)}\\kappa(\\mathfrak q)$.",
+   "uses": [
+    "def-kun-transcendence-degree"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/fields.tex",
+    "place": "Tag 030G (definition-transcendence-degree); apply the definition of algebraic independence under the commuting field isomorphisms."
+   }
+  },
+  {
+   "text": "Apply [lem-sc-integral-function-field-affine-fraction] to $(S,U)$ and $(X,V)$. It gives $\\eta_S\\in U$, $\\eta_X\\in V$, domains $A,B$, and injective germ maps $i_A:A\\to F=R(S)$ and $i_B:B\\to L=R(X)$ making $F,L$ fraction fields. Continuity gives $f(X)=f(\\overline{\\{\\eta_X\\}})\\subseteq\\overline{\\{f(\\eta_X)\\}}$; density of $f(X)$ makes $f(\\eta_X)$ a generic point of $S$, hence $f(\\eta_X)=\\eta_S$ (uniqueness for the integral scheme, as in the cited fraction-field node). Let $j:F\\to L$ be the actual generic stalk map; it is injective, since it is a unital homomorphism of fields. Compatibility of the structure-sheaf morphism with germs gives $j i_A=i_B\\varphi$. Consequently $\\varphi$ is injective as well: if $\\varphi(a)=0$ then $j(i_A(a))=0$, and both $j$ and $i_A$ are injective. On a fraction $i_A(a)i_A(t)^{-1}$, $t\\ne0$, this same germ square gives $j(i_A(a)i_A(t)^{-1})=i_B(\\varphi(a))i_B(\\varphi(t))^{-1}$; the denominator is nonzero by injectivity. Thus the generic field extension is the one induced by the given affine ring map. All algebra structures in the two towers $A\\to B\\to L$ and $A\\to F\\to L$ are therefore injective and have the same composite $A\\to L$.",
+   "uses": [
+    "lem-sc-integral-function-field-affine-fraction",
+    "def-sc-generic-point",
+    "def-weil-locally-ringed-space-morphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 01RV (lemma-integral-scheme-rational-functions), integral case, with Schemes Tag 01HV(6) on the nonempty affine opens; generic-point image follows from continuity and dominance."
+   }
+  },
+  {
+   "text": "For $z\\in F$ the fraction-field description gives $z=i_A(a)i_A(t)^{-1}$ with $a,t\\in A$, $t\\ne0$. The nonzero polynomial $tT-a\\in A[T]$ vanishes at $z$. Hence no nonempty subset of $F$ is algebraically independent over $A$ (a relation in any one member is already a relation in the full family), whereas the empty subset is independent because $i_A$ is injective. Thus $\\operatorname{trdeg}_A F=0$ directly from its defining supremum. The same calculation $tT-b$ for a fraction of elements of $B$ in $L$ gives $\\operatorname{trdeg}_B L=0$.",
+   "uses": [
+    "lem-sc-integral-function-field-affine-fraction",
+    "def-kun-transcendence-degree"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/fields.tex",
+    "place": "Tag 030G (definition-transcendence-degree), using the fraction representations of Morphisms Tag 01RV; the nonzero linear relations are written explicitly."
+   }
+  },
+  {
+   "text": "Use [lem-exc-domain-transcendence-degree-tower] first on $A\\subseteq B\\subseteq L$, and then on $A\\subseteq F\\subseteq L$, identifying injective maps with their images. Its hypotheses hold by step 6: every ring is a domain, all maps are injective, and both composites are the actual generic germ map. Substituting the two zeros of step 7 gives\n$$\\operatorname{trdeg}_A L=\\operatorname{trdeg}_A B+0=\\operatorname{trdeg}_A B,\\qquad\n\\operatorname{trdeg}_A L=0+\\operatorname{trdeg}_F L=\\operatorname{trdeg}_{R(S)}R(X).$$\nThis proves the final comparison. Only adding zero is used, so the argument is valid for arbitrary infinite cardinals too. Together with steps 1--5 this proves every clause, without a Noetherian or finite-type assumption.",
+   "uses": [
+    "lem-exc-domain-transcendence-degree-tower"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/fields.tex",
+    "place": "Tag 030H (lemma-transcendence-degree-tower), domain-algebra form stated by the cited Mathlib leaf, applied to the two injective towers."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-affine-open-stalk-localization",
+  "def-weil-pbc-localization-at-prime",
+  "def-weil-locally-ringed-space-morphism",
+  "lem-weil-pbc-localization-dimension-chains-below-prime",
+  "def-weil-pbc-krull-dimension-ring",
+  "def-weil-residue-field",
+  "lem-weil-pbc-prime-residue-field-algebra",
+  "def-kun-transcendence-degree",
+  "lem-sc-integral-function-field-affine-fraction",
+  "def-sc-generic-point",
+  "lem-exc-domain-transcendence-degree-tower"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/morphisms.tex",
+  "place": "Tag 02JU (lemma-dimension-formula), expansion of the affine reduction using Tags 01HV, 01HY, 01RV, 00E3, 00KF, 030G and the domain form of 030H. Naturality and the two zero transcendence-degree arguments are written out."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "residueFieldMap|residueField.*(iso|equiv)|trdeg.*[Ff]raction",
+   "results": "{\"t\": \"2026-10-22T05:56:14Z\", \"tool\": \"grep\", \"query\": \"residueFieldMap|residueField.*(iso|equiv)|trdeg.*[Ff]raction\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/PullbackCarrier.lean\", \"Mathlib/AlgebraicGeometry/PullbackCarrier.lean\", \"Mathlib/AlgebraicGeometry/PullbackCarrier.lean\", \"Mathlib/AlgebraicGeometry/PullbackCarrier.lean\", \"Mathlib/AlgebraicGeometry/PullbackCarrier.lean\", \"Mathlib/AlgebraicGeometry/AlgClosed/Basic.lean\", \"Mathlib/AlgebraicGeometry/AlgClosed/Basic.lean\", \"Mathlib/AlgebraicGeometry/AlgClosed/Basic.lean\"], \"digest\": \"8a145a8aaa647cc1\"}",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "affine scheme stalk residue field extension transcendence degree fraction field coordinate algebra",
+   "results": "{\"t\": \"2026-10-22T05:56:14Z\", \"tool\": \"leansearch\", \"query\": \"affine scheme stalk residue field extension transcendence degree fraction field coordinate algebra\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.LocallyRingedSpace.residueField\", \"AlgebraicGeometry.Scheme.residueField\", \"AlgebraicGeometry.LocallyRingedSpace.Γevaluation\", \"AlgebraicGeometry.Scheme.descResidueField_fromSpecResidueField\", \"AlgebraicGeometry.StructureSheaf.stalkAlgebra\", \"AlgebraicGeometry.Scheme.evaluation.congr_simp\", \"AlgebraicGeometry.LocallyRingedSpace.instFieldCarrierResidueField\", \"AlgebraicGeometry.Scheme.instFieldCarrierResidueField\"], \"digest\": \"251780a5da931d5e\"}",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Scheme.Hom.residueFieldMap",
+   "results": "{\"t\": \"2026-10-22T05:56:14Z\", \"tool\": \"loogle\", \"query\": \"AlgebraicGeometry.Scheme.Hom.residueFieldMap\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Hom.residueFieldMap\", \"AlgebraicGeometry.Scheme.instIsIsoCommRingCatResidueFieldMapOfIsOpenImmersion\", \"AlgebraicGeometry.Scheme.residueFieldMap_id\", \"AlgebraicGeometry.Scheme.Hom.SpecMap_residueFieldMap_fromSpecResidueField\", \"AlgebraicGeometry.Scheme.instIsOverMapResidueFieldMapOverInferInstanceOverClass\", \"AlgebraicGeometry.Scheme.Hom.SpecMap_residueFieldMap_fromSpecResidueField_assoc\", \"AlgebraicGeometry.Scheme.residueFieldMap_comp\", \"AlgebraicGeometry.Scheme.residue_residueFieldMap\"], \"digest\": \"6876b8c09aab02d8\"}",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For an affine chart of a scheme morphism, local ring dimensions equal prime heights and residue field extensions identify with fraction fields of the quotient rings",
+   "results": "{\"t\": \"2026-10-22T05:56:35Z\", \"tool\": \"leanfinder\", \"query\": \"For an affine chart of a scheme morphism, local ring dimensions equal prime heights and residue field extensions identify with fraction fields of the quotient rings\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.SpecToEquivOfField\", \"AlgebraicGeometry.Scheme.instFieldCarrierResidueField\", \"AlgebraicGeometry.Scheme.SpecToEquivOfField_eq_iff\", \"AlgebraicGeometry.Scheme.instIsPreimmersionMapResidue\", \"AlgebraicGeometry.Scheme.descResidueField\", \"AlgebraicGeometry.Scheme.instUniqueCarrierCarrierCommRingCatSpecResidueField\", \"AlgebraicGeometry.Scheme.instIsPreimmersionFromSpecResidueField\", \"AlgebraicGeometry.Scheme.descResidueField_stalkClosedPointTo_fromSpecResidueField\"], \"digest\": \"e9ba02fbbad4665e\"}",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "trdeg.*(Fraction|fraction)|trdeg_eq.*[Ff]raction|[Ff]raction.*trdeg",
+   "results": "{\"t\": \"2026-10-22T05:56:41Z\", \"tool\": \"grep\", \"query\": \"trdeg.*(Fraction|fraction)|trdeg_eq.*[Ff]raction|[Ff]raction.*trdeg\", \"sub\": \"RingTheory\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Naturality of affine stalk and residue field identifications, prime heights and transcendence degree unchanged when passing from domain algebras to their fraction fields",
+   "results": "{\"t\": \"2026-10-22T05:56:59Z\", \"tool\": \"leanfinder\", \"query\": \"Naturality of affine stalk and residue field identifications, prime heights and transcendence degree unchanged when passing from domain algebras to their fraction fields\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.descResidueField\", \"AlgebraicGeometry.Scheme.instFieldCarrierResidueField\", \"AlgebraicGeometry.Scheme.residue_descResidueField\", \"AlgebraicGeometry.Scheme.descResidueField_fromSpecResidueField\", \"AlgebraicGeometry.Scheme.descResidueField_stalkClosedPointTo_fromSpecResidueField\", \"AlgebraicGeometry.stalkFunctionFieldAlgebra\", \"AlgebraicGeometry.Scheme.residue_descResidueField_assoc\", \"AlgebraicGeometry.instIsFractionRingCarrierStalkCommRingCatPresheafFunctionField\"], \"digest\": \"bf133d0a7c3c3b25\"}",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "trdeg|fractionRing|isFractionRing",
+   "results": "{\"t\": \"2026-10-22T06:43:33Z\", \"tool\": \"grep\", \"query\": \"trdeg|fractionRing|isFractionRing\", \"sub\": \"RingTheory/AlgebraicIndependent\", \"ok\": true, \"n_hits\": 20, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/AlgebraicIndependent/Transcendental.lean\", \"Mathlib/RingTheory/AlgebraicIndependent/Transcendental.lean\", \"Mathlib/RingTheory/AlgebraicIndependent/Transcendental.lean\", \"Mathlib/RingTheory/AlgebraicIndependent/Transcendental.lean\", \"Mathlib/RingTheory/AlgebraicIndependent/Transcendental.lean\", \"Mathlib/RingTheory/AlgebraicIndependent/Basic.lean\", \"Mathlib/RingTheory/AlgebraicIndependent/Basic.lean\", \"Mathlib/RingTheory/AlgebraicIndependent/Basic.lean\"], \"digest\": \"abece2223b9e88c5\"}",
+   "date": "2026-10-22",
+   "verdict": "no match for the full affine comparison; the domain tower hits are already represented by lem-exc-domain-transcendence-degree-tower"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Transcendence degree is unchanged by localization of domains to fraction fields",
+   "results": "{\"t\": \"2026-10-22T06:43:34Z\", \"tool\": \"leansearch\", \"query\": \"Transcendence degree is unchanged by localization of domains to fraction fields\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"IsStronglyTranscendental.iff_of_isLocalization\", \"IsStronglyTranscendental.of_isLocalization\", \"IsStronglyTranscendental.of_isLocalization_left\", \"Algebra.trdeg\", \"AlgEquiv.trdeg_eq\", \"trdeg_add_eq\", \"IsLocalization.instIsScalarTowerAtPrimeFractionRing\", \"IsTranscendenceBasis.lift_cardinalMk_eq_trdeg\"], \"digest\": \"8ddebde2fc8371da\"}",
+   "date": "2026-10-22",
+   "verdict": "no match for the full affine comparison; the domain tower hits are already represented by lem-exc-domain-transcendence-degree-tower"
+  },
+  {
+   "tool": "loogle",
+   "query": "Algebra.trdeg, IsFractionRing",
+   "results": "{\"t\": \"2026-10-22T06:43:34Z\", \"tool\": \"loogle\", \"query\": \"Algebra.trdeg, IsFractionRing\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match for the full affine comparison; the domain tower hits are already represented by lem-exc-domain-transcendence-degree-tower"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Transcendence degree of an injective algebra of integral domains equals transcendence degree of their fraction fields",
+   "results": "{\"t\": \"2026-10-22T06:43:44Z\", \"tool\": \"leanfinder\", \"query\": \"Transcendence degree of an injective algebra of integral domains equals transcendence degree of their fraction fields\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"trdeg_le_of_injective\", \"lift_trdeg_le_of_injective\", \"trdeg_eq_zero_of_not_injective\", \"lift_trdeg_add_eq\", \"lift_trdeg_add_le\", \"transcendental_algebraMap_iff\", \"trdeg_add_eq\", \"trdeg_add_le\"], \"digest\": \"083bbd03c775533c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match for the full affine comparison; the domain tower hits are already represented by lem-exc-domain-transcendence-degree-tower"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-local-dimension-formula",
+  "date": "2026-10-22",
+  "group": "NH"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Tag 02JU (lemma-dimension-formula), reduction to the algebra dimension formula: the prime contraction and stalk identifications from former step 1, and all local dimension, residue-field naturality and domain-transcendence-degree comparisons from former step 2 of lem-trf-local-dimension-formula. Blueprint ancestor lem-trf-local-term-locality, proof (1)--(2), normal-cone dimension bound.",
+   "via": [
+    "lem-trf-local-dimension-formula",
+    "lem-trf-closed-dominant-dimension",
+    "lem-trf-plurinodal-proper-hypercover",
+    "lem-trf-orgogozo-good-modification",
+    "lem-trf-trait-nearby-base-change",
+    "lem-trf-specialization-external-product",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-trf-affine-local-dimension-term-comparison",
+  "worker": "stage1",
+  "summary": "Checked both affine germ isomorphisms, contraction by localness, the fraction formula for the stalk map, dimensions including infinite heights, quotient residue-field naturality, and the actual generic stalk algebra. The generic transcendence term is proved by two applications of the existing domain tower formula and explicit nonzero linear polynomials for fractions. All needed lemmas already exist; no new nodes and no statement correction. Repair of returned head 570367a7af8: rebased the retained split on the current unsplit node, reread all fourteen dependencies (now Mathlib leaves), revalidated all seventeen verbatim citations, and expanded the localization ideal-membership and actual generic-map fraction calculations. The statement and route are retained.",
+  "blueprint": "lem-trf-local-term-locality, proof (1)--(2), normal-cone dimension bound, via lem-trf-local-dimension-formula: the affine reduction of Tag 02JU. This is a lower-level comparison, not a replacement of any unit step.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q15-477b00a71",
+  "group": "Q15",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q15-477b00a71 (reviewer sub-agent of L); spot-checked: Third delivery of the same split. The item JSON is byte-identical to f133ad69442f (same sha256 24b139d8…), which was PASSed before. Both earlier heads (570367a7, f133ad69) were PASSed and then refused at landing as 'completed in this project's DAG but not in' the live DAG. The only change in this delivery is a report paragraph with no new mathematics. There are no new nodes and no tool_uses, and there is no repair note, so the re-split rule does not apply. The live item is still unsplit with 0 steps, so no other group has superseded this split. I reread the current statements of the cited nodes, all of status mathlib. affine-open-stalk-localization (c) gives the germ localization isomorphisms for any affine open (step 1). Locality of f#_x gives h^-1(m_x)=m_s, so phi^-1(q)=p. Step 2: the square on fractions commutes. Step 3: chains-below-prime and appending p give ht(p), including the unbounded case. Step 4: prime-residue-field-algebra (b) gives kappa(p)=Frac(A/p), the square descends, and A/p->B/q is injective by contraction. Step 5: field isomorphisms transport transcendence degree. Step 6: dominance plus the unique generic point give f(eta_X)=eta_S and j i_A=i_B phi, so phi is injective. Step 7: tT-a with t nonzero gives trdeg_A F=0 and trdeg_B L=0. Step 8: the domain tower node is applied to both towers using only +0, with no cardinal cancellation. Edge cases checked: identity, the generic point, fields, infinite height or trdeg. Sources: Stacks 02JU, 01HY, 01HV, 00E3, 00KF, 00CT, 01RV, 030G, 030H. No SGA source is used, and the statement is unchanged. No fixes. Maintainer note: this is the side-completion promotion loop for a third time. Landing should promote this split rather than return it again."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.AffineLocalDimensionTermComparison",
+  "declaration": "AlgebraicGeometry.affine_local_dimension_term_comparison",
+  "file": "lean/Sheaf/AlgebraicGeometry/AffineLocalDimensionTermComparison.lean",
+  "statement": "theorem affine_local_dimension_term_comparison {X S : Scheme.{u}} [IsIntegral X] [IsIntegral S] (f : X ⟶ S) [IsDominant f] (U : S.Opens) (hU : IsAffineOpen U) (V : X.Opens) (hV : IsAffineOpen V) (hVU : V ≤ f ⁻¹ᵁ U) (x : V) (p : PrimeSpectrum Γ(S, U)) (q : PrimeSpectrum Γ(X, V)) (hp : p = hU.primeIdealOf ⟨f x, hVU x.property⟩) (hq : q = hV.primeIdealOf x) : ∃ hc : p.asIdeal = q.asIdeal.comap (f.appLE U V hVU).hom, ∃ (eS : Localization.AtPrime p.asIdeal ≃+* S.presheaf.stalk (f x)) (eX : Localization.AtPrime q.asIdeal ≃+* X.presheaf.stalk x), eS.toRingHom.comp (algebraMap Γ(S, U) (Localization.AtPrime p.asIdeal)) = (S.presheaf.germ U (f x) (hVU x.property)).hom ∧ eX.toRingHom.comp (algebraMap Γ(X, V) (Localization.AtPrime q.asIdeal)) = (X.presheaf.germ V x x.property).hom ∧ (f.stalkMap x).hom.comp eS.toRingHom = eX.toRingHom.comp (Localization.localRingHom p.asIdeal q.asIdeal (f.appLE U V hVU).hom hc) ∧ ringKrullDim (S.presheaf.stalk (f x)) = (p.asIdeal.height : WithBot ℕ∞) ∧ ringKrullDim (X.presheaf.stalk x) = (q.asIdeal.height : WithBot ℕ∞) ∧ ∃ (rS : S.residueField (f x) ≃+* p.asIdeal.ResidueField) (rX : X.residueField x ≃+* q.asIdeal.ResidueField), rS.toRingHom.comp (S.residue (f x)).hom = (IsLocalRing.residue (Localization.AtPrime p.asIdeal)).comp eS.symm.toRingHom ∧ rX.toRingHom.comp (X.residue x).hom = (IsLocalRing.residue (Localization.AtPrime q.asIdeal)).comp eX.symm.toRingHom ∧ rX.toRingHom.comp (f.residueFieldMap x).hom = (Ideal.ResidueField.map p.asIdeal q.asIdeal (f.appLE U V hVU).hom hc).comp rS.toRingHom ∧ @Algebra.trdeg (S.residueField (f x)) (X.residueField x) _ _ (f.residueFieldMap x).hom.toAlgebra = @Algebra.trdeg p.asIdeal.ResidueField q.asIdeal.ResidueField _ _ (Ideal.ResidueField.map p.asIdeal q.asIdeal (f.appLE U V hVU).hom hc).toAlgebra ∧ @Algebra.trdeg Γ(S, U) Γ(X, V) _ _ (f.appLE U V hVU).hom.toAlgebra = @Algebra.trdeg S.functionField X.functionField _ _ (f.functionFieldMap f.apply_genericPoint_of_isDominant).hom.toAlgebra",
+  "branch": "newtargets-dag",
+  "by": "Q54",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-2e42f25db",
+  "group": "Q54",
+  "result": "pass",
+  "note": "Only item lean changed vs live; the 9 stmt_dep records are identical to live; no new nodes or definitions; sorry only. Checked every clause: hp/hq pin p,q to primeIdealOf; contraction hc; eS/eX pinned by germ equations (unique by localization); stalk square via localRingHom; ringKrullDim = Ideal.height in WithBot ℕ∞ (infinite allowed); rS/rX pinned by residue equations (residue maps surjective); Ideal.ResidueField carries IsFractionRing (A/p), as in the def-weil-pbc-localization-at-prime record; residue square via Ideal.ResidueField.map; both trdeg equalities with explicit actual algebras. No Noetherian/finite-type assumption; single universe u. lean.statement verbatim; docstrings carry Stacks tags, blueprint id and 8 proof steps; report has both sections (second reading is a self-review, disclosed). Note: the generic algebra uses functionFieldMap inline instead of dominantFunctionFieldAlgebra (landed def-sfb-dominant-function-field-map, not cited by the item); they are defeq by proof irrelevance, and the owner lives in the parent theorem module, so not H4. No compile, no fixes."
+ }
+}

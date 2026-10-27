@@ -1,0 +1,134 @@
+{
+ "kind": "statement",
+ "status": "split",
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-lem-field-extension",
+ "mathlib_match": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.FieldProjectionOriginWitnesses",
+  "date": "2026-10-26",
+  "group": "W8"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sp-field-projection-origin-witnesses",
+   "place": "Projection-formula domain decomposition",
+   "via": []
+  },
+  "same_as": []
+ },
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-field-extension/sk-lem-field-extension-towers.proof.md",
+  "place": "(2), projection-formula domain"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "finite coefficient normalized unit origin witnesses",
+   "results": "No exact theorem; project-specific clause split required.",
+   "date": "2026-10-26",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "normalized coefficient tower etale origin witnesses",
+   "results": "No exact theorem; project-specific clause split required.",
+   "date": "2026-10-26",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "field_projection_origin_witnesses",
+   "results": "Only the assigned theorem found.",
+   "date": "2026-10-26",
+   "verdict": "no match"
+  }
+ ],
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.FieldProjectionOriginWitnesses",
+  "file": "lean/Sheaf/Paper/FieldProjectionOriginWitnesses.lean",
+  "branch": "sheaf-dag",
+  "by": "W8",
+  "date": "2026-10-26",
+  "declaration": "AlgebraicGeometry.ProEtale.FieldProjectionOrigin.field_projection_origin_good_levels",
+  "statement": "theorem field_projection_origin_good_levels (X Y : Scheme.{u}) [X.Over (Spec (.of P.field.k))] [Y.Over (Spec (.of P.field.k))] [LocallyOfFiniteType (X ↘ Spec (.of P.field.k))] [QuasiCompact (X ↘ Spec (.of P.field.k))] [IsSeparated (X ↘ Spec (.of P.field.k))] [LocallyOfFiniteType (Y ↘ Spec (.of P.field.k))] [QuasiCompact (Y ↘ Spec (.of P.field.k))] [IsSeparated (Y ↘ Spec (.of P.field.k))] (f : X ⟶ Y) [f.IsOver (Spec (.of P.field.k))] (d : ℕ) [SmoothOfRelativeDimension d f] [IsSeparated f] (c : Compactification f) (D : Models P) (b : FieldShriekSystem.Laws P D c) (a : Domains P D c) (A : Adjoints P D c b a) (l : FieldExceptionalSystem.Laws P D c b a A) (j : ∀ E : Index P, normalized P D E Y (J P E Y)) (E F : Index P) (h : E ≤ F) (K : N P D E Y) : ∀ n : ℕ, SpTowerShriek.GoodLevel P.coefficients.l E.val (D.base E) Y n K.obj ∧ SpTowerShriek.GoodLevel P.coefficients.l E.val (D.base E) X n ((A.right E).obj ⟨J P E Y, j E⟩).obj ∧ SpTowerShriek.GoodLevel P.coefficients.l F.val (D.base F) Y n ((scalar P D a h Y).obj K).obj ∧ SpTowerShriek.GoodLevel P.coefficients.l F.val (D.base F) X n ((A.right F).obj ⟨J P F Y, j F⟩).obj ∧ SpTowerShriek.GoodLevel P.coefficients.l F.val (D.base F) X n ((scalar P D a h X).obj ((A.right E).obj ⟨J P E Y, j E⟩)).obj"
+ },
+ "id": "lem-sp-field-projection-origin-witnesses-good-levels",
+ "title": "GoodLevel predicates for projection inputs",
+ "statement": "For supplied normalized coefficient units, all five projection inputs satisfy GoodLevel at every coefficient level.",
+ "stmt_deps": [
+  "lem-sp-tower-chart-admissibility",
+  "det-sp-tower-gluing",
+  "def-sp-field-shriek-system-models"
+ ],
+ "proof": [
+  {
+   "text": "The finite field of Domains supplies spFiniteConstructibleTor at each level for every object of N, in particular each of the five displayed objects. The right and scalar functors have codomain N.",
+   "uses": [
+    "def-sp-field-exceptional-system-domains",
+    "def-sp-field-exceptional-system-adjoints"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Use Base.ideals n to transport this finite-level predicate along the actual equality of ell-power and uniformizer-power ideals. Equality induction reduces the transport functor to the identity, so bounded cohomology, intrinsic constructibility, and the Tor interval are unchanged.",
+   "uses": [
+    "def-sp-tower-shriek-data",
+    "sk-def-sp-normalized-towers"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "If homology vanishes outside the integral interval [a,b], its support is a subset of the finite set of integers in [a,b]. Together with intrinsic constructibility and finite Tor amplitude, this is exactly finiteTorConstructible and hence GoodLevel. Apply this conversion five times.",
+   "uses": [
+    "def-weil-finite-tor-amplitude",
+    "def-weil-finite-torsion-constructibility"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-sp-field-exceptional-system-domains",
+  "def-sp-field-exceptional-system-adjoints",
+  "def-sp-tower-shriek-data",
+  "sk-def-sp-normalized-towers",
+  "def-weil-finite-tor-amplitude",
+  "def-weil-finite-torsion-constructibility"
+ ],
+ "proof_origin": {
+  "by": "C3 stage-3 worker",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-field-extension/sk-lem-sp-field-extension-towers.proof.md",
+  "place": "(2), projection-formula domain; good-levels proved from the existing declarations"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "W8",
+  "result": "pass",
+  "landing": "20261026T003124-L-148408",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C3",
+  "result": "pass",
+  "landing": "20261026T022940-L-507578",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

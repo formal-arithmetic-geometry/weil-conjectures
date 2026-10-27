@@ -193,7 +193,18 @@
   "def-weil-weil-sheaf-complex"
  ],
  "proof_split_by": "paragraphs",
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
  "chapter": "sec-poincare-duality",
  "unit": "sk-lem-finite",
  "lean": {
@@ -235,5 +246,28 @@
   "group": "Q108",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q108-046f4afe9 (reviewer sub-agent of L); spot-checked: Read in full: the item, all five new nodes, every cited statement, the main-20261015 prop-weil-operations proof (5 sentences), unit sk-lem-finite, the 2026-10-21 repair note (re-split extended to batch 5) and the base item, which is the live 11-step proof PASSed at NP 96ed7f97. The snapshot's chapter symlinks point to a gc'd dagsnap, so all non-pod nodes were read from clones/side-live. Re-split: the statement is byte-identical; the proof is a 5-step, 2425-character assembly; all 11 old step texts appear verbatim in the report. Each old step reappears as a clause of a self-contained, statement-only new node of comparable size: Steps 1-2 in semilinear-field-operation-lifts (2.9k), 3/4/6 in constructible-mate-coherence (3.0k), 5/11 in fixed-pair-truncation-cohomology (2.7k), 7/10 in rational-purity-pairing (3.3k), 8-9 in formal-verdier-exchange-equivariance (3.4k). No argument was shortened or dropped. The corrected transpose order in old Step 9 (exceptional, then tensor-Hom, then ordinary) is right; I checked the types. Mathematics: the mate b of a^{-1} matches def-weil-pbc-adjunction-mate and is invertible by lem-weil-mate-iso-along-equivalences; I derived both mate identities from naturality and the triangle identities. The third truncation-triangle arrow is unique by BBD 1.3.3. The point-transport chain follows from naturality of iota. Purity and pairing for arbitrary rational theta work without a lattice (checked d=0 and theta=ell on a point). The formal Verdier map is invertible only under the fix-node hypotheses. Other edge cases checked: f=id, empty X, scalar Hom lift b/a, non-separated X_0 with f_0 separated. Batch-5, each flagged citation accepted: (1) semilinear-field-operation-lifts, (2) constructible-mate-coherence, (3) fixed-pair-truncation-cohomology, (4) rational-purity-pairing, (5) formal-verdier-exchange-equivariance. Each is Frobenius-equivariance calculus, which the nt-assume-poincare-duality scope explicitly excludes; the trace-formula leaf takes Weil operators as given. Delivered closure = base closure minus 18 old-proof tools plus exactly the 5 new nodes; neither assumption leaf, nor nt-target-poincare-isiso, sk-thm-sf-verdier-exchange, thm-sf-verdier-exchange, cor-sf-duality-pullback or sk-thm-trace-transport is in it. fix-cor-verdier-exchange was already cited in base Step 9. Duplicate candidates were searched across the DAG and distinguished: lem-fix-weil-operations, cor-coef-verdier-weil-equivariance, lem-coef-frobenius-exchange-equivalence, thm-pod-equivariance-of-the-twisted-pairing and thm-pur-weil-equivariance-of-purity-and-trace (both strict datum), lem-pod-texact-truncation-comparison. Form: B1-B9 fine, searches complete (the NatIso Loogle query error is honestly recorded), no SGA, no cycle. Advisory only, no fixes: node 5's first paragraph restates cor-coef-verdier-weil-equivariance and node 2 re-asserts lem-pod-weil-frobenius-compact-support-exchange, so provers should cite those nodes; the item's merge-owned tool_uses lists old-proof tools the item no longer cites; node 5 has a mild B1 proof hint in its statement."
+ },
+ "blueprint_update": {
+  "snapshot": "main-20261023-1620",
+  "commit": "7284bb09daf97437d544c51882b325f9c52cd345",
+  "changed": [
+   "statement"
+  ],
+  "statement": "Fix the finite-field datum\n$p,a,q,k_0,k$, where $q=p^a$, and fix a prime $\\ell\\neq p$; write\n$\\Ql=\\mathbf Q_\\ell$, choose an algebraic closure $\\Qlb$ of $\\Ql$, and\nlet $E/\\Ql$ be finite and contained in $\\Qlb$, and let\n$\\Lambda\\in\\{E,\\Qlb\\}$, regarded as a condensed ring. On a scheme $W$ use\nthe condensed categories\n$\\Dctf(W,\\Lambda)=\\Dbc(W,\\Lambda)\\subseteq D(W_{\\mathrm{pro\\acute et}},\\Lambda)$ of\n[det-def-sfb-bounded-constructible], the\nseparated finite-type\nmorphism conditions, and the\nexceptional inverse image in its constructible form (the exceptional inverse\nimage of [def-weil-exceptional-inverse-image], defined for every separated\nfinite-type morphism; the ambient clause (1) of\n[def-weil-exceptional-adjoint-admissibility] is not assumed, as it fails in\ngeneral). Use the\nderived pullback, tensor, and\ninternal-Hom operations, the\nderived direct-image and\ncompact-support direct image, the\nexceptional inverse image, the\nexchange/projection transformations, and\nthe standard truncation functors $\\tau^{\\leq m},\\tau^{\\geq m}$.\nLet $X_0,Y_0$ be\nfinite-type $k_0$-schemes\nand let $f_0:X_0\\to Y_0$ be a\nseparated finite-type\n$k_0$-morphism, and let\n$X=X_0\\times_{k_0}k$, $Y=Y_0\\times_{k_0}k$, and let $f:X\\to Y$ be\nthe geometric fiber of\n$f_0$. Put\n\n$$\ng_X=\\operatorname{id}_{X_0}\\times\\operatorname{Spec}(\\operatorname{Frob}_q),\n\\qquad\ng_Y=\\operatorname{id}_{Y_0}\\times\\operatorname{Spec}(\\operatorname{Frob}_q),\n$$\n\nusing the geometric-Frobenius convention. A Weil complex on $W\\in\\{X,Y\\}$ is\na pair $(K,\\theta_K)$ with $K\\in\\Dbc(W,\\Lambda)$ and\n$\\theta_K:Lg_W^*K\\xrightarrow{\\sim}K$, as in [def-weil-weil-sheaf-complex]\nand [sk-def-sf-weil-complexes]; an object of\n$D^b_{c,\\mathrm W}(W,\\Lambda)$ gives the pair\n$(\\operatorname{For}(K),\\theta_K)$.\n\nFor a Weil complex $(K,\\theta_K)$ on $X$, and, whenever a tensor or internal\nHom is used on $W$, for Weil complexes $M,N$ on $W$, the operations\n\n$$\nLf^*,\\quad Rf_*,\\quad Rf_!,\\quad Rf^!,\\quad -\\otimes^L-,\\quad R\\mathcal Hom\n$$\n\napplied to the underlying objects carry induced Weil structures, built from\nthe exchange and adjunction maps. For example, the Weil structure on\n$Rf_*K$ is\n\n$$\nLg_Y^*Rf_*K\n\\xrightarrow{\\operatorname{Ex}_*}\nRf_*Lg_X^*K\n\\xrightarrow{Rf_*(\\theta_K)}Rf_*K,\n$$\n\nand the compact-support construction uses $\\operatorname{Ex}_!$. The\nunderlying object of each induced Weil complex is the operation applied to\nthe underlying object, and morphisms of Weil complexes go to morphisms of\nWeil complexes. All these operations preserve $\\Dbc(-,\\Lambda)=\\Dctf(-,\\Lambda)$ for\n$\\Lambda\\in\\{E,\\Qlb\\}$ ([sk-thm-sf-ctf-stability]), so equivariance needs no\nfurther preservation theorem.\nFor every $W\\in\\{X,Y\\}$ and $m\\in\\mathbf Z$, let\n$\\tau^{\\leq m},\\tau^{\\geq m}:\\Dbc(W,\\Lambda)\\to\\Dbc(W,\\Lambda)$\nbe the truncation functors of [prop-constructible-truncations],\ncharacterized by vanishing of the\ncohomology sheaves\n$\\mathcal H^r(\\tau^{\\leq m}K)=0$ for $r>m$ and\n$\\mathcal H^r(\\tau^{\\geq m}K)=0$ for $r<m$, together with their\nstandard truncation triangles; they also carry induced Weil structures.\nComposition,\nbase change, projection, purity, and duality isomorphisms are morphisms of\nWeil complexes and induce Frobenius-equivariant maps on\ncohomology.",
+  "proof": [
+   {
+    "text": "The operations preserve $\\Dbc(-,\\Lambda)$ by [sk-thm-sf-ctf-stability].\nThe induced Weil structures on the operations, evaluations, adjunction maps,\nexchanges and projection maps are [lem-fix-weil-operations].\nPullback by the Frobenius automorphism is exact, so it commutes with\nthe truncations of [prop-constructible-truncations].\nThe geometric orientation and trace are equivariant by\n[thm-pur-weil-equivariance-of-purity-and-trace] and\n[prop-pur-weil-equivariance-compatibilities].\nThe formal duality exchange of [fix-cor-verdier-exchange] is made\nfrom the same evaluation and adjunction maps, hence is equivariant;\nits smooth pairing form is\n[thm-pod-equivariance-of-the-twisted-pairing].\nThis proves the assertion on the stated domains without appealing to\nthe later verification export.",
+    "uses": [
+     "lem-fix-weil-operations",
+     "prop-constructible-truncations",
+     "thm-pur-weil-equivariance-of-purity-and-trace",
+     "prop-pur-weil-equivariance-compatibilities",
+     "fix-cor-verdier-exchange",
+     "thm-pod-equivariance-of-the-twisted-pairing"
+    ],
+    "elementary": false
+   }
+  ],
+  "note": "the current blueprint (main-20261023-1620, weil-conjectures-blueprint 7284bb09da) states or proves this differently; a worker who touches the node follows it"
  }
 }

@@ -1,0 +1,148 @@
+{
+ "id": "lem-sf-twisted-action-closed-comparisons",
+ "kind": "statement",
+ "title": "Tensor and internal Hom comparisons for a twisted action presentation",
+ "statement": "Let $(C,J)$ be a small site with pullbacks, $s:C\\simeq C$ continuous in both directions, $R$ a commutative ring sheaf, $a:(s^{-1})^*R\\simeq R$, and $P$ an OrbitPresentation [def-sf-twisted-action-presentation-data]. There is a full Presentation $Q$ extending exactly $P$. Its tensor comparison preserves pure tensors, its tensor action is diagonal and its unit is coefficient restriction. Its internal-Hom comparison has the conjugate action, preserves evaluation, and is natural in both variables. The tensor symmetry and tensor-Hom evaluation equations hold. The underlying category, topology, coefficient, restriction functors, geometric morphism and induction data of $Q$ are exactly those in $P$.",
+ "source": {
+  "document": "literature/stacks-project/sites.tex",
+  "place": "Original twisted-site proof steps 9--13; sheafification and localized-site Hom calculation. Agent twisted variant of Tag 00W0 (proposition-sheaves-on-group), motivation only; exact non-SGA reference WANTED."
+ },
+ "stmt_deps": [
+  "def-sf-twisted-action-presentation-data"
+ ],
+ "proof": [
+  {
+   "text": "Apply tensorComparisons to the restriction part of P. This supplies normalized tensor and unit comparisons, their action equations, tensor naturality (including translation), and tensor symmetry. No orbit-induction field is used.",
+   "uses": [
+    "lem-sf-twisted-action-tensor-comparisons"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply homEvaluationComparisons with those tensor comparisons to get the sheaf Hom and translation Hom isomorphisms preserving evaluation. This is only the slice-Hom construction, with no conjugate-action or Hom-naturality assertion.",
+   "uses": [
+    "lem-sf-twisted-action-hom-evaluation-comparisons"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Prove evaluation naturality and injectivity of uncurrying directly from tensorHomEquiv and its naturality. For maps f and g, uncurry the desired Hom naturality square and precompose the tensor restriction isomorphism. Tensor naturality and the evaluation comparison turn the left side into U applied to ordinary evaluation naturality, which is the right side. Injectivity of uncurrying gives Hom naturality.",
+   "uses": [
+    "def-pur-sheaf-hom",
+    "def-pur-sheaf-tensor-product"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Uncurry the desired Hom-action equation and precompose the source action isomorphism and translation/tensor comparison. The diagonal tensor action and evaluation compatibility identify the left side with the action followed by restricted evaluation. Equivariance of the module morphism evaluation changes this to translated restricted evaluation followed by the target action. Translation tensor naturality and the translation evaluation comparison give evaluation of the translated Hom map. Evaluation naturality cancels the source action with its inverse, giving the conjugate formula. Injectivity of uncurrying proves the equation.",
+   "uses": [
+    "def-pur-sheaf-hom",
+    "def-pur-sheaf-tensor-product"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Construct Presentation with toOrbitPresentation exactly P, using the two comparison records and the two proved equations. Its parent equality is reflexive, so the displayed subtype is inhabited. Every induction and exactness field is retained literally.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-sf-twisted-action-tensor-comparisons",
+  "lem-sf-twisted-action-hom-evaluation-comparisons",
+  "def-pur-sheaf-hom",
+  "def-pur-sheaf-tensor-product"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "C9 stage-3 reduction of action-site steps 9--13. Tensor/unit construction and evaluation-normalized slice Hom are separated; Hom naturality and conjugate action proved by tensor-Hom adjunction and equivariance of evaluation."
+ },
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Sheaves with an invertible semilinear action of a site automorphism are modules on its semidirect ringed action site; restriction preserves tensor and internal Hom",
+   "results": "8 hits: SheafOfModules.hom_ext, SheafOfModules.restrictScalars, SheafOfModules.instCategory, AlgebraicGeometry.Scheme.Modules, SheafOfModules, PresheafOfModules.Sheafify.map_smul_eq, SheafOfModules.mk, PresheafOfModules.Sheafify.module. Related primitives only; the explicit source free-algebra construction is reused. No complete normalized twisted-site presentation or orbit package.",
+   "date": "2026-10-22",
+   "verdict": "related declarations reused; no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Endofunctor.Algebra.forget",
+   "results": "6 hits: CategoryTheory.Endofunctor.Algebra.forget, CategoryTheory.Endofunctor.Algebra.forget_faithful, CategoryTheory.Endofunctor.Algebra.forget_reflects_iso, CategoryTheory.Endofunctor.Algebra.forget_obj, CategoryTheory.Endofunctor.Algebra.forget_map, CategoryTheory.Algebra.forget_additive. Related primitives only; the explicit source free-algebra construction is reused. No complete normalized twisted-site presentation or orbit package.",
+   "date": "2026-10-22",
+   "verdict": "related declarations reused; no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "tensorObjIsoSheafification|IsoAlgebra|preservesFiniteLimits_of_preservesHomology",
+   "results": "9 hits: Mathlib/CategoryTheory/Abelian/GrothendieckAxioms/Basic.lean, Mathlib/CategoryTheory/Abelian/GrothendieckCategory/ModuleEmbedding/GabrielPopescu.lean, Mathlib/Topology/Sheaves/Abelian.lean, Mathlib/Algebra/Category/Grp/AB.lean, Mathlib/Algebra/Homology/ShortComplex/ExactFunctor.lean, Mathlib/Algebra/Homology/ShortComplex/ExactFunctor.lean, Mathlib/Algebra/Homology/ShortComplex/ExactFunctor.lean, Mathlib/Algebra/Category/AlgCat/Basic.lean. Related primitives only; the explicit source free-algebra construction is reused. No complete normalized twisted-site presentation or orbit package.",
+   "date": "2026-10-22",
+   "verdict": "related declarations reused; no exact match"
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.CategoryTheory.TwistedActionRingedSite",
+  "date": "2026-10-22",
+  "group": "U3"
+ },
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "The parent obligation has no created.item blueprint ancestor. Its recorded provenance is lem-a1-local-boundary-duality and the evaluation/biduality sentence of thm-coef-qbar-verdier. This site realization supplies the abelian-category foundation for the internal-Hom and evaluation argument of cor-coef-verdier-weil-equivariance, without replacing the native derived category by fixed pairs in a derived category. Original twisted-site proof steps 9--13; sheafification and localized-site Hom calculation.",
+   "via": [
+    "lem-sf-twisted-action-ringed-site",
+    "lem-sf-weil-native-closed-forgetful",
+    "lem-sf-weil-verdier-biduality"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.TwistedActionClosedComparisons",
+  "file": "lean/Sheaf/CategoryTheory/TwistedActionClosedComparisons.lean",
+  "declaration": "CategoryTheory.TwistedActionRingedSite.closedComparisons",
+  "declarations": [
+   "CategoryTheory.TwistedActionRingedSite.closedComparisons"
+  ],
+  "statement": "theorem closedComparisons [HasPullbacks C] (P : OrbitPresentation J s R a) : Nonempty {Q : Presentation J s R a // Q.toOrbitPresentation = P}",
+  "branch": "sheaf-dag",
+  "by": "U3",
+  "date": "2026-10-22"
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "C-9bf8a",
+  "group": "U3",
+  "result": "pass",
+  "landing": "20261023T105703-L-3592432",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C9",
+  "result": "pass",
+  "landing": "20261027T054554-L-963286",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

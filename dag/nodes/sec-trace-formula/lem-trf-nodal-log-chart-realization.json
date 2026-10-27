@@ -1,0 +1,193 @@
+{
+ "id": "lem-trf-nodal-log-chart-realization",
+ "kind": "statement",
+ "title": "Divisorial realization of the nodal logarithmic pushout chart",
+ "statement": "Let $Y=\\operatorname{Spec}A$ be a locally Noetherian affine scheme [pqf-def-locnoeth, def-weil-affine-spectrum], let $T\\subseteq Y$ be closed, and suppose $(Y,T)$ is a log regular pair with divisorial log structure $M_Y$ [def-trf-log-regular-pair]. Let $P\\to M_Y$ be a fine saturated chart with structure map $\\alpha:P\\to A$ [def-trf-fs-log-blowup], let $a\\in P$ and $\\varepsilon\\in A^\\times$, and put $h=\\varepsilon\\alpha(a)$. Assume $h$ is invertible on $Y\\setminus T$. Let $c:W\\to Z=\\operatorname{Spec}(A[u,v]/(uv-h))$ be etale [def-weil-etale-morphism], with $W$ locally Noetherian, and let $g:W\\to Y$ be its composite. Write $u,v$ also for their pullbacks to $W$. Put $R=\\mathbf Z\\oplus P$ and $Q=\\mathbf N^2\\amalg_{\\mathbf N}R$, where the two maps out of $\\mathbf N$ send $1$ to $(1,1)$ and $(1,a)$; thus $Q$ is the quotient of $\\mathbf N^2\\oplus R$ identifying $((1,1),0)$ with $(0,(1,a))$. Give $R$ the base structure map $(n,p)\\mapsto\\varepsilon^n\\alpha(p)$ and $Q$ the map to $\\Gamma(W,\\mathcal O_W)$ sending the two branch generators to $u,v$ and $R$ through the base. Let $L$ be its associated log structure [def-trf-fs-log-blowup]. The associated base $R$-log structure is canonically $M_Y$. The monoid $Q$ is fine saturated, the groupified map $R^{\\rm gp}\\to Q^{\\rm gp}$ is injective with cokernel $\\mathbf Z$, and the canonical identification $Y\\times_{\\operatorname{Spec}\\mathbf Z[R]}\\operatorname{Spec}\\mathbf Z[Q]\\cong Z$ identifies the logarithmic comparison with $c$. Here $\\mathbf Z[S]$ is the ring freely generated as an abelian group by $[s]$, with $[s][t]=[s+t]$. The $R\\to Q$ chart defines a morphism $(W,L)\\to(Y,M_Y)$ of fine saturated log schemes and $(W,L)$ is log regular. Its triviality locus is exactly the dense open $U=g^{-1}(Y\\setminus T)$, and the structure map canonically identifies $L$ with $\\mathcal O_W\\cap j_*\\mathcal O_U^\\times$, where $j:U\\hookrightarrow W$. Consequently $g^{-1}(T)$ is nowhere dense and $(W,g^{-1}(T))$ is a log regular pair.",
+ "source": {
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "VI Proposition 1.9 proof, printed p. 71, equation (1.a), the cocartesian monoid square and cartesian scheme square, and the final sentence; VI 1.8 and 1.4."
+ },
+ "stmt_deps": [
+  "pqf-def-locnoeth",
+  "def-weil-affine-spectrum",
+  "def-trf-log-regular-pair",
+  "def-trf-fs-log-blowup",
+  "def-weil-etale-morphism"
+ ],
+ "proof": [
+  {
+   "text": "Write $\\rho:R\\to Q$ for the chart homomorphism. The monoid $R=\\mathbf Z\\oplus P$ is fs: finite generators are those of $P$ and $\\pm1$, its group completion is $\\mathbf Z\\oplus P^{\\rm gp}$, and saturation is checked in the $P$ coordinate [def-trf-fs-log-blowup]. By [lem-trf-associated-log-universal-stalks] its associated log structure exists. At a geometric point of $Y$ with strict local ring $B$, set $F=\\alpha^{-1}(B^\\times)$. The inverse image of units for the $R$ chart is $\\mathbf Z\\oplus F$, and the map of pushouts $[(n,p),b]\\mapsto[p,\\varepsilon^n b]$ identifies $R\\oplus_{\\mathbf Z\\oplus F}B^\\times$ with $P\\oplus_F B^\\times$; its inverse is $[p,b]\\mapsto[(0,p),b]$. These formulas respect the defining relations and are inverse because $(n,0)$ maps to the unit $\\varepsilon^n$. They are the stalk maps of the canonical morphism induced by $(n,p)\\mapsto\\varepsilon^n c_P(p)$ into $M_Y$, where $c_P$ is the given chart. The chart identification and stalk formula of [lem-trf-associated-log-universal-stalks] identify the associated $R$-log structure canonically with $M_Y$.",
+   "uses": [
+    "def-trf-fs-log-blowup",
+    "lem-trf-associated-log-universal-stalks"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "VI 1.9, printed p.71: the unit-twisted base chart c′; explicit stalk-pushout verification using VI 1.1."
+   }
+  },
+  {
+   "text": "Apply [lem-trf-nodal-divisorial-chart] to $P,a,A,\\alpha,\\varepsilon$. It gives that $Q$ is fs, that $\\rho^{\\rm gp}$ is injective with cokernel $\\mathbf Z$, and the $A$-algebra isomorphism $C:=A\\otimes_{\\mathbf Z[R]}\\mathbf Z[Q]\\simeq A[u,v]/(uv-h)$ with the specified images of every generator. By [lem-weil-pbc-fibre-product-affine-spectra], $\\operatorname{Spec}C$ is the displayed scheme fibre product, with exactly the base and chart projections. Thus this is the claimed canonical identification with $Z$.",
+   "uses": [
+    "lem-trf-nodal-divisorial-chart",
+    "lem-weil-pbc-fibre-product-affine-spectra"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "VI 1.9, printed p.71: cocartesian monoid square, cartesian scheme square, and group-completion calculation."
+   }
+  },
+  {
+   "text": "By [lem-trf-toric-chart-fs-realization], $Z=\\operatorname{Spec}C$ is locally Noetherian with associated fs $Q$-log structure $M_Z$. With the base $R$ chart of step 1, [lem-trf-toric-chart-compatible-comparison] constructs $(Z,M_Z)\\to(Y,M_Y)$ with compatible charts $R,Q,\\rho$, whose comparison to the fibre product of step 2 is the identity under its canonical identification. Since $c:W\\to Z$ is etale, the restriction clause of [lem-trf-associated-log-universal-stalks] identifies $M_Z|_W$ with the log structure $L$ associated to the restricted $Q$ chart. Restriction of sheaves on the etale site therefore gives a strict log morphism $(W,L)\\to(Z,M_Z)$. Composing with the preceding log morphism gives the required morphism to $(Y,M_Y)$. Its chart sends the branch generators to $u,v$ and each $(n,p)$ to $g^*(\\varepsilon^n\\alpha(p))$. Consequently its comparison is exactly $c$, as may be checked on these ring generators.",
+   "uses": [
+    "lem-trf-toric-chart-fs-realization",
+    "lem-trf-toric-chart-compatible-comparison",
+    "lem-trf-associated-log-universal-stalks"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "VI 1.1 and VI 1.9, printed pp.69 and 71: associated fs chart, chart morphism, and its etale restriction."
+   }
+  },
+  {
+   "text": "The morphism of step 3 has locally Noetherian fs source and target, log regular target by hypothesis, fs compatible charts $R\\to Q$, injective groupification with torsion-free cokernel $\\mathbf Z$ by step 2, and etale comparison $c$. All hypotheses of [lem-trf-log-smooth-log-regular] hold. It follows that $(W,L)$ is log regular, its triviality locus $V$ is dense open, and the structure map identifies $L$ canonically with $\\mathcal O_W\\cap j_{V*}\\mathcal O_V^\\times$.",
+   "uses": [
+    "lem-trf-log-smooth-log-regular"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "VI 1.8 and VI 1.4, printed pp.70 and 69, as applied at the end of VI Proposition 1.9."
+   }
+  },
+  {
+   "text": "We identify $V$ with $U=g^{-1}(Y\\setminus T)$. At a geometric point $\\bar w$ mapping to $\\bar y$, the chart-stalk formula [lem-trf-associated-log-universal-stalks] says that $L_{\\bar w}$ is trivial exactly when every $Q$ element maps to a unit: if all do, its pushout is just $\\mathcal O_{W,\\bar w}^\\times$; conversely triviality forces every structural image to be a unit. Above $Y\\setminus T$, the $P$ chart images are units by [def-trf-log-regular-pair], and $uv=g^*h$ is a unit by hypothesis. Hence both $u$ and $v$ are units (their inverses are $v/(uv)$ and $u/(uv)$). Together with the units $\\varepsilon^n$ these generate all chart images, so $U\\subseteq V$. Conversely, at a point above $T$, nontriviality of the base chart gives $p\\in P$ with nonunit image in $\\mathcal O_{Y,\\bar y}$. The induced map to $\\mathcal O_{W,\\bar w}$ is local, so this image remains a nonunit; it is also the structural image of $\\rho(0,p)$ in $L_{\\bar w}$. Thus $\\bar w\\notin V$. We obtain $V=U$. Substitution into step 4 gives the asserted canonical divisorial identification and density. The closed complement $g^{-1}(T)$ is nowhere dense, and the fs log regularity and this exact triviality locus give the log regular pair by [def-trf-log-regular-pair].",
+   "uses": [
+    "lem-trf-associated-log-universal-stalks",
+    "def-trf-log-regular-pair"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "VI 1.4 and VI 1.9, printed pp.69 and 71: identify the exact boundary using uv=h and the local chart maps."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-trf-fs-log-blowup",
+  "lem-trf-associated-log-universal-stalks",
+  "lem-trf-nodal-divisorial-chart",
+  "lem-weil-pbc-fibre-product-affine-spectra",
+  "lem-trf-toric-chart-fs-realization",
+  "lem-trf-toric-chart-compatible-comparison",
+  "lem-trf-log-smooth-log-regular",
+  "def-trf-log-regular-pair"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "VI Proposition 1.9, printed p.71, with VI 1.1, 1.4 and 1.8: explicit assembly using existing monoid, associated-log, chart-comparison and log-regularity statements."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For a log regular affine base chart P, the etale model uv equals a unit times a monomial has fine saturated log chart N2 pushout (Z plus P), with divisorial structure on its dense triviality locus.",
+   "results": "{\"t\": \"2026-10-22T06:11:47Z\", \"tool\": \"leanfinder\", \"query\": \"For a log regular affine base chart P, the etale model uv equals a unit times a monomial has fine saturated log chart N2 pushout (Z plus P), with divisorial structure on its dense triviality locus.\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.basicOpen_subset_etaleLocus_iff\", \"Algebra.basicOpen_subset_etaleLocus_iff_etale\", \"StandardEtalePair.hasMap_X\", \"RingHom.IsStandardSmoothOfRelativeDimension.exists_etale_mvPolynomial\", \"Algebra.IsStandardSmoothOfRelativeDimension.exists_etale_mvPolynomial\", \"RingHom.IsStandardSmooth.exists_etale_mvPolynomial\", \"Algebra.exists_etale_of_isEtaleAt\", \"StandardEtalePair.homEquiv\"], \"digest\": \"8e3109ec93df856f\"}; Read all returned signatures: ordinary smooth/etale coordinates, manifold charts or logarithmic heights do not construct these associated log charts or identify their divisorial triviality loci. No match.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The logarithmic structure of an ordinary double point smoothing uv equals a base monomial is divisorial and log regular, with both branch generators.",
+   "results": "{\"t\": \"2026-10-22T06:11:21Z\", \"tool\": \"leansearch\", \"query\": \"The logarithmic structure of an ordinary double point smoothing uv equals a base monomial is divisorial and log regular, with both branch generators.\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsSmooth.casesOn\", \"AlgebraicGeometry.IsSmooth.recOn\", \"LibraryNote.Design_choices_about_smooth_algebraic_structures\", \"Algebra.smoothLocus\", \"Algebra.smoothLocus_eq_univ_iff\", \"AlgebraicGeometry.IsSmooth.exists_isStandardSmooth\", \"AlgebraicGeometry.IsSmooth.mk\", \"Algebra.mvPolynomial\"], \"digest\": \"0204d67fa518849e\"}; Read all returned signatures: ordinary smooth/etale coordinates, manifold charts or logarithmic heights do not construct these associated log charts or identify their divisorial triviality loci. No match.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"LogStructure\"",
+   "results": "{\"t\": \"2026-10-22T06:11:21Z\", \"tool\": \"loogle\", \"query\": \"\\\"LogStructure\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}; Read all returned signatures: ordinary smooth/etale coordinates, manifold charts or logarithmic heights do not construct these associated log charts or identify their divisorial triviality loci. No match.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "nodal|logSmooth|log_smooth|semistable",
+   "results": "{\"t\": \"2026-10-22T06:11:20Z\", \"tool\": \"grep\", \"query\": \"nodal|logSmooth|log_smooth|semistable\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}; Read all returned signatures: ordinary smooth/etale coordinates, manifold charts or logarithmic heights do not construct these associated log charts or identify their divisorial triviality loci. No match.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An etale nodal chart uv equals a unit times a monomial over a log regular base defines the divisorial fs log structure of the inverse image boundary",
+   "results": "{\"t\": \"2026-10-24T08:08:40Z\", \"tool\": \"leanfinder\", \"query\": \"An etale nodal chart uv equals a unit times a monomial over a log regular base defines the divisorial fs log structure of the inverse image boundary\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"StandardEtalePresentation.P\", \"StandardEtalePair.hasMap_X\", \"StandardEtalePair\", \"StandardEtalePair.HasMap\", \"StandardEtalePresentation\", \"StandardEtalePresentation.toSubmersivePresentation\", \"StandardEtalePair.inv_aeval_X_g\", \"StandardEtalePresentation.toPresentation_σ'\"], \"digest\": \"db9562c77c31479d\"}; Read all returned signatures. Standard etale ring presentations, analytic logarithmic derivatives and divisors do not state the fs logarithmic chart or divisorial realization. No match.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"LogStructure\"",
+   "results": "{\"t\": \"2026-10-24T08:09:06Z\", \"tool\": \"loogle\", \"query\": \"\\\"LogStructure\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}; Read all returned signatures. Standard etale ring presentations, analytic logarithmic derivatives and divisors do not state the fs logarithmic chart or divisorial realization. No match.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "LogStructure|LogRegular|log.regular|log.smooth|nodal",
+   "results": "{\"t\": \"2026-10-24T08:09:06Z\", \"tool\": \"grep\", \"query\": \"LogStructure|LogRegular|log.regular|log.smooth|nodal\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}; Read all returned signatures. Standard etale ring presentations, analytic logarithmic derivatives and divisors do not state the fs logarithmic chart or divisorial realization. No match.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A nodal curve uv equals h over a log regular base has the divisorial logarithmic structure with the two branch generators",
+   "results": "{\"t\": \"2026-10-24T08:09:07Z\", \"tool\": \"leansearch\", \"query\": \"A nodal curve uv equals h over a log regular base has the divisorial logarithmic structure with the two branch generators\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"LibraryNote.Design_choices_about_smooth_algebraic_structures\", \"Differential.logDeriv\", \"ValueDistribution.logCounting_top\", \"WeierstrassCurve.IsCharTwoNF.casesOn\", \"MeromorphicOn.divisor_zpow\", \"locallyFinsuppWithin.logCounting_divisor\", \"WeierstrassCurve.IsCharTwoNF\", \"MeromorphicOn.divisor_of_toMeromorphicNFOn\"], \"digest\": \"9f9473df466ef661\"}; Read all returned signatures. Standard etale ring presentations, analytic logarithmic derivatives and divisors do not state the fs logarithmic chart or divisorial realization. No match.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-nodal-log-regularity",
+  "date": "2026-10-22",
+  "group": "Q114"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Historical nearby-duality alteration input, lem-trf-local-term-locality proof (1)--(2), via nodal-pair projective resolution: VI Proposition 1.9 proof, printed p. 71, equation (1.a), the cocartesian monoid square and cartesian scheme square, and the final sentence; VI 1.8 and 1.4.",
+   "via": [
+    "lem-trf-nodal-log-regularity",
+    "lem-trf-nodal-pair-projective-resolution",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-trf-nodal-log-chart-realization",
+  "worker": "stage1",
+  "summary": "Q69: retained the statement, reused the existing nodal monoid and log-regularity theorems, explicitly checked the unit-twisted base chart, constructed the morphism by etale restriction of the toric chart, and proved equality of the triviality locus with the inverse image of the original complement. No new nodes.",
+  "blueprint": "Retained historical nearby-duality/alteration ancestry of lem-trf-local-term-locality proof (1)--(2), via nodal-log-regularity. The latest blueprint now uses contracting correspondences; this item supplies only its already-recorded historical ILO VI Proposition 1.9 local-chart input, without asserting a new dependency of the current blueprint. Steps 1--3 realize the two chart squares and step 4 the final log-regularity implication; step 5 verifies VI 1.4 recovery on precisely the stated boundary."
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q69-c613bb888",
+  "group": "Q69",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q69-c613bb888 (reviewer sub-agent of L); spot-checked: I read the item and its five steps in full, together with every cited statement and ILO VI 1.8 and Prop. 1.9 (proof on printed p.71: (1.a), the cocartesian square N→N², N→Z×P, the cartesian square with c′=(c,1↦ε), and the conclusion). The statement matches the source and is unchanged from the base. The item takes the étale model as a hypothesis, so no SGA is used. Step 1: R=Z⊕P is fs, its unit preimage is Z⊕F, and the pushout maps [(n,p),b]↦[p,ε^n b] and [p,b]↦[(0,p),b] respect the relations and are inverse, so R is a chart of M_Y by the chart clause of associated-log-universal-stalks; elementary is justified. Step 2: nodal-divisorial-chart states fs, injective g^gp with cokernel Z and the A-algebra isomorphism over Z[R]; the affine fibre product is a Mathlib leaf. Step 3: toric-chart-fs-realization and compatible-comparison give (Z,M_Z)→(Y,M_Y) with θκ=id, and the stated étale-restriction clause gives L=M_Z|_W. Step 4: every hypothesis of log-smooth-log-regular holds (fs, locally Noetherian, log regular base, cokernel Z torsion-free, étale comparison allowed). Step 5: V=U, since off T the chart images are units and uv=g^*h, and over T some α(p) is a nonunit that stays a nonunit under the local map of strict henselizations. This proves the exact triviality locus, rather than assuming the source's 'i.e.' identification. Edge cases checked: W empty, A=0, T empty, a=0, nonsharp P. No cycle: a transitive dependency walk does not reach the item, and its only citer is nodal-log-regularity. Route stays inside sk-i-curve-zero plus one Mathlib leaf, so no tool_uses are needed. No new nodes, no repair note. Minor, not repaired: the fibre product in the statement does not cite def-pc-fibre-product; this is base text and the sibling node has the same gap."
+ }
+}

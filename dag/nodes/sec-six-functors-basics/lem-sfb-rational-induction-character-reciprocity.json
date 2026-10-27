@@ -1,0 +1,201 @@
+{
+ "id": "lem-sfb-rational-induction-character-reciprocity",
+ "kind": "statement",
+ "title": "Frobenius reciprocity for rational induction of a character",
+ "statement": "Let $F$ be an algebraically closed field [def-weil-field, def-weil-algebraic-closure], $G$ an affine group scheme of finite type over $F$ [def-sc-group-scheme], and $H\\subseteq G$ a closed subgroup scheme. For an affine $F$-scheme $X$ write $F[X]=\\Gamma(X,\\mathcal O_X)$. Let $\\chi:H\\to\\mathbf G_m$ be a group-scheme homomorphism, where $\\mathbf G_m(A)=A^\\times$ for every commutative $F$-algebra $A$. Write $F_\\chi$ for the one-dimensional rational $H$-module with $h\\cdot a=\\chi(h)a$. A rational $G$-module is an $F$-vector space $V$ with a coaction $V\\to V\\otimes_F F[G]$ satisfying coassociativity and the counit identity, and equivariant maps commute with coactions. Define the rational $G$-module\n$$E_H(\\chi)=\\{f\\in F[G]:f(gh)=\\chi(h)^{-1}f(g)\\text{ after every commutative }F\\text{-algebra extension}\\},$$\nwith action $(s f)(g)=f(s^{-1}g)$. For every finite-dimensional rational $G$-module $V$, evaluation at the identity gives an $F$-linear isomorphism\n$$\\operatorname{Hom}_G(V,E_H(\\chi))\\xrightarrow{\\ \\sim\\ }\\operatorname{Hom}_H(V|_H,F_\\chi),\\qquad a\\longmapsto(v\\longmapsto a(v)(1)).$$\nBoth Hom spaces consist of maps of rational group-scheme modules, with equivariance after every commutative $F$-algebra extension.",
+ "source": {
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "22.29(a),(b) and 22.30, printed pp.470--471; regular-function rational induction, not abstract-group induction."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-weil-algebraic-closure",
+  "def-sc-group-scheme"
+ ],
+ "proof": [
+  {
+   "text": "Put $C=F[G]$ and $E=E_H(\\chi)$. For affine products the coordinate algebra is the tensor product: algebra maps $B\\otimes_F D\\to A$ are exactly pairs of $F$-algebra maps $B\\to A$, $D\\to A$, so [def-weil-affine-spectrum] identifies its spectrum with the product by the universal property [def-pc-fibre-product]. Multiplication, inversion and identity of [def-sc-group-scheme] give pullbacks on regular functions; write $L:C\\to C\\otimes_F C$ for pullback along $(g,s)\\mapsto s^{-1}g$, in that factor order. Associativity and the unit identity give $(L\\otimes1)L=(1\\otimes\\Delta)L$ and $(1\\otimes\\epsilon)L=1$. The semi-invariance condition is linear, so $E$ is a vector subspace. For $f\\in E$, write $L(f)=\\sum_i f_i\\otimes a_i$ with the $a_i$ linearly independent (expand the finite span of the second factors in a basis). The identity $f(s^{-1}gh)=\\chi(h)^{-1}f(s^{-1}g)$ gives $\\sum_i(f_i(gh)-\\chi(h)^{-1}f_i(g))\\otimes a_i=0$. Applying coefficient functionals on the span of the $a_i$ gives the defining identity for every $f_i$, hence $L(f)\\in E\\otimes C$. Thus $L$ restricts to the required rational coaction on $E$. All displayed identities are identities of regular functions: they can be tested on universal points over the coordinate algebras of the relevant affine products. By [def-weil-affine-spectrum], an affine point is the corresponding algebra homomorphism, so testing on the identity homomorphism recovers the function itself. This works for nonreduced groups as well.",
+   "uses": [
+    "def-sc-group-scheme",
+    "def-weil-affine-spectrum",
+    "def-pc-fibre-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "22.29(a),(b) and 22.30, printed pp.470–471 (PDF pp.482–483); explicit coaction and inverse calculations supplied by Q27."
+   }
+  },
+  {
+   "text": "Evaluation $\\epsilon_E:E\\to F$, $f\\mapsto f(1)$, is linear. For any commutative $F$-algebra $A$, $h\\in H(A)$ and $f\\in E\\otimes_F A$, one has $\\epsilon_E(hf)=f(h^{-1})=\\chi(h)f(1)$ by semi-invariance at $g=1$. If $a:V\\to E$ is rational $G$-equivariant, its scalar extension satisfies $\\epsilon_E(a(hv))=\\epsilon_E(ha(v))=\\chi(h)\\epsilon_E(a(v))$. Therefore $T(a)=\\epsilon_E\\circ a$ belongs to $\\operatorname{Hom}_H(V|_H,F_\\chi)$, and $T$ is linear.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "22.29(a),(b) and 22.30, printed pp.470–471 (PDF pp.482–483); explicit coaction and inverse calculations supplied by Q27."
+   }
+  },
+  {
+   "text": "For $\\lambda\\in\\operatorname{Hom}_H(V|_H,F_\\chi)$ define $b_\\lambda(v)(g)=\\lambda(g^{-1}v)$. This is a regular function, not merely a function on $F$-points: if $\\rho_V(v)=\\sum_j v_j\\otimes c_j$, then $b_\\lambda(v)=\\sum_j\\lambda(v_j)S(c_j)\\in C$, where $S$ is pullback by inversion. This formula defines an $F$-linear map $b_\\lambda:V\\to C$ independent of the tensor expression and commutes with scalar extension. For every $A$, $g\\in G(A)$ and $h\\in H(A)$, $b_\\lambda(v)(gh)=\\lambda(h^{-1}g^{-1}v)=\\chi(h)^{-1}\\lambda(g^{-1}v)$. Thus each $b_\\lambda(v)$ belongs to $E$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "22.29(a),(b) and 22.30, printed pp.470–471 (PDF pp.482–483); explicit coaction and inverse calculations supplied by Q27."
+   }
+  },
+  {
+   "text": "For every $A$ and $s,g\\in G(A)$, $b_\\lambda(sv)(g)=\\lambda(g^{-1}sv)=b_\\lambda(v)(s^{-1}g)=(s b_\\lambda(v))(g)$. These formulas apply to all $v\\in V\\otimes_F A$ by linearity. They imply equality of the two coaction maps: evaluate on the universal pair $(s,g)$, so the equality is in $C\\otimes_F C$ for each $v$; the inclusion $E\\otimes_F C\\hookrightarrow C\\otimes_F C$ is injective, since extending a vector-space basis of $E$ to one of $C$ gives a linear retraction. Consequently $b_\\lambda$ is a morphism of rational $G$-modules. Its formula is also linear in $\\lambda$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "22.29(a),(b) and 22.30, printed pp.470–471 (PDF pp.482–483); explicit coaction and inverse calculations supplied by Q27."
+   }
+  },
+  {
+   "text": "Finally $T(b_\\lambda)(v)=b_\\lambda(v)(1)=\\lambda(v)$. Conversely, for an equivariant $a:V\\to E$, $b_{T(a)}(v)(g)=T(a)(g^{-1}v)=a(g^{-1}v)(1)=(g^{-1}a(v))(1)=a(v)(g)$. This is valid after every algebra extension; taking the universal $g$ proves equality as regular functions. Thus $T$ and $\\lambda\\mapsto b_\\lambda$ are inverse linear maps, giving exactly the asserted isomorphism.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "22.29(a),(b) and 22.30, printed pp.470–471 (PDF pp.482–483); explicit coaction and inverse calculations supplied by Q27."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sc-group-scheme",
+  "def-weil-affine-spectrum",
+  "def-pc-fibre-product"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "22.29(a),(b) and 22.30, printed pp.470–471 (PDF pp.482–483); explicit coaction and inverse calculations supplied by Q27."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "frobeniusReciprocity|frobenius_reciprocity|induction.*adjunction|ind.*Adjunction",
+   "results": "{\"t\": \"2026-10-23T12:05:53Z\", \"tool\": \"grep\", \"query\": \"frobeniusReciprocity|frobenius_reciprocity|induction.*adjunction|ind.*Adjunction\", \"sub\": \"RepresentationTheory\", \"ok\": true, \"n_hits\": 14, \"note\": \"\", \"top\": [\"Mathlib/RepresentationTheory/Induced.lean\", \"Mathlib/RepresentationTheory/Induced.lean\", \"Mathlib/RepresentationTheory/Induced.lean\", \"Mathlib/RepresentationTheory/Induced.lean\", \"Mathlib/RepresentationTheory/Coinduced.lean\", \"Mathlib/RepresentationTheory/Coinduced.lean\", \"Mathlib/RepresentationTheory/Coinduced.lean\", \"Mathlib/RepresentationTheory/Coinduced.lean\"], \"digest\": \"00eb691e7ee83ea6\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: Rep.resCoindHomEquiv and Rep.resCoindAdjunction use arbitrary functions on abstract monoids, not regular functions and coactions. Rep.resIndAdjunction further assumes finite subgroup index. Read Coinduced.lean:275--307 and FiniteIndex.lean:173--206; no one-line rational-algebraic specialization."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Rational algebraic group modules induction from a Borel subgroup is right adjoint to restriction",
+   "results": "{\"t\": \"2026-10-23T12:05:53Z\", \"tool\": \"leansearch\", \"query\": \"Rational algebraic group modules induction from a Borel subgroup is right adjoint to restriction\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Rep.indResAdjunction\", \"Rep.instIsRightAdjointActionModuleCatRes\", \"Rep.coindResAdjunction\", \"Rep.instIsRightAdjointSubtypeMemSubgroupIndFunctorSubtype\", \"Rep.resIndAdjunction\", \"Rep.resCoindAdjunction\", \"Rep.instIsLeftAdjointActionModuleCatRes\", \"Rep.instIsLeftAdjointIndFunctor\"], \"digest\": \"1e33e1a250ba1f55\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: Rep.resCoindHomEquiv and Rep.resCoindAdjunction use arbitrary functions on abstract monoids, not regular functions and coactions. Rep.resIndAdjunction further assumes finite subgroup index. Read Coinduced.lean:275--307 and FiniteIndex.lean:173--206; no one-line rational-algebraic specialization."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Representation\", \"ind\"",
+   "results": "{\"t\": \"2026-10-23T12:05:53Z\", \"tool\": \"loogle\", \"query\": \"\\\"Representation\\\", \\\"ind\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"Representation.coindV\", \"Representation.coind\", \"Representation.coind'\", \"Representation.coe_coindV\", \"Representation.mem_coindV\", \"Representation.coindMap\", \"Representation.coindMap_coe_apply_apply\", \"Representation.coindMap_coe_apply\"], \"digest\": \"2247a389ddc1c94a\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: Rep.resCoindHomEquiv and Rep.resCoindAdjunction use arbitrary functions on abstract monoids, not regular functions and coactions. Rep.resIndAdjunction further assumes finite subgroup index. Read Coinduced.lean:275--307 and FiniteIndex.lean:173--206; no one-line rational-algebraic specialization."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Rational representations of an algebraic group satisfy Frobenius reciprocity for induction from a closed subgroup",
+   "results": "{\"t\": \"2026-10-23T12:05:54Z\", \"tool\": \"leanfinder\", \"query\": \"Rational representations of an algebraic group satisfy Frobenius reciprocity for induction from a closed subgroup\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Rep.instIsRightAdjointSubtypeMemSubgroupIndFunctorSubtype\", \"Rep.resIndAdjunction\", \"Rep.coindResAdjunction_homEquiv_apply\", \"Rep.coindToInd\", \"Rep.coindToInd_apply\", \"Rep.resIndAdjunction_homEquiv_apply\", \"Rep.instIsLeftAdjointSubtypeMemSubgroupCoindFunctorSubtype\", \"Rep.indCoindIso_hom_hom_hom\"], \"digest\": \"64ccd275c15489a1\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: Rep.resCoindHomEquiv and Rep.resCoindAdjunction use arbitrary functions on abstract monoids, not regular functions and coactions. Rep.resIndAdjunction further assumes finite subgroup index. Read Coinduced.lean:275--307 and FiniteIndex.lean:173--206; no one-line rational-algebraic specialization."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Evaluation at identity identifies equivariant linear maps into regular functions f gh equals chi h inverse f g with H equivariant maps to character chi",
+   "results": "{\"t\": \"2026-10-23T12:13:38Z\", \"tool\": \"leanfinder\", \"query\": \"Evaluation at identity identifies equivariant linear maps into regular functions f gh equals chi h inverse f g with H equivariant maps to character chi\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Rep.leftRegularHomEquiv_apply\", \"FDRep.character\", \"TannakaDuality.FiniteGroup.sumSMulInv\", \"FDRep.char_linHom\", \"TannakaDuality.FiniteGroup.leftRegular\", \"TannakaDuality.FiniteGroup.rightRegular\", \"Rep.leftRegularHom\", \"Rep.leftRegularHomEquiv\"], \"digest\": \"dd11979b4198bb06\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: Rep.resCoindHomEquiv and Rep.resCoindAdjunction use arbitrary functions on abstract monoids, not regular functions and coactions. Rep.resIndAdjunction further assumes finite subgroup index. Read Coinduced.lean:275--307 and FiniteIndex.lean:173--206; no one-line rational-algebraic specialization."
+  },
+  {
+   "tool": "grep",
+   "query": "resCoindHomEquiv|resCoindAdjunction|coaction|Comodule",
+   "results": "{\"t\": \"2026-10-23T13:14:30Z\", \"tool\": \"grep\", \"query\": \"resCoindHomEquiv|resCoindAdjunction|coaction|Comodule\", \"sub\": \"RepresentationTheory\", \"ok\": true, \"n_hits\": 13, \"note\": \"\", \"top\": [\"Mathlib/RepresentationTheory/Coinduced.lean\", \"Mathlib/RepresentationTheory/Coinduced.lean\", \"Mathlib/RepresentationTheory/Coinduced.lean\", \"Mathlib/RepresentationTheory/Coinduced.lean\", \"Mathlib/RepresentationTheory/Coinduced.lean\", \"Mathlib/RepresentationTheory/FiniteIndex.lean\", \"Mathlib/RepresentationTheory/FiniteIndex.lean\", \"Mathlib/RepresentationTheory/FiniteIndex.lean\"], \"digest\": \"2d9ef5bb6d8ca991\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: read RepresentationTheory/Coinduced.lean:57–87 and 245–307. coindV is a subspace of all abstract-monoid functions, with no coordinate coaction or regularity. Finite-group Tannaka and induction results do not supply the rational group-scheme statement."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Evaluation at identity is an isomorphism from G equivariant maps into rational induction to H equivariant maps",
+   "results": "{\"t\": \"2026-10-23T13:14:30Z\", \"tool\": \"leansearch\", \"query\": \"Evaluation at identity is an isomorphism from G equivariant maps into rational induction to H equivariant maps\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Rep.indResAdjunction\", \"Rep.coindIso\", \"Rep.resCoindHomEquiv_symm_apply_hom\", \"Rep.resCoindHomEquiv\", \"Rep.resCoindHomEquiv_apply_hom\", \"Rep.coindVEquiv\", \"Rep.indResHomEquiv\", \"Rep.leftRegularHomEquiv_apply\"], \"digest\": \"d3f2b3b3253674f8\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: read RepresentationTheory/Coinduced.lean:57–87 and 245–307. coindV is a subspace of all abstract-monoid functions, with no coordinate coaction or regularity. Finite-group Tannaka and induction results do not supply the rational group-scheme statement."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Rep\", \"resCoind\"",
+   "results": "{\"t\": \"2026-10-23T13:14:31Z\", \"tool\": \"loogle\", \"query\": \"\\\"Rep\\\", \\\"resCoind\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 6, \"note\": \"\", \"top\": [\"Rep.resCoindAdjunction\", \"Rep.resCoindToHom\", \"Rep.resCoindHomEquiv\", \"Rep.resCoindHomEquiv_apply\", \"Rep.resCoindToHom_hom_apply_coe\", \"Rep.resCoindHomEquiv_symm_apply\"], \"digest\": \"bc630937c1b217e0\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: read RepresentationTheory/Coinduced.lean:57–87 and 245–307. coindV is a subspace of all abstract-monoid functions, with no coordinate coaction or regularity. Finite-group Tannaka and induction results do not supply the rational group-scheme statement."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Frobenius reciprocity for rational representations of affine algebraic groups using regular functions and evaluation at identity",
+   "results": "{\"t\": \"2026-10-23T13:14:41Z\", \"tool\": \"leanfinder\", \"query\": \"Frobenius reciprocity for rational representations of affine algebraic groups using regular functions and evaluation at identity\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"TannakaDuality.FiniteGroup.algHomOfRightFDRepComp\", \"Rep.leftRegularHomEquiv\", \"TannakaDuality.FiniteGroup.sumSMulInv\", \"Rep.indResHomEquiv\", \"Rep.indResHomEquiv_symm_apply_hom\", \"Rep.normNatTrans\", \"Rep.indResAdjunction_counit_app_hom_hom\", \"TannakaDuality.FiniteGroup.ofRightFDRep\"], \"digest\": \"8c67ef8e8b397129\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: read RepresentationTheory/Coinduced.lean:57–87 and 245–307. coindV is a subspace of all abstract-monoid functions, with no coordinate coaction or regularity. Finite-group Tannaka and induction results do not supply the rational group-scheme statement."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Matrix coefficient formula v maps to function g maps to lambda of inverse g acting on v gives algebraic group induction adjunction",
+   "results": "{\"t\": \"2026-10-23T13:14:41Z\", \"tool\": \"leanfinder\", \"query\": \"Matrix coefficient formula v maps to function g maps to lambda of inverse g acting on v gives algebraic group induction adjunction\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"TannakaDuality.FiniteGroup.sumSMulInv\", \"TannakaDuality.FiniteGroup.sumSMulInv_apply\", \"TannakaDuality.FiniteGroup.ofRightFDRep_hom\", \"TannakaDuality.FiniteGroup.ofRightFDRep\", \"Rep.coindToInd_apply\", \"TannakaDuality.FiniteGroup.sumSMulInv_single_id\", \"Representation.ind_mk\", \"Module.Basis.toMatrix_smul_left\"], \"digest\": \"f6daf6c67248d9c1\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: read RepresentationTheory/Coinduced.lean:57–87 and 245–307. coindV is a subspace of all abstract-monoid functions, with no coordinate coaction or regularity. Finite-group Tannaka and induction results do not supply the rational group-scheme statement."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-rho-tensor-square-invariant-line",
+  "date": "2026-10-23",
+  "group": "NZ"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Haboush symmetric-power lifting for a trivial quotient representation. Supporting representation-theoretic input: Steinberg endomorphisms detect a nonzero fixed vector. Supporting Tensor-square rho sections have a one-dimensional invariant space. Rational induction input for the tensor-square invariant-line calculation: Milne 22.29 evaluation at identity, applied to V=W_m dual and chi=-m rho.",
+   "via": [
+    "lem-sfb-rho-tensor-square-invariant-line",
+    "lem-sfb-steinberg-endomorphism-detection",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-rational-induction-character-reciprocity",
+  "worker": "stage1",
+  "summary": "Statement unchanged. Five explicit elementary steps establish the restricted regular coaction, evaluation equivariance, the regular-function inverse using the antipode, equivariance on universal points, and both inverse identities. No new nodes; no use of abstract-group induction or rational-point density.",
+  "blueprint": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Haboush symmetric-power lifting for a trivial quotient representation. Supporting representation-theoretic input: Steinberg endomorphisms detect a nonzero fixed vector. Supporting Tensor-square rho sections have a one-dimensional invariant space. Rational induction input for the tensor-square invariant-line calculation: Milne 22.29 evaluation at identity, applied to V=W_m dual and chi=-m rho. Realizes its rational-induction supporting input by the explicit inverse to Milne 22.29(b), preserving the direct-images proof (3) route.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q27-952558748",
+  "group": "Q27",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q27-952558748 (reviewer sub-agent of L); spot-checked: I read the item in full; this delivery adds no new nodes. The statement is byte-identical to the live node and only the proof fields changed; it is a first split with no repair note, so the re-split rule does not apply. Source: Milne iAG2017 22.29(a),(b) and 22.30 at printed pp.470–471 (PDF 482–483). Ind_H^G(V) with f(gh)=h⁻¹f(g), the action (gf)(x)=f(g⁻¹x) and the reciprocity ε∘φ are read with V=F_χ, which gives the item's E_H(χ) exactly, sign and evaluation at 1 included. Milne gives no proof, so proof_origin=agent is correct. Each of the 5 steps recomputed. Step 1: L(f)(g,s)=f(s⁻¹g) is coassociative and counital, and E is stable via coefficient functionals in F[G×H]⊗C. Step 2: ε(hf)=f(h⁻¹)=χ(h)f(1). Step 3: b_λ(v)=Σλ(v_j)S(c_j) is regular, and b_λ(v)(gh)=χ(h)⁻¹b_λ(v)(g). Step 4: b_λ(sv)(g)=b_λ(v)(s⁻¹g); compared at the universal pair, with E⊗C→C⊗C injective via a basis retraction. Step 5: both inverse identities hold with the correct action sign. All steps are honestly elementary, and the cited definition nodes (def-sc-group-scheme, def-weil-affine-spectrum, def-pc-fibre-product) state what is used. Advisory only: the affine-product identification is argued through algebra-valued points, which is all the proof needs. The parent lem-sfb-rho-tensor-square-invariant-line uses the statement exactly (G=S, H=B, V=W^∨, E_B(χ)=W). Edge cases V=0, H=G, G_m with t^r, H=1 and nonreduced μ_p/α_p are consistent. No duplicate: grep of the DAG for reciprocity/induction/22.29/Jantzen and of blueprint main-20261015 found none, and hopf-coaction-linearization is different. Mathlib searches cover three kinds and the no-leaf verdict is right. No SGA, no tool_uses. The blueprint.from.node=null is inherited and unchanged (advisory for the maintainer). No fixes."
+ }
+}

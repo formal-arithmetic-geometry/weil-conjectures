@@ -1,0 +1,131 @@
+{
+ "id": "def-sfb-space-finite-tor-dimension-over",
+ "kind": "definition",
+ "title": "Uniform finite Tor dimension over an algebraic space",
+ "status": "split",
+ "import_flags": [],
+ "statement": "Let $S$ be a scheme [def-pc-scheme], let $f:X\\to Y$ be a morphism of algebraic spaces over $S$ [def-trf-algebraic-space], and let $E\\in D(\\mathcal O_X)$ in the equivalent small-model derived category [def-sfb-space-derived-module-calculus], with universes as in [def-weil-size-convention]. Use the canonical geometric stalk rings, module stalks and ring maps of [def-sfb-space-geometric-stalk-models]. Define finite Tor dimension over $Y$ by the uniform geometric-stalk criterion: there is a cochain complex $K$ representing $E$ and integers $a\\le b$ such that for every algebraically closed field $\\Omega$ in the original section universe, every $s:\\operatorname{Spec}\\Omega\\to S$, and every geometric point $x:\\operatorname{Spec}\\Omega\\to X$ over $s$, the complex $K_x$ restricted along $\\mathcal O_{Y,f(x)}\\to\\mathcal O_{X,x}$ is isomorphic in the module derived category [def-weil-abstract-derived-category] to a complex $P_x$ of flat $\\mathcal O_{Y,f(x)}$-modules with $P_x^n=0$ for $n\\notin[a,b]$. No finite generation of the flat terms is required. The same $a,b$ must work for every point, even when $X$ is not quasi-compact. Equivalently, scalar restriction of $E$ has Tor amplitude $[a,b]$ over $f^{-1}\\mathcal O_Y$: its derived tensor with every sheaf of $f^{-1}\\mathcal O_Y$-modules has cohomology zero outside $[a,b]$. This equivalence is the stalk criterion (Stacks 0DJJ, using enough geometric points of the small etale topos), followed by the bounded-flat-complex criterion (08G1).",
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-trf-algebraic-space",
+  "def-sfb-space-derived-module-calculus",
+  "def-weil-size-convention",
+  "def-sfb-space-geometric-stalk-models",
+  "def-weil-abstract-derived-category"
+ ],
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex; literature/stacks-project/spaces-perfect.tex",
+  "place": "Tags 08FZ (definition-tor-amplitude), 08G1 (lemma-tor-amplitude), 0DJJ (lemma-tor-amplitude-stalk); Tag 08IS, hypothesis (3)."
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Finite Tor dimension of a complex relative to a morphism of algebraic spaces tested uniformly on geometric stalks",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Flat.iff_flat_stalkMap\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Flat\", \"type\": \": Flat f ↔ ∀ x, (f.stalkMap x).hom.Flat\", \"doc\": \"A morphism $ f : X \\\\to Y $ of schemes is flat if and only if for every point $ x \\\\in X $, the induced ring homomorphism on the stalks at $ x $ is flat.\"}\n  {\"name\": \"AlgebraicGeometry.Flat.of_stalkMap\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Flat\", \"type\": \"(H : ∀ x, (f.stalkMap x).hom.Flat) : Flat f\", \"doc\": \"If for every point $ x \\\\in X $, the induced map on stalks $ \\\\mathcal{O}_{Y, f(x)} \\\\to \\\\mathcal{O}_{X, x} $ is flat, then the morphism $ f : X \\\\to Y $ of schemes is flat.\"}\n  {\"name\": \"AlgebraicGeometry.stalkwise\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Constructors\", \"type\": \"(P : ∀ {R S : Type u} [CommRing R] [CommRing S], (R →+* S) → Prop) : MorphismProperty Scheme.{u}\", \"doc\": \"A morphism property of schemes defined by requiring that for every point $x$ in the domain scheme, the induced ring homomorphism on the stalk at $x$ satisfies the predicate $P$ applied to the correspo\"}\n  {\"name\": \"AlgebraicGeometry.LocallyRingedSpace.isLocalHomStalkMap'\", \"module\": \"Mathlib.Geometry.RingedSpace.LocallyRingedSpace\", \"type\": \"{X Y : LocallyRingedSpace.{u}} (f : X ⟶ Y) (x : X) : IsLocalHom (f.toHom.stalkMap x).hom\", \"doc\": \"For any morphism $f : X \\\\to Y$ between two locally ringed spaces, and for any point $x \\\\in X$, the ring homomorphism $\\\\mathcal{O}_{Y, f(x)} \\\\to \\\\mathcal{O}_{X, x}$ induced by $f$ at $x$ is a local rin\"}\n  {\"name\": \"AlgebraicGeometry.LocallyRingedSpace.Hom.stalkMap\", \"module\": \"Mathlib.Geometry.RingedSpace.LocallyRingedSpace\", \"type\": \"{X Y : LocallyRingedSpace.{u}} (f : Hom X Y) (x : X) : Y.presheaf.stalk (f.1.1 x) ⟶ X.presheaf.stalk x\", \"doc\": \"For a morphism of locally ringed spaces $f: X \\\\to Y$ and a point $x \\\\in X$, `stalkMap` defines the induced ring homomorphism from the stalk of the structure sheaf of $Y$ at $f(x)$, denoted $\\\\mathcal{O\"}\n  {\"name\": \"AlgebraicGeometry.IsFinite.recOn\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Finite\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} →\\n  {f : X ⟶ Y} →\\n    {motive : AlgebraicGeometry.IsFinite f → Sort u} →\\n      (t : AlgebraicGeometry.IsFinite f) →\\n        ([toIsAffineHom : AlgebraicGeometry.IsAffineHom f] →\\n            (finite_app :\\n                ∀ (U : Y.Opens),\\n                  AlgebraicGeom\", \"doc\": \"A morphism $ f : X \\\\to Y $ of schemes is finite if it is affine and for every affine open subset $ U \\\\subseteq Y $, the induced ring homomorphism $ \\\\Gamma(Y, U) \\\\to \\\\Gamma(X, f^{-1}(U)) $ is finite, m\"}\n  {\"name\": \"AlgebraicGeometry.LocallyOfFiniteType.stalkMap\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.FiniteType\", \"type\": \"[LocallyOfFiniteType f] (x : X) : (f.stalkMap x).hom.EssFiniteType\", \"doc\": \"For any morphism $ f: X \\\\to Y $ of schemes that is locally of finite type and any point $ x \\\\in X $, the induced ring homomorphism on the stalks $ \\\\mathcal{O}_{Y,f(x)} \\\\to \\\\mathcal{O}_{X,x} $ is of es\"}\n  {\"name\": \"AlgebraicGeometry.SurjectiveOnStalks.instIsZariskiLocalAtSource\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.SurjectiveOnStalks\", \"type\": \": IsZariskiLocalAtSource @SurjectiveOnStalks\", \"doc\": \"The property of a morphism of schemes having surjective induced maps on stalks is Zariski-local at the source, meaning it can be checked locally on an open cover of the source scheme.\"}\n",
+   "date": "2026-10-24",
+   "verdict": "No match: ordinary scheme flatness and scalar-restriction APIs do not define a uniform relative Tor interval for a morphism of algebraic spaces."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Relative finite Tor dimension for algebraic spaces as a uniform bounded flat complex over every geometric base local ring",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Flat\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Flat\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"The property that a morphism $ f : X \\to Y $ of schemes is flat.\"}\n  {\"name\": \"AlgebraicGeometry.Flat.instHasRingHomPropertyFlat\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Flat\", \"type\": \"AlgebraicGeometry.HasRingHomProperty @AlgebraicGeometry.Flat fun {R S} [CommRing R] [CommRing S] => RingHom.Flat\", \"doc\": \"The property of being a flat morphism of schemes is characterized by the flatness of the corresponding ring homomorphism. Specifically, a morphism of schemes is flat if and only if the associated ring\"}\n  {\"name\": \"AlgebraicGeometry.IsSmoothOfRelativeDimension\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"ℕ → {X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"For a natural number $n$ and a morphism $f: X \\\\to Y$ of schemes, the proposition that $f$ is smooth of relative dimension $n$.\"}\n  {\"name\": \"AlgebraicGeometry.UniversallyOpen.of_flat\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/UniversallyOpen\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.Flat f]\\n  [AlgebraicGeometry.LocallyOfFinitePresentation f], AlgebraicGeometry.UniversallyOpen f\", \"doc\": \"A morphism of schemes that is flat and locally of finite presentation is universally open. This means that for any base change $ Y' \\to Y $, the induced morphism $ X \\times_Y Y' \\to Y' $ is an open map o\"}\n  {\"name\": \"AlgebraicGeometry.Flat.instIsMultiplicativeScheme\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Flat\", \"type\": \"CategoryTheory.MorphismProperty.IsMultiplicative @AlgebraicGeometry.Flat\", \"doc\": \"The property of being a flat morphism of schemes is multiplicative. That is, if $ f : X \\\\to Y $ and $ g : Y \\\\to Z $ are flat morphisms of schemes, then their composition $ g \\\\circ f : X \\\\to Z $ is als\"}\n  {\"name\": \"AlgebraicGeometry.Flat.isStableUnderBaseChange\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Flat\", \"type\": \"CategoryTheory.MorphismProperty.IsStableUnderBaseChange @AlgebraicGeometry.Flat\", \"doc\": \"The property of being a flat morphism of schemes is stable under base change, meaning that if a morphism of schemes is flat, then any base change (pullback) of this morphism is also flat.\"}\n  {\"name\": \"AlgebraicGeometry.Flat.instOfIsOpenImmersion\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Flat\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.IsOpenImmersion f], AlgebraicGeometry.Flat f\", \"doc\": \"Every open immersion of schemes is a flat morphism.\"}\n  {\"name\": \"Algebra.Smooth.flat\", \"module\": \"Mathlib/RingTheory/Smooth/Flat\", \"type\": \"∀ (R : Type u_1) (A : Type u_2) [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A] [Algebra.Smooth R A],\\n  Module.Flat R A\", \"doc\": \"If $ A $ is a smooth $ R $-algebra, then $ A $ is a flat $ R $-module.\"}\n",
+   "date": "2026-10-24",
+   "verdict": "No match: ordinary scheme flatness and scalar-restriction APIs do not define a uniform relative Tor interval for a morphism of algebraic spaces."
+  },
+  {
+   "tool": "grep",
+   "query": "HasFiniteTorDimensionOver|finite [Tt]or dimension|torAmplitudeIn AlgebraicGeometry",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-24",
+   "verdict": "No match: ordinary scheme flatness and scalar-restriction APIs do not define a uniform relative Tor interval for a morphism of algebraic spaces."
+  },
+  {
+   "tool": "grep",
+   "query": "HasFiniteTorDimensionOver|relative.*[Tt]or.*stalk in lean/WeilConjectures/AlgebraicGeometry and lean/Sheaf/AlgebraicGeometry",
+   "results": "Scheme.HasFiniteTorDimensionOver in WeilConjectures/AlgebraicGeometry/FiniteTorDimensionOver.lean and its scheme consumers. AlgebraicSpaceRelativePerfect uses that predicate only for a scheme target. SpaceRelativePerfectGeneral uses varying chart bounds and includes pseudo-coherence. No uniform relative algebraic-space predicate. Read AlgebraicSpaceGeometricStalkModels.stalk, stalkRing, stalkMap, and ModuleCat.restrictScalars.",
+   "date": "2026-10-24",
+   "verdict": "Reuse canonical stalk constructions; no duplicate of this relative uniform predicate."
+  },
+  {
+   "tool": "grep",
+   "query": "finite Tor dimension over|finite tor dimension over|HasFiniteTorDimensionOver in dag/nodes/*/def-*.json; tools/blueprint_refs.py search \"finite Tor dimension\"",
+   "results": "def-pc-finite-tor-dimension-over is scheme-only; def-sfb-space-relative-perfect and def-sfb-space-relative-perfect-general include pseudo-coherence and allow varying local bounds. Blueprint search returned four unrelated coefficient/admissibility nodes. No node defines the uniform predicate for arbitrary algebraic-space morphisms.",
+   "date": "2026-10-24",
+   "verdict": "New definition node required under brief-stage2 section 1(A)."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-space-bounded-coherent-finite-tor-image-perfect",
+  "date": "2026-10-24",
+  "group": "Q144"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "Tag 08IS hypothesis (3): scalar restriction to the inverse-image base structure sheaf, using the uniform stalk criterion.",
+   "via": [
+    "lem-sfb-space-bounded-coherent-finite-tor-image-perfect",
+    "lem-sfb-space-noetherian-tensor-perfect",
+    "lem-sfb-proper-support-tensor-perfect",
+    "lem-sfb-proper-flat-space-derived-base-change",
+    "lem-sfb-curve-h0-genus-strata",
+    "lem-sfb-stable-and-smooth-family-open-loci",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.AlgebraicSpaceFiniteTorDimensionOver",
+  "declaration": "AlgebraicGeometry.AlgebraicSpace.HasFiniteTorDimensionOver",
+  "file": "lean/Sheaf/AlgebraicGeometry/AlgebraicSpaceFiniteTorDimensionOver.lean",
+  "statement": "def HasFiniteTorDimensionOver {S : Scheme.{u}} {X Y : AlgebraicSpace S} (f : X ⟶ Y) [HasDerivedCategory.{w} X.SmallModules] (E : X.DerivedModules) : Prop",
+  "branch": "newtargets-dag",
+  "by": "Q144",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-73f0aec88",
+  "group": "Q144",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-73f0aec88",
+  "group": "Q144",
+  "result": "pass",
+  "note": "Read item, new def node, both modules, report and the used declarations (geometric stalk models, derived modules, small ringed model, strict-perfect package, module support, mapPoint/MapIsQuasiCompact, MapIsLocally/MapIsProper) against Stacks 08IS/0CZC (and 08FZ/08G1/0DJJ for the new node). Every hypothesis matches the node: Y quasi-compact, absolutely quasi-separated, locally Noetherian on charts; f locally finite type, quasi-separated by diagonal; qcoh plus f.g. on affine charts (charts locally Noetherian); bounded; reduced closed support subspace proper over Y; uniform relative Tor; conclusion IsPerfectOnRingedSiteOfUniverses of the K-injective derived direct image; w free. New node HasFiniteTorDimensionOver: uniform [a,b] flat representatives of geometric stalk complexes restricted along the canonical stalkMap, equal to Tor amplitude over the inverse-image ring sheaf by 0DJJ+08G1. No duplicate (scheme-only, absolute ringed-site and relative-perfect predicates differ); §5 fields ok; real data. lean.statement verbatim for both nodes; proof sorry; docstrings ok; item statement unchanged; stmt_deps gained only landed nodes plus the new one. Edge cases H=0, empty X, a=b, non-quasi-compact X, k[eps] residue field ok. Minor note: schemeRestriction/mapPoint/SmallModules owner nodes not in stmt_deps (reached through imports). No compile run (no fix)."
+ }
+}

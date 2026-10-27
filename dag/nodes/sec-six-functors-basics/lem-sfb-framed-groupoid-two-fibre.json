@@ -1,0 +1,264 @@
+{
+ "id": "lem-sfb-framed-groupoid-two-fibre",
+ "kind": "statement",
+ "title": "Two-fibre product of a framed groupoid",
+ "statement": "Let $S$ be a scheme [def-pc-scheme] and let $\\mathcal X$ be a category fibred in groupoids over $\\mathit{Sch}/S$, with the conventions of [def-sfb-stable-pointed-moduli-groupoids] and universes as in [def-weil-size-convention]. Fix a commutative ring $A$ and $n\\geq0$. Suppose each object $x\\in\\mathcal X(T)$ is assigned a sheaf $H_x$ of $\\underline A_T$-modules on $T_{\\mathrm{et}}$ [def-weil-pbc-etale-site, def-weil-sheaf-of-modules-category, def-weil-pbc-constant-sheaf]. For every arrow $a:y\\to x$ over $u:T'\\to T$, suppose given an isomorphism $H(a):u^{-1}H_x\\xrightarrow{\\sim}H_y$ [def-weil-pbc-inverse-image], satisfying identity and composition equations with the canonical inverse-image associators. Let $\\mathcal X^{\\mathrm{fr}}(T)$ have objects $(x,\\lambda)$ with $\\lambda:\\underline{A^n}_T\\xrightarrow{\\sim}H_x$, and arrows $a:(y,\\lambda_y)\\to(x,\\lambda_x)$ satisfying $H(a)\\circ u^{-1}\\lambda_x=\\lambda_y$, using the constant-sheaf comparison. Forgetting the frame gives $q:\\mathcal X^{\\mathrm{fr}}\\to\\mathcal X$.\nFor every $x\\in\\mathcal X(T)$, the 2-fibre product $h_T\\times_{\\mathcal X}\\mathcal X^{\\mathrm{fr}}$ is naturally equivalent over $\\mathit{Sch}/T$ to the discrete groupoid with value $\\operatorname{Isom}_{\\underline A_{T'}}(\\underline{A^n}_{T'},H_{x_{T'}})$ at $T'\\to T$. In the convention orienting the comparison toward $x_{T'}$, this equivalence sends $(y,\\lambda,\\phi:y\\xrightarrow{\\sim}x_{T'})$ to $H(\\phi)^{-1}\\lambda$. The equivalence is compatible with every base change and its specified $H(a)$ comparisons, including compositions. No hypothesis that objects of $\\mathcal X$ or $\\mathcal X^{\\mathrm{fr}}$ have trivial automorphisms is imposed.",
+ "source": {
+  "document": "literature/pikaart-de-jong-moduli-nonabelian-level-1995.pdf",
+  "place": "Section 2.3.3: forgetful abelian-level groupoid, generalized to a cartesian module-sheaf assignment; returned proof Step 3. Agent-written categorical comparison, with its entire explicit transport and arrow argument retained in report.md. Local PDF WANTED; primary arXiv PDF read online, https://arxiv.org/pdf/alg-geom/9501003."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-sfb-stable-pointed-moduli-groupoids",
+  "def-weil-size-convention",
+  "def-weil-pbc-etale-site",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-pbc-constant-sheaf",
+  "def-weil-pbc-inverse-image"
+ ],
+ "proof": [
+  {
+   "text": "Fix $U\\to T$ and put $x_U=x\\times_TU$ (a chosen cartesian lift). By the fibrewise 2-product definition in [def-sfb-stable-pointed-moduli-groupoids], using the inverse comparison orientation, an object of the fibre is $t=(y,\\lambda,\\phi:y\\xrightarrow{\\sim}x_U)$. An arrow $a:t\\to t'=(z,\\mu,\\psi)$ is an arrow $a:y\\to z$ over $\\mathrm{id}_U$ satisfying $\\psi a=\\phi$ and $H(a)\\mu=\\lambda$. Here and below identity inverse images are identified by their specified unit isomorphisms. The hypothesis on $H$ gives $H(ba)=H(a)H(b)$ for vertical arrows, so $H(a^{-1})=H(a)^{-1}$. Define $F_U(t)=H(\\phi)^{-1}\\lambda$, which is an actual module-sheaf isomorphism $\\underline{A^n}_U\\to H_{x_U}$.",
+   "uses": [
+    "def-sfb-stable-pointed-moduli-groupoids"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Tag 003R, example-2-fibre-product-categories; Tag 0040, lemma-2-product-categories-over-C. Explicit agent-written frame calculation in this model."
+   }
+  },
+  {
+   "text": "For an arrow $a:t\\to t'$, $\\psi a=\\phi$ gives $H(\\phi)=H(a)H(\\psi)$; hence $F_U(t)=H(\\psi)^{-1}H(a)^{-1}\\lambda=H(\\psi)^{-1}\\mu=F_U(t')$. Send $a$ to the unique arrow between these equal objects in the discrete target. Identities and composition are preserved because a discrete category has at most one arrow between two objects. Conversely if $F_U(t)=F_U(t')$, the only possible arrow is $a=\\psi^{-1}\\phi$. It satisfies $\\psi a=\\phi$ and $H(a)\\mu=H(\\phi)H(\\psi)^{-1}\\mu=\\lambda$, so it exists and is unique. Thus no automorphism of a triple survives: when $t=t'$, this arrow is $\\phi^{-1}\\phi=\\mathrm{id}_y$, regardless of $\\operatorname{Aut}(y)$.",
+   "uses": [
+    "def-sfb-stable-pointed-moduli-groupoids"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Tag 003R, example-2-fibre-product-categories; Tag 0040, lemma-2-product-categories-over-C. Explicit agent-written frame calculation in this model."
+   }
+  },
+  {
+   "text": "Define $E_U(\\nu)=(x_U,\\nu,\\mathrm{id}_{x_U})$ and send the identity of $\\nu$ to $\\mathrm{id}_{x_U}$. The identity equation for $H$ gives $F_UE_U=\\mathrm{id}$. For every $t=(y,\\lambda,\\phi)$, the arrow $\\phi:y\\to x_U$ is an arrow $t\\to E_UF_U(t)$ since $H(\\phi)F_U(t)=\\lambda$. These arrows form a natural isomorphism: for $a:t\\to t'$, both paths are the same arrow because $\\psi a=\\phi$. Its image under $F_U$ is the identity, and at $E_U(\\nu)$ its component is the identity. These are the two triangle identities, giving an explicit equivalence of the fibre groupoids.",
+   "uses": [
+    "def-sfb-stable-pointed-moduli-groupoids"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Tag 003R, example-2-fibre-product-categories; Tag 0040, lemma-2-product-categories-over-C. Explicit agent-written frame calculation in this model."
+   }
+  },
+  {
+   "text": "We check arrows over an arbitrary base map, not just vertical arrows. Let $f:V\\to U$, choose cartesian arrows $b:y_V\\to y$ and $c:x_V\\to x_U$, and let $\\phi_V:y_V\\xrightarrow{\\sim}x_V$ be determined by $c\\phi_V=\\phi b$, using the lifting property of [def-sfb-stable-pointed-moduli-groupoids]. Write $k_f:\\underline{A^n}_V\\xrightarrow{\\sim}f^{-1}\\underline{A^n}_U$ for the constant comparison. The pulled-back frame is $\\lambda_V=H(b)f^{-1}(\\lambda)k_f$. The composition equation assumed for $H$ gives $H(b)f^{-1}H(\\phi)=H(\\phi_V)H(c)$. Consequently\n$$H(\\phi_V)^{-1}\\lambda_V=H(c)f^{-1}(H(\\phi)^{-1}\\lambda)k_f.$$\nThe right side is exactly the restriction of $F_U(t)$ in the frame presheaf. For any arrow over $f$ the same computation follows from its comparison square and frame equation. It defines $F$ on the total categories over $\\mathit{Sch}/T$.",
+   "uses": [
+    "def-sfb-stable-pointed-moduli-groupoids"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Tag 003R, example-2-fibre-product-categories; Tag 0040, lemma-2-product-categories-over-C. Explicit agent-written frame calculation in this model."
+   }
+  },
+  {
+   "text": "For $W\\xrightarrow{g}V\\xrightarrow{f}U$, applying the preceding restriction formula twice gives, after inserting the inverse-image associator,\n$$H(c_g)g^{-1}H(c_f)\\,g^{-1}f^{-1}(\\nu)\\,g^{-1}(k_f)k_g.$$\nThe assumed composition equation for $H$ identifies the first factors with $H(c_fc_g)$; [lem-weil-pbc-constant-pullback-composition-coherence], applied to the abelian group underlying $A^n$, identifies the last factors with $k_{fg}$ through the same associator. Thus this is the direct restriction along $fg$. For identity maps the analogous equality is [lem-weil-pbc-constant-pullback-identity-coherence] and the assumed identity equation for $H$. These are equalities of module maps because both sides are module maps and equality can be checked on their underlying abelian sheaves. This proves composition and identity compatibility, without any flatness or local freeness assumption on $H_y$.",
+   "uses": [
+    "lem-weil-pbc-constant-pullback-composition-coherence",
+    "lem-weil-pbc-constant-pullback-identity-coherence"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Tag 03CB, lemma-composition-morphisms-sites; the constant-object composition and identity equations in the two cited coherence nodes."
+   }
+  },
+  {
+   "text": "The functors $E_U$ also respect pullback: the pullback of $(x_U,\\nu,\\mathrm{id})$ is $(x_V,H(c)f^{-1}\\nu k_f,\\mathrm{id})$. The component $\\phi$ of the natural isomorphism in Step 3 pulls back to $\\phi_V$, since $c\\phi_V=\\phi b$. Hence $F,E$ and their unit and counit assemble to an equivalence over $\\mathit{Sch}/T$. If the chosen lift of $x_U$ is replaced, the lifting property in [def-sfb-stable-pointed-moduli-groupoids] gives the unique comparison over the identity commuting with its arrow to $x$; the formulas already proved apply to that comparison. They therefore give the same equivalence up to its specified natural comparison, and compositions agree by uniqueness. The construction uses the given $H(a)$ for every arrow, establishing all the asserted base-change compatibility.",
+   "uses": [
+    "def-sfb-stable-pointed-moduli-groupoids"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Tag 003R, example-2-fibre-product-categories; Tag 0040, lemma-2-product-categories-over-C. Explicit agent-written frame calculation in this model."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sfb-stable-pointed-moduli-groupoids",
+  "lem-weil-pbc-constant-pullback-composition-coherence",
+  "lem-weil-pbc-constant-pullback-identity-coherence"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/categories.tex",
+  "place": "Tags 003R and 0040, explicit 2-fibre-product model; direct categorical proof for the cartesian sheaf assignment in the item. Pikaart--de Jong Section 2.3.3 motivates the application, not the generalized lemma."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "The two fiber product over a groupoid of the groupoid of framed objects with a fixed object is equivalent to the discrete groupoid of frames of that object",
+   "results": "[leansearch] UNAVAILABLE 0 hit(s) | service unavailable: {\"error\":\"Rate limit exceeded: 60 per 1 minute\"}\n  This kind of search is not available now. It is recorded as unavailable; use the other kinds and grep, and do not write a verdict for it.\n",
+   "date": "2026-10-22",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The homotopy fiber of the forgetful functor from objects with a trivialization is equivalent to the set of trivializations on a fixed object",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"Bundle.Trivial.fiberBundle_trivializationAt'\", \"module\": \"Mathlib/Topology/FiberBundle/Constructions\", \"type\": \"∀ (B : Type u_1) (F : Type u_2) [inst : TopologicalSpace B] [inst_1 : TopologicalSpace F] (x : B),\\n  FiberBundle.trivializationAt' x = Bundle.Trivial.trivialization B F\", \"doc\": \"Given topological spaces $B$ and $F$, the trivial bundle with total space $B \\\\times F$ equipped with the product topology is a fiber bundle. This structure uses the canonical global trivialization pro\"}\n  {\"name\": \"Bundle.Trivial.trivialization_apply\", \"module\": \"Mathlib/Topology/FiberBundle/Constructions\", \"type\": \"∀ (B : Type u_1) (F : Type u_2) [inst : TopologicalSpace B] [inst_1 : TopologicalSpace F]\\n  (a : Bundle.TotalSpace F (Bundle.Trivial B F)), ↑(Bundle.Trivial.trivialization B F) a = (a.proj, a.snd)\", \"doc\": \"For any element $a$ in the total space of the trivial bundle over a base space $B$ with fiber $F$, the canonical trivialization maps $a$ to the ordered pair $(\\\\pi(a), s(a))$, where $\\\\pi(a)$ denotes th\"}\n  {\"name\": \"Bundle.Trivial.trivialization\", \"module\": \"Mathlib/Topology/FiberBundle/Constructions\", \"type\": \"(B : Type u_1) →\\n  (F : Type u_2) → [inst : TopologicalSpace B] → [inst_1 : TopologicalSpace F] → Trivialization F Bundle.TotalSpace.proj\", \"doc\": \"The canonical trivialization for a trivial bundle over a base space $B$ with fiber $F$, constructed using the homeomorphism between the total space and the product space $B \\\\times F$. This trivializat\"}\n  {\"name\": \"IsHomeomorphicTrivialFiberBundle\", \"module\": \"Mathlib/Topology/FiberBundle/IsHomeomorphicTrivialBundle\", \"type\": \"{B : Type u_1} →\\n  (F : Type u_2) → {Z : Type u_3} → [TopologicalSpace B] → [TopologicalSpace F] → [TopologicalSpace Z] → (Z → B) → Prop\", \"doc\": \"A fiber bundle $\\\\pi: Z \\\\to B$ is trivial if there exists a homeomorphism $e: Z \\\\to B \\\\times F$ such that for every $z \\\\in Z$, the projection $\\\\pi(z)$ equals the first component of $e(z)$. This means t\"}\n  {\"name\": \"Bundle.Trivial.homeomorphProd_apply\", \"module\": \"Mathlib/Topology/FiberBundle/Constructions\", \"type\": \"∀ (B : Type u_1) (F : Type u_2) [inst : TopologicalSpace B] [inst_1 : TopologicalSpace F]\\n  (x : Bundle.TotalSpace F fun x => F), (Bundle.Trivial.homeomorphProd B F) x = (x.proj, x.snd)\", \"doc\": \"The total space of a trivial bundle over a base space $ B $ with fiber $ F $, equipped with the product topology, is homeomorphic to the Cartesian product $ B \\\\times F $. This homeomorphism arises fro\"}\n  {\"name\": \"Bundle.Trivial.homeomorphProd\", \"module\": \"Mathlib/Topology/FiberBundle/Constructions\", \"type\": \"(B : Type u_1) →\\n  (F : Type u_2) →\\n    [inst : TopologicalSpace B] → [inst_1 : TopologicalSpace F] → Bundle.TotalSpace F (Bundle.Trivial B F) ≃ₜ B × F\", \"doc\": \"The total space of a trivial bundle over a base space $ B $ with fiber $ F $, equipped with the product topology, is homeomorphic to the Cartesian product $ B \\\\times F $. This homeomorphism is induced\"}\n  {\"name\": \"Trivialization.preimageSingletonHomeomorph\", \"module\": \"Mathlib/Topology/FiberBundle/Trivialization\", \"type\": \"{B : Type u_1} →\\n  {F : Type u_2} →\\n    {Z : Type u_4} →\\n      [inst : TopologicalSpace B] →\\n        [inst_1 : TopologicalSpace F] →\\n          {proj : Z → B} →\\n            [inst_2 : TopologicalSpace Z] → (e : Trivialization F proj) → {b : B} → b ∈ e.baseSet → ↑(proj ⁻¹' {b}) ≃ₜ F\", \"doc\": \"Given a point $ b $ in the base set of the trivialization $ e $, the preimage of the singleton set $ \\\\{b\\\\} $ under the projection map is homeomorphic to the fiber $ F $.\"}\n  {\"name\": \"isHomeomorphicTrivialFiberBundle_fst\", \"module\": \"Mathlib/Topology/FiberBundle/IsHomeomorphicTrivialBundle\", \"type\": \"∀ {B : Type u_1} (F : Type u_2) [inst : TopologicalSpace B] [inst_1 : TopologicalSpace F],\\n  IsHomeomorphicTrivialFiberBundle F Prod.fst\", \"doc\": \"The projection map $\\\\pi_1: B \\\\times F \\\\to B$ is a trivial fiber bundle, as the total space $B \\\\times F$ is homeomorphic to the product space $B \\\\times F$ via the identity map, preserving the bundle pr\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits do not state the asserted etale frame scheme, framed-groupoid comparison, or coarse-stack identification; ordinary scheme smoothness, condensed modules and discrete groupoids alone do not specialize to this statement"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Groupoid, CategoryTheory.Functor.IsEquivalence",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits do not state the asserted etale frame scheme, framed-groupoid comparison, or coarse-stack identification; ordinary scheme smoothness, condensed modules and discrete groupoids alone do not specialize to this statement"
+  },
+  {
+   "tool": "grep",
+   "query": "twoFiber|two_fiber|homotopy[Ff]iber|[Ff]ramed[Gg]roupoid|[Ff]ramed[Oo]bject",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits do not state the asserted etale frame scheme, framed-groupoid comparison, or coarse-stack identification; ordinary scheme smoothness, condensed modules and discrete groupoids alone do not specialize to this statement"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A groupoid of triples consisting of an object a framing and an isomorphism to a fixed object is equivalent to a discrete set",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"FundamentalGroupoid.punitEquivDiscretePUnit\", \"module\": \"Mathlib/AlgebraicTopology/FundamentalGroupoid/PUnit\", \"type\": \"FundamentalGroupoid PUnit.{u + 1} ≌ CategoryTheory.Discrete PUnit.{v + 1}\", \"doc\": \"The fundamental groupoid of the unit type is equivalent to the discrete category over the unit type, as both have a single object and only the identity morphism.\"}\n  {\"name\": \"CategoryTheory.instGroupoidDiscrete\", \"module\": \"Mathlib/CategoryTheory/Groupoid/Discrete\", \"type\": \"{C : Type u_1} → CategoryTheory.Groupoid (CategoryTheory.Discrete C)\", \"doc\": \"For any type $\\\\alpha$, the discrete category over $\\\\alpha$ is a groupoid, as all its morphisms are identity morphisms and thus invertible.\"}\n  {\"name\": \"CategoryTheory.instIsGroupoidOfIsDiscrete\", \"module\": \"Mathlib/CategoryTheory/Groupoid/Discrete\", \"type\": \"∀ {C : Type u_1} [inst : CategoryTheory.Category.{v_1, u_1} C] [CategoryTheory.IsDiscrete C],\\n  CategoryTheory.IsGroupoid C\", \"doc\": \"Every discrete category, in which all morphisms are identity morphisms, is a groupoid since identity morphisms are trivially isomorphisms.\"}\n  {\"name\": \"FundamentalGroupoid.punitEquivDiscretePUnit_functor\", \"module\": \"Mathlib/AlgebraicTopology/FundamentalGroupoid/PUnit\", \"type\": \"FundamentalGroupoid.punitEquivDiscretePUnit.functor = CategoryTheory.Functor.star (FundamentalGroupoid PUnit.{u + 1})\", \"doc\": \"The functor component of the categorical equivalence between the fundamental groupoid of the unit type and the discrete category over the unit type is equal to the constant functor that maps every obj\"}\n  {\"name\": \"FundamentalGroupoid.punitEquivDiscretePUnit_unitIso\", \"module\": \"Mathlib/AlgebraicTopology/FundamentalGroupoid/PUnit\", \"type\": \"FundamentalGroupoid.punitEquivDiscretePUnit.unitIso =\\n  CategoryTheory.NatIso.ofComponents\\n    (fun x => CategoryTheory.Iso.refl ((CategoryTheory.Functor.id (FundamentalGroupoid PUnit.{u + 1})).obj x))\\n    @FundamentalGroupoid.punitEquivDiscretePUnit._proof_2\", \"doc\": \"The unit isomorphism of the categorical equivalence between the fundamental groupoid of the unit type and the discrete category over the unit type is naturally isomorphic to the identity functor via c\"}\n  {\"name\": \"CategoryTheory.Grpd.instInhabited\", \"module\": \"Mathlib/CategoryTheory/Groupoid/Grpd/Basic\", \"type\": \"Inhabited CategoryTheory.Grpd\", \"doc\": \"The category of groupoids is inhabited, as demonstrated by the trivial groupoid constructed from the single-object category associated with the unit type's canonical commutative group structure. This \"}\n  {\"name\": \"FundamentalGroupoid.punitEquivDiscretePUnit_counitIso\", \"module\": \"Mathlib/AlgebraicTopology/FundamentalGroupoid/PUnit\", \"type\": \"FundamentalGroupoid.punitEquivDiscretePUnit.counitIso =\\n  CategoryTheory.Iso.refl\\n    (((CategoryTheory.Functor.const (CategoryTheory.Discrete PUnit.{v + 1})).obj { as := PUnit.unit }).comp\\n      (CategoryTheory.Functor.star (FundamentalGroupoid PUnit.{u + 1})))\", \"doc\": \"The counit isomorphism of the equivalence between the fundamental groupoid of the unit type and the discrete category over the unit type is the identity isomorphism on the discrete category, as both c\"}\n  {\"name\": \"CategoryTheory.Groupoid.IsTotallyDisconnected\", \"module\": \"Mathlib/CategoryTheory/Groupoid/Basic\", \"type\": \"(C : Type u_1) → [CategoryTheory.Groupoid C] → Prop\", \"doc\": \"A groupoid is totally disconnected if for any two objects $ c $ and $ d $, the existence of a morphism $ c \\to d $ implies $ c = d $. In other words, the only morphisms in such a groupoid are identity \"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits do not state the asserted etale frame scheme, framed-groupoid comparison, or coarse-stack identification; ordinary scheme smoothness, condensed modules and discrete groupoids alone do not specialize to this statement"
+  },
+  {
+   "tool": "grep",
+   "query": "TwoPullback|twoPullback|homotopy[Ff]ib|[Ff]ramed[Gg]roupoid|[Ff]ramed[Oo]bject",
+   "results": "0 hits: none. ",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The two fiber product of a groupoid of framed objects with a fixed object is equivalent to the discrete category of frames of that object",
+   "results": "8 hits: FundamentalGroupoid.punitEquivDiscretePUnit, CategoryTheory.piEquivalenceFunctorDiscrete, CategoryTheory.Discrete.productEquiv, CategoryTheory.Subgroupoid.discrete, CategoryTheory.PreGaloisCategory.fiberPullbackEquiv, CategoryTheory.Grpd.piLimitFanIsLimit, CategoryTheory.instGroupoidDiscrete, CategoryTheory.Limits.Concrete.productEquiv.  Discrete products, the unit fundamental groupoid and ordinary fiber functor pullbacks do not give the claimed equivalence.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Groupoid, CategoryTheory.Discrete",
+   "results": "3 hits: CategoryTheory.Grpd.piIsoPi, CategoryTheory.Grpd.piIsoPi_hom_π, CategoryTheory.instGroupoidDiscrete.  Groupoid products and discreteness do not give the framed two-fibre comparison.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a groupoid with a contravariant family of sets the homotopy fiber of its category of elements over an object is the discrete category of the fiber set",
+   "results": "8 hits: CategoryTheory.Pseudofunctor.CoGrothendieck.ι_obj_fiber, CategoryTheory.groupoidOfElements, CategoryTheory.Pseudofunctor.CoGrothendieck.fiber, CategoryTheory.Pseudofunctor.CoGrothendieck.Hom.fiber, CategoryTheory.Pseudofunctor.Grothendieck.fiber, CategoryTheory.Grothendieck.transport_fiber, IsCoveringMap.monodromyFunctor_obj, CategoryTheory.Grothendieck.fiber.  Elements and Grothendieck declarations describe constructions or their fibres, not this two-fibre equivalence with coherent sheaf transport.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A comma groupoid of an object and the projection from elements of a set valued functor is equivalent to a discrete category",
+   "results": "8 hits: CategoryTheory.groupoidOfElements, CategoryTheory.piEquivalenceFunctorDiscrete, CategoryTheory.Grothendieck.grothendieckTypeToCat, FundamentalGroupoid.punitEquivDiscretePUnit, CategoryTheory.Comma.toPUnitIdEquiv, CategoryTheory.piEquivalenceFunctorDiscrete_functor_obj, CategoryTheory.Comma.toIdPUnitEquiv, CategoryTheory.instGroupoidDiscrete.  Elements and Grothendieck declarations describe constructions or their fibres, not this two-fibre equivalence with coherent sheaf transport.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-smooth-curve-abelian-level-rigidification",
+  "date": "2026-10-22",
+  "group": "Q61"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Smooth-curve abelian level rigidification. Returned rigidification proof: Section 2.3.3: forgetful abelian-level groupoid, generalized to a cartesian module-sheaf assignment; returned proof Step 3. Agent-written categorical comparison, with its entire explicit transport and arrow argument retained in report.md. Local PDF WANTED; primary arXiv PDF read online, https://arxiv.org/pdf/alg-geom/9501003.",
+   "via": [
+    "lem-sfb-smooth-curve-abelian-level-rigidification",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-framed-groupoid-two-fibre",
+  "worker": "stage1",
+  "summary": "Q96: proved the comparison directly using the defined fibrewise 2-product: explicit transport, unique arrows, quasi-inverse and triangles, and the base-change square with constant-comparison coherence. No new nodes, no representability or trivial-automorphism hypotheses. Statement unchanged. Searched live project, DAG, current blueprint and Mathlib.",
+  "blueprint": "Current latest blueprint det-thm-sf-ctf-stability-direct-images, proof (3), is the inherited direct-image route. The item is a created prerequisite of the stable-curve level-structure branch recorded in blueprint.from.place; its categorical comparison is proved here, without replacing a unit step. blueprint_refs ancestor reports None and no blueprint node states this abstract framing result.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-constant-pullback-composition-coherence",
+    "why": "Generic identity for constant sheaf inverse-image comparisons under composition; the moduli unit has no such coherence statement."
+   },
+   {
+    "node": "lem-weil-pbc-constant-pullback-identity-coherence",
+    "why": "Generic constant sheaf identity inverse-image comparison, for the identity base map; the moduli unit has no such coherence statement."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-constant-pullback-composition-coherence",
+  "lem-weil-pbc-constant-pullback-identity-coherence"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q96-1f2ad2f33",
+  "group": "Q96",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q96-1f2ad2f33 (reviewer sub-agent of L); spot-checked: I read the whole delivery. It is a first split of the created auxiliary node: statement unchanged, no new nodes, six elementary steps, and proof_deps equal the union of the step uses. I recomputed every equality against the def-sfb-stable-pointed-moduli-groupoids 2-product and lifting clauses, and against Stacks categories.tex Tag 003R (l.5578) and Tag 0040 (l.6081). Steps 1-3: with the inverted orientation ψa=φ, the triple maps to F(t)=H(φ)^{-1}λ; F(t)=F(t') and the unique arrow is a=ψ^{-1}φ; E(ν)=(x_U,ν,id) and the triangle identities hold. Step 4: φ_V is fixed by cφ_V=φb, giving H(b)f^{-1}H(φ)=H(φ_V)H(c) and hence the restriction formula. Step 5: c_f c_g=c_{fg} by uniqueness, and the cited coherence lemma with u=g, v=f has the right direction; same for the identity lemma. Step 6: E is cartesian. I accept the two sk-thm-p1 constant-coherence nodes as declared tool uses. Searching the DAG found no duplicate: lem-sfb-finite-local-system-frame-scheme is about representability and lem-sfb-algebraic-stack-fibre-products about algebraicity. No SGA citation. Edge cases checked: no frames, n=0, A=0, BG with trivial action (automorphisms do not survive). Advisory only: the unchanged statement does not cite lem-weil-pbc-inverse-image-composition for its associators. Step 5 reads k_f as the abelian comparison c_f, while the parent's frames use the module comparison of lem-sfb-geometric-inverse-image-constant-module; the two agree on global sections but no node states it. The report's citations.json and searches.jsonl are not in the commit."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.FramedGroupoidTwoFibre",
+  "declaration": "AlgebraicGeometry.CartesianFramingAssignment.twoFibre_equivalence",
+  "declarations": [
+   "AlgebraicGeometry.CartesianFramingAssignment",
+   "AlgebraicGeometry.CartesianFramingAssignment.constant",
+   "AlgebraicGeometry.CartesianFramingAssignment.Frame",
+   "AlgebraicGeometry.CartesianFramingAssignment.restrict",
+   "AlgebraicGeometry.CartesianFramingAssignment.restrict_laws",
+   "AlgebraicGeometry.CartesianFramingAssignment.frames",
+   "AlgebraicGeometry.CartesianFramingAssignment.framed",
+   "AlgebraicGeometry.CartesianFramingAssignment.forget",
+   "AlgebraicGeometry.CartesianFramingAssignment.representable",
+   "AlgebraicGeometry.CartesianFramingAssignment.twoFibre",
+   "AlgebraicGeometry.CartesianFramingAssignment.discreteFrames",
+   "AlgebraicGeometry.CartesianFramingAssignment.twoFibre_equivalence"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/FramedGroupoidTwoFibre.lean",
+  "statement": "theorem twoFibre_equivalence (H : CartesianFramingAssignment X A) (n : ℕ) (hX : IsFibredInGroupoids X) : (∀ x : X.obj, ∃ t : BasedFunctor (representable (X.p.obj x)) X, ∃ i : t.obj (Over.mk (𝟙 (X.p.obj x))) ≅ x, X.p.IsHomLift (𝟙 (X.p.obj x)) i.hom) ∧ (∀ (T : Over S) (t : BasedFunctor (representable T) X), ∃ e : BasedFunctor (H.twoFibre n t) (H.discreteFrames n t), e.toFunctor.IsEquivalence ∧ ∀ z : (H.twoFibre n t).obj, e.obj z = op ⟨op z.obj.left, (H.frames n).map z.obj.hom.op z.obj.right.unop.snd⟩)",
+  "branch": "sheaf-dag",
+  "by": "Q05",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "Total-category 2-fibre comparison using the recorded moduliTwoFiberProduct; frames are genuine module-sheaf isomorphisms, with inverse-image unit/composition equations and constant comparisons. Helpers construct only the notions introduced in this node. restrict_laws states its identity/composition compatibility clause; both named theorems are postponed. The coefficient ring and module values are in the common larger universe u+1, as in the recorded moduli interface."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-9ca87503d",
+  "group": "Q05",
+  "result": "pass",
+  "note": "All clauses match the node: H(a) on all arrows with upperStarId/upperStarComp equations; frames are actual isos with restriction via upperStarConstantSheafIso; framed category = elements of the frames presheaf; twoFibre = recorded moduliTwoFiberProduct over Over T; the BasedFunctor equivalence to the discrete frames groupoid is pinned by the object formula (restricting along the stored φ⁻¹ = H(φ)⁻¹λ). Statement verbatim; node differs from live only in lean; A in Type (u+1) per the parent interface. Advisory: h_T modelled as Over T rather than discreteModuli(yoneda T); restrict_laws coherence needs a ModuleCat transfer of the AddCommGrpCat lemmas."
+ }
+}

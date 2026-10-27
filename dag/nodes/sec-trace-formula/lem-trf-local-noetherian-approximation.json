@@ -16,75 +16,32 @@
  ],
  "proof": [
   {
-   "text": "Let $I$ be the set of finitely generated $\\mathbf Z$-subalgebras $R_i\\subseteq R$, ordered by inclusion. By [lemma-nagata-ring-finite-type-subalgebras] this is a small nonempty directed set and $R=\\varinjlim_iR_i$. Apply [lem-kun-fp-algebra-descent] to $S/R$: choose $i$ and a finitely presented $R_i$-algebra $B_i$ with $S\\cong B_i\\otimes_{R_i}R$ as $R$-algebras. For every $j\\geq i$ put $B_j=B_i\\otimes_{R_i}R_j$, with transitions induced by the inclusions. The subalgebras containing $R_i$ are still directed and have union $R$: a finite set of elements together with generators of $R_i$ lies in one finitely generated subalgebra. Thus their colimit is still $R$.",
+   "text": "Apply [lem-trf-flat-subring-model-system] to the given flat finitely presented map $R\\to S$. Obtain $i,B_i,j_f$ and $B_j=B_i\\otimes_{R_i}R_j$. On the tail $j\\geq j_f$, the base rings have colimit $R$, every $R_j$ is a finite-type integer subalgebra, every $R_j\\to B_j$ is finitely presented and flat, and the compatible isomorphisms $B_j\\otimes_{R_j}R\\cong S$ identify the original algebra map with the base change. In particular the chosen model is part of one fixed compatible family.",
    "uses": [
-    "lemma-nagata-ring-finite-type-subalgebras",
-    "lem-kun-fp-algebra-descent"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Tags 00R0 (lemma-limit-finite-presentation) and 05N9 (lemma-colimit-category-fp-algebras), finite-presentation descent"
-   }
-  },
-  {
-   "text": "The tensor base changes $R_j\\to B_j$ are finitely presented by [lem-weil-pbc-finite-presentation-base-change-composition]. Use [lem-weil-pbc-colimit-flat-ring-map] for the directed base rings $R_j$ ($j\\geq i$), initial algebras $R_i$ and $B_i$, and initial algebra homomorphism $R_i\\to B_i$. Its limit map is $R\\to R\\otimes_{R_i}B_i\\cong S$, which is flat by hypothesis. It gives $j_f\\geq i$ such that every $R_j\\to B_j$ with $j\\geq j_f$ is flat. This application requires finite presentation of the algebra map, not finite presentation of $S$ as an $R$-module.",
-   "uses": [
-    "lem-weil-pbc-finite-presentation-base-change-composition",
-    "lem-weil-pbc-colimit-flat-ring-map"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Tags 05G5 (lemma-base-change-finiteness), part (4), and 02JO (lemma-flat-finite-presentation-limit-flat), part (3); the flat input used in More on Morphisms 05FE"
-   }
-  },
-  {
-   "text": "Set $A=R_{j_f}$ and $B=B_{j_f}$. By [lem-trf-geometrically-reduced-fibre-locus] and [lem-trf-geometrically-irreducible-fibre-locus], the two loci $E_{\\mathrm{red}},E_{\\mathrm{irr}}\\subseteq\\operatorname{Spec}A$ are constructible. Finite presentation, needed for these results, was proved in step 2; neither locus result needs a Noetherian base. By [lem-weil-pbc-fibre-product-affine-spectra], the morphism $\\operatorname{Spec}S\\to\\operatorname{Spec}R$ is the base change of $\\operatorname{Spec}B\\to\\operatorname{Spec}A$; the same identification gives its fibres as the spectra of the stated fibre rings. The reduced-locus equality in the first cited locus node shows that the image of $\\operatorname{Spec}R\\to\\operatorname{Spec}A$ lies in $E_{\\mathrm{red}}$, because all given fibres are geometrically integral and hence geometrically reduced. For irreducibility apply [lem-sbc-radicial-preparation-fibre-comparison] with the identity universal homeomorphism of the base-changed scheme. It says exactly that a fibre over a point of $\\operatorname{Spec}R$ is geometrically irreducible if and only if the original fibre at its image in $\\operatorname{Spec}A$ is. Thus this image also lies in $E_{\\mathrm{irr}}$. The implications from integral to reduced and irreducible are [def-pc-integral-scheme] applied after each field extension, using [def-pc-geometrically-irreducible].",
-   "uses": [
-    "lem-trf-geometrically-reduced-fibre-locus",
-    "lem-trf-geometrically-irreducible-fibre-locus",
-    "lem-weil-pbc-fibre-product-affine-spectra",
-    "lem-sbc-radicial-preparation-fibre-comparison",
-    "def-pc-integral-scheme",
-    "def-pc-geometrically-irreducible"
+    "lem-trf-flat-subring-model-system"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/more-morphisms.tex",
-    "place": "Tags 05FG and 05FH, proofs: Tags 0579/055B for the loci and Tags 0576/0555 for their inverse-image equalities"
+    "place": "Tag 05FE, lemma-Noetherian-approximation-flat, proof via lemma-Noetherian-approximation-flat-module: the flat algebra-model construction, expanded to its cofinal subalgebra system and compatible cocartesian squares."
    }
   },
   {
-   "text": "The affine inverse system $(\\operatorname{Spec}R_j)_{j\\geq i}$ has limit $\\operatorname{Spec}R$ by [lem-weil-pbc-limit-affine-transition] and the ring-colimit computation of step 1. Its stages are affine, hence quasi-compact and quasi-separated, and all transition maps are affine. Apply [lem-weil-pbc-limit-contained-in-constructible] at $j_f$ first to $E_{\\mathrm{red}}$ and then to $E_{\\mathrm{irr}}$, using both image containments of step 3. It gives indices $j_r,j_t\\geq j_f$ such that every sufficiently late stage maps into the respective locus. Choose one upper bound $j_0$ for $j_r,j_t$. Then the whole image of $\\operatorname{Spec}R_{j_0}\\to\\operatorname{Spec}A$ lies in both loci. No surjectivity of a projection from the limit is asserted or needed.",
+   "text": "Apply [lem-trf-geometrically-integral-fibres-limit-descent] to the small directed tail $j\\geq j_f$ supplied by [lem-trf-flat-subring-model-system], taking $a=j_f$, $A_j=R_j$, $A=R$ and $C_a=B_{j_f}$. Write $C=C_a\\otimes_{R_{j_f}}R$. The tower statement identifies $C_a\\otimes_{R_{j_f}}R_j$ with $B_j$ and $C_a\\otimes_{R_{j_f}}R$ with $S$ as an $R$-algebra. For every prime $\\mathfrak p$ of $R$, tensoring the latter isomorphism with $\\kappa(\\mathfrak p)$ gives the fibre isomorphism $C\\otimes_R\\kappa(\\mathfrak p)\\cong S\\otimes_R\\kappa(\\mathfrak p)$, sending $c\\otimes t$ to $\\theta_{j_f}(c)\\otimes t$, with inverse induced by $\\theta_{j_f}^{-1}$. For every field extension $K/\\kappa(\\mathfrak p)$ the same formulas, tensored with $K$, give inverse $K$-algebra isomorphisms, so nonemptiness, reducedness and irreducibility hold on both sides simultaneously. Thus the original geometric fibre hypothesis applies exactly. Take $j_0$ to be the threshold supplied by descent. Its conclusion applies to $C_{j_0}=B_{j_f}\\otimes_{R_{j_f}}R_{j_0}$. The tower gives an $R_{j_0}$-algebra isomorphism $C_{j_0}\\cong B_{j_0}$; tensoring this isomorphism and its inverse with each $\\kappa(\\mathfrak q)$ and each extension of that field identifies their geometric fibres. Hence $R_{j_0}\\to B_{j_0}$ has geometrically integral fibres at every prime, including primes outside the image of $\\operatorname{Spec}R$. No surjectivity of a colimit projection is used.",
    "uses": [
-    "lem-weil-pbc-limit-affine-transition",
-    "lem-weil-pbc-limit-contained-in-constructible"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/limits.tex",
-    "place": "Tag 01YW (lemma-directed-inverse-system-affine-schemes-has-limit) and Tag 05F4 (lemma-limit-contained-in-constructible); the refinement in More on Morphisms 05FG and 05FH"
-   }
-  },
-  {
-   "text": "For every prime $\\mathfrak p_0$ of $R_{j_0}$, its image in $\\operatorname{Spec}A$ belongs to $E_{\\mathrm{red}}\\cap E_{\\mathrm{irr}}$. Apply the reduced-locus base-change equality [lem-trf-geometrically-reduced-fibre-locus] to $A\\to R_{j_0}$. For irreducibility use [lem-sbc-radicial-preparation-fibre-comparison] again with the identity universal homeomorphism; [lem-weil-pbc-fibre-product-affine-spectra] identifies this base change with $\\operatorname{Spec}B_{j_0}\\to\\operatorname{Spec}R_{j_0}$. Thus every fibre of this map is geometrically reduced and geometrically irreducible. For each field extension of $\\kappa(\\mathfrak p_0)$ it is nonempty, reduced and irreducible, hence integral by [def-pc-integral-scheme]. By the definition [def-pc-geometrically-irreducible], the fibre is geometrically integral. In particular an empty fibre is not being counted as integral.",
-   "uses": [
-    "lem-trf-geometrically-reduced-fibre-locus",
-    "lem-sbc-radicial-preparation-fibre-comparison",
-    "lem-weil-pbc-fibre-product-affine-spectra",
-    "def-pc-integral-scheme",
-    "def-pc-geometrically-irreducible"
+    "lem-trf-geometrically-integral-fibres-limit-descent",
+    "lem-trf-flat-subring-model-system"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/more-morphisms.tex",
-    "place": "Tags 0576 (lemma-base-change-fibres-geometrically-reduced) and 0555 (lemma-base-change-fibres-geometrically-irreducible); Properties Tag 01ON (lemma-characterize-integral) after each field extension"
+    "place": "Tags 05FG (lemma-Noetherian-approximation-geometrically-reduced) and 05FH (lemma-Noetherian-approximation-geometrically-irreducible), proofs: simultaneous constructible-locus refinement of a fixed finite-presentation model, for an arbitrary directed base-ring system."
    }
   },
   {
-   "text": "Take $R_0=R_{j_0}$ and $S_0=B_{j_0}$. The ring $R_0$ is of finite type over $\\mathbf Z$ by construction. Step 2 gives flatness because $j_0\\geq j_f$. It also gives a finite presentation of $S_0$ over $R_0$, whose finitely many polynomial variables generate it as an algebra, so the required finite-type assertion follows directly from [def-weil-pbc-finitely-presented-algebra]. Step 5 gives geometrically integral fibres. Finally, the algebra maps induced by the original model have the canonical identification\n$$S_0\\otimes_{R_0}R=(B_i\\otimes_{R_i}R_0)\\otimes_{R_0}R\\cong B_i\\otimes_{R_i}R\\cong S.$$\nThe first isomorphism sends $(b\\otimes a)\\otimes r$ to $b\\otimes ar$, with inverse $b\\otimes r\\mapsto(b\\otimes1)\\otimes r$; both inverse and algebra-compatibility identities hold on pure tensors by the tensor relations. Tensor products are coproducts of commutative algebras, so this is precisely the required cocartesian diagram. The universal map into any compatible $R$-algebra sends $b_0\\otimes r$ to the product of the two images, and is uniquely determined by this formula.",
+   "text": "Set $R_0=R_{j_0}$ and $S_0=B_{j_0}$. The conclusions of [lem-trf-flat-subring-model-system] give finite type of $R_0$ over $\\mathbf Z$, flatness of $R_0\\to S_0$, and the compatible cocartesian square with $S_0\\otimes_{R_0}R\\cong S$. Its finite presentation expresses $S_0$ as a quotient of $R_0[x_1,\\ldots,x_n]$ by finitely many relations [def-weil-pbc-finitely-presented-algebra]; the images of the variables generate it, giving the required finite type. Together with step 2 this verifies every condition of the claimed diagram.",
    "uses": [
+    "lem-trf-flat-subring-model-system",
     "def-weil-pbc-finitely-presented-algebra"
    ],
    "elementary": true,
@@ -95,18 +52,8 @@
   }
  ],
  "proof_deps": [
-  "lemma-nagata-ring-finite-type-subalgebras",
-  "lem-kun-fp-algebra-descent",
-  "lem-weil-pbc-finite-presentation-base-change-composition",
-  "lem-weil-pbc-colimit-flat-ring-map",
-  "lem-trf-geometrically-reduced-fibre-locus",
-  "lem-trf-geometrically-irreducible-fibre-locus",
-  "lem-weil-pbc-fibre-product-affine-spectra",
-  "lem-sbc-radicial-preparation-fibre-comparison",
-  "def-pc-integral-scheme",
-  "def-pc-geometrically-irreducible",
-  "lem-weil-pbc-limit-affine-transition",
-  "lem-weil-pbc-limit-contained-in-constructible",
+  "lem-trf-flat-subring-model-system",
+  "lem-trf-geometrically-integral-fibres-limit-descent",
   "def-weil-pbc-finitely-presented-algebra"
  ],
  "proof_origin": {
@@ -212,46 +159,13 @@
   "is": null
  },
  "split_report": {
-  "date": "2026-10-18",
+  "date": "2026-10-23",
   "item": "lem-trf-local-noetherian-approximation",
   "worker": "stage1",
-  "group": "Q04",
-  "summary": "Kept the complete statement of 05FT first proof paragraph. Expanded the simultaneous model construction using the existing finite-presentation descent, eventual flatness and constructible-containment nodes. Added only two geometric fibre-locus results; the pre-existing general radicial fibre comparison supplies irreducibility base change. Checked all hypotheses, citations, empty fibres and the zero ring; no new approximation-clause nodes.",
-  "blueprint": "Proof (1)--(2), semistable-alteration input: the Raynaud--Gruson flattening argument uses Stacks 05I3 for universal injectivity and equivalence of flatness with the cokernel, globalized by Algebra 05CL; within 05I3 (1)⇒(2), the projectivity of S over R (Tag 05FT) used with Tag 05FQ. This split expands only the 05FT algebraic Noetherian-model input already reached through the recorded ancestry; it makes no change to the updated contracting-correspondence theorem.",
-  "tool_uses": [
-   {
-    "node": "lemma-nagata-ring-finite-type-subalgebras",
-    "why": "Generic A ring is the filtered colimit of its finite-type $\\mathbf Z$-subalgebras input for the affine Noetherian-approximation subargument of Stacks 05FT; this unit has no alternative algebra/limit theorem and its geometric route is unchanged."
-   },
-   {
-    "node": "lem-kun-fp-algebra-descent",
-    "why": "Generic Descent of finitely presented algebras input for the affine Noetherian-approximation subargument of Stacks 05FT; this unit has no alternative algebra/limit theorem and its geometric route is unchanged."
-   },
-   {
-    "node": "lem-weil-pbc-finite-presentation-base-change-composition",
-    "why": "Generic Finite presentation: base change and composition input for the affine Noetherian-approximation subargument of Stacks 05FT; this unit has no alternative algebra/limit theorem and its geometric route is unchanged."
-   },
-   {
-    "node": "lem-weil-pbc-colimit-flat-ring-map",
-    "why": "Generic Flatness of a finitely presented algebra map descends to a stage of a directed colimit of base rings input for the affine Noetherian-approximation subargument of Stacks 05FT; this unit has no alternative algebra/limit theorem and its geometric route is unchanged."
-   },
-   {
-    "node": "lem-weil-pbc-fibre-product-affine-spectra",
-    "why": "Generic The fibre product of affine schemes is the spectrum of the tensor product input for the affine Noetherian-approximation subargument of Stacks 05FT; this unit has no alternative algebra/limit theorem and its geometric route is unchanged."
-   },
-   {
-    "node": "lem-sbc-radicial-preparation-fibre-comparison",
-    "why": "Generic Radicial preparation fibre comparison input for the affine Noetherian-approximation subargument of Stacks 05FT; this unit has no alternative algebra/limit theorem and its geometric route is unchanged."
-   },
-   {
-    "node": "lem-weil-pbc-limit-affine-transition",
-    "why": "Generic Limits of schemes along affine transition morphisms input for the affine Noetherian-approximation subargument of Stacks 05FT; this unit has no alternative algebra/limit theorem and its geometric route is unchanged."
-   },
-   {
-    "node": "lem-weil-pbc-limit-contained-in-constructible",
-    "why": "Generic A constructible set containing the image of a limit contains the image of a stage input for the affine Noetherian-approximation subargument of Stacks 05FT; this unit has no alternative algebra/limit theorem and its geometric route is unchanged."
-   }
-  ]
+  "group": "Q87",
+  "summary": "Repair of the 2026-10-22 re-split: kept the statement verbatim and extracted two independent statement-only arguments of comparable proof size. The flat subring model system carries old steps 1--2 and the tensor/pushout computation of step 6; geometric-integrality descent carries old steps 3--5. All six old arguments are preserved verbatim in the report for their future workers. The parent is a three-step assembly under 3000 characters. Repaired the landing refusal for returned head 45edd591bc8 against the current DAG: reread every direct citation and the retained proof-plan inputs, and made the step-2 application and its residue-field fibre isomorphism explicit in assembly step 2. Resumed after provider interruption: the current-DAG dry run passed at 5baeea98113; clarified that the fibre isomorphism persists after every residue-field extension, as required for geometric integrality. Repair continuation 2026-10-23 for the current return at 1aed06ed0cf: compared against the still-six-step current DAG and reread every direct citation, new-node definition and archived proof input. Assembly step 2 now defines its limit algebra C and explicitly transfers the descended fibre property from C_j0 to the tower algebra B_j0 over the same residue fields and their extensions, including primes not reached from Spec R. No statement or search question changed.",
+  "blueprint": "Proof (1)--(2), semistable-alteration input: the Raynaud--Gruson flattening argument uses Stacks 05I3 for universal injectivity and equivalence of flatness with the cokernel, globalized by Algebra 05CL; within 05I3 (1)⇒(2), the projectivity of S over R (Tag 05FT) used with Tag 05FQ. This split expands only the 05FT algebraic Noetherian-model input already reached through the recorded ancestry; it makes no change to the updated contracting-correspondence theorem. Re-split: algebraic model tower and geometric fibre descent separately realize this already recorded helper; no change to the current contracting-correspondence ancestor.",
+  "tool_uses": []
  },
  "tool_uses": [
   "lemma-nagata-ring-finite-type-subalgebras",
@@ -264,12 +178,12 @@
   "lem-weil-pbc-limit-contained-in-constructible"
  ],
  "reviewed": {
-  "date": "2026-10-17",
+  "date": "2026-10-22",
   "by": "L",
-  "reviewer": "NT-Codex-Q04-4c7653d4d",
-  "group": "Q04",
+  "reviewer": "NT-cc-Q87-7e1363123",
+  "group": "Q87",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q04-4c7653d4d (reviewer sub-agent of L); spot-checked: Read the item, both new nodes, cited statements and mathematical sources in full. The six-step approximation argument and both constructible-locus statements are valid; no repairs needed. Concrete source, hypothesis, edge-case, duplicate, route and long-step checks are recorded in review.md, including the limitation that the live pivot list was unavailable under the no-git restriction."
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q87-7e1363123 (reviewer sub-agent of L); spot-checked: Fourth push of the 2026-10-22 re-split. The three earlier heads, 27156d0d, 45edd591 and 1aed06ed, were all PASSed. Each was refused at landing with 'completed in this project's DAG but not in the live DAG', which is a side-completion promotion fault, not a fault in the mathematics. Live and side-live still have the Q04 six-step proof. Their statement, stmt_deps, source, blueprint and lean record are byte-equal to the delivered item, and neither new id is present, so the item is not superseded. Compared with 1aed06ed, both new nodes are byte-identical. The only change is in parent step 2. It names C, takes j_0 = the descent threshold, and moves geometric integrality from C_{j0}=B_{jf}⊗R_{j0} to B_{j0}. That uses the tower's natural R_{j0}-algebra isomorphism B_j⊗R_k≅B_k, tensored with κ(q) and every extension field, so it also covers primes outside the image of Spec R. This is correct and needs no new citation. I re-read the mathematics from scratch. The item statement matches flat.tex 05FT (l.2247), first proof paragraph. lem-trf-flat-subring-model-system is true: f.g. Z-subalgebras, fp descent, 02JO(3) eventual flatness (the flat input of 05FE, l.9815), and tensor associativity give the θ_j and B_j⊗R_k≅B_k clauses. lem-trf-geometrically-integral-fibres-limit-descent is the 05FG/05FH proof (l.9845/9880) for an arbitrary directed system: the 0579/055B loci are constructible, 0576/0555 base-change reflection puts the image of Spec A in them, and limits 05F4 (l.530) is applied twice with an upper bound taken. Small cases: A=0 is vacuous; C_a=0 is excluded by the hypothesis; Z[x]/(2x-1) forces inverting 2. Step 3 gets finite type over Z from j_0∈I, flatness from j_0≥j_f, the cocartesian square from the tower, and fp⇒finite type from the presentation variables. proof_deps equal the union of the uses. The old steps 1-2 plus the tensor part of 6 (~2.3k chars) and steps 3-5 (~3.0k chars) became two comparable new nodes, nothing was dropped, and the parent is a short assembly. Duplicate search with rg -L: Q86 reduced-fibres-limit-descent covers only the reduced half, and geometrically-integral-fibre-neighbourhood is étale-local smooth, so there are no duplicates. No SGA, no cycle, all stmt_deps exist. Advisory: the item's inherited tool_uses are stale; the landing refusal is a promotion issue for the maintainer."
  },
  "lean": {
   "module": "Sheaf.AlgebraicGeometry.LocalNoetherianApproximation",
@@ -289,5 +203,16 @@
   "result": "pass",
   "note": "Statement, dependencies, source alignment, edge cases, docstrings, route-pivot compliance, and compiler evidence all checked successfully."
  },
- "lean_audit": {}
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ }
 }

@@ -1,0 +1,345 @@
+{
+ "id": "lem-sfb-bundle-endomorphism-derived-adjunction",
+ "kind": "statement",
+ "title": "Unbounded endomorphism-algebra tensor and global Hom adjunction for a vector bundle",
+ "statement": "Let $A$ be a commutative ring, $X$ a quasi-compact quasi-separated $A$-scheme [def-pc-scheme], and $E$ a finite locally free $\\mathcal O_X$-module, meaning locally isomorphic to $\\mathcal O_X^{\\oplus r}$ for a finite integer $r$, viewed in degree zero. Put $B=\\operatorname{End}_{\\mathcal O_X}(E)$ with composition multiplication and left evaluation action on $E$. For a right $B$-module $L$, define $V_E(L)$ to be the sheaf associated to $U\\mapsto L\\otimes_B E(U)$. Use the unbounded derived categories [def-weil-abstract-derived-category, def-pc-derived-category]. The total left derived functor $F_E=-\\otimes_B^{\\mathbf L}E$ of $V_E$ exists on all of $D(\\operatorname{Mod}\\!\\text{-}B)$, takes values in $D_{\\mathrm{QCoh}}(\\mathcal O_X)$, and satisfies $F_E(B)\\simeq E$. It has right adjoint $G_E$ on $D_{\\mathrm{QCoh}}(\\mathcal O_X)$, computed on a K-injective resolution $K\\to I^\\bullet$ by the complex $\\operatorname{Hom}_{\\mathcal O_X}(E,I^\\bullet)$ with right action $f\\cdot b=f\\circ b$. The functors and the adjunction are $A$-linear and exact for the standard triangulated structures. After restriction of scalars along $A\\to B$, there is a natural derived isomorphism $\\operatorname{Res}_A G_E(K)\\simeq R\\operatorname{Hom}_X(E,K)$, where global derived Hom is [def-pc-global-derived-rhom] with its $A$-structure restricted from $\\Gamma(X,\\mathcal O_X)$. For every $q\\in\\mathbf Z$, this identifies $H^q(G_E(K))$ with $\\operatorname{Hom}_{D(\\mathcal O_X)}(E,K[q])$, including the right $B$-action by precomposition. Here K-injective means that the complex of maps from every acyclic complex into $I^\\bullet$ is acyclic.",
+ "source": {
+  "document": "literature/stacks-project/dga.tex",
+  "place": "Tag 09LX, dga-lemma-tensor-with-complex-derived; Tag 09LY, dga-lemma-tensor-with-complex-hom-adjoint; the RHom construction in dga-lemma-existence-of-derived. Quasi-coherent image: Tag 09M3, perfect-lemma-tensor-with-QCoh-complex in literature/stacks-project/perfect.tex. Specialization to a vector bundle in degree zero."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-abstract-derived-category",
+  "def-pc-derived-category",
+  "def-pc-global-derived-rhom",
+  "def-weil-triangulated-category"
+ ],
+ "proof": [
+  {
+   "text": "Write $T(C)^n=V_E(C^n)$, $d_T=V_E(d_C)$ for a right $B$-module complex $C$, and $H(J)^n=\\operatorname{Hom}_{\\mathcal O_X}(E,J^n)$, $d_H(f)=d_Jf$. The right action is $f\\cdot b=f\\circ b$: $(f\\cdot b_1)\\cdot b_2=f\\cdot(b_1b_2)$. For a homogeneous map $u:T(C)\\to J$, define $\\widehat u(c)(e)=u(c\\otimes e)$. Conversely define $\\widetilde v(c\\otimes e)=v(c)(e)$; this is balanced since $v(cb)(e)=v(c)(be)$, and extends uniquely through sheafification. These formulas are inverse and commute with restriction maps. For maps of degree $r$, both carry $d_Ju-(-1)^ru d_C$ to $d_J\\widehat u-(-1)^r\\widehat u d_C$. They therefore identify the complexes of global maps $\\operatorname{Hom}_{\\mathcal O_X}^{\\bullet}(T(C),J)$ and $\\operatorname{Hom}_B^{\\bullet}(C,H(J))$, naturally in both arguments.",
+   "uses": [
+    "def-weil-presheaf-modules-sheafification"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/dga.tex",
+    "place": "Tag 09LV, lemma-tensor-with-complex; explicit degree-zero evaluation in the proof of Tag 09LY, lemma-tensor-with-complex-hom-adjoint"
+   }
+  },
+  {
+   "text": "The additive functors $T$ and $H$ preserve chain homotopies: applying either functor to $f-g=dh+hd$ gives the same identity. They commute with shifts and cones, because the cone has terms $J^n\\oplus C^{n+1}$ and differential matrix $\\left(\\begin{smallmatrix}d_J&f\\\\0&-d_C\\end{smallmatrix}\\right)$, and both functors preserve finite direct sums and that matrix. Thus they induce exact functors on homotopy categories, and also after exact localization in their targets. Taking degree-zero cycles modulo boundaries in step 1 gives the ordinary homotopy-category tensor--Hom adjunction.",
+   "uses": [
+    "lem-pur-homotopy-category-triangulated"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/dga.tex",
+    "place": "Tag 09LW, lemma-tensor-with-complex-homotopy; lemma-existence-of-derived (cone calculation)"
+   }
+  },
+  {
+   "text": "Regard $B$ as the dg category with one object and endomorphism complex $B[0]$. The semi-free replacement theorem gives a quasi-isomorphism $P\\to C$ for every unbounded right $B$-complex. Its semi-free source is homotopically projective, hence K-projective: acyclicity of its Hom complex implies null homotopy of every map to an acyclic complex. If $s:P\\to P'$ is a quasi-isomorphism between such sources, its inverse in the derived category lifts to $t:P'\\to P$ by the K-projective Hom bijection. Injectivity of that bijection, first with source $P$ and then with source $P'$, gives $ts=1$ and $st=1$ in the homotopy category. Consequently $T(s)$ is a homotopy equivalence. Apply the left-derived existence criterion to the exact functor $Q_XT$ of step 2 and this semi-free class. It supplies an everywhere defined exact left derived functor $F_E$, with $F_E(C)=Q_XT(P)$. The complex $B[0]$ itself is semi-free and $T(B[0])\\cong E[0]$ by $b\\otimes e\\mapsto b(e)$, inverse $e\\mapsto1\\otimes e$. Thus $F_E(B)\\simeq E$.",
+   "uses": [
+    "lem-coef-dg-module-semi-free-replacement",
+    "lem-coef-dg-semi-free-homotopically-projective",
+    "lem-coef-kprojective-derived-hom-bijection",
+    "lem-pur-left-derived-from-kflat-class"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/dga.tex",
+    "place": "Tag 09LX, lemma-tensor-with-complex-derived; Tags 09KP (lemma-resolve), 09KM (lemma-property-P-K-projective); derived.tex Tag 06XN"
+   }
+  },
+  {
+   "text": "The split graded filtration of a semi-free $P$ identifies each $P^n$ with a direct sum of copies of $B$: choose the graded splittings, so the union is the direct sum of successive free graded quotients. Hence $T(P)^n$ is the corresponding sheaf coproduct of copies of $E$, by $b\\otimes e\\mapsto b(e)$ on each summand. The bundle $E$ is quasi-coherent by its local finite-free description. Coproduct closure makes every $T(P)^n$ quasi-coherent. Kernel closure gives $Z^n=\\ker(d^n)$ quasi-coherent; $d^{n-1}$ factors through $Z^n$ since $d^nd^{n-1}=0$. Cokernel closure applied to $T(P)^{n-1}\\to Z^n$ gives $H^n(T(P))$ quasi-coherent. This proves $F_E(C)\\in D_{\\mathrm{QCoh}}(\\mathcal O_X)$ for arbitrary $C$, with no boundedness assertion on $P$.",
+   "uses": [
+    "lem-coef-dg-module-semi-free-replacement",
+    "pqf-def-coherent",
+    "lem-weil-pbc-quasi-coherent-module-coproduct-closure",
+    "lem-weil-pbc-quasi-coherent-module-kernel",
+    "lem-weil-pbc-quasi-coherent-module-cokernel-closure"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/perfect.tex",
+    "place": "Tag 09M3, lemma-tensor-with-QCoh-complex, degree-zero specialization; schemes.tex Tags 01IC, 01ID and Section 01LA"
+   }
+  },
+  {
+   "text": "Use the small Zariski site of $X$, enlarging the module universe if necessary. The ringed-site resolution theorem gives $K\\to I$ with $I$ K-injective for every unbounded complex of $\\mathcal O_X$-modules. A quasi-isomorphism $s:I\\to I'$ between K-injectives is a homotopy equivalence: its derived inverse lifts to $t:I'\\to I$ by the K-injective Hom bijection with target $I$, and injectivity with targets $I,I'$ gives the two inverse identities. The additive functor $H$ preserves this homotopy equivalence. The right-derived existence criterion, applied to $Q_BH$ and the class of K-injectives, therefore produces a functor $G_E:D(\\mathcal O_X)\\to D(\\operatorname{Mod}\\!\\text{-}B)$ computed by $H(I)$. This is a functor with its actual right $B$-action, because every map, differential, and homotopy used by $H$ commutes with precomposition by $B$. Shifts and cones of K-injectives are K-injective: mapping an acyclic complex into them gives shifts or cones of acyclic Hom complexes. Thus a triangle between K-injective representatives is represented by its actual cone; step 2 shows that $H$ carries it to a cone triangle. Consequently $G_E$ is exact. Restrict this functor to $D_{\\mathrm{QCoh}}(\\mathcal O_X)$.",
+   "uses": [
+    "prop-pur-kinjective-resolutions-exist",
+    "lem-sc-kinjective-quasi-iso-comparison",
+    "lem-sf-right-derived-from-adapted-complexes"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/dga.tex",
+    "place": "lemma-existence-of-derived; sites-cohomology.tex Section 07A5 and injectives.tex Tag 079P; derived.tex Tag 06XN"
+   }
+  },
+  {
+   "text": "For $L\\in D(\\operatorname{Mod}\\!\\text{-}B)$ choose semi-free $P\\to L$, and for $K\\in D(\\mathcal O_X)$ choose $K\\to I$ K-injective. The two localization bijections and step 1 give\n$$\\operatorname{Hom}_{D(\\mathcal O_X)}(F_E(L),K)=\\operatorname{Hom}_{K(\\mathcal O_X)}(T(P),I)=\\operatorname{Hom}_{K(\\operatorname{Mod}\\!\\text{-}B)}(P,H(I))=\\operatorname{Hom}_{D(\\operatorname{Mod}\\!\\text{-}B)}(L,G_E(K)).$$\nThese bijections are natural: each is induced by localization or by the explicit evaluation maps of step 1; the bijections make the result independent of the chosen comparison maps between resolutions. Thus $F_E\\dashv G_E$ on the ambient categories. By step 4 the left adjoint lands in the full subcategory $D_{\\mathrm{QCoh}}$, so the same Hom bijection restricts to the required adjunction there.",
+   "uses": [
+    "lem-coef-kprojective-derived-hom-bijection",
+    "lem-sc-kinjective-quasi-iso-comparison",
+    "def-pc-derived-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/dga.tex",
+    "place": "Tag 09LY, lemma-tensor-with-complex-hom-adjoint, resolved Hom calculation; no compactness or self-Ext vanishing used"
+   }
+  },
+  {
+   "text": "The complex $E[0]$ is K-flat: for any acyclic $N$, its tensor with $E$ restricts on every trivializing open to a finite direct sum of copies of $N$. The kernel/image computation of cohomology is local, and a finite direct sum of exact complexes is exact. Thus $N\\otimes E$ is acyclic on $X$, as required by the definition of K-flatness.",
+   "uses": [
+    "def-pc-kflat-complex"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Definition 06YN, definition-K-flat; local finite-free verification"
+   }
+  },
+  {
+   "text": "By the construction of derived internal Hom, $R\\mathcal Hom_{\\mathcal O_X}(E,K)$ is represented by $\\mathcal Hom^\\bullet(E,I)$. Step 7 and the K-flat/K-injective Hom theorem show that this representing complex is itself K-injective. The definition of global derived Hom therefore computes $R\\Gamma$ on this very complex without any further replacement:\n$$R\\operatorname{Hom}_X(E,K)\\simeq Q_{\\Gamma(X,\\mathcal O_X)}\\Gamma(X,\\mathcal Hom^\\bullet(E,I)).$$\nIts degree-$n$ module is exactly $\\operatorname{Hom}_{\\mathcal O_X}(E,I^n)$ and its differential is $f\\mapsto d_If$. Restrict scalars along $A\\to\\Gamma(X,\\mathcal O_X)$: this is the underlying $A$-complex of $H(I)$, since the scalar $a$ acts on $E$ as the endomorphism defining $A\\to B$. This yields the claimed natural isomorphism in $D(A)$, rather than merely an equality of cohomology groups. The comparison uses the same maps of K-injective representatives, so is natural in $K$.",
+   "uses": [
+    "def-pur-derived-internal-hom",
+    "lem-pur-hom-kflat-into-kinjective",
+    "def-pc-global-derived-rhom"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 08J7 (section-internal-hom), 0A96 (lemma-RHom-from-K-flat-into-K-injective), 0B6E (section-global-RHom)"
+   }
+  },
+  {
+   "text": "A degree-$q$ cocycle of $H(I)$ is a map $f:E\\to I^q$ with $d_If=0$, equivalently a chain map $E[0]\\to I[q]$; the sign in the differential of $I[q]$ does not change the cycle condition. Boundaries are exactly maps null homotopic as such chain maps (multiplying a homotopy by $(-1)^q$ absorbs the shift sign). Hence $H^q(H(I))=\\operatorname{Hom}_{K(\\mathcal O_X)}(E,I[q])$. The shift $I[q]$ is K-injective, since mapping into it shifts the Hom complex. The K-injective localization bijection gives $H^q(G_E(K))\\cong\\operatorname{Hom}_{D(\\mathcal O_X)}(E,K[q])$. Its naturality in the source sends $f\\circ b$ to precomposition by $b$ in the derived category, proving the right $B$-action clause for every positive, zero, and negative $q$.",
+   "uses": [
+    "lem-sc-kinjective-quasi-iso-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0A94, lemma-RHom-into-K-injective; Equation 0A8Z, equation-global-cohomology-hom-complex"
+   }
+  },
+  {
+   "text": "The scalar map $A\\to B$ is central, because every $\\mathcal O_X$-linear endomorphism commutes with multiplication by a global scalar. The maps $c\\otimes e\\mapsto ac\\otimes e=c\\otimes ae$ and $f\\mapsto af=f\\circ(a\\operatorname{id}_E)$ make the functors $T,H$ and the evaluation bijection $A$-linear. These equalities also hold on complexes, homotopy classes, and the resolved Hom groups in step 6; thus the derived functors and their adjunction are $A$-linear. Exactness of both derived functors was obtained in steps 3 and 5 from the exact homotopy functors of step 2 and the derived-functor criteria. By the triangulated-subcategory theorem with $T=X$, $D_{\\mathrm{QCoh}}(\\mathcal O_X)$ contains $0$, is stable under shifts and is closed under middle terms of distinguished triangles of $D(\\mathcal O_X)$, so it is a full triangulated subcategory whose distinguished triangles are the ambient ones with vertices in it. Hence the restriction of $G_E$ to it is exact, and the left functor, whose values lie in it by step 4, is exact as a functor into it. The shift compatibility of the adjunction is the degree-$r$ differential identity in step 1.",
+   "uses": [
+    "lem-pc-supported-qcoh-triangulated"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/dga.tex",
+    "place": "lemma-tensor-with-complex and lemma-existence-of-derived, scalar and cone formulas for the degree-zero specialization"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-presheaf-modules-sheafification",
+  "lem-pur-homotopy-category-triangulated",
+  "lem-coef-dg-module-semi-free-replacement",
+  "lem-coef-dg-semi-free-homotopically-projective",
+  "lem-coef-kprojective-derived-hom-bijection",
+  "lem-pur-left-derived-from-kflat-class",
+  "pqf-def-coherent",
+  "lem-weil-pbc-quasi-coherent-module-coproduct-closure",
+  "lem-weil-pbc-quasi-coherent-module-kernel",
+  "lem-weil-pbc-quasi-coherent-module-cokernel-closure",
+  "prop-pur-kinjective-resolutions-exist",
+  "lem-sc-kinjective-quasi-iso-comparison",
+  "lem-sf-right-derived-from-adapted-complexes",
+  "def-pc-derived-category",
+  "def-pc-kflat-complex",
+  "def-pur-derived-internal-hom",
+  "lem-pur-hom-kflat-into-kinjective",
+  "def-pc-global-derived-rhom",
+  "lem-pc-supported-qcoh-triangulated"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/dga.tex",
+  "place": "Tags 09LV--09LY, degree-zero specialization; perfect.tex Tag 09M3; sites-cohomology.tex Tags 0A96 and 0B6E"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For a vector bundle E on a scheme derived tensor over the global endomorphism ring is left adjoint to global derived Hom from E",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.instIsRightAdjointPresheafOfModulesToPresheafOfModules\", \"module\": \"Mathlib/AlgebraicGeometry/Modules/Sheaf\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme}, (AlgebraicGeometry.Scheme.Modules.toPresheafOfModules X).IsRightAdjoint\", \"doc\": \"The forgetful functor from the category of sheaves of modules over a scheme $ X $ to the category of presheaves of modules over $ X $ is a right adjoint.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.pseudofunctor\", \"module\": \"Mathlib/AlgebraicGeometry/Modules/Sheaf\", \"type\": \"CategoryTheory.Pseudofunctor (CategoryTheory.LocallyDiscrete AlgebraicGeometry.Schemeᵒᵖ)\\n  (CategoryTheory.Bicategory.Adj CategoryTheory.Cat)\", \"doc\": \"A pseudofunctor from the locally discrete opposite category of schemes to the bicategory of adjunctions in categories, assigning to each scheme its category of modules (as an adjunction) and to each m\"}\n  {\"name\": \"CategoryTheory.IsGrothendieckAbelian.instIsLeftAdjointModuleCatMulOppositeEndTensorObj\", \"module\": \"Mathlib/CategoryTheory/Abelian/GrothendieckCategory/ModuleEmbedding/GabrielPopescu\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Abelian C]\\n  [inst_2 : CategoryTheory.IsGrothendieckAbelian.{v, v, u} C] {G : C},\\n  (CategoryTheory.IsGrothendieckAbelian.tensorObj G).IsLeftAdjoint\", \"doc\": \"For any object $ G $ in a Grothendieck abelian category $ \\\\mathcal{C} $, the functor $ \\\\text{Mod}(\\\\text{End}(G)^{\\\\text{op}}) \\\\to \\\\mathcal{C} $ constructed via the tensorObj operation is a left adjoint\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.instIsLeftAdjointPullback\", \"module\": \"Mathlib/AlgebraicGeometry/Modules/Sheaf\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y), (AlgebraicGeometry.Scheme.Modules.pullback f).IsLeftAdjoint\", \"doc\": \"For any morphism $ f : X \\to Y $ of schemes, the pullback functor from the category of sheaves of modules over $ Y $'s structure sheaf to the category of sheaves of modules over $ X $'s structure sheaf\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.instIsRightAdjointPushforward\", \"module\": \"Mathlib/AlgebraicGeometry/Modules/Sheaf\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y), (AlgebraicGeometry.Scheme.Modules.pushforward f).IsRightAdjoint\", \"doc\": \"For any morphism $ f : X \\to Y $ of schemes, the pushforward functor from the category of sheaves of modules over the structure sheaf of $ X $ to that over $ Y $ is a right adjoint. This means there ex\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.pseudofunctor_map_adj\", \"module\": \"Mathlib/AlgebraicGeometry/Modules/Sheaf\", \"type\": \"∀ {X Y : CategoryTheory.LocallyDiscrete AlgebraicGeometry.Schemeᵒᵖ} (f : X ⟶ Y),\\n  (AlgebraicGeometry.Scheme.Modules.pseudofunctor.map f).adj =\\n    (AlgebraicGeometry.Scheme.Modules.pullbackPushforwardAdjunction f.as.unop).toCat\", \"doc\": \"For any morphism $ f $ in the opposite category of schemes, the adjunction associated with the pseudofunctor's mapping of $ f $ is equal to the pullback-pushforward adjunction between the module categ\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.pullbackPushforwardAdjunction\", \"module\": \"Mathlib/AlgebraicGeometry/Modules/Sheaf\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} →\\n  (f : X ⟶ Y) → AlgebraicGeometry.Scheme.Modules.pullback f ⊣ AlgebraicGeometry.Scheme.Modules.pushforward f\", \"doc\": \"For any morphism $ f : X \\to Y $ of schemes, the pullback functor from the category of sheaves of modules over $ Y $'s structure sheaf to the category of sheaves of modules over $ X $'s structure sheaf\"}\n  {\"name\": \"SheafOfModules.PullbackConstruction.adjunction\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous\", \"type\": \"{C : Type u₁} →\\n  [inst : CategoryTheory.Category.{v₁, u₁} C] →\\n    {D : Type u₂} →\\n      [inst_1 : CategoryTheory.Category.{v₂, u₂} D] →\\n        {J : CategoryTheory.GrothendieckTopology C} →\\n          {K : CategoryTheory.GrothendieckTopology D} →\\n            {F : CategoryTheory.Functor C D} →\\n     \", \"doc\": \"Given categories $\\\\mathcal{C}$ and $\\\\mathcal{D}$ with Grothendieck topologies $J$ and $K$, a continuous functor $F : \\\\mathcal{C} \\\\to \\\\mathcal{D}$, and sheaves of rings $S$ on $\\\\mathcal{C}$ and $R$ on \"}",
+   "date": "2026-10-23",
+   "verdict": "no match: ordinary tensor and pullback adjunctions, and the conditional abstract derived adjunction theorem, do not construct the unbounded endomorphism-algebra derived tensor or its quasi-coherent image."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived tensor with a bimodule sheaf is left adjoint to derived Hom and has quasi coherent image",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"ModuleCat.monoidalClosedHomEquiv\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Monoidal.Closed\", \"type\": \"(M N P : ModuleCat.{u} R) :\\n  ((MonoidalCategory.tensorLeft M).obj N ⟶ P) ≃ (N ⟶ ((linearCoyoneda R (ModuleCat R)).obj (op M)).obj P)\", \"doc\": \"Let $R$ be a commutative ring. For any $R$-modules $M, N, P$, there is a canonical equivalence between the set of $R$-linear maps from the tensor product $M \\\\otimes_R N$ to $P$, and the set of $R$-lin\"}\n  {\"name\": \"SheafOfModules.PullbackConstruction.adjunction\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.PullbackContinuous\", \"type\": \": (forget S ⋙ PresheafOfModules.pullback.{v} φ.val ⋙ PresheafOfModules.sheafification (𝟙 R.val)) ⊣ pushforward.{v} φ\", \"doc\": \"Given categories $\\\\mathcal{C}$ and $\\\\mathcal{D}$ with Grothendieck topologies $J$ and $K$, a continuous functor $F : \\\\mathcal{C} \\\\to \\\\mathcal{D}$, and sheaves of rings $S$ on $\\\\mathcal{C}$ and $R$ on \"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.pullbackPushforwardAdjunction\", \"module\": \"Mathlib.AlgebraicGeometry.Modules.Sheaf\", \"type\": \": pullback f ⊣ pushforward f\", \"doc\": \"For any morphism $ f : X \\to Y $ of schemes, the pullback functor from the category of sheaves of modules over $ Y $'s structure sheaf to the category of sheaves of modules over $ X $'s structure sheaf\"}\n  {\"name\": \"CategoryTheory.Adjunction.derived\", \"module\": \"Mathlib.CategoryTheory.Functor.Derived.Adjunction\", \"type\": \"[G'.IsLeftDerivedFunctor α W₁] [F'.IsRightDerivedFunctor β W₂]\\n  [(G' ⋙ F').IsLeftDerivedFunctor ((Functor.associator _ _ _).inv ≫ whiskerRight α F') W₁]\\n  [(F' ⋙ G').IsRightDerivedFunctor (whiskerRight β G' ≫ (Functor.associator _ _ _).hom) W₂] : G' ⊣ F'\", \"doc\": \"Given categories $\\\\mathcal{C}_1, \\\\mathcal{C}_2, \\\\mathcal{D}_1, \\\\mathcal{D}_2$ with an adjunction $G \\\\dashv F$ between $\\\\mathcal{C}_1$ and $\\\\mathcal{C}_2$, and localization functors $L_1: \\\\mathcal{C}_1\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.instIsLeftAdjointPullback\", \"module\": \"Mathlib.AlgebraicGeometry.Modules.Sheaf\", \"type\": \": (pullback f).IsLeftAdjoint\", \"doc\": \"For any morphism $ f : X \\to Y $ of schemes, the pullback functor from the category of sheaves of modules over $ Y $'s structure sheaf to the category of sheaves of modules over $ X $'s structure sheaf\"}\n  {\"name\": \"SheafOfModules.pullbackPushforwardAdjunction\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.PullbackContinuous\", \"type\": \": pullback.{v} φ ⊣ pushforward.{v} φ\", \"doc\": \"Given categories $\\\\mathcal{C}$ and $\\\\mathcal{D}$ with Grothendieck topologies $J$ and $K$, a continuous functor $F : \\\\mathcal{C} \\\\to \\\\mathcal{D}$, and a natural transformation $\\\\phi : S \\\\to F_*R$ betw\"}\n  {\"name\": \"PresheafOfModules.instIsLeftAdjointSheafOfModulesSheafification\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Presheaf.Sheafification\", \"type\": \": (sheafification.{v} α).IsLeftAdjoint\", \"doc\": \"The sheafification functor for presheaves of modules over a presheaf of rings is a left adjoint to the inclusion functor from the category of sheaves of modules to the category of presheaves of module\"}\n  {\"name\": \"SheafOfModules.instIsRightAdjointPushforward\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.PullbackContinuous\", \"type\": \": (pushforward.{v} φ).IsRightAdjoint\", \"doc\": \"The pushforward functor for sheaves of modules, induced by a continuous functor and a morphism of ring sheaves, is a right adjoint.\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: ordinary tensor and pullback adjunctions, and the conditional abstract derived adjunction theorem, do not construct the unbounded endomorphism-algebra derived tensor or its quasi-coherent image."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"DerivedCategory\", \"adjunction\"",
+   "results": "[loogle] OK 0 hit(s)",
+   "date": "2026-10-23",
+   "verdict": "no match: ordinary tensor and pullback adjunctions, and the conditional abstract derived adjunction theorem, do not construct the unbounded endomorphism-algebra derived tensor or its quasi-coherent image."
+  },
+  {
+   "tool": "grep",
+   "query": "tensor.with.complex|endomorphism.*derived|derived.*endomorphism|derivedTensor.*[Aa]dj",
+   "results": "[grep] OK 0 hit(s)",
+   "date": "2026-10-23",
+   "verdict": "no match: ordinary tensor and pullback adjunctions, and the conditional abstract derived adjunction theorem, do not construct the unbounded endomorphism-algebra derived tensor or its quasi-coherent image."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Unbounded derived extension of scalars from a noncommutative endomorphism algebra to sheaves tensor Hom adjunction",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"CategoryTheory.IsGrothendieckAbelian.tensorObj\", \"module\": \"Mathlib/CategoryTheory/Abelian/GrothendieckCategory/ModuleEmbedding/GabrielPopescu\", \"type\": \"{C : Type u} →\\n  [inst : CategoryTheory.Category.{v, u} C] →\\n    [inst_1 : CategoryTheory.Abelian C] →\\n      [CategoryTheory.IsGrothendieckAbelian.{v, v, u} C] →\\n        (G : C) → CategoryTheory.Functor (ModuleCat (CategoryTheory.End G)ᵐᵒᵖ) C\", \"doc\": \"For any object $ G $ in a Grothendieck abelian category $ \\\\mathcal{C} $, this defines a functor from the category of modules over the opposite ring $ \\\\text{End}(G)^{\\\\text{op}} $ back to $ \\\\mathcal{C} \"}\n  {\"name\": \"CategoryTheory.IsGrothendieckAbelian.instIsLeftAdjointModuleCatMulOppositeEndTensorObj\", \"module\": \"Mathlib/CategoryTheory/Abelian/GrothendieckCategory/ModuleEmbedding/GabrielPopescu\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Abelian C]\\n  [inst_2 : CategoryTheory.IsGrothendieckAbelian.{v, v, u} C] {G : C},\\n  (CategoryTheory.IsGrothendieckAbelian.tensorObj G).IsLeftAdjoint\", \"doc\": \"For any object $ G $ in a Grothendieck abelian category $ \\\\mathcal{C} $, the functor $ \\\\text{Mod}(\\\\text{End}(G)^{\\\\text{op}}) \\\\to \\\\mathcal{C} $ constructed via the tensorObj operation is a left adjoint\"}\n  {\"name\": \"SheafOfModules.PullbackConstruction.adjunction\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous\", \"type\": \"{C : Type u₁} →\\n  [inst : CategoryTheory.Category.{v₁, u₁} C] →\\n    {D : Type u₂} →\\n      [inst_1 : CategoryTheory.Category.{v₂, u₂} D] →\\n        {J : CategoryTheory.GrothendieckTopology C} →\\n          {K : CategoryTheory.GrothendieckTopology D} →\\n            {F : CategoryTheory.Functor C D} →\\n     \", \"doc\": \"Given categories $\\\\mathcal{C}$ and $\\\\mathcal{D}$ with Grothendieck topologies $J$ and $K$, a continuous functor $F : \\\\mathcal{C} \\\\to \\\\mathcal{D}$, and sheaves of rings $S$ on $\\\\mathcal{C}$ and $R$ on \"}\n  {\"name\": \"ModuleCat.ExtendRestrictScalarsAdj.HomEquiv.fromExtendScalars_hom_apply\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/ChangeOfRings\", \"type\": \"∀ {R : Type u₁} {S : Type u₂} [inst : CommRing R] [inst_1 : CommRing S] (f : R →+* S) {X : ModuleCat R}\\n  {Y : ModuleCat S} (g : X ⟶ (ModuleCat.restrictScalars f).obj Y)\\n  (z : TensorProduct R ↑((ModuleCat.restrictScalars f).obj (ModuleCat.of S S)) ↑X),\\n  (ModuleCat.Hom.hom (ModuleCat.ExtendRestrict\", \"doc\": \"Given commutative rings $ R $ and $ S $, a ring homomorphism $ f : R \\to S $, an $ R $-module $ X $, and an $ S $-module $ Y $, there is a natural bijection between $ R $-linear maps from $ X $ to the \"}\n  {\"name\": \"Ext\", \"module\": \"Mathlib/CategoryTheory/Abelian/Ext\", \"type\": \"(R : Type u_1) →\\n  [inst : Ring R] →\\n    (C : Type u_2) →\\n      [inst_1 : CategoryTheory.Category.{v_1, u_2} C] →\\n        [inst_2 : CategoryTheory.Abelian C] →\\n          [CategoryTheory.Linear R C] →\\n            [CategoryTheory.EnoughProjectives C] →\\n              ℕ → CategoryTheory.Functor Cᵒᵖ (Cat\", \"doc\": \"For a ring $ R $ and an abelian $ R $-linear category $ \\\\mathcal{C} $ with enough projectives, the $ n $-th extension functor $ \\\\text{Ext}^n $ is a bifunctor $ \\\\mathcal{C}^{\\\\text{op}} \\\\times \\\\mathcal{\"}\n  {\"name\": \"LightCondensed.instMonoidalClosedSheafLightProfiniteCoherentTopologyModuleCat\", \"module\": \"Mathlib/Condensed/Light/Monoidal\", \"type\": \"(R : Type u) →\\n  [inst : CommRing R] →\\n    CategoryTheory.MonoidalClosed (CategoryTheory.Sheaf (CategoryTheory.coherentTopology LightProfinite) (ModuleCat R))\", \"doc\": \"For any commutative ring $ R $, the category of sheaves on light profinite spaces (compact Hausdorff, totally disconnected, second-countable topological spaces) equipped with the coherent Grothendieck\"}\n  {\"name\": \"ModuleCat.instIsRightAdjointCoextendScalars\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/ChangeOfRings\", \"type\": \"∀ {R : Type u₁} {S : Type u₂} [inst : Ring R] [inst_1 : Ring S] (f : R →+* S),\\n  (ModuleCat.coextendScalars f).IsRightAdjoint\", \"doc\": \"For any ring homomorphism $ f : R \\to S $, the coextension of scalars functor from the category of left $ R $-modules to the category of left $ S $-modules is a right adjoint. This functor maps an $ R \"}\n  {\"name\": \"LightCondensed.ihomPoints\", \"module\": \"Mathlib/Condensed/Light/InternallyProjective\", \"type\": \"(R : Type u) →\\n  [inst : CommRing R] →\\n    (A B : LightCondMod R) →\\n      (S : LightProfinite) →\\n        ↑((A ⟹ B).val.obj (Opposite.op S)) ≃\\n          (CategoryTheory.MonoidalCategoryStruct.tensorObj A ((LightCondensed.free R).obj S.toCondensed) ⟶ B)\", \"doc\": \"Let $R$ be a commutative ring. For any light condensed $R$-modules $A$ and $B$, and any light profinite space $S$, this definition provides a canonical isomorphism of $R$-modules between the sections \"}",
+   "date": "2026-10-23",
+   "verdict": "no match: ordinary tensor and pullback adjunctions, and the conditional abstract derived adjunction theorem, do not construct the unbounded endomorphism-algebra derived tensor or its quasi-coherent image."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Unbounded derived sheafified tensor over the global endomorphism ring of a vector bundle is left adjoint to derived global Hom",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"CategoryTheory.IsGrothendieckAbelian.instIsLeftAdjointModuleCatMulOppositeEndTensorObj\", \"module\": \"Mathlib/CategoryTheory/Abelian/GrothendieckCategory/ModuleEmbedding/GabrielPopescu\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Abelian C]\\n  [inst_2 : CategoryTheory.IsGrothendieckAbelian.{v, v, u} C] {G : C},\\n  (CategoryTheory.IsGrothendieckAbelian.tensorObj G).IsLeftAdjoint\", \"doc\": \"For any object $ G $ in a Grothendieck abelian category $ \\\\mathcal{C} $, the functor $ \\\\text{Mod}(\\\\text{End}(G)^{\\\\text{op}}) \\\\to \\\\mathcal{C} $ constructed via the tensorObj operation is a left adjoint\"}\n  {\"name\": \"PresheafOfModules.sheafificationAdjunction\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Presheaf/Sheafification\", \"type\": \"{C : Type u'} →\\n  [inst : CategoryTheory.Category.{v', u'} C] →\\n    {J : CategoryTheory.GrothendieckTopology C} →\\n      {R₀ : CategoryTheory.Functor Cᵒᵖ RingCat} →\\n        {R : CategoryTheory.Sheaf J RingCat} →\\n          (α : R₀ ⟶ R.val) →\\n            [inst_1 : CategoryTheory.Presheaf.IsLocallyInjec\", \"doc\": \"Given a presheaf of rings $ R_0 $ on a category $ \\\\mathcal{C} $ with Grothendieck topology $ J $, and a sheafified ring $ R $, the sheafification functor for presheaves of modules over $ R_0 $ is left\"}\n  {\"name\": \"SheafOfModules.PullbackConstruction.adjunction\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous\", \"type\": \"{C : Type u₁} →\\n  [inst : CategoryTheory.Category.{v₁, u₁} C] →\\n    {D : Type u₂} →\\n      [inst_1 : CategoryTheory.Category.{v₂, u₂} D] →\\n        {J : CategoryTheory.GrothendieckTopology C} →\\n          {K : CategoryTheory.GrothendieckTopology D} →\\n            {F : CategoryTheory.Functor C D} →\\n     \", \"doc\": \"Given categories $\\\\mathcal{C}$ and $\\\\mathcal{D}$ with Grothendieck topologies $J$ and $K$, a continuous functor $F : \\\\mathcal{C} \\\\to \\\\mathcal{D}$, and sheaves of rings $S$ on $\\\\mathcal{C}$ and $R$ on \"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.instIsRightAdjointPresheafOfModulesToPresheafOfModules\", \"module\": \"Mathlib/AlgebraicGeometry/Modules/Sheaf\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme}, (AlgebraicGeometry.Scheme.Modules.toPresheafOfModules X).IsRightAdjoint\", \"doc\": \"The forgetful functor from the category of sheaves of modules over a scheme $ X $ to the category of presheaves of modules over $ X $ is a right adjoint.\"}\n  {\"name\": \"PresheafOfModules.instIsLeftAdjointSheafOfModulesSheafification\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Presheaf/Sheafification\", \"type\": \"∀ {C : Type u'} [inst : CategoryTheory.Category.{v', u'} C] {J : CategoryTheory.GrothendieckTopology C}\\n  {R₀ : CategoryTheory.Functor Cᵒᵖ RingCat} {R : CategoryTheory.Sheaf J RingCat} (α : R₀ ⟶ R.val)\\n  [inst_1 : CategoryTheory.Presheaf.IsLocallyInjective J α] [inst_2 : CategoryTheory.Presheaf.IsLo\", \"doc\": \"The sheafification functor for presheaves of modules over a presheaf of rings is a left adjoint to the inclusion functor from the category of sheaves of modules to the category of presheaves of module\"}\n  {\"name\": \"PresheafOfModules.sheafificationAdjunction_homEquiv_apply\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Presheaf/Sheafification\", \"type\": \"∀ {C : Type u'} [inst : CategoryTheory.Category.{v', u'} C] {J : CategoryTheory.GrothendieckTopology C}\\n  {R₀ : CategoryTheory.Functor Cᵒᵖ RingCat} {R : CategoryTheory.Sheaf J RingCat} (α : R₀ ⟶ R.val)\\n  [inst_1 : CategoryTheory.Presheaf.IsLocallyInjective J α] [inst_2 : CategoryTheory.Presheaf.IsLo\", \"doc\": \"For any presheaf of modules $ M_0 $ over a presheaf of rings $ R_0 $ on a category $ \\\\mathcal{C} $ with Grothendieck topology $ J $, and a sheaf of modules $ F $ over the sheafified ring $ R $, there \"}\n  {\"name\": \"instMonoidalClosedSheafOfHasSheafifyOfFunctorOpposite\", \"module\": \"Mathlib/CategoryTheory/Sites/CartesianClosed\", \"type\": \"{C : Type u_1} →\\n  [inst : CategoryTheory.Category.{v_1, u_1} C] →\\n    (J : CategoryTheory.GrothendieckTopology C) →\\n      (A : Type u_2) →\\n        [inst_1 : CategoryTheory.Category.{v_2, u_2} A] →\\n          [CategoryTheory.HasSheafify J A] →\\n            [inst_3 : CategoryTheory.CartesianMonoidalCat\", \"doc\": \"Given a category $\\\\mathcal{C}$ with a Grothendieck topology $J$ and a category $\\\\mathcal{A}$ equipped with a Cartesian monoidal structure and sheafification, the category of sheaves on $\\\\mathcal{C}$ w\"}\n  {\"name\": \"SheafOfModules.instIsRightAdjointPushforward\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [inst_1 : CategoryTheory.Category.{v₂, u₂} D]\\n  {J : CategoryTheory.GrothendieckTopology C} {K : CategoryTheory.GrothendieckTopology D}\\n  {F : CategoryTheory.Functor C D} {S : CategoryTheory.Sheaf J RingCat} {R : CategoryTheor\", \"doc\": \"The pushforward functor for sheaves of modules, induced by a continuous functor and a morphism of ring sheaves, is a right adjoint.\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the ordinary endomorphism tensor adjunction is not its unbounded derived construction; the abstract derived adjunction theorem assumes derivability and composite derivability and supplies neither the quasi-coherent image nor the global Hom model."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Unbounded derived tensor over a noncommutative ring with an object in a Grothendieck category and derived Hom adjunction",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"ModuleCat.monoidalClosedHomEquiv\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Monoidal.Closed\", \"type\": \"(M N P : ModuleCat.{u} R) :\\n  ((MonoidalCategory.tensorLeft M).obj N ⟶ P) ≃ (N ⟶ ((linearCoyoneda R (ModuleCat R)).obj (op M)).obj P)\", \"doc\": \"Let $R$ be a commutative ring. For any $R$-modules $M, N, P$, there is a canonical equivalence between the set of $R$-linear maps from the tensor product $M \\\\otimes_R N$ to $P$, and the set of $R$-lin\"}\n  {\"name\": \"CategoryTheory.ihom.adjunction\", \"module\": \"Mathlib.CategoryTheory.Monoidal.Closed.Basic\", \"type\": \": tensorLeft A ⊣ ihom A\", \"doc\": \"In a closed monoidal category $\\\\mathcal{C}$, for any object $A$, the left tensoring functor $- \\\\otimes A$ is left adjoint to the internal hom functor $[A, -]$. This establishes a natural isomorphism b\"}\n  {\"name\": \"CategoryTheory.exp.adjunction\", \"module\": \"Mathlib.CategoryTheory.Monoidal.Closed.Cartesian\", \"type\": \"{C : Type u} →\\n  [inst : CategoryTheory.Category.{v, u} C] →\\n    [inst_1 : CategoryTheory.MonoidalCategory C] →\\n      (A : C) →\\n        [inst_2 : CategoryTheory.Closed A] → CategoryTheory.MonoidalCategory.tensorLeft A ⊣ CategoryTheory.ihom A\", \"doc\": \"In a closed monoidal category $\\\\mathcal{C}$, for any object $A$, the left tensoring functor $- \\\\otimes A$ is left adjoint to the internal hom functor $[A, -]$. This establishes a natural isomorphism b\"}\n  {\"name\": \"CategoryTheory.Closed.adj\", \"module\": \"Mathlib.CategoryTheory.Monoidal.Closed.Basic\", \"type\": \"{C : Type u} →\\n  {inst : CategoryTheory.Category.{v, u} C} →\\n    {inst_1 : CategoryTheory.MonoidalCategory C} →\\n      {X : C} →\\n        [self : CategoryTheory.Closed X] →\\n          CategoryTheory.MonoidalCategory.tensorLeft X ⊣ CategoryTheory.Closed.rightAdj X\", \"doc\": \"In a closed monoidal category $\\\\mathcal{C}$, for any object $X$, the left tensoring functor $- \\\\otimes X$ is left adjoint to the internal hom functor $[X, -]$. This establishes a natural isomorphism b\"}\n  {\"name\": \"CategoryTheory.Adjunction.derived\", \"module\": \"Mathlib.CategoryTheory.Functor.Derived.Adjunction\", \"type\": \"[G'.IsLeftDerivedFunctor α W₁] [F'.IsRightDerivedFunctor β W₂]\\n  [(G' ⋙ F').IsLeftDerivedFunctor ((Functor.associator _ _ _).inv ≫ whiskerRight α F') W₁]\\n  [(F' ⋙ G').IsRightDerivedFunctor (whiskerRight β G' ≫ (Functor.associator _ _ _).hom) W₂] : G' ⊣ F'\", \"doc\": \"Given categories $\\\\mathcal{C}_1, \\\\mathcal{C}_2, \\\\mathcal{D}_1, \\\\mathcal{D}_2$ with an adjunction $G \\\\dashv F$ between $\\\\mathcal{C}_1$ and $\\\\mathcal{C}_2$, and localization functors $L_1: \\\\mathcal{C}_1\"}\n  {\"name\": \"CategoryTheory.Adjunction.derivedη\", \"module\": \"Mathlib.CategoryTheory.Functor.Derived.Adjunction\", \"type\": \": 𝟭 D₁ ⟶ G' ⋙ F'\", \"doc\": \"The natural transformation from the identity functor on $\\\\mathcal{D}_1$ to the composition $G' \\\\circ F'$, constructed via the left-derived lift involving associators, whiskering operations, and the un\"}\n  {\"name\": \"CategoryTheory.FunctorToTypes.adj\", \"module\": \"Mathlib.CategoryTheory.Monoidal.Closed.FunctorToTypes\", \"type\": \": tensorLeft F ⊣ rightAdj F\", \"doc\": \"The functor tensoring with $ F $ on the left is left adjoint to the Hom-functor from $ F $, establishing the Hom-tensor adjunction in the category of functors from $ \\\\mathcal{C} $ to $ \\\\mathrm{Type}\\\\,\"}\n  {\"name\": \"CategoryTheory.Adjunction.derived'\", \"module\": \"Mathlib.CategoryTheory.Functor.Derived.Adjunction\", \"type\": \"{C₁ : Type u_1} →\\n  {C₂ : Type u_2} →\\n    {D₁ : Type u_3} →\\n      {D₂ : Type u_4} →\\n        [inst : CategoryTheory.Category.{v_1, u_1} C₁] →\\n          [inst_1 : CategoryTheory.Category.{v_2, u_2} C₂] →\\n            [inst_2 : CategoryTheory.Category.{v_3, u_3} D₁] →\\n              [inst_3 : CategoryThe\", \"doc\": \"Given categories $\\\\mathcal{C}_1, \\\\mathcal{C}_2, \\\\mathcal{D}_1, \\\\mathcal{D}_2$ with an adjunction $G \\\\dashv F$ between $\\\\mathcal{C}_1$ and $\\\\mathcal{C}_2$, and localization functors $L_1: \\\\mathcal{C}_1\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the ordinary endomorphism tensor adjunction is not its unbounded derived construction; the abstract derived adjunction theorem assumes derivability and composite derivability and supplies neither the quasi-coherent image nor the global Hom model."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Tensor with a generator of a Grothendieck abelian category and its unbounded derived Hom adjunction over a noncommutative endomorphism ring",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"CategoryTheory.IsGrothendieckAbelian.tensorObj\", \"module\": \"Mathlib/CategoryTheory/Abelian/GrothendieckCategory/ModuleEmbedding/GabrielPopescu\", \"type\": \"{C : Type u} →\\n  [inst : CategoryTheory.Category.{v, u} C] →\\n    [inst_1 : CategoryTheory.Abelian C] →\\n      [CategoryTheory.IsGrothendieckAbelian.{v, v, u} C] →\\n        (G : C) → CategoryTheory.Functor (ModuleCat (CategoryTheory.End G)ᵐᵒᵖ) C\", \"doc\": \"For any object $ G $ in a Grothendieck abelian category $ \\\\mathcal{C} $, this defines a functor from the category of modules over the opposite ring $ \\\\text{End}(G)^{\\\\text{op}} $ back to $ \\\\mathcal{C} \"}\n  {\"name\": \"CategoryTheory.IsGrothendieckAbelian.instIsLeftAdjointModuleCatMulOppositeEndTensorObj\", \"module\": \"Mathlib/CategoryTheory/Abelian/GrothendieckCategory/ModuleEmbedding/GabrielPopescu\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Abelian C]\\n  [inst_2 : CategoryTheory.IsGrothendieckAbelian.{v, v, u} C] {G : C},\\n  (CategoryTheory.IsGrothendieckAbelian.tensorObj G).IsLeftAdjoint\", \"doc\": \"For any object $ G $ in a Grothendieck abelian category $ \\\\mathcal{C} $, the functor $ \\\\text{Mod}(\\\\text{End}(G)^{\\\\text{op}}) \\\\to \\\\mathcal{C} $ constructed via the tensorObj operation is a left adjoint\"}\n  {\"name\": \"CategoryTheory.IsGrothendieckAbelian.tensorObjPreadditiveCoyonedaObjAdjunction\", \"module\": \"Mathlib/CategoryTheory/Abelian/GrothendieckCategory/ModuleEmbedding/GabrielPopescu\", \"type\": \"{C : Type u} →\\n  [inst : CategoryTheory.Category.{v, u} C] →\\n    [inst_1 : CategoryTheory.Abelian C] →\\n      [inst_2 : CategoryTheory.IsGrothendieckAbelian.{v, v, u} C] →\\n        (G : C) → CategoryTheory.IsGrothendieckAbelian.tensorObj G ⊣ CategoryTheory.preadditiveCoyonedaObj G\", \"doc\": \"For any object $ G $ in a Grothendieck abelian category $ \\\\mathcal{C} $, this defines an adjunction where the tensor functor $ \\\\text{tensorObj} \\\\, G $ (constructing objects in $ \\\\mathcal{C} $ from $ \\\\\"}\n  {\"name\": \"CategoryTheory.IsGrothendieckAbelian.instIsRightAdjointModuleCatMulOppositeEndPreadditiveCoyonedaObj\", \"module\": \"Mathlib/CategoryTheory/Abelian/GrothendieckCategory/ModuleEmbedding/GabrielPopescu\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Abelian C]\\n  [CategoryTheory.IsGrothendieckAbelian.{v, v, u} C] {G : C}, (CategoryTheory.preadditiveCoyonedaObj G).IsRightAdjoint\", \"doc\": \"For any object $ G $ in a Grothendieck abelian category $ \\\\mathcal{C} $, the Coyoneda functor $ \\\\mathcal{C} \\\\to \\\\text{Mod}(\\\\text{End}(G)^{\\\\text{op}}) $, which sends an object $ X $ to the $ \\\\text{End}\"}\n  {\"name\": \"Ext\", \"module\": \"Mathlib/CategoryTheory/Abelian/Ext\", \"type\": \"(R : Type u_1) →\\n  [inst : Ring R] →\\n    (C : Type u_2) →\\n      [inst_1 : CategoryTheory.Category.{v_1, u_2} C] →\\n        [inst_2 : CategoryTheory.Abelian C] →\\n          [CategoryTheory.Linear R C] →\\n            [CategoryTheory.EnoughProjectives C] →\\n              ℕ → CategoryTheory.Functor Cᵒᵖ (Cat\", \"doc\": \"For a ring $ R $ and an abelian $ R $-linear category $ \\\\mathcal{C} $ with enough projectives, the $ n $-th extension functor $ \\\\text{Ext}^n $ is a bifunctor $ \\\\mathcal{C}^{\\\\text{op}} \\\\times \\\\mathcal{\"}\n  {\"name\": \"CategoryTheory.Tor\", \"module\": \"Mathlib/CategoryTheory/Monoidal/Tor\", \"type\": \"(C : Type u_1) →\\n  [inst : CategoryTheory.Category.{v_1, u_1} C] →\\n    [inst_1 : CategoryTheory.MonoidalCategory C] →\\n      [inst_2 : CategoryTheory.Abelian C] →\\n        [CategoryTheory.MonoidalPreadditive C] →\\n          [CategoryTheory.HasProjectiveResolutions C] → ℕ → CategoryTheory.Functor C (Cat\", \"doc\": \"The $ n $-th left-derived functor of the tensor product operation in a monoidal abelian category, constructed by taking projective resolutions. For each object $ X $, $ \\\\mathrm{Tor}_n(X,-) $ is the $ \"}\n  {\"name\": \"CategoryTheory.Tor'\", \"module\": \"Mathlib/CategoryTheory/Monoidal/Tor\", \"type\": \"(C : Type u_1) →\\n  [inst : CategoryTheory.Category.{v_1, u_1} C] →\\n    [inst_1 : CategoryTheory.MonoidalCategory C] →\\n      [inst_2 : CategoryTheory.Abelian C] →\\n        [CategoryTheory.MonoidalPreadditive C] →\\n          [CategoryTheory.HasProjectiveResolutions C] → ℕ → CategoryTheory.Functor C (Cat\", \"doc\": \"For a monoidal abelian category $\\\\mathcal{C}$ with enough projective objects, the $n$-th Tor functor $\\\\mathrm{Tor}_n : \\\\mathcal{C} \\\\times \\\\mathcal{C} \\\\to \\\\mathcal{C}$ is the $n$-th left-derived functo\"}\n  {\"name\": \"CategoryTheory.Functor.instLinearDerivedCategoryMapDerivedCategory\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/ExactFunctor\", \"type\": \"∀ {C₁ : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} C₁] [inst_1 : CategoryTheory.Abelian C₁]\\n  [inst_2 : HasDerivedCategory C₁] {C₂ : Type u₂} [inst_3 : CategoryTheory.Category.{v₂, u₂} C₂]\\n  [inst_4 : CategoryTheory.Abelian C₂] [inst_5 : HasDerivedCategory C₂] (F : CategoryTheory.Functor C₁ C\", \"doc\": \"If $ F : \\\\mathcal{C}_1 \\\\to \\\\mathcal{C}_2 $ is an $ R $-linear functor between abelian categories, then the induced functor $ F_* : \\\\mathcal{D}(\\\\mathcal{C}_1) \\\\to \\\\mathcal{D}(\\\\mathcal{C}_2) $ between t\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the ordinary endomorphism tensor adjunction is not its unbounded derived construction; the abstract derived adjunction theorem assumes derivability and composite derivability and supplies neither the quasi-coherent image nor the global Hom model."
+  },
+  {
+   "tool": "grep",
+   "query": "tensorObj|IsLeftAdjointModuleCatMulOppositeEndTensorObj|def derived|def derived.",
+   "results": "[grep] OK 25 hit(s)\n  {\"file\": \"Mathlib/CategoryTheory/Localization/Monoidal/Basic.lean\", \"line\": \"175\", \"text\": \"  tensorObj X Y := ((tensorBifunctor L W ε).obj X).obj Y\"}\n  {\"file\": \"Mathlib/CategoryTheory/Functor/Derived/Adjunction.lean\", \"line\": \"52\", \"text\": \"def derived' [G'.IsLeftDerivedFunctor α W₁] [F'.IsRightDerivedFunctor β W₂]\"}\n  {\"file\": \"Mathlib/CategoryTheory/Functor/Derived/Adjunction.lean\", \"line\": \"96\", \"text\": \"noncomputable def derivedη : 𝟭 D₁ ⟶ G' ⋙ F' :=\"}\n  {\"file\": \"Mathlib/CategoryTheory/Functor/Derived/Adjunction.lean\", \"line\": \"118\", \"text\": \"noncomputable def derivedε : F' ⋙ G' ⟶ 𝟭 D₂ :=\"}\n  {\"file\": \"Mathlib/CategoryTheory/Functor/Derived/Adjunction.lean\", \"line\": \"144\", \"text\": \"noncomputable def derived [G'.IsLeftDerivedFunctor α W₁] [F'.IsRightDerivedFunctor β W₂]\"}\n  {\"file\": \"Mathlib/CategoryTheory/Monoidal/Widesubcategory.lean\", \"line\": \"71\", \"text\": \"  tensorObj c c' := ⟨c.obj ⊗ c'.obj⟩\"}\n  {\"file\": \"Mathlib/CategoryTheory/Bicategory/Monad/Basic.lean\", \"line\": \"86\", \"text\": \"    simp only [tensorObj_def, MonoidalCategory.whiskerLeft_comp, whiskerLeft_def, Category.assoc,\"}\n  {\"file\": \"Mathlib/CategoryTheory/Bicategory/Monad/Basic.lean\", \"line\": \"92\", \"text\": \"    simp only [tensorUnit_def, tensorObj_def, whiskerRight_def, Category.assoc, leftUnitor_def]\"}\n  {\"file\": \"Mathlib/CategoryTheory/Bicategory/Monad/Basic.lean\", \"line\": \"95\", \"text\": \"    simp only [tensorUnit_def, tensorObj_def, whiskerLeft_def, rightUnitor_def]\"}\n  {\"file\": \"Mathlib/CategoryTheory/Functor/FunctorHom.lean\", \"line\": \"205\", \"text\": \"attribute [local simp] functorHom types_tensorObj_def in\"}\n  {\"file\": \"Mathlib/CategoryTheory/Monoidal/Subcategory.lean\", \"line\": \"80\", \"text\": \"  tensorObj X Y := ⟨X.1 ⊗ Y.1, prop_tensor X.2 Y.2⟩\"}\n  {\"file\": \"Mathlib/CategoryTheory/Monoidal/Bimon_.lean\", \"line\": \"137\", \"text\": \"attribute [local simp] MonObj.tensorObj.one_def MonObj.tensorObj.mul_def tensorμ in\"}\n  {\"file\": \"Mathlib/CategoryTheory/Monoidal/Bimon_.lean\", \"line\": \"282\", \"text\": \"attribute [local simp] MonObj.tensorObj.one_def in\"}\n  {\"file\": \"Mathlib/CategoryTheory/GradedObject/Braiding.lean\", \"line\": \"14\", \"text\": \"`GradedObject.Monoidal.braiding : tensorObj X Y ≅ tensorObj Y X`\"}\n  {\"file\": \"Mathlib/CategoryTheory/GradedObject/Braiding.lean\", \"line\": \"42\", \"text\": \"/-- The braiding `tensorObj X Y ≅ tensorObj Y X` when `X` and `Y` are graded objects\"}\n  {\"file\": \"Mathlib/CategoryTheory/GradedObject/Braiding.lean\", \"line\": \"44\", \"text\": \"noncomputable def braiding [HasTensor X Y] [HasTensor Y X] : tensorObj X Y ≅ tensorObj Y X where\"}\n  {\"file\": \"Mathlib/CategoryTheory/GradedObject/Braiding.lean\", \"line\": \"45\", \"text\": \"  hom k := tensorObjDesc (fun i j hij => (β_ _ _).hom ≫\"}\n  {\"file\": \"Mathlib/CategoryTheory/GradedObject/Braiding.lean\", \"line\": \"46\", \"text\": \"    ιTensorObj Y X j i k (by simpa only [add_comm j i] using hij))\"}\n  {\"file\": \"Mathlib/CategoryTheory/Monoidal/Free/Basic.lean\", \"line\": \"154\", \"text\": \"  tensorObj X Y := FreeMonoidalCategory.tensor X Y\"}\n  {\"file\": \"Mathlib/CategoryTheory/GradedObject/Monoidal.lean\", \"line\": \"17\", \"text\": \"`GradedObject.Monoidal.tensorObj X₁ X₂` under the assumption `HasTensor X₁ X₂`\"}\n  {\"file\": \"Mathlib/CategoryTheory/GradedObject/Monoidal.lean\", \"line\": \"56\", \"text\": \"noncomputable abbrev tensorObj (X₁ X₂ : GradedObject I C) [HasTensor X₁ X₂] :\"}\n  {\"file\": \"Mathlib/CategoryTheory/GradedObject/Monoidal.lean\", \"line\": \"65\", \"text\": \"noncomputable def ιTensorObj (i₁ i₂ i₁₂ : I) (h : i₁ + i₂ = i₁₂) :\"}\n  {\"file\": \"Mathlib/CategoryTheory/GradedObject/Monoidal.lean\", \"line\": \"66\", \"text\": \"    X₁ i₁ ⊗ X₂ i₂ ⟶ tensorObj X₁ X₂ i₁₂ :=\"}\n  {\"file\": \"Mathlib/CategoryTheory/GradedObject/Monoidal.lean\", \"line\": \"72\", \"text\": \"lemma tensorObj_ext {A : C} {j : I} (f g : tensorObj X₁ X₂ j ⟶ A)\"}\n  {\"file\": \"Mathlib/CategoryTheory/Bicategory/End.lean\", \"line\": \"41\", \"text\": \"  tensorObj f g := f ≫ g\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the ordinary endomorphism tensor adjunction is not its unbounded derived construction; the abstract derived adjunction theorem assumes derivability and composite derivability and supplies neither the quasi-coherent image nor the global Hom model."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-projective-space-tilting-equivalence",
+  "date": "2026-10-23",
+  "group": "Q35"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Knudsen forgetful morphism as the universal stable curve. Section 1, Theorem 1.8, Corollaries 1.9 and 1.11; Section 2, Proposition 2.1 (printed pp.172--175): degree-zero logarithmic components and their section-algebra contraction. Independent prerequisite: Flat finitely presented relative image from an acyclic section algebra. Finite-presentation argument: detect pseudo-coherence of the projective-space direct image by its finitely many derived twists (Stacks 0CSG). Proof of Stacks 0CSG (5) => (1): the equivalence from 0BQU and its RHom inverse. Construction and adjunction prerequisites of Tag 0BQU; no generation or equivalence is asserted.",
+   "via": [
+    "lem-sfb-projective-space-tilting-equivalence",
+    "lem-sfb-projective-space-pseudocoherence-twist-test",
+    "lem-sfb-relative-section-image-flat-fp",
+    "lem-sfb-log-canonical-deletion-algebra",
+    "lem-sfb-knudsen-pointed-forgetful-universal-curve",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-bundle-endomorphism-derived-adjunction",
+  "worker": "stage1",
+  "summary": "Constructed unbounded tensor and global-Hom functors with existing semi-free/K-injective resolution and derived-functor criteria, wrote the evaluation adjunction explicitly, verified quasi-coherence termwise and the derived global-Hom comparison with its B-action. No new nodes or statement changes.",
+  "blueprint": "Inherited blueprint place: det-thm-sf-ctf-stability-direct-images proof (3), through the projective-space tilting prerequisite of 0BQU. Steps 1--6 construct the unbounded tensor--Hom adjunction; 7--9 identify its inverse-functor formula, and 10 records A-linearity. The ancestor command returns None for the inherited broken creation chain; its explicit place and via list are preserved.",
+  "tool_uses": [
+   {
+    "node": "lem-coef-dg-module-semi-free-replacement",
+    "why": "Generic resolution/localization or quasi-coherent-module closure tool used in the explicit endomorphism tensor--Hom construction, not a replacement of any unit-level six-functor step."
+   },
+   {
+    "node": "lem-coef-dg-semi-free-homotopically-projective",
+    "why": "Generic resolution/localization or quasi-coherent-module closure tool used in the explicit endomorphism tensor--Hom construction, not a replacement of any unit-level six-functor step."
+   },
+   {
+    "node": "lem-pur-left-derived-from-kflat-class",
+    "why": "Generic resolution/localization or quasi-coherent-module closure tool used in the explicit endomorphism tensor--Hom construction, not a replacement of any unit-level six-functor step."
+   },
+   {
+    "node": "lem-sf-right-derived-from-adapted-complexes",
+    "why": "Generic resolution/localization or quasi-coherent-module closure tool used in the explicit endomorphism tensor--Hom construction, not a replacement of any unit-level six-functor step."
+   },
+   {
+    "node": "lem-pur-hom-kflat-into-kinjective",
+    "why": "Generic resolution/localization or quasi-coherent-module closure tool used in the explicit endomorphism tensor--Hom construction, not a replacement of any unit-level six-functor step."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-coef-dg-module-semi-free-replacement",
+  "lem-coef-dg-semi-free-homotopically-projective",
+  "lem-pur-left-derived-from-kflat-class",
+  "lem-sf-right-derived-from-adapted-complexes",
+  "lem-pur-hom-kflat-into-kinjective"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q52-17f989571",
+  "group": "Q52",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q52-17f989571 (reviewer sub-agent of L); spot-checked: Read in full: the item and its 10 steps against Stacks dga.tex 09LX (l.5967) and 09LY (l.6060), and perfect.tex 09M3 (l.4433), degree-zero specialization. The statement is unchanged from live and not weakened. The item is unsplit in live and side-live, with no repair note and no new nodes. Steps 1-9 check: the balanced evaluation bijection (û(cb)(e)=û(c)(be)) and the sheafification extension; the cone matrix, so T and H are exact on K; the semi-free class with quasi-isomorphisms becoming homotopy equivalences through the K-projective bijection; the termwise-free P^n giving coproducts of E, then kernel and cokernel closure; K-injective resolutions on the small Zariski site, with exactness of G_E proved separately because the criterion does not assert it; the adjunction chain through the two localization bijections; E[0] K-flat locally; Hom^•(E,I) K-injective, so RHom_X(E,K) is Γ(Hom(E,I)) in D(Γ), then restricted to D(A); and the cycle/boundary sign (−1)^q for H^q, with the B-action. Small cases checked: X empty or E=0, E=O_X (derived RΓ), Spec R with R^r, and r>1 with noncommutative B. One fault, C1/C4 in step 10: exactness on D_QCoh needs D_QCoh to be a triangulated subcategory (closed under cones), which is uncited. FIX: cite the existing Lean-closed lem-pc-supported-qcoh-triangulated with T=X, rewrite the sentence, set elementary false, and add it to proof_deps. Route pivot: I accept the citations of lem-coef-dg-module-semi-free-replacement and lem-coef-dg-semi-free-homotopically-projective. They are justified at steps 3 and 4 as the one-object dg category B[0], i.e. ordinary K-projective termwise-free resolutions of unbounded complexes over the noncommutative ring End(E). The DAG's K-projective nodes are only for commutative rings or bounded-above complexes, and Mathlib has no unbounded K-projective existence. The 'dg categor' wording is that specialization only. Maintainer note: these nodes' Lean modules (DGModuleSemiFreeReplacement, SemiFreeDGModule) were removed at the 2026-10-18 pivot, so stage 2/3 will need the facts re-provided. Accepted tool_uses: the two dg nodes, lem-pur-left-derived-from-kflat-class, lem-sf-right-derived-from-adapted-complexes, lem-pur-hom-kflat-into-kinjective (generic tools). blueprint.from.node null is inherited from the Q35 creation.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.BundleEndomorphismDerivedAdjunction",
+  "declaration": "AlgebraicGeometry.BundleEndomorphism.tensor_derived_adjunction",
+  "declarations": [
+   "AlgebraicGeometry.BundleEndomorphism.Modules",
+   "AlgebraicGeometry.BundleEndomorphism.Scalars",
+   "AlgebraicGeometry.BundleEndomorphism.tensor",
+   "AlgebraicGeometry.BundleEndomorphism.tensorAdditive",
+   "AlgebraicGeometry.BundleEndomorphism.hom",
+   "AlgebraicGeometry.BundleEndomorphism.single",
+   "AlgebraicGeometry.BundleEndomorphism.derivedHom",
+   "AlgebraicGeometry.BundleEndomorphism.qcHom",
+   "AlgebraicGeometry.BundleEndomorphism.scalarsCompatible",
+   "AlgebraicGeometry.BundleEndomorphism.globalHom",
+   "AlgebraicGeometry.BundleEndomorphism.adjunctionStatement",
+   "AlgebraicGeometry.BundleEndomorphism.tensor_derived_adjunction"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/BundleEndomorphismDerivedAdjunction.lean",
+  "statement": "theorem tensor_derived_adjunction (A : Type a) [CommRing A] (aX : A →+* Scalars X) [CompactSpace X] [QuasiSeparatedSpace X] (E : Modules X) [E.IsFiniteLocallyFree] [HasDerivedCategory.{wB} (ModuleCat.{u} (End E)ᵐᵒᵖ)] [HasDerivedCategory.{wA} (ModuleCat.{u} A)] [HasDerivedCategory.{wΓ} (ModuleCat.{u} (Scalars X))] : ∃ linearInst : Linear A (Modules X), scalarsCompatible X A aX (linearInst := linearInst) ∧ adjunctionStatement X A aX E (linearInst := linearInst)",
+  "branch": "newtargets-dag",
+  "by": "NW",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-0e16da3e9",
+  "group": "NW",
+  "result": "pass",
+  "note": "Statement matches node clause by clause: qcqs A-scheme via aX : A→+*Γ(X,⊤), IsFiniteLocallyFree (varying or zero rank, site universe), B=End E with Bᵐᵒᵖ-modules, tensorObj = left adjoint of Hom(E,-) (unique iso to the sheafified balanced tensor, node step 1), IsLeftDerivedFunctor along quasiIso into D_QCoh, F(B)≅E, adjunction with ι⋙R(preadditiveCoyonedaObj E), K-injective model clause in D(Mod-B), A-linear structure pinned by scalarsCompatible plus linear functors and homEquiv, ∃CommShift+IsTriangulated for both functors (adjunction shift compatibility automatic), natural Nonempty iso Res_A∘G ≅ schemeGlobalDerivedHom(E,-) restricted along aX (node: 'there is'), ∀q∈ℤ ≃+ H^q(G K) ≅ Hom(E,K[q]) with B-precomposition and naturality. Edge cases (empty X, E=0, matrix B, all q, universes) ok. lean.statement verbatim, one sorry, 12 declarations present, docstrings/proof steps present, only the lean field differs from live, no name clash. Not recompiled (no file changed); compile evidence is the worker's. Advisory: IsFiniteLocallyFree (def-sc-finite-locally-free-sheaf) and smulHom (def-pc-euler-characteristic module) come from nodes outside stmt_deps; the node defines the notion inline."
+ }
+}

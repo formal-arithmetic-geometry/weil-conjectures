@@ -1,0 +1,347 @@
+{
+ "id": "lem-sfb-effective-action-norm-pencil",
+ "kind": "statement",
+ "title": "Effective generic action and equivariant orbit norms",
+ "statement": "Let $S$ be an integral scheme with function field $K$, and let $p:Y\\to S$ be a dominant separated morphism with $Y$ integral. Let $J$ be a finite group acting on $Y$ over $S$, let $G$ be its image in $\\operatorname{Aut}_S(Y)$, and put $C=Y\\times_S\\operatorname{Spec}K$. Then restriction $G\\to\\operatorname{Aut}_K(C)$ is injective. For any invertible $\\mathcal O_Y$-module $L$ put $B=\\bigotimes_{g\\in G}g^*L$ and $\\mathcal N_G(a)=\\bigotimes_{g\\in G}g^*a\\in\\Gamma(Y,B^{\\otimes n})$ for $a\\in\\Gamma(Y,L^{\\otimes n})$, with the ordered tensor and power comparisons of [def-sfb-pencil-orbit-bundle-norm]. The canonical factor-permutation isomorphisms $h^*B\\simeq B$ form a $G$-linearization and carry $h^*\\mathcal N_G(a)$ to $\\mathcal N_G(a)$. Whenever $\\mathcal N_G(a),\\mathcal N_G(b)$ generate $B^{\\otimes n}$, their section morphism $[\\mathcal N_G(a):\\mathcal N_G(b)]:Y\\to\\mathbf P^1_S$ is $J$-invariant. The construction and these identifications commute with restriction to an open of $S$ and with arbitrary base change $T\\to S$, using the induced $G$-action even if that action ceases to be faithful. For every $m\\geq1$ one has $\\mathcal N_G(a^m)=\\mathcal N_G(a)^m$ under the canonical tensor-power identification.\n\nIntegral schemes, function fields, separated morphisms, and base change have the meanings of [def-pc-integral-scheme], [def-sc-function-field], [def-weil-proper-morphism], [def-pc-base-change]. Invertible modules, generating sections and their projective-coordinate morphisms are [def-sc-invertible-module], [def-weil-pbc-generating-sections], [def-weil-pbc-morphism-to-projective-space-by-sections]. Dominant means that the image is dense; a $G$-linearization means pullback isomorphisms compatible with multiplication and the identity in $G$.",
+ "source": {
+  "document": "literature/de-jong-families-curves-alterations-1997.pdf",
+  "place": "de Jong §3.4, printed p.606; agent-written quotient-free norm-section replacement, extracted from returned proof steps 2--3. The last extraction supplies the finite-separable parameter descent needed in §3.3. Local PDF WANTED; publisher PDF read at https://www.numdam.org/item/10.5802/aif.1575.pdf."
+ },
+ "stmt_deps": [
+  "def-sfb-pencil-orbit-bundle-norm",
+  "def-pc-integral-scheme",
+  "def-sc-function-field",
+  "def-weil-proper-morphism",
+  "def-pc-base-change",
+  "def-sc-invertible-module",
+  "def-weil-pbc-generating-sections",
+  "def-weil-pbc-morphism-to-projective-space-by-sections",
+  "def-sfb-orbit-tensor-base-change-comparison",
+  "def-pc-module-pullback",
+  "def-sc-tensor-pullback-power-comparison"
+ ],
+ "proof": [
+  {
+   "text": "Let $\\xi$ be the generic point of $Y$ and $\\eta$ that of $S$. Continuity gives $p(Y)\\subseteq\\overline{\\{p(\\xi)\\}}$, so dominance gives $p(\\xi)=\\eta$. The map on local rings therefore gives $K=\\mathcal O_{S,\\eta}\\to\\mathcal O_{Y,\\xi}=k(Y)$. The fibre-product universal property [def-pc-base-change] supplies $u:\\operatorname{Spec}k(Y)\\to C$ whose composite with $q:C\\to Y$ is the generic-point map $i$. By [lem-sc-integral-function-field-affine-fraction], on every nonempty affine open $V\\subset Y$ the map $\\mathcal O_Y(V)\\to k(Y)$ is injective. These opens are a basis, so $\\mathcal O_Y\\to i_*\\mathcal O_{\\operatorname{Spec}k(Y)}$ is injective: $i$ is scheme-theoretically dominant.",
+   "uses": [
+    "lem-sc-integral-function-field-affine-fraction",
+    "def-pc-base-change"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 01RV, lemma-integral-scheme-rational-functions; generic-point map and fibre-product factorization"
+   }
+  },
+  {
+   "text": "Suppose $g_1,g_2\\in G$ induce the same automorphism of $C$. Then $g_1\\circ i=g_1\\circ q\\circ u=g_2\\circ q\\circ u=g_2\\circ i$. Apply [lemma-nagata-ext-scheme-theoretically-dominant-separated] with its $T=Y$, target $Y$, base $S$, and $\\iota=i$. Its separatedness hypothesis is exactly the separatedness of $p$; its two structure composites are $p$ because $g_1,g_2$ are $S$-automorphisms. Step 1 supplies scheme-theoretic dominance. Thus $g_1=g_2$, proving injectivity. Restriction respects multiplication by the fibre-product universal property, so this is the asserted injective group homomorphism.",
+   "uses": [
+    "lemma-nagata-ext-scheme-theoretically-dominant-separated",
+    "def-pc-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-nagata-compactification/sk-thm-nagata-sketch-conrad/lemma-nagata-ext-scheme-theoretically-dominant-separated.md",
+    "place": "Statement and equalizer proof, applied to the generic-point probe"
+   }
+  },
+  {
+   "text": "Use the enumeration, unit tail, and recursive comparisons of [def-sfb-pencil-orbit-bundle-norm]. By [lem-weil-pbc-invertible-pullback-tensor](1), every $g^*L$, hence $B$ and every $B^{\\otimes n}$, is invertible (the zero power is $\\mathcal O_Y$). By its clause (2), pullback distributes over the ordered tensor and $h^*g^*L\\simeq(g\\circ h)^*L$. Adopt $(gh)(y)=g(h(y))$. Define $\\lambda_h:h^*B\\simeq B$ by this comparison followed by the factor permutation sending the factor labelled $g$ to the factor labelled $gh$. This permutation is bijective, with inverse multiplication by $h^{-1}$. The symmetry, associators and unitors of [lem-weil-pbc-module-tensor-symmetric-monoidal] provide the required ordered permutation map, including its unit tail.",
+   "uses": [
+    "def-sfb-pencil-orbit-bundle-norm",
+    "lem-weil-pbc-invertible-pullback-tensor",
+    "lem-weil-pbc-module-tensor-symmetric-monoidal"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/modules.tex",
+    "place": "Tags 0B8L (lemma-pullback-invertible), 01CT (lemma-constructions-invertible), 01CD (lemma-tensor-product-pullback), 01CA (section-tensor-product)"
+   }
+  },
+  {
+   "text": "Check the linearization on local pure tensors, which generate the tensor sheaf. In $k^*h^*B$, the factor originally labelled $g$ is $(ghk)^*L$. First applying $k^*\\lambda_h$ moves it to label $gh$ in $k^*B$, then $\\lambda_k$ moves it to $ghk$ in $B$. Applying $\\lambda_{hk}$ directly makes exactly the same move and leaves the same tensor entries. The pullback-composition maps and tensor symmetries in [lem-weil-pbc-invertible-pullback-tensor](2) have these pure-tensor formulas; consequently the two sheaf maps agree. The identity permutation gives $\\lambda_1=\\mathrm{id}$ under $1^*B\\simeq B$. Thus $\\lambda_{hk}=\\lambda_k\\circ k^*\\lambda_h$ under $(hk)^*\\simeq k^*h^*$, the required cocycle.",
+   "uses": [
+    "lem-weil-pbc-invertible-pullback-tensor",
+    "lem-weil-pbc-module-tensor-symmetric-monoidal"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/modules.tex",
+    "place": "Tags 01CD and 01CA: explicit pullback and permutation formulas; cocycle checked on pure tensors"
+   }
+  },
+  {
+   "text": "The recursive power-distribution map of [def-sfb-pencil-orbit-bundle-norm] sends the array of factors $(g,r)$, $g\\in G$, $1\\leq r\\leq n$, from the order with $g$ outermost to the order with $r$ outermost. Its pullback-power comparisons send $h^*(s_1\\otimes\\cdots\\otimes s_n)$ to $h^*s_1\\otimes\\cdots\\otimes h^*s_n$, by [def-sc-tensor-pullback-power-comparison] and [lem-weil-pbc-invertible-pullback-tensor](2). Reindexing $(g,r)$ as $(gh,r)$ therefore commutes with this distribution. Hence the tensor-power linearization sends $h^*\\mathcal N_G(a)$ to the tensor of $(gh)^*a$ over $g$, which is exactly $\\mathcal N_G(a)$ after the permutation of Step 3. For $n=0$, $a$ is a global function and $\\mathcal N_G(a)=\\prod_{g\\in G}g^*a$ under the specified unit maps. Applying $h^*$ permutes these factors by $g\\mapsto gh$, so the product is fixed; no assumption $a=1$ is made.",
+   "uses": [
+    "def-sfb-pencil-orbit-bundle-norm",
+    "def-sc-tensor-pullback-power-comparison",
+    "lem-weil-pbc-invertible-pullback-tensor",
+    "lem-weil-pbc-module-tensor-symmetric-monoidal"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/modules.tex",
+    "place": "Tags 01CD and 01CA: pullback of tensors and transposition of a finite array of factors"
+   }
+  },
+  {
+   "text": "Put $s=\\mathcal N_G(a)$ and $t=\\mathcal N_G(b)$. They generate the invertible module $B^{\\otimes n}$ by hypothesis. By [lem-weil-pbc-invertible-generating-sections-fibre], at every point at least one has nonzero image in its fibre; this is the hypothesis of the projective-space theorem below. By [lem-weil-pbc-projective-space-functor-of-points], precomposition of the section morphism with $h$ corresponds to $(h^*B^{\\otimes n},h^*s,h^*t)$. Step 5 identifies this pair with $(B^{\\otimes n},s,t)$; equivalent pairs give equal maps to $\\mathbf P^1_{\\mathbf Z}$. Since $p\\circ h=p$, both maps also have the same component in $S$. The fibre-product uniqueness in [def-weil-pbc-morphism-to-projective-space-by-sections] now gives $[s:t]\\circ h=[s:t]$ over $S$. Every element of $J$ acts through its image in $G$, so the morphism is $J$-invariant.",
+   "uses": [
+    "lem-weil-pbc-invertible-generating-sections-fibre",
+    "lem-weil-pbc-projective-space-functor-of-points",
+    "def-weil-pbc-morphism-to-projective-space-by-sections"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/constructions.tex",
+    "place": "Tag 01NE, lemma-projective-space, and paragraph after Definition 01NF"
+   }
+  },
+  {
+   "text": "For $T\\to S$ put $Y_T=Y\\times_ST$ and $v:Y_T\\to Y$. Each $g$ induces $g_T$ with $v\\circ g_T=g\\circ v$ [def-pc-base-change]. Clause (2) of [lem-weil-pbc-invertible-pullback-tensor] gives $v^*g^*L\\simeq g_T^*v^*L$. Tensor these maps in the SAME enumeration of $G$ to identify $v^*B$ with $B_{G,T}$. On local tensors these maps send each entry to its pullback; the unit entry stays $1$. Thus they carry $v^*\\mathcal N_G(a)$ to $\\mathcal N_{G,T}(v^*a)$ using the recursive power comparisons of [def-sfb-pencil-orbit-bundle-norm]. The linearization square also commutes: either route sends the entry labelled $g$ to the pullback entry labelled $gh$. These equalities on local tensors prove equality of sheaf maps, and remain true for successive base changes. Retain $G$ as indexing group even if distinct $g_T$ coincide; no factor is removed and no faithfulness is used. Open restriction is the case $T\\subseteq S$.",
+   "uses": [
+    "def-pc-base-change",
+    "lem-weil-pbc-invertible-pullback-tensor",
+    "def-sfb-pencil-orbit-bundle-norm",
+    "lem-weil-pbc-module-tensor-symmetric-monoidal"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/modules.tex",
+    "place": "Tags 01CD, 01CA: factorwise comparison under arbitrary pullback; no flatness assumption"
+   }
+  },
+  {
+   "text": "Using the tensor-sheaf construction of [def-pc-module-pullback], the pulled-back sections still generate: locally each section of $B^{\\otimes n}$ is a linear combination of $s,t$, so after pullback their images generate $v^*B^{\\otimes n}$, whose local generators are $1\\otimes e$ for local generators $e$. The pullback compatibility in [lem-weil-pbc-projective-space-functor-of-points] and the two projections in [def-weil-pbc-morphism-to-projective-space-by-sections] identify their pencil with the base change $Y_T\\to\\mathbf P^1_T$. Together with Step 7 this proves compatibility for the invariant pencil as well as for its bundle, sections and linearization. It asserts no generic-fibre faithfulness after this base change.",
+   "uses": [
+    "def-pc-module-pullback",
+    "def-weil-pbc-generating-sections",
+    "lem-weil-pbc-projective-space-functor-of-points",
+    "def-weil-pbc-morphism-to-projective-space-by-sections"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/constructions.tex",
+    "place": "Tag 01NE and the following relative construction; generation checked directly from Modules Tag 01AM"
+   }
+  },
+  {
+   "text": "Finally, $a^m$ is the $m$-fold tensor of $a$, regarded in $L^{\\otimes nm}$ by concatenation. Pullback sends it to $(g^*a)^{\\otimes m}$ by [lem-weil-pbc-invertible-pullback-tensor](2). In the norm construction both $\\mathcal N_G(a^m)$ and $\\mathcal N_G(a)^m$ are therefore the same tensor array indexed by $(g,j,r)$ with $1\\leq j\\leq m$, $1\\leq r\\leq n$: the first initially groups by $g$, the second by $j$, and the canonical power identifications group both by $(j,r)$ with the $g$ factors inside. The ordered permutation maps of [lem-weil-pbc-module-tensor-symmetric-monoidal] send each tensor entry to exactly that position. Equality follows on pure local tensors, hence for these sections, using the comparisons fixed by [def-sfb-pencil-orbit-bundle-norm]. If $n=0$, $a$ is a global function and the assertion is $\\prod_g(g^*a)^m=(\\prod_g g^*a)^m$ in the commutative ring $\\Gamma(Y,\\mathcal O_Y)$. If $m=1$ it is the identity comparison.",
+   "uses": [
+    "def-sfb-pencil-orbit-bundle-norm",
+    "lem-weil-pbc-invertible-pullback-tensor",
+    "lem-weil-pbc-module-tensor-symmetric-monoidal"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/modules.tex",
+    "place": "Tag 01CA, section-tensor-product: associativity and symmetry; Tag 01CD, lemma-tensor-product-pullback"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sc-integral-function-field-affine-fraction",
+  "def-pc-base-change",
+  "lemma-nagata-ext-scheme-theoretically-dominant-separated",
+  "def-sfb-pencil-orbit-bundle-norm",
+  "lem-weil-pbc-invertible-pullback-tensor",
+  "lem-weil-pbc-module-tensor-symmetric-monoidal",
+  "def-sc-tensor-pullback-power-comparison",
+  "lem-weil-pbc-invertible-generating-sections-fibre",
+  "lem-weil-pbc-projective-space-functor-of-points",
+  "def-weil-pbc-morphism-to-projective-space-by-sections",
+  "def-pc-module-pullback",
+  "def-weil-pbc-generating-sections"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/modules.tex",
+  "place": "Explicit quotient-free norm argument using Tags 01CA, 01CD, 01CT, 0B8L, plus 01NE and 01RV; motivated by de Jong §3.4, printed p.606, which itself uses a quotient rather than orbit tensor norms."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Finite group actions on an integral separated relative curve are faithful on the generic fibre after removing the kernel; products of translated line bundle sections define invariant pencils compatible with base change and powers.",
+   "results": "; IsGaloisGroup.faithful, CategoryTheory.PreGaloisCategory.FiberFunctor.isPretransitive_of_isGalois, CategoryTheory.PreGaloisCategory.action_ext_of_isGalois, IsGaloisGroup.to_isFractionRing, CategoryTheory.PreGaloisCategory.toAut_surjective_isGalois_finite_family, Ideal.isPretransitive_of_isGaloisGroup, IsFractionRing.stabilizerHom_surjective, Ideal.isPretransitive_of_isGalois",
+   "date": "2026-10-22",
+   "verdict": "no match: hits do not state the effective-action/norm, interpolation, relative section-pencil, integral coordinate-avoidance, or finite-separable specialization assertion"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.IsSeparated, AlgebraicGeometry.IsIntegral",
+   "results": "; no hits",
+   "date": "2026-10-22",
+   "verdict": "no match: hits do not state the effective-action/norm, interpolation, relative section-pencil, integral coordinate-avoidance, or finite-separable specialization assertion"
+  },
+  {
+   "tool": "grep",
+   "query": "norm.*section|orbit.*bundle|tensor.*lineariz",
+   "results": "; Mathlib/AlgebraicGeometry/EllipticCurve/NormalForms.lean (Mathlib/AlgebraicGeometry)",
+   "date": "2026-10-22",
+   "verdict": "no match: hits do not state the effective-action/norm, interpolation, relative section-pencil, integral coordinate-avoidance, or finite-separable specialization assertion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An automorphism of an integral scheme over an integral base is determined by its generic fibre, and orbit tensor products of invertible sheaves have canonical equivariant norm sections.",
+   "results": "; AlgebraicGeometry.Scheme.Hom.normalizationDesc, AlgebraicGeometry.Scheme.Hom.instIsIsoToNormalizationOfIsIntegralHom, groupCohomology.exists_mul_galRestrict_of_norm_eq_one, AlgebraicGeometry.Scheme.Hom.normalizationDiagram, IsGaloisGroup.iff_isFractionRing, galRestrict, AlgebraicGeometry.Scheme.Hom.toNormalization_app_preimage, AlgebraicGeometry.Scheme.Hom.normalization.hom_ext",
+   "date": "2026-10-22",
+   "verdict": "no match: hits do not state the effective-action/norm, interpolation, relative section-pencil, integral coordinate-avoidance, or finite-separable specialization assertion"
+  },
+  {
+   "tool": "leansearch",
+   "query": "An effective finite group action on an integral scheme is faithful on its generic fibre; products of translated invertible sheaf sections induce invariant projective pencils.",
+   "results": "; IsGaloisGroup.fixedPoints, Finite.to_properlyDiscontinuousSMul, IsGalois.of_fixed_field, FaithfulVAdd, Subgroup.instFaithfulSMulSubtypeMem, MulAction.IsQuasiPreprimitive, faithfulVAdd_iff, LinearEquiv.apply_faithfulSMul",
+   "date": "2026-10-22",
+   "verdict": "no match: different objects or only component facts"
+  },
+  {
+   "tool": "grep",
+   "query": "orbit.*[Bb]undle|norm.*[Ss]ection|linearization|linearisation",
+   "results": "[grep] OK 1 hit(s)\n  {\"file\": \"Mathlib/AlgebraicGeometry/EllipticCurve/NormalForms.lean\", \"line\": \"19\", \"text\": \"The following normal forms are in [silverman2009], section III.1, page 42.\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: read returned hits; none states the combined effective generic action, orbit line-bundle linearization, invariant section-pencil and base-change/power assertions, or a one-line specialization of them."
+  },
+  {
+   "tool": "leansearch",
+   "query": "An automorphism of an integral scheme over an integral base is determined by its restriction to the generic fibre",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.instIsGermInjectiveOfIsIntegral\", \"module\": \"Mathlib.AlgebraicGeometry.SpreadingOut\", \"type\": \"[IsIntegral X] : X.IsGermInjective\", \"doc\": \"Every integral scheme is germ-injective. That is, for every point $ x $ in an integral scheme $ X $, the natural map from the local ring $ \\\\mathcal{O}_{X,x} $ to the stalk of the structure sheaf at $ \"}\n  {\"name\": \"AlgebraicGeometry.Scheme.PartialMap.fromFunctionField_restrict\", \"module\": \"Mathlib.AlgebraicGeometry.RationalMap\", \"type\": \"(f : X.PartialMap Y) [IrreducibleSpace X] {U : X.Opens} (hU : Dense (U : Set X)) (hU' : U ≤ f.domain) :\\n  (f.restrict U hU hU').fromFunctionField = f.fromFunctionField\", \"doc\": \"Let $X$ be an irreducible scheme, $Y$ be a scheme, and $f: X \\\\dashrightarrow Y$ be a rational map. Let $U$ be a dense open subset of $X$ that is contained in the domain of $f$. The morphism of schemes\"}\n  {\"name\": \"AlgebraicGeometry.IsOpenImmersion.isoRestrict\", \"module\": \"Mathlib.AlgebraicGeometry.OpenImmersion\", \"type\": \": X ≅ Z.restrict f.isOpenEmbedding\", \"doc\": \"Given an open immersion $ f: X \\\\to Y $ between schemes, this constructs an isomorphism between $ X $ and the restriction of $ Y $ to the open subset defined by the underlying open embedding $ f_{\\\\text\"}\n  {\"name\": \"AlgebraicGeometry.IsIntegralHom.hasAffineProperty\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Integral\", \"type\": \": HasAffineProperty @IsIntegralHom fun X _ f _ ↦ IsAffine X ∧ RingHom.IsIntegral (f.app ⊤).hom\", \"doc\": \"A morphism $ f: X \\to Y $ of schemes is integral if the target scheme $ Y $ is affine, the source scheme $ X $ is affine, and the induced ring homomorphism between their coordinate rings is integral (i\"}\n  {\"name\": \"AlgebraicGeometry.IsIntegralHom.instUniversallyClosed\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Integral\", \"type\": \"(f : X ⟶ Y) [IsIntegralHom f] : UniversallyClosed f\", \"doc\": \"Every integral morphism $ f: X \\to Y $ of schemes is universally closed. This instance asserts that if a morphism of schemes is integral, then it satisfies the condition that all base changes of the mo\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.instIsIsoToNormalizationOfIsIntegralHom\", \"module\": \"Mathlib.AlgebraicGeometry.Normalization\", \"type\": \"[IsIntegralHom f] : IsIso f.toNormalization\", \"doc\": \"For any integral morphism $ f: X \\to Y $ of schemes, the normalization morphism from $ X $ to the normalization of $ f $ is an isomorphism.\"}\n  {\"name\": \"AlgebraicGeometry.instIsIsoSchemeMorphismRestrict\", \"module\": \"Mathlib.AlgebraicGeometry.Restrict\", \"type\": \"{X Y : Scheme.{u}} (f : X ⟶ Y) [IsIso f] (U : Y.Opens) : IsIso (f ∣_ U)\", \"doc\": \"If $ f : X \\to Y $ is an isomorphism of schemes and $ U $ is an open subset of $ Y $, then the restriction of $ f $ to $ U $ is also an isomorphism between the corresponding open subsets of $ X $ and $\"}\n  {\"name\": \"galRestrictHom\", \"module\": \"Mathlib.RingTheory.IntegralClosure.IntegralRestrict\", \"type\": \": (L →ₐ[K] L) ≃* (B →ₐ[A] B)\", \"doc\": \"The structure defines a group isomorphism between the automorphism group of $ L $ over $ K $ and the automorphism group of the integral closure $ B $ of $ A $ in $ L $, constructed by restricting auto\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: read returned hits; none states the combined effective generic action, orbit line-bundle linearization, invariant section-pencil and base-change/power assertions, or a one-line specialization of them."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"IsSeparated\", \"IsIntegral\"",
+   "results": "[loogle] OK 1 hit(s)\n  {\"name\": \"AlgebraicGeometry.IsIntegralHom.instHasOfPostcompPropertySchemeIsSeparated\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Integral\", \"type\": \" : CategoryTheory.MorphismProperty.HasOfPostcompProperty @AlgebraicGeometry.IsIntegralHom @AlgebraicGeometry.IsSeparated\", \"doc\": \"\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: read returned hits; none states the combined effective generic action, orbit line-bundle linearization, invariant section-pencil and base-change/power assertions, or a one-line specialization of them."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finite group orbit tensor products of line bundles carry a canonical linearization fixing the tensor norm sections and defining invariant projective pencils",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"Representation.Coinvariants.mk_inv_tmul\", \"module\": \"Mathlib/RepresentationTheory/Coinvariants\", \"type\": \"∀ {k : Type u_6} {G : Type u_7} {V : Type u_8} {W : Type u_9} [inst : CommRing k] [inst_1 : Group G]\\n  [inst_2 : AddCommGroup V] [inst_3 : Module k V] [inst_4 : AddCommGroup W] [inst_5 : Module k W]\\n  (ρ : Representation k G V) (τ : Representation k G W) (x : V) (y : W) (g : G),\\n  (Representation.Co\", \"doc\": \"In the coinvariants module of the tensor product representation $\\\\rho \\\\otimes \\\\tau$, the image of $\\\\rho(g^{-1})x \\\\otimes y$ under the canonical quotient map equals the image of $x \\\\otimes \\\\tau(g)y$. T\"}\n  {\"name\": \"Representation.Coinvariants.mk_tmul_inv\", \"module\": \"Mathlib/RepresentationTheory/Coinvariants\", \"type\": \"∀ {k : Type u_6} {G : Type u_7} {V : Type u_8} {W : Type u_9} [inst : CommRing k] [inst_1 : Group G]\\n  [inst_2 : AddCommGroup V] [inst_3 : Module k V] [inst_4 : AddCommGroup W] [inst_5 : Module k W]\\n  (ρ : Representation k G V) (τ : Representation k G W) (x : V) (y : W) (g : G),\\n  (Representation.Co\", \"doc\": \"For any elements $ x \\\\in V $, $ y \\\\in W $, and $ g \\\\in G $, the coinvariants map applied to $ x \\\\otimes \\\\tau(g^{-1})y $ equals the coinvariants map applied to $ \\\\rho(g)x \\\\otimes y $ in the tensor prod\"}\n  {\"name\": \"Representation.ofCoinvariantsTprodLeftRegular_mk_tmul_single\", \"module\": \"Mathlib/RepresentationTheory/Coinvariants\", \"type\": \"∀ {k : Type u_6} {G : Type u_7} {V : Type u_8} [inst : CommRing k] [inst_1 : Group G] [inst_2 : AddCommGroup V]\\n  [inst_3 : Module k V] (ρ : Representation k G V) (x : V) (g : G) (r : k),\\n  ρ.ofCoinvariantsTprodLeftRegular\\n      ((Representation.Coinvariants.mk (ρ.tprod (Representation.leftRegular k\", \"doc\": \"Let `k` be a commutative ring, `G` a group, and `V` a `k`-module with a representation `ρ`. Let `Φ` be the canonical linear map `ofCoinvariantsTprodLeftRegular ρ` from the coinvariants module `(V ⊗_k \"}\n  {\"name\": \"Rep.finsuppToCoinvariantsTensorFree_single\", \"module\": \"Mathlib/RepresentationTheory/Coinvariants\", \"type\": \"∀ {k G : Type u} [inst : CommRing k] [inst_1 : Group G] {A : Rep k G} {α : Type u} [inst_2 : DecidableEq α] (i : α)\\n  (x : ↑A.V),\\n  (A.finsuppToCoinvariantsTensorFree α) (Finsupp.single i x) =\\n    (Representation.Coinvariants.mk (A.ρ.tprod (Representation.free k G α)))\\n      (x ⊗ₜ[k] Finsupp.single \", \"doc\": \"For a commutative ring $k$, monoid $G$, type $\\\\alpha$, and representation $A$ in $\\\\text{Rep}(k,G)$, applying the canonical $k$-linear map $\\\\text{finsuppToCoinvariantsTensorFree}$ to the finite support\"}\n  {\"name\": \"Rep.FiniteCyclicGroup.coinvariantsTensorResolutionIso_hom_f_hom_apply\", \"module\": \"Mathlib/RepresentationTheory/Homological/GroupHomology/FiniteCyclic\", \"type\": \"∀ {k G : Type u} [inst : CommRing k] [inst_1 : CommGroup G] [inst_2 : Fintype G] (A : Rep k G) (g : G)\\n  (hg : ∀ (x : G), x ∈ Subgroup.zpowers g) (i : ℕ)\\n  (a :\\n    TensorProduct k (↑A.V) (G →₀ k) ⧸\\n      (Representation.Coinvariants.ker (A.ρ.tprod (Representation.leftRegular k G))).toAddSubgroup),\\n\", \"doc\": \"For a commutative ring $ k $, finite cyclic group $ G $ generated by $ g $, and a $ k $-linear representation $ A $ of $ G $, the coinvariants of $ A $ tensor product with a projective resolution of $\"}\n  {\"name\": \"Rep.coinvariantsTensorFreeToFinsupp_mk_tmul_single\", \"module\": \"Mathlib/RepresentationTheory/Coinvariants\", \"type\": \"∀ {k G : Type u} [inst : CommRing k] [inst_1 : Group G] {A : Rep k G} {α : Type u} [inst_2 : DecidableEq α] (x : ↑A.V)\\n  (i : α) (g : G) (r : k),\\n  (A.coinvariantsTensorFreeToFinsupp α)\\n      ((Representation.Coinvariants.mk (A.ρ.tprod (Representation.free k G α)))\\n        (x ⊗ₜ[k] Finsupp.single i \", \"doc\": \"For a representation $ A $ of a monoid $ G $ over a commutative ring $ k $, index type $ \\\\alpha $, element $ x \\\\in A $, index $ i \\\\in \\\\alpha $, group element $ g \\\\in G $, and scalar $ r \\\\in k $, the l\"}\n  {\"name\": \"Representation.coinvariantsTprodLeftRegularLEquiv_symm_apply\", \"module\": \"Mathlib/RepresentationTheory/Coinvariants\", \"type\": \"∀ {k : Type u_6} {G : Type u_7} {V : Type u_8} [inst : CommRing k] [inst_1 : Group G] [inst_2 : AddCommGroup V]\\n  [inst_3 : Module k V] (ρ : Representation k G V) (a : V),\\n  ρ.coinvariantsTprodLeftRegularLEquiv.symm a =\\n    (Representation.Coinvariants.mk (ρ.tprod (Representation.leftRegular k G))) \", \"doc\": \"For a representation $\\\\rho$ of a group $G$ over a commutative ring $k$, applying the inverse of the isomorphism between the coinvariants of $\\\\rho \\\\otimes \\\\text{leftRegular}(k,G)$ and the original modu\"}\n  {\"name\": \"Representation.coinvariantsTprodLeftRegularLEquiv_apply\", \"module\": \"Mathlib/RepresentationTheory/Coinvariants\", \"type\": \"∀ {k : Type u_6} {G : Type u_7} {V : Type u_8} [inst : CommRing k] [inst_1 : Group G] [inst_2 : AddCommGroup V]\\n  [inst_3 : Module k V] (ρ : Representation k G V) (x : (ρ.tprod (Representation.leftRegular k G)).Coinvariants),\\n  ρ.coinvariantsTprodLeftRegularLEquiv x = ρ.ofCoinvariantsTprodLeftRegula\", \"doc\": \"For a representation $\\\\rho$ of a group $G$ over a commutative ring $k$, the coinvariants of the tensor product representation $\\\\rho \\\\otimes \\\\text{leftRegular}(k,G)$ are isomorphic to the original modu\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: read returned hits; none states the combined effective generic action, orbit line-bundle linearization, invariant section-pencil and base-change/power assertions, or a one-line specialization of them."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A finite group permutes tensor factors of translated invertible sheaves and the resulting norm sections commute with arbitrary base change and powers",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.Pullback.Triplet.tensorCongr_trans\", \"module\": \"Mathlib/AlgebraicGeometry/PullbackCarrier\", \"type\": \"∀ {X Y S : AlgebraicGeometry.Scheme} {f : X ⟶ S} {g : Y ⟶ S} {x y z : AlgebraicGeometry.Scheme.Pullback.Triplet f g}\\n  (e : x = y) (e' : y = z),\\n  AlgebraicGeometry.Scheme.Pullback.Triplet.tensorCongr e ≪≫ AlgebraicGeometry.Scheme.Pullback.Triplet.tensorCongr e' =\\n    AlgebraicGeometry.Scheme.Pullba\", \"doc\": \"Given schemes $X,Y,S$ with morphisms $f:X\\\\to S$ and $g:Y\\\\to S$, for any equalities $e:x=y$ and $e':y=z$ between pullback triplets, the composition of isomorphisms $\\\\text{tensorCongr}(e) \\\\circ \\\\text{te\"}\n  {\"name\": \"groupCohomology.exists_mul_galRestrict_of_norm_eq_one\", \"module\": \"Mathlib/RepresentationTheory/Homological/GroupCohomology/Hilbert90\", \"type\": \"∀ {K L : Type} [inst : Field K] [inst_1 : Field L] [inst_2 : Algebra K L] [FiniteDimensional K L]\\n  [inst_4 : IsGalois K L] [IsCyclic Gal(L/K)] {g : Gal(L/K)} {A : Type u_1} {B : Type u_2} [inst_6 : CommRing A]\\n  [inst_7 : CommRing B] [inst_8 : Algebra A B] [inst_9 : Algebra A L] [inst_10 : Algebra \", \"doc\": \"In a cyclic Galois extension $ L/K $ with generator $ g $, if an element $ \\\\eta \\\\in B $ (the integral closure of $ A $ in $ L $) satisfies $ \\\\operatorname{Norm}_{L/K}(\\\\eta) = 1 $, then there exists a \"}\n  {\"name\": \"Rep.norm_comm\", \"module\": \"Mathlib/RepresentationTheory/Rep\", \"type\": \"∀ {k G : Type u} [inst : CommRing k] [inst_1 : Group G] [inst_2 : Fintype G] {A B : Rep k G} (f : A ⟶ B),\\n  CategoryTheory.CategoryStruct.comp f B.norm = CategoryTheory.CategoryStruct.comp A.norm f\", \"doc\": \"For any morphism $ f : A \\\\to B $ between representations $ A $ and $ B $ of a finite group $ G $ over a commutative ring $ k $, the composition of $ f $ with the norm map $ \\\\mathrm{norm}_B $ equals th\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Pullback.Triplet.tensorCongr_refl\", \"module\": \"Mathlib/AlgebraicGeometry/PullbackCarrier\", \"type\": \"∀ {X Y S : AlgebraicGeometry.Scheme} {f : X ⟶ S} {g : Y ⟶ S} {x : AlgebraicGeometry.Scheme.Pullback.Triplet f g},\\n  AlgebraicGeometry.Scheme.Pullback.Triplet.tensorCongr ⋯ = CategoryTheory.Iso.refl x.tensor\", \"doc\": \"For any pullback triplet $T$ in the category of schemes, applying the tensor congruence construction to the reflexive equality $T = T$ yields the identity isomorphism on the associated tensor pushout \"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Pullback.Triplet.tensorCongr_symm\", \"module\": \"Mathlib/AlgebraicGeometry/PullbackCarrier\", \"type\": \"∀ {X Y S : AlgebraicGeometry.Scheme} {f : X ⟶ S} {g : Y ⟶ S} {x y : AlgebraicGeometry.Scheme.Pullback.Triplet f g}\\n  (e : x = y),\\n  (AlgebraicGeometry.Scheme.Pullback.Triplet.tensorCongr e).symm =\\n    AlgebraicGeometry.Scheme.Pullback.Triplet.tensorCongr ⋯\", \"doc\": \"Given schemes $X,Y,S$ with morphisms $f:X\\\\to S$ and $g:Y\\\\to S$, if two pullback triplets $T_1$ and $T_2$ are equal, then the inverse of the isomorphism between their tensor pushouts is equal to the te\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Pullback.Triplet.tensorCongr_trans_hom_assoc\", \"module\": \"Mathlib/AlgebraicGeometry/PullbackCarrier\", \"type\": \"∀ {X Y S : AlgebraicGeometry.Scheme} {f : X ⟶ S} {g : Y ⟶ S} {x y z : AlgebraicGeometry.Scheme.Pullback.Triplet f g}\\n  (e : x = y) (e' : y = z) {Z : CommRingCat} (h : z.tensor ⟶ Z),\\n  CategoryTheory.CategoryStruct.comp (AlgebraicGeometry.Scheme.Pullback.Triplet.tensorCongr e).hom\\n      (CategoryTheo\", \"doc\": \"Given schemes $X,Y,S$ with morphisms $f:X\\\\to S$ and $g:Y\\\\to S$, and three equal pullback triplets $x=y=z$, the composition of the tensor congruence homomorphisms $T_1.tensor \\\\to T_2.tensor$ and $T_2.t\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Pullback.Triplet.tensorCongr_inv\", \"module\": \"Mathlib/AlgebraicGeometry/PullbackCarrier\", \"type\": \"∀ {X Y S : AlgebraicGeometry.Scheme} {f : X ⟶ S} {g : Y ⟶ S} {x y : AlgebraicGeometry.Scheme.Pullback.Triplet f g}\\n  (e : x = y),\\n  (AlgebraicGeometry.Scheme.Pullback.Triplet.tensorCongr e).inv =\\n    (AlgebraicGeometry.Scheme.Pullback.Triplet.tensorCongr ⋯).hom\", \"doc\": \"For any two pullback triplets $x$ and $y$ with an equality $e : x = y$, the inverse of the isomorphism $\\\\text{tensorCongr}(e)$ between their tensor pushouts is equal to the isomorphism $\\\\text{tensorCo\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Pullback.Triplet.tensorCongr_trans_hom\", \"module\": \"Mathlib/AlgebraicGeometry/PullbackCarrier\", \"type\": \"∀ {X Y S : AlgebraicGeometry.Scheme} {f : X ⟶ S} {g : Y ⟶ S} {x y z : AlgebraicGeometry.Scheme.Pullback.Triplet f g}\\n  (e : x = y) (e' : y = z),\\n  CategoryTheory.CategoryStruct.comp (AlgebraicGeometry.Scheme.Pullback.Triplet.tensorCongr e).hom\\n      (AlgebraicGeometry.Scheme.Pullback.Triplet.tensorC\", \"doc\": \"Given schemes $X,Y,S$ with morphisms $f:X\\\\to S$ and $g:Y\\\\to S$, for any three pullback triplets $x,y,z$ with equalities $x=y$ and $y=z$, the composition of the isomorphisms $(T_1.tensor \\\\cong T_2.tens\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: read returned hits; none states the combined effective generic action, orbit line-bundle linearization, invariant section-pencil and base-change/power assertions, or a one-line specialization of them."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-invariant-local-curve-pencils",
+  "date": "2026-10-22",
+  "group": "O2"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong §§3.2--3.6, printed pp.605--608: finite separable constant extension, invariant Kummer cover and normalization, then rationalization of the generic marking. For a zero-dimensional base use §3.3 and a smooth covering of genus at least two. The kernel fixed-field statements are the fibre-product group construction in §3.5, rather than just the full-group invariant statement.; auxiliary de Jong §§3.3--3.4, pp.605--606: local quotient pencils and avoidance of 0,1,infinity. The zero-dimensional clause spells out the suitable-cover/pencil choice left implicit in §3.3; after a finite separable constant extension one chooses the finite separating pencil on the quotient curve. Local PDF WANTED; online publisher PDF read.; extraction of returned local-pencil proof, steps 2--3",
+   "via": [
+    "lem-sfb-invariant-local-curve-pencils",
+    "lem-sfb-high-genus-equivariant-cover",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-effective-action-norm-pencil",
+  "worker": "stage1",
+  "summary": "Kept the statement and its statement dependencies. Proved generic faithfulness using a scheme-theoretically dominant generic-point probe and the existing separated-target extensionality lemma. Constructed the linearization by right translation of tensor indices; checked its cocycle, fixed norm sections, invariant projective pencil, arbitrary-base-change compatibility without re-effectivizing the group, and tensor-power identity. All required component facts already have DAG nodes; no new nodes. Repair of returned head dfdc1ff8741: rebased the retained split onto the current live DAG, reread all cited statements, and made explicit the fibre-generation criterion in Step 6 and tensor-pullback construction in Step 8. Retained all original searches, the statement, its definitions and the proof route. Continued repair after the successful current-base dry run f1027e65dfd: corrected the degree-zero arguments in Steps 5 and 9. An arbitrary section of the zero tensor power is a global function, whose norm is the product of its translates, not necessarily the unit. Its invariance and power identity follow by permutation and multiplication in the global function ring.",
+  "blueprint": "Existing ancestry through lem-sfb-invariant-local-curve-pencils: det-thm-sf-ctf-stability-direct-images proof (3), alteration input, de Jong §3.4 local invariant pencils. This node realizes the extracted effective-action and quotient-free orbit-norm prerequisite, not a replacement of the unit route.",
+  "tool_uses": [
+   {
+    "node": "lem-sc-integral-function-field-affine-fraction",
+    "why": "Generic tool: injectivity of affine sections into the generic stalk of an arbitrary integral scheme; the current unit provides no such scheme-theoretic dominance fact."
+   },
+   {
+    "node": "lem-weil-pbc-invertible-pullback-tensor",
+    "why": "Generic tool: pullback/tensor preserve invertibility and their section formulas; it does not replace the alteration route."
+   },
+   {
+    "node": "lem-weil-pbc-module-tensor-symmetric-monoidal",
+    "why": "Generic tool: ordered factor permutations and their pure-tensor formulas, needed to calculate the linearization and norm."
+   },
+   {
+    "node": "lem-weil-pbc-projective-space-functor-of-points",
+    "why": "Generic tool: isomorphic generating line-bundle pairs define the same projective morphism, naturally under pullback."
+   },
+   {
+    "node": "lem-weil-pbc-invertible-generating-sections-fibre",
+    "why": "Generic tool: equivalence of sheaf generation with nonvanishing in every fibre, matching the exact hypothesis of the projective-space functor-of-points statement; the alteration unit supplies no such criterion."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sc-integral-function-field-affine-fraction",
+  "lem-weil-pbc-invertible-pullback-tensor",
+  "lem-weil-pbc-module-tensor-symmetric-monoidal",
+  "lem-weil-pbc-projective-space-functor-of-points",
+  "lem-weil-pbc-invertible-generating-sections-fibre"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q15-369f38589",
+  "group": "Q15",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q15-369f38589 (reviewer sub-agent of L); spot-checked: PASS with no fixes; I read all nine steps, the statement and every cited node's statement in full. There are no new nodes and no repair note, and the item is still unsplit live and side-live. Compared with the head dfdc1ff8741, which a reader PASSed before landing refused it on a side-completion promotion, the statement, stmt_deps, source and blueprint are identical. Four steps change. Steps 5 and 9 fix a real degree-zero error: with n=0 the norm is the product of the translates of a, not 1 (trivial G, a=2 gives 2). Invariance now follows by the right translation g to gh, and the power formula by ring multiplication. Step 6 now cites lem-weil-pbc-invertible-generating-sections-fibre, which turns generation into the nonvanishing hypothesis of the functor-of-points statement. Step 8 now cites def-pc-module-pullback for the local generators 1⊗e. Step checks: in Step 1, dominance gives p(ξ)=η, and injective germ maps on affines make Spec k(Y)→Y scheme-theoretically dominant. In Step 2 the separated-extensionality lemma applies with s=p separated, f=g1, g=g2 over S and ι the generic point. In Step 4 the cocycle λ_{hk}=λ_k∘k^*λ_h holds because both routes send label g to ghk. In Step 6 pullback compatibility plus Step 5 give equivalent pairs, p∘h=p fixes the S-component, and fibre-product uniqueness finishes. In Step 7 G stays the index set after base change, which the norm definition allows for a non-injective ρ. Edge cases checked: trivial G; a non-faithful J; S a field; n=0 with a=0, 2 or t; m=1; empty or non-reduced T; separatedness is needed in Step 2. Batch-5: I accept def-sc-tensor-pullback-power-comparison. It is a general definition of the pullback tensor and power comparison for any morphism of schemes, not a step of the trace-formula or Poincaré-duality proofs. Its dependency closure of 28 nodes contains no other node from those chapters, and it is already a stmt_dep of def-sfb-pencil-orbit-bundle-norm, which the item's statement cites. Searches for linearization and orbit norms found no duplicate. No SGA is cited, and proof_origin agent is correct because the local de Jong PDF is missing (WANTED). Accepted tool_uses: affine-fraction, invertible-pullback-tensor, module-tensor-symmetric-monoidal, projective-space-functor-of-points and generating-sections-fibre."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.EffectiveActionNormPencil",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.effective_action_norm_pencil",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.Modules.pencilLocalTensor",
+   "AlgebraicGeometry.Scheme.Modules.existsUnique_pencilPermutationIso",
+   "AlgebraicGeometry.Scheme.Modules.pencilPermutationIso",
+   "AlgebraicGeometry.Scheme.Modules.pencilActionPullbackIso",
+   "AlgebraicGeometry.Scheme.Modules.pencilLinearization",
+   "AlgebraicGeometry.Scheme.Modules.pencilPullbackSection",
+   "AlgebraicGeometry.Scheme.Modules.pencilPullbackPowerSection",
+   "AlgebraicGeometry.Scheme.Modules.pencilSectionPower",
+   "AlgebraicGeometry.Scheme.Modules.pencilEffectiveAction",
+   "AlgebraicGeometry.Scheme.Modules.pencilBaseChangeAction",
+   "AlgebraicGeometry.Scheme.Modules.pencilEffectiveGroupFinite",
+   "AlgebraicGeometry.Scheme.Modules.pencilOrbitBaseChangeIso",
+   "AlgebraicGeometry.Scheme.Modules.pencilActionIdentityIso",
+   "AlgebraicGeometry.Scheme.Modules.pencilActionMulIso",
+   "AlgebraicGeometry.Scheme.Modules.pencilPowerLinearization",
+   "AlgebraicGeometry.Scheme.Modules.pencilCommutingPullbackIso",
+   "AlgebraicGeometry.Scheme.Modules.pencilBaseChangeNorm",
+   "AlgebraicGeometry.Scheme.Modules.effective_action_norm_pencil"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/EffectiveActionNormPencil.lean",
+  "statement": "theorem effective_action_norm_pencil {Y S : Scheme.{u}} [IsIntegral S] [IsIntegral Y] (p : Y ⟶ S) [IsDominant p] [IsSeparated p] (J : Type v) [Group J] [Finite J] (ρ : J →* Aut (Over.mk p)) (L : Y.Modules) [L.IsInvertible] : Function.Injective (((Over.pullback S.fromSpecFunctionField).mapAut (Over.mk p)).comp ρ.range.subtype) ∧ ∃ _hB : (pencilOrbitBundle (pencilEffectiveAction ρ) L).IsInvertible, ∃ hBn : ∀ n : ℕ, ((pencilOrbitBundle (pencilEffectiveAction ρ) L).tensorPow n).IsInvertible, ((pencilLinearization (pencilEffectiveAction ρ) L 1).hom = (pencilActionIdentityIso (pencilEffectiveAction ρ) (pencilOrbitBundle (pencilEffectiveAction ρ) L)).hom) ∧ (∀ h k : ρ.range, (pencilLinearization (pencilEffectiveAction ρ) L (h * k)).hom = (pencilActionMulIso (pencilEffectiveAction ρ) (pencilOrbitBundle (pencilEffectiveAction ρ) L) h k).hom ≫ (tensorPullback (pencilEffectiveAction ρ k).hom).map (pencilLinearization (pencilEffectiveAction ρ) L h).hom ≫ (pencilLinearization (pencilEffectiveAction ρ) L k).hom) ∧ (∀ (n : ℕ) (a : (L.tensorPow n).sections) (h : ρ.range), SheafOfModules.sectionsMap (pencilPowerLinearization (pencilEffectiveAction ρ) L n h).hom (pencilPullbackSection (pencilEffectiveAction ρ h).hom ((pencilOrbitBundle (pencilEffectiveAction ρ) L).tensorPow n) (pencilNormSection (pencilEffectiveAction ρ) L n a)) = pencilNormSection (pencilEffectiveAction ρ) L n a) ∧ (∀ (n : ℕ) (a b : (L.tensorPow n).sections) (hN : Epi (((pencilOrbitBundle (pencilEffectiveAction ρ) L).tensorPow n).freeHomEquiv.symm (pencilSectionPair _ (pencilNormSection (pencilEffectiveAction ρ) L n a) (pencilNormSection (pencilEffectiveAction ρ) L n b)))) (j : J), (ρ j).hom.left ≫ pencilCoordinateMorphism p _ (hBn n) (pencilNormSection (pencilEffectiveAction ρ) L n a) (pencilNormSection (pencilEffectiveAction ρ) L n b) hN = pencilCoordinateMorphism p _ (hBn n) (pencilNormSection (pencilEffectiveAction ρ) L n a) (pencilNormSection (pencilEffectiveAction ρ) L n b) hN) ∧ (∀ (T : Scheme.{u}) (t : T ⟶ S), ∃ hBTn : ∀ n : ℕ, ((pencilOrbitBundle (pencilBaseChangeAction ρ t) ((tensorPullback (Limits.pullback.fst p t)).obj L)).tensorPow n).IsInvertible, (∀ h : ρ.range, (tensorPullback (pencilBaseChangeAction ρ t h).hom).map (pencilOrbitBaseChangeIso ρ t L).hom ≫ (pencilLinearization (pencilBaseChangeAction ρ t) ((tensorPullback (Limits.pullback.fst p t)).obj L) h).hom = (pencilCommutingPullbackIso (Limits.pullback.fst p t) (pencilEffectiveAction ρ h) (pencilBaseChangeAction ρ t h) (baseChange_morphism_projections h.val.hom (Over.mk t)).1 (pencilOrbitBundle (pencilEffectiveAction ρ) L)).hom ≫ (tensorPullback (Limits.pullback.fst p t)).map (pencilLinearization (pencilEffectiveAction ρ) L h).hom ≫ (pencilOrbitBaseChangeIso ρ t L).hom) ∧ (∀ (n : ℕ) (a : (L.tensorPow n).sections), SheafOfModules.sectionsMap (boundaryTensorPowIso (pencilOrbitBaseChangeIso ρ t L) n).hom (pencilPullbackPowerSection (Limits.pullback.fst p t) (pencilOrbitBundle (pencilEffectiveAction ρ) L) n (pencilNormSection (pencilEffectiveAction ρ) L n a)) = pencilBaseChangeNorm ρ t L n a) ∧ (∀ (n : ℕ) (a b : (L.tensorPow n).sections) (hN : Epi (((pencilOrbitBundle (pencilEffectiveAction ρ) L).tensorPow n).freeHomEquiv.symm (pencilSectionPair _ (pencilNormSection (pencilEffectiveAction ρ) L n a) (pencilNormSection (pencilEffectiveAction ρ) L n b)))), ∃ hNT : Epi (((pencilOrbitBundle (pencilBaseChangeAction ρ t) ((tensorPullback (Limits.pullback.fst p t)).obj L)).tensorPow n).freeHomEquiv.symm (pencilSectionPair _ (pencilBaseChangeNorm ρ t L n a) (pencilBaseChangeNorm ρ t L n b))), pencilCoordinateMorphism (Limits.pullback.snd p t) _ (hBTn n) (pencilBaseChangeNorm ρ t L n a) (pencilBaseChangeNorm ρ t L n b) hNT ≫ ProjectiveSpace.map (ULift.{u} (Fin 2)) t = Limits.pullback.fst p t ≫ pencilCoordinateMorphism p _ (hBn n) (pencilNormSection (pencilEffectiveAction ρ) L n a) (pencilNormSection (pencilEffectiveAction ρ) L n b) hN)) ∧ (∀ (n m : ℕ) (_hm : 1 ≤ m) (a : (L.tensorPow n).sections), pencilNormSection (pencilEffectiveAction ρ) L (n * m) (pencilSectionPower L n m a) = pencilSectionPower (pencilOrbitBundle (pencilEffectiveAction ρ) L) n m (pencilNormSection (pencilEffectiveAction ρ) L n a))",
+  "branch": "newtargets-dag",
+  "by": "Q51",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "Canonical factor permutations are uniquely specified on local pure tensors. The actual image subgroup indexes all norms, including after arbitrary base change. Both n=0 and every m>=1 are retained. All helper data are constructions; the only choice is from a uniquely determining universal property."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-2becc9b04",
+  "group": "Q51",
+  "result": "fix",
+  "note": "First S2 delivery; item fields unchanged except lean and stmt_deps (+new node, +landed def-pc-module-pullback, def-sc-tensor-pullback-power-comparison), statement verbatim. Clause-by-clause: IsIntegral S,Y, IsDominant/IsSeparated p, finite J universe v, G = ρ.range; injectivity via Over.pullback fromSpecFunctionField mapAut; linearization = pullback-composition + mulRight permutation pinned by ∃! on all opens/local pure tensors (named sorry theorem, no hollow def); identity clause and cocycle λ_{hk}=mulIso≫k^*λ_h≫λ_k checked; norm fixed for all n incl. n=0; J-invariant coordinate morphism under sheaf-Epi generation; arbitrary T→S: same ρ.range index, linearization square, norm and pencil base-change (φ_T≫ProjectiveSpace.map t = v≫φ, generation preserved); N(a^m)=N(a)^m via tensorPowMulIso for m≥1. No extra hypotheses; no H4 duplicate (rg lineariz/pencil*/normPencilTranslateBaseChangeIso); new existing:true def node owns the landed normPencilTranslateBaseChangeIso and passes check_new_node. FIX F1: new node TeX had ill-typed square β(g)∘f=f∘α(g) and ambiguous comparison direction → fixes/def-sfb-orbit-tensor-base-change-comparison.json (statement only: f∘β(g)=α(g)∘f; inverse composite comparison, equality, composite comparison, matching the Lean body). No Lean changed, no compile run."
+ }
+}

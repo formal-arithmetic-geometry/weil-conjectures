@@ -1,0 +1,287 @@
+{
+ "id": "lem-sfb-finite-field-connected-group-torsor-point",
+ "kind": "statement",
+ "title": "Lang theorem for torsors under connected groups over finite fields",
+ "statement": "Let $k$ be a finite field [def-weil-field], and let $H$ be a smooth geometrically connected affine $k$-group scheme of finite type [def-sc-group-scheme, def-sbc-smooth-morphisms, def-weil-connected-scheme, def-weil-finite-type-morphism]. Let $Y$ be a $k$-scheme [def-pc-scheme] with a right action $Y\\times_kH\\to Y$ satisfying the unit and associativity identities. Suppose that $Y\\to\\operatorname{Spec}k$ is flat and surjective and locally of finite presentation [def-weil-flat-morphism, def-sbc-locally-finite-presentation], and that $(y,h)\\mapsto(y,yh)$ is an isomorphism $Y\\times_kH\\xrightarrow{\\sim}Y\\times_kY$ [def-pc-fibre-product]. Then $Y(k)=\\operatorname{Hom}_k(\\operatorname{Spec}k,Y)$ is nonempty. Reductivity, commutativity and a chosen point of $Y$ are not hypotheses.",
+ "source": {
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Corollary 17.98 and its proof, printed p.383; Proposition 3.50, p.80 (smooth-group torsors and H^1), Definition 2.66 and Proposition 2.69, p.60. This is the torsor form used in the proof of Theorem 25.9(b), p.546."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-sc-group-scheme",
+  "def-sbc-smooth-morphisms",
+  "def-weil-connected-scheme",
+  "def-weil-finite-type-morphism",
+  "def-pc-scheme",
+  "def-weil-flat-morphism",
+  "def-sbc-locally-finite-presentation",
+  "def-pc-fibre-product"
+ ],
+ "proof": [
+  {
+   "text": "Choose an algebraic closure $K$ of $k$ [def-weil-algebraic-closure], let $f:Y\\to\\operatorname{Spec}k$ be the structure morphism and $g:\\operatorname{Spec}K\\to\\operatorname{Spec}k$ the induced morphism, and put $Y_K=Y\\times_{\\operatorname{Spec}k}\\operatorname{Spec}K$ with projections $p:Y_K\\to Y$ and $f_K:Y_K\\to\\operatorname{Spec}K$ [def-pc-fibre-product]. By [lem-weil-pbc-base-change-image] with $C=Y$, $f_K(Y_K)=g^{-1}(f(Y))$; since $f$ is surjective this is all of $\\operatorname{Spec}K$, so $Y_K$ is nonempty. The only nonempty affine open of the one-point scheme $\\operatorname{Spec}k$ is itself, so the affine opens $\\operatorname{Spec}A$ of [def-sbc-locally-finite-presentation] cover $Y$ with each $A$ a finitely presented, in particular finitely generated, $k$-algebra: $f$ is locally of finite type [def-weil-finite-type-morphism]. By [lem-weil-pbc-lft-base-change], $f_K$ is locally of finite type. Apply [lem-sc-lft-over-field-jacobson-space] to the nonempty closed subset $Y_K$ itself to obtain a closed point. By [lem-weil-pbc-closed-point-residue-field-base] its residue field is $K$. The corresponding $K$-point, composed with $p$, gives $y\\in Y(K)$.",
+   "uses": [
+    "def-weil-algebraic-closure",
+    "def-pc-fibre-product",
+    "lem-weil-pbc-base-change-image",
+    "def-sbc-locally-finite-presentation",
+    "def-weil-finite-type-morphism",
+    "lem-weil-pbc-lft-base-change",
+    "lem-sc-lft-over-field-jacobson-space",
+    "lem-weil-pbc-closed-point-residue-field-base"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Corollary 17.98 and proof, printed p.383; Proposition 3.50, p.80, and Definition 2.66, p.60: point representative of a torsor cocycle."
+   }
+  },
+  {
+   "text": "Put $q=|k|$ [def-weil-finite-field-q-elements] and $\\sigma(b)=b^q$ on $K$ [def-weil-frobenius-substitution]. For any $k$-scheme $T$ define $\\sigma(t)=t\\circ\\operatorname{Spec}(\\sigma)$ on $T(K)$ [def-weil-affine-spectrum]. Because the action is a $k$-morphism, $\\sigma(yh)=\\sigma(y)\\sigma(h)$. Evaluate the assumed torsor isomorphism on $\\operatorname{Spec}K$: the pair $(y,\\sigma(y))$ has a unique preimage $(y,a)$, so $a\\in H(K)$ and $\\sigma(y)=ya$. This uses no prior $k$-point of $Y$.",
+   "uses": [
+    "def-weil-finite-field-q-elements",
+    "def-weil-frobenius-substitution",
+    "def-weil-affine-spectrum"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Corollary 17.98 and proof, printed p.383; Proposition 3.50, p.80, and Definition 2.66, p.60: point representative of a torsor cocycle."
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-lang-finite-field-group-surjectivity] to $H$ and $a$. Its hypotheses hold: $k$ is finite, $K$ is its algebraic closure, and $H$ is affine, smooth and of finite type; geometric connectedness gives connectedness by taking the extension $k/k$. Its Frobenius action on points is exactly that of step 2, since on any coordinate $c$ precomposition sends $h(c)$ to $h(c)^q$. Obtain $g\\in H(K)$ with $g^{-1}\\sigma(g)=a$, equivalently $\\sigma(g)=ga$. Set $z=yg^{-1}$. Then, using the right action and keeping the factor order, $\\sigma(z)=ya(ga)^{-1}=yaa^{-1}g^{-1}=yg^{-1}=z$.",
+   "uses": [
+    "lem-sfb-lang-finite-field-group-surjectivity"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Corollary 17.98 and proof, printed p.383; Proposition 3.50, p.80, and Definition 2.66, p.60: point representative of a torsor cocycle."
+   }
+  },
+  {
+   "text": "Choose an affine open $U=\\operatorname{Spec}A$ of $Y$ containing the image of $z$. The one-point scheme $\\operatorname{Spec}K$ factors through this open; write its ring map as $v:A\\to K$ [def-pc-scheme, def-weil-affine-spectrum]. Equality $\\sigma(z)=z$ says $v(b)^q=v(b)$ for every $b\\in A$. By [lem-weil-unique-subfield-of-closure], clause 3 with $n=1$, the elements of $K$ satisfying this equation are exactly the image $\\iota(k)$. Corestrict $v$ to $\\iota(k)$ and compose with $\\iota^{-1}$ to obtain a $k$-algebra map $A\\to k$: its addition, multiplication and unit identities follow from those of $v$ and injectivity of $\\iota$. Taking spectra and composing with $U\\hookrightarrow Y$ gives a $k$-point of $Y$. No global affine or separated hypothesis on $Y$ was used.",
+   "uses": [
+    "def-pc-scheme",
+    "def-weil-affine-spectrum",
+    "lem-weil-unique-subfield-of-closure"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Corollary 17.98 and proof, printed p.383; Proposition 3.50, p.80, and Definition 2.66, p.60: point representative of a torsor cocycle."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-algebraic-closure",
+  "def-pc-fibre-product",
+  "lem-weil-pbc-base-change-image",
+  "def-sbc-locally-finite-presentation",
+  "def-weil-finite-type-morphism",
+  "lem-weil-pbc-lft-base-change",
+  "lem-sc-lft-over-field-jacobson-space",
+  "lem-weil-pbc-closed-point-residue-field-base",
+  "def-weil-finite-field-q-elements",
+  "def-weil-frobenius-substitution",
+  "def-weil-affine-spectrum",
+  "lem-sfb-lang-finite-field-group-surjectivity",
+  "def-pc-scheme",
+  "lem-weil-unique-subfield-of-closure"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Corollary 17.98 and proof, printed p.383; Proposition 3.50, p.80, and Definition 2.66, p.60: point representative of a torsor cocycle."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "Lang.*[Tt]heorem|langMap|[Ll]ang[Ss]teinberg|[Tt]orsor",
+   "results": "{\"t\": \"2026-10-24T07:06:13Z\", \"tool\": \"grep\", \"query\": \"Lang.*[Tt]heorem|langMap|[Ll]ang[Ss]teinberg|[Tt]orsor\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: abstract AddTorsor.nonempty assumes nonemptiness in the structure (Mathlib/Algebra/Torsor/Defs.lean:57-59), and Hilbert90.lean:107 concerns the multiplicative group of a field extension. Neither proves the connected algebraic-group torsor assertion."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Lang theorem triviality of torsors under connected smooth affine algebraic groups over finite fields",
+   "results": "{\"t\": \"2026-10-24T07:06:14Z\", \"tool\": \"leansearch\", \"query\": \"Lang theorem triviality of torsors under connected smooth affine algebraic groups over finite fields\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AddTorsor.noConfusion\", \"AddTorsor.noConfusionType\", \"AddTorsor\", \"AddTorsor.connectedSpace\", \"AddTorsor.subsingleton_iff\", \"AddTorsor.mk\", \"Algebra.IsStandardSmooth.subsingleton_h1Cotangent\", \"AffineSubspace.toAddTorsor.congr_simp\"], \"digest\": \"4ca50be42d413c49\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: abstract AddTorsor.nonempty assumes nonemptiness in the structure (Mathlib/Algebra/Torsor/Defs.lean:57-59), and Hilbert90.lean:107 concerns the multiplicative group of a field extension. Neither proves the connected algebraic-group torsor assertion."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Lang\"",
+   "results": "{\"t\": \"2026-10-24T07:06:14Z\", \"tool\": \"loogle\", \"query\": \"\\\"Lang\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"Std.Http.Header.Name.contentLanguage\", \"Lean.Language.DynamicSnapshot\", \"Lean.Language.ProcessingContext\", \"Lean.Language.Snapshot\", \"Lean.Language.SnapshotLeaf\", \"Lean.Language.SnapshotTree\", \"Lean.Language.SnapshotTreeTransform\", \"Lean.Language.Snapshot.Diagnostics\"], \"digest\": \"8dd7f3999bc4d04b\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: abstract AddTorsor.nonempty assumes nonemptiness in the structure (Mathlib/Algebra/Torsor/Defs.lean:57-59), and Hilbert90.lean:107 concerns the multiplicative group of a field extension. Neither proves the connected algebraic-group torsor assertion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Every torsor under a smooth connected algebraic group over a finite field has a rational point by Lang theorem",
+   "results": "{\"t\": \"2026-10-24T07:06:16Z\", \"tool\": \"leanfinder\", \"query\": \"Every torsor under a smooth connected algebraic group over a finite field has a rational point by Lang theorem\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"ax_grothendieck_of_locally_finite\", \"FirstOrder.Field.ACF_isSatisfiable\", \"ax_grothendieck_of_definable\", \"AddTorsor.nonempty\", \"ax_grothendieck_univ\", \"FirstOrder.ACF_models_genericPolyMapSurjOnOfInjOn_of_prime\", \"CategoryTheory.PreGaloisCategory.instIsPretransitiveCarrierObjFintypeCatOfIsConnected\", \"FunctionField.RingOfIntegers.instFintypeClassGroupSubtypeMemSubalgebraPolynomialRingOfIntegers\"], \"digest\": \"fb56630e32bbda7a\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: abstract AddTorsor.nonempty assumes nonemptiness in the structure (Mathlib/Algebra/Torsor/Defs.lean:57-59), and Hilbert90.lean:107 concerns the multiplicative group of a field extension. Neither proves the connected algebraic-group torsor assertion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Principal homogeneous spaces of connected algebraic groups over finite fields are trivial",
+   "results": "{\"t\": \"2026-10-24T07:09:06Z\", \"tool\": \"leanfinder\", \"query\": \"Principal homogeneous spaces of connected algebraic groups over finite fields are trivial\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.FintypeCat.Action.pretransitive_of_isConnected\", \"CategoryTheory.PreGaloisCategory.instIsPretransitiveCarrierObjFintypeCatOfIsConnected\", \"groupCohomology.H1ofAutOnUnitsUnique\", \"CategoryTheory.PreGaloisCategory.isPretransitive_of_surjective\", \"CategoryTheory.PreGaloisCategory.instFiniteAutOfIsConnected\", \"CategoryTheory.PreGaloisCategory.FiberFunctor.isPretransitive_of_isConnected\", \"CategoryTheory.PreGaloisCategory.IsFundamentalGroup.non_trivial\", \"CategoryTheory.PreGaloisCategory.exists_hom_from_galois_of_connected\"], \"digest\": \"6330fce7804b18bc\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: abstract AddTorsor.nonempty assumes nonemptiness in the structure (Mathlib/Algebra/Torsor/Defs.lean:57-59), and Hilbert90.lean:107 concerns the multiplicative group of a field extension. Neither proves the connected algebraic-group torsor assertion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Every torsor under a smooth connected affine group scheme over a finite field has a rational point",
+   "results": "{\"t\": \"2026-10-24T08:19:10Z\", \"tool\": \"leanfinder\", \"query\": \"Every torsor under a smooth connected affine group scheme over a finite field has a rational point\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.AffineSpace.instSurjectiveOverSchemeInferInstanceOverClass\", \"AlgebraicGeometry.AffineSpace.instLocallyOfFinitePresentationOverSchemeInferInstanceOverClassOfFinite\", \"AlgebraicGeometry.AffineSpace\", \"AlgebraicGeometry.instIsAffineOfFiniteOfDiscreteTopologyCarrierCarrierCommRingCat\", \"AlgebraicGeometry.AffineSpace.not_isIntegralHom\", \"AddTorsor.connectedSpace\", \"AlgebraicGeometry.AffineSpace.instIsAffine\", \"AlgebraicGeometry.pointsPi_surjective_of_isAffine\"], \"digest\": \"2bdac6be4532bbe1\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: affine-space properties and abstract torsor nonemptiness do not prove existence of rational points on algebraic-group torsors."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Lang\"",
+   "results": "{\"t\": \"2026-10-24T08:19:11Z\", \"tool\": \"loogle\", \"query\": \"\\\"Lang\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"Std.Http.Header.Name.contentLanguage\", \"Lean.Language.DynamicSnapshot\", \"Lean.Language.ProcessingContext\", \"Lean.Language.Snapshot\", \"Lean.Language.SnapshotLeaf\", \"Lean.Language.SnapshotTree\", \"Lean.Language.SnapshotTreeTransform\", \"Lean.Language.Snapshot.Diagnostics\"], \"digest\": \"8dd7f3999bc4d04b\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern Lean language internals, not Lang surjectivity or torsor rational points."
+  },
+  {
+   "tool": "grep",
+   "query": "Lang.*[Tt]heorem|langMap|[Ll]ang[Ss]teinberg|[Tt]orsor",
+   "results": "{\"t\": \"2026-10-24T08:21:35Z\", \"tool\": \"grep\", \"query\": \"Lang.*[Tt]heorem|langMap|[Ll]ang[Ss]teinberg|[Tt]orsor\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: affine-space properties and abstract torsor nonemptiness do not prove existence of rational points on algebraic-group torsors."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Lang theorem rational point on a principal homogeneous space of a connected algebraic group over a finite field",
+   "results": "{\"t\": \"2026-10-24T08:21:35Z\", \"tool\": \"leansearch\", \"query\": \"Lang theorem rational point on a principal homogeneous space of a connected algebraic group over a finite field\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"FixedPoints.isIntegral\", \"FiniteField.orderOf_frobeniusAlgEquivOfAlgebraic\", \"FixedPoints.toAlgAut_surjective\", \"FixedPoints.toAlgAut_bijective\", \"IsGaloisGroup.fixedPoints_eq_bot\", \"IsGaloisGroup.finite\", \"AlgebraicGeometry.IsFinite.finite_preimage_singleton\", \"FiniteField.frobeniusAlgEquivOfAlgebraic.congr_simp\"], \"digest\": \"594a3ac4a134b2d9\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: fixed subfields, Frobenius order and finite morphism fibres do not supply the group torsor assertion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Principal homogeneous spaces for connected algebraic groups over finite fields are trivial",
+   "results": "{\"t\": \"2026-10-24T08:21:37Z\", \"tool\": \"leanfinder\", \"query\": \"Principal homogeneous spaces for connected algebraic groups over finite fields are trivial\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.FintypeCat.Action.pretransitive_of_isConnected\", \"CategoryTheory.PreGaloisCategory.instIsPretransitiveCarrierObjFintypeCatOfIsConnected\", \"groupCohomology.H1ofAutOnUnitsUnique\", \"CategoryTheory.PreGaloisCategory.isPretransitive_of_surjective\", \"CategoryTheory.PreGaloisCategory.FiberFunctor.isPretransitive_of_isConnected\", \"CategoryTheory.PreGaloisCategory.instFiniteAutOfIsConnected\", \"CategoryTheory.FintypeCat.isoQuotientStabilizerOfIsConnected\", \"CategoryTheory.FintypeCat.Action.isConnected_of_transitive\"], \"digest\": \"79aff269c8a40001\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: affine-space properties and abstract torsor nonemptiness do not prove existence of rational points on algebraic-group torsors."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-field-parabolic-quotient-rational-lift",
+  "date": "2026-10-24",
+  "group": "Q108"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Haboush symmetric-power lifting for a trivial quotient representation. Supporting representation-theoretic input: Steinberg endomorphisms detect a nonzero fixed vector. Supporting Self-duality of rho section modules at characteristic-dependent weights. Supporting input: Positive-characteristic simplicity step, using irreducibility of the Steinberg induced module rather than assuming self-duality. Numerical input to the dimension comparison: Weyl dimension of the induced module. Supporting Kempf vanishing for dominant flag line bundles. Positive-characteristic Andersen–Haboush argument: trivial pushforward of M_((p^r-1)rho), before the Serre twisting calculation. Supporting input: Lemma 2.3, second assertion, and Lemma 2.1, printed pp.153--155: H^0(u,V(lambda))=K v_lambda for p-restricted dominant lambda. With roots positive in Lie(B), V(lambda)=Gamma(M_{-w0 lambda}). Supporting input: Simple-root distributions and infinitesimal subalgebra calculus. Supporting input: pinning-compatible integral-to-geometric distribution comparison, with all positive root divided powers, before simple-root generation. Integral-root-model prerequisite before the comparison: integral Chevalley construction and a positive-root coordinate chart; integral matrix-closure construction: the big cell and its Weyl translates, before identifying the special fibre. Supporting input: Integral closure atlas, exhaustion of each special fibre: exclude extra components using the generic and special identity-component big-cell dimensions. Supporting input: Lemma 3.7 (first assertion, the Iwahori--Matsumoto maximal-boundedness statement) and its application in Proposition 4.3, second paragraph, printed pp.7-8; Cartan double-coset input used to prove the maximal-boundedness prerequisite, before the torus-powers argument. Supporting input: Remark 3.5, forward implication, printed p.5: integral conjugation into a fixed maximal split torus. Only the complete-DVR case is needed here; the statement is the conjugacy input, not a Cartan factorization. Supporting input: Residue-field base case: rational conjugacy of split tori, before lifting a fixed conjugator. This is over a field and contains no complete-DVR lifting assertion. Supporting field argument, conjugacy step: Milne Theorem 25.10, rational conjugacy of the maximal containing split torus with the prescribed one. Supporting rational-conjugacy argument: Milne 25.10, passage from a rational fixed coset to an element of G(k), using 25.9(b). Supporting input to Milne 25.9(b): Corollary 17.98, in the finite-field case of 25.9(b).",
+   "via": [
+    "lem-sfb-field-parabolic-quotient-rational-lift",
+    "lem-sfb-field-maximal-split-tori-conjugacy",
+    "lem-sfb-field-split-torus-rational-containment",
+    "lem-sfb-complete-dvr-torus-cocharacter-conjugacy",
+    "lem-sfb-split-reductive-dvr-cartan-decomposition",
+    "lem-sfb-split-reductive-integral-maximal-bounded",
+    "lem-sfb-quasi-reductive-special-connectedness",
+    "lem-sfb-integral-chevalley-weyl-atlas",
+    "lem-sfb-chevalley-integral-root-model",
+    "lem-sfb-borel-kostant-distribution-comparison",
+    "lem-sfb-borel-simple-root-distribution-calculus",
+    "lem-sfb-restricted-induced-infinitesimal-invariants",
+    "lem-sfb-flag-frobenius-rho-pushforward",
+    "lem-sfb-dominant-flag-line-kempf-vanishing",
+    "lem-sfb-induced-weyl-dimension-formula",
+    "lem-sfb-steinberg-induced-module-irreducible",
+    "lem-sfb-rho-section-self-duality",
+    "lem-sfb-steinberg-endomorphism-detection",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-finite-field-connected-group-torsor-point",
+  "worker": "stage1",
+  "group": "Q33",
+  "summary": "Kept the torsor statement, correcting doubled TeX escapes only. Reused the existing Lang-surjectivity node. Gave a four-step point proof: nonempty geometric fibre and a K-point, the torsor Frobenius displacement, its explicit Lang correction with the correct factor order, and descent on one affine chart by the finite-field fixed-scalar identity. All supporting statements already exist; no new nodes. Searched the live project for attachments and ran five recorded Mathlib searches, finding no match.",
+  "blueprint": "Inherited prerequisite to det-thm-sf-ctf-stability-direct-images proof (3), via Milne 25.9(b), finite-field case, and Corollary 17.98. Read latest/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md and the unit section; neither contains another formulation of this torsor lemma. Preserve the inherited null nearest ancestor and via chain returned by blueprint_refs.py.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-base-change-image",
+    "why": "Image of a base change (Stacks 01S1 proof): surjectivity of Y over k makes the geometric fibre Y_K nonempty. Generic scheme theory; replaces the trace-formula-chapter fppf-covering node (reviewer FIX)."
+   },
+   {
+    "node": "lem-weil-pbc-lft-base-change",
+    "why": "Base change of a locally finite type morphism (Stacks 01T4) gives Y_K locally of finite type over K. Generic scheme theory; replaces the trace-formula-chapter fppf-covering node (reviewer FIX)."
+   },
+   {
+    "node": "lem-sc-lft-over-field-jacobson-space",
+    "why": "Obtain a closed point of the nonempty geometric fibre; the unit has no alternate closed-point existence input."
+   },
+   {
+    "node": "lem-weil-pbc-closed-point-residue-field-base",
+    "why": "Its algebraically closed residue-field assertion turns that closed point into a K-point; the unit has no alternate residue-field input."
+   },
+   {
+    "node": "lem-weil-unique-subfield-of-closure",
+    "why": "Use only clause 3 at n=1 to identify the Frobenius-fixed scalars with k in the final affine-chart calculation. This is a finite-field tool, not a change of geometric route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-base-change-image",
+  "lem-weil-pbc-lft-base-change",
+  "lem-sc-lft-over-field-jacobson-space",
+  "lem-weil-pbc-closed-point-residue-field-base",
+  "lem-weil-unique-subfield-of-closure"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q33-5edea5418",
+  "group": "Q33",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q33-5edea5418 (reviewer sub-agent of L); spot-checked: I read the whole item. It is a first split of an unsplit node with no new nodes, and the statement matches live verbatim. Source: Milne iAG2017 Cor. 17.97–17.98, printed p.383 (PDF pp.394–395); the proof is that argument written out on points. Step 1 (closed K-point of Y_K via Jacobson 0478 and the Nullstellensatz node) is correct. Step 2 (σ(y)=y·a from the torsor isomorphism on K-points) is elementary and correct. Step 3: all hypotheses of the Lang node hold, since geometrically connected gives connected with k'=k; its coordinate Frobenius equals precomposition with Spec σ; σ(y·g⁻¹)=y·a·a⁻¹·g⁻¹ keeps the right factor order. Step 4: σ∘v=v on an affine chart, so the values lie in ι(k) by clause 3 (n=1) of unique-subfield; ι⁻¹∘v gives a k-point; Y need not be affine. Small cases checked: trivial H, G_m (Hilbert 90), and constant Z/2 with Y=Spec F_{q²}, which is excluded by connectedness. FIX (step 1 only): replaced the new sec-trace-formula citation lem-trf-fppf-covering-base-change with lem-weil-pbc-base-change-image (f surjective, so Y_K is nonempty) and lem-weil-pbc-lft-base-change (lfp over a field implies lft by definition). I updated proof_deps and tool_uses; flatness is no longer used, and the statement is unchanged. After the fix, the closure of the non-Lang citations contains no trf, PD or nt node. Batch-5 flag 2, the Lang surjectivity node: it is the essential input and outside both assumptions; its closure reaches only lem-trf-smooth-at-point-fibre-criterion (Stacks 01V9) and two affine smoothness helpers. These are generic smoothness algebra, not steps of the trace-formula or PD proofs, so I accept the flag. Fixed file: fixes/dag/nodes/sec-six-functors-basics/lem-sfb-finite-field-connected-group-torsor-point.json.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.FiniteFieldConnectedGroupTorsorPoint",
+  "declaration": "AlgebraicGeometry.finiteField_connectedGroup_torsor_nonempty",
+  "file": "lean/Sheaf/AlgebraicGeometry/FiniteFieldConnectedGroupTorsorPoint.lean",
+  "statement": "theorem finiteField_connectedGroup_torsor_nonempty (k : Type u) [Field k] [Finite k] (H : Over (Spec (.of k))) [GrpObj H] [IsAffine H.left] [Smooth H.hom] [GeometricallyConnected H.hom] [LocallyOfFiniteType H.hom] [QuasiCompact H.hom] (Y : Over (Spec (.of k))) [Flat Y.hom] [Surjective Y.hom] [LocallyOfFinitePresentation Y.hom] (act : Y ⊗ H ⟶ Y) (unit : lift (𝟙 Y) (toUnit Y ≫ MonObj.one (X := H)) ≫ act = 𝟙 Y) (assoc : (act ▷ H) ≫ act = (α_ Y H H).hom ≫ (Y ◁ MonObj.mul (X := H)) ≫ act) [IsIso (lift (fst Y H) act)] : Nonempty (Over.mk (𝟙 (Spec (.of k))) ⟶ Y)",
+  "branch": "newtargets-dag",
+  "by": "N8",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-a4f9807d4",
+  "group": "N8",
+  "result": "pass",
+  "note": "Statement checked clause by clause against node (Milne iAG Cor. 17.98 p.383): k finite field; GrpObj H over Spec k with IsAffine, Smooth, GeometricallyConnected (Mathlib: ConnectedSpace of every field base change, includes nonemptiness), LocallyOfFiniteType+QuasiCompact = finite type per dep record; Y flat/surjective/lfp over k; act : Y ⊗ H ⟶ Y in Over (Spec k), with Y ⊗ H = pullback Y.hom H.hom (global instance AlgebraicGeometry/Pullbacks.lean:712, Over.tensorObj_left rfl); unit lift (𝟙 Y)(toUnit ≫ η) ≫ act = 𝟙; assoc (act ▷ H) ≫ act = α ≫ (Y ◁ μ) ≫ act, right-action order correct; IsIso (lift (fst Y H) act) is (y,h)↦(y,yh); conclusion Nonempty (Over.mk (𝟙 Spec k) ⟶ Y) = Y(k). No extra hypothesis (no reductivity, commutativity, basepoint, affine/separated Y), no universe restriction beyond the forced common u; same convention as landed commutative_torsor_positive_weight. Edge cases: Y empty excluded by surjectivity; trivial and noncommutative H; disconnected groups excluded; all characteristics. No duplicate in Sheaf/WeilConjectures/Mathlib (Frobenius vector-bundle Lang files are GL_n only). Only the item lean field differs from live; 9 dep records identical; statement verbatim; source/blueprint docstrings and four-step proof plan present; no defs; proof sorry only. Not recompiled (no file changed)."
+ }
+}

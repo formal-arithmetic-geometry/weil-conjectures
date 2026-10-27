@@ -1,0 +1,113 @@
+{
+ "id": "lem-sfb-real-smooth-differentiation",
+ "kind": "statement",
+ "title": "Smooth real differentiation rules",
+ "statement": "Use $\\mathbf R,\\mathbf C$ [def-weil-field]. Let $E,F,G$ be finite-dimensional normed real vector spaces (finite-dimensional means spanned by finitely many vectors). On open subsets, smooth means $C^\\infty$ in real coordinates and $Df$ is the real Frechet differential, a continuous real-linear map. Constants and continuous real-linear maps are smooth, with differentials zero and the map itself. Sums and compositions of smooth maps are smooth; products of smooth maps into $\\mathbf R$ or $\\mathbf C$ are smooth. A smooth map is differentiable, and its differential, as a map into continuous real-linear maps, is smooth. At points where the indicated differentials exist,\n$$D(f+g)=Df+Dg,\\qquad D(uv)(x)[v_0]=u(x)Dv(x)[v_0]+v(x)Du(x)[v_0],\\qquad D(g\\circ f)(x)=Dg(f(x))\\circ Df(x).$$\nIn the product formula $u,v$ are scalar-valued and $v_0\\in E$. The real function $t\\mapsto\\log t$ is smooth at every $t>0$ and has derivative $t^{-1}$ there.",
+ "source": {
+  "document": "Mathlib/Analysis/Calculus/ContDiff/Comp.lean",
+  "place": "ContDiffAt.comp:223; ContDiffAt.fderiv_right:724. Further clause signatures: ContDiff/Basic.lean contDiffAt_const:111, ContinuousLinearMap.contDiff:161; ContDiff/Operations.lean ContDiffAt.add:184, ContDiffAt.mul:450; ContDiff/Defs.lean ContDiffAt.differentiableAt:998; FDeriv/Const.lean hasFDerivAt_const:114; FDeriv/Linear.lean ContinuousLinearMap.hasFDerivAt:57; FDeriv/Add.lean HasFDerivAt.add:208; FDeriv/Mul.lean HasFDerivAt.mul:205; FDeriv/Comp.lean HasFDerivAt.comp:105; Analysis/SpecialFunctions/Log/Deriv.lean Real.hasDerivAt_log:52, Real.contDiffAt_log:74. All paths under Mathlib/Analysis/Calculus/ unless otherwise indicated."
+ },
+ "stmt_deps": [
+  "def-weil-field"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Smooth real functions obey sum product chain rules and have smooth Frechet derivatives and real logarithm is smooth on positive reals",
+   "results": "8 hits: ContDiff.log, ContDiffAt.log, ContDiffOn.log, ContDiffWithinAt.log, Real.contDiffOn_log, Real.contDiffAt_log, Differentiable.log, Real.differentiableOn_mul_log",
+   "date": "2026-10-24",
+   "verdict": "match: source signatures read; the declarations listed in mathlib_match supply precisely the clauses, over the stated scalar fields"
+  },
+  {
+   "tool": "loogle",
+   "query": "Real.hasDerivAt_log",
+   "results": "1 hits: Real.hasDerivAt_log",
+   "date": "2026-10-24",
+   "verdict": "match: source signatures read; the declarations listed in mathlib_match supply precisely the clauses, over the stated scalar fields"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Smoothness of products sums compositions derivatives and logarithms of nonzero smooth real functions",
+   "results": "8 hits: ContDiffOn.log, ContMDiff.prod, contMDiff_finset_prod', logDeriv_prod, logDeriv_mul, contMDiff_finset_prod, ContDiff.smul, ContDiffAt.log",
+   "date": "2026-10-24",
+   "verdict": "match: source signatures read; the declarations listed in mathlib_match supply precisely the clauses, over the stated scalar fields"
+  },
+  {
+   "tool": "loogle",
+   "query": "ContDiffAt, fderiv",
+   "results": "12 hits: ContDiffAt.hasStrictFDerivAt, ContDiffAt.exists_lipschitzOnWith_of_nnnorm_lt, ContDiffAt.continuousAt_fderiv, ContDiffAt.fderiv_right_succ, ContDiffAt.fderiv_right, ContDiffAt.fderiv_succ, ContDiffAt.fderiv, extDeriv_pullback",
+   "date": "2026-10-24",
+   "verdict": "match: source signatures read; the declarations listed in mathlib_match supply precisely the clauses, over the stated scalar fields"
+  },
+  {
+   "tool": "grep",
+   "query": "theorem ContDiffAt.(add|mul|comp|fderiv_right)|theorem HasFDerivAt.(add|mul|comp)|theorem contDiffAt_log|theorem hasDerivAt_log",
+   "results": "25 hits: Mathlib/Analysis/SpecialFunctions/Log/Deriv.lean, Mathlib/Analysis/SpecialFunctions/Log/Deriv.lean, Mathlib/Analysis/SpecialFunctions/Log/InvLog.lean, Mathlib/Analysis/Calculus/ContDiff/Comp.lean, Mathlib/Analysis/Calculus/ContDiff/Comp.lean, Mathlib/Analysis/Calculus/ContDiff/Comp.lean, Mathlib/Analysis/Calculus/ContDiff/Comp.lean, Mathlib/Analysis/Calculus/ContDiff/Comp.lean. Subdirectory: Analysis",
+   "date": "2026-10-24",
+   "verdict": "match: source signatures read; the declarations listed in mathlib_match supply precisely the clauses, over the stated scalar fields"
+  },
+  {
+   "tool": "grep",
+   "query": "theorem ContDiffAt.fderiv_right|theorem ContDiffAt.isSymmSndFDerivAt|theorem IsSymmSndFDerivAt.eq|theorem ContinuousLinearMap.contDiff|theorem ContinuousLinearMap.hasFDerivAt",
+   "results": "6 hits: Mathlib/Analysis/Calculus/ContDiff/Basic.lean, Mathlib/Analysis/Calculus/ContDiff/Comp.lean, Mathlib/Analysis/Calculus/ContDiff/Comp.lean, Mathlib/Analysis/Calculus/FDeriv/Bilinear.lean, Mathlib/Analysis/Calculus/FDeriv/Symmetric.lean, Mathlib/Analysis/Calculus/FDeriv/Symmetric.lean. Subdirectory: Analysis/Calculus",
+   "date": "2026-10-24",
+   "verdict": "match: source signatures read; the declarations listed in mathlib_match supply precisely the clauses, over the stated scalar fields"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "contDiffAt_const, ContinuousLinearMap.contDiff, hasFDerivAt_const, ContinuousLinearMap.hasFDerivAt, ContDiffAt.add, ContDiffAt.mul, ContDiffAt.comp, ContDiffAt.differentiableAt, ContDiffAt.fderiv_right, HasFDerivAt.add, HasFDerivAt.mul, HasFDerivAt.comp, Real.hasDerivAt_log, Real.contDiffAt_log",
+  "file": "Mathlib/Analysis/Calculus/ContDiff/Comp.lean",
+  "line": 223,
+  "how": "One declaration per clause, specialized to real scalars and smoothness infinity: contDiffAt_const (ContDiff/Basic.lean:111), ContinuousLinearMap.contDiff (same:161), hasFDerivAt_const (FDeriv/Const.lean:114), ContinuousLinearMap.hasFDerivAt (FDeriv/Linear.lean:57), ContDiffAt.add (ContDiff/Operations.lean:184), ContDiffAt.mul (same:450, scalar target R or C), ContDiffAt.comp (ContDiff/Comp.lean:223), ContDiffAt.differentiableAt (ContDiff/Defs.lean:998, infinity is nonzero), ContDiffAt.fderiv_right (ContDiff/Comp.lean:724, infinity+1 <= infinity), HasFDerivAt.add (FDeriv/Add.lean:208), HasFDerivAt.mul (FDeriv/Mul.lean:205, evaluate on v_0), HasFDerivAt.comp (FDeriv/Comp.lean:105), Real.hasDerivAt_log and Real.contDiffAt_log (Mathlib/Analysis/SpecialFunctions/Log/Deriv.lean:52,74, positivity implies nonzero). Other paths are under Mathlib/Analysis/Calculus/. All signatures read. Statements are local on open domains, so use the pointwise variants after restricting to a neighbourhood."
+ },
+ "status": "mathlib",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-local-ddbar-potential-calculus",
+  "date": "2026-10-24",
+  "group": "NZ"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), supporting GAGA input in the Kodaira/Kempf prerequisite chain; Analytic structure-sheaf vanishing on projective space. Supporting input: Compact projective complex geometry and its Fubini--Study metric. Supporting input: coordinate-invariant complex Hessian calculus underlying the local Fubini–Study potentials in Demailly VI §4 (4.4). Supporting calculus input: Smooth real differentiation rules.",
+   "via": [
+    "lem-sfb-local-ddbar-potential-calculus",
+    "lem-sfb-analytic-projective-kahler-geometry",
+    "lem-sfb-analytic-projective-structure-cohomology",
+    "lem-sfb-gaga-derived-coherent-sections",
+    "lem-sfb-algebraic-dolbeault-derivative-comparison",
+    "lem-sfb-hodge-first-differential-zero",
+    "lem-sfb-kollar-smooth-divisor-injectivity",
+    "lem-sfb-kodaira-vanishing",
+    "lem-sfb-dominant-flag-line-kempf-vanishing",
+    "lem-sfb-induced-weyl-dimension-formula",
+    "lem-sfb-steinberg-induced-module-irreducible",
+    "lem-sfb-rho-section-self-duality",
+    "lem-sfb-steinberg-endomorphism-detection",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ }
+}

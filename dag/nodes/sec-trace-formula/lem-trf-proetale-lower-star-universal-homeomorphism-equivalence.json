@@ -1,0 +1,184 @@
+{
+ "id": "lem-trf-proetale-lower-star-universal-homeomorphism-equivalence",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "i-topology",
+   "place": "topological invariance of the topos used for D^b_ctf (sk-i-topology), here for A-valued pro-etale sheaves (upstream declaration AlgebraicGeometry.ProEtale.isEquivalence_lowerStar_of_isUniversalHomeomorphism, recorded by the 2026-10-22 maintainer audit of upstream sorries without a DAG node)",
+   "via": []
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Pro-étale direct image along a universal homeomorphism is an equivalence (abelian-valued sheaves)",
+ "statement": "Let $r\\colon X\\to Y$ be a universal homeomorphism of schemes [def-weil-universal-homeomorphism] and $\\mathcal A$ a Grothendieck abelian category [def-sp-grothendieck-abelian]. Then the direct image $r_*\\colon\\operatorname{Sh}(X_{\\mathrm{pro\\acute et}},\\mathcal A)\\to\\operatorname{Sh}(Y_{\\mathrm{pro\\acute et}},\\mathcal A)$ between the categories of $\\mathcal A$-valued sheaves on the small pro-étale sites [def-weil-pbc-proetale-site], given by restriction along the base change $V\\mapsto V\\times_YX$ [def-weil-proetale-inverse-image], is an equivalence of categories.",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-trace-formula/sk-i-topology/i-topology.md",
+  "place": "i-topology: topological invariance of the topos used for D^b_ctf (sk-i-topology), here for A-valued pro-etale sheaves; Lean: upstream file lean/WeilConjectures/SixFunctors/ProEtale/FiniteCoefficient/UpperLowerStar/TopInvariance.lean, declaration AlgebraicGeometry.ProEtale.isEquivalence_lowerStar_of_isUniversalHomeomorphism (module WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.UpperLowerStar.TopInvariance, lines 55-56, proof `sorry`)"
+ },
+ "stmt_deps": [
+  "def-weil-universal-homeomorphism",
+  "def-weil-pbc-proetale-site",
+  "def-weil-proetale-inverse-image",
+  "def-sp-grothendieck-abelian"
+ ],
+ "proof": [
+  {
+   "text": "Work in the compatible small models and coefficient universe of the pro-etale site. Put $C=Y_{\\mathrm{proet}}$, $D=X_{\\mathrm{proet}}$ and $u=u_r:C\\to D$. Both sites have finite limits: the identity of $Y$ (resp. $X$) is a final object, and for maps $V_1\\to V\\leftarrow V_2$ of the site the fibre product $V_1\\times_VV_2\\to V_2$ is weakly etale by base change and its composite with $V_2\\to Y$ is weakly etale by composition [lem-weil-pbc-weakly-etale-composition-base-change], so the chosen fibre product of the size convention is an object of the site and is the fibre product there. The inverse-image definition states that $u$ preserves the final object, fibre products and coverings; preservation of finite limits follows by constructing products as fibre products over the final object and equalizers as pullbacks of diagonals. The pro-etale subcanonicality lemma supplies that every representable on each site is a sheaf. Thus these are subcanonical sites and $u$ has exactly the continuity and finite-limit hypotheses of the coefficient-lifting lemma.",
+   "uses": [
+    "def-weil-proetale-inverse-image",
+    "lem-weil-pbc-proetale-subcanonical",
+    "lem-weil-pbc-weakly-etale-composition-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 09A5, functoriality; Tag 098Z, lemma-proetale-subcanonical"
+   }
+  },
+  {
+   "text": "The existing set-valued topological-invariance theorem applies to the given universal homeomorphism $r$ without a finiteness or noetherian hypothesis. Its direct-image equivalence is precisely $R_{\\mathrm{set}}(H)=H\\circ u^{\\mathrm{op}}$, by the direct-image formula. Separately, completeness of a Grothendieck abelian category gives all limits indexed by categories small in the coefficient universe. Here, as in the upstream declaration, whose $\\mathcal A$ has its Hom sets and its Grothendieck structure in the universe of the set-valued sheaves, $\\mathcal A$ is Grothendieck relative to the coefficient universe $\\mathcal V$ of the pro-etale site, so its Hom sets lie in that universe; hence $\\mathcal A$ satisfies the locally small and complete hypotheses of the coefficient-lifting lemma. These limits include the small section-indexed diagrams, not limits over the whole category of sheaves.",
+   "uses": [
+    "lem-trf-proetale-topological-invariance-direct-image",
+    "def-weil-proetale-inverse-image",
+    "lem-coef-grothendieck-small-limits"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 09AB, lemma-thickening; completeness supplied by Mathlib GrothendieckCategory/Basic.lean:102-104"
+   }
+  },
+  {
+   "text": "Apply the complete-valued sheaf equivalence-lifting lemma to $u$ and $\\mathcal A$ using steps 1 and 2. It gives an equivalence for the actual restriction functor $R_{\\mathcal A}$. For every $\\mathcal A$-valued sheaf $G$ and object $V\\to Y$ its value is $G(u(V))=G(V\\times_YX)$, and on arrows and natural transformations it is the same precomposition. This is exactly the direct image $r_*$ specified in the statement, so that direct image is an equivalence.",
+   "uses": [
+    "lem-trf-complete-valued-sheaf-equivalence-lift"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Tag 00VR, Hom-test definition; agent coefficient-lifting argument isolated in the cited node"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-proetale-inverse-image",
+  "lem-weil-pbc-proetale-subcanonical",
+  "lem-weil-pbc-weakly-etale-composition-base-change",
+  "lem-trf-proetale-topological-invariance-direct-image",
+  "lem-coef-grothendieck-small-limits",
+  "lem-trf-complete-valued-sheaf-equivalence-lift"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Tag 09AB (lemma-thickening), reusing the existing set-valued theorem; coefficient upgrade by the Hom-test of sites.tex Tag 00VR and a separately stated generic lemma"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "universal homeomorphism induces an equivalence of sheaf categories on the site",
+   "results": "TopCat.Presheaf.presheafEquivOfIso (Mathlib.Topology.Sheaves.Presheaf), Equivalence.sheafCongr (Mathlib.CategoryTheory.Sites.Equivalence), Functor.sheafInducedTopologyEquivOfIsCoverDense: generic site equivalences, no universal homeomorphism",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"UniversallyHomeomorph\"",
+   "results": "none",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rlE 'UniversallyHomeomorph|IsUniversalHomeomorphism' lean/.lake/packages/mathlib/Mathlib/",
+   "results": "none",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Direct image along a universal homeomorphism is an equivalence for pro etale sheaves valued in a Grothendieck abelian category",
+   "results": "8 hits; AlgebraicGeometry.Scheme.Etale.forgetFullyFaithful, CategoryTheory.Functor.IsDenseSubsite.instIsEquivalenceSheafSheafPushforwardContinuous, AlgebraicGeometry.Scheme.etaleTopology, CategoryTheory.Equivalence.sheafCongr, AlgebraicGeometry.Scheme.smallEtaleTopology, AlgebraicGeometry.Scheme.Etale.forget, CategoryTheory.Equivalence.transportIsoSheafToPresheaf, CategoryTheory.Equivalence.sheafCongr.functor. Read Sites/Equivalence.lean:109-143 and DenseSubsite/SheafEquiv.lean:37-40,107-108: these require an equivalence of underlying categories or a dense-subsite hypothesis, not merely an equivalence of set-sheaf categories. Coherent comparison results have additional coherence hypotheses.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Universal homeomorphisms induce equivalent categories of proetale sheaves with arbitrary abelian coefficients",
+   "results": "8 hits; TopCat.Presheaf.presheafEquivOfIso, TopCat.Presheaf.presheafEquivOfIso_functor_obj_map, TopCat.Presheaf.presheafEquivOfIso_functor_map_app, TopCat.Presheaf.pullbackInvIsoPushforwardHom, CategoryTheory.Equivalence.precoherent_isSheaf_iff, CategoryTheory.Equivalence.sheafCongr.functor, CategoryTheory.Equivalence.sheafCongr, CategoryTheory.Equivalence.sheafCongrPrecoherent_functor_obj_val_obj. Read Sites/Equivalence.lean:109-143 and DenseSubsite/SheafEquiv.lean:37-40,107-108: these require an equivalence of underlying categories or a dense-subsite hypothesis, not merely an equivalence of set-sheaf categories. Coherent comparison results have additional coherence hypotheses.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "isEquivalence.*(lowerStar|sheafPushforward)|[Uu]niversal[Hh]omeomorph",
+   "results": "0 hits; . Read Sites/Equivalence.lean:109-143 and DenseSubsite/SheafEquiv.lean:37-40,107-108: these require an equivalence of underlying categories or a dense-subsite hypothesis, not merely an equivalence of set-sheaf categories. Coherent comparison results have additional coherence hypotheses.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "maintainer",
+  "item": null,
+  "date": "2026-10-22",
+  "why": "upstream sorried declaration without a DAG node (maintainer audit of dag/lean_audit.json, the human's order 2026-10-22: every sorried upstream declaration gets a node whether or not a target needs it); no sorry-free SHEAF declaration states it; recorded so that stage 1 splits it when a target reaches it"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "sorry_here",
+   "decls": [
+    {
+     "name": "AlgebraicGeometry.ProEtale.isEquivalence_lowerStar_of_isUniversalHomeomorphism",
+     "module": "WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.UpperLowerStar.TopInvariance",
+     "lines": [
+      55,
+      56
+     ],
+     "kind": "theorem",
+     "sorry": true
+    }
+   ],
+   "missing": []
+  }
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-topology",
+ "lean": {
+  "existing": true,
+  "module": "WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.UpperLowerStar.TopInvariance",
+  "file": "lean/WeilConjectures/SixFunctors/ProEtale/FiniteCoefficient/UpperLowerStar/TopInvariance.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.isEquivalence_lowerStar_of_isUniversalHomeomorphism",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.isEquivalence_lowerStar_of_isUniversalHomeomorphism"
+  ],
+  "statement": "theorem isEquivalence_lowerStar_of_isUniversalHomeomorphism : ((r)_*[A]).IsEquivalence :=\n  sorry",
+  "branch": "slopmaster2",
+  "by": "maintainer",
+  "date": "2026-10-22",
+  "note": "upstream declaration (verbatim in live), proof still `sorry`; no node recorded it before 2026-10-22; lem-trf-proetale-topological-invariance (worker node, Lean Scheme.proEtaleSheaf_topological_invariance on newtargets-dag) states the form for sheaves of sets; consumed in the same upstream file by isEquivalence_upperStar_of_isUniversalHomeomorphism (no DAG node records it)"
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-trf-proetale-lower-star-universal-homeomorphism-equivalence",
+  "worker": "stage1",
+  "summary": "Reused the existing geometric set-sheaf direct-image equivalence and Mathlib completeness of Grothendieck abelian categories; isolated one generic complete-valued sheaf equivalence-lifting lemma. No claim that all weakly etale site objects are equivalent is used. Added the missing Grothendieck-abelian definition citation without changing hypotheses or conclusion.",
+  "blueprint": "Realizes the first paragraph of current sk-i-topology's proof, the equivalence on sheaves before its derived-category argument, in the pro-etale coefficient category of the upstream declaration; no derived or constructibility assertion is changed."
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q69-c6ff71cd2",
+  "group": "Q69",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q69-c6ff71cd2 (reviewer sub-agent of L); spot-checked: Read the item, the new node lem-trf-complete-valued-sheaf-equivalence-lift, every cited statement, the upstream TopInvariance.lean:40-56, blueprint i-topology (master, main-20261015, latest), and Stacks 09AB, 098Z, 00VR and 04D3. The item's statement matches the upstream declaration (any universal homeomorphism, any Grothendieck abelian A, r_* = restriction along V↦V×_Y X). The only change is the added def-sp-grothendieck-abelian, which is correct. The new node is true: the left adjoint L of R_set sends h_c to h_{u(c)} by subcanonicity and Yoneda, and R_A is precomposition with L under Sh(C,A) ≃ limit-preserving functors Sh(C)^op→A. I tested it with u=id, A=Sets, A=Ab, the terminal A and the empty scheme. It is generic category theory, not a restatement of the item, and has no duplicate in the DAG (the dense-subsite and ring-object lifting nodes are different). FIX, two edits: (1) C1/E1: step 1 showed that u preserves finite limits but not that the two sites have them. I added that the identity is final and that fibre products stay in the site by weakly étale base change and composition, citing lem-weil-pbc-weakly-etale-composition-base-change in uses and proof_deps. (2) Step 2 silently read A as Grothendieck relative to the site's coefficient universe V. I made this explicit, matching the upstream .{u+1}; the statement is unchanged. Batch-5: the closure of lem-trf-proetale-topological-invariance-direct-image holds only the six sk-i-topology invariance nodes and reaches no trace-formula, Poincaré-duality or nt-* node. It is the general topos invariance of Stacks 09AB, which neither assumption gives, so I accept it as generic. The new lemma is pure category theory and is also accepted. No tool_uses are needed. Maintainer note: the new node has blueprint.from.node=null because the item has created.item=null; the natural ancestor is i-topology.; 1 file(s) fixed by the reviewer"
+ }
+}

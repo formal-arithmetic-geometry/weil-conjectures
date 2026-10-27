@@ -1,0 +1,268 @@
+{
+ "id": "lem-pod-specified-hom-scalar-evaluation",
+ "kind": "statement",
+ "title": "Specified completed scalar Hom comparison via evaluation on arbitrary schemes",
+ "statement": "Fix a prime $\\ell$, finite extensions $E\\subset L$ of $\\mathbf Q_\\ell$ inside a fixed algebraic closure, their valuation rings and uniformizers $t=\\varpi_E$, $v=\\varpi_L$ [def-weil-l-adic-coefficient-extension]. Let $W$ be any scheme on which $\\ell$ is invertible [def-weil-scheme-morphism-properties]. On its small pro-etale site [def-weil-pbc-proetale-site] put $R=\\widehat{\\mathcal O}_{E,W}$ and $S=\\widehat{\\mathcal O}_{L,W}$ [def-weil-completed-integral-coefficients]. Let $T=-\\otimes_R^{\\mathbf L}S$ be ordinary derived scalar extension [lem-pur-derived-change-of-rings], $C=C_{L/E}$ the specified strict-quotient-tower integral scalar extension [def-weil-integral-scalar-extension], and $H_R,H_S$ ambient derived internal Hom [def-pur-derived-internal-hom]. Take $M,N\\in D^b_c(W,\\mathcal O_E)$ such that $H_R(M,N)\\in D^b_c(W,\\mathcal O_E)$ [def-weil-derived-complete-integral-detailed]. For $Z=M,N,H_R(M,N)$ use precisely the quotient-augmentation comparison $\\chi_Z:TZ\\xrightarrow{\\sim}CZ$ of [lem-weil-finite-free-completed-scalar-comparison]. Let $\\gamma_{M,N}:TH_R(M,N)\\xrightarrow{\\sim}H_S(TM,TN)$ be the ordinary evaluation-transpose map [lem-sf-ringed-finite-free-hom-base-change].\n\nThe specified Hom operation comparison $\\theta^{\\mathcal Hom}_{L/E;M,N}:CH_R(M,N)\\xrightarrow{\\sim}H_S(CM,CN)$ of [lem-pur-integral-operations-scalar-extension], used by [def-weil-derived-pullback-tensor-hom], satisfies the equality of actual derived morphisms\n$$\\theta^{\\mathcal Hom}_{L/E;M,N}\\circ\\chi_{H_R(M,N)}=H_S(\\chi_M^{-1},\\chi_N)\\circ\\gamma_{M,N}.$$\nHere specified means the following chain-Hom construction, with its fixed localized resolution augmentations, not an arbitrary natural isomorphism with tower laws. Choose a flat-term K-flat representative $P\\to M$, a K-injective representative $I$ of $N$, and a flat-term K-flat resolution $q:Q\\to\\mathcal Hom_R^\\bullet(P,I)$ [lem-pc-kflat-resolution, prop-pur-kinjective-resolutions-exist]. With the fixed augmentation $j:I\\otimes_RS\\to J=I_S(I\\otimes_RS)$, its ordinary chain map is\n$$Q\\otimes_RS\\longrightarrow\\mathcal Hom_S^\\bullet(P\\otimes_RS,J),\\qquad x\\otimes s\\longmapsto\\bigl(m\\otimes b\\longmapsto j(q(x)(m)\\otimes sb)\\bigr).$$\nIt is followed and conjugated by precisely the input and output quotient completion maps $\\chi$, including their zero shifted-product coordinates. Hom differential and evaluation use [def-pur-hom-complex, def-coef-ringed-tensor-hom-model, def-coef-hom-representative-evaluation]. This construction is independent of representatives through the canonical localized resolution comparisons and equals the specified operation comparison. Equivalently, after $\\chi$ identifications its tensor-Hom transpose is $TM\\otimes_S^{\\mathbf L}TH_R(M,N)\\cong T(M\\otimes_R^{\\mathbf L}H_R(M,N))\\xrightarrow{T(\\operatorname{ev})}TN$.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-poincare-duality/sk-lem-finite/prop-pod-dual-tate-data-compatibility.proof.md",
+  "place": "prop-pod-dual-tate-data-compatibility, proof Step 5: the specified coefficient comparisons are built from evaluation and tensor maps. Agent-formulated arbitrary-scheme normalization bridge, exposing the coefficient construction; underlying derived adjunction: Stacks Tag 08J9, sites-cohomology.tex, label lemma-internal-hom. The completed comparison identification is not stated verbatim in Stacks."
+ },
+ "stmt_deps": [
+  "def-weil-l-adic-coefficient-extension",
+  "def-weil-scheme-morphism-properties",
+  "def-weil-pbc-proetale-site",
+  "def-weil-completed-integral-coefficients",
+  "lem-pur-derived-change-of-rings",
+  "def-weil-integral-scalar-extension",
+  "def-pur-derived-internal-hom",
+  "def-weil-derived-complete-integral-detailed",
+  "lem-weil-finite-free-completed-scalar-comparison",
+  "lem-sf-ringed-finite-free-hom-base-change",
+  "lem-pur-integral-operations-scalar-extension",
+  "def-weil-derived-pullback-tensor-hom",
+  "lem-pc-kflat-resolution",
+  "prop-pur-kinjective-resolutions-exist",
+  "def-pur-hom-complex",
+  "def-coef-ringed-tensor-hom-model",
+  "def-coef-hom-representative-evaluation"
+ ],
+ "proof": [
+  {
+   "text": "Unfold the existing specified comparison scalarHomCompleted of [lem-pur-integral-operations-scalar-extension]. It is the composite of the inverse Hom-output completion comparison, the ordinary evaluation-transpose scalarHomOrdinary, and the internal-Hom image of the inverse first-input and direct second-input completion comparisons. The canonical scalarCompletionIso has scalarCompletion as its forward map. Cancel the Hom-output forward map with its inverse to obtain the first displayed equality, as an equality of actual morphisms.",
+   "uses": [
+    "lem-pur-integral-operations-scalar-extension"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-poincare-duality/sk-lem-finite/prop-pod-dual-tate-data-compatibility.proof.md",
+    "place": "prop-pod-dual-tate-data-compatibility, proof Step 5: the specified coefficient comparisons are built from evaluation and tensor maps. Agent-formulated arbitrary-scheme normalization bridge, exposing the coefficient construction; underlying derived adjunction: Stacks Tag 08J9, sites-cohomology.tex, label lemma-internal-hom. The completed comparison identification is not stated verbatim in Stacks."
+   }
+  },
+  {
+   "text": "Further compose with the internal-Hom image of the direct first-input and inverse second-input comparisons. Functoriality on the product category and the two isomorphism cancellation equations reduce this composite to scalarHomOrdinary. By coefficientBaseChangeHom of [lem-coef-derived-system-evaluation-calculus], scalarHomOrdinary is definitionally the closed transpose of the inverse ordinary tensor comparison followed by scalar-extended evaluation. Applying the inverse equivalence cancels the transpose, giving precisely the second displayed equality.",
+   "uses": [
+    "lem-pur-integral-operations-scalar-extension",
+    "lem-coef-derived-system-evaluation-calculus"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-poincare-duality/sk-lem-finite/prop-pod-dual-tate-data-compatibility.proof.md",
+    "place": "prop-pod-dual-tate-data-compatibility, proof Step 5: the specified coefficient comparisons are built from evaluation and tensor maps. Agent-formulated arbitrary-scheme normalization bridge, exposing the coefficient construction; underlying derived adjunction: Stacks Tag 08J9, sites-cohomology.tex, label lemma-internal-hom. The completed comparison identification is not stated verbatim in Stacks."
+   }
+  },
+  {
+   "text": "For the chain clause, apply specifiedHomScalarChain of [lem-zl-specified-hom-scalar-evaluation] to the given P, I, Q and q. That declaration already has the same arbitrary-scheme hypotheses, fixed K-injective augmentations, sheaf-section formula and unique chain map; unlike the older finite-field evaluation theorem in its module, the chain declaration needs no finite-field structure on X. Apply the forward closed transpose to the second equality from the preceding step. Its application to the inverse transpose cancels, identifying the three-completion-map composite with scalarHomOrdinary. Reassociate and substitute this equality into the existing chain localization square. The section formula is unchanged. Conversely, substitute it into any candidate completed square and apply uniqueness in specifiedHomScalarChain. This proves existence and uniqueness with the prescribed completed comparison.",
+   "uses": [
+    "lem-zl-specified-hom-scalar-evaluation",
+    "lem-pur-integral-operations-scalar-extension",
+    "lem-coef-derived-system-evaluation-calculus"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-poincare-duality/sk-lem-finite/prop-pod-dual-tate-data-compatibility.proof.md",
+    "place": "prop-pod-dual-tate-data-compatibility, proof Step 5: the specified coefficient comparisons are built from evaluation and tensor maps. Agent-formulated arbitrary-scheme normalization bridge, exposing the coefficient construction; underlying derived adjunction: Stacks Tag 08J9, sites-cohomology.tex, label lemma-internal-hom. The completed comparison identification is not stated verbatim in Stacks."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-pur-integral-operations-scalar-extension",
+  "lem-coef-derived-system-evaluation-calculus",
+  "lem-zl-specified-hom-scalar-evaluation"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-poincare-duality/sk-lem-finite/prop-pod-dual-tate-data-compatibility.proof.md",
+  "place": "Step 5. R2 formalization: unfold the recorded completed comparison and cancel its canonical completion maps; transpose cancellation uses coefficientBaseChangeHom. Reuse the arbitrary-scheme ordinary chain theorem specifiedHomScalarChain from lem-zl-specified-hom-scalar-evaluation, rather than reconstructing its normalized chain map."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "(internalHom|ihom|RHom).*(completion|scalar|baseChange)|scalar.*[Hh]om.*eval",
+   "results": "20 hits: Mathlib/NumberTheory/NumberField/Basic.lean, Mathlib/Algebra/MvPolynomial/Equiv.lean, Mathlib/Algebra/Category/ModuleCat/Presheaf/Colimits.lean, Mathlib/Algebra/Category/ModuleCat/Presheaf/Limits.lean, Mathlib/Algebra/TrivSqZeroExt/Basic.lean, Mathlib/Algebra/TrivSqZeroExt/Basic.lean, Mathlib/Algebra/TrivSqZeroExt/Basic.lean, Mathlib/Algebra/TrivSqZeroExt/Basic.lean",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern ordinary module adjunctions, generic evaluation, Gamma-Spec, or ordinary module adic completion; none identifies the specified completed sheaf-Hom operation comparison through the quotient completion units"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The internal Hom scalar comparison for derived complete sheaves equals the ordinary evaluation transpose conjugated by the canonical completion maps",
+   "results": "8 hits: CategoryTheory.ihom.ev, smoothSheafCommRing.forgetStalk_hom_comp_evalHom, ModuleCat.ExtendRestrictScalarsAdj.HomEquiv.evalAt, smoothSheaf.evalHom, CategoryTheory.sheafHom, UniformSpace.Completion.map_smul_eq_mul_coe, smoothSheafCommRing.forgetStalk_inv_comp_eval_apply, LightCondensed.ihomPoints",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern ordinary module adjunctions, generic evaluation, Gamma-Spec, or ordinary module adic completion; none identifies the specified completed sheaf-Hom operation comparison through the quotient completion units"
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules, CategoryTheory.MonoidalClosed",
+   "results": "0 hits: ",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern ordinary module adjunctions, generic evaluation, Gamma-Spec, or ordinary module adic completion; none identifies the specified completed sheaf-Hom operation comparison through the quotient completion units"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Specified completed coefficient internal Hom comparison equals the evaluation transpose after quotient completion units on an arbitrary scheme",
+   "results": "8 hits: AlgebraicGeometry.ΓSpec_adjunction_homEquiv_eq, AlgebraicGeometry.ΓSpec.adjunction_homEquiv_apply, AlgebraicGeometry.ΓSpec.adjunction_homEquiv_symm_apply, AlgebraicGeometry.ΓSpec.toOpen_comp_locallyRingedSpaceAdjunction_homEquiv_app, LightCondensed.ihomPoints_apply, LightCondensed.ihom_map_val_app, AlgebraicGeometry.ΓSpecIso_inv_ΓSpec_adjunction_homEquiv, AlgebraicGeometry.ΓSpec.locallyRingedSpaceAdjunction_homEquiv_apply'",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern ordinary module adjunctions, generic evaluation, Gamma-Spec, or ordinary module adic completion; none identifies the specified completed sheaf-Hom operation comparison through the quotient completion units"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finite free change of scalars derived internal Hom chain map sends h tensor s to the map m tensor b to h(m) tensor sb with canonical adic completion units",
+   "results": "8 hits: AdicCompletion.tensor_map_id_left_eq_map, AdicCompletion.ofTensorProduct, AdicCompletion.ofTensorProduct_naturality, IsBaseChange.lift, AdicCompletion.ofTensorProduct_tmul, AdicCompletion.ofTensorProductEquivOfFiniteNoetherian_symm_of, ModuleCat.ExtendRestrictScalarsAdj.HomEquiv.fromExtendScalars_hom_apply, AdicCompletion.ofTensorProductEquivOfFiniteNoetherian_apply",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern ordinary module adjunctions, generic evaluation, Gamma-Spec, or ordinary module adic completion; none identifies the specified completed sheaf-Hom operation comparison through the quotient completion units"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Specified completed scalar extension comparison for derived sheaf internal Hom equals the evaluation transpose conjugated by quotient completion units",
+   "results": "8 hits: LightCondensed.ihomPoints_symm_comp, LightCondensed.ihom_map_val_app, LightCondensed.ihomPoints_apply, LightCondensed.ihomPoints, LightCondensed.ihomPoints_symm_apply, SheafOfModules.unitHomEquiv_symm_freeHomEquiv_apply, SheafOfModules.unitHomEquiv_symm_comp, PresheafOfModules.sheafifyHomEquiv'",
+   "date": "2026-10-23",
+   "verdict": "no match: ordinary modules, generic closed-category evaluation, underived sheaves, localization and adic module completion do not state the specified derived completed sheaf-Hom comparison"
+  },
+  {
+   "tool": "grep",
+   "query": "(internalHom|ihom|RHom).*(completion|scalar|baseChange)|scalar.*[Hh]om.*eval",
+   "results": "20 hits: Mathlib/NumberTheory/NumberField/Basic.lean, Mathlib/Algebra/TrivSqZeroExt/Basic.lean, Mathlib/Algebra/TrivSqZeroExt/Basic.lean, Mathlib/Algebra/TrivSqZeroExt/Basic.lean, Mathlib/Algebra/TrivSqZeroExt/Basic.lean, Mathlib/Algebra/TrivSqZeroExt/Basic.lean, Mathlib/Algebra/MvPolynomial/Equiv.lean, Mathlib/Algebra/Category/ModuleCat/Presheaf/Colimits.lean",
+   "date": "2026-10-23",
+   "verdict": "no match: ordinary modules, generic closed-category evaluation, underived sheaves, localization and adic module completion do not state the specified derived completed sheaf-Hom comparison"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived complete sheaf internal Hom scalar comparison is the evaluation transpose through canonical completion maps",
+   "results": "8 hits: transpose_dualTensorHom, CategoryTheory.ihom.ev, CategoryTheory.exp.ev, AbstractCompletion.compare_coe, LightCondensed.ihomPoints, CategoryTheory.sheafHom, ModuleCat.ExtendRestrictScalarsAdj.HomEquiv.evalAt, AdicCompletion.transitionMap_comp_eval",
+   "date": "2026-10-23",
+   "verdict": "no match: ordinary modules, generic closed-category evaluation, underived sheaves, localization and adic module completion do not state the specified derived completed sheaf-Hom comparison"
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules, CategoryTheory.MonoidalClosed",
+   "results": "0 hits: ",
+   "date": "2026-10-23",
+   "verdict": "no match: ordinary modules, generic closed-category evaluation, underived sheaves, localization and adic module completion do not state the specified derived completed sheaf-Hom comparison"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a finite free extension of ring sheaves the scalar Hom chain map f tensor s sends m tensor b to f(m) tensor sb and localizes to derived evaluation",
+   "results": "8 hits: IsLocalizedModule.map_lTensor, ModuleCat.ExtendRestrictScalarsAdj.HomEquiv.fromExtendScalars_hom_apply, PresheafOfModules.Monoidal.tensorObjMap, Algebra.FormallyUnramified.sec, IsLocalizedModule.rTensor, Module.mem_freeLocus_iff_tensor, IsLocalization.moduleTensorEquiv, Algebra.tensorH1CotangentOfIsLocalization_toLinearMap",
+   "date": "2026-10-23",
+   "verdict": "no match: ordinary modules, generic closed-category evaluation, underived sheaves, localization and adic module completion do not state the specified derived completed sheaf-Hom comparison"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-pod-reindexing-hom-coefficient-descent",
+  "date": "2026-10-23",
+  "group": "NW"
+ },
+ "chapter": "sec-poincare-duality",
+ "unit": "sk-def-weil",
+ "blueprint": {
+  "from": {
+   "node": "prop-pod-dual-tate-data-compatibility",
+   "place": "Step 5: coefficient comparisons built from the same evaluation and tensor maps; pin the specified completed internal-Hom comparison before coefficient transport.",
+   "via": [
+    "lem-pod-reindexing-hom-coefficient-descent",
+    "lem-pod-derived-automorphism-hom-evaluation"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-pod-specified-hom-scalar-evaluation",
+  "worker": "stage1",
+  "summary": "Give a five-step proof without new nodes: reuse existing scalar-Hom chain evaluation, K-flat chain transposition and normalized tensor comparison; compare the actual localized map with extended evaluation, then conjugate by the specified strict quotient-augmentation maps and cancel. Preserve the statement and all its hypotheses. Distinguish the item's specified construction from the existence-only statement of integral operation compatibility.",
+  "blueprint": "prop-pod-dual-tate-data-compatibility, proof Step 5: coefficient comparisons are built from the same evaluation and tensor maps; realizes the arbitrary-scheme Hom normalization bridge through the two recorded ancestor auxiliaries.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-finite-free-completed-scalar-comparison",
+    "why": "Generic ringed-site representative, derived comparison, or completeness tool; used on its stated domain to normalize scalar Hom, without replacing the unit route."
+   },
+   {
+    "node": "lem-sf-ringed-finite-free-hom-base-change",
+    "why": "Generic ringed-site representative, derived comparison, or completeness tool; used on its stated domain to normalize scalar Hom, without replacing the unit route."
+   },
+   {
+    "node": "lem-pc-kflat-resolution",
+    "why": "Generic ringed-site representative, derived comparison, or completeness tool; used on its stated domain to normalize scalar Hom, without replacing the unit route."
+   },
+   {
+    "node": "prop-pur-kinjective-resolutions-exist",
+    "why": "Generic ringed-site representative, derived comparison, or completeness tool; used on its stated domain to normalize scalar Hom, without replacing the unit route."
+   },
+   {
+    "node": "lem-weil-pbc-exact-functor-derived-factorization",
+    "why": "Generic ringed-site representative, derived comparison, or completeness tool; used on its stated domain to normalize scalar Hom, without replacing the unit route."
+   },
+   {
+    "node": "lem-pur-derived-change-of-rings",
+    "why": "Generic ringed-site representative, derived comparison, or completeness tool; used on its stated domain to normalize scalar Hom, without replacing the unit route."
+   },
+   {
+    "node": "lem-sf-ringed-finite-free-tensor-data",
+    "why": "Generic ringed-site representative, derived comparison, or completeness tool; used on its stated domain to normalize scalar Hom, without replacing the unit route."
+   },
+   {
+    "node": "lem-sfb-scalar-hom-chain-evaluation",
+    "why": "Generic ringed-site representative, derived comparison, or completeness tool; used on its stated domain to normalize scalar Hom, without replacing the unit route."
+   },
+   {
+    "node": "lem-sfb-hom-kflat-chain-transpose",
+    "why": "Generic ringed-site representative, derived comparison, or completeness tool; used on its stated domain to normalize scalar Hom, without replacing the unit route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-finite-free-completed-scalar-comparison",
+  "lem-sf-ringed-finite-free-hom-base-change",
+  "lem-pc-kflat-resolution",
+  "prop-pur-kinjective-resolutions-exist",
+  "lem-weil-pbc-exact-functor-derived-factorization",
+  "lem-pur-derived-change-of-rings",
+  "lem-sf-ringed-finite-free-tensor-data",
+  "lem-sfb-scalar-hom-chain-evaluation",
+  "lem-sfb-hom-kflat-chain-transpose"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-NG-07ec7f1ec",
+  "group": "NG",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NG-07ec7f1ec (reviewer sub-agent of L); spot-checked: Read the item's 5 steps and every cited statement: lem-weil-finite-free-completed-scalar-comparison, lem-sf-ringed-finite-free-hom-base-change, lem-sfb-scalar-hom-chain-evaluation, lem-sfb-hom-kflat-chain-transpose, lem-sf-ringed-finite-free-tensor-data, def-coef-ringed-tensor-hom-model (Hom-first closed structure), def-pur-hom-complex, the K-flat and K-injective resolution existence nodes, the exact-functor factorization and def-weil-integral-scalar-extension. Also read blueprint main-20261015 prop-pod-dual-tate-data-compatibility proof Step 5. No new nodes and no SGA. The statement pins theta^Hom by the chain construction conjugated by the chi maps; this agrees with parent Step 6 of lem-pur-integral-operations-scalar-extension (chi-conjugate of the evaluation-defined c_{M,N}), so the item is not hollow. The core argument is correct: [a]=gamma via the chain transpose, the tensor comparison kappa and T(ev). I recomputed the Step 3 differential and the Koszul signs (Hom-first vs M-first). Step 5 is an elementary cancellation. Small cases M=0, N=0, L=E, degree 0, odd/odd and ramified L/E all check. One fault, fixed: Step 4 applies lem-sfb-hom-kflat-chain-transpose, which needs a K-flat complex with flat terms, but Step 2 only proved P tensor_R S is K-flat. I added the elementary flat-terms argument to Step 2; nothing else changed. Maintainer note: lem-zl-specified-hom-scalar-evaluation (NN, 2026-10-18) states the same core equality for finite-type X over Fbar_p only. The item is its arbitrary-scheme generalization, not a duplicate made by this delivery, and lem-zl could cite it. The declared tool_uses are accepted.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.Paper.SpecifiedHomScalarEvaluationArbitraryScheme",
+  "declaration": "WeilConjectures.specifiedHomScalarEvaluation_arbitraryScheme",
+  "declarations": [
+   "WeilConjectures.specifiedHomScalarEvaluation_arbitraryScheme",
+   "WeilConjectures.specifiedCompletedHomScalarChain"
+  ],
+  "file": "lean/Sheaf/Paper/SpecifiedHomScalarEvaluationArbitraryScheme.lean",
+  "statement": "theorem specifiedHomScalarEvaluation_arbitraryScheme (W : Scheme.{u}) (_hl : ∀ x : W, IsUnit (l : W.presheaf.stalk x)) (M N : DerivedCategory (integralTowerModules l E W)) (hM : sfIntegralConstructible l E W M) (hN : sfIntegralConstructible l E W N) (hH : sfIntegralConstructible l E W ((integralDerivedInternalHom l E W).obj (op M, N))) : ((scalarCompletion l E L ι W).app ((integralDerivedInternalHom l E W).obj (op M, N)) ≫ (scalarHomCompleted l E L ι W M N hM.1 hN.1 hH.1).hom = scalarHomOrdinary l E L ι W M N ≫ (integralDerivedInternalHom l L W).map (Prod.mkHom ((scalarCompletionIso l E L ι W M hM.1).inv.op) ((scalarCompletionIso l E L ι W N hN.1).hom))) ∧ ((scalarIntegralClosed l L W).transpose _ ((integralOrdinaryDerivedScalar l E L ι W).obj M) ((integralOrdinaryDerivedScalar l E L ι W).obj N)).symm ((scalarCompletion l E L ι W).app ((integralDerivedInternalHom l E W).obj (op M, N)) ≫ (scalarHomCompleted l E L ι W M N hM.1 hN.1 hH.1).hom ≫ (integralDerivedInternalHom l L W).map (Prod.mkHom ((scalarCompletionIso l E L ι W M hM.1).hom.op) ((scalarCompletionIso l E L ι W N hN.1).inv))) = (scalarClosedTensor l E L ι W).inv.app ((integralDerivedInternalHom l E W).obj (op M, N), M) ≫ (integralOrdinaryDerivedScalar l E L ι W).map ((scalarIntegralClosed l E W).evaluation M N)",
+  "branch": "newtargets-dag",
+  "by": "Q24",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "Arbitrary-scheme equality for the recorded completed Hom comparison, its ordinary evaluation transpose, and the explicit normalized chain construction. Retains constructibility of both inputs and their ambient Hom, and invertibility of l on W. Uses the existing maps and fixed resolution augmentations; no new scalar or Hom construction. The earlier specifiedHomScalarEvaluation is restricted to schemes of finite type over a finite-field datum; its canonical resolution-unit helper is reused."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-0d4999fca",
+  "group": "Q24",
+  "result": "pass",
+  "note": "Only the item's lean field changed; statement verbatim (script check); no defs, proofs sorry; docstrings with source, blueprint id and proof steps; report has Worker report and Second reading by Q24. Checked clause by clause: θ=scalarHomCompleted (=integralHomScalarComparison of def-weil-derived-pullback-tensor-hom), χ=scalarCompletion (quotient coords, zero shifted coord via integralScalarCompletionChain), γ=scalarHomOrdinary=coefficientBaseChangeHom transpose of κ⁻¹≫T(ev); hyps: any Scheme.{u}, ℓ unit on stalks, hM/hN/hH constructible, nothing stronger; conjunct 1 variance ok, conjunct 2 Hom-first transpose with the same sign on both sides; companion pins the chain formula j(q(x)(m)⊗sb) with the canonical toKInjectiveResolution augmentation and χ-conjugated θ for all representatives. Edge cases: empty W, M/N=0, L=E, ramified, unbounded reps, degree 0/odd. Advisory: main theorem is definitional given the recorded scalarHomCompleted; companion ≈ NK specifiedHomScalarChain (arbitrary-scheme generalization accepted at stage 1); specifiedHomResolutionUnit/integralScalarCompletionChain owners outside stmt_deps (lem-zl precedent). No file changed, no compile run."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R2",
+  "result": "pass",
+  "landing": "20261025T050916-L-3865771",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

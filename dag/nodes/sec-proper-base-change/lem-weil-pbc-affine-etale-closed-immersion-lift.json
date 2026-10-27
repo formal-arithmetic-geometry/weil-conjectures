@@ -173,5 +173,61 @@
   "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  },
- "lean_audit": {}
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": [
+    "AlgebraicGeometry.Etale.exists_affine_lift_of_closedImmersion"
+   ]
+  },
+  "slopmaster2": {
+   "state": "closed",
+   "decls": [
+    {
+     "name": "AlgebraicGeometry.Etale.exists_affine_lift_of_closedImmersion",
+     "module": "WeilConjectures.AlgebraicGeometry.AffineEtaleClosedImmersionLift",
+     "lines": [
+      70,
+      108
+     ],
+     "kind": "theorem",
+     "sorry": false
+    }
+   ],
+   "missing": [],
+   "open": []
+  }
+ },
+ "blueprint_update": {
+  "snapshot": "main-20261023-1620",
+  "commit": "7284bb09daf97437d544c51882b325f9c52cd345",
+  "changed": [
+   "statement",
+   "proof"
+  ],
+  "statement": "Let X, Z, V be schemes [def-pc-scheme], X and V affine, i: Z → X a closed immersion, and p: V → Z étale. There exists an affine scheme U with an étale q: U → X and a: V → U making the square (a,p,q,i) a fiber product.",
+  "proof": [
+   {
+    "text": "Write $X=\\operatorname{Spec}R$. A closed immersion into an affine scheme is the spectrum of a quotient map: there are an ideal $I\\subseteq R$, an isomorphism $Z\\cong\\operatorname{Spec}(R/I)$ and a factorization of $i$ through $\\operatorname{Spec}(R\\to R/I)$. Write $V=\\operatorname{Spec}B$; under these identifications $p$ is $\\operatorname{Spec}$ of a ring map $R/I\\to B$, which is etale since $p$ is ([def-pc-scheme]).",
+    "uses": [
+     "def-pc-scheme"
+    ],
+    "elementary": false
+   },
+   {
+    "text": "By [lem-exc-etale-algebra-lift] the etale $R/I$-algebra $B$ lifts to an etale $R$-algebra $C$ with an isomorphism $C/IC\\cong B$ of $R/I$-algebras. Composing with the canonical isomorphism $C\\otimes_R(R/I)\\cong C/IC$ gives $C\\otimes_R(R/I)\\cong B$, compatible with the maps from $C$ and from $R/I$; so the square of rings with sides $R\\to C$, $R\\to R/I$, $C\\to B$, $R/I\\to B$ is a pushout. ([lem-exc-etale-algebra-lift]).",
+    "uses": [
+     "lem-exc-etale-algebra-lift"
+    ],
+    "elementary": false
+   },
+   {
+    "text": "The spectrum functor takes this pushout of rings to a pullback of affine schemes. Put $U=\\operatorname{Spec}C$, let $q:U\\to X$ be induced by $R\\to C$ (etale, since $R\\to C$ is), and let $a:V\\to U$ be induced by $C\\to B$. Transporting the pullback square along the identifications of $X$, $Z$ and $V$ with spectra shows that $(a,p,q,i)$ is a fibre product square.",
+    "uses": [],
+    "elementary": null
+   }
+  ],
+  "note": "the current blueprint (main-20261023-1620, weil-conjectures-blueprint 7284bb09da) states or proves this differently; the node is proved in Lean: recorded 2026-10-23, not reopened"
+ }
 }

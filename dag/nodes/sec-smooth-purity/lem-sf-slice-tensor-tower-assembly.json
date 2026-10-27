@@ -1,0 +1,119 @@
+{
+ "id": "lem-sf-slice-tensor-tower-assembly",
+ "kind": "statement",
+ "title": "SliceTensorTowerAssembly",
+ "statement": "Let C,R,V have module sheafification and locally-bijective compatibility on C and C/V. Use [def-sf-slice-tensor-generator-interfaces]. Suppose k_A is a scalar-restriction comparison normalized on extension summands, t_A and tv_A are normalized ordinary tensor-to-scalar-extension comparisons on C and C/V, and l_A is a normalized coefficient-linear comparison. For every strict tower S of R-algebra sheaves there exists an ordinary natural isomorphism o_S:j_R! ⋙ reduction(R,S) ≅ reduction(R|V,S|V) ⋙ towerExtension(R,V). It sends [m]_a tensor s to [m tensor s]_a at each level and is uniquely so normalized. At every level its forward map equals t followed by restriction of l, inverse k and extension of inverse tv. The o_S commute with every map of algebra towers. No inverse generator formula for l, scalar-unit specialization or chain lift is included in the conclusion.",
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tags 03DI, 03CY, 03EK and 0E8I; extraction of the scalar, tensor transport and strict tower steps of lem-sf-cbc-slice-tensor-generator-coherence."
+ },
+ "stmt_deps": [
+  "def-sf-slice-tensor-generator-interfaces"
+ ],
+ "proof": [
+  {
+   "text": "Apply exists_ringedSliceTensorGenerators with H the underlying module of the coefficient algebra. Transport its ordinary tensors through the sheafification tensor identifications. This gives a normalized ordinary comparison at each coefficient algebra. On a generator both its forward map and t followed by restriction of l, inverse k and inverse tv send [m] tensor s to [m tensor s]; the sheafification adjunction and tensor generation identify the maps. For a coefficient map b, both composites send [m] tensor s to [m tensor b(s)]; the same test proves coefficient naturality. Assemble the level isomorphisms with NatIso.ofComponents, first over the tower and then over slice modules. Coefficient naturality gives the tower squares, and module naturality gives the second assembly. Generator extensionality gives uniqueness. No chain, unit, flatness or boundedness hypothesis is needed here.",
+   "uses": [
+    "lem-sf-ringed-slice-tensor-generators",
+    "def-weil-inverse-system",
+    "def-sf-localized-strict-tensor-comparison-data",
+    "def-weil-presheaf-modules-sheafification",
+    "lem-sp-scalar-extension-binary-coherence"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sf-ringed-slice-tensor-generators",
+  "def-weil-inverse-system",
+  "def-sf-localized-strict-tensor-comparison-data",
+  "def-weil-presheaf-modules-sheafification",
+  "lem-sp-scalar-extension-binary-coherence"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Generator normalization and strict coherence refinement of Tags 03DI, 03CY, 03EK and 0E8I."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Restriction of scalars and scalar extension commute with extension by zero on a slice site with generators",
+   "results": "SheafOfModules.Presentation.mapGenerators; PresheafOfModules.restrictScalarsCompToPresheaf; ModuleCat.ExtendRestrictScalarsAdj.HomEquiv.fromExtendScalars; ModuleCat.ExtendRestrictScalarsAdj.unit",
+   "date": "2026-10-25",
+   "verdict": "No normalized slice, scalar/tensor or strict-tower comparison in these results."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"SheafOfModules\", \"tensor\"",
+   "results": "PresheafOfModulesOfCommRing.Monoidal.tensorObj, tensorObj_obj, tensorHom, tensorHom_app and tensorObj_map_tmul.",
+   "date": "2026-10-25",
+   "verdict": "Sectionwise presheaf tensors, not the needed normalized natural comparisons."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Sheafification of tensor with an algebra is extension of scalars followed by restriction of scalars, natural in module sheaves",
+   "results": "PresheafOfModules.restrictScalarsObj; PresheafOfModules.toSheafify; PresheafOfModules.sheafifyMap; SheafOfModules.restrictScalars.",
+   "date": "2026-10-25",
+   "verdict": "These supply restriction and sheafification, not the generator-normalized scalar/tower comparisons."
+  },
+  {
+   "tool": "grep",
+   "query": "scalarExtension.*(hom_ext|map_tmul)|tensor.*sheafification",
+   "results": "msearch: 0 hits. Repository searches locate ScalarExtensionBinaryCoherence, RingedSliceTensorGenerators, SemilinearSliceScalarGenerators, StrictScalarHomChain and ScalarHomOrdinaryTensorComparison.",
+   "date": "2026-10-25",
+   "verdict": "Existing scalar and ordinary generators are useful proof inputs; their tensor representations differ, so the extracted interface and comparison steps are still needed."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.CategoryTheory.SliceTensorGeneratorCoherence",
+  "date": "2026-10-25",
+  "group": "S2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "fix-lem-exchanges",
+   "place": "Proof Steps 1–2, through the parent generator-coherence refinement",
+   "via": [
+    "lem-sf-cbc-slice-tensor-generator-coherence"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sf-cbc",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.SliceTensorTowerAssembly",
+  "file": "lean/Sheaf/CategoryTheory/SliceTensorTowerAssembly.lean",
+  "declaration": "SheafOfModules.SliceTensorGenerator.tensorTowerAssembly_exists",
+  "statement": "theorem tensorTowerAssembly_exists\n    (k : ∀ A : Under R,\n    scalars.{max c v, v, r} (R.over V) ((sliceAlgebras.{c, v, r} R V).obj A) ⋙\n        localizedSystemExtension.{c, v, r} R V ≅\n      localizedSystemExtension.{c, v, r} A.right V ⋙ scalars.{c, v, r} R A)\n    (t : ∀ A : Under R, TensorLift.{c, v, r} R A)\n    (tv : ∀ A : Under R,\n    TensorLift.{max c v, v, r} (R.over V) ((sliceAlgebras.{c, v, r} R V).obj A))\n    (l : ∀ A : Under R, LinearComparison.{c, v, r} R V A)\n    (hk : ∀ A,\n    ScalarExtensionNormalized.{c, v, r} R V A (k A))\n    (ht : ∀ A, TensorLiftNormalized.{c, v, r} R A (t A))\n    (htv : ∀ A,\n    TensorLiftNormalized.{max c v, v, r} (R.over V)\n      ((sliceAlgebras.{c, v, r} R V).obj A) (tv A))\n    (hl : ∀ A, LinearNormalized.{c, v, r} R V A (l A))\n    : ∃ o : ∀ S : AlgebraTowers.{c, v, r} R,\n    localizedSystemExtension.{c, v, r} R V ⋙ reduction.{c, v, r} R S ≅\n      reduction.{max c v, v, r} (R.over V) (S ⋙ sliceAlgebras.{c, v, r} R V) ⋙\n        towerExtension.{c, v, r} R V,\n      (∀ S, OrdinaryNormalized.{c, v, r} R V S (o S)) ∧\n      (∀ S e,\n    OrdinaryNormalized.{c, v, r} R V S e → e = o S) ∧\n      (∀ (S : AlgebraTowers.{c, v, r} R)\n    (M : Modules.{max c v, v, r} (R.over V)) (n : ℕᵒᵖ),\n    ((o S).hom.app M).app n =\n      (t (S.obj n)).hom.app ((localizedSystemExtension.{c, v, r} R V).obj M) ≫\n        (scalars.{c, v, r} R (S.obj n)).map ((l (S.obj n)).hom.app M) ≫\n        (k (S.obj n)).inv.app\n          ((extend.{max c v, v, r} ((sliceAlgebras.{c, v, r} R V).obj (S.obj n)).hom).obj M) ≫\n        (localizedSystemExtension.{c, v, r} R V).map\n          ((tv (S.obj n)).inv.app M)) ∧\n      (∀ (S T : AlgebraTowers.{c, v, r} R) (a : S ⟶ T),\n    Functor.whiskerLeft (localizedSystemExtension.{c, v, r} R V)\n        ((reductionFamily.{c, v, r} R).map a) ≫ (o T).hom =\n      (o S).hom ≫\n        Functor.whiskerRight\n          ((reductionFamily.{max c v, v, r} (R.over V)).map\n            (Functor.whiskerRight a (sliceAlgebras.{c, v, r} R V)))\n          (towerExtension.{c, v, r} R V))",
+  "branch": "sheaf-dag",
+  "by": "S2",
+  "date": "2026-10-25"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-fe40f",
+  "group": "S2",
+  "result": "pass",
+  "landing": "20261025T101330-L-3683306",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-fe40f",
+  "group": "S2",
+  "result": "pass",
+  "landing": "20261025T101330-L-3683306",
+  "kind": "interface",
+  "note": "independent cc review: coherence_exists assembly vs node proof/proof_deps; Coherence/onComplexes vs clone (identical); 3 new sorried lemmas vs their nodes and docstrings (true, not restatements); moved interface defs vs change record; sandbox compile of 5 delivered modules + 3 direct importers (all compile, exit 0); #print axioms coherence_exists = propext, sorryAx, Classical.choice, Quot.sound"
+ }
+}

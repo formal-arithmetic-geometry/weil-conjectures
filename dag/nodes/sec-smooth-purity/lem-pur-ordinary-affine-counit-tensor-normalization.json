@@ -1,0 +1,317 @@
+{
+ "id": "lem-pur-ordinary-affine-counit-tensor-normalization",
+ "kind": "statement",
+ "title": "Tensor normalization of the ordinary etale ordered affine-space counit",
+ "statement": "Let $N\\geq1$, let $A$ be a finite commutative ring with $NA=0$, and let $S$ be a Noetherian scheme, meaning one with a finite affine cover by spectra of Noetherian rings [def-pc-scheme], on which $N$ is invertible. Work in the ordinary unbounded derived categories $D(T_{\\mathrm{et}},A)$ [def-weil-pbc-derived-categories], with exact inverse image [prop-weil-pbc-inverse-image-modules-exact] and derived tensor [def-kun-derived-tensor]. For $d\\geq0$ let $p_d:X_d=\\mathbf A^d_S\\to S$ [def-sbc-affine-space], put $W_d=A_{X_d}(d)[2d]$ with the ordinary Tate lines and canonical pullback/tensor comparisons [lem-asd-etale-finite-twist-pullback], and write $G_dK=p_d^*K\\otimes_A^LW_d$.\nUse exactly the ordered affine-line composite adjunction of [lem-amb-affine-space-top-trace]: on each line compose open extension with the normalized projective-line adjunction of [lem-asd-ordinary-finite-p1-adjunction], and use the identity adjunction at $d=0$. Identify its left functor with $Rp_{d!}$ by the proper/open-normalized compact-support compositor [lem-amb-unbounded-compact-support-comparisons], and its right functor with $G_d$ by the canonical ordered Tate/shift reassociation. Denote its counit by $\\varepsilon^{(d)}_K:Rp_{d!}G_dK\\to K$, and its trace at the coefficient unit by $t_d=\\varepsilon^{(d)}_{A_S}:Rp_{d!}W_d\\to A_S$.\nFor every $K\\in D(S_{\\mathrm{et}},A)$ the actual counit satisfies\n$$\\varepsilon^{(d)}_K=\\rho_K\\circ(1_K\\otimes t_d)\\circ P_{p_d;K,W_d}^{-1}.$$\nHere $\\rho_K:K\\otimes_A^LA_S\\to K$ is the canonical right unitor, and $P_{p_d;K,W_d}:K\\otimes_A^LRp_{d!}W_d\\to Rp_{d!}(p_d^*K\\otimes_A^LW_d)$ is the canonical coefficient-first compact-support projection: the proper projection of [lem-amb-proper-coproducts-projection] followed by the open tensor comparison of [lem-pur-etale-open-derived-tensor] on a compactification [def-amb-etale-compact-support]. No boundedness, constructibility, or finite Tor-amplitude condition on $K$ is assumed. The formula includes $d=0$, the zero ring, and the empty scheme.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-an/lem-amb-affine-space-top-trace.proof.md",
+  "place": "last paragraph: projection formula on chosen compactifications and ordered affine-line composite counit; expanded coefficient normalization needed in cor-pur-vector-bundle-purity proof paragraph 2"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-pbc-derived-categories",
+  "prop-weil-pbc-inverse-image-modules-exact",
+  "def-kun-derived-tensor",
+  "def-sbc-affine-space",
+  "lem-asd-etale-finite-twist-pullback",
+  "lem-amb-affine-space-top-trace",
+  "lem-asd-ordinary-finite-p1-adjunction",
+  "lem-amb-unbounded-compact-support-comparisons",
+  "lem-amb-proper-coproducts-projection",
+  "lem-pur-etale-open-derived-tensor",
+  "def-amb-etale-compact-support",
+  "def-amb-affine-linear-trace-action",
+  "def-trf-coordinate-counit-arrows",
+  "def-trf-section-local-comparison-data",
+  "def-pur-affine-dualizing-tower-comparison",
+  "def-pur-compact-support-projection-map",
+  "def-amb-affine-trace-construction",
+  "def-amb-affine-trace-tower",
+  "def-asd-ordinary-finite-p1-data",
+  "def-asd-ordinary-finite-p1-arrows"
+ ],
+ "proof": [
+  {
+   "text": "The proper finite-coefficient projection is invertible. Both signed symmetries, the exact/left-derived inverse-image comparison, and the open tensor comparison are invertible; therefore their specified compactification composite is invertible on the arbitrary unbounded inputs in the statement. Use asIso of that very map, fixing its hom without a choice.",
+   "uses": [
+    "lem-amb-proper-coproducts-projection",
+    "lem-pur-etale-open-derived-tensor",
+    "def-pur-compact-support-projection-map"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-an/lem-amb-affine-space-top-trace.proof.md",
+    "place": "last paragraph: ordered affine-line projection formula and actual composite counit"
+   }
+  },
+  {
+   "text": "Cancel the forward compact-support projection. The structural projection/reassociation theorem identifies its composite with the inverse right reassociation and inverse ordered left comparison. This structural comparison contains no adjunction counit or projective-line data.",
+   "uses": [
+    "lem-pur-ordinary-affine-projection-reassociation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-an/lem-amb-affine-space-top-trace.proof.md",
+    "place": "last paragraph: ordered affine-line projection formula and actual composite counit"
+   }
+  },
+  {
+   "text": "Use naturality of the actual ordered composite counit with respect to the right unitor on K. The ordered coefficient counit square, obtained by pasting the normalized proper counit square and open counit square and induction over coordinates, then moves the coefficient K outside the composite counit. This square applies to all unbounded K and to the constant single unit as its second input.",
+   "uses": [
+    "lem-pur-ordinary-affine-tower-tensor-counit",
+    "def-amb-affine-trace-construction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-an/lem-amb-affine-space-top-trace.proof.md",
+    "place": "last paragraph: ordered affine-line projection formula and actual composite counit"
+   }
+  },
+  {
+   "text": "Functoriality combines the mapped inverse Tate comparison, inverse left comparison, and the tower counit. By the unchanged definition of trace their composite is the given trace. The remaining arrow is precisely the specified right unitor. This proves the formula, including dimension zero, the empty base and the zero ring.",
+   "uses": [
+    "def-pur-ordinary-affine-counit-tensor-maps"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-an/lem-amb-affine-space-top-trace.proof.md",
+    "place": "last paragraph: ordered affine-line projection formula and actual composite counit"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-amb-proper-coproducts-projection",
+  "lem-pur-etale-open-derived-tensor",
+  "def-pur-compact-support-projection-map",
+  "lem-pur-ordinary-affine-projection-reassociation",
+  "lem-pur-ordinary-affine-tower-tensor-counit",
+  "def-amb-affine-trace-construction",
+  "def-pur-ordinary-affine-counit-tensor-maps"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-an/lem-amb-affine-space-top-trace.proof.md",
+  "place": "last paragraph: ordered affine-line projection formula and actual composite counit"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "affineSpace.*counit|counit.*affineSpace|affine.*[Tt]race.*[Tt]ensor",
+   "results": "none",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits give algebraic traces, ordinary sheaf adjunctions, coalgebras, or ring-theoretic etale maps, not the normalized ordinary-etale affine compact-support counit and its projection equation"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Counit for compactly supported etale cohomology of affine space equals tensor with its integration trace under projection formula",
+   "results": "CompHausLike.LocallyConstant.counit; CoalgebraStruct.counit; AlgebraicGeometry.Scheme.Modules.restrictAdjunction_counit_app_app; CompHausLike.LocallyConstant.counitApp; TensorProduct.counit_def; CompHausLike.LocallyConstant.counitApp.congr_simp; CoalgCat.counit_def; Coalgebra.sum_counit_tmul_map_eq",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits give algebraic traces, ordinary sheaf adjunctions, coalgebras, or ring-theoretic etale maps, not the normalized ordinary-etale affine compact-support counit and its projection equation"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction, \"counit\"",
+   "results": "CategoryTheory.Adjunction.mkOfUnitCounit; CategoryTheory.Adjunction.counit; CategoryTheory.Adjunction.ext_counit; CategoryTheory.Adjunction.ofNatIsoLeft_counit; CategoryTheory.Adjunction.ofNatIsoRight_counit; CategoryTheory.Adjunction.counit_naturality; CategoryTheory.Adjunction.counit_naturality_assoc; CategoryTheory.Adjunction.toEquivalence_counitIso_hom_app",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits give algebraic traces, ordinary sheaf adjunctions, coalgebras, or ring-theoretic etale maps, not the normalized ordinary-etale affine compact-support counit and its projection equation"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For arbitrary finite coefficients on a Noetherian scheme the ordinary etale affine space adjunction counit is the compact support projection formula followed by tensoring with the trace at the constant sheaf",
+   "results": "AlgebraicGeometry.ΓSpec.isIso_adjunction_counit; AlgebraicGeometry.ΓSpec.adjunction_counit_app'; AlgebraicGeometry.ΓSpec.adjunction_counit_app; AlgebraicGeometry.AffineSpace.SpecIso_hom_appTop; AlgebraicGeometry.ΓSpec.adjunction; AlgebraicGeometry.AffineSpace.homOfVector_toSpecMvPoly; AlgebraicGeometry.AffineSpace.isoOfIsAffine_hom_appTop; AlgebraicGeometry.AffineSpace.toSpecMvPolyIntEquiv",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits give algebraic traces, ordinary sheaf adjunctions, coalgebras, or ring-theoretic etale maps, not the normalized ordinary-etale affine compact-support counit and its projection equation"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Projection formula identifies the entire etale affine coordinate tower counit at a complex with identity tensor the unit counit",
+   "results": "StandardEtalePair.lift_X_left; StandardEtalePresentation.toSubmersivePresentation_map; Algebra.exists_etale_isIdempotentElem_forall_liesOver_eq; StandardEtalePair.homEquiv_symm_apply; Algebra.Etale.exists_subalgebra_fg; KaehlerDifferential.tensorKaehlerEquivOfFormallyEtale_apply; Algebra.Etale.comp; KaehlerDifferential.tensorKaehlerEquivOfFormallyEtale_symm_D_algebraMap",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits give algebraic traces, ordinary sheaf adjunctions, coalgebras, or ring-theoretic etale maps, not the normalized ordinary-etale affine compact-support counit and its projection equation"
+  },
+  {
+   "tool": "grep",
+   "query": "affineSpace.*counit|counit.*affineSpace|compactSupport.*[Pp]rojection",
+   "results": "none",
+   "date": "2026-10-22",
+   "verdict": "no match: general adjunction/monoidal identities or unrelated affine scheme facts do not give the specified ordinary-etale compact-support counit equation"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Affine space etale compact support adjunction counit equals tensor with integration trace",
+   "results": "CategoryTheory.Adjunction.CoreHomEquivUnitCounit.counit; CategoryTheory.Adjunction.Localization.ε; CategoryTheory.Adjunction.functorialityCounit_app_hom; SheafOfModules.pushforwardPushforwardAdj_counit_app_val_app; CompHausLike.LocallyConstant.counit; CategoryTheory.constantSheafAdj_counit_app; CategoryTheory.ihom.ihom_adjunction_counit; CompHausLike.LocallyConstant.counit_app_val",
+   "date": "2026-10-22",
+   "verdict": "no match: general adjunction/monoidal identities or unrelated affine scheme facts do not give the specified ordinary-etale compact-support counit equation"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The counit of the ordinary etale compact support affine space adjunction is tensor with the trace at the coefficient unit via the projection formula",
+   "results": "AlgebraicGeometry.ΓSpec.isIso_adjunction_counit; AlgebraicGeometry.ΓSpec.adjunction_counit_app'; AlgebraicGeometry.ΓSpec.adjunction_counit_app; AlgebraicGeometry.ΓSpec.isIso_locallyRingedSpaceAdjunction_counit; AlgebraicGeometry.ΓSpec.locallyRingedSpaceAdjunction_counit; AlgebraicGeometry.ΓSpec.locallyRingedSpaceAdjunction_counit_app'; AlgebraicGeometry.AffineSpace.SpecIso_hom_appTop; AlgebraicGeometry.ΓSpec.locallyRingedSpaceAdjunction_counit_app",
+   "date": "2026-10-22",
+   "verdict": "no match: general adjunction/monoidal identities or unrelated affine scheme facts do not give the specified ordinary-etale compact-support counit equation"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Projection formula for an iterated composite of tensor linear adjunctions determines every counit from its component at the monoidal unit",
+   "results": "CategoryTheory.Adjunction.ε_comp_map_ε_assoc; CategoryTheory.Adjunction.rightAdjointLaxMonoidal_ε; CategoryTheory.Adjunction.map_μ_comp_counit_app_tensor; CategoryTheory.Adjunction.map_ε_comp_counit_app_unit; CategoryTheory.Adjunction.map_ε_comp_counit_app_unit_assoc; CategoryTheory.Adjunction.unit_app_tensor_comp_map_δ; CategoryTheory.Adjunction.ε_comp_map_ε; CategoryTheory.Adjunction.map_μ_comp_counit_app_tensor_assoc",
+   "date": "2026-10-22",
+   "verdict": "no match: general adjunction/monoidal identities or unrelated affine scheme facts do not give the specified ordinary-etale compact-support counit equation"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-pur-vector-trace-geometric-descent",
+  "date": "2026-10-22",
+  "group": "Q96"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-an",
+ "blueprint": {
+  "from": {
+   "node": "cor-pur-vector-bundle-purity",
+   "place": "proof paragraph 2: composition of the explicit projective-line adjunctions gives affine-space counits; the coefficient input in the inner block of a direct sum",
+   "via": [
+    "lem-pur-vector-trace-geometric-descent"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-pur-ordinary-affine-counit-tensor-normalization",
+  "worker": "stage1",
+  "summary": "Proved the actual counit normalization by restricting the normalized projective-line counit and an explicit induction on the ordered coordinate tower. Reused existing generic projection-action and compact-support composition nodes; no new nodes, no coefficient-category change and no boundedness assumptions. Retained the statement, source provenance and original search history. Checked all cited statements and the zero-dimensional, empty-base and zero-ring cases.",
+  "blueprint": "cor-pur-vector-bundle-purity proof paragraph 2, ordered affine-space integration; expands lem-amb-affine-space-top-trace final paragraph and unit sk-prop-an Steps 5(c) and 6.",
+  "tool_uses": [
+   {
+    "node": "lemma-nagata-relative-affine-space-open-immersion",
+    "why": "Generic The standard affine chart in relative projective space used for the specified ordinary-etale projection, tensor, geometry or adjunction normalization; it supplies a tool for sk-prop-an Steps 5(c) and 6, without replacing their ordered affine-line route."
+   },
+   {
+    "node": "lemma-nagata-projective-space-base-change-proper",
+    "why": "Generic Projective space is proper over its base used for the specified ordinary-etale projection, tensor, geometry or adjunction normalization; it supplies a tool for sk-prop-an Steps 5(c) and 6, without replacing their ordered affine-line route."
+   },
+   {
+    "node": "lem-weil-pbc-finite-type-over-noetherian",
+    "why": "Generic A scheme of finite type over a Noetherian scheme is Noetherian (Stacks 01T6) used for the specified ordinary-etale projection, tensor, geometry or adjunction normalization; it supplies a tool for sk-prop-an Steps 5(c) and 6, without replacing their ordered affine-line route."
+   },
+   {
+    "node": "lem-weil-pbc-noetherian-open-subscheme-noetherian",
+    "why": "Generic An open subscheme of a Noetherian scheme is Noetherian used for the specified ordinary-etale projection, tensor, geometry or adjunction normalization; it supplies a tool for sk-prop-an Steps 5(c) and 6, without replacing their ordered affine-line route."
+   },
+   {
+    "node": "lem-amb-proper-coproducts-projection",
+    "why": "Generic The proper projection formula on the ambient category used for the specified ordinary-etale projection, tensor, geometry or adjunction normalization; it supplies a tool for sk-prop-an Steps 5(c) and 6, without replacing their ordered affine-line route."
+   },
+   {
+    "node": "lem-pur-etale-open-derived-tensor",
+    "why": "Generic Open extension by zero and unbounded derived tensor on ordinary etale sites used for the specified ordinary-etale projection, tensor, geometry or adjunction normalization; it supplies a tool for sk-prop-an Steps 5(c) and 6, without replacing their ordered affine-line route."
+   },
+   {
+    "node": "lem-asd-etale-finite-twist-pullback",
+    "why": "Generic Finite Tate lines on the small etale site and their pullback used for the specified ordinary-etale projection, tensor, geometry or adjunction normalization; it supplies a tool for sk-prop-an Steps 5(c) and 6, without replacing their ordered affine-line route."
+   },
+   {
+    "node": "lem-pur-adjoint-left-projection-action",
+    "why": "Generic Left-coefficient counit projection: transpose, unit and associativity used for the specified ordinary-etale projection, tensor, geometry or adjunction normalization; it supplies a tool for sk-prop-an Steps 5(c) and 6, without replacing their ordered affine-line route."
+   },
+   {
+    "node": "lem-pur-open-left-projection-action",
+    "why": "Generic Left-coefficient action laws from normalized open restriction used for the specified ordinary-etale projection, tensor, geometry or adjunction normalization; it supplies a tool for sk-prop-an Steps 5(c) and 6, without replacing their ordered affine-line route."
+   },
+   {
+    "node": "lem-pur-composite-left-projection-action",
+    "why": "Generic Pasting two forward left-coefficient tensor actions used for the specified ordinary-etale projection, tensor, geometry or adjunction normalization; it supplies a tool for sk-prop-an Steps 5(c) and 6, without replacing their ordered affine-line route."
+   },
+   {
+    "node": "lem-weil-pbc-extension-by-zero-adjunction",
+    "why": "Generic Extension by zero is left adjoint to restriction (étale site) used for the specified ordinary-etale projection, tensor, geometry or adjunction normalization; it supplies a tool for sk-prop-an Steps 5(c) and 6, without replacing their ordered affine-line route."
+   },
+   {
+    "node": "prop-weil-open-closed-recollement-adjunctions",
+    "why": "Generic Adjunctions of the open-closed recollement used for the specified ordinary-etale projection, tensor, geometry or adjunction normalization; it supplies a tool for sk-prop-an Steps 5(c) and 6, without replacing their ordered affine-line route."
+   },
+   {
+    "node": "lem-pur-exact-pullback-signed-comparison",
+    "why": "Generic Exact ringed pullback identifies the canonical signed derived tensor comparison used for the specified ordinary-etale projection, tensor, geometry or adjunction normalization; it supplies a tool for sk-prop-an Steps 5(c) and 6, without replacing their ordered affine-line route."
+   },
+   {
+    "node": "lem-sf-ringed-derived-closed-symmetric-monoidal",
+    "why": "Generic The derived category of a ringed site is closed symmetric monoidal used for the specified ordinary-etale projection, tensor, geometry or adjunction normalization; it supplies a tool for sk-prop-an Steps 5(c) and 6, without replacing their ordered affine-line route."
+   },
+   {
+    "node": "lem-asd-ordinary-finite-p1-adjunction",
+    "why": "Generic Ordinary etale projective-line adjunction with arbitrary finite invertible-exponent coefficients used for the specified ordinary-etale projection, tensor, geometry or adjunction normalization; it supplies a tool for sk-prop-an Steps 5(c) and 6, without replacing their ordered affine-line route."
+   },
+   {
+    "node": "lem-pur-unit-adjunct-tensor-action",
+    "why": "Generic Tensor action and counit equations for a unit-defined left-adjoint projection used for the specified ordinary-etale projection, tensor, geometry or adjunction normalization; it supplies a tool for sk-prop-an Steps 5(c) and 6, without replacing their ordered affine-line route."
+   },
+   {
+    "node": "lem-sfb-ringed-projection-tensor-composition",
+    "why": "Generic Tensor and composition coherence of ringed-topos projection maps used for the specified ordinary-etale projection, tensor, geometry or adjunction normalization; it supplies a tool for sk-prop-an Steps 5(c) and 6, without replacing their ordered affine-line route."
+   },
+   {
+    "node": "lem-kun-derived-pullback-composition-monoidal",
+    "why": "Generic Canonical derived etale inverse-image composition is monoidal used for the specified ordinary-etale projection, tensor, geometry or adjunction normalization; it supplies a tool for sk-prop-an Steps 5(c) and 6, without replacing their ordered affine-line route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lemma-nagata-relative-affine-space-open-immersion",
+  "lemma-nagata-projective-space-base-change-proper",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-weil-pbc-noetherian-open-subscheme-noetherian",
+  "lem-amb-proper-coproducts-projection",
+  "lem-pur-etale-open-derived-tensor",
+  "lem-asd-etale-finite-twist-pullback",
+  "lem-pur-adjoint-left-projection-action",
+  "lem-weil-pbc-extension-by-zero-adjunction",
+  "lem-asd-ordinary-finite-p1-adjunction",
+  "lem-pur-unit-adjunct-tensor-action",
+  "lem-kun-derived-pullback-composition-monoidal"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q155-0837d3387",
+  "group": "Q155",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q155-0837d3387 (reviewer sub-agent of L); spot-checked: I read the whole item. Its statement and stmt_deps are identical to the base copy that Q96 created (status unsplit). The delivery has no new nodes and there is no repair note, so the re-split rule does not apply. No SGA is cited. Source: the blueprint lem-amb-affine-space-top-trace.proof.md last paragraph (tower plus projection formula), which the item makes precise for the actual counit on arbitrary unbounded K, as the parent lem-pur-vector-trace-geometric-descent uses it with K=W_p. Step 2: the adjoint, open and composite left-projection-action lemmas apply. The proper action is the PF/σ projection of lem-amb-proper-coproducts-projection. The open γ's restriction normalization follows in a line from the 0GL1 sheaf identity and the identity counit of extension by zero. Inverting the unit and associativity laws gives the displayed Q-equations. Step 3: I checked that κ in lem-pur-unit-adjunct-tensor-action equals γ^{-1} (transpose Q(γ^{-1})u=δ^{-1}(u⊗1)=b), so e∘P_j=1⊗e_V. Naturality of π then gives ε_p=ρ(1⊗t_q Rq_*e_V)Q_p, and I_p=t_p at K=A. I recomputed Steps 5-7: the inner block gives ε_f=(1⊗b)Q_f; the composite counit is ρ(1⊗t_g F_g b)Q_g F_g(Q_f); the inverted lem-amb-shriek-tensor-composition identity gives Q_hα=(1⊗α_W)Q_gF_g(Q_f), hence ε^{(d+1)}=ρ(1⊗c)Q_h with c=t_{d+1}. The tower order (last coordinate, p_{d+1}=p_d f) matches unit sk-prop-an Steps 5/6. I accept the 7 declared tool uses: generic monoidal and derived-monoidal coherence lemmas. There is no cycle (the closure of 11991 nodes excludes the item) and no merged citation. The candidate duplicates (ordered-affine-transpose-projection, affine-space-composition-law, affine-coefficient-counit-coordinate-maps, sp-ordered-tate-scalar-normalization) are pro-étale/ctf/finite-field or change-of-ring variants, not duplicates. Edge cases d=0, d=1, the zero ring and the empty scheme check out. No changes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.OrdinaryAffineCounitTensorNormalization",
+  "declaration": "AlgebraicGeometry.Etale.ordinaryAffineCounit_tensor_normalization",
+  "declarations": [
+   "AlgebraicGeometry.Etale.ordinaryAffineCounit_tensor_normalization"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/OrdinaryAffineCounitTensorNormalization.lean",
+  "statement": "theorem ordinaryAffineCounit_tensor_normalization (N : ℕ) (hN : 0 < N) (A : Type (u + 1)) [CommRing A] [Finite A] (hA : (N : A) = 0) (t : OrdinaryFiniteTwistTransport A N hA) (D : ∀ (T : Scheme.{u}) [IsNoetherian T] (hT : IsUnit (N : Γ(T, ⊤))), OrdinaryFiniteP1Datum A N hA t T hT) (S : Scheme.{u}) [IsNoetherian S] (hS : IsUnit (N : Γ(S, ⊤))) (d : ℕ) (K : DerivedCategoryModule A S) : ∃ P : (((derivedTensor (ModuleCat.{u + 1} A) S).obj K).obj ((rightDerivedLowerShriek (ModuleCat.{u + 1} A) (affineTraceProjection S d)).obj (SectionLocalDualizingComparisons.tateObject A N hA (affineTraceTower S d) d))) ≅ (rightDerivedLowerShriek (ModuleCat.{u + 1} A) (affineTraceProjection S d)).obj (((derivedTensor (ModuleCat.{u + 1} A) (affineTraceTower S d)).obj ((upperStar (ModuleCat.{u + 1} A) (affineTraceProjection S d)).mapDerivedCategory.obj K)).obj (SectionLocalDualizingComparisons.tateObject A N hA (affineTraceTower S d) d)), P.hom = compactSupportProjectionMap A (affineTraceProjection S d) (SectionLocalDualizingComparisons.tateObject A N hA (affineTraceTower S d) d) K ∧ counit A N hN hA t D S hS d K = P.inv ≫ ((derivedTensor (ModuleCat.{u + 1} A) S).obj K).map (trace A N hN hA t D S hS d) ≫ (derivedTensorSingleUnitIso K).hom",
+  "branch": "sheaf-dag",
+  "by": "G2",
+  "date": "2026-10-25",
+  "existing": false,
+  "note": "The theorem statement is unchanged. The five existing canonical map definitions have moved byte-identically to the publicly imported definition-only module OrdinaryAffineCounitTensorMaps, with their own ownership node. The proof uses the actual tower tensor counit square and a separate structural projection comparison."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-e11dbefb8",
+  "group": "Q136",
+  "result": "pass",
+  "note": "Re-delivery after H2 RETURN at 8a5a4c598e0a. Lean change = 4 public imports of the owning modules of the newly cited def nodes (all exist live); statement and 5 helpers byte-identical, so the earlier full math check holds: N>0, finite A with NA=0 and no Nontrivial, Noetherian S with N a unit, all d, unbounded K; eps = actual transported affineTraceAdjunction counit; t_d its unit value; P.hom = compactSupportProjectionMap so P.inv is the node's inverse; P.inv >> (K⊗t) >> rho order correct; d=0, zero ring, empty scheme covered. Item: only stmt_deps and lean changed (statement, proof, proof_deps = live; proof_deps = union of step uses); lem-amb-shriek-tensor-composition -> def-pur-compact-support-projection-map, lem-coef-dualizing-affine-space -> new def-pur-affine-dualizing-tower-comparison, plus def-amb-affine-trace-construction/-tower and def-asd-ordinary-finite-p1-data/-arrows. New node: existing:true owner of the live @[irreducible] def affineDualizingTowerComparison, statement verbatim; body = inverse identity comparison at 0, then compactification iso whiskered by F_r, C_r after Ru_!, proper/open compositor, matching the node text; no .choose/Nonempty; stmt_deps as requested; import_flags present. All snapshot dep records byte-identical to live. Q06's parallel delivery was returned; item not landed, not superseded. Lean statement verbatim; one sorry; 8-step docstring; both report sections present. Advisory: ordinaryFiniteUnit/Line, leftDerivedUpperStarComp, derivedTensorAssociator are owned by def nodes outside stmt_deps (base-era). No compile (no file changed)."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-e2b21",
+  "group": "G2",
+  "result": "pass",
+  "landing": "20261025T204611-L-2980818",
+  "kind": "interface",
+  "note": "independent cc review: item theorem statement byte-identical to clone; the 5 moved defs byte-identical in OrdinaryAffineCounitTensorMaps (public re-export, 0 importers); 3 sorry holes checked against OrdinaryFiniteP1Datum.counit_normalization, derivedOpenImmersionLowerShriekProjectionMap (= adjunction projectionMap) and the canonical compact-support compositor lemmas; #print axioms of item, tower, line and the 5 categorical lemmas on a scratch build"
+ }
+}

@@ -1,0 +1,226 @@
+{
+ "id": "lem-sfb-pinned-root-hom-extension-criterion",
+ "kind": "statement",
+ "title": "Extension criterion for torus, simple-root and Weyl maps",
+ "statement": "Let $A$ be a nonzero commutative ring and $P=(G,T=D_A(M),\\Phi,\\Phi^\\vee,\\Delta,(X_\\alpha))$ a pinned split realization [def-sfb-pinned-split-root-realization] with $|\\Delta|\\leq2$. Use the root homomorphisms $x_\\gamma:\\mathbf G_a\\to U_\\gamma\\subseteq G$, simple Weyl representatives $n_\\alpha$, reflections $s_\\alpha$, and ordered positive-root subgroup $U^+$ of [lem-sfb-low-rank-universal-root-coordinates]. Let $H$ be an affine $A$-group scheme, meaning an affine scheme over $\\operatorname{Spec}A$ equipped with multiplication, identity and inverse satisfying the group diagrams. Suppose given homomorphisms $f_T:T\\to H$, $f_\\alpha:\\mathbf G_a\\to H$ for $\\alpha\\in\\Delta$, elements $h_\\alpha\\in H(A)$, and a homomorphism $F_+:U^+\\to H$ such that $F_+\\circ x_\\alpha=f_\\alpha$ at every simple root. Assume the following identities hold on points over every commutative $A$-algebra $R$:\n\n1. For $t\\in T(R)$ and $z\\in R$, one has $f_T(t)f_\\alpha(z)f_T(t)^{-1}=f_\\alpha(\\alpha(t)z)$ and $h_\\alpha f_T(t)h_\\alpha^{-1}=f_T(s_\\alpha(t))$, where $s_\\alpha:T\\to T$ is the torus automorphism dual to the character-lattice reflection.\n2. One has $h_\\alpha^2=f_T(\\alpha^\\vee(-1))$ and $(h_\\alpha f_\\alpha(1))^3=1$. For distinct simple roots $\\alpha,\\beta$, put $m_{\\alpha\\beta}=\\operatorname{ord}(s_\\alpha s_\\beta)$ and $t_{\\alpha\\beta}=(n_\\alpha n_\\beta)^{m_{\\alpha\\beta}}\\in T(A)$. Require $(h_\\alpha h_\\beta)^{m_{\\alpha\\beta}}=f_T(t_{\\alpha\\beta})$.\n3. For $\\alpha\\in\\Delta$, $\\gamma\\in\\Phi^+\\setminus\\{\\alpha\\}$ and $z\\in R$, one has\n$$h_\\alpha F_+(x_\\gamma(z))h_\\alpha^{-1}=F_+(n_\\alpha x_\\gamma(z)n_\\alpha^{-1}).$$\nHere $s_\\alpha\\gamma$ is positive in this case, so the argument of $F_+$ lies in $U^+$.\n\nThen there is a unique $A$-group-scheme homomorphism $f:G\\to H$ with $f|_T=f_T$, $f\\circ x_\\alpha=f_\\alpha$, and $f(n_\\alpha)=h_\\alpha$ for every simple root. Uniqueness also holds when comparing any two already existing homomorphisms with these restrictions, without separately checking conditions 1--3. Rank zero and one are allowed, with the corresponding empty lists of conditions. All assertions allow nonreduced and disconnected $A$.",
+ "source": {
+  "document": "https://math.stanford.edu/~conrad/papers/luminysga3smf.pdf",
+  "place": "Theorem 6.2.4 and equations (6.2.2)--(6.2.6), printed pp.201--203; uniqueness in the paragraph preceding Theorem 6.2.1, pp.198--199. Rank at most two specialization: for rank two the subgroup indexed by the two simple roots is the entire positive-root subgroup; for rank one there is no pair condition Read online; local PDF WANTED. This is Conrad, Reductive Group Schemes, not an invocation of any SGA source. No Stacks tag states this group-theoretic input."
+ },
+ "stmt_deps": [
+  "def-sfb-pinned-split-root-realization",
+  "lem-sfb-low-rank-universal-root-coordinates"
+ ],
+ "proof": [
+  {
+   "text": "If $\\Delta=\\varnothing$, the base condition forces $\\Phi=\\varnothing$: a root would be a nonzero integer combination of the empty base. The open-cell assertion of [lem-sfb-split-root-subgroup-weyl-calculus] then identifies $T=\\Omega$ as an open subscheme of $G$, and its surjective multiplication $T\\times_A T\\to G$ factors through $T\\hookrightarrow G$. Thus this open immersion has image all of $G$, so is an isomorphism. The required extension is $f_T$ under $G=T$, and its torus restriction determines it uniquely.",
+   "uses": [
+    "lem-sfb-split-root-subgroup-weyl-calculus"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://math.stanford.edu/~conrad/papers/luminysga3smf.pdf",
+    "place": "Section 6.2 opening paragraph, p.198; rank-zero specialization."
+   }
+  },
+  {
+   "text": "Assume $\\Delta\\ne\\varnothing$. Identify the conventions of [lem-sfb-low-rank-universal-root-coordinates] with [lem-sfb-split-root-subgroup-weyl-calculus]: $z\\mapsto\\exp_\\gamma(zX_\\gamma)$ is $x_\\gamma$, since both are equivariant closed homomorphisms with differential $1\\mapsto X_\\gamma$, and the former node gives uniqueness. The linked opposite generator, hence $n_\\alpha$, is the same by the latter node's uniqueness. In particular $\\exp_\\alpha(X_\\alpha)=x_\\alpha(1)$. The torus automorphisms $s_\\alpha$ of the two nodes coincide: $s_\\alpha(t)=t\\alpha^\\vee(\\alpha(t))^{-1}$ induces $m\\mapsto m-\\langle m,\\alpha^\\vee\\rangle\\alpha$ on characters. The integers $m_{\\alpha\\beta}$ also agree: since $Z_G(T)=T$ by [lem-sfb-split-root-subgroup-weyl-calculus], an element of $N_G(T)/T$ acting trivially on $T$ is trivial, so the order of $s_\\alpha s_\\beta$ in that Weyl group equals its order as an automorphism of $T$, which is the integer of the item. Hence $t_{\\alpha\\beta}=(n_\\alpha n_\\beta)^{m_{\\alpha\\beta}}$ is the same element of $T(A)$ for both nodes' conventions, as used in step 3. Put $\\bar f_\\alpha=F_+|_{U_\\alpha}$. For a pair of distinct simple roots, $\\Delta=\\{\\alpha,\\beta\\}$, so the base sign condition gives $\\Psi_{\\alpha\\beta}=\\Phi^+$. The ordered-product descriptions in those nodes identify $U_{\\Psi_{\\alpha\\beta}}=U^+$; take $q_{\\alpha\\beta}=F_+$. Its simple-root restrictions are $\\bar f_\\alpha,\\bar f_\\beta$, with $\\bar f_\\alpha\\circ x_\\alpha=f_\\alpha$. In rank one no pair map is required.",
+   "uses": [
+    "lem-sfb-low-rank-universal-root-coordinates",
+    "lem-sfb-split-root-subgroup-weyl-calculus"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://math.stanford.edu/~conrad/papers/luminysga3smf.pdf",
+    "place": "Proposition 5.1.16 and Theorem 6.2.4, pp.148, 201--203."
+   }
+  },
+  {
+   "text": "The supplied identities verify the hypotheses of [lem-sfb-pinned-root-relations-hom-criterion]. The first identity gives torus equivariance for each $\\bar f_\\alpha$ and the reflection formula for $h_\\alpha$; the root-coordinate parametrizations extend the displayed equalities from $x_\\alpha(z)$ and $x_\\gamma(z)$ to all points of the corresponding root subgroups over every $A$-algebra. The square relation is exactly $h_\\alpha^2= f_T(\\alpha^\\vee(-1))$, while the cubic relation is the given $(h_\\alpha f_\\alpha(1))^3=1$ because $x_\\alpha(1)=\\exp_\\alpha(X_\\alpha)$ and $F_+\\circ x_\\alpha=f_\\alpha$. The pair relation is assumption 2. Finally, for $c\\in\\Psi_{\\alpha\\beta}\\setminus\\{\\alpha\\}$ (and symmetrically for $\\beta$), assumption 3 gives the required conjugation identity for $q_{\\alpha\\beta}$; [lem-sfb-split-root-subgroup-weyl-calculus] ensures the conjugated point remains in $U_{\\Psi_{\\alpha\\beta}}$. Therefore the criterion produces an $A$-group-scheme homomorphism $f:G\\to H$ with the stated torus, simple-root and Weyl restrictions. Its restriction along $x_\\alpha$ is $f_\\alpha$ by construction.",
+   "uses": [
+    "lem-sfb-pinned-root-relations-hom-criterion",
+    "lem-sfb-low-rank-universal-root-coordinates",
+    "lem-sfb-split-root-subgroup-weyl-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://math.stanford.edu/~conrad/papers/luminysga3smf.pdf",
+    "place": "Theorem 6.2.4 and equations (6.2.2)--(6.2.6), pp.201--203."
+   }
+  },
+  {
+   "text": "For uniqueness, let $f,g:G\\to H$ have the prescribed restrictions. Their restrictions to every $U_\\alpha$ agree because the root maps $x_\\alpha$ parametrise those root subgroups and $f\\circ x_\\alpha=g\\circ x_\\alpha=f_\\alpha$; their restrictions to $T$ agree by hypothesis, and their values on $n_\\alpha$ are both $h_\\alpha$. The uniqueness clause of [lem-sfb-pinned-root-relations-hom-criterion] therefore gives $f=g$. All arguments use identities of points over arbitrary commutative $A$-algebras, so disconnected and nonreduced bases are included.",
+   "uses": [
+    "lem-sfb-pinned-root-relations-hom-criterion",
+    "lem-sfb-low-rank-universal-root-coordinates"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://math.stanford.edu/~conrad/papers/luminysga3smf.pdf",
+    "place": "Uniqueness paragraph preceding Theorem 6.2.1, pp.198--199, and Theorem 6.2.4, pp.201--203."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-low-rank-universal-root-coordinates",
+  "lem-sfb-pinned-root-relations-hom-criterion",
+  "lem-sfb-split-root-subgroup-weyl-calculus"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://math.stanford.edu/~conrad/papers/luminysga3smf.pdf",
+  "place": "Assembly specialization of Theorem 6.2.4, printed p.201, equations (6.2.2)--(6.2.6); online source read, local archival copy WANTED."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Homomorphism from a split reductive group scheme extending torus root group maps and Weyl elements satisfying relations",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"GroupExtension.Splitting.toMonoidHom\", \"module\": \"Mathlib/GroupTheory/GroupExtension/Defs\", \"type\": \"{N : Type u_1} →\\n  {E : Type u_2} →\\n    {G : Type u_3} →\\n      [inst : Group N] → [inst_1 : Group E] → [inst_2 : Group G] → {S : GroupExtension N E G} → S.Splitting → G →* E\", \"doc\": \"Given a group extension $1 \\\\to N \\\\to E \\\\to G \\\\to 1$ and a splitting $s : G \\\\to E$ (a group homomorphism such that the composition $G \\\\xrightarrow{s} E \\\\xrightarrow{\\\\pi} G$ is the identity), this const\"}\n  {\"name\": \"RootPairing.Hom.weightMap\", \"module\": \"Mathlib/LinearAlgebra/RootSystem/Hom\", \"type\": \"{ι : Type u_1} →\\n  {R : Type u_2} →\\n    {M : Type u_3} →\\n      {N : Type u_4} →\\n        [inst : CommRing R] →\\n          [inst_1 : AddCommGroup M] →\\n            [inst_2 : Module R M] →\\n              [inst_3 : AddCommGroup N] →\\n                [inst_4 : Module R N] →\\n                  {ι₂ : Type u_5} \", \"doc\": \"Given commutative rings $ R $, $ R $-modules $ M, N $, and $ M', N' $, and homomorphisms between root pairings $ (M, N) $ and $ (M', N') $, this is the linear map component of the homomorphism that ma\"}\n  {\"name\": \"RootPairing.weylGroupToPerm\", \"module\": \"Mathlib/LinearAlgebra/RootSystem/WeylGroup\", \"type\": \"{ι : Type u_1} →\\n  {R : Type u_2} →\\n    {M : Type u_3} →\\n      {N : Type u_4} →\\n        [inst : CommRing R] →\\n          [inst_1 : AddCommGroup M] →\\n            [inst_2 : Module R M] →\\n              [inst_3 : AddCommGroup N] → [inst_4 : Module R N] → (P : RootPairing ι R M N) → ↥P.weylGroup →* ι ≃ ι\", \"doc\": \"The group homomorphism from the Weyl group of a root pairing $ P $ to the permutation group of its index set $ \\\\iota $, sending each Weyl group element to the permutation it induces on $ \\\\iota $ via i\"}\n  {\"name\": \"RootPairing.EmbeddedG2\", \"module\": \"Mathlib/LinearAlgebra/RootSystem/Finite/G2\", \"type\": \"{ι : Type u_1} →\\n  {R : Type u_2} →\\n    {M : Type u_3} →\\n      {N : Type u_4} →\\n        [inst : CommRing R] →\\n          [inst_1 : AddCommGroup M] →\\n            [inst_2 : Module R M] → [inst_3 : AddCommGroup N] → [inst_4 : Module R N] → RootPairing ι R M N → Type u_1\", \"doc\": \"Given a commutative ring $ R $, $ R $-modules $ M $ and $ N $, and a root pairing between them, this constructs the type of embedded $ G_2 $ root systems parameterized by a type $ \\\\iota $, defined ind\"}\n  {\"name\": \"RootPairing.weylGroup_apply_root\", \"module\": \"Mathlib/LinearAlgebra/RootSystem/WeylGroup\", \"type\": \"∀ {ι : Type u_1} {R : Type u_2} {M : Type u_3} {N : Type u_4} [inst : CommRing R] [inst_1 : AddCommGroup M]\\n  [inst_2 : Module R M] [inst_3 : AddCommGroup N] [inst_4 : Module R N] (P : RootPairing ι R M N) (g : ↥P.weylGroup)\\n  (i : ι), g • P.root i = P.root ((P.weylGroupToPerm g) i)\", \"doc\": \"For any element $ g $ of the Weyl group of a root pairing $ P $ and any index $ i $, the action of $ g $ on the root $ \\\\alpha_i $ satisfies $ g \\\\cdot \\\\alpha_i = \\\\alpha_{\\\\sigma(i)} $, where $ \\\\sigma $ \"}\n  {\"name\": \"RootPairing.range_weylGroup_weightHom\", \"module\": \"Mathlib/LinearAlgebra/RootSystem/WeylGroup\", \"type\": \"∀ {ι : Type u_1} {R : Type u_2} {M : Type u_3} {N : Type u_4} [inst : CommRing R] [inst_1 : AddCommGroup M]\\n  [inst_2 : Module R M] [inst_3 : AddCommGroup N] [inst_4 : Module R N] (P : RootPairing ι R M N),\\n  ((RootPairing.Equiv.weightHom P).restrict P.weylGroup).range = Subgroup.closure (Set.range \", \"doc\": \"The image of the Weyl group of a root pairing $ P $ under the weight homomorphism is equal to the subgroup generated by the reflections of $ P $. This means that every element in the image can be expr\"}\n  {\"name\": \"RootPairing.weylGroupRootRep\", \"module\": \"Mathlib/LinearAlgebra/RootSystem/WeylGroup\", \"type\": \"{ι : Type u_1} →\\n  {R : Type u_2} →\\n    {M : Type u_3} →\\n      {N : Type u_4} →\\n        [inst : CommRing R] →\\n          [inst_1 : AddCommGroup M] →\\n            [inst_2 : Module R M] →\\n              [inst_3 : AddCommGroup N] →\\n                [inst_4 : Module R N] → (P : RootPairing ι R M N) → Repres\", \"doc\": \"The representation of the Weyl group of a root pairing $ P $ on the underlying $ R $-module $ M $, constructed via the distributive multiplicative action of the Weyl group on $ M $ that commutes with \"}\n  {\"name\": \"GroupExtension.Splitting.conjAct\", \"module\": \"Mathlib/GroupTheory/GroupExtension/Basic\", \"type\": \"{N : Type u_1} →\\n  {G : Type u_2} →\\n    [inst : Group N] →\\n      [inst_1 : Group G] →\\n        {E : Type u_3} → [inst_2 : Group E] → {S : GroupExtension N E G} → S.Splitting → G →* MulAut N\", \"doc\": \"The group homomorphism $ G \\\\to \\\\mathrm{Aut}(N) $ obtained by composing the splitting $ s : G \\\\to E $ with the conjugation action homomorphism $ E \\\\to \\\\mathrm{Aut}(N) $, where $ \\\\mathrm{Aut}(N) $ denot\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: abstract root pairings, Lie-algebra matrices, abstract presented groups and ordinary scheme morphisms do not give these reductive-group-scheme assertions"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"GroupScheme\", \"Hom\"",
+   "results": "[loogle] OK 0 hit(s)",
+   "date": "2026-10-24",
+   "verdict": "no match: abstract root pairings, Lie-algebra matrices, abstract presented groups and ordinary scheme morphisms do not give these reductive-group-scheme assertions"
+  },
+  {
+   "tool": "grep",
+   "query": "reductive.*presentation|homomorphism.*root.*group|root.*homomorphism.*extend",
+   "results": "[grep] OK 0 hit(s)",
+   "date": "2026-10-24",
+   "verdict": "no match: abstract root pairings, Lie-algebra matrices, abstract presented groups and ordinary scheme morphisms do not give these reductive-group-scheme assertions"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Generators and relations criterion extending simple root homomorphisms of split reductive group schemes",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"CartanMatrix.Generators\", \"module\": \"Mathlib.Algebra.Lie.SerreConstruction\", \"type\": \"Type v → Type v\", \"doc\": \"The inductive structure defining the generators associated with a Cartan matrix in the context of Lie algebras, typically encoding simple root vectors and their relations.\"}\n  {\"name\": \"CartanMatrix.Generators.F\", \"module\": \"Mathlib.Algebra.Lie.SerreConstruction\", \"type\": \"{B : Type v} → B → CartanMatrix.Generators B\", \"doc\": \"A constructor that maps each element of a type $ B $ to a generator in the Cartan matrix's generator structure, representing simple roots in the Lie algebra construction.\"}\n  {\"name\": \"CartanMatrix.Generators.ctorElimType\", \"module\": \"Mathlib.Algebra.Lie.SerreConstruction\", \"type\": \"{B : Type v} → {motive : CartanMatrix.Generators B → Sort u} → ℕ → Sort (max 1 (imax (v + 1) u))\", \"doc\": \"An inductive structure defining the generators $E_b$, $F_b$, and $H_i$ associated with a Cartan matrix in the context of Lie algebras. These generators correspond to simple root vectors and Cartan sub\"}\n  {\"name\": \"CartanMatrix.Generators.E\", \"module\": \"Mathlib.Algebra.Lie.SerreConstruction\", \"type\": \"{B : Type v} → B → CartanMatrix.Generators B\", \"doc\": \"The constructor that maps each element $ b $ of type $ B $ to a generator in the inductive structure associated with a Cartan matrix, representing simple root vectors in Lie algebra constructions.\"}\n  {\"name\": \"PresentedGroup.toGroup.of\", \"module\": \"Mathlib.GroupTheory.PresentedGroup\", \"type\": \"(h : ∀ r ∈ rels, FreeGroup.lift f r = 1) {x : α} : toGroup h (of x) = f x\", \"doc\": \"Let $\\\\langle \\\\alpha \\\\mid \\\\text{rels} \\\\rangle$ be a group presented by generators $\\\\alpha$ and relations $\\\\text{rels} \\\\subseteq \\\\text{FreeGroup}(\\\\alpha)$. If $f : \\\\text{FreeGroup}(\\\\alpha) \\\\to G$ is a g\"}\n  {\"name\": \"CartanMatrix.Generators.casesOn\", \"module\": \"Mathlib.Algebra.Lie.SerreConstruction\", \"type\": \"{B : Type v} →\\n  {motive : CartanMatrix.Generators B → Sort u} →\\n    (t : CartanMatrix.Generators B) →\\n      ((a : B) → motive (CartanMatrix.Generators.H a)) →\\n        ((a : B) → motive (CartanMatrix.Generators.E a)) → ((a : B) → motive (CartanMatrix.Generators.F a)) → motive t\", \"doc\": \"The inductive structure defining the Serre generators associated with a Cartan matrix in Lie algebra theory, consisting of three types of elements: simple root vectors $e_i$ (via constructor E), their\"}\n  {\"name\": \"PresentedGroup.ext_iff\", \"module\": \"Mathlib.GroupTheory.PresentedGroup\", \"type\": \"∀ {α : Type u_1} {G : Type u_2} [inst : Group G] {rels : Set (FreeGroup α)} {φ ψ : PresentedGroup rels →* G},\\n  φ = ψ ↔ ∀ (x : α), φ (PresentedGroup.of x) = ψ (PresentedGroup.of x)\", \"doc\": \"For any group $G$ and a presented group $\\\\langle \\\\alpha \\\\mid \\\\text{rels} \\\\rangle$, two monoid homomorphisms $\\\\varphi, \\\\psi : \\\\langle \\\\alpha \\\\mid \\\\text{rels} \\\\rangle \\\\to G$ are equal if and only if the\"}\n  {\"name\": \"PresentedGroup.toGroup\", \"module\": \"Mathlib.GroupTheory.PresentedGroup\", \"type\": \"(h : ∀ r ∈ rels, FreeGroup.lift f r = 1) : PresentedGroup rels →* G\", \"doc\": \"Given a free group on generators $\\\\alpha$ and a set of relations $\\\\text{rels}$, if every relation $r \\\\in \\\\text{rels}$ is mapped to the identity element in $G$ by a group homomorphism $F : \\\\text{FreeGr\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: abstract root pairings, Lie-algebra matrices, abstract presented groups and ordinary scheme morphisms do not give these reductive-group-scheme assertions"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Construct group scheme homomorphism from torus and positive root subgroup maps with normalizer compatibility",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"RootPairing.Hom.weightMap\", \"module\": \"Mathlib/LinearAlgebra/RootSystem/Hom\", \"type\": \"{ι : Type u_1} →\\n  {R : Type u_2} →\\n    {M : Type u_3} →\\n      {N : Type u_4} →\\n        [inst : CommRing R] →\\n          [inst_1 : AddCommGroup M] →\\n            [inst_2 : Module R M] →\\n              [inst_3 : AddCommGroup N] →\\n                [inst_4 : Module R N] →\\n                  {ι₂ : Type u_5} \", \"doc\": \"Given commutative rings $ R $, $ R $-modules $ M, N $, and $ M', N' $, and homomorphisms between root pairings $ (M, N) $ and $ (M', N') $, this is the linear map component of the homomorphism that ma\"}\n  {\"name\": \"RootPairing.Hom.coweightMap\", \"module\": \"Mathlib/LinearAlgebra/RootSystem/Hom\", \"type\": \"{ι : Type u_1} →\\n  {R : Type u_2} →\\n    {M : Type u_3} →\\n      {N : Type u_4} →\\n        [inst : CommRing R] →\\n          [inst_1 : AddCommGroup M] →\\n            [inst_2 : Module R M] →\\n              [inst_3 : AddCommGroup N] →\\n                [inst_4 : Module R N] →\\n                  {ι₂ : Type u_5} \", \"doc\": \"Given homomorphisms between root pairings $(M,N)$ and $(M',N')$ over a commutative ring $R$, this is the linear map from $N'$ to $N$ that preserves the $R$-module structure, forming part of the data e\"}\n  {\"name\": \"RootPairing.IsG2.toEmbeddedG2\", \"module\": \"Mathlib/LinearAlgebra/RootSystem/Finite/G2\", \"type\": \"{ι : Type u_1} →\\n  {R : Type u_2} →\\n    {M : Type u_3} →\\n      {N : Type u_4} →\\n        [inst : CommRing R] →\\n          [inst_1 : AddCommGroup M] →\\n            [inst_2 : Module R M] →\\n              [inst_3 : AddCommGroup N] → [inst_4 : Module R N] → (P : RootPairing ι R M N) → [P.IsG2] → P.EmbeddedG\", \"doc\": \"Given a root pairing $ P $ satisfying the G2 root system axioms, this constructs the corresponding embedded $ G_2 $ root system by selecting two roots $ \\\\text{long} $ and $ \\\\text{short} $ such that th\"}\n  {\"name\": \"RootDatum\", \"module\": \"Mathlib/LinearAlgebra/RootSystem/Defs\", \"type\": \"Type u_1 →\\n  (X₁ : Type u_5) → (X₂ : Type u_6) → [AddCommGroup X₁] → [AddCommGroup X₂] → Type (max (max (max u_1 0) u_5) u_6)\", \"doc\": \"A root datum is a root pairing between two additive commutative groups $X_1$ and $X_2$ over the integers $\\\\mathbb{Z}$, where each group is equipped with its canonical $\\\\mathbb{Z}$-module structure. Th\"}\n  {\"name\": \"RootPairing.EmbeddedG2\", \"module\": \"Mathlib/LinearAlgebra/RootSystem/Finite/G2\", \"type\": \"{ι : Type u_1} →\\n  {R : Type u_2} →\\n    {M : Type u_3} →\\n      {N : Type u_4} →\\n        [inst : CommRing R] →\\n          [inst_1 : AddCommGroup M] →\\n            [inst_2 : Module R M] → [inst_3 : AddCommGroup N] → [inst_4 : Module R N] → RootPairing ι R M N → Type u_1\", \"doc\": \"Given a commutative ring $ R $, $ R $-modules $ M $ and $ N $, and a root pairing between them, this constructs the type of embedded $ G_2 $ root systems parameterized by a type $ \\\\iota $, defined ind\"}\n  {\"name\": \"RootPairing.Equiv.weightHom\", \"module\": \"Mathlib/LinearAlgebra/RootSystem/Hom\", \"type\": \"{ι : Type u_1} →\\n  {R : Type u_2} →\\n    {M : Type u_3} →\\n      {N : Type u_4} →\\n        [inst : CommRing R] →\\n          [inst_1 : AddCommGroup M] →\\n            [inst_2 : Module R M] →\\n              [inst_3 : AddCommGroup N] → [inst_4 : Module R N] → (P : RootPairing ι R M N) → P.Aut →* M ≃ₗ[R] M\", \"doc\": \"For a root pairing $ P $ over a commutative ring $ R $, this defines a monoid homomorphism from the automorphism group of $ P $ to the group of $ R $-linear automorphisms of the underlying module $ M \"}\n  {\"name\": \"RootPairing.Equiv.coweightHom\", \"module\": \"Mathlib/LinearAlgebra/RootSystem/Hom\", \"type\": \"{ι : Type u_1} →\\n  {R : Type u_2} →\\n    {M : Type u_3} →\\n      {N : Type u_4} →\\n        [inst : CommRing R] →\\n          [inst_1 : AddCommGroup M] →\\n            [inst_2 : Module R M] →\\n              [inst_3 : AddCommGroup N] → [inst_4 : Module R N] → (P : RootPairing ι R M N) → P.Aut →* (N ≃ₗ[R] N)ᵐᵒ\", \"doc\": \"For a root pairing $ P $ over a commutative ring $ R $, this defines a monoid homomorphism from the automorphism group of $ P $ to the opposite monoid of linear automorphisms of the coweight module $ \"}\n  {\"name\": \"RootPairing.Hom.root_weightMap\", \"module\": \"Mathlib/LinearAlgebra/RootSystem/Hom\", \"type\": \"∀ {ι : Type u_1} {R : Type u_2} {M : Type u_3} {N : Type u_4} [inst : CommRing R] [inst_1 : AddCommGroup M]\\n  [inst_2 : Module R M] [inst_3 : AddCommGroup N] [inst_4 : Module R N] {ι₂ : Type u_5} {M₂ : Type u_6} {N₂ : Type u_7}\\n  [inst_5 : AddCommGroup M₂] [inst_6 : Module R M₂] [inst_7 : AddCommGro\", \"doc\": \"For any homomorphism $ f : P \\\\to Q $ between root pairings over a commutative ring $ R $, the composition of the weight map $ f_{\\\\text{weight}} $ with the root embedding $ \\\\Phi_P : \\\\iota \\\\to M $ of $ \"}",
+   "date": "2026-10-24",
+   "verdict": "no match: abstract root pairings, Lie-algebra matrices, abstract presented groups and ordinary scheme morphisms do not give these reductive-group-scheme assertions"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Homomorphism from a split reductive group scheme extending torus root group maps and Weyl elements satisfying relations",
+   "results": "{\"t\": \"2026-10-24T11:22:58Z\", \"tool\": \"leanfinder\", \"query\": \"Homomorphism from a split reductive group scheme extending torus root group maps and Weyl elements satisfying relations\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"GroupExtension.Splitting.toMonoidHom\", \"RootPairing.Hom.weightMap\", \"RootPairing.weylGroupToPerm\", \"RootPairing.EmbeddedG2\", \"RootPairing.weylGroup_apply_root\", \"RootPairing.range_weylGroup_weightHom\", \"RootPairing.weylGroupRootRep\", \"GroupExtension.Splitting.conjAct\"], \"digest\": \"e68a9e29b7a9eb4b\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern abstract root pairings, abstract presented groups, Lie algebras, and schemes; none gives this split reductive group-scheme extension theorem."
+  },
+  {
+   "tool": "loogle",
+   "query": "GroupScheme, Hom",
+   "results": "{\"t\": \"2026-10-24T11:22:59Z\", \"tool\": \"loogle\", \"query\": \"GroupScheme, Hom\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"loogle: unknown identifier 'GroupScheme'\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern abstract root pairings, abstract presented groups, Lie algebras, and schemes; none gives this split reductive group-scheme extension theorem."
+  },
+  {
+   "tool": "grep",
+   "query": "reductive.*presentation|homomorphism.*root.*group|root.*homomorphism.*extend",
+   "results": "{\"t\": \"2026-10-24T11:22:59Z\", \"tool\": \"grep\", \"query\": \"reductive.*presentation|homomorphism.*root.*group|root.*homomorphism.*extend\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern abstract root pairings, abstract presented groups, Lie algebras, and schemes; none gives this split reductive group-scheme extension theorem."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Generators and relations criterion extending simple root homomorphisms of split reductive group schemes",
+   "results": "{\"t\": \"2026-10-24T11:23:00Z\", \"tool\": \"leansearch\", \"query\": \"Generators and relations criterion extending simple root homomorphisms of split reductive group schemes\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CartanMatrix.Generators\", \"CartanMatrix.Generators.F\", \"CartanMatrix.Generators.ctorElimType\", \"CartanMatrix.Generators.E\", \"PresentedGroup.toGroup.of\", \"CartanMatrix.Generators.casesOn\", \"PresentedGroup.ext_iff\", \"PresentedGroup.toGroup\"], \"digest\": \"411d3913419a29ca\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern abstract root pairings, abstract presented groups, Lie algebras, and schemes; none gives this split reductive group-scheme extension theorem."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Construct group scheme homomorphism from torus and positive root subgroup maps with normalizer compatibility",
+   "results": "{\"t\": \"2026-10-24T11:23:05Z\", \"tool\": \"leanfinder\", \"query\": \"Construct group scheme homomorphism from torus and positive root subgroup maps with normalizer compatibility\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"RootPairing.Hom.weightMap\", \"RootPairing.Hom.coweightMap\", \"RootPairing.IsG2.toEmbeddedG2\", \"RootDatum\", \"RootPairing.EmbeddedG2\", \"RootPairing.Equiv.weightHom\", \"RootPairing.Equiv.coweightHom\", \"RootPairing.Hom.root_weightMap\"], \"digest\": \"df97be445f69f994\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern abstract root pairings, abstract presented groups, Lie algebras, and schemes; none gives this split reductive group-scheme extension theorem."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A homomorphism of pinned split reductive group schemes exists from torus and root maps satisfying rank two relations",
+   "results": "{\"t\": \"2026-10-24T11:23:06Z\", \"tool\": \"leansearch\", \"query\": \"A homomorphism of pinned split reductive group schemes exists from torus and root maps satisfying rank two relations\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"RootPairing.Hom.coroot_coweightMap\", \"RootPairing.Hom.mk.inj\", \"AlgebraicGeometry.Scheme.Hom\", \"RootPairing.Hom.ext\", \"RootPairing.Hom.mk.noConfusion\", \"RootPairing.Hom\", \"RootPairing.Hom.mk.injEq\", \"RootPairing.Hom.noConfusion\"], \"digest\": \"5329be0eb9177a03\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern abstract root pairings, abstract presented groups, Lie algebras, and schemes; none gives this split reductive group-scheme extension theorem."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-low-rank-pinned-root-hom",
+  "date": "2026-10-24",
+  "group": "Q129"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Haboush symmetric-power lifting for a trivial quotient representation. Supporting representation-theoretic input: Steinberg endomorphisms detect a nonzero fixed vector. Supporting Self-duality of rho section modules at characteristic-dependent weights. Supporting input: Positive-characteristic simplicity step, using irreducibility of the Steinberg induced module rather than assuming self-duality. Numerical input to the dimension comparison: Weyl dimension of the induced module. Supporting Kempf vanishing for dominant flag line bundles. Positive-characteristic Andersen–Haboush argument: trivial pushforward of M_((p^r-1)rho), before the Serre twisting calculation. Supporting input: Lemma 2.3, second assertion, and Lemma 2.1, printed pp.153--155: H^0(u,V(lambda))=K v_lambda for p-restricted dominant lambda. With roots positive in Lie(B), V(lambda)=Gamma(M_{-w0 lambda}). Supporting input: Simple-root distributions and infinitesimal subalgebra calculus. Supporting input: pinning-compatible integral-to-geometric distribution comparison, with all positive root divided powers, before simple-root generation. Integral-root-model prerequisite before the comparison: integral Chevalley construction and a positive-root coordinate chart; integral matrix-closure construction: the big cell and its Weyl translates, before identifying the special fibre. Supporting input: Integral closure atlas, exhaustion of each special fibre: exclude extra components using the generic and special identity-component big-cell dimensions. Supporting input: Lemma 3.7 (first assertion, the Iwahori--Matsumoto maximal-boundedness statement) and its application in Proposition 4.3, second paragraph, printed pp.7-8; Cartan double-coset input used to prove the maximal-boundedness prerequisite, before the torus-powers argument. Supporting input: Theorem 1.3, implication (1) to (3), printed pp.1, 6; Definition 3.4 and Lemma 3.6, printed pp.5-6. The complete-DVR cocharacter form, before the non-complete descent of Theorem 4.1. Supporting input: Section 2, Claim 2, printed p.2; Section 3, proof of Theorem 1.3, (1) implies (2), printed p.6, removes the residue-field and splitness restrictions. Supporting input: Claim 2: choose a linear embedding and use reductivity to make the homogeneous quotient affine. Supporting input: Alper, Adequate moduli spaces and geometrically reductive group schemes, Theorem 9.7.5, Proposition 9.3.1(i), Lemma 9.2.5(2),(3), printed pp.522,524,527--528. WANTED local copy; read https://content.algebraicgeometry.nl/2014-4/2014-4-022.pdf. Supporting input: Theorem 9.7.5, reductive-to-geometrically-reductive direction, reductions preceding the final determinant argument, printed p.527; use Lemma 9.2.5(2),(5), Proposition 9.3.1 (base change and descent), Proposition 9.5.1 (quotients and extensions). The result is the conditional reduction, not the geometric reductivity theorem itself; no SGA source is invoked. Supporting input: Theorem 9.7.5 reduction paragraph: etale splitting followed by descent from split groups over the integers. Supporting input: Theorem 6.1.16(2), printed p.196, and Theorem 6.1.17 (Isomorphism Theorem), p.197; pinnings as in Definition 6.1.1, p.186; supporting input for Theorem 6.1.17: Central-isogeny lifting and adjoint-torus ambiguity over arbitrary rings; supporting input: Normalized root homomorphisms in semisimple rank at most two. Supporting input: Theorem 6.2.4 and equations (6.2.2)--(6.2.6), printed pp.201--203; uniqueness in the paragraph preceding Theorem 6.2.1, pp.198--199. Rank at most two specialization: for rank two the subgroup indexed by the two simple roots is the entire positive-root subgroup; for rank one there is no pair condition",
+   "via": [
+    "lem-sfb-low-rank-pinned-root-hom",
+    "lem-sfb-split-central-isogeny-lifting",
+    "lem-sfb-pinned-split-root-classification",
+    "lem-sfb-reductive-etale-integral-models",
+    "lem-sfb-reductive-symmetric-power-dvr-reduction",
+    "lem-sfb-reductive-ring-invariant-power-lifting",
+    "lem-sfb-dvr-reductive-linear-affine-quotient",
+    "lem-sfb-reductive-nodal-equivariant-torsor-extension",
+    "lem-sfb-complete-dvr-cocharacter-cartan",
+    "lem-sfb-split-reductive-dvr-cartan-decomposition",
+    "lem-sfb-split-reductive-integral-maximal-bounded",
+    "lem-sfb-quasi-reductive-special-connectedness",
+    "lem-sfb-integral-chevalley-weyl-atlas",
+    "lem-sfb-chevalley-integral-root-model",
+    "lem-sfb-borel-kostant-distribution-comparison",
+    "lem-sfb-borel-simple-root-distribution-calculus",
+    "lem-sfb-restricted-induced-infinitesimal-invariants",
+    "lem-sfb-flag-frobenius-rho-pushforward",
+    "lem-sfb-dominant-flag-line-kempf-vanishing",
+    "lem-sfb-induced-weyl-dimension-formula",
+    "lem-sfb-steinberg-induced-module-irreducible",
+    "lem-sfb-rho-section-self-duality",
+    "lem-sfb-steinberg-endomorphism-detection",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-pinned-root-hom-extension-criterion",
+  "worker": "stage1",
+  "summary": "No finished Lean declaration states this criterion. I audited the imported statement against Conrad's Theorem 6.2.4 and split it as a four-step assembly: rank zero from the open-cell generation statement, restriction of F_+ to the rank-one and rank-two root subgroups, verification of every relation-level hypothesis, and uniqueness. No new node was needed because the existing relation-level criterion and root-subgroup calculus state the non-elementary inputs.",
+  "blueprint": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Haboush symmetric-power lifting for a trivial quotient representation. Supporting representation-theoretic input: Steinberg endomorphisms detect a nonzero fixed vector. Supporting Self-duality of rho section modules at characteristic-dependent weights. Supporting input: Positive-characteristic simplicity step, using irreducibility of the Steinberg induced module rather than assuming self-duality. Numerical input to the dimension comparison: Weyl dimension of the induced module. Supporting Kempf vanishing for dominant flag line bundles. Positive-characteristic Andersen–Haboush argument: trivial pushforward of M_((p^r-1)rho), before the Serre twisting calculation. Supporting input: Lemma 2.3, second assertion, and Lemma 2.1, printed pp.153--155: H^0(u,V(lambda))=K v_lambda for p-restricted dominant lambda. With roots positive in Lie(B), V(lambda)=Gamma(M_{-w0 lambda}). Supporting input: Simple-root distributions and infinitesimal subalgebra calculus. Supporting input: pinning-compatible integral-to-geometric distribution comparison, with all positive root divided powers, before simple-root generation. Integral-root-model prerequisite before the comparison: integral Chevalley construction and a positive-root coordinate chart; integral matrix-closure construction: the big cell and its Weyl translates, before identifying the special fibre. Supporting input: Integral closure atlas, exhaustion of each special fibre: exclude extra components using the generic and special identity-component big-cell dimensions. Supporting input: Lemma 3.7 (first assertion, the Iwahori--Matsumoto maximal-boundedness statement) and its application in Proposition 4.3, second paragraph, printed pp.7-8; Cartan double-coset input used to prove the maximal-boundedness prerequisite, before the torus-powers argument. Supporting input: Theorem 1.3, implication (1) to (3), printed pp.1, 6; Definition 3.4 and Lemma 3.6, printed pp.5-6. The complete-DVR cocharacter form, before the non-complete descent of Theorem 4.1. Supporting input: Section 2, Claim 2, printed p.2; Section 3, proof of Theorem 1.3, (1) implies (2), printed p.6, removes the residue-field and splitness restrictions. Supporting input: Claim 2: choose a linear embedding and use reductivity to make the homogeneous quotient affine. Supporting input: Alper, Adequate moduli spaces and geometrically reductive group schemes, Theorem 9.7.5, Proposition 9.3.1(i), Lemma 9.2.5(2),(3), printed pp.522,524,527--528. WANTED local copy; read https://content.algebraicgeometry.nl/2014-4/2014-4-022.pdf. Supporting input: Theorem 9.7.5, reductive-to-geometrically-reductive direction, reductions preceding the final determinant argument, printed p.527; use Lemma 9.2.5(2),(5), Proposition 9.3.1 (base change and descent), Proposition 9.5.1 (quotients and extensions). The result is the conditional reduction, not the geometric reductivity theorem itself; no SGA source is invoked. Supporting input: Theorem 9.7.5 reduction paragraph: etale splitting followed by descent from split groups over the integers. Supporting input: Theorem 6.1.16(2), printed p.196, and Theorem 6.1.17 (Isomorphism Theorem), p.197; pinnings as in Definition 6.1.1, p.186; supporting input for Theorem 6.1.17: Central-isogeny lifting and adjoint-torus ambiguity over arbitrary rings; supporting input: Normalized root homomorphisms in semisimple rank at most two. Supporting input: Theorem 6.2.4 and equations (6.2.2)--(6.2.6), printed pp.201--203; uniqueness in the paragraph preceding Theorem 6.2.1, pp.198--199. Rank at most two specialization: for rank two the subgroup indexed by the two simple roots is the entire positive-root subgroup; for rank one there is no pair condition This split realizes the final extension-criterion prerequisite by specializing the existing general relation criterion; no unit or chapter route changes."
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q08-2e6a13d26",
+  "group": "Q08",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q08-2e6a13d26 (reviewer sub-agent of L); spot-checked: No new nodes; the statement and stmt_deps are byte-identical to the base (which was unsplit with an empty proof). proof_deps equal the union of step uses, all in unit sk-thm-sf-ctf-stability, so no tool_uses. A dependency closure over the snapshot DAG finds no cycle. Source: Conrad's Reductive Group Schemes (fetched from the author's site, since there is no local copy), printed p.201: (6.2.2)-(6.2.6) and the uniqueness paragraph; Theorem 6.2.4 pp.201-202, with m_ab defined as the order in W(Phi). The item is the rank<=2 case with [a,b]=Phi+ and an affine H. Step 1 (rank 0): Delta empty forces Phi empty; the open cell is T, and the faithfully flat Omega x Omega -> G lands in T, so the open immersion T -> G is surjective and G=T. Correct, and it avoids the false closed-immersion route. Step 2: the uniqueness in lem-sfb-low-rank-universal-root-coordinates identifies exp_gamma(zX_gamma) with x_gamma; the calculus node's unique linked generator identifies the two n_alpha; Psi_ab=Phi+ and U_Psi=U+. Step 3: I checked every hypothesis of lem-sfb-pinned-root-relations-hom-criterion (torus equivariance via x_alpha: G_a = U_alpha, reflection, square, cubic via exp_alpha(X_alpha)=x_alpha(1), pair relation, conjugation on U_c with n_alpha U_c n_alpha^-1 inside U_Psi). Step 4 uses the criterion's uniqueness clause for existing maps. Edge cases checked: rank 0 with a central torus, rank 1 (no pair data), A1xA1, B2/G2 over Z/2 and Z/3, nonreduced and disconnected A. FIX: step 2 never identified the item's m_ab (order of s_a s_b as a torus automorphism) with the criterion's m_ab (order in N_G(T)/T), nor the two s_alpha conventions. I added this to step 2: Z_G(T)=T from the calculus node makes the Weyl action on T faithful, so the orders agree and t_ab is the same element. Only the step 2 text changed; uses and deps are unchanged. The relation-level criterion is the general form and the item is its used specialization, so it is not a duplicate.; 1 file(s) fixed by the reviewer"
+ }
+}

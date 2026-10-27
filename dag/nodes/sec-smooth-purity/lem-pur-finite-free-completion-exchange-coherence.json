@@ -19,146 +19,67 @@
  ],
  "proof": [
   {
-   "text": "Choose a K-flat resolution $P\\to Q$ with flat terms. Write $E_a=-\\otimes_R S$, $E_b=-\\otimes_S V$, $E_{ba}=-\\otimes_R V$ on complexes. The cited derived-change-of-rings theorem computes $T_aQ$ by $E_aP$ and $T_{ba}Q$ by $E_{ba}P$. These are K-flat over the new rings: for an acyclic $S$-complex $N$, restriction to $R$ is acyclic and $N\\otimes_S E_aP\\cong(\\operatorname{Res}_R N)\\otimes_R P$ is acyclic by the definition of K-flatness; the same argument applies to $b$ and $ba$. Thus $T_bT_aQ$ is represented by $E_bE_aP$, and its specified associator is the chain isomorphism $((p\\otimes s)\\otimes q)\\mapsto p\\otimes b(s)q$. The inverse sends $p\\otimes q$ to $(p\\otimes1)\\otimes q$. These balanced formulas commute with differentials since scalars have degree zero.",
+   "text": "Reuse both the ordinary and derived scalar associators and the balanced formula from the ringed K-flat word comparison API. Their normalized formula on termwise flat K-flat resolutions extends to every complex by naturality and cancellation of the resolution quasi-isomorphism. The finite-free quotient comparison gives exactness of E_b, so its universal derived counit is invertible on every complex.",
+   "uses": [
+    "lem-trf-ringed-kflat-word-comparison-descent",
+    "lem-pur-finite-free-quotient-roos-comparison",
+    "lem-pur-derived-change-of-rings"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "On a K-flat P, choose the three prescribed representatives. Apply the cochain horizontal coherence lemma to obtain restricted, the coordinate equation and arithmetic composition. Map these equations to the derived category. Naturality of the scalar counits moves inverse arithmetic maps across extension. Cancel the isomorphisms to obtain the required derived exchange equation.",
+   "uses": [
+    "lem-pur-finite-free-completion-exchange",
+    "lem-pur-finite-free-quotient-roos-horizontal-coherence",
+    "lem-pur-kflat-change-of-rings",
+    "def-pur-completion-representative-accessors"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The augmentation has coordinates (0, quotient family). Product projections and the representatives quotient formula show that extension preserves the selected quotient family; biproduct projections give the augmentation square. Map this square to the derived category and cancel the prescribed arithmetic quasi-isomorphism and computing counits. This proves unit preservation on K-flat representatives.",
+   "uses": [
+    "lem-pur-finite-free-completion-exchange",
+    "def-pur-principal-quotient-completion-model"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "K-flat resolutions and localization extensionality extend the exchange and unit equations to all derived objects. The same cochain witnesses give RepresentativeComposition. Postcomposing the exchange equality with the normalized output isomorphism gives the last transport equation.",
    "uses": [
     "lem-pc-kflat-resolution",
-    "lem-pur-derived-change-of-rings",
-    "def-pc-kflat-complex",
-    "def-pur-sheaf-tensor-product"
+    "lem-pur-finite-free-quotient-roos-horizontal-coherence"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tags 06YS (lemma-K-flat-resolution), 06YN (definition-K-flat), 06YT and 06YY; sites-modules.tex Tag 03EK (section-tensor-product), balanced scalar associativity"
-   }
+   "elementary": false
   },
   {
-   "text": "If $S$ has $R$-basis $(s_i)_{i<d}$, then the underlying $R$-module functor $E_a$ is $M\\mapsto M^{\\oplus d}$. It is exact, hence preserves acyclic complexes and quasi-isomorphisms, so it computes $T_a$ on every complex, including a Roos complex which need not be K-flat. Its canonical product comparison is invertible: a family of $d$-tuples is sent back to the $d$-tuple of families. This is the inverse of the map with $n$-th projection $E_a(\\mathrm{pr}_n)$. The argument also applies to $b$. A basis of $V$ over $S$ and one of $S$ over $R$ give the $R$-basis $(s_iq_j)_{i,j}$ of $V$, so it applies to $ba$. Empty bases give the zero functor. The coordinate maps themselves use only projections, and therefore are independent of all these bases.",
+   "text": "For identity coefficients reuse both the ordinary and derived scalar units and the pure-tensor formula from the ringed K-flat word comparison API. Extend the counit normalization from termwise flat K-flat resolutions to all complexes by naturality and cancellation. The existing identity quotient Roos normalization and cancellation give the exchange identity on K-flat complexes; resolutions extend it to all derived objects. Naturality of the scalar identification implies identity unit preservation.",
    "uses": [
-    "def-pur-sheaf-tensor-product",
-    "def-weil-sheaf-of-modules-category",
-    "def-weil-category-product",
-    "def-weil-abstract-derived-category"
+    "lem-trf-ringed-kflat-word-comparison-descent",
+    "lem-pur-identity-quotient-roos-normalization",
+    "lem-pc-kflat-resolution",
+    "lem-pur-kflat-change-of-rings"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 0941, lemma-derived-limit-is-ok, strict Roos model; agent-written coordinate coherence refinement of the specified finite-free exchange"
-   }
-  },
-  {
-   "text": "Put $X_n=P\\otimes_R R/t^n$, $Y_m=E_aP\\otimes_S S/v^m$, $Z_k=E_{ba}P\\otimes_V V/w^k$, all with quotient transitions, for indices at least $1$. Write $H$ for the actual shifted Roos cone. For a tower $K$ let $K^{(d)}_n=K_{dn}$. The exchange statement supplies canonical chain isomorphisms $\\Theta_a:E_aH(X)\\to H(Y^{(e)})$, $\\Theta_b:E_bH(Y)\\to H(Z^{(f)})$, and $\\Theta_{ba}:E_{ba}H(X)\\to H(Z^{(ef)})$, before the arithmetic restriction is inverted. We have used the chain associator of Step 1 to identify the $b$-target tower with $Z^{(f)}$. Let $\\Theta_b^{(e)}:E_bH(Y^{(e)})\\to H((Z^{(f)})^{(e)})=H(Z^{(ef)})$ be the same tensor/product and quotient maps on the restricted tower. Write $r_d(K):H(K)\\to H(K^{(d)})$ for the specified restriction. In the derived category the stipulated exchanges are exactly $\\epsilon^a=r_e(Y)^{-1}\\Theta_a$, $\\epsilon^b=r_f(Z)^{-1}\\Theta_b$, and $\\epsilon^{ba}=r_{ef}(Z)^{-1}\\Theta_{ba}$. Their isomorphism assertions apply: $V$ is finite free over $R$ by Step 2 and $(ba)(t)=b(u)z^e w^{ef}$ with unit $b(u)z^e$ and $ef\\ge1$.",
-   "uses": [
-    "lem-pur-finite-free-completion-exchange",
-    "def-weil-strict-roos-model"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 0941, lemma-derived-limit-is-ok, strict Roos model; agent-written coordinate coherence refinement of the specified finite-free exchange"
-   }
-  },
-  {
-   "text": "Check the quotient identifications without introducing a unit multiplier into the maps. Since $a(t^n)=u^nv^{en}$, the ideals generated by these two sections agree. The map $(R/t^n)\\otimes_R S\\to S/v^{en}$ sends $\\bar r\\otimes s$ to $\\overline{a(r)s}$; its inverse sends $\\bar s$ to $\\bar1\\otimes s$. Likewise $b(v^m)=z^mw^{fm}$. For the composite, both quotient routes send $((\\bar r\\otimes s)\\otimes q)$ to $\\overline{(ba)(r)b(s)q}$ modulo $w^{efn}$. The formulas respect quotient transitions because reducing a representative before or after multiplication gives the same residue. Tensoring with $P$ gives strictly commuting tower identifications. These are maps of sheaves: the formulas are balanced on presheaves and extend to the defining sheafified tensors. Units change the ideals, never the residue-class formula.",
-   "uses": [
-    "def-pur-sheaf-tensor-product"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 0941, lemma-derived-limit-is-ok, strict Roos model; agent-written coordinate coherence refinement of the specified finite-free exchange"
-   }
-  },
-  {
-   "text": "The tensor/product comparisons compose with scalar reassociation on both product coordinates. Indeed, for any family $(M_n)$, project the two maps from $E_bE_a(\\prod_n M_n)$ to $\\prod_n E_{ba}M_n$ to the $n$-th factor. Both are $\\alpha_{M_n}E_bE_a(\\mathrm{pr}_n)$, by naturality of the balanced formula of Step 1; on local tensor generators they send $((x\\otimes s)\\otimes q)$ to $\\mathrm{pr}_n(x)\\otimes b(s)q$. The product universal property gives equality. Combining this with Step 4 on the two diagonal coordinates of the cone gives the actual chain-map equation\n$$\\Theta_b^{(e)} E_b(\\Theta_a)=\\Theta_{ba}\\alpha_{H(X)}.$$\nThere is no unspecified cone isomorphism here: the coordinate formula for $H$ has differential $(y,x)\\mapsto(-dy-(1-s)x,dx)$, and the two maps just checked are its two diagonal components.",
-   "uses": [
-    "def-weil-category-product",
-    "def-pur-sheaf-tensor-product",
-    "def-weil-strict-roos-model"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 0941, lemma-derived-limit-is-ok, strict Roos model; agent-written coordinate coherence refinement of the specified finite-free exchange"
-   }
-  },
-  {
-   "text": "The additive Roos comparison applies to $E_b$ by the canonical product invertibility of Step 2. Its arithmetic compatibility, followed by the quotient identifications of Step 4, gives\n$$r_e(Z^{(f)})\\Theta_b=\\Theta_b^{(e)}E_b(r_e(Y)).$$\nHere these are actual chain maps over the possibly nonconstant ring sheaves. Explicitly, selection at $en$ commutes with $E_b(\\mathrm{pr}_{en})$. For the other coordinate, writing $Y_{j,i}$ for the transition $Y_i\\to Y_j$, the projection is $\\sum_{i=en}^{e(n+1)-1}Y_{en,i}\\mathrm{pr}_i$; the additive functor carries this finite sum to the corresponding sum for $Z^{(f)}$. Quotient naturality identifies $E_b(Y_{en,i})$ with $Z_{fen,fi}$. Thus the cited additive statement has exactly the two required coordinates; no constant-ring cofinality theorem is applied to a nonconstant sheaf.",
-   "uses": [
-    "lem-pur-roos-additive-comparison",
-    "def-weil-strict-roos-model"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 0941, lemma-derived-limit-is-ok, strict Roos model; agent-written coordinate coherence refinement of the specified finite-free exchange"
-   }
-  },
-  {
-   "text": "For completeness check the order of arithmetic composition directly in the category of $V$-modules. For any tower $K$ write $K_{j,i}$ for its transition from $i$ to $j$. The selected coordinate of $r_e(K^{(f)})r_f(K)$ is $x_{fen}$. The weighted coordinate is\n$$\\sum_{j=en}^{e(n+1)-1}K_{fen,fj}\\sum_{i=fj}^{f(j+1)-1}K_{fj,i}y_i\n=\\sum_{i=efn}^{ef(n+1)-1}K_{efn,i}y_i.$$\nIndeed $K_{fen,fj}K_{fj,i}=K_{fen,i}$, and the $e$ adjacent blocks of length $f$ partition exactly the displayed interval. Both coordinates therefore equal those of $r_{ef}(K)$, proving the strict equation $r_e(K^{(f)})r_f(K)=r_{ef}(K)$. When $d=1$, selection is identity and each weighted sum has its single identity-transition term, hence $r_1(K)=1$. These finite identities also prove the chain-map square, since the block sum of $(1-s)y$ telescopes to $y_{dn}-K_{dn,d(n+1)}y_{d(n+1)}$.",
-   "uses": [
-    "def-weil-strict-roos-model",
-    "def-weil-category-product"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 0941, lemma-derived-limit-is-ok, strict Roos model; agent-written coordinate coherence refinement of the specified finite-free exchange"
-   }
-  },
-  {
-   "text": "Pass the chain equations to the derived category. In the identifications of Step 3, multiply the desired two-stage map by $r_{ef}(Z)$ on the left. Steps 6 and 7 give, with composition read right to left,\n$$\\begin{aligned}\nr_{ef}(Z)\\epsilon^b E_b(\\epsilon^a)\n&=r_e(Z^{(f)})\\Theta_b E_b(\\epsilon^a)\\\\\n&=\\Theta_b^{(e)}E_b(r_e(Y)\\epsilon^a)\\\\\n&=\\Theta_b^{(e)}E_b(\\Theta_a)\n=\\Theta_{ba}\\alpha_{H(X)}.\n\\end{aligned}$$\nAlso $r_{ef}(Z)\\epsilon^{ba}\\alpha_{H(X)}=\\Theta_{ba}\\alpha_{H(X)}$. The specified $r_{ef}(Z)$ is invertible by the exchange construction for $ba$, so cancellation proves equality. Restoring the chain associator on the output tower restores exactly the factor $C_V(\\alpha_Q)$ in the question. Every equality before this cancellation was equality of both actual product coordinates after the specified arithmetic maps, rather than uniqueness of a map of distinguished triangles.",
-   "uses": [
-    "lem-pur-finite-free-completion-exchange",
-    "def-weil-abstract-derived-category"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 0941, lemma-derived-limit-is-ok, strict Roos model; agent-written coordinate coherence refinement of the specified finite-free exchange"
-   }
-  },
-  {
-   "text": "The quotient augmentation has coordinates $(0,(P\\to P/h^n)_n)$. A tensor/product comparison carries it to the scalar-extended quotient family. Selection carries that family to its subsequence and the weighted coordinate sends zero to zero. Thus the preceding equations preserve these augmentations, as also asserted for each $\\epsilon$ by the exchange theorem. For an identity coefficient map with the same section and exponent $1$, multiplication $p\\otimes a\\mapsto ap$ identifies the tensor/product map and each quotient map with identity; Step 7 gives $r_1=1$. Hence the specified exchange is identity. All displayed formulas commute with chain maps in $P$. The exchange theorem already states naturality on $D(R)$, so the equality is natural in $Q$, independently of the resolution chosen in Step 1.",
-   "uses": [
-    "def-weil-strict-roos-model",
-    "lem-pur-finite-free-completion-exchange"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 0941, lemma-derived-limit-is-ok, strict Roos model; agent-written coordinate coherence refinement of the specified finite-free exchange"
-   }
-  },
-  {
-   "text": "Finally use the natural normalized comparison $\\rho_K:H(K)\\xrightarrow\\sim R\\lim K$ for ring-sheaf modules with exact countable products. Its stated normalization is $H(K)\\to H(I)\\leftarrow\\lim I$, where the right arrow has coordinates $(0,(\\mathrm{pr}_n)_n)$, and it sends strict quotient augmentations to the canonical derived augmentations. Replace each Roos vertex of the equality of Step 8 by its image under this same $\\rho$. The two occurrences of each intermediate $\\rho$ and its inverse cancel; naturality identifies the final reassociation with $C_V(\\alpha_Q)$. This is precisely the equality under the normalized strict-derived-limit comparisons. Their hypotheses hold for each of $R,S,V$ by assumption. No step imposed a bound on $P$, and no step used completeness, constructibility or perfectness.",
-   "uses": [
-    "lem-weil-strict-roos-comparison"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 0941, lemma-derived-limit-is-ok, strict Roos model; agent-written coordinate coherence refinement of the specified finite-free exchange"
-   }
+   "elementary": false
   }
  ],
  "proof_deps": [
-  "lem-pc-kflat-resolution",
+  "lem-trf-ringed-kflat-word-comparison-descent",
+  "lem-pur-finite-free-quotient-roos-comparison",
   "lem-pur-derived-change-of-rings",
-  "def-pc-kflat-complex",
-  "def-pur-sheaf-tensor-product",
-  "def-weil-sheaf-of-modules-category",
-  "def-weil-category-product",
-  "def-weil-abstract-derived-category",
   "lem-pur-finite-free-completion-exchange",
-  "def-weil-strict-roos-model",
-  "lem-pur-roos-additive-comparison",
-  "lem-weil-strict-roos-comparison"
+  "lem-pur-finite-free-quotient-roos-horizontal-coherence",
+  "lem-pur-kflat-change-of-rings",
+  "def-pur-principal-quotient-completion-model",
+  "lem-pc-kflat-resolution",
+  "lem-pur-identity-quotient-roos-normalization",
+  "def-pur-completion-representative-accessors"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/sites-cohomology.tex",
-  "place": "Tag 0941, lemma-derived-limit-is-ok, strict Roos model; agent-written coordinate coherence refinement of the specified finite-free exchange"
+  "place": "B4: explicit ordinary adjunction, cochain counit descent, arithmetic inverse cancellation and augmentation coordinates; strict cochain coherence isolated as a separate result."
  },
  "mathlib_searches": [
   {
@@ -254,41 +175,71 @@
   "is": null
  },
  "split_report": {
-  "date": "2026-10-21",
+  "date": "2026-10-22",
   "item": "lem-pur-finite-free-completion-exchange-coherence",
   "worker": "stage1",
-  "summary": "Proved the specified coherence by product projections, quotient residue formulas, additive Roos arithmetic compatibility, explicit weighted-block composition and cancellation of the specified arithmetic isomorphism. Included identity, augmentation, unbounded K-flat models and normalized strict-derived-limit transport. No new nodes. Statement unchanged mathematically; the named normalized comparison now has an explicit citation.",
-  "blueprint": "Realizes the final integral/common-stage paragraph of def-weil-derived-pullback-tensor-hom, through lem-pur-integral-operations-scalar-extension coefficient-tower and identity compatibility; current unit sk-thm-sf-compatibility clause (7).",
+  "summary": "Re-split the 8383-character proof into six assembly steps, with two statement-only supporting nodes for ideal-quotient tower scalar associativity and horizontal coherence of additive Roos comparisons. Reused the existing K-flat change-of-rings, exact-functor factorization and strict cofinal composition statements. The statement and its prescribed maps are unchanged.",
+  "blueprint": "Final integral/common-stage coefficient compatibility paragraph of def-weil-derived-pullback-tensor-hom, via lem-pur-integral-operations-scalar-extension, realizing sk-thm-sf-compatibility clause (7).",
   "tool_uses": [
    {
     "node": "lem-pc-kflat-resolution",
-    "why": "Generic existence of unbounded K-flat resolutions on a ringed site, used only to choose a representative; it does not replace the coefficient coherence route."
+    "why": "Unbounded flat-term K-flat representatives; generic ringed-site resolution tool."
+   },
+   {
+    "node": "lem-pur-kflat-change-of-rings",
+    "why": "Preserves K-flat flat-term representatives for arbitrary ring sheaves; no alternative coefficient route."
+   },
+   {
+    "node": "lem-weil-pbc-exact-functor-derived-factorization",
+    "why": "Computes an exact scalar functor on every complex, including a Roos complex; generic localization tool."
+   },
+   {
+    "node": "lem-pur-finite-free-scalar-extension",
+    "why": "Provides finite-power coordinates for arbitrary finite-free ring sheaves, to verify the product hypothesis."
+   },
+   {
+    "node": "lem-fix-cofinal-roos-restriction",
+    "why": "Supplies the actual arithmetic cochain composition and identity equations on any small ringed site, already part of the coefficient route."
    }
   ]
  },
  "tool_uses": [
-  "lem-pc-kflat-resolution"
+  "lem-pc-kflat-resolution",
+  "lem-pur-kflat-change-of-rings"
  ],
  "reviewed": {
-  "date": "2026-10-21",
+  "date": "2026-10-22",
   "by": "L",
-  "reviewer": "NT-cc-NV-af5a08b18",
-  "group": "NV",
+  "reviewer": "NT-cc-Q82-0d877656e",
+  "group": "Q82",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NV-af5a08b18 (reviewer sub-agent of L); spot-checked: I read the whole delivery and changed nothing. It is one commit with the item and its report, and no new nodes. The statement only gains the citation [lem-weil-strict-roos-comparison] for a comparison it already named; it is not weakened. The item is not on any drop list and the live copy is still unsplit. No SGA source is used, there is no cycle, and the only citer (lem-pur-integral-operations-scalar-extension Step 7) uses exactly these tower and identity equations. Step-by-step checks: Step 1, E_aP is K-flat over S because N⊗_S(P⊗_R S) ≅ Res(N)⊗_R P; the associator formula is right. Step 2, finite free means E_a is a finite direct sum, so it is exact and commutes with products. Step 3, the decomposition ε = r^{-1}Θ is exactly the exchange node's specification, and its hypotheses hold for ba: (ba)(t)=b(u)z^e w^{ef} with ef ≥ 1, and V is finite free over R. Step 4, the residue formulas are right and since u is a unit, a(t^n)S = v^{en}S. Step 5, product extensionality gives Θ_b^{(e)}E_b(Θ_a)=Θ_{ba}α. Step 6, the additive Roos comparison applies to E_b and its block/selection clause gives r_e(Z^{(f)})Θ_b=Θ_b^{(e)}E_b(r_e(Y)). Step 7, I recomputed the composition r_e(K^{(f)})r_f(K)=r_{ef}(K) (the blocks tile [efn, ef(n+1)−1]; for e=2, f=3, n=1 that is 6..11), r_1=1, and the telescoping chain-map square. Step 8, I redid the cancellation chain and it is correct; the invertibility of r_ef comes from the exchange statement. Advisory only: lem-sp-strict-tower-arithmetic-restriction could also have been cited there. Step 9, augmentations and the identity case (u=1, e=1, r_1=1) check out. Step 10, the transfer through the natural normalized ρ of lem-weil-strict-roos-comparison is valid; products are exact by hypothesis. No duplicate in the DAG: lem-weil-finite-free-completed-scalar-comparison, lem-cbc-rational-compact-support-coefficient-coherence and lem-pur-constant-finite-free-products state different things. Every citation is on the route of sk-thm-sf-compatibility. I accept the declared tool use of lem-pc-kflat-resolution; that node is already on the route anyway. Edge cases d=0, e=f=1, units, and unbounded Q all hold."
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q82-0d877656e (reviewer sub-agent of L); spot-checked: FIX with 3 repairs. The released repair note (re-split, 2026-10-22) applies and I judged the delivery on its merits. Statement unchanged against side-live; no SGA; no cycle. Old 10 steps against new 6: old 4 is now the new node lem-pur-ideal-quotient-tower-scalar-associator and old 5 the new node lem-pur-roos-comparison-horizontal-coherence. Old 1, 2 and 7 now cite existing nodes whose statements say exactly that: lem-pur-kflat-change-of-rings, lem-pur-finite-free-quotient-roos-comparison with lem-pur-finite-free-scalar-extension, and lem-fix-cofinal-roos-restriction (r_{ψ,φ*X}r_{φ,X}=r_{φ∘ψ,X}, r_id=1). Old 3, 8, 9 and 10 are kept as short steps. Both new nodes are true and generic and restate no clause of the item: I checked β on local generators, (((p⊗r̄)⊗s)⊗q)→(p⊗b(s)q)⊗overline{ba(r)} by both routes, with b(J_n)V=K_n, and the κ cochain map, horizontal law and augmentation by projecting to factors and naturality of α. Edge cases checked: I_n=0 and I_n=R, zero and identity functors. The dup search found no node stating either new one: lem-pur-roos-additive-comparison covers one functor only, lem-fix-scalar-completion-associator a different object. Sources checked: Stacks 0941 sites-cohomology.tex lemma-derived-limit-is-ok and 03EK sites-modules.tex section-tensor-product. Each new node has three kinds of search, with LeanSearch recorded as unavailable. I recomputed Steps 2, 3 and 5: (ba)(t)=b(u)z^e w^{ef}, and the cancellation through r_ef. Repairs in fixes/dag/nodes/sec-smooth-purity/<item>.json: (1) C1/C4: Step 1 says T_aQ is computed by E_aP but did not cite lem-pur-derived-change-of-rings; it is now added to the uses and proof_deps, and the step now says restriction of scalars preserves products and reflects isomorphisms. (2) E5/re-split: Step 4 had dropped the quotient naturality of old step 6; it now states that the selection/block maps are the r_φ of cofinal restriction and that their naturality in tower maps moves H(β_b) across r_e. (3) E5: Step 6's identity case now names the argument (horizontal law with G=L=id and α the multiplication, κ_id=1, the quotient identity law, r_1=1). Proof is 2993 characters. Accepted tool uses: lem-pc-kflat-resolution, lem-pur-kflat-change-of-rings, lem-pur-finite-free-scalar-extension, lem-weil-pbc-exact-functor-derived-factorization, lem-fix-cofinal-roos-restriction (generic cochain identity). Maintainer note: the NG Lean record was written for the old proof; its proof deps will change.; 1 file(s) fixed by the reviewer"
  },
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
  "lean": {
   "module": "Sheaf.Algebra.Homology.FiniteFreeCompletionExchangeCoherence",
   "declaration": "CategoryTheory.PrincipalQuotientCompletion.finiteFreeCompletionExchangeCoherence",
   "declarations": [
-   "CategoryTheory.PrincipalQuotientCompletion.arithmeticRoosMap",
-   "CategoryTheory.PrincipalQuotientCompletion.scalarTensorSection",
    "CategoryTheory.PrincipalQuotientCompletion.BalancedScalarAssociator",
    "CategoryTheory.PrincipalQuotientCompletion.BalancedScalarUnit",
-   "CategoryTheory.PrincipalQuotientCompletion.RepresentativeComposition",
    "CategoryTheory.PrincipalQuotientCompletion.finiteFreeCompletionExchangeCoherence",
-   "CategoryTheory.PrincipalQuotientCompletion.finiteFreeCompletionExchangeIdentity"
+   "CategoryTheory.PrincipalQuotientCompletion.finiteFreeCompletionExchangeIdentity",
+   "CategoryTheory.PrincipalQuotientCompletion.ScalarAssociatorData",
+   "CategoryTheory.PrincipalQuotientCompletion.BalancedScalarAssociator.ordinary",
+   "CategoryTheory.PrincipalQuotientCompletion.BalancedScalarAssociator.balanced",
+   "CategoryTheory.PrincipalQuotientCompletion.BalancedScalarAssociator.derived",
+   "CategoryTheory.PrincipalQuotientCompletion.BalancedScalarAssociator.computes"
   ],
   "file": "lean/Sheaf/Algebra/Homology/FiniteFreeCompletionExchangeCoherence.lean",
   "statement": "theorem finiteFreeCompletionExchangeCoherence (Fa : SheafOfModules.DerivedChangeOfRingsCochainModel.{u, v, r, wR, wS} a) (Fb : SheafOfModules.DerivedChangeOfRingsCochainModel.{u, v, r, wS, wV} b) (Fba : SheafOfModules.DerivedChangeOfRingsCochainModel.{u, v, r, wR, wV} (a ≫ b)) (_hfreeS : ∃ d : ℕ, Nonempty ((SheafOfModules.restrictScalars ((sheafCompose J (forget₂ CommRingCat.{r} RingCat.{r})).map a)).obj (SheafOfModules.unit (SheafOfModules.derivedChangeRingIndependentCoefficients J S)) ≅ ∐ (fun _ : Fin d ↦ SheafOfModules.unit (SheafOfModules.derivedChangeRingIndependentCoefficients J R)))) (_hfreeV : ∃ d : ℕ, Nonempty ((SheafOfModules.restrictScalars ((sheafCompose J (forget₂ CommRingCat.{r} RingCat.{r})).map b)).obj (SheafOfModules.unit (SheafOfModules.derivedChangeRingIndependentCoefficients J V)) ≅ ∐ (fun _ : Fin d ↦ SheafOfModules.unit (SheafOfModules.derivedChangeRingIndependentCoefficients J S)))) (t : (SheafOfModules.unit (SheafOfModules.derivedChangeRingIndependentCoefficients J R)).sections) (vS : (SheafOfModules.unit (SheafOfModules.derivedChangeRingIndependentCoefficients J S)).sections) (w : (SheafOfModules.unit (SheafOfModules.derivedChangeRingIndependentCoefficients J V)).sections) (_ht : Mono (globalSectionMultiplication R t)) (_hv : Mono (globalSectionMultiplication S vS)) (_hw : Mono (globalSectionMultiplication V w)) (uS : (SheafOfModules.unit (SheafOfModules.derivedChangeRingIndependentCoefficients J S)).sections) (z : (SheafOfModules.unit (SheafOfModules.derivedChangeRingIndependentCoefficients J V)).sections) (_hu : ∀ U : Cᵒᵖ, IsUnit (@id (S.obj.obj U) (uS.val U))) (_hz : ∀ U : Cᵒᵖ, IsUnit (@id (V.obj.obj U) (z.val U))) (e f : ℕ) (_he : 1 ≤ e) (_hf : 1 ≤ f) (_ha : ∀ U : Cᵒᵖ, a.hom.app U (@id (R.obj.obj U) (t.val U)) = (@id (S.obj.obj U) (uS.val U)) * (@id (S.obj.obj U) (vS.val U)) ^ e) (_hb : ∀ U : Cᵒᵖ, b.hom.app U (@id (S.obj.obj U) (vS.val U)) = (@id (V.obj.obj U) (z.val U)) * (@id (V.obj.obj U) (w.val U)) ^ f) [HasExactLimitsOfShape (Discrete ℕ) (ringedSiteModules.{r} (SheafOfModules.derivedChangeRingIndependentCoefficients J R))] [HasExactLimitsOfShape (Discrete ℕ) (ringedSiteModules.{r} (SheafOfModules.derivedChangeRingIndependentCoefficients J S))] [HasExactLimitsOfShape (Discrete ℕ) (ringedSiteModules.{r} (SheafOfModules.derivedChangeRingIndependentCoefficients J V))] [HasExactLimitsOfShape (Discrete ℕ) (Sheaf J AddCommGrpCat.{r})] : ∃ α : BalancedScalarAssociator Fa Fb Fba, ∀ (CR : Model R t) (CS : Model S vS) (CV : Model V w) (εa : CR.completion ⋙ Fa.T ≅ Fa.T ⋙ CS.completion) (εb : CS.completion ⋙ Fb.T ≅ Fb.T ⋙ CV.completion) (εba : CR.completion ⋙ Fba.T ≅ Fba.T ⋙ CV.completion), (∀ P, CochainComplex.IsKFlatIndependentCoefficients (R := R) P → Nonempty (RepresentativeComparison Fa t vS e CR CS εa P)) → (∀ P, CochainComplex.IsKFlatIndependentCoefficients (R := S) P → Nonempty (RepresentativeComparison Fb vS w f CS CV εb P)) → (∀ P, CochainComplex.IsKFlatIndependentCoefficients (R := R) P → Nonempty (RepresentativeComparison Fba t w (e * f) CR CV εba P)) → (∀ Q, Fb.T.map (εa.hom.app Q) ≫ εb.hom.app (Fa.T.obj Q) ≫ CV.completion.map (α.derived.hom.app Q) = α.derived.hom.app (CR.completion.obj Q) ≫ εba.hom.app Q) ∧ (∀ Q, Fa.T.map (CR.unit.app Q) ≫ εa.hom.app Q = CS.unit.app (Fa.T.obj Q)) ∧ (∀ Q, Fb.T.map (CS.unit.app Q) ≫ εb.hom.app Q = CV.unit.app (Fb.T.obj Q)) ∧ (∀ Q, Fba.T.map (CR.unit.app Q) ≫ εba.hom.app Q = CV.unit.app (Fba.T.obj Q)) ∧ (∀ P, CochainComplex.IsKFlatIndependentCoefficients (R := R) P → ∃ (ra : RepresentativeComparison Fa t vS e CR CS εa P) (rb : RepresentativeComparison Fb vS w f CS CV εb ((extendedComplex Fa).obj P)) (rba : RepresentativeComparison Fba t w (e * f) CR CV εba P), Nonempty (RepresentativeComposition α.ordinary (sourceTower t P) (targetTower Fa vS P) (targetTower Fb w ((extendedComplex Fa).obj P)) (targetTower Fba w P) ((quotientTower V w).map ((Functor.mapHomologicalComplexCompIso α.ordinary (.up ℤ)).hom.app P)) e f _he ra.val rb.val rba.val)) ∧ (∀ (D : DerivedCategory.{wV} (ringedSiteModules.{r} (SheafOfModules.derivedChangeRingIndependentCoefficients J V)) ⥤ DerivedCategory.{wV} (ringedSiteModules.{r} (SheafOfModules.derivedChangeRingIndependentCoefficients J V))) (ρ : CV.completion ≅ D) Q, Fb.T.map (εa.hom.app Q) ≫ εb.hom.app (Fa.T.obj Q) ≫ CV.completion.map (α.derived.hom.app Q) ≫ ρ.hom.app (Fba.T.obj Q) = α.derived.hom.app (CR.completion.obj Q) ≫ εba.hom.app Q ≫ ρ.hom.app (Fba.T.obj Q))",
@@ -304,5 +255,15 @@
   "group": "NG",
   "result": "pass",
   "note": "Node differs from live only in lean; 8 dep records unchanged; statement verbatim; 2 sorry (theorems only); no name collisions. Main equation orientation/types match C_V(α)∘ε^b∘T_b(ε^a)=ε^{ba}∘α. α (BalancedScalarAssociator) pinned on sheafified generators q⊗(s⊗x)↦(b(s)q)⊗x and K-flat counits; ε's pinned by the dependency's RepresentativeComparison (β/c/δ/a all determined; F.ε, CS.counit, Q(a) iso on K-flat) so no arbitrary exchanges; RepresentativeComposition gives steps 5–7 chain equations (coordinates, arithmetic square, r_e r_f=r_ef) with index e(n+1)-1 consistent; unit conjuncts and identity theorem (BalancedScalarUnit s⊗x↦s•x, e=1, same t/model) correct; hypotheses (finite free incl. rank 0, Mono sections, units, e,f≥1, 4 exact-product instances) exact, universes independent. Advisories: final ρ conjunct is a tautology (=≫ of the main one; node clause is itself a corollary); Model/quotientTower/selection/block/roosF owners not in stmt_deps (stage-1, base-era); compact-support-roos-cofinality stmt_dep unused; plain defs from theorem stmt_dep exchange are genuine stage-1 use. No recompile per 2026-10-21 rule; worker scompile clean 44.9/33.7 s."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-9c075",
+  "group": "B4",
+  "result": "fix",
+  "landing": "20261025T201357-L-2465468",
+  "kind": "interface",
+  "note": "independent cc review: item signatures byte-identical to live; split lemma checked clause by clause against RepresentativeRoosComparison/index/block/selection; 26 importers compiled against the delivered set and against published PQCM/FFCE"
  }
 }

@@ -1,0 +1,119 @@
+{
+ "id": "lem-sfb-internal-first-residue-ring-pushout",
+ "kind": "statement",
+ "title": "The actual first-residue coefficient square is a ring-sheaf pushout",
+ "statement": "For a prime l, a finite extension E of Q_l in universe u and any scheme X, let a be the actual constant-to-continuous scalar map followed by the inverse integral pointComparison of [def-sfb-integral-constant-model-realization]. There exists a ring-object isomorphism e from the continuous first quotient of [sk-def-pe-derived-completion] to the constant quotient of [def-sfb-integral-models-stacks-data]. Under the smallMap section-ring reconstruction, the square with top map a, left map the constant first residue map, right map the actual continuous first quotient followed by e, and lower map the identity of the constant residue ring is a pushout of commutative ring sheaves. No assertion about module functors, flatness or complexes is included.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-lem-integral-models/sk-lem-integral-models.proof.md",
+  "place": "Proof (1)--(2), first quotient identification; Stacks sites-modules.tex lemma-completion-flat (093M), proetale.tex section-derived-completion-noetherian (099L)"
+ },
+ "stmt_deps": [
+  "sk-def-pe-derived-completion",
+  "def-sfb-integral-models-stacks-data",
+  "def-sfb-integral-constant-model-realization"
+ ],
+ "proof": [
+  {
+   "text": "Construct the canonical first-residue isomorphism as the inverse of the constant-function map. Finiteness and discreteness make that map locally bijective. Its naturality with the quotient map and the equality of the two integral topologies prove the normalized residue square on the point; apply the point inverse image to obtain the square on X.",
+   "uses": [
+    "lem-sfb-internal-first-residue-ring-iso"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply the corrected normalized sheaf pushout directly in the category of commutative ring sheaves on the small site. No pushout of underlying abelian sheaves is asserted or transported.",
+   "uses": [
+    "lem-sfb-internal-first-residue-sheaf-pushout"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-internal-first-residue-ring-iso",
+  "lem-sfb-internal-first-residue-sheaf-pushout"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "group": "G4",
+  "date": "2026-10-26",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-lem-integral-models/sk-lem-integral-models.proof.md",
+  "place": "canonical residue normalization followed by the corrected ring-valued pushout"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "IsPushout.*quotient|quotient.*IsPushout",
+   "results": "{\"t\": \"2026-10-25T18:24:01Z\", \"tool\": \"grep\", \"query\": \"IsPushout.*quotient|quotient.*IsPushout\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-25",
+   "verdict": "No match for the normalized constant/continuous first-residue ring-sheaf pushout; Mathlib supplies only the general pushout API."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The constant valuation ring to continuous integral functions and its first finite residue quotient form a pushout square of ring sheaves",
+   "results": "{\"t\": \"2026-10-25T18:24:02Z\", \"tool\": \"leanfinder\", \"query\": \"The constant valuation ring to continuous integral functions and its first finite residue quotient form a pushout square of ring sheaves\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.ValuativeCommSq.valuationRing\", \"AlgebraicGeometry.ValuativeCommSq.K\", \"AlgebraicGeometry.isPullback_Spec_map_pushout\", \"AlgebraicGeometry.ValuativeCommSq.algebra\", \"AlgebraicGeometry.isPullback_SpecMap_pushout\", \"AlgebraicGeometry.isPullback_Spec_map_isPushout\", \"AlgebraicGeometry.ValuativeCommSq.commRing\", \"AlgebraicGeometry.ValuativeCommSq.i\\u2081\"], \"digest\": \"b6c3e1470e6b5ac4\"}",
+   "date": "2026-10-25",
+   "verdict": "No match for the normalized constant/continuous first-residue ring-sheaf pushout; Mathlib supplies only the general pushout API."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.IsPushout",
+   "results": "{\"t\": \"2026-10-25T18:24:02Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.IsPushout\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"CategoryTheory.IsPushout\", \"CategoryTheory.IsPushout.cocone\", \"CategoryTheory.IsPushout.hasPushout\", \"CategoryTheory.IsPushout.flip\", \"CategoryTheory.IsPushout.toCommSq\", \"CategoryTheory.IsPushout.flip_iff\", \"CategoryTheory.IsPushout.of_hasPushout\", \"CategoryTheory.IsPushout.isoPushout\"], \"digest\": \"4c152a0eb4ee2657\"}",
+   "date": "2026-10-25",
+   "verdict": "No match for the normalized constant/continuous first-residue ring-sheaf pushout; Mathlib supplies only the general pushout API."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.SixFunctors.ProEtale.InternalFirstResidueOrdinaryComparison",
+  "date": "2026-10-26",
+  "group": "M8"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-thm-sf-pf-adic-open",
+   "place": "Proof steps 1--2: identify the first constant and continuous quotient as a ring-sheaf pushout; only the coefficient-ring part of the ordinary tensor comparison.",
+   "via": [
+    "lem-sfb-internal-first-residue-ordinary-comparison",
+    "lem-sfb-internal-first-residue-reduction-comparison",
+    "lem-sfb-internal-residue-stacks-comparison",
+    "lem-sfb-internal-integral-residue-criterion"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-pf-adic",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.SixFunctors.ProEtale.InternalFirstResidueRingPushout",
+  "file": "lean/Sheaf/SixFunctors/ProEtale/InternalFirstResidueRingPushout.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.internal_first_residue_ring_pushout",
+  "statement": "theorem internal_first_residue_ring_pushout\n    (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]\n    [Algebra (Padic l) E] [FiniteDimensional (Padic l) E] (X : Scheme.{u}) :\n    let a := IntegralModelsStacks.scalarMap l E X ≫\n      coefficientMap (IntegralConstantModel.pointComparison l E).inv.hom X\n    ∃ e : Mon.mk (DerivedNakayama.quotientRing l E 1) ≅\n        Mon.mk (IntegralModelsStacks.discreteObj (Padic.coefficientExtensionRing l E 1)),\n      IsPushout (IntegralModelsStacks.smallMap X a)\n        (IntegralModelsStacks.smallMap X (IntegralModelsStacks.residueMap l E X))\n        (IntegralModelsStacks.smallMap X\n          (AdicCompletion.quotient l E X 0 ≫ coefficientMap e.hom.hom X)) (𝟙 _)",
+  "branch": "sheaf-dag",
+  "by": "M8",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M8",
+  "result": "pass",
+  "landing": "20261025T202618-L-2733968",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-200cc",
+  "group": "G4",
+  "result": "pass",
+  "landing": "20261026T081922-L-2102151",
+  "kind": "interface",
+  "note": "independent cc review: sheaf-pushout new statement/proof vs node lem-sfb-internal-first-residue-sheaf-pushout and change record; RingPushout unchanged signature + node proof fields; RingIso additions vs live F3 file (public proof verbatim); importer OrdinaryComparison OK in §3b"
+ }
+}

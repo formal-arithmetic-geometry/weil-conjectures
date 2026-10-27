@@ -1,0 +1,290 @@
+{
+ "id": "lem-sfb-space-formally-unramified-etale-charts",
+ "kind": "statement",
+ "title": "Formal unramifiedness on etale scheme charts",
+ "statement": "Let $S$ be a scheme [def-pc-scheme] and $f:Z\\to X$ a morphism of algebraic spaces over $S$ [def-trf-algebraic-space], in the universes of [def-weil-size-convention]. A first-order thickening is a representable closed immersion with square-zero ideal, tested after scheme base change [def-weil-closed-immersion]. Say that $f$ is formally unramified if restriction $\\operatorname{Hom}_X(T',Z)\\to\\operatorname{Hom}_X(T,Z)$ is injective for every such thickening $T\\hookrightarrow T'$ of affine schemes over $X$. For a scheme morphism this agrees with [def-weil-pbc-formally-unramified-morphism]. The following are equivalent: (1) $f$ is formally unramified; (2) for every commutative square $V\\xrightarrow{g}U$ over $Z\\xrightarrow{f}X$, where $V,U$ are schemes and $V\\to Z$, $U\\to X$ are etale [def-weil-etale-morphism], the scheme map $g$ is formally unramified; (3) there is such a square with both vertical maps surjective and $g$ formally unramified. Fibre products used to form charts are [lem-trf-space-fibre-products-etale-covers]. No local finite type, quasi-compactness or separation hypothesis is required.",
+ "source": {
+  "document": "literature/stacks-project/spaces-more-morphisms.tex",
+  "place": "Tag 04G8, lemma-formally-unramified, equivalence of (1)-(3)."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-trf-algebraic-space",
+  "def-weil-size-convention",
+  "def-weil-closed-immersion",
+  "def-weil-etale-morphism",
+  "lem-trf-space-fibre-products-etale-covers",
+  "def-weil-pbc-formally-unramified-morphism",
+  "def-sbc-first-order-thickening"
+ ],
+ "proof": [
+  {
+   "text": "First record the direct scheme specialization needed below. If $p:E\\to Y$ is representable etale, $i:T\\hookrightarrow T'$ is a first-order thickening of affine schemes, and $e_0:T\\to E$, $b:T'\\to Y$ satisfy $pe_0=bi$, then $P=T'\\times_YE$ is a scheme etale over $T'$ by the meaning of representable etale in [def-trf-algebraic-space]. Its projection is flat and unramified by [def-weil-etale-morphism]. The pair $(i,e_0)$ gives a map $T\\to P$ over $T'$. Apply [lem-weil-pbc-flat-unramified-formally-etale] to $P\\to T'$ with base scheme $T'$ and test thickening $i$: it gives exactly one section $T'\\to P$ extending this map. By the fibre-product universal property, sections are exactly maps $e:T'\\to E$ with $pe=b$, and the extension condition is $ei=e_0$. Thus representable etale maps have the required unique lifts. This is an application to one scheme base change, with no descent or chartwise lifting theorem.",
+   "uses": [
+    "def-trf-algebraic-space",
+    "def-weil-etale-morphism",
+    "lem-weil-pbc-flat-unramified-formally-etale"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-more-morphisms.tex",
+    "place": "Tag 04AL, lemma-representable-property-formally-property, etale clause and its proof by the scheme base change; more-morphisms.tex Tags 02HM and 04FF."
+   }
+  },
+  {
+   "text": "Assume (1), and write a square of (2) as $qg=fp$, with $p:V\\to Z$ and $q:U\\to X$ representable etale. For a test thickening $i:T\\hookrightarrow T'$ and two maps $v_1,v_2:T'\\to V$ having the same restriction to $T$ and satisfying $gv_1=gv_2$, the equality $fpv_1=qgv_1=qgv_2=fpv_2$ and (1) give $pv_1=pv_2$. Apply the uniqueness in step 1 to $p$, with this common base map $T'\\to Z$ and common restriction $T\\to V$. It gives $v_1=v_2$. This is precisely formal unramifiedness of $g$ in [def-weil-pbc-formally-unramified-morphism], so (2) holds. When the original map is a scheme map, its square-zero injectivity condition likewise is exactly this definition.",
+   "uses": [
+    "def-trf-algebraic-space",
+    "def-weil-pbc-formally-unramified-morphism"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-more-morphisms.tex",
+    "place": "Tag 04G8, lemma-formally-unramified, (1) implies (2); the composition and cancellation arguments of Tags 049T and 04G5 are written out as equalities of lifts."
+   }
+  },
+  {
+   "text": "Assume (2). Choose a surjective etale scheme atlas $q:U\\to X$ from [def-trf-algebraic-space]. The final assertion of [lem-sfb-unramified-etale-compatible-charts], applied to $f:Z\\to X$ and this prescribed atlas, supplies a scheme $V$, a surjective etale atlas $p:V\\to Z$, and $g:V\\to U$ with $qg=fp$. Condition (2) applies to this square and makes $g$ formally unramified, proving (3). Only the existence clause of the cited node is used; no unramifiedness hypothesis on $f$ is required.",
+   "uses": [
+    "def-trf-algebraic-space",
+    "lem-sfb-unramified-etale-compatible-charts"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-more-morphisms.tex",
+    "place": "Tag 04G8, lemma-formally-unramified, (2) implies (3); spaces.tex Tag 02X1, lemma-lift-morphism-presentations."
+   }
+  },
+  {
+   "text": "Assume (3), fixing $p,q,g$ as above. Let $i:T\\hookrightarrow T'$ be an affine first-order thickening and $a,b:T'\\to Z$ satisfy $ai=bi$ and $fa=fb$. Base change the cover $p$ along $a$: by [lem-trf-space-fibre-products-etale-covers], $W'=T'\\times_{a,Z}V\\to T'$ is a surjective etale map from a scheme. Choose affine open subsets $A_\\lambda\\subset W'$ covering $W'$; their maps $r_\\lambda:A_\\lambda\\to T'$ are jointly surjective etale, by the open-immersion and composition clauses of [lem-weil-pbc-etale-composition-cancellation]. Put $A_{0,\\lambda}=A_\\lambda\\times_{T'}T$. By [lem-weil-pbc-first-order-thickening-base-change] this is a first-order thickening of $A_\\lambda$; it is affine since a closed subscheme of an affine is affine [def-sbc-first-order-thickening]. The canonical map $v_\\lambda:A_\\lambda\\to V$ lies over $ar_\\lambda$. Its restriction to $A_{0,\\lambda}$ also lies over $br_\\lambda$ because $ai=bi$. Step 1 for $p$ therefore gives $w_\\lambda:A_\\lambda\\to V$ over $br_\\lambda$ with the same restriction. Since $qgv_\\lambda=far_\\lambda=fbr_\\lambda=qgw_\\lambda$, uniqueness in step 1 for $q$ gives $gv_\\lambda=gw_\\lambda$. Formal unramifiedness of the scheme map $g$ [def-weil-pbc-formally-unramified-morphism] now gives $v_\\lambda=w_\\lambda$, whence $ar_\\lambda=pv_\\lambda=pw_\\lambda=br_\\lambda$.",
+   "uses": [
+    "lem-trf-space-fibre-products-etale-covers",
+    "lem-weil-pbc-etale-composition-cancellation",
+    "lem-weil-pbc-first-order-thickening-base-change",
+    "def-sbc-first-order-thickening",
+    "def-weil-pbc-formally-unramified-morphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-more-morphisms.tex",
+    "place": "Tag 04G8, lemma-formally-unramified, (3) implies (1); Tag 04CY, lemma-etale-on-top, uniqueness argument, taking the etale cover W prime to be the pullback along the already given lift a. Scheme open-immersion/composition permanence: morphisms.tex Tags 02GP and 02GN."
+   }
+  },
+  {
+   "text": "Each $r_\\lambda$ in step 4 is flat and locally of finite presentation by [def-weil-etale-morphism], so their joint surjectivity makes them an fppf covering by [def-pc-fppf-site]. The algebraic space $Z$ is an fppf sheaf of sets [def-trf-algebraic-space]; its sheaf axiom says that restriction to this cover is injective. The equalities $ar_\\lambda=br_\\lambda$ therefore imply $a=b$. This proves (1). Empty schemes cause no exception: injectivity for the empty covering says a sheaf has a singleton value on the empty scheme. All lifting tests above used affine square-zero thickenings and no finiteness or separation assumption on $f$.",
+   "uses": [
+    "def-weil-etale-morphism",
+    "def-pc-fppf-site",
+    "def-trf-algebraic-space"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-more-morphisms.tex",
+    "place": "Tag 04CY, lemma-etale-on-top, final equality of two lifts detected on an etale covering, completing Tag 04G8."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-trf-algebraic-space",
+  "def-weil-etale-morphism",
+  "lem-weil-pbc-flat-unramified-formally-etale",
+  "def-weil-pbc-formally-unramified-morphism",
+  "lem-sfb-unramified-etale-compatible-charts",
+  "lem-trf-space-fibre-products-etale-covers",
+  "lem-weil-pbc-etale-composition-cancellation",
+  "lem-weil-pbc-first-order-thickening-base-change",
+  "def-sbc-first-order-thickening",
+  "def-pc-fppf-site"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/spaces-more-morphisms.tex",
+  "place": "Tag 04G8, lemma-formally-unramified, with the representable scheme reduction of Tag 04AL and the uniqueness argument of Tag 04CY. In that argument the existing first lift a allows W prime to be its pullback of the atlas; lifting an arbitrary etale object across the thickening is unnecessary."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A morphism of algebraic spaces is formally unramified if and only if a map between surjective etale scheme charts is formally unramified",
+   "results": "8 hits: AlgebraicGeometry.formallyUnramified_iff, AlgebraicGeometry.IsEtale.instFormallyUnramified, AlgebraicGeometry.FormallyUnramified, AlgebraicGeometry.FormallyUnramified.instIsMultiplicativeScheme, AlgebraicGeometry.FormallyUnramified.instHasRingHomPropertyFormallyUnramified, AlgebraicGeometry.FormallyUnramified.formallyUnramified_appLE, AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified, AlgebraicGeometry.Scheme.Hom.formallyUnramified_appLE",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern rings, schemes, or metric thickenings; none states the algebraic-space assertion."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"FormallyUnramified\", \"of_comp\"",
+   "results": "2 hits: RingHom.FormallyUnramified.of_comp, AlgebraicGeometry.FormallyUnramified.of_comp",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern rings, schemes, or metric thickenings; none states the algebraic-space assertion."
+  },
+  {
+   "tool": "grep",
+   "query": "formallyUnramified.*(etale|cover)|formally_unramified.*(etale|chart)",
+   "results": "7 hits: Mathlib/AlgebraicGeometry/Morphisms/Etale.lean, Mathlib/AlgebraicGeometry/Morphisms/FormallyUnramified.lean, Mathlib/AlgebraicGeometry/Morphisms/FormallyUnramified.lean, Mathlib/RingTheory/RingHom/Etale.lean, Mathlib/RingTheory/RingHom/Etale.lean, Mathlib/RingTheory/RingHom/Unramified.lean, Mathlib/RingTheory/Etale/Basic.lean",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern rings, schemes, or metric thickenings; none states the algebraic-space assertion."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Formal unramifiedness is local for the etale topology on source and target algebraic spaces",
+   "results": "8 hits: AlgebraicGeometry.FormallyUnramified, AlgebraicGeometry.FormallyUnramified.recOn, AlgebraicGeometry.FormallyUnramified.casesOn, Algebra.FormallyUnramified.localization_map, RingHom.FormallyUnramified.propertyIsLocal, Algebra.FormallyUnramified, AlgebraicGeometry.IsEtale.instFormallyUnramified, Algebra.Unramified",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern rings, schemes, or metric thickenings; none states the algebraic-space assertion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An etale presentation detects uniqueness of square zero infinitesimal lifts for morphisms of algebraic spaces",
+   "results": "8 hits: AlgebraicGeometry.IsEtale.instFormallyUnramified, Algebra.Etale.formallyEtale, AlgebraicGeometry.IsEtale.instIsSmooth, AlgebraicGeometry.FormallyUnramified, AlgebraicGeometry.IsEtale, AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified, AlgebraicGeometry.Scheme.Etale, Algebra.FormallyEtale.instFormallySmooth",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern rings, schemes, or metric thickenings; none states the algebraic-space assertion."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"FormallyUnramified\", \"etale\"",
+   "results": "12 hits: Algebra.FormallyEtale.instFormallyUnramified, Algebra.FormallyEtale.of_formallyUnramified_and_formallySmooth, Algebra.Etale.iff_formallyUnramified_and_smooth, Algebra.FormallyEtale.iff_formallyUnramified_and_formallySmooth, Algebra.FormallyEtale.of_formallyUnramified_of_field, Algebra.FormallyEtale.iff_formallyUnramified_of_field, Algebra.Etale.of_formallyUnramified_of_flat, RingHom.Etale.formallyUnramified",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern rings, schemes, or metric thickenings; none states the algebraic-space assertion."
+  },
+  {
+   "tool": "grep",
+   "query": "formallyUnramified.*(etale|cover)|formally_unramified.*(etale|chart)",
+   "results": "3 hits: Mathlib/AlgebraicGeometry/Morphisms/Etale.lean, Mathlib/AlgebraicGeometry/Morphisms/FormallyUnramified.lean, Mathlib/AlgebraicGeometry/Morphisms/FormallyUnramified.lean. Subdirectory: AlgebraicGeometry",
+   "date": "2026-10-23",
+   "verdict": "no match: read scheme FormallyUnramified and Etale sources; these hits do not give the square-zero chart criterion for algebraic spaces or general sheaves.",
+   "digest": "504c9f7512eb2095"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"FormallyUnramified\", \"etale\"",
+   "results": "12 hits: Algebra.FormallyEtale.instFormallyUnramified, Algebra.FormallyEtale.of_formallyUnramified_and_formallySmooth, Algebra.Etale.iff_formallyUnramified_and_smooth, Algebra.FormallyEtale.iff_formallyUnramified_and_formallySmooth, Algebra.FormallyEtale.of_formallyUnramified_of_field, Algebra.FormallyEtale.iff_formallyUnramified_of_field, Algebra.Etale.of_formallyUnramified_of_flat, RingHom.Etale.formallyUnramified",
+   "date": "2026-10-23",
+   "verdict": "no match: read scheme FormallyUnramified and Etale sources; these hits do not give the square-zero chart criterion for algebraic spaces or general sheaves.",
+   "digest": "39df130ad58b6350"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Uniqueness of square zero infinitesimal lifts is local for etale presentations of algebraic spaces",
+   "results": "8 hits: TrivSqZeroExt.lift.congr_simp, StandardEtalePair.existsUnique_hasMap_of_hasMap_quotient_of_sq_eq_bot, Algebra.FormallyUnramified.lift_unique, AlgebraicGeometry.LocallyRingedSpace.IsOpenImmersion.lift_uniq, liftOfDerivationToSquareZero, Algebra.FormallyUnramified.ext', Algebra.FormallyUnramified.lift_unique_of_ringHom, Algebra.FormallyUnramified.lift_unique'",
+   "date": "2026-10-23",
+   "verdict": "no match: read scheme FormallyUnramified and Etale sources; these hits do not give the square-zero chart criterion for algebraic spaces or general sheaves.",
+   "digest": "4fce42b2b03d96cf"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A morphism of algebraic spaces is formally unramified exactly when compatible surjective etale scheme charts are formally unramified",
+   "results": "8 hits: AlgebraicGeometry.formallyUnramified_iff, AlgebraicGeometry.IsEtale.instFormallyUnramified, AlgebraicGeometry.FormallyUnramified, AlgebraicGeometry.FormallyUnramified.instIsMultiplicativeScheme, AlgebraicGeometry.FormallyUnramified.instHasRingHomPropertyFormallyUnramified, AlgebraicGeometry.FormallyUnramified.formallyUnramified_appLE, AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified, AlgebraicGeometry.FormallyUnramified.of_comp",
+   "date": "2026-10-23",
+   "verdict": "no match: read scheme FormallyUnramified and Etale sources; these hits do not give the square-zero chart criterion for algebraic spaces or general sheaves.",
+   "digest": "0a17f393b02fbea2"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Formal unramifiedness of a morphism of sheaves is detected after a representable surjective etale cover of its source",
+   "results": "8 hits: AlgebraicGeometry.IsEtale.instFormallyUnramified, AlgebraicGeometry.FormallyUnramified, AlgebraicGeometry.formallyUnramified_iff, RingHom.FormallyUnramified.propertyIsLocal, AlgebraicGeometry.FormallyUnramified.instIsMultiplicativeScheme, AlgebraicGeometry.FormallyUnramified.instHasRingHomPropertyFormallyUnramified, AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified, Algebra.FormallyEtale.instFormallyUnramified",
+   "date": "2026-10-23",
+   "verdict": "no match: read scheme FormallyUnramified and Etale sources; these hits do not give the square-zero chart criterion for algebraic spaces or general sheaves.",
+   "digest": "cdf94a4a90fd7ac0"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-space-universal-conormal",
+  "date": "2026-10-24",
+  "group": "Q75"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Power lifting implies universal submersiveness of an affine invariant quotient. Fppf presentation used after the affine invariant quotient construction. Supporting input: Apply the flat-groupoid algebraicity theorem to the action groupoid; unlike the smooth-groupoid theorem this does not require H smooth. Algebraicity step: criteria.tex Tag 06FI applies the general bootstrap theorem Tag 06DC to the flat locally finitely presented quotient presentation. Supporting input: Tag 06D9 (lemma-lci-formally-smooth), using the unramified lci deformation of Tag 06D8 (lemma-lci-unobstructed). Supporting input in the conormal construction of criteria.tex lemma-lci-unobstructed: existence of the universal first-order thickening and interpretation of its ideal. Supporting input: Tag 04G8, lemma-formally-unramified, (1)-(3); spaces.tex Tag 02X1, lemma-lift-morphism-presentations, for compatible surjective presentations..",
+   "via": [
+    "lem-sfb-space-universal-conormal",
+    "lem-sfb-relative-finite-hilbert-lci-lift",
+    "lem-sfb-fppf-stack-algebraicity-bootstrap",
+    "lem-sfb-flat-groupoid-algebraic-quotient",
+    "lem-sfb-flat-affine-action-stack-presentation",
+    "lem-sfb-power-lifting-quotient-submersive",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-space-formally-unramified-etale-charts",
+  "worker": "stage1",
+  "summary": "Proved all three implications by explicit equality of infinitesimal lifts, using scheme flat-unramified formal etaleness on representable base changes. Reused compatible chart existence, etale-cover base change and first-order thickening base change. No new nodes or Mathlib leaves; statement unchanged. Avoided the existing algebraic-space infinitesimal-lifting node because its transitive dependencies reach this item.",
+  "blueprint": "Supports the inherited det-thm-sf-ctf-stability-direct-images proof (3) alteration/plurinodal and conormal prerequisite chain. Read the latest unit and direct-images proof (3), which retains the proper/open factorization; no unit or chapter route changes. The ancestor tool returns None, matching inherited blueprint.from.node=null; retained its full place and via. Searches for formally unramified, unramified and 04G8 find no blueprint equivalent.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-flat-unramified-formally-etale",
+    "why": "Generic scheme square-zero lifting theorem, applied to one represented etale base change; the unit has no replacement for this foundational tool."
+   },
+   {
+    "node": "lem-weil-pbc-first-order-thickening-base-change",
+    "why": "Generic scheme base-change lemma ensures each affine test A_0 inside A has square-zero ideal; not a change of the six-functor route."
+   },
+   {
+    "node": "lem-trf-space-fibre-products-etale-covers",
+    "why": "General algebraic-space fibre products and cover base change construct the scheme cover W prime; unrelated to the trace-formula route."
+   },
+   {
+    "node": "lem-weil-pbc-etale-composition-cancellation",
+    "why": "Generic scheme etale permanence states explicitly that open immersions are etale and composites of etale maps are etale, so the affine refinement is a cover; no unit route is replaced."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-flat-unramified-formally-etale",
+  "lem-weil-pbc-first-order-thickening-base-change",
+  "lem-trf-space-fibre-products-etale-covers",
+  "lem-weil-pbc-etale-composition-cancellation"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q34-e26c0e2e2",
+  "group": "Q34",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q34-e26c0e2e2 (reviewer sub-agent of L); spot-checked: I read the source, Stacks spaces-more-morphisms Tag 04G8 (lemma-formally-unramified, l.2724), with Definition 04G7. The item's (1)-(3) match it with no added hypothesis, and the statement is unchanged against live (status there is still unsplit, so this delivery is not superseded). The delivery has 0 new nodes and all five steps hold. Step 1: P=T'xE is a scheme etale over T'; lem-weil-pbc-flat-unramified-formally-etale applied over the base T' gives exactly one section, i.e. a unique lift. Step 2: from f p v1 = f p v2 and (1), p v1 = p v2; step 1 uniqueness then gives v1 = v2, which is exactly def-weil-pbc-formally-unramified-morphism. Step 3: the final atlas sentence of lem-sfb-unramified-etale-compatible-charts needs no hypothesis on f. Step 4: I checked each equation. The W' cover is a scheme, the affine opens are etale (open-immersion and composition clauses), and A_{0,λ} is an affine first-order thickening (thickening-base-change and def-sbc-first-order-thickening (4)). Then w_λ comes from step 1 for p, g v_λ = g w_λ from uniqueness for q, and v_λ = w_λ because g is formally unramified. Step 5: the A_λ form an fppf covering and Z is an fppf sheaf, so a = b. proof_deps equal the union of the step uses. Edge cases checked: empty spaces; A^1->Spec k with t->0 and t->ε shows the notion is not vacuous. I confirmed the avoided lem-sfb-etale-space-infinitesimal-lifting really leads back to this item via universal-conormal, so avoiding it was right (C6), and none of the proof_dep closures contains the item. No SGA. Batch-5: lem-sfb-unramified-etale-compatible-charts reaches sec-trace-formula only through foundational algebraic-space definitions and lemmas (def-trf-algebraic-space, fibre products and etale covers, surjective composition), with no nt-assume, trace-formula or Poincaré node, so it is general and accepted. I accept all four declared tool_uses as generic scheme or space tools. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SpaceFormallyUnramifiedEtaleCharts",
+  "declaration": "AlgebraicGeometry.AlgebraicSpace.space_formallyUnramified_etale_charts",
+  "declarations": [
+   "AlgebraicGeometry.AlgebraicSpace.space_formallyUnramified_etale_charts",
+   "AlgebraicGeometry.AlgebraicSpace.scheme_formallyUnramified_iff_affine_firstOrder"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/SpaceFormallyUnramifiedEtaleCharts.lean",
+  "statement": "theorem space_formallyUnramified_etale_charts {S : Scheme.{u}} {Z X : AlgebraicSpace S} (f : Z ⟶ X) : List.TFAE [ (∀ (T T' : Over S) (i : T ⟶ T'), IsAffine T.left → IsAffine T'.left → IsFirstOrderThickening i.left → ∀ (b : yoneda.obj T' ⟶ X.obj.obj) (a₁ a₂ : yoneda.obj T' ⟶ Z.obj.obj), a₁ ≫ f.hom.hom = b → a₂ ≫ f.hom.hom = b → yoneda.map i ≫ a₁ = yoneda.map i ≫ a₂ → a₁ = a₂), (∀ (V U : Over S) (p : yoneda.obj V ⟶ Z.obj.obj) (q : yoneda.obj U ⟶ X.obj.obj) (g : V ⟶ U), IsEtale p → IsEtale q → p ≫ f.hom.hom = yoneda.map g ≫ q → FormallyUnramified g.left), (∃ (V U : Over S) (p : yoneda.obj V ⟶ Z.obj.obj) (q : yoneda.obj U ⟶ X.obj.obj) (g : V ⟶ U), IsEtale p ∧ IsEtale q ∧ IsSurjective p ∧ IsSurjective q ∧ p ≫ f.hom.hom = yoneda.map g ≫ q ∧ FormallyUnramified g.left)]",
+  "branch": "newtargets-dag",
+  "by": "Q34",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "The three conditions are List.TFAE, with the affine first-order injectivity predicate expanded verbatim and scheme chart maps using Mathlib FormallyUnramified. The second theorem records the scheme specialization. Added the already-landed first-order thickening definition owner to stmt_deps; all other node fields are unchanged."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-71c72456b",
+  "group": "Q34",
+  "result": "pass",
+  "note": "Read Stacks 04G7/04G8 (spaces-more-morphisms l.2707, l.2724), the node, all 8 stmt_deps' records, and the module. TFAE (1)-(3) match clause by clause: (1) is affine first-order injectivity over a fixed X-map b via yoneda and IsFirstOrderThickening; (2) covers all etale charts with Mathlib FormallyUnramified g.left and no surjectivity; (3) is an existential with surjective etale charts. No extra hypotheses; one universe u, the same as the AlgebraicSpace interface. The scheme-agreement theorem is true (FormallyUnramified.hom_ext and of_hom_ext, same universe). SpaceFormallyUnramified lives in the module of theorem node lem-sfb-space-universal-conormal, which uses this item in its proof (import cycle), so the inline expansion is OK and no definition is duplicated. The only non-lean change to the node is the stmt_dep def-sbc-first-order-thickening, a landed owner used in the signature. Statement verbatim; imports exist live; docstrings carry source and blueprint; proofs are sorry only; the report has both sections. I changed no file, so I did not compile; the worker's compile was clean. No findings."
+ }
+}

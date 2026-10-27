@@ -1,0 +1,352 @@
+{
+ "id": "lem-sf-bc-compact-support-domain",
+ "kind": "statement",
+ "title": "Compact-support exchange through all specified coefficient domains",
+ "statement": "Fix $k=\\overline{\\mathbf F}_q$ of characteristic $p$, a prime $\\ell\\ne p$, a finite extension $E/\\mathbf Q_\\ell$, its valuation ring $R=\\mathcal O_E$, a uniformizer $\\varpi$, and $A_n=R/(\\varpi^n)$ for $n\\ge1$. Use [def-fix-six-functor-datum]. Let $f:X\\to Y$, $g:Y'\\to Y$, $g':X'\\to X$, $f':X'\\to Y'$ be a Cartesian square [def-weil-pbc-cartesian-square] of separated finite-type $k$-schemes and separated finite-type $k$-morphisms. Choose a compactification $c=(j:X\\hookrightarrow\\overline X,p:\\overline X\\to Y)$ with $j$ quasi-compact open and $p$ proper, and its base change $c'=(j',p')$ [def-nagata-compactification]. Use the compactification exchange of [def-exchange-projection]. For bounded finite torsion etale $K$, extension by zero is still bounded below with the same annihilating coefficient ring; the composite\n$$Lg^*Rp_*j_!K\\xrightarrow{\\operatorname{Ex}_{*,p}}Rp'_*L\\bar g'^*j_!K\\xrightarrow{Rp'_*(\\beta_K)}Rp'_*j'_!Lg'^*K$$\nis an isomorphism, agrees under the canonical proper/open refinement comparisons, and defines the compactification-independent exchange. For a finite pro-etale input equipped with a bounded etale-origin witness [def-weil-pbc-etale-origin-witness], the transported compactification composite is the etale composite conjugated by that witness; it is invertible and independent of the witness.\nAt $R$, use derived-complete constructible inputs with compatible etale-origin reductions in a common finite interval [def-weil-pbc-bounded-constructible-complete] and completed pullback [def-weil-pbc-completed-pullback]. The specified completed exchange is completed proper exchange on $j_!K$, followed by the completed open comparison; it is invertible and compactification independent. At $E$ use a specified integral lattice presentation and raw rationalization; at $\\overline{\\mathbf Q}_\\ell$ use admissible common-stage presentations stable under common finite overfields. Retain the uniform landing bounds of [thm-cbc-complete-proetale, thm-cbc-finite-extension, thm-cbc-qbar] whenever asserting the conclusion in $D^b_c$. The rational exchange is the extension of the completed one, is natural for rational morphisms and independent of the lattice; the common-stage exchange is represented by that finite-stage map after a finite overfield and is independent of the field and representative. These are exactly the compact-support theorem maps. No smoothness of $g$ is required.",
+ "chapter": "sec-six-functors",
+ "unit": "sk-thm-sf-package",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-functor-package.proof.md",
+  "place": "Clause (4), base-change sentence; argument separated from realization steps 10,11."
+ },
+ "stmt_deps": [
+  "def-fix-six-functor-datum",
+  "def-weil-pbc-cartesian-square",
+  "def-exchange-projection",
+  "def-nagata-compactification",
+  "def-weil-pbc-etale-origin-witness",
+  "def-weil-pbc-bounded-constructible-complete",
+  "def-weil-pbc-completed-pullback",
+  "thm-cbc-complete-proetale",
+  "thm-cbc-finite-extension",
+  "thm-cbc-qbar"
+ ],
+ "proof": [
+  {
+   "text": "The original sfCompactSupportDomain_finite remains open. Its route is the existing etale compact-support base-change instance and shriekBaseChangeOfIsPullback_shriekIso evaluated at K, with the positive finite quotient supplied by Padic.finite_coefficientExtensionRing. Exact open extension preserves the lower bound, and linearity preserves the scalar annihilator. The attempted component normalization did not validate within the per-file time limit, so this delivery does not claim this clause proved.",
+   "uses": [
+    "def-weil-l-adic-coefficient-extension",
+    "thm-cbc-finite-torsion",
+    "lem-weil-pbc-extension-by-zero-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-package/prop-functor-package.proof.md",
+    "place": "Clause (4), compact-support base-change assembly, in the recorded finite/completed/rational/common-stage categories."
+   }
+  },
+  {
+   "text": "Apply isIso_csAuxiliaryExchange to the retained origin for the canonical finite pro-etale map. Apply compactSupport_exchange_transport to each retained witness: both conjugates equal the same source-library exchange component, giving independence. That component is invertible on plusEtaleOrigin. Expand the canonical and source-library composites; the normalized ordinary open comparison is the inverse derived open base-change comparison. Associator and whiskering component formulas identify the two composites and hence the witness conjugate with the canonical finite-coefficient map.",
+   "uses": [
+    "thm-cbc-finite-level-proetale",
+    "lem-pur-co-smooth-exchange-transport"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-package/prop-functor-package.proof.md",
+    "place": "Clause (4), compact-support base-change assembly, in the recorded finite/completed/rational/common-stage categories."
+   }
+  },
+  {
+   "text": "Unpack the intrinsic-completion presentation in K.property.1 and apply the existing wfComplete_of_presentation lemma from PbcCompletedPullbackActual to obtain intrinsic completeness for the given tuple. Its retained compatible etale origins are K.property.2.2. Apply completeCompactSupportProetale_isIso and completeCompactSupportProetale_refinement to this same object and these origins. Their exchange and refinement maps are exactly the definitions in the integral conclusions.",
+   "uses": [
+    "def-weil-pbc-bounded-constructible-complete",
+    "thm-cbc-complete-proetale"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-package/prop-functor-package.proof.md",
+    "place": "Clause (4), compact-support base-change assembly, in the recorded finite/completed/rational/common-stage categories."
+   }
+  },
+  {
+   "text": "The structure map of each SixFunctorSpace is locally of finite type and quasi-compact by its property. The Mathlib instances LocallyOfFiniteType.isLocallyNoetherian and QuasiCompact.compactSpace_of_compactSpace give IsNoetherian. The existing exists_topologicalKrullDim_le gives a natural dimension bound, including the empty scheme. Specialize coefficientPrime_isUnit_stalk to PurityFiniteSetting with the given field/coefficient data, bottom intermediate field and level one. Package the last two conclusions in Fact where required.",
+   "uses": [
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "lem-kun-dimension-finite-type",
+    "def-pur-conventions"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-package/prop-functor-package.proof.md",
+    "place": "Clause (4), compact-support base-change assembly, in the recorded finite/completed/rational/common-stage categories."
+   }
+  },
+  {
+   "text": "Apply finiteExtension_compactSupportBaseChange with the geometric consequences just proved at all four corners. Retain both uniform landing witnesses, its natural isomorphism and its normalization on every complete integral object. Naturality at alpha.hom and beta.hom, followed by mapping their inverse identities, proves lattice independence. Apply congrArg (finiteExtensionRationalArrow ...) to completeCompactSupportProetale_refinement to get the rational refinement equation.",
+   "uses": [
+    "thm-cbc-finite-extension",
+    "thm-cbc-complete-proetale"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-package/prop-functor-package.proof.md",
+    "place": "Clause (4), compact-support base-change assembly, in the recorded finite/completed/rational/common-stage categories."
+   }
+  },
+  {
+   "text": "Supply the geometric Fact instances to qbarCompactSupportBaseChange and retain its model, finite-stage invertibility, descended invertibility, common-finite-overfield formula and presentation-independence equation; its additional componentwise invertibility clause is redundant. The original sfCompactSupportDomain_qbarRefinement remains open: localize the completed refinement maps at each finite field, check coherence with the normalized source/target beta comparisons, and descend the resulting comparison families and their commuting equation. The final refinement assertion is not claimed proved by this delivery.",
+   "uses": [
+    "thm-cbc-qbar",
+    "prop-weil-pbc-descent-functors",
+    "thm-cbc-complete-proetale",
+    "prop-weil-pbc-rational-transport"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-package/prop-functor-package.proof.md",
+    "place": "Clause (4), compact-support base-change assembly, in the recorded finite/completed/rational/common-stage categories."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-l-adic-coefficient-extension",
+  "thm-cbc-finite-torsion",
+  "lem-weil-pbc-extension-by-zero-exact",
+  "thm-cbc-finite-level-proetale",
+  "lem-pur-co-smooth-exchange-transport",
+  "def-weil-pbc-bounded-constructible-complete",
+  "thm-cbc-complete-proetale",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-kun-dimension-finite-type",
+  "def-pur-conventions",
+  "thm-cbc-finite-extension",
+  "thm-cbc-qbar",
+  "prop-weil-pbc-descent-functors",
+  "prop-weil-pbc-rational-transport"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-package/prop-functor-package.proof.md",
+  "place": "Clause (4), compact-support base-change assembly, in the recorded finite/completed/rational/common-stage categories. Q4: thirteen proofs completed; finite etale assembly and common-stage refinement remain the original named holes."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "The compactification base change composite is independent of refinement and agrees with transported l-adic compact support exchange",
+   "results": "{\"t\": \"2026-10-22T06:12:28Z\", \"tool\": \"leansearch\", \"query\": \"The compactification base change composite is independent of refinement and agrees with transported l-adic compact support exchange\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"LinearMap.baseChange_comp\", \"LinearEquiv.baseChange_trans\", \"IsBaseChange.comp_iff\", \"IsBaseChange.comp\", \"LinearMap.liftBaseChange_comp\", \"AlgebraicGeometry.quasiCompact_isStableUnderBaseChange\", \"HasCompactSupport.comp_isClosedEmbedding\", \"HasCompactSupport.comp_homeomorph\"], \"digest\": \"3f40b8c26a5af0e2\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: hits do not state this joint geometric/coefficient-domain and specified-map assertion; see report for candidate distinctions"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction, AlgebraicGeometry.IsProper",
+   "results": "{\"t\": \"2026-10-22T06:12:29Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.Adjunction, AlgebraicGeometry.IsProper\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: hits do not state this joint geometric/coefficient-domain and specified-map assertion; see report for candidate distinctions"
+  },
+  {
+   "tool": "grep",
+   "query": "compactSupport.*baseChange|compact.*support.*exchange|extensionByZero.*baseChange",
+   "results": "{\"t\": \"2026-10-22T06:12:29Z\", \"tool\": \"grep\", \"query\": \"compactSupport.*baseChange|compact.*support.*exchange|extensionByZero.*baseChange\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: hits do not state this joint geometric/coefficient-domain and specified-map assertion; see report for candidate distinctions"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Compact support base change for arbitrary base morphisms using proper compactification and extension by zero at finite completed and rational coefficients",
+   "results": "{\"t\": \"2026-10-22T06:12:59Z\", \"tool\": \"leanfinder\", \"query\": \"Compact support base change for arbitrary base morphisms using proper compactification and extension by zero at finite completed and rational coefficients\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HasCompactMulSupport.extend_one\", \"HasCompactSupport.extend_zero\", \"HasCompactMulSupport.mulTSupport_extend_one_subset\", \"HasCompactSupport.tsupport_extend_zero_subset\", \"HasCompactMulSupport.mulTSupport_extend_one\", \"HasCompactSupport.tsupport_extend_zero\", \"CompactlySupportedContinuousMap.compLeft\", \"IsBaseChange.finsuppPow\"], \"digest\": \"ba093ac1aecd5da2\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: hits do not state this joint geometric/coefficient-domain and specified-map assertion; see report for candidate distinctions"
+  },
+  {
+   "tool": "grep",
+   "query": "compactSupport.*baseChange|compact.*support.*exchange|extensionByZero.*baseChange",
+   "results": "{\"t\": \"2026-10-23T10:37:53Z\", \"tool\": \"grep\", \"query\": \"compactSupport.*baseChange|compact.*support.*exchange|extensionByZero.*baseChange\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: returned scheme geometry, ordinary structure-sheaf restrictions or topological support, not the specified derived etale/proetale compact-support exchange and coefficient transports"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived compact support direct image base change isomorphism for torsion etale sheaves through compactification",
+   "results": "{\"t\": \"2026-10-23T10:37:54Z\", \"tool\": \"leansearch\", \"query\": \"Derived compact support direct image base change isomorphism for torsion etale sheaves through compactification\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Modules.restrictFunctorAdjCounitIso\", \"KaehlerDifferential.tensorKaehlerEquivOfFormallyEtale_apply\", \"RingHom.Etale.isStableUnderBaseChange\", \"KaehlerDifferential.tensorKaehlerEquivOfFormallyEtale\", \"AlgebraicGeometry.IsEtale.instIsStableUnderBaseChangeScheme\", \"KaehlerDifferential.tensorKaehlerEquivOfFormallyEtale.congr_simp\", \"HasCompactSupport.comp_isClosedEmbedding\", \"AlgebraicGeometry.Scheme.Modules.restrictFunctorComp\"], \"digest\": \"b4c36a49c339822f\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: returned scheme geometry, ordinary structure-sheaf restrictions or topological support, not the specified derived etale/proetale compact-support exchange and coefficient transports"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.IsIso, AlgebraicGeometry.IsProper",
+   "results": "{\"t\": \"2026-10-23T10:37:54Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.IsIso, AlgebraicGeometry.IsProper\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: returned scheme geometry, ordinary structure-sheaf restrictions or topological support, not the specified derived etale/proetale compact-support exchange and coefficient transports"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Compact support exchange for etale sheaves is invertible by proper base change and extension by zero, and extends through complete and rational coefficients",
+   "results": "{\"t\": \"2026-10-23T10:37:55Z\", \"tool\": \"leanfinder\", \"query\": \"Compact support exchange for etale sheaves is invertible by proper base change and extension by zero, and extends through complete and rational coefficients\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.exists_eq_pow_mul_of_is_compact_of_quasi_separated_space_aux\", \"AlgebraicGeometry.exists_appTop_map_eq_zero_of_isLimit\", \"AlgebraicGeometry.exists_app_map_eq_zero_of_isLimit\", \"AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified\", \"AlgebraicGeometry.exists_of_res_zero_of_qcqs\", \"AlgebraicGeometry.isIso_of_comp_eq_sigmaSpec\", \"AlgebraicGeometry.isIso_ΓSpec_adjunction_unit_app_basicOpen\", \"AlgebraicGeometry.exists_of_res_zero_of_qcqs_of_top\"], \"digest\": \"1a0eec8e53930502\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: returned scheme geometry, ordinary structure-sheaf restrictions or topological support, not the specified derived etale/proetale compact-support exchange and coefficient transports"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sf-package-base-change-domain-realization",
+  "date": "2026-10-22",
+  "group": "Q139"
+ },
+ "blueprint": {
+  "from": {
+   "node": "prop-functor-package",
+   "place": "Clause (4), base-change sentence; returned realization steps 10,11: Compact-support exchange through all specified coefficient domains.",
+   "via": [
+    "lem-sf-package-base-change-domain-realization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sf-bc-compact-support-domain",
+  "worker": "stage1",
+  "summary": "Expanded the finite proper/open composite, coefficient-forgetting bridge, refinement compatibility, witnessed site transport and completed/rational/common-stage assembly. Reused all existing general theorems; no new nodes. Preserved the explicit completed-proetale categories and all uniform landing restrictions, without identifying them with the newer condensed blueprint categories.",
+  "blueprint": "prop-functor-package.proof.md, clause (4), compact-support sentence: steps 1–3 finite etale, step 4 witnessed pro-etale, step 5 completed integral, steps 6–7 rational/common-stage.",
+  "tool_uses": [
+   {
+    "node": "lem-pur-finite-setting-comparison-hypotheses",
+    "why": "Generic geometric/coefficient hypothesis verification for the compactification assembly; no node of this package unit replaces this theorem."
+   },
+   {
+    "node": "lem-weil-pbc-extension-by-zero-exact",
+    "why": "Generic exactness, exchange, comparison or coefficient-transport input for the compactification assembly; no node of this package unit replaces this theorem."
+   },
+   {
+    "node": "def-cbc-exchange-map",
+    "why": "Generic exactness, exchange, comparison or coefficient-transport input for the compactification assembly; no node of this package unit replaces this theorem."
+   },
+   {
+    "node": "thm-weil-pbc-bounded-below",
+    "why": "Generic exactness, exchange, comparison or coefficient-transport input for the compactification assembly; no node of this package unit replaces this theorem."
+   },
+   {
+    "node": "lem-weil-pbc-exchange-forget-coefficients",
+    "why": "Generic exactness, exchange, comparison or coefficient-transport input for the compactification assembly; no node of this package unit replaces this theorem."
+   },
+   {
+    "node": "cor-cbc-derived-extension-zero-base-change",
+    "why": "Generic exactness, exchange, comparison or coefficient-transport input for the compactification assembly; no node of this package unit replaces this theorem."
+   },
+   {
+    "node": "thm-cbc-finite-torsion",
+    "why": "Generic exactness, exchange, comparison or coefficient-transport input for the compactification assembly; no node of this package unit replaces this theorem."
+   },
+   {
+    "node": "def-exchange-projection",
+    "why": "Generic exactness, exchange, comparison or coefficient-transport input for the compactification assembly; no node of this package unit replaces this theorem."
+   },
+   {
+    "node": "thm-cbc-finite-level-proetale",
+    "why": "Generic exactness, exchange, comparison or coefficient-transport input for the compactification assembly; no node of this package unit replaces this theorem."
+   },
+   {
+    "node": "def-weil-pbc-bounded-constructible-complete",
+    "why": "Generic exactness, exchange, comparison or coefficient-transport input for the compactification assembly; no node of this package unit replaces this theorem."
+   },
+   {
+    "node": "thm-cbc-complete-proetale",
+    "why": "Generic exactness, exchange, comparison or coefficient-transport input for the compactification assembly; no node of this package unit replaces this theorem."
+   },
+   {
+    "node": "thm-cbc-finite-extension",
+    "why": "Generic exactness, exchange, comparison or coefficient-transport input for the compactification assembly; no node of this package unit replaces this theorem."
+   },
+   {
+    "node": "prop-weil-pbc-rational-transport",
+    "why": "Generic exactness, exchange, comparison or coefficient-transport input for the compactification assembly; no node of this package unit replaces this theorem."
+   },
+   {
+    "node": "thm-cbc-qbar",
+    "why": "Generic exactness, exchange, comparison or coefficient-transport input for the compactification assembly; no node of this package unit replaces this theorem."
+   },
+   {
+    "node": "prop-weil-pbc-descent-functors",
+    "why": "Generic exactness, exchange, comparison or coefficient-transport input for the compactification assembly; no node of this package unit replaces this theorem."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pur-finite-setting-comparison-hypotheses",
+  "lem-weil-pbc-extension-by-zero-exact",
+  "def-cbc-exchange-map",
+  "thm-weil-pbc-bounded-below",
+  "lem-weil-pbc-exchange-forget-coefficients",
+  "cor-cbc-derived-extension-zero-base-change",
+  "thm-cbc-finite-torsion",
+  "def-exchange-projection",
+  "thm-cbc-finite-level-proetale",
+  "def-weil-pbc-bounded-constructible-complete",
+  "thm-cbc-complete-proetale",
+  "thm-cbc-finite-extension",
+  "prop-weil-pbc-rational-transport",
+  "thm-cbc-qbar",
+  "prop-weil-pbc-descent-functors"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q11-3498d8b2b",
+  "group": "Q11",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q11-3498d8b2b (reviewer sub-agent of L); spot-checked: I read the item in full. Statement, stmt_deps, blueprint and created are byte-identical to live; the delivery only adds 7 proof steps, proof_deps (equal to the union of the step uses), proof_origin, split_report and searches. No new nodes, and live is still unsplit. All cited statements lie on the sk-thm-sf-package route (transitive uses include sk-prop-cohsm, sk-thm-p1, sk-thm-properbasechange, sk-prop-sf-cbc), so the blanket tool_uses are harmless. The route follows main-20261015 prop-functor-package.proof clause (4): thm-cbc-finite-torsion, thm-cbc-qbar and thm-weil-pbc-bounded-below. The deliberate non-identification with the condensed categories of the latest blueprint is correct, and no target is weakened. I checked Stacks 0F7L (the compactification composite of proper base change on j_! followed by extension-by-zero base change) and 03DJ (j_! exact). No SGA source is used. Step checks: (1) lem-pur-finite-setting-comparison-hypotheses gives Noetherian, finite-dimensional corners with ℓ invertible, which covers the hypotheses of the later theorems; j_! keeps the lower bound and the ℓ^n annihilator. (2) The square (p, ḡ′, g, p′) is cartesian, thm-weil-pbc-bounded-below applies to the forgetful image, lem-weil-pbc-exchange-forget-coefficients(3) reflects invertibility, and β is invertible by cor-cbc-derived-extension-zero-base-change. This is redundant with thm-cbc-finite-torsion but not a fault. (3) thm-cbc-finite-torsion gives refinement and compactification independence; def-cbc-exchange-map and def-exchange-projection have the same ordered composite. (4) thm-cbc-finite-level-proetale applies with c given; I checked the directions in the α-conjugation. (5) def-weil-pbc-bounded-constructible-complete supplies exactly the hypotheses of thm-cbc-complete-proetale; (O_E,(ϖ)) is an adic datum (P_n finite and perfect). (6) Lattice independence and naturality come from thm-cbc-finite-extension; compactification independence comes from prop-weil-pbc-rational-transport, which extends the transformations and their equations uniquely. (7) thm-cbc-qbar gives representation and independence, and prop-weil-pbc-descent-functors descends the equations. Edge cases K=0, j=id, g=id, empty X and n=1 are consistent, and g is never assumed smooth. All 15 cited nodes are live, unmerged and unchanged, and no duplicate exists in the DAG. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.CompactSupportExchangeDomains",
+  "declaration": "WeilConjectures.sfCompactSupportDomain_qbar",
+  "declarations": [
+   "WeilConjectures.sfDomainSquare",
+   "WeilConjectures.sfDomainProperSquare",
+   "WeilConjectures.sfDomainOpenSquare",
+   "WeilConjectures.sfDomainEtaleExchange",
+   "WeilConjectures.sfDomainEtaleComparison",
+   "WeilConjectures.sfDomainEtaleComparison'",
+   "WeilConjectures.sfCompactSupportDomain_finite",
+   "WeilConjectures.sfCompactSupportDomain_finiteProetale",
+   "WeilConjectures.sfDomainWitnessExchange",
+   "WeilConjectures.sfCompactSupportDomain_witness",
+   "WeilConjectures.sfCompactSupportDomain_witness_identification",
+   "WeilConjectures.sfDomainIntegralComplete",
+   "WeilConjectures.sfDomainIntegralExchange",
+   "WeilConjectures.sfCompactSupportDomain_integral",
+   "WeilConjectures.sfCompactSupportDomain_integralRefinement",
+   "WeilConjectures.sfDomainNoetherian",
+   "WeilConjectures.sfDomainGeometry",
+   "WeilConjectures.sfCompactSupportDomain_rational",
+   "WeilConjectures.sfCompactSupportDomain_rationalRefinement",
+   "WeilConjectures.sfDomainDimension",
+   "WeilConjectures.sfDomainInvertible",
+   "WeilConjectures.sfDomainScalarSystem",
+   "WeilConjectures.sfDomainQbarModel",
+   "WeilConjectures.sfDomainQbarConclusion",
+   "WeilConjectures.sfCompactSupportDomain_qbar",
+   "WeilConjectures.sfDomainQbarRefinementConclusion",
+   "WeilConjectures.sfCompactSupportDomain_qbarRefinement"
+  ],
+  "file": "lean/Sheaf/Paper/CompactSupportExchangeDomains.lean",
+  "statement": "theorem sfCompactSupportDomain_qbar (D : FiniteFieldDatum.{u}) (C : D.CoefficientDatum) (Q : SixFunctorCompactifiedSquare D) [IsSeparated Q.X.obj.hom] [IsSeparated Q.Y.obj.hom] [IsSeparated Q.X'.obj.hom] [IsSeparated Q.Y'.obj.hom] [IsSeparated Q.g.hom.left] [LocallyOfFiniteType Q.g.hom.left] [QuasiCompact Q.g.hom.left] [IsSeparated Q.g'.hom.left] [LocallyOfFiniteType Q.g'.hom.left] [QuasiCompact Q.g'.hom.left] [IsSeparated Q.f'.hom.left] [LocallyOfFiniteType Q.f'.hom.left] [QuasiCompact Q.f'.hom.left] [IsSeparated Q.f.hom.left] [LocallyOfFiniteType Q.f.hom.left] [QuasiCompact Q.f.hom.left] : sfDomainQbarConclusion D C Q",
+  "branch": "sheaf-dag",
+  "by": "O1",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "The recorded declarations jointly state the finite, witnessed pro-etale, completed, raw rational and common-stage clauses, including bounds, normalizations and refinement compatibility. Definitions specialize existing canonical constructions; no coefficient domain, statement or dependency is changed."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-365b60400",
+  "group": "O1",
+  "result": "pass",
+  "note": "Every clause matches the node: finite étale (bounded K, isomorphism of the 0F7L composite, comparison square, lower bound and annihilator kept), witnessed pro-étale (canonical conjugate, invertible, independent of witness, equal to the canonical pro-étale composite), completed (invertible, refinement directions checked), rational (landing as conclusion, pinned natural iso, lattice independence) and common stage (normalized model, representative order, refinement square). Hypotheses are exactly separated finite type on all corners and maps, no smoothness. Records: only lean changed, statement verbatim, both report sections present, no hollow definitions, all proofs sorry. Edge cases K=0, empty scheme, j=id, g=id, n=1 covered. Advisory: concrete exchange maps owned by def-cbc-exchange-map, pur713-def-shriek-exchange and def-pur-compact-exchange-witness-transport are uncited (def-exchange-projection's Lean is abstract; family precedent); independence equations redundant with naturality; global sorry Noetherian instance is trivially provable; E universe follows the dependency theorems."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q4",
+  "result": "pass",
+  "landing": "20261025T143739-L-1080862",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

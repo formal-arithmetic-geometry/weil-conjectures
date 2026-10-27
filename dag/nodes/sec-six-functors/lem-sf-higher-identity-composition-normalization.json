@@ -1,0 +1,198 @@
+{
+ "id": "lem-sf-higher-identity-composition-normalization",
+ "kind": "statement",
+ "title": "Completed identity unitor and scalar coefficient compatibility",
+ "statement": "Fix a six-functor datum $S$ of [def-sf-datum] over a finite-field datum $D$, coefficient datum $C$, finite extension $E/\\mathbf Q_\\ell$, and exponent $n\\geq1$. Use the support identity comparisons, composition-law predicate and coefficient-compatibility predicate of [def-sf-identity-coefficient-transport-data]. There are natural identity comparisons $v_I:I_I\\simeq\\mathrm{id}$, $v_R:I_R\\simeq\\mathrm{id}$ and $v_Q:I_Q\\simeq\\mathrm{id}$ on the specified integral, rational and common-stage point categories. Each satisfies $\\alpha_{\\mathrm{id}_s,a,K}=v_{Ra_!K}$ for every bounded constructible input on every separated finite-type space. The identity comparison $v_I$ commutes with every specified integral-to-finite reduction and its canonical finite identity comparison, and $v_I,v_R$ commute with the specified rationalization comparison. For every finite coefficient field $L$ inside the specified algebraic closure there are similarly normalized integral and rational comparisons $v_{LI},v_{LR}$, commuting with that stage's rationalization and all its finite reductions, and with $v_Q$ under the supplied common-stage inclusion. These are statements about the left-adjoint compositors and coefficient squares only; no exceptional counit or right-mate assertion occurs.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-identification/sk-thm-sf-identification.proof.md",
+  "place": "Normalized trace sentence; agent expansion in lem-sf-identification-coefficient-transport, steps 1--7."
+ },
+ "stmt_deps": [
+  "def-sf-datum",
+  "def-sf-identity-coefficient-transport-data"
+ ],
+ "proof": [
+  {
+   "text": "At finite coefficients, [thm-sf-comp-composition] gives $\\alpha_{\\mathrm{id}_s,a}=vRa_!$ by its identity clause. Integrally the identity compactification in [def-weil-integral-rational-qbar-compact-support] gives $IC=\\mathcal L_s\\mathcal R_sC$. Use the actual adjunction $\\mathcal R_s\\dashv\\mathcal L_s$ and its unit $u$ from [lem-coef-derived-system-evaluation-calculus]. The identity-open case of [lem-sf-integral-open-reduction-comparison] says that this $u_C$ is invertible on derived-complete inputs; the open coefficient comparison $r_{\\mathrm{id}}$ is the identity, since extension by zero along the identity leaves the flat-term reduction representative and every quotient map unchanged. Its formula $d_{\\mathrm{id}}=u_C^{-1}\\mathcal L(r_{\\mathrm{id}})^{-1}$ therefore fixes the canonical identity comparison as $v_C=u_C^{-1}$.",
+   "uses": [
+    "thm-sf-comp-composition",
+    "def-weil-integral-rational-qbar-compact-support",
+    "lem-coef-derived-system-evaluation-calculus",
+    "lem-sf-integral-open-reduction-comparison"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Fix an integral input $K$ and a compactification $a=pj$ with $j$ quasi-compact open and $p$ proper. Put $T=S_pJ_j$ on semilinear systems, $N=T\\mathcal R_XK$, and $C=d_{a,K}:\\mathcal L_sN\\xrightarrow{\\sim}Ra_!K$, the direct strict-tower identification of [lem-sf-integral-compactification-comparison-bridge]. The tower is the one defining [def-weil-integral-rational-qbar-compact-support]. The system inputs and intermediate outputs meet the realization domain of [lem-sf-integral-compactification-system-realization]: the datum's operations are on $D^b_{ctf}$, hence have common finite cohomological and Tor intervals, and (A5) of [def-sf-datum] identifies the system levels and quotient transitions with the finite reductions. Normalization and compatible etale-origin witnesses are part of the stated coefficient-domain data. Choose the outer identity compactification and retain the same compactification for the composite. The bridge lemma fixes $B_{\\mathrm{id}}=1$, $I=\\mathcal L_s\\mathcal R_s$ and $d_{\\mathrm{id},M}=1$ under the system unitors. It compares its counit formula to the actual word-normalized composition of [fix-lem-exchanges](2),(4); this is the comparison our statement names. The finite cohomological bounds and the finite global dimension of the coefficient DVR allow this normalization on every bounded constructible integral input.",
+   "uses": [
+    "lem-sf-integral-compactification-comparison-bridge",
+    "def-weil-integral-rational-qbar-compact-support",
+    "lem-sf-integral-compactification-system-realization",
+    "def-sf-datum",
+    "fix-lem-exchanges"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Write $e_N^{\\mathrm{sys}}:\\mathcal R_s\\mathcal L_sN\\to N$ for the actual system counit of [lem-coef-derived-system-evaluation-calculus]. For the outer identity compactification, the proper/open map and proper/open compositors give $\\beta=1_T$ by [lem-sf-ambient-proper-open-pasting]. Specialize the equality of [lem-sf-integral-compactification-comparison-bridge] to $(g,f)=(\\mathrm{id}_s,a)$. Its $d_g=1$, $d_h=d_f=C$ and $B_g=1$ give, for the specified comparison of [fix-lem-exchanges](2),(4),\n$$\\alpha_{\\mathrm{id}_s,a,K}=C\\circ\\mathcal L_s(e_N^{\\mathrm{sys}})\\circ\\mathcal L_s\\mathcal R_s(C^{-1}).$$\nAll maps here are actual integral maps. Naturality of $u$ gives $\\mathcal L_s\\mathcal R_s(C^{-1})u_{Ra_!K}=u_{\\mathcal L_sN}C^{-1}$. The adjunction triangle $\\mathcal L_s(e_N^{\\mathrm{sys}})u_{\\mathcal L_sN}=1$ therefore yields $\\alpha_{\\mathrm{id}_s,a,K}u_{Ra_!K}=1$. By Step 1, $u_{Ra_!K}$ is invertible, so $\\alpha_{\\mathrm{id}_s,a,K}=u_{Ra_!K}^{-1}=v_{Ra_!K}$. This uses the bridge's statement, without choosing or normalizing any of the unspecified expression-realization maps $c_V$.",
+   "uses": [
+    "lem-coef-derived-system-evaluation-calculus",
+    "lem-sf-ambient-proper-open-pasting",
+    "lem-sf-integral-compactification-comparison-bridge",
+    "fix-lem-exchanges"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The actual projection-normalized coefficient reductions identify the inverse reconstruction unit with every canonical finite identity comparison, giving precisely the reduction compatibility equations.",
+   "uses": [
+    "def-sf-datum",
+    "lem-sf-integral-open-reduction-comparison",
+    "def-sf-identity-coefficient-transport-data"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "At $E$, [def-weil-rationalization-karoubi] has the same objects as the integral category and morphisms $f/t^r$; the higher compact-support operations are those of [def-weil-integral-rational-qbar-compact-support]. Applying its scalar-localization functor $Q$ to Step 3 gives $\\alpha_E=Q(\\alpha_{\\mathrm{int}})=Q(v_{Ra_!})=v_E Ra_{!,E}$. Here the operation/composition coefficient comparisons are the supplied compatibility data of (A5) of [def-sf-datum]. Naturality also holds on denominators: $v_{K'}I_E(f/t^r)=Q(v_{K'}I(f))/t^r=Q(fv_K)/t^r=(f/t^r)v_K$. At $\\overline{\\mathbf Q}_\\ell$, choose one finite field containing representatives for the finitely many objects and morphisms in question, as in [def-weil-algebraically-closed-coefficients]. The equality just proved over that field gives equality of their common-stage classes. Under a further field extension the functor sends this equality and its inverse identities to the same equalities; (A5) identifies these images with the supplied operation/composition comparisons. This proves normalization at both field stages using the specified coefficient data, rather than deducing equality from reductions. Repeat the completed and rational construction for every finite field in the closure. Its reduction comparisons give every remaining finite-level square.",
+   "uses": [
+    "def-weil-rationalization-karoubi",
+    "def-weil-integral-rational-qbar-compact-support",
+    "def-sf-datum",
+    "def-weil-algebraically-closed-coefficients"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "thm-sf-comp-composition",
+  "def-weil-integral-rational-qbar-compact-support",
+  "lem-coef-derived-system-evaluation-calculus",
+  "lem-sf-integral-open-reduction-comparison",
+  "lem-sf-integral-compactification-comparison-bridge",
+  "lem-sf-integral-compactification-system-realization",
+  "def-sf-datum",
+  "fix-lem-exchanges",
+  "lem-sf-ambient-proper-open-pasting",
+  "def-sf-identity-coefficient-transport-data",
+  "def-weil-rationalization-karoubi",
+  "def-weil-algebraically-closed-coefficients"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-identification/sk-thm-sf-identification.proof.md",
+  "place": "Normalized trace sentence; agent expansion in lem-sf-identification-coefficient-transport, steps 1--7."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.conjugateEquiv_apply_app",
+   "results": "1 hits. CategoryTheory.conjugateEquiv_apply_app. ",
+   "date": "2026-10-25",
+   "verdict": "No theorem identifying the supplied six-functor compact-support identity comparisons; the mate results are used for the formal calculation."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "adjunction mate of identity functor isomorphism composite adjunction counit formula",
+   "results": "8 hits. CategoryTheory.conjugateEquiv_adjunction_id, CategoryTheory.mateEquiv_counit, CategoryTheory.Adjunction.left_triangle, CategoryTheory.mateEquiv_counit_symm, CategoryTheory.Equivalence.adjointify_η_ε, CategoryTheory.Adjunction.right_triangle, CategoryTheory.Equivalence.adjointify_η_ε_assoc, CategoryTheory.conjugateEquiv_rightUnitor_hom. ",
+   "date": "2026-10-25",
+   "verdict": "No theorem identifying the supplied six-functor compact-support identity comparisons; the mate results are used for the formal calculation."
+  },
+  {
+   "tool": "grep",
+   "query": "conjugateEquiv.*(whisker|counit)|conjugate.*comp",
+   "results": "25 hits. Mathlib/AlgebraicGeometry/Modules/Sheaf.lean, Mathlib/AlgebraicGeometry/Modules/Sheaf.lean, Mathlib/AlgebraicGeometry/Modules/Sheaf.lean, Mathlib/AlgebraicGeometry/Modules/Sheaf.lean, Mathlib/MeasureTheory/Function/Holder.lean, Mathlib/CategoryTheory/Shift/Adjunction.lean, Mathlib/CategoryTheory/Shift/Adjunction.lean, Mathlib/CategoryTheory/Shift/Adjunction.lean. ",
+   "date": "2026-10-25",
+   "verdict": "No theorem identifying the supplied six-functor compact-support identity comparisons; the mate results are used for the formal calculation."
+  },
+  {
+   "tool": "leansearch",
+   "query": "canonical compact support identity composition normalization compatible integral completion rational localization coefficient change",
+   "results": "8 hits. CompactlySupportedContinuousMap.comp_id, HasCompactMulSupport.comp_left, HasCompactSupport.comp_homeomorph, CompactlySupportedContinuousMap.coe_mk, HasCompactSupport.comp_isClosedEmbedding, HasCompactMulSupport.comp₂_left, HasCompactMulSupport.comp_isClosedEmbedding, ContDiffMapSupportedIn.coe_of_support_subset. ",
+   "date": "2026-10-25",
+   "verdict": "No theorem identifying the supplied six-functor compact-support identity comparisons; the mate results are used for the formal calculation."
+  },
+  {
+   "tool": "leansearch",
+   "query": "conjugation natural isomorphism adjunction identity counit composite adjunction mate",
+   "results": "8 hits. CategoryTheory.Adjunction.counitAsIsoOfIso, CategoryTheory.Adjunction.counit, CategoryTheory.Adjunction.CoreHomEquivUnitCounit.counit, CategoryTheory.conjugateEquiv_adjunction_id, CategoryTheory.Bicategory.conjugateEquiv_id, CategoryTheory.Adjunction.leftAdjointIdIso, CategoryTheory.Adjunction.ofNatIsoRight, CategoryTheory.Adjunction.unitAsIsoOfIso. ",
+   "date": "2026-10-25",
+   "verdict": "No theorem identifying the supplied six-functor compact-support identity comparisons; the mate results are used for the formal calculation."
+  },
+  {
+   "tool": "grep",
+   "query": "lowerShriek.*[Ii]d|compactSupport.*[Ii]d|scalar.*[Ll]ocalization.*[Cc]omposition",
+   "results": "1 hits. Mathlib/Topology/Algebra/Support.lean. ",
+   "date": "2026-10-25",
+   "verdict": "No theorem identifying the supplied six-functor compact-support identity comparisons; the mate results are used for the formal calculation."
+  },
+  {
+   "tool": "leansearch",
+   "query": "compact support pushforward functor identity compactification composition natural isomorphism unit normalization",
+   "results": "8 hits. CategoryTheory.Functor.sheafPushforwardContinuousComp, CategoryTheory.ExponentiableMorphism.unit_pushforwardComp_hom_assoc, SheafOfModules.pushforwardId, CategoryTheory.Functor.sheafPushforwardContinuousComp', PresheafOfModules.pushforwardComp, SheafOfModules.pushforwardComp_inv_app_val_app, SheafOfModules.pushforwardNatTrans_id, AlgebraicGeometry.Scheme.Modules.pushforwardId. ",
+   "date": "2026-10-25",
+   "verdict": "No theorem identifying the supplied six-functor compact-support identity comparisons; the mate results are used for the formal calculation."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.conjugateEquiv_adjunction_id",
+   "results": "1 hits. CategoryTheory.conjugateEquiv_adjunction_id. ",
+   "date": "2026-10-25",
+   "verdict": "No theorem identifying the supplied six-functor compact-support identity comparisons; the mate results are used for the formal calculation."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.IdentificationCoefficientTransport",
+  "group": "A7",
+  "date": "2026-10-26"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "sk-thm-sf-identification",
+   "place": "proof, normalized trace sentence: completed left-adjoint identity calculation and its scalar images, before the mate calculation",
+   "via": [
+    "lem-sf-identification-coefficient-transport"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-thm-sf-identification",
+ "lean_audit": {
+  "master": "none",
+  "slopmaster2": "none"
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.HigherIdentityCompositionNormalization",
+  "file": "lean/Sheaf/Paper/HigherIdentityCompositionNormalization.lean",
+  "declaration": "WeilConjectures.higherIdentityCompositionNormalization",
+  "statement": "theorem higherIdentityCompositionNormalization (D : FiniteFieldDatum.{u}) (C : D.CoefficientDatum) (E : Type u) [Field E] [Algebra (Padic C.l) E] [FiniteDimensional (Padic C.l) E] (n : ℕ) (hn : 1 ≤ n) (S : SixFunctorDatum D C E n hn) : (∃ vI : S.higher.integral.support (𝟙 (sixFunctorPoint D)) (sfPointIdentityCompactification D) ≅ 𝟭 _, SfIdentityCompositionLaw.{u, u+2, u+2} S.higher.integral vI ∧ ∃ vR : S.higher.rational.support (𝟙 (sixFunctorPoint D)) (sfPointIdentityCompactification D) ≅ 𝟭 _, SfIdentityCompositionLaw.{u, u+2, u+2} S.higher.rational vR ∧ SfIdentityChange S.higher.rationalization vI vR ∧ (∀ m : ℕ, @SfIdentityChange.{u, u+2, u+2, u+2, u+2} D (fun X ↦ sfIntegralConstructibleCategory C.l E X.obj.left) (fun X ↦ inferInstanceAs (Category.{u+2} (sfIntegralConstructibleCategory C.l E X.obj.left))) (sixFunctorFiniteCategory D C E (m+1) (Nat.succ_le_succ (Nat.zero_le m))) (fun X ↦ inferInstanceAs (Category.{u+2} (sixFunctorFiniteCategory D C E (m+1) (Nat.succ_le_succ (Nat.zero_le m)) X))) _ _ _ (S.integralNormalization.reduction m) vI (sfFiniteIdentityComparison D C E (m+1) (Nat.succ_le_succ (Nat.zero_le m)) (S.integralNormalization.finiteLevels m))) ∧ ∃ vQ : S.closure.commonStage.support (𝟙 (sixFunctorPoint D)) (sfPointIdentityCompactification D) ≅ 𝟭 _, SfIdentityCompositionLaw.{u, u+2, u+2} S.closure.commonStage vQ ∧ ∀ L : Padic.FiniteCoefficientFields C.l C.Qbar, ∃ vLI : (S.closure.coefficientStages L).integral.support (𝟙 (sixFunctorPoint D)) (sfPointIdentityCompactification D) ≅ 𝟭 _, ∃ vLR : (S.closure.coefficientStages L).rational.support (𝟙 (sixFunctorPoint D)) (sfPointIdentityCompactification D) ≅ 𝟭 _, SfIdentityCompositionLaw.{u, u+2, u+2} (S.closure.coefficientStages L).integral vLI ∧ SfIdentityCompositionLaw.{u, u+2, u+2} (S.closure.coefficientStages L).rational vLR ∧ SfIdentityChange (S.closure.coefficientStages L).rationalization vLI vLR ∧ SfIdentityChange (S.closure.commonStageComparison L) vLR vQ ∧ ∀ m : ℕ, @SfIdentityChange.{u, u+2, u+2, u+2, u+2} D (fun X ↦ sfIntegralConstructibleCategory C.l (AlgebraicallyClosedCoefficients.Coefficient.{u} C.l C.Qbar L) X.obj.left) (fun X ↦ inferInstanceAs (Category.{u+2} (sfIntegralConstructibleCategory C.l (AlgebraicallyClosedCoefficients.Coefficient.{u} C.l C.Qbar L) X.obj.left))) (sixFunctorFiniteCategory D C (AlgebraicallyClosedCoefficients.Coefficient.{u} C.l C.Qbar L) (m+1) (Nat.succ_le_succ (Nat.zero_le m))) (fun X ↦ inferInstanceAs (Category.{u+2} (sixFunctorFiniteCategory D C (AlgebraicallyClosedCoefficients.Coefficient.{u} C.l C.Qbar L) (m+1) (Nat.succ_le_succ (Nat.zero_le m)) X))) _ _ _ ((S.coefficientIntegralNormalization L).reduction m) vLI (sfFiniteIdentityComparison D C (AlgebraicallyClosedCoefficients.Coefficient.{u} C.l C.Qbar L) (m+1) (Nat.succ_le_succ (Nat.zero_le m)) ((S.coefficientIntegralNormalization L).finiteLevels m)))",
+  "branch": "sheaf-dag",
+  "by": "A7",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-2b465",
+  "group": "A7",
+  "result": "fix",
+  "landing": "20261025T201329-L-2429489",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-2b465",
+  "group": "A7",
+  "result": "fix",
+  "landing": "20261025T201329-L-2429489",
+  "kind": "interface",
+  "note": "independent cc review: item theorem signature (clone vs delivery, identical) and moved defs (verbatim diff) against the change record; new sorry statements against the item node, the finite composition normalization fields and the integral finite-Tor predicate"
+ }
+}

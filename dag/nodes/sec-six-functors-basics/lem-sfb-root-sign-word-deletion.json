@@ -1,0 +1,208 @@
+{
+ "id": "lem-sfb-root-sign-word-deletion",
+ "kind": "statement",
+ "title": "Sign-change deletion for orthogonal reflection words",
+ "statement": "Let $V$ be a finite-dimensional real vector space [def-weil-vector-space-dimension] with a positive definite symmetric bilinear form $(\\ ,\\ )$. For $a\\ne0$ write $s_a(x)=x-2(x,a)(a,a)^{-1}a$. Let $R\\subseteq V\\setminus\\{0\\}$ and $P\\subseteq R$ satisfy $R=P\\sqcup(-P)$. Let $D\\subseteq P$ satisfy, for every $a\\in D$, $s_a(R)=R$ and $s_a(P\\setminus\\{a\\})=P\\setminus\\{a\\}$. For $k\\geq0$, $a_1,\\ldots,a_k\\in D$, and $b\\in P$, set $w=s_{a_1}\\cdots s_{a_k}$, with the rightmost factor acting first. If $wb\\in-P$, then $k\\geq1$ and there is $j\\in\\{1,\\ldots,k\\}$ such that $$w s_b=s_{a_1}\\cdots s_{a_{j-1}}s_{a_{j+1}}\\cdots s_{a_k}.$$ No finiteness, spanning, integrality, or Coxeter-presentation assumption on $R$ is required.",
+ "source": {
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Appendix C.10, printed p.610, exchange argument underlying freeness (the book refers to Humphreys 1990, 1.8); agent-formulated sign-partition version, without assuming a Coxeter presentation."
+ },
+ "stmt_deps": [
+  "def-weil-vector-space-dimension"
+ ],
+ "proof": [
+  {
+   "text": "For nonzero $a$, put $d=(a,a)>0$ and $\\lambda_x=2(x,a)/d$. The formula $s_ax=x-\\lambda_xa$ is linear, gives $s_aa=-a$ and $(s_ax,a)=-(x,a)$, hence $s_a^2x=x$. Bilinearity and symmetry give $$(s_ax,s_ay)=(x,y)-\\lambda_y(x,a)-\\lambda_x(a,y)+\\lambda_x\\lambda_y d=(x,y).$$ Thus every word of these reflections is a linear map preserving the form, including the empty word.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Appendix C.10, printed p.610 (PDF p.622), freeness/exchange input; agent-written details for the stated sign-partition generalization. Reflection formula as in C.8, printed p.609, and C.20, printed p.611."
+   }
+  },
+  {
+   "text": "If $q$ is such a word and $b\\ne0$, then $(qb,qb)=(b,b)>0$, and substitution gives, for every $x$, $$q s_bx=qx-\\frac{2(x,b)}{(b,b)}qb=qx-\\frac{2(qx,qb)}{(qb,qb)}qb=s_{qb}qx.$$ Therefore $q s_b=s_{qb}q$. This is a calculation from the displayed formula, with no presentation of the reflection group assumed.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Appendix C.10, printed p.610 (PDF p.622), freeness/exchange input; agent-written details for the stated sign-partition generalization. Reflection formula as in C.8, printed p.609, and C.20, printed p.611."
+   }
+  },
+  {
+   "text": "Since $P\\cap(-P)=\\varnothing$, the empty word sends $b\\in P$ into $P$, not into $-P$. Thus the hypothesis implies $k\\geq1$. Define $c_{k+1}=b$ and $c_i=s_{a_i}\\cdots s_{a_k}b$ for $1\\leq i\\leq k$. Each $c_i$ belongs to $R$ by repeated application of $s_{a_i}(R)=R$, so lies in exactly one of $P$ and $-P$. Since $c_1=wb\\in-P$ and $c_{k+1}\\in P$, choose the largest $j\\in\\{1,\\ldots,k\\}$ with $c_j\\in-P$. Maximality implies $c_{j+1}\\in P$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Appendix C.10, printed p.610 (PDF p.622), freeness/exchange input; agent-written details for the stated sign-partition generalization. Reflection formula as in C.8, printed p.609, and C.20, printed p.611."
+   }
+  },
+  {
+   "text": "Now $c_j=s_{a_j}c_{j+1}$. If $c_{j+1}\\ne a_j$, then $c_{j+1}\\in P\\setminus\\{a_j\\}$ and the stated equality $s_{a_j}(P\\setminus\\{a_j\\})=P\\setminus\\{a_j\\}$ puts $c_j$ in $P$, contradicting $c_j\\in-P$. Consequently $c_{j+1}=a_j$. This uses only the sign-preservation hypothesis, not finiteness or a spanning property of $R$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Appendix C.10, printed p.610 (PDF p.622), freeness/exchange input; agent-written details for the stated sign-partition generalization. Reflection formula as in C.8, printed p.609, and C.20, printed p.611."
+   }
+  },
+  {
+   "text": "Set $p=s_{a_1}\\cdots s_{a_{j-1}}$ and $q=s_{a_{j+1}}\\cdots s_{a_k}$, allowing either to be empty. Then $qb=c_{j+1}=a_j$, so step 2 gives $q s_b=s_{a_j}q$. Using step 1, $$w s_b=p s_{a_j}q s_b=p s_{a_j}s_{a_j}q=pq=s_{a_1}\\cdots s_{a_{j-1}}s_{a_{j+1}}\\cdots s_{a_k}.$$ This is the required deletion at the index $1\\leq j\\leq k$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Appendix C.10, printed p.610 (PDF p.622), freeness/exchange input; agent-written details for the stated sign-partition generalization. Reflection formula as in C.8, printed p.609, and C.20, printed p.611."
+   }
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Appendix C.10, printed p.610 (PDF p.622), freeness/exchange input; agent-written details for the stated sign-partition generalization. Reflection formula as in C.8, printed p.609, and C.20, printed p.611."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "For simple reflections in a root system, a word taking a positive root to a negative root satisfies the strong exchange deletion condition",
+   "results": "Read returned hits: CoxeterSystem.IsRightDescent, CoxeterSystem.IsLeftDescent, CoxeterSystem.simple, CoxeterSystem.isRightDescent_iff, CoxeterSystem.IsReduced.drop, CoxeterSystem.isRightDescent_iff_not_isRightDescent_mul, CoxeterSystem.IsReduced.reverse, CoxeterSystem.length_eq_one_iff; ; search digest 99a9ccd238a2fec3",
+   "date": "2026-10-23",
+   "verdict": "no match: Base.induction_reflect is a root induction principle requiring paired root/coroot data, not this raw real-reflection statement; Coxeter exchange/generation declarations assume an already constructed Coxeter system."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"exchange\"",
+   "results": "Read returned hits: Equiv.swap_bijOn_exchange, Set.encard_exchange, Set.encard_exchange', Set.ncard_exchange, Set.ncard_exchange', mem_span_insert_exchange, CategoryTheory.NatTrans.exchange, CategoryTheory.Bicategory.whisker_exchange; ; search digest f48baba39ede1d1a",
+   "date": "2026-10-23",
+   "verdict": "no match: Base.induction_reflect is a root induction principle requiring paired root/coroot data, not this raw real-reflection statement; Coxeter exchange/generation declarations assume an already constructed Coxeter system."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Exchange condition: if a word of simple root reflections sends a positive root beta to a negative root then multiplying on the right by the reflection in beta deletes one letter of the word",
+   "results": "Read returned hits: CoxeterSystem.wordProd_mul_getD_rightInvSeq, CoxeterSystem.IsRightInversion, CoxeterSystem.getD_leftInvSeq_mul_wordProd, CoxeterSystem.IsRightDescent, CoxeterSystem.length_mul_simple, CoxeterSystem.isReflection_of_mem_rightInvSeq, CoxeterSystem.isRightDescent_iff_not_isRightDescent_mul, CoxeterSystem.length_mul_simple_ne; ; search digest 497d813ab4adcca5",
+   "date": "2026-10-23",
+   "verdict": "no match: Base.induction_reflect is a root induction principle requiring paired root/coroot data, not this raw real-reflection statement; Coxeter exchange/generation declarations assume an already constructed Coxeter system."
+  },
+  {
+   "tool": "leansearch",
+   "query": "In a finite real root system the exchange lemma for simple reflection words follows by the first sign change of a positive root",
+   "results": "Read returned hits: CoxeterSystem.simple, RootPairing.Base.IsPos.induction_on_reflect, CoxeterSystem.length_mul_simple, RootPairing.root_reflectionPerm, RootPairing.reflectionPerm_eq_reflectionPerm_iff, CoxeterSystem.IsReflection, RootPairing.reflection, RootPairing.mem_range_root_of_mem_range_reflection_of_mem_range_root; ; search digest ea6e0d5b5bf96ce4",
+   "date": "2026-10-23",
+   "verdict": "no match: Base.induction_reflect is a root induction principle requiring paired root/coroot data, not this raw real-reflection statement; Coxeter exchange/generation declarations assume an already constructed Coxeter system."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A positive-negative root partition with simple reflections changing the sign of only their own root implies that if a reflection word makes beta negative then its product times s_beta equals a word with one factor omitted",
+   "results": "Read returned hits: CoxeterSystem.wordProd_mul_getD_rightInvSeq, CoxeterSystem.getD_leftInvSeq_mul_wordProd, RootPairing.Base.IsPos.induction_on_reflect, CoxeterSystem.getD_rightInvSeq, CoxeterSystem.getElem_rightInvSeq, CoxeterSystem.isRightDescent_iff_not_isRightDescent_mul, RootPairing.Base.IsPos.reflectionPerm, RootPairing.chainTopCoeff_reflectionPerm_right; ; search digest 43a242267a54de87",
+   "date": "2026-10-23",
+   "verdict": "no match: Base.induction_reflect is a root induction principle requiring paired root/coroot data, not this raw real-reflection statement; Coxeter exchange/generation declarations assume an already constructed Coxeter system."
+  },
+  {
+   "tool": "grep",
+   "query": "wordProd_mul_getD_rightInvSeq|exchange|deletion",
+   "results": "Read returned hits: Mathlib/GroupTheory/Coxeter/Inversion.lean, Mathlib/GroupTheory/Coxeter/Inversion.lean, Mathlib/GroupTheory/Coxeter/Inversion.lean, Mathlib/GroupTheory/Coxeter/Inversion.lean; ; search digest 3847e29ccc4e7573",
+   "date": "2026-10-23",
+   "verdict": "no match: Base.induction_reflect is a root induction principle requiring paired root/coroot data, not this raw real-reflection statement; Coxeter exchange/generation declarations assume an already constructed Coxeter system."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A word of orthogonal root reflections taking a positive root to a negative root permits deletion of one letter after multiplication by that root reflection",
+   "results": "{\"t\": \"2026-10-23T21:46:08Z\", \"tool\": \"leansearch\", \"query\": \"A word of orthogonal root reflections taking a positive root to a negative root permits deletion of one letter after multiplication by that root reflection\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"RootPairing.mem_range_root_of_mem_range_reflection_of_mem_range_root\", \"LieAlgebra.IsKilling.reflectRoot\", \"RootPairing.reflection\", \"RootPairing.IsOrthogonal.reflection_apply_right\", \"CoxeterSystem.IsReflection\", \"RootPairing.bijOn_reflection_root\", \"RootPairing.isOrthogonal_comm\", \"RootPairing.weylGroup.ofIdx_smul\"], \"digest\": \"1211825c8f2d2063\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the CoxeterSystem deletion identity presupposes a Coxeter presentation and an inversion sequence; RootPairing results require paired root/coroot and base data. Neither specializes in one line to arbitrary R=P disjoint union (-P) with the stated raw orthogonal reflections. See Mathlib/GroupTheory/Coxeter/Inversion.lean:349 and LinearAlgebra/RootSystem/Base.lean:639."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Sign partition of roots simple reflections exchange deletion lemma without assuming a Coxeter system",
+   "results": "{\"t\": \"2026-10-23T21:46:09Z\", \"tool\": \"leanfinder\", \"query\": \"Sign partition of roots simple reflections exchange deletion lemma without assuming a Coxeter system\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CoxeterSystem.prod_alternatingWord_eq_prod_alternatingWord_sub\", \"RootPairing.Base.IsPos.reflectionPerm\", \"RootPairing.chainTopCoeff_reflectionPerm_right\", \"CoxeterSystem.wordProd_mul_getD_rightInvSeq\", \"RootPairing.chainTopCoeff_reflectionPerm_left\", \"RootPairing.chainBotCoeff_reflectionPerm_right\", \"RootPairing.chainBotCoeff_reflectionPerm_left\", \"RootPairing.Base.IsPos.induction_on_reflect\"], \"digest\": \"d403a2ea02366da6\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the CoxeterSystem deletion identity presupposes a Coxeter presentation and an inversion sequence; RootPairing results require paired root/coroot and base data. Neither specializes in one line to arbitrary R=P disjoint union (-P) with the stated raw orthogonal reflections. See Mathlib/GroupTheory/Coxeter/Inversion.lean:349 and LinearAlgebra/RootSystem/Base.lean:639."
+  },
+  {
+   "tool": "grep",
+   "query": "exchange|deletion|wordProd_mul_getD_rightInvSeq",
+   "results": "{\"t\": \"2026-10-23T21:46:37Z\", \"tool\": \"grep\", \"query\": \"exchange|deletion|wordProd_mul_getD_rightInvSeq\", \"sub\": \"GroupTheory/Coxeter\", \"ok\": true, \"n_hits\": 4, \"note\": \"\", \"top\": [\"Mathlib/GroupTheory/Coxeter/Inversion.lean\", \"Mathlib/GroupTheory/Coxeter/Inversion.lean\", \"Mathlib/GroupTheory/Coxeter/Inversion.lean\", \"Mathlib/GroupTheory/Coxeter/Inversion.lean\"], \"digest\": \"3847e29ccc4e7573\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the CoxeterSystem deletion identity presupposes a Coxeter presentation and an inversion sequence; RootPairing results require paired root/coroot and base data. Neither specializes in one line to arbitrary R=P disjoint union (-P) with the stated raw orthogonal reflections. See Mathlib/GroupTheory/Coxeter/Inversion.lean:349 and LinearAlgebra/RootSystem/Base.lean:639."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"exchange\"",
+   "results": "{\"t\": \"2026-10-23T21:46:37Z\", \"tool\": \"loogle\", \"query\": \"\\\"exchange\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"Equiv.swap_bijOn_exchange\", \"Set.encard_exchange\", \"Set.encard_exchange'\", \"Set.ncard_exchange\", \"Set.ncard_exchange'\", \"mem_span_insert_exchange\", \"CategoryTheory.NatTrans.exchange\", \"CategoryTheory.Bicategory.whisker_exchange\"], \"digest\": \"f48baba39ede1d1a\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the CoxeterSystem deletion identity presupposes a Coxeter presentation and an inversion sequence; RootPairing results require paired root/coroot and base data. Neither specializes in one line to arbitrary R=P disjoint union (-P) with the stated raw orthogonal reflections. See Mathlib/GroupTheory/Coxeter/Inversion.lean:349 and LinearAlgebra/RootSystem/Base.lean:639."
+  },
+  {
+   "tool": "leansearch",
+   "query": "First sign change of suffix images of a root yields the exchange condition for a reflection word",
+   "results": "{\"t\": \"2026-10-23T21:50:08Z\", \"tool\": \"leansearch\", \"query\": \"First sign change of suffix images of a root yields the exchange condition for a reflection word\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"RootPairing.reflection_apply_root\", \"RootPairing.mem_range_root_of_mem_range_reflection_of_mem_range_root\", \"RootPairing.reflection_apply_self\", \"RootPairing.reflection\", \"RootPairing.root_reflectionPerm\", \"CoxeterSystem.IsReflection\", \"RootPairing.reflection_image_eq\", \"RootPairing.reflectionPerm_symm\"], \"digest\": \"7775776546947841\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the CoxeterSystem deletion identity presupposes a Coxeter presentation and an inversion sequence; RootPairing results require paired root/coroot and base data. Neither specializes in one line to arbitrary R=P disjoint union (-P) with the stated raw orthogonal reflections. See Mathlib/GroupTheory/Coxeter/Inversion.lean:349 and LinearAlgebra/RootSystem/Base.lean:639."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "If each generator reflection sends all positive roots except its own to positive roots a negative image implies a word with one reflection erased",
+   "results": "{\"t\": \"2026-10-23T21:50:09Z\", \"tool\": \"leanfinder\", \"query\": \"If each generator reflection sends all positive roots except its own to positive roots a negative image implies a word with one reflection erased\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"RootPairing.Base.IsPos.induction_on_reflect\", \"RootPairing.Base.induction_reflect\", \"RootPairing.Base.IsPos.reflectionPerm\", \"RootPairing.RootPositiveForm.rootLength_reflectionPerm_self\", \"RootPairing.chainTopCoeff_reflectionPerm_left\", \"RootPairing.chainBotCoeff_reflectionPerm_left\", \"RootPairing.chainTopCoeff_reflectionPerm_right\", \"RootPairing.chainBotCoeff_reflectionPerm_right\"], \"digest\": \"443f4d12292073f9\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the CoxeterSystem deletion identity presupposes a Coxeter presentation and an inversion sequence; RootPairing results require paired root/coroot and base data. Neither specializes in one line to arbitrary R=P disjoint union (-P) with the stated raw orthogonal reflections. See Mathlib/GroupTheory/Coxeter/Inversion.lean:349 and LinearAlgebra/RootSystem/Base.lean:639."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-root-chamber-simple-transitivity",
+  "date": "2026-10-24",
+  "group": "Q48"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Haboush symmetric-power lifting for a trivial quotient representation. Supporting representation-theoretic input: Steinberg endomorphisms detect a nonzero fixed vector. Supporting Large rho tensor squares detect a nonzero invariant vector. Geometric input: opposite flags form the nonvanishing locus of the invariant rho external-square section. Supporting input: Regularity and Weyl orbit of the half sum of positive roots. Supporting input: Milne C.9--C.10 and C.21--C.22: apply chamber geometry to the root span with its averaged invariant inner product. Supporting Sign-change deletion for orthogonal reflection words.",
+   "via": [
+    "lem-sfb-root-chamber-simple-transitivity",
+    "lem-sfb-rho-regular-weyl-orbit",
+    "lem-sfb-double-flag-invariant-boundary",
+    "lem-sfb-rho-tensor-square-eventual-detection",
+    "lem-sfb-steinberg-endomorphism-detection",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-root-sign-word-deletion",
+  "worker": "stage1",
+  "group": "O4",
+  "summary": "Retained the full statement and its generality. Wrote the reflection involution and form-preservation calculation, the explicit intertwining formula, the last negative suffix, identification of the sign-changing root, and cancellation. Every step is elementary from the displayed definitions and hypotheses; no new nodes or proof citations are needed. Searched project declarations, the whole imported blueprint and Mathlib; Coxeter results assume additional structure.",
+  "blueprint": "This item supplies the exchange/deletion input used in step 10 of lem-sfb-root-chamber-simple-transitivity, supporting Milne C.10 freeness. Its recorded upstream route reaches paragraph (3) of det-thm-sf-ctf-stability-direct-images. The current blueprint paragraph (3) was read in literature/blueprint/latest; it contains no separate reflection-word lemma. blueprint_refs.py ancestor returns None, so the existing null from.node and via chain are retained. Steps 1-2 give the reflection calculation; steps 3-5 give the sign-change deletion argument."
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-O4-d45843a5f",
+  "group": "O4",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-O4-d45843a5f (reviewer sub-agent of L); spot-checked: I read the whole item, its parent and the source. Statement, stmt_deps and blueprint are unchanged from live, where the item is still unsplit; there is no repair note and no other group has split it. Milne C.10 (printed p.610, PDF p.622) gives no proof and only refers to Humphreys 1.8, so proof_origin=agent and the WANTED line are correct. I checked all five elementary steps by hand. (1) (s_a x,a)=-(x,a) gives s_a^2=1, and the cross terms in the form expansion cancel (-2-2+4=0). (2) q s_b = s_{qb} q follows from form preservation, and qb is nonzero. (3) Each c_i lies in R because s_{a_i}(R)=R; taking the largest j with c_j in -P gives c_{j+1} in P, and P∩(-P)=∅ forces k≥1. (4) s_{a_j}(P\\{a_j\\})=P\\{a_j\\} forces c_{j+1}=a_j. (5) w s_b = p s_{a_j}^2 q = pq. Edge cases tested: k=0; rank one with odd and even words; A2 with b=c (j=2) and b=a+c (j=1), which confirms the product orientation. The statement matches the only citer, step 10 of lem-sfb-root-chamber-simple-transitivity, whose step 7 supplies the sign hypothesis. A DAG search found no duplicate: the reflection-generation, Weyl-realization, crystallographic-base and parabolic nodes state different results. The Mathlib no-match verdict is right: CoxeterSystem.wordProd_mul_getD_rightInvSeq presupposes a Coxeter system, and the RootPairing base results need a crystallographic pairing with a base. No SGA, no tool_uses, no cycle, proof_deps=[]."
+ }
+}

@@ -1,0 +1,130 @@
+{
+ "id": "lem-fix-ordinary-completed-cover-detection",
+ "kind": "statement",
+ "title": "Pro-etale covers detect ordinary completed-coefficient module isomorphisms",
+ "statement": "Fix ell,E [def-weil-l-adic-coefficient-extension], a nonempty qcqs scheme S [def-pc-scheme, def-weil-quasi-separated-morphism], and a family W:I→S.ProEt [def-weil-pbc-proetale-site] of qcqs domains covering the terminal pro-etale object. On module sheaves over the completed integral coefficient sheaf on S [def-weil-completed-integral-coefficients], the family a↦ordinaryPull(W_a.hom) of [def-fix-qcqs-completion-ordinary-models] jointly reflects isomorphisms. Scheme, coefficient and cover-index universes are independent. This is a statement about module sheaves, not derived categories, and has no ambient immersion.",
+ "source": {
+  "document": "literature/stacks-project/sites.tex",
+  "place": "Tag 04TQ, lemma-glue-maps; proetale.tex weakly etale slice localization and coefficient restriction. Base-change the terminal cover to every test object."
+ },
+ "stmt_deps": [
+  "def-weil-l-adic-coefficient-extension",
+  "def-pc-scheme",
+  "def-weil-completed-integral-coefficients",
+  "def-fix-qcqs-completion-ordinary-models",
+  "def-weil-quasi-separated-morphism",
+  "def-weil-pbc-proetale-site"
+ ],
+ "proof": [
+  {
+   "text": "Use the completed coefficient restriction isomorphism and its finite-projection equations from completed coefficient ringed coherence. The adjunction induced by the site postcomposition/base-change adjunction sends every finite restriction map to the specified constant-section direct ring map: precompose with constant sheafification and use naturality along the site counit. Taking the compatible inverse limit and applying ordinaryCompletedRingMap_existsUnique identifies its adjunct with the exact ring map defining ordinaryPush. Mathlib SheafOfModules.pushforwardPushforwardAdj now gives the module restriction adjunction. Uniqueness of left adjoints identifies ordinaryPull with this sectionwise module restriction. These constructions keep module universe max u (t+1) and require no qcqs or nonempty hypothesis on a chart.",
+   "uses": [
+    "lem-tw-completed-coefficient-ringed-coherence",
+    "def-fix-qcqs-completion-ordinary-models"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Generate a covering sieve from the prescribed terminal-object precover and pull it back along each test object’s structural arrow. It is contained in the sieve of objects admitting a map to some W_a; thus the family covers the top. For each object T over W_a, weakly-etale cancellation makes T.hom.left an object of W_a.left.ProEt, whose postcomposition is canonically isomorphic to T.left. The chart restriction isomorphism and evaluation therefore show that the original underlying abelian sheaf map is an isomorphism at T.left. Sheaf.isIso_of_coversTop makes the original underlying sheaf map invertible. Finally SheafOfModules.toSheaf reflects isomorphisms, giving the original module-map isomorphism. No derived-category or quotient-tower comparison is used.",
+   "uses": [
+    "lem-weil-proetale-weakly-etale-localization",
+    "lem-sfb-sheaf-cover-local-isomorphism"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-fix-qcqs-completion-ordinary-models",
+  "lem-sfb-sheaf-cover-local-isomorphism",
+  "lem-tw-completed-coefficient-ringed-coherence",
+  "lem-weil-proetale-weakly-etale-localization"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites.tex",
+  "place": "Tag 04TQ, lemma-glue-maps; sites-modules.tex Tag 04J0, lemma-localize-morphism-ringed-sites. Explicit finite-section and adjunction calculation by R7."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Restriction of sheaves of modules to an open closed decomposition or a covering family jointly reflects isomorphisms, and inverse images compose",
+   "results": "Scheme.Modules.restrictFunctorIsoPullback and restrictFunctorComp concern Zariski structure-sheaf modules. SheafOfModules.pullbackIso and instReflectsIsomorphismsSheafSheafCompose give generic ingredients, not completed pro-etale coefficients.",
+   "date": "2026-10-27",
+   "verdict": "No direct match for the specified ordinaryPull. Use the existing coefficient models and generic site/module constructions."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.IsLeftDerivedFunctor",
+   "results": "leftDerivedUnique and the left-derived natural-isomorphism API.",
+   "date": "2026-10-27",
+   "verdict": "Useful for transporting exact ordinary restrictions to mapDerivedCategory; no geometry-specific module detection statement."
+  },
+  {
+   "tool": "grep",
+   "query": "pushforwardComp|mapDerivedCategoryCompIso|JointlyReflectIsomorphisms",
+   "results": "Mathlib SheafOfModules.pushforwardComp and source ExactFunctor.lean mapDerivedCategoryCompIso and jointlyReflectIsomorphisms_mapDerivedCategory.",
+   "date": "2026-10-27",
+   "verdict": "Reuse these proved generic composition and derived-detection lemmas. The lower completed-coefficient geometry still requires its own interface."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Exact functors which jointly reflect isomorphisms also jointly reflect isomorphisms on unbounded derived categories",
+   "results": "Eight general derived-functor results including mapDerivedCategory and its factorizations. Local rg found the exact jointly-reflecting-family theorem in WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor.",
+   "date": "2026-10-27",
+   "verdict": "Reuse that existing proved source theorem rather than introduce another cohomology descent obligation."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.QcqsOrdinaryLocalDetection",
+  "date": "2026-10-27",
+  "group": "D7"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-rem-sf-pf-done",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-fix-weil-operations",
+   "place": "Proof, paragraph beginning “For an admissible exceptional adjoint”, especially “Evaluation is natural in the two Weil maps and their inverses, so its square commutes”: the canonical-unit restriction and finite open–closed locality used in the ordinary-to-completed evaluation comparison.",
+   "via": [
+    "lem-fix-qcqs-ordinary-local-detection",
+    "lem-fix-qcqs-completion-unit-locality",
+    "lem-fix-constructible-tensor-completion"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.OrdinaryCompletedCoverDetection",
+  "file": "lean/Sheaf/Paper/OrdinaryCompletedCoverDetection.lean",
+  "declaration": "WeilConjectures.IntegralOnSlice.ordinaryCompletedCoverDetection",
+  "statement": "theorem ordinaryCompletedCoverDetection\n    (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]\n    [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]\n    (S : Scheme.{t}) [CompactSpace S] [QuasiSeparatedSpace S] [Nonempty S]\n    (I : Type w) (W : I → S.ProEt)\n    (hcompact : ∀ a : I, CompactSpace (W a).left)\n    (hqs : ∀ a : I, QuasiSeparatedSpace (W a).left)\n    (hcover : Presieve.ofArrows W\n      (fun a ↦ (MorphismProperty.Over.homMk (W a).hom (Category.comp_id _) :\n        W a ⟶ ProEt.mk (𝟙 S))) ∈ ProEt.precoverage S (ProEt.mk (𝟙 S))) :\n    JointlyReflectIsomorphisms (fun a : I ↦ ordinaryPull l E (W a).hom)",
+  "branch": "sheaf-dag",
+  "by": "D7",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D7",
+  "result": "pass",
+  "landing": "20261026T222617-L-674083",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R7",
+  "result": "pass",
+  "landing": "20261027T012929-L-2349067",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

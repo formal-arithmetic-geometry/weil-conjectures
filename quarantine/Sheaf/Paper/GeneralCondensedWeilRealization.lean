@@ -17,6 +17,8 @@ public import Sheaf.Paper.SfWeilSheafComplex
 public import Sheaf.SixFunctors.FrobeniusFixedPoints
 public import Sheaf.SixFunctors.SchemeFrobenius
 public import WeilConjectures.CategoryTheory.RingObjects.Condensed.EllAdic
+public import WeilConjectures.TraceFormula.CompactCohomology
+public import WeilConjectures.TraceFormula.Stalk
 public import WeilConjectures.TraceFormula.Statement
 import Sheaf.AlgebraicGeometry.AbsoluteFrobeniusSite
 import Sheaf.AlgebraicGeometry.SchemeFrobeniusFiniteRadicial
@@ -176,7 +178,7 @@ variable [Fact (ringChar D.k).Prime] [Fact (ringChar D.k ≠ l)]
 /-- The target is the published internal-module Weil category for the model Frobenius.
 Source: the realization statement, (K_Ω,phi_Ω)
 (blueprint: lem-zl-general-condensed-weil-realization). -/
-abbrev Target := WeilBoundedConstructibleOfEnd l (modelFrobenius D Y₀)
+abbrev Target := WeilBoundedConstructible l (modelFrobenius D Y₀)
 
 /-- The simultaneous functorial realization, specified object comparisons, operator
 identities, fixed-point indexing, and right duals. The matrix functor is the single

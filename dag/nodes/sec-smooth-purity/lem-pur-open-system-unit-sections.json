@@ -1,0 +1,150 @@
+{
+ "id": "lem-pur-open-system-unit-sections",
+ "kind": "statement",
+ "title": "Carrier-normalized open-extension unit generation",
+ "statement": "For the actual system categories of [lem-coef-semilinear-derived-sections], let O be normalized OpenSystems data with restriction evaluations equal to identity on sections. Transport its ordinary system unit along the proved carrier equality of open restriction. For an open system M and a level n, two module-sheaf maps from the n-th evaluation of O.extension(M) to an arbitrary B_n-module sheaf agree whenever they agree on every such transported unit section over each V→U. Continuous module pushforward, scalar restriction and system evaluation preserve the actual section carriers and restriction functions, with explicitly proved transports; these ancillary identities supply the criterion without changing any coefficient object.",
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tags 03DI--03DJ, extension-by-zero adjunction; Mathlib SheafOfModules.pushforward and Adjunction.homEquiv_unit."
+ },
+ "stmt_deps": [
+  "lem-coef-semilinear-derived-sections"
+ ],
+ "proof": [
+  {
+   "text": "For a continuous module pushforward, its section carrier and section functions are those of the original presheaf at the image object. Prove these carrier equalities before specializing the ring sheaves. Transport functions with casts, which preserve equality, composition, heterogeneous values, and injectivity. Apply this also to evaluation and scalar restriction.",
+   "uses": [
+    "lem-coef-semilinear-derived-sections"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Transport the system adjunction unit through actual open restriction. Naturality follows from naturality of that unit and the proved pushforward restriction formula. Evaluate OpenSystems.unit_evaluation on a slice section; the restriction evaluation is identity on sections, so extension evaluation sends the transported system unit to the ordinary localized unit.",
+   "uses": [
+    "lem-coef-semilinear-derived-sections"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Precompose both proposed maps by inverse extension evaluation. Apply the injective Hom equivalence of the ordinary extension/restriction adjunction. Its unit formula reduces equality of the transposes to equality on ordinary unit sections. The preceding normalization and cancellation of the extension evaluation isomorphism reduce this to the given equality on transported system units.",
+   "uses": [
+    "lem-coef-semilinear-derived-sections"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-coef-semilinear-derived-sections"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tags 03DI--03DJ; the ordinary adjunction unit and actual continuous module pushforward section formulas."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "For extension by zero of module sheaves, maps are determined by their composites with the adjunction unit",
+   "results": "8 hits, including SheafOfModules.pushforwardPushforwardAdj_unit_app_val_app and SheafOfModules.PullbackConstruction.adjunction in Mathlib.Algebra.Category.ModuleCat.Sheaf. These give different adjunction units or the general pullback adjunction, not the normalized OpenSystems criterion.",
+   "date": "2026-10-27",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A morphism from extension by zero is determined by its values on the adjunction unit",
+   "results": "8 hits, including PresheafOfModules.free_hom_ext and ModuleCat.ExtendRestrictScalarsAdj.unit_app. These concern free presheaves or scalar adjunctions; none states generation by the normalized OpenSystems unit. The existing general adjunction Hom equivalence is used directly.",
+   "date": "2026-10-27",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.homEquiv_unit",
+   "results": "One hit: Mathlib.CategoryTheory.Adjunction.Basic, CategoryTheory.Adjunction.homEquiv_unit. Used directly in the proof.",
+   "date": "2026-10-27",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "pushforward.*obj_val|pushforward.*map_val|homEquiv_unit",
+   "results": "25 hits, including Mathlib.CategoryTheory.Adjunction.Basic homEquiv_unit. Local reading of continuous module pushforward supplies its carrier and map definitions; no normalized system-unit generation criterion is already stated.",
+   "date": "2026-10-27",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.BlockOpenExtensionTransitions",
+  "date": "2026-10-27",
+  "group": "Y2"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-def-sf-operations",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "def-weil-exceptional-inverse-image",
+   "place": "Adic-stage paragraph: compatible finite-level functors before inverse limits; open-localization consequence of lem-pur-system-block-repetition, proof step 4.",
+   "via": [
+    "lem-pur-system-block-repetition",
+    "lem-pur-etale-system-cofinal-mate",
+    "lem-pur-etale-coefficient-system-adjoint",
+    "lem-pur-block-open-extension-transitions"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.OpenSystemUnitSections",
+  "file": "lean/Sheaf/Paper/OpenSystemUnitSections.lean",
+  "declaration": "WeilConjectures.SemilinearSections.OpenUnitSections.open_level_hom_ext_raw",
+  "declarations": [
+   "WeilConjectures.SemilinearSections.OpenUnitSections.apply_heq",
+   "WeilConjectures.SemilinearSections.OpenUnitSections.castMap",
+   "WeilConjectures.SemilinearSections.OpenUnitSections.castMap_heq",
+   "WeilConjectures.SemilinearSections.OpenUnitSections.castMap_injective",
+   "WeilConjectures.SemilinearSections.OpenUnitSections.evaluation_type",
+   "WeilConjectures.SemilinearSections.OpenUnitSections.iso_section_injective",
+   "WeilConjectures.SemilinearSections.OpenUnitSections.localized_unit_naturality_cast",
+   "WeilConjectures.SemilinearSections.OpenUnitSections.open_level_hom_ext_raw",
+   "WeilConjectures.SemilinearSections.OpenUnitSections.open_restriction_type",
+   "WeilConjectures.SemilinearSections.OpenUnitSections.ordinaryUnitSection",
+   "WeilConjectures.SemilinearSections.OpenUnitSections.over_type",
+   "WeilConjectures.SemilinearSections.OpenUnitSections.rawExtensionEvaluation",
+   "WeilConjectures.SemilinearSections.OpenUnitSections.rawUnit",
+   "WeilConjectures.SemilinearSections.OpenUnitSections.rawUnit_evaluation",
+   "WeilConjectures.SemilinearSections.OpenUnitSections.rawUnit_naturality",
+   "WeilConjectures.SemilinearSections.OpenUnitSections.res_map_cast",
+   "WeilConjectures.SemilinearSections.OpenUnitSections.res_type",
+   "WeilConjectures.SemilinearSections.OpenUnitSections.section_cast_comp",
+   "WeilConjectures.SemilinearSections.OpenUnitSections.section_cast_triple",
+   "WeilConjectures.SemilinearSections.OpenUnitSections.transition_cast"
+  ],
+  "statement": "theorem open_level_hom_ext_raw\n    (hO : ∀ (n : ℕ) N V x,\n      HEq (((O.restrictionEvaluation n).hom.app N).val.app V x) x)\n    (M : Systems (J.over U) (openRings.{c, v, r} J B U)\n      (openTransitions.{c, v, r} J B τ U)) (n : ℕ)\n    {N : Mod.{c, v, max c v r} J (B n)}\n    {f g : (evaluation.{c, v, max c v r} J B τ n).obj (O.extension.obj M) ⟶ N}\n    (he : ∀ (V : (Over U)ᵒᵖ) (x : M.val.obj (op (n, V.unop))),\n      f.val.app (op V.unop.left)\n          (cast (evaluation_type.{c, v, r} J B τ (O.extension.obj M) n (op V.unop.left)).symm\n            (rawUnit.{c, v, r} J B τ U O M (op (n, V.unop)) x)) =\n      g.val.app (op V.unop.left)\n          (cast (evaluation_type.{c, v, r} J B τ (O.extension.obj M) n (op V.unop.left)).symm\n            (rawUnit.{c, v, r} J B τ U O M (op (n, V.unop)) x))) : f = g",
+  "branch": "sheaf-dag",
+  "by": "Y2",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Y2",
+  "result": "pass",
+  "landing": "20261027T034811-L-3687939",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Y2",
+  "result": "pass",
+  "landing": "20261027T034811-L-3687939",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

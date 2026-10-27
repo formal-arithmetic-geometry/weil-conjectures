@@ -33,34 +33,29 @@
    }
   },
   {
-   "text": "Set $a_i=f_i(v)$ and partition $I$ as $I_0=\\{i:a_i=0\\}$, $I_+=\\{i:a_i>0\\}$, $I_-=\\{i:a_i<0\\}$. Define a new family $\\mathcal F$ consisting of $f_h$ for $h\\in I_0$, $f_i$ for $i\\in I_+$, and $$g_{ij}=a_i f_j-a_j f_i\\qquad(i\\in I_+,\\ j\\in I_-).$$ It is finite, since the old index set and its indicated product are finite, and every member is rational linear. Steps 4 and 5 verify that its nonnegative locus is exactly $C_{k+1}$; thus this defines the induction step without assuming a separation or cone-duality theorem.",
-   "uses": [],
-   "elementary": true,
+   "text": "The induction hypothesis makes $I$ finite. Apply [lem-trf-rational-ray-elimination-forward] to the finite family $f_i$ and $v$. It supplies the finite rational-linear family $\\mathcal F$ consisting of the zero-sign forms, positive-sign forms and $g_{ij}=a_i f_j-a_j f_i$ for $i\\in I_+$ and $j\\in I_-$, where $a_i=f_i(v)$. Every witness $t$ in Step 2 makes every member nonnegative. Thus $C_{k+1}$ is contained in its nonnegative locus.",
+   "uses": [
+    "lem-trf-rational-ray-elimination-forward"
+   ],
+   "elementary": false,
    "source": {
     "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
-    "place": "Agent-written proof, explicit next finite family. Remark 3.1.29 is contextual only and does not contain this argument."
+    "place": "Agent-written auxiliary assertion extracted from lem-trf-rational-cone-dual-finite, old proof steps 3--4 (explicit finite family and forward inclusion). Expose VIII Remark 3.1.29, printed p. 103, supplies toric context only, not this assertion."
    }
   },
   {
-   "text": "Suppose $x\\in C_{k+1}$ and choose $t\\ge0$ as in Step 2. For $h\\in I_0$, $f_h(x)=f_h(x)-ta_h\\ge0$. For $i\\in I_+$, $f_i(x)=(f_i(x)-ta_i)+ta_i\\ge0$. For $i\\in I_+$ and $j\\in I_-$, cancellation gives $$g_{ij}(x)=a_i(f_j(x)-ta_j)+(-a_j)(f_i(x)-ta_i)\\ge0,$$ since both coefficients are positive. Hence every form in $\\mathcal F$ is nonnegative at $x$.",
-   "uses": [],
-   "elementary": true,
+   "text": "For the reverse inclusion, assume every member of $\\mathcal F$ is nonnegative at $x$. Put $a_i=f_i(v)$ and $b_i=f_i(x)$. The retained forms give $b_h\\ge0$ on $I_0$ and $b_i\\ge0$ on $I_+$; evaluation gives $g_{ij}(x)=a_i b_j-a_j b_i\\ge0$ on $I_+\\times I_-$. Thus [lem-trf-rational-ray-elimination-witness] applies to the same finite $I$. Its $B=\\{0\\}\\cup\\{b_j/a_j:j\\in I_-\\}$ has a rational maximum $T\\ge0$ with $b_i-Ta_i\\ge0$ for all $i$. Since $f_i(x-Tv)=b_i-Ta_i$, the induction hypothesis gives $x-Tv\\in C_k$, and Step 2 gives $x\\in C_{k+1}$.",
+   "uses": [
+    "lem-trf-rational-ray-elimination-witness"
+   ],
+   "elementary": false,
    "source": {
     "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
-    "place": "Agent-written proof, forward inclusion by cancellation. Remark 3.1.29 is contextual only and does not contain this argument."
+    "place": "Agent-written auxiliary assertion extracted from lem-trf-rational-cone-dual-finite, old proof step 5 and step 6 empty-sign-class discussion. Expose VIII Remark 3.1.29, printed p. 103, supplies toric context only, not this assertion."
    }
   },
   {
-   "text": "Conversely, suppose all forms in $\\mathcal F$ are nonnegative at $x$. The finite nonempty set $B=\\{0\\}\\cup\\{f_j(x)/a_j:j\\in I_-\\}\\subset\\mathbf Q$ has a largest member $T$, obtained by successively taking the larger of two entries. Thus $T\\ge0$. For each $i\\in I_+$, the inequality $f_i(x)\\ge0$ gives $0\\le f_i(x)/a_i$, and for each $j\\in I_-$ the inequality $g_{ij}(x)\\ge0$ gives $$\\frac{f_j(x)}{a_j}\\le\\frac{f_i(x)}{a_i}.$$ Here division reverses the inequality precisely because $a_i a_j<0$: the displayed difference is $g_{ij}(x)/(a_i a_j)\\le0$. Every entry of $B$ is consequently at most $f_i(x)/a_i$, so $T\\le f_i(x)/a_i$. It follows that $f_i(x)-Ta_i\\ge0$ for $i\\in I_+$. For $j\\in I_-$, $T\\ge f_j(x)/a_j$, and multiplication by $a_j<0$ gives $f_j(x)-Ta_j\\ge0$. For $h\\in I_0$ the same inequality is just $f_h(x)\\ge0$. Thus $x-Tv\\in C_k$ and $T\\ge0$, so Step 2 gives $x\\in C_{k+1}$.",
-   "uses": [],
-   "elementary": true,
-   "source": {
-    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
-    "place": "Agent-written proof, reverse inclusion with an explicit rational coefficient. Remark 3.1.29 is contextual only and does not contain this argument."
-   }
-  },
-  {
-   "text": "Steps 3--5 construct the required finite family for $C_{k+1}$ from that for $C_k$, completing the induction. At $k=m$ we have $C_m=C$, and enumeration of the final family gives the forms $\\lambda_1,\\ldots,\\lambda_s$ of the statement. All operations used rational coefficients, with division only by the strictly signed $a_i$. Empty sign classes cause no problem: $B$ always contains $0$, and if $I_+$ is empty there are no upper bounds to satisfy. If the old family is empty then the new one is empty and both cones are $V$. For $m=0$ the signed coordinate family applies, and for $V=0$ the empty family applies for every $m$. No pointedness or spanning assumption on the given generators was used.",
+   "text": "Steps 3--4 complete the induction. At $k=m$, enumerate the final finite family as $\\lambda_1,\\ldots,\\lambda_s$; its nonnegative locus is $C_m=C$. All operations are rational, and divisions use only strictly signed $a_i$. Empty sign classes are allowed: $I_-=\\varnothing$ gives $B=\\{0\\}$ and $T=0$, while $I_+=\\varnothing$ imposes no upper bounds. If the old family is empty, both old and new cones are $V$. For $m=0$ use the signed coordinate family; for $V=0$ use the empty family. No pointedness or spanning assumption on the generators was used.",
    "uses": [],
    "elementary": true,
    "source": {
@@ -70,12 +65,14 @@
   }
  ],
  "proof_deps": [
-  "def-weil-finite-dimensional-subspace"
+  "def-weil-finite-dimensional-subspace",
+  "lem-trf-rational-ray-elimination-forward",
+  "lem-trf-rational-ray-elimination-witness"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
-  "place": "Complete constructive proof supplied in the six steps: induction on the number of generators and explicit elimination of the next nonnegative coefficient. The original contextual citation, Expose VIII Remark 3.1.29 (printed p. 103), does not state or prove this result; no claim from unread Kato §9.6 is used."
+  "place": "Agent-written induction on the number of generators, with the finite signed-family/forward implication and explicit rational reverse witness now extracted into separate statement-only nodes. ILO VIII Remark 3.1.29, printed p. 103, remains contextual only; the report preserves every old proof argument and its extraction map."
  },
  "mathlib_searches": [
   {
@@ -181,20 +178,20 @@
   "is": null
  },
  "split_report": {
-  "date": "2026-10-18",
+  "date": "2026-10-23",
   "item": "lem-trf-rational-cone-dual-finite",
   "worker": "stage1",
-  "summary": "Repair of E7/F1: read ILO VIII Remark 3.1.29 and the blueprint proof and removed the false source attributions. Replaced the unsupported pointed-case/lineality split by a complete explicit induction on the generators; each induction step eliminates one rational nonnegative coefficient by a finite maximum and verified signed inequalities. No new node or unread theorem is used. The statement is unchanged.",
+  "summary": "Repair of returned head f4efa93a28d: rebuilt the retained split on the current server DAG, compared every inherited item field and the retained six-step proof, and reread every cited statement and its current blueprint update. Preserve the exact theorem statement, finite-coordinate seed and generator induction, and the two statement-only elimination work items with all recorded searches. The reverse application now explicitly identifies each scalar hypothesis and the residual evaluation f_i(x-Tv)=b_i-Ta_i; the closing step explicitly handles the empty negative class. All old calculations remain in the report proof plans. The assembly stays below 3000 characters. The initial resumed dry run passed at a33b8a63cfd; maintainer promotion is not performed by this worker.",
   "blueprint": "The historical ancestor and via list are preserved, but its clauses (1)--(2) contain no rational-cone assertion. This is a descendant auxiliary result used in proof step 1 of lem-trf-rational-cone-dual-integral-forms, not a claimed realization of a cone step in lem-trf-local-term-locality.",
   "tool_uses": []
  },
  "reviewed": {
-  "date": "2026-10-17",
+  "date": "2026-10-22",
   "by": "L",
-  "reviewer": "NT-Codex-Q78-4fdb6c160",
-  "group": "Q78",
+  "reviewer": "NT-cc-Q102-96af074fd",
+  "group": "Q102",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q78-4fdb6c160 (reviewer sub-agent of L); spot-checked: Reviewed item, cited statements, unit/chapter route, blueprint/source records, all six proof steps, edge cases, duplicate candidates, and Mathlib searches. The explicit rational induction is correct, handles degeneracies, has no hidden long-step lemma, uses no SGA or dropped machinery, and honestly records the ILO/Kato attribution limit. Review written to review.md."
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q102-96af074fd (reviewer sub-agent of L); spot-checked: I read the item, both new nodes, the cited defs, the direct citer integral-forms and the repair note (released stage 1, re-split, >=2 new nodes, assembly <=3000) in full. The re-split is valid. Old steps 1-2 (basis/coordinate forms, induction setup) are kept verbatim as elementary steps 1-2. Old steps 3+4 (family F and forward cancellation) became lem-trf-rational-ray-elimination-forward. Old step 5 plus the empty-sign cases became lem-trf-rational-ray-elimination-witness. Old step 6 became step 5. Nothing was shortened, the two nodes are of comparable size, neither restates the item, and the assembly is 2889 characters with proof_deps equal to the union of uses. Mathematics checked: forward g_ij(x)=a_i(f_j(x)-t a_j)+(-a_j)(f_i(x)-t a_i)>=0. Witness: dividing a_i b_j-a_j b_i>=0 by a_i a_j<0 gives b_j/a_j<=b_i/a_i, so T=max B satisfies all residuals. Checked edge cases (empty I, I_+ or I_-, v=0, V=0, m=0) and small numeric cases. Step 4 matches the witness hypotheses exactly, using f_i(x-Tv)=b_i-T a_i, and now defines B before step 5 uses it (the 0d7ba concern is resolved). No duplicates in the DAG (gordan, sharp-cone-lattice, integral-forms, toric nodes differ). Mathlib searches cover all three kinds and no match is correct. No SGA, no tool_uses, statement unchanged, no supersession in live. Against the PASSed f4efa93a28df the new nodes are byte-identical; only item steps 4-5 were reworded. Advisory: the new nodes lack a lean_audit field (same on earlier PASSed heads)."
  },
  "lean": {
   "module": "Sheaf.TraceFormula.RationalConeDualFinite",
@@ -214,5 +211,16 @@
   "result": "pass",
   "note": "Statement, dependencies, proof plan, edge cases, documentation, source records, and route-pivot compliance checked; scompile.py passed both compilation modes."
  },
- "lean_audit": {}
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ }
 }

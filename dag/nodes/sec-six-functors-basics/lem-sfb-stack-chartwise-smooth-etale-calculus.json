@@ -1,0 +1,350 @@
+{
+ "id": "lem-sfb-stack-chartwise-smooth-etale-calculus",
+ "kind": "statement",
+ "title": "Chartwise calculus for smooth and etale representable morphisms",
+ "statement": "Let $S$ be a scheme. For morphisms of algebraic stacks over $S$ representable by algebraic spaces, each property in the list smooth, etale, flat, locally of finite presentation, locally of finite type is stable under arbitrary base change and composition and can be checked on an open cover of the source. An open substack is a full substack whose pullback by any scheme is an open subscheme [def-weil-open-immersion]. Surjectivity is stable under base change and composition. Etale morphisms are smooth, and smooth morphisms are flat and locally of finite presentation; local finite presentation implies local finite type. For a set-indexed family of etale morphisms $q_i:U_i\\to\\mathcal X$ from schemes, the map $\\coprod_iU_i\\to\\mathcal X$ obtained by gluing their objects along the disjoint open cover is etale and representable by algebraic spaces, provided the scheme coproduct belongs to the chosen universe [def-weil-size-convention, lem-weil-pbc-scheme-coproduct-family]. Scheme properties mean [def-sbc-smooth-morphisms, def-weil-etale-morphism, def-weil-flat-morphism, def-sbc-locally-finite-presentation, def-weil-finite-type-morphism]. An algebraic stack means a stack in groupoids with representable diagonal and a smooth surjective scheme atlas; stack, 2-fibre product and representability by algebraic spaces use [def-sfb-stable-pointed-moduli-groupoids]. Algebraic spaces use [def-trf-algebraic-space]. Properties of representable morphisms are tested after scheme base change on etale scheme charts. Here surjectivity means field-extension local lifting: for every field $K$, every object $y$ of the target over $\\operatorname{Spec}K$ admits, after an extension $K\\hookrightarrow L$, a source object $x$ and an isomorphism $f(x)\\simeq y|_L$. For a map representable by algebraic spaces this is equivalent to the chart test of [def-sfb-stable-pointed-moduli-groupoids]: for every scheme $T\\to\\mathcal Y$ and every surjective etale scheme chart $U\\to\\mathcal X\\times_{\\mathcal Y}T$, the scheme map $U\\to T$ is surjective [def-weil-surjective-morphism]. An open cover means a family of open substacks whose inverse images cover every scheme mapping to the source. The diagonal in the definition of algebraic stack is representable by algebraic spaces.",
+ "source": {
+  "document": "literature/stacks-project/stacks-properties.tex",
+  "place": "Section 04XB (section-properties-morphisms), including Tag 04XC (lemma-property-spaces-too); algebraic.tex Tags 045B (lemma-composition-representable-transformations-property), 045C (lemma-base-change-representable-transformations-property), 045G (lemma-representable-diagonal); spaces-morphisms.tex Tags 03ZD, 03ZE, 03ZF, 04AJ, 04TA, 04XX for smoothness, and spaces-properties.tex Tags 03FT, 03FU, 03FS for etaleness. Surjectivity: stacks-properties.tex Tags 04ZT, 04ZU. The disjoint-source clause is source locality and stack descent on the disjoint open cover."
+ },
+ "stmt_deps": [
+  "def-sfb-stable-pointed-moduli-groupoids",
+  "def-trf-algebraic-space",
+  "def-sbc-smooth-morphisms",
+  "def-weil-etale-morphism",
+  "def-weil-flat-morphism",
+  "def-sbc-locally-finite-presentation",
+  "def-weil-finite-type-morphism",
+  "def-weil-size-convention",
+  "lem-weil-pbc-scheme-coproduct-family",
+  "def-weil-open-immersion",
+  "def-weil-surjective-morphism",
+  "def-sfb-algebraic-moduli-stack",
+  "def-sfb-dm-stack-morphism-properties",
+  "def-sfb-open-moduli-substack",
+  "def-sfb-moduli-chart-normalization"
+ ],
+ "proof": [
+  {
+   "text": "Fix P from the five properties. On schemes, its composition laws are respectively [lem-trf-smooth-composition], [lem-weil-pbc-etale-composition-cancellation](2), [lem-pc-flat-compose], [lem-sbc-locally-finite-presentation-composition], and [lem-weil-pbc-proper-fp-permanence](e). The chart operations additionally use arbitrary scheme base change for etaleness [lem-weil-pbc-etale-scheme-base-change]. All these laws concern arbitrary schemes, so source charts need not be Noetherian or quasi-compact. The completed stack base-change proof in step 4 uses formal test reassociation rather than a scheme base-change law for P.",
+   "uses": [
+    "lem-weil-pbc-etale-scheme-base-change",
+    "lem-trf-smooth-composition",
+    "lem-weil-pbc-etale-composition-cancellation",
+    "lem-pc-flat-compose",
+    "lem-sbc-locally-finite-presentation-composition",
+    "lem-weil-pbc-proper-fp-permanence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-morphisms.tex",
+    "place": "Tags 0AML (remark-composition-P) and 0AMM (remark-base-change-P), scheme inputs; morphisms.tex Tags 01VA, 01VB, 02GN, 02GO, 01U7, 01U9, 01TR, 01TS, 01T3, 01T4"
+   }
+  },
+  {
+   "text": "By [lem-sfb-scheme-etale-source-target-properties], this $P$ is etale local on source-and-target. Apply [lem-sfb-space-etale-presentation-property-criterion] to interpret it on algebraic spaces: it holds on every etale scheme presentation exactly when it holds on one presentation covering the source. We will use both directions, and the scheme comparison, below. This supplies chart independence; it is not an assumption that a chosen smooth stack atlas is etale.",
+   "uses": [
+    "lem-sfb-scheme-etale-source-target-properties",
+    "lem-sfb-space-etale-presentation-property-criterion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-morphisms.tex",
+    "place": "Tag 03MJ (lemma-local-source-target), applied with descent.tex Tag 04R3 (remark-list-local-source-target)"
+   }
+  },
+  {
+   "text": "Here are the fibre-product identifications and chart operations used below. Fibre products of algebraic spaces exist by [lem-trf-space-fibre-products-etale-covers]. A map from a scheme $U$ to a space $F$ is representable: for another scheme $T\\to F$, $U\\times_F T$ is the pullback of the representable diagonal of $F$ along $U\\times_S T\\to F\\times_S F$, so is a scheme by [def-trf-algebraic-space]. For the chart operations we use only representable etale maps (scheme-valued tests). For such $a:A\\to B$ and $b:B\\to C$, a scheme test $T\\to C$ factors their composite as the etale scheme maps $A_T\\to B_T\\to T$; step 1 gives etaleness of the composite. If the two maps are surjective, these scheme maps are surjective and [lem-trf-surjective-morphism-composition] applies. Arbitrary base change retains exactly the same scheme tests; base changes of an etale surjective scheme map are etale by step 1 and surjective by [lem-weil-pbc-surjective-base-change]. Hence these operations preserve representable etale charts and their covering property. In all ensuing 2-pullback reassociations the functor keeps the maps to the factors and composes the displayed isomorphisms between their images; its inverse inserts the identity isomorphism at the repeated factor. Thus these reassociations are equivalences of the explicit groupoids of [def-sfb-stable-pointed-moduli-groupoids], compatible with all projections.",
+   "uses": [
+    "lem-trf-space-fibre-products-etale-covers",
+    "def-trf-algebraic-space",
+    "lem-trf-surjective-morphism-composition",
+    "lem-weil-pbc-surjective-base-change",
+    "def-sfb-stable-pointed-moduli-groupoids"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-morphisms.tex",
+    "place": "Tag 03MJ (lemma-local-source-target), presentation refinements; algebraic.tex Tags 0302 and 045C, formal pullback reassociation"
+   }
+  },
+  {
+   "text": "For a scheme test t:T→H of the base change H×_G F→H, insert the repeated H factor and its identity comparison to define T×_G F→T×_H(H×_G F). It is fully faithful because the outer comma square forces the middle component of each arrow to be t applied to its T component. For essential surjectivity, an object (a,(h,x,β),α) is isomorphic to the inserted object with comparison g(α) followed by β; the isomorphism has components identity on a, α on h, and identity on x. The functor preserves the projection to T strictly. Composing each space-test equivalence with this functor retains the same representing space, projection, and chart property. Thus arbitrary stack base change preserves ModuliSpaceTest P for any scheme property P; forgetting its chart clause gives representability. This proves the base-change theorem directly from [def-sfb-stable-pointed-moduli-groupoids].",
+   "uses": [
+    "def-sfb-stable-pointed-moduli-groupoids"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebraic.tex",
+    "place": "Tag 045C, explicit 2-fibre-product reassociation"
+   }
+  },
+  {
+   "text": "For composition, take a scheme test of g with its property witness B→T. Apply [lem-sfb-stack-composite-chart-refinement] to get the representing space A of gf and pointwise compatible refinements of each étale chart U→A. For each x∈U its refinement passes through a scheme chart W→B and through a chart V→M of a scheme test of f on W. The two existing ModuliSpaceTest hypotheses give P(V→W) and P(W→T). Apply the scheme composition instance for the selected property P to get P(V→T). The equality of projections in the refinement lemma gives the étale local witnesses for P(U→T), with identity target chart. The locality clause of [lem-sfb-scheme-etale-source-target-properties] descends P to U→T. This works for every chart, giving ModuliSpaceTest P (gf). Forgetting its property clause supplies representability.",
+   "uses": [
+    "lem-sfb-stack-composite-chart-refinement",
+    "lem-sfb-scheme-etale-source-target-properties",
+    "lem-trf-smooth-composition",
+    "lem-weil-pbc-etale-composition-cancellation",
+    "lem-pc-flat-compose",
+    "lem-sbc-locally-finite-presentation-composition",
+    "lem-weil-pbc-proper-fp-permanence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebraic.tex; literature/stacks-project/spaces-morphisms.tex",
+    "place": "Tags 0300 (lemma-base-change-by-space-representable-by-space), 045B (lemma-composition-representable-transformations-property), and 03MJ (lemma-local-source-target): the property-independent iterated-test and compatible-chart construction in steps 3 and 7 of lem-sfb-stack-chartwise-smooth-etale-calculus."
+   }
+  },
+  {
+   "text": "Let $\\{\\mathcal X_i\\subset\\mathcal X\\}$ be an open cover and keep $f$ representable by spaces. For a scheme $T\\to\\mathcal Y$, write $A=\\mathcal X\\times_{\\mathcal Y}T$ and choose an etale scheme atlas $U\\to A$. Its inverse images $U_i$ of the open substacks are open subschemes covering $U$, by the meaning of open substack and [def-weil-open-immersion]. The maps $U_i\\to A_i=\\mathcal X_i\\times_{\\mathcal Y}T$ are etale charts by step 3. If all $f|_{\\mathcal X_i}$ have $P$, their scheme tests and step 2 give $P(U_i\\to T)$. Open immersions are etale by [lem-weil-pbc-etale-composition-cancellation](1). The source-cover clause of [lem-sfb-scheme-etale-source-target-properties] gives $P(U\\to T)$, and step 2 gives $P(A\\to T)$. Conversely if $f$ has $P$, any chart of $A_i$ composed with $A_i\\to A$ is an etale chart (the latter map pulls back to open subschemes, hence etale by the same scheme lemma). Step 2 gives $P$ on that chart, hence on $A_i\\to T$. To justify representability here before using the tests, $\\mathcal X_i\\to\\mathcal X$ is representable by schemes by the definition of open substack; [lem-sfb-representable-pullback-over-space] applied over $A$ makes $A_i=\\mathcal X_i\\times_{\\mathcal X}A$ a space. Thus $P$ is local on an open cover of the source.",
+   "uses": [
+    "def-trf-algebraic-space",
+    "def-weil-open-immersion",
+    "lem-weil-pbc-etale-composition-cancellation",
+    "lem-sfb-scheme-etale-source-target-properties",
+    "lem-sfb-representable-pullback-over-space"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-morphisms.tex",
+    "place": "Tag 03MJ (lemma-local-source-target) and descent.tex Tag 04R1(f); stacks-properties.tex Section 04XB; restriction to open source substacks"
+   }
+  },
+  {
+   "text": "The implications are checked on exactly the same scheme charts and with exactly the same algebraic-space base-change witnesses. Mathlib.AlgebraicGeometry.Morphisms.Etale supplies Etale→Smooth [def-weil-etale-morphism, def-sbc-smooth-morphisms]. The scheme instances [lem-pc-smooth-flat] give Smooth→Flat and Smooth→LocallyOfFinitePresentation. The finite-presentation scheme instance gives LocallyOfFinitePresentation→LocallyOfFiniteType [def-sbc-locally-finite-presentation, def-weil-finite-type-morphism]. Applying these instances to each chart proves all four implications, without the fibre-dimension assertion of lem-weil-pbc-etale-smooth-zero-dimensional-fibres and without changing a presentation.",
+   "uses": [
+    "def-sbc-smooth-morphisms",
+    "def-weil-etale-morphism",
+    "lem-pc-smooth-flat",
+    "def-sbc-locally-finite-presentation",
+    "def-weil-finite-type-morphism"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-morphisms.tex",
+    "place": "Tags 04XX (lemma-etale-smooth), 04AJ (lemma-smooth-locally-finite-presentation), 04TA (lemma-smooth-flat), and 0464 (lemma-finite-presentation-finite-type), their scheme-chart proofs"
+   }
+  },
+  {
+   "text": "Use the field-extension lifting meaning of surjectivity. This argument applies to arbitrary stack morphisms, whether or not representable. If $f:\\mathcal X\\to\\mathcal Y$ is surjective and $x'$ is an object of $\\mathcal Y'$ over a field $K$, lift its image in $\\mathcal Y$ after $K\\hookrightarrow L$ to an object $x$ of $\\mathcal X$ and an isomorphism $f(x)\\simeq x'|_L$. The triple $(x'|_L,x,\\phi)$ is an object of $\\mathcal Y'\\times_{\\mathcal Y}\\mathcal X$ over $L$ lifting $x'$. For two surjective composable maps, lift first over $K\\hookrightarrow L$ through the second map, then over $L\\hookrightarrow M$ through the first. Restriction and composition of the two isomorphisms gives a lift of the original object over $M$. These constructions use exactly the 2-fibre product of [def-sfb-stable-pointed-moduli-groupoids] and prove surjectivity under arbitrary base change and composition. The assertions include empty targets: there is then no field-valued object to lift.",
+   "uses": [
+    "def-sfb-stable-pointed-moduli-groupoids"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/stacks-properties.tex",
+    "place": "Tags 04ZT (lemma-composition-surjective), 04ZU (lemma-base-change-surjective), field-valued lifting proofs"
+   }
+  },
+  {
+   "text": "Let $U=\\coprod_iU_i$ be the scheme supplied by [lem-weil-pbc-scheme-coproduct-family], in the universe required by [def-weil-size-convention]. Its summands give a disjoint open cover. The maps $q_i$ are objects of $\\mathcal X(U_i)$ by [def-sfb-stable-pointed-moduli-groupoids]. On distinct overlaps the base is empty, and stack descent for the empty cover identifies the fibre over the empty scheme with the terminal groupoid; hence the restrictions have a unique overlap isomorphism, satisfying the cocycle equation. Effective descent on the disjoint open cover gives an object over $U$ restricting to these objects. It defines $q:U\\to\\mathcal X$, with specified 2-isomorphisms $q|_{U_i}\\simeq q_i$. This is a descent construction of the map to a stack; the ordinary scheme coproduct universal property is used only to construct the source.",
+   "uses": [
+    "lem-weil-pbc-scheme-coproduct-family",
+    "def-weil-size-convention",
+    "def-sfb-stable-pointed-moduli-groupoids"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebraic.tex",
+    "place": "Tag 045G (lemma-representable-diagonal), preliminary disjoint-source construction using stack descent; stacks.tex definition of effective object descent"
+   }
+  },
+  {
+   "text": "For a scheme $T\\to\\mathcal X$, the 2-fibre product $U\\times_{\\mathcal X}T$ is the pullback of $\\Delta_{\\mathcal X/S}$ along the scheme $U\\times_ST\\to\\mathcal X\\times_S\\mathcal X$. Indeed both groupoids consist of maps to $U,T$ with an isomorphism between their images; this is the tuple description of [def-sfb-stable-pointed-moduli-groupoids]. Since the diagonal of the algebraic stack is representable by spaces, its scheme pullback is a space. Thus $q$ is representable by spaces without any assertion that an arbitrary disjoint union of spaces is already constructed. Apply the source-locality result of step 8 to the open cover $U=\\bigcup_iU_i$: each restriction is the given etale $q_i$, so $q$ is etale. For the empty index set, descent gives the unique object over the empty scheme and the same empty-cover argument in step 8 applies.",
+   "uses": [
+    "def-sfb-stable-pointed-moduli-groupoids",
+    "def-trf-algebraic-space"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebraic.tex",
+    "place": "Tag 045G (lemma-representable-diagonal), formal diagonal pullback; source-locality from spaces-morphisms.tex Tag 03MJ and descent.tex Tag 04R1(f)"
+   }
+  },
+  {
+   "text": "Here is the comparison of the two surjectivity conventions for $f:\\mathcal X\\to\\mathcal Y$ representable by algebraic spaces. For a scheme $T\\to\\mathcal Y$ put $A=\\mathcal X\\times_{\\mathcal Y}T$, an algebraic space, and recall from step 3 that maps from schemes to $A$ are representable. Suppose $f$ is surjective in the field-lifting sense, and let $U\\to A$ be any surjective etale scheme chart and $t\\in T$. Restrict the object of $\\mathcal Y$ over $T$ to $y$ over $\\operatorname{Spec}\\kappa(t)$; lifting gives $\\kappa(t)\\hookrightarrow L$, an object $x$ of $\\mathcal X$ over $L$ and $\\phi:f(x)\\simeq y|_L$. By the tuple description of [def-sfb-stable-pointed-moduli-groupoids], $(x,\\operatorname{Spec}L\\to T,\\phi)$ is a map $s:\\operatorname{Spec}L\\to A$ whose composite to $T$ has image $t$. The scheme $U\\times_{A,s}\\operatorname{Spec}L$ maps surjectively onto $\\operatorname{Spec}L$ by the definition of a surjective representable map in [def-trf-algebraic-space], so it has a point; its image $u\\in U$ maps to $t$. Hence $U\\to T$ is surjective [def-weil-surjective-morphism]. Conversely suppose that for each scheme $T\\to\\mathcal Y$ some surjective etale scheme chart $U\\to A$ has $U\\to T$ surjective. For an object $y$ of $\\mathcal Y$ over $\\operatorname{Spec}K$ take $T=\\operatorname{Spec}K$ and such a chart $U$ (a chart exists by [def-trf-algebraic-space]). As $U\\to\\operatorname{Spec}K$ is surjective, $U$ has a point $u$; put $L=\\kappa(u)\\supseteq K$. The composite $\\operatorname{Spec}L\\to U\\to A$ is, by the same tuple description, an object $x$ of $\\mathcal X$ over $L$, the map $\\operatorname{Spec}L\\to\\operatorname{Spec}K$ and an isomorphism $f(x)\\simeq y|_L$: the required lift. Thus the field-lifting condition, the chart test for every chart and the chart test for one chart per $T$ are equivalent, and step 10 applies in either reading; empty $T$ and empty $\\mathcal Y$ are included.",
+   "uses": [
+    "def-sfb-stable-pointed-moduli-groupoids",
+    "def-trf-algebraic-space",
+    "def-weil-surjective-morphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/stacks-properties.tex",
+    "place": "Tag 04XI (lemma-characterize-surjective), proof, written with etale scheme charts in place of point spaces"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sbc-locally-finite-presentation",
+  "def-sbc-smooth-morphisms",
+  "def-sfb-stable-pointed-moduli-groupoids",
+  "def-trf-algebraic-space",
+  "def-weil-etale-morphism",
+  "def-weil-finite-type-morphism",
+  "def-weil-open-immersion",
+  "def-weil-size-convention",
+  "def-weil-surjective-morphism",
+  "lem-pc-flat-compose",
+  "lem-pc-smooth-flat",
+  "lem-sbc-locally-finite-presentation-composition",
+  "lem-sfb-representable-pullback-over-space",
+  "lem-sfb-scheme-etale-source-target-properties",
+  "lem-sfb-space-etale-presentation-property-criterion",
+  "lem-sfb-stack-composite-chart-refinement",
+  "lem-trf-smooth-composition",
+  "lem-trf-space-fibre-products-etale-covers",
+  "lem-trf-surjective-morphism-composition",
+  "lem-weil-pbc-etale-composition-cancellation",
+  "lem-weil-pbc-etale-scheme-base-change",
+  "lem-weil-pbc-proper-fp-permanence",
+  "lem-weil-pbc-scheme-coproduct-family",
+  "lem-weil-pbc-surjective-base-change"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/spaces-morphisms.tex",
+  "place": "Tag 03MJ and Remarks 0AML, 0AMM; descent.tex Tags 04R1 and 04R3; stacks-properties.tex Section 04XB and Tag 04XC; algebraic.tex Tags 0300, 045B, 045C, 045G. The omitted formal chart and disjoint-cover arguments are written out. E9 stage-3 partial proof: step 4 is direct test reassociation, step 9 applies the scheme instances to unchanged test witnesses, and step 10 is formalized by field-extension lifts and actual comparison isomorphisms. The other clauses retain their existing proof plans. V3 stage-3 composition reduction: scheme composition and pointwise étale locality are formalized; the property-independent compatible charts are split into lem-sfb-stack-composite-chart-refinement. Other remaining clauses keep their proof plans."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "[Aa]lgebraic[Ss]tack|[Ee]tale.*[Ii]sSmooth|[Ss]mooth.*[Ff]lat",
+   "results": "[grep] OK 25 hit(s)\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/LocalFlatDescent.lean\", \"line\": \"41\", \"text\": \"instance : DescendsAlong @Smooth (@Surjective ⊓ @Flat ⊓ @QuasiCompact) :=\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/LocalFlatDescent.lean\", \"line\": \"42\", \"text\": \"  HasRingHomProperty.descendsAlong_flat RingHom.Smooth.codescendsAlong_faithfullyFlat\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/SmoothFiber.lean\", \"line\": \"16\", \"text\": \"- `Smooth.of_smooth_fiberToSpecResidueField`: A flat morphism, locally of\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/SmoothFiber.lean\", \"line\": \"34\", \"text\": \"lemma Smooth.of_smooth_fiberToSpecResidueField [LocallyOfFinitePresentation f] [Flat f]\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth.lean\", \"line\": \"14\", \"text\": \"public import Mathlib.RingTheory.Smooth.Flat\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth.lean\", \"line\": \"113\", \"text\": \"instance (priority := low) [Smooth f] : Flat f where\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth.lean\", \"line\": \"114\", \"text\": \"  flat_appLE {_} hU {_} hV e := (f.smooth_appLE hU hV e).flat\"}\n  {\"file\": \"Mathlib/RingTheory/TotallySplit.lean\", \"line\": \"10\", \"text\": \"public import Mathlib.RingTheory.Smooth.Flat\"}\n  {\"file\": \"Mathlib/RingTheory/LocalRing/Etale.lean\", \"line\": \"11\", \"text\": \"public import Mathlib.RingTheory.Smooth.Flat\"}\n  {\"file\": \"Mathlib/RingTheory/Smooth/IntegralClosure.lean\", \"line\": \"8\", \"text\": \"public import Mathlib.RingTheory.Smooth.Flat\"}\n  {\"file\": \"Mathlib/RingTheory/Smooth/Quotient.lean\", \"line\": \"101\", \"text\": \"lemma Algebra.FormallySmooth.of_surjective_of_ker_eq_map_of_flat [Module.Flat R S]\"}\n  {\"file\": \"Mathlib/RingTheory/Smooth/Quotient.lean\", \"line\": \"220\", \"text\": \"/-- A pure `RingHom` variant of `Algebra.FormallySmooth.of_surjective_of_ker_eq_map_of_flat` -/\"}\n  {\"file\": \"Mathlib/RingTheory/Smooth/Quotient.lean\", \"line\": \"221\", \"text\": \"lemma RingHom.FormallySmooth.of_flat_of_ker_eq_map_of_square_zero (f : R →+* S) (flat : f.Flat)\"}\n  {\"file\": \"Mathlib/RingTheory/Smooth/Quotient.lean\", \"line\": \"228\", \"text\": \"  exact Algebra.FormallySmooth.of_surjective_of_ker_eq_map_of_flat surjR surjS eqmap sq0 ‹_›\"}\n  {\"file\": \"Mathlib/RingTheory/Smooth/AdicCompletion.lean\", \"line\": \"17\", \"text\": \"This is used in the proof that a smooth algebra over a Noetherian ring is flat\"}\n  {\"file\": \"Mathlib/RingTheory/Smooth/AdicCompletion.lean\", \"line\": \"18\", \"text\": \"(see `Mathlib.RingTheory.Smooth.Flat`).\"}\n  {\"file\": \"Mathlib/RingTheory/Smooth/Fiber.lean\", \"line\": \"34\", \"text\": \"For the converse that smooth implies flat, see `Mathlib/RingTheory/Smooth/Flat.lean`.\"}\n  {\"file\": \"Mathlib/RingTheory/Smooth/Flat.lean\", \"line\": \"16\", \"text\": \"# Smooth algebras are flat\"}\n  {\"file\": \"Mathlib/RingTheory/Smooth/Flat.lean\", \"line\": \"18\", \"text\": \"Let `A` be a smooth `R`-algebra. In this file we show that then `A` is `R`-flat.\"}\n  {\"file\": \"Mathlib/RingTheory/Smooth/Flat.lean\", \"line\": \"32\", \"text\": \"- [Conde-Lago, A short proof of smooth implies flat][condelago2016shortproofsmoothimplies]\"}\n  {\"file\": \"Mathlib/RingTheory/Smooth/Flat.lean\", \"line\": \"41\", \"text\": \"lemma FormallySmooth.flat_of_algHom_of_isNoetherianRing (f : S →ₐ[R] A) (hf : Function.Surjective f)\"}\n  {\"file\": \"Mathlib/RingTheory/Smooth/Flat.lean\", \"line\": \"51\", \"text\": \"/-- If `A` is `R`-smooth and `R` is Noetherian, then `A` is `R`-flat. -/\"}\n  {\"file\": \"Mathlib/RingTheory/RingHom/Etale.lean\", \"line\": \"10\", \"text\": \"public import Mathlib.RingTheory.Smooth.Flat\"}\n  {\"file\": \"Mathlib/RingTheory/Etale/Weakly.lean\", \"line\": \"10\", \"text\": \"public import Mathlib.RingTheory.Smooth.Flat\"}\n  {\"file\": \"Mathlib/RingTheory/Etale/Weakly.lean\", \"line\": \"60\", \"text\": \"    exact Smooth.flat (S ⊗[R] S) S\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the returned scheme/ring or general topological results do not state this algebraic-space/stack assertion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Smooth and etale representable morphisms of algebraic stacks are stable under base change and composition, etale maps are smooth, smooth maps are flat locally finitely presented, and etale maps can be checked on an open cover of the source",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.IsEtale.instIsStableUnderBaseChangeScheme\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"CategoryTheory.MorphismProperty.IsStableUnderBaseChange @AlgebraicGeometry.IsEtale\", \"doc\": \"The property of being an étale morphism is stable under base change. That is, if a morphism of schemes is étale, then any base change (pullback) of this morphism is also étale.\"}\n  {\"name\": \"AlgebraicGeometry.IsEtale.instHasOfPostcompPropertyScheme\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"CategoryTheory.MorphismProperty.HasOfPostcompProperty @AlgebraicGeometry.IsEtale @AlgebraicGeometry.IsEtale\", \"doc\": \"The composition of two étale morphisms of schemes is also an étale morphism.\"}\n  {\"name\": \"AlgebraicGeometry.instIsStableUnderCompositionSchemeIsSmooth\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"CategoryTheory.MorphismProperty.IsStableUnderComposition @AlgebraicGeometry.IsSmooth\", \"doc\": \"For any morphisms $ f: X \\\\to Y $ and $ g: Y \\\\to Z $ of schemes, if $ f $ and $ g $ are smooth, then their composition $ g \\\\circ f $ is also smooth.\"}\n  {\"name\": \"AlgebraicGeometry.IsEtale.instIsSmooth\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.IsEtale f], AlgebraicGeometry.IsSmooth f\", \"doc\": \"Every étale morphism of schemes is a smooth morphism. Specifically, if a morphism $ f: X \\to Y $ of schemes is étale (i.e., smooth of relative dimension 0), then it satisfies the conditions of being a \"}\n  {\"name\": \"AlgebraicGeometry.IsEtale\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"A morphism $ f: X \\\\to Y $ of schemes is étale if it is smooth of relative dimension 0.\"}\n  {\"name\": \"AlgebraicGeometry.IsSmooth\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"A morphism $ f: X \\to Y $ of schemes is smooth.\"}\n  {\"name\": \"AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"CategoryTheory.MorphismProperty.HasOfPostcompProperty (@AlgebraicGeometry.IsEtale)\\n  (@AlgebraicGeometry.LocallyOfFiniteType ⊓ @AlgebraicGeometry.FormallyUnramified)\", \"doc\": \"For any category of schemes, the composition of a morphism that is locally of finite type and a morphism that is formally unramified results in an étale morphism. This instance asserts that the proper\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Etale\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"AlgebraicGeometry.Scheme → Type (u + 1)\", \"doc\": \"The property of being an étale morphism to a fixed scheme $X$, defined as morphisms that are smooth of relative dimension 0, constructed via the morphism property lifting over $X$.\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the returned scheme/ring or general topological results do not state this algebraic-space/stack assertion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Scheme chart calculus for smooth and etale maps to algebraic stacks and algebraic spaces",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.Etale\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"AlgebraicGeometry.Scheme → Type (u + 1)\", \"doc\": \"The property of being an étale morphism to a fixed scheme $X$, defined as morphisms that are smooth of relative dimension 0, constructed via the morphism property lifting over $X$.\"}\n  {\"name\": \"AlgebraicGeometry.IsEtale\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"A morphism $ f: X \\\\to Y $ of schemes is étale if it is smooth of relative dimension 0.\"}\n  {\"name\": \"AlgebraicGeometry.IsSmooth\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"A morphism $ f: X \\to Y $ of schemes is smooth.\"}\n  {\"name\": \"AlgebraicGeometry.IsEtale.instIsSmooth\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.IsEtale f], AlgebraicGeometry.IsSmooth f\", \"doc\": \"Every étale morphism of schemes is a smooth morphism. Specifically, if a morphism $ f: X \\to Y $ of schemes is étale (i.e., smooth of relative dimension 0), then it satisfies the conditions of being a \"}\n  {\"name\": \"AlgebraicGeometry.isSmooth_iff\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y),\\n  AlgebraicGeometry.IsSmooth f ↔\\n    ∀ (x : ↥X),\\n      ∃ U V,\\n        ∃ (_ : x ∈ ↑V) (e : ↑V ≤ (TopologicalSpace.Opens.map f.base).obj ↑U),\\n          (CommRingCat.Hom.hom (AlgebraicGeometry.Scheme.Hom.appLE f (↑U) (↑V) e)).IsStandardSmooth\", \"doc\": \"A morphism of schemes $f: X \\\\to Y$ is smooth if and only if for every point $x \\\\in X$, there exist open subsets $V$ of $X$ and $U$ of $Y$ such that $x \\\\in V$, $f(V) \\\\subseteq U$, and the induced ring \"}\n  {\"name\": \"AlgebraicGeometry.IsSmooth.exists_isStandardSmooth\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y} [self : AlgebraicGeometry.IsSmooth f] (x : ↥X),\\n  ∃ U V,\\n    ∃ (_ : x ∈ ↑V) (e : ↑V ≤ (TopologicalSpace.Opens.map f.base).obj ↑U),\\n      (CommRingCat.Hom.hom (AlgebraicGeometry.Scheme.Hom.appLE f (↑U) (↑V) e)).IsStandardSmooth\", \"doc\": \"Let $f: X \\\\to Y$ be a smooth morphism of schemes. For any point $x \\\\in X$, there exist an open neighborhood $V$ of $x$ and an open neighborhood $U$ of $f(x)$ with $f(V) \\\\subseteq U$, such that the rin\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.instCategoryEtale\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"(X : AlgebraicGeometry.Scheme) → CategoryTheory.Category.{u, u + 1} X.Etale\", \"doc\": \"For any scheme $X$, the collection of étale morphisms to $X$ forms a category, where objects are schemes equipped with an étale morphism to $X$ and morphisms are commutative triangles between such obj\"}\n  {\"name\": \"AlgebraicGeometry.IsEtale.instHasOfPostcompPropertyScheme\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"CategoryTheory.MorphismProperty.HasOfPostcompProperty @AlgebraicGeometry.IsEtale @AlgebraicGeometry.IsEtale\", \"doc\": \"The composition of two étale morphisms of schemes is also an étale morphism.\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the returned scheme/ring or general topological results do not state this algebraic-space/stack assertion"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Smooth and etale representable morphisms of algebraic stacks are stable under base change and composition, etale maps are smooth, smooth maps are flat locally finitely presented, and etale maps can be checked on an open cover of the source",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.isSmooth_isStableUnderBaseChange\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Smooth\", \"type\": \": MorphismProperty.IsStableUnderBaseChange @IsSmooth\", \"doc\": \"The property of being a smooth morphism is stable under base change. That is, if $ f: X \\\\to Y $ is a smooth morphism of schemes, then any base change of $ f $ is also smooth.\"}\n  {\"name\": \"AlgebraicGeometry.IsEtale.instIsSmooth\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Etale\", \"type\": \"[IsEtale f] : IsSmooth f\", \"doc\": \"Every étale morphism of schemes is a smooth morphism. Specifically, if a morphism $ f: X \\to Y $ of schemes is étale (i.e., smooth of relative dimension 0), then it satisfies the conditions of being a \"}\n  {\"name\": \"AlgebraicGeometry.IsEtale.instIsStableUnderBaseChangeScheme\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Etale\", \"type\": \": IsStableUnderBaseChange @IsEtale\", \"doc\": \"The property of being an étale morphism is stable under base change. That is, if a morphism of schemes is étale, then any base change (pullback) of this morphism is also étale.\"}\n  {\"name\": \"AlgebraicGeometry.instIsStableUnderCompositionSchemeIsSmooth\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Smooth\", \"type\": \": MorphismProperty.IsStableUnderComposition @IsSmooth\", \"doc\": \"For any morphisms $ f: X \\\\to Y $ and $ g: Y \\\\to Z $ of schemes, if $ f $ and $ g $ are smooth, then their composition $ g \\\\circ f $ is also smooth.\"}\n  {\"name\": \"AlgebraicGeometry.isSmoothOfRelativeDimension_isStableUnderBaseChange\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Smooth\", \"type\": \": MorphismProperty.IsStableUnderBaseChange (@IsSmoothOfRelativeDimension n)\", \"doc\": \"For any morphism $ f: X \\\\to Y $ of schemes, if $ f $ is smooth of relative dimension $ n $, then any base change (pullback) of $ f $ is also smooth of relative dimension $ n $.\"}\n  {\"name\": \"AlgebraicGeometry.isSmooth_comp\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Smooth\", \"type\": \"{Z : Scheme.{u}} (g : Y ⟶ Z) [IsSmooth f] [IsSmooth g] : IsSmooth (f ≫ g)\", \"doc\": \"The composition of two smooth morphisms of schemes is again a smooth morphism.\"}\n  {\"name\": \"AlgebraicGeometry.instLocallyOfFinitePresentationOfIsSmooth\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Smooth\", \"type\": \"[hf : IsSmooth f] : LocallyOfFinitePresentation f\", \"doc\": \"Every smooth morphism of schemes is locally of finite presentation.\"}\n  {\"name\": \"CategoryTheory.Functor.relativelyRepresentable.isStableUnderBaseChange\", \"module\": \"Mathlib.CategoryTheory.MorphismProperty.Representable\", \"type\": \": IsStableUnderBaseChange F.relativelyRepresentable\", \"doc\": \"The property of being relatively representable with respect to a functor $ F : \\\\mathcal{C} \\\\to \\\\mathcal{D} $ is stable under base change. That is, if a morphism $ f : X \\\\to Y $ in $ \\\\mathcal{D} $ is r\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the returned scheme/ring or general topological results do not state this algebraic-space/stack assertion"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry.IsEtale\", \"IsSmooth\"",
+   "results": "[loogle] OK 0 hit(s)",
+   "date": "2026-10-22",
+   "verdict": "no match: the returned scheme/ring or general topological results do not state this algebraic-space/stack assertion"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-unramified-diagonal-etale-atlas",
+  "date": "2026-10-22",
+  "group": "Q33"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: The Deligne--Mumford locus in the stack of proper curves. Supporting input: Unramified diagonal yields an etale scheme atlas. Proof of the unramified-diagonal/etale-atlas criterion: Chartwise calculus for smooth and etale representable morphisms.",
+   "via": [
+    "lem-sfb-unramified-diagonal-etale-atlas",
+    "lem-sfb-curve-stack-infinitesimal-dm-locus",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-stack-chartwise-smooth-etale-calculus",
+  "worker": "stage1",
+  "summary": "Reused all scheme permanence nodes; supplied explicit compatible space charts, scheme-to-space tests, stack composition and base change, open-source locality, implications, field-valued surjectivity and disjoint-source object descent. Added only the three missing scheme-locality, general presentation-comparison and representability-over-a-space inputs. Normalized doubled TeX escapes and made the surjectivity/open-cover conventions explicit. Repair of return 2026-10-22 07:19 UTC (head 0c424679534): rebased through the delivery tool onto current origin/sheaf-dag, reread all current cited statements and revalidated all 41 verbatim citations; retained the previously approved chart argument and clarified the scheme-composition application in step 5. Repair of returned head 36f62cee27b (2026-10-22 16:17 UTC): reread the current proof inputs and all 41 citation quotes, preserved the approved argument and recorded searches, and distinguished the newly present 03MJ atlas-refinement node in the report after the initial current-base dry run identified it.",
+  "blueprint": "The ancestor command returns None, as in the inherited blueprint.from.node. The recorded place is det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through stable pointed curves and the unramified-diagonal/etale-atlas input. Steps 1-9 realize precisely its chartwise-calculus prerequisite; steps 10-12 supply surjectivity and disjoint assembly. The null ancestor and full inherited via chain are retained.",
+  "tool_uses": [
+   {
+    "node": "lem-trf-space-fibre-products-etale-covers",
+    "why": "Generic scheme/space input used only as its stated law in the explicit chart argument; no node of this unit supplies that law. This preserves the stable-curve alteration route."
+   },
+   {
+    "node": "lem-weil-pbc-etale-smooth-zero-dimensional-fibres",
+    "why": "Step 9 takes only its statement that an etale morphism of def-weil-etale-morphism is smooth in the sense of def-sbc-smooth-morphisms; generic scheme fact, no node of this unit gives it (added by the maintainer reader)."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-trf-space-fibre-products-etale-covers"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-NG-c1c06fc7d",
+  "group": "NG",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NG-c1c06fc7d (reviewer sub-agent of L); spot-checked: Head c1c06fc7 re-delivers 36f62cee. The three new nodes are byte-identical to that head. In the item only split_report.date and split_report.summary changed. The report adds that the newly present lem-a1-space-lqf-atlas-refinement (03MJ) is not a duplicate. I agree: it gives local quasi-finiteness over a scheme target, not a comparison of presentations for an arbitrary property. Heads 0c42, 06c5 and 36f6 were all reviewed FIX and then refused at landing for a side/live mismatch, so the fix was lost 3 times. No repair note exists, so this is not a re-split and I judged the delivery on its merits. Sources read in stacks-project: 04QZ, 04R1 (a)-(g) and 04R3 in descent.tex (l.7144/7252/7493); 03MJ in spaces-morphisms.tex l.4097, with 02X1 existence; 0300 in algebraic.tex l.683, both hypotheses checked; 04XC, 04XI, 04ZT and 04ZU. No SGA source is used. The new nodes are faithful to these sources, true, statement-only, generic and not duplicates (rg -L over the snapshot), and none restates a clause of the item. Small cases checked: identity charts, empty chart or family, and BG_m not representable. Steps 1-8 and 10-12 were checked against every cited statement. Step 4: U'→X×_Y Y' factors as two base changes of surjective étale maps. Step 6: A is a space by 0300. Step 8: A_i is a space by 0300, and open immersions are étale. Step 11: the overlap isomorphism is unique via descent over ∅. Step 12: q is representable via the diagonal pullback. Fault 1 (C/E5), re-applied: the sentence 'For a map representable by algebraic spaces this is the surjectivity condition on all its algebraic-space scheme base changes' is proved by no step and is undefined as written. It is load-bearing, because the citer lem-sfb-unramified-diagonal-etale-atlas uses the chart test in steps 3 and 10. The fix restates it as equivalence with the def-sfb chart test, adds def-weil-surjective-morphism to stmt_deps and proof_deps, adds step 13 (the 04XI proof with étale charts, both directions, empty cases included), and names 04XI in source.place. Fault 2 (C4), re-applied: step 9 cited the relative-dimension-0 sentence of def-sbc for étale⇒smooth, which is a different étale. It now cites lem-weil-pbc-etale-smooth-zero-dimensional-fibres together with def-weil-etale-morphism. That node's closure has 112 nodes, with no cycle and no trf node. Batch-5 check: def-trf-algebraic-space is a general definition. lem-trf-space-fibre-products-etale-covers, lem-trf-smooth-composition and lem-trf-surjective-morphism-composition are generic space/scheme laws. def-sfb-stable-pointed-moduli-groupoids reaches only the definition def-trf-projective-bundle-morphism. None is a step of the trace formula or of Poincaré duality, so all are accepted. Accepted tool_uses: lem-trf-space-fibre-products-etale-covers and lem-weil-pbc-etale-smooth-zero-dimensional-fibres. The fix is fixes/dag/nodes/sec-six-functors-basics/lem-sfb-stack-chartwise-smooth-etale-calculus.json, which is the 36f6 fix with this head's split_report date and summary. The union of step uses equals proof_deps. No node is dropped. Maintainer note: this fix has now been lost 3 times through landing refusals.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.StackChartwiseSmoothEtaleCalculus",
+  "declaration": "CategoryTheory.stack_chartwise_smooth_etale_calculus",
+  "declarations": [
+   "CategoryTheory.IsSurjectiveModuliMap",
+   "CategoryTheory.IsOpenModuliCover",
+   "CategoryTheory.stack_chartwise_smooth_etale_calculus",
+   "CategoryTheory.stack_chartwise_comp",
+   "CategoryTheory.stack_chartwise_openCover",
+   "CategoryTheory.stack_chartwise_implications",
+   "CategoryTheory.surjective_moduli_baseChange",
+   "CategoryTheory.surjective_moduli_comp",
+   "CategoryTheory.surjective_moduli_iff_chartwise",
+   "CategoryTheory.etale_moduli_scheme_coproduct"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/StackChartwiseSmoothEtaleCalculus.lean",
+  "statement": "theorem stack_chartwise_smooth_etale_calculus {S : Scheme.{u}} {F : BasedCategory.{v₁, w₁} (Over S)} {G : BasedCategory.{v₂, w₂} (Over S)} {H : BasedCategory.{v₃, w₃} (Over S)} (P : MorphismProperty Scheme.{u}) (hP : P = @Smooth ∨ P = @Etale ∨ P = @Flat ∨ P = @LocallyOfFinitePresentation ∨ P = @LocallyOfFiniteType) (hF : IsAlgebraicModuliStack F) (hG : IsAlgebraicModuliStack G) (hH : IsAlgebraicModuliStack H) (f : BasedFunctor F G) (g : BasedFunctor H G) (hf : IsRepresentableByAlgebraicSpaces f) (hPf : ModuliSpaceTest P f) : IsRepresentableByAlgebraicSpaces (moduliTwoFiberFst g f) ∧ ModuliSpaceTest P (moduliTwoFiberFst g f)",
+  "branch": "sheaf-dag",
+  "by": "NP",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "The eight theorems together state all clauses of the node. The two helper predicates spell out the field-lifting and inverse-image-cover conventions already introduced by this node. Reuses the landed algebraic-stack, open-substack, chartwise-test and scheme-base-change definitions; their four owning nodes are added to stmt_deps. No existing definition or statement is changed."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-923017022",
+  "group": "NP",
+  "result": "pass",
+  "note": "Delivery 9230170224ac changes only the lean record and adds four landed definition nodes to stmt_deps (def-sfb-algebraic-moduli-stack, def-sfb-dm-stack-morphism-properties, def-sfb-open-moduli-substack, def-sfb-moduli-chart-normalization); all are on the base, used in the signatures and acyclic. Every node clause is rendered against the live dependency declarations: base change via moduliTwoFiberFst g f, composition via f.comp g, open-cover iff with inverse-image point covering, etale=>smooth=>flat and lfp=>lft (IsEtaleModuliMap unfolds to ModuliSpaceTest @Etale), field-lifting surjectivity with the actual restriction 2-iso and its base-change/composition laws without representability, the every-chart equivalence, and coproduct gluing with Sigma.ι restriction 2-isos under HasCoproduct (no Small). Universes are bound and independent; no stronger assumptions; edge cases (empty index, empty cover, empty target) covered; no existing duplicate; helper defs non-hollow; all proofs sorry; statement verbatim. Advisories: redundant WeilConjectures SmoothFiber import (lem-pc-smooth-flat is a Mathlib match); IsLocallyFiniteTypeModuliMap is a parallel DM-style encoding; the existential gluing is unique up to iso by descent; theorem docstrings use generic source tags."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V3",
+  "result": "pass",
+  "landing": "20261026T092907-L-3477012",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

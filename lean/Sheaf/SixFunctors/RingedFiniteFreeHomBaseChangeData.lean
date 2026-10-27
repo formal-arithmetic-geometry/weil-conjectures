@@ -22,6 +22,7 @@ public import Sheaf.Algebra.Homology.RhomGlobalSectionsOfUniverses
 public import Sheaf.Algebra.Homology.KFlatIndependentCoefficients
 public import Sheaf.Algebra.Homology.DerivedChangeOfRingsCochainModel
 import Sheaf.Algebra.Homology.ScalarInternalHomAdjunction
+import all Sheaf.Algebra.Homology.ScalarHomTensorCoherence
 /-! # Normalized tensor comparison for scalar extension
 
 Source: Stacks Project, Tags 07A4 and 08J9.
@@ -67,6 +68,51 @@ def ringedFiniteFreeScalarSection
         (SheafOfModules.changeOfRingsPresheaf φ M)).app U)
       (s ⊗ₜ[R.obj.obj U, (φ.hom.app U).hom] x))
 
+open SheafOfModules WeilConjectures CategoryTheory.MonoidalCategory
+
+attribute [local instance] isMonoidal_W_independentCoefficients
+  preservesZeroMorphisms_curriedTensor_independentCoefficients
+  preservesZeroMorphisms_curriedTensor_obj_independentCoefficients
+attribute [local irreducible] monoidalCategory coefficientTotalTensor
+
+private theorem scalarComparison_natural
+    [∀ A : Sheaf J CommRingCat.{max c v r}, HasDerivedCategory.{w} (scalarModules J A)]
+    (M : ScalarHomModels.{c, v, r, w} J) (μ : ScalarHomTensorComparison M φ)
+    {P P' Q Q' : CochainComplex (scalarModules J R) ℤ}
+    (f : P ⟶ P') (g : Q ⟶ Q') :
+    ((scalarComplex (M.scalar φ).extension (M.scalar φ).extension_additive).map
+      ((coefficientTotalTensor.{r, c, v} J R).map (Prod.mkHom f g))) ≫
+        (μ.complexIso P' Q').hom =
+      (μ.complexIso P Q).hom ≫ (coefficientTotalTensor.{r, c, v} J S).map
+        (Prod.mkHom
+          ((scalarComplex (M.scalar φ).extension (M.scalar φ).extension_additive).map f)
+          ((scalarComplex (M.scalar φ).extension (M.scalar φ).extension_additive).map g)) := by
+  let s := M.scalar φ
+  let := s.extension_additive
+  apply HomologicalComplex.Hom.ext
+  funext n
+  apply (s.ordinaryAdjunction.homEquiv _ _).injective
+  apply ScalarHomTensor.total_pure_hom_ext
+  intro p q h V x y
+  have hu {X Y : scalarModules J R} (a : X ⟶ Y) (z : X.val.obj V) :
+      (s.extension.map a).val.app V (scalarHomUnitSection M φ X V z) =
+        scalarHomUnitSection M φ Y V (a.val.app V z) :=
+    (congrArg (fun k ↦ k.val.app V z) (s.ordinaryAdjunction.unit.naturality a)).symm
+  change ((μ.complexIso P' Q').hom.f n).val.app V
+      ((s.extension.map (((coefficientTotalTensor.{r, c, v} J R).map
+        (Prod.mkHom f g)).f n)).val.app V (scalarHomUnitSection M φ _ V _)) =
+    (((coefficientTotalTensor.{r, c, v} J S).map (Prod.mkHom
+      ((scalarComplex s.extension s.extension_additive).map f)
+      ((scalarComplex s.extension s.extension_additive).map g))).f n).val.app V
+      (((μ.complexIso P Q).hom.f n).val.app V (scalarHomUnitSection M φ _ V _))
+  rw [hu, ScalarHomTensor.tensor_generator_map, μ.generators, μ.generators,
+    ScalarHomTensor.tensor_generator_map]
+  change _ = coefficientTensorGenerator.{r, c, v} J S
+    ((scalarComplex s.extension s.extension_additive).obj P')
+    ((scalarComplex s.extension s.extension_additive).obj Q') p q n h V
+    ((s.extension.map (f.f p)).val.app V (scalarHomUnitSection M φ _ V x))
+    ((s.extension.map (g.f q)).val.app V (scalarHomUnitSection M φ _ V y))
+  rw [hu, hu]
 
 /-- The actual scalar tensor comparison on complexes and preservation of K-flatness.
 Source: Stacks Project, sites-cohomology.tex, Tags 07A4, 06YT and 08J9.
@@ -114,7 +160,43 @@ theorem ringedFiniteFreeHomBaseChange_complex
         CochainComplex.IsKFlatIndependentCoefficients (J := J) (R := R) P →
           CochainComplex.IsKFlatIndependentCoefficients (J := J) (R := S)
             ((D.E.mapHomologicalComplex (ComplexShape.up ℤ)).obj P)) := by
-  sorry
+  classical
+  rcases D with ⟨E, hobj, hmap, hadd⟩
+  let : ∀ A : Sheaf J CommRingCat.{max c v r},
+      HasDerivedCategory (scalarModules J A) := fun A ↦ HasDerivedCategory.standard _
+  obtain ⟨M, μ, _⟩ := scalarInternalHomAdjunction_exists.{c, v, r} (J := J)
+  have he : (M.scalar φ).extension = E := by
+    refine Functor.ext (fun X ↦ ((M.scalar φ).extension_obj X).trans (hobj X).symm) ?_
+    intro X Y f
+    rw [(M.scalar φ).extension_map, hmap]
+    simp
+  subst E
+  have hu (N : scalarModules J R) (V : Cᵒᵖ) (x : N.val.obj V) :
+      ringedFiniteFreeScalarSection.{c, v, r} J φ (M.scalar φ).extension hobj N V 1 x =
+        scalarHomUnitSection M φ N V x := by
+    have hh := (M.scalar φ).ordinaryUnit N V x
+    have hn : (M.scalar φ).extension_obj N = hobj N := Subsingleton.elim _ _
+    rw [hn] at hh
+    apply_fun (eqToHom (hobj N).symm).val.app V at hh
+    simp only [← ModuleCat.comp_apply, ← PresheafOfModules.comp_app,
+      ← SheafOfModules.comp_val, eqToHom_trans, eqToHom_refl,
+      SheafOfModules.id_val, PresheafOfModules.id_app, ModuleCat.id_apply] at hh
+    rw [← PresheafOfModules.toPresheaf_map_sheafificationAdjunction_unit_app
+      (𝟙 (derivedChangeRingIndependentCoefficients J S).obj)
+      (changeOfRingsPresheaf φ N)] at hh
+    rw [ModuleCat.extendRestrictScalarsAdj_unit_app_apply] at hh
+    erw [PresheafOfModules.toPresheaf_map_app_apply] at hh
+    exact hh.symm
+  let F := scalarComplex (M.scalar φ).extension (M.scalar φ).extension_additive
+  let κ : coefficientTotalTensor.{r, c, v} J R ⋙ F ≅
+      F.prod F ⋙ coefficientTotalTensor.{r, c, v} J S :=
+    NatIso.ofComponents (fun X ↦ (μ φ).complexIso X.1 X.2)
+    (fun f ↦ scalarComparison_natural.{c, v, r} J φ M (μ φ) f.1 f.2)
+  refine ⟨κ, ?_, ?_⟩
+  · intro P Q p q U x y
+    simp only [hu]
+    exact (μ φ).generators P Q p q (p + q) rfl U x y
+  · exact (μ φ).preservesKFlat
 
 end Site
 end CategoryTheory

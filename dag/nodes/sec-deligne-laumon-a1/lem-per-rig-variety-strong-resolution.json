@@ -1,0 +1,411 @@
+{
+ "id": "lem-per-rig-variety-strong-resolution",
+ "kind": "statement",
+ "title": "Strong functorial desingularization of characteristic-zero varieties",
+ "statement": "Let $\\mathrm{Var}^{p=0,\\mathrm{reg}}$ have as objects finite disjoint unions of generically reduced schemes of finite type over fields of characteristic zero [def-weil-finite-type-morphism]. Generically reduced means reduced at every generic point of every irreducible component [def-pc-reduced-scheme]. Its morphisms are all regular scheme morphisms, with no requirement of compatibility with the fields: flat morphisms [def-weil-flat-morphism] with geometrically regular fibres [def-pc-scheme-fibre, def-weil-pbc-g-ring]. There exists a single strong desingularization rule $F_{\\mathrm{Var}}$ on this category. For each object $X$, its value is a finite ordered tower $X_r\\to\\cdots\\to X_0=X$ of ordinary blowups [def-nagata-global-blowup] with coherent nonempty regular centers [pqf-def-coherent, def-weil-regular-scheme], regular final scheme $X_r$, and every center contained in the inverse image of $X_{\\mathrm{sing}}$, the nonregular locus of the ORIGINAL $X$. For every regular morphism $Y\\to X$, the tower $F_{\\mathrm{Var}}(Y)$ is the pullback of $F_{\\mathrm{Var}}(X)$ with precisely the empty centers removed, retaining every other extended ideal and its order. This rule is compatible with identities and composition and is defined on finite disjoint unions, whose single ordered tower specifies the synchronization of the component towers. It takes the empty scheme to the length-zero tower.",
+ "source": {
+  "document": "https://math.huji.ac.il/~temkin/papers/Non_Embedded_Desingularization.pdf",
+  "place": "Temkin arXiv:0904.1592v2, §§2.3.1–2.3.4 and Theorem 2.3.5 (printed pp.11–14): generically reduced varieties, original-singular-locus support, strongness, and compatibility with all regular morphisms, including across fields; Lemma 2.3.1 and Remark 2.3.4 explain disjoint-union synchronization. Read online 2026-10-24; archival copy WANTED."
+ },
+ "stmt_deps": [
+  "def-weil-finite-type-morphism",
+  "def-pc-reduced-scheme",
+  "def-weil-flat-morphism",
+  "def-pc-scheme-fibre",
+  "def-weil-pbc-g-ring",
+  "def-nagata-global-blowup",
+  "pqf-def-coherent",
+  "def-weil-regular-scheme"
+ ],
+ "proof": [
+  {
+   "text": "First construct the rational algorithm from the local calculus [lem-per-generically-reduced-rational-invariant-calculus]. Cover a finite-type generically reduced $\\mathbf Q$-scheme by finitely many affine opens, each embedded in an affine space by generators of its coordinate algebra. At any finite history, the intrinsic-embedding and restriction comparisons in clause (2) identify the invariant functions and stratum ideals on overlaps. Take the full maximum over the finite cover, using the common ordered value set; on a chart missing this value its center ideal is the unit ideal. Glue these coherent ideals by finite iteration of [lemma-nagata-glue-finite-type-ideals]. All the schemes are Noetherian, hence qcqs, and the chosen opens and their finite unions are quasi-compact. Thus that lemma's hypotheses hold at each stage.",
+   "uses": [
+    "lem-per-generically-reduced-rational-invariant-calculus",
+    "lemma-nagata-glue-finite-type-ideals"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bierstone-milman-temkin/Q-universal-desingularization.pdf",
+    "place": "§§6.1--6.3; local-global assembly of the invariant"
+   }
+  },
+  {
+   "text": "Blow up the glued ideal. The flat-base-change comparison [def-nagata-blowup-flat-base-change-map, thm-nagata-blowup-flat-base-change] identifies its restrictions to the chosen opens. On an embedded chart the intrinsic blowup is the scheme-theoretic strict transform: apply [def-nagata-strict-transform-blowup-comparison, thm-nagata-strict-transform-is-blowup] to the closed immersion into the ambient smooth scheme and to that stage's center. Hence these are precisely the next histories of the calculus, not blowups of the reduced scheme. Clause (3) of [lem-per-generically-reduced-rational-invariant-calculus] terminates the construction: on each chart the nonempty restricted steps form its terminating maximum-stratum sequence, and every global step is nonempty on some chart. An infinite global sequence would therefore have infinitely many nonempty steps on one of the finitely many charts, a contradiction.",
+   "uses": [
+    "def-nagata-blowup-flat-base-change-map",
+    "thm-nagata-blowup-flat-base-change",
+    "def-nagata-strict-transform-blowup-comparison",
+    "thm-nagata-strict-transform-is-blowup",
+    "lem-per-generically-reduced-rational-invariant-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bierstone-milman-temkin/Q-universal-desingularization.pdf",
+    "place": "Theorem/Addendum 6.1 and its local embedded construction; Stacks 0806 strict-transform comparison"
+   }
+  },
+  {
+   "text": "Denote the resulting rational tower by $R(X)$. Every retained center is coherent, nonempty and regular and avoids the inverse image of the original regular locus, and the terminal scheme is regular, by clauses (1) and (3) of [lem-per-generically-reduced-rational-invariant-calculus]. For a smooth map, compare its local embedded histories using clause (2). Induct through the ordered maxima: a target maximum whose inverse image is empty contributes a unit ideal and leaves the source history unchanged; at the next maximum met by the source, the stratum ideals agree. This proves smooth compatibility of $R$ with exactly those empty stages deleted. The argument uses all individual strata, rather than asserting that every target maximum meets the source. The intrinsic history comparison makes the result independent of the affine embeddings and cover. Finite disjoint unions use one maximum over all components at each stage, giving a synchronized tower. A regular initial scheme has the empty history.",
+   "uses": [
+    "lem-per-generically-reduced-rational-invariant-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bierstone-milman-temkin/Q-universal-desingularization.pdf",
+    "place": "§6.3, including arbitrary smooth relative dimensions and synchronization"
+   }
+  },
+  {
+   "text": "Now let $X$ be affine and a finite disjoint union of generically reduced finite-type schemes over characteristic-zero fields and choose a presentation $X=\\varprojlim X_i$ from [lem-per-variety-rational-smooth-limit-models]. Fix one index $i$. Pull the finite tower $R(X_i)$ back along the regular projection $p_i$, extending each ideal; contract a stage exactly when its extended ideal is the unit ideal. The base-change isomorphisms [def-nagata-blowup-flat-base-change-map, thm-nagata-blowup-flat-base-change] show that this is a tower of ordinary blowups on $X$. Unit ideals are invertible, so [cor-nagata-blowup-cartier-iso] supplies the identity stages being contracted. This is a finite tower, rather than an inverse limit of an unbounded family of towers.",
+   "uses": [
+    "lem-per-variety-rational-smooth-limit-models",
+    "def-nagata-blowup-flat-base-change-map",
+    "thm-nagata-blowup-flat-base-change",
+    "cor-nagata-blowup-cartier-iso"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bierstone-milman-temkin/Q-universal-desingularization.pdf",
+    "place": "Proof of Theorem 7.4, first paragraph"
+   }
+  },
+  {
+   "text": "The regular maps to the rational levels remain regular after each blowup and after restricting to a center. Indeed the blowups are finite type by [lemma-nagata-blowup-proper, def-weil-proper-morphism]; closed center immersions are finite type on these Noetherian schemes. Apply [lem-weil-pbc-regular-base-change] affine-locally to these finite-type base changes of the regular projection. Thus the pulled-back centers and final scheme are regular by [lem-weil-pbc-regular-map-ascent], applied on affine opens: the base is regular, the target is Noetherian (finite type over a component's field), and the regular projection is flat with regular fibres. Extended finitely generated ideals are still finitely generated; on these Noetherian schemes they are coherent. A nonunit ideal defines a nonempty center; the other ideals were deleted.",
+   "uses": [
+    "lemma-nagata-blowup-proper",
+    "def-weil-proper-morphism",
+    "lem-weil-pbc-regular-base-change",
+    "lem-weil-pbc-regular-map-ascent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bierstone-milman-temkin/Q-universal-desingularization.pdf",
+    "place": "Proof of Theorem 7.4: preservation of strong resolution under regular projection; Stacks 07C1 and regular ascent"
+   }
+  },
+  {
+   "text": "The centers pulled back in Step 4 avoid the original regular locus of $X$. If $x\\in X$ is regular, the flat local homomorphism $\\mathcal O_{X_i,p_i(x)}\\to\\mathcal O_{X,x}$ has Noetherian local source and regular local target. By [lem-weil-pbc-flat-under-regular] its source is regular. No center of $R(X_i)$ lies above this point by Step 3, so no pulled-back center lies above $x$. This argument concerns the regular locus of the INITIAL scheme, even at cleanup stages whose current scheme is already regular.",
+   "uses": [
+    "lem-weil-pbc-flat-under-regular"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bierstone-milman-temkin/Q-universal-desingularization.pdf",
+    "place": "Proof of Theorem 7.4, preservation of condition (2) of Theorem 6.1; Stacks 00OF"
+   }
+  },
+  {
+   "text": "Changing $i$ does not change the contracted tower: pass to a common upper bound in the directed set; its transition maps are smooth, so Step 3 compares both rational towers, and then extend their ideals to $X$. To compare two presentations of the same $X$, apply the finite-stage comparison of [lem-per-variety-rational-smooth-limit-models] to the identity map and a chosen stage of the first presentation. It gives a smooth finite-stage map from the second presentation. Step 3, followed by pullback to $X$, identifies the towers, including the extended center ideals in their order. Deleting unit ideals is transitive under further extension, so the two contractions agree. Define $F(X)$ to be this presentation-independent tower.",
+   "uses": [
+    "lem-per-variety-rational-smooth-limit-models"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bierstone-milman-temkin/Q-universal-desingularization.pdf",
+    "place": "Proof of Theorem 7.4, independence of the projective-limit representation"
+   }
+  },
+  {
+   "text": "For any regular $h:Y\\to X$ between the affine objects, choose their presentations independently. For a stage $X_i$, [lem-per-variety-rational-smooth-limit-models] supplies a smooth map $Y_j\\to X_i$ commuting with $h$. Step 3 compares the rational towers at these stages. Pulling this comparison to $Y$ and using Step 7 gives $F(Y)=h^*F(X)$ after exactly the empty centers are deleted. This proves affine regular functoriality even when no ground fields or their structure maps are compatible. For finitely many affine components, the modeling lemma presents their entire disjoint union at once; the same construction therefore gives one ordered tower on that union.",
+   "uses": [
+    "lem-per-variety-rational-smooth-limit-models"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bierstone-milman-temkin/Q-universal-desingularization.pdf",
+    "place": "Proof of Theorem 7.4, finite-stage smooth lifting of an arbitrary regular morphism"
+   }
+  },
+  {
+   "text": "We need equality before deletion when gluing. Let $a,b:W\\to U$ be two regular maps between affine objects. The maps $a\\amalg\\mathrm{id}_U,b\\amalg\\mathrm{id}_U:W\\amalg U\\to U$ are surjective and regular. At every blowup level their pullback maps remain surjective by [lem-weil-pbc-surjective-base-change]; consequently a nonempty center stays nonempty. Step 8 identifies both full pullback towers with $F(W\\amalg U)$ without any deletion. Restricting these equal towers to $W$ gives equality with their original positions, including empty centers. Apply this in particular to the two maps from an affine open of an overlap into the finite disjoint union of an affine cover.",
+   "uses": [
+    "lem-weil-pbc-surjective-base-change"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/bierstone-milman-temkin/Q-universal-desingularization.pdf",
+    "place": "Temkin Non-embedded desingularization §2.3.4, Lemma 2.3.1: the disjoint-union-with-identity argument"
+   }
+  },
+  {
+   "text": "For a general object choose a finite affine cover $U=\\coprod U_a\\to X$. The synchronized tower $F(U)$ restricts to towers on the $U_a$ with positions retained. Step 9, tested on affine covers of $U_a\\cap U_b$, identifies their stagewise center ideals in exactly those positions. Glue each level's ideals by [lemma-nagata-glue-finite-type-ideals] and form its blowup. The canonical comparisons [def-nagata-blowup-flat-base-change-map, thm-nagata-blowup-flat-base-change] identify its restrictions with the corresponding levels over the $U_a$. Induction gives the global tower. Coherence, regularity of centers and final scheme, and avoidance of the original regular locus hold locally by Steps 5--6; every retained global center is nonempty on some $U_a$. There are only the finitely many positions of $F(U)$.",
+   "uses": [
+    "lemma-nagata-glue-finite-type-ideals",
+    "def-nagata-blowup-flat-base-change-map",
+    "thm-nagata-blowup-flat-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bierstone-milman-temkin/Q-universal-desingularization.pdf",
+    "place": "Proof of Theorem 7.4, gluing paragraph; Temkin §2.3.4 Lemma 2.3.3"
+   }
+  },
+  {
+   "text": "Two finite affine covers give the same tower: choose a finite affine cover of each pairwise intersection of one chart from each cover, and let $W$ be their disjoint union. The maps from $W$ to the two disjoint-union covers are regular and surjective. Step 8 compares both full pulled-back towers with $F(W)$; surjectivity and [lem-weil-pbc-surjective-base-change] ensure that no globally nonempty center is deleted. The overlap equalities in Step 9 and uniqueness of gluing therefore identify the two towers on $X$. For a regular morphism between general objects take finite affine covers subordinate to inverse images of target charts. Step 8 compares the affine restrictions; Step 9 synchronizes the overlap comparisons, and their morphisms glue uniquely by [lem-weil-pbc-scheme-morphism-gluing]. Thus the global source tower is the pulled-back target tower with exactly empty centers deleted.",
+   "uses": [
+    "lem-weil-pbc-scheme-morphism-gluing",
+    "lem-weil-pbc-surjective-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bierstone-milman-temkin/Q-universal-desingularization.pdf",
+    "place": "Proof of Theorem 7.4, final paragraph; Temkin Lemma 2.3.3"
+   }
+  },
+  {
+   "text": "Finally, identities and compositions give the required comparisons: on affine blowup charts the maps [def-nagata-blowup-flat-base-change-map] extend coefficients and send each fraction to the same fraction of its images. Applying two ring maps or their composite therefore gives the same chart maps, hence the same global maps by [lem-weil-pbc-scheme-morphism-gluing]. Ideal extension is transitive and a unit ideal remains unit; contraction in two stages thus deletes exactly the positions deleted by the composite. A nonempty Cartier center is retained even if its blowup is an isomorphism. Finite disjoint unions have already been synchronized in Steps 3, 8 and 10, and the empty scheme has zero positions. These verifications give the single rule $FVar$ asserted in the item.",
+   "uses": [
+    "def-nagata-blowup-flat-base-change-map",
+    "lem-weil-pbc-scheme-morphism-gluing"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/bierstone-milman-temkin/Q-universal-desingularization.pdf",
+    "place": "Temkin §§2.2.1, 2.3.1--2.3.4; canonical chart maps for flat blowup base change"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-per-generically-reduced-rational-invariant-calculus",
+  "lemma-nagata-glue-finite-type-ideals",
+  "def-nagata-blowup-flat-base-change-map",
+  "thm-nagata-blowup-flat-base-change",
+  "def-nagata-strict-transform-blowup-comparison",
+  "thm-nagata-strict-transform-is-blowup",
+  "lem-per-variety-rational-smooth-limit-models",
+  "cor-nagata-blowup-cartier-iso",
+  "lemma-nagata-blowup-proper",
+  "def-weil-proper-morphism",
+  "lem-weil-pbc-regular-base-change",
+  "lem-weil-pbc-regular-map-ascent",
+  "lem-weil-pbc-flat-under-regular",
+  "lem-weil-pbc-surjective-base-change",
+  "lem-weil-pbc-scheme-morphism-gluing"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/bierstone-milman-temkin/Q-universal-desingularization.pdf",
+  "place": "Assembly following BMT §§6.1--6.3 and proof of Theorem 7.4; Temkin §§2.3.1--2.3.4. Online primary texts read; archival PDFs WANTED."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Strong functorial desingularization of rig-regular locally principal formal varieties in characteristic zero",
+   "results": "8 hits: ordinary smoothness, normalization and unrelated categorical constructions; no formal desingularization theorem",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "FormalScheme, Blowup, Regular",
+   "results": "0 hits; loogle reports unknown identifier FormalScheme",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "desingulari[sz]|rig.regular|formal.variet",
+   "results": "0 hits in Mathlib AlgebraicGeometry",
+   "date": "2026-10-24",
+   "verdict": "no match",
+   "subdirectory": "AlgebraicGeometry"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Strong functorial desingularization of rig-regular locally principal formal varieties in characteristic zero",
+   "results": "8 hits: formally smooth/unramified, normalization and affine-transition declarations; none states formal desingularization",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Strong resolution of generically reduced characteristic zero varieties by regular centers supported over the original singular locus and functorial for all regular morphisms",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.IsSmooth.exists_isStandardSmooth\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y} [self : AlgebraicGeometry.IsSmooth f] (x : ↥X),\\n  ∃ U V,\\n    ∃ (_ : x ∈ ↑V) (e : ↑V ≤ (TopologicalSpace.Opens.map f.base).obj ↑U),\\n      (CommRingCat.Hom.hom (AlgebraicGeometry.Scheme.Hom.appLE f (↑U) (↑V) e)).IsStandardSmooth\", \"doc\": \"Let $f: X \\\\to Y$ be a smooth morphism of schemes. For any point $x \\\\in X$, there exist an open neighborhood $V$ of $x$ and an open neighborhood $U$ of $f(x)$ with $f(V) \\\\subseteq U$, such that the rin\"}\n  {\"name\": \"AlgebraicGeometry.IsReduced\", \"module\": \"Mathlib/AlgebraicGeometry/Properties\", \"type\": \"AlgebraicGeometry.Scheme → Prop\", \"doc\": \"A predicate indicating that a scheme is reduced, i.e., that all its local rings have no nonzero nilpotent elements.\"}\n  {\"name\": \"AlgebraicGeometry.IsSmoothOfRelativeDimension.exists_isStandardSmoothOfRelativeDimension\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"∀ {n : ℕ} {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y} [self : AlgebraicGeometry.IsSmoothOfRelativeDimension n f]\\n  (x : ↥X),\\n  ∃ U V,\\n    ∃ (_ : x ∈ ↑V) (e : ↑V ≤ (TopologicalSpace.Opens.map f.base).obj ↑U),\\n      RingHom.IsStandardSmoothOfRelativeDimension n\\n        (CommRingCat.Hom.hom (Algebraic\", \"doc\": \"For every point $x$ in $X$, there exist open neighborhoods $U$ of $f(x)$ in $Y$ and $V$ of $x$ in $X$ such that $V$ is contained in the preimage of $U$ under $f$, and the induced ring homomorphism on \"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.instIsReducedNormalization\", \"module\": \"Mathlib/AlgebraicGeometry/Normalization\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [inst : AlgebraicGeometry.QuasiCompact f]\\n  [inst_1 : AlgebraicGeometry.QuasiSeparated f] [AlgebraicGeometry.IsReduced X],\\n  AlgebraicGeometry.IsReduced (AlgebraicGeometry.Scheme.Hom.normalization f)\", \"doc\": \"If $ X $ is a reduced scheme, then the normalization of any morphism $ f: X \\\\to Y $ is also a reduced scheme. This instance asserts that the categorical normalization construction preserves the reduce\"}\n  {\"name\": \"AlgebraicGeometry.IsSmoothOfRelativeDimension\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"ℕ → {X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"For a natural number $n$ and a morphism $f: X \\\\to Y$ of schemes, the proposition that $f$ is smooth of relative dimension $n$.\"}\n  {\"name\": \"Algebra.smoothLocus\", \"module\": \"Mathlib/RingTheory/Smooth/Locus\", \"type\": \"(R : Type u_1) → (A : Type u_2) → [inst : CommRing R] → [inst_1 : CommRing A] → [Algebra R A] → Set (PrimeSpectrum A)\", \"doc\": \"The set of prime ideals $\\\\mathfrak{p} \\\\in \\\\operatorname{Spec}(A)$ where the algebra $A$ is formally smooth over the base commutative ring $R$. This means the localization $A_{\\\\mathfrak{p}}$ satisfies \"}\n  {\"name\": \"AlgebraicGeometry.isReduced_of_isIntegral\", \"module\": \"Mathlib/AlgebraicGeometry/Properties\", \"type\": \"∀ (X : AlgebraicGeometry.Scheme) [AlgebraicGeometry.IsIntegral X], AlgebraicGeometry.IsReduced X\", \"doc\": \"Every integral scheme is a reduced scheme. That is, if a scheme $X$ is integral (meaning it is both irreducible and reduced), then it necessarily satisfies the condition of being reduced (all its loca\"}\n  {\"name\": \"AlgebraicGeometry.instHasRingHomPropertyIsSmoothOfRelativeDimensionLocallyIsStandardSmoothOfRelativeDimension\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"∀ (n : ℕ),\\n  AlgebraicGeometry.HasRingHomProperty (@AlgebraicGeometry.IsSmoothOfRelativeDimension n)\\n    fun {R S} [CommRing R] [CommRing S] =>\\n    RingHom.Locally fun {R S} [CommRing R] [CommRing S] => RingHom.IsStandardSmoothOfRelativeDimension n\", \"doc\": \"For any natural number $ n $ and a morphism $ f: X \\to Y $ of schemes, the morphism $ f $ is smooth of relative dimension $ n $ if and only if it is locally standard smooth of relative dimension $ n $.\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: returned declarations do not state algebraization or ordered geometric resolution and its comparison/gluing; generic scheme gluing, formal smoothness lifting, and reducedness do not specialize to this theorem"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Resolution of singularities for generically reduced finite type schemes over arbitrary characteristic zero fields compatible with regular base change",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.IsReduced.mk\", \"module\": \"Mathlib.AlgebraicGeometry.Properties\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme},\\n  autoParam (∀ (U : X.Opens), IsReduced ↑(X.presheaf.obj (Opposite.op U)))\\n      AlgebraicGeometry.IsReduced.component_reduced._autoParam →\\n    AlgebraicGeometry.IsReduced X\", \"doc\": \"A scheme $ X $ is reduced if for every open subset $ U $ of $ X $, the ring of sections $ \\\\mathcal{O}_X(U) $ is reduced (i.e., contains no nonzero nilpotent elements).\"}\n  {\"name\": \"AlgebraicGeometry.IsReduced.of_openCover\", \"module\": \"Mathlib.AlgebraicGeometry.Properties\", \"type\": \"(𝒰 : X.OpenCover) [∀ i, IsReduced (𝒰.X i)] : IsReduced X\", \"doc\": \"If a scheme $X$ admits an open cover $\\\\{U_i\\\\}$ such that each open subscheme $U_i$ is reduced (i.e., has no nonzero nilpotent elements in its local rings), then $X$ itself is a reduced scheme.\"}\n  {\"name\": \"AlgebraicGeometry.isReduced_of_isReduced_stalk\", \"module\": \"Mathlib.AlgebraicGeometry.Properties\", \"type\": \"[∀ x : X, _root_.IsReduced (X.presheaf.stalk x)] : IsReduced X\", \"doc\": \"If for every point $ x $ in a scheme $ X $, the stalk of the structure sheaf at $ x $ is a reduced ring (i.e., contains no nonzero nilpotent elements), then the scheme $ X $ is reduced.\"}\n  {\"name\": \"AlgebraicGeometry.IsReduced\", \"module\": \"Mathlib.AlgebraicGeometry.Properties\", \"type\": \"AlgebraicGeometry.Scheme → Prop\", \"doc\": \"A predicate indicating that a scheme is reduced, i.e., that all its local rings have no nonzero nilpotent elements.\"}\n  {\"name\": \"AlgebraicGeometry.IsReduced.recOn\", \"module\": \"Mathlib.AlgebraicGeometry.Properties\", \"type\": \"{X : AlgebraicGeometry.Scheme} →\\n  {motive : AlgebraicGeometry.IsReduced X → Sort u} →\\n    (t : AlgebraicGeometry.IsReduced X) →\\n      ((component_reduced : ∀ (U : X.Opens), IsReduced ↑(X.presheaf.obj (Opposite.op U))) → motive ⋯) → motive t\", \"doc\": \"Given a scheme $X$ and a type family $P$ over the predicate that $X$ is reduced, if for every open subset $U \\\\subseteq X$ the ring of sections $\\\\mathcal{O}_X(U)$ is reduced (contains no nonzero nilpot\"}\n  {\"name\": \"AlgebraicGeometry.IsReduced.casesOn\", \"module\": \"Mathlib.AlgebraicGeometry.Properties\", \"type\": \"{X : AlgebraicGeometry.Scheme} →\\n  {motive : AlgebraicGeometry.IsReduced X → Sort u} →\\n    (t : AlgebraicGeometry.IsReduced X) →\\n      ((component_reduced : ∀ (U : X.Opens), IsReduced ↑(X.presheaf.obj (Opposite.op U))) → motive ⋯) → motive t\", \"doc\": \"Given a scheme $X$ and a type family $P$ over the predicate that $X$ is reduced, if every open subset $U \\\\subseteq X$ has a reduced ring of sections $\\\\mathcal{O}_X(U)$, then this recursor constructs a\"}\n  {\"name\": \"AlgebraicGeometry.isIntegral_of_irreducibleSpace_of_isReduced\", \"module\": \"Mathlib.AlgebraicGeometry.Properties\", \"type\": \"[IsReduced X] [H : IrreducibleSpace X] : IsIntegral X\", \"doc\": \"If a scheme $X$ is irreducible as a topological space and has no nonzero nilpotent elements in its structure sheaf (i.e., is reduced), then $X$ is an integral scheme.\"}\n  {\"name\": \"AlgebraicGeometry.isReduced_of_isAffine_isReduced\", \"module\": \"Mathlib.AlgebraicGeometry.Properties\", \"type\": \"[IsAffine X] [_root_.IsReduced Γ(X, ⊤)] : IsReduced X\", \"doc\": \"If $X$ is an affine scheme and the ring of global sections $\\\\Gamma(X, \\\\mathcal{O}_X)$ is reduced (i.e., contains no nonzero nilpotent elements), then the scheme $X$ itself is reduced (i.e., all its lo\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: returned declarations do not state algebraization or ordered geometric resolution and its comparison/gluing; generic scheme gluing, formal smoothness lifting, and reducedness do not specialize to this theorem"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"desingularization\"",
+   "results": "[loogle] OK 0 hit(s)",
+   "date": "2026-10-24",
+   "verdict": "no match: returned declarations do not state algebraization or ordered geometric resolution and its comparison/gluing; generic scheme gluing, formal smoothness lifting, and reducedness do not specialize to this theorem"
+  },
+  {
+   "tool": "grep",
+   "query": "desingulari[sz]|resolution.of.singular|singular.*blow",
+   "results": "[grep] OK 0 hit(s)",
+   "date": "2026-10-24",
+   "verdict": "no match: returned declarations do not state algebraization or ordered geometric resolution and its comparison/gluing; generic scheme gluing, formal smoothness lifting, and reducedness do not specialize to this theorem",
+   "subdirectory": "AlgebraicGeometry"
+  },
+  {
+   "tool": "grep",
+   "query": "desingulari[sz]|strong.*resolution|functorial.*blow",
+   "results": "; 0 hits: ",
+   "date": "2026-10-24",
+   "verdict": "no match: smoothness, reducedness, normalization, or finite-presentation descent does not give the stated singularity calculus or regular smooth-model approximation"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Strong resolution of singularities for characteristic zero varieties compatible with regular morphisms",
+   "results": "; 8 hits: AlgebraicGeometry.IsSmooth.casesOn, AlgebraicGeometry.IsSmooth, AlgebraicGeometry.IsSmooth.recOn, Algebra.mvPolynomial, AlgebraicGeometry.FormallyUnramified, Algebra.IsStandardSmoothOfRelativeDimension.localization_away, Algebra.FormallySmooth.casesOn, AlgebraicGeometry.isSmooth_iff",
+   "date": "2026-10-24",
+   "verdict": "no match: smoothness, reducedness, normalization, or finite-presentation descent does not give the stated singularity calculus or regular smooth-model approximation"
+  },
+  {
+   "tool": "loogle",
+   "query": "Blowup, Regular, IsSmooth, IsReduced",
+   "results": "loogle: unknown identifier 'Blowup'; 0 hits: ",
+   "date": "2026-10-24",
+   "verdict": "invalid query; not evidence of absence"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Strong functorial desingularization of generically reduced characteristic-zero varieties by regular centers supported over the original singular locus",
+   "results": "; 8 hits: AlgebraicGeometry.IsSmooth.exists_isStandardSmooth, AlgebraicGeometry.IsSmoothOfRelativeDimension.exists_isStandardSmoothOfRelativeDimension, AlgebraicGeometry.instHasRingHomPropertyIsSmoothLocallyIsStandardSmooth, AlgebraicGeometry.IsReduced, Algebra.smoothLocus, AlgebraicGeometry.IsSmoothOfRelativeDimension, AlgebraicGeometry.instHasRingHomPropertyIsSmoothOfRelativeDimensionLocallyIsStandardSmoothOfRelativeDimension, AlgebraicGeometry.Scheme.Hom.instIsReducedNormalization",
+   "date": "2026-10-24",
+   "verdict": "no match: smoothness, reducedness, normalization, or finite-presentation descent does not give the stated singularity calculus or regular smooth-model approximation"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"desingularization\"",
+   "results": "; 0 hits: ",
+   "date": "2026-10-24",
+   "verdict": "no match: smoothness, reducedness, normalization, or finite-presentation descent does not give the stated singularity calculus or regular smooth-model approximation"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Canonical blowup resolution of generically reduced schemes functorial under arbitrary regular maps",
+   "results": "; 8 hits: AlgebraicGeometry.Scheme.Hom.normalization, AlgebraicGeometry.Scheme.Hom.toNormalization, AlgebraicGeometry.Scheme.Hom.instIsReducedNormalization, AlgebraicGeometry.Scheme.Hom.fromNormalization, AlgebraicGeometry.Scheme.Hom.normalizationDiagramMap, AlgebraicGeometry.Scheme.RationalMap.toPartialMap, AlgebraicGeometry.Scheme.Hom.toNormalization_fromNormalization, AlgebraicGeometry.isReduced_of_isOpenImmersion",
+   "date": "2026-10-24",
+   "verdict": "no match: smoothness, reducedness, normalization, or finite-presentation descent does not give the stated singularity calculus or regular smooth-model approximation"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-per-rig-regular-formal-resolution",
+  "date": "2026-10-24",
+  "group": "Q61"
+ },
+ "chapter": "sec-deligne-laumon-a1",
+ "unit": "sk-p-dl-a1-perverse",
+ "blueprint": {
+  "from": {
+   "node": "lem-per-artin-gabber-affine-curve",
+   "place": "Temkin Theorem 2.3.5 (printed p.14): existence of a functorial strong desingularization $FVar$ on $Var^{p=0,reg}$, with the definition of compatibility in §2.3.3--2.3.4",
+   "via": [
+    "lem-per-rig-regular-formal-resolution",
+    "lem-per-small-singular-locus-resolution",
+    "lem-per-qe-ordinary-regular-resolution",
+    "lem-per-characteristic-zero-log-resolution-independence",
+    "lem-per-complete-local-rigidification-comparison",
+    "lem-per-gabber-absolute-equivariant-modification",
+    "lem-per-gabber-log-smooth-equivariant-modification",
+    "lem-per-trait-prime-to-ell-log-alteration",
+    "lem-per-gabber-regular-pair-purity",
+    "lem-per-absolute-gysin-purity",
+    "lem-per-potential-dualizing-regular-unit",
+    "lem-per-finite-regular-reduction-dualizing",
+    "lem-per-qbar-generic-duality-model",
+    "lem-per-qbar-middle-tstructure"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-per-rig-variety-strong-resolution",
+  "worker": "stage1",
+  "summary": "Statement retained. Built rational strong resolution from a local generically-reduced invariant calculus, then descended finite rational towers along smooth inverse-limit models and proved representation independence/regular functoriality by finite-stage smooth comparison. Glued using synchronized finite disjoint unions; distinguished empty centers from identity Cartier blowups. Two new statement-only inputs; existing reduced-only calculus is insufficient for embedded nilpotents. No Lean written or compiled.",
+  "blueprint": "Ancestor lem-per-artin-gabber-affine-curve, Step 3 duality, through the recorded regular-resolution branch; realizes this item via Temkin Theorem 2.3.5 and the alternative BMT §7 approximation route.",
+  "tool_uses": [
+   {
+    "node": "lemma-nagata-glue-finite-type-ideals",
+    "why": "Generic scheme/blowup or commutative-algebra tool: Gluing compatible finite-type ideals on two qc opens. The perverse unit supplies no replacement for this infrastructure."
+   },
+   {
+    "node": "def-nagata-blowup-flat-base-change-map",
+    "why": "Generic scheme/blowup or commutative-algebra tool: Flat base-change comparison for blow-ups. The perverse unit supplies no replacement for this infrastructure."
+   },
+   {
+    "node": "thm-nagata-blowup-flat-base-change",
+    "why": "Generic scheme/blowup or commutative-algebra tool: Flat base change of blow-ups. The perverse unit supplies no replacement for this infrastructure."
+   },
+   {
+    "node": "def-nagata-strict-transform-blowup-comparison",
+    "why": "Generic scheme/blowup or commutative-algebra tool: Comparison from the extended-ideal blow-up to the base change. The perverse unit supplies no replacement for this infrastructure."
+   },
+   {
+    "node": "thm-nagata-strict-transform-is-blowup",
+    "why": "Generic scheme/blowup or commutative-algebra tool: [stacks-project]. The perverse unit supplies no replacement for this infrastructure."
+   },
+   {
+    "node": "cor-nagata-blowup-cartier-iso",
+    "why": "Generic scheme/blowup or commutative-algebra tool: Blow-up of an effective Cartier center. The perverse unit supplies no replacement for this infrastructure."
+   },
+   {
+    "node": "lemma-nagata-blowup-proper",
+    "why": "Generic scheme/blowup or commutative-algebra tool: Properness of a blow-up. The perverse unit supplies no replacement for this infrastructure."
+   },
+   {
+    "node": "def-weil-proper-morphism",
+    "why": "Generic scheme/blowup or commutative-algebra tool: Separated, universally closed and proper morphisms. The perverse unit supplies no replacement for this infrastructure."
+   },
+   {
+    "node": "lem-weil-pbc-regular-base-change",
+    "why": "Generic scheme/blowup or commutative-algebra tool: Regular ring maps are stable under finite type base change. The perverse unit supplies no replacement for this infrastructure."
+   },
+   {
+    "node": "lem-weil-pbc-regular-map-ascent",
+    "why": "Generic scheme/blowup or commutative-algebra tool: Regularity ascends along flat maps with regular fibres. The perverse unit supplies no replacement for this infrastructure."
+   },
+   {
+    "node": "lem-weil-pbc-flat-under-regular",
+    "why": "Generic scheme/blowup or commutative-algebra tool: Regularity descends along flat local homomorphisms. The perverse unit supplies no replacement for this infrastructure."
+   },
+   {
+    "node": "lem-weil-pbc-surjective-base-change",
+    "why": "Generic scheme/blowup or commutative-algebra tool: Base change of a surjective morphism is surjective. The perverse unit supplies no replacement for this infrastructure."
+   },
+   {
+    "node": "lem-weil-pbc-scheme-morphism-gluing",
+    "why": "Generic scheme/blowup or commutative-algebra tool: Morphisms of schemes glue along an open cover. The perverse unit supplies no replacement for this infrastructure."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lemma-nagata-glue-finite-type-ideals",
+  "def-nagata-blowup-flat-base-change-map",
+  "thm-nagata-blowup-flat-base-change",
+  "def-nagata-strict-transform-blowup-comparison",
+  "thm-nagata-strict-transform-is-blowup",
+  "cor-nagata-blowup-cartier-iso",
+  "lemma-nagata-blowup-proper",
+  "def-weil-proper-morphism",
+  "lem-weil-pbc-regular-base-change",
+  "lem-weil-pbc-regular-map-ascent",
+  "lem-weil-pbc-flat-under-regular",
+  "lem-weil-pbc-surjective-base-change",
+  "lem-weil-pbc-scheme-morphism-gluing"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q13-55b39a865",
+  "group": "Q13",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q13-55b39a865 (reviewer sub-agent of L); spot-checked: First split, no repair note. Sources fetched and read: Temkin arXiv:0904.1592v2 §2.1.14, §2.3.1–2.3.5 (the item statement matches Theorem 2.3.5, including generically reduced inputs, regular morphisms across fields and empty-blowup synchronization; the countability of Inv is left out and nothing uses it), and BMT arXiv:0905.3580v1 Theorem/Addendum 6.1, §6.3, Theorems 7.4–7.5. The 12 steps follow BMT 7.4: Q-models with smooth affine transitions, a finite-stage smooth lift through the smooth locus, Temkin Lemma 2.3.1 (the f⊔id trick) and affine gluing. lem-per-variety-rational-smooth-limit-models is true; I checked it by hand. The models come from the system of smooth f.g. Q-subalgebras of k with smooth inclusions, which is directed by generic smoothness. Generic flatness and going-down keep the models generically reduced, and the projections are regular by 07C1. The comparison clause holds: a Noetherian filtered colimit of regular rings with flat transitions is regular, flatness and regular fibres descend along the faithfully flat Y→Y_j, and the open smooth locus contains q_j(Y), so a limit argument gives a stage mapping into it. lem-per-generically-reduced-rational-invariant-calculus is BMT 6.1 with inv# over Q for generically reduced inputs, with cleanup allowed; I checked nowhere density, persistence of generic reducedness and that the centres lie over Sing X. It does not restate the item, which adds gluing, all characteristic-zero fields and all regular maps (Steps 4–12). Each step's citations were checked against the cited statements: qcqs for the ideal gluing, flatness of p_i for blowup base change, finite type for 07C1, Noetherian target for ascent, a flat local Noetherian map for flat-under-regular, surjectivity at every level for Steps 9 and 11. Edge cases checked: empty, regular, Spec Q[x,e]/(e^2,xe), components over different fields, nonseparated schemes, Cartier centres. I accept the 13 generic blowup and commutative-algebra tool_uses. Advisory only: the calculus node generalizes the reduced-only lem-trf-hilbert-samuel-resolution-invariant-calculus; the model node overlaps lem-per-elkik-rational-smooth-models, a principal-pair version that does not apply to schemes with embedded points; the Mathlib search verdict strings are shared boilerplate. No fixes."
+ }
+}

@@ -169,7 +169,32 @@
    ]
   }
  ],
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": [
+    "AlgebraicGeometry.Etale.isIso_finiteOpenComparison"
+   ]
+  },
+  "slopmaster2": {
+   "state": "closed",
+   "decls": [
+    {
+     "name": "AlgebraicGeometry.Etale.isIso_finiteOpenComparison",
+     "module": "WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.FiniteComparison",
+     "lines": [
+      232,
+      243
+     ],
+     "kind": "theorem",
+     "sorry": false
+    }
+   ],
+   "missing": [],
+   "open": []
+  }
+ },
  "chapter": "sec-proper-base-change",
  "unit": "sk-thm-p1",
  "split_report": {
@@ -196,49 +221,36 @@
   "note": "statement narrowed to the isomorphism (the compatibilities with composites and ground-field extension are used by no reached node); four steps along Stacks 0GJ1 and 0F70 (a_G an isomorphism by the unit of j_! ⊣ j^{-1} and the finite exchange; stalks of v̄_*(j_U)_!G vanish off V by the finite stalk formula; the characterization of j_!; naturality); the stalk tracing of the brief was not needed; 2 new nodes; Lean attached (closed), and to the new unit node"
  },
  "blueprint_update": {
-  "snapshot": "main-20261015",
-  "statement": "Consider a Cartesian square as in [def-weil-pbc-finite-open-comparison],\nwith $j_X,j_Y$ open immersions and $\\bar v$ finite. The morphism\n\n$$\n\\beta_{\\bar v,j_Y,G}:(j_Y)_!v_*G\\xrightarrow{\\sim}\\bar v_*(j_X)_!G\n$$\n\nof [def-weil-pbc-finite-open-comparison] is an isomorphism. It is natural in\n$G$, compatible with identity and composite finite maps, and commutes with\narbitrary base change (in particular with extension of the ground field).",
+  "snapshot": "main-20261023-1620",
+  "commit": "7284bb09daf97437d544c51882b325f9c52cd345",
+  "changed": [
+   "statement",
+   "proof"
+  ],
+  "statement": "Consider a Cartesian square as in [def-weil-pbc-finite-open-comparison],\nwith $j_X,j_Y$ open immersions and $\\bar v$ finite, and coefficients in a\ncategory $\\mathcal A$ as there. Then for every $\\mathcal A$-valued sheaf $G$\non $U_{\\mathrm{et}}$ the morphism\n\n$$\n\\beta_{\\bar v,j_Y,G}:(j_Y)_!v_*G\\xrightarrow{\\sim}\\bar v_*(j_X)_!G\n$$\n\nof [def-weil-pbc-finite-open-comparison] is an isomorphism. Hence the natural\ntransformation $\\beta:(j_Y)_!v_*\\to\\bar v_*(j_X)_!$ is a natural isomorphism.",
   "proof": [
    {
-    "text": "The preceding lemma proves that the specified map is an isomorphism and\ngives both inverse equations.",
-    "uses": [],
-    "elementary": null
-   },
-   {
-    "text": "For a morphism $\\phi:G\\to H$, naturality is the commutative square\n\n$$\n\\begin{CD}\nj_!v_*G @>{\\beta_G}>> \\bar v_*j'_!G\\\\\n@V{j_!v_*\\phi}VV @VV{\\bar v_*j'_!\\phi}V\\\\\nj_!v_*H @>{\\beta_H}>> \\bar v_*j'_!H.\n\\end{CD}\n$$\n\nAt $\\bar y\\in V$, both routes send\n$(s_{\\bar x})_{\\bar x\\mapsto\\bar y}$ to\n$(\\phi_{\\bar x}(s_{\\bar x}))_{\\bar x\\mapsto\\bar y}$; outside $V$ all four\nstalks vanish. Thus the square commutes. The same calculation with the\ninverse maps $\\gamma_G,\\gamma_H$ proves naturality of the inverse.",
-    "uses": [],
-    "elementary": null
-   },
-   {
-    "text": "If $\\bar v=\\operatorname{id}_Y$ and $v=\\operatorname{id}_V$, every fibre sum\nhas one summand. Both the unit–base-change construction of $\\beta$ and the\nsection formula are the identity of $j_!G$. This proves identity\ncompatibility.",
-    "uses": [],
-    "elementary": null
-   },
-   {
-    "text": "For composition, let $f_1:X_1\\to Y$ and $f_2:X_2\\to X_1$ be finite. Put\n$U_i=X_i\\times_YV$, let $g_1:U_1\\to V$, $g_2:U_2\\to U_1$, and denote the\nopen immersions by $j_0:V\\to Y$, $j_i:U_i\\to X_i$. The compatibility to\nprove is the outer equality in\n\n$$\n\\begin{CD}\n(j_0)_!(g_1g_2)_*G\n@>{\\beta_{f_1,g_{2,*}G}}>>\nf_{1,*}(j_1)_!g_{2,*}G\n@>{f_{1,*}\\beta_{f_2,G}}>>\nf_{1,*}f_{2,*}(j_2)_!G\\\\\n@V{\\beta_{f_1f_2,G}}V{\\sim}V\n@. @VV{=}V\\\\\n(f_1f_2)_*(j_2)_!G @= (f_1f_2)_*(j_2)_!G\n@= (f_1f_2)_*(j_2)_!G .\n\\end{CD}\n$$\n\nAt $\\bar y\\in V$, the upper route first groups a tuple by\n$\\bar x_1\\mapsto\\bar y$ and then by\n$\\bar x_2\\mapsto\\bar x_1$:\n\n$$\n\\bigoplus_{\\bar x_1\\mapsto\\bar y}\n\\left(\\bigoplus_{\\bar x_2\\mapsto\\bar x_1}G_{\\bar x_2}\\right)\n\\longrightarrow\n\\bigoplus_{\\bar x_2\\mapsto\\bar y}G_{\\bar x_2}.\n$$",
-    "uses": [],
-    "elementary": null
-   },
-   {
-    "text": "It is the canonical flattening of the doubly indexed finite sum. The lower\nroute is the same flattening for the composite fibre. Outside $V$ every\nterm is zero. This proves composition compatibility; applying the reverse\ngrouping proves the corresponding equation for $\\gamma$.",
-    "uses": [],
-    "elementary": null
-   },
-   {
-    "text": "Finally let $h:\\widetilde Y\\to Y$ be arbitrary and put tildes on all four\nschemes and maps after base change. If $h_X,h_V,h_U$ are the projections,\nopen and finite base change give the vertical isomorphisms in\n\n$$\n\\begin{CD}\nh^{-1}(j_Y)_!v_*G\n@>{h^{-1}\\beta_{\\bar v,j_Y,G}}>>\nh^{-1}\\bar v_*(j_X)_!G\\\\\n@V{\\sim}VV @VV{\\sim}V\\\\\n(\\widetilde j_Y)_!\\widetilde v_*h_U^{-1}G\n@>{\\beta_{\\widetilde{\\bar v},\\widetilde j_Y,h_U^{-1}G}}>>\n\\widetilde{\\bar v}_*(\\widetilde j_X)_!h_U^{-1}G .\n\\end{CD}\n$$\n\nThe left vertical map is\n$h^{-1}(j_Y)_!\\cong(\\widetilde j_Y)_!h_V^{-1}$ followed by\n$h_V^{-1}v_*\\cong\\widetilde v_*h_U^{-1}$; the right vertical map uses the\nsame two comparisons in the other order. At a geometric point of\n$\\widetilde V$, both routes pull each component $s_{\\bar x}$ to the\ncorresponding component over the pulled-back geometric fibre. Off\n$\\widetilde V$, both routes are zero. The rectangle therefore commutes,\nand the inverse rectangle follows from the two inverse equations.",
-    "uses": [],
-    "elementary": null
-   },
-   {
-    "text": "At a geometric point $\\bar y\\to Y$, the stalk of the left side is\n$(v_*G)_{\\bar y}$ if $\\bar y\\in V$ and $0$ otherwise; the stalk of the right\nside is the sum over the geometric points of the finite fibre $X_{\\bar y}$ of\nthe stalks of the extension by zero [def-weil-pbc-extension-by-zero], namely\n$G_{\\bar x}$ for $\\bar x\\in U_{\\bar y}$ and $0$ otherwise, and $U_{\\bar\ny}=X_{\\bar y}$ precisely when $\\bar y\\in V$. By\n[lemma-weil-pbc-finite-stalk-formula] both sides are the same finite direct sum,\nand the map of [def-weil-pbc-finite-open-comparison] is the\nidentity on each summand; conservativity of geometric stalks gives the\nisomorphism. The remaining compatibilities are built into the construction.",
+    "text": "A natural transformation is an isomorphism as soon as all its components\nare, so it suffices to show that $\\beta_G=\\beta_{\\bar v,j_Y,G}$ is an\nisomorphism for a fixed $G$. By conservativity of geometric stalks\n([lemma-weil-pbc-geometric-stalk-conservative]) it suffices to check this on\nthe stalk at every geometric point $\\bar y\\to Y$ with algebraically closed\nresidue field.",
     "uses": [
-     "def-weil-pbc-extension-by-zero",
-     "lemma-weil-pbc-finite-stalk-formula",
-     "def-weil-pbc-finite-open-comparison"
+     "lemma-weil-pbc-geometric-stalk-conservative"
+    ],
+    "elementary": false
+   },
+   {
+    "text": "*Points of $V$.* The restriction $j_Y^{-1}\\beta_G$ is an isomorphism: by the\ntriangle identity for $(j_Y)_!\\dashv j_Y^{-1}$, it is identified, via the\nunit isomorphism $v_*G\\cong j_Y^{-1}(j_Y)_!v_*G$, with the isomorphism\n$v_*G\\xrightarrow{\\sim}j_Y^{-1}\\bar v_*(j_X)_!G$ to which $\\beta_G$ is\nadjoint; the latter is built from the unit isomorphism of $(j_X)_!\\dashv\nj_X^{-1}$ and the finite base change isomorphism\n([lemma-weil-pbc-finite-exchange]). If $\\bar y$ factors through $V$, the\nstalk of $\\beta_G$ at $\\bar y$ is the stalk of $j_Y^{-1}\\beta_G$ at the lifted\npoint, hence an isomorphism.",
+    "uses": [
+     "lemma-weil-pbc-finite-exchange"
+    ],
+    "elementary": false
+   },
+   {
+    "text": "*Points outside $V$.* If $\\bar y$ does not lie in $V$, the stalk of\n$(j_Y)_!v_*G$ at $\\bar y$ is zero ([def-weil-pbc-extension-by-zero]). Since\nthe square is Cartesian, no geometric point of the finite fibre\n$X\\times_Y\\bar y$ lies in $U$, so the pullback of $(j_X)_!G$ to this fibre\nvanishes, and by finite base change the stalk of $\\bar v_*(j_X)_!G$ at\n$\\bar y$ is zero as well. A map between zero objects is an isomorphism.",
+    "uses": [
+     "def-weil-pbc-extension-by-zero"
     ],
     "elementary": false
    }
   ],
-  "note": "the current blueprint (aligned 2026-10-15 with the six-functors notes) states or proves this differently; a worker who touches the node follows it"
+  "note": "the current blueprint (main-20261023-1620, weil-conjectures-blueprint 7284bb09da) states or proves this differently; the node is proved in Lean: recorded 2026-10-23, not reopened"
  }
 }

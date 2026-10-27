@@ -28,85 +28,41 @@
  ],
  "proof": [
   {
-   "text": "Put $R=\\mathcal O_E$, $B=\\mathcal O_{E,X}$, $k=R/\\pi_E$ and $L=\\operatorname{Res}K$. The completed coefficient identification [det-prop-sfb-qlbar-colimit-x-integral-limit] and part (3) of [det-prop-integral-criterion-constant-coefficients] identify both first derived reductions with the same object $M=K\\otimes_B^L k_X\\simeq L\\otimes_{R_X}^L k_X$.",
+   "text": "Transport boundedness by the specified exact faithful realization and homology by its natural homology comparison. Apply the heart-level scalar-model comparison degree by degree.",
    "uses": [
-    "det-prop-sfb-qlbar-colimit-x-integral-limit",
-    "det-prop-integral-criterion-constant-coefficients"
+    "def-sfb-integral-constant-model-realization",
+    "lem-sfb-integral-constant-model-realization"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-integral-models/sk-lem-integral-models-stacks.md",
-    "place": "Unit proof (1)–(2), coefficient map and residue identification"
-   }
+   "elementary": true
   },
   {
-   "text": "By [lem-weil-pbc-restriction-local-completeness], applied to $R_X\\to B$ and $(\\pi_E)$, $K$ is locally derived complete exactly when $L$ is. The DVR statement [lem-weil-l-adic-extension-integers-dvr] makes $R$ Noetherian: every ideal has one generator. Thus [lem-weil-pbc-constant-completion-equivalence] applies to $R$, $(\\pi_E)$ and the completion $B$ of step 1; its unit compatibility identifies local and quotient-tower completeness on both sides. This checks the conventions needed for the complete-object equivalence below.",
-   "uses": [
-    "lem-weil-pbc-restriction-local-completeness",
-    "lem-weil-l-adic-extension-integers-dvr",
-    "lem-weil-pbc-constant-completion-equivalence"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/algebraization.tex",
-    "place": "Tag 099C, lemma-restriction-derived-complete; completion conventions: proetale.tex Tag 099M, lemma-naive-completion"
-   }
-  },
-  {
-   "text": "Noetherian $X$ is quasi-compact and locally Noetherian; [lem-weil-pbc-locally-noetherian-quasi-separated] supplies quasi-separatedness. The residue $k$ is a finite field [def-weil-l-adic-coefficient-extension], hence discrete Noetherian (its only ideals are $0,k$). Apply [lem-sfb-constructible-local-tor-etale-origin] to $M$: its constructible cohomology and local finite Tor dimension are equivalent to bounded constructible étale origin with finite Tor amplitude.",
-   "uses": [
-    "lem-weil-pbc-locally-noetherian-quasi-separated",
-    "def-weil-l-adic-coefficient-extension",
-    "lem-sfb-constructible-local-tor-etale-origin"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/proetale.tex",
-    "place": "Tag 09C1, definition-Dbc, residue condition; étale origin supplied by the extracted lemma"
-   }
-  },
-  {
-   "text": "[lem-sfb-integral-cohomological-adic-criterion] says $K\\in\\Dbc(X,R)$ exactly when $K$ is locally derived complete and its first reduction has the étale origin of step 3. Substitute the reduction identification of step 1, the completeness equivalence of step 2, and the residue criterion of step 3. The étale constructibility conventions agree: over the field $k$, finitely generated means finite-dimensional, and on Noetherian $X$ the affine-local strata of [def-pe-etale-constructible-module] give one global stratification by [lem-sfb-noetherian-global-constructibility] (étale site, $R=k$), the converse being restriction to affine opens. The resulting conjunction is precisely the definition of $L\\in\\Dc(X,R)$, proving both implications for arbitrary $K$.",
+   "text": "Apply the cohomological adic criterion to the transported complex. The complete-object and residue comparisons identify the resulting adic predicate with stacksConstructible of Res K.",
    "uses": [
     "lem-sfb-integral-cohomological-adic-criterion",
-    "lem-sfb-noetherian-global-constructibility",
-    "def-pe-etale-constructible-module"
+    "lem-sfb-integral-models-completion-transport",
+    "lem-sfb-integral-models-residue-transport"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-integral-models/sk-lem-integral-models-stacks.md",
-    "place": "Unit proof (1)–(2), comparison with the integral criterion"
-   }
+   "elementary": true
   },
   {
-   "text": "Part (2) of [det-prop-integral-criterion-constant-coefficients], with the convention check of step 2, gives an equivalence on complete objects. Step 4 identifies the selected full subcategories. Restriction is fully faithful on them since the Hom maps are unchanged. Given $L\\in\\Dc(X,R)$, its complete preimage $K$ lies in $\\Dbc(X,R)$ by step 4. This proves essential surjectivity and the asserted equivalence induced by $\\operatorname{Res}$.",
+   "text": "Restrict the complete-object equivalence to the selected full subcategories. Full faithfulness follows from their fully faithful inclusions. A Stacks constructible object has a complete preimage, and the membership equivalence makes that preimage bounded constructible. Compose the inclusion isomorphisms to identify its forward functor with Res.",
    "uses": [
-    "det-prop-integral-criterion-constant-coefficients"
+    "lem-sfb-integral-models-completion-transport"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-integral-models/sk-lem-integral-models-stacks.md",
-    "place": "Unit proof (1)–(2), equivalence restricted to the selected objects"
-   }
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "det-prop-sfb-qlbar-colimit-x-integral-limit",
-  "det-prop-integral-criterion-constant-coefficients",
-  "lem-weil-pbc-restriction-local-completeness",
-  "lem-weil-l-adic-extension-integers-dvr",
-  "lem-weil-pbc-constant-completion-equivalence",
-  "lem-weil-pbc-locally-noetherian-quasi-separated",
-  "def-weil-l-adic-coefficient-extension",
-  "lem-sfb-constructible-local-tor-etale-origin",
+  "def-sfb-integral-constant-model-realization",
+  "lem-sfb-integral-constant-model-realization",
   "lem-sfb-integral-cohomological-adic-criterion",
-  "lem-sfb-noetherian-global-constructibility",
-  "def-pe-etale-constructible-module"
+  "lem-sfb-integral-models-completion-transport",
+  "lem-sfb-integral-models-residue-transport"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-integral-models/sk-lem-integral-models-stacks.md",
-  "place": "Unit sk-lem-integral-models proof (1)–(2), retaining the existing reduction/completeness route and extracting the combined residue descent argument."
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-lem-integral-models/_section.md",
+  "place": "Proof (1)–(2), unchanged route through the cohomological adic criterion and complete-object equivalence; explicit section-presentation comparisons."
  },
  "mathlib_searches": [
   {
@@ -212,7 +168,18 @@
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q48-7e268ba0b (reviewer sub-agent of L); spot-checked: Read the item, the new node lem-sfb-constructible-local-tor-etale-origin and every cited statement, along with Stacks proetale 09C1, 09AJ, 09C2 (2),(4) with its proof, and 09AL, the blueprint proof and unit step (1)-(2), and the repair note. The item statement is byte-identical to the previous split. The re-split note is answered: one new statement-only node, and five short steps (2199 characters). Steps 1, 2, 3 and 5 are correct. Step 1 uses part (3) of the proposition with n=1. Step 2 uses the restriction reflection for arbitrary complexes, the PID property for Noetherianity and the Koszul/quotient unit identification. Step 3 gives qcqs and k a Noetherian field. Step 5 is elementary. The new node (Stacks 09C2 at n=1) is true. One direction is local-to-global Tor, the unit test for boundedness, the constructible comparison, then Tor reflection; the other is the converse. Tested on X empty, M=0, the zero ring, nu^*Z/l and the unbounded sum of k[n]. It is not a duplicate (09C2 and local-Tor candidates in the DAG and blueprint were read), it does not restate an item clause, and there is no cycle. Three repairs, written to fixes/dag/nodes/sec-six-functors-basics/. (1) C1/C4 in item step 4: the criterion's étale constructibility (global stratification, finite-dimensional values) differs from def-pe-etale-constructible-module (affine-local strata, finitely generated values). Step 4 now cites lem-sfb-noetherian-global-constructibility and def-pe-etale-constructible-module, and proof_deps is updated. (2) B3 in the new node: nu_X^* now cites the defining node def-weil-pbc-site-comparison-morphism, with det-pe-classical-sheaves-modules kept for exactness. (3) B5 in the new node: the source is now Tag 09C2 (2),(4) with 09AL, instead of 09AL alone, and the missing lean_audit field is added. No SGA source is cited. Accepted tool_uses: restriction-local-completeness, constant-completion-equivalence and the l-adic DVR lemma.; 2 file(s) fixed by the reviewer"
  },
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
  "tool_uses": [
   "lem-weil-pbc-restriction-local-completeness",
   "lem-weil-pbc-constant-completion-equivalence",
@@ -231,35 +198,24 @@
   "module": "Sheaf.AlgebraicGeometry.IntegralModelsStacks",
   "declaration": "AlgebraicGeometry.ProEtale.IntegralModelsStacks.integral_models_stacks",
   "declarations": [
-   "AlgebraicGeometry.ProEtale.IntegralModelsStacks.discreteSheaf",
-   "AlgebraicGeometry.ProEtale.IntegralModelsStacks.discreteObj",
-   "AlgebraicGeometry.ProEtale.IntegralModelsStacks.discreteObj_comm",
-   "AlgebraicGeometry.ProEtale.IntegralModelsStacks.constantToContinuous",
-   "AlgebraicGeometry.ProEtale.IntegralModelsStacks.discreteMap",
-   "AlgebraicGeometry.ProEtale.IntegralModelsStacks.discreteMap_mon",
-   "AlgebraicGeometry.ProEtale.IntegralModelsStacks.sectionMap",
-   "AlgebraicGeometry.ProEtale.IntegralModelsStacks.smallRing",
-   "AlgebraicGeometry.ProEtale.IntegralModelsStacks.smallMap",
-   "AlgebraicGeometry.ProEtale.IntegralModelsStacks.smallModules",
-   "AlgebraicGeometry.ProEtale.IntegralModelsStacks.smallDerivedObject",
-   "AlgebraicGeometry.ProEtale.IntegralModelsStacks.integersObj",
-   "AlgebraicGeometry.ProEtale.IntegralModelsStacks.integersObj_comm",
-   "AlgebraicGeometry.ProEtale.IntegralModelsStacks.scalarPointMap",
-   "AlgebraicGeometry.ProEtale.IntegralModelsStacks.scalarPointMap_mon",
-   "AlgebraicGeometry.ProEtale.IntegralModelsStacks.scalarMap",
-   "AlgebraicGeometry.ProEtale.IntegralModelsStacks.scalarMap_mon",
-   "AlgebraicGeometry.ProEtale.IntegralModelsStacks.residueMap",
-   "AlgebraicGeometry.ProEtale.IntegralModelsStacks.residueMap_mon",
-   "AlgebraicGeometry.ProEtale.IntegralModelsStacks.restriction",
-   "AlgebraicGeometry.ProEtale.IntegralModelsStacks.stacksConstructible",
    "AlgebraicGeometry.ProEtale.IntegralModelsStacks.integral_models_stacks"
   ],
   "file": "lean/Sheaf/AlgebraicGeometry/IntegralModelsStacks.lean",
-  "statement": "theorem integral_models_stacks (l : ℕ) [Fact l.Prime] (E : Type u) [Field E] [Algebra (Padic l) E] [FiniteDimensional (Padic l) E] (X : Scheme.{u}) [IsNoetherian X] : (∀ K, constantModelBoundedConstructible (integersObj l E) X K ↔ stacksConstructible l E X ((restriction l E X).obj K)) ∧ ∃ e : ConstantModelBoundedConstructible (integersObj l E) X ≌ (stacksConstructible l E X).FullSubcategory, Nonempty (e.functor ⋙ (stacksConstructible l E X).ι ≅ (constantModelBoundedConstructible (integersObj l E) X).ι ⋙ restriction l E X)",
+  "statement": "theorem integral_models_stacks (l : ℕ) [Fact l.Prime]\n    (E : Type u) [Field E] [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]\n    (X : Scheme.{u}) [IsNoetherian X] :\n    (∀ K, constantModelBoundedConstructible (integersObj l E) X K ↔\n      stacksConstructible l E X ((restriction l E X).obj K)) ∧\n    ∃ e : ConstantModelBoundedConstructible (integersObj l E) X ≌\n        (stacksConstructible l E X).FullSubcategory,\n      Nonempty (e.functor ⋙ (stacksConstructible l E X).ι ≅\n        (constantModelBoundedConstructible (integersObj l E) X).ι ⋙ restriction l E X)",
   "branch": "newtargets-dag",
   "by": "N1",
   "date": "2026-10-18",
   "existing": false,
   "note": "The auxiliary definitions spell out the Stacks category introduced in the statement and the specified restriction functor. Completeness uses the existing local predicate after sectionwise transport to an equivalent small site. Coefficients and maps are constructed from actual constant sheaves, constant continuous functions, and the scalar quotient; no comparison or functor is postulated."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "C-bcd0e",
+  "group": "W6",
+  "result": "fix",
+  "landing": "20261024T021935-L-2879228",
+  "kind": "interface",
+  "note": "independent cc review: item statement vs live clone (identical); moved Data block vs original item block (verbatim); new sorry statements vs blueprint unit steps (1)-(2) and Stacks 099C/099M/09C2/09AL; item node proof_deps vs Lean proof; both direct importers compiled against the delivery"
  }
 }

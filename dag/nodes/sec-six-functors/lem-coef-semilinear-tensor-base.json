@@ -1,0 +1,112 @@
+{
+ "kind": "statement",
+ "status": "split",
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "mathlib_match": null,
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-coef-integral-exceptional-adjoint",
+   "place": "Construction 4.1 tensor part of the proof of lem-coef-semilinear-system-existence.",
+   "via": [
+    "lem-coef-semilinear-system-existence"
+   ]
+  },
+  "same_as": []
+ },
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.SemilinearTensorCoherence",
+  "date": "2026-10-26",
+  "group": "P5"
+ },
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/zheng-six-operations-lefschetz-verdier-DM-stacks_arXiv-1006.3810.pdf",
+  "place": "Construction 4.1 tensor models; implemented by applying the existing evaluation-normalized ringed-site tensor-Hom adjunction (Stacks 08J9) on the sequence site and at every coefficient level. H3, 2026-10-26."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "derived tensor closed monoidal sheaf models",
+   "results": "No exact theorem for the full normalized system package.",
+   "date": "2026-10-26",
+   "verdict": "split component remains."
+  },
+  {
+   "tool": "grep",
+   "query": "SystemTensorBase|SystemTensorComparisons|systemTensorReduction",
+   "results": "No existing declarations before this delivery.",
+   "date": "2026-10-26",
+   "verdict": "new component."
+  },
+  {
+   "tool": "leansearch",
+   "query": "tensor reduction compatibility derived systems",
+   "results": "Generic tensor and adjunction APIs only.",
+   "date": "2026-10-26",
+   "verdict": "split component remains."
+  }
+ ],
+ "id": "lem-coef-semilinear-tensor-base",
+ "title": "Base closed tensor models for semilinear systems",
+ "statement": "For the site and ring tower of [def-coef-semilinear-system-models], there are closed structures and K-flat total-tensor models on the sequence site and at every coefficient level.",
+ "source": {
+  "document": "literature/zheng-six-operations-lefschetz-verdier-DM-stacks_arXiv-1006.3810.pdf",
+  "place": "Construction 4.1, tensor descent before evaluation and scalar comparison."
+ },
+ "stmt_deps": [
+  "def-coef-semilinear-derived-calculus",
+  "def-coef-semilinear-system-models"
+ ],
+ "proof": [
+  {
+   "text": "The sequence category is essentially small by sequenceSmall, so use abelianSheafify, locallyBijective, and hasDerived at the coefficient universe max(c,v,r). Apply RingedDerivedNative.closedAdjunction to the actual sequence topology and systemRing. It supplies a Closed structure and its Models data for precisely the recorded derived internal Hom. Apply the same theorem on J with B(n) for every natural number n.",
+   "uses": [
+    "def-coef-semilinear-system-models",
+    "lem-sf-ringed-derived-tensor-hom-adjunction"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use classical choice for the family of level structures and their nonempty model types. Assemble the sequence structure, its model, the level structures, and their models into SystemTensorBase. No compatibility between these four fields is required by SystemTensorBase; the parent comparison construction retains those obligations.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-coef-semilinear-system-models",
+  "lem-sf-ringed-derived-tensor-hom-adjunction"
+ ],
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.SemilinearTensorBase",
+  "file": "lean/Sheaf/Paper/SemilinearTensorBase.lean",
+  "declaration": "WeilConjectures.SemilinearSections.systemTensorBase_nonempty",
+  "statement": "theorem systemTensorBase_nonempty :\n    Nonempty (SystemTensorBase.{c, v, r} J B τ)",
+  "branch": "sheaf-dag",
+  "by": "P5",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P5",
+  "result": "pass",
+  "landing": "20261026T092234-L-3416155",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H3",
+  "result": "pass",
+  "landing": "20261026T102401-L-347995",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

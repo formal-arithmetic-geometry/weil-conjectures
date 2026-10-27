@@ -114,7 +114,59 @@
   "thm-zl-lefschetz-weil-identity"
  ],
  "proof_split_by": "labels",
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
  "chapter": "sec-zeta-weil",
- "unit": "sk-thm-tracetodeterminant"
+ "unit": "sk-thm-tracetodeterminant",
+ "blueprint_update": {
+  "snapshot": "main-20261023-1620",
+  "commit": "7284bb09daf97437d544c51882b325f9c52cd345",
+  "changed": [
+   "statement"
+  ],
+  "statement": "Fix the finite-field datum\n$p,a,q,k_0,k$, where $q=p^a$, and choose a prime $\\ell\\neq p$;\nwrite $\\Ql=\\mathbf Q_\\ell$, choose an algebraic closure $\\Qlb$ of\n$\\Ql$, and let $Y_0$ be a\nseparated finite-type\n$k_0$-scheme and put $Y=Y_0\\times_{k_0}k$. Let $(K,\\phi_K)$ be a\nWeil complex with $K\\in D^b_c(Y,\\Qlb)\\subset D(Y_{\\mathrm{proét}},\\Qlb)$\n([det-def-sfb-bounded-constructible], [sk-def-sf-weil-complexes],\n[def-weil-weil-sheaf-complex]). Use the\ngeometric Frobenius convention; the induced\ncohomological action $F$ is the\nglobal geometric-Frobenius\naction. Use the\nlocal Frobenius operators and the\ncompact-support cohomology\ndefined for this complex.\nFor every integer $n\\geq1$ and each point\n$x\\in Y_0(\\mathbf F_{q^n})$, choose a\ngeometric point\n$\\bar x\\to Y$ over $x$, iterate its local Weil isomorphism $n$ times,\nand write $K_{\\bar x}= L\\bar x^*K$, using the\nderived pullback. The trace\nidentity, with values in $\\Qlb$, is\n\n$$\n\\sum_{x\\in Y_0(\\mathbf F_{q^n})}\\sum_{j\\in\\mathbf Z}(-1)^j\n\\Tr\\bigl(F_x^{(n)}\\mid\n\\mathcal H^j(K)_{\\bar x}\\bigr)\n=\n\\sum_{i\\in\\mathbf Z}(-1)^i\\Tr(F^n\\mid H_c^i(Y,K)).\n$$\n\nIf $K$ and $\\phi_K$ are obtained by extension of scalars from a Weil\ncomplex $(K_E,\\phi_{K_E})$ over a finite extension $E/\\Ql$ inside $\\Qlb$,\nwhich is always possible by [sk-thm-sfb-qlbar-two-colimit] (3) for $K$ and\n(2) for $\\phi_K$, both sides are the images under $E\\hookrightarrow\\Qlb$ of\nthe corresponding $E$-valued traces for $K_E$.\n\nFor $K=(\\Qlb)_Y=p_Y^*\\Qlb$ with its canonical Weil structure and\nproper $Y_0$, the\npoint-count convention specializes to\n\n$$\n\\#Y_0(\\mathbf F_{q^n})\n=\\sum_{i\\in\\mathbf Z}(-1)^i\\Tr(F^n\\mid H^i(Y,\\Qlb)).\n$$\n\nHere $F_x^{(n)}$ and $K_{\\bar x}$ are the\nlocal Frobenius and stalk\nconstructions, and $H_c^i$ is\ncompact-support cohomology of the pro-étale site.",
+  "proof": [
+   {
+    "text": "*Step 1: the identity.* The local data of the interface are the\nlocal Frobenius operators $F_x^{(n)}$ and the stalk complexes\n$K_{\\bar x}=L\\bar x^*K$ of\n[def-weil-local-frobenius-trace], computed with the derived\npullback of [def-weil-derived-pullback-tensor-hom] and traced\nalternately over the cohomology sheaves of\n[def-weil-derived-cohomology-sheaves]; the\nglobal side is the compact-support cohomology of\n[def-weil-ordinary-compact-cohomology] with the geometric-Frobenius\noperator of [def-weil-global-geometric-frobenius]. With these\nidentifications, and the induced Frobenius operators on the geometric\nstalks of [def-trf-frobenius-operators], the displayed identity is the\nGrothendieck–Lefschetz trace formula [det-thm-tf-uniform-formula-weil] in its\nform (2) for $\\Lambda=\\Qlb$ and $m=n$: the complexes are perfect, so the\nalternating sums of traces over cohomology are the traces of\n[det-thm-tf-uniform-formula-weil] (1), and all sums over degrees are finite.\nThat theorem is proved in the trace-formula chapter from the finite-ring\ntrace formula, the Lefschetz–Verdier comparison on the projective line and\nthe local-term computations. The properness hypothesis in the\nLefschetz–Verdier comparison cannot be dropped for an arbitrary\ncorrespondence on a non-proper scheme.\n\nFor the $E$-model clause: if $K\\cong(K_E)_{\\Qlb}$ compatibly with the Weil\nstructures, the stalks and the compactly supported cohomology of $K$ are\nobtained from those of $K_E$ by the flat extension of scalars, compatibly\nwith the Frobenius operators ([sk-prop-scalar-six]), and traces commute\nwith extension of scalars; such a model exists by\n[sk-thm-sfb-qlbar-two-colimit] (3), and the Weil structure descends to\nsome finite $E$ by (2) applied with $r=0$, after enlarging $E$.",
+    "uses": [
+     "def-weil-local-frobenius-trace",
+     "def-weil-derived-pullback-tensor-hom",
+     "def-weil-derived-cohomology-sheaves",
+     "def-weil-ordinary-compact-cohomology",
+     "def-weil-global-geometric-frobenius",
+     "def-trf-frobenius-operators",
+     "det-thm-tf-uniform-formula-weil",
+     "sk-thm-sfb-qlbar-two-colimit"
+    ],
+    "elementary": false
+   },
+   {
+    "text": "*Step 2: the point-count specialization.* For\n$K=(\\Qlb)_Y$ and proper $Y_0$, the\ninterface's constant-sheaf clause is [cor-trf-point-counting],\nwhose second form replaces compact-support by ordinary cohomology via\nthe proper coincidence of [prop-weil-proper-compact-coincidence];\nthe point-count convention is the one of\n[def-weil-point-counts-zeta].",
+    "uses": [
+     "cor-trf-point-counting",
+     "prop-weil-proper-compact-coincidence",
+     "def-weil-point-counts-zeta"
+    ],
+    "elementary": false
+   },
+   {
+    "text": "*Step 3: the determinant form.* In the smooth-proper\ngeometrically connected case the same trace formula is the input of\nthe trace-to-determinant identity [thm-zl-lefschetz-weil-identity]\nof the zeta chapter, which converts the per-iterate point counts into the\ndeterminant factorization of the zeta series.",
+    "uses": [
+     "thm-zl-lefschetz-weil-identity"
+    ],
+    "elementary": false
+   }
+  ],
+  "note": "the current blueprint (main-20261023-1620, weil-conjectures-blueprint 7284bb09da) states or proves this differently; the node is proved in Lean: recorded 2026-10-23, not reopened"
+ }
 }

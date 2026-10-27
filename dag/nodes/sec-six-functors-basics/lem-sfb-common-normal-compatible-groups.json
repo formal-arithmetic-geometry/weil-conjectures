@@ -1,0 +1,252 @@
+{
+ "id": "lem-sfb-common-normal-compatible-groups",
+ "kind": "statement",
+ "title": "Simultaneous normal constants and compatible finite product groups",
+ "statement": "Let $e$ be a field, $I$ a nonempty finite set, and, for each $i\\in I$, let $F_i/e$ be a finite field extension and $J_i$ a finite group equipped with a homomorphism $\\rho_i:J_i\\to\\operatorname{Aut}_e(F_i)$. The homomorphisms need not be injective. There exist a finite normal extension $K/e$ and $e$-embeddings $u_i:F_i\\hookrightarrow K$ with the following properties. Put $A=\\operatorname{Aut}_e(K)$, $G=A\\times\\prod_{t\\in I}J_t$, and let $\\pi:G\\to A$ be the first projection. The groups $A$ and $G$ are finite and $\\pi$ is surjective. For each $i$, the subset\n$$\\Gamma_i=\\{(a,(j_t)_t)\\in G: a\\circ u_i=u_i\\circ\\rho_i(j_i)\\}$$\nis a subgroup, and its coordinate map $r_i:\\Gamma_i\\to J_i$ is surjective. Moreover\n$$\\pi(\\ker r_i)=\\operatorname{Aut}_{u_i(F_i)}(K)$$\nas subgroups of $\\operatorname{Aut}_e(K)$: an automorphism on the right fixes every element of the embedded field $u_i(F_i)$. The fixed subfield $K^{\\pi(G)}=\\{x\\in K: a(x)=x\\text{ for every }a\\in\\pi(G)\\}$ is purely inseparable over $e$. Here normal means that the minimal polynomial over $e$ of every element of $K$ splits into linear factors in $K[T]$; no separability of $F_i/e$ or $K/e$ is assumed. Fields, finite extensions, and pure inseparability use [def-weil-field], [def-pc-field-extension], and [def-pc-field-tower].",
+ "source": {
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "X 2.3 Step 2, printed p.150, graph enlargement before (2.b); agent-formulated simultaneous common-normal-field elaboration, former steps 1–2 of lem-sfb-common-field-semilinear-induction. Supporting field lemmas are Stacks Tags 09DT (lemma-normal-closure), 0BME (lemma-lift-maps (2)), and 030M (lemma-normal-case (2)); the common-compositum argument is retained in report.md."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-pc-field-extension",
+  "def-pc-field-tower"
+ ],
+ "proof": [
+  {
+   "text": "Enumerate $I=\\{i_1,\\ldots,i_n\\}$. Inductively construct a finite $L_r/e$ with embeddings of $F_{i_1},\\ldots,F_{i_r}$, starting with $L_0=e$. By [lem-weil-common-extension-fields], embed $L_r$ and $F_{i_{r+1}}$ over $e$ into a field $\\Omega_r$. Identify both fields with their images in $\\Omega_r$; the images of $e$ agree because the embeddings fix $e$. Take their compositum $L_{r+1}$ in $\\Omega_r$. By [lem-weil-pbc-compositum-degree-bound], $L_{r+1}/L_r$ is finite with degree at most $[F_{i_{r+1}}:e]$. It is finite over $e$ directly: if $b_s$ span $L_r/e$ and $c_t$ span $L_{r+1}/L_r$, then writing $x=\\sum_t a_tc_t$ and $a_t=\\sum_s d_{st}b_s$ expresses $x$ as an $e$-linear combination of the finitely many $b_sc_t$. Compose the old embeddings with the induced embedding $L_r\\hookrightarrow L_{r+1}$ and use the new embedding of $F_{i_{r+1}}$. This proves the induction and supplies $L_n$.",
+   "uses": [
+    "lem-weil-common-extension-fields",
+    "lem-weil-pbc-compositum-degree-bound"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/fields.tex",
+    "place": "Tags 0H7K (lemma-common-extension-field), 09ID (definition-compositum); compositum finiteness as in the cited degree-bound node; finite-family induction and spanning-set argument written by Q120."
+   }
+  },
+  {
+   "text": "Apply [lem-weil-pbc-finite-extension-in-finite-normal-extension] to the finite extension $L_n/e$. It gives an extension $K/L_n$ finite and normal over $e$. Composing the embeddings into $L_n$ with $L_n\\hookrightarrow K$ gives all $u_i$.",
+   "uses": [
+    "lem-weil-pbc-finite-extension-in-finite-normal-extension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/fields.tex",
+    "place": "Tag 09DT (lemma-normal-closure), existence clause."
+   }
+  },
+  {
+   "text": "By [lem-weil-pbc-finite-extension-finitely-many-embeddings], applied with base $e$, domain $K$ and codomain $K$, the set of $e$-algebra maps $K\\to K$ is finite. Forgetting the inverse embeds $A=\\operatorname{Aut}_e(K)$ in this set, so $A$ is finite. Thus $G=A\\times\\prod_{t\\in I}J_t$ is finite. The map $a\\mapsto(a,(1)_t)$ is a right inverse of $\\pi$, proving surjectivity.",
+   "uses": [
+    "lem-weil-pbc-finite-extension-finitely-many-embeddings"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/fields.tex",
+    "place": "Tag 09HS (lemma-normal-and-automorphisms); use the existing more general embedding-count node; finite products and the displayed section are elementary."
+   }
+  },
+  {
+   "text": "Fix $i$. The identity belongs to $\\Gamma_i$. If $(a,j),(b,k)\\in\\Gamma_i$, then $ab\\circ u_i=a\\circ u_i\\circ\\rho_i(k_i)=u_i\\circ\\rho_i(j_i)\\circ\\rho_i(k_i)=u_i\\circ\\rho_i(j_ik_i)$, so their product belongs to $\\Gamma_i$. From $a\\circ u_i=u_i\\circ\\rho_i(j_i)$, composing on the left with $a^{-1}$ and on the right with $\\rho_i(j_i)^{-1}$ gives $a^{-1}\\circ u_i=u_i\\circ\\rho_i(j_i^{-1})$. Thus inverses belong as well. This proves the subgroup assertion, and restriction of the $i$th coordinate projection is the homomorphism $r_i$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "ILO X 2.3 Step 2, printed p.150, graph enlargement before (2.b); elementary product-group calculation written by Q120."
+   }
+  },
+  {
+   "text": "Given $j\\in J_i$, conjugate $\\rho_i(j)$ by $u_i$ to obtain an $e$-automorphism $\\tau$ of the subfield $u_i(F_i)\\subseteq K$. Apply [lem-sfb-normal-intermediate-isomorphism-lifts] with $k=e$, $L=K$ and $M_1=M_2=u_i(F_i)$. It gives $a\\in A$ satisfying $a\\circ u_i=u_i\\circ\\rho_i(j)$. Take $j_i=j$ and $j_t=1$ for $t\\ne i$. Then $(a,(j_t)_t)\\in\\Gamma_i$ and maps to $j$, proving $r_i$ surjective.",
+   "uses": [
+    "lem-sfb-normal-intermediate-isomorphism-lifts"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/fields.tex",
+    "place": "Tag 0BME (lemma-lift-maps), part (2); apply to the embedded intermediate field, with no normality assumption on it."
+   }
+  },
+  {
+   "text": "If $(a,(j_t)_t)\\in\\ker r_i$, then $j_i=1$ and its compatibility equation reads $a\\circ u_i=u_i$, so $a$ fixes $u_i(F_i)$ pointwise. This gives $\\pi(\\ker r_i)\\subseteq\\operatorname{Aut}_{u_i(F_i)}(K)$. Conversely, if $a\\in A$ fixes $u_i(F_i)$, the tuple $(a,(1)_t)$ belongs to $\\Gamma_i$ and to $\\ker r_i$, and projects to $a$. This gives the reverse inclusion and hence the asserted subgroup equality.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "ILO X 2.3 Step 2, printed p.150, graph enlargement; elementary kernel-image calculation for the compatible product subgroups, written by Q120."
+   }
+  },
+  {
+   "text": "Since $\\pi$ is surjective, its image is $A$ and $K^{\\pi(G)}=K^A$. Apply [lem-weil-pbc-normal-extension-fixed-field-purely-inseparable] to $K/e$, which is algebraic and normal by step 2. It says exactly that $K^A/e$ is purely inseparable, as required.",
+   "uses": [
+    "lem-weil-pbc-normal-extension-fixed-field-purely-inseparable"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/fields.tex",
+    "place": "Tag 030M (lemma-normal-case), part (2), with the fixed field identified in its proof; ILO X 2.3 Step 2, printed p.151, radicial fixed-field assertion."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-common-extension-fields",
+  "lem-weil-pbc-compositum-degree-bound",
+  "lem-weil-pbc-finite-extension-in-finite-normal-extension",
+  "lem-weil-pbc-finite-extension-finitely-many-embeddings",
+  "lem-sfb-normal-intermediate-isomorphism-lifts",
+  "lem-weil-pbc-normal-extension-fixed-field-purely-inseparable"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "X 2.3 Step 2, printed pp.150–151, graph enlargement and radicial fixed field; finite-family elaboration using Stacks 0H7K, 09ID, 09DT, 09HS, 0BME and 030M. Original field/compositum argument retained from coord/reports/Q28/lem-sfb-common-field-semilinear-induction.md, original steps 1–2."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Finite family of finite field extensions with finite automorphism group actions admit a common finite normal extension and compatible subgroups of one product group",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"fixedByFinite\", \"module\": \"Mathlib/FieldTheory/KrullTopology\", \"type\": \"(K : Type u_1) →\\n  (L : Type u_2) → [inst : Field K] → [inst_1 : Field L] → [inst_2 : Algebra K L] → Set (Subgroup Gal(L/K))\", \"doc\": \"The set of subgroups of the Galois group $\\\\text{Gal}(L/K)$ obtained by taking the fixing subgroup for each finite intermediate field $E$ between $K$ and $L$, where each subgroup consists of automorphi\"}\n  {\"name\": \"galBasis\", \"module\": \"Mathlib/FieldTheory/KrullTopology\", \"type\": \"(K : Type u_1) → (L : Type u_2) → [inst : Field K] → [inst_1 : Field L] → [inst_2 : Algebra K L] → FilterBasis Gal(L/K)\", \"doc\": \"The filter basis for the Krull topology on the Galois group $\\\\text{Gal}(L/K)$, consisting of subgroups that fix finite intermediate fields between $K$ and $L$. Each basis element is the subgroup of au\"}\n  {\"name\": \"finGaloisGroupMap\", \"module\": \"Mathlib/FieldTheory/Galois/Profinite\", \"type\": \"{k : Type u_1} →\\n  {K : Type u_2} →\\n    [inst : Field k] →\\n      [inst_1 : Field K] →\\n        [inst_2 : Algebra k K] →\\n          {L₁ L₂ : (FiniteGaloisIntermediateField k K)ᵒᵖ} →\\n            (L₁ ⟶ L₂) → ((Opposite.unop L₁).finGaloisGroup ⟶ (Opposite.unop L₂).finGaloisGroup)\", \"doc\": \"For finite Galois intermediate fields $L_1$ and $L_2$ in a Galois extension $K/k$, this constructs a group homomorphism from $\\\\text{Gal}(L_1/k)$ to $\\\\text{Gal}(L_2/k)$ by restricting automorphisms of \"}\n  {\"name\": \"InfiniteGalois.isOpen_and_normal_iff_finite_and_isGalois\", \"module\": \"Mathlib/FieldTheory/Galois/Infinite\", \"type\": \"∀ {k : Type u_1} {K : Type u_2} [inst : Field k] [inst_1 : Field K] [inst_2 : Algebra k K] (L : IntermediateField k K)\\n  [IsGalois k K], IsOpen L.fixingSubgroup.carrier ∧ L.fixingSubgroup.Normal ↔ FiniteDimensional k ↥L ∧ IsGalois k ↥L\", \"doc\": \"For an intermediate field $ L $ between $ k $ and $ K $ in an infinite Galois extension $ K/k $, the fixing subgroup of $ L $ in the Galois group $ \\\\text{Gal}(K/k) $ is both open (in the Krull topolog\"}\n  {\"name\": \"IsGaloisGroup.fixedPoints\", \"module\": \"Mathlib/FieldTheory/Galois/IsGaloisGroup\", \"type\": \"∀ (G : Type u_1) (L : Type u_4) [inst : Group G] [inst_1 : Field L] [inst_2 : MulSemiringAction G L] [Finite G]\\n  [FaithfulSMul G L], IsGaloisGroup G (↥(FixedPoints.subfield G L)) L\", \"doc\": \"If $ G $ is a finite group acting faithfully on a field $ L $, then $ G $ is the Galois group of the field extension $ L $ over the subfield of elements fixed by the action of $ G $.\"}\n  {\"name\": \"top_fixedByFinite\", \"module\": \"Mathlib/FieldTheory/KrullTopology\", \"type\": \"∀ {K : Type u_1} {L : Type u_2} [inst : Field K] [inst_1 : Field L] [inst_2 : Algebra K L], ⊤ ∈ fixedByFinite K L\", \"doc\": \"The entire Galois group $\\\\text{Gal}(L/K)$ is an element of the set of subgroups that fix every finite intermediate field between $K$ and $L$.\"}\n  {\"name\": \"IsGaloisGroup.intermediateField\", \"module\": \"Mathlib/FieldTheory/Galois/IsGaloisGroup\", \"type\": \"∀ (G : Type u_1) (K : Type u_3) (L : Type u_4) [inst : Group G] [inst_1 : Field K] [inst_2 : Field L]\\n  [inst_3 : Algebra K L] [inst_4 : MulSemiringAction G L] (F : IntermediateField K L) [Finite G]\\n  [hGKL : IsGaloisGroup G K L], IsGaloisGroup (↥(fixingSubgroup G ↑F)) (↥F) L\", \"doc\": \"For a finite Galois extension $ L/K $ with Galois group $ G $, and an intermediate field $ F $ (i.e., $ K \\\\subseteq F \\\\subseteq L $), the subgroup of $ G $ consisting of all automorphisms that fix eve\"}\n  {\"name\": \"IsGalois.fixingSubgroup_normal_of_isGalois\", \"module\": \"Mathlib/FieldTheory/Galois/Basic\", \"type\": \"∀ {K : Type u_3} {L : Type u_4} [inst : Field K] [inst_1 : Field L] [inst_2 : Algebra K L] (E : IntermediateField K L)\\n  [IsGalois K L] [IsGalois K ↥E], E.fixingSubgroup.Normal\", \"doc\": \"Given a commutative semiring $ R' $, a scalar multiplication $ R' \\to K $, an $ R' $-algebra structure on $ L $, and compatibility of scalar multiplication between $ R' $, $ K $, and $ L $, any interme\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: read the returned signatures; they provide only individual field, coproduct, prime-transitivity or residue-field ingredients, not this simultaneous construction or all its asserted comparisons as a one-line specialization"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Amalgamate finite field actions in a finite normal closure using pairs of automorphisms that agree on an intermediate field",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"InfiniteGalois.toAlgEquivAux_eq_liftNormal\", \"module\": \"Mathlib/FieldTheory/Galois/Profinite\", \"type\": \"∀ {k : Type u_3} {K : Type u_4} [inst : Field k] [inst_1 : Field K] [inst_2 : Algebra k K] [inst_3 : IsGalois k K]\\n  (g : ↑(ProfiniteGrp.limit (InfiniteGalois.asProfiniteGaloisGroupFunctor k K)).toProfinite.toTop) (x : K)\\n  (L : FiniteGaloisIntermediateField k K),\\n  x ∈ L.toIntermediateField → Infin\", \"doc\": \"For an infinite Galois extension $ K/k $, the automorphism of $ K $ induced by an element $ g $ in the profinite Galois group $ \\\\text{Gal}(K/k) $ (defined as the inverse limit of finite Galois groups)\"}\n  {\"name\": \"finGaloisGroupMap\", \"module\": \"Mathlib/FieldTheory/Galois/Profinite\", \"type\": \"{k : Type u_1} →\\n  {K : Type u_2} →\\n    [inst : Field k] →\\n      [inst_1 : Field K] →\\n        [inst_2 : Algebra k K] →\\n          {L₁ L₂ : (FiniteGaloisIntermediateField k K)ᵒᵖ} →\\n            (L₁ ⟶ L₂) → ((Opposite.unop L₁).finGaloisGroup ⟶ (Opposite.unop L₂).finGaloisGroup)\", \"doc\": \"For finite Galois intermediate fields $L_1$ and $L_2$ in a Galois extension $K/k$, this constructs a group homomorphism from $\\\\text{Gal}(L_1/k)$ to $\\\\text{Gal}(L_2/k)$ by restricting automorphisms of \"}\n  {\"name\": \"Normal.algHomEquivAut\", \"module\": \"Mathlib/FieldTheory/Normal/Defs\", \"type\": \"(F : Type u_1) →\\n  [inst : Field F] →\\n    (K₁ : Type u_3) →\\n      [inst_1 : Field K₁] →\\n        [inst_2 : Algebra F K₁] →\\n          (E : Type u_6) →\\n            [inst_3 : Field E] →\\n              [inst_4 : Algebra F E] →\\n                [inst_5 : Algebra E K₁] → [IsScalarTower F E K₁] → [Normal F E]\", \"doc\": \"For a normal field extension $ E/F $, there is a canonical bijection between the set of $ F $-algebra homomorphisms from $ E $ to a field $ K_1 $ and the Galois group $ \\text{Gal}(E/F) $. This equivale\"}\n  {\"name\": \"IntermediateField.restrictRestrictAlgEquivMapHom\", \"module\": \"Mathlib/FieldTheory/Galois/Basic\", \"type\": \"(F : Type u_1) →\\n  (K : Type u_2) →\\n    (L : Type u_3) →\\n      (E : Type u_4) →\\n        [inst : Field F] →\\n          [inst_1 : Field K] →\\n            [inst_2 : Field L] →\\n              [inst_3 : Field E] →\\n                [inst_4 : Algebra F K] →\\n                  [inst_5 : Algebra F L] →\\n          \", \"doc\": \"The group homomorphism from the Galois group $\\\\mathrm{Gal}(E/L)$ to $\\\\mathrm{Gal}(K/F)$, defined by first lifting each automorphism to an $F$-algebra automorphism of $E$ via the scalar tower action an\"}\n  {\"name\": \"AlgEquiv.restrictNormalHom\", \"module\": \"Mathlib/FieldTheory/Normal/Defs\", \"type\": \"{F : Type u_1} →\\n  [inst : Field F] →\\n    {K₁ : Type u_3} →\\n      [inst_1 : Field K₁] →\\n        [inst_2 : Algebra F K₁] →\\n          (E : Type u_6) →\\n            [inst_3 : Field E] →\\n              [inst_4 : Algebra F E] →\\n                [inst_5 : Algebra E K₁] → [IsScalarTower F E K₁] → [Normal F E]\", \"doc\": \"The monoid homomorphism from the Galois group $\\\\text{Gal}(K_1/F)$ to $\\\\text{Gal}(E/F)$, defined by restricting each automorphism $\\\\chi$ to the subfield $E$. This homomorphism sends $\\\\chi$ to $\\\\chi|_E$\"}\n  {\"name\": \"InfiniteGalois.mk_toAlgEquivAux\", \"module\": \"Mathlib/FieldTheory/Galois/Profinite\", \"type\": \"∀ {k : Type u_3} {K : Type u_4} [inst : Field k] [inst_1 : Field K] [inst_2 : Algebra k K] [inst_3 : IsGalois k K]\\n  (g : ↑(ProfiniteGrp.limit (InfiniteGalois.asProfiniteGaloisGroupFunctor k K)).toProfinite.toTop) (x : K)\\n  (L : FiniteGaloisIntermediateField k K) (hx' : InfiniteGalois.toAlgEquivAux✝\", \"doc\": \"For any element $g$ in the profinite Galois group $\\\\mathrm{Gal}(K/k)$, any $x \\\\in L$ where $L$ is a finite Galois intermediate field, and any $x \\\\in L$, the automorphism of $K$ induced by $g$ evaluate\"}\n  {\"name\": \"AlgHom.restrictNormal'\", \"module\": \"Mathlib/FieldTheory/Normal/Defs\", \"type\": \"{F : Type u_1} →\\n  [inst : Field F] →\\n    {K₁ : Type u_3} →\\n      {K₂ : Type u_4} →\\n        [inst_1 : Field K₁] →\\n          [inst_2 : Field K₂] →\\n            [inst_3 : Algebra F K₁] →\\n              [inst_4 : Algebra F K₂] →\\n                (K₁ →ₐ[F] K₂) →\\n                  (E : Type u_6) →\\n         \", \"doc\": \"Given a normal field extension $ E/F $, the restriction map from the Galois group $ \\\\text{Gal}(E/F) $ to itself, induced by restricting algebra homomorphisms to $ E $, is bijective under scalar tower \"}\n  {\"name\": \"AlgEquiv.restrictNormalHom_apply\", \"module\": \"Mathlib/FieldTheory/Normal/Defs\", \"type\": \"∀ {F : Type u_1} [inst : Field F] {K₁ : Type u_3} [inst_1 : Field K₁] [inst_2 : Algebra F K₁]\\n  (L : IntermediateField F K₁) [inst_3 : Normal F ↥L] (σ : Gal(K₁/F)) (x : ↥L),\\n  ↑(((AlgEquiv.restrictNormalHom ↥L) σ) x) = σ ↑x\", \"doc\": \"For any normal intermediate field $ L $ between fields $ F $ and $ K_1 $, and for any automorphism $ \\\\sigma \\\\in \\\\text{Gal}(K_1/F) $, the restriction homomorphism applied to $ \\\\sigma $ satisfies $ \\\\tex\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: read the returned signatures; they provide only individual field, coproduct, prime-transitivity or residue-field ingredients, not this simultaneous construction or all its asserted comparisons as a one-line specialization"
+  },
+  {
+   "tool": "loogle",
+   "query": "Normal, AlgEquiv",
+   "results": "[loogle] OK 12 hit(s)\n  {\"name\": \"Normal.of_algEquiv\", \"module\": \"Mathlib.FieldTheory.Normal.Defs\", \"type\": \" {F : Type u_1} [Field F] {E : Type u_3} [Field E] [Algebra F E] {E' : Type u_4} [Field E'] [Algebra F E'] [h : Normal F E] (f : E ≃ₐ[F] E') : Normal F E'\", \"doc\": \"\"}\n  {\"name\": \"AlgEquiv.transfer_normal\", \"module\": \"Mathlib.FieldTheory.Normal.Defs\", \"type\": \" {F : Type u_1} [Field F] {E : Type u_3} [Field E] [Algebra F E] {E' : Type u_4} [Field E'] [Algebra F E'] (f : E ≃ₐ[F] E') : Normal F E ↔ Normal F E'\", \"doc\": \"\"}\n  {\"name\": \"Normal.algHomEquivAut\", \"module\": \"Mathlib.FieldTheory.Normal.Defs\", \"type\": \" (F : Type u_1) [Field F] (K₁ : Type u_3) [Field K₁] [Algebra F K₁] (E : Type u_6) [Field E] [Algebra F E] [Algebra E K₁] [IsScalarTower F E K₁] [Normal F E] : (E →ₐ[F] K₁) ≃ Gal(E/F)\", \"doc\": \"If `K₁/E/F` is a tower of fields with `E/F` normal then `AlgHom.restrictNormal'` is an\\nequivalence.\"}\n  {\"name\": \"AlgEquiv.restrictNormal\", \"module\": \"Mathlib.FieldTheory.Normal.Defs\", \"type\": \" {F : Type u_1} [Field F] {K₁ : Type u_3} {K₂ : Type u_4} [Field K₁] [Field K₂] [Algebra F K₁] [Algebra F K₂] (χ : K₁ ≃ₐ[F] K₂) (E : Type u_6) [Field E] [Algebra F E] [Algebra E K₁] [Algebra E K₂] [IsScalarTower F E K₁] [IsScalarTower F E K₂] [Normal F E] : Gal(E/F)\", \"doc\": \"Restrict algebra isomorphism to a normal subfield\"}\n  {\"name\": \"AlgHom.restrictNormal'\", \"module\": \"Mathlib.FieldTheory.Normal.Defs\", \"type\": \" {F : Type u_1} [Field F] {K₁ : Type u_3} {K₂ : Type u_4} [Field K₁] [Field K₂] [Algebra F K₁] [Algebra F K₂] (ϕ : K₁ →ₐ[F] K₂) (E : Type u_6) [Field E] [Algebra F E] [Algebra E K₁] [Algebra E K₂] [IsScalarTower F E K₁] [IsScalarTower F E K₂] [Normal F E] : Gal(E/F)\", \"doc\": \"Restrict algebra homomorphism to normal subfield (`AlgEquiv` version)\"}\n  {\"name\": \"AlgEquiv.restrictNormalHom\", \"module\": \"Mathlib.FieldTheory.Normal.Defs\", \"type\": \" {F : Type u_1} [Field F] {K₁ : Type u_3} [Field K₁] [Algebra F K₁] (E : Type u_6) [Field E] [Algebra F E] [Algebra E K₁] [IsScalarTower F E K₁] [Normal F E] : Gal(K₁/F) →* Gal(E/F)\", \"doc\": \"Restriction to a normal subfield as a group homomorphism\"}\n  {\"name\": \"AlgEquiv.restrictNormal_commutes\", \"module\": \"Mathlib.FieldTheory.Normal.Defs\", \"type\": \" {F : Type u_1} [Field F] {K₁ : Type u_3} {K₂ : Type u_4} [Field K₁] [Field K₂] [Algebra F K₁] [Algebra F K₂] (χ : K₁ ≃ₐ[F] K₂) (E : Type u_6) [Field E] [Algebra F E] [Algebra E K₁] [Algebra E K₂] [IsScalarTower F E K₁] [IsScalarTower F E K₂] [Normal F E] (x : E) : (algebraMap E K₂) ((χ.restrictNorm\", \"doc\": \"\"}\n  {\"name\": \"AlgEquiv.restrictNormal_trans\", \"module\": \"Mathlib.FieldTheory.Normal.Defs\", \"type\": \" {F : Type u_1} [Field F] {K₁ : Type u_3} {K₂ : Type u_4} {K₃ : Type u_5} [Field K₁] [Field K₂] [Field K₃] [Algebra F K₁] [Algebra F K₂] [Algebra F K₃] (χ : K₁ ≃ₐ[F] K₂) (ω : K₂ ≃ₐ[F] K₃) (E : Type u_6) [Field E] [Algebra F E] [Algebra E K₁] [Algebra E K₂] [Algebra E K₃] [IsScalarTower F E K₁] [IsSc\", \"doc\": \"\"}\n  {\"name\": \"Normal.algHomEquivAut_apply\", \"module\": \"Mathlib.FieldTheory.Normal.Defs\", \"type\": \" (F : Type u_1) [Field F] (K₁ : Type u_3) [Field K₁] [Algebra F K₁] (E : Type u_6) [Field E] [Algebra F E] [Algebra E K₁] [IsScalarTower F E K₁] [Normal F E] (σ : E →ₐ[F] K₁) : (Normal.algHomEquivAut F K₁ E) σ = σ.restrictNormal' E\", \"doc\": \"\"}\n  {\"name\": \"AlgEquiv.restrictNormalHom_id\", \"module\": \"Mathlib.FieldTheory.Normal.Defs\", \"type\": \" (F : Type u_6) (K : Type u_7) [Field F] [Field K] [Algebra F K] [Normal F K] : AlgEquiv.restrictNormalHom K = MonoidHom.id Gal(K/F)\", \"doc\": \"The group homomorphism given by restricting an algebra isomorphism to itself\\nis the identity map.\"}\n  {\"name\": \"Normal.algHomEquivAut_symm_apply\", \"module\": \"Mathlib.FieldTheory.Normal.Defs\", \"type\": \" (F : Type u_1) [Field F] (K₁ : Type u_3) [Field K₁] [Algebra F K₁] (E : Type u_6) [Field E] [Algebra F E] [Algebra E K₁] [IsScalarTower F E K₁] [Normal F E] (σ : Gal(E/F)) : (Normal.algHomEquivAut F K₁ E).symm σ = (IsScalarTower.toAlgHom F E K₁).comp ↑σ\", \"doc\": \"\"}\n  {\"name\": \"IsScalarTower.AlgEquiv.restrictNormalHom_comp\", \"module\": \"Mathlib.FieldTheory.Normal.Defs\", \"type\": \" (F : Type u_6) (K₁ : Type u_7) (K₂ : Type u_8) (K₃ : Type u_9) [Field F] [Field K₁] [Field K₂] [Field K₃] [Algebra F K₁] [Algebra F K₂] [Algebra F K₃] [Algebra K₁ K₂] [Algebra K₁ K₃] [Algebra K₂ K₃] [IsScalarTower F K₁ K₃] [IsScalarTower F K₁ K₂] [IsScalarTower F K₂ K₃] [IsScalarTower K₁ K₂ K₃] [No\", \"doc\": \"In a scalar tower `K₃/K₂/K₁/F` with `K₁` and `K₂` normal over `F`, the group homomorphism\\nwhich restricts algebra isomorphisms of `K₃` to `K₁` is equal to the composition of\\nthe group homomorphism giv\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: read the returned signatures; they provide only individual field, coproduct, prime-transitivity or residue-field ingredients, not this simultaneous construction or all its asserted comparisons as a one-line specialization"
+  },
+  {
+   "tool": "grep",
+   "query": "common.*normal|compatible.*[Aa]ut|liftNormal",
+   "results": "[grep] OK 11 hit(s)\n  {\"file\": \"Mathlib/FieldTheory/Normal/Closure.lean\", \"line\": \"240\", \"text\": \"  · exact le_iSup_of_le (f.liftNormal L) (fun b ⟨a, h⟩ ↦ ⟨a, a.2, h ▸ f.liftNormal_commutes L a⟩)\"}\n  {\"file\": \"Mathlib/FieldTheory/Normal/Basic.lean\", \"line\": \"188\", \"text\": \"  an algebra homomorphism `ϕ : K₁ →ₐ[F] K₂` to `ϕ.liftNormal E : E →ₐ[F] E`. -/\"}\n  {\"file\": \"Mathlib/FieldTheory/Normal/Basic.lean\", \"line\": \"190\", \"text\": \"noncomputable def AlgHom.liftNormal [h : Normal F E] : E →ₐ[F] E :=\"}\n  {\"file\": \"Mathlib/FieldTheory/Normal/Basic.lean\", \"line\": \"202\", \"text\": \"theorem AlgHom.liftNormal_commutes [Normal F E] (x : K₁) :\"}\n  {\"file\": \"Mathlib/FieldTheory/Normal/Basic.lean\", \"line\": \"203\", \"text\": \"    ϕ.liftNormal E (algebraMap K₁ E x) = algebraMap K₂ E (ϕ x) :=\"}\n  {\"file\": \"Mathlib/FieldTheory/Normal/Basic.lean\", \"line\": \"208\", \"text\": \"theorem AlgHom.restrict_liftNormal (ϕ : K₁ →ₐ[F] K₁) [Normal F K₁] [Normal F E] :\"}\n  {\"file\": \"Mathlib/FieldTheory/Galois/Profinite.lean\", \"line\": \"230\", \"text\": \"lemma toAlgEquivAux_eq_liftNormal [IsGalois k K] (g : limit (asProfiniteGaloisGroupFunctor k K))\"}\n  {\"file\": \"Mathlib/FieldTheory/Galois/Profinite.lean\", \"line\": \"232\", \"text\": \"    toAlgEquivAux g x = (proj L g).liftNormal K x := by\"}\n  {\"file\": \"Mathlib/FieldTheory/Galois/Profinite.lean\", \"line\": \"234\", \"text\": \"  exact (AlgEquiv.liftNormal_commutes (proj L g) _ ⟨x, hx⟩).symm\"}\n  {\"file\": \"Mathlib/FieldTheory/Galois/Profinite.lean\", \"line\": \"260\", \"text\": \"    rw [toAlgEquivAux_eq_liftNormal g x (adjoin k {x, y}) hx,\"}\n  {\"file\": \"Mathlib/FieldTheory/Galois/Profinite.lean\", \"line\": \"261\", \"text\": \"      toAlgEquivAux_eq_liftNormal g y (adjoin k {x, y}) hy,\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: read the returned signatures; they provide only individual field, coproduct, prime-transitivity or residue-field ingredients, not this simultaneous construction or all its asserted comparisons as a one-line specialization"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Simultaneous normal closure of finite extensions and compatible finite automorphism groups",
+   "results": "[leansearch] UNAVAILABLE 0 hit(s) | service unavailable: {\"error\":\"Rate limit exceeded: 60 per 1 minute\"}\n  This kind of search is not available now. It is recorded as unavailable; use the other kinds and grep, and do not write a verdict for it.",
+   "date": "2026-10-22",
+   "verdict": "unavailable: service unavailable: {\"error\":\"Rate limit exceeded: 60 per 1 minute\"}"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finite family of finite field extensions with finite automorphism group actions admit a common finite normal extension and compatible subgroups of one product group",
+   "results": "Q120 command result: 8 hits; top entries: fixedByFinite, galBasis, top_fixedByFinite, IsGaloisGroup.intermediateField, FixedPoints.normal, InfiniteGalois.toAlgEquivAux_eq_liftNormal, IsGaloisGroup.subgroup, InfiniteGalois.isOpen_and_normal_iff_finite_and_isGalois. Read the returned signatures: individual normal-closure, lifting and fixed-field ingredients, not the simultaneous product-group statement.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Amalgamate finite field actions in a finite normal closure using pairs of automorphisms that agree on an intermediate field",
+   "results": "Q120 command result: 8 hits; top entries: AlgEquiv.liftNormal, finGaloisGroupMap, InfiniteGalois.toAlgEquivAux_eq_liftNormal, InfiniteGalois.mk_toAlgEquivAux, AlgEquiv.restrictNormalHom, Normal.algHomEquivAut, AlgHom.restrictNormal, AlgHom.restrictNormal'. Read the returned signatures: individual normal-closure, lifting and fixed-field ingredients, not the simultaneous product-group statement.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "Normal, AlgEquiv",
+   "results": "Q120 command result: 12 hits; top entries: Normal.of_algEquiv, AlgEquiv.transfer_normal, Normal.algHomEquivAut, AlgEquiv.restrictNormal, AlgHom.restrictNormal', AlgEquiv.restrictNormalHom, AlgEquiv.restrictNormal_commutes, AlgEquiv.restrictNormal_trans. Read the returned signatures: individual normal-closure, lifting and fixed-field ingredients, not the simultaneous product-group statement.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "common.*normal|compatible.*[Aa]ut|liftNormal",
+   "results": "Q120 command result: 16 hits; top entries: Mathlib/FieldTheory/Normal/Basic.lean, Mathlib/FieldTheory/Normal/Basic.lean, Mathlib/FieldTheory/Normal/Basic.lean, Mathlib/FieldTheory/Normal/Basic.lean, Mathlib/FieldTheory/Normal/Basic.lean, Mathlib/FieldTheory/Normal/Closure.lean, Mathlib/FieldTheory/Galois/Profinite.lean, Mathlib/FieldTheory/Galois/Profinite.lean. Read the returned signatures: individual normal-closure, lifting and fixed-field ingredients, not the simultaneous product-group statement.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Simultaneous normal closure of finite extensions and compatible finite automorphism groups",
+   "results": "Q120 command result: 8 hits; top entries: IsNormalClosure, isNormalClosure_normalClosure, IntermediateField.normalClosure, normalClosure.normal, IsNormalClosure.mk, Algebra.IsAlgebraic.isNormalClosure_normalClosure, normalClosure_def, IntermediateField.normalClosure_def''. Read the returned signatures: individual normal-closure, lifting and fixed-field ingredients, not the simultaneous product-group statement.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-common-field-semilinear-induction",
+  "date": "2026-10-22",
+  "group": "Q28"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "X 2.3 Step 2, printed p.150, graph enlargement before (2.b); agent-formulated simultaneous common-normal-field elaboration, former steps 1–2 of lem-sfb-common-field-semilinear-induction. Supporting field lemmas are Stacks Tags 09DT (lemma-normal-closure), 0BME (lemma-lift-maps (2)), and 030M (lemma-normal-case (2)); the common-compositum argument is retained in report.md.",
+   "via": [
+    "lem-sfb-common-field-semilinear-induction",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-common-normal-compatible-groups",
+  "worker": "stage1",
+  "group": "Q120",
+  "summary": "Retained the statement and all inherited metadata. Split the common finite normal constants and compatible product groups into seven complete steps, reusing six existing statements and creating no nodes. The finite-family induction includes explicit spanning sets; subgroup closure, surjectivity and both kernel-image inclusions are written out. Used the embedding-count Mathlib leaf for finite automorphisms; no separability or faithfulness is added. Read the retained Q28 argument and exact cited statements and sources; recorded current searches and verbatim citation witnesses. Repair of return 2026-10-22 (returned head 6500228e027): delivery rebuilt on the current DAG; all three statement-dependency and all six proof-dependency statements re-read, including the closed fixed-field theorem. All citation witnesses remain exact. Step 1 now explicitly identifies the two embedded images and their common base before using the compositum bound; no statement, source route, dependency, or search question changed.",
+  "blueprint": "The inherited ancestry search reports blueprint.from.node = None. Preserve that null and via chain. These steps realize the common-field/group elaboration of det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction, via ILO X 2.3 Step 2 before (2.b). The inherited parent report preserves the original steps 1–2; the present split retains them and supplies the kernel-image equality explicitly. Whole-blueprint searches found no equivalent node.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-common-extension-fields",
+    "why": "Generic common-overfield existence for two extensions, used before taking a finite compositum; the stability unit has no replacement for this field-theory tool."
+   },
+   {
+    "node": "lem-weil-pbc-normal-extension-fixed-field-purely-inseparable",
+    "why": "Generic normal-field fixed-field theorem without separability, used for the constants K/e; the stability unit has no replacement for this field-theory tool."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-common-extension-fields",
+  "lem-weil-pbc-normal-extension-fixed-field-purely-inseparable"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q120-6c8334a1b",
+  "group": "Q120",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q120-6c8334a1b (reviewer sub-agent of L); spot-checked: This is a re-delivery after a landing return. The head 6500228e027 had a PASS and was then refused at landing because its side completion was not promoted. A JSON diff against that head shows one proof change, in step 1, plus updated split_report date and summary. Step 1 now identifies both fields with their images in Ω_r, states that the images of e agree because the embeddings are e-algebra maps, and composes through the induced embedding L_r↪L_{r+1}. This is correct and makes the compositum-bound hypothesis (a common F⊆K,M) explicit. The statement, stmt_deps, proof_deps (equal to the union of the steps' uses), source, ancestry and tool_uses are unchanged. There are no new nodes and no re-split note. I re-read all six cited statements on this snapshot: 0H7K common overfield, the compositum bound, 09DT normal closure (normal over the base), the embedding count (no separability), 0BME(2) lift (needs only the ambient to be normal), and 030M(2) fixed field. Each of the seven steps is correct. Step 3 bounds Aut_e(K) by End_e(K), and a↦(a,1) is a section of π. Step 4 computes closure in the right order. Step 5 lifts τ=u_iρ_i(j)u_i^{-1} with M1=M2=u_i(F_i). Step 6 proves both inclusions. Step 7 uses π(G)=A, so K^A is the node's S. The purely-inseparable definition in def-pc-field-tower matches. I checked these edge cases: F_i=e, non-faithful ρ_i, purely inseparable K (A trivial, K^A=K), and characteristic 0. No SGA source is cited. I accept the two generic field tool_uses. Maintainer note: this is a landing-promotion re-issue. Advisory: the report mentions a citations.json that is not on the branch."
+ },
+ "lean": {
+  "module": "Sheaf.FieldTheory.CommonNormalCompatibleGroups",
+  "declaration": "Field.exists_common_normal_compatible_groups",
+  "file": "lean/Sheaf/FieldTheory/CommonNormalCompatibleGroups.lean",
+  "statement": "theorem exists_common_normal_compatible_groups (e : Type u) [Field e] (I : Type w) [Finite I] [Nonempty I] (F : I → Type v) [∀ i, Field (F i)] [∀ i, Algebra e (F i)] [∀ i, Module.Finite e (F i)] (J : I → Type z) [∀ i, Group (J i)] [∀ i, Finite (J i)] (rho : ∀ i, J i →* (F i ≃ₐ[e] F i)) : ∃ (K : Type (max u v)) (_ : Field K) (_ : Algebra e K) (_ : Module.Finite e K) (_ : Normal e K) (emb : ∀ i, F i →ₐ[e] K), Finite (K ≃ₐ[e] K) ∧ Finite ((K ≃ₐ[e] K) × (∀ t, J t)) ∧ Function.Surjective (MonoidHom.fst (K ≃ₐ[e] K) (∀ t, J t)) ∧ (∃ (Gamma : I → Subgroup ((K ≃ₐ[e] K) × (∀ t, J t))) (r : ∀ i, Gamma i →* J i), (∀ (i : I) (g : (K ≃ₐ[e] K) × (∀ t, J t)), g ∈ Gamma i ↔ g.1.toAlgHom.comp (emb i) = (emb i).comp (rho i (g.2 i)).toAlgHom) ∧ (∀ (i : I) (g : Gamma i), r i g = g.val.2 i) ∧ (∀ i : I, Function.Surjective (r i)) ∧ (∀ i : I, (r i).ker.map ((MonoidHom.fst (K ≃ₐ[e] K) (∀ t, J t)).comp (Gamma i).subtype) = (emb i).fieldRange.fixingSubgroup)) ∧ IsPurelyInseparable e (IntermediateField.fixedField (MonoidHom.fst (K ≃ₐ[e] K) (∀ t, J t)).range)",
+  "branch": "sheaf-dag",
+  "by": "Q25",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-1e6b86ed1",
+  "group": "Q25",
+  "result": "pass",
+  "note": "Only change is the new lean record and module Sheaf.FieldTheory.CommonNormalCompatibleGroups (Field.exists_common_normal_compatible_groups, proof sorry only). Every clause matches the node: finite normal K/e via Mathlib Normal, no separability; literal Aut_e(K)×Π J_t with canonical MonoidHom.fst; Γ_i pinned by iff on every ambient element; r_i pinned to the i-th coordinate and surjective; ker-image equals (emb i).fieldRange.fixingSubgroup; IsPurelyInseparable of the fixed field of fst.range. AlgEquiv multiplication order matches proof step 4. No extra hypotheses (no faithfulness, Galois or separability); universes independent, K : Type (max u v) is satisfiable. Edge cases singleton/F=e, non-faithful rho, purely inseparable K, char 0 OK; empty I excluded by the node. stmt_deps (field, Algebra, FieldTower leaves) used as recorded; statement field verbatim; docstrings carry source, blueprint tag and 7 steps; no hollow defs; imports exist; no duplicate (CommonFieldSemilinearInduction is a different, larger statement). Report has Worker report and Second reading by Q25. Not recompiled per instructions; worker reports a clean scompile."
+ }
+}

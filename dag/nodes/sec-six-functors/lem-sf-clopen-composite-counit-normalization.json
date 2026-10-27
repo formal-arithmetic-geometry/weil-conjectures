@@ -1,0 +1,276 @@
+{
+ "id": "lem-sf-clopen-composite-counit-normalization",
+ "kind": "statement",
+ "title": "Clopen projection and a composite derived counit cancel the direct-image unit",
+ "statement": "Let $\\Lambda$ be a finite commutative ring, let $q:X\\to W$ be a morphism of schemes, let $s:U\\hookrightarrow X$ be an open immersion which is also a closed immersion, and put $r=qs$ [def-pc-scheme, def-weil-open-immersion, def-weil-closed-immersion]. Work in the ordinary unbounded derived categories of constant-$\\Lambda$ module sheaves on small pro-etale sites [def-weil-pbc-proetale-site, def-weil-pbc-proetale-operations]. Write $P_u\\dashv S_u$ for exact inverse image and total derived direct image, with unit $\\eta_u$ and counit $\\varepsilon_u$. Let $J_s\\dashv P_s$ be exact open extension with identity-on-open unit $u_s:1\\xrightarrow{\\sim}P_sJ_s$ [lem-sf-open-tensor-normalization]. Let $t_s:J_s\\to S_s$ be the $P_s\\dashv S_s$ adjunct of $u_s^{-1}:P_sJ_s\\to1$ [def-weil-pbc-adjunction-mate]. Let $\\pi_s:F\\to J_sP_sF$ be the morphism which is identity on $s(U)$ and zero on its complementary open, defined on sheaves and applied degreewise. Let $c:S_qS_s\\xrightarrow{\\sim}S_r$ be the direct-image compositor conjugate to $P_sP_q\\cong P_r$, using the composite adjunction [def-weil-pbc-composite-adjunction], and put $a=c\\circ S_q(t_s):S_qJ_s\\to S_r$.\nThen $t_s$ and $a$ are isomorphisms and $(t_sP_s)\\pi_s=\\eta_s$. For every unbounded derived object $M$ on $U$, put $H=S_rM$. After the canonical identification $P_sP_qH\\cong P_rH$, the following composite equals $1_H$:\n$$H\\xrightarrow{\\eta_{q,H}}S_qP_qH\\xrightarrow{S_q(\\pi_{s,P_qH})}S_qJ_sP_sP_qH\\xrightarrow{S_qJ_s(\\varepsilon_{r,M})}S_qJ_sM\\xrightarrow{a_M}S_rM=H.$$\nThe assertion is natural in $M$ and uses the specified maps in the derived category itself. No properness or boundedness hypothesis on $q,M$ is imposed, and no projection-formula morphism is involved.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-prop-sf-pf-coherence/prop-sf-pf-coherence.proof.md",
+  "place": "Compactification-independence sentence and following open-restriction/counit argument; agent extraction from lem-sf-proper-open-tensor-compatibility, old proof step 2: the clopen projector, its identification with the direct-image unit, and cancellation against the pasted counit"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-open-immersion",
+  "def-weil-closed-immersion",
+  "def-weil-pbc-proetale-site",
+  "def-weil-pbc-proetale-operations",
+  "lem-sf-open-tensor-normalization",
+  "def-weil-pbc-adjunction-mate",
+  "def-weil-pbc-composite-adjunction"
+ ],
+ "proof": [
+  {
+   "text": "Use the existing invertible canonical sheaf comparison sheafComparison: s_! ≅ s_* already used in the definition of reverseSheafAdjunction. Let α identify upperStar with open restriction, let a be extension by zero adjoint to restriction, and let b be restriction adjoint to direct image. The published identity a.unit ≫ restriction.map(comparison) = inv(b.counit), together with compatibility of α with the counits of its two adjunctions, shows that the counit of reverseSheafAdjunction is the inverse of the specified open-extension unit. This is the private lemma sheaf_counit; no product-category model is needed.",
+   "uses": [
+    "def-weil-pbc-proetale-operations",
+    "det-sp-unique-right-adjoint"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Tags 0037 and 0DV0; unit/counit identities, composite adjunctions and uniqueness of adjoints"
+   }
+  },
+  {
+   "text": "For an exact adjunction whose counit is invertible, compare its localized counit with the inverse derived-composition comparison followed by the localized counit isomorphism and the derived-identity comparison. Evaluate on cochain representatives. The localization counit formula, natural-isomorphism factorization, derived-composition factorization and the derived-identity formula cancel the comparison isomorphisms. This proves the private lemma exact_counit. Apply it to the reverse sheaf adjunction and the equality from Step 1 to obtain derived_counit: its counit is exactly openUnit.inv.",
+   "uses": [
+    "def-weil-exact-derived-adjunction",
+    "lem-pur-exact-restriction-composition",
+    "lem-sf-open-tensor-normalization"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 015F; exact functors and localization of adjunctions, checked on complexes"
+   }
+  },
+  {
+   "text": "The inverse Hom equivalence sends the canonical rightAdjointUniq isomorphism to the counit of the reverse derived adjunction. Step 2 therefore identifies this isomorphism with the specified comparison, which was independently defined as the adjunct of openUnit.inv. It is invertible. The standard unit_rightAdjointUniq_hom equation gives projector followed by comparison whiskered with pullback equal to adjunction.unit. Functoriality then gives invertibility of compositeComparison.",
+   "uses": [
+    "det-sp-unique-right-adjoint",
+    "lem-weil-pbc-adjunction-of-natural-bijection"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Tags 0037 and 0DV0; unit/counit identities, composite adjunctions and uniqueness of adjoints"
+   }
+  },
+  {
+   "text": "Let H = S_r M and e = d.hom_H followed by ε_r,M, retaining the actual pullback compositor d. Naturality of comparison at e moves it across J_s(e). Replace projector followed by comparison with η_s using Step 3. Naturality of directComposition moves it across (S_s ⋙ S_q)(e). The resulting initial pair η_q followed by S_q(η_s) is the unit of the composite adjunction.",
+   "uses": [
+    "def-weil-pbc-composite-adjunction"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Tags 0037 and 0DV0; unit/counit identities, composite adjunctions and uniqueness of adjoints"
+   }
+  },
+  {
+   "text": "Apply unit_conjugateEquiv to the composite adjunction, the adjunction for r, and d.inv. It identifies the composite unit followed by directComposition at P_s P_q H with η_r,H followed by S_r(d.inv_H). Functoriality combines d.inv_H with e; inverse cancellation leaves ε_r,M. The whole expression is η_r,H followed by S_r(ε_r,M), hence the identity by the right triangle identity. This proves exactly the specified cancellation, without properness, boundedness, or a projection-formula assumption. All transformations are natural; empty schemes and the zero coefficient ring require no exception.",
+   "uses": [
+    "def-weil-pbc-adjunction-conjugate",
+    "lem-weil-pbc-adjunction-of-natural-bijection"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Tags 0037 and 0DV0; unit/counit identities, composite adjunctions and uniqueness of adjoints"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-proetale-operations",
+  "det-sp-unique-right-adjoint",
+  "def-weil-exact-derived-adjunction",
+  "lem-pur-exact-restriction-composition",
+  "lem-sf-open-tensor-normalization",
+  "lem-weil-pbc-adjunction-of-natural-bijection",
+  "def-weil-pbc-composite-adjunction",
+  "def-weil-pbc-adjunction-conjugate"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-prop-sf-pf-coherence/prop-sf-pf-coherence.proof.md",
+  "place": "Compactification-independence and compatibility with counits; T7 direct normalization from the published canonical clopen sheaf comparison, exact adjunction localization on cochain representatives, right-adjoint uniqueness, and unit_conjugateEquiv followed by the right triangle identity. The unit route and statement are unchanged."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "clopen|extensionByZero|extension_by_zero",
+   "results": "0 hits: none",
+   "date": "2026-10-22",
+   "verdict": "no match: the composite-counit formula is present, but the geometric clopen projector, normalized J_s to S_s identification, and derived composite comparison are not a one-line specialization"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A clopen component projection becomes the adjunction unit under extension by zero equals direct image and composite derived counit gives identity",
+   "results": "8 hits: IsOpenMap.adjunction, CompHausLike.LocallyConstant.adjunction, CompHausLike.LocallyConstant.adjunction_left_triangle, StalkSkyscraperPresheafAdjunctionAuxs.unit_app, TopologicalSpace.Opens.adjunction_counit_app_self, CompHausLike.LocallyConstant.adjunction_unit, stalkSkyscraperSheafAdjunction, CondensedSet.topCatAdjunction",
+   "date": "2026-10-22",
+   "verdict": "no match: the composite-counit formula is present, but the geometric clopen projector, normalized J_s to S_s identification, and derived composite comparison are not a one-line specialization"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.comp, \"counit\"",
+   "results": "3 hits: CategoryTheory.Adjunction.comp_counit_app, CategoryTheory.Adjunction.comp_counit_app_assoc, CategoryTheory.Adjunction.comp_counit",
+   "date": "2026-10-22",
+   "verdict": "no match: the composite-counit formula is present, but the geometric clopen projector, normalized J_s to S_s identification, and derived composite comparison are not a one-line specialization"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a clopen immersion followed by a scheme map, the derived direct image of the clopen projection followed by the composite adjunction counit sends the unit to the identity",
+   "results": "8 hits: AlgebraicGeometry.Scheme.Modules.restrictFunctorAdjCounitIso, AlgebraicGeometry.Scheme.Modules.restrictAdjunction_counit_app_app, AlgebraicGeometry.Scheme.Modules.instIsIsoFunctorCounitRestrictAdjunction, AlgebraicGeometry.Scheme.ofRestrict_toLRSHom_c_app, AlgebraicGeometry.LocallyRingedSpace.Γ_Spec_left_triangle, AlgebraicGeometry.Scheme.Modules.restrictAdjunction_unit_app_app, AlgebraicGeometry.ΓSpec.left_triangle, AlgebraicGeometry.ΓSpec.right_triangle",
+   "date": "2026-10-22",
+   "verdict": "no match: the composite-counit formula is present, but the geometric clopen projector, normalized J_s to S_s identification, and derived composite comparison are not a one-line specialization"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Under extension by zero equal direct image for an open and closed subscheme, the component projector is the pullback pushforward unit, and composing with the counit for a composite gives identity",
+   "results": "8 hits: AlgebraicGeometry.Scheme.Modules.restrictFunctorAdjCounitIso, AlgebraicGeometry.Scheme.Opens.toSpecΓ_SpecMap_presheaf_map_top, AlgebraicGeometry.Scheme.ofRestrict_toLRSHom_c_app, AlgebraicGeometry.Scheme.ofRestrict_app, AlgebraicGeometry.Scheme.Modules.restrictAdjunction_counit_app_app, AlgebraicGeometry.Scheme.Modules.restrictAdjunction_unit_app_app, AlgebraicGeometry.Scheme.Opens.toSpecΓ_SpecMap_presheaf_map, AlgebraicGeometry.Scheme.Opens.toSpecΓ_SpecMap_map",
+   "date": "2026-10-22",
+   "verdict": "no match: the composite-counit formula is present, but the geometric clopen projector, normalized J_s to S_s identification, and derived composite comparison are not a one-line specialization"
+  },
+  {
+   "tool": "grep",
+   "query": "clopen.*(unit|counit)|comp_counit_app|unit_mateEquiv",
+   "results": "15 hits: Mathlib/CategoryTheory/Shift/Adjunction.lean, Mathlib/CategoryTheory/Adjunction/Basic.lean, Mathlib/CategoryTheory/Adjunction/Mates.lean, Mathlib/CategoryTheory/Adjunction/Mates.lean, Mathlib/CategoryTheory/Adjunction/Mates.lean, Mathlib/CategoryTheory/Adjunction/Mates.lean, Mathlib/CategoryTheory/Adjunction/Mates.lean, Mathlib/CategoryTheory/Monoidal/NaturalTransformation.lean",
+   "date": "2026-10-22",
+   "verdict": "no match: the composite-counit formula is present, but the geometric clopen projector, normalized J_s to S_s identification, and derived composite comparison are not a one-line specialization"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For an open and closed immersion extension by zero equals derived direct image and the component projector is the adjunction unit",
+   "results": "8 hits: AlgebraicGeometry.Scheme.Modules.restrictAdjunction_unit_app_app, AlgebraicGeometry.Scheme.Modules.restrictAdjunction_counit_app_app, AlgebraicGeometry.Scheme.Modules.restrictFunctorAdjCounitIso, AlgebraicGeometry.Scheme.ofRestrict_toLRSHom_c_app, AlgebraicGeometry.IsOpenImmersion.app_ΓIso_hom, AlgebraicGeometry.IsOpenImmersion.map_ΓIso_hom, AlgebraicGeometry.Scheme.Modules.restrictAdjunction, AlgebraicGeometry.Scheme.ofRestrict_app",
+   "date": "2026-10-22",
+   "verdict": "no match for the full item: generic adjunction identities and Zariski structure-module restrictions do not supply the clopen pro-etale derived normalization; generic facts are reused through existing nodes"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.comp, \"counit\"",
+   "results": "3 hits: CategoryTheory.Adjunction.comp_counit_app, CategoryTheory.Adjunction.comp_counit_app_assoc, CategoryTheory.Adjunction.comp_counit",
+   "date": "2026-10-22",
+   "verdict": "no match for the full item: generic adjunction identities and Zariski structure-module restrictions do not supply the clopen pro-etale derived normalization; generic facts are reused through existing nodes"
+  },
+  {
+   "tool": "grep",
+   "query": "clopen.*(unit|counit)|comp_counit_app|right_triangle_components",
+   "results": "25 hits: Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean, Mathlib/Algebra/Category/ModuleCat/Topology/Basic.lean, Mathlib/Algebra/Category/ModuleCat/ChangeOfRings.lean, Mathlib/Algebra/Category/Ring/Adjunctions.lean, Mathlib/CategoryTheory/Localization/Adjunction.lean, Mathlib/CategoryTheory/Adjunction/Lifting/Left.lean, Mathlib/CategoryTheory/Adjunction/Lifting/Left.lean",
+   "date": "2026-10-22",
+   "verdict": "no match for the full item: generic adjunction identities and Zariski structure-module restrictions do not supply the clopen pro-etale derived normalization; generic facts are reused through existing nodes"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Clopen extension by zero is direct image and the composite adjunction counit cancels its unit",
+   "results": "8 hits: CompHausLike.LocallyConstant.counit_app_val, IsOpenMap.adjunction, CondensedSet.topCatAdjunctionCounitEquiv, TopologicalSpace.Opens.adjunction_counit_app_self, CompHausLike.LocallyConstant.adjunction, CondensedSet.topCatAdjunctionCounit, CategoryTheory.Adjunction.CoreHomEquivUnitCounit.counit, CompHausLike.LocallyConstant.counit",
+   "date": "2026-10-22",
+   "verdict": "no match for the full item: generic adjunction identities and Zariski structure-module restrictions do not supply the clopen pro-etale derived normalization; generic facts are reused through existing nodes"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Composite of two adjunctions right triangle identity natural unit and counit cancellation",
+   "results": "8 hits: CategoryTheory.Adjunction.right_triangle, CategoryTheory.Adjunction.comp_unit_app_assoc, CategoryTheory.Adjunction.comp_unit_app, CategoryTheory.Adjunction.comp_unit, CategoryTheory.Adjunction.CoreUnitCounit.right_triangle, CategoryTheory.Adjunction.right_triangle_components_assoc, CategoryTheory.Adjunction.comp_counit_app_assoc, CategoryTheory.Adjunction.right_triangle_components",
+   "date": "2026-10-22",
+   "verdict": "no match for the full item: generic adjunction identities and Zariski structure-module restrictions do not supply the clopen pro-etale derived normalization; generic facts are reused through existing nodes"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sf-proper-open-tensor-compatibility",
+  "date": "2026-10-22",
+  "group": "Q152"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-rem-sf-pf-done",
+ "blueprint": {
+  "from": {
+   "node": "lem-fix-weil-operations",
+   "place": "Proof, paragraph beginning \"For an admissible exceptional adjoint\", sentence \"the projection transformation of [def-exchange-projection] is a composite of precisely these tensor and counit maps, hence is equivariant as well\": the Frobenius-transported compactification differs from the chosen one, so the two projection composites must be compared through the refinement comparison. The proper/open interchange component of each refinement comparison must respect the base tensor action. Extracted subargument: the clopen projector, its identification with the direct-image unit, and cancellation against the pasted counit",
+   "via": [
+    "lem-sf-proper-open-tensor-compatibility",
+    "lem-fix-projection-compactification-comparison"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sf-clopen-composite-counit-normalization",
+  "worker": "stage1",
+  "summary": "Five-step proof with explicit clopen product coordinates, exact unbounded localization, counit-normalized right-adjoint uniqueness, identification of the projector with the unit, and a naturality/triangle calculation with the specified compositor. Statement unchanged; no new nodes. Existing general ringed clopen nodes apply to arbitrary schemes and finite commutative rings, unlike the narrower ambient and etale section nodes.",
+  "blueprint": "Realizes lem-fix-weil-operations.proof.md final paragraph, sentence that the projection transformation is a composite of tensor and counit maps: the clopen/counit cancellation inside the compactification refinement comparison. Immediate source prop-sf-pf-coherence.proof.md compactification-independence sentence. No change to the unit or chapter route.",
+  "tool_uses": [
+   {
+    "node": "lem-pur-clopen-ringed-module-gluing",
+    "why": "General finite-clopen module gluing for an arbitrary ring sheaf; this unit has no such sheaf-theoretic lemma."
+   },
+   {
+    "node": "lem-pur-site-restriction-module-adjunction-exact",
+    "why": "Exact extension by zero and restriction on arbitrary localized ringed sites, used to identify zero insertion."
+   },
+   {
+    "node": "lem-pur-clopen-unbounded-derived-localization",
+    "why": "General exact clopen product equivalence on unbounded derived categories; supplies actual derived morphism coordinates."
+   },
+   {
+    "node": "lem-sf-open-tensor-normalization",
+    "why": "Supplies the specified identity-on-open derived unit, rather than an arbitrary adjunction normalization."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sf-open-tensor-normalization"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q106-a19475a67",
+  "group": "Q106",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q106-a19475a67 (reviewer sub-agent of L); spot-checked: I read the item, all 5 steps and every cited statement in full. The statement is true: (t_sP_s)π_s=η_s, and c·η^B=η_r, the conjugate compositor's compatibility with the units (direction checked against def-weil-pbc-adjunction-conjugate with τ=d⁻¹:P_r→P_sP_q), together give triangle identity =1. Tested on s=id (gives the ordinary triangle identity for q), U empty, Λ=0 and M=0. Step 1: lem-pur-clopen-ringed-module-gluing covers an arbitrary scheme and ring sheaf, so Λ_X and an empty piece are fine. j_!≅E is shown via left-adjoint uniqueness through Hom-bijection injectivity, and the s_* formula matches def-weil-pbc-proetale-operations. Step 2: the derived product equivalence from lem-pur-clopen-unbounded-derived-localization gives P_s⊣J_s with counit u_s⁻¹. det-sp-unique-right-adjoint is applied with the correct orientation (G=J_s, J=S_s), and the resulting γ is by definition t_s, so t_s is invertible. Steps 3–5 are correct formal transpose/naturality calculations (unit order checked against def-weil-pbc-composite-adjunction; every source and target checked), correctly marked elementary. proof_deps equals the union of uses. Stacks tags checked (04TS, 015F, 05RU, 0037, 0DV0=categories.tex:3576), no SGA. The live node is still unsplit and there is no repair note, so this is not a re-split. No new nodes. The 4 declared tool uses are accepted as generic off-unit tools. Advisory: lem-cbc-proper-open-clopen-projector (strict towers, s=(k,r) only) overlaps Steps 2–3 but is neither a duplicate nor a generalization of the item. Some site identifications (U_proet with X/U) are only implicit, which is acceptable."
+ },
+ "lean": {
+  "module": "Sheaf.SixFunctors.ClopenCompositeCounitNormalization",
+  "declaration": "AlgebraicGeometry.ProEtale.ClopenCompositeCounit.clopenCompositeCounitNormalization",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.ClopenCompositeCounit.adjunction",
+   "AlgebraicGeometry.ProEtale.ClopenCompositeCounit.openUnit",
+   "AlgebraicGeometry.ProEtale.ClopenCompositeCounit.comparison",
+   "AlgebraicGeometry.ProEtale.ClopenCompositeCounit.sheafComparison",
+   "AlgebraicGeometry.ProEtale.ClopenCompositeCounit.reverseSheafAdjunction",
+   "AlgebraicGeometry.ProEtale.ClopenCompositeCounit.projector",
+   "AlgebraicGeometry.ProEtale.ClopenCompositeCounit.pullbackComposition",
+   "AlgebraicGeometry.ProEtale.ClopenCompositeCounit.directComposition",
+   "AlgebraicGeometry.ProEtale.ClopenCompositeCounit.compositeComparison",
+   "AlgebraicGeometry.ProEtale.ClopenCompositeCounit.cancellation",
+   "AlgebraicGeometry.ProEtale.ClopenCompositeCounit.clopenCompositeCounitNormalization"
+  ],
+  "file": "lean/Sheaf/SixFunctors/ClopenCompositeCounitNormalization.lean",
+  "statement": "theorem clopenCompositeCounitNormalization {U X W : Scheme.{u}} (s : U ⟶ X) (q : X ⟶ W) [IsOpenImmersion s] [IsClosedImmersion s] : IsIso (comparison Λ s) ∧ IsIso (compositeComparison Λ s q) ∧ (projector Λ s ≫ Functor.whiskerLeft (upperStar (ModuleCat.{u + 1} Λ) s).mapDerivedCategory (comparison Λ s) = (adjunction Λ s).unit) ∧ (∀ M : DerivedCategory (Sheaf (ProEt.topology U) (ModuleCat.{u + 1} Λ)), cancellation Λ s q M = 𝟙 _)",
+  "branch": "newtargets-dag",
+  "by": "Q76",
+  "date": "2026-10-23",
+  "existing": false,
+  "note": "The helpers construct exactly the stipulated maps using the published fixed-scalar constant-module presentation on ProEt.topology. The sheaf reverse adjunction supplies the actual degreewise projector; t is independently defined by the adjunct of inverse open unit, and c by conjugateIsoEquiv of inverse pullback composition. Only the final theorem is postponed."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-998fa78f3",
+  "group": "Q76",
+  "result": "pass",
+  "note": "Read node (unchanged vs side-live except lean), all 8 stmt_dep records, report (Worker report + Second reading by Q76), module and framework sources (FiniteD/finiteShriek/FiniteOpenPin.unit in OpenTensorNormalizationData, canonical j_!→j_* comparison, clopen isIso theorem). Every node object is a canonical construction: derived P⊣S via published adjunction ofNatIsoLeft; u_s = localized published open unit (pinned to the normalized unit by FiniteOpenPin.unit); t_s = whiskerRight.homEquiv of u_s⁻¹ (= mate formula); π_s = localized unit of sheaf s^*⊣j_! via canonical j_!≅s_* (identity on U, zero on complement), not assumed equal to η_s; c = conjugateIsoEquiv(Adjunction.comp, P_r≅P_sP_q); a = S_q(t)≫c. Four conjuncts match the node, with d inserted before ε_r in the correct orientation. Verified by hand: the transpose argument gives (tP)π=η and c∘η^B=S_r(d⁻¹)η_r, so the composite is 1. Statement verbatim, docstrings/H8 present, only the final theorem is sorry, no extra hypotheses (Λ:Type(u+1) as in the stmt_dep finite clause), edge cases U=∅, Λ=0, s=id, unbounded M OK. Advisory: exactDerivedAdjunction owned by a proof_dep def node; fixed-scalar ProEtale operations reexported by the proetale-operations module; homEquiv instead of mateEquiv. No compile (no changes); worker reports clean scompile 17.2 s."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T7",
+  "result": "pass",
+  "landing": "20261024T191247-L-289076",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

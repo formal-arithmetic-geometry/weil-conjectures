@@ -1,0 +1,146 @@
+{
+ "id": "lem-sfb-discrete-coefficient-model",
+ "kind": "statement",
+ "title": "Normalized discrete coefficient module-sheaf model",
+ "statement": "Let X be a Noetherian scheme, A a commutative ring in universe u, k a Noetherian commutative ring in universe u+1, and e : ULift A ≃+* k. The internal modules on X over the pulled-back discrete condensed ring A [def-sfb-integral-models-stacks-data] have the following normalized presentation on the equivalent coefficient-sized small pro-etale site. There exists a ring sheaf isomorphism c from the constant sheaf k to the reconstructed section ring, whose map on every constant section e(a) is the constant additive sheaf comparison [def-sfb-constant-sheaf-scheme-pullback-comparison] applied to a. The explicitly constructed functor smallModules followed by scalar restriction along c is an additive strong monoidal equivalence. For every module N, the internal finite-constant-model constructibility of N is equivalent to affine-local coefficient-model constructibility of its image [def-sfb-affine-locally-constructible-proetale-modules]. Normalization makes c unique, including on disconnected sites. No derived object, integral completion, residue or Tor predicate occurs.",
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tag 03CY, lemma-sheafification-presheaf-modules; Sites Tag 00YV, proposition-functoriality-algebraic-structures-topoi; Pro-etale Tag 09AJ, definition-constructible. Agent-written normalized section-action specialization for integral-models (1)--(2)."
+ },
+ "stmt_deps": [
+  "def-sfb-integral-models-stacks-data",
+  "def-sfb-constant-sheaf-scheme-pullback-comparison",
+  "def-sfb-affine-locally-constructible-proetale-modules"
+ ],
+ "proof": [
+  {
+   "text": "Construct c explicitly: relabel the constant ring k by e inverse, use the inverse constant-sheaf precomposition comparison for AsSmall.down, then precompose the proved discreteRingIso construction of IntegralModelsFlatResidue. Sheafification naturality, constantsIso_unit and discreteRingIso_unit prove the required formula on constants. Keep the existing normalization-uniqueness proof. No arbitrary object is chosen from an unproved existence theorem.",
+   "uses": [
+    "def-sfb-constant-sheaf-scheme-pullback-comparison",
+    "def-sfb-integral-models-stacks-data",
+    "lem-sfb-integral-models-flat-residue",
+    "lem-weil-pbc-completed-constant-algebra-flat-quotients"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Reuse the existing additive-equivalence instances. Reuse the proved sectionMonoidal_exists helper of FiniteComparisonPresentation, which assembles internal_section_tensor_comparison into CoreMonoidal using tensor naturality, associativity and the unit equations. The ringed cocontinuous restriction theorem applies to AsSmall.down and the coefficient isomorphism c, giving the remaining monoidal factor. Compose these structures for the actual functor discreteCoefficientModel. The scalar-restriction cancellation helper of ConstantScalarRestrictionTensor still proves its equivalence instance.",
+   "uses": [
+    "lem-pe-internal-section-tensor-comparison",
+    "lem-sfb-ringed-cocontinuous-monoidal",
+    "lem-sfb-constant-scalar-restriction-tensor",
+    "lem-ctf-finite-comparison-presentation"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Since X is Noetherian it is quasi-compact and quasi-separated, so unfold internal constant-model constructibility as existence of a finite stratification with finite constant local models. On each stratum apply discrete_coefficient_local_models to its immersion and N. Convert finite-type constant local models to finitely presented ones by finiteLocalModels_iff_presentation. Apply proEtale_noetherian_global_constructibility in both directions, retaining the same stratification.",
+   "uses": [
+    "lem-sfb-discrete-coefficient-local-models",
+    "lem-sfb-noetherian-global-constructibility"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-sfb-constant-sheaf-scheme-pullback-comparison",
+  "def-sfb-integral-models-stacks-data",
+  "lem-sfb-integral-models-flat-residue",
+  "lem-weil-pbc-completed-constant-algebra-flat-quotients",
+  "lem-pe-internal-section-tensor-comparison",
+  "lem-sfb-ringed-cocontinuous-monoidal",
+  "lem-sfb-constant-scalar-restriction-tensor",
+  "lem-sfb-discrete-coefficient-local-models",
+  "lem-sfb-noetherian-global-constructibility",
+  "lem-ctf-finite-comparison-presentation"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-lem-integral-models/_section.md",
+  "place": "Integral-models proof (1)--(2): explicit normalized coefficient map, monoidal section and cocontinuous restriction, then finite local models on each stratum and the Noetherian global comparison. Q5 implements the first two parts and reduces only the local finite-model step."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "An exact equivalence of modules over a constant ring sheaf and fixed scalar sheaves preserves constructibility and finite Tor amplitude",
+   "date": "2026-10-25",
+   "results": "8 hits, including ModuleCat.restrictScalarsEquivalenceOfRingEquiv, restriction equivalence and sheafification infrastructure.",
+   "verdict": "No normalized project discrete coefficient model or its constructibility comparison; reuse the existing scalar restriction and section-action constructions."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Exact monoidal equivalence of sheaves of modules preserves finite Tor amplitude and constructible homology",
+   "date": "2026-10-25",
+   "results": "8 hits, including general light condensed monoidal and sheaf monoidal constructions.",
+   "verdict": "No theorem comparing the internal discrete coefficient model with this small-site constant ring model."
+  },
+  {
+   "tool": "grep",
+   "query": "finiteTorAmplitude.*mapDerivedCategory|fixedScalarDerivedModel|constantModel.*constructible",
+   "date": "2026-10-25",
+   "results": "0 hits in the Mathlib search. Local project search found FiniteComparisonPresentation, InternalResidueStacksComparison and ConstantScalarRestrictionTensor.",
+   "verdict": "The project finite presentation comparison uses a different continuous finite coefficient realization and universe; the internal residue comparison stops at another derived reduction. Neither directly supplies the normalized small-site model used here."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.IntegralResidueCoefficientTransport",
+  "date": "2026-10-25",
+  "group": "Z9"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-lem-integral-models-stacks",
+   "place": "Integral-models proof (1)--(2): module-sheaf coefficient presentation and finite constant local models, before deriving or reducing.",
+   "via": [
+    "lem-sfb-integral-residue-coefficient-transport",
+    "lem-sfb-integral-models-residue-transport"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-lem-integral-models",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.DiscreteCoefficientModel",
+  "file": "lean/Sheaf/AlgebraicGeometry/DiscreteCoefficientModel.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.IntegralModelsStacks.discrete_coefficient_model",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.IntegralModelsStacks.discreteCoefficientAbelianIso",
+   "AlgebraicGeometry.ProEtale.IntegralModelsStacks.DiscreteCoefficientNormalized",
+   "AlgebraicGeometry.ProEtale.IntegralModelsStacks.discreteCoefficientNormalized_unique",
+   "AlgebraicGeometry.ProEtale.IntegralModelsStacks.discreteCoefficientModel",
+   "AlgebraicGeometry.ProEtale.IntegralModelsStacks.discreteCoefficientModel_isEquivalence",
+   "AlgebraicGeometry.ProEtale.IntegralModelsStacks.discreteCoefficientModel_additive",
+   "AlgebraicGeometry.ProEtale.IntegralModelsStacks.discrete_coefficient_model"
+  ],
+  "statement": "theorem discrete_coefficient_model (X : Scheme.{u}) [IsNoetherian X]\n    (A : Type u) [CommRing A] (k : Type (u + 1)) [CommRing k] [IsNoetherianRing k]\n    (e : ULift.{u + 1} A ≃+* k) :\n    ∃ c : ConstantCompletion.constant (Scheme.coefficientProEtaleModelTopology.{u, u} X) k ≅\n        smallRing X (condensedRingObj (discreteObj A) X),\n      DiscreteCoefficientNormalized X A k e c ∧\n      Nonempty (discreteCoefficientModel X A k c).Monoidal ∧\n      ∀ N, IsConstantModelConstructible (discreteObj A) X N ↔\n        Scheme.IsCoefficientAffineLocallyConstructibleProEtaleModuleSheaf.{u, u} X k\n          ((discreteCoefficientModel X A k c).obj N)",
+  "branch": "sheaf-dag",
+  "by": "Z9",
+  "date": "2026-10-25"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Z9",
+  "result": "pass",
+  "landing": "20261025T212803-L-234683",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q5",
+  "result": "pass",
+  "landing": "20261026T002258-L-72466",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

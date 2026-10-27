@@ -1,0 +1,121 @@
+{
+ "id": "def-sfb-global-section-module-map",
+ "kind": "definition",
+ "title": "Module map from a global section",
+ "status": "split",
+ "import_flags": [],
+ "statement": "Let $X$ be a scheme [def-pc-scheme] and $M$ an $\\mathcal O_X$-module [def-weil-sheaf-of-modules-category]. For $s\\in\\Gamma(X,M)$ define the $\\mathcal O_X$-linear morphism $\\mathcal O_X\\to M$ by sending $r\\in\\mathcal O_X(U)$ to $r\\,s|_U$ on every open $U\\subseteq X$. Equivalently, form the compatible family of restrictions of $s$ and apply the inverse of the unit-Hom/sections equivalence. This definition fixes the map, including on the zero module and on the empty scheme.",
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-sheaf-of-modules-category"
+ ],
+ "source": {
+  "document": "literature/stacks-project/modules.tex",
+  "place": "section-sections, the unique module morphism associated to a global section"
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "morphism from structure sheaf corresponding to a global section of module sheaf",
+   "results": "Both semantic searches find SheafOfModules.unitHomEquiv, the general family-of-sections equivalence. Source search finds the exact top-open section specialization homOfGlobalSection. Only theorem-owned modules refer to this construction, with no definition node for it.",
+   "date": "2026-10-24",
+   "verdict": "reuse source definition"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "global section to morphism structure sheaf modules",
+   "results": "Both semantic searches find SheafOfModules.unitHomEquiv, the general family-of-sections equivalence. Source search finds the exact top-open section specialization homOfGlobalSection. Only theorem-owned modules refer to this construction, with no definition node for it.",
+   "date": "2026-10-24",
+   "verdict": "reuse source definition"
+  },
+  {
+   "tool": "grep",
+   "query": "NodalRelativeDualizingAdjunction|zariskiTracePullbackUnitIso|dualEvaluation|homOfGlobalSection",
+   "results": "msearch Mathlib/AlgebraicGeometry: 0 hits. rg of the named WeilConjectures and Sheaf source modules finds the exact existing declarations. DAG definition-record search and blueprint_refs search find no owner for this notion. Both semantic searches find SheafOfModules.unitHomEquiv, the general family-of-sections equivalence. Source search finds the exact top-open section specialization homOfGlobalSection. Only theorem-owned modules refer to this construction, with no definition node for it.",
+   "date": "2026-10-24",
+   "verdict": "existing source definition; add ownership node"
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-smooth-proper-coherent-trace-pairing",
+  "date": "2026-10-24",
+  "group": "NR"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "Canonical construction used by the smooth proper coherent trace pairing: Module map from a global section",
+   "via": [
+    "lem-sfb-smooth-proper-coherent-trace-pairing",
+    "lem-sfb-flag-line-equivariant-serre-pairing",
+    "lem-sfb-top-bottom-cohomology-simple-image",
+    "lem-sfb-induced-composition-linkage",
+    "lem-sfb-restricted-rho-simple-dimension",
+    "lem-sfb-steinberg-induced-module-irreducible",
+    "lem-sfb-rho-section-self-duality",
+    "lem-sfb-steinberg-endomorphism-detection",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "lean": {
+  "module": "WeilConjectures.AlgebraicGeometry.Modules.PullbackFreeGenerator",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.homOfGlobalSection",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.Modules.homOfGlobalSection"
+  ],
+  "statement": "noncomputable def homOfGlobalSection (M : X.Modules) (u : Γ(M, ⊤)) :\n    Modules.unit X ⟶ M",
+  "branch": "sheaf-dag",
+  "by": "NR",
+  "date": "2026-10-24",
+  "existing": true,
+  "note": "H2 repair: the definition node owns these exact existing definitions; no assertion of the theorem in this module is being used. Both semantic searches find SheafOfModules.unitHomEquiv, the general family-of-sections equivalence. Source search finds the exact top-open section specialization homOfGlobalSection. Only theorem-owned modules refer to this construction, with no definition node for it."
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-97ab15cdf",
+  "group": "NR",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-97ab15cdf",
+  "group": "NR",
+  "result": "pass",
+  "note": "Re-delivery of the 737909f H2 return. Lean differs only in imports; the definitions and theorem signature are byte-identical and lean.statement is verbatim in the file. The item node changes only in lean and stmt_deps, with the statement text unchanged. Four existing:true def nodes were added: def-sfb-relative-dualizing-adjunction (NodalRelativeDualizingAdjunction/.complex, 0A9E), def-sfb-derived-pullback-unit-identification (zariskiTracePullbackUnitIso = εIso of the canonical monoidal realization, 079U), def-sfb-sheaf-dual-evaluation (dual/dualEvaluation) and def-sfb-global-section-module-map (homOfGlobalSection). Each statement matches its construction, and no other def node owns these declarations in live. The §1(B) lean-only repair of def-pc-affine-global-hom-base-change-map points the record to the WeilConjectures module, which really holds affineGlobalHomBaseChangeMap (general M K) and canonicalPullbackAdjunction; the Sheaf module only re-imports it. Mechanical theorem-stmt_dep finding judged PASS: pull uses choose(exists_tensorPullbackAdjunction), whose module contains only that theorem and whose adjunction is pinned by the unit formula (the earlier review asked for this dep); tensorComparison = choose(module_pullback_tensor), pinned by naturality and the pure-tensor formula. Both are genuine theorem conclusions. Mathematics re-read clause by clause against Stacks 0FVV/0FVY/0FW0/0B6J/0AAB: counit-normalized trace, perfectness with both transposes, canonical base change for all k-algebras, t_A = 1⊗t, invariance under automorphisms with dual(η⁻¹), composition laws, and edge cases (d=0, empty Y, rank 0, A=0, non-Noetherian A, char 2, single universe u). nt_incremental2.check on live plus the snapshot nodes gives []. Gates: no hollow defs, docstrings carry source and blueprint, the only sorry is the main theorem. Advisory: dual is also listed under def-pc-divisor-line-bundle; the new unit-identification node does not cite lem-sc-mixed-hom-tensor-pullback-iso; def-trf-polynomial-duality-presentation-data is an unused stmt_dep/import; the ProperFlatSpaceDerivedDuality import clash is a stage-3 matter. No compile run, since no file was changed."
+ }
+}

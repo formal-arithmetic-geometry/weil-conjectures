@@ -1,0 +1,126 @@
+{
+ "id": "lem-sfb-nonaffine-closed-derived-evaluation",
+ "kind": "statement",
+ "title": "Closed-unit comparison is natural in lifted tests",
+ "statement": "For a commutative condensed ring [sk-def-sfb-condensed-ring], use the derived module functors [sk-def-sfb-module-derived-pushpull] and specified section maps [def-sfb-closed-test-derived-exchange-maps] in the common universe [def-weil-size-convention]. Let A be a commutative ring, I an ideal, and V,V′ affine pro-etale tests over Spec(A/I). Let v be the closed-site lift [def-exc-closed-site-lift]. Assume V,V′,v(V),v(V′) are w-contractible [sk-def-pe-wlocal]. For every r:V′→V and every unbounded derived module K over Spec A, closedComparison_V followed by sectionsArrow_r on s* K equals sectionsArrow_v(r) followed by closedComparison_V′ on K.",
+ "source": {
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Tags 09BK (lemma-closed-immersion-affines), 09BL (lemma-closed-immersion-affines-apply); sites-cohomology.tex Tag 0D6F (lemma-unbounded-cohomology-of-open). Agent extension of the existing affine-source lifted-test calculation to qcqs nonaffine sources."
+ },
+ "stmt_deps": [
+  "def-sfb-closed-test-derived-exchange-maps",
+  "sk-def-sfb-module-derived-pushpull",
+  "def-weil-size-convention",
+  "sk-def-sfb-condensed-ring",
+  "sk-def-pe-wlocal",
+  "def-exc-closed-site-lift"
+ ],
+ "proof": [
+  {
+   "text": "Proof: expand closedComparison as restriction along the closed-site inclusion,\nthe equality of its composite with the structural morphism, and pullComp.\nThe inclusion is a natural transformation of the affine pro-etale site functors,\nso a test arrow gives a commuting square of these inclusions. Adjunction units\nare natural, and the unit of a composite adjunction is the composite of its units.\nApply this identity to that square, then use associativity of pullComp and the\nnormalization of pushDerivedSectionsIso by ordinary section composition.\nThe two resulting maps are precisely the displayed composites of sectionsArrow\nand closedComparison. Equivalently compute these maps on K-injective resolutions:\nboth are the presheaf restriction followed by the same inverse-image unit.\nThe equality descends through the universal right-derived comparison.\nNo invertibility is needed. Identity arrows, zero complexes, I=0 and empty tests\nsatisfy the same unit and composition identities.",
+   "uses": [
+    "lem-weil-pbc-affine-closed-site-functor-properties",
+    "sk-def-sfb-module-derived-pushpull",
+    "def-sfb-closed-test-derived-exchange-maps"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tags 09BK (lemma-closed-immersion-affines), 09BL (lemma-closed-immersion-affines-apply); sites-cohomology.tex Tag 0D6F (lemma-unbounded-cohomology-of-open). Agent extension of the existing affine-source lifted-test calculation to qcqs nonaffine sources."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-affine-closed-site-functor-properties",
+  "sk-def-sfb-module-derived-pushpull",
+  "def-sfb-closed-test-derived-exchange-maps"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Strict subargument of source step 9: closed-unit test naturality only; H8 stage-3 decomposition."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Derived global sections on a proetale test after direct image agree with derived sections on the pullback test, naturally in test restrictions",
+   "results": "CategoryTheory.Sheaf.ΓRes_naturality; CategoryTheory.Sheaf.ΓObjEquivSections_naturality_symm; CategoryTheory.Sheaf.ΓObjEquivSections_naturality; AlgebraicGeometry.Scheme.Opens.toScheme_presheaf_obj; CategoryTheory.Sheaf.ΓRes_map; CategoryTheory.Sheaf.natTransΓRes_app; CategoryTheory.Sheaf.natTransΓRes; AlgebraicGeometry.LocallyRingedSpace.Γevaluation_naturality_apply",
+   "date": "2026-10-25",
+   "verdict": "No theorem identified for the specified normalized internal-module comparison; generic mate lemmas support formal normalization only."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Adjunction mate exchange is compatible with isomorphisms of left adjoints and composition of exact derived functors",
+   "results": "CategoryTheory.mateEquiv_apply; CategoryTheory.mateEquiv_conjugateEquiv_vcomp; CategoryTheory.Adjunction.derivedε_fac_app_assoc; CategoryTheory.conjugateEquiv_mateEquiv_vcomp; CategoryTheory.Adjunction.derivedη_fac_app_assoc; CategoryTheory.Adjunction.derivedε_fac_app; CategoryTheory.Adjunction.derivedη_fac_app; CategoryTheory.mateEquiv_vcomp",
+   "date": "2026-10-25",
+   "verdict": "No theorem identified for the specified normalized internal-module comparison; generic mate lemmas support formal normalization only."
+  },
+  {
+   "tool": "loogle",
+   "query": "mateEquiv",
+   "results": "loogle: unknown identifier 'mateEquiv'",
+   "date": "2026-10-25",
+   "verdict": "No theorem identified for the specified normalized internal-module comparison; generic mate lemmas support formal normalization only."
+  },
+  {
+   "tool": "grep",
+   "query": "sectionComparison|eqToHom_iso_hom_naturality|homEquiv_ofNatIsoLeft",
+   "results": "Mathlib/CategoryTheory/EqToHom.lean; Mathlib/CategoryTheory/Adjunction/Basic.lean; Mathlib/CategoryTheory/Adjunction/Basic.lean; Mathlib/CategoryTheory/Limits/Shapes/Biproducts.lean; Mathlib/CategoryTheory/Sites/Hypercover/Zero.lean; Mathlib/CategoryTheory/Sites/Hypercover/One.lean; Mathlib/CategoryTheory/Sites/Hypercover/One.lean; Mathlib/CategoryTheory/Sites/Hypercover/One.lean",
+   "date": "2026-10-25",
+   "verdict": "No theorem identified for the specified normalized internal-module comparison; generic mate lemmas support formal normalization only."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.NonaffineClosedTestExchangeIdentification",
+  "date": "2026-10-25",
+  "group": "H8"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-prop-sf-comp-coherence",
+ "blueprint": {
+  "from": {
+   "node": "det-sf-comp-coherence-cocycle",
+   "place": "Refinement isomorphisms, det-sf-comp-coherence-refinement (2): closed-complement base-change calculation; replacement of the unsupported all-continuous algebraic-closure uses in returned steps 4 and 6.",
+   "via": [
+    "lem-sfb-nonaffine-closed-test-exchange-identification",
+    "lem-sfb-qcqs-proper-constructible-closed-base-change",
+    "lem-sfb-qcqs-proper-open-boundary-vanishing"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "lean": {
+  "module": "Sheaf.Paper.ClosedTestClosedEvaluation",
+  "declaration": "AlgebraicGeometry.ProEtale.ClosedTestSectionSteps.closed_derived_evaluation",
+  "file": "lean/Sheaf/Paper/ClosedTestClosedEvaluation.lean",
+  "statement": "theorem closed_derived_evaluation\n    (A : Type u) [CommRing A] (I : Ideal A)\n    (V : (Spec (.of (A ⧸ I))).AffineProEt)\n    [IsWContractibleRing Γ(V.left, ⊤)]\n    [IsWContractibleRing Γ(((Scheme.AffineProEt.closedSiteLift A I).obj V).left, ⊤)] :\n    ∀ (V' : (Spec (.of (A ⧸ I))).AffineProEt) (r : V' ⟶ V)\n        [IsWContractibleRing Γ(V'.left, ⊤)]\n        [IsWContractibleRing Γ(((Scheme.AffineProEt.closedSiteLift A I).obj V').left, ⊤)]\n        (K : DerivedCategory\n          (Mod (Sheaf (Scheme.ProEt.topology (Spec (.of A))) Ab.{u + 1})\n            (condensedRingObj Λ (Spec (.of A))))),\n        (closedComparison Λ A I V).app K ≫\n            (sectionsArrow Λ r.left (MorphismProperty.Over.w r)).app\n              ((pull Λ (closedMap A I)).obj K) =\n          (sectionsArrow Λ ((Scheme.AffineProEt.closedSiteLift A I).map r).left\n              (MorphismProperty.Over.w ((Scheme.AffineProEt.closedSiteLift A I).map r))).app\n                K ≫ (closedComparison Λ A I V').app K",
+  "by": "H8",
+  "date": "2026-10-25",
+  "existing": false,
+  "branch": "sheaf-dag"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H8",
+  "result": "pass",
+  "landing": "20261025T123102-L-1830699",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H8",
+  "result": "pass",
+  "landing": "20261025T123102-L-1830699",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

@@ -1,0 +1,127 @@
+{
+ "id": "lem-pur-ordinary-line-scalar-evaluation",
+ "kind": "statement",
+ "title": "Signed evaluation compatibility of a normalized scalar comparison",
+ "statement": "Let $X,R,S,\\alpha,p,L,K,l,k,B$ have the meanings of [def-pur-ordinary-line-scalar-data], with $L,K$ locally free of rank one. Let $b:L\\otimes_R S\\cong K$ and require the signed family $B$ to satisfy the tensor-power and dual normalizations of [lem-pur-signed-line-scalar-tensor-tower]. Suppose ordinary natural isomorphisms $o_m$ have the forward balanced formula $s\\otimes(x\\otimes y)\\mapsto(s\\otimes x)\\otimes B_m(1\\otimes y)$. Suppose derived natural isomorphisms $d_m:D_pF_{L,m}\\cong F_{K,m}D_p$ satisfy the fixed representative square on every flat-term K-flat complex. Then, for every $Y\\in D(R)$ and integer $m$, the composite of $d_{-m}(F_{L,m}Y)$, $F_{K,-m}(d_m(Y))$ and the fixed target evaluation $\\epsilon_{K,m}(D_pY)$ equals $D_p(\\epsilon_{L,m}(Y))$. The evaluations are the actual normalized evaluations of the given line data; the statement asserts their compatibility for an already constructed comparison, not the existence of a comparison.",
+ "stmt_deps": [
+  "def-pur-ordinary-line-scalar-data",
+  "lem-pur-signed-line-scalar-tensor-tower"
+ ],
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 07A4, lemma-pullback-tensor-product; the ordinary signed-line part of blueprint Tate-twist local freeness proof (3)."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Derived scalar extension of sheaves commutes with tensoring by a locally free rank one sheaf",
+   "results": "8 hits including SheafOfModules.map_ιFree_mapFree_hom, SheafOfModules.freeFunctorCompPullbackIso",
+   "date": "2026-10-27",
+   "verdict": "No exact match: the hits concern free sheaves and ordinary pullback, without the representative-normalized unbounded comparison."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.leftDerivedNatIso",
+   "results": "CategoryTheory.Functor.leftDerivedNatIso, leftDerivedNatIso_hom, leftDerivedNatIso_inv",
+   "date": "2026-10-27",
+   "verdict": "Useful universal uniqueness API; it does not provide the ordinary balanced formula or the normalized evaluation square."
+  },
+  {
+   "tool": "grep",
+   "query": "scalarTensorBinaryIso|tensorComparison|scalarTensorComparison_natural",
+   "results": "0 hits in the Mathlib search service; local rg finds the project scalar tensor core and ordinary tensor comparison.",
+   "date": "2026-10-27",
+   "verdict": "Use the existing project tensor comparison; no matching Mathlib statement."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Algebra.Homology.OrdinaryLineDerivedScalarComparison",
+  "date": "2026-10-27",
+  "group": "M1"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-an",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-def-sp-tate-twist-locally-free",
+   "place": "Proof (3), exact signed-line twists and actual evaluation; ordinary coefficient comparison.",
+   "via": [
+    "lem-pur-ordinary-line-derived-scalar-comparison"
+   ]
+  },
+  "same_as": []
+ },
+ "proof": [
+  {
+   "text": "Choose a flat-term K-flat representative of Y. Tensor by each signed power and scalar extension preserve such models. Substitute the two supplied representative equations and the two line evaluation computation equations.",
+   "uses": [
+    "lem-pc-kflat-resolution",
+    "lem-weil-pbc-ringed-topos-kflat-pullback",
+    "def-pur-ordinary-line-scalar-data"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "The resulting ordinary cochain square can be checked on sheafified generators. Both paths send ((x tensor y) tensor z) tensor s to x tensor s alpha(ev(y,z)): the signed-power comparison preserves the actual evaluation, and commutativity identifies the two scalar orders. The signed basis normalization uniquely identifies the line-data evaluation with this contraction. This includes m=0 and negative m. Explicit local check: on a slice trivializing L, transport a basis through b to K. The recorded signed bases e_n and f_n satisfy B_n(1 tensor e_n)=f_n by hB. Both normalized evaluations take the opposite basis pair to 1. On a e_m tensor c e_{-m} their values are ac and alpha(a)alpha(c), respectively. Bilinearity and sheaf separatedness extend equality from these local bases to arbitrary sections, including zero and negative exponents.",
+   "uses": [
+    "lem-pur-signed-line-scalar-tensor-tower",
+    "lem-pc-sites-sheaf-tensor-bilinear-universal"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply localization to the ordinary cochain square. Naturality along the chosen representative isomorphism gives the desired square on Y, so it is independent of the representative.",
+   "uses": [
+    "lem-weil-pbc-localization-universal-property"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-kflat-resolution",
+  "lem-weil-pbc-ringed-topos-kflat-pullback",
+  "def-pur-ordinary-line-scalar-data",
+  "lem-pur-signed-line-scalar-tensor-tower",
+  "lem-pc-sites-sheaf-tensor-bilinear-universal",
+  "lem-weil-pbc-localization-universal-property"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 07A4 and 06YY; explicit extraction of parent proof steps 5, 6 and 8 by M1."
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Algebra.Homology.OrdinaryLineScalarEvaluation",
+  "file": "lean/Sheaf/Algebra/Homology/OrdinaryLineScalarEvaluation.lean",
+  "declaration": "SheafOfModules.OrdinaryLineScalar.ordinary_scalar_line_evaluation",
+  "statement": "theorem ordinary_scalar_line_evaluation\n    (α : R ⟶ S) (p : SuccessiveDerivedQuotient.Presentation.{t + 1, t, max a (t + 1), w}\n      (J := Scheme.ProEt.topology X) α)\n    (L : Modules.{t, a} X R) (K : Modules.{t, a} X S)\n    [L.IsFiniteLocallyFreeOfRank 1] [K.IsFiniteLocallyFreeOfRank 1]\n    (B : ∀ m : ℤ, changeOfRingsOfUniverses.{t, t + 1, max a (t + 1), max a (t + 1)}\n      (J := Scheme.ProEt.topology X) α (power.{t, a} L m) ≅ power.{t, a} K m)\n    (l : LineData L) (k : LineData K)\n    (b : changeOfRingsOfUniverses.{t, t + 1, max a (t + 1), max a (t + 1)}\n      (J := Scheme.ProEt.topology X) α L ≅ K)\n    (hB : SignedLineComparisonNormalized.{t + 1, t, a} α L K b B)\n    (o : ∀ m : ℤ, tensor.{t, a} L m ⋙ p.ordinary ≅\n      p.ordinary ⋙ tensor.{t, a} K m)\n    (ho : ∀ (m : ℤ) (M : Modules.{t, a} X R) (U : X.ProEtᵒᵖ)\n      (x : M.val.obj U) (y : (power.{t, a} L m).val.obj U) (s : S.obj.obj U),\n      ((o m).hom.app M).val.app U\n        (scalar.{t, a, w} p ((tensor.{t, a} L m).obj M) U s\n          (LineUnbounded.pureTensor.{t, a} X R M (power.{t, a} L m) U x y)) =\n      LineUnbounded.pureTensor.{t, a} X S (p.ordinary.obj M) (power.{t, a} K m) U\n        (scalar.{t, a, w} p M U s x)\n        ((B m).hom.val.app U (scalarExtensionSection α (power.{t, a} L m) U 1 y)))\n    (d : ∀ m : ℤ, twist.{t, a, w} L m ⋙ p.derived ≅\n      p.derived ⋙ twist.{t, a, w} K m)\n    (hd : ∀ (m : ℤ) (P : CochainComplex (Modules.{t, a} X R) ℤ), FlatModel P →\n      (d m).hom.app (𝒬[R].obj P) ≫\n        (twist.{t, a, w} K m).map (compute.{t, a, w} p P) ≫\n        (k.factors m).hom.app ((p.ordinary.mapHomologicalComplex (.up ℤ)).obj P) =\n      p.derived.map ((l.factors m).hom.app P) ≫\n        compute.{t, a, w} p (((tensor.{t, a} L m).mapHomologicalComplex (.up ℤ)).obj P) ≫\n        𝒬[S].map ((Functor.mapHomologicalComplexCompIso (o m) (.up ℤ)).hom.app P)) :\n    ∀ (m : ℤ) (Y : DerivedCategory (Modules.{t, a} X R)),\n      (d (-m)).hom.app ((twist.{t, a, w} L m).obj Y) ≫\n        (twist.{t, a, w} K (-m)).map ((d m).hom.app Y) ≫\n        (k.epsilon m).hom.app (p.derived.obj Y) =\n      p.derived.map ((l.epsilon m).hom.app Y)",
+  "branch": "sheaf-dag",
+  "by": "M1",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-2e1d4",
+  "group": "M1",
+  "result": "pass",
+  "landing": "20261027T131500-L-2942396",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-2e1d4",
+  "group": "M1",
+  "result": "pass",
+  "landing": "20261027T131500-L-2942396",
+  "kind": "interface",
+  "note": "independent cc review: the deleted blocks of the original module against the new Data/Presentations/LineData modules (verbatim apart from blueprint tags), the item signature against the clone, the four direct importers and #print axioms compiled in sandbox /tmp/m1sb, the timing of the published original (106.6 s) against the delivered item (34 s), and the evaluation hole against its node and the Comparison.evaluation field"
+ }
+}

@@ -78,6 +78,20 @@ theorem systemSingle_preserves {K L : CochainComplex (systemLevel B n) ℤ} (f :
       (hzero K).isIso (hzero L) _
     infer_instance
 
+/-- The determined normalized derivation of the fixed ordinary singleton adjunction.
+Keeping the selected derivation named prevents repeated reduction of its resolving-class
+construction when comparing fields. Source: Zheng 4.1; Stacks 06XN and 0FND
+(blueprint: lem-pur-system-single-derived-extension). -/
+@[irreducible]
+def systemSingleDerivation (S : SystemScalarAssignment (J := J))
+    (T : SystemTensorCoherence S) :
+    SystemLeftExtensionDerivation (systemEvaluation B n) (systemSingleFunctor S T B n)
+      (systemSingleAdjunction S T B n) (systemLevelKFlat B n) :=
+  Classical.choice <|
+    nonempty_normalizedLeftExtension (systemEvaluation B n) (systemSingleFunctor S T B n)
+      (systemSingleAdjunction S T B n) (systemLevelKFlat B n)
+      (systemLevel_kFlatResolution B n) (fun f ↦ systemSingle_preserves S T B n f)
+
 /-- The ordinary singleton adjunction has its everywhere-defined normalized derived
 adjunction. Source: Zheng 4.1; Stacks 06XN and 0FND
 (blueprint: lem-pur-system-single-derived-extension).
@@ -86,9 +100,6 @@ the preceding resolution and invariance lemmas. -/
 def systemSingleDerivedExtension (S : SystemScalarAssignment (J := J))
     (T : SystemTensorCoherence S) :
     SystemDerivedLeftExtension (systemEvaluation B n) (systemLevelKFlat B n) :=
-  (Classical.choice <|
-  nonempty_normalizedLeftExtension (systemEvaluation B n) (systemSingleFunctor S T B n)
-    (systemSingleAdjunction S T B n) (systemLevelKFlat B n)
-    (systemLevel_kFlatResolution B n) (fun f ↦ systemSingle_preserves S T B n f)).toExtension
+  (systemSingleDerivation B n S T).toExtension
 
 end SheafOfModules

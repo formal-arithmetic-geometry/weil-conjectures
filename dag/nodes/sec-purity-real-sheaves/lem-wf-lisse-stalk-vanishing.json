@@ -1,0 +1,134 @@
+{
+ "id": "lem-wf-lisse-stalk-vanishing",
+ "kind": "statement",
+ "title": "Lisse sheaves with vanishing geometric stalks",
+ "statement": "Let $X$ be a scheme and $\\overline{\\mathbf Q}_{\\ell,X}=p_X^*\\underline{\\Qlb}$ the coefficient\nsheaf on $X_{\\mathrm{proét}}$ ([sk-def-sfb-pulled-back-coefficients],\n[sk-def-sfb-qlbar-condensed]). For a $\\overline{\\mathbf Q}_{\\ell,X}$-module $H$ and a geometric\npoint $s:\\Spec K\\to X$, with $K$ algebraically closed, write\n$H_s=\\Gamma(\\Spec K,s^*H)$ for the stalk, $s^*$ being the pullback of module objects\n([sk-def-sfb-module-pushforward-pullback]). Call $H$ *lisse* if it is locally free of finite\nrank for the pro-étale topology ([sk-lem-coefficient-heart]).\n\n1. If $H$ is lisse and over every point $x\\in X$ there is a geometric point $s$ of $X$ with\n   $H_s=0$, then $H=0$.\n2. Let $g:Z\\to X$ be a morphism of schemes such that $g^*H$ is lisse. If $H_s=0$ for every\n   geometric point $s$ of $X$, then $g^*H=0$.",
+ "source": {
+  "document": "literature/blueprint/main-20261023/blueprint/sec-purity-real-sheaves/sk-i-real-sheaves/lem-wf-lisse-stalk-vanishing.md",
+  "place": "node lem-wf-lisse-stalk-vanishing, order 2928",
+  "external": [
+   {
+    "document": "Stacks Project",
+    "place": "Tag 01JT"
+   }
+  ]
+ },
+ "stmt_deps": [
+  "sk-def-sfb-pulled-back-coefficients",
+  "sk-def-sfb-qlbar-condensed",
+  "sk-def-sfb-module-pushforward-pullback",
+  "sk-lem-coefficient-heart"
+ ],
+ "proof": [
+  {
+   "text": "(1) Write $\\Lambda=\\underline{\\Qlb}$. Choose a pro-étale cover $\\{f_i:V_i\\to X\\}$\n([def-weil-pbc-proetale-site]) with isomorphisms\n$f_i^*H\\simeq\\Lambda_{V_i}^{\\oplus n_i}$. Fix $i$ with $V_i\\neq\\emptyset$, a point $v\\in V_i$,\nand put $x=f_i(v)$; by hypothesis there is a geometric point $s:\\Spec K\\to X$ over $x$ with\n$H_s=0$.",
+   "uses": [
+    "def-weil-pbc-proetale-site"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "*$s$ lifts to $V_i$.* The fibre product $W=V_i\\times_X\\Spec K$ is nonempty: its points over\n$(v,\\Spec K)$ correspond to the primes of $\\kappa(v)\\otimes_{\\kappa(x)}K$\n([Tag 01JT](https://stacks.math.columbia.edu/tag/01JT)), a nonzero ring, being a tensor product\nof two nonzero vector spaces over the field $\\kappa(x)$. The projection $W\\to\\Spec K$ is weakly\nétale, as a base change of $f_i$. Let $W'\\subseteq W$ be a nonempty affine open. Since $K$ is\nseparably closed, the affine pro-étale objects over $\\Spec K$ are the profinite sets\n([sk-prop-pe-condensed-point]); $W'$ corresponds to a nonempty profinite set, and its map to\nthe one-point set has a section $\\Spec K\\to W'$. Composing with $W'\\subseteq W\\to V_i$ gives\n$t:\\Spec K\\to V_i$ with $f_i\\circ t=s$.",
+   "uses": [],
+   "elementary": null
+  },
+  {
+   "text": "*The stalk.* By the composition isomorphism of pullbacks\n([sk-def-sfb-module-pushforward-pullback]) and $t^*\\Lambda_{V_i}\\simeq\\Lambda_{\\Spec K}$\n([sk-def-sfb-pulled-back-coefficients]),\n\n$$\ns^*H\\simeq t^*f_i^*H\\simeq t^*\\Lambda_{V_i}^{\\oplus n_i}\\simeq\\Lambda_{\\Spec K}^{\\oplus n_i},\n\\qquad\\text{so}\\qquad\n0=H_s\\simeq\\Gamma(\\Spec K,\\Lambda_{\\Spec K})^{\\oplus n_i}=\\Qlb^{\\oplus n_i},\n$$\n\nthe sections of $\\underline{\\Qlb}$ over the point being the constant functions, i.e. $\\Qlb$\n([sk-def-sfb-qlbar-condensed], [sk-prop-pe-condensed-point]). Hence $n_i=0$ and\n$f_i^*H=0$; for $V_i=\\emptyset$ this holds trivially.",
+   "uses": [
+    "sk-def-sfb-module-pushforward-pullback",
+    "sk-def-sfb-pulled-back-coefficients",
+    "sk-def-sfb-qlbar-condensed"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "*Conclusion.* For an object $V_i$ of $X_{\\mathrm{proét}}$ the pullback $f_i^*H$ is the\nrestriction of $H$ to $V_i$. So $H(U')=0$ for every object $U'$ lying over some $V_i$, and for\nan arbitrary object $U$ the sheaf axiom for the cover $\\{U\\times_XV_i\\to U\\}$ presents $H(U)$\nas a subgroup of $\\prod_iH(U\\times_XV_i)=0$. Hence $H=0$.\n\n(2) Let $z\\in Z$ and let $t:\\Spec K\\to Z$ be a geometric point over $z$. By the composition\nisomorphism of pullbacks, $(g^*H)_t=\\Gamma(\\Spec K,t^*g^*H)\\simeq\\Gamma(\\Spec K,(g\\circ t)^*H)\n=H_{g\\circ t}=0$. So the lisse module $g^*H$ satisfies the hypothesis of (1), and $g^*H=0$.",
+   "uses": [],
+   "elementary": null
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-proetale-site",
+  "sk-def-sfb-module-pushforward-pullback",
+  "sk-def-sfb-pulled-back-coefficients",
+  "sk-def-sfb-qlbar-condensed"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261023/blueprint/sec-purity-real-sheaves/sk-i-real-sheaves/lem-wf-lisse-stalk-vanishing.md",
+  "place": "## Proof"
+ },
+ "mathlib_searches": [],
+ "mathlib_match": null,
+ "status": "imported",
+ "merged_into": null,
+ "import_flags": [
+  "proof_cites_literature",
+  "lean_not_found"
+ ],
+ "blueprint_kind": "lemma",
+ "blueprint_order": 2928,
+ "blueprint_uses": [
+  "sk-def-sfb-pulled-back-coefficients",
+  "sk-def-sfb-qlbar-condensed",
+  "sk-def-sfb-module-pushforward-pullback",
+  "sk-lem-coefficient-heart",
+  "def-weil-pbc-proetale-site",
+  "sk-prop-pe-condensed-point"
+ ],
+ "blueprint_lean": [
+  "AlgebraicGeometry.ProEtale.IsAdicLisseSheaf.isZero_of_forall_subsingleton_stalk",
+  "AlgebraicGeometry.ProEtale.isZero_adicUpperStar_of_forall_subsingleton_stalk"
+ ],
+ "blueprint_lean_not_found": [
+  "AlgebraicGeometry.ProEtale.IsAdicLisseSheaf.isZero_of_forall_subsingleton_stalk",
+  "AlgebraicGeometry.ProEtale.isZero_adicUpperStar_of_forall_subsingleton_stalk"
+ ],
+ "proof_split_by": "labels",
+ "blueprint_snapshot": "main-20261023",
+ "blueprint": {
+  "is": "lem-wf-lisse-stalk-vanishing",
+  "from": null,
+  "same_as": null
+ },
+ "chapter": "sec-purity-real-sheaves",
+ "unit": "sk-i-real-sheaves",
+ "blueprint_update": {
+  "snapshot": "main-20261023-1620",
+  "commit": "7284bb09daf97437d544c51882b325f9c52cd345",
+  "changed": [
+   "statement",
+   "proof"
+  ],
+  "statement": "Let $X$ be a scheme and $\\overline{\\mathbf Q}_{\\ell,X}=p_X^*\\underline{\\Qlb}$ the coefficient\nsheaf on $X_{\\mathrm{proét}}$ ([det-def-sfb-pulled-back-coefficients],\n[det-def-sfb-qlbar-condensed]). For a $\\overline{\\mathbf Q}_{\\ell,X}$-module $H$ and a geometric\npoint $s:\\Spec K\\to X$, with $K$ algebraically closed, write\n$H_s=\\Gamma(\\Spec K,s^*H)$ for the stalk, $s^*$ being the pullback of module objects\n([det-def-sfb-module-pushforward-pullback]). Call $H$ *lisse* if it is locally free of finite\nrank for the pro-étale topology ([sk-lem-coefficient-heart]).\n\n1. If $H$ is lisse and over every point $x\\in X$ there is a geometric point $s$ of $X$ with\n   $H_s=0$, then $H=0$.\n2. Let $g:Z\\to X$ be a morphism of schemes such that $g^*H$ is lisse. If $H_s=0$ for every\n   geometric point $s$ of $X$, then $g^*H=0$.",
+  "proof": [
+   {
+    "text": "(1) Write $\\Lambda=\\underline{\\Qlb}$. Choose a pro-étale cover $\\{f_i:V_i\\to X\\}$\n([def-weil-pbc-proetale-site]) with isomorphisms\n$f_i^*H\\simeq\\Lambda_{V_i}^{\\oplus n_i}$. Fix $i$ with $V_i\\neq\\emptyset$, a point $v\\in V_i$,\nand put $x=f_i(v)$; by hypothesis there is a geometric point $s:\\Spec K\\to X$ over $x$ with\n$H_s=0$.",
+    "uses": [
+     "def-weil-pbc-proetale-site"
+    ],
+    "elementary": false
+   },
+   {
+    "text": "*$s$ lifts to $V_i$.* The fibre product $W=V_i\\times_X\\Spec K$ is nonempty: its points over\n$(v,\\Spec K)$ correspond to the primes of $\\kappa(v)\\otimes_{\\kappa(x)}K$\n([Tag 01JT](https://stacks.math.columbia.edu/tag/01JT)), a nonzero ring, being a tensor product\nof two nonzero vector spaces over the field $\\kappa(x)$. The projection $W\\to\\Spec K$ is weakly\nétale, as a base change of $f_i$. Let $W'\\subseteq W$ be a nonempty affine open. Since $K$ is\nseparably closed, the affine pro-étale objects over $\\Spec K$ are the profinite sets\n([sk-prop-pe-condensed-point]); $W'$ corresponds to a nonempty profinite set, and its map to\nthe one-point set has a section $\\Spec K\\to W'$. Composing with $W'\\subseteq W\\to V_i$ gives\n$t:\\Spec K\\to V_i$ with $f_i\\circ t=s$.",
+    "uses": [],
+    "elementary": null
+   },
+   {
+    "text": "*The stalk.* By the composition isomorphism of pullbacks\n([det-def-sfb-module-pushforward-pullback]) and $t^*\\Lambda_{V_i}\\simeq\\Lambda_{\\Spec K}$\n([det-def-sfb-pulled-back-coefficients]),\n\n$$\ns^*H\\simeq t^*f_i^*H\\simeq t^*\\Lambda_{V_i}^{\\oplus n_i}\\simeq\\Lambda_{\\Spec K}^{\\oplus n_i},\n\\qquad\\text{so}\\qquad\n0=H_s\\simeq\\Gamma(\\Spec K,\\Lambda_{\\Spec K})^{\\oplus n_i}=\\Qlb^{\\oplus n_i},\n$$\n\nthe sections of $\\underline{\\Qlb}$ over the point being the constant functions, i.e. $\\Qlb$\n([det-def-sfb-qlbar-condensed], [sk-prop-pe-condensed-point]). Hence $n_i=0$ and\n$f_i^*H=0$; for $V_i=\\emptyset$ this holds trivially.",
+    "uses": [
+     "det-def-sfb-module-pushforward-pullback",
+     "det-def-sfb-pulled-back-coefficients",
+     "det-def-sfb-qlbar-condensed"
+    ],
+    "elementary": false
+   },
+   {
+    "text": "*Conclusion.* For an object $V_i$ of $X_{\\mathrm{proét}}$ the pullback $f_i^*H$ is the\nrestriction of $H$ to $V_i$. So $H(U')=0$ for every object $U'$ lying over some $V_i$, and for\nan arbitrary object $U$ the sheaf axiom for the cover $\\{U\\times_XV_i\\to U\\}$ presents $H(U)$\nas a subgroup of $\\prod_iH(U\\times_XV_i)=0$. Hence $H=0$.\n\n(2) Let $z\\in Z$ and let $t:\\Spec K\\to Z$ be a geometric point over $z$. By the composition\nisomorphism of pullbacks, $(g^*H)_t=\\Gamma(\\Spec K,t^*g^*H)\\simeq\\Gamma(\\Spec K,(g\\circ t)^*H)\n=H_{g\\circ t}=0$. So the lisse module $g^*H$ satisfies the hypothesis of (1), and $g^*H=0$.",
+    "uses": [],
+    "elementary": null
+   }
+  ],
+  "note": "the current blueprint (main-20261023-1620, weil-conjectures-blueprint 7284bb09da) states or proves this differently; a worker who touches the node follows it"
+ }
+}

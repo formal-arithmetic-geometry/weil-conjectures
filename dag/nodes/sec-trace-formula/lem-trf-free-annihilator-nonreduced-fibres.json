@@ -1,0 +1,240 @@
+{
+ "id": "lem-trf-free-annihilator-nonreduced-fibres",
+ "kind": "statement",
+ "title": "Nonreduced fibres detected by free annihilator and principal quotients",
+ "statement": "Let $A$ be a commutative ring, $f:X\\to\\operatorname{Spec}A$ a morphism of schemes [def-pc-scheme, def-weil-affine-spectrum], and $U=\\operatorname{Spec}B\\subseteq X$ an affine open subscheme whose structure map comes from the specified $A$-algebra structure on the commutative ring $B$ [def-weil-open-immersion]. Let $b\\in B$ satisfy $b^n=0$ for some $n\\geq1$. Put $C=B/\\operatorname{Ann}_B(b)$, where $\\operatorname{Ann}_B(b)=\\{x\\in B:bx=0\\}$, and $D=B/bB$. Assume $C\\ne0$ and both $C$ and $D$ are free $A$-modules [def-weil-pbc-free-module], with possibly infinite bases. Then, for every homomorphism $A\\to k$ to a field, $b\\otimes1$ is a nonzero nilpotent element of $B\\otimes_Ak$ [def-weil-module-base-change]. Consequently, for every $t\\in\\operatorname{Spec}A$ the scheme-theoretic fibre $X_t$ is not reduced [def-pc-scheme-fibre, def-pc-reduced-scheme]. No domain, finite type, or Noetherian hypothesis is imposed on $A$, $B$, or $f$.",
+ "source": {
+  "document": "literature/stacks-project/more-morphisms.tex",
+  "place": "Tag 0575, lemma-nonreduced-in-neighbourhood, proof after the short exact sequence: tensoring with a field, nonzero multiplication by h, and nonreducedness of every whole fibre"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-affine-spectrum",
+  "def-weil-open-immersion",
+  "def-weil-pbc-free-module",
+  "def-weil-module-base-change",
+  "def-pc-scheme-fibre",
+  "def-pc-reduced-scheme"
+ ],
+ "proof": [
+  {
+   "text": "Put $I=\\operatorname{Ann}_B(b)$ and let $q:B\\to D$ be the quotient map. Multiplication defines an $A$-linear map $j:C\\to B$, $[x]\\mapsto bx$: changing $x$ by an element of $I$ does not change $bx$. If $j([x])=0$, then $x\\in I$, so $[x]=0$. Its image is $bB=\\ker q$, and $q$ is surjective. Thus $0\\to C\\xrightarrow{j}B\\xrightarrow{q}D\\to0$ is exact.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 0575, lemma-nonreduced-in-neighbourhood, proof: the short exact sequence and its field base changes; final paragraph on the nonreduced whole fibre"
+   }
+  },
+  {
+   "text": "Use the assumed freeness of $D$: choose a basis $(d_i)$ and lifts $z_i\\in B$ with $q(z_i)=d_i$. The rule $s(\\sum a_i d_i)=\\sum a_i z_i$ defines an $A$-linear section of $q$, since each expansion is finite and unique. Define $r:B\\to C$ by requiring $j(r(x))=x-s(q(x))$; step 1 gives a unique such element and its $A$-linearity. Since $qj=0$, one has $rj=\\mathrm{id}_C$. For any $A\\to k$, functoriality of module base change gives $(r\\otimes_Ak)(j\\otimes_Ak)=\\mathrm{id}_{C\\otimes_Ak}$. Therefore $j_k=j\\otimes_Ak$ is injective. This is the elementary split-sequence case of the tensor-exactness argument in Tag 0575; the item assumes the stronger condition that its last term is free.",
+   "uses": [
+    "def-weil-pbc-free-module",
+    "def-weil-module-base-change"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 0575, lemma-nonreduced-in-neighbourhood, proof: the short exact sequence and its field base changes; final paragraph on the nonreduced whole fibre"
+   }
+  },
+  {
+   "text": "Choose a basis $(c_i)_{i\\in J}$ of $C$. Because $C\\ne0$, $J$ is nonempty. By [lem-weil-pbc-free-module-base-change-free], $(c_i\\otimes1)_{i\\in J}$ is a basis of $C\\otimes_Ak$ over the nonzero field $k$, so $C\\otimes_Ak\\ne0$. Write $b_k=b\\otimes1$. If $b_k=0$, then on every pure tensor one has $j_k([x]\\otimes a)=bx\\otimes a=(x\\otimes a)b_k=0$. Pure tensors generate the tensor product additively, so $j_k=0$, contradicting its injectivity and nonzero source. Hence $b_k\\ne0$. Also $b_k^n=b^n\\otimes1=0$. This proves the asserted nonzero nilpotent for every field map.",
+   "uses": [
+    "def-weil-pbc-free-module",
+    "lem-weil-pbc-free-module-base-change-free",
+    "def-weil-module-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 0575, lemma-nonreduced-in-neighbourhood, proof: the short exact sequence and its field base changes; final paragraph on the nonreduced whole fibre"
+   }
+  },
+  {
+   "text": "Fix $t\\in\\operatorname{Spec}A$ and apply step 3 to its canonical residue-field homomorphism $A\\to\\kappa(t)$. Let $i:X_t\\to X$ be the fibre projection and $V=i^{-1}(U)$, an open subset by continuity. Apply [lem-sbc-affine-fibre-sections-tensor] with $R=A$ and the affine open $U$: its section algebra $\\Gamma(X,U)=B$ has exactly the specified $A$-algebra structure by hypothesis. Its ring isomorphism $\\Gamma(X_t,V)\\cong B\\otimes_A\\kappa(t)$ carries the restriction of $b$ to $b\\otimes1$. Thus $\\Gamma(X_t,V)$ contains a nonzero nilpotent. The open-section characterization in [def-pc-reduced-scheme] now rules out reducedness of $X_t$. This works for each $t$, without any domain, finiteness or Noetherian assumption.",
+   "uses": [
+    "lem-sbc-affine-fibre-sections-tensor",
+    "def-pc-scheme-fibre",
+    "def-pc-reduced-scheme"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 0575, lemma-nonreduced-in-neighbourhood, proof: the short exact sequence and its field base changes; final paragraph on the nonreduced whole fibre"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-free-module",
+  "def-weil-module-base-change",
+  "lem-weil-pbc-free-module-base-change-free",
+  "lem-sbc-affine-fibre-sections-tensor",
+  "def-pc-scheme-fibre",
+  "def-pc-reduced-scheme"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/more-morphisms.tex",
+  "place": "Tag 0575, lemma-nonreduced-in-neighbourhood, proof: the short exact sequence and its field base changes; final paragraph on the nonreduced whole fibre",
+  "note": "Expands the final algebraic argument of Tag 0575. The free last term in this item permits the explicit basis section in step 2, so the quoted flat-cokernel tensor theorem is not needed as a black box."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "isNilpotent_tensor_residueField_iff|annihilator.*[Tt]ensor|[Tt]ensor.*annihilator|injective.*[Ff]lat",
+   "results": "OK 25 hits; Mathlib/RingTheory/Spectrum/Prime/ChevalleyComplexity.lean, Mathlib/RingTheory/Spectrum/Prime/Polynomial.lean, Mathlib/RingTheory/Spectrum/Prime/Polynomial.lean, Mathlib/RingTheory/Spectrum/Prime/Polynomial.lean, Mathlib/RingTheory/Smooth/IntegralClosure.lean, Mathlib/RingTheory/Smooth/IntegralClosure.lean, Mathlib/RingTheory/Smooth/IntegralClosure.lean, Mathlib/RingTheory/Smooth/IntegralClosure.lean; digest 7e30674a304b8734. Directory Mathlib/RingTheory.  Read Mathlib/RingTheory/Spectrum/Prime/Polynomial.lean:35-56 and Flat/Equalizer.lean:187-201, and AlgebraicGeometry/Properties.lean:68-145. The flat-cokernel theorem is the existing cited node lem-weil-pbc-flat-quotient-tensor-injective; it supplies only injectivity. Nilpotent.map supplies nilpotence only; no hit proves nonvanishing using the nonzero free annihilator quotient and then nonreducedness of every ambient scheme fibre.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "IsNilpotent, TensorProduct",
+   "results": "OK 3 hits; isNilpotent_tensor_residueField_iff, PrimeSpectrum.mem_image_comap_basicOpen, PrimeSpectrum.mem_image_comap_zeroLocus_sdiff; digest e2ed29a656fe4df7.  Read Mathlib/RingTheory/Spectrum/Prime/Polynomial.lean:35-56 and Flat/Equalizer.lean:187-201, and AlgebraicGeometry/Properties.lean:68-145. The flat-cokernel theorem is the existing cited node lem-weil-pbc-flat-quotient-tensor-injective; it supplies only injectivity. Nilpotent.map supplies nilpotence only; no hit proves nonvanishing using the nonzero free annihilator quotient and then nonreducedness of every ambient scheme fibre.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A nilpotent element survives every field base change when its annihilator quotient is nonzero free and its principal ideal quotient is free",
+   "results": "OK 8 hits; IsNilpotent, IsNilpotent.map, Algebra.isNilpotent_trace_of_isNilpotent, isNilpotent_tensor_residueField_iff, IsNilpotent.map_exp, pos_nilpotencyClass_iff, IsNilpotent.mk, IsNilpotent.map_iff; digest 95d148f6d69519c3.  Read Mathlib/RingTheory/Spectrum/Prime/Polynomial.lean:35-56 and Flat/Equalizer.lean:187-201, and AlgebraicGeometry/Properties.lean:68-145. The flat-cokernel theorem is the existing cited node lem-weil-pbc-flat-quotient-tensor-injective; it supplies only injectivity. Nilpotent.map supplies nilpotence only; no hit proves nonvanishing using the nonzero free annihilator quotient and then nonreducedness of every ambient scheme fibre.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a commutative algebra B over A with nilpotent h, if B/Ann(h) is nonzero free and B/hB is free over A then h remains nonzero in every field fibre, so an open affine chart Spec B forces each ambient scheme fibre nonreduced",
+   "results": "OK 8 hits; AlgebraicGeometry.IsReduced, AlgebraicGeometry.isReduced_of_isAffine_isReduced, AlgebraicGeometry.affine_isReduced_iff, AlgebraicGeometry.instIsReducedSpecOfIsReducedCarrier, AlgebraicGeometry.Scheme.nilradical_eq_bot, AlgebraicGeometry.isReduced_of_isReduced_stalk, AlgebraicGeometry.isReduced_of_isIntegral, AlgebraicGeometry.isReduced_of_isOpenImmersion; digest b75b12912ff89382.  Read Mathlib/RingTheory/Spectrum/Prime/Polynomial.lean:35-56 and Flat/Equalizer.lean:187-201, and AlgebraicGeometry/Properties.lean:68-145. The flat-cokernel theorem is the existing cited node lem-weil-pbc-flat-quotient-tensor-injective; it supplies only injectivity. Nilpotent.map supplies nilpotence only; no hit proves nonvanishing using the nonzero free annihilator quotient and then nonreducedness of every ambient scheme fibre.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "annihilator|IsNilpotent",
+   "results": "OK 6 hits; Mathlib/RingTheory/Flat/FaithfullyFlat/Basic.lean, Mathlib/RingTheory/Flat/FaithfullyFlat/Basic.lean, Mathlib/RingTheory/Flat/FaithfullyFlat/Basic.lean, Mathlib/RingTheory/Flat/FaithfullyFlat/Basic.lean, Mathlib/RingTheory/Flat/Basic.lean, Mathlib/RingTheory/Flat/Basic.lean; digest 06248da0b2d619cc. Directory Mathlib/RingTheory/Flat.  Read Mathlib/RingTheory/Spectrum/Prime/Polynomial.lean:35-56 and Flat/Equalizer.lean:187-201, and AlgebraicGeometry/Properties.lean:68-145. The flat-cokernel theorem is the existing cited node lem-weil-pbc-flat-quotient-tensor-injective; it supplies only injectivity. Nilpotent.map supplies nilpotence only; no hit proves nonvanishing using the nonzero free annihilator quotient and then nonreducedness of every ambient scheme fibre.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Nonzero free annihilator quotient and free cokernel of multiplication by a nilpotent guarantee a nonreduced fibre of an affine open subscheme at every base point",
+   "results": "OK 8 hits; AlgebraicGeometry.isReduced_of_isAffine_isReduced, AlgebraicGeometry.affine_isReduced_iff, AlgebraicGeometry.IsReduced, AlgebraicGeometry.isReduced_of_isReduced_stalk, AlgebraicGeometry.isReduced_stalk_of_isReduced, AlgebraicGeometry.exists_pow_mul_eq_zero_of_res_basicOpen_eq_zero_of_isAffineOpen, AlgebraicGeometry.instIsReducedSpecOfIsReducedCarrier, AlgebraicGeometry.isReduced_of_isIntegral; digest 2212f42762bb6066.  Read Mathlib/RingTheory/Spectrum/Prime/Polynomial.lean:35-56 and Flat/Equalizer.lean:187-201, and AlgebraicGeometry/Properties.lean:68-145. The flat-cokernel theorem is the existing cited node lem-weil-pbc-flat-quotient-tensor-injective; it supplies only injectivity. Nilpotent.map supplies nilpotence only; no hit proves nonvanishing using the nonzero free annihilator quotient and then nonreducedness of every ambient scheme fibre.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A nilpotent element survives every field base change if its annihilator quotient is nonzero free and its principal ideal quotient is free",
+   "results": "OK 8 hits: isNilpotent_tensor_residueField_iff, Algebra.IsGeometricallyReduced, PrimeSpectrum.mem_image_comap_basicOpen, PrimeSpectrum.mem_image_comap_zeroLocus_sdiff, Algebra.isGeometricallyReduced_iff, Algebra.IsGeometricallyReduced.isReduced_algebraicClosure_tensorProduct, Algebra.FormallySmooth.iff_injective_cotangentComplexBaseChange, Algebra.FormallyUnramified.isReduced_of_field; digest 007923e82e7b3d1e. Read Mathlib/RingTheory/Spectrum/Prime/Polynomial.lean:35-58 and RingTheory/Flat/FaithfullyFlat/Basic.lean:55-115. Nilpotence-in-a-finite-free-algebra and faithfully-flat tensor nontriviality do not state this annihilator/cokernel criterion or its whole-scheme-fibre conclusion.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "annihilator.*[Tt]ensor|[Tt]ensor.*annihilator|isNilpotent_tensor_residueField_iff",
+   "results": "OK 4 hits: Mathlib/RingTheory/Spectrum/Prime/ChevalleyComplexity.lean, Mathlib/RingTheory/Spectrum/Prime/Polynomial.lean, Mathlib/RingTheory/Spectrum/Prime/Polynomial.lean, Mathlib/RingTheory/Spectrum/Prime/Polynomial.lean; digest b1f698272f294c74. Directory Mathlib/RingTheory. Read Mathlib/RingTheory/Spectrum/Prime/Polynomial.lean:35-58 and RingTheory/Flat/FaithfullyFlat/Basic.lean:55-115. Nilpotence-in-a-finite-free-algebra and faithfully-flat tensor nontriviality do not state this annihilator/cokernel criterion or its whole-scheme-fibre conclusion.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A nonzero nilpotent remains nonzero after tensoring with any field when the annihilator quotient and cokernel are free modules",
+   "results": "OK 8 hits: Module.FaithfullyFlat.lTensor_nontrivial, LieModule.instIsNilpotentTensor, Module.FaithfullyFlat.rTensor_nontrivial, isNilpotent_tensor_residueField_iff, Module.quotientAnnihilator, Algebra.instIsReducedTensorProductOfIsAlgebraicOfIsGeometricallyReduced, IsLocalRing.map_tensorProduct_mk_eq_top, Module.free_of_maximalIdeal_rTensor_injective; digest 08251a6eb73e5079. Read Mathlib/RingTheory/Spectrum/Prime/Polynomial.lean:35-58 and RingTheory/Flat/FaithfullyFlat/Basic.lean:55-115. Nilpotence-in-a-finite-free-algebra and faithfully-flat tensor nontriviality do not state this annihilator/cokernel criterion or its whole-scheme-fibre conclusion.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "IsNilpotent, TensorProduct",
+   "results": "OK 3 hits: isNilpotent_tensor_residueField_iff, PrimeSpectrum.mem_image_comap_basicOpen, PrimeSpectrum.mem_image_comap_zeroLocus_sdiff; digest e2ed29a656fe4df7. Read Mathlib/RingTheory/Spectrum/Prime/Polynomial.lean:35-58 and RingTheory/Flat/FaithfullyFlat/Basic.lean:55-115. Nilpotence-in-a-finite-free-algebra and faithfully-flat tensor nontriviality do not state this annihilator/cokernel criterion or its whole-scheme-fibre conclusion.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A nilpotent in an algebra gives nonreduced fibres over every field when both the quotient by its annihilator and the quotient by its principal ideal are free and the first quotient is nonzero",
+   "results": "OK 8 hits: Algebra.IsGeometricallyReduced, Algebra.FormallyUnramified.isReduced_of_field, isNilpotent_tensor_residueField_iff, Algebra.isReduced_of_isGeometricallyReduced, Algebra.Unramified, exists_isNilpotent_of_not_isReduced, Algebra.IsUnramifiedAt, PrimeSpectrum.mem_image_comap_zeroLocus_sdiff; digest 6acef3662360da8e. Read Mathlib/RingTheory/Spectrum/Prime/Polynomial.lean:35-58 and RingTheory/Flat/FaithfullyFlat/Basic.lean:55-115. Nilpotence-in-a-finite-free-algebra and faithfully-flat tensor nontriviality do not state this annihilator/cokernel criterion or its whole-scheme-fibre conclusion.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-nonreduced-fibre-open",
+  "date": "2026-10-22",
+  "group": "Q90"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Constructibility input below lem-trf-local-term-locality: the negative generic-fibre alternative (Stacks 0577) uses ordinary nonreduced spreading (0575) after the 0550 base preparation. In the 0575 subargument: Tag 0575, lemma-nonreduced-in-neighbourhood, proof after the short exact sequence: tensoring with a field, nonzero multiplication by h, and nonreducedness of every whole fibre.",
+   "via": [
+    "lem-trf-nonreduced-fibre-open",
+    "lem-trf-generic-fibre-not-geometrically-reduced-open",
+    "lem-trf-generic-constancy-geometric-reducedness",
+    "lem-trf-geometrically-reduced-fibre-locus",
+    "lem-trf-local-noetherian-approximation",
+    "lem-trf-local-fibres-integral-projective",
+    "lem-trf-local-generic-basis-universal-injective",
+    "lem-trf-free-subtraction-flatness",
+    "lem-trf-flattening-module-by-admissible-blowup",
+    "lem-trf-flattening-by-admissible-blowup",
+    "lem-trf-flatification-horizontal-curve-pair",
+    "lem-trf-dejong-relative-marked-semistable",
+    "lem-trf-relative-marked-nodal-reduction",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-trf-free-annihilator-nonreduced-fibres",
+  "worker": "stage1",
+  "summary": "Q36: preserved the statement and the existing literature/blueprint provenance. Expanded the annihilator injection, the basis section of the free principal quotient and its tensor retraction, nonvanishing through the nonempty base-changed basis, and the open-section obstruction to reducedness of each entire fibre. Reused existing nodes; no new nodes. Searched the project for an attachment and refreshed the logged Mathlib searches with a second semantic phrasing.",
+  "blueprint": "Realizes the 0575 field-base-change subargument of the constructibility input below lem-trf-local-term-locality, through the existing via chain. The current latest blueprint locality proof is read as the ancestor context; no change to its contracting-correspondence route or to the unit/chapter is made.",
+  "tool_uses": [
+   {
+    "node": "lem-sbc-affine-fibre-sections-tensor",
+    "why": "Generic affine-open fibre-section comparison, used exactly with the specified A-algebra B and every residue field; the trace-formula unit supplies no replacement for this algebraic-geometric identification."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sbc-affine-fibre-sections-tensor"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q36-1e5f9193a",
+  "group": "Q36",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q36-1e5f9193a (reviewer sub-agent of L); spot-checked: Read Stacks 0575 (more-morphisms.tex lemma-nonreduced-in-neighbourhood, l.7110 ff.): after the generic-flatness preparation it has the exact sequence 0→C→B→B/hB→0, with C nonzero free and B/hB flat, then tensors with a field. The item states this situation with D free (stronger), and the parent nonreduced-fibre-open supplies freeness via lem-trf-annihilator-quotients-generic-free. Statement and stmt_deps are byte-identical to live, where the item is still unsplit; there is no re-split note and no new nodes. Step 1: j:[x]↦bx is injective with image bB=ker q (elementary, checked). Step 2: a basis section of free D gives a retraction r with rj=id, and the composition/identity clause of def-weil-module-base-change makes j_k injective; this legitimately replaces flat-tor-zero. Step 3: lem-weil-pbc-free-module-base-change-free gives the basis (c_i⊗1), nonempty since C≠0, so C⊗k≠0. The bilinear clause of module-base-change gives the ring structure and (x⊗a)b_k=bx⊗a, so b_k=0 would force j_k=0, a contradiction; b_k^n=b^n⊗1=0. Step 4: lem-sbc-affine-fibre-sections-tensor (any affine open, no hypotheses, e(i*a)=a⊗1) together with the open-sections clause of def-pc-reduced-scheme shows every fibre X_t is nonreduced; the A-algebra structure agrees through def-weil-affine-spectrum. Accepted tool_use: lem-sbc-affine-fibre-sections-tensor (sk-prop-normal-form) as a generic fibre-section identification; no unit step is replaced. Duplicate search over 0575/annihilator/nonreduced nodes found nothing that states this criterion. Tested Z[ε]/ε² with b=ε (passes); b=2ε makes D non-free and 2ε vanishes over F_2, so the D-free hypothesis is needed; b=0 and A=0 are excluded by C≠0. No changes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.FreeAnnihilatorNonreducedFibres",
+  "declaration": "AlgebraicGeometry.free_annihilator_nonreduced_fibres",
+  "file": "lean/Sheaf/AlgebraicGeometry/FreeAnnihilatorNonreducedFibres.lean",
+  "statement": "theorem free_annihilator_nonreduced_fibres {A B : Type u} [CommRing A] [CommRing B] [Algebra A B] {X : Scheme.{u}} (f : X ⟶ Spec (.of A)) (i : Spec (.of B) ⟶ X) [IsOpenImmersion i] (hi : i ≫ f = Spec.map (CommRingCat.ofHom (algebraMap A B))) (b : B) (hb : IsNilpotent b) [Nontrivial (B ⧸ Module.annihilator B (Ideal.span ({b} : Set B)))] [Module.Free A (B ⧸ Module.annihilator B (Ideal.span ({b} : Set B)))] [Module.Free A (B ⧸ Ideal.span ({b} : Set B))] : (∀ (k : Type (max u v)) [Field k] [Algebra A k], (b ⊗ₜ[A] (1 : k)) ≠ 0 ∧ IsNilpotent (b ⊗ₜ[A] (1 : k))) ∧ ∀ t : Spec (.of A), ¬ IsReduced (f.fiber t)",
+  "branch": "newtargets-dag",
+  "by": "Q26",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-311aa66f4",
+  "group": "Q26",
+  "result": "pass",
+  "note": "The item node differs from live only in its lean field. Every clause of the Lean matches the node: open immersion i with hi fixing the algebra map; IsNilpotent b equivalent to b^n=0 for some n>=1; Module.annihilator of span{b} equals Ann(b); Nontrivial C; Module.Free A on both quotients with no finiteness; first conclusion for every field k : Type (max u v) with an A-algebra structure, b⊗1 nonzero and nilpotent; second conclusion ¬IsReduced (f.fiber t) for every t. No extra assumptions. Agrees with Stacks 0575, which the node strengthens from D flat to D free on purpose. All seven statement-dependency records map to existing Mathlib declarations; the AffineFibreSectionsTensor proof-dependency import exists with the expected signature. lean.statement is verbatim in the file; one sorry theorem with source/blueprint docstrings and four proof steps; no name clash; report has both required sections. Edge cases b=0, A=0 and empty chart are excluded by C≠0. Not recompiled per instructions; the worker reports a clean scompile."
+ }
+}

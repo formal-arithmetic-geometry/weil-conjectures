@@ -1,0 +1,205 @@
+{
+ "id": "lem-pur-general-specialization-hom-additivity",
+ "kind": "statement",
+ "title": "Specialization respects normalized Hom coordinates and their addition",
+ "statement": "Fix a finite-field datum $D=(p,a,q,k_0,k)$ [def-weil-finite-field-fiber], a prime $\\ell\\ne p$, an algebraic closure $\\Omega/\\mathbf Q_\\ell$ [def-weil-l-adic-numbers, def-weil-algebraic-closure], and any scheme $Y$ with no structure map to $k$; its universe is independent of that of $\\Omega$. Let $I$ be the directed finite coefficient subfields [def-weil-finite-subextension-directed-set]. On the fixed intrinsic rational stages $C_E=\\mathrm{sfRationalConstructibleCategory}(\\ell,\\mathrm{Shrink}(E),Y)$, obtained by raw rationalization of the intrinsic integral category [def-weil-derived-complete-integral-detailed, def-weil-rationalization-karoubi], let $S$ and $S_D$ be the normalized scalar systems with proof parameters $0$ and $p$, respectively [lem-general-algebraically-closed-coefficient-stages]. Use the equality $\\eta:S=S_D$ of [lem-pur-general-specialization-pairs], and set $P=S.\\mathrm{PairCategory}$, $P_D=S_D.\\mathrm{PairCategory}$ [def-sf-directed-common-stage-data]. Let $e:P\\simeq P_D$ be equality transport, namely $\\mathrm{Pi.eqToEquivalence}(T\\mapsto T.\\mathrm{PairCategory},\\eta)$; this specifies the functor, not an arbitrary equivalence.\n\nUse the pair and transport identifications of [lem-pur-general-specialization-pairs], the prescribed colimit Hom groups on $P$ [lem-pur-general-pair-hom-coordinates], and those on $P_D$ [lem-pur-general-intrinsic-finite-field-transport]. Let $c_{A,B}$ and $c^D_{eA,eB}$ be their unique representative-normalized coordinate equivalences [def-weil-directed-colimit-abelian-groups]. For every $f:A\\to B$,\n$$c^D_{eA,eB}(e(f))=c_{A,B}(f)$$\nafter the equality identification of the colimit families induced by $\\eta$. Moreover $e$ preserves the prescribed zero morphisms and sums: $e(0)=0$ and $e(f+g)=e(f)+e(g)$ for all parallel arrows. This is additivity for the already prescribed preadditive structures [def-weil-preadditive-category], not a new structure transported to make the assertion true.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sfb-qlbar-two-colimit/_section.md",
+  "place": "Old owning proof argument 10 and former specialization proof final step, coordinate portion; GeneralAlgebraicallyClosedCoefficients.lean:216-225, 895-925 (specialization_homCoordinates, specialization_additive).",
+  "note": "Construction material from old argument 10 (retained verbatim): For specialization_additive, use that specialization is an equivalence. It preserves the zero object and binary products, which exist in the pretriangulated source. A private abstract equivalence lemma first supplies preservation of zero morphisms from preservation of the initial object, then applies Mathlib Functor.additive_of_preserves_binary_products. Specializing it proves additivity for the already prescribed preadditive structures. The explicit zero-morphism step is as follows. The equivalence preserves the zero object because its inverse transports each unique arrow, so a zero morphism, factored through a zero object, maps to zero. It preserves binary products by the same transport of their universal property. These products exist in the pretriangulated source. Apply lem-sfb-products-zero-additive (Mathlib Functor.additive_of_preserves_binary_products) with these fixed group structures. For the coordinate clause, on [L,u] both specifications give the image of u under the same colimit structure map: specialization_pairs keeps its label and finite map, and specialization_transport identifies the transition maps. Every arrow has a finite representative, so representative induction gives equality on all arrows. This retains the additional normalization argument from the former supporting proof, not just its additive conclusion."
+ },
+ "stmt_deps": [
+  "def-weil-finite-field-fiber",
+  "def-weil-l-adic-numbers",
+  "def-weil-algebraic-closure",
+  "def-weil-finite-subextension-directed-set",
+  "def-weil-derived-complete-integral-detailed",
+  "def-weil-rationalization-karoubi",
+  "lem-general-algebraically-closed-coefficient-stages",
+  "def-sf-directed-common-stage-data",
+  "lem-pur-general-specialization-pairs",
+  "lem-pur-general-pair-hom-coordinates",
+  "lem-pur-general-intrinsic-finite-field-transport",
+  "def-weil-directed-colimit-abelian-groups",
+  "def-weil-preadditive-category"
+ ],
+ "proof": [
+  {
+   "text": "Use $\\eta$ and the transport clause of [lem-pur-general-specialization-pairs] to identify, for fixed $A,B$, the finite Hom groups and every transition map of the two systems. Equality transport identifies their abelian-group colimits and their canonical homomorphisms $\\iota_L$ [def-weil-directed-colimit-abelian-groups]: after eliminating the equality of systems, this identification is the identity. In particular it preserves zero and addition and takes each $\\iota_L(u)$ to the same class. Denote this identification by $J$.",
+   "uses": [
+    "lem-pur-general-specialization-pairs",
+    "def-weil-directed-colimit-abelian-groups"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sfb-qlbar-two-colimit/_section.md",
+    "place": "Displayed Hom colimit, representative normalization and abelian-group laws; live Sheaf/Paper/GeneralAlgebraicallyClosedCoefficients.lean:895-925 and the coordinate-transfer constructions in both coefficient modules."
+   }
+  },
+  {
+   "text": "Given $f:A\\to B$, choose a finite representative $f=[L,u]$ using [lem-pur-general-pair-hom-coordinates]. The pair clause of [lem-pur-general-specialization-pairs] gives $e(f)=[L,u_D]$, where $u_D$ is the equality transport of $u$. The prescribed coordinate formulas of [lem-pur-general-pair-hom-coordinates] and [lem-pur-general-intrinsic-finite-field-transport] now give $c^D(e(f))=\\iota^D_L(u_D)=J(\\iota_L(u))=J(c(f))$. The representative exists for every arrow, so this proves the claimed coordinate identity for all $f$.",
+   "uses": [
+    "lem-pur-general-pair-hom-coordinates",
+    "lem-pur-general-specialization-pairs",
+    "lem-pur-general-intrinsic-finite-field-transport"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sfb-qlbar-two-colimit/_section.md",
+    "place": "Displayed Hom colimit, representative normalization and abelian-group laws; live Sheaf/Paper/GeneralAlgebraicallyClosedCoefficients.lean:895-925 and the coordinate-transfer constructions in both coefficient modules."
+   }
+  },
+  {
+   "text": "The prescribed Hom groups in [lem-pur-general-pair-hom-coordinates] and [lem-pur-general-intrinsic-finite-field-transport] are transferred from their colimits by $c$ and $c^D$, respectively. Thus these coordinate equivalences preserve zero and addition for those already fixed laws. Applying step 2 to zero gives $c^D(e(0))=J(c(0))=0=c^D(0)$. For parallel $f,g$, it gives $c^D(e(f+g))=J(c(f+g))=J(c(f))+J(c(g))=c^D(e(f))+c^D(e(g))=c^D(e(f)+e(g))$. Injectivity of $c^D$ proves $e(0)=0$ and $e(f+g)=e(f)+e(g)$. No Hom group structure is replaced in this argument.",
+   "uses": [
+    "lem-pur-general-pair-hom-coordinates",
+    "lem-pur-general-intrinsic-finite-field-transport"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sfb-qlbar-two-colimit/_section.md",
+    "place": "Displayed Hom colimit, representative normalization and abelian-group laws; live Sheaf/Paper/GeneralAlgebraicallyClosedCoefficients.lean:895-925 and the coordinate-transfer constructions in both coefficient modules."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-pur-general-specialization-pairs",
+  "def-weil-directed-colimit-abelian-groups",
+  "lem-pur-general-pair-hom-coordinates",
+  "lem-pur-general-intrinsic-finite-field-transport"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sfb-qlbar-two-colimit/_section.md",
+  "place": "Displayed Hom colimit and retained order-1462 pair model; representative proof follows the specialization_homCoordinates docstring, with additivity deduced directly from the prescribed coordinate group laws."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The equality transport equivalence between datum free and finite field coefficient pair categories agrees with normalized Hom colimit coordinates and is additive for their prescribed preadditive structures",
+   "results": "[leanfinder] OK 8 hit(s); CategoryTheory.Free.ext, CategoryTheory.Free.liftUnique, CategoryTheory.Mat_.liftUnique, CategoryTheory.Mat_.ext, CategoryTheory.Free.lift_additive, CategoryTheory.categoryFree, CategoryTheory.Free.lift_map, CategoryTheory.Mat_.embeddingLiftIso_hom_app",
+   "date": "2026-10-27",
+   "verdict": "No exact or one-line match: the hits do not identify this specified coefficient-system normalization."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.additive_of_preserves_binary_products",
+   "results": "[loogle] OK 1 hit(s); CategoryTheory.Functor.additive_of_preserves_binary_products",
+   "date": "2026-10-27",
+   "verdict": "No exact or one-line match: the hits do not identify this specified coefficient-system normalization."
+  },
+  {
+   "tool": "grep",
+   "query": "specialization_homCoordinates|specialization_additive|additive_of_preserves_binary_products",
+   "results": "[grep] OK 6 hit(s); Mathlib/RingTheory/Morita/Basic.lean:72, Mathlib/Algebra/Category/Grp/LeftExactFunctor.lean:91, Mathlib/CategoryTheory/Preadditive/AdditiveFunctor.lean:234, Mathlib/CategoryTheory/Triangulated/Functor.lean:238, Mathlib/CategoryTheory/Triangulated/HomologicalFunctor.lean:154, Mathlib/CategoryTheory/Abelian/SerreClass/Localization.lean:464",
+   "date": "2026-10-27",
+   "verdict": "No exact or one-line match: the hits do not identify this specified coefficient-system normalization."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Normalized coefficient specialization preserves direct limit Hom coordinates and addition because its equivalence preserves zero objects and binary products",
+   "results": "[leansearch] OK 8 hit(s); AddCommGroup.DirectLimit.map, AddCommGroup.DirectLimit.map_apply_of, DirectLimit.instAddZeroClassOfAddMonoidHomClass.congr_simp, AddCommGroup.DirectLimit.congr, DirectLimit.instAddCommMonoidOfAddMonoidHomClass.congr_simp, DirectLimit.nsmul_def, DirectLimit.instAddZeroClassOfAddMonoidHomClass, DirectLimit.instAddCommMonoidOfAddMonoidHomClass",
+   "date": "2026-10-27",
+   "verdict": "No exact or one-line match: the hits do not identify this specified coefficient-system normalization."
+  },
+  {
+   "tool": "grep",
+   "query": "specialization_homCoordinates|specialization_additive|eqToEquivalence",
+   "results": "{\"t\": \"2026-10-27T07:28:18Z\", \"tool\": \"grep\", \"query\": \"specialization_homCoordinates|specialization_additive|eqToEquivalence\", \"sub\": \"\", \"ok\": true, \"n_hits\": 6, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Localization/Pi.lean\", \"Mathlib/CategoryTheory/Pi/Basic.lean\", \"Mathlib/CategoryTheory/Pi/Basic.lean\", \"Mathlib/CategoryTheory/Pi/Basic.lean\", \"Mathlib/CategoryTheory/Pi/Basic.lean\", \"Mathlib/CategoryTheory/Pi/Basic.lean\"], \"digest\": \"63c5fcde578c1212\"}",
+   "date": "2026-10-27",
+   "verdict": "no match: these general direct-limit/equality-transport declarations do not state the specified pair functor and its normalized coordinates; their application requires the project representative comparison proved here"
+  },
+  {
+   "tool": "leansearch",
+   "query": "An equivalence fixing every finite representative preserves the normalized direct limit Hom coordinates and the abelian group addition",
+   "results": "{\"t\": \"2026-10-27T07:28:19Z\", \"tool\": \"leansearch\", \"query\": \"An equivalence fixing every finite representative preserves the normalized direct limit Hom coordinates and the abelian group addition\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AddCommGroup.DirectLimit.congr_apply_of\", \"AddCommGroup.DirectLimit.congr\", \"AddCommGroup.DirectLimit\", \"Module.DirectLimit.Eqv.rec\", \"AddCommGroup.DirectLimit.congr_symm_apply_of\", \"AddCommGrpCat.homAddEquiv\", \"Module.DirectLimit.Eqv.congr_simp\", \"Ring.DirectLimit.congr\"], \"digest\": \"29515ab0662c2864\"}",
+   "date": "2026-10-27",
+   "verdict": "no match: these general direct-limit/equality-transport declarations do not state the specified pair functor and its normalized coordinates; their application requires the project representative comparison proved here"
+  },
+  {
+   "tool": "loogle",
+   "query": "AddCommGroup.DirectLimit.congr",
+   "results": "{\"t\": \"2026-10-27T07:28:19Z\", \"tool\": \"loogle\", \"query\": \"AddCommGroup.DirectLimit.congr\", \"sub\": \"\", \"ok\": true, \"n_hits\": 3, \"note\": \"\", \"top\": [\"AddCommGroup.DirectLimit.congr\", \"AddCommGroup.DirectLimit.congr_apply_of\", \"AddCommGroup.DirectLimit.congr_symm_apply_of\"], \"digest\": \"5077ee032c67341d\"}",
+   "date": "2026-10-27",
+   "verdict": "no match: these general direct-limit/equality-transport declarations do not state the specified pair functor and its normalized coordinates; their application requires the project representative comparison proved here"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Equality transport between two equal stage systems preserves their representative normalized Hom direct limit coordinates and their prescribed addition",
+   "results": "{\"t\": \"2026-10-27T07:28:20Z\", \"tool\": \"leanfinder\", \"query\": \"Equality transport between two equal stage systems preserves their representative normalized Hom direct limit coordinates and their prescribed addition\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AddCommGroup.DirectLimit.congr\", \"Module.DirectLimit.congr\", \"AddCommGroup.DirectLimit.congr_apply_of\", \"Module.DirectLimit.congr_apply_of\", \"FirstOrder.Language.DirectLimit.funMap_unify_equiv\", \"Ring.DirectLimit.congr_apply_of\", \"AddCommGroup.DirectLimit.congr_symm_apply_of\", \"Ring.DirectLimit.congr\"], \"digest\": \"4dd1bd3ed22314dc\"}",
+   "date": "2026-10-27",
+   "verdict": "no match: these general direct-limit/equality-transport declarations do not state the specified pair functor and its normalized coordinates; their application requires the project representative comparison proved here"
+  },
+  {
+   "tool": "grep",
+   "query": "def congr|congr_apply_of|of_add|of_zero",
+   "results": "{\"t\": \"2026-10-27T07:28:31Z\", \"tool\": \"grep\", \"query\": \"def congr|congr_apply_of|of_add|of_zero\", \"sub\": \"Algebra/Colimit/Module.lean\", \"ok\": true, \"n_hits\": 4, \"note\": \"\", \"top\": [\"212\", \"220\", \"417\", \"429\"], \"digest\": \"280d577acad1d8bd\"}",
+   "date": "2026-10-27",
+   "verdict": "no match: these general direct-limit/equality-transport declarations do not state the specified pair functor and its normalized coordinates; their application requires the project representative comparison proved here"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A functor between common stage pair categories fixing finite representatives preserves the already fixed colimit group laws on morphisms",
+   "results": "{\"t\": \"2026-10-27T07:28:33Z\", \"tool\": \"leanfinder\", \"query\": \"A functor between common stage pair categories fixing finite representatives preserves the already fixed colimit group laws on morphisms\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AddCommGrpCat.Colimits.Quot.map_ι\", \"CommGrpCat.FilteredColimits.G\", \"GrpCat.FilteredColimits.G.mk_eq\", \"CategoryTheory.PreGaloisCategory.FiberFunctor.instPreservesColimitsOfShapeFintypeCatSingleObjOfFinite\", \"AddCommGrpCat.FilteredColimits.G\", \"CategoryTheory.PreGaloisCategory.instPreservesColimitsOfShapeFintypeCatSingleObjInclOfFinite\", \"GrpCat.FilteredColimits.colimit_mul_mk_eq\", \"CommGrpCat.FilteredColimits.colimit\"], \"digest\": \"f80bab89ec4b2785\"}",
+   "date": "2026-10-27",
+   "verdict": "no match: these general direct-limit/equality-transport declarations do not state the specified pair functor and its normalized coordinates; their application requires the project representative comparison proved here"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "def-weil-algebraically-closed-coefficients",
+  "date": "2026-10-27",
+  "group": "ND"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-def-sf-operations",
+ "blueprint": {
+  "from": {
+   "node": "def-weil-algebraically-closed-coefficients",
+   "place": "Old owning proof argument 10 and former specialization proof final step, coordinate portion; GeneralAlgebraicallyClosedCoefficients.lean:216-225, 895-925 (specialization_homCoordinates, specialization_additive).",
+   "via": []
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-27",
+  "item": "lem-pur-general-specialization-hom-additivity",
+  "worker": "stage1",
+  "summary": "Proved coordinate compatibility on every finite representative using the existing equality-specialization and the two normalized coordinate statements. Deducted zero and addition by applying the fixed coordinate equivalences and using injectivity; no new preadditive structure is transported. No new nodes, statement changes or unfinished project attachment. Recorded six fresh msearch receipts in addition to retaining the inherited four searches as inherited evidence.",
+  "blueprint": "Nearest ancestor def-weil-algebraically-closed-coefficients, retained old argument 10 and specialization proof final coordinate step; realizes the displayed Hom colimit and its canonical abelian laws in latest sk-thm-sfb-qlbar-two-colimit. This is below the unit route: the elementary coordinate argument replaces the private binary-product criterion only for this node.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "NT-cc-NS-72a5487c1",
+  "group": "NS",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NS-72a5487c1 (reviewer sub-agent of L); spot-checked: Read the item and the full statements of the four cited nodes: specialization-pairs, pair-hom-coordinates, intrinsic-finite-field-transport (all unsplit, same unit sk-def-sf-operations) and the Mathlib leaf def-weil-directed-colimit-abelian-groups. Also read the blueprint latest sk-thm-sfb-qlbar-two-colimit displayed Hom colimit (lines 20-45) and the reference Lean GeneralAlgebraicallyClosedCoefficients.lean:376-390 and 840-925, plus SfAlgebraicallyClosedCoefficients.lean:1006-1012. In both coefficient modules the Hom group law is transferred through homCoordinates, and the specialization functor is Pi.eqToEquivalence. The statement and stmt_deps are unchanged and faithful; the functor is the specified equality transport, the coefficient stages C_E are the same for both systems, and nothing is weakened. Step 1 is elementary: the pairs node gives equal transition functors and heterogeneously equal associators and transports, and e(E,K)=(E,K) gives equal index sets (implicit in the step, advisory), so after eliminating eta J is the identity. Step 2 takes the finite representative, e([L,u])=[L,u_D] and both coordinate formulas [L,u]->iota_L(u) from the cited statements, not their proofs. Step 3 is elementary: c and c^D are group isomorphisms by transfer, J is additive, and injectivity of c^D gives e(0)=0 and e(f+g)=e(f)+e(g). This direct calculation replaces the source note's binary-product criterion below the unit, and it is valid. Edge cases checked: eta reflexive, repeated fields, zero arrows, representatives at different fields, empty Y. No new nodes, no duplicates (lem-pur-general-coefficient-specialization cites the item and covers shift/exactness), no cycle, proof_deps equals the union of the uses, no tool_uses needed. No fixes written."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.GeneralAlgebraicallyClosedCoefficients",
+  "declaration": "WeilConjectures.GeneralAlgebraicallyClosedCoefficients.specialization_homCoordinates",
+  "declarations": [
+   "WeilConjectures.GeneralAlgebraicallyClosedCoefficients.specialization_homCoordinates",
+   "WeilConjectures.GeneralAlgebraicallyClosedCoefficients.specialization_additive"
+  ],
+  "statement": "theorem specialization_homCoordinates (A B : Pair l Ω Y) (f : A ⟶ B) :\n    HEq\n      (SfAlgebraicallyClosedCoefficients.homCoordinates\n        ((specialization D l hl Ω Y).functor.obj A)\n        ((specialization D l hl Ω Y).functor.obj B)\n        ((specialization D l hl Ω Y).functor.map f))\n      (homCoordinates A B f)",
+  "branch": "newtargets-dag",
+  "by": "NF",
+  "date": "2026-10-27",
+  "existing": true,
+  "note": "Existing statements cover both clauses for the specified Pi.eqToEquivalence specialization: specialization_homCoordinates gives equality of the normalized colimit coordinates after system equality identification (HEq); specialization_additive is additivity for the already prescribed preadditive structures. The zero formula follows directly from the standard Functor.preservesZeroMorphisms_of_additive instance and Functor.map_zero, without changing either Hom group law. No new module, statement correction or proof completion."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-c1ee5513d",
+  "group": "NF",
+  "result": "pass",
+  "note": "Existing-declaration attachment; only the item's lean field changed (all other fields equal side-live). specialization = Pi.eqToEquivalence of specialization_stageSystem, as specified. specialization_homCoordinates: HEq(c^D(e.obj A,e.obj B,e.map f), c A B f) for all A, B, f, with c, c^D the choose of the same exists-unique spec as pairHomCoordinates and the finite-field homCoordinates. specialization_additive: Functor.Additive for the unique preadditive instances (homAddCommGroup transferred along homCoordinates); zero via preservesZeroMorphisms_of_additive. Hypotheses D, l prime, l≠p, IsAlgClosure Ω, arbitrary Y with independent universes d,u,v; no extra assumptions. lean.statement verbatim at l.903-910. Edge cases (empty Y, zero arrows, different fields, repeated fields) covered. Advisory: decls also owned by parent def-weil-algebraically-closed-coefficients (a stmt_dep would be a cycle; same precedent as specialization-pairs); additive docstring uses the binary-product argument; second reading was by the same worker but is a real reading. No compile needed (no file changed)."
+ }
+}

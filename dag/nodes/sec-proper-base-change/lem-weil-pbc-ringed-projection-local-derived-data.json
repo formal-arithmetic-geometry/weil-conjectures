@@ -1,0 +1,100 @@
+{
+ "id": "lem-weil-pbc-ringed-projection-local-derived-data",
+ "kind": "statement",
+ "title": "Existence of normalized localized derived comparison data",
+ "statement": "Fix the same schemes, morphism, coefficient rings, Global datum g and object V, and fix a LocalBaseData package b. Then the normalized derived portion exists: the zero-preservation instances, ordinary direct-image comparison and section identity, preservation of K-injectives, derived direct-image comparison with its representative equation and shift, derived pullback mate with its shift, and the counit mate equation.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 08FI and 0FN5; the derived direct-image, pullback-mate and counit part of the local construction."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-ringed-projection-restriction-data",
+  "lem-weil-pbc-ringed-projection-local-base-data"
+ ],
+ "proof": [
+  {
+   "text": "Construct the ordinary direct-image isomorphism by restriction of scalars along coefficient_sections; its components are identity on sections. The inverse mate of this square is invertible by the ordinary localization theorem with its unit normalization.",
+   "uses": [
+    "lem-weil-pbc-ringed-projection-ordinary-slice-mate"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Restriction to the slice preserves K-injective complexes by the existing containing-universe restriction theorem. Localize the exact pullback square termwise and take its mate under the actual canonical derived adjunctions. The generic localized_mate_cochain_normalization identity gives precisely the representative equation after cancelling the exact-model factorization isomorphisms. On K-injectives the two canonical right-derived comparison maps are invertible, so the derived mate is invertible there. Every derived object is isomorphic to such a representative; naturality transports invertibility to every object.",
+   "uses": [
+    "lem-pur-kinjective-restrict-localized-universes",
+    "lem-sbc-unbounded-exact-adjunction-square"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Exact-functor localization isomorphisms commute with shifts, and the canonical derived adjunctions commute with their fixed shifts. Mate compatibility therefore gives directImage_shift, while inversion gives pullback_shift. The adjunction mate counit equation is exactly mate_counit. Assemble the resulting data without changing any LocalDerivedData field or target.",
+   "uses": [
+    "lem-sp-canonical-right-derived-adjunction-shift"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-ringed-projection-ordinary-slice-mate",
+  "lem-pur-kinjective-restrict-localized-universes",
+  "lem-sbc-unbounded-exact-adjunction-square",
+  "lem-sp-canonical-right-derived-adjunction-shift"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 08FI and 0FN5; normalized exact pullback localization and derived mate calculation, using the existing containing-universe ordinary comparison and K-injective restriction."
+ },
+ "mathlib_searches": [],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.RingedProjectionLocalData",
+  "date": "2026-10-27",
+  "group": "P3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-ringed-projection-local-data",
+   "place": "Derived comparison and mate fields of the Local construction.",
+   "via": [
+    "lem-weil-pbc-ringed-projection-local-data"
+   ]
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.RingedProjectionLocalDerivedData",
+  "file": "lean/Sheaf/Paper/RingedProjectionLocalDerivedData.lean",
+  "declaration": "AlgebraicGeometry.Scheme.ProjectionRestriction.localDerivedData_exists",
+  "statement": "theorem localDerivedData_exists {X Y : Scheme.{u}} (f : X ⟶ Y) (R_Y : Sheaf (ProEt.topology Y) CommRingCat.{u + 1}) (R_X : Sheaf (ProEt.topology X) CommRingCat.{u + 1}) (c : (proEtaleSheafInverseImage f CommRingCat.{u + 1}).obj R_Y ≅ R_X) (g : Global f R_Y R_X c) (V : Y.ProEt) (b : LocalBaseData g V) : Nonempty (LocalDerivedData g V b)",
+  "branch": "sheaf-dag",
+  "by": "P3",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P3",
+  "result": "pass",
+  "landing": "20261027T050630-L-247165",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J3",
+  "result": "pass",
+  "landing": "20261027T053007-L-503582",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

@@ -29,71 +29,133 @@
  ],
  "proof": [
   {
-   "text": "Put $s=\\operatorname{Spec}k$. The coefficient unit $U=\\widehat{\\mathcal O}_{E,s}$ is derived complete and constructible, with reductions $U_n=(A_{E,n})_s$ in degree zero, by [lem-weil-constant-coefficient-objects-constructible]. Each $U_n$ has Tor amplitude $[0,0]$: tensoring the free rank-one coefficient module with a sheaf $M$ gives $M$. Thus $U\\in D^b_{ctf}(s,\\mathcal O_E)$ by [def-weil-finite-tor-amplitude]. Apply [thm-pur-adic-reconstruction] to $f=a_X$ and $K=U$; its hypotheses hold because $X$ and $s$ are separated finite-type $k$-schemes and $a_X$ is smooth separated of pure dimension $d\\geq0$. Use the compatible integral purity family of [lem-pur-adic-purity-scalar-naturality], whose reductions are precisely those of this theorem. The pullback formula of [def-weil-derived-pullback-tensor-hom] identifies $La_X^*U$ with $\\mathcal O_{E,X}$: at each finite level pullback takes the coefficient unit to $(A_{E,n})_X$, and their derived inverse limit is the completed unit, by the same constant-coefficient lemma. Hence the purity map is $\\gamma_{a_X,U}:\\mathcal O_{E,X}(d)[2d]\\xrightarrow{\\sim}Ra_X^!U=\\omega_{X,\\mathcal O_E}$. Its inverse is the claimed identification. Here $\\mathcal O_{E,X}$ means the completed coefficient unit, not the discrete constant sheaf.",
+   "text": "For the finite-model preliminaries, the published signed Tate tensor family gives a tensor inverse in degree d, hence flatness of the positive Tate power (etalePowerFlat). The zero and positive-step uniqueness statements are equality of specified isomorphisms, obtained from HEq. The finite unit is a degree-zero single complex; the exact etale/proetale comparison identifies its image with another single complex, proving finiteUnitPlus. The structure morphism is over Spec k because Spec.map of the identity is identity. These preliminary proofs preserve the integral/rational/common-stage unit route below; the remaining seven Lean holes retain that route.",
    "uses": [
-    "lem-weil-constant-coefficient-objects-constructible",
-    "def-weil-finite-tor-amplitude",
+    "lem-asd-finite-etale-tate-tensor-family"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-cor-sp-all-coefficients/cor-pur-adic-and-rational-smooth-dualizing-complexes.proof.md",
+    "place": "coefficient-unit application; elementary finite-model preliminaries in the Lean realization"
+   }
+  },
+  {
+   "text": "Put $s=\\operatorname{Spec}k$ and $U=\\widehat{\\mathcal O}_{E,s}$. By [lem-pur-completed-unit-pullback-tower], $U\\in D^b_{ctf}(s,\\mathcal O_E)$, its reductions are the coefficient units with common Tor interval $[0,0]$, and $La_X^*U\\cong\\widehat{\\mathcal O}_{E,X}$. Apply [thm-pur-adic-reconstruction] using the compatible family of [lem-pur-adic-purity-scalar-naturality]. Its hypotheses hold: $X,s$ are separated finite-type $k$-schemes and $a_X$ is smooth separated of pure dimension $d\\ge0$. It gives $\\gamma_{a_X,U}:\\mathcal O_{E,X}(d)[2d]\\xrightarrow{\\sim}\\omega_{X,\\mathcal O_E}$, with the specified finite reductions. Invert it; $\\mathcal O_{E,X}$ denotes the completed unit.",
+   "uses": [
+    "lem-pur-completed-unit-pullback-tower",
     "thm-pur-adic-reconstruction",
-    "lem-pur-adic-purity-scalar-naturality",
-    "def-weil-derived-pullback-tensor-hom"
+    "lem-pur-adic-purity-scalar-naturality"
    ],
    "elementary": false,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-cor-sp-all-coefficients/cor-pur-adic-and-rational-smooth-dualizing-complexes.proof.md",
-    "place": "first sentence: integral coefficient application and inversion of the purity map"
+    "place": "proof, coefficient-unit application"
    }
   },
   {
-   "text": "For $\\Lambda=E$, use the image of $U$ as the lattice presentation of $\\Lambda_s$; for $\\Lambda=\\Qlb$, use that $E$-object at a finite coefficient stage. These are the coefficient units specified by [def-pur-conventions] and [lem-weil-constant-coefficient-objects-constructible]. Apply [thm-pur-rational-and-qbar-purity] to $a_X$ and these units. Its geometric hypotheses are those checked in Step 1 and its lattice hypothesis is supplied by $U$. The rationalized and common-stage pullback formulas of [def-weil-derived-pullback-tensor-hom] take the integral identification $La_X^*U\\cong\\mathcal O_{E,X}$ of Step 1 to $La_X^*\\Lambda_s\\cong\\Lambda_X$. Thus it gives $\\gamma_{a_X,\\Lambda_s}:\\Lambda_X(d)[2d]\\xrightarrow{\\sim}\\omega_{X,\\Lambda}$ at each of the two field stages. Invert this map to obtain the displayed dualizing-complex identification.",
+   "text": "The rational and common-stage units are presented by $U$, and their pullbacks are $E_X$ and $(\\Qlb)_X$, by [lem-pur-completed-unit-pullback-tower]. Apply [thm-pur-rational-and-qbar-purity] to $a_X$ at these units. Step 1 checks its geometric hypotheses and supplies its normalized integral lattice. The resulting isomorphisms are exactly the coefficient transports of integral purity; invert them to obtain $\\omega_{X,\\Lambda}\\cong\\Lambda_X(d)[2d]$ for $\\Lambda=E,\\Qlb$.",
    "uses": [
-    "def-pur-conventions",
-    "lem-weil-constant-coefficient-objects-constructible",
-    "thm-pur-rational-and-qbar-purity",
-    "def-weil-derived-pullback-tensor-hom"
+    "lem-pur-completed-unit-pullback-tower",
+    "thm-pur-rational-and-qbar-purity"
    ],
    "elementary": false,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-cor-sp-all-coefficients/cor-pur-adic-and-rational-smooth-dualizing-complexes.proof.md",
-    "place": "first sentence: rational and algebraically closed coefficient applications"
+    "place": "proof, coefficient-unit application"
    }
   },
   {
-   "text": "Write $\\eta_\\Lambda=\\gamma_{a_X,\\Lambda_s}^{-1}$ for the identification in Steps 1–2 and $\\epsilon_\\Lambda:Ra_{X!}\\omega_{X,\\Lambda}\\to\\Lambda_s$ for the counit in [def-pur-conventions]. Reading the counit through $\\eta_\\Lambda$ gives exactly the typed composite $Ra_{X!}(\\Lambda_X(d)[2d])\\xrightarrow{Ra_{X!}(\\gamma_{a_X,\\Lambda_s})}Ra_{X!}\\omega_{X,\\Lambda}\\xrightarrow{\\epsilon_\\Lambda}\\Lambda_s$. At every finite level this is the smooth trace by [def-pur-smooth-trace]. The integral trace compatibility of [prop-pur-adic-reconstruction-trace-coherence] says that the composite at $\\mathcal O_E$ is the adic transport of those finite-level composites; [prop-pur-rational-purity-trace-coherence] says that the composites at $E$ and $\\Qlb$ are their rationalized and common-stage transports. To identify the normalization, use the affine-space clause of [thm-pur-trace-normalization-transitivity] at each $\\Lambda=A_{E,n}$: for $p_d:\\mathbf A_k^d\\to s$ its smooth trace is the product of the normalized affine-line traces and sends their ordered $d$-fold fundamental class to $1$. The current theorem explicitly identifies $\\Lambda=A_{E,n}$ and assumes separated finite-type $k$-schemes; $\\mathbf A_k^d$ and $s$ satisfy these hypotheses, and $p_d$ is smooth separated of pure relative dimension $d$. Its coefficient-transport clause, together with the two trace-coherence statements just applied, transports this finite normalization along the same adic, rationalized and common-stage maps used in Steps 1–2. Thus the composite for $a_X$ is the transported normalized smooth trace; no fundamental class integrating to $1$ is claimed for an arbitrary $X$. Finally apply the point-fiber functor in [def-weil-ordinary-compact-cohomology]: it sends the source to $R\\Gamma_c(X,\\Lambda_X(d)[2d])$ and the target coefficient unit to $\\Lambda$, giving precisely the asserted integration map.",
+   "text": "Write $\\eta_\\Lambda=\\gamma_{a_X,\\Lambda_s}^{-1}$. Reading the counit through $\\eta_\\Lambda$ gives $\\epsilon_\\Lambda\\circ Ra_{X!}(\\gamma_{a_X,\\Lambda_s})$. At finite level this is the smooth trace by [def-pur-smooth-trace]. The integral and field-stage composites are its specified transports by [prop-pur-adic-reconstruction-trace-coherence] and [prop-pur-rational-purity-trace-coherence]. Apply [lem-pur-point-trace-reconstruction] to these coherent counit pairings: their point-fibre values have source $R\\Gamma_c(X,\\Lambda_X(d)[2d])$ and target $\\Lambda$, with the same normalization under coefficient transport. The affine-space clause of [thm-pur-trace-normalization-transitivity] supplies that normalization: for $p_d:\\mathbf A_k^d\\to s$ (both schemes separated finite type), the finite trace is the ordered product of normalized affine-line traces and sends their $d$-fold class to $1$. Its coefficient-transport clause preserves this normalization, including $d=0$. No class integrating to $1$ is asserted for arbitrary $X$.",
    "uses": [
-    "def-pur-conventions",
     "def-pur-smooth-trace",
     "prop-pur-adic-reconstruction-trace-coherence",
     "prop-pur-rational-purity-trace-coherence",
-    "thm-pur-trace-normalization-transitivity",
-    "def-weil-ordinary-compact-cohomology"
+    "lem-pur-point-trace-reconstruction",
+    "thm-pur-trace-normalization-transitivity"
    ],
    "elementary": false,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-cor-sp-all-coefficients/cor-pur-adic-and-rational-smooth-dualizing-complexes.proof.md",
-    "place": "second clause: counit, transported trace and normalization"
+    "place": "proof, counit and normalization clause"
    }
   }
  ],
  "proof_deps": [
-  "lem-weil-constant-coefficient-objects-constructible",
-  "def-weil-finite-tor-amplitude",
+  "lem-asd-finite-etale-tate-tensor-family",
+  "lem-pur-completed-unit-pullback-tower",
   "thm-pur-adic-reconstruction",
   "lem-pur-adic-purity-scalar-naturality",
-  "def-weil-derived-pullback-tensor-hom",
-  "def-pur-conventions",
   "thm-pur-rational-and-qbar-purity",
   "def-pur-smooth-trace",
   "prop-pur-adic-reconstruction-trace-coherence",
   "prop-pur-rational-purity-trace-coherence",
-  "thm-pur-trace-normalization-transitivity",
-  "def-weil-ordinary-compact-cohomology"
+  "lem-pur-point-trace-reconstruction",
+  "thm-pur-trace-normalization-transitivity"
  ],
  "proof_origin": {
-  "by": "agent",
-  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-cor-sp-all-coefficients/cor-pur-adic-and-rational-smooth-dualizing-complexes.proof.md",
-  "place": "proof paragraph, expanded into integral, rational/Qbar, and counit steps"
+  "by": "A2 stage 3",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-cor-sp-all-coefficients/cor-pur-adic-and-rational-smooth-dualizing-complexes.proof.md",
+  "place": "coefficient-unit application and counit clause",
+  "note": "The original three integral/rational/common-stage plan steps and all their dependencies are retained for the seven remaining holes. Added the actual tensor-family dependency used to prove the finite Tate flatness preliminary. Restored the archived Lean attachment unchanged; this repair does not claim to prove the final corollary."
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Completed coefficient units have uniform Tor amplitude zero and their derived pullbacks are coefficient units at integral rational and algebraically closed coefficient stages",
+   "results": "8 hits: Algebra.Smooth.exists_finiteType, Algebra.IsStandardSmoothOfRelativeDimension, Algebra.FormallySmooth.iff_injective_cotangentComplexBaseChange, Algebra.IsStandardSmooth, RingHom.IsStandardSmoothOfRelativeDimension, RingHom.FormallyUnramified.ofLocalizationSpanTarget, BDeRham, Algebra.Etale",
+   "date": "2026-10-22",
+   "verdict": "no match: no complete smooth dualizing-complex identification with the three coefficient stages and normalized counit"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor, CategoryTheory.Limits.IsLimit",
+   "results": "12 hits: CategoryTheory.Limits.IsLimit, CategoryTheory.Limits.IsLimit.subsingleton, CategoryTheory.Limits.IsLimit.ofRepresentableBy, CategoryTheory.Limits.IsLimit.representableBy, CategoryTheory.Limits.IsLimit.lift, CategoryTheory.Limits.IsLimit.ofIsoLimit, CategoryTheory.Limits.IsLimit.uniqueUpToIso, CategoryTheory.Limits.IsLimit.equivIsoLimit",
+   "date": "2026-10-22",
+   "verdict": "no match: no complete smooth dualizing-complex identification with the three coefficient stages and normalized counit"
+  },
+  {
+   "tool": "grep",
+   "query": "completed.*unit|unit.*completed|adic.*pullback|pullback.*adic",
+   "results": "14 hits: Mathlib/NumberTheory/LSeries/HurwitzZetaOdd.lean, Mathlib/NumberTheory/LSeries/HurwitzZetaOdd.lean, Mathlib/NumberTheory/LSeries/HurwitzZetaOdd.lean, Mathlib/NumberTheory/LSeries/HurwitzZetaOdd.lean, Mathlib/NumberTheory/LSeries/HurwitzZetaOdd.lean, Mathlib/NumberTheory/LSeries/HurwitzZetaEven.lean, Mathlib/NumberTheory/LSeries/HurwitzZetaEven.lean, Mathlib/NumberTheory/LSeries/HurwitzZetaEven.lean",
+   "date": "2026-10-22",
+   "verdict": "no match: no complete smooth dualizing-complex identification with the three coefficient stages and normalized counit"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived pullback preserves completed adic coefficient units with uniformly bounded Tor amplitude",
+   "results": "8 hits: AdicCompletion.module, AdicCompletion, AdicCompletion.ofTensorProductEquivOfFiniteNoetherian, isUnit_iff_notMem_of_isAdicComplete_maximal, AdicCompletion.ofTensorProductEquivOfFiniteNoetherian_apply, AdicCompletion.coe_ofTensorProductEquivOfFiniteNoetherian, PreTilt.untilt.congr_simp, SheafOfModules.pullbackPushforwardAdjunction_homEquiv_pullbackObjUnitToUnit",
+   "date": "2026-10-22",
+   "verdict": "no match: no complete smooth dualizing-complex identification with the three coefficient stages and normalized counit"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A coherent finite coefficient system of maps into exceptional inverse image gives counit trace maps whose integral reconstruction rationalization and common finite field images preserve normalized affine space integration",
+   "results": "8 hits: AlgebraicGeometry.AffineSpace.not_isIntegralHom, AlgebraicGeometry.AffineSpace.homOfVector_toSpecMvPoly, AlgebraicGeometry.AffineSpace.isIntegralHom_over_iff_isEmpty, AlgebraicGeometry.AffineSpace.map_toSpecMvPoly, AlgebraicGeometry.Scheme.Hom.toNormalization_app_preimage, AlgebraicGeometry.AffineSpace.toSpecMvPolyIntEquiv_comp, AlgebraicGeometry.Scheme.Hom.ι_fromNormalization, AlgebraicGeometry.AffineSpace.map_Spec_map",
+   "date": "2026-10-22",
+   "verdict": "no match: no complete smooth dualizing-complex identification with the three coefficient stages and normalized counit"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.counit, CategoryTheory.Functor.map_comp",
+   "results": "0 hits: ",
+   "date": "2026-10-22",
+   "verdict": "no match: no complete smooth dualizing-complex identification with the three coefficient stages and normalized counit"
+  },
+  {
+   "tool": "grep",
+   "query": "trace.*reconstruction|counit.*adic|adic.*counit|integration.*coefficient",
+   "results": "3 hits: Mathlib/CategoryTheory/Adjunction/Lifting/Left.lean, Mathlib/CategoryTheory/Monad/Limits.lean, Mathlib/CategoryTheory/Monad/Limits.lean",
+   "date": "2026-10-22",
+   "verdict": "no match: no complete smooth dualizing-complex identification with the three coefficient stages and normalized counit"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Exceptional adjunction counit pairing on a normalized adic system commutes with derived inverse limit and scalar extension of coefficients",
+   "results": "8 hits: CategoryTheory.Adjunction.derivedε, CategoryTheory.Adjunction.derivedε.congr_simp, CategoryTheory.Adjunction.counitAsIsoOfIso, CategoryTheory.Adjunction.derived_counit, CategoryTheory.Adjunction.functorialityCounit, CategoryTheory.Adjunction.Localization.ε, CategoryTheory.Adjunction.derivedε_fac_app, CategoryTheory.instIsReflexivePairMapAppCounitObj",
+   "date": "2026-10-22",
+   "verdict": "no match: no complete smooth dualizing-complex identification with the three coefficient stages and normalized counit"
+  }
+ ],
  "mathlib_match": null,
  "status": "split",
  "merged_into": null,
@@ -120,40 +182,55 @@
   "def-weil-scheme-morphism-properties"
  ],
  "proof_split_by": "paragraphs",
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
  "chapter": "sec-smooth-purity",
  "unit": "sk-thm-purity-transport",
  "blueprint_update": {
-  "snapshot": "main-20261015",
-  "statement": "Work in the purity conventions of [def-pur-conventions], let\n$\\Lambda\\in\\{\\mathcal O_E,E,\\Qlb\\}$, and let $a_X:X\\to\\Spec k$ be a\nseparated finite-type smooth morphism of pure dimension $d$. The\ndualizing complex\n\n$$\n\\omega_{X,\\Lambda}=Ra_X^!\\Lambda\n$$\n\nhas the canonical identification\n\n$$\n\\omega_{X,\\Lambda}\\xrightarrow{\\ \\sim\\ }\\Lambda_X(d)[2d]\n$$\n\nobtained from [thm-pur-rational-and-qbar-purity], and the counit\nidentifies with the transported normalized integration map\n\n$$\nR\\Gamma_c(X,\\Lambda_X(d)[2d])\\longrightarrow\\Lambda.\n$$",
+  "snapshot": "main-20261023-1620",
+  "commit": "7284bb09daf97437d544c51882b325f9c52cd345",
+  "changed": [
+   "statement"
+  ],
+  "statement": "Work in the purity conventions of [def-pur-conventions], let\n$\\Lambda\\in\\{\\mathcal O_E,E,\\Qlb\\}$ with the condensed categories\n$\\Dbc(-,\\Lambda)$ of [def-sf-setting], and let $a_X:X\\to\\Spec k$ be a\nseparated finite-type smooth morphism of pure dimension $d$. The\ndualizing complex\n\n$$\n\\omega_{X,\\Lambda}=Ra_X^!\\Lambda\n$$\n\nhas the canonical identification\n\n$$\n\\omega_{X,\\Lambda}\\xrightarrow{\\ \\sim\\ }\\Lambda_X(d)[2d]\n$$\n\nobtained from [sk-thm-purity-transport]. Through it, the counit becomes the\nsmooth trace\n\n$$\nR\\Gamma_c(X,\\Lambda_X(d)[2d])\\longrightarrow\\Lambda\n$$\n\nof [sk-def-sp-trace]. Its reductions modulo $\\pi_E^n$ (for\n$\\Lambda=\\mathcal O_E$) are the finite normalized integration maps of\n[cor-pur-finite-stage-smooth-dualizing-complex]. For $\\Lambda=E$ it is the\nintegral one with $\\ell$ inverted, and for $\\Lambda=\\Qlb$ the extension of\nscalars of the one over a finite $E$.",
   "proof": [
    {
-    "text": "Apply [thm-pur-rational-and-qbar-purity] to $f=a_X$ and the\ncoefficient $\\Lambda$: the purity isomorphism identifies the dualizing\ncomplex with $\\Lambda_X(d)[2d]$, and the counit is the transported smooth\ntrace [def-pur-smooth-trace], whose normalization is the\ncoefficient transport of\n[thm-pur-trace-normalization-transitivity].",
+    "text": "Apply [sk-thm-purity-transport] to $f=a_X$ and $K=\\Lambda_{\\Spec k}$. Since\n$a_X^*\\Lambda_{\\Spec k}=\\Lambda_X$, the purity isomorphism\n$\\gamma_{a_X,\\Lambda}(\\Lambda_{\\Spec k})$ identifies $\\Lambda_X(d)[2d]$ with\n$\\omega_{X,\\Lambda}$. By definition of the smooth trace ([sk-def-sp-trace]), the\ncounit $\\varepsilon_{a_X}(\\Lambda)$ composed with $Ra_{X!}$ of this identification\nis $\\operatorname{Tr}_{a_X}(\\Lambda_{\\Spec k})$. Its description through the\nfinite traces is the final assertion of [det-sp-purity-coefficient-change],\nwhose items (1)–(3) treat reduction, inversion of $\\ell$ and extension of\nscalars, applied to the finite traces of\n[cor-pur-finite-stage-smooth-dualizing-complex].",
     "uses": [
-     "thm-pur-rational-and-qbar-purity",
-     "def-pur-smooth-trace",
-     "thm-pur-trace-normalization-transitivity"
+     "sk-thm-purity-transport",
+     "sk-def-sp-trace",
+     "cor-pur-finite-stage-smooth-dualizing-complex"
     ],
     "elementary": false
    }
   ],
-  "note": "the current blueprint (aligned 2026-10-15 with the six-functors notes) states or proves this differently; a worker who touches the node follows it"
+  "note": "the current blueprint (main-20261023-1620, weil-conjectures-blueprint 7284bb09da) states or proves this differently; a worker who touches the node follows it"
  },
  "split_report": {
-  "date": "2026-10-17",
+  "date": "2026-10-22",
   "item": "cor-pur-adic-and-rational-smooth-dualizing-complexes",
   "worker": "stage1",
-  "summary": "Repair of the refused landing: revalidated all twelve cited statements against the retained delivery, replaced the obsolete normalization-theorem quote, and applied its current finite-coefficient affine-space clause explicitly, checking separated finite-type hypotheses. Retains the completed coefficient unit, compatible integral purity family, inverses of purity maps, and stage-specific counit transports. No new nodes and no change to the previously corrected statement.",
-  "blueprint": "Realizes the current main-20261015 corollary proof paragraph and sk-thm-purity-transport Step 4: proof Step 1 applies integral purity, Step 2 applies rational/Qbar purity, and Step 3 identifies the counit with normalized integration. The integral attribution omitted by the source is corrected explicitly in the report.",
+  "summary": "Repair of batch5 re-split return: preserve the statement and all original arguments; extract two independent statement-only tasks, the completed coefficient-unit/pullback system and arbitrary coherent point-valued counit pairings. Parent remains the direct integral/rational purity application and the normalized counit assembly. Original proof is preserved verbatim in report.md for the argument-by-argument allocation.",
+  "blueprint": "Current main-20261015 proof paragraph, with integral application supplied by thm-pur-adic-reconstruction: first sentence realized by Steps 1–2 and the completed-unit lemma; second sentence by Step 3 and the point-trace reconstruction lemma. Both new nodes serve sk-thm-purity-transport Step 4.",
   "tool_uses": []
  },
  "reviewed": {
-  "date": "2026-10-17",
+  "date": "2026-10-22",
   "by": "L",
-  "reviewer": "NT-cc-Q08-d6a644131",
-  "group": "Q08",
+  "reviewer": "NT-cc-Q74-002242b3b",
+  "group": "Q74",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q08-d6a644131 (reviewer sub-agent of L); spot-checked: I read the whole delivery: the item, its 3 steps and all 12 cited statements in the snapshot DAG, the master (order 2030) and main-20261015 statement and proof sources, the sk-cor-sp-all-coefficients sketch, and the sk-thm-purity-transport unit route. The delivery has no new nodes. Statement: the base text attributes the O_E case to thm-pur-rational-and-qbar-purity, but that theorem only covers the E and Qlb categories. The corrected text cites thm-pur-adic-reconstruction for O_E. It is recorded in the report and weakens nothing: the hypotheses, the direction of the isomorphism and the counit claim are all unchanged. The citers are unaffected. Step 1: the constant-coefficient lemma (clause 2) gives U in D^b_c(s,O_E). U_n has Tor amplitude [0,0], so U is in D^b_ctf(s,O_E). The hypotheses of the adic reconstruction theorem hold for a_X: s. That theorem gives no unique lift, and the step correctly takes a definite map from the scalar-naturality lemma. La_X^*U is Rlim of (A_{E,n})_X, which is Ô_{E,X} because Ô_{E,X} is derived complete (def-weil-derived-complete). Step 2: clause 3 of the same lemma supplies the E and Qlb units; the rational and common-stage pullbacks use the integral operation on objects. Step 3: at A_{E,n}, the counit read through η is def-pur-smooth-trace. The two trace-coherence propositions transport it to O_E, E and Qlb. The affine-space clause and transport sentence of the current thm-pur-trace-normalization-transitivity give the normalization; the step claims no class integrating to 1 on an arbitrary X. RΓ_c = Fib_s Ra_! comes from def-weil-ordinary-compact-cohomology. Edge cases checked: d=0, X=Spec k, X empty, n=1 and n>1, A^1, A^0. All dependencies are on the unit's transitive route (it contains sk-def-sf-admissible and sk-def-sf-operations), so no tool_use is needed. No SGA is cited and there is no cycle. FIX: added def-pur-smooth-trace and def-weil-ordinary-compact-cohomology to the item's stmt_deps, because the statement uses RΓ_c and the transported smooth trace (normalized integration). Both were already in proof_deps. The corrected item is in fixes/dag/nodes/sec-smooth-purity/; review.md has the details.; 1 file(s) fixed by the reviewer"
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q74-002242b3b (reviewer sub-agent of L); spot-checked: I read the re-split fully and changed nothing. Context: repair note released 2026-10-22 (batch5, at least 2 new nodes, assembly at most 3000 characters). The item is not on the drop list and no other group has superseded it (the live item still has the base 3-step Q08 proof). Item statement and stmt_deps are identical to base and live. No SGA citation; no missing dependencies and no cycle. Allocation: old Steps 1 and 2 (constructibility of the completed unit, Tor [0,0], La^*U ≅ Ô_{E,X} through the finite unit system and its derived limit, lattice presentation of the E and Q̄ units) moved to lem-pur-completed-unit-pullback-tower. The point-fibre passage and the transport of the counit pairing through reconstruction and the field stages from old Step 3 moved to lem-pur-point-trace-reconstruction. The parent keeps three short applications: adic reconstruction with the scalar-naturality family, then rational/Q̄ purity, then smooth trace with the two trace-coherence props and the normalization theorem's affine and transport clauses. It is 2183 characters, the new nodes are 1967 and 2611, and nothing was dropped or blurred. Node 1 is true: the unit is flat, c^f commutes with the quotient maps, completed pullback is Rlim of B_{X,n}, which is Ô_{E,X}, and the field images follow from def-weil-derived-pullback-tensor-hom. Node 2 is true and well typed against the system construction of Ra^! in def-weil-exceptional-inverse-image, the fixed-compactification Rlim formula for Ra_! and prop-coef-integral-exceptional-adjoint (counits agree after reduction). Its class clause is conditional, and the t=0 and empty-X cases are consistent. Parent Step 3 applies node 2 to t_•=γ_•, which thm-pur-adic-reconstruction gives as a strict-tower morphism. Duplicate candidates (constant-coefficient lemma, zl unit realization, completed-operation tower substitution, coef adjunction transition and integral exceptional adjoint, tower-trace comparison) overlap only partly; this is advisory. Advisory: the item's Lean was already closed by Q39 on 2026-10-18, so this split only adds statement-only tasks."
  },
  "tool_uses": [
   "lem-pur-adic-purity-scalar-naturality"
@@ -227,5 +304,15 @@
   "group": "Q39",
   "result": "fix",
   "note": "28b4 = a678 delivery plus twiceSucc replaced by the existing PurityFiniteSetting.frameDegreeNext (identical signature, PurityFrameClass.lean:139, proof-irrelevant use in EtalePowerPresentation.normalized); this repairs the duplicate-declaration refusal. Statement and binders are byte-identical to a678, which earlier reviews read clause by clause: O_E/E/Qbar clauses and counit equations, no extra hypotheses or universe restriction, edge cases d=0, empty X, levels n+1. lean.statement is verbatim and all 48 declarations are present. Mechanical finding: thm-pur-diagonal-dualizing-object is a genuine dependency (finiteIntegration uses diagonalDualizingObject = existsUnique_diagonalDualizingObject.exists.choose), PASS on that point. FIX 1 (H6): structureIsOver was again a proof term for the Prop class Hom.IsOver, the 84cf/a678 fixes having been lost on re-delivery; restored as theorem := by sorry with a proof docstring plus attribute [instance]. FIX 2: re-applied the a678 inlining of non-instance lets in finitePowerComparison/finiteIntegration (zeta-equal, no signature change). Report sentence corrected and a Reviewer fix section added. nt_compile --json on the local overlay at load about 80: delivered clean in 37.6 s; fixed clean in about 48 s and 29.6 s. Note: frameDegreeNext's owner def-pur-frame-class is not in stmt_deps (proof-irrelevant arithmetic, no rule requires it)."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "C-36acb",
+  "group": "A2",
+  "result": "pass",
+  "landing": "20261024T184511-L-3056387",
+  "kind": "proof",
+  "note": "independent cc review: delivered AdicSmoothDualizingComplexes.lean vs quarantine original (only explicit Hom types + @[irreducible] on 3 maps with verbatim bodies, local transparency controls, 5 genuine proofs, import pruning); node diff vs live (proof/proof_deps/proof_origin only); change record vs live+quarantine users (none use the 3 maps); #print axioms scratch compile"
  }
 }

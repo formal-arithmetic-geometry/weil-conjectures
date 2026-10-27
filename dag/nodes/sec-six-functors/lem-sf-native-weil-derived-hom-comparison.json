@@ -1,0 +1,366 @@
+{
+ "id": "lem-sf-native-weil-derived-hom-comparison",
+ "kind": "statement",
+ "title": "Resolution-independent native Weil derived Hom transposition",
+ "statement": "Fix a finite field $k_0$, an algebraic closure $k$ of $k_0$, a prime $\\ell\\ne\\operatorname{char}k_0$ and $\\Omega=\\overline{\\mathbf Q}_\\ell$. Let $f_0:X_0\\to Y_0$ be a separated finite-type morphism between separated finite-type $k_0$-schemes. Use the actual coefficient sheaves $B_T$, module categories $\\mathcal A_T$, Frobenius functors $P_T=F_T^*$ and abelian fixed-pair categories $\\mathcal W_T=\\mathcal A_T^{F_T^*}$ of [def-sf-native-weil-derived-framework], with its small-site and larger-universe convention. Use the underived adjunction $F_0\\dashv G_0$, its unit $\\eta$ and counit $\\varepsilon$, the localization functors $Q_T$, and the K-injective computation $\\beta_I:Q_YG_0I\\xrightarrow{\\sim}Rf_*(Q_XI)$ and $c_r:Rf_*(Q_XJ)\\xrightarrow{\\sim}Q_YG_0I$ of [lem-sf-native-weil-injective-adjunction-model]. For any cochain complexes $M$ in $\\mathcal W_Y$ and $J$ in $\\mathcal W_X$, and any K-injective resolution $r:J\\to I$, the following composite is a bijection:\n$$\\begin{aligned}\n\\Phi^r_{M,J}:\\operatorname{Hom}_{D(\\mathcal W_X)}(Q_XF_0M,Q_XJ)\n&\\xrightarrow{Q_Xr\\circ-}\\operatorname{Hom}_{D(\\mathcal W_X)}(Q_XF_0M,Q_XI)\\\\\n&\\xrightarrow{Q_X^{-1}}\\operatorname{Hom}_{K(\\mathcal W_X)}(F_0M,I)\\\\\n&\\xrightarrow{[u]\\mapsto[G_0u\\circ\\eta_M]}\\operatorname{Hom}_{K(\\mathcal W_Y)}(M,G_0I)\\\\\n&\\xrightarrow{c_r^{-1}\\circ Q_Y(-)}\\operatorname{Hom}_{D(\\mathcal W_Y)}(Q_YM,Rf_*Q_XJ).\n\\end{aligned}$$\nHere $Q_X^{-1}$ means the inverse localization Hom bijection into the K-injective target, not a quasi-inverse on objects. The resulting bijection is independent of $r$ and of the complex representatives of both derived objects under their specified localization isomorphisms. It defines a bijection $\\Phi_{T,N}:\\operatorname{Hom}(f^*T,N)\\cong\\operatorname{Hom}(T,Rf_*N)$ for all ambient derived objects, natural in both variables including all derived extension morphisms. More explicitly, for $a:T'\\to T$, $h:f^*T\\to N$, and $b:N\\to N'$,\n$$\\Phi_{T',N}(h\\circ f^*a)=\\Phi_{T,N}(h)\\circ a,\\qquad\n\\Phi_{T,N'}(b\\circ h)=Rf_*(b)\\circ\\Phi_{T,N}(h).$$\nFor K-injective representatives $I,I'$ the unique homotopy class representing a derived arrow $v:Q_XI\\to Q_XI'$ computes its image under $Rf_*$ by $\\beta_{I'}\\circ Q_Y(G_0\\widetilde v)\\circ\\beta_I^{-1}$, where $Q_X\\widetilde v=v$. The class representing the identity between two such representatives of one object is a homotopy equivalence and identifies the two Hom composites above.\n\nThe transposes of identities have the following specified normalizations. For $T=Q_YM$ and a K-injective resolution $s:F_0M\\to I$, with $c_s:Rf_*(f^*T)\\xrightarrow{\\sim}Q_YG_0I$,\n$$c_s\\circ\\Phi_{T,f^*T}(\\mathrm{id})=Q_Y(G_0s\\circ\\eta_M).$$\nFor K-injective $I$ and $N=Q_XI$,\n$$\\Phi^{-1}_{Rf_*N,N}(\\mathrm{id})\\circ f^*(\\beta_I)=Q_X(\\varepsilon_I).$$\nThus these identity transposes are the actual derived unit and counit of the specified underived adjunction and chosen total derived functors. No preservation of bounded constructible objects is asserted.",
+ "source": {
+  "document": "literature/stacks-project/derived.tex",
+  "place": "Tags 070I (lemma-K-injective) and 08BJ (lemma-adjoint-preserve-K-injectives), Hom computation and homotopy adjunction; expanded by an agent to resolution independence, naturality and identity-transpose normalization. Extracted from returned proof steps 4-7."
+ },
+ "stmt_deps": [
+  "def-sf-native-weil-derived-framework",
+  "lem-sf-native-weil-injective-adjunction-model"
+ ],
+ "proof": [
+  {
+   "text": "Use the exactness assertion of [lem-sf-native-weil-injective-adjunction-model] for the actual upperStar. Apply the existing source-library construction CategoryTheory.Adjunction.mapDerivedCategoryRightDerivedAdjunction to upperStarLowerStarAdjunction. Its K-injective derivability argument constructs the ambient unbounded adjunction directly from the homotopy adjunction, the factorization alpha and the universal comparison beta. Mathlib derivedη_fac_app and derivedε_fac_app give the two normalized unit and counit equations. All objects are those of [def-weil-abstract-derived-category]; no boundedness restriction or replacement of the native categories occurs.",
+   "uses": [
+    "lem-sf-native-weil-injective-adjunction-model",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "lean/WeilConjectures/CategoryTheory/DerivedCategory/RightDerivedFunctor/Adjunction.lean",
+    "place": "mapDerivedCategoryRightDerivedAdjunction; Mathlib/CategoryTheory/Functor/Derived/Adjunction.lean derivedη_fac_app and derivedε_fac_app; Mathlib/Algebra/Homology/DerivedCategory/KInjective.lean Qh_map_bijective. The explicit comparison calculation is by K2."
+   }
+  },
+  {
+   "text": "For each K-injective target I, [lem-weil-pbc-kinjective-hom-derived] makes Q_X on Hom into I bijective. Lift each derived v between K-injectives uniquely to t. Naturality of beta gives beta_I followed by R(v) equals Q_Y(G(t)) followed by beta_Iprime. If v is invertible, lift its inverse into I. Applying injectivity of the two Hom-localization maps to the two composites proves that the lifts are inverse. This proves all three properties of the unique lift.",
+   "uses": [
+    "lem-weil-pbc-kinjective-hom-derived"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "lean/WeilConjectures/CategoryTheory/DerivedCategory/RightDerivedFunctor/Adjunction.lean",
+    "place": "mapDerivedCategoryRightDerivedAdjunction; Mathlib/CategoryTheory/Functor/Derived/Adjunction.lean derivedη_fac_app and derivedε_fac_app; Mathlib/Algebra/Homology/DerivedCategory/KInjective.lean Qh_map_bijective. The explicit comparison calculation is by K2."
+   }
+  },
+  {
+   "text": "Expand the derived transpose as eta_d followed by R(alpha_M followed by Q_X(t)). Substitute the normalized unit equation of step 1, and apply naturality of beta at t and functoriality of Q_Y. The result is exactly Q_Y(eta_M followed by G(t)) followed by beta_I. For a resolution r and Q_X(t)=h followed by Q_X(r), right naturality of the adjunction identifies its left side with Phi(alpha_M followed by h) followed by R(Q_X(r)). This is the required four-arrow resolution-comparison equation. Taking t=s gives the stated unit normalization. No choice of resolution or inverse Hom map is needed to construct a second adjunction.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "lean/WeilConjectures/CategoryTheory/DerivedCategory/RightDerivedFunctor/Adjunction.lean",
+    "place": "mapDerivedCategoryRightDerivedAdjunction; Mathlib/CategoryTheory/Functor/Derived/Adjunction.lean derivedη_fac_app and derivedε_fac_app; Mathlib/Algebra/Homology/DerivedCategory/KInjective.lean Qh_map_bijective. The explicit comparison calculation is by K2."
+   }
+  },
+  {
+   "text": "The homEquiv of the ambient adjunction is natural for every source and target derived arrow by Adjunction.homEquiv_naturality_left and homEquiv_naturality_right. Thus the same equivalence gives every resolution comparison, including changes of representative, and all are bijections. The normalized counit equation from step 1 is the final conjunct. Together with the unique lifts of step 2 and the resolution equation and unit normalization of step 3, these are precisely the six conjuncts of IsResolutionHomComparison.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "lean/WeilConjectures/CategoryTheory/DerivedCategory/RightDerivedFunctor/Adjunction.lean",
+    "place": "mapDerivedCategoryRightDerivedAdjunction; Mathlib/CategoryTheory/Functor/Derived/Adjunction.lean derivedη_fac_app and derivedε_fac_app; Mathlib/Algebra/Homology/DerivedCategory/KInjective.lean Qh_map_bijective. The explicit comparison calculation is by K2."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sf-native-weil-injective-adjunction-model",
+  "lem-weil-pbc-kinjective-hom-derived",
+  "def-weil-abstract-derived-category"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "lean/WeilConjectures/CategoryTheory/DerivedCategory/RightDerivedFunctor/Adjunction.lean",
+  "place": "mapDerivedCategoryRightDerivedAdjunction; Mathlib/CategoryTheory/Functor/Derived/Adjunction.lean derivedη_fac_app and derivedε_fac_app; Mathlib/Algebra/Homology/DerivedCategory/KInjective.lean Qh_map_bijective. The explicit comparison calculation is by K2."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "derivedη_fac_app|derivedε_fac_app|homEquiv.*[Kk]Injective|[Kk]Injective.*homEquiv",
+   "results": {
+    "ok": true,
+    "n_hits": 2,
+    "note": "",
+    "top": [
+     "Mathlib/CategoryTheory/Functor/Derived/Adjunction.lean",
+     "Mathlib/CategoryTheory/Functor/Derived/Adjunction.lean"
+    ],
+    "digest": "7339e7e42107eac4"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: abstract derived adjunction requires additional composition derivability hypotheses; ordinary injective-resolution naturality and generic K-injective Hom bijectivity do not state the specified native Weil composite, its independence and normalization"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"derived\", \"homEquiv\"",
+   "results": {
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: abstract derived adjunction requires additional composition derivability hypotheses; ordinary injective-resolution naturality and generic K-injective Hom bijectivity do not state the specified native Weil composite, its independence and normalization"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The chain of Hom bijections using a K-injective replacement and an exact left adjoint is independent of resolution and natural in both derived variables with the original derived unit and counit",
+   "results": {
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "CategoryTheory.Functor.rightDerived_map_eq",
+     "CategoryTheory.InjectiveResolution.isoRightDerivedObj_hom_naturality",
+     "CategoryTheory.InjectiveResolution.isoRightDerivedObj_hom_naturality_assoc",
+     "CategoryTheory.InjectiveResolution.rightDerived_app_eq",
+     "CategoryTheory.InjectiveResolution.toRightDerivedZero_eq",
+     "CategoryTheory.InjectiveResolution.toRightDerivedZero'_naturality",
+     "CategoryTheory.InjectiveResolution.toRightDerivedZero'_naturality_assoc",
+     "CategoryTheory.Functor.mapDerivedCategoryFactorsh_hom_app"
+    ],
+    "digest": "52f538f5bc05edfa"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: abstract derived adjunction requires additional composition derivability hypotheses; ordinary injective-resolution naturality and generic K-injective Hom bijectivity do not state the specified native Weil composite, its independence and normalization"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Resolution independent natural Hom equivalence on unbounded derived categories of Weil sheaves with explicitly normalized derived unit and counit",
+   "results": {
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "CategoryTheory.Adjunction.derived_unit",
+     "CategoryTheory.Adjunction.derivedη.congr_simp",
+     "CategoryTheory.Adjunction.CoreHomEquivUnitCounit.homEquiv",
+     "CategoryTheory.Adjunction.CoreHomEquivUnitCounit.mk.congr_simp",
+     "CategoryTheory.Adjunction.mkOfHomEquiv",
+     "CategoryTheory.Adjunction.mkOfHomEquiv_unit_app",
+     "CategoryTheory.Adjunction.toEquivalence",
+     "CategoryTheory.Equivalence.counit"
+    ],
+    "digest": "9353fce32a15ac45"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: abstract derived adjunction requires additional composition derivability hypotheses; ordinary injective-resolution naturality and generic K-injective Hom bijectivity do not state the specified native Weil composite, its independence and normalization"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For derived categories of abelian Weil sheaves show the resolution Hom chain is a canonical natural bijection and compute its transposes of identities from the underived adjunction",
+   "results": {
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "CategoryTheory.Adjunction.derived",
+     "CategoryTheory.Functor.mapDerivedCategoryFactorsh_hom_app",
+     "CategoryTheory.Functor.sheafAdjunctionCocontinuous_homEquiv_apply_val",
+     "CochainComplex.IsKInjective.Qh_map_bijective",
+     "CategoryTheory.Sheaf.H",
+     "CategoryTheory.sheafComposeNatIso",
+     "DerivedCategory.singleFunctorIsoCompQ",
+     "SheafOfModules.PullbackConstruction.adjunction"
+    ],
+    "digest": "bebd4ac3653d8d59"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: abstract derived adjunction requires additional composition derivability hypotheses; ordinary injective-resolution naturality and generic K-injective Hom bijectivity do not state the specified native Weil composite, its independence and normalization"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Hom into a K-injective complex is computed by the homotopy category and localization is bijective",
+   "results": {
+    "t": "2026-10-22T12:14:44Z",
+    "tool": "leansearch",
+    "query": "Hom into a K-injective complex is computed by the homotopy category and localization is bijective",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "CochainComplex.IsKInjective.Qh_map_bijective",
+     "CochainComplex.HomComplex.CohomologyClass.bijective_toSmallShiftedHom_of_isKInjective",
+     "HomologicalComplexUpToQuasiIso.Q_inverts_homotopyEquivalences",
+     "HomologicalComplexUpToQuasiIso.Q_map_eq_of_homotopy",
+     "HomologicalComplexUpToQuasiIso.instIsLocalizationHomotopyCategoryQhQuasiIso",
+     "CochainComplex.HomComplex.CohomologyClass.bijective_toSmallShiftedHom_of_isKProjective",
+     "ComplexShape.QFactorsThroughHomotopy.areEqualizedByLocalization",
+     "instIsLocalizationHomologicalComplexIntUpHomotopyCategoryQuotientHomotopyEquivalences"
+    ],
+    "digest": "627f9a61fe857856"
+   },
+   "date": "2026-10-22",
+   "verdict": "match for the generic input only: Qh_map_bijective is already lem-weil-pbc-kinjective-hom-derived; abstract derived adjunction requires composition derivability and does not itself state this specified native Hom composite with all resolution and normalization clauses."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Hom into a K-injective complex is computed by the homotopy category and localization is bijective",
+   "results": {
+    "t": "2026-10-22T12:14:48Z",
+    "tool": "leanfinder",
+    "query": "Hom into a K-injective complex is computed by the homotopy category and localization is bijective",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "CochainComplex.IsKInjective.Qh_map_bijective",
+     "CochainComplex.HomComplex.CohomologyClass.bijective_toSmallShiftedHom_of_isKInjective",
+     "CochainComplex.IsKInjective.rightOrthogonal",
+     "CochainComplex.isKInjective_iff_rightOrthogonal",
+     "CochainComplex.IsKInjective.nonempty_homotopy_zero",
+     "CochainComplex.IsKProjective.Qh_map_bijective",
+     "ComplexShape.QFactorsThroughHomotopy.areEqualizedByLocalization",
+     "HomotopyEquiv.isKInjective"
+    ],
+    "digest": "4d272068782a43fc"
+   },
+   "date": "2026-10-22",
+   "verdict": "match for the generic input only: Qh_map_bijective is already lem-weil-pbc-kinjective-hom-derived; abstract derived adjunction requires composition derivability and does not itself state this specified native Hom composite with all resolution and normalization clauses."
+  },
+  {
+   "tool": "grep",
+   "query": "Qh_map_bijective|mapDerivedCategoryRightDerivedAdjunction|derivedη_fac_app|derivedε_fac_app",
+   "results": {
+    "t": "2026-10-22T12:15:18Z",
+    "tool": "grep",
+    "query": "Qh_map_bijective|mapDerivedCategoryRightDerivedAdjunction|derivedη_fac_app|derivedε_fac_app",
+    "sub": "",
+    "ok": true,
+    "n_hits": 12,
+    "note": "",
+    "top": [
+     "Mathlib/CategoryTheory/Functor/Derived/Adjunction.lean",
+     "Mathlib/CategoryTheory/Functor/Derived/Adjunction.lean",
+     "Mathlib/Algebra/Homology/DerivedCategory/KInjective.lean",
+     "Mathlib/Algebra/Homology/DerivedCategory/KInjective.lean",
+     "Mathlib/Algebra/Homology/DerivedCategory/KInjective.lean",
+     "Mathlib/Algebra/Homology/DerivedCategory/KInjective.lean",
+     "Mathlib/Algebra/Homology/DerivedCategory/Plus.lean",
+     "Mathlib/Algebra/Homology/DerivedCategory/Plus.lean"
+    ],
+    "digest": "41e574d8b3f76e98"
+   },
+   "date": "2026-10-22",
+   "verdict": "match for the generic input only: Qh_map_bijective is already lem-weil-pbc-kinjective-hom-derived; abstract derived adjunction requires composition derivability and does not itself state this specified native Hom composite with all resolution and normalization clauses."
+  },
+  {
+   "tool": "loogle",
+   "query": "CochainComplex.IsKInjective.Qh_map_bijective",
+   "results": {
+    "t": "2026-10-22T12:15:19Z",
+    "tool": "loogle",
+    "query": "CochainComplex.IsKInjective.Qh_map_bijective",
+    "sub": "",
+    "ok": true,
+    "n_hits": 1,
+    "note": "",
+    "top": [
+     "CochainComplex.IsKInjective.Qh_map_bijective"
+    ],
+    "digest": "fc0a4c77f863f2da"
+   },
+   "date": "2026-10-22",
+   "verdict": "match for the generic input only: Qh_map_bijective is already lem-weil-pbc-kinjective-hom-derived; abstract derived adjunction requires composition derivability and does not itself state this specified native Hom composite with all resolution and normalization clauses."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived adjunction of an exact left adjoint and total right derived functor natural Hom bijection normalized by the unit and counit using K injective resolutions",
+   "results": {
+    "t": "2026-10-22T12:15:26Z",
+    "tool": "leanfinder",
+    "query": "Derived adjunction of an exact left adjoint and total right derived functor natural Hom bijection normalized by the unit and counit using K injective resolutions",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "CategoryTheory.Adjunction.derived",
+     "CategoryTheory.Adjunction.derived'",
+     "CategoryTheory.Adjunction.derivedε",
+     "CategoryTheory.Adjunction.derivedη",
+     "CategoryTheory.Adjunction.derived_unit",
+     "CategoryTheory.Adjunction.derived'_unit",
+     "CategoryTheory.Adjunction.derived_counit",
+     "CategoryTheory.Adjunction.derived'_counit"
+    ],
+    "digest": "a29de5aa81e736bf"
+   },
+   "date": "2026-10-22",
+   "verdict": "match for the generic input only: Qh_map_bijective is already lem-weil-pbc-kinjective-hom-derived; abstract derived adjunction requires composition derivability and does not itself state this specified native Hom composite with all resolution and normalization clauses."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sf-derived-weil-pullback-pushforward-adjunction",
+  "date": "2026-10-22",
+  "group": "Q36"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "fix-lem-tensor-adjunction.proof.md Step 1, last Hom bijection: construct the ambient pullback/direct-image Hom transposition using K-injectives, prove derived naturality and resolution independence, and compute its identity transposes (the extracted returned proof steps 4-7).",
+   "via": [
+    "lem-sf-derived-weil-pullback-pushforward-adjunction",
+    "lem-sf-weil-verdier-exchange"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sf-native-weil-derived-hom-comparison",
+  "worker": "stage1",
+  "summary": "Proved the explicit Hom composite bijective using the existing generic K-injective Hom leaf and native underived model; gave equations for both variables, formal inverses in source localization, arbitrary derived target arrows, resolution and representative changes, and the normalized identity transposes. No new nodes or statement changes.",
+  "blueprint": "The last Hom bijection in Step 1 of fix-lem-tensor-adjunction.proof.md, with its native Weil ambient realization; resolves all clauses extracted into this item.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-kinjective-hom-derived",
+    "why": "Generic Mathlib-leaf localization Hom bijectivity for an arbitrary abelian category; used with both actual abelian Weil categories."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-kinjective-hom-derived"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q13-41be78116",
+  "group": "Q13",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q13-41be78116 (reviewer sub-agent of L); spot-checked: I read all 7 steps in full against the complete statements of lem-sf-native-weil-injective-adjunction-model, lem-weil-pbc-kinjective-hom-derived (Mathlib leaf Qh_map_bijective; no bounded-below restriction) and def-weil-abstract-derived-category. Sources: Stacks derived.tex lemma-K-injective 070I (l.9632) and lemma-adjoint-preserve-K-injectives 08BJ (l.9857); blueprint main-20261015 fix-lem-tensor-adjunction.proof.md Step 1, last Hom bijection. I recomputed each formula: Psi(Q_X u)=beta_I Q_Y(G_0u eta_M) using c_id=beta_I^{-1}; Phi^r=Rf_*(Q_Xr)^{-1} Psi(Q_Xr h); source and target naturality on chain maps; extension through formal inverses of the localization (checked the substitution); c_{r'}Rf_*(b)=Q_YG_0v c_r and the step-4 chain; resolution independence and the homotopy-equivalence clause. The unit transpose is c_s^{-1}Q_Y(G_0s eta_M). The counit composite is with f^*(beta_I) and gives Q_X eps_I by the triangle identity G_0eps_I eta_{G_0I}=id. Step 7 is the Yoneda computation of the triangle identities. Small cases tested: r=id, zero complexes, two resolutions of one target, M=G_0I with u=eps_I. No new nodes; no duplicate found (lem-sbc-unbounded-exact-adjunction-square is about ringed sites and towers). The citer lem-sf-derived-weil-pullback-pushforward-adjunction uses exactly the stated clauses. No SGA. Accepted tool_use: the generic Mathlib leaf lem-weil-pbc-kinjective-hom-derived. Remark, no change: the statement's f^*T=Q_XF_0M holds only through the specified factorization isomorphism, which the representative-independence clause and step 5 cover. Step 3's exactness remark is redundant but harmless. First delivery of the item, no re-split note. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.WeilSheaf.NativeDerivedHomComparison",
+  "declaration": "AlgebraicGeometry.ProEtaleWeilSheaf.derivedHomComparison",
+  "declarations": [
+   "CategoryTheory.Adjunction.IsResolutionHomComparison",
+   "AlgebraicGeometry.ProEtaleWeilSheaf.derivedHomComparison"
+  ],
+  "file": "lean/Sheaf/WeilSheaf/NativeDerivedHomComparison.lean",
+  "statement": "theorem derivedHomComparison : ∃ adj : (upperStar k₀ l f).mapDerivedCategory ⊣ (lowerStar k₀ l f).rightDerivedFunctor, CategoryTheory.Adjunction.IsResolutionHomComparison ((upperStar k₀ l f).mapHomotopyCategory (ComplexShape.up ℤ)) ((lowerStar k₀ l f).mapHomotopyCategory (ComplexShape.up ℤ)) DerivedCategory.Qh DerivedCategory.Qh (upperStar k₀ l f).mapDerivedCategory (lowerStar k₀ l f).rightDerivedFunctor (upperStar k₀ l f).mapDerivedCategoryFactorsh (lowerStar k₀ l f).rightDerivedFunctorUnit ((upperStarLowerStarAdjunction k₀ l f).mapHomotopyCategory (ComplexShape.up ℤ)) adj (fun I ↦ ∃ (J : CochainComplex (ProEtaleWeilSheaf k₀ l X) ℤ), J.IsKInjective ∧ (HomotopyCategory.quotient _ _).obj J = I) (HomotopyCategory.quasiIso (ProEtaleWeilSheaf k₀ l X) (ComplexShape.up ℤ))",
+  "branch": "sheaf-dag",
+  "by": "Q141",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "IsResolutionHomComparison packages the exact Hom-transposition equations. The native theorem supplies only the actual existing functors, localization factor, underived homotopy adjunction and universal comparison. The equivalence is the derived adjunction homEquiv and its four-arrow formula is characterized after composition by invertible R(Qr). The beta-conjugation and unit equations are likewise written after multiplication by beta_I, invertible at K-injectives. This avoids expanding the native adjunction during kernel checking. Resolution and representative independence follow from one ambient Hom equivalence, the characterizing equation for every resolution, and both explicit naturality equations. The public predicate is a same-notion statement-packaging helper, not a replacement category, arbitrary map or independent construction."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-1ad642b74",
+  "group": "Q141",
+  "result": "pass",
+  "note": "Read the item, both stmt_deps (framework existing:true; NativeInjectiveAdjunctionModel side-live source), mapDerivedCategoryFactorsh, rightDerivedFunctor/Unit, Adjunction.mapHomotopyCategory, and Stacks 070I/08BJ. Every clause matches: conjunct 2 cancels to Phi^r = c_r^{-1} Q_Y(G0 u eta_M) with c_r = beta_I^{-1} Rf_*(Qr); t exists uniquely by Qh_map_bijective; equality with homEquiv gives bijectivity and independence of resolution and representatives; naturality covers all derived arrows; the beta-conjugation formula and IsIso lift; unit normalization with Rd(alpha_M) and counit normalization with alpha_{G0 I}. The exists adj is uniquely pinned (Rd(Qr) invertible, resolutions exist, naturality), so it is not arbitrary; the IsResolutionHomComparison Prop is real packaging with no clash. Hypotheses equal the model's block; no universe restriction. Item changed only in lean; record complete; statement verbatim; docstrings and proof steps present; sorry only; worker report and second reading present. Advisories: A1 the framework already has Adjunction.mapDerivedCategoryRightDerivedAdjunction (canonical, same data); A2 the DerivedCategory.Basic import is redundant; A3 the second reading admits it is not independent. No fixes, no compile."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K2",
+  "result": "pass",
+  "landing": "20261024T190203-L-3981010",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

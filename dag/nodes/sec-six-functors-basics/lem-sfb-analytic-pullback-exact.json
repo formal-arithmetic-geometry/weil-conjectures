@@ -1,0 +1,267 @@
+{
+ "id": "lem-sfb-analytic-pullback-exact",
+ "kind": "statement",
+ "title": "Exactness of analytic pullback for algebraic module sheaves",
+ "statement": "Let $X$ be a separated finite-type smooth scheme over $\\mathbf C$ with analytification $\\pi:M\\to X$ as in [lem-sfb-smooth-analytification-cotangent]. For every short exact sequence of $\\mathcal O_X$-module sheaves $0\\to F'\\to F\\to F''\\to0$, the sequence of analytic module sheaves $0\\to F'^{\\mathrm{an}}\\to F^{\\mathrm{an}}\\to F''^{\\mathrm{an}}\\to0$ is exact. No finite-generation hypothesis on the modules is required.",
+ "source": {
+  "document": "literature/serre-gaga.pdf",
+  "place": "WANTED: Serre, Géométrie algébrique et géométrie analytique, §9 Prop.10 and §6 Prop.3 corollary, printed pp.16--18; exactness follows from flatness of analytic local rings."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-finite-type-morphism",
+  "def-sbc-smooth-morphisms",
+  "lem-sfb-smooth-analytification-cotangent",
+  "def-weil-sheaf-of-modules-category"
+ ],
+ "proof": [
+  {
+   "text": "Fix $a\\in M$ and put $x=\\pi(a)$, $A=\\mathcal O_{X,x}$ and $B=\\mathcal O_{M,a}$. The local comparison lemma gives Noetherian local rings $A,B$ and the canonical isomorphism $\\widehat A\\simeq\\widehat B$. Its compatibility with the two completion maps makes this an $A$-algebra isomorphism for the actual map $A\\to B$; it is not merely an abstract isomorphism of complete rings.",
+   "uses": [
+    "lem-sfb-analytic-local-completion-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "(3), supporting GAGA prerequisite chain; agent proof of analytic exactness, with the absent Serre source recorded WANTED"
+   }
+  },
+  {
+   "text": "Apply faithful flatness of Noetherian local completion first to $A$ and then to $B$. Thus $\\widehat A$ is flat over $A$, while $B\\to\\widehat B$ is faithfully flat. The preceding $A$-algebra isomorphism makes $\\widehat B$ flat over $A$. Apply faithfully flat descent of module flatness to $A\\to B\\to C=\\widehat B$ and the $B$-module $N=B$: the map $C\\otimes_BB\\to C$, $c\\otimes b\\mapsto cb$, is an $A$-linear isomorphism with inverse $c\\mapsto c\\otimes1$. The descent equivalence therefore says that $B$ is flat over $A$.",
+   "uses": [
+    "lem-weil-pbc-local-completion-faithfully-flat",
+    "lem-trf-flatness-faithfully-flat-extension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tags 00MC (lemma-completion-faithfully-flat) and 0584 (lemma-flatness-descends-more-general), part (2)"
+   }
+  },
+  {
+   "text": "Forget the module structures in the given short exact sequence. The sectionwise kernel and sheafified-cokernel formulas for module sheaves are the same as for the underlying abelian sheaves: the module action on a kernel is its restricted action, and on a cokernel is the quotient action followed by sheafification. Thus forgetting preserves and reflects exactness. The short-exact stalk criterion gives $0\\to F'_x\\to F_x\\to F''_x\\to0$ for every $x\\in X$. The same criterion on $M$ will detect exactness of the analytic sequence.",
+   "uses": [
+    "def-weil-sheaf-of-modules-category",
+    "lem-sc-abelian-sheaf-short-exact-stalkwise"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/modules.tex",
+    "place": "Tag 01AG (lemma-abelian); sheaves.tex Section 007S, exactness at points"
+   }
+  },
+  {
+   "text": "View the analytification morphism of ringed spaces as the corresponding morphism of ringed sheaf topoi, and take the point defined by $a\\in M$. Its composite point evaluates germs at $x=\\pi(a)$: a neighbourhood $V$ of $x$ pulls back to the neighbourhood $\\pi^{-1}V$ of $a$. The ringed-topos pullback-stalk comparison applies to the defining tensor pullback and yields $(F^{\\mathrm{an}})_a\\cong F_x\\otimes_AB$, and likewise for $F'$ and $F''$. Naturality identifies both analytic stalk maps with the original stalk maps tensored with $1_B$. In particular these identifications compare the actual sequence maps.",
+   "uses": [
+    "lem-sfb-ringed-topos-pullback-stalk"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 05V5 (lemma-pullback-stalk), applied to the morphism of topological sheaf topoi of π; compare sheaves.tex Tag 0098 (lemma-stalk-pullback-modules)"
+   }
+  },
+  {
+   "text": "Tensor the short exact stalk sequence with $B$ over $A$. Right exactness of tensor gives exactness at $F_x\\otimes_AB$ and surjectivity onto $F''_x\\otimes_AB$. Flatness of $B$ gives injectivity of $F'_x\\otimes_AB\\to F_x\\otimes_AB$ by the defining injectivity criterion. Hence the analytic sequence is short exact at every $a\\in M$, and the stalk criterion of step 3 gives the claimed short exact sequence of analytic module sheaves. The argument applies to arbitrary stalk modules: no coherence, quasi-coherence or finite-generation assumption occurs.",
+   "uses": [
+    "lem-weil-pbc-tensor-right-exact",
+    "def-weil-pbc-flat-ring-map",
+    "lem-sc-abelian-sheaf-short-exact-stalkwise",
+    "def-weil-sheaf-of-modules-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tags 00DF (lemma-tensor-product-exact) and 00HB (definition-flat); modules.tex Tag 01AG (lemma-abelian)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-analytic-local-completion-comparison",
+  "lem-weil-pbc-local-completion-faithfully-flat",
+  "lem-trf-flatness-faithfully-flat-extension",
+  "def-weil-sheaf-of-modules-category",
+  "lem-sc-abelian-sheaf-short-exact-stalkwise",
+  "lem-sfb-ringed-topos-pullback-stalk",
+  "lem-weil-pbc-tensor-right-exact",
+  "def-weil-pbc-flat-ring-map"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+  "place": "(3), supporting GAGA prerequisite chain; agent proof of analytic exactness, with the absent Serre source recorded WANTED"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Analytification of coherent algebraic sheaves on smooth complex varieties is exact and commutes with closed embeddings and canonical cohomology connecting maps",
+   "results": "OK 8 hits: Algebra.H1Cotangent.exact_map_δ, Algebra.H1Cotangent.exact_δ_mapBaseChange, AlgebraicGeometry.Scheme.Modules.instAbelian, Algebra.Generators.H1Cotangent.exact_map_δ', Algebra.Generators.H1Cotangent.exact_map_δ, CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex_exact, AlgebraicGeometry.exists_app_map_eq_zero_of_isLimit, CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex_shortExact.",
+   "date": "2026-10-24",
+   "verdict": "no match: Mathlib has no analytic pullback exactness theorem"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Flat holomorphic local rings over algebraic local rings make analytic pullback exact",
+   "results": "OK 8 hits: AlgebraicGeometry.Flat.instHasRingHomPropertyFlat, Module.FaithfullyFlat.of_flat_of_isLocalHom, AlgebraicGeometry.Flat.stalkMap, Algebra.Smooth.flat, AlgebraicGeometry.Flat.of_stalkMap, AlgebraicGeometry.instHasRingHomPropertyIsSmoothLocallyIsStandardSmooth, AlgebraicGeometry.Flat.iff_flat_stalkMap, RingHom.Flat.localRingHom.",
+   "date": "2026-10-24",
+   "verdict": "no match: algebraic flatness only"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"analytification\"",
+   "results": "OK 0 hits: .",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "analytification|GAGA|analyticPullback",
+   "results": "OK 0 hits: .",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Analytification is an exact functor on coherent sheaves and respects closed direct images",
+   "results": "OK 8 hits: CategoryTheory.exactFunctor, CategoryTheory.ExactFunctor.of, CategoryTheory.HasSheafify.isLeftExact, AlgebraicGeometry.Scheme.Modules.instFaithfulPushforward, AlgebraicGeometry.Scheme.Modules.instAdditivePushforward, CategoryTheory.GrothendieckTopology.PreservesSheafification.mk, CategoryTheory.GrothendieckTopology.instPreservesSheafification, CompHausLike.LocallyConstantModule.functor.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"analytification\"",
+   "results": "OK 0 hits: . ",
+   "date": "2026-10-24",
+   "verdict": "no match: returned declarations do not compare algebraic and holomorphic local rings or their completions"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Analytification pullback of arbitrary algebraic module sheaves is exact because analytic local rings are flat",
+   "results": "OK 8 hits: Condensed.instAB4StarCondensedMod, LightCondensed.instIsGrothendieckAbelianLightCondMod, Profinite.NobelingProof.succ_exact, KaehlerDifferential.exact_mapBaseChange_map, SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom_assoc, Module.Flat.lTensor_shortComplex_exact, Module.Flat.rTensor_shortComplex_exact, SheafOfModules.instIsIsoPullbackObjUnitToUnitOfFinal. ",
+   "date": "2026-10-24",
+   "verdict": "no match: returned declarations do not compare algebraic and holomorphic local rings or their completions"
+  },
+  {
+   "tool": "grep",
+   "query": "analytification|analyticPullback|GAGA",
+   "results": "OK 0 hits: . ",
+   "date": "2026-10-24",
+   "verdict": "no match: returned declarations do not compare algebraic and holomorphic local rings or their completions"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Analytification of arbitrary sheaves of modules is exact",
+   "results": "OK 8 hits: CategoryTheory.HasSheafify.isLeftExact, CategoryTheory.Sheaf.hasExactColimitsOfShape, PresheafOfModules.sheafify, PresheafOfModules.sheafification, PresheafOfModules.sheafifyMap, CategoryTheory.Sheaf.instHasExactLimitsOfShapeOfHasFiniteColimitsOfPreservesFiniteColimitsFunctorOppositeSheafToPresheaf, SheafOfModules.IsQuasicoherent.casesOn, PresheafOfModules.toSheafify. ",
+   "date": "2026-10-24",
+   "verdict": "no match: returned declarations do not compare algebraic and holomorphic local rings or their completions"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A morphism of ringed spaces with flat stalk ring maps has exact pullback on all sheaves of modules",
+   "results": "OK 8 hits: AlgebraicGeometry.Flat.of_stalkMap, AlgebraicGeometry.Flat.iff_flat_stalkMap, AlgebraicGeometry.Flat.stalkMap, AlgebraicGeometry.Flat.instHasRingHomPropertyFlat, AlgebraicGeometry.Flat.isStableUnderBaseChange, AlgebraicGeometry.Flat, Module.Flat.iff_lTensor_exact', Module.Flat.iff_rTensor_exact'. ",
+   "date": "2026-10-24",
+   "verdict": "no match: returned declarations do not compare algebraic and holomorphic local rings or their completions"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-gaga-derived-coherent-sections",
+  "date": "2026-10-24",
+  "group": "Q41"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), supporting GAGA input in the Kodaira/Kempf prerequisite chain: local-ring input for exact analytic pullback.",
+   "via": [
+    "lem-sfb-gaga-derived-coherent-sections",
+    "lem-sfb-algebraic-dolbeault-derivative-comparison",
+    "lem-sfb-hodge-first-differential-zero",
+    "lem-sfb-kollar-smooth-divisor-injectivity",
+    "lem-sfb-kodaira-vanishing",
+    "lem-sfb-dominant-flag-line-kempf-vanishing",
+    "lem-sfb-induced-weyl-dimension-formula",
+    "lem-sfb-steinberg-induced-module-irreducible",
+    "lem-sfb-rho-section-self-duality",
+    "lem-sfb-steinberg-endomorphism-detection",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-analytic-pullback-exact",
+  "worker": "stage1",
+  "summary": "Reduced analytic exactness for all module sheaves to the canonical local completion comparison, faithfully flat descent and the existing natural pullback-stalk comparison. One new statement-only analytic local-ring input; all generic algebra and sheaf facts reused. Serre is absent and recorded WANTED; proof is agent-written.",
+  "blueprint": "det-thm-sf-ctf-stability-direct-images, proof (3), supporting GAGA input in the Kodaira/Kempf prerequisite chain: local-ring input for exact analytic pullback.",
+  "tool_uses": [
+   {
+    "node": "lem-trf-flatness-faithfully-flat-extension",
+    "why": "Generic algebraic descent of flatness along a faithfully flat intermediate extension, used with the completion of a holomorphic local ring; this unit has no replacement for the general descent theorem."
+   },
+   {
+    "node": "lem-sc-abelian-sheaf-short-exact-stalkwise",
+    "why": "Generic short-exactness criterion on arbitrary topological spaces, used for the underlying abelian sheaves on both X and M; not a replacement of the unit route."
+   },
+   {
+    "node": "lem-weil-pbc-tensor-right-exact",
+    "why": "Generic tensor right exactness over a commutative ring, needed for arbitrary local modules, with no finiteness hypotheses."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-trf-flatness-faithfully-flat-extension",
+  "lem-sc-abelian-sheaf-short-exact-stalkwise",
+  "lem-weil-pbc-tensor-right-exact"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q02-d49bc52b2",
+  "group": "Q02",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q02-d49bc52b2 (reviewer sub-agent of L); spot-checked: Read the item and the new node in full, together with every cited statement. Serre's GAGA is absent from both literature trees; the delivery records it as WANTED and the proof is marked agent-written. The argument is the standard GAGA one and holds on its own: (1) the new node lem-sfb-analytic-local-completion-comparison gives A=O_{X,x} and B=O_{M,a} Noetherian local, and Â≅B̂ as A-algebras (its composite clause); (2) 00MC on A and on B, then 0584(2) with C=B̂ and N=B (C⊗_B B≅C written out), give B flat over A; (3) the sheaf-of-modules category node gives sectionwise kernels and sheafified cokernels, so exactness can be checked on the underlying abelian sheaves, and the stalkwise criterion holds on any topological space; (4) ringed-topos pullback-stalk with u=π and the point of a gives (F^an)_a≅F_x⊗_A B, natural in F; F^an=O_M⊗_{π⁻¹O_X}π⁻¹F matches its u*; (5) 00DF plus flatness give a short exact stalk sequence. No finiteness hypothesis is used, which matches the parent's use on kernels (lem-sfb-gaga-derived-coherent-sections steps 5 and 9). The new node is true: Â≅C[[t]]≅(C{t})^; tested at a point, A^1 at 0, mixed-dimension components and empty X. It is self-contained, statement-only and strictly smaller than the item. A grep of all dag/nodes for holomorphic/convergent/analytif/GAGA/completion found no duplicate. Batch-5: lem-trf-flatness-faithfully-flat-extension is generic commutative algebra (0584, proof_deps three definitions), outside both assumptions; lem-sfb-ringed-topos-pullback-stalk reaches sec-trace-formula only through the general definition def-trf-geometric-morphism. Both acceptable. The worker wrote tool_uses itself (C8); the entries are accurate and accepted (0584, the stalkwise criterion, the 00DF Mathlib leaf). No SGA. No changes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.AnalyticPullbackExact",
+  "declaration": "AlgebraicGeometry.SmoothAnalytic.analytify_shortExact",
+  "declarations": [
+   "AlgebraicGeometry.SmoothAnalytic.analytifyMap",
+   "AlgebraicGeometry.SmoothAnalytic.analytify_shortExact"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/AnalyticPullbackExact.lean",
+  "statement": "theorem analytify_shortExact {X : Scheme.{u}} (f : X ⟶ Spec (.of (ULift.{u} ℂ))) [IsSeparated f] [LocallyOfFiniteType f] [QuasiCompact f] [Smooth f] (D : Data f) (S : ShortComplex X.Modules) (hS : S.ShortExact) : ∃ h : analytifyMap D S.f ≫ analytifyMap D S.g = 0, (ShortComplex.mk (analytifyMap D S.f) (analytifyMap D S.g) h).ShortExact",
+  "branch": "newtargets-dag",
+  "by": "N8",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-7f422e4cd",
+  "group": "N8",
+  "result": "pass",
+  "note": "Node unchanged except the lean record; one new module, statement verbatim. Clause check: separated + (LocallyOfFiniteType + QuasiCompact) + Smooth over Spec ULift ℂ at any universe; analytification as ∀ D : SmoothAnalytic.Data f (pinned structure, same as the stmt_dep theorem); F^an = analytify (changeOfRings ∘ inverseImageModule); the maps via the new helper analytifyMap = changeOfRingsHom ∘ inverseImageModuleMap (real data, same composite as landed tensorPullbackDifferential, no duplicate found); arbitrary S.ShortExact with no finiteness; conclusion ∃ proof of composite zero ∧ analytic ShortExact. Edge cases (empty X, zero or non-quasi-coherent modules, varying dimension) covered; statement true for every D. Docstrings carry Serre GAGA no.9 Def.2/Prop.10 and the blueprint tag; 5-step proof plan in the docstring; only the theorem is sorried. Advisories: def-sfb-smooth-analytic-data (owner of Data/analytify) and the owners of the helper declarations are not in stmt_deps (base stmt_deps unchanged, no theorem dep added → advisory per precedent); proof-only imports unused in the statement (H9, stage 3). No file changed, nothing compiled; the worker reports clean compiles (2.5/2.7 s)."
+ }
+}

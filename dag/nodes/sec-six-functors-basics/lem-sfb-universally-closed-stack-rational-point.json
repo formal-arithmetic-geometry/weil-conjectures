@@ -1,0 +1,273 @@
+{
+ "id": "lem-sfb-universally-closed-stack-rational-point",
+ "kind": "statement",
+ "title": "Rational objects on universally closed stacks over algebraically closed fields",
+ "statement": "Let $K$ be an algebraically closed field [def-weil-field, def-weil-algebraic-closure], and let $\\mathcal Z$ be a nonempty algebraic stack over $K$ [def-sfb-algebraic-moduli-stack]. Suppose $\\mathcal Z$ admits a smooth surjective atlas by a quasi-compact scheme, and its diagonal $\\mathcal Z\\to\\mathcal Z\\times_K\\mathcal Z$ is quasi-compact and separated. Quasi-compactness and quasi-separatedness of stack morphisms have the chart conventions of [def-sfb-stack-qcqs-morphism]; separated for a representable morphism means its relative diagonal is a closed immersion. Assume that for every $K$-scheme $T$ the map $|\\mathcal Z\\times_K T|\\to|T|$ sends closed subsets to closed subsets, with the point spaces and $2$-fibre products of [lem-sfb-smooth-presentation-closed-subsets, def-pc-scheme]. Then $\\mathcal Z(K)$ has an object: there exists a $K$-morphism $\\operatorname{Spec}K\\to\\mathcal Z$. No local finite-type or Noetherian hypothesis on $\\mathcal Z/K$ is imposed.",
+ "source": {
+  "document": "literature/stacks-project/stacks-morphisms.tex",
+  "place": "Tags 0DQL (lemma-gerbe-diagonal-quasi-compact), 0DQQ (lemma-sober-qs), 06RC (proposition-open-stratum), 06R9 (lemma-gerbe-bijection-points), 06QI (lemma-gerbe-fppf), and 0DN8 (lemma-gerbe-smooth); together with decent-spaces.tex Tag 047Z (lemma-when-field) and morphisms.tex Tag 01WM (lemma-integral-universally-closed). This is the same-field existence input implicit in Alper Theorem 5.3.1(5), following the argument of Good moduli spaces Theorem 4.16(iv); an independent proof is outlined in report.md."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-weil-algebraic-closure",
+  "def-sfb-algebraic-moduli-stack",
+  "def-sfb-stack-qcqs-morphism",
+  "lem-sfb-smooth-presentation-closed-subsets",
+  "def-pc-scheme",
+  "def-sfb-relative-moduli-inertia",
+  "def-sfb-proper-curve-moduli"
+ ],
+ "proof": [
+  {
+   "text": "Apply [lem-sfb-qc-diagonal-stack-spectral] to $\\mathcal Z$: its quasi-compact smooth atlas and quasi-compact diagonal are hypotheses of the item. Its nonempty point space is therefore quasi-compact and Kolmogorov. By [lem-sc-quasi-compact-kolmogorov-closed-point] choose a closed point $z$. By [lem-sfb-smooth-presentation-closed-subsets] the closed subset $\\{z\\}$ has a reduced closed substack $i:\\mathcal C\\hookrightarrow\\mathcal Z$ with $|\\mathcal C|=\\{z\\}$.",
+   "uses": [
+    "lem-sfb-qc-diagonal-stack-spectral",
+    "lem-sc-quasi-compact-kolmogorov-closed-point",
+    "lem-sfb-smooth-presentation-closed-subsets"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/stacks-morphisms.tex",
+    "place": "Tags 0DQN (lemma-spectral-qc-diagonal-qc), 06RC (proposition-open-stratum), 0DQL (lemma-gerbe-diagonal-quasi-compact), 06R9 (lemma-gerbe-bijection-points), 0DN8 (lemma-gerbe-smooth); morphisms.tex Tag 01WM (lemma-integral-universally-closed)."
+   }
+  },
+  {
+   "text": "The diagonal of $\\mathcal C$ is the base change of the diagonal of $\\mathcal Z$ along $\\mathcal C\\times_K\\mathcal C\\to\\mathcal Z\\times_K\\mathcal Z$: closed substacks are full, so the isomorphism spaces between their objects are unchanged. It is quasi-compact, since any further quasi-compact scheme test is exactly a test of the original diagonal [def-sfb-stack-qcqs-morphism]. For each $K$-scheme $T$, [lem-sfb-stack-closed-immersion-calculus] makes $i_T$ a closed immersion inducing a closed embedding on point spaces. Thus every closed subset of $|\\mathcal C\\times_K T|$ is closed in $|\\mathcal Z\\times_K T|$, and its image in $|T|$ is closed by the assumed universal closedness of $\\mathcal Z/K$.",
+   "uses": [
+    "def-sfb-stack-qcqs-morphism",
+    "lem-sfb-stack-closed-immersion-calculus"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/stacks-morphisms.tex",
+    "place": "Tags 0DQN (lemma-spectral-qc-diagonal-qc), 06RC (proposition-open-stratum), 0DQL (lemma-gerbe-diagonal-quasi-compact), 06R9 (lemma-gerbe-bijection-points), 0DN8 (lemma-gerbe-smooth); morphisms.tex Tag 01WM (lemma-integral-universally-closed)."
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-reduced-singleton-qc-diagonal-gerbe] to $\\mathcal C$: reducedness and the singleton point space came from step 1, and step 2 supplies its quasi-compact diagonal. Obtain a field extension $L/K$ and a gerbe $p:\\mathcal C\\to\\operatorname{Spec}L$. By [lem-sfb-gerbe-smooth-universal-homeomorphism], $p$ is smooth and surjective and remains a homeomorphism on point spaces after every algebraic-stack base change.",
+   "uses": [
+    "lem-sfb-reduced-singleton-qc-diagonal-gerbe",
+    "lem-sfb-gerbe-smooth-universal-homeomorphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/stacks-morphisms.tex",
+    "place": "Tags 0DQN (lemma-spectral-qc-diagonal-qc), 06RC (proposition-open-stratum), 0DQL (lemma-gerbe-diagonal-quasi-compact), 06R9 (lemma-gerbe-bijection-points), 0DN8 (lemma-gerbe-smooth); morphisms.tex Tag 01WM (lemma-integral-universally-closed)."
+   }
+  },
+  {
+   "text": "Let $T$ be any $K$-scheme and write $Y_T=\\operatorname{Spec}L\\times_K T$. Base changing the homeomorphism assertion of [lem-sfb-gerbe-smooth-universal-homeomorphism] along $Y_T\\to\\operatorname{Spec}L$ gives a homeomorphism $|\\mathcal C\\times_K T|\\to|Y_T|$. For a closed subset $D\\subseteq|Y_T|$, its inverse image is closed; its image in $|T|$ is closed by step 2 and equals the image of $D$, by surjectivity of that homeomorphism. Hence $\\operatorname{Spec}L\\to\\operatorname{Spec}K$ is universally closed. It is affine (the inverse images of the only affine opens of the field spectrum are affine), so [pqf-lem-integral-univclosed] says that $L$ is integral over $K$.",
+   "uses": [
+    "lem-sfb-gerbe-smooth-universal-homeomorphism",
+    "pqf-lem-integral-univclosed"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/stacks-morphisms.tex",
+    "place": "Tags 0DQN (lemma-spectral-qc-diagonal-qc), 06RC (proposition-open-stratum), 0DQL (lemma-gerbe-diagonal-quasi-compact), 06R9 (lemma-gerbe-bijection-points), 0DN8 (lemma-gerbe-smooth); morphisms.tex Tag 01WM (lemma-integral-universally-closed)."
+   }
+  },
+  {
+   "text": "For $a\\in L$, integrality supplies a monic polynomial over $K$ vanishing at $a$. Since $K$ is algebraically closed [def-weil-algebraic-closure], this polynomial factors into linear factors over $K$ (successively divide by a root); since $L$ is a field, one of those factors vanishes at $a$. Thus every $a\\in L$ belongs to $K$, and the structure inclusion $K\\to L$ is an isomorphism. Regard $p$ as a smooth surjective map $\\mathcal C\\to\\operatorname{Spec}K$.",
+   "uses": [
+    "def-weil-algebraic-closure"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/stacks-morphisms.tex",
+    "place": "Tags 0DQN (lemma-spectral-qc-diagonal-qc), 06RC (proposition-open-stratum), 0DQL (lemma-gerbe-diagonal-quasi-compact), 06R9 (lemma-gerbe-bijection-points), 0DN8 (lemma-gerbe-smooth); morphisms.tex Tag 01WM (lemma-integral-universally-closed)."
+   }
+  },
+  {
+   "text": "Smoothness of $\\mathcal C$ over $K$ means, by [def-sfb-algebraic-moduli-stack], that there is a smooth surjective scheme atlas $U\\to\\mathcal C$ whose composite $U\\to\\operatorname{Spec}K$ is smooth. The atlas is nonempty because $|\\mathcal C|$ is a singleton. The algebraically closed field $K$ is separably closed: its irreducible polynomials are linear. Hence [lem-pc-rational-points-dense] supplies a $K$-point of $U$. Compose $\\operatorname{Spec}K\\to U\\to\\mathcal C\\xrightarrow{i}\\mathcal Z$. This is the required object of $\\mathcal Z(K)$.",
+   "uses": [
+    "def-sfb-algebraic-moduli-stack",
+    "lem-pc-rational-points-dense"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/stacks-morphisms.tex",
+    "place": "Tags 0DQN (lemma-spectral-qc-diagonal-qc), 06RC (proposition-open-stratum), 0DQL (lemma-gerbe-diagonal-quasi-compact), 06R9 (lemma-gerbe-bijection-points), 0DN8 (lemma-gerbe-smooth); morphisms.tex Tag 01WM (lemma-integral-universally-closed)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-qc-diagonal-stack-spectral",
+  "lem-sc-quasi-compact-kolmogorov-closed-point",
+  "lem-sfb-smooth-presentation-closed-subsets",
+  "def-sfb-stack-qcqs-morphism",
+  "lem-sfb-stack-closed-immersion-calculus",
+  "lem-sfb-reduced-singleton-qc-diagonal-gerbe",
+  "lem-sfb-gerbe-smooth-universal-homeomorphism",
+  "pqf-lem-integral-univclosed",
+  "def-weil-algebraic-closure",
+  "def-sfb-algebraic-moduli-stack",
+  "lem-pc-rational-points-dense"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/stacks-morphisms.tex",
+  "place": "Tags 0DQN (lemma-spectral-qc-diagonal-qc), 06RC (proposition-open-stratum), 0DQL (lemma-gerbe-diagonal-quasi-compact), 06R9 (lemma-gerbe-bijection-points), 0DN8 (lemma-gerbe-smooth); morphisms.tex Tag 01WM (lemma-integral-universally-closed)."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Nonempty quasi compact quasi separated universally closed algebraic stack over an algebraically closed field has a rational point",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.isField_of_universallyClosed\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Proper\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} (K : Type u) [inst : Field K]\\n  (f : X ⟶ AlgebraicGeometry.Spec { carrier := K, commRing := Field.toEuclideanDomain.toCommRing })\\n  [AlgebraicGeometry.IsIntegral X] [AlgebraicGeometry.UniversallyClosed f], IsField ↑(X.presheaf.obj (Opposite.op ⊤))\", \"doc\": \"If $X$ is an integral scheme and the morphism $f: X \\\\to \\\\operatorname{Spec}(K)$ is universally closed, then the ring of global sections $\\\\Gamma(X, \\\\mathcal{O}_X)$ is a field.\"}\n  {\"name\": \"AlgebraicGeometry.compactSpace_of_universallyClosed\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/UniversallyClosed\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} {K : Type u} [inst : Field K]\\n  (f : X ⟶ AlgebraicGeometry.Spec { carrier := K, commRing := Field.toEuclideanDomain.toCommRing })\\n  [AlgebraicGeometry.UniversallyClosed f], CompactSpace ↥X\", \"doc\": \"If $ f: X \\\\to \\\\operatorname{Spec}(K) $ is a universally closed morphism of schemes, where $ K $ is a field, then the underlying topological space of $ X $ is compact.\"}\n  {\"name\": \"AlgebraicGeometry.finite_appTop_of_universallyClosed\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Proper\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} (K : Type u) [inst : Field K]\\n  (f : X ⟶ AlgebraicGeometry.Spec { carrier := K, commRing := Field.toEuclideanDomain.toCommRing })\\n  [AlgebraicGeometry.IsIntegral X] [AlgebraicGeometry.UniversallyClosed f] [AlgebraicGeometry.LocallyOfFiniteType f],\\n  (CommRingCat.Hom.\", \"doc\": \"Let $K$ be a field, and let $f: X \\\\to \\\\operatorname{Spec}(K)$ be a morphism from an integral scheme $X$. If $f$ is universally closed and locally of finite type, then the ring of global sections of $X\"}\n  {\"name\": \"AlgebraicGeometry.universallyClosed_eq_universallySpecializing\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/UniversallyClosed\", \"type\": \"@AlgebraicGeometry.UniversallyClosed =\\n  (AlgebraicGeometry.topologically @SpecializingMap).universally ⊓ @AlgebraicGeometry.QuasiCompact\", \"doc\": \"A morphism of schemes is universally closed if and only if it is both quasi-compact and universally specializing. Universally specializing means that for every base change, the induced morphism preser\"}\n  {\"name\": \"AlgebraicGeometry.IsIntegral.nonempty\", \"module\": \"Mathlib/AlgebraicGeometry/Properties\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} [self : AlgebraicGeometry.IsIntegral X], Nonempty ↥X\", \"doc\": \"Every integral scheme has a non-empty underlying topological space.\"}\n  {\"name\": \"AlgebraicGeometry.instQuasiCompactOfUniversallyClosed\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/UniversallyClosed\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.UniversallyClosed f], AlgebraicGeometry.QuasiCompact f\", \"doc\": \"Every universally closed morphism of schemes is quasi-compact. Specifically, if a morphism $ f: X \\to Y $ of schemes is universally closed (i.e., all base changes of $ f $ induce closed maps on the und\"}\n  {\"name\": \"AlgebraicGeometry.instHasAffinePropertyQuasiCompactCompactSpaceCarrierCarrierCommRingCat\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiCompact\", \"type\": \"AlgebraicGeometry.HasAffineProperty @AlgebraicGeometry.QuasiCompact fun X x x_1 x_2 => CompactSpace ↥X\", \"doc\": \"For any quasi-compact morphism of schemes $ f: X \\to Y $ where the target $ Y $ is affine, the underlying topological space of $ Y $ is compact. This instance establishes that the quasi-compactness pro\"}\n  {\"name\": \"AlgebraicGeometry.instIsDominantToSpecΓOfCompactSpaceCarrierCarrierCommRingCat\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/ClosedImmersion\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} [CompactSpace ↥X], AlgebraicGeometry.IsDominant X.toSpecΓ\", \"doc\": \"For any compact scheme $X$, the canonical morphism from $X$ to the affine scheme $\\\\operatorname{Spec}(\\\\Gamma(X))$ is dominant, meaning its image is dense in $\\\\operatorname{Spec}(\\\\Gamma(X))$.\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern schemes or other notions; none states the asserted algebraic-stack or algebraic-space result"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A universally closed algebraic stack over an algebraically closed field has a rational object if it is nonempty and quasi compact quasi separated",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.universallyClosed_isStableUnderBaseChange\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.UniversallyClosed\", \"type\": \": IsStableUnderBaseChange @UniversallyClosed\", \"doc\": \"The property of being a universally closed morphism of schemes is stable under base change. That is, if $ f: X \\to Y $ is a universally closed morphism and $ Y' \\to Y $ is any morphism of schemes, then \"}\n  {\"name\": \"AlgebraicGeometry.Surjective.of_universallyClosed_of_isDominant\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.UniversallyClosed\", \"type\": \"[UniversallyClosed f] [IsDominant f] : Surjective f\", \"doc\": \"A morphism $ f: X \\to Y $ of schemes is universally closed if for every base change, the induced morphism is a closed map in the topological sense.\"}\n  {\"name\": \"AlgebraicGeometry.UniversallyClosed.of_valuativeCriterion\", \"module\": \"Mathlib.AlgebraicGeometry.ValuativeCriterion\", \"type\": \"[QuasiCompact f] (hf : ValuativeCriterion.Existence f) : UniversallyClosed f\", \"doc\": \"If a morphism of schemes is quasi-compact and satisfies the valuative criterion for existence, then it is universally closed.\"}\n  {\"name\": \"AlgebraicGeometry.UniversallyClosed\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.UniversallyClosed\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"A morphism $ f: X \\\\to Y $ of schemes is universally closed if for every base change, the induced morphism is a closed map in the topological sense.\"}\n  {\"name\": \"AlgebraicGeometry.instQuasiCompactOfUniversallyClosed\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.UniversallyClosed\", \"type\": \"[UniversallyClosed f] : QuasiCompact f\", \"doc\": \"Every universally closed morphism of schemes is quasi-compact. Specifically, if a morphism $ f: X \\to Y $ of schemes is universally closed (i.e., all base changes of $ f $ induce closed maps on the und\"}\n  {\"name\": \"AlgebraicGeometry.universallyClosed_eq_universallySpecializing\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.UniversallyClosed\", \"type\": \": @UniversallyClosed = (topologically @SpecializingMap).universally ⊓ @QuasiCompact\", \"doc\": \"A morphism of schemes is universally closed if and only if it is both quasi-compact and universally specializing. Universally specializing means that for every base change, the induced morphism preser\"}\n  {\"name\": \"AlgebraicGeometry.UniversallyClosed.out\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.UniversallyClosed\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y} [self : AlgebraicGeometry.UniversallyClosed f],\\n  (AlgebraicGeometry.topologically @IsClosedMap).universally f\", \"doc\": \"For any morphism $ f: X \\\\to Y $ of schemes, if $ f $ is universally closed, then the underlying continuous map of $ f $ is universally closed in the topological sense.\"}\n  {\"name\": \"AlgebraicGeometry.UniversallyClosed.of_comp_of_isSeparated\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Proper\", \"type\": \"[UniversallyClosed (f ≫ g)] [IsSeparated g] : UniversallyClosed f\", \"doc\": \"If the composition of morphisms $ f $ and $ g $ is universally closed and $ g $ is a separated morphism of schemes, then $ f $ is universally closed.\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern schemes or other notions; none states the asserted algebraic-stack or algebraic-space result"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"UniversallyClosed\"",
+   "results": "[loogle] OK 12 hit(s)\n  {\"name\": \"AlgebraicGeometry.universallyClosed_isZariskiLocalAtTarget\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.UniversallyClosed\", \"type\": \" : AlgebraicGeometry.IsZariskiLocalAtTarget @AlgebraicGeometry.UniversallyClosed\", \"doc\": \"\"}\n  {\"name\": \"AlgebraicGeometry.instIsMultiplicativeSchemeUniversallyClosed\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.UniversallyClosed\", \"type\": \" : CategoryTheory.MorphismProperty.IsMultiplicative @AlgebraicGeometry.UniversallyClosed\", \"doc\": \"\"}\n  {\"name\": \"AlgebraicGeometry.universallyClosed_isStableUnderBaseChange\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.UniversallyClosed\", \"type\": \" : CategoryTheory.MorphismProperty.IsStableUnderBaseChange @AlgebraicGeometry.UniversallyClosed\", \"doc\": \"\"}\n  {\"name\": \"AlgebraicGeometry.universallyClosed_isStableUnderComposition\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.UniversallyClosed\", \"type\": \" : CategoryTheory.MorphismProperty.IsStableUnderComposition @AlgebraicGeometry.UniversallyClosed\", \"doc\": \"\"}\n  {\"name\": \"AlgebraicGeometry.universallyClosed_respectsIso\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.UniversallyClosed\", \"type\": \" : CategoryTheory.MorphismProperty.RespectsIso @AlgebraicGeometry.UniversallyClosed\", \"doc\": \"\"}\n  {\"name\": \"AlgebraicGeometry.UniversallyClosed\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.UniversallyClosed\", \"type\": \" {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) : Prop\", \"doc\": \"A morphism of schemes `f : X ⟶ Y` is universally closed if the base change `X ×[Y] Y' ⟶ Y'`\\nalong any morphism `Y' ⟶ Y` is (topologically) a closed map.\"}\n  {\"name\": \"AlgebraicGeometry.instQuasiCompactOfUniversallyClosed\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.UniversallyClosed\", \"type\": \" {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.UniversallyClosed f] : AlgebraicGeometry.QuasiCompact f\", \"doc\": \"\"}\n  {\"name\": \"AlgebraicGeometry.instUniversallyClosedOfIsClosedImmersion\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.UniversallyClosed\", \"type\": \" {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.IsClosedImmersion f] : AlgebraicGeometry.UniversallyClosed f\", \"doc\": \"\"}\n  {\"name\": \"AlgebraicGeometry.universallyClosed_eq\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.UniversallyClosed\", \"type\": \" : @AlgebraicGeometry.UniversallyClosed = (AlgebraicGeometry.topologically @IsClosedMap).universally\", \"doc\": \"\"}\n  {\"name\": \"AlgebraicGeometry.Surjective.of_universallyClosed_of_isDominant\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.UniversallyClosed\", \"type\": \" {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.UniversallyClosed f] [AlgebraicGeometry.IsDominant f] : AlgebraicGeometry.Surjective f\", \"doc\": \"\"}\n  {\"name\": \"AlgebraicGeometry.UniversallyClosed.mk\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.UniversallyClosed\", \"type\": \" {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y} (universally_isClosedMap : (AlgebraicGeometry.topologically @IsClosedMap).universally f) : AlgebraicGeometry.UniversallyClosed f\", \"doc\": \"\"}\n  {\"name\": \"AlgebraicGeometry.UniversallyClosed.universally_isClosedMap\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.UniversallyClosed\", \"type\": \" {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y} [self : AlgebraicGeometry.UniversallyClosed f] : (AlgebraicGeometry.topologically @IsClosedMap).universally f\", \"doc\": \"\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern schemes or other notions; none states the asserted algebraic-stack or algebraic-space result"
+  },
+  {
+   "tool": "grep",
+   "query": "AlgebraicStack|algebraic.stack|universallyClosed.*[Rr]ational",
+   "results": "[grep] OK 0 hit(s)",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern schemes or other notions; none states the asserted algebraic-stack or algebraic-space result"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Closed points in a quasi compact universally closed algebraic stack with quasi compact separated diagonal are represented over the algebraically closed base field",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.isField_of_universallyClosed\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Proper\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} (K : Type u) [inst : Field K]\\n  (f : X ⟶ AlgebraicGeometry.Spec { carrier := K, commRing := Field.toEuclideanDomain.toCommRing })\\n  [AlgebraicGeometry.IsIntegral X] [AlgebraicGeometry.UniversallyClosed f], IsField ↑(X.presheaf.obj (Opposite.op ⊤))\", \"doc\": \"If $X$ is an integral scheme and the morphism $f: X \\\\to \\\\operatorname{Spec}(K)$ is universally closed, then the ring of global sections $\\\\Gamma(X, \\\\mathcal{O}_X)$ is a field.\"}\n  {\"name\": \"AlgebraicGeometry.compactSpace_of_universallyClosed\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/UniversallyClosed\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} {K : Type u} [inst : Field K]\\n  (f : X ⟶ AlgebraicGeometry.Spec { carrier := K, commRing := Field.toEuclideanDomain.toCommRing })\\n  [AlgebraicGeometry.UniversallyClosed f], CompactSpace ↥X\", \"doc\": \"If $ f: X \\\\to \\\\operatorname{Spec}(K) $ is a universally closed morphism of schemes, where $ K $ is a field, then the underlying topological space of $ X $ is compact.\"}\n  {\"name\": \"AlgebraicGeometry.universallyClosed_eq_universallySpecializing\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/UniversallyClosed\", \"type\": \"@AlgebraicGeometry.UniversallyClosed =\\n  (AlgebraicGeometry.topologically @SpecializingMap).universally ⊓ @AlgebraicGeometry.QuasiCompact\", \"doc\": \"A morphism of schemes is universally closed if and only if it is both quasi-compact and universally specializing. Universally specializing means that for every base change, the induced morphism preser\"}\n  {\"name\": \"AlgebraicGeometry.instQuasiCompactOfUniversallyClosed\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/UniversallyClosed\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.UniversallyClosed f], AlgebraicGeometry.QuasiCompact f\", \"doc\": \"Every universally closed morphism of schemes is quasi-compact. Specifically, if a morphism $ f: X \\to Y $ of schemes is universally closed (i.e., all base changes of $ f $ induce closed maps on the und\"}\n  {\"name\": \"AlgebraicGeometry.finite_appTop_of_universallyClosed\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Proper\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} (K : Type u) [inst : Field K]\\n  (f : X ⟶ AlgebraicGeometry.Spec { carrier := K, commRing := Field.toEuclideanDomain.toCommRing })\\n  [AlgebraicGeometry.IsIntegral X] [AlgebraicGeometry.UniversallyClosed f] [AlgebraicGeometry.LocallyOfFiniteType f],\\n  (CommRingCat.Hom.\", \"doc\": \"Let $K$ be a field, and let $f: X \\\\to \\\\operatorname{Spec}(K)$ be a morphism from an integral scheme $X$. If $f$ is universally closed and locally of finite type, then the ring of global sections of $X\"}\n  {\"name\": \"AlgebraicGeometry.instIsDominantToSpecΓOfCompactSpaceCarrierCarrierCommRingCat\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/ClosedImmersion\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} [CompactSpace ↥X], AlgebraicGeometry.IsDominant X.toSpecΓ\", \"doc\": \"For any compact scheme $X$, the canonical morphism from $X$ to the affine scheme $\\\\operatorname{Spec}(\\\\Gamma(X))$ is dominant, meaning its image is dense in $\\\\operatorname{Spec}(\\\\Gamma(X))$.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.closePoints_subset_preimage_closedPoints\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Finite\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [JacobsonSpace ↥Y] [AlgebraicGeometry.LocallyOfFiniteType f],\\n  closedPoints ↥X ⊆ ⇑(CategoryTheory.ConcreteCategory.hom f.base) ⁻¹' closedPoints ↥Y\", \"doc\": \"For schemes $X$ and $Y$, if $Y$ is a Jacobson space and the morphism $f: X \\to Y$ is locally of finite type, then the set of closed points of $X$ is contained in the preimage under $f$ of the set of cl\"}\n  {\"name\": \"AlgebraicGeometry.isClosed_singleton_iff_isClosedImmersion\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/ClosedImmersion\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} {x : ↥X}, IsClosed {x} ↔ AlgebraicGeometry.IsClosedImmersion (X.fromSpecResidueField x)\", \"doc\": \"For a scheme $X$ and a point $x \\\\in X$, the singleton set $\\\\{x\\\\}$ is closed in the topological space of $X$ if and only if the canonical morphism $\\\\operatorname{Spec}(\\\\kappa(x)) \\\\to X$ (where $\\\\kappa(\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern schemes or other notions; none states the asserted algebraic-stack or algebraic-space result"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A nonempty universally closed algebraic stack with quasi compact separated diagonal over an algebraically closed field has a rational object",
+   "results": "8 hits: AlgebraicGeometry.isField_of_universallyClosed, AlgebraicGeometry.compactSpace_of_universallyClosed, AlgebraicGeometry.universallyClosed_eq_universallySpecializing, AlgebraicGeometry.finite_appTop_of_universallyClosed, AlgebraicGeometry.instQuasiCompactOfUniversallyClosed, AlgebraicGeometry.UniversallyClosed, AlgebraicGeometry.isProper_eq, AlgebraicGeometry.UniversallyClosed.of_valuativeCriterion",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern schemes or general topology; none gives the stated theorem about algebraic stacks"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Universally closed quasi compact algebraic stack over an algebraically closed field admits a rational point",
+   "results": "8 hits: AlgebraicGeometry.UniversallyClosed, AlgebraicGeometry.compactSpace_of_universallyClosed, AlgebraicGeometry.instQuasiCompactOfUniversallyClosed, AlgebraicGeometry.isField_of_universallyClosed, AlgebraicGeometry.universallyClosedTypeComp, AlgebraicGeometry.UniversallyClosed.out, AlgebraicGeometry.UniversallyClosed.mk, AlgebraicGeometry.Surjective.of_universallyClosed_of_isDominant",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern schemes or general topology; none gives the stated theorem about algebraic stacks"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.UniversallyClosed",
+   "results": "12 hits: AlgebraicGeometry.universallyClosed_isZariskiLocalAtTarget, AlgebraicGeometry.instIsMultiplicativeSchemeUniversallyClosed, AlgebraicGeometry.universallyClosed_isStableUnderBaseChange, AlgebraicGeometry.universallyClosed_isStableUnderComposition, AlgebraicGeometry.universallyClosed_respectsIso, AlgebraicGeometry.UniversallyClosed, AlgebraicGeometry.instQuasiCompactOfUniversallyClosed, AlgebraicGeometry.instUniversallyClosedOfIsClosedImmersion",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern schemes or general topology; none gives the stated theorem about algebraic stacks"
+  },
+  {
+   "tool": "grep",
+   "query": "AlgebraicStack|universallyClosed.*rational|gerbe",
+   "results": "0 hits: ",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern schemes or general topology; none gives the stated theorem about algebraic stacks"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Closed points and residue gerbes of quasi separated universally closed algebraic stacks",
+   "results": "8 hits: AlgebraicGeometry.IsClosedImmersion.SpecMap_residue, AlgebraicGeometry.IsClosedImmersion.Spec_map_residue, AlgebraicGeometry.isClosed_singleton_iff_isClosedImmersion, AlgebraicGeometry.instQuasiSoberCarrierCarrierCommRingCat, AlgebraicGeometry.Scheme.SpecMap_residue_apply, AlgebraicGeometry.Scheme.Spec_map_residue_apply, AlgebraicGeometry.isClosed_singleton_iff_locallyOfFiniteType, AlgebraicGeometry.universallyClosed_eq_universallySpecializing",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern schemes or general topology; none gives the stated theorem about algebraic stacks"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-adequate-geometric-fibres-submersion",
+  "date": "2026-10-23",
+  "group": "Q148"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Affine PGL quotients with closed orbits and zero-dimensional stabilizers. Supporting affine-quotient step: Adequate moduli spaces are universal for separated targets. Alper Theorem 7.2.1, locally separated case through Proposition 7.1.1: Theorem 5.3.1(3),(5), printed pp.29--30; these supply conditions (a),(b) used in Proposition 7.1.1. Supporting input for Theorem 5.3.1(3),(5): Rational objects on universally closed stacks over algebraically closed fields.",
+   "via": [
+    "lem-sfb-adequate-geometric-fibres-submersion",
+    "lem-sfb-adequate-locally-separated-universality",
+    "lem-sfb-affine-pgl-finite-stabilizer-quotient",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-universally-closed-stack-rational-point",
+  "worker": "stage1",
+  "summary": "Checked the no-finite-type hypotheses directly against Stacks. Choose a closed point using spectrality, pass to its reduced closed singleton substack, identify that substack as a gerbe over a field, descend universal closedness through the gerbe homeomorphism, and force the field extension to be trivial before selecting a rational point on a smooth atlas. Two new statement-only inputs; all other ingredients reused. Statement unchanged.",
+  "blueprint": "Supports inherited det-thm-sf-ctf-stability-direct-images proof (3), via the alteration/moduli chain in blueprint.from. Current latest direct-images proof (3) is the direct-image preservation/compactification paragraph. This is a lower-level generic rational-object input, preserving the inherited unit route. No blueprint node duplicates either new input.",
+  "tool_uses": [
+   {
+    "node": "pqf-lem-integral-univclosed",
+    "why": "Generic scheme criterion integral = affine + universally closed, applied to the residue field spectrum; the unit has no such criterion."
+   },
+   {
+    "node": "lem-sc-quasi-compact-kolmogorov-closed-point",
+    "why": "Generic compact Kolmogorov topology supplies a closed point without finite type; the unit has no such topological lemma."
+   },
+   {
+    "node": "lem-pc-rational-points-dense",
+    "why": "Generic existence of a rational point on a nonempty smooth scheme over a separably closed field, applied to the gerbe atlas; the unit has no such point-existence lemma."
+   }
+  ]
+ },
+ "tool_uses": [
+  "pqf-lem-integral-univclosed",
+  "lem-sc-quasi-compact-kolmogorov-closed-point",
+  "lem-pc-rational-points-dense"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q50-f298b89d4",
+  "group": "Q50",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q50-f298b89d4 (reviewer sub-agent of L); spot-checked: I read the item, both new nodes and every cited statement, and checked them against the Stacks sources. Spectral node: it is exactly 0DQN lemma-spectral-qc-diagonal-qc (stacks-morphisms l.6721). The diagonal relative to Spec k and the absolute one have equivalent quasi-compactness. The empty stack is allowed. Gerbe node: 06RC proposition-open-stratum (l.6533) needs only a reduced stack with quasi-compact inertia, and the inertia is a base change of the diagonal. The planned route is 06RC, then 0DQL (base space quasi-separated, so decent), then 06R9 (base space a singleton), then 0DN8 (smooth, so the base is reduced), then 047Z lemma-when-field (Spec L); the k-structure factors through the gerbe. Tested on Spec L, BG, a non-neutral gerbe and Spec k(t)/k; no Noetherian or finite-type input is needed. There are no duplicates: noetherian-singleton-gerbe, singleton-stack-finite-field-homeomorphism, flat-inertia-algebraic-space-quotient, unramified-diagonal-singleton-field-cover, finite-type-stack-closed-specialization and quasiseparated-space-sober all have different hypotheses or conclusions. Steps: (1) the spectral node and 005E give a closed point, and smooth-presentation-closed-subsets gives the reduced substack C with |C|={z}. (2) Elementary: C is a monomorphism into Z, so Δ_C is a base change of Δ_Z and quasi-compact; closed-immersion-calculus passes universal closedness to C. (3) The new gerbe node gives p: C→Spec L, and gerbe-smooth-universal-homeomorphism (0DN8/06R9) makes p smooth, surjective and a universal homeomorphism. (4) Base change along Spec L×_K T shows Spec L→Spec K is universally closed and affine, so 01WM gives L integral over K. (5) Elementary: L=K because K is algebraically closed. (6) A smooth nonempty atlas over the separably closed K has a K-point by lem-pc-rational-points-dense. proof_deps is the union of the step citations and there is no cycle. Batch-5 flags: all four flagged citations reach def-trf-algebraic-space only as the general definition of algebraic spaces. They are definitions or general stack topology, not results the trace-formula or Poincaré-duality assumptions give, so they are accepted. tool_uses accepted: 01WM, 005E and rational points on smooth schemes are generic. No SGA. The statement is unchanged; the separated-diagonal hypothesis is simply unused. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.UniversallyClosedStackRationalPoint",
+  "declaration": "CategoryTheory.universallyClosedStack_nonempty_rationalObjects",
+  "file": "lean/Sheaf/AlgebraicGeometry/UniversallyClosedStackRationalPoint.lean",
+  "statement": "theorem universallyClosedStack_nonempty_rationalObjects (K : Type u) [Field K] [IsAlgClosed K] (F : BasedCategory.{v, w} (Over (Spec (.of K)))) (hF : IsAlgebraicModuliStack F) (hne : Nonempty (ModuliPoints F)) (hqc : IsQuasiCompactModuli F) (hdiag : ∀ (T : Over (Spec (.of K))) (t : BasedFunctor (discreteModuli (yoneda.obj T)) (moduliTwoFiberProduct (moduliBaseStructure F) (moduliBaseStructure F))), ∃ (Z : AlgebraicSpace (Spec (.of K))) (p : Z.obj.obj ⟶ yoneda.obj T), HasSpaceBaseChange (moduliRelativeDiagonal (moduliBaseStructure F)) T t Z p ∧ AlgebraicSpace.MapIsQuasiCompact p ∧ AlgebraicSpace.MapToSchemeIsSeparated Z T p) (hclosed : ∀ T : Over (Spec (.of K)), @IsClosedMap _ _ (moduliSmoothPointTopology (moduliTwoFiberProduct (moduliBaseStructure F) (moduliBaseStructure (discreteModuli (yoneda.obj T))))) (moduliSmoothPointTopology (discreteModuli (yoneda.obj T))) (moduliPointMap (moduliTwoFiberSnd (moduliBaseStructure F) (moduliBaseStructure (discreteModuli (yoneda.obj T)))))) : Nonempty (Functor.Fiber F.p (Over.mk (𝟙 (Spec (.of K)))))",
+  "branch": "newtargets-dag",
+  "by": "N0",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "Uses the recorded quasi-compact smooth-atlas predicate and algebraic-space scheme tests for the quasi-compact separated diagonal. Universal closedness is tested on the smooth-presentation topologies of the canonical 2-products with every base scheme. The conclusion is the actual fibre over the identity K-scheme, not an object over an extension. The two added landed definition dependencies supply the canonical base structural morphism and the existing algebraic-space quasi-compactness/separatedness predicates."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-8c2908f78",
+  "group": "N0",
+  "result": "pass",
+  "note": "Read the item, report (Worker report + Second reading by N0), the module and every used declaration in side-live: IsAlgebraicModuliStack, IsSmoothModuliAtlas, IsQuasiCompactModuli, moduliBaseStructure, moduliSmoothPointTopology, MapIsQuasiCompact, MapToSchemeIsSeparated, HasSpaceBaseChange, moduliTwoFiberProduct/Snd, moduliRelativeDiagonal, moduliPointMap, discreteModuli. Every clause matches the node: IsAlgClosed K; algebraic stack over Sch/K; Nonempty ModuliPoints; qc smooth atlas; qc and separated diagonal via alg-space presentations of scheme base changes (presentation-invariant, so the existential is fine); universal closedness on the smooth-presentation topology of F x_K T -> |T| for every K-scheme T; conclusion is an object in the fibre over the identity of Spec K. No extra hypotheses or universe restriction; the empty stack is excluded exactly. Statement verbatim in the file. Node diff is only lean + two landed def stmt_deps (relative-moduli-inertia, proper-curve-moduli) present on base. All other owners are def nodes in the transitive stmt_dep closure; moduliSmoothPointTopology is a recorded helper of an existing stmt_dep. Docstrings, source places and the six proof steps are present; sorry only; no hollow defs; no pro-etale. Not landed elsewhere. No compile, since no file was changed."
+ }
+}

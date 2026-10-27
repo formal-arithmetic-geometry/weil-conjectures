@@ -1,0 +1,340 @@
+{
+ "id": "lem-sfb-generic-smooth-model-smoothening",
+ "kind": "statement",
+ "title": "Smoothening a separated finite-type model without changing its unramified sections",
+ "statement": "Let $R$ be a discrete valuation ring with fraction field $E$ [def-sc-discrete-valuation-ring], and let $T=\\operatorname{Spec}R$ [def-weil-affine-spectrum]. Fix a geometric closed point of $T$ and let $R^{\\mathrm{sh}}$ be the corresponding strict henselization [def-weil-geometric-point, def-weil-pbc-strict-henselization-limit]. Let $Y\\to T$ be a separated finite-type morphism of schemes [def-pc-scheme, def-weil-finite-type-morphism], where separated means that the diagonal is a closed immersion [def-weil-closed-immersion]. Suppose its generic fibre $Y_E=Y\\times_T\\operatorname{Spec}E$ [def-pc-base-change] is smooth over $E$ [def-sbc-smooth-morphisms]. There exist a smooth separated finite-type $T$-scheme $Y^{\\mathrm{sm}}$ and a $T$-morphism $q:Y^{\\mathrm{sm}}\\to Y$ such that $q_E:Y^{\\mathrm{sm}}_E\\to Y_E$ is an isomorphism and composition with $q$ gives a bijection $Y^{\\mathrm{sm}}(R^{\\mathrm{sh}})\\xrightarrow{\\sim}Y(R^{\\mathrm{sh}})$. Here $Y(B)=\\operatorname{Hom}_T(\\operatorname{Spec}B,Y)$ for a $T$-algebra $B$. No boundedness assumption, properness assumption on $Y$, excellence assumption on $R$, or group structure is imposed.",
+ "source": {
+  "document": "literature/bosch-lutkebohmert-raynaud-neron-models.pdf",
+  "place": "BLR 3.1 Corollary 4, printed pp.61-62 (PDF pp.67-68), obtained from 3.1 Theorem 3 by restricting to the smooth locus; separatedness follows from the blowup construction when Y is separated. Primary scan https://www.math.stonybrook.edu/~kamenova/homepage_files/Bosch_Raynaud_Neron_Model_tc.pdf read; local copy WANTED."
+ },
+ "stmt_deps": [
+  "def-sc-discrete-valuation-ring",
+  "def-weil-affine-spectrum",
+  "def-weil-geometric-point",
+  "def-weil-pbc-strict-henselization-limit",
+  "def-pc-scheme",
+  "def-weil-finite-type-morphism",
+  "def-weil-closed-immersion",
+  "def-pc-base-change",
+  "def-sbc-smooth-morphisms",
+  "def-weil-pbc-strict-henselization-structural-map"
+ ],
+ "proof": [
+  {
+   "text": "Write $K=E$ and $A=R^{\\mathrm{sh}}$. The geometric strict local ring is identified with the algebraic strict henselization relative to the separable residue closure by [lem-exc-affine-strict-local-ring-comparison]. Since $R$ is Noetherian by [def-sc-discrete-valuation-ring], [lem-sc-strict-henselization-dvr] and [lem-sc-ring-strict-henselization-local-maximal-ideal] show that $A$ is a flat DVR over $R$ with maximal ideal $\\pi A$. Replace $Y$ by the closed subscheme $X$ defined on each affine $\\operatorname{Spec}B$ by $B_0=\\operatorname{im}(B\\to B[1/\\pi])$. Its kernel consists of elements killed by some power of $\\pi$; this description commutes with localization, so the quotients glue. Every $A$-point kills that kernel, giving $X(A)=Y(A)$, and $X_K=Y_K$. The algebra $B_0$ is torsion free over the PID $R$, hence flat by [lem-weil-pbc-pid-torsion-free-module-flat]. It is a quotient of $B$, so is of finite type; the closed diagonal of $Y$ restricts to that of $X$. Thus $X$ is flat separated of finite type, without assuming $Y$ flat.",
+   "uses": [
+    "lem-exc-affine-strict-local-ring-comparison",
+    "def-sc-discrete-valuation-ring",
+    "lem-sc-strict-henselization-dvr",
+    "lem-sc-ring-strict-henselization-local-maximal-ideal",
+    "lem-weil-pbc-pid-torsion-free-module-flat"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bosch-lutkebohmert-raynaud-neron-models.pdf",
+    "place": "3.3 setup; explicit removal of vertical torsion before applying the flat form of the section-defect criterion; primary scan read at https://www.math.stonybrook.edu/~kamenova/homepage_files/Bosch_Raynaud_Neron_Model_tc.pdf; local PDF WANTED."
+   }
+  },
+  {
+   "text": "For any flat separated finite-type $R$-model $V$ with this smooth generic fibre, put $\\delta_V(a)=\\operatorname{length}_A\\operatorname{tors}\\Gamma(\\operatorname{Spec}A,a^*\\Omega^1_{V/R})$. The criterion [lem-sfb-trait-section-differential-defect-criterion] says it is a finite integer, zero precisely when the closed image of $a$ is smooth over $R$. Such a section factors through a smooth open neighbourhood: its inverse image is an open subset of the spectrum of the local ring $A$ containing the closed point, hence the whole spectrum. By [lem-sfb-uniform-section-differential-bound], all these integers have a common finite bound. We prove, by strong induction on $c$, that for every such $V$ any subset $E\\subseteq V(A)$ whose defects are at most $c$ can be brought into the smooth locus by a finite sequence of special-fibre blowups whose centres lie in the nonsmooth locus and in the inverse image of the closure of $\\{a_k:a\\in E\\}$ in $V_k$ (the support condition used in steps 5 and 6). For $c=0$ (including $E=\\varnothing$) use the empty sequence.",
+   "uses": [
+    "lem-sfb-trait-section-differential-defect-criterion",
+    "lem-sfb-uniform-section-differential-bound"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bosch-lutkebohmert-raynaud-neron-models.pdf",
+    "place": "3.3 Lemma 1 and Proposition 3; 3.4 Theorem 2, outer induction; primary scan read at https://www.math.stonybrook.edu/~kamenova/homepage_files/Bosch_Raynaud_Neron_Model_tc.pdf; local PDF WANTED."
+   }
+  },
+  {
+   "text": "Fix $c>0$ and discard from $E$ the sections already smooth. Centres will always lie in the nonsmooth locus, so [lem-sfb-trait-blowup-section-charts] makes every later blowup an isomorphism near these discarded sections. A finite-type $R$-scheme is Noetherian by [lem-weil-pbc-finite-type-over-noetherian]. Relative differentials are quasi-coherent of finite type by [lem-trf-relative-differential-sheaf-base-change]; on this Noetherian scheme their finite presentations are coherent. Apply [lem-sfb-separable-point-cotangent-filtration] on $V_k$ with $M=\\Omega^1_{V/R}|_{V_k}$ to the reductions of $E$. Pull its partition back to $E$, writing $E=E_1\\amalg\\cdots\\amalg E_t$, with closed subschemes $Z_1\\supset\\cdots\\supset Z_t$ and dense opens $U_i$. If $t=0$ there is nothing to do. All $Z_i$ lie in the nonsmooth locus: it is the closed complement of the union of smooth open neighbourhoods, and contains the reductions being closed up.",
+   "uses": [
+    "lem-sfb-trait-blowup-section-charts",
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "lem-trf-relative-differential-sheaf-base-change",
+    "lem-sfb-separable-point-cotangent-filtration"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bosch-lutkebohmert-raynaud-neron-models.pdf",
+    "place": "3.4 Theorem 2, construction of the canonical partition; primary scan read at https://www.math.stonybrook.edu/~kamenova/homepage_files/Bosch_Raynaud_Neron_Model_tc.pdf; local PDF WANTED."
+   }
+  },
+  {
+   "text": "Induct also on the finite length $t$ of this partition. Blow up $Z_t$. By [lem-sfb-trait-blowup-section-charts], the new model $V'$ is again flat separated of finite type, has the same generic fibre, and every section lifts uniquely. Each section of $E_t$ reduces into $U_t$ and its lift lies in the dilatation chart. The density assertion of [lem-sfb-separable-point-cotangent-filtration] gives condition (N) on $Z_t$: the intersection of the evaluation kernels is zero. Any additional sections only shrink that intersection. Since $U_t$ is smooth and the restricted differential module is locally free there, [lem-sfb-permissible-dilatation-section-estimate] gives $\\delta_{V'}(a')\\leq\\max(0,\\delta_V(a)-1)\\leq c-1$ for $a\\in E_t$. This is the defect of the section in the full blowup too: the chart is open and the entire section lies in it.",
+   "uses": [
+    "lem-sfb-trait-blowup-section-charts",
+    "lem-sfb-separable-point-cotangent-filtration",
+    "lem-sfb-permissible-dilatation-section-estimate"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bosch-lutkebohmert-raynaud-neron-models.pdf",
+    "place": "3.4 Lemma 1 and Theorem 2, blow up the last stratum; 3.3 Proposition 5; primary scan read at https://www.math.stonybrook.edu/~kamenova/homepage_files/Bosch_Raynaud_Neron_Model_tc.pdf; local PDF WANTED."
+   }
+  },
+  {
+   "text": "Every section in $E\\setminus E_t$ reduces outside $Z_t$ by the filtration node, so it factors through $V\\setminus Z_t$. Its lifted section is identified there with the original one, and its differential module and defect are unchanged. Apply the outer induction hypothesis at $c-1$ to the lifted subset $E_t$. The new centres lie in the nonsmooth locus over $Z_t$: over $V\\setminus Z_t$ no section of this subset reduces, so all its reduced-closure centres and their successors are supported over $Z_t$. This support condition is part of the induction construction, and is preserved by taking closures and inverse images under the blowup morphisms. Thus these modifications are isomorphisms near every remaining section. The sections of $E_t$ are now smooth and will stay so under blowups centred in the nonsmooth locus.",
+   "uses": [
+    "lem-sfb-trait-blowup-section-charts",
+    "lem-sfb-separable-point-cotangent-filtration"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bosch-lutkebohmert-raynaud-neron-models.pdf",
+    "place": "3.4 Theorem 2, applying the outer induction to the last part and leaving the other parts unaffected; primary scan read at https://www.math.stonybrook.edu/~kamenova/homepage_files/Bosch_Raynaud_Neron_Model_tc.pdf; local PDF WANTED."
+   }
+  },
+  {
+   "text": "On the resulting model recompute the canonical partition of the remaining nonsmooth sections. Their closed images lie in the unchanged open over $V\\setminus Z_t$. Formation of reduced closure, its smooth open, and the locus where a coherent module is locally free all restrict to an open subset. Consequently membership of these remaining sections in each successive part is exactly their old membership in $E_1,\\ldots,E_{t-1}$, with any now-empty parts omitted. No new part appears: after these $t-1$ parts no section remains, regardless of extra closure points in the exceptional fibre. Their defects are still at most $c$. The inner induction on $t$ therefore makes them smooth in finitely many further blowups. Previously resolved sections stay smooth because all centres are nonsmooth. This proves the inner induction, hence the outer induction; all centres produced lie in the closures of the current unresolved reductions, as required by the support invariant used in the preceding step.",
+   "uses": [
+    "lem-sfb-separable-point-cotangent-filtration",
+    "lem-sfb-trait-blowup-section-charts"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bosch-lutkebohmert-raynaud-neron-models.pdf",
+    "place": "3.4 Theorem 2, second induction on the partition length, printed p.73; primary scan read at https://www.math.stonybrook.edu/~kamenova/homepage_files/Bosch_Raynaud_Neron_Model_tc.pdf; local PDF WANTED."
+   }
+  },
+  {
+   "text": "Take $E=X(A)$ and a bound supplied by [lem-sfb-uniform-section-differential-bound]. The two inductions give a flat separated finite-type $R$-scheme $W$ mapping to $X$, with unchanged generic fibre, and with every $A$-section smooth. At every blowup [lem-sfb-trait-blowup-section-charts] gives a bijection on $A$-points; their finite composite and $X(A)=Y(A)$ give $W(A)\\simeq Y(A)$. Let $Y^{\\mathrm{sm}}\\subseteq W$ be the union of all opens smooth over $R$. Smoothness is local on the source in [def-sbc-smooth-morphisms], so this union is smooth. Every $A$-section lies in this union by the criterion and the local-spectrum argument of step 2. Conversely an open subscheme is a monomorphism, so $Y^{\\mathrm{sm}}(A)\\to W(A)$ is injective as well as surjective.",
+   "uses": [
+    "lem-sfb-uniform-section-differential-bound",
+    "lem-sfb-trait-blowup-section-charts",
+    "def-sbc-smooth-morphisms",
+    "lem-sfb-trait-section-differential-defect-criterion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bosch-lutkebohmert-raynaud-neron-models.pdf",
+    "place": "3.1 Theorem 3 and Corollary 4, restriction to the smooth locus; primary scan read at https://www.math.stonybrook.edu/~kamenova/homepage_files/Bosch_Raynaud_Neron_Model_tc.pdf; local PDF WANTED."
+   }
+  },
+  {
+   "text": "The generic fibre of $W$ is all smooth. Since $\\operatorname{Spec}K=D(\\pi)\\subseteq\\operatorname{Spec}R$ is open, clause (b) of [lem-weil-pbc-smooth-restrict-open-subschemes] applied to $W_K\\to\\operatorname{Spec}K$ shows that $W_K$ itself is a smooth open over $R$, hence lies in $Y^{\\mathrm{sm}}$. Thus $(Y^{\\mathrm{sm}})_K=W_K=Y_K$. Also $W$ is Noetherian by [lem-weil-pbc-finite-type-over-noetherian], and its open subscheme $Y^{\\mathrm{sm}}$ is quasi-compact by [lem-weil-pbc-noetherian-open-subscheme-noetherian]. A finite affine refinement of its open cover inside finite-type affine charts of $W$ gives a finite cover by principal opens whose coordinate algebras are localizations at one element of finite-type $R$-algebras; adjoining that element's inverse preserves finite generation. Hence $Y^{\\mathrm{sm}}\\to\\operatorname{Spec}R$ is of finite type. Its diagonal is the restriction of the closed diagonal of $W$, so it is separated. Compose its open immersion into $W$ with the maps to $X$ and $Y$ to obtain $q$, with both required bijections and generic-fibre isomorphism.",
+   "uses": [
+    "lem-weil-pbc-smooth-restrict-open-subschemes",
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "lem-weil-pbc-noetherian-open-subscheme-noetherian"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bosch-lutkebohmert-raynaud-neron-models.pdf",
+    "place": "3.1 Corollary 4; verification of separatedness and finite type after taking the smooth open; primary scan read at https://www.math.stonybrook.edu/~kamenova/homepage_files/Bosch_Raynaud_Neron_Model_tc.pdf; local PDF WANTED."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sbc-smooth-morphisms",
+  "def-sc-discrete-valuation-ring",
+  "lem-exc-affine-strict-local-ring-comparison",
+  "lem-sc-ring-strict-henselization-local-maximal-ideal",
+  "lem-sc-strict-henselization-dvr",
+  "lem-sfb-permissible-dilatation-section-estimate",
+  "lem-sfb-separable-point-cotangent-filtration",
+  "lem-sfb-trait-blowup-section-charts",
+  "lem-sfb-trait-section-differential-defect-criterion",
+  "lem-sfb-uniform-section-differential-bound",
+  "lem-trf-relative-differential-sheaf-base-change",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-weil-pbc-noetherian-open-subscheme-noetherian",
+  "lem-weil-pbc-pid-torsion-free-module-flat",
+  "lem-weil-pbc-smooth-restrict-open-subschemes"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/bosch-lutkebohmert-raynaud-neron-models.pdf",
+  "place": "BLR 3.3 Proposition 3; 3.4 Theorem 2 double induction; 3.1 Corollary 4. Primary scan read online, local PDF WANTED; explicit preliminary flat closure and induction support/locality arguments supplied by Q54."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A generically smooth finite type scheme over a discrete valuation ring can be made smooth along all unramified sections by blowing up the special fibre",
+   "results": "{\"t\": \"2026-10-24T08:30:30Z\", \"tool\": \"leansearch\", \"query\": \"A generically smooth finite type scheme over a discrete valuation ring can be made smooth along all unramified sections by blowing up the special fibre\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsSmooth.casesOn\", \"AlgebraicGeometry.IsSmooth.recOn\", \"AlgebraicGeometry.IsSmooth.mk\", \"AlgebraicGeometry.FormallyUnramified.recOn\", \"AlgebraicGeometry.instLocallyOfFinitePresentationOfIsSmooth\", \"AlgebraicGeometry.IsSmoothOfRelativeDimension.isSmooth\", \"Algebra.smoothLocus\", \"AlgebraicGeometry.FormallyUnramified.casesOn\"], \"digest\": \"956efc37a867fe17\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: semantic hits are smooth local presentations or smooth loci; neither those nor the empty Loogle/grep results give a modification preserving the entire smooth generic fibre and all strict-henselian sections."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Every finite type scheme over a discrete valuation ring with smooth generic fibre admits a smoothening inducing a bijection on strict henselian integral points",
+   "results": "{\"t\": \"2026-10-24T08:30:31Z\", \"tool\": \"leanfinder\", \"query\": \"Every finite type scheme over a discrete valuation ring with smooth generic fibre admits a smoothening inducing a bijection on strict henselian integral points\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.instHasRingHomPropertyIsSmoothLocallyIsStandardSmooth\", \"AlgebraicGeometry.IsSmooth.exists_isStandardSmooth\", \"AlgebraicGeometry.IsSmoothOfRelativeDimension.exists_isStandardSmoothOfRelativeDimension\", \"AlgebraicGeometry.instHasRingHomPropertyIsSmoothOfRelativeDimensionLocallyIsStandardSmoothOfRelativeDimension\", \"Algebra.IsSmoothAt.exists_notMem_isStandardSmooth\", \"AlgebraicGeometry.IsSmooth\", \"AlgebraicGeometry.IsSmoothOfRelativeDimension\", \"AlgebraicGeometry.isSmooth_iff\"], \"digest\": \"2199d331cc10c85c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: semantic hits are smooth local presentations or smooth loci; neither those nor the empty Loogle/grep results give a modification preserving the entire smooth generic fibre and all strict-henselian sections."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Smooth\", \"Valuation\"",
+   "results": "{\"t\": \"2026-10-24T08:30:31Z\", \"tool\": \"loogle\", \"query\": \"\\\"Smooth\\\", \\\"Valuation\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: semantic hits are smooth local presentations or smooth loci; neither those nor the empty Loogle/grep results give a modification preserving the entire smooth generic fibre and all strict-henselian sections."
+  },
+  {
+   "tool": "grep",
+   "query": "smoothen|Neron|Néron|smooth.*blow|blow.*smooth",
+   "results": "{\"t\": \"2026-10-24T08:30:31Z\", \"tool\": \"grep\", \"query\": \"smoothen|Neron|Néron|smooth.*blow|blow.*smooth\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: semantic hits are smooth local presentations or smooth loci; neither those nor the empty Loogle/grep results give a modification preserving the entire smooth generic fibre and all strict-henselian sections."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Neron smoothening: resolve only the smoothness defect along unramified integral sections, keeping the same smooth generic fibre",
+   "results": "{\"t\": \"2026-10-24T08:31:16Z\", \"tool\": \"leanfinder\", \"query\": \"Neron smoothening: resolve only the smoothness defect along unramified integral sections, keeping the same smooth generic fibre\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.instHasRingHomPropertyIsSmoothLocallyIsStandardSmooth\", \"AlgebraicGeometry.IsSmooth.exists_isStandardSmooth\", \"AlgebraicGeometry.IsSmoothOfRelativeDimension.exists_isStandardSmoothOfRelativeDimension\", \"AlgebraicGeometry.IsSmoothOfRelativeDimension\", \"AlgebraicGeometry.IsSmooth\", \"AlgebraicGeometry.instHasRingHomPropertyIsSmoothOfRelativeDimensionLocallyIsStandardSmoothOfRelativeDimension\", \"AlgebraicGeometry.IsSmoothOfRelativeDimension.isSmooth\", \"Algebra.IsSmoothAt.exists_notMem_isStandardSmooth\"], \"digest\": \"c595dee101a40e43\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: semantic hits are smooth local presentations or smooth loci; neither those nor the empty Loogle/grep results give a modification preserving the entire smooth generic fibre and all strict-henselian sections."
+  },
+  {
+   "tool": "grep",
+   "query": "smoothen|Neron|Néron|smooth.*blow|blow.*smooth",
+   "results": "{\"t\": \"2026-10-24T09:20:47Z\", \"tool\": \"grep\", \"query\": \"smoothen|Neron|Néron|smooth.*blow|blow.*smooth\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: only general smoothness/unramified definitions and local presentations; no model smoothening theorem."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A finite type generically smooth scheme over a discrete valuation ring admits a smooth model inducing a bijection on strict henselization valued points",
+   "results": "{\"t\": \"2026-10-24T09:20:48Z\", \"tool\": \"leansearch\", \"query\": \"A finite type generically smooth scheme over a discrete valuation ring admits a smooth model inducing a bijection on strict henselization valued points\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsSmooth.casesOn\", \"AlgebraicGeometry.IsSmooth.recOn\", \"AlgebraicGeometry.Scheme.mk.noConfusion\", \"AlgebraicGeometry.instLocallyOfFinitePresentationOfIsSmooth\", \"AlgebraicGeometry.IsSmooth.mk\", \"AlgebraicGeometry.IsSmooth\", \"AlgebraicGeometry.SpecToEquivOfLocalRing\", \"AlgebraicGeometry.IsSmoothOfRelativeDimension.isSmooth\"], \"digest\": \"37eeed4ccbb8e27c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: only general smoothness/unramified definitions and local presentations; no model smoothening theorem."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Smooth\", \"Valuation\"",
+   "results": "{\"t\": \"2026-10-24T09:20:48Z\", \"tool\": \"loogle\", \"query\": \"\\\"Smooth\\\", \\\"Valuation\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: only general smoothness/unramified definitions and local presentations; no model smoothening theorem."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Smoothening separated finite type schemes over a trait without changing the generic fibre and unramified integral sections",
+   "results": "{\"t\": \"2026-10-24T09:20:49Z\", \"tool\": \"leanfinder\", \"query\": \"Smoothening separated finite type schemes over a trait without changing the generic fibre and unramified integral sections\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.FormallyUnramified\", \"AlgebraicGeometry.IsSmooth\", \"AlgebraicGeometry.instHasRingHomPropertyIsSmoothLocallyIsStandardSmooth\", \"AlgebraicGeometry.IsSmooth.exists_isStandardSmooth\", \"AlgebraicGeometry.IsSmoothOfRelativeDimension\", \"AlgebraicGeometry.IsEtale\", \"AlgebraicGeometry.Scheme.Etale\", \"AlgebraicGeometry.IsSmoothOfRelativeDimension.exists_isStandardSmoothOfRelativeDimension\"], \"digest\": \"e76c205865d99b34\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: only general smoothness/unramified definitions and local presentations; no model smoothening theorem."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-weak-neron-family-rational-property",
+  "date": "2026-10-24",
+  "group": "Q08"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "BLR 3.5 Theorem 2 proof: apply the smoothening process (3.1 Corollary 4) separately to the finitely many separated models covering the bounded points.",
+   "via": [
+    "lem-sfb-weak-neron-family-rational-property",
+    "lem-sfb-bounded-group-translation-model",
+    "lem-sfb-bounded-group-local-neron-criterion",
+    "lem-sfb-abelian-neron-model",
+    "lem-sfb-semiabelian-neron-lft-existence",
+    "lem-sfb-trait-semiabelian-hom-extension",
+    "lem-sfb-semiabelian-generic-graph-proper",
+    "lem-sfb-normal-semiabelian-hom-extension",
+    "lem-sfb-symmetric-line-power-prolongation",
+    "lem-sfb-normal-symmetric-cubical-extension",
+    "lem-sfb-symmetric-ample-power-extension",
+    "lem-sfb-regular-group-generic-ampleness",
+    "lem-sfb-stable-picard-theta-ampleness",
+    "lem-sfb-stable-relative-picard-kummer",
+    "lem-sfb-stable-level-versal-branch-freeness",
+    "lem-sfb-stable-abelian-level-normalization",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-generic-smooth-model-smoothening",
+  "worker": "stage1",
+  "summary": "Read BLR 3.1, 3.3 and 3.4 online; retain the statement, remove vertical torsion before using the existing flat defect criterion, and prove the global double induction using three independently reusable inputs. Restrict to the smooth open and verify separatedness, finite type, generic fibre and all strict-henselian sections. No Lean declaration attaches.",
+  "blueprint": "No imported blueprint ancestor: blueprint_refs ancestor returns None. This below-unit branch realizes the parent weak-Neron-family proof sentence applying BLR 3.1 Corollary 4 to each separated model; latest blueprint main-20261024 was searched, no smoothening duplicate.",
+  "tool_uses": [
+   {
+    "node": "lem-exc-affine-strict-local-ring-comparison",
+    "why": "Generic algebraic-geometry tool used for its stated assertion (strict local ring, flatness, Noetherianity, differential finiteness or restriction of smoothness); the current unit has no replacement and its proof route is not changed."
+   },
+   {
+    "node": "lem-sc-ring-strict-henselization-local-maximal-ideal",
+    "why": "Generic algebraic-geometry tool used for its stated assertion (strict local ring, flatness, Noetherianity, differential finiteness or restriction of smoothness); the current unit has no replacement and its proof route is not changed."
+   },
+   {
+    "node": "lem-sc-strict-henselization-dvr",
+    "why": "Generic algebraic-geometry tool used for its stated assertion (strict local ring, flatness, Noetherianity, differential finiteness or restriction of smoothness); the current unit has no replacement and its proof route is not changed."
+   },
+   {
+    "node": "lem-trf-relative-differential-sheaf-base-change",
+    "why": "Generic algebraic-geometry tool used for its stated assertion (strict local ring, flatness, Noetherianity, differential finiteness or restriction of smoothness); the current unit has no replacement and its proof route is not changed."
+   },
+   {
+    "node": "lem-weil-pbc-finite-type-over-noetherian",
+    "why": "Generic algebraic-geometry tool used for its stated assertion (strict local ring, flatness, Noetherianity, differential finiteness or restriction of smoothness); the current unit has no replacement and its proof route is not changed."
+   },
+   {
+    "node": "lem-weil-pbc-noetherian-open-subscheme-noetherian",
+    "why": "Generic algebraic-geometry tool used for its stated assertion (strict local ring, flatness, Noetherianity, differential finiteness or restriction of smoothness); the current unit has no replacement and its proof route is not changed."
+   },
+   {
+    "node": "lem-weil-pbc-pid-torsion-free-module-flat",
+    "why": "Generic algebraic-geometry tool used for its stated assertion (strict local ring, flatness, Noetherianity, differential finiteness or restriction of smoothness); the current unit has no replacement and its proof route is not changed."
+   },
+   {
+    "node": "lem-weil-pbc-smooth-restrict-open-subschemes",
+    "why": "Generic algebraic-geometry tool used for its stated assertion (strict local ring, flatness, Noetherianity, differential finiteness or restriction of smoothness); the current unit has no replacement and its proof route is not changed."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-exc-affine-strict-local-ring-comparison",
+  "lem-sc-ring-strict-henselization-local-maximal-ideal",
+  "lem-sc-strict-henselization-dvr",
+  "lem-trf-relative-differential-sheaf-base-change",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-weil-pbc-noetherian-open-subscheme-noetherian",
+  "lem-weil-pbc-pid-torsion-free-module-flat",
+  "lem-weil-pbc-smooth-restrict-open-subschemes"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q54-db583c7b8",
+  "group": "Q54",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q54-db583c7b8 (reviewer sub-agent of L); spot-checked: I read the item, all three new nodes and every cited statement. BLR is not available locally, so I checked BLR 3.1 Thm 3/Cor 4, 3.3 and the 3.4 double induction from my knowledge of the text, and the blowup node against Stacks 0804, 0806 and 02NS. The mathematics holds. Step 1: the π-torsion quotient B_0 = im(B→B[1/π]) keeps every A-point and the generic fibre and is flat (PID torsion-free); A = R^sh is a DVR with maximal ideal πA by the comparison, DVR and maximal-ideal nodes. Step 4: every hypothesis of permissible-dilatation-section-estimate holds ((N) from the filtration's kernel-zero clause, the a_k lie in U_t), and the π-chart of the blowup node is that node's dilatation. Step 6: the recomputed partition agrees with the old one over V∖Z_t level by level, so t' ≤ t−1 (lexicographic induction on (c,t)). Steps 7–8: the smooth open, clause (b) for W_K, finite type and separatedness are correct. New nodes, tested on small cases: the filtration on imperfect k with x^p−ay^p, P=∅ and Spec k (not a duplicate of separable-point-closure-universal-density, which needs Galois-stable T); the blowup node with Z=∅, Z=X_k and xy=π^2 (π∈I makes I·A invertible, the charts are π-torsion-free, unique lift via 0806); the uniform bound via Jacobian minors, xy=π^2 giving δ≤1. Batch 5: lem-trf-relative-differential-sheaf-base-change and def-trf-minor-ideal, which the two sfb nodes reach, are general Kähler-differential and minor-ideal facts, not parts of the trace formula or Poincaré duality, so accepted. I accept the tool_uses (generic algebraic-geometry tools). FIX 1 (B3): stmt_deps of all three new nodes left out notions cited in their statements; completed. FIX 2 (D4): the step-2 inductive claim did not include the support condition that steps 5–6 use (centres lie over the closure of the reductions of E, for every model V); added to step 2.; 4 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.GenericSmoothModelSmoothening",
+  "declaration": "AlgebraicGeometry.Scheme.exists_smoothening_of_smooth_generic_fiber",
+  "file": "lean/Sheaf/AlgebraicGeometry/GenericSmoothModelSmoothening.lean",
+  "statement": "theorem exists_smoothening_of_smooth_generic_fiber (R E : Type u) [CommRing R] [IsDomain R] [IsDiscreteValuationRing R] [Field E] [Algebra R E] [IsFractionRing R E] (Ω : Type u) [Field Ω] [IsAlgClosed Ω] (s : Spec (.of Ω) ⟶ Spec (.of R)) (hs : ∀ x : Spec (.of Ω), (s.base x).asIdeal = IsLocalRing.maximalIdeal R) (Y : Over (Spec (.of R))) [IsSeparated Y.hom] [LocallyOfFiniteType Y.hom] [QuasiCompact Y.hom] [Smooth (pullback.snd Y.hom (Spec.map (CommRingCat.ofHom (algebraMap R E))))] : ∃ (Ysm : Over (Spec (.of R))) (q : Ysm ⟶ Y), Smooth Ysm.hom ∧ IsSeparated Ysm.hom ∧ LocallyOfFiniteType Ysm.hom ∧ QuasiCompact Ysm.hom ∧ IsIso (((Over.pullback (Spec.map (CommRingCat.ofHom (algebraMap R E)))).map q).left) ∧ Function.Bijective (fun a : Over.mk (strictHenselizationStructuralMap s) ⟶ Ysm ↦ a ≫ q)",
+  "branch": "newtargets-dag",
+  "by": "Q15",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-bea52b8ad",
+  "group": "Q15",
+  "result": "fix",
+  "note": "Lean exact against node and BLR 3.1 Cor 4: DVR R, Frac E, closed geometric point via hs = maximalIdeal, R^sh over T via the canonical landed strictHenselizationStructuralMap (unique), IsSeparated+LOFT+QC, Smooth on pullback.snd to Spec E, conclusion ∃ Ysm q with Smooth/IsSeparated/LOFT/QC, IsIso (Over.pullback g).map q .left, Bijective (a ↦ a ≫ q) on Over-homs; no extra hypotheses; lean.statement verbatim; added landed stmt_dep structural-map OK; private proof-dep imports all exist; docstrings carry source, blueprint id and steps 1-8. Sole fault H11: the second reading only had dispatcher wording → report FIX (worker report verbatim plus a real clause-by-clause reading). Note: parallel Q06 delivery b703986bb4a7 (same file, theorem exists_generic_smooth_model_smoothening) PASSed, neither landed; the first lander owns the item."
+ }
+}

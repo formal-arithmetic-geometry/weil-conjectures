@@ -1,0 +1,201 @@
+{
+ "id": "lem-sfb-adequate-moduli-universally-submersive",
+ "kind": "statement",
+ "title": "Adequate moduli spaces are universally submersive",
+ "statement": "Let $k$ be a field [def-weil-field] and $f:\\mathcal X\\to Y$ an adequate moduli space [def-sfb-adequate-moduli-space]. For every morphism $T\\to Y$ of algebraic spaces over $k$ [def-trf-algebraic-space], the induced continuous map $|\\mathcal X\\times_YT|\\to|T|$ is surjective, and a subset $V\\subseteq|T|$ is open if and only if its inverse image is open. Here the underlying space of an algebraic stack consists of field-valued objects up to isomorphism after common field extension, with the quotient topology from a smooth surjective scheme atlas; the topology on an algebraic space is defined by any surjective etale scheme atlas. There is no Noetherian, finite-type or separatedness hypothesis on $Y$.",
+ "source": {
+  "document": "literature/alper-adequate-moduli-spaces-arXiv-1005.2398.pdf",
+  "place": "Alper arXiv:1005.2398v3, Theorem 5.3.1 (1)--(3), including arbitrary algebraic-space base change; its proof uses Proposition 5.2.9 (3). Read online https://arxiv.org/html/1005.2398v3; local PDF WANTED."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-sfb-adequate-moduli-space",
+  "def-trf-algebraic-space",
+  "def-sfb-stack-point-topological-space",
+  "def-sfb-open-moduli-substack",
+  "def-sfb-dm-stack-morphism-properties"
+ ],
+ "proof": [
+  {
+   "text": "Fix an arbitrary morphism $g:T\\to Y$ of algebraic spaces over $k$, and put $h:|\\mathcal X\\times_YT|\\to|T|$. By [lem-sfb-adequate-moduli-topological-images], $|f|$ is surjective. The image-base-change assertion of [lem-sfb-smooth-presentation-closed-subsets], applied to $\\mathcal X\\to Y\\leftarrow T$ (regarding spaces as stacks with discrete groupoids), gives $\\operatorname{im}h=|g|^{-1}(\\operatorname{im}|f|)=|T|$. Thus $h$ is surjective. The same topology node supplies continuity of $h$ and the agreement with the atlas topologies used in the statement.",
+   "uses": [
+    "lem-sfb-adequate-moduli-topological-images",
+    "lem-sfb-smooth-presentation-closed-subsets"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/stacks-properties.tex",
+    "place": "Tags 04XH (lemma-points-cartesian), 04XL (lemma-topology-points), combined with Alper Theorem 5.3.1(1)."
+   }
+  },
+  {
+   "text": "For this same arbitrary algebraic-space base change $T\\to Y$, [lem-sfb-adequate-moduli-topological-images] states that $h$ sends every closed subset to a closed subset. Apply that assertion directly to the original adequate moduli space $f$. No assertion that $\\mathcal X\\times_YT\\to T$ is itself adequate is needed, and no flatness hypothesis is imposed on $g$.",
+   "uses": [
+    "lem-sfb-adequate-moduli-topological-images"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/alper-adequate-moduli-spaces-arXiv-1005.2398.pdf",
+    "place": "Alper arXiv:1005.2398v3, Theorem 5.3.1(1)--(3), especially the last implication (1),(2) imply (3); read https://arxiv.org/html/1005.2398v3, local PDF WANTED."
+   }
+  },
+  {
+   "text": "Let $V\\subseteq|T|$. If $V$ is open, continuity of $h$ gives openness of $h^{-1}(V)$. Conversely suppose $h^{-1}(V)$ is open. Its complement $C=h^{-1}(|T|\\setminus V)$ is closed, so Step 2 makes $h(C)$ closed. Surjectivity from Step 1 gives $h(C)=|T|\\setminus V$: every point outside $V$ has a preimage, and every point of $C$ maps outside $V$. Hence $V$ is open. Since $g$ was arbitrary, this proves every assertion of the item.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/alper-adequate-moduli-spaces-arXiv-1005.2398.pdf",
+    "place": "Alper arXiv:1005.2398v3, Theorem 5.3.1(1)--(3), especially the last implication (1),(2) imply (3); read https://arxiv.org/html/1005.2398v3, local PDF WANTED."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-adequate-moduli-topological-images",
+  "lem-sfb-smooth-presentation-closed-subsets"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/alper-adequate-moduli-spaces-arXiv-1005.2398.pdf",
+  "place": "Assembly of existing DAG statements following the elementary final implication in Alper Theorem 5.3.1; primary HTML read, local PDF WANTED."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Every adequate moduli space is universally submersive surjective and universally closed without noetherian hypotheses",
+   "results": "Actual search returned 8 hits: AlgebraicGeometry.isProper_eq, AlgebraicGeometry.IsProper, AlgebraicGeometry.isProper_iff, AlgebraicGeometry.IsFinite.iff_isProper_and_isAffineHom, AlgebraicGeometry.IsFinite, AlgebraicGeometry.Scheme.exists_hom_isAffine_of_isLocalAtSource, AlgebraicGeometry.Scheme.exists_hom_isAffine_of_isZariskiLocalAtSource, AlgebraicGeometry.IsIntegralHom.iff_universallyClosed_and_isAffineHom",
+   "date": "2026-10-22",
+   "verdict": "no match: proper/closed scheme morphisms and quotient maps for flat schemes or generalizing prime-spectrum maps do not give this theorem for adequate moduli spaces"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The underlying topology on the target of an adequate moduli space is the quotient topology after any base change",
+   "results": "Actual search returned 8 hits: AlgebraicGeometry.Flat.isQuotientMap_of_surjective, PrimeSpectrum.isQuotientMap_of_generalizingMap, PrimeSpectrum.isQuotientMap_of_specializingMap, AlgebraicGeometry.Scheme.etalePretopology, AlgebraicGeometry.Scheme.exists_isQuasiAffine_of_isLimit, AlgebraicGeometry.UniversallyOpen, DomMulAct.isQuotientMap_mk, AlgebraicGeometry.QuasiCompactCover.instPullback₁Scheme",
+   "date": "2026-10-22",
+   "verdict": "no match: proper/closed scheme morphisms and quotient maps for flat schemes or generalizing prime-spectrum maps do not give this theorem for adequate moduli spaces"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsQuotientMap\", \"AlgebraicGeometry\"",
+   "results": "Actual search returned 1 hits: AlgebraicGeometry.Flat.isQuotientMap_of_surjective",
+   "date": "2026-10-22",
+   "verdict": "no match: proper/closed scheme morphisms and quotient maps for flat schemes or generalizing prime-spectrum maps do not give this theorem for adequate moduli spaces"
+  },
+  {
+   "tool": "grep",
+   "query": "adequateModuli|adequate_moduli|universally.?submersive",
+   "results": "Actual search returned 0 hits: ",
+   "date": "2026-10-22",
+   "verdict": "no match: proper/closed scheme morphisms and quotient maps for flat schemes or generalizing prime-spectrum maps do not give this theorem for adequate moduli spaces"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Adequate moduli spaces are universally closed and universally submersive",
+   "results": "Actual search returned 8 hits: AlgebraicGeometry.universallyClosed_eq, AlgebraicGeometry.Surjective.of_universallyClosed_of_isDominant, AlgebraicGeometry.UniversallyClosed.mk, AlgebraicGeometry.UniversallyClosed, AlgebraicGeometry.Scheme.Hom.isClosedMap, AlgebraicGeometry.IsProper.toUniversallyClosed, AlgebraicGeometry.universallyClosed_iff, AlgebraicGeometry.isProper_eq",
+   "date": "2026-10-22",
+   "verdict": "no match: proper/closed scheme morphisms and quotient maps for flat schemes or generalizing prime-spectrum maps do not give this theorem for adequate moduli spaces"
+  },
+  {
+   "tool": "grep",
+   "query": "adequateModuli|adequate_moduli|universally.?submersive",
+   "results": "Actual logged search: 0 hits; ",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme-only universally-closed or flat-morphism results do not establish adequacy for stacks; general quotient-map topology handles only the elementary final step"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Adequate moduli spaces induce surjective closed quotient maps after arbitrary base change",
+   "results": "Actual logged search: 8 hits; AlgebraicGeometry.UniversallyClosed.universally_isClosedMap, AlgebraicGeometry.universallyClosed_iff, AlgebraicGeometry.Surjective.of_universallyClosed_of_isDominant, AlgebraicGeometry.UniversallyClosed, Topology.isQuotientMap_iff_isClosed, AlgebraicGeometry.UniversallyClosed.mk, AlgebraicGeometry.Surjective.instIsStableUnderBaseChangeScheme, AlgebraicGeometry.IsProper.toUniversallyClosed",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme-only universally-closed or flat-morphism results do not establish adequacy for stacks; general quotient-map topology handles only the elementary final step"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsQuotientMap\", \"AlgebraicGeometry\"",
+   "results": "Actual logged search: 1 hits; AlgebraicGeometry.Flat.isQuotientMap_of_surjective",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme-only universally-closed or flat-morphism results do not establish adequacy for stacks; general quotient-map topology handles only the elementary final step"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A surjective universally closed morphism from an algebraic stack to an algebraic space induces a quotient map after base change",
+   "results": "Actual logged search: 8 hits; AlgebraicGeometry.Flat.isQuotientMap_of_surjective, AlgebraicGeometry.UniversallyClosed.of_comp_surjective, AlgebraicGeometry.descendsAlong_universallyClosed_surjective_inf_flat_inf_quasicompact, AlgebraicGeometry.Surjective.instIsStableUnderBaseChangeScheme, AlgebraicGeometry.Surjective.of_universallyClosed_of_isDominant, AlgebraicGeometry.SurjectiveOnStalks.stableUnderBaseChange, AlgebraicGeometry.UniversallyClosed, AlgebraicGeometry.descendsAlong_universallyOpen_surjective_inf_flat_inf_quasicompact",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme-only universally-closed or flat-morphism results do not establish adequacy for stacks; general quotient-map topology handles only the elementary final step"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An adequate moduli space is universally submersive: after any algebraic space base change its topology is the quotient topology",
+   "results": "Actual logged search: 8 hits; AlgebraicGeometry.UniversallyOpen, AlgebraicGeometry.UniversallyInjective, AlgebraicGeometry.universallyOpen_iff, AlgebraicGeometry.IsPreimmersion, AlgebraicGeometry.UniversallyOpen.eq, AlgebraicGeometry.UniversallyOpen.out, AlgebraicGeometry.UniversallyOpen.universally_isOpenMap, AlgebraicGeometry.universallyInjective_eq",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme-only universally-closed or flat-morphism results do not establish adequacy for stacks; general quotient-map topology handles only the elementary final step"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-power-lifting-quotient-submersive",
+  "date": "2026-10-22",
+  "group": "Q01"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Power lifting implies universal submersiveness of an affine invariant quotient. Apply the general geometric property of adequate moduli spaces, before composing with the fppf presentation.",
+   "via": [
+    "lem-sfb-power-lifting-quotient-submersive",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-adequate-moduli-universally-submersive",
+  "worker": "stage1",
+  "summary": "Retained the exact statement and all inherited provenance/searches. Reused the existing general adequate-moduli topological-images node and the smooth-presentation/base-change-of-images node rather than creating duplicate geometric lemmas. Wrote out surjectivity after arbitrary algebraic-space base change and the elementary closed-surjection quotient-topology argument. Read Alper Theorem 5.3.1 and Proposition 5.2.9 online and Stacks 04XH/04XL locally; five actual new item searches found no complete Mathlib match. No new nodes or Lean changes.",
+  "blueprint": "The inherited from.place locates this as the universal-submersiveness prerequisite for the affine invariant quotient in det-thm-sf-ctf-stability-direct-images proof (3). The split retains that route and inherited null ancestor (blueprint_refs.py ancestor reports None); it only assembles existing same-unit geometric inputs. Whole-blueprint searches for adequate moduli, universally submersive, 5.2.9 and closed substack found no blueprint equivalent."
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q98-70cbb47f5",
+  "group": "Q98",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q98-70cbb47f5 (reviewer sub-agent of L); spot-checked: I read Alper arXiv:1005.2398v3 Thm 5.3.1 and its proof (pp.29-30, arXiv PDF; there is no local copy, so WANTED is correct). Alper says (3) follows from (1),(2). The item statement is unchanged and not weakened. Step 1: topological-images gives |phi| surjective; smooth-presentation-closed-subsets says images commute with base change for any algebraic stacks (spaces are stacks), so the base-changed map is surjective; the same node gives continuity and atlas independence (Stacks 04XH/04XL checked locally). Step 2: topological-images states closedness for every algebraic-space T->Y, applied to the original phi with no adequacy claim for the base change. Step 3: surjective + closed => quotient, genuinely elementary. No new nodes, no cycle (only the parent cites the item), both cited nodes in the same unit, no SGA. Advisory: the earlier node lem-sfb-adequate-geometric-fibres-submersion (Q70) already contains the item's conclusion; this overlap is not introduced by this delivery. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.AdequateModuliUniversallySubmersive",
+  "declaration": "CategoryTheory.adequate_moduli_universally_submersive",
+  "file": "lean/Sheaf/AlgebraicGeometry/AdequateModuliUniversallySubmersive.lean",
+  "statement": "theorem adequate_moduli_universally_submersive (k : Type u) [Field k] (F : BasedCategory.{v, w} (Over (Spec (.of k)))) (hF : IsAlgebraicModuliStack F) (Y : AlgebraicSpace (Spec (.of k))) (φ : BasedFunctor F (discreteModuli Y.obj.obj)) (hφ : IsAdequateModuliSpace F hF Y φ) : ∀ (T : AlgebraicSpace (Spec (.of k))) (g : T ⟶ Y), Function.Surjective (moduliPointMap (moduliTwoFiberSnd φ (discreteModuliMap g.hom.hom))) ∧ ∀ V : Set (ModuliPoints (discreteModuli T.obj.obj)), @IsOpen _ (moduliPointTopologicalSpace (discreteModuli T.obj.obj)) V ↔ @IsOpen _ (moduliPointTopologicalSpace (moduliTwoFiberProduct φ (discreteModuliMap g.hom.hom))) (moduliPointMap (moduliTwoFiberSnd φ (discreteModuliMap g.hom.hom)) ⁻¹' V)",
+  "branch": "sheaf-dag",
+  "by": "NH",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-ed99f794d",
+  "group": "NH",
+  "result": "pass",
+  "note": "Re-delivery of returned ba4c34: H2/H4 fixed as asked (theorem stmt_dep replaced by the landed def node def-sfb-stack-point-topological-space; moduliPointTopologicalSpace on both IsOpen sides; lean.statement verbatim with the file, python check). Node diff vs side-live: only the lean record plus 3 landed def stmt_deps (stack-point-topology, open-moduli-substack, dm-stack-morphism-properties), allowed by brief l.177. Clauses match: field, adequate φ with binders identical to topological-images, arbitrary non-flat T→Y, surjectivity of the canonical 2-fibre second projection, open iff preimage open; no extra hypotheses; universes bound. No defs, sorry only, docstrings with source and blueprint, proof imports non-public. Advisories: same-session second reading; stable-pointed-groupoids decls reached transitively; stage-3 bridge moduliSmoothPointTopology = moduliPointTopologicalSpace."
+ }
+}

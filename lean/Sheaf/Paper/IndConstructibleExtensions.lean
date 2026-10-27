@@ -16,6 +16,7 @@ import Sheaf.Paper.ConstructibleExtContinuity
 import Sheaf.Paper.CoefficientHeartClosure
 import Sheaf.Paper.IndHeartFullFaithfulness
 import Mathlib.CategoryTheory.Abelian.GrothendieckAxioms.Connected
+import Mathlib.Order.CompletePartialOrder
 
 /-!
 # Extensions of ind-constructible module sheaves

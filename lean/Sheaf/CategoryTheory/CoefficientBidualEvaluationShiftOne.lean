@@ -6,6 +6,7 @@ Authors: SHEAF groups Q7, P1
 module
 
 public import Sheaf.Algebra.Homology.RingedInternalHomShiftOfUniverses
+public import Sheaf.CategoryTheory.RingedSiteDualityMaps
 import all Sheaf.Algebra.Homology.RingedInternalHomShiftOfUniverses
 import all Sheaf.CategoryTheory.RingedSiteDualityMaps
 import Sheaf.Algebra.Homology.SignedDoubleHomCone

@@ -1,0 +1,385 @@
+{
+ "id": "lem-sfb-flat-derived-coherator-interchange",
+ "kind": "statement",
+ "title": "Flat direct image and the derived coherator: normalized interchange",
+ "statement": "Let $f:Z\\to Y$ be a flat quasi-compact quasi-separated morphism of schemes [def-pc-scheme, def-weil-flat-morphism, def-weil-quasi-separated-morphism]; quasi-compact means that inverse images of affine opens are quasi-compact [def-weil-pbc-quasi-compact-scheme]. Write $\\mathcal A_T=\\operatorname{QCoh}(\\mathcal O_T)$, and let $I_T\\dashv C_T$ with unit $e_T$ and counit $d_T$ be [lem-sfb-scheme-derived-coherator-adjunction] for $T=Z,Y$. All derived categories are unbounded. Let $P_f:D(\\mathcal A_Y)\\to D(\\mathcal A_Z)$ be termwise tensor pullback, and let $R_f=Rf_*:D(\\mathcal O_Z)\\to D(\\mathcal O_Y)$ be module derived direct image [def-pc-module-pullback, def-pc-derived-direct-image]. The functor $f_*:\\mathcal A_Z\\to\\mathcal A_Y$ has a total right derived functor $\\Phi_f$ [def-sfb-right-derived-functor], and $P_f\\dashv\\Phi_f$; write $u_f:\\operatorname{id}\\to\\Phi_fP_f$ for its induced derived unit. Tensor pullback on all modules is exact and its derived functor is left adjoint to $R_f$, with unit $v_f$. There is a canonical natural isomorphism $\\lambda:C_YR_f\\xrightarrow{\\sim}\\Phi_fC_Z$, obtained by identifying these as right adjoints to $I_ZP_f=f^*I_Y$. All these functors and adjunctions carry the canonical triangulated and shift-compatible structures. Suppose $c:I_Y\\Phi_f\\xrightarrow{\\sim}R_fI_Z$ is a natural isomorphism whose composite with the localized right-derived comparison unit of $f_*$ is the canonical module-derived comparison, computed using a K-injective module resolution. Then, with composition read right to left and the exact pullback/inclusion identifications understood, one has for all $B\\in D(\\mathcal A_Z)$, $E\\in D(\\mathcal O_Z)$ and $H\\in D(\\mathcal A_Y)$:\n$$\\lambda_{I_ZB}\\circ C_Y(c_B)\\circ e_Y(\\Phi_fB)=\\Phi_f(e_Z(B)),$$\n$$d_Y(R_fE)=R_f(d_Z(E))\\circ c_{C_ZE}\\circ I_Y(\\lambda_E),$$\n$$c_{P_fH}\\circ I_Y(u_f(H))=v_f(I_YH).$$\nIn particular these assertions apply when $Y$ is quasi-compact and quasi-separated and $f$ is the inclusion of any affine open of $Y$ [def-weil-open-immersion].",
+ "source": {
+  "document": "literature/stacks-project/perfect.tex",
+  "place": "Tag 08D8, perfect-lemma-flat-pushforward-coherator, statement and the four Hom identifications in its proof. The three displayed identities are the adjunction-normalized refinement of that comparison, needed for the adjunction maps in Tag 09T6."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-flat-morphism",
+  "def-weil-quasi-separated-morphism",
+  "def-weil-pbc-quasi-compact-scheme",
+  "lem-sfb-scheme-derived-coherator-adjunction",
+  "def-pc-module-pullback",
+  "def-pc-derived-direct-image",
+  "def-sfb-right-derived-functor",
+  "def-weil-open-immersion"
+ ],
+ "proof": [
+  {
+   "text": "By the quasi-coherent pushforward theorem, $f_*$ restricts to $F:\\mathcal A_Z\\to\\mathcal A_Y$, since $f$ is quasi-compact and quasi-separated. Pullback preserves quasi-coherence and is exact on all modules because $f$ is flat. Exactness of the inclusions therefore makes its restriction $P^0:\\mathcal A_Y\\to\\mathcal A_Z$ exact as well. Fullness of these abelian subcategories restricts the ordinary module Hom bijection to $P^0\\dashv F$. Thus $i_ZP^0=f^*i_Y$ and $i_YF=f_*i_Z$, and these two identifications respect adjuncts: a module map and its transpose are literally the same maps as in the full quasi-coherent subcategories.",
+   "uses": [
+    "pqf-lem-pushforward-qcoh",
+    "lem-weil-pbc-module-pullback-quasi-coherent",
+    "lem-weil-pbc-flat-module-pullback-exact-pushforward-injective",
+    "lem-sfb-qcoh-grothendieck-generators",
+    "def-pc-module-pullback"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/perfect.tex",
+    "place": "Tag 08D8, lemma-flat-pushforward-coherator, first two proof paragraphs; schemes.tex Tag 01LC and modules.tex Tags 01BG, 02N4"
+   }
+  },
+  {
+   "text": "Both $\\mathcal A_Z$ and the scheme module category $\\mathcal M_Z$ are Grothendieck abelian, so every complex in either category has a K-injective resolution. Applying $F$ degreewise induces an exact functor on homotopy categories: it takes the cone of $a$ to the cone of $F(a)$ because an additive functor preserves the finite biproducts and signed matrices defining a cone. The enough-K-injectives theorem therefore gives its total unbounded right derived functor $\\Phi_f$, computed by $F(J)$ on K-injective $J$. The exact-functor factorization gives the termwise derived $P_f$, and the derived-adjunction theorem applied to $P^0\\dashv F$ gives $P_f\\dashv\\Phi_f$ with its induced unit $u_f$. Use the module derived adjunction for $f^*\\dashv f_*$; flat exactness identifies its left functor with termwise $f^*$, giving the stated unit $v_f$.",
+   "uses": [
+    "lem-sfb-qcoh-grothendieck-generators",
+    "lem-pc-scheme-modules-grothendieck-abelian",
+    "lem-weil-pbc-kinjective-functorial-existence",
+    "lem-weil-pbc-kinjective-total-derived",
+    "lem-weil-pbc-exact-functor-derived-factorization",
+    "lem-pc-derived-adjoint-functors",
+    "lem-pc-ringed-spaces-derived-adjoint"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/perfect.tex",
+    "place": "Tag 08D8, proof paragraphs constructing Phi and the two derived pullback adjunctions; injectives.tex Tag 079P; derived.tex Tags 070K, 070Y, 09T5"
+   }
+  },
+  {
+   "text": "Write $K=f^*$ on the module derived categories, $P=P_f$, $\\Phi=\\Phi_f$, $R=R_f$, and write $w:P\\Phi\\to\\operatorname{id}$ and $\\epsilon:KR\\to\\operatorname{id}$ for the two counits. Compose adjunction Hom bijections to obtain, for $H\\in D(\\mathcal A_Y)$ and $E\\in D(\\mathcal O_Z)$,\n$$\\operatorname{Hom}(H,C_YRE)\\cong\\operatorname{Hom}(I_YH,RE)\\cong\\operatorname{Hom}(KI_YH,E)=\\operatorname{Hom}(I_ZPH,E)\\cong\\operatorname{Hom}(PH,C_ZE)\\cong\\operatorname{Hom}(H,\\Phi C_ZE).$$\nThe composite-adjunction definition gives these as two adjunctions to $I_ZP=KI_Y$. Uniqueness of right adjoints gives their canonical natural isomorphism $\\lambda:C_YR\\xrightarrow{\\sim}\\Phi C_Z$. Its defining counit equation, using that definition, is\n$$d_Z(E)\\,I_Z(w_{C_ZE})\\,I_ZP(\\lambda_E)=\\epsilon_E\\,K(d_Y(RE)).\\tag{*}$$\nHere and below juxtaposition denotes composition read right to left.",
+   "uses": [
+    "lem-sfb-scheme-derived-coherator-adjunction",
+    "def-weil-pbc-composite-adjunction",
+    "det-sp-unique-right-adjoint"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/perfect.tex",
+    "place": "Tag 08D8, four Hom identifications in the last proof paragraph; categories.tex Tag 0037, adjunction formulas"
+   }
+  },
+  {
+   "text": "Apply the exact-square right-derived-unit theorem with $F=f_*|_{\\mathcal A_Z}$, $G=f_*$ on modules, $U=i_Z$ and $V=i_Y$, and with the identity ordinary square $i_YF=Gi_Z$. The inclusions are exact, and both source categories have K-injective resolutions by step 2. It follows that $I_Y\\Phi$, with its localized comparison unit, is a right derived functor of $i_YF$. The assumed normalization of $c$ is precisely the characterizing equation for the theorem's unique comparison $b:I_Y\\Phi\\to RI_Z$. Consequently $c=b$. Now apply the normalized derived-adjoint-square theorem to the ordinary compatible adjunction square of step 1, with $L=P^0$, $R=F$, $L_0=f^*$, $R_0=f_*$, $V=i_Z$ and $W=i_Y$. Its unit equation gives\n$$c_{PH}\\,I_Y(u_f(H))=v_f(I_YH),$$\nand its counit equation gives\n$$I_Z(w_B)=\\epsilon_{I_ZB}\\,K(c_B).\\tag{**}$$\nThis proves the third requested identity and pins down the counit needed below. The comparison theorem does not require $i_Z$ to preserve K-injectives.",
+   "uses": [
+    "lem-sfb-exact-square-right-derived-unit",
+    "lem-kun-derived-adjoint-square-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 09T5, lemma-derived-adjoint-functors, with Tag 070Y; normalized exact-square consequences stated in the two cited nodes"
+   }
+  },
+  {
+   "text": "For the first identity, apply the Hom bijection in step 3 at $H=\\Phi B$ and $E=I_ZB$ to the map $C_Y(c_B)e_Y(\\Phi B):\\Phi B\\to C_YRI_ZB$. Its successive inverse transposes first give $c_B:I_Y\\Phi B\\to RI_ZB$ (the $I_Y\\dashv C_Y$ triangle identity), and then $\\epsilon_{I_ZB}K(c_B)=I_Z(w_B)$ by (**). On the other side, the inverse transpose of $\\Phi(e_Z(B)):\\Phi B\\to\\Phi C_ZI_ZB$ under $P\\dashv\\Phi$ is $e_Z(B)w_B$, by counit naturality. Its further inverse transpose under $I_Z\\dashv C_Z$ is $d_Z(I_ZB)I_Z(e_Z(B))I_Z(w_B)=I_Z(w_B)$ by the triangle identity. Since $\\lambda$ identifies these two Hom bijections, their common inverse transpose proves\n$$\\lambda_{I_ZB}\\,C_Y(c_B)\\,e_Y(\\Phi B)=\\Phi(e_Z(B)).$$",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/perfect.tex",
+    "place": "Tag 08D8, explicit evaluation of the four Hom identifications on e_Y; categories.tex Tag 0037, counit naturality and triangle identities"
+   }
+  },
+  {
+   "text": "For the second identity, take inverse transposes under $K\\dashv R$. The inverse transpose of $d_Y(RE)$ is $\\epsilon_EK(d_Y(RE))$. The inverse transpose of $R(d_Z(E))c_{C_ZE}I_Y(\\lambda_E)$ is, by naturality of $\\epsilon$,\n$$d_Z(E)\\,\\epsilon_{I_ZC_ZE}\\,K(c_{C_ZE})\\,KI_Y(\\lambda_E).$$\nUsing (**) with $B=C_ZE$ and $KI_Y=I_ZP$, this becomes $d_Z(E)I_Z(w_{C_ZE})I_ZP(\\lambda_E)$, which equals the first inverse transpose by (*). Injectivity of the adjunction Hom bijection proves exactly\n$$d_Y(RE)=R(d_Z(E))\\,c_{C_ZE}\\,I_Y(\\lambda_E).$$",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/perfect.tex",
+    "place": "Tag 08D8, explicit evaluation of the composite counits; categories.tex Tag 0037, inverse transpose and naturality"
+   }
+  },
+  {
+   "text": "The exact-functor factorization equips $I_T$, $P$ and $K$ with their canonical triangulated structures and integer-shift comparisons. The K-injective right-derived-functor theorem supplies those structures for $C_T$, $\\Phi$ and $R$. The coherator node already includes compatibility of $e_T,d_T$ with shifts. Apply canonical right-derived adjunction shift compatibility to the exact left adjoints $P^0$ and $f^*$ to obtain the same compatibility for $u_f,w,v_f,\\epsilon$, retaining the fixed K-injective shifts. Finally the composite Hom bijections commute with shifts, because each of their units and counits does. Their defining characterization of $\\lambda$ then gives its shift compatibility: shifting either inverse transpose produces the same shifted map. Thus all constructions use the canonical structures appearing in the statement.",
+   "uses": [
+    "lem-weil-pbc-exact-functor-derived-factorization",
+    "lem-pc-right-derived-functor-triangulated",
+    "lem-sfb-scheme-derived-coherator-adjunction",
+    "lem-sp-canonical-right-derived-adjunction-shift"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tags 014X, 015F, 070K, 070Y, 09T5; canonical shift compatibility as stated in lem-sp-canonical-right-derived-adjunction-shift"
+   }
+  },
+  {
+   "text": "Let $j:U\\hookrightarrow Y$ be an affine open with $Y$ qcqs. Both $U$ and every affine open $V\\subseteq Y$ are quasi-compact. The quasi-separated-intersection theorem makes $j^{-1}(V)=U\\cap V$ quasi-compact; this is precisely quasi-compactness of $j$. By the open-immersion definition its stalk maps are isomorphisms, so are flat. Its diagonal $U\\to U\\times_YU$ is an isomorphism: the inverse is either projection, since a map into the fibre product is a pair of maps into $U$ agreeing in the open subspace of $Y$, hence an equal pair. The diagonal is consequently quasi-compact, and $j$ is quasi-separated. All hypotheses already used for $f$ hold for $j$, including the empty affine open. This proves the final specialization.",
+   "uses": [
+    "lem-weil-pbc-affine-scheme-qcqs",
+    "pqf-lem-qs-intersection-qc",
+    "def-weil-open-immersion",
+    "def-weil-flat-morphism",
+    "def-weil-quasi-separated-morphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/perfect.tex",
+    "place": "Tag 09T6, lemma-argument-proves, application of Tag 08D8 to an affine open; schemes.tex Tag 01KO, quasi-compact intersections"
+   }
+  }
+ ],
+ "proof_deps": [
+  "pqf-lem-pushforward-qcoh",
+  "lem-weil-pbc-module-pullback-quasi-coherent",
+  "lem-weil-pbc-flat-module-pullback-exact-pushforward-injective",
+  "lem-sfb-qcoh-grothendieck-generators",
+  "def-pc-module-pullback",
+  "lem-pc-scheme-modules-grothendieck-abelian",
+  "lem-weil-pbc-kinjective-functorial-existence",
+  "lem-weil-pbc-kinjective-total-derived",
+  "lem-weil-pbc-exact-functor-derived-factorization",
+  "lem-pc-derived-adjoint-functors",
+  "lem-pc-ringed-spaces-derived-adjoint",
+  "lem-sfb-scheme-derived-coherator-adjunction",
+  "def-weil-pbc-composite-adjunction",
+  "det-sp-unique-right-adjoint",
+  "lem-sfb-exact-square-right-derived-unit",
+  "lem-kun-derived-adjoint-square-comparison",
+  "lem-pc-right-derived-functor-triangulated",
+  "lem-sp-canonical-right-derived-adjunction-shift",
+  "lem-weil-pbc-affine-scheme-qcqs",
+  "pqf-lem-qs-intersection-qc",
+  "def-weil-open-immersion",
+  "def-weil-flat-morphism",
+  "def-weil-quasi-separated-morphism"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/perfect.tex",
+  "place": "Tag 08D8, lemma-flat-pushforward-coherator; agent expansion of adjunction-normalized unit and counit identities for Tag 09T6"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "coherator|[Dd]erived.*[Aa]djunction|[Aa]djunction.*[Dd]erived",
+   "results": "4 hits: Mathlib/CategoryTheory/Functor/Derived/Adjunction.lean, Mathlib/CategoryTheory/Functor/Derived/Adjunction.lean, Mathlib/CategoryTheory/Functor/Derived/Adjunction.lean, Mathlib/CategoryTheory/Functor/Derived/Adjunction.lean",
+   "date": "2026-10-23",
+   "verdict": "no match: read the hits; abstract localization, adjunction uniqueness and derived-adjunction constructions do not construct the scheme quasi-coherator or establish its geometric comparisons; quasi-coherent local-presentation and ordinary module adjunction declarations do not state this unbounded comparison."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"rightAdjointUniq\"",
+   "results": "12 hits: CategoryTheory.Adjunction.rightAdjointUniq, CategoryTheory.Adjunction.rightAdjointUniq_refl, CategoryTheory.Adjunction.rightAdjointUniq_inv_app, CategoryTheory.Adjunction.rightAdjointUniq_hom_counit, CategoryTheory.Adjunction.unit_rightAdjointUniq_hom, CategoryTheory.Adjunction.rightAdjointUniq_trans, CategoryTheory.Adjunction.rightAdjointUniq_trans_app, CategoryTheory.Adjunction.unit_rightAdjointUniq_hom_app",
+   "date": "2026-10-23",
+   "verdict": "no match: read the hits; abstract localization, adjunction uniqueness and derived-adjunction constructions do not construct the scheme quasi-coherator or establish its geometric comparisons; quasi-coherent local-presentation and ordinary module adjunction declarations do not state this unbounded comparison."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Flat morphism derived pushforward commutes with derived quasi coherator with compatible adjunction units and counits",
+   "results": "8 hits: CategoryTheory.Adjunction.derived_unit, CategoryTheory.Adjunction.derivedε, SheafOfModules.pushforwardPushforwardAdj, CategoryTheory.Adjunction.derivedη.congr_simp, CategoryTheory.Adjunction.derivedη_fac_app, CategoryTheory.Adjunction.derivedη_fac_app_assoc, CategoryTheory.Adjunction.derivedη, SheafOfModules.pushforwardPushforwardAdj_unit_app_val_app",
+   "date": "2026-10-23",
+   "verdict": "no match: read the hits; abstract localization, adjunction uniqueness and derived-adjunction constructions do not construct the scheme quasi-coherator or establish its geometric comparisons; quasi-coherent local-presentation and ordinary module adjunction declarations do not state this unbounded comparison."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a flat quasi compact quasi separated scheme morphism the derived coherator commutes with right derived pushforward as the unique isomorphism of right adjoints",
+   "results": "8 hits: SheafOfModules.instIsRightAdjointPushforwardCompSheafRingCatMapSheafPushforwardContinuous, SheafOfModules.pushforwardPushforwardAdj, CategoryTheory.Functor.pushforwardContinuousSheafificationCompatibility, CategoryTheory.Functor.pushforwardContinuousSheafificationCompatibility_hom_app_val, SheafOfModules.pushforwardComp, SheafOfModules.pushforwardPushforwardAdj_counit_app_val_app, SheafOfModules.pushforwardNatIso, SheafOfModules.pushforwardPushforwardAdj_unit_app_val_app",
+   "date": "2026-10-23",
+   "verdict": "no match: read the hits; abstract localization, adjunction uniqueness and derived-adjunction constructions do not construct the scheme quasi-coherator or establish its geometric comparisons; quasi-coherent local-presentation and ordinary module adjunction declarations do not state this unbounded comparison."
+  },
+  {
+   "tool": "grep",
+   "query": "coherator|QCoh.*[Aa]djoint|[Aa]djoint.*QCoh",
+   "results": "0 hits: ",
+   "date": "2026-10-23",
+   "verdict": "no match: ordinary module pushforward, abstract derived adjunctions and uniqueness of right adjoints do not state this scheme derived coherator comparison or its normalized identities; read Modules/Sheaf.lean, Adjunction/Unique.lean and Functor/Derived/Adjunction.lean."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived pushforward along a flat scheme morphism commutes with the right derived quasi coherator",
+   "results": "8 hits: AlgebraicGeometry.Scheme.Modules.pushforward, AlgebraicGeometry.Scheme.Modules.pushforwardComp, AlgebraicGeometry.Scheme.Modules.pushforward_map_app, PresheafOfModules.pushforward₀, AlgebraicGeometry.Scheme.Modules.pseudofunctor_map_r, SheafOfModules.pushforwardComp, AlgebraicGeometry.Scheme.Modules.instIsRightAdjointPushforward, AlgebraicGeometry.Flat.stalkMap",
+   "date": "2026-10-23",
+   "verdict": "no match: ordinary module pushforward, abstract derived adjunctions and uniqueness of right adjoints do not state this scheme derived coherator comparison or its normalized identities; read Modules/Sheaf.lean, Adjunction/Unique.lean and Functor/Derived/Adjunction.lean."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"coherator\"",
+   "results": "0 hits: ",
+   "date": "2026-10-23",
+   "verdict": "no match: ordinary module pushforward, abstract derived adjunctions and uniqueness of right adjoints do not state this scheme derived coherator comparison or its normalized identities; read Modules/Sheaf.lean, Adjunction/Unique.lean and Functor/Derived/Adjunction.lean."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Flat quasi compact quasi separated scheme pushforward commutes with the unbounded derived quasi coherator with adjunction units and counits",
+   "results": "8 hits: AlgebraicGeometry.Scheme.Modules.instIsRightAdjointPushforward, AlgebraicGeometry.Scheme.Modules.pushforwardComp, AlgebraicGeometry.Scheme.Modules.pushforwardComp_hom_app_app, AlgebraicGeometry.Scheme.Modules.pullbackPushforwardAdjunction, SheafOfModules.pushforwardPushforwardAdj, SheafOfModules.pushforwardPushforwardAdj_counit_app_val_app, SheafOfModules.pushforwardPushforwardAdj_unit_app_val_app, SheafOfModules.pullbackPushforwardAdjunction_homEquiv_symm_unitToPushforwardObjUnit",
+   "date": "2026-10-23",
+   "verdict": "no match: ordinary module pushforward, abstract derived adjunctions and uniqueness of right adjoints do not state this scheme derived coherator comparison or its normalized identities; read Modules/Sheaf.lean, Adjunction/Unique.lean and Functor/Derived/Adjunction.lean."
+  },
+  {
+   "tool": "grep",
+   "query": "rightAdjointUniq_hom_counit|unit_rightAdjointUniq_hom|derivedη_fac_app|def derived",
+   "results": "17 hits: Mathlib/CategoryTheory/Adjunction/Unique.lean, Mathlib/CategoryTheory/Adjunction/Unique.lean, Mathlib/CategoryTheory/Adjunction/Unique.lean, Mathlib/CategoryTheory/Functor/Derived/Adjunction.lean, Mathlib/CategoryTheory/Functor/Derived/Adjunction.lean, Mathlib/CategoryTheory/Functor/Derived/Adjunction.lean, Mathlib/CategoryTheory/Functor/Derived/Adjunction.lean, Mathlib/CategoryTheory/Functor/Derived/Adjunction.lean",
+   "date": "2026-10-23",
+   "verdict": "no match: ordinary module pushforward, abstract derived adjunctions and uniqueness of right adjoints do not state this scheme derived coherator comparison or its normalized identities; read Modules/Sheaf.lean, Adjunction/Unique.lean and Functor/Derived/Adjunction.lean."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"rightAdjointUniq\"",
+   "results": "12 hits: CategoryTheory.Adjunction.rightAdjointUniq, CategoryTheory.Adjunction.rightAdjointUniq_refl, CategoryTheory.Adjunction.rightAdjointUniq_inv_app, CategoryTheory.Adjunction.rightAdjointUniq_hom_counit, CategoryTheory.Adjunction.unit_rightAdjointUniq_hom, CategoryTheory.Adjunction.rightAdjointUniq_trans, CategoryTheory.Adjunction.rightAdjointUniq_trans_app, CategoryTheory.Adjunction.unit_rightAdjointUniq_hom_app",
+   "date": "2026-10-23",
+   "verdict": "no match: ordinary module pushforward, abstract derived adjunctions and uniqueness of right adjoints do not state this scheme derived coherator comparison or its normalized identities; read Modules/Sheaf.lean, Adjunction/Unique.lean and Functor/Derived/Adjunction.lean."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Compatibility of derived adjunctions with the inclusion of quasi coherent sheaves and its right adjoint",
+   "results": "8 hits: CategoryTheory.Sheaf.adjunction, SheafOfModules.pushforwardPushforwardAdj, SheafOfModules.PullbackConstruction.adjunction, CategoryTheory.instIsIsoFunctorOppositeSheafSheafComposeNatTrans, CategoryTheory.sheafComposeNatIso, CategoryTheory.Functor.sheafAdjunctionCocontinuous_homEquiv_apply_val, CategoryTheory.sheafComposeNatTrans, CategoryTheory.sheafComposeNatTrans_fac",
+   "date": "2026-10-23",
+   "verdict": "no match: ordinary module pushforward, abstract derived adjunctions and uniqueness of right adjoints do not state this scheme derived coherator comparison or its normalized identities; read Modules/Sheaf.lean, Adjunction/Unique.lean and Functor/Derived/Adjunction.lean."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-affine-open-derived-qcoh-criterion",
+  "date": "2026-10-24",
+  "group": "N0"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Knudsen forgetful morphism as the universal stable curve. Section 1, Theorem 1.8, Corollaries 1.9 and 1.11; Section 2, Proposition 2.1 (printed pp.172--175): degree-zero logarithmic components and their section-algebra contraction. Independent prerequisite: Flat finitely presented relative image from an acyclic section algebra. Finite-presentation argument: detect pseudo-coherence of the projective-space direct image by its finitely many derived twists (Stacks 0CSG). Proof of Stacks 0CSG (5) => (1): the equivalence from 0BQU and its RHom inverse. Generator input in the proof of Tag 0BQU, after the self-Ext calculation. Input to Tag 0A9V: 0BQR, lemma-nonzero-some-cohomology. Proof of Tag 0BQR, first paragraph: represent K by a complex of quasi-coherent modules using Tag 08DB. Prerequisite of the 08DB argument: Tag 09T6, affine-open derived-pushforward comparison criterion. Tag 09T6 proof: Tag 08D8, perfect-lemma-flat-pushforward-coherator, statement and the four Hom identifications in its proof. The three displayed identities are the adjunction-normalized refinement of that comparison, needed for the adjunction maps in Tag 09T6.",
+   "via": [
+    "lem-sfb-affine-open-derived-qcoh-criterion",
+    "lem-sfb-qc-separated-quasicoherent-complex-model",
+    "lem-sfb-ample-twist-hypercohomology-detection",
+    "lem-sfb-projective-negative-twists-generator",
+    "lem-sfb-projective-space-tilting-equivalence",
+    "lem-sfb-projective-space-pseudocoherence-twist-test",
+    "lem-sfb-relative-section-image-flat-fp",
+    "lem-sfb-log-canonical-deletion-algebra",
+    "lem-sfb-knudsen-pointed-forgetful-universal-curve",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-flat-derived-coherator-interchange",
+  "worker": "stage1",
+  "summary": "Followed Stacks 08D8, constructing the two derived adjunctions and the right-adjoint comparison from existing DAG nodes. Used the existing normalized exact-square comparison to identify the supplied c, then computed the first two identities by inverse transposes and triangle identities. Checked canonical shifts and the affine-open hypotheses. Statement unchanged; no new nodes.",
+  "blueprint": "Realizes the inherited from.place: Tag 09T6 prerequisite of the 08DB complex-model argument, by the four Hom identifications of Tag 08D8 and their adjunction normalization. The ancestor command returns None, as already recorded on the live item; retained the inherited null ancestor and via chain. Whole-blueprint searches coherator flat and coherator pushforward found no duplicate.",
+  "tool_uses": [
+   {
+    "node": "pqf-lem-pushforward-qcoh",
+    "why": "Generic tool: Pushforward of quasi-coherent modules. Used as stated in the explicit adjunction argument; the unit has no replacement for this categorical or quasi-coherent prerequisite."
+   },
+   {
+    "node": "lem-weil-pbc-module-pullback-quasi-coherent",
+    "why": "Generic tool: The pullback of a quasi-coherent module is quasi-coherent. Used as stated in the explicit adjunction argument; the unit has no replacement for this categorical or quasi-coherent prerequisite."
+   },
+   {
+    "node": "lem-weil-pbc-flat-module-pullback-exact-pushforward-injective",
+    "why": "Generic tool: Flat module pullback is exact and direct image preserves injectives. Used as stated in the explicit adjunction argument; the unit has no replacement for this categorical or quasi-coherent prerequisite."
+   },
+   {
+    "node": "lem-weil-pbc-kinjective-functorial-existence",
+    "why": "Generic tool: Functorial K-injective replacement. Used as stated in the explicit adjunction argument; the unit has no replacement for this categorical or quasi-coherent prerequisite."
+   },
+   {
+    "node": "lem-weil-pbc-kinjective-total-derived",
+    "why": "Generic tool: Enough K-injectives compute total right derived functors. Used as stated in the explicit adjunction argument; the unit has no replacement for this categorical or quasi-coherent prerequisite."
+   },
+   {
+    "node": "lem-pc-derived-adjoint-functors",
+    "why": "Generic tool: Derived functors of adjoint functors are adjoint. Used as stated in the explicit adjunction argument; the unit has no replacement for this categorical or quasi-coherent prerequisite."
+   },
+   {
+    "node": "lem-pc-ringed-spaces-derived-adjoint",
+    "why": "Generic tool: Derived pullback is left adjoint to derived direct image. Used as stated in the explicit adjunction argument; the unit has no replacement for this categorical or quasi-coherent prerequisite."
+   },
+   {
+    "node": "lem-kun-derived-adjoint-square-comparison",
+    "why": "Generic tool: Canonical right-derived comparison respects an exact adjoint square. Used as stated in the explicit adjunction argument; the unit has no replacement for this categorical or quasi-coherent prerequisite."
+   },
+   {
+    "node": "lem-pc-right-derived-functor-triangulated",
+    "why": "Generic tool: The unbounded right derived functor is triangulated. Used as stated in the explicit adjunction argument; the unit has no replacement for this categorical or quasi-coherent prerequisite."
+   },
+   {
+    "node": "lem-sp-canonical-right-derived-adjunction-shift",
+    "why": "Generic tool: Canonical unbounded right-derived adjunctions commute with canonical shifts. Used as stated in the explicit adjunction argument; the unit has no replacement for this categorical or quasi-coherent prerequisite."
+   },
+   {
+    "node": "pqf-lem-qs-intersection-qc",
+    "why": "Generic tool: Intersections of quasi-compact opens. Used as stated in the explicit adjunction argument; the unit has no replacement for this categorical or quasi-coherent prerequisite."
+   },
+   {
+    "node": "lem-pc-scheme-modules-grothendieck-abelian",
+    "why": "Provides Grothendieck abelianness of the Zariski module category, so that the existing general K-injective existence theorem applies. The unit has no replacement for this resolution prerequisite."
+   }
+  ]
+ },
+ "tool_uses": [
+  "pqf-lem-pushforward-qcoh",
+  "lem-weil-pbc-module-pullback-quasi-coherent",
+  "lem-weil-pbc-flat-module-pullback-exact-pushforward-injective",
+  "lem-weil-pbc-kinjective-functorial-existence",
+  "lem-weil-pbc-kinjective-total-derived",
+  "lem-pc-derived-adjoint-functors",
+  "lem-pc-ringed-spaces-derived-adjoint",
+  "lem-kun-derived-adjoint-square-comparison",
+  "lem-pc-right-derived-functor-triangulated",
+  "lem-sp-canonical-right-derived-adjunction-shift",
+  "pqf-lem-qs-intersection-qc",
+  "lem-pc-scheme-modules-grothendieck-abelian"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q32-20aa1f48d",
+  "group": "Q32",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q32-20aa1f48d (reviewer sub-agent of L); spot-checked: I read the item (8 steps, no new nodes; statement, stmt_deps and blueprint byte-identical to live) against Stacks perfect.tex 08D8. The hypotheses match (flat qcqs, unbounded categories) and QCoh and Mod are kept distinct. lambda: C_Y R_f ≅ Phi C_Z comes from uniqueness of right adjoints to I_Z P = f^* I_Y, as in 08D8. Step 3: with the counit order of the composite-adjunction node, det-sp-unique-right-adjoint gives (*). Step 4: the exact-square node (A=QCoh_Z, A'=Mod_Z, U=i_Z, V=i_Y, c identity) characterizes c uniquely, so c=b of lem-kun-derived-adjoint-square-comparison (L=P^0, L_0=f^*, a and c identities, L and L_0 exact). Its unit formula is the third identity and its counit formula is (**), both in the stated orientations. Steps 5-6: I checked the transposition calculations by hand (triangle identities, naturality of d_Y and w, (**) at B=C_Z E, then (*)). Step 7: the shift node needs K-injectives on QCoh_Z and Mod_Z, which both have. Step 8: U∩V is quasi-compact by the qs-intersection node, stalk maps are isomorphisms, and the diagonal is an isomorphism because an open immersion is a monomorphism; no affineness of intersections is assumed. Edge cases f=id, empty open and non-separated Y all hold. proof_deps equals the union of uses, there is no cycle, no SGA, not superseded on live, and no repair note. The 12 declared generic tool uses are accepted. Batch-5 finding: lem-trf-localization-essentially-surjective is a Mathlib leaf (localization is essentially surjective), generic category theory and no part of the trace-formula or Poincaré-duality statements or proofs, so the citation stands. One remark only: the 'defined at' versus universal-property total-derived identification in step 2 is the DAG-wide convention justified by 070K."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.FlatDerivedCoheratorInterchange",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.exists_flatDerivedCoheratorInterchange",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.Modules.flatCoheratorPullback",
+   "AlgebraicGeometry.Scheme.Modules.flatCoheratorPushforward",
+   "AlgebraicGeometry.Scheme.Modules.flatCoheratorLocalizedUnit",
+   "AlgebraicGeometry.Scheme.Modules.flatCoheratorRightAdjointComparison",
+   "AlgebraicGeometry.Scheme.Modules.FlatCoheratorInterchangeIdentities",
+   "AlgebraicGeometry.Scheme.Modules.FlatDerivedCoheratorInterchangeData",
+   "AlgebraicGeometry.Scheme.Modules.flatDerivedCoheratorInterchangeType",
+   "AlgebraicGeometry.Scheme.Modules.exists_flatDerivedCoheratorInterchange",
+   "AlgebraicGeometry.Scheme.Modules.exists_flatDerivedCoheratorInterchange_affineOpen"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/FlatDerivedCoheratorInterchange.lean",
+  "statement": "theorem exists_flatDerivedCoheratorInterchange {Z Y : Scheme.{u}} (f : Z ⟶ Y) [Flat f] [QuasiCompact f] [QuasiSeparated f] [HasDerivedCategory.{wZ} (SheafOfModules.{u} Z.ringCatSheaf)] [HasDerivedCategory.{wY} (SheafOfModules.{u} Y.ringCatSheaf)] (dZ : DerivedCoheratorAdjunctionData (SheafOfModules.isQuasicoherent Z.ringCatSheaf).ι) (dY : DerivedCoheratorAdjunctionData (SheafOfModules.isQuasicoherent Y.ringCatSheaf).ι) : Nonempty (flatDerivedCoheratorInterchangeType f dZ dY)",
+  "branch": "sheaf-dag",
+  "by": "ND",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "The real full-subcategory lifts, localized unit, canonical right-adjoint comparison and identity predicate belong to this node. The package states all existence claims and quantifies over every unit-normalized c. Its specialization installs exactly the supplied coherator structures, with independent ambient localization universes. The second theorem states the affine-open clause."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-8048e530f",
+  "group": "ND",
+  "result": "fix",
+  "note": "Lean and records correct. Hypotheses are exactly Flat/QuasiCompact/QuasiSeparated, with independent universes wZ, wY. P_f and F are lifts of the real tensorPullback and pushforward; preservation of quasi-coherence is a Sigma' conclusion. Phi_f is the recorded rightDerivedFunctorOfQuasiIsoResolutions; R_f is schemeDerivedDirectImage. Both derived adjunctions are pinned by homEquiv on Qh-objects; the Phi shift is pinned by unit CommShift; pullbackInclusion is pinned by an equation; lambda = rightAdjointUniq (canonical). The c premise, over every c, is the exact-square unit characterization and determines c. The three identities match the node with types checked, and the affine-open clause is exact. No hollow definitions, two sorry proofs, docstrings present. Statement verbatim in the file, 9 declarations match, statement-dependency files byte-identical to live, no collisions. Not compiled (no Lean change). Only fault H11: the second-reading section was just the direct-delivery note. FIX: fixes/lem-sfb-flat-derived-coherator-interchange.report.md = worker report verbatim + clause-by-clause second reading. Advisory: R_f's canonical CommShift instance is owned by proof_dep lem-pc-right-derived-functor-triangulated, not a stmt_dep."
+ }
+}

@@ -1,0 +1,227 @@
+{
+ "id": "lem-trf-cohen-monomial-quotient-regularity",
+ "kind": "statement",
+ "title": "Uniformizer perturbations on completed monomial quotients",
+ "statement": "Let $p$ be a prime and let $C$ be a Cohen ring with uniformizer $p$ [def-weil-pbc-cohen-ring]. Let $P$ be a finitely generated integral saturated commutative monoid [def-trf-fs-log-blowup], written additively, which is sharp: $0$ is its only invertible element. Let $n\\ge0$, put $S=C[P][t_1,\\ldots,t_n]$, where $C[P]=\\bigoplus_{q\\in P}Cz^q$ and $z^qz^r=z^{q+r}$, and put\n$$J_S=(z^q\\ (q\\ne0),t_1,\\ldots,t_n)S,\\qquad \\mathfrak a=(p)+J_S,\\qquad B=\\varprojlim_m S/\\mathfrak a^m,\\qquad J=J_SB.$$\nThe inverse limit is the adic completion [def-weil-pbc-adic-completion]. For any monoid ideal $I\\subseteq P$, meaning $I+P\\subseteq I$ and allowing $I=\\varnothing$ and $I=P$, put $IS=(z^q:q\\in I)S$ and $N=B/(IS)B$. For every integer $m\\ge0$, the natural map induces an isomorphism of $C$-modules\n$$S/(IS+J_S^{m+1})\\ \\xrightarrow{\\sim}\\ N/J^{m+1}N.$$\nThese modules are free of finite rank over $C$, and $\\bigcap_{m\\ge0}J^mN=0$. For every $\\theta\\in B$ with $\\theta-p\\in J$, multiplication by $\\theta$ on $N$ is injective.",
+ "source": {
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "Proof (1)--(2) of lem-trf-local-term-locality: ILO VIII 3.4.3 Tor-independence input, printed p.110. Agent-extracted mixed-characteristic sublemma for VI 1.6(ii), printed p.70 (theta congruent to p modulo the nonconstant monomials and variables); retained parent Step 4(a), including finite free truncations, exact completion, Jacobson radical and separatedness. ILO supplies the completed model, not this argument."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-cohen-ring",
+  "def-trf-fs-log-blowup",
+  "def-weil-pbc-adic-completion"
+ ],
+ "proof": [
+  {
+   "text": "By the Cohen-ring definition, $C$ is a principal ideal domain, $p\\ne0$, and $C\\to\\varprojlim_k C/p^kC$ is bijective. The PID Noetherianity statement makes $C$ Noetherian. Choose nonzero generators $q_1,\\ldots,q_d$ of $P$, omitting $0$ from a finite generating set (allow $d=0$). Sending polynomial generators to $z^{q_i}$ and $t_j$ gives a surjection $C[X_1,\\ldots,X_d,T_1,\\ldots,T_n]\\to S$, since every basis monomial is a product of those generators. Thus the finite-type Noetherianity statement makes $S$ Noetherian. Every ideal $K\\subseteq S$ is therefore finitely generated, by the definition of Noetherian; $S/K$ is cyclic.",
+   "uses": [
+    "def-weil-pbc-cohen-ring",
+    "lem-weil-pbc-pid-noetherian-normal",
+    "lem-weil-pbc-finite-type-algebra-noetherian",
+    "def-weil-pbc-noetherian-ring"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tags 00FN (lemma-Noetherian-permanence) and 0327 (definition-cohen-ring); the finite polynomial presentation is explicit."
+   }
+  },
+  {
+   "text": "Write $e_{q,\\alpha}=z^qt^\\alpha$, for $(q,\\alpha)\\in P\\times\\mathbf N^n$; these form the displayed coefficient basis of $S$. A monomial-generated ideal is exactly the $C$-span of the basis monomials divisible by one of its generators: multiplication shifts indices, and conversely every such basis monomial is the generator times a monomial. Hence $IS$ is spanned by indices with $q\\in I$, while $J_S^{m+1}$ is spanned by products of $m+1$ generators of $J_S$, times arbitrary monomials. Put $Q_m=S/(IS+J_S^{m+1})$. The images of the basis monomials outside this union of supports form a $C$-basis of $Q_m$, since quotienting a free coefficient module by a subset of its basis leaves precisely the complementary basis. This basis is finite: represent $q=\\sum_i e_iq_i$; if $\\sum_i e_i+\\sum_j\\alpha_j\\ge m+1$, then $z^qt^\\alpha\\in J_S^{m+1}$. Thus every surviving index is the image of an exponent tuple of total degree at most $m$ in the finite list of $d+n$ generators. In particular each $Q_m$ is finite free, and multiplication by the nonzero $p\\in C$ on it is injective.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "ILO VI 1.6(ii), printed p.70, completed monoid algebra notation; elementary coefficient calculation for the extracted sublemma."
+   }
+  },
+  {
+   "text": "For any ideal $K\\subseteq S$, complete $0\\to K\\to S\\to S/K\\to0$ at $\\mathfrak a$. All three modules are finite by Step 1, so exact completion gives a surjection $B\\to\\widehat{S/K}$ with kernel the image of $\\widehat K\\to B$. The finite-module tensor comparison identifies $\\widehat K$ with $B\\otimes_SK$. Its formula and naturality identify the latter map with $b\\otimes k\\mapsto bk$; its image is exactly $KB$, since tensors are finite sums of pure tensors and $KB$ consists of finite sums $bk$. We have therefore constructed a canonical $B$-linear isomorphism $B/KB\\cong\\widehat{S/K}=\\varprojlim_r(S/K)/\\mathfrak a^r(S/K)$, carrying the image of $s\\in S$ to its compatible residue classes. All module actions in this identification are componentwise, as in the cited statements.",
+   "uses": [
+    "lem-weil-pbc-completion-exact-finite-modules",
+    "lem-weil-pbc-completion-finite-module-tensor"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tags 00MA (lemma-completion-tensor), parts (2),(3), and 00MB (lemma-completion-flat), part (2)."
+   }
+  },
+  {
+   "text": "For fixed $m$, let $\\overline J$ denote the action of $J_S$ on $Q_m$, so $\\overline J^{m+1}Q_m=0$. Expanding products from $\\mathfrak a=(p)+J_S$ shows, for every $k\\ge0$, $p^kQ_m\\subseteq\\mathfrak a^kQ_m$ and $\\mathfrak a^{k+m+1}Q_m\\subseteq p^kQ_m$: a term with at least $m+1$ factors in $J_S$ vanishes, and every other term has at least $k$ factors $p$. The finite basis in Step 2 and completeness of $C$ give $Q_m\\cong\\varprojlim_k Q_m/p^kQ_m$ coefficient by coefficient. Explicitly, from compatible classes modulo $\\mathfrak a^r$, take the class at $r=k+m+1$ modulo $p^k$ and recover a unique vector $x\\in Q_m$ by that coefficient completeness. For fixed $r$, using $k\\ge r$ shows that $x$ has the prescribed class modulo $\\mathfrak a^r$. If a vector maps to zero modulo every $\\mathfrak a^r$, the second inclusion puts it in every $p^kQ_m$, so all its coefficients are zero. Thus the canonical map $Q_m\\to\\widehat{Q_m}$ is bijective.",
+   "uses": [
+    "def-weil-pbc-cohen-ring"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 0327 (definition-cohen-ring), completeness clause; elementary comparison of the two explicit filtrations and finite coefficient limits."
+   }
+  },
+  {
+   "text": "Apply Step 3 to $K=IS+J_S^{m+1}$ and Step 4 to identify $B/(IS+J_S^{m+1})B$ with $Q_m$, inversely to the map induced by $S\\to B$. Extension of ideals respects sums and products directly from their finite-sum definitions, so $(IS+J_S^{m+1})B=(IS)B+J^{m+1}$. The maps sending the class of $b$ to its class in $(B/(IS)B)/J^{m+1}(B/(IS)B)$, and back, are mutually inverse. Consequently $Q_m\\to N/J^{m+1}N$ is the asserted natural $C$-module isomorphism, proving also the finite-free assertion of the item.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tags 00MA and 00MB, as already applied in Step 3; elementary quotient identifications."
+   }
+  },
+  {
+   "text": "Apply Step 3 instead to $K=IS$ and put $M=S/IS$. It identifies $N$ with the actual module of compatible classes $\\varprojlim_rM/\\mathfrak a^rM$. For each $r$, the image in $B$ of every $j\\in J_S$ acts as zero on the $r$th quotient after any product of $r$ such factors, since $J_S^r\\subseteq\\mathfrak a^r$. Finite sums with coefficients in $B$ give the same vanishing for every element of $J^rN$. Therefore an element of $\\bigcap_rJ^rN$ has zero $r$th coordinate for every $r$, and is the zero compatible sequence. This proves the claimed $J$-adic separatedness without assuming that $J$ is a maximal ideal.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00MA, as already applied in Step 3; direct use of the componentwise inverse-limit description."
+   }
+  },
+  {
+   "text": "Write $\\theta=p+j$ with $j\\in J$, and suppose $\\theta x=0$ in $N$. Induct on $r\\ge0$ to prove $x\\in J^rN$. The case $r=0$ is automatic. If $x\\in J^rN$, then $px=-jx\\in J^{r+1}N$. By Step 5 with $m=r$, the quotient $N/J^{r+1}N$ is a free $C$-module, so multiplication by $p$ is injective on it, as checked in Step 2. Thus $x\\in J^{r+1}N$. Step 6 now gives $x=0$. Applying this kernel calculation to $x-y$ proves injectivity of multiplication by $\\theta$. If $I=P$ the module is zero and all the same arguments hold with the empty basis; $I=\\varnothing$, $P=\\{0\\}$, $n=0$ and $m=0$ require no exclusions.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "ILO VI 1.6(ii), printed p.70, perturbation congruence; elementary induction using the truncations just proved."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-cohen-ring",
+  "def-weil-pbc-noetherian-ring",
+  "lem-weil-pbc-completion-exact-finite-modules",
+  "lem-weil-pbc-completion-finite-module-tensor",
+  "lem-weil-pbc-finite-type-algebra-noetherian",
+  "lem-weil-pbc-pid-noetherian-normal"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "VI 1.6(ii), printed p.70, and VIII 3.4.3, printed p.110, supply the model and its use. The coefficient, completion and filtration arguments are written here; exact completion and finite-module comparison are Stacks Tags 00MA and 00MB."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Let C be a complete discrete valuation ring with uniformizer p, P a finitely generated sharp integral monoid, and B the completion of C[P][t] at (p, nonconstant monomials, t). For each monoid ideal I, p+j is a nonzerodivisor on B/IB whenever j is in the monomial and variable ideal",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"IsDedekindDomain.HeightOneSpectrum.adicCompletion.mul_nonZeroDivisor_mem_adicCompletionIntegers\", \"module\": \"Mathlib/RingTheory/DedekindDomain/AdicValuation\", \"type\": \"∀ {R : Type u_1} [inst : CommRing R] [inst_1 : IsDedekindDomain R] {K : Type u_2} [inst_2 : Field K]\\n  [inst_3 : Algebra R K] [inst_4 : IsFractionRing R K] (v : IsDedekindDomain.HeightOneSpectrum R)\\n  (a : IsDedekindDomain.HeightOneSpectrum.adicCompletion K v),\\n  ∃ b ∈ nonZeroDivisors R, a * ↑b ∈ Is\", \"doc\": \"In a Dedekind domain $ R $ with fraction field $ K $, for any height one prime ideal $ \\\\mathfrak{p} $ and element $ a $ in the $ \\\\mathfrak{p} $-adic completion of $ K $, there exists a non-zero elemen\"}\n  {\"name\": \"PowerSeries.IsWeierstrassFactorizationAt.map_ne_zero_of_ne_top\", \"module\": \"Mathlib/RingTheory/PowerSeries/WeierstrassPreparation\", \"type\": \"∀ {A : Type u_1} [inst : CommRing A] {g : PowerSeries A} {f : Polynomial A} {h : PowerSeries A} {I : Ideal A},\\n  g.IsWeierstrassFactorizationAt f h I → I ≠ ⊤ → (PowerSeries.map (Ideal.Quotient.mk I)) g ≠ 0\", \"doc\": \"Given a Weierstrass factorization of a power series $ f $ at an ideal $ I $ in a commutative ring $ A $, if $ I $ is a proper ideal (i.e., $ I \\neq A $), then the image of the unit factor $ g $ under t\"}\n  {\"name\": \"Polynomial.IsDistinguishedAt.map_ne_zero_of_eq_mul\", \"module\": \"Mathlib/RingTheory/Polynomial/Eisenstein/Distinguished\", \"type\": \"∀ {R : Type u_1} [inst : CommRing R] {I : Ideal R} (f h : PowerSeries R) {g : Polynomial R},\\n  g.IsDistinguishedAt I → PowerSeries.constantCoeff h ∉ I → f = ↑g * h → (PowerSeries.map (Ideal.Quotient.mk I)) f ≠ 0\", \"doc\": \"If a polynomial $g$ is distinguished at an ideal $I$ of a commutative ring $R$, another polynomial $h$ has a constant term not in $I$, and $f = g \\\\cdot h$, then the image of $f$ under the canonical qu\"}\n  {\"name\": \"Polynomial.IsDistinguishedAt.isWeierstrassDivisorAt'\", \"module\": \"Mathlib/RingTheory/PowerSeries/WeierstrassPreparation\", \"type\": \"∀ {A : Type u_1} [inst : CommRing A] {g : Polynomial A} {I : Ideal A},\\n  g.IsDistinguishedAt I → ∀ [IsHausdorff I A], (↑g).IsWeierstrassDivisorAt I\", \"doc\": \"For a commutative ring $ A $, an ideal $ I $, and a polynomial $ g $ over $ A $, if $ g $ is distinguished at $ I $ (i.e., its leading coefficient modulo $ I $ is a unit in $ A/I $) and $ A $ is Hausd\"}\n  {\"name\": \"PowerSeries.isDistinguishedAt_weierstrassDistinguished\", \"module\": \"Mathlib/RingTheory/PowerSeries/WeierstrassPreparation\", \"type\": \"∀ {A : Type u_1} [inst : CommRing A] [inst_1 : IsLocalRing A] [inst_2 : IsAdicComplete (IsLocalRing.maximalIdeal A) A]\\n  {g : PowerSeries A} (hg : (PowerSeries.map (IsLocalRing.residue A)) g ≠ 0),\\n  (g.weierstrassDistinguished hg).IsDistinguishedAt (IsLocalRing.maximalIdeal A)\", \"doc\": \"For a local ring $ A $ with maximal ideal $ \\\\mathfrak{m} $, if a power series $ g $ over $ A $ has non-zero image under the residue map $ A \\\\to A/\\\\mathfrak{m} $, then the Weierstrass distinguished pol\"}\n  {\"name\": \"Polynomial.IsDistinguishedAt.isWeierstrassDivisorAt\", \"module\": \"Mathlib/RingTheory/PowerSeries/WeierstrassPreparation\", \"type\": \"∀ {A : Type u_1} [inst : CommRing A] {g : Polynomial A} {I : Ideal A},\\n  g.IsDistinguishedAt I → I ≠ ⊤ → (↑g).IsWeierstrassDivisorAt I\", \"doc\": \"If a polynomial $ g $ is distinguished at an ideal $ I $ of a commutative ring $ A $, and $ I $ is not the entire ring ($ I \\\\neq A $), then $ g $ satisfies the Weierstrass divisor condition at $ I $. \"}\n  {\"name\": \"PowerSeries.exists_isWeierstrassDivision\", \"module\": \"Mathlib/RingTheory/PowerSeries/WeierstrassPreparation\", \"type\": \"∀ {A : Type u_1} [inst : CommRing A] [inst_1 : IsLocalRing A] (f : PowerSeries A) {g : PowerSeries A}\\n  [IsAdicComplete (IsLocalRing.maximalIdeal A) A],\\n  (PowerSeries.map (IsLocalRing.residue A)) g ≠ 0 → ∃ q r, f.IsWeierstrassDivision g q r\", \"doc\": \"Let $ A $ be a local ring whose maximal ideal is adic complete. If $ g $ is a power series in $ A[[X]] $ whose image in the residue field of $ A $ is nonzero, then for any power series $ f $, there ex\"}\n  {\"name\": \"PreTilt.isDomain\", \"module\": \"Mathlib/RingTheory/Perfection\", \"type\": \"∀ (K : Type u₁) [inst : Field K] (v : Valuation K NNReal) (O : Type u₂) [inst_1 : CommRing O] [inst_2 : Algebra O K],\\n  v.Integers O → ∀ (p : ℕ) [inst : Fact (Nat.Prime p)] [inst_3 : Fact ¬IsUnit ↑p], IsDomain (PreTilt O p)\", \"doc\": \"For a commutative ring $ O $ and prime $ p $, the pretilt $ \\\\mathrm{PreTilt}(O, p) $ (defined as the perfection of $ O/(p) $ consisting of sequences $ (f_n) $ with $ f_n = f_{n+1}^p $) has no zero div\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: power-series variable injectivity, Weierstrass results and adic separatedness do not state uniformizer perturbation regularity on arbitrary fs monoid-ideal quotients"
+  },
+  {
+   "tool": "loogle",
+   "query": "IsAdicComplete, IsSMulRegular",
+   "results": "[loogle] OK 0 hit(s)",
+   "date": "2026-10-22",
+   "verdict": "no match: power-series variable injectivity, Weierstrass results and adic separatedness do not state uniformizer perturbation regularity on arbitrary fs monoid-ideal quotients"
+  },
+  {
+   "tool": "grep",
+   "query": "(IsSMulRegular|IsRegular|NonZeroDivisor).*(Adic|adic|[Mm]onomial)|([Mm]onomial|[Mm]onoid).*(adic|Adic|[Cc]ompletion)",
+   "results": "[grep] OK 25 hit(s)\n  {\"file\": \"Mathlib/NumberTheory/Padics/PadicNumbers.lean\", \"line\": \"116\", \"text\": \"    MonoidWithZeroHom.coe_mk, ZeroHom.coe_mk, Rat.intCast_eq_zero_iff, padicValRat.of_int]\"}\n  {\"file\": \"Mathlib/NumberTheory/Padics/PadicNumbers.lean\", \"line\": \"125\", \"text\": \"    MonoidWithZeroHom.coe_mk, ZeroHom.coe_mk, Rat.intCast_eq_zero_iff, padicValRat.of_int]\"}\n  {\"file\": \"Mathlib/NumberTheory/Padics/PadicIntegers.lean\", \"line\": \"576\", \"text\": \"      rw [Submonoid.coe_one, map_one, mul_one, PadicInt.algebraMap_apply, Subtype.coe_mk]\"}\n  {\"file\": \"Mathlib/Topology/Algebra/LinearMapCompletion.lean\", \"line\": \"45\", \"text\": \"  __ := f.toAddMonoidHom.completion f.continuous\"}\n  {\"file\": \"Mathlib/Topology/Algebra/LinearMapCompletion.lean\", \"line\": \"54\", \"text\": \"lemma toAddMonoidHom_completion (f : α →SL[σ] β) :\"}\n  {\"file\": \"Mathlib/Topology/Algebra/LinearMapCompletion.lean\", \"line\": \"55\", \"text\": \"    f.completion.toAddMonoidHom = f.toAddMonoidHom.completion f.continuous := rfl\"}\n  {\"file\": \"Mathlib/Topology/Algebra/LinearMapCompletion.lean\", \"line\": \"80\", \"text\": \"lemma toAddMonoidHom_fromCompletion (f : α →SL[σ] β) :\"}\n  {\"file\": \"Mathlib/Topology/Algebra/GroupCompletion.lean\", \"line\": \"26\", \"text\": \"* `AddMonoidHom.completion`: promotes a continuous group morphism\"}\n  {\"file\": \"Mathlib/Topology/Algebra/GroupCompletion.lean\", \"line\": \"97\", \"text\": \"instance : AddMonoid (Completion α) where\"}\n  {\"file\": \"Mathlib/Topology/Algebra/GroupCompletion.lean\", \"line\": \"122\", \"text\": \"instance : SubNegMonoid (Completion α) where\"}\n  {\"file\": \"Mathlib/Topology/Algebra/GroupCompletion.lean\", \"line\": \"237\", \"text\": \"def AddMonoidHom.completion (f : α →+ β) (hf : Continuous f) : Completion α →+ Completion β :=\"}\n  {\"file\": \"Mathlib/Topology/Algebra/GroupCompletion.lean\", \"line\": \"241\", \"text\": \"theorem AddMonoidHom.continuous_completion (f : α →+ β) (hf : Continuous f) :\"}\n  {\"file\": \"Mathlib/Topology/Algebra/UniformRing.lean\", \"line\": \"85\", \"text\": \"  { AddMonoidWithOne.unary, ((inferInstance : AddCommGroup (Completion α))),\"}\n  {\"file\": \"Mathlib/Algebra/MvPolynomial/Basic.lean\", \"line\": \"786\", \"text\": \"theorem _root_.IsRegular.monomial {m : σ →₀ ℕ} {a : R}\"}\n  {\"file\": \"Mathlib/Algebra/MvPolynomial/Basic.lean\", \"line\": \"788\", \"text\": \"    IsRegular (monomial m a) := by\"}\n  {\"file\": \"Mathlib/Algebra/MvPolynomial/Basic.lean\", \"line\": \"799\", \"text\": \"  isRegular_one.monomial.left.eq_iff\"}\n  {\"file\": \"Mathlib/Algebra/MvPolynomial/Basic.lean\", \"line\": \"809\", \"text\": \"  isRegular_one.monomial.right.eq_iff\"}\n  {\"file\": \"Mathlib/RingTheory/Radical/NatInt.lean\", \"line\": \"91\", \"text\": \"@[positivity UniqueFactorizationMonoid.radical _]\"}\n  {\"file\": \"Mathlib/RingTheory/Radical/Basic.lean\", \"line\": \"211\", \"text\": \"Note this generalises to radical elements `a`, see `UniqueFactorizationMonoid.dvd_radical_iff`.\"}\n  {\"file\": \"Mathlib/RingTheory/Radical/Basic.lean\", \"line\": \"405\", \"text\": \"  rw [UniqueFactorizationMonoid.radical_mul hab.isRelPrime]\"}\n  {\"file\": \"Mathlib/RingTheory/Nilpotent/Basic.lean\", \"line\": \"117\", \"text\": \"theorem Prime.isRadical [CommMonoidWithZero R] {y : R} (hy : Prime y) : IsRadical y :=\"}\n  {\"file\": \"Mathlib/RingTheory/Nilpotent/Basic.lean\", \"line\": \"120\", \"text\": \"theorem zero_isRadical_iff [MonoidWithZero R] : IsRadical (0 : R) ↔ IsReduced R := by\"}\n  {\"file\": \"Mathlib/RingTheory/Nilpotent/Basic.lean\", \"line\": \"128\", \"text\": \"theorem IsRadical.of_dvd [CommMonoidWithZero R] [IsCancelMulZero R] {x y : R} (hy : IsRadical y)\"}\n  {\"file\": \"Mathlib/RingTheory/Nilpotent/Defs.lean\", \"line\": \"137\", \"text\": \"/-- An element `y` in a monoid is radical if for any element `x`, `y` divides `x` whenever it\"}\n  {\"file\": \"Mathlib/RingTheory/MvPowerSeries/NoZeroDivisors.lean\", \"line\": \"130\", \"text\": \"  monomial_mem_nonzeroDivisorsLeft.and monomial_mem_nonzeroDivisorsRight\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: power-series variable injectivity, Weierstrass results and adic separatedness do not state uniformizer perturbation regularity on arbitrary fs monoid-ideal quotients"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A power series congruent to a uniformizer modulo the variables is injective on a quotient by a monomial ideal over a complete discrete valuation ring",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"PowerSeries.mul_X_injective\", \"module\": \"Mathlib.RingTheory.PowerSeries.Basic\", \"type\": \": Function.Injective (· * X : R⟦X⟧ → R⟦X⟧)\", \"doc\": \"The operation of multiplying by the formal variable $ X $ is injective in the ring of univariate power series over a semiring $ R $. Specifically, for any power series $ a, b \\\\in R\\\\llbracket X \\\\rrbrac\"}\n  {\"name\": \"PowerSeries.mul_X_pow_injective\", \"module\": \"Mathlib.RingTheory.PowerSeries.Basic\", \"type\": \"{k : ℕ} : Function.Injective (· * X ^ k : R⟦X⟧ → R⟦X⟧)\", \"doc\": \"For any natural number $k$, the map from the ring of univariate power series over a semiring $R$ to itself defined by multiplying each power series by $X^k$ is injective. In other words, if $f \\\\cdot X\"}\n  {\"name\": \"PowerSeries.X_pow_mul_cancel\", \"module\": \"Mathlib.RingTheory.PowerSeries.Basic\", \"type\": \"{k : ℕ} {φ ψ : R⟦X⟧} (h : X ^ k * φ = X ^ k * ψ) : φ = ψ\", \"doc\": \"For any natural number $k$ and power series $\\\\varphi, \\\\psi$ over a ring $R$, if $X^k \\\\cdot \\\\varphi = X^k \\\\cdot \\\\psi$, then $\\\\varphi = \\\\psi$.\"}\n  {\"name\": \"MvPolynomial.coe_inj\", \"module\": \"Mathlib.RingTheory.MvPowerSeries.Basic\", \"type\": \": (φ : MvPowerSeries σ R) = ψ ↔ φ = ψ\", \"doc\": \"The natural embedding of multivariate polynomials over $ R $ in variables $ \\\\sigma $ into multivariate power series is injective, meaning that two polynomials map to the same power series if and only \"}\n  {\"name\": \"PowerSeries.X_pow_mul_injective\", \"module\": \"Mathlib.RingTheory.PowerSeries.Basic\", \"type\": \"{k : ℕ} : Function.Injective (X ^ k * · : R⟦X⟧ → R⟦X⟧)\", \"doc\": \"For any natural number $k$, the function $f \\\\mapsto X^k \\\\cdot f$ from the ring of univariate power series $R[[X]]$ to itself is injective. This means that multiplying a power series by the formal vari\"}\n  {\"name\": \"PowerSeries.rescale_injective\", \"module\": \"Mathlib.RingTheory.PowerSeries.NoZeroDivisors\", \"type\": \"{a : R} (ha : a ≠ 0) : Function.Injective (rescale a)\", \"doc\": \"For any non-zero element $ a $ in a commutative semiring $ R $, the rescaling operation on power series defined by multiplying the $ k $-th coefficient by $ a^k $ is injective. That is, if $ f $ and $\"}\n  {\"name\": \"PowerSeries.weierstrassUnit\", \"module\": \"Mathlib.RingTheory.PowerSeries.WeierstrassPreparation\", \"type\": \"(hg : g.map (IsLocalRing.residue A) ≠ 0) : A⟦X⟧\", \"doc\": \"Given a power series $ g $ over a commutative local ring $ A $ with maximal ideal $ \\\\mathfrak{m} $, if the image of $ g $ under the residue map $ A \\\\to A/\\\\mathfrak{m} $ is non-zero, this function retu\"}\n  {\"name\": \"PowerSeries.IsWeierstrassDivisorAt\", \"module\": \"Mathlib.RingTheory.PowerSeries.WeierstrassPreparation\", \"type\": \": Prop\", \"doc\": \"A power series $ g $ satisfies the Weierstrass divisor condition at an ideal $ I $ if the coefficient of $ X^{\\text{ord}(g)} $ in the image of $ g $ under the quotient map $ R \\to R/I $ is a unit in the\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: power-series variable injectivity, Weierstrass results and adic separatedness do not state uniformizer perturbation regularity on arbitrary fs monoid-ideal quotients"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Multiplication by p plus an element of J is injective on a J-adically separated module whose quotients by powers of J are p torsion free",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AdicCompletion.of_injective\", \"module\": \"Mathlib/RingTheory/AdicCompletion/Basic\", \"type\": \"∀ {R : Type u_1} [inst : CommRing R] (I : Ideal R) (M : Type u_4) [inst_1 : AddCommGroup M] [inst_2 : Module R M]\\n  [IsHausdorff I M], Function.Injective ⇑(AdicCompletion.of I M)\", \"doc\": \"Given a commutative ring $ R $, an ideal $ I $, and an $ R $-module $ M $ satisfying the Hausdorff condition (i.e., $ \\\\bigcap_{n=1}^\\\\infty I^n M = 0 $), the canonical $ R $-linear map from $ M $ to it\"}\n  {\"name\": \"AdicCompletion.map_injective\", \"module\": \"Mathlib/RingTheory/AdicCompletion/Exactness\", \"type\": \"∀ {R : Type u} [inst : CommRing R] (I : Ideal R) {M : Type u} [inst_1 : AddCommGroup M] [inst_2 : Module R M]\\n  {N : Type u} [inst_3 : AddCommGroup N] [inst_4 : Module R N] [IsNoetherianRing R] [Module.Finite R N] {f : M →ₗ[R] N},\\n  Function.Injective ⇑f → Function.Injective ⇑(AdicCompletion.map I f\", \"doc\": \"If $ f : M \\\\to N $ is an injective $ R $-linear map between $ R $-modules, then the induced map between the $ I $-adic completions of $ M $ and $ N $ is also injective, where $ R $ is a commutative ri\"}\n  {\"name\": \"AdicCompletion.of_injective_iff\", \"module\": \"Mathlib/RingTheory/AdicCompletion/Basic\", \"type\": \"∀ {R : Type u_1} [inst : CommRing R] {I : Ideal R} {M : Type u_4} [inst_1 : AddCommGroup M] [inst_2 : Module R M],\\n  Function.Injective ⇑(AdicCompletion.of I M) ↔ IsHausdorff I M\", \"doc\": \"The canonical linear map from an $ R $-module $ M $ to its $ I $-adic completion is injective if and only if the Hausdorff condition holds for $ M $ with respect to the ideal $ I $, i.e., the intersec\"}\n  {\"name\": \"Ideal.powQuotSuccInclusion_injective\", \"module\": \"Mathlib/NumberTheory/RamificationInertia/Basic\", \"type\": \"∀ {R : Type u} [inst : CommRing R] {S : Type v} [inst_1 : CommRing S] (p : Ideal R) (P : Ideal S) [inst_2 : Algebra R S]\\n  (i : ℕ), Function.Injective ⇑(p.powQuotSuccInclusion P i)\", \"doc\": \"For any natural number $i$, the linear map from the image of $\\\\mathfrak{P}^{i+1}$ to the image of $\\\\mathfrak{P}^i$ in the quotient ring $S/\\\\mathfrak{P}^e$ is injective.\"}\n  {\"name\": \"AdicCompletion.of_inj\", \"module\": \"Mathlib/RingTheory/AdicCompletion/Basic\", \"type\": \"∀ {R : Type u_1} [inst : CommRing R] {I : Ideal R} {M : Type u_4} [inst_1 : AddCommGroup M] [inst_2 : Module R M]\\n  [IsHausdorff I M] {a b : M}, (AdicCompletion.of I M) a = (AdicCompletion.of I M) b ↔ a = b\", \"doc\": \"If the Hausdorff condition holds for the ideal $ I $ and module $ M $, then the canonical $ R $-linear map from $ M $ to its $ I $-adic completion is injective, i.e., $ \\\\mathrm{of}(a) = \\\\mathrm{of}(b)\"}\n  {\"name\": \"IsHausdorff.haus\", \"module\": \"Mathlib/RingTheory/AdicCompletion/Basic\", \"type\": \"∀ {R : Type u_1} [inst : CommRing R] {I : Ideal R} {M : Type u_4} [inst_1 : AddCommGroup M] [inst_2 : Module R M],\\n  IsHausdorff I M → ∀ (x : M), (∀ (n : ℕ), x ≡ 0 [SMOD I ^ n • ⊤]) → x = 0\", \"doc\": \"For any element $x$ in the $R$-module $M$, if $x$ lies in the submodule $I^n M$ for all natural numbers $n$, then $x$ must be the zero element. This characterizes the Hausdorff condition for the modul\"}\n  {\"name\": \"isHausdorff_iff\", \"module\": \"Mathlib/RingTheory/AdicCompletion/Basic\", \"type\": \"∀ {R : Type u_1} [inst : CommRing R] {I : Ideal R} {M : Type u_4} [inst_1 : AddCommGroup M] [inst_2 : Module R M],\\n  IsHausdorff I M ↔ ∀ (x : M), (∀ (n : ℕ), x ≡ 0 [SMOD I ^ n • ⊤]) → x = 0\", \"doc\": \"For a commutative ring $ R $, an ideal $ I $, and an $ R $-module $ M $, the Hausdorff condition holds if and only if the only element of $ M $ contained in all submodules $ I^n M $ for every positive\"}\n  {\"name\": \"IsHausdorff.haus'\", \"module\": \"Mathlib/RingTheory/AdicCompletion/Basic\", \"type\": \"∀ {R : Type u_1} {inst : CommRing R} {I : Ideal R} {M : Type u_4} {inst_1 : AddCommGroup M} {inst_2 : Module R M}\\n  [self : IsHausdorff I M] (x : M), (∀ (n : ℕ), x ≡ 0 [SMOD I ^ n • ⊤]) → x = 0\", \"doc\": \"For any element $ x $ in $ M $, if $ x $ lies in $ I^n M $ for all positive integers $ n $, then $ x $ must be the zero element.\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: power-series variable injectivity, Weierstrass results and adic separatedness do not state uniformizer perturbation regularity on arbitrary fs monoid-ideal quotients"
+  },
+  {
+   "tool": "grep",
+   "query": "monomial|IsSMulRegular|IsAdicComplete|IsHausdorff",
+   "results": "[grep] OK 25 hit(s)\n  {\"file\": \"Mathlib/RingTheory/AdicCompletion/Completeness.lean\", \"line\": \"36\", \"text\": \"* `AdicCompletion.isAdicComplete`: `AdicCompletion I M` is `I`-adically complete if `I` is\"}\n  {\"file\": \"Mathlib/RingTheory/AdicCompletion/Completeness.lean\", \"line\": \"39\", \"text\": \"* `MvPowerSeries.isAdicComplete`: Multivariate power series is adic complete with respect to\"}\n  {\"file\": \"Mathlib/RingTheory/AdicCompletion/Completeness.lean\", \"line\": \"185\", \"text\": \"theorem isAdicComplete (h : I.FG) : IsAdicComplete I (AdicCompletion I M) where\"}\n  {\"file\": \"Mathlib/RingTheory/AdicCompletion/Completeness.lean\", \"line\": \"215\", \"text\": \"    IsAdicComplete (.span (.range X) : Ideal (MvPowerSeries σ R)) (MvPowerSeries σ R) := by\"}\n  {\"file\": \"Mathlib/RingTheory/AdicCompletion/Completeness.lean\", \"line\": \"221\", \"text\": \"  rw [← IsAdicComplete.congr_ringEquiv _ (toAdicCompletionAlgEquiv σ R).toRingEquiv, this,\"}\n  {\"file\": \"Mathlib/RingTheory/AdicCompletion/Algebra.lean\", \"line\": \"428\", \"text\": \"variable [IsAdicComplete I S]\"}\n  {\"file\": \"Mathlib/RingTheory/AdicCompletion/Topology.lean\", \"line\": \"18\", \"text\": \"- `IsAdic.isAdicComplete_iff`:\"}\n  {\"file\": \"Mathlib/RingTheory/AdicCompletion/Topology.lean\", \"line\": \"19\", \"text\": \"  `IsAdicComplete I R` is equivalent to `CompleteSpace R` and `T2Space R` in the adic topology.\"}\n  {\"file\": \"Mathlib/RingTheory/AdicCompletion/Topology.lean\", \"line\": \"30\", \"text\": \"/-- `IsHausdorff I R` is equivalent to being Hausdorff in the adic topology. -/\"}\n  {\"file\": \"Mathlib/RingTheory/AdicCompletion/Topology.lean\", \"line\": \"31\", \"text\": \"protected lemma IsAdic.isHausdorff_iff : IsHausdorff I R ↔ T2Space R := by\"}\n  {\"file\": \"Mathlib/RingTheory/AdicCompletion/Topology.lean\", \"line\": \"32\", \"text\": \"  rw [I.ringFilterBasis.t2Space_iff_sInter_subset hI.symm, isHausdorff_iff]\"}\n  {\"file\": \"Mathlib/RingTheory/AdicCompletion/Noetherian.lean\", \"line\": \"23\", \"text\": \"lemma IsHausdorff.of_le_jacobson (h : I ≤ Ideal.jacobson ⊥) : IsHausdorff I M :=\"}\n  {\"file\": \"Mathlib/RingTheory/AdicCompletion/Noetherian.lean\", \"line\": \"26\", \"text\": \"theorem IsHausdorff.of_isLocalRing [IsLocalRing R] (h : I ≠ ⊤) : IsHausdorff I M :=\"}\n  {\"file\": \"Mathlib/RingTheory/AdicCompletion/Noetherian.lean\", \"line\": \"29\", \"text\": \"instance [IsLocalRing R] : IsHausdorff (maximalIdeal R) M :=\"}\n  {\"file\": \"Mathlib/RingTheory/AdicCompletion/Noetherian.lean\", \"line\": \"32\", \"text\": \"lemma IsHausdorff.of_isTorsionFree [IsDomain R] [IsTorsionFree R M] (h : I ≠ ⊤) : IsHausdorff I M :=\"}\n  {\"file\": \"Mathlib/RingTheory/AdicCompletion/Noetherian.lean\", \"line\": \"35\", \"text\": \"theorem IsHausdorff.of_isDomain [IsDomain R] (h : I ≠ ⊤) : IsHausdorff I R :=\"}\n  {\"file\": \"Mathlib/RingTheory/AdicCompletion/RingHom.lean\", \"line\": \"21\", \"text\": \"- `IsAdicComplete.liftRingHom`: if `R` is\"}\n  {\"file\": \"Mathlib/RingTheory/AdicCompletion/RingHom.lean\", \"line\": \"34\", \"text\": \"namespace IsAdicComplete\"}\n  {\"file\": \"Mathlib/RingTheory/AdicCompletion/RingHom.lean\", \"line\": \"40\", \"text\": \"variable [IsAdicComplete I S] (f : (n : ℕ) → R →+* S ⧸ I ^ n)\"}\n  {\"file\": \"Mathlib/RingTheory/AdicCompletion/RingHom.lean\", \"line\": \"44\", \"text\": \"Universal property of `IsAdicComplete` for rings.\"}\n  {\"file\": \"Mathlib/RingTheory/AdicCompletion/RingHom.lean\", \"line\": \"91\", \"text\": \"Then it is the map `IsAdicComplete.lift`.\"}\n  {\"file\": \"Mathlib/RingTheory/AdicCompletion/Functoriality.lean\", \"line\": \"437\", \"text\": \"theorem surjective_of_mkQ_comp_surjective [IsPrecomplete I M] [IsHausdorff I N]\"}\n  {\"file\": \"Mathlib/RingTheory/AdicCompletion/Functoriality.lean\", \"line\": \"447\", \"text\": \"theorem surjective_of_mk_map_comp_surjective [IsPrecomplete I R] [haus : IsHausdorff (I.map f) S]\"}\n  {\"file\": \"Mathlib/RingTheory/AdicCompletion/Functoriality.lean\", \"line\": \"456\", \"text\": \"  have _ := IsHausdorff.map_algebraMap_iff.mp haus\"}\n  {\"file\": \"Mathlib/RingTheory/AdicCompletion/LocalRing.lean\", \"line\": \"34\", \"text\": \"* `AdicCompletion.isAdicComplete_of_fg` : for a local ring `R` with finitely generated\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: power-series variable injectivity, Weierstrass results and adic separatedness do not state uniformizer perturbation regularity on arbitrary fs monoid-ideal quotients"
+  },
+  {
+   "tool": "grep",
+   "query": "(IsSMulRegular|IsRegular|NonZeroDivisor).*(Adic|adic|[Mm]onomial)|([Mm]onomial|[Mm]onoid).*(adic|Adic|[Cc]ompletion)",
+   "results": "{\"t\": \"2026-10-23T04:09:23Z\", \"tool\": \"grep\", \"query\": \"(IsSMulRegular|IsRegular|NonZeroDivisor).*(Adic|adic|[Mm]onomial)|([Mm]onomial|[Mm]onoid).*(adic|Adic|[Cc]ompletion)\", \"sub\": \"\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/NumberTheory/Padics/PadicNumbers.lean\", \"Mathlib/NumberTheory/Padics/PadicNumbers.lean\", \"Mathlib/NumberTheory/Padics/PadicIntegers.lean\", \"Mathlib/Topology/Algebra/LinearMapCompletion.lean\", \"Mathlib/Topology/Algebra/LinearMapCompletion.lean\", \"Mathlib/Topology/Algebra/LinearMapCompletion.lean\", \"Mathlib/Topology/Algebra/LinearMapCompletion.lean\", \"Mathlib/Topology/Algebra/GroupCompletion.lean\"], \"digest\": \"bc0d5e0bd512a9f9\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits do not state all finite-free monomial truncation, quotient comparison and perturbation-injectivity clauses for an arbitrary sharp fs monoid and monoid ideal"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A power series congruent to a uniformizer modulo the variables is injective on a quotient by a monomial ideal over a complete discrete valuation ring",
+   "results": "{\"t\": \"2026-10-23T04:09:23Z\", \"tool\": \"leansearch\", \"query\": \"A power series congruent to a uniformizer modulo the variables is injective on a quotient by a monomial ideal over a complete discrete valuation ring\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"PowerSeries.mul_X_injective\", \"PowerSeries.mul_X_pow_injective\", \"PowerSeries.X_pow_mul_cancel\", \"MvPolynomial.coe_inj\", \"PowerSeries.X_pow_mul_injective\", \"PowerSeries.rescale_injective\", \"PowerSeries.weierstrassUnit\", \"PowerSeries.IsWeierstrassDivisorAt\"], \"digest\": \"9d5b00e7ed1bb27d\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits do not state all finite-free monomial truncation, quotient comparison and perturbation-injectivity clauses for an arbitrary sharp fs monoid and monoid ideal"
+  },
+  {
+   "tool": "loogle",
+   "query": "IsAdicComplete, IsSMulRegular",
+   "results": "{\"t\": \"2026-10-23T04:09:23Z\", \"tool\": \"loogle\", \"query\": \"IsAdicComplete, IsSMulRegular\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits do not state all finite-free monomial truncation, quotient comparison and perturbation-injectivity clauses for an arbitrary sharp fs monoid and monoid ideal"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Multiplication by p plus an element of J is injective on a J-adically separated module whose quotients by powers of J are p torsion free",
+   "results": "{\"t\": \"2026-10-23T04:09:32Z\", \"tool\": \"leanfinder\", \"query\": \"Multiplication by p plus an element of J is injective on a J-adically separated module whose quotients by powers of J are p torsion free\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Ideal.powQuotSuccInclusion_injective\", \"AdicCompletion.of_injective\", \"Ideal.quotientToQuotientRangePowQuotSucc_injective\", \"AdicCompletion.map_injective\", \"IsHausdorff\", \"AdicCompletion.of_inj\", \"AdicCompletion.of_injective_iff\", \"RingTheory.Sequence.IsWeaklyRegular.regular_mod_prev\"], \"digest\": \"e6182339131360cf\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits do not state all finite-free monomial truncation, quotient comparison and perturbation-injectivity clauses for an arbitrary sharp fs monoid and monoid ideal"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a complete discrete valuation ring C and a finitely generated sharp monoid P, the completion of C[P][t] modulo any monomial ideal has finite free quotients modulo powers of the nonconstant monomial ideal, and p plus a nonconstant series acts injectively",
+   "results": "{\"t\": \"2026-10-23T04:10:04Z\", \"tool\": \"leanfinder\", \"query\": \"For a complete discrete valuation ring C and a finitely generated sharp monoid P, the completion of C[P][t] modulo any monomial ideal has finite free quotients modulo powers of the nonconstant monomial ideal, and p plus a nonconstant series acts injectively\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"PowerSeries.exists_isWeierstrassDivision\", \"PowerSeries.isWeierstrassDivision_weierstrassDiv_weierstrassMod\", \"PowerSeries.IsWeierstrassDivisorAt.mod'_mk_eq_mod\", \"Polynomial.IsDistinguishedAt.algEquivQuotient_symm_apply\", \"PowerSeries.exists_isWeierstrassFactorization\", \"Polynomial.IsDistinguishedAt.algEquivQuotient_apply\", \"PowerSeries.IsWeierstrassFactorizationAt.algEquivQuotient_apply\", \"PowerSeries.IsWeierstrassDivisorAt.mk_mod'_eq_self\"], \"digest\": \"5457819a9ee0bad4\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits do not state all finite-free monomial truncation, quotient comparison and perturbation-injectivity clauses for an arbitrary sharp fs monoid and monoid ideal"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-kato-tor-independence-chart",
+  "date": "2026-10-22",
+  "group": "Q05"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Proof (1)--(2) of lem-trf-local-term-locality: ILO VIII 3.4.3 Tor-independence input, printed p.110. Agent-extracted mixed-characteristic sublemma for VI 1.6(ii), printed p.70 (theta congruent to p modulo the nonconstant monomials and variables); retained parent Step 4(a), including finite free truncations, exact completion, Jacobson radical and separatedness. ILO supplies the completed model, not this argument.",
+   "via": [
+    "lem-trf-kato-tor-independence-chart",
+    "lem-trf-log-regular-monoidal-ideal-contraction",
+    "lem-trf-free-characteristic-regular-boundary",
+    "lem-trf-log-regular-desingularization",
+    "lem-trf-nodal-pair-projective-resolution",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-trf-cohen-monomial-quotient-regularity",
+  "worker": "stage1",
+  "summary": "Keep the statement and all inherited metadata. Give the finite complementary monomial basis, prove completion of arbitrary ideal quotients from exactness and the finite-module tensor comparison, compare the two filtrations on each truncation coefficientwise, prove separatedness from inverse-limit coordinates, and finish by induction. All non-elementary inputs already exist; no new node is needed.",
+  "blueprint": "Refines the mixed-characteristic Tor-independence input in lem-trf-local-term-locality, proof (1)--(2), through lem-trf-kato-tor-independence-chart, Step 3. ILO VI 1.6(ii) gives the completed Cohen model and VIII 3.4.3 uses Kato 6.1(ii).",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-NE-93979f5a5",
+  "group": "NE",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NE-93979f5a5 (reviewer sub-agent of L); spot-checked: Read in full: the single-commit delivery (item and report, no new nodes), the item's 7 steps, all 8 cited/statement-dep statements, ILO VI 1.6(ii) at pdf p.76, the Stacks tag table (00MA, 00MB, 00FN, 0327), and the parent lem-trf-kato-tor-independence-chart Step 3. Statement, stmt_deps, source and blueprint are byte-identical to live, which is still unsplit with no repair note, so nothing supersedes this and no target is weakened. proof_deps equals the union of uses. All cited nodes are sk-thm-p1 Mathlib leaves or definitions, so the route is fine and no tool_uses entry is needed. Checked step by step. Step 1: the finite polynomial presentation makes S Noetherian. Step 2: the monomial-ideal support calculation gives a finite complementary C-basis; finiteness follows because z^q t^α lies in J_S^{m+1} once its total degree in the d+n generators is at least m+1. Step 3: B/KB ≅ (S/K)^ follows from the two completion statements, and naturality of c with c_S(b⊗s)=bs makes the image of K^ exactly KB. Step 4: p^kQ ⊆ 𝔞^kQ and 𝔞^{k+m+1}Q ⊆ p^kQ, and both directions of the bijection Q_m → Q_m^ are verified. Step 5: ι_{Q_m} is bijective, and KB=(IS)B+J^{m+1}. Step 6: the r-th coordinate of anything in J^rN vanishes, so the intersection is 0. Step 7: the induction is correct, using p injective on the C-free truncation. Edge cases tested: I=P, I=∅, I={≥2} in P=N (C[[z]]/(z^2)), m=0, and P={0} with n=0. No duplicate found by rg -L over dag/nodes for monomial/monoid-completion candidates. Details are in review.md."
+ }
+}

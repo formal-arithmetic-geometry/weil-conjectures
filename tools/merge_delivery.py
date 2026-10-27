@@ -1031,6 +1031,9 @@ def cmd_merge2(o, batch=None):
                 sd = list(cur.get("stmt_deps") or [])
                 cur["stmt_deps"] = sd + [x for x in D["added_deps"] if x not in sd]
                 say(f"set {node_rel}: stmt_deps = {cur['stmt_deps']} (added {D['added_deps']})")
+            if not D.get("corrected") and D.get("removed_deps"):   # 2026-10-25 (deliverfix): a delivered removal
+                cur["stmt_deps"] = [x for x in cur.get("stmt_deps") or [] if x not in D["removed_deps"]]
+                say(f"set {node_rel}: stmt_deps = {cur['stmt_deps']} (removed {D['removed_deps']})")
             docs[item] = cur
             say(f"set {node_rel}: reviewed_lean = {json.dumps(cur['reviewed_lean'], ensure_ascii=False)}")
             put(item)
@@ -1046,6 +1049,7 @@ def cmd_merge2(o, batch=None):
                 nd = json.loads((ROOT / x["path"]).read_text())
                 nd["lean"] = records[nid]
                 nd["reviewed_lean"] = reviewed
+                nd.update(json.loads(json.dumps(x.get("dep_fields") or {})))   # 2026-10-25 (deliverfix): delivered edges
                 docs[nid] = nd; paths_nodes[nid] = x["path"]
                 say(f"set the dependency node {x['path']}: lean (mathlib_match kept) and reviewed_lean")
                 put(nid)
@@ -1155,6 +1159,7 @@ def cmd_merge2(o, batch=None):
         sha = git("rev-parse", "--short", "HEAD")
         git("branch", "-D", br, check=False)
         _qmark("reviewed", str(getattr(o, "stage", "-")), [item])
+        _qmark("done", "2", [item])   # the human, 2026-10-25: the statement is on live; the item leaves the queue now
         if _os.environ.get("SHEAF_STAGE2_DEFER_QUEUE") != "1":
             refresh_queue(item)
     print(f"MERGED {item} {sha}" + (f" (new nodes: {', '.join(new)})" if new else ""))

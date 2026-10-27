@@ -1,0 +1,106 @@
+{
+ "id": "def-cbc-localized-clopen-square",
+ "kind": "definition",
+ "title": "Exact localization of the clopen comparison square",
+ "statement": "Given four abelian categories with derived categories, exact additive functors G,L,L′,G′, and a natural transformation σ:G L′→L G′, clopenLocalizedSquare descends σ to unbounded derived categories using the canonical exact-functor composition comparisons. clopenLocalizedSquarePlus is its bounded-below counterpart. These are the prescribed exact localization constructions; their factorization equations follow from localization.",
+ "stmt_deps": [
+  "lem-weil-pbc-exact-functor-derived-factorization"
+ ],
+ "source": {
+  "document": "literature/stacks-project/more-etale.tex",
+  "place": "Tag 0F7B, first proof paragraph; categorical construction implementing its prescribed comparison."
+ },
+ "proof": [
+  {
+   "text": "Construct the square by composing the inverse exact composition comparison, the localization lift of the termwise natural transformation, and the target exact composition comparison. In D+ use the homotopy localization and its lifting instances. These are the same terms as the original geometric derivedAlpha definitions, with abstract functors as parameters.",
+   "uses": [
+    "lem-weil-pbc-exact-functor-derived-factorization"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-exact-functor-derived-factorization"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/more-etale.tex",
+  "place": "Tag 0F7B; B5 explicit definition and component interface."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Comparison of proper support composition with unit-counit mate for open immersions",
+   "results": "Existing group search found ordinary module adjunctions and no full comparison.",
+   "date": "2026-10-23",
+   "verdict": "Use the existing construction ingredients; a small definition packages them without adding mathematical assumptions."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.mateEquiv",
+   "results": "Existing group search found mateEquiv and its unit/counit formulas.",
+   "date": "2026-10-23",
+   "verdict": "Use the existing construction ingredients; a small definition packages them without adding mathematical assumptions."
+  },
+  {
+   "tool": "grep",
+   "query": "properOpenInterchangeConditions|NatTrans.comp_app|whiskerLeft_app",
+   "results": "The coherence theorem and Mathlib natural-transformation component lemmas supply all ingredients.",
+   "date": "2026-10-23",
+   "verdict": "Use the existing construction ingredients; a small definition packages them without adding mathematical assumptions."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.EtaleClopenMateNormalization",
+  "date": "2026-10-23",
+  "group": "B5"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sf-cbc",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-cbc-etale-clopen-mate-normalization",
+   "place": "Explicit construction interface for the comparison used in the proof.",
+   "via": []
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.EtaleClopenMateNormalization",
+  "file": "lean/Sheaf/AlgebraicGeometry/EtaleClopenMateNormalization.lean",
+  "declaration": "AlgebraicGeometry.Etale.ClopenMateNormalization.clopenLocalizedSquare",
+  "declarations": [
+   "AlgebraicGeometry.Etale.ClopenMateNormalization.clopenLocalizedSquare",
+   "AlgebraicGeometry.Etale.ClopenMateNormalization.clopenLocalizedSquarePlus",
+   "AlgebraicGeometry.Etale.ClopenMateNormalization.clopenLocalizedSquarePlus_factorization"
+  ],
+  "statement": "def clopenLocalizedSquare (σ : G ⋙ L' ⟶ L ⋙ G') :\n    G.mapDerivedCategory ⋙ L'.mapDerivedCategory ⟶\n      L.mapDerivedCategory ⋙ G'.mapDerivedCategory",
+  "branch": "sheaf-dag",
+  "by": "B5",
+  "date": "2026-10-23"
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "C-77b58",
+  "group": "B5",
+  "result": "fix",
+  "landing": "20261024T184610-L-3075477",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-88b21",
+  "group": "M6",
+  "result": "fix",
+  "landing": "20261027T050621-L-245698",
+  "kind": "interface",
+  "note": "independent cc review: item proof, beta/tail sorry statements and the additive EtaleClopenMateNormalization wrappers vs clone sheaf-dag sources, cbcClopenProjection/projection defs, DAG owner records; 3b importers 6/6 OK"
+ }
+}

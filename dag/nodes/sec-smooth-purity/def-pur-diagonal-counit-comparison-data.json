@@ -1,0 +1,124 @@
+{
+ "id": "def-pur-diagonal-counit-comparison-data",
+ "kind": "definition",
+ "title": "Explicit pullback comparisons and the local inverse DNC orientation",
+ "statement": "In the finite setting P, retain the original comparisonPull, restriction, unitChange and coordinate constructions formerly attached to lem-pur-diagonal-affine-counit-restriction. For an open square k:O→W, j:U→X with k W.ι=O.ι j, restrictionAlong is the specified derived pullback compositor, equality comparison and site comparison. For any normalized Chart C over affine target V, localInverse is tate followed by theta_C inverse followed by the pullback of nu*(unitChange). These are actual constructed isomorphisms and morphisms, with no existence witness or new proof obligation.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-orientation/thm-pur-diagonal-dualizing-object.proof.md",
+  "place": "Steps 1--2 and combining/canonicity paragraph"
+ },
+ "stmt_deps": [
+  "def-pur-conventions",
+  "def-pur-diagonal-dualizing-data",
+  "lem-pur-diagonal-orientation-refinement",
+  "def-asd-ordinary-finite-p1-arrows",
+  "def-asd-ordinary-finite-p1-data",
+  "def-sp-etale-compact-support-normalization",
+  "def-pur-purity-base-change-sources",
+  "def-amb-affine-trace-tower"
+ ],
+ "proof": [
+  {
+   "text": "Form the displayed inverse-image composition, site and unit isomorphisms. Compose the four-factor inverse with the endpoint comparisons. The existing coordinate map is retained verbatim.",
+   "uses": [
+    "def-pur-conventions",
+    "def-pur-diagonal-dualizing-data",
+    "lem-pur-diagonal-orientation-refinement"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-pur-conventions",
+  "def-pur-diagonal-dualizing-data",
+  "lem-pur-diagonal-orientation-refinement"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-orientation/thm-pur-diagonal-dualizing-object.proof.md",
+  "place": "Steps 1--2 and combining/canonicity paragraph"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The DNC diagonal orientation is natural under an etale correspondence and is the integration counit on affine projection",
+   "results": "8 hits concerning scheme diagonals and affine coordinate maps; no DNC orientation or counit identity.",
+   "date": "2026-10-26",
+   "verdict": "No matching normalization/naturality theorem."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Iso.inv_hom_id",
+   "results": "2 hits; Iso.inv_hom_id supplies structural cancellation, not the geometric identity.",
+   "date": "2026-10-26",
+   "verdict": "Use for assembly, not a geometric replacement."
+  },
+  {
+   "tool": "grep",
+   "query": "diagonalAffineMate|BetaNormalized|dncInvariance",
+   "results": "msearch: 0 Mathlib hits. Project rg found DiagonalDncChartNormalization and ChartDncVectorFactors, which depend on the assigned item via PurityDiagonalDualizingObject. Independent finite-ring section normalization is available but not the local four-factor identity. Blueprint searches affine counit, diagonal etale, agreement model, projection purity agreement: no duplicate; etale correspondence matched only torsor H1.",
+   "date": "2026-10-26",
+   "verdict": "No independent matching declaration; the two geometric steps are stated separately."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.DiagonalAffineCounitRestriction",
+  "date": "2026-10-26",
+  "group": "C6"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-pur-diagonal-dualizing-object",
+   "place": "Steps 1--2 and combining/canonicity paragraph",
+   "via": [
+    "lem-pur-diagonal-affine-counit-restriction",
+    "lem-pur-diagonal-ordinary-orientation-normalization"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-thm-smooth-purity",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.DiagonalCounitComparisonData",
+  "file": "lean/Sheaf/Paper/DiagonalCounitComparisonData.lean",
+  "declaration": "WeilConjectures.PurityFiniteSetting.OrientationCounit.localInverse",
+  "declarations": [
+   "WeilConjectures.PurityFiniteSetting.OrientationCounit.comparisonPull",
+   "WeilConjectures.PurityFiniteSetting.OrientationCounit.restriction",
+   "WeilConjectures.PurityFiniteSetting.OrientationCounit.unitChange",
+   "WeilConjectures.PurityFiniteSetting.OrientationCounit.coordinate",
+   "WeilConjectures.PurityFiniteSetting.OrientationCounit.restrictionAlong",
+   "WeilConjectures.PurityFiniteSetting.OrientationCounit.localInverse"
+  ],
+  "statement": "def localInverse (P : PurityFiniteSetting.{u}) {X Y : Scheme.{u}}\n    (d : ℕ) (f : X ⟶ Y)\n    [IsSeparated f] [LocallyOfFiniteType f] [QuasiCompact f]\n    [SmoothOfRelativeDimension d f] [HasCompactification f]\n    (aY : Y ⟶ Spec (.of P.field.k)) [LocallyOfFiniteType aY] [QuasiCompact aY]\n    (V : Y.affineOpens) (C : OrientationRefinement.Chart P f aY d V) :\n    (OrientationRefinement.pull P (f ⁻¹ᵁ V.1).ι).obj\n        ((ProEtale.comparisonUpperStar\n          (ModuleCat.{u + 1} P.Coefficient) X).mapDerivedCategory.obj\n            (P.diagonalTwistEtale X d)) ≅\n      (OrientationRefinement.pull P (f ⁻¹ᵁ V.1).ι).obj\n        ((ProEtale.comparisonUpperStar\n          (ModuleCat.{u + 1} P.Coefficient) X).mapDerivedCategory.obj\n            (P.diagonalOrdinaryDualizing f))",
+  "branch": "sheaf-dag",
+  "by": "C6",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-2b655",
+  "group": "C6",
+  "result": "fix",
+  "landing": "20261026T023000-L-510496",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-2b655",
+  "group": "C6",
+  "result": "fix",
+  "landing": "20261026T023000-L-510496",
+  "kind": "interface",
+  "note": "independent cc review: moved OrientationCounit defs vs live item block (verbatim); new sorry lemmas (etale naturality, affine model) vs item and blueprint canonicity; node stmt_deps vs declarations used in the Lean statements; importer DiagonalOrdinaryOrientationNormalization compiled in sandbox (rc 0)"
+ }
+}

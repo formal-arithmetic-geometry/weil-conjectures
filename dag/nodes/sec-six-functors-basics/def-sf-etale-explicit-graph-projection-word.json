@@ -1,0 +1,117 @@
+{
+ "id": "def-sf-etale-explicit-graph-projection-word",
+ "kind": "definition",
+ "title": "Canonical successive projection for explicit proper/open/proper factors",
+ "statement": "Let B be a Grothendieck abelian symmetric monoidal closed coefficient category admitting functorial flat resolutions and the flat-pullback/concrete sheaf-composition structures of the ordinary unbounded etale functors [def-kun-derived-tensor, def-kun-projection-formula-map, lem-pur-etale-open-derived-tensor, lem-kun-derived-pullback-composition-monoidal]. Given proper a:X→W, open immersion e:W→P, proper p:P→Y, f:X→Y and a e p=f, construct for unbounded M on X and K on Y the morphism Rp_*De_!Ra_*M tensor K → Rp_*De_!Ra_*(M tensor Lf*K). It is, in order, the proper projection for p; Rp of the inverse open tensor comparison for e; Rp De of the proper projection for a; and Rp De Ra of M tensor the inverse compositor for (a,e) at Lp*K followed by the inverse compositor for (a e,p) at K. This is the componentwise form of the successive graph-word projection, with no chosen existence witness or inverse of a projection map.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 0B56 (projection map) and 0GL1 (open projection); the canonical pullback associativity calculation in lean/WeilConjectures/SixFunctors/Etale/Derived/UpperStarCompCoherence.lean."
+ },
+ "stmt_deps": [
+  "def-kun-derived-tensor",
+  "def-kun-projection-formula-map",
+  "lem-pur-etale-open-derived-tensor",
+  "lem-kun-derived-pullback-composition-monoidal"
+ ],
+ "proof": [
+  {
+   "text": "Construct the word by composing the actual proper, open, and proper projection components and applying the two inverse pullback compositor components. This is precisely the componentwise form of the original graph-word formula: the functor associator contributes the identity. Keep the coefficient category and the three morphisms as parameters, so the construction and its API use the same derived-category structures.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "agent",
+  "document": "lean/Sheaf/AlgebraicGeometry/SfGraphProjectionData.lean",
+  "place": "D9: parameterize the original explicit graph construction by the coefficient category and three morphisms. Evaluate only the functor-associator and iso-whiskering components of the original final compositor."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Factor a successive proper open proper derived projection map through the compactification projection and the first proper projection",
+   "results": "8 unrelated hits on Profinite.IndexFunctor, LightProfinite, DiscreteQuotient and Nobeling projections. No derived sheaf projection factorization.",
+   "date": "2026-10-26",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"projectionMapOfCompactification\"",
+   "results": "0 Mathlib hits; this constructor and its explicit equation are in the adopted source library.",
+   "date": "2026-10-26",
+   "verdict": "reuse project helpers"
+  },
+  {
+   "tool": "grep",
+   "query": "projection.*prefix|prefix.*projection|proper.*projection.*comp",
+   "results": "25 hits on initialize_simps_projections as_prefix, unrelated to the derived projection. Source search finds no existing proper-prefix factorization. Blueprint search proper prefix projection returns zero nodes.",
+   "date": "2026-10-26",
+   "verdict": "no duplicate; use the existing generic tower proof helpers"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Factor a successive proper open proper derived projection map through the compactification projection and the first proper projection",
+   "results": "8 hits concerning proper maps of topological spaces, projections from compact spaces, and CompHausLike pullbacks. None concerns derived sheaf projection or compactification projection.",
+   "date": "2026-10-26",
+   "verdict": "no match; reuse project projection calculations"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.SfGraphCompositionTailProjection",
+  "date": "2026-10-26",
+  "group": "D9"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-prop-sf-rf-shriek-preservation",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "Explicit-factor construction used to implement def-sf-etale-graph-word-projection and to prove its proper-prefix factorization.",
+   "via": [
+    "def-sf-etale-graph-word-projection",
+    "lem-sf-etale-graph-composition-tail-projection",
+    "lem-sf-etale-compact-projection-coherence",
+    "lem-sf-exceptional-tensor-transitivity",
+    "lem-sf-smooth-dualizing-complex-invertible"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.SfGraphProjectionWord",
+  "file": "lean/Sheaf/AlgebraicGeometry/SfGraphProjectionWord.lean",
+  "declaration": "AlgebraicGeometry.Etale.sfGraphProjectionWord",
+  "declarations": [
+   "AlgebraicGeometry.Etale.sfGraphProjectionWord"
+  ],
+  "statement": "def sfGraphProjectionWord\n    {X W P Y : Scheme.{u}} (a : X ⟶ W) (e : W ⟶ P) (p : P ⟶ Y)\n    [IsProper a] [IsOpenImmersion e] [IsProper p] (f : X ⟶ Y)\n    (hf : a ≫ e ≫ p = f)\n    (M : DerivedCategory (Sheaf X.smallEtaleTopology B))\n    (K : DerivedCategory (Sheaf Y.smallEtaleTopology B)) :\n    ((derivedTensor B Y).obj (((lowerStar B a).rightDerivedFunctor ⋙\n      (openImmersionLowerShriek B e).mapDerivedCategory ⋙\n        (lowerStar B p).rightDerivedFunctor).obj M)).obj K ⟶\n      ((lowerStar B a).rightDerivedFunctor ⋙\n      (openImmersionLowerShriek B e).mapDerivedCategory ⋙ (lowerStar B p).rightDerivedFunctor).obj\n        (((derivedTensor B X).obj M).obj ((upperStar B f).leftDerivedFunctor.obj K))",
+  "branch": "sheaf-dag",
+  "by": "D9",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-30781",
+  "group": "D9",
+  "result": "pass",
+  "landing": "20261026T065448-L-2996235",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-30781",
+  "group": "D9",
+  "result": "pass",
+  "landing": "20261026T065448-L-2996235",
+  "kind": "interface",
+  "note": "independent cc review: item theorem signature vs node lem-sf-etale-graph-composition-tail-projection; new sfGraphWordProjection body vs old (equal up to associator 𝟙 + isoWhiskerLeft components); new nodes' lean.statement vs Lean; 4 delivered modules + 8 unchanged consumers compiled in sandbox; #print axioms"
+ }
+}

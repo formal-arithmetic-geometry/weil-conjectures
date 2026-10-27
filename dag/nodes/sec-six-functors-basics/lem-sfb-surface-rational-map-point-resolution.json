@@ -1,0 +1,348 @@
+{
+ "id": "lem-sfb-surface-rational-map-point-resolution",
+ "kind": "statement",
+ "title": "Elimination of indeterminacy on a regular Noetherian surface",
+ "statement": "Let $S$ be a scheme [def-pc-scheme]. Let $X\\to S$ be an integral regular Noetherian scheme of dimension $2$ [def-pc-integral-scheme, def-weil-regular-scheme, pqf-def-locnoeth, def-kun-topological-krull-dimension], where Noetherian means locally Noetherian and quasi-compact. Let $Y\\to S$ be proper [def-weil-proper-morphism], let $U\\subseteq X$ be a dense open subscheme [def-weil-open-immersion], and let $f:U\\to Y$ be an $S$-morphism. There exist $n\\geq0$, a tower $X_n\\xrightarrow{b_n}\\cdots\\xrightarrow{b_1}X_0=X$ of blowups of reduced closed points [def-nagata-global-blowup], and an $S$-morphism $g:X_n\\to Y$. Every centre lies outside the inverse image of $U$. Every $X_i$ is integral, regular, Noetherian and of dimension $2$. The composite $p:X_n\\to X$ is proper and is an isomorphism over $U$, and $g|_{p^{-1}(U)}=f\\circ p|_{p^{-1}(U)}$. Length zero is allowed.",
+ "source": {
+  "document": "literature/stacks-project/resolve.tex",
+  "place": "Tag 0C5H (resolve-lemma-extend-rational-map-blowing-up), with regular surface preservation from Tag 0AGR (resolve-lemma-blowup-regular). The point-blowup tower in 0C5H is through regular surfaces; the properness and Noetherianity conclusions are the usual finite-type blowup properties."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "pqf-def-locnoeth",
+  "def-pc-integral-scheme",
+  "def-weil-regular-scheme",
+  "def-kun-topological-krull-dimension",
+  "def-weil-proper-morphism",
+  "def-weil-open-immersion",
+  "def-nagata-global-blowup",
+  "def-weil-scheme-over-base",
+  "def-trf-ordinary-resolution-rule"
+ ],
+ "proof": [
+  {
+   "text": "Consider all pairs $(V,F)$ with $U\\subseteq V\\subseteq X$ open and $F:V\\to Y$ an $S$-morphism extending $f$. This family is nonempty since it contains $(U,f)$. Apply [lem-weil-pbc-noetherian-scheme-closed-subsets-minimal] to their closed complements to choose $(V,F)$ for which $T=X\\setminus V$ is minimal under inclusion. Thus $F$ cannot be extended to any strictly larger open containing $V$.",
+   "uses": [
+    "lem-weil-pbc-noetherian-scheme-closed-subsets-minimal"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/resolve.tex",
+    "place": "Tag 0C5H, proof, first sentence; Noetherian maximal-domain implementation of the enlargement of U."
+   }
+  },
+  {
+   "text": "By [lem-sc-scheme-stalk-dimension-generalization-chains] and $\\dim X=2$, every local ring has dimension at most $2$. An integral scheme has a unique generic point $\\eta$, by [def-pc-integral-scheme] and [lem-sc-scheme-sober]; it belongs to every nonempty open, hence to $U$. Every other point has $\\eta$ as a strict generalization, so has local dimension at least $1$. If $x\\notin V$ had local dimension $1$, its local ring would be regular by [def-weil-regular-scheme] and a DVR by [lem-sc-regular-dim1-dvr], hence a valuation ring by [def-sc-discrete-valuation-ring]. Apply [lem-sfb-rational-map-extension-valuation-point] with dense open $V$ and map $F$ to extend across $x$, contradicting step 1. Consequently $\\dim\\mathcal O_{X,t}=2$ for every $t\\in T$.",
+   "uses": [
+    "lem-sc-scheme-stalk-dimension-generalization-chains",
+    "def-kun-topological-krull-dimension",
+    "def-pc-integral-scheme",
+    "lem-sc-scheme-sober",
+    "def-weil-regular-scheme",
+    "lem-sc-regular-dim1-dvr",
+    "def-sc-discrete-valuation-ring",
+    "lem-sfb-rational-map-extension-valuation-point"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/resolve.tex",
+    "place": "Tag 0C5H, proof, first sentence; the DVR criterion is algebra.tex Tag 00PD (lemma-characterize-dvr), (3) implies (2)."
+   }
+  },
+  {
+   "text": "Every $t\\in T$ is closed in $X$: otherwise a strict specialization of $t$ could be prefixed to a length-two generalization chain starting at $t$, contradicting $\\dim X=2$. Here the existence of that chain follows from [lem-sc-scheme-stalk-dimension-generalization-chains], since a supremum of integer chain lengths equal to $2$ is attained. The closed set $T$ is finite. Indeed, if it were not a finite union of singleton closed subsets, choose a minimal closed subset $C\\subseteq T$ failing this property, by [lem-weil-pbc-noetherian-scheme-closed-subsets-minimal]. It is neither empty nor a singleton. It cannot be irreducible, since its generic point given by [lem-sc-scheme-sober] is a point of $T$, hence closed in $X$. Thus $C=C_1\\cup C_2$ for two proper closed subsets; their minimality gives finite singleton decompositions, a contradiction. The empty $T$ is permitted.",
+   "uses": [
+    "lem-sc-scheme-stalk-dimension-generalization-chains",
+    "def-kun-topological-krull-dimension",
+    "lem-weil-pbc-noetherian-scheme-closed-subsets-minimal",
+    "lem-sc-scheme-sober"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/resolve.tex",
+    "place": "Tag 0C5H, proof, second sentence: the complement is a finite set of regular dimension-two closed points; chain and Noetherian arguments expanded."
+   }
+  },
+  {
+   "text": "The inclusion $j:V\\hookrightarrow X$ is quasi-compact. To see this directly from [lem-weil-pbc-noetherian-scheme-closed-subsets-minimal], ascending chains of open subsets of $X$ terminate, so among finite subunions of any family of opens there is a maximal one; it contains every member of that family and equals its union. Thus every open subspace of $X$ is quasi-compact. In particular the intersection of $V$ with any affine open of $X$ is quasi-compact, which is exactly the required quasi-compactness of the open immersion $j$.",
+   "uses": [
+    "lem-weil-pbc-noetherian-scheme-closed-subsets-minimal"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/divisors.tex",
+    "place": "Tag 0C4V (divisors-lemma-extend-rational-map-after-modification), proof: the domain open is retrocompact because X is Noetherian."
+   }
+  },
+  {
+   "text": "Let $a=(j,F):V\\to X\\times_S Y$ and let $i:Z=\\operatorname{SIm}(a)\\hookrightarrow X\\times_S Y$ be its scheme-theoretic image, with factor map $a^{\\mathrm{im}}$, as in [def-nagata-scheme-theoretic-image]. Write $q=\\operatorname{pr}_X i$ and $F_Z=\\operatorname{pr}_Y i$. By [lem-weil-pbc-proper-base-change], $\\operatorname{pr}_X$ is proper; [lem-weil-pbc-closed-immersion-proper](b) makes $q$ proper. Properness includes separatedness by [def-weil-proper-morphism]. Hence [lemma-nagata-scheme-image-partial-section], using the quasi-compact inclusion from step 4 and separated $Y\\to S$, says that $q^{-1}(V)\\to V$ is an isomorphism. The equality $i a^{\\mathrm{im}}=a$ gives $q a^{\\mathrm{im}}=j$ and $F_Z a^{\\mathrm{im}}=F$. Therefore $F_Z|_{q^{-1}(V)}=F\\circ q|_{q^{-1}(V)}$. Both projections are over $S$, so $F_Z$ is an $S$-morphism when $Z$ is given its structure through $q$.",
+   "uses": [
+    "def-nagata-scheme-theoretic-image",
+    "lem-weil-pbc-proper-base-change",
+    "lem-weil-pbc-closed-immersion-proper",
+    "def-weil-proper-morphism",
+    "lemma-nagata-scheme-image-partial-section"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/divisors.tex",
+    "place": "Tag 0C4V (divisors-lemma-extend-rational-map-after-modification), proof in full: scheme-theoretic graph image; used by Tag 0C5H after enlarging U."
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-regular-point-blowup-domination] to $q:Z\\to X$ and the finite set $T$. Its hypotheses hold: $X$ is Noetherian; every point of $T$ is closed with regular local ring of dimension $2$ by steps 2--3; and $q$ is proper and an isomorphism over $V=X\\setminus T$ by step 5. Obtain a finite tower $X_n\\xrightarrow{b_n}\\cdots\\xrightarrow{b_1}X_0=X$ and $h:X_n\\to Z$ with $qh=p=b_1\\cdots b_n$. Each centre is a reduced closed point mapping to $T$, hence lies outside the inverse image of the original $U\\subseteq V$. Equip every $X_i$ with the $S$-structure obtained by composing with $X\\to S$.",
+   "uses": [
+    "lem-sfb-regular-point-blowup-domination"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/resolve.tex",
+    "place": "Tag 0C5H, proof, last two sentences, invoking Tag 0AHI (resolve-lemma-dominate-by-blowing-up-in-points)."
+   }
+  },
+  {
+   "text": "Induct on $i$ with invariant: $X_i$ is integral, regular and Noetherian; each earlier blowup is proper and an isomorphism away from its centre; and every closed point of $X_i$ mapping into $T$ has local dimension $2$. The base follows from the hypotheses and steps 2--3. The next centre is such a closed point. Apply [lem-sfb-regular-point-blowup-geometry] at that centre: it gives the first two parts of the invariant on $X_{i+1}$. To check the last part, let $r\\in X_{i+1}$ be closed over $T$. Since $b_{i+1}$ is proper, hence closed by [def-weil-proper-morphism], its image is a closed point of $X_i$. If this image is the centre, the same geometry node gives $\\dim\\mathcal O_{X_{i+1},r}=2$; otherwise the isomorphism away from the centre identifies this local ring with the dimension-two local ring supplied by the induction hypothesis. This proves the invariant, including when $T$ is empty (the tower then has no centres).",
+   "uses": [
+    "lem-sfb-regular-point-blowup-geometry",
+    "def-weil-proper-morphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/resolve.tex",
+    "place": "Tag 0AGR (resolve-lemma-blowup-regular) through the existing global point-blowup geometry node; preservation along the tower of Tag 0C5H."
+   }
+  },
+  {
+   "text": "For use in the dimension check, every point $z$ of a Noetherian scheme $W$ has a closed specialization. Choose a minimal nonempty closed subset $C\\subseteq\\overline{\\{z\\}}$ by [lem-weil-pbc-noetherian-scheme-closed-subsets-minimal]. For every $c\\in C$, minimality gives $\\overline{\\{c\\}}=C$. Uniqueness of generic points in [lem-sc-scheme-sober] implies that all these $c$ coincide, so $C$ is a singleton closed in $W$. Moreover, [lem-sc-scheme-stalk-dimension-generalization-chains] shows that the local dimension at $z$ is at most the local dimension at a specialization of $z$. Finally, by the same chain formula and [lem-sc-scheme-sober], $\\dim W$ is the supremum of its local-ring dimensions: a chain of irreducible closed subsets becomes the chain of their generic points and conversely. These arguments apply without separatedness or a Jacobson hypothesis.",
+   "uses": [
+    "lem-weil-pbc-noetherian-scheme-closed-subsets-minimal",
+    "lem-sc-scheme-sober",
+    "lem-sc-scheme-stalk-dimension-generalization-chains",
+    "def-kun-topological-krull-dimension"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/properties.tex",
+    "place": "Tag 02IZ (properties-lemma-codimension-local-ring) and schemes.tex Tag 01IS (lemma-scheme-sober); elementary consequences needed for the extra dimension clause."
+   }
+  },
+  {
+   "text": "Now prove $\\dim X_i=2$ by induction, the case $i=0$ being assumed. Let $b:X_{i+1}\\to X_i$ have centre $c$. Every closed point $r$ of $X_{i+1}$ has local dimension at most $2$: if $b(r)=c$, use [lem-sfb-regular-point-blowup-geometry]; otherwise $b$ is an isomorphism near $r$ and identifies its local ring with one on $X_i$. Step 8 bounds the local dimension at every point by that at a closed specialization, and identifies the supremum with scheme dimension, so $\\dim X_{i+1}\\leq2$. For the reverse inequality, the proper map $b$ has closed image by [def-weil-proper-morphism]. Its image contains $X_i\\setminus\\{c\\}$, which is dense because $X_i$ is integral and has dimension $2$. Thus $b$ is surjective. Choose a point over $c$ and a closed specialization $r$ of it by step 8. Continuity and closedness of $c$ keep $r$ over $c$. The geometry node gives $\\dim\\mathcal O_{X_{i+1},r}=2$, whence $\\dim X_{i+1}\\geq2$.",
+   "uses": [
+    "lem-sfb-regular-point-blowup-geometry",
+    "def-weil-proper-morphism",
+    "def-pc-integral-scheme"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/resolve.tex",
+    "place": "Tag 0AGR and the closed-point dimension assertion of the global geometry node; dimension preservation in the tower of Tag 0C5H."
+   }
+  },
+  {
+   "text": "Each $b_i$ is proper by step 7, so [lem-weil-pbc-proper-composition] makes $p$ proper (for length zero, the identity is proper directly from [def-weil-proper-morphism]). Since all centres lie over $T$, composing their isomorphisms off their centres identifies $p^{-1}(V)$ with $V$, and hence $p^{-1}(U)$ with $U$. Define $g=F_Z\\circ h$. It is an $S$-morphism, since $qh=p$ and $F_Z$ is over $S$. On $p^{-1}(U)$ the map $h$ lands in $q^{-1}(V)$, and step 5 gives $g=F\\circ q\\circ h=F\\circ p=f\\circ p$. Steps 7 and 9 give every asserted property of the intermediate schemes. If $U=X$, choose the length-zero tower and $g=f$; more generally the construction also permits length zero whenever the map already extends.",
+   "uses": [
+    "lem-weil-pbc-proper-composition",
+    "def-weil-proper-morphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/resolve.tex",
+    "place": "Tag 0C5H, proof, final composition; the properness and original-domain compatibility clauses expanded."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-noetherian-scheme-closed-subsets-minimal",
+  "lem-sc-scheme-stalk-dimension-generalization-chains",
+  "def-kun-topological-krull-dimension",
+  "def-pc-integral-scheme",
+  "lem-sc-scheme-sober",
+  "def-weil-regular-scheme",
+  "lem-sc-regular-dim1-dvr",
+  "def-sc-discrete-valuation-ring",
+  "lem-sfb-rational-map-extension-valuation-point",
+  "def-nagata-scheme-theoretic-image",
+  "lem-weil-pbc-proper-base-change",
+  "lem-weil-pbc-closed-immersion-proper",
+  "def-weil-proper-morphism",
+  "lemma-nagata-scheme-image-partial-section",
+  "lem-sfb-regular-point-blowup-domination",
+  "lem-sfb-regular-point-blowup-geometry",
+  "lem-weil-pbc-proper-composition"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/resolve.tex",
+  "place": "Tag 0C5H (resolve-lemma-extend-rational-map-blowing-up), with its Tag 0BX7 and Tag 0C4V inputs and regularity from Tag 0AGR; elementary Noetherian and dimension arguments are expanded."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Extend a rational map from an integral regular Noetherian surface to a proper scheme by a finite sequence of blowups at closed points",
+   "results": "{\"t\": \"2026-10-22T04:46:47Z\", \"tool\": \"leanfinder\", \"query\": \"Extend a rational map from an integral regular Noetherian surface to a proper scheme by a finite sequence of blowups at closed points\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.RationalMap.exists_rep\", \"AlgebraicGeometry.Scheme.RationalMap.exists_partialMap_over\", \"AlgebraicGeometry.Scheme.PartialMap.toRationalMap\", \"AlgebraicGeometry.Scheme.RationalMap.IsOver.exists_partialMap_over\", \"AlgebraicGeometry.Scheme.RationalMap.toPartialMap\", \"AlgebraicGeometry.Scheme.RationalMap.ofFunctionField\", \"AlgebraicGeometry.Scheme.RationalMap\", \"AlgebraicGeometry.Scheme.PartialMap.fromFunctionField\"], \"digest\": \"7544e1f1908f30be\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits represent or restrict rational maps on dense opens; none extends them to a point-blowup tower, or asserts surface resolution."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Elimination of indeterminacies on a regular two dimensional scheme by point blowups",
+   "results": "{\"t\": \"2026-10-22T04:46:42Z\", \"tool\": \"leansearch\", \"query\": \"Elimination of indeterminacies on a regular two dimensional scheme by point blowups\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.mk.noConfusion\", \"AlgebraicGeometry.Scheme\", \"WeierstrassCurve.Affine.Point.some.elim\", \"AlgebraicGeometry.IsSmooth.casesOn\", \"WeierstrassCurve.Affine.Point.ctorElim\", \"AlgebraicGeometry.IsSmooth.recOn\", \"AlgebraicGeometry.IsSmooth\", \"AlgebraicGeometry.IsIntegral\"], \"digest\": \"06b8d771ad76d396\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits represent or restrict rational maps on dense opens; none extends them to a point-blowup tower, or asserts surface resolution."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"RationalMap\"",
+   "results": "{\"t\": \"2026-10-22T04:46:42Z\", \"tool\": \"loogle\", \"query\": \"\\\"AlgebraicGeometry\\\", \\\"RationalMap\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.RationalMap\", \"AlgebraicGeometry.Scheme.RationalMap.id\", \"AlgebraicGeometry.Scheme.RationalMap.domain\", \"AlgebraicGeometry.Scheme.Hom.toRationalMap\", \"AlgebraicGeometry.Scheme.PartialMap.toRationalMap\", \"AlgebraicGeometry.Scheme.RationalMap.representative\", \"AlgebraicGeometry.Scheme.PartialMap.toRationalMap_surjective\", \"AlgebraicGeometry.Scheme.RationalMap.openCoverDomain\"], \"digest\": \"17fc852bc34c880c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits represent or restrict rational maps on dense opens; none extends them to a point-blowup tower, or asserts surface resolution."
+  },
+  {
+   "tool": "grep",
+   "query": "extend.*rational|resolv.*rational|point.*blow|blow.*point",
+   "results": "{\"t\": \"2026-10-22T04:46:41Z\", \"tool\": \"grep\", \"query\": \"extend.*rational|resolv.*rational|point.*blow|blow.*point\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits represent or restrict rational maps on dense opens; none extends them to a point-blowup tower, or asserts surface resolution."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A proper target valued morphism on a dense open of a regular surface extends after blowing up finitely many reduced closed points",
+   "results": "{\"t\": \"2026-10-22T04:46:43Z\", \"tool\": \"leanfinder\", \"query\": \"A proper target valued morphism on a dense open of a regular surface extends after blowing up finitely many reduced closed points\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.PartialMap.exists_restrict_isOver\", \"AlgebraicGeometry.Scheme.RationalMap.exists_rep\", \"AlgebraicGeometry.Scheme.RationalMap.exists_partialMap_over\", \"AlgebraicGeometry.Scheme.RationalMap.IsOver.exists_partialMap_over\", \"AlgebraicGeometry.Scheme.PartialMap.fromFunctionField_restrict\", \"AlgebraicGeometry.Scheme.PartialMap.fromFunctionField\", \"AlgebraicGeometry.Scheme.RationalMap.toPartialMap\", \"AlgebraicGeometry.Scheme.RationalMap.dense_domain\"], \"digest\": \"a188da6f242a1559\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits represent or restrict rational maps on dense opens; none extends them to a point-blowup tower, or asserts surface resolution."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A rational map from a regular Noetherian surface to a proper scheme is resolved by finitely many blowups at closed points",
+   "results": "{\"t\": \"2026-10-22T05:08:20Z\", \"tool\": \"leanfinder\", \"query\": \"A rational map from a regular Noetherian surface to a proper scheme is resolved by finitely many blowups at closed points\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.RationalMap.exists_rep\", \"AlgebraicGeometry.Scheme.RationalMap.exists_partialMap_over\", \"AlgebraicGeometry.Scheme.RationalMap.IsOver.exists_partialMap_over\", \"AlgebraicGeometry.Scheme.RationalMap\", \"AlgebraicGeometry.Scheme.RationalMap.toPartialMap\", \"AlgebraicGeometry.Scheme.Hom.toRationalMap\", \"AlgebraicGeometry.Scheme.RationalMap.IsOver\", \"AlgebraicGeometry.Scheme.RationalMap.ofFunctionField\"], \"digest\": \"d82b797797890ad6\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: RationalMap representatives and proper-morphism stability do not give point-blowup resolution of a regular surface; grep finds no point-blowup resolution declaration."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"RationalMap\", \"AlgebraicGeometry\"",
+   "results": "{\"t\": \"2026-10-22T05:08:41Z\", \"tool\": \"loogle\", \"query\": \"\\\"RationalMap\\\", \\\"AlgebraicGeometry\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.RationalMap\", \"AlgebraicGeometry.Scheme.RationalMap.id\", \"AlgebraicGeometry.Scheme.RationalMap.domain\", \"AlgebraicGeometry.Scheme.Hom.toRationalMap\", \"AlgebraicGeometry.Scheme.PartialMap.toRationalMap\", \"AlgebraicGeometry.Scheme.RationalMap.representative\", \"AlgebraicGeometry.Scheme.PartialMap.toRationalMap_surjective\", \"AlgebraicGeometry.Scheme.RationalMap.openCoverDomain\"], \"digest\": \"17fc852bc34c880c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: RationalMap representatives and proper-morphism stability do not give point-blowup resolution of a regular surface; grep finds no point-blowup resolution declaration."
+  },
+  {
+   "tool": "grep",
+   "query": "extend.*rational|resolv.*rational|point.*blow|blow.*point",
+   "results": "{\"t\": \"2026-10-22T05:08:40Z\", \"tool\": \"grep\", \"query\": \"extend.*rational|resolv.*rational|point.*blow|blow.*point\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: RationalMap representatives and proper-morphism stability do not give point-blowup resolution of a regular surface; grep finds no point-blowup resolution declaration."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Elimination of indeterminacies by point blowups on a regular surface",
+   "results": "{\"t\": \"2026-10-22T05:08:40Z\", \"tool\": \"leansearch\", \"query\": \"Elimination of indeterminacies by point blowups on a regular surface\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"WeierstrassCurve.Affine.Point.some.elim\", \"WeierstrassCurve.Affine.Point.ctorElimType\", \"WeierstrassCurve.Affine.Point.ctorElim\", \"AlgebraicGeometry.IsSmooth\", \"Algebra.smoothLocus\", \"AlgebraicGeometry.IsSmooth.recOn\", \"AlgebraicGeometry.IsProper\", \"WeierstrassCurve.Affine.Point.some.noConfusion\"], \"digest\": \"b9d3356db7ba4bad\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: RationalMap representatives and proper-morphism stability do not give point-blowup resolution of a regular surface; grep finds no point-blowup resolution declaration."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A proper target morphism on a dense open surface extends after a tower of blowups",
+   "results": "{\"t\": \"2026-10-22T05:08:45Z\", \"tool\": \"leanfinder\", \"query\": \"A proper target morphism on a dense open surface extends after a tower of blowups\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsProper.instIsZariskiLocalAtTarget\", \"AlgebraicGeometry.IsProper.stableUnderComposition\", \"AlgebraicGeometry.Scheme.PartialMap.exists_restrict_isOver\", \"AlgebraicGeometry.IsProper.instIsMultiplicativeScheme\", \"AlgebraicGeometry.instHasOfPostcompPropertySchemeIsProperIsSeparated\", \"AlgebraicGeometry.IsProper.of_comp\", \"AlgebraicGeometry.Scheme.RationalMap.exists_partialMap_over\", \"AlgebraicGeometry.IsProper.comp_iff\"], \"digest\": \"15efc2a367e00acf\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: RationalMap representatives and proper-morphism stability do not give point-blowup resolution of a regular surface; grep finds no point-blowup resolution declaration."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-common-regular-surface-resolution",
+  "date": "2026-10-22",
+  "group": "NI"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong §3.8, last paragraph, printed pp.608--609: finite unramified Isom for unordered stable marked curves, and extension over a normal base. This is rigidity of stable pointed curves themselves, independent of any modification map.; rigidity input: Invariance of logarithmic pluricanonical lattices of semistable models; Common domination of marked nodal models over a discrete valuation ring; Common point-blowup resolution of regular proper surfaces; Tag 0C5H (resolve-lemma-extend-rational-map-blowing-up), with regular surface preservation from Tag 0AGR (resolve-lemma-blowup-regular). The point-blowup tower in 0C5H is through regular surfaces; the properness and Noetherianity conclusions are the usual finite-type blowup properties.",
+   "via": [
+    "lem-sfb-common-regular-surface-resolution",
+    "lem-sfb-common-nodal-model",
+    "lem-sfb-semistable-log-pluricanonical-lattices",
+    "lem-sfb-stable-pointed-isom-finite",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sfb-surface-rational-map-point-resolution",
+  "worker": "stage1",
+  "summary": "Followed Stacks 0C5H. Added only the point-local valuation extension input 0BX7; reused same-unit point-blowup domination and regularity. Expanded the proper graph modification using existing scheme-image and properness nodes instead of creating a duplicate 0C4V node. Wrote out finite indeterminacy, closed-specialization and intermediate dimension arguments. No statement correction.",
+  "blueprint": "det-thm-sf-ctf-stability-direct-images, proof (3), through the alteration and stable-pointed-curve rigidity chain recorded in blueprint.from.via; Stacks Tag 0C5H proof, first sentence: extend the rational map across every codimension-one point before resolving the remaining finite set of points. The item realizes the common-regular-surface-resolution prerequisite in this recorded chain. The ancestry tool returns null because lem-sfb-admissible-direct-image was created by a module delivery; the inherited null root and via chain are retained, with the actual blueprint proof place stated explicitly.",
+  "tool_uses": [
+   {
+    "node": "lem-sc-regular-dim1-dvr",
+    "why": "Generic regular-local dimension-one DVR criterion (Stacks 00PD), used to apply 0BX7 at codimension one; no corresponding same-unit criterion is present."
+   },
+   {
+    "node": "lem-sc-scheme-stalk-dimension-generalization-chains",
+    "why": "Generic local-ring/chain dimension formula (Stacks 02IZ), needed for the finite exceptional set and preservation of global surface dimension; no same-unit version exists."
+   },
+   {
+    "node": "lemma-nagata-scheme-image-partial-section",
+    "why": "Generic partial-section scheme-image theorem, used exactly in the graph modification proof of Stacks 0C4V; the unit has no such graph-image assertion."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sc-regular-dim1-dvr",
+  "lem-sc-scheme-stalk-dimension-generalization-chains",
+  "lemma-nagata-scheme-image-partial-section"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q41-cb6fd57b7",
+  "group": "Q41",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q41-cb6fd57b7 (reviewer sub-agent of L); spot-checked: I read the item and the new node in full against Stacks resolve.tex 0C5H (l.965-990), 0AHI (l.929-962) and morphisms.tex 0BX7 (l.10425-10473). The item statement is unchanged. The new node lem-sfb-rational-map-extension-valuation-point is 0BX7 restricted to integral Noetherian X: U dense puts x in its closure, and O_{X,x} is a valuation ring. It is self-contained, statement-only and cites the right definitions. No duplicate exists: lem-sfb-valuation-stalk-proper-target-extension works over a field and needs every stalk to be a valuation ring. All 10 steps check against the cited statements. Step 2: the chain formula gives local dimension at most 2; codimension-1 points are regular, hence DVRs, hence valuation rings, so the new node extends (V,F) there, which contradicts the minimal T from step 1. Step 3: T is a finite set of closed points of local dimension 2. Step 4: V->X is quasi-compact. Step 5: the 0C4V graph is written out from the scheme-image, proper base change and closed-immersion (b) nodes, with the partial-section lemma under exactly its hypotheses, giving F_Z = F q over V. Step 6: the domination node's hypotheses hold exactly. Step 7: the induction keeps the hypotheses of the geometry node at every centre (proper implies closed, plus the off-centre isomorphism). Steps 8-9: dim X_i = 2 in both directions. Step 10: assembly, with g = F p = f p on p^{-1}(U). There is no cycle and proof_deps equals the step uses. Batch-5: def-trf-valuation-ring is a general definition. lem-trf-blowup-chart-regular-sequence-presentation is Stacks 0BIQ commutative algebra, not part of either assumption, and it and the geometry node are already in the b5 closure without this item; the only node the item adds is the new one. Both accepted. The split_report's three generic off-unit tools (00PD, 02IZ chain formula, the scheme-image partial-section lemma) are accepted. The null blueprint ancestry is inherited. No changes made."
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SurfaceRationalMapPointResolution",
+  "declaration": "AlgebraicGeometry.exists_surface_rational_map_point_resolution",
+  "file": "lean/Sheaf/AlgebraicGeometry/SurfaceRationalMapPointResolution.lean",
+  "statement": "theorem exists_surface_rational_map_point_resolution (S X Y : Scheme.{u}) [IsIntegral X] [IsNoetherian X] (sX : X ⟶ S) (sY : Y ⟶ S) [IsProper sY] (hX : IsRegularScheme X) (hdim : topologicalKrullDim X = 2) (U : X.Opens) (hU : Dense (U : Set X)) (f : U.toScheme ⟶ Y) (hf : f ≫ sY = U.ι ≫ sX) : ∃ (A : OrdinaryBlowupTower X) (g : A.level (Fin.last A.length) ⟶ Y), (∀ i : Fin A.length, ∃ (p : A.level i.castSucc) (hp : IsClosed ({p} : Set _)), A.center i = Scheme.IdealSheafData.vanishingIdeal ⟨{p}, hp⟩ ∧ A.toBase i.castSucc p ∉ U) ∧ (∀ i : Fin (A.length + 1), IsIntegral (A.level i) ∧ IsRegularScheme (A.level i) ∧ IsNoetherian (A.level i) ∧ topologicalKrullDim (A.level i) = 2) ∧ IsProper (A.toBase (Fin.last A.length)) ∧ IsIso (A.toBase (Fin.last A.length) ∣_ U) ∧ g ≫ sY = A.toBase (Fin.last A.length) ≫ sX ∧ (A.toBase (Fin.last A.length) ⁻¹ᵁ U).ι ≫ g = (A.toBase (Fin.last A.length) ∣_ U) ≫ f",
+  "branch": "newtargets-dag",
+  "by": "Q22",
+  "date": "2026-10-22",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-910163f44",
+  "group": "Q22",
+  "result": "pass",
+  "note": "Read the node, all 10 stmt_dep records, Stacks resolve.tex 0C5H (l.965-990), OrdinaryBlowupTower/toBase (side-live OrdinaryResolutionRule.lean l.48-65) and Mathlib vanishingIdeal. Clause by clause the Lean matches the node: IsIntegral/IsNoetherian/IsRegularScheme/topologicalKrullDim=2 on X; IsProper sY only; dense U : X.Opens; explicit S-triangle hf; ∃ OrdinaryBlowupTower X with level 0 ≅ X and blowupIso over each level; centres = vanishingIdeal of closed singletons whose image in X is ∉ U; all levels i : Fin (n+1) integral, regular, Noetherian, dim 2; IsProper p; IsIso (p ∣_ U); g S-morphism; agreement on all of p⁻¹ᵁ U. Length zero allowed. The statement field is a verbatim match of the file; max line 92. The only node change besides lean is the added stmt_dep def-trf-ordinary-resolution-rule (landed owner of the tower; the live citer lem-sfb-common-regular-surface-resolution already has it, so the b5 closure is unchanged). No new definition, sorry only, source and blueprint docstrings present, 10-step proof docstring. Advisory: the public import Mathlib.AlgebraicGeometry.Over is unused. No compile run since nothing was changed."
+ }
+}

@@ -377,16 +377,14 @@
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q71-844945c09 (reviewer sub-agent of L); spot-checked: The C6/D4 return of 93495d86 is repaired. lem-per-punctured-support-cohomological-bound has been removed. The transitive closure of the item's dependencies (3447 nodes) reaches neither that node nor the item, so there is no cycle. The punctured bound is now proved directly for Z/ℓ^n in 11 steps, following ILO XVII 3.2.1 (p. 268), which I read. Steps 1–2: constructible filtered presentation, replaced by images D_a ⊆ F. Constructibility comes from subobjects-noetherian and from Serre (1) on K_a→C_a. colim D_a = F is checked, and the support passes on through exact forgetting and exact stalks. Step 3: irreducible refinement and sober generic points give Z = closure of the support, with dim r ≤ e; C=0 is handled first. Step 4: lem-kun-04ca and finite pushforward for an ℓ^n-torsion sheaf. Step 5: S=Spec A, Z=Spec A/I with I⊆m. A/I is excellent (finite-type lemma, S={1}) and strictly henselian (quotient lemma). The r parameters cover the puncture; r=0 gives an empty puncture. Step 6: the new node on Z (dim r) bounds each D(f_{i0}⋯f_{ip}) ⊆ V. With the alternating Čech complex on r opens, E_2^{p,b}=0 for p+b≥2r. Steps 8–11 are the supported and generic arguments already checked in the earlier review: the acyclic/torsion support sequence and the module-kernel comparison, then η = lim D(f), constructible descent, the affine bound with q>d, and colimits. The source's bounds are kept: q≥2e, Γ_s q>2d (at least ILO's cd_ℓ Γ_x ≤ 2d), cd η ≤ d. The only change is that e is now stated as an integer ≥0. New node lem-per-affine-open-strict-local-cd is true by ILO XV Cor 1.2.2 (p. 219) for an affine open immersion, giving f⋆δ ≤ d, extended to all sheaves by colimits. It has a statement only, five recorded searches and correct blueprint fields. A fresh dag grep found no duplicate (trf relative bounds, condition (*), curve bounds). There is no parallel delivery of the new node. All 20 off-unit tool_uses are generic and accepted. No SGA is used. Advisory: the item's source.place still mentions the ℓ-adic filtration, which the proof no longer uses. This is cosmetic and left unchanged. No fixes were written."
  },
- "lean": {
+ "lean": null,
+ "lean_removed": {
+  "commit": "e7ce5f35a7d",
+  "path": "lean/Sheaf/AlgebraicGeometry/StrictLocalEtaleDimensionBounds.lean",
   "module": "Sheaf.AlgebraicGeometry.StrictLocalEtaleDimensionBounds",
   "declaration": "AlgebraicGeometry.Etale.strictLocal_etale_dimension_bounds",
-  "file": "lean/Sheaf/AlgebraicGeometry/StrictLocalEtaleDimensionBounds.lean",
-  "statement": "theorem strictLocal_etale_dimension_bounds (R : CommRingCat.{u}) [IsNoetherianRing R] [IsStrictlyHenselianLocalRing R] (hR : IsExcellent R) (ℓ n d : ℕ) (hℓ : ℓ.Prime) (hn : 1 ≤ n) (hunit : IsUnit (ℓ : R)) (hd : ringKrullDim R = (d : WithBot ℕ∞)) (U : (Spec R).Opens) (hU : (U : Set (Spec R)) = ({IsLocalRing.closedPoint R} : Set (Spec R))ᶜ) : (∀ (F : Sheaf U.toScheme.smallEtaleTopology (ModuleCat.{u + 1} (ULift.{u + 1} (ZMod (ℓ ^ n))))) (e : ℕ), (∀ (Ω : Type u) [Field Ω] [IsAlgClosed Ω] (t : Spec (.of Ω) ⟶ U.toScheme), ¬ IsZero (pointedEtaleStalk F t) → topologicalKrullDim (closure ({U.ι (t (IsLocalRing.closedPoint Ω))} : Set (Spec R))) ≤ (e : WithBot ℕ∞)) → ∀ (q : ℤ), (2 * e : ℤ) ≤ q → IsZero ((cohomology AddCommGrpCat.{u + 1} U.toScheme q).obj ((_root_.DerivedCategory.singleFunctor _ 0).obj ((sheafCompose U.toScheme.smallEtaleTopology (forget₂ (ModuleCat.{u + 1} (ULift.{u + 1} (ZMod (ℓ ^ n)))) AddCommGrpCat.{u + 1})).obj F)))) ∧ (∀ (G : Sheaf (Spec R).smallEtaleTopology (ModuleCat.{u + 1} (ULift.{u + 1} (ZMod (ℓ ^ n))))) (q : ℤ), (2 * d : ℤ) < q → IsZero ((_root_.DerivedCategory.homologyFunctor _ q).obj ((derivedSupportedEtaleSections (ULift.{u + 1} (ZMod (ℓ ^ n))) (Spec R) U).obj ((_root_.DerivedCategory.Plus.singleFunctor _ 0).obj G)))) ∧ (∀ [_hI : IsIntegral (Spec R)] (L : Sheaf (Spec (.of (Spec R).functionField)).smallEtaleTopology (ModuleCat.{u + 1} (ULift.{u + 1} (ZMod (ℓ ^ n))))) (q : ℤ), (d : ℤ) < q → IsZero ((cohomology AddCommGrpCat.{u + 1} (Spec (.of (Spec R).functionField)) q).obj ((_root_.DerivedCategory.singleFunctor _ 0).obj ((sheafCompose (Spec (.of (Spec R).functionField)).smallEtaleTopology (forget₂ (ModuleCat.{u + 1} (ULift.{u + 1} (ZMod (ℓ ^ n)))) AddCommGrpCat.{u + 1})).obj L))))",
-  "branch": "newtargets-dag",
-  "by": "Q110",
-  "date": "2026-10-18",
-  "existing": false,
-  "note": "2026-10-20 (U): module Sheaf.AlgebraicGeometry.StrictLocalEtaleDimensionBounds deleted (dead: no target reaches it); this node is not reached either."
+  "reason": "module deleted as dead (no target reaches it by imports; this node is not reached either); the declaration does not live on elsewhere, so the node has no Lean statement",
+  "former_note": "2026-10-20 (U): module Sheaf.AlgebraicGeometry.StrictLocalEtaleDimensionBounds deleted (dead: no target reaches it); this node is not reached either."
  },
  "reviewed_lean": {
   "date": "2026-10-18",
@@ -396,5 +394,16 @@
   "result": "pass",
   "note": "Lean matches node and ILO XVII 3.2.1/3.2.2 (pp. 268-269) clause by clause: strictly henselian Noetherian excellent Spec R, ell unit, ringKrullDim = d, puncture by hU; support hypothesis via pointedEtaleStalk at all geometric points with closure in Spec R and topologicalKrullDim <= e; H^q(U)=0 for q>=2e, derivedSupportedEtaleSections homology 0 for q>2d, IsIntegral-local generic-point bound q>d. ULift coefficient is forced by the supported-sections interface and is the same ring. Edge cases e=0, d=0, n=1 OK. No duplicate (F_ell first-clause consumer only). Node unchanged apart from lean; statement verbatim; plain imports equal the proof-use modules; docstrings, source and blueprint present; sorry only. nt_compile --json clean in 5.1 s. Advisory: source.place still mentions the ell-adic filtration."
  },
- "lean_audit": {}
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ }
 }

@@ -1,0 +1,180 @@
+{
+ "id": "lem-weil-pbc-finite-perfect-adic-constant-models-reduction",
+ "kind": "statement",
+ "title": "Scalar balancing of two constant models on one nonempty chart",
+ "statement": "Let X be a scheme, d an adic coefficient datum on A, phi_n coefficient isomorphisms satisfying FinitePerfectModelsCompatible, and M a completed derived module [def-weil-pbc-adic-coefficient-datum, def-weil-pbc-finite-perfect-adic-tower-data]. Fix n and an X-etale chart W with a point w. Let Eprime be perfect over A/I^(n+2) and E perfect over A/I^(n+1) [def-pc-perfect-ring-complex]. Suppose the actual (n+1)st and nth quotients of M restricted to W are respectively isomorphic to completed constant realizations of Eprime and E [def-weil-pbc-ringed-site-derived-restriction]. Then algebraic derived extension of Eprime along A/I^(n+2) to A/I^(n+1) is isomorphic to E [def-sfb-module-derived-scalar-comparisons]. No etale descended complex, local constancy assumption or cover-existence conclusion is present.",
+ "source": {
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Tag 09C6, looking locally on X to obtain M_(n+1) tensor^L A/I^(n+1) = M_n; sites-cohomology.tex lemma-locally-constant-map (Tag 09BE); Tag 0D6D for scalar transitivity; etale-cohomology.tex Tags 03PT and 040R."
+ },
+ "stmt_deps": [
+  "def-pc-perfect-ring-complex",
+  "def-sfb-module-derived-scalar-comparisons",
+  "def-weil-pbc-adic-coefficient-datum",
+  "def-weil-pbc-finite-perfect-adic-tower-data",
+  "def-weil-pbc-finite-perfect-quotient-model-data",
+  "def-weil-pbc-ringed-site-derived-restriction"
+ ],
+ "proof": [
+  {
+   "text": "Identify the representative-defined slice restriction with the derived functor of exact over-restriction. Derive the ordinary tensor-over-restriction square using K-flat resolutions; restriction preserves K-flatness. Thus any isomorphism on this slice remains an isomorphism after coefficient extension. Apply this to the upper constant-model isomorphism.",
+   "uses": [
+    "def-weil-pbc-ringed-derived-restriction",
+    "lem-sfb-proetale-local-scalar-homology-iso",
+    "lem-sfb-ringed-site-restriction-kflat"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use the canonical pbcReductionNormalization isomorphisms for the completed upper projection followed by the finite transition, and for the two compatible paths through the constant quotient map. Insert the supplied upper and lower model isomorphisms and the small-coefficient constant scalar-extension comparison.",
+   "uses": [
+    "def-weil-pbc-adic-coefficient-datum",
+    "def-weil-pbc-bounded-constructible-tower",
+    "lem-weil-pbc-finite-perfect-adic-constant-scalar-extension"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Choose complex representatives of the resulting algebraic derived objects and compare their exact constant realizations with finiteModelConstantComplex. Apply finiteConstantSlice_iso_reflects at the specified point of W. Transport its standard-localization isomorphism to the chosen small algebraic localization by the canonical localization equivalence.",
+   "uses": [
+    "lem-weil-pbc-finite-constant-slice-iso-reflects"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-ringed-derived-restriction",
+  "lem-sfb-proetale-local-scalar-homology-iso",
+  "lem-sfb-ringed-site-restriction-kflat",
+  "def-weil-pbc-adic-coefficient-datum",
+  "def-weil-pbc-bounded-constructible-tower",
+  "lem-weil-pbc-finite-perfect-adic-constant-scalar-extension",
+  "lem-weil-pbc-finite-constant-slice-iso-reflects"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "agent": "H7",
+  "date": "2026-10-27",
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Tag 09C6, looking locally on X to obtain M_(n+1) tensor^L A/I^(n+1) = M_n; sites-cohomology.tex lemma-locally-constant-map (Tag 09BE); Tag 0D6D for scalar transitivity; etale-cohomology.tex Tags 03PT and 040R."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "finite ring locally perfect proetale complex descends to etale site with perfect geometric stalk",
+   "results": "8 hits: HasRingHomProperty.descendsAlong, RingHom.Etale and perfect ring/field results; no derived finite coefficient descent.",
+   "date": "2026-10-27",
+   "verdict": "No exact match."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "finite quotient complexes descend to etale sheaves and geometric stalk perfect complexes",
+   "results": "8 hits about etale algebra and morphism instances; no finite quotient derived descent or perfect stalk model.",
+   "date": "2026-10-27",
+   "verdict": "No exact match."
+  },
+  {
+   "tool": "grep",
+   "query": "stalk.*perfect|perfect.*stalk",
+   "results": "One Mathlib hit, AlgebraicGeometry/Morphisms/Smooth.lean:360, a PerfectField instance at a stalk; no perfect complex statement.",
+   "date": "2026-10-27",
+   "verdict": "No exact match."
+  },
+  {
+   "tool": "leansearch",
+   "query": "derived scalar extension of consecutive finite quotient perfect constant models is isomorphic after a geometric stalk",
+   "results": "8 hits about ringed-space stalks, localization and ModuleCat.Tilde; no derived constant model balancing.",
+   "date": "2026-10-27",
+   "verdict": "No exact match."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "consecutive derived quotient complexes give scalar extension isomorphisms of their geometric stalks",
+   "results": "8 ordinary stalk, localization and Tilde results; no derived scalar balancing.",
+   "date": "2026-10-27",
+   "verdict": "No exact match."
+  },
+  {
+   "tool": "grep",
+   "query": "mapDerivedCategory.*(stalk|[Ff]iber)|([Ff]iber|stalk).*mapDerivedCategory",
+   "results": "0 Mathlib hits.",
+   "date": "2026-10-27",
+   "verdict": "No exact match."
+  },
+  {
+   "tool": "loogle",
+   "query": "ModuleCat.uliftFunctor",
+   "results": "12 declarations, including the module universe lift and its additive, finite limit/colimit, full and faithful instances.",
+   "date": "2026-10-27",
+   "verdict": "Primitives for the concrete algebraic universe lift; no record of descended level data."
+  },
+  {
+   "tool": "leansearch",
+   "query": "exact universe lift of module complexes and derived geometric stalk finite etale locally constant sheaves",
+   "results": "8 hits including FGModuleCat.ulift, Module.Finite.ulift, Module.Flat.of_ulift, ULift.moduleEquiv, Condensed.ulift; no derived etale level construction.",
+   "date": "2026-10-27",
+   "verdict": "Only elementary universe-lift ingredients."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.FinitePerfectAdicEtaleStalkData",
+  "date": "2026-10-27",
+  "group": "F1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-finite-extension",
+   "place": "Tag 09C6, looking locally on X to obtain M_(n+1) tensor^L A/I^(n+1) = M_n; sites-cohomology.tex lemma-locally-constant-map (Tag 09BE); Tag 0D6D for scalar transitivity; etale-cohomology.tex Tags 03PT and 040R.",
+   "via": [
+    "lem-weil-pbc-finite-perfect-adic-etale-stalk-data",
+    "lem-weil-pbc-finite-perfect-adic-stalk-models",
+    "lem-weil-pbc-finite-perfect-adic-tower-extraction",
+    "lem-weil-pbc-finite-perfect-adic-realization",
+    "lem-weil-pbc-residue-lisse-perfect-lift",
+    "lem-weil-pbc-integral-stratified-perfect-characterization",
+    "lem-weil-pbc-condensed-e-realization",
+    "nt-target-proetale-e"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.FinitePerfectAdicConstantModelsReduction",
+  "file": "lean/Sheaf/Paper/FinitePerfectAdicConstantModelsReduction.lean",
+  "declaration": "AlgebraicGeometry.Scheme.finitePerfectAdic_constant_models_reduction",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.finitePerfectAdic_constant_models_reduction"
+  ],
+  "statement": "theorem finitePerfectAdic_constant_models_reduction\n    (X : Scheme.{t}) {A : Type t} [CommRing A] (d : AdicCoefficientDatum A)\n    (φ : ∀ n : ℕ, adicConstantRing X (A ⧸ d.ideal ^ (n + 1)) ⟶\n      completedAdicFiniteCommRing X d n)\n    (hφ : ∀ n : ℕ, IsIso (φ n)) (hcompat : FinitePerfectModelsCompatible X d φ)\n    (M : DerivedCategory (CompletedAdicModules X d)) (n : ℕ) (W : X.Etale) (w : W.left)\n    (E' : DerivedCategory (ModuleCat.{t} (A ⧸ d.ideal ^ (n + 1 + 1))))\n    (E : DerivedCategory (ModuleCat.{t} (A ⧸ d.ideal ^ (n + 1))))\n    (hE' : DerivedCategory.IsPerfect E') (hE : DerivedCategory.IsPerfect E)\n    (e' : Nonempty\n      (ringedSiteDerivedRestrictionOfUniverses (completedAdicFiniteRing X d (n + 1))\n          ((toProEt X).obj W) ((completedAdicQuotientReduction X d (n + 1)).obj M) ≅\n        ringedSiteDerivedRestrictionOfUniverses (completedAdicFiniteRing X d (n + 1))\n          ((toProEt X).obj W) ((completedAdicDerivedChange X (φ (n + 1))).obj\n            ((finitePerfectAdicDerivedConstant X (A ⧸ d.ideal ^ (n + 1 + 1))).obj E'))))\n    (e : Nonempty\n      (ringedSiteDerivedRestrictionOfUniverses (completedAdicFiniteRing X d n)\n          ((toProEt X).obj W) ((completedAdicQuotientReduction X d n).obj M) ≅\n        ringedSiteDerivedRestrictionOfUniverses (completedAdicFiniteRing X d n)\n          ((toProEt X).obj W) ((completedAdicDerivedChange X (φ n)).obj\n            ((finitePerfectAdicDerivedConstant X (A ⧸ d.ideal ^ (n + 1))).obj E)))) :\n    Nonempty\n      ((ConstantScalarRealization.moduleDerivedExtension\n        (Ideal.Quotient.factorPowSucc d.ideal (n + 1))).obj E' ≅ E)",
+  "branch": "sheaf-dag",
+  "by": "F1",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-5024d",
+  "group": "F1",
+  "result": "fix",
+  "landing": "20261027T094358-L-219792",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H7",
+  "result": "pass",
+  "landing": "20261027T123450-L-2302329",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

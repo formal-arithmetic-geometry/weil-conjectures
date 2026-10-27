@@ -1,0 +1,228 @@
+{
+ "id": "lem-a1-space-atlas-point-comparison",
+ "kind": "statement",
+ "title": "Common-atlas point identities and comparison of detected open subsets",
+ "statement": "Let $S$ be a scheme [def-pc-scheme] and $E$ an algebraic space over $S$ [def-trf-algebraic-space]. All schemes are over $S$ in the universes of [def-weil-size-convention]. Write $|E|$ for its field-valued point classes and $|t|:|T|\\to|E|$ for the map of a scheme-source morphism, as in [def-a1-algebraic-space-point-classes]. Let $w:h_W\\to E$ and $p:h_V\\to E$ be representable surjective etale morphisms from schemes. The sheaf fibre product $Q=W\\times_EV$ is represented by a scheme, and its projections $a:Q\\to W$ and $b:Q\\to V$ are surjective etale [def-weil-etale-morphism], hence continuous open maps on scheme points. For every subset $A\\subseteq|E|$ one has $$ |a|\\bigl(|b|^{-1}(|p|^{-1}(A))\\bigr)=|w|^{-1}(A),\\qquad |b|\\bigl(|a|^{-1}(|w|^{-1}(A))\\bigr)=|p|^{-1}(A). $$ Every pair $(x,y)\\in|W|\\times|V|$ with $|w|(x)=|p|(y)$ is the pair of projections of some point of $Q$. In particular $|w|^{-1}(A)$ is open in $W$ if and only if $|p|^{-1}(A)$ is open in $V$. No topology on $|E|$ is assumed in these assertions.",
+ "source": {
+  "document": "literature/stacks-project/spaces-properties.tex",
+  "place": "Tag 03BX (lemma-topology-points), proof: comparison of presentations through their fibre product; Tag 03H4 (lemma-points-cartesian), the common-field point-lifting argument."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-trf-algebraic-space",
+  "def-weil-size-convention",
+  "def-a1-algebraic-space-point-classes",
+  "def-weil-etale-morphism"
+ ],
+ "proof": [
+  {
+   "text": "Apply [lem-a1-space-fibre-product-point] to W,V,w,p to obtain one representing scheme Q, its two projections a,b, and lifting for compatible common-field maps. For each of the properties etale and surjective, apply the scheme-test definition [def-trf-algebraic-space] to p along w and to w along p. Yoneda full faithfulness and uniqueness of the representing pullback identify each test projection with a or b up to a scheme isomorphism. Both properties respect isomorphisms, so a and b are surjective etale.",
+   "uses": [
+    "lem-a1-space-fibre-product-point",
+    "def-trf-algebraic-space"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-properties.tex",
+    "place": "Tag 03BX (lemma-topology-points), proof, common-presentation comparison."
+   }
+  },
+  {
+   "text": "The maps $|a|$ and $|b|$ are continuous because $a,b$ are scheme morphisms [def-pc-scheme]. They are open by [lem-weil-pbc-etale-morphism-open-map], applied to the two etale scheme projections of Step 1.",
+   "uses": [
+    "def-pc-scheme",
+    "lem-weil-pbc-etale-morphism-open-map"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 03WT (lemma-etale-open), used in the common-presentation square of Tag 03BX."
+   }
+  },
+  {
+   "text": "The common-field relation of [def-a1-algebraic-space-point-classes] is an equivalence relation: reflexivity uses identity maps, symmetry interchanges them, and transitivity takes the scheme fibre product of two field spectra over the middle representative field. Mathlib Scheme.Pullback.exists_preimage_pullback supplies a point of that fibre product, since the middle field spectrum has a unique point. The residue field of this point, together with the two projection maps, gives a common extension; functoriality gives agreement of the two restricted values. Thus equality in the generated quotient implies this relation. Apply it to the canonical residue-field representatives of x and y. Composing the resulting maps with the residue-field maps to W and V gives the common-field input of the lifting clause from [lem-a1-space-fibre-product-point], and hence a point of Q above x,y.",
+   "uses": [
+    "def-a1-algebraic-space-point-classes",
+    "lem-a1-space-fibre-product-point",
+    "def-pc-scheme"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-properties.tex",
+    "place": "Tag 03H4 (lemma-points-cartesian), statement and common-field proof."
+   }
+  },
+  {
+   "text": "For a scheme morphism k:U→V and a presheaf map t:h_V→F, naturality and the canonical residue-field map κ(k(x))→κ(x) show that schemePointMap(yoneda.map k ≫ t)(x)=schemePointMap(t)(k(x)); their canonical representatives are related by the common field κ(x), as in [def-a1-algebraic-space-point-classes]. Apply this to a,w and b,p and use commutativity of the representing square. For B=|w|⁻¹(A), C=|p|⁻¹(A), this gives |a|⁻¹(B)=|b|⁻¹(C). Surjectivity of a,b then gives |a|(|b|⁻¹(C))=B and |b|(|a|⁻¹(B))=C by the elementary image-preimage identity.",
+   "uses": [
+    "def-a1-algebraic-space-point-classes"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-properties.tex",
+    "place": "Tag 03BX (lemma-topology-points), proof, common-presentation comparison."
+   }
+  },
+  {
+   "text": "If $B$ is open, continuity of $|a|$ makes $|a|^{-1}(B)$ open in $Q$. Its image under the open map $|b|$ is $C$ by Step 4, so $C$ is open. Conversely, if $C$ is open, take its inverse image by $|b|$ and then its image by $|a|$ to obtain the open subset $B$. This proves the equivalence using only scheme topologies.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-properties.tex",
+    "place": "Tag 03BX (lemma-topology-points), proof, common-presentation comparison."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-trf-algebraic-space",
+  "def-pc-scheme",
+  "lem-weil-pbc-etale-morphism-open-map",
+  "lem-a1-space-fibre-product-point",
+  "def-a1-algebraic-space-point-classes"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/spaces-properties.tex",
+  "place": "Tag 03BX (lemma-topology-points), proof, independence of presentation through the common fibre product; Tag 03H4 (lemma-points-cartesian); Morphisms Tag 03WT (lemma-etale-open)."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "AlgebraicSpace|atlas.*topolog|topolog.*atlas",
+   "results": "{\"t\": \"2026-10-22T07:51:52Z\", \"tool\": \"grep\", \"query\": \"AlgebraicSpace|atlas.*topolog|topolog.*atlas\", \"sub\": \"\", \"ok\": true, \"n_hits\": 7, \"note\": \"\", \"top\": [\"Mathlib/Geometry/Manifold/ChartedSpace.lean\", \"Mathlib/Geometry/Manifold/ChartedSpace.lean\", \"Mathlib/Geometry/Manifold/ChartedSpace.lean\", \"Mathlib/Geometry/Manifold/ChartedSpace.lean\", \"Mathlib/Geometry/Manifold/ChartedSpace.lean\", \"Mathlib/Geometry/Manifold/IsManifold/InteriorBoundary.lean\", \"Mathlib/Geometry/Manifold/IsManifold/InteriorBoundary.lean\"], \"digest\": \"5a331c82e9ef44ad\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: returned declarations concern scheme covers, scheme fibre products, etale scheme morphisms, rings, or manifold atlases; none states this sheaf fibre-product and field-valued point assertion for an algebraic-space target."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicSpace\", \"Point\"",
+   "results": "{\"t\": \"2026-10-22T07:51:52Z\", \"tool\": \"loogle\", \"query\": \"\\\"AlgebraicSpace\\\", \\\"Point\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: returned declarations concern scheme covers, scheme fibre products, etale scheme morphisms, rings, or manifold atlases; none states this sheaf fibre-product and field-valued point assertion for an algebraic-space target."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Two surjective etale atlases of an algebraic space detect the same open subsets of field valued points using their fibre product",
+   "results": "{\"t\": \"2026-10-22T07:51:52Z\", \"tool\": \"leansearch\", \"query\": \"Two surjective etale atlases of an algebraic space detect the same open subsets of field valued points using their fibre product\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"ChartedSpace.ext_iff\", \"AlgebraicGeometry.IsOpenImmersion.opensEquiv\", \"ChartedSpace.ext\", \"AlgebraicGeometry.Scheme.smallEtaleTopology\", \"AlgebraicGeometry.Scheme.etaleTopology\", \"AlgebraicGeometry.Scheme.etalePretopology\", \"AlgebraicGeometry.Scheme.instIsJointlySurjectivePreservingIsOpenImmersion\", \"AlgebraicGeometry.Scheme.smallEtalePretopology\"], \"digest\": \"bd264e10ed575493\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: returned declarations concern scheme covers, scheme fibre products, etale scheme morphisms, rings, or manifold atlases; none states this sheaf fibre-product and field-valued point assertion for an algebraic-space target."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Independence of an algebraic space point topology from the etale presentation via open surjective projections of the common refinement",
+   "results": "{\"t\": \"2026-10-22T07:52:03Z\", \"tool\": \"leanfinder\", \"query\": \"Independence of an algebraic space point topology from the etale presentation via open surjective projections of the common refinement\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"StandardEtalePresentation.mk.inj\", \"Algebra.isOpen_etaleLocus\", \"AlgebraicGeometry.Scheme.Etale\", \"StandardEtalePresentation.toSubmersivePresentation_toPreSubmersivePresentation_toPresentation\", \"Algebra.etaleLocus_eq_univ_iff_etale\", \"AlgebraicGeometry.IsEtale.of_comp\", \"AlgebraicGeometry.IsEtale\", \"AlgebraicGeometry.Scheme.instCategoryEtale\"], \"digest\": \"67315e7f6972ef69\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: returned declarations concern scheme covers, scheme fibre products, etale scheme morphisms, rings, or manifold atlases; none states this sheaf fibre-product and field-valued point assertion for an algebraic-space target."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For two surjective etale scheme atlases of an algebraic space the fibre product transports inverse images of every subset and detects the same open subsets",
+   "results": "{\"t\": \"2026-10-22T07:52:03Z\", \"tool\": \"leanfinder\", \"query\": \"For two surjective etale scheme atlases of an algebraic space the fibre product transports inverse images of every subset and detects the same open subsets\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.IsStandardEtale.of_surjective\", \"AlgebraicGeometry.Scheme.instHasPullbacksEtale\", \"AlgebraicGeometry.Scheme.instCategoryEtale\", \"AlgebraicGeometry.Scheme.instIsJointlySurjectivePreservingIsOpenImmersion\", \"AlgebraicGeometry.Scheme.pullbackComparison_forget_surjective\", \"AlgebraicGeometry.Scheme.Pullback.forget_comparison_surjective\", \"AlgebraicGeometry.IsEtale.of_comp\", \"AlgebraicGeometry.Scheme.smallEtalePretopology\"], \"digest\": \"61436d3c056322aa\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: returned declarations concern scheme covers, scheme fibre products, etale scheme morphisms, rings, or manifold atlases; none states this sheaf fibre-product and field-valued point assertion for an algebraic-space target."
+  },
+  {
+   "tool": "grep",
+   "query": "AlgebraicSpace|atlas.*topolog|topolog.*atlas",
+   "results": "{\"t\": \"2026-10-23T04:10:06Z\", \"tool\": \"grep\", \"query\": \"AlgebraicSpace|atlas.*topolog|topolog.*atlas\", \"sub\": \"\", \"ok\": true, \"n_hits\": 7, \"note\": \"\", \"top\": [\"Mathlib/Geometry/Manifold/IsManifold/InteriorBoundary.lean\", \"Mathlib/Geometry/Manifold/IsManifold/InteriorBoundary.lean\", \"Mathlib/Geometry/Manifold/ChartedSpace.lean\", \"Mathlib/Geometry/Manifold/ChartedSpace.lean\", \"Mathlib/Geometry/Manifold/ChartedSpace.lean\", \"Mathlib/Geometry/Manifold/ChartedSpace.lean\", \"Mathlib/Geometry/Manifold/ChartedSpace.lean\"], \"digest\": \"05b344a093f3533e\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern scheme-only etale sites, scheme pullbacks, open immersions, restrictions or manifold atlases; none has the algebraic-space point-class target and both atlas comparisons."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicSpace\", \"Point\"",
+   "results": "{\"t\": \"2026-10-23T04:10:06Z\", \"tool\": \"loogle\", \"query\": \"\\\"AlgebraicSpace\\\", \\\"Point\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern scheme-only etale sites, scheme pullbacks, open immersions, restrictions or manifold atlases; none has the algebraic-space point-class target and both atlas comparisons."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Common etale atlas comparison of open subsets of algebraic space points",
+   "results": "{\"t\": \"2026-10-23T04:10:07Z\", \"tool\": \"leansearch\", \"query\": \"Common etale atlas comparison of open subsets of algebraic space points\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsOpenImmersion.opensEquiv\", \"AlgebraicGeometry.Scheme.OpenCover.isOpenCover_opensRange\", \"AlgebraicGeometry.coe_opensRestrict_apply_coe\", \"AlgebraicGeometry.affineOpensRestrict\", \"TopologicalSpace.Opens.chart_eq\", \"AlgebraicGeometry.opensRestrict\", \"AlgebraicGeometry.Scheme.smallEtaleTopology\", \"AlgebraicGeometry.coe_opensRestrict_symm_apply\"], \"digest\": \"4ff7bbe0d67a8983\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern scheme-only etale sites, scheme pullbacks, open immersions, restrictions or manifold atlases; none has the algebraic-space point-class target and both atlas comparisons."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Two surjective etale scheme atlases of an algebraic space have a common fibre product and detect the same open subsets of its field valued point classes",
+   "results": "{\"t\": \"2026-10-23T04:10:11Z\", \"tool\": \"leanfinder\", \"query\": \"Two surjective etale scheme atlases of an algebraic space have a common fibre product and detect the same open subsets of its field valued point classes\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Etale\", \"AlgebraicGeometry.Scheme.etalePretopology\", \"AlgebraicGeometry.Scheme.etaleTopology\", \"AlgebraicGeometry.Scheme.instHasPullbacksEtale\", \"AlgebraicGeometry.instUniqueI₀SchemeCover\", \"AlgebraicGeometry.Scheme.smallEtalePretopology\", \"AlgebraicGeometry.Scheme.instCategoryEtale\", \"AlgebraicGeometry.Scheme.smallEtaleTopology\"], \"digest\": \"e59661e1a19552d0\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern scheme-only etale sites, scheme pullbacks, open immersions, restrictions or manifold atlases; none has the algebraic-space point-class target and both atlas comparisons."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Comparison of inverse images of subsets using a surjective open common refinement of two presentations of an algebraic space",
+   "results": "{\"t\": \"2026-10-23T04:11:02Z\", \"tool\": \"leanfinder\", \"query\": \"Comparison of inverse images of subsets using a surjective open common refinement of two presentations of an algebraic space\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Hom.le_preimage_resLE_iff\", \"AlgebraicGeometry.Scheme.Cover.RelativeGluingData.preimage_toBase_eq_range_ι\", \"AlgebraicGeometry.Scheme.Hom.le_resLE_preimage_iff\", \"AlgebraicGeometry.PresheafedSpace.GlueData.ι_image_preimage_eq\", \"AlgebraicGeometry.Scheme.Cover.LocallyDirected.ofIsBasisOpensRange_le_iff\", \"AlgebraicGeometry.mem_range_iff_of_surjective\", \"AlgebraicGeometry.Scheme.Pullback.forget_comparison_surjective\", \"AlgebraicGeometry.Scheme.pullbackComparison_forget_surjective\"], \"digest\": \"99d20f4fec246bc6\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern scheme-only etale sites, scheme pullbacks, open immersions, restrictions or manifold atlases; none has the algebraic-space point-class target and both atlas comparisons."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-a1-space-affine-etale-cover",
+  "date": "2026-10-22",
+  "group": "NY"
+ },
+ "chapter": "sec-purity-real-sheaves",
+ "unit": "sk-p-real-rankin",
+ "blueprint": {
+  "from": {
+   "node": "lem-a1-affine-hc0",
+   "place": "Gabber fpqc descent input to the Loc_X-to-Cov_X construction in Bhatt–Scholze Lemma 7.3.9, p.67, used through lem-a1-proetale-local-system-representability and lem-a1-space-fpqc-separated-valuative-descent in the lissity/support argument of lem-a1-affine-hc0. Extraction of returned proof step 3 (common-atlas comparison).",
+   "via": [
+    "lem-a1-space-affine-etale-cover",
+    "lem-a1-algebraic-space-fpqc-sheaf",
+    "lem-a1-space-fpqc-separated-valuative-descent",
+    "lem-a1-proetale-local-system-representability"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-a1-space-atlas-point-comparison",
+  "worker": "stage1",
+  "summary": "Kept the statement and its hypotheses. Scheme-test representability gives both surjective etale projections directly; cited the existing scheme-openness leaf and pointwise fibre-product lifting lemma. Wrote the subset identities and both openness implications explicitly, without invoking the topology on the algebraic-space point set. No new nodes or attachments.",
+  "blueprint": "Realizes the common-atlas comparison extracted from step 3 of lem-a1-space-affine-etale-cover, on the existing Gabber/Loc_X-to-Cov_X representability branch under lem-a1-affine-hc0. The present helper follows Stacks 03BX and 03H4, preserving that branch; it does not replace the Rankin–Selberg unit argument.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q09-c46d11db9",
+  "group": "Q09",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q09-c46d11db9 (reviewer sub-agent of L); spot-checked: I read the item in full, compared it with the live and side-live clones and checked the sources. Statement, stmt_deps, source and blueprint are unchanged; only the 5-step proof was added (the base proof was empty). There are no new nodes and no repair note, so this is not a re-split. Sources: 03BX (lemma-topology-points, proof via U×_XU'), 03H4 and 03WT, all checked in tags/tags. Step 1 instantiates the representable surjective étale definition in def-trf-algebraic-space twice, once for each atlas tested along the other, so it is elementary. Step 2 gets continuity from scheme morphisms and openness from lem-weil-pbc-etale-morphism-open-map (a Mathlib leaf, Scheme.Hom.isOpenMap). Step 3 applies the reviewed lem-a1-space-fibre-product-point (C=W, U=V); its common-field point relation is the same as the one in def-a1-algebraic-space-point-classes. Step 4 shows |a|^{-1}(B)=|b|^{-1}(C) from w∘a=p∘b plus restriction to κ(z), and finishes by surjectivity; it is elementary. Step 5 combines continuity of one projection with openness of the other, in both directions. Edge cases tested: empty E, A=∅ and A=|E|, the identity atlas, the fold map V⊔V→V, and R real closed with Spec C (several points over one pair, but only surjectivity is claimed). There is no cycle and the route stays in unit sk-p-real-rankin with no tool_uses. Batch-5 flag: def-trf-algebraic-space, reached through lem-a1-space-fibre-product-point, is the general definition of an algebraic space and not a step of the trace-formula or Poincaré-duality proofs. The item already had it in its stmt_deps before this delivery, so I accept the citation. No changes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.AlgebraicSpaceAtlasPointComparison",
+  "declaration": "AlgebraicGeometry.AlgebraicSpace.exists_atlas_point_comparison",
+  "file": "lean/Sheaf/AlgebraicGeometry/AlgebraicSpaceAtlasPointComparison.lean",
+  "statement": "theorem exists_atlas_point_comparison {S : Scheme.{u}} (E : AlgebraicSpace S) (W V : Over S) (w : yoneda.obj W ⟶ E.obj.obj) (p : yoneda.obj V ⟶ E.obj.obj) (hw : IsEtale w) (hsw : IsSurjective w) (hp : IsEtale p) (hsp : IsSurjective p) : ∃ (Q : Over S) (a : Q ⟶ W) (b : Q ⟶ V), IsPullback (yoneda.map a) (yoneda.map b) w p ∧ Etale a.left ∧ Surjective a.left ∧ Etale b.left ∧ Surjective b.left ∧ Continuous a.left ∧ IsOpenMap a.left ∧ Continuous b.left ∧ IsOpenMap b.left ∧ (∀ (x : W.left) (y : V.left), schemePointMap w x = schemePointMap p y → ∃ z : Q.left, a.left z = x ∧ b.left z = y) ∧ (∀ A : Set (Point E.obj.obj), a.left '' (b.left ⁻¹' (schemePointMap p ⁻¹' A)) = schemePointMap w ⁻¹' A ∧ b.left '' (a.left ⁻¹' (schemePointMap w ⁻¹' A)) = schemePointMap p ⁻¹' A ∧ (IsOpen (schemePointMap w ⁻¹' A) ↔ IsOpen (schemePointMap p ⁻¹' A)))",
+  "branch": "newtargets-dag",
+  "by": "Q108",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-19490911d",
+  "group": "Q108",
+  "result": "pass",
+  "note": "Only the lean record changed; lean.statement is verbatim in the file. Checked all 10 clauses against IsEtale/IsSurjective (IsRepresentableWith), IsPullback orientation, Mathlib Etale/Surjective (no name capture), Point/schemePointMap: pair lifting via EqvGen→Rel→common-field hypothesis of exists_scheme_fibreProduct_point; subset identities and open iff on scheme carriers only. No extra hypotheses or universe restriction. Edge cases: empty E, A=∅/univ, identity atlas, several points over a pair. No defs, sorry only, docstrings with source, blueprint and 5 steps, proof-only imports are proof_deps modules, no new nodes, first stage-2 delivery. Advisory: Surjective/IsPullback are cited implicitly via def-trf-algebraic-space. No compile (no file changed)."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V3",
+  "result": "pass",
+  "landing": "20261026T083255-L-2312146",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

@@ -22,129 +22,72 @@
  ],
  "proof": [
   {
-   "text": "For a local ring at $x$ form $h_x$, $q_x$ and $c_x$ as in [lem-trf-hilbert-samuel-smooth-dimension-profile], and use the normalized head $A_x=(c_x,\\Delta^{q_x}h_x)$. For a fixed input choose an integer $D$ at least its dimension. The common shift $\\Lambda^D$ is strictly increasing in lexicographic order: if $f$ and $g$ first differ at $n$, their partial sums first differ there with the same sign. Its inverse $\\Delta$ has the same property. Thus comparing normalized heads is exactly comparing the modified heads with this common $D$. Changing the dimension of a different input never enters this comparison. The cited statement gives finite image, upper semicontinuity and detection of regularity. Keep the normalized head, not $D$, as part of the synchronization value.",
+   "text": "Choose a numerical engine using [lem-trf-marked-ideal-numerical-resolution-engine], and then choose its simultaneous normalized assignment using [lem-trf-normalized-resolution-word-gluing]. The latter provides finite image and regularity detection on every admissible history, for the same fixed word space and the same engine. Construct the calculus first on this small word type. At the end use the order-preserving injection into its universe lift: a range has the same greatest values after lifting, maximum steps are equivalent, and induction on the three admissibility constructors identifies admissible histories. Transport all fields along this injection to place the value type in Type (u+1), without changing any center or history.",
    "uses": [
-    "lem-trf-hilbert-samuel-smooth-dimension-profile"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
-    "place": "VIII 2.3.13; explicit removal of the common dimension shift in BMT 6.3."
-   }
-  },
-  {
-   "text": "At a singular point take a minimal-embedding, maximal-order, codimension-zero presentation from [lem-trf-hilbert-samuel-local-presentations]. Apply [lem-trf-marked-ideal-numerical-resolution-engine] to that marked ideal and delete its first entry $1$. Prefix the remaining word by $A_x$. On points already regular set $\\nu=\\bot$, irrespective of exceptional-divisor cleanup. Use the same lexicographic word space for every input and append the one new least element $\\bot$. Minimal-embedding equivalence makes this definition independent of the local presentation: equivalent presentations give the same tail word, and the head is intrinsic. The transformed presentations use controlled ideal transforms while the scheme uses strict transforms; equality of their test sequences is precisely what permits applying the marked-ideal construction at every admissible stage.",
-   "uses": [
-    "lem-trf-hilbert-samuel-local-presentations",
-    "lem-trf-marked-ideal-numerical-resolution-engine"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
-    "place": "VIII 2.3.11--2.3.13; local presentations and replacement of the marked-ideal leading entry."
-   }
-  },
-  {
-   "text": "On a finite affine cover, the heads and their tail words have finite images, so their union is finite. At a maximum head, its presentation identifies its stratum with the relevant marked-ideal cosupport. Upper semicontinuity of the head makes the maximum head closed; upper semicontinuity of the tail on that closed stratum makes the full maximum $T=\\{\\nu_H=m\\}$ closed in $X_H$. Let $M_H$ be its reduced induced closed subscheme [lem-weil-pbc-reduced-induced-closed-subscheme]. Each point of $T$ lies under a point of an etale neighbourhood $U\\to X_H$ carrying a presentation; by Step 2, $\\nu_H$ on $U$ is the word of that presentation, and the marked-ideal engine makes the preimage of $T$ the underlying set of a smooth closed center $C_U$ transverse to the exceptional divisors. The base change $M_H\\times_{X_H}U\\to M_H$ is etale [lem-weil-pbc-etale-scheme-base-change], so $M_H\\times_{X_H}U$ is reduced [etale-proposition-etale-reduced] with the same underlying set as $C_U$, hence equals $C_U$ by the uniqueness clause (3). Now $C_U$ is smooth over $\\mathbf Q$, so its local rings are regular [lem-trf-smooth-geometrically-normal]. Etale maps are flat [def-weil-etale-morphism], so each local ring of $M_H$ maps flatly and locally to a regular local ring of $C_U$ and is regular [lem-weil-pbc-flat-under-regular]. Thus $M_H$ is a nonempty regular closed subscheme when $X_H$ is singular. No maximum greater than $\\bot$ meets the regular locus. Every generic point of a reduced scheme has a field as its local ring: localization at a minimal prime is reduced with only its zero prime, so each nonzero element is invertible. Thus a closed subset of singular points contains no irreducible component and hence no nonempty open subset. This proves the claimed nowhere density.",
-   "uses": [
-    "lem-trf-hilbert-samuel-local-presentations",
     "lem-trf-marked-ideal-numerical-resolution-engine",
-    "lem-trf-hilbert-samuel-smooth-dimension-profile",
+    "lem-trf-normalized-resolution-word-gluing"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "ILO VIII 2.3.11--2.3.13; re-split assembly step 1 of the normalized word construction."
+   }
+  },
+  {
+   "text": "Apply [lem-trf-resolution-word-finite-history-comparison] at the last stage to obtain smooth, separated, finite-type ambient geometry and a reduced intrinsic scheme for every admissible history, including histories obtained by smooth pullback with deletion. The progress theorem [lem-trf-resolution-word-progress-termination] now supplies maximum extensions and preservation of geometry. A positive next maximum implies nonregularity by bottom detection, so its strict inequality is the progress theorem. For an arbitrary maximum extension, uniqueness of the greatest value identifies its center support with the closed maximum supplied by [lem-trf-resolution-word-maximum-center-descent]. The actual center is reduced by the definition of maximum step. Uniqueness in [lem-weil-pbc-reduced-induced-closed-subscheme] therefore gives an isomorphism with the regular nonempty reduced maximum center, and the support equality gives nowhere density. The ambient is locally Noetherian by [lem-weil-pbc-finite-type-over-noetherian]; the preceding ambient of the extension is isomorphic to it, and the intrinsic scheme is a closed subscheme. On these locally Noetherian schemes ideal sheaves are quasi-coherent and finite type, hence have finite-type kernels of finite-free maps by [pqf-lem-coherent-ft-locnoeth]. This gives both required coherence fields in their existing encoding.",
+   "uses": [
+    "lem-trf-normalized-resolution-word-gluing",
+    "lem-trf-resolution-word-maximum-center-descent",
+    "lem-trf-resolution-word-progress-termination",
+    "lem-trf-resolution-word-finite-history-comparison",
     "lem-weil-pbc-reduced-induced-closed-subscheme",
-    "lem-weil-pbc-etale-scheme-base-change",
-    "etale-proposition-etale-reduced",
-    "lem-trf-smooth-geometrically-normal",
-    "def-weil-etale-morphism",
-    "lem-weil-pbc-flat-under-regular"
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "pqf-lem-coherent-ft-locnoeth"
    ],
    "elementary": false,
    "source": {
     "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
-    "place": "VIII 2.3.11 and local maximum-locus gluing; generic-point argument written out."
+    "place": "ILO VIII 2.3.11--2.3.13; re-split assembly step 2 of the normalized word construction."
    }
   },
   {
-   "text": "Each affine coordinate ring of $X_H$ and $P_H$ is Noetherian by [lem-weil-pbc-finite-type-algebra-noetherian]. A closed subscheme ideal is quasi-coherent by [lem-weil-pbc-reduced-induced-closed-subscheme]. Every submodule of a finite module over such a ring is finitely generated and finitely presented by [lem-trf-noetherian-submodule-finitely-presented]; applying this also to kernels of maps from finite free modules proves coherence of the two ideals. The center is smooth over $\\mathbf Q$ by [lem-trf-regular-perfect-field-smooth]. The ambient blowup and reduced strict transform remain in the required class by [lem-trf-smooth-center-blowup-geometry]. At the selected maximum, either the head drops or it stays fixed and the tail maximum strictly drops by the marked-ideal engine. At other points the admissible-transform heads and tails cannot increase. The next positive global maximum is therefore strictly smaller.",
+   "text": "Use the pullback existence clause of [lem-trf-resolution-word-finite-history-comparison]. Specialize its word and ideal comparisons to the final stage. The final prefix is definitionally the original history; the final-index equality transports the given stage map to SmoothPullback.finalMap. By [lem-weil-pbc-reduced-induced-closed-subscheme], any reduced stratum ideal is the vanishing ideal of its closed support. The stagewise smooth ideal equality thus gives reducedness of its comap; the support-comap identity and value equality give its stratum condition. If the inverse-image equality locus is empty, the support is empty and the comapped ideal is the unit ideal. Intrinsic comparison gives final value equality. The final intrinsic isomorphism is surjective, so a greatest value on the second history is greatest on the first as well. The intrinsic vanishing-ideal equality then identifies any two reduced maximum-stratum ideals. These pointwise equalities are compatible with restriction and further pullback as in the comparison theorem.",
    "uses": [
-    "lem-weil-pbc-finite-type-algebra-noetherian",
-    "lem-weil-pbc-reduced-induced-closed-subscheme",
-    "lem-trf-noetherian-submodule-finitely-presented",
-    "lem-trf-regular-perfect-field-smooth",
-    "lem-trf-smooth-center-blowup-geometry",
-    "lem-trf-marked-ideal-numerical-resolution-engine",
-    "lem-trf-hilbert-samuel-smooth-dimension-profile"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
-    "place": "VIII 2.3.11; Stacks 0FUT and affine Noetherian coherence for geometric consequences."
-   }
-  },
-  {
-   "text": "For a smooth pullback and $y\\mapsto x$, [lem-trf-hilbert-samuel-smooth-dimension-profile] gives $h_y=\\Lambda^s h_x$ and $q_y=q_x+s$, with $c_y=c_x$. Hence $\\Delta^{q_y}h_y=\\Delta^{q_x}h_x$. This uses the fibre-local dimension $s$ at this point and requires no constant relative dimension. The local presentation theorem and the marked-ideal engine give equality of the tail words under this pullback, including the ordered exceptional data. Consequently $\\nu(y)=\\nu(x)$ at each finite stage. The maximum center is smooth over $\\mathbf Q$ by Step 4. Its inverse image is smooth over it, as a base change of the smooth ambient map [lem-pc-proper-base-change], hence smooth over $\\mathbf Q$ [lem-trf-smooth-composition] and reduced [lem-trf-smooth-geometrically-normal]; it has the same underlying inverse-image stratum. Uniqueness in [lem-weil-pbc-reduced-induced-closed-subscheme] gives equality of its extended ideal and the reduced stratum ideal. If empty, its ideal is the unit ideal. Restriction is the same comparison on an open neighbourhood. Deleting an empty center adds no exceptional hypersurface and changes none of the local data.",
-   "uses": [
-    "lem-trf-hilbert-samuel-smooth-dimension-profile",
-    "lem-trf-hilbert-samuel-local-presentations",
-    "lem-trf-marked-ideal-numerical-resolution-engine",
-    "lem-pc-proper-base-change",
-    "lem-weil-pbc-reduced-induced-closed-subscheme",
-    "lem-trf-smooth-composition",
-    "lem-trf-smooth-geometrically-normal"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
-    "place": "VIII 2.3.13 and 2.3.5(i); normalized smooth comparison and equality of reduced ideals."
-   }
-  },
-  {
-   "text": "Suppose two histories satisfy (3). Their local rings identify, so their heads agree. The local presentation theorem identifies the maximal-order presentation equivalence classes using exactly the strict-transform schemes and the ordered earlier center ideals. The numerical marked-ideal engine then gives equal tail words. The retained ideals matter even for an intrinsic identity blowup: they determine the same ordered exceptional information used by the presentations. Thus the functions agree. Their images, maxima and maximum subsets agree, and uniqueness of reduced induced structure identifies their center ideals. The comparison is independent of local choices, so computing it before or after the restriction or smooth pullback in the preceding step gives the same head, presentation class and word. This proves the stated compatibility for finite histories, without identifying distinct ambient schemes.",
-   "uses": [
-    "lem-trf-hilbert-samuel-local-presentations",
-    "lem-trf-marked-ideal-numerical-resolution-engine",
+    "lem-trf-resolution-word-finite-history-comparison",
     "lem-weil-pbc-reduced-induced-closed-subscheme"
    ],
    "elementary": false,
    "source": {
     "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
-    "place": "VIII 2.3.11--2.3.13; intrinsic minimal-embedding comparison, retaining ordered ideals."
+    "place": "ILO VIII 2.3.11--2.3.13; re-split assembly step 3 of the normalized word construction."
    }
   },
   {
-   "text": "Assume an infinite maximum-center process from one initial pair. Its heads cannot increase. By [lem-trf-hilbert-samuel-smooth-dimension-profile] they can strictly drop only finitely many times, so there is an infinite tail with the same maximum head. On this tail use its finitely many local presentations. The marked-ideal process is exactly the engine process at that head, since Step 2 used its tail word and Step 3 its full maximum center. By [lem-trf-marked-ideal-numerical-resolution-engine] this process terminates with empty cosupport; by [lem-trf-hilbert-samuel-local-presentations] this removes that head, a contradiction. Equivalently the engine's coefficient-dimension induction and terminal monomial case exclude the putative infinite constant-head tail. For a finite disjoint union use its finite cover and the same global maximum rule, so the same argument applies. The empty scheme and every regular scheme have no positive maximum and yield zero steps. This proves (4) for the very functions constructed above; no well-foundedness of an arbitrary ordered set is asserted.",
+   "text": "For (4), use [lem-trf-resolution-word-progress-termination] for this same assignment and the full maximum centers just identified. It rules out infinitely many head drops and an infinite constant-head tail, hence an infinite sequence from the empty history. The assertion includes finite disjoint unions, and the empty or regular input has zero steps. This is termination of the chosen construction; no additional well-foundedness assumption on its value space is needed.",
    "uses": [
-    "lem-trf-hilbert-samuel-smooth-dimension-profile",
-    "lem-trf-marked-ideal-numerical-resolution-engine",
-    "lem-trf-hilbert-samuel-local-presentations"
+    "lem-trf-resolution-word-progress-termination"
    ],
    "elementary": false,
    "source": {
     "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
-    "place": "VIII 2.3.11, stopping before cleanup; presentation reduction and marked-ideal termination."
+    "place": "ILO VIII 2.3.11--2.3.13; re-split assembly step 4 of the normalized word construction."
    }
   }
  ],
  "proof_deps": [
-  "lem-trf-hilbert-samuel-smooth-dimension-profile",
-  "lem-trf-hilbert-samuel-local-presentations",
   "lem-trf-marked-ideal-numerical-resolution-engine",
+  "lem-trf-normalized-resolution-word-gluing",
+  "lem-trf-resolution-word-maximum-center-descent",
+  "lem-trf-resolution-word-progress-termination",
+  "lem-trf-resolution-word-finite-history-comparison",
   "lem-weil-pbc-reduced-induced-closed-subscheme",
-  "lem-weil-pbc-etale-scheme-base-change",
-  "etale-proposition-etale-reduced",
-  "lem-trf-smooth-geometrically-normal",
-  "def-weil-etale-morphism",
-  "lem-weil-pbc-flat-under-regular",
-  "lem-weil-pbc-finite-type-algebra-noetherian",
-  "lem-trf-noetherian-submodule-finitely-presented",
-  "lem-trf-regular-perfect-field-smooth",
-  "lem-trf-smooth-center-blowup-geometry",
-  "lem-pc-proper-base-change",
-  "lem-trf-smooth-composition"
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "pqf-lem-coherent-ft-locnoeth"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
-  "place": "VIII 2.3.11--2.3.13, pp.93--94; explicit assembly of local presentations, normalized heads and marked-ideal invariants. Detailed BMT archival input WANTED."
+  "place": "VIII 2.3.11--2.3.13, pp.93--94; Lean assembly of the four stated normalized-word argument nodes, with reduced-center uniqueness, locally Noetherian coherence, final-index transport and universe lifting. Detailed BMT archival input remains WANTED."
  },
  "mathlib_searches": [
   {
@@ -250,48 +193,23 @@
   "is": null
  },
  "split_report": {
-  "date": "2026-10-19",
+  "date": "2026-10-23",
   "item": "lem-trf-hilbert-samuel-resolution-invariant-calculus",
   "worker": "stage1",
-  "summary": "Restricted the ill-typed unrestricted-history domain to admissible resolution histories and their local smooth pullbacks; constructed the synchronization invariant from local Hilbert--Samuel presentations, marked-ideal tails and dimension-normalized heads, then proved maximum geometry, finite-history comparisons and termination. Four strictly lower statement-only nodes; no Mathlib match.",
+  "summary": "Repair of returned head 66f32236c3e: re-read current presentation, profile, engine and history statements; retain the unchanged item statement and four statement-only workloads, explicitly separate presentation test boundaries from earlier recorded history, and retain exceptional birth stages in the gluing/comparison. Rebuild on the current DAG through deliver.py, preserving live maintainer and Lean records. Added the newly required duplicate comparison with coordinate blowup charts.",
   "blueprint": "Historical alteration branch recorded in blueprint.from, via embedded ordinary resolution; current local-term-locality contracting-correspondence route is unchanged.",
-  "tool_uses": [
-   {
-    "node": "lem-weil-pbc-reduced-induced-closed-subscheme",
-    "why": "Generic scheme or affine algebra tool for center geometry/coherence; the local trace-formula unit has no substitute."
-   },
-   {
-    "node": "lem-weil-pbc-finite-type-algebra-noetherian",
-    "why": "Generic scheme or affine algebra tool for center geometry/coherence; the local trace-formula unit has no substitute."
-   },
-   {
-    "node": "lem-pc-proper-base-change",
-    "why": "Generic scheme or affine algebra tool for center geometry/coherence; the local trace-formula unit has no substitute."
-   },
-   {
-    "node": "etale-proposition-etale-reduced",
-    "why": "Generic scheme tool (Step 3): an etale scheme over a reduced scheme is reduced, to identify the pulled-back maximum stratum with the engine's center; the local trace-formula unit has no substitute."
-   },
-   {
-    "node": "lem-weil-pbc-flat-under-regular",
-    "why": "Generic commutative-algebra tool (Step 3): regularity descends along the flat local maps of an etale neighbourhood, so the glued maximum stratum is regular; the local trace-formula unit has no substitute."
-   }
-  ]
+  "tool_uses": []
  },
  "tool_uses": [
-  "lem-weil-pbc-reduced-induced-closed-subscheme",
-  "lem-weil-pbc-finite-type-algebra-noetherian",
-  "lem-pc-proper-base-change",
-  "etale-proposition-etale-reduced",
-  "lem-weil-pbc-flat-under-regular"
+  "lem-weil-pbc-reduced-induced-closed-subscheme"
  ],
  "reviewed": {
-  "date": "2026-10-18",
+  "date": "2026-10-23",
   "by": "L",
-  "reviewer": "NT-cc-NZ-52a5367f2",
-  "group": "NZ",
+  "reviewer": "NT-cc-Q153-292973abf",
+  "group": "Q153",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NZ-52a5367f2 (reviewer sub-agent of L); spot-checked: I read the item in full: the statement, all 7 steps, all 4 new nodes, the parent lem-trf-embedded-resolution-ambient-comparison, every cited statement, and ILO VIII 2.3.9-2.3.13 (pp.93-94). BMT is absent from literature/; it is recorded as WANTED and proof_origin=agent. No SGA is cited. Statement change accepted: arbitrary ambient blowup histories make clause (1)'s 'new ambient is smooth' false, e.g. Bl_(u^2,v^3) A^2 has the singular chart u^2t=v^3. The parent's Steps 1, 2, 4, 5 and 7 use only admissible histories (segments of the process, their pullbacks and restrictions). Checks: Λ^D is strictly lex-increasing with Δ as inverse. Regular head = (1,(1,1,...)); a nonregular point has Δ^d h(1)=1+embdim-d>1. Under smooth maps, local component dimensions shift by s (dimension theory plus flat going-down), so c and q behave as stated. Smooth-centre blowups stay smooth, and the strict transform is the closure of a reduced open, hence reduced. The profile node was tested on plane∪line and on xy=0 plus a line. No duplicate in the DAG; the decomposition is the standard BM one and no node restates an item clause. Faults, all repaired: (1) C1/E5 Step 3: presentations are only étale-local but were glued as if Zariski, and smooth=>reduced/regular was uncited. M_H is now the reduced induced structure, and its étale pullback equals the engine centre via lem-weil-pbc-etale-scheme-base-change, etale-proposition-etale-reduced and reduced-induced (3). Regularity comes from lem-trf-smooth-geometrically-normal plus lem-weil-pbc-flat-under-regular; the last two off-unit generic nodes are added to tool_uses. (2) C1 Step 5: the inverse-image centre needed lem-trf-smooth-composition and smooth=>reduced; both added. (3) B2 engine node: 'the companion/coefficient-ideal construction gives' named an undefined object, now one ∃ global word assignment in a fixed ordered set. No cycle; steps are under 2000 characters; proof_deps updated. Accepted tool_uses: reduced-induced-closed-subscheme, finite-type-algebra-noetherian and lem-pc-proper-base-change (2), plus the two added. Fixed files: the item and lem-trf-marked-ideal-numerical-resolution-engine.; 2 file(s) fixed by the reviewer"
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q153-292973abf (reviewer sub-agent of L); spot-checked: Head 292973ab is the 4th push of this re-split. The three earlier heads (dab45d00, 4374b0fa, 66f32236) were each FIXed and then refused at landing with 'side completion never promoted', which is a promotion fault, not a mathematical one. Live still has the 7-step NZ proof (7487 characters), none of the four new ids exists live or side-live, and there is no stage-3 landing, so the delivery is not superseded. Changes since 66f3: the gluing node now keeps exceptional birth stages and separates the presentation's test boundary (empty when the presentation is taken) from the recorded earlier history. That matches the current local-presentations statement word for word and the engine's 'histories retain … birth stages', so it is true. The comparison node adds 'hence the induced exceptional birth-stage data', which is true because a birth stage is the index of the earlier center ideal, and those ideals and their order are preserved. Item Step 1 adds the matching wording. The item statement and the descent and progress nodes are byte-identical, and every cited lower statement (profile, presentations, engine, admissible-history, blowup geometry) is identical to the 66f3 snapshot. The re-split mapping holds: old steps 1-2 plus finite image go to gluing; old 3 plus coherence go to descent; old 5-6 go to comparison; the rest of 4 plus 7 go to progress. The nodes are 1.8-2.4k characters each, none restates the item, and all 7 old steps are verbatim in the report. Small cases checked again: regular head (1,(1,1,...)), xy=0 Δh=(1,2,2,...), plane∪line c=2, Δ^{q+s}Λ^s h=Δ^q h, a reduced scheme has regular generic points, regular over Q means smooth, empty X takes zero steps. Source: ILO VIII 2.3.11/2.3.13 pp.93-94; BMT is WANTED and proof_origin is agent; no SGA. Fault E1/C1, still present: descent and progress need P_H smooth/separated/finite-type and X_H reduced. def-trf-admissible-embedded-history assumes neither at later stages and closes the admissible class under smooth comparisons with deletion, but Step 2 inducts only over maximum extensions. FIX, re-applied as a delta onto this head's text: (a) the comparison node now also states that the pulled-back ambients are smooth, separated and finite type and the strict transforms reduced; this is true by cartesian smooth base change, and smooth over reduced is reduced. (b) Step 2 now inducts over both generating operations and cites the comparison node; the assembly is 2681 characters. Advisory: the item's tool_uses are stale, and the descent node's source labels Stacks tag 033B with the wrong TeX file. Maintainer: this is the 4th loss of the fix, please merge with fixes/ applied or promote by hand.; 2 file(s) fixed by the reviewer"
  },
  "lean": {
   "module": "Sheaf.AlgebraicGeometry.ResolutionInvariantCalculus",
@@ -311,5 +229,26 @@
   "result": "pass",
   "note": "Clauses (1)-(4) are all present (finiteImage/regularPoint/maximumExists/maximumGeometry/nextGeometry/strictProgress; pullbackExists/smoothValues/smoothIdeals; IntrinsicComparison with intrinsicValues/intrinsicIdeals; termination), none weaker or stronger than the node. Admissible is the inductive closure of empty histories, reduced maximum-center steps and cartesian smooth pullbacks that delete exactly the unit-ideal stages; it agrees with the node because node (1) makes every step an allowed next history. Centers are reduced-induced through the closed immersion; comap is Mathlib's scheme-theoretic preimage ideal; strict transforms are the scheme-theoretic Nagata ones. V : Type (u+1) with LinearOrder/OrderBot, same pattern as the landed parent; no universe restriction on schemes. Edge cases n=0, empty/regular X, fully missed pullback, bottom maximum and identity intrinsic blowups are covered. No hollow definitions; the def modules have no sorry and the item has one; docstrings and lean.statement fields are verbatim. nt_compile --json on all 3 files: clean (3.6/2.7/2.1 s); a broken control copy errors. Advisory: pqf-def-coherent records IsQuasiCoherentFiniteType while the delivery uses IsFiniteTypeWithFiniteTypeKernels (exact 01BV coherence, tagged pqf-def-coherent, also used by landed LabeledEmbeddedResolution); three private imports stand in for proof deps with no Lean record yet; 'comparisons commute' holds automatically from the pointwise equalities."
  },
- "lean_audit": {}
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D9",
+  "result": "pass",
+  "landing": "20261026T081535-L-2000495",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
 }

@@ -1,0 +1,322 @@
+{
+ "id": "lem-sfb-bar-augmentation-row-comparison",
+ "kind": "statement",
+ "title": "Actual bar augmentation from positive-row collapse, with resolution normalization",
+ "statement": "Work on the small coherent profinite site in common universes [def-weil-size-convention]. Let $R$ be a commutative condensed ring and $G$ a profinite group, meaning a compact Hausdorff totally disconnected topological group [sk-def-sfb-condensed-ring]. Let $N$ be an internal $R$-module with trivial $G$-action [sk-def-sfb-module-objects, def-sfb-condensed-action-module]. Use ordinary derived categories [def-weil-abstract-derived-category]. Fix compatible nonnegative derived-bar data as in [lem-sfb-condensed-derived-invariant-bar, def-sfb-condensed-equivariant-bar-data]. For a nonnegative equivariant injective resolution $s:N[0]\\to I^\\bullet$ [def-sp-injective-resolutions] write\n$$C^p=\\underline{\\operatorname{Hom}}_R(R[\\underline G^p],N),\\quad D_I^{p,q}=\\underline{\\operatorname{Hom}}_R(R[\\underline G^p],UI^q),\\quad V_{I,q}^p=H^q(D_I^{p,\\bullet},d_v),$$\nwith the inhomogeneous action-dependent bar differential $d_h$. The resolution differential $d_v$ commutes with $d_h$, and totalization has finite diagonals and differential $d_h+(-1)^pd_v$ [def-sp-double-complex-total]. All terms with a negative index are zero. Let $a_I:C^\\bullet\\to\\operatorname{Tot}D_I$ have component in $(p,0)$ induced by $s^0:N\\to UI^0$, followed by the $(p,0)$ coprojection; its other source components are zero. Assume, for every such resolution, that\n$$H^p(V_{I,q}^\\bullet,d_h)=0\\quad\\text{for every }p\\geq0,\\ q>0.$$\nThese are internal module cohomology objects, not the cohomology groups of evaluated section complexes.\n\nThen $a_I$ is a cochain map and a quasi-isomorphism. Its localization is the actual resolution augmentation $Q(C^\\bullet)\\to\\operatorname{Tot}_{p\\geq0}R\\underline{\\operatorname{Hom}}_R(R[\\underline G^p],N[0])$. For every augmentation-preserving equivariant chain map $f:I^\\bullet\\to I'^\\bullet$, one has the equality of cochain maps\n$$\\operatorname{Tot}(D_f)\\,a_I=a_{I'},$$\nand $\\operatorname{Tot}(D_f)$ is a quasi-isomorphism. Such lifts exist between any two resolutions; their localized maps are the canonical changes of resolution, and two lifts induce the same localized map. More explicitly, any equivariant resolution homotopy between lifts induces a total homotopy with its component in bar degree $p$ multiplied by $(-1)^p$. The localized augmentations agree under the canonical identifications between all compatible models. The column-wise quasi-isomorphism hypothesis is a sufficient special case of the displayed row hypothesis.\n\nFinally $C^0=N$, its differential out of degree zero is zero, and under the canonical identification of invariant sections of a trivial action with $N$, the induced degree-zero augmentation is $1_N$. Its square with the invariant-resolution augmentation and the compatible model's total augmentation commutes on degree-zero cohomology. All conclusions retain the specified components of $a_I$; an arbitrary isomorphism of derived objects is not substituted for this morphism.",
+ "source": {
+  "document": "literature/stacks-project/homology.tex",
+  "place": "Tags 0130 (lemma-ss-double-complex), 0132 (lemma-first-quadrant-ss), 0133 (lemma-double-complex-gives-resolution); derived.tex Tags 013P (lemma-morphisms-lift) and 013S (lemma-morphisms-equal-up-to-homotopy). Agent positive-E2-row refinement and normalized compatible bar specialization."
+ },
+ "stmt_deps": [
+  "def-weil-size-convention",
+  "sk-def-sfb-condensed-ring",
+  "sk-def-sfb-module-objects",
+  "def-sfb-condensed-action-module",
+  "def-weil-abstract-derived-category",
+  "lem-sfb-condensed-derived-invariant-bar",
+  "def-sfb-condensed-equivariant-bar-data",
+  "def-sp-injective-resolutions",
+  "def-sp-double-complex-total",
+  "def-sfb-relative-bar-data"
+ ],
+ "proof": [
+  {
+   "text": "Put $J^{p,0}=C^p$, with horizontal differential $d_C$, and $J^{p,q}=0$ for $q\\ne0$. Equivariance of $s^0$ makes $\\underline{\\operatorname{Hom}}_R(R[\\underline G^p],s^0)$ commute with every bar face, including the first action face. Also $d_I^0s^0=0$, so these maps give a double-complex morphism $\\alpha:J\\to D_I$. Under $\\operatorname{Tot}J=C^\\bullet$, its total map is precisely $a_I$: in degree $n$ the only source summand is $(n,0)$, and its vertical contribution $(-1)^n\\underline{\\operatorname{Hom}}(R[\\underline G^n],d_I^0s^0)$ is zero. This proves the cochain-map assertion with the specified components.",
+   "uses": [
+    "def-sfb-condensed-equivariant-bar-data",
+    "def-sp-double-complex-total"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/homology.tex",
+    "place": "Tag 0133 (lemma-double-complex-gives-resolution), construction of the actual augmentation; compatible action-face specification"
+   }
+  },
+  {
+   "text": "The computation datum makes $U$ exact, so the underlying resolution has $N=\\ker(UI^0\\to UI^1)$ via $s^0$. For each $p$, internal $\\underline{\\operatorname{Hom}}_R(R[\\underline G^p],-)$ is a right adjoint by tensor--Hom adjunction, hence preserves this kernel by the right-adjoint limit lemma (the finite parallel-pair index category is small). Since degree $-1$ is zero, it follows that the map induced by $\\alpha$ gives $C^p\\xrightarrow{\\sim}V_{I,0}^p$. Naturality of the kernel comparison with each bar face makes this an isomorphism of horizontal complexes, not merely of the individual objects. This uses left exactness only; positive column cohomology need not vanish.",
+   "uses": [
+    "def-sfb-condensed-equivariant-bar-data",
+    "lem-sfb-condensed-derived-invariant-bar",
+    "lem-weil-pbc-right-adjoint-preserves-limits"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/homology.tex",
+    "place": "Tags 0130 (lemma-ss-double-complex), 0133 (lemma-double-complex-gives-resolution), zero vertical cohomology; internal tensor--Hom adjunction from sites-modules.tex Tag 03EO"
+   }
+  },
+  {
+   "text": "Apply the first, functorial spectral sequence of double complexes to $\\alpha$. For $J$ its second page is $H^p(C^\\bullet)$ on $q=0$ and zero elsewhere. For $D_I$ it is $H^p(V_{I,q}^\\bullet)$; the hypothesis kills every $q>0$ row, and step 2 identifies the map on the $q=0$ row with an isomorphism. Both totals are first quadrant with exactly the finite-diagonal image filtrations in the cited spectral-sequence theorem. The row-collapse lemma therefore gives edge isomorphisms $E_2^{n,0}\\to H^n(\\operatorname{Tot}(-))$ for both complexes. Functoriality for $\\alpha$ makes their square commute, with bottom map $H^n(\\operatorname{Tot}\\alpha)=H^n(a_I)$. Its other three maps are isomorphisms, so $H^n(a_I)$ is an isomorphism for every $n\\ge0$. Both complexes vanish below zero; thus $a_I$ is a quasi-isomorphism. The use of this square fixes the morphism, rather than choosing an unrelated abutment isomorphism.",
+   "uses": [
+    "thm-sp-double-complex-spectral-sequences",
+    "lem-weil-pbc-first-quadrant-row-collapse"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/homology.tex",
+    "place": "Tags 0130 (lemma-ss-double-complex), 0132 (lemma-first-quadrant-ss), 0133 (lemma-double-complex-gives-resolution); agent refinement from E1 column vanishing to E2 positive-row vanishing"
+   }
+  },
+  {
+   "text": "For an augmentation-preserving equivariant lift $f:I\\to I'$, postcomposition in each internal Hom gives $\\underline{\\operatorname{Hom}}(R[\\underline G^p],Uf^0)\\,\\underline{\\operatorname{Hom}}(R[\\underline G^p],s^0)=\\underline{\\operatorname{Hom}}(R[\\underline G^p],s'^0)$. After the $(p,0)$ total coprojections these equalities are exactly $\\operatorname{Tot}(D_f)a_I=a_{I'}$ as cochain maps. On cohomology, $H^n(\\operatorname{Tot}(D_f))=H^n(a_{I'})H^n(a_I)^{-1}$ by step 3, so this total map is a quasi-isomorphism.",
+   "uses": [
+    "def-sfb-condensed-equivariant-bar-data",
+    "def-sp-double-complex-total",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), internal bar input: functoriality of the specified resolution augmentation; agent argument by the summand equations"
+   }
+  },
+  {
+   "text": "Apply the existing bar-total naturality lemma in the equivariant abelian category supplied by the compatible data. It supplies lifts of $1_N$ between any two nonnegative injective resolutions, their identity/composition compatibility after localization, and for every equivariant resolution homotopy $h$ the total homotopy $H|_{(p,q)}=(-1)^p\\underline{\\operatorname{Hom}}_R(R[\\underline G^p],Uh^q)$. In $dH+Hd$ the horizontal terms cancel because their signs are $(-1)^p$ and $(-1)^{p+1}$; the vertical terms have sign $(-1)^{2p}=1$. Consequently two lifts give the same localized map; reversing a lift gives its inverse. By the same lemma's derived-unit clause, these are the canonical changes of resolution. Step 4 now makes the localized $a_I$ agree under those changes.",
+   "uses": [
+    "lem-sfb-condensed-bar-total-naturality",
+    "def-sfb-condensed-equivariant-bar-data",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tags 013P (lemma-morphisms-lift), 013S (lemma-morphisms-equal-up-to-homotopy), and internal-bar specialization with the total homotopy sign"
+   }
+  },
+  {
+   "text": "The compatible data compute each derived internal Hom on the same underlying injective resolution $UI^\\bullet$. The normalized derived comparison is obtained by mapping the specified augmentation and inverting the derived-functor unit on injectives, as in the derived-resolution naturality lemma. Its underived-to-derived map in bar degree $p$ is therefore represented by postcomposition with $s^0$, not by a freely chosen isomorphism. Taking the finite-diagonal total gives exactly $Q(a_I)$ as the actual resolution augmentation into $\\operatorname{Tot}_{p\\ge0}R\\underline{\\operatorname{Hom}}_R(R[\\underline G^p],N[0])$. Normalized comparisons assemble for the whole bar diagram by that lemma; the compatible model isomorphisms are fixed on summands by their evaluations and augmentations. Together with step 5, this proves agreement for all compatible models.",
+   "uses": [
+    "def-sfb-condensed-equivariant-bar-data",
+    "lem-sp-derived-injective-resolution-naturality",
+    "lem-sfb-condensed-bar-total-naturality"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tags 013P and 013S, normalized injective-resolution computation; agent internal-bar model specialization"
+   }
+  },
+  {
+   "text": "If the column augmentations $C^p[0]\\to D_I^{p,\\bullet}$ are quasi-isomorphisms, then $V_{I,q}^p=0$ for every $p\\ge0,q>0$. Each positive horizontal cohomology row is consequently the zero complex, so the displayed row hypothesis follows. Thus column-wise quasi-isomorphism is the asserted sufficient special case, without imposing it on steps 1--6.",
+   "uses": [
+    "def-weil-abstract-derived-category",
+    "def-sp-double-complex-total"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/homology.tex",
+    "place": "Tag 0133 (lemma-double-complex-gives-resolution), stronger column-exactness special case"
+   }
+  },
+  {
+   "text": "Evaluation on $G^0=*$ identifies $C^0=N$; the two degree-zero faces are $n\\mapsto(g\\mapsto g n)$ and $n\\mapsto(g\\mapsto n)$, so $d_C^0=0$ for the trivial action and $H^0(C)=N$. The kernel of the total differential out of $D_I^{0,0}=UI^0$ consists of sections with $d_Ix=0$ and $gx=x$ after every profinite base change. Via the kernel inclusion $s^0$ it is exactly $N$, all of whose sections are fixed. Hence $H^0(a_I)$ is $1_N$ under this specified identification. Write $u:N[0]\\to\\Gamma_G(I^\\bullet)$ for the invariant-resolution augmentation, $b_I:\\Gamma_G(I^\\bullet)\\to\\operatorname{Tot}D_I$ for the model augmentation, and $c:N[0]\\to C^\\bullet$ for the identity in degree zero. Then $b_Iu=a_Ic$: in degree zero both are $s^0$ followed by the $(0,0)$ coprojection, and all other source terms are zero. The same kernel computation identifies $H^0(u)$ with $1_N$. Applying $H^0$ gives the required commuting square; normalization of the compatible model by $b_I$ preserves it.",
+   "uses": [
+    "def-sfb-condensed-action-module",
+    "def-sfb-condensed-equivariant-bar-data",
+    "def-sp-double-complex-total",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), internal bar input: degree-zero action faces and invariant/total augmentations; agent normalization check"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sfb-condensed-equivariant-bar-data",
+  "def-sp-double-complex-total",
+  "lem-sfb-condensed-derived-invariant-bar",
+  "lem-weil-pbc-right-adjoint-preserves-limits",
+  "thm-sp-double-complex-spectral-sequences",
+  "lem-weil-pbc-first-quadrant-row-collapse",
+  "def-weil-abstract-derived-category",
+  "lem-sfb-condensed-bar-total-naturality",
+  "lem-sp-derived-injective-resolution-naturality",
+  "def-sfb-condensed-action-module"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/homology.tex",
+  "place": "Tags 0130, 0132, 0133; positive-E2-row refinement and specified-map comparison, with derived.tex Tags 013P and 013S and the compatible internal-bar interface"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A first quadrant double complex with acyclic positive vertical cohomology rows is quasi isomorphic to its zeroth vertical cohomology row via the canonical augmentation, naturally up to homotopy",
+   "results": "{\"t\": \"2026-10-24T03:28:21Z\", \"tool\": \"leanfinder\", \"query\": \"A first quadrant double complex with acyclic positive vertical cohomology rows is quasi isomorphic to its zeroth vertical cohomology row via the canonical augmentation, naturally up to homotopy\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CochainComplex.quasiIsoAt₀_iff\", \"CochainComplex.cm5b.instQuasiIsoIntP\", \"ChainComplex.quasiIsoAt₀_iff\", \"CochainComplex.ConnectData.homologyIsoPos\", \"HomotopyCategory.quasiIso_eq_subcategoryAcyclic_W\", \"CochainComplex.instQuasiIsoIntπTruncGEOfIsGE\", \"CochainComplex.instQuasiIsoIntιTruncLEOfIsLE\", \"HomologicalComplex.HomologySequence.quasiIso_τ₃\"], \"digest\": \"f8d366830ee489c7\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: generic quasi-isomorphism and injective-resolution lemmas do not supply positive-row bar collapse together with the specified augmentation, compatible-model normalization and total homotopy comparison."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A bar resolution augmentation is a quasi isomorphism when its positive vertical cohomology rows vanish horizontally, and comparison lifts give the same derived map independently of injective resolution",
+   "results": "{\"t\": \"2026-10-24T03:30:49Z\", \"tool\": \"leanfinder\", \"query\": \"A bar resolution augmentation is a quasi isomorphism when its positive vertical cohomology rows vanish horizontally, and comparison lifts give the same derived map independently of injective resolution\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CochainComplex.cm5b.instQuasiIsoIntP\", \"CategoryTheory.InjectiveResolution.quasiIso\", \"CategoryTheory.InjectiveResolution.instQuasiIsoIntι'\", \"Rep.standardComplex.instQuasiIsoNatεToSingle₀\", \"Rep.FiniteCyclicGroup.resolution_quasiIso\", \"CategoryTheory.InjectiveResolution.isoRightDerivedObj\", \"Rep.standardComplex.quasiIso_forget₂_εToSingle₀\", \"CategoryTheory.instIsIsoToRightDerivedZero'\"], \"digest\": \"cdf1cab3e9700f05\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: generic quasi-isomorphism and injective-resolution lemmas do not supply positive-row bar collapse together with the specified augmentation, compatible-model normalization and total homotopy comparison."
+  },
+  {
+   "tool": "leansearch",
+   "query": "First quadrant double complex bottom row augmentation quasi isomorphism if all positive vertical cohomology rows are horizontally acyclic",
+   "results": "{\"t\": \"2026-10-24T03:30:50Z\", \"tool\": \"leansearch\", \"query\": \"First quadrant double complex bottom row augmentation quasi isomorphism if all positive vertical cohomology rows are horizontally acyclic\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"QuasiIso\", \"CategoryTheory.ShortComplex.QuasiIso.casesOn\", \"quasiIso_comp\", \"quasiIso_of_comp_right\", \"CategoryTheory.ShortComplex.QuasiIso.isIso\", \"quasiIsoAt_comp\", \"quasiIso_of_isIso\", \"QuasiIsoAt.mk\"], \"digest\": \"0ec8c07aee3e51c8\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: generic quasi-isomorphism and injective-resolution lemmas do not supply positive-row bar collapse together with the specified augmentation, compatible-model normalization and total homotopy comparison."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"SpectralSequence\", \"quasiIso\"",
+   "results": "{\"t\": \"2026-10-24T03:28:22Z\", \"tool\": \"loogle\", \"query\": \"\\\"SpectralSequence\\\", \\\"quasiIso\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: generic quasi-isomorphism and injective-resolution lemmas do not supply positive-row bar collapse together with the specified augmentation, compatible-model normalization and total homotopy comparison."
+  },
+  {
+   "tool": "grep",
+   "query": "(quasiIso|acyclic).*(total|spectral)|(total|spectral).*(quasiIso|acyclic)",
+   "results": "{\"t\": \"2026-10-24T03:30:50Z\", \"tool\": \"grep\", \"query\": \"(quasiIso|acyclic).*(total|spectral)|(total|spectral).*(quasiIso|acyclic)\", \"sub\": \"Algebra/Homology\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: generic quasi-isomorphism and injective-resolution lemmas do not supply positive-row bar collapse together with the specified augmentation, compatible-model normalization and total homotopy comparison."
+  },
+  {
+   "tool": "grep",
+   "query": "(quasiIso|acyclic).*(total|spectral)|(total|spectral).*(quasiIso|acyclic)",
+   "results": "{\"t\": \"2026-10-24T03:58:01Z\", \"tool\": \"grep\", \"query\": \"(quasiIso|acyclic).*(total|spectral)|(total|spectral).*(quasiIso|acyclic)\", \"sub\": \"Algebra/Homology\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: generic total-summand or quasi-isomorphism facts do not state the specified bar augmentation, positive-E2-row criterion and compatible-model normalization."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.InjectiveResolution, Homotopy",
+   "results": "{\"t\": \"2026-10-24T03:58:02Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.InjectiveResolution, Homotopy\", \"sub\": \"\", \"ok\": true, \"n_hits\": 4, \"note\": \"\", \"top\": [\"CategoryTheory.InjectiveResolution.descIdHomotopy\", \"CategoryTheory.InjectiveResolution.descCompHomotopy\", \"CategoryTheory.InjectiveResolution.descHomotopyZero\", \"CategoryTheory.InjectiveResolution.descHomotopy\"], \"digest\": \"3eadc33135f61a0a\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: generic injective-resolution descents/homotopies are already covered by the cited existing bar-total naturality node; they do not state this augmentation and positive-row criterion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A first quadrant double complex has a quasi isomorphism from its bottom vertical cycles when all positive vertical cohomology rows are horizontally acyclic",
+   "results": "{\"t\": \"2026-10-24T03:58:03Z\", \"tool\": \"leanfinder\", \"query\": \"A first quadrant double complex has a quasi isomorphism from its bottom vertical cycles when all positive vertical cohomology rows are horizontally acyclic\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CochainComplex.cm5b.instQuasiIsoIntP\", \"CochainComplex.quasiIsoAt₀_iff\", \"CochainComplex.ConnectData.homologyIsoPos\", \"ChainComplex.quasiIsoAt₀_iff\", \"HomologicalComplex.HomologySequence.quasiIso_τ₃\", \"CochainComplex.instQuasiIsoIntπTruncGEOfIsGE\", \"quasiIsoAt_iff'\", \"CochainComplex.instQuasiIsoIntιTruncLEOfIsLE\"], \"digest\": \"38bdd22e71209d36\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: generic total-summand or quasi-isomorphism facts do not state the specified bar augmentation, positive-E2-row criterion and compatible-model normalization."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The canonical augmentation from zeroth vertical cycles to a first quadrant bicomplex total is a quasi isomorphism if positive vertical cohomology rows are horizontally acyclic",
+   "results": "{\"t\": \"2026-10-24T03:58:27Z\", \"tool\": \"leansearch\", \"query\": \"The canonical augmentation from zeroth vertical cycles to a first quadrant bicomplex total is a quasi isomorphism if positive vertical cohomology rows are horizontally acyclic\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HomologicalComplex.pOpcyclesIso\", \"quasiIso_of_isIso\", \"CategoryTheory.ShortComplex.QuasiIso.isIso\", \"CategoryTheory.ShortComplex.QuasiIso.mk\", \"ChainComplex.quasiIsoAt₀_iff\", \"CategoryTheory.ShortComplex.quasiIso_comp\", \"CategoryTheory.ShortComplex.quasiIso_iff_isIso_descOpcycles\", \"QuasiIsoAt.mk\"], \"digest\": \"95867cf94f238489\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: generic total-summand or quasi-isomorphism facts do not state the specified bar augmentation, positive-E2-row criterion and compatible-model normalization."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Natural spectral sequences for a first quadrant bicomplex compare its bottom cycle row to the total complex when the E2 page is supported on row zero",
+   "results": "{\"t\": \"2026-10-24T03:58:29Z\", \"tool\": \"leanfinder\", \"query\": \"Natural spectral sequences for a first quadrant bicomplex compare its bottom cycle row to the total complex when the E2 page is supported on row zero\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HomologicalComplex₂.ιTotalOrZero_eq\", \"HomologicalComplex₂.ιTotalOrZero_eq_zero\", \"HomologicalComplex.ιMapBifunctorOrZero_eq_zero\", \"HomologicalComplex₂.XXIsoOfEq_hom_ιTotal\", \"HomologicalComplex.mapBifunctor₁₂.ιOrZero_eq\", \"HomologicalComplex.mapBifunctor₁₂.ιOrZero_eq_zero\", \"HomologicalComplex₂.XXIsoOfEq_inv_ιTotal\", \"HomologicalComplex.ιMapBifunctorOrZero_eq\"], \"digest\": \"a807b31a64c0fdad\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: generic total-summand or quasi-isomorphism facts do not state the specified bar augmentation, positive-E2-row criterion and compatible-model normalization."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-norm-algcl-bar-augmentation",
+  "date": "2026-10-24",
+  "group": "Q84"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "Paragraph (3), open direct image: scalar analytic base below the tame-boundary polynomial bar calculation; agent expansion, not a theorem asserted by the blueprint. Actual bar augmentation from positive-row collapse, with resolution normalization.",
+   "via": [
+    "lem-sfb-norm-algcl-bar-augmentation",
+    "lem-sfb-ind-unipotent-procyclic-difference",
+    "lem-sfb-polynomial-translation-acyclic",
+    "lem-sfb-polynomial-derived-bar-comparison",
+    "lem-sfb-trivial-ladic-derived-exterior",
+    "lem-sfb-dense-lattice-derived-invariants-comparison",
+    "lem-sfb-tame-inertia-continuous-koszul",
+    "lem-sfb-continuous-algcl-tame-boundary-comparison",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-bar-augmentation-row-comparison",
+  "worker": "stage1",
+  "summary": "Q45 proves the actual augmentation by functorial spectral-sequence comparison with a single-row double complex, reusing existing row-collapse and normalized bar-resolution homotopy statements. No new node is needed. Every comparison retains the specified summand maps; degree-zero normalization is checked at the level of chain maps. The statement and inherited metadata are unchanged.",
+  "blueprint": "Inherited ancestor utility returns None. This is an agent expansion of paragraph (3), open direct image, of the current latest six-functors-basics/sk-thm-sf-ctf-stability direct-images proof. It proves only the formal internal-bar input and changes no geometric route.",
+  "tool_uses": [
+   {
+    "node": "thm-sp-double-complex-spectral-sequences",
+    "why": "Generic functorial first-quadrant double-complex spectral sequence with finite image filtration; the unit supplies no alternative formal spectral-sequence construction."
+   },
+   {
+    "node": "lem-weil-pbc-first-quadrant-row-collapse",
+    "why": "Generic spectral-sequence edge isomorphism when the second page is supported on row zero; used for both the single-row source and the target."
+   },
+   {
+    "node": "lem-sp-derived-injective-resolution-naturality",
+    "why": "Generic normalization and naturality of derived comparisons on specified injective resolutions, used to identify the actual morphism."
+   }
+  ]
+ },
+ "tool_uses": [
+  "thm-sp-double-complex-spectral-sequences",
+  "lem-weil-pbc-first-quadrant-row-collapse",
+  "lem-sp-derived-injective-resolution-naturality"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q45-acf3b46ef",
+  "group": "Q45",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q45-acf3b46ef (reviewer sub-agent of L); spot-checked: First split; the base was unsplit and there is no repair note. Statement and stmt_deps are byte-identical to the base. There are no new nodes, and the steps' uses equal proof_deps. No cycle (DFS over 630 dependency nodes) and no SGA. Source: Stacks homology.tex 0133 lemma-double-complex-gives-resolution (l.6699) and 0132 lemma-first-quadrant-ss. The item is the positive-E_2-row refinement, correctly marked by: agent. Step 3 also identifies the actual map, which the Stacks proof does not. Step 1: α = Hom(R[G^p],s^0) is a double-complex map because s^0 is equivariant and d_I^0 s^0 = 0, and Tot α = a_I. Step 2: U is exact (computation datum), and internal Hom is a right adjoint (stated in lem-sfb-condensed-derived-invariant-bar), so it preserves the kernel (mathlib leaf). This gives C ≅ V_{I,0} as complexes. Step 3: first spectral sequence, indices match the row-collapse lemma, and the edge square along Tot α makes H^n(a_I) an isomorphism. Step 4: Tot(D_f) a_I = a_{I'}, quasi-isomorphism by 2-of-3. Step 5: bar-total-naturality states lifts, the (−1)^p homotopy (signs rechecked) and the derived-unit clause. Step 6: the normalized comparison composed with the unit is Q(G s). Step 7: column case trivial. Step 8: d^0 = gn − n = 0, the H^0 kernel is s^0(N), and b_I u = a_I c at chain level. Tested on G = 1 (alternating 0/id bar complex, H = N in degree 0), N = 0 and the worker's non-column-acyclic example. Duplicate scan: the column/row augmentation nodes and the condensed-bar-total, normalization and evaluated nodes all differ. The three generic split_report tool_uses (double-complex spectral sequence, row collapse, injective-resolution naturality) are accepted. The null inherited from.node is a base-node matter."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.BarAugmentationRowComparison",
+  "declaration": "CategoryTheory.CondensedBar.bar_augmentation_row_comparison",
+  "declarations": [
+   "CategoryTheory.CondensedBar.verticalCohomologyRow",
+   "CategoryTheory.CondensedBar.barDiagramTotalIso",
+   "CategoryTheory.CondensedBar.bar_augmentation_columns_imply_rows",
+   "CategoryTheory.CondensedBar.bar_augmentation_row_comparison"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/BarAugmentationRowComparison.lean",
+  "statement": "theorem bar_augmentation_row_comparison (M : Model A G) (N : Modules A) (hrows : ∀ (I : InjectiveResolution ((Profinite.CondensedAction.trivial (R := A.toMon) (P := G)).obj N)) (p q : ℕ), 0 < q → IsZero ((verticalCohomologyRow M.bar I.cocomplex q).homology p)) : (∀ (I : InjectiveResolution ((Profinite.CondensedAction.trivial (R := A.toMon) (P := G)).obj N)), (∀ n : ℕ, (RelativeCyclic.barAugmentation M.functions M.bar _ I).f n = ((cochains M.bar).map (I.ι.f 0)).f n ≫ (doubleComplex M.bar I.cocomplex).ιTotal (.up ℕ) n 0 n (by simp)) ∧ QuasiIso (RelativeCyclic.barAugmentation M.functions M.bar _ I) ∧ IsIso (DerivedCategory.Q.{u + 2}.map (HomologicalComplex.extendMap (RelativeCyclic.barAugmentation M.functions M.bar _ I) ComplexShape.embeddingUpNat))) ∧ (∀ (I J : InjectiveResolution ((Profinite.CondensedAction.trivial (R := A.toMon) (P := G)).obj N)) (f : I.cocomplex ⟶ J.cocomplex), I.ι ≫ f = J.ι → RelativeCyclic.barAugmentation M.functions M.bar _ I ≫ (totalCochains M.bar).map f = RelativeCyclic.barAugmentation M.functions M.bar _ J ∧ QuasiIso ((totalCochains M.bar).map f) ∧ (M.computation.iso I).hom ≫ (totalLocalization M.bar).map f = (M.computation.iso J).hom) ∧ (∀ (I J : InjectiveResolution ((Profinite.CondensedAction.trivial (R := A.toMon) (P := G)).obj N)), (∃ f : I.cocomplex ⟶ J.cocomplex, I.ι ≫ f = J.ι) ∧ (∀ (f g : I.cocomplex ⟶ J.cocomplex), I.ι ≫ f = J.ι → I.ι ≫ g = J.ι → (totalLocalization M.bar).map f = (totalLocalization M.bar).map g) ∧ (∀ (f : I.cocomplex ⟶ J.cocomplex) (g : J.cocomplex ⟶ I.cocomplex), I.ι ≫ f = J.ι → J.ι ≫ g = I.ι → (totalLocalization M.bar).map f ≫ (totalLocalization M.bar).map g = 𝟙 _ ∧ (totalLocalization M.bar).map g ≫ (totalLocalization M.bar).map f = 𝟙 _)) ∧ (∀ (I J : InjectiveResolution ((Profinite.CondensedAction.trivial (R := A.toMon) (P := G)).obj N)) (f g : I.cocomplex ⟶ J.cocomplex) (h : Homotopy f g), I.ι ≫ f = J.ι → I.ι ≫ g = J.ι → ∃ H : Homotopy ((totalCochains M.bar).map f) ((totalCochains M.bar).map g), ∀ (p q n m : ℕ) (hpq : p + q = n), (doubleComplex M.bar I.cocomplex).ιTotal (.up ℕ) p q n hpq ≫ H.hom n m = (-1 : ℤ) ^ p • (((cochains M.bar).map (h.hom q (m - p))).f p ≫ (doubleComplex M.bar J.cocomplex).ιTotalOrZero (.up ℕ) p (m - p) m)) ∧ (∀ (I : InjectiveResolution ((Profinite.CondensedAction.trivial (R := A.toMon) (P := G)).obj N)) (p : ℕ), ∃ c : (M.functions.functor (power G p)).rightDerivedFunctor.{u + 2, u + 2}.obj (DerivedCategory.Q.{u + 2}.obj ((forgetAction.mapHomologicalComplex (.up ℤ)).obj ((HomologicalComplex.single _ (.up ℤ) 0).obj ((Profinite.CondensedAction.trivial (R := A.toMon) (P := G)).obj N)))) ≅ DerivedCategory.Q.{u + 2}.obj (((M.functions.functor (power G p)).mapHomologicalComplex (.up ℤ)).obj ((forgetAction.mapHomologicalComplex (.up ℤ)).obj I.cochainComplex)), c.hom ≫ (M.functions.functor (power G p)).rightDerivedFunctorUnitQ.{u + 2, u + 2} ((forgetAction.mapHomologicalComplex (.up ℤ)).obj I.cochainComplex) = (M.functions.functor (power G p)).rightDerivedFunctor.{u + 2, u + 2}.map (DerivedCategory.Q.{u + 2}.map ((forgetAction.mapHomologicalComplex (.up ℤ)).map I.ι')) ∧ (M.functions.functor (power G p)).rightDerivedFunctorUnitQ.{u + 2, u + 2} ((forgetAction.mapHomologicalComplex (.up ℤ)).obj ((HomologicalComplex.single _ (.up ℤ) 0).obj ((Profinite.CondensedAction.trivial (R := A.toMon) (P := G)).obj N))) ≫ c.hom = DerivedCategory.Q.{u + 2}.map (((M.functions.functor (power G p)).mapHomologicalComplex (.up ℤ)).map ((forgetAction.mapHomologicalComplex (.up ℤ)).map I.ι'))) ∧ (∀ M' : Model A G, ∃ e : cochains M.bar ≅ cochains M'.bar, (∀ (L : Equivariant A G) (p : ℕ) (S : Profinite.{u}) (x : sections A (((cochains M.bar).obj L).X p) S), M'.functions.evaluate (power G p) S L.module ((M'.bar.term L p).hom.hom.hom.app (op S) (((e.hom.app L).f p).hom.hom.app (op S) x)) = M.functions.evaluate (power G p) S L.module ((M.bar.term L p).hom.hom.hom.app (op S) x)) ∧ (∀ I : InjectiveResolution ((Profinite.CondensedAction.trivial (R := A.toMon) (P := G)).obj N), DerivedCategory.Q.{u + 2}.map (HomologicalComplex.extendMap (RelativeCyclic.barAugmentation M.functions M.bar _ I) ComplexShape.embeddingUpNat) ≫ (DerivedCategory.Q.{u + 2}.mapIso ((ComplexShape.embeddingUpNat.extendFunctor (Modules A)).mapIso (barDiagramTotalIso e I.cocomplex))).hom = (DerivedCategory.Q.{u + 2}.mapIso ((ComplexShape.embeddingUpNat.extendFunctor (Modules A)).mapIso (e.app ((Profinite.CondensedAction.trivial (R := A.toMon) (P := G)).obj N)))).hom ≫ DerivedCategory.Q.{u + 2}.map (HomologicalComplex.extendMap (RelativeCyclic.barAugmentation M'.functions M'.bar _ I) ComplexShape.embeddingUpNat))) ∧ (∃ e : ((cochains M.bar).obj ((Profinite.CondensedAction.trivial (R := A.toMon) (P := G)).obj N)).X 0 ≅ N, (∀ (S : Profinite.{u}) (x : sections A (((cochains M.bar).obj ((Profinite.CondensedAction.trivial (R := A.toMon) (P := G)).obj N)).X 0) S), e.hom.hom.hom.app (op S) x = (M.functions.evaluate (power G 0) S N ((M.bar.term ((Profinite.CondensedAction.trivial (R := A.toMon) (P := G)).obj N) 0).hom.hom.hom.app (op S) x)).val S (𝟙 S) (ContinuousMap.const S (fun i ↦ Fin.elim0 i))) ∧ ((cochains M.bar).obj ((Profinite.CondensedAction.trivial (R := A.toMon) (P := G)).obj N)).d 0 1 = 0 ∧ (∃ v : M.invariants.functor.obj ((Profinite.CondensedAction.trivial (R := A.toMon) (P := G)).obj N) ≅ N, v.hom = M.invariants.inclusion.app ((Profinite.CondensedAction.trivial (R := A.toMon) (P := G)).obj N) ∧ (M.augmentation.map.app ((Profinite.CondensedAction.trivial (R := A.toMon) (P := G)).obj N)).f 0 ≫ e.hom = v.hom ∧ (∀ I : InjectiveResolution ((Profinite.CondensedAction.trivial (R := A.toMon) (P := G)).obj N), (CochainComplex.single₀ (Modules A)).map v.inv ≫ M.augmentation.map.app ((Profinite.CondensedAction.trivial (R := A.toMon) (P := G)).obj N) ≫ RelativeCyclic.barAugmentation M.functions M.bar _ I = (CochainComplex.single₀ (Modules A)).map v.inv ≫ (HomologicalComplex.singleMapHomologicalComplex M.invariants.functor (.up ℕ) 0).inv.app ((Profinite.CondensedAction.trivial (R := A.toMon) (P := G)).obj N) ≫ (M.invariants.functor.mapHomologicalComplex (.up ℕ)).map I.ι ≫ M.totalAugmentation.map.app I.cocomplex) ∧ (∃ hC : ((cochains M.bar).obj ((Profinite.CondensedAction.trivial (R := A.toMon) (P := G)).obj N)).homology 0 ≅ N, ((cochains M.bar).obj ((Profinite.CondensedAction.trivial (R := A.toMon) (P := G)).obj N)).homologyπ 0 ≫ hC.hom = ((cochains M.bar).obj ((Profinite.CondensedAction.trivial (R := A.toMon) (P := G)).obj N)).iCycles 0 ≫ e.hom ∧ (∀ I : InjectiveResolution ((Profinite.CondensedAction.trivial (R := A.toMon) (P := G)).obj N), ∃ (hT : ((totalCochains M.bar).obj I.cocomplex).homology 0 ≅ N) (hV : ((M.invariants.functor.mapHomologicalComplex (.up ℕ)).obj I.cocomplex).homology 0 ≅ M.invariants.functor.obj ((Profinite.CondensedAction.trivial (R := A.toMon) (P := G)).obj N)), HomologicalComplex.homologyMap (RelativeCyclic.barAugmentation M.functions M.bar _ I) 0 ≫ hT.hom = hC.hom ∧ HomologicalComplex.homologyMap (M.totalAugmentation.map.app I.cocomplex) 0 ≫ hT.hom = hV.hom ≫ v.hom ∧ (∃ hS : ((CochainComplex.single₀ (Modules A)).obj (M.invariants.functor.obj ((Profinite.CondensedAction.trivial (R := A.toMon) (P := G)).obj N))).homology 0 ≅ M.invariants.functor.obj ((Profinite.CondensedAction.trivial (R := A.toMon) (P := G)).obj N), ((CochainComplex.single₀ (Modules A)).obj (M.invariants.functor.obj ((Profinite.CondensedAction.trivial (R := A.toMon) (P := G)).obj N))).homologyπ 0 ≫ hS.hom = ((CochainComplex.single₀ (Modules A)).obj (M.invariants.functor.obj ((Profinite.CondensedAction.trivial (R := A.toMon) (P := G)).obj N))).iCycles 0 ∧ HomologicalComplex.homologyMap ((HomologicalComplex.singleMapHomologicalComplex M.invariants.functor (.up ℕ) 0).inv.app ((Profinite.CondensedAction.trivial (R := A.toMon) (P := G)).obj N) ≫ (M.invariants.functor.mapHomologicalComplex (.up ℕ)).map I.ι) 0 ≫ hV.hom = hS.hom)))))",
+  "branch": "sheaf-dag",
+  "by": "Q126",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "Reuses the already landed unique RelativeCyclic.barAugmentation from def-sfb-relative-bar-data, added to stmt_deps. No node statement is changed. The separate columns-imply-rows theorem states the sufficient special case without assuming the row hypothesis. Auxiliary definitions construct the internal vertical-cohomology row and the total of a compatible bar-diagram isomorphism."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-8492060f3",
+  "group": "Q126",
+  "result": "pass",
+  "note": "Q126 8492060f: new module BarAugmentationRowComparison; item node changes only lean (verbatim, complete) and stmt_deps (+ landed def-sfb-relative-bar-data, allowed; DFS over 760 nodes finds no cycle). The theorem stmt_dep on lem-sfb-condensed-bar-total-naturality that got O2 5f08 returned (H2) is not added. Clause-by-clause match: Ring.{u}/profinite G/trivial N/Model M; internal vertical-cohomology rows for every I, p, q>0; landed barAugmentation with (n,0) components, QuasiIso, IsIso Q; per-column derived clause pinned by unitQ equations (unit invertible on injectives); lift equality a_I≫Tot f=a_J, QuasiIso, iso_I≫Q(Tot f)=iso_J; lifts exist, localized maps equal and inverse; (-1)^p homotopy with ιTotalOrZero indices checked (truncated m-p, q=0, shape zeros); model change e pinned by evaluate∘term, square via barDiagramTotalIso; columns⇒rows as a separate theorem; degree-zero e/v/d0=0/a^0 e=v, chain square (proof step 8) and H^0 hC/hT/hV/hS forced. Edge cases G=1, N=0, zero ring, p=q=n=0, negatives, universes OK. Gates: sorry-only, real helper defs, docstrings with source/blueprint/8 steps, lines ≤100, report sections present, three kinds of search. Compile not reproduced (human rule); worker reports clean 12.0/10.1 s. Advisories: totalLocalization is owned by a theorem node and not cited; verticalCohomologyRow repeats theorem-owned barTransferVerticalCohomology; base stmt_dep condensed-derived-invariant-bar contributes no declaration."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "AUTO",
+  "group": "E9",
+  "result": "pass",
+  "landing": "20261026T081721-L-2050698",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)",
+  "sorry_before": [
+   "CategoryTheory.CondensedBar.bar_augmentation_columns_imply_rows",
+   "CategoryTheory.CondensedBar.bar_augmentation_row_comparison"
+  ],
+  "sorry_after": [
+   "CategoryTheory.CondensedBar.bar_augmentation_row_comparison"
+  ]
+ }
+}

@@ -1,0 +1,339 @@
+{
+ "id": "lem-sf-derived-hom-substitution-coherence",
+ "kind": "statement",
+ "title": "Derived internal-Hom substitution with coefficient and signed-shift comparisons",
+ "statement": "Fix primes $p\\ne\\ell$, an integer $a\\ge1$, $q=p^a$, a field $k_0$ with $q$ elements and an algebraic closure $k$ of $k_0$ [def-weil-finite-field-fiber]. Fix an algebraic closure $\\overline{\\mathbf Q}_\\ell$ of $\\mathbf Q_\\ell$, a finite extension $E/\\mathbf Q_\\ell$ inside it, its valuation ring $\\mathcal O_E$ and uniformizer $\\varpi_E$, and $n\\ge1$. Put $A_{E,n}=\\mathcal O_E/\\varpi_E^n$ and $\\Lambda\\in\\{A_{E,n},\\mathcal O_E,E,\\overline{\\mathbf Q}_\\ell\\}$ [def-weil-l-adic-coefficient-extension]. Fix a six-functor datum [def-sf-datum], using its constructible exceptional adjunctions and finite-Tor categories $C_\\Lambda(T)=D^b_{ctf}(T,\\Lambda)$ [def-weil-finite-tor-amplitude]. Integral operations are completed; field operations are the specified rationalizations and common finite-stage operations. Let $f:X\\to Y$ be a separated finite-type morphism of separated finite-type $k$-schemes [def-weil-scheme-morphism-properties].\nUse the actual derived internal Homs $H_\\Lambda(M,U)=R\\mathcal H om_X(M,U)$ and ordinary direct image $Rf_{\\Lambda*}$ of [def-weil-derived-pullback-tensor-hom, def-weil-derived-direct-image]. For $U,V\\in C_\\Lambda(X)$ and an isomorphism $c:U\\xrightarrow{\\sim}V$, put $J_U(M)=Rf_{\\Lambda*}H_\\Lambda(M,U)$ and\n$$j_c(M)=Rf_{\\Lambda*}H_\\Lambda(1_M,c):J_U(M)\\xrightarrow{\\sim}J_V(M)\\qquad(M\\in C_\\Lambda(X)).$$\nThese components form a natural isomorphism of contravariant functors. For the signed source-shift comparisons $s_U(M,r):J_U(M[r])\\xrightarrow{\\sim}J_U(M)[-r]$ of the actual derived Hom and direct image, for every $r\\in\\mathbf Z$,\n$$s_V(M,r)\\circ j_c(M[r])=j_c(M)[-r]\\circ s_U(M,r).$$\nThe source-shift convention on a degree-$d$ Hom family is reindexing with multiplier $(-1)^{rd}$, localized to the derived category; field-stage comparisons are its rationalized or common-stage images.\n\nFor an allowed (A5) coefficient comparison $T_X,T_Y$ at $\\Lambda\\to\\Lambda'$, let\n$$h_{M,U}:T_XH_\\Lambda(M,U)\\longrightarrow H_{\\Lambda'}(T_XM,T_XU)$$\nbe the canonical comparison obtained by applying $T_X$ to evaluation, inserting its tensor comparison, and transposing. Let $\\gamma_Z:T_YRf_{\\Lambda*}Z\\to Rf_{\\Lambda'*}T_XZ$ be the ordinary direct-image comparison, normalized as the mate of the pullback comparison. For $U',V'\\in C_{\\Lambda'}(X)$, isomorphisms $u:T_XU\\xrightarrow{\\sim}U'$, $v:T_XV\\xrightarrow{\\sim}V'$ and $c':U'\\xrightarrow{\\sim}V'$ satisfying $v\\circ T_Xc=c'\\circ u$, set\n$$\\sigma_{U,u}(M)=Rf_{\\Lambda'*}\\bigl(H_{\\Lambda'}(1,u)\\circ h_{M,U}\\bigr)\\circ\\gamma_{H_\\Lambda(M,U)}:T_YJ_U(M)\\longrightarrow Rf_{\\Lambda'*}H_{\\Lambda'}(T_XM,U').$$\nDefine $\\sigma_{V,v}$ identically. Then the specified evaluation-defined comparisons satisfy\n$$\\sigma_{V,v}(M)\\circ T_Y(j_c(M))=j_{c'}(T_XM)\\circ\\sigma_{U,u}(M).$$\nThese are equations in the actual coefficient category, or its ambient derived realization, with the canonical associators inserted. They use only the domains of (A5); no assertion that arbitrary ambient internal-Hom coefficient comparisons are invertible is included. At integral coefficients the completed comparison is used, and field comparisons are formed by rationalization and common finite stages.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-verdier-exchange/thm-sf-verdier-exchange.proof.md",
+  "place": "Step 2: substitute Rf^!omega_Y ≅ omega_X inside internal Hom; Step 3: naturality, coefficient and shift compatibility of this substitution (returned proof Step 4, remaining argument)"
+ },
+ "stmt_deps": [
+  "def-weil-finite-field-fiber",
+  "def-weil-l-adic-coefficient-extension",
+  "def-sf-datum",
+  "def-weil-finite-tor-amplitude",
+  "def-weil-scheme-morphism-properties",
+  "def-weil-derived-pullback-tensor-hom",
+  "def-weil-derived-direct-image",
+  "lem-weil-pbc-ringed-internal-hom-exact-restriction"
+ ],
+ "proof": [
+  {
+   "text": "Write $H=H_\\Lambda$, $R=Rf_{\\Lambda*}$ and $R'=Rf_{\\Lambda'*}$. Work in the actual ambient derived realizations whenever an output is not in the finite-Tor subcategory. At finite and integral coefficients $H$ is the ringed-site derived Hom, hence a bifunctor; at field coefficients its action on morphisms is the specified rationalized or common-stage action. $R,R'$ are the specified direct-image functors. The only coefficient data used below are the evaluation-transpose definition of $h$, the natural tensor comparison used in that definition, and the direct-image mate $\\gamma$ from the question. The allowed domains are those of (A5); this proof does not enlarge them.",
+   "uses": [
+    "def-pur-derived-internal-hom",
+    "def-weil-derived-pullback-tensor-hom",
+    "def-weil-derived-direct-image",
+    "def-sf-datum"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-verdier-exchange/thm-sf-verdier-exchange.proof.md",
+    "place": "Step 2: substitute Rf^!omega_Y ≅ omega_X inside internal Hom; Step 3: naturality, coefficient and shift compatibility of this substitution (returned proof Step 4, remaining argument)"
+   }
+  },
+  {
+   "text": "For $a:M'\\to M$, bifunctoriality gives $H(a,1_V)H(1_M,c)=H(1_{M'},c)H(a,1_U)=H(a,c)$. Applying $R$ gives the contravariant naturality square for $j_c$. Likewise $H(1,c^{-1})H(1,c)=1$ and $H(1,c)H(1,c^{-1})=1$, so the components $j_{c^{-1}}$ are the inverse natural transformation. This constructs the asserted natural isomorphism, rather than merely proving its components invertible.",
+   "uses": [
+    "def-pur-derived-internal-hom",
+    "def-weil-derived-pullback-tensor-hom",
+    "def-weil-derived-direct-image"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-verdier-exchange/thm-sf-verdier-exchange.proof.md",
+    "place": "Step 2: substitute Rf^!omega_Y ≅ omega_X inside internal Hom; Step 3: naturality, coefficient and shift compatibility of this substitution (returned proof Step 4, remaining argument)"
+   }
+  },
+  {
+   "text": "Represent $M$ by a complex $L$ and write $I(-)$ for the functorial K-injective replacement of [def-pur-derived-internal-hom], so $H(M,U)=\\mathcal Hom^\\bullet(L,I(U))$. The stipulated source-shift comparison is the localization of the chain map $\\rho_{L,I}:\\mathcal Hom^\\bullet(L[r],I)\\to\\mathcal Hom^\\bullet(L,I)[-r]$ which reindexes a degree-$d$ family $(\\phi^p)_p$ and multiplies it by $(-1)^{rd}$. It is a chain isomorphism: the inverse reindexes back with the same sign, and with the differential of [def-pur-hom-complex] and $d_{L[r]}=(-1)^rd_L$ both $\\rho(d\\phi)$ and $(-1)^rd(\\rho\\phi)$ equal $(-1)^{r(d+1)}$ times the reindexed $d_I\\phi-(-1)^{d+r}\\phi d_L$. Its localization is the isomorphism $t_U:H(M[r],U)\\xrightarrow{\\sim}H(M,U)[-r]$, the inverse of the natural source-shift isomorphism recorded in [lem-pur-derived-internal-hom-shift-left] (no boundedness or K-flatness is needed). For a chain map $g:I\\to I'$, postcomposition with the degree-zero map $g$ is componentwise [def-pur-hom-complex], and $g((-1)^{rd}\\phi)=(-1)^{rd}(g\\phi)$, so $\\rho_{L,I'}\\circ g_*=g_*[-r]\\circ\\rho_{L,I}$. By [def-pur-derived-internal-hom], $H(1,c)$ is the morphism induced through the localization by the functor on pairs of complexes; it is a composite of images of chain maps and of inverses of images of quasi-isomorphisms, and $\\rho$ commutes with each, hence with their inverses. Therefore $t_VH(1,c)=H(1,c)[-r]t_U$ for the stipulated signed comparison itself; no chain representative of $c$ and no identification with an unspecified objectwise isomorphism is used. Write $\\kappa_Z:R(Z[-r])\\xrightarrow{\\sim}(RZ)[-r]$ for the canonical direct-image shift comparison occurring in $s$. By definition $s_U=\\kappa_{H(M,U)}R(t_U)$. Naturality of this shift comparison says $\\kappa_{H(M,V)}R(H(1,c)[-r])=R(H(1,c))[-r]\\kappa_{H(M,U)}$. Apply $R$ to the equation for $t$ and substitute this naturality identity; the result is exactly $s_Vj_c(M[r])=j_c(M)[-r]s_U$.",
+   "uses": [
+    "lem-pur-derived-internal-hom-shift-left",
+    "def-pur-hom-complex",
+    "def-pur-derived-internal-hom"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0A8X, section-hom-complexes; Tag 08J7, section-internal-hom; signed source-shift naturality on derived Hom."
+   }
+  },
+  {
+   "text": "Put $T=T_X$ and write $\\mu:TH(M,U)\\otimes TM\\to T(H(M,U)\\otimes M)$ for the tensor comparison in the definition of $h$. Use the tensor-Hom transposition supplied for these evaluation maps, with evaluation $e_{M,U}:H(M,U)\\otimes M\\to U$. The closed adjunction gives $e_{M,V}(H(1,c)\\otimes1)=c\\,e_{M,U}$. Uncurry the two maps $h_{M,V}\\,T H(1,c)$ and $H'(1,Tc)\\,h_{M,U}$, both from $TH(M,U)$ to $H'(TM,TV)$. Naturality of $\\mu$ makes the first uncurry equal to $T(e_{M,V})\\,T(H(1,c)\\otimes1)\\,\\mu=T(c)\\,T(e_{M,U})\\,\\mu$. Naturality of target evaluation and the defining transpose equation for $h_{M,U}$ give exactly this same uncurry for the second map. Injectivity of the tensor-Hom bijection proves $h_{M,V}\\,T H(1,c)=H'(1,Tc)\\,h_{M,U}$. This is a direct calculation with the evaluation-defined maps, and does not require either $h$ to be an isomorphism.",
+   "uses": [
+    "lem-sf-ringed-derived-closed-symmetric-monoidal",
+    "def-coef-ringed-tensor-hom-model"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 08J9, lemma-internal-hom, its natural tensor-Hom bijection and counit evaluation; formal transpose calculation."
+   }
+  },
+  {
+   "text": "Abbreviate $b_U=H'(1,u)h_{M,U}$ and $b_V=H'(1,v)h_{M,V}$. Postcompose the equation of Step 4 by $H'(1,v)$ and use the given equation $v\\,Tc=c'u$. Bifunctoriality gives $b_V\\,T H(1,c)=H'(1,v\\,Tc)h_{M,U}=H'(1,c'u)h_{M,U}=H'(1,c')b_U$. This also verifies every source and target: both sides go from $TH(M,U)$ to $H'(TM,V')$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-verdier-exchange/thm-sf-verdier-exchange.proof.md",
+    "place": "Step 2: substitute Rf^!omega_Y ≅ omega_X inside internal Hom; Step 3: naturality, coefficient and shift compatibility of this substitution (returned proof Step 4, remaining argument)"
+   }
+  },
+  {
+   "text": "The mate definition makes $\\gamma:T_YR\\to R'T_X$ a natural transformation. Apply its naturality to $a=H(1,c)$ to obtain $\\gamma_{H(M,V)}\\,T_YR(a)=R'T_X(a)\\,\\gamma_{H(M,U)}$. Using Step 5, functoriality of $R'$ and associativity now gives\n$$\\begin{aligned}\n\\sigma_{V,v}\\,T_Y(j_c)&=R'(b_V)\\,\\gamma_{H(M,V)}\\,T_YR(a)\\\\\n&=R'(b_V\\,T_Xa)\\,\\gamma_{H(M,U)}\\\\\n&=R'(H'(1,c')\\,b_U)\\,\\gamma_{H(M,U)}\\\\\n&=j_{c'}(T_XM)\\,\\sigma_{U,u}.\n\\end{aligned}$$\nHere $j_{c'}(T_XM)=R'H'(1,c')$ is precisely the target-stage substitution in the statement. The computation uses the specified mate itself, with no choice of a different direct-image comparison.",
+   "uses": [
+    "def-weil-pbc-adjunction-mate"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-verdier-exchange/thm-sf-verdier-exchange.proof.md",
+    "place": "Step 3, naturality of the specified mate and substitution; formal pasting of the two displayed naturality equations."
+   }
+  },
+  {
+   "text": "At integral coefficients the argument takes place in the completed coefficient category or its actual ambient derived realization: $h$ is its stipulated evaluation transpose and $\\gamma$ its stipulated completed mate. Steps 4--6 compare morphisms in that category directly; they never infer equality from equality of finite reductions. For $E$, use the rationalized actions on objects and morphisms specified for $H$ and $R$: composition and identities in each displayed calculation are preserved, and the degree-zero evaluation and shift comparisons are their specified images. For $\\overline{\\mathbf Q}_\\ell$, represent the finitely many objects and arrows in a displayed calculation over a single finite extension containing their stages. The common-stage formula for operations conjugates each arrow by its endpoint comparison. In a composite the adjacent comparison and its inverse cancel, so each equation proved over that stage gives the displayed equation of common-stage classes. The allowed coefficient comparison from (A5) is used only where $h$ and $\\gamma$ are defined. In particular no reduction from a field to finite coefficients, no perfectness of $M$ on the site, and no invertibility of an arbitrary internal-Hom comparison is used.",
+   "uses": [
+    "def-sf-datum",
+    "def-weil-derived-pullback-tensor-hom",
+    "def-weil-derived-direct-image"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-verdier-exchange/thm-sf-verdier-exchange.proof.md",
+    "place": "Step 2: substitute Rf^!omega_Y ≅ omega_X inside internal Hom; Step 3: naturality, coefficient and shift compatibility of this substitution (returned proof Step 4, remaining argument)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pur-derived-internal-hom",
+  "def-weil-derived-pullback-tensor-hom",
+  "def-weil-derived-direct-image",
+  "def-sf-datum",
+  "lem-pur-derived-internal-hom-shift-left",
+  "def-pur-hom-complex",
+  "lem-sf-ringed-derived-closed-symmetric-monoidal",
+  "def-coef-ringed-tensor-hom-model",
+  "def-weil-pbc-adjunction-mate"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-verdier-exchange/thm-sf-verdier-exchange.proof.md",
+  "place": "Steps 2--3, expanded by bifunctoriality, signed source-shift naturality and the explicit evaluation-transpose calculation; Stacks sites-cohomology.tex Tags 0A8X, 08J7, 08J9."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Finite reduction and scalar extension preserve the canonical map from Rf star internal Hom of M and f exceptional omega to Rf star internal Hom of M and omega X including negative shifts",
+   "results": "8 hits: CategoryTheory.Abelian.Ext.singleFunctor_map_comp_hom, CategoryTheory.Abelian.Ext.hom_comp_singleFunctor_map_shift, CategoryTheory.Abelian.Ext.mapExactFunctor, CategoryTheory.Functor.mapExtLinearMap_apply, CategoryTheory.Abelian.Ext.mapExactFunctor_hom, CategoryTheory.Functor.mapExtLinearMap_coe, CategoryTheory.Functor.mapExactFunctor_smul, CategoryTheory.Abelian.Ext.preadditiveYoneda_homologySequenceδ_singleTriangle_apply.  Ext composition and exact-functor maps; none states the derived internal-Hom substitution coefficient square.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Naturality and signed shift compatibility of evaluation defined coefficient comparisons for derived internal Hom postcomposition by an isomorphism",
+   "results": "8 hits: CochainComplex.shiftEval, CochainComplex.shiftEval_hom_app, CategoryTheory.Localization.SmallShiftedHom.postcompEquiv_apply, CategoryTheory.SingleFunctors.postcompIsoOfIso, CategoryTheory.Localization.SmallShiftedHom.postcompEquiv, CategoryTheory.Localization.SmallShiftedHom.postcompEquiv_symm_apply, CategoryTheory.SingleFunctors.postcompIsoOfIso_hom_hom_app, CategoryTheory.ShiftedHom.map.  Shift evaluation, shifted Hom localization, and SingleFunctors; no comparison for actual constructible coefficient operations.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Postcomposition by the dualizing composition mate on derived internal Hom is natural and compatible with coefficient change and shifts",
+   "results": "8 hits: CategoryTheory.NatTrans.rightDerivedToHomotopyCategory_comp, CategoryTheory.NatTrans.PullbackShift.natIsoComp, CategoryTheory.Functor.commShiftIso_map₂CochainComplex_flip_hom_app, PresheafOfModules.Derivation.postcomp, CategoryTheory.SingleFunctors.postcompPostcompIso, CategoryTheory.Functor.mapCochainComplexSingleFunctor, CategoryTheory.MonoidalCategory.DayConvolutionInternalHom.map, CochainComplex.shiftEval.  Right-derived natural-transformation composition, BifunctorShift and SingleFunctors; no all-stage comparison square.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"ihom\", \"naturality\"",
+   "results": "4 hits: CategoryTheory.ihom.coev_naturality, CategoryTheory.ihom.ev_naturality, CategoryTheory.ihom.ev_naturality_assoc, CategoryTheory.ihom.coev_naturality_assoc.  Read Closed/Basic.lean:109–115: evaluation naturality is a constituent, not signed derived realization and coefficient/direct-image compatibility.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "mapBifunctorShift|mapBifunctor.*naturality",
+   "results": "8 hits: Mathlib/Algebra/Homology/BifunctorFlip.lean, Mathlib/Algebra/Homology/BifunctorHomotopy.lean, Mathlib/Algebra/Homology/BifunctorShift.lean, Mathlib/Algebra/Homology/BifunctorShift.lean, Mathlib/Algebra/Homology/BifunctorShift.lean, Mathlib/Algebra/Homology/BifunctorShift.lean, Mathlib/Algebra/Homology/BifunctorShift.lean, Mathlib/Algebra/Homology/BifunctorAssociator.lean.  Read BifunctorShift.lean:77–110. Covariant total-bifunctor shifts do not directly state the contravariant internal-Hom coefficient square.",
+   "date": "2026-10-22",
+   "verdict": "no match",
+   "subdirectory": "Algebra/Homology"
+  },
+  {
+   "tool": "grep",
+   "query": "dualizing|verdier|exceptionalInverse|rightDerivedUpperShriek",
+   "results": "0 hits: .  No geometric declaration found.",
+   "date": "2026-10-22",
+   "verdict": "no match",
+   "subdirectory": "AlgebraicGeometry"
+  },
+  {
+   "tool": "grep",
+   "query": "ihomComparison|derivedInternalHom|homComplex_shift_left",
+   "results": "0 hits: . ",
+   "date": "2026-10-22",
+   "verdict": "no match: constituent categorical naturality APIs only; not the actual derived internal-Hom substitution with its coefficient and signed-shift comparisons."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Naturality of internal Hom scalar extension comparison in the target and commutation of internal Hom source shift with postcomposition",
+   "results": "8 hits: CategoryTheory.Functor.commShiftIso_hom_naturality, CategoryTheory.Functor.commShiftIso_hom_naturality_assoc, CategoryTheory.ShiftedHom.map_smul, ModuleCat.ExtendRestrictScalarsAdj.homEquiv, CochainComplex.HomComplex.Cochain.rightUnshift_smul, ModuleCat.ExtendRestrictScalarsAdj.HomEquiv.toRestrictScalars, ModuleCat.ExtendRestrictScalarsAdj.HomEquiv.fromExtendScalars, CategoryTheory.Functor.CommShift.OfComp.map_iso_hom_app. ",
+   "date": "2026-10-22",
+   "verdict": "no match: constituent categorical naturality APIs only; not the actual derived internal-Hom substitution with its coefficient and signed-shift comparisons."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"ihom\", \"naturality\"",
+   "results": "4 hits: CategoryTheory.ihom.coev_naturality, CategoryTheory.ihom.ev_naturality, CategoryTheory.ihom.ev_naturality_assoc, CategoryTheory.ihom.coev_naturality_assoc. ",
+   "date": "2026-10-22",
+   "verdict": "no match: constituent categorical naturality APIs only; not the actual derived internal-Hom substitution with its coefficient and signed-shift comparisons."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived internal Hom postcomposition by an isomorphism is compatible with signed source shifts and evaluation defined change of coefficients and direct image",
+   "results": "8 hits: CategoryTheory.Localization.SmallShiftedHom.postcompEquiv_apply, CategoryTheory.Localization.SmallShiftedHom.postcompEquiv, CategoryTheory.SingleFunctors.postcompIsoOfIso, CategoryTheory.Localization.SmallShiftedHom.postcompEquiv_symm_apply, CategoryTheory.Abelian.Ext.postcompOfLinear, CategoryTheory.LocalizerMorphism.smallShiftedHomMap_comp, CategoryTheory.SingleFunctors.postcompPostcompIso_hom_hom_app, DerivedCategory.singleFunctorsPostcompQIso_hom_hom. ",
+   "date": "2026-10-22",
+   "verdict": "no match: constituent categorical naturality APIs only; not the actual derived internal-Hom substitution with its coefficient and signed-shift comparisons."
+  },
+  {
+   "tool": "grep",
+   "query": "ev_naturality|commShiftIso_hom_naturality",
+   "results": "22 hits: Mathlib/CategoryTheory/Localization/SmallShiftedHom.lean, Mathlib/CategoryTheory/Triangulated/Subcategory.lean, Mathlib/CategoryTheory/LocallyCartesianClosed/ExponentiableMorphism.lean, Mathlib/CategoryTheory/LocallyCartesianClosed/ExponentiableMorphism.lean, Mathlib/CategoryTheory/Triangulated/Adjunction.lean, Mathlib/CategoryTheory/Triangulated/Adjunction.lean, Mathlib/CategoryTheory/Triangulated/Functor.lean, Mathlib/CategoryTheory/Triangulated/Functor.lean. ",
+   "date": "2026-10-22",
+   "verdict": "no match: constituent categorical naturality APIs only; not the actual derived internal-Hom substitution with its coefficient and signed-shift comparisons.",
+   "subdirectory": "CategoryTheory"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Naturality of the transpose of tensor evaluation under a monoidal functor in the second internal Hom variable",
+   "results": "8 hits: CategoryTheory.ihom.ev_naturality_assoc, CategoryTheory.ihom.ev_naturality, CategoryTheory.MonoidalCategory.DayConvolutionInternalHom.ev_naturality_app, CategoryTheory.tensorRightHomEquiv_naturality, CategoryTheory.ihom.coev_naturality_assoc, CategoryTheory.tensorRightHomEquiv_symm_naturality, CategoryTheory.MonoidalClosed.FunctorCategory.homEquiv_naturality_two_symm, CategoryTheory.ihom.coev_naturality. ",
+   "date": "2026-10-22",
+   "verdict": "no match: constituent categorical naturality APIs only; not the actual derived internal-Hom substitution with its coefficient and signed-shift comparisons."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "thm-sf-verdier-exchange",
+  "date": "2026-10-22",
+  "group": "Q79"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-thm-sf-verdier-exchange",
+ "blueprint": {
+  "from": {
+   "node": "thm-sf-verdier-exchange",
+   "place": "Step 2: substitute Rf^!omega_Y ≅ omega_X inside internal Hom; Step 3: naturality, coefficient and shift compatibility of this substitution (returned proof Step 4, remaining argument)",
+   "via": []
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sf-derived-hom-substitution-coherence",
+  "worker": "stage1",
+  "summary": "Statement unchanged. Seven steps prove naturality, signed shift commutation and the specified coefficient square by explicit evaluation transposes and mate naturality. Reused the existing derived source-shift natural isomorphism and ringed-site closed tensor-Hom result. No new nodes, no field-to-finite reduction, no conservativity assertion for finite reductions, and no assumed ambient Hom comparison isomorphism.",
+  "blueprint": "thm-sf-verdier-exchange proof Step 2 (substitution in the target of internal Hom), and Step 3 (naturality, signed shifts, and coefficient compatibility of that substitution).",
+  "tool_uses": [
+   {
+    "node": "def-pur-derived-internal-hom",
+    "why": "Actual ringed-site Hom bifunctor, a generic notion used by the operation datum."
+   },
+   {
+    "node": "def-weil-derived-pullback-tensor-hom",
+    "why": "Actual finite, integral, rational and common-stage Hom actions; the unit uses these operations."
+   },
+   {
+    "node": "def-weil-derived-direct-image",
+    "why": "Actual direct-image functor at each coefficient stage, as required by this unit."
+   },
+   {
+    "node": "def-sf-datum",
+    "why": "The six-functor setting and the allowed A5 domains are expressly used by the unit."
+   },
+   {
+    "node": "lem-pur-derived-internal-hom-shift-left",
+    "why": "Generic unbounded ringed-site Hom source-shift isomorphism natural in the target; the unit has no separate source-shift construction."
+   },
+   {
+    "node": "def-pur-hom-complex",
+    "why": "Signed representative convention for the stipulated source-shift isomorphism."
+   },
+   {
+    "node": "lem-sf-ringed-derived-closed-symmetric-monoidal",
+    "why": "Generic natural closed tensor-Hom bijection and evaluation on the actual ambient ringed-site derived category, for the short transpose computation."
+   },
+   {
+    "node": "def-coef-ringed-tensor-hom-model",
+    "why": "Specified evaluation and transposition convention for the actual Hom, including the supplied closed model."
+   },
+   {
+    "node": "def-weil-pbc-adjunction-mate",
+    "why": "Definition of the mate as a natural transformation; no new mate-coherence theorem is invoked."
+   }
+  ]
+ },
+ "tool_uses": [
+  "def-pur-derived-internal-hom",
+  "def-weil-derived-pullback-tensor-hom",
+  "def-weil-derived-direct-image",
+  "def-sf-datum",
+  "lem-pur-derived-internal-hom-shift-left",
+  "def-pur-hom-complex",
+  "lem-sf-ringed-derived-closed-symmetric-monoidal",
+  "def-coef-ringed-tensor-hom-model",
+  "def-weil-pbc-adjunction-mate"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q44-ea759b75e",
+  "group": "Q44",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q44-ea759b75e (reviewer sub-agent of L); spot-checked: Read the full item (7 steps, statement unchanged against live; live is unsplit, there is no repair note and no other group has superseded it), the unit sk-thm-sf-verdier-exchange, the main-20261015 proof Steps 2-3, and the statements of all 9 proof deps and 7 stmt deps. There are no new nodes, no cycle and no SGA citation. Steps 2 and 4-7 are correct as written. I recomputed by hand Step 4's two uncurries, both T(c)T(e_U)mu, and Step 6's four-line mate pasting. One fault, repaired (C3/C4). Step 3 took the signed (-1)^{rd} convention from lem-pur-derived-internal-hom-shift-left, but that node's statement only says a natural iso exists; the Lean docstring confirms it is the same construction, so nothing is false. Step 3 now argues directly: rho (reindexing times (-1)^{rd}) is a chain iso (I checked the differential with d_{L[r]}=(-1)^r d_L), it commutes with postcomposition, and H(1,c) is induced through localization (def-pur-derived-internal-hom, added to uses; proof_deps unchanged). Duplicate candidates are not the item: lem-coef-closed-adjunction-naturality (b_{P,N} with an adjoint G), def-pur-coefficient-base-change-hom (definition only) and lem-sf-coefficient-evaluation-naturality (a different map). The declared tool_uses (generic Hom/shift/closed/mate notions) are accepted. Fixed file: fixes/dag/nodes/sec-six-functors/lem-sf-derived-hom-substitution-coherence.json.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.Paper.DerivedHomSubstitutionCoherence",
+  "declaration": "WeilConjectures.DerivedHomSubstitution.coherence",
+  "declarations": [
+   "WeilConjectures.DerivedHomSubstitution.hom",
+   "WeilConjectures.DerivedHomSubstitution.functor",
+   "WeilConjectures.DerivedHomSubstitution.substitution",
+   "WeilConjectures.DerivedHomSubstitution.homComparison",
+   "WeilConjectures.DerivedHomSubstitution.sigma",
+   "WeilConjectures.DerivedHomSubstitution.CoefficientSquare",
+   "WeilConjectures.DerivedHomSubstitution.ShiftFamily",
+   "WeilConjectures.DerivedHomSubstitution.ShiftSquare",
+   "WeilConjectures.DerivedHomSubstitution.realization",
+   "WeilConjectures.DerivedHomSubstitution.realizedShift",
+   "WeilConjectures.DerivedHomSubstitution.baseSigma",
+   "WeilConjectures.DerivedHomSubstitution.ShiftTransport",
+   "WeilConjectures.DerivedHomSubstitution.ShiftNaturality",
+   "WeilConjectures.DerivedHomSubstitution.coefficient_square",
+   "WeilConjectures.DerivedHomSubstitution.finiteShift",
+   "WeilConjectures.DerivedHomSubstitution.integralShift",
+   "WeilConjectures.DerivedHomSubstitution.completedShift",
+   "WeilConjectures.DerivedHomSubstitution.stageCompletedShift",
+   "WeilConjectures.DerivedHomSubstitution.FieldShifts",
+   "WeilConjectures.DerivedHomSubstitution.FieldNormalization",
+   "WeilConjectures.DerivedHomSubstitution.CoefficientCoherence",
+   "WeilConjectures.DerivedHomSubstitution.coherence",
+   "WeilConjectures.DerivedHomSubstitution.fieldShifts"
+  ],
+  "file": "lean/Sheaf/Paper/DerivedHomSubstitutionCoherence.lean",
+  "statement": "theorem coherence (S : SixFunctorDatum D C E n hn) {X Y : SixFunctorSpace D} [IsSeparated X.obj.hom] [IsSeparated Y.obj.hom] (f : X ⟶ Y) [IsSeparated f.hom.left] [LocallyOfFiniteType f.hom.left] [QuasiCompact f.hom.left] : ShiftSquare (finiteShift S f) ∧ ShiftSquare (completedShift S f) ∧ (∃! s : FieldShifts S f, FieldNormalization S f s ∧ ShiftSquare s.rational ∧ (∀ E₀ : Padic.FiniteCoefficientFields C.l C.Qbar, ShiftSquare (s.stage E₀)) ∧ ShiftSquare s.closure) ∧ CoefficientCoherence S f",
+  "branch": "newtargets-dag",
+  "by": "Q02",
+  "date": "2026-10-22",
+  "existing": false,
+  "note": "Constructs J and j as the actual Hom/direct-image functors and their mapped natural isomorphism. Computes h by evaluation-transposition and sigma from the specified direct-image mate. Finite/completed shifts are lifted from the existing uniquely normalized independent-universe ringed-site sourceShift; field shifts are uniquely normalized rationalized/common-stage images. The theorem states their squares at all four stages; coefficient_square is the same evaluation/mate calculation for any allowed comparison, including a supplied realization. Helpers are the canonical maps and assembly formulas belonging to this node. No mathematical statement correction or dependency-interface replacement. The recorded integral residue-Tor equality is also cited: it ensures the rationalization normalization covers every underlying object and therefore determines the field-family data uniquely."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-00a55c82d",
+  "group": "Q02",
+  "result": "pass",
+  "note": "Re-delivery of RETURN 015b2d46a82f (H2) makes exactly the correction asked for: lem-coef-integral-residue-tor removed from stmt_deps; module SHA-256 45add7e1… byte-identical; lean record, statement, proof and proof_deps unchanged. All snapshot dependency node files are byte-identical to live; item still unlanded live. Re-read substitution (isoWhiskerRight of the Hom mapIso c), homComparison (transpose of tensor.inv then T(ev)), sigma with gamma = directAdjunction.right (the mate), CoefficientSquare (v∘Tc=c'∘u ⇒ σ_V∘T_Y(j_c)=j_{c'}∘σ_U, no IsIso), realizedShift (normalized signed sourceShift.symm, then R0.commShiftIso, lifted through the full faithful FY) and the field ∃!: all match the node; edge cases and universes OK. Mechanical finding: lem-weil-pbc-ringed-internal-hom-exact-restriction is genuine. RingedHomUniverses.sourceShift is .choose of leftShift_existsUnique (RingedInternalHomShiftOfUniverses.lean:2046/2055), owned by no definition node, and used as definition data in finiteShift/integralShift, so PASS on that point. No file changed, nothing compiled. Advisories: field ShiftSquare clauses are implied by ShiftNaturality; private imports serve only the proof plan."
+ }
+}

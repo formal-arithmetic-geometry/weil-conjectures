@@ -1,0 +1,110 @@
+{
+ "id": "def-pur-proetale-module-scalar-restriction",
+ "kind": "definition",
+ "title": "Restriction of intrinsic pro-etale modules to constant scalars",
+ "status": "split",
+ "statement": "Let $T$ be a scheme in universe $u$ and $B$ a commutative ring in universe $u$. On the small pro-etale site [def-weil-pbc-proetale-site], form the constant sheaf of rings $B_T$ by sheafification [def-weil-pbc-constant-sheaf] [def-weil-pbc-sheafification], using $\\operatorname{ULift}B$ in universe $u+1$. For a sheaf $M$ of $B_T$-modules [def-weil-sheaf-of-modules-category], define its constant-scalar restriction to be the same underlying sheaf of abelian groups, with $\\operatorname{ULift}B$ acting on $M(U)$ through the canonical sheafification-unit map $\\operatorname{ULift}B\\to B_T(U)$ on every site object $U$. Restriction maps and morphisms are the original maps, now linear for this constant scalar action; this is scalar restriction [def-pc-sheaf-restrict-scalars] along the constant-presheaf unit. Thus obtain the specified functor $\\operatorname{Mod}(B_T)\\to\\operatorname{Sh}(T_{proet},\\operatorname{Mod}_{\\operatorname{ULift}B})$, together with its defining scalar-unit map. No assertion of equivalence and no finiteness, nonzero-ring or nonempty-scheme hypothesis is part of this definition.",
+ "stmt_deps": [
+  "def-weil-pbc-proetale-site",
+  "def-weil-pbc-constant-sheaf",
+  "def-weil-pbc-sheafification",
+  "def-weil-sheaf-of-modules-category",
+  "def-pc-sheaf-restrict-scalars"
+ ],
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tags 093I (section-constant) and 03CY (lemma-sheafification-presheaf-modules), restriction along the constant-scalar sheafification unit"
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "proEtaleModuleRestriction|proEtaleModuleScalarUnit",
+   "results": "0 hits: ; subdirectory AlgebraicGeometry",
+   "date": "2026-10-23",
+   "verdict": "No exact Mathlib match; bind the existing project definition without duplicating it."
+  },
+  {
+   "tool": "leansearch",
+   "query": "restriction of modules over constant ring sheaf to fixed constant scalars pro etale site",
+   "results": "8 hits: PresheafOfModules.restrictScalarsObj; SheafOfModules.restrictScalars; PresheafOfModules.restrictScalars; ModuleCat.RestrictScalars.obj'; RestrictScalars; SheafOfModules.instAdditiveRestrictScalars; ModuleCat.Tilde.res_const; PresheafOfModules.restrictScalars_obj",
+   "date": "2026-10-23",
+   "verdict": "No exact Mathlib match; bind the existing project definition without duplicating it."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "canonical restriction constant scalars constant ring sheaf module pro etale",
+   "results": "8 hits: SheafOfModules.restrictScalars; ModuleCat.tilde; SheafOfModules.restrictScalars_obj_val; ModuleCat.Tilde.res_const; ModuleCat.instModuleCarrierObjOppositeOpensCarrierCarrierCommRingCatSpecOfRingCatValRingCatSheafTopTildeInType; PresheafOfModules.restrictScalarsObj; ModuleCat.tildeInModuleCat; PresheafOfModules.restrictScalars_obj",
+   "date": "2026-10-23",
+   "verdict": "No exact Mathlib match; bind the existing project definition without duplicating it."
+  },
+  {
+   "tool": "grep",
+   "query": "rg proEtaleModuleRestriction|proEtaleModuleScalarUnit lean/WeilConjectures lean/Sheaf; definition-owner scan of dag/nodes; blueprint_refs.py search proEtaleModuleRestriction",
+   "results": "No upstream match. Existing proEtaleModuleScalarUnit and proEtaleModuleRestriction in Sheaf.Paper.ProEtaleConstantModuleEncoding; only theorem node lem-weil-pbc-proetale-constant-module-encoding lists them. No definition owner. Blueprint search: 0 nodes.",
+   "date": "2026-10-23",
+   "verdict": "Add definition ownership with existing:true for the published plain definitions; no new Lean construction."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-pur-system-compatible-compositor-normalization",
+  "date": "2026-10-23",
+  "group": "Q98"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-pur-adic-reconstruction-trace-coherence",
+   "place": "Compatible-triangle system compositor, finite-level coefficient presentation and supplied compactifications in proof Steps 4 and 6",
+   "via": [
+    "lem-pur-system-compatible-compositor-normalization",
+    "lem-pur-system-level-projection-formula-coherence"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-thm-sf-compatibility",
+ "lean": {
+  "module": "Sheaf.Paper.ProEtaleConstantModuleEncoding",
+  "declaration": "AlgebraicGeometry.Scheme.proEtaleModuleRestriction",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.proEtaleModuleScalarUnit",
+   "AlgebraicGeometry.Scheme.proEtaleModuleRestriction"
+  ],
+  "statement": "noncomputable def proEtaleModuleRestriction :\n    proEtaleRingModules T (proEtaleConstantRing T B) ⥤\n      Sheaf (ProEt.topology T) (ModuleCat.{u + 1} (ULift.{u + 1, u} B))",
+  "branch": "newtargets-dag",
+  "by": "Q98",
+  "date": "2026-10-23",
+  "existing": true,
+  "note": "Definition ownership requested by the independent H2 return at immutable head b86166d065e2. These are already published plain definitions with concrete data. The theorem in the same module is not needed to define them. No Lean definition or theorem is copied."
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-1ed0e0a98",
+  "group": "Q98",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-1ed0e0a98",
+  "group": "Q98",
+  "result": "pass",
+  "note": "Re-delivery after H2 RETURN b86166d065e2; all four required corrections done. Item .lean byte-identical apart from 3 public owner imports, so the prior H3 clause check stands (re-read: triangle/IsPullback, β_Q order, levelwise ∃-interval domain, IsIso on full domain, finite α clause with pinned C n/id, identity/empty/n=0). Item node differs from live only in lean and stmt_deps: all 15 live stmt_deps kept, 8 def nodes added, the 3 added theorem stmt_deps (lem-pur-compact-support-site-coherence, lem-sp-finite-site-tower-paste, lem-weil-pbc-proetale-constant-module-encoding) dropped. All other snapshot node records byte-identical to live. The 3 new existing:true owners (def-pur-finite-site-tower-etale-coordinates, def-pur-compatible-triangle-compactifications, def-pur-proetale-module-scalar-restriction) match the live decls and universes, statements verbatim; their stmt_deps exist; Stacks tags 0F7J/093I/03CY valid; no prior def owner. No compile (no change). Advisories: SemilinearProperOpen gamma/sComp/jComp/R/J/E/evalR/Derived def owners not cited (they come through the original stmt_dep lem-sf-semilinear-proper-open-mate-pasting); existing-module docstrings name the old blueprint node; étale-side α spelling kept, with justification."
+ }
+}

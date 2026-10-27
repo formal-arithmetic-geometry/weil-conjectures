@@ -1,0 +1,139 @@
+{
+ "id": "def-sfb-supported-model-hull",
+ "kind": "definition",
+ "title": "Supported finite scalar model hull",
+ "status": "split",
+ "import_flags": [],
+ "statement": "Let $\\Lambda$ be a commutative condensed ring [sk-def-sfb-condensed-ring] and $X$ a scheme [def-pc-scheme]. Use the small pro-etale site [def-weil-pbc-proetale-site] and indexing universe of [def-weil-size-convention], put $\\Lambda_X=p_X^*\\Lambda$ [sk-def-sfb-pulled-back-coefficients], and use the ordinary uncompleted module-object category [sk-def-sfb-module-objects] $D(\\operatorname{Mod}_{\\Lambda_X})$ [def-weil-abstract-derived-category]. A support chain is a finite chain $W\\to\\cdots\\to X$, each arrow a quasi-compact open immersion [def-weil-open-immersion, def-weil-finite-type-morphism] or a closed immersion with quasi-compact open complement [def-weil-closed-immersion]. Its ordinary extension functor $J$ composes open extension by zero [def-sfb-module-open-lower-shriek] and closed direct image [def-sfb-module-lower-star]; the empty chain gives the identity. A finite scalar local model means the finite constant local model of [sk-def-sfb-constructible]. Define $\\mathcal G_X$ to be the intersection of all full replete classes $P$ containing $(JL)[0]$ for every such chain and finite scalar local model $L$ on $W$, containing zero, closed under all integer shifts and distinguished-triangle extensions [def-weil-triangulated-subcategory], closed under retract diagrams $K\\xrightarrow{i}L\\xrightarrow{p}K$ with $pi=1_K$, and closed under all small products in the ordinary derived category [def-weil-category-product]. In addition, if $I$ is a small filtered category and $C:I\\to\\mathrm{CoCh}(\\operatorname{Mod}_{\\Lambda_X})$ is a strict diagram with one integer $a$ such that $C_i^n=0$ for every $i$ and $n<a$, then $Q(C_i)\\in P$ for every $i$ implies $Q(\\varinjlim_I C_i)\\in P$, with the colimit taken termwise in module sheaves [def-weil-pbc-category-colimit]. Replete means closed under isomorphisms. For qcqs $X$ this is exactly the supported model hull in the descent obligation.",
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-pbc-proetale-site",
+  "def-weil-size-convention",
+  "def-weil-open-immersion",
+  "def-weil-closed-immersion",
+  "def-weil-finite-type-morphism",
+  "def-sfb-module-open-lower-shriek",
+  "def-sfb-module-lower-star",
+  "sk-def-sfb-constructible",
+  "def-weil-triangulated-subcategory",
+  "def-weil-category-product",
+  "def-weil-pbc-category-colimit",
+  "def-weil-abstract-derived-category",
+  "sk-def-sfb-condensed-ring",
+  "sk-def-sfb-pulled-back-coefficients",
+  "sk-def-sfb-module-objects"
+ ],
+ "source": {
+  "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
+  "place": "Agent-defined structural supported hull in lem-sfb-supported-hull-proetale-descent, second paragraph; HRS Sections 3--4 provide the ambient setting only, not this additional definition or its descent theorem."
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "small products bounded below filtered colimits triangulated subcategory",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"CategoryTheory.Limits.ι_colimitPointwiseProductToProductColimit_π_assoc\", \"module\": \"Mathlib.CategoryTheory.Limits.FilteredColimitCommutesProduct\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] {α : Type w} {I : α → Type u₁}\\n  [inst_1 : (i : α) → CategoryTheory.Category.{v₁, u₁} (I i)]\\n  [inst_2 : CategoryTheory.Limits.HasLimitsOfShape (CategoryTheory.Discrete α) C]\\n  (F : (i : α) → CategoryTheory.Functor (I i) C) [inst_3 : ∀ (i : α)\", \"doc\": \"In a category with filtered colimits and finite products, the canonical morphism from the filtered colimit of a pointwise product diagram to the product of filtered colimits of each component diagram \"}\n  {\"name\": \"CategoryTheory.Limits.coconePointwiseProduct\", \"module\": \"Mathlib.CategoryTheory.Limits.FilteredColimitCommutesProduct\", \"type\": \": Cocone (pointwiseProduct F)\", \"doc\": \"In a category with filtered colimits and finite products, the cocone for the pointwise product of a functor $ F $ is constructed by taking the product of the colimits of each component $ F(s) $ as the\"}\n  {\"name\": \"CategoryTheory.Limits.IsIPC.mk\", \"module\": \"Mathlib.CategoryTheory.Limits.FilteredColimitCommutesProduct\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Limits.HasProducts C]\\n  [inst_2 : CategoryTheory.Limits.HasFilteredColimitsOfSize.{w, w, v, u} C],\\n  (∀ (α : Type w) (I : α → Type w) [inst_3 : (i : α) → CategoryTheory.SmallCategory (I i)]\\n      [inst_4 : ∀ (i : α), C\", \"doc\": \"If in a category $\\\\mathcal{C}$ with products and filtered colimits, the canonical morphism from the colimit of a pointwise product to the product of colimits is an isomorphism for all diagrams indexed\"}\n  {\"name\": \"CategoryTheory.Limits.pointwiseProductCompEvaluation\", \"module\": \"Mathlib.CategoryTheory.Limits.FilteredColimitCommutesProduct\", \"type\": \"(d : D) : pointwiseProduct F ⋙ (evaluation D C).obj d ≅ pointwiseProduct (fun s => F s ⋙ (evaluation _ _).obj d)\", \"doc\": \"In a category with all discrete limits, the natural isomorphism between the composition of the pointwise product functor with the evaluation functor and the pointwise product of the composition with e\"}\n  {\"name\": \"CategoryTheory.Limits.preservesSmallestFilteredColimits_of_preservesFilteredColimits\", \"module\": \"Mathlib.CategoryTheory.Limits.Preserves.Filtered\", \"type\": \"(F : C ⥤ D) [PreservesFilteredColimitsOfSize.{w', w} F] : PreservesFilteredColimitsOfSize.{0, 0} F\", \"doc\": \"If a functor $ F : C \\\\to D $ preserves filtered colimits of size $ \\\\{w', w\\\\} $, then it also preserves filtered colimits of the smallest size $ \\\\{0, 0\\\\} $.\"}\n  {\"name\": \"CategoryTheory.IsFiltered.small_fullSubcategory_filteredClosure\", \"module\": \"Mathlib.CategoryTheory.Filtered.Small\", \"type\": \": Small.{max v w} (filteredClosure f).FullSubcategory\", \"doc\": \"Given a category $\\\\mathcal{C}$ that is filtered or empty, the full subcategory consisting of objects satisfying the filtered closure condition forms a small category. Specifically, for any property $P\"}\n  {\"name\": \"CategoryTheory.Limits.instIsIPCType\", \"module\": \"Mathlib.CategoryTheory.Limits.FilteredColimitCommutesProduct\", \"type\": \": IsIPC.{u} (Type u)\", \"doc\": \"In the category of types, filtered colimits commute with products. This means that for any filtered diagram and any product diagram, the canonical morphism from the colimit of the product diagram to t\"}\n  {\"name\": \"CategoryTheory.Limits.hasProducts_of_finite_and_cofiltered\", \"module\": \"Mathlib.CategoryTheory.Limits.Constructions.Filtered\", \"type\": \"[HasFiniteProducts C] [HasCofilteredLimitsOfSize.{w, w} C] : HasProducts.{w} C\", \"doc\": \"If a category $\\\\mathcal{C}$ has finite products and cofiltered limits of a given size, then $\\\\mathcal{C}$ has all products.\"}\n",
+   "date": "2026-10-24",
+   "verdict": "No supported finite-scalar-model hull match. General triangulated subcategories and derived t-structures do not give the specified generator/closure intersection."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "intersection of full replete classes closed under products filtered colimits derived category supported generators",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"DerivedCategory.TStructure.t\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/TStructure\", \"type\": \"{C : Type u} →\\n  [inst : CategoryTheory.Category.{v, u} C] →\\n    [inst_1 : CategoryTheory.Abelian C] →\\n      [inst_2 : HasDerivedCategory C] → CategoryTheory.Triangulated.TStructure (DerivedCategory C)\", \"doc\": \"The T-structure on the derived category of an abelian category is defined by two families of objects: $\\\\mathcal{L}_n$ consisting of objects isomorphic to cochain complexes strictly supported in degree\"}\n  {\"name\": \"DerivedCategory.IsGE\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/TStructure\", \"type\": \"{C : Type u} →\\n  [inst : CategoryTheory.Category.{v, u} C] →\\n    [inst_1 : CategoryTheory.Abelian C] → [inst_2 : HasDerivedCategory C] → DerivedCategory C → ℤ → Prop\", \"doc\": \"For an object $ X $ in the derived category of an abelian category $ \\\\mathcal{C} $ and integer $ n $, this proposition holds if $ X $ belongs to the family $ \\\\mathcal{G}_n $ of the T-structure defined\"}\n  {\"name\": \"DerivedCategory.IsLE\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/TStructure\", \"type\": \"{C : Type u} →\\n  [inst : CategoryTheory.Category.{v, u} C] →\\n    [inst_1 : CategoryTheory.Abelian C] → [inst_2 : HasDerivedCategory C] → DerivedCategory C → ℤ → Prop\", \"doc\": \"This proposition asserts that an object $ X $ in the derived category belongs to the subcategory $ \\\\mathcal{L}_n $, consisting of objects isomorphic to cochain complexes strictly supported in degrees \"}\n  {\"name\": \"CategoryTheory.ObjectProperty.instIsSerreClassTop\", \"module\": \"Mathlib/CategoryTheory/Abelian/SerreClass/Basic\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Abelian C], ⊤.IsSerreClass\", \"doc\": \"The class of all objects in an abelian category is a Serre class. This means that it is closed under subobjects, quotients, extensions, and finite direct sums.\"}\n  {\"name\": \"DerivedCategory.exists_iso_Q_obj_of_isGE\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/TStructure\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Abelian C]\\n  [inst_2 : HasDerivedCategory C] (X : DerivedCategory C) (n : ℤ) [hX : X.IsGE n],\\n  ∃ K, ∃ (_ : K.IsStrictlyGE n), Nonempty (X ≅ DerivedCategory.Q.obj K)\", \"doc\": \"For any object $ X $ in the derived category of an abelian category $ \\\\mathcal{C} $ and integer $ n $, if $ X $ belongs to the $ \\\\mathcal{G}_n $ family of the T-structure (i.e., is isomorphic to a coc\"}\n  {\"name\": \"DerivedCategory.exists_iso_Q_obj_of_isLE\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/TStructure\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Abelian C]\\n  [inst_2 : HasDerivedCategory C] (X : DerivedCategory C) (n : ℤ) [hX : X.IsLE n],\\n  ∃ K, ∃ (_ : K.IsStrictlyLE n), Nonempty (X ≅ DerivedCategory.Q.obj K)\", \"doc\": \"For any object $X$ in the derived category of an abelian category $\\\\mathcal{C}$ that belongs to the left subcategory $\\\\mathcal{L}_n$ of the T-structure at degree $n$, there exists a cochain complex $K\"}\n  {\"name\": \"CategoryTheory.ObjectProperty.IsSerreClass\", \"module\": \"Mathlib/CategoryTheory/Abelian/SerreClass/Basic\", \"type\": \"{C : Type u} →\\n  [inst : CategoryTheory.Category.{v, u} C] → [CategoryTheory.Abelian C] → CategoryTheory.ObjectProperty C → Prop\", \"doc\": \"A predicate $ P $ on objects of an abelian category $ \\\\mathcal{C} $ is a Serre class if it satisfies the axioms defining a Serre class, including closure under subobjects, quotients, extensions, and f\"}\n  {\"name\": \"DerivedCategory.exists_iso_Q_obj_of_isGE_of_isLE\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/TStructure\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Abelian C]\\n  [inst_2 : HasDerivedCategory C] (X : DerivedCategory C) (a b : ℤ) [X.IsGE a] [X.IsLE b],\\n  ∃ K, ∃ (_ : K.IsStrictlyGE a) (_ : K.IsStrictlyLE b), Nonempty (X ≅ DerivedCategory.Q.obj K)\", \"doc\": \"For any object $X$ in the derived category of an abelian category $\\\\mathcal{C}$, if $X$ is cohomologically bounded below by integer $a$ and above by integer $b$ (i.e., $X \\\\in \\\\mathcal{G}_a \\\\cap \\\\mathc\"}\n",
+   "date": "2026-10-24",
+   "verdict": "No supported finite-scalar-model hull match. General triangulated subcategories and derived t-structures do not give the specified generator/closure intersection."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.ObjectProperty.IsTriangulated",
+   "results": "[loogle] OK 12 hit(s)\n  {\"name\": \"CategoryTheory.ObjectProperty.IsTriangulated\", \"module\": \"Mathlib.CategoryTheory.Triangulated.Subcategory\", \"type\": \" {C : Type u_1} [CategoryTheory.Category.{v_1, u_1} C] [CategoryTheory.Limits.HasZeroObject C] [CategoryTheory.HasShift C ℤ] [CategoryTheory.Preadditive C] [∀ (n : ℤ), (CategoryTheory.shiftFunctor C n).Additive] [CategoryTheory.Pretriangulated C] (P : CategoryTheory.ObjectProperty C) : Prop\", \"doc\": \"The property that `P : ObjectProperty C` is a triangulated subcategory\\n(of a pretriangulated category `C`).\"}\n  {\"name\": \"CategoryTheory.ObjectProperty.IsTriangulated.toContainsZero\", \"module\": \"Mathlib.CategoryTheory.Triangulated.Subcategory\", \"type\": \" {C : Type u_1} {inst✝ : CategoryTheory.Category.{v_1, u_1} C} {inst✝¹ : CategoryTheory.Limits.HasZeroObject C} {inst✝² : CategoryTheory.HasShift C ℤ} {inst✝³ : CategoryTheory.Preadditive C} {inst✝⁴ : ∀ (n : ℤ), (CategoryTheory.shiftFunctor C n).Additive} {inst✝⁵ : CategoryTheory.Pretriangulated C} \", \"doc\": \"\"}\n  {\"name\": \"CategoryTheory.ObjectProperty.IsTriangulated.toIsStableUnderShift\", \"module\": \"Mathlib.CategoryTheory.Triangulated.Subcategory\", \"type\": \" {C : Type u_1} {inst✝ : CategoryTheory.Category.{v_1, u_1} C} {inst✝¹ : CategoryTheory.Limits.HasZeroObject C} {inst✝² : CategoryTheory.HasShift C ℤ} {inst✝³ : CategoryTheory.Preadditive C} {inst✝⁴ : ∀ (n : ℤ), (CategoryTheory.shiftFunctor C n).Additive} {inst✝⁵ : CategoryTheory.Pretriangulated C} \", \"doc\": \"\"}\n  {\"name\": \"CategoryTheory.ObjectProperty.instIsClosedUnderBinaryProductsOfIsTriangulatedOfIsClosedUnderIsomorphisms\", \"module\": \"Mathlib.CategoryTheory.Triangulated.Subcategory\", \"type\": \" {C : Type u_1} [CategoryTheory.Category.{v_1, u_1} C] [CategoryTheory.Limits.HasZeroObject C] [CategoryTheory.HasShift C ℤ] [CategoryTheory.Preadditive C] [∀ (n : ℤ), (CategoryTheory.shiftFunctor C n).Additive] [CategoryTheory.Pretriangulated C] (P : CategoryTheory.ObjectProperty C) [P.IsTriangulat\", \"doc\": \"\"}\n  {\"name\": \"CategoryTheory.ObjectProperty.instIsClosedUnderFiniteProductsOfIsTriangulatedOfIsClosedUnderIsomorphisms\", \"module\": \"Mathlib.CategoryTheory.Triangulated.Subcategory\", \"type\": \" {C : Type u_1} [CategoryTheory.Category.{v_1, u_1} C] [CategoryTheory.Limits.HasZeroObject C] [CategoryTheory.HasShift C ℤ] [CategoryTheory.Preadditive C] [∀ (n : ℤ), (CategoryTheory.shiftFunctor C n).Additive] [CategoryTheory.Pretriangulated C] (P : CategoryTheory.ObjectProperty C) [P.IsTriangulat\", \"doc\": \"\"}\n  {\"name\": \"CategoryTheory.ObjectProperty.instIsTriangulatedClosed₁OfIsTriangulated\", \"module\": \"Mathlib.CategoryTheory.Triangulated.Subcategory\", \"type\": \" {C : Type u_1} [CategoryTheory.Category.{v_1, u_1} C] [CategoryTheory.Limits.HasZeroObject C] [CategoryTheory.HasShift C ℤ] [CategoryTheory.Preadditive C] [∀ (n : ℤ), (CategoryTheory.shiftFunctor C n).Additive] [CategoryTheory.Pretriangulated C] (P : CategoryTheory.ObjectProperty C) [P.IsTriangulat\", \"doc\": \"\"}\n  {\"name\": \"CategoryTheory.ObjectProperty.instIsTriangulatedClosed₃OfIsTriangulated\", \"module\": \"Mathlib.CategoryTheory.Triangulated.Subcategory\", \"type\": \" {C : Type u_1} [CategoryTheory.Category.{v_1, u_1} C] [CategoryTheory.Limits.HasZeroObject C] [CategoryTheory.HasShift C ℤ] [CategoryTheory.Preadditive C] [∀ (n : ℤ), (CategoryTheory.shiftFunctor C n).Additive] [CategoryTheory.Pretriangulated C] (P : CategoryTheory.ObjectProperty C) [P.IsTriangulat\", \"doc\": \"\"}\n  {\"name\": \"CategoryTheory.ObjectProperty.IsTriangulated.toIsTriangulatedClosed₂\", \"module\": \"Mathlib.CategoryTheory.Triangulated.Subcategory\", \"type\": \" {C : Type u_1} {inst✝ : CategoryTheory.Category.{v_1, u_1} C} {inst✝¹ : CategoryTheory.Limits.HasZeroObject C} {inst✝² : CategoryTheory.HasShift C ℤ} {inst✝³ : CategoryTheory.Preadditive C} {inst✝⁴ : ∀ (n : ℤ), (CategoryTheory.shiftFunctor C n).Additive} {inst✝⁵ : CategoryTheory.Pretriangulated C} \", \"doc\": \"\"}\n  {\"name\": \"CategoryTheory.ObjectProperty.instIsStableUnderFiniteProductsTrWOfIsTriangulated\", \"module\": \"Mathlib.CategoryTheory.Triangulated.Subcategory\", \"type\": \" {C : Type u_1} [CategoryTheory.Category.{v_1, u_1} C] [CategoryTheory.Limits.HasZeroObject C] [CategoryTheory.HasShift C ℤ] [CategoryTheory.Preadditive C] [∀ (n : ℤ), (CategoryTheory.shiftFunctor C n).Additive] [CategoryTheory.Pretriangulated C] (P : CategoryTheory.ObjectProperty C) [P.IsTriangulat\", \"doc\": \"\"}\n  {\"name\": \"CategoryTheory.ObjectProperty.instIsTriangulatedIsoClosure\", \"module\": \"Mathlib.CategoryTheory.Triangulated.Subcategory\", \"type\": \" {C : Type u_1} [CategoryTheory.Category.{v_1, u_1} C] [CategoryTheory.Limits.HasZeroObject C] [CategoryTheory.HasShift C ℤ] [CategoryTheory.Preadditive C] [∀ (n : ℤ), (CategoryTheory.shiftFunctor C n).Additive] [CategoryTheory.Pretriangulated C] (P : CategoryTheory.ObjectProperty C) [P.IsTriangulat\", \"doc\": \"\"}\n  {\"name\": \"CategoryTheory.ObjectProperty.instHasLeftCalculusOfFractionsTrWOfIsTriangulatedOfIsTriangulated\", \"module\": \"Mathlib.CategoryTheory.Triangulated.Subcategory\", \"type\": \" {C : Type u_1} [CategoryTheory.Category.{v_1, u_1} C] [CategoryTheory.Limits.HasZeroObject C] [CategoryTheory.HasShift C ℤ] [CategoryTheory.Preadditive C] [∀ (n : ℤ), (CategoryTheory.shiftFunctor C n).Additive] [CategoryTheory.Pretriangulated C] (P : CategoryTheory.ObjectProperty C) [CategoryTheory\", \"doc\": \"\"}\n  {\"name\": \"CategoryTheory.ObjectProperty.instHasRightCalculusOfFractionsTrWOfIsTriangulatedOfIsTriangulated\", \"module\": \"Mathlib.CategoryTheory.Triangulated.Subcategory\", \"type\": \" {C : Type u_1} [CategoryTheory.Category.{v_1, u_1} C] [CategoryTheory.Limits.HasZeroObject C] [CategoryTheory.HasShift C ℤ] [CategoryTheory.Preadditive C] [∀ (n : ℤ), (CategoryTheory.shiftFunctor C n).Additive] [CategoryTheory.Pretriangulated C] (P : CategoryTheory.ObjectProperty C) [CategoryTheory\", \"doc\": \"\"}\n",
+   "date": "2026-10-24",
+   "verdict": "No supported finite-scalar-model hull match. General triangulated subcategories and derived t-structures do not give the specified generator/closure intersection."
+  },
+  {
+   "tool": "grep",
+   "query": "supportedHull|SupportedHull|supportChain",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-24",
+   "verdict": "No supported finite-scalar-model hull match. General triangulated subcategories and derived t-structures do not give the specified generator/closure intersection."
+  },
+  {
+   "tool": "grep",
+   "query": "rg -n ScalarModelSupportChain|supportedModelHull|IsSupportedModelHullClass lean/WeilConjectures lean/Sheaf dag/lean_names_upstream.json; rg -l -i supported.{0,15}hull|hull.{0,15}supported lean/Sheaf lean/WeilConjectures dag/nodes; blueprint_refs.py search supported hull; blueprint_refs.py search support chain",
+   "results": "No Lean declarations match. DAG hits: lem-sfb-supported-image-bounded-derived-generation, lem-sfb-proetale-supported-model-coinduction, and the item; these restate this hull inline, with no separate definition node or Lean record. Blueprint searches: 0 blueprint nodes match each query. QcqsOpenClosedTree has branching trees with both complementary children and Path on a chosen tree, not the finite one-branch support-chain notion.",
+   "date": "2026-10-24",
+   "verdict": "Missing definition: add the structural hull and its chain data once, reusing HasFiniteConstantLocalModel, actual extension functors, and Mathlib closure predicates."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-supported-hull-proetale-descent",
+  "date": "2026-10-24",
+  "group": "NR"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-sf-comp-coherence-cocycle",
+   "place": "Refinement isomorphisms paragraph, via det-sf-comp-coherence-refinement (2), first paragraph: descendant closed-fibre heart comparison; descent of the structural supported generation class before applying closed-pair restriction. Structural hull used by this descent obligation.",
+   "via": [
+    "lem-sfb-supported-hull-proetale-descent",
+    "lem-sfb-supported-image-bounded-derived-generation",
+    "lem-sfb-supported-image-rigidity-from-model-comparisons",
+    "lem-sfb-supported-three-term-scalar-rigidity",
+    "lem-sfb-closed-torsion-rigidity-serre-transfer",
+    "lem-sfb-proper-wcontractible-closed-fibre-rigidity",
+    "lem-sfb-qcqs-proper-serre-heart-bound",
+    "lem-sfb-qcqs-proper-hull-tail-bound",
+    "lem-sfb-qcqs-proper-localizing-coproducts",
+    "lem-sfb-qcqs-proper-open-boundary-vanishing"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-prop-sf-comp-coherence",
+ "lean": {
+  "module": "Sheaf.Paper.SupportedModelHull",
+  "declaration": "AlgebraicGeometry.ProEtale.supportedModelHull",
+  "file": "lean/Sheaf/Paper/SupportedModelHull.lean",
+  "statement": "def supportedModelHull (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ] [IsCommMonObj Λ] (X : Scheme.{u}) : ObjectProperty (DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) (condensedRingObj Λ X)))",
+  "branch": "sheaf-dag",
+  "by": "NR",
+  "date": "2026-10-24",
+  "existing": false,
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.ScalarModelSupportChain",
+   "AlgebraicGeometry.ProEtale.ScalarModelSupportChain.extension",
+   "AlgebraicGeometry.ProEtale.IsSupportedModelHullClass",
+   "AlgebraicGeometry.ProEtale.supportedModelHull"
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-67e928e2f",
+  "group": "NR",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-67e928e2f",
+  "group": "NR",
+  "result": "pass",
+  "note": "Read the item and every stmt_dep, both modules, the report and the new def node, against HasFiniteConstantLocalModel, IsLocalizingAdmissibleCoefficient/IsAdmissibleCoefficient, openImmersionLowerShriek, IsWeaklyContractible (090M) and proetalePrecoverage/ProEt. The six-way Λ is exact: Ω uses all continuous maps and the finite-subextension disjunct is rightly excluded. Universes Scheme.{u}, site u+1/u, Ab.{u+1}, indices Type(u+1); no equality forced. qcqs V, arbitrary N, actual pro-étale cover family, affine and weakly contractible U_i, actual upperStar hypothesis, hull conclusion: all match the node. New def-sfb-supported-model-hull (§1(A), absent elsewhere) matches the item's hull paragraph: qc open steps and closed steps with compact complement; J in the correct order with identity for nil; recorded finite constant local models in degree 0; IsTriangulated + replete + retracts + all small products + common-bound strict filtered colimits; intersection. Only stmt_deps/lean differ from live; lean.statement verbatim; docstrings and 9-step proof plan present; sorry only; edge cases covered. Not recompiled (no change). Advisory: NR second reading was in-thread."
+ }
+}

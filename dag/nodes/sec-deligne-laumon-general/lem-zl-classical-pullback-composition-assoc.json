@@ -1,0 +1,140 @@
+{
+ "id": "lem-zl-classical-pullback-composition-assoc",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-zl-real-mixed-by-curves",
+   "place": "Proof paragraph 1, constant-extension local Frobenius comparison: three-pullback reassociation before combining classical positive Weil iterates.",
+   "via": [
+    "def-zl-classical-local-frobenius-data",
+    "lem-zl-classical-local-frobenius-iterate-comparison",
+    "lem-zl-classical-weil-filtration-heart-transport"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Associativity of germ-normalized classical pullback composition",
+ "status": "split",
+ "import_flags": [],
+ "statement": "Fix a prime l, a scheme Y in Type u which is Noetherian and separated and on whose residue fields l is invertible, and an algebraic closure Ω of Q_l in Type (u+1). Let P_h be the algebraic lisse automorphism pullback of [def-wf-lisse-adic-automorphism-pullback]. Suppose given natural isomorphisms c(h,k):P_k ⋙ P_h ≅ P_(h≪≫k), normalized on all geometric fibres of [def-pod-lisse-adic-fibre-functors] as follows: fibre_x(c(h,k)_F) followed by the canonical pullback-fibre comparison for h≪≫k equals the pullback-fibre comparison for h at P_k F, then the comparison for k at x h, then the equality transport along (x h) k = x (h k). For every three scheme automorphisms f,g,h and every algebraic lisse sheaf F, c(f,g≪≫h)^(-1)_F followed by P_f(c(g,h)^(-1)_F) is heterogeneously equal to c(f≪≫g,h)^(-1)_F followed by c(f,g)^(-1)_(P_h F). The only endpoint identification is associativity f≪≫(g≪≫h)=(f≪≫g)≪≫h. No Weil structure, iteration, connectedness or invariant lattice is assumed.",
+ "stmt_deps": [
+  "def-wf-lisse-adic-automorphism-pullback",
+  "def-pod-lisse-adic-fibre-functors"
+ ],
+ "source": {
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Proposition 6.8.4(1),(4), Remark 6.8.15; Weil II (1.1.1) b)--d). Agent extraction of the three-pullback reassociation step in classicalWeil_blocks, blueprint real-mixed-by-curves paragraph 1, constant-extension comparison."
+ },
+ "proof": [
+  {
+   "text": "Apply the algebraic fibre functor of [def-pod-lisse-adic-fibre-functors] to both words. Functoriality and naturality of the pullback-fibre comparisons move each inner compositor across the outer comparison. Solve the normalization equation for the fibre image of each inverse compositor and cancel inverse comparisons. The remaining equality involves only canonical pullback-fibre comparisons, computed at unchanged finite coefficient models. At every finite quotient these canonical maps send a germ (U,z,s) to the identical germ with its structure map reindexed, by [def-wf-lisse-adic-automorphism-pullback]. Associativity identifies the structure maps and pointed lifts for f,g,h, so the words agree on every colimit injection. Colimit extensionality gives equality at each quotient; inverse-limit projections and scalar extension to the finite coefficient field and then Ω preserve it. The naturality used above is checked first on finite germs for integral arrows, then on rational pure tensors and finite sums, then on representatives in the coefficient localization. This does not require any rational Weil map to preserve a lattice.",
+   "uses": [
+    "def-wf-lisse-adic-automorphism-pullback",
+    "def-pod-lisse-adic-fibre-functors"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply the normalization hypothesis and naturality of the pullback-fibre maps to conclude that the words agree on every algebraic geometric fibre. For detection use only the finite-coefficient part of [cor-galois-lisse-representations], as in the current blueprint. Decompose the Noetherian scheme into finitely many connected clopen components and choose a geometric point on each nonempty component. Finite lisse stalks detect arrows there by the finite correspondence. For integral adic systems the free limit fibre surjects onto each finite fibre, so equality on the limit detects each finite-level arrow and hence an integral system arrow. For rational arrows clear a common denominator; integral fibres are torsion-free, so localization detects the numerator. For algebraic-coefficient arrows take a common finite coefficient model in the filtered coefficient localization and use faithful extension of fields to reduce equality to the rational case. This proves detection for the actual algebraic fibre. Restriction to the finite clopen decomposition detects the original arrows, also after the localizations by enlarging the finitely many common fields and denominators together. Thus the words agree after the associativity transport of their sources. On the empty scheme all sheaves are zero. No representation theorem for pro-etale algebraic lisse sheaves or regularity assumption is used.",
+   "uses": [
+    "def-pod-lisse-adic-fibre-functors",
+    "def-wf-lisse-adic-automorphism-pullback",
+    "cor-galois-lisse-representations"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-wf-lisse-adic-automorphism-pullback",
+  "def-pod-lisse-adic-fibre-functors",
+  "cor-galois-lisse-representations"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "T6",
+  "document": "literature/blueprint/latest/blueprint/sec-deligne-laumon-general/sk-i-dl-general-real/_section.md",
+  "place": "Expanded germ-normalized compositor reassociation from the existing classicalWeil_blocks docstring; this statement has no iterate or block law."
+ },
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "The natural isomorphisms for iterated pullback of lisse sheaves satisfy associativity when normalized on geometric fibers",
+   "results": "8 hits including PresheafOfModules.pullback_assoc, SheafOfModules.pullback_assoc and CategoryTheory.GrothendieckTopology.overMapPullback_assoc. These are general sheaf/presheaf pullback associativity, not the normalized lisse coefficient localization comparisons.",
+   "date": "2026-10-26",
+   "verdict": "No exact match; general pullback laws do not identify the chosen classical normalization."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Composition of pullback of lisse algebraic sheaves under scheme automorphisms",
+   "results": "8 hits including AlgebraicGeometry.Scheme.Modules.pullbackComp, pseudofunctor_associativity and pullbackCongr in Mathlib.AlgebraicGeometry.Modules.Sheaf. Those concern quasi-coherent scheme modules, not algebraic lisse sheaves.",
+   "date": "2026-10-26",
+   "verdict": "No exact match."
+  },
+  {
+   "tool": "grep",
+   "query": "classicalComposition|classicalWeilIterate_add|AutomorphismPullback.*[Cc]omp",
+   "results": "[grep] OK 0 hit(s). Direct source search found only classicalComposition_existsUnique and classicalWeil_blocks in the assigned module. Mathlib.AlgebraicGeometry.Modules.Sheaf has pullbackComp and pseudofunctor_associativity for scheme modules, read at lines 241 and 273. Blueprint search for classical compositor returned zero nodes.",
+   "date": "2026-10-26",
+   "verdict": "No existing declaration or blueprint node states this normalized lisse equation."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Iso.trans, _ = _",
+   "results": "12 hits, including CategoryTheory.Iso.refl_trans, trans_refl, self_symm_id, symm_self_id, trans_symm and trans_assoc. The abstract iso associativity law is used for positive powers and endpoint transports; it does not identify the two normalized three-pullback compositor words.",
+   "date": "2026-10-26",
+   "verdict": "Generic Iso.trans_assoc is useful elementary glue; no normalized-compositor match."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.ClassicalLocalFrobeniusData",
+  "date": "2026-10-26",
+  "group": "T6"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-deligne-laumon-general",
+ "unit": "sk-i-dl-general-real",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.ClassicalPullbackCompositionCoherence",
+  "file": "lean/Sheaf/Paper/ClassicalPullbackCompositionCoherence.lean",
+  "declaration": "WeilConjectures.ClassicalLocalFrobenius.normalizedClassicalComposition_assoc",
+  "statement": "theorem normalizedClassicalComposition_assoc\n    (c : ∀ h k : Y ≅ Y,\n      lisseAlgebraicAutomorphismPullback k l Ω ⋙\n        lisseAlgebraicAutomorphismPullback h l Ω ≅\n          lisseAlgebraicAutomorphismPullback (h ≪≫ k) l Ω)\n    (hc : ∀ (h k : Y ≅ Y) (κ : Type u) [Field κ] [IsAlgClosed κ]\n      (x : Spec (.of κ) ⟶ Y) (F : LisseAlgebraicSheaf l Y Ω),\n      let T := (lisseAlgebraicFiberFunctor l Y x Ω).copyObj\n        (lisseAlgebraicFiber l Y Ω x)\n        (fun M ↦ eqToIso (lisseAlgebraicFiberFunctor_obj l Y x Ω M))\n      T.map ((c h k).hom.app F) ≫\n          (lisseAlgebraicAutomorphismFiberIso (h ≪≫ k) l Ω x F).hom =\n        (lisseAlgebraicAutomorphismFiberIso h l Ω x\n          ((lisseAlgebraicAutomorphismPullback k l Ω).obj F)).hom ≫\n        (lisseAlgebraicAutomorphismFiberIso k l Ω (x ≫ h.hom) F).hom ≫\n        eqToHom (congrArg (fun y ↦ lisseAlgebraicFiber l Y Ω y F)\n          (Category.assoc x h.hom k.hom)))\n    (f g h : Y ≅ Y) (F : LisseAlgebraicSheaf l Y Ω) :\n    HEq\n      ((c f (g ≪≫ h)).inv.app F ≫\n        (lisseAlgebraicAutomorphismPullback f l Ω).map ((c g h).inv.app F))\n      ((c (f ≪≫ g) h).inv.app F ≫\n        (c f g).inv.app ((lisseAlgebraicAutomorphismPullback h l Ω).obj F))",
+  "branch": "sheaf-dag",
+  "by": "T6",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T6",
+  "result": "pass",
+  "landing": "20261026T002826-L-118834",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T6",
+  "result": "pass",
+  "landing": "20261026T002826-L-118834",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

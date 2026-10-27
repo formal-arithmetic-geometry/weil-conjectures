@@ -96,7 +96,109 @@
   "def-pc-smooth-projective-curve"
  ],
  "proof_split_by": "paragraphs",
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": [
+    "AlgebraicGeometry.Scheme.smoothOfRelativeDimension_baseChange",
+    "AlgebraicGeometry.Scheme.isProper_baseChange",
+    "AlgebraicGeometry.Scheme.isReduced_baseChange",
+    "AlgebraicGeometry.Scheme.GlobalSectionsBijective.of_isSepClosed"
+   ]
+  },
+  "slopmaster2": {
+   "state": "closed",
+   "decls": [
+    {
+     "name": "AlgebraicGeometry.Scheme.smoothOfRelativeDimension_baseChange",
+     "module": "WeilConjectures.AlgebraicGeometry.Curve.RiemannRoch",
+     "lines": [
+      1696,
+      1706
+     ],
+     "kind": "theorem",
+     "sorry": false
+    },
+    {
+     "name": "AlgebraicGeometry.Scheme.isProper_baseChange",
+     "module": "WeilConjectures.AlgebraicGeometry.Curve.RiemannRoch",
+     "lines": [
+      1708,
+      1715
+     ],
+     "kind": "theorem",
+     "sorry": false
+    },
+    {
+     "name": "AlgebraicGeometry.Scheme.isReduced_baseChange",
+     "module": "WeilConjectures.AlgebraicGeometry.Curve.RiemannRoch",
+     "lines": [
+      1717,
+      1725
+     ],
+     "kind": "theorem",
+     "sorry": false
+    },
+    {
+     "name": "AlgebraicGeometry.Scheme.GlobalSectionsBijective.of_isSepClosed",
+     "module": "WeilConjectures.AlgebraicGeometry.GlobalSectionsBijective",
+     "lines": [
+      212,
+      219
+     ],
+     "kind": "theorem",
+     "sorry": false
+    },
+    {
+     "name": "AlgebraicGeometry.GeometricallyIntegral.of_smooth_of_geometricallyConnected",
+     "module": "WeilConjectures.AlgebraicGeometry.Curve.RiemannRoch",
+     "lines": [
+      1727,
+      1737
+     ],
+     "kind": "theorem",
+     "sorry": false,
+     "partial": "`prop-pc-xk-integral`, part (2"
+    },
+    {
+     "name": "AlgebraicGeometry.GeometricallyIntegral.of_isSepClosed",
+     "module": "WeilConjectures.AlgebraicGeometry.Curve.RiemannRoch",
+     "lines": [
+      1739,
+      1747
+     ],
+     "kind": "theorem",
+     "sorry": false,
+     "partial": "`prop-pc-xk-integral`, part (2"
+    },
+    {
+     "name": "AlgebraicGeometry.Scheme.isIntegral_baseChange",
+     "module": "WeilConjectures.AlgebraicGeometry.Curve.RiemannRoch",
+     "lines": [
+      1749,
+      1758
+     ],
+     "kind": "theorem",
+     "sorry": false,
+     "partial": "`prop-pc-xk-integral`, part (2"
+    },
+    {
+     "name": "AlgebraicGeometry.isIso_pushforwardUnitMap_of_globalSectionsBijective",
+     "module": "WeilConjectures.AlgebraicGeometry.Picard.RationalPoint",
+     "lines": [
+      130,
+      142
+     ],
+     "kind": "theorem",
+     "sorry": false,
+     "partial": "`prop-pc-xk-integral`, part (1"
+    }
+   ],
+   "missing": [],
+   "open": []
+  }
+ },
  "chapter": "sec-picard-framework",
  "unit": "sk-thm-picard-twist",
  "split_report": {
@@ -172,5 +274,42 @@
   ],
   "sorry_free": false,
   "note": "recorded by L at 04:46 UTC from lean_audit (stage 2, rule 2 of the human: one definition per notion; a node whose notion has a declaration in the source repository is not stated again; audit state rests_on_sorry)"
+ },
+ "blueprint_update": {
+  "snapshot": "main-20261023-1620",
+  "commit": "7284bb09daf97437d544c51882b325f9c52cd345",
+  "changed": [
+   "statement",
+   "proof"
+  ],
+  "statement": "Let $k$ be a separably closed field and let $X$ be a connected\n$k$-scheme which is smooth of relative dimension $1$ and proper over $k$\n(for instance a smooth projective curve over $k$).\nThen:\n\n1. $H^0(X,\\mathcal{O}_X)=k$ and $f_*\\mathcal{O}_X=\\mathcal{O}_k$ (where $f:X\\to\\operatorname{Spec} k$);\n1. for every field extension $K/k$, the\nbase change $X_K$ is integral, smooth of relative dimension $1$ and\nproper over $K$, hence a curve over $K$ (in particular $X$ is\ngeometrically integral), with $H^0(X_K,\\mathcal{O}_{X_K})=K$ and\n$\\dim_KH^1(X_K,\\mathcal{O}_{X_K})=\\dim_kH^1(X,\\mathcal{O}_X)$.",
+  "proof": [
+   {
+    "text": "For (1): $X$ is reduced (smooth over a field) and connected, so\n$k':=H^0(X,\\mathcal{O}_X)$ is a finite-dimensional reduced $k$-algebra without\nnontrivial idempotents, i.e. a finite field extension of $k$. Since $X$ is\nsmooth, it is geometrically reduced, so $k'\\otimes_k\\bar k\\subseteq\nH^0(X_{\\bar k},\\mathcal{O})$ is reduced and $k'/k$ is separable; as $k$ is\nseparably closed, $k'=k$. Since $H^0(X,\\mathcal{O}_X)=k$, the quasi-coherent\n$\\mathcal{O}_k$-module $f_*\\mathcal{O}_X$ is free of rank one, so\n$f_*\\mathcal{O}_X=\\mathcal{O}_k$.",
+    "uses": [],
+    "elementary": null
+   },
+   {
+    "text": "For (2): let $K/k$ be a field extension and let\n$g:\\operatorname{Spec}(K)\\to\\operatorname{Spec}(k)$. The morphism $g$ is flat\n([lem-pc-flat-field]), both bases are affine, and $f$ is quasi-compact and\nquasi-separated (it is proper), so\n[lem-pc-flat-base-change-cohom] applied to $\\mathcal{F}=\\mathcal{O}_X$ gives\n\n$$\nH^i(X,\\mathcal{O}_X)\\otimes_kK\\;\\cong\\;H^i(X_K,\\mathcal{O}_{X_K})\\qquad(i\\ge0).\n$$",
+    "uses": [
+     "lem-pc-flat-field",
+     "lem-pc-flat-base-change-cohom"
+    ],
+    "elementary": false
+   },
+   {
+    "text": "For $i=0$ this gives $H^0(X_K,\\mathcal{O}_{X_K})=k\\otimes_kK=K$, hence\n$f_{K,*}\\mathcal{O}_{X_K}=\\mathcal{O}_K$ ($\\operatorname{Spec}(K)$ is a point,\nand the canonical map $\\mathcal{O}_K\\to f_{K,*}\\mathcal{O}_{X_K}$ is the\nisomorphism $K\\to H^0(X_K,\\mathcal{O}_{X_K})$ on global sections); for $i=1$ it\ngives $\\dim_K H^1(X_K,\\mathcal{O}_{X_K})=\\dim_kH^1(X,\\mathcal{O}_X)$.\nThe morphism $X_K\\to\\operatorname{Spec}(K)$ is smooth (base change of smooth,\n[lem-pc-proper-base-change]) and proper (base change of proper,\n[lem-pc-proper-base-change]), so $X_K$ is regular\n([lem-sc-smooth-regular]), hence normal ([rem-pc-regular-normal])\nand reduced. Moreover $X_K$ is geometrically reduced: for every $K'/K$,\n$X_{K'}$ is smooth over $K'$, hence regular, hence reduced; and $X_K$ is\nproper, so [lem-pc-h0-geom-connected] (with $k$ replaced by $K$ and\n$X$ by $X_K$) shows that $X_K$ is geometrically connected, in particular\nconnected. A Noetherian normal connected scheme is irreducible by\n[rem-pc-regular-normal]: the normal scheme $X_K$ is a finite disjoint\nunion of normal integral schemes, and connectedness forces a single\ncomponent. Hence $X_K$ is integral. By [lem-pc-dim-base-change]\nthe dimension of $X_K$ is $1$, and $X_K\\to\\operatorname{Spec}(K)$ is of finite type and\nseparated (base changes of finite type and separated morphisms), so $X_K$\nis a variety of dimension $1$, i.e. a curve ([def-pc-curve]). This proves\n(2); applying (2) to $K=k$ (and all extensions) gives geometric\nintegrality of $X$.",
+    "uses": [
+     "lem-pc-proper-base-change",
+     "lem-sc-smooth-regular",
+     "rem-pc-regular-normal",
+     "lem-pc-h0-geom-connected",
+     "lem-pc-dim-base-change",
+     "def-pc-curve"
+    ],
+    "elementary": false
+   }
+  ],
+  "note": "the current blueprint (main-20261023-1620, weil-conjectures-blueprint 7284bb09da) states or proves this differently; the node is proved in Lean: recorded 2026-10-23, not reopened"
  }
 }

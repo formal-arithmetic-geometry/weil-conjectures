@@ -1,0 +1,295 @@
+{
+ "id": "lem-sfb-resolution-roof-injective-transpose",
+ "kind": "statement",
+ "title": "Injective representatives of resolution roofs and their canonical transposes",
+ "statement": "Let $\\mathcal B,\\mathcal E$ be abelian categories in the universes of [def-sp-abelian, def-weil-size-convention], with ordinary derived categories [def-weil-abstract-derived-category], and suppose $\\mathcal E$ is Grothendieck abelian [def-sp-grothendieck-abelian]. Let $L:\\mathcal B\\to\\mathcal E$ be exact and additive, with a specified additive right adjoint $R$. Use the canonical derived adjunction and canonical shift comparison of [lem-trf-bounded-below-derived-adjunction, lem-sp-canonical-right-derived-adjunction-shift]. Fix $X\\in\\mathcal B$, $N\\in\\mathcal E$, a cochain complex $P$ vanishing in positive degrees, a quasi-isomorphism $e:P\\to LX[0]$, a nonnegative injective resolution $a:N[0]\\to I^\\bullet$ [def-sp-injective-resolutions], an integer $q\\geq0$, and a cochain map $u:P\\to N[q]$.\n\nThere exists a cochain map $h:LX[0]\\to I[q]$ such that $he$ is chain-homotopic to $a[q]u$ and\n$$Q(h)=Q(a[q])Q(u)Q(e)^{-1}.$$\nFor every such $h$, let $\\widetilde h:X[0]\\to R(I[q])$ be its termwise adjoint. Under the canonical shift identification, its component in degree zero defines a map $\\widetilde h^{\\flat}:X[-q]\\to R(I^\\bullet)$. If $\\beta_a:Q R(I^\\bullet)\\xrightarrow{\\sim}\\mathbf R R(N[0])$ is the canonical injective-resolution identification, then\n$$\\beta_a Q(\\widetilde h^{\\flat})=\\Phi_q\\bigl(Q(u)Q(e)^{-1}\\bigr),$$\nwhere $\\Phi_q$ is the canonical derived-adjunction bijection followed by the canonical shift identification. This holds for every choice of $a,h$ above, without projectivity of any $P^i$. For internal equivariant modules, exact trivial inflation and invariants as in [def-sfb-condensed-action-module, lem-sfb-condensed-derived-restriction-calculus] instantiate $L,R$; in that case the termwise adjoint is the unique factorization of $h$ through the invariant inclusion.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+  "place": "Paragraph (3), open direct image, internal bar normalization: old roof-adjunction proof steps 8-9 (K-injective representative, homotopy and canonical adjunction with shifts). Agent-extracted statement from the reviewed roof-adjunction argument; a direct internal-category reference is WANTED where applicable."
+ },
+ "stmt_deps": [
+  "def-sp-abelian",
+  "def-weil-size-convention",
+  "def-weil-abstract-derived-category",
+  "def-sp-grothendieck-abelian",
+  "def-sp-injective-resolutions",
+  "lem-trf-bounded-below-derived-adjunction",
+  "lem-sp-canonical-right-derived-adjunction-shift",
+  "def-sfb-condensed-action-module",
+  "lem-sfb-condensed-derived-restriction-calculus"
+ ],
+ "proof": [
+  {
+   "text": "Put $J=I[q]$. Its terms are injective, and $J^n=0$ for $n<-q$. Thus [lem-weil-pbc-bounded-below-injectives-kinjective] makes $J$ K-injective. Set $f=Q(u)Q(e)^{-1}$ and $v=Q(a[q])f$. By [lem-weil-pbc-kinjective-hom-derived], localization gives a bijection from homotopy classes of maps $LX[0]\\to J$ to derived maps $Q(LX[0])\\to QJ$. Choose a representative $h$ of the class corresponding to $v$. Then $Q(he)=vQ(e)=Q(a[q]u)$. Apply the injective part of the same bijection with source $P$ and target $J$: $he$ and $a[q]u$ are homotopic. This proves both the existence and the displayed formula for $Q(h)$. The bijection allows an arbitrary source complex, so no bounded-below or projectivity condition on $P$ has been used.",
+   "uses": [
+    "lem-weil-pbc-bounded-below-injectives-kinjective",
+    "lem-weil-pbc-kinjective-hom-derived"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 070J, lemma-bounded-below-injectives-K-injective; Tag 070I, lemma-K-injective, (1) implies (3)."
+   }
+  },
+  {
+   "text": "For any $h$ satisfying the required homotopy, the same localization calculation gives $Qh=Q(a[q])f$. Apply [lem-weil-pbc-termwise-adjunction-homotopy] to $X[0]$ and $J$: its transpose is the chain map $\\widetilde h=R(h)\\eta_{X[0]}$. In degree zero this is $R(h^0)\\eta_X:X\\to R(I^q)$; all other source components vanish. The chain condition says $(-1)^qR(d_I^q)\\widetilde h^0=0$, equivalently $R(d_I^q)\\widetilde h^0=0$. Hence the same component defines the chain map $\\widetilde h^{\\flat}:X[-q]\\to R(I)$. Shifting a chain map shifts its components without multiplying them by a sign, so shifting $\\widetilde h$ by $[-q]$ and using the termwise shift identification gives precisely $\\widetilde h^{\\flat}$.",
+   "uses": [
+    "lem-weil-pbc-termwise-adjunction-homotopy"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 08BJ, lemma-adjoint-preserve-K-injectives, termwise homotopy adjunction in its proof; component calculation written by Q36."
+   }
+  },
+  {
+   "text": "Write $\\alpha_T:Q(RT)\\to\\mathbf R R(QT)$ for the universal right-derived comparison. The Grothendieck hypothesis supplies K-injective resolutions by [lem-sfb-grothendieck-k-injective]; [def-sfb-right-derived-functor] makes $\\alpha_J$ invertible. Use the unbounded adjunction of [lem-sfb-resolving-derived-adjunction-normalization], taking the left resolving class to be all complexes: exactness of $L$ makes termwise $L$ invert quasi-isomorphisms by [lem-weil-pbc-exact-functor-derived-factorization], so $D(L)$ with its invertible comparison $\\varphi$ is a universal left derived pair. Denote its unshifted Hom bijection by $\\Psi$. Its stated normalization, with $\\varphi$ inserted, gives\n$$\\Psi(Qh)=\\alpha_JQ(\\widetilde h).$$\nThis adjunction is the canonical one of the statement, because the normalization determines it. For a complex $M$ of $\\mathcal B$ and a K-injective $J'$, every derived map $Q(LM)\\to QJ'$ is $Q$ of a chain map by [lem-weil-pbc-kinjective-hom-derived], $\\varphi$ is invertible, and every object of $D(\\mathcal E)$ is isomorphic to such a $QJ'$ by [lem-sfb-grothendieck-k-injective]; naturality in the second variable then fixes $\\Psi$ on all pairs. Applied to the identity chain map of $LM$, the normalization is the canonical unit formula $\\mathbf RR(\\varphi_M)\\eta^D_{QM}=\\alpha_{LM}Q(\\eta_M)$, and an adjunction between given functors is determined by its unit, so no adjunction transported by an automorphism satisfies it.",
+   "uses": [
+    "lem-sfb-grothendieck-k-injective",
+    "def-sfb-right-derived-functor",
+    "lem-sfb-resolving-derived-adjunction-normalization",
+    "lem-weil-pbc-exact-functor-derived-factorization",
+    "lem-weil-pbc-kinjective-hom-derived"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 09T5, lemma-derived-adjoint-functors, with Tag 0FND, lemma-pre-derived-adjoint-functors-general, ordinary-transpose normalization; Tag 070Y, lemma-K-injective-defined."
+   }
+  },
+  {
+   "text": "Naturality of the adjunction bijection in its target and $Qh=Q(a[q])f$ now give\n$$\\mathbf R R(Q(a[q]))\\Psi(f)=\\Psi(Qh)=\\alpha_JQ(\\widetilde h).$$\nInvert $\\mathbf R R(Q(a[q]))$ and put\n$$\\beta_{a[q]}=\\mathbf R R(Q(a[q]))^{-1}\\alpha_J.$$\nConsequently $\\Psi(f)=\\beta_{a[q]}Q(\\widetilde h)$. This is the canonical injective-resolution identification: it maps the specified augmentation by the derived functor and then inverts it, using the derived comparison on the injective target. This formula follows directly from the unit normalization of [def-sfb-right-derived-functor], so there is no choice of a comparison on cohomology.",
+   "uses": [
+    "lem-sfb-resolving-derived-adjunction-normalization",
+    "def-sfb-right-derived-functor"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 0FND, lemma-pre-derived-adjoint-functors-general, functoriality in the target; Tag 070Y, lemma-K-injective-defined, normalized resolution comparison."
+   }
+  },
+  {
+   "text": "Apply the canonical shift compatibility of [lem-sp-canonical-right-derived-adjunction-shift]. It identifies $\\Psi(f):QX[0]\\to\\mathbf R R(Q(N[q]))$ with the map $\\Phi_q(f):Q(X[-q])\\to\\mathbf R R(QN[0])$ in the statement. Under the same compatibility $\\beta_{a[q]}$ is the $[q]$-shift of $\\beta_a=\\mathbf R R(Qa)^{-1}\\alpha_I$: these comparisons use the shifted augmentation $a[q]$ and the fixed K-injective shift, which the cited statement explicitly retains. Concretely, $I$ and $I[q]$ are K-injective (step 1), so on $QI$ the fixed K-injective shift isomorphism of $\\mathbf RR$ is the one under which $\\alpha_{I[q]}$ corresponds to $\\alpha_I[q]$ through the termwise equality $R(I[q])=R(I)[q]$; the shift isomorphisms of $\\mathbf RR$ and $Q$ are natural, so $\\mathbf RR(Q(a[q]))$ corresponds to $\\mathbf RR(Qa)[q]$. Thus shifting the equality in step 4 by $[-q]$, and using the component identification of step 2, gives\n$$\\Phi_q(f)=\\beta_aQ(\\widetilde h^{\\flat}).$$\nEvery comparison used here is the fixed canonical one; the degree-$q$ component is $R(h^0)\\eta_X$, with no additional scalar or shift sign.",
+   "uses": [
+    "lem-sp-canonical-right-derived-adjunction-shift"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 0A8D, lemma-adjoint-is-exact, and Tag 0DVC, lemma-pre-derived-adjoint-functors; canonical K-injective shift compatibility supplied by the cited node."
+   }
+  },
+  {
+   "text": "Finally [lem-sfb-condensed-derived-restriction-calculus] states that the internal action categories are Grothendieck abelian and that exact trivial-action inflation is left adjoint to invariants, with transpose given by the invariant inclusion. It therefore supplies exactly the hypotheses on $L,R$ used above. Since the source of $h$ has trivial action, its equivariance means that $h$ factors through the invariant subobject of $I[q]$; the adjunction identifies this factorization with $\\widetilde h$. Uniqueness follows because the invariant inclusion is a monomorphism. The proof used only the prescribed properties of $a$ and $h$, so it applies to every such choice, including $q=0$.",
+   "uses": [
+    "lem-sfb-condensed-derived-restriction-calculus"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Agent specialization to the internal invariant inclusion in the current blueprint paragraph (3), using the cited internal restriction-calculus statement."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-bounded-below-injectives-kinjective",
+  "lem-weil-pbc-kinjective-hom-derived",
+  "lem-weil-pbc-termwise-adjunction-homotopy",
+  "lem-sfb-grothendieck-k-injective",
+  "def-sfb-right-derived-functor",
+  "lem-sfb-resolving-derived-adjunction-normalization",
+  "lem-weil-pbc-exact-functor-derived-factorization",
+  "lem-sp-canonical-right-derived-adjunction-shift",
+  "lem-sfb-condensed-derived-restriction-calculus"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+  "place": "Paragraph (3), internal bar normalization in the existing DAG refinement; Q36 assembly from Stacks Tags 070I, 070J, 070Y, 0FND, 09T5 and 0A8D and existing canonical-shift nodes. The blueprint itself supplies the direct-image route, not this calculation."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "homEquiv.*[Ii]njective|[Ii]njective.*homEquiv|homEquiv.*[Dd]erived|derivedAdjunction",
+   "results": "{\"t\": \"2026-10-22T06:05:49Z\", \"tool\": \"grep\", \"query\": \"homEquiv.*[Ii]njective|[Ii]njective.*homEquiv|homEquiv.*[Dd]erived|derivedAdjunction\", \"sub\": \"Algebra/Homology\", \"ok\": true, \"n_hits\": 9, \"note\": \"\", \"top\": [\"Mathlib/Algebra/Homology/DerivedCategory/Ext/EnoughProjectives.lean\", \"Mathlib/Algebra/Homology/Embedding/TruncGE.lean\", \"Mathlib/Algebra/Homology/DerivedCategory/Ext/EnoughInjectives.lean\", \"Mathlib/Algebra/Homology/DerivedCategory/Ext/Basic.lean\", \"Mathlib/Algebra/Homology/DerivedCategory/Ext/Basic.lean\", \"Mathlib/Algebra/Homology/DerivedCategory/Ext/Basic.lean\", \"Mathlib/Algebra/Homology/DerivedCategory/Ext/Basic.lean\", \"Mathlib/Algebra/Homology/DerivedCategory/Ext/Basic.lean\"], \"digest\": \"f0461cd792361057\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary injective resolution maps and K-injective localization bijections do not state the combined arbitrary-resolution homotopy and canonical shifted derived-adjunction transpose; the generic adjunction and shift inputs already have nodes."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived adjunction for exact left adjoint computed by termwise transpose into bounded below injective complex and canonical shifts",
+   "results": "{\"t\": \"2026-10-22T06:05:49Z\", \"tool\": \"leansearch\", \"query\": \"Derived adjunction for exact left adjoint computed by termwise transpose into bounded below injective complex and canonical shifts\", \"sub\": \"\", \"ok\": false, \"n_hits\": 0, \"note\": \"service unavailable: {\\\"error\\\":\\\"Rate limit exceeded: 60 per 1 minute\\\"}\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.DerivedCategory.Q",
+   "results": "{\"t\": \"2026-10-22T06:05:49Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.DerivedCategory.Q\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"loogle: unknown identifier 'CategoryTheory.DerivedCategory.Q'\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary injective resolution maps and K-injective localization bijections do not state the combined arbitrary-resolution homotopy and canonical shifted derived-adjunction transpose; the generic adjunction and shift inputs already have nodes."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A roof from an augmented resolution to a shifted module admits a representative into an injective resolution and its canonical derived adjunct is the termwise invariant transpose",
+   "results": "{\"t\": \"2026-10-22T06:06:04Z\", \"tool\": \"leanfinder\", \"query\": \"A roof from an augmented resolution to a shifted module admits a representative into an injective resolution and its canonical derived adjunct is the termwise invariant transpose\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.InjectiveResolution.toRightDerivedZero'\", \"CategoryTheory.InjectiveResolution.descFOne\", \"CategoryTheory.InjectiveResolution.ι'\", \"CategoryTheory.InjectiveResolution.ι'_f_zero\", \"CategoryTheory.InjectiveResolution.descFSucc\", \"CategoryTheory.InjectiveResolution.toRightDerivedZero_eq\", \"CategoryTheory.InjectiveResolution.Hom.hom'_f\", \"CategoryTheory.InjectiveResolution.desc\"], \"digest\": \"09f4d023bbc4f89d\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary injective resolution maps and K-injective localization bijections do not state the combined arbitrary-resolution homotopy and canonical shifted derived-adjunction transpose; the generic adjunction and shift inputs already have nodes."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For an exact left adjoint and its right adjoint a derived roof with arbitrary resolution source has an injective chain map representative whose termwise transpose is its canonical shifted derived adjunct",
+   "results": "{\"t\": \"2026-10-22T06:07:25Z\", \"tool\": \"leanfinder\", \"query\": \"For an exact left adjoint and its right adjoint a derived roof with arbitrary resolution source has an injective chain map representative whose termwise transpose is its canonical shifted derived adjunct\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.rightDerived_map_eq\", \"CategoryTheory.InjectiveResolution.toRightDerivedZero'\", \"CategoryTheory.InjectiveResolution.rightDerived_app_eq\", \"CategoryTheory.InjectiveResolution.toRightDerivedZero_eq\", \"CategoryTheory.Functor.isZero_rightDerived_obj_injective_succ\", \"CategoryTheory.Functor.toRightDerivedZero\", \"CategoryTheory.InjectiveResolution.rightDerivedToHomotopyCategory_app_eq\", \"CategoryTheory.instIsIsoToRightDerivedZero'\"], \"digest\": \"296a89e8cf7479ab\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary injective resolution maps and K-injective localization bijections do not state the combined arbitrary-resolution homotopy and canonical shifted derived-adjunction transpose; the generic adjunction and shift inputs already have nodes."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A derived adjunction for an exact left adjoint is computed by transposing a chain map into an injective resolution after replacing a roof by a homotopic representative",
+   "results": "{\"t\": \"2026-10-23T10:50:07Z\", \"tool\": \"leanfinder\", \"query\": \"A derived adjunction for an exact left adjoint is computed by transposing a chain map into an injective resolution after replacing a roof by a homotopic representative\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Adjunction.derived\", \"CategoryTheory.Adjunction.derived'\", \"CategoryTheory.Adjunction.derivedε\", \"CategoryTheory.Adjunction.derivedη\", \"CategoryTheory.InjectiveResolution.isoRightDerivedToHomotopyCategoryObj\", \"CategoryTheory.InjectiveResolution.rightDerivedToHomotopyCategory_app_eq\", \"CategoryTheory.Functor.rightDerivedToHomotopyCategory\", \"CategoryTheory.InjectiveResolution.rightDerived_app_eq\"], \"digest\": \"ce9a20793eb3dfc4\"}",
+   "date": "2026-10-23",
+   "verdict": "no match for the entire item: the hits provide derived-adjunction infrastructure or K-injective localization bijections already represented by existing nodes; the arbitrary roof, specified resolution, shifted canonical transpose and internal-invariants specialization require the assembly written here."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsKInjective\", \"bijective\"",
+   "results": "{\"t\": \"2026-10-23T10:50:08Z\", \"tool\": \"loogle\", \"query\": \"\\\"IsKInjective\\\", \\\"bijective\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 3, \"note\": \"\", \"top\": [\"CochainComplex.HomComplex.CohomologyClass.bijective_toSmallShiftedHom_of_isKInjective\", \"CochainComplex.IsKInjective.Qh_map_bijective\", \"DerivedCategory.Plus.Qh_map_bijective_of_isKInjective\"], \"digest\": \"0b264f7feda64dfb\"}",
+   "date": "2026-10-23",
+   "verdict": "no match for the entire item: the hits provide derived-adjunction infrastructure or K-injective localization bijections already represented by existing nodes; the arbitrary roof, specified resolution, shifted canonical transpose and internal-invariants specialization require the assembly written here."
+  },
+  {
+   "tool": "grep",
+   "query": "homEquiv|bijective|quasiIso",
+   "results": "{\"t\": \"2026-10-23T10:50:08Z\", \"tool\": \"grep\", \"query\": \"homEquiv|bijective|quasiIso\", \"sub\": \"Algebra/Homology/HomotopyCategory/KInjective.lean\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match for the entire item: the hits provide derived-adjunction infrastructure or K-injective localization bijections already represented by existing nodes; the arbitrary roof, specified resolution, shifted canonical transpose and internal-invariants specialization require the assembly written here."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived adjunction termwise transpose of maps into bounded below injective complexes",
+   "results": "{\"t\": \"2026-10-23T10:50:09Z\", \"tool\": \"leansearch\", \"query\": \"Derived adjunction termwise transpose of maps into bounded below injective complexes\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Adjunction.derived\", \"CategoryTheory.Adjunction.injectivePresentationOfMap\", \"CategoryTheory.Injective.injective_of_adjoint\", \"CategoryTheory.NatTrans.rightDerived\", \"CategoryTheory.InjectiveResolution.rightDerived_app_eq\", \"CategoryTheory.Adjunction.derivedη\", \"CategoryTheory.Functor.toRightDerivedZero\", \"Module.Dual.transpose\"], \"digest\": \"54a7781fec247e23\"}",
+   "date": "2026-10-23",
+   "verdict": "no match for the entire item: the hits provide derived-adjunction infrastructure or K-injective localization bijections already represented by existing nodes; the arbitrary roof, specified resolution, shifted canonical transpose and internal-invariants specialization require the assembly written here."
+  },
+  {
+   "tool": "grep",
+   "query": "derivedη_fac_app|derivedη_fac|Qh_map_bijective|isKInjective_of_injective",
+   "results": "{\"t\": \"2026-10-23T10:56:39Z\", \"tool\": \"grep\", \"query\": \"derivedη_fac_app|derivedη_fac|Qh_map_bijective|isKInjective_of_injective\", \"sub\": \"Algebra/Homology\", \"ok\": true, \"n_hits\": 18, \"note\": \"\", \"top\": [\"Mathlib/Algebra/Homology/HomotopyCategory/KInjective.lean\", \"Mathlib/Algebra/Homology/HomotopyCategory/KInjective.lean\", \"Mathlib/Algebra/Homology/HomotopyCategory/KInjective.lean\", \"Mathlib/Algebra/Homology/HomotopyCategory/KInjective.lean\", \"Mathlib/Algebra/Homology/HomotopyCategory/KInjective.lean\", \"Mathlib/Algebra/Homology/HomotopyCategory/KProjective.lean\", \"Mathlib/Algebra/Homology/ModelCategory/Injective.lean\", \"Mathlib/Algebra/Homology/DerivedCategory/DerivabilityStructureInjectives.lean\"], \"digest\": \"e3530bed86a53cfc\"}",
+   "date": "2026-10-23",
+   "verdict": "no match for the entire item: the hits provide derived-adjunction infrastructure or K-injective localization bijections already represented by existing nodes; the arbitrary roof, specified resolution, shifted canonical transpose and internal-invariants specialization require the assembly written here."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Canonical derived adjunction Hom bijection on an injective target agrees with the underived chain complex adjunction and its canonical shift isomorphism",
+   "results": "{\"t\": \"2026-10-23T10:56:39Z\", \"tool\": \"leanfinder\", \"query\": \"Canonical derived adjunction Hom bijection on an injective target agrees with the underived chain complex adjunction and its canonical shift isomorphism\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Abelian.Ext.homEquiv\", \"CategoryTheory.InjectiveResolution.extMk_hom\", \"CochainComplex.IsKInjective.Qh_map_bijective\", \"CochainComplex.HomComplex.CohomologyClass.bijective_toSmallShiftedHom_of_isKInjective\", \"CategoryTheory.Abelian.Ext.homLinearEquiv\", \"CategoryTheory.InjectiveResolution.extEquivCohomologyClass_symm_mk_hom\", \"CategoryTheory.InjectiveResolution.isoRightDerivedToHomotopyCategoryObj\", \"CategoryTheory.instIsIsoAppToRightDerivedZeroOfInjective\"], \"digest\": \"5a1cc5a67679be0d\"}",
+   "date": "2026-10-23",
+   "verdict": "no match for the entire item: the hits provide derived-adjunction infrastructure or K-injective localization bijections already represented by existing nodes; the arbitrary roof, specified resolution, shifted canonical transpose and internal-invariants specialization require the assembly written here."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-internal-bar-roof-adjunction",
+  "date": "2026-10-22",
+  "group": "Q88"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "Paragraph (3), open direct image, internal bar normalization: old roof-adjunction proof steps 8-9 (K-injective representative, homotopy and canonical adjunction with shifts).",
+   "via": [
+    "lem-sfb-internal-bar-roof-adjunction",
+    "lem-sfb-internal-bar-ordered-cup",
+    "lem-sfb-trivial-ladic-derived-exterior",
+    "lem-sfb-dense-lattice-derived-invariants-comparison",
+    "lem-sfb-tame-inertia-continuous-koszul",
+    "lem-sfb-continuous-algcl-tame-boundary-comparison",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-resolution-roof-injective-transpose",
+  "worker": "stage1",
+  "summary": "Q36: no project declaration states the entire item. Reused existing K-injective localization, termwise and normalized unbounded adjunction, and fixed-shift nodes; no new nodes. Kept the statement and statement dependencies verbatim. Wrote the roof existence/homotopy argument for arbitrary P, the universal resolution comparison, the shifted component and the invariant-factorization specialization. Reread all cited statements and tested q=0, q=1, identity adjunction, zero objects and nonprojective source resolutions.",
+  "blueprint": "Current latest blueprint paragraph (3), open direct image: existing internal-bar-roof-adjunction refinement, old roof proof steps 8-9. Steps 1-2 construct the representative/transpose; 3-5 identify the canonical derived arrow and shifts; 6 specializes to invariants. The inherited blueprint ancestor is null because the creation chain is broken; no invented ancestor is introduced.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-termwise-adjunction-homotopy",
+    "why": "Generic termwise adjunction and its descent through homotopies; the unit has no separate statement for this abstract categorical tool."
+   },
+   {
+    "node": "lem-sfb-grothendieck-k-injective",
+    "why": "Generic existence of K-injective resolutions in a Grothendieck category, needed to apply the unbounded canonical adjunction; the unit contains no replacement."
+   },
+   {
+    "node": "def-sfb-right-derived-functor",
+    "why": "The universal derived comparison and its invertibility on K-injectives specify the canonical resolution identification."
+   },
+   {
+    "node": "lem-sfb-resolving-derived-adjunction-normalization",
+    "why": "Generic unbounded adjunction normalization on a chain map; supplies the actual transpose formula, not a substitute route for a unit theorem."
+   },
+   {
+    "node": "lem-weil-pbc-exact-functor-derived-factorization",
+    "why": "Exact L preserves quasi-isomorphisms and is represented termwise; justifies using all complexes as its resolving class."
+   },
+   {
+    "node": "lem-sp-canonical-right-derived-adjunction-shift",
+    "why": "Generic compatibility with the fixed K-injective shift, explicitly required in the item; no unit-local alternative states it."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-termwise-adjunction-homotopy",
+  "lem-sfb-grothendieck-k-injective",
+  "def-sfb-right-derived-functor",
+  "lem-sfb-resolving-derived-adjunction-normalization",
+  "lem-weil-pbc-exact-functor-derived-factorization",
+  "lem-sp-canonical-right-derived-adjunction-shift"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q36-559a99bdc",
+  "group": "Q36",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q36-559a99bdc (reviewer sub-agent of L); spot-checked: Read the item in full; this is a first split with no new nodes, and the statement and stmt_deps are byte-identical to base/live. I checked every cited statement: 070J K-injective, kinjective-hom-derived (any source, so non-projective and unbounded P are fine), termwise adjunction (a), Grothendieck K-injective, def-sfb-right-derived-functor (α, β_a direction), resolving-derived-adjunction-normalization (an ∃ d statement; its formula with M=X[0], I=I[q], f=h gives Ψ(Qh)=α_J Q(h~)), exact-functor factorization, the sp canonical shift node, and the condensed-restriction first paragraph. Stacks 070J/070I/08BJ/09T5/0FND/070Y/0A8D/0DVC match their labels; I read the 0FND normalization. The blueprint main-20261015 direct-images paragraph (3) agrees with agent origin. No SGA. Steps 1, 2, 4 and 6 are correct; the q=1 sign is absorbed by the chain condition, and the factorization through the invariant inclusion is unique because the inclusion is mono. Tests: q=0, q=1, identity adjunction, X=0 or N=0, trivial group. FIX 1: step 3 asserted without argument that the ∃-adjunction of the normalization node is the canonical adjunction, which step 5 needs to apply the shift node. I added the uniqueness argument: maps into K-injectives are Q of chain maps (kinjective-hom-derived, added to uses, already in proof_deps), every object is ≅ QJ', naturality, and the unit formula determines the adjunction. FIX 2: step 5 now says explicitly that the fixed K-injective shift makes α_{I[q]} correspond to α_I[q], and that the shift isomorphisms are natural. The stmt_dep on the bounded-below adjunction is a convention only, consistent with the parent's unbounded RΓ_G. I accept the six generic tool_uses. proof_deps is still the union of uses.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.ResolutionRoofInjectiveTranspose",
+  "declaration": "CategoryTheory.ResolutionRoof.injectiveTranspose",
+  "declarations": [
+   "CategoryTheory.ResolutionRoof.termwiseTranspose",
+   "CategoryTheory.ResolutionRoof.transposeFlat",
+   "CategoryTheory.ResolutionRoof.roof",
+   "CategoryTheory.ResolutionRoof.resolutionComparison",
+   "CategoryTheory.ResolutionRoof.shiftedDerivedTranspose",
+   "CategoryTheory.ResolutionRoof.injectiveTranspose",
+   "CategoryTheory.ResolutionRoof.internalTransposeFactorization"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/ResolutionRoofInjectiveTranspose.lean",
+  "statement": "theorem injectiveTranspose (adj : L ⊣ R) (X : B) (N : E) (P : CochainComplex E ℤ) [P.IsStrictlyLE 0] (e : P ⟶ (CochainComplex.singleFunctor E 0).obj (L.obj X)) [QuasiIso e] (I : InjectiveResolution N) (q : ℤ) (hq : 0 ≤ q) (f : P ⟶ ((CochainComplex.singleFunctor E 0).obj N)⟦q⟧) : (∃ h : (CochainComplex.singleFunctor E 0).obj (L.obj X) ⟶ I.cochainComplex⟦q⟧, Nonempty (Homotopy (e ≫ h) (f ≫ I.ι'⟦q⟧')) ∧ DerivedCategory.Q.map h = roof e f ≫ DerivedCategory.Q.map (I.ι'⟦q⟧')) ∧ (∀ h : (CochainComplex.singleFunctor E 0).obj (L.obj X) ⟶ I.cochainComplex⟦q⟧, Nonempty (Homotopy (e ≫ h) (f ≫ I.ι'⟦q⟧')) → DerivedCategory.Q.map (transposeFlat adj X I.cochainComplex q h) ≫ resolutionComparison R I.ι' = shiftedDerivedTranspose adj X N q (roof e f))",
+  "branch": "sheaf-dag",
+  "by": "Q82",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-a51939c20",
+  "group": "Q82",
+  "result": "pass",
+  "note": "Read item, 9 stmt_deps, module, report (Worker report + Second reading by Q82 present). Clause match: independent universes; Grothendieck on E only (K-injective instance is universe-polymorphic); L additive+exact, adj : L ⊣ R; P IsStrictlyLE 0; QuasiIso e; full InjectiveResolution I via cochainComplex/ι'; q ≥ 0; ∃ h with Homotopy and Q h = roof ≫ Q(ι'[q]); ∀ h with homotopy (formula implied) → Q(transposeFlat) ≫ β_a = Φ_q(roof). β_a = rightDerivedFunctorUnitQ ≫ inv RR(Qι') (direction OK); Φ_q = mapDerivedCategoryRightDerivedAdjunction.homEquiv with factors/single comparison and the canonical Q/RR shifts plus shiftShiftNeg (types checked by hand; adjunction is the one in lem-sp-canonical-right-derived-adjunction-shift); transposeFlat adds no sign. Internal clause: per-degree factorization through the invariant inclusion plus uniqueness, any topological G. Defs canonical, not hollow; theorems sorry only; docstrings carry the source and proof steps; lines ≤ 100; lean.statement verbatim; node changed only in lean. Edge cases q=0, zero objects, unbounded non-projective P, trivial G covered. Advisories: invariants A G / abelian instances owned by def-sfb-condensed-derived-invariants, not a stmt_dep (cannot be added in S2; precedent Q142/Q71/Q110); unused PlusAdjunction and proof-only imports; second reading done in-session. No files changed, no compile needed."
+ }
+}

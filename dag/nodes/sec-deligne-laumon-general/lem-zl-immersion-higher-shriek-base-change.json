@@ -1,0 +1,244 @@
+{
+ "id": "lem-zl-immersion-higher-shriek-base-change",
+ "kind": "statement",
+ "title": "Higher compact-support base change along a locally closed immersion",
+ "statement": "Fix a finite field $k_0=\\mathbf F_q$ of characteristic $p$, its algebraic closure $k$, a prime $\\ell\\ne p$ and an algebraic closure $\\Qlb$ of $\\mathbf Q_\\ell$. For every separated finite-type $k_0$-scheme $S_0$ write $S=S_0\\times_{k_0}k$. Use the common-stage coefficient categories $D^b_c(S,\\Qlb)$, their constructible hearts and their Weil objects as in [def-weil-weil-sheaf-complex; def-weil-constructible-heart]. A Weil complex is a pair with a geometric-Frobenius isomorphism; no triangulated structure on the category of pairs is assumed. Write $Rf_{0!}$ for the compact-support functor of [def-weil-integral-rational-qbar-compact-support], with its induced Weil structure, and $\\mathcal H^r$ for the standard heart-valued cohomology functors [prop-constructible-truncations].\n\nLet\n$$\\begin{array}{ccc}X'_0&\\xrightarrow{g_0}&X_0\\\\ f'_0\\downarrow&&\\downarrow f_0\\\\ Y'_0&\\xrightarrow{h_0}&Y_0\\end{array}$$\nbe Cartesian [def-weil-pbc-cartesian-square], with all four schemes separated of finite type over $k_0$, $f_0$ separated of finite type, and $h_0$ a locally closed immersion (a closed immersion followed by an open immersion [def-weil-closed-immersion; def-weil-open-immersion]). All pullbacks are the derived coefficient pullbacks of [def-weil-derived-pullback-tensor-hom]; on constructible hearts their notation means their exact restriction. For every constructible Weil complex $K$ on $X_0$ and every $r\\in\\mathbf Z$, the canonical compact-support base-change map induces a natural isomorphism of constructible Weil sheaves\n$$h_0^*\\mathcal H^r(Rf_{0!}K)\\xrightarrow{\\sim}\\mathcal H^r(Rf'_{0!}g_0^*K).$$\nFor a constructible Weil sheaf $F$ on $X_0$, this specializes to\n$$h_0^*R^rf_{0!}F\\xrightarrow{\\sim}R^rf'_{0!}(g_0^*F),\\qquad R^rf_{0!}F:=\\mathcal H^r(Rf_{0!}(F[0])).$$\nBoth isomorphisms are induced by $\\mathcal H^r$ of the canonical derived exchange $h_0^*Rf_{0!}\\to Rf'_{0!}g_0^*$, using the standard cohomology comparisons for immersion pullbacks. They intertwine the Weil structures and are natural in $K$, respectively $F$. No properness of $f_0$ or smoothness of $h_0$ is assumed.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-general/sk-l-dl-general-excision/lem-zl-morphism-open-closed-reduction.proof.md",
+  "place": "Part 2: taking cohomology through the two immersion pullbacks in the compact-support base-change isomorphisms (old steps 7 and 9)."
+ },
+ "stmt_deps": [
+  "def-weil-weil-sheaf-complex",
+  "def-weil-constructible-heart",
+  "def-weil-integral-rational-qbar-compact-support",
+  "prop-constructible-truncations",
+  "def-weil-pbc-cartesian-square",
+  "def-weil-closed-immersion",
+  "def-weil-open-immersion",
+  "def-weil-derived-pullback-tensor-hom"
+ ],
+ "proof": [
+  {
+   "text": "Base change the given Cartesian square from $k_0$ to $k$, and forget the Weil structures temporarily. Apply clause (4) of [prop-functor-package] at the common-stage $\\Qlb$ coefficient stage to the underlying object of $K$. Its hypotheses are exactly the separated finite-type scheme setting and separated finite-type $f_0$ assumed here; the compact-support clause permits arbitrary base change, so applies to $h_0$ without properness or smoothness. It gives the actual canonical exchange isomorphism $B_K:h_0^*Rf_{0!}K\\xrightarrow{\\sim}Rf\\prime_{0!}g_0^*K$. By clause (1) of [fix-lem-exchanges], this is the specified compact-support exchange, natural in the coefficient object. The field-coefficient assertion of [fix-prop-coherence] says that these comparison maps are Weil-equivariant. Thus $B_K$ is an isomorphism of Weil pairs, natural in $K$; no triangulated structure on the category of pairs is used.",
+   "uses": [
+    "prop-functor-package",
+    "fix-prop-coherence",
+    "fix-lem-exchanges"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-general/sk-l-dl-general-excision/lem-zl-morphism-open-closed-reduction.proof.md",
+    "place": "Part 2: taking cohomology through the two immersion pullbacks in the compact-support base-change isomorphisms (old steps 7 and 9)."
+   }
+  },
+  {
+   "text": "Put $L=Rf_{0!}K$, which is bounded constructible by the domain assertion in [prop-functor-package]. Clause (1) of [lem-zl-immersion-weil-local-behavior], applied to the locally closed immersion $h_0$, supplies the canonical natural Weil isomorphism $c_{h,L}^r:\\mathcal H^r(h_0^*L)\\xrightarrow{\\sim}h_0^*\\mathcal H^r(L)$ for every $r\\in\\mathbf Z$. In particular this comparison uses the standard constructible heart, with the same common-stage coefficients as $B_K$.",
+   "uses": [
+    "prop-functor-package",
+    "lem-zl-immersion-weil-local-behavior"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-general/sk-l-dl-general-excision/lem-zl-morphism-open-closed-reduction.proof.md",
+    "place": "Part 2: taking cohomology through the two immersion pullbacks in the compact-support base-change isomorphisms (old steps 7 and 9)."
+   }
+  },
+  {
+   "text": "Apply the heart-valued cohomology functor of [prop-constructible-truncations] to $B_K$. The required arrow is explicitly $\\mathcal H^r(B_K)\\circ(c_{h,L}^r)^{-1}$. It is invertible: its inverse is $c_{h,L}^r\\circ\\mathcal H^r(B_K^{-1})$, by the identity and composition laws of a functor. Both factors are natural and Weil-equivariant by the preceding steps, so their composite is as well. This proves the complex assertion, with precisely the required canonical map and without a choice of a different exchange.",
+   "uses": [
+    "prop-constructible-truncations"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-general/sk-l-dl-general-excision/lem-zl-morphism-open-closed-reduction.proof.md",
+    "place": "Part 2: taking cohomology through the two immersion pullbacks in the compact-support base-change isomorphisms (old steps 7 and 9)."
+   }
+  },
+  {
+   "text": "For a constructible Weil sheaf $F$, take $K=F[0]$. By [lem-a1-constructible-pullback-t-exact] applied to the geometric map $g:X\\prime\\to X$, $g^*$ restricts to the exact functor of constructible hearts, hence the canonical heart embedding identifies $g_0^*(F[0])$ with $(g_0^*F)[0]$. This identification is the pullback comparison on heart objects and is Weil-equivariant by the field-coefficient coherence of [fix-prop-coherence]. Substitution in the arrow of step 3 gives $h_0^*R^rf_{0!}F\\xrightarrow{\\sim}R^rf\\prime_{0!}(g_0^*F)$, since $R^r(-)_!$ in the statement is defined by $\\mathcal H^r$ on the degree-zero input. Naturality follows by substituting the degree-zero image of every morphism $F\\to F\\prime$ into the naturality square in step 3.",
+   "uses": [
+    "lem-a1-constructible-pullback-t-exact",
+    "fix-prop-coherence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-general/sk-l-dl-general-excision/lem-zl-morphism-open-closed-reduction.proof.md",
+    "place": "Part 2: taking cohomology through the two immersion pullbacks in the compact-support base-change isomorphisms (old steps 7 and 9)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "prop-functor-package",
+  "fix-prop-coherence",
+  "fix-lem-exchanges",
+  "lem-zl-immersion-weil-local-behavior",
+  "prop-constructible-truncations",
+  "lem-a1-constructible-pullback-t-exact"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-general/sk-l-dl-general-excision/lem-zl-morphism-open-closed-reduction.proof.md",
+  "place": "Part 2, displayed derived compact-support base-change isomorphisms and the sentence beginning \"Sheaf form: the pullbacks\"; expanded using the cited existing nodes."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "In a cartesian square of schemes over a finite field with horizontal locally closed immersions the pullback of higher compact support direct image of a constructible ell adic Weil sheaf is isomorphic to the higher image of its restriction",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.pullbackRestrictIsoRestrict_hom_ι\", \"module\": \"Mathlib/AlgebraicGeometry/Restrict\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) (U : Y.Opens),\\n  CategoryTheory.CategoryStruct.comp (AlgebraicGeometry.pullbackRestrictIsoRestrict f U).hom\\n      ((TopologicalSpace.Opens.map f.base).obj U).ι =\\n    CategoryTheory.Limits.pullback.fst f U.ι\", \"doc\": \"Let $f: X \\\\to Y$ be a morphism of schemes, and $U$ be an open subset of $Y$. Let $\\\\phi$ be the canonical isomorphism `pullbackRestrictIsoRestrict f U` which identifies the pullback $X \\\\times_Y Y|_U$ w\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.conjugateEquiv_pullbackComp_inv\", \"module\": \"Mathlib/AlgebraicGeometry/Modules/Sheaf\", \"type\": \"∀ {X Y Z : AlgebraicGeometry.Scheme} (f : X ⟶ Y) (g : Y ⟶ Z),\\n  (CategoryTheory.conjugateEquiv\\n        ((AlgebraicGeometry.Scheme.Modules.pullbackPushforwardAdjunction g).comp\\n          (AlgebraicGeometry.Scheme.Modules.pullbackPushforwardAdjunction f))\\n        (AlgebraicGeometry.Scheme.Modules.pull\", \"doc\": \"For schemes $X, Y, Z$ and morphisms $f : X \\\\to Y$, $g : Y \\\\to Z$, the conjugate equivalence between the composition of pullback-pushforward adjunctions $ (g_\\\\ast \\\\dashv g^\\\\ast) \\\\circ (f_\\\\ast \\\\dashv f^\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.restrictFunctorIsoPullback\", \"module\": \"Mathlib/AlgebraicGeometry/Modules/Sheaf\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} →\\n  (f : X ⟶ Y) →\\n    [inst : AlgebraicGeometry.IsOpenImmersion f] →\\n      AlgebraicGeometry.Scheme.Modules.restrictFunctor f ≅ AlgebraicGeometry.Scheme.Modules.pullback f\", \"doc\": \"Given an open immersion $ f : X \\\\to Y $ of schemes, the restriction functor from the category of sheaves of modules over $ Y $'s structure sheaf to those over $ X $'s structure sheaf is naturally isom\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.pullbackPushforwardAdjunction\", \"module\": \"Mathlib/AlgebraicGeometry/Modules/Sheaf\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} →\\n  (f : X ⟶ Y) → AlgebraicGeometry.Scheme.Modules.pullback f ⊣ AlgebraicGeometry.Scheme.Modules.pushforward f\", \"doc\": \"For any morphism $ f : X \\to Y $ of schemes, the pullback functor from the category of sheaves of modules over $ Y $'s structure sheaf to the category of sheaves of modules over $ X $'s structure sheaf\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.restrictFunctorComp\", \"module\": \"Mathlib/AlgebraicGeometry/Modules/Sheaf\", \"type\": \"{X Y Z : AlgebraicGeometry.Scheme} →\\n  (f : X ⟶ Y) →\\n    (g : Y ⟶ Z) →\\n      [inst : AlgebraicGeometry.IsOpenImmersion f] →\\n        [inst_1 : AlgebraicGeometry.IsOpenImmersion g] →\\n          AlgebraicGeometry.Scheme.Modules.restrictFunctor (CategoryTheory.CategoryStruct.comp f g) ≅\\n            (Alge\", \"doc\": \"For two open immersions $ f : X \\\\to Y $ and $ g : Y \\\\to Z $ between schemes, the restriction functor for the composition $ g \\\\circ f $ is naturally isomorphic to the composition of the restriction fun\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.pullbackComp\", \"module\": \"Mathlib/AlgebraicGeometry/Modules/Sheaf\", \"type\": \"{X Y Z : AlgebraicGeometry.Scheme} →\\n  (f : X ⟶ Y) →\\n    (g : Y ⟶ Z) →\\n      (AlgebraicGeometry.Scheme.Modules.pullback g).comp (AlgebraicGeometry.Scheme.Modules.pullback f) ≅\\n        AlgebraicGeometry.Scheme.Modules.pullback (CategoryTheory.CategoryStruct.comp f g)\", \"doc\": \"For any schemes $X, Y, Z$ and morphisms $f : X \\\\to Y$, $g : Y \\\\to Z$, the composition of the pullback functors along $g$ and $f$ is naturally isomorphic to the pullback functor along the composition $\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.IdealSheafData.comapIso_hom_snd\", \"module\": \"Mathlib/AlgebraicGeometry/IdealSheaf/Functorial\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (I : Y.IdealSheafData) (f : X ⟶ Y),\\n  CategoryTheory.CategoryStruct.comp (I.comapIso f).hom (CategoryTheory.Limits.pullback.snd f I.subschemeι) =\\n    (I.comap f).subschemeMap I f ⋯\", \"doc\": \"Given a scheme $Y$ with ideal sheaf data $\\\\mathcal{I}$ defining a closed subscheme $Z \\\\subset Y$, and a morphism $f: X \\\\to Y$, the homomorphism component of the isomorphism between the comap subscheme\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.IdealSheafData.comapIso_hom_snd_assoc\", \"module\": \"Mathlib/AlgebraicGeometry/IdealSheaf/Functorial\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (I : Y.IdealSheafData) (f : X ⟶ Y) {Z : AlgebraicGeometry.Scheme}\\n  (h : I.subscheme ⟶ Z),\\n  CategoryTheory.CategoryStruct.comp (I.comapIso f).hom\\n      (CategoryTheory.CategoryStruct.comp (CategoryTheory.Limits.pullback.snd f I.subschemeι) h) =\\n    CategoryTheory.\", \"doc\": \"For schemes $X,Y$, ideal sheaf data $\\\\mathcal{I}$ on $Y$, morphism $f:X\\\\to Y$, and any morphism $h$ from the closed subscheme defined by $\\\\mathcal{I}$ to a scheme $Z$, the composition of the comap iso\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: returned Zariski structure-sheaf restrictions or scheme base changes, not higher compact-support images in the constructible Weil heart"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"WeilSheaf\", \"upperStar\", \"higherLowerShriek\"",
+   "results": "[loogle] OK 0 hit(s)",
+   "date": "2026-10-22",
+   "verdict": "no match: returned Zariski structure-sheaf restrictions or scheme base changes, not higher compact-support images in the constructible Weil heart"
+  },
+  {
+   "tool": "grep",
+   "query": "upperStar.*higherLowerShriek|higherLowerShriek.*baseChange|baseChange.*higherLowerShriek",
+   "results": "[grep] OK 0 hit(s)",
+   "date": "2026-10-22",
+   "verdict": "no match: returned Zariski structure-sheaf restrictions or scheme base changes, not higher compact-support images in the constructible Weil heart"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Base change for higher direct images with compact support of constructible ell adic Weil sheaves along an open or closed immersion",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.restrictAdjunction\", \"module\": \"Mathlib.AlgebraicGeometry.Modules.Sheaf\", \"type\": \": restrictFunctor f ⊣ pushforward f\", \"doc\": \"Given an open immersion $ f: X \\to Y $ of schemes, there is an adjunction between the restriction functor (mapping sheaves of modules on $ Y $ to those on $ X $) and the pushforward functor (mapping sh\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.restrictFunctorIsoPullback\", \"module\": \"Mathlib.AlgebraicGeometry.Modules.Sheaf\", \"type\": \": restrictFunctor f ≅ pullback f\", \"doc\": \"Given an open immersion $ f : X \\\\to Y $ of schemes, the restriction functor from the category of sheaves of modules over $ Y $'s structure sheaf to those over $ X $'s structure sheaf is naturally isom\"}\n  {\"name\": \"AlgebraicGeometry.SheafedSpace.IsOpenImmersion.isoRestrict_hom_ofRestrict_assoc\", \"module\": \"Mathlib.Geometry.RingedSpace.OpenImmersion\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] {X Y : AlgebraicGeometry.SheafedSpace C} (f : X ⟶ Y)\\n  [H : AlgebraicGeometry.SheafedSpace.IsOpenImmersion f] {Z : AlgebraicGeometry.SheafedSpace C} (h : Y ⟶ Z),\\n  CategoryTheory.CategoryStruct.comp (AlgebraicGeometry.SheafedSpace.IsOpenImmers\", \"doc\": \"Given an open immersion $ f : X ⟶ Y $ between sheafed spaces over a category $\\\\mathcal{C}$, this constructs an isomorphism from $X$ to the restriction of $Y$ to the open subset defined by the image of\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.instIsLeftAdjointRestrictFunctor\", \"module\": \"Mathlib.AlgebraicGeometry.Modules.Sheaf\", \"type\": \": (restrictFunctor f).IsLeftAdjoint\", \"doc\": \"For an open immersion $ f: X \\to Y $ between schemes, the restriction functor from the category of sheaves of modules over $ Y $ to the category of sheaves of modules over $ X $, induced by $ f $, has \"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.restrictStalkNatIso\", \"module\": \"Mathlib.AlgebraicGeometry.Modules.Sheaf\", \"type\": \"(f : X ⟶ Y) [IsOpenImmersion f] (x : X) :\\n  restrictFunctor f ⋙ toPresheaf _ ⋙ TopCat.Presheaf.stalkFunctor _ x ≅\\n    toPresheaf _ ⋙ TopCat.Presheaf.stalkFunctor _ (f x)\", \"doc\": \"For an open immersion of schemes $f: X \\\\to Y$ and a point $x \\\\in X$, this definition establishes a natural isomorphism between the functor that computes the stalk at $x$ of the pullback of a sheaf of \"}\n  {\"name\": \"AlgebraicGeometry.quasiCompact_isStableUnderBaseChange\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.QuasiCompact\", \"type\": \": MorphismProperty.IsStableUnderBaseChange @QuasiCompact\", \"doc\": \"If a morphism of schemes is quasi-compact, then any base change (pullback) of the morphism is also quasi-compact.\"}\n  {\"name\": \"AlgebraicGeometry.isOpenImmersion_stableUnderBaseChange\", \"module\": \"Mathlib.AlgebraicGeometry.OpenImmersion\", \"type\": \": MorphismProperty.IsStableUnderBaseChange @IsOpenImmersion\", \"doc\": \"The property of being an open immersion of schemes is stable under base change. That is, if $ f: X \\to Y $ is an open immersion and $ g: Z \\to Y $ is any morphism of schemes, then the base change $ f \\ti\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.restrictFunctorComp\", \"module\": \"Mathlib.AlgebraicGeometry.Modules.Sheaf\", \"type\": \"[IsOpenImmersion f] [IsOpenImmersion g] : restrictFunctor (f ≫ g) ≅ restrictFunctor g ⋙ restrictFunctor f\", \"doc\": \"For two open immersions $ f : X \\\\to Y $ and $ g : Y \\\\to Z $ between schemes, the restriction functor for the composition $ g \\\\circ f $ is naturally isomorphic to the composition of the restriction fun\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: returned Zariski structure-sheaf restrictions or scheme base changes, not higher compact-support images in the constructible Weil heart"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Cohomology sheaves of compact support base change commute with restriction to a locally closed stratum for mixed ell adic Weil complexes",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"HomologicalComplex.pOpcycles_restrictionOpcyclesIso_hom\", \"module\": \"Mathlib/Algebra/Homology/Embedding/RestrictionHomology\", \"type\": \"∀ {ι : Type u_1} {ι' : Type u_2} {c : ComplexShape ι} {c' : ComplexShape ι'} {C : Type u_3}\\n  [inst : CategoryTheory.Category.{v_1, u_3} C] [inst_1 : CategoryTheory.Limits.HasZeroMorphisms C]\\n  (K : HomologicalComplex C c') (e : c.Embedding c') [inst_2 : e.IsRelIff] (i j : ι) (hi : c.prev j = i) {i'\", \"doc\": \"The composition of the canonical projection from the restricted complex's object to its right homology object followed by the isomorphism to the original complex's homology equals the composition of t\"}\n  {\"name\": \"HomologicalComplex.restrictionCyclesIso_hom_iCycles\", \"module\": \"Mathlib/Algebra/Homology/Embedding/RestrictionHomology\", \"type\": \"∀ {ι : Type u_1} {ι' : Type u_2} {c : ComplexShape ι} {c' : ComplexShape ι'} {C : Type u_3}\\n  [inst : CategoryTheory.Category.{v_1, u_3} C] [inst_1 : CategoryTheory.Limits.HasZeroMorphisms C]\\n  (K : HomologicalComplex C c') (e : c.Embedding c') [inst_2 : e.IsRelIff] (j k : ι) (hk : c.next j = k) {j'\", \"doc\": \"For a homological complex $ K $, an embedding $ e $ between complex shapes, and indices $ j $ with $ e.f(j) = j' $, the composition of the isomorphism between cycles $ (K|_e)_\\text{cycles}(j) \\to K_\\text\"}\n  {\"name\": \"AlgebraicGeometry.exists_eq_pow_mul_of_is_compact_of_quasi_separated_space_aux_aux\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiSeparated\", \"type\": \"∀ {X : TopCat} (F : TopCat.Presheaf CommRingCat X) {U₁ U₂ U₃ U₄ U₅ U₆ U₇ : TopologicalSpace.Opens ↑X} {n₁ n₂ : ℕ}\\n  {y₁ : ↑(F.obj (Opposite.op U₁))} {y₂ : ↑(F.obj (Opposite.op U₂))} {f : ↑(F.obj (Opposite.op (U₁ ⊔ U₂)))}\\n  {x : ↑(F.obj (Opposite.op U₃))} (h₄₁ : U₄ ≤ U₁) (h₄₂ : U₄ ≤ U₂) (h₅₁ : U₅ ≤ U\", \"doc\": \"Given a topological space $X$, a presheaf $F$ of commutative rings on $X$, and open subsets $U_1, U_2, U_3, U_4, U_5, U_6, U_7$ satisfying inclusion relations $U_4 \\\\subseteq U_1 \\\\cap U_2$, $U_5 \\\\subse\"}\n  {\"name\": \"HomologicalComplex.pOpcycles_restrictionOpcyclesIso_inv\", \"module\": \"Mathlib/Algebra/Homology/Embedding/RestrictionHomology\", \"type\": \"∀ {ι : Type u_1} {ι' : Type u_2} {c : ComplexShape ι} {c' : ComplexShape ι'} {C : Type u_3}\\n  [inst : CategoryTheory.Category.{v_1, u_3} C] [inst_1 : CategoryTheory.Limits.HasZeroMorphisms C]\\n  (K : HomologicalComplex C c') (e : c.Embedding c') [inst_2 : e.IsRelIff] (i j : ι) (hi : c.prev j = i) {i'\", \"doc\": \"For a homological complex $ K $, an embedding $ e $ between complex shapes mapping index $ j $ to $ j' $, the composition of the morphism $ p: K_{j'} \\\\to Q $ (to the right homology object at $ j' $) w\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.restrictFunctorComp\", \"module\": \"Mathlib/AlgebraicGeometry/Modules/Sheaf\", \"type\": \"{X Y Z : AlgebraicGeometry.Scheme} →\\n  (f : X ⟶ Y) →\\n    (g : Y ⟶ Z) →\\n      [inst : AlgebraicGeometry.IsOpenImmersion f] →\\n        [inst_1 : AlgebraicGeometry.IsOpenImmersion g] →\\n          AlgebraicGeometry.Scheme.Modules.restrictFunctor (CategoryTheory.CategoryStruct.comp f g) ≅\\n            (Alge\", \"doc\": \"For two open immersions $ f : X \\\\to Y $ and $ g : Y \\\\to Z $ between schemes, the restriction functor for the composition $ g \\\\circ f $ is naturally isomorphic to the composition of the restriction fun\"}\n  {\"name\": \"ModuleCat.Tilde.toOpen_res\", \"module\": \"Mathlib/AlgebraicGeometry/Modules/Tilde\", \"type\": \"∀ {R : Type u} [inst : CommRing R] (M : ModuleCat R)\\n  (U V : TopologicalSpace.Opens ↑(AlgebraicGeometry.PrimeSpectrum.Top R)) (i : V ⟶ U),\\n  CategoryTheory.CategoryStruct.comp (ModuleCat.Tilde.toOpen M U) (M.tildeInModuleCat.map i.op) =\\n    ModuleCat.Tilde.toOpen M V\", \"doc\": \"For open subsets $U$ and $V$ of $\\\\operatorname{Spec}(R)$ with $V \\\\subseteq U$, the composition of the restriction map $\\\\widetilde{M}(U) \\\\to \\\\widetilde{M}(V)$ with the sheaf morphism induced by the inc\"}\n  {\"name\": \"SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackFree\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [inst_1 : CategoryTheory.Category.{v₂, u₂} D]\\n  {J : CategoryTheory.GrothendieckTopology C} {K : CategoryTheory.GrothendieckTopology D}\\n  {F : CategoryTheory.Functor C D} {S : CategoryTheory.Sheaf J RingCat} {R : CategoryTheor\", \"doc\": \"Given categories $\\\\mathcal{C}$ and $\\\\mathcal{D}$ with Grothendieck topologies $J$ and $K$, a continuous functor $F : \\\\mathcal{C} \\\\to \\\\mathcal{D}$, and a natural transformation $\\\\phi : S \\\\to F_*R$ betw\"}\n  {\"name\": \"CategoryTheory.Sheaf.ΓRes_map_assoc\", \"module\": \"Mathlib/CategoryTheory/Sites/GlobalSections\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] {J : CategoryTheory.GrothendieckTopology C} {A : Type u₂}\\n  [inst_1 : CategoryTheory.Category.{v₂, u₂} A] [inst_2 : CategoryTheory.HasWeakSheafify J A]\\n  [inst_3 : CategoryTheory.HasGlobalSectionsFunctor J A] (F : CategoryTheory.Sheaf J A) {V \", \"doc\": \"For a sheaf $ F $ on a category $\\\\mathcal{C}$ with values in $\\\\mathcal{A}$, given objects $U,V \\\\in \\\\mathcal{C}^{\\\\text{op}}$ and a morphism $f: U \\\\to V$, the composition of the global-to-local restrict\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: returned Zariski structure-sheaf restrictions or scheme base changes, not higher compact-support images in the constructible Weil heart"
+  },
+  {
+   "tool": "grep",
+   "query": "restrictStalkNatIso|restrictFunctorIsoPullback",
+   "results": "[grep] OK 5 hit(s)\n  {\"file\": \"Mathlib/AlgebraicGeometry/Modules/Sheaf.lean\", \"line\": \"346\", \"text\": \"This is isomorphic to the pullback functor (see `restrictFunctorIsoPullback`)\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Modules/Sheaf.lean\", \"line\": \"453\", \"text\": \"def restrictFunctorIsoPullback : restrictFunctor f ≅ pullback f :=\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Modules/Sheaf.lean\", \"line\": \"510\", \"text\": \"def restrictStalkNatIso (x : X) :\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Modules/Sheaf.lean\", \"line\": \"519\", \"text\": \"lemma germ_restrictStalkNatIso_hom_app (x : X) (M : Y.Modules) (hxU : x ∈ U) :\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Modules/Sheaf.lean\", \"line\": \"521\", \"text\": \"      (restrictStalkNatIso f x).hom.app M = M.presheaf.germ _ _ (by simpa) :=\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: returned Zariski structure-sheaf restrictions or scheme base changes, not higher compact-support images in the constructible Weil heart"
+  },
+  {
+   "tool": "grep",
+   "query": "higherLowerShriek|compactSupport.*baseChange|baseChange.*compactSupport",
+   "results": "0 hits: ",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern ring-module scalar base change, scheme restriction or ordinary sheaf pullback composition, not compact-support exchange in the common-stage constructible Weil category."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Base change isomorphism for cohomology sheaves of compactly supported direct image of constructible ell adic sheaves",
+   "results": "8 hits: IsBaseChange.basis.congr_simp, IsBaseChange.directSum, IsBaseChange.basis_repr_comp_apply, IsBaseChange.tensorEquiv, LinearEquiv.coe_baseChange, IsBaseChange.directSumPow, IsBaseChange.of_comp, AlgebraicGeometry.IsProper.isStableUnderBaseChange",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern ring-module scalar base change, scheme restriction or ordinary sheaf pullback composition, not compact-support exchange in the common-stage constructible Weil category."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"higherLowerShriek\", \"upperStar\"",
+   "results": "0 hits: ",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern ring-module scalar base change, scheme restriction or ordinary sheaf pullback composition, not compact-support exchange in the common-stage constructible Weil category."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Higher cohomology sheaves of compact support direct image commute with pullback along a locally closed immersion for constructible ell adic Weil complexes",
+   "results": "8 hits: AlgebraicGeometry.Scheme.Modules.restrictFunctorComp, SheafOfModules.pullbackComp, TopCat.Sheaf.pullbackPushforwardAdjunction, SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom, SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom_assoc, AlgebraicGeometry.Scheme.Modules.pushforwardComp, AlgebraicGeometry.Scheme.Modules.conjugateEquiv_pullbackComp_inv, AlgebraicGeometry.Scheme.Modules.pullbackPushforwardAdjunction",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern ring-module scalar base change, scheme restriction or ordinary sheaf pullback composition, not compact-support exchange in the common-stage constructible Weil category."
+  },
+  {
+   "tool": "grep",
+   "query": "lowerShriek|LowerShriek|WeilSheaf",
+   "results": "0 hits: ",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern ring-module scalar base change, scheme restriction or ordinary sheaf pullback composition, not compact-support exchange in the common-stage constructible Weil category."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Inverse image of higher direct images with proper support is naturally isomorphic to higher direct images after restriction to a locally closed subscheme",
+   "results": "8 hits: AlgebraicGeometry.IsOpenImmersion.map_ΓIso_inv_apply, AlgebraicGeometry.Scheme.Modules.restrictFunctorComp, AlgebraicGeometry.Scheme.Hom.appIso_inv_appLE_assoc, AlgebraicGeometry.Scheme.Hom.app_appIso_inv, AlgebraicGeometry.Scheme.Hom.appLE_appIso_inv_apply, AlgebraicGeometry.morphismRestrictRestrict, AlgebraicGeometry.Scheme.Hom.appLE_appIso_inv_assoc, AlgebraicGeometry.Scheme.Hom.app_invApp'_assoc",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern ring-module scalar base change, scheme restriction or ordinary sheaf pullback composition, not compact-support exchange in the common-stage constructible Weil category."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-zl-morphism-open-closed-reduction",
+  "date": "2026-10-22",
+  "group": "Q15"
+ },
+ "chapter": "sec-deligne-laumon-general",
+ "unit": "sk-l-dl-general-excision",
+ "blueprint": {
+  "from": {
+   "node": "lem-zl-morphism-open-closed-reduction",
+   "place": "Part 2: taking cohomology through the two immersion pullbacks in the compact-support base-change isomorphisms (old steps 7 and 9).",
+   "via": []
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-zl-immersion-higher-shriek-base-change",
+  "worker": "stage1",
+  "summary": "Q36: expanded the cohomology consequence of canonical compact-support exchange in four steps, reusing existing derived base change, field Weil coherence, immersion cohomology comparison, and general constructible pullback t-exactness. Statement unchanged; no new nodes.",
+  "blueprint": "lem-zl-morphism-open-closed-reduction, Part 2: displayed base-change isomorphisms and the exact-pullback cohomology passage in its Sheaf form paragraph.",
+  "tool_uses": [
+   {
+    "node": "prop-functor-package",
+    "why": "The ancestor proof explicitly uses clause (4) for arbitrary compact-support base change."
+   },
+   {
+    "node": "fix-prop-coherence",
+    "why": "Supplies field-coefficient Weil equivariance of the actual exchange, which the unit invokes without restating."
+   },
+   {
+    "node": "prop-constructible-truncations",
+    "why": "Supplies the standard heart-valued cohomology functors used by the unit."
+   },
+   {
+    "node": "lem-a1-constructible-pullback-t-exact",
+    "why": "General coefficient pullback t-exactness identifies pullback of a heart object with the degree-zero embedding of its restriction; no new local lemma is needed."
+   },
+   {
+    "node": "fix-lem-exchanges",
+    "why": "Identifies the actual canonical compact-support transformation at the coefficient stages and states its naturality; the unit does not reprove exchange functoriality."
+   }
+  ]
+ },
+ "tool_uses": [
+  "prop-functor-package",
+  "fix-prop-coherence",
+  "prop-constructible-truncations",
+  "lem-a1-constructible-pullback-t-exact",
+  "fix-lem-exchanges"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q36-f41eb3709",
+  "group": "Q36",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q36-f41eb3709 (reviewer sub-agent of L); spot-checked: I read all of the mathematics. The source is the main-20261015 lem-zl-morphism-open-closed-reduction.proof.md Part 2: arbitrary compact-support base change via prop-functor-package(4), then H^r through exact immersion pullbacks. The item generalizes it correctly to any locally closed immersion. Its statement and stmt_deps are unchanged from the base, and there are no new nodes. The item is a first split, created as a child by Q15's re-split of its parent; the parent's live step cites it for j'^*/i'^* of R^r f_{0!}F. Neither the item nor its citations are in the drop list. Step 1: B_K is the specified Ex_! of prop-functor-package(4) at the common Q̄_ℓ stage (separated finite-type square). Its naturality comes from fix-lem-exchanges(1) and its Weil-equivariance from fix-prop-coherence. Step 2: lem-zl-immersion-weil-local-behavior(1) gives the natural Weil isomorphism H^a(h^*L)≅h^*H^a(L) for locally closed immersions, with matching hypotheses. Step 3: the composite H^r(B_K)∘c^{-1} is invertible by the functor laws, which is elementary. Step 4: lem-a1-constructible-pullback-t-exact (any morphism of finite-type k-schemes) gives g^*(F[0])=(g^*F)[0]. The extra fix-prop-coherence citation in step 4 is more than needed but harmless. Edge cases checked: r<0, empty Y', h=id, non-proper f. No duplicate found by rg -L. Batch-5 finding: the closure of both targets with and without the item's new proof dependencies is identical (19713 nodes, 0 added). fix-prop-coherence is used only for general six-functor Weil coherence, def-weil-local-frobenius-trace is a definition, and constructible pullback t-exactness is general. None of these is a step of the trace formula or of PD, so all are accepted. The tool_uses for the off-unit generic six-functor and t-structure nodes are accepted. No fixes."
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ }
+}

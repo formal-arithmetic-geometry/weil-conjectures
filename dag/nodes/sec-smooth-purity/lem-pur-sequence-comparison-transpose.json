@@ -1,0 +1,157 @@
+{
+ "id": "lem-pur-sequence-comparison-transpose",
+ "kind": "statement",
+ "title": "Compatibility of normalized universal coefficient comparisons with transposition",
+ "statement": "In the finite-field, l-invertible, finite-type setting of [def-weil-finite-field-fiber], let S be a supplied coherent coefficient calculus [lem-coef-derived-system-evaluation-calculus], O the ordinary quotient projection and H its constant-ring factorization [def-pur-sequence-adjoint-resolution-data]. Fix any right pair RP, eta and comparison kappa satisfying the representative normalization of [lem-pur-sequence-kinjective-comparison-shifts]. There exists a normalized universal K-flat comparison A [lem-pur-sequence-kflat-comparison-shifts] such that for every base complex Q, system complex I and chain map f:O.pullback(Q) to I, the S-transpose of A.reductionCounit_Q followed by [f] equals the localized ordinary transpose of f, followed by the localized ordinary-limit comparison O.limit_I, followed by eta_I and kappa_[I]. Q and I need not themselves be resolving. This is compatibility of the two universal coefficient comparisons with the ordinary chain-map transpose, before any simultaneous replacement is chosen.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-compatibility/fix-prop-coherence.proof.md",
+  "place": "Coefficient-comparison paragraph, via original sequence-projection normalization proof steps."
+ },
+ "stmt_deps": [
+  "def-pur-sequence-adjoint-resolution-data",
+  "def-coef-ringed-sequence-site",
+  "lem-coef-derived-system-evaluation-calculus",
+  "def-weil-finite-field-fiber",
+  "lem-pur-sequence-kflat-comparison-shifts",
+  "lem-pur-sequence-kinjective-comparison-shifts"
+ ],
+ "proof": [
+  {
+   "text": "Take the normalized universal K-flat comparison on the strict ordinary quotient pullback. On a flat-term K-flat representative its counit is the common strict-model comparison, including all quotient transitions.",
+   "uses": [
+    "lem-pur-sequence-kflat-comparison-shifts",
+    "lem-pc-kflat-resolution"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 06YY and 06YS, K-flat computation of derived pullback."
+   }
+  },
+  {
+   "text": "Use the constant-ring factorization and the normalized right comparison. On K-injective systems and every simultaneous tower replacement the comparison is represented by lim(j); no assertion that restriction preserves K-injectives is needed.",
+   "uses": [
+    "lem-pur-sequence-kinjective-comparison-shifts",
+    "lem-weil-pbc-ringed-topoi-derived-pushforward-composition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0D6E, lemma-derived-pushforward-composition."
+   }
+  },
+  {
+   "text": "Apply resolving-class derived adjunction normalization to obtain the ordinary-transpose formula for the universal comparisons. Transport the canonical full Hom correspondence to the supplied coefficient reduction and total limit, choosing the left comparison compatibly with that transport.",
+   "uses": [
+    "lem-sfb-resolving-derived-adjunction-normalization",
+    "lem-coef-sequence-pushforward-limit-projections",
+    "lem-coef-derived-system-evaluation-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 09T5, lemma-derived-adjoint-functors, and preceding pre-derived adjunction lemma."
+   }
+  },
+  {
+   "text": "Cover full system Hom sets by K-flat and K-injective representatives, and extend by naturality and inversion of quasi-isomorphisms to arbitrary complex inputs. This yields the displayed chain-map formula with the ordinary limit comparison inserted. No faithfulness of evaluation is invoked.",
+   "uses": [
+    "lem-pc-kflat-resolution",
+    "prop-pur-kinjective-resolutions-exist",
+    "lem-coef-sequence-projection-derived-adjunction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tags 070I and 09T5, K-injective Hom computation and fraction-extension adjunction."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-pur-sequence-kflat-comparison-shifts",
+  "lem-pc-kflat-resolution",
+  "lem-pur-sequence-kinjective-comparison-shifts",
+  "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
+  "lem-sfb-resolving-derived-adjunction-normalization",
+  "lem-coef-sequence-pushforward-limit-projections",
+  "lem-coef-derived-system-evaluation-calculus",
+  "prop-pur-kinjective-resolutions-exist",
+  "lem-coef-sequence-projection-derived-adjunction"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-compatibility/fix-prop-coherence.proof.md",
+  "place": "Coefficient-comparison paragraph, via original sequence-projection normalization proof steps."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Ringed projection from a sequence site factors through the constant ring, with exact restriction of scalars and inverse limit direct image",
+   "results": "Read eight hits, including SheafOfModules.Presentation.map_π_eq and CondensedMod.ofSheafProfinite; none states the sequence-site factorization or its normalized coefficient interface.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.leftAdjointUniq",
+   "results": "Read leftAdjointUniq, unit_leftAdjointUniq_hom_app, leftAdjointUniq_hom_app_counit. These provide adjunction transport, not the sequence geometry or the supplied derived coefficient normalization.",
+   "date": "2026-10-24",
+   "verdict": "partial match: generic transport API used in the assembly"
+  },
+  {
+   "tool": "grep",
+   "query": "Ringed.*[Ff]actor|homEquiv_ofNatIsoRight|derivedη_fac_app",
+   "results": "Read Mathlib/CategoryTheory/Adjunction/Basic.lean homEquiv_ofNatIsoRight_apply and Mathlib/CategoryTheory/Functor/Derived/Adjunction.lean derivedη_fac_app. These are generic normalization formulas, with no actual quotient tower or coefficient calculus.",
+   "date": "2026-10-24",
+   "verdict": "partial match: generic API only"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.PurSequenceProjectionHomNormalization",
+  "date": "2026-10-24",
+  "group": "S6"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-thm-sf-compatibility",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pur-sequence-projection-hom-normalization",
+   "place": "Original proof steps 3–7: chain-map compatibility of the two canonical universal comparisons."
+  },
+  "same_as": []
+ },
+ "lean": {
+  "module": "Sheaf.Paper.PurSequenceComparisonTranspose",
+  "file": "lean/Sheaf/Paper/PurSequenceComparisonTranspose.lean",
+  "declaration": "WeilConjectures.purSequenceComparisonTranspose",
+  "statement": "theorem purSequenceComparisonTranspose\n    (F : FiniteFieldDatum.{t}) (hl : l ≠ F.p)\n    [W.Over (Spec (.of F.k))]\n    [LocallyOfFiniteType (W ↘ Spec (.of F.k))] [QuasiCompact (W ↘ Spec (.of F.k))]\n    (S : CoefficientDerivedSystemCalculus l E W)\n    (hS : CoefficientDerivedSystemCoherence l E W S)\n    (O : PurSequenceOrdinaryAdjoints l E W)\n    (H : PurSequenceRingedFactorization l E W O)\n    (RP : coefficientSequenceDerived l E W ⥤\n      DerivedCategory (scalarReductionSource l E W))\n    (η : (SequenceKInjectiveComparison.push l E W).mapHomologicalComplex (.up ℤ) ⋙\n      DerivedCategory.Q ⟶ DerivedCategory.Q ⋙ RP)\n    (κ : RP ≅ coefficientSequenceLimit l E W)\n    (hn : SequenceKInjectiveComparison.Normalization l E W RP η κ) :\n    ∃ A : PurSequenceKFlatComparison l E W S O,\n    ∀ (Q : CochainComplex (scalarReductionSource l E W) ℤ)\n    (I : CochainComplex (coefficientSequenceModules l E W) ℤ)\n    (f : (O.pullback.mapHomologicalComplex (.up ℤ)).obj Q ⟶ I),\n    S.adjunction.homEquiv (DerivedCategory.Q.obj Q) (DerivedCategory.Q.obj I)\n      (A.reductionCounit.app Q ≫ DerivedCategory.Q.map f) =\n    DerivedCategory.Q.map ((O.adjunction.mapHomologicalComplex (.up ℤ)).homEquiv Q I f) ≫\n      DerivedCategory.Q.map ((NatIso.mapHomologicalComplex O.limit (.up ℤ)).hom.app I) ≫\n      η.app I ≫ κ.hom.app (DerivedCategory.Q.obj I)",
+  "branch": "sheaf-dag",
+  "by": "S6",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S6",
+  "result": "pass",
+  "landing": "20261024T191050-L-238762",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S6",
+  "result": "pass",
+  "landing": "20261024T191050-L-238762",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

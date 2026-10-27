@@ -13,6 +13,9 @@ import Mathlib.CategoryTheory.Comma.StructuredArrow.Small
 import Mathlib.AlgebraicGeometry.Noetherian
 import Sheaf.Paper.CoefficientHeartClosure
 import Sheaf.Paper.CoefficientHeartSmall
+public import Mathlib.AlgebraicGeometry.QuasiAffine
+public import Mathlib.RingTheory.DedekindDomain.Basic
+public import Mathlib.RingTheory.DedekindDomain.Dvr
 
 /-!
 # Kernels and cokernels of ind-constructible sheaves

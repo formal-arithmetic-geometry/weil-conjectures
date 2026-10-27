@@ -193,7 +193,18 @@
   "def-weil-scheme-morphism-properties"
  ],
  "proof_split_by": "paragraphs",
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
  "chapter": "sec-smooth-purity",
  "unit": "sk-prop-a1-kummer",
  "split_report": {
@@ -282,5 +293,32 @@
   "landing": "20261020T211723-L-3492915",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ },
+ "blueprint_update": {
+  "snapshot": "main-20261023-1620",
+  "commit": "7284bb09daf97437d544c51882b325f9c52cd345",
+  "changed": [
+   "proof"
+  ],
+  "statement": "Let $T$ be a scheme, let $B,C\\subseteq T$ be\nclosed subschemes, and\nput $V=T\\setminus C$, with open immersion $v:V\\hookrightarrow T$.\nLet $F$ be a bounded-below complex of module sheaves on the\nsmall etale site.\nWrite $R\\Gamma_B(T,F)$ for the derived functor of the\nsections supported on $B$,\nwhose cohomology is the\ncohomology with support.\nThere is a natural distinguished triangle in the\nderived category of modules:\n\n$$\nR\\Gamma_{B\\cap C}(T,F)\\longrightarrow R\\Gamma_B(T,F)\n\\longrightarrow R\\Gamma_{B\\cap V}(V,v^*F)\\longrightarrow\nR\\Gamma_{B\\cap C}(T,F)[1].\n$$\n\nThe third support is closed in $V$; its ambient scheme is $V$.",
+  "proof": [
+   {
+    "text": "Choose a bounded-below injective resolution $F\\to I^\\bullet$\nas in [def-sp-kinjective-bridge].\nFor the closed immersion $i:B\\hookrightarrow T$, the\n[def-pur-flasque-support] functor $i^!$ is right adjoint to\nthe exact functor $i_*$; hence $i^!$ preserves injectives.\nThe functor $i_*$ also preserves injectives, since it is right\nadjoint to the exact restriction $i^*$.\nConsequently $\\mathcal G_BI=i_*i^!I$ is injective whenever $I$\nis injective. An injective sheaf has surjective restriction of\nsections to an open subset: apply its lifting property to the\nmonomorphism from the free module sheaf of that open subset to\nthe constant free module sheaf.\nRestriction to $V$ is exact and commutes with the support kernel,\nso\n\n$$\n(\\mathcal G_BI)|_V=\\mathcal G_{B\\cap V}(I|_V).\n$$",
+    "uses": [
+     "def-sp-kinjective-bridge",
+     "def-pur-flasque-support"
+    ],
+    "elementary": false
+   },
+   {
+    "text": "The kernel of the resulting surjection\n$\\Gamma_B(T,I)\\to\\Gamma_{B\\cap V}(V,I|_V)$ consists precisely of\nsections supported on both $B$ and $C$, namely\n$\\Gamma_{B\\cap C}(T,I)$.\nThis gives a short exact sequence of complexes of sections.\nBy the exactness of extension by zero in\n[def-weil-open-closed-recollement], the restriction $v^*$\npreserves injectives. Thus all three complexes compute the\nderived support functors of [def-pur-support-cohomology].\nThe cone triangle of the short exact sequence proves the assertion.\nAll maps come from support inclusion and restriction, so the\ncomparison theorem for injective resolutions makes the triangle\nnatural in $F$.",
+    "uses": [
+     "def-weil-open-closed-recollement",
+     "def-pur-support-cohomology"
+    ],
+    "elementary": false
+   }
+  ],
+  "note": "the current blueprint (main-20261023-1620, weil-conjectures-blueprint 7284bb09da) states or proves this differently; a worker who touches the node follows it"
  }
 }

@@ -14,7 +14,7 @@ import Sheaf.Paper.ContinuousRingUniverseRealization
 import WeilConjectures.CategoryTheory.Sites.MonObj
 import Mathlib.CategoryTheory.Preadditive.HomOrthogonal
 import Mathlib.Topology.MetricSpace.Ultra.TotallySeparated
-import Mathlib.Analysis.Normed.Algebra.Ultra
+public import Mathlib.Analysis.Normed.Algebra.Ultra
 import WeilConjectures.CategoryTheory.ModuleObjects.FinitelyPresentedComap
 
 /-!

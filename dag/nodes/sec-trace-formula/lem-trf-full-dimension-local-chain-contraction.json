@@ -1,0 +1,273 @@
+{
+ "id": "lem-trf-full-dimension-local-chain-contraction",
+ "kind": "statement",
+ "title": "Optimal local prime chains contract from zero to the prescribed maximal ideal",
+ "statement": "Let $A$ be a nonzero commutative integral domain (so $ab=0$ implies $a=0$ or $b=0$), let $\\mathfrak m\\subset A$ be a maximal ideal, and let $B=A_{\\mathfrak m}$ with canonical fraction map $\\lambda:A\\to B$, $a\\mapsto a/1$ [def-weil-pbc-localization-at-prime]. Suppose $r\\geq0$ is an integer and $\\dim A=\\dim B=r$, with Krull dimension and strict prime chains as in [def-weil-pbc-krull-dimension-ring]. Then $B$ has a strict prime chain $\\mathfrak q_0\\subsetneq\\cdots\\subsetneq\\mathfrak q_r$ of length $r$. For every such chain, its contracted ideals $\\mathfrak p_i=\\lambda^{-1}(\\mathfrak q_i)$ are prime and satisfy $\\mathfrak p_0\\subsetneq\\cdots\\subsetneq\\mathfrak p_r\\subseteq\\mathfrak m$, $\\mathfrak p_0=(0)$, and $\\mathfrak p_r=\\mathfrak m$. Thus the contracted chain has both prescribed endpoints, including when $r=0$.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tag 00E3, lemma-spec-localization: prime extension and contraction; finite-supremum attainment and endpoint maximality expand the maximal-local-chain argument of Morphisms Tag 02JX, lemma-alteration-dimension, equality proof."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-localization-at-prime",
+  "def-weil-pbc-krull-dimension-ring"
+ ],
+ "proof": [
+  {
+   "text": "By [def-weil-pbc-krull-dimension-ring], every prime-chain length in $B$ is at most $r$, and their supremum is $r$. If $r>0$ and no chain had length $r$, all lengths, being integers, would be at most $r-1$, making that supremum at most $r-1$, a contradiction. If $r=0$, absence of a length-zero chain would mean there are no primes and hence dimension $-\\infty$, again a contradiction. Thus a length-$r$ chain exists. Fix any such chain for the remaining steps. The same definition and $\\dim A=r$ imply that every prime chain in $A$ has length at most $r$; we use this bound for both endpoints.",
+   "uses": [
+    "def-weil-pbc-krull-dimension-ring"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00KE, definition-Krull: dimension is the supremum of nonnegative integer prime-chain lengths; the finite-supremum attainment argument is written out here."
+   }
+  },
+  {
+   "text": "The maximal ideal $\\mathfrak m$ is prime: if $ab\\in\\mathfrak m$ and $a\\notin\\mathfrak m$, maximality gives $1=x+ca$ with $x\\in\\mathfrak m$, so $b=xb+cab\\in\\mathfrak m$. Apply clause (1) of [lem-weil-pbc-primes-of-localization] to $R=A$ and $\\mathfrak p=\\mathfrak m$. Contraction sends each $\\mathfrak q_i$ to the prime $\\mathfrak p_i=\\lambda^{-1}(\\mathfrak q_i)\\subseteq\\mathfrak m$ and preserves inclusions. If adjacent contracted primes were equal, injectivity of the stated bijection would give $\\mathfrak q_i=\\mathfrak q_{i+1}$, contradicting strictness. Thus the contracted chain is strict.",
+   "uses": [
+    "lem-weil-pbc-primes-of-localization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00E3, lemma-spec-localization: contraction and inverse extension for localization at the complement of a prime."
+   }
+  },
+  {
+   "text": "The zero ideal of $A$ is proper and prime because $A$ is a nonzero domain: $ab\\in(0)$ implies $a=0$ or $b=0$. Since $(0)$ is contained in every ideal, if $\\mathfrak p_0\\ne(0)$ then $(0)\\subsetneq\\mathfrak p_0$. Prepending $(0)$ to the contracted chain therefore gives a strict prime chain of length $r+1$ in $A$. This contradicts $\\dim A=r$ by [def-weil-pbc-krull-dimension-ring] and the bound established in step 1. Hence $\\mathfrak p_0=(0)$.",
+   "uses": [
+    "def-weil-pbc-krull-dimension-ring"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00KE, definition-Krull: no prime chain in A can have length r+1 when dim A=r; explicit endpoint argument expanding the local-chain use in Morphisms Tag 02JX, lemma-alteration-dimension, equality proof."
+   }
+  },
+  {
+   "text": "We already know $\\mathfrak p_r\\subseteq\\mathfrak m$, and $\\mathfrak m$ is prime by step 2. If this inclusion were strict, appending $\\mathfrak m$ would give a strict prime chain of length $r+1$ in $A$, contrary to [def-weil-pbc-krull-dimension-ring] and $\\dim A=r$. Thus $\\mathfrak p_r=\\mathfrak m$. When $r=0$ the same prepend and append arguments apply to the single prime $\\mathfrak p_0$, giving $(0)=\\mathfrak p_0=\\mathfrak m$ without excluding this case.",
+   "uses": [
+    "def-weil-pbc-krull-dimension-ring"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00KE, definition-Krull: no prime chain in A can have length r+1 when dim A=r; explicit endpoint argument expanding the local-chain use in Morphisms Tag 02JX, lemma-alteration-dimension, equality proof."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-krull-dimension-ring",
+  "lem-weil-pbc-primes-of-localization"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tags 00KE (definition-Krull) and 00E3 (lemma-spec-localization); explicit finite-supremum and endpoint arguments expanding the local-chain step in Morphisms Tag 02JX (lemma-alteration-dimension)."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "exists.*(chain|series)|exists.*length.*height|height.*exists|exists.*height",
+   "results": "{\"t\": \"2026-10-22T05:55:51Z\", \"tool\": \"grep\", \"query\": \"exists.*(chain|series)|exists.*length.*height|height.*exists|exists.*height\", \"sub\": \"RingTheory/KrullDimension\", \"ok\": true, \"n_hits\": 2, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/KrullDimension/Regular.lean\", \"Mathlib/RingTheory/KrullDimension/Regular.lean\"], \"digest\": \"ca7ad39e59538b51\"}; Only ingredients: height attainment, dimension-height equality, and prime correspondence; no assertion about every optimal localized chain and both contracted endpoints.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A prime ideal of finite height in a domain admits a strict prime ideal chain from zero to that prime realizing its height",
+   "results": "{\"t\": \"2026-10-22T05:55:52Z\", \"tool\": \"leansearch\", \"query\": \"A prime ideal of finite height in a domain admits a strict prime ideal chain from zero to that prime realizing its height\", \"sub\": \"\", \"ok\": false, \"n_hits\": 0, \"note\": \"service unavailable: {\\\"error\\\":\\\"Rate limit exceeded: 60 per 1 minute\\\"}\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}; Only ingredients: height attainment, dimension-height equality, and prime correspondence; no assertion about every optimal localized chain and both contracted endpoints.",
+   "date": "2026-10-22",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"PrimeSpectrum\", \"LTSeries\"",
+   "results": "{\"t\": \"2026-10-22T05:55:52Z\", \"tool\": \"loogle\", \"query\": \"\\\"PrimeSpectrum\\\", \\\"LTSeries\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"PrimeSpectrum.exist_ltSeries_mem_one_of_mem_last\"], \"digest\": \"de9e03419b496c60\"}; Only ingredients: height attainment, dimension-height equality, and prime correspondence; no assertion about every optimal localized chain and both contracted endpoints.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "If a domain A and its localization at a maximal ideal m both have finite Krull dimension r there exists a strict prime chain of length r from zero to m",
+   "results": "{\"t\": \"2026-10-22T05:56:06Z\", \"tool\": \"leanfinder\", \"query\": \"If a domain A and its localization at a maximal ideal m both have finite Krull dimension r there exists a strict prime chain of length r from zero to m\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Ring.krullDimLE_of_isLocalization_maximal\", \"IsLocalization.AtPrime.ringKrullDim_eq_height\", \"Ring.KrullDimLE.of_isLocalization\", \"Ideal.primeHeight_eq_ringKrullDim_iff\", \"IsLocalRing.maximalIdeal_primeHeight_eq_ringKrullDim\", \"Ideal.sup_primeHeight_of_maximal_eq_ringKrullDim\", \"ringKrullDim_le_ringKrullDim_quotSMulTop_succ\", \"Module.ringKrullDim_quotient_add_one_of_mem_nonZeroDivisors\"], \"digest\": \"1f5eb213be02ad49\"}; Only ingredients: height attainment, dimension-height equality, and prime correspondence; no assertion about every optimal localized chain and both contracted endpoints.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "exists.*length|length.*exists|chain.*height|height.*chain|LTSeries",
+   "results": "{\"t\": \"2026-10-22T05:56:19Z\", \"tool\": \"grep\", \"query\": \"exists.*length|length.*exists|chain.*height|height.*chain|LTSeries\", \"sub\": \"Order/KrullDimension\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}; Only ingredients: height attainment, dimension-height equality, and prime correspondence; no assertion about every optimal localized chain and both contracted endpoints.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"height\", \"LTSeries\"",
+   "results": "{\"t\": \"2026-10-22T05:56:20Z\", \"tool\": \"loogle\", \"query\": \"\\\"height\\\", \\\"LTSeries\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 2, \"note\": \"\", \"top\": [\"LTSeries.height_last_longestOf\", \"Ideal.exists_ltSeries_length_eq_height\"], \"digest\": \"6923213bc79a426b\"}; Only ingredients: height attainment, dimension-height equality, and prime correspondence; no assertion about every optimal localized chain and both contracted endpoints.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsLocalization.AtPrime\", \"ringKrullDim\"",
+   "results": "{\"t\": \"2026-10-22T05:56:20Z\", \"tool\": \"loogle\", \"query\": \"\\\"IsLocalization.AtPrime\\\", \\\"ringKrullDim\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"IsLocalization.AtPrime.ringKrullDim_eq_height\"], \"digest\": \"fa14187c85dfb6d1\"}; Only ingredients: height attainment, dimension-height equality, and prime correspondence; no assertion about every optimal localized chain and both contracted endpoints.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "exists_ltSeries_length_eq_height|head.*(bot|minimal)|longest.*head|head.*longest|last.*longest",
+   "results": "{\"t\": \"2026-10-22T05:56:30Z\", \"tool\": \"grep\", \"query\": \"exists_ltSeries_length_eq_height|head.*(bot|minimal)|longest.*head|head.*longest|last.*longest\", \"sub\": \"RingTheory/Ideal/Height.lean\", \"ok\": true, \"n_hits\": 2, \"note\": \"\", \"top\": [\"97\", \"196\"], \"digest\": \"257e88ac4d17c994\"}; Only ingredients: height attainment, dimension-height equality, and prime correspondence; no assertion about every optimal localized chain and both contracted endpoints.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "head.*bot|head.*minimal|head.*longest|longest.*head|longestOf|exists.*length",
+   "results": "{\"t\": \"2026-10-22T05:56:30Z\", \"tool\": \"grep\", \"query\": \"head.*bot|head.*minimal|head.*longest|longest.*head|longestOf|exists.*length\", \"sub\": \"Order/KrullDimension.lean\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"367\", \"704\", \"707\", \"708\", \"737\"], \"digest\": \"0048a5fa3aa80b55\"}; Only ingredients: height attainment, dimension-height equality, and prime correspondence; no assertion about every optimal localized chain and both contracted endpoints.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A finite dimensional integral domain with a maximal ideal of full height has a prime ideal series of maximal length with endpoints zero and that maximal ideal",
+   "results": "{\"t\": \"2026-10-22T05:56:40Z\", \"tool\": \"leanfinder\", \"query\": \"A finite dimensional integral domain with a maximal ideal of full height has a prime ideal series of maximal length with endpoints zero and that maximal ideal\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Ideal.exists_isMaximal_height\", \"Ideal.isMaximal_of_primeHeight_eq_ringKrullDim\", \"Ideal.primeHeight_eq_ringKrullDim_iff\", \"Ring.KrullDimLE.mk₁'\", \"Ring.DimensionLEOne.not_lt_lt\", \"Ring.krullDimLE_one_iff_of_noZeroDivisors\", \"Ideal.height_le_one_of_isPrincipal_of_mem_minimalPrimes_of_isLocalRing\", \"ringKrullDim_le_iff_isMaximal_height_le\"], \"digest\": \"0634b2d7d9878e3e\"}; Only ingredients: height attainment, dimension-height equality, and prime correspondence; no assertion about every optimal localized chain and both contracted endpoints.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "LTSeries|prime.*[Cc]hain|[Cc]hain.*prime",
+   "results": "{\"t\": \"2026-10-22T05:57:18Z\", \"tool\": \"grep\", \"query\": \"LTSeries|prime.*[Cc]hain|[Cc]hain.*prime\", \"sub\": \"RingTheory/Localization\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}; Only ingredients: height attainment, dimension-height equality, and prime correspondence; no assertion about every optimal localized chain and both contracted endpoints.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Contract a longest prime chain in a maximal localization of an integral domain to a chain with endpoints zero and the maximal ideal",
+   "results": "{\"t\": \"2026-10-22T05:57:18Z\", \"tool\": \"leansearch\", \"query\": \"Contract a longest prime chain in a maximal localization of an integral domain to a chain with endpoints zero and the maximal ideal\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"IsLocalization.AtPrime.map_eq_maximalIdeal\", \"IsLocalization.AtPrime.comap_maximalIdeal\", \"Ideal.under_map_of_isLocalizationAtPrime\", \"Localization.AtPrime.comap_maximalIdeal\", \"IsLocalization.AtPrime.mem_primesOver_of_isPrime\", \"IsDedekindDomain.primesOverEquivPrimesOver\", \"IsLocalization.AtPrime.liesOver_maximalIdeal\", \"IsLocalization.primeHeight_comap\"], \"digest\": \"588587febed6df39\"}; Only ingredients: height attainment, dimension-height equality, and prime correspondence; no assertion about every optimal localized chain and both contracted endpoints.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsLocalization\", \"LTSeries\"",
+   "results": "{\"t\": \"2026-10-22T05:57:18Z\", \"tool\": \"loogle\", \"query\": \"\\\"IsLocalization\\\", \\\"LTSeries\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}; Only ingredients: height attainment, dimension-height equality, and prime correspondence; no assertion about every optimal localized chain and both contracted endpoints.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a domain with dim A equal to dim A_m equal to r, length-r prime chains exist in A_m and contraction maps every such chain strictly from zero to the given maximal ideal m",
+   "results": "{\"t\": \"2026-10-22T05:57:38Z\", \"tool\": \"leanfinder\", \"query\": \"For a domain with dim A equal to dim A_m equal to r, length-r prime chains exist in A_m and contraction maps every such chain strictly from zero to the given maximal ideal m\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Ring.krullDimLE_of_isLocalization_maximal\", \"Ring.KrullDimLE.of_isLocalization\", \"Ideal.exists_ltSeries_length_eq_height\", \"IsLocalization.AtPrime.ringKrullDim_eq_height\", \"Ideal.height_le_one_of_isPrincipal_of_mem_minimalPrimes_of_isLocalRing\", \"Module.ringKrullDim_quotient_add_one_of_mem_nonZeroDivisors\", \"PrimeSpectrum.exist_mem_one_of_mem_maximal_ideal\", \"Ideal.primeHeight_eq_ringKrullDim_iff\"], \"digest\": \"4928f54092173a6e\"}; Only ingredients: height attainment, dimension-height equality, and prime correspondence; no assertion about every optimal localized chain and both contracted endpoints.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "LTSeries|chain.*(contract|local)|head.*bot|last.*maximal",
+   "results": "{\"t\": \"2026-10-22T07:11:40Z\", \"tool\": \"grep\", \"query\": \"LTSeries|chain.*(contract|local)|head.*bot|last.*maximal\", \"sub\": \"RingTheory/Localization\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}; Read the returned candidates: prime correspondence, height attainment and dimension-height identities are ingredients, not the full every-chain endpoint assertion.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A longest prime chain in a localization at a maximal ideal of a domain contracts from zero to that maximal ideal",
+   "results": "{\"t\": \"2026-10-22T07:11:41Z\", \"tool\": \"leansearch\", \"query\": \"A longest prime chain in a localization at a maximal ideal of a domain contracts from zero to that maximal ideal\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Ideal.under_map_of_isLocalizationAtPrime\", \"IsLocalization.AtPrime.map_eq_maximalIdeal\", \"IsLocalization.AtPrime.mem_primesOver_of_isPrime\", \"IsLocalization.AtPrime.liesOver_map_of_liesOver\", \"IsLocalization.AtPrime.comap_maximalIdeal\", \"IsLocalization.AtPrime.comap_map_eq_map\", \"IsLocalRing.le_maximalIdeal_of_isPrime\", \"IsLocalization.primeHeight_comap\"], \"digest\": \"366a1471247e56ba\"}; Read the returned candidates: prime correspondence, height attainment and dimension-height identities are ingredients, not the full every-chain endpoint assertion.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsLocalization\", \"LTSeries\"",
+   "results": "{\"t\": \"2026-10-22T07:11:41Z\", \"tool\": \"loogle\", \"query\": \"\\\"IsLocalization\\\", \\\"LTSeries\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}; Read the returned candidates: prime correspondence, height attainment and dimension-height identities are ingredients, not the full every-chain endpoint assertion.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "In a finite dimensional domain every longest prime ideal chain in the localization at a maximal ideal contracts strictly with endpoints zero and that maximal ideal when the two dimensions agree",
+   "results": "{\"t\": \"2026-10-22T07:11:43Z\", \"tool\": \"leanfinder\", \"query\": \"In a finite dimensional domain every longest prime ideal chain in the localization at a maximal ideal contracts strictly with endpoints zero and that maximal ideal when the two dimensions agree\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Ring.krullDimLE_of_isLocalization_maximal\", \"Ring.DimensionLEOne.localization\", \"Ideal.primeHeight_eq_ringKrullDim_iff\", \"IsLocalization.AtPrime.ringKrullDim_eq_height\", \"Ring.KrullDimLE.of_isLocalization\", \"ringKrullDim_le_ringKrullDim_add_card\", \"IsLocalRing.maximalIdeal_primeHeight_eq_ringKrullDim\", \"Ideal.exists_ltSeries_length_eq_height\"], \"digest\": \"fa2f02f62dd6ad93\"}; Read the returned candidates: prime correspondence, height attainment and dimension-height identities are ingredients, not the full every-chain endpoint assertion.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "exists_ltSeries_length_eq_height|head.*bot|last.*maximal|longestOf",
+   "results": "{\"t\": \"2026-10-22T07:12:04Z\", \"tool\": \"grep\", \"query\": \"exists_ltSeries_length_eq_height|head.*bot|last.*maximal|longestOf\", \"sub\": \"RingTheory/Ideal/Height.lean\", \"ok\": true, \"n_hits\": 4, \"note\": \"\", \"top\": [\"97\", \"191\", \"192\", \"196\"], \"digest\": \"97de5ee35d86401e\"}; Read the returned candidates: prime correspondence, height attainment and dimension-height identities are ingredients, not the full every-chain endpoint assertion.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "If dim A equals dim A_m equals r for a domain A then all length r chains in A_m contract to chains in A from the zero ideal to m",
+   "results": "{\"t\": \"2026-10-22T07:12:09Z\", \"tool\": \"leanfinder\", \"query\": \"If dim A equals dim A_m equals r for a domain A then all length r chains in A_m contract to chains in A from the zero ideal to m\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Ring.krullDimLE_of_isLocalization_maximal\", \"IsLocalization.AtPrime.ringKrullDim_eq_height\", \"Ideal.exists_ltSeries_length_eq_height\", \"Ring.KrullDimLE.of_isLocalization\", \"PrimeSpectrum.exist_ltSeries_mem_one_of_mem_last\", \"ringKrullDim_quotient\", \"ringKrullDim_le_ringKrullDim_quotSMulTop_succ\", \"ringKrullDim_add_length_eq_ringKrullDim_of_isRegular\"], \"digest\": \"af590ea3f86b54b1\"}; Read the returned candidates: prime correspondence, height attainment and dimension-height identities are ingredients, not the full every-chain endpoint assertion.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"height\", \"LTSeries\"",
+   "results": "{\"t\": \"2026-10-22T07:12:09Z\", \"tool\": \"loogle\", \"query\": \"\\\"height\\\", \\\"LTSeries\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 2, \"note\": \"\", \"top\": [\"LTSeries.height_last_longestOf\", \"Ideal.exists_ltSeries_length_eq_height\"], \"digest\": \"6923213bc79a426b\"}; Read the returned candidates: prime correspondence, height attainment and dimension-height identities are ingredients, not the full every-chain endpoint assertion.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-generic-fibre-closed-chain",
+  "date": "2026-10-22",
+  "group": "NA"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Proof (1)--(2), normal-cone specialization: maximal local prime chains in the generic fibre used by the alteration dimension input; original auxiliary proof step 4 and the endpoint argument of step 5.",
+   "via": [
+    "lem-trf-generic-fibre-closed-chain",
+    "lem-trf-closed-dominant-dimension"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-trf-full-dimension-local-chain-contraction",
+  "worker": "stage1",
+  "summary": "Repair of returned head 30aa55e723a: compared the retained split with the current unsplit DAG node, re-read both cited node statements and the localization definition, and verified every retained citation is still verbatim. Kept the statement and four-step proof route; made injectivity-to-strictness explicit and assigned precise source places to individual steps. Reused the existing Mathlib prime correspondence; finite-supremum attainment and both endpoint contradictions include r=0. No new nodes, new leaves, or statement changes. On resumption, rechecked against the current unsplit node and current dependency statements after dry-run d6575529a68; clarified the common upper bound on chain lengths and the strict inclusion when prepending zero. Retained every prior argument and all search records.",
+  "blueprint": "lem-trf-local-term-locality proof (1)--(2), normal-cone specialization, through lem-trf-closed-dominant-dimension and lem-trf-generic-fibre-closed-chain: the maximal local prime-chain argument of the alteration-dimension input."
+ },
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q113-a81139018",
+  "group": "Q113",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q113-a81139018 (reviewer sub-agent of L); spot-checked: No new nodes; 4-step split of an unsplit imported node, statement/stmt_deps/source/ancestry unchanged; proof_deps = union of uses (def-weil-pbc-krull-dimension-ring, lem-weil-pbc-primes-of-localization, both mathlib). Step 1: finite sup of integer lengths attained, r=0 via the −∞ clause of the dimension definition; bound on chains in A from dim A=r. Step 2: m maximal⇒prime (explicit), clause (1) of primes-of-localization with R=A, p=m gives prime contractions ⊆ m, inclusion-preserving, and injectivity gives strictness. Step 3: nonzero domain ⇒ (0) prime; p0≠0 would let (0) be prepended to give length r+1, contradiction. Step 4: appending m likewise; r=0 gives (0)=p0=m. Checked a field (r=0) and Z at (p) (r=1). Sources: Stacks algebra.tex:3163 lemma-spec-localization 00E3 matches clause (1); 14327 definition-Krull 00KE; 02JX cited only as ancestry with proof_origin agent. No SGA. Duplicate grep (prime chains contracted/below a prime) finds no equivalent node. The only citer, lem-trf-generic-fibre-closed-chain, uses exactly the endpoint conclusion. The only change from previously approved heads 30aa55e723a and 2cdf94fce04 is clarifying text in steps 1 and 3; the earlier refusals were landing/side-promotion faults, so this needs promotion at landing, not a math change."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.FullDimensionLocalChainContraction",
+  "declaration": "Ideal.full_dimension_local_chain_contraction",
+  "file": "lean/Sheaf/RingTheory/FullDimensionLocalChainContraction.lean",
+  "statement": "theorem full_dimension_local_chain_contraction {A : Type u} [CommRing A] [IsDomain A] (m : Ideal A) [m.IsMaximal] (r : ℕ) (hA : ringKrullDim A = (r : WithBot ℕ∞)) (hB : ringKrullDim (Localization.AtPrime m) = (r : WithBot ℕ∞)) : (∃ q : Fin (r + 1) → Ideal (Localization.AtPrime m), (∀ i : Fin (r + 1), (q i).IsPrime) ∧ StrictMono q) ∧ (∀ q : Fin (r + 1) → Ideal (Localization.AtPrime m), (∀ i : Fin (r + 1), (q i).IsPrime) → StrictMono q → (∀ i : Fin (r + 1), (Ideal.comap (algebraMap A (Localization.AtPrime m)) (q i)).IsPrime) ∧ StrictMono (fun i ↦ Ideal.comap (algebraMap A (Localization.AtPrime m)) (q i)) ∧ (∀ i : Fin (r + 1), Ideal.comap (algebraMap A (Localization.AtPrime m)) (q i) ≤ m) ∧ Ideal.comap (algebraMap A (Localization.AtPrime m)) (q 0) = ⊥ ∧ Ideal.comap (algebraMap A (Localization.AtPrime m)) (q (Fin.last r)) = m)",
+  "branch": "sheaf-dag",
+  "by": "Q80",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-4fadab51b",
+  "group": "Q80",
+  "result": "pass",
+  "note": "Node changed only in lean (vs side-live). Lean matches node clause by clause: IsDomain A, m maximal, Localization.AtPrime m with algebraMap, contraction = Ideal.comap, r:ℕ, hA/hB equalities in WithBot ℕ∞; existential chain Fin (r+1) prime+StrictMono; separate universal clause with contracted primality, StrictMono, ≤ m, q 0 ↦ ⊥, q (Fin.last r) ↦ m. Statement verified true (injective prime correspondence; prepend 0/append m contradict dim A=r). r=0 singleton case is consistent (field, m=⊥). No extra assumptions, universe u free, autoImplicit false. No defs, single sorry theorem, source/blueprint docstrings with 4 proof steps, statement verbatim, report has Worker report + Second reading by Q80. No name clash in Mathlib/lean/Sheaf/dag. No compile needed (no change)."
+ }
+}

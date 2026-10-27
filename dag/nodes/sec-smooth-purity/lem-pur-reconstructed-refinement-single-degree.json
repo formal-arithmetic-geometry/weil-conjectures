@@ -1,0 +1,110 @@
+{
+ "id": "lem-pur-reconstructed-refinement-single-degree",
+ "kind": "statement",
+ "title": "Common-degree evaluation detects the supplied Brown square",
+ "statement": "Fix a prime $\\ell$, a normed finite extension $E/\\mathbf Q_\\ell$, a field $k$ whose characteristic is prime and different from $\\ell$, separated finite-type $k$-schemes $X,Y$, a $k$-morphism $f:X\\to Y$, and a specified normalized compact-support comparison family $C$ [lem-pur-compact-support-condensed-realization]. Use the actual functors, maps, supplied pairs, and normalized Brown data of [def-pur-reconstructed-refinement-data]. Let $w:c\\to d$ be a refinement, $D_1,D_2$ normalized Brown packages, $L$ an integral object on $Y$, and $A_1,A_2$ supplied systems over $L$. Let $s:A_2.\\operatorname{system}\\xrightarrow{\\sim}A_1.\\operatorname{system}$ be an actual derived-system isomorphism and let $r\\in\\mathbf Z$. Suppose each finite evaluation in the first site package sends both supplied systems to objects concentrated in degree $r$, and sends $\\theta_1\\circ s$ and $\\rho_{12}\\circ\\theta_2$ to the same map. Then $\\theta_1\\circ s=\\rho_{12}\\circ\\theta_2$ as actual derived-system maps. This asserts detection only in the common single-degree case.",
+ "stmt_deps": [
+  "def-pur-reconstructed-refinement-data"
+ ],
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-unique-adjoint/sk-prop-sp-unique-adjoint-categorical.proof.md",
+  "place": "Stacks Tags 06XS and 08J5; parent proof Step 4."
+ },
+ "proof": [
+  {
+   "text": "exact conservative evaluations detect that both supplied systems are\nconcentrated in degree r. Their good-truncation maps identify them with the shifted\nheart. The target is isomorphic to the first supplied system via theta, so it is\nconcentrated in that same degree. On the shifted heart the degree-r cohomology\nfunctor is fully faithful. The exact evaluation comparisons carry its map to the\ncohomology of each displayed evaluated map. Joint faithfulness of evaluation on\nordinary strict coefficient systems identifies these heart maps. Full faithfulness\nof the shifted heart then gives the asserted equality in the derived category.\nNo faithfulness of evaluations on arbitrary derived morphisms is asserted.",
+   "uses": [
+    "lem-pur-integral-reconstructed-representing-pair",
+    "lem-pur-good-truncation-exact-normalization",
+    "lem-pur-coefficient-system-derived-comparison"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-pur-integral-reconstructed-representing-pair",
+  "lem-pur-good-truncation-exact-normalization",
+  "lem-pur-coefficient-system-derived-comparison"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-unique-adjoint/sk-prop-sp-unique-adjoint-categorical.proof.md",
+  "place": "Stacks Tags 06XS and 08J5; parent proof Step 4."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Exact conservative derived evaluations detect equality of maps between systems concentrated in a single degree",
+   "results": "CochainComplex.fromSingle₀Equiv and chain-map extensionality; no project geometric comparison.",
+   "date": "2026-10-26",
+   "verdict": "Generic tools only; the project-specific normalization calculation is not stated."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Transport a counit preserving comparison of right adjoints along an isomorphism of left adjoints",
+   "results": "Adjunction.rightAdjointUniq and its counit formulas; the Brown domain here is restricted, with explicitly transported system maps.",
+   "date": "2026-10-26",
+   "verdict": "Use the counit uniqueness argument; no exact project statement."
+  },
+  {
+   "tool": "grep",
+   "query": "systemRefinement_(id|comp)|hom_formula|single_degree_square|condensedProjection_refinement",
+   "results": "Remote Mathlib grep: OK 0 hits. Local rg on the project found systemRefinement_id and systemRefinement_comp, Brown hom_formula, same-compactification single_degree_square, and condensedProjection_refinement; their signatures were read.",
+   "date": "2026-10-26",
+   "verdict": "These supply substeps of the recorded proof."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.ReconstructedPairRefinementCoherence",
+  "date": "2026-10-26",
+  "group": "A5"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-thm-purity-transport",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-pur-rational-and-qbar-purity",
+   "place": "Stacks Tags 06XS and 08J5; parent proof Step 4.",
+   "via": [
+    "lem-pur-reconstructed-pair-refinement-coherence",
+    "lem-pur-condensed-exceptional-reconstruction",
+    "nt-target-smooth-purity-qbar"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.ReconstructedRefinementSingleDegree",
+  "file": "lean/Sheaf/Paper/ReconstructedRefinementSingleDegree.lean",
+  "declaration": "WeilConjectures.ReconstructedPairRefinement.reconstructedRefinementSingleDegree",
+  "statement": "theorem reconstructedRefinementSingleDegree :\n    (∀ (c d : Compactification f)\n    (D₁ : At l E k C X Y f c) (D₂ : At l E k C X Y f d) (w : c.Refinement d)\n    (L : CondensedERealization.Integral l E Y.scheme)\n    (A₁ : D₁.Supplied L) (A₂ : D₂.Supplied L) (r : ℤ)\n    (s : A₂.system ≅ A₁.system),\n    (∀ n : ℕ, ((D₁.transport.siteX.proEvaluation.evaluation n).obj A₁.system).IsGE r ∧\n      ((D₁.transport.siteX.proEvaluation.evaluation n).obj A₁.system).IsLE r) →\n    (∀ n : ℕ, ((D₁.transport.siteX.proEvaluation.evaluation n).obj A₂.system).IsGE r ∧\n      ((D₁.transport.siteX.proEvaluation.evaluation n).obj A₂.system).IsLE r) →\n    (∀ n : ℕ, (D₁.transport.siteX.proEvaluation.evaluation n).map\n        (s.hom ≫ (D₁.pair L A₁).theta.hom) =\n      (D₁.transport.siteX.proEvaluation.evaluation n).map\n        ((D₂.pair L A₂).theta.hom ≫ mate D₁ D₂ w L A₁ A₂)) →\n    s.hom ≫ (D₁.pair L A₁).theta.hom =\n      (D₂.pair L A₂).theta.hom ≫ mate D₁ D₂ w L A₁ A₂)",
+  "branch": "sheaf-dag",
+  "by": "A5",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-039cd",
+  "group": "A5",
+  "result": "fix",
+  "landing": "20261025T204354-L-2947874",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-039cd",
+  "group": "A5",
+  "result": "fix",
+  "landing": "20261025T204354-L-2947874",
+  "kind": "interface",
+  "note": "independent cc review: delivered ReconstructedPairRefinementData.lean vs clone item module (verbatim prefix); 5 sorried lemmas vs old Coherence fields (4 verbatim, TraceTransport generalized, true via scalar_refinement/RefinementCoherence.realization/condensedProjection_refinement); item node vs proof"
+ }
+}

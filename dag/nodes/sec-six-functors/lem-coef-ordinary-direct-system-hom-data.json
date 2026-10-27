@@ -1,0 +1,165 @@
+{
+ "kind": "statement",
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tag 03D2, lemma-pullback-module, and Tag 03D7, lemma-adjoint-pullback-pushforward-modules; applied termwise to the strict systems in Zheng Construction 4.1 and the paragraph before Lemma 4.10."
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-coef-integral-exceptional-adjoint",
+   "place": "Proof paragraph 2: the finite coefficient-level derived adjunctions before R lim; geometric inverse image and direct image on the normalized ordinary semilinear system calculus. Ordinary normalized geometric realization on semilinear systems. Separate ordinary construction step: Assembling ordinary direct image and its component Hom bijection.",
+   "via": [
+    "lem-coef-semilinear-ordinary-geometric-realization"
+   ]
+  },
+  "same_as": []
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A module inverse image has a right adjoint whose underlying transpose is the inverse image direct image adjunction of sheaves of sets",
+   "results": "{\"t\": \"2026-10-26T08:42:07Z\", \"tool\": \"leansearch\", \"query\": \"A module inverse image has a right adjoint whose underlying transpose is the inverse image direct image adjunction of sheaves of sets\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"TopCat.Sheaf.pullback\", \"AlgebraicGeometry.Scheme.Modules.pullbackPushforwardAdjunction\", \"SheafOfModules.PullbackConstruction.adjunction\", \"TopCat.Sheaf.instIsLeftAdjointPullback\", \"AlgebraicGeometry.Scheme.Modules.instIsLeftAdjointPullback\", \"CategoryTheory.Functor.sheafAdjunctionContinuous\", \"AlgebraicGeometry.Scheme.Modules.instIsRightAdjointPresheafOfModulesToPresheafOfModules\", \"SheafOfModules.pullbackPushforwardAdjunction\"], \"digest\": \"a5f08730525fbd5d\"}",
+   "date": "2026-10-26",
+   "verdict": "The returned adjunction and sheaf lemmas do not state the normalized arbitrary-site strict-system construction. Existing project module-transport lemmas are reused for the coefficient-level construction."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "adjunction termwise inverse image of semilinear systems of sheaves of modules",
+   "results": "{\"t\": \"2026-10-26T08:29:50Z\", \"tool\": \"leanfinder\", \"query\": \"adjunction termwise inverse image of semilinear systems of sheaves of modules\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SheafOfModules.PullbackConstruction.adjunction\", \"SheafOfModules.ιFree_mapFree_inv\", \"PresheafOfModules.sheafificationAdjunction_homEquiv_apply\", \"PresheafOfModules.sheafificationAdjunction\", \"LightCondensed.freeForgetAdjunction\", \"SheafOfModules.freeHomEquiv_symm_comp\", \"SheafOfModules.unitHomEquiv_symm_freeHomEquiv_apply\", \"SheafOfModules.unitHomEquiv_symm_comp\"], \"digest\": \"5cfc224f47d0eb44\"}",
+   "date": "2026-10-26",
+   "verdict": "The returned adjunction and sheaf lemmas do not state the normalized arbitrary-site strict-system construction. Existing project module-transport lemmas are reused for the coefficient-level construction."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"SheafOfModules\", \"adjunction\"",
+   "results": "{\"t\": \"2026-10-26T08:30:01Z\", \"tool\": \"loogle\", \"query\": \"\\\"SheafOfModules\\\", \\\"adjunction\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"PresheafOfModules.freeAdjunctionUnit\", \"PresheafOfModules.freeAdjunction\", \"PresheafOfModules.freeAdjunctionUnit_app\", \"PresheafOfModules.freeAdjunction_homEquiv\", \"PresheafOfModules.freeAdjunction_unit_app\", \"PresheafOfModules.pullbackPushforwardAdjunction\", \"PresheafOfModulesOfCommRing.pullbackPushforwardAdjunction\", \"PresheafOfModules.colimitAdjunction\"], \"digest\": \"3bc2b9beb5471990\"}",
+   "date": "2026-10-26",
+   "verdict": "The returned adjunction and sheaf lemmas do not state the normalized arbitrary-site strict-system construction. Existing project module-transport lemmas are reused for the coefficient-level construction."
+  },
+  {
+   "tool": "grep",
+   "query": "AlgebraicInverseImage|mkOfHomEquiv|additive_of_preserves",
+   "results": "{\"t\": \"2026-10-26T08:31:59Z\", \"tool\": \"grep\", \"query\": \"AlgebraicInverseImage|mkOfHomEquiv|additive_of_preserves\", \"sub\": \"\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/RepresentationTheory/Induced.lean\", \"Mathlib/RepresentationTheory/Coinduced.lean\", \"Mathlib/AlgebraicTopology/CechNerve.lean\", \"Mathlib/AlgebraicTopology/CechNerve.lean\", \"Mathlib/RepresentationTheory/Rep/Basic.lean\", \"Mathlib/RepresentationTheory/Rep/Basic.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/NerveAdjunction.lean\", \"Mathlib/Order/Category/BddLat.lean\"], \"digest\": \"ff4d8ed79967adf4\"}",
+   "date": "2026-10-26",
+   "verdict": "The returned adjunction and sheaf lemmas do not state the normalized arbitrary-site strict-system construction. Existing project module-transport lemmas are reused for the coefficient-level construction."
+  }
+ ],
+ "mathlib_match": null,
+ "id": "lem-coef-ordinary-direct-system-hom-data",
+ "title": "Restricting level Hom bijections to compatible systems",
+ "statement": "Let C,C′,J,J′,B,τ,F,σ,uInv,I,P,V,a be the coefficient towers, actual sequence-site systems, ordinary inverse-image system, and level adjunctions of [lem-coef-ordinary-inverse-system] and [def-coef-semilinear-system-models]. Let K be an OrdinaryDirectSystemCore as in [lem-coef-ordinary-direct-system-core], including its local mate condition for two arbitrary component maps. Then there is an equivalence (P.pull M → N) ≃ (M → K.push N) for all systems M,N, whose nth component, followed by K.component_n.hom, is a_n.homEquiv applied to P.component_n.inv followed by evaluation_n of the original morphism. No finite-limit, set-adjunction, or geometric construction hypothesis is needed to prove this local-to-global assertion once K is supplied.",
+ "stmt_deps": [
+  "def-coef-semilinear-system-models",
+  "lem-coef-ordinary-inverse-system",
+  "lem-coef-ordinary-direct-system-core"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tag 03D2, lemma-pullback-module, and Tag 03D7, lemma-adjoint-pullback-pushforward-modules; applied termwise to the strict systems in Zheng Construction 4.1 and the paragraph before Lemma 4.10. E4: local mate compatibility repair and explicit local-to-global assembly on 2026-10-26."
+ },
+ "proof": [
+  {
+   "text": "A compatible family of component module-sheaf maps assembles into a map on the actual sequence site: use the nth map at (n,U). Every product-site arrow factors as a vertical arrow and a horizontal arrow; vertical naturality and the given horizontal squares prove naturality. Linearity is transported across the evaluation coefficient identity. Evaluation recovers the original family, and component evaluations jointly detect equality. The private helpers systemHom_naturality, systemHomApp, systemHomMk and systemHomMk_evaluation prove these statements explicitly.",
+   "uses": [
+    "def-coef-semilinear-system-models"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "At each level form the equivalence obtained by precomposing with P.component_n.inv, applying the level adjunction, then postcomposing with K.component_n.inv. The core local mate condition transports horizontal compatibility in both directions. Assemble the resulting families with systemHomMk. The level equivalences have inverse laws, and joint faithfulness of evaluations proves the two global inverse laws. Evaluation of the constructed forward map and cancellation of the core component isomorphism give homEquiv_component.",
+   "uses": [
+    "lem-coef-ordinary-direct-system-core",
+    "def-coef-semilinear-system-models"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-coef-ordinary-direct-system-core",
+  "def-coef-semilinear-system-models"
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.SemilinearOrdinaryDirectSystem",
+  "date": "2026-10-26",
+  "group": "H1"
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.SemilinearOrdinaryDirectSystem",
+  "file": "lean/Sheaf/Paper/SemilinearOrdinaryDirectSystem.lean",
+  "declaration": "WeilConjectures.SemilinearSections.ordinaryDirectSystem_homData_exists",
+  "declarations": [
+   "WeilConjectures.SemilinearSections.OrdinaryDirectSystemHomData",
+   "WeilConjectures.SemilinearSections.ordinaryDirectSystem_homData_exists"
+  ],
+  "statement": "theorem ordinaryDirectSystem_homData_exists\n    (K : OrdinaryDirectSystemCore.{c, v, r} J B τ J' uInv F σ I P V a) :\n    Nonempty (OrdinaryDirectSystemHomData.{c, v, r} J B τ J' uInv F σ I P V a K)",
+  "branch": "sheaf-dag",
+  "by": "H1",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H1",
+  "result": "pass",
+  "landing": "20261026T104436-L-822271",
+  "kind": "proof",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-ed7db",
+  "group": "M2",
+  "result": "pass",
+  "landing": "20261026T152657-L-1147431",
+  "kind": "interface",
+  "note": "independent cc review: delivered ed7db1fc913b Lean (4 modules) and 4 node files vs clone sheaf-dag nodes and change record; unchanged parent/target statements diffed; direct importer GeometricOrdinaryRealization compiled against delivered modules (exit 0, 17.8 s); #print axioms clean",
+  "sorry_before": [
+   "WeilConjectures.SemilinearSections.ordinaryDirectSystem_core_data_exists",
+   "WeilConjectures.SemilinearSections.ordinaryDirectSystem_core_transition_mate_exists"
+  ],
+  "sorry_after": []
+ },
+ "statement_change": {
+  "date": "2026-10-26",
+  "by": "E4 stage 3",
+  "old_statement": "theorem ordinaryDirectSystem_homData_exists (K : OrdinaryDirectSystemCore.{c, v, r} J B τ J' F σ V) : Nonempty (OrdinaryDirectSystemHomData.{c, v, r} J B τ J' uInv F σ I P V a K)",
+  "what": "The original core identified vertical components but imposed no condition on horizontal transitions. Over a constant nonzero ring, identity inverse image and the functor retaining components but zeroing every nonidentity transition satisfy the old core. The promised transpose of the identity of a constant nonzero system would have identity components into that zero-transition system, which is not a system morphism. Add the local two-component mate law to the geometric core, and prove the global restriction of Hom equivalences from that law; the main existence theorem and OrdinaryDirectSystem are unchanged.",
+  "source": {
+   "document": "literature/stacks-project/sites-modules.tex",
+   "place": "Tag 03D2, lemma-pullback-module, and Tag 03D7, lemma-adjoint-pullback-pushforward-modules; applied termwise to the strict systems in Zheng Construction 4.1 and the paragraph before Lemma 4.10."
+  },
+  "citers": [
+   {
+    "id": "lem-coef-ordinary-direct-system",
+    "holds": true,
+    "note": "The main theorem passes its already supplied P into the strengthened core construction, then uses the completely proved local-to-global Hom construction. Its signature and conclusion are unchanged."
+   }
+  ],
+  "old_stmt_deps": [],
+  "old_proof": [
+   {
+    "text": "Take the product of the levelwise Hom equivalences supplied by the module adjunctions. The transition equation for P and the normalization ha show that a family is compatible before transposition exactly when its transpose is compatible after transposition; restricting the product equivalence gives homEquiv and its component formula.",
+    "uses": [
+     "lem-coef-ordinary-inverse-system",
+     "lem-coef-normalized-module-adjunction",
+     "def-coef-semilinear-system-models"
+    ],
+    "elementary": false
+   }
+  ],
+  "old_proof_deps": [
+   "lem-coef-ordinary-inverse-system",
+   "lem-coef-normalized-module-adjunction",
+   "def-coef-semilinear-system-models"
+  ]
+ }
+}

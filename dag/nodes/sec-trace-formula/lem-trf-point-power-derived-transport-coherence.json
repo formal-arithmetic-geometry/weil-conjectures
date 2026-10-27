@@ -1,0 +1,119 @@
+{
+ "id": "lem-trf-point-power-derived-transport-coherence",
+ "kind": "statement",
+ "title": "Derived transport coherence from strict insertion coherence",
+ "statement": "Fix a finite-field datum D with algebraic closure k and characteristic p, a prime l different from p, and a finite extension E of Q_l. Let G_r be the recorded exact inverse image on strict coefficient systems, Gamma the recorded exact tower-section functor, and u_r and I_r the normalized chain and derived insertions of [lem-trf-point-system-transport-descent]. Let P be any family of the compositors of [def-trf-point-power-roos-coherence-data], and let m >= 1. Suppose the strict tower chain maps satisfy u_{m+1,M} = u_{m,M} followed by u_{1,G_m M} followed by Gamma(t_{m,M}) for every strict system complex M. Then the corresponding equality I_{m+1,C} = I_{m,C} followed by I_{1,G_m C} followed by Gamma(t_{m,C}) holds for every object C of the ordinary unbounded derived system category. The final compositor is the one induced by P.t m through the exact derived functor factorization, not an independently chosen comparison.",
+ "stmt_deps": [
+  "def-trf-point-power-roos-coherence-data",
+  "lem-trf-point-system-transport-descent"
+ ],
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-trace-formula/sk-thm-trace-transport/thm-trf-l-function-euler-product.proof.md",
+  "place": "Step 1, Global powers, referring to det-thm-tf-uniform-formula-weil proof (2); point insertion specialization and Stacks 0941 Roos refinement."
+ },
+ "proof": [
+  {
+   "text": "The defining representative equation for derivedTransport in [lem-trf-point-system-transport-descent], followed by mapDerivedCategoryCompIso_fac, gives the representative equation for I and u with their canonically factored targets. Cancel the image of the complex composition iso; its inverse was the final factor used to define u. This is the proved insertion_model lemma.",
+   "uses": [
+    "lem-trf-point-system-transport-descent"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Express the desired equality as equality of natural transformations. Precomposition with the ordinary localization functor is faithful. On each strict complex M, postcompose with the isomorphism formed from the exact derived factors for G_{m+1} and Gamma. Apply insertion_model on the left. On the right use the defining equation for the derived image of P.t m and naturality of the insertion and Gamma factorization to move the factors next to the two insertions. Apply insertion_model twice; the resulting equation is exactly the image of the assumed strict chain identity under localization. Cancel the postcomposition isomorphism and then use faithfulness of precomposition. No faithfulness of derived evaluation is asserted.",
+   "uses": [
+    "lem-trf-point-system-transport-descent"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-trf-point-system-transport-descent"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-trace-formula/sk-thm-trace-transport/thm-trf-l-function-euler-product.proof.md",
+  "place": "Step 1, Global powers, referring to det-thm-tf-uniform-formula-weil proof (2); point insertion specialization and Stacks 0941 Roos refinement."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Canonical inverse image comparison with derived inverse limit respects composition on both coordinates of the Roos cone",
+   "results": "8 hits: CategoryTheory.preservesLimitIso_inv_π, CategoryTheory.liftedLimitMapsToOriginal_inv_map_π, CategoryTheory.Limits.IsLimit.conePointsIsoOfNatIso_inv_comp, LightProfinite.isoMapCone, localCohomology.diagramComp, CategoryTheory.Limits.HasLimit.isoOfNatIso_inv_π, CategoryTheory.Limits.PreservesLimit₂.isoObjConePointsOfIsColimit_inv_comp_map_π, CategoryTheory.preservesLimitIso_inv_π_assoc. Generic limits, pullback composition and product projection facts do not give the recorded point-system or normalized Roos family specialization.",
+   "date": "2026-10-26",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"piComparison\"",
+   "results": "11 hits: CategoryTheory.Limits.piComparison, CategoryTheory.Limits.piComparison_comp_π, CategoryTheory.Limits.map_lift_piComparison, CategoryTheory.Limits.piComparison_comp_π_assoc, CategoryTheory.Limits.map_lift_piComparison_assoc, CategoryTheory.Limits.piComparison_comp_π_apply, CategoryTheory.Limits.instIsIsoPiComparison, CategoryTheory.Limits.inv_piComparison_comp_map_π. Generic limits, pullback composition and product projection facts do not give the recorded point-system or normalized Roos family specialization.",
+   "date": "2026-10-26",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "roosConeCompositor|pointSystemInsertion|point_system_power",
+   "results": "0 hits: . Generic limits, pullback composition and product projection facts do not give the recorded point-system or normalized Roos family specialization.",
+   "date": "2026-10-26",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Canonical inverse images under powers of an automorphism compose on sheaves of modules and on unbounded derived inverse limits",
+   "results": "8 hits: SheafOfModules.pullbackComp, AlgebraicGeometry.Scheme.Modules.inv_app, AlgebraicGeometry.Scheme.Modules.pullbackComp, SheafOfModules.hasLimit, SheafOfModules.pushforwardComp_inv_app_val_app, AlgebraicGeometry.Scheme.inv_app, AlgebraicGeometry.Scheme.Modules.pushforwardComp_inv_app_app, SheafOfModules.instIsLeftAdjointPullback. Generic limits, pullback composition and product projection facts do not give the recorded point-system or normalized Roos family specialization.",
+   "date": "2026-10-26",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.PointSystemPowerRoosCoherence",
+  "date": "2026-10-26",
+  "group": "P2"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-thm-trace-transport",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-trf-l-function-euler-product",
+   "place": "Step 1, Global powers: localization",
+   "via": [
+    "lem-trf-point-system-power-roos-coherence"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.PointSystemPowerRoosCoherence",
+  "file": "lean/Sheaf/Paper/PointSystemPowerRoosCoherence.lean",
+  "declaration": "WeilConjectures.PointSystemTransport.PowerRoos.derived_transport_coherence_from_strict",
+  "statement": "theorem derived_transport_coherence_from_strict (hl : l ≠ D.p) (P : Compositors D l E) (m : ℕ) (hm : 1 ≤ m) (hs : StrictTransportCoherence D l E hl P m hm) : DerivedTransportCoherence D l E hl P m hm",
+  "branch": "sheaf-dag",
+  "by": "P2",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-b8ac7",
+  "group": "P2",
+  "result": "pass",
+  "landing": "20261026T070427-L-3586572",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-b8ac7",
+  "group": "P2",
+  "result": "pass",
+  "landing": "20261026T070427-L-3586572",
+  "kind": "interface",
+  "note": "independent cc review: delivered PointSystemPowerRoosData vs clone item module (verbatim extraction), item theorem vs the two new specialization statements + proved derived_transport_coherence_from_strict, nodes vs Lean"
+ }
+}

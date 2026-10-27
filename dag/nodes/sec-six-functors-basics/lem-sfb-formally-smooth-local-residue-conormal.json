@@ -1,0 +1,95 @@
+{
+ "id": "lem-sfb-formally-smooth-local-residue-conormal",
+ "kind": "statement",
+ "title": "Formal smoothness of a local quotient detected by its residue conormal differential",
+ "statement": "Let $R$ be a commutative ring, $C$ a commutative $R$-algebra, $S$ a local commutative $R$-algebra with unique maximal ideal $\\mathfrak n$, and $p:C\\twoheadrightarrow S$ a surjective $R$-algebra homomorphism with finitely generated kernel $J$. Assume $C$ is formally smooth over $R$ (the $0$-adic case of [def-weil-pbc-formally-smooth-adic]) and $\\Omega_{C/R}$ [def-weil-pbc-kahler-differentials] is a finite free $C$-module, meaning it is isomorphic to $C^{\\oplus e}$ for some finite $e\\ge0$. Put $k=S/\\mathfrak n$, $M=J/J^2$, $T=S\\otimes_C\\Omega_{C/R}$ [def-weil-module-base-change], and let $\\delta:M\\to T$ be the $S$-linear conormal differential $j\\bmod J^2\\mapsto1\\otimes\\mathrm dj$. Then $S$ is formally smooth over $R$ (for the $0$-adic topology) if and only if $1_k\\otimes\\delta:k\\otimes_SM\\to k\\otimes_ST$ is injective.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tag 031I (lemma-characterize-formally-smooth-again), its formally smooth presentation generalization in remark-lemma-characterize-formally-smooth, together with the local finite-free residue-field splitting criterion; exact combined statement in Mathlib/RingTheory/Smooth/Local.lean, lines 25-46, Algebra.FormallySmooth.iff_injective_lTensor_residueField."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-formally-smooth-adic",
+  "def-weil-pbc-kahler-differentials",
+  "def-weil-module-base-change"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A local quotient S of a formally smooth R algebra C with finite free Kahler differentials and finitely generated kernel is formally smooth if and only if its conormal differential is injective after tensoring with the residue field of S",
+   "sub": "",
+   "results": "Read 8 hits: Algebra.FormallySmooth.iff_injective_lTensor_residueField, Algebra.FormallySmooth.iff_injective_cotangentComplexBaseChange_residueField, Algebra.FormallySmooth.iff_injective_cotangentComplexBaseChange, Algebra.FormallySmooth.iff_split_injection, Algebra.FormallySmooth.kerCotangentToTensor_injective_iff, Algebra.IsStandardSmooth.iff_exists_basis_kaehlerDifferential, Algebra.Extension.formallySmooth_iff_split_injection, Algebra.formallySmooth_iff",
+   "date": "2026-10-23",
+   "verdict": "match: Algebra.FormallySmooth.iff_injective_lTensor_residueField; source read at the recorded file and line."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Algebra.FormallySmooth.iff_injective_lTensor_residueField\"",
+   "sub": "",
+   "results": "Read 1 hits: Algebra.FormallySmooth.iff_injective_lTensor_residueField",
+   "date": "2026-10-23",
+   "verdict": "match: Algebra.FormallySmooth.iff_injective_lTensor_residueField; source read at the recorded file and line."
+  },
+  {
+   "tool": "grep",
+   "query": "iff_injective_lTensor_residueField",
+   "sub": "RingTheory/Smooth",
+   "results": "Read 2 hits: Mathlib/RingTheory/Smooth/Local.lean, Mathlib/RingTheory/Smooth/Local.lean",
+   "date": "2026-10-23",
+   "verdict": "match: Algebra.FormallySmooth.iff_injective_lTensor_residueField; source read at the recorded file and line."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Formal smoothness of a local algebra is equivalent to injectivity of the conormal map after residue field tensor for a formally smooth presentation with finite free differentials and finite kernel",
+   "sub": "",
+   "results": "Read 8 hits: Algebra.FormallySmooth.iff_injective_lTensor_residueField, Algebra.FormallySmooth.iff_injective_cotangentComplexBaseChange, Algebra.FormallySmooth.iff_injective_cotangentComplexBaseChange_residueField, Algebra.FormallySmooth, RingHom.FormallySmooth, Algebra.Smooth.formallySmooth, Algebra.FormallySmooth.iff_split_injection, Algebra.FormallySmooth.mk",
+   "date": "2026-10-23",
+   "verdict": "match: Algebra.FormallySmooth.iff_injective_lTensor_residueField; source read at the recorded file and line."
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "Algebra.FormallySmooth.iff_injective_lTensor_residueField",
+  "file": "Mathlib/RingTheory/Smooth/Local.lean",
+  "line": 34,
+  "how": "exact: lines 34-41, with the extension P having Ring=C and structure map p. P.Cotangent=J/J^2 and P.CotangentSpace=S tensor_C Omega(C/R); P.cotangentComplex sends [j] to 1 tensor dj. P.ker.FG is the finite-generation hypothesis. The source module is acted on through S=C/J; the theorem tensors over S with ResidueField S=S/n. FormallySmooth has the square-zero lifting characterization of the 0-adic notion, Algebra.FormallySmooth.iff_comp_surjective in Smooth/Basic.lean. No Noetherian or finite-presentation assumption is added."
+ },
+ "status": "mathlib",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-truncated-polynomial-sections-smooth",
+  "date": "2026-10-23",
+  "group": "O2"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Algebraicity and smoothness of the stack of all nodal curves. Supporting input: Tag 0D59 (lemma-curves-defo-thy), over Spec Z; artin.tex definition-versal and definition-openness-versality. Supporting input: Tag 0CXU (lemma-SGE-implies-openness-versality), specialized to Spec Z; remark-strong-effectiveness; definitions definition-RS-star, definition-limit-preserving, definition-versal and definition-openness-versality. Supporting input: Tag 0CXU, representable fibre product Z and application of lemma-base-change-versal at z_0=i(u_0). Supporting input: Tag 0CXM proof, last paragraph: More on Morphisms lemma-lifting-along-artinian-at-point, using the fixed chart residue field. Supporting input: Tag 02HX affine reduction, then Tag 02HT proof of (4) implies (1): deduction of smoothness from the resulting truncated sections. Supporting input: Tag 031I (lemma-characterize-formally-smooth-again), its formally smooth presentation generalization in remark-lemma-characterize-formally-smooth, together with the local finite-free residue-field splitting criterion; exact combined statement in Mathlib/RingTheory/Smooth/Local.lean, lines 25-46, Algebra.FormallySmooth.iff_injective_lTensor_residueField.",
+   "via": [
+    "lem-sfb-truncated-polynomial-sections-smooth",
+    "lem-sfb-smooth-fixed-residue-artinian-test",
+    "lem-sfb-artin-versal-base-change-smooth",
+    "lem-sfb-artin-square-zero-effectivity-openness",
+    "lem-sfb-curve-openness-versality",
+    "lem-sfb-nodal-curve-stack-smooth",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ }
+}

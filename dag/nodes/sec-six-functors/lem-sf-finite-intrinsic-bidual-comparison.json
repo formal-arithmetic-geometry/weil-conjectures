@@ -1,0 +1,134 @@
+{
+ "id": "lem-sf-finite-intrinsic-bidual-comparison",
+ "kind": "statement",
+ "title": "Normalized bidual comparison under constant-ring realization",
+ "statement": "Let X be a scheme and B a finite commutative ring. Let F be the canonical exact derived equivalence from fixed-scalar pro-etale module sheaves to modules over the constant commutative ring sheaf [def-weil-pbc-proetale-modules, def-weil-proetale-inverse-image]. Let a be a normalized intrinsic tensor-Hom presentation [def-sf-integral-hom-reduction-models], and s its signed representative symmetry [def-sf-integral-verdier-models]. Assume naturality of s in both variables and first-input naturality of the evaluation counits, with exactly the equations in the Lean statement. Fix arbitrary fixed-scalar derived objects W,K and a normalized ambient duality pairing h into W [lem-weil-duality-pairing]. Write δ_h for its evaluation transpose. Fix arbitrary intrinsic derived objects ω,M and isomorphisms w:FW ≅ ω and i:FK ≅ M. Write δ_a,s for the intrinsic evaluation transpose [def-sf-integral-verdier-models], and H for the intrinsic derived internal Hom [def-pur-derived-internal-hom]. Then there is an isomorphism c:F(RHom(RHom(K,W),W)) ≅ H(H(M,ω),ω) such that i followed by δ_a,s at M equals F(δ_h at K) followed by c. No constructibility, finite-Tor, dualizing-object, or invertible-biduality hypothesis is assumed.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-tower/thm-coef-integral-verdier.proof.md",
+  "place": "Second paragraph: identify the finite evaluation transpose; coefficient-presentation realization step of lem-sf-finite-intrinsic-verdier-biduality. Stacks sites.tex Tag 00YV, proposition-functoriality-algebraic-structures-topoi; sites-cohomology.tex Tags 06YL, 08J9 (lemma-internal-hom), 08JA (lemma-section-RHom-over-U), and 0FPT (lemma-symmetric-monoidal-derived)."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-proetale-modules",
+  "def-weil-proetale-inverse-image",
+  "def-sf-integral-hom-reduction-models",
+  "def-sf-integral-verdier-models",
+  "lem-weil-duality-pairing",
+  "def-pur-derived-internal-hom"
+ ],
+ "proof": [
+  {
+   "text": "The constant-scalar realization is an additive exact equivalence, and its ordinary total tensor comparison is induced by sending scalar-unit local pure tensors to the same local pure tensors. The Koszul swap commutes with this comparison on each homogeneous generator. Local generation and additivity give the chain symmetry equation.",
+   "uses": [
+    "def-weil-pbc-proetale-modules",
+    "lem-exc-intrinsic-realization-tensor-complex"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Resolve both tensor inputs by K-flat complexes. The exact equivalence preserves and reflects acyclicity and, through the tensor comparison, K-flatness. Descend the tensor comparison and symmetry square through localization. The normalized representative formulas for a and s identify their tensor and swap with these descended constructions. Tensor-Hom adjunction and full faithfulness give the closed comparison F RHom(K,W) ≅ H(FK,FW); its untranspose is realized evaluation.",
+   "uses": [
+    "lem-sf-ringed-derived-closed-symmetric-monoidal",
+    "def-sf-integral-hom-reduction-models",
+    "def-sf-integral-verdier-models",
+    "lem-exc-intrinsic-realization-tensor-complex"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Compose the closed comparison with H(i inverse,w) to obtain d:F RHom(K,W) ≅ H(M,ω). Apply the closed comparison at RHom(K,W), postcompose in its second input with w, and precompose in its first input with d inverse. This composite is the required c. Untranspose i followed by intrinsic delta and F(delta_h) followed by c. The evaluation normalization and symmetry square identify these maps: both evaluate a homogeneous functional on the same argument with the same Koszul sign. Naturality hs and he transport the equation along i and w. Localization gives equality for arbitrary derived objects, and injectivity of transposition gives the displayed equation.",
+   "uses": [
+    "lem-weil-duality-pairing",
+    "def-sf-integral-verdier-models",
+    "def-sf-integral-hom-reduction-models"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 08J9 and 0FPT, applied to the exact constant-scalar coefficient realization of Tag 00YV; expansion of the original item realization step."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Exact equivalence of sheaves of modules over constant ring identifies derived internal Hom and the evaluation transpose double dual map",
+   "results": "8 hits: LinearEquiv.trans_dualMap_symm_flip, CategoryTheory.Sheaf.ΓHomEquiv, transpose_dualTensorHom, Module.evalEquiv, Module.evalEquiv_apply, PresheafOfModules.unitHomEquiv, Module.Dual.eval, SheafOfModules.Hom.ext_iff. None compares the two derived coefficient presentations.",
+   "date": "2026-10-26",
+   "verdict": "No exact match."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Functor\", \"IsIso\", \"internalHom\"",
+   "results": "0 hits.",
+   "date": "2026-10-26",
+   "verdict": "No exact match."
+  },
+  {
+   "tool": "grep",
+   "query": "toIhomIhom|map_toIhomIhom",
+   "results": "0 hits from msearch Mathlib search. Repository rg found the formal normalized monoidal transport in EvaluationBidualComparisonTransport and the ordinary tensor-complex realization in IntrinsicRealizationTensorComplex; neither states the comparison with an arbitrary normalized intrinsic presentation.",
+   "date": "2026-10-26",
+   "verdict": "No exact match."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.SixFunctors.FiniteIntrinsicVerdierBiduality",
+  "date": "2026-10-26",
+  "group": "J9"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-coef-integral-verdier",
+   "place": "Second proof paragraph: evaluation compatibility identifies the reduction with the canonical finite double-dual map; the constant-ring realization part of this identification.",
+   "via": [
+    "lem-sf-finite-intrinsic-verdier-biduality"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.SixFunctors.FiniteIntrinsicBidualComparison",
+  "file": "lean/Sheaf/SixFunctors/FiniteIntrinsicBidualComparison.lean",
+  "declaration": "WeilConjectures.IntegralVerdier.finiteIntrinsicBidualComparison",
+  "statement": "theorem finiteIntrinsicBidualComparison\n    (X : Scheme.{u}) (B : Type u) [CommRing B] [Finite B]\n    (a : IntegralHom.TensorPresentation.{u, u} X (proEtaleConstantRing X B))\n    (s : SignedSymmetry X (proEtaleConstantRing X B) a)\n    (hs : ∀ (K L K' L' : proEtaleDerivedCategory X B)\n      (f : K ⟶ K') (g : L ⟶ L'),\n      a.tensor.map (Prod.mkHom f g) ≫ (s.swap K' L').hom =\n        (s.swap K L).hom ≫ a.tensor.map (Prod.mkHom g f))\n    (he : ∀ (K K' W : proEtaleDerivedCategory X B) (f : K' ⟶ K),\n      a.tensor.map (Prod.mkHom (𝟙 K')\n        ((IntegralHom.hom.{u, u} X (proEtaleConstantRing X B)).map\n          (Prod.mkHom f.op (𝟙 W)))) ≫ (a.adjunction K').counit.app W =\n        a.tensor.map (Prod.mkHom f (𝟙 _)) ≫ (a.adjunction K).counit.app W)\n    (W K : DerivedCategory (Sheaf (ProEt.topology X)\n      (ModuleCat.{u + 1} (ULift.{u + 1, u} B))))\n    (h : ProEtale.AmbientDualityPairing\n      (ModuleCat.{u + 1} (ULift.{u + 1, u} B)) X W)\n    (ω M : proEtaleDerivedCategory X B)\n    (w : (sfIntrinsicDerivedEquivalence X B).functor.obj W ≅ ω)\n    (i : (sfIntrinsicDerivedEquivalence X B).functor.obj K ≅ M) :\n    ∃ c : (sfIntrinsicDerivedEquivalence X B).functor.obj\n        ((dualityDoubleFunctor MonoidalClosed.internalHom W).obj K) ≅\n          (IntegralHom.hom.{u, u} X (proEtaleConstantRing X B)).obj\n            (op ((IntegralHom.hom.{u, u} X (proEtaleConstantRing X B)).obj (op M, ω)), ω),\n      i.hom ≫ delta X a s ω M =\n        (sfIntrinsicDerivedEquivalence X B).functor.map\n          (ProEtale.AmbientDualityPairing.bidualityMap\n            (ModuleCat.{u + 1} (ULift.{u + 1, u} B)) X h K) ≫ c.hom",
+  "branch": "sheaf-dag",
+  "by": "J9",
+  "date": "2026-10-26"
+ },
+ "proof_deps": [
+  "def-weil-pbc-proetale-modules",
+  "lem-exc-intrinsic-realization-tensor-complex",
+  "lem-sf-ringed-derived-closed-symmetric-monoidal",
+  "def-sf-integral-hom-reduction-models",
+  "def-sf-integral-verdier-models",
+  "lem-weil-duality-pairing"
+ ],
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J9",
+  "result": "pass",
+  "landing": "20261025T202331-L-2708363",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J9",
+  "result": "pass",
+  "landing": "20261025T202331-L-2708363",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

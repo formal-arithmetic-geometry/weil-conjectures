@@ -1,0 +1,121 @@
+{
+ "id": "new-unit-localized-scalar-conjugation",
+ "kind": "statement",
+ "title": "Scalar conjugation for localized structural coefficients",
+ "statement": "Let j:Y→X be etale [def-pc-scheme,def-weil-etale-morphism]. Compose j inverse image of the inverse canonical unit-structure isomorphism [new-unit-structure-coefficient-iso] with the normalized coherent restriction [def-weil-pbc-coherent-etale-restriction], obtaining e:j^-1 A_X ≅ (j* O_X)_et. If μ is an endomorphism of j^-1 A_X whose localization-restriction component at every T→Y is multiplication by the restriction of r∈Γ(Y,O_Y), then μ followed by e equals e followed by coherentEtaleMap of smulHom r. No cohomology or higher-image realization is involved.",
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-etale-morphism",
+  "new-unit-structure-coefficient-iso",
+  "def-weil-pbc-coherent-etale-restriction"
+ ],
+ "source": {
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tag 03Q8, lemma-higher-direct-images; Tags 03P2, 0096, 0097 and 03DR, normalized unit coefficients and restriction; Tags 03FD and 01FT, Ext evaluation"
+ },
+ "proof": [
+  {
+   "text": "At T→Y, the inverse coefficient map followed by localization restriction sends s to the unit structural coordinate of c(T,j)(s). Prove this from the defining normalization of coherentEtaleRestrictionIso, naturality of localization restriction and the component formula of unitStructureCoefficientIso. The two module morphisms in that coordinate map are linear over Γ(T,O_T). The coherent multiplication component is multiplication by T.hom.appTop r. Substitute the stipulated formula for μ, use linearity, and cancel the localization and coefficient isomorphisms. Sectionwise equality proves equality of sheaf maps.",
+   "uses": [
+    "new-unit-structure-coefficient-iso",
+    "def-weil-pbc-coherent-etale-restriction"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "new-unit-structure-coefficient-iso",
+  "def-weil-pbc-coherent-etale-restriction"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tag 03Q8, lemma-higher-direct-images; Tags 03P2, 0096, 0097 and 03DR, normalized unit coefficients and restriction; Tags 03FD and 01FT, Ext evaluation"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The associated etale sheaf of the unit module is isomorphic to the additive structure sheaf naturally in scalar multiplication",
+   "results": "8 hits, including SheafOfModules.unit, unitHomEquiv and structurePresheafCompForget. None identifies the project tensor-section coefficient or its localized scalar action.",
+   "date": "2026-10-25",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"tensorPullbackObjUnitToUnit\"",
+   "results": "0 hits",
+   "date": "2026-10-25",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "sheafHToDerived.*natural|etaleTensorUnit.*Iso|unitRealization.*transport",
+   "results": "0 hits",
+   "date": "2026-10-25",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Naturality of evaluation of Ext classes under a right derived functor with respect to coefficient morphisms",
+   "results": "8 hits: extFunctor, its map formula and generic right-derived naturality. None states naturality of the fixed derivedExtEvaluation composite.",
+   "date": "2026-10-25",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.UnitRealizationScalarNormalization",
+  "date": "2026-10-25",
+  "group": "U2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-direct-image-finiteness-proper",
+   "place": "Classical torsion constructibility input via proper smooth curve structural coefficients; unit coefficient transport and scalar normalization.",
+   "via": [
+    "lem-weil-pbc-smooth-curve-etale-structure-direct-images",
+    "new-unit-realization-scalar-normalization"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.UnitLocalizedScalarConjugation",
+  "file": "lean/Sheaf/AlgebraicGeometry/UnitLocalizedScalarConjugation.lean",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.unitLocalizedCoefficientIso_scalar",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.Modules.unitLocalizedCoefficientIso",
+   "AlgebraicGeometry.Scheme.Modules.unitLocalizedCoefficientIso_scalar"
+  ],
+  "statement": "theorem unitLocalizedCoefficientIso_scalar {X Y : Scheme.{u}} (j : Y ⟶ X) [AlgebraicGeometry.Etale j] (r : Γ(Y, ⊤)) (μ : (Etale.upperStar AddCommGrpCat.{u + 1} j).obj X.etaleAdditiveSheaf ⟶ (Etale.upperStar AddCommGrpCat.{u + 1} j).obj X.etaleAdditiveSheaf) (hμ : ∀ (T : Y.Etale) (x : ((Etale.upperStar AddCommGrpCat.{u + 1} j).obj X.etaleAdditiveSheaf).obj.obj (op T)), (((Etale.upperStarIsoLocalizationRestriction AddCommGrpCat.{u + 1} j inferInstance).hom.app X.etaleAdditiveSheaf).hom.app (op T)) (μ.hom.app (op T) x) = ULift.up (@id Γ(T.left, ⊤) (T.hom.appTop r) * (@id Γ(T.left, ⊤) ((((Etale.upperStarIsoLocalizationRestriction AddCommGrpCat.{u + 1} j inferInstance).hom.app X.etaleAdditiveSheaf).hom.app (op T)) x).down))) : μ ≫ (unitLocalizedCoefficientIso j).hom = (unitLocalizedCoefficientIso j).hom ≫ coherentEtaleMap _ _ (((tensorPullback j).obj (SheafOfModules.unit X.ringCatSheaf)).smulHom r)",
+  "branch": "sheaf-dag",
+  "by": "U2",
+  "date": "2026-10-25"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U2",
+  "result": "pass",
+  "landing": "20261025T123943-L-1920510",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U2",
+  "result": "pass",
+  "landing": "20261025T123943-L-1920510",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

@@ -13,67 +13,59 @@
  ],
  "proof": [
   {
-   "text": "Use the associated-graded multiplication on the ambient cokernel pieces I^n/I I^n. Their products and unit have the representative formulas and satisfy the graded laws.",
+   "text": "Choose the ambient graded algebra with its quotient-projection unit and representative multiplication. Use the normalized closed-immersion power quotient at exponent 1, with the fixed tensor-pullback adjunction, to obtain e_n:i_*piece_n ≅ B_n sending each fixed representative to its quotient class.",
    "uses": [
-    "lem-weil-pbc-formal-associated-graded-algebra-exists"
+    "lem-weil-pbc-formal-associated-graded-algebra-exists",
+    "lem-weil-pbc-closed-immersion-power-quotient"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/divisors.tex",
-    "place": "Tags 0630–0633, the conormal algebra, its degree pieces, and its affine identification."
+    "place": "Tag 0630, paragraph before definition-conormal-sheaf, and Tag 0633 (lemma-affine-conormal-sheaf)."
    }
   },
   {
-   "text": "The normalized closed-immersion quotient theorem identifies these cokernels with the pushforward of the fixed pieces i^*I^n. Descend the graded operations and laws using fully faithful closed pushforward.",
+   "text": "Descend the ambient homogeneous algebra through e_n. Apply totalization to the resulting graded algebra on piece_n to get an algebra A, homogeneous inclusions and a colimiting cofan. Apply e_(m+n) to compare a product of representatives: descent identifies it with the ambient product. The ambient theorem supplies a product lift c; monicity of the power inclusion identifies it with any prescribed product representative d. Apply e_0 to the unit-composite equation to identify the degree-zero representative with the scalar map.",
    "uses": [
-    "lem-weil-pbc-closed-immersion-power-quotient",
-    "lem-weil-pbc-closed-immersion-pushforward-fully-faithful"
+    "lem-pur-closed-immersion-graded-algebra-descent",
+    "lem-pur-graded-sheaf-algebra-totalization",
+    "lem-weil-pbc-formal-polynomial-power-lifts"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/divisors.tex",
-    "place": "Tags 0630–0633, the conormal algebra, its degree pieces, and its affine identification."
+    "place": "Tag 0630, paragraph before definition-conormal-sheaf, and Tag 0633 (lemma-affine-conormal-sheaf)."
    }
   },
   {
-   "text": "Sheafify the presheaf of finite sums of homogeneous sections, with convolution multiplication. Maps to a sheaf module are exactly families of maps from the homogeneous pieces; thus this is the required coproduct. The induced scalar map is the degree-zero unit.",
+   "text": "For each ambient affine open take the normalized additive coproduct equivalence E. Every direct-sum element is built by additions from homogeneous quotient classes; quotient induction and the affine power range lift each of those to a fixed representative. Thus these representatives additively generate the algebra sections. Double induction reduces preservation of multiplication by E to two representatives. An affine power product lift and the proved multiplication formula identify both sides with the same degree-(m+n) quotient class. An additive equivalence preserving products is a ring equivalence, hence gives the required ring chart with the original normalization.",
    "uses": [
-    "def-weil-sheaf-of-modules-category",
-    "def-weil-pbc-graded-sheaf-structures"
+    "lem-pur-conormal-coproduct-affine-add-equiv",
+    "lem-weil-pbc-formal-associated-graded-affine-multiplication",
+    "def-weil-pbc-associated-graded-ring"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/divisors.tex",
-    "place": "Tags 0630–0633, the conormal algebra, its degree pieces, and its affine identification."
-   }
-  },
-  {
-   "text": "On an ambient affine open, identify the fixed quotient pieces with the tilde modules I(U)^n/I(U)^(n+1), using the normalized unit and affine pullback. The tilde adjunction preserves coproducts, giving the direct-sum affine chart. Its unit and products are those of the associated-graded ring.",
-   "uses": [
-    "lem-weil-pbc-module-pullback-affine-sections",
-    "lem-weil-pbc-affine-tilde-gamma-adjunction"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/divisors.tex",
-    "place": "Tags 0630–0633, the conormal algebra, its degree pieces, and its affine identification."
+    "place": "Tag 0630, paragraph before definition-conormal-sheaf, and Tag 0633 (lemma-affine-conormal-sheaf)."
    }
   }
  ],
  "proof_deps": [
   "lem-weil-pbc-formal-associated-graded-algebra-exists",
   "lem-weil-pbc-closed-immersion-power-quotient",
-  "lem-weil-pbc-closed-immersion-pushforward-fully-faithful",
-  "def-weil-sheaf-of-modules-category",
-  "def-weil-pbc-graded-sheaf-structures",
-  "lem-weil-pbc-module-pullback-affine-sections",
-  "lem-weil-pbc-affine-tilde-gamma-adjunction"
+  "lem-pur-closed-immersion-graded-algebra-descent",
+  "lem-pur-graded-sheaf-algebra-totalization",
+  "lem-weil-pbc-formal-polynomial-power-lifts",
+  "lem-pur-conormal-coproduct-affine-add-equiv",
+  "lem-weil-pbc-formal-associated-graded-affine-multiplication",
+  "def-weil-pbc-associated-graded-ring"
  ],
  "proof_origin": {
+  "by": "agent",
   "document": "literature/stacks-project/divisors.tex",
-  "place": "Tags 0630–0633, the conormal algebra, its degree pieces, and its affine identification.",
-  "method": "Source argument, specialized to the fixed tensor-pullback pieces; Lean proof by N2.",
-  "by": "document"
+  "place": "Tags 0630–0633, normalized quotient descent and totalization, followed by an additive-chart multiplicativity proof.",
+  "method": "H1 Lean reduction: quotient normalization and representative formulas proved; double direct-sum/quotient induction proves the ring comparison from the additive comparison."
  },
  "mathlib_searches": [
   {
@@ -151,14 +143,25 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-20",
+  "date": "2026-10-26",
   "by": "L",
-  "reviewer": "C-aade2",
-  "group": "N2",
+  "reviewer": "COMPILER",
+  "group": "H1",
   "result": "pass",
-  "landing": "20261020T233205-L-904241",
+  "landing": "20261026T001706-L-22631",
   "kind": "interface",
-  "note": "independent cc review: aade2819 vs 07ff8649 (Lean and nodes sha-identical; only change record Users table and report changed); Presentation/exists_conormalGradedAlgebra and the six moved defs vs live; AffineData fields vs Presentation and Stacks 0630-0633; 7 direct importers compiled against the sandbox-built item olean"
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  },
- "lean_audit": {}
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ }
 }

@@ -15,6 +15,13 @@ public import Sheaf.AlgebraicGeometry.ProjectiveSpaceHomOfGeneratingSections
 public import WeilConjectures.AlgebraicGeometry.Modules.ZeroLocus
 public import WeilConjectures.AlgebraicGeometry.EtaleTensorSections
 
+import Sheaf.AlgebraicGeometry.ImmersiveSystemLocalCotangentPair
+import Sheaf.AlgebraicGeometry.LocalCotangentPairComponent
+import WeilConjectures.AlgebraicGeometry.Regular
+import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.QuasiFinite
+import WeilConjectures.RingTheory.FiniteTypeDomainDimensionLocalRingLocalization
+import WeilConjectures.AlgebraicGeometry.SectionNonvanishingZeroLocus
+
 /-! # BertiniFiniteCoverTransverseComponent
 
 Source: blueprint paragraph 3 of the finite-cover Bertini argument
@@ -34,6 +41,42 @@ namespace AlgebraicGeometry
 
 attribute [local irreducible] Scheme.Modules.tensorPullback Scheme.Modules.tensorPullbackObj
 
+private theorem closedPoint_coheight
+    {k : Type u} [Field k] (X : Scheme.{u}) [X.Over (Spec (.of k))]
+    [IsAffine X] [ConnectedSpace X] [Smooth (X ↘ Spec (.of k))]
+    [LocallyOfFiniteType (X ↘ Spec (.of k))]
+    (d : ℕ) (hdim : X.IsPureDimension d) {x : X} (hx : IsClosed ({x} : Set X)) :
+    Order.coheight x = d := by
+  have : IsLocallyNoetherian X := LocallyOfFiniteType.isLocallyNoetherian
+    (X ↘ Spec (.of k))
+  have : IsRegular X := IsRegular.of_smooth (X ↘ Spec (.of k))
+  have : IsIntegral X := IsRegular.isIntegral X
+  have hXdim : topologicalKrullDim X = (d : WithBot ℕ∞) := by
+    have h := hdim Set.univ (by simp [irreducibleComponents_eq_singleton])
+    rwa [(Homeomorph.Set.univ X).isHomeomorph.topologicalKrullDim_eq] at h
+  let A : CommRingCat.{u} := Γ(X, ⊤)
+  let e : X ≅ Spec A := X.isoSpec
+  let y : Spec A := e.hom x
+  obtain ⟨φ, hφ⟩ := Spec.map_surjective (e.inv ≫ (X ↘ Spec (.of k)))
+  have hft : LocallyOfFiniteType (Spec.map φ) := hφ ▸ inferInstance
+  let : Algebra k A := φ.hom.toAlgebra
+  have : Algebra.FiniteType k A := HasRingHomProperty.Spec_iff.mp hft
+  have : IsDomain A := inferInstance
+  have hAdim : ringKrullDim A = (d : WithBot ℕ∞) := by
+    rw [← PrimeSpectrum.topologicalKrullDim_eq_ringKrullDim]
+    exact e.hom.homeomorph.isHomeomorph.topologicalKrullDim_eq.symm.trans hXdim
+  have hy : IsClosed ({y} : Set (Spec A)) := by
+    simpa only [Set.image_singleton] using e.hom.isClosedEmbedding.isClosedMap _ hx
+  have : y.asIdeal.IsMaximal := (PrimeSpectrum.isClosed_singleton_iff_isMaximal _).mp hy
+  have hloc := finiteTypeDomain_ringKrullDim_localizationAtMaximal_localization
+    (k := k) (S := A) y.asIdeal
+  rw [IsLocalization.AtPrime.ringKrullDim_eq_height y.asIdeal
+    (Localization.AtPrime y.asIdeal), idealHeight_eq_coheight, hAdim] at hloc
+  have hco : Order.coheight y = d := by exact_mod_cast hloc
+  rw [← coheight_eq_of_isOpenImmersion e.hom]
+  exact hco
+
+
 set_option linter.unusedVariables false in
 /-- An immersive system on the complement of finitely many points has a transverse
 codimension-two intersection component on a connected finite etale cover.
@@ -42,22 +85,17 @@ Source: main-20261015, `lem-zl-bertini-finite-cover-curve.proof.md`, paragraph 3
 Stacks Project, Tag 0G4F, condition (3), and Tag 0B2G.
 (blueprint: lem-zl-bertini-finite-cover-transverse-component).
 
-Proof: the finite inverse image of S cannot exhaust the connected smooth scheme T:
-its closed points have local dimension d at least two, whereas a finite space of
-closed points has dimension zero. Choose a closed t outside it using the Jacobson
-property, and put x = π(t). Both residue fields are k. Generation supplies a section
-s₁ nonzero at x, which trivializes L nearby. In that frame, the coordinate ratios
-of the given basis sections induce the local map to the standard projective chart.
-The immersion makes the map on cotangent spaces surjective. Subtracting the values
-at x times s₁ produces sections vanishing at x whose classes span its cotangent
-space. Etaleness gives a surjection to the cotangent space at t. Both regular local
-rings have dimension d. Choose two linear combinations with independent classes
-at t. Nakayama extends their coefficients to a regular system of parameters; the
-quotient by its first two elements is regular local of dimension d-2, hence a
-domain. Their ideal is prime of height two. Contracting this prime to a trivializing
-affine neighbourhood gives a minimal prime of the two-section ideal of height two.
-The closure of its component in T is a maximal irreducible closed subset of the
-intersection, has coheight two, and contains t, where s₁ does not vanish. -/
+Proof: the generic point of T has coheight zero, and an etale map preserves
+coheight. It therefore cannot map into S, whose points have coheight d at least two.
+The Jacobson property supplies a closed t in the inverse image of U₀. The image
+π(t) is closed because π is finite. Finite-type domain dimension and regularity
+identify the cotangent dimension at t with d. The pointwise first-jet lemma supplies
+three vectors, with the first section nonvanishing at t and the other two having
+independent cotangent classes. Apply the local cotangent-pair component theorem:
+the local ideal generated by these two germs is prime of height two; its contraction
+to an affine neighbourhood is minimal over the two coefficients, and its closure
+is a global maximal irreducible closed subset of the intersection. It contains t,
+so it is not contained in the zero support of the first section. -/
 theorem bertini_finiteCover_transverse_component
     (k : Type u) [Field k] [IsAlgClosed k]
     (X : Scheme.{u}) [X.Over (Spec (.of k))] [IsAffine X] [ConnectedSpace X]
@@ -100,6 +138,58 @@ theorem bertini_finiteCover_transverse_component
         (Scheme.Modules.homOfGlobalSection ((Scheme.Modules.tensorPullback π).obj L)
           (Scheme.Modules.tensorSectionsUnit π L (ψ v₁))).zeroLocus.support ∧
       Order.coheight W = 2 := by
-  sorry
+  classical
+  dsimp only
+  have : IsLocallyNoetherian X :=
+    LocallyOfFiniteType.isLocallyNoetherian (X ↘ Spec (.of k))
+  have : IsRegular X := IsRegular.of_smooth (X ↘ Spec (.of k))
+  have : LocallyOfFiniteType (π ≫ (X ↘ Spec (.of k))) := inferInstance
+  have : IsLocallyNoetherian T :=
+    LocallyOfFiniteType.isLocallyNoetherian (π ≫ (X ↘ Spec (.of k)))
+  have : IsRegular T := ⟨isRegularLocalRing_stalk_of_etale π
+    (fun x ↦ inferInstance)⟩
+  have : IsIntegral T := IsRegular.isIntegral T
+  have : JacobsonSpace T := LocallyOfFiniteType.jacobsonSpace (π ≫ (X ↘ Spec (.of k)))
+  let η : T := genericPoint T
+  have hη : Order.coheight η = 0 := Order.coheight_eq_zero.mpr (by
+    intro z hz
+    rw [Scheme.le_iff_specializes]
+    exact genericPoint_specializes z)
+  have hηU : η ∈ π ⁻¹ᵁ U₀ := by
+    change π η ∈ U₀
+    rw [← SetLike.mem_coe, hU₀]
+    intro hηS
+    have hdimη := closedPoint_coheight (k := k) X d hdim (hclosed (π η) hηS)
+    rw [π.coheight_apply_of_flat, hη] at hdimη
+    have hd0 : d = 0 := by exact_mod_cast hdimη.symm
+    omega
+  obtain ⟨t, htU, htclosed⟩ := nonempty_inter_closedPoints
+    (show (π ⁻¹ᵁ U₀ : Set T).Nonempty from ⟨η, hηU⟩)
+    (π ⁻¹ᵁ U₀).isOpen.isLocallyClosed
+  have htxclosed : IsClosed ({π t} : Set X) := by
+    simpa only [Set.image_singleton] using π.isClosedMap _ htclosed
+  have htdim : Order.coheight t = d := by
+    rw [← π.coheight_apply_of_flat]
+    exact closedPoint_coheight (k := k) X d hdim htxclosed
+  have hcot : Module.finrank (IsLocalRing.ResidueField (T.presheaf.stalk t))
+      (IsLocalRing.CotangentSpace (T.presheaf.stalk t)) = d := by
+    have h := (IsRegularLocalRing.iff_finrank_cotangentSpace (T.presheaf.stalk t)).mp
+      inferInstance
+    rw [ringKrullDim_stalk_eq_coheight, htdim] at h
+    exact_mod_cast h
+  obtain ⟨v₁, v₂, v₃, hv₁, U, htU', e, he, f, hs₂, hs₃, hf, hind⟩ :=
+    immersiveSystem_local_cotangent_pair k X T π t htclosed
+      (by simpa only [hcot] using hd) U₀ htU L V r b ψ hlinear hgen
+  let LT := (Scheme.Modules.tensorPullback π).obj L
+  let : LT.IsInvertible := Scheme.Modules.IsInvertible.of_iso
+    (((Classical.choose (Scheme.Modules.exists_tensorPullbackAdjunction π)).leftAdjointUniq
+      (Scheme.Modules.pullbackPushforwardAdjunction π)).app L).symm
+  obtain ⟨W, hW, htW, hcodim⟩ := local_cotangent_pair_component T LT
+    (Scheme.Modules.tensorSectionsUnit π L (ψ v₂))
+    (Scheme.Modules.tensorSectionsUnit π L (ψ v₃)) t U htU' e he f hs₂ hs₃ hf hind
+  refine ⟨v₁, v₂, v₃, W, hW, ?_, hcodim⟩
+  intro hsub
+  rw [Scheme.Modules.nonvanishingLocus_eq_compl_support_zeroLocus] at hv₁
+  exact hv₁ (hsub htW)
 
 end AlgebraicGeometry

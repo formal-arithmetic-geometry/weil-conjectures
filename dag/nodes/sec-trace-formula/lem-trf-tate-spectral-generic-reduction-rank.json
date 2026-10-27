@@ -1,0 +1,460 @@
+{
+ "id": "lem-trf-tate-spectral-generic-reduction-rank",
+ "kind": "statement",
+ "title": "Gauss homogeneity and generic rank of the reduction of a finite Tate domain",
+ "statement": "Let $K$ be an algebraically closed field [def-weil-field], complete for a nontrivial real-valued nonarchimedean absolute value. Write $V=\\{a:|a|\\le1\\}$, $\\mathfrak m=\\{a:|a|<1\\}$ and $k=V/\\mathfrak m$. Let $T=K\\langle U_1,\\ldots,U_d\\rangle$, $d\\ge0$, be a restricted-series ring [def-trf-restricted-series-presentation] with Gauss norm $\\|\\cdot\\|_G$. Let $j:T\\hookrightarrow C$ be an injective $K$-algebra homomorphism, where $C$ is a nonzero affinoid domain (a quotient of a restricted-series ring which has no zero divisors) finite as a $T$-module. Define $\\rho_C(c)=\\sup_{\\mathfrak n\\in\\operatorname{Max}C}|c\\bmod\\mathfrak n|$, using the finite residue fields with their unique extending absolute values. Put $C^\\circ=\\{c:\\rho_C(c)\\le1\\}$, $C^{\\circ\\circ}=\\{c:\\rho_C(c)<1\\}$, $S=C^\\circ/C^{\\circ\\circ}$, $R=k[U_1,\\ldots,U_d]$, $F=\\operatorname{Frac}(T)$ and $E=\\operatorname{Frac}(C)$. Then $\\rho_C(j(t)c)=\\|t\\|_G\\rho_C(c)$ for every $t\\in T,c\\in C$. Coefficient reduction identifies the reduction of $T$ with $R$, and $j$ induces an injective map $R\\hookrightarrow S$. The ring $S$ is reduced and torsion-free as an $R$-module (a nonzero scalar in $R$ kills no nonzero element of $S$). For $Q=\\operatorname{Frac}(R)$, the localization $S\\otimes_R Q$ is a finite-dimensional $Q$-algebra and $\\dim_Q(S\\otimes_R Q)\\le[E:F]$. No integrality or module-finiteness assertion about $S$ over $R$ is included.",
+ "source": {
+  "document": "literature/bosch-formal-rigid-geometry-2008.pdf",
+  "url": "https://www.uni-muenster.de/IVV5WS/WebHop/user/weckerm/heft378.pdf",
+  "place": "Agent reconstruction from Section 1.4 Lemma 12(i)-(iii), printed pp.25-27, and Section 1.2 Gauss norm and coefficient reduction, printed pp.8-9. Minimal-polynomial scaling gives Gauss homogeneity; normalize coefficients of a lifted linear relation to prove the generic-rank bound. Not quoted as a theorem of Bosch. Primary PDF read online; archival copy WANTED."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-trf-restricted-series-presentation",
+  "def-weil-module-base-change",
+  "def-weil-finite-dimensional-subspace",
+  "def-weil-vector-space-dimension",
+  "def-weil-pbc-mv-polynomial-ring",
+  "def-weil-pbc-algebra-hom-quotient"
+ ],
+ "proof": [
+  {
+   "text": "Apply [lem-trf-tate-fraction-orthogonal-spectral-norm] with $e=d$ and $L=E$. Its hypotheses are precisely the given completeness, nontrivial valuation, algebraic closedness, injective finite map and nonzero affinoid domain. It supplies $n=[E:F]<\\infty$ and an $F$-vector-space norm $N$ restricting to $\\rho_C$, with $N(fz)=|f|_FN(z)$ and $|t|_F=\\|t\\|_G$. Hence $\\rho_C(j(t)c)=N(tc)=\\|t\\|_G\\rho_C(c)$, including $t=0$ and $c=0$. Its explicit formula applied to the minimal polynomial $Z-1$ gives $\\rho_C(1)=N(1)=1$, so $\\rho_C(j(t))=\\|t\\|_G$. The orthogonal-basis assertion of that node is not needed.",
+   "uses": [
+    "lem-trf-tate-fraction-orthogonal-spectral-norm"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bosch-formal-rigid-geometry-2008.pdf",
+    "place": "Section 1.2, printed pp.8-9, and Section 1.4 Lemma 12, printed pp.25-27; agent assembly from the cited DAG statements, with the generic-rank argument supplied here. Primary PDF read online 2026-10-24; archival copy WANTED."
+   }
+  },
+  {
+   "text": "At each maximal ideal the residue absolute value is ultrametric and multiplicative; taking suprema gives $\\rho_C(a+b)\\le\\max(\\rho_C(a),\\rho_C(b))$, $\\rho_C(-a)=\\rho_C(a)$ and $\\rho_C(ab)\\le\\rho_C(a)\\rho_C(b)$. The suprema are finite by [lem-trf-affinoid-supremum-seminorm-calculus]. Thus $C^\\circ$ is a unital subring and $C^{\\circ\\circ}$ is an ideal of it: for the ideal product use $\\rho_C(a)\\le1$, $\\rho_C(b)<1$. Consequently the displayed quotient $S$ is a ring. If a class represented by $c\\in C^\\circ$ has a positive power zero, then $\\rho_C(c^h)<1$ for some $h\\ge1$. The cited power formula yields $\\rho_C(c)^h<1$, hence $\\rho_C(c)<1$, and the class itself is zero. This proves reducedness.",
+   "uses": [
+    "lem-trf-affinoid-supremum-seminorm-calculus"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/bosch-formal-rigid-geometry-2008.pdf",
+    "place": "Section 1.2, printed pp.8-9, and Section 1.4 Lemma 12, printed pp.25-27; agent assembly from the cited DAG statements, with the generic-rank argument supplied here. Primary PDF read online 2026-10-24; archival copy WANTED."
+   }
+  },
+  {
+   "text": "By [lem-trf-tate-unit-ball-polynomial-reduction], coefficient reduction from $T^\\circ=\\{t:\\|t\\|_G\\le1\\}$ onto $R$ is surjective with kernel $T^{\\circ\\circ}=\\{t:\\|t\\|_G<1\\}$. This gives the asserted identification of the reduction of $T$. Step 1 shows that $j$ sends these two sets into $C^\\circ$ and $C^{\\circ\\circ}$, respectively, and that $j(t)$ represents zero in $S$ exactly when $\\|t\\|_G<1$. Hence it induces an injective unital ring map $R\\hookrightarrow S$, taking residue constants to residue constants. Also $R$ is a domain: nonzero $r,u\\in R$ admit lifts $t,v$ of Gauss norm one, so $\\|tv\\|_G=1$ by [lem-trf-tate-gauss-multiplicative]; their product has nonzero reduction.",
+   "uses": [
+    "lem-trf-tate-unit-ball-polynomial-reduction",
+    "lem-trf-tate-gauss-multiplicative"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bosch-formal-rigid-geometry-2008.pdf",
+    "place": "Section 1.2, printed pp.8-9, and Section 1.4 Lemma 12, printed pp.25-27; agent assembly from the cited DAG statements, with the generic-rank argument supplied here. Primary PDF read online 2026-10-24; archival copy WANTED."
+   }
+  },
+  {
+   "text": "Let $0\\ne r\\in R$ and $0\\ne s\\in S$. Lift $r$ to $t\\in T^\\circ$ by step 3 and $s$ to $c\\in C^\\circ$ by the quotient definition. Nonvanishing of the reductions implies $\\|t\\|_G=1$ and $\\rho_C(c)=1$. Step 1 gives $\\rho_C(j(t)c)=1$, so its reduction $rs$ is nonzero. This proves the stated torsion-freeness, without identifying $S$ with a domain.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/bosch-formal-rigid-geometry-2008.pdf",
+    "place": "Section 1.2, printed pp.8-9, and Section 1.4 Lemma 12, printed pp.25-27; agent assembly from the cited DAG statements, with the generic-rank argument supplied here. Primary PDF read online 2026-10-24; archival copy WANTED."
+   }
+  },
+  {
+   "text": "Put $M=R\\setminus\\{0\\}$. Since $R$ is a domain, $Q$ is its localization at $M$. Apply [lem-weil-pbc-localization-base-change] to $R\\to S$: it identifies the ring $W=S\\otimes_RQ$ with the localization of $S$ at the image of $M$. Its $Q$-algebra structure has scalar map $q\\mapsto1\\otimes q$. Take a finite independent family $w_1,\\ldots,w_m$ over $Q$ in $W$. The cited fraction representation gives $w_i=s_i\\otimes(1/r_i)$ for $s_i\\in S$ and $0\\ne r_i\\in R$. The vectors $s_i\\otimes1=r_iw_i$ are independent: a relation with coefficients $q_i$ becomes $\\sum_i(q_ir_i)w_i=0$, so every $q_i=0$. Choose lifts $c_i\\in C^\\circ$ of $s_i$.",
+   "uses": [
+    "lem-weil-pbc-localization-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bosch-formal-rigid-geometry-2008.pdf",
+    "place": "Section 1.2, printed pp.8-9, and Section 1.4 Lemma 12, printed pp.25-27; agent assembly from the cited DAG statements, with the generic-rank argument supplied here. Primary PDF read online 2026-10-24; archival copy WANTED."
+   }
+  },
+  {
+   "text": "These $c_i$ are independent over $F$. Indeed, a nonzero relation $\\sum_i f_ic_i=0$ in $E$, $f_i\\in F$, gives one $\\sum_i t_ic_i=0$ with $t_i\\in T$ not all zero after multiplying by the product of the nonzero denominators of the $f_i$. Since $C\\hookrightarrow E$ is injective, this is an equality in $C$. The largest coefficient absolute value among all the finitely many restricted series $t_i$ is attained: choose any nonzero coefficient $a$; in each series only finitely many coefficients have absolute value at least $|a|$, and the maximum over their finite nonempty union dominates all remaining coefficients. Let $\\lambda\\in K^\\times$ be a coefficient attaining that maximum and put $u_i=\\lambda^{-1}t_i$. All $u_i$ have Gauss norm at most one and some has norm one. Reduce $\\sum_i j(u_i)c_i=0$ in $S$: it gives $\\sum_i\\operatorname{red}(u_i)s_i=0$, with some $\\operatorname{red}(u_i)\\ne0$ by the kernel assertion of [lem-trf-tate-unit-ball-polynomial-reduction]. Tensoring gives a nonzero $Q$-linear relation on the independent $s_i\\otimes1$ of step 5; nonzero coefficients remain nonzero in $Q$ because $R$ is a domain. This contradiction proves the independence.",
+   "uses": [
+    "lem-trf-tate-unit-ball-polynomial-reduction",
+    "def-trf-restricted-series-presentation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bosch-formal-rigid-geometry-2008.pdf",
+    "place": "Section 1.2, printed pp.8-9, and Section 1.4 Lemma 12, printed pp.25-27; agent assembly from the cited DAG statements, with the generic-rank argument supplied here. Primary PDF read online 2026-10-24; archival copy WANTED."
+   }
+  },
+  {
+   "text": "Apply [lem-weil-independent-family-card-le-dimension] to $c_1,\\ldots,c_m$ in the finite-dimensional $F$-space $E$ from step 1. It gives $m\\le n$. Therefore every finite independent family in $W$ has size at most $n$. Starting with the empty family, whenever its span is not all of $W$, choose one vector outside that span. The enlarged family is independent: in a relation with a nonzero coefficient of the new vector, division by that coefficient would put it in the old span. This process must stop by the $n$th addition, since otherwise it constructs $n+1$ independent vectors. The resulting family is a finite basis of size at most $n$. By [def-weil-finite-dimensional-subspace] and [def-weil-vector-space-dimension] this proves finite dimensionality and gives $\\dim_Q W\\le n=[E:F]$. Its $Q$-algebra structure was established in step 5.",
+   "uses": [
+    "lem-weil-independent-family-card-le-dimension",
+    "def-weil-finite-dimensional-subspace",
+    "def-weil-vector-space-dimension"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/bosch-formal-rigid-geometry-2008.pdf",
+    "place": "Section 1.2, printed pp.8-9, and Section 1.4 Lemma 12, printed pp.25-27; agent assembly from the cited DAG statements, with the generic-rank argument supplied here. Primary PDF read online 2026-10-24; archival copy WANTED."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-trf-restricted-series-presentation",
+  "def-weil-finite-dimensional-subspace",
+  "def-weil-vector-space-dimension",
+  "lem-trf-affinoid-supremum-seminorm-calculus",
+  "lem-trf-tate-fraction-orthogonal-spectral-norm",
+  "lem-trf-tate-gauss-multiplicative",
+  "lem-trf-tate-unit-ball-polynomial-reduction",
+  "lem-weil-independent-family-card-le-dimension",
+  "lem-weil-pbc-localization-base-change"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/bosch-formal-rigid-geometry-2008.pdf",
+  "place": "Section 1.2, printed pp.8-9, and Section 1.4 Lemma 12, printed pp.25-27; agent assembly from the cited DAG statements, with the generic-rank argument supplied here. Primary PDF read online 2026-10-24; archival copy WANTED."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "spectralNorm|spectralRadius|TateAlgebra",
+   "results": {
+    "t": "2026-10-24T09:58:58Z",
+    "tool": "grep",
+    "query": "spectralNorm|spectralRadius|TateAlgebra",
+    "sub": "Analysis",
+    "ok": true,
+    "n_hits": 25,
+    "note": "",
+    "top": [
+     "Mathlib/Analysis/CStarAlgebra/GelfandDuality.lean",
+     "Mathlib/Analysis/CStarAlgebra/GelfandDuality.lean",
+     "Mathlib/Analysis/CStarAlgebra/GelfandDuality.lean",
+     "Mathlib/Analysis/CStarAlgebra/GelfandDuality.lean",
+     "Mathlib/Analysis/CStarAlgebra/Spectrum.lean",
+     "Mathlib/Analysis/CStarAlgebra/Spectrum.lean",
+     "Mathlib/Analysis/CStarAlgebra/Spectrum.lean",
+     "Mathlib/Analysis/CStarAlgebra/Spectrum.lean"
+    ],
+    "digest": "6a4ad86bde55ca8e"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: spectralNorm_smul is homogeneity of the minimal-polynomial spectral norm for a normed FIELD extension; it neither identifies the affinoid maximal-spectrum norm nor asserts torsion-freeness or a rank bound for its reduction. PID module and formal PowerSeries rank results have different objects. There is no one-line specialization to this analytic comparison."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Spectral reduction of a finite torsion free Tate algebra module has no polynomial torsion and bounded generic dimension",
+   "results": {
+    "t": "2026-10-24T09:58:58Z",
+    "tool": "leansearch",
+    "query": "Spectral reduction of a finite torsion free Tate algebra module has no polynomial torsion and bounded generic dimension",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "Module.basisOfFiniteTypeTorsionFree",
+     "Module.AEval.isTorsion_of_finiteDimensional",
+     "Module.free_of_finite_type_torsion_free'",
+     "Module.basisOfFiniteTypeTorsionFree'",
+     "instFreeSubtypeMemIdealOfFiniteOfIsTorsionFree",
+     "Module.free_iff_isTorsionFree",
+     "Submodule.exists_isInternal_prime_power_torsion_of_pid",
+     "IsDedekindDomain.HeightOneSpectrum.instIsTorsionFreeSubtypeAdicCompletionMemValuationSubringAdicCompletionIntegers"
+    ],
+    "digest": "b9c98f201043ebc8"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: spectralNorm_smul is homogeneity of the minimal-polynomial spectral norm for a normed FIELD extension; it neither identifies the affinoid maximal-spectrum norm nor asserts torsion-freeness or a rank bound for its reduction. PID module and formal PowerSeries rank results have different objects. There is no one-line specialization to this analytic comparison."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"spectralNorm\", \"rank\"",
+   "results": {
+    "t": "2026-10-24T09:58:58Z",
+    "tool": "loogle",
+    "query": "\"spectralNorm\", \"rank\"",
+    "sub": "",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: spectralNorm_smul is homogeneity of the minimal-polynomial spectral norm for a normed FIELD extension; it neither identifies the affinoid maximal-spectrum norm nor asserts torsion-freeness or a rank bound for its reduction. PID module and formal PowerSeries rank results have different objects. There is no one-line specialization to this analytic comparison."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a finite torsion free algebra over a Tate algebra its canonical reduction is torsion free over the residue polynomial ring and its generic rank is bounded by the original generic rank",
+   "results": {
+    "t": "2026-10-24T09:59:00Z",
+    "tool": "leanfinder",
+    "query": "For a finite torsion free algebra over a Tate algebra its canonical reduction is torsion free over the residue polynomial ring and its generic rank is bounded by the original generic rank",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "PowerSeries.spanFinrank_le_spanFinrank_map_constantCoeff_add_one_of_isPrime",
+     "Module.rankAtStalk_eq",
+     "Algebra.IsAlgebraic.lift_rank_of_isFractionRing",
+     "Algebra.IsAlgebraic.rank_fractionRing_mvPolynomial",
+     "PowerSeries.spanFinrank_eq_spanFinrank_map_constantCoeff_of_X_notMem_of_fg_of_isPrime",
+     "RatFunc.rank_ratFunc_ratFunc",
+     "Algebra.IsAlgebraic.rank_of_isFractionRing",
+     "Algebra.IsAlgebraic.rank_fractionRing_polynomial"
+    ],
+    "digest": "e73fb202151549d1"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: spectralNorm_smul is homogeneity of the minimal-polynomial spectral norm for a normed FIELD extension; it neither identifies the affinoid maximal-spectrum norm nor asserts torsion-freeness or a rank bound for its reduction. PID module and formal PowerSeries rank results have different objects. There is no one-line specialization to this analytic comparison."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a finite injective map from convergent power series to an affinoid domain the spectral norm is homogeneous for Gauss norm scalars and residue linear independence lifts to fraction field linear independence",
+   "results": {
+    "t": "2026-10-24T09:59:01Z",
+    "tool": "leanfinder",
+    "query": "For a finite injective map from convergent power series to an affinoid domain the spectral norm is homogeneous for Gauss norm scalars and residue linear independence lifts to fraction field linear independence",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "isPowMul_spectralNorm",
+     "spectralNorm_smul",
+     "isPowMul_spectralNorm_of_finiteDimensional_normal",
+     "spectralAlgNorm_isPowMul",
+     "isNonarchimedean_spectralNorm_of_finiteDimensional_normal",
+     "spectralNorm_unique",
+     "norm_le_spectralNorm",
+     "spectralAlgNorm"
+    ],
+    "digest": "12df0fd880a5bc02"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: spectralNorm_smul is homogeneity of the minimal-polynomial spectral norm for a normed FIELD extension; it neither identifies the affinoid maximal-spectrum norm nor asserts torsion-freeness or a rank bound for its reduction. PID module and formal PowerSeries rank results have different objects. There is no one-line specialization to this analytic comparison."
+  },
+  {
+   "tool": "grep",
+   "query": "TateAlgebra|spectralNorm_smul|spectralValue.*mul",
+   "results": {
+    "t": "2026-10-24T15:21:40Z",
+    "tool": "grep",
+    "query": "TateAlgebra|spectralNorm_smul|spectralValue.*mul",
+    "sub": "Analysis",
+    "ok": true,
+    "n_hits": 4,
+    "note": "",
+    "top": [
+     "Mathlib/Analysis/Normed/Unbundled/SpectralNorm.lean",
+     "Mathlib/Analysis/Normed/Unbundled/SpectralNorm.lean",
+     "Mathlib/Analysis/Normed/Unbundled/SpectralNorm.lean",
+     "Mathlib/Analysis/Normed/Unbundled/SpectralNorm.lean"
+    ],
+    "digest": "ac536b6104d459e4"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: field-extension spectralNorm statements do not identify the affinoid supremum norm or its canonical reduction. FractionRing dimension results concern E/F, not the residue localization S tensor_R Q; the independence hits do not give this analytic lifting argument."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Reduction of a finite algebra over restricted power series is torsion free of rank at most the degree of its fraction field",
+   "results": {
+    "t": "2026-10-24T15:21:41Z",
+    "tool": "leansearch",
+    "query": "Reduction of a finite algebra over restricted power series is torsion free of rank at most the degree of its fraction field",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "instFiniteDimensionalFractionRingOfFinite",
+     "Subalgebra.instIsTorsionFree'",
+     "Algebra.IsAlgebraic.rank_fractionRing",
+     "instIsTorsionFreeLocalizationAlgebraMapSubmonoidPrimeCompl_1",
+     "Algebra.IsAlgebraic.rank_of_isFractionRing",
+     "Algebra.IsAlgebraic.rank_fractionRing_mvPolynomial",
+     "PowerSeries.spanFinrank_le_spanFinrank_map_constantCoeff_add_one_of_X_mem",
+     "Algebra.IsAlgebraic.rank_fractionRing_polynomial"
+    ],
+    "digest": "115f1037cdc1a253"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: field-extension spectralNorm statements do not identify the affinoid supremum norm or its canonical reduction. FractionRing dimension results concern E/F, not the residue localization S tensor_R Q; the independence hits do not give this analytic lifting argument."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"spectralNorm\", \"smul\"",
+   "results": {
+    "t": "2026-10-24T15:21:41Z",
+    "tool": "loogle",
+    "query": "\"spectralNorm\", \"smul\"",
+    "sub": "",
+    "ok": true,
+    "n_hits": 1,
+    "note": "",
+    "top": [
+     "spectralNorm_smul"
+    ],
+    "digest": "9242ed01da521b93"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: field-extension spectralNorm statements do not identify the affinoid supremum norm or its canonical reduction. FractionRing dimension results concern E/F, not the residue localization S tensor_R Q; the independence hits do not give this analytic lifting argument."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For an affinoid domain finite over a Tate algebra the spectral norm is homogeneous for Gauss scalars and the canonical reduction has bounded generic rank",
+   "results": {
+    "t": "2026-10-24T15:21:42Z",
+    "tool": "leanfinder",
+    "query": "For an affinoid domain finite over a Tate algebra the spectral norm is homogeneous for Gauss scalars and the canonical reduction has bounded generic rank",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "isPowMul_spectralNorm",
+     "isPowMul_spectralNorm_of_finiteDimensional_normal",
+     "isNonarchimedean_spectralNorm",
+     "isNonarchimedean_spectralNorm_of_finiteDimensional_normal",
+     "spectralAlgNorm_isPowMul",
+     "spectralAlgNorm_def",
+     "spectralNorm_extends_of_finiteDimensional",
+     "spectralAlgNorm"
+    ],
+    "digest": "0aff9b0b4717e55d"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: field-extension spectralNorm statements do not identify the affinoid supremum norm or its canonical reduction. FractionRing dimension results concern E/F, not the residue localization S tensor_R Q; the independence hits do not give this analytic lifting argument."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Residue linear independence of bounded vectors for a norm homogeneous over Gauss valued restricted series implies linear independence over the fraction field",
+   "results": {
+    "t": "2026-10-24T15:22:40Z",
+    "tool": "leanfinder",
+    "query": "Residue linear independence of bounded vectors for a norm homogeneous over Gauss valued restricted series implies linear independence over the fraction field",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "Profinite.NobelingProof.GoodProducts.linearIndependentAux",
+     "Ideal.FinrankQuotientMap.linearIndependent_of_nontrivial",
+     "Profinite.NobelingProof.GoodProducts.linearIndependent",
+     "Profinite.NobelingProof.GoodProducts.linearIndependent_comp_of_eval",
+     "Profinite.NobelingProof.GoodProducts.linearIndependentSingleton",
+     "RootPairing.linearIndepOn_root_baseOf'",
+     "NumberField.mixedEmbedding.fundamentalCone.linearIndependent_completeFamily",
+     "Profinite.NobelingProof.GoodProducts.linearIndependent_iff_range"
+    ],
+    "digest": "e0b15eb9b4febd46"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: field-extension spectralNorm statements do not identify the affinoid supremum norm or its canonical reduction. FractionRing dimension results concern E/F, not the residue localization S tensor_R Q; the independence hits do not give this analytic lifting argument."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-finite-affinoid-canonical-reduction",
+  "date": "2026-10-24",
+  "group": "Q117"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Historical analytic input supporting the normalization chain from lem-trf-local-term-locality, through Temkin Theorem 3.5.5 Step 2: Distinguished presentations of reduced affinoids over an algebraically closed field. This is below the node level, not a replacement of the current contracting-correspondence unit proof. Supporting analytic lemma in the presentation construction: Finite generation of the canonical reduction of a strict affinoid. Relative finiteness of the reduction map used after Tate Noether normalization. Repair of relative reduction finiteness: Gauss homogeneity and generic rank of the reduction of a finite Tate domain.",
+   "via": [
+    "lem-trf-finite-affinoid-canonical-reduction",
+    "lem-trf-affinoid-canonical-reduction-finite-type",
+    "lem-trf-affinoid-distinguished-presentation",
+    "lem-trf-valuation-grauert-remmert-powerbounded",
+    "lem-trf-valuation-reduced-fibre-normalization",
+    "lem-trf-reduced-fibre-modification",
+    "lem-trf-valuation-curve-finite-normalization",
+    "lem-trf-modification-fibre-centre-finite",
+    "lem-trf-finite-fibre-valuation-domination",
+    "lem-trf-valuation-strict-semistable-cofinality",
+    "lem-trf-valuation-stable-reduction",
+    "lem-trf-temkin-stable-modification",
+    "lem-trf-stable-modification-flat-curve-pair",
+    "lem-trf-dejong-relative-marked-semistable",
+    "lem-trf-relative-marked-nodal-reduction",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-trf-tate-spectral-generic-reduction-rank",
+  "worker": "stage1",
+  "summary": "Reused the existing fraction-field spectral norm and coefficient-reduction statements. Proved reducedness and torsion-freeness directly, and proved the generic dimension bound by lifting independent residue vectors and normalizing an arbitrary nonzero relation. No new nodes; no assertion of relative integrality or finiteness of S over R. All hypotheses and zero-variable cases checked.",
+  "blueprint": "Historical analytic support below lem-trf-local-term-locality, as identified in blueprint.from.place: the finite Tate-domain reduction input to the distinguished-presentation construction. The current contracting-correspondence unit is unchanged.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-localization-base-change",
+    "why": "Generic localization base-change identifies S tensor_R Q with the localization and supplies fraction representatives."
+   },
+   {
+    "node": "def-weil-vector-space-dimension",
+    "why": "Generic definition of dimension counts the finite basis constructed in step 7."
+   },
+   {
+    "node": "def-weil-module-base-change",
+    "why": "Generic tensor scalar-extension formulas for finite sums and fractions, not supplied by the analytic unit."
+   },
+   {
+    "node": "lem-weil-independent-family-card-le-dimension",
+    "why": "Generic finite-dimensional linear algebra bounds the number of independent lifts in E."
+   },
+   {
+    "node": "def-weil-finite-dimensional-subspace",
+    "why": "The finite-span definition of finite-dimensional vector space is a generic notion."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-localization-base-change",
+  "def-weil-vector-space-dimension",
+  "def-weil-module-base-change",
+  "lem-weil-independent-family-card-le-dimension",
+  "def-weil-finite-dimensional-subspace"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q83-755fc2382",
+  "group": "Q83",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q83-755fc2382 (reviewer sub-agent of L); spot-checked: I read the item in full; there are no new nodes and no fixes. Shape: one commit, statement byte-identical to base (base was unsplit with an empty proof, no repair note, so this is not a re-split). proof_deps equals the union of step uses, there is no cycle (80-node closure checked), and the 10 recorded searches cover grep, LeanSearch, Loogle and LeanFinder. Step 1: every hypothesis of lem-trf-tate-fraction-orthogonal-spectral-norm is in the item (K algebraically closed, complete, nontrivial; C nonzero affinoid domain; j injective and finite). Homogeneity follows from N(fz)=|f|_F N(z) with |t/1|_F=G(t), and rho(1)=1 from the explicit formula at Z-1, which is the norm the homogeneity clause is about. Step 2 (elementary): C° is a ring, C°° an ideal of it, and S is reduced by the power formula of the supremum-calculus node. Step 3: the surjectivity and kernel of red, with norm preservation, give an injective R->S; proving R a domain through Gauss multiplicativity is redundant but correct. Step 4: lifts of norm 1 give torsion-freeness. Step 5: localization base change gives w_i = s_i⊗(1/r_i), so the s_i⊗1 are independent. Step 6: denominators are cleared (T is a domain inside C), and a coefficient lambda attaining the maximum exists because coefficients tend to zero; reducing then contradicts step 5. Step 7: the independent-family leaf and a greedy basis give dim_Q W <= [E:F]. Edge cases checked: d=0 (C=K, n=1), V^2=U (rank 2), zero factors, S nonzero. All non-leaf citations are in sk-i-curve-zero; the declared tool_uses are leaves or definitions and I accept them. Duplicate search over the DAG with rg -L for torsion-free/Gauss/reduction found no node stating this result. The only citer, lem-trf-finite-affinoid-canonical-reduction step 1, uses exactly the stated clauses. Bosch is absent from literature (WANTED) and the proof is correctly marked agent; no SGA is cited."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.TateSpectralGenericReductionRank",
+  "declaration": "RestrictedSeries.tate_spectral_generic_reduction_rank",
+  "file": "lean/Sheaf/RingTheory/TateSpectralGenericReductionRank.lean",
+  "statement": "theorem tate_spectral_generic_reduction_rank (K : Type u) [NontriviallyNormedField K] [IsUltrametricDist K] [CompleteSpace K] [IsAlgClosed K] (d : ℕ) (V : ValuationSubring K) (hV : ∀ a : K, a ∈ V ↔ ‖a‖ ≤ 1) (C : Type v) [CommRing C] [IsDomain C] [Algebra K C] [Algebra (MvPowerSeries.IsRestricted.subring (R := K) (fun _ : Fin d ↦ (1 : ℝ))) C] [Module.Finite (MvPowerSeries.IsRestricted.subring (R := K) (fun _ : Fin d ↦ (1 : ℝ))) C] (hinj : Function.Injective (algebraMap (MvPowerSeries.IsRestricted.subring (R := K) (fun _ : Fin d ↦ (1 : ℝ))) C)) (hscalar : (algebraMap (MvPowerSeries.IsRestricted.subring (R := K) (fun _ : Fin d ↦ (1 : ℝ))) C).comp (constants K d) = algebraMap K C) (haff : ∃ (n : ℕ) (q : (MvPowerSeries.IsRestricted.subring (R := K) (fun _ : Fin n ↦ (1 : ℝ))) →+* C), Function.Surjective q ∧ q.comp (constants K n) = algebraMap K C) (ρ : C → ℝ) (hρ : ∀ c : C, ρ c = sSup {r : ℝ | ∃ m : MaximalSpectrum C, ∃ a : AbsoluteValue (C ⧸ m.asIdeal) ℝ, (∀ b : K, a (Ideal.Quotient.mk m.asIdeal (algebraMap K C b)) = ‖b‖) ∧ r = a (Ideal.Quotient.mk m.asIdeal c)}) : (∀ (t : MvPowerSeries.IsRestricted.subring (R := K) (fun _ : Fin d ↦ (1 : ℝ))) (c : C), ρ (algebraMap _ C t * c) = MvPowerSeries.gaussNorm (norm : K → ℝ) (fun _ : Fin d ↦ 1) t.val * ρ c) ∧ ∃ U : Subring (MvPowerSeries.IsRestricted.subring (R := K) (fun _ : Fin d ↦ (1 : ℝ))), (∀ t, t ∈ U ↔ MvPowerSeries.gaussNorm (norm : K → ℝ) (fun _ : Fin d ↦ 1) t.val ≤ 1) ∧ ∃ (red : U →+* MvPolynomial (Fin d) (IsLocalRing.ResidueField V)), Function.Surjective red ∧ (∀ t : U, red t = 0 ↔ MvPowerSeries.gaussNorm (norm : K → ℝ) (fun _ : Fin d ↦ 1) t.val.val < 1) ∧ (∀ (t : U) (m : Fin d →₀ ℕ), ∃ a : V, a.val = MvPowerSeries.coeff m t.val.val ∧ MvPolynomial.coeff m (red t) = IsLocalRing.residue V a) ∧ ∃ P : Subring C, (∀ c : C, c ∈ P ↔ ρ c ≤ 1) ∧ ∃ I : Ideal P, (∀ c : P, c ∈ I ↔ ρ c.val < 1) ∧ IsReduced (P ⧸ I) ∧ ∃ (jU : U →+* P) (jbar : MvPolynomial (Fin d) (IsLocalRing.ResidueField V) →+* P ⧸ I), (∀ t : U, (jU t).val = algebraMap _ C t.val) ∧ Function.Injective jbar ∧ (∀ t : U, jbar (red t) = Ideal.Quotient.mk I (jU t)) ∧ ∀ [A : Algebra (MvPolynomial (Fin d) (IsLocalRing.ResidueField V)) (P ⧸ I)], algebraMap (MvPolynomial (Fin d) (IsLocalRing.ResidueField V)) (P ⧸ I) = jbar → (∀ (r : MvPolynomial (Fin d) (IsLocalRing.ResidueField V)) (s : P ⧸ I), r ≠ 0 → r • s = 0 → s = 0) ∧ FiniteDimensional (FractionRing (MvPolynomial (Fin d) (IsLocalRing.ResidueField V))) ((FractionRing (MvPolynomial (Fin d) (IsLocalRing.ResidueField V))) ⊗[ MvPolynomial (Fin d) (IsLocalRing.ResidueField V)] (P ⧸ I)) ∧ Module.finrank (FractionRing (MvPolynomial (Fin d) (IsLocalRing.ResidueField V))) ((FractionRing (MvPolynomial (Fin d) (IsLocalRing.ResidueField V))) ⊗[ MvPolynomial (Fin d) (IsLocalRing.ResidueField V)] (P ⧸ I)) ≤ @Module.finrank (FractionRing (MvPowerSeries.IsRestricted.subring (R := K) (fun _ : Fin d ↦ (1 : ℝ)))) (FractionRing C) _ _ (IsFractionRing.map (K := FractionRing (MvPowerSeries.IsRestricted.subring (R := K) (fun _ : Fin d ↦ (1 : ℝ)))) (L := FractionRing C) hinj).toAlgebra.toModule",
+  "branch": "newtargets-dag",
+  "by": "NW",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-70ca4cdbd",
+  "group": "NW",
+  "result": "pass",
+  "note": "Delivery adds 3 files (report, node lean field only, module); lean.statement verbatim in the file, sorry only. Hypotheses match the node with nothing stronger: K NontriviallyNormedField+IsUltrametricDist+Complete+IsAlgClosed, V pinned by hV, T=IsRestricted.subring radius 1, gaussNorm; C IsDomain + algebraic quotient haff (not the stronger normed IsAffinoidQuotient, as the node says), hinj, hscalar, Module.Finite. rho pinned by hρ as sSup over MaximalSpectrum and extending absolute values (C/m = K, unique extension, so this is the source's supremum). Conclusions all present and pinned: homogeneity for all t,c; U={G<=1}; red surjective, ker G<1, coefficientwise reduction; P={rho<=1} and I={rho<1} exact; IsReduced; jU/jbar injective and forced by representatives; torsion-free under the canonical algebra (jbar.toAlgebra); FiniteDimensional and finrank Q (Q tensor_R S) <= [E:F] via IsFractionRing.map hinj. Edge cases d=0, zero factors, S with zero divisors checked. H4: no Lean owner for the affinoid sup seminorm or reduction in side-live lean/Sheaf or Mathlib. Docstrings give the source and blueprint tag plus the 7 proof steps; imports clean. Not recompiled (no change). Advisory: the Second reading by NW was by the author, per the dispatcher instruction."
+ }
+}

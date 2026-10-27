@@ -1,0 +1,301 @@
+{
+ "id": "lem-trf-curve-euler-defect-additivity",
+ "kind": "statement",
+ "title": "Additivity and well-definedness of the Euler defect on an integral proper curve",
+ "statement": "Let $k$ be a field [def-weil-field] and $C$ an integral scheme [def-pc-integral-scheme] proper over $k$ [def-weil-proper-morphism] of topological Krull dimension one [def-kun-topological-krull-dimension]. Let $\\xi$ be its generic point, so $\\overline{\\{\\xi\\}}=C$, and let $\\mathcal L$ be an invertible $\\mathcal O_C$-module [def-sc-invertible-module]. Then $C$ is Noetherian, meaning locally Noetherian [pqf-def-locnoeth] and quasi-compact [def-weil-pbc-scheme-conventions], and $\\mathcal O_{C,\\xi}$ is a field canonically identified with $\\kappa(\\xi)$ [def-weil-residue-field]. For every coherent $\\mathcal O_C$-module $\\mathcal H$ [pqf-def-coherent], the tensor $\\mathcal L\\otimes_{\\mathcal O_C}\\mathcal H$ is coherent [def-pur-sheaf-tensor-product] and the generic stalk $\\mathcal H_\\xi$ [def-weil-pbc-module-stalk] is finite-dimensional over $\\kappa(\\xi)$. Write $r(\\mathcal H)=\\dim_{\\kappa(\\xi)}\\mathcal H_\\xi$ [def-weil-vector-space-dimension], and define the integer\n$$D_{\\mathcal L}(\\mathcal H)=\\chi(C,\\mathcal L\\otimes\\mathcal H)-\\chi(C,\\mathcal H)-r(\\mathcal H)\\deg_k(\\mathcal L),$$\nusing Euler characteristic [def-pc-euler-characteristic] and degree [def-pc-degree-line-bundle]. Then $D_{\\mathcal L}(0)=0$. For every short exact sequence $0\\to\\mathcal H_1\\to\\mathcal H_2\\to\\mathcal H_3\\to0$ of coherent modules [def-weil-pbc-exact-sequence] one has\n$$r(\\mathcal H_2)=r(\\mathcal H_1)+r(\\mathcal H_3),\\qquad D_{\\mathcal L}(\\mathcal H_2)=D_{\\mathcal L}(\\mathcal H_1)+D_{\\mathcal L}(\\mathcal H_3).$$\nIn particular, the property $D_{\\mathcal L}(\\mathcal H)=0$ holds for the third term whenever it holds for any two terms of such a sequence.",
+ "source": {
+  "document": "literature/stacks-project/varieties.tex",
+  "place": "Tag 0AYV, lemma-degree-on-proper-curve, proof of condition (1), with the Noetherian, coherence, finite generic rank and zero-object preliminaries of returned steps 1-3."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-pc-integral-scheme",
+  "def-weil-proper-morphism",
+  "def-kun-topological-krull-dimension",
+  "def-sc-invertible-module",
+  "pqf-def-locnoeth",
+  "def-weil-pbc-scheme-conventions",
+  "def-weil-residue-field",
+  "pqf-def-coherent",
+  "def-pur-sheaf-tensor-product",
+  "def-weil-pbc-module-stalk",
+  "def-weil-vector-space-dimension",
+  "def-pc-euler-characteristic",
+  "def-pc-degree-line-bundle",
+  "def-weil-pbc-exact-sequence",
+  "def-pc-module-stalk-functor"
+ ],
+ "proof": [
+  {
+   "text": "Apply [lem-trf-proper-field-invertible-coherent] with $Y=C$ and $\\mathcal N=\\mathcal L$: $C$ is locally Noetherian and quasi-compact, and $\\mathcal L$ and $\\mathcal O_C$ are coherent. The hypotheses are precisely properness over the field and invertibility; no smoothness or geometric integrality is required. Apply [lem-sc-rational-functions-generic-stalks] to the integral scheme $C$, which has just its one irreducible component, to see that $A=\\mathcal O_{C,\\xi}$ is a field. Its maximal ideal is zero (any nonzero element of an ideal in a field generates 1), so the quotient map $A\\to A/0=\\kappa(\\xi)$ is a canonical isomorphism by [def-weil-residue-field].",
+   "uses": [
+    "lem-trf-proper-field-invertible-coherent",
+    "lem-sc-rational-functions-generic-stalks",
+    "def-weil-residue-field"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tags 01T6 and 01RV, lemma-finite-type-noetherian and lemma-integral-scheme-rational-functions; coherent.tex Tag 01XZ."
+   }
+  },
+  {
+   "text": "For coherent $\\mathcal H$, choose the open trivializations $\\mathcal L|_U\\cong\\mathcal O_U$ of [def-sc-invertible-module]. On each such open, multiplication identifies $(\\mathcal L\\otimes\\mathcal H)|_U$ with $\\mathcal H|_U$: on presheaf pure tensors it sends $a\\otimes h$ to $ah$, with inverse $h\\mapsto1\\otimes h$, and these inverse maps induce inverse maps after the sheafification in [def-pur-sheaf-tensor-product]. Thus finite type and finite type of the kernels in the definition [pqf-def-coherent] hold locally for the tensor exactly as they do for $\\mathcal H$. They hold on every open because finite type is local by that definition. Consequently $\\mathcal L\\otimes\\mathcal H$ is coherent.",
+   "uses": [
+    "def-sc-invertible-module",
+    "def-pur-sheaf-tensor-product",
+    "pqf-def-coherent"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/coherent.tex",
+    "place": "Tag 01XZ, lemma-coherent-Noetherian; local rank-one tensor calculation spelled out."
+   }
+  },
+  {
+   "text": "By finite type in [pqf-def-coherent], on some neighbourhood $U$ of $\\xi$ there is a surjection $\\mathcal O_U^m\\to\\mathcal H|_U$. Apply [def-sc-open-module-stalk-functor] on the scheme $U$ with its whole open and point $\\xi$. Its finite-colimit preservation preserves the cokernel zero of this map, so it is a surjection on stalks. The stalk of a finite free sheaf is $A^m$: germs of a finite tuple give its tuple of germs, with inverse obtained by choosing representatives on the intersection of their finitely many neighbourhoods, as in [def-weil-pbc-module-stalk]. Hence the $m$ standard germs span $\\mathcal H_\\xi$ over $A=\\kappa(\\xi)$. From a finite spanning list, delete each vector in the span of its predecessors; the resulting independent spanning list is a finite basis. Thus $r(\\mathcal H)$ is finite.",
+   "uses": [
+    "pqf-def-coherent",
+    "def-sc-open-module-stalk-functor",
+    "def-weil-pbc-module-stalk"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/modules.tex",
+    "place": "Tags 01AG and 01AH, lemma-abelian and lemma-limits-colimits; finite type generators as in Tag 01B8, lemma-finite-type-surjective-on-stalk."
+   }
+  },
+  {
+   "text": "Apply [lem-pc-euler-characteristic-well-defined] to $\\mathcal H$, $\\mathcal L\\otimes\\mathcal H$, $\\mathcal L$ and $\\mathcal O_C$, all coherent by steps 1–2 on the proper $k$-scheme $C$. Their Euler characteristics are integers. Therefore $\\deg_k(\\mathcal L)=\\chi(C,\\mathcal L)-\\chi(C,\\mathcal O_C)$ by [def-pc-degree-line-bundle] is an integer, and so is the displayed defect. For any coherent short exact sequence, [def-sc-open-module-stalk-functor] with $U=C$ preserves its kernels and cokernels and thus gives a short exact sequence of $A$-modules at $\\xi$. Transport along the field quotient isomorphism of step 1 gives a short exact sequence of finite-dimensional $\\kappa(\\xi)$-vector spaces. Apply [lem-trf-finite-dimensional-short-exact-dimension] to obtain $r(\\mathcal H_2)=r(\\mathcal H_1)+r(\\mathcal H_3)$.",
+   "uses": [
+    "lem-pc-euler-characteristic-well-defined",
+    "def-pc-degree-line-bundle",
+    "def-sc-open-module-stalk-functor",
+    "lem-trf-finite-dimensional-short-exact-dimension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 0AYV, lemma-degree-on-proper-curve, condition (1); Tag 0AYR, definition-degree; preceding definition-euler-characteristic and its finiteness justification."
+   }
+  },
+  {
+   "text": "An invertible module is finite locally free with local rank one by [def-sc-invertible-module]. Thus [lem-sc-ext-tensor-exact] sends the given short exact sequence to $0\\to\\mathcal L\\otimes\\mathcal H_1\\to\\mathcal L\\otimes\\mathcal H_2\\to\\mathcal L\\otimes\\mathcal H_3\\to0$. Its terms are coherent by step 2. Apply [lem-pc-euler-additive] once to this sequence and once to the original one. Writing $a_i=\\chi(C,\\mathcal L\\otimes\\mathcal H_i)$ and $b_i=\\chi(C,\\mathcal H_i)$, the results are $a_2=a_1+a_3$ and $b_2=b_1+b_3$.",
+   "uses": [
+    "def-sc-invertible-module",
+    "lem-sc-ext-tensor-exact",
+    "lem-pc-euler-additive"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 0AYV, lemma-degree-on-proper-curve, proof of condition (1); Tag 08AA, lemma-euler-characteristic-additive."
+   }
+  },
+  {
+   "text": "Put $d=\\deg_k(\\mathcal L)$ and $r_i=r(\\mathcal H_i)$. Substitute the three preceding equalities and distribute multiplication in $\\mathbf Z$: $D_{\\mathcal L}(\\mathcal H_2)=(a_1+a_3)-(b_1+b_3)-(r_1+r_3)d=(a_1-b_1-r_1d)+(a_3-b_3-r_3d)$. This proves defect additivity. The zero sheaf is coherent directly from [pqf-def-coherent] (its presentation has zero generators and a map from a finite free sheaf to zero has that finite free kernel). The stalk and tensor definitions give $0_\\xi=0$ and $\\mathcal L\\otimes0=0$. Its dimension is zero, since its empty list is a basis [def-weil-vector-space-dimension]. Applying [lem-pc-euler-additive] to $0\\to0\\to0\\to0\\to0$ gives $\\chi(C,0)=2\\chi(C,0)$, hence $\\chi(C,0)=0$ by subtraction in $\\mathbf Z$. Thus $D_{\\mathcal L}(0)=0$. Finally if $D_2=D_1+D_3$ and any two of the three integers vanish, solving that equality for the remaining integer gives zero.",
+   "uses": [
+    "pqf-def-coherent",
+    "def-weil-vector-space-dimension",
+    "def-pur-sheaf-tensor-product",
+    "def-weil-pbc-module-stalk",
+    "lem-pc-euler-additive"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 0AYV, lemma-degree-on-proper-curve, condition (1); zero-object case required for the corrected coherent-devissage criterion."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-trf-proper-field-invertible-coherent",
+  "lem-sc-rational-functions-generic-stalks",
+  "def-weil-residue-field",
+  "def-sc-invertible-module",
+  "def-pur-sheaf-tensor-product",
+  "pqf-def-coherent",
+  "def-sc-open-module-stalk-functor",
+  "def-weil-pbc-module-stalk",
+  "lem-pc-euler-characteristic-well-defined",
+  "def-pc-degree-line-bundle",
+  "lem-trf-finite-dimensional-short-exact-dimension",
+  "lem-sc-ext-tensor-exact",
+  "lem-pc-euler-additive",
+  "def-weil-vector-space-dimension"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/varieties.tex",
+  "place": "Tag 0AYV, lemma-degree-on-proper-curve, condition (1), expanded using Tags 08AA, 01XZ, 01RV, 01AG and 01AH."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For a proper integral curve and an invertible sheaf L the integer chi(L tensor F) minus chi(F) minus generic rank(F) times degree(L) is additive in coherent short exact sequences",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"Algebra.H1Cotangent.exact_δ_mapBaseChange\", \"module\": \"Mathlib/RingTheory/Kaehler/JacobiZariski\", \"type\": \"∀ (R : Type u₁) (S : Type u₂) [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S] (T : Type u₃)\\n  [inst_3 : CommRing T] [inst_4 : Algebra R T] [inst_5 : Algebra S T] [inst_6 : IsScalarTower R S T],\\n  Function.Exact ⇑(Algebra.H1Cotangent.δ R S T) ⇑(KaehlerDifferential.mapBaseChange R S T\", \"doc\": \"The image of the connecting homomorphism $\\\\delta: H^1(S \\\\to T) \\\\to T \\\\otimes_S \\\\Omega_{S/R}$ in the Jacobi-Zariski exact sequence equals the kernel of the base change map $\\\\Omega_{S/R} \\\\otimes_S B \\\\to\"}\n  {\"name\": \"ModuleCat.free_shortExact_rank_add\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Free\", \"type\": \"∀ {R : Type u_3} [inst : Ring R] {S : CategoryTheory.ShortComplex (ModuleCat R)},\\n  S.ShortExact →\\n    ∀ [Module.Free R ↑S.X₁] [Module.Free R ↑S.X₃] [StrongRankCondition R],\\n      Module.rank R ↑S.X₂ = Module.rank R ↑S.X₁ + Module.rank R ↑S.X₃\", \"doc\": \"In a short exact sequence $0 \\\\to X_1 \\\\to X_2 \\\\to X_3 \\\\to 0$ of free modules over a ring $R$ satisfying the strong rank condition, the rank of the middle module $X_2$ equals the sum of the ranks of $X_\"}\n  {\"name\": \"ModuleCat.free_shortExact_finrank_add\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Free\", \"type\": \"∀ {R : Type u_3} [inst : Ring R] {S : CategoryTheory.ShortComplex (ModuleCat R)},\\n  S.ShortExact →\\n    ∀ {n p : ℕ} [Module.Free R ↑S.X₁] [Module.Free R ↑S.X₃] [Module.Finite R ↑S.X₁] [Module.Finite R ↑S.X₃],\\n      Module.finrank R ↑S.X₁ = n →\\n        Module.finrank R ↑S.X₃ = p → ∀ [StrongRankConditi\", \"doc\": \"In a short exact sequence $0 \\\\to X_1 \\\\to X_2 \\\\to X_3 \\\\to 0$ of free modules over a ring $R$ satisfying the strong rank condition, if $X_1$ and $X_3$ have finite ranks $n$ and $p$ respectively, then $X\"}\n  {\"name\": \"Algebra.Generators.H1Cotangent.exact_δ_map\", \"module\": \"Mathlib/RingTheory/Kaehler/JacobiZariski\", \"type\": \"∀ {R : Type u₁} {S : Type u₂} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S] {T : Type u₃}\\n  [inst_3 : CommRing T] [inst_4 : Algebra R T] [inst_5 : Algebra S T] [inst_6 : IsScalarTower R S T] {ι : Type w₁}\\n  {σ : Type w₂} (Q : Algebra.Generators S T ι) (P : Algebra.Generators R S σ\", \"doc\": \"The sequence involving the connecting homomorphism $\\\\delta: H^1(Q) \\\\to T \\\\otimes_S \\\\Omega_{S/R}$ and the base change map $\\\\Omega_{A/R} \\\\otimes_A B \\\\to \\\\Omega_{B/R}$ is exact, establishing a fundamenta\"}\n  {\"name\": \"Algebra.H1Cotangent.exact_map_δ\", \"module\": \"Mathlib/RingTheory/Kaehler/JacobiZariski\", \"type\": \"∀ (R : Type u₁) (S : Type u₂) [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S] (T : Type u₃)\\n  [inst_3 : CommRing T] [inst_4 : Algebra R T] [inst_5 : Algebra S T] [inst_6 : IsScalarTower R S T],\\n  Function.Exact ⇑(Algebra.H1Cotangent.map R S T T) ⇑(Algebra.H1Cotangent.δ R S T)\", \"doc\": \"The sequence involving the induced map on first cotangent cohomology and the connecting homomorphism δ in the Jacobi-Zariski exact sequence is exact, meaning the image of the map $ H^1(S \\\\to T) \\\\to T \"}\n  {\"name\": \"KaehlerDifferential.exact_mapBaseChange_map\", \"module\": \"Mathlib/RingTheory/Kaehler/Basic\", \"type\": \"∀ (R : Type u) [inst : CommRing R] (A : Type u_2) (B : Type u_3) [inst_1 : CommRing A] [inst_2 : CommRing B]\\n  [inst_3 : Algebra R A] [inst_4 : Algebra A B] [inst_5 : Algebra R B] [inst_6 : IsScalarTower R A B],\\n  Function.Exact ⇑(KaehlerDifferential.mapBaseChange R A B) ⇑(KaehlerDifferential.map R \", \"doc\": \"The image of the base change map $\\\\Omega_{A/R} \\\\otimes_A B \\\\to \\\\Omega_{B/R}$ is equal to the kernel of the Kähler differentials map $\\\\Omega_{A/R} \\\\to \\\\Omega_{B/S}$, establishing an exact sequence in t\"}\n  {\"name\": \"Algebra.Generators.H1Cotangent.exact_map_δ'\", \"module\": \"Mathlib/RingTheory/Kaehler/JacobiZariski\", \"type\": \"∀ {R : Type u₁} {S : Type u₂} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S] {T : Type u₃}\\n  [inst_3 : CommRing T] [inst_4 : Algebra R T] [inst_5 : Algebra S T] [inst_6 : IsScalarTower R S T] {ι : Type w₁}\\n  {σ : Type w₂} {τ : Type w₅} (Q : Algebra.Generators S T ι) (P : Algebra.Ge\", \"doc\": \"For an algebra extension homomorphism $ f $, the induced map on the first cotangent cohomology modules is exact at the image of $ f $, meaning the image of $ f $ is equal to the kernel of the connecti\"}\n  {\"name\": \"Algebra.Generators.H1Cotangent.exact_map_δ\", \"module\": \"Mathlib/RingTheory/Kaehler/JacobiZariski\", \"type\": \"∀ {R : Type u₁} {S : Type u₂} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S] {T : Type u₃}\\n  [inst_3 : CommRing T] [inst_4 : Algebra R T] [inst_5 : Algebra S T] [inst_6 : IsScalarTower R S T] {ι : Type w₁}\\n  {σ : Type w₂} (Q : Algebra.Generators S T ι) (P : Algebra.Generators R S σ\", \"doc\": \"The sequence involving the first cotangent cohomology modules is exact at $ H^1(Q) $ with the connecting homomorphism $ \\\\delta $, as established by the Snake Lemma applied to the cotangent complexes o\"}\nRead all returned types: no declaration states this complete scheme/module assertion or specializes to it in one line.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Euler characteristic and generic rank are additive in short exact sequences of coherent modules on an integral proper curve",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"Module.length_eq_add_of_exact\", \"module\": \"Mathlib.RingTheory.Length\", \"type\": \": Module.length R M = Module.length R N + Module.length R P\", \"doc\": \"If $ 0 \\\\to N \\\\to M \\\\to P \\\\to 0 $ is a short exact sequence of $ R $-modules, then the length of $ M $ equals the sum of the lengths of $ N $ and $ P $, i.e., $ \\\\operatorname{length}(M) = \\\\operatorname\"}\n  {\"name\": \"rank_add_rank_split\", \"module\": \"Mathlib.LinearAlgebra.Dimension.DivisionRing\", \"type\": \"(db : V₂ →ₗ[K] V) (eb : V₃ →ₗ[K] V) (cd : V₁ →ₗ[K] V₂) (ce : V₁ →ₗ[K] V₃)\\n  (hde : ⊤ ≤ LinearMap.range db ⊔ LinearMap.range eb) (hgd : ker cd = ⊥) (eq : db.comp cd = eb.comp ce)\\n  (eq₂ : ∀ d e, db d = eb e → ∃ c, cd c = d ∧ ce c = e) :\\n  Module.rank K V + Module.rank K V₁ = Module.rank K V₂ + Module\", \"doc\": \"Given a split exact sequence of modules over a division ring $ K $, with appropriate conditions on the linear maps ensuring the sequence splits, the sum of the ranks of the outer modules equals the su\"}\n  {\"name\": \"ModuleCat.free_shortExact_rank_add\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Free\", \"type\": \"[Module.Free R S.X₁] [Module.Free R S.X₃] [StrongRankCondition R] :\\n  Module.rank R S.X₂ = Module.rank R S.X₁ + Module.rank R S.X₃\", \"doc\": \"In a short exact sequence $0 \\\\to X_1 \\\\to X_2 \\\\to X_3 \\\\to 0$ of free modules over a ring $R$ satisfying the strong rank condition, the rank of the middle module $X_2$ equals the sum of the ranks of $X_\"}\n  {\"name\": \"ModuleCat.free_shortExact_finrank_add\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Free\", \"type\": \"{n p : ℕ} [Module.Free R S.X₁] [Module.Free R S.X₃] [Module.Finite R S.X₁] [Module.Finite R S.X₃]\\n  (hN : Module.finrank R S.X₁ = n) (hP : Module.finrank R S.X₃ = p) [StrongRankCondition R] : finrank R S.X₂ = n + p\", \"doc\": \"In a short exact sequence $0 \\\\to X_1 \\\\to X_2 \\\\to X_3 \\\\to 0$ of free modules over a ring $R$ satisfying the strong rank condition, if $X_1$ and $X_3$ have finite ranks $n$ and $p$ respectively, then $X\"}\n  {\"name\": \"rank_quotient_add_rank_of_isDomain\", \"module\": \"Mathlib.LinearAlgebra.Dimension.Localization\", \"type\": \"[IsDomain R] (M' : Submodule R M) : Module.rank R (M ⧸ M') + Module.rank R M' = Module.rank R M\", \"doc\": \"For any domain $ R $ and any submodule $ M' $ of an $ R $-module $ M $, the rank of the quotient module $ M/M' $ plus the rank of $ M' $ equals the rank of $ M $. Symbolically, $ \\\\operatorname{rank}(M\"}\n  {\"name\": \"HasRankNullity.rank_quotient_add_rank\", \"module\": \"Mathlib.LinearAlgebra.Dimension.RankNullity\", \"type\": \"∀ {R : Type v} {inst : Ring R} [self : HasRankNullity.{u, v} R] {M : Type u} [inst_1 : AddCommGroup M]\\n  [inst_2 : Module R M] (N : Submodule R M), Module.rank R (M ⧸ N) + Module.rank R ↥N = Module.rank R M\", \"doc\": \"For any ring $ R $ satisfying the rank-nullity property, an $ R $-module $ M $, and a submodule $ N $ of $ M $, the rank of $ M $ is equal to the sum of the ranks of $ N $ and the quotient module $ M/\"}\n  {\"name\": \"rank_quotient_add_rank_le\", \"module\": \"Mathlib.LinearAlgebra.Dimension.Constructions\", \"type\": \"[Nontrivial R] (M' : Submodule R M) : Module.rank R (M ⧸ M') + Module.rank R M' ≤ Module.rank R M\", \"doc\": \"For any non-trivial ring $ R $ and any submodule $ M' $ of an $ R $-module $ M $, the sum of the ranks of the quotient module $ M/M' $ and the submodule $ M' $ is less than or equal to the rank of the\"}\n  {\"name\": \"Submodule.finrank_quotient_add_finrank\", \"module\": \"Mathlib.LinearAlgebra.Dimension.RankNullity\", \"type\": \"[Module.Finite R M] (N : Submodule R M) : finrank R (M ⧸ N) + finrank R N = finrank R M\", \"doc\": \"For a finitely generated module $ M $ over a ring $ R $ and a submodule $ N $, the sum of the finite ranks of $ N $ and the quotient module $ M/N $ equals the finite rank of $ M $, i.e., $ \\\\operatorna\"}\nRead all returned types: no declaration states this complete scheme/module assertion or specializes to it in one line.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"eulerChar\", \"tensor\"",
+   "results": "[loogle] OK 0 hit(s)\nRead all returned types: no declaration states this complete scheme/module assertion or specializes to it in one line.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "eulerChar.*(tensor|exact|add)|genericRank|generic.rank",
+   "results": "[grep] OK 0 hit(s)\nRead all returned types: no declaration states this complete scheme/module assertion or specializes to it in one line.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An integral proper scheme over a field is Noetherian and tensoring a coherent sheaf with a line bundle preserves coherence and gives finite dimensional generic stalks",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.isIntegral_of_isAffine_of_isDomain\", \"module\": \"Mathlib/AlgebraicGeometry/Properties\", \"type\": \"∀ (X : AlgebraicGeometry.Scheme) [AlgebraicGeometry.IsAffine X] [Nonempty ↥X]\\n  [IsDomain ↑(X.presheaf.obj (Opposite.op ⊤))], AlgebraicGeometry.IsIntegral X\", \"doc\": \"If $X$ is a non-empty affine scheme and the ring of global sections $\\\\Gamma(X, \\\\mathcal{O}_X)$ is an integral domain, then $X$ is an integral scheme.\"}\n  {\"name\": \"AlgebraicGeometry.IsIntegral\", \"module\": \"Mathlib/AlgebraicGeometry/Properties\", \"type\": \"AlgebraicGeometry.Scheme → Prop\", \"doc\": \"The predicate for a scheme to be integral\"}\n  {\"name\": \"AlgebraicGeometry.IsLocallyNoetherian\", \"module\": \"Mathlib/AlgebraicGeometry/Noetherian\", \"type\": \"AlgebraicGeometry.Scheme → Prop\", \"doc\": \"A scheme is locally Noetherian if it admits an open cover by Noetherian schemes.\"}\n  {\"name\": \"AlgebraicGeometry.instIsNoetherianRingCarrierStalkCommRingCatPresheafOfIsLocallyNoetherian\", \"module\": \"Mathlib/AlgebraicGeometry/Noetherian\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} [AlgebraicGeometry.IsLocallyNoetherian X] {x : ↥X},\\n  IsNoetherianRing ↑(X.presheaf.stalk x)\", \"doc\": \"For any locally Noetherian scheme $ X $, the stalk of its structure sheaf at any point $ x $ is a Noetherian ring. This follows from the property that a scheme being locally Noetherian implies every p\"}\n  {\"name\": \"AlgebraicGeometry.affine_isIntegral_iff\", \"module\": \"Mathlib/AlgebraicGeometry/Properties\", \"type\": \"∀ (R : CommRingCat), AlgebraicGeometry.IsIntegral (AlgebraicGeometry.Spec R) ↔ IsDomain ↑R\", \"doc\": \"The affine scheme $\\\\operatorname{Spec}(R)$ is integral if and only if the commutative ring $R$ is a domain (i.e., has no zero divisors).\"}\n  {\"name\": \"AlgebraicGeometry.instIsDomainCarrierObjOppositeOpensCarrierCarrierCommRingCatPresheafOpOpensTopOfIsIntegral\", \"module\": \"Mathlib/AlgebraicGeometry/Properties\", \"type\": \"∀ (X : AlgebraicGeometry.Scheme) [AlgebraicGeometry.IsIntegral X], IsDomain ↑(X.presheaf.obj (Opposite.op ⊤))\", \"doc\": \"For any integral scheme $X$, the ring of global sections $\\\\Gamma(X, \\\\mathcal{O}_X)$ is an integral domain. This follows from the property that an integral scheme is both irreducible and reduced, ensur\"}\n  {\"name\": \"AlgebraicGeometry.IsFinite.iff_isIntegralHom_and_locallyOfFiniteType\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Finite\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y),\\n  AlgebraicGeometry.IsFinite f ↔ AlgebraicGeometry.IsIntegralHom f ∧ AlgebraicGeometry.LocallyOfFiniteType f\", \"doc\": \"For a morphism $ f: X \\\\to Y $ of schemes, $ f $ is finite if and only if $ f $ is integral and locally of finite type.\"}\n  {\"name\": \"AlgebraicGeometry.finite_appTop_of_universallyClosed\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Proper\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} (K : Type u) [inst : Field K]\\n  (f : X ⟶ AlgebraicGeometry.Spec { carrier := K, commRing := Field.toEuclideanDomain.toCommRing })\\n  [AlgebraicGeometry.IsIntegral X] [AlgebraicGeometry.UniversallyClosed f] [AlgebraicGeometry.LocallyOfFiniteType f],\\n  (CommRingCat.Hom.\", \"doc\": \"Let $K$ be a field, and let $f: X \\\\to \\\\operatorname{Spec}(K)$ be a morphism from an integral scheme $X$. If $f$ is universally closed and locally of finite type, then the ring of global sections of $X\"}\nRead all returned types: no declaration states this complete scheme/module assertion or specializes to it in one line.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "eulerChar.*(tensor|exact|add)|genericRank|generic.rank",
+   "results": "Actual search returned 0 hits: . ; returned types read in the worker session. No hit states the complete geometric assertion; the linear algebra hits cover only rank additivity.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Euler characteristic and generic rank are additive in a short exact sequence of coherent sheaves on a proper integral curve",
+   "results": "Actual search returned 8 hits: ModuleCat.free_shortExact_rank_add, ModuleCat.free_shortExact_finrank_add, Module.length_eq_add_of_exact, rank_add_rank_split, rank_quotient_add_rank_of_isDomain, HasRankNullity.rank_quotient_add_rank, IncidenceAlgebra.eulerChar, LinearMap.rank_add_le. ; returned types read in the worker session. No hit states the complete geometric assertion; the linear algebra hits cover only rank additivity.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"eulerChar\", \"tensor\"",
+   "results": "Actual search returned 0 hits: . ; returned types read in the worker session. No hit states the complete geometric assertion; the linear algebra hits cover only rank additivity.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Euler characteristic minus generic rank times degree of a line bundle is additive on coherent sheaves on a proper integral curve",
+   "results": "Actual search returned 8 hits: AlgebraicGeometry.Scheme.Modules.instAdditivePushforward, AlgebraicGeometry.Scheme.Modules.instAdditivePullback, AlgebraicGeometry.Proj.add_apply, AlgebraicGeometry.StructureSheaf.const_add, AlgebraicGeometry.exists_eq_pow_mul_of_is_compact_of_quasi_separated_space_aux, AlgebraicGeometry.Scheme.Modules.Hom.add_app, AlgebraicGeometry.Proj.sub_apply, AlgebraicGeometry.ProjectiveSpectrum.StructureSheaf.SectionSubring.add_mem'. ; returned types read in the worker session. No hit states the complete geometric assertion; the linear algebra hits cover only rank additivity.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Noetherian proper integral curve coherent sheaf tensor line bundle finite dimensional generic stalk additive Euler defect",
+   "results": "Actual search returned 8 hits: AlgebraicGeometry.finite_appTop_of_universallyClosed, AlgebraicGeometry.instIsDomainCarrierStalkCommRingCatPresheafOfIsIntegral, AlgebraicGeometry.instIsNoetherianRingCarrierStalkCommRingCatPresheafOfIsLocallyNoetherian, AlgebraicGeometry.instFieldCarrierFunctionField, AlgebraicGeometry.Scheme.functionField, AlgebraicGeometry.isReduced_of_isIntegral, AlgebraicGeometry.instIsDomainCarrierObjOppositeOpensCarrierCarrierCommRingCatPresheafOpOpensTopOfIsIntegral, AlgebraicGeometry.instIsFractionRingCarrierStalkCommRingCatPresheafFunctionField. ; returned types read in the worker session. No hit states the complete geometric assertion; the linear algebra hits cover only rank additivity.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-curve-euler-tensor-generic-rank",
+  "date": "2026-10-22",
+  "group": "Q143"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "The fibrewise ampleness-to-projectivity argument: positivity on normalized geometric-fibre components is converted to relative ampleness and then to a projective-bundle embedding. Supporting input: the proper integral curve degree criterion (0B5X). In the 0B5X proof this is the tensor-product degree formula used to pass from the degree of a positive tensor power to the degree of the line bundle and to obtain linear Euler-characteristic growth. Supporting input: the integral-curve Euler-characteristic calculation in the proof of Stacks 0AYX (via 0AYV). Within this supporting calculation: Tag 0AYV, lemma-degree-on-proper-curve, proof of condition (1), with the Noetherian, coherence, finite generic rank and zero-object preliminaries of returned steps 1-3.",
+   "via": [
+    "lem-trf-curve-euler-tensor-generic-rank",
+    "lem-trf-curve-degree-tensor-additive",
+    "lem-trf-proper-integral-curve-ample-degree",
+    "lem-trf-fibre-degree-ample-criterion",
+    "lem-trf-proper-fibrewise-ample-projective",
+    "lem-trf-temkin-stable-modification",
+    "lem-trf-stable-modification-flat-curve-pair",
+    "lem-trf-dejong-relative-marked-semistable",
+    "lem-trf-relative-marked-nodal-reduction",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-trf-curve-euler-defect-additivity",
+  "worker": "stage1",
+  "summary": "Expanded 0AYV condition (1) using existing Noetherianity, generic-field, exact stalk, tensor-exactness and Euler-additivity interfaces. Coherence of a rank-one twist and finiteness of generic rank are elementary local calculations, not new nodes. Added one Mathlib leaf for finite-dimensional dimension additivity; retained the complete statement and all prior searches.",
+  "blueprint": "Supporting integral-curve degree calculation in the recorded ancestor chain from lem-trf-local-term-locality; realizes the 0AYV additivity condition used in the proper-curve degree route. Latest blueprint ancestor and unit read; no unit or chapter route changed.",
+  "tool_uses": [
+   {
+    "node": "lem-sc-rational-functions-generic-stalks",
+    "why": "The generic local ring is a field on any integral scheme; this generic-ring tool does not replace the unit route."
+   },
+   {
+    "node": "lem-pc-euler-characteristic-well-defined",
+    "why": "Proper coherent cohomology makes the Euler sums finite; the unit has no alternative coherent finiteness statement."
+   },
+   {
+    "node": "lem-sc-ext-tensor-exact",
+    "why": "Finite locally free tensor preserves short exact sequences; used only for the line-bundle twist."
+   },
+   {
+    "node": "lem-pc-euler-additive",
+    "why": "Euler additivity on arbitrary proper schemes supplies the two identities required by 0AYV, without smoothness."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sc-rational-functions-generic-stalks",
+  "lem-pc-euler-characteristic-well-defined",
+  "lem-sc-ext-tensor-exact",
+  "lem-pc-euler-additive"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q147-4cb984f6f",
+  "group": "Q147",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q147-4cb984f6f (reviewer sub-agent of L); spot-checked: Read the item, the new leaf, all 15 cited statements, Stacks 0AYV (varieties.tex 9669-9690; the proof of (1) is 'chi and rank additive') and the citer lem-trf-curve-euler-tensor-generic-rank step 1. The statement is unchanged against all earlier Q143 snapshots, and the base proof was empty, so this is not a re-split. Step 1 uses proper-field-invertible-coherent (Noetherian, O_C and L coherent) and rational-functions-generic-stalks (integral clause gives a field), so the maximal ideal is 0. Step 2 (elementary): on a trivializing open, L(x)H is isomorphic to H; coherence is local, so a few lines suffice. Step 3 (elementary): the stalk functor preserves finite colimits, so the finite-type surjection stays surjective and r is finite. Step 4 uses chi-well-defined and the degree definition; the stalk functor is exact, and the new leaf gives rank additivity. Step 5: lem-sc-ext-tensor-exact for rank-one L, then 08AA applied twice. Step 6: integer algebra; D(0)=0 via chi(0)=2chi(0); two-out-of-three. The four off-unit tool_uses (generic-stalks, chi-well-defined, ext-tensor-exact, euler-additive) are generic and accepted. New leaf: ModuleCat.free_shortExact_finrank_add checked at Free.lean:181, with the instances at VectorSpace.lean:156 and InvariantBasisNumber.lean:249; it is a one-line specialization, tested on 0, V->V->0 and K->K^2->K. Advisory: lem-trf-vector-space-quotient-dimension and lem-weil-pbc-idempotent-charpoly-rank-nullity are near relatives the report did not list. They are not the short-exact form, so they are not duplicates. Edge cases: H=0, L=O_C, skyscraper at a closed point (r=0), singular curves and a nontrivial constant field. No SGA. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.CurveEulerDefectAdditivity",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.curve_euler_defect_additivity",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.Modules.curveResidueStalk",
+   "AlgebraicGeometry.Scheme.Modules.curveGenericRank",
+   "AlgebraicGeometry.Scheme.Modules.curveEulerDefect",
+   "AlgebraicGeometry.Scheme.Modules.curve_euler_defect_additivity"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/CurveEulerDefectAdditivity.lean",
+  "statement": "theorem curve_euler_defect_additivity (k : Type u) [Field k] (C : Scheme.{u}) [IsIntegral C] [C.Over (Spec (.of k))] [IsProper (C ↘ Spec (.of k))] (hdim : topologicalKrullDim C = 1) (ξ : C) (hξ : IsGenericPoint ξ Set.univ) (L : C.Modules) [L.IsInvertible] : IsLocallyNoetherian C ∧ CompactSpace C ∧ IsField (C.presheaf.stalk ξ) ∧ ∃ e : C.presheaf.stalk ξ ≃+* C.residueField ξ, e.toRingHom = (C.residue ξ).hom ∧ (∀ H : C.Modules, RingedSpace.IsCoherent C.toRingedSpace H → RingedSpace.IsCoherent C.toRingedSpace (L ⊗ H) ∧ FiniteDimensional (C.residueField ξ) (curveResidueStalk ξ e H)) ∧ curveEulerDefect k L ξ e (0 : C.Modules) = 0 ∧ (∀ S : ShortComplex C.Modules, S.ShortExact → RingedSpace.IsCoherent C.toRingedSpace S.X₁ → RingedSpace.IsCoherent C.toRingedSpace S.X₂ → RingedSpace.IsCoherent C.toRingedSpace S.X₃ → curveGenericRank ξ e S.X₂ = curveGenericRank ξ e S.X₁ + curveGenericRank ξ e S.X₃ ∧ curveEulerDefect k L ξ e S.X₂ = curveEulerDefect k L ξ e S.X₁ + curveEulerDefect k L ξ e S.X₃ ∧ (curveEulerDefect k L ξ e S.X₁ = 0 ∧ curveEulerDefect k L ξ e S.X₂ = 0 → curveEulerDefect k L ξ e S.X₃ = 0) ∧ (curveEulerDefect k L ξ e S.X₁ = 0 ∧ curveEulerDefect k L ξ e S.X₃ = 0 → curveEulerDefect k L ξ e S.X₂ = 0) ∧ (curveEulerDefect k L ξ e S.X₂ = 0 ∧ curveEulerDefect k L ξ e S.X₃ = 0 → curveEulerDefect k L ξ e S.X₁ = 0))",
+  "branch": "newtargets-dag",
+  "by": "NS",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "The generic stalk keeps its existing carrier and receives the residue-field action by restriction of scalars along the inverse of e. The theorem characterizes e as the canonical residue quotient, and asserts its existence and the field property as conclusions, not hypotheses. Added the already recorded def-pc-module-stalk-functor to cite the ringed-space stalk interface used on schemes. Helpers belong to the rank and defect notation introduced in this node; their data are explicit."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-711d03df6",
+  "group": "NS",
+  "result": "pass",
+  "note": "Clause-by-clause match against node and Stacks 0AYV: Noetherian/compact, IsField and e pinned by e.toRingHom=(C.residue ξ).hom are conclusions; tensor coherence and finite generic dim for all coherent H; curveGenericRank = finrank of the recorded RingedSpace.moduleStalkFunctor stalk restricted along e⁻¹; curveEulerDefect = (L⊗H).eulerChar k − H.eulerChar k − r·L.degree k in ℤ (recorded eulerChar/degree); D(0)=0, rank and defect additivity on coherent S.ShortExact, all three two-out-of-three cases. No extra assumptions; universe u shared with eulerChar API. stmt_deps gained landed def-pc-module-stalk-functor, which is used (brief §177 allows it); lean.statement verbatim; sorry only; source/blueprint docstrings and 6-step proof docstring; helpers have real data; report has Worker report and Second reading by NS. Advisory: Scheme.Modules.rank (def-pc-module-torsion-generic-rank) is a near-owner, not cited by the node; inline r via cited deps accepted per inline precedent. No fix, no compile."
+ }
+}

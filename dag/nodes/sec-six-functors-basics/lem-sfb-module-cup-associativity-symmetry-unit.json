@@ -1,0 +1,261 @@
+{
+ "id": "lem-sfb-module-cup-associativity-symmetry-unit",
+ "kind": "statement",
+ "title": "Associativity, signed symmetry and units of scalar module cups",
+ "statement": "Let $k$ be a field [def-weil-field], $f:X\\to\\operatorname{Spec}k$ a scheme over $k$ [def-weil-scheme-over-base], and $F,G,L$ arbitrary $\\mathcal O_X$-module sheaves [def-weil-sheaf-of-modules-category]. Use the $k$-bilinear scalar cohomology cups $H_k^p(X,F)\\times H_k^q(X,G)\\to H_k^{p+q}(X,F\\otimes_{\\mathcal O_X}G)$ of [def-sc-field-linear-module-cohomology-operations], with tensor product [def-pur-sheaf-tensor-product]. Let $p,q,r\\geq0$, $a\\in H_k^p(X,F)$, $b\\in H_k^q(X,G)$, and $c\\in H_k^r(X,L)$. Under the canonical associator $(F\\otimes G)\\otimes L\\cong F\\otimes(G\\otimes L)$, one has $(a\\smile b)\\smile c=a\\smile(b\\smile c)$. Under the canonical symmetry $\\tau:F\\otimes G\\cong G\\otimes F$, one has $\\tau_*(a\\smile b)=(-1)^{pq}b\\smile a$. If $u_X\\in H_k^0(X,\\mathcal O_X)$ is the image of $1\\in\\Gamma(X,\\mathcal O_X)$ under the canonical degree-zero derived-sections comparison [def-sc-ringed-space-module-cohomology], then $(\\lambda_F)_*(u_X\\smile a)=a$ and $(\\rho_F)_*(a\\smile u_X)=a$ under the left and right tensor-unit isomorphisms. Coefficient isomorphisms act by the recorded cohomology functor. No quasi-coherence, separatedness, properness, or finiteness hypothesis is imposed.",
+ "source": {
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Tags 0FP4 (lemma-cup-product-associative) and 0FP5 (lemma-cup-product-commutative), specialized to sheaves in degree zero; remark-cup-product and section-cup-product for the unit. For the scalar Yoneda convention, the sectionwise comparison has factor (-1)^(pq), whose associativity exponents satisfy pq+(p+q)r=qr+p(q+r)."
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "stmt_deps": [
+  "def-weil-field",
+  "def-weil-scheme-over-base",
+  "def-weil-sheaf-of-modules-category",
+  "def-sc-field-linear-module-cohomology-operations",
+  "def-pur-sheaf-tensor-product",
+  "def-sc-ringed-space-module-cohomology"
+ ],
+ "proof": [
+  {
+   "text": "Write $a\\star b$ for the ordinary unsigned module cup, with scalars restricted to $k$. Let $sF=F[0]$, $U=\\mathcal O_X$, and $e=e_{-,n}$ be the normalized shifted-Hom equivalence. Put $B_{p,q}(f,g)=t_{p,q}\\circ(f\\otimes^{\\mathbf L}g)$ and $d=(\\lambda^D_{sU})^{-1}:sU\\to sU\\otimes^{\\mathbf L}sU$. The comparison gives $e(a\\star b)=m_{F,G}[p+q]\\circ B_{p,q}(e(a),e(b))\\circ d$, sends the canonical class of $1$ to $1_{sU}$, and sends coefficient maps to postcomposition. Its hypotheses hold for arbitrary module sheaves on the scheme $X$. The tensor-morphism calculus applies to the degree-zero source $U$: $U\\otimes_{U}-$ is the identity, so $U$ is flat; no flatness of the target coefficients is needed.",
+   "uses": [
+    "lem-sfb-module-cup-shifted-hom-comparison",
+    "lem-pur-shifted-tensor-morphism-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/cohomology.tex",
+    "place": "Tag 0FP2, shifted-Hom construction and comparison to cup; coefficient and unit normalization"
+   }
+  },
+  {
+   "text": "Expand the preceding formula twice for $(a\\star b)\\star c$. Naturality of tensoring and of $t$ moves the inner coefficient map $m_{F,G}$ to the target. After the ordinary coefficient associator, its target composite is\n$$s(\\alpha)\\circ m_{F\\otimes G,L}\\circ(m_{F,G}\\otimes^{\\mathbf L}1).$$\nFor $a\\star(b\\star c)$ the target composite is $m_{F,G\\otimes L}\\circ(1\\otimes^{\\mathbf L}m_{G,L})\\circ\\alpha^D$. These are equal by augmentation coherence. The remaining shifted tensor maps are equal by associativity of $B$ in the cited calculus. The two source maps obtained by iterating $d$ agree under the source associator by the monoidal unit coherence axioms. Thus the two morphisms from $sU$ agree. Injectivity and coefficient naturality of $e$ prove ordinary-cup associativity under the stated coefficient associator.",
+   "uses": [
+    "lem-sfb-single-tensor-augmentation-coherence",
+    "lem-sfb-module-cup-shifted-hom-comparison",
+    "lem-pur-shifted-tensor-morphism-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/cohomology.tex",
+    "place": "Tag 0FP4; its tensor/counit associativity argument in shifted-Hom coordinates"
+   }
+  },
+  {
+   "text": "For ordinary symmetry, apply the coefficient map $s(\\tau)[p+q]$ to the formula of step 1. The augmentation identity $s(\\tau)\\circ m_{F,G}=m_{G,F}\\circ\\sigma^D$ moves the symmetry before $m$. The shifted tensor calculus gives $\\sigma^D[p+q]\\circ B_{p,q}(f,g)=(-1)^{pq}B_{q,p}(g,f)\\circ\\sigma^D_{sU,sU}$. The symmetry on the tensor square of the unit fixes $d$, by the symmetric monoidal unit axioms. The resulting morphism is $(-1)^{pq}e(b\\star a)$. Additivity, coefficient naturality and injectivity of $e$ give $\\tau_*(a\\star b)=(-1)^{pq}b\\star a$. This supplies the sign argument omitted in the source's proof.",
+   "uses": [
+    "lem-sfb-single-tensor-augmentation-coherence",
+    "lem-sfb-module-cup-shifted-hom-comparison",
+    "lem-pur-shifted-tensor-morphism-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/cohomology.tex",
+    "place": "Tag 0FP5; omitted proof expanded using the Koszul shifted-tensor identity"
+   }
+  },
+  {
+   "text": "The representative of $u_X$ is $1_{sU}$. In the left product its image after the coefficient unitor is\n$$s(\\lambda_F)[p]\\circ m_{U,F}[p]\\circ t_{0,p}\\circ(1_{sU}\\otimes^{\\mathbf L} e(a))\\circ d.$$\nThe augmentation unit identity replaces the first two factors by $\\lambda^D_{sF}[p]$. The derived unitors are those of the fixed K-flat monoidal structure, descended from the unsigned module unitors on total tensor models. On total cochain models, $\\lambda^D_{sF}[p]\\circ t_{0,p}=\\lambda^D_{sF[p]}$: the $U[0]$ factor has degree zero, so its shift-extraction sign is $(-1)^{p\\cdot0}=1$. Unitor naturality then reduces the displayed map to $e(a)\\circ\\lambda^D_{sU}\\circ d=e(a)$. On the right, use $s(\\rho_F)m_{F,U}=\\rho^D_{sF}$ and $t_{p,0}$, whose sign is identically one; right-unitor naturality reduces the map to $e(a)$. Left and right unitors agree on $sU$, so the same $d$ serves both computations. Injectivity of $e$ proves both ordinary unit identities in every degree.",
+   "uses": [
+    "lem-sfb-single-tensor-augmentation-coherence",
+    "lem-sfb-module-cup-shifted-hom-comparison",
+    "lem-pur-derived-tensor-additive-constraints",
+    "def-pc-scheme-derived-tensor-structure"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/cohomology.tex",
+    "place": "Tag 0FKU, shifted-Hom construction with identity unit class; Tag 0FPB and the normalized total-tensor unitors"
+   }
+  },
+  {
+   "text": "Write $\\epsilon_{i,j}=(-1)^{ij}$. The signed scalar/module comparison gives $x\\smile y=\\epsilon_{i,j}(x\\star y)$ for every coefficient pair and degrees $i,j$. All coefficient maps are the recorded additive cohomology maps, hence commute with these integer signs. Bilinearity yields\n$$(a\\smile b)\\smile c=\\epsilon_{p,q}\\epsilon_{p+q,r}((a\\star b)\\star c),\\qquad a\\smile(b\\smile c)=\\epsilon_{q,r}\\epsilon_{p,q+r}(a\\star(b\\star c)).$$\nThe two signs agree since $pq+(p+q)r=qr+p(q+r)$. For symmetry, $\\tau_*(a\\smile b)=\\epsilon_{p,q}^2(b\\star a)=b\\star a$, while $\\epsilon_{p,q}(b\\smile a)=\\epsilon_{p,q}\\epsilon_{q,p}(b\\star a)=b\\star a$. Finally $\\epsilon_{0,p}=\\epsilon_{p,0}=1$, so both ordinary unit identities give exactly the stated scalar unit identities. No restriction on $X$ or its modules was introduced.",
+   "uses": [
+    "lem-sc-scalar-cup-module-cup-compatibility",
+    "def-sc-field-linear-module-cohomology-operations"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/cohomology.tex",
+    "place": "Recorded signed scalar/module cup comparison; elementary exponent and bilinearity calculation"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-scheme-derived-tensor-structure",
+  "def-sc-field-linear-module-cohomology-operations",
+  "lem-pur-derived-tensor-additive-constraints",
+  "lem-pur-shifted-tensor-morphism-calculus",
+  "lem-sc-scalar-cup-module-cup-compatibility",
+  "lem-sfb-module-cup-shifted-hom-comparison",
+  "lem-sfb-single-tensor-augmentation-coherence"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Tags 0FP2, 0FP4 and 0FP5 (lemma-second-cup-equals-first, lemma-cup-product-associative, lemma-cup-product-commutative); section-cup-product. Scalar sign transport uses the recorded signed scalar/module comparison.",
+  "note": "Assembly from normalized comparisons and existing shifted-tensor calculus; includes the sign and omitted commutativity/unit calculations."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For module sheaves F G K on a scheme over a field, scalar cohomology cup pairings obey associativity, Koszul symmetry, and both structure sheaf unit laws in every degree",
+   "results": "8 hits: AlgebraicGeometry.Scheme.Modules.instAbelian, AlgebraicGeometry.Scheme.Modules.pseudofunctor_associativity_assoc, AlgebraicGeometry.Scheme.Modules.Hom.comp_app, CategoryTheory.Sheaf.H, CategoryTheory.Sheaf.instAddCommGroupH, AlgebraicGeometry.Scheme.Modules.map_smul, AlgebraicGeometry.AffineSpace.comp_homOfVector_assoc, SheafOfModules.unitHomEquiv_symm_comp",
+   "date": "2026-10-23",
+   "verdict": "no match: sheaf definitions, module morphism composition and Ext.comp_assoc do not state the tensor cup symmetry and unit identities for these coefficient modules"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Sheaf module cohomology cup pairings are associative symmetric with sign and unital for arbitrary coefficient modules",
+   "results": "8 hits: SheafOfModules.comp_val_assoc, SheafOfModules.unit, SheafOfModules.noConfusionType, AlgebraicGeometry.Scheme.Modules, PresheafOfModules.Sheafify.mul_smul, SheafOfModules, SheafOfModules.free, SheafOfModules.sections",
+   "date": "2026-10-23",
+   "verdict": "no match: sheaf definitions, module morphism composition and Ext.comp_assoc do not state the tensor cup symmetry and unit identities for these coefficient modules"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Ext\", \"tensor\", \"comm\"",
+   "results": "0 hits: ",
+   "date": "2026-10-23",
+   "verdict": "no match: sheaf definitions, module morphism composition and Ext.comp_assoc do not state the tensor cup symmetry and unit identities for these coefficient modules"
+  },
+  {
+   "tool": "grep",
+   "query": "scalarExtCup|scalarCohomologyCup|cupProduct.*(assoc|comm)|shiftProduct_comm",
+   "results": "0 hits: ",
+   "date": "2026-10-23",
+   "verdict": "no match: sheaf definitions, module morphism composition and Ext.comp_assoc do not state the tensor cup symmetry and unit identities for these coefficient modules"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Associativity and signed symmetry of Ext tensor products of two sheaf cohomology classes with module coefficients and tensor unit identities",
+   "results": "8 hits: CategoryTheory.Sheaf.H, CategoryTheory.Abelian.Ext.comp_assoc_of_third_deg_zero, CategoryTheory.Abelian.Ext.comp_assoc, CategoryTheory.Abelian.Ext.comp_assoc_of_second_deg_zero, CategoryTheory.Abelian.Ext.bilinearComp_apply_apply, CategoryTheory.Abelian.Ext.bilinearCompOfLinear_apply_apply, CategoryTheory.InjectiveResolution.extEquivCohomologyClass_symm_add, CategoryTheory.ProjectiveResolution.extEquivCohomologyClass_symm_add",
+   "date": "2026-10-23",
+   "verdict": "no match: sheaf definitions, module morphism composition and Ext.comp_assoc do not state the tensor cup symmetry and unit identities for these coefficient modules"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Sheaf cohomology cup products with arbitrary module coefficients are associative graded symmetric and have the class of one as a two sided unit",
+   "results": "8 hits: CategoryTheory.Sheaf.H, CategoryTheory.Sheaf.instAddCommGroupH, CategoryTheory.Sheaf.cohomologyPresheaf, CategoryTheory.Sheaf.cohomologyPresheafFunctor, CategoryTheory.PresheafOfGroups.OneCochain.instMul, CategoryTheory.PresheafOfGroups.OneCohomologyRelation.trans, CategoryTheory.PresheafOfGroups.OneCohomologyRelation, CategoryTheory.PresheafOfGroups.Cochain₀.mul_apply",
+   "date": "2026-10-23",
+   "verdict": "no match: returned declarations do not state the canonical comparison with these module-sheaf objects and normalization"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Associativity graded commutativity and unit laws for cup products of sheaf module cohomology",
+   "results": "8 hits: TensorProduct.gradedMul_assoc, TensorProduct.gradedComm_gradedMul, SheafOfModules.comp_val_assoc, CategoryTheory.Sheaf.instAddCommGroupH, SheafOfModules.free, PresheafOfModules.Sheafify.mul_smul, SheafOfModules.hom_ext, SheafOfModules.unit",
+   "date": "2026-10-23",
+   "verdict": "no match: returned declarations do not state the canonical comparison with these module-sheaf objects and normalization"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Ext\", \"tensor\", \"assoc\"",
+   "results": "0 hits: ",
+   "date": "2026-10-23",
+   "verdict": "no match: returned declarations do not state the canonical comparison with these module-sheaf objects and normalization"
+  },
+  {
+   "tool": "grep",
+   "query": "cupProduct.*(assoc|comm)|scalarCohomologyCup|moduleCup.*(assoc|unit)",
+   "results": "0 hits: ",
+   "date": "2026-10-23",
+   "verdict": "no match: returned declarations do not state the canonical comparison with these module-sheaf objects and normalization"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Yoneda tensor products of Ext classes of sheaves of vector spaces satisfy associative Koszul commutation and arbitrary degree tensor unit identities",
+   "results": "8 hits: CategoryTheory.Sheaf.H, CategoryTheory.Abelian.Ext.bilinearCompOfLinear, CategoryTheory.Abelian.Ext.bilinearCompOfLinear_apply_apply, CategoryTheory.Abelian.Ext.comp_assoc_of_third_deg_zero, CategoryTheory.Abelian.Ext.bilinearComp_apply_apply, CategoryTheory.Abelian.Ext.bilinearComp, CategoryTheory.Abelian.Ext.comp_assoc_of_second_deg_zero, CategoryTheory.Abelian.Ext.precompOfLinear",
+   "date": "2026-10-23",
+   "verdict": "no match: returned declarations do not state the canonical comparison with these module-sheaf objects and normalization"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-coherent-group-bialgebra",
+  "date": "2026-10-23",
+  "group": "Q159"
+ },
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Smooth-curve abelian level rigidification. Geometric stabilizer input for the smooth full-level cover; restrict to geometric curves before passing to families. Auxiliary input: Curve pullback is faithful on the canonically polarized Jacobian. Supporting input: Dual abelian varieties and the line-bundle homomorphism. Auxiliary for this split: First coherent cohomology dimension of an abelian variety. Supporting input for the coherent H1 dimension argument: The coherent cohomology bialgebra of a proper group. Supporting tensor-coefficient identities used in the external-product calculations: associativity, signed symmetry, and both units before the group-law construction.",
+   "via": [
+    "lem-sfb-coherent-group-bialgebra",
+    "lem-sfb-abelian-structure-h1-dimension",
+    "lem-sfb-abelian-polarization-calculus",
+    "lem-sfb-curve-polarized-jacobian-faithfulness",
+    "lem-sfb-geometric-curve-level-faithfulness",
+    "lem-sfb-smooth-curve-abelian-level-rigidification",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-module-cup-associativity-symmetry-unit",
+  "worker": "stage1",
+  "group": "Q107",
+  "summary": "Preserved all hypotheses and clauses; assembled the ordinary module-cup identities from normalized shifted-Hom and coefficient augmentation comparisons and existing signed tensor calculus, then transported the explicit (-1)^(pq) scalar convention. Two new comparison nodes, neither a cup-identity clause.",
+  "blueprint": "Current latest sec-six-functors-basics/sk-thm-sf-ctf-stability direct-images proof (3), through the existing alteration/moduli/Jacobian/coherent-bialgebra support chain: supply the generic coefficient-cup identities used in coherent external-product and triple-product calculations. This created-node chain currently has blueprint.from.node=null; retained the exact ancestry returned by blueprint_refs.py.",
+  "tool_uses": [
+   {
+    "node": "lem-pur-shifted-tensor-morphism-calculus",
+    "why": "Generic shifted tensor associativity and Koszul symmetry for flat degree-zero sources, applied to the structure sheaf; no purity construction or conclusion is used."
+   },
+   {
+    "node": "lem-pur-derived-tensor-additive-constraints",
+    "why": "Canonical K-flat tensor/shift normalizations give the sign and derived unitor formulas in the explicit unit calculation; no purity statement is used."
+   },
+   {
+    "node": "lem-sc-scalar-cup-module-cup-compatibility",
+    "why": "Signed comparison between the specified scalar Ext cup and the ordinary module cup; the unit has no replacement for this coefficient-convention comparison."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pur-shifted-tensor-morphism-calculus",
+  "lem-pur-derived-tensor-additive-constraints",
+  "lem-sc-scalar-cup-module-cup-compatibility"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q107-5c87e3f62",
+  "group": "Q107",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q107-5c87e3f62 (reviewer sub-agent of L); spot-checked: Read the item, both new nodes and all cited statements in full, and checked the Stacks sources. Sources: cohomology.tex section-cup-product (0FKU), 0FP2 with its sign footnote, 0FP4, 0FP5 (proof omitted), 0FPB, remark-cup-product, and more-algebra item-shift-tensor (sign (-1)^{pb}). Statement and stmt_deps are unchanged; live and side-live still have the item unsplit, so the delivery is not superseded. Step 1: the calculus needs flat degree-zero sources, and U=O_X is flat; targets are arbitrary and the Zariski site is small. Step 2: naturality of t plus the associator equation of the augmentation node plus associativity of B in the calculus; correct. Step 3: s(tau)m = m sigma^D, the Koszul identity with sign (-1)^{pq}, and sigma_{1,1}=id; this fills in the proof 0FP5 omits; correct. Step 4: the unitor computation is correct, since t_{0,p} and t_{p,0} have sign 1 on models. Fault (C4): step 4 used the representatives of the derived unitors but cited only lem-pur-derived-tensor-additive-constraints, which states no unitors. FIX: step 4 now cites def-pc-scheme-derived-tensor-structure, whose unitors descend from the module unitors, with one sentence added; proof_deps updated and still equal to the union of uses. Step 5: the exponent identities pq+(p+q)r = qr+p(q+r), eps^2 = 1 and eps_{0,p} = 1 are correct. New node shifted-hom-comparison: true, as 0FP2 in shifted-target form; the sign check by naturality of t gives +1, which agrees with Stacks. New node single-tensor-augmentation-coherence: true, as the lax symmetric structure of the degree-zero embedding; on k[t] with F=G=O/(t), Tor_1 is nonzero, so m is not an isomorphism, and the node does not claim it is. Neither new node duplicates an existing node: lem-sc-module-cup-canonical-hzero-identification gives the same map c with no coherence equations, lem-pc-derived-structure-sheaf-hom-hypercohomology gives Hom ~ H^0 R Gamma with no cup formula, and lem-sfb-derived-monoidal gives lax Q with no symmetry. Neither restates a clause of the item. Tool uses accepted: lem-pur-shifted-tensor-morphism-calculus, lem-pur-derived-tensor-additive-constraints and lem-sc-scalar-cup-module-cup-compatibility are all generic. Batch 5: the closure reaches def-pod-ring-scalar-extension, a general definition of scalar extension, not a statement or proof step of the trace formula or Poincare duality, so the citation is acceptable.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.ModuleCupAssociativitySymmetryUnit",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.scalarCohomologyCup_associativity_symmetry_unit",
+  "file": "lean/Sheaf/AlgebraicGeometry/ModuleCupAssociativitySymmetryUnit.lean",
+  "statement": "theorem scalarCohomologyCup_associativity_symmetry_unit {k : Type u} [Field k] {X : Scheme.{u}} (f : X ⟶ Spec (CommRingCat.of k)) (F G L : X.Modules) (p q r : ℕ) (a : scalarCohomology f F p) (b : scalarCohomology f G q) (c : scalarCohomology f L r) : scalarCohomologyMap f (α_ F G L).hom ((p + q) + r) (scalarCohomologyCup f (F ⊗ G) L (p + q) r (scalarCohomologyCup f F G p q a b) c) = cast (congrArg (fun n : ℕ ↦ ↥(scalarCohomology f (F ⊗ (G ⊗ L)) n)) (Nat.add_assoc p q r).symm) (scalarCohomologyCup f F (G ⊗ L) p (q + r) a (scalarCohomologyCup f G L q r b c)) ∧ scalarCohomologyMap f (β_ F G).hom (p + q) (scalarCohomologyCup f F G p q a b) = (-1 : k) ^ (p * q) • cast (congrArg (fun n : ℕ ↦ ↥(scalarCohomology f (G ⊗ F) n)) (Nat.add_comm q p)) (scalarCohomologyCup f G F q p b a) ∧ cast (congrArg (fun n : ℕ ↦ ↥(scalarCohomology f F n)) (Nat.zero_add p)) (scalarCohomologyMap f (λ_ F).hom (0 + p) (scalarCohomologyCup f (SheafOfModules.unit X.ringCatSheaf) F 0 p (((@Functor.toRightDerivedZero _ _ _ _ _ (@InjectiveResolution.instHasInjectiveResolutions _ _ _ (RingedSpace.moduleSheaves_abelian_enoughInjectives X.toRingedSpace).2) _ (RingedSpace.globalSectionsFunctor X.toRingedSpace) _).app (SheafOfModules.unit X.ringCatSheaf)).hom (1 : Γ(X, ⊤))) a)) = a ∧ cast (congrArg (fun n : ℕ ↦ ↥(scalarCohomology f F n)) (Nat.add_zero p)) (scalarCohomologyMap f (ρ_ F).hom (p + 0) (scalarCohomologyCup f F (SheafOfModules.unit X.ringCatSheaf) p 0 a (((@Functor.toRightDerivedZero _ _ _ _ _ (@InjectiveResolution.instHasInjectiveResolutions _ _ _ (RingedSpace.moduleSheaves_abelian_enoughInjectives X.toRingedSpace).2) _ (RingedSpace.globalSectionsFunctor X.toRingedSpace) _).app (SheafOfModules.unit X.ringCatSheaf)).hom (1 : Γ(X, ⊤))))) = a",
+  "branch": "sheaf-dag",
+  "by": "NB",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-780d046fe",
+  "group": "NB",
+  "result": "pass",
+  "note": "Re-delivery after H2 RETURN at 56fa4afd. The theorem stmt_dep lem-sc-scalar-unit-cohomology-coordinates is removed; stmt_deps equal the base's six def nodes, and lean is the only node field differing from side-live. The unit class is written inline as toRightDerivedZero(globalSectionsFunctor).app unit applied to 1, with instHasInjectiveResolutions of moduleSheaves_abelian_enoughInjectives.2. This is the same term as the old scalarUnitCohomologyClass body and the same instance path as moduleCohomology. The enough-injectives proof is the def node's own witness (already a stmt_dep of def-sc-ringed-space-module-cohomology), so no H2. Clauses re-checked: associativity (α, add_assoc cast), symmetry (β, (-1)^(pq)), units (λ/ρ with zero_add/add_zero casts), coefficient maps via scalarCohomologyMap. No extra hypotheses; edge cases and universes as before. lean.statement verbatim; docstrings carry source and all 5 proof steps; lines ≤100; proof sorry. No file changed, so not recompiled; the worker reports a compile without output."
+ }
+}

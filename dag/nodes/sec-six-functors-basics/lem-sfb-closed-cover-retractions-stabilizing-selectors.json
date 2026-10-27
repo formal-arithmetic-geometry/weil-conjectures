@@ -1,0 +1,369 @@
+{
+ "id": "lem-sfb-closed-cover-retractions-stabilizing-selectors",
+ "kind": "statement",
+ "title": "Retractions and pointwise stabilizing selectors for countable closed profinite covers",
+ "statement": "Let $S$ be a nonempty compact metrizable Hausdorff totally disconnected space with a fixed compatible metric. Let $(A_j)_{j\\geq1}$ be nonempty closed subsets with $S=\\bigcup_{j\\geq1}A_j$. In the universes of [def-weil-size-convention], there exist refining finite clopen partitions $\\mathcal P_i$ of $S$, $i\\geq1$, whose nonempty atoms have diameter $<2^{-i}$, and continuous maps $\\rho_j:S\\to A_j$ with $\\rho_j(a)=a$ for every $a\\in A_j$. Give each finite set $\\mathcal P_i$ the discrete topology. The atom map\n$$e:S\\longrightarrow\\prod_{i\\geq1}\\mathcal P_i,\\qquad e(s)_i=\\text{the atom containing }s,$$\nis a homeomorphism onto its image, and each $e(A_j)$ is nonempty and closed in that product. With\n$$U_{j,i}=\\bigcup\\{P\\in\\mathcal P_i:P\\cap A_j\\ne\\varnothing\\},$$\nthe sets $U_{j,i}$ are clopen, decrease as $i$ increases, and satisfy $\\bigcap_iU_{j,i}=A_j$. Define $k_i:S\\to\\{1,\\ldots,i\\}$ as the least $j\\leq i$ with $s\\in U_{j,i}$, and as $1$ if there is no such $j$. Each $k_i$ is locally constant. For every $s\\in S$, writing $j(s)=\\min\\{j\\geq1:s\\in A_j\\}$, there exists $i_0(s)$ such that $k_i(s)=j(s)$ for every $i\\geq i_0(s)$. No uniform stabilization in $s$, disjointness, or openness of the $A_j$ is assumed.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+  "place": "Paragraph (3), agent-formulated scalar analytic input, not a theorem asserted in the blueprint. Old proof steps 5–6: finite clopen partitions, product embedding, closed-subset retractions and stabilizing selectors. Exact literature reference WANTED; the full inherited argument is retained in the delivery report."
+ },
+ "stmt_deps": [
+  "def-weil-size-convention"
+ ],
+ "proof": [
+  {
+   "text": "Apply [lem-sfb-closed-cover-partitions-product] to obtain the shrinking refining partitions, the retractions, and the atom embedding with nonempty closed images. The covering hypothesis is not needed for this part.",
+   "uses": [
+    "lem-sfb-closed-cover-partitions-product"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply [lem-sfb-closed-cover-selectors] to these same partitions, using their clopenness, diameter bounds, and refinement. Combine its neighborhoods and selectors with the first lemma's data. Every component of the existential conclusion is retained unchanged.",
+   "uses": [
+    "lem-sfb-closed-cover-selectors"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-closed-cover-partitions-product",
+  "lem-sfb-closed-cover-selectors"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "lean/Sheaf/Topology/ClosedCoverStabilizingSelectors.lean",
+  "place": "The complete Lean proof combines two fully proved constructions. The partition construction uses Mathlib finite disjoint clopen refinements and successive partition infima; compact closed embeddings replace the original direct proofs of inverse continuity and closed images. All eight parent steps are realized, and no sorry remains."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A countable cover of a compact metrizable zero dimensional space by nonempty closed subsets admits continuous retractions onto each subset and finite locally constant selectors eventually choosing the least covering index",
+   "results": {
+    "t": "2026-10-22T06:02:00Z",
+    "tool": "leanfinder",
+    "query": "A countable cover of a compact metrizable zero dimensional space by nonempty closed subsets admits continuous retractions onto each subset and finite locally constant selectors eventually choosing the least covering index",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "ContinuousMap.exists_disjoint_nonempty_clopen_cover_of_mem_nhds_diagonal",
+     "Profinite.NobelingProof.fin_comap_jointlySurjective",
+     "PiNat.exists_retraction_subtype_of_isClosed",
+     "PiNat.exists_retraction_of_isClosed",
+     "TopologicalSpace.IsOpenCover.exists_finite_nonempty_disjoint_clopen_cover",
+     "ContinuousMap.exists_finite_approximation_of_mem_nhds_diagonal",
+     "TopologicalSpace.IsOpenCover.exists_finite_clopen_cover",
+     "exists_gt_t2space"
+    ],
+    "digest": "6995fae269b6e584"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: PiNat.exists_retraction_subtype_of_isClosed is already the existing product-retraction leaf; a compact-space product embedding plus shrinking partitions and eventually least-index selectors are additional arguments."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Closed subsets of compact metrizable totally disconnected spaces retract and clopen finite selectors stabilize pointwise",
+   "results": {
+    "t": "2026-10-22T06:02:09Z",
+    "tool": "leanfinder",
+    "query": "Closed subsets of compact metrizable totally disconnected spaces retract and clopen finite selectors stabilize pointwise",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "exists_retractionCantorSet",
+     "Profinite.Nobeling.ι",
+     "Profinite.NobelingProof.fin_comap_jointlySurjective",
+     "exists_clopen_partition_of_clopen_cover",
+     "PiNat.exists_retraction_of_isClosed",
+     "Profinite.NobelingProof.e_mem_of_eq_true",
+     "Profinite.NobelingProof.π",
+     "PiNat.exists_retraction_subtype_of_isClosed"
+    ],
+    "digest": "9ed582d22119f335"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: PiNat.exists_retraction_subtype_of_isClosed is already the existing product-retraction leaf; a compact-space product embedding plus shrinking partitions and eventually least-index selectors are additional arguments."
+  },
+  {
+   "tool": "loogle",
+   "query": "Continuous, IsClosed",
+   "results": {
+    "t": "2026-10-22T06:02:10Z",
+    "tool": "loogle",
+    "query": "Continuous, IsClosed",
+    "sub": "",
+    "ok": true,
+    "n_hits": 12,
+    "note": "",
+    "top": [
+     "IsClosed.preimage",
+     "continuous_iff_isClosed",
+     "Set.MapsTo.closure_left",
+     "IsOpenMap.preimage_closure_image",
+     "IsClosed.setOfPred_mapsTo",
+     "IsClosed.setOf_mapsTo",
+     "LocallyFinite.continuous",
+     "specializingMap_iff_isClosed_image_closure_singleton"
+    ],
+    "digest": "5e7bb8e098952824"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: PiNat.exists_retraction_subtype_of_isClosed is already the existing product-retraction leaf; a compact-space product embedding plus shrinking partitions and eventually least-index selectors are additional arguments."
+  },
+  {
+   "tool": "grep",
+   "query": "(retract|selector|selection).*(closed|clopen)|(closed|clopen).*(retract|selector|selection)",
+   "results": {
+    "t": "2026-10-22T06:02:10Z",
+    "tool": "grep",
+    "query": "(retract|selector|selection).*(closed|clopen)|(closed|clopen).*(retract|selector|selection)",
+    "sub": "",
+    "ok": true,
+    "n_hits": 14,
+    "note": "",
+    "top": [
+     "Mathlib/Topology/MetricSpace/PiNat.lean",
+     "Mathlib/Topology/MetricSpace/PiNat.lean",
+     "Mathlib/Topology/MetricSpace/PiNat.lean",
+     "Mathlib/Topology/MetricSpace/PiNat.lean",
+     "Mathlib/Topology/MetricSpace/PiNat.lean",
+     "Mathlib/Topology/MetricSpace/HausdorffAlexandroff.lean",
+     "Mathlib/Topology/MetricSpace/HausdorffAlexandroff.lean",
+     "Mathlib/Topology/MetricSpace/HausdorffAlexandroff.lean"
+    ],
+    "digest": "cace69bdda7b2f78"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: PiNat.exists_retraction_subtype_of_isClosed is already the existing product-retraction leaf; a compact-space product embedding plus shrinking partitions and eventually least-index selectors are additional arguments."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Continuous retractions for closed subsets of compact metrizable profinite spaces with pointwise stabilizing locally constant choices",
+   "results": {
+    "t": "2026-10-22T06:02:11Z",
+    "tool": "leansearch",
+    "query": "Continuous retractions for closed subsets of compact metrizable profinite spaces with pointwise stabilizing locally constant choices",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "exists_retractionCantorSet",
+     "PiNat.exists_retraction_subtype_of_isClosed",
+     "PiNat.exists_retraction_of_isClosed",
+     "PiNat.exists_lipschitz_retraction_of_isClosed",
+     "LightProfinite.isClosedMap",
+     "Profinite.NobelingProof.fin_comap_jointlySurjective",
+     "TopologicalSpace.Fiber.instCompactSpaceElemValSetMemRangeCoeLocallyConstantPreimageSingleton",
+     "Profinite.exists_locallyConstant"
+    ],
+    "digest": "408de1b9d8aef061"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: PiNat.exists_retraction_subtype_of_isClosed is already the existing product-retraction leaf; a compact-space product embedding plus shrinking partitions and eventually least-index selectors are additional arguments."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A countable closed cover of a compact metrizable totally disconnected space has shrinking refining clopen partitions continuous retractions and pointwise eventually least-index locally constant selectors",
+   "results": {
+    "t": "2026-10-22T11:18:03Z",
+    "tool": "leanfinder",
+    "query": "A countable closed cover of a compact metrizable totally disconnected space has shrinking refining clopen partitions continuous retractions and pointwise eventually least-index locally constant selectors",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "exists_clopen_partition_of_clopen_cover",
+     "TopologicalSpace.IsOpenCover.exists_finite_clopen_cover",
+     "ContinuousMap.exists_disjoint_nonempty_clopen_cover_of_mem_nhds_diagonal",
+     "TopologicalSpace.IsOpenCover.exists_finite_nonempty_disjoint_clopen_cover",
+     "Profinite.NobelingProof.fin_comap_jointlySurjective",
+     "ContinuousMap.exists_finite_sum_const_indicator_approximation_of_mem_nhds_diagonal",
+     "ContinuousMap.exists_finite_sum_const_mulIndicator_approximation_of_mem_nhds_diagonal",
+     "ContinuousMap.exists_finite_approximation_of_mem_nhds_diagonal"
+    ],
+    "digest": "eed4a926ffe6bc52"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match for the full item: finite clopen refinement/approximation and PiNat closed-product retractions are separate ingredients; no hit supplies the closed cover with eventually least-index selectors. PiNat.exists_retraction_subtype_of_isClosed is reused via its existing DAG leaf."
+  },
+  {
+   "tool": "grep",
+   "query": "(retract|selector|selection).*(closed|clopen)|(closed|clopen).*(retract|selector|selection)",
+   "results": {
+    "t": "2026-10-22T11:20:03Z",
+    "tool": "grep",
+    "query": "(retract|selector|selection).*(closed|clopen)|(closed|clopen).*(retract|selector|selection)",
+    "sub": "",
+    "ok": true,
+    "n_hits": 14,
+    "note": "",
+    "top": [
+     "Mathlib/Topology/MetricSpace/HausdorffAlexandroff.lean",
+     "Mathlib/Topology/MetricSpace/HausdorffAlexandroff.lean",
+     "Mathlib/Topology/MetricSpace/HausdorffAlexandroff.lean",
+     "Mathlib/AlgebraicGeometry/Morphisms/ClosedImmersion.lean",
+     "Mathlib/AlgebraicGeometry/Morphisms/ClosedImmersion.lean",
+     "Mathlib/Topology/MetricSpace/PiNat.lean",
+     "Mathlib/Topology/MetricSpace/PiNat.lean",
+     "Mathlib/Topology/MetricSpace/PiNat.lean"
+    ],
+    "digest": "534cbfbca9a2f923"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match for the full item: finite clopen refinement/approximation and PiNat closed-product retractions are separate ingredients; no hit supplies the closed cover with eventually least-index selectors. PiNat.exists_retraction_subtype_of_isClosed is reused via its existing DAG leaf."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A compact metrizable totally disconnected space with a countable nonempty closed cover has continuous retractions and locally constant selectors eventually equal to the least covering index",
+   "results": {
+    "t": "2026-10-22T11:20:03Z",
+    "tool": "leansearch",
+    "query": "A compact metrizable totally disconnected space with a countable nonempty closed cover has continuous retractions and locally constant selectors eventually equal to the least covering index",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "exists_clopen_partition_of_clopen_cover",
+     "PiNat.exists_lipschitz_retraction_of_isClosed",
+     "CompactExhaustion.find",
+     "paracompact_of_compact",
+     "Set.Countable.isTotallyDisconnected",
+     "TopologicalSpace.Fiber.instCompactSpaceElemValSetMemRangeCoeLocallyConstantPreimageSingleton",
+     "TopologicalSpace.IsOpenCover.exists_finite_clopen_cover",
+     "Profinite.instTotallyDisconnectedSpaceCarrierToTop"
+    ],
+    "digest": "a6ad45fe51982c21"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match for the full item: finite clopen refinement/approximation and PiNat closed-product retractions are separate ingredients; no hit supplies the closed cover with eventually least-index selectors. PiNat.exists_retraction_subtype_of_isClosed is reused via its existing DAG leaf."
+  },
+  {
+   "tool": "loogle",
+   "query": "PiNat.exists_retraction_subtype_of_isClosed",
+   "results": {
+    "t": "2026-10-22T11:20:04Z",
+    "tool": "loogle",
+    "query": "PiNat.exists_retraction_subtype_of_isClosed",
+    "sub": "",
+    "ok": true,
+    "n_hits": 1,
+    "note": "",
+    "top": [
+     "PiNat.exists_retraction_subtype_of_isClosed"
+    ],
+    "digest": "50851967af4b203e"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match for the full item: finite clopen refinement/approximation and PiNat closed-product retractions are separate ingredients; no hit supplies the closed cover with eventually least-index selectors. PiNat.exists_retraction_subtype_of_isClosed is reused via its existing DAG leaf."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Closed covers of a zero dimensional compact metric space admit continuous retractions and locally constant selections converging pointwise to the first covering index",
+   "results": {
+    "t": "2026-10-22T11:20:14Z",
+    "tool": "leanfinder",
+    "query": "Closed covers of a zero dimensional compact metric space admit continuous retractions and locally constant selections converging pointwise to the first covering index",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "ContinuousMap.exists_finite_approximation_of_mem_nhds_diagonal",
+     "Profinite.NobelingProof.fin_comap_jointlySurjective",
+     "ContinuousMap.exists_disjoint_nonempty_clopen_cover_of_mem_nhds_diagonal",
+     "PiNat.exists_retraction_subtype_of_isClosed",
+     "PiNat.exists_retraction_of_isClosed",
+     "ContinuousMap.exists_finite_sum_const_indicator_approximation_of_mem_nhds_diagonal",
+     "ContinuousMap.exists_finite_sum_const_mulIndicator_approximation_of_mem_nhds_diagonal",
+     "exists_retractionCantorSet"
+    ],
+    "digest": "de5e461c17e6508a"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match for the full item: finite clopen refinement/approximation and PiNat closed-product retractions are separate ingredients; no hit supplies the closed cover with eventually least-index selectors. PiNat.exists_retraction_subtype_of_isClosed is reused via its existing DAG leaf."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-parameter-cochain-completion-boundary-descent",
+  "date": "2026-10-22",
+  "group": "Q49"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "Paragraph (3), open direct image: scalar analytic base. Old proof steps 5–6: finite clopen partitions, product embedding, closed-subset retractions and stabilizing selectors.",
+   "via": [
+    "lem-sfb-parameter-cochain-completion-boundary-descent",
+    "lem-sfb-procyclic-scalar-cochain-evaluation",
+    "lem-sfb-ind-unipotent-procyclic-difference",
+    "lem-sfb-polynomial-translation-acyclic",
+    "lem-sfb-polynomial-derived-bar-comparison",
+    "lem-sfb-trivial-ladic-derived-exterior",
+    "lem-sfb-dense-lattice-derived-invariants-comparison",
+    "lem-sfb-tame-inertia-continuous-koszul",
+    "lem-sfb-continuous-algcl-tame-boundary-comparison",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sfb-closed-cover-retractions-stabilizing-selectors",
+  "worker": "stage1",
+  "summary": "Unchanged statement. Proved in eight steps with no new nodes, using the existing clopen-basis and countable-discrete-product retraction leaves. Wrote out Boolean-atom partitions, the embedding, a finite-subcover closed-image argument, neighbourhood intersections and the finite-maximum stabilization argument. Searches find partial Mathlib ingredients but not the combined statement. No project Lean attachment.",
+  "blueprint": "Current main-20261015 direct-images proof paragraph (3), open direct image: scalar analytic input below parameter-cochain-completion-boundary-descent, old proof steps 5–6. Inherited ancestry has from.node=null; this is an agent-formulated auxiliary lemma, not an assertion of the blueprint.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q54-165807d50",
+  "group": "Q54",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q54-165807d50 (reviewer sub-agent of L); spot-checked: I read the whole delivery. It is one commit containing the item and the report, with no new nodes. Compared with the live item (unsplit), the statement, stmt_deps, source and blueprint fields are unchanged; only the proof, proof_deps, proof_origin, status, split_report and appended mathlib_searches (leanfinder, loogle, leansearch, grep) differ. The item has no repair note, and it is still unsplit in live and side-live, so nothing supersedes this delivery. proof_deps is exactly the union of the steps' uses: the Mathlib leaves lem-weil-pbc-profinite-clopen-basis (isTopologicalBasis_isClopen, whose hypotheses match the item's) and lem-sfb-countable-discrete-product-closed-retraction. I checked the second against PiNat.exists_retraction_subtype_of_isClosed at PiNat.lean:680-687 in the pinned Mathlib. Both leaves are tools, not route, so no tool_uses are needed. Stacks 08ZZ (topology.tex:4207) is only a source annotation; step 1 builds the clopen atoms directly from the clopen basis. All 8 steps are correct. Step 1: radius 2^-i/3 balls and a finite subcover give Boolean atoms, and each atom lies in a member of V_i, so its diameter is at most 2*2^-i/3 < 2^-i, with refinement because generators accumulate. Steps 2-3: e is continuous and injective, and its inverse is continuous by shrinking atoms. Step 4: the sets D_i = S minus x_i are clopen, and a finite subcover gives a cylinder missing e(A_j), so e(A_j) is closed in the whole product Q. Step 5: the retraction is reindexed by n+1 and rho_j = e_j^-1 r_j e. Step 6: the U_{j,i} decrease and their intersection is exactly A_j. Step 7: each k_i is constant on atoms. Step 8: a finite maximum gives pointwise stabilization. Edge cases checked: singleton S, A_j = S, j(s) = 1, a non-uniform cover of {0} together with {1/n}, and overlapping A_j. A DAG-wide search found no duplicate. The single citer, parent step 4 of lem-sfb-parameter-cochain-completion-boundary-descent, uses exactly the stated clauses. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.Topology.ClosedCoverStabilizingSelectors",
+  "declaration": "TopologicalSpace.exists_closedCover_retractions_stabilizingSelectors",
+  "file": "lean/Sheaf/Topology/ClosedCoverStabilizingSelectors.lean",
+  "statement": "theorem exists_closedCover_retractions_stabilizingSelectors (S : Type u) [MetricSpace S] [CompactSpace S] [TotallyDisconnectedSpace S] [Nonempty S] (A : ℕ+ → Set S) (hclosed : ∀ j, IsClosed (A j)) (hnonempty : ∀ j, (A j).Nonempty) (hcover : (⋃ j, A j) = Set.univ) : ∃ P : ℕ+ → Finpartition (Set.univ : Set S), (∀ i, P (i + 1) ≤ P i) ∧ (∀ i p, p ∈ (P i).parts → IsClopen p ∧ Metric.diam p < (1 / 2 : ℝ) ^ (i : ℕ)) ∧ ∃ ρ : ∀ j, C(S, A j), (∀ j (a : A j), ρ j a = a) ∧ ∃ e : S → ∀ i : ℕ+, WithDiscreteTopology (P i).parts, (∀ s i, s ∈ (e s i).ofTopology.val) ∧ IsEmbedding e ∧ (∀ j, (e '' A j).Nonempty ∧ IsClosed (e '' A j)) ∧ ∃ U : ℕ+ → ℕ+ → Set S, (∀ j i, U j i = ⋃ (p : (P i).parts) (_ : (p.val ∩ A j).Nonempty), p.val) ∧ (∀ j i, IsClopen (U j i)) ∧ (∀ j i, U j (i + 1) ⊆ U j i) ∧ (∀ j, (⋂ i, U j i) = A j) ∧ ∃ k : ∀ i : ℕ+, LocallyConstant S {j : ℕ+ // j ≤ i}, (∀ i s, ((∃ j : ℕ+, j ≤ i ∧ s ∈ U j i) → s ∈ U (k i s).val i ∧ ∀ j : ℕ+, j ≤ i → s ∈ U j i → (k i s).val ≤ j) ∧ ((∀ j : ℕ+, j ≤ i → s ∉ U j i) → (k i s).val = 1)) ∧ ∀ s, ∃ j₀ : ℕ+, s ∈ A j₀ ∧ (∀ j : ℕ+, s ∈ A j → j₀ ≤ j) ∧ ∃ i₀ : ℕ+, ∀ i : ℕ+, i₀ ≤ i → (k i s).val = j₀",
+  "branch": "newtargets-dag",
+  "by": "Q04",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-85a67c9d5",
+  "group": "Q04",
+  "result": "pass",
+  "note": "Single sorry theorem TopologicalSpace.exists_closedCover_retractions_stabilizingSelectors; only lean record changed vs side-live; no duplicate or repair note. Hypotheses: MetricSpace (fixed metric, T2), Compact, TotallyDisconnected, Nonempty, A : ℕ+ → Set S closed/nonempty/covering; nothing stronger. Conclusion clauses all present: Finpartition univ with refinement P(i+1) ≤ P i (Mathlib order = finer), clopen atoms with diam < (1/2)^i, ρ j : C(S, A j) fixing A j, atom map e into Pi WithDiscreteTopology pinned by membership, IsEmbedding, e''A j nonempty and closed in the full product, U pinned by union equation and clopen/decreasing/⋂ = A j, k LocallyConstant into {j ≤ i} with least-eligible and default-1 branches, pointwise stabilization to the minimal covering index with i₀ depending on s. Edge cases checked (singleton, j(s)=1, A j = S, overlaps, nothing eligible); single universe u. lean.statement verbatim; docstrings carry source, blueprint tag and 8 proof steps; report has both sections. Minor: docstring path 'latest' vs 'main-20261015'. No compile run (no change)."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P1",
+  "result": "pass",
+  "landing": "20261026T082623-L-2197176",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

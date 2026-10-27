@@ -20,126 +20,49 @@
  ],
  "proof": [
   {
-   "text": "First establish stability, without any restriction on irreducible components. By [sk-thm-pe-weakly-contractible-basis] and [lem-zl-condensed-lisse-proetale-locality], it suffices to check a distinguished triangle on a w-contractible affine $U$. Write $A=\\Gamma(U,\\Lambda_U)$. The equivalence [lem-zl-condensed-wcontractible-lisse-evaluation] writes any dualizable first and second terms as $F_U(P)$ and $F_U(Q)$ for perfect $A$-complexes, and represents the arrow by an arrow $P\\to Q$ in $D(A)$. Choose bounded finite-projective representatives using [def-pc-perfect-ring-complex]. By [lem-pc-ring-derived-map-representative] that arrow is represented by a chain map $p^\\bullet\\to q^\\bullet$. Its cone has terms $q^n\\oplus p^{n+1}$, again bounded and finite projective. Exactness of $F_U$ identifies its image with the third term of the triangle, which is therefore dualizable. The zero complex and integer shifts are likewise bounded finite-projective, and the equivalence preserves isomorphisms. Locality descends all these assertions to $X$.",
+   "text": "Use the already proved generic source-library shift and cone stability [lem-zl-derived-dualizable-stability]. The zero object has itself as dual, with zero evaluation and coevaluation and triangle identities forced by zero-object uniqueness. Transporting a dual along an isomorphism is IsDualizable.of_iso. The existing module-sheaf instances meet the generic hypotheses. This avoids any local-basis argument for stability.",
    "uses": [
-    "lem-zl-condensed-wcontractible-lisse-evaluation",
-    "lem-zl-condensed-lisse-proetale-locality",
+    "lem-zl-derived-dualizable-stability"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "On every w-contractible affine basis member, perfect scalar realization is dualizable by the scalar clause of condensed_wcontractible_projective_calculus. A basis member is identified with Spec D; transport w-contractibility to its global-section ring through the canonical ΓSpecIso and the scheme isomorphism. Scalar realization commutes with inverse image. Locality descends dualizability to each original cover member, and then to X. This implication does not use the component hypothesis.",
+   "uses": [
+    "lem-zl-condensed-wcontractible-projective-calculus",
     "sk-thm-pe-weakly-contractible-basis",
-    "def-pc-perfect-ring-complex",
-    "lem-pc-ring-derived-map-representative"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
-    "place": "Observation after Definition 3.3; Lemma 4.1(2); bounded-projective cone argument expanded"
-   }
-  },
-  {
-   "text": "We prove the implication from local scalar models to dualizability for every scheme, including cover objects with infinitely many irreducible components. For a perfect $P\\in D(R)$ and any scheme $T$, cover $T$ by w-contractible affines $V$ using [sk-thm-pe-weakly-contractible-basis]. Put $A=\\Gamma(V,\\Lambda_V)$. By [lem-zl-condensed-wcontractible-lisse-evaluation], the restriction of $\\Lambda_T\\otimes^L_{\\underline R}\\underline P$ is $F_V(A\\otimes_R^L P)$. A bounded finite-projective representative of $P$ computes this derived base change: each projective summand of $R^n$ becomes the corresponding summand of $A^n$. Thus $A\\otimes_R^L P$ is perfect, even if $A$ is not flat over $R$, and its image under $F_V$ is dualizable. Apply [lem-zl-condensed-lisse-proetale-locality] first to this cover of $T$, and then to the given covering family of $X$. This proves the reverse implication with varying $P_i$.",
-   "uses": [
-    "lem-zl-condensed-wcontractible-lisse-evaluation",
-    "lem-zl-condensed-lisse-proetale-locality",
-    "sk-thm-pe-weakly-contractible-basis",
-    "def-pc-perfect-ring-complex"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
-    "place": "Definition 3.5 and reverse implication of Theorem 4.13"
-   }
-  },
-  {
-   "text": "For the forward implication first suppose that $X$ is nonempty irreducible affine. Fix a geometric generic point $\\eta:\\operatorname{Spec}\\Omega\\to X$. Pullback preserves dualizability by [lem-zl-condensed-lisse-proetale-locality]. The affine geometric point is w-contractible (one strictly henselian local ring and one component), so [lem-zl-condensed-wcontractible-lisse-evaluation] supplies $P\\in\\operatorname{Perf}(R)$ and $K|_\\eta\\simeq\\Lambda_\\eta\\otimes^L_{\\underline R}\\underline P$, since $\\Gamma(\\eta,\\Lambda_\\eta)=\\Gamma(*,\\Lambda)=R$. Choose an affine faithfully flat ind-etale w-contractible cover $U\\to X$ by [lem-weil-pbc-source-wcontractible-extension]. For $S=\\pi_0U$ the same evaluation lemma gives a dualizable $M\\in D(S,\\Lambda)$ with $\\pi_U^*M\\simeq K|_U$.",
-   "uses": [
-    "lem-zl-condensed-wcontractible-lisse-evaluation",
-    "lem-zl-condensed-lisse-proetale-locality",
-    "lem-weil-pbc-source-wcontractible-extension"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
-    "place": "Theorem 4.13, first paragraph and irreducible case; geometric-point case of Lemma 4.1"
-   }
-  },
-  {
-   "text": "Apply [lem-zl-generic-fiber-components-section] to $U\\to X$ and $\\eta$. With $S_\\eta=\\pi_0(U\\times_X\\eta)$ and $r:S_\\eta\\to S$, its commutative component square and the isomorphism at $\\eta$ identify\n$$r^*M\\simeq\\Lambda_{S_\\eta}\\otimes^L_{\\underline R}\\underline P.$$\nIndeed their images under the coefficient-compatible equivalence $\\pi_{U\\times_X\\eta}^*$ are respectively $K|_{U\\times_X\\eta}$ and the pullback of the scalar model at $\\eta$; full faithfulness reflects the resulting isomorphism. Pull this isomorphism back along the continuous section $s:S\\to S_\\eta$. Inverse images on these profinite slice sites compose, $r\\circ s=\\mathrm{id}$, and the coefficient and constant-sheaf pullbacks are the specified ones. Thus $M\\simeq\\Lambda_S\\otimes^L_{\\underline R}\\underline P$. Applying $\\pi_U^*$ and its scalar compatibility from [lem-zl-condensed-wcontractible-lisse-evaluation] gives $K|_U\\simeq\\Lambda_U\\otimes^L_{\\underline R}\\underline P$. This proves the irreducible-affine case, with the very same $P$ on any such chosen cover.",
-   "uses": [
-    "lem-zl-generic-fiber-components-section",
-    "lem-zl-condensed-wcontractible-lisse-evaluation"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
-    "place": "Theorem 4.13, diagram (4.4) and the paragraph following it"
-   }
-  },
-  {
-   "text": "Now take an affine open $X=\\operatorname{Spec}A$ having finitely many irreducible components $X_a$. Give each component its reduced closed scheme structure by [lem-weil-pbc-reduced-induced-closed-subscheme], so $X_a=\\operatorname{Spec}(A/I_a)$ is irreducible affine. Their underlying sets cover $X$ by [lem-sc-irreducible-components-cover]. Pullback of $K$ to each $X_a$ is dualizable by [lem-zl-condensed-lisse-proetale-locality]. Choose an affine faithfully flat ind-etale w-contractible cover $W_a=\\operatorname{Spec}\\overline C_a\\to X_a$ by [lem-weil-pbc-source-wcontractible-extension]. Steps 3-4, applied over $X_a$ with this cover, give $K|_{W_a}\\simeq\\Lambda_{W_a}\\otimes^L_{\\underline R}\\underline{P_a}$ for a perfect $R$-complex $P_a$. Different components may give different $P_a$. We have made no claim that a closed subscheme of a w-contractible affine is w-contractible.",
-   "uses": [
-    "lem-weil-pbc-reduced-induced-closed-subscheme",
-    "lem-sc-irreducible-components-cover",
-    "lem-zl-condensed-lisse-proetale-locality",
-    "lem-weil-pbc-source-wcontractible-extension"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
-    "place": "Theorem 4.13, finite-component paragraph, refined by w-contractible covers of the components"
-   }
-  },
-  {
-   "text": "Set $C_a=H_A(\\overline C_a)$, using [def-exc-ind-etale-closed-lift]. Its diagram is filtered by [lem-exc-closed-lift-filtered], so its defining colimit of etale $A$-algebras makes $C_a$ ind-etale over $A$. By [lem-exc-closed-lift-reduction] the specified map identifies $C_a/I_aC_a$ with $\\overline C_a$. By [lem-zl-henselian-indetale-closed-lift] the pair $(C_a,I_aC_a)$ is henselian. Put $V_a=\\operatorname{Spec}C_a$, with closed fiber $W_a$. Since $W_a$ is w-contractible, [lem-zl-condensed-henselian-lisse-rigidity] makes $V_a$ w-contractible and makes restriction $D_{\\mathrm{lis}}(V_a,\\Lambda)\\to D_{\\mathrm{lis}}(W_a,\\Lambda)$ fully faithful. Both $K|_{V_a}$ and its scalar model are dualizable: use [lem-zl-condensed-lisse-proetale-locality] for the former, and Step 2 for the latter. Full faithfulness lifts the isomorphism of Step 5 and its inverse; faithfulness makes their composites identities. We obtain $K|_{V_a}\\simeq\\Lambda_{V_a}\\otimes^L_{\\underline R}\\underline{P_a}$.",
-   "uses": [
-    "def-exc-ind-etale-closed-lift",
-    "lem-exc-closed-lift-filtered",
-    "lem-exc-closed-lift-reduction",
-    "lem-zl-henselian-indetale-closed-lift",
-    "lem-zl-condensed-henselian-lisse-rigidity",
     "lem-zl-condensed-lisse-proetale-locality"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
-    "place": "Theorem 4.13, finite-component paragraph; Bhatt--Scholze Definition 2.2.10, Lemma 2.2.12 and Lemma 6.1.1"
-   }
+   "elementary": false
   },
   {
-   "text": "There are finitely many $a$. Each $V_a\\to X$ is affine ind-etale, hence weakly etale by [lem-weil-pbc-ind-etale-stability], so flat and a pro-etale site object. Its image contains all of $X_a$, since its closed fiber $W_a\\to X_a$ is surjective. As the $X_a$ cover $X$, the finite affine disjoint union $\\coprod_a V_a\\to X$ is surjective, flat and quasi-compact, hence is a covering in the small pro-etale site [def-weil-pbc-proetale-site, def-weil-pbc-ind-etale-algebra]. The models of Step 6 therefore give the required covering. For a general $X$ with Zariski locally finitely many irreducible components, take affine open neighborhoods inside the open neighborhoods from that hypothesis. An open subset of a finite union of irreducible closed subsets has at most that finite number of irreducible components: intersect those subsets with the open and discard the empty ones. Apply the affine construction and compose the resulting covers with the Zariski open cover. The empty scheme uses the empty covering. No uniform amplitude, rank, or scalar model across cover members is required.",
+   "text": "For each point choose an affine open inside a supplied neighborhood with finitely many irreducible components. An open embedding sends a component to a set whose closure is an ambient component: enlarge that closure to an ambient component and pull back; maximality identifies the pullback, and openness gives density. This is injective on components because pullback of closure recovers the original closed component. Thus the chosen affine open still has finitely many components. Apply the affine forward assembly [lem-zl-condensed-affine-local-perfect-models] to the restricted dualizable K.",
    "uses": [
-    "def-weil-pbc-proetale-site",
-    "def-weil-pbc-ind-etale-algebra",
-    "lem-weil-pbc-ind-etale-stability"
+    "lem-zl-condensed-affine-local-perfect-models",
+    "lem-zl-condensed-lisse-proetale-locality"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
-    "place": "Theorem 4.13, Zariski localization and final covering argument"
-   }
+   "elementary": false
+  },
+  {
+   "text": "The affine opens, indexed by points of X, form a Zariski cover, hence a pro-etale cover. Bind it with the individual covers of the affine opens. The canonical derived composition comparison identifies pullback to each member of this composed cover with the iterated pullback used in its local model. If X is empty the point-indexed cover is empty, so the same assembly works. Combine this forward implication with the reverse implication.",
+   "uses": [
+    "def-weil-pbc-proetale-site"
+   ],
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "lem-zl-condensed-wcontractible-lisse-evaluation",
-  "lem-zl-condensed-lisse-proetale-locality",
+  "lem-zl-derived-dualizable-stability",
+  "lem-zl-condensed-wcontractible-projective-calculus",
   "sk-thm-pe-weakly-contractible-basis",
-  "def-pc-perfect-ring-complex",
-  "lem-pc-ring-derived-map-representative",
-  "lem-weil-pbc-source-wcontractible-extension",
-  "lem-zl-generic-fiber-components-section",
-  "lem-weil-pbc-reduced-induced-closed-subscheme",
-  "lem-sc-irreducible-components-cover",
-  "def-exc-ind-etale-closed-lift",
-  "lem-exc-closed-lift-filtered",
-  "lem-exc-closed-lift-reduction",
-  "lem-zl-henselian-indetale-closed-lift",
-  "lem-zl-condensed-henselian-lisse-rigidity",
-  "def-weil-pbc-proetale-site",
-  "def-weil-pbc-ind-etale-algebra",
-  "lem-weil-pbc-ind-etale-stability"
+  "lem-zl-condensed-lisse-proetale-locality",
+  "lem-zl-condensed-affine-local-perfect-models",
+  "def-weil-pbc-proetale-site"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
-  "place": "Definition 3.3, Lemma 4.1 and proof of Theorem 4.13; finite-component argument repaired using Bhatt--Scholze henselian lifts"
+  "place": "HRS Definition 3.3 stability observation and Theorem 4.13; generic source-library stability and explicit affine-to-Zariski cover assembly, K1 stage 3, 2026-10-25."
  },
  "mathlib_searches": [
   {
@@ -236,11 +159,11 @@
   "is": null
  },
  "split_report": {
-  "date": "2026-10-18",
+  "date": "2026-10-22",
   "item": "lem-zl-condensed-dualizable-local-perfect-models",
   "worker": "stage1",
-  "summary": "Expanded the HRS local perfect-model argument through w-contractible evaluation, generic-fiber components, and henselian rigidity; proved stability by bounded-projective cone representatives, using an existing chain-map theorem. Repaired the unsupported closed-subscheme w-contractibility assertion by first covering each closed component by a w-contractible ind-etale affine and then henselian-lifting that cover. Statement unchanged, five statement-only lemmas, no Mathlib match.",
-  "blueprint": "Proof Step 3, paragraph beginning “The field-stage projection formula”: continuous-coefficient realization in lem-zl-adic-hom-tensor-lisse-criterion uses the dualizable truncation and heart theorem.",
+  "summary": "Q146 re-split repair: unchanged statement; three comparable statement-only argument nodes for w-contractible projective calculus, irreducible generic-model descent, and prescribed finite-closed-cover henselian model lifting. All seven old arguments are preserved in the new statements and the report, and the parent now assembles them in under 3000 characters. Mathlib searches and verbatim citation coverage checked.",
+  "blueprint": "Proof Step 3, paragraph beginning “The field-stage projection formula”: continuous-coefficient realization in lem-zl-adic-hom-tensor-lisse-criterion uses the dualizable truncation and heart theorem. All seven local-model subarguments are redistributed; no unit route changes.",
   "tool_uses": [
    {
     "node": "sk-thm-pe-weakly-contractible-basis",
@@ -253,36 +176,19 @@
    {
     "node": "lem-weil-pbc-reduced-induced-closed-subscheme",
     "why": "Generic scheme topology, w-contractible cover, or ind-etale closed-lift tool for the HRS local-model proof; no node of this unit supplies it, and no smooth-proper purity or weight argument is replaced."
-   },
-   {
-    "node": "lem-exc-closed-lift-filtered",
-    "why": "Generic scheme topology, w-contractible cover, or ind-etale closed-lift tool for the HRS local-model proof; no node of this unit supplies it, and no smooth-proper purity or weight argument is replaced."
-   },
-   {
-    "node": "lem-exc-closed-lift-reduction",
-    "why": "Generic scheme topology, w-contractible cover, or ind-etale closed-lift tool for the HRS local-model proof; no node of this unit supplies it, and no smooth-proper purity or weight argument is replaced."
-   },
-   {
-    "node": "lem-weil-pbc-ind-etale-stability",
-    "why": "Step 7 uses only the generic implication ind-etale implies weakly etale to verify the pro-etale covering condition; this is a scheme-topology tool, not a replacement for the smooth-proper purity route."
    }
   ]
  },
  "tool_uses": [
-  "sk-thm-pe-weakly-contractible-basis",
-  "lem-weil-pbc-source-wcontractible-extension",
-  "lem-weil-pbc-reduced-induced-closed-subscheme",
-  "lem-exc-closed-lift-filtered",
-  "lem-exc-closed-lift-reduction",
-  "lem-weil-pbc-ind-etale-stability"
+  "sk-thm-pe-weakly-contractible-basis"
  ],
  "reviewed": {
-  "date": "2026-10-18",
+  "date": "2026-10-22",
   "by": "L",
-  "reviewer": "NT-Codex-Q12-aab77293d",
-  "group": "Q12",
+  "reviewer": "NT-cc-Q146-41b35e631",
+  "group": "Q146",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q12-aab77293d (reviewer sub-agent of L); spot-checked: Read the item and all five new nodes in full against HRS §§3–4, BS §§2.2/6.1 and cited sources. The henselian refinement repairs the source’s closed-subscheme gap. Corrected two citation faults: derived constant realization and ind-etale-to-weakly-etale stability in Step 7. Statements unchanged; no cycles, dropped-route dependencies or long steps. Whole corrected JSON and concrete checks are in fixes/ and review.md.; 1 file(s) fixed by the reviewer"
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q146-41b35e631 (reviewer sub-agent of L); spot-checked: I read the re-split in full: the item, all three new nodes, every cited statement, and HRS Definition 3.3, Lemma 4.1, Proposition 4.3(3), Corollary 4.4 and Theorem 4.13. It complies with the 2026-10-21 order (released note, keep_plan). The statement and stmt_deps are unchanged, the assembly is 2054 characters (2300 after my fix), and the three new nodes have comparable statements of 2006, 2386 and 2410 characters. Old steps 1-2 became the projective calculus, old steps 3-4 became the irreducible generic model, and old step 6 plus the cover part of step 7 became the finite closed model lifts. Old step 5 and the Zariski and empty-scheme part of step 7 stay as assembly in parent steps 3 and 5, with no clause dropped. All three new statements hold. The calculus follows from K-projective chain-map representatives, cone terms q'^n plus q^{n+1}, F_T being exact and monoidal, and Perf being equivalent to D_lis. In the generic model, Gamma(eta, Lambda) = R, pi_V is an equivalence so r^*M is L(P), and pulling back along s gives M = L_S(P). The lifts follow from the filtered colimit, the reduction isomorphism, the henselian pair, the rigidity equivalence, and the fact that a finite flat surjective affine family is an fpqc covering. I tested the empty index set, I=0, the zero ring and non-reduced X. Two partial overlaps are accepted: the calculus's last paragraph repeats the final clause of lem-zl-condensed-wcontractible-lisse-evaluation, and the generic lemma repeats the existence of a section from lem-zl-generic-fiber-components-section; both sit inside larger new claims, so neither node is a duplicate. Batch 5: the newly cited lisse-evaluation node reaches def-trf-geometric-morphism, which is a general definition of a geometric morphism, and the base item already cited lisse-evaluation, so this is accepted. There is no SGA source and the item is not superseded live. FIX: Step 3 applied the generic lemma without choosing a geometric generic point; it now chooses eta_a over an algebraic closure and cites def-weil-geometric-point and def-weil-algebraic-closure (both Mathlib leaves) in its uses and proof_deps. The three declared tool uses are accepted.; 1 file(s) fixed by the reviewer"
  },
  "lean": {
   "module": "Sheaf.AlgebraicGeometry.CondensedDualizableLocalPerfectModels",
@@ -306,5 +212,26 @@
   "result": "pass",
   "note": "Read node, 9 stmt_deps, HRS Def 3.3/3.5/Thm 4.13 places, both modules, report (Worker report + Second reading by Q20 present), upstream ModuleObject.Basic/DerivedCategory, DerivedChangeOfRingsCochainModel, CommutativeSiteDerivedConstantModuleFunctor, PerfectRingComplexGeneral. Clause-by-clause match: general comm. condensed Λ, R=Γ(*,Λ), Λ_X=condensedRingObj on Scheme.ProEt, ordinary derived category with Mod.derivedMonoidalCategory (confirmed by #synth), Nonempty HasRightDual, stability (0/iso/all ℤ shifts/dist. cones) without component hypothesis, Zariski-local finite components, Scheme.Cover of proetalePrecoverage, per-member ∃ perfect P, ↔, no extra assumptions. New def node def-zl-condensed-scalar-realization is canonical: constant realization ⋙ universal derived change of rings along the constantSheafAdj counit ⋙ section-module equivalence ⋙ p_X^*. Classical.choice of the recorded universal structure is the established pattern and doesn't change the Nonempty-iso statement. No duplicates found. Statement text unchanged, lean.statement verbatim, only the two theorems sorry, docstrings have source/blueprint, edge cases ok. nt_compile --json on both files rc 0, no diagnostics, 2.7 s each. Non-blocking: global HasDerivedCategory.{u+2} helper instances could cause type mismatches downstream."
  },
- "lean_audit": {}
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K1",
+  "result": "pass",
+  "landing": "20261025T095530-L-3435526",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
 }

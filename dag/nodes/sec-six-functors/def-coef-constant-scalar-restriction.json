@@ -1,0 +1,126 @@
+{
+ "id": "def-coef-constant-scalar-restriction",
+ "kind": "definition",
+ "title": "Constant commutative-ring sheaf modules and canonical scalar restriction",
+ "status": "split",
+ "import_flags": [],
+ "statement": "Let $(C,J)$ be a site, with objects in universe $u$ and arrows in universe $v$, and $B$ a commutative ring in universe $\\max(u,v)$. Write $R=\\underline B$ for its constant commutative-ring sheaf [def-weil-pbc-constant-sheaf]. Define $\\mathrm{Modules}(J,B)$ to be sheaves of modules over the underlying ring sheaf of $R$ [def-weil-sheaf-of-modules-category], and $\\mathrm{Fixed}(J,B)=\\operatorname{Sh}_J(C,\\operatorname{Mod}_B)$. The functor $\\mathrm{restriction}:\\mathrm{Modules}(J,B)\\to\\mathrm{Fixed}(J,B)$ first restricts scalars along the canonical isomorphism between the underlying ring sheaf of the constant commutative-ring sheaf and the constant ring sheaf, then applies restriction along the constant-ring sheafification unit [def-sfb-constant-ring-module-restriction]. Thus it retains sections and restriction maps and gives each section its $B$-action through that unit. This is the specified functor itself; no claim of exactness, tensor compatibility or equivalence is included.",
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tag 03CY, sheaf modules and restriction along the constant ring sheafification unit; the canonical commutative-ring to ring constant-sheaf comparison."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-constant-sheaf",
+  "def-weil-sheaf-of-modules-category",
+  "def-sfb-constant-ring-module-restriction"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "ExceptionalSystemSiteComparison|exceptionalProSupport|ConstantScalarRestriction",
+   "results": "{\"t\": \"2026-10-24T19:37:08Z\", \"tool\": \"grep\", \"query\": \"ExceptionalSystemSiteComparison|exceptionalProSupport|ConstantScalarRestriction\", \"sub\": \"CategoryTheory\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "No exact Mathlib ownership match. The exact definitions already exist in the project modules ExceptionalSystemTransport and ConstantScalarRestrictionTensor; bind those definitions, not their theorem conclusions."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Definition of the ordinary strict coefficient system site comparison and proper open compact support geometric mate; constant ring sheaf scalar restriction",
+   "results": "{\"t\": \"2026-10-24T19:37:08Z\", \"tool\": \"leansearch\", \"query\": \"Definition of the ordinary strict coefficient system site comparison and proper open compact support geometric mate; constant ring sheaf scalar restriction\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SheafOfModules.restrictScalars\", \"AlgebraicGeometry.StructureSheaf.res_const\", \"PresheafOfModules.restrictScalarsObj\", \"ModuleCat.Tilde.res_const\", \"SheafOfModules.instAdditiveRestrictScalars\", \"AlgebraicGeometry.StructureSheaf.res_const'\", \"SheafOfModules.restrictScalars_map_val\", \"RestrictScalars\"], \"digest\": \"f7dba08daa565c02\"}",
+   "date": "2026-10-24",
+   "verdict": "No exact Mathlib ownership match. The exact definitions already exist in the project modules ExceptionalSystemTransport and ConstantScalarRestrictionTensor; bind those definitions, not their theorem conclusions."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An etale proetale coefficient system comparison record with actual geometric mate and Hom chain adjunction; restriction from constant ring sheaf modules to fixed ring module sheaves",
+   "results": "{\"t\": \"2026-10-24T19:37:09Z\", \"tool\": \"leanfinder\", \"query\": \"An etale proetale coefficient system comparison record with actual geometric mate and Hom chain adjunction; restriction from constant ring sheaf modules to fixed ring module sheaves\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Etale.forgetFullyFaithful\", \"AlgebraicGeometry.Scheme.Etale.forget\", \"StandardEtalePair.homEquiv\", \"StandardEtalePair.homEquiv_apply_coe\", \"Algebra.FormallyEtale.of_restrictScalars\", \"Algebra.FormallyEtale.Algebra.FormallyEtale.of_restrictScalars\", \"AlgebraicGeometry.Scheme.instCategoryEtale\", \"PresheafOfModules.DifferentialsConstruction.relativeDifferentials'\"], \"digest\": \"cb1a6d76b2759072\"}",
+   "date": "2026-10-24",
+   "verdict": "No exact Mathlib ownership match. The exact definitions already exist in the project modules ExceptionalSystemTransport and ConstantScalarRestrictionTensor; bind those definitions, not their theorem conclusions."
+  },
+  {
+   "tool": "grep",
+   "query": "rg -l ExceptionalSystemSiteComparison|ConstantScalarRestriction.Modules|exceptionalProSupport dag/nodes; blueprint_refs.py search site transport; blueprint_refs.py search constant scalar restriction; rg exact names lean/WeilConjectures lean/Sheaf",
+   "results": "DAG search: only lem-sf-exceptional-system-transport and lem-sfb-constant-scalar-restriction-tensor currently record these names. Both blueprint searches: 0 matching nodes. No matching definition under lean/WeilConjectures. Exact public definitions found in lean/Sheaf/Paper/ExceptionalSystemTransport.lean (site comparison at 238, pro support at 456, geometric mate at 597, origin adjunction at 677) and lean/Sheaf/CategoryTheory/ConstantScalarRestrictionTensor.lean (ring at 81, Modules at 86, Fixed at 98, restriction at 130).",
+   "date": "2026-10-24",
+   "verdict": "The definitions are existing Lean declarations but lack independent definition-node ownership. Add existing:true ownership records; do not duplicate the definitions or depend on theorem conclusions."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-coef-levelwise-normalized-adjoint-descent",
+  "date": "2026-10-24",
+  "group": "Q09"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-coef-integral-exceptional-adjoint",
+   "place": "Definition ownership for the actual system and finite site-transport construction and coefficient restriction used in the normalization and descent paragraphs.",
+   "via": [
+    "lem-coef-levelwise-normalized-adjoint-descent",
+    "lem-coef-cartesian-section-adjoint-mates",
+    "lem-coef-finite-adjunction-diagram-realization"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "lean": {
+  "module": "Sheaf.CategoryTheory.ConstantScalarRestrictionTensor",
+  "declaration": "CategoryTheory.ConstantScalarRestriction.restriction",
+  "declarations": [
+   "CategoryTheory.ConstantScalarRestriction.ring",
+   "CategoryTheory.ConstantScalarRestriction.Modules",
+   "CategoryTheory.ConstantScalarRestriction.Fixed",
+   "CategoryTheory.ConstantScalarRestriction.restriction"
+  ],
+  "statement": "def restriction : Modules J B ⥤ Fixed J B",
+  "branch": "newtargets-dag",
+  "by": "Q09",
+  "date": "2026-10-24",
+  "existing": true,
+  "note": "Existing definition ownership, as requested by the independent return at 279455f23c99. This binds exactly ring, Modules, Fixed and restriction in the published module, with enclosing variables {C : Type u} [Category.{v} C] (J : GrothendieckTopology C) (B : Type (max u v)) [CommRing B]. It does not cite or assert the enclosing scalar-restriction tensor theorem. No new Lean module or copied definitions."
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-9cd8362fc",
+  "group": "Q09",
+  "result": "fix",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-9cd8362fc",
+  "group": "Q09",
+  "result": "fix",
+  "note": "Lean byte-identical to 279455 (maths re-read clause by clause: hypotheses, pinned q/quotientOpen/evaluation, TransitionFormulas incl. counit characterization of b, levelwise-only bounds, SiteEquivalence, canonical comparison, ExceptionalOriginAdjunction transpose, finite Rf^! formula, edge cases m=n/empty/n+1/universes; correct). H2 repair verified: def-coef-system-site-transport-interfaces lists 37 live declarations of ExceptionalSystemTransport (script-checked, statement verbatim) and def-coef-constant-scalar-restriction matches ring/Modules/Fixed/restriction. FIX (§1(B)/H12): etaleLevel/proLevel use restriction.mapDerivedCategory, whose Additive/PreservesFinite(Co)Limits instances come only from the instance-theorems additive/isEquivalence of lem-sfb-constant-scalar-restriction-tensor; restored it to def-coef-levelwise-normalized-strict-systems stmt_deps with a statement clause (fixes/def-coef-levelwise-normalized-strict-systems.json). Advisories: lem-pur-coefficient-system-derived-comparison stmt_dep accepted as constructed data; Q74 84770 FIX (unlanded) creates def-sf-exceptional-system-interfaces owning the same defs; second lander must rebind."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "C-984a5",
+  "group": "U9",
+  "result": "fix",
+  "landing": "20261024T234301-L-2549791",
+  "kind": "interface",
+  "note": "independent cc review: ConstantScalarRestrictionTensor (ordinary_exists closed, onDerived abbrev→def, memo/ring instances) against lem-sfb-constant-scalar-restriction-tensor and lem-sfb-constant-restriction-ordinary-monoidal, clone diff, change record; axioms clean; item plus 14 direct importers and the onDerived-user chain compiled in sandbox",
+  "sorry_before": [
+   "CategoryTheory.ConstantScalarRestriction.ordinary_exists"
+  ],
+  "sorry_after": []
+ }
+}

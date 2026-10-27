@@ -1,0 +1,284 @@
+{
+ "id": "lem-trf-smooth-chart-generic-residue-transcendence",
+ "kind": "statement",
+ "title": "Generic-component transcendence degree in a smooth local chart",
+ "statement": "Let $(A,\\mathfrak m,K)$ be a nonzero commutative Noetherian local ring [def-weil-pbc-noetherian-ring], let $P$ be a smooth $A$-algebra [def-weil-pbc-smooth-ring-map], and let $\\mathfrak N\\subset P$ be a prime with $\\mathfrak N\\cap A=\\mathfrak m$. Set $B=P_{\\mathfrak N}$, $L=\\kappa(\\mathfrak N)$, $F=B/\\mathfrak mB$, $s=\\dim F$, and $t=\\operatorname{trdeg}_K L$ [def-weil-pbc-localization-at-prime, def-weil-pbc-krull-dimension-ring, def-kun-transcendence-degree]. Let\n$$r=\\dim_{\\mathfrak N}(\\operatorname{Spec}(P\\otimes_AK))$$\nbe the topological dimension of the closed fibre at the indicated point [def-weil-affine-spectrum, def-kun-topological-dimension-at-point, def-weil-pbc-module-tensor-product]. Then $r,s,t$ are finite nonnegative integers and $r=s+t$. For every minimal prime $\\mathfrak Q$ of $P$ contained in $\\mathfrak N$ whose contraction $\\mathfrak p$ is a minimal prime of $A$ (minimal means containing no strictly smaller prime), put $E=\\operatorname{Frac}(A/\\mathfrak p)$ and $H=\\operatorname{Frac}(P/\\mathfrak Q)$, with the field inclusion induced by $A\\to P$. The prime $\\mathfrak Q$ determines a minimal prime $\\overline{\\mathfrak Q}$ of $P\\otimes_AE$, its localization has dimension zero and residue field $H$, and\n$$\\operatorname{trdeg}_E H=\\dim_{\\overline{\\mathfrak Q}}(\\operatorname{Spec}(P\\otimes_AE))=r.$$\nAlso $H\\simeq\\operatorname{Frac}(B/\\mathfrak Q B)$ compatibly with $E$. The dimension $r$ here is the dimension at a point of a fibre, whereas $s$ is the Krull dimension of its local ring.",
+ "source": {
+  "document": "literature/stacks-project/morphisms.tex",
+  "place": "Tag 02G1 (lemma-smooth-omega-finite-locally-free), local constancy of fibre dimension, with algebra.tex Tag 00P1 (lemma-dimension-at-a-point-finite-type-field); agent specialization to minimal-component generic fibres, formerly steps 6 and 8 of lem-trf-smooth-local-tangent-cone-extension."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-noetherian-ring",
+  "def-weil-pbc-smooth-ring-map",
+  "def-weil-pbc-localization-at-prime",
+  "def-weil-pbc-krull-dimension-ring",
+  "def-kun-transcendence-degree",
+  "def-weil-affine-spectrum",
+  "def-kun-topological-dimension-at-point",
+  "def-weil-pbc-module-tensor-product"
+ ],
+ "proof": [
+  {
+   "text": "Put $C_k=P\\otimes_A k$ for $k=K$ or $E$. A finite presentation of the smooth algebra $P$ in particular gives finitely many algebra generators; their tensors with $1$ generate $C_k$ over $k$. Thus each $C_k$ is of finite type over its field. The affine smoothness criterion makes $f:\\operatorname{Spec}P\\to\\operatorname{Spec}A$ smooth. The affine fibre-product isomorphism identifies its fibre over $\\mathfrak m$ with $\\operatorname{Spec}C_K$ and, once $E=\\kappa(\\mathfrak p)$ is identified in step 3, its fibre over $\\mathfrak p$ with $\\operatorname{Spec}C_E$.",
+   "uses": [
+    "def-weil-pbc-smooth-ring-map",
+    "lem-weil-pbc-smooth-ring-map-iff-smooth-affine",
+    "lem-weil-pbc-fibre-product-affine-spectra"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 01V6 (lemma-smooth-characterize); schemes.tex Tags 01I4/01JQ (lemma-fibre-product-affine-schemes, lemma-fibre-product-affines). Finite-type base change is written out using generators."
+   }
+  },
+  {
+   "text": "The fibre prime correspondence gives the prime $\\overline{\\mathfrak N}$ of $C_K$ above $\\mathfrak N$, with residue field $L$, compatibly with $K$. The fibre local-ring isomorphism gives $(C_K)_{\\overline{\\mathfrak N}}\\simeq P_{\\mathfrak N}/\\mathfrak mP_{\\mathfrak N}=F$. Apply the finite-type-over-a-field dimension formula to $(K,C_K,\\overline{\\mathfrak N})$. It says precisely that $r,s,t$ are finite nonnegative integers and $r=s+t$; the hypothesis $\\mathfrak N\\cap A=\\mathfrak m$ is exactly the hypothesis needed for these fibre identifications.",
+   "uses": [
+    "lem-weil-pbc-fibre-ring-primes-residue-fields",
+    "lem-weil-pbc-fibre-ring-local-ring-iso",
+    "lem-weil-pbc-dimension-at-point-local-ring-trdeg"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tags 00E6 (remark-fundamental-diagram), 0H9M (remark-local-ring-fibre), 00P1 (lemma-dimension-at-a-point-finite-type-field)."
+   }
+  },
+  {
+   "text": "For any ring $R$ and prime $\\mathfrak a$, apply the localization-quotient-by-prime isomorphism to $T=R\\setminus\\mathfrak a$ and the maximal ideal $\\mathfrak aR_{\\mathfrak a}$. It identifies $\\kappa(\\mathfrak a)$ with the localization of $R/\\mathfrak a$ at all its nonzero elements, namely $\\operatorname{Frac}(R/\\mathfrak a)$. Applying this to $(A,\\mathfrak p)$ and $(P,\\mathfrak Q)$ gives $E=\\kappa(\\mathfrak p)$ and $H=\\kappa(\\mathfrak Q)$. These identifications preserve the structure maps: the class of $a/s$ maps to $\\overline a/\\overline s$. Since the kernel of $A\\to P/\\mathfrak Q$ is $\\mathfrak p$, the induced domain map $A/\\mathfrak p\\to P/\\mathfrak Q$ is injective and its fraction-field extension is the specified inclusion $E\\to H$.",
+   "uses": [
+    "lem-weil-pbc-localization-quotient-by-prime",
+    "def-weil-pbc-localization-at-prime"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tags 00CT (proposition-localize-quotient) and 00E3 (lemma-spec-localization), applied to the complement of a prime."
+   }
+  },
+  {
+   "text": "Apply the inclusion-preserving fibre prime correspondence to $A\\to P$ over $\\mathfrak p$. It gives a prime $\\overline{\\mathfrak Q}$ in $C_E$ with residue field $H$ as an $E$-field. If a prime of $C_E$ lies below $\\overline{\\mathfrak Q}$, its contraction lies below $\\mathfrak Q$ in $P$, hence equals $\\mathfrak Q$ by minimality; the bijection then makes the original prime equal to $\\overline{\\mathfrak Q}$. Thus $\\overline{\\mathfrak Q}$ is minimal. The primes of $(C_E)_{\\overline{\\mathfrak Q}}$ correspond to the primes of $C_E$ below $\\overline{\\mathfrak Q}$, so this nonzero local ring has exactly one prime. Every chain has length zero, and its Krull dimension is zero. This uses no reducedness assumption on $A$ or $P$.",
+   "uses": [
+    "lem-weil-pbc-fibre-ring-primes-residue-fields",
+    "lem-weil-pbc-primes-of-localization",
+    "def-weil-pbc-krull-dimension-ring"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tags 00E6 (remark-fundamental-diagram), 0H9M (remark-local-ring-fibre), 00E3 (lemma-spec-localization); dimension zero directly from the definition by prime chains."
+   }
+  },
+  {
+   "text": "By smooth local constancy, $d(x)=\\dim_x((\\operatorname{Spec}P)_{f(x)})$ is locally constant on $\\operatorname{Spec}P$. Choose an open neighbourhood of $\\mathfrak N$ where $d=d(\\mathfrak N)$. It contains $\\mathfrak Q$: indeed it contains a basic open $D(h)$ through $\\mathfrak N$, and $h\\notin\\mathfrak N$ implies $h\\notin\\mathfrak Q$ because $\\mathfrak Q\\subseteq\\mathfrak N$. Consequently $d(\\mathfrak Q)=d(\\mathfrak N)=r$. The affine fibre identifications of step 1 identify $d(\\mathfrak Q)$ with $\\dim_{\\overline{\\mathfrak Q}}\\operatorname{Spec}C_E$.",
+   "uses": [
+    "sbc-lem-smooth-relative-dimension-locally-constant",
+    "lem-weil-pbc-fibre-product-affine-spectra"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 02G1 (lemma-smooth-omega-finite-locally-free), local constancy; specialization argument using the Zariski basic opens written out."
+   }
+  },
+  {
+   "text": "Apply the finite-type-over-a-field dimension formula to $(E,C_E,\\overline{\\mathfrak Q})$. Its local-ring dimension is zero by step 4 and its residue field is $H$, with the prescribed $E$-structure. Hence $\\dim_{\\overline{\\mathfrak Q}}\\operatorname{Spec}C_E=0+\\operatorname{trdeg}_E H=\\operatorname{trdeg}_E H$. Combining with step 5 gives the required equality with $r$. The same formula also proves finiteness of the generic transcendence degree.",
+   "uses": [
+    "lem-weil-pbc-dimension-at-point-local-ring-trdeg"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00P1 (lemma-dimension-at-a-point-finite-type-field), applied at the minimal prime of the generic fibre."
+   }
+  },
+  {
+   "text": "Finally the localization prime correspondence makes $\\mathfrak QB$ a prime of $B=P_{\\mathfrak N}$ contracting to $\\mathfrak Q$, since $\\mathfrak Q\\subseteq\\mathfrak N$. The localization-quotient-by-prime isomorphism identifies $B/\\mathfrak QB$ with the localization of the domain $D=P/\\mathfrak Q$ at the images of $P\\setminus\\mathfrak N$; those images are nonzero. This localization embeds in $\\operatorname{Frac}D$. Conversely, its fraction field contains $D$ and the inverses of every nonzero element of $D$, so the two fraction fields coincide by their maps $a/b\\mapsto a/b$. This gives $H\\simeq\\operatorname{Frac}(B/\\mathfrak QB)$. Both maps fix $D$, hence fix $A/\\mathfrak p$ and the inverses of its nonzero elements, so the isomorphism is compatible with $E$.",
+   "uses": [
+    "lem-weil-pbc-primes-of-localization",
+    "lem-weil-pbc-localization-quotient-by-prime"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tags 00E3 (lemma-spec-localization), 00CT (proposition-localize-quotient); fraction-field identification by the explicit fraction maps."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-smooth-ring-map",
+  "lem-weil-pbc-smooth-ring-map-iff-smooth-affine",
+  "lem-weil-pbc-fibre-product-affine-spectra",
+  "lem-weil-pbc-fibre-ring-primes-residue-fields",
+  "lem-weil-pbc-fibre-ring-local-ring-iso",
+  "lem-weil-pbc-dimension-at-point-local-ring-trdeg",
+  "lem-weil-pbc-localization-quotient-by-prime",
+  "def-weil-pbc-localization-at-prime",
+  "lem-weil-pbc-primes-of-localization",
+  "def-weil-pbc-krull-dimension-ring",
+  "sbc-lem-smooth-relative-dimension-locally-constant"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/morphisms.tex",
+  "place": "Assembly of Stacks Tags 02G1, 01V6, 01I4/01JQ, 00P1, 00E6, 0H9M, 00E3, 00CT; generic-component specialization and compatible fraction-field identifications written out."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "loogle",
+   "query": "\"Smooth\", \"trdeg\"",
+   "results": "{\"t\": \"2026-10-22T06:42:10Z\", \"tool\": \"loogle\", \"query\": \"\\\"Smooth\\\", \\\"trdeg\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: smooth presentation relativeDimension and ranks of differentials do not identify the fraction-field transcendence degree at every minimal component below a chosen point."
+  },
+  {
+   "tool": "grep",
+   "query": "[Ss]mooth.*trdeg|trdeg.*[Ss]mooth|relativeDimension",
+   "results": "{\"t\": \"2026-10-22T06:42:10Z\", \"tool\": \"grep\", \"query\": \"[Ss]mooth.*trdeg|trdeg.*[Ss]mooth|relativeDimension\", \"sub\": \"RingTheory\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/Smooth/StandardSmoothCotangent.lean\", \"Mathlib/RingTheory/Smooth/StandardSmoothCotangent.lean\", \"Mathlib/RingTheory/Smooth/StandardSmoothCotangent.lean\", \"Mathlib/RingTheory/Smooth/StandardSmoothCotangent.lean\", \"Mathlib/RingTheory/Smooth/StandardSmoothCotangent.lean\", \"Mathlib/RingTheory/Smooth/StandardSmoothOfFree.lean\", \"Mathlib/RingTheory/Smooth/StandardSmoothOfFree.lean\", \"Mathlib/RingTheory/Smooth/StandardSmoothOfFree.lean\"], \"digest\": \"2bb87cddba3ce816\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: smooth presentation relativeDimension and ranks of differentials do not identify the fraction-field transcendence degree at every minimal component below a chosen point."
+  },
+  {
+   "tool": "leansearch",
+   "query": "lem-trf-smooth-chart-generic-residue-transcendence: smooth relative dimension at a point equals transcendence degree at each generic component specializing to that point",
+   "results": "{\"t\": \"2026-10-22T06:42:11Z\", \"tool\": \"leansearch\", \"query\": \"lem-trf-smooth-chart-generic-residue-transcendence: smooth relative dimension at a point equals transcendence degree at each generic component specializing to that point\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.isSmoothOfRelativeDimension_comp\", \"RingHom.IsStandardSmoothOfRelativeDimension\", \"IsTranscendenceBasis.lift_cardinalMk_eq_trdeg\", \"AlgebraicGeometry.IsSmoothOfRelativeDimension.isSmooth\", \"AlgebraicGeometry.IsSmoothOfRelativeDimension\", \"Algebra.IsStandardSmooth.relativeDimension\", \"AlgebraicGeometry.IsSmooth.recOn\", \"AlgebraicGeometry.IsSmooth.casesOn\"], \"digest\": \"9bd3eeade6a4e8ba\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: smooth presentation relativeDimension and ranks of differentials do not identify the fraction-field transcendence degree at every minimal component below a chosen point."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "lem-trf-smooth-chart-generic-residue-transcendence: in a smooth finite type algebra over a local ring, all minimal primes contained in a fixed prime have fraction field transcendence degree equal to closed fibre local dimension plus residue transcendence degree",
+   "results": "{\"t\": \"2026-10-22T06:42:11Z\", \"tool\": \"leanfinder\", \"query\": \"lem-trf-smooth-chart-generic-residue-transcendence: in a smooth finite type algebra over a local ring, all minimal primes contained in a fixed prime have fraction field transcendence degree equal to closed fibre local dimension plus residue transcendence degree\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.IsStandardSmooth.relativeDimension\", \"isStronglyTranscendental_mk_of_mem_minimalPrimes\", \"Algebra.IsStandardSmoothOfRelativeDimension\", \"Algebra.IsStandardSmoothOfRelativeDimension.out\", \"Algebra.IsSmoothAt\", \"Algebra.isUnramifiedAt_iff_map_eq\", \"Algebra.IsStandardSmoothOfRelativeDimension.iff_of_isStandardSmooth\", \"Algebra.IsStandardSmoothOfRelativeDimension.rank_kaehlerDifferential\"], \"digest\": \"9ea72d8ea83ffe7e\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: smooth presentation relativeDimension and ranks of differentials do not identify the fraction-field transcendence degree at every minimal component below a chosen point."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "lem-trf-smooth-chart-generic-residue-transcendence: local constancy of smooth relative dimension gives equality between generic fibre transcendence degree and dimension at a specialization",
+   "results": "{\"t\": \"2026-10-22T06:42:12Z\", \"tool\": \"leanfinder\", \"query\": \"lem-trf-smooth-chart-generic-residue-transcendence: local constancy of smooth relative dimension gives equality between generic fibre transcendence degree and dimension at a specialization\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.IsStandardSmooth.relativeDimension\", \"Algebra.IsStandardSmoothOfRelativeDimension.out\", \"Algebra.IsStandardSmoothOfRelativeDimension\", \"Algebra.IsStandardSmoothOfRelativeDimension.isStandardSmooth\", \"AlgebraicGeometry.IsSmoothOfRelativeDimension.exists_isStandardSmoothOfRelativeDimension\", \"AlgebraicGeometry.isSmoothOfRelativeDimension_iff\", \"RingHom.IsStandardSmoothOfRelativeDimension\", \"AlgebraicGeometry.instHasRingHomPropertyIsSmoothOfRelativeDimensionLocallyIsStandardSmoothOfRelativeDimension\"], \"digest\": \"d14752a4beb0a6af\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: smooth presentation relativeDimension and ranks of differentials do not identify the fraction-field transcendence degree at every minimal component below a chosen point."
+  },
+  {
+   "tool": "grep",
+   "query": "smooth.*trdeg|trdeg.*smooth|isLocallyConstant.*[Kk]rull",
+   "results": "{\"t\": \"2026-10-23T11:35:54Z\", \"tool\": \"grep\", \"query\": \"smooth.*trdeg|trdeg.*smooth|isLocallyConstant.*[Kk]rull\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits give standard smooth presentations or relative-dimension notions, not the whole generic-component and closed-fibre comparison."
+  },
+  {
+   "tool": "leansearch",
+   "query": "lem-trf-smooth-chart-generic-residue-transcendence: smooth fibre dimension at a point equals local ring dimension plus residue transcendence degree and is constant under specialization",
+   "results": "{\"t\": \"2026-10-23T11:35:54Z\", \"tool\": \"leansearch\", \"query\": \"lem-trf-smooth-chart-generic-residue-transcendence: smooth fibre dimension at a point equals local ring dimension plus residue transcendence degree and is constant under specialization\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.instLocallyOfFinitePresentationOfIsSmooth\", \"AlgebraicGeometry.isSmoothOfRelativeDimension_comp\", \"AlgebraicGeometry.IsSmooth.casesOn\", \"AlgebraicGeometry.IsSmooth.recOn\", \"AlgebraicGeometry.IsSmoothOfRelativeDimension.isSmooth\", \"AlgebraicGeometry.isSmoothOfRelativeDimension_isStableUnderBaseChange\", \"AlgebraicGeometry.IsSmoothOfRelativeDimension\", \"RingHom.IsStandardSmoothOfRelativeDimension\"], \"digest\": \"9c30858f92f8d3e6\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits give standard smooth presentations or relative-dimension notions, not the whole generic-component and closed-fibre comparison."
+  },
+  {
+   "tool": "loogle",
+   "query": "Algebra.Smooth, Algebra.trdeg",
+   "results": "{\"t\": \"2026-10-23T11:35:54Z\", \"tool\": \"loogle\", \"query\": \"Algebra.Smooth, Algebra.trdeg\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits give standard smooth presentations or relative-dimension notions, not the whole generic-component and closed-fibre comparison."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "lem-trf-smooth-chart-generic-residue-transcendence: in a smooth algebra over a Noetherian local ring, the transcendence degree of each minimal component over its base generic residue field is the closed fibre dimension at a specialization",
+   "results": "{\"t\": \"2026-10-23T11:35:56Z\", \"tool\": \"leanfinder\", \"query\": \"lem-trf-smooth-chart-generic-residue-transcendence: in a smooth algebra over a Noetherian local ring, the transcendence degree of each minimal component over its base generic residue field is the closed fibre dimension at a specialization\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.IsStandardSmooth.relativeDimension\", \"Algebra.IsStandardSmoothOfRelativeDimension.out\", \"Algebra.IsStandardSmoothOfRelativeDimension\", \"Algebra.IsStandardSmoothOfRelativeDimension.isStandardSmooth\", \"Algebra.IsStandardSmoothOfRelativeDimension.iff_of_isStandardSmooth\", \"RingHom.IsStandardSmoothOfRelativeDimension\", \"isStronglyTranscendental_mk_of_mem_minimalPrimes\", \"Algebra.SubmersivePresentation.isStandardSmoothOfRelativeDimension\"], \"digest\": \"450363133396c72c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits give standard smooth presentations or relative-dimension notions, not the whole generic-component and closed-fibre comparison."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "lem-trf-smooth-chart-generic-residue-transcendence: locally constant relative dimension of a smooth morphism, dimension formula at a generic point of a fibre as transcendence degree of its residue field",
+   "results": "{\"t\": \"2026-10-23T11:37:30Z\", \"tool\": \"leanfinder\", \"query\": \"lem-trf-smooth-chart-generic-residue-transcendence: locally constant relative dimension of a smooth morphism, dimension formula at a generic point of a fibre as transcendence degree of its residue field\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.IsStandardSmooth.relativeDimension\", \"AlgebraicGeometry.IsSmoothOfRelativeDimension\", \"AlgebraicGeometry.IsSmoothOfRelativeDimension.exists_isStandardSmoothOfRelativeDimension\", \"AlgebraicGeometry.isSmoothOfRelativeDimension_iff\", \"Algebra.IsStandardSmoothOfRelativeDimension\", \"Algebra.IsStandardSmoothOfRelativeDimension.out\", \"AlgebraicGeometry.IsSmoothOfRelativeDimension.isSmooth\", \"AlgebraicGeometry.instHasRingHomPropertyIsSmoothOfRelativeDimensionLocallyIsStandardSmoothOfRelativeDimension\"], \"digest\": \"da44f5e7c51c61cc\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits give standard smooth presentations or relative-dimension notions, not the whole generic-component and closed-fibre comparison."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-smooth-local-tangent-cone-extension",
+  "date": "2026-10-22",
+  "group": "NI"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Historical nearby-duality/alteration branch of lem-trf-local-term-locality, proof (1)--(2), through lem-trf-log-regular-desingularization: monoidal resolution used for the regular modification of nodal pairs; ILO VIII 3.3.15, pp.109--110. Expose VIII, Theorems 3.1.27 and 3.2.20, and Remark 3.2.21, pp.102,106; construction in 3.2.19 over k=Q. Supporting source: Expose VIII, Theorem 2.3.10, normalized restriction in 2.3.9 and Remark 2.3.12(i), equivariance in Corollary 2.3.17, printed pp.93--95; application in 3.2.19, p.106. Refinement in this split: Expose VIII, Theorem 2.3.10 restricted to finite-type Q-schemes, with tower conventions 2.1.4, 2.3.1, 2.3.4 and Remark 2.3.5(i), printed pp.87,91--93. This is ordinary resolution, not the normalized toric conclusion; no Stacks tag states this characteristic-zero resolution theorem. Lower input: embedded characteristic-zero resolution and invariant synchronization discussed in ILO VIII 2.3.11 and 2.3.13; the intrinsic gluing argument is supplied in this item. Lower input: Expose VIII 2.3.11 and 2.3.13, pp.93--94: local invariant input underlying the cited strong embedded algorithm; BMT sections 6.1--6.3, especially local embedding independence and the correction of synchronization for arbitrary smooth morphisms. Lower input: Smooth-stable Hilbert--Samuel head and component-dimension correction. Refinement here: Tangent cone and minimal-prime dimensions of an essentially smooth local extension. Re-split of lem-trf-smooth-local-tangent-cone-extension: Tag 02G1 (lemma-smooth-omega-finite-locally-free), local constancy of fibre dimension, with algebra.tex Tag 00P1 (lemma-dimension-at-a-point-finite-type-field); agent specialization to minimal-component generic fibres, formerly steps 6 and 8 of lem-trf-smooth-local-tangent-cone-extension.",
+   "via": [
+    "lem-trf-smooth-local-tangent-cone-extension",
+    "lem-trf-hilbert-samuel-smooth-dimension-profile",
+    "lem-trf-hilbert-samuel-resolution-invariant-calculus",
+    "lem-trf-embedded-resolution-ambient-comparison",
+    "lem-trf-smooth-functorial-ordinary-resolution",
+    "lem-trf-toric-normalized-desingularization",
+    "lem-trf-functorial-fan-desingularization",
+    "lem-trf-monoidal-resolution-tower",
+    "lem-trf-log-regular-desingularization",
+    "lem-trf-nodal-pair-projective-resolution",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-trf-smooth-chart-generic-residue-transcendence",
+  "worker": "stage1",
+  "summary": "Statement retained. Reused the existing field dimension formula, smooth relative-dimension local constancy, affine smoothness criterion, affine fibre product, fibre prime/residue/local-ring results, and localization-quotient result. Wrote out minimality, specialization, zero-dimensional localization and compatible fraction-field maps. No new nodes, no attachment, no Lean edits or compiles.",
+  "blueprint": "Historical auxiliary commutative-algebra branch recorded in blueprint.from.place, through lem-trf-smooth-local-tangent-cone-extension, steps 6 and 8: compare closed-fibre point dimension and generic component transcendence degree. The current latest locality proof uses contracting correspondences instead; this item supplies the already assigned historical auxiliary input without changing the current unit route.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-smooth-ring-map-iff-smooth-affine",
+    "why": "Generic commutative-algebra/affine-scheme tool for this assigned smooth-chart auxiliary lemma; no node of sk-i-curve-zero states this input, and no contracting-correspondence step is replaced."
+   },
+   {
+    "node": "lem-weil-pbc-fibre-ring-primes-residue-fields",
+    "why": "Generic commutative-algebra/affine-scheme tool for this assigned smooth-chart auxiliary lemma; no node of sk-i-curve-zero states this input, and no contracting-correspondence step is replaced."
+   },
+   {
+    "node": "lem-weil-pbc-dimension-at-point-local-ring-trdeg",
+    "why": "Generic commutative-algebra/affine-scheme tool for this assigned smooth-chart auxiliary lemma; no node of sk-i-curve-zero states this input, and no contracting-correspondence step is replaced."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-smooth-ring-map-iff-smooth-affine",
+  "lem-weil-pbc-fibre-ring-primes-residue-fields",
+  "lem-weil-pbc-dimension-at-point-local-ring-trdeg"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q96-17e435eb3",
+  "group": "Q96",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q96-17e435eb3 (reviewer sub-agent of L); spot-checked: Statement-only item, split into 7 steps with no new nodes and the statement unchanged. It is correct: tested on A=k[ε]/ε², P=A[x], N=(ε,x) (r=1,s=1,t=0; trdeg_k k(x)=1), on P=k[x], N=(0), and on a finite étale P. Sources checked: Stacks 00P1 at algebra.tex:28222 and 02G1 at morphisms.tex:7214. Every cited statement was read. Step 1: smooth ring map gives finite type fibres; iff-smooth-affine gives smoothness in the def-sbc-smooth-morphisms sense, the same notion the sbc lemma uses; fibre-product-affine gives the fibres. Step 2: fibre-primes (1),(2) and fibre local-ring iso give C_K at N̄ ≅ F with residue field L; the 00P1 node gives r=s+t with all three finite. Step 3: localization-quotient with T=R∖a gives κ(a)=Frac(R/a) and the E→H inclusion (elementary). Step 4: the inclusion-reflecting fibre bijection plus minimality of Q makes Q̄ minimal; primes-of-localization makes the localization dimension 0; residue field H. Step 5: sbc local constancy, Q⊆N so every basic open around N contains Q, d(Q)=r. Step 6: 00P1 node on (E,C_E,Q̄) gives trdeg_E H=r. Step 7: QB is prime and B/QB is a localization of P/Q at nonzero elements, with the same fraction field compatibly with E. The implicit K=κ(m) (A local) is elementary. No duplicate: lem-trf-domain-generic-local-fibre-bound is a different inequality and same_as=[] is right. Worker-declared tool_uses (iff-smooth-affine, fibre-primes, dim-at-point; generic sk-thm-p1 inputs) are accepted; the sbc lemma is Lean-closed on slopmaster2 and the other deps have Mathlib status. No SGA. review_split.py printed only 'no such node' path artifacts because the chapter directories are symlinks; all cited nodes exist."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.SmoothChartGenericResidueTranscendence",
+  "declaration": "Algebra.smooth_chart_generic_residue_transcendence",
+  "file": "lean/Sheaf/RingTheory/SmoothChartGenericResidueTranscendence.lean",
+  "statement": "theorem smooth_chart_generic_residue_transcendence {A : Type u} {P : Type v} [CommRing A] [CommRing P] [IsNoetherianRing A] [IsLocalRing A] [Algebra A P] [Smooth A P] (m : Ideal A) [m.IsMaximal] (hm : m = IsLocalRing.maximalIdeal A) (N : Ideal P) [N.IsPrime] (hN : m = N.comap (algebraMap A P)) : ∃ (n : PrimeSpectrum (m.Fiber P)) (r s t : ℕ), n.asIdeal.comap Algebra.TensorProduct.includeRight.toRingHom = N ∧ topologicalKrullDimAt (n : AlgebraicGeometry.Spec (CommRingCat.of (m.Fiber P))) = (r : WithBot ℕ∞) ∧ ringKrullDim (Localization.AtPrime N ⧸ m.map (algebraMap A (Localization.AtPrime N))) = (s : WithBot ℕ∞) ∧ @Algebra.trdeg m.ResidueField N.ResidueField _ _ (Ideal.ResidueField.map m N (algebraMap A P) hN).toAlgebra = (t : Cardinal.{v}) ∧ r = s + t ∧ ∀ (Q : PrimeSpectrum P), Q.asIdeal ∈ minimalPrimes P → Q.asIdeal ≤ N → Q.asIdeal.comap (algebraMap A P) ∈ minimalPrimes A → ∃ q : PrimeSpectrum ((Q.asIdeal.comap (algebraMap A P)).Fiber P), q.asIdeal.comap Algebra.TensorProduct.includeRight.toRingHom = Q.asIdeal ∧ q.asIdeal ∈ minimalPrimes ((Q.asIdeal.comap (algebraMap A P)).Fiber P) ∧ ringKrullDim (Localization.AtPrime q.asIdeal) = 0 ∧ (∃ θ : q.asIdeal.ResidueField ≃+* Q.asIdeal.ResidueField, ∀ x : P, θ (algebraMap _ q.asIdeal.ResidueField (Algebra.TensorProduct.includeRight (R := A) (A := (Q.asIdeal.comap (algebraMap A P)).ResidueField) x)) = algebraMap P Q.asIdeal.ResidueField x) ∧ @Algebra.trdeg (Q.asIdeal.comap (algebraMap A P)).ResidueField Q.asIdeal.ResidueField _ _ (Ideal.ResidueField.map (Q.asIdeal.comap (algebraMap A P)) Q.asIdeal (algebraMap A P) rfl).toAlgebra = (r : Cardinal.{v}) ∧ topologicalKrullDimAt (q : AlgebraicGeometry.Spec (CommRingCat.of ((Q.asIdeal.comap (algebraMap A P)).Fiber P))) = (r : WithBot ℕ∞) ∧ ∃ e : Q.asIdeal.ResidueField ≃+* FractionRing (Localization.AtPrime N ⧸ Q.asIdeal.map (algebraMap P (Localization.AtPrime N))), ∀ x : P, e (algebraMap P Q.asIdeal.ResidueField x) = algebraMap _ (FractionRing (Localization.AtPrime N ⧸ Q.asIdeal.map (algebraMap P (Localization.AtPrime N)))) (Ideal.Quotient.mk (Q.asIdeal.map (algebraMap P (Localization.AtPrime N))) (algebraMap P (Localization.AtPrime N) x))",
+  "branch": "newtargets-dag",
+  "by": "Q28",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-793fc191b",
+  "group": "Q28",
+  "result": "pass",
+  "note": "Statement matches node verbatim (lean.statement == file signature; node copy changes only lean). Hypotheses exact: Noetherian local A (IsLocalRing gives nonzero), Algebra.Smooth, N prime with m = N.comap; redundant [m.IsMaximal] follows from hm. Objects are canonical Mathlib/recorded owners: Ideal.Fiber = κ(p)⊗[A]P, Ideal.ResidueField (IsFractionRing gives Frac(A/p), Frac(P/Q)), ResidueField.map embeddings, topologicalKrullDimAt on Spec, ringKrullDim, Algebra.trdeg in Cardinal.{v}. All clauses present: n over N (unique by preimageEquivFiber), ℕ witnesses with r=s+t, every minimal Q≤N with minimal contraction gives minimal q̄ with dim-0 localization, θ residue iso compatible on P (hence on E), trdeg_E H = r = dim at q̄, H ≃ Frac(B/QB) compatible on P. Mathematics true via 00P1 twice + 02G1 local constancy (Q⊆N). Edge cases k[x] at (0)/(x), k[ε]/ε², étale, zero rings OK; universes u,v independent. Docstrings carry source place, blueprint and the 7 proof steps; no hollow definition, only sorry; no name clash in side-live; imports exist. No file changed, so no compile."
+ }
+}

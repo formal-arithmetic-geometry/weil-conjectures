@@ -19,6 +19,16 @@ public import Sheaf.Paper.CompletedConstantSheafReduction
 public import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
 public import Mathlib.Algebra.Homology.DerivedCategory.TStructure
 public import Mathlib.CategoryTheory.Triangulated.TStructure.TruncLEGT
+import WeilConjectures.SixFunctors.ProEtale.Comparison.FullyFaithful
+import all Sheaf.Paper.RegularSingleReduction
+import Sheaf.Paper.RegularQuotientSelfCohomology
+import Sheaf.Paper.PrincipalAdjacentQuotientTor
+import all Sheaf.CategoryTheory.DerivedCategory.StandardQuotientsPerfect
+import all Sheaf.Paper.IntegralLocalReductionLowerBound
+import Sheaf.Paper.NormalizedConstructibleTowerLocalEffectivity
+import all Sheaf.Paper.ConstructibleCoefficientSerre
+import Sheaf.AlgebraicGeometry.NoetherianStratumDetection
+import all Sheaf.AlgebraicGeometry.ProEtaleRingSheafChangeAdjunction
 import Mathlib.CategoryTheory.Triangulated.Adjunction
 import all Sheaf.Paper.ActualCompletedReductionReconstruction
 import all Sheaf.Paper.AdicCoefficientDatum
@@ -59,6 +69,10 @@ attribute [local instance 2000] pbcTowers_hasDerivedCategory
 
 -- Keep the universal scalar-extension witnesses behind their functor/adjunction API.
 attribute [local irreducible] completedAdicDerivedChange pbcDerivedScalarAdjunction
+attribute [local irreducible] pbcDerivedRestrictComp pbcRestrictComp pbcScalarAdjunction
+attribute [local irreducible] Functor.mapDerivedCategory completedReductionCoefficient
+attribute [local irreducible] HasDerivedCategory.standard SheafOfModules.monoidalCategory
+  Functor.leftAdjoint
 attribute [local irreducible] pbcComplexCounit pbcExtensionCounit
   pbcDerivedExtensionExistence
 
@@ -80,7 +94,7 @@ instance pbcLevelwiseScalarCommShift
   (pbcDerivedScalarAdjunction φ).leftAdjointCommShift ℤ
 
 /-- The higher-Tor condition at precisely the degrees above the cutoff. The module
-H^q(M_(n+1)) is placed in degree zero before scalar extension; positive p means degree -p.
+H^q(M_(n + 1)) is placed in degree zero before scalar extension; positive p means degree -p.
 Source: blueprint order 1429, (TC); Stacks Tag 06YU
 (blueprint: prop-weil-pbc-levelwise-truncations). -/
 def PbcLevelwiseTorVanishing (M : AdicTower T d) (m : ℤ) : Prop :=
@@ -515,6 +529,12 @@ theorem pbc_strict_tower_truncation_cohomology
       ((DerivedCategory.TStructure.t.truncGE (m + 1)).obj V) (m + 1)
     exact DerivedCategory.isZero_of_isGE _ (m + 1) i (by omega)
 
+section ReductionTowerPresentation
+
+-- Compare the completed-coefficient aliases without expanding the chosen limit cone.
+attribute [local semireducible] completedReductionCoefficient
+attribute [local irreducible] CategoryTheory.Limits.limit
+
 /-- The fixed K-flat evaluation comparison for the reduction of one completed object.
 Source: blueprint order 1429, opening paragraph; Stacks Tag 06YY
 (blueprint: prop-weil-pbc-levelwise-truncations). -/
@@ -525,8 +545,17 @@ def pbcReductionEvaluationIso (K : PbcCompletedDerived T d) (n : ℕ) :
         ((completedReductionTower T d).obj K) :=
   (asIso (completedReductionEvaluation T d n)).symm.app K
 
+set_option backward.isDefEq.respectTransparency false in
+set_option backward.isDefEq.respectTransparency.types false in
+private theorem scalar_complex_counit_eq
+    {R S : Sheaf (ProEt.topology T) CommRingCat.{u + 1}} (φ : R ⟶ S)
+    (P : CochainComplex (pbcModules T R) ℤ) :
+    pbcComplexCounit φ P = reductionScalarComplexCounit T φ P := by
+  unfold pbcComplexCounit pbcExtensionCounit reductionScalarComplexCounit
+    reductionComplexCounit
+  rfl
+
 section ReductionLaws
-attribute [local semireducible] pbcComplexCounit pbcExtensionCounit pbcDerivedExtensionExistence
 
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
@@ -746,6 +775,7 @@ private theorem reduction_allpair_comparison (b a : ℕ) (hab : a ≤ b) :
     (completedReductionEvaluation T d b).app _ ≫
       (step).app _ ≫ c
   dsimp only [c]
+  simp only [scalar_complex_counit_eq T] at hs ⊢
   erw [he a]
   change _ = (completedReductionEvaluation T d b).app _ ≫
     (((pbcDerivedRestrict (pbcAdicProjection T d b)).map _) ≫ _) ≫ _
@@ -755,8 +785,7 @@ private theorem reduction_allpair_comparison (b a : ℕ) (hab : a ≤ b) :
   have hn := τ.naturality q
   try dsimp only [Functor.comp_map] at hn
   change τ.app _ ≫ (E a).map q ≫ (F a).mapDerivedCategoryFactors.hom.app J = _
-  rw [← Category.assoc, ← hn, Category.assoc, ht]
-  rfl
+  rw [← Category.assoc, ← hn, Category.assoc, ht]; rfl
 
 end ReductionLaws
 
@@ -863,6 +892,10 @@ def pbcReductionAdicTower (K : PbcCompletedDerived T d) : AdicTower T d where
   transition := (pbc_reduction_adic_tower_laws T d K).1
   cocycle := (pbc_reduction_adic_tower_laws T d K).2
 
+end ReductionTowerPresentation
+
+attribute [local irreducible] pbcReductionAdicTower
+
 /-- A constant scalar as a section of the actual completed function coefficient ring.
 The constant-to-completed map is followed by the canonical limit presentation comparison.
 Source: blueprint order 1429, sufficient condition; Stacks Tag 093M
@@ -890,7 +923,6 @@ def pbcTruncationCounterexample (m : ℤ) : PbcCompletedDerived T d :=
       (SheafOfModules.unit ((adicLisseForget T).obj ((pbcAdicRings T d).obj (op 0))))))
       ⟦(-(m + 1))⟧
 
-attribute [local irreducible] pbcDerivedRestrictComp
 
 private lemma truncGE_comparison_unit
     {C D : Type*} [Category C] [Category D] [Abelian C] [Abelian D]
@@ -1031,7 +1063,7 @@ private theorem truncation_upper_bound (M : AdicTower T d) (m : ℤ)
   induction b, hab using Nat.le_induction with
   | base =>
       have hq : pbcAdicQuotient T d a a (le_refl a) = 𝟙 _ :=
-        reductionCoefficientMap_id T d a
+        by exact (pbcAdicRings T d).map_id (op a)
       rw [hq]
       have : DerivedCategory.TStructure.t.IsGE
           ((𝟭 (DerivedCategory (pbcModules T ((pbcAdicRings T d).obj (op a))))).obj
@@ -1516,8 +1548,14 @@ private theorem construct_truncations (M : AdicTower T d) (m : ℤ)
   intro b a hab
   refine ⟨τ b a hab, ?_, ?_⟩
   · refine ⟨?_, hτ b a hab, ?_⟩
-    · simp [PbcLevelwiseTruncationData.lowerNormalization, N, L]
-    · simp [PbcLevelwiseTruncationData.upperNormalization, N, U]
+    · change (τ b a hab).hom.hom₁ =
+          ((pbcDerivedExtend (pbcAdicQuotient T d b a hab)).mapIso
+            (Iso.refl _)).hom ≫ (τ b a hab).hom.hom₁ ≫ 𝟙 _
+      simp only [Functor.mapIso_refl, Iso.refl_hom, Category.id_comp, Category.comp_id]
+    · change (τ b a hab).hom.hom₃ =
+          ((pbcDerivedExtend (pbcAdicQuotient T d b a hab)).mapIso
+            (Iso.refl _)).hom ≫ (τ b a hab).hom.hom₃ ≫ 𝟙 _
+      simp only [Functor.mapIso_refl, Iso.refl_hom, Category.id_comp, Category.comp_id]
   · intro σ hσ
     exact (allpair_truncation_triangle T d M m hTor b a hab).unique hσ.2.1 (hτ b a hab)
 
@@ -1543,6 +1581,386 @@ theorem pbc_adic_levelwise_truncations (M : AdicTower T d) (m : ℤ)
     ∃ N : PbcLevelwiseTruncationData T d M m, PbcIsLevelwiseTruncation T d N := by
   exact construct_truncations T d M m _hTor
 
+open AlgebraicGeometry.ProEtale
+
+set_option backward.isDefEq.respectTransparency false in
+set_option backward.isDefEq.respectTransparency.types false in
+private theorem cover_of_sieve (X : Scheme.{u})
+    (V : Sieve (⊤_ X.ProEt)) (hV : V ∈ ProEt.topology X (⊤_ X.ProEt)) :
+    ∃ (I : Type (u + 1)) (U : I → X.ProEt) (f : ∀ i, U i ⟶ ⊤_ X.ProEt),
+      Presieve.ofArrows (fun i ↦ (U i).left) (fun i ↦ (U i).hom) ∈
+        proetalePrecoverage X ∧ ∀ i, V (f i) := by
+  let e : ProEt.mk (𝟙 X) ≅ ⊤_ X.ProEt :=
+    (ProEt.isTerminalMkId X).uniqueUpToIso terminalIsTerminal
+  have h := (ProEt.topology X).pullback_stable e.hom hV
+  obtain ⟨P, hP, hPV⟩ := ProEt.mem_topology_iff.mp h
+  obtain ⟨I, U, f, rfl⟩ := P.exists_eq_ofArrows
+  refine ⟨I, U, fun i ↦ f i ≫ e.hom, ?_, fun i ↦ hPV _ _ ⟨i⟩⟩
+  rw [ProEt.mem_precoverage_iff, Presieve.map_ofArrows] at hP
+  change Presieve.ofArrows (fun i ↦ (U i).left) (fun i ↦ (f i).left) ∈
+    proetalePrecoverage X at hP
+  have hw (i : I) : (f i).left = (U i).hom := by
+    have hw := MorphismProperty.Over.w (f i)
+    change (f i).left ≫ 𝟙 X = (U i).hom at hw
+    exact (Category.comp_id _).symm.trans hw
+  simpa only [hw] using hP
+
+set_option backward.isDefEq.respectTransparency false in
+set_option backward.isDefEq.respectTransparency.types false in
+private theorem pullback_homology_zero {X Y : Scheme.{u}} (g : X ⟶ Y)
+    (R : Sheaf (ProEt.topology Y) CommRingCat.{u + 1})
+    (K : DerivedCategory (pbcModules Y R)) (q : ℤ)
+    (h : IsZero ((DerivedCategory.homologyFunctor _ q).obj
+      ((adicTowerPullback g R).obj K))) :
+    IsZero ((proEtaleSheafInverseImage g AddCommGrpCat.{u + 1}).obj
+      ((SheafOfModules.toSheaf _).obj ((DerivedCategory.homologyFunctor _ q).obj K))) := by
+  let R' := (adicTowerInverseImage g).obj R
+  let F := proEtaleRingModulePullback g R R' (Iso.refl _)
+  let adj := proEtaleRingModuleAdjunction g R R' (Iso.refl _)
+  let H := (DerivedCategory.homologyFunctor _ q).obj K
+  have hz : IsZero (F.obj H) :=
+    h.of_iso ((F.mapDerivedCategoryHomologyFunctorIso q).app K)
+  let a := ((proEtaleSheafAdjunction g AddCommGrpCat.{u + 1}).homEquiv
+    ((SheafOfModules.toSheaf _).obj H)
+    ((SheafOfModules.toSheaf _).obj (F.obj H))).symm
+      ((SheafOfModules.toSheaf _).map (adj.unit.app H))
+  have : IsIso a := ringUnitComparison g R R' (Iso.refl _) adj H
+  exact ((SheafOfModules.toSheaf _).map_isZero hz).of_iso (asIso a)
+
+set_option backward.isDefEq.respectTransparency false in
+set_option backward.isDefEq.respectTransparency.types false in
+private theorem finite_lisse_descent {X : Scheme.{u}} (A : Type (u + 1)) [CommRing A]
+    (F : Sheaf (ProEt.topology X) (ModuleCat.{u + 1} A))
+    (V : Cover.{u + 1} proetalePrecoverage X)
+    (h : ∀ i, IsFiniteLocallyConstant A
+      ((upperStar (ModuleCat.{u + 1} A) (V.f i)).obj F)) :
+    IsFiniteLocallyConstant A F := by
+  choose I W g hg he using h
+  refine ⟨(Σ i, I i), (fun p ↦ W p.1 p.2),
+    (fun p ↦ g p.1 p.2 ≫ V.f p.1),
+    Precoverage.comp_mem_coverings V.f V.mem₀ g hg, ?_⟩
+  rintro ⟨i, j⟩
+  obtain ⟨M, hM, ⟨e⟩⟩ := he i j
+  exact ⟨M, hM, ⟨(upperStarComp (ModuleCat.{u + 1} A) (g i j) (V.f i)).app F ≪≫ e⟩⟩
+
+set_option backward.isDefEq.respectTransparency false in
+set_option backward.isDefEq.respectTransparency.types false in
+private theorem local_finite {X Y : Scheme.{u}} (g : X ⟶ Y)
+    (A : Type (u + 1)) [CommRing A]
+    (R : Sheaf (ProEt.topology Y) CommRingCat.{u + 1})
+    (c : adicLisseConstantRing Y A ⟶ R)
+    (K : DerivedCategory (pbcModules Y R)) (q : ℤ)
+    (h : IsRelativelyFiniteLisseModule g A
+      ((pbcRestrict ((adicTowerInverseImage g).map c)).obj
+        ((DerivedCategory.homologyFunctor _ q).obj ((adicTowerPullback g R).obj K)))) :
+    IsFiniteLocallyConstant A
+      ((upperStar (ModuleCat.{u + 1} A) g).obj
+        ((CoefficientSerre.proEtaleModuleRestriction Y A).obj
+          ((pbcRestrict c).obj ((DerivedCategory.homologyFunctor _ q).obj K)))) := by
+  let C := adicLisseConstantRing Y A
+  let R' := (adicTowerInverseImage g).obj R
+  let C' := (adicTowerInverseImage g).obj C
+  let FR := proEtaleRingModulePullback g R R' (Iso.refl _)
+  let FC := proEtaleRingModulePullback g C C' (Iso.refl _)
+  let H := (DerivedCategory.homologyFunctor _ q).obj K
+  let U := pbcRestrict ((adicTowerInverseImage g).map c)
+  let U₀ := pbcRestrict c
+  let e₁ : U.obj ((DerivedCategory.homologyFunctor _ q).obj
+      ((adicTowerPullback g R).obj K)) ≅ U.obj (FR.obj H) :=
+    U.mapIso ((FR.mapDerivedCategoryHomologyFunctorIso q).app K).symm
+  let e₂ : FC.obj (U₀.obj H) ≅ U.obj (FR.obj H) :=
+    by
+    let t := proEtaleRingRestrictionPullbackInv g C R C' R' c
+      ((adicTowerInverseImage g).map c) (Iso.refl _) (Iso.refl _)
+      ((Category.id_comp _).trans (Category.comp_id _).symm)
+    have : IsIso t := proEtaleRingRestrictionPullbackInv_isIso g C R C' R' c
+      ((adicTowerInverseImage g).map c) (Iso.refl _) (Iso.refl _)
+      ((Category.id_comp _).trans (Category.comp_id _).symm)
+    exact asIso (t.app H)
+  let θ := (SheafOfModules.exists_scalarExtensionRingIso.{u + 1, u, u + 1, 0}
+    (Iso.refl C')).choose
+  let e₃ : FC.obj (U₀.obj H) ≅
+      (proEtaleModuleInverseImage g C).obj (U₀.obj H) := by
+    exact θ _
+  have hf := (CoefficientSerre.relative_finite_iff g A _).mp h
+  exact isFiniteLocallyConstant_of_iso
+    ((CoefficientSerre.relativeRestriction g A).mapIso (e₁ ≪≫ e₂.symm ≪≫ e₃) ≪≫
+      CoefficientSerre.relativePullbackComparison g A (U₀.obj H)) hf
+
+
+set_option backward.isDefEq.respectTransparency false in
+set_option backward.isDefEq.respectTransparency.types false in
+private theorem uniform_constructible (T : Scheme.{u}) [IsNoetherian T]
+    {A : Type (u + 1)} [CommRing A] (d : AdicCoefficientDatum A)
+    (M : AdicTower T d) (a b : ℤ)
+    (S : Stratification T)
+    (V : ∀ i : Fin S.n, Cover.{u + 1} proetalePrecoverage (S.domain i))
+    (L : ∀ (i : Fin S.n) (j : (V i).I₀),
+      AdicTowerLocalModel d ((V i).f j ≫ S.immersion i) M a b) :
+    ∀ n q, IsConstructibleProEtaleCoefficientModuleSheaf T (PbcQuotient d n)
+      ((pbcRestrict (pbcLevelConstantComparison T d n).hom).obj
+        ((DerivedCategory.homologyFunctor _ q).obj (M.level n))) := by
+  intro n q
+  let A' := PbcQuotient d n
+  let H := (DerivedCategory.homologyFunctor _ q).obj (M.level n)
+  let c := (pbcLevelConstantComparison T d n).hom
+  let F := (CoefficientSerre.proEtaleModuleRestriction T A').obj ((pbcRestrict c).obj H)
+  apply (CoefficientSerre.coefficient_constructible_iff T A' _).mpr
+  refine ⟨S, fun i ↦ finite_lisse_descent A' _ (V i) (fun j ↦ ?_)⟩
+  let g := (V i).f j ≫ S.immersion i
+  have hlocal : IsFiniteLocallyConstant A'
+      ((upperStar (ModuleCat.{u + 1} A') g).obj F) := by
+    apply local_finite g A' _ c (M.level n) q
+    apply (CoefficientSerre.relative_finite_iff g A' _).mpr
+    let U := pbcRestrict ((adicTowerInverseImage g).map c)
+    let e := U.mapIso ((DerivedCategory.homologyFunctor _ q).mapIso
+      ((L i j).identification n))
+    exact isFiniteLocallyConstant_of_iso
+      ((CoefficientSerre.relativeRestriction g A').mapIso e).symm
+      ((CoefficientSerre.relative_finite_iff g A' _).mp ((L i j).finiteLisse n q))
+  exact isFiniteLocallyConstant_of_iso
+    ((upperStarComp (ModuleCat.{u + 1} A') ((V i).f j) (S.immersion i)).app F) hlocal
+
+
+set_option backward.isDefEq.respectTransparency false in
+set_option backward.isDefEq.respectTransparency.types false in
+private theorem constructible_iso
+    (X : Scheme.{u}) (B : Type (u + 1)) [CommRing B] [Finite B]
+    {F G : pbcModules X (adicLisseConstantRing X B)} (e : F ≅ G)
+    (h : IsConstructibleProEtaleCoefficientModuleSheaf X B F) :
+    IsConstructibleProEtaleCoefficientModuleSheaf X B G := by
+  apply (CoefficientSerre.coefficient_constructible_iff X B G).mpr
+  exact isConstructible_of_iso ((CoefficientSerre.proEtaleModuleRestriction X B).mapIso e)
+    ((CoefficientSerre.coefficient_constructible_iff X B F).mp h)
+
+set_option backward.isDefEq.respectTransparency false in
+set_option backward.isDefEq.respectTransparency.types false in
+private theorem constructible_zero_of_constructible
+    (X : Scheme.{u}) (B : Type (u + 1)) [CommRing B] [Finite B]
+    (F G : pbcModules X (adicLisseConstantRing X B))
+    (hF : IsConstructibleProEtaleCoefficientModuleSheaf X B F) (hG : IsZero G) :
+    IsConstructibleProEtaleCoefficientModuleSheaf X B G := by
+  have hk := ((constructibleCoefficient_exactClosure X B).1 F F (𝟙 F) hF hF).1
+  exact constructible_iso X B
+    ((isZero_kernel_of_mono (𝟙 F)).isoZero ≪≫ hG.isoZero.symm) hk
+
+section LocalModelBounds
+attribute [local semireducible] completedAdicDerivedChange
+
+set_option backward.isDefEq.respectTransparency false in
+set_option backward.isDefEq.respectTransparency.types false in
+private theorem uniform_model_bounds (X : Scheme.{u}) [IsNoetherian X]
+    {B : Type (u + 1)} [CommRing B] (c : AdicCoefficientDatum B)
+    (M : AdicTower X c) (a b : ℤ) (S : Stratification X)
+    (V : ∀ i : Fin S.n, Cover.{u + 1} proetalePrecoverage (S.domain i))
+    (L : ∀ (i : Fin S.n) (j : (V i).I₀),
+      AdicTowerLocalModel c ((V i).f j ≫ S.immersion i) M a b)
+    (hlower : ∀ i j n,
+      (adicTowerLocalReduction c ((V i).f j ≫ S.immersion i) (L i j).complex n).IsGE
+        (a - 1)) :
+    ∀ n q, (q < a - 1 ∨ b < q) →
+      IsZero ((DerivedCategory.homologyFunctor _ q).obj (M.level n)) := by
+  intro n q hq
+  let H := (DerivedCategory.homologyFunctor _ q).obj (M.level n)
+  have hz : IsZero ((SheafOfModules.toSheaf _).obj H) := by
+    apply proEtale_isZero_of_stratum_cover X S V
+    intro i j
+    let g := (V i).f j ≫ S.immersion i
+    let P := (L i j).complex
+    have : P.IsStrictlyLE b := (CochainComplex.isStrictlyLE_iff _ _).2
+      (fun q hq ↦ (L i j).bounded q (Or.inr hq))
+    have hb : (adicTowerLocalReduction c g P n).IsLE b :=
+      (SheafOfModules.ringedTensorCohomologicalBounds.{u + 2, u + 1, u + 1, u}
+        ((adicTowerInverseImage g).map (pbcAdicProjection X c n)) b).1
+          (DerivedCategory.Q.obj P) inferInstance
+    have ha : (adicTowerLocalReduction c g P n).IsGE (a - 1) := hlower i j n
+    have hlocal : IsZero ((DerivedCategory.homologyFunctor _ q).obj
+        (adicTowerLocalReduction c g P n)) := by
+      rcases hq with hq | hq
+      · exact DerivedCategory.isZero_of_isGE _ (a - 1) q hq
+      · exact DerivedCategory.isZero_of_isLE _ b q hq
+    apply pullback_homology_zero g _ (M.level n) q
+    exact hlocal.of_iso
+      ((DerivedCategory.homologyFunctor _ q).mapIso ((L i j).identification n))
+  apply (IsZero.iff_id_eq_zero H).2
+  apply (SheafOfModules.toSheaf _).map_injective
+  simpa using hz.eq_of_src ((SheafOfModules.toSheaf _).map (𝟙 H))
+    ((SheafOfModules.toSheaf _).map (0 : H ⟶ H))
+
+end LocalModelBounds
+
+section PrincipalReductionProof
+attribute [local semireducible] completedReductionCoefficient
+set_option backward.isDefEq.respectTransparency false
+set_option backward.isDefEq.respectTransparency.types false
+private theorem completed_comparison_eq
+    {A : Type (u + 1)} [CommRing A] (d : AdicCoefficientDatum A) :
+    (pbcCompletedComparison T d).hom =
+      CompletedConstantReduction.completedComparison T d.ideal d.quotientFinite := by
+  have he (n : ℕ) : (pbcLevelConstantComparison T d n).hom =
+      @AdicCoefficients.constantComparison T (A ⧸ d.ideal ^ (n + 1)) _
+        (d.quotientFinite n) := by
+    apply Sheaf.hom_ext
+    apply sheafify_hom_ext _ _ _ ((pbcAdicRings T d).obj (op n)).property
+    change toSheafify _ _ ≫ (pbcLevelConstantComparison T d n).hom.hom =
+      toSheafify _ _ ≫ sheafifyMap _ _
+    rw [← toSheafify_naturality]
+    ext U b
+    exact (pbcLevelConstantComparison_exists T d n).exists.choose_spec U b
+  apply limit.hom_ext
+  intro n
+  dsimp only [pbcCompletedComparison, CompletedConstantReduction.completedComparison]
+  rw [HasLimit.isoOfNatIso_hom_π]
+  change _ = limMap (CompletedConstantReduction.systemComparison T d.ideal _) ≫
+    limit.π (AdicCoefficients.ringSystem T d.ideal d.quotientFinite) n
+  rw [limMap_π]
+  change _ ≫ (pbcLevelConstantComparison T d n.unop).hom = _
+  rw [he]
+  rfl
+
+private theorem completed_scalar_section
+    {A : Type (u + 1)} [CommRing A] (d : AdicCoefficientDatum A)
+    (a : A) (U : T.ProEtᵒᵖ) :
+    pbcCompletedConstantSection T d a U =
+      (CompletedConstantReduction.base T d.ideal ≫
+        CompletedConstantReduction.completedComparison T d.ideal d.quotientFinite).hom.app U
+          ((adicLisseConstantUnit T A).app U a) := by
+  unfold pbcCompletedConstantSection
+  rw [completed_comparison_eq T d]
+  rfl
+
+end PrincipalReductionProof
+
+section ResidueCounterexampleProof
+attribute [local semireducible] completedReductionCoefficient
+set_option backward.isDefEq.respectTransparency false
+set_option backward.isDefEq.respectTransparency.types false
+
+private theorem counterexample_levels
+    (T : Scheme.{u}) {A : Type (u + 1)} [CommRing A] [IsDomain A]
+    (d : AdicCoefficientDatum A) (π : A) (hI : d.ideal = Ideal.span {π})
+    (hπ : π ≠ 0) (m : ℤ) (n : ℕ) :
+    let X := (pbcCompletedReduction T d n).obj (pbcTruncationCounterexample T d m)
+    let N := pbcTruncationResidueLevel T d n
+    Nonempty ((DerivedCategory.homologyFunctor _ m).obj X ≅ N) ∧
+    Nonempty ((DerivedCategory.homologyFunctor _ (m+1)).obj X ≅ N) ∧
+    (∀ q : ℤ, q ≠ m → q ≠ m+1 →
+      IsZero ((DerivedCategory.homologyFunctor _ q).obj X)) ∧
+    Nonempty ((DerivedCategory.TStructure.t.truncLE m).obj X ≅
+      ((DerivedCategory.singleFunctor _ 0).obj N)⟦-m⟧) := by
+  let N := pbcTruncationResidueLevel T d n
+  let φ := pbcAdicProjection T d n
+  let ψ := pbcAdicQuotient T d n 0 (Nat.zero_le n)
+  let χ := pbcAdicProjection T d 0
+  let H := SheafOfModules.unit ((adicLisseForget T).obj ((pbcAdicRings T d).obj (op 0)))
+  let Y := (DerivedCategory.singleFunctor _ 0).obj ((pbcRestrict φ).obj N)
+  let K := (pbcDerivedExtend φ).obj Y
+  let eM : (pbcRestrict φ).obj N ≅ (pbcRestrict χ).obj H :=
+    (pbcRestrictComp φ ψ χ (pbcAdicProjection_comp T d n 0 (Nat.zero_le n))).app H
+  let eX : (pbcCompletedReduction T d n).obj (pbcTruncationCounterexample T d m) ≅
+      K⟦-(m+1)⟧ :=
+    (pbcDerivedExtend φ).mapIso
+      ((shiftFunctor _ (-(m+1))).mapIso
+        ((DerivedCategory.singleFunctor _ 0).mapIso eM.symm)) ≪≫
+      ((pbcDerivedExtend φ).commShiftIso (-(m+1))).app Y
+  obtain ⟨p,hz,hs,hp⟩ := completed_principal_resolution T d π hI hπ n
+  obtain ⟨⟨e0⟩,⟨e1⟩,hv⟩ := regularQuotient_single_cohomology T φ _ p hp hz hs N
+  let eh (q : ℤ) := (DerivedCategory.homologyFunctor _ q).mapIso eX ≪≫
+    ((DerivedCategory.homologyFunctor _ 0).shiftIso (-(m+1)) q (q-(m+1))
+      (by omega)).app K
+  have hm : Nonempty ((DerivedCategory.homologyFunctor _ m).obj
+      ((pbcCompletedReduction T d n).obj (pbcTruncationCounterexample T d m)) ≅ N) := by
+    have he : m-(m+1) = -1 := by omega
+    exact ⟨eh m ≪≫ (eqToIso (by rw [he]; rfl)) ≪≫ e1⟩
+  have hm1 : Nonempty ((DerivedCategory.homologyFunctor _ (m+1)).obj
+      ((pbcCompletedReduction T d n).obj (pbcTruncationCounterexample T d m)) ≅ N) := by
+    have he : m+1-(m+1) = 0 := by omega
+    exact ⟨eh (m+1) ≪≫ (eqToIso (by rw [he]; rfl)) ≪≫ e0⟩
+  have hv' (q : ℤ) (hq : q ≠ m) (hq' : q ≠ m+1) :
+      IsZero ((DerivedCategory.homologyFunctor _ q).obj
+        ((pbcCompletedReduction T d n).obj (pbcTruncationCounterexample T d m))) :=
+    (hv (q-(m+1)) (by omega) (by omega)).of_iso (eh q)
+  refine ⟨hm,hm1,hv',?_⟩
+  let X := (pbcCompletedReduction T d n).obj (pbcTruncationCounterexample T d m)
+  let L := (DerivedCategory.TStructure.t.truncLE m).obj X
+  obtain ⟨eL⟩ := DerivedCategory.nonempty_iso_singleFunctor_obj_homologyFunctor_obj L m
+    (fun q hq ↦ by
+      by_cases h : q ≤ m
+      · have : IsIso ((DerivedCategory.homologyFunctor _ q).map
+          ((DerivedCategory.TStructure.t.truncLEι m).app X)) :=
+          DerivedCategory.isIso_homologyFunctor_map_truncLTι_app X (m+1) q (by omega)
+        exact (hv' q hq (by omega)).of_iso
+          (asIso ((DerivedCategory.homologyFunctor _ q).map
+            ((DerivedCategory.TStructure.t.truncLEι m).app X)))
+      · exact DerivedCategory.isZero_of_isLE L m q (by omega))
+  have : IsIso ((DerivedCategory.homologyFunctor _ m).map
+      ((DerivedCategory.TStructure.t.truncLEι m).app X)) :=
+    DerivedCategory.isIso_homologyFunctor_map_truncLTι_app X (m+1) m (by omega)
+  let hLm := asIso ((DerivedCategory.homologyFunctor _ m).map
+    ((DerivedCategory.TStructure.t.truncLEι m).app X)) ≪≫ hm.some
+  exact ⟨eL ≪≫ (DerivedCategory.singleFunctor _ m).mapIso hLm ≪≫
+    (((DerivedCategory.singleFunctors _).shiftIso (-m) m 0 (by omega)).app N).symm⟩
+private theorem integral_residue_nontrivial
+    (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
+    [Algebra (Padic l) E] [FiniteDimensional (Padic l) E] :
+    Nontrivial (PbcQuotient (pbcIntegralDatum l E) 0) := by
+  let h := (Padic.extension_integers_dvr l E (Padic.coefficientExtensionAbsoluteValue l E)
+    (spectralNorm_extends (K := ℚ_[l]) (L := E))).choose_spec.choose_spec
+  have hgen : Ideal.span ({Padic.coefficientExtensionUniformizer l E} :
+      Set (Padic.coefficientExtensionIntegers l E)) =
+        Padic.coefficientExtensionMaximalIdeal l E :=
+    h.2.2.2.2.2.2.2.2.2.2.2.2.2.1.choose_spec
+  have hn : ¬ IsUnit (pbcUniformizer l E) := by
+    intro hu
+    have hu' : IsUnit (Padic.coefficientExtensionUniformizer l E) :=
+      hu.map (ULift.ringEquiv : PbcIntegralRing l E ≃+*
+        Padic.coefficientExtensionIntegers l E).toMonoidHom
+    exact h.2.2.2.2.1.ne_top (hgen.symm.trans (Ideal.span_singleton_eq_top.mpr hu'))
+  apply Ideal.Quotient.nontrivial_iff.mpr
+  change (Ideal.span ({pbcUniformizer l E} : Set (PbcIntegralRing l E))) ^ (0+1) ≠ ⊤
+  simpa only [Nat.zero_add,pow_one] using Ideal.span_singleton_ne_top hn
+
+private theorem residue_level_nonzero
+    (T : Scheme.{u}) (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
+    [Algebra (Padic l) E] [FiniteDimensional (Padic l) E] (hT : Nonempty T) (n : ℕ) :
+    ¬ IsZero (pbcTruncationResidueLevel T (pbcIntegralDatum l E) n) := by
+  classical
+  let d := pbcIntegralDatum l E
+  let Λ := PbcQuotient d 0
+  let : Nontrivial Λ := integral_residue_nontrivial l E
+  let U := ProEt.mk (𝟙 T)
+  have hbot : (⊥ : Sieve U) ∉ ProEt.topology T U := by
+    intro h
+    obtain ⟨Q,hQ,hQS⟩ := ProEt.mem_topology_iff.mp h
+    obtain ⟨ι,W,f,rfl⟩ := Q.exists_eq_ofArrows
+    rw [ProEt.mem_precoverage_iff,Presieve.map_ofArrows] at hQ
+    obtain ⟨i,y,hy⟩ :=
+      ((Scheme.ofArrows_mem_precoverage_iff (P := @WeaklyEtale)).1 hQ.2).1
+        (Classical.choice hT)
+    have hf := hQS _ _ (Presieve.ofArrows.mk i)
+    simp at hf
+  intro hz
+  have hsub := zero_module_sections_subsingleton T _ hz (op U)
+  have hz01 : (0 : ((pbcAdicRings T d).obj (op 0)).obj.obj (op U)) = 1 :=
+    hsub.elim _ _
+  have hconstant : (0 : (adicLisseConstantRing T Λ).obj.obj (op U)) = 1 := by
+    have h := congrArg ((pbcLevelConstantComparison T d 0).inv.hom.app (op U)) hz01
+    simpa only [map_zero,map_one] using h
+  have heq : (adicLisseConstantUnit T Λ).app (op U) (0 : Λ) =
+      (adicLisseConstantUnit T Λ).app (op U) (1 : Λ) := by
+    simpa only [map_zero,map_one] using hconstant
+  have hcover := Presheaf.equalizerSieve_mem (ProEt.topology T)
+    (adicLisseConstantUnit T Λ) (0 : Λ) (1 : Λ) heq
+  apply hbot
+  convert hcover using 1
+  ext W g
+  simp only [Sieve.bot_apply,Presheaf.equalizerSieve_apply,false_iff]
+  change (0 : Λ) ≠ 1
+  exact zero_ne_one
+
+
+end ResidueCounterexampleProof
+
 section IntegralCoefficients
 
 variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
@@ -1566,17 +1984,23 @@ theorem pbc_levelwise_truncations
       PbcIsLevelwiseTruncation T (pbcIntegralDatum l E) N := by
   exact pbc_adic_levelwise_truncations T (pbcIntegralDatum l E) _ m _hTor
 
+attribute [local semireducible] completedReductionCoefficient in
+set_option backward.isDefEq.respectTransparency false in
+set_option backward.isDefEq.respectTransparency.types false in
 /-- Injectivity of the uniformizer on H^q(K), q≥m+1, suffices for (TC). Injectivity
 is tested on every site's sections, which is precisely monicity of scalar multiplication.
 Source: blueprint order 1429, sufficient condition
 (blueprint: prop-weil-pbc-levelwise-truncations).
-Proof: the two-term free resolution [B --varpi^a--> B] of R_a gives the multiplication
-triangle and 0→H^q(K)/varpi^a→H^q(K_a)→H^(q+1)(K)[varpi^a]→0. In the stated range the
-last term vanishes. Resolve R_n over R_(n+1) by the periodic free resolution with
-alternating maps varpi^n and varpi. After tensoring with H^q(K)/varpi^(n+1), injectivity
-of varpi on H^q(K) identifies each kernel with the preceding image. The resolution
-is K-flat because it is bounded above and flat. All its negative cohomology is zero,
-giving every positive Tor, with no unbounded spectral-sequence convergence claim. -/
+
+Proof: the normalized principal quotient triangle identifies H^q(K_a) with ordinary
+extension of H^q(K) whenever multiplication by varpi is injective on H^(q+1)(K).
+Put H=H^q(K) and L=H[0]. Injectivity on H implies that every completed reduction
+of L is concentrated in degree zero. Its degree-zero cohomology is the same ordinary
+extension of H, hence identifies with H^q(K_a). The concentrated-single theorem now
+identifies L_a with H^q(K_a)[0]. Reducing once more and using the existing canonical
+reduction normalization identifies its next reduction with L at the lower level.
+The latter has no negative cohomology, proving all the claimed higher Tor vanishings.
+No finiteness, flatness, or spectral-sequence convergence assumption is added. -/
 theorem pbc_levelwise_tor_of_uniformizer_injective
     (K : PbcCompletedDerived T (pbcIntegralDatum l E)) (m : ℤ)
     (_hinj : ∀ q : ℤ, m + 1 ≤ q → ∀ U : T.ProEtᵒᵖ,
@@ -1585,7 +2009,57 @@ theorem pbc_levelwise_tor_of_uniformizer_injective
           pbcCompletedConstantSection T (pbcIntegralDatum l E) (pbcUniformizer l E) U • x)) :
     PbcLevelwiseTorVanishing T (pbcIntegralDatum l E)
       (pbcReductionAdicTower T (pbcIntegralDatum l E) K) m := by
-  sorry
+  simp only [PbcLevelwiseTorVanishing, pbcReductionAdicTower]
+  classical
+  let A := PbcIntegralRing l E
+  let ering : A ≃+* Padic.coefficientExtensionIntegers l E := ULift.ringEquiv
+  let : IsDomain A := ering.toMulEquiv.isDomain _
+  let d := pbcIntegralDatum l E
+  let π := pbcUniformizer l E
+  have hI : d.ideal = Ideal.span {π} := rfl
+  have hπ : π ≠ 0 := by
+    intro h
+    exact AlgebraicGeometry.uniformizer_ne_zero l E (congrArg ULift.down h)
+  intro n q hq p hp
+  let H := (DerivedCategory.homologyFunctor _ q).obj K
+  let L := (DerivedCategory.singleFunctor _ 0).obj H
+  have hi (U : T.ProEtᵒᵖ) : Function.Injective (fun x : H.val.obj U ↦
+      (CompletedConstantReduction.base T d.ideal ≫
+        CompletedConstantReduction.completedComparison T d.ideal d.quotientFinite).hom.app U
+          ((adicLisseConstantUnit T _).app U π) • x) := by
+    simpa only [completed_scalar_section] using _hinj q hq U
+  have hL (a : ℕ) := principalReduction_single_isConcentrated T d π hI hπ H hi a
+  let φ := pbcAdicProjection T d (n + 1)
+  let h0 := (DerivedCategory.singleFunctorCompHomologyFunctorIso _ 0).app H
+  let cK := ((pbcScalarAdjunction φ).homEquiv _ _).symm
+    ((DerivedCategory.homologyFunctor _ q).map
+        ((pbcDerivedScalarAdjunction φ).unit.app K) ≫
+      ((pbcRestrict φ).mapDerivedCategoryHomologyFunctorIso q).inv.app
+        ((pbcDerivedExtend φ).obj K))
+  have : IsIso cK := principalReductionCohomology_isIso T d π hI hπ (n + 1) K q
+    (fun U ↦ by simpa only [completed_scalar_section] using _hinj (q + 1) (by omega) U)
+  let cL := ((pbcScalarAdjunction φ).homEquiv _ _).symm
+    ((DerivedCategory.homologyFunctor _ 0).map
+        ((pbcDerivedScalarAdjunction φ).unit.app L) ≫
+      ((pbcRestrict φ).mapDerivedCategoryHomologyFunctorIso 0).inv.app
+        ((pbcDerivedExtend φ).obj L))
+  have : IsIso cL := principalReductionCohomology_isIso T d π hI hπ (n + 1) L 0
+    (fun U ↦ by
+      have hz : IsZero ((DerivedCategory.homologyFunctor _ (0 + 1)).obj L) :=
+        DerivedCategory.isZero_of_isLE L 0 1 (by omega)
+      have := zero_module_sections_subsingleton T _ hz U
+      exact fun _ _ _ ↦ Subsingleton.elim _ _)
+  let eh := (asIso cL).symm ≪≫ (pbcExtend φ).mapIso h0 ≪≫ asIso cK
+  obtain ⟨e₀⟩ := DerivedCategory.nonempty_iso_singleFunctor_obj_homologyFunctor_obj
+    ((pbcDerivedExtend φ).obj L) 0 (hL (n + 1))
+  let e := e₀ ≪≫ (DerivedCategory.singleFunctor _ 0).mapIso eh
+  let ψ := pbcAdicQuotient T d (n + 1) n (Nat.le_succ n)
+  let er := (pbcDerivedExtend ψ).mapIso e.symm ≪≫
+    pbcReductionNormalization (pbcAdicProjection T d (n + 1)) ψ
+      (pbcAdicProjection T d n) (pbcAdicProjection_comp T d (n + 1) n (Nat.le_succ n)) L
+  exact (hL n (-(p : ℤ)) (by omega)).of_iso
+    ((DerivedCategory.homologyFunctor _ (-(p : ℤ))).mapIso er)
+
 
 /-- Uniform bounded constructibility is preserved under (TC), with the stated sharp
 cohomological windows. The conclusion uses the full common-local-model predicate;
@@ -1594,8 +2068,8 @@ Source: blueprint order 1429, (2); Stacks Tags 09C1, 09C7 and 09C2
 (blueprint: prop-weil-pbc-levelwise-truncations).
 Proof: pull the two-term completed quotient resolution back to each common model domain,
 retaining the actual inverse-image completed ring. A model in [d0,d1] reduces into
-[d0-1,d1]. Exact restriction and the constructible etale-origin stalk comparison make
-these bounds global. Canonical truncation intersects this interval with its surviving
+[d0-1,d1]. Exact restriction and stratum-cover zero detection make these bounds global.
+Canonical truncation intersects this interval with its surviving
 range. Its cohomology remains intrinsically constructible. Under (TC) the preceding
 normalization theorem supplies adic towers. Apply normalizedConstructibleTower_local_effectivity
 to their constructible cohomology and common finite bounds to obtain new finite
@@ -1622,7 +2096,90 @@ theorem pbc_levelwise_truncations_constructible [IsNoetherian T]
       IsZero ((DerivedCategory.homologyFunctor _ q).obj (N.lower.level n))) ∧
     (∀ (n : ℕ) (q : ℤ), (q < max (m + 1) (d₀ - 1) ∨ d₁ < q) →
       IsZero ((DerivedCategory.homologyFunctor _ q).obj (N.upper.level n))) := by
-  sorry
+  classical
+  let c := pbcIntegralDatum l E
+  let M := pbcReductionAdicTower T c K
+  obtain ⟨hab, S, hS⟩ := _hmodels
+  choose W hW hL using hS
+  have hcov := fun i ↦ cover_of_sieve (S.domain i) (W i) (hW i)
+  choose I U f hU hf using hcov
+  let V (i : Fin S.n) : Cover.{u + 1} proetalePrecoverage (S.domain i) :=
+    { I₀ := I i, X := fun j ↦ (U i j).left, f := fun j ↦ (U i j).hom, mem₀ := hU i }
+  have hmodels (i : Fin S.n) (j : (V i).I₀) :
+      Nonempty (AdicTowerLocalModel c ((V i).f j ≫ S.immersion i) M d₀ d₁) :=
+    hL i (U i j) (f i j) (hf i j)
+  let L (i : Fin S.n) (j : (V i).I₀) := Classical.choice (hmodels i j)
+  have hc := uniform_constructible T c M d₀ d₁ S V L
+  have hb := uniform_model_bounds T c M d₀ d₁ S V L (by
+    intro i j n
+    have : (L i j).complex.IsStrictlyGE d₀ :=
+      (CochainComplex.isStrictlyGE_iff _ _).2
+        (fun q hq ↦ (L i j).bounded q (Or.inl hq))
+    exact integralLocalReduction_isGE l E _ _ d₀ n)
+  have hminus (n : ℕ) (q : ℤ) (hq : q < d₀ - 1 ∨ min m d₁ < q) :
+      IsZero ((DerivedCategory.homologyFunctor _ q).obj (N.lower.level n)) := by
+    rw [N.lowerLevel n]
+    by_cases hqm : q ≤ m
+    · have hq' : q < d₀ - 1 ∨ d₁ < q := by omega
+      have : IsIso ((DerivedCategory.homologyFunctor _ q).map
+          ((DerivedCategory.TStructure.t.truncLEι m).app (M.level n))) :=
+        DerivedCategory.isIso_homologyFunctor_map_truncLTι_app _ (m + 1) q (by omega)
+      exact (hb n q hq').of_iso
+        (asIso ((DerivedCategory.homologyFunctor _ q).map
+          ((DerivedCategory.TStructure.t.truncLEι m).app (M.level n))))
+    · exact DerivedCategory.isZero_of_isLE _ m q (by omega)
+  have hplus (n : ℕ) (q : ℤ)
+      (hq : q < max (m + 1) (d₀ - 1) ∨ d₁ < q) :
+      IsZero ((DerivedCategory.homologyFunctor _ q).obj (N.upper.level n)) := by
+    rw [N.upperLevel n]
+    by_cases hqm : m + 1 ≤ q
+    · have hq' : q < d₀ - 1 ∨ d₁ < q := by omega
+      have : IsIso ((DerivedCategory.homologyFunctor _ q).map
+          ((DerivedCategory.TStructure.t.truncGEπ (m + 1)).app (M.level n))) :=
+        DerivedCategory.isIso_homologyFunctor_map_truncGEπ_app _ (m + 1) q hqm
+      exact (hb n q hq').of_iso
+        (asIso ((DerivedCategory.homologyFunctor _ q).map
+          ((DerivedCategory.TStructure.t.truncGEπ (m + 1)).app (M.level n)))).symm
+    · exact DerivedCategory.isZero_of_isGE _ (m + 1) q (by omega)
+  have hcminus (n : ℕ) (q : ℤ) :
+      IsConstructibleProEtaleCoefficientModuleSheaf T (PbcQuotient c n)
+        ((pbcRestrict (pbcLevelConstantComparison T c n).hom).obj
+          ((DerivedCategory.homologyFunctor _ q).obj (N.lower.level n))) := by
+    let R := pbcRestrict (pbcLevelConstantComparison T c n).hom
+    rw [N.lowerLevel n]
+    by_cases hqm : q ≤ m
+    · have : IsIso ((DerivedCategory.homologyFunctor _ q).map
+          ((DerivedCategory.TStructure.t.truncLEι m).app (M.level n))) :=
+        DerivedCategory.isIso_homologyFunctor_map_truncLTι_app _ (m + 1) q (by omega)
+      exact constructible_iso T _ (R.mapIso
+        (asIso ((DerivedCategory.homologyFunctor _ q).map
+          ((DerivedCategory.TStructure.t.truncLEι m).app (M.level n)))).symm) (hc n q)
+    · exact constructible_zero_of_constructible T _ _ _ (hc n q)
+        (R.map_isZero (DerivedCategory.isZero_of_isLE _ m q (by omega)))
+  have hcplus (n : ℕ) (q : ℤ) :
+      IsConstructibleProEtaleCoefficientModuleSheaf T (PbcQuotient c n)
+        ((pbcRestrict (pbcLevelConstantComparison T c n).hom).obj
+          ((DerivedCategory.homologyFunctor _ q).obj (N.upper.level n))) := by
+    let R := pbcRestrict (pbcLevelConstantComparison T c n).hom
+    rw [N.upperLevel n]
+    by_cases hqm : m + 1 ≤ q
+    · have : IsIso ((DerivedCategory.homologyFunctor _ q).map
+          ((DerivedCategory.TStructure.t.truncGEπ (m + 1)).app (M.level n))) :=
+        DerivedCategory.isIso_homologyFunctor_map_truncGEπ_app _ (m + 1) q hqm
+      exact constructible_iso T _ (R.mapIso
+        (asIso ((DerivedCategory.homologyFunctor _ q).map
+          ((DerivedCategory.TStructure.t.truncGEπ (m + 1)).app (M.level n))))) (hc n q)
+    · exact constructible_zero_of_constructible T _ _ _ (hc n q)
+        (R.map_isZero (DerivedCategory.isZero_of_isGE _ (m + 1) q (by omega)))
+  refine ⟨?_, ?_, hminus, hplus⟩
+  · apply (normalizedConstructibleTower_local_effectivity T c N.lower hcminus
+      (d₀ - 1) d₁ (by omega) ?_).2
+    intro n q hq
+    exact hminus n q (by omega)
+  · apply (normalizedConstructibleTower_local_effectivity T c N.upper hcplus
+      (d₀ - 1) d₁ (by omega) ?_).2
+    intro n q hq
+    exact hplus n q (by omega)
 
 /-- On a nonempty scheme, the shifted residue example has exactly the two asserted
 cohomology sheaves at each level. Its lower truncation has one cohomology sheaf, but
@@ -1633,7 +2190,7 @@ Source: blueprint order 1429, counterexample in (1)
 Proof: over B the two-term resolution of R_n becomes [k --0--> k] after tensoring
 with the shifted residue. This computes the two cohomology sheaves without an R_n-linear
 splitting. The concentrated-single theorem identifies its lower truncation with k[-m].
-The periodic free R_(n+1)-resolution of R_n alternates varpi^n and varpi; both maps
+The periodic free R_(n + 1)-resolution of R_n alternates varpi^n and varpi; both maps
 become zero after tensoring with k. Hence every nonpositive-degree cohomology is k. On a nonempty
 scheme k is nonzero, since 0 and 1 remain distinct on some member of every cover.
 At degree m-1 the derived reduction is therefore nonzero while the lower truncation
@@ -1673,7 +2230,45 @@ theorem pbc_levelwise_truncation_counterexample (_hT : Nonempty T) (m : ℤ) :
       (DerivedCategory.TStructure.t.truncLE m).obj
         ((pbcCompletedReduction T (pbcIntegralDatum l E) n).obj
           (pbcTruncationCounterexample T (pbcIntegralDatum l E) m))) := by
-  sorry
+  classical
+  let A := PbcIntegralRing l E
+  let ering : A ≃+* Padic.coefficientExtensionIntegers l E := ULift.ringEquiv
+  let : IsDomain A := ering.toMulEquiv.isDomain _
+  let d := pbcIntegralDatum l E
+  let π := pbcUniformizer l E
+  have hI : d.ideal = Ideal.span {π} := rfl
+  have hπ : π ≠ 0 := by
+    intro h
+    exact AlgebraicGeometry.uniformizer_ne_zero l E (congrArg ULift.down h)
+  have hper := principalAdjacentQuotient_tor T d π hI hπ
+  have hlevels := counterexample_levels T d π hI hπ m
+  have hnext (n p : ℕ) : Nonempty
+      ((DerivedCategory.homologyFunctor _ (m - (p : ℤ))).obj
+        ((pbcDerivedExtend (pbcAdicQuotient T d (n + 1) n (Nat.le_succ n))).obj
+          ((DerivedCategory.TStructure.t.truncLE m).obj
+            ((pbcCompletedReduction T d (n + 1)).obj
+              (pbcTruncationCounterexample T d m)))) ≅ pbcTruncationResidueLevel T d n) := by
+    let G := pbcDerivedExtend (pbcAdicQuotient T d (n + 1) n (Nat.le_succ n))
+    let L := (DerivedCategory.singleFunctor _ 0).obj (pbcTruncationResidueLevel T d (n + 1))
+    let eL := (hlevels (n + 1)).2.2.2.some
+    let e := G.mapIso eL ≪≫ (G.commShiftIso (-m)).app L
+    obtain ⟨et⟩ := hper n (-(p : ℤ)) (by omega)
+    exact ⟨(DerivedCategory.homologyFunctor _ (m - (p : ℤ))).mapIso e ≪≫
+      ((DerivedCategory.homologyFunctor _ 0).shiftIso (-m) (m - (p : ℤ)) (-(p : ℤ))
+        (by omega)).app (G.obj L) ≪≫ et⟩
+  refine ⟨hlevels, hnext, ?_⟩
+  intro n ⟨e⟩
+  let L := (DerivedCategory.singleFunctor _ 0).obj (pbcTruncationResidueLevel T d n)
+  have : DerivedCategory.TStructure.t.IsGE (L⟦-m⟧) m :=
+    DerivedCategory.TStructure.t.isGE_shift L 0 (-m) m (by omega)
+  have hz : IsZero ((DerivedCategory.homologyFunctor _ (m - 1)).obj (L⟦-m⟧)) :=
+    DerivedCategory.isZero_of_isGE _ m (m - 1) (by omega)
+  have hz' := hz.of_iso ((DerivedCategory.homologyFunctor _ (m - 1)).mapIso
+    ((hlevels n).2.2.2.some))
+  have hz'' := hz'.of_iso ((DerivedCategory.homologyFunctor _ (m - 1)).mapIso e)
+  obtain ⟨er⟩ := hnext n 1
+  exact residue_level_nonzero T l E _hT n (hz''.of_iso er.symm)
+
 
 end IntegralCoefficients
 
@@ -1874,6 +2469,44 @@ private lemma originLE_counit (W : PbcWitnessedTower T d) (m : ℤ) (n : ℕ) :
   rw [← Category.assoc, truncLE_comparison_counit]
 
 set_option backward.isDefEq.respectTransparency false in
+set_option backward.isDefEq.respectTransparency.types false in
+private def originWithAlpha (n : ℕ) (K : PbcWitnessAmbient T d n)
+    (hK : DerivedCategory.TStructure.t.plus
+      ((finiteCoefficientRealization T (PbcQuotient d n)).mapDerivedCategory.obj K))
+    (L : DerivedCategory (Sheaf T.smallEtaleTopology (ModuleCat.{u + 1} (PbcQuotient d n))))
+    (hL : DerivedCategory.TStructure.t.plus L)
+    (e : (comparisonUpperStar (ModuleCat.{u + 1} (PbcQuotient d n)) T).mapDerivedCategory.obj
+      L ≅ K) :
+    EtaleOriginWitness T (PbcQuotient d n)
+      ⟨(finiteCoefficientRealization T (PbcQuotient d n)).mapDerivedCategory.obj K, hK⟩ where
+  L := ⟨L, hL⟩
+  alpha := DerivedCategory.Plus.ι.preimageIso
+    ((Functor.mapDerivedCategoryCompIso
+      (comparisonUpperStar (ModuleCat.{u + 1} (PbcQuotient d n)) T)
+      (finiteCoefficientRealization T (PbcQuotient d n))).app L ≪≫
+        (finiteCoefficientRealization T (PbcQuotient d n)).mapDerivedCategory.mapIso e)
+
+set_option backward.isDefEq.respectTransparency false in
+set_option backward.isDefEq.respectTransparency.types false in
+private theorem originWithAlpha_hom (n : ℕ) (K : PbcWitnessAmbient T d n)
+    (hK : DerivedCategory.TStructure.t.plus
+      ((finiteCoefficientRealization T (PbcQuotient d n)).mapDerivedCategory.obj K))
+    (L : DerivedCategory (Sheaf T.smallEtaleTopology (ModuleCat.{u + 1} (PbcQuotient d n))))
+    (hL : DerivedCategory.TStructure.t.plus L)
+    (e : (comparisonUpperStar (ModuleCat.{u + 1} (PbcQuotient d n)) T).mapDerivedCategory.obj
+      L ≅ K) :
+    (pbcFixedOriginAlpha T (PbcQuotient d n) K hK
+      (originWithAlpha T d n K hK L hL e)).hom = e.hom := by
+  let F := finiteCoefficientRealization T (PbcQuotient d n)
+  apply F.mapDerivedCategory.map_injective
+  dsimp only [pbcFixedOriginAlpha, originWithAlpha]
+  change F.mapDerivedCategory.map (F.mapDerivedCategory.preimage _) = _
+  rw [Functor.map_preimage]
+  simp only [Iso.trans_hom, Functor.mapIso_hom, Functor.preimageIso_hom]
+  rw [Functor.map_preimage]
+  simp only [F, Iso.symm_hom, Iso.app_hom, Iso.inv_hom_id_app_assoc]
+
+set_option backward.isDefEq.respectTransparency false in
 /-- Without (TC), the truncated etale antecedents give the retained levelwise origin
 pairs, with the stated isomorphisms and compatibility with strict transitions only.
 Source: blueprint order 1429, final paragraph
@@ -1956,22 +2589,12 @@ theorem pbc_levelwise_truncation_origins (W : PbcWitnessedTower T d) (m : ℤ) :
         obtain ⟨j, hj⟩ := (W.origin n).L.property
         have := hj
         exact ⟨j, inferInstance⟩⟩
-    let V : ProEtale.EtaleOriginWitness T (PbcQuotient d n)
-        ⟨F.mapDerivedCategory.obj ((DerivedCategory.TStructure.t.truncLE m).obj (W.K n)), h⟩ :=
-      { L := L
-        alpha := DerivedCategory.Plus.ι.preimageIso
-          ((Functor.mapDerivedCategoryCompIso
-            (comparisonUpperStar (ModuleCat.{u + 1} (PbcQuotient d n)) T) F).app L.obj ≪≫
-              F.mapDerivedCategory.mapIso (pbcLevelwiseOriginLE T d W m n)) }
+    let V := originWithAlpha T d n
+      ((DerivedCategory.TStructure.t.truncLE m).obj (W.K n)) h L.obj L.property
+      (pbcLevelwiseOriginLE T d W m n)
     refine ⟨h, V, rfl, ?_⟩
-    simp only [eqToHom_refl]
-    apply F.mapDerivedCategory.map_injective
-    dsimp [pbcFixedOriginAlpha, V]
-    change F.mapDerivedCategory.map (F.mapDerivedCategory.preimage _) = _
-    rw [Functor.map_preimage]
-    simp only [Iso.trans_hom, Functor.mapIso_hom, Functor.preimageIso_hom]
-    rw [Functor.map_preimage]
-    simp [F]
+    simpa only [eqToHom_refl, CategoryTheory.Functor.map_id, Category.id_comp] using
+      originWithAlpha_hom T d n _ h L.obj L.property (pbcLevelwiseOriginLE T d W m n)
   · intro n
     obtain ⟨k, hk⟩ := W.boundedBelow n
     let F := finiteCoefficientRealization T (PbcQuotient d n)
@@ -1995,23 +2618,12 @@ theorem pbc_levelwise_truncation_origins (W : PbcWitnessedTower T d) (m : ℤ) :
         obtain ⟨j, hj⟩ := (W.origin n).L.property
         have := hj
         exact ⟨j, inferInstance⟩⟩
-    let V : ProEtale.EtaleOriginWitness T (PbcQuotient d n)
-        ⟨F.mapDerivedCategory.obj
-          ((DerivedCategory.TStructure.t.truncGE (m + 1)).obj (W.K n)), h⟩ :=
-      { L := L
-        alpha := DerivedCategory.Plus.ι.preimageIso
-          ((Functor.mapDerivedCategoryCompIso
-            (comparisonUpperStar (ModuleCat.{u + 1} (PbcQuotient d n)) T) F).app L.obj ≪≫
-              F.mapDerivedCategory.mapIso (pbcLevelwiseOriginGE T d W m n)) }
+    let V := originWithAlpha T d n
+      ((DerivedCategory.TStructure.t.truncGE (m + 1)).obj (W.K n)) h L.obj L.property
+      (pbcLevelwiseOriginGE T d W m n)
     refine ⟨h, V, rfl, ?_⟩
-    simp only [eqToHom_refl]
-    apply F.mapDerivedCategory.map_injective
-    dsimp [pbcFixedOriginAlpha, V]
-    change F.mapDerivedCategory.map (F.mapDerivedCategory.preimage _) = _
-    rw [Functor.map_preimage]
-    simp only [Iso.trans_hom, Functor.mapIso_hom, Functor.preimageIso_hom]
-    rw [Functor.map_preimage]
-    simp [F]
+    simpa only [eqToHom_refl, CategoryTheory.Functor.map_id, Category.id_comp] using
+      originWithAlpha_hom T d n _ h L.obj L.property (pbcLevelwiseOriginGE T d W m n)
   · intro n
     let φ := pbcWitnessQuotientMap d (n + 1) n (Nat.le_succ n)
     let F := comparisonUpperStar (ModuleCat.{u + 1} (PbcQuotient d (n + 1))) T
@@ -2128,6 +2740,439 @@ def pbcTruncatedEtaleNormalizationGE (W V : PbcWitnessedTower T d) (m : ℤ)
   (pbcWitnessEtaleReduction T d n).mapIso (eqToIso (hV (n + 1))).symm ≪≫
     V.beta n ≪≫ eqToIso (hV n)
 
+section OriginNormalizationProof
+set_option backward.isDefEq.respectTransparency false
+set_option backward.isDefEq.respectTransparency.types false
+
+private theorem reflectLE
+    {C D : Type*} [Category C] [Abelian C] [HasDerivedCategory C]
+    [Category D] [Abelian D] [HasDerivedCategory D]
+    (F : C ⥤ D) [F.Additive] [PreservesFiniteLimits F] [PreservesFiniteColimits F]
+    [F.Faithful] (K : DerivedCategory C) (a : ℤ)
+    (h : (F.mapDerivedCategory.obj K).IsLE a) : K.IsLE a := by
+  rw [DerivedCategory.isLE_iff]
+  intro q hq
+  exact F.isZero_homologyFunctor_of_isZero_homologyFunctor_mapDerivedCategory_obj
+    ((DerivedCategory.isLE_iff _ a).mp h q hq)
+
+private theorem reflectGE
+    {C D : Type*} [Category C] [Abelian C] [HasDerivedCategory C]
+    [Category D] [Abelian D] [HasDerivedCategory D]
+    (F : C ⥤ D) [F.Additive] [PreservesFiniteLimits F] [PreservesFiniteColimits F]
+    [F.Faithful] (K : DerivedCategory C) (a : ℤ)
+    (h : (F.mapDerivedCategory.obj K).IsGE a) : K.IsGE a := by
+  rw [DerivedCategory.isGE_iff]
+  intro q hq
+  exact F.isZero_homologyFunctor_of_isZero_homologyFunctor_mapDerivedCategory_obj
+    ((DerivedCategory.isGE_iff _ a).mp h q hq)
+
+private def originFunctionLE {M : AdicTower T d} {m : ℤ}
+    (W : PbcWitnessedTower T d)
+    (e : ∀ n, (pbcDerivedFunctionRealization T d n).obj (W.K n) ≅ M.level n) (n : ℕ) :
+    (((comparisonUpperStar (ModuleCat.{u+1} (PbcQuotient d n)) T).mapDerivedCategory ⋙
+      pbcDerivedFunctionRealization T d n).obj
+      ((DerivedCategory.TStructure.t.truncLE m).obj (W.origin n).L.obj)) ≅
+      (DerivedCategory.TStructure.t.truncLE m).obj (M.level n) :=
+  (pbcDerivedFunctionRealization T d n).mapIso (pbcLevelwiseOriginLE T d W m n) ≪≫
+    ((pbcFunctionRealization T d n).mapDerivedCategoryTruncLEIso m).app (W.K n) ≪≫
+      (DerivedCategory.TStructure.t.truncLE m).mapIso (e n)
+
+private def originFunctionGE {M : AdicTower T d} {m : ℤ}
+    (W : PbcWitnessedTower T d)
+    (e : ∀ n, (pbcDerivedFunctionRealization T d n).obj (W.K n) ≅ M.level n) (n : ℕ) :
+    (((comparisonUpperStar (ModuleCat.{u+1} (PbcQuotient d n)) T).mapDerivedCategory ⋙
+      pbcDerivedFunctionRealization T d n).obj
+      ((DerivedCategory.TStructure.t.truncGE (m + 1)).obj (W.origin n).L.obj)) ≅
+      (DerivedCategory.TStructure.t.truncGE (m + 1)).obj (M.level n) :=
+  (pbcDerivedFunctionRealization T d n).mapIso (pbcLevelwiseOriginGE T d W m n) ≪≫
+    ((pbcFunctionRealization T d n).mapDerivedCategoryTruncGEIso (m + 1)).app (W.K n) ≪≫
+      (DerivedCategory.TStructure.t.truncGE (m + 1)).mapIso (e n)
+
+private theorem originFunctionLE_counit {M : AdicTower T d} {m : ℤ}
+    (W : PbcWitnessedTower T d)
+    (e : ∀ n, (pbcDerivedFunctionRealization T d n).obj (W.K n) ≅ M.level n) (n : ℕ) :
+    (originFunctionLE T d W e n (m := m)).hom ≫
+        (DerivedCategory.TStructure.t.truncLEι m).app (M.level n) =
+      (((comparisonUpperStar (ModuleCat.{u + 1} (PbcQuotient d n)) T).mapDerivedCategory ⋙
+        pbcDerivedFunctionRealization T d n).map
+          ((DerivedCategory.TStructure.t.truncLEι m).app (W.origin n).L.obj)) ≫
+        (pbcDerivedFunctionRealization T d n).map (W.alpha n).hom ≫ (e n).hom := by
+  dsimp only [originFunctionLE]
+  simp only [Iso.trans_hom, Functor.mapIso_hom, Iso.app_hom, Category.assoc]
+  rw [(DerivedCategory.TStructure.t.truncLEι m).naturality]
+  simp only [ Functor.id_map]
+  rw [reassoc_of% truncLE_comparison_counit (pbcFunctionRealization T d n) (W.K n) m]
+  rw [← Functor.map_comp_assoc, originLE_counit]
+  simp only [Functor.map_comp, Category.assoc, Functor.comp_map]
+
+private theorem originFunctionGE_unit {M : AdicTower T d} {m : ℤ}
+    (W : PbcWitnessedTower T d)
+    (e : ∀ n, (pbcDerivedFunctionRealization T d n).obj (W.K n) ≅ M.level n) (n : ℕ) :
+    (((comparisonUpperStar (ModuleCat.{u + 1} (PbcQuotient d n)) T).mapDerivedCategory ⋙
+      pbcDerivedFunctionRealization T d n).map
+        ((DerivedCategory.TStructure.t.truncGEπ (m + 1)).app (W.origin n).L.obj)) ≫
+      (originFunctionGE T d W e n (m := m)).hom =
+    (pbcDerivedFunctionRealization T d n).map (W.alpha n).hom ≫ (e n).hom ≫
+      (DerivedCategory.TStructure.t.truncGEπ (m + 1)).app (M.level n) := by
+  dsimp only [originFunctionGE]
+  simp only [Iso.trans_hom, Functor.mapIso_hom, Iso.app_hom, Functor.comp_map]
+  rw [← Functor.map_comp_assoc, originGE_unit]
+  simp only [Functor.map_comp, Category.assoc]
+  rw [reassoc_of% truncGE_comparison_unit (pbcFunctionRealization T d n) (W.K n) (m + 1)]
+  simpa only [Functor.id_map, Category.assoc] using
+    congrArg (fun f ↦ (pbcDerivedFunctionRealization T d n).map (W.alpha n).hom ≫ f)
+      ((DerivedCategory.TStructure.t.truncGEπ (m + 1)).naturality (e n).hom).symm
+
+private theorem origin_function_formula
+    (W : PbcWitnessedTower T d)
+    (n : ℕ) :
+    (pbcLevelwiseOriginReduction T d n).hom.app (W.origin (n + 1)).L.obj ≫
+      (pbcDerivedFunctionRealization T d n).map
+        ((comparisonUpperStar (ModuleCat.{u + 1} (PbcQuotient d n)) T).mapDerivedCategory.map
+          (W.beta n).hom) ≫
+      (pbcDerivedFunctionRealization T d n).map (W.alpha n).hom =
+    (pbcDerivedExtend (pbcAdicQuotient T d (n + 1) n (Nat.le_succ n))).map
+      ((pbcDerivedFunctionRealization T d (n + 1)).map (W.alpha (n + 1)).hom) ≫
+      (pbcFunctionReduction T d n).hom.app (W.K (n + 1)) ≫
+        (pbcDerivedFunctionRealization T d n).map (W.theta n).hom := by
+  let φ := pbcWitnessQuotientMap d (n + 1) n (Nat.le_succ n)
+  let F := pbcDerivedFunctionRealization T d n
+  let G := pbcDerivedExtend (pbcAdicQuotient T d (n + 1) n (Nat.le_succ n))
+  let C := (comparisonUpperStar (ModuleCat.{u + 1} (PbcQuotient d n)) T).mapDerivedCategory
+  let C' := (comparisonUpperStar
+    (ModuleCat.{u + 1} (PbcQuotient d (n + 1))) T).mapDerivedCategory
+  let η := pbcFunctionReduction T d n
+  let κ := pbcComparisonReduction T φ
+  have hw₀ := W.compatibility n
+  dsimp only [PbcWitnessedTower.alpha, pbcWitnessReduction, pbcWitnessEtaleReduction,
+    pbcFixedScalarExtension] at hw₀
+  have hw : κ.hom.app (W.origin (n + 1)).L.obj ≫ C.map (W.beta n).hom ≫
+      (W.alpha n).hom = (pbcWitnessReduction T d n).map (W.alpha (n + 1)).hom ≫
+        (W.theta n).hom := by
+    dsimp only [C, κ, φ, PbcWitnessedTower.alpha, pbcWitnessReduction,
+      pbcWitnessEtaleReduction, pbcFixedScalarExtension]
+    rw [hw₀]
+    simp only [Iso.hom_inv_id_app_assoc]
+  simp only [pbcLevelwiseOriginReduction, Iso.trans_hom, Iso.symm_hom, NatTrans.comp_app,
+    Functor.associator_hom_app, Functor.isoWhiskerLeft_hom, Functor.whiskerLeft_app,
+    Functor.associator_inv_app, Functor.isoWhiskerRight_hom, Functor.whiskerRight_app,
+    Category.id_comp, Category.comp_id, Category.assoc]
+  change η.hom.app (C'.obj (W.origin (n + 1)).L.obj) ≫
+      F.map (κ.hom.app (W.origin (n + 1)).L.obj) ≫
+      F.map (C.map (W.beta n).hom) ≫ F.map (W.alpha n).hom =
+    G.map ((pbcDerivedFunctionRealization T d (n + 1)).map (W.alpha (n + 1)).hom) ≫
+      η.hom.app (W.K (n + 1)) ≫ F.map (W.theta n).hom
+  erw [← F.map_comp_assoc, ← F.map_comp]
+  simp only [Category.assoc]
+  erw [hw]
+  simp only [Functor.map_comp]
+  rw [← reassoc_of% η.hom.naturality (W.alpha (n + 1)).hom]
+
+private theorem origin_function_normalization {M : AdicTower T d}
+    (W : PbcWitnessedTower T d)
+    (e : ∀ n, (pbcDerivedFunctionRealization T d n).obj (W.K n) ≅ M.level n)
+    (he : ∀ n,
+      (pbcDerivedFunctionRealization T d n).map (W.theta n).hom ≫ (e n).hom =
+        (pbcFunctionReduction T d n).inv.app (W.K (n + 1)) ≫
+          (pbcDerivedExtend (pbcAdicQuotient T d (n + 1) n (Nat.le_succ n))).map
+            (e (n + 1)).hom ≫ (M.normalization (n + 1) n (Nat.le_succ n)).hom)
+    (n : ℕ) :
+    (pbcLevelwiseOriginReduction T d n).hom.app (W.origin (n + 1)).L.obj ≫
+      (pbcDerivedFunctionRealization T d n).map
+        ((comparisonUpperStar (ModuleCat.{u + 1} (PbcQuotient d n)) T).mapDerivedCategory.map
+          (W.beta n).hom) ≫
+      (pbcDerivedFunctionRealization T d n).map (W.alpha n).hom ≫ (e n).hom =
+    (pbcDerivedExtend (pbcAdicQuotient T d (n + 1) n (Nat.le_succ n))).map
+      ((pbcDerivedFunctionRealization T d (n + 1)).map (W.alpha (n + 1)).hom ≫
+        (e (n + 1)).hom) ≫ (M.normalization (n + 1) n (Nat.le_succ n)).hom := by
+  rw [reassoc_of% origin_function_formula T d W n]
+  rw [he n]
+  simp only [Category.assoc, Iso.hom_inv_id_app_assoc, Functor.map_comp]
+
+private theorem origin_function_normalization_of {M : AdicTower T d}
+    (W : PbcWitnessedTower T d)
+    (e : ∀ n, (pbcDerivedFunctionRealization T d n).obj (W.K n) ≅ M.level n)
+    (n : ℕ)
+    (h : (pbcLevelwiseOriginReduction T d n).hom.app (W.origin (n + 1)).L.obj ≫
+      (pbcDerivedFunctionRealization T d n).map
+        ((comparisonUpperStar (ModuleCat.{u + 1} (PbcQuotient d n)) T).mapDerivedCategory.map
+          (W.beta n).hom) ≫
+      (pbcDerivedFunctionRealization T d n).map (W.alpha n).hom ≫ (e n).hom =
+    (pbcDerivedExtend (pbcAdicQuotient T d (n + 1) n (Nat.le_succ n))).map
+      ((pbcDerivedFunctionRealization T d (n + 1)).map (W.alpha (n + 1)).hom ≫
+        (e (n + 1)).hom) ≫ (M.normalization (n + 1) n (Nat.le_succ n)).hom) :
+      (pbcDerivedFunctionRealization T d n).map (W.theta n).hom ≫ (e n).hom =
+        (pbcFunctionReduction T d n).inv.app (W.K (n + 1)) ≫
+          (pbcDerivedExtend (pbcAdicQuotient T d (n + 1) n (Nat.le_succ n))).map
+            (e (n + 1)).hom ≫ (M.normalization (n + 1) n (Nat.le_succ n)).hom := by
+  apply (cancel_epi ((pbcFunctionReduction T d n).hom.app (W.K (n + 1)))).1
+  apply (cancel_epi
+    ((pbcDerivedExtend (pbcAdicQuotient T d (n + 1) n (Nat.le_succ n))).map
+      ((pbcDerivedFunctionRealization T d (n + 1)).map (W.alpha (n + 1)).hom))).1
+  simp only [ Iso.hom_inv_id_app_assoc]
+  rw [← reassoc_of% origin_function_formula T d W n]
+  simpa only [Functor.map_comp, Category.assoc] using h
+
+private theorem origin_reduced_bounds {M : AdicTower T d} {m : ℤ}
+    (N : PbcLevelwiseTruncationData T d M m) (W : PbcWitnessedTower T d)
+    (e : ∀ n, (pbcDerivedFunctionRealization T d n).obj (W.K n) ≅ M.level n) (n : ℕ) :
+    ((pbcWitnessEtaleReduction T d n).obj
+      ((DerivedCategory.TStructure.t.truncLE m).obj (W.origin (n + 1)).L.obj)).IsLE m ∧
+    ((pbcWitnessEtaleReduction T d n).obj
+      ((DerivedCategory.TStructure.t.truncGE (m + 1)).obj
+        (W.origin (n + 1)).L.obj)).IsGE (m + 1) := by
+  let C := comparisonUpperStar (ModuleCat.{u+1} (PbcQuotient d n)) T
+  let F := pbcFunctionRealization T d n
+  let E := pbcDerivedExtend (pbcAdicQuotient T d (n + 1) n (Nat.le_succ n))
+  let X := (DerivedCategory.TStructure.t.truncLE m).obj (W.origin (n + 1)).L.obj
+  let Y := (DerivedCategory.TStructure.t.truncGE (m + 1)).obj (W.origin (n + 1)).L.obj
+  let eX : F.mapDerivedCategory.obj (C.mapDerivedCategory.obj
+      ((pbcWitnessEtaleReduction T d n).obj X)) ≅
+      (DerivedCategory.TStructure.t.truncLE m).obj (M.level n) :=
+    (pbcLevelwiseOriginReduction T d n).symm.app X ≪≫
+      E.mapIso (originFunctionLE T d W e (n + 1)) ≪≫
+        N.lowerNormalization (n + 1) n (Nat.le_succ n)
+  let eY : F.mapDerivedCategory.obj (C.mapDerivedCategory.obj
+      ((pbcWitnessEtaleReduction T d n).obj Y)) ≅
+      (DerivedCategory.TStructure.t.truncGE (m + 1)).obj (M.level n) :=
+    (pbcLevelwiseOriginReduction T d n).symm.app Y ≪≫
+      E.mapIso (originFunctionGE T d W e (n + 1)) ≪≫
+        N.upperNormalization (n + 1) n (Nat.le_succ n)
+  constructor
+  · apply reflectLE C _ m
+    apply reflectLE F _ m
+    exact DerivedCategory.TStructure.t.isLE_of_iso eX.symm m
+  · apply reflectGE C _ (m + 1)
+    apply reflectGE F _ (m + 1)
+    exact DerivedCategory.TStructure.t.isGE_of_iso eY.symm (m + 1)
+
+private theorem origin_normalized_triangle {M : AdicTower T d} {m : ℤ}
+    (N : PbcLevelwiseTruncationData T d M m) (W : PbcWitnessedTower T d)
+    (e : ∀ n, (pbcDerivedFunctionRealization T d n).obj (W.K n) ≅ M.level n) (n : ℕ) :
+    ∃! τ : (pbcWitnessEtaleReduction T d n).mapTriangle.obj
+        ((DerivedCategory.TStructure.t.triangleLEGE m (m + 1) rfl).obj
+          (W.origin (n + 1)).L.obj) ≅
+      (DerivedCategory.TStructure.t.triangleLEGE m (m + 1) rfl).obj (W.origin n).L.obj,
+      τ.hom.hom₂ = (W.beta n).hom := by
+  let E := pbcWitnessEtaleReduction T d n
+  let U := Sheaf.derivedRestrictScalars T.smallEtaleTopology
+    (pbcWitnessQuotientMap d (n + 1) n (Nat.le_succ n))
+  let adj := Adjunction.ofIsRightAdjoint U
+  let : U.leftAdjoint.CommShift ℤ := adj.leftAdjointCommShift ℤ
+  have : adj.CommShift ℤ := adj.commShift_of_rightAdjoint ℤ
+  have : E.IsTriangulated := adj.isTriangulated_leftAdjoint
+  let t := DerivedCategory.TStructure.t
+    (C := Sheaf T.smallEtaleTopology (ModuleCat.{u+1} (PbcQuotient d n)))
+  have hs := E.map_distinguished _
+    (DerivedCategory.TStructure.t.triangleLEGE_distinguished m (m + 1) rfl
+      (W.origin (n + 1)).L.obj)
+  have ht := t.triangleLEGE_distinguished m (m + 1) rfl (W.origin n).L.obj
+  have hb := origin_reduced_bounds T d N W e n
+  obtain ⟨τ,hτ⟩ := t.triangle_iso_exists hs ht (W.beta n) m (m + 1)
+    hb.1 hb.2 (by
+      change t.IsLE ((t.truncLE m).obj (W.origin n).L.obj) m
+      infer_instance) (by
+      change t.IsGE ((t.truncGE (m + 1)).obj (W.origin n).L.obj) (m + 1)
+      infer_instance)
+  refine ⟨τ,hτ,?_⟩
+  intro σ hσ
+  apply Iso.ext
+  exact t.triangle_map_ext hs ht m (m + 1) hb.1 (by
+      change t.IsGE ((t.truncGE (m + 1)).obj (W.origin n).L.obj) (m + 1)
+      infer_instance) (hσ.trans hτ.symm)
+private theorem origin_function_endpointLE {M : AdicTower T d} {m : ℤ}
+    (N : PbcLevelwiseTruncationData T d M m) (hN : PbcIsLevelwiseTruncation T d N)
+    (W : PbcWitnessedTower T d)
+    (e : ∀ n, (pbcDerivedFunctionRealization T d n).obj (W.K n) ≅ M.level n)
+    (he : ∀ n,
+      (pbcDerivedFunctionRealization T d n).map (W.theta n).hom ≫ (e n).hom =
+        (pbcFunctionReduction T d n).inv.app (W.K (n + 1)) ≫
+          (pbcDerivedExtend (pbcAdicQuotient T d (n + 1) n (Nat.le_succ n))).map
+            (e (n + 1)).hom ≫ (M.normalization (n + 1) n (Nat.le_succ n)).hom)
+    (n : ℕ)
+    (τ : (pbcWitnessEtaleReduction T d n).mapTriangle.obj
+        ((DerivedCategory.TStructure.t.triangleLEGE m (m + 1) rfl).obj
+          (W.origin (n + 1)).L.obj) ≅
+      (DerivedCategory.TStructure.t.triangleLEGE m (m + 1) rfl).obj (W.origin n).L.obj)
+    (hτ : τ.hom.hom₂ = (W.beta n).hom) :
+    (pbcLevelwiseOriginReduction T d n).hom.app
+        ((DerivedCategory.TStructure.t.truncLE m).obj (W.origin (n + 1)).L.obj) ≫
+      (((comparisonUpperStar (ModuleCat.{u + 1} (PbcQuotient d n)) T).mapDerivedCategory ⋙
+        pbcDerivedFunctionRealization T d n).map τ.hom.hom₁) ≫
+      (originFunctionLE T d W e n).hom =
+    (pbcDerivedExtend (pbcAdicQuotient T d (n + 1) n (Nat.le_succ n))).map
+      (originFunctionLE T d W e (n + 1)).hom ≫
+        (N.lowerNormalization (n + 1) n (Nat.le_succ n)).hom := by
+  let t := DerivedCategory.TStructure.t (C := pbcModules T ((pbcAdicRings T d).obj (op n)))
+  let G := pbcDerivedExtend (pbcAdicQuotient T d (n + 1) n (Nat.le_succ n))
+  let F := (comparisonUpperStar (ModuleCat.{u + 1} (PbcQuotient d n)) T).mapDerivedCategory ⋙
+    pbcDerivedFunctionRealization T d n
+  let F' := (comparisonUpperStar
+    (ModuleCat.{u + 1} (PbcQuotient d (n + 1))) T).mapDerivedCategory ⋙
+      pbcDerivedFunctionRealization T d (n + 1)
+  let X := (DerivedCategory.TStructure.t.truncLE m).obj (W.origin (n + 1)).L.obj
+  let a₁ := originFunctionLE T d W e (n + 1) (m := m)
+  let a₀ := originFunctionLE T d W e n (m := m)
+  let η := pbcLevelwiseOriginReduction T d n
+  let eX := G.mapIso a₁ ≪≫ N.lowerNormalization (n + 1) n (Nat.le_succ n)
+  have : t.IsLE
+      ((((comparisonUpperStar (ModuleCat.{u + 1} (PbcQuotient d (n + 1))) T).mapDerivedCategory ⋙
+        pbcDerivedFunctionRealization T d (n + 1)) ⋙
+        pbcDerivedExtend (pbcAdicQuotient T d (n + 1) n (Nat.le_succ n))).obj
+          ((DerivedCategory.TStructure.t.truncLE m).obj (W.origin (n + 1)).L.obj)) m :=
+    t.isLE_of_iso eX.symm m
+  apply t.to_truncLE_obj_ext
+  simp only [Category.assoc]
+  rw [originFunctionLE_counit]
+  have hc := τ.hom.comm₁
+  rw [hτ] at hc
+  change (pbcWitnessEtaleReduction T d n).map
+      ((DerivedCategory.TStructure.t.truncLEι m).app (W.origin (n + 1)).L.obj) ≫
+      (W.beta n).hom = τ.hom.hom₁ ≫
+        (DerivedCategory.TStructure.t.truncLEι m).app (W.origin n).L.obj at hc
+  change η.hom.app X ≫ F.map τ.hom.hom₁ ≫
+      F.map ((DerivedCategory.TStructure.t.truncLEι m).app (W.origin n).L.obj) ≫
+      (pbcDerivedFunctionRealization T d n).map (W.alpha n).hom ≫ (e n).hom = _
+  rw [← F.map_comp_assoc, ← hc]
+  simp only [Functor.map_comp, Category.assoc]
+  have hn := η.hom.naturality
+    ((DerivedCategory.TStructure.t.truncLEι m).app (W.origin (n + 1)).L.obj)
+  change G.map (F'.map
+      ((DerivedCategory.TStructure.t.truncLEι m).app (W.origin (n + 1)).L.obj)) ≫
+      η.hom.app (W.origin (n + 1)).L.obj = η.hom.app X ≫
+        F.map ((pbcWitnessEtaleReduction T d n).map
+          ((DerivedCategory.TStructure.t.truncLEι m).app (W.origin (n + 1)).L.obj)) at hn
+  erw [← reassoc_of% hn]
+  erw [origin_function_normalization T d W e he n]
+  rw [← G.map_comp_assoc, ← originFunctionLE_counit T d W e (n + 1)]
+  simp only [Functor.map_comp, Category.assoc]
+  obtain ⟨σ, hσ, _⟩ := hN (n + 1) n (Nat.le_succ n)
+  have hcomm := σ.hom.comm₁
+  rw [hσ.1, hσ.2.1] at hcomm
+  exact congrArg (fun f ↦ G.map a₁.hom ≫ f) hcomm
+
+private theorem origin_function_endpointGE {M : AdicTower T d} {m : ℤ}
+    (N : PbcLevelwiseTruncationData T d M m) (hN : PbcIsLevelwiseTruncation T d N)
+    (W : PbcWitnessedTower T d)
+    (e : ∀ n, (pbcDerivedFunctionRealization T d n).obj (W.K n) ≅ M.level n)
+    (he : ∀ n,
+      (pbcDerivedFunctionRealization T d n).map (W.theta n).hom ≫ (e n).hom =
+        (pbcFunctionReduction T d n).inv.app (W.K (n + 1)) ≫
+          (pbcDerivedExtend (pbcAdicQuotient T d (n + 1) n (Nat.le_succ n))).map
+            (e (n + 1)).hom ≫ (M.normalization (n + 1) n (Nat.le_succ n)).hom)
+    (n : ℕ)
+    (τ : (pbcWitnessEtaleReduction T d n).mapTriangle.obj
+        ((DerivedCategory.TStructure.t.triangleLEGE m (m + 1) rfl).obj
+          (W.origin (n + 1)).L.obj) ≅
+      (DerivedCategory.TStructure.t.triangleLEGE m (m + 1) rfl).obj (W.origin n).L.obj)
+    (hτ : τ.hom.hom₂ = (W.beta n).hom) :
+    (pbcLevelwiseOriginReduction T d n).hom.app
+        ((DerivedCategory.TStructure.t.truncGE (m + 1)).obj (W.origin (n + 1)).L.obj) ≫
+      (((comparisonUpperStar (ModuleCat.{u + 1} (PbcQuotient d n)) T).mapDerivedCategory ⋙
+        pbcDerivedFunctionRealization T d n).map τ.hom.hom₃) ≫
+      (originFunctionGE T d W e n).hom =
+    (pbcDerivedExtend (pbcAdicQuotient T d (n + 1) n (Nat.le_succ n))).map
+      (originFunctionGE T d W e (n + 1)).hom ≫
+        (N.upperNormalization (n + 1) n (Nat.le_succ n)).hom := by
+  let t := DerivedCategory.TStructure.t (C := pbcModules T ((pbcAdicRings T d).obj (op n)))
+  let φ := pbcAdicQuotient T d (n + 1) n (Nat.le_succ n)
+  let G := pbcDerivedExtend φ
+  let F := (comparisonUpperStar (ModuleCat.{u + 1} (PbcQuotient d n)) T).mapDerivedCategory ⋙
+    pbcDerivedFunctionRealization T d n
+  let F' := (comparisonUpperStar
+    (ModuleCat.{u + 1} (PbcQuotient d (n + 1))) T).mapDerivedCategory ⋙
+      pbcDerivedFunctionRealization T d (n + 1)
+  let a₁ := originFunctionGE T d W e (n + 1) (m := m)
+  let a₀ := originFunctionGE T d W e n (m := m)
+  let η := pbcLevelwiseOriginReduction T d n
+  have : (pbcDerivedScalarAdjunction φ).CommShift ℤ :=
+    (pbcDerivedScalarAdjunction φ).commShift_of_rightAdjoint ℤ
+  have : (pbcDerivedRestrict φ).IsTriangulated :=
+    inferInstanceAs ((pbcRestrict φ).mapDerivedCategory.IsTriangulated)
+  have : G.IsTriangulated := (pbcDerivedScalarAdjunction φ).isTriangulated_leftAdjoint
+  let S := (F' ⋙ G).mapTriangle.obj
+    ((DerivedCategory.TStructure.t.triangleLEGE m (m + 1) rfl).obj (W.origin (n + 1)).L.obj)
+  have hS : S ∈ distTriang _ := (F' ⋙ G).map_distinguished _
+    (DerivedCategory.TStructure.t.triangleLEGE_distinguished m (m + 1) rfl
+      (W.origin (n + 1)).L.obj)
+  let eX := G.mapIso (originFunctionLE T d W e (n + 1) (m := m)) ≪≫
+    N.lowerNormalization (n + 1) n (Nat.le_succ n)
+  have hLE : t.IsLE S.obj₁ m := t.isLE_of_iso eX.symm m
+  have hinj {f g : S.obj₃ ⟶ (t.truncGE (m + 1)).obj (M.level n)}
+      (h : S.mor₂ ≫ f = S.mor₂ ≫ g) : f = g := by
+    apply sub_eq_zero.mp
+    obtain ⟨k, hk⟩ := S.yoneda_exact₃ hS (f - g)
+      (by rw [CategoryTheory.Preadditive.comp_sub, h, sub_self])
+    rw [hk, t.zero_of_isLE_of_isGE k (m - 1) (m + 1) (by omega)
+      (t.isLE_shift S.obj₁ m 1 (m - 1)) inferInstance, comp_zero]
+  apply hinj
+  have hc := τ.hom.comm₂
+  rw [hτ] at hc
+  change (pbcWitnessEtaleReduction T d n).map
+      ((DerivedCategory.TStructure.t.truncGEπ (m + 1)).app (W.origin (n + 1)).L.obj) ≫
+      τ.hom.hom₃ = (W.beta n).hom ≫
+        (DerivedCategory.TStructure.t.truncGEπ (m + 1)).app (W.origin n).L.obj at hc
+  change G.map (F'.map
+      ((DerivedCategory.TStructure.t.truncGEπ (m + 1)).app (W.origin (n + 1)).L.obj)) ≫
+      η.hom.app _ ≫ F.map τ.hom.hom₃ ≫ a₀.hom =
+    G.map (F'.map
+      ((DerivedCategory.TStructure.t.truncGEπ (m + 1)).app (W.origin (n + 1)).L.obj)) ≫
+      G.map a₁.hom ≫ (N.upperNormalization (n + 1) n (Nat.le_succ n)).hom
+  have hn := η.hom.naturality
+    ((DerivedCategory.TStructure.t.truncGEπ (m + 1)).app (W.origin (n + 1)).L.obj)
+  change G.map (F'.map
+      ((DerivedCategory.TStructure.t.truncGEπ (m + 1)).app (W.origin (n + 1)).L.obj)) ≫
+      η.hom.app _ = η.hom.app (W.origin (n + 1)).L.obj ≫
+        F.map ((pbcWitnessEtaleReduction T d n).map
+          ((DerivedCategory.TStructure.t.truncGEπ (m + 1)).app
+            (W.origin (n + 1)).L.obj)) at hn
+  rw [reassoc_of% hn]
+  erw [← F.map_comp_assoc, hc]
+  simp only [Functor.map_comp, Category.assoc]
+  rw [originFunctionGE_unit]
+  erw [reassoc_of% origin_function_normalization T d W e he n]
+  obtain ⟨σ, hσ, _⟩ := hN (n + 1) n (Nat.le_succ n)
+  have hcomm := σ.hom.comm₂
+  rw [hσ.2.1, hσ.2.2] at hcomm
+  change G.map ((DerivedCategory.TStructure.t.truncGEπ (m + 1)).app
+      (M.level (n + 1))) ≫ (N.upperNormalization (n + 1) n (Nat.le_succ n)).hom =
+    (M.normalization (n + 1) n (Nat.le_succ n)).hom ≫
+      (DerivedCategory.TStructure.t.truncGEπ (m + 1)).app (M.level n) at hcomm
+  rw [← hcomm]
+  rw [← G.map_comp_assoc]
+  simp only [Category.assoc]
+  rw [← originFunctionGE_unit T d W e (n + 1) (m := m)]
+  simp only [Functor.map_comp, Category.assoc]
+  rfl
+
+private def witnessFromOrigins
+    (K : ∀ n : ℕ, PbcWitnessAmbient T d n)
+    (hb : ∀ n : ℕ, DerivedCategory.TStructure.t.plus
+      ((finiteCoefficientRealization T (PbcQuotient d n)).mapDerivedCategory.obj (K n)))
+    (V : ∀ n : ℕ, EtaleOriginWitness T (PbcQuotient d n)
+      ⟨(finiteCoefficientRealization T (PbcQuotient d n)).mapDerivedCategory.obj (K n), hb n⟩)
+    (b : ∀ n : ℕ, (pbcWitnessEtaleReduction T d n).obj (V (n + 1)).L.obj ≅ (V n).L.obj) :
+    PbcWitnessedTower T d where
+  K := K
+  boundedBelow := hb
+  origin := V
+  beta := b
+  theta n :=
+    (pbcWitnessReduction T d n).mapIso
+      (pbcFixedOriginAlpha T (PbcQuotient d (n + 1)) (K (n + 1)) (hb (n + 1))
+        (V (n + 1))).symm ≪≫
+    (pbcComparisonReduction T (pbcWitnessQuotientMap d (n + 1) n (Nat.le_succ n))).app
+      (V (n + 1)).L.obj ≪≫
+    (comparisonUpperStar (ModuleCat.{u + 1} (PbcQuotient d n)) T).mapDerivedCategory.mapIso
+      (b n) ≪≫
+    pbcFixedOriginAlpha T (PbcQuotient d n) (K n) (hb n) (V n)
+  compatibility n := by
+    dsimp only [pbcWitnessReduction, pbcWitnessEtaleReduction, pbcFixedScalarExtension]
+    simp only [Iso.trans_hom, Functor.mapIso_hom, Iso.symm_hom, Iso.app_hom,
+      ← Functor.map_comp_assoc, Iso.hom_inv_id]
+    erw [CategoryTheory.Functor.map_id]
+    simp only [Category.id_comp, Iso.inv_hom_id_app_assoc]
+
 /-- Under (TC), the levelwise retained origins are normalized compatibly with both
 adic truncations. Their alpha maps are exactly the truncated original maps, and their
 beta maps identify the entire reduced etale truncation triangle with the next one.
@@ -2137,17 +3182,16 @@ without (TC); that case is pbc_levelwise_truncation_origins.
 Source: blueprint order 1429, final paragraph; Stacks Tags 099R, 06YY and 07A4
 (blueprint: prop-weil-pbc-levelwise-truncations).
 
-Proof: exact comparison commutes with cohomology and truncation. The canonical tensor
-comparison, characterized by balancing on K-flat representatives, identifies the
-pullbacks of the etale higher Tor sheaves with those of the pro-etale levels. The latter
-vanish by (TC). The comparison unit is an isomorphism, so inverse image reflects their
-vanishing. Apply the tensor-bound and triangle-uniqueness argument to the etale beta
-maps. This supplies normalized truncated etale triangles and quotient cocycles. Pull
-them back and compose with the truncated alpha. The input normalization compatibility
-identifies the middle component with the original one; uniqueness then identifies both
-end components with the pro-etale truncation normalizations. The fixed function-ring
-realization and tensor mates transport precisely these equations. On pure tensors all
-three-quotient comparisons multiply the same residues, so the full cocycles agree. -/
+Proof: exact faithful comparison reflects the bounds of both reduced etale end
+objects from the supplied normalized pro-etale truncation triangle. The original beta
+and the canonical coefficient tensor comparison identify its middle object. Uniqueness
+of truncation triangles gives the etale endpoint isomorphisms. Their counit and unit
+identities identify their realizations with the supplied lower and upper normalizations.
+Lift the truncated alpha maps through the fully faithful finite-coefficient realization,
+and construct the new witnessed towers with those alpha maps and the etale endpoint
+isomorphisms as beta. Naturality of the canonical comparison proves compatibility. The
+remaining equalities are exactly the component formulas of these constructions.
+-/
 theorem pbc_levelwise_truncation_compatible_origins {M : AdicTower T d} {m : ℤ}
     (_hTor : PbcLevelwiseTorVanishing T d M m)
     (N : PbcLevelwiseTruncationData T d M m) (_hN : PbcIsLevelwiseTruncation T d N)
@@ -2195,6 +3239,116 @@ theorem pbc_levelwise_truncation_compatible_origins {M : AdicTower T d} {m : ℤ
         τ.hom.hom₁ = (pbcTruncatedEtaleNormalizationLE T d W Wminus m hLminus n).hom ∧
         τ.hom.hom₂ = (W.beta n).hom ∧
         τ.hom.hom₃ = (pbcTruncatedEtaleNormalizationGE T d W Wplus m hLplus n).hom) := by
-  sorry
+  classical
+  let ho := pbc_levelwise_truncation_origins T d W m
+  let hbminus n := (ho.1 n).choose
+  let hbplus n := (ho.2.1 n).choose
+  let hLm (n : ℕ) : DerivedCategory.TStructure.t.plus
+      ((DerivedCategory.TStructure.t.truncLE m).obj (W.origin n).L.obj) := by
+    obtain ⟨k, hk⟩ := (W.origin n).L.property
+    have := hk
+    exact ⟨k, inferInstance⟩
+  let hLp (n : ℕ) : DerivedCategory.TStructure.t.plus
+      ((DerivedCategory.TStructure.t.truncGE (m + 1)).obj (W.origin n).L.obj) := by
+    obtain ⟨k, hk⟩ := (W.origin n).L.property
+    have := hk
+    exact ⟨k, inferInstance⟩
+  let Vm (n : ℕ) := originWithAlpha T d n
+    ((DerivedCategory.TStructure.t.truncLE m).obj (W.K n)) (hbminus n)
+    ((DerivedCategory.TStructure.t.truncLE m).obj (W.origin n).L.obj) (hLm n)
+    (pbcLevelwiseOriginLE T d W m n)
+  let Vp (n : ℕ) := originWithAlpha T d n
+    ((DerivedCategory.TStructure.t.truncGE (m + 1)).obj (W.K n)) (hbplus n)
+    ((DerivedCategory.TStructure.t.truncGE (m + 1)).obj (W.origin n).L.obj) (hLp n)
+    (pbcLevelwiseOriginGE T d W m n)
+  let τ n := (origin_normalized_triangle T d N W e n).choose
+  have hτ n : (τ n).hom.hom₂ = (W.beta n).hom :=
+    (origin_normalized_triangle T d N W e n).choose_spec.1
+  let Wminus := witnessFromOrigins T d
+    (fun n ↦ (DerivedCategory.TStructure.t.truncLE m).obj (W.K n)) hbminus Vm
+    (fun n ↦ asIso (τ n).hom.hom₁)
+  let Wplus := witnessFromOrigins T d
+    (fun n ↦ (DerivedCategory.TStructure.t.truncGE (m + 1)).obj (W.K n)) hbplus Vp
+    (fun n ↦ asIso (τ n).hom.hom₃)
+  refine ⟨Wminus, Wplus, fun _ ↦ rfl, fun _ ↦ rfl, fun _ ↦ rfl,
+    fun _ ↦ rfl, ?_, ?_, ?_, ?_, ?_⟩
+  · intro n
+    simp only [eqToHom_refl, CategoryTheory.Functor.map_id,
+      Category.id_comp, Category.comp_id]
+    exact (originWithAlpha_hom T d n _ _ _ _ _).symm
+  · intro n
+    let r := pbcTruncatedRealizationLE T d N W Wminus (fun _ ↦ rfl) e
+    apply origin_function_normalization_of T d Wminus r n
+    have ha (k : ℕ) :
+        (pbcDerivedFunctionRealization T d k).map (Wminus.alpha k).hom ≫ (r k).hom =
+      (originFunctionLE T d W e k).hom ≫ (eqToIso (N.lowerLevel k)).inv := by
+      change (pbcDerivedFunctionRealization T d k).map
+        (pbcFixedOriginAlpha T (PbcQuotient d k) _ _
+          (originWithAlpha T d k _ _ _ _ _)).hom ≫ _ = _
+      rw [originWithAlpha_hom]
+      simp only [r, pbcTruncatedRealizationLE,
+        eqToIso_refl, Functor.mapIso_refl, Iso.refl_trans, originFunctionLE,
+        Iso.trans_hom, Category.assoc, Functor.mapIso_hom, Iso.symm_hom]
+    rw [ha n, ha (n + 1)]
+    have h := origin_function_endpointLE T d N _hN W e _he n (τ n) (hτ n)
+    change (pbcLevelwiseOriginReduction T d n).hom.app
+        ((DerivedCategory.TStructure.t.truncLE m).obj (W.origin (n + 1)).L.obj) ≫
+      (((comparisonUpperStar (ModuleCat.{u + 1} (PbcQuotient d n)) T).mapDerivedCategory ⋙
+        pbcDerivedFunctionRealization T d n).map (τ n).hom.hom₁) ≫
+      (originFunctionLE T d W e n).hom ≫ (eqToIso (N.lowerLevel n)).inv =
+      (pbcDerivedExtend (pbcAdicQuotient T d (n + 1) n (Nat.le_succ n))).map
+        ((originFunctionLE T d W e (n + 1)).hom ≫
+          (eqToIso (N.lowerLevel (n + 1))).inv) ≫
+        (N.lower.normalization (n + 1) n (Nat.le_succ n)).hom
+    simpa only [PbcLevelwiseTruncationData.lowerNormalization, Iso.trans_hom,
+      Functor.mapIso_hom, Iso.symm_hom, Category.assoc, Iso.hom_inv_id,
+      Category.comp_id, Functor.map_comp] using
+      congrArg (fun f ↦ f ≫ (eqToIso (N.lowerLevel n)).inv) h
+  · intro n
+    simp only [eqToHom_refl, CategoryTheory.Functor.map_id,
+      Category.id_comp, Category.comp_id]
+    exact (originWithAlpha_hom T d n _ _ _ _ _).symm
+  · intro n
+    let r := pbcTruncatedRealizationGE T d N W Wplus (fun _ ↦ rfl) e
+    apply origin_function_normalization_of T d Wplus r n
+    have ha (k : ℕ) :
+        (pbcDerivedFunctionRealization T d k).map (Wplus.alpha k).hom ≫ (r k).hom =
+      (originFunctionGE T d W e k).hom ≫ (eqToIso (N.upperLevel k)).inv := by
+      change (pbcDerivedFunctionRealization T d k).map
+        (pbcFixedOriginAlpha T (PbcQuotient d k) _ _
+          (originWithAlpha T d k _ _ _ _ _)).hom ≫ _ = _
+      rw [originWithAlpha_hom]
+      simp only [r, pbcTruncatedRealizationGE,
+        eqToIso_refl, Functor.mapIso_refl, Iso.refl_trans, originFunctionGE,
+        Iso.trans_hom, Category.assoc, Functor.mapIso_hom, Iso.symm_hom]
+    rw [ha n, ha (n + 1)]
+    have h := origin_function_endpointGE T d N _hN W e _he n (τ n) (hτ n)
+    change (pbcLevelwiseOriginReduction T d n).hom.app
+        ((DerivedCategory.TStructure.t.truncGE (m + 1)).obj (W.origin (n + 1)).L.obj) ≫
+      (((comparisonUpperStar (ModuleCat.{u + 1} (PbcQuotient d n)) T).mapDerivedCategory ⋙
+        pbcDerivedFunctionRealization T d n).map (τ n).hom.hom₃) ≫
+      (originFunctionGE T d W e n).hom ≫ (eqToIso (N.upperLevel n)).inv =
+      (pbcDerivedExtend (pbcAdicQuotient T d (n + 1) n (Nat.le_succ n))).map
+        ((originFunctionGE T d W e (n + 1)).hom ≫
+          (eqToIso (N.upperLevel (n + 1))).inv) ≫
+        (N.upper.normalization (n + 1) n (Nat.le_succ n)).hom
+    simpa only [PbcLevelwiseTruncationData.upperNormalization, Iso.trans_hom,
+      Functor.mapIso_hom, Iso.symm_hom, Category.assoc, Iso.hom_inv_id,
+      Category.comp_id, Functor.map_comp] using
+      congrArg (fun f ↦ f ≫ (eqToIso (N.upperLevel n)).inv) h
+  · intro n
+    refine ⟨τ n, ?_, ?_⟩
+    · refine ⟨?_, hτ n, ?_⟩
+      · change (τ n).hom.hom₁ =
+          (pbcWitnessEtaleReduction T d n).map (𝟙 _) ≫ (τ n).hom.hom₁ ≫ 𝟙 _
+        rw [CategoryTheory.Functor.map_id, Category.id_comp, Category.comp_id]
+      · change (τ n).hom.hom₃ =
+          (pbcWitnessEtaleReduction T d n).map (𝟙 _) ≫ (τ n).hom.hom₃ ≫ 𝟙 _
+        rw [CategoryTheory.Functor.map_id, Category.id_comp, Category.comp_id]
+    · intro σ hσ
+      exact (origin_normalized_triangle T d N W e n).choose_spec.2 σ hσ.2.1
+
+
+end OriginNormalizationProof
 
 end AlgebraicGeometry.Scheme

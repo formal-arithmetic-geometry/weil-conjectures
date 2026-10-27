@@ -1,0 +1,309 @@
+{
+ "id": "lem-sfb-normal-affine-rational-indeterminacy",
+ "kind": "statement",
+ "title": "Affine-target indeterminacy on a normal Noetherian integral scheme",
+ "statement": "Let $W$ be a nonempty integral scheme [def-pc-integral-scheme] which is Noetherian (locally Noetherian [pqf-def-locnoeth] and quasi-compact) and normal (every local ring is an integrally closed domain [def-weil-pbc-normal-ring]). Let $A$ be any commutative ring and let $H=\\operatorname{Spec}A$ [def-weil-affine-spectrum]. Let $D\\subseteq W$ be a dense open subscheme and let $h:D\\to H$ be a morphism. Define the open subset\n$$E=\\bigcup\\{V\\subseteq W\\text{ open}:\\ \\exists h_V:V\\to H,\\quad h_V|_{V\\cap D}=h|_{V\\cap D}\\}.$$\nThere is a unique morphism $h_E:E\\to H$ restricting to every such $h_V$. Every irreducible component of the closed subset $W\\setminus E$ has a generic point $\\xi$ with $\\dim\\mathcal O_{W,\\xi}=1$ [def-weil-irreducible-components, def-sc-generic-point, def-weil-pbc-krull-dimension-ring]. The complement may be empty. No field, finite generation of $A$, or factoriality of $W$ is assumed.",
+ "source": {
+  "document": "literature/bosch-lutkebohmert-raynaud-neron-models.pdf",
+  "place": "BLR §4.4 Lemma 2, printed p.109 (PDF p.115). Supporting algebra: Stacks Tag 031T, algebra.tex, label lemma-normal-domain-intersection-localizations-height-1, part (2). Primary scan read online at https://www.math.stonybrook.edu/~kamenova/homepage_files/Bosch_Raynaud_Neron_Model_tc.pdf; local copy WANTED."
+ },
+ "stmt_deps": [
+  "def-pc-integral-scheme",
+  "pqf-def-locnoeth",
+  "def-weil-pbc-normal-ring",
+  "def-weil-affine-spectrum",
+  "def-weil-irreducible-components",
+  "def-sc-generic-point",
+  "def-weil-pbc-krull-dimension-ring"
+ ],
+ "proof": [
+  {
+   "text": "Write $\\eta$ for the generic point of $W$ and $K=\\mathcal O_{W,\\eta}$. By [lem-sc-integral-scheme-stalks-in-function-field], $\\eta$ belongs to every nonempty open and sections on any such open inject into $K$. The affine adjunction [lem-a1-locally-ringed-space-affine-adjunction] associates to $h$ a ring map $A\\to\\Gamma(D,\\mathcal O_W)$, hence a map $\\varphi:A\\to K$. Every extension $h_V$ in the definition of $E$ induces the same generic map: if $V$ is nonempty then $V\\cap D$ contains $\\eta$. On each nonempty overlap $V\\cap V'$, injectivity into $K$ makes their coordinate ring maps equal; the adjunction makes their morphisms equal. Empty overlaps have a unique morphism. Now [lem-weil-pbc-scheme-morphism-gluing] gives a unique $h_E$ restricting to all $h_V$. Since $D$ is one of these opens, $D\\subseteq E$, and $h_E|_D=h$.",
+   "uses": [
+    "lem-sc-integral-scheme-stalks-in-function-field",
+    "lem-a1-locally-ringed-space-affine-adjunction",
+    "lem-weil-pbc-scheme-morphism-gluing"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 031T, lemma-normal-domain-intersection-localizations-height-1 (2); affine-coordinate expansion of BLR §4.4 Lemma 2, printed p.109 (online scan PDF p.115)."
+   }
+  },
+  {
+   "text": "Put $Z=W\\setminus E$. If $Z$ is empty there is nothing further to prove. Otherwise [lem-sc-noetherian-closed-subset-finite-components] writes $Z=C_1\\cup\\cdots\\cup C_r$ as its distinct irreducible components. Fix one, $C=C_i$. By [lem-sc-scheme-sober] it has a generic point $\\xi$. This point lies in none of the other $C_j$: membership would imply $C=\\overline{\\{\\xi\\}}\\subseteq C_j$, contrary to maximality and distinctness. Choose an affine neighbourhood $U$ of $\\xi$ inside $W\\setminus\\bigcup_{j\\ne i}C_j$. Thus $Z\\cap U=C\\cap U$. Write $R=\\Gamma(U,\\mathcal O_W)$ and $\\mathfrak p$ for the prime of $\\xi$ under $U\\cong\\operatorname{Spec}R$. On this chart $C\\cap U=V(\\mathfrak p)$, directly from the Zariski closure of a point. By [lem-weil-pbc-affine-open-stalk-localization], $\\mathcal O_{W,\\xi}\\cong R_{\\mathfrak p}$.",
+   "uses": [
+    "lem-sc-noetherian-closed-subset-finite-components",
+    "lem-sc-scheme-sober",
+    "lem-weil-pbc-affine-open-stalk-localization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 031T, lemma-normal-domain-intersection-localizations-height-1 (2); affine-coordinate expansion of BLR §4.4 Lemma 2, printed p.109 (online scan PDF p.115)."
+   }
+  },
+  {
+   "text": "The ring $R$ is a domain by integrality and is Noetherian by [pqf-lem-affine-open-locnoeth]. Identify $\\operatorname{Frac}R$ with $K$ by [lem-sc-integral-function-field-affine-fraction]. It is also integrally closed: for $a/b\\in\\operatorname{Frac}R$, $b\\ne0$, integral over $R$, regard $a/b$ as the section on the principal open $D_U(b)$ using [lem-weil-pbc-affine-open-section-vanishing-prime]. This open contains $\\eta$, so is dense in $U$. Apply [lem-sbc-normal-dense-open-integral-section] with ambient scheme $U$, dense open $D_U(b)$ and affine open $U$ itself. Its local normality and locally Noetherian hypotheses are inherited from $W$. It extends $a/b$ to $r\\in R$; equality in $K$ gives $r=a/b$.",
+   "uses": [
+    "pqf-lem-affine-open-locnoeth",
+    "lem-sc-integral-function-field-affine-fraction",
+    "lem-weil-pbc-affine-open-section-vanishing-prime",
+    "lem-sbc-normal-dense-open-integral-section"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 031T, lemma-normal-domain-intersection-localizations-height-1 (2); affine-coordinate expansion of BLR §4.4 Lemma 2, printed p.109 (online scan PDF p.115)."
+   }
+  },
+  {
+   "text": "Apply [lem-per-reflexive-height-one-intersection-criterion] to the $R$-module $M=R$. This is finite, torsion free, and reflexive: $\\operatorname{Hom}_R(R,R)\\cong R$ sends $f$ to $f(1)$, with inverse $c\\mapsto(r\\mapsto rc)$; applying this twice identifies the bidual evaluation with the identity of $R$. The theorem therefore gives $R=\\bigcap_{\\operatorname{ht}\\mathfrak q=1}R_{\\mathfrak q}$ inside $K$, including the empty-intersection convention. This is precisely the scalar intersection assertion of Tag 031T(2), obtained from an existing more general node rather than introducing a duplicate.",
+   "uses": [
+    "lem-per-reflexive-height-one-intersection-criterion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 031T, lemma-normal-domain-intersection-localizations-height-1 (2); affine-coordinate expansion of BLR §4.4 Lemma 2, printed p.109 (online scan PDF p.115)."
+   }
+  },
+  {
+   "text": "The prime $\\mathfrak p$ is nonzero: otherwise $\\xi=\\eta$, but $\\eta\\in D\\subseteq E$ whereas $\\xi\\in Z$. Suppose some nonzero prime lies strictly below $\\mathfrak p$. For every height-one prime $\\mathfrak q$ of $R$ one then has $\\mathfrak p\\not\\subseteq\\mathfrak q$: inclusion would give a chain of at least two strict prime inclusions below $\\mathfrak q$. Consequently its point $x_{\\mathfrak q}$ does not belong to $V(\\mathfrak p)=Z\\cap U$, and lies in $E$. For every $a\\in A$, the section $h_E^*(a)$ has a germ at $x_{\\mathfrak q}$ whose image in $K$ is $\\varphi(a)$. By [lem-weil-pbc-affine-open-stalk-localization], this means $\\varphi(a)\\in R_{\\mathfrak q}$. Step 4 now gives $\\varphi(a)\\in R$ for every $a\\in A$.",
+   "uses": [
+    "lem-weil-pbc-affine-open-stalk-localization"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 031T, lemma-normal-domain-intersection-localizations-height-1 (2); affine-coordinate expansion of BLR §4.4 Lemma 2, printed p.109 (online scan PDF p.115)."
+   }
+  },
+  {
+   "text": "Because $R\\hookrightarrow K$ is injective, the unique preimages of the elements $\\varphi(a)$ define a unital ring homomorphism $\\varphi_U:A\\to R$: addition, multiplication and the unit can all be checked after this injection. By [lem-a1-locally-ringed-space-affine-adjunction] it defines $h_U:U\\to H$. On $U\\cap D$, its coordinate maps and those of $h$ have the same generic germs $\\varphi(a)$; injectivity from [lem-sc-integral-scheme-stalks-in-function-field] and the affine adjunction show equality there. Hence $U$ occurs in the defining union for $E$, contradicting $\\xi\\in U\\setminus E$. There is therefore no nonzero prime strictly below the nonzero $\\mathfrak p$. The only chains of primes below $\\mathfrak p$ have length at most one, and $(0)\\subsetneq\\mathfrak p$ has length one. By [lem-weil-pbc-localization-dimension-chains-below-prime] and the stalk identification in step 2, $\\dim\\mathcal O_{W,\\xi}=1$. This applies to every component of $Z$.",
+   "uses": [
+    "lem-a1-locally-ringed-space-affine-adjunction",
+    "lem-sc-integral-scheme-stalks-in-function-field",
+    "lem-weil-pbc-localization-dimension-chains-below-prime"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 031T, lemma-normal-domain-intersection-localizations-height-1 (2); affine-coordinate expansion of BLR §4.4 Lemma 2, printed p.109 (online scan PDF p.115)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sc-integral-scheme-stalks-in-function-field",
+  "lem-a1-locally-ringed-space-affine-adjunction",
+  "lem-weil-pbc-scheme-morphism-gluing",
+  "lem-sc-noetherian-closed-subset-finite-components",
+  "lem-sc-scheme-sober",
+  "lem-weil-pbc-affine-open-stalk-localization",
+  "pqf-lem-affine-open-locnoeth",
+  "lem-sc-integral-function-field-affine-fraction",
+  "lem-weil-pbc-affine-open-section-vanishing-prime",
+  "lem-sbc-normal-dense-open-integral-section",
+  "lem-per-reflexive-height-one-intersection-criterion",
+  "lem-weil-pbc-localization-dimension-chains-below-prime"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tag 031T(2), expanded into the affine-coordinate proof of BLR §4.4 Lemma 2; BLR primary scan read online, local copy WANTED. Existing reflexive-module intersection criterion specializes to the scalar identity."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "rational.*section|section.*rational|indeterminacy|codimension",
+   "results": "{\"t\": \"2026-10-24T08:47:27Z\", \"tool\": \"grep\", \"query\": \"rational.*section|section.*rational|indeterminacy|codimension\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 3, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/OrderOfVanishing.lean\", \"Mathlib/AlgebraicGeometry/AlgebraicCycle/Basic.lean\", \"Mathlib/AlgebraicGeometry/AlgebraicCycle/Basic.lean\"], \"digest\": \"5fbba5235fd66871\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: rational-map representatives and domains, smooth charts, zero loci and analytic meromorphic divisors do not assert the normal-scheme affine indeterminacy theorem or the smooth-section codimension intersection bound."
+  },
+  {
+   "tool": "grep",
+   "query": "indeterminacy|pure.*codimension|normal.*rational|rational.*normal",
+   "results": "{\"t\": \"2026-10-24T08:49:50Z\", \"tool\": \"grep\", \"query\": \"indeterminacy|pure.*codimension|normal.*rational|rational.*normal\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: rational-map representatives and domains, smooth charts, zero loci and analytic meromorphic divisors do not assert the normal-scheme affine indeterminacy theorem or the smooth-section codimension intersection bound."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The indeterminacy locus of a rational map from a normal noetherian scheme into an affine scheme is empty or pure codimension one",
+   "results": "{\"t\": \"2026-10-24T08:49:51Z\", \"tool\": \"leansearch\", \"query\": \"The indeterminacy locus of a rational map from a normal noetherian scheme into an affine scheme is empty or pure codimension one\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.RationalMap\", \"AlgebraicGeometry.Scheme.PartialMap.noConfusionType\", \"AlgebraicGeometry.Scheme.RationalMap.dense_domain\", \"AlgebraicGeometry.Scheme.RationalMap.ofFunctionField\", \"AlgebraicGeometry.Scheme.RationalMap.IsOver.exists_partialMap_over\", \"AlgebraicGeometry.Scheme.PartialMap.fromFunctionField_restrict\", \"AlgebraicGeometry.Scheme.RationalMap.IsOver\", \"AlgebraicGeometry.Scheme.RationalMap.IsOver.mk\"], \"digest\": \"bf6d1ca9c20a0362\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: rational-map representatives and domains, smooth charts, zero loci and analytic meromorphic divisors do not assert the normal-scheme affine indeterminacy theorem or the smooth-section codimension intersection bound."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A rational map from a normal scheme to Spec A extends over every subset where its coordinate functions have no height one poles",
+   "results": "{\"t\": \"2026-10-24T08:49:56Z\", \"tool\": \"leanfinder\", \"query\": \"A rational map from a normal scheme to Spec A extends over every subset where its coordinate functions have no height one poles\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.RationalMap.fromFunctionField\", \"AlgebraicGeometry.Scheme.RationalMap.ofFunctionField\", \"AlgebraicGeometry.Scheme.PartialMap.fromFunctionField\", \"AlgebraicGeometry.Scheme.RationalMap.toPartialMap\", \"AlgebraicGeometry.Scheme.RationalMap.fromFunctionField_ofFunctionField\", \"AlgebraicGeometry.Scheme.RationalMap.IsOver.exists_partialMap_over\", \"AlgebraicGeometry.Scheme.RationalMap.exists_partialMap_over\", \"AlgebraicGeometry.Scheme.PartialMap.toRationalMap\"], \"digest\": \"da523648aa6f06f8\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: rational-map representatives and domains, smooth charts, zero loci and analytic meromorphic divisors do not assert the normal-scheme affine indeterminacy theorem or the smooth-section codimension intersection bound."
+  },
+  {
+   "tool": "grep",
+   "query": "RationalMap|normal.*codimension|height.*one",
+   "results": "{\"t\": \"2026-10-24T09:02:11Z\", \"tool\": \"grep\", \"query\": \"RationalMap|normal.*codimension|height.*one\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/EllipticCurve/Reduction.lean\", \"Mathlib/AlgebraicGeometry/EllipticCurve/Reduction.lean\", \"Mathlib/AlgebraicGeometry/RationalMap.lean\", \"Mathlib/AlgebraicGeometry/EllipticCurve/LFunction.lean\", \"Mathlib/AlgebraicGeometry/OrderOfVanishing.lean\", \"Mathlib/AlgebraicGeometry/OrderOfVanishing.lean\", \"Mathlib/AlgebraicGeometry/OrderOfVanishing.lean\", \"Mathlib/AlgebraicGeometry/OrderOfVanishing.lean\"], \"digest\": \"d9810d0714cd03f4\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: rational-map representatives and domains, smooth charts, zero loci and analytic meromorphic divisors do not assert the normal-scheme affine indeterminacy theorem or the smooth-section codimension intersection bound."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A rational map from a normal Noetherian integral scheme into an affine scheme is defined everywhere if it is defined at all codimension at most one points",
+   "results": "{\"t\": \"2026-10-24T09:02:12Z\", \"tool\": \"leansearch\", \"query\": \"A rational map from a normal Noetherian integral scheme into an affine scheme is defined everywhere if it is defined at all codimension at most one points\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.RationalMap\", \"AlgebraicGeometry.Scheme.RationalMap.mem_domain\", \"AlgebraicGeometry.Scheme.RationalMap.ofFunctionField\", \"AlgebraicGeometry.Scheme.PartialMap.noConfusionType\", \"AlgebraicGeometry.Scheme.RationalMap.IsOver.mk\", \"AlgebraicGeometry.Scheme.RationalMap.domain\", \"AlgebraicGeometry.Scheme.RationalMap.dense_domain\", \"AlgebraicGeometry.Scheme.Hom.toPartialMap\"], \"digest\": \"d0fa92db6f64bb1d\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: rational-map representatives and domains, smooth charts, zero loci and analytic meromorphic divisors do not assert the normal-scheme affine indeterminacy theorem or the smooth-section codimension intersection bound."
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Scheme.RationalMap, IsIntegral, IsNoetherian",
+   "results": "{\"t\": \"2026-10-24T09:02:12Z\", \"tool\": \"loogle\", \"query\": \"AlgebraicGeometry.Scheme.RationalMap, IsIntegral, IsNoetherian\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: rational-map representatives and domains, smooth charts, zero loci and analytic meromorphic divisors do not assert the normal-scheme affine indeterminacy theorem or the smooth-section codimension intersection bound."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a rational map from a normal Noetherian integral scheme to an affine scheme, the indeterminacy locus has pure codimension one",
+   "results": "{\"t\": \"2026-10-24T09:02:13Z\", \"tool\": \"leanfinder\", \"query\": \"For a rational map from a normal Noetherian integral scheme to an affine scheme, the indeterminacy locus has pure codimension one\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.RationalMap.dense_domain\", \"AlgebraicGeometry.Scheme.RationalMap.domain\", \"AlgebraicGeometry.Scheme.RationalMap.fromFunctionField\", \"AlgebraicGeometry.Scheme.RationalMap\", \"AlgebraicGeometry.Scheme.RationalMap.toPartialMap\", \"AlgebraicGeometry.Scheme.PartialMap.dense_domain\", \"AlgebraicGeometry.Scheme.RationalMap.ofFunctionField\", \"AlgebraicGeometry.Scheme.RationalMap.fromFunctionField_ofFunctionField\"], \"digest\": \"0fe56aace7fbce01\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: rational-map representatives and domains, smooth charts, zero loci and analytic meromorphic divisors do not assert the normal-scheme affine indeterminacy theorem or the smooth-section codimension intersection bound."
+  },
+  {
+   "tool": "grep",
+   "query": "indeterminacy|Hartogs|rational.*normal|normal.*rational",
+   "results": "{\"t\": \"2026-10-24T09:30:09Z\", \"tool\": \"grep\", \"query\": \"indeterminacy|Hartogs|rational.*normal|normal.*rational\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected RationalMap dense_domain, domain, mem_domain and fromFunctionField/ofFunctionField; none states normal-scheme affine-target pure codimension-one indeterminacy. ofFunctionField assumes a locally finite type target, unavailable here."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A rational map from a normal noetherian scheme to an affine scheme is defined outside a pure codimension one closed subset",
+   "results": "{\"t\": \"2026-10-24T09:30:09Z\", \"tool\": \"leansearch\", \"query\": \"A rational map from a normal noetherian scheme to an affine scheme is defined outside a pure codimension one closed subset\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.RationalMap\", \"AlgebraicGeometry.Scheme.RationalMap.IsOver.mk\", \"AlgebraicGeometry.Scheme.PartialMap.noConfusionType\", \"AlgebraicGeometry.Scheme.RationalMap.dense_domain\", \"AlgebraicGeometry.Scheme.RationalMap.IsOver\", \"AlgebraicGeometry.Scheme.RationalMap.domain\", \"AlgebraicGeometry.Scheme.RationalMap.mem_domain\", \"AlgebraicGeometry.Scheme.RationalMap.ofFunctionField\"], \"digest\": \"aaa562a3c7106e9f\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected RationalMap dense_domain, domain, mem_domain and fromFunctionField/ofFunctionField; none states normal-scheme affine-target pure codimension-one indeterminacy. ofFunctionField assumes a locally finite type target, unavailable here."
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Scheme.RationalMap, IsIntegral",
+   "results": "{\"t\": \"2026-10-24T09:30:09Z\", \"tool\": \"loogle\", \"query\": \"AlgebraicGeometry.Scheme.RationalMap, IsIntegral\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected RationalMap dense_domain, domain, mem_domain and fromFunctionField/ofFunctionField; none states normal-scheme affine-target pure codimension-one indeterminacy. ofFunctionField assumes a locally finite type target, unavailable here."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The complement of the maximal domain of a rational map from a normal Noetherian integral scheme to an affine scheme has pure codimension one",
+   "results": "{\"t\": \"2026-10-24T09:30:15Z\", \"tool\": \"leanfinder\", \"query\": \"The complement of the maximal domain of a rational map from a normal Noetherian integral scheme to an affine scheme has pure codimension one\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.RationalMap.dense_domain\", \"AlgebraicGeometry.Scheme.RationalMap.domain\", \"AlgebraicGeometry.Scheme.PartialMap.dense_domain\", \"AlgebraicGeometry.Scheme.PartialMap.le_domain_toRationalMap\", \"AlgebraicGeometry.Scheme.Hom.toPartialMap_domain\", \"AlgebraicGeometry.instIsDominantιCoborderRange\", \"AlgebraicGeometry.Scheme.RationalMap.mem_domain\", \"AlgebraicGeometry.Scheme.Hom.instIsDominantToNormalization\"], \"digest\": \"ef371aae2fe30cc9\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected RationalMap dense_domain, domain, mem_domain and fromFunctionField/ofFunctionField; none states normal-scheme affine-target pure codimension-one indeterminacy. ofFunctionField assumes a locally finite type target, unavailable here."
+  },
+  {
+   "tool": "grep",
+   "query": "RationalMap|IsIntegrallyClosed",
+   "results": "{\"t\": \"2026-10-24T09:37:01Z\", \"tool\": \"grep\", \"query\": \"RationalMap|IsIntegrallyClosed\", \"sub\": \"AlgebraicGeometry/RationalMap.lean\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"8\"], \"digest\": \"a0da3e9975f7a8b2\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected RationalMap dense_domain, domain, mem_domain and fromFunctionField/ofFunctionField; none states normal-scheme affine-target pure codimension-one indeterminacy. ofFunctionField assumes a locally finite type target, unavailable here."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a normal noetherian domain every rational function regular at all height one primes is in the ring, so affine target rational maps extend across codimension two",
+   "results": "{\"t\": \"2026-10-24T09:37:03Z\", \"tool\": \"leanfinder\", \"query\": \"For a normal noetherian domain every rational function regular at all height one primes is in the ring, so affine target rational maps extend across codimension two\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.RationalMap.dense_domain\", \"AlgebraicGeometry.Scheme.RationalMap.fromFunctionField\", \"AlgebraicGeometry.Scheme.PartialMap.fromFunctionField\", \"AlgebraicGeometry.Scheme.RationalMap.exists_rep\", \"AlgebraicGeometry.Scheme.RationalMap.ofFunctionField\", \"AlgebraicGeometry.Scheme.RationalMap.fromFunctionField_toRationalMap\", \"AlgebraicGeometry.Scheme.RationalMap.mem_domain\", \"AlgebraicGeometry.Scheme.RationalMap.fromFunctionField_ofFunctionField\"], \"digest\": \"5fc451dece25c9f0\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected RationalMap dense_domain, domain, mem_domain and fromFunctionField/ofFunctionField; none states normal-scheme affine-target pure codimension-one indeterminacy. ofFunctionField assumes a locally finite type target, unavailable here."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-smooth-section-rational-extension",
+  "date": "2026-10-24",
+  "group": "Q09"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), recorded trait-extension prerequisite below the alteration route; BLR 10.1 Proposition 2 and its proof, printed p.290 (PDF p.296): essentially smooth DVR criterion, via Weil extension. Supporting extension step: BLR §10.1 Proposition 2, converse, invokes §4.4 Theorem 1 to extend the fibrewise dense rational map across codimension at least two. BLR §4.4 Theorem 1, diagonal-reduction paragraph: regularity near a smooth section from regularity at its codimension-at-most-one points and agreement with a given morphism along the section. Supporting input: BLR §4.4 Lemma 2, printed p.109 (PDF p.115). Supporting algebra: Stacks Tag 031T, algebra.tex, label lemma-normal-domain-intersection-localizations-height-1, part (2).",
+   "via": [
+    "lem-sfb-smooth-section-rational-extension",
+    "lem-sfb-relative-group-weil-extension",
+    "lem-sfb-neron-dvr-point-criterion",
+    "lem-sfb-split-torus-extension-neron-lft",
+    "lem-sfb-semiabelian-neron-lft-existence",
+    "lem-sfb-trait-semiabelian-hom-extension",
+    "lem-sfb-semiabelian-generic-graph-proper",
+    "lem-sfb-normal-semiabelian-hom-extension",
+    "lem-sfb-symmetric-line-power-prolongation",
+    "lem-sfb-normal-symmetric-cubical-extension",
+    "lem-sfb-symmetric-ample-power-extension",
+    "lem-sfb-regular-group-generic-ampleness",
+    "lem-sfb-stable-picard-theta-ampleness",
+    "lem-sfb-stable-relative-picard-kummer",
+    "lem-sfb-stable-level-versal-branch-freeness",
+    "lem-sfb-stable-abelian-level-normalization",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-normal-affine-rational-indeterminacy",
+  "worker": "stage1",
+  "summary": "Q67 supplies the complete affine-coordinate proof, retaining the full statement and using only existing nodes. Generic-stalk injectivity and the affine adjunction give compatibility and gluing. Isolate one boundary component on an affine chart, prove its ring normal by integral-section extension, specialize the existing reflexive-module criterion to R, and extend every coordinate simultaneously if the boundary generic prime has height greater than one. No finite generation of A or factoriality is used; no new nodes are needed.",
+  "blueprint": "det-thm-sf-ctf-stability-direct-images, proof (3), recorded trait-extension prerequisite below the alteration route; BLR 10.1 Proposition 2 and its proof, printed p.290 (PDF p.296): essentially smooth DVR criterion, via Weil extension. Supporting extension step: BLR §10.1 Proposition 2, converse, invokes §4.4 Theorem 1 to extend the fibrewise dense rational map across codimension at least two. BLR §4.4 Theorem 1, diagonal-reduction paragraph: regularity near a smooth section from regularity at its codimension-at-most-one points and agreement with a given morphism along the section. Supporting input: BLR §4.4 Lemma 2, printed p.109 (PDF p.115). Supporting algebra: Stacks Tag 031T, algebra.tex, label lemma-normal-domain-intersection-localizations-height-1, part (2). The current latest blueprint direct-image proof (3) supplies the parent route; this split expands its recorded BLR affine-indeterminacy prerequisite. The ancestor tool prints None, matching the inherited null from.node.",
+  "tool_uses": [
+   {
+    "node": "lem-sbc-normal-dense-open-integral-section",
+    "why": "Generic integral-section extension proves the affine chart ring is integrally closed; this is a general normal-scheme tool and does not replace a unit step."
+   },
+   {
+    "node": "lem-per-reflexive-height-one-intersection-criterion",
+    "why": "The general reflexive-module intersection criterion specialized to the module R gives the scalar height-one intersection identity needed by BLR; no node in this unit states that tool."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sbc-normal-dense-open-integral-section",
+  "lem-per-reflexive-height-one-intersection-criterion"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q67-c8ba5e0ac",
+  "group": "Q67",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q67-c8ba5e0ac (reviewer sub-agent of L); spot-checked: PASS with no changes. Shape: one commit; only the item and its report change. Against clones/live the statement, stmt_deps, source and blueprint are unchanged. No new nodes. The step uses equal proof_deps (12 nodes), and a DFS over the snapshot DAG from the item finds no cycle. Read: Stacks algebra.tex 031T (lemma-normal-domain-intersection-localizations-height-1) part (2), and all 12 cited statements. BLR §4.4 Lemma 2 is not in the local literature (WANTED); the worker read it online. The item matches BLR for integral W with any A. Step 1: generic-stalk injectivity plus the naturality of the affine adjunction make the extensions agree on overlaps; gluing gives h_E, with h_E|_D = h. Step 2: finitely many components of the closed W∖E (W Noetherian); generic point ξ lies in none of the other components; an affine U in their complement gives Z∩U = V(p) and O_{W,ξ} ≅ R_p. Step 3: R is a Noetherian domain with Frac R = K. R is integrally closed by lem-sbc-normal-dense-open-integral-section applied with X = U and the dense D(b), since O(D(b)) = R_b ⊂ K. Step 4: the reflexive criterion (Stacks 0AVB) applied to M = R gives 031T(2), including the empty intersection. No closer scalar node exists: function-field-sections-glue is plain sheaf gluing, and the serre-s2 node needs S2. Step 5 is genuinely elementary: p ≠ 0; if a nonzero prime lay strictly below p, every height-one q would avoid V(p), so x_q ∈ E and φ(a) ∈ R_q. Step 6: φ_U : A → R gives an h_U that agrees with h on U∩D, contradicting ξ ∉ E. So ht p = 1, and dim O_{W,ξ} = 1 by the chains-below-prime node. Small cases checked: A² with 1/x; a regular function on A²∖0, which extends; the cone xy = z² with x/z, whose undefined locus is the line y = z = 0; a constant map; A = 0. The worker's tool_uses (the dense-open integral-section node and the reflexive criterion) are both generic algebra tools; I searched for a Mathlib-status alternative and found none, so I accept them. One minor deviation: the worker wrote tool_uses itself instead of leaving them to the maintainer (C8); the content is right, so I made no change. Details are in review.md."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.NormalAffineRationalIndeterminacy",
+  "declaration": "AlgebraicGeometry.Scheme.existsUnique_affine_extension_and_indeterminacy_dim_one",
+  "file": "lean/Sheaf/AlgebraicGeometry/NormalAffineRationalIndeterminacy.lean",
+  "statement": "theorem existsUnique_affine_extension_and_indeterminacy_dim_one (W : Scheme.{u}) [IsIntegral W] [IsNoetherian W] (_hnormal : ∀ x : W, IsDomain (W.presheaf.stalk x) ∧ IsIntegrallyClosed (W.presheaf.stalk x)) (A : Type u) [CommRing A] (D : W.Opens) (_hD : Dense (D : Set W)) (h : D.toScheme ⟶ Spec (CommRingCat.of A)) (E : W.Opens) (_hE : E = sSup {V : W.Opens | ∃ hV : V.toScheme ⟶ Spec (CommRingCat.of A), W.homOfLE (inf_le_left : V ⊓ D ≤ V) ≫ hV = W.homOfLE (inf_le_right : V ⊓ D ≤ D) ≫ h}) : (∃! hE : E.toScheme ⟶ Spec (CommRingCat.of A), ∀ (V : W.Opens) (hV : V.toScheme ⟶ Spec (CommRingCat.of A)), W.homOfLE (inf_le_left : V ⊓ D ≤ V) ≫ hV = W.homOfLE (inf_le_right : V ⊓ D ≤ D) ≫ h → ∃ i : V ≤ E, W.homOfLE i ≫ hE = hV) ∧ ∀ C ∈ irreducibleComponents {x : W // x ∉ E}, ∃ ξ : W, IsGenericPoint ξ (Subtype.val '' C) ∧ ringKrullDim (W.presheaf.stalk ξ) = 1",
+  "branch": "newtargets-dag",
+  "by": "Q92",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-62a4df90e",
+  "group": "Q92",
+  "result": "pass",
+  "note": "Read the node, the 7 stmt_dep records, Mathlib Scheme.homOfLE and IsNoetherian, the module and report. lean.statement matches the file verbatim; the node is unchanged except lean; one sorry theorem with no definitions or new nodes; docstrings carry source, blueprint and the 6 proof steps; private proof-dep imports exist in live. Clauses: IsIntegral (nonempty), IsNoetherian (= locally Noetherian + compact), inline stalk normality as the record prescribes, arbitrary CommRing A in universe u, dense D, E pinned by an sSup equality to the node's union. The ∃! hE clause with a Prop inclusion witness is the right strength (the V's cover E, and V = D gives hE|D = h). Components of the subspace {x // x ∉ E} have a generic point via val '' C with ringKrullDim of the stalk = 1. Empty complement is vacuous. Edge cases checked: field, A = 0, empty V, 1/x on the plane, normal cone. No findings; no compile needed."
+ }
+}

@@ -1,0 +1,353 @@
+{
+ "id": "lem-weil-pbc-derived-finite-evaluation-normalization",
+ "kind": "statement",
+ "title": "Universal-counit normalized derived finite evaluation",
+ "statement": "Let $g:T'\\to T$ be a morphism of schemes. Use the Noetherian adic datum $A,I,P_n=A/I^n$, $S_{W,n}=(P_n)_W$, $B_W=\\varprojlim_n S_{W,n}$, projections $\\pi_{W,n}:B_W\\to S_{W,n}$ and quotient maps $q_{W,b,a}:S_{W,b}\\to S_{W,a}$ of [def-weil-pbc-adic-coefficient-datum], for $W=T,T'$ and positive indices. Use completed-coefficient module pullback $G=g^*$ and its strict-tower version $G^{\\mathrm{Tow}}$ of [def-weil-pbc-completed-pullback], and the fixed finite interfaces of [def-cbc-completed-reduction-finite-interfaces].\n\nThe projection-defined ring map $c_g:g^{-1}B_T\\to B_{T'}$ equals the integral coefficient map of [def-weil-pbc-four-corners] and is an isomorphism. Consequently $G$ and $G^{\\mathrm{Tow}}$ are exact.\n\nLet $\\mathcal R_T$ be the derived strict reduction functor, $V_g=Lg^*_{\\mathrm{Tow}}$, $U_n=\\operatorname{ev}_n V_g\\mathcal R_T$, and $H_n(K)=Lg_n^*(K\\otimes^L_{B_T}S_{T,n})$. Write $Q$ for localization of complexes at quasi-isomorphisms. For a cochain complex $P$ put $P_n=P\\otimes_{B_T}S_{T,n}$, let $\\epsilon^{\\mathcal R}_P:\\mathcal R_T(QP)\\to Q\\mathcal R_T^0P$ and $\\epsilon^V$ be the universal left-derived counits, and define\n$$u_{n,P}:U_n(QP)\\to Q\\bigl(\\operatorname{ev}_nG^{\\mathrm{Tow}}\\mathcal R_T^0P\\bigr)$$\nby applying $V_g$ to $\\epsilon^{\\mathcal R}_P$, then its universal counit, then exact evaluation localization. This is a natural transformation on complexes with exactly these components. Put $v_{n,P}:H_n(QP)\\to Q(g_n^*P_n)$ equal to the finite derived scalar-extension counit followed by exact finite pullback localization. Both $u_{n,P}$ and $v_{n,P}$ are invertible whenever $P$ is K-flat [def-pc-kflat-complex]; no boundedness is imposed. Let $\\delta_{n,P}:\\operatorname{Res}_{\\pi_{T',n}}Q(g_n^*P_n)\\xrightarrow{\\sim}Q(\\operatorname{Res}_{\\pi_{T',n}}g_n^*P_n)$ be exact restriction localization, and let $E_n$ be the ordinary isomorphism specified in [lem-weil-pbc-ordinary-finite-evaluation-transition].\n\nThere is a unique natural isomorphism\n$$e_n:U_n\\xrightarrow{\\sim}\\operatorname{Res}_{\\pi_{T',n}}H_n$$\nsuch that for every K-flat $P$,\n$$Q(E_n(P))\\,u_{n,P}=\\delta_{n,P}\\,\\operatorname{Res}_{\\pi_{T',n}}(v_{n,P})\\,e_n(QP).$$\nThe ordinary isomorphism is applied termwise in this equation. This is the canonical finite evaluation completedReductionFiniteEvaluation and its specified representative normalization, for every derived input, including unbounded inputs that are not complete.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-proper-base-change/sk-prop-pbc-complete/lemma-weil-pbc-completed-pullback-reduction.proof.md",
+  "place": "Paragraph 2, evaluation of the defining pulled strict reduction tower; expanded universal-counit/K-flat normalization, existing Lean completedReductionFiniteEvaluation_exists (line 1128) and completedReductionCompositeCounitNat (line 664). Agent-written interface refinement of Stacks Tag 099N (proetale.tex, lemma-pushforward-Noetherian-case), clause (5); explicit statement and proof in lean/Sheaf/Paper/CompletedPullbackReduction.lean."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-adic-coefficient-datum",
+  "def-weil-pbc-completed-pullback",
+  "def-cbc-completed-reduction-finite-interfaces",
+  "def-pc-kflat-complex",
+  "lem-weil-pbc-ordinary-finite-evaluation-transition",
+  "def-weil-pbc-four-corners"
+ ],
+ "proof": [
+  {
+   "text": "Apply [lem-weil-pbc-profinite-coefficient-inverse-image] to the countable tower of finite rings $Q_n=P_n$. Its specified isomorphism $c:g^{-1}B_T\\xrightarrow{\\sim}B_{T'}$ satisfies $\\pi_{T',n}c=c_{g,n}g^{-1}\\pi_{T,n}$. These are exactly the components defining $c_g$ in [def-weil-pbc-completed-pullback]. Two maps to the limit $B_{T'}$ with equal projections are equal, hence $c_g=c$. The integral coefficient map of [def-weil-pbc-four-corners] is this same specified map; for arbitrary $g$ one can use the cartesian square with both vertical arrows identities, which are proper, so that $g$ occurs among its arrows. Thus the asserted equality is equality of the specified maps, and $c_g$ is invertible.",
+   "uses": [
+    "lem-weil-pbc-profinite-coefficient-inverse-image",
+    "def-weil-pbc-completed-pullback",
+    "def-weil-pbc-four-corners"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tags 098T (lemma-morphism-big-small) and 097N (lemma-ind-etale-implies), via the cited finite-ring-tower coefficient lemma; uniqueness of a limit map."
+   }
+  },
+  {
+   "text": "By [lem-trf-geometric-inverse-image-exact], inverse image with scalars $g^{-1}B_T$ is exact. Extension along the ring isomorphism $c_g$ just relabels scalars: the tensor map $x\\otimes b\\mapsto c_g^{-1}(b)x$ has inverse $x\\mapsto x\\otimes1$. Thus $G$ is naturally isomorphic to that exact inverse image followed by scalar relabelling, and is exact. Kernels and cokernels of strict towers are levelwise by [lem-weil-tower-category-levelwise-abelian]. Applying $G$ to each level therefore proves exactness of $G^{\\mathrm{Tow}}$; the same node gives exactness of evaluation. Finite pullback $g_n^*$ is exact by [prop-weil-pbc-proetale-constant-exact], since $P_n$ is a finite discrete ring. Restriction along $\\pi_{T',n}$ is exact: it changes neither the underlying abelian sheaf nor kernels and cokernels.",
+   "uses": [
+    "lem-trf-geometric-inverse-image-exact",
+    "lem-weil-tower-category-levelwise-abelian",
+    "prop-weil-pbc-proetale-constant-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 04JC, lemma-flat-pullback-exact; homology.tex Tag 02MZ, lemma-inverse-systems-abelian."
+   }
+  },
+  {
+   "text": "Use [lem-weil-pbc-exact-functor-derived-functor] for the exact $G^{\\mathrm{Tow}}$ and $g_n^*$ of Step 2. Their universal left-derived counits agree, under the unique universal-property comparison, with termwise localization; in particular they are invertible on every complex. Use its exact factorization also for evaluation and scalar restriction. This gives the exact evaluation factor and exactly the comparison $\\delta_{n,P}$ in the statement. These comparisons are natural on the homotopy category and hence on complexes. No flatness of a tower obtained after reduction is required here: the tower pullback counit is invertible on every tower complex.",
+   "uses": [
+    "lem-weil-pbc-exact-functor-derived-functor"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 015F, lemma-right-derived-exact-functor, and its left-derived dual; localization factorization and universal property."
+   }
+  },
+  {
+   "text": "For every complex $P$, put $R^0P=\\mathcal R_T^0P$ and write $D\\operatorname{ev}_n$ for exact derived evaluation. Define\n$$u_{n,P}=\\lambda^{\\operatorname{ev}_n}_{G^{\\mathrm{Tow}}R^0P}\\circ D\\operatorname{ev}_n\\bigl(\\epsilon^V_{R^0P}\\circ V_g(\\epsilon^{\\mathcal R}_P)\\bigr),$$\nwhere $\\lambda^{\\operatorname{ev}_n}$ is the exact localization factor from Step 3. This has the required source and target. Whiskering $\\epsilon^{\\mathcal R}$ with $V_g$, composing with $\\epsilon^V$, and then composing with $\\lambda^{\\operatorname{ev}_n}$ makes this a natural transformation. More explicitly, for a chain map $h:P\\to P'$, the three naturality squares commute in succession, so their composite says $Q(\\operatorname{ev}_nG^{\\mathrm{Tow}}\\mathcal R_T^0h)u_{n,P}=u_{n,P'}U_n(Qh)$. All these squares already exist on homotopy categories, so the displayed transformation also factors through chain homotopy. Its components are the specified universal-counit components, without a choice of comparison automorphism.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Definition Tag 05S9: universal left-derived counit; formal composition of the given counits and exact localization factor."
+   }
+  },
+  {
+   "text": "For a quasi-isomorphism $h:P\\to P'$ between K-flat $B_T$-complexes, [lem-pur-derived-change-of-rings](1) says each $h\\otimes1_{S_{T,n}}$ is a quasi-isomorphism. Restriction to $B_T$ leaves cohomology unchanged. By [lem-weil-tower-category-levelwise-abelian], cohomology of strict tower complexes is computed levelwise (use its levelwise kernels and cokernels), so $\\mathcal R_T^0(h)$ is a quasi-isomorphism of strict tower complexes. The additive functor $\\mathcal R_T^0$ preserves shifts and mapping cones termwise: a cone has the two summands $P'{}^i\\oplus P^{i+1}$ with its signed differential, and tensor distributes over these summands and carries that differential to the same matrix. Thus its homotopy functor followed by tower localization is exact. K-flat representatives resolve every complex by [lem-pc-kflat-resolution]. Apply [lem-pur-left-derived-from-kflat-class] with the class of ALL K-flat complexes and target $D(\\operatorname{Tow}_{B_T}(T))$. Its counit is invertible at every K-flat $P$; by universal uniqueness the same holds for the specified $\\epsilon^{\\mathcal R}_P$. The remaining factors defining $u_{n,P}$ are invertible by Step 3, hence so is $u_{n,P}$. Neither flat terms nor boundedness of $P$ are needed.",
+   "uses": [
+    "lem-pur-derived-change-of-rings",
+    "lem-weil-tower-category-levelwise-abelian",
+    "lem-pc-kflat-resolution",
+    "lem-pur-left-derived-from-kflat-class"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 06YT (lemma-derived-tor-quasi-isomorphism-other-side) and 06YS (lemma-K-flat-resolution); homology.tex Tag 02MZ; derived.tex Tag 06XN (lemma-find-existence-computes), applied to the actual derived category of strict towers."
+   }
+  },
+  {
+   "text": "For finite scalar extension use [lem-pur-derived-change-of-rings] with $B_T\\to S_{T,n}$. Its universal counit $a_{n,P}: (QP)\\otimes^L_{B_T}S_{T,n}\\to QP_n$ is natural on the homotopy category and invertible on every K-flat $P$. Indeed such a $P$ itself computes derived extension, using its identity as the K-flat resolution. Define\n$$v_{n,P}=\\lambda^{g_n^*}_{P_n}\\circ Lg_n^*(a_{n,P}),$$\nwhere $\\lambda^{g_n^*}$ is the exact pullback localization from Step 3. This is the finite model map in the statement, natural by the two constituent naturality squares, and invertible on K-flat $P$. Put $J_n=\\operatorname{Res}_{\\pi_{T',n}}H_n$ and\n$$b_{n,P}=\\delta_{n,P}\\circ\\operatorname{Res}_{\\pi_{T',n}}(v_{n,P}).$$\nThus $b_n$ is a natural transformation $J_nQ\\to Q(\\operatorname{Res}_{\\pi_{T',n}}g_n^*P_n)$, also invertible on K-flat $P$.",
+   "uses": [
+    "lem-pur-derived-change-of-rings"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 06YT, 06YU and 06YY (lemma-derived-base-change), specialized to change of rings on one site; derived.tex Tag 06XN."
+   }
+  },
+  {
+   "text": "Apply the ordinary natural isomorphism $E_n$ of [lem-weil-pbc-ordinary-finite-evaluation-transition] termwise and localize. On the full subcategory of K-flat complexes define\n$$a_P=b_{n,P}^{-1}\\circ Q(E_n(P))\\circ u_{n,P}:U_n(QP)\\longrightarrow J_n(QP).$$\nIts factors are invertible by Steps 5 and 6 and the cited ordinary comparison. For any chain map $h:P\\to P'$ between K-flat complexes, substitute the naturality equations for $u_n$, $E_n$ and $b_n$ into this formula and cancel $b_{n,P'}$; the result is $J_n(Qh)a_P=a_{P'}U_n(Qh)$. These maps and equations depend only on the homotopy class of $h$, since all three natural transformations used above factor through the homotopy category.",
+   "uses": [
+    "lem-weil-pbc-ordinary-finite-evaluation-transition"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proper-base-change/sk-prop-pbc-complete/lemma-weil-pbc-completed-pullback-reduction.proof.md",
+    "place": "Paragraph 2; termwise ordinary finite evaluation, with the universal-counit comparison written explicitly."
+   }
+  },
+  {
+   "text": "Work in $C=K(\\operatorname{Mod}(B_T))$, with $W$ the quasi-isomorphisms and $Q_h:C\\to D(\\operatorname{Mod}(B_T))$. This $W$ has right calculus of fractions by [lem-pur-quasi-isos-saturated-triangulated]. Every object admits a quasi-isomorphism $P\\to X$ with $P$ K-flat by [lem-pc-kflat-resolution]. Apply [lem-sc-nattrans-from-resolving-class] with $A=U_nQ_h$, $B=J_nQ_h$ and the $a_P$ of Step 7. Its hypothesis that $A$ inverts $W$ holds because $Q_h$ does; its naturality hypothesis is exactly Step 7. It gives a natural transformation $A\\to B$ extending $a_P$. Both $A$ and $B$ invert $W$, so the fully faithful precomposition statement in [lem-weil-pbc-localization-universal-property] descends it to $e_n:U_n\\to J_n$. On each K-flat $P$ its component is exactly $a_P$, whence multiplying by $b_{n,P}$ gives the required representative equation.",
+   "uses": [
+    "lem-pur-quasi-isos-saturated-triangulated",
+    "lem-pc-kflat-resolution",
+    "lem-sc-nattrans-from-resolving-class",
+    "lem-weil-pbc-localization-universal-property"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 05RT (lemma-acyclic), Tag 06XN; sites-cohomology.tex Tag 06YS; resolving-class descent and the fully faithful localization property of the cited nodes."
+   }
+  },
+  {
+   "text": "For any complex $X$ choose a K-flat quasi-isomorphism $s:P\\to X$ as in Step 8. Naturality gives\n$$e_n(QX)=J_n(Qs)\\,a_P\\,U_n(Qs)^{-1}.$$\nAll three factors are invertible, so every component is invertible and $e_n$ is a natural isomorphism. If $e'_n$ has the stated normalization, cancellation of $b_{n,P}$ forces $e'_n(QP)=a_P$ for all K-flat $P$. The same naturality equation with $s$ then forces $e'_n(QX)=e_n(QX)$ for all complexes $X$. By [lem-weil-pbc-localization-universal-property], agreement on localized complexes implies equality of natural transformations, and hence of the natural isomorphisms. This proves uniqueness. The fixed interface [def-cbc-completed-reduction-finite-interfaces] names precisely the comparison with this ordinary map and these universal-counit components, so it is $\\operatorname{completedReductionFiniteEvaluation}$. The replacements in Step 8 exist for arbitrary unbounded complexes; no step assumes derived completeness.",
+   "uses": [
+    "lem-weil-pbc-localization-universal-property",
+    "def-cbc-completed-reduction-finite-interfaces"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 06XN and localization uniqueness; the displayed conjugation and cancellation prove invertibility and uniqueness."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-cbc-completed-reduction-finite-interfaces",
+  "def-weil-pbc-completed-pullback",
+  "def-weil-pbc-four-corners",
+  "lem-pc-kflat-resolution",
+  "lem-pur-derived-change-of-rings",
+  "lem-pur-left-derived-from-kflat-class",
+  "lem-pur-quasi-isos-saturated-triangulated",
+  "lem-sc-nattrans-from-resolving-class",
+  "lem-trf-geometric-inverse-image-exact",
+  "lem-weil-pbc-exact-functor-derived-functor",
+  "lem-weil-pbc-localization-universal-property",
+  "lem-weil-pbc-ordinary-finite-evaluation-transition",
+  "lem-weil-pbc-profinite-coefficient-inverse-image",
+  "lem-weil-tower-category-levelwise-abelian",
+  "prop-weil-pbc-proetale-constant-exact"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-proper-base-change/sk-prop-pbc-complete/lemma-weil-pbc-completed-pullback-reduction.proof.md",
+  "place": "Paragraph 2, finite evaluation; explicit universal-counit construction and resolving-class descent as in lean/Sheaf/Paper/CompletedPullbackReduction.lean, lines 664-700 and 1005-1160, checked against Stacks Tags 04JC, 015F, 06YS, 06YT, 06YU, 06XN and 099N. This refinement is not asserted to be the literal statement of 099N."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "leftDerivedCounitOnComplex|descend.*comparison.*iso",
+   "results": "0 hits",
+   "date": "2026-10-22",
+   "verdict": "no match: generic leftDerivedNatIso and exact-functor factors require the composed K-flat computation and its counit invertibility to be established; they do not state this finite evaluation isomorphism and its representative equation."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.leftDerivedCounitOnComplex",
+   "results": "0 hits; loogle: unknown identifier 'CategoryTheory.Functor.leftDerivedCounitOnComplex'",
+   "date": "2026-10-22",
+   "verdict": "no match: generic leftDerivedNatIso and exact-functor factors require the composed K-flat computation and its counit invertibility to be established; they do not state this finite evaluation isomorphism and its representative equation."
+  },
+  {
+   "tool": "leansearch",
+   "query": "derived finite evaluation pullback reduction tower natural isomorphism determined on K flat complexes",
+   "results": "CategoryTheory.Functor.mapDerivedCategorySingleFunctor; CategoryTheory.Functor.mapHomologicalComplexUpToQuasiIsoFactorsh; CategoryTheory.compEvaluation; CategoryTheory.Functor.leftDerivedNatIso; CategoryTheory.Functor.rightDerivedNatIso; HomologicalComplex.forgetEval; AlgebraicTopology.DoldKan.natTransPInfty_f; CategoryTheory.Limits.ProductsFromFiniteCofiltered.liftToFinsetEvaluationIso",
+   "date": "2026-10-22",
+   "verdict": "no match: generic leftDerivedNatIso and exact-functor factors require the composed K-flat computation and its counit invertibility to be established; they do not state this finite evaluation isomorphism and its representative equation."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "derived finite evaluation pullback reduction tower natural isomorphism determined on K flat complexes",
+   "results": "CategoryTheory.Functor.mapDerivedCategoryFactorsh_hom_app; CategoryTheory.Functor.mapDerivedCategorySingleFunctor; CategoryTheory.Functor.mapHomologicalComplexUpToQuasiIsoFactorsh; CategoryTheory.Functor.mapHomologicalComplexUpToQuasiIsoFactorsh_hom_app; DerivedCategory.singleFunctorIsoCompQ; CategoryTheory.Functor.mapHomologicalComplexUpToQuasiIsoFactorsh_hom_app_assoc; CategoryTheory.ProjectiveResolution.isoLeftDerivedObj; CategoryTheory.Functor.leftDerivedZeroIsoSelf_hom_inv_id_assoc",
+   "date": "2026-10-22",
+   "verdict": "no match: generic leftDerivedNatIso and exact-functor factors require the composed K-flat computation and its counit invertibility to be established; they do not state this finite evaluation isomorphism and its representative equation."
+  },
+  {
+   "tool": "grep",
+   "query": "leftDerivedNatIso|mapDerivedCategoryFactors",
+   "results": "Mathlib/Algebra/Homology/DerivedCategory/ExactFunctor.lean; Mathlib/Algebra/Homology/DerivedCategory/ExactFunctor.lean; Mathlib/Algebra/Homology/DerivedCategory/ExactFunctor.lean; Mathlib/Algebra/Homology/DerivedCategory/ExactFunctor.lean; Mathlib/Algebra/Homology/DerivedCategory/ExactFunctor.lean; Mathlib/Algebra/Homology/DerivedCategory/Ext/Map.lean; Mathlib/Algebra/Homology/DerivedCategory/Ext/Map.lean; Mathlib/Algebra/Homology/DerivedCategory/Ext/Map.lean; Mathlib/Algebra/Homology",
+   "date": "2026-10-22",
+   "verdict": "no match: generic leftDerivedNatIso and exact-functor factors require the composed K-flat computation and its counit invertibility to be established; they do not state this finite evaluation isomorphism and its representative equation."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "compose left derived functors natural comparison isomorphism on resolving K flat subcategory",
+   "results": "CategoryTheory.Functor.leftDerivedNatIso; CategoryTheory.NatTrans.leftDerived_comp; CategoryTheory.NatTrans.leftDerived_comp_assoc; CategoryTheory.Functor.mapDerivedCategoryFactorsh_hom_app; CategoryTheory.LocalizerMorphism.rightDerivedFunctorComparison; CategoryTheory.LocalizerMorphism.rightDerivedFunctorComparison_fac; CategoryTheory.LocalizerMorphism.rightDerivedFunctorComparison_fac_app; CategoryTheory.LocalizerMorphism.instIsIsoFunctorRightDerivedFunctorComparison",
+   "date": "2026-10-22",
+   "verdict": "no match: generic leftDerivedNatIso and exact-functor factors require the composed K-flat computation and its counit invertibility to be established; they do not state this finite evaluation isomorphism and its representative equation."
+  },
+  {
+   "tool": "grep",
+   "query": "leftDerivedNatIso|mapDerivedCategoryFactors|KFlat",
+   "results": "10 hits: Mathlib/Algebra/Homology/DerivedCategory/ExactFunctor.lean; Mathlib/Algebra/Homology/DerivedCategory/ExactFunctor.lean; Mathlib/Algebra/Homology/DerivedCategory/ExactFunctor.lean; Mathlib/Algebra/Homology/DerivedCategory/ExactFunctor.lean; Mathlib/Algebra/Homology/DerivedCategory/ExactFunctor.lean; Mathlib/Algebra/Homology/DerivedCategory/Ext/Map.lean; Mathlib/Algebra/Homology/DerivedCategory/Ext/Map.lean; Mathlib/Algebra/Homology/DerivedCategory/Ext/Map.lean",
+   "date": "2026-10-22",
+   "verdict": "no match: generic exact localization or uniqueness of already-derived functors does not establish this composite tower computation and its K-flat normalization."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.leftDerivedNatIso",
+   "results": "3 hits: CategoryTheory.Functor.leftDerivedNatIso; CategoryTheory.Functor.leftDerivedNatIso_hom; CategoryTheory.Functor.leftDerivedNatIso_inv",
+   "date": "2026-10-22",
+   "verdict": "no match: generic exact localization or uniqueness of already-derived functors does not establish this composite tower computation and its K-flat normalization."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Natural isomorphism between derived functors uniquely specified by their counits on K-flat resolutions and evaluation of inverse sequences",
+   "results": "8 hits: CategoryTheory.Functor.leftDerivedUnique; CategoryTheory.Functor.rightDerivedUnique.congr_simp; CategoryTheory.Functor.rightDerivedUnique; CategoryTheory.Functor.toRightDerivedZero; CategoryTheory.instIsIsoFunctorToRightDerivedZero; CategoryTheory.InjectiveResolution.isoRightDerivedObj_hom_naturality_assoc; CategoryTheory.Functor.leftDerivedNatIso; CategoryTheory.Functor.rightDerivedZeroIsoSelf",
+   "date": "2026-10-22",
+   "verdict": "no match: generic exact localization or uniqueness of already-derived functors does not establish this composite tower computation and its K-flat normalization."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived finite evaluation of a strict reduction tower commutes with pullback, uniquely normalized by universal derived counits on unbounded K-flat complexes",
+   "results": "8 hits: CategoryTheory.Functor.mapDerivedCategoryFactorsh; CategoryTheory.Functor.mapDerivedCategoryFactors; CategoryTheory.Functor.mapDerivedCategoryFactorsh_hom_app; CategoryTheory.Functor.mapDerivedCategorySingleFunctor; CategoryTheory.Functor.leftDerived_map_eq; CategoryTheory.Functor.rightDerived_map_eq; CategoryTheory.Functor.rightDerivedZeroIsoSelf_inv_hom_id_assoc; CategoryTheory.NatTrans.leftDerived_comp_assoc",
+   "date": "2026-10-22",
+   "verdict": "no match: generic exact localization or uniqueness of already-derived functors does not establish this composite tower computation and its K-flat normalization."
+  },
+  {
+   "tool": "grep",
+   "query": "completedReductionFiniteEvaluation|completedReductionCompositeCounit|IsKFlatIndependentCoefficients|cochainRepresentativeWhiskering",
+   "results": "0 hits: ",
+   "date": "2026-10-22",
+   "verdict": "no match: generic exact localization or uniqueness of already-derived functors does not establish this composite tower computation and its K-flat normalization."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A comparison of unbounded derived functors obtained from ordinary finite scalar extension and exact inverse image of sheaves is uniquely determined on K-flat resolutions",
+   "results": "8 hits: CategoryTheory.Functor.mapDerivedCategoryFactorsh_hom_app; CategoryTheory.Functor.mapDerivedCategoryFactors; CategoryTheory.Functor.mapDerivedCategoryFactorsh; CategoryTheory.Abelian.Ext.mapExactFunctor_hom; CategoryTheory.Functor.instLiftingCochainComplexIntDerivedCategoryQQuasiIsoUpCompHomologicalComplexMapHomologicalComplexMapDerivedCategory; CategoryTheory.Functor.mapDerivedCategorySingleFunctor; CategoryTheory.Functor.leftDerivedUnique; CategoryTheory.LocalizerMorphism.instIsIsoFunctorRightDerivedFunctorComparison",
+   "date": "2026-10-22",
+   "verdict": "no match: generic exact localization or uniqueness of already-derived functors does not establish this composite tower computation and its K-flat normalization."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lemma-weil-pbc-completed-pullback-reduction",
+  "date": "2026-10-22",
+  "group": "Q09"
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "blueprint": {
+  "from": {
+   "node": "lemma-weil-pbc-completed-pullback-reduction",
+   "place": "Paragraph 2, evaluation of the defining pulled strict reduction tower; expanded universal-counit/K-flat normalization, existing Lean completedReductionFiniteEvaluation_exists (line 1128) and completedReductionCompositeCounitNat (line 664).",
+   "via": []
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-weil-pbc-derived-finite-evaluation-normalization",
+  "worker": "stage1",
+  "summary": "Q61: retained the statement and all six statement dependencies; expanded projection uniqueness, exact completed and finite pullback, the literal composite universal counit and its naturality, K-flat invertibility, and normalized descent/uniqueness on the unbounded derived category. Reused existing generic tools; no new nodes and no Lean changes.",
+  "blueprint": "Realizes paragraph 2 of lemma-weil-pbc-completed-pullback-reduction: evaluation of the defining pulled strict reduction tower at each finite coefficient, with the previously implicit ordinary comparison and universal-counit representative normalization.",
+  "tool_uses": [
+   {
+    "node": "lem-trf-geometric-inverse-image-exact",
+    "why": "Exactness of transported module inverse image for a geometric morphism; the unit has no generic theorem with arbitrary ring-sheaf coefficients."
+   },
+   {
+    "node": "lem-weil-tower-category-levelwise-abelian",
+    "why": "Generic levelwise kernels, cokernels and exact evaluation in strict towers; no unit-specific geometry is replaced."
+   },
+   {
+    "node": "lem-pur-derived-change-of-rings",
+    "why": "Unbounded scalar-extension counit on K-flat module-sheaf complexes on one site; the unit supplies no generic derived change-of-rings construction."
+   },
+   {
+    "node": "lem-pur-quasi-isos-saturated-triangulated",
+    "why": "Right calculus of fractions on the homotopy category, required by the generic descent theorem."
+   },
+   {
+    "node": "lem-pc-kflat-resolution",
+    "why": "Existence of unbounded K-flat resolutions for the specified sheaf-ring category."
+   },
+   {
+    "node": "lem-sc-nattrans-from-resolving-class",
+    "why": "Generic natural-transformation descent from the K-flat resolving class; the unit has no such general categorical descent statement."
+   },
+   {
+    "node": "lem-pur-left-derived-from-kflat-class",
+    "why": "Generic resolving-class construction of a universal left derived functor, applied to strict reduction with actual target D(Tow), after verifying its hypotheses levelwise."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-trf-geometric-inverse-image-exact",
+  "lem-weil-tower-category-levelwise-abelian",
+  "lem-pur-derived-change-of-rings",
+  "lem-pur-quasi-isos-saturated-triangulated",
+  "lem-pc-kflat-resolution",
+  "lem-sc-nattrans-from-resolving-class",
+  "lem-pur-left-derived-from-kflat-class"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q61-8596f3881",
+  "group": "Q61",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q61-8596f3881 (reviewer sub-agent of L); spot-checked: Q61 8596f388: 9-step split of the 2026-10-22 Q09 node, which is still unsplit live and not on the drop list. No new nodes; statement and stmt_deps unchanged. I read every cited statement and checked each step. Step 1: c_g equals the four-corners c_u by profinite-coefficient-inverse-image limit uniqueness, using the identity-vertical proper square for arbitrary g. Step 2: lem-trf exactness plus relabelling along the iso c_g, levelwise towers (mathlib leaf), and proetale-constant-exact for finite discrete P_n. Step 3: exact-functor-derived-functor gives the right Kan extension, so V_g's counit is invertible on all tower complexes. Step 5: derived-change-of-rings(1), levelwise cohomology, cone exactness and left-derived-from-kflat-class with target D(Tow) give the R_T counit iso on K-flat P. Step 6: derived-change-of-rings(2) with the identity resolution. Steps 7-9: the a_P types match; quasi-isos-saturated gives the right Ore and cancellation conditions needed by sc-nattrans-from-resolving-class; localization-universal-property (2)/(3) gives descent and uniqueness. The equation matches Sheaf completedReductionFiniteEvaluation_exists (CompletedPullbackReduction.lean:1128). Completed and finite coefficient categories stay distinct (explicit Res along pi_{T',n}). No SGA. The cbc open-square finite-comparison nodes are not duplicates. All 7 declared generic tool_uses are accepted."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.CompletedReductionFiniteEvaluationNormalization",
+  "declaration": "AlgebraicGeometry.Scheme.completedReductionFiniteEvaluation_normalized",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.completedReductionFiniteEvaluation_normalized",
+   "AlgebraicGeometry.Scheme.completedReductionFiniteEvaluation_exists",
+   "AlgebraicGeometry.Scheme.HasCompletedReductionFiniteEvaluationNormalization",
+   "AlgebraicGeometry.Scheme.completedReductionCompositeCounitNat",
+   "AlgebraicGeometry.Scheme.completedReductionPulledModelMap",
+   "AlgebraicGeometry.Scheme.completedReductionFiniteModelMap",
+   "AlgebraicGeometry.Scheme.completedReductionRestrictionFactors",
+   "AlgebraicGeometry.Scheme.completedReductionFiniteEvaluation"
+  ],
+  "statement": "theorem completedReductionFiniteEvaluation_normalized (n : ℕ) : (completedCoefficientMap g d = (d.integralRingIso g).hom ∧ IsIso (completedCoefficientMap g d)) ∧ (PreservesFiniteLimits (completedModulePullback g d) ∧ PreservesFiniteColimits (completedModulePullback g d) ∧ PreservesFiniteLimits (completedTowerModulePullback g d) ∧ PreservesFiniteColimits (completedTowerModulePullback g d)) ∧ (∀ {P P' : CochainComplex (pbcModules Y (pbcAdicCompletion Y d)) ℤ} (h : P ⟶ P'), (pbcTowerEvaluation X (pbcAdicCompletion X d) n).map ((completedTowerPullback g d).map ((completedReductionTower Y d).map (DerivedCategory.Q.map h))) ≫ completedReductionPulledModelMap g d n P' = completedReductionPulledModelMap g d n P ≫ DerivedCategory.Q.map ((((CategoryTheory.evaluation ℕᵒᵖ (pbcModules X (pbcAdicCompletion X d))).obj (op n)).mapHomologicalComplex (.up ℤ)).map (((completedTowerModulePullback g d).mapHomologicalComplex (.up ℤ)).map (((completedReductionModuleTowerFunctor Y d).mapHomologicalComplex (.up ℤ)).map h)))) ∧ (∀ P : CochainComplex (pbcModules Y (pbcAdicCompletion Y d)) ℤ, CochainComplex.IsKFlatIndependentCoefficients (R := pbcAdicCompletion Y d) P → IsIso (completedReductionPulledModelMap g d n P) ∧ IsIso (completedReductionFiniteModelMap g d n P)) ∧ (∃! e : completedReductionTower Y d ⋙ completedTowerPullback g d ⋙ pbcTowerEvaluation X (pbcAdicCompletion X d) n ≅ completedReductionFiniteTarget g d n ⋙ pbcDerivedRestrict (completedReductionProjection X d n), HasCompletedReductionFiniteEvaluationNormalization g d n e) ∧ HasCompletedReductionFiniteEvaluationNormalization g d n (completedReductionFiniteEvaluation g d n)",
+  "branch": "newtargets-dag",
+  "by": "NN",
+  "date": "2026-10-22",
+  "existing": false,
+  "note": "Reviewer FIX (H3): the existing completedReductionFiniteEvaluation_exists states only the unique normalized e_n; the node's other clauses (c_g = four-corners integralRingIso.hom and invertible; exactness of completedModulePullback and completedTowerModulePullback; naturality of u; invertibility of u and v on K-flat complexes; completedReductionFiniteEvaluation satisfies the normalization) were only private lemmas of CompletedTowerPullback/CompletedPullbackReduction. completedReductionFiniteEvaluation_normalized states all clauses publicly on the same existing declarations (no new notion, no new hypothesis); its proof will reuse those private lemmas and completedReductionFiniteEvaluation_exists. Natural n denotes exponent n+1.",
+  "file": "lean/Sheaf/Paper/CompletedReductionFiniteEvaluationNormalization.lean",
+  "fixed_by": "NT-stage2-cc-27a929ba9"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-27a929ba9",
+  "group": "NN",
+  "result": "fix",
+  "note": "H3: the existing:true binding completedReductionFiniteEvaluation_exists states only the unique normalized e_n. The node clauses c_g = four-corners integralRingIso.hom and invertible, exactness of completedModulePullback/completedTowerModulePullback, and invertibility of u_{n,P}, v_{n,P} on K-flat P existed only as private lemmas (CompletedTowerPullback:152-196, CompletedPullbackReduction:894-1028); stmt_dep def-weil-pbc-four-corners was unused. FIX: new module fixes/lean/Sheaf/Paper/CompletedReductionFiniteEvaluationNormalization.lean, theorem completedReductionFiniteEvaluation_normalized (sorry), stating all clauses (ring-map identification and iso, four exactness props, u naturality square, u/v IsIso on IsKFlatIndependentCoefficients P, the verbatim ∃!, normalization of completedReductionFiniteEvaluation) with the node's proof steps in the docstring, plus <item>.lean-record.json existing:false. nt_compile --json clean 17.0 s (a control with an injected error fails); refit_record/check_lean_text/check_record show no notes. Everything else checked: no extra hypotheses, literal universal-counit u, v as the finite counit then pullback localization, ≫ order of the normalization equation, full derived category, n = exponent n+1, universes (u+1,u)/u+1. Advisories: completed-pullback integral interface reached by public import (as in the PASSed sibling); shared listing of finite-interface defs; the worker report predates the new module."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "AUTO",
+  "group": "D4",
+  "result": "pass",
+  "landing": "20261022T143044-L-940055",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)",
+  "sorry_before": [
+   "AlgebraicGeometry.Scheme.completedReductionFiniteEvaluation_normalized"
+  ],
+  "sorry_after": []
+ }
+}

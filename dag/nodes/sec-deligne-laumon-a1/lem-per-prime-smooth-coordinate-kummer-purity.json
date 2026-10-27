@@ -1,0 +1,615 @@
+{
+ "kind": "statement",
+ "proof": [
+  {
+   "text": "Put $S=\\operatorname{Spec}k_0$, $V=\\operatorname{Spec}P=\\mathbf A^c_S$, and let $s:S\\hookrightarrow V$ set all coordinates to zero. The affine fibre-product and tensor-quotient identifications give $Z=X\\times_VS$, with maps $i$ and $h_Z:Z\\to S$. The affine smoothness equivalence makes $P\\to C$ a smooth ring map. Its base change along $P\\to k_0$ makes $k_0\\to D$ smooth. The projection $V\\to S$ is smooth; composing with $h$ makes $X\\to S$ smooth. Thus $V,X,Z$ are regular and locally Noetherian. Their underlying spaces are affine, hence quasi-compact: a cover by basic opens $D(f_a)$ covering a spectrum means $(f_a)=1$, and an expression for $1$ uses finitely many $f_a$. Consequently they are Noetherian. This checks the Noetherian hypotheses below, including $S$, whose local ring is a field.",
+   "uses": [
+    "lem-weil-pbc-fibre-product-affine-spectra",
+    "lem-weil-pbc-tensor-quotient-base-change",
+    "lem-weil-pbc-smooth-ring-map-iff-smooth-affine",
+    "lem-weil-pbc-smooth-ring-map-base-change-composition",
+    "sbc-lem-affine-space-smooth",
+    "lem-trf-smooth-composition",
+    "lem-weil-pbc-smooth-scheme-over-field-regular"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex; literature/stacks-project/morphisms.tex; literature/stacks-project/varieties.tex",
+    "place": "Tags 00T4 (lemma-base-change-smooth), 01VA (lemma-composition-smooth), 056S (lemma-smooth-regular); affine quotient square"
+   }
+  },
+  {
+   "text": "Smoothness gives flatness, hence $C$ is flat as a $P$-module. For $0\\leq r<c$, the quotient $P/(T_1,\\ldots,T_r)$ is $k_0[T_{r+1},\\ldots,T_c]$: delete monomials divisible by one of the first $r$ variables. Multiplication by $T_{r+1}$ is injective, because it sends distinct monomials to distinct monomials without changing their coefficients. Tensor this injective map with the flat $P$-module $C$. The tensor-quotient identifications give injectivity of multiplication by $T_{r+1}$ on $C/(T_1,\\ldots,T_r)C$. The final quotient is $D\\ne0$, so this is a regular sequence, including the empty sequence when $c=0$. It generates the ideal of $i$, so the defining regular-immersion condition gives constant codimension $c$. The same monomial argument applies to $s$.",
+   "uses": [
+    "lem-pc-smooth-flat",
+    "lem-weil-pbc-flat-ring-map-iff-flat-affine",
+    "lem-weil-pbc-flat-tensor-exact",
+    "lem-weil-pbc-tensor-quotient-base-change",
+    "def-weil-pbc-regular-sequence",
+    "def-per-regular-closed-immersion-codimension"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "flat tensor exactness applied to multiplication by successive polynomial variables"
+   }
+  },
+  {
+   "text": "For each $0\\le r<c$ put $B_r=\\operatorname{Spec}k_0[T_{r+2},\\ldots,T_c]$, $L_r=\\mathbf A^1_{B_r}$, and $Q_r=\\mathbf P^1_{B_r}$ with projection $q_r$. Its standard open $a_r:L_r\\hookrightarrow Q_r$ has coordinate $t=T_{r+1}=x_1/x_0$. Let $d_r:B_r\\hookrightarrow Q_r$ be $x_1=0$, lying in that open, and $z_r:B_r\\hookrightarrow L_r$ its restriction. The two polynomial charts show that $d_r$ is an effective Cartier divisor: its ideal has generator $t$ on $x_0\\ne0$ and $1$ on $x_1\\ne0$. Dualizing these generators gives transition $t^{-1}$, so $\\mathcal O_{Q_r}(d_r)=\\mathcal O_{Q_r}(1)$ with exactly the convention in the projective-line adjunction. The bases $B_r$ are regular Noetherian by Step 1 applied to polynomial rings. Their projective lines have a finite cover by polynomial charts and are Noetherian by the same argument. Take $N=\\ell$, $A=\\mathbf F_\\ell$ throughout.",
+   "uses": [
+    "lem-weil-pbc-projective-space-standard-charts",
+    "lemma-nagata-relative-affine-space-open-immersion",
+    "def-pc-divisor-line-bundle",
+    "lem-asd-ordinary-finite-p1-adjunction"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-an/cor-pur-affine-space-zero-section-purity.proof.md",
+    "place": "Rank-one coordinate orientation: projective charts and the positive Chern normalization"
+   }
+  },
+  {
+   "text": "Write $q=q_r$, $d=d_r$ and $K=A_{Q_r}(1)[2]$. The supported Cartier map $c_d:d_*A_{B_r}\\to K$ satisfies $c_d u_d=c_1(\\mathcal O(1))$. Under $Rq_*d_*=R(qd)_*=\\mathrm{id}$ put $e=Rq_*c_d:A_{B_r}\\to Rq_*K$. The composite of $A_{B_r}\\to Rq_*A_{Q_r}$ with $Rq_*u_d$ is the unit for $qd=\\mathrm{id}$, hence is $1$ (the units paste). Applying $Rq_*$ to $c_du_d=c_1(\\mathcal O(1))$ and precomposing with that unit gives $e=h$. The normalized projective-line counit therefore sends this very supported class to $t_qe=t_qh=1$. This uses the positive Kummer sign, not merely some isomorphism of the underlying objects.",
+   "uses": [
+    "lem-asd-ordinary-supported-kummer",
+    "lem-asd-ordinary-finite-p1-adjunction",
+    "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
+    "lem-cat-right-adjoint-composition"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-an/cor-pur-affine-space-zero-section-purity.proof.md",
+    "place": "Rank-one orientation: integrate the supported positive Cartier class to 1"
+   }
+  },
+  {
+   "text": "The adjunction $Rq_*\\dashv G_q$, with $G_qM=q^*M(1)[2]$, and $d_*\\dashv d^!$ compose to an adjunction $Rq_*d_*\\dashv d^!G_q$. Since $qd=1$, uniqueness of right adjoints gives a counit-compatible isomorphism $\\beta:d^!K\\xrightarrow{\\sim}A_{B_r}$. The transpose $\\eta_d:A_{B_r}\\to d^!K$ of $c_d$ then satisfies $\\beta\\eta_d=t_qRq_*c_d=1$ by Step 4, so is an isomorphism. Here $d^!$ on bounded-below objects is precisely the chosen supported derived adjoint: its injective construction agrees with the ordinary total derived adjoint and uniqueness preserves the counit. All calculations can thus be read in $D^+$; no finite-field convention or general smooth-duality theorem has been used. For every closed immersion $u$ in the tower and square, the identity-open compactification gives $Ru_!=Ru_*$; uniqueness of right adjoints thus also identifies the compact-support convention of class calculus with this closed-support convention, preserving transposes.",
+   "uses": [
+    "lem-asd-ordinary-finite-p1-adjunction",
+    "lem-cat-right-adjoint-composition",
+    "det-sp-unique-right-adjoint",
+    "def-per-closed-support-plus-adjunction",
+    "src-right-derived-functor-plus-compatibility",
+    "def-amb-etale-compact-support"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-an/cor-pur-affine-space-zero-section-purity.proof.md",
+    "place": "Composite adjunction with the closed section; the calculated transpose is the inverse"
+   }
+  },
+  {
+   "text": "For $a=a_r$, $z=z_r$ and $d=az$, the closed-support/open-counit statement gives the actual isomorphism $a_!z_*M\\simeq d_*M$, initially for sheaves and hence for complexes since all three functors are exact. Consequently the Hom calculation $\\operatorname{Hom}(z_*M,a^*K)=\\operatorname{Hom}(a_!z_*M,K)=\\operatorname{Hom}(d_*M,K)$ identifies $z^!a^*K$ with $d^!K$, compatibly with transposes. Restriction of $c_d$ is $c_z$ by Cartier pullback. The counit identity in that same open-counit statement says explicitly that its extension back followed by the open counit equals $c_d$ under $a_!z_*A\\simeq d_*A$. Thus the preceding Hom calculation sends $\\eta_z$ to $\\eta_d$, and $\\eta_z:A_{B_r}\\to z^!A_{L_r}(1)[2]$ is an isomorphism for every $r$.",
+   "uses": [
+    "lem-pur-closed-support-open-counit",
+    "lem-amb-etale-adjoint-locality",
+    "lem-asd-ordinary-supported-kummer",
+    "lem-weil-pbc-extension-by-zero-exact",
+    "def-per-closed-support-plus-adjunction",
+    "lem-weil-pbc-open-immersion-etale"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-an/cor-pur-affine-space-zero-section-purity.proof.md",
+    "place": "Open restriction of the rank-one supported orientation; counits identify the actual maps"
+   }
+  },
+  {
+   "text": "Twist-shifts commute with the closed adjoints used here. Indeed a Tate line $E=A_T(a)[b]$ is tensor-invertible, with inverse $A_T(-a)[-b]$. For a closed immersion $u:Y\\hookrightarrow T$ and any $M,K$, the proper projection formula and tensor evaluation give\n$\\operatorname{Hom}(M,u^!(K\\otimes E))=\\operatorname{Hom}(u_*M,K\\otimes E)=\\operatorname{Hom}(u_*(M\\otimes u^*E^{-1}),K)=\\operatorname{Hom}(M,u^!K\\otimes u^*E)$.\nUniqueness of right adjoints gives the counit-compatible comparison $u^!(K\\otimes E)\\simeq u^!K\\otimes u^*E$. Closed immersions are proper; all schemes used are Noetherian. The twist pullback statement supplies the indicated inverse lines and evaluation, so no trivialization or sign choice enters this calculation.",
+   "uses": [
+    "lem-asd-etale-finite-twist-pullback",
+    "lem-amb-proper-coproducts-projection",
+    "lem-weil-pbc-closed-immersion-proper",
+    "def-per-closed-support-plus-adjunction",
+    "det-sp-unique-right-adjoint"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-an/cor-pur-affine-space-zero-section-purity.proof.md",
+    "place": "Tensor-invertible Tate lines and the proper projection formula; formal Hom calculation"
+   }
+  },
+  {
+   "text": "Set $V_r=V(T_1,\\ldots,T_r)\\subset V$, so $V_0=V$ and $V_c=S$. For each $r<c$, the embedding $V_{r+1}\\hookrightarrow V_r$ is exactly the zero section $z_r$ over $B_r=V_{r+1}$ in Step 6. Thus its specified Cartier transpose is invertible. Induct on $r$ to prove that the specified class of $V_r\\hookrightarrow V$ is invertible. For $r=0$ it is $1$. For the induction step, the class-calculus composition formula expresses the class of $V_{r+1}\\hookrightarrow V$ as the Cartier class followed by the exceptional pullback of the class for $V_r\\hookrightarrow V$, with twist-shifts added. Step 7 identifies those twist-shifts, and a functor carries an inverse to an inverse. Both factors are therefore invertible. At $r=c$ this proves invertibility of the specified $\\eta_s:A_S\\to s^!A_V(c)[2c]$. The same formula identifies it with the ordered positive Cartier product. If $c=0$ the base case alone applies.",
+   "uses": [
+    "lem-per-regular-immersion-class-calculus",
+    "lem-asd-etale-finite-twist-pullback",
+    "def-per-closed-support-plus-adjunction"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-an/cor-pur-affine-space-zero-section-purity.proof.md",
+    "place": "Ordered coordinate tower: induction with base and transition, retaining the Cartier normalization"
+   }
+  },
+  {
+   "text": "It remains to pull this class through our smooth square, without invoking regular supported base change. Let $j:U=V\\setminus S\\hookrightarrow V$ and $j':U'=X\\setminus Z\\hookrightarrow X$; write $h_U:U'\\to U$. The open $U$ is the finite union of basic opens $D(T_a)$, and its intersections with affine opens are quasi-compact (the target is Noetherian); as an open immersion $j$ has diagonal an isomorphism and is quasi-separated. The same holds for $j'$. For $K=A_V(c)[2c]$, ordinary bounded-below smooth base change applies to $j$ along $h$: its cohomology sheaves are killed by $\\ell$, invertible on $V$. It gives $h^*Rj_*j^*K\\xrightarrow{\\sim}Rj'_*h_U^*j^*K$. The module exchange is this same isomorphism: forget coefficients, use the canonical comparison of module and abelian exchanges, and reflect isomorphisms by the conservative forgetful functor. Compatibility of plus and total derived functors permits this comparison in $D^+$.",
+   "uses": [
+    "sbc-thm-bounded-below-derived-smooth-base-change",
+    "lem-kun-unbounded-abelian-exchange-comparison",
+    "src-right-derived-functor-plus-compatibility",
+    "lem-sfb-noetherian-open-immersion-qc",
+    "prop-weil-pbc-inverse-image-modules-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex; literature/milne-lectures-on-etale-cohomology_LEC.pdf",
+    "place": "Ordinary smooth base change for the complementary open, not regular supported exchange"
+   }
+  },
+  {
+   "text": "Choose a bounded-below injective module complex $I$ representing $K$, and an injective replacement $h^*I\\to J$ representing $h^*K$. The derived replacement map is represented by a chain map because $J$ is K-injective. Put $H(M)=s^*\\ker(M\\to j_*j^*M)$ and $H'(M)=i^*\\ker(M\\to j'_*j'^*M)$. The injective support-sequence statement gives exact sequences $0\\to s_*H(I)\\to I\\to j_*j^*I\\to0$ and $0\\to i_*H'(J)\\to J\\to j'_*j'^*J\\to0$. Exact $h^*$ preserves the first sequence. Its middle map to the second is $h^*I\\to J$; its third map is termwise open exchange followed by $j'_*j'^*(h^*I\\to J)$. Naturality of restriction makes the square commute, so there is an induced map of kernels, hence a map of these short exact sequences. The derived third map is the canonical exchange in Step 9: its transpose is the pulled-back restriction counit, which defines exchange. Naturality of the short-exact-sequence triangle therefore gives a morphism of support triangles, including the connecting maps.",
+   "uses": [
+    "lem-weil-pbc-dplus-injective-representative",
+    "lem-pur-etale-injective-support-sequence",
+    "prop-weil-pbc-inverse-image-modules-exact",
+    "lem-weil-pbc-complex-ses-triangle",
+    "lem-kun-unbounded-abelian-exchange-comparison",
+    "def-weil-pbc-derived-exchange",
+    "lem-weil-pbc-kinjective-hom-derived"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex; literature/stacks-project/etale-cohomology.tex",
+    "place": "Support-kernel injective calculation and naturality of short exact sequence triangles; Stacks Tags 093X and 09XQ"
+   }
+  },
+  {
+   "text": "The middle and third maps of the triangle morphism in Step 10 are isomorphisms, by the resolution and Step 9. Hence its first map $h^*s_*s^!K\\to i_*i^!h^*K$ is an isomorphism. Finite exchange for the closed immersion identifies its source with $i_*h_Z^*s^!K$. These are also module identifications: the abelian finite exchange commutes with scalar multiplications, or equivalently follows from the module/abelian exchange comparison. Applying $i^*$, for which $i^*i_*=1$, shows that $b:h_Z^*s^!K\\to i^!h^*K$ is invertible. The latter identity holds for modules by the same scalar naturality as for abelian sheaves, and termwise for complexes since both functors are exact. By its kernel construction, the pushed-forward $b$ followed by the closed counit is exactly the pullback of the closed counit for $s$. It is therefore the canonical closed-support mate, rather than an arbitrary triangle filler.",
+   "uses": [
+    "lem-sf-triangle-morphism-iso",
+    "lemma-weil-pbc-finite-exchange",
+    "lem-weil-pbc-closed-immersion-finite",
+    "lem-kun-unbounded-abelian-exchange-comparison",
+    "lem-kun-04ca",
+    "prop-weil-pbc-inverse-image-modules-exact",
+    "def-per-closed-support-plus-adjunction"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex; literature/stacks-project/derived.tex",
+    "place": "Two isomorphisms in the actual support triangle imply the support comparison is invertible"
+   }
+  },
+  {
+   "text": "Smoothness makes $h$ flat. The admitted regular-immersion class calculus says its specified class commutes with flat base change. The canonical mate is the map $b$ of Step 11, since its closed counit is precisely the pulled-back counit. Consequently $b\\circ h_Z^*\\eta_s$ is exactly $\\eta_i$ after the twist pullback identification $h^*A_V(c)[2c]=A_X(c)[2c]$. Steps 8 and 11 prove that both factors are isomorphisms, hence so is $\\eta_i$ in the chosen ordinary-etale $D^+$. On our affine chart the regular-generator formula of the same class-calculus statement says this class is the ordered supported product for $T_1,\\ldots,T_c$, with $+c_1$ in rank one and empty product $1$. This proves the normalization clause as well as invertibility.",
+   "uses": [
+    "lem-pc-smooth-flat",
+    "lem-per-regular-immersion-class-calculus",
+    "lem-asd-etale-finite-twist-pullback"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Flat pullback of the specified positive regular-immersion class, using the comparison just computed"
+   }
+  },
+  {
+   "text": "For completeness identify derived sections of this same arrow with the claimed supported map. For an $A$-module sheaf $F$, its subsheaf $P_Z(F)=\\ker(F\\to j_*j^*F)$ is supported on $Z$ and is $i_*i^!_0F$ by the supported-kernel adjunction. The abelian-sheaf identification is $A$-linear: the kernel, restriction maps and adjunction maps commute with multiplication by every element of $A$. Conversely an abelian adjoint of an $A$-linear map is $A$-linear by the adjunction's naturality in these multiplications. Hence the same supported adjunction holds for $A$-module sheaves, and $\\Gamma(Z,i^!_0F)=\\Gamma_Z(X,F)$. Choose a bounded-below injective module resolution $J$ of $A_X(c)[2c]$. Exactness of $i_*$ in the chosen adjunction implies that $i^!_0$ preserves injectives. Thus the single complex $\\Gamma(Z,i^!_0J)=\\Gamma_Z(X,J)$ computes both $R\\Gamma(Z,i^!A_X(c)[2c])$ and $R\\Gamma_Z(X,A(c))[2c]$. The identification is induced by the supported adjunction itself. Applying the functor $R\\Gamma(Z,-)$ to $\\eta_i$ and using this identification therefore gives precisely $\\gamma_i$, an isomorphism in $D(A)$.",
+   "uses": [
+    "lem-pur-etale-supported-kernel-adjunction",
+    "def-per-closed-support-plus-adjunction",
+    "lem-sp-right-adjoint-preserves-injectives",
+    "lem-weil-pbc-dplus-injective-representative",
+    "lem-weil-pbc-right-derived-plus-injective",
+    "def-pur-etale-derived-supported-sections"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex; literature/milne-lectures-on-etale-cohomology_LEC.pdf",
+    "place": "Tag 09XQ, lemma-sections-with-support-acyclic; Milne section 16, proof that Theorem 16.7 implies Theorem 16.1, injective-resolution derived form"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-fibre-product-affine-spectra",
+  "lem-weil-pbc-tensor-quotient-base-change",
+  "lem-weil-pbc-smooth-ring-map-iff-smooth-affine",
+  "lem-weil-pbc-smooth-ring-map-base-change-composition",
+  "sbc-lem-affine-space-smooth",
+  "lem-trf-smooth-composition",
+  "lem-weil-pbc-smooth-scheme-over-field-regular",
+  "lem-pc-smooth-flat",
+  "lem-weil-pbc-flat-ring-map-iff-flat-affine",
+  "lem-weil-pbc-flat-tensor-exact",
+  "def-weil-pbc-regular-sequence",
+  "def-per-regular-closed-immersion-codimension",
+  "lem-weil-pbc-projective-space-standard-charts",
+  "lemma-nagata-relative-affine-space-open-immersion",
+  "def-pc-divisor-line-bundle",
+  "lem-asd-ordinary-finite-p1-adjunction",
+  "lem-asd-ordinary-supported-kummer",
+  "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
+  "lem-cat-right-adjoint-composition",
+  "det-sp-unique-right-adjoint",
+  "def-per-closed-support-plus-adjunction",
+  "src-right-derived-functor-plus-compatibility",
+  "def-amb-etale-compact-support",
+  "lem-pur-closed-support-open-counit",
+  "lem-amb-etale-adjoint-locality",
+  "lem-weil-pbc-extension-by-zero-exact",
+  "lem-weil-pbc-open-immersion-etale",
+  "lem-asd-etale-finite-twist-pullback",
+  "lem-amb-proper-coproducts-projection",
+  "lem-weil-pbc-closed-immersion-proper",
+  "lem-per-regular-immersion-class-calculus",
+  "sbc-thm-bounded-below-derived-smooth-base-change",
+  "lem-kun-unbounded-abelian-exchange-comparison",
+  "lem-sfb-noetherian-open-immersion-qc",
+  "prop-weil-pbc-inverse-image-modules-exact",
+  "lem-weil-pbc-dplus-injective-representative",
+  "lem-pur-etale-injective-support-sequence",
+  "lem-weil-pbc-complex-ses-triangle",
+  "def-weil-pbc-derived-exchange",
+  "lem-weil-pbc-kinjective-hom-derived",
+  "lem-sf-triangle-morphism-iso",
+  "lemma-weil-pbc-finite-exchange",
+  "lem-weil-pbc-closed-immersion-finite",
+  "lem-kun-04ca",
+  "lem-pur-etale-supported-kernel-adjunction",
+  "lem-sp-right-adjoint-preserves-injectives",
+  "lem-weil-pbc-right-derived-plus-injective",
+  "def-pur-etale-derived-supported-sections"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-an/cor-pur-affine-space-zero-section-purity.proof.md",
+  "place": "Ordinary-etale coordinate orientation by the positive projective-line Kummer trace and composite adjunctions; support-kernel resolution calculation and ordinary smooth base change; no excluded smooth-duality or regular-supported-exchange interface."
+ },
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-per-trait-test-prime-field-local-input",
+  "date": "2026-10-24",
+  "group": "Q109"
+ },
+ "chapter": "sec-deligne-laumon-a1",
+ "unit": "sk-p-dl-a1-perverse",
+ "id": "lem-per-prime-smooth-coordinate-kummer-purity",
+ "title": "Kummer purity for smooth polynomial-coordinate pairs over a prime field",
+ "statement": "Let $k_0$ be $\\mathbf Q$ or $\\mathbf F_p$ for a prime $p$, let $\\ell$ be a prime invertible in $k_0$, and put $A=\\mathbf F_\\ell$. Fix an integer $c\\geq0$, put $P=k_0[T_1,\\ldots,T_c]$ [def-weil-pbc-mv-polynomial-ring], and let $C$ be a nonzero commutative $P$-algebra for which $h:\\operatorname{Spec}C\\to\\operatorname{Spec}P$ is smooth [def-sbc-smooth-morphisms]. Suppose $D=C/(T_1,\\ldots,T_c)C\\ne0$. Write $X=\\operatorname{Spec}C$, $Z=\\operatorname{Spec}D$ and $i:Z\\hookrightarrow X$ for the quotient immersion [def-weil-affine-spectrum, def-weil-closed-immersion]. These are regular Noetherian schemes [def-weil-regular-scheme]; the images of the $T_i$ are a regular sequence [def-weil-pbc-regular-sequence] giving $i$ constant codimension $c$ [def-per-regular-closed-immersion-codimension].\nIn the ordinary small-etale bounded-below derived category with finite Tate twists [def-weil-pbc-derived-categories, def-asd-finite-etale-tate-twist] and the closed-support adjunction [def-per-closed-support-plus-adjunction], the specified Kummer class of [lem-per-regular-immersion-class-calculus] is an isomorphism\n$$\\eta_i:A_Z\\xrightarrow{\\sim}i^!A_X(c)[2c].$$\nIts supported class is the ordered product of the positive Cartier Kummer boundaries of the images of $T_1,\\ldots,T_c$; for $c=0$ it is $1$. In particular, derived sections of this very morphism, under the canonical closed-support adjunction identification, give an isomorphism in $D(A)$ [def-weil-abstract-derived-category]\n$$\\gamma_i:R\\Gamma(Z,A)\\xrightarrow{\\sim}R\\Gamma_Z(X,A(c))[2c],$$\nwhere supported sections mean [def-pur-etale-derived-supported-sections].",
+ "source": {
+  "document": "literature/milne-lectures-on-etale-cohomology_LEC.pdf; literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-an/cor-pur-affine-space-zero-section-purity.proof.md",
+  "place": "Milne section 16, Theorem 16.7 and Lemma 16.8, printed pp.111--112, smooth-pair purity over an arbitrary field; canonical ordered Kummer normalization and derived form follow the current blueprint zero-section proof through the ordinary affine-line adjunction and its normalized projective-line trace. This prime-field finite-type interface is agent-formulated; no fixed algebraic-closure-of-finite-field purity theorem is applied outside its hypotheses."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-mv-polynomial-ring",
+  "def-sbc-smooth-morphisms",
+  "def-weil-affine-spectrum",
+  "def-weil-closed-immersion",
+  "def-weil-regular-scheme",
+  "def-weil-pbc-regular-sequence",
+  "def-per-regular-closed-immersion-codimension",
+  "def-weil-pbc-derived-categories",
+  "def-asd-finite-etale-tate-twist",
+  "def-per-closed-support-plus-adjunction",
+  "lem-per-regular-immersion-class-calculus",
+  "def-weil-abstract-derived-category",
+  "def-pur-etale-derived-supported-sections"
+ ],
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For a smooth morphism to affine c space over a prime field the pullback of the origin has canonical Kummer Gysin purity in the bounded below etale derived category",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.AffineSpace.isPullback_map\", \"module\": \"Mathlib/AlgebraicGeometry/AffineSpace\", \"type\": \"∀ {n : Type v} {S T : AlgebraicGeometry.Scheme} (f : S ⟶ T),\\n  CategoryTheory.IsPullback (AlgebraicGeometry.AffineSpace.map n f) (AlgebraicGeometry.AffineSpace n S ↘ S)\\n    (AlgebraicGeometry.AffineSpace n T ↘ T) f\", \"doc\": \"Given a morphism $f: S \\\\to T$ of schemes, the induced morphism $\\\\mathbb{A}^n_S \\\\to \\\\mathbb{A}^n_T$ between affine spaces forms a pullback square with the canonical projections $\\\\mathbb{A}^n_S \\\\to S$ a\"}\n  {\"name\": \"AlgebraicGeometry.IsSmoothOfRelativeDimension\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"ℕ → {X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"For a natural number $n$ and a morphism $f: X \\\\to Y$ of schemes, the proposition that $f$ is smooth of relative dimension $n$.\"}\n  {\"name\": \"AlgebraicGeometry.of_targetAffineLocally_of_isPullback\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Basic\", \"type\": \"∀ {P : AlgebraicGeometry.AffineTargetMorphismProperty} [P.IsLocal] {X Y UX UY : AlgebraicGeometry.Scheme}\\n  [inst : AlgebraicGeometry.IsAffine UY] {f : X ⟶ Y} {iY : UY ⟶ Y} [AlgebraicGeometry.IsOpenImmersion iY] {iX : UX ⟶ X}\\n  {f' : UX ⟶ UY}, CategoryTheory.IsPullback iX f' f iY → AlgebraicGeometry\", \"doc\": \"Given a local property $ P $ of morphisms with affine target, if a morphism $ f: X \\\\to Y $ satisfies $ P $ locally on affine opens of $ Y $, and there exists a pullback square involving an open immers\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.instHasPullbacksEtale\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"∀ (X : AlgebraicGeometry.Scheme), CategoryTheory.Limits.HasPullbacks X.Etale\", \"doc\": \"For any scheme $ X $, the category of étale morphisms to $ X $ has all pullbacks. This means that for any pair of étale morphisms $ Y \\to X $ and $ Z \\to X $, and any morphism $ Y \\to Z $, the fiber prod\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.isPullback_toSpecΓ_toSpecΓ\", \"module\": \"Mathlib/AlgebraicGeometry/QuasiAffine\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.IsAffineHom f] [Y.IsQuasiAffine],\\n  CategoryTheory.IsPullback f X.toSpecΓ Y.toSpecΓ (AlgebraicGeometry.Spec.map (AlgebraicGeometry.Scheme.Hom.appTop f))\", \"doc\": \"Let $f: X \\\\to Y$ be an affine morphism of schemes, and assume that $Y$ is a quasi-affine scheme. Let $\\\\text{toSpecΓ}_X: X \\\\to \\\\mathrm{Spec}(\\\\Gamma(X, \\\\mathcal{O}_X))$ and $\\\\text{toSpecΓ}_Y: Y \\\\to \\\\mat\"}\n  {\"name\": \"AlgebraicGeometry.HasAffineProperty.of_isPullback\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Basic\", \"type\": \"∀ {P : CategoryTheory.MorphismProperty AlgebraicGeometry.Scheme} {Q : AlgebraicGeometry.AffineTargetMorphismProperty}\\n  [AlgebraicGeometry.HasAffineProperty P Q] {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y}\\n  {UX UY : AlgebraicGeometry.Scheme} [inst : AlgebraicGeometry.IsAffine UY] {iY : UY ⟶ Y}\\n  [\", \"doc\": \"Given a pullback square where the target scheme $ Y $ is affine and the morphism $ i_Y: UY \\to Y $ is an open immersion, if the morphism $ f $ satisfies an affine target property $ P $, then the induce\"}\n  {\"name\": \"AlgebraicGeometry.FormallyUnramified\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FormallyUnramified\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"A morphism $ f: X \\\\to Y $ of schemes is formally unramified if it satisfies the infinitesimal lifting property characterizing formal unramification, meaning there are no nontrivial deformations of $ f\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.formallyUnramified_appLE\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FormallyUnramified\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [self : AlgebraicGeometry.FormallyUnramified f] {U : Y.Opens},\\n  AlgebraicGeometry.IsAffineOpen U →\\n    ∀ {V : X.Opens},\\n      AlgebraicGeometry.IsAffineOpen V →\\n        ∀ (e : V ≤ (TopologicalSpace.Opens.map f.base).obj U),\\n          (CommRingCat.Hom.h\", \"doc\": \"Let $f: X \\\\to Y$ be a formally unramified morphism of schemes. For any affine open subset $U$ of $Y$ and any affine open subset $V$ of $X$ such that $V \\\\subseteq f^{-1}(U)$, the induced ring homomorph\"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: returned declarations concern standard smooth charts, power-series division, ordinary residue fields or spectrum coordinate maps; none states the simultaneous parameter-model theorem or the supported derived Kummer purity map"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Cohomological purity for smooth affine pairs over a field: the ordered Kummer fundamental class is an isomorphism",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"Algebra.IsStandardSmooth.subsingleton_h1Cotangent\", \"module\": \"Mathlib/RingTheory/Smooth/StandardSmoothCotangent\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S]\\n  [Algebra.IsStandardSmooth R S], Subsingleton (Algebra.H1Cotangent R S)\", \"doc\": \"For any commutative ring $ R $ and a standard smooth $ R $-algebra $ S $, the first cohomology group $ H^1(\\\\Lambda_{S/R}) $ of the cotangent complex is trivial, meaning any two elements in this group \"}\n  {\"name\": \"AlgebraicGeometry.AffineSpace.isoOfIsAffine_inv_appTop_coord\", \"module\": \"Mathlib/AlgebraicGeometry/AffineSpace\", \"type\": \"∀ {n : Type v} (S : AlgebraicGeometry.Scheme) [inst : AlgebraicGeometry.IsAffine S] (i : n),\\n  (CategoryTheory.ConcreteCategory.hom\\n        (AlgebraicGeometry.Scheme.Hom.appTop (AlgebraicGeometry.AffineSpace.isoOfIsAffine n S).inv))\\n      (AlgebraicGeometry.AffineSpace.coord S i) =\\n    (CategoryTheo\", \"doc\": \"For an affine scheme $ S $, the inverse of the isomorphism between the affine space $ \\\\mathbb{A}^n_S $ and the spectrum of the polynomial ring over the global sections of $ S $ maps the $ i $-th coord\"}\n  {\"name\": \"AlgebraicGeometry.AffineSpace.isoOfIsAffine_hom_appTop\", \"module\": \"Mathlib/AlgebraicGeometry/AffineSpace\", \"type\": \"∀ {n : Type v} (S : AlgebraicGeometry.Scheme) [inst : AlgebraicGeometry.IsAffine S],\\n  AlgebraicGeometry.Scheme.Hom.appTop (AlgebraicGeometry.AffineSpace.isoOfIsAffine n S).hom =\\n    CategoryTheory.CategoryStruct.comp\\n      (AlgebraicGeometry.Scheme.ΓSpecIso\\n          { carrier := MvPolynomial n ↑(S\", \"doc\": \"When the base scheme $ S $ is affine, the isomorphism between the affine space $ \\\\mathbb{A}^n_S $ and the spectrum of the polynomial ring over the global sections of $ S $ maps the entire space to the\"}\n  {\"name\": \"AlgebraicGeometry.AffineSpace.isoOfIsAffine_inv_over\", \"module\": \"Mathlib/AlgebraicGeometry/AffineSpace\", \"type\": \"∀ {n : Type v} (S : AlgebraicGeometry.Scheme) [inst : AlgebraicGeometry.IsAffine S],\\n  CategoryTheory.CategoryStruct.comp (AlgebraicGeometry.AffineSpace.isoOfIsAffine n S).inv\\n      (AlgebraicGeometry.AffineSpace n S ↘ S) =\\n    CategoryTheory.CategoryStruct.comp (AlgebraicGeometry.Spec.map (CommRing\", \"doc\": \"When $ S $ is an affine scheme, the inverse of the isomorphism between the affine space $ \\\\mathbb{A}^n_S $ and the spectrum of the polynomial ring over the global sections of $ S $, composed with the \"}\n  {\"name\": \"AlgebraicGeometry.AffineSpace.isoOfIsAffine_hom\", \"module\": \"Mathlib/AlgebraicGeometry/AffineSpace\", \"type\": \"∀ (n : Type v) (S : AlgebraicGeometry.Scheme) [inst : AlgebraicGeometry.IsAffine S],\\n  (AlgebraicGeometry.AffineSpace.isoOfIsAffine n S).hom =\\n    CategoryTheory.CategoryStruct.comp (AlgebraicGeometry.AffineSpace n S).toSpecΓ\\n      (AlgebraicGeometry.Spec.map\\n        (CommRingCat.ofHom\\n          (Mv\", \"doc\": \"For an affine scheme $ S $ and a type $ n $, the affine space $ \\\\mathbb{A}^n_S $ is isomorphic to the spectrum of the polynomial ring $ \\\\Gamma(S)[x_1,\\\\dots,x_n] $ over the global sections of $ S $. Th\"}\n  {\"name\": \"AlgebraicGeometry.AffineSpace.isoOfIsAffine_inv\", \"module\": \"Mathlib/AlgebraicGeometry/AffineSpace\", \"type\": \"∀ (n : Type v) (S : AlgebraicGeometry.Scheme) [inst : AlgebraicGeometry.IsAffine S],\\n  (AlgebraicGeometry.AffineSpace.isoOfIsAffine n S).inv =\\n    AlgebraicGeometry.AffineSpace.homOfVector\\n      (CategoryTheory.CategoryStruct.comp (AlgebraicGeometry.Spec.map (CommRingCat.ofHom MvPolynomial.C)) S.iso\", \"doc\": \"For an affine scheme $ S $ and a type $ n $, the inverse of the canonical isomorphism between the affine space $ \\\\mathbb{A}^n_S $ and the spectrum of the polynomial ring over the global sections of $ \"}\n  {\"name\": \"AlgebraicGeometry.AffineSpace.instIsIsoSchemeOverInferInstanceOverClassOfIsEmpty\", \"module\": \"Mathlib/AlgebraicGeometry/AffineSpace\", \"type\": \"∀ {n : Type v} (S : AlgebraicGeometry.Scheme) [IsEmpty n], CategoryTheory.IsIso (AlgebraicGeometry.AffineSpace n S ↘ S)\", \"doc\": \"If the type $ n $ is empty (i.e., $ n = 0 $), then the canonical morphism from the affine space $ \\\\mathbb{A}^n_S $ to the base scheme $ S $ is an isomorphism. This reflects the fact that the affine sp\"}\n  {\"name\": \"AlgebraicGeometry.AffineSpace.isoOfIsAffine_inv_over_assoc\", \"module\": \"Mathlib/AlgebraicGeometry/AffineSpace\", \"type\": \"∀ {n : Type v} (S : AlgebraicGeometry.Scheme) [inst : AlgebraicGeometry.IsAffine S] {Z : AlgebraicGeometry.Scheme}\\n  (h : S ⟶ Z),\\n  CategoryTheory.CategoryStruct.comp (AlgebraicGeometry.AffineSpace.isoOfIsAffine n S).inv\\n      (CategoryTheory.CategoryStruct.comp (AlgebraicGeometry.AffineSpace n S ↘ \", \"doc\": \"For an affine scheme $ S $ and any scheme $ Z $, the composition of the inverse isomorphism $ (\\\\mathbb{A}^n_S \\\\cong \\\\operatorname{Spec}(\\\\Gamma(S)[x_1,\\\\dots,x_n]))^{-1} $, the canonical morphism $ \\\\mat\"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: returned declarations concern standard smooth charts, power-series division, ordinary residue fields or spectrum coordinate maps; none states the simultaneous parameter-model theorem or the supported derived Kummer purity map"
+  },
+  {
+   "tool": "grep",
+   "query": "Gysin|gysin|cohomological.?purity|Kummer.*(support|class)",
+   "results": "[grep] OK 5 hit(s)\n  {\"file\": \"Mathlib/CategoryTheory/Sites/Canonical.lean\", \"line\": \"17\", \"text\": \"A sieve `S` on `X` is covering for `finestTopologySingle P` iff\"}\n  {\"file\": \"Mathlib/CategoryTheory/Sites/Canonical.lean\", \"line\": \"59\", \"text\": \"def finestTopologySingle (P : Cᵒᵖ ⥤ Type w) : GrothendieckTopology C where\"}\n  {\"file\": \"Mathlib/CategoryTheory/Sites/Canonical.lean\", \"line\": \"83\", \"text\": \"  sInf (finestTopologySingle '' Ps)\"}\n  {\"file\": \"Mathlib/FieldTheory/KummerExtension.lean\", \"line\": \"17\", \"text\": \"Kummer theory is about the classification of finite extensions of `L` whose Galois group is cyclic\"}\n  {\"file\": \"Mathlib/FieldTheory/KummerExtension.lean\", \"line\": \"49\", \"text\": \"TODO: relate Kummer extensions of degree 2 with the class `Algebra.IsQuadraticExtension`.\"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: returned declarations concern standard smooth charts, power-series division, ordinary residue fields or spectrum coordinate maps; none states the simultaneous parameter-model theorem or the supported derived Kummer purity map"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Etale derived Kummer purity for the zero locus of smooth polynomial coordinates over a field",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"MvPolynomial.zeroLocus\", \"module\": \"Mathlib.RingTheory.Nullstellensatz\", \"type\": \"(I : Ideal (MvPolynomial σ k)) : Set (σ → K)\", \"doc\": \"The zero locus of an ideal $ I $ in the multivariate polynomial ring $ k[\\\\sigma] $ is the set of all functions $ x : \\\\sigma \\\\to K $ such that for every polynomial $ p \\\\in I $, the algebraic evaluation\"}\n  {\"name\": \"Algebra.IsStandardSmoothOfRelativeDimension.exists_etale_mvPolynomial\", \"module\": \"Mathlib.RingTheory.RingHom.StandardSmooth\", \"type\": \"[Algebra R S] [Algebra.IsStandardSmoothOfRelativeDimension n R S] : ∃ g : MvPolynomial (Fin n) R →ₐ[R] S, g.Etale\", \"doc\": \"If $ S $ is a standard smooth algebra of relative dimension $ n $ over a commutative ring $ R $, then there exists an étale algebra homomorphism $ g : R[x_1, \\\\dots, x_n] \\\\to S $ from the polynomial ri\"}\n  {\"name\": \"Algebra.Etale.formallyEtale\", \"module\": \"Mathlib.RingTheory.Etale.Basic\", \"type\": \"∀ {R : Type u} {A : Type v} {inst : CommRing R} {inst_1 : CommRing A} {inst_2 : Algebra R A} [self : Algebra.Etale R A],\\n  Algebra.FormallyEtale R A\", \"doc\": \"If $ A $ is an étale algebra over a commutative ring $ R $, then $ A $ is formally étale over $ R $. This establishes that the property of being étale implies formal étaleness in the context of commut\"}\n  {\"name\": \"Algebra.instEtaleOfIsStandardSmoothOfRelativeDimensionOfNatNat\", \"module\": \"Mathlib.RingTheory.Smooth.StandardSmoothCotangent\", \"type\": \"[IsStandardSmoothOfRelativeDimension 0 R S] : Etale R S\", \"doc\": \"If $ S $ is a standard smooth algebra of relative dimension 0 over a commutative ring $ R $, then $ S $ is an étale algebra over $ R $.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Etale\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Etale\", \"type\": \"(X : Scheme.{u}) : Type _\", \"doc\": \"The property of being an étale morphism to a fixed scheme $X$, defined as morphisms that are smooth of relative dimension 0, constructed via the morphism property lifting over $X$.\"}\n  {\"name\": \"MvPolynomial.mem_zeroLocus_iff\", \"module\": \"Mathlib.RingTheory.Nullstellensatz\", \"type\": \"{I : Ideal (MvPolynomial σ k)} {x : σ → K} : x ∈ zeroLocus K I ↔ ∀ p ∈ I, aeval x p = 0\", \"doc\": \"For an ideal $ I $ in the multivariate polynomial ring $ k[\\\\sigma] $, a function $ x : \\\\sigma \\\\to K $ belongs to the zero locus of $ I $ if and only if every polynomial $ p \\\\in I $ satisfies $ \\\\text{a\"}\n  {\"name\": \"Algebra.FormallyEtale.of_unramified_and_smooth\", \"module\": \"Mathlib.RingTheory.Etale.Basic\", \"type\": \"∀ {R : Type u} {A : Type v} [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A]\\n  [Algebra.FormallyUnramified R A] [Algebra.FormallySmooth R A], Algebra.FormallyEtale R A\", \"doc\": \"For commutative rings $ R $ and $ A $ with an $ R $-algebra structure, if $ A $ is both formally unramified over $ R $ and formally smooth over $ R $, then $ A $ is formally étale over $ R $.\"}\n  {\"name\": \"Algebra.etaleLocus_eq_unramfiedLocus_inter_smoothLocus\", \"module\": \"Mathlib.RingTheory.Etale.Locus\", \"type\": \": etaleLocus R A = unramifiedLocus R A ∩ smoothLocus R A\", \"doc\": \"For a commutative ring $ R $ and an $ R $-algebra $ A $, the étale locus of $ A $ over $ R $ coincides with the intersection of the unramified locus and the smooth locus of $ A $ over $ R $. Formally,\"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: returned declarations concern standard smooth charts, power-series division, ordinary residue fields or spectrum coordinate maps; none states the simultaneous parameter-model theorem or the supported derived Kummer purity map"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"DerivedCategory\", \"Etale\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-24",
+   "verdict": "no match: returned declarations concern standard smooth charts, power-series division, ordinary residue fields or spectrum coordinate maps; none states the simultaneous parameter-model theorem or the supported derived Kummer purity map"
+  },
+  {
+   "tool": "grep",
+   "query": "Kummer|kummer|[Pp]urity",
+   "results": "Actual search: ok=True, hits=0, subdirectory=AlgebraicGeometry; declarations: ",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected hits concern ordinary smooth/etale morphisms and algebraic coordinate maps; none states finite-coefficient supported derived Kummer purity"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The etale Gysin map of a smooth coordinate closed immersion over a prime field is an isomorphism",
+   "results": "Actual search: ok=True, hits=8, subdirectory=; declarations: AlgebraicGeometry.IsClosedImmersion.instIsIsoSchemeToImage, AlgebraicGeometry.IsClosedImmersion.isIso_of_injective_of_isAffine, AlgebraicGeometry.Scheme.Hom.appIso, AlgebraicGeometry.IsEtale.instIsSmooth, AlgebraicGeometry.IsOpenImmersion.ΓIsoTop, AlgebraicGeometry.IsOpenImmersion.ΓIso, AlgebraicGeometry.Scheme.Hom.app_appIso_inv_assoc, AlgebraicGeometry.IsClosedImmersion.isIso_iff_ker_eq_bot",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected hits concern ordinary smooth/etale morphisms and algebraic coordinate maps; none states finite-coefficient supported derived Kummer purity"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"DerivedCategory\", \"Etale\"",
+   "results": "Actual search: ok=True, hits=0, subdirectory=; declarations: ",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected hits concern ordinary smooth/etale morphisms and algebraic coordinate maps; none states finite-coefficient supported derived Kummer purity"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Kummer fundamental class gives etale cohomological purity for a smooth pullback of a polynomial coordinate zero section over a field",
+   "results": "Actual search: ok=True, hits=8, subdirectory=; declarations: Algebra.IsStandardSmoothOfRelativeDimension.exists_etale_mvPolynomial, StandardEtalePair.hasMap_X, RingHom.IsStandardSmoothOfRelativeDimension.exists_etale_mvPolynomial, Algebra.instEtaleOfIsStandardSmoothOfRelativeDimensionOfNatNat, StandardEtalePresentation.exists_mul_aeval_x_g_pow_eq_aeval_x, RingHom.IsStandardSmooth.exists_etale_mvPolynomial, StandardEtalePair, StandardEtalePresentation",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected hits concern ordinary smooth/etale morphisms and algebraic coordinate maps; none states finite-coefficient supported derived Kummer purity"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a regular immersion cut out by coordinates, the positive etale Kummer Gysin morphism identifies local cohomology with the shifted Tate twist",
+   "results": "Actual search: ok=True, hits=8, subdirectory=; declarations: AlgebraicGeometry.Proj.fromOfGlobalSections_morphismRestrict, AlgebraicGeometry.liftCoborder_app, AlgebraicGeometry.Scheme.Hom.toImage_app, Algebra.etaleLocus_eq_compl_support, AlgebraicGeometry.Scheme.IdealSheafData.isOpenImmersion_glueDataObjMap, AlgebraicGeometry.Proj.fromOfGlobalSections_resLE, Algebra.basicOpen_subset_etaleLocus_iff, AlgebraicGeometry.LocallyRingedSpace.toΓSpecCApp_iff",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected hits concern ordinary smooth/etale morphisms and algebraic coordinate maps; none states finite-coefficient supported derived Kummer purity"
+  }
+ ],
+ "blueprint": {
+  "from": {
+   "node": "lem-per-artin-gabber-affine-curve",
+   "place": "Proof Step 3: regular finite-torsion local purity input; ILO XVI Proposition 3.2.5 in the admitted trait-test reduction. Fresh local proof replacing excluded Q45 prime-field punctual purity. Finite-type ordinary-etale coordinate-pair purity before taking the supported limit.",
+   "via": [
+    "lem-per-trait-test-prime-field-local-input",
+    "lem-per-punctual-purity-trait-test",
+    "lem-per-gabber-regular-pair-purity",
+    "lem-per-absolute-gysin-purity",
+    "lem-per-potential-dualizing-regular-unit",
+    "lem-per-finite-regular-reduction-dualizing",
+    "lem-per-qbar-generic-duality-model",
+    "lem-per-qbar-middle-tstructure"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-per-prime-smooth-coordinate-kummer-purity",
+  "worker": "stage1",
+  "summary": "R1 repair: removed all three excluded interfaces and their use. Rebuilt the origin class from ordinary finite projective-line adjunction, its positive Kummer normalization and coordinate induction; computed the canonical support comparison using injective kernel sequences and ordinary smooth base change. Retained geometry, full statement, specified class and derived-sections calculation; no new nodes.",
+  "blueprint": "Nearest ancestor lem-per-artin-gabber-affine-curve, Proof Step 3 regular local-purity input; realizes the ordinary-etale finite-type coordinate-pair calculation singled out by lem-per-trait-test-prime-field-local-input. Latest zero-section proof supplies the adjunction/positive Kummer normalization route.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-fibre-product-affine-spectra",
+    "why": "Generic affine geometry, derived-category, or exact-adjunction tool used only for the displayed finite ordinary-etale coordinate calculation; no statement of the perverse/Fourier unit is replaced."
+   },
+   {
+    "node": "lem-weil-pbc-tensor-quotient-base-change",
+    "why": "Generic affine geometry, derived-category, or exact-adjunction tool used only for the displayed finite ordinary-etale coordinate calculation; no statement of the perverse/Fourier unit is replaced."
+   },
+   {
+    "node": "lem-weil-pbc-smooth-ring-map-iff-smooth-affine",
+    "why": "Generic affine geometry, derived-category, or exact-adjunction tool used only for the displayed finite ordinary-etale coordinate calculation; no statement of the perverse/Fourier unit is replaced."
+   },
+   {
+    "node": "lem-weil-pbc-smooth-ring-map-base-change-composition",
+    "why": "Generic affine geometry, derived-category, or exact-adjunction tool used only for the displayed finite ordinary-etale coordinate calculation; no statement of the perverse/Fourier unit is replaced."
+   },
+   {
+    "node": "sbc-lem-affine-space-smooth",
+    "why": "Generic affine geometry, derived-category, or exact-adjunction tool used only for the displayed finite ordinary-etale coordinate calculation; no statement of the perverse/Fourier unit is replaced."
+   },
+   {
+    "node": "lem-trf-smooth-composition",
+    "why": "Generic affine geometry, derived-category, or exact-adjunction tool used only for the displayed finite ordinary-etale coordinate calculation; no statement of the perverse/Fourier unit is replaced."
+   },
+   {
+    "node": "lem-weil-pbc-smooth-scheme-over-field-regular",
+    "why": "Generic affine geometry, derived-category, or exact-adjunction tool used only for the displayed finite ordinary-etale coordinate calculation; no statement of the perverse/Fourier unit is replaced."
+   },
+   {
+    "node": "lem-pc-smooth-flat",
+    "why": "Generic affine geometry, derived-category, or exact-adjunction tool used only for the displayed finite ordinary-etale coordinate calculation; no statement of the perverse/Fourier unit is replaced."
+   },
+   {
+    "node": "lem-weil-pbc-flat-ring-map-iff-flat-affine",
+    "why": "Generic affine geometry, derived-category, or exact-adjunction tool used only for the displayed finite ordinary-etale coordinate calculation; no statement of the perverse/Fourier unit is replaced."
+   },
+   {
+    "node": "lem-weil-pbc-flat-tensor-exact",
+    "why": "Generic affine geometry, derived-category, or exact-adjunction tool used only for the displayed finite ordinary-etale coordinate calculation; no statement of the perverse/Fourier unit is replaced."
+   },
+   {
+    "node": "lem-weil-pbc-projective-space-standard-charts",
+    "why": "Generic affine geometry, derived-category, or exact-adjunction tool used only for the displayed finite ordinary-etale coordinate calculation; no statement of the perverse/Fourier unit is replaced."
+   },
+   {
+    "node": "lemma-nagata-relative-affine-space-open-immersion",
+    "why": "Generic affine geometry, derived-category, or exact-adjunction tool used only for the displayed finite ordinary-etale coordinate calculation; no statement of the perverse/Fourier unit is replaced."
+   },
+   {
+    "node": "def-pc-divisor-line-bundle",
+    "why": "Generic affine geometry, derived-category, or exact-adjunction tool used only for the displayed finite ordinary-etale coordinate calculation; no statement of the perverse/Fourier unit is replaced."
+   },
+   {
+    "node": "lem-asd-ordinary-finite-p1-adjunction",
+    "why": "Arbitrary-Noetherian-base ordinary-etale projective-line adjunction and its positive Chern counit, the rank-one input explicitly prescribed by the blueprint coordinate proof."
+   },
+   {
+    "node": "lem-asd-ordinary-supported-kummer",
+    "why": "Ordinary finite Cartier supported class and its Chern normalization/pullback, before any general purity assertion."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
+    "why": "Generic affine geometry, derived-category, or exact-adjunction tool used only for the displayed finite ordinary-etale coordinate calculation; no statement of the perverse/Fourier unit is replaced."
+   },
+   {
+    "node": "lem-cat-right-adjoint-composition",
+    "why": "Generic affine geometry, derived-category, or exact-adjunction tool used only for the displayed finite ordinary-etale coordinate calculation; no statement of the perverse/Fourier unit is replaced."
+   },
+   {
+    "node": "det-sp-unique-right-adjoint",
+    "why": "Generic affine geometry, derived-category, or exact-adjunction tool used only for the displayed finite ordinary-etale coordinate calculation; no statement of the perverse/Fourier unit is replaced."
+   },
+   {
+    "node": "src-right-derived-functor-plus-compatibility",
+    "why": "Generic affine geometry, derived-category, or exact-adjunction tool used only for the displayed finite ordinary-etale coordinate calculation; no statement of the perverse/Fourier unit is replaced."
+   },
+   {
+    "node": "lem-pur-closed-support-open-counit",
+    "why": "Generic exact open/closed counit calculation identifies the actual restricted Cartier morphism."
+   },
+   {
+    "node": "lem-amb-etale-adjoint-locality",
+    "why": "Only the generic exact etale sum-extension adjunction, specialized to the standard open; no general smooth duality is used."
+   },
+   {
+    "node": "lem-weil-pbc-extension-by-zero-exact",
+    "why": "Generic affine geometry, derived-category, or exact-adjunction tool used only for the displayed finite ordinary-etale coordinate calculation; no statement of the perverse/Fourier unit is replaced."
+   },
+   {
+    "node": "lem-asd-etale-finite-twist-pullback",
+    "why": "Generic affine geometry, derived-category, or exact-adjunction tool used only for the displayed finite ordinary-etale coordinate calculation; no statement of the perverse/Fourier unit is replaced."
+   },
+   {
+    "node": "lem-amb-proper-coproducts-projection",
+    "why": "Generic tensor projection for closed direct image, used in the displayed Hom calculation with invertible Tate lines."
+   },
+   {
+    "node": "lem-weil-pbc-closed-immersion-proper",
+    "why": "Generic affine geometry, derived-category, or exact-adjunction tool used only for the displayed finite ordinary-etale coordinate calculation; no statement of the perverse/Fourier unit is replaced."
+   },
+   {
+    "node": "sbc-thm-bounded-below-derived-smooth-base-change",
+    "why": "Generic ordinary smooth base change applied to the complementary open; it is not a purity theorem."
+   },
+   {
+    "node": "lem-kun-unbounded-abelian-exchange-comparison",
+    "why": "Only the generic coefficient-forgetting comparison for the specified direct-image exchange, to apply abelian smooth base change to modules."
+   },
+   {
+    "node": "lem-sfb-noetherian-open-immersion-qc",
+    "why": "Generic affine geometry, derived-category, or exact-adjunction tool used only for the displayed finite ordinary-etale coordinate calculation; no statement of the perverse/Fourier unit is replaced."
+   },
+   {
+    "node": "prop-weil-pbc-inverse-image-modules-exact",
+    "why": "Generic affine geometry, derived-category, or exact-adjunction tool used only for the displayed finite ordinary-etale coordinate calculation; no statement of the perverse/Fourier unit is replaced."
+   },
+   {
+    "node": "lem-weil-pbc-dplus-injective-representative",
+    "why": "Generic affine geometry, derived-category, or exact-adjunction tool used only for the displayed finite ordinary-etale coordinate calculation; no statement of the perverse/Fourier unit is replaced."
+   },
+   {
+    "node": "lem-pur-etale-injective-support-sequence",
+    "why": "Generic ordinary module injective support sequence fixes the canonical map and its triangle, without purity."
+   },
+   {
+    "node": "lem-weil-pbc-complex-ses-triangle",
+    "why": "Generic affine geometry, derived-category, or exact-adjunction tool used only for the displayed finite ordinary-etale coordinate calculation; no statement of the perverse/Fourier unit is replaced."
+   },
+   {
+    "node": "def-weil-pbc-derived-exchange",
+    "why": "Generic affine geometry, derived-category, or exact-adjunction tool used only for the displayed finite ordinary-etale coordinate calculation; no statement of the perverse/Fourier unit is replaced."
+   },
+   {
+    "node": "lem-sf-triangle-morphism-iso",
+    "why": "Generic affine geometry, derived-category, or exact-adjunction tool used only for the displayed finite ordinary-etale coordinate calculation; no statement of the perverse/Fourier unit is replaced."
+   },
+   {
+    "node": "lemma-weil-pbc-finite-exchange",
+    "why": "Generic affine geometry, derived-category, or exact-adjunction tool used only for the displayed finite ordinary-etale coordinate calculation; no statement of the perverse/Fourier unit is replaced."
+   },
+   {
+    "node": "lem-weil-pbc-closed-immersion-finite",
+    "why": "Generic affine geometry, derived-category, or exact-adjunction tool used only for the displayed finite ordinary-etale coordinate calculation; no statement of the perverse/Fourier unit is replaced."
+   },
+   {
+    "node": "lem-kun-04ca",
+    "why": "Generic affine geometry, derived-category, or exact-adjunction tool used only for the displayed finite ordinary-etale coordinate calculation; no statement of the perverse/Fourier unit is replaced."
+   },
+   {
+    "node": "lem-pur-etale-supported-kernel-adjunction",
+    "why": "Generic affine geometry, derived-category, or exact-adjunction tool used only for the displayed finite ordinary-etale coordinate calculation; no statement of the perverse/Fourier unit is replaced."
+   },
+   {
+    "node": "lem-sp-right-adjoint-preserves-injectives",
+    "why": "Generic affine geometry, derived-category, or exact-adjunction tool used only for the displayed finite ordinary-etale coordinate calculation; no statement of the perverse/Fourier unit is replaced."
+   },
+   {
+    "node": "lem-weil-pbc-right-derived-plus-injective",
+    "why": "Generic affine geometry, derived-category, or exact-adjunction tool used only for the displayed finite ordinary-etale coordinate calculation; no statement of the perverse/Fourier unit is replaced."
+   },
+   {
+    "node": "lem-weil-pbc-open-immersion-etale",
+    "why": "Generic derived or open-immersion tool for the displayed ordinary-etale adjunction/resolution calculation; no perverse/Fourier proof step is replaced."
+   },
+   {
+    "node": "lem-weil-pbc-kinjective-hom-derived",
+    "why": "Generic derived or open-immersion tool for the displayed ordinary-etale adjunction/resolution calculation; no perverse/Fourier proof step is replaced."
+   },
+   {
+    "node": "def-amb-etale-compact-support",
+    "why": "Only the identity-open compactification for a closed immersion, identifying its compact support with closed direct image and hence its chosen right adjoints."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-fibre-product-affine-spectra",
+  "lem-weil-pbc-tensor-quotient-base-change",
+  "lem-weil-pbc-smooth-ring-map-iff-smooth-affine",
+  "lem-weil-pbc-smooth-ring-map-base-change-composition",
+  "sbc-lem-affine-space-smooth",
+  "lem-trf-smooth-composition",
+  "lem-weil-pbc-smooth-scheme-over-field-regular",
+  "lem-pc-smooth-flat",
+  "lem-weil-pbc-flat-ring-map-iff-flat-affine",
+  "lem-weil-pbc-flat-tensor-exact",
+  "lem-weil-pbc-projective-space-standard-charts",
+  "lemma-nagata-relative-affine-space-open-immersion",
+  "def-pc-divisor-line-bundle",
+  "lem-asd-ordinary-finite-p1-adjunction",
+  "lem-asd-ordinary-supported-kummer",
+  "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
+  "lem-cat-right-adjoint-composition",
+  "det-sp-unique-right-adjoint",
+  "src-right-derived-functor-plus-compatibility",
+  "lem-pur-closed-support-open-counit",
+  "lem-amb-etale-adjoint-locality",
+  "lem-weil-pbc-extension-by-zero-exact",
+  "lem-asd-etale-finite-twist-pullback",
+  "lem-amb-proper-coproducts-projection",
+  "lem-weil-pbc-closed-immersion-proper",
+  "sbc-thm-bounded-below-derived-smooth-base-change",
+  "lem-kun-unbounded-abelian-exchange-comparison",
+  "lem-sfb-noetherian-open-immersion-qc",
+  "prop-weil-pbc-inverse-image-modules-exact",
+  "lem-weil-pbc-dplus-injective-representative",
+  "lem-pur-etale-injective-support-sequence",
+  "lem-weil-pbc-complex-ses-triangle",
+  "def-weil-pbc-derived-exchange",
+  "lem-sf-triangle-morphism-iso",
+  "lemma-weil-pbc-finite-exchange",
+  "lem-weil-pbc-closed-immersion-finite",
+  "lem-kun-04ca",
+  "lem-pur-etale-supported-kernel-adjunction",
+  "lem-sp-right-adjoint-preserves-injectives",
+  "lem-weil-pbc-right-derived-plus-injective",
+  "lem-weil-pbc-open-immersion-etale",
+  "lem-weil-pbc-kinjective-hom-derived",
+  "def-amb-etale-compact-support"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q08-90281cb8f",
+  "group": "Q08",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q08-90281cb8f (reviewer sub-agent of L); spot-checked: This repairs the RETURN of fadc6babe4d8, which cited three dropped Artin–Gabber nodes. All three (smooth-duality, mixed identities, regular-closed-support base change) are now gone. I checked all 56 stmt and proof deps against coord/route-pivot-dropped.txt in both side-live and live, and none is listed. lem-per-regular-immersion-class-calculus was re-admitted by NU and def-per-closed-support-plus-adjunction by Q84. The statement and stmt_deps are unchanged. There are no new nodes, every uses id is in proof_deps, and all ids exist. Sources read: Milne LEC §16, Thm 16.7 and Lemma 16.8 (pp.111–112), and the latest blueprint proof of cor-pur-affine-space-zero-section-purity. That proof's route is a composite adjunction with the Cartier class integrating to 1 under the P1 trace, followed by an ordered product of Cartier maps. The item follows this route for S ⊂ A^c and reaches general smooth h by smooth base change. No SGA source is used, and no finite-field or Qbar_l convention is applied to Q. Step-by-step checks: Step 1: Z=X×_V S; X, Z, V and S are smooth over k0, hence regular and Noetherian. Step 2: the monomial nonzerodivisor stays injective after the flat tensor, and D≠0. Step 3: the ideal generators t and 1 give dual transition t^{-1}, which is exactly the P1-node convention g0=(x1/x0)^{-1}g1. Step 4: c_d u_d=+c1(O(1)) together with pasted units gives Rq_*c_d=h, so t_q h=1; this uses statements only, not the asd proof sign. Step 5: from Rq_*d_* ⊣ d^!G_q and qd=1, uniqueness gives β with βη_d=1, and Ri_! is identified with the closed-support adjoint by uniqueness. Step 6: the open-counit identity ε∘a_!(c_U)=c∘e plus Cartier pullback carries η_z to η_d. Step 7: the twist comparison follows from the projection formula and Yoneda. Step 8: the induction is set up properly from the class-calculus composition rule and its rank-one transpose clause. Step 9: sbc bounded-below smooth base change applies (j is qcqs on a Noetherian V, the coefficients are ℓ-torsion with ℓ invertible), and the module/abelian comparison gives the module version. Steps 10–11: the injective support sequences, a map of short exact sequences and the triangle morphism give a first map that is an isomorphism, then finite exchange and i^*i_*=1 make b the canonical invertible mate. Step 12: flat base change in the class calculus gives η_i=b∘h_Z^*η_s, and the chart product with +c1 gives the normalization. Step 13: an A-linear supported kernel and one injective complex compute both sides, giving γ_i. Edge cases tested: c=0 (U empty, class 1), c=1 (sign), C=P, an extra polynomial factor, disconnected C, components missing Z, char p with ℓ≠p, and Q. Batch-5 flags: lem-trf-smooth-composition only says smooth composed with smooth is smooth (status mathlib). It is generic and not a step of the trace formula or of Poincaré duality, so I accepted it; it could also be replaced by the pbc ring-map composition clause. lem-asd-ordinary-supported-kummer reaches pod only through lem-pod-etale-stalk-tensor-scalar, which is generic stalk tensor and scalar extension. That is not Poincaré-duality content, and nt-assume-poincare-duality (char p fields, Qbar_l) cannot give a Cartier class over Q or over a Noetherian base, so I accepted it. The declared tool_uses are generic and used for what their statements say; accepted. Duplicates: cor-pur zero-section and thm-pur-finite-coefficient-smooth-purity are fixed-k pro-etale, lem-trf-ambient-diagonal-purity-base-change is forbidden by batch 5, and smooth-divisor purity is codimension 1 only, so none can replace the item. No fixes."
+ }
+}

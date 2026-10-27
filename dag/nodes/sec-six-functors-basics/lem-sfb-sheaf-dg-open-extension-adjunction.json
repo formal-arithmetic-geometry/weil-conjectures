@@ -1,0 +1,255 @@
+{
+ "id": "lem-sfb-sheaf-dg-open-extension-adjunction",
+ "kind": "statement",
+ "title": "Open extension by zero and restriction for sheaf dg modules",
+ "statement": "Let $X$ be a topological space, $\\mathcal O$ a sheaf of commutative rings, and $\\mathcal A$ a sheaf dg $\\mathcal O$-algebra, in the universes of [def-weil-size-convention]. Use left sheaf dg modules and degree-zero chain maps as in [def-sfb-sheaf-dg-module-localization]. Let $U\\subseteq X$ be open, with inclusion $j$, and write $\\mathcal A_U=\\mathcal A|_U$. For a left dg $\\mathcal A_U$-module $L$, define a graded presheaf $P_L$ on $X$ by $P_L^q(V)=L^q(V)$ when $V\\subseteq U$, and $P_L^q(V)=0$ otherwise. Its restrictions are those of $L$ when the source open is contained in $U$, and zero otherwise; the differential and the $\\mathcal A(V)$-action are those of $L$ or zero. Sheafify each degree as an $\\mathcal O$-module [def-weil-presheaf-modules-sheafification]. The resulting graded sheaf $j_!L$ has an induced differential and left $\\mathcal A$-action, and these constructions on objects and maps define a functor on dg modules. There is a natural bijection\n$$\\operatorname{Hom}_{\\mathrm{dg}\\,\\mathcal A}(j_!L,M)\\simeq\\operatorname{Hom}_{\\mathrm{dg}\\,\\mathcal A_U}(L,M|_U)$$\nfor every left sheaf dg $\\mathcal A$-module $M$. Both Hom sets here consist of degree-zero action-preserving chain maps, before passing to homotopy or inverting quasi-isomorphisms.",
+ "source": {
+  "document": "literature/stacks-project/sdga.tex",
+  "place": "Tag 0FRW (lemma-extension-by-zero-dg), degree-zero closed maps, and Tag 0FRA (lemma-extension-by-zero-graded), specialized to the open site of a space; left-module convention. Explicit presheaf construction as in section-localize-graded and section-localize-dg."
+ },
+ "stmt_deps": [
+  "def-weil-size-convention",
+  "def-sfb-sheaf-dg-module-localization",
+  "def-weil-presheaf-modules-sheafification"
+ ],
+ "proof": [
+  {
+   "text": "For each degree q form P_L^q as in the statement. For W subset V, the only case in which the source is nonzero is V subset U, and then W subset U too. Hence composable restrictions either are restrictions of L throughout or have zero source; this proves the presheaf identities and compatibility with d and the action. On V subset U the identities d^2=0, 1x=x, (ab)x=a(bx) and d(ax)=d(a)x+(-1)^{|a|}a d(x) are those of L; on every other V they are identities on zero modules. Thus P_L is a presheaf dg module in the explicit left convention of [def-sfb-sheaf-dg-module-localization].",
+   "uses": [
+    "def-sfb-sheaf-dg-module-localization"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sdga.tex",
+    "place": "Tags 0FRI (definition-dgm), 0FRV (section-localize-dg); the explicit zero presheaf on the opens site"
+   }
+  },
+  {
+   "text": "Write J^q=(P_L^q)^# and eta_q:P_L^q -> J^q. The module-sheafification universal property [def-weil-presheaf-modules-sheafification] extends eta_{q+1} d uniquely to D^q:J^q -> J^{q+1}. For each p,q the presheaf pairing A^p times P_L^q -> J^{p+q}, (a,x) |-> eta_{p+q}(ax), is O-bilinear and restriction-compatible. Apply [lem-pc-sites-module-sheafification-bilinear-extension] to obtain A^p times J^q -> J^{p+q}; here the sheafification of the already sheaf A^p is canonically A^p, since its identity has the sheafification universal property. This constructs the proposed differential and action, with D eta=eta d and a eta(x)=eta(ax).",
+   "uses": [
+    "def-weil-presheaf-modules-sheafification",
+    "lem-pc-sites-module-sheafification-bilinear-extension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03CY (lemma-sheafification-presheaf-modules); Tag 0GMW (lemma-sheafification-tensor), bilinear universal property"
+   }
+  },
+  {
+   "text": "These operations satisfy the dg-module laws. Indeed, [lem-weil-pbc-module-sheafification-underlying-sets] identifies the underlying sets of J^q with set sheafification, and [lem-weil-pbc-site-sheafification-sections-local] says every section of J^q is locally eta_q(x). On such a representative the two sides of each law reduce, by the formulas in step 2, respectively to eta(d^2x)=0, eta(1x)=eta(x), eta((ab)x)=eta(a(bx)), and eta(d(ax))=eta(d(a)x+(-1)^p a d(x)). These are the identities of step 1. Sheaf separatedness makes the equalities global. Bilinearity was supplied in step 2, so this proves all axioms of [def-sfb-sheaf-dg-module-localization]. No boundedness or exactness assertion is needed.",
+   "uses": [
+    "lem-weil-pbc-module-sheafification-underlying-sets",
+    "lem-weil-pbc-site-sheafification-sections-local",
+    "def-sfb-sheaf-dg-module-localization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sdga.tex",
+    "place": "Tag 0FRV (section-localize-dg), omitted verification of differentials; local-section test from sites.tex Tag 00WK and sheaves.tex Tag 0087"
+   }
+  },
+  {
+   "text": "A dg map f:L -> L' gives the presheaf map P_f equal to f on opens inside U and to the zero map elsewhere. Sheafify degreewise using [def-weil-presheaf-modules-sheafification]. The induced map J_f satisfies J_f eta=eta P_f. Differential compatibility follows from the uniqueness of linear extensions in that node. Action compatibility follows from uniqueness of bilinear extension in [lem-pc-sites-module-sheafification-bilinear-extension], since on A^p times P_L^q both composites are eta(f(ax))=eta(a f(x)). Identity and composition agree after each eta, hence agree by linear uniqueness. Consequently this is a functor on dg modules, denoted j_!. Restriction simply restricts every structure map and preserves its identities.",
+   "uses": [
+    "def-weil-presheaf-modules-sheafification",
+    "lem-pc-sites-module-sheafification-bilinear-extension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sdga.tex",
+    "place": "Tag 0FRV (section-localize-dg), functor on maps; Tags 03CY and 0GMW for the extension and uniqueness"
+   }
+  },
+  {
+   "text": "First ignore the differential and action. Degree by degree, [def-weil-presheaf-modules-sheafification] identifies O-linear maps g^q:J^q -> M^q with presheaf O-linear maps h^q:P_L^q -> M^q. Such h^q are in natural bijection with O_U-linear sheaf maps f^q:L^q -> M^q|_U: restrict h^q to opens contained in U; conversely set h_V^q=f_V^q for V subset U and h_V^q=0 otherwise. For W subset V, naturality holds by that of f if V subset U, and has zero source if V is not contained in U. The two recipes are inverse because the other source modules are zero. Taking these explicit inverses in every integer degree gives the bijection on graded underlying module maps, with f_V^q=g_V^q eta_{q,V} for V subset U.",
+   "uses": [
+    "def-weil-presheaf-modules-sheafification"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sdga.tex",
+    "place": "Tag 0FRA (lemma-extension-by-zero-graded), underlying graded module adjunction; Tag 03CY for the explicit presheaf realization"
+   }
+  },
+  {
+   "text": "Under step 5, g is a chain map exactly when f is. Compare d_M g^q and g^{q+1}D^q: linear uniqueness of [def-weil-presheaf-modules-sheafification] tests their equality after eta_q, where on opens inside U it reads d_M f^q=f^{q+1}d_L, and elsewhere the source is zero. Likewise compare the two bilinear maps A^p times J^q -> M^{p+q}, (a,z) |-> g(az) and (a,z) |-> a g(z). Uniqueness in [lem-pc-sites-module-sheafification-bilinear-extension] tests equality on A^p times P_L^q; on opens inside U this reads f(ax)=a f(x), and elsewhere the second factor is zero. Thus the bijection restricts precisely to the degree-zero action-preserving chain maps of [def-sfb-sheaf-dg-module-localization]. For precomposition by t:L' -> L its value on x is f(t(x)), since J_t eta=eta P_t; for postcomposition by s:M -> M' it is s(f(x)). This proves naturality in both variables and the asserted adjunction before homotopy or localization.",
+   "uses": [
+    "def-weil-presheaf-modules-sheafification",
+    "lem-pc-sites-module-sheafification-bilinear-extension",
+    "def-sfb-sheaf-dg-module-localization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sdga.tex",
+    "place": "Tags 0FRA (lemma-extension-by-zero-graded) and 0FRW (lemma-extension-by-zero-dg), degree-zero closed-map sub-bijection; Tags 03CY and 0GMW for testing the two compatibility equations"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sfb-sheaf-dg-module-localization",
+  "def-weil-presheaf-modules-sheafification",
+  "lem-pc-sites-module-sheafification-bilinear-extension",
+  "lem-weil-pbc-module-sheafification-underlying-sets",
+  "lem-weil-pbc-site-sheafification-sections-local"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sdga.tex",
+  "place": "Tags 0FRA and 0FRW: explicit opens-site sheafification construction and verification of the omitted dg compatibility, with left modules"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Extension by zero for sheaves of differential graded modules on an open subset is left adjoint to restriction",
+   "results": "{\"t\": \"2026-10-24T08:11:10Z\", \"tool\": \"leanfinder\", \"query\": \"Extension by zero for sheaves of differential graded modules on an open subset is left adjoint to restriction\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Modules.instIsLeftAdjointRestrictFunctor\", \"AlgebraicGeometry.Scheme.Modules.restrictAdjunction\", \"PresheafOfModules.sheafificationAdjunction\", \"AlgebraicGeometry.Scheme.Modules.instIsRightAdjointPresheafOfModulesToPresheafOfModules\", \"SheafOfModules.PullbackConstruction.adjunction\", \"PresheafOfModules.sheafificationAdjunction_homEquiv_apply\", \"PresheafOfModules.instIsLeftAdjointSheafOfModulesSheafification\", \"AlgebraicGeometry.Scheme.Modules.restrictAdjunction_counit_app_app\"], \"digest\": \"231f10d55c844cc5\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: ordinary restriction/pushforward and presheaf sheafification adjunctions do not provide extension by zero for modules over a sheaf dg algebra. Read Scheme.Modules.restrictAdjunction at Mathlib/AlgebraicGeometry/Modules/Sheaf.lean:425, PresheafOfModules.sheafificationAdjunction at Algebra/Category/ModuleCat/Presheaf/Sheafification.lean:125, and SheafOfModules.PullbackConstruction.adjunction at Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean:79. No dg-module declarations in the source grep; neither phrase gives a one-line specialization."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"SheafOfModules\", \"adjunction\"",
+   "results": "{\"t\": \"2026-10-24T08:11:11Z\", \"tool\": \"loogle\", \"query\": \"\\\"SheafOfModules\\\", \\\"adjunction\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"PresheafOfModules.freeAdjunctionUnit\", \"PresheafOfModules.freeAdjunction\", \"PresheafOfModules.freeAdjunctionUnit_app\", \"PresheafOfModules.freeAdjunction_homEquiv\", \"PresheafOfModules.freeAdjunction_unit_app\", \"PresheafOfModules.pullbackPushforwardAdjunction\", \"PresheafOfModulesOfCommRing.pullbackPushforwardAdjunction\", \"PresheafOfModules.colimitAdjunction\"], \"digest\": \"3bc2b9beb5471990\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: ordinary restriction/pushforward and presheaf sheafification adjunctions do not provide extension by zero for modules over a sheaf dg algebra. Read Scheme.Modules.restrictAdjunction at Mathlib/AlgebraicGeometry/Modules/Sheaf.lean:425, PresheafOfModules.sheafificationAdjunction at Algebra/Category/ModuleCat/Presheaf/Sheafification.lean:125, and SheafOfModules.PullbackConstruction.adjunction at Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean:79. No dg-module declarations in the source grep; neither phrase gives a one-line specialization."
+  },
+  {
+   "tool": "grep",
+   "query": "DifferentialGraded|DGModule|extensionByZero|extension_by_zero",
+   "results": "{\"t\": \"2026-10-24T08:11:11Z\", \"tool\": \"grep\", \"query\": \"DifferentialGraded|DGModule|extensionByZero|extension_by_zero\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: ordinary restriction/pushforward and presheaf sheafification adjunctions do not provide extension by zero for modules over a sheaf dg algebra. Read Scheme.Modules.restrictAdjunction at Mathlib/AlgebraicGeometry/Modules/Sheaf.lean:425, PresheafOfModules.sheafificationAdjunction at Algebra/Category/ModuleCat/Presheaf/Sheafification.lean:125, and SheafOfModules.PullbackConstruction.adjunction at Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean:79. No dg-module declarations in the source grep; neither phrase gives a one-line specialization."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Open extension by zero on sheaves of differential graded modules is adjoint to restriction",
+   "results": "{\"t\": \"2026-10-24T08:11:11Z\", \"tool\": \"leansearch\", \"query\": \"Open extension by zero on sheaves of differential graded modules is adjoint to restriction\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Modules.restrictAdjunction\", \"AlgebraicGeometry.Scheme.Modules.instIsLeftAdjointRestrictFunctor\", \"SheafOfModules.PullbackConstruction.adjunction\", \"ModuleCat.extendRestrictScalarsAdj\", \"SheafOfModules.pushforwardPushforwardAdj\", \"AlgebraicGeometry.Scheme.Modules.restrictAdjunction_unit_app_app\", \"AlgebraicGeometry.Scheme.Modules.restrictFunctor\", \"CategoryTheory.constantSheafΓAdj\"], \"digest\": \"7f241f4d4a217713\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: ordinary restriction/pushforward and presheaf sheafification adjunctions do not provide extension by zero for modules over a sheaf dg algebra. Read Scheme.Modules.restrictAdjunction at Mathlib/AlgebraicGeometry/Modules/Sheaf.lean:425, PresheafOfModules.sheafificationAdjunction at Algebra/Category/ModuleCat/Presheaf/Sheafification.lean:125, and SheafOfModules.PullbackConstruction.adjunction at Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean:79. No dg-module declarations in the source grep; neither phrase gives a one-line specialization."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Restriction of dg module sheaves to an open subspace has a left adjoint defined by sheafifying the extension by zero presheaf",
+   "results": "{\"t\": \"2026-10-24T08:11:37Z\", \"tool\": \"leanfinder\", \"query\": \"Restriction of dg module sheaves to an open subspace has a left adjoint defined by sheafifying the extension by zero presheaf\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Modules.instIsLeftAdjointRestrictFunctor\", \"PresheafOfModules.sheafificationAdjunction\", \"PresheafOfModules.instIsLeftAdjointSheafOfModulesSheafification\", \"AlgebraicGeometry.Scheme.Modules.restrictAdjunction\", \"PresheafOfModules.sheafificationAdjunction_homEquiv_apply\", \"SheafOfModules.PullbackConstruction.adjunction\", \"AlgebraicGeometry.Scheme.Modules.instIsRightAdjointPresheafOfModulesToPresheafOfModules\", \"PresheafOfModules.toPresheaf_map_sheafificationAdjunction_unit_app\"], \"digest\": \"2a684187d81abb27\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: ordinary restriction/pushforward and presheaf sheafification adjunctions do not provide extension by zero for modules over a sheaf dg algebra. Read Scheme.Modules.restrictAdjunction at Mathlib/AlgebraicGeometry/Modules/Sheaf.lean:425, PresheafOfModules.sheafificationAdjunction at Algebra/Category/ModuleCat/Presheaf/Sheafification.lean:125, and SheafOfModules.PullbackConstruction.adjunction at Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean:79. No dg-module declarations in the source grep; neither phrase gives a one-line specialization."
+  },
+  {
+   "tool": "grep",
+   "query": "DifferentialGraded|DGModule|extensionByZero|extension_by_zero",
+   "results": "{\"t\": \"2026-10-24T08:34:04Z\", \"tool\": \"grep\", \"query\": \"DifferentialGraded|DGModule|extensionByZero|extension_by_zero\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: read PresheafOfModules.sheafificationAdjunction at Mathlib/Algebra/Category/ModuleCat/Presheaf/Sheafification.lean:125 and Scheme.Modules.restrictAdjunction at Mathlib/AlgebraicGeometry/Modules/Sheaf.lean:425; they concern ordinary modules, and the latter has restriction left adjoint to pushforward. Neither constructs zero extension for sheaf dg modules. Source grep has no matching dg-module/zero-extension declaration, and the second semantic phrasing gives only ordinary module sheafification/pullback adjunctions."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Sheafification of the zero extension presheaf for dg modules gives an adjunction with open restriction",
+   "results": "{\"t\": \"2026-10-24T08:34:04Z\", \"tool\": \"leansearch\", \"query\": \"Sheafification of the zero extension presheaf for dg modules gives an adjunction with open restriction\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.presheafToSheaf\", \"PresheafOfModules.sheafify\", \"AlgebraicGeometry.Scheme.Modules.restrictAdjunction\", \"PresheafOfModules.toSheafify\", \"PresheafOfModules.sheafificationAdjunction\", \"CategoryTheory.Functor.sheafPullbackConstruction.sheafAdjunctionContinuous\", \"CategoryTheory.Sheaf.adjunction\", \"CategoryTheory.plusPlusAdjunction\"], \"digest\": \"369f0d8c1ae06bce\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: read PresheafOfModules.sheafificationAdjunction at Mathlib/Algebra/Category/ModuleCat/Presheaf/Sheafification.lean:125 and Scheme.Modules.restrictAdjunction at Mathlib/AlgebraicGeometry/Modules/Sheaf.lean:425; they concern ordinary modules, and the latter has restriction left adjoint to pushforward. Neither constructs zero extension for sheaf dg modules. Source grep has no matching dg-module/zero-extension declaration, and the second semantic phrasing gives only ordinary module sheafification/pullback adjunctions."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"SheafOfModules\", \"adjunction\"",
+   "results": "{\"t\": \"2026-10-24T08:34:04Z\", \"tool\": \"loogle\", \"query\": \"\\\"SheafOfModules\\\", \\\"adjunction\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"PresheafOfModules.freeAdjunctionUnit\", \"PresheafOfModules.freeAdjunction\", \"PresheafOfModules.freeAdjunctionUnit_app\", \"PresheafOfModules.freeAdjunction_homEquiv\", \"PresheafOfModules.freeAdjunction_unit_app\", \"PresheafOfModules.pullbackPushforwardAdjunction\", \"PresheafOfModulesOfCommRing.pullbackPushforwardAdjunction\", \"PresheafOfModules.colimitAdjunction\"], \"digest\": \"3bc2b9beb5471990\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: read PresheafOfModules.sheafificationAdjunction at Mathlib/Algebra/Category/ModuleCat/Presheaf/Sheafification.lean:125 and Scheme.Modules.restrictAdjunction at Mathlib/AlgebraicGeometry/Modules/Sheaf.lean:425; they concern ordinary modules, and the latter has restriction left adjoint to pushforward. Neither constructs zero extension for sheaf dg modules. Source grep has no matching dg-module/zero-extension declaration, and the second semantic phrasing gives only ordinary module sheafification/pullback adjunctions."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Extension by zero for sheaves of left differential graded modules on an open subspace is left adjoint to restriction",
+   "results": "{\"t\": \"2026-10-24T08:34:05Z\", \"tool\": \"leanfinder\", \"query\": \"Extension by zero for sheaves of left differential graded modules on an open subspace is left adjoint to restriction\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Modules.instIsLeftAdjointRestrictFunctor\", \"AlgebraicGeometry.Scheme.Modules.restrictAdjunction\", \"PresheafOfModules.sheafificationAdjunction\", \"AlgebraicGeometry.Scheme.Modules.instIsRightAdjointPresheafOfModulesToPresheafOfModules\", \"SheafOfModules.PullbackConstruction.adjunction\", \"PresheafOfModules.instIsLeftAdjointSheafOfModulesSheafification\", \"AlgebraicGeometry.Scheme.Modules.restrictAdjunction_counit_app_app\", \"AlgebraicGeometry.Scheme.Modules.restrictAdjunction_unit_app_app\"], \"digest\": \"d046d2690b9d3eb8\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: read PresheafOfModules.sheafificationAdjunction at Mathlib/Algebra/Category/ModuleCat/Presheaf/Sheafification.lean:125 and Scheme.Modules.restrictAdjunction at Mathlib/AlgebraicGeometry/Modules/Sheaf.lean:425; they concern ordinary modules, and the latter has restriction left adjoint to pushforward. Neither constructs zero extension for sheaf dg modules. Source grep has no matching dg-module/zero-extension declaration, and the second semantic phrasing gives only ordinary module sheafification/pullback adjunctions."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Restriction of dg module sheaves to an open subset has a left adjoint constructed by degreewise sheafification of zero extension",
+   "results": "{\"t\": \"2026-10-24T08:34:50Z\", \"tool\": \"leanfinder\", \"query\": \"Restriction of dg module sheaves to an open subset has a left adjoint constructed by degreewise sheafification of zero extension\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Modules.instIsLeftAdjointRestrictFunctor\", \"PresheafOfModules.sheafificationAdjunction\", \"PresheafOfModules.instIsLeftAdjointSheafOfModulesSheafification\", \"SheafOfModules.PullbackConstruction.adjunction\", \"PresheafOfModules.sheafificationAdjunction_homEquiv_apply\", \"AlgebraicGeometry.Scheme.Modules.instIsRightAdjointPresheafOfModulesToPresheafOfModules\", \"PresheafOfModules.toPresheaf_map_sheafificationAdjunction_unit_app\", \"PresheafOfModules.sheafificationCompForgetCompToPresheaf\"], \"digest\": \"74e50049ab2f3c2b\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: read PresheafOfModules.sheafificationAdjunction at Mathlib/Algebra/Category/ModuleCat/Presheaf/Sheafification.lean:125 and Scheme.Modules.restrictAdjunction at Mathlib/AlgebraicGeometry/Modules/Sheaf.lean:425; they concern ordinary modules, and the latter has restriction left adjoint to pushforward. Neither constructs zero extension for sheaf dg modules. Source grep has no matching dg-module/zero-extension declaration, and the second semantic phrasing gives only ordinary module sheafification/pullback adjunctions."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-sheaf-dg-grothendieck",
+  "date": "2026-10-24",
+  "group": "Q13"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Knudsen forgetful morphism as the universal stable curve. Section 1, Theorem 1.8, Corollaries 1.9 and 1.11; Section 2, Proposition 2.1 (printed pp.172--175): degree-zero logarithmic components and their section-algebra contraction. Independent prerequisite: Cohomology and log dualizing comparison for a given elementary nodal contraction. Logarithmic comparison before Knudsen Lemma 1.6: generic coherent-duality trace on a perfect marking ideal, replacing the differential-dual presentation by the same adjunction-normalized relative duality. Prerequisite for the perfect-image coherent trace comparison: locality on affine opens for the proper map between the two curve families, without asserting that this map is flat. Independent prerequisite: Pseudo-coherent perfect direct images between flat finitely presented families. Kiehl finiteness input: the unnumbered general relative-pseudo-coherence assertion following Stacks lemma-flat-proper-pseudo-coherent-direct-image-general. Finite-degree Noetherian descente input for the Kiehl finiteness assertion. Independent prerequisite: Relative sheaf descente on a prescribed Noetherian envelope. Two-open gluing prerequisite, conditional on approximation on both opens and their intersection, uniform in a supplied finite coefficient stage. Single-degree induction step: cancel finite polynomial-chart top obstructions globally while retaining the prescribed scalar-action normalization. Mayer--Vietoris subproblem for one degree: given a global coherent witness at cutoff n+1 and witnesses on two opens at cutoff n, obtain a global witness at cutoff n. The supplied global witness is part of the hypothesis. Independent input: finite coherent factorization of a cohomologically surjective perfect dg arrow to an ordinary scheme complex, with cohomologically surjective first factor. Affine case: finite coherent factorization for Y=Spec S; no Zariski assembly is asserted. Affine passage to dg global modules, including the local-to-finite-cell perfectness theorem and the actual coefficient adjunction comparisons. Independent tool: Affine equivalence: construct the dg adjunction before checking its unit and counit by the ordinary affine equivalence. Resolution prerequisite: the category in which the transfinite injective replacement is constructed. Generator construction in Stacks 0FS9: extension by zero from each open, before applying the local disk Hom calculation.",
+   "via": [
+    "lem-sfb-sheaf-dg-grothendieck",
+    "lem-sfb-flat-ringed-dg-pushpull",
+    "lem-sfb-affine-dg-coefficient-module-comparison",
+    "lem-sfb-affine-perfect-arrow-coherent-factorization",
+    "lem-sfb-perfect-coefficient-arrow-finite-realization",
+    "lem-sfb-global-witness-one-degree-binary-patching",
+    "lem-sfb-sheaf-single-degree-coefficient-cancellation",
+    "lem-sfb-relative-coefficient-window-two-open-locality",
+    "lem-sfb-prescribed-envelope-relative-sheaf-descente",
+    "lem-sfb-relative-complex-noetherian-cohomology-approximation",
+    "lem-sfb-kiehl-relative-pseudocoherent-direct-image",
+    "lem-sfb-flat-family-perfect-direct-image-pseudocoherent",
+    "lem-sfb-proper-flat-families-coherent-adjoint-locality",
+    "lem-sfb-relative-nodal-perfect-duality-trace",
+    "lem-sfb-elementary-nodal-contraction-direct-image",
+    "lem-sfb-log-canonical-deletion-algebra",
+    "lem-sfb-knudsen-pointed-forgetful-universal-curve",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-sheaf-dg-open-extension-adjunction",
+  "worker": "stage1",
+  "summary": "Kept the statement and its explicit zero-presheaf construction unchanged. Gave six proof steps constructing the differential/action and functor, checking all dg laws on local representatives, and restricting the degreewise sheafification bijection to chain and action-preserving maps. Reused module sheafification, bilinear extension, underlying sets, and local-section nodes; no new nodes. Checked project Lean, Mathlib searches and Stacks source, including the surrounding adjoint-direction typo.",
+  "blueprint": "Realizes the inherited prerequisite for the Stacks 0FS9 generator argument under det-thm-sf-ctf-stability-direct-images proof (3), through lem-sfb-sheaf-dg-grothendieck. Read latest sk-thm-sf-ctf-stability and sk-thm-sf-ctf-stability-direct-images.proof.md. blueprint_refs.py ancestor returns None; retained the inherited null ancestor and via. Searches of the entire blueprint for extension by zero, dg module and differential graded find no equivalent topological sheaf dg-module statement. No unit or chapter changes.",
+  "tool_uses": [
+   {
+    "node": "lem-pc-sites-module-sheafification-bilinear-extension",
+    "why": "Generic bilinear sheafification universal property supplies the action and tests its compatibility. No node of this unit supplies this site-level tool."
+   },
+   {
+    "node": "lem-weil-pbc-module-sheafification-underlying-sets",
+    "why": "Generic underlying-set comparison for module sheafification permits the local-section test; no replacement of any unit proof route."
+   },
+   {
+    "node": "lem-weil-pbc-site-sheafification-sections-local",
+    "why": "Generic local representatives for set sheafification verify the constructed dg identities. No node of this unit gives this foundational sheafification fact."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pc-sites-module-sheafification-bilinear-extension",
+  "lem-weil-pbc-module-sheafification-underlying-sets",
+  "lem-weil-pbc-site-sheafification-sections-local"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q133-2edccb92a",
+  "group": "Q133",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q133-2edccb92a (reviewer sub-agent of L); spot-checked: Read the item and all five cited node statements in full; checked them against Stacks sdga.tex (0FRA, 0FRV, 0FRW: the dg compatibility and adjunction proofs are 'omitted' there) and the sheafification tags 03CY, 0GMW, 00WK, 0087. Statement unchanged. It specializes Stacks from sites to the open site of a space, uses left modules and degree-zero chain maps, and makes j_! left adjoint to restriction. Confirmed the report's source error: Stacks writes 'right adjoint to j_*', which is ill-typed; the item follows the displayed Hom formula. Step 1: zero-presheaf restrictions are consistent (V⊂U implies W⊂U; mixed case has zero source); elementary. Step 2: D extends eta∘d (d is O-linear); the action comes from the bilinear-extension lemma with O^#=O and A^p its own sheafification; the action is O-bilinear by the definition. Step 3: local representatives eta(x) via underlying-sets + sections-local; checked d^2=0, unit, associativity and the (-1)^p Leibniz rule; separatedness makes them global. Step 4: functoriality by linear and bilinear uniqueness. Step 5: explicit graded bijection; h is forced to be zero off U. Step 6: chain and action conditions are tested after eta and on A^p×P^q; naturality checked in both variables. Edge cases checked: U=∅, U=X, opens meeting both U and its complement. No cycle (closure of 126 nodes). No duplicate: ringed-site module adjunction lem-pur-site-restriction-module-adjunction-exact has no dg structure and step 5 proves its needed form inline; lem-sfb-sheaf-dg-open-extension-calculus is the larger derived statement. Accepted tool_uses: the bilinear-extension and sections-local lemmas (generic). No fixes."
+ }
+}

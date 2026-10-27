@@ -1,0 +1,128 @@
+{
+ "id": "lem-sf-proper-open-factor-projection",
+ "kind": "statement",
+ "title": "Projection for a proper morphism factored through an open",
+ "statement": "Let A be a finite commutative ring, s:X→V and j:V→U with j an open immersion [def-weil-open-immersion], and h:X→U proper [def-weil-proper-morphism] with s j=h. On the ordinary unbounded module derived categories [def-weil-pbc-derived-categories], use exact open extension [lem-weil-pbc-extension-by-zero-exact], its tensor comparison [lem-pur-etale-open-derived-tensor], and the counit-defined proper projections [def-kun-projection-formula-map]. For arbitrary M in D(X_et,A) and N in D(U_et,A), the canonical comparison Rs_* Jj_! ≅ Rh_* commutes with the proper/open projection maps, with coefficient transport Lh* ≅ Ls* Lj* given by the specified pullback composition isomorphism. Write E:Rs_* Jj_! ≅ Rh_* for this comparison, c_N:Lh*N→Ls*Lj*N for the pullback compositor, and δ_j^{-1}:Jj_!B⊗N→Jj_!(B⊗Lj*N). In Lean composition order, the equation is (E_M⊗1_N) ≫ π_h(M,N) ≫ Rh_*(1_M⊗c_N) = δ_j^{-1}(Rs_*M,N) ≫ Jj_!(π_s(M,Lj*N)) ≫ E_(M⊗Ls*Lj*N). No boundedness or quasi-compactness is assumed.",
+ "source": {
+  "document": "lean/WeilConjectures/SixFunctors/Etale/Derived/LowerShriekComposition.lean",
+  "place": "rightDerivedLowerStarCompOpenImmersionLowerShriekIso; Stacks Tags 0F7B, 0GL1 and 0B56"
+ },
+ "stmt_deps": [
+  "def-weil-open-immersion",
+  "def-weil-proper-morphism",
+  "def-weil-pbc-derived-categories",
+  "lem-weil-pbc-extension-by-zero-exact",
+  "lem-pur-etale-open-derived-tensor",
+  "def-kun-projection-formula-map"
+ ],
+ "proof": [
+  {
+   "text": "The pullback tensor comparison at the identity is compatible with the canonical identity isomorphism. Use the identity case of pullback composition and its tensor-composition law, canceling the tensor comparison. This is the already proved identity_pullback_tensor in SfEtaleGraphTransferTensor. The identity extension adjunction unit is inverse to the identity extension and restriction comparisons: apply unit_leftAdjointUniq and map the resulting equality to derived categories. By the projection adjunction transpose and tensor naturality, the identity-open inverse projection followed by the canonical extension identity and the pullback identity is the tensor of the extension identity.",
+   "uses": [
+    "lem-kun-derived-pullback-composition-monoidal"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The square s, identity_X, j, h is Cartesian because j is a monomorphism and s j=h. Apply the already proved generic mixed_projection in CompactificationProjectionComposition (through import all), the same tensor-square calculation used by etaleProperOpenTensorSquare. It is the open tensor/base-change mate calculation using the specified adjunctions, counit projections, and open tensor/base-change identity. Postcompose with Rh_* of the identity extension comparison. Its naturality, the identity-open projection normalization, and left identity coherence for pullback composition identify the two coefficient paths. Naturality of proper projection then identifies exchange followed by identity removal with rightDerivedLowerStarCompOpenImmersionLowerShriekIso. No proper projection is inverted. The calculations are proved with a general coefficient category first and specialized to ModuleCat A, preserving instance sharing.",
+   "uses": [
+    "def-weil-pbc-adjunction-mate",
+    "def-kun-projection-formula-map",
+    "lem-asd-open-projection-exchange"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "lean/Sheaf/AlgebraicGeometry/CompactificationProjectionComposition.lean",
+    "place": "AlgebraicGeometry.Etale.mixed_projection, private and fully proved; Stacks sites-cohomology.tex Tags 0GL1 and 0B56"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-kun-derived-pullback-composition-monoidal",
+  "def-weil-pbc-adjunction-mate",
+  "def-kun-projection-formula-map",
+  "lem-asd-open-projection-exchange"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "lean/WeilConjectures/SixFunctors/Etale/Derived/LowerShriekComposition.lean",
+  "place": "D2: identity-top specialization of the first step of lem-sf-graph-middle-projection-square; reuse the proved generic mixed_projection, with canonical identity normalization by adjunction and pullback tensor coherence."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Compatibility of projection formula with proper direct image and extension by zero along an open immersion",
+   "results": "Eight results about structure-sheaf maps for open immersions; no derived projection compatibility.",
+   "date": "2026-10-26",
+   "verdict": "No matching result."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"rightDerivedLowerStarCompOpenImmersionLowerShriekIso\"",
+   "results": "No results.",
+   "date": "2026-10-26",
+   "verdict": "The comparison belongs to the source library."
+  },
+  {
+   "tool": "grep",
+   "query": "projection.*comp|comp.*projection",
+   "results": "Mathlib results concern unrelated projections. Project search finds EtaleProperOpenTensorSquare and the private identity_pullback_tensor in SfEtaleGraphTransferTensor, which the proof reuses.",
+   "date": "2026-10-26",
+   "verdict": "Specialize the existing square and normalize the identity."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.SfGraphMiddleProjectionSquare",
+  "date": "2026-10-26",
+  "group": "D2"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-prop-sf-rf-shriek-preservation",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sf-graph-middle-projection-square",
+   "place": "First proof step: specialize the proper/open tensor square to each identity-top factorization square.",
+   "via": [
+    "lem-sf-etale-graph-word-projection-square",
+    "lem-sf-etale-compact-projection-coherence",
+    "lem-sf-exceptional-tensor-transitivity",
+    "lem-sf-smooth-dualizing-complex-invertible"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.ProperOpenFactorProjection",
+  "file": "lean/Sheaf/AlgebraicGeometry/ProperOpenFactorProjection.lean",
+  "declaration": "AlgebraicGeometry.Etale.properOpenFactor_projection",
+  "statement": "theorem properOpenFactor_projection\n    (A : Type (u + 1)) [CommRing A] [Finite A]\n    {X V U : Scheme.{u}} (s : X ⟶ V) (j : V ⟶ U) (h : X ⟶ U)\n    [IsOpenImmersion j] [IsProper h] (fac : s ≫ j = h)\n    (M : DerivedCategoryModule A X) (N : DerivedCategoryModule A U) :\n    let B := ModuleCat.{u + 1} A\n    let E := rightDerivedLowerStarCompOpenImmersionLowerShriekIso A s j h fac\n    ((derivedTensor B U).map (E.hom.app M)).app N ≫\n        ((rightDerivedLowerStarProjectionMap B h).app M).app N ≫\n        (lowerStar B h).rightDerivedFunctor.map\n          (((derivedTensor B X).obj M).map\n            ((leftDerivedUpperStarComp B s j h fac.symm).hom.app N)) =\n      ((derivedOpenImmersionLowerShriekProjectionIso B j).inv.app\n        ((lowerStar B s).rightDerivedFunctor.obj M)).app N ≫\n        (openImmersionLowerShriek B j).mapDerivedCategory.map\n          (((rightDerivedLowerStarProjectionMap B s).app M).app\n            ((upperStar B j).leftDerivedFunctor.obj N)) ≫\n        E.hom.app (((derivedTensor B X).obj M).obj\n          ((upperStar B s).leftDerivedFunctor.obj\n            ((upperStar B j).leftDerivedFunctor.obj N)))",
+  "branch": "sheaf-dag",
+  "by": "D2",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D2",
+  "result": "pass",
+  "landing": "20261026T091340-L-3335619",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D2",
+  "result": "pass",
+  "landing": "20261026T091340-L-3335619",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

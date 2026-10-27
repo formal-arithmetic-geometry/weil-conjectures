@@ -1,0 +1,197 @@
+{
+ "id": "lem-dl-a1-local-heart-abelian-evaluation",
+ "kind": "statement",
+ "title": "Abelian cartesian local heart and exact evaluations",
+ "statement": "Fix a finite-field datum D and coefficient datum c [def-weil-finite-field-fiber], and a locally finite-type k0-scheme T. Let Hloc(T) be the literal category of cartesian local heart objects on separated finite-type opens [def-dl-a1-locally-constructible-adic-heart]. Each component category is the common-stage standard heart over k0 [lem-per-adic-heart-pullback-fibres, def-weil-constructible-heart]. There are Abelian structures on Hloc(T) and all these component categories [def-sp-abelian], for which every literal evaluation functor is additive and preserves finite limits and finite colimits. This assertion constructs only the algebraic category and exact evaluation; it asserts no cover detection or defect-vanishing equivalence.",
+ "source": {
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "§6.8, Proposition 6.8.14 and Remark 6.8.15; local cartesian heart defects on finite-type affine opens (returned proof Step 12). Stacks Tag 04TQ, sites-lemma-glue-maps."
+ },
+ "stmt_deps": [
+  "def-weil-finite-field-fiber",
+  "def-dl-a1-locally-constructible-adic-heart",
+  "def-weil-constructible-heart",
+  "lem-per-adic-heart-pullback-fibres",
+  "def-sp-abelian"
+ ],
+ "proof": [
+  {
+   "text": "For each basis open $V$, use the bounded common-stage standard t-structure over $k_0$ supplied by [lem-per-adic-heart-pullback-fibres]. Its heart $\\mathcal H_V$ is abelian by [prop-weil-heart-abelian]. For $U\\subseteq V$ in the basis, apply [lem-per-adic-stratified-pullback-texact] with base field $k_0$: the actual completed restriction $r_{UV}$ is additive and exact on hearts. Both schemes are separated finite type over this field and $\\ell$ is invertible there. Use the composition comparisons and cocycle specified in [def-dl-a1-locally-constructible-adic-heart]. These are the given common-stage functors; no coefficient field is chosen on $T$.",
+   "uses": [
+    "lem-per-adic-heart-pullback-fibres",
+    "prop-weil-heart-abelian",
+    "lem-per-adic-stratified-pullback-texact",
+    "def-dl-a1-locally-constructible-adic-heart"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Proposition 6.8.14, Remark 6.8.15; finite-type restriction infrastructure"
+   }
+  },
+  {
+   "text": "Addition and negation of compatible arrow families preserve their compatibility equations, since all $r_{UV}$ are additive. Thus the Hom sets are abelian groups and composition is bilinear componentwise. The family of zero objects, with the unique restriction comparisons, is a zero object. For $A,B$, form $(A\\oplus B)_V=A_V\\oplus B_V$; use the additive restriction comparisons and the direct sums of their given gluing maps. Their cocycle and the injection/projection identities are checked in each component, so this gives binary biproducts. These constructions use exactly the compatible-family category of [def-dl-a1-locally-constructible-adic-heart].",
+   "uses": [
+    "def-dl-a1-locally-constructible-adic-heart"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Agent argument on compatible families, following Proposition 6.8.14 and Remark 6.8.15"
+   }
+  },
+  {
+   "text": "For $f:A\\to B$, set $N_V=\\ker f_V$, with inclusion $i_V:N_V\\to A_V$. Exactness and [lem-sp-exact-functor-preserves-homology](a) identify $r_{UV}N_V$ with $\\ker(r_{UV}f_V)$. The square for $f$ conjugates this kernel to $N_U$; define $\\rho^N_{UV}$ to be its unique isomorphism satisfying $i_U\\rho^N_{UV}=\\rho^A_{UV}r_{UV}i_V$. On a triple of nested opens the two induced arrows into $N_U$ agree after $i_U$, by the cocycle for $A$ and naturality of the composition comparison. Since $i_U$ is monic they agree. Identities follow by the same cancellation. Hence $N$ is cartesian and $i:N\\to A$ is compatible. Given a compatible $h:D\\to A$ with $fh=0$, let $t_V:D_V\\to N_V$ be its unique kernel lift. The two compatibility composites for $t$ agree after $i_U$, both equalling the compatibility composite for $h$; cancellation makes $t$ compatible. Componentwise uniqueness proves the global kernel universal property.",
+   "uses": [
+    "lem-sp-exact-functor-preserves-homology",
+    "def-dl-a1-locally-constructible-adic-heart"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Agent kernel construction using the exact completed restrictions of Remark 6.8.15"
+   }
+  },
+  {
+   "text": "Set $Q_V=\\operatorname{coker}f_V$, with projection $p_V:B_V\\to Q_V$. By [lem-sp-exact-functor-preserves-homology](a), $r_{UV}p_V$ is a cokernel of $r_{UV}f_V$. Conjugating by the given comparisons defines a unique isomorphism $\\rho^Q_{UV}$ with $\\rho^Q_{UV}r_{UV}p_V=p_U\\rho^B_{UV}$. On a triple the cocycle for $B$ makes the two arrows to $Q_U$ agree after the epimorphism obtained by restricting $p_V$ twice, so they agree; this also gives identity normalization. For $h:B\\to D$ with $hf=0$, its unique component factorizations $t_V:Q_V\\to D_V$ are compatible: precompose the proposed compatibility equation with the epimorphism $r_{UV}p_V$ and use that for $h$. Thus $p:B\\to Q$ is a global cokernel, with its universal property. In particular both kernels and cokernels evaluate to the corresponding component constructions.",
+   "uses": [
+    "lem-sp-exact-functor-preserves-homology",
+    "def-dl-a1-locally-constructible-adic-heart"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Agent cokernel construction using the exact completed restrictions of Remark 6.8.15"
+   }
+  },
+  {
+   "text": "Let $f:A\\to B$ be monic in the compatible-family category. Its kernel inclusion $i:N\\to A$ has $fi=0$, whence $i=0$ by monicity; since $i$ is itself monic, $\\mathrm{id}_N=0$. Thus every $\\ker f_V=N_V$ is zero, so $f_V$ is monic in the abelian heart $\\mathcal H_V$. There it is a kernel of its cokernel $p_V$. For any compatible $h:D\\to B$ with $ph=0$, factor $h_V$ uniquely through $f_V$. The factors are compatible because composing their proposed compatibility equation with the monomorphism $f_U$ gives that of $h$. They give the unique factorization through $f$. Hence every global monomorphism is a kernel of its cokernel.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Agent verification of the normal-monomorphism axiom of an abelian category"
+   }
+  },
+  {
+   "text": "Let $f:A\\to B$ be epic. For its cokernel $p:B\\to Q$, $pf=0$ implies $p=0$; since $p$ is epic, $\\mathrm{id}_Q=0$. Every component cokernel is therefore zero, so $f_V$ is epic in $\\mathcal H_V$ and is a cokernel of its kernel $i_V$. Given compatible $h:A\\to D$ with $hi=0$, its unique factorizations through $f_V$ are compatible: precompose the compatibility equation with the epimorphism $r_{UV}f_V$ and use that for $h$. Uniqueness holds componentwise. Thus every epimorphism is a cokernel of its kernel. Together with Steps 2--4 this proves all the axioms of [def-sp-abelian].",
+   "uses": [
+    "def-sp-abelian"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Agent verification of the normal-epimorphism axiom and abelian-category definition"
+   }
+  },
+  {
+   "text": "Evaluation preserves component biproducts, kernels and cokernels by the explicit universal properties in Steps 2--4. Thus it is additive; the usual finite-product-and-kernel and finite-coproduct-and-cokernel descriptions in an abelian category give preservation of finite limits and finite colimits.",
+   "uses": [
+    "def-sp-abelian"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "§6.8, Proposition 6.8.14 and Remark 6.8.15; local cartesian heart defects on finite-type affine opens (returned proof Step 12). Stacks Tag 04TQ, sites-lemma-glue-maps."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-per-adic-heart-pullback-fibres",
+  "prop-weil-heart-abelian",
+  "lem-per-adic-stratified-pullback-texact",
+  "def-dl-a1-locally-constructible-adic-heart",
+  "lem-sp-exact-functor-preserves-homology",
+  "def-sp-abelian"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Componentwise universal-property argument from local-heart Steps 1--8, following BS Proposition 6.8.14 and Remark 6.8.15"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A category of cartesian families of abelian categories is abelian and evaluation preserves finite limits and colimits",
+   "results": "8 hits: Abelian.hasFiniteLimits and evaluation preservation of limits/colimits in ordinary functor categories and homological complexes. These do not construct the specified varying cartesian heart or establish open-cover detection.",
+   "date": "2026-10-25",
+   "verdict": "No match: the local category is not an ordinary functor category in a fixed target."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The category of cartesian families in abelian categories with exact restriction functors is abelian, and evaluation is exact",
+   "results": "8 hits: condensed AB4/AB4Star instances, Grothendieck AB4, AddCommGrp AB4Star, and Functor.exact_tfae. None constructs the literal cartesian adic heart.",
+   "date": "2026-10-25",
+   "verdict": "No match. Exact-functor comparison results are useful after the cartesian abelian construction."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Limits.IsZero",
+   "results": "12 hits including IsZero, IsZero.hasZeroObject, IsZero.iso and isZero_zero. These concern generic zero objects, not cartesian adic families. The separate query kernelComparison, IsIso returned no hits.",
+   "date": "2026-10-25",
+   "verdict": "No match for either cartesian abelian construction or cover detection."
+  },
+  {
+   "tool": "grep",
+   "query": "cartesian.*(heart|[Aa]belian)|isZero.*[Cc]over",
+   "results": "msearch Mathlib grep: 0 hits. Local rg additionally found no cartesian abelian theorem. Sheaf SfConstructibleHeart has abelianity only over the fixed algebraic closure D.k; the existing AdicHeartIntrinsicFibres handles arbitrary base fields via normalized presentation transport.",
+   "date": "2026-10-25",
+   "verdict": "No existing statement of the required two local-heart steps."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.DlLocalHeartCoverDefects",
+  "date": "2026-10-25",
+  "group": "H1"
+ },
+ "chapter": "sec-deligne-laumon-a1",
+ "unit": "sk-p-dl-a1-exact",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "p-dl-a1-exact",
+   "place": "p-dl-a1-exact.proof.md, Step 1 final sentence and Step 5 final sentence: detection on geometric stalks; componentwise heart construction of lem-dl-a1-local-heart-cover-defects.",
+   "via": [
+    "lem-dl-a1-local-heart-cover-defects"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.DlLocalHeartAbelianEvaluation",
+  "file": "lean/Sheaf/Paper/DlLocalHeartAbelianEvaluation.lean",
+  "declaration": "WeilConjectures.dlLocalHeartAbelianEvaluation",
+  "declarations": [
+   "WeilConjectures.DlLocalHeartAbelianEvaluation",
+   "WeilConjectures.dlLocalHeartAbelianEvaluation"
+  ],
+  "statement": "theorem dlLocalHeartAbelianEvaluation [LocallyOfFiniteType T.hom] :\n    Nonempty (DlLocalHeartAbelianEvaluation D c T)",
+  "branch": "sheaf-dag",
+  "by": "H1",
+  "date": "2026-10-25"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H1",
+  "result": "pass",
+  "landing": "20261025T123026-L-1825057",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H1",
+  "result": "pass",
+  "landing": "20261025T123026-L-1825057",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

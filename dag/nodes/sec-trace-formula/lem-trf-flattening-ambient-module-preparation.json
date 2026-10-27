@@ -1,0 +1,315 @@
+{
+ "id": "lem-trf-flattening-ambient-module-preparation",
+ "kind": "statement",
+ "title": "Ambient module preparation for affine pieces of a finite-type morphism",
+ "statement": "Let $T$ be a quasi-compact quasi-separated scheme, $U\\subseteq T$ a quasi-compact open, and $g:W\\to T$ a finite-type morphism [def-weil-pbc-scheme-conventions, def-weil-finite-type-morphism, def-weil-quasi-separated-morphism]. Assume $W_U=W\\times_T U\\to U$ is flat and locally of finite presentation [def-weil-flat-morphism, def-sbc-locally-finite-presentation, def-pc-fibre-product]. Then there are a finite affine open cover $W=\\bigcup_{i=1}^r W_i$, integers $n_i\\geq0$, quasi-compact open subschemes $V_i\\subseteq\\mathbb A_T^{n_i}$ [def-nagata-relative-affine-space], and closed immersions $j_i:W_i\\hookrightarrow V_i$ over $T$ [def-weil-closed-immersion]. Each $V_i\\to T$ is quasi-compact and locally of finite presentation. The $\\mathcal O_{V_i}$-module $\\mathcal F_i=(j_i)_*\\mathcal O_{W_i}$, whose sections on an open $H\\subseteq V_i$ are $\\Gamma(j_i^{-1}H,\\mathcal O_{W_i})$ with scalars induced by $j_i$, is quasi-coherent and of finite type [pqf-def-coherent]. Its restriction to $V_i\\times_T U$ is a module of finite presentation [def-weil-pbc-module-finite-type-presentation] and is flat over $U$ [def-pc-scheme-module-flat-over]. The empty cover is permitted when $W$ is empty.",
+ "source": {
+  "document": "literature/stacks-project/flat.tex",
+  "place": "Tag 081R, lemma-flat-after-blowing-up, proof: finite affine covering in paragraph 1 and ambient immersion with module in paragraph 2, before the application of theorem-flatten-module. The immersion input is morphisms.tex, lemma-quasi-affine-finite-type-over-S; finite presentation of the quotient over the ambient algebra uses Tag 02FV, lemma-finite-presentation-permanence."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-scheme-conventions",
+  "def-weil-finite-type-morphism",
+  "def-weil-quasi-separated-morphism",
+  "def-weil-flat-morphism",
+  "def-sbc-locally-finite-presentation",
+  "def-pc-fibre-product",
+  "def-nagata-relative-affine-space",
+  "def-weil-closed-immersion",
+  "pqf-def-coherent",
+  "def-weil-pbc-module-finite-type-presentation",
+  "def-pc-scheme-module-flat-over"
+ ],
+ "proof": [
+  {
+   "text": "Choose a finite affine open cover $T=\\bigcup_a B_a$ by [lem-weil-pbc-qcqs-finite-affine-open-cover]. By the finite-type hypothesis and [def-weil-finite-type-morphism], each $g^{-1}(B_a)$ has a finite affine open cover $W_{ab}=\\operatorname{Spec}C_{ab}$ with $C_{ab}$ a finitely generated algebra over $A_a=\\Gamma(B_a,\\mathcal O_T)$. The finitely many $W_{ab}$ cover $W$; reindex them by $i$. In particular, each $W_i$ maps into a selected affine open $B_{a(i)}$ of $T$. If $W$ is empty, take the empty family and all assertions are vacuous.",
+   "uses": [
+    "lem-weil-pbc-qcqs-finite-affine-open-cover",
+    "def-weil-finite-type-morphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 01T0, definition-finite-type; flat.tex Tag 081R, lemma-flat-after-blowing-up, finite affine covering"
+   }
+  },
+  {
+   "text": "For each $i$, choose algebra generators $c_1,\\ldots,c_{n_i}$ of $C_i$ over $A_{a(i)}$, allowing $n_i=0$. The surjection $A_{a(i)}[t_1,\\ldots,t_{n_i}]\\twoheadrightarrow C_i$, $t_j\\mapsto c_j$, defines a closed immersion $j_i:W_i\\hookrightarrow V_i:=\\operatorname{Spec}(A_{a(i)}[t_1,\\ldots,t_{n_i}])$ over $B_{a(i)}$, hence over $T$, by [def-weil-closed-immersion, def-weil-affine-spectrum]. The affine chart description in [def-nagata-relative-affine-space] identifies $V_i$ with the inverse image of $B_{a(i)}$ in $\\mathbb A_T^{n_i}$, an open subscheme. Thus these choices give the required immersion and ambient open, with $V_i$ affine and therefore quasi-compact by [lem-weil-pbc-affine-scheme-qcqs].",
+   "uses": [
+    "def-weil-closed-immersion",
+    "def-weil-affine-spectrum",
+    "def-nagata-relative-affine-space",
+    "lem-weil-pbc-affine-scheme-qcqs"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 01QO, lemma-closed-immersion; Tag 081R ambient-immersion construction in flat.tex; explicit affine-coordinate refinement"
+   }
+  },
+  {
+   "text": "The projection $V_i=\\mathbb A_{B_{a(i)}}^{n_i}\\to B_{a(i)}$ is locally of finite presentation by [sbc-lem-affine-space-smooth, def-sbc-smooth-morphisms]. The open immersion $B_{a(i)}\\hookrightarrow T$ is locally of finite presentation by [lem-weil-pbc-open-immersion-etale, def-weil-etale-morphism]. Their composite $p_i:V_i\\to T$ is locally of finite presentation by [lem-sbc-locally-finite-presentation-composition]. As $V_i$ is quasi-compact and $T$ is quasi-separated, [lem-weil-pbc-qcqs-morphism-permanence](1) shows $p_i$ is quasi-compact. These are the two required properties of the ambient morphism.",
+   "uses": [
+    "sbc-lem-affine-space-smooth",
+    "def-sbc-smooth-morphisms",
+    "lem-weil-pbc-open-immersion-etale",
+    "def-weil-etale-morphism",
+    "lem-sbc-locally-finite-presentation-composition",
+    "lem-weil-pbc-qcqs-morphism-permanence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tags 01TR (lemma-composition-finite-presentation), 03GI (schemes.tex lemma-quasi-compact-permanence); polynomial projection as in Tag 081R"
+   }
+  },
+  {
+   "text": "Set $\\mathcal F_i=(j_i)_*\\mathcal O_{W_i}$ with the section and scalar maps in the statement. The closed-immersion description in [def-weil-closed-immersion] makes $j_i$ affine; hence [lem-weil-pbc-affine-morphism-relative-spec](1) makes $\\mathcal F_i$ quasi-coherent. On every affine open $H=\\operatorname{Spec}R\\subseteq V_i$, that same closed-immersion description gives $j_i^{-1}H=\\operatorname{Spec}(R/I)$ and $\\mathcal F_i(H)=R/I$. This module is generated by $1$ (or is zero). By [lem-weil-pbc-quasi-coherent-finite-type-affine](a), $\\mathcal F_i|_H$ is of finite type. Such opens cover $V_i$, so the definition gives finite type everywhere.",
+   "uses": [
+    "def-weil-closed-immersion",
+    "lem-weil-pbc-affine-morphism-relative-spec",
+    "lem-weil-pbc-quasi-coherent-finite-type-affine"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 01QO, lemma-closed-immersion; schemes.tex lemma-push-forward-quasi-coherent; properties.tex Tag 01PB, lemma-finite-type-module"
+   }
+  },
+  {
+   "text": "Write $V_{i,U}=V_i\\times_T U$ and $W_{i,U}=W_i\\times_T U$. By [lem-weil-pbc-qcqs-morphism-permanence](3), $V_{i,U}\\to U$ is locally of finite presentation; in particular it is locally of finite type: for every affine open $V\\subseteq U$, any affine open cover of the inverse image of $V$ in $V_{i,U}$ consists of affine opens whose coordinate rings are finitely presented, hence finitely generated, $\\mathcal O_U(V)$-algebras by [lem-weil-pbc-lfp-affine-opens-finite-presentation], which is the condition of [def-weil-finite-type-morphism]. The scheme $W_{i,U}$ is the open subscheme of $W_U$ corresponding to $W_i\\subseteq W$. Its inclusion in $W_U$ is locally of finite presentation by [lem-weil-pbc-open-immersion-etale, def-weil-etale-morphism], so $W_{i,U}\\to U$ is locally of finite presentation by the hypothesis on $W_U$ and [lem-sbc-locally-finite-presentation-composition]. Apply [lem-a1-map-over-base-finite-presentation] with $S=U$, $X=W_{i,U}$, $Y=V_{i,U}$: the restricted morphism $j_{i,U}$ is locally of finite presentation. It is still a closed immersion: on any affine chart the restriction is the same quotient-ring description of $j_i$.",
+   "uses": [
+    "lem-weil-pbc-qcqs-morphism-permanence",
+    "lem-weil-pbc-open-immersion-etale",
+    "def-weil-etale-morphism",
+    "lem-sbc-locally-finite-presentation-composition",
+    "lem-weil-pbc-lfp-affine-opens-finite-presentation",
+    "def-weil-finite-type-morphism",
+    "lem-a1-map-over-base-finite-presentation",
+    "def-weil-closed-immersion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tags 01TS, 01TR, 02FV (lemma-finite-presentation-permanence), and 01QO"
+   }
+  },
+  {
+   "text": "By [lem-weil-pbc-affine-morphism-relative-spec](4), $\\mathcal F_i|_{V_{i,U}}=(j_{i,U})_*\\mathcal O_{W_{i,U}}$. On every affine open $H=\\operatorname{Spec}R\\subseteq V_{i,U}$, the closed immersion has affine inverse image $\\operatorname{Spec}(R/I)$ by [def-weil-closed-immersion]. By step 5 and [lem-weil-pbc-lfp-affine-opens-finite-presentation], $R/I$ is a finitely presented $R$-algebra. Apply [lem-weil-pbc-finite-presentation-surjection-kernel-fg] with zero polynomial variables to $R\\twoheadrightarrow R/I$. It gives $I=(f_1,\\ldots,f_m)$. Consequently $R^{m}\\to R\\to R/I\\to0$, with first map $(r_k)\\mapsto\\sum_k r_k f_k$, is a finite module presentation. The quasi-coherence from step 4 and [lem-weil-pbc-quasi-coherent-finite-type-affine](b) give a finite presentation of $\\mathcal F_i$ on $H$. These opens cover $V_{i,U}$, proving the asserted module finite presentation.",
+   "uses": [
+    "lem-weil-pbc-affine-morphism-relative-spec",
+    "def-weil-closed-immersion",
+    "lem-weil-pbc-lfp-affine-opens-finite-presentation",
+    "lem-weil-pbc-finite-presentation-surjection-kernel-fg",
+    "lem-weil-pbc-quasi-coherent-finite-type-affine"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 01TV (lemma-closed-immersion-finite-presentation), Tag 01TQ; algebra.tex lemma-finite-presentation-independent; properties.tex Tag 01PC"
+   }
+  },
+  {
+   "text": "Finally apply the closed-subspace stalk formula [lem-sc-closed-pushforward-abelian-stalks] to the underlying additive sheaf of $\\mathcal O_{W_{i,U}}$. Off the closed image its direct-image stalk is zero and hence flat. At $y=j_{i,U}(w)$ it is $\\mathcal O_{W_{i,U},w}$. This identification is compatible with $\\mathcal O_{U,u}$-scalars, where $u=p_i(y)$: a germ $a$ on $U$ acts on both sides by multiplication by its pulled-back germ at $w$, since $j_i$ is over $T$. Open subschemes have the same local rings, so this is $\\mathcal O_{W_U,w}$ as an $\\mathcal O_{U,u}$-module. It is flat by the assumed flatness of $W_U\\to U$ and [def-weil-flat-morphism]. Thus every stalk is flat over its base local ring, exactly the stalk criterion in [def-pc-scheme-module-flat-over]. This proves the final assertion for every $i$.",
+   "uses": [
+    "lem-sc-closed-pushforward-abelian-stalks",
+    "def-weil-flat-morphism",
+    "def-pc-scheme-module-flat-over"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 081R, ambient module input; Tag 01U4 stalk criterion; sheaves.tex Tag 00AE, lemma-stalks-closed-pushforward"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-nagata-relative-affine-space",
+  "def-pc-scheme-module-flat-over",
+  "def-sbc-smooth-morphisms",
+  "def-weil-affine-spectrum",
+  "def-weil-closed-immersion",
+  "def-weil-etale-morphism",
+  "def-weil-finite-type-morphism",
+  "def-weil-flat-morphism",
+  "lem-a1-map-over-base-finite-presentation",
+  "lem-sbc-locally-finite-presentation-composition",
+  "lem-sc-closed-pushforward-abelian-stalks",
+  "lem-weil-pbc-affine-morphism-relative-spec",
+  "lem-weil-pbc-affine-scheme-qcqs",
+  "lem-weil-pbc-finite-presentation-surjection-kernel-fg",
+  "lem-weil-pbc-lfp-affine-opens-finite-presentation",
+  "lem-weil-pbc-open-immersion-etale",
+  "lem-weil-pbc-qcqs-finite-affine-open-cover",
+  "lem-weil-pbc-qcqs-morphism-permanence",
+  "lem-weil-pbc-quasi-coherent-finite-type-affine",
+  "sbc-lem-affine-space-smooth"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/flat.tex",
+  "place": "Tag 081R, lemma-flat-after-blowing-up, affine-cover and ambient-module paragraphs; explicit affine-coordinate refinement and module verification using Tags 02FV, 01TV, 01PB, 01PC"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A finite type morphism from an affine scheme to a quasi compact quasi separated scheme embeds into affine space; pushforward of its structure sheaf is finitely presented and flat over the flat finitely presented locus",
+   "results": "8 hits; AlgebraicGeometry.AffineSpace.instLocallyOfFinitePresentationOverSchemeInferInstanceOverClassOfFinite, AlgebraicGeometry.isFinite_iff, AlgebraicGeometry.locallyQuasiFinite_iff, AlgebraicGeometry.IsFinite.instHasAffinePropertyAndIsAffineFiniteCarrierObjOppositeOpensCarrierCarrierCommRingCatPresheafOpOpensTopHomAppTop, AlgebraicGeometry.Scheme.Hom.finitePresentation_appLE, AlgebraicGeometry.locallyOfFinitePresentation_iff, AlgebraicGeometry.LocallyQuasiFinite.quasiFinite_appLE, AlgebraicGeometry.locallyOfFiniteType_iff. The hits concern affine space, flatness, finite presentation or descent separately; none states this lemma.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.IsClosedImmersion, AlgebraicGeometry.LocallyOfFinitePresentation",
+   "results": "0 hits; . The hits concern affine space, flatness, finite presentation or descent separately; none states this lemma.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "quasiAffine.*[Ii]mmersion|immersion.*[Aa]ffineSpace|pushforward.*[Ff]inite[Pp]resentation|finitePresentation.*pushforward",
+   "results": "4 hits; Mathlib/AlgebraicGeometry/QuasiAffine.lean, Mathlib/AlgebraicGeometry/QuasiAffine.lean, Mathlib/AlgebraicGeometry/QuasiAffine.lean, Mathlib/AlgebraicGeometry/QuasiAffine.lean. The hits concern affine space, flatness, finite presentation or descent separately; none states this lemma.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Closed immersion pushforward of structure sheaf is finitely presented when source and target are locally finitely presented over a base",
+   "results": "8 hits; SheafOfModules.isFinitePresentation, AlgebraicGeometry.IsClosedImmersion.instIsIsoSchemeToImage, AlgebraicGeometry.IsFinite.instOfIsClosedImmersion, SheafOfModules.QuasicoherentData.IsFinitePresentation, AlgebraicGeometry.locallyOfFinitePresentation_of_isOpenImmersion, AlgebraicGeometry.IsClosedImmersion, AlgebraicGeometry.IsClosedImmersion.toSurjectiveOnStalks, AlgebraicGeometry.IsClosedImmersion.of_isPreimmersion. The hits concern affine space, flatness, finite presentation or descent separately; none states this lemma.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Quasi affine finite type schemes admit immersions into relative affine space with finitely presented structure module on the good open",
+   "results": "8 hits; AlgebraicGeometry.Scheme.IsQuasiAffine.toIsImmersion, AlgebraicGeometry.Scheme.instIsOpenImmersionToSpecΓOfIsQuasiAffine, AlgebraicGeometry.Scheme.IsQuasiAffine.of_isImmersion, AlgebraicGeometry.Scheme.IsQuasiAffine, AlgebraicGeometry.AffineSpace.instLocallyOfFinitePresentationOverSchemeInferInstanceOverClassOfFinite, AlgebraicGeometry.LocallyOfFinitePresentation.finitePresentation_of_affine_subset, AlgebraicGeometry.instLocallyQuasiFiniteOfIsImmersion, AlgebraicGeometry.Scheme.Hom.instIsOpenImmersionMapAffineZariskiSiteCompOppositeCommRingCatRightOpOpensOpToOpensFunctorNormalizationDiagramSpec. The hits concern affine space, flatness, finite presentation or descent separately; none states this lemma.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A finite type scheme over a quasi compact quasi separated base has a finite affine cover embedded as closed subschemes of open subsets of affine spaces, with structure module finitely presented and flat on a given open",
+   "results": "8 hits: AlgebraicGeometry.IsFinite.instHasAffinePropertyAndIsAffineFiniteCarrierObjOppositeOpensCarrierCarrierCommRingCatPresheafOpOpensTopHomAppTop, AlgebraicGeometry.IsFinite.finite_app, AlgebraicGeometry.Scheme.AffineCover, AlgebraicGeometry.Scheme.exists_isOpenCover_and_isAffine, AlgebraicGeometry.instIsAffineXSchemeFiniteSubcover, AlgebraicGeometry.Scheme.Hom.finite_app, AlgebraicGeometry.AffineSpace.instLocallyOfFinitePresentationOverSchemeInferInstanceOverClassOfFinite, AlgebraicGeometry.QuasiCompactCover.of_finite. No hit gives the complete cover, ambient and module conclusions.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.IsClosedImmersion, AlgebraicGeometry.LocallyOfFinitePresentation",
+   "results": "0 hits: . No hit gives the complete cover, ambient and module conclusions.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "quasiAffine.*[Ii]mmersion|immersion.*[Aa]ffineSpace|pushforward.*[Ff]inite[Pp]resentation|finitePresentation.*pushforward",
+   "results": "4 hits: Mathlib/AlgebraicGeometry/QuasiAffine.lean, Mathlib/AlgebraicGeometry/QuasiAffine.lean, Mathlib/AlgebraicGeometry/QuasiAffine.lean, Mathlib/AlgebraicGeometry/QuasiAffine.lean. No hit gives the complete cover, ambient and module conclusions.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Finite affine covers of finite type schemes embedded into relative affine space with finitely presented flat structure module on an open subset",
+   "results": "8 hits: AlgebraicGeometry.Scheme.affineCover, AlgebraicGeometry.Scheme.affineOpenCover, AlgebraicGeometry.Scheme.AffineCover, AlgebraicGeometry.Scheme.AffineCover.ctorIdx, AlgebraicGeometry.Scheme.AffineCover.mk, AlgebraicGeometry.Scheme.affineBasisCover, AlgebraicGeometry.Scheme.AffineCover.cover, AlgebraicGeometry.Scheme.AffineCover.J. No hit gives the complete cover, ambient and module conclusions.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Affine finite type algebras over base affine open subsets give closed embeddings into relative affine space; quotient module is finitely presented over the flat finitely presented locus",
+   "results": "8 hits: AlgebraicGeometry.AffineSpace.instLocallyOfFinitePresentationOverSchemeInferInstanceOverClassOfFinite, AlgebraicGeometry.IsClosedImmersion.hasAffineProperty, AlgebraicGeometry.instLocallyOfFiniteTypeOfIsClosedImmersion, AlgebraicGeometry.IsFinite.instHasAffinePropertyAndIsAffineFiniteCarrierObjOppositeOpensCarrierCarrierCommRingCatPresheafOpOpensTopHomAppTop, AlgebraicGeometry.IsClosedImmersion.spec_of_quotient_mk, AlgebraicGeometry.isClosedImmersion_iff_isAffineHom, AlgebraicGeometry.IsClosedImmersion.instIsAffineHom, AlgebraicGeometry.IsClosedImmersion.of_surjective_of_isAffine. No hit gives the complete cover, ambient and module conclusions.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-flattening-by-admissible-blowup",
+  "date": "2026-10-22",
+  "group": "Q85"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Proof (1)--(2), semistable-alteration input in the nearby-cycle branch: ILO X Theorem 3.4 proof Step 2, 'due to the flattening theorem of Raynaud-Gruson [5.7.9], this can be achieved by replacing S with an appropriate projective modification S', replacing X with the proper transform'. Subargument: Stacks 081R, ambient module preparation for affine pieces of a finite-type morphism.",
+   "via": [
+    "lem-trf-flattening-by-admissible-blowup",
+    "lem-trf-flatification-horizontal-curve-pair",
+    "lem-trf-dejong-relative-marked-semistable",
+    "lem-trf-relative-marked-nodal-reduction",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-trf-flattening-ambient-module-preparation",
+  "worker": "stage1",
+  "summary": "Split into seven steps, reusing existing nodes throughout. Choose affine pieces above finite affine base opens and construct their closed embeddings using algebra generators. Verify ambient quasi-compactness and local finite presentation, global module quasi-coherence and finite type, good-open finite presentation via permanence and the n=0 quotient-kernel lemma, and flatness via closed-subspace stalks. Statement unchanged; no new nodes.",
+  "blueprint": "Proof (1)--(2), semistable-alteration input in the nearby-cycle branch: ILO X Theorem 3.4 proof Step 2, 'due to the flattening theorem of Raynaud-Gruson [5.7.9], this can be achieved by replacing S with an appropriate projective modification S', replacing X with the proper transform'. Subargument: Stacks 081R, ambient module preparation for affine pieces of a finite-type morphism. Explicit realization of the affine-cover and ambient-module preparation in Stacks 081R, the input to module flattening.",
+  "tool_uses": [
+   {
+    "node": "lem-a1-map-over-base-finite-presentation",
+    "why": "Generic permanence of local finite presentation for a map over a base; applied to the good-open closed immersion, not to replace the flattening route."
+   },
+   {
+    "node": "lem-sbc-locally-finite-presentation-composition",
+    "why": "Generic composition rule for the ambient map and the open source restriction; the present unit contains no such algebraic-geometric permanence statement."
+   },
+   {
+    "node": "lem-weil-pbc-open-immersion-etale",
+    "why": "Generic fact that open inclusions are locally of finite presentation, extracted through the definition of etale; no flattening argument is replaced."
+   },
+   {
+    "node": "lem-weil-pbc-affine-morphism-relative-spec",
+    "why": "Only the quasi-coherence of an affine pushed structure sheaf and its open restriction, clauses (1) and (4), are used."
+   },
+   {
+    "node": "lem-sc-closed-pushforward-abelian-stalks",
+    "why": "Generic closed-subspace stalk calculation, with scalar compatibility written explicitly in step 7; no etale/proetale comparison is involved."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-a1-map-over-base-finite-presentation",
+  "lem-sbc-locally-finite-presentation-composition",
+  "lem-weil-pbc-open-immersion-etale",
+  "lem-weil-pbc-affine-morphism-relative-spec",
+  "lem-sc-closed-pushforward-abelian-stalks"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q66-820b6aa19",
+  "group": "Q66",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q66-820b6aa19 (reviewer sub-agent of L); spot-checked: I read Stacks 081R (flat.tex 9122-9170) and all 7 steps against the statements of the 24 cited nodes. The split realizes paragraphs 1-2 of 081R with an explicit affine variant: W_i sits over affine base opens B_a and is embedded by algebra generators into V_i=Spec A[t], which is the preimage of B_a in A^n_T by def-nagata-relative-affine-space. This is stronger than the 04II immersion, and the parent's step 2 needs no more than what it gives. The statement is unchanged and there are no new nodes. There is no repair note, so the re-split rule does not apply. Step 3: permanence(1) applies since V_i is qc and T is qs. Step 4: cyclic R/I plus clause (a) gives finite type only, which is correct. Step 6: the kernel lemma is used with n=0 (allowed), and clause (b) holds. Step 7: closed-pushforward stalks, where the scalar compatibility is written out, together with the flatness stalk criterion. Edge cases checked: W empty, n_i=0, I=0, I=R. Route: only lem-a1-map-over-base-finite-presentation is off the unit's route, and its declared tool_use is accepted. There is no SGA citation and no duplicate (rg -L over 081R, the id and 'ambient module'). FIX (C1/C4): step 5 claimed V_{i,U}->U is locally of finite type, as lem-a1 requires, via 'a presentation supplies generators'. That gives only the pointwise form. The affine-local form of def-weil-finite-type-morphism needs 01TQ. Step 5 now cites lem-weil-pbc-lfp-affine-opens-finite-presentation and def-weil-finite-type-morphism; both were already in proof_deps. The corrected file is fixes/dag/nodes/sec-trace-formula/lem-trf-flattening-ambient-module-preparation.json.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.FlatteningAmbientModulePreparation",
+  "declaration": "AlgebraicGeometry.exists_flattening_ambient_module_preparation",
+  "file": "lean/Sheaf/AlgebraicGeometry/FlatteningAmbientModulePreparation.lean",
+  "statement": "theorem exists_flattening_ambient_module_preparation {T W : Scheme.{u}} [CompactSpace T] [QuasiSeparatedSpace T] (U : T.Opens) (hU : IsCompact (U : Set T)) (g : W ⟶ T) [LocallyOfFiniteType g] [QuasiCompact g] [Flat (pullback.snd g U.ι)] [LocallyOfFinitePresentation (pullback.snd g U.ι)] : ∃ (r : ℕ) (O : Fin r → W.Opens) (n : Fin r → ℕ) (V : ∀ i : Fin r, (AffineSpace (ULift.{u} (Fin (n i))) T).Opens) (j : ∀ i : Fin r, (O i).toScheme ⟶ (V i).toScheme), (⨆ i : Fin r, O i) = ⊤ ∧ ∀ i : Fin r, IsAffineOpen (O i) ∧ IsCompact (V i : Set (AffineSpace (ULift.{u} (Fin (n i))) T)) ∧ IsClosedImmersion (j i) ∧ j i ≫ ((V i).ι ≫ (AffineSpace (ULift.{u} (Fin (n i))) T ↘ T)) = (O i).ι ≫ g ∧ QuasiCompact ((V i).ι ≫ (AffineSpace (ULift.{u} (Fin (n i))) T ↘ T)) ∧ LocallyOfFinitePresentation ((V i).ι ≫ (AffineSpace (ULift.{u} (Fin (n i))) T ↘ T)) ∧ Scheme.Modules.IsQuasiCoherentFiniteType ((Scheme.Modules.pushforward (j i)).obj (SheafOfModules.unit (O i).toScheme.ringCatSheaf)) ∧ SheafOfModules.IsFinitePresentation (((Scheme.Modules.pushforward (j i)).obj (SheafOfModules.unit (O i).toScheme.ringCatSheaf)).restrict (((V i).ι ≫ (AffineSpace (ULift.{u} (Fin (n i))) T ↘ T)) ⁻¹ᵁ U).ι) ∧ Scheme.Modules.IsFlatOver (((Scheme.Modules.pushforward (j i)).obj (SheafOfModules.unit (O i).toScheme.ringCatSheaf)).restrict (((V i).ι ≫ (AffineSpace (ULift.{u} (Fin (n i))) T ↘ T)) ⁻¹ᵁ U).ι) (((V i).ι ≫ (AffineSpace (ULift.{u} (Fin (n i))) T ↘ T)) ∣_ U)",
+  "branch": "newtargets-dag",
+  "by": "Q77",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-17610dc68",
+  "group": "Q77",
+  "result": "pass",
+  "note": "Read the node, the 11 stmt_dep records, the Mathlib pushforward/restrict/AffineSpace declarations and the side-live IsFlatOver. Hypotheses: T qcqs is CompactSpace+QuasiSeparatedSpace; U qc open; finite type is LocallyOfFiniteType+QuasiCompact as recorded, with no QS on g; Flat and LFP on pullback.snd g U.ι, whose target is U. Conclusions: finite affine cover O : Fin r → W.Opens with ⨆=⊤ and IsAffineOpen; V_i opens of AffineSpace (ULift (Fin n_i)) T (ULift forced by Mathlib's universe, no restriction), IsCompact; j_i closed immersion over T by an equation; p_i QuasiCompact and LFP; F_i = pushforward j (unit), sections Γ(j⁻¹H) by rfl with scalars through j, IsQuasiCoherentFiniteType; restriction to the canonical open model p⁻¹U is IsFinitePresentation and IsFlatOver along p∣_U. Edge cases W/T/U empty, U=T, n_i=0, zero quotients are covered. lean.statement verbatim (diff). Node differs from live only by the lean record; not landed elsewhere; all imports exist; docstrings carry the source place, blueprint tag and all 7 proof steps; sorry only; no new defs; report has Worker report and Second reading by Q77. Advisory: hU unused but node-faithful. No compile run (no file changed)."
+ }
+}

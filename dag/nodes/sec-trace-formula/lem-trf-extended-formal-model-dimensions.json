@@ -1,0 +1,141 @@
+{
+ "id": "lem-trf-extended-formal-model-dimensions",
+ "kind": "statement",
+ "title": "Dimensions of an extended completed toric pair",
+ "status": "split",
+ "import_flags": [],
+ "statement": "Let B be a Noetherian local ring, T a sharp fs commutative monoid, J contained in the maximal ideal of B, and mixed a Boolean. Suppose AddMonoidAlgebra.HasExtendedFormalMonoidModel B (Additive T) J mixed holds: its one nonzero complete regular local coefficient ring D presents the completed pair, with its parameter reduction in m_D minus m_D squared in the mixed case. Then ModelDimensions B T J mixed holds, with the same meaning and the same coefficient ring throughout as defined in def-trf-formal-chart-geometric-data. Thus it retains the pair presentation, asserts regularity of the completed quotient by J, and computes both completed dimensions with e=0 or e=1. This conclusion concerns completions only, not regularity or dimensions before completion or after strict henselization.",
+ "stmt_deps": [
+  "def-trf-formal-chart-geometric-data",
+  "def-trf-fs-log-blowup",
+  "def-trf-chart-unit-face-data",
+  "def-per-formal-monoid-extension-data",
+  "def-weil-pbc-noetherian-ring"
+ ],
+ "source": {
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "VI 1.6 and 1.8, p.70; formal-model-to-geometric-stalk argument from returned item steps 6--7 (agent-supplied refinement). Stacks: algebra.tex Tag 00MA (lemma-completion-tensor), Tag 05WS (lemma-quotient-strict-henselization); more-algebra.tex Tags 07NY (lemma-completion-regular), 07NV (lemma-completion-dimension), 06LN (lemma-henselization-regular), 06LK (lemma-henselization-dimension)."
+ },
+ "proof": [
+  {
+   "text": "Unpack the extended formal model. Under the canonical evaluation equivalence for polynomials in zero variables, its completed monoid ring and monomial ideal become the objects of formal-monoid-ring-dimension. Apply that theorem to the sharp fs monoid T and D. In the field-model case its stratum equivalence identifies the quotient with D and gives its dimension.",
+   "uses": [
+    "lem-trf-formal-monoid-ring-dimension"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "In the mixed case the D-algebra stratum equivalence of the dimension theorem equals the specified rho: the constant inclusion D -> H/L is surjective and each equivalence is its inverse. Apply its parameter clause to eta, using rho(eta) in m_D minus m_D squared. Quotienting H/(eta) by the image of L is the same as quotienting H/L by the class of eta, so its stratum is D/(rho(eta)). The dimension theorem gives both dimension drops by one and regular-local regularity of the latter.",
+   "uses": [
+    "lem-trf-formal-monoid-ring-dimension"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "A regular local ring is regular as a ring. Transport regularity and Krull dimensions through the pair isomorphism, and retain D, its completeness, and the original pair map. Discard only the residue-field equivalence and adic-topology assertions of the extended model, which ModelDimensions does not request.",
+   "uses": [
+    "lem-weil-pbc-regular-local-localization"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-trf-formal-monoid-ring-dimension",
+  "lem-weil-pbc-regular-local-localization"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "Extracted proof steps of lem-trf-formal-chart-geometric-regularity; Dimensions of an extended completed toric pair. Uses the existing inputs with the indicated Stacks comparisons."
+ },
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "formalMonoidRing_dimension|completion_dimension|isRegularLocalRing_iff",
+   "results": "{\"t\": \"2026-10-26T08:05:44Z\", \"tool\": \"grep\", \"query\": \"formalMonoidRing_dimension|completion_dimension|isRegularLocalRing_iff\", \"sub\": \"\", \"ok\": true, \"n_hits\": 6, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/RegularLocalRing/Polynomial.lean\", \"Mathlib/RingTheory/RegularLocalRing/Defs.lean\", \"Mathlib/RingTheory/RegularLocalRing/Defs.lean\", \"Mathlib/RingTheory/RegularLocalRing/Defs.lean\", \"Mathlib/RingTheory/RegularLocalRing/Defs.lean\", \"Mathlib/RingTheory/RegularLocalRing/Defs.lean\"], \"digest\": \"fa4e9bbac71b0e70\"}",
+   "date": "2026-10-26",
+   "verdict": "no exact match; existing project inputs are reused"
+  },
+  {
+   "tool": "loogle",
+   "query": "AdicCompletion, ringKrullDim",
+   "results": "{\"t\": \"2026-10-26T08:05:45Z\", \"tool\": \"loogle\", \"query\": \"AdicCompletion, ringKrullDim\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-26",
+   "verdict": "no exact match; existing project inputs are reused"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A complete sharp monoid algebra model determines the dimension and regularity of its monomial stratum and completion descends these to the local ring",
+   "results": "{\"t\": \"2026-10-26T08:05:52Z\", \"tool\": \"leanfinder\", \"query\": \"A complete sharp monoid algebra model determines the dimension and regularity of its monomial stratum and completion descends these to the local ring\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"MvPowerSeries.instIsLocalRing\", \"MonoidAlgebra.isLocalHom_singleOneRingHom\", \"MonoidAlgebra.isLocalHom_singleOneAlgHom\", \"isLocalRing_of_isAdicComplete_maximal\", \"PowerSeries.instIsLocalRing\", \"BDeRham\", \"LaurentSeries.powerSeriesAlgEquiv\", \"IsDedekindDomain.HeightOneSpectrum.instAlgebraAdicCompletion\"], \"digest\": \"a410ed7b9ebc0514\"}",
+   "date": "2026-10-26",
+   "verdict": "no exact match; existing project inputs are reused"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Compute dimensions and regularity of the monomial stratum of a completed sharp fine saturated monoid ring and its parameter hypersurface",
+   "results": "{\"t\": \"2026-10-26T08:14:10Z\", \"tool\": \"leansearch\", \"query\": \"Compute dimensions and regularity of the monomial stratum of a completed sharp fine saturated monoid ring and its parameter hypersurface\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"ringKrullDim_add_enatCard_le_ringKrullDim_mvPolynomial\", \"ringKrullDim_add_natCard_le_ringKrullDim_mvPolynomial\", \"IsRegular.monomial\", \"MvPolynomial.ringKrullDim_of_isNoetherianRing\", \"AffineAddMonoid.dim\", \"MvPolynomial.rank_eq_lift\", \"Algebra.mvPolynomial\", \"ringKrullDim_add_length_eq_ringKrullDim_of_isRegular\"], \"digest\": \"505588b4ceaf5e7f\"}",
+   "date": "2026-10-26",
+   "verdict": "no exact match; existing project inputs are reused"
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.FormalChartGeometricRegularity",
+  "date": "2026-10-26",
+  "group": "V1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Historical nearby-duality/alteration input under lem-trf-local-term-locality proof (1)--(2), through lem-trf-nodal-pair-projective-resolution: ILO VI Proposition 1.9, the final application of log smoothness, using VI 1.8 and VI 1.4. Extraction: VI 1.6 and 1.8, p.70; formal-model-to-geometric-stalk argument from returned item steps 6--7 (agent-supplied refinement). Stacks: algebra.tex Tag 00MA (lemma-completion-tensor), Tag 05WS (lemma-quotient-strict-henselization); more-algebra.tex Tags 07NY (lemma-completion-regular), 07NV (lemma-completion-dimension), 06LN (lemma-henselization-regular), 06LK (lemma-henselization-dimension). Specific refinement: Dimensions of an extended completed toric pair",
+   "via": [
+    "lem-trf-formal-chart-geometric-regularity",
+    "lem-trf-log-smooth-log-regular",
+    "lem-trf-nodal-log-regularity",
+    "lem-trf-nodal-pair-projective-resolution",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.ExtendedFormalModelDimensions",
+  "file": "lean/Sheaf/AlgebraicGeometry/ExtendedFormalModelDimensions.lean",
+  "declaration": "AlgebraicGeometry.extended_formal_model_dimensions",
+  "declarations": [
+   "AlgebraicGeometry.extended_formal_model_dimensions"
+  ],
+  "statement": "theorem extended_formal_model_dimensions (B T : Type u) [CommRing B] [IsLocalRing B] [IsNoetherianRing B] [CommMonoid T] (_hfs : IsFineSaturatedMonoid T) (_hsharp : ∀ t : T, IsUnit t → t = 1) (J : Ideal B) (_hJ : J ≤ IsLocalRing.maximalIdeal B) (mixed : Bool) (_hmodel : AddMonoidAlgebra.HasExtendedFormalMonoidModel B (Additive T) J mixed) : ModelDimensions B T J mixed",
+  "branch": "sheaf-dag",
+  "by": "V1",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-2e473",
+  "group": "V1",
+  "result": "fix",
+  "landing": "20261026T092830-L-3471491",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-2e473",
+  "group": "V1",
+  "result": "fix",
+  "landing": "20261026T092830-L-3471491",
+  "kind": "interface",
+  "note": "independent cc review: item proof + 3 split statements (local preparation, extended model dimensions, strict comparison) against node lem-trf-formal-chart-geometric-regularity, HasExtendedFormalMonoidModel/CompletedLocalModel defs, FineSaturatedLogScheme; moved defs diffed byte-identical vs clone; 0 importers"
+ }
+}

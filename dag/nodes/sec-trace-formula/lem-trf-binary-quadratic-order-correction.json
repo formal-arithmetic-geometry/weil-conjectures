@@ -1,0 +1,222 @@
+{
+ "id": "lem-trf-binary-quadratic-order-correction",
+ "kind": "statement",
+ "title": "Finite-order homogeneous correction for a nondegenerate binary quadratic",
+ "statement": "Let $F$ be a field, $S=F[[u,v]]$ [def-weil-pbc-multivariate-power-series], $\\mathfrak p=(u,v)$, and $Q(U,V)=aU^2+bUV+cV^2$ for $a,b,c\\in F$ with $b^2-4ac\\ne0$. Put $L_1=2au+bv$ and $L_2=bu+2cv$. Let $r\\ge2$, $f,x,y\\in S$, $x-u,y-v\\in\\mathfrak p^2$, and $E=f-Q(x,y)\\in\\mathfrak p^{r+1}$. Let $H\\in F[u,v]$ be the homogeneous degree-$(r+1)$ component of $E$ (the sum of its monomials of that total degree). There exist homogeneous polynomials $A,B\\in F[U,V]$ of degree $r$ (zero is allowed) such that $H=L_1A(u,v)+L_2B(u,v)$. For these choices, putting $x'=x+A(x,y)$ and $y'=y+B(x,y)$, one has $x'-x,y'-y\\in\\mathfrak p^r$, $x'-u,y'-v\\in\\mathfrak p^2$, and $Q(x',y')-Q(x,y)-H\\in\\mathfrak p^{r+2}$, hence $f-Q(x',y')\\in\\mathfrak p^{r+2}$. No restriction on the characteristic of $F$ is imposed.",
+ "source": {
+  "document": "literature/stacks-project/curves.tex",
+  "place": "Tag 0C49 (lemma-nodal-algebraic), proof of (2) implies (3), polar-basis correction modulo the fourth power and its induction to higher powers; the same calculation with fixed series f and error f-Q(x,y)."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-multivariate-power-series",
+  "def-weil-pbc-mv-polynomial-ring"
+ ],
+ "proof": [
+  {
+   "text": "Apply [lem-weil-pbc-power-series-combined-ideal-coefficients] with $\\Lambda=F$, $J=0$ and $d=2$. For $n\\ge1$ it says exactly that membership in $\\mathfrak p^n$ is vanishing of every coefficient of total degree $<n$, because $0^{n-|E|}=0$ for $|E|<n$. Thus $E$ has no terms below degree $r+1$. Subtracting its finite degree-$(r+1)$ part $H$ leaves no terms below degree $r+2$, so $E-H\\in\\mathfrak p^{r+2}$. There are only $r+2$ binary monomials of degree $r+1$, so $H$ is indeed a polynomial.",
+   "uses": [
+    "lem-weil-pbc-power-series-combined-ideal-coefficients"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/curves.tex",
+    "place": "Tag 0C49 (lemma-nodal-algebraic), proof of (2) implies (3), polar correction formula and higher-order induction; explicit fixed-series version."
+   }
+  },
+  {
+   "text": "Write $H=\\sum_{i+j=r+1}h_{ij}u^iv^j$. Define $P(U,V)=\\sum_{i+j=r+1,\\ i>0}h_{ij}U^{i-1}V^j$ and $R(U,V)=h_{0,r+1}V^r$. Then $H=uP(u,v)+vR(u,v)$, and both $P,R$ are homogeneous of degree $r$. Put $D=4ac-b^2\\ne0$ and set $A=D^{-1}(2cP-bR)$, $B=D^{-1}(-bP+2aR)$. Multiplication gives $2aA+bB=P$ and $bA+2cB=R$. Therefore $L_1A(u,v)+L_2B(u,v)=H$. All these are polynomial identities; the inverse used is only that of the nonzero field element $D$. The zero polynomial is permitted throughout.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/curves.tex",
+    "place": "Tag 0C49 (lemma-nodal-algebraic), proof of (2) implies (3), polar correction formula and higher-order induction; explicit fixed-series version."
+   }
+  },
+  {
+   "text": "The hypotheses imply $x,y\\in\\mathfrak p$. For any degree-$r$ monomial $U^iV^j$ one has $x^iy^j\\in\\mathfrak p^r$. Moreover\n$$x^iy^j-u^iv^j=(x^i-u^i)y^j+u^i(y^j-v^j)\\in\\mathfrak p^{r+1}.$$\nIndeed, if $i>0$, then $x^i-u^i=(x-u)\\sum_{k=0}^{i-1}x^{i-1-k}u^k\\in\\mathfrak p^{i+1}$; for $i=0$ the difference is zero. The corresponding formula for $y^j-v^j$ gives order $j+1$ when $j>0$. Multiplying by the other $j$ or $i$ factors gives the stated order. Summing the finitely many monomials of $A,B$ proves, for $\\delta=A(x,y)$ and $\\epsilon=B(x,y)$, that $\\delta,\\epsilon\\in\\mathfrak p^r$ and $\\delta-A(u,v),\\epsilon-B(u,v)\\in\\mathfrak p^{r+1}$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/curves.tex",
+    "place": "Tag 0C49 (lemma-nodal-algebraic), proof of (2) implies (3), polar correction formula and higher-order induction; explicit fixed-series version."
+   }
+  },
+  {
+   "text": "Set $x'=x+\\delta$, $y'=y+\\epsilon$. Then $x'-x,y'-y\\in\\mathfrak p^r$. Since $r\\ge2$, both differences also lie in $\\mathfrak p^2$, hence $x'-u,y'-v\\in\\mathfrak p^2$. Write $M_1=2ax+by$ and $M_2=bx+2cy$. We have $M_i\\in\\mathfrak p$ and $M_i-L_i\\in\\mathfrak p^2$. Consequently\n$$M_1\\delta-L_1A(u,v)=(M_1-L_1)\\delta+L_1(\\delta-A(u,v))\\in\\mathfrak p^{r+2},$$\nand likewise $M_2\\epsilon-L_2B(u,v)\\in\\mathfrak p^{r+2}$. Here every estimate is just multiplication of ideal powers, $\\mathfrak p^s\\mathfrak p^t\\subseteq\\mathfrak p^{s+t}$. Adding and using step 2 gives $M_1\\delta+M_2\\epsilon-H\\in\\mathfrak p^{r+2}$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/curves.tex",
+    "place": "Tag 0C49 (lemma-nodal-algebraic), proof of (2) implies (3), polar correction formula and higher-order induction; explicit fixed-series version."
+   }
+  },
+  {
+   "text": "Direct expansion of the quadratic gives the exact identity\n$$Q(x',y')-Q(x,y)=M_1\\delta+M_2\\epsilon+a\\delta^2+b\\delta\\epsilon+c\\epsilon^2.$$\nThe last three terms lie in $\\mathfrak p^{2r}\\subseteq\\mathfrak p^{r+2}$, since $r\\ge2$. Step 4 therefore gives $Q(x',y')-Q(x,y)-H\\in\\mathfrak p^{r+2}$. Finally\n$$f-Q(x',y')=(E-H)-(Q(x',y')-Q(x,y)-H)\\in\\mathfrak p^{r+2}$$\nby step 1. The expansion and all ideal inclusions hold in every characteristic, proving every claimed clause.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/curves.tex",
+    "place": "Tag 0C49 (lemma-nodal-algebraic), proof of (2) implies (3), polar correction formula and higher-order induction; explicit fixed-series version."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-power-series-combined-ideal-coefficients"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/curves.tex",
+  "place": "Tag 0C49 (lemma-nodal-algebraic), proof of (2) implies (3), polar correction formula and higher-order induction; explicit fixed-series version."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "In F[[u,v]] a binary quadratic with invertible polar matrix admits homogeneous coordinate corrections raising the error from order r+1 to r+2",
+   "results": "[leanfinder] OK 8 hit(s); PowerSeries.IsWeierstrassDivisorAt.seq; xInTermsOfW; PowerSeries.IsWeierstrassDivision.isWeierstrassFactorization; PowerSeries.weierstrassMod; PowerSeries.IsWeierstrassFactorization.isWeierstrassDivision; PowerSeries.IsWeierstrassDivisorAt.seq_one; PowerSeries.IsWeierstrassDivisorAt.mod; PowerSeries.IsWeierstrassDivisorAt.coeff_seq_mem",
+   "date": "2026-10-22",
+   "verdict": "no match: homogeneous-component definitions and homogeneous sum/product identities do not choose polar corrections or prove the error-raising congruence; the other hits concern Weierstrass division, homogenization or unrelated polynomial bounds."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Solve a homogeneous binary polynomial as the sum of two independent linear forms times homogeneous polynomials and improve a quadratic approximation by one degree",
+   "results": "[leanfinder] OK 8 hit(s); Polynomial.homogenize; Polynomial.exists_approx_polynomial_aux; ChevalleyThm.MvPolynomialC.degBound_succ; ChevalleyThm.MvPolynomialC.degBound_casesOn_succ; ChevalleyThm.MvPolynomialC.numBound_succ; Polynomial.homogenizeLM; MvPolynomial.combinatorial_nullstellensatz_exists_linearCombination; Polynomial.exists_partition_polynomial_aux",
+   "date": "2026-10-22",
+   "verdict": "no match: homogeneous-component definitions and homogeneous sum/product identities do not choose polar corrections or prove the error-raising congruence; the other hits concern Weierstrass division, homogenization or unrelated polynomial bounds."
+  },
+  {
+   "tool": "loogle",
+   "query": "MvPowerSeries, homogeneousComponent",
+   "results": "[loogle] OK 0 hit(s); loogle: unknown identifier 'homogeneousComponent'; ",
+   "date": "2026-10-22",
+   "verdict": "unavailable: this query returned unknown identifier homogeneousComponent; the separately recorded qualified MvPowerSeries.IsHomogeneous query supplies the successful type search."
+  },
+  {
+   "tool": "loogle",
+   "query": "MvPowerSeries.IsHomogeneous, MvPowerSeries",
+   "results": "[loogle] OK 6 hit(s); MvPowerSeries.IsHomogeneous; MvPowerSeries.IsHomogeneous.add; MvPowerSeries.IsHomogeneous.mul; MvPowerSeries.isHomogeneous_homogeneousComponent; MvPowerSeries.isHomogeneous_iff_eq_homogeneousComponent; MvPowerSeries.IsHomogeneous.coeff_eq_zero",
+   "date": "2026-10-22",
+   "verdict": "no match: homogeneous-component definitions and homogeneous sum/product identities do not choose polar corrections or prove the error-raising congruence; the other hits concern Weierstrass division, homogenization or unrelated polynomial bounds."
+  },
+  {
+   "tool": "grep",
+   "query": "polar|Morse|homogeneousComponent|homogeneous.*degree",
+   "results": "[grep] OK 16 hit(s); Mathlib/RingTheory/MvPowerSeries/NoZeroDivisors.lean; Mathlib/RingTheory/MvPowerSeries/NoZeroDivisors.lean; Mathlib/RingTheory/MvPowerSeries/NoZeroDivisors.lean; Mathlib/RingTheory/MvPowerSeries/NoZeroDivisors.lean; Mathlib/RingTheory/MvPowerSeries/Trunc.lean; Mathlib/RingTheory/MvPowerSeries/Trunc.lean; Mathlib/RingTheory/MvPowerSeries/Substitution.lean; Mathlib/RingTheory/MvPowerSeries/Substitution.lean; Mathlib subdirectory RingTheory/MvPowerSeries",
+   "date": "2026-10-22",
+   "verdict": "no match: homogeneous-component definitions and homogeneous sum/product identities do not choose polar corrections or prove the error-raising congruence; the other hits concern Weierstrass division, homogenization or unrelated polynomial bounds."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A nondegenerate quadratic formal power series can be corrected at each homogeneous degree by changing its coordinates",
+   "results": "[leansearch] OK 8 hit(s); MvPowerSeries.homogeneousComponent; MvPowerSeries.IsHomogeneous; MvPowerSeries.homogeneousComponent_of_order; MvPowerSeries.coeff_homogeneousComponent; MvPowerSeries.IsHomogeneous.coeff_eq_zero; MvPowerSeries.homogeneousComponent_of_lt_order_eq_zero; MvPowerSeries.isHomogeneous_iff_eq_homogeneousComponent; MvPowerSeries.isHomogeneous_homogeneousComponent",
+   "date": "2026-10-22",
+   "verdict": "no match: homogeneous-component definitions and homogeneous sum/product identities do not choose polar corrections or prove the error-raising congruence; the other hits concern Weierstrass division, homogenization or unrelated polynomial bounds."
+  },
+  {
+   "tool": "grep",
+   "query": "homogeneousComponent|ideal.*pow|order.*mul",
+   "results": "25 hits: Mathlib/RingTheory/MvPowerSeries/LinearTopology.lean, Mathlib/RingTheory/MvPowerSeries/LinearTopology.lean, Mathlib/RingTheory/MvPowerSeries/LinearTopology.lean, Mathlib/RingTheory/MvPowerSeries/LinearTopology.lean, Mathlib/RingTheory/MvPowerSeries/NoZeroDivisors.lean, Mathlib/RingTheory/MvPowerSeries/NoZeroDivisors.lean, Mathlib/RingTheory/MvPowerSeries/NoZeroDivisors.lean, Mathlib/RingTheory/MvPowerSeries/NoZeroDivisors.lean",
+   "date": "2026-10-23",
+   "verdict": "no match: homogeneous components and homogenization do not state the polar correction or the error-raising congruence; Euler identity requires division by the degree to solve for a homogeneous polynomial, which is unavailable in arbitrary characteristic."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Homogeneous coordinate corrections for a nondegenerate binary quadratic formal power series",
+   "results": "8 hits: Polynomial.homogenize, MvPowerSeries.IsHomogeneous, Polynomial.homogenizeLM, Polynomial.coeff_homogenize, MvPowerSeries.homogeneousComponent, MvPowerSeries.coeff_homogeneousComponent, Polynomial.homogenize_eq_of_isHomogeneous, MvPowerSeries.isHomogeneous_homogeneousComponent",
+   "date": "2026-10-23",
+   "verdict": "no match: homogeneous components and homogenization do not state the polar correction or the error-raising congruence; Euler identity requires division by the degree to solve for a homogeneous polynomial, which is unavailable in arbitrary characteristic."
+  },
+  {
+   "tool": "loogle",
+   "query": "MvPowerSeries.IsHomogeneous, MvPowerSeries",
+   "results": "6 hits: MvPowerSeries.IsHomogeneous, MvPowerSeries.IsHomogeneous.add, MvPowerSeries.IsHomogeneous.mul, MvPowerSeries.isHomogeneous_homogeneousComponent, MvPowerSeries.isHomogeneous_iff_eq_homogeneousComponent, MvPowerSeries.IsHomogeneous.coeff_eq_zero",
+   "date": "2026-10-23",
+   "verdict": "no match: homogeneous components and homogenization do not state the polar correction or the error-raising congruence; Euler identity requires division by the degree to solve for a homogeneous polynomial, which is unavailable in arbitrary characteristic."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A binary quadratic with invertible polar matrix admits homogeneous coordinate corrections raising the formal power series error by one degree",
+   "results": "8 hits: xInTermsOfW, PowerSeries.IsWeierstrassDivisorAt.seq_one, xInTermsOfW_eq, xInTermsOfW_aux, PowerSeries.IsWeierstrassDivisorAt.seq, WeierstrassCurve.Jacobian.eval_polynomial_of_Z_ne_zero, WeierstrassCurve.exists_variableChange_isShortNF, Algebra.SubmersivePresentation.aeval_invJacobianOfHasCoeffs",
+   "date": "2026-10-23",
+   "verdict": "no match: homogeneous components and homogenization do not state the polar correction or the error-raising congruence; Euler identity requires division by the degree to solve for a homogeneous polynomial, which is unavailable in arbitrary characteristic."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Express a homogeneous binary polynomial as a sum of two independent linear forms times homogeneous polynomials",
+   "results": "8 hits: Polynomial.homogenize, MvPolynomial.decomposition, Polynomial.homogenizeLM, Polynomial.homogenize_eq_of_isHomogeneous, MvPolynomial.decomposition.decompose'_eq, Polynomial.isHomogeneous_homogenize, Polynomial.homogenize_add, MvPolynomial.IsHomogeneous.sum_X_mul_pderiv",
+   "date": "2026-10-23",
+   "verdict": "no match: homogeneous components and homogenization do not state the polar correction or the error-raising congruence; Euler identity requires division by the degree to solve for a homogeneous polynomial, which is unavailable in arbitrary characteristic."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-formal-binary-morse",
+  "date": "2026-10-22",
+  "group": "Q86"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Successive coordinate corrections removing cubic and higher terms in the nondegenerate-quadratic completion argument, Curves 0C49, below the imported pointwise nodal ingredient. Finite-order polar correction (returned proof steps 2-3).",
+   "via": [
+    "lem-trf-formal-binary-morse",
+    "lem-trf-formal-jacobian-quadratic-criterion",
+    "lem-trf-nodal-point-local-criterion",
+    "lem-trf-nodal-curve-lci-criterion",
+    "lem-trf-nodal-family-fitting-singular",
+    "lem-trf-projective-nodal-family-geometry",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-trf-binary-quadratic-order-correction",
+  "worker": "stage1",
+  "summary": "Explicit degree-by-degree polar correction following Curves 0C49: reuse the existing coefficient criterion, factor the binary homogeneous polynomial monomial by monomial, solve the polar equations with an explicit inverse, and bound all substitution and quadratic remainders. No new nodes; no change to the statement or unit route.",
+  "blueprint": "The inherited nodal-completion subargument below lem-trf-local-term-locality, via lem-trf-formal-binary-morse: the finite-order correction in Curves 0C49. The latest locality blueprint has no separate quadratic lemma; this split supplies the inherited auxiliary algebra calculation.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-power-series-combined-ideal-coefficients",
+    "why": "Generic coefficient criterion for formal series, specialized to J=0 and two variables to identify the error after removing its leading homogeneous part; no node in sk-i-curve-zero supplies this ring-theoretic tool."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-power-series-combined-ideal-coefficients"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q133-3e0d8fd67",
+  "group": "Q133",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q133-3e0d8fd67 (reviewer sub-agent of L); spot-checked: I read the whole item. Its statement is byte-identical to the version created by Q86's reviewed re-split of lem-trf-formal-binary-morse, which uses it as step 1 with exactly these clauses. The only stmt_deps change adds def-weil-pbc-mv-polynomial-ring, which is justified because the statement uses F[u,v] and polynomial evaluation. There are no new nodes. Source checked: Stacks curves.tex 3913-3949, Tag 0C49 (2)=>(3). Its polar correction modulo m^4 and the 'continuing by induction' are written out here as the general step r -> r+1; no SGA is cited. Step 1 applies lem-weil-pbc-power-series-combined-ideal-coefficients with Lambda=F, J=0, d=2, using 'only if' at n=r+1 and 'if' at n=r+2 to get E-H in p^{r+2}. I accept that node as a generic tool use. Step 2: I recomputed A=D^{-1}(2cP-bR) and B=D^{-1}(-bP+2aR), which give 2aA+bB=P and bA+2cB=R; only D=4ac-b^2 is inverted. Step 3: the telescoping bounds x^i-u^i in p^{i+1} hold, including zero exponents. Step 4: (M_i-L_i)delta and L_i(delta-A(u,v)) both lie in p^{r+2}. Step 5: I re-expanded the quadratic identity exactly; 2r>=r+2 holds and the final subtraction has the right sign. Steps 3-5 work for any A,B with H=L1A+L2B. Cases tested: char 2 with Q=UV and with Q=U^2+UV+V^2 for H=u^3 (B=U^2); Q=U^2+V^2 over Q at r=2 (remainder u^4/4, the tight case); H=0; and the excluded char-2 case U^2+V^2 with D=0. An rg -L duplicate audit (0C49, polar, discriminant, quadratic completion nodes, sibling successive-limit) found no duplicate. Mathlib searches cover all three kinds. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.BinaryQuadraticOrderCorrection",
+  "declaration": "MvPowerSeries.exists_binary_quadratic_order_correction",
+  "file": "lean/Sheaf/RingTheory/BinaryQuadraticOrderCorrection.lean",
+  "statement": "theorem exists_binary_quadratic_order_correction (F : Type u) [Field F] (a b c : F) (hdisc : b ^ 2 - 4 * a * c ≠ 0) (Q : MvPolynomial (Fin 2) F) (hQ : Q = MvPolynomial.C a * MvPolynomial.X 0 ^ 2 + MvPolynomial.C b * MvPolynomial.X 0 * MvPolynomial.X 1 + MvPolynomial.C c * MvPolynomial.X 1 ^ 2) (p : Ideal (MvPowerSeries (Fin 2) F)) (hp : p = Ideal.span (Set.range (X : Fin 2 → MvPowerSeries (Fin 2) F))) (r : ℕ) (hr : 2 ≤ r) (f x y : MvPowerSeries (Fin 2) F) (hx : x - X 0 ∈ p ^ 2) (hy : y - X 1 ∈ p ^ 2) (hE : f - MvPolynomial.aeval ![x, y] Q ∈ p ^ (r + 1)) (H : MvPolynomial (Fin 2) F) (hH : (H : MvPowerSeries (Fin 2) F) = homogeneousComponent (r + 1) (f - MvPolynomial.aeval ![x, y] Q)) : ∃ A B : MvPolynomial (Fin 2) F, A.IsHomogeneous r ∧ B.IsHomogeneous r ∧ (H : MvPowerSeries (Fin 2) F) = ((2 * a) • X 0 + b • X 1) * (A : MvPowerSeries (Fin 2) F) + (b • X 0 + (2 * c) • X 1) * (B : MvPowerSeries (Fin 2) F) ∧ ∀ x' y' : MvPowerSeries (Fin 2) F, x' = x + MvPolynomial.aeval ![x, y] A → y' = y + MvPolynomial.aeval ![x, y] B → x' - x ∈ p ^ r ∧ y' - y ∈ p ^ r ∧ x' - X 0 ∈ p ^ 2 ∧ y' - X 1 ∈ p ^ 2 ∧ MvPolynomial.aeval ![x', y'] Q - MvPolynomial.aeval ![x, y] Q - (H : MvPowerSeries (Fin 2) F) ∈ p ^ (r + 2) ∧ f - MvPolynomial.aeval ![x', y'] Q ∈ p ^ (r + 2)",
+  "branch": "newtargets-dag",
+  "by": "Q21",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-8c21b3ef0",
+  "group": "Q21",
+  "result": "pass",
+  "note": "Node unchanged except for the lean record; stmt_deps MvPowerSeries/MvPolynomial (Mathlib leaves) read. Clause-by-clause match against Stacks 0C49 (2)=>(3) and the node: field in any characteristic, Q via hQ, hdisc, p=span X, L1/L2 polar factors, r>=2, hx/hy/hE, H as polynomial with coe = MvPowerSeries.homogeneousComponent (r+1) E (unique, finite support), exists homogeneous A,B of degree r (zero allowed) with H=L1A+L2B, x',y' by equality binders, all six conclusions with correct signs. Edge cases H=0, r=2 tight, char 2, D=0 excluded. No duplicate found in the project trees; one sorry; docstrings with source, blueprint and 5 proof steps; lean.statement verbatim; proof-dep import exists. Advisory: 'for these choices' rendered inside the exists (witnessed A,B); the only citer, formal-binary-morse, needs only existence. No compile run (no changes); relied on the worker's clean scompile."
+ }
+}

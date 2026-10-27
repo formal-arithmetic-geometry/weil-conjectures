@@ -1,0 +1,395 @@
+{
+ "id": "lem-sfb-integral-fibre-section-specialization",
+ "kind": "statement",
+ "title": "Normalized derived specialization to a surjective closed fibre section",
+ "statement": "Fix distinct primes $p,\\ell$, a field $k$ of characteristic $p$, a finite norm-topological extension $E/\\mathbf Q_\\ell$, and an algebraic closure $\\Omega\\supset E$ with its extended norm topology. For $F=E,\\Omega$ use the all-continuous condensed ring $C_F(Q)=C(Q,F)$, its pullbacks $C_{F,X}=p_X^*C_F$, internal modules, and ordinary unbounded derived direct images on small pro-etale sites [def-sfb-continuous-map-condensed-ring, sk-def-sfb-pulled-back-coefficients, sk-def-sfb-module-objects, sk-def-sfb-module-derived-pushpull, def-weil-pbc-proetale-site].\nLet $q:X\\to U$ be a morphism of affine $k$-schemes, $s:Z\\hookrightarrow U$ a closed immersion, and $i:Z\\to X$ a map with $qi=s$ [def-weil-closed-immersion]. For every profinite $P$ use the actual test schemes [def-sfb-profinite-test-objects], put $q_P=q\\pi_P:X[P]\\to U$, and let $i_P:Z[P]\\to X[P]$ be induced by $i$. Assume $q_P$ is integral [def-weil-finite-integral-morphism] and the induced $a_P:Z[P]\\to B_P=X[P]\\times_U Z$ is a surjective closed immersion for every $P$. Write $h_P:B_P\\to X[P]$, $q_{Z,P}:B_P\\to Z$, and $\\rho_P:Z[P]\\to Z$ for the projections.\nFor a finite-rank lisse $C_{F,X}$-module $\\mathcal L$ [def-sfb-lisse-coefficient-module] set $\\mathcal L_P=\\pi_P^*\\mathcal L$. Define $\\theta_{F,P,\\mathcal L}$ to be the $\\rho_P^*\\dashv R\\rho_{P,*}$-adjunct of the actual counit pulled back by $i_P$:\n$$\\rho_P^*s^*Rq_{P,*}\\mathcal L_P[0]\\cong i_P^*q_P^*Rq_{P,*}\\mathcal L_P[0]\\xrightarrow{i_P^*\\varepsilon}i_P^*\\mathcal L_P[0]\\cong\\rho_P^*i^*\\mathcal L[0].$$\nThen\n$$\\theta_{F,P,\\mathcal L}:s^*Rq_{P,*}\\mathcal L_P[0]\\xrightarrow{\\sim}R\\rho_{P,*}(\\rho_P^*i^*\\mathcal L[0])$$\nis an isomorphism in the derived module category. It equals the cartesian exchange for $(q_P,s)$ followed by $R(q_{Z,P})_*$ of the actual unit for $a_P$, with the canonical derived composition identification. In degree zero it is restriction of full-source sections along $i_P$. For $P=*$ it is the actual boundary restriction $s^*Rq_*\\mathcal L[0]\\to i^*\\mathcal L[0]$, with the adjunction normalization just specified.\nThese maps are natural in module morphisms, continuous parameter maps, and pro-etale base change of $U$ carrying the displayed diagrams. This includes morphisms of the full-source schemes and compatible module arrows. For profinite families indexed by $Q$ and simultaneous parameter maps $Q\\times P'\\to P$, the equality is over the entire $Q$-parametrized schemes. The identity, empty parameter, empty $Z$, and zero-module cases are included.\nFor $C_E\\to C_\\Omega$ use actual coefficient restriction and the map $\\mathcal L_E\\to\\operatorname{Res}(C_{\\Omega,X}\\otimes_{C_{E,X}}\\mathcal L_E)$, $x\\mapsto1\\otimes x$ [def-sfb-continuous-map-condensed-ring-map, sk-def-sfb-change-of-scalars]. The two $\\theta$ maps commute with this map and the canonical directional derived direct-image/restriction comparisons. More precisely, define the same adjunct $\\theta$ for any degree-zero coefficient module, without an invertibility assertion. Its naturality square for $\\mathcal L_E\\to\\operatorname{Res}\\mathcal L_\\Omega$, followed by the directional restriction square for $\\theta_\\Omega$, gives the commuting cospan with common source $s^*Rq_{P,*}\\operatorname{Res}\\mathcal L_{\\Omega,P}[0]$ and common boundary target $R\\rho_{P,*}(\\rho_P^*i^*\\operatorname{Res}\\mathcal L_\\Omega[0])$. No directional restriction map is inverted and no scalar-extension/direct-image isomorphism is asserted.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+  "place": "Returned proof step 3 and the full-source part of step 5: exchange, nil-fibre unit, normalized restriction, profinite-family and scalar-restriction diagrams; agent-extracted intermediate assertion, not a theorem quoted from the blueprint"
+ },
+ "stmt_deps": [
+  "def-sfb-continuous-map-condensed-ring",
+  "sk-def-sfb-pulled-back-coefficients",
+  "sk-def-sfb-module-objects",
+  "sk-def-sfb-module-derived-pushpull",
+  "def-weil-pbc-proetale-site",
+  "def-sfb-lisse-coefficient-module",
+  "def-sfb-profinite-test-objects",
+  "def-weil-closed-immersion",
+  "def-weil-finite-integral-morphism",
+  "def-sfb-continuous-map-condensed-ring-map",
+  "sk-def-sfb-change-of-scalars",
+  "def-sfb-derived-exchange-scalar-comparisons",
+  "def-sfb-test-map-derived-composition",
+  "def-sfb-right-derived-single-h0-comparisons"
+ ],
+ "proof": [
+  {
+   "text": "Fix $F,P$ and put $K=\\mathcal L_P[0]$, $B=B_P$, $a=a_P$, $h=h_P$, $b=q_{Z,P}$, $r=\\rho_P$. All module pullbacks used below are exact. Indeed, [lem-sfb-internal-module-operations-transport] identifies them, including adjunctions, with section-ring pullbacks. By [lem-sfb-alpha-iso] these are inverse image with the coefficient action relabelled by a ring isomorphism. The underlying abelian inverse image is exact by [lem-sfb-finite-upper-star-exact]. Kernels have the restricted action and cokernels the induced quotient action, so exactness of the underlying sequence is exactness as modules. A finite free basis pulls back to a finite free basis; pulling back a local trivialization therefore makes $\\mathcal L_P$ finite-rank lisse. The test construction [def-sfb-profinite-test-objects] makes $X[P]$ affine: it is the fibre product of two affine schemes over $\\operatorname{Spec}\\mathbf Z$. Thus the integral morphism $q_P$ and closed immersion $s$ satisfy the affine hypotheses of closed base change.",
+   "uses": [
+    "lem-sfb-internal-module-operations-transport",
+    "lem-sfb-alpha-iso",
+    "lem-sfb-finite-upper-star-exact",
+    "def-sfb-profinite-test-objects"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), open direct image: agent expansion of the full integral-source specialization, with adjunction-normalized restriction."
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-integral-lisse-closed-base-change] to $q_P,s,\\mathcal L_P$. It gives the isomorphism $\\beta:s^*Rq_{P,*}K\\to Rb_*h^*K$, with transpose exactly $h^*\\varepsilon^{q_P}_K$ after the pullback comparison. This applies separately to $C_E$ and $C_\\Omega$, using all continuous functions, without a completeness assumption on $\\Omega$.",
+   "uses": [
+    "lem-sfb-integral-lisse-closed-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), open direct image: agent expansion of the full integral-source specialization, with adjunction-normalized restriction."
+   }
+  },
+  {
+   "text": "Apply [lem-weil-pbc-proetale-ringed-open-closed] to $a:Z[P]\\hookrightarrow B$ and its empty complementary open immersion. The empty open is quasi-compact, even without Noetherian hypotheses. The module category on the empty site is zero (the empty covering forces its only section group to be zero), so the localization sequence becomes $0\\to0\\to H\\xrightarrow{\\eta^a_H}a_*a^*H\\to0$. Thus the actual unit is invertible for every module $H$. The stated closed direct image is exact; inverse image is exact by step 1. The actual closed counit is invertible by [lem-weil-pbc-proetale-ringed-closed-counit]. Use [lem-sfb-internal-module-operations-transport] to identify all these assertions with the internal module functors and their actual adjunction, for the arbitrary coefficient ring $C_F$. In particular no finite-constant-ring invariance lemma is being applied to $C_F$.",
+   "uses": [
+    "lem-weil-pbc-proetale-ringed-open-closed",
+    "lem-weil-pbc-proetale-ringed-closed-counit",
+    "lem-sfb-internal-module-operations-transport"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), open direct image: agent expansion of the full integral-source specialization, with adjunction-normalized restriction."
+   }
+  },
+  {
+   "text": "Descend the exact closed functors and their unit and counit termwise. Apply [lem-sfb-exact-open-closed-unbounded-calculus] to the exact localization package of step 3, taking both open functors to be zero. It makes the localized actual closed unit invertible on every unbounded complex. By [def-sfb-right-derived-exact], $Ra_*$ is the termwise functor $D(a_*)$ with its canonical computation comparison. Hence $\\eta^a:h^*K\\to Ra_*a^*h^*K$ is the actual derived unit and is invertible. Apply [lem-sfb-derived-composition-adjunction-normalization] to $a,b,r=ba$ and the ordinary pullback comparison [def-sfb-module-upper-star-comp]. It supplies $Rb_*Ra_*\\cong Rr_*$ and identifies the derived adjunction with the composite adjunction. The categories are Grothendieck by [lem-sfb-proetale-sheaves-grothendieck] for abelian sheaves and [lem-sfb-modobj-grothendieck] for modules over their ring objects; the sheaf tensor is closed symmetric monoidal and additive by [lem-weil-pbc-sheaf-tensor-closed] (with $\\mathcal A=\\mathrm{Ab}$), hence preserves colimits in either variable. The left adjoints are exact by step 1. Consequently the composite $\\gamma= (Rb_*Ra_*\\cong Rr_*)\\circ Rb_*(\\eta^a_{h^*K})\\circ\\beta$ is invertible.",
+   "uses": [
+    "lem-sfb-exact-open-closed-unbounded-calculus",
+    "def-sfb-right-derived-exact",
+    "lem-sfb-derived-composition-adjunction-normalization",
+    "def-sfb-module-upper-star-comp",
+    "lem-sfb-proetale-sheaves-grothendieck",
+    "lem-sfb-modobj-grothendieck",
+    "lem-weil-pbc-sheaf-tensor-closed"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), open direct image: agent expansion of the full integral-source specialization, with adjunction-normalized restriction."
+   }
+  },
+  {
+   "text": "Write $A=s^*Rq_{P,*}K$ and $H=h^*K$. Under $r^*=a^*b^*$, the transpose of $\\gamma$ is\n$$a^*b^*A\\xrightarrow{a^*b^*\\beta}a^*b^*Rb_*H\\xrightarrow{a^*b^*Rb_*\\eta^a_H}a^*b^*Rb_*Ra_*a^*H\\xrightarrow{a^*\\varepsilon^b_{Ra_*a^*H}}a^*Ra_*a^*H\\xrightarrow{\\varepsilon^a_{a^*H}}a^*H.$$\nNaturality of $\\varepsilon^b$ changes its middle two arrows into $a^*\\eta^a_H\\circ a^*\\varepsilon^b_H$. The triangle identity $\\varepsilon^a_{a^*H}\\circ a^*\\eta^a_H=1$ leaves $a^*(\\varepsilon^b_H\\circ b^*\\beta)$. By the specified transpose of $\\beta$ this equals $a^*h^*\\varepsilon^{q_P}_K=i_P^*\\varepsilon^{q_P}_K$. Therefore the adjunction bijection [def-weil-pbc-adjunction-mate] identifies $\\gamma$ with the defined $\\theta$. This proves both its invertibility and the asserted equality of maps, not just an abstract isomorphism of objects.",
+   "uses": [
+    "def-weil-pbc-adjunction-mate",
+    "lem-sfb-derived-composition-adjunction-normalization"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), open direct image: agent expansion of the full integral-source specialization, with adjunction-normalized restriction."
+   }
+  },
+  {
+   "text": "The same adjunct formula defines $\\theta$ for every degree-zero coefficient module, with no lisseness or invertibility claim. On $H^0$, right derived direct image of a degree-zero module is ordinary direct image; its counit evaluates a section on a test by restriction. Thus the transpose just computed, and hence $H^0\\theta$, is full-source restriction along $i_P$. This can be checked using a nonnegative injective resolution: the degree-zero kernel of its pushed-forward complex is the direct image of the original module, by left exactness, and the induced counit is the ordinary counit. For $P=*$ the test schemes are $X,Z$, $r=1_Z$, and the identity adjunction changes the formula to $s^*Rq_*\\mathcal L[0]\\to i^*\\mathcal L[0]$ given by $i^*\\varepsilon^q$, as claimed.",
+   "uses": [
+    "sk-def-sfb-module-derived-pushpull",
+    "def-sfb-profinite-test-objects"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), open direct image: agent expansion of the full integral-source specialization, with adjunction-normalized restriction."
+   }
+  },
+  {
+   "text": "Naturality in module arrows is naturality of the counit followed by the adjunction bijection. More generally let $g:X'\\to X$ be a morphism over $U$, with compatible sections, and let $u:g^*K\\to K'$ be the supplied module arrow. The full-source arrow $Rq_*K\\to Rq'_*K'$ is adjoint to $q'^*Rq_*K\\cong g^*q^*Rq_*K\\xrightarrow{g^*\\varepsilon^q}g^*K\\xrightarrow{u}K'$. Pulling this displayed formula along the compatible section yields exactly the composite of the boundary restriction with $i'^*u$. Transposing proves the required full-source square. Composition and identity follow by inserting this formula twice and cancelling the intermediate unit and counit by their triangle identity; the composition comparisons are the conjugates fixed by [lem-sfb-derived-composition-adjunction-normalization]. Continuous parameter maps induce precisely such $g$ by the functorial test construction. Pro-etale base change of $U$ preserves these equations: the exchange $\\beta$ has this base-change compatibility by [lem-sfb-integral-lisse-closed-base-change], and the remaining unit and composite-adjunction identities are natural. No base-change invertibility for arbitrary modules is used.",
+   "uses": [
+    "def-weil-pbc-adjunction-mate",
+    "lem-sfb-derived-composition-adjunction-normalization",
+    "def-sfb-profinite-test-objects",
+    "lem-sfb-integral-lisse-closed-base-change"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), open direct image: agent expansion of the full integral-source specialization, with adjunction-normalized restriction."
+   }
+  },
+  {
+   "text": "For a profinite family $Q$, perform step 7 over $U[Q]$, using $X[Q\\times P]\\cong X[P]\\times_U U[Q]$ and the analogous identity for $Z,B$. These identities follow from finite-limit preservation [lem-sfb-profinite-to-proetale-finite-limits] and base change in [def-sfb-profinite-test-objects]. A simultaneous map $Q\\times P'\\to P$ gives the morphism over $Q$ defined by $(q,p')\\mapsto(q,\\phi(q,p'))$; the equation of step 7 is therefore an equation on the entire $Q$-parametrized schemes, not a test at individual points. The pro-etale base-change compatibility used here is included in [lem-sfb-integral-lisse-closed-base-change]. For the empty parameter or empty $Z$, both target categories on the relevant empty schemes are zero. For zero modules every arrow is the unique zero arrow, and identity parameters give the identity comparison. The constructions above include all these cases without dividing by a rank or choosing a point.",
+   "uses": [
+    "def-sfb-profinite-test-objects",
+    "lem-sfb-integral-lisse-closed-base-change",
+    "lem-sfb-profinite-to-proetale-finite-limits"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), open direct image: agent expansion of the full integral-source specialization, with adjunction-normalized restriction."
+   }
+  },
+  {
+   "text": "Put $r_T=\\operatorname{Res}_{C_{E,T}}^{C_{\\Omega,T}}$. Apply [lem-weil-pbc-ring-sheaf-change-adjunction] through [lem-sfb-internal-module-operations-transport]. Its adjunct equality says that restricting a counit-adjunct and then taking the forward direct-image comparison equals first using the pullback/restriction comparison and then transposing the restricted counit. Apply this equality to $q_P$ and to $\\rho_P$. Since the defining transpose of $\\theta_\\Omega$ is $i_P^*\\varepsilon^{q_P}_\\Omega$, the resulting two transposes are the same restricted counit; hence the directional restriction square for $\\theta_\\Omega$ commutes. This argument uses only the forward comparison arrows; none is inverted. Separately apply the module naturality of step 7 over $C_E$ to the actual arrow $\\mathcal L_E\\to r_X\\mathcal L_\\Omega$, $x\\mapsto1\\otimes x$. Pasting that square with the restriction square just proved gives exactly the stated cospan: both paths start at $s^*Rq_{P,*}r_{X[P]}\\mathcal L_{\\Omega,P}[0]$ and end at $R\\rho_{P,*}\\rho_P^*i^*r_X\\mathcal L_\\Omega[0]$. The intermediate $\\theta$ on the restricted module is defined by step 6, without any lisseness requirement. Only ordinary scalar extension of $\\mathcal L_E$ is involved; no scalar-extension/direct-image isomorphism enters.",
+   "uses": [
+    "lem-weil-pbc-ring-sheaf-change-adjunction",
+    "lem-sfb-internal-module-operations-transport",
+    "def-weil-pbc-adjunction-mate"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), open direct image: agent expansion of the full integral-source specialization, with adjunction-normalized restriction."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-internal-module-operations-transport",
+  "lem-sfb-alpha-iso",
+  "lem-sfb-finite-upper-star-exact",
+  "def-sfb-profinite-test-objects",
+  "lem-sfb-integral-lisse-closed-base-change",
+  "lem-weil-pbc-proetale-ringed-open-closed",
+  "lem-weil-pbc-proetale-ringed-closed-counit",
+  "lem-sfb-exact-open-closed-unbounded-calculus",
+  "def-sfb-right-derived-exact",
+  "lem-sfb-derived-composition-adjunction-normalization",
+  "def-sfb-module-upper-star-comp",
+  "lem-sfb-proetale-sheaves-grothendieck",
+  "lem-sfb-modobj-grothendieck",
+  "def-weil-pbc-adjunction-mate",
+  "sk-def-sfb-module-derived-pushpull",
+  "lem-sfb-profinite-to-proetale-finite-limits",
+  "lem-weil-pbc-ring-sheaf-change-adjunction",
+  "lem-weil-pbc-sheaf-tensor-closed"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+  "place": "Paragraph (3), full-source restriction input; formal assembly using existing all-continuous integral exchange and arbitrary-ring localization. Stacks 09AH, 09BM, 0D6E, 09T5 support the cited tools, not a finite-coefficient substitution."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "(integral|nilpotent).*(baseChange|exchange|specializ)|(baseChange|exchange|specializ).*(integral|nilpotent)",
+   "results": "25 hits: Mathlib/MeasureTheory/Function/L2Space.lean, Mathlib/NumberTheory/AbelSummation.lean, Mathlib/NumberTheory/AbelSummation.lean, Mathlib/NumberTheory/AbelSummation.lean, Mathlib/NumberTheory/AbelSummation.lean, Mathlib/NumberTheory/AbelSummation.lean, Mathlib/FieldTheory/Minpoly/Field.lean, Mathlib/AlgebraicGeometry/EllipticCurve/Reduction.lean",
+   "date": "2026-10-22",
+   "verdict": "no match: none states this normalized derived pro-etale internal-module specialization or its coefficient and family diagrams"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Sheaf\", \"IsIntegral\", \"IsIso\"",
+   "results": "0 hits: ",
+   "date": "2026-10-22",
+   "verdict": "no match: none states this normalized derived pro-etale internal-module specialization or its coefficient and family diagrams"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived restriction of sections to a closed fibre section is an isomorphism for a lisse condensed coefficient module and an integral morphism",
+   "results": "8 hits: CategoryTheory.Sheaf.ΓRes, AlgebraicGeometry.LocallyRingedSpace.ofRestrict_stalkMap_isIso, AlgebraicGeometry.PresheafedSpace.restrictStalkIso, AlgebraicGeometry.PresheafedSpace.ofRestrict_stalkMap_isIso, AlgebraicGeometry.Scheme.Modules.restrictFunctorAdjCounitIso, AlgebraicGeometry.LocallyRingedSpace.IsOpenImmersion.isoRestrict, AlgebraicGeometry.IsIntegralHom.instOfIsClosedImmersion, AlgebraicGeometry.LocallyRingedSpace.restrictStalkIso",
+   "date": "2026-10-22",
+   "verdict": "no match: none states this normalized derived pro-etale internal-module specialization or its coefficient and family diagrams"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Closed specialization of derived direct image of a lisse condensed module along an integral affine morphism with a surjective closed fibre section and profinite parameters",
+   "results": "8 hits: AlgebraicGeometry.isClosedMap_iff_specializingMap, PrimeSpectrum.stableUnderSpecialization_range_iff, PrimeSpectrum.isClosed_range_of_stableUnderSpecialization, PrimeSpectrum.stableUnderSpecialization_image_iff, PrimeSpectrum.isClosed_image_of_stableUnderSpecialization, AlgebraicGeometry.exists_app_map_eq_zero_of_isLimit, AlgebraicGeometry.exists_appTop_map_eq_zero_of_isLimit, AlgebraicGeometry.exists_mem_of_isClosed_of_nonempty",
+   "date": "2026-10-22",
+   "verdict": "no match: none states this normalized derived pro-etale internal-module specialization or its coefficient and family diagrams"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Normalized closed base change followed by topological invariance of a nil thickening commutes with profinite families and scalar restriction",
+   "results": "8 hits: AlgebraicGeometry.Scheme.Hom.preservesLocalization_normalizationDiagramMap, AlgebraicGeometry.Scheme.Hom.toNormalization_app_preimage, AlgebraicGeometry.Scheme.Hom.normalizationDiagram, AlgebraicGeometry.Scheme.Hom.normalizationDesc, AlgebraicGeometry.Scheme.Hom.normalizationDiagramMap, AlgebraicGeometry.Scheme.Hom.inl_toNormalization_normalizationCoprodIso_inv, AlgebraicGeometry.Scheme.Hom.inr_toNormalization_normalizationCoprodIso_inv, AlgebraicGeometry.Scheme.Hom.normalizationCoprodIso_inv_coprodDesc_fromNormalization",
+   "date": "2026-10-22",
+   "verdict": "no match: none states this normalized derived pro-etale internal-module specialization or its coefficient and family diagrams"
+  },
+  {
+   "tool": "grep",
+   "query": "(integral|nilpotent).*(baseChange|exchange|specializ)|(baseChange|exchange|specializ).*(integral|nilpotent)",
+   "results": "25 hits: Mathlib/NumberTheory/AbelSummation.lean, Mathlib/NumberTheory/AbelSummation.lean, Mathlib/NumberTheory/AbelSummation.lean, Mathlib/NumberTheory/AbelSummation.lean, Mathlib/NumberTheory/AbelSummation.lean, Mathlib/Algebra/Lie/CartanCriterion.lean, Mathlib/FieldTheory/Minpoly/Field.lean, Mathlib/AlgebraicGeometry/EllipticCurve/Reduction.lean",
+   "date": "2026-10-22",
+   "verdict": "no match: scheme integrality, Zariski module adjunctions and condensed solid counits do not state this small-pro-etale continuous-coefficient derived specialization"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Closed fibre specialization of derived direct images of lisse pro etale modules along an integral morphism",
+   "results": "8 hits: AlgebraicGeometry.IsIntegralHom.instUniversallyClosed, TopCat.Presheaf.stalkSpecializes, AlgebraicGeometry.Scheme.Modules.restrictFunctorAdjCounitIso, AlgebraicGeometry.IsIntegralHom.instOfIsClosedImmersion, AlgebraicGeometry.Scheme.Modules.restrictStalkNatIso, AlgebraicGeometry.Scheme.isLocalHom_stalkClosedPointTo', AlgebraicGeometry.Scheme.Modules.instFullPushforward, PrimeSpectrum.isClosed_image_of_stableUnderSpecialization",
+   "date": "2026-10-22",
+   "verdict": "no match: scheme integrality, Zariski module adjunctions and condensed solid counits do not state this small-pro-etale continuous-coefficient derived specialization"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Sheaf\", \"IsIntegralHom\", \"IsIso\"",
+   "results": "0 hits: ",
+   "date": "2026-10-22",
+   "verdict": "no match: scheme integrality, Zariski module adjunctions and condensed solid counits do not state this small-pro-etale continuous-coefficient derived specialization"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived restriction to a closed fibre section of an integral affine scheme morphism for locally free condensed pro etale modules is the counit adjunct",
+   "results": "8 hits: AlgebraicGeometry.Scheme.Modules.instIsIsoFunctorCounitRestrictAdjunction, AlgebraicGeometry.Scheme.Modules.restrictAdjunction_counit_app_app, AlgebraicGeometry.Scheme.Modules.restrictFunctorAdjCounitIso, AlgebraicGeometry.ΓSpec.adjunction_counit_app', AlgebraicGeometry.Scheme.Modules.restrictAdjunction, Condensed.profiniteSolidCounit, AlgebraicGeometry.Scheme.ofRestrict_toLRSHom_c_app, AlgebraicGeometry.Scheme.Modules.instIsLeftAdjointRestrictFunctor",
+   "date": "2026-10-22",
+   "verdict": "no match: scheme integrality, Zariski module adjunctions and condensed solid counits do not state this small-pro-etale continuous-coefficient derived specialization"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Cartesian exchange followed by the unit of a surjective closed immersion equals restriction to a fibre section by uniqueness of adjunction",
+   "results": "8 hits: AlgebraicGeometry.Scheme.Modules.restrictAdjunction_counit_app_app, AlgebraicGeometry.Scheme.Modules.restrictAdjunction_unit_app_app, AlgebraicGeometry.morphismRestrictOpensRange, AlgebraicGeometry.pullbackRestrictIsoRestrict_hom_ι, AlgebraicGeometry.Scheme.IdealSheafData.comapIso_hom_snd, AlgebraicGeometry.Scheme.ofRestrict_toLRSHom_c_app, AlgebraicGeometry.pullbackRestrictIsoRestrict_inv_fst, AlgebraicGeometry.Scheme.IdealSheafData.comapIso_hom_fst",
+   "date": "2026-10-22",
+   "verdict": "no match: scheme integrality, Zariski module adjunctions and condensed solid counits do not state this small-pro-etale continuous-coefficient derived specialization"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-root-tower-boundary-acyclicity",
+  "date": "2026-10-22",
+  "group": "NN"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "Paragraph (3), open direct image; Returned proof step 3 and the full-source part of step 5: exchange, nil-fibre unit, normalized restriction, profinite-family and scalar-restriction diagrams",
+   "via": [
+    "lem-sfb-root-tower-boundary-acyclicity",
+    "lem-sfb-tame-stratum-kummer-descent",
+    "lem-sfb-continuous-algcl-tame-boundary-comparison",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sfb-integral-fibre-section-specialization",
+  "worker": "stage1",
+  "summary": "Statement unchanged. Nine steps assemble existing integral lisse exchange, arbitrary-ring empty-complement localization, canonical derived composition, and a written transpose computation. Full-source, profinite-family and forward coefficient squares are proved with the actual counits. No new nodes.",
+  "blueprint": "Current main-20261015 direct-images paragraph (3), full integral-source specialization inside the tame-boundary open-direct-image route; inherited null ancestor and via chain retained, as blueprint_refs.py ancestor reports. Whole-blueprint searches found no equivalent.",
+  "tool_uses": [
+   {
+    "node": "lem-sfb-internal-module-operations-transport",
+    "why": "Generic arbitrary-condensed-ring equivalence preserves the actual module functors and adjunctions; avoids replacing continuous coefficients by finite constant rings."
+   },
+   {
+    "node": "lem-sfb-finite-upper-star-exact",
+    "why": "Generic exactness of abelian inverse image supplies exactness after the stated ring-action identification."
+   },
+   {
+    "node": "lem-weil-pbc-proetale-ringed-open-closed",
+    "why": "Generic arbitrary-ring localization with empty complementary open makes the actual closed unit invertible; no finite-coefficient invariance substitute."
+   },
+   {
+    "node": "lem-weil-pbc-proetale-ringed-closed-counit",
+    "why": "Generic arbitrary-ring closed counit theorem supplies the actual counit required by exact-derived localization."
+   },
+   {
+    "node": "lem-sfb-exact-open-closed-unbounded-calculus",
+    "why": "Generic exact abelian localization descends the actual unit to ordinary unbounded derived categories."
+   },
+   {
+    "node": "lem-sfb-derived-composition-adjunction-normalization",
+    "why": "Generic exact-left-adjoint composition theorem fixes the derived composition and actual composite counit."
+   },
+   {
+    "node": "lem-weil-pbc-ring-sheaf-change-adjunction",
+    "why": "Generic arbitrary ring-sheaf derived adjunct equation proves forward scalar-restriction coherence without any scalar-extension/direct-image assertion."
+   },
+   {
+    "node": "lem-sfb-proetale-sheaves-grothendieck",
+    "why": "Generic universe-compatible Grothendieck theorem supplies the ambient abelian sheaf categories for the derived composition tool."
+   },
+   {
+    "node": "lem-sfb-modobj-grothendieck",
+    "why": "Generic internal-module Grothendieck theorem verifies the derived composition hypotheses."
+   },
+   {
+    "node": "lem-sfb-profinite-to-proetale-finite-limits",
+    "why": "Generic test-functor finite-limit theorem identifies the entire product-parametrized schemes."
+   },
+   {
+    "node": "lem-weil-pbc-sheaf-tensor-closed",
+    "why": "Generic closed symmetric monoidal structure on pro-etale abelian sheaves, the hypothesis of the internal-module Grothendieck theorem used for derived composition."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sfb-internal-module-operations-transport",
+  "lem-sfb-finite-upper-star-exact",
+  "lem-weil-pbc-proetale-ringed-open-closed",
+  "lem-weil-pbc-proetale-ringed-closed-counit",
+  "lem-sfb-exact-open-closed-unbounded-calculus",
+  "lem-sfb-derived-composition-adjunction-normalization",
+  "lem-weil-pbc-ring-sheaf-change-adjunction",
+  "lem-sfb-proetale-sheaves-grothendieck",
+  "lem-sfb-modobj-grothendieck",
+  "lem-sfb-profinite-to-proetale-finite-limits",
+  "lem-weil-pbc-sheaf-tensor-closed"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-NZ-144bb4971",
+  "group": "NZ",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NZ-144bb4971 (reviewer sub-agent of L); spot-checked: I read the item and all 25 cited statements in full; there are no new nodes. The statement is true: I tested empty P, empty Z, P=*, a nil ideal with no uniform nilpotence exponent, q_P integral because LC(P,Z) is integral over Z, and confirmed that a non-surjective a_P is excluded by the hypotheses. Step 2: the hypotheses and adjunct definition of lem-sfb-integral-lisse-closed-base-change match the use. Step 3: Stacks 09AH (lemma-ses-associated-to-open) needs only a quasi-compact complement, and here the complement is empty; the empty site has zero module category, so the actual unit of a_P is invertible for the arbitrary ring C_F. This differs from the parent's original route via new-lem-weil-pbc-condensed-surjective-closed-equivalence but is equally valid. Step 4: applying derived composition with L_a=b^*, L_b=a^* is correct. Step 5: I recomputed the transpose; naturality of the counit of b plus the triangle identity give i_P^*ε, so the composite equals θ as a map. Steps 6–9: H^0 and P=* are right; the naturality squares follow by transposing; Q-families hold on whole schemes via finite-limit preservation; the E→Ω restriction square follows from the adjunct equality of lem-weil-pbc-ring-sheaf-change-adjunction with no direct-image comparison inverted. Checked against the parent's original steps 3 and 5: every argument there is carried. Not dropped, not superseded (still unsplit in side-live), no cycle, no SGA, all three kinds of Mathlib search recorded. FIX (C1): step 4 asserted that the sheaf tensor is closed, as lem-sfb-modobj-grothendieck requires, without a citation. I added lem-weil-pbc-sheaf-tensor-closed (3) to the step, to proof_deps and to tool_uses. Advisories: the pro-étale base-change naturality in step 7 is only formal mate calculus and is thinly written; the proof is 8.3k characters and may later get a batch-5 re-split note; the overlap with lem-sfb-root-tower-coordinate-face (J = all) was already flagged by the parent's reviewer.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.Paper.IntegralFibreSectionSpecialization",
+  "declaration": "AlgebraicGeometry.ProEtale.IntegralFibreSection.integral_fibre_section_specialization",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.IntegralFibreSection.testBase",
+   "AlgebraicGeometry.ProEtale.IntegralFibreSection.testProjection",
+   "AlgebraicGeometry.ProEtale.IntegralFibreSection.testSection_square",
+   "AlgebraicGeometry.ProEtale.IntegralFibreSection.fibreSection",
+   "AlgebraicGeometry.ProEtale.IntegralFibreSection.testComplex",
+   "AlgebraicGeometry.ProEtale.IntegralFibreSection.testMap_projection",
+   "AlgebraicGeometry.ProEtale.IntegralFibreSection.boundaryIdentification",
+   "AlgebraicGeometry.ProEtale.IntegralFibreSection.specialization",
+   "AlgebraicGeometry.ProEtale.IntegralFibreSection.fibreSection_fst",
+   "AlgebraicGeometry.ProEtale.IntegralFibreSection.fibreSection_snd",
+   "AlgebraicGeometry.ProEtale.IntegralFibreSection.fibreComposition",
+   "AlgebraicGeometry.ProEtale.IntegralFibreSection.fibrePullIdentification",
+   "AlgebraicGeometry.ProEtale.IntegralFibreSection.factoredSpecialization",
+   "AlgebraicGeometry.ProEtale.IntegralFibreSection.ordinarySquare",
+   "AlgebraicGeometry.ProEtale.IntegralFibreSection.ordinaryExchange",
+   "AlgebraicGeometry.ProEtale.IntegralFibreSection.ordinaryRestriction",
+   "AlgebraicGeometry.ProEtale.IntegralFibreSection.TestHypotheses",
+   "AlgebraicGeometry.ProEtale.IntegralFibreSection.GeometricAssertions",
+   "AlgebraicGeometry.ProEtale.IntegralFibreSection.DegreeZeroRestriction",
+   "AlgebraicGeometry.ProEtale.IntegralFibreSection.AdjunctNormalization",
+   "AlgebraicGeometry.ProEtale.IntegralFibreSection.originalBoundary",
+   "AlgebraicGeometry.ProEtale.IntegralFibreSection.originalToTest",
+   "AlgebraicGeometry.ProEtale.IntegralFibreSection.PointNormalization",
+   "AlgebraicGeometry.ProEtale.IntegralFibreSection.CubeNaturality",
+   "AlgebraicGeometry.ProEtale.IntegralFibreSection.Naturality",
+   "AlgebraicGeometry.ProEtale.IntegralFibreSection.testScalarUnit",
+   "AlgebraicGeometry.ProEtale.IntegralFibreSection.restrictedBoundaryIdentification",
+   "AlgebraicGeometry.ProEtale.IntegralFibreSection.ScalarCompatibility",
+   "AlgebraicGeometry.ProEtale.IntegralFibreSection.Assertions",
+   "AlgebraicGeometry.ProEtale.IntegralFibreSection.integral_fibre_section_specialization"
+  ],
+  "file": "lean/Sheaf/Paper/IntegralFibreSectionSpecialization.lean",
+  "statement": "theorem integral_fibre_section_specialization (p ℓ : ℕ) [Fact p.Prime] [Fact ℓ.Prime] (_hpℓ : p ≠ ℓ) (k : Type u) [Field k] [CharP k p] (E Ω : Type u) [NormedField E] [NormedAlgebra ℚ_[ℓ] E] [FiniteDimensional ℚ_[ℓ] E] [NormedField Ω] [NormedAlgebra E Ω] [IsAlgClosure E Ω] {X U Z : Scheme.{u}} [X.Over (Spec (.of k))] [U.Over (Spec (.of k))] [Z.Over (Spec (.of k))] [IsAffine X] [IsAffine U] (q : X ⟶ U) [q.IsOver (Spec (.of k))] (s : Z ⟶ U) [s.IsOver (Spec (.of k))] [IsClosedImmersion s] (i : Z ⟶ X) (w : i ≫ q = s) (_h : TestHypotheses q s i w) : Assertions (Profinite.continuousCoefficientRingObj E) q s i w ∧ Assertions (Profinite.continuousCoefficientRingObj Ω) q s i w ∧ ScalarCompatibility (coefficientInclusion E Ω) q s i w",
+  "branch": "sheaf-dag",
+  "by": "Q38",
+  "date": "2026-10-22",
+  "existing": false,
+  "note": "H2 repair of returned head 84875dd21abd: replace the three added theorem statement dependencies by definition nodes recording their already landed plain helper constructions. The module and its exact signature, all construction data, and the original statement and proof are unchanged."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-675e78e40",
+  "group": "Q38",
+  "result": "pass",
+  "note": "Re-delivery of 84875dd2 (RETURN H2 only). Item .lean byte-identical (sha 4b7e512f); item record differs only in stmt_deps and lean.note; stmt_deps = base 11 + def-sfb-derived-exchange-scalar-comparisons, def-sfb-test-map-derived-composition, def-sfb-right-derived-single-h0-comparisons; theorem stmt_deps dropped. New def nodes are existing:true on the unchanged modules IntegralLisseClosedBaseChange, RootTowerCoordinateFace and RightDerivedSingleH0. Their listed declarations are plain defs/abbrevs/irreducible defs with real data (squareExchange mates, pullback.lift, conjugateIsoEquiv, H0 composites), not .choose. TeX matches the constructions; statements verbatim from def; own stmt_deps exist; no SGA; searches recorded; declarations used by the item are covered; no other def-node owner; live item still open with no competing delivery. Substance re-read: hypotheses (affine X,U; closed s; per-P integral q_P and surjective closed a_P), adjunct pinning of theta, IsIso + factorization, H0 restriction, P=* normalization, cube naturality, forward scalar cospan; edge cases empty P/Z, zero, rank 0. No hollow defs, sorry-only proofs, docstrings OK. No file changed, so no compile (worker reports clean). Advisory: originalToTest mixes adj with RootCoordinateFace.lowerComp (base-era, both canonical)."
+ }
+}

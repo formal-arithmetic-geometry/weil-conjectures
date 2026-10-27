@@ -434,20 +434,37 @@
   "module": "Sheaf.AlgebraicGeometry.NoetherianLogPairStrictResolution",
   "declaration": "AlgebraicGeometry.exists_noetherian_log_pair_strict_resolution",
   "file": "lean/Sheaf/AlgebraicGeometry/NoetherianLogPairStrictResolution.lean",
-  "statement": "theorem exists_noetherian_log_pair_strict_resolution (M : Scheme.{u}) [IsIntegral M] [IsNoetherian M] (hExcellent : ∀ W : M.affineOpens, IsExcellent Γ(M, W)) (B : TopologicalSpace.Closeds M) (U : Scheme.{u}) (j : U ⟶ M) [IsOpenImmersion j] (hU : DenseRange j) (hBU : (Set.range j : Set M) = (B : Set M)ᶜ) (hlog : IsDivisorialFineSaturatedLogRegularPair M U j hU) : ∃ (R : Scheme.{u}) (e : R ⟶ M) (A : R.IdealSheafData), IsIntegral R ∧ IsRegularScheme R ∧ IsNoetherian R ∧ IsProper e ∧ (∃ (V : M.Opens) (W : R.Opens) (i : W.toScheme ≅ V.toScheme), Dense (V : Set M) ∧ Dense (W : Set R) ∧ i.hom ≫ V.ι = W.ι ≫ e) ∧ IsStrictNormalCrossingsBoundary A ∧ (e ⁻¹' (B : Set M) ⊆ (A.support : Set R)) ∧ ∀ x : R, ∃ (W : R.affineOpens) (hx : x ∈ W.1) (hN : IsNoetherianRing (R.presheaf.stalk x)) (l : List (R.presheaf.stalk x)) (s : ℕ) (t : Fin s → Γ(R, W)), @IsLocalRing.IsRegularSystemOfParameters (R.presheaf.stalk x) _ _ hN l ∧ (List.ofFn (fun a : Fin s ↦ (R.presheaf.germ W.1 x hx).hom (t a))).IsPrefix l ∧ Function.Injective (fun a : Fin s ↦ Ideal.span ({t a} : Set Γ(R, W))) ∧ (A.ideal W).minimalPrimes = Set.range (fun a : Fin s ↦ Ideal.span ({t a} : Set Γ(R, W))) ∧ A.ideal W = Ideal.span ({∏ a : Fin s, t a} : Set Γ(R, W))",
+  "statement": "theorem exists_noetherian_log_pair_strict_resolution (M : Scheme.{u}) [IsIntegral M] [IsNoetherian M] (hexc : ∀ V : M.affineOpens, IsExcellent Γ(M, V)) (B : Closeds M) (hB : DenseRange (Scheme.Opens.ι (X := M) B.compl)) (hlog : IsDivisorialFineSaturatedLogRegularPair M (Scheme.Opens.toScheme (X := M) B.compl) (Scheme.Opens.ι (X := M) B.compl) hB) : ∃ (R : Scheme.{u}) (e : R ⟶ M) (A : R.IdealSheafData), IsIntegral R ∧ IsNoetherian R ∧ IsRegularScheme R ∧ IsProper e ∧ (∃ V : M.Opens, Dense (V : Set M) ∧ Dense ((e ⁻¹ᵁ V) : Set R) ∧ IsIso (e ∣_ V)) ∧ IsStrictNormalCrossingsBoundary A ∧ e ⁻¹' (B : Set M) ⊆ A.support ∧ ∀ x : R, ∃ (W : R.affineOpens) (hx : x ∈ W.1) (s : ℕ) (C : Fin s → Closeds R) (t : Fin s → Γ(R, W)) (hN : IsNoetherianRing (R.presheaf.stalk x)) (p : List (R.presheaf.stalk x)), Function.Injective C ∧ Set.range (fun i ↦ (C i : Set R)) = {Z | Z ∈ Set.image (Set.image Subtype.val) (irreducibleComponents (A.support : Set R)) ∧ x ∈ Z} ∧ (∀ i, (Scheme.IdealSheafData.vanishingIdeal (C i)).ideal W = Ideal.span {t i}) ∧ (List.ofFn (fun i ↦ R.presheaf.germ W.1 x hx (t i))).Sublist p ∧ @IsLocalRing.IsRegularSystemOfParameters (R.presheaf.stalk x) _ _ hN p ∧ A.ideal W = Ideal.span {∏ i, t i}",
   "branch": "newtargets-dag",
-  "by": "Q46",
-  "date": "2026-10-18",
-  "existing": false,
-  "note": "2026-10-20 (U): module Sheaf.AlgebraicGeometry.NoetherianLogPairStrictResolution deleted (dead: no target reaches it); this node is not reached either."
+  "by": "NH",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "lean_removed": {
+  "commit": "f6bf55e2b05",
+  "path": "lean/Sheaf/AlgebraicGeometry/NoetherianLogPairStrictResolution.lean",
+  "module": "Sheaf.AlgebraicGeometry.NoetherianLogPairStrictResolution",
+  "declaration": "AlgebraicGeometry.exists_noetherian_log_pair_strict_resolution",
+  "reason": "module deleted as dead (no target reaches it, node not reached); declaration exists nowhere else in lean/ or Mathlib, so the node has no Lean statement"
  },
  "reviewed_lean": {
-  "date": "2026-10-18",
+  "date": "2026-10-24",
   "by": "L",
-  "reviewer": "NT-stage2-cc-676a0b3b0",
-  "group": "Q46",
+  "reviewer": "NT-stage2-cc-3b7369759",
+  "group": "NH",
   "result": "pass",
-  "note": "Single module NoetherianLogPairStrictResolution.lean; node record differs from live only in lean, lean.statement verbatim. Clause-by-clause match: IsIntegral/IsNoetherian M, affine-open IsExcellent, Closeds B with dense open-immersion complement, recorded IsDivisorialFineSaturatedLogRegularPair; conclusion R integral+IsRegularScheme+Noetherian, IsProper e, dense-open iso square (node's own birational definition), IsStrictNormalCrossingsBoundary A, e⁻¹B ⊆ supp A, local clause (germs prefix of a regular system of parameters, distinct principal minimal primes, A = (∏ t)) equivalent to the node and true after shrinking. Edge cases (empty boundary, x∉A with s=0, dim-0 stalk, universes) ok. Imports = statement deps (public) + all 23 recorded proof-dep modules. No duplicate in side Sheaf/WeilConjectures. Docstrings with source/blueprint and 13 proof steps; sorry only. nt_compile --json clean in 2.3 s. No findings."
+  "note": "Restates the module deleted as dead (lean_removed f6bf55e2b05), whose earlier delivery passed review (Q46). Node differs from live only in lean; lean.statement matches the file verbatim; no duplicate declaration in side-live or Mathlib. Hypotheses match the node with nothing stronger: IsIntegral/IsNoetherian M, IsExcellent on every affine open, B Closeds with dense complement inclusion, recorded IsDivisorialFineSaturatedLogRegularPair on the canonical complement inclusion. Conclusion: R : Scheme.{u} with IsIntegral, IsNoetherian, IsRegularScheme; IsProper e; dense-open IsIso (e ∣_ V) (the node's birational meaning); IsStrictNormalCrossingsBoundary A; e⁻¹B ⊆ A.support; local clause with injective labels equal to the components of A.support through x, vanishingIdeal(C i).ideal W = (t i), germs a Sublist of an IsRegularSystemOfParameters list, A.ideal W = (∏ t). Edge cases (B empty, s=0, dimension-0 stalk, universes) covered. All 8 stmt_deps used; all 27 imports exist; docstrings carry source place, blueprint tag and the 13 proof steps; sorry only; no hollow definitions; no pro-etale substitute. No compile because no file changed; the worker reports a clean scompile. No findings."
  },
- "lean_audit": {}
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ }
 }

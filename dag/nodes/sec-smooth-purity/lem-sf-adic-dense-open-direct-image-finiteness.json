@@ -18,46 +18,79 @@
  ],
  "proof": [
   {
-   "text": "The target W is a noetherian quasi-excellent scheme because it is quasi-compact and locally of finite type over K. The prime l is invertible on W. The open source Z is also noetherian and qcqs. A constructible adic sheaf in degree zero is a constructible complex for the concrete coefficient sheaf, by the finite lisse stratification characterization of Proposition 6.8.11. Proposition 6.8.14 gives a finite extension E/Q_l and an integral constructible complex C over the completed O_E coefficient sheaf whose rationalization and extension to Qbar_l is F[0]. A global lisse lattice is not asserted: Lemma 6.8.13 constructs a constructible lattice, gluing extensions after clearing denominators.",
+   "text": "Use the exact faithful native-to-condensed encoding on the Noetherian source and target. Its cohomology and constructibility comparisons place F[0] in the bounded constructible category for the continuous algebraic-closure coefficient ring. Quasi-compact local finite type over K makes W Noetherian, and the quasi-compact open immersion makes Z Noetherian. No separatedness of W or positive-characteristic assumption is added.",
    "uses": [
-    "lem-weil-pbc-lisse-e-constructible-integral-lattice"
+    "lem-sf-native-adic-encoding-ordinary-operations",
+    "lem-sf-native-adic-encoding-constructibility"
    ],
    "elementary": false
   },
   {
-   "text": "For every n >= 1, reduce C by the perfect quotient O_E/pi^n. Its derived reduction C_n has finite l-primary torsion coefficients and is bounded constructible. The finite-coefficient open-immersion finiteness theorem [cor-fin-deligne-open-finite-coefficients] shows Rj_*C_n is constructible. Theorem 6.7.1 gives a finite cohomological-dimension bound on torsion sheaves, independent of n. Equivalently use the finite filtration by powers of pi, whose factors are modules over O_E/pi, and the long exact cohomology sequence. With the two-term resolution of O_E/pi^n and the fixed amplitude of C, all the derived images occupy a single finite interval. No bound by the zero-dimensional fibres of j is used.",
+   "text": "For a finite field A killed by l, transport a bounded constructible pro-etale complex to the etale site using the fixed coefficient origin. Since l is a unit in K, apply finite-coefficient open direct-image finiteness. Transport back using the derived direct-image comparison. Bounded complexes over a field have finite Tor amplitude: all sheaves are flat and bounded truncation devissage applies. Use the normalized finite-discrete encoding and its tensor comparison to obtain the same assertions for internal condensed coefficients.",
    "uses": [
     "cor-fin-deligne-open-finite-coefficients",
-    "lem-kun-0f10"
+    "lem-sf-proetale-constructible-origin",
+    "lem-sf-finite-discrete-encoding-compactification",
+    "lem-sf-finite-discrete-encoding-constructibility",
+    "lem-sf-finite-discrete-encoding-tensor-tor"
    ],
    "elementary": false
   },
   {
-   "text": "The completed direct image is derived complete and commutes with these perfect reductions, by Lemmas 6.5.9 and 6.5.11. The bounded constructible finite reductions with their uniform bounds therefore place it in the integral constructible category, exactly Lemma 6.7.2; this is the integral argument of [lem-sf-integral-direct-image-constructible] specialized to j.",
+   "text": "For a finite coefficient extension E/Q_l, its first residue quotient is a finite field killed by l. The integral residue criterion supplies derived completeness and bounded constructibility of the residue reduction of the integral input. Direct image preserves derived completeness and its canonical residue comparison is invertible. Apply the preceding finite-field result, then the integral residue criterion on W. This gives bounded constructibility of the integral image without imposing a fibre-dimension bound on an open immersion.",
    "uses": [
-    "lem-sf-integral-direct-image-constructible"
+    "lem-sfb-internal-integral-residue-criterion",
+    "lem-sfb-internal-integral-direct-image-limits",
+    "lem-weil-l-adic-extension-integers-dvr"
    ],
    "elementary": false
   },
   {
-   "text": "Propositions 6.8.11 and 6.8.14 and Remark 6.8.15 identify the rationalization and coefficient extension of this image with the ordinary ambient derived image on AdicSheaf_l. The sheaf of locally finite continuous functions is the filtered finite-coefficient-extension model of Lemma 6.8.2, rather than the discrete constant field sheaf. Under the stated finiteness assumptions the comparisons commute with direct image as in Remark 6.8.15. Consequently the displayed Rj_*(F[0]) is bounded and all its cohomology sheaves are constructible. This coefficient-model comparison, not the torsion theorem alone, remains to be formalized.",
+   "text": "Transport integral constructibility between continuous coefficient models using their coefficient-ring isomorphisms and the integral local-finite-presentation/constant-model comparison. A bounded constructible complex over a finite rational coefficient field admits a constructible integral model. The qcqs integral-localization direct-image comparison and exact scalar extension carry bounded constructibility to its rational direct image. These coefficient transport helpers are reused from the proper finiteness module but require no properness.",
    "uses": [
-    "def-weil-algebraically-closed-coefficients"
+    "lem-sfb-noetherian-proper-constructible-cohomology",
+    "lem-weil-pbc-continuous-constructible-integral-model",
+    "lem-weil-pbc-continuous-integral-push-comparison",
+    "lem-weil-pbc-bounded-constructible-exact-scalar-extension",
+    "lem-sfb-integral-lfp-constant-model-comparison"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Finite-coefficient descent represents a bounded constructible algebraic-closure-coefficient complex over a finite extension. The bounded-below qcqs Qbar coefficient-change mate identifies its direct image with the scalar extension of the finite-field image. Exact scalar extension preserves boundedness and constructibility. Finally the derived native encoding comparison and faithfulness reflect boundedness and constructible cohomology, giving the original statement.",
+   "uses": [
+    "lem-weil-pbc-bounded-constructible-exact-scalar-extension",
+    "lem-sf-native-adic-encoding-ordinary-operations",
+    "lem-sf-native-adic-encoding-constructibility",
+    "lem-sfb-constructible-cocone-obj",
+    "lem-sfb-qlbar-direct-image-comparison"
    ],
    "elementary": false
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-lisse-e-constructible-integral-lattice",
+  "lem-sf-native-adic-encoding-ordinary-operations",
+  "lem-sf-native-adic-encoding-constructibility",
   "cor-fin-deligne-open-finite-coefficients",
-  "lem-kun-0f10",
-  "lem-sf-integral-direct-image-constructible",
-  "def-weil-algebraically-closed-coefficients"
+  "lem-sf-proetale-constructible-origin",
+  "lem-sf-finite-discrete-encoding-compactification",
+  "lem-sf-finite-discrete-encoding-constructibility",
+  "lem-sf-finite-discrete-encoding-tensor-tor",
+  "lem-sfb-internal-integral-residue-criterion",
+  "lem-sfb-internal-integral-direct-image-limits",
+  "lem-weil-l-adic-extension-integers-dvr",
+  "lem-sfb-noetherian-proper-constructible-cohomology",
+  "lem-weil-pbc-continuous-constructible-integral-model",
+  "lem-weil-pbc-continuous-integral-push-comparison",
+  "lem-weil-pbc-bounded-constructible-exact-scalar-extension",
+  "lem-sfb-integral-lfp-constant-model-comparison",
+  "lem-sfb-constructible-cocone-obj",
+  "lem-sfb-qlbar-direct-image-comparison"
  ],
  "proof_origin": {
   "by": "agent",
-  "group": "C3",
-  "date": "2026-10-16",
+  "group": "H1",
+  "date": "2026-10-25",
   "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
   "place": "Lemma 6.7.2, Proposition 6.8.11, Proposition 6.8.14 and Remark 6.8.15; affine compactification proof of sk-prop-sf-finiteness (SGA 4½, Theoreme de finitude, Theorem 1.1)."
  },
@@ -136,14 +169,25 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-15",
+  "date": "2026-10-25",
   "by": "L",
-  "reviewer": "X-39cd0",
-  "group": "C3",
+  "reviewer": "COMPILER",
+  "group": "H1",
   "result": "pass",
-  "landing": "20261015T195758-L-1299658",
+  "landing": "20261025T095416-L-3401750",
   "kind": "interface",
-  "note": "independent Codex review: Delivered Lean statements, proofs, axioms and DAG records checked against the published originals, dependency interfaces and cited source; all delivery modules and direct importers compile."
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  },
- "lean_audit": {}
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ }
 }

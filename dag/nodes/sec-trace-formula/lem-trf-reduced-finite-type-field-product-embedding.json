@@ -1,0 +1,227 @@
+{
+ "id": "lem-trf-reduced-finite-type-field-product-embedding",
+ "kind": "statement",
+ "title": "Embedding a reduced finite-type algebra into finitely many extension fields",
+ "statement": "Let $k$ be a field [def-weil-field] [def-pc-field-extension] and $B$ a reduced commutative $k$-algebra, meaning that $b^n=0$ with $n\\ge1$ implies $b=0$. Assume $B$ is generated as a $k$-algebra by finitely many elements. Then there exist an integer $t\\ge0$, extension fields $K_i/k$ for $1\\le i\\le t$, and an injective unital $k$-algebra homomorphism $j:B\\hookrightarrow\\prod_{i=1}^tK_i$. The product has coordinatewise ring operations and scalar action; for $t=0$ it is the zero ring. The zero algebra $B$ is allowed, in which case one may take $t=0$. No perfectness of $k$ or integrality of $B$ is assumed.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tag 034N (lemma-geometrically-reduced-any-reduced-base-change), proof, second sentence: the finite-type reduced algebra embedding into a finite product of fields."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-pc-field-extension"
+ ],
+ "proof": [
+  {
+   "text": "If $B$ is the zero ring, take $t=0$ and the unique map from $B$ to the empty product. Both rings have one element, so this is an injective unital $k$-algebra map. Henceforth assume $B\\ne0$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 034N (lemma-geometrically-reduced-any-reduced-base-change), finite-product reduction; empty-product convention of the item"
+   }
+  },
+  {
+   "text": "Apply [lem-wf-affine-noetherian-components] to the finitely generated $k$-algebra $B$: it is Noetherian. By [lem-weil-pbc-noetherian-finitely-many-minimal-primes], its minimal prime ideals form a finite set; enumerate them without repetition as $\\mathfrak p_1,\\ldots,\\mathfrak p_t$.",
+   "uses": [
+    "lem-wf-affine-noetherian-components",
+    "lem-weil-pbc-noetherian-finitely-many-minimal-primes"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00FN (lemma-Noetherian-permanence); Tag 00FR (lemma-Noetherian-irreducible-components)"
+   }
+  },
+  {
+   "text": "For each $i$ put $K_i=B_{\\mathfrak p_i}$ with its canonical map $\\lambda_i:B\\to K_i$ [def-weil-pbc-localization-at-prime]. Since $B$ is reduced and $\\mathfrak p_i$ is minimal, [lem-weil-pbc-minimal-prime-reduced-localization-field] says $K_i$ is a field. Give $K_i$ the scalar map $k\\to B\\xrightarrow{\\lambda_i}K_i$; this makes it an extension field of $k$ by [def-pc-field-extension].",
+   "uses": [
+    "def-weil-pbc-localization-at-prime",
+    "lem-weil-pbc-minimal-prime-reduced-localization-field",
+    "def-pc-field-extension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00EU (lemma-minimal-prime-reduced-ring); Tag 00EW (lemma-reduced-ring-sub-product-fields), proof"
+   }
+  },
+  {
+   "text": "Define $j(b)=(\\lambda_i(b))_{i=1}^t$. The maps $\\lambda_i$ are unital ring maps, so the coordinatewise operations make $j$ a unital ring map. For $a\\in k$ and $b\\in B$, its $i$th coordinate satisfies $\\lambda_i(ab)=\\lambda_i(a)\\lambda_i(b)$, exactly the scalar action just assigned to $K_i$. Thus $j$ is a $k$-algebra homomorphism.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00EW (lemma-reduced-ring-sub-product-fields), part (2) and its proof"
+   }
+  },
+  {
+   "text": "If $j(b)=0$, then $b/1=0$ in every $B_{\\mathfrak p_i}$. The fraction equality in [def-weil-pbc-localization-at-prime] gives $s_i\\notin\\mathfrak p_i$ with $s_i b=0$. Primality implies $b\\in\\mathfrak p_i$, since $s_i b\\in\\mathfrak p_i$ and $s_i\\notin\\mathfrak p_i$. Hence $b$ belongs to every minimal prime of $B$.",
+   "uses": [
+    "def-weil-pbc-localization-at-prime"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00EW (lemma-reduced-ring-sub-product-fields), proof of (2); Tag 00CO (definition-localization)"
+   }
+  },
+  {
+   "text": "Every prime $\\mathfrak q$ of $B$ contains a minimal prime by [lem-weil-pbc-prime-contains-minimal-prime], applied with $I=0$. Therefore the element $b$ of Step 5 lies in every prime. By [lem-weil-pbc-zero-locus-eq-iff-radical-eq], with $I=0$, it belongs to $\\sqrt{(0)}$: $b^n=0$ for some $n\\ge1$. Reducedness gives $b=0$. If $j(b)=j(c)$, apply this to $b-c$ to obtain $b=c$. This proves injectivity and all the required assertions.",
+   "uses": [
+    "lem-weil-pbc-prime-contains-minimal-prime",
+    "lem-weil-pbc-zero-locus-eq-iff-radical-eq"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00E0 (lemma-Zariski-topology), parts (4) and (7); Tag 00EW (lemma-reduced-ring-sub-product-fields), proof of (2)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-wf-affine-noetherian-components",
+  "lem-weil-pbc-noetherian-finitely-many-minimal-primes",
+  "def-weil-pbc-localization-at-prime",
+  "lem-weil-pbc-minimal-prime-reduced-localization-field",
+  "def-pc-field-extension",
+  "lem-weil-pbc-prime-contains-minimal-prime",
+  "lem-weil-pbc-zero-locus-eq-iff-radical-eq"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tag 034N (lemma-geometrically-reduced-any-reduced-base-change), finite-type reduction; Tag 00EW (lemma-reduced-ring-sub-product-fields), proof of (2), with Tags 00FN, 00FR, 00EU and 00E0"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "exists.*[Ff]ield|[Ii]njective.*[Pp]i|[Pp]i.*[Ii]njective",
+   "results": "{\"t\": \"2026-10-22T05:58:38Z\", \"tool\": \"grep\", \"query\": \"exists.*[Ff]ield|[Ii]njective.*[Pp]i|[Pp]i.*[Ii]njective\", \"sub\": \"RingTheory/Localization\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/Localization/Pi.lean\"], \"digest\": \"99099a93a6bb3c8d\"} Read the source: Noether normalization embeds a polynomial ring INTO B, not B into fields; finite minimal primes and total-fraction component maps are ingredients, not this algebra embedding statement.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A reduced finite type algebra embeds into a finite product of fields",
+   "results": "{\"t\": \"2026-10-22T05:58:38Z\", \"tool\": \"leansearch\", \"query\": \"A reduced finite type algebra embeds into a finite product of fields\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.FiniteType.iff_quotient_mvPolynomial\", \"Algebra.FiniteType.iff_quotient_mvPolynomial''\", \"Algebra.IsGeometricallyReduced.casesOn\", \"Algebra.FormallyUnramified.isReduced_of_field\", \"Algebra.FiniteType.iff_quotient_mvPolynomial'\", \"Algebra.FiniteType.prod\", \"Algebra.FiniteType.baseChange\", \"Algebra.FiniteType\"], \"digest\": \"50e1efbcb592b588\"} Read the source: Noether normalization embeds a polynomial ring INTO B, not B into fields; finite minimal primes and total-fraction component maps are ingredients, not this algebra embedding statement.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "IsReduced, Algebra.FiniteType, Function.Injective",
+   "results": "{\"t\": \"2026-10-22T05:58:38Z\", \"tool\": \"loogle\", \"query\": \"IsReduced, Algebra.FiniteType, Function.Injective\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"} Read the source: Noether normalization embeds a polynomial ring INTO B, not B into fields; finite minimal primes and total-fraction component maps are ingredients, not this algebra embedding statement.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Every reduced finitely generated algebra over a field admits an injective algebra map into a finite product of extension fields",
+   "results": "{\"t\": \"2026-10-22T05:58:49Z\", \"tool\": \"leanfinder\", \"query\": \"Every reduced finitely generated algebra over a field admits an injective algebra map into a finite product of extension fields\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"exists_finite_inj_algHom_of_fg\", \"exists_integral_inj_algHom_of_fg\", \"Algebra.IsGeometricallyReduced.of_forall_fg\", \"IsPurelyInseparable.injective_comp_algebraMap\", \"Algebra.IsGeometricallyReduced\", \"Algebra.IsGeometricallyReduced.of_injective\", \"minpoly.AlgHom.fintype\", \"finite_of_algHom_finiteType_of_isJacobsonRing\"], \"digest\": \"0d29bafe0dcabd0d\"} Read the source: Noether normalization embeds a polynomial ring INTO B, not B into fields; finite minimal primes and total-fraction component maps are ingredients, not this algebra embedding statement.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A reduced Noetherian algebra over a field embeds in the product of the fraction fields of its finitely many irreducible components",
+   "results": "{\"t\": \"2026-10-22T05:59:11Z\", \"tool\": \"leanfinder\", \"query\": \"A reduced Noetherian algebra over a field embeds in the product of the fraction fields of its finitely many irreducible components\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"instFiniteMaximalSpectrumOfIsFractionRing\", \"finite_of_algHom_finiteType_of_isJacobsonRing\", \"exists_integral_inj_algHom_of_fg\", \"exists_integral_inj_algHom_of_quotient\", \"exists_finite_inj_algHom_of_fg\", \"isDedekindRing_iff\", \"Algebra.IsGeometricallyReduced.of_forall_fg\", \"Algebra.QuasiFinite.instOfIsFractionRing\"], \"digest\": \"48b3309a56f0bdd0\"} Read the source: Noether normalization embeds a polynomial ring INTO B, not B into fields; finite minimal primes and total-fraction component maps are ingredients, not this algebra embedding statement.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "exists_finite_inj_algHom_of_fg|toPiLocalization.*injective|toPi.*ResidueField|isReduced_of_injective",
+   "results": "{\"t\": \"2026-10-22T05:59:23Z\", \"tool\": \"grep\", \"query\": \"exists_finite_inj_algHom_of_fg|toPiLocalization.*injective|toPi.*ResidueField|isReduced_of_injective\", \"sub\": \"RingTheory\", \"ok\": true, \"n_hits\": 15, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/Spectrum/Prime/Noetherian.lean\", \"Mathlib/RingTheory/Spectrum/Prime/Topology.lean\", \"Mathlib/RingTheory/Spectrum/Prime/Topology.lean\", \"Mathlib/RingTheory/Spectrum/Maximal/Localization.lean\", \"Mathlib/RingTheory/Spectrum/Maximal/Localization.lean\", \"Mathlib/RingTheory/Spectrum/Maximal/Localization.lean\", \"Mathlib/RingTheory/Spectrum/Maximal/Localization.lean\", \"Mathlib/RingTheory/Spectrum/Maximal/Localization.lean\"], \"digest\": \"b69051c01f7e4087\"} Read the source: Noether normalization embeds a polynomial ring INTO B, not B into fields; finite minimal primes and total-fraction component maps are ingredients, not this algebra embedding statement.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "NoetherNormalization|toPi.*injective|finite.*minimalPrimes|pi.*[Ii]njective",
+   "results": "{\"t\": \"2026-10-22T05:59:53Z\", \"tool\": \"grep\", \"query\": \"NoetherNormalization|toPi.*injective|finite.*minimalPrimes|pi.*[Ii]njective\", \"sub\": \"RingTheory/Ideal/MinimalPrime\", \"ok\": true, \"n_hits\": 4, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/Ideal/MinimalPrime/Noetherian.lean\", \"Mathlib/RingTheory/Ideal/MinimalPrime/Noetherian.lean\", \"Mathlib/RingTheory/Ideal/MinimalPrime/Noetherian.lean\", \"Mathlib/RingTheory/Ideal/MinimalPrime/Colon.lean\"], \"digest\": \"466c59505a873679\"} Read the source: Noether normalization embeds a polynomial ring INTO B, not B into fields; finite minimal primes and total-fraction component maps are ingredients, not this algebra embedding statement.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "toPi.*(injective|ResidueField)|exists.*inj.*algHom|finite_minimalPrimes|sInf_minimalPrimes",
+   "results": "{\"t\": \"2026-10-23T04:17:12Z\", \"tool\": \"grep\", \"query\": \"toPi.*(injective|ResidueField)|exists.*inj.*algHom|finite_minimalPrimes|sInf_minimalPrimes\", \"sub\": \"RingTheory\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/Spectrum/Prime/Noetherian.lean\", \"Mathlib/RingTheory/Spectrum/Prime/Topology.lean\", \"Mathlib/RingTheory/Spectrum/Prime/Topology.lean\", \"Mathlib/RingTheory/Spectrum/Prime/Topology.lean\", \"Mathlib/RingTheory/Spectrum/Prime/RingHom.lean\", \"Mathlib/RingTheory/Spectrum/Prime/RingHom.lean\", \"Mathlib/RingTheory/Spectrum/Maximal/Localization.lean\", \"Mathlib/RingTheory/Spectrum/Maximal/Localization.lean\"], \"digest\": \"41bf70731d94faff\"} No exact finite minimal-prime field-product embedding. PrimeSpectrum.toPiLocalization_injective concerns all primes; those localizations need not be fields, and the prime set need not be finite.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A reduced Noetherian algebra embeds in a finite product of fraction fields of prime quotients",
+   "results": "{\"t\": \"2026-10-23T04:17:13Z\", \"tool\": \"leansearch\", \"query\": \"A reduced Noetherian algebra embeds in a finite product of fraction fields of prime quotients\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"exists_finite_inj_algHom_of_fg\", \"exists_integral_inj_algHom_of_fg\", \"instFiniteMaximalSpectrumOfIsFractionRing\", \"Algebra.isReduced_of_isGeometricallyReduced\", \"FractionalIdeal.isNoetherian_coeIdeal\", \"Algebra.IsGeometricallyReduced.isReduced_algebraicClosure_tensorProduct\", \"instIsAlgebraicResidueFieldOfIsIntegral\", \"Algebra.FormallyUnramified.isReduced_of_field\"], \"digest\": \"242d60cc88db26e9\"} Noether normalization has the opposite direction (polynomial algebra into B); geometric reducedness and residue-field algebraicity do not state this embedding.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "IsReduced, Algebra.FiniteType, Function.Injective",
+   "results": "{\"t\": \"2026-10-23T04:17:13Z\", \"tool\": \"loogle\", \"query\": \"IsReduced, Algebra.FiniteType, Function.Injective\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"} No hits for the combined reduced, finite-type, injectivity pattern.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A reduced finitely generated algebra over a field embeds into a finite product of extension fields",
+   "results": "{\"t\": \"2026-10-23T04:17:15Z\", \"tool\": \"leanfinder\", \"query\": \"A reduced finitely generated algebra over a field embeds into a finite product of extension fields\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"exists_finite_inj_algHom_of_fg\", \"exists_integral_inj_algHom_of_fg\", \"minpoly.AlgHom.fintype\", \"Algebra.finite_of_essFiniteType_of_isAlgebraic\", \"Algebra.Etale.iff_exists_algEquiv_prod\", \"PowerBasis.AlgHom.fintype\", \"IntermediateField.finite_of_fg_of_isAlgebraic\", \"IntermediateField.Lifts.nonempty_algHom_of_exist_lifts_finset\"], \"digest\": \"83f79f117cfd974f\"} Noether normalization and etale algebra decomposition do not apply to arbitrary reduced finite-type algebras; the second phrasing returns the product over all primes, requiring the finite minimal-prime argument supplied in this split.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A reduced Noetherian ring injects into the product of its localizations at minimal prime ideals, which are fields",
+   "results": "{\"t\": \"2026-10-23T04:19:35Z\", \"tool\": \"leanfinder\", \"query\": \"A reduced Noetherian ring injects into the product of its localizations at minimal prime ideals, which are fields\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"PrimeSpectrum.toPiLocalization_injective\", \"MaximalSpectrum.toPiLocalization_injective\", \"PrimeSpectrum.toPiLocalization_bijective\", \"injective_of_isLocalization_isMaximal\", \"PrimeSpectrum.sigmaToPi_injective\", \"PrimeSpectrum.piLocalizationToMaximal_bijective\", \"MaximalSpectrum.toPiLocalizationEquiv\", \"PrimeSpectrum.exists_primeSpectrum_prod_le_and_ne_bot_of_domain\"], \"digest\": \"adb7a7ab3035e956\"} Noether normalization and etale algebra decomposition do not apply to arbitrary reduced finite-type algebras; the second phrasing returns the product over all primes, requiring the finite minimal-prime argument supplied in this split.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-geometrically-reduced-base-change",
+  "date": "2026-10-22",
+  "group": "Q03"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "the separable-scalar-restriction ingredient in the ancestor proof, namely the passage to a finite separable constants extension; in its separable-constants chain, Tag 034N finite-type field-product embedding",
+   "via": [
+    "lem-trf-geometrically-reduced-base-change",
+    "lem-trf-geometric-reducedness-separable-scalar-restriction",
+    "lem-trf-geometrically-integral-curve-factorization",
+    "lem-trf-de-jong-geometrically-irreducible-tower",
+    "lem-trf-plurinodal-proper-hypercover",
+    "lem-trf-orgogozo-good-modification",
+    "lem-trf-trait-nearby-base-change",
+    "lem-trf-specialization-external-product",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-trf-reduced-finite-type-field-product-embedding",
+  "worker": "stage1",
+  "summary": "Preserved the statement, including zero algebra and arbitrary ground field. Expanded the finite-product embedding into Noetherianity, enumeration of minimal primes, their field localizations, the coordinatewise algebra map, and the explicit kernel argument through the radical of zero. Reused existing Mathlib-leaf nodes throughout; no new nodes. Searched the live project and Mathlib without finding an exact completed declaration.",
+  "blueprint": "Realizes the finite-product-of-fields ingredient (Stacks 034N) in the separable-constants chain recorded in blueprint.from for lem-trf-local-term-locality; the ancestor and intermediate route are preserved.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q112-e0eed407b",
+  "group": "Q112",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q112-e0eed407b (reviewer sub-agent of L); spot-checked: I read the item in full; the delivery has no new nodes. The statement matches Stacks 034N (algebra.tex l.10130): it adds the explicit k-algebra structure, allows the zero algebra and t=0, and has no perfectness assumption. It fits both consumers: the step of lem-trf-geometrically-reduced-base-change that cites it, and lem-trf-finite-field-product-tensor-detection. The six steps follow the proof of 00EW(2) (l.4560) with 00EU (l.4543) and 00FN/00FR. Every cited node is a mathlib leaf or definition, and I checked each hypothesis. lem-wf-affine-noetherian-components (finitely generated over a field) gives Noetherian. lem-weil-pbc-noetherian-finitely-many-minimal-primes gives finitely many minimal primes. lem-weil-pbc-minimal-prime-reduced-localization-field (minimal prime, reduced ring) makes each B_p a field, and the 'k-algebra that is a field' clause of def-pc-field-extension makes it an extension of k. Step 5's kernel argument follows from the fraction equality in the statement of def-weil-pbc-localization-at-prime. Step 6 uses the I=0 clauses of prime-contains-minimal-prime and zero-locus-eq-iff-radical-eq, then reducedness. Steps 1, 4 and 5 are correctly marked elementary, and proof_deps is exactly the union of the uses. The route is fine: all cited nodes are leaves, tool_uses is empty, the item is not the unit's key node, and it cites no SGA. The closest existing node, lem-weil-pbc-reduced-noetherian-total-ring-fractions (Q(R) ≅ ∏R_q), states something different, so it is not a duplicate. The recorded Mathlib searches show no exact match; toPiLocalization_injective runs over all primes. Small cases: B=0, k, k×k, k[x], k[x,y]/(xy); the excluded k[ε]/ε² shows reducedness is needed. No fixes."
+ }
+}

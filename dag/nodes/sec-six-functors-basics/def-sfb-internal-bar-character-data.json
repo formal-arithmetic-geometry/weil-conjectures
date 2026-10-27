@@ -1,0 +1,167 @@
+{
+ "id": "def-sfb-internal-bar-character-data",
+ "kind": "definition",
+ "title": "Canonical complexes, components, shifted iteration and augmentation for character lifts",
+ "statement": "Let $A$ be a commutative condensed ring and $G$ a profinite group with the coefficient sizes of [sk-def-sfb-condensed-ring, sk-def-sfb-module-objects, def-sfb-condensed-action-module, def-weil-size-convention]. Let $D$ be a resolution of [lem-sfb-condensed-internal-bar-resolution]. Let $P$ be the underlying nonnegative chain complex, extended along $n\\mapsto-n$ to a cochain complex. Identify $P^{-n}$ with $D_n$ by the extension isomorphism. For a map $F:P\\to P[q]$ its transported component is $D_{n+q}\\to D_n$. For a condensed additive character of [def-sfb-condensed-unipotent-class], IsLift means equivariance of these components and the formula $[g_0,\\dots,g_{n+1}]\\mapsto a(g_0^{-1}g_1)[g_1,\\dots,g_{n+1}]$ on every profinite parameter. Let $H$ be internal functions and $B$ an inhomogeneous bar diagram of [def-sfb-condensed-equivariant-bar-data]. Define the augmented component by composition with the shifted augmentation and the degree-q inhomogeneous component by the single-object and bar-term isomorphisms. Given a family $L_a:P\\to P[1]$, construct $F_{[]}$ as the zero-shift identity and $F_{a++[b]}=F_a;L_b[|a|]$ followed by the shift-addition identification $P[1][|a|]\\cong P[|a|+1]$. Construct $e:P\\to A[0]$ by extending the given chain augmentation and the canonical extended-single isomorphism. Then its transported zero component is the given augmentation, any degree-one map has zero component at degree zero, and $e[q]F$ has zero components away from degree $-q$. These are actual constructions, with no choice of data from an existence theorem.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+  "place": "Paragraph (3), open direct image; agent-written internal-bar expansion, extracted from lem-sfb-internal-bar-character-lifts."
+ },
+ "stmt_deps": [
+  "sk-def-sfb-condensed-ring",
+  "sk-def-sfb-module-objects",
+  "def-sfb-condensed-action-module",
+  "def-weil-size-convention",
+  "def-weil-abstract-derived-category",
+  "lem-sfb-condensed-internal-bar-resolution",
+  "def-sfb-condensed-equivariant-bar-data",
+  "def-sfb-condensed-unipotent-class"
+ ],
+ "proof": [
+  {
+   "text": "Use ChainComplex.of for the given boundary maps; extend along embeddingDownNat and use extendXIso to define the term and component identifications.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Define orderedIterate by List.reverseRec with the zero-shift identity and the displayed shifted composition. List.reverseRec_nil and List.reverseRec_concat prove its two recursion equations.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Use ChainComplex.toSingle₀Equiv with boundary_augmentation to construct the chain augmentation. Extend it and apply extendSingleIso. The two component formulas and inverse-hom cancellation give its normalization.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "The extension is zero in all positive degrees. Hence a degree-one map has zero target in degree zero. A shifted single complex has zero target outside its single degree, proving the sole-component assertion.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+  "place": "Paragraph (3), open direct image; agent-written internal-bar expansion, extracted from lem-sfb-internal-bar-character-lifts."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Additive characters define degree one chain maps on homogeneous bar complex by deleting the first vertex",
+   "results": "{\"t\": \"2026-10-26T06:39:25Z\", \"tool\": \"leanfinder\", \"query\": \"Additive characters define degree one chain maps on homogeneous bar complex by deleting the first vertex\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Rep.barComplex.d\", \"groupHomology.inhomogeneousChains.d\", \"Rep.barComplex.d_single\", \"Rep.standardComplex.d\", \"Rep.barComplex.d_def\", \"Rep.standardComplex.εToSingle₀\", \"Rep.barComplex\", \"Rep.FiniteCyclicGroup.chainComplexFunctor\"], \"digest\": \"85be8a1bec56ec81\"}",
+   "date": "2026-10-26",
+   "verdict": "No exact match. The hits describe discrete representations, generic complex maps or list recursion, not these internal condensed bar maps. The relevant source-library cupHom calculation assumes a commutative group and cannot be applied to the stated arbitrary profinite group."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"CochainComplex.toSingle\"",
+   "results": "{\"t\": \"2026-10-26T06:39:56Z\", \"tool\": \"loogle\", \"query\": \"\\\"CochainComplex.toSingle\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 4, \"note\": \"\", \"top\": [\"CochainComplex.toSingle₀Equiv\", \"CochainComplex.toSingle₀Equiv_apply\", \"CochainComplex.toSingle₀Equiv_symm_apply_f_zero\", \"CochainComplex.toSingle₀Equiv_symm_apply_f_succ\"], \"digest\": \"ef0386adb4262fe1\"}",
+   "date": "2026-10-26",
+   "verdict": "No exact match. The hits describe discrete representations, generic complex maps or list recursion, not these internal condensed bar maps. The relevant source-library cupHom calculation assumes a commutative group and cannot be applied to the stated arbitrary profinite group."
+  },
+  {
+   "tool": "grep",
+   "query": "character.*(barComplex|chainMap)|barComplex.*character",
+   "results": "{\"t\": \"2026-10-26T06:41:10Z\", \"tool\": \"grep\", \"query\": \"character.*(barComplex|chainMap)|barComplex.*character\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-26",
+   "verdict": "No exact match. The hits describe discrete representations, generic complex maps or list recursion, not these internal condensed bar maps. The relevant source-library cupHom calculation assumes a commutative group and cannot be applied to the stated arbitrary profinite group."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Ordered products of additive group characters are cocycles in inhomogeneous group cochains with trivial coefficients",
+   "results": "{\"t\": \"2026-10-26T06:44:43Z\", \"tool\": \"leansearch\", \"query\": \"Ordered products of additive group characters are cocycles in inhomogeneous group cochains with trivial coefficients\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"groupCohomology.cocyclesMk\", \"groupCohomology.cocyclesOfIsCocycle₁\", \"groupCohomology.cocycles\", \"groupCohomology.mem_cocycles₁_of_addMonoidHom\", \"AddChar.instAddCommGroup\", \"groupCohomology.iCocycles\", \"groupCohomology.instFunLikeSubtypeForallProdCarrierVModuleCatMemSubmoduleCocycles₂\", \"AddChar.coe_mul\"], \"digest\": \"a3f459eeca588cdd\"}",
+   "date": "2026-10-26",
+   "verdict": "No exact match. The hits describe discrete representations, generic complex maps or list recursion, not these internal condensed bar maps. The relevant source-library cupHom calculation assumes a commutative group and cannot be applied to the stated arbitrary profinite group."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Internal condensed character deletion gives a unique chain map to the shift of a homogeneous bar complex",
+   "results": "{\"t\": \"2026-10-26T06:44:43Z\", \"tool\": \"leansearch\", \"query\": \"Internal condensed character deletion gives a unique chain map to the shift of a homogeneous bar complex\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"ChainComplex.ofHom\", \"CochainComplex.homOfDegreewiseSplit\", \"HomologicalComplex.Hom.mk\", \"HomologicalComplex.Hom.ext_iff\", \"HomologicalComplex.Hom.mk.noConfusion\", \"ChainComplex.truncate\", \"Homotopy.shift\", \"CochainComplex.HomComplex.Cochain.shift\"], \"digest\": \"0fa4681d5977fd34\"}",
+   "date": "2026-10-26",
+   "verdict": "No exact match. The hits describe discrete representations, generic complex maps or list recursion, not these internal condensed bar maps. The relevant source-library cupHom calculation assumes a commutative group and cannot be applied to the stated arbitrary profinite group."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Iterated degree one character deletion chain maps on the homogeneous bar have ordered product coefficients after augmentation",
+   "results": "{\"t\": \"2026-10-26T06:44:46Z\", \"tool\": \"leanfinder\", \"query\": \"Iterated degree one character deletion chain maps on the homogeneous bar have ordered product coefficients after augmentation\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicTopology.DoldKan.hσ'_eq'\", \"AlgebraicTopology.DoldKan.HigherFacesVanish.on_Γ₀_summand_id\", \"AlgebraicTopology.DoldKan.HigherFacesVanish.induction\", \"AlgebraicTopology.DoldKan.HigherFacesVanish.of_P\", \"AlgebraicTopology.DoldKan.PInfty\", \"AlgebraicTopology.DoldKan.hσ\", \"AlgebraicTopology.DoldKan.decomposition_Q\", \"AlgebraicTopology.DoldKan.hσ'_eq_zero\"], \"digest\": \"6be1b464c62f384f\"}",
+   "date": "2026-10-26",
+   "verdict": "No exact match. The hits describe discrete representations, generic complex maps or list recursion, not these internal condensed bar maps. The relevant source-library cupHom calculation assumes a commutative group and cannot be applied to the stated arbitrary profinite group."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.CategoryTheory.InternalBarCharacterLifts",
+  "date": "2026-10-26",
+  "group": "R4"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "Canonical complexes, components, shifted iteration and augmentation for character lifts; character-lift calculation below direct-images paragraph (3).",
+   "via": [
+    "lem-sfb-internal-bar-character-lifts",
+    "lem-sfb-internal-bar-ordered-cup",
+    "lem-sfb-trivial-ladic-derived-exterior",
+    "lem-sfb-dense-lattice-derived-invariants-comparison",
+    "lem-sfb-tame-inertia-continuous-koszul",
+    "lem-sfb-continuous-algcl-tame-boundary-comparison",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.InternalBarCharacterData",
+  "file": "lean/Sheaf/CategoryTheory/InternalBarCharacterData.lean",
+  "declaration": "Profinite.CondensedAction.InternalBarCharacter.orderedIterate",
+  "statement": "def orderedIterate (D : Resolution A.toMon G)\n    (L : Character A G → (complex D ⟶ (complex D)⟦(1 : ℤ)⟧)) :\n    ∀ a : List (Character A G), complex D ⟶ (complex D)⟦(a.length : ℤ)⟧",
+  "branch": "sheaf-dag",
+  "by": "R4",
+  "date": "2026-10-26",
+  "declarations": [
+   "Profinite.CondensedAction.InternalBarCharacter.chains",
+   "Profinite.CondensedAction.InternalBarCharacter.complex",
+   "Profinite.CondensedAction.InternalBarCharacter.termIso",
+   "Profinite.CondensedAction.InternalBarCharacter.component",
+   "Profinite.CondensedAction.InternalBarCharacter.IsLift",
+   "Profinite.CondensedAction.InternalBarCharacter.augmentedComponent",
+   "Profinite.CondensedAction.InternalBarCharacter.cocycleComponent",
+   "Profinite.CondensedAction.InternalBarCharacter.orderedIterate",
+   "Profinite.CondensedAction.InternalBarCharacter.orderedIterate_nil",
+   "Profinite.CondensedAction.InternalBarCharacter.orderedIterate_snoc",
+   "Profinite.CondensedAction.InternalBarCharacter.barAugmentation",
+   "Profinite.CondensedAction.InternalBarCharacter.barAugmentation_zero",
+   "Profinite.CondensedAction.InternalBarCharacter.degreeOne_zero",
+   "Profinite.CondensedAction.InternalBarCharacter.augmented_sole"
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-f251e",
+  "group": "R4",
+  "result": "pass",
+  "landing": "20261026T082841-L-2231382",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-f251e",
+  "group": "R4",
+  "result": "pass",
+  "landing": "20261026T082841-L-2231382",
+  "kind": "interface",
+  "note": "independent cc review: 7 moved defs vs clone (identical except blueprint docstring tags), Lifts/exists_lifts byte-identical, three new sorry statements vs Resolution boundary/diagonal/augmentation fields and Mathlib shift sign conventions, item node only proof/proof_deps/proof_origin/lean changed; no importers of the item"
+ }
+}

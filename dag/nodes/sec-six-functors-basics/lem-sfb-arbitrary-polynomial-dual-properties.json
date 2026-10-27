@@ -1,0 +1,327 @@
+{
+ "id": "lem-sfb-arbitrary-polynomial-dual-properties",
+ "kind": "statement",
+ "title": "Polynomial relative dual and its scalar map over arbitrary bases",
+ "statement": "Let $R\\to A$ be a flat finitely presented homomorphism of arbitrary commutative rings [def-weil-pbc-flat-ring-map, def-weil-pbc-finitely-presented-algebra]. Fix a surjection $P=R[x_1,\\ldots,x_n]\\twoheadrightarrow A$, where $n\\geq0$ [def-weil-pbc-mv-polynomial-ring]. Work in ordinary module derived categories [def-weil-abstract-derived-category], with derived tensor computed on K-flat resolutions [def-pc-module-kflat-complex] and internal Hom [def-pur-derived-internal-hom] on the one-object ringed site. Put $C=C_{P\\to A}(P[0])[n]\\in D(A)$, where $C_{P\\to A}$ is derived coinduction with precomposition action $(a h)(a')=h(a'a)$ [def-trf-derived-coinduction]. Call $T\\in D(A)$ $R$-perfect if it is pseudo-coherent over $A$ [def-pc-ring-pseudo-coherent-complex] and there exist integers $a_T\\leq b_T$ with $H^i(T\\otimes_R^{\\mathbf L}Q)=0$ for every $R$-module $Q$ and $i\\notin[a_T,b_T]$. Then $A[0]$ is perfect over $P$, meaning represented by a bounded complex of finitely generated projective $P$-modules [def-pc-perfect-ring-complex, def-weil-pbc-projective-module]. The complex $C$ is $R$-perfect, and its restriction to $P$ is perfect. The scalar-action morphism $h:A[0]\\to R\\operatorname{Hom}_A(C,C)$, the transpose of the unit action on $C$, is an isomorphism in $D(A)$. These conclusions include $A=0$ and do not assume Noetherianity.",
+ "source": {
+  "document": "literature/stacks-project/dualizing.tex",
+  "place": "Agent arbitrary-base extension of Tag 0BZW, lemma-relative-dualizing-algebraic, proof of (1)(a)--(c) and (2)(a), using polynomial perfectness and finite-presentation descent; not the Noetherian statement verbatim."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-flat-ring-map",
+  "def-weil-pbc-finitely-presented-algebra",
+  "def-weil-pbc-mv-polynomial-ring",
+  "def-weil-abstract-derived-category",
+  "def-pur-derived-internal-hom",
+  "def-trf-derived-coinduction",
+  "def-pc-ring-pseudo-coherent-complex",
+  "def-pc-module-kflat-complex",
+  "def-pc-perfect-ring-complex",
+  "def-weil-pbc-projective-module",
+  "def-sfb-derived-module-scalar-action-map"
+ ],
+ "proof": [
+  {
+   "text": "Write $U:D(A)\\to D(P)$ for restriction. The flat finitely presented hypothesis and [lem-sfb-flat-fp-polynomial-pseudocoherent] give pseudo-coherence of $UA[0]$ for this particular surjection, not merely for some presentation. Apply [lem-trf-base-flat-polynomial-tor-bound] to the $P$-module $A$: $\\operatorname{Tor}^P_j(A,N)=0$ for $j>n$ and every $P$-module $N$. To express this as derived amplitude, take a projective resolution of $A$ in nonpositive cochain degrees. Its terms are flat by the split-free description [def-weil-pbc-projective-module], so it is K-flat by [lem-pc-module-bounded-flat-kflat]. The tensor model [lem-pc-source-kflat-module-tensor-model] and the definition [def-weil-pbc-tor-modules] identify $H^{-j}(A[0]\\otimes_P^{\\mathbf L}N[0])$ with $\\operatorname{Tor}^P_j(A,N)$; positive cochain degrees vanish in that model. Thus $UA[0]$ has Tor amplitude $[-n,0]$.",
+   "uses": [
+    "lem-sfb-flat-fp-polynomial-pseudocoherent",
+    "lem-trf-base-flat-polynomial-tor-bound",
+    "def-weil-pbc-projective-module",
+    "lem-pc-module-bounded-flat-kflat",
+    "lem-pc-source-kflat-module-tensor-model",
+    "def-weil-pbc-tor-modules"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tags 067J (lemma-flat-finite-presentation-perfect), 068X (lemma-perfect-over-polynomial-ring); ordinary Tor and derived tensor definitions"
+   }
+  },
+  {
+   "text": "Apply [lem-pc-ring-pseudo-coherent-finite-tor-perfect] over the commutative ring $P$ to the pseudo-coherent object and finite Tor interval just established. It gives a bounded complex of finitely generated projective $P$-modules representing $UA[0]$. This proves the first assertion, with exactly the meaning of perfect in [def-pc-perfect-ring-complex].",
+   "uses": [
+    "lem-pc-ring-pseudo-coherent-finite-tor-perfect",
+    "def-pc-perfect-ring-complex"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0658, lemma-perfect, implication (2) to (1)"
+   }
+  },
+  {
+   "text": "Use the usual symmetric monoidal structure on $D(P)$ supplied by [lem-sf-ringed-derived-closed-symmetric-monoidal] on the one-object ringed site (with the localization universe chosen equal to the module universe). Put $K=UA[0]$ and $K^\\vee=R\\operatorname{Hom}_P(K,P[0])$. The perfect-duality lemma [lem-trf-perfect-complex-derived-biduality] gives that $K^\\vee$ is perfect and that canonical evaluation $K\\to(K^\\vee)^\\vee$ is an isomorphism. The underlying-object assertion of [lem-trf-derived-coinduction-adjunction] identifies $UC=K^\\vee[n]$. Shifting a bounded finite-projective representative simply reindexes its terms, so $UC$ is perfect. In particular it has a bounded-above finite-projective representative; the equivalent characterization of pseudo-coherence in [lem-pc-pseudo-coherent-bounded-finite-free-model] shows that $UC$ is pseudo-coherent over $P$.",
+   "uses": [
+    "lem-sf-ringed-derived-closed-symmetric-monoidal",
+    "lem-trf-perfect-complex-derived-biduality",
+    "lem-trf-derived-coinduction-adjunction",
+    "lem-pc-pseudo-coherent-bounded-finite-free-model"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tags 07VI (lemma-dual-perfect-complex), 0FPT (sites-cohomology, symmetric monoidal structure), and dualizing.tex Tags 0A70--0A71"
+   }
+  },
+  {
+   "text": "The polynomial algebra $P$ is free as an $R$-module on its monomials, hence $R\\to P$ is flat: tensoring an injection with $P$ is the direct sum of copies of that injection. It is finitely presented, with the $n$ variables and no relations, by [def-weil-pbc-mv-polynomial-ring, def-weil-pbc-finitely-presented-algebra]. Consequently the surjection $P\\to A$ satisfies every hypothesis of [lem-sfb-flat-fp-quotient-pseudocoherent] with its intermediate algebra $B=P$. Applying its reverse implication to $C\\in D(A)$ and the pseudo-coherence of $UC$ proved in step 3 gives pseudo-coherence of $C$ over $A$.",
+   "uses": [
+    "def-weil-pbc-mv-polynomial-ring",
+    "def-weil-pbc-finitely-presented-algebra",
+    "lem-sfb-flat-fp-quotient-pseudocoherent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0E1T, lemma-more-relative-pseudo-coherent-is-moot, (4) implies (1)"
+   }
+  },
+  {
+   "text": "Choose a bounded finite-projective $P$-complex $E^\\bullet$ representing $UC$, and integers $r\\le s$ outside which its terms vanish. Every term is a retract of a free $P$-module [def-weil-pbc-projective-module]. Since $P$ is $R$-free on its monomials [def-weil-pbc-mv-polynomial-ring], that free $P$-module is $R$-free; tensoring a split retract of a free module with an injection is a split retract of an injection, hence each $E^j$ is $R$-flat. The restricted complex is K-flat over $R$ by [lem-pc-module-bounded-flat-kflat]. Therefore [lem-pc-source-kflat-module-tensor-model] computes $C\\otimes_R^{\\mathbf L}Q[0]$ by $E^\\bullet\\otimes_RQ$, which has zero terms, hence zero cohomology, outside $[r,s]$, for every $R$-module $Q$. Together with step 4 this is precisely the $R$-perfectness stipulated in the statement. If $E^\\bullet=0$, take $r=s=0$.",
+   "uses": [
+    "def-weil-pbc-projective-module",
+    "def-weil-pbc-mv-polynomial-ring",
+    "lem-pc-module-bounded-flat-kflat",
+    "lem-pc-source-kflat-module-tensor-model"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/dualizing.tex",
+    "place": "Tag 0BZW, lemma-relative-dualizing-algebraic, proof of (1)(b): the perfect polynomial dual is a bounded base-flat complex"
+   }
+  },
+  {
+   "text": "Apply [lem-trf-algebraic-shriek-derived-hom-adjunction] to $P\\to A$, $D=C_{P\\to A}(P[0])$ and the integer $n$. Its scalar-evaluation compatibility identifies the restriction of the actual scalar-action morphism $h$ under the canonical isomorphism\n$$U R\\operatorname{Hom}_A(C,C)\\ \\cong\\ R\\operatorname{Hom}_P(R\\operatorname{Hom}_P(A,P),P)$$\nwith the canonical bidual map $A[0]\\to R\\operatorname{Hom}_P(R\\operatorname{Hom}_P(A,P),P)$. Specifically, the precomposition action gives $(a\\cdot h')(1)=h'(a)$, so this identification concerns the prescribed homothety, not just an abstract isomorphism between its source and target. The bidual map is an isomorphism by [lem-trf-perfect-complex-derived-biduality], applied to the perfect object of step 2 in the symmetric monoidal module derived category [lem-sf-ringed-derived-closed-symmetric-monoidal]. Restriction $U$ is conservative by [lem-trf-derived-coinduction-adjunction], hence $h$ itself is an isomorphism in $D(A)$.",
+   "uses": [
+    "lem-trf-algebraic-shriek-derived-hom-adjunction",
+    "lem-trf-perfect-complex-derived-biduality",
+    "lem-sf-ringed-derived-closed-symmetric-monoidal",
+    "lem-trf-derived-coinduction-adjunction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/dualizing.tex",
+    "place": "Tags 0A70--0A71 and 0BZW, lemma-relative-dualizing-algebraic, displayed double-Hom calculation in (1)(c)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-flat-fp-polynomial-pseudocoherent",
+  "lem-trf-base-flat-polynomial-tor-bound",
+  "def-weil-pbc-projective-module",
+  "lem-pc-module-bounded-flat-kflat",
+  "lem-pc-source-kflat-module-tensor-model",
+  "def-weil-pbc-tor-modules",
+  "lem-pc-ring-pseudo-coherent-finite-tor-perfect",
+  "def-pc-perfect-ring-complex",
+  "lem-sf-ringed-derived-closed-symmetric-monoidal",
+  "lem-trf-perfect-complex-derived-biduality",
+  "lem-trf-derived-coinduction-adjunction",
+  "lem-pc-pseudo-coherent-bounded-finite-free-model",
+  "def-weil-pbc-mv-polynomial-ring",
+  "def-weil-pbc-finitely-presented-algebra",
+  "lem-sfb-flat-fp-quotient-pseudocoherent",
+  "lem-trf-algebraic-shriek-derived-hom-adjunction"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/dualizing.tex",
+  "place": "Arbitrary-base implementation of Tag 0BZW (1)(a)--(c) and (2)(a), using Tags 067J, 068X, 0658, 07VI and 0E1T in more-algebra.tex. The Noetherian lemma is source material, not applied outside its hypotheses."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "relative.*perfect|[Ss]emidualizing|[Hh]omothety",
+   "results": "1 hits: Mathlib/RingTheory/PowerSeries/Substitution.lean; digest=d16dc71aaef43521; ",
+   "date": "2026-10-23",
+   "verdict": "no match: inspected hits concern underived algebra or general derived categories, not this relative polynomial-duality assertion"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The dual of a perfect polynomial quotient is relatively perfect and its derived endomorphisms are scalars",
+   "results": "8 hits: FGModuleCat.FGModuleCatDual, FractionalIdeal.dual, FractionalIdeal.dual_injective, Subspace.dualQuotDistrib, Module.dual_projective, PerfectClosure.mk, LinearMap.IsPerfPair.flip, PerfectClosure; digest=b8cd90419d69886c; ",
+   "date": "2026-10-23",
+   "verdict": "no match: inspected hits concern underived algebra or general derived categories, not this relative polynomial-duality assertion"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"DerivedCategory\", \"dual\"",
+   "results": "0 hits: none; digest=4f53cda18c2baa0c; ",
+   "date": "2026-10-23",
+   "verdict": "no match: inspected hits concern underived algebra or general derived categories, not this relative polynomial-duality assertion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Polynomial presentation of a flat finitely presented algebra over an arbitrary ring has a relatively perfect derived dual with scalar endomorphisms",
+   "results": "8 hits: Algebra.IsStandardSmooth, Algebra.Smooth.flat, Algebra.IsStandardSmoothOfRelativeDimension, Algebra.Smooth, Algebra.FormallySmooth.instFinitePresentationKaehlerDifferentialOfEssFiniteType, Algebra.Smooth.finitePresentation, Algebra.smooth_iff, Algebra.Etale; digest=d3440464e7309596; ",
+   "date": "2026-10-23",
+   "verdict": "no match: inspected hits concern underived algebra or general derived categories, not this relative polynomial-duality assertion"
+  },
+  {
+   "tool": "grep",
+   "query": "semidualiz|homothety|relative.*dualizing|polynomial.*perfect",
+   "results": "25 hits: Mathlib/Topology/Algebra/Affine.lean, Mathlib/Topology/Algebra/Affine.lean, Mathlib/Topology/Algebra/Affine.lean, Mathlib/Topology/Algebra/Affine.lean, Mathlib/Topology/Algebra/Affine.lean, Mathlib/MeasureTheory/Measure/Hausdorff.lean, Mathlib/MeasureTheory/Measure/Hausdorff.lean, Mathlib/MeasureTheory/Measure/Hausdorff.lean; digest=be7f2f58320806d5; ",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern smooth algebras, ordinary module reflexivity or ambient derived-category structure, not the stated polynomial relative-duality properties"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived Hom of a perfect polynomial quotient into the polynomial ring has scalar derived endomorphisms and finite Tor amplitude over the base",
+   "results": "8 hits: HasDerivedCategory.standard, DerivedCategory.instLinear, DerivedCategory.instAdditiveHomotopyCategoryIntUpQh, Perfection.lift, PerfectionMap.mk, Differential.implicitDeriv, Polynomial.mkDerivation, PerfectionMap.map; digest=f10e7b16acb1a6c5; ",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern smooth algebras, ordinary module reflexivity or ambient derived-category structure, not the stated polynomial relative-duality properties"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"DerivedCategory\", \"dual\"",
+   "results": "0 hits: none; digest=4f53cda18c2baa0c; ",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern smooth algebras, ordinary module reflexivity or ambient derived-category structure, not the stated polynomial relative-duality properties"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a flat finitely presented algebra over a commutative ring the derived polynomial relative dual is relatively perfect and its scalar endomorphism map is an isomorphism",
+   "results": "8 hits: Algebra.IsStandardSmooth, Algebra.Etale, Algebra.Smooth, Algebra.Smooth.flat, Algebra.FormallySmooth.of_perfectField, Algebra.IsStandardSmoothOfRelativeDimension, Algebra.smooth_iff, RingHom.IsStandardSmoothOfRelativeDimension.toAlgebra; digest=00c063307311e46e; ",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern smooth algebras, ordinary module reflexivity or ambient derived-category structure, not the stated polynomial relative-duality properties"
+  },
+  {
+   "tool": "grep",
+   "query": "dual.*perfect|perfect.*dual|coinduction",
+   "results": "0 hits: none; digest=4f53cda18c2baa0c; ",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern smooth algebras, ordinary module reflexivity or ambient derived-category structure, not the stated polynomial relative-duality properties"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A perfect complex of modules has a perfect dual and canonical double dual isomorphism; derived coinduction identifies scalar action with double dual evaluation",
+   "results": "8 hits: LinearMap.IsPerfPair.dualEval, Module.IsReflexive.of_isPerfPair, LinearMap.toPerfPair, LinearEquiv.instIsPerfPair, Module.evalEquiv, FGModuleCat.rightRigidCategory, FGModuleCat.exactPairing, FGModuleCat.rightDual; digest=0032690715e58a33; ",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern smooth algebras, ordinary module reflexivity or ambient derived-category structure, not the stated polynomial relative-duality properties"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-arbitrary-ring-relative-dualizing-isomorphism",
+  "date": "2026-10-23",
+  "group": "NS"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: The ten-canonical Hilbert parameter and projective-frame torsors. Specific prerequisite: Relative dualizing line of an arbitrary nodal family. Derived-complex prerequisite: proper flat duality and its normalized polynomial models, before applying the regular-equation calculation. Supporting input: Open restriction and rigidity of supplied relative dualizing pairs over arbitrary bases. Affine uniqueness input: unmarked module complexes, before generator normalization. Supporting input: Polynomial relative dual and its scalar map over arbitrary bases.",
+   "via": [
+    "lem-sfb-arbitrary-ring-relative-dualizing-isomorphism",
+    "lem-sfb-relative-dualizing-pair-open-rigidity",
+    "lem-sfb-proper-flat-dualizing-polynomial-model",
+    "lem-sfb-gorenstein-curve-relative-dualizing",
+    "lem-sfb-ten-canonical-hilbert-parameter",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-arbitrary-polynomial-dual-properties",
+  "worker": "stage1",
+  "summary": "No mathematical statement change. Added notion references and supplied six proof steps using existing arbitrary-ring DAG lemmas: polynomial pseudo-coherence and Tor bound, perfectness criterion, perfect duality, pseudo-coherence reflection, explicit bounded base-flat tensor model, and scalar-normalized coinduction/biduality. No new nodes. Checked the zero algebra and zero-variable case.",
+  "blueprint": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: The ten-canonical Hilbert parameter and projective-frame torsors. Specific prerequisite: Relative dualizing line of an arbitrary nodal family. Derived-complex prerequisite: proper flat duality and its normalized polynomial models, before applying the regular-equation calculation. Supporting input: Open restriction and rigidity of supplied relative dualizing pairs over arbitrary bases. Affine uniqueness input: unmarked module complexes, before generator normalization. Supporting input: Polynomial relative dual and its scalar map over arbitrary bases. Steps 1--6 provide the polynomial-dual prerequisite within the existing relative-dualizing route; the current blueprint direct-images item is unchanged. The inherited created.item chain has no imported ancestor (blueprint_refs.py ancestor returns None), so its existing null from.node is retained.",
+  "tool_uses": [
+   {
+    "node": "lem-trf-base-flat-polynomial-tor-bound",
+    "why": "Quantitative Tor transfer for an arbitrary base-flat polynomial module; the unit has no corresponding quantitative statement."
+   },
+   {
+    "node": "lem-pc-ring-pseudo-coherent-finite-tor-perfect",
+    "why": "Generic ring-complex shortening criterion; applies to the fixed polynomial quotient without replacing any geometric unit step."
+   },
+   {
+    "node": "lem-sf-ringed-derived-closed-symmetric-monoidal",
+    "why": "Generic signed tensor/Hom structure, used on the one-object ringed site to meet the perfect-duality interface."
+   },
+   {
+    "node": "lem-trf-perfect-complex-derived-biduality",
+    "why": "Generic canonical perfect-complex biduality over arbitrary commutative rings, not Noetherian relative-dualizing existence."
+   },
+   {
+    "node": "lem-trf-derived-coinduction-adjunction",
+    "why": "Generic coinduction underlying-object identification and conservativity of scalar restriction."
+   },
+   {
+    "node": "lem-pc-pseudo-coherent-bounded-finite-free-model",
+    "why": "Generic equivalence of the bounded-above finite-projective and finite-free models of pseudo-coherence."
+   },
+   {
+    "node": "lem-pc-module-bounded-flat-kflat",
+    "why": "Generic K-flatness of a bounded-above flat module complex, used for the two actual tensor models."
+   },
+   {
+    "node": "lem-pc-source-kflat-module-tensor-model",
+    "why": "Generic unbounded module derived tensor computation on a K-flat first complex."
+   },
+   {
+    "node": "lem-trf-algebraic-shriek-derived-hom-adjunction",
+    "why": "Generic mixed-ring derived-Hom adjunction including its explicit scalar-action-to-bidual-evaluation compatibility."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-trf-base-flat-polynomial-tor-bound",
+  "lem-pc-ring-pseudo-coherent-finite-tor-perfect",
+  "lem-sf-ringed-derived-closed-symmetric-monoidal",
+  "lem-trf-perfect-complex-derived-biduality",
+  "lem-trf-derived-coinduction-adjunction",
+  "lem-pc-pseudo-coherent-bounded-finite-free-model",
+  "lem-pc-module-bounded-flat-kflat",
+  "lem-pc-source-kflat-module-tensor-model",
+  "lem-trf-algebraic-shriek-derived-hom-adjunction"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-N6-177af1bba",
+  "group": "N6",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-N6-177af1bba (reviewer sub-agent of L); spot-checked: PASS. The six steps follow the proof of Stacks 0BZW (dualizing.tex lemma-relative-dualizing-algebraic, parts (1)(a)-(c) and (2)(a)) for arbitrary bases, with 0E1T substituted for the Noetherian D^b_Coh step. I read 0E1T and 068X in more-algebra.tex. Step 1 uses the 067J pseudo-coherence lemma for the given surjection and the base-flat polynomial Tor bound; the hypothesis that A is flat over R holds. The conversion to Tor amplitude [-n,0] cites projective=summand of free, bounded-above flat => K-flat, the K-flat tensor model and the Tor definition. Step 2: the 0658 criterion gives that A is perfect over P. Step 3: the symmetric monoidal structure on the one-object site meets the hypothesis of the 07VI biduality node. The coinduction node gives UC=K^vee[n]. Pseudo-coherence of UC comes from the 'equivalently f.g. projective' clause in the statement of lem-pc-pseudo-coherent-bounded-finite-free-model. This is a statement-level use, accepted. Step 4: 0E1T applies with B=P (P is free on monomials, so flat and finitely presented; P->A is surjective). Step 5: bounded P-projective terms are R-flat, so the complex is K-flat over R and the amplitude is [r,s]. Step 6: the mixed RHom adjunction maps the actual scalar map h to the canonical bidual map. That map is an iso by biduality, and U is conservative, so h is an iso. Edge cases A=0, R=0, n=0 and A=P all go through. Duplicates: the 0BZW and perfect/pseudo-coherent searches found only Noetherian finite-type versions (lem-trf-algebraic-shriek-relative-perfect, lem-trf-flat-polynomial-quotient-perfect) and siblings with different conclusions. None restates the item. There is no cycle and no SGA citation. Batch 5: the four newly cited trf nodes are general commutative/homological algebra. They are the base-flat polynomial Tor bound, 07VI perfect biduality, 0A70/0A71 coinduction, and the mixed RHom adjunction. Their closures contain no trace-formula or Poincare-duality statement or step and no nt-assume leaf, so they lie outside the assumptions and are accepted. The tool_uses in split_report are generic tools and are accepted. No new nodes and no changes."
+ },
+ "lean": {
+  "module": "Sheaf.Algebra.Homology.PolynomialRelativeDualProperties",
+  "declaration": "ModuleCat.polynomialRelativeDual_properties",
+  "declarations": [
+   "ModuleCat.polynomialRelativeDual",
+   "ModuleCat.polynomialRelativeDual_properties"
+  ],
+  "file": "lean/Sheaf/Algebra/Homology/PolynomialRelativeDualProperties.lean",
+  "statement": "theorem polynomialRelativeDual_properties {R A : Type u} [CommRing R] [CommRing A] [Algebra R A] [Module.Flat R A] [Algebra.FinitePresentation R A] [HasDerivedCategory.{u} (ModuleCat.{u} R)] [HasDerivedCategory.{u} (ModuleCat.{u} A)] (n : ℕ) (p : MvPolynomial (Fin n) R →ₐ[R] A) [HasDerivedCategory.{u} (ModuleCat.{u} (MvPolynomial (Fin n) R))] (hp : Function.Surjective p) : DerivedCategory.IsPerfectRingComplex ((restrictScalars p.toRingHom).mapDerivedCategory.obj ((DerivedCategory.singleFunctor (ModuleCat.{u} A) 0).obj (ModuleCat.of A A))) ∧ DerivedCategory.IsPseudoCoherent (polynomialRelativeDual n p.toRingHom) ∧ (∃ a b : ℤ, a ≤ b ∧ DerivedCategory.torAmplitudeIn (ModuleCat.{u} R) a b ((restrictScalars (algebraMap R A)).mapDerivedCategory.obj (polynomialRelativeDual n p.toRingHom))) ∧ DerivedCategory.IsPerfectRingComplex ((restrictScalars p.toRingHom).mapDerivedCategory.obj (polynomialRelativeDual n p.toRingHom)) ∧ IsIso (derivedModuleScalarActionMap (polynomialRelativeDual n p.toRingHom))",
+  "branch": "sheaf-dag",
+  "by": "N9",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "Repairs H2 from immutable head 2ee3b9b43a0c: cite the new definition node def-sfb-derived-module-scalar-action-map, whose standalone module defines the canonical scalar arrow, instead of the Noetherian theorem node lem-trf-algebraic-shriek-relative-perfect. Import TorAmplitude directly. The coinduced dual construction and all five conjuncts are preserved."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-c95b1d688",
+  "group": "N9",
+  "result": "pass",
+  "note": "Re-delivery fixes the H2 defect returned at 2ee3b9b43a0c. The theorem-node dep lem-trf-algebraic-shriek-relative-perfect is replaced by the new def node def-sfb-derived-module-scalar-action-map: ModuleCat.derivedModuleScalarActionMap = singleFunctorObjUnitIso.hom ≫ curry' (𝟙 K), the same formula as algebraicShriekScalarMap, real data, arbitrary A and K, no finiteness. Node fields complete (H12), source Stacks 0BZW(1)(c), stmt_deps def-weil-abstract-derived-category + def-pur-derived-internal-hom (ihom = MonoidalClosed.internalHom), lean.statement verbatim. No def node on side-live owns the map; other curry'(𝟙) uses are in theorem modules. Item diff vs 2ee3: only the imports (adds TorAmplitude) and the final conjunct's map name. Hypotheses (flat, FinitePresentation, surjective MvPolynomial (Fin n) R →ₐ[R] A), C = derivedCoinduction(P[0])⟦n⟧ and the five conjuncts match the node; A=0, R=0, n=0 admitted; no Noetherian assumption; docstrings with source places and blueprint ids; single sorry. No compile (no change). Maintainer note: algebraicShriekScalarMap in the trf module is now a duplicate and could become an abbrev later."
+ }
+}

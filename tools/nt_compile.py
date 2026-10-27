@@ -2,7 +2,9 @@
 """2026-10-15: compile side-project files singly; live source/build are read-only.
 
 nt_compile.py FILE.lean or --json with {files: {path/under/lean.lean: text}} on stdin.
-Every process has nice 19, two Lean threads and a hard 60 second per-file timeout.
+Every process has nice 19, one Lean thread and a 60 second per-file limit: a delivered file whose compile takes longer
+is NOT accepted. 2026-10-26 (the human): Lean is stopped only after SHEAF_FILE_RUN_LIMIT (300 s), so the slow declaration
+finishes and its messages are shown.
 Sibling modules, side-only imports and explicit side interface overrides compile
 first into a private temporary directory.
 No lake invocation, build request, or artifact is written into the live project.
@@ -15,6 +17,17 @@ import subprocess
 import sys
 import tempfile
 import time
+
+
+def _thp_off():
+    # 2026-10-26 (the human): PR_SET_THP_DISABLE (prctl 41) for the Lean child, inherited across exec. Lean's heap is
+    # madvised for huge pages, and every fault then ran synchronous compaction (92-99% failed), which showed as
+    # memory pressure (PSI ~45%) that kept the slot governors from adding slots. Fail-safe: the compile runs anyway.
+    try:
+        import ctypes
+        ctypes.CDLL(None, use_errno=True).prctl(41, 1, 0, 0, 0)
+    except Exception:   # noqa: BLE001
+        pass
 
 from nt_source_overlay import load_overrides, source_for_import
 
@@ -130,6 +143,29 @@ def main():
             except OSError:
                 pass
 
+        walked = set()
+
+        def walk_published(rel):
+            """2026-10-25 (deliverfix): a module read from the published build is walked, so that a module changed since
+            the publication reached only through it is compiled from its current source (never loaded stale)."""
+            if rel in walked or rel in done or not rel.startswith(("Sheaf/", "WeilConjectures/", "Comparator/")):
+                return
+            walked.add(rel)
+            try:
+                text = (LIVE / rel).read_text()
+            except OSError:
+                return
+            for imp in IMPORT.findall(text):
+                dep = imp.replace(".", "/") + ".lean"
+                if dep in files:
+                    compile_one(dep, files[dep])
+                    continue
+                side = source_for_import(ROOT, LIVE, dep, overrides)
+                if side is not None:
+                    compile_one(dep, side.read_text())
+                else:
+                    walk_published(dep)
+
         def compile_one(rel, text):
             if rel in done:
                 return
@@ -146,6 +182,8 @@ def main():
                 side = source_for_import(ROOT, LIVE, dep, overrides)
                 if side is not None:
                     compile_one(dep, side.read_text())
+                else:
+                    walk_published(dep)
             cacheable = rel not in files and all(   # every side-sourced module (overrides and side-only imports)
                 d in keys for d in (i.replace(".", "/") + ".lean" for i in IMPORT.findall(text)) if d in done)
             key = override_key(rel, text) if cacheable else None
@@ -162,19 +200,27 @@ def main():
                 "name": rel[:-5].replace("/", "."), "isModule": False,
                 "importArts": artifacts, "dynlibs": [], "plugins": [], "options": {}}))
             upstream = rel.startswith(("WeilConjectures/", "Comparator/"))
-            cmd = [str(pathlib.Path.home() / ".elan/bin/lean"), *opts,
+            cmd = [str(pathlib.Path.home() / ".elan/bin/lean"), "-j1", *opts,   # one core per single-file compile (the human, 2026-10-22)
                    *([] if upstream else ["-DautoImplicit=false"]),
                    "-R", str(tree), "-o", str(out), "--setup", str(setup), str(src)]
             start = time.monotonic()
+            # 2026-10-25 (deliverfix): a landed library module compiled privately (not a delivered file) gets 400 s
+            limit = 60 if rel in files else int(os.environ.get("NT_LIBRARY_LIMIT", "400"))
+            run_limit = max(limit, int(os.environ.get("SHEAF_FILE_RUN_LIMIT", "120")))   # 2026-10-26: run longer, accept 60 s
             try:
-                p = subprocess.run(cmd, cwd=LIVE,
+                # 2026-10-25 (fairq): stdbuf makes Lean flush each message, so a timeout keeps the messages before it
+                p = subprocess.run(["stdbuf", "-oL", "-eL"] + cmd, preexec_fn=_thp_off, cwd=LIVE,
                                    env=dict(os.environ, LEAN_PATH=lp, LEAN_NUM_THREADS="1"),
-                                   capture_output=True, text=True, timeout=60)
+                                   capture_output=True, text=True, timeout=run_limit)
                 output = (p.stdout + p.stderr).replace(str(tree) + "/", "")
                 print(output, end="", flush=True)
-                print(f"{rel}: {time.monotonic()-start:.1f} s; nice 19; 2 threads; limit 60 s", flush=True)
+                took = time.monotonic() - start
+                print(f"{rel}: {took:.1f} s; nice 19; 1 thread; limit {limit} s", flush=True)
                 if p.returncode:
                     raise SystemExit(p.returncode)
+                if took > limit:
+                    raise SystemExit(f"{rel}: NOT ACCEPTED: took {took:.0f} s > {limit} s, the limit for one file (it ran up to "
+                                     f"{run_limit} s only so that the slow declarations finish and report, above)")
             except subprocess.TimeoutExpired as exc:
                 # A later slow declaration must not erase errors from earlier
                 # declarations. TimeoutExpired can contain bytes with text=True.
@@ -183,7 +229,7 @@ def main():
                     for value in (exc.stdout, exc.stderr))
                 print(partial.replace(str(tree) + "/", ""),
                       end="" if not partial or partial.endswith("\n") else "\n", flush=True)
-                raise SystemExit(f"{rel}: timeout after 60 s")
+                raise SystemExit(f"{rel}: NOT ACCEPTED: timeout after {run_limit} s (the limit for one file is {limit} s)")
             # Lean needs the IR and private/server companions of transitive
             # private imports too, exactly as the launcher's lcompile does.
             stem = objects / rel[:-5]

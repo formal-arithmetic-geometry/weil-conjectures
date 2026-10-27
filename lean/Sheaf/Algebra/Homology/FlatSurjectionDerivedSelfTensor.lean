@@ -8,8 +8,8 @@ module
 public import Sheaf.Algebra.Homology.DerivedTensorSecondFactorFunctor
 public import Mathlib.RingTheory.RingHom.Flat
 public import WeilConjectures.FromJoel.Algebra.Homology.BifunctorSingle
-import Mathlib.RingTheory.Flat.Basic
-import WeilConjectures.FromJoel.CategoryTheory.Monoidal.KFlat
+import WeilConjectures.CategoryTheory.Abelian.Flat.ModuleCat
+import Mathlib.CategoryTheory.Adjunction.FullyFaithful
 
 /-!
 # Derived self-tensor multiplication for a flat surjection
@@ -99,6 +99,30 @@ theorem isIso_derivedSelfTensorMultiplication_of_flat_surjective
     [HasDerivedCategory.{wB} (ModuleCat.{u} B)]
     (f : A →+* B) (hf : Function.Surjective f) (hflat : f.Flat) :
     IsIso (derivedSelfTensorMultiplication f) := by
-  sorry
+  classical
+  let M := (ModuleCat.restrictScalars f).obj (ModuleCat.of B B)
+  let N := (HomologicalComplex.single (ModuleCat.{u} B) (.up ℤ) 0).obj
+    (ModuleCat.of B B)
+  let E := (HomologicalComplex.single (ModuleCat.{u} A) (.up ℤ) 0).obj M
+  let ε := Classical.choose
+    (Classical.choose_spec (exists_derivedTensor_second_factor_functor f).2)
+  have hM : Module.Flat A M := hflat
+  have hE : (HomologicalComplex.quasiIso (ModuleCat.{u} A) (.up ℤ)).kFlat E :=
+    (CochainComplex.kFlat_single_obj_iff_flat M 0).2 ((ModuleCat.flat_iff_flat M).2 hM)
+  have hε : IsIso ((ε N).app E) :=
+    (Classical.choose_spec
+      (Classical.choose_spec (exists_derivedTensor_second_factor_functor f).2)).2.2.1
+      N E hE
+  have : (ModuleCat.restrictScalars.{u} f).Full :=
+    { map_surjective := fun {X Y} g ↦ ⟨ModuleCat.ofHom
+        { toFun := g
+          map_add' := g.hom.map_add
+          map_smul' := fun b x ↦ by
+            obtain ⟨a, rfl⟩ := hf b
+            exact g.hom.map_smul a x }, rfl⟩ }
+  have : IsIso ((ModuleCat.extendRestrictScalarsAdj f).counit.app
+      (ModuleCat.of B B)) := inferInstance
+  unfold derivedSelfTensorMultiplication
+  infer_instance
 
 end DerivedCategory

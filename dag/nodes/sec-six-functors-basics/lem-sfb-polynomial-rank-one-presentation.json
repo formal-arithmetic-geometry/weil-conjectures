@@ -1,0 +1,154 @@
+{
+ "id": "lem-sfb-polynomial-rank-one-presentation",
+ "kind": "statement",
+ "title": "Normalized internal presentation of an arbitrary finite polynomial system",
+ "statement": "Fix a prime $\\ell$, normed $\\mathbf Q_\\ell$-algebra fields $E,F$, an $E$-algebra structure on $F$ compatible with the $\\mathbf Q_\\ell$ structures (a scalar tower), and a continuous coefficient homomorphism $E\\to F$. Let $k,m\\geq0$ and let Q be any PolynomialSystem for $(\\ell,E,k,m)$ [def-sfb-polynomial-rank-one-model-data]. Then PresentationAssertion(Q,F) holds: every polynomial translation Model has the normalized continuous-section stage maps, coefficient projections, underlying and equivariant colimits, and derivative, exponential and difference maps specified by that predicate. This assertion assumes the entire finite system Q; it does not construct it or assert one exists. It treats one arbitrary coefficient field F and needs no completeness hypothesis on F.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+  "place": "Paragraph (3), open direct image; agent-formulated expansion in lem-sfb-polynomial-rank-one-difference-model. Specifically: original expanded proof steps 6--9."
+ },
+ "stmt_deps": [
+  "def-sfb-polynomial-rank-one-model-data"
+ ],
+ "proof": [
+  {
+   "text": "Form the continuous splitting pi by placing H first. For any given PolynomialSystem Q, apply the existing continuous-section presentation existence theorem to Q.system and the continuous coefficient inclusion E to F. Tensor Q.basis with F. In these finite coordinates tensorPolynomial sends the tensor basis to the same monomials, so coefficient extraction is its inverse; both directions are continuous in the finite product module topology. Completeness of F is unnecessary.",
+   "uses": [
+    "def-sfb-ind-unipotent-system",
+    "def-sfb-continuous-representation-condensation",
+    "def-sfb-polynomial-rank-one-model-data"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Transport the finite coordinate maps through the internal-module/section-module equivalence. This gives monomial injections j and coefficient projections p, with the specified section formulas. Their matrix identities establish the finite coproduct property. The corresponding finite sum of the coprojections of T defines w. The scalar tower and Q.translation identify its source action with translation over F; the varying-parameter formula of T proves equivariance. Q.inclusion and the presentation transition formula prove compatibility.",
+   "uses": [
+    "def-weil-pbc-internal-abelian-sheaf-module-equivalence",
+    "def-sfb-continuous-representation-condensation",
+    "def-sfb-polynomial-translation-model",
+    "def-sfb-polynomial-rank-one-model-data"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply only the categorical creation and underlying-colimit clauses of filtered colimit creation for the action of G times H. Every exponent vector belongs to the stage at its total degree. Thus compatible w induce an equivariant map from the colimit c to T, and the monomial coproduct property gives the inverse by sending a monomial into any containing stage. Compatibility makes the choice of stage irrelevant. The colimit and coproduct universal properties prove the inverse identities and the normalization. No formula identifying arbitrary sections of an infinite colimit with the colimit of sections is used.",
+   "uses": [
+    "lem-sfb-profinite-action-filtered-colimit-creation",
+    "def-sfb-polynomial-translation-model"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The compatible scalar-extended stage operators descend to D. Q.derivative and Q.monomials give minus the first partial derivative on each monomial. Differentiation commutes with all translations, so D is equivariant. Let expD be the action of the central group element (1,generator ell), and set delta=expD-id. The System exponential field supplies the finite-stage formula, and T.translation gives the finite polynomial difference formula. These verify all remaining equations, including on the empty test space and with k=0, m=0 or n=0.",
+   "uses": [
+    "def-sfb-ind-unipotent-system",
+    "def-sfb-polynomial-translation-model",
+    "def-sfb-polynomial-rank-one-model-data"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-sfb-ind-unipotent-system",
+  "def-sfb-continuous-representation-condensation",
+  "def-sfb-polynomial-rank-one-model-data",
+  "def-weil-pbc-internal-abelian-sheaf-module-equivalence",
+  "def-sfb-polynomial-translation-model",
+  "lem-sfb-profinite-action-filtered-colimit-creation"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+  "place": "Paragraph (3), open direct image; agent-formulated expansion in lem-sfb-polynomial-rank-one-difference-model. Specifically: original expanded proof steps 6--9."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "The bounded degree monomials form a finite dimensional polynomial translation representation with nilpotent derivative exponential",
+   "results": "8 hits: LieDerivation.exp; Polynomial.degreeLT.basis; Module.End.exp_mul_of_derivation; MvPolynomial.restrictDegree; IsNilpotent.exp; MvPolynomial.instFiniteSubtypeMemSubmoduleRestrictDegreeOfFinite; MvPolynomial.degreesLE; Polynomial.basisMonomials.",
+   "date": "2026-10-26",
+   "verdict": "No exact match for the specified finite-system and internal continuous-section presentation interfaces. The hits supply polynomial algebra tools, not the whole obligation."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Bounded degree multivariate polynomial spaces with translation action and nilpotent partial derivative have Taylor exponential equal to translation",
+   "results": "8 hits: Polynomial.coe_taylorEquiv; Polynomial.taylor_apply; Polynomial.taylor_eval; Polynomial.taylor_taylor; Polynomial.taylorLinearEquiv_apply_coe; Polynomial.taylorEquiv_symm; Polynomial.taylorEquiv; Polynomial.toAlgHom_taylorEquiv.",
+   "date": "2026-10-26",
+   "verdict": "No exact match for the specified finite-system and internal continuous-section presentation interfaces. The hits supply polynomial algebra tools, not the whole obligation."
+  },
+  {
+   "tool": "loogle",
+   "query": "MvPolynomial.pderiv, MvPolynomial.totalDegree",
+   "results": "0 hits.",
+   "date": "2026-10-26",
+   "verdict": "No exact match for the specified finite-system and internal continuous-section presentation interfaces. The hits supply polynomial algebra tools, not the whole obligation."
+  },
+  {
+   "tool": "grep",
+   "query": "taylor|totalDegree|degreeLE|restrictTotalDegree",
+   "results": "25 hits, including MvPowerSeries.totalDegree_truncFinset, totalDegree_trunc', Polynomial.map_taylor and analytic Taylor-series results. Local source inspection additionally found MvPolynomial.restrictDegree, degreesLE, le_totalDegree and coeff_pderiv.",
+   "date": "2026-10-26",
+   "verdict": "No exact match for the specified finite-system and internal continuous-section presentation interfaces. The hits supply polynomial algebra tools, not the whole obligation."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.PolynomialRankOneDifferenceModel",
+  "date": "2026-10-26",
+  "group": "A6"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "Paragraph (3), open direct image; agent-formulated expansion in lem-sfb-polynomial-rank-one-difference-model.",
+   "via": [
+    "lem-sfb-polynomial-rank-one-difference-model",
+    "lem-sfb-polynomial-translation-acyclic",
+    "lem-sfb-polynomial-derived-bar-comparison",
+    "lem-sfb-trivial-ladic-derived-exterior",
+    "lem-sfb-dense-lattice-derived-invariants-comparison",
+    "lem-sfb-tame-inertia-continuous-koszul",
+    "lem-sfb-continuous-algcl-tame-boundary-comparison",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.PolynomialRankOnePresentation",
+  "file": "lean/Sheaf/Paper/PolynomialRankOnePresentation.lean",
+  "declaration": "Profinite.CondensedAction.PolynomialRankOne.presentation_assertion",
+  "statement": "theorem presentation_assertion (ℓ : ℕ) [Fact ℓ.Prime] (E : Type u) [NormedField E] [NormedAlgebra ℚ_[ℓ] E] (k m : ℕ) (F : Type u) [NormedField F] [NormedAlgebra ℚ_[ℓ] F] [Algebra E F] [IsScalarTower ℚ_[ℓ] E F] (Q : PolynomialSystem ℓ E k m) (hf : Continuous (algebraMap E F)) : PresentationAssertion ℓ E k m F Q",
+  "branch": "sheaf-dag",
+  "by": "A6",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-96f37",
+  "group": "A6",
+  "result": "fix",
+  "landing": "20261026T080838-L-1626806",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-96f37",
+  "group": "A6",
+  "result": "fix",
+  "landing": "20261026T080838-L-1626806",
+  "kind": "interface",
+  "note": "independent cc review: data module vs old item module (verbatim apart from blueprint tags); item statement unchanged; the 2 sorried splits (system existence, presentation for arbitrary Q) against the item node's plan steps 1-5/6-9 and IndUnipotent.System/exists_presentation"
+ }
+}

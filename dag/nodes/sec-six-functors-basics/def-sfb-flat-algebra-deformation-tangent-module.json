@@ -1,0 +1,120 @@
+{
+ "id": "def-sfb-flat-algebra-deformation-tangent-module",
+ "kind": "definition",
+ "title": "Canonical vector operations on flat algebra deformation tangent classes",
+ "status": "split",
+ "import_flags": [],
+ "statement": "Let $k$ be a field [def-weil-field] and $B$ a commutative $k$-algebra. Use the marked Artinian test category and its square-zero tests $k[V]$ [def-sfb-artin-deformation-test-category], and the marked flat deformation groupoids and canonical tensor-product base-change relation [def-sfb-marked-flat-algebra-deformations]. Define $T_B$ to be the set of isomorphism classes of $\\mathrm{Def}_B(k[k])$ and $[Q]$ the class of $Q$. For a finite-dimensional $k$-vector space $V$, a linear map $f:V\\to k$, $Q\\in\\mathrm{Def}_B(k[V])$ and $x\\in T_B$, say that $Q$ induces $x$ along $f$ if there is $D\\in\\mathrm{Def}_B(k[k])$ with $[D]=x$ and a canonical marked base-change map $Q\\to D$ above the residue-preserving square-zero map $(a,v)\\mapsto(a,f(v))$ [def-sfb-marked-stack-deformations]. For an additive commutative group and $k$-module structure on $T_B$, define the predicate that this is the canonical deformation vector-space structure by the following two requirements. For every dual-number deformation $Q$, $c\\in k$ and $y\\in T_B$, $c[Q]=y$ if and only if $Q$ induces $y$ along $v\\mapsto cv$. For $x,y,z\\in T_B$, $x+y=z$ if and only if there is $Q\\in\\mathrm{Def}_B(k[k\\times k])$ inducing $x,y,z$ along the first projection, second projection and addition map, respectively.",
+ "stmt_deps": [
+  "def-weil-field",
+  "def-sfb-artin-deformation-test-category",
+  "def-sfb-marked-flat-algebra-deformations",
+  "def-sfb-marked-stack-deformations"
+ ],
+ "source": {
+  "document": "literature/stacks-project/examples-defos.tex",
+  "place": "Tag 0DY3 (lemma-rings-TI), Baer operations on dual-number deformations; formal-defos.tex tangent-space operations; square-zero base-change formulation."
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Canonical vector space operations on isomorphism classes of flat algebra deformations over dual numbers from square zero base change",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"DualNumber.lift\", \"module\": \"Mathlib.Algebra.DualNumber\", \"type\": \": { fe : (A →ₐ[R] B) × B // fe.2 * fe.2 = 0 ∧ ∀ a, Commute fe.2 (fe.1 a) } ≃ (A[ε] →ₐ[R] B)\", \"doc\": \"This equivalence establishes a bijection between pairs $(f, \\\\epsilon)$, where $f : A \\\\to B$ is an $R$-algebra homomorphism and $\\\\epsilon \\\\in B$ satisfies $\\\\epsilon^2 = 0$ and commutes with $f(a)$ for \"}\n  {\"name\": \"RingHom.Flat.respectsIso\", \"module\": \"Mathlib.RingTheory.RingHom.Flat\", \"type\": \": RespectsIso Flat\", \"doc\": \"If $ f : R \\\\to S $ is a flat ring homomorphism between commutative rings, then composing $ f $ with a ring isomorphism on either the source or target preserves the flatness property. Specifically, for\"}\n  {\"name\": \"IsBaseChange.toDual_apply\", \"module\": \"Mathlib.LinearAlgebra.Dual.BaseChange\", \"type\": \"(f : Dual R V) : ibc.toDual f = (f.baseChange A).congr ibc.equiv\", \"doc\": \"For any R-linear functional $ f $ on $ V $, the dual map induced by base change to $ A $ satisfies $ \\\\text{toDual}(f) = (f_{A}) \\\\circ \\\\text{equiv} $, where $ f_{A} $ is the base change of $ f $ to $ A\"}\n  {\"name\": \"derivationToSquareZeroEquivLift\", \"module\": \"Mathlib.RingTheory.Derivation.ToSquareZero\", \"type\": \"[IsScalarTower R A B] :\\n  Derivation R A I ≃ { f : A →ₐ[R] B // (Ideal.Quotient.mkₐ R I).comp f = IsScalarTower.toAlgHom R A (B ⧸ I) }\", \"doc\": \"Given a commutative semiring $ R $, an $ R $-algebra $ A $, a commutative ring $ B $ equipped with $ R $-algebra and $ A $-algebra structures, and a square-zero ideal $ I $ of $ B $ (i.e., $ I^2 = 0 $\"}\n  {\"name\": \"IsBaseChange.dual\", \"module\": \"Mathlib.LinearAlgebra.Dual.BaseChange\", \"type\": \": IsBaseChange A (ibc.toDual)\", \"doc\": \"Given an $ R $-module $ V $ and its base change $ W = V \\\\otimes_R A $ along an $ R $-algebra $ A $, the base change induces an $ R $-linear map from the dual module $ \\\\text{Hom}_R(V, R) $ to the dual \"}\n  {\"name\": \"IsBaseChange.toDual\", \"module\": \"Mathlib.LinearAlgebra.Dual.BaseChange\", \"type\": \": Dual R V →ₗ[R] Dual A W\", \"doc\": \"The R-linear map from the dual module of V over R to the dual module of W over A, induced by base change via the algebra structure of A over R. This map sends an R-linear functional on V to an A-linea\"}\n  {\"name\": \"derivationToSquareZeroEquivLift_symm_apply_apply_coe\", \"module\": \"Mathlib.RingTheory.Derivation.ToSquareZero\", \"type\": \"∀ {R : Type u} {A : Type v} {B : Type w} [inst : CommSemiring R] [inst_1 : CommSemiring A] [inst_2 : CommRing B]\\n  [inst_3 : Algebra R A] [inst_4 : Algebra R B] (I : Ideal B) [inst_5 : Algebra A B] (hI : I ^ 2 = ⊥)\\n  [inst_6 : IsScalarTower R A B] (f : { f // (Ideal.Quotient.mkₐ R I).comp f = IsScal\", \"doc\": \"Given a commutative semiring $ R $, an $ R $-algebra $ A $, a commutative ring $ B $ equipped with $ R $-algebra and $ A $-algebra structures, and a square-zero ideal $ I $ of $ B $ (i.e., $ I^2 = 0 $\"}\n  {\"name\": \"liftOfDerivationToSquareZero\", \"module\": \"Mathlib.RingTheory.Derivation.ToSquareZero\", \"type\": \"[IsScalarTower R A B] (hI : I ^ 2 = ⊥) (f : Derivation R A I) : A →ₐ[R] B\", \"doc\": \"Given a commutative semiring $ R $, an $ R $-algebra $ A $, a commutative ring $ B $ with a square-zero ideal $ I $, and a derivation $ f: A \\to I $ over $ R $, this constructs an $ R $-algebra homomor\"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: no marked flat algebra tangent vector operations; project has the general cofibred tangentSet and squareZeroMap, reused here, but not this predicate on the flat algebra groupoid."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"deformation\", \"tangent\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-24",
+   "verdict": "no match: no marked flat algebra tangent vector operations; project has the general cofibred tangentSet and squareZeroMap, reused here, but not this predicate on the flat algebra groupoid."
+  },
+  {
+   "tool": "grep",
+   "query": "tangentSet|CanonicalTangent|FlatDeformation",
+   "results": "[grep] OK 5 hit(s)\n  {\"file\": \"Mathlib/Geometry/Euclidean/Sphere/Tangent.lean\", \"line\": \"24\", \"text\": \"* `EuclideanGeometry.Sphere.tangentSet`: the set of all maximal tangent spaces to a given sphere.\"}\n  {\"file\": \"Mathlib/Geometry/Euclidean/Sphere/Tangent.lean\", \"line\": \"264\", \"text\": \"noncomputable def tangentSet (s : Sphere P) : Set (AffineSubspace ℝ P) :=\"}\n  {\"file\": \"Mathlib/Geometry/Euclidean/Sphere/Tangent.lean\", \"line\": \"267\", \"text\": \"lemma mem_tangentSet_iff {as : AffineSubspace ℝ P} {s : Sphere P} :\"}\n  {\"file\": \"Mathlib/Geometry/Euclidean/Sphere/Tangent.lean\", \"line\": \"268\", \"text\": \"    as ∈ s.tangentSet ↔ ∃ p, p ∈ s ∧ s.orthRadius p = as :=\"}\n  {\"file\": \"Mathlib/Geometry/Euclidean/Sphere/Tangent.lean\", \"line\": \"271\", \"text\": \"lemma isTangent_of_mem_tangentSet {as : AffineSubspace ℝ P} {s : Sphere P}\"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: no marked flat algebra tangent vector operations; project has the general cofibred tangentSet and squareZeroMap, reused here, but not this predicate on the flat algebra groupoid."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-isolated-affine-completion-deformation",
+  "date": "2026-10-24",
+  "group": "NR"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Scheme representability of the stable abelian-level normalization. Supporting input: freeness at normalized boundary branches. Local-to-global deformation theorem underlying the node parameters in Pikaart--de Jong 2.3.6; no automorphism action or normalized level cover. Supporting calculation: Deformations of an affine isolated singularity and its completions. Tangent-space clause: identify the canonical vector operations through square-zero base changes.",
+   "via": [
+    "lem-sfb-isolated-affine-completion-deformation",
+    "lem-sfb-nodal-deformation-smoothing-parameters",
+    "lem-sfb-stable-level-versal-branch-freeness",
+    "lem-sfb-stable-abelian-level-normalization",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "lean": {
+  "module": "Sheaf.RingTheory.FlatAlgebraDeformationTangentModule",
+  "declaration": "Algebra.FlatDeformation.IsCanonicalTangentModule",
+  "declarations": [
+   "Algebra.FlatDeformation.Tangent",
+   "Algebra.FlatDeformation.tangentClass",
+   "Algebra.FlatDeformation.InducesTangent",
+   "Algebra.FlatDeformation.IsCanonicalTangentModule"
+  ],
+  "file": "lean/Sheaf/RingTheory/FlatAlgebraDeformationTangentModule.lean",
+  "statement": "def IsCanonicalTangentModule [AddCommGroup (Tangent (k := k) B)] [Module k (Tangent (k := k) B)] : Prop",
+  "branch": "newtargets-dag",
+  "by": "NR",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "Second reading (maintainer review 2026-10-24): the square-zero parameter map is AlgebraicGeometry.StackDeformation.squareZeroTransport of def-sfb-marked-stack-deformations (textually the same construction as ArtinDeformation.squareZeroMap, which is a plain def owned by the theorem node lem-sfb-artin-rs-tangent-tensor and so cannot be a statement dependency).",
+  "fixed_by": "NT-stage2-cc-8f67fd744"
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-8f67fd744",
+  "group": "NR",
+  "result": "fix",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-8f67fd744",
+  "group": "NR",
+  "result": "fix",
+  "note": "Item statement matches the node and Stacks 0DZF clause by clause: field, FiniteType P, injective Fin r maximal ideals (r=0 allowed), smoothness off the points via a smooth open neighbourhood, completion of the actual localization at q_i=marking^-1(m_i), F pinned by e through IsLocalizedCompletionMap on scalars, marking, arrows and base change (exists-unique j), Stacks 06HG smoothness over every surjection keeping the specified j_i, tangent operations pinned by IsCanonicalTangentModule (scalar push plus an iff for addition over k[k x k]) and dF fixed on classes. Edge cases: r=0, P=0, smooth listed points, arbitrary residue fields. Common universe u is forced by the landed Groupoid and Scheme.{u}. lean.statement verbatim for both nodes; dep records unchanged vs live. Finding fixed: the new def node def-sfb-flat-algebra-deformation-tangent-module used ArtinDeformation.squareZeroMap (plain def owned by theorem lem-sfb-artin-rs-tangent-tensor) with no stmt_dep. fixes/FlatAlgebraDeformationTangentModule.lean now imports MarkedStackDeformations and uses StackDeformation.squareZeroTransport (same construction, Q34 precedent); fixes/def-sfb-flat-algebra-deformation-tangent-module.json adds stmt_dep def-sfb-marked-stack-deformations with a bracket citation and lean.note. nt_compile --json of the fixed module plus the delivered item: clean, exit 0, 8.8 s / 9.3 s."
+ }
+}

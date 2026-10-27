@@ -73,16 +73,20 @@
  },
  "lean_audit": {
   "master": {
-   "state": "none"
+   "state": "none",
+   "decls": [],
+   "missing": []
   },
   "slopmaster2": {
-   "state": "none"
+   "state": "none",
+   "decls": [],
+   "missing": []
   }
  },
  "chapter": "sec-six-functors-basics",
  "unit": "sk-thm-sf-ctf-stability",
  "lean": {
-  "module": "Sheaf.CategoryTheory.CondensedInternalBarResolution",
+  "module": "Sheaf.CategoryTheory.CondensedInternalBarData",
   "declaration": "Profinite.CondensedAction.InternalBar.freeAdjunction",
   "declarations": [
    "Profinite.CondensedAction.InternalBar.free",
@@ -93,7 +97,8 @@
   "by": "NA",
   "date": "2026-10-21",
   "existing": true,
-  "note": "Definition ownership required by return H2: these two existing plain definitions construct the functor and composite adjunction without choosing exists_resolution. The theorem node lem-sfb-condensed-internal-bar-resolution states exactness of a bar resolution and does not own this independent definition notion. No Lean module is added."
+  "note": "Definition ownership required by return H2: these two existing plain definitions construct the functor and composite adjunction without choosing exists_resolution. The theorem node lem-sfb-condensed-internal-bar-resolution states exactness of a bar resolution and does not own this independent definition notion. No Lean module is added.",
+  "file": "lean/Sheaf/CategoryTheory/CondensedInternalBarData.lean"
  },
  "reviewed": {
   "date": "2026-10-21",
@@ -110,5 +115,15 @@
   "group": "NA",
   "result": "pass",
   "note": "Re-delivery answering the H2 RETURN of e8abced2b64d. The Lean module is byte-identical (sha256 1f5968db…), and the clause-by-clause H3 re-check is clean: finite normed E/Q_ell, continuousScalarRing, actual free module and Mod.ihom, evaluation bijective, additive, with S-coordinate action and both restriction laws, IsIso of rightDerivedSingleUnit and of Q.map of every injective-resolution augmentation, chain-level parameter naturality, degree-zero normalization, CompleteSpace E as a conclusion; edge cases P=∅/pt and S=∅ are covered. H2 is repaired by the new existing:true definition nodes def-sfb-condensed-free-module-adjunction (InternalBar.free/freeAdjunction, CondensedInternalBarResolution.lean:53,60) and def-sfb-right-derived-single-unit (Functor.rightDerivedSingleUnit, RightDerivedSingleZeroUnit.lean:34). Their TeX matches the Lean constructions, their deps exist live, their statements are verbatim, and no live definition node owns these declarations. The item node differs from live only in stmt_deps/lean, the six other dep records are byte-identical to live, and the dropped theorem deps supply nothing still used. Advisory: conjunct 9 restates rightDerivedSingleUnit_zero and conjunct 8 is formal naturality. No file changed, so no compile."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-4920a",
+  "group": "H7",
+  "result": "fix",
+  "landing": "20261025T143431-L-1005020",
+  "kind": "interface",
+  "note": "independent cc review: exists_resolution proof, the two new sorried statements (deletion comparison, induced coordinates) and the moved InternalBar data against their nodes, the change record and the 11 direct importers (all compiled against the sandbox build)"
  }
 }

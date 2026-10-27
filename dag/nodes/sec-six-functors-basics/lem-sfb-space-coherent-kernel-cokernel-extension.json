@@ -1,0 +1,320 @@
+{
+ "id": "lem-sfb-space-coherent-kernel-cokernel-extension",
+ "kind": "statement",
+ "title": "Coherent modules on a locally Noetherian space are closed under kernels, cokernels and extensions",
+ "statement": "Let $S$ be a scheme [def-pc-scheme] and let $Z$ be a locally Noetherian algebraic space over $S$ [def-trf-algebraic-space]. Work in the abelian category of module sheaves on $(Z_{\\mathrm{et}},\\mathcal O_Z)$ [def-weil-sheaf-of-modules-category]. Locally Noetherian means that etale scheme charts are locally Noetherian [pqf-def-locnoeth]. Coherent means that on every affine etale chart $\\operatorname{Spec}R$ with $R$ Noetherian [def-weil-pbc-noetherian-ring], the module sheaf is associated to a finitely generated $R$-module $N$ [def-weil-finitely-generated-module], with value $B\\otimes_RN$ on affine etale maps $\\operatorname{Spec}B\\to\\operatorname{Spec}R$. The zero module is coherent. For every morphism $u:F\\to G$ of coherent $\\mathcal O_Z$-modules, its kernel and cokernel in this module-sheaf category are coherent. For every short exact sequence $0\\to F\\to E\\to G\\to0$ in this category with $F,G$ coherent, $E$ is coherent. Coherence is invariant under isomorphism of module sheaves.",
+ "source": {
+  "document": "literature/stacks-project/spaces-cohomology.tex",
+  "place": "Tag 07UC (lemma-coherent-abelian-Noetherian), with coherence characterized by Tag 07UB (lemma-coherent-Noetherian)."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-trf-algebraic-space",
+  "def-weil-sheaf-of-modules-category",
+  "pqf-def-locnoeth",
+  "def-weil-pbc-noetherian-ring",
+  "def-weil-finitely-generated-module",
+  "def-trf-space-quasi-coherent-module"
+ ],
+ "proof": [
+  {
+   "text": "Fix any affine etale chart $v:V=\\operatorname{Spec}R\\to Z$ with $R$ Noetherian. By [def-trf-algebraic-space], its module pullback is restriction to the localized site, hence is exact by [lem-pur-site-restriction-module-adjunction-exact]. Write $A_V$ for the fully faithful scheme Zariski/etale comparison of [lem-trf-scheme-zariski-etale-quasi-coherent-equivalence]; it is exact into the ambient etale module category by [lem-sfb-scheme-etale-module-exact-finiteness-comparison]. By [lem-weil-pbc-spec-module-tilde-sections] and [lem-weil-pbc-tilde-pullback-base-change], $A_V(\\widetilde N)$ has value $B\\otimes_RN$ on $\\operatorname{Spec}B\\to V$. Consequently a coherent space module restricts to $A_V(\\widetilde N)$ for finite $N$. These restrictions are site quasi-coherent, and the local-presentation condition [def-trf-space-quasi-coherent-module] then makes the module quasi-coherent on $Z$: each object $T$ of $Z_{\\mathrm{et}}$ is a locally Noetherian scheme, so by [pqf-def-locnoeth] it has an affine open cover by spectra $\\operatorname{Spec}R_i$ of Noetherian rings; each $\\operatorname{Spec}R_i\\to T\\to Z$ is such a chart, and we take the local presentations of $A_{\\operatorname{Spec}R_i}(\\widetilde{N_i})$ there. The affine finite-type criterion [lem-weil-pbc-quasi-coherent-finite-type-affine] and [pqf-lem-coherent-ft-locnoeth] show that $\\widetilde N$ is coherent on $V$, which is locally Noetherian by [pqf-def-locnoeth] since $R$ is Noetherian. Conversely a coherent Zariski module $H$ on $V$ is quasi-coherent of finite type by the latter criterion; the affine criterion makes $N=H(V)$ finite, and [lem-weil-pbc-affine-tilde-gamma-adjunction](3) gives $H\\simeq\\widetilde N$. Thus $A_V(H)$ has exactly the finite-module formula required in the statement.",
+   "uses": [
+    "def-trf-algebraic-space",
+    "lem-pur-site-restriction-module-adjunction-exact",
+    "lem-trf-scheme-zariski-etale-quasi-coherent-equivalence",
+    "lem-sfb-scheme-etale-module-exact-finiteness-comparison",
+    "lem-weil-pbc-spec-module-tilde-sections",
+    "lem-weil-pbc-tilde-pullback-base-change",
+    "def-trf-space-quasi-coherent-module",
+    "lem-weil-pbc-quasi-coherent-finite-type-affine",
+    "pqf-lem-coherent-ft-locnoeth",
+    "lem-weil-pbc-affine-tilde-gamma-adjunction",
+    "pqf-def-locnoeth"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-cohomology.tex",
+    "place": "Tag 07UB (lemma-coherent-Noetherian), affine chart characterization; spaces-properties.tex Tags 03LV/03LW; descent.tex Tags 03DX and 06VE(5); coherent.tex Tag 01XZ; properties.tex Tag 01PB; schemes.tex Tags 01HV, 01I9 and 01IA."
+   }
+  },
+  {
+   "text": "For $u:F\\to G$ coherent, on the chart $V$ of step 1 write $F|_V\\simeq A_V(H_F)$ and $G|_V\\simeq A_V(H_G)$ with $H_F,H_G$ coherent. Full faithfulness of [lem-trf-scheme-zariski-etale-quasi-coherent-equivalence] lifts $u|_V$ to a Zariski module map $h:H_F\\to H_G$. By [lem-weil-pbc-coherent-modules-kernel-cokernel-sum](1), its scheme kernel $K$ and cokernel $C$ are coherent, and so is the image of $h$, the cokernel of $K\\to H_F$; all three are quasi-coherent by [pqf-lem-coherent-ft-locnoeth]. Exactness of $A_V$ in [lem-sfb-scheme-etale-module-exact-finiteness-comparison] applied to $0\\to K\\to H_F\\to\\operatorname{Im}h\\to0$ and $0\\to\\operatorname{Im}h\\to H_G\\to C\\to0$ identifies $A_V(K)$ and $A_V(C)$ with the ambient etale kernel and cokernel of $u|_V$. Exact restriction from step 1 identifies these with $(\\ker u)|_V$ and $(\\operatorname{coker}u)|_V$. The converse comparison of step 1 gives the required finite-module formulas for these two restrictions. Since $V$ was an arbitrary Noetherian affine etale chart, this proves both global coherence assertions.",
+   "uses": [
+    "lem-trf-scheme-zariski-etale-quasi-coherent-equivalence",
+    "lem-weil-pbc-coherent-modules-kernel-cokernel-sum",
+    "pqf-lem-coherent-ft-locnoeth",
+    "lem-sfb-scheme-etale-module-exact-finiteness-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-cohomology.tex",
+    "place": "Tag 07UC (lemma-coherent-abelian-Noetherian), reduction to schemes; modules.tex Tag 01BY(2),(3), coherent.tex Tag 01XZ, descent.tex Tags 03DX and 06VE(5)."
+   }
+  },
+  {
+   "text": "For $0\\to F\\to E\\to G\\to0$ with coherent endpoints, step 1 makes $F,G$ quasi-coherent on $Z$. Thus [lem-sfb-space-qcoh-extension-closed] makes $E$ quasi-coherent, without any prior assumption on $E$. Exact restriction to $V$ gives a short exact sequence of etale modules. The equivalence [lem-trf-scheme-zariski-etale-quasi-coherent-equivalence] writes its terms and maps as the $A_V$-images of a complex $H_F\\to H_E\\to H_G$ of quasi-coherent Zariski modules. This complex is short exact: its kernels, images, cokernels and homology are quasi-coherent by [lem-weil-pbc-quasi-coherent-module-kernel] and [lem-weil-pbc-quasi-coherent-module-cokernel-image]; the exact functor $A_V$ of [lem-sfb-scheme-etale-module-exact-finiteness-comparison] sends its three homology objects to zero. Full faithfulness reflects zero objects (the identity of an object mapping to zero must be zero), so all three homology objects vanish. Step 1 says $H_F,H_G$ are coherent. The extension clause (2) of [lem-weil-pbc-coherent-modules-kernel-cokernel-sum] now gives coherence of $H_E$. The converse comparison of step 1 gives the finite-module formula for $E|_V$. This holds on every chart $V$, proving coherence of $E$.",
+   "uses": [
+    "lem-sfb-space-qcoh-extension-closed",
+    "lem-trf-scheme-zariski-etale-quasi-coherent-equivalence",
+    "lem-weil-pbc-quasi-coherent-module-kernel",
+    "lem-weil-pbc-quasi-coherent-module-cokernel-image",
+    "lem-sfb-scheme-etale-module-exact-finiteness-comparison",
+    "lem-weil-pbc-coherent-modules-kernel-cokernel-sum"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-cohomology.tex",
+    "place": "Tag 07UC, extension case in the scheme reduction; spaces-properties.tex Tag 03M1(4); descent.tex Tags 03DX and 06VE(5); schemes.tex Tags 01IC and 01LB; modules.tex Tag 01BY(4)."
+   }
+  },
+  {
+   "text": "The zero module on every affine chart is $B\\mapsto B\\otimes_R0=0$, and the zero $R$-module is generated by the empty set. Hence the zero module is coherent. If $F\\simeq F'$ and $F$ is coherent, restrict the isomorphism to a chart and compose its inverse with $F|_V\\simeq(B\\mapsto B\\otimes_RN)$. This gives the same finite-module formula for $F'|_V$ with the same finitely generated $N$. The inverse isomorphism gives the converse, so coherence is invariant under isomorphism.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-cohomology.tex",
+    "place": "Tag 07UB (lemma-coherent-Noetherian), explicit affine finite-module condition; zero and isomorphism invariance follow from the condition itself."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-trf-algebraic-space",
+  "lem-pur-site-restriction-module-adjunction-exact",
+  "lem-trf-scheme-zariski-etale-quasi-coherent-equivalence",
+  "lem-sfb-scheme-etale-module-exact-finiteness-comparison",
+  "lem-weil-pbc-spec-module-tilde-sections",
+  "lem-weil-pbc-tilde-pullback-base-change",
+  "def-trf-space-quasi-coherent-module",
+  "lem-weil-pbc-quasi-coherent-finite-type-affine",
+  "pqf-lem-coherent-ft-locnoeth",
+  "lem-weil-pbc-affine-tilde-gamma-adjunction",
+  "lem-weil-pbc-coherent-modules-kernel-cokernel-sum",
+  "lem-sfb-space-qcoh-extension-closed",
+  "lem-weil-pbc-quasi-coherent-module-kernel",
+  "lem-weil-pbc-quasi-coherent-module-cokernel-image",
+  "pqf-def-locnoeth"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/spaces-cohomology.tex",
+  "place": "Tag 07UC (lemma-coherent-abelian-Noetherian), exact etale localization and scheme closure, with the convention comparison expanded using Tag 07UB."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "coherent|IsCoherent",
+   "results": "{\"t\": \"2026-10-23T09:34:30Z\", \"tool\": \"grep\", \"query\": \"coherent|IsCoherent\", \"sub\": \"Algebra/Category/ModuleCat/Sheaf\", \"ok\": true, \"n_hits\": 10, \"note\": \"\", \"top\": [\"Mathlib/Algebra/Category/ModuleCat/Sheaf/LocallyFree.lean\", \"Mathlib/Algebra/Category/ModuleCat/Sheaf/LocallyFree.lean\", \"Mathlib/Algebra/Category/ModuleCat/Sheaf/LocallyFree.lean\", \"Mathlib/Algebra/Category/ModuleCat/Sheaf/LocallyFree.lean\", \"Mathlib/Algebra/Category/ModuleCat/Sheaf/LocallyFree.lean\", \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent.lean\", \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent.lean\", \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent.lean\"], \"digest\": \"4ba44ec0dcd3f25c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: ambient abelianness, quasi-coherence, finite presentation and finite-module abelianness do not assert closure of coherent modules on the small etale ringed site; FGModuleCat.instAbelian has no etale descent comparison."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Coherent modules form a weak Serre subcategory on a locally Noetherian algebraic space",
+   "results": "{\"t\": \"2026-10-23T09:34:31Z\", \"tool\": \"leansearch\", \"query\": \"Coherent modules form a weak Serre subcategory on a locally Noetherian algebraic space\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.ObjectProperty.IsSerreClass.toIsClosedUnderSubobjects\", \"CategoryTheory.ObjectProperty.instIsSerreClassTop\", \"CategoryTheory.ObjectProperty.IsSerreClass.mk\", \"CategoryTheory.ObjectProperty.IsSerreClass\", \"SheafOfModules.IsQuasicoherent.mk\", \"CategoryTheory.ObjectProperty.epiModSerre\", \"FGModuleCat.instAbelian\", \"SheafOfModules.QuasicoherentData.I\"], \"digest\": \"1c590373af5a205c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: ambient abelianness, quasi-coherence, finite presentation and finite-module abelianness do not assert closure of coherent modules on the small etale ringed site; FGModuleCat.instAbelian has no etale descent comparison."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsCoherent\"",
+   "results": "{\"t\": \"2026-10-23T09:34:31Z\", \"tool\": \"loogle\", \"query\": \"\\\"IsCoherent\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"Topology.IsCoherentWith\", \"Topology.IsCoherentWith.isOpen_of_forall_induced\", \"Topology.IsCoherentWith.mk\", \"Topology.IsCoherentWith.mono\", \"Topology.IsCoherentWith.of_continuous_prop\", \"Topology.IsCoherentWith.of_nhds\", \"Topology.IsCoherentWith.continuous_iff\", \"Topology.IsCoherentWith.of_seq\"], \"digest\": \"5503d5669b62f8e0\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: ambient abelianness, quasi-coherence, finite presentation and finite-module abelianness do not assert closure of coherent modules on the small etale ringed site; FGModuleCat.instAbelian has no etale descent comparison."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Coherent sheaves of modules on a locally Noetherian algebraic space are closed under kernels cokernels and extensions",
+   "results": "{\"t\": \"2026-10-23T09:34:41Z\", \"tool\": \"leanfinder\", \"query\": \"Coherent sheaves of modules on a locally Noetherian algebraic space are closed under kernels cokernels and extensions\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Modules.instAbelian\", \"AlgebraicGeometry.Scheme.Modules.instHasColimits\", \"AlgebraicGeometry.Scheme.Modules.instCategory\", \"SheafOfModules.instAbelian\", \"SheafOfModules.isFinitePresentation\", \"SheafOfModules.isQuasicoherent\", \"SheafOfModules.IsFiniteType\", \"LightCondensed.instIsGrothendieckAbelianLightCondMod\"], \"digest\": \"caa42cc4a9b822bd\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: ambient abelianness, quasi-coherence, finite presentation and finite-module abelianness do not assert closure of coherent modules on the small etale ringed site; FGModuleCat.instAbelian has no etale descent comparison."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Kernels cokernels and middle terms of extensions of coherent module sheaves on an etale ringed site remain coherent",
+   "results": "{\"t\": \"2026-10-23T09:34:42Z\", \"tool\": \"leanfinder\", \"query\": \"Kernels cokernels and middle terms of extensions of coherent module sheaves on an etale ringed site remain coherent\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Modules.instAbelian\", \"SheafOfModules.instAbelian\", \"LightCondensed.instIsGrothendieckAbelianLightCondMod\", \"instAbelianCondensedMod\", \"instAbelianLightCondMod\", \"CategoryTheory.Sheaf.H\", \"SheafOfModules.isQuasicoherent\", \"SheafOfModules.IsQuasicoherent\"], \"digest\": \"0341611f113cf7e0\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: ambient abelianness, quasi-coherence, finite presentation and finite-module abelianness do not assert closure of coherent modules on the small etale ringed site; FGModuleCat.instAbelian has no etale descent comparison."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Coherent modules on a locally Noetherian algebraic space have coherent kernels cokernels and extensions",
+   "results": "{\"t\": \"2026-10-23T12:04:20Z\", \"tool\": \"leansearch\", \"query\": \"Coherent modules on a locally Noetherian algebraic space have coherent kernels cokernels and extensions\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Modules.instAbelian\", \"FGModuleCat.instAbelian\", \"isNoetherian_of_range_eq_ker\", \"AlgebraicGeometry.LocallyRingedSpace.instHasCoequalizers\", \"ModuleCat.cokernelIsColimit\", \"instAB4ModuleCat\", \"SheafOfModules.IsQuasicoherent.casesOn\", \"SheafOfModules.QuasicoherentData.I\"], \"digest\": \"e217a27fc7e618aa\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern ambient abelianness, topological coherence, or finite presentation/quasi-coherence; none gives the stated coherent algebraic-space subcategory closure."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Coherent sheaves on a locally Noetherian algebraic space form an abelian subcategory closed under extensions",
+   "results": "{\"t\": \"2026-10-23T12:06:30Z\", \"tool\": \"leanfinder\", \"query\": \"Coherent sheaves on a locally Noetherian algebraic space form an abelian subcategory closed under extensions\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Modules.instAbelian\", \"AlgebraicGeometry.Scheme.Modules.instHasColimits\", \"AlgebraicGeometry.IsLocallyNoetherian\", \"instAbelianLightCondMod\", \"CategoryTheory.Sheaf.instIsGrothendieckAbelian\", \"LightCondensed.instIsGrothendieckAbelianLightCondMod\", \"CategoryTheory.Sheaf.isGrothendieckAbelian_of_essentiallySmall\", \"instAbelianCondensedMod\"], \"digest\": \"0820d2e65e05a870\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern ambient abelianness, topological coherence, or finite presentation/quasi-coherence; none gives the stated coherent algebraic-space subcategory closure."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Kernel cokernel and extension closure for finite presentation module sheaves on locally Noetherian etale sites",
+   "results": "{\"t\": \"2026-10-23T12:10:57Z\", \"tool\": \"leanfinder\", \"query\": \"Kernel cokernel and extension closure for finite presentation module sheaves on locally Noetherian etale sites\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SheafOfModules.IsFinitePresentation\", \"SheafOfModules.QuasicoherentData.IsFinitePresentation.isFinite_presentation\", \"SheafOfModules.isFinitePresentation\", \"SheafOfModules.quasicoherentDataOfIsFinitePresentation\", \"SheafOfModules.QuasicoherentData.IsFinitePresentation\", \"SheafOfModules.instIsFiniteTypeOfIsFinitePresentation\", \"SheafOfModules.Presentation.IsFinite\", \"SheafOfModules.IsFinitePresentation.exists_quasicoherentData\"], \"digest\": \"4964fdfe53347253\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern ambient abelianness, topological coherence, or finite presentation/quasi-coherence; none gives the stated coherent algebraic-space subcategory closure."
+  },
+  {
+   "tool": "grep",
+   "query": "IsFinitePresentation|instAbelian|[Cc]oherent",
+   "results": "{\"t\": \"2026-10-23T12:36:25Z\", \"tool\": \"grep\", \"query\": \"IsFinitePresentation|instAbelian|[Cc]oherent\", \"sub\": \"Algebra/Category/ModuleCat/Sheaf\", \"ok\": true, \"n_hits\": 10, \"note\": \"\", \"top\": [\"Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent.lean\", \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent.lean\", \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent.lean\", \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent.lean\", \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent.lean\", \"Mathlib/Algebra/Category/ModuleCat/Sheaf/LocallyFree.lean\", \"Mathlib/Algebra/Category/ModuleCat/Sheaf/LocallyFree.lean\", \"Mathlib/Algebra/Category/ModuleCat/Sheaf/LocallyFree.lean\"], \"digest\": \"5c4b1e1ca9c7434d\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern ambient abelianness, topological coherence, or finite presentation/quasi-coherence; none gives the stated coherent algebraic-space subcategory closure."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Exact pullback of module sheaves along an etale morphism of algebraic spaces preserves kernels cokernels and short exact sequences",
+   "results": "{\"t\": \"2026-10-23T13:34:19Z\", \"tool\": \"leanfinder\", \"query\": \"Exact pullback of module sheaves along an etale morphism of algebraic spaces preserves kernels cokernels and short exact sequences\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsEtale.instIsStableUnderBaseChangeScheme\", \"AlgebraicGeometry.Scheme.Modules.instAdditivePullback\", \"AlgebraicGeometry.Scheme.Modules.instAbelian\", \"AlgebraicGeometry.Scheme.instHasPullbacksEtale\", \"AlgebraicGeometry.IsEtale.instHasOfPostcompPropertyScheme\", \"AlgebraicGeometry.Scheme.Modules.instIsLeftAdjointPullback\", \"AlgebraicGeometry.Scheme.Modules.pullback\", \"KaehlerDifferential.exact_mapBaseChange_map\"], \"digest\": \"89250f15f211d458\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme/module pullback infrastructure does not state exact algebraic-space small-etale restriction or coherent closure."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.PreservesFiniteLimits, CategoryTheory.PreservesFiniteColimits, AlgebraicGeometry",
+   "results": "{\"t\": \"2026-10-23T13:34:20Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.PreservesFiniteLimits, CategoryTheory.PreservesFiniteColimits, AlgebraicGeometry\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"loogle: unknown identifier 'CategoryTheory.PreservesFiniteLimits'\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "query rejected: unknown identifier; no absence inference taken from this query."
+  },
+  {
+   "tool": "grep",
+   "query": "lemma-etale-exact-pullback|exact.*pullback|pullback.*exact",
+   "results": "{\"t\": \"2026-10-23T13:34:20Z\", \"tool\": \"grep\", \"query\": \"lemma-etale-exact-pullback|exact.*pullback|pullback.*exact\", \"sub\": \"Algebra/Category/ModuleCat/Sheaf\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme/module pullback infrastructure does not state exact algebraic-space small-etale restriction or coherent closure."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Etale pullback of sheaves of modules on algebraic spaces is exact",
+   "results": "{\"t\": \"2026-10-23T13:34:21Z\", \"tool\": \"leansearch\", \"query\": \"Etale pullback of sheaves of modules on algebraic spaces is exact\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Modules.pullback\", \"SheafOfModules.pullback\", \"SheafOfModules.instIsLeftAdjointPullback\", \"SheafOfModules.pullbackPushforwardAdjunction\", \"AlgebraicGeometry.Scheme.Modules.pullbackPushforwardAdjunction\", \"AlgebraicGeometry.Scheme.Modules.instAdditivePullback\", \"AlgebraicGeometry.Scheme.Modules.restrictStalkNatIso\", \"SheafOfModules.pullbackObjFreeIso.congr_simp\"], \"digest\": \"efc97cee020ee5ee\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme/module pullback infrastructure does not state exact algebraic-space small-etale restriction or coherent closure."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-proper-space-coherent-derived-image",
+  "date": "2026-10-23",
+  "group": "N5"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Algebraicity and smoothness of the stack of all nodal curves. Supporting input: Tag 0D57 (lemma-curves-tangent-space), both clauses (finite type fields over Z and arbitrary fields). Tangent-finiteness proof: Tag 0D0T (lemma-ext-finite), for K in D^-_Coh and L in D^+_Coh. Supporting input of Tag 0D0T: Tag 0D0R applied with Y=Spec(A) supplies coherent cohomology after proper direct image. Input of Tag 0D0R through the proof of Tag 08GK: passage from coherent E_2 terms to coherent stable terms and their finite extensions.",
+   "via": [
+    "lem-sfb-proper-space-coherent-derived-image",
+    "lem-sfb-proper-space-coherent-ext-finite",
+    "lem-sfb-curve-tangent-finiteness",
+    "lem-sfb-nodal-curve-stack-smooth",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-space-coherent-kernel-cokernel-extension",
+  "worker": "stage1",
+  "summary": "Repair of the returned dependency cycle: replaced the citation of lem-sfb-space-coherent-abelian (now downstream of this item) by exact etale-chart restriction, exact scheme Zariski/etale comparison, scheme coherent closure, and quasi-coherent extension closure. Statement and inherited metadata unchanged; no new nodes.",
+  "blueprint": "Current latest det-thm-sf-ctf-stability-direct-images, proof (3), direct-image preservation; inherited supporting chain through proper coherent direct image: coherent spectral-sequence subquotients and finite extensions. The existing blueprint.from.place and ancestry are retained. Blueprint searches for coherent, 07UB, 07UC, coherent.*kernel and coherent.*extension found no blueprint statement of this closure lemma.",
+  "tool_uses": [
+   {
+    "node": "lem-pur-site-restriction-module-adjunction-exact",
+    "why": "Exact restriction to a localized ringed site is the generic tool identifying ambient kernels, cokernels and short exact sequences on etale charts. No same-unit node supplies this generic statement."
+   },
+   {
+    "node": "lem-trf-scheme-zariski-etale-quasi-coherent-equivalence",
+    "why": "The generic fully faithful Zariski/small-etale comparison identifies chart modules and lifts their maps. No same-unit node supplies this generic statement."
+   },
+   {
+    "node": "lem-weil-pbc-spec-module-tilde-sections",
+    "why": "The associated module on an affine scheme is quasi-coherent and has its expected global sections, used to identify the explicit tensor formula. No same-unit node supplies this generic statement."
+   },
+   {
+    "node": "lem-weil-pbc-tilde-pullback-base-change",
+    "why": "The generic affine pullback formula identifies chart values as B tensor_R N. No same-unit node supplies this generic statement."
+   },
+   {
+    "node": "lem-weil-pbc-quasi-coherent-finite-type-affine",
+    "why": "The generic affine criterion compares finitely generated chart sections with finite type. No same-unit node supplies this generic statement."
+   },
+   {
+    "node": "pqf-lem-coherent-ft-locnoeth",
+    "why": "The generic locally Noetherian scheme criterion identifies coherent modules with quasi-coherent finite-type modules. No same-unit node supplies this generic statement."
+   },
+   {
+    "node": "lem-weil-pbc-affine-tilde-gamma-adjunction",
+    "why": "The affine quasi-coherent counit identifies H with the tilde sheaf of H(V). No same-unit node supplies this generic statement."
+   },
+   {
+    "node": "lem-weil-pbc-coherent-modules-kernel-cokernel-sum",
+    "why": "Scheme coherent closure is precisely the scheme input of Stacks 07UC; no same-unit lemma replaces this input without depending on this item. No same-unit node supplies this generic statement."
+   },
+   {
+    "node": "lem-weil-pbc-quasi-coherent-module-kernel",
+    "why": "Scheme quasi-coherent kernels allow the exact faithful comparison to detect short exactness of the lifted complex. No same-unit node supplies this generic statement."
+   },
+   {
+    "node": "lem-weil-pbc-quasi-coherent-module-cokernel-image",
+    "why": "Scheme quasi-coherent images and cokernels ensure that the lifted complex has quasi-coherent homology. No same-unit node supplies this generic statement."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pur-site-restriction-module-adjunction-exact",
+  "lem-trf-scheme-zariski-etale-quasi-coherent-equivalence",
+  "lem-weil-pbc-spec-module-tilde-sections",
+  "lem-weil-pbc-tilde-pullback-base-change",
+  "lem-weil-pbc-quasi-coherent-finite-type-affine",
+  "pqf-lem-coherent-ft-locnoeth",
+  "lem-weil-pbc-affine-tilde-gamma-adjunction",
+  "lem-weil-pbc-coherent-modules-kernel-cokernel-sum",
+  "lem-weil-pbc-quasi-coherent-module-kernel",
+  "lem-weil-pbc-quasi-coherent-module-cokernel-image"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q86-859b51ee2",
+  "group": "Q86",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q86-859b51ee2 (reviewer sub-agent of L); spot-checked: Read in full: the item (4 steps, statement unchanged, no new nodes); Stacks spaces-cohomology 07UB (l.1877) and 07UC (l.1909); spaces-properties 03M1(4); and all 14 cited statements. This is a real repair of the landing cycle: the citation of lem-sfb-space-coherent-abelian is gone, and the closures of the 14 proof_deps no longer contain the item. The route is that of the 07UC proof: exact chart restriction, the exact fully faithful Zar/et comparison A_V, and scheme 01BY. The extension clause first proves E quasi-coherent via 03M1(4) and then reflects exactness by faithfulness. Correct. Two small repairs, written to fixes/dag/nodes/sec-six-functors-basics/<item>.json. (C4) Step 1 took 'an affine open cover' of each object of Z_et without citing pqf-def-locnoeth, and the item only describes charts with R Noetherian; 01OX is not given by any node. The step now takes the Noetherian affine cover from [pqf-def-locnoeth], which also gives that V is locally Noetherian for 01XZ. pqf-def-locnoeth is added to the uses and proof_deps; it is already a stmt_dep. (E5) Step 2 now says that Im h = coker(K→H_F) is coherent, hence quasi-coherent, and names the two short exact sequences to which the exactness of A_V is applied. Batch-5: lem-trf-scheme-zariski-etale-quasi-coherent-equivalence (03DX), the exact-finiteness comparison (06VE, reaching trf only through that node) and def-trf-space-quasi-coherent-module (03G9) are generic algebraic-space foundations. Their trf closure lies entirely in sk-i-curve-zero, they are not steps of the proof of the trace formula or of Poincaré duality, and so they are accepted. All 10 tool_uses are accepted as the generic scheme inputs of the source's reduction. Edge cases checked: empty Z, zero/identity maps, Spec k and k[ε] extensions. No SGA source is cited.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.AlgebraicSpaceCoherentKernelCokernelExtension",
+  "declaration": "AlgebraicGeometry.AlgebraicSpace.coherent_kernel_cokernel_extension",
+  "file": "lean/Sheaf/AlgebraicGeometry/AlgebraicSpaceCoherentKernelCokernelExtension.lean",
+  "statement": "theorem coherent_kernel_cokernel_extension {S : Scheme.{u}} (Z : AlgebraicSpace S) (hln : ∀ T : Z.EtaleSite, IsLocallyNoetherian (Z.etaleForget.obj T)) : SheafOfModules.IsFinitePresentation (⊤_ Z.Modules) ∧ (∀ (F G : Z.Modules) (f : F ⟶ G), F.IsFinitePresentation → G.IsFinitePresentation → (∀ k : KernelFork f, IsLimit k → k.pt.IsFinitePresentation) ∧ (∀ c : CokernelCofork f, IsColimit c → c.pt.IsFinitePresentation)) ∧ (∀ c : ShortComplex Z.Modules, c.ShortExact → c.X₁.IsFinitePresentation → c.X₃.IsFinitePresentation → c.X₂.IsFinitePresentation) ∧ (∀ (F G : Z.Modules) (_e : F ≅ G), F.IsFinitePresentation ↔ G.IsFinitePresentation)",
+  "branch": "newtargets-dag",
+  "by": "Q26",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "Coherence is the existing SheafOfModules.IsFinitePresentation predicate, equivalent to the node’s finite affine-chart tensor formula by Stacks 07UB under the locally Noetherian hypothesis. Kernel and cokernel objects are quantified by their ambient universal properties, and the terminal module is zero. The added already-landed statement dependency provides the existing site predicates and slice sheafification instances; no new definition or mathematical hypothesis is introduced."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-86faaff0a",
+  "group": "Q26",
+  "result": "pass",
+  "note": "Read the item, all 7 stmt_deps, Stacks 07UB/07UC, Mathlib IsFinitePresentation/QuasicoherentData, the landed sibling AlgebraicSpaceCoherentAbelian and the AlgebraicSpace/QCoh modules. Clauses match: S, Z, hln on all etale charts, Z.Modules ambient, coherence = IsFinitePresentation (07UB(1)<=>(3) under hln, same encoding as landed siblings), zero via the terminal object, kernel/cokernel via universal properties in all module sheaves, free middle term of the short exact sequence, iso-invariance iff. No extra hypotheses or universe restriction; empty Z and zero cases covered. Added stmt_dep def-trf-space-quasi-coherent-module is landed (allowed) and supplies the needed slice sheafification instances. lean.statement verbatim; no defs; proof is sorry; docstrings give source, blueprint and the 4 proof steps; proof imports exist and none is downstream. No fixes, no compile run."
+ }
+}

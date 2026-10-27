@@ -1,0 +1,292 @@
+{
+ "id": "lem-sfb-evaluation-duality-completion",
+ "kind": "statement",
+ "title": "Canonical evaluation duality and preservation of augmented derived completion",
+ "statement": "Let $(\\mathcal C,R)$ be a ringed site small in the module universe [def-weil-size-convention, def-weil-sheaf-of-modules-category]. Use the unbounded derived category $D(R)$, its K-flat symmetric derived tensor, and its closed derived internal Hom [def-weil-abstract-derived-category, def-pc-kflat-complex, def-pc-tensor-complex-sheaves, def-pur-derived-internal-hom]. Let $M\\in D(R)$, put $D=R\\mathcal Hom_R(M,R)$ and let $e:D\\otimes_R^{\\mathbf L}M\\to R$ be evaluation. Suppose that for every $N\\in D(R)$ the canonical transpose\n$$u_N:N\\otimes_R^{\\mathbf L}D\\longrightarrow R\\mathcal Hom_R(M,N)$$\nof contraction with $e$ is an isomorphism. Define $c:R\\to M\\otimes_R^{\\mathbf L}D$ as the element corresponding to $1_M$ under the closed adjunction and $u_M$.\n\nThen, with the canonical associators and unitors suppressed, the actual maps $e,c$ satisfy\n$$(1_M\\otimes e)(c\\otimes1_M)=1_M,\\qquad(e\\otimes1_D)(1_D\\otimes c)=1_D.$$\nThey induce both tensor adjunctions $M\\otimes_R^{\\mathbf L}-\\dashv D\\otimes_R^{\\mathbf L}-$ and $D\\otimes_R^{\\mathbf L}-\\dashv M\\otimes_R^{\\mathbf L}-$. In particular $T_M=M\\otimes_R^{\\mathbf L}-$ preserves all products that exist and every sequential homotopy-limit cone.\n\nMore generally let $(B_n)_{n\\geq1}$ be a tower of commutative $R$-algebra sheaves with compatible unit maps $R\\to B_n$. Define $C_B(N)=R\\varprojlim_n(N\\otimes_R^{\\mathbf L}B_n)$, with canonical map $\\eta_N:N\\to C_B(N)$. Here sequential derived limits mean the Roos/Milnor homotopy limits, the fibre of $1-t:\\prod_nN_n\\to\\prod_nN_n$, with $t$ induced by the tower transitions [lem-pc-homotopy-limit-map]. The associators and canonical product/limit comparisons give a natural isomorphism\n$$T_MC_B(N)\\xrightarrow{\\sim}C_B(T_MN)$$\nwhose composite with $T_M(\\eta_N)$ equals $\\eta_{T_MN}$. Thus $T_M$ preserves the objects for which $\\eta_N$ is an isomorphism. This includes derived $\\pi$-complete objects for $B_n=R/(\\pi^n)$, and also the finite-coefficient reduction tower used for a pulled-back completed integral coefficient sheaf.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-int-tensor/det-lem-int-tensor-product.proof.md",
+  "place": "First paragraph, evaluation/coevaluation, both triangle identities, products, sequential inverse limits, and the canonical completion map; old split steps 4 and 5. Supporting Stacks Tag 0FPU (example-dual-derived), whose omitted duality verification is retained in the report."
+ },
+ "stmt_deps": [
+  "def-weil-size-convention",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-abstract-derived-category",
+  "def-pc-kflat-complex",
+  "def-pc-tensor-complex-sheaves",
+  "def-pur-derived-internal-hom",
+  "lem-pc-homotopy-limit-map",
+  "def-sfb-augmented-algebra-tower-completion-model",
+  "lem-sf-ringed-derived-tensor-hom-adjunction",
+  "def-sf-coefficient-evaluation-transpose"
+ ],
+ "proof": [
+  {
+   "text": "Write $[M,N]=R\\mathcal Hom_R(M,N)$. The evaluation-normalized closed adjunction of [lem-sf-ringed-derived-tensor-hom-adjunction] identifies the transpose of $u_M c$ with $(1_M\\otimes e)(c\\otimes1_M)$. By the definition of $c$, $u_Mc$ is the transpose of $1_M$. Injectivity of this adjunction bijection gives the first triangle identity $f:=(1_M\\otimes e)(c\\otimes1_M)=1_M$. All tensors below are derived, and the fixed symmetric associators and unitors are suppressed.",
+   "uses": [
+    "lem-sf-ringed-derived-tensor-hom-adjunction"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-int-tensor/det-lem-int-tensor-product.proof.md",
+    "place": "First paragraph, evaluation/coevaluation, both triangle identities, products, sequential inverse limits, and the canonical completion map; old split steps 4 and 5. Supporting Stacks Tag 0FPU (example-dual-derived), whose omitted duality verification is retained in the report."
+   }
+  },
+  {
+   "text": "Put $h=(e\\otimes1_D)(1_D\\otimes c)$. Functoriality of tensor gives\n$$e(h\\otimes1_M)=e(1_D\\otimes1_M\\otimes e)(1_D\\otimes c\\otimes1_M)=e(1_D\\otimes f)=e.$$\nFor the middle equality, interchange the two evaluations $e$ on $D\\otimes M\\otimes D\\otimes M$: applying either evaluation first and then the other is $e\\otimes e$ followed by $R\\otimes R\\cong R$. Curry the displayed equality under [lem-sf-ringed-derived-tensor-hom-adjunction]. Since $D=[M,R]$ and $e$ is its actual evaluation, the transpose of $e(h\\otimes1_M)$ is $h$, and the transpose of $e$ is $1_D$. Thus $h=1_D$, the second triangle identity. This checks the maps themselves without local equality detection or a choice of duality data.",
+   "uses": [
+    "lem-sf-ringed-derived-tensor-hom-adjunction"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-int-tensor/det-lem-int-tensor-product.proof.md",
+    "place": "First paragraph, evaluation/coevaluation, both triangle identities, products, sequential inverse limits, and the canonical completion map; old split steps 4 and 5. Supporting Stacks Tag 0FPU (example-dual-derived), whose omitted duality verification is retained in the report."
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-dual-tensor-adjunctions] to the exact pairing $(M,D,e,c)$ just verified. It gives $T_D\\dashv T_M$ and $U_M\\dashv U_D$, where $T_A=A\\otimes-$ and $U_A=-\\otimes A$. Symmetry identifies $U_A$ with $T_A$, so the latter adjunction is $T_M\\dashv T_D$. The former makes $T_M$ a right adjoint and therefore proves preservation of all existing products (with their indexing sets in the chosen universe).",
+   "uses": [
+    "lem-sfb-dual-tensor-adjunctions"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-int-tensor/det-lem-int-tensor-product.proof.md",
+    "place": "First paragraph, evaluation/coevaluation, both triangle identities, products, sequential inverse limits, and the canonical completion map; old split steps 4 and 5. Supporting Stacks Tag 0FPU (example-dual-derived), whose omitted duality verification is retained in the report."
+   }
+  },
+  {
+   "text": "The native derived tensor already has its canonical shift comparison and the proved source-library instance DerivedCategory.isTriangulated_tensorLeft (WeilConjectures.CategoryTheory.DerivedCategory.Monoidal.Shift). Transport from the chosen closed structure using its monoidal equality. Since step 3 makes tensorLeft M a right adjoint, it preserves countable products. Apply lem-pc-homotopy-limit-map directly. No comparison with the separate KFlatFixedTensorTriangulated presentation is required. For completion, lem-pc-kflat-resolution is used through the proved K-flat localization of the native closed-adjunction module: its inclusion followed by Q is a localization and hence essentially surjective.",
+   "uses": [
+    "lem-sf-ringed-derived-native-tensor",
+    "lem-sf-ringed-derived-tensor-hom-adjunction",
+    "lem-pc-homotopy-limit-map"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-int-tensor/det-lem-int-tensor-product.proof.md",
+    "place": "First paragraph, evaluation/coevaluation, both triangle identities, products, sequential inverse limits, and the canonical completion map; old split steps 4 and 5. Supporting Stacks Tag 0FPU (example-dual-derived), whose omitted duality verification is retained in the report."
+   }
+  },
+  {
+   "text": "Construct a RoosLimit from lem-weil-pbc-ringed-strict-tower-homotopy-limit by taking its stated distinguished derived-limit triangles as Milnor cones. For a strict augmented algebra tower, tensoring a quasi-isomorphism between K-flat complexes is a quasi-isomorphism by the native invertible tensorators and naturality. Localize this strict tensor-tower functor to obtain an augmented completion Model. Descend its whole augmentation transformation through the fully faithful whiskering functor of that localization. For a K-flat representative A of M, apply lem-sfb-kflat-augmented-roos-comparison. Identify its derived tensor functor with tensorLeft (Q A) using the native tensorator and fully faithful whiskering by Q. Right-adjoint product preservation from step 3 makes the Roos comparison invertible.",
+   "uses": [
+    "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
+    "lem-sf-ringed-derived-native-tensor",
+    "lem-sf-ringed-derived-tensor-hom-adjunction",
+    "lem-sfb-kflat-augmented-roos-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-int-tensor/det-lem-int-tensor-product.proof.md",
+    "place": "First paragraph, evaluation/coevaluation, both triangle identities, products, sequential inverse limits, and the canonical completion map; old split steps 4 and 5. Supporting Stacks Tag 0FPU (example-dual-derived), whose omitted duality verification is retained in the report."
+   }
+  },
+  {
+   "text": "For a K-flat P, construct the strict tower isomorphism (A tensor P) tensor X_n ≅ A tensor (P tensor X_n) from the ordinary tensor associator. Its naturality checks every transition. The tensor unitor and associator equations identify the whole ordinary-limit lifts of the augmentations, not just projections of a derived limit. Convert ordinaryLimit to roosLimitFunctor by its canonical limit-cone isomorphism and transport the right-derived universal comparison accordingly. Combine the Model computation, the normalized Roos comparison, the inverse strict associator, the Model computation on A tensor P (which is K-flat by associativity and the two K-flat hypotheses), and the native tensorator. Their composite preserves the entire Model.unit by unit_computes and the Roos augmentation equation. Fully faithful whiskering through the K-flat localization descends this natural isomorphism and its unit equation to every derived object. Essential surjectivity of that localization supplies a representative of M; tensoring its isomorphism transports the conclusion from Q A to M.",
+   "uses": [
+    "lem-sfb-kflat-augmented-roos-comparison",
+    "def-pc-tensor-complex-sheaves",
+    "def-pc-kflat-complex",
+    "lem-sf-ringed-derived-native-tensor"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-int-tensor/det-lem-int-tensor-product.proof.md",
+    "place": "First paragraph, evaluation/coevaluation, both triangle identities, products, sequential inverse limits, and the canonical completion map; old split steps 4 and 5. Supporting Stacks Tag 0FPU (example-dual-derived), whose omitted duality verification is retained in the report."
+   }
+  },
+  {
+   "text": "If $\\eta_N$ is an isomorphism, so is $T_M(\\eta_N)$ because functors preserve inverses; its composite with $\\theta_N$ is therefore an isomorphism. By step 6 this composite is precisely $\\eta_{T_MN}$. This proves preservation of the complete objects for every algebra tower in the statement, including $B_n=R/(\\pi^n)$ and the finite-coefficient reduction tower of a pulled-back completed integral coefficient sheaf. No assertion of underived exact products, flat quotients, or regularity of $\\pi$ was needed.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-int-tensor/det-lem-int-tensor-product.proof.md",
+    "place": "First paragraph, evaluation/coevaluation, both triangle identities, products, sequential inverse limits, and the canonical completion map; old split steps 4 and 5. Supporting Stacks Tag 0FPU (example-dual-derived), whose omitted duality verification is retained in the report."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sf-ringed-derived-tensor-hom-adjunction",
+  "lem-sfb-dual-tensor-adjunctions",
+  "lem-sf-ringed-derived-native-tensor",
+  "lem-pc-homotopy-limit-map",
+  "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
+  "lem-sfb-kflat-augmented-roos-comparison",
+  "def-pc-tensor-complex-sheaves",
+  "def-pc-kflat-complex"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-int-tensor/det-lem-int-tensor-product.proof.md",
+  "place": "First proof paragraph, expanded with both triangle identities omitted in Stacks Tag 0FPU (sites-cohomology-example-dual-derived) and a normalized augmented Roos comparison. Lean realization by G2, 2026-10-23: native exactness; K-flat localization; whole-map augmented comparison and descent."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "If the canonical tensor dual to internal Hom map is an isomorphism for every target then evaluation and coevaluation satisfy both triangle identities and tensor preserves products derived inverse limits and derived adic completeness",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"LightCondensed.internallyProjective_iff_tensor_condition\", \"module\": \"Mathlib/Condensed/Light/InternallyProjective\", \"type\": \"∀ (R : Type u) [inst : CommRing R] (P : LightCondMod R),\\n  CategoryTheory.InternallyProjective P ↔\\n    ∀ {A B : LightCondMod R} (e : A ⟶ B) [CategoryTheory.Epi e] (S : LightProfinite)\\n      (g : CategoryTheory.MonoidalCategoryStruct.tensorObj P ((LightCondensed.free R).obj S.toCondensed) ⟶ B),\\n     \", \"doc\": \"Let $R$ be a commutative ring and $P$ be a light condensed $R$-module. $P$ is an internally projective object if and only if for every epimorphism $e: A \\\\to B$ of light condensed $R$-modules, any ligh\"}\n  {\"name\": \"LightCondensed.internallyProjective_iff_tensor_condition'\", \"module\": \"Mathlib/Condensed/Light/InternallyProjective\", \"type\": \"∀ (R : Type u) [inst : CommRing R] (P : LightCondMod R),\\n  CategoryTheory.InternallyProjective P ↔\\n    ∀ {A B : LightCondMod R} (e : A ⟶ B) [CategoryTheory.Epi e] (S : LightProfinite)\\n      (g : CategoryTheory.MonoidalCategoryStruct.tensorObj ((LightCondensed.free R).obj S.toCondensed) P ⟶ B),\\n     \", \"doc\": \"Let $R$ be a commutative ring. A light condensed $R$-module $P$ is internally projective if and only if for every epimorphism $e: A \\\\to B$ of light condensed $R$-modules, any light profinite space $S$\"}\n  {\"name\": \"LightCondensed.free_lightProfinite_internallyProjective_iff_tensor_condition\", \"module\": \"Mathlib/Condensed/Light/InternallyProjective\", \"type\": \"∀ (R : Type u) [inst : CommRing R] (P : LightProfinite),\\n  CategoryTheory.InternallyProjective ((LightCondensed.free R).obj P.toCondensed) ↔\\n    ∀ {A B : LightCondMod R} (e : A ⟶ B) [CategoryTheory.Epi e] (S : LightProfinite)\\n      (g : (LightCondensed.free R).obj (CategoryTheory.MonoidalCategoryStr\", \"doc\": \"For a light profinite space $ P $, the free $ R $-module $ \\\\text{Free}(P) $ is internally projective in the category of light condensed $ R $-modules if and only if for every epimorphism $ e: A \\\\to B \"}\n  {\"name\": \"LightCondensed.free_lightProfinite_internallyProjective_iff_tensor_condition'\", \"module\": \"Mathlib/Condensed/Light/InternallyProjective\", \"type\": \"∀ (R : Type u) [inst : CommRing R] (P : LightProfinite),\\n  CategoryTheory.InternallyProjective ((LightCondensed.free R).obj P.toCondensed) ↔\\n    ∀ {A B : LightCondMod R} (e : A ⟶ B) [CategoryTheory.Epi e] (S : LightProfinite)\\n      (g : (LightCondensed.free R).obj (CategoryTheory.MonoidalCategoryStr\", \"doc\": \"Let $R$ be a commutative ring and $P$ be a light profinite space. The free light condensed $R$-module on the condensed set associated with $P$, denoted $\\\\mathcal{F}(P)$, is internally projective if an\"}\n  {\"name\": \"LightCondensed.free_internallyProjective_iff_tensor_condition'\", \"module\": \"Mathlib/Condensed/Light/InternallyProjective\", \"type\": \"∀ (R : Type u) [inst : CommRing R] (P : LightCondSet),\\n  CategoryTheory.InternallyProjective ((LightCondensed.free R).obj P) ↔\\n    ∀ {A B : LightCondMod R} (e : A ⟶ B) [CategoryTheory.Epi e] (S : LightProfinite)\\n      (g : (LightCondensed.free R).obj (CategoryTheory.MonoidalCategoryStruct.tensorObj \", \"doc\": \"For any commutative ring $ R $, the category of light condensed $ R $-modules forms a monoidal closed category. This structure arises from the adjunction between sheafification and inclusion functors,\"}\n  {\"name\": \"LightCondensed.free_internallyProjective_iff_tensor_condition\", \"module\": \"Mathlib/Condensed/Light/InternallyProjective\", \"type\": \"∀ (R : Type u) [inst : CommRing R] (P : LightCondSet),\\n  CategoryTheory.InternallyProjective ((LightCondensed.free R).obj P) ↔\\n    ∀ {A B : LightCondMod R} (e : A ⟶ B) [CategoryTheory.Epi e] (S : LightProfinite)\\n      (g : (LightCondensed.free R).obj (CategoryTheory.MonoidalCategoryStruct.tensorObj \", \"doc\": \"For a light condensed set $ P $, the free $ R $-module $ \\\\text{free}_R(P) $ is internally projective in the category of light condensed $ R $-modules if and only if for every epimorphism $ e : A \\\\to B\"}\n  {\"name\": \"AdicCompletion.ofTensorProductEquivOfPiFintype\", \"module\": \"Mathlib/RingTheory/AdicCompletion/AsTensorProduct\", \"type\": \"{R : Type u_1} →\\n  [inst : CommRing R] →\\n    (I : Ideal R) →\\n      (ι : Type u_4) →\\n        [Fintype ι] →\\n          [DecidableEq ι] → TensorProduct R (AdicCompletion I R) (ι → R) ≃ₗ[AdicCompletion I R] AdicCompletion I (ι → R)\", \"doc\": \"For a commutative ring $ R $, an ideal $ I $, and a finite index type $ \\\\iota $ with decidable equality, this constructs a linear equivalence between the $ I $-adic completion of the product module $ \"}\n  {\"name\": \"LightCondensed.instMonoidalClosedFunctorOppositeLightProfiniteModuleCat\", \"module\": \"Mathlib/Condensed/Light/Monoidal\", \"type\": \"(R : Type u) →\\n  [inst : CommRing R] → CategoryTheory.MonoidalClosed (CategoryTheory.Functor LightProfiniteᵒᵖ (ModuleCat R))\", \"doc\": \"For any commutative ring $ R $, the category of functors from the opposite category of light profinite spaces to the category of left $ R $-modules forms a monoidal closed category. This structure is \"}",
+   "date": "2026-10-22",
+   "verdict": "no match: ExactPairing and tensor Hom bijections take an existing dual pair as input; the hits do not construct the specified duality from u_N or prove compatibility with augmented derived completion"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"MonoidalClosed\", \"ExactPairing\"",
+   "results": "[loogle] OK 0 hit(s)",
+   "date": "2026-10-22",
+   "verdict": "no match: ExactPairing and tensor Hom bijections take an existing dual pair as input; the hits do not construct the specified duality from u_N or prove compatibility with augmented derived completion"
+  },
+  {
+   "tool": "grep",
+   "query": "[Dd]ualiz|ExactPairing|[Dd]erived[Cc]omplet",
+   "results": "[grep] OK 23 hit(s)\n  {\"file\": \"Mathlib/CategoryTheory/Functor/Derived/PointwiseRightDerived.lean\", \"line\": \"22\", \"text\": \"by dualizing this file. These two files should be kept in sync.\"}\n  {\"file\": \"Mathlib/CategoryTheory/Functor/Derived/PointwiseLeftDerived.lean\", \"line\": \"21\", \"text\": \"Note: this file was obtained by dualizing the definitions in the file\"}\n  {\"file\": \"Mathlib/CategoryTheory/Functor/Derived/LeftDerived.lean\", \"line\": \"27\", \"text\": \"(This file was obtained by dualizing the results in the file\"}\n  {\"file\": \"Mathlib/CategoryTheory/Adjunction/PartialAdjoint.lean\", \"line\": \"32\", \"text\": \"* consider dualizing the results to right adjoints\"}\n  {\"file\": \"Mathlib/CategoryTheory/Category/Cat/Op.lean\", \"line\": \"12\", \"text\": \"# The dualizing functor on `Cat`\"}\n  {\"file\": \"Mathlib/CategoryTheory/RepresentedBy.lean\", \"line\": \"30\", \"text\": \"- Dualize to `IsCorepresentedBy`.\"}\n  {\"file\": \"Mathlib/CategoryTheory/Monoidal/Rigid/Basic.lean\", \"line\": \"20\", \"text\": \"* `ExactPairing` of two objects of a monoidal category\"}\n  {\"file\": \"Mathlib/CategoryTheory/Monoidal/Rigid/Basic.lean\", \"line\": \"46\", \"text\": \"Although we construct the adjunction `tensorLeft Y ⊣ tensorLeft X` from `ExactPairing X Y`,\"}\n  {\"file\": \"Mathlib/CategoryTheory/Monoidal/Rigid/Basic.lean\", \"line\": \"50\", \"text\": \"and `ExactPairing X Y` is in bijection with adjunctions compatible with this right `C` action.\"}\n  {\"file\": \"Mathlib/CategoryTheory/Monoidal/Rigid/Basic.lean\", \"line\": \"77\", \"text\": \"class ExactPairing (X Y : C) where\"}\n  {\"file\": \"Mathlib/CategoryTheory/Monoidal/Rigid/Basic.lean\", \"line\": \"80\", \"text\": \"  Do not use directly. Use `ExactPairing.coevaluation` instead. -/\"}\n  {\"file\": \"Mathlib/CategoryTheory/Monoidal/Rigid/Braided.lean\", \"line\": \"24\", \"text\": \"/-- `coevaluation_evaluation'` field of `ExactPairing Y X` in a braided category -/\"}\n  {\"file\": \"Mathlib/CategoryTheory/Monoidal/Rigid/Braided.lean\", \"line\": \"25\", \"text\": \"private theorem coevaluation_evaluation_braided' [inst : ExactPairing X Y] :\"}\n  {\"file\": \"Mathlib/CategoryTheory/Monoidal/Rigid/Braided.lean\", \"line\": \"51\", \"text\": \"/-- `evaluation_coevaluation'` field of `ExactPairing Y X` in a braided category -/\"}\n  {\"file\": \"Mathlib/CategoryTheory/Monoidal/Rigid/Braided.lean\", \"line\": \"52\", \"text\": \"private theorem evaluation_coevaluation_braided' [inst : ExactPairing X Y] :\"}\n  {\"file\": \"Mathlib/CategoryTheory/Monoidal/Rigid/Braided.lean\", \"line\": \"81\", \"text\": \"def exactPairing_swap (X Y : C) [ExactPairing X Y] : ExactPairing Y X where\"}\n  {\"file\": \"Mathlib/CategoryTheory/Monoidal/Rigid/OfEquivalence.lean\", \"line\": \"28\", \"text\": \"def ExactPairing.ofFaithful [F.Faithful] {X Y : C} (eval : Y ⊗ X ⟶ 𝟙_ C)\"}\n  {\"file\": \"Mathlib/CategoryTheory/Monoidal/Rigid/OfEquivalence.lean\", \"line\": \"29\", \"text\": \"    (coeval : 𝟙_ C ⟶ X ⊗ Y) [ExactPairing (F.obj X) (F.obj Y)]\"}\n  {\"file\": \"Mathlib/CategoryTheory/Monoidal/Rigid/OfEquivalence.lean\", \"line\": \"31\", \"text\": \"    (map_coeval : F.map coeval = (η F) ≫ η_ _ _ ≫ μ F _ _) : ExactPairing X Y where\"}\n  {\"file\": \"Mathlib/CategoryTheory/Monoidal/Rigid/OfEquivalence.lean\", \"line\": \"47\", \"text\": \"noncomputable def ExactPairing.ofFullyFaithful [F.Full] [F.Faithful] (X Y : C)\"}\n  {\"file\": \"Mathlib/CategoryTheory/Monoidal/Rigid/OfEquivalence.lean\", \"line\": \"48\", \"text\": \"    [ExactPairing (F.obj X) (F.obj Y)] : ExactPairing X Y :=\"}\n  {\"file\": \"Mathlib/CategoryTheory/Limits/Constructions/LimitsOfProductsAndEqualizers.lean\", \"line\": \"310\", \"text\": \"We now dualize the above constructions, resorting to copy-paste.\"}\n  {\"file\": \"Mathlib/CategoryTheory/Limits/Shapes/Countable.lean\", \"line\": \"255\", \"text\": \"For this we need to dualize this whole section.\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: ExactPairing and tensor Hom bijections take an existing dual pair as input; the hits do not construct the specified duality from u_N or prove compatibility with augmented derived completion"
+  },
+  {
+   "tool": "leansearch",
+   "query": "An evaluation tensor internal Hom isomorphism gives a dual pair whose tensor functor preserves products sequential homotopy limits and derived completion",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"dualTensorHomEquivOfBasis\", \"module\": \"Mathlib.LinearAlgebra.Contraction\", \"type\": \": Module.Dual R M ⊗[R] N ≃ₗ[R] M →ₗ[R] N\", \"doc\": \"Let $R$ be a commutative semiring, and let $M$ and $N$ be modules over $R$. If $M$ is a free module with a finite basis, then there is an $R$-linear isomorphism between the tensor product of the dual \"}\n  {\"name\": \"CategoryTheory.exp.ev\", \"module\": \"Mathlib.CategoryTheory.Monoidal.Closed.Cartesian\", \"type\": \"{C : Type u} →\\n  [inst : CategoryTheory.Category.{v, u} C] →\\n    [inst_1 : CategoryTheory.MonoidalCategory C] →\\n      (A : C) →\\n        [inst_2 : CategoryTheory.Closed A] →\\n          (CategoryTheory.ihom A).comp (CategoryTheory.MonoidalCategory.tensorLeft A) ⟶ CategoryTheory.Functor.id C\", \"doc\": \"In a closed monoidal category $\\\\mathcal{C}$, for any object $A$, this is the counit of the adjunction between the internal hom functor $[A, -]$ and the left tensoring functor $- \\\\otimes A$. It provide\"}\n  {\"name\": \"CategoryTheory.tensorRightHomEquiv_tensor\", \"module\": \"Mathlib.CategoryTheory.Monoidal.Rigid.Basic\", \"type\": \"{X X' Y Y' Z Z' : C} [ExactPairing Y Y'] (f : X ⟶ Z ⊗ Y') (g : X' ⟶ Z') :\\n  (tensorRightHomEquiv (X' ⊗ X) Y Y' (Z' ⊗ Z)).symm ((g ⊗ₘ f) ≫ (α_ _ _ _).inv) =\\n    (α_ _ _ _).hom ≫ (g ⊗ₘ (tensorRightHomEquiv X Y Y' Z).symm f)\", \"doc\": \"Given a monoidal category $\\\\mathcal{C}$ and dual objects $Y$ and $Y'$, there is a natural bijection between morphisms $X \\\\otimes Y \\\\to Z$ and morphisms $X \\\\to Z \\\\otimes Y'$. This equivalence is constr\"}\n  {\"name\": \"dualTensorHomEquiv\", \"module\": \"Mathlib.LinearAlgebra.Contraction\", \"type\": \": Module.Dual R M ⊗[R] N ≃ₗ[R] M →ₗ[R] N\", \"doc\": \"For a commutative semiring $ R $, a free $ R $-module $ M $, and an $ R $-module $ N $, the tensor product of the dual module $ M^* $ with $ N $ is linearly isomorphic to the module of $ R $-linear ma\"}\n  {\"name\": \"CategoryTheory.ihom.ev\", \"module\": \"Mathlib.CategoryTheory.Monoidal.Closed.Basic\", \"type\": \": ihom A ⋙ tensorLeft A ⟶ 𝟭 C\", \"doc\": \"In a closed monoidal category $\\\\mathcal{C}$, for any object $A$, the evaluation morphism is the counit of the adjunction between the internal hom functor $[A, -]$ and the left tensoring functor $- \\\\ot\"}\n  {\"name\": \"CategoryTheory.tensorRightHomEquiv\", \"module\": \"Mathlib.CategoryTheory.Monoidal.Rigid.Basic\", \"type\": \"(X Y Y' Z : C) [ExactPairing Y Y'] : (X ⊗ Y ⟶ Z) ≃ (X ⟶ Z ⊗ Y')\", \"doc\": \"Given a monoidal category $\\\\mathcal{C}$ and dual objects $Y$ and $Y'$, this equivalence establishes a natural bijection between morphisms $X \\\\otimes Y \\\\to Z$ and morphisms $X \\\\to Z \\\\otimes Y'$. The eq\"}\n  {\"name\": \"CategoryTheory.Limits.PreservesLimitPair.iso_hom\", \"module\": \"Mathlib.CategoryTheory.Limits.Preserves.Shapes.BinaryProducts\", \"type\": \": (PreservesLimitPair.iso G X Y).hom = prodComparison G X Y\", \"doc\": \"The hom component of the isomorphism between $ G(X \\\\times Y) $ and $ G(X) \\\\times G(Y) $ is equal to the product comparison morphism $ G(X \\\\times Y) \\\\to G(X) \\\\times G(Y) $ induced by the functor $ G $.\"}\n  {\"name\": \"CategoryTheory.tensorLeftHomEquiv\", \"module\": \"Mathlib.CategoryTheory.Monoidal.Rigid.Basic\", \"type\": \"(X Y Y' Z : C) [ExactPairing Y Y'] : (Y' ⊗ X ⟶ Z) ≃ (X ⟶ Y ⊗ Z)\", \"doc\": \"In a rigid monoidal category $\\\\mathcal{C}$, given objects $X,Z$ and dual objects $Y,Y'$ (with an exact pairing), there is a natural equivalence between the hom-set $\\\\text{Hom}(Y' \\\\otimes X, Z)$ and $\\\\\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: ExactPairing and tensor Hom bijections take an existing dual pair as input; the hits do not construct the specified duality from u_N or prove compatibility with augmented derived completion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "In a derived category of ring sheaves invertible canonical evaluation comparison implies rigid duality and compatibility of tensor with the canonical adic completion map",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"LightCondensed.internallyProjective_iff_tensor_condition'\", \"module\": \"Mathlib/Condensed/Light/InternallyProjective\", \"type\": \"∀ (R : Type u) [inst : CommRing R] (P : LightCondMod R),\\n  CategoryTheory.InternallyProjective P ↔\\n    ∀ {A B : LightCondMod R} (e : A ⟶ B) [CategoryTheory.Epi e] (S : LightProfinite)\\n      (g : CategoryTheory.MonoidalCategoryStruct.tensorObj ((LightCondensed.free R).obj S.toCondensed) P ⟶ B),\\n     \", \"doc\": \"Let $R$ be a commutative ring. A light condensed $R$-module $P$ is internally projective if and only if for every epimorphism $e: A \\\\to B$ of light condensed $R$-modules, any light profinite space $S$\"}\n  {\"name\": \"LightCondensed.internallyProjective_iff_tensor_condition\", \"module\": \"Mathlib/Condensed/Light/InternallyProjective\", \"type\": \"∀ (R : Type u) [inst : CommRing R] (P : LightCondMod R),\\n  CategoryTheory.InternallyProjective P ↔\\n    ∀ {A B : LightCondMod R} (e : A ⟶ B) [CategoryTheory.Epi e] (S : LightProfinite)\\n      (g : CategoryTheory.MonoidalCategoryStruct.tensorObj P ((LightCondensed.free R).obj S.toCondensed) ⟶ B),\\n     \", \"doc\": \"Let $R$ be a commutative ring and $P$ be a light condensed $R$-module. $P$ is an internally projective object if and only if for every epimorphism $e: A \\\\to B$ of light condensed $R$-modules, any ligh\"}\n  {\"name\": \"LightCondensed.free_internallyProjective_iff_tensor_condition\", \"module\": \"Mathlib/Condensed/Light/InternallyProjective\", \"type\": \"∀ (R : Type u) [inst : CommRing R] (P : LightCondSet),\\n  CategoryTheory.InternallyProjective ((LightCondensed.free R).obj P) ↔\\n    ∀ {A B : LightCondMod R} (e : A ⟶ B) [CategoryTheory.Epi e] (S : LightProfinite)\\n      (g : (LightCondensed.free R).obj (CategoryTheory.MonoidalCategoryStruct.tensorObj \", \"doc\": \"For a light condensed set $ P $, the free $ R $-module $ \\\\text{free}_R(P) $ is internally projective in the category of light condensed $ R $-modules if and only if for every epimorphism $ e : A \\\\to B\"}\n  {\"name\": \"LightCondensed.free_internallyProjective_iff_tensor_condition'\", \"module\": \"Mathlib/Condensed/Light/InternallyProjective\", \"type\": \"∀ (R : Type u) [inst : CommRing R] (P : LightCondSet),\\n  CategoryTheory.InternallyProjective ((LightCondensed.free R).obj P) ↔\\n    ∀ {A B : LightCondMod R} (e : A ⟶ B) [CategoryTheory.Epi e] (S : LightProfinite)\\n      (g : (LightCondensed.free R).obj (CategoryTheory.MonoidalCategoryStruct.tensorObj \", \"doc\": \"For any commutative ring $ R $, the category of light condensed $ R $-modules forms a monoidal closed category. This structure arises from the adjunction between sheafification and inclusion functors,\"}\n  {\"name\": \"LightCondensed.free_lightProfinite_internallyProjective_iff_tensor_condition'\", \"module\": \"Mathlib/Condensed/Light/InternallyProjective\", \"type\": \"∀ (R : Type u) [inst : CommRing R] (P : LightProfinite),\\n  CategoryTheory.InternallyProjective ((LightCondensed.free R).obj P.toCondensed) ↔\\n    ∀ {A B : LightCondMod R} (e : A ⟶ B) [CategoryTheory.Epi e] (S : LightProfinite)\\n      (g : (LightCondensed.free R).obj (CategoryTheory.MonoidalCategoryStr\", \"doc\": \"Let $R$ be a commutative ring and $P$ be a light profinite space. The free light condensed $R$-module on the condensed set associated with $P$, denoted $\\\\mathcal{F}(P)$, is internally projective if an\"}\n  {\"name\": \"LightCondensed.free_lightProfinite_internallyProjective_iff_tensor_condition\", \"module\": \"Mathlib/Condensed/Light/InternallyProjective\", \"type\": \"∀ (R : Type u) [inst : CommRing R] (P : LightProfinite),\\n  CategoryTheory.InternallyProjective ((LightCondensed.free R).obj P.toCondensed) ↔\\n    ∀ {A B : LightCondMod R} (e : A ⟶ B) [CategoryTheory.Epi e] (S : LightProfinite)\\n      (g : (LightCondensed.free R).obj (CategoryTheory.MonoidalCategoryStr\", \"doc\": \"For a light profinite space $ P $, the free $ R $-module $ \\\\text{Free}(P) $ is internally projective in the category of light condensed $ R $-modules if and only if for every epimorphism $ e: A \\\\to B \"}\n  {\"name\": \"LightCondensed.instMonoidalClosedSheafLightProfiniteCoherentTopologyModuleCat\", \"module\": \"Mathlib/Condensed/Light/Monoidal\", \"type\": \"(R : Type u) →\\n  [inst : CommRing R] →\\n    CategoryTheory.MonoidalClosed (CategoryTheory.Sheaf (CategoryTheory.coherentTopology LightProfinite) (ModuleCat R))\", \"doc\": \"For any commutative ring $ R $, the category of sheaves on light profinite spaces (compact Hausdorff, totally disconnected, second-countable topological spaces) equipped with the coherent Grothendieck\"}\n  {\"name\": \"AdicCompletion.ofTensorProductEquivOfFiniteNoetherian_symm_of\", \"module\": \"Mathlib/RingTheory/AdicCompletion/AsTensorProduct\", \"type\": \"∀ {R : Type u} [inst : CommRing R] (I : Ideal R) (M : Type u) [inst_1 : AddCommGroup M] [inst_2 : Module R M]\\n  [inst_3 : IsNoetherianRing R] [inst_4 : Module.Finite R M] (x : M),\\n  (AdicCompletion.ofTensorProductEquivOfFiniteNoetherian I M).symm ((AdicCompletion.of I M) x) = 1 ⊗ₜ[R] x\", \"doc\": \"For a Noetherian commutative ring $ R $, an ideal $ I $, and a finitely generated $ R $-module $ M $, applying the inverse of the linear equivalence between $ \\\\hat{R} \\\\otimes_R M $ and the $ I $-adic \"}",
+   "date": "2026-10-22",
+   "verdict": "no match: ExactPairing and tensor Hom bijections take an existing dual pair as input; the hits do not construct the specified duality from u_N or prove compatibility with augmented derived completion"
+  },
+  {
+   "tool": "grep",
+   "query": "dualizable|ExactPairing|completion",
+   "results": "15 hits; Mathlib/CategoryTheory/Monoidal/Rigid/OfEquivalence.lean, Mathlib/CategoryTheory/Monoidal/Rigid/OfEquivalence.lean, Mathlib/CategoryTheory/Monoidal/Rigid/OfEquivalence.lean, Mathlib/CategoryTheory/Monoidal/Rigid/OfEquivalence.lean, Mathlib/CategoryTheory/Monoidal/Rigid/OfEquivalence.lean, Mathlib/CategoryTheory/Monoidal/Rigid/Basic.lean, Mathlib/CategoryTheory/Monoidal/Rigid/Basic.lean, Mathlib/CategoryTheory/Monoidal/Rigid/Basic.lean",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern existing exact pairings or ordinary/condensed tensors, not the evaluation criterion together with the specified augmented derived completion comparison"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"ExactPairing\", \"ihom\"",
+   "results": "0 hits; ",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern existing exact pairings or ordinary/condensed tensors, not the evaluation criterion together with the specified augmented derived completion comparison"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A dualizable object tensor functor preserves derived completion and its canonical augmentation",
+   "results": "8 hits; CategoryTheory.leftDistributor, CategoryTheory.tensorLeftAdjunction, CategoryTheory.tensorRightAdjunction, CompleteLat.dualEquiv_functor, CommRingCat.Under.instPreservesFiniteLimitsUnderTensorProdOfFlatCarrier, CategoryTheory.instPreservesFiniteBiproductsTensorLeft, CategoryTheory.rightDistributor, completeLat_dual_comp_forget_to_bddLat",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern existing exact pairings or ordinary/condensed tensors, not the evaluation criterion together with the specified augmented derived completion comparison"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "In a closed symmetric monoidal derived category invertible evaluation tensor internal Hom comparison gives duality and tensor commutes with derived adic completion",
+   "results": "8 hits; LightCondensed.ihomPoints_symm_comp, LightCondensed.instMonoidalClosedLightCondMod, LightCondensed.ihomPoints_symm_apply, LightCondensed.internallyProjective_iff_tensor_condition', LightCondensed.internallyProjective_iff_tensor_condition, LightCondensed.free_lightProfinite_internallyProjective_iff_tensor_condition, LightCondensed.free_lightProfinite_internallyProjective_iff_tensor_condition', LightCondensed.free_internallyProjective_iff_tensor_condition",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern existing exact pairings or ordinary/condensed tensors, not the evaluation criterion together with the specified augmented derived completion comparison"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An isomorphism from tensor by the internal dual to internal Hom constructs coevaluation satisfying both zigzag identities in a closed monoidal category",
+   "results": "8 hits; CategoryTheory.exp.coev, CategoryTheory.ihom.coev, CategoryTheory.ihom.adjunction, CategoryTheory.closedOfHasLeftDual, CategoryTheory.ihom.ihom_adjunction_unit, CategoryTheory.exp.adjunction, CategoryTheory.Closed.adj, CategoryTheory.ihom.ev_coev",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern existing exact pairings or ordinary/condensed tensors, not the evaluation criterion together with the specified augmented derived completion comparison"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "det-lem-int-tensor-product",
+  "date": "2026-10-22",
+  "group": "Q53"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-lem-int-tensor",
+ "blueprint": {
+  "from": {
+   "node": "det-lem-int-tensor-product",
+   "place": "First paragraph, evaluation/coevaluation, both triangle identities, products, sequential inverse limits, and the canonical completion map; old split steps 4 and 5. Supporting Stacks Tag 0FPU (example-dual-derived), whose omitted duality verification is retained in the report.",
+   "via": []
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sfb-evaluation-duality-completion",
+  "worker": "stage1",
+  "summary": "Checked the arbitrary small ringed-site evaluation criterion, wrote both triangle calculations, reused the exact-pairing Mathlib leaf and homotopy-limit-map node, and isolated only the enhanced augmented K-flat Roos comparison. No hypothesis or conclusion changed; no claim that level projections detect equality into a homotopy limit.",
+  "blueprint": "Realizes the dualizability, both-adjoints, products, Roos limits and canonical derived-completeness sentences of the first paragraph of det-lem-int-tensor-product.proof.md; unit sk-lem-int-tensor step 3.",
+  "tool_uses": [
+   {
+    "node": "lem-sf-ringed-derived-tensor-hom-adjunction",
+    "why": "Evaluation-normalized closed adjunction on arbitrary ringed sites; generic closed-tensor infrastructure, with no replacement of the integral tensor route."
+   },
+   {
+    "node": "lem-pc-kflat-resolution",
+    "why": "Generic existence of flat-term K-flat representatives on a ringed site."
+   },
+   {
+    "node": "lem-weil-pbc-kflat-fixed-tensor-triangulated",
+    "why": "Exactness of fixed K-flat derived tensor including shifts; generic cone/localization infrastructure."
+   },
+   {
+    "node": "lem-sf-ringed-derived-native-tensor",
+    "why": "One-K-flat computation and the native associator comparison ensure the strict tensor tower computes the specified derived tensor without changing monoidal structures."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
+    "why": "Generic existence of derived countable products and the normalized strict-tower derived limit in D(R) of an arbitrary ringed site; needed for the product hypothesis of the homotopy-limit-map tool (reviewer repair Q70)."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sf-ringed-derived-tensor-hom-adjunction",
+  "lem-pc-kflat-resolution",
+  "lem-sf-ringed-derived-native-tensor",
+  "lem-weil-pbc-ringed-strict-tower-homotopy-limit"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q70-37ae361a0",
+  "group": "Q70",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q70-37ae361a0 (reviewer sub-agent of L); spot-checked: The mathematics is correct. I read the item, the new node lem-sfb-kflat-augmented-roos-comparison, every cited statement, the blueprint det-lem-int-tensor-product first paragraph and Stacks 0FPU/0941. The item statement is identical to base (unsplit). Steps 1-2 correctly fill the triangle identities that 0FPU omits: transpose/naturality, and the interchange e(e⊗1)=e(1⊗e). Step 3 uses the ExactPairing Mathlib leaf plus symmetry. In the new node, the signed fibre map is a chain map (checked coordinatewise using b(1⊗s_I)=s_J b), and the iso and augmentation clauses hold without exact sheaf products. Edge cases checked: A=0, R[0], R[1] with its sign, zero and constant towers. It is not a restatement and has no duplicate in the DAG. Three repairs in fixes/: (1) C1/E1, step 4: lem-pc-homotopy-limit-map needs countable products in D(R), which nothing cited gave; it now cites lem-weil-pbc-ringed-strict-tower-homotopy-limit, added as a tool_use. (2) C4/E4, step 5: it identified the tower through lem-pe-kflat-scalar-tower-realization (the r_nF_n model) while step 6 uses the native one-K-flat tensor, and no node compares the two models. Step 5 now uses lem-sf-ringed-derived-native-tensor (natural in L, unitor-compatible); lem-pe and its tool_use are dropped. (3) B3, new node: 'K-injective' now cites def-pur-kinjective-complex. Cycle check is clean. No SGA citation. Accepted tool_uses: the derived tensor-Hom adjunction, kflat-resolution, kflat-fixed-tensor-triangulated, the native derived tensor and the strict-tower homotopy limit.; 2 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.SixFunctors.EvaluationDualityCompletion",
+  "declaration": "CategoryTheory.EvaluationDualityCompletion.evaluation_duality_completion",
+  "declarations": [
+   "CategoryTheory.EvaluationDualityCompletion.closed",
+   "CategoryTheory.EvaluationDualityCompletion.dual",
+   "CategoryTheory.EvaluationDualityCompletion.comparison",
+   "CategoryTheory.EvaluationDualityCompletion.coevaluation",
+   "CategoryTheory.EvaluationDualityCompletion.Statement",
+   "CategoryTheory.EvaluationDualityCompletion.evaluation_duality_completion"
+  ],
+  "file": "lean/Sheaf/SixFunctors/EvaluationDualityCompletion.lean",
+  "statement": "theorem evaluation_duality_completion : Statement.{c, v, u, w, z} J R",
+  "branch": "sheaf-dag",
+  "by": "ND",
+  "date": "2026-10-23",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-22afcbc1a",
+  "group": "ND",
+  "result": "pass",
+  "note": "Re-delivery of 1fbc0485dcae resolves the H2 return exactly: stmt_deps drop lem-sf-ringed-derived-native-tensor (kept in proof_deps) and replace lem-sfb-ringed-site-duality-maps by base def node def-sf-coefficient-evaluation-transpose (existing:true owner of ringedSiteDualEvaluation; snapshot record = live). The item module's only change is RingedDerivedNative.Modules → ringedSiteModules.{max c v u, max c v u, v, c} of the forgotten ring sheaf; both abbrevs are SheafOfModules.{max c v u}, definitionally equal, with no universe restriction. Helper module byte-identical; statement, proof, proof_deps, lean.statement and new-node record unchanged. Mechanical finding on lem-sf-ringed-derived-tensor-hom-adjunction: genuine dependency; closed = closedAdjunction.choose, the witness closedStructure is private and S.monoidal = native is a theorem conclusion, so PASS on that point. All clauses re-checked: both triangles with explicit α/λ/ρ, both adjunctions, Type z products, IsHomotopyLimit mapCone, CommMon tower with actual units, Model with whole-unit pin, ∃θ with unit equation, preservation of η-iso objects. Edge cases covered, universes independent, only the theorem is sorry, docstrings OK, no live collision. Advisory: the new node still cites theorem nodes strict-tower-homotopy-limit/homotopy-limit-map; the second reading is a self-review. No compile (no file changed)."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G2",
+  "result": "pass",
+  "landing": "20261024T014839-L-2284170",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

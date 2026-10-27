@@ -1,0 +1,150 @@
+{
+ "id": "def-sfb-cech-derived-augmentation",
+ "kind": "definition",
+ "title": "Canonical derived augmentation on an injective resolution",
+ "status": "split",
+ "import_flags": [],
+ "statement": "For an abelian category $\\mathcal A$ with its ordinary derived category [sk-def-sfb-derived-categories], define $Q_{\\mathbb N}:C^{\\geq0}(\\mathcal A)\\to D(\\mathcal A)$ by extension by zero to integer degrees followed by $Q$. Now let $R,S$ be ring sheaves on small sites with their module categories [def-weil-sheaf-of-modules-category], their derived categories, and K-injective resolutions on $\\operatorname{Mod}(R)$. Let $G:\\operatorname{Mod}(R)\\to\\operatorname{Mod}(S)$ be additive, with the ordinary right-derived functor and its canonical unit $\\eta_G$ [def-sfb-right-derived-functor]. For an injective resolution $i:K[0]\\to I$ [def-sp-injective-resolutions], define $c_{G,I}:RG(Q_{\\mathbb N}K[0])\\xrightarrow{\\sim}Q_{\\mathbb N}(GI)$ as the composite of $RG(Qi)$, the inverse of $\\eta_G$ at the extended injective complex $I$, and the canonical isomorphism commuting $G$ with extension by zero. For a coherent Cech image model $D$ [def-sfb-coherent-cech-image-model], a sheaf $V$ and a chain map $b:GI\\to T_D(G,V,I)$ to its nonnegative signed total [def-sp-double-complex-total], define $\\alpha_{D,G,V,I,b}=c_{G,I}\\,;\\,Q_{\\mathbb N}(b):RG(Q_{\\mathbb N}K[0])\\to Q(T_D(G,V,I))$. The definition applies to every such $b$; when $b$ is the localization-unit augmentation of $D$, it is the canonical derived Cech augmentation. It asserts no invertibility or naturality theorem.",
+ "stmt_deps": [
+  "sk-def-sfb-derived-categories",
+  "def-weil-sheaf-of-modules-category",
+  "def-sfb-right-derived-functor",
+  "def-sp-injective-resolutions",
+  "def-sfb-coherent-cech-image-model",
+  "def-sp-double-complex-total"
+ ],
+ "source": {
+  "document": "literature/stacks-project/derived.tex",
+  "place": "Tags 05RU and 070I: extension by zero and computation on bounded-below injective resolutions; sites-cohomology.tex Tag 03FC, augmented Cech complex."
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "cechColumnRestrictComplex|CechAugmentationNormalized|mapExtendIso|embeddingUpNat",
+   "results": "{\"t\": \"2026-10-24T11:25:25Z\", \"tool\": \"grep\", \"query\": \"cechColumnRestrictComplex|CechAugmentationNormalized|mapExtendIso|embeddingUpNat\", \"sub\": \"\", \"ok\": true, \"n_hits\": 9, \"note\": \"\", \"top\": [\"Mathlib/Algebra/Homology/HomotopyCategory/KInjective.lean\", \"Mathlib/Algebra/Homology/Embedding/CochainComplex.lean\", \"Mathlib/Algebra/Homology/Embedding/Basic.lean\", \"Mathlib/Algebra/Homology/Embedding/Basic.lean\", \"Mathlib/Algebra/Homology/Embedding/Basic.lean\", \"Mathlib/Algebra/Homology/DerivedCategory/KInjective.lean\", \"Mathlib/CategoryTheory/Abelian/Injective/Extend.lean\", \"Mathlib/CategoryTheory/Abelian/Injective/Extend.lean\"], \"digest\": \"20ba185c9a60f98d\"}",
+   "date": "2026-10-24",
+   "verdict": "No exact Mathlib definition; existing landed project helpers are reused without copying data."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Restrict a cochain complex of module sheaves to a sheaf slice and define the derived augmentation using its injective resolution comparison",
+   "results": "{\"t\": \"2026-10-24T11:25:25Z\", \"tool\": \"leansearch\", \"query\": \"Restrict a cochain complex of module sheaves to a sheaf slice and define the derived augmentation using its injective resolution comparison\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.InjectiveResolution.cocomplex\", \"CategoryTheory.InjectiveResolution.ofCocomplex\", \"CategoryTheory.InjectiveResolution.cochainComplex\", \"CategoryTheory.InjectiveResolution.ι\", \"CochainComplex.augment\", \"CategoryTheory.Sheaf.ΓRes\", \"AlgebraicGeometry.Scheme.Modules.restrict\", \"CategoryTheory.InjectiveResolution.Hom.hom'\"], \"digest\": \"ac31ff7c61b02bb6\"}",
+   "date": "2026-10-24",
+   "verdict": "No exact Mathlib definition; existing landed project helpers are reused without copying data."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Restriction of complexes to ringed sheaf slices, localization of nonnegative complexes, and canonical derived Cech augmentation from an injective resolution",
+   "results": "{\"t\": \"2026-10-24T11:25:28Z\", \"tool\": \"leanfinder\", \"query\": \"Restriction of complexes to ringed sheaf slices, localization of nonnegative complexes, and canonical derived Cech augmentation from an injective resolution\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.InjectiveResolution.toRightDerivedZero'\", \"CochainComplex.cm5b.I\", \"CategoryTheory.InjectiveResolution.ofCocomplex\", \"CochainComplex.cm5b.I_X\", \"CategoryTheory.Functor.toRightDerivedZero\", \"CategoryTheory.InjectiveResolution.cocomplex\", \"CategoryTheory.InjectiveResolution.toRightDerivedZero_eq\", \"CochainComplex.cm5b\"], \"digest\": \"3ec05a1b53eed7b0\"}",
+   "date": "2026-10-24",
+   "verdict": "No exact Mathlib definition; existing landed project helpers are reused without copying data."
+  },
+  {
+   "tool": "grep",
+   "query": "rg -n \"cechColumnRestrictComplex|CechAugmentationNormalized\" lean/WeilConjectures lean/Sheaf",
+   "results": "No hits in WeilConjectures. Sheaf defines cechColumnRestrictComplex in CechInjectiveColumnModel.lean:52; QN, comparison and alpha are in CechAugmentationNormalizedNaturality.lean:43,64,79. Other hits are consumers.",
+   "date": "2026-10-24",
+   "verdict": "Exact project definitions found: record existing:true definition ownership; do not duplicate."
+  },
+  {
+   "tool": "grep",
+   "query": "rg -l \"cechColumnRestrictComplex|CechAugmentationNormalized.QN|CechAugmentationNormalized.alpha|CechAugmentationNormalized.comparison\" dag/nodes; blueprint_refs.py search \"derived augmentation\"",
+   "results": "Only theorem nodes lem-sfb-cech-injective-column-model, lem-sfb-cech-coefficient-derived-comparison and lem-sfb-cech-augmentation-normalized-naturality. Blueprint search: 0 blueprint nodes match derived augmentation.",
+   "date": "2026-10-24",
+   "verdict": "No existing definition node owns these helpers; introduce definition-only ownership as requested by return H2/H4."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-cech-pushforward-augmented-model",
+  "date": "2026-10-24",
+  "group": "NW"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "Paragraph (3), direct images: canonical complex restriction and injective-resolution augmentation in the coherent Cech pushforward model.",
+   "via": [
+    "lem-sfb-cech-pushforward-augmented-model",
+    "lem-sfb-cech-localization-unit-totalization",
+    "lem-sfb-partial-kummer-boundary-unit-model",
+    "lem-sfb-transverse-tame-open-shriek-exchange",
+    "lem-sfb-continuous-algcl-tame-boundary-comparison",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "lean": {
+  "module": "Sheaf.CategoryTheory.CechAugmentationNormalizedNaturality",
+  "declaration": "CategoryTheory.CechAugmentationNormalized.alpha",
+  "declarations": [
+   "CategoryTheory.CechAugmentationNormalized.QN",
+   "CategoryTheory.CechAugmentationNormalized.comparison",
+   "CategoryTheory.CechAugmentationNormalized.alpha"
+  ],
+  "statement": "def alpha (D : CoherentCechImageModel R)\n    (G : ringedSiteModules.{u} R ⥤ ringedSiteModules.{u} S) [G.Additive]\n    (V : Sheaf J (Type u)) {K : ringedSiteModules.{u} R} (I : InjectiveResolution K)\n    (b : (G.mapHomologicalComplex (.up ℕ)).obj I.cocomplex ⟶\n      (D.totalFunctor G V).obj I.cocomplex) :\n    G.rightDerivedFunctor.obj ((QN (ringedSiteModules.{u} R)).obj\n      ((CochainComplex.single₀ _).obj K)) ⟶\n      DerivedCategory.Q.obj (D.total G V I.cocomplex)",
+  "branch": "sheaf-dag",
+  "by": "NW",
+  "date": "2026-10-24",
+  "existing": true,
+  "note": "Definition ownership of existing landed helpers, as requested by independent return H2/H4. Their original host theorem modules and proofs are preserved; no theorem conclusion is used to supply this definition data."
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-f7c5f07ae",
+  "group": "NW",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-f7c5f07ae",
+  "group": "NW",
+  "result": "pass",
+  "note": "Re-delivery of 18089ae7 RETURN. H2/H4 fixed: theorem nodes lem-sfb-cech-injective-column-model and lem-sfb-cech-augmentation-normalized-naturality removed from stmt_deps (kept in proof_deps); new existing:true definition nodes def-sfb-cech-column-restriction-complex (cechColumnRestrictComplex) and def-sfb-cech-derived-augmentation (QN/comparison/alpha) own the plain defs, signatures verbatim from the live files, TeX matches the bodies, H12 fields complete, no other owner in the live DAG. Added def-sfb-right-derived-functor is a landed node (allowed by stage2_delivery.py) and is really used (Rf_*, unitQ). H3 fixed: tautological ∃rho removed; beta stays pinned by the unitQ/representative equation, operators by IsColumnDiagram. Item node otherwise identical to live (only lean + added stmt_deps). Independent reading: no Cartesian hypothesis on f, exact inverse image via fInverse ⊣ f.modules, alpha IsIso with totalIso fixed on every ιTotal, composition pinned by units, ModelNaturality/ComparisonLaws real (D.refinement built by whiskering the actual image functor). Edge cases N=0, f=id, V terminal, degrees 0/1 covered. One sorry, docstrings with source and blueprint, all lean.statement fields verbatim. Notes: second reading by the same worker; landed helper docstrings name the theorem node as blueprint. No compile: no file changed."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A3",
+  "result": "pass",
+  "landing": "20261024T184519-L-3059081",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)",
+  "sorry_before": [
+   "CategoryTheory.CechAugmentationNormalized.alpha_projection",
+   "CategoryTheory.CechAugmentationNormalized.alpha_refinement",
+   "CategoryTheory.CechAugmentationNormalized.augmentation_exists",
+   "CategoryTheory.CechAugmentationNormalized.cech_augmentation_normalized_naturality",
+   "CategoryTheory.CechAugmentationNormalized.columnUnit_comm",
+   "CategoryTheory.CechAugmentationNormalized.lift_independence",
+   "CategoryTheory.CechAugmentationNormalized.projection_normalization",
+   "CategoryTheory.CechAugmentationNormalized.refinement_laws",
+   "CategoryTheory.CechAugmentationNormalized.resolution_comparison_laws",
+   "CategoryTheory.CechAugmentationNormalized.signed_total_homotopy",
+   "CategoryTheory.CechAugmentationNormalized.slice_normalization"
+  ],
+  "sorry_after": []
+ }
+}

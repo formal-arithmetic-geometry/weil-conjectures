@@ -1,0 +1,146 @@
+{
+ "id": "lem-sf-field-projection-refinement-square",
+ "kind": "statement",
+ "title": "Transport of the single-refinement projection square to field coefficients",
+ "statement": "Fix the finite-field and coefficient datum of [def-fix-six-functor-datum]. The schemes are finite-type schemes over its field, with separated finite-type morphisms [def-weil-scheme-morphism-properties]. Compactifications and proper refinements are those of [def-weil-compactifications-refinements]. Let $S$ be the normalized six-functor operation datum, with $\\ell$ invertible in the base field. At both the rational stage $E$ and the common-stage $\\overline{\\mathbf Q}_\\ell$ category [def-weil-algebraically-closed-coefficients], the predicate $\\mathrm{refinementLaw}$ of [def-sf-projection-single-refinement-law] holds for all bounded constructible inputs ($P=\\mathrm{True}$), using each stage's recorded tensor, pullback, projection and compactification comparison. This asserts the local square for one proper refinement only; it does not assert comparison independence for arbitrary pairs.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-prop-sf-pf-coherence/prop-sf-pf-coherence.proof.md",
+  "place": "Compactification-independence sentence: compatibility of refinement comparisons with the counits and j_!, together with naturality."
+ },
+ "stmt_deps": [
+  "def-sf-projection-single-refinement-law",
+  "def-fix-six-functor-datum",
+  "def-weil-scheme-morphism-properties",
+  "def-weil-compactifications-refinements",
+  "def-weil-algebraically-closed-coefficients"
+ ],
+ "proof": [
+  {
+   "text": "Promote integralRefinementProjection to the integral comparison equation for any two compactifications: choose a common refinement, cancel its first comparison square, compose with its second square, and use comparison_trans. The two identity-square constructions identitySquare and compactSupportProjectionSquare are definitionally equal. Combine this comparison equation with integralStageProjection_structuralIdentities to obtain CompactSupportProjectionCoherence for the integral stage. The structural-identities proof plan uses only integral refinement squares for its proper coincidence clause.",
+   "uses": [
+    "lem-sf-integral-projection-refinement-square",
+    "lem-sf-integral-stage-projection-structural-identities",
+    "prop-compactification-refinement",
+    "def-fix-six-functor-datum"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply compactSupportProjectionCoherence_rational to this integral coherence. For every finite coefficient field in the closure, construct its operation datum using finiteLevels 0 of coefficientIntegralNormalization, the recorded higher coefficient stage, and the same closure/coherence data. Repeat the integral coherence construction and rational transport at that field.",
+   "uses": [
+    "lem-sf-rational-projection-comparison-equations",
+    "def-fix-six-functor-datum"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply compactSupportProjectionCoherence_common to the family of rational coherence results. For each of the two requested refinement laws, take the compactification field of the corresponding coherence result, reverse the equality, and specialize it to the supplied pair of compactifications. No use of the supplied refinement is needed because the comparison equation now holds for every pair.",
+   "uses": [
+    "lem-sf-common-projection-comparison-equations"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sf-integral-projection-refinement-square",
+  "lem-sf-integral-stage-projection-structural-identities",
+  "prop-compactification-refinement",
+  "def-fix-six-functor-datum",
+  "lem-sf-rational-projection-comparison-equations",
+  "lem-sf-common-projection-comparison-equations"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-prop-sf-pf-coherence/prop-sf-pf-coherence.proof.md",
+  "place": "Compactification-independence sentence; reuse the existing rational/common transport of the four comparison equations, after assembling integral coherence (Q2, 2026-10-26)."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A natural projection morphism commutes with a proper refinement of compactifications at integral coefficients",
+   "results": "8 unrelated hits, including AffineSpace.toSpecMvPoly, Algebra.PreSubmersivePresentation.ofHasCoeffs_map and LightProfinite projections.",
+   "date": "2026-10-25",
+   "verdict": "No match for the normalized integral or field single-refinement square."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived projection transformation commutes with refinement comparison of compactifications",
+   "results": "8 unrelated Profinite and LightProfinite projection/transition identities.",
+   "date": "2026-10-25",
+   "verdict": "No derived compactification statement."
+  },
+  {
+   "tool": "grep",
+   "query": "refinementProjection|projectionRefinement|higherLaw",
+   "results": "msearch: 0 Mathlib hits. Local rg found ProjectionRefinementDescent.finite_descent (used), refinementProjectionCounit (ambient system equation), and projectionIntegralCoherenceRealization (requires specified expression realization). No datum-coordinate integral/field single-refinement square.",
+   "date": "2026-10-25",
+   "verdict": "Reuse finite_descent. New steps concern realization and coefficient transport of one refinement, not ambient refinement algebra."
+  },
+  {
+   "tool": "blueprint_refs.py search",
+   "query": "projection refinement; projection integral refinement",
+   "results": "22 and 8 blueprint matches respectively. Generic exchange/datum/package/adjunction entries, no statement matching one normalized integral refinement square or its field transport.",
+   "date": "2026-10-25",
+   "verdict": "No duplicate blueprint local-step statement."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.FixProjectionCompactificationComparison",
+  "date": "2026-10-25",
+  "group": "J2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-fix-weil-operations",
+   "place": "Compactification-independence sentence: compatibility of refinement comparisons with the counits and j_!, together with naturality.",
+   "via": [
+    "lem-fix-projection-compactification-comparison"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-rem-sf-pf-done",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.FieldProjectionRefinementSquare",
+  "file": "lean/Sheaf/Paper/FieldProjectionRefinementSquare.lean",
+  "declaration": "WeilConjectures.FixProjectionCompactification.fieldRefinementProjection",
+  "statement": "theorem fieldRefinementProjection\n    (D : FiniteFieldDatum.{u}) (C : D.CoefficientDatum)\n    (E : Type u) [Field E] [Algebra (Padic C.l) E]\n    [FiniteDimensional (Padic C.l) E] (n : ℕ) (hn : 1 ≤ n)\n    (S : SixFunctorOperationDatum D C E n hn) (hl : IsUnit (C.l : D.k)) :\n    refinementLaw S.higher.rational S.higher.rationalTensor S.higher.rationalExchange\n      (fun _ _ ↦ True) ∧\n    refinementLaw S.closure.commonStage S.closure.commonStageTensor S.closure.commonStageExchange\n      (fun _ _ ↦ True)",
+  "branch": "sheaf-dag",
+  "by": "J2",
+  "date": "2026-10-25"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-a98d5",
+  "group": "J2",
+  "result": "fix",
+  "landing": "20261025T211625-L-3999844",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q2",
+  "result": "pass",
+  "landing": "20261026T070550-L-3618079",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

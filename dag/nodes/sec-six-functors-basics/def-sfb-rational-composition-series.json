@@ -1,0 +1,134 @@
+{
+ "id": "def-sfb-rational-composition-series",
+ "kind": "definition",
+ "title": "Composition series of rational group-scheme modules",
+ "status": "split",
+ "import_flags": [],
+ "statement": "Let $F$ be a field [def-weil-field] and let $G$ be an affine $F$-group scheme [def-sc-group-scheme]. Let $V$ be an $F$-vector space with a counital coassociative coaction $c:V\\to V\\otimes_F F[G]$. Use rational subspaces and simple rational modules as in [def-sfb-rational-highest-weight-data]. A rational composition series of $(V,c)$ is a finite strictly increasing filtration $0=N_0\\subsetneq\\cdots\\subsetneq N_n=V$ by rational subspaces, with each actual quotient $N_{i+1}/N_i$ nonzero and simple. The restricted coactions on the $N_i$ are characterized by equivariance of inclusion into $V$; the quotient coactions are characterized by equivariance of the quotient projection. The filtration of length zero is permitted for $V=0$.",
+ "stmt_deps": [
+  "def-weil-field",
+  "def-sc-group-scheme",
+  "def-sfb-rational-highest-weight-data"
+ ],
+ "source": {
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Sections 4a--4b, rational subrepresentations and quotients; finite composition filtrations as used in Jantzen, Representations of Algebraic Groups (2003), II.2 and II.6."
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "Coaction|Comodule|CompositionSeries RingTheory/Coalgebra",
+   "results": "0 hits: ",
+   "date": "2026-10-24",
+   "verdict": "No rational-coaction composition-series definition; the abstract-group and ordinary module results do not give rational group-scheme subobjects."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Composition series of rational representations of an affine algebraic group as coaction stable subspaces and simple quotient comodules",
+   "results": "8 hits: FDRep.finrank_hom_simple_simple, FDRep.simple_iff_end_is_rank_one, Representation.IsIrreducible, Rep.toCoinvariants, Rep.instProjective, FDRep.simple_iff_char_is_norm_one, Representation.IsIrreducible.toIsSimpleOrder, Representation.irreducible_iff_isSimpleModule_asModule",
+   "date": "2026-10-24",
+   "verdict": "No rational-coaction composition-series definition; the abstract-group and ordinary module results do not give rational group-scheme subobjects."
+  },
+  {
+   "tool": "loogle",
+   "query": "CompositionSeries, Coalgebra",
+   "results": "0 hits: ",
+   "date": "2026-10-24",
+   "verdict": "No rational-coaction composition-series definition; the abstract-group and ordinary module results do not give rational group-scheme subobjects."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Composition series of coalgebra comodules rational representation stable submodule quotients",
+   "results": "8 hits: exists_compositionSeries_of_isNoetherian_isArtinian, JordanHolderModule.instJordanHolderLattice, isFiniteLength_iff_exists_compositionSeries, Module.length_compositionSeries, isFiniteLength_of_exists_compositionSeries, Ideal.stableFiltration_stable, Coalgebra.Repr.recOn, Representation.toCoinvariants",
+   "date": "2026-10-24",
+   "verdict": "No rational-coaction composition-series definition; the abstract-group and ordinary module results do not give rational group-scheme subobjects."
+  },
+  {
+   "tool": "grep",
+   "query": "rg composition series / IsStable / CompositionSeries in lean/WeilConjectures, lean/Sheaf and dag/nodes; tools/blueprint_refs.py search \"rational composition\"",
+   "results": "WeilConjectures.RepresentationTheory.CompositionSeries is for abstract group representations; RationalHighestWeightData supplies coaction-stable subspaces and simple modules but no rational composition series. Blueprint search: 0 matches. The only matching rational composition-series DAG statement is the present item.",
+   "date": "2026-10-24",
+   "verdict": "No existing definition node or exact declaration."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-induced-composition-linkage",
+  "date": "2026-10-24",
+  "group": "Q38"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Haboush symmetric-power lifting for a trivial quotient representation. Supporting representation-theoretic input: Steinberg endomorphisms detect a nonzero fixed vector. Supporting Self-duality of rho section modules at characteristic-dependent weights. Supporting input: Positive-characteristic simplicity step, using irreducibility of the Steinberg induced module rather than assuming self-duality. Numerical input to the dimension comparison: Dimension of the simple module at the first restricted rho weight. Supporting general input: dominant induced-module composition factors, multiplicity one at the highest weight and affine linkage; used to exclude all lower factors at (p-1)rho. Rational composition-series terminology for the induced-module assertion.",
+   "via": [
+    "lem-sfb-induced-composition-linkage",
+    "lem-sfb-restricted-rho-simple-dimension",
+    "lem-sfb-steinberg-induced-module-irreducible",
+    "lem-sfb-rho-section-self-duality",
+    "lem-sfb-steinberg-endomorphism-detection",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.GroupScheme.RationalCompositionSeries",
+  "declaration": "AlgebraicGeometry.RationalHighestWeight.RationalCompositionSeries",
+  "declarations": [
+   "AlgebraicGeometry.RationalHighestWeight.FiltrationFactor",
+   "AlgebraicGeometry.RationalHighestWeight.RationalCompositionSeries"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/GroupScheme/RationalCompositionSeries.lean",
+  "statement": "structure RationalCompositionSeries (c : V →ₗ[F] V ⊗[F] coordinateAlgebra G)",
+  "branch": "sheaf-dag",
+  "by": "Q38",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-1257597d2",
+  "group": "Q38",
+  "result": "fix",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-1257597d2",
+  "group": "Q38",
+  "result": "fix",
+  "note": "Repair of 31cd H2 RETURN. Item module only imports changed vs 31cd; RationalCompositionSeries identical; item node only stmt_deps (theorem node -> new def-sfb-affine-weight-order-action). Statement re-checked against node (alg. closed F, any prime p, sc semisimple S, pinned T/B/U/root datum/W action, integral rho, every composition series: exists-unique eta factor, others dominant mu<eta with mu+rho=w(eta+rho)+p*gamma, gamma in rootSpan Z); rank 0/reducible/p=2 included. New def node statement matches the 8 verbatim-moved AffineWeight defs (Andersen 1980 Def.1; Milne 21.1-21.2). Mechanical: nt_parallel2 Preparation never drops names a delivered module removes, so the move would be refused under import_prune check 3. FIX in the Q97 shape: fixes/AffineReflectionDominantDescent.lean = live text (cmp identical); fixes/AffineWeightOrderAction.lean = public re-export + abbrev AffineWeight.normalizerCharacterAction with docstrings; fixes/def-sfb-affine-weight-order-action.json lean primary = alias, declarations = alias + 8 re-exported names (check_lean_text []); report with Reviewer fix section. nt_compile --json: AffineWeightOrderAction 15.7 s, RationalCompositionSeries 16.1 s, InducedCompositionLinkage 19.1 s, no errors. Land with --revert-nodes lem-sfb-affine-reflection-dominant-descent to keep the live dep record."
+ }
+}

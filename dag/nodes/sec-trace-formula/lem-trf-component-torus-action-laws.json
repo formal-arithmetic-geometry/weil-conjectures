@@ -1,0 +1,156 @@
+{
+ "id": "lem-trf-component-torus-action-laws",
+ "kind": "statement",
+ "title": "Canonical component torus action satisfies the action laws",
+ "statement": "Let $k$ be a field and $M$ a fine torsion-free monoscheme with a finite affine cover [def-trf-monoscheme-toric-realization]. For any toric component $C$ of $M$, let $L$ be its generic lattice, let $T=\\operatorname{Spec}k[L]$ with the diagonal group-algebra Hopf structure [def-sc-group-scheme], and let $X_C$ be its component realization. The specified chartwise coaction $a:T\\times_k X_C\\to X_C$ [def-pc-fibre-product] is the underlying morphism of an associative unital action of this group object on $X_C$, encoded by $\\mathrm{ModObj}$ in the category of schemes over $\\operatorname{Spec}k$. The ambient $M$ need not be connected.",
+ "source": {
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "Expose VIII, Proposition 3.2.2 and 3.2.4, printed p.103; chartwise action and gluing on a single connected component."
+ },
+ "stmt_deps": [
+  "def-trf-monoscheme-toric-realization",
+  "def-sc-group-scheme",
+  "def-pc-fibre-product"
+ ],
+ "proof": [
+  {
+   "text": "Use the component charts in the definition of componentOpen. On each chart P the prescribed coaction sends a monomial e^p to e^degree(p) tensor e^p. This preserves scalars, so its spectrum is a morphism over k. The component chart images cover the component open by its definition.",
+   "uses": [
+    "def-trf-monoscheme-toric-realization",
+    "lem-weil-pbc-fibre-product-affine-spectra"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose VIII, Proposition 3.2.2 and 3.2.4, printed p.103; chartwise action and gluing on a single connected component."
+   }
+  },
+  {
+   "text": "On a monomial, the unit composite is e^p because augmentation sends every lattice monomial to one. The two associativity composites are both e^degree(p) tensor e^degree(p) tensor e^p by the diagonal comultiplication. Equality on monomials extends by linearity. These are precisely the action diagrams in the category of schemes over Spec k.",
+   "uses": [
+    "def-sc-group-scheme",
+    "lem-weil-pbc-fibre-product-affine-spectra"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose VIII, Proposition 3.2.2 and 3.2.4, printed p.103; chartwise action and gluing on a single connected component."
+   }
+  },
+  {
+   "text": "The coaction preserves each chart: after localization at e^a its first tensor factor e^degree(a) is already a unit, so invertibility is equivalent to invertibility of the second factor. Restricted coactions agree because germs commute with restriction. The product chart opens cover the action domain and the triple-product domains. Thus the over-base, associativity and unit identities descend by scheme-morphism gluing uniqueness. The defining uniqueness property of torusAction identifies the resulting map with that specified morphism. Package the three properties into ModObj. Rank zero and an empty ambient monoscheme satisfy the same argument, the latter having no components.",
+   "uses": [
+    "def-trf-monoscheme-toric-realization",
+    "lem-weil-pbc-open-fibre-product",
+    "lem-weil-pbc-scheme-morphism-gluing"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose VIII, Proposition 3.2.2 and 3.2.4, printed p.103; chartwise action and gluing on a single connected component."
+   }
+  }
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "Expose VIII, Proposition 3.2.2 and 3.2.4, printed p.103; chartwise action and gluing on a single connected component."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "The action of a group scheme on a scheme satisfies unit and associativity laws",
+   "results": "OK: 8 hits; SemigroupAction.mk, MulActionHom.instMonoid, AddSemigroupAction.mk, ConjAct.mulAction₀, AddAut.applyMulAction, AddUnits.vaddAssocClass'_left, AddSemigroupAction, AddUnits.vaddAssocClass'",
+   "date": "2026-10-26",
+   "verdict": "No exact match for the specified chartwise action on a component. ModObj supplies the action-law interface; latticeTorus_action in the project only handles a connected ambient monoscheme. Local source searches found no general component law theorem."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The canonical torus coaction on every connected component of a finite torsion free monoscheme realization is unital and associative and defines a group scheme action",
+   "results": "OK: 8 hits; CategoryTheory.PreGaloisCategory.FiberFunctor.isPretransitive_of_isConnected, CategoryTheory.PreGaloisCategory.instIsPretransitiveCarrierObjFintypeCatOfIsConnected, CategoryTheory.PreGaloisCategory.IsFundamentalGroup.toIsNaturalSMul, CategoryTheory.PreGaloisCategory.fiberIsoQuotientStabilizer, CategoryTheory.PreGaloisCategory.instPreservesIsConnectedActionFintypeCatAutFunctorFunctorToAction, CategoryTheory.FintypeCat.instPreGaloisCategoryActionFintypeCat, CategoryTheory.PreGaloisCategory.instMulActionAutCarrierVFintypeCatFunctorObjActionFunctorToAction, CategoryTheory.PreGaloisCategory.IsFundamentalGroup.continuous_smul",
+   "date": "2026-10-26",
+   "verdict": "No exact match for the specified chartwise action on a component. ModObj supplies the action-law interface; latticeTorus_action in the project only handles a connected ambient monoscheme. Local source searches found no general component law theorem."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"CategoryTheory.ModObj\"",
+   "results": "OK: 12 hits; CategoryTheory.ModObj, CategoryTheory.ModObj.regular, CategoryTheory.ModObj.instTensorUnit, CategoryTheory.ModObj.smul, CategoryTheory.ModObj.smul_eq_mul, CategoryTheory.ModObj.ofIso, CategoryTheory.ModObj.ext, CategoryTheory.ModObj.ext_iff",
+   "date": "2026-10-26",
+   "verdict": "No exact match for the specified chartwise action on a component. ModObj supplies the action-law interface; latticeTorus_action in the project only handles a connected ambient monoscheme. Local source searches found no general component law theorem."
+  },
+  {
+   "tool": "grep",
+   "query": "existsUnique_torusAction|canonical.*torus.*action|torusAction",
+   "results": "OK: 0 hits; ",
+   "date": "2026-10-26",
+   "verdict": "No exact match for the specified chartwise action on a component. ModObj supplies the action-law interface; latticeTorus_action in the project only handles a connected ambient monoscheme. Local source searches found no general component law theorem."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.ToricRealizationFiniteType",
+  "date": "2026-10-26",
+  "group": "G6"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Historical nearby-duality/alteration branch of lem-trf-local-term-locality, proof (1)--(2), through lem-trf-log-regular-desingularization: monoidal resolution used for the regular modification of nodal pairs; ILO VIII 3.3.15, pp.109--110. Expose VIII, Theorems 3.1.27 and 3.2.20, and Remark 3.2.21, pp.102,106; construction in 3.2.19 over k=Q. Supporting source: Expose VIII, Theorem 2.3.10, normalized restriction in 2.3.9 and Remark 2.3.12(i), equivariance in Corollary 2.3.17, printed pp.93--95; application in 3.2.19, p.106. Refinement in this split: Expose VIII, Remark 3.1.4 and 3.1.10(ii), Proposition 3.2.2 and 3.2.4--3.2.5, printed pp.98--100,103; smooth torus input in 2.3.16--2.3.17 and application in 3.2.19. No Stacks tag states the complete monoscheme realization assertion. Component action-law part of parent proof Step 2: ILO VIII 3.2.4 on each connected component, with the coaction-gluing construction of 3.2.2.",
+   "via": [
+    "lem-trf-toric-realization-finite-type",
+    "lem-trf-toric-normalized-desingularization",
+    "lem-trf-functorial-fan-desingularization",
+    "lem-trf-monoidal-resolution-tower",
+    "lem-trf-log-regular-desingularization",
+    "lem-trf-nodal-pair-projective-resolution",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.ComponentTorusActionLaws",
+  "file": "lean/Sheaf/AlgebraicGeometry/ComponentTorusActionLaws.lean",
+  "declaration": "AlgebraicGeometry.Monoscheme.component_torus_action_laws",
+  "statement": "theorem component_torus_action_laws (k : Type u) [Field k]\n    (M : Fine.{u}) (hM : Fine.IsTorsionFree M) (C : ToricComponent M) :\n    ∃ action : ModObj\n        ((Spec (.of (MonoidAlgebra k C.lattice))).asOver (Spec (.of k)))\n        (Over.mk (componentToBase k C)),\n      action.smul.left = torusAction k C",
+  "branch": "sheaf-dag",
+  "by": "G6",
+  "date": "2026-10-26"
+ },
+ "proof_deps": [
+  "def-trf-monoscheme-toric-realization",
+  "lem-weil-pbc-fibre-product-affine-spectra",
+  "def-sc-group-scheme",
+  "lem-weil-pbc-open-fibre-product",
+  "lem-weil-pbc-scheme-morphism-gluing"
+ ],
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G6",
+  "result": "pass",
+  "landing": "20261026T091640-L-3361032",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G6",
+  "result": "pass",
+  "landing": "20261026T091640-L-3361032",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

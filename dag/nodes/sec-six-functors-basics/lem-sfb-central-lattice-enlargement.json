@@ -1,0 +1,178 @@
+{
+ "id": "lem-sfb-central-lattice-enlargement",
+ "kind": "statement",
+ "title": "Realization of a finite integral lattice enlargement by a central isogeny",
+ "statement": "Let $F$ be an algebraically closed field [def-weil-field, def-weil-algebraic-closure] and let $H$ be a semisimple $F$-group scheme [def-sc-group-scheme], meaning smooth, connected, affine and of finite type with no nontrivial smooth connected solvable normal subgroup. Solvable means that successive commutator subgroup schemes become trivial. Fix a split maximal torus $T$ and its root datum $(X,\\Phi,X_*,\\Phi^\\vee)$ in the conventions of [lem-sfb-reductive-borel-pair-structure]. Suppose that the roots span $V=X\\otimes_{\\mathbf Z}\\mathbf Q$. Let $L\\subset V$ be a free abelian subgroup of rank $\\dim_{\\mathbf Q}V$, with $X\\subseteq L$ and $L/X$ finite, such that $\\langle L,\\alpha^\\vee\\rangle\\subseteq\\mathbf Z$ for every root $\\alpha$. The pairing is extended rationally from $X\\times X_*$. There exist a split semisimple $F$-group scheme $H_L$, a split maximal torus $T_L\\subset H_L$, an identification $X^*(T_L)=L$, and a surjective homomorphism $f:H_L\\to H$ with finite central scheme-theoretic kernel, carrying $T_L$ onto $T$, such that $f|_{T_L}^*:X\\to L$ is the specified inclusion. Moreover $f$ is an isomorphism if and only if $L=X$. Finite kernel means finite-dimensional coordinate algebra, and central means commuting with all group elements after every commutative $F$-algebra extension. No restriction on the characteristic or on the order of $L/X$ is imposed.",
+ "source": {
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Appendix C.35, printed p.615; Theorem 23.55 and Corollary 23.56, printed p.501; Theorem 23.9, printed p.487; Proposition 23.5, printed pp.485--486, centrality and isomorphism criteria."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-weil-algebraic-closure",
+  "def-sc-group-scheme",
+  "lem-sfb-reductive-borel-pair-structure"
+ ],
+ "proof": [
+  {
+   "text": "Put $L^\\vee=\\operatorname{Hom}_{\\mathbf Z}(L,\\mathbf Z)$. For each $\\alpha\\in\\Phi$, its rational coroot restricts to $c_\\alpha\\in L^\\vee$ by hypothesis. The reduced root datum of [lem-sfb-reductive-borel-pair-structure] gives $\\langle\\alpha,c_\\alpha\\rangle=2$ and $s_\\alpha(\\Phi)=\\Phi$. For $l\\in L$, $s_\\alpha(l)=l-\\langle l,c_\\alpha\\rangle\\alpha\\in L$ since $\\alpha\\in X\\subset L$; $s_\\alpha^2=1$. The generated reflection group acts faithfully on the finite set $\\Phi$, because $\\Phi$ spans $V=L\\otimes\\mathbf Q$, so it is finite. Distinct coroots remain distinct on $L$, since they are already distinct on $X$. Reducedness is unchanged in $V$. Thus these data satisfy all the reduced-root-datum axioms of the realization theorem.",
+   "uses": [
+    "lem-sfb-reductive-borel-pair-structure"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Appendix C.28 and C.35, printed pp.613--615: verify the axioms on the enlarged lattice."
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-root-datum-realization] to obtain $(H_L,T_L)$ with character lattice $L$, roots $\\Phi$ and coroots $c_\\alpha$. The roots still span $L\\otimes\\mathbf Q=V$. Consequently [lem-sfb-semisimple-roots-span], applied to this split reductive group, makes $H_L$ semisimple.",
+   "uses": [
+    "lem-sfb-root-datum-realization",
+    "lem-sfb-semisimple-roots-span"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Theorem 23.55, p.501, followed by Proposition 21.48, p.439."
+   }
+  },
+  {
+   "text": "For the inclusion $u:X\\hookrightarrow L$, take the root bijection to be the identity and every root exponent to be $1$. Then $u(\\alpha)=\\alpha$ and $u^\\vee(c_\\alpha)=\\alpha^\\vee$, the latter because restriction back to $X$ recovers the original functional. The map is injective with finite cokernel by hypothesis. These are precisely the hypotheses of [lem-sfb-root-datum-isogeny-realization] with source group $H_L$ and target $H$. That theorem gives $f:H_L\\to H$, surjective with finite kernel, carrying $T_L$ onto $T$, with the specified pullback $u$. Its centrality criterion applies since every exponent is $1$. Its isomorphism criterion says $f$ is an isomorphism exactly when $u$ is an isomorphism; for this inclusion that is equivalent to $L=X$. No separability condition is invoked.",
+   "uses": [
+    "lem-sfb-root-datum-isogeny-realization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Definitions 23.1--23.2, pp.483--484; Theorem 23.9, p.487; Proposition 23.5, pp.485--486."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-reductive-borel-pair-structure",
+  "lem-sfb-root-datum-realization",
+  "lem-sfb-semisimple-roots-span",
+  "lem-sfb-root-datum-isogeny-realization"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Appendix C.35, p.615; Theorem 23.55, p.501; Proposition 21.48, p.439; Definitions 23.1--23.2, pp.483--484; Theorem 23.9, p.487 and Proposition 23.5, pp.485--486."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "root.datum|rootDatum|central.isogen|weightLattice",
+   "results": "{\"t\": \"2026-10-23T13:19:26Z\", \"tool\": \"grep\", \"query\": \"root.datum|rootDatum|central.isogen|weightLattice\", \"sub\": \"\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"Mathlib/LinearAlgebra/RootSystem/Defs.lean\", \"Mathlib/LinearAlgebra/RootSystem/Defs.lean\", \"Mathlib/LinearAlgebra/RootSystem/Defs.lean\", \"Mathlib/LinearAlgebra/RootSystem/Defs.lean\", \"Mathlib/LinearAlgebra/RootSystem/Defs.lean\"], \"digest\": \"2757f456872bed70\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: RootDatum and abstract root-pairing homomorphisms do not construct algebraic groups or central isogenies; special-linear abstract group center results do not realize arbitrary lattices"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"isogeny\"",
+   "results": "{\"t\": \"2026-10-23T13:19:27Z\", \"tool\": \"loogle\", \"query\": \"\\\"isogeny\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: RootDatum and abstract root-pairing homomorphisms do not construct algebraic groups or central isogenies; special-linear abstract group center results do not realize arbitrary lattices"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Realization of root data by split reductive groups and central isogenies",
+   "results": "{\"t\": \"2026-10-23T13:19:27Z\", \"tool\": \"leansearch\", \"query\": \"Realization of root data by split reductive groups and central isogenies\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"RootDatum\", \"RootSystem.mk'\", \"LieSubalgebra.root.congr_simp\", \"RootPairing.restrictScalars_coe_root\", \"RootPairing.RootSystem\", \"LieAlgebra.IsKilling.rootSystem_root_apply\", \"RootPairing.rootSpan_eq_top_iff\", \"RootPairing.IsRootSystem.mk\"], \"digest\": \"c650e44b6b658131\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: RootDatum and abstract root-pairing homomorphisms do not construct algebraic groups or central isogenies; special-linear abstract group center results do not realize arbitrary lattices"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A central isogeny of split semisimple algebraic groups realizes any finite index enlargement of the character lattice between the root lattice and weight lattice",
+   "results": "{\"t\": \"2026-10-23T13:19:32Z\", \"tool\": \"leanfinder\", \"query\": \"A central isogeny of split semisimple algebraic groups realizes any finite index enlargement of the character lattice between the root lattice and weight lattice\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SpecialLinearGroup.centerCongr_toLin_equiv_trans_centerEquivRootsOfUnity_eq\", \"SpecialLinearGroup.centerEquivRootsOfUnity\", \"RootPairing.mk''\", \"SpecialLinearGroup.centerEquivRootsOfUnity_symm_apply\", \"RootPairing.baseOf_root_eq_baseOf_coroot\", \"LieModule.exists_forall_mem_corootSpace_smul_add_eq_zero\", \"LieAlgebra.IsKilling.apply_coroot_eq_cast'\", \"LieAlgebra.IsKilling.cartanEquivDual_symm_apply_mem_corootSpace\"], \"digest\": \"380d589858841c16\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: RootDatum and abstract root-pairing homomorphisms do not construct algebraic groups or central isogenies; special-linear abstract group center results do not realize arbitrary lattices"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The existence and isogeny theorems for reductive algebraic groups realize an inclusion of root datum lattices as a central covering homomorphism",
+   "results": "{\"t\": \"2026-10-23T13:24:44Z\", \"tool\": \"leanfinder\", \"query\": \"The existence and isogeny theorems for reductive algebraic groups realize an inclusion of root datum lattices as a central covering homomorphism\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"RootDatum\", \"RootPairing.coroot\", \"RootPairing.root'In\", \"RootPairing.Hom.coweightMap\", \"RootPairing.Hom.weightMap\", \"RootPairing.Equiv.comp_coweightMap_apply\", \"RootPairing.mk''\", \"RootPairing.Hom.root_weightMap\"], \"digest\": \"7865f487c0d0f065\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: RootDatum and abstract root-pairing homomorphisms do not construct algebraic groups or central isogenies; special-linear abstract group center results do not realize arbitrary lattices"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Realize a finite index integral enlargement of a semisimple group's character lattice by a central isogeny",
+   "results": "{\"t\": \"2026-10-23T14:45:51Z\", \"tool\": \"leanfinder\", \"query\": \"Realize a finite index integral enlargement of a semisimple group's character lattice by a central isogeny\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"FDRep.char_orthonormal\", \"FDRep.simple_iff_char_is_norm_one\", \"SpecialLinearGroup.centerCongr_toLin_equiv_trans_centerEquivRootsOfUnity_eq\", \"SpecialLinearGroup.centerEquivRootsOfUnity_invFun\", \"SpecialLinearGroup.centerEquivRootsOfUnity\", \"SpecialLinearGroup.centerEquivRootsOfUnity_apply_of_finrank_le_one\", \"FDRep.scalar_product_char_eq_finrank_equivariant\", \"SpecialLinearGroup.centerEquivRootsOfUnity_apply\"], \"digest\": \"68989ff9bc1d92ca\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: returned finite-group character theory and abstract special-linear centers do not realize character-lattice extensions of algebraic group schemes"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-simply-connected-character-lattice",
+  "date": "2026-10-23",
+  "group": "NC"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Haboush symmetric-power lifting for a trivial quotient representation. Supporting representation-theoretic input: Steinberg endomorphisms detect a nonzero fixed vector. Supporting Borel pairs and actual rho section modules. Supporting input: Integrality of the half sum of positive roots supporting the rho section modules in the Steinberg endomorphism detection input. Supporting lattice proof: Appendix C.35, printed p.615; Theorem 23.55 and Corollary 23.56, printed p.501; Theorem 23.9, printed p.487; Proposition 23.5, printed pp.485--486, centrality and isomorphism criteria.",
+   "via": [
+    "lem-sfb-simply-connected-character-lattice",
+    "lem-sfb-rho-section-modules",
+    "lem-sfb-steinberg-endomorphism-detection",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-central-lattice-enlargement",
+  "worker": "stage1",
+  "summary": "Verified Milne C.28/C.35 and the existence and isogeny theorems. Constructed the enlarged reduced root datum explicitly, reused the existing semisimplicity/spanning criterion, and extracted two general statement-only inputs. Checked centrality for scheme-theoretic kernels without separability and the prescribed inclusion, not merely an abstract lattice isomorphism.",
+  "blueprint": "Retains the inherited det-thm-sf-ctf-stability-direct-images proof (3) alteration-reduction ancestry and its supporting simply-connected-character-lattice argument. The latest blueprint gives no separate root-datum lemma; this split supplies the C.35 / 23.55 / 23.9 / 23.5 argument recorded in the item ancestry. The ancestor command returns None, as does the live item; preserve that provenance rather than invent a blueprint id."
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q123-42216da40",
+  "group": "Q123",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q123-42216da40 (reviewer sub-agent of L); spot-checked: I read the item and both new nodes in full against Milne iAG2017: C.28 and C.31 (p.613), C.35 (p.615), Def 23.1/23.2 (pp.483-484), Prop 23.5 with its proof (pp.485-486), Thm 23.9 (p.487) and Thm 23.55 (p.501). lem-sfb-root-datum-realization: its inline root-datum axioms are exactly C.28 (rd1-rd3) plus reducedness, and it is otherwise Thm 23.55. lem-sfb-root-datum-isogeny-realization: the direction (u: X*(S0)->X*(S1), b: R1->R0) and the conditions u(b a)=q a, u^vee(a^vee)=q b(a)^vee are literally Def 23.1. Its existence clause is 23.9; its centrality iff all q=1 and its isomorphism iff q=1 and u an isomorphism are 23.5 with 23.2. I tested it on Frobenius of SL2 (q=p, kernel not central), SL2->PGL2 (q=1, kernel mu2 central and nonreduced in char 2), char 0 and rank 0. Both new nodes are statement-only and searched, and neither duplicates an existing node: rg -L over dag/nodes for root datum, isogeny and existence theorem; the converse-direction node central-isogeny-borel-root-compatibility and the universal-cover node were checked. Neither restates a clause of the item. Step 1 is the elementary C.35 check: s_a(L) is in L, W acts faithfully on the spanning set Phi so W is finite, c_a is injective, reducedness is unchanged. Step 2 applies realization plus semisimple-roots-span; all hypotheses hold. Step 3 applies the isogeny node with u the inclusion, b=id, q=1; the isomorphism holds iff X=L, as literal equality. proof_deps equals the union of the uses, there is no cycle, the route stays inside sk-thm-sf-ctf-stability, there is no SGA citation and there are no tool_uses. Batch-5 finding: both flagged citations are stmt_deps on lem-sfb-reductive-borel-pair-structure for conventions, which the item already cited on the base. The reached node lem-trf-fppf-covering-base-change is a generic Mathlib leaf (fppf coverings are stable under base change), not part of the trace formula or Poincare duality or their proofs, so it is accepted. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.GroupScheme.CentralLatticeEnlargement",
+  "declaration": "AlgebraicGeometry.exists_central_isogeny_of_lattice_enlargement",
+  "file": "lean/Sheaf/AlgebraicGeometry/GroupScheme/CentralLatticeEnlargement.lean",
+  "statement": "theorem exists_central_isogeny_of_lattice_enlargement {F : Type u} [Field F] [IsAlgClosed F] (H T : Grp (Over (Spec (.of F)))) (hH : IsSemisimpleGroupScheme H.X) (iT : T ⟶ H) (hT : ReductiveTorusCentralizer.IsMaximalTorus iT) (hsplit : ∃ r : ℕ, Nonempty (T ≅ MultiplicativeType.splitTorus F r)) [IsCommMonObj T.X] [IsCommMonObj (StandardGroupSchemes.multiplicative F)] (aH : ModObj T.X H.X) (hconj : aH.smul = (iT.hom.hom ⊗ₘ 𝟙 H.X) ≫ GrpObj.conj H.X) (Φ : Finset (Additive (T ⟶ Grp.mk (StandardGroupSchemes.multiplicative F)))) (P : RootDatum Φ (Additive (T ⟶ Grp.mk (StandardGroupSchemes.multiplicative F))) (Additive (Grp.mk (StandardGroupSchemes.multiplicative F) ⟶ T))) [Module.Finite ℤ (Additive (T ⟶ Grp.mk (StandardGroupSchemes.multiplicative F)))] [Module.Finite ℤ (Additive (Grp.mk (StandardGroupSchemes.multiplicative F) ⟶ T))] (hred : P.IsReduced) (hroot : ∀ α : Φ, P.root α = α.val) (hpair : ∀ (χ : Additive (T ⟶ Grp.mk (StandardGroupSchemes.multiplicative F))) (ν : Additive (Grp.mk (StandardGroupSchemes.multiplicative F) ⟶ T)), ν.toMul.hom.hom ≫ χ.toMul.hom.hom = (𝟙 (StandardGroupSchemes.multiplicative F)) ^ (P.toLinearMap χ ν)) (hweights : ∀ χ : Additive (T ⟶ Grp.mk (StandardGroupSchemes.multiplicative F)), χ ∈ Φ ↔ χ ≠ 0 ∧ @TorusCharacterTangent.weightSpace F _ T H aH χ.toMul ≠ ⊥) (hspan : Submodule.span ℚ (Set.range (fun α : Φ ↦ TensorProduct.tmul ℤ (1 : ℚ) (P.root α))) = ⊤) (L : Submodule ℤ (ℚ ⊗[ℤ] Additive (T ⟶ Grp.mk (StandardGroupSchemes.multiplicative F)))) [Module.Free ℤ L] [Module.Finite ℤ L] (hrank : Module.finrank ℤ L = Module.finrank ℚ (ℚ ⊗[ℤ] Additive (T ⟶ Grp.mk (StandardGroupSchemes.multiplicative F)))) (hXL : ∀ χ : Additive (T ⟶ Grp.mk (StandardGroupSchemes.multiplicative F)), TensorProduct.tmul ℤ (1 : ℚ) χ ∈ L) (hindex : Finite (L ⧸ Submodule.comap L.subtype (LinearMap.range (TensorProduct.mk ℤ ℚ _ 1)))) (hintegral : ∀ (l : L) (α : Φ), ∃ n : ℤ, (((Int.castAddHom ℚ).toIntLinearMap.comp (P.coroot' α)).liftBaseChange ℚ) l.val = (n : ℚ)) : ∃ (HL TL : Grp (Over (Spec (.of F)))) (iTL : TL ⟶ HL) (_ : IsCommMonObj TL.X) (e : Additive (TL ⟶ Grp.mk (StandardGroupSchemes.multiplicative F)) ≃ₗ[ℤ] L) (f : HL ⟶ H) (fT : TL ⟶ T), IsSemisimpleGroupScheme HL.X ∧ ReductiveTorusCentralizer.IsMaximalTorus iTL ∧ (∃ r : ℕ, Nonempty (TL ≅ MultiplicativeType.splitTorus F r)) ∧ Surjective f.hom.hom.left ∧ IsFinite (GrpObj.ker f.hom.hom).hom ∧ (∀ (A : Type u) [CommRing A] [Algebra F A] (x : StandardGroupSchemes.affine F A ⟶ GrpObj.ker f.hom.hom) (g : StandardGroupSchemes.affine F A ⟶ HL.X), (x ≫ GrpObj.kerι f.hom.hom) * g = g * (x ≫ GrpObj.kerι f.hom.hom)) ∧ iTL ≫ f = fT ≫ iT ∧ Surjective fT.hom.hom.left ∧ (∀ χ : Additive (T ⟶ Grp.mk (StandardGroupSchemes.multiplicative F)), (e (Additive.ofMul (fT ≫ χ.toMul))).val = TensorProduct.tmul ℤ (1 : ℚ) χ) ∧ (IsIso f ↔ L = LinearMap.range (TensorProduct.mk ℤ ℚ _ 1))",
+  "branch": "newtargets-dag",
+  "by": "N5",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-8af4abcc1",
+  "group": "N5",
+  "result": "pass",
+  "note": "Item node differs from side-live only in lean; statement verbatim; one theorem, proof sorry only; source/blueprint docstrings with the 3-step proof plan; report has Worker report and Second reading by N5. Hypotheses: IsSemisimpleGroupScheme H, split maximal torus, root datum pinned verbatim to reductive_borel_pair_structure data (actual Hom lattices, composition pairing, conjugation weights); Module.Finite/IsReduced are consequences, not stronger assumptions; rational span; L free finite of rank dim V, X⊆L, L/X finite via comap of actual subtype; integrality via canonical liftBaseChange of P.coroot'. Conclusions: semisimple HL with split maximal TL, e: X*(TL)≃L pinned on X by fT pullback (hence on L), surjective f, finite scheme-theoretic kernel, centrality on all A-points of F-algebras in Type u, iTL≫f=fT≫iT with fT surjective, IsIso f ↔ L = X. Matches consumer simplyConnected_character_lattice interfaces. Edge cases rank 0, L=X, char p | [L:X] (μ2 nonreduced), char 0, universes OK. No duplicate found. Advisory: def-node owners (IsSemisimpleGroupScheme, IsMaximalTorus, splitTorus, weightSpace) reached only via Borel-pair stmt_dep, as in landed Q76 consumer. No compile (no file changed)."
+ }
+}

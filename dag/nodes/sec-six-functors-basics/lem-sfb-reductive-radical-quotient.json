@@ -1,0 +1,265 @@
+{
+ "id": "lem-sfb-reductive-radical-quotient",
+ "kind": "statement",
+ "title": "Central torus radical and semisimple quotient of a reductive group",
+ "statement": "Let $k$ be a field [def-weil-field] and let $G$ be a smooth [def-sbc-smooth-morphisms] affine group scheme [def-sc-group-scheme] of finite type [def-weil-finite-type-morphism] over $k$, geometrically connected and reductive. Here geometrically connected means connected after extension to an algebraic closure, with connected as in [def-weil-connected-scheme]; reductive means that $G_{\\bar k}$ has no nontrivial smooth connected normal unipotent closed subgroup scheme, for an algebraic closure $\\bar k$ of $k$. Closed normal subgroups are as in [def-sc-group-scheme-subgroup]. For smooth affine groups, unipotent means that in a faithful matrix representation every geometric point is a unipotent matrix, that is, $(u-I)^N=0$ for some $N\\geq1$.\n\nThe group $G$ has a largest smooth connected normal solvable closed subgroup scheme $R(G)$, called its radical. Solvable means having a finite descending series of closed subgroup schemes, each normal in its predecessor, in which every successive group-scheme quotient is commutative. The centre $Z(G)$ is the subgroup functor whose $A$-points are the elements of $G(A)$ commuting with every element of $G(A')$ for every commutative $A$-algebra $A'$. Then $R(G)$ is the largest subtorus of $Z(G)$. A torus is a group scheme which after extension to $\\bar k$ is isomorphic to $(\\mathbf G_m)^d$ for some $d\\geq0$, with $\\mathbf G_m$ as in [def-sc-gm-ga]. Moreover $R(G)_{\\bar k}=R(G_{\\bar k})$, and the fppf sheaf quotient $Q=G/R(G)$ is represented by a smooth affine geometrically connected group scheme of finite type over $k$ which is semisimple and reductive. Here semisimple means that $Q_{\\bar k}$ has no nontrivial smooth connected normal solvable closed subgroup scheme; in particular $Q_{\\bar k}$ has no nontrivial smooth connected normal unipotent closed subgroup scheme. The fppf sheaf quotient is the sheafification of $A\\mapsto G(A)/R(G)(A)$ for faithfully flat finitely presented coverings of commutative $k$-algebras.",
+ "source": {
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Corollary 17.62(b)--(d), printed pp.372--373; Sections 6.44--6.46, printed p.135, and Chapter 19(a)--(b), printed pp.397--400. The quotient is by the smooth central torus, with the usual algebraic-group quotient of Theorem 5.28 and Propositions 5.24--5.29 (torsor, smoothness and affineness)."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-sc-group-scheme",
+  "def-sbc-smooth-morphisms",
+  "def-weil-finite-type-morphism",
+  "def-weil-connected-scheme",
+  "def-sc-group-scheme-subgroup",
+  "def-sc-gm-ga",
+  "def-sfb-solvable-group-structure",
+  "def-sfb-tori-multiplicative-type",
+  "def-sfb-reductive-torus-centralizer-terminology",
+  "def-sfb-semisimple-group-scheme",
+  "def-sfb-fppf-group-quotient-presentation"
+ ],
+ "proof": [
+  {
+   "text": "Among the smooth connected normal solvable closed subgroups of $G$, choose $R$ of greatest dimension; this is possible since the trivial subgroup is one and the dimensions are nonnegative integers bounded by $\\dim G$. For any other such subgroup $N$, [lem-sfb-solvable-normal-subgroup-products] gives another such subgroup $RN$ containing $R$ and $N$. Maximality of the dimension and strict dimension growth for a proper closed inclusion force $RN=R$, hence $N\\subseteq R$. This proves existence and uniqueness of $R=R(G)$. The same argument constructs $C=R(G_{\\bar k})$.",
+   "uses": [
+    "lem-sfb-solvable-normal-subgroup-products"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Lemma 6.41, Proposition 6.42 and Section 6.44, printed pp.134--135."
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-perfect-solvable-unipotent-torus] over the perfect field $\\bar k$ to $C$. Its smooth connected unipotent subgroup $C_u$ is normal in $G_{\\bar k}$ because $C$ is normal there and the ambient group is smooth. Reductivity of $G$ forces $C_u=1$, so $C=C/C_u$ is a torus. By the field-extension assertion of [lem-sfb-solvable-normal-subgroup-products], $R_{\\bar k}$ is a smooth connected normal solvable subgroup of $G_{\\bar k}$; thus $R_{\\bar k}\\subseteq C$. The smooth connected subgroup assertion of [lem-sfb-multiplicative-type-largest-subtorus] makes $R_{\\bar k}$ a torus, so it is a product of copies of $\\mathbf G_m$ over $\\bar k$. This is exactly the stated definition that $R$ is a $k$-torus.",
+   "uses": [
+    "lem-sfb-perfect-solvable-unipotent-torus",
+    "lem-sfb-solvable-normal-subgroup-products",
+    "lem-sfb-multiplicative-type-largest-subtorus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Corollary 17.62(b), printed p.372; Theorem 16.33(a)--(c) and Proposition 1.90."
+   }
+  },
+  {
+   "text": "Normality gives a conjugation action $G\\times R\\to R$ by group automorphisms. Since $G$ is smooth and geometrically connected and $R$ is a torus, [lem-sfb-connected-action-torus-rigidity] makes this action the projection: $grg^{-1}=r$ after every change of scalar algebra. Hence $R\\subseteq Z(G)$ for precisely the centre functor in the statement.",
+   "uses": [
+    "lem-sfb-connected-action-torus-rigidity"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Corollary 17.62(b) and Corollary 12.37, printed pp.372,244."
+   }
+  },
+  {
+   "text": "The functor $Z(G)$ is a closed normal commutative subgroup by [lem-sfb-affine-group-centre-base-change]. It is of multiplicative type by [lem-sfb-reductive-centre-multiplicative-type], so [lem-sfb-multiplicative-type-largest-subtorus] supplies its largest subtorus $T=Z(G)^t$. This $T$ is smooth and connected, since every torus is by the same [lem-sfb-multiplicative-type-largest-subtorus], is normal in $G$ since it is central, and is solvable: the series $T\\supseteq1$ has commutative quotient $T$. Thus maximality of $R$ gives $T\\subseteq R$. Conversely Step 3 makes $R$ a subtorus of $Z(G)$, so $R\\subseteq T$. Therefore $R=Z(G)^t$.",
+   "uses": [
+    "lem-sfb-affine-group-centre-base-change",
+    "lem-sfb-reductive-centre-multiplicative-type",
+    "lem-sfb-multiplicative-type-largest-subtorus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Corollary 17.62(a)--(b), printed p.372; Notation 12.29, printed p.241."
+   }
+  },
+  {
+   "text": "Applying the argument of Steps 1--4 to $G_{\\bar k}$ gives $C=Z(G_{\\bar k})^t$; all the hypotheses hold there by the geometric reductivity assumption. Using separately base change for the scheme-theoretic centre and for the largest subtorus gives the equality of closed subgroups $$R_{\\bar k}=(Z(G)^t)_{\\bar k}=(Z(G)_{\\bar k})^t=Z(G_{\\bar k})^t=C.$$ Thus $R(G)_{\\bar k}=R(G_{\\bar k})$, without asserting such a base-change theorem for the radicals of arbitrary nonreductive groups.",
+   "uses": [
+    "lem-sfb-affine-group-centre-base-change",
+    "lem-sfb-multiplicative-type-largest-subtorus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Corollary 17.62(c), printed pp.372--373."
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-affine-normal-quotient-geometry] to the closed normal subgroup $R\\subseteq G$. It represents exactly the fppf sheaf quotient specified in the statement by an affine finite-type group $Q$, which is smooth and geometrically connected since $G$ is. The same cited statement identifies $$Q_{\\bar k}\\simeq G_{\\bar k}/R_{\\bar k}=G_{\\bar k}/C$$ compatibly with the quotient map and its kernel, using Step 5.",
+   "uses": [
+    "lem-sfb-affine-normal-quotient-geometry"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Propositions 5.24--5.29, printed pp.104--105; Corollary 17.62(d), printed p.373."
+   }
+  },
+  {
+   "text": "Let $S\\subseteq Q_{\\bar k}$ be any smooth connected normal solvable closed subgroup and let $P$ be its inverse image in $G_{\\bar k}$. The exact-sequence and subgroup-correspondence assertions of [lem-sfb-affine-normal-quotient-geometry] give $1\\to C\\to P\\to S\\to1$, with $P$ smooth and connected and normal in $G_{\\bar k}$. Pull back a solvable series for $S$; the successive quotients above $C$ are the original commutative quotients, by that correspondence assertion. Append a solvable series for $C$. This is a finite solvable series for $P$. Consequently $P\\subseteq C$ by the maximality proved in Step 1, while the inverse image contains $C$; hence $P=C$ and exactness forces $S=P/C=1$. This proves the geometric semisimplicity required. Finally [lem-sfb-smooth-unipotent-solvable] makes every smooth connected normal unipotent subgroup of $Q_{\\bar k}$ solvable, so the same conclusion makes it trivial. Together with Step 6 this proves that $Q$ is reductive as well.",
+   "uses": [
+    "lem-sfb-affine-normal-quotient-geometry",
+    "lem-sfb-smooth-unipotent-solvable"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Section 6.44, printed p.135; Proposition 19.2(b), printed p.398; Corollary 17.62(d), printed p.373; Theorem 14.5 and Example 6.49."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-solvable-normal-subgroup-products",
+  "lem-sfb-perfect-solvable-unipotent-torus",
+  "lem-sfb-multiplicative-type-largest-subtorus",
+  "lem-sfb-connected-action-torus-rigidity",
+  "lem-sfb-affine-group-centre-base-change",
+  "lem-sfb-reductive-centre-multiplicative-type",
+  "lem-sfb-affine-normal-quotient-geometry",
+  "lem-sfb-smooth-unipotent-solvable"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Corollary 17.62(b)--(d), printed pp.372--373, expanding radical existence by Lemma 6.41/Proposition 6.42 and quotient semisimplicity by the inverse-image argument of Proposition 19.2(b), printed p.398."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The radical of a reductive algebraic group is its largest central torus and the quotient by the radical is semisimple",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"LieAlgebra.IsSemisimple.instHasTrivialRadical\", \"module\": \"Mathlib/Algebra/Lie/Semisimple/Basic\", \"type\": \"∀ {R : Type u_1} {L : Type u_2} [inst : CommRing R] [inst_1 : LieRing L] [inst_2 : LieAlgebra R L]\\n  [LieAlgebra.IsSemisimple R L], LieAlgebra.HasTrivialRadical R L\", \"doc\": \"Every semisimple Lie algebra over a commutative ring has a trivial radical, meaning its radical (the largest solvable ideal) is the zero ideal.\"}\n  {\"name\": \"LieAlgebra.abelian_radical_of_hasTrivialRadical\", \"module\": \"Mathlib/Algebra/Lie/Semisimple/Basic\", \"type\": \"∀ (R : Type u_1) (L : Type u_2) [inst : CommRing R] [inst_1 : LieRing L] [inst_2 : LieAlgebra R L]\\n  [LieAlgebra.HasTrivialRadical R L], IsLieAbelian ↥(LieAlgebra.radical R L)\", \"doc\": \"If a Lie algebra $\\\\mathfrak{g}$ over a commutative ring $R$ has a trivial radical (i.e., its radical is the zero ideal), then the radical is an abelian Lie algebra. This follows because the trivial ra\"}\n  {\"name\": \"LieAlgebra.hasTrivialRadical_of_isIrreducible_of_isFaithful\", \"module\": \"Mathlib/Algebra/Lie/Semisimple/Lemmas\", \"type\": \"∀ (k : Type u_1) (L : Type u_2) (M : Type u_3) [inst : Field k] [CharZero k] [inst_2 : LieRing L]\\n  [inst_3 : LieAlgebra k L] [Module.Finite k L] [inst_5 : AddCommGroup M] [inst_6 : Module k M]\\n  [inst_7 : LieRingModule L M] [inst_8 : LieModule k L M] [Module.Finite k M] [LieModule.IsIrreducible k L\", \"doc\": \"If a Lie algebra $\\\\mathfrak{g}$ over a field $k$ admits an irreducible and faithful module $M$ such that the trace of the endomorphism $\\\\mathrm{ad}_x \\\\in \\\\mathrm{End}_k(M)$ corresponding to each $x \\\\i\"}\n  {\"name\": \"LieAlgebra.hasTrivialRadical_iff\", \"module\": \"Mathlib/Algebra/Lie/Semisimple/Defs\", \"type\": \"∀ (R : Type u_1) (L : Type u_2) [inst : CommRing R] [inst_1 : LieRing L] [inst_2 : LieAlgebra R L],\\n  LieAlgebra.HasTrivialRadical R L ↔ LieAlgebra.radical R L = ⊥\", \"doc\": \"For any commutative ring $ R $ and Lie algebra $ L $ over $ R $, the Lie algebra $ L $ has a trivial radical if and only if its radical (the sum of all solvable ideals) equals the zero submodule $\\\\{0\\\\\"}\n  {\"name\": \"LieAlgebra.IsKilling.instHasTrivialRadical\", \"module\": \"Mathlib/Algebra/Lie/Killing\", \"type\": \"∀ (R : Type u_1) (L : Type u_3) [inst : CommRing R] [inst_1 : LieRing L] [inst_2 : LieAlgebra R L]\\n  [LieAlgebra.IsKilling R L] [Module.Free R L] [Module.Finite R L] [IsDomain R] [IsPrincipalIdealRing R],\\n  LieAlgebra.HasTrivialRadical R L\", \"doc\": \"For a Lie algebra $ L $ over a commutative ring $ R $ that is a domain and a principal ideal ring, if $ L $ is finitely generated and free as an $ R $-module and its Killing form is non-degenerate, th\"}\n  {\"name\": \"LieAlgebra.hasCentralRadical_and_of_isIrreducible_of_isFaithful\", \"module\": \"Mathlib/Algebra/Lie/Semisimple/Lemmas\", \"type\": \"∀ (k : Type u_1) (L : Type u_2) (M : Type u_3) [inst : Field k] [CharZero k] [inst_2 : LieRing L]\\n  [inst_3 : LieAlgebra k L] [Module.Finite k L] [inst_5 : AddCommGroup M] [inst_6 : Module k M]\\n  [inst_7 : LieRingModule L M] [inst_8 : LieModule k L M] [Module.Finite k M] [LieModule.IsIrreducible k L\", \"doc\": \"For a Lie algebra $\\\\mathfrak{g}$ over a field $k$ with an irreducible and faithful module $M$, the radical of $\\\\mathfrak{g}$ is central, and an element $x \\\\in \\\\mathfrak{g}$ lies in the center if and o\"}\n  {\"name\": \"LieAlgebra.hasCentralRadical_of_radical_le\", \"module\": \"Mathlib/Algebra/Lie/Semisimple/Defs\", \"type\": \"∀ (R : Type u_1) (L : Type u_2) [inst : CommRing R] [inst_1 : LieRing L] [inst_2 : LieAlgebra R L],\\n  LieAlgebra.radical R L ≤ LieAlgebra.center R L → LieAlgebra.HasCentralRadical R L\", \"doc\": \"For a Lie algebra $ L $ over a commutative ring $ R $, if the radical of $ L $ is contained within its center, then $ L $ has a central radical (i.e., its radical is a central ideal).\"}\n  {\"name\": \"LieAlgebra.IsSimple.instHasTrivialRadical\", \"module\": \"Mathlib/Algebra/Lie/Semisimple/Basic\", \"type\": \"∀ (R : Type u_1) (L : Type u_2) [inst : CommRing R] [inst_1 : LieRing L] [inst_2 : LieAlgebra R L]\\n  [LieAlgebra.IsSimple R L], LieAlgebra.HasTrivialRadical R L\", \"doc\": \"Every simple Lie algebra over a commutative ring has a trivial radical, meaning its radical (the largest solvable ideal) is the zero ideal.\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: hits describe abstract matrix groups, representations or Lie algebras, not reductive affine group schemes over arbitrary fields or their geometric radicals"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A reductive group modulo its maximal connected solvable normal subgroup has trivial geometric solvable radical",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"LieAlgebra.hasTrivialRadical_of_no_solvable_ideals\", \"module\": \"Mathlib/Algebra/Lie/Semisimple/Basic\", \"type\": \"∀ {R : Type u_1} {L : Type u_2} [inst : CommRing R] [inst_1 : LieRing L] [inst_2 : LieAlgebra R L],\\n  (∀ (I : LieIdeal R L), LieAlgebra.IsSolvable ↥I → I = ⊥) → LieAlgebra.HasTrivialRadical R L\", \"doc\": \"If every solvable Lie ideal $ I $ of a Lie algebra $ L $ over a commutative ring $ R $ satisfies $ I = \\\\{0\\\\} $, then $ L $ has a trivial radical (i.e., its radical—the largest solvable ideal—is the ze\"}\n  {\"name\": \"LieAlgebra.hasTrivialRadical_iff_no_solvable_ideals\", \"module\": \"Mathlib/Algebra/Lie/Semisimple/Basic\", \"type\": \"∀ (R : Type u_1) (L : Type u_2) [inst : CommRing R] [inst_1 : LieRing L] [inst_2 : LieAlgebra R L],\\n  LieAlgebra.HasTrivialRadical R L ↔ ∀ (I : LieIdeal R L), LieAlgebra.IsSolvable ↥I → I = ⊥\", \"doc\": \"A Lie algebra $ L $ over a commutative ring $ R $ has a trivial radical (i.e., its radical is the zero ideal) if and only if every solvable Lie ideal $ I $ of $ L $ satisfies $ I = \\\\{0\\\\} $.\"}\n  {\"name\": \"LieAlgebra.radical_eq_top_of_isSolvable\", \"module\": \"Mathlib/Algebra/Lie/Solvable\", \"type\": \"∀ (R : Type u) (L : Type v) [inst : CommRing R] [inst_1 : LieRing L] [inst_2 : LieAlgebra R L]\\n  [LieAlgebra.IsSolvable L], LieAlgebra.radical R L = ⊤\", \"doc\": \"If $ \\\\mathfrak{g} $ is a solvable Lie algebra over a commutative ring $ R $, then its radical (the sum of all solvable ideals) is equal to the entire Lie algebra $ \\\\mathfrak{g} $, i.e., $ \\\\mathrm{radi\"}\n  {\"name\": \"LieAlgebra.abelian_radical_iff_solvable_is_abelian\", \"module\": \"Mathlib/Algebra/Lie/Semisimple/Basic\", \"type\": \"∀ (R : Type u_1) (L : Type u_2) [inst : CommRing R] [inst_1 : LieRing L] [inst_2 : LieAlgebra R L] [IsNoetherian R L],\\n  IsLieAbelian ↥(LieAlgebra.radical R L) ↔ ∀ (I : LieIdeal R L), LieAlgebra.IsSolvable ↥I → IsLieAbelian ↥I\", \"doc\": \"In a Noetherian Lie algebra $\\\\mathfrak{g}$ over a commutative ring $R$, the radical of $\\\\mathfrak{g}$ is abelian if and only if every solvable ideal of $\\\\mathfrak{g}$ is abelian.\"}\n  {\"name\": \"LieAlgebra.hasTrivialRadical_iff\", \"module\": \"Mathlib/Algebra/Lie/Semisimple/Defs\", \"type\": \"∀ (R : Type u_1) (L : Type u_2) [inst : CommRing R] [inst_1 : LieRing L] [inst_2 : LieAlgebra R L],\\n  LieAlgebra.HasTrivialRadical R L ↔ LieAlgebra.radical R L = ⊥\", \"doc\": \"For any commutative ring $ R $ and Lie algebra $ L $ over $ R $, the Lie algebra $ L $ has a trivial radical if and only if its radical (the sum of all solvable ideals) equals the zero submodule $\\\\{0\\\\\"}\n  {\"name\": \"LieAlgebra.abelian_radical_of_hasTrivialRadical\", \"module\": \"Mathlib/Algebra/Lie/Semisimple/Basic\", \"type\": \"∀ (R : Type u_1) (L : Type u_2) [inst : CommRing R] [inst_1 : LieRing L] [inst_2 : LieAlgebra R L]\\n  [LieAlgebra.HasTrivialRadical R L], IsLieAbelian ↥(LieAlgebra.radical R L)\", \"doc\": \"If a Lie algebra $\\\\mathfrak{g}$ over a commutative ring $R$ has a trivial radical (i.e., its radical is the zero ideal), then the radical is an abelian Lie algebra. This follows because the trivial ra\"}\n  {\"name\": \"LieAlgebra.radicalIsSolvable\", \"module\": \"Mathlib/Algebra/Lie/Solvable\", \"type\": \"∀ (R : Type u) (L : Type v) [inst : CommRing R] [inst_1 : LieRing L] [inst_2 : LieAlgebra R L] [IsNoetherian R L],\\n  LieAlgebra.IsSolvable ↥(LieAlgebra.radical R L)\", \"doc\": \"If a Lie algebra $ L $ over a commutative ring $ R $ is Noetherian (i.e., every submodule is finitely generated), then its radical—the sum of all solvable ideals in $ L $—is itself a solvable ideal.\"}\n  {\"name\": \"LieAlgebra.HasTrivialRadical.radical_eq_bot\", \"module\": \"Mathlib/Algebra/Lie/Semisimple/Defs\", \"type\": \"∀ {R : Type u_1} {L : Type u_2} {inst : CommRing R} {inst_1 : LieRing L} {inst_2 : LieAlgebra R L}\\n  [self : LieAlgebra.HasTrivialRadical R L], LieAlgebra.radical R L = ⊥\", \"doc\": \"For any Lie algebra $ L $ over a commutative ring $ R $ with a trivial radical, the radical of $ L $ is equal to the zero submodule, i.e., $\\\\operatorname{rad}(L) = \\\\{0\\\\}$.\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: hits describe abstract matrix groups, representations or Lie algebras, not reductive affine group schemes over arbitrary fields or their geometric radicals"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Reductive\", \"radical\"",
+   "results": "[loogle] OK 0 hit(s)",
+   "date": "2026-10-22",
+   "verdict": "no match: hits describe abstract matrix groups, representations or Lie algebras, not reductive affine group schemes over arbitrary fields or their geometric radicals"
+  },
+  {
+   "tool": "grep",
+   "query": "[Rr]eductive|[Ss]emisimple.*[Gg]roup|[Ss]olvable[Rr]adical",
+   "results": "[grep] OK 7 hit(s)\n  {\"file\": \"Mathlib/RingTheory/SimpleModule/InjectiveProjective.lean\", \"line\": \"21\", \"text\": \"variable (R : Type*) [Ring R] [IsSemisimpleRing R] (M : Type*) [AddCommGroup M] [Module R M]\"}\n  {\"file\": \"Mathlib/LinearAlgebra/Semisimple.lean\", \"line\": \"119\", \"text\": \"protected lemma _root_.LinearEquiv.isSemisimple_iff {M₂ : Type*} [AddCommGroup M₂] [Module R M₂]\"}\n  {\"file\": \"Mathlib/Algebra/Lie/Semisimple/Lemmas.lean\", \"line\": \"14\", \"text\": \"This file is a home for lemmas about semisimple and reductive Lie algebras.\"}\n  {\"file\": \"Mathlib/Algebra/Lie/Semisimple/Lemmas.lean\", \"line\": \"18\", \"text\": \"  algebra with an irreducible faithful finite-dimensional representation is reductive.\"}\n  {\"file\": \"Mathlib/Algebra/Lie/Semisimple/Defs.lean\", \"line\": \"71\", \"text\": \"are called *reductive*, if the coefficients are a field of characteristic zero.\"}\n  {\"file\": \"Mathlib/Algebra/Lie/Semisimple/Defs.lean\", \"line\": \"74\", \"text\": \"the label 'reductive' should mean when the coefficients are not a field of characteristic zero. -/\"}\n  {\"file\": \"Mathlib/RepresentationTheory/Semisimple.lean\", \"line\": \"43\", \"text\": \"theorem isSemisimpleModule_iff_isSemisimpleRepresentation_ofModule (M : Type*) [AddCommGroup M]\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: hits describe abstract matrix groups, representations or Lie algebras, not reductive affine group schemes over arbitrary fields or their geometric radicals"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The radical of a reductive algebraic group is its largest central torus and the quotient by the radical is semisimple",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"LieAlgebra.hasCentralRadical_iff\", \"module\": \"Mathlib.Algebra.Lie.Semisimple.Defs\", \"type\": \"∀ (R : Type u_1) (L : Type u_2) [inst : CommRing R] [inst_1 : LieRing L] [inst_2 : LieAlgebra R L],\\n  LieAlgebra.HasCentralRadical R L ↔ LieAlgebra.radical R L = LieAlgebra.center R L\", \"doc\": \"For a Lie algebra $\\\\mathfrak{g}$ over a commutative ring $R$, the radical of $\\\\mathfrak{g}$ is a central ideal if and only if the radical of $\\\\mathfrak{g}$ is equal to the center of $\\\\mathfrak{g}$.\"}\n  {\"name\": \"LieAlgebra.IsSemisimple.instHasTrivialRadical\", \"module\": \"Mathlib.Algebra.Lie.Semisimple.Basic\", \"type\": \": HasTrivialRadical R L\", \"doc\": \"Every semisimple Lie algebra over a commutative ring has a trivial radical, meaning its radical (the largest solvable ideal) is the zero ideal.\"}\n  {\"name\": \"LieAlgebra.radical\", \"module\": \"Mathlib.Algebra.Lie.Solvable\", \"type\": \"(R : Type u) → (L : Type v) → [inst : CommRing R] → [inst_1 : LieRing L] → [inst_2 : LieAlgebra R L] → LieIdeal R L\", \"doc\": \"The radical of a Lie algebra $\\\\mathfrak{g}$ over a commutative ring $R$ is defined as the supremum (sum) of all solvable Lie ideals in $\\\\mathfrak{g}$. This represents the largest solvable ideal contai\"}\n  {\"name\": \"LieAlgebra.HasCentralRadical.radical_eq_center\", \"module\": \"Mathlib.Algebra.Lie.Semisimple.Defs\", \"type\": \"∀ {R : Type u_1} {L : Type u_2} {inst : CommRing R} {inst_1 : LieRing L} {inst_2 : LieAlgebra R L}\\n  [self : LieAlgebra.HasCentralRadical R L], LieAlgebra.radical R L = LieAlgebra.center R L\", \"doc\": \"For any commutative ring $ R $ and Lie algebra $ L $ over $ R $ with a central radical, the radical of $ L $ is equal to its center. That is, $ \\\\operatorname{rad}(L) = \\\\mathfrak{z}(L) $, where $ \\\\oper\"}\n  {\"name\": \"LieAlgebra.radical_eq_top_of_isSolvable\", \"module\": \"Mathlib.Algebra.Lie.Solvable\", \"type\": \"[IsSolvable L] : radical R L = ⊤\", \"doc\": \"If $ \\\\mathfrak{g} $ is a solvable Lie algebra over a commutative ring $ R $, then its radical (the sum of all solvable ideals) is equal to the entire Lie algebra $ \\\\mathfrak{g} $, i.e., $ \\\\mathrm{radi\"}\n  {\"name\": \"LieAlgebra.HasCentralRadical.mk\", \"module\": \"Mathlib.Algebra.Lie.Semisimple.Defs\", \"type\": \"∀ {R : Type u_1} {L : Type u_2} [inst : CommRing R] [inst_1 : LieRing L] [inst_2 : LieAlgebra R L],\\n  LieAlgebra.radical R L = LieAlgebra.center R L → LieAlgebra.HasCentralRadical R L\", \"doc\": \"If the radical of a Lie algebra $\\\\mathfrak{g}$ over a commutative ring $R$ equals its center, then $\\\\mathfrak{g}$ has a central radical (i.e., its radical is a central ideal).\"}\n  {\"name\": \"LieAlgebra.hasCentralRadical_of_radical_le\", \"module\": \"Mathlib.Algebra.Lie.Semisimple.Defs\", \"type\": \"(h : radical R L ≤ center R L) : LieAlgebra.HasCentralRadical R L\", \"doc\": \"For a Lie algebra $ L $ over a commutative ring $ R $, if the radical of $ L $ is contained within its center, then $ L $ has a central radical (i.e., its radical is a central ideal).\"}\n  {\"name\": \"LieAlgebra.abelian_radical_of_hasTrivialRadical\", \"module\": \"Mathlib.Algebra.Lie.Semisimple.Basic\", \"type\": \"[HasTrivialRadical R L] : IsLieAbelian (radical R L)\", \"doc\": \"If a Lie algebra $\\\\mathfrak{g}$ over a commutative ring $R$ has a trivial radical (i.e., its radical is the zero ideal), then the radical is an abelian Lie algebra. This follows because the trivial ra\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: hits describe abstract matrix groups, representations or Lie algebras, not reductive affine group schemes over arbitrary fields or their geometric radicals"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The solvable radical of a reductive algebraic group is a central torus and its quotient is semisimple",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"LieAlgebra.hasCentralRadical_and_of_isIrreducible_of_isFaithful\", \"module\": \"Mathlib/Algebra/Lie/Semisimple/Lemmas\", \"type\": \"∀ (k : Type u_1) (L : Type u_2) (M : Type u_3) [inst : Field k] [CharZero k] [inst_2 : LieRing L]\\n  [inst_3 : LieAlgebra k L] [Module.Finite k L] [inst_5 : AddCommGroup M] [inst_6 : Module k M]\\n  [inst_7 : LieRingModule L M] [inst_8 : LieModule k L M] [Module.Finite k M] [LieModule.IsIrreducible k L\", \"doc\": \"For a Lie algebra $\\\\mathfrak{g}$ over a field $k$ with an irreducible and faithful module $M$, the radical of $\\\\mathfrak{g}$ is central, and an element $x \\\\in \\\\mathfrak{g}$ lies in the center if and o\"}\n  {\"name\": \"LieAlgebra.IsSemisimple.instHasTrivialRadical\", \"module\": \"Mathlib/Algebra/Lie/Semisimple/Basic\", \"type\": \"∀ {R : Type u_1} {L : Type u_2} [inst : CommRing R] [inst_1 : LieRing L] [inst_2 : LieAlgebra R L]\\n  [LieAlgebra.IsSemisimple R L], LieAlgebra.HasTrivialRadical R L\", \"doc\": \"Every semisimple Lie algebra over a commutative ring has a trivial radical, meaning its radical (the largest solvable ideal) is the zero ideal.\"}\n  {\"name\": \"LieAlgebra.hasCentralRadical_iff\", \"module\": \"Mathlib/Algebra/Lie/Semisimple/Defs\", \"type\": \"∀ (R : Type u_1) (L : Type u_2) [inst : CommRing R] [inst_1 : LieRing L] [inst_2 : LieAlgebra R L],\\n  LieAlgebra.HasCentralRadical R L ↔ LieAlgebra.radical R L = LieAlgebra.center R L\", \"doc\": \"For a Lie algebra $\\\\mathfrak{g}$ over a commutative ring $R$, the radical of $\\\\mathfrak{g}$ is a central ideal if and only if the radical of $\\\\mathfrak{g}$ is equal to the center of $\\\\mathfrak{g}$.\"}\n  {\"name\": \"LieAlgebra.hasCentralRadical_of_radical_le\", \"module\": \"Mathlib/Algebra/Lie/Semisimple/Defs\", \"type\": \"∀ (R : Type u_1) (L : Type u_2) [inst : CommRing R] [inst_1 : LieRing L] [inst_2 : LieAlgebra R L],\\n  LieAlgebra.radical R L ≤ LieAlgebra.center R L → LieAlgebra.HasCentralRadical R L\", \"doc\": \"For a Lie algebra $ L $ over a commutative ring $ R $, if the radical of $ L $ is contained within its center, then $ L $ has a central radical (i.e., its radical is a central ideal).\"}\n  {\"name\": \"LieAlgebra.radicalIsSolvable\", \"module\": \"Mathlib/Algebra/Lie/Solvable\", \"type\": \"∀ (R : Type u) (L : Type v) [inst : CommRing R] [inst_1 : LieRing L] [inst_2 : LieAlgebra R L] [IsNoetherian R L],\\n  LieAlgebra.IsSolvable ↥(LieAlgebra.radical R L)\", \"doc\": \"If a Lie algebra $ L $ over a commutative ring $ R $ is Noetherian (i.e., every submodule is finitely generated), then its radical—the sum of all solvable ideals in $ L $—is itself a solvable ideal.\"}\n  {\"name\": \"LieAlgebra.HasCentralRadical\", \"module\": \"Mathlib/Algebra/Lie/Semisimple/Defs\", \"type\": \"(R : Type u_1) → (L : Type u_2) → [inst : CommRing R] → [inst_1 : LieRing L] → [LieAlgebra R L] → Prop\", \"doc\": \"The Lie algebra $ L $ over the commutative ring $ R $ has a central radical, meaning its radical is a central ideal.\"}\n  {\"name\": \"LieAlgebra.HasCentralRadical.radical_eq_center\", \"module\": \"Mathlib/Algebra/Lie/Semisimple/Defs\", \"type\": \"∀ {R : Type u_1} {L : Type u_2} {inst : CommRing R} {inst_1 : LieRing L} {inst_2 : LieAlgebra R L}\\n  [self : LieAlgebra.HasCentralRadical R L], LieAlgebra.radical R L = LieAlgebra.center R L\", \"doc\": \"For any commutative ring $ R $ and Lie algebra $ L $ over $ R $ with a central radical, the radical of $ L $ is equal to its center. That is, $ \\\\operatorname{rad}(L) = \\\\mathfrak{z}(L) $, where $ \\\\oper\"}\n  {\"name\": \"LieAlgebra.hasTrivialRadical_of_isIrreducible_of_isFaithful\", \"module\": \"Mathlib/Algebra/Lie/Semisimple/Lemmas\", \"type\": \"∀ (k : Type u_1) (L : Type u_2) (M : Type u_3) [inst : Field k] [CharZero k] [inst_2 : LieRing L]\\n  [inst_3 : LieAlgebra k L] [Module.Finite k L] [inst_5 : AddCommGroup M] [inst_6 : Module k M]\\n  [inst_7 : LieRingModule L M] [inst_8 : LieModule k L M] [Module.Finite k M] [LieModule.IsIrreducible k L\", \"doc\": \"If a Lie algebra $\\\\mathfrak{g}$ over a field $k$ admits an irreducible and faithful module $M$ such that the trace of the endomorphism $\\\\mathrm{ad}_x \\\\in \\\\mathrm{End}_k(M)$ corresponding to each $x \\\\i\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: Lie-algebra radicals do not give a statement about geometric solvable radicals and fppf quotients of group schemes"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Reductive affine group schemes have a maximal central torus with semisimple quotient",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"LieAlgebra.hasCentralRadical_and_of_isIrreducible_of_isFaithful\", \"module\": \"Mathlib/Algebra/Lie/Semisimple/Lemmas\", \"type\": \"∀ (k : Type u_1) (L : Type u_2) (M : Type u_3) [inst : Field k] [CharZero k] [inst_2 : LieRing L]\\n  [inst_3 : LieAlgebra k L] [Module.Finite k L] [inst_5 : AddCommGroup M] [inst_6 : Module k M]\\n  [inst_7 : LieRingModule L M] [inst_8 : LieModule k L M] [Module.Finite k M] [LieModule.IsIrreducible k L\", \"doc\": \"For a Lie algebra $\\\\mathfrak{g}$ over a field $k$ with an irreducible and faithful module $M$, the radical of $\\\\mathfrak{g}$ is central, and an element $x \\\\in \\\\mathfrak{g}$ lies in the center if and o\"}\n  {\"name\": \"RootPairing.GeckConstruction.instHasTrivialRadical\", \"module\": \"Mathlib/LinearAlgebra/RootSystem/GeckConstruction/Semisimple\", \"type\": \"∀ {ι : Type u_1} {K : Type u_2} {M : Type u_3} {N : Type u_4} [inst : Field K] [inst_1 : CharZero K]\\n  [inst_2 : DecidableEq ι] [inst_3 : Fintype ι] [inst_4 : AddCommGroup M] [inst_5 : Module K M]\\n  [inst_6 : AddCommGroup N] [inst_7 : Module K N] {P : RootPairing ι K M N} [P.IsRootSystem]\\n  [inst_9 \", \"doc\": \"The Lie algebra constructed via the Geck construction from a root pairing over an algebraically closed field has a trivial radical, hence is semisimple. Specifically, the Lie subalgebra of the matrix \"}\n  {\"name\": \"LieAlgebra.exists_isCartanSubalgebra_engel\", \"module\": \"Mathlib/Algebra/Lie/CartanExists\", \"type\": \"∀ (K : Type u_1) (L : Type u_2) [inst : Field K] [inst_1 : LieRing L] [inst_2 : LieAlgebra K L] [Module.Finite K L]\\n  [Infinite K], ∃ x, (LieSubalgebra.engel K x).IsCartanSubalgebra\", \"doc\": \"For an infinite field $ K $, there exists an element $ x $ in the Lie algebra $ L $ such that the Engel subalgebra associated with $ x $ forms a Cartan subalgebra of $ L $. This means the maximal gene\"}\n  {\"name\": \"LieAlgebra.IsSemisimple.instHasTrivialRadical\", \"module\": \"Mathlib/Algebra/Lie/Semisimple/Basic\", \"type\": \"∀ {R : Type u_1} {L : Type u_2} [inst : CommRing R] [inst_1 : LieRing L] [inst_2 : LieAlgebra R L]\\n  [LieAlgebra.IsSemisimple R L], LieAlgebra.HasTrivialRadical R L\", \"doc\": \"Every semisimple Lie algebra over a commutative ring has a trivial radical, meaning its radical (the largest solvable ideal) is the zero ideal.\"}\n  {\"name\": \"LieAlgebra.hasCentralRadical_of_radical_le\", \"module\": \"Mathlib/Algebra/Lie/Semisimple/Defs\", \"type\": \"∀ (R : Type u_1) (L : Type u_2) [inst : CommRing R] [inst_1 : LieRing L] [inst_2 : LieAlgebra R L],\\n  LieAlgebra.radical R L ≤ LieAlgebra.center R L → LieAlgebra.HasCentralRadical R L\", \"doc\": \"For a Lie algebra $ L $ over a commutative ring $ R $, if the radical of $ L $ is contained within its center, then $ L $ has a central radical (i.e., its radical is a central ideal).\"}\n  {\"name\": \"LieAlgebra.HasCentralRadical\", \"module\": \"Mathlib/Algebra/Lie/Semisimple/Defs\", \"type\": \"(R : Type u_1) → (L : Type u_2) → [inst : CommRing R] → [inst_1 : LieRing L] → [LieAlgebra R L] → Prop\", \"doc\": \"The Lie algebra $ L $ over the commutative ring $ R $ has a central radical, meaning its radical is a central ideal.\"}\n  {\"name\": \"LieAlgebra.hasTrivialRadical_of_isIrreducible_of_isFaithful\", \"module\": \"Mathlib/Algebra/Lie/Semisimple/Lemmas\", \"type\": \"∀ (k : Type u_1) (L : Type u_2) (M : Type u_3) [inst : Field k] [CharZero k] [inst_2 : LieRing L]\\n  [inst_3 : LieAlgebra k L] [Module.Finite k L] [inst_5 : AddCommGroup M] [inst_6 : Module k M]\\n  [inst_7 : LieRingModule L M] [inst_8 : LieModule k L M] [Module.Finite k M] [LieModule.IsIrreducible k L\", \"doc\": \"If a Lie algebra $\\\\mathfrak{g}$ over a field $k$ admits an irreducible and faithful module $M$ such that the trace of the endomorphism $\\\\mathrm{ad}_x \\\\in \\\\mathrm{End}_k(M)$ corresponding to each $x \\\\i\"}\n  {\"name\": \"LieAlgebra.hasCentralRadical_iff\", \"module\": \"Mathlib/Algebra/Lie/Semisimple/Defs\", \"type\": \"∀ (R : Type u_1) (L : Type u_2) [inst : CommRing R] [inst_1 : LieRing L] [inst_2 : LieAlgebra R L],\\n  LieAlgebra.HasCentralRadical R L ↔ LieAlgebra.radical R L = LieAlgebra.center R L\", \"doc\": \"For a Lie algebra $\\\\mathfrak{g}$ over a commutative ring $R$, the radical of $\\\\mathfrak{g}$ is a central ideal if and only if the radical of $\\\\mathfrak{g}$ is equal to the center of $\\\\mathfrak{g}$.\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: Lie-algebra radicals do not give a statement about geometric solvable radicals and fppf quotients of group schemes"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Reductive\", \"radical\"",
+   "results": "[loogle] OK 0 hit(s)",
+   "date": "2026-10-23",
+   "verdict": "no match: Lie-algebra radicals do not give a statement about geometric solvable radicals and fppf quotients of group schemes"
+  },
+  {
+   "tool": "grep",
+   "query": "reductive|solvableRadical",
+   "results": "[grep] OK 4 hit(s)\n  {\"file\": \"Mathlib/Algebra/Lie/Semisimple/Lemmas.lean\", \"line\": \"14\", \"text\": \"This file is a home for lemmas about semisimple and reductive Lie algebras.\"}\n  {\"file\": \"Mathlib/Algebra/Lie/Semisimple/Lemmas.lean\", \"line\": \"18\", \"text\": \"  algebra with an irreducible faithful finite-dimensional representation is reductive.\"}\n  {\"file\": \"Mathlib/Algebra/Lie/Semisimple/Defs.lean\", \"line\": \"71\", \"text\": \"are called *reductive*, if the coefficients are a field of characteristic zero.\"}\n  {\"file\": \"Mathlib/Algebra/Lie/Semisimple/Defs.lean\", \"line\": \"74\", \"text\": \"the label 'reductive' should mean when the coefficients are not a field of characteristic zero. -/\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: Lie-algebra radicals do not give a statement about geometric solvable radicals and fppf quotients of group schemes"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The solvable radical of a reductive algebraic group is a central torus and its quotient is semisimple",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"LieAlgebra.radicalIsSolvable\", \"module\": \"Mathlib.Algebra.Lie.Solvable\", \"type\": \"[IsNoetherian R L] : IsSolvable (radical R L)\", \"doc\": \"If a Lie algebra $ L $ over a commutative ring $ R $ is Noetherian (i.e., every submodule is finitely generated), then its radical—the sum of all solvable ideals in $ L $—is itself a solvable ideal.\"}\n  {\"name\": \"LieAlgebra.hasCentralRadical_iff\", \"module\": \"Mathlib.Algebra.Lie.Semisimple.Defs\", \"type\": \"∀ (R : Type u_1) (L : Type u_2) [inst : CommRing R] [inst_1 : LieRing L] [inst_2 : LieAlgebra R L],\\n  LieAlgebra.HasCentralRadical R L ↔ LieAlgebra.radical R L = LieAlgebra.center R L\", \"doc\": \"For a Lie algebra $\\\\mathfrak{g}$ over a commutative ring $R$, the radical of $\\\\mathfrak{g}$ is a central ideal if and only if the radical of $\\\\mathfrak{g}$ is equal to the center of $\\\\mathfrak{g}$.\"}\n  {\"name\": \"LieAlgebra.radical_eq_top_of_isSolvable\", \"module\": \"Mathlib.Algebra.Lie.Solvable\", \"type\": \"[IsSolvable L] : radical R L = ⊤\", \"doc\": \"If $ \\\\mathfrak{g} $ is a solvable Lie algebra over a commutative ring $ R $, then its radical (the sum of all solvable ideals) is equal to the entire Lie algebra $ \\\\mathfrak{g} $, i.e., $ \\\\mathrm{radi\"}\n  {\"name\": \"LieAlgebra.HasCentralRadical.radical_eq_center\", \"module\": \"Mathlib.Algebra.Lie.Semisimple.Defs\", \"type\": \"∀ {R : Type u_1} {L : Type u_2} {inst : CommRing R} {inst_1 : LieRing L} {inst_2 : LieAlgebra R L}\\n  [self : LieAlgebra.HasCentralRadical R L], LieAlgebra.radical R L = LieAlgebra.center R L\", \"doc\": \"For any commutative ring $ R $ and Lie algebra $ L $ over $ R $ with a central radical, the radical of $ L $ is equal to its center. That is, $ \\\\operatorname{rad}(L) = \\\\mathfrak{z}(L) $, where $ \\\\oper\"}\n  {\"name\": \"LieAlgebra.hasTrivialRadical_of_no_solvable_ideals\", \"module\": \"Mathlib.Algebra.Lie.Semisimple.Basic\", \"type\": \"(h : ∀ I : LieIdeal R L, IsSolvable I → I = ⊥) : HasTrivialRadical R L\", \"doc\": \"If every solvable Lie ideal $ I $ of a Lie algebra $ L $ over a commutative ring $ R $ satisfies $ I = \\\\{0\\\\} $, then $ L $ has a trivial radical (i.e., its radical—the largest solvable ideal—is the ze\"}\n  {\"name\": \"LieAlgebra.hasCentralRadical_of_radical_le\", \"module\": \"Mathlib.Algebra.Lie.Semisimple.Defs\", \"type\": \"(h : radical R L ≤ center R L) : LieAlgebra.HasCentralRadical R L\", \"doc\": \"For a Lie algebra $ L $ over a commutative ring $ R $, if the radical of $ L $ is contained within its center, then $ L $ has a central radical (i.e., its radical is a central ideal).\"}\n  {\"name\": \"LieAlgebra.IsSemisimple.instHasTrivialRadical\", \"module\": \"Mathlib.Algebra.Lie.Semisimple.Basic\", \"type\": \": HasTrivialRadical R L\", \"doc\": \"Every semisimple Lie algebra over a commutative ring has a trivial radical, meaning its radical (the largest solvable ideal) is the zero ideal.\"}\n  {\"name\": \"LieAlgebra.abelian_radical_iff_solvable_is_abelian\", \"module\": \"Mathlib.Algebra.Lie.Semisimple.Basic\", \"type\": \"[IsNoetherian R L] : IsLieAbelian (radical R L) ↔ ∀ I : LieIdeal R L, IsSolvable I → IsLieAbelian I\", \"doc\": \"In a Noetherian Lie algebra $\\\\mathfrak{g}$ over a commutative ring $R$, the radical of $\\\\mathfrak{g}$ is abelian if and only if every solvable ideal of $\\\\mathfrak{g}$ is abelian.\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: Lie-algebra radicals do not give a statement about geometric solvable radicals and fppf quotients of group schemes"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-pgl-reductive-structure",
+  "date": "2026-10-22",
+  "group": "O4"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Reductive group-scheme structure of PGL. Supporting input: Corollary 17.62(b)--(d), printed pp.372--373; Sections 6.44--6.46, printed p.135, and Chapter 19(a)--(b), printed pp.397--400. The quotient is by the smooth central torus, with the usual algebraic-group quotient of Theorem 5.28 and Propositions 5.24--5.27.",
+   "via": [
+    "lem-sfb-pgl-reductive-structure",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-reductive-radical-quotient",
+  "worker": "stage1",
+  "summary": "Read Milne and checked the existing arbitrary-field geometric statement. Constructed the radical by dimension maximality, proved the geometric solvable radical is a torus, used rigidity to centralize R, identified it with the largest central torus, established algebraic-closure base change, and proved quotient semisimplicity by the exact inverse-image argument. Eight searched statement-only prerequisites isolate the genuine non-elementary inputs; no statement or route change.",
+  "blueprint": "Realizes the existing from.place chain for det-thm-sf-ctf-stability-direct-images (3), through the plurinodal alteration/moduli route and lem-sfb-pgl-reductive-structure: the general reductive radical/quotient input. The nearest blueprint ancestor printed by blueprint_refs.py is null; its inherited from.node and full via chain are preserved. The current latest blueprint direct-images proof (3) and its unit were read; no alternate route is introduced."
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q02-9b6f9c217",
+  "group": "Q02",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q02-9b6f9c217 (reviewer sub-agent of L); spot-checked: I read the item, all 8 new nodes and Milne iAG2017 at 1.92 (with the paragraph after it), 6.41-6.48, 12.14, 12.29, 12.36-12.38, 14.21, 16.33 and 17.61-17.62 with their proofs. The statement is unchanged and correct. I checked it on G=1, tori, GL_n (quotient PGL_n) and SL_p in characteristic p (the centre is mu_p, which is not smooth, and the radical is trivial). The 7 steps follow 6.42 and 17.62(b)-(d). The rigidity node needs only a connected acting group (Milne 12.37), and its specialisation to tori is sound. Base change of the radical is proved only for reductive G, through the base change of the centre and of the largest subtorus, which matches Milne 6.48. Semisimplicity is proved by the inverse-image argument and the correspondence clause, and reductivity of the quotient by 14.21, valid over any field. Every new node is true and strictly smaller than the item. A search of the whole DAG found no duplicates: the lem-ag-* results are about Lie algebras, and projective-matrix-central-cover and reductive-torus-simply-connected-cover state different things. No source field cites SGA (the only matches are inside Mathlib search results). There are no off-unit tool uses. One fault, C1/C4: Step 4 used that T=Z(G)^t is smooth and connected, which maximality of R needs, but no cited statement gave it; lem-sfb-multiplicative-type-largest-subtorus stated only the converse. The FIX adds the clause 'Every torus is smooth and connected' (Milne Def. 12.14 and the paragraph after it, p.236) to that node's statement and source, and Step 4 now cites it. The corrected JSON is in fixes/dag/nodes/sec-six-functors-basics/ and the step-by-step checks are in review.md.; 2 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.ReductiveRadicalQuotient",
+  "declaration": "AlgebraicGeometry.reductive_radical_quotient",
+  "file": "lean/Sheaf/AlgebraicGeometry/ReductiveRadicalQuotient.lean",
+  "statement": "theorem reductive_radical_quotient {k : Type u} [Field k] (G : Grp (Over (Spec (.of k)))) (hG : ReductiveTorusCentralizer.IsReductive G) : ∃ (R : Grp (Over (Spec (.of k)))) (i : R ⟶ G), SolvableGroupStructure.IsAlgebraic R ∧ Smooth R.X.hom ∧ ConnectedSpace R.X.left ∧ IsClosedSubgroupScheme i.hom.hom ∧ IsNormalSubgroupScheme i.hom.hom ∧ SolvableGroupStructure.IsSolvable R ∧ (∀ (N : Grp (Over (Spec (.of k)))) (j : N ⟶ G), SolvableGroupStructure.IsAlgebraic N → Smooth N.X.hom → ConnectedSpace N.X.left → IsClosedSubgroupScheme j.hom.hom → IsNormalSubgroupScheme j.hom.hom → SolvableGroupStructure.IsSolvable N → ∃ f : N ⟶ R, f ≫ i = j) ∧ MultiplicativeType.IsTorus R ∧ (∀ (A : Type u) [CommRing A] [Algebra k A] (r : StandardGroupSchemes.affine k A ⟶ R.X), r ≫ i.hom.hom ∈ ReductiveTorusCentralizer.centralizerPoints (𝟙 G) A) ∧ (∀ (T : Grp (Over (Spec (.of k)))) (j : T ⟶ G), IsClosedSubgroupScheme j.hom.hom → MultiplicativeType.IsTorus T → (∀ (A : Type u) [CommRing A] [Algebra k A] (t : StandardGroupSchemes.affine k A ⟶ T.X), t ≫ j.hom.hom ∈ ReductiveTorusCentralizer.centralizerPoints (𝟙 G) A) → ∃ f : T ⟶ R, f ≫ i = j) ∧ SolvableGroupStructure.IsAlgebraic ((MultiplicativeType.baseChange (K := AlgebraicClosure k)).obj R) ∧ Smooth ((MultiplicativeType.baseChange (K := AlgebraicClosure k)).obj R).X.hom ∧ ConnectedSpace ((MultiplicativeType.baseChange (K := AlgebraicClosure k)).obj R).X.left ∧ IsClosedSubgroupScheme ((MultiplicativeType.baseChange (K := AlgebraicClosure k)).map i).hom.hom ∧ IsNormalSubgroupScheme ((MultiplicativeType.baseChange (K := AlgebraicClosure k)).map i).hom.hom ∧ SolvableGroupStructure.IsSolvable ((MultiplicativeType.baseChange (K := AlgebraicClosure k)).obj R) ∧ (∀ (N : Grp (Over (Spec (.of (AlgebraicClosure k))))) (j : N ⟶ (MultiplicativeType.baseChange (K := AlgebraicClosure k)).obj G), SolvableGroupStructure.IsAlgebraic N → Smooth N.X.hom → ConnectedSpace N.X.left → IsClosedSubgroupScheme j.hom.hom → IsNormalSubgroupScheme j.hom.hom → SolvableGroupStructure.IsSolvable N → ∃ f : N ⟶ (MultiplicativeType.baseChange (K := AlgebraicClosure k)).obj R, f ≫ (MultiplicativeType.baseChange (K := AlgebraicClosure k)).map i = j) ∧ ∃ (Q : Grp (Over (Spec (.of k)))) (q : G ⟶ Q), IsFppfGroupQuotient i q ∧ ReductiveTorusCentralizer.IsReductive Q ∧ IsSemisimpleGroupScheme ((MultiplicativeType.baseChange (K := AlgebraicClosure k)).obj Q).X",
+  "branch": "sheaf-dag",
+  "by": "NY",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "Uses the published group-scheme, solvability, torus, universal-centre, reductivity, semisimplicity and fppf-quotient declarations. Radical and largest-central-subtorus properties are expressed by factorizations commuting with inclusions. The algebraic-closure pullback satisfies the same radical universal property, identifying the actual closed subgroup, rather than only its geometric points. No chosen radical or quotient definition is introduced."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-10b039628",
+  "group": "NY",
+  "result": "pass",
+  "note": "Re-delivery of c2919f1b2c9f (RETURN H2): the Lean module is byte-identical and the only node change is the stmt_dep swap of lem-sfb-affine-normal-quotient-geometry for def-sfb-fppf-group-quotient-presentation (existing:true def node by Q95, on the snapshot base, owns IsFppfGroupQuotient); the theorem stays in proof_deps. Re-read IsReductive, centralizerPoints, IsTorus/splitTorus/baseChange, IsSemisimpleGroupScheme and IsFppfGroupQuotient in side-live: every clause matches the node (largest radical, largest central torus, k̄ base change of the closed subgroup via its universal property, fppf quotient reductive and geometrically semisimple), with no extra assumptions. Edge cases G=1, torus, GL_n, SL_p in char p are fine. Single universe u. sorry only. Docstrings have the source place and 7 steps. lean.statement is verbatim. Item not landed in live. Not compiled because nothing was changed; the worker reports a clean compile."
+ }
+}

@@ -1,0 +1,228 @@
+{
+ "id": "lem-sp-finite-tower-scalar-mates",
+ "kind": "statement",
+ "title": "Scalar mates and counits in a finite ordered tower",
+ "statement": "Let $d\\geq0$. For $0\\leq r\\leq d$ and $R\\in\\{A,B\\}$ let $\\mathcal C_{r,R}$ be categories, and let $T_r:\\mathcal C_{r,A}\\to\\mathcal C_{r,B}$ be functors. For $r<d$ fix adjunctions $L_{r,R}:\\mathcal C_{r+1,R}\\rightleftarrows\\mathcal C_{r,R}:W_{r,R}$, with $L_{r,R}$ left adjoint and actual counit $e_{r,R}$. Suppose given natural isomorphisms $b_r:T_rL_{r,A}\\xrightarrow{\\sim}L_{r,B}T_{r+1}$ and $a_r:T_{r+1}W_{r,A}\\xrightarrow{\\sim}W_{r,B}T_r$ such that $a_r$ is the mate of $b_r^{-1}$ [def-weil-pbc-adjunction-mate]. Starting from the identity adjunction, form the actual ordered composite adjunctions [def-weil-pbc-composite-adjunction]\n$$\\mathcal F_{0,R}=\\mathcal G_{0,R}=1_{\\mathcal C_{0,R}},\\quad \\mathcal F_{r+1,R}=\\mathcal F_{r,R}L_{r,R},\\quad \\mathcal G_{r+1,R}=W_{r,R}\\mathcal G_{r,R}.$$\nWrite their counits as $\\mathcal E_{0,R}=1$ and\n$$\\mathcal E_{r+1,R}=\\mathcal E_{r,R}\\circ\\mathcal F_{r,R}(e_{r,R}\\mathcal G_{r,R}).$$\nDefine $B_0=A_0=1$ and\n$$B_{r+1}=\\mathcal F_{r,B}(b_r)\\circ B_rL_{r,A},\\qquad A_{r+1}=W_{r,B}(A_r)\\circ a_r\\mathcal G_{r,A}.$$\nThen $A_d:T_d\\mathcal G_{d,A}\\xrightarrow{\\sim}\\mathcal G_{d,B}T_0$ is the mate of $B_d^{-1}$ for those composite adjunctions, and for every $K\\in\\mathcal C_{0,A}$,\n$$\\mathcal E_{d,B,T_0K}\\circ\\mathcal F_{d,B}(A_d(K))\\circ B_d(\\mathcal G_{d,A}K)=T_0(\\mathcal E_{d,A,K}).$$\nAt $d=0$ all functors, comparisons and counits are identities. No identification of a composite left functor with a compactification, or of a composite right functor with a twisted pullback, is part of this assertion.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-reduction/sk-lem-sp-reduction-exceptional.proof.md",
+  "place": "Charts: Scalar mates and counits in a finite ordered tower; retained affine-counit proof steps 5, 6"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-adjunction-mate",
+  "def-weil-pbc-composite-adjunction"
+ ],
+ "proof": [
+  {
+   "text": "For every $r\\leq d$, compose the adjunction $L_{r,R}\\dashv W_{r,R}$ (when $r<d$) with the already constructed $\\mathcal F_{r,R}\\dashv\\mathcal G_{r,R}$, in that order. The composite-adjunction formula [def-weil-pbc-composite-adjunction] gives $\\mathcal F_{r,R}L_{r,R}\\dashv W_{r,R}\\mathcal G_{r,R}$ with actual counit $\\mathcal E_{r,R}\\circ\\mathcal F_{r,R}(e_{r,R}\\mathcal G_{r,R})$. Its identity-adjunction clause starts the recursion at $r=0$. Thus these are exactly the ordered adjunctions and counits in the statement. We prove by induction on $r$ that $B_r,A_r$ are natural isomorphisms and that $A_r$ is the mate of $B_r^{-1}$ for these adjunctions.",
+   "uses": [
+    "def-weil-pbc-composite-adjunction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-reduction/sk-lem-sp-reduction-exceptional.proof.md",
+    "place": "Charts, iterated projective-line integration; ordered counits made explicit using Stacks 0DV0 (lemma-compose-counits)"
+   }
+  },
+  {
+   "text": "At $r=0$ the left and right composite functors are identities, their units and counits are identities, and $B_0=A_0=1_{T_0}$. In the component formula of [def-weil-pbc-adjunction-mate], take both adjunctions to be the identity adjunctions of [def-weil-pbc-composite-adjunction] and take $G=H=T_0$. All three arrows defining the mate of $B_0^{-1}=1_{T_0}$ are identities; its mate is therefore $A_0$. This also proves the asserted zero-length case, without requiring $T_0$ itself to be the identity functor.",
+   "uses": [
+    "def-weil-pbc-adjunction-mate",
+    "def-weil-pbc-composite-adjunction"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-reduction/sk-lem-sp-reduction-exceptional.proof.md",
+    "place": "Charts, iterated projective-line integration; identity base case for the finite iteration"
+   }
+  },
+  {
+   "text": "Suppose the inductive claim holds at $r<d$. Whiskering an isomorphism preserves its inverse: applying a functor to its two inverse equations gives the inverse equations for its image, and right whiskering evaluates the same equations at the relevant objects. Hence the two recursion formulas define natural isomorphisms $B_{r+1},A_{r+1}$. Reversing the two factors of $B_{r+1}$ gives\n$$B_{r+1}^{-1}=(B_r^{-1}L_{r,A})\\circ\\mathcal F_{r,B}(b_r^{-1}).$$\nIndeed, composing this expression with $\\mathcal F_{r,B}(b_r)\\circ(B_rL_{r,A})$ in either order cancels the adjacent inverse pairs.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-reduction/sk-lem-sp-reduction-exceptional.proof.md",
+    "place": "Charts, iterated projective-line integration; elementary inverse calculation for the successor comparison"
+   }
+  },
+  {
+   "text": "Apply clause (2), pasting along the adjunctions, of [lem-weil-pbc-mate-pasting]. Make the substitutions\n$$(L_1,R_1)=(L_{r,A},W_{r,A}),\\quad(L_3,R_3)=(\\mathcal F_{r,A},\\mathcal G_{r,A}),$$\n$$(L_2,R_2)=(L_{r,B},W_{r,B}),\\quad(L_4,R_4)=(\\mathcal F_{r,B},\\mathcal G_{r,B}),$$\n$$G=T_{r+1},\\quad H=T_r,\\quad K=T_0,\\quad\\alpha=b_r^{-1},\\quad\\beta=B_r^{-1}.$$\nHere $\\alpha:L_{r,B}T_{r+1}\\to T_rL_{r,A}$ has mate $a_r$ by hypothesis, while $\\beta:\\mathcal F_{r,B}T_r\\to T_0\\mathcal F_{r,A}$ has mate $A_r$ by induction. The pasted left square $(\\beta L_1)\\circ(L_4\\alpha)$ is exactly the inverse computed in step 3. Its mate is\n$$(R_2\\beta^\\flat)\\circ(\\alpha^\\flat R_3)=W_{r,B}(A_r)\\circ a_r\\mathcal G_{r,A}=A_{r+1}.$$\nThe adjunctions used by that clause are the same ordered composites as in step 1, with their actual counits, so no change-of-adjunction identification is needed. This closes the induction.",
+   "uses": [
+    "lem-weil-pbc-mate-pasting"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-reduction/sk-lem-sp-reduction-exceptional.proof.md",
+    "place": "Charts, iterated projective-line integration; binary mate pasting iterated in the stated order"
+   }
+  },
+  {
+   "text": "Use [lem-amb-mate-unit-counit] with $L_1=\\mathcal F_{d,A}$, $R_1=\\mathcal G_{d,A}$, $L_2=\\mathcal F_{d,B}$, $R_2=\\mathcal G_{d,B}$, $G=T_d$, $H=T_0$, $\\alpha=B_d^{-1}$, and its mate $\\beta=A_d$. For $K\\in\\mathcal C_{0,A}$ it gives\n$$\\mathcal E_{d,B,T_0K}\\circ\\mathcal F_{d,B}(A_d(K))=T_0(\\mathcal E_{d,A,K})\\circ B_d^{-1}(\\mathcal G_{d,A}K).$$\nPrecompose both sides with $B_d(\\mathcal G_{d,A}K)$. The adjacent factors $B_d^{-1}(\\mathcal G_{d,A}K)\\circ B_d(\\mathcal G_{d,A}K)$ cancel to the identity, giving exactly the required formula. The argument used only the ordered composite adjunctions, and makes none of the geometric identifications excluded by the statement.",
+   "uses": [
+    "lem-amb-mate-unit-counit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-reduction/sk-lem-sp-reduction-exceptional.proof.md",
+    "place": "Charts, final counit identity and uniqueness of transposes; finite ordered scalar square before geometric identifications"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-composite-adjunction",
+  "def-weil-pbc-adjunction-mate",
+  "lem-weil-pbc-mate-pasting",
+  "lem-amb-mate-unit-counit"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-reduction/sk-lem-sp-reduction-exceptional.proof.md",
+  "place": "Charts: explicit finite induction filling the iterated projective-line integration sentence; categorical formulas checked in Mathlib Adjunction/Mates.lean and Stacks 0DV0"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "In a finite tower of adjunctions coefficient squares whose inverses have given mates paste to the ordered composite counit identity with identity base case",
+   "results": "{\"t\": \"2026-10-22T05:55:24Z\", \"tool\": \"leanfinder\", \"query\": \"In a finite tower of adjunctions coefficient squares whose inverses have given mates paste to the ordered composite counit identity with identity base case\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.mateEquiv_counit\", \"CategoryTheory.mateEquiv_counit_symm\", \"CategoryTheory.conjugateEquiv_counit\", \"CategoryTheory.conjugateEquiv_counit_symm\", \"CategoryTheory.Adjunction.right_triangle\", \"CategoryTheory.Adjunction.left_triangle\", \"CategoryTheory.Adjunction.right_triangle_components\", \"CategoryTheory.Adjunction.map_ε_comp_counit_app_unit\"], \"digest\": \"e45c895fbcf11d80\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: finite-tower recursion and induction are not stated by the binary mate or counit lemmas"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Induction on the length of an affine coordinate tower for scalar compatible ordered adjunction counits before choosing a compactification",
+   "results": "{\"t\": \"2026-10-22T05:56:01Z\", \"tool\": \"leanfinder\", \"query\": \"Induction on the length of an affine coordinate tower for scalar compatible ordered adjunction counits before choosing a compactification\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Condensed.profiniteSolidCounit\", \"Field.Emb.Cardinal.succEquiv_coherence\", \"Field.Emb.Cardinal.embFunctor\", \"Field.Emb.Cardinal.filtration_succ\", \"AlgebraicGeometry.AffineSpace.map_toSpecMvPoly\", \"AlgebraicGeometry.exists_map_preimage_le_map_preimage\", \"AlgebraicGeometry.AffineSpace.homOfVector_toSpecMvPoly\", \"Field.Emb.Cardinal.filtration_apply\"], \"digest\": \"47b45cf2fa18a960\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: finite-tower recursion and induction are not stated by the binary mate or counit lemmas"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.mateEquiv, CategoryTheory.Adjunction.comp",
+   "results": "{\"t\": \"2026-10-22T05:55:16Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.mateEquiv, CategoryTheory.Adjunction.comp\", \"sub\": \"\", \"ok\": true, \"n_hits\": 6, \"note\": \"\", \"top\": [\"CategoryTheory.mateEquiv_hcomp\", \"CategoryTheory.iterated_mateEquiv_conjugateEquiv\", \"CategoryTheory.iterated_mateEquiv_conjugateEquiv_symm\", \"CategoryTheory.mateEquiv_square\", \"CategoryTheory.toOverIteratedSliceForwardIsoPullback_hom_app_left\", \"CategoryTheory.toOverIteratedSliceForwardIsoPullback_inv_app_left\"], \"digest\": \"5c0344c60218e48c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: finite-tower recursion and induction are not stated by the binary mate or counit lemmas"
+  },
+  {
+   "tool": "grep",
+   "query": "mateEquiv_hcomp|mateEquiv.*(iter|fold|list)|counit.*(iter|fold)",
+   "results": "{\"t\": \"2026-10-22T05:55:16Z\", \"tool\": \"grep\", \"query\": \"mateEquiv_hcomp|mateEquiv.*(iter|fold|list)|counit.*(iter|fold)\", \"sub\": \"\", \"ok\": true, \"n_hits\": 7, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Adjunction/Mates.lean\", \"Mathlib/CategoryTheory/Adjunction/Mates.lean\", \"Mathlib/CategoryTheory/Bicategory/Adjunction/Mate.lean\", \"Mathlib/CategoryTheory/Bicategory/Adjunction/Mate.lean\", \"Mathlib/CategoryTheory/Bicategory/Adjunction/Mate.lean\", \"Mathlib/CategoryTheory/Bicategory/Adjunction/Mate.lean\", \"Mathlib/CategoryTheory/Bicategory/Adjunction/Mate.lean\"], \"digest\": \"26fbba5fcd9aea48\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: finite-tower recursion and induction are not stated by the binary mate or counit lemmas"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Finite ordered tower of adjunctions compatible natural transformations paste with composite counits",
+   "results": "{\"t\": \"2026-10-22T05:55:16Z\", \"tool\": \"leansearch\", \"query\": \"Finite ordered tower of adjunctions compatible natural transformations paste with composite counits\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Adjunction.comp_counit\", \"CategoryTheory.Adjunction.counit_naturality_assoc\", \"CategoryTheory.Bicategory.Adjunction.compCounit\", \"CategoryTheory.Adjunction.CoreUnitCounit.counit\", \"CategoryTheory.Adjunction.leftAdjointCompNatTrans_app\", \"CategoryTheory.Adjunction.counit_naturality\", \"CategoryTheory.Adjunction.comp_counit_app\", \"CategoryTheory.Bicategory.Adjunction.comp_counit\"], \"digest\": \"94f9ae5dba0eaa14\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: finite-tower recursion and induction are not stated by the binary mate or counit lemmas"
+  },
+  {
+   "tool": "grep",
+   "query": "mateEquiv_hcomp|mateEquiv_counit|mateEquiv.*(fold|list|Fin)",
+   "results": "{\"t\": \"2026-10-22T06:27:17Z\", \"tool\": \"grep\", \"query\": \"mateEquiv_hcomp|mateEquiv_counit|mateEquiv.*(fold|list|Fin)\", \"sub\": \"CategoryTheory/Adjunction\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Adjunction/Mates.lean\", \"Mathlib/CategoryTheory/Adjunction/Mates.lean\", \"Mathlib/CategoryTheory/Adjunction/Mates.lean\", \"Mathlib/CategoryTheory/Adjunction/Mates.lean\", \"Mathlib/CategoryTheory/Adjunction/Mates.lean\"], \"digest\": \"135851e05bba01be\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits give binary mate pasting, the mate component formula, or the composite counit; the finite recursively ordered tower requires induction."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Finite tower of adjunctions natural comparison isomorphisms mates and composite counits",
+   "results": "{\"t\": \"2026-10-22T06:27:18Z\", \"tool\": \"leansearch\", \"query\": \"Finite tower of adjunctions natural comparison isomorphisms mates and composite counits\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Adjunction.comp_counit\", \"CategoryTheory.Adjunction.comp_counit_app\", \"CategoryTheory.Bicategory.Adjunction.compCounit\", \"CategoryTheory.Adjunction.counitAsIsoOfIso\", \"CategoryTheory.mateEquiv_apply\", \"CategoryTheory.Adjunction.counit\", \"CategoryTheory.Adjunction.mk\", \"CategoryTheory.Adjunction.comp_unit\"], \"digest\": \"4e38ce38374e261d\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits give binary mate pasting, the mate component formula, or the composite counit; the finite recursively ordered tower requires induction."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.mateEquiv, CategoryTheory.Adjunction.comp",
+   "results": "{\"t\": \"2026-10-22T06:27:18Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.mateEquiv, CategoryTheory.Adjunction.comp\", \"sub\": \"\", \"ok\": true, \"n_hits\": 6, \"note\": \"\", \"top\": [\"CategoryTheory.mateEquiv_hcomp\", \"CategoryTheory.iterated_mateEquiv_conjugateEquiv\", \"CategoryTheory.iterated_mateEquiv_conjugateEquiv_symm\", \"CategoryTheory.mateEquiv_square\", \"CategoryTheory.toOverIteratedSliceForwardIsoPullback_hom_app_left\", \"CategoryTheory.toOverIteratedSliceForwardIsoPullback_inv_app_left\"], \"digest\": \"5c0344c60218e48c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits give binary mate pasting, the mate component formula, or the composite counit; the finite recursively ordered tower requires induction."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Mates of a finite ordered sequence of adjunction squares compose by induction and satisfy the composite counit identity",
+   "results": "{\"t\": \"2026-10-22T06:27:29Z\", \"tool\": \"leanfinder\", \"query\": \"Mates of a finite ordered sequence of adjunction squares compose by induction and satisfy the composite counit identity\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.mateEquiv_square\", \"CategoryTheory.Bicategory.mateEquiv_square\", \"CategoryTheory.mateEquiv_vcomp\", \"CategoryTheory.conjugateEquiv_mateEquiv_vcomp\", \"CategoryTheory.mateEquiv_conjugateEquiv_vcomp\", \"CategoryTheory.mateEquiv_apply\", \"CategoryTheory.iterated_mateEquiv_conjugateEquiv\", \"CategoryTheory.mateEquiv\"], \"digest\": \"4c7746098f9f7cbf\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits give binary mate pasting, the mate component formula, or the composite counit; the finite recursively ordered tower requires induction."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Iterated horizontal pasting of mates for recursively composed adjunctions along a finite sequence of categories",
+   "results": "{\"t\": \"2026-10-22T06:27:55Z\", \"tool\": \"leanfinder\", \"query\": \"Iterated horizontal pasting of mates for recursively composed adjunctions along a finite sequence of categories\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.mateEquiv_vcomp\", \"CategoryTheory.conjugateEquiv_mateEquiv_vcomp\", \"CategoryTheory.mateEquiv_conjugateEquiv_vcomp\", \"CategoryTheory.mateEquiv_hcomp\", \"CategoryTheory.iterated_mateEquiv_conjugateEquiv\", \"CategoryTheory.mateEquiv_apply\", \"CategoryTheory.mateEquiv\", \"CategoryTheory.iterated_mateEquiv_conjugateEquiv_symm\"], \"digest\": \"6f740831456a7a94\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits give binary mate pasting, the mate component formula, or the composite counit; the finite recursively ordered tower requires induction."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sp-affine-counit-scalar",
+  "date": "2026-10-22",
+  "group": "N8"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-lem-sp-reduction",
+ "blueprint": {
+  "from": {
+   "node": "det-sp-reduction-exceptional",
+   "place": "Charts, iterated projective-line integration: Scalar mates and counits in a finite ordered tower (retained affine-counit proof steps 5, 6)",
+   "via": [
+    "lem-sp-affine-counit-scalar"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sp-finite-tower-scalar-mates",
+  "worker": "stage1",
+  "summary": "Q41: supplied the finite induction with the complete substitution into existing binary mate pasting, checked the actual ordered counits, and derived the counit equation by cancellation. Reused four existing Mathlib nodes; no new nodes or statement change. Searched the project Lean source and the whole DAG/blueprint and recorded five additional Mathlib searches.",
+  "blueprint": "det-sp-reduction-exceptional, Charts: the iterated projective-line integration and the concluding scalar-counit identity, corresponding to retained affine-counit steps 5 and 6."
+ },
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q41-7c43b1a2a",
+  "group": "Q41",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q41-7c43b1a2a (reviewer sub-agent of L); spot-checked: I read the whole item. It has no new nodes, and its statement, stmt_deps and source are unchanged; the delivery is one commit touching only the item and the report. Source: main-20261015 sk-lem-sp-reduction-exceptional.proof.md, Charts paragraph (iterated projective-line integration, then uniqueness of transposes). The parent lem-sp-affine-counit-scalar step 2 uses the displayed conclusion as stated, including d=0. Statement type checks: b_r^{-1} is a square for (L_{r,A},L_{r,B},T_{r+1},T_r) with a mate of the type of a_r; the recursion endpoints of B_{r+1} and A_{r+1} check; the composite counit E_r∘F_r(e_rG_r) matches def-weil-pbc-composite-adjunction. Step 2 computes the base case directly from the mate formula with identity adjunctions and G=H=T_0, rightly avoiding mate-pasting clause (4). Step 3: the inverse (B_r^{-1}L)∘F_{r,B}(b_r^{-1}) is elementary. Step 4: every substitution into lem-weil-pbc-mate-pasting clause (2) checks. α=b_r^{-1} and β=B_r^{-1} have the right directions, δ=B_{r+1}^{-1}, δ♭=W(A_r)∘a_rG=A_{r+1}, and the clause uses the same counit order as step 1. Step 5: lem-amb-mate-unit-counit at K∈C_{0,A}, then precomposition with B_d(G_{d,A}K), gives the formula. Small cases: d=1 reduces to the single-step mate counit identity, d=0 is trivial, and d=2 matches the pasting order. Duplicate search: lem-trf-iterated-square-mates (mate of a mate equals the conjugate over 4 adjunctions), lem-sf-adjunct-conjugate-open-factor, lem-coef-dg-mate-pasting and the binary lem-weil-pbc-mate-pasting are not duplicates. All cited nodes are generic Mathlib leaves, so no tool_uses are needed. There is no SGA and no re-split note. No changes."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.FiniteTowerScalarMates",
+  "declaration": "CategoryTheory.finiteScalarTower_mates_counit",
+  "declarations": [
+   "CategoryTheory.finiteScalarLeft",
+   "CategoryTheory.finiteScalarRight",
+   "CategoryTheory.finiteScalarAdjunction",
+   "CategoryTheory.finiteScalarLeftComparison",
+   "CategoryTheory.finiteScalarRightComparison"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/FiniteTowerScalarMates.lean",
+  "statement": "theorem finiteScalarTower_mates_counit (d : ℕ) {C : Fin (d + 1) → Type u} {D : Fin (d + 1) → Type u'} [∀ r, Category.{v} (C r)] [∀ r, Category.{v'} (D r)] (L : ∀ r : Fin d, C r.succ ⥤ C r.castSucc) (W : ∀ r : Fin d, C r.castSucc ⥤ C r.succ) (L' : ∀ r : Fin d, D r.succ ⥤ D r.castSucc) (W' : ∀ r : Fin d, D r.castSucc ⥤ D r.succ) (adj : ∀ r, L r ⊣ W r) (adj' : ∀ r, L' r ⊣ W' r) (T : ∀ r, C r ⥤ D r) (b : ∀ r, L r ⋙ T r.castSucc ≅ T r.succ ⋙ L' r) (a : ∀ r, W r ⋙ T r.succ ≅ T r.castSucc ⋙ W' r) (mates : ∀ r, (mateEquiv (adj r) (adj' r) (b r).inv).natTrans = (a r).hom) : (mateEquiv (finiteScalarAdjunction adj (Fin.last d)) (finiteScalarAdjunction adj' (Fin.last d)) (finiteScalarLeftComparison L L' T b (Fin.last d)).inv).natTrans = (finiteScalarRightComparison W W' T a (Fin.last d)).hom ∧ ∀ K : C 0, (finiteScalarLeftComparison L L' T b (Fin.last d)).hom.app ((finiteScalarRight W (Fin.last d)).obj K) ≫ (finiteScalarLeft L' (Fin.last d)).map ((finiteScalarRightComparison W W' T a (Fin.last d)).hom.app K) ≫ (finiteScalarAdjunction adj' (Fin.last d)).counit.app ((T 0).obj K) = (T 0).map ((finiteScalarAdjunction adj (Fin.last d)).counit.app K)",
+  "branch": "sheaf-dag",
+  "by": "Q28",
+  "date": "2026-10-22",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-0a09a0b1f",
+  "group": "Q28",
+  "result": "pass",
+  "note": "Node fields unchanged except lean; live item has no lean record (not superseded). Every clause checked against mateEquiv/Adjunction.comp: b_r.inv square types, a_r mate type, F/G recursions (F_{r+1}=L r ⋙ F_r, G_{r+1}=G_r ⋙ W r), composite counit via comp_counit_app = E_r∘F_r(e_r G_r), B/A successor components match the node formulas, A not defined as a mate, final mate clause at Fin.last d and counit identity B_d(G K)≫F'(A_d K)≫E'(T0 K)=T0(E K) in correct order. d=0 vacuous with identity bases and arbitrary T_0; independent A/B universes. ℕ-indexed affineTrace*Tower generics in AffineTraceConstruction need data at all levels and have a one-way left/objectwise right comparison, so they are not a duplicate (stage-3 bridge advisory). Defs not hollow, docstrings with source/blueprint/proof steps, statement verbatim, one sorry. Advisory: Mathlib.Data.Fin.Basic import likely redundant. No file changed, no compile run (worker's clean scompile and dry run recorded)."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "AUTO",
+  "group": "Q6",
+  "result": "pass",
+  "landing": "20261022T144110-L-1499009",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)",
+  "sorry_before": [
+   "CategoryTheory.finiteScalarTower_mates_counit"
+  ],
+  "sorry_after": []
+ }
+}

@@ -1,0 +1,221 @@
+{
+ "id": "lem-trf-monoid-unit-twist-ideal-tensor",
+ "kind": "statement",
+ "title": "Unit-character twist and coefficient extension on monomial ideal tensors",
+ "statement": "Let $Q$ be a commutative monoid written additively, $K\\subset Q$ a monoid ideal ($K+Q\\subset K$, allowing $\\varnothing$), $A$ a commutative ring, and $b:Q\\to(A,\\cdot)$ and $u:Q\\to A^\\times$ homomorphisms. Put $c(q)=u(q)b(q)$. For any commutative ring $D$, $D[Q]$ is the ring of finite sums $\\sum d_qz^q$ with $z^qz^p=z^{q+p}$ and $D[K]$ is the ideal spanned by $z^k$, $k\\in K$. For $d=b,c$, let $A_d$ be $A$ with the $\\mathbf Z[Q]$ action $z^q\\mapsto d(q)$ and with the $A[Q]$ action $a_0z^q\\mapsto a_0d(q)$ as appropriate.\nThere is an $A$-linear isomorphism of module tensors [def-weil-pbc-module-tensor-product]\n$$\\rho:\\mathbf Z[K]\\otimes_{\\mathbf Z[Q]}A_c\\xrightarrow{\\sim}\\mathbf Z[K]\\otimes_{\\mathbf Z[Q]}A_b,\\qquad z^q\\otimes a\\longmapsto z^q\\otimes u(q)a,$$\nwith inverse $z^q\\otimes a\\mapsto z^q\\otimes u(q)^{-1}a$. For $d=b,c$, the coefficient map\n$$\\iota_d:\\mathbf Z[K]\\otimes_{\\mathbf Z[Q]}A_d\\xrightarrow{\\sim}A[K]\\otimes_{A[Q]}A_d,\\qquad z^q\\otimes a\\longmapsto z^q\\otimes a$$\nis an $A$-linear isomorphism with inverse $(a_0z^q)\\otimes a\\mapsto z^q\\otimes a_0a$. Let $\\tau_u:A[Q]\\to A[Q]$ be the $A$-algebra automorphism $z^q\\mapsto u(q)z^q$. It preserves $A[K]$ and the evaluation homomorphisms satisfy $\\operatorname{ev}_c=\\operatorname{ev}_b\\tau_u$. In the coefficient-extended presentations, $\\rho$ is exactly the ideal-tensor map induced by $\\tau_u$ and the identity on $A$. All displayed isomorphisms commute with the multiplication maps to $A$ and with the identity on that target, and are natural under coefficient homomorphisms carrying $b,u$ to the chosen new characters. No flatness over $\\mathbf Z$ is assumed.",
+ "source": {
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "Expose VI 3.7(a) (printed p. 75) and Expose VIII proof of 3.4.3 (printed p. 110). Agent unit-character and coefficient-extension calculation; returned parent step 7."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-module-tensor-product"
+ ],
+ "proof": [
+  {
+   "text": "Write $R=\\mathbf Z[Q]$, $I=\\mathbf Z[K]$ and $T_d=I\\otimes_R A_d$. Every element of $I$ has a unique finite expression $\\sum_{k\\in K}n_kz^k$: multiplication by $z^p$ preserves this support because $K+Q\\subset K$. By the quotient construction of [def-weil-pbc-module-tensor-product], $T_d$ has the following presentation as an $A$-module: generators $e_k=z^k\\otimes1$ for $k\\in K$ and relations $e_{k+p}=d(p)e_k$ for $k\\in K,p\\in Q$. Indeed, let $E_d$ be the free $A$-module on $K$ modulo these relations. The formula $(\\sum n_kz^k,a)\\mapsto\\sum n_kae_k$ is biadditive and $R$-balanced, since for each monomial $z^p$ its two values are $\\sum n_kae_{k+p}$ and $\\sum n_kd(p)ae_k$. Finite sums give balancing for every element of $R$. It therefore induces an additive map $T_d\\to E_d$ by the defining quotient; it is $A$-linear for the action on the second tensor factor. Conversely $e_k\\mapsto z^k\\otimes1$ respects the relations by balancing in $T_d$. These maps are inverse on $e_k$ and on every $z^k\\otimes a$, which generate the respective modules. This proves the presentation without an exactness or flatness theorem.",
+   "uses": [
+    "def-weil-pbc-module-tensor-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tags 00CV (algebra-section-tensor-product), 00CW (algebra-definition-bilinear), 00CX (algebra-lemma-tensor-product), quotient construction in the proof; explicit monomial calculations by the worker."
+   }
+  },
+  {
+   "text": "The coefficient-extended tensor $U_d=A[K]\\otimes_{A[Q]}A_d$ has the identical $A$-module presentation. In fact $(\\sum a_kz^k,a)\\mapsto\\sum a_kae_k$ is $A$-bilinear and balanced: for a scalar monomial $rz^p$ the required equation is $\\sum ra_kae_{k+p}=\\sum a_krd(p)ae_k$, exactly the defining relation of $E_d$. By [def-weil-pbc-module-tensor-product] it descends to $U_d\\to E_d$, inverse to $e_k\\mapsto z^k\\otimes1$. Thus the identity on $E_d$ gives $\\iota_d:T_d\\simeq U_d$. On generators it is $z^k\\otimes a\\mapsto z^k\\otimes a$; its inverse sends $(a_0z^k)\\otimes a$ to $z^k\\otimes a_0a$, using balancing by the constant $a_0$. This constructs both coefficient isomorphisms for $d=b,c$.",
+   "uses": [
+    "def-weil-pbc-module-tensor-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tags 00CV (algebra-section-tensor-product), 00CW (algebra-definition-bilinear), 00CX (algebra-lemma-tensor-product), quotient construction in the proof; explicit monomial calculations by the worker."
+   }
+  },
+  {
+   "text": "Use the presentations just proved to define $\\rho(e_k^c)=u(k)e_k^b$ $A$-linearly. It respects every relation, because $u(k+p)e_{k+p}^b=u(k)u(p)b(p)e_k^b=c(p)u(k)e_k^b$. Define the reverse map by $e_k^b\\mapsto u(k)^{-1}e_k^c$; here $u(k+p)^{-1}e_{k+p}^c=u(k)^{-1}u(p)^{-1}c(p)e_k^c=b(p)u(k)^{-1}e_k^c$. Each composite is the identity on every generator, since $u(k)$ is a unit. The generation clause of [def-weil-pbc-module-tensor-product] now gives mutually inverse $A$-linear maps, with exactly the stated formulas for $z^k\\otimes a$.",
+   "uses": [
+    "def-weil-pbc-module-tensor-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tags 00CV (algebra-section-tensor-product), 00CW (algebra-definition-bilinear), 00CX (algebra-lemma-tensor-product), quotient construction in the proof; explicit monomial calculations by the worker."
+   }
+  },
+  {
+   "text": "Define $\\tau_u(\\sum a_qz^q)=\\sum a_qu(q)z^q$. It is additive, fixes constants since $u(0)=1$, and is multiplicative since the images of $z^qz^p$ and $z^q$ times the image of $z^p$ both equal $u(q)u(p)z^{q+p}$. Distributivity over finite sums proves this for arbitrary inputs. The identical construction with $u^{-1}$ is inverse. Both maps preserve support, hence preserve $A[K]$. For each monomial, $\\operatorname{ev}_b\\tau_u(a_qz^q)=a_qu(q)b(q)=a_qc(q)=\\operatorname{ev}_c(a_qz^q)$; additivity proves the equality of evaluation homomorphisms.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tags 00CV (algebra-section-tensor-product), 00CW (algebra-definition-bilinear), 00CX (algebra-lemma-tensor-product), quotient construction in the proof; explicit monomial calculations by the worker."
+   }
+  },
+  {
+   "text": "The map on extended ideal tensors induced by $\\tau_u$ and $1_A$ is $h_c\\otimes a\\mapsto\\tau_u(h_c)\\otimes a$. To check balancing for $r\\in A[Q]$, compute $\\tau_u(rh_c)\\otimes a=\\tau_u(h_c)\\otimes\\operatorname{ev}_b(\\tau_u(r))a=\\tau_u(h_c)\\otimes\\operatorname{ev}_c(r)a$. Additivity and $A$-linearity are immediate from the formulas, so the quotient construction of [def-weil-pbc-module-tensor-product] gives the map. On $z^k\\otimes a$ its value is $u(k)z^k\\otimes a=z^k\\otimes u(k)a$. Hence it equals $\\iota_b\\rho\\iota_c^{-1}$ on the generators, and therefore on the whole tensor.",
+   "uses": [
+    "def-weil-pbc-module-tensor-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tags 00CV (algebra-section-tensor-product), 00CW (algebra-definition-bilinear), 00CX (algebra-lemma-tensor-product), quotient construction in the proof; explicit monomial calculations by the worker."
+   }
+  },
+  {
+   "text": "For either presentation, the multiplication map $\\mu_d$ sends $z^k\\otimes a$ to $d(k)a$ (and $(a_0z^k)\\otimes a$ to $a_0d(k)a$). It is defined on the quotient because evaluation is multiplicative. Then $\\mu_b\\rho(z^k\\otimes a)=b(k)u(k)a=c(k)a=\\mu_c(z^k\\otimes a)$, and $\\mu_d\\iota_d(z^k\\otimes a)=d(k)a$. By the generation clause of [def-weil-pbc-module-tensor-product] these equalities prove all multiplication squares, with $1_A$ on their targets. The inverse squares follow by composing with the inverse isomorphisms.",
+   "uses": [
+    "def-weil-pbc-module-tensor-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tags 00CV (algebra-section-tensor-product), 00CW (algebra-definition-bilinear), 00CX (algebra-lemma-tensor-product), quotient construction in the proof; explicit monomial calculations by the worker."
+   }
+  },
+  {
+   "text": "Let $f:A\\to A'$ be a unital coefficient homomorphism with $b'=f\\circ b$ and $u'(q)=f(u(q))$ on units, so $c'=f\\circ c$. On each tensor presentation the coefficient map is the additive, $f$-semilinear map $z^k\\otimes a\\mapsto z^k\\otimes f(a)$, well defined since the presentation relation $e_{k+p}=d(p)e_k$ maps to $e'_{k+p}=f(d(p))e'_k$. The two paths in the $\\rho$ square both send this generator to $z^k\\otimes f(u(k))f(a)$. The $\\iota_d$ squares both send it to $z^k\\otimes f(a)$; for its inverse use $f(a_0a)=f(a_0)f(a)$. On a monomial the $\\tau_u$ square reads $f(a_q)u'(q)z^q=f(a_qu(q))z^q$, and multiplication squares read $f(d(k)a)=f(d(k))f(a)$. Additivity and generation as in [def-weil-pbc-module-tensor-product] prove naturality everywhere, including inverses since $f(u(k)^{-1})=f(u(k))^{-1}$. None of these constructions required $A$ or $A'$ to be flat over $\\mathbf Z$.",
+   "uses": [
+    "def-weil-pbc-module-tensor-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tags 00CV (algebra-section-tensor-product), 00CW (algebra-definition-bilinear), 00CX (algebra-lemma-tensor-product), quotient construction in the proof; explicit monomial calculations by the worker."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-module-tensor-product"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "Explicit unit-character/coefficient-extension calculation expanding Expose VI 3.7(a), printed p. 75, and Expose VIII proof of Lemma 3.4.3, printed p. 110; tensor quotient construction from Stacks Tag 00CX."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A unit character twisting a monoid algebra gives a natural isomorphism on monomial ideal tensors compatible with multiplication and extension of integer coefficients",
+   "results": "[leanfinder] OK 8 hit(s); MonoidAlgebra.scalarTensorEquiv_tmul [Mathlib/RingTheory/TensorProduct/MonoidAlgebra]; MonoidAlgebra.scalarTensorEquiv [Mathlib/RingTheory/TensorProduct/MonoidAlgebra]; MonoidAlgebra.tensorEquiv_tmul [Mathlib/RingTheory/TensorProduct/MonoidAlgebra]; MonoidAlgebra.tensorEquiv [Mathlib/RingTheory/TensorProduct/MonoidAlgebra]; AddMonoidAlgebra.scalarTensorEquiv [Mathlib/RingTheory/TensorProduct/MonoidAlgebra]; AddMonoidAlgebra.scalarTensorEquiv_tmul [Mathlib/RingTheory/TensorProduct/MonoidAlgebra]; MonoidAlgebra.scalarTensorEquiv_symm_single [Mathlib/RingTheory/TensorProduct/MonoidAlgebra]; AddMonoidAlgebra.tensorEquiv_tmul [Mathlib/RingTheory/TensorProduct/MonoidAlgebra]",
+   "date": "2026-10-22",
+   "verdict": "no match: hits provide units, localization or whole monoid-algebra infrastructure, not this chart/monomial-ideal tensor statement with its specified maps and multiplication compatibility."
+  },
+  {
+   "tool": "leansearch",
+   "query": "If monoid charts c and b satisfy c(q)=u(q)b(q) for a unit character then z^q tensor a maps to z^q tensor u(q)a on ideal tensors",
+   "results": "[leansearch] OK 8 hit(s); MonoidAlgebra.scalarTensorEquiv_tmul [Mathlib.RingTheory.TensorProduct.MonoidAlgebra]; FDRep.char_tensor [Mathlib.RepresentationTheory.Character]; MonoidAlgebra.tensorEquiv.invFun_tmul [Mathlib.RingTheory.TensorProduct.MonoidAlgebra]; CategoryTheory.MonoidalCategory.tensorUnitLeft [Mathlib.CategoryTheory.Monoidal.Category]; MulChar.toUnitHom [Mathlib.NumberTheory.MulChar.Basic]; CategoryTheory.MonObj.instIsMonHomTensorHom [Mathlib.CategoryTheory.Monoidal.Mon_]; MonoidAlgebra.tensorEquiv_tmul [Mathlib.RingTheory.TensorProduct.MonoidAlgebra]; PiTensorProduct.mapMonoidHom [Mathlib.LinearAlgebra.PiTensorProduct]",
+   "date": "2026-10-22",
+   "verdict": "no match: hits provide units, localization or whole monoid-algebra infrastructure, not this chart/monomial-ideal tensor statement with its specified maps and multiplication compatibility."
+  },
+  {
+   "tool": "loogle",
+   "query": "MonoidAlgebra, Units",
+   "results": "[loogle] OK 0 hit(s)",
+   "date": "2026-10-22",
+   "verdict": "no match: hits provide units, localization or whole monoid-algebra infrastructure, not this chart/monomial-ideal tensor statement with its specified maps and multiplication compatibility."
+  },
+  {
+   "tool": "grep",
+   "query": "MonoidAlgebra.*(twist|unit)|unit.*MonoidAlgebra|scalarTensorEquiv",
+   "results": "[grep] OK 25 hit(s); Mathlib/RingTheory/TensorProduct/MvPolynomial.lean:90:   AddMonoidAlgebra.scalarTensorEquiv R N; Mathlib/RingTheory/TensorProduct/MvPolynomial.lean:99:   AddMonoidAlgebra.scalarTensorEquiv ..; Mathlib/RingTheory/TensorProduct/MvPolynomial.lean:104:   AddMonoidAlgebra.scalarTensorEquiv_tmul ..; Mathlib/RingTheory/TensorProduct/MvPolynomial.lean:109:   AddMonoidAlgebra.scalarTensorEquiv_symm_single ..; Mathlib/RingTheory/TensorProduct/MvPolynomial.lean:114:   AddMonoidAlgebra.scalarTensorEquiv_symm_single ..; Mathlib/RingTheory/TensorProduct/MonoidAlgebra.lean:105: noncomputable def scalarTensorEquiv : A ⊗[R] R[M] ≃ₐ[A] A[M] :=; Mathlib/RingTheory/TensorProduct/MonoidAlgebra.lean:109: lemma scalarTensorEquiv_tmul (a : A) (p : R[M]) :; Mathlib/RingTheory/TensorProduct/MonoidAlgebra.lean:110:     scalarTensorEquiv R A (a ⊗ₜ p) = a • mapAlgHom M (Algebra.ofId ..) p := by; Mathlib/RingTheory/TensorProduct/MonoidAlgebra.lean:111:   ext; simp [scalarTensorEquiv]; simp [Algebra.smul_def, Algebra.commutes]; Mathlib/RingTheory/TensorProduct/MonoidAlgebra.lean:114: lemma scalarTensorEquiv_symm_single (m : M) (a : A) :; Mathlib/RingTheory/Bialgebra/MonoidAlgebra.lean:225:     (counitAlgHom S (MonoidAlgebra S M)).toRingHom.comp (mapRingHom M f) =; Mathlib/RepresentationTheory/Rep/Iso.lean:127: def unitIsoAddEquiv {V : Rep.{w} k G} : V ≃+ (toModuleMonoidAlgebra ⋙; Mathlib/RepresentationTheory/Rep/Iso.lean:144:     unitIsoAddEquiv ((V.ρ g).toFun x) = ((ofModuleMonoidAlgebra.obj; Mathlib/RepresentationTheory/Rep/Iso.lean:145:       (toModuleMonoidAlgebra.obj V)).ρ g).toFun (unitIsoAddEquiv x) := by; Mathlib/RepresentationTheory/Rep/Iso.lean:146:   simp [unitIsoAddEquiv, ofModuleMonoidAlgebra, toModuleMonoidAlgebra]; Mathlib/RepresentationTheory/Rep/Iso.lean:150: def unitIso (V : Rep.{w} k G) : V ≅ (toModuleMonoidAlgebra ⋙ ofModuleMonoidAlgebra).obj V :=; Mathlib/RepresentationTheory/Action.lean:84:   __ := MonoidAlgebra.uniqueLinearEquiv k PUnit |>.symm.toLinearMap; Mathlib/RepresentationTheory/Action.lean:96:   toLinearMap := (MonoidAlgebra.uniqueLinearEquiv k PUnit).toLinearMap; Mathlib/Algebra/Category/Ring/Adjunctions.lean:102:   unit := { app G := CommMonCat.ofHom (MonoidAlgebra.of R G) }; Mathlib/Algebra/SkewMonoidAlgebra/Basic.lean:451: theorem sum_mul {S : Type*} [NonUnitalNonAssocSemiring S] (b : S) (s : SkewMonoidAlgebra k G); Mathlib/Algebra/SkewMonoidAlgebra/Basic.lean:455: theorem mul_sum {S : Type*} [NonUnitalNonAssocSemiring S] (b : S) (s : SkewMonoidAlgebra k G); Mathlib/Algebra/SkewMonoidAlgebra/Basic.lean:678:     NonUnitalNonAssocSemiring (SkewMonoidAlgebra k G) where; Mathlib/Algebra/SkewMonoidAlgebra/Basic.lean:717: instance : NonUnitalSemiring (SkewMonoidAlgebra k G) where; Mathlib/Algebra/SkewMonoidAlgebra/Basic.lean:757:     NonUnitalNonAssocRing (SkewMonoidAlgebra k G) where; Mathlib/Algebra/MonoidAlgebra/Basic.lean:180: then `AddMonoidAlgebra.mapDomain f` is a non-unital algebra homomorphism",
+   "date": "2026-10-22",
+   "verdict": "no match: hits provide units, localization or whole monoid-algebra infrastructure, not this chart/monomial-ideal tensor statement with its specified maps and multiplication compatibility."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Diagonal automorphism of a monoid algebra multiplying each monomial by a unit character preserves monomial ideals and compares evaluation tensor products",
+   "results": "[leanfinder] OK 8 hit(s); Rep.diagonalSuccIsoTensorTrivial_hom_hom_single [Mathlib/RepresentationTheory/Rep]; Rep.diagonalSuccIsoTensorTrivial_inv_hom_single_single [Mathlib/RepresentationTheory/Rep]; Rep.diagonalSuccIsoTensorTrivial_inv_hom_single_right [Mathlib/RepresentationTheory/Rep]; Rep.diagonalSuccIsoTensorTrivial_inv_hom_single_left [Mathlib/RepresentationTheory/Rep]; MonoidAlgebra.scalarTensorEquiv_tmul [Mathlib/RingTheory/TensorProduct/MonoidAlgebra]; MonoidAlgebra.tensorEquiv_tmul [Mathlib/RingTheory/TensorProduct/MonoidAlgebra]; MonoidAlgebra.scalarTensorEquiv [Mathlib/RingTheory/TensorProduct/MonoidAlgebra]; MonoidAlgebra.tensorEquiv [Mathlib/RingTheory/TensorProduct/MonoidAlgebra]",
+   "date": "2026-10-22",
+   "verdict": "no match: hits provide units, localization or whole monoid-algebra infrastructure, not this chart/monomial-ideal tensor statement with its specified maps and multiplication compatibility."
+  },
+  {
+   "tool": "grep",
+   "query": "(twist|[Uu]nit|[Cc]haracter).*([Mm]onoidAlgebra|monomial)|([Mm]onoidAlgebra|monomial).*(twist|[Uu]nit|[Cc]haracter)",
+   "results": "[grep] OK 25 hit(s); Mathlib/RingTheory/Bialgebra/MonoidAlgebra.lean; Mathlib/RingTheory/PowerSeries/Substitution.lean; Mathlib/RingTheory/MvPolynomial/Groebner.lean; Mathlib/RingTheory/MvPolynomial/Groebner.lean; Mathlib/RingTheory/MvPolynomial/Groebner.lean; Mathlib/RingTheory/MvPolynomial/Groebner.lean; Mathlib/Tactic/ComputeAsymptotics/Multiseries/Monomial/Basic.lean; Mathlib/Tactic/ComputeAsymptotics/Multiseries/Monomial/Basic.lean",
+   "date": "2026-10-23",
+   "verdict": "no match: whole-algebra base change, unrelated invertible-module or polynomial results do not state the monomial-ideal tensor unit twist and its compatibility clauses."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Coefficient extension from integers for a monomial ideal tensor a character module and isomorphism under a unit character twist",
+   "results": "[leansearch] OK 8 hit(s); MvPolynomial.coeff_rTensorAlgHom_tmul; CharacterModule.int; MvPolynomial.rTensor; MvPolynomial.lcoeff; MvPolynomial.monomial_mem_coeffsIn; TensorProduct.CompatibleSMul.unit; MvPolynomial.coeffAddMonoidHom; ModuleCat.extendScalarsId_inv_app_apply",
+   "date": "2026-10-23",
+   "verdict": "no match: whole-algebra base change, unrelated invertible-module or polynomial results do not state the monomial-ideal tensor unit twist and its compatibility clauses."
+  },
+  {
+   "tool": "loogle",
+   "query": "AddMonoidAlgebra, TensorProduct",
+   "results": "[loogle] OK 12 hit(s); AddMonoidAlgebra.scalarTensorEquiv; AddMonoidAlgebra.tensorEquiv; AddMonoidAlgebra.lTensorAlgEquiv; AddMonoidAlgebra.rTensorEquivAlgEquiv; AddMonoidAlgebra.rTensorEquivAlgEquiv.invFun; AddMonoidAlgebra.scalarTensorEquiv_symm_single; AddMonoidAlgebra.scalarTensorEquiv_tmul; AddMonoidAlgebra.tensorEquiv_single_tmul_single",
+   "date": "2026-10-23",
+   "verdict": "no match: whole-algebra base change, unrelated invertible-module or polynomial results do not state the monomial-ideal tensor unit twist and its compatibility clauses."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A unit character twist on a commutative monoid algebra induces an isomorphism of monomial ideal tensor products under evaluation",
+   "results": "[leanfinder] OK 8 hit(s); MonoidAlgebra.scalarTensorEquiv_tmul; MonoidAlgebra.tensorEquiv_tmul; MonoidAlgebra.scalarTensorEquiv; MonoidAlgebra.tensorEquiv.invFun_tmul; MonoidAlgebra.scalarTensorEquiv_symm_single; MonoidAlgebra.tensorEquiv; MonoidAlgebra.tensorEquiv_symm_single; MonoidAlgebra.tensorEquiv.invFun",
+   "date": "2026-10-23",
+   "verdict": "no match: whole-algebra base change, unrelated invertible-module or polynomial results do not state the monomial-ideal tensor unit twist and its compatibility clauses."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Semilinear isomorphism on an ideal tensor product induced by a ring automorphism with compatible evaluation characters",
+   "results": "[leanfinder] OK 8 hit(s); Submodule.tensorInvEquiv; Ideal.qoutMapEquivTensorQout; Module.Invertible.rTensorEquiv; IsBaseChange.toDualBaseChange; Algebra.TensorProduct.quotIdealMapEquivTensorQuot_symm_tmul; Algebra.TensorProduct.quotIdealMapEquivTensorQuot_mk; AdicCompletion.ofTensorProductEquivOfFiniteNoetherian_symm_of; TensorProduct.quotTensorEquivQuotSMul_symm_mk",
+   "date": "2026-10-23",
+   "verdict": "no match: whole-algebra base change, unrelated invertible-module or polynomial results do not state the monomial-ideal tensor unit twist and its compatibility clauses."
+  },
+  {
+   "tool": "grep",
+   "query": "scalarTensorEquiv|rTensorEquivAlgEquiv|lTensorAlgEquiv",
+   "results": "[grep] OK 5 hit(s); 30; 39; 45; 46; 48; subdirectory/file argument: RingTheory/TensorProduct/MonoidAlgebra.lean; command returned malformed file/line fields; source was read directly at Mathlib/RingTheory/TensorProduct/MonoidAlgebra.lean:30-115.",
+   "date": "2026-10-23",
+   "verdict": "no match: whole-algebra base change, unrelated invertible-module or polynomial results do not state the monomial-ideal tensor unit twist and its compatibility clauses."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-log-chart-face-tor-comparison",
+  "date": "2026-10-22",
+  "group": "Q06"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Proof (1)--(2), nearby-duality alteration reduction (through the ancestry of lem-trf-log-blowup-normalization): input Expose VIII, proof of Lemma 3.4.3, printed p. 110, where Tor_1^{Z[P]}(Z[P]/IZ[P],O_X)=0 is taken from Kato 1994, 6.1(ii); this node reduces the given chart to the sharp chart at a geometric point to which the Kato statement applies (face localization, splitting, unit twist; cf. Expose VI, 3.7(a), printed p. 75). Subargument: Expose VI 3.7(a) (printed p. 75) and Expose VIII proof of 3.4.3 (printed p. 110). Agent unit-character and coefficient-extension calculation; returned parent step 7.",
+   "via": [
+    "lem-trf-log-chart-face-tor-comparison",
+    "lem-trf-log-regular-monomial-tor",
+    "lem-trf-log-blowup-normalization",
+    "lem-trf-log-regular-desingularization",
+    "lem-trf-nodal-pair-projective-resolution",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-trf-monoid-unit-twist-ideal-tensor",
+  "worker": "stage1",
+  "summary": "Q131: proved the formulas directly from the tensor quotient presentation, checking both balancing relations and both inverse maps, the A-algebra automorphism, multiplication and coefficient naturality. Searched live Lean, DAG, blueprint and Mathlib; no exact finished attachment or full Mathlib match. No new nodes: all auxiliary calculations are elementary steps from the existing tensor definition. Statement and inherited metadata retained.",
+  "blueprint": "Realizes the existing from.place: unit twist and coefficient extension in returned parent step 7 of lem-trf-log-chart-face-tor-comparison, descending from lem-trf-local-term-locality proof (1)--(2), nearby-duality alteration reduction. Keeps the specified ILO VI 3.7(a)/VIII 3.4.3 chart route."
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q131-40f5fb3af",
+  "group": "Q131",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q131-40f5fb3af (reviewer sub-agent of L); spot-checked: I read the item, its sources and every citation in full, and recomputed all seven steps; the split is correct and there are no new nodes, fixes or dropped nodes. Shape: one commit touching only the item and its report (which has a Review by Q131 section); this is a first split of a node with no proof, and no repair note exists. The statement, stmt_deps, created and blueprint fields are byte-identical to the base copy (Q06 run snapshot), so no target was weakened. Citation: the only node cited is def-weil-pbc-module-tensor-product (a Mathlib-leaf definition: universal property, quotient construction, generation by pure tensors), so no route or tool_use issue arises. Steps: (1) the generator-and-relation presentation e_{k+p}=d(p)e_k, bilinear for Z[Q] acting via d, with the reverse map well defined; (2) the same presentation over A[Q], which gives iota_d and its inverse via d(0)=1; (3) rho is consistent because u(k+p)b(p)=u(k)c(p), and its inverse inverts only units; (4) tau_u is a unital multiplicative automorphism that preserves A[K], and ev_b tau_u = ev_c; (5) the tau-induced map descends (tau-twisted structure, using ev_b tau = ev_c) and equals iota_b rho iota_c^{-1} on generators; (6) the multiplication squares hold since b u = c; (7) naturality under f: A -> A' holds on the presentations with no flatness assumption. The elementary marks are justified. Edge cases checked: K empty; Q={0} with u=1; A=Z/4, b(1)=2, u(1)=-1 (nonunit b, A not Z-flat); the zero ring. Sources: ILO VI 3.7(a) at PDF p.81 (unit splitting) and VIII 3.4.3 at PDF p.116 (ideal tensor and Tor) are context only, so proof_origin by agent is correct; Stacks tags 00CV, 00CW, 00CX are verified in tags/tags; there is no SGA. Duplicates: rg over dag/nodes found none. The face-localization, split-unit-group, completed-monomial and chart-face-split nodes are different statements, and the parent's step 4 uses exactly rho, its identification with tau_u through iota_b and iota_c, and multiplication compatibility. Mathlib: three kinds of search are recorded; MonoidAlgebra.scalarTensorEquiv is about the whole algebra, not an ideal tensor with a twist."
+ }
+}

@@ -16,6 +16,9 @@ public import Sheaf.Paper.FieldDerivedScalarTower
 public import Sheaf.Paper.DerivedPullbackTensorHom
 public import Sheaf.Paper.SfConstructibleHeart
 public import Sheaf.Paper.GeneralAlgebraicallyClosedCoefficients
+import Mathlib.Algebra.CharP.CharAndCard
+import Sheaf.Paper.PointRealizationStandardCohomology
+import Sheaf.Paper.IntegralStratumChartRestrictions
 
 /-! # T-exact constructible pullback and geometric-point fibres
 
@@ -38,6 +41,10 @@ isomorphisms. The categories and the standard pairs are the recorded intrinsic o
 
 @[expose] public noncomputable section
 set_option autoImplicit false
+set_option genSizeOf false
+set_option genInjectivity false
+set_option genSizeOfSpec false
+set_option genCtorIdx false
 set_option synthInstance.maxSize 2048
 set_option backward.defeqAttrib.useBackward true
 set_option backward.isDefEq.respectTransparency false
@@ -48,6 +55,10 @@ universe u v uC vC uB vB uD vD uA vA
 open CategoryTheory CategoryTheory.Limits CategoryTheory.Triangulated AlgebraicGeometry
 
 namespace WeilConjectures
+
+-- Keep the point targets in their published small derived Hom universe when the chart API
+-- imports the residue-lisse standard-size localization instance. This preference is file-local.
+attribute [local instance 2000] HasDerivedCategory.ofIsGrothendieckAbelian
 
 /-- Clause package: preservation of both standard halves, the exact restriction to
 specified full hearts, and the canonical truncation and cohomology comparisons.
@@ -171,19 +182,48 @@ private theorem derived_heart_homology_zero
   · exact DerivedCategory.isZero_of_isGE K 0 j h
   · exact DerivedCategory.isZero_of_isLE K 0 j h
 
+/-- A prime different from the finite-field characteristic is a unit in every residue
+field over its algebraic closure. Source: finite-field convention, elementary
+characteristic calculation (blueprint: lem-a4-constructible-residue-prime-unit).
+
+Proof: the cardinality of the finite base field gives characteristic p. Since l and p
+are distinct primes, l is nonzero and hence a unit there. Map this unit along the
+algebraic-closure inclusion, the structure morphism on global sections, and evaluation
+in the residue field. Ring maps preserve natural numbers and units. No nonemptiness
+or finite-type hypothesis on the scheme is needed. -/
+theorem constructiblePullbackResidue_isUnit
+    (D : FiniteFieldDatum.{u}) (l : ℕ) [Fact l.Prime] (hl : l ≠ D.p)
+    (Y : Scheme.{u}) [Y.Over (Spec (.of D.k))] (y : Y) :
+    IsUnit (l : Y.residueField y) := by
+  let : Fintype D.k₀ := Fintype.ofFinite D.k₀
+  let : Fact D.p.Prime := ⟨D.prime⟩
+  let : CharP D.k₀ D.p := charP_of_card_eq_prime_pow
+    (by simpa only [Nat.card_eq_fintype_card] using D.card_base.trans D.cardinality_eq)
+  have hunit : IsUnit (l : D.k₀) :=
+    (CharP.cast_ne_zero_of_ne_of_prime D.k₀ (Fact.out : l.Prime) hl.symm).isUnit
+  let g := (Y ↘ Spec (.of D.k)) ≫ Spec.map (CommRingCat.ofHom (algebraMap D.k₀ D.k))
+  simpa only [map_natCast] using
+    hunit.map ((Scheme.ΓSpecIso (CommRingCat.of D.k₀)).inv ≫ g.appTop ≫
+      Y.Γevaluation y).hom
+
+
 variable (D : FiniteFieldDatum.{u}) (l : ℕ) [Fact l.Prime] (hl : l ≠ D.p)
 
-/-- The residue-field inverse required by the recorded pullback interface, extracted
-from constructibleTruncations_exists. Invertible structures are subsingletons, so the
-postponed theorem determines these data uniquely; no invertibility hypothesis is added.
+-- This cached inverse intentionally stays folded during repeated instance comparisons.
+set_option warn.classDefReducibility false in
+/-- The residue-field inverse required by the recorded pullback interface. It is
+constructed from the finite-field characteristic calculation, without extracting the
+entire constructible-truncation package. Inverse structures are subsingletons, so
+this is the same normalized inverse as in the previous interface.
 Source: finite-field convention and Bhatt--Scholze 6.8.15
-(blueprint: lem-a1-constructible-pullback-t-exact). -/
-abbrev constructiblePullbackResidueUnits (Y : Scheme.{u})
+(blueprint: def-a1-constructible-pullback-residue-units). -/
+def constructiblePullbackResidueUnits (Y : Scheme.{u})
     [Y.Over (Spec (.of D.k))]
     [LocallyOfFiniteType (Y ↘ Spec (.of D.k))] [QuasiCompact (Y ↘ Spec (.of D.k))] :
     ∀ y : Y, Invertible (l : Y.residueField y) :=
-  (constructibleTruncations_exists D l hl Y
-    (AlgebraicClosure (Padic l))).choose_spec.choose_spec.choose
+  fun y ↦ (constructiblePullbackResidue_isUnit D l hl Y y).invertible
+
+attribute [local irreducible] constructiblePullbackResidueUnits
 
 /-- The comparison clause at a finite coefficient field, using exactly the recorded
 standard t-structures and full constructible hearts.

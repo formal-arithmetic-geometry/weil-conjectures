@@ -1,0 +1,172 @@
+{
+  "id": "lem-sfb-supported-coefficient-localization",
+  "kind": "statement",
+  "title": "Localization preserves actual closed restriction on one module",
+  "statement": "Fix a prime ell and commutative condensed rings R,K on profinite sets [sk-def-localizing-closure], and a ring-object map a:R -> K. Pull them back to every small pro-etale site [sk-def-sfb-module-derived-pushpull, def-weil-size-convention]. Assume scalar extension along a_V preserves finite limits for every scheme V, and the regular K_V-module, restricted to R_V, is the colimit of R_V --ell--> R_V --ell--> ... with zeroth leg a_V. This is the defined predicate IsEllLocalizationCoefficient, with its cocone and specified zeroth leg. For a closed immersion t:T0 -> T of qcqs schemes [def-weil-closed-immersion, def-weil-pbc-scheme-conventions] and any R_T-module H, if the actual ordinary module-derived restriction rho_R,t on H[0] is an isomorphism, then rho_K,t on (K_T tensor_R_T H)[0] is an isomorphism. The maps rho are the adjunction-unit-derived restriction maps [def-sfb-closed-restriction-actual-map]. No finite-model, lattice, torsion-rigidity, or complement hypothesis is imposed.",
+  "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-sf-comp-coherence/det-sf-comp-coherence-refinement.proof.md",
+    "place": "Refinement isomorphisms paragraph of det-sf-comp-coherence-cocycle, via det-sf-comp-coherence-refinement (2), first paragraph: closed-fibre heart comparison. Agent-formulated Conditional transfer of supported finite-model comparison from integral to rational coefficients. Exact full-generality reference WANTED. Split of steps 4--5."
+  },
+  "stmt_deps": [
+    "sk-def-localizing-closure",
+    "sk-def-sfb-module-derived-pushpull",
+    "def-weil-size-convention",
+    "sk-def-sfb-change-of-scalars",
+    "def-weil-closed-immersion",
+    "def-weil-pbc-scheme-conventions",
+    "def-sfb-closed-restriction-actual-map"
+  ],
+  "proof": [
+    {
+      "text": "Use the specified regular-module telescope, tensor it with H, and apply the tensor adjunction and colimit preservation. The zeroth leg is the coefficient map, so restriction of K tensor_R H is the ell-telescope of H with its actual R-action. Cartesian pullback identifies its pullback with the ell-telescope of t^*H.",
+      "uses": [
+        "sk-def-sfb-change-of-scalars",
+        "sk-prop-sfb-cartesian-coefficients"
+      ],
+      "elementary": false
+    },
+    {
+      "text": "Apply bounded-below filtered section continuity on both qcqs schemes to the degree-zero telescopes. Naturality at each leg identifies the restriction on the colimit with the colimit of the restriction on H in every cohomological degree. Each such map is invertible by hH. The closed-restriction derived-operations theorem supplies the normalized simultaneous filtered representatives of the actual restriction.",
+      "uses": [
+        "det-pe-bounded-continuity-sections",
+        "lem-sfb-closed-restriction-derived-operations"
+      ],
+      "elementary": false
+    },
+    {
+      "text": "Finite-limit preservation of extension makes coefficient restriction preserve K-injectives. A K-injective resolution over K therefore computes sections after restriction to R. Choose a second K-injective resolution on T0 after pullback. Coefficient forgetting preserves the adjunction-unit section map and the augmentation-compatible chain comparison. Scalar coherence, Cartesian coefficients and the two-resolution formula identify the map obtained above with the actual K-derived restriction. All cohomology maps are invertible, hence the derived restriction is invertible.",
+      "uses": [
+        "lem-sfb-comap-preserves-k-injectives",
+        "lem-coef-derived-sections-scalar-coherence",
+        "lem-sfb-internal-module-operations-transport",
+        "lem-sp-kinjective-comparison-principle",
+        "sk-prop-sfb-cartesian-coefficients",
+        "lem-sfb-closed-restriction-derived-operations",
+        "lem-weil-pbc-unbounded-derived-iso-cohomology"
+      ],
+      "elementary": false
+    }
+  ],
+  "proof_deps": [
+    "sk-def-sfb-change-of-scalars",
+    "sk-prop-sfb-cartesian-coefficients",
+    "det-pe-bounded-continuity-sections",
+    "lem-sfb-closed-restriction-derived-operations",
+    "lem-sfb-comap-preserves-k-injectives",
+    "lem-coef-derived-sections-scalar-coherence",
+    "lem-sfb-internal-module-operations-transport",
+    "lem-sp-kinjective-comparison-principle",
+    "lem-weil-pbc-unbounded-derived-iso-cohomology"
+  ],
+  "proof_origin": {
+    "by": "agent",
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-sf-comp-coherence/det-sf-comp-coherence-refinement.proof.md",
+    "place": "Original supported rational transfer proof, steps 4--5: localization and coefficient forgetting."
+  },
+  "mathlib_searches": [
+    {
+      "tool": "leanfinder",
+      "query": "Restriction isomorphism on derived sections is closed under short exact sequences of module sheaves",
+      "results": "Search returned eight general sheaf/category results; no actual module-derived restriction comparison closure theorem.",
+      "date": "2026-10-25",
+      "verdict": "Use the project closed-restriction derived-operations theorem and the Mathlib triangle isomorphism theorem."
+    },
+    {
+      "tool": "loogle",
+      "query": "\"extensionProductIter\"",
+      "results": "Mathlib provides extensionProductIter and its successor/addition rules in Triangulated.Subcategory; no geometric scalar-localization comparison.",
+      "date": "2026-10-25",
+      "verdict": "Use extensionProductIter to state finite generation and its elementary induction to combine comparisons."
+    },
+    {
+      "tool": "leansearch",
+      "query": "Scalar extension inverting a prime preserves cohomology restriction isomorphism by filtered colimit continuity",
+      "results": "Results concern ModuleCat localization and flat scalar extension, not the actual pro-etale module-derived restriction.",
+      "date": "2026-10-25",
+      "verdict": "No direct match; retain the telescope and coefficient-forgetting argument from original proof steps 4--5."
+    },
+    {
+      "tool": "grep",
+      "query": "IsIso.*rightDerivedPullback|extensionProductIter.*IsIso",
+      "results": "No matches through msearch. Direct library searches found QcqsLatticeTreeReconstruction and ClosedRestrictionDerivedOperations.",
+      "date": "2026-10-25",
+      "verdict": "Reuse those declarations; the geometric generation and coefficient-localization glue have distinct interfaces."
+    },
+    {
+      "tool": "leanfinder",
+      "query": "Finite dimensional pro-etale local systems on qcqs schemes have integral lattices on finite constructible strata, giving finite triangle extension generation by supported integral models",
+      "results": "Eight hits: Scheme.etaleTopology, SheafOfModules.IsFiniteType.exists_localGeneratorsData, Scheme.smallEtaleTopology, LocallyOfFiniteType and affine-transition-limit lemmas.",
+      "date": "2026-10-25",
+      "verdict": "No match for stratified lattices or finite triangulated generation; reuse the project lattice nodes."
+    },
+    {
+      "tool": "loogle",
+      "query": "\"Functor.ofSequence\", \"IsColimit\"",
+      "results": "No hits.",
+      "date": "2026-10-25",
+      "verdict": "No direct existing generic telescope comparison supplied by this query."
+    }
+  ],
+  "mathlib_match": null,
+  "status": "split",
+  "created": {
+    "by": "worker",
+    "item": "Sheaf.Paper.SupportedRationalModelRigidityTransfer",
+    "date": "2026-10-25",
+    "group": "M5"
+  },
+  "chapter": "sec-six-functors-basics",
+  "unit": "sk-prop-sf-comp-coherence",
+  "blueprint": {
+    "from": {
+      "node": "det-sf-comp-coherence-cocycle",
+      "place": "Refinement isomorphisms paragraph of det-sf-comp-coherence-cocycle, via det-sf-comp-coherence-refinement (2), first paragraph: closed-fibre heart comparison. Conditional transfer of supported finite-model comparison from integral to rational coefficients.",
+      "via": [
+        "lem-sfb-supported-rational-model-rigidity-transfer",
+        "lem-sfb-supported-three-term-scalar-rigidity",
+        "lem-sfb-closed-torsion-rigidity-serre-transfer",
+        "lem-sfb-proper-wcontractible-closed-fibre-rigidity",
+        "lem-sfb-qcqs-proper-serre-heart-bound",
+        "lem-sfb-qcqs-proper-hull-tail-bound",
+        "lem-sfb-qcqs-proper-localizing-coproducts",
+        "lem-sfb-qcqs-proper-open-boundary-vanishing"
+      ]
+    },
+    "same_as": [],
+    "is": null
+  },
+  "lean": {
+    "existing": false,
+    "module": "Sheaf.Paper.SupportedCoefficientLocalization",
+    "file": "lean/Sheaf/Paper/SupportedCoefficientLocalization.lean",
+    "declaration": "AlgebraicGeometry.ProEtale.CondensedRing.supported_coefficient_localization",
+    "declarations": [
+      "AlgebraicGeometry.ProEtale.CondensedRing.IsEllLocalizationCoefficient",
+      "AlgebraicGeometry.ProEtale.CondensedRing.supported_coefficient_localization"
+    ],
+    "statement": "theorem supported_coefficient_localization (ℓ : ℕ) [Fact ℓ.Prime] {R K : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}} [MonObj R] [IsCommMonObj R] [MonObj K] [IsCommMonObj K] (a : Mon.mk R ⟶ Mon.mk K) (ha : IsEllLocalizationCoefficient ℓ a) {T₀ T : Scheme.{u}} [CompactSpace T] [QuasiSeparatedSpace T] [CompactSpace T₀] [QuasiSeparatedSpace T₀] (t : T₀ ⟶ T) [IsClosedImmersion t] (H : Mod (Sheaf (Scheme.ProEt.topology T) Ab.{u + 1}) (condensedRingObj R T)) (hH : IsIso ((closedRestrictionRho R t).app ((DerivedCategory.singleFunctor _ 0).obj H))) : IsIso ((closedRestrictionRho K t).app ((DerivedCategory.singleFunctor _ 0).obj ((Mod.extendScalars (coefficientMap a.hom T)).obj H)))",
+    "branch": "sheaf-dag",
+    "by": "M5",
+    "date": "2026-10-25"
+  },
+  "reviewed": {
+    "date": "2026-10-25",
+    "by": "L",
+    "reviewer": "C-c38ae",
+    "group": "M5",
+    "result": "fix",
+    "landing": "20261025T101246-L-3676260",
+    "kind": "interface",
+    "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+  },
+  "reviewed_proof": {
+    "date": "2026-10-25",
+    "by": "L",
+    "reviewer": "C-c38ae",
+    "group": "M5",
+    "result": "fix",
+    "landing": "20261025T101246-L-3676260",
+    "kind": "interface",
+    "note": "independent cc review: item proof vs node plan (generation + coefficient localization + closed-restriction triangle API); two new sorry statements vs their nodes and original steps 1-5,7; unit sk-prop-sf-comp-coherence realized nodes vs removed imports; axioms via scratch compile"
+  }
+}

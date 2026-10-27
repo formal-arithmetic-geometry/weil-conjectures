@@ -10,6 +10,7 @@ public import WeilConjectures.SixFunctors.Etale.Derived.OpenImmersionLowerShriek
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.FlatModuleCat
 public import Sheaf.AlgebraicGeometry.SupportComparisonPullbackCoherence
 public import Sheaf.Paper.ComparisonPullbackExact
+public import WeilConjectures.CategoryTheory.Adjunction.ProjectionMapMate
 import WeilConjectures.Mathlib.CategoryTheory.Adjunction.Unique
 import WeilConjectures.CategoryTheory.Adjunction.ProjectionMapCompat
 import WeilConjectures.CategoryTheory.DerivedCategory.MapDerivedCategoryMate
@@ -89,7 +90,7 @@ private lemma transport_refl {C D : Type*} [Category* C] [Category* D]
   ext M
   simp [Adjunction.ofNatIsoRight_unit]
 
-private def tensorTransport
+def tensorTransport
     {C D : Type*} [Category C] [Category D]
     (T : C ⥤ C ⥤ C) (U : D ⥤ D ⥤ D)
     {F G : C ⥤ D} (e : F ≅ G)
@@ -386,7 +387,7 @@ private lemma comparison_extension_mate (Λ : Type (u + 1)) [CommRing Λ]
   rw [iterated_mateEquiv_conjugateEquiv]
   exact hh.trans (comparison_restriction_mate Λ j).symm
 
-private noncomputable def comparisonTensorNatIso
+noncomputable def comparisonTensorNatIso
     (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ] (X : Scheme.{u}) :=
   tensorTransport (Etale.derivedTensor (ModuleCat.{u + 1} Λ) X)
     (derivedTensor (ModuleCat.{u + 1} Λ) X)
@@ -395,7 +396,7 @@ private noncomputable def comparisonTensorNatIso
 
 set_option maxHeartbeats 10000 in
 -- Avoid unbounded unfolding while checking the two site comparisons.
-private lemma supportComparison_eq (Λ : Type (u + 1)) [CommRing Λ]
+lemma supportComparison_eq (Λ : Type (u + 1)) [CommRing Λ]
     {U X : Scheme.{u}} (j : U ⟶ X) :
     supportSiteComparisonCoefficientPullbackIso (ModuleCat.{u + 1} Λ) j =
       (comparisonUpperStarCompUpperStarIso (ModuleCat.{u + 1} Λ) j).symm := by
@@ -449,7 +450,7 @@ private lemma comparisonPullback_transport (Λ : Type (u + 1)) [CommRing Λ]
   rw [← Functor.map_comp_assoc, Iso.inv_hom_id_app]
   erw [CategoryTheory.Functor.map_id, Category.id_comp, Category.comp_id]
 
-private lemma comparison_tensor_compatible
+lemma comparison_tensor_compatible
     (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ]
     {U X : Scheme.{u}} (j : U ⟶ X) :
     Adjunction.ComparisonCompatible (comparisonOpenDerivedPullbackIso Λ j).symm
@@ -481,7 +482,7 @@ private lemma tensorTransport_app
         Functor.isoWhiskerLeft G (U.mapIso (e.app K)) := by
   rfl
 
-private lemma comparison_tensor_app (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ]
+lemma comparison_tensor_app (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ]
     (X : Scheme.{u}) (K : Etale.DerivedCategoryModule Λ X) :
     (comparisonTensorNatIso Λ X).app K =
       derivedTensorObjCompMapDerivedCategoryComparisonUpperStarIso

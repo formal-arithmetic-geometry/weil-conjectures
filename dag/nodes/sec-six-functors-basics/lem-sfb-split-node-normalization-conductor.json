@@ -1,0 +1,325 @@
+{
+ "id": "lem-sfb-split-node-normalization-conductor",
+ "kind": "statement",
+ "title": "Affine componentwise normalization and split-node conductor algebra",
+ "statement": "Let $T$ be a reduced Noetherian commutative ring (Noetherian means every ideal is finitely generated), with minimal primes $\\mathfrak p_1,\\ldots,\\mathfrak p_t$, and put $F_i=\\operatorname{Frac}(T/\\mathfrak p_i)$. For each $i$ let $\\overline T_i$ be the integral closure of $T/\\mathfrak p_i$ in $F_i$ [def-weil-pbc-integral-closure]. Then the componentwise normalization [def-weil-pbc-reduced-normalization] of $\\operatorname{Spec}T$ [def-weil-affine-spectrum] is canonically $\\operatorname{Spec}(\\prod_i\\overline T_i)$, with structural map induced by $t\\mapsto(t\\bmod\\mathfrak p_i)_i$, and $\\prod_i\\overline T_i$ is the integral closure of $T$ in $\\prod_iF_i$. These descriptions commute with restriction to every principal open. For a normal domain $T$ (an integral domain integrally closed in its fraction field), this normalization map is the identity. In particular, let $R$ be a field or a discrete valuation ring [def-sc-discrete-valuation-ring], $Q=R[u,v]/(uv)$ [def-weil-polynomial-ring], and $E=R[u]\\times R[v]$. The map $Q\\to E$, $u\\mapsto(u,0)$, $v\\mapsto(0,v)$, identifies $Q$ with $\\{(f,g):f(0)=g(0)\\}$ and identifies $E$ with its normalization algebra. It is finite, with $E=Q[e]$ for $e=(1,0)$. The conductor, defined as $I=\\{a\\in Q:aE\\subseteq Q\\}$, is $I=(u,v)=uR[u]\\times vR[v]$, and $IE=I$, $Q/I=R$, $E/IE=R\\times R$. The canonical map $Q\\to E\\times_{R\\times R}R$ is an isomorphism, where $R\\to R\\times R$ is diagonal. The two branches $\\operatorname{Spec}R[u]$, $\\operatorname{Spec}R[v]$ and their origins are smooth over $R$ [def-sbc-smooth-morphisms]. The empty component product uses the zero ring.",
+ "source": {
+  "document": "literature/stacks-project/morphisms.tex",
+  "place": "Tags 035P (lemma-description-normalization), 0CDV (lemma-normalization-in-terms-of-components); explicit split model of models.tex Tag 0CDD (lemma-etale-local-at-worst-nodal). Agent conductor and fibre-product calculation, not a verbatim Stacks theorem."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-integral-closure",
+  "def-pc-reduced-scheme",
+  "def-sc-discrete-valuation-ring",
+  "def-weil-affine-spectrum",
+  "def-weil-pbc-reduced-normalization",
+  "def-weil-polynomial-ring",
+  "def-sbc-smooth-morphisms"
+ ],
+ "proof": [
+  {
+   "text": "Put $X=\\operatorname{Spec}T$. It is locally Noetherian, its single affine chart having Noetherian ring $T$ [pqf-def-locnoeth]; by the remark there every quasi-compact open $V\\subseteq X$ is locally Noetherian, hence a Noetherian scheme, and so has finitely many irreducible components by [lem-weil-pbc-noetherian-finitely-many-components]. By [lem-weil-pbc-spec-irreducible-components-minimal-primes] the generic points of the components of $X$ are its minimal primes $\\mathfrak p_1,\\ldots,\\mathfrak p_t$ (finitely many by the case $V=X$). The residue field at $\\mathfrak p_i$ is $T_{\\mathfrak p_i}/\\mathfrak p_iT_{\\mathfrak p_i}=\\operatorname{Frac}(T/\\mathfrak p_i)=F_i$, with $T$ acting by germs and residues, i.e. through $t\\mapsto t\\bmod\\mathfrak p_i$. Apply [lem-sfb-normalization-generic-residue-affine-charts] to the scheme $X$ and the affine open $U=X$: there $C_X=\\prod_iF_i$, $D_X$ is the integral closure of $T$ in $\\prod_iF_i$, and $X^\\nu\\simeq\\operatorname{Spec}D_X$ over $X$, the normalization map being induced by $T\\to D_X$, $t\\mapsto(t\\bmod\\mathfrak p_i)_i$. Step 2 computes $D_X=\\prod_i\\overline T_i$. If $T=0$ then $X$ is empty, $t=0$, and the node's empty case gives the zero ring.",
+   "uses": [
+    "pqf-def-locnoeth",
+    "lem-weil-pbc-noetherian-finitely-many-components",
+    "lem-weil-pbc-spec-irreducible-components-minimal-primes",
+    "lem-sfb-normalization-generic-residue-affine-charts"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 035P (lemma-description-normalization), (1), (3), (4); 0CDV (lemma-normalization-in-terms-of-components); algebra.tex Tag 00ES (lemma-irreducible)."
+   }
+  },
+  {
+   "text": "For $x=(x_i)\\in\\prod_iF_i$, a monic equation over $T$ projects to a monic equation over each $T/\\mathfrak p_i$. Conversely, if every $x_i\\in\\overline T_i$, choose a monic $f_i\\in(T/\\mathfrak p_i)[Z]$ annihilating $x_i$ and lift its coefficients to a monic $g_i\\in T[Z]$. The monic polynomial $\\prod_i g_i$ annihilates $x$: at coordinate $i$ its factor $g_i(x_i)$ vanishes. Thus the integral closure of $T$ in $\\prod_iF_i$ is exactly $\\prod_i\\overline T_i$, by [def-weil-pbc-integral-closure]. For no factors the ambient ring is zero and its sole element is annihilated by $Z$. With step 1 this gives $X^\\nu\\simeq\\operatorname{Spec}(\\prod_i\\overline T_i)$, with structural homomorphism $t\\mapsto(t\\bmod\\mathfrak p_i)_i$.",
+   "uses": [
+    "def-weil-pbc-integral-closure"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 035P (lemma-description-normalization), (3); explicit finite-product monic-polynomial argument."
+   }
+  },
+  {
+   "text": "Let $s\\in T$ and $W=D(s)=\\operatorname{Spec}T_s$. By the compatibility clause of [lem-sfb-normalization-generic-residue-affine-charts], the generic points of $W$ are the $\\mathfrak p_i$ with $s\\notin\\mathfrak p_i$, with unchanged residue fields, so $C_W=\\prod_{s\\notin\\mathfrak p_i}F_i=(\\prod_iF_i)_s$: a factor with $s\\in\\mathfrak p_i$, where $s$ acts as $0$, localizes to zero, and on the others $s$ is already a unit. The node gives $\\nu^{-1}(W)\\simeq\\operatorname{Spec}D_W$, and the restriction $D_X\\to D_W$ of $\\nu_*\\mathcal O_{X^\\nu}$ is the projection $C_X\\to C_W$. By [lem-weil-pbc-integral-closure-commutes-localization] for $T\\to\\prod_iF_i$ and the powers of $s$, the integral closure $D_W$ of $T_s$ in $(\\prod_iF_i)_s$ is the image of $(D_X)_s=\\prod_{s\\notin\\mathfrak p_i}(\\overline T_i)_s$, and restriction sends $b$ to $b/1$. The same node for $T/\\mathfrak p_i\\to F_i$ identifies $(\\overline T_i)_s$ with the integral closure of $(T/\\mathfrak p_i)_s=T_s/\\mathfrak p_iT_s$ in $F_i$. The minimal primes of the reduced Noetherian ring $T_s$ are the $\\mathfrak p_iT_s$ with $s\\notin\\mathfrak p_i$, so this is the description of steps 1--2 for $T_s$, with the same structural homomorphisms. If $T$ is a normal domain, its only minimal prime is $(0)$, $F_1=\\operatorname{Frac}T$, and $\\overline T_1=T$ by the definition of normal domain. The structural map is therefore the identity under the canonical identification.",
+   "uses": [
+    "lem-sfb-normalization-generic-residue-affine-charts",
+    "lem-weil-pbc-integral-closure-commutes-localization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 035P (lemma-description-normalization) on the affine opens D(s); 035H (definition-normalization-X-in-Y) restriction maps; algebra.tex Tag 0307 (lemma-integral-closure-localize)."
+   }
+  },
+  {
+   "text": "Now let $R$ be a field or DVR. The homomorphism $R[u,v]\\to R[u]\\times R[v]$ sends $h$ to $(h(u,0),h(0,v))$. Its kernel is $(uv)$: expand $h$ in monomials; vanishing of both evaluations means every surviving monomial has both exponents positive and is divisible by $uv$. Its image is exactly the pairs with equal constant coefficients, since $(f,g)$ with $f(0)=g(0)=c$ is the image of $f(u)+g(v)-c$. This proves the claimed identification of $Q$ as a subring of $E$, with the stipulated images of $u,v$.",
+   "uses": [
+    "def-weil-polynomial-ring"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/models.tex",
+    "place": "Tag 0CDD (lemma-etale-local-at-worst-nodal), split chart; agent polynomial calculation."
+   }
+  },
+  {
+   "text": "In $E$ put $e=(1,0)$. For $b=(f,g)$, let $d=f(0)-g(0)\\in R$ and $q=(f-d,g)\\in Q$. Then $b=q+de$. Thus $E=Q+Qe=Q[e]$, with $1,e$ generating $E$ as a $Q$-module; this proves finiteness directly. Also $e^2=e$, and $b=q+de$ satisfies the monic equation $(Z-q)^2-d(Z-q)=0$ over $Q$. Consequently every element of $E$ is integral over $Q$, without an appeal to a finite-module integrality theorem.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/models.tex",
+    "place": "Tag 0CDD (lemma-etale-local-at-worst-nodal), split chart; agent idempotent and monic-polynomial calculation."
+   }
+  },
+  {
+   "text": "Both fields and DVRs are principal ideal domains, so [lem-weil-pbc-pid-noetherian-normal] makes $R$ a normal domain. By [lem-weil-pbc-polynomial-ring-normal-domain], $R[u]$ and $R[v]$ are normal domains. The injection $Q\\subset E$ shows $Q$ is reduced. Its minimal primes are $(v)$ and $(u)$: their quotients are the two polynomial domains, and every prime contains $u$ or $v$ since $uv=0$; neither of these two primes contains the other. By [lem-weil-pbc-spec-irreducible-components-minimal-primes], the reduced irreducible components are therefore the two affine lines. Each has identity function-field normalization, since its coordinate ring is integrally closed in its fraction field, by [def-sc-normalization]. The definition [def-weil-pbc-reduced-normalization] and [lem-weil-pbc-finite-affine-coproduct-spectrum] now identify the normalization map with $\\operatorname{Spec}E\\to\\operatorname{Spec}Q$ and its structural map from step 4. No excellence or finiteness of an arbitrary normalization is used.",
+   "uses": [
+    "lem-weil-pbc-pid-noetherian-normal",
+    "lem-weil-pbc-polynomial-ring-normal-domain",
+    "lem-weil-pbc-spec-irreducible-components-minimal-primes",
+    "def-sc-normalization",
+    "def-weil-pbc-reduced-normalization",
+    "lem-weil-pbc-finite-affine-coproduct-spectrum"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 0CDV (lemma-normalization-in-terms-of-components); algebra.tex Tags 00GZ (lemma-PID-normal), 030A (lemma-polynomial-domain-normal); explicit minimal-prime calculation."
+   }
+  },
+  {
+   "text": "For $a=(f,g)\\in Q$ write $c=f(0)=g(0)$. If $aE\\subseteq Q$, multiplication by $e$ gives $(f,0)\\in Q$, so $c=0$. Conversely, if $c=0$, then for every $(h,k)\\in E$, both constants of $(fh,gk)$ are zero, hence this product is in $Q$. Therefore $I=uR[u]\\times vR[v]$. It equals $(u,v)$ as an ideal of $Q$: write $(uf,vg)=u(f,f(0))+v(g(0),g)$, with both coefficient pairs in $Q$. The displayed product ideal is already an ideal of $E$, so $IE=I$. Evaluation at the origins now gives $Q/I=R$ and $E/IE=R\\times R$; the induced map is the diagonal.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/models.tex",
+    "place": "Tag 0CDD (lemma-etale-local-at-worst-nodal), split chart; agent conductor and quotient calculation."
+   }
+  },
+  {
+   "text": "An element of $E\\times_{R\\times R}R$ is a pair $((f,g),r)$ with $f(0)=r=g(0)$. Thus $(f,g)\\in Q$, and the inverse of the canonical map sends $((f,g),r)$ to the class of $f(u)+g(v)-r$ in $Q$. Step 4 shows the composites are identities: evaluation recovers $(f,g)$, and every class in $Q$ is determined by its two evaluations. These maps preserve sums, products and constants, as can be checked in $E$ through the injective map of step 4. This proves the canonical ring isomorphism.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/models.tex",
+    "place": "Tag 0CDD (lemma-etale-local-at-worst-nodal), split chart; agent fibre-product calculation."
+   }
+  },
+  {
+   "text": "The two branches are $\\mathbf A^1_{\\operatorname{Spec}R}$ and their origins, with their induced reduced structures, are $\\operatorname{Spec}R=\\mathbf A^0_{\\operatorname{Spec}R}$, by [def-sbc-affine-space]. Apply [sbc-lem-affine-space-smooth] with $n=1$ and $n=0$, respectively. Hence all four structural morphisms to $\\operatorname{Spec}R$ are smooth, as claimed.",
+   "uses": [
+    "def-sbc-affine-space",
+    "sbc-lem-affine-space-smooth"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00T7 (lemma-standard-smooth), polynomial algebras (zero equations); smoothness in the formally smooth convention by more-morphisms.tex Tag 02H6 (lemma-smooth-formally-smooth)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "pqf-def-locnoeth",
+  "lem-weil-pbc-noetherian-finitely-many-components",
+  "lem-weil-pbc-spec-irreducible-components-minimal-primes",
+  "lem-sfb-normalization-generic-residue-affine-charts",
+  "def-weil-pbc-integral-closure",
+  "lem-weil-pbc-integral-closure-commutes-localization",
+  "def-weil-polynomial-ring",
+  "lem-weil-pbc-pid-noetherian-normal",
+  "lem-weil-pbc-polynomial-ring-normal-domain",
+  "def-sc-normalization",
+  "def-weil-pbc-reduced-normalization",
+  "lem-weil-pbc-finite-affine-coproduct-spectrum",
+  "def-sbc-affine-space",
+  "sbc-lem-affine-space-smooth"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/morphisms.tex",
+  "place": "Tags 035P and 0CDV for affine normalization (via the generic-residue affine-chart node), algebra.tex 0307 for localization; explicit split-chart algebra following models.tex 0CDD, with the conductor calculation written by Q19."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Integral closure and conductor of the split node ring R[u,v]/(uv) over a discrete valuation ring",
+   "results": "{\"t\": \"2026-10-22T06:15:08Z\", \"tool\": \"leanfinder\", \"query\": \"Integral closure and conductor of the split node ring R[u,v]/(uv) over a discrete valuation ring\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"conductor_mul_differentIdeal\", \"KummerDedekind.normalizedFactors_ideal_map_eq_normalizedFactors_min_poly_mk_map\", \"KummerDedekind.normalizedFactorsMapEquivNormalizedFactorsMinPolyMk_symm_apply_eq_span\", \"KummerDedekind.Ideal.irreducible_map_of_irreducible_minpoly\", \"KummerDedekind.normalizedFactorsMapEquivNormalizedFactorsMinPolyMk\", \"conductor_eq_top_of_powerBasis\", \"pow_sub_one_dvd_differentIdeal_aux\", \"RingOfIntegers.not_dvd_exponent_iff\"], \"digest\": \"18f772e9aa135317\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: integral-closure base change and monogenic conductor facts do not compute the split-node normalization and conductor square."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Normalization of a reduced Noetherian affine scheme is the integral closure in the product of component fraction fields and for a split node is two affine lines",
+   "results": "{\"t\": \"2026-10-22T06:15:08Z\", \"tool\": \"leansearch\", \"query\": \"Normalization of a reduced Noetherian affine scheme is the integral closure in the product of component fraction fields and for a split node is two affine lines\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Hom.normalization\", \"AlgebraicGeometry.Scheme.Hom.ι_toNormalization_assoc\", \"AlgebraicGeometry.Scheme.Hom.normalizationDesc\", \"AlgebraicGeometry.Scheme.Hom.instIsIsoToNormalizationOfIsIntegralHom\", \"AlgebraicGeometry.Scheme.Hom.instIsIntegralNormalization\", \"AlgebraicGeometry.Scheme.Hom.ker_toNormalization\", \"AlgebraicGeometry.Scheme.Hom.instIsIntegralHomFromNormalization\", \"AlgebraicGeometry.Scheme.Hom.toNormalization_app_preimage\"], \"digest\": \"00db66e62a96f10b\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: integral-closure base change and monogenic conductor facts do not compute the split-node normalization and conductor square."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"integralClosure\", \"prod\"",
+   "results": "{\"t\": \"2026-10-22T06:15:09Z\", \"tool\": \"loogle\", \"query\": \"\\\"integralClosure\\\", \\\"prod\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 7, \"note\": \"\", \"top\": [\"TensorProduct.toIntegralClosure\", \"TensorProduct.toIntegralClosure_bijective_of_smooth\", \"TensorProduct.toIntegralClosure_bijective_of_isLocalization\", \"TensorProduct.toIntegralClosure_injective_of_flat\", \"TensorProduct.toIntegralClosure_bijective_of_isLocalizationAway\", \"TensorProduct.toIntegralClosure_mvPolynomial_bijective\", \"TensorProduct.toIntegralClosure_bijective_of_tower\"], \"digest\": \"a935f45cd469c5d8\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: integral-closure base change and monogenic conductor facts do not compute the split-node normalization and conductor square."
+  },
+  {
+   "tool": "grep",
+   "query": "conductor|normalization|integralClosure",
+   "results": "{\"t\": \"2026-10-22T06:15:09Z\", \"tool\": \"grep\", \"query\": \"conductor|normalization|integralClosure\", \"sub\": \"RingTheory\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/LocalProperties/IntegrallyClosed.lean\", \"Mathlib/RingTheory/FractionalIdeal/Operations.lean\", \"Mathlib/RingTheory/Radical/Basic.lean\", \"Mathlib/RingTheory/Radical/Basic.lean\", \"Mathlib/RingTheory/Radical/Basic.lean\", \"Mathlib/RingTheory/Radical/Basic.lean\", \"Mathlib/RingTheory/Radical/Basic.lean\", \"Mathlib/RingTheory/LinearDisjoint.lean\"], \"digest\": \"d4ddf50e6a86e0cf\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: integral-closure base change and monogenic conductor facts do not compute the split-node normalization and conductor square."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Normalization and conductor of R[u,v]/(uv) as pairs of polynomials with equal constant coefficients",
+   "results": "{\"t\": \"2026-10-23T09:25:58Z\", \"tool\": \"leanfinder\", \"query\": \"Normalization and conductor of R[u,v]/(uv) as pairs of polynomials with equal constant coefficients\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"KummerDedekind.normalizedFactorsMapEquivNormalizedFactorsMinPolyMk\", \"KummerDedekind.normalizedFactorsMapEquivNormalizedFactorsMinPolyMk_symm_apply_eq_span\", \"KummerDedekind.normalizedFactors_ideal_map_eq_normalizedFactors_min_poly_mk_map\", \"Polynomial.instNormalizationMonoid\", \"Polynomial.X_eq_normalize\", \"WeierstrassCurve.Affine.CoordinateRing.coe_norm_smul_basis\", \"Polynomial.coe_normUnit\", \"IsLocalization.integerNormalization_spec\"], \"digest\": \"985b067440ae07ea\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits do not state the split-node conductor, normalization, fibre-product and smooth-branch assertions together. Relative normalization and localization results are reused through existing DAG nodes."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Integral closure of a reduced ring in a product of fraction fields and conductor fibre product of a nodal ring",
+   "results": "{\"t\": \"2026-10-23T09:27:34Z\", \"tool\": \"leansearch\", \"query\": \"Integral closure of a reduced ring in a product of fraction fields and conductor fibre product of a nodal ring\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"integralClosure.isIntegralClosure\", \"integralClosure.AlgebraIsIntegral\", \"integralClosure\", \"IsIntegralClosure.of_isIntegrallyClosed\", \"instIsIntegrallyClosedInSubtypeMemSubalgebraIntegralClosure\", \"IsIntegrallyClosed.instIsIntegralClosure\", \"Ring.instFiniteNormalClosure\", \"Ring.instIsIntegralClosureNormalClosureSubtypeAlgebraicClosureFractionRingMemIntermediateFieldNormalClosure\"], \"digest\": \"639067ff42c76feb\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits do not state the split-node conductor, normalization, fibre-product and smooth-branch assertions together. Relative normalization and localization results are reused through existing DAG nodes."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"integralClosure\", \"prod\"",
+   "results": "{\"t\": \"2026-10-23T09:27:35Z\", \"tool\": \"loogle\", \"query\": \"\\\"integralClosure\\\", \\\"prod\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 7, \"note\": \"\", \"top\": [\"TensorProduct.toIntegralClosure\", \"TensorProduct.toIntegralClosure_bijective_of_smooth\", \"TensorProduct.toIntegralClosure_bijective_of_isLocalization\", \"TensorProduct.toIntegralClosure_injective_of_flat\", \"TensorProduct.toIntegralClosure_bijective_of_isLocalizationAway\", \"TensorProduct.toIntegralClosure_mvPolynomial_bijective\", \"TensorProduct.toIntegralClosure_bijective_of_tower\"], \"digest\": \"a935f45cd469c5d8\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits do not state the split-node conductor, normalization, fibre-product and smooth-branch assertions together. Relative normalization and localization results are reused through existing DAG nodes."
+  },
+  {
+   "tool": "grep",
+   "query": "conductor|splitNode|split_node|normalization",
+   "results": "{\"t\": \"2026-10-23T09:27:35Z\", \"tool\": \"grep\", \"query\": \"conductor|splitNode|split_node|normalization\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 10, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/ZariskisMainTheorem.lean\", \"Mathlib/AlgebraicGeometry/ZariskisMainTheorem.lean\", \"Mathlib/AlgebraicGeometry/ZariskisMainTheorem.lean\", \"Mathlib/AlgebraicGeometry/ZariskisMainTheorem.lean\", \"Mathlib/AlgebraicGeometry/ZariskisMainTheorem.lean\", \"Mathlib/AlgebraicGeometry/Normalization.lean\", \"Mathlib/AlgebraicGeometry/Normalization.lean\", \"Mathlib/AlgebraicGeometry/Normalization.lean\"], \"digest\": \"d3a37eb2d6b30722\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits do not state the split-node conductor, normalization, fibre-product and smooth-branch assertions together. Relative normalization and localization results are reused through existing DAG nodes."
+  },
+  {
+   "tool": "grep",
+   "query": "IsIntegrallyClosed|isIntegrallyClosed",
+   "results": "{\"t\": \"2026-10-23T09:29:20Z\", \"tool\": \"grep\", \"query\": \"IsIntegrallyClosed|isIntegrallyClosed\", \"sub\": \"RingTheory/PrincipalIdealDomain.lean\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits do not state the split-node conductor, normalization, fibre-product and smooth-branch assertions together. Relative normalization and localization results are reused through existing DAG nodes."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Every principal ideal domain is integrally closed in its fraction field",
+   "results": "{\"t\": \"2026-10-23T09:29:29Z\", \"tool\": \"leanfinder\", \"query\": \"Every principal ideal domain is integrally closed in its fraction field\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"IsPrincipalIdealRing.isDedekindDomain\", \"FractionalIdeal.isPrincipal\", \"IsDedekindDomainInv.integrallyClosed\", \"IsDedekindDomainDvr.isIntegrallyClosed\", \"IsDedekindRing.toIsIntegralClosure\", \"Ring.DimensionLEOne.principal_ideal_ring\", \"isDedekindDomain_iff\", \"instIsDedekindDomainOfIsDomainOfIsDedekindRing\"], \"digest\": \"14554b1f29f90b75\"}",
+   "date": "2026-10-23",
+   "verdict": "match for an existing dependency only: PID normality is already lem-weil-pbc-pid-noetherian-normal; not the item."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Integral closure of a reduced Noetherian ring is the product of the integral closures of its minimal prime quotient domains",
+   "results": "{\"t\": \"2026-10-23T09:34:08Z\", \"tool\": \"leanfinder\", \"query\": \"Integral closure of a reduced Noetherian ring is the product of the integral closures of its minimal prime quotient domains\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"PrimeSpectrum.exists_primeSpectrum_prod_le_and_ne_bot_of_domain\", \"Algebra.ZariskisMainProperty.of_isIntegral\", \"instHasGoingDownOfIsDomainOfFaithfulSMulOfIsIntegralOfIsIntegrallyClosed\", \"isDedekindRing_iff\", \"Algebra.ZariskisMainProperty\", \"completeIntegralClosure_eq_integralClosure\", \"IsIntegrallyClosed.of_localization\", \"isDedekindDomain_iff\"], \"digest\": \"ba612cf40742f133\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits do not state the split-node conductor, normalization, fibre-product and smooth-branch assertions together. Relative normalization and localization results are reused through existing DAG nodes."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-persistent-node-normalization",
+  "date": "2026-10-22",
+  "group": "Q123"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2; inherited common-nodal-model prerequisite: persistent-node normalization over a trait. Separate xy=0 branches; retain normal xy=pi^n charts; descend finite normalization and reconstruct by the conductor fibre-product rings.; returned proof step 2: affine componentwise normalization and the full split conductor ring calculation",
+   "via": [
+    "lem-sfb-persistent-node-normalization",
+    "lem-sfb-common-nodal-model",
+    "lem-sfb-semistable-log-pluricanonical-lattices",
+    "lem-sfb-stable-pointed-isom-finite",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-split-node-normalization-conductor",
+  "worker": "stage1",
+  "summary": "Q19 checked the latest blueprint route and Stacks 035P/0CDV, 0307, 00GZ, 030A, 0CDD and 00T7. Reused the live affine-chart normalization node lem-sfb-normalization-generic-residue-affine-charts (review FIX replacing two dropped 2026-10-19 nodes), localization, polynomial-normality and affine-space results; supplied explicit polynomial, idempotent, conductor and fibre-product calculations. No statement change and no new nodes. No exact project attachment or Mathlib match for the full item.",
+  "blueprint": "Latest blueprint sec-six-functors-basics/sk-thm-sf-ctf-stability, det-thm-sf-ctf-stability-direct-images proof (3), inherited normalization-of-persistent-node prerequisite. The latest paragraph refers to compactification/direct-image preservation; it does not state this auxiliary algebra. Steps 1-3 establish the inherited affine description and restriction; steps 4-8 compute the split chart; step 9 verifies smooth strata. The inherited blueprint.from.node is null and is preserved.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-spec-irreducible-components-minimal-primes",
+    "why": "Generic identification of affine components with minimal primes, used for the explicit two-branch ring."
+   },
+   {
+    "node": "lem-weil-pbc-finite-affine-coproduct-spectrum",
+    "why": "Generic finite disjoint-union/product-spectrum identification, used to express the two normalized branches as Spec E."
+   },
+   {
+    "node": "sbc-lem-affine-space-smooth",
+    "why": "Only smoothness of relative affine spaces in dimensions zero and one; generic smooth geometry tool."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-spec-irreducible-components-minimal-primes",
+  "lem-weil-pbc-finite-affine-coproduct-spectrum",
+  "sbc-lem-affine-space-smooth"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q19-bfd41a7d8",
+  "group": "Q19",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q19-bfd41a7d8 (reviewer sub-agent of L); spot-checked: The mathematics is correct. Steps 1 and 3 cite two dropped nodes; I re-cited live nodes in their place. Mechanical finding: steps 1 and 3 cited lem-per-componentwise-normalization-affine-charts and lem-per-componentwise-normalization-properties, and both are dropped (side-live route-pivot-dropped.txt lines 1474-1475). The delivery does not justify them at any step. This is a citation fault, not a route fault: the item, its three citers (persistent-node-normalization and two trf nodes) and its whole blueprint via chain are live, and the two nodes were used only for generic Stacks 035P/035Q(2) normalization facts. FIX, step 1: it now uses the live same-unit lem-sfb-normalization-generic-residue-affine-charts. Its finitely-many-components hypothesis comes from pqf-def-locnoeth and lem-weil-pbc-noetherian-finitely-many-components, and the generic points from minimal-primes with κ(p_i)=F_i. This gives X^ν≅Spec D_X. Step 2 is unchanged except for a closing sentence giving D_X=∏T̄_i. FIX, step 3: it now uses the chart node's affine-open compatibility for D(s), with C_W=(∏F_i)_s, and integral-closure-commutes-localization gives D_W=(D_X)_s. The normal-domain case is t=1. I recomputed proof_deps and removed both dropped ids from tool_uses. The closure has 172 nodes, with no dropped id, nothing missing and no cycle. I checked the sources: Stacks 035P (morphisms l.14426, parts (1),(3),(4)), 0CDV, 035K/035H, 0307, 00GZ, 030A, 00ES, models 0CDD and 00T7. Step checks: kernel (uv) and image f(0)=g(0) by monomials; b=q+de with monic (Z-q)^2-d(Z-q), so no division by 2; minimal primes (u),(v) are incomparable; R is a PID, so it is normal, and so is R[u]; conductor I=uR[u]×vR[v]=(u,v), via (uf,vg)=u(f,f(0))+v(g(0),g); IE=I, Q/I=R, E/IE=R×R; the fibre-product inverse is f(u)+g(v)-r; A^1 and A^0 are smooth. Edge cases: T=0, T a field, k×k, s=0 or 1, characteristic 2, and a non-excellent DVR. There are no new nodes and the statement is unchanged. Advisory: the item's general clause is essentially a Noetherian specialization of the live generic-residue-affine-charts and affine-total-fractions nodes. That comes from the inherited Q123 statement, not from this delivery. Accepted tool_uses: minimal-primes, finite-affine-coproduct-spectrum and affine-space-smooth (generic). No SGA source is used.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SplitNodeNormalizationConductor",
+  "declaration": "AlgebraicGeometry.splitNode_normalization_conductor",
+  "declarations": [
+   "AlgebraicGeometry.SplitNodeNormalization.Fractions",
+   "AlgebraicGeometry.SplitNodeNormalization.Components",
+   "AlgebraicGeometry.SplitNodeNormalization.componentMap",
+   "AlgebraicGeometry.SplitNodeNormalization.inclusion",
+   "AlgebraicGeometry.SplitNodeNormalization.fractionMap",
+   "AlgebraicGeometry.SplitNodeNormalization.Node",
+   "AlgebraicGeometry.SplitNodeNormalization.nodeQuotient",
+   "AlgebraicGeometry.SplitNodeNormalization.branchEvaluation",
+   "AlgebraicGeometry.SplitNodeNormalization.origins",
+   "AlgebraicGeometry.SplitNodeNormalization.conductorPullback",
+   "AlgebraicGeometry.splitNode_affine_normalization",
+   "AlgebraicGeometry.splitNode_normal_domain_identity",
+   "AlgebraicGeometry.splitNode_normalization_conductor"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/SplitNodeNormalizationConductor.lean",
+  "statement": "theorem splitNode_normalization_conductor (R : Type u) [CommRing R] [IsDomain R] (_hR : IsField R ∨ IsDiscreteValuationRing R) : ∃ (j : Node R →+* Polynomial R × Polynomial R) (ε : Node R →+* R), j.comp (nodeQuotient R) = branchEvaluation R ∧ ε.comp (nodeQuotient R) = MvPolynomial.eval₂Hom (RingHom.id R) (fun _ ↦ 0) ∧ Function.Injective j ∧ (∀ b : Polynomial R × Polynomial R, b ∈ j.range ↔ (origins R b).1 = (origins R b).2) ∧ (∃ e : (Spec (.of (Node R))).reducedNormalization ≅ Spec (.of (Polynomial R × Polynomial R)), e.hom ≫ Spec.map (CommRingCat.ofHom j) = (Spec (.of (Node R))).fromReducedNormalization) ∧ j.Finite ∧ (∀ b : Polynomial R × Polynomial R, ∃ f : Polynomial (Node R), Polynomial.eval₂ j (1, 0) f = b) ∧ ∃ I : Ideal (Node R), (∀ a : Node R, a ∈ I ↔ ∀ b : Polynomial R × Polynomial R, j a * b ∈ j.range) ∧ I = Ideal.span {nodeQuotient R (MvPolynomial.X 0), nodeQuotient R (MvPolynomial.X 1)} ∧ Set.image j (I : Set (Node R)) = (((Ideal.span {(Polynomial.X : Polynomial R)}).prod (Ideal.span {(Polynomial.X : Polynomial R)}) : Ideal (Polynomial R × Polynomial R)) : Set (Polynomial R × Polynomial R)) ∧ I.map j = (Ideal.span {Polynomial.X}).prod (Ideal.span {Polynomial.X}) ∧ (∃ q : (Node R ⧸ I) ≃+* R, ∀ a : Node R, q (Ideal.Quotient.mk I a) = ε a) ∧ (∃ q : ((Polynomial R × Polynomial R) ⧸ I.map j) ≃+* R × R, ∀ b : Polynomial R × Polynomial R, q (Ideal.Quotient.mk (I.map j) b) = origins R b) ∧ (∃ q : Node R ≃+* conductorPullback R, ∀ a : Node R, (q a).val = (j a, ε a)) ∧ Smooth (Spec.map (CommRingCat.ofHom (Polynomial.C : R →+* Polynomial R))) ∧ Smooth (Spec.map (CommRingCat.ofHom (Polynomial.evalRingHom 0 : Polynomial R →+* R)) ≫ Spec.map (CommRingCat.ofHom (Polynomial.C : R →+* Polynomial R)))",
+  "branch": "newtargets-dag",
+  "by": "NA",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "The module states all clauses in three named theorems: splitNode_affine_normalization, splitNode_normal_domain_identity, and splitNode_normalization_conductor. Public helper constructions spell out the rings and canonical maps of this same node; all theorem proofs are sorry."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-5aa38b6d3",
+  "group": "NA",
+  "result": "pass",
+  "note": "Read node (unchanged except new lean record), all 7 stmt_dep records (Spec, integralClosure, reducedNormalization coproduct def in side-live, Polynomial, Smooth, scheme IsReduced→ring IsReduced, Mathlib IsDiscreteValuationRing), the module and report. General clause: injective enumeration of minimalPrimes, integrality over the explicit diagonal ⇔ product of integralClosures, normalization iso pinned by e.hom ≫ Spec.map componentMap = fromReducedNormalization, D(s) restriction square + localized closure description, normal-domain map is iso, Fin 0 zero ring. Split node: j and ε pinned through nodeQuotient, injective with equal-constant image, normalization iso, j.Finite and E=Q[e] at (1,0), conductor by node's definition = (u,v), j''I = I.map j = XR[X]×XR[X], Q/I≃R via ε, E/IE≃R×R via origins, Q≃eqLocus pullback pinned to (j a, ε a), smoothness of Spec R[X] and of the origin Spec R over R. IsDomain implied by field-or-DVR; no extra hypotheses; single universe u; statement verbatim; declarations list matches; real-data helpers with source/blueprint docstrings; all sorry. No existing declaration states the item (strictNodalRing is the uv−a Temkin chart, not cited; advisory only). No compile needed (no change)."
+ }
+}

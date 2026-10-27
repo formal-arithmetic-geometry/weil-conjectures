@@ -1,0 +1,116 @@
+{
+ "id": "lem-sfb-integral-roos-completion-isomorphisms",
+ "kind": "statement",
+ "title": "Descent of localized Roos comparisons to completion isomorphisms",
+ "statement": "Fix the geometric and coefficient setting and the strict functors of [def-sfb-integral-pullback-strict-roos-data]. Fix ordinary comparison d, tower comparisons a,e, maps alphaU,alphaV and natural Roos comparisons kappaR,kappaC. Assume on GoodR that the two canonical reduction counits are invertible, and that localized alphaU composed with kappaR equals the completed quotient unit followed by Rlim of its reduction counit. Assume IsConstantUnitNormalized, namely the analogous constant equation after constantTowerIso. Then the two given Roos functors on GoodR admit natural isomorphisms to actual completed-coefficient completion and constant quotient completion, respectively, carrying alphaU and alphaV to their specified units. No normalized-chain existence, preservation of Good, coefficient equality or completed-pullback comparison is asserted.",
+ "source": {
+  "document": "Stacks Project, proetale.tex",
+  "place": "First paragraph and Comparison with the Stacks Project; descent of normalized localized quotient augmentations to completion isomorphisms, Stacks 099M and 099N."
+ },
+ "stmt_deps": [
+  "def-sfb-integral-pullback-strict-roos-data",
+  "def-weil-pbc-adic-coefficient-datum",
+  "def-weil-pbc-completed-pullback"
+ ],
+ "proof": [
+  {
+   "text": "The two reduction counits are natural on cochain complexes. Restrict their natural transformations along the ordinary complex pullbacks to the full category GoodR. By the assumed invertibility, package them as natural isomorphisms. For the completed ring compose kappaR with Rlim of the inverse counit and the inverse of the actual/quotient completion reflector comparison; for constants compose kappaC, Rlim of constantTowerIso, then Rlim of the inverse counit. All factors are natural.",
+   "uses": [
+    "def-weil-pbc-adic-coefficient-datum",
+    "lem-sfb-integral-roos-completion-reflector-comparison"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The completedConstantRlimUnit equals the unit of the derived constant/limit adjunction by its unique defining normalization. Postcompose the proposed unit equalities with the invertible reduction counits, and in the completed case the reflector comparison. Functoriality, associativity and inverse cancellation reduce them to the two assumed localized equations. This uses no inverse of a completion unit and works on arbitrary unbounded GoodR inputs. Zero inputs and identity morphisms have the same identities.",
+   "uses": [
+    "def-weil-pbc-completed-pullback"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-adic-coefficient-datum",
+  "lem-sfb-integral-roos-completion-reflector-comparison",
+  "def-weil-pbc-completed-pullback"
+ ],
+ "proof_origin": {
+  "document": "Stacks Project, proetale.tex",
+  "place": "First paragraph and Comparison with the Stacks Project; descent of normalized localized quotient augmentations to completion isomorphisms, Stacks 099M and 099N.",
+  "by": "agent"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Derived completion is the derived inverse limit of the quotient reduction tower, compatibly with its unit",
+   "results": "AdicCompletion and its module/transition APIs; no derived sheaf completion comparison.",
+   "date": "2026-10-25",
+   "verdict": "No exact match; these are ordinary ring/module completion declarations."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The normalized Roos mapping cone augmentation agrees with the derived completion unit for a tower of quotient modules",
+   "results": "IsAdicComplete.of_comp_lift, IsAdicComplete.mkQ_comp_lift, AdicCompletion.eval_comp_of; no normalized derived Roos theorem.",
+   "date": "2026-10-25",
+   "verdict": "No exact match."
+  },
+  {
+   "tool": "grep",
+   "query": "reductionComplexCounit|IsConstantUnitNormalized",
+   "results": "msearch grep returned zero hits. Local rg on the project found the actual coefficient definitions and counit APIs; local rg on the Mathlib derived, homotopy and adic-completion directories found no matching normalized Roos/K-flat completion theorem.",
+   "date": "2026-10-25",
+   "verdict": "The new statements only assemble the project APIs for these actual coefficient categories."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.IntegralRoosDerivedPullbackUnit",
+  "date": "2026-10-25",
+  "group": "S4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-lem-int-tensor-pullback",
+   "place": "First paragraph: the target of c_K is the completion of g^*K; Comparison with the Stacks Project: the restricted target and unit give completed inverse image. Returned proof step 10: identify c_g and the augmented derived representatives. Agent-written strict cochain refinement; Stacks proetale.tex Tags 099M (lemma-naive-completion), 099N (lemma-pushforward-Noetherian-case), clauses (2),(5)",
+   "via": [
+    "lem-sfb-integral-roos-derived-pullback-unit"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-lem-int-tensor",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.IntegralRoosCompletionIsomorphisms",
+  "file": "lean/Sheaf/Paper/IntegralRoosCompletionIsomorphisms.lean",
+  "declaration": "WeilConjectures.IntegralPullbackStrictRoos.integralRoosCompletionIsomorphisms",
+  "statement": "theorem integralRoosCompletionIsomorphisms\n    (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]\n    [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]\n    {X Y : Scheme.{u}} (g : X ⟶ Y)\n    (k : Type u) [Field k] [Fact (ringChar k).Prime] [Fact (ringChar k ≠ l)]\n    [X.Over (Spec (.of k))] [Y.Over (Spec (.of k))] [g.IsOver (Spec (.of k))]\n    [IsSeparated (X ↘ Spec (.of k))] [IsSeparated (Y ↘ Spec (.of k))]\n    [LocallyOfFiniteType (X ↘ Spec (.of k))] [QuasiCompact (X ↘ Spec (.of k))]\n    [LocallyOfFiniteType (Y ↘ Spec (.of k))] [QuasiCompact (Y ↘ Spec (.of k))]\n    (d : pullR l E g ⋙ res l E X ≅ res l E Y ⋙ pullC l E g)\n    (a : T l E g ≅ U l E g)\n    (e : T l E g ⋙ towerRes l E X ≅ V l E g)\n    (αU : alphaUType l E g) (αV : alphaVType l E g)\n    (κR : kappaType X (R l E X)) (κC : kappaType X (C l E X))\n    (hR : ∀ (P : complexesR l E Y), GoodR l E Y P →\n      IsIso (completedReductionTowerComplexCounit X (datum l E)\n        ((cxPullR l E g).obj P)))\n    (hC : ∀ (P : complexesR l E Y), GoodR l E Y P →\n      IsIso (OrderedExchange.reductionComplexCounit (datum l E) X\n        (((res l E Y ⋙ pullC l E g).mapHomologicalComplex (.up ℤ)).obj P)))\n    (hU : ∀ (P : complexesR l E Y), GoodR l E Y P →\n      DerivedCategory.Q.map (αU P) ≫ κR.hom.app ((cxU l E g).obj P) =\n        unitR l E X (DerivedCategory.Q.obj ((cxPullR l E g).obj P)) ≫\n          (completedRlim X (R l E X)).map\n            (completedReductionTowerComplexCounit X (datum l E)\n              ((cxPullR l E g).obj P)))\n    (hV : IsConstantUnitNormalized l E g d a e αV κC) :\n    ∃ (eR : ObjectProperty.ι (GoodR l E Y) ⋙ cxU l E g ⋙ roosF ⋙ DerivedCategory.Q ≅\n        ObjectProperty.ι (GoodR l E Y) ⋙ cxPullR l E g ⋙ DerivedCategory.Q ⋙\n          pbcActualCompletion (datum l E) X)\n      (eC : ObjectProperty.ι (GoodR l E Y) ⋙ cxV l E g ⋙ roosF ⋙ DerivedCategory.Q ≅\n        ObjectProperty.ι (GoodR l E Y) ⋙ cxRes l E Y ⋙ cxPullC l E g ⋙\n          DerivedCategory.Q ⋙ OrderedExchange.completion (datum l E) X),\n      ∀ (P : complexesR l E Y) (hP : GoodR l E Y P),\n        (DerivedCategory.Q.map (αU P) ≫ eR.hom.app ⟨P, hP⟩ =\n          (pbcActualCompletionUnit (datum l E) X).app\n            (DerivedCategory.Q.obj ((cxPullR l E g).obj P))) ∧\n        (DerivedCategory.Q.map (αV P) ≫ eC.hom.app ⟨P, hP⟩ =\n          (OrderedExchange.unit (datum l E) X).app\n            (DerivedCategory.Q.obj ((cxPullC l E g).obj ((cxRes l E Y).obj P))))",
+  "branch": "sheaf-dag",
+  "by": "S4",
+  "date": "2026-10-25"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-51f79",
+  "group": "S4",
+  "result": "pass",
+  "landing": "20261025T203123-L-2784613",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-51f79",
+  "group": "S4",
+  "result": "pass",
+  "landing": "20261025T203123-L-2784613",
+  "kind": "interface",
+  "note": "independent cc review: item proof (assembleRoos over 4 sorried substeps + proved reflector comparison) vs unchanged item statement and parent IsComparison/IsLocalized/IsConstantUnitNormalized defs; unit sk-lem-int-tensor realized=[] vs removed imports; item node diff vs clone (proof/proof_deps/proof_origin/tool_uses only)"
+ }
+}

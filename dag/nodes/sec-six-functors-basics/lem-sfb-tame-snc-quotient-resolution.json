@@ -26,9 +26,175 @@
   "def-weil-regular-scheme",
   "def-pc-field-tower"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "The finite separable map $\\operatorname{Spec}K\\to\\operatorname{Spec}F$ is etale by [lem-weil-pbc-finite-separable-extension-etale], hence smooth of relative dimension zero by [lem-weil-pbc-etale-smooth-zero-dimensional-fibres]. Smooth composition [lem-trf-smooth-composition] shows that $Y$ and every intersection of components of $D$ are smooth over $F$. Their codimensions are unchanged, since their schemes have not changed. Thus $D$ is also relative SNC over $F$. The supplied semilinear quotient geometry [lem-sfb-semilinear-quotient-projective-geometry], with $e=F$, gives that $Y,Q$ are normal Noetherian, $Y$ is a finite disjoint union of clopen integral components, and $Y/F$ is projective. The same statement gives $Q$ the unique $F$-structure for which $q$ is an $F$-morphism, and shows $Q$ proper of finite type, in particular separated, over $F$; nothing more about $Q$ is used below.",
+   "uses": [
+    "lem-weil-pbc-finite-separable-extension-etale",
+    "lem-weil-pbc-etale-smooth-zero-dimensional-fibres",
+    "lem-trf-smooth-composition",
+    "lem-sfb-semilinear-quotient-projective-geometry"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "X 2.3 Step 3, p.151, separable constants and smooth pairs; projectivity of supplied semilinear quotient as in Step 2."
+   }
+  },
+  {
+   "text": "Partition the finitely many components of $Y$ into $H$-orbits. Each orbit union $Y_a$ is clopen and invariant, and its image $Q_a$ is clopen: both it and its complement are images of closed subsets under the finite map. The restricted quotient has all the required properties by [lem-sfb-clopen-geometric-categorical-quotient]. Choose a component $C_a$ and let $G_a$ be its stabilizer. On an affine open of $Q_a$, sections upstairs form a product indexed by these components. An invariant tuple is determined uniquely by its component on $C_a$, which must be $G_a$-invariant; the other entries are its translates. The orbit-fibre assertion restricts in the same way, and an invariant map from $C_a$ extends to $Y_a$ by translates. Consequently $C_a\\to Q_a$ is the finite categorical geometric quotient by $G_a$. It is surjective, and $Q_a$ is integral because it is reduced and the image of the irreducible $C_a$.",
+   "uses": [
+    "lem-sfb-clopen-geometric-categorical-quotient"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "X 2.3 Step 3, pp.151--152, component stabilizers and induction over each orbit."
+   }
+  },
+  {
+   "text": "Let $I_a$ be the kernel of $G_a\\to\\operatorname{Aut}_F(\\kappa(C_a))$. An element of this kernel is the identity on $C_a$: apply [lem-sfb-relative-separated-dominant-ext] to the two maps from the reduced scheme $C_a$ to the separated $F$-scheme $C_a$, and to $\\operatorname{Spec}\\kappa(C_a)\\to C_a$. Thus $I_a$ is normal and acts trivially on the scheme and its boundary. The action factors through $\\overline G_a=G_a/I_a$ and the quotient stays $Q_a$. For each nonidentity element the equalizer with the identity is closed, since the diagonal of $C_a/F$ is closed [def-weil-proper-morphism], and misses the generic point by the definition of $I_a$. Remove the finite union of these proper fixed loci. The complement is invariant, dense, and free on geometric points. The order of $\\overline G_a$ is invertible in $F$, because it divides $|H|$. This is the generically free effective action required by Gabber.",
+   "uses": [
+    "lem-sfb-relative-separated-dominant-ext",
+    "def-weil-proper-morphism"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "X 2.3 Step 3, p.151, stabilizer modulo inertia at the generic point."
+   }
+  },
+  {
+   "text": "Restriction to the clopen component $C_a$ preserves smoothness [lem-weil-pbc-smooth-restrict-open-subschemes]. The restrictions of the integral components of $D$ are either empty or unchanged, so $D_a=D\\cap C_a$ is relative SNC. By the converse clause of [lem-sfb-free-characteristic-relative-nc-criterion], condition (a) holds: its divisorial log structure is fs, log smooth over the trivial log field $F$, and has triviality locus exactly $C_a\\setminus D_a$; that criterion also makes $(C_a,D_a)$ log regular. The action of $\\overline G_a$ preserves this structure. Apply [lem-sfb-field-log-smooth-gabber-modification] to obtain $h_a:W_a\\to C_a$ and $P_a=W_a/\\overline G_a$ with log-smooth log-regular quotient boundary $B_a$. In particular the image in $P_a$ of $h_a^{-1}D_a$ is contained in $B_a$. Since $C_a/F$ is projective and $h_a$ is projective in the finite-space convention, [lem-trf-h-projective-composition] makes $W_a/F$ projective. The new node gives $P_a$ integral with a locally closed immersion $j:P_a\\to\\mathbf P^n_F$, so $P_a/F$ is separated of finite type. By [lem-sfb-finite-constant-projective-graph] over $S=\\operatorname{Spec}F$, $W_a$ and $\\mathbf P^n_F$ are proper over $F$; as $p_a:W_a\\to P_a$ is surjective, [lem-weil-pbc-image-universally-closed] makes $P_a/F$ proper, and [lem-weil-pbc-scheme-theoretic-image-proper] for $j$ over $\\operatorname{Spec}F$ shows $j(P_a)$ closed in $\\mathbf P^n_F$. Writing $j$ as a closed immersion into an open $U$, the ideal of $j(P_a)$ on $U$ and the unit ideal on $\\mathbf P^n_F\\setminus j(P_a)$ glue, so $j$ is a closed immersion [def-weil-closed-immersion] and $P_a/F$ is projective [def-kun-projective]. The categorical property gives $f_a:P_a\\to Q_a$ with $f_ap_a=c_ah_a$; it is an $F$-morphism, because both maps $P_a\\to\\operatorname{Spec}F$ factor the same invariant map from $W_a$ through $p_a$.",
+   "uses": [
+    "lem-weil-pbc-smooth-restrict-open-subschemes",
+    "lem-sfb-free-characteristic-relative-nc-criterion",
+    "lem-sfb-field-log-smooth-gabber-modification",
+    "lem-trf-h-projective-composition",
+    "lem-sfb-finite-constant-projective-graph",
+    "lem-weil-pbc-image-universally-closed",
+    "lem-weil-pbc-scheme-theoretic-image-proper",
+    "def-weil-closed-immersion",
+    "def-kun-projective"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "X Theorem 1.1, pp.135--136; X 2.3 Step 3, diagram (2.d), p.151."
+   }
+  },
+  {
+   "text": "Put $U_a=P_a\\setminus B_a$. By [lem-sfb-field-log-smooth-gabber-modification], $P_a$ is integral of finite type over $F$ and its fs divisorial log structure is log regular and log smooth over the trivial log field, with triviality locus exactly $U_a$. Thus all hypotheses of [lem-sfb-equivariant-log-smooth-fan-regularization] hold with trivial group. It gives a projective birational tower $A_a\\to P_a$, with $A_a$ smooth over $F$ and reduced inverse-image boundary having smooth coordinate normal-crossings charts. Apply [lem-sfb-relative-nc-maximal-branch-strictification], again with trivial group, to get a projective birational morphism $R_a\\to A_a$ with $R_a$ smooth and integral and full reduced boundary $\\widetilde E_a$ relative strict normal crossings. Both citations allow imperfect $F$ and empty boundary. Each tower is projective in the projective-bundle sense. Their composite with the projective $P_a/F$ is projective by [lem-sfb-projective-bundle-composition]. The structure sheaf on the affine scheme $\\operatorname{Spec}F$ is ample directly from [def-weil-pbc-ample-invertible-module], so [lem-trf-projective-bundle-to-h-projective] makes $R_a/F$ projective in the finite-space convention.",
+   "uses": [
+    "lem-sfb-field-log-smooth-gabber-modification",
+    "lem-sfb-equivariant-log-smooth-fan-regularization",
+    "lem-sfb-relative-nc-maximal-branch-strictification",
+    "lem-sfb-projective-bundle-composition",
+    "def-weil-pbc-ample-invertible-module",
+    "lem-trf-projective-bundle-to-h-projective"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "X 2.3 Step 3, p.152; VIII 3.4.9, pp.111--112, and VIII 4.1.6--4.1.8, p.118."
+   }
+  },
+  {
+   "text": "The modification $h_a$ identifies the function fields of $W_a,C_a$ equivariantly. By [lem-sfb-finite-quotient-generic-fields] for the normal Noetherian $C_a\\to Q_a$, $\\kappa(Q_a)=\\kappa(C_a)^{G_a}=\\kappa(C_a)^{\\overline G_a}$ with its actual embedding. For $p_a$, take an affine open $V\\subseteq P_a$; $p_a^{-1}V=\\operatorname{Spec}A$ is affine as $p_a$ is finite, $A$ is a domain and $\\mathcal O(V)=A^{\\overline G_a}$. An invariant fraction $a/b$ equals $a\\prod_{g\\ne1}g(b)/\\prod_g g(b)$ with invariant denominator, hence invariant numerator, so $\\kappa(P_a)=\\kappa(W_a)^{\\overline G_a}=\\kappa(C_a)^{\\overline G_a}$. As $f_ap_a=c_ah_a$ is surjective, $f_a$ maps generic point to generic point and induces the identity of $\\kappa(C_a)^{\\overline G_a}$ on these embeddings. Both later towers are birational, so $v_a:R_a\\to Q_a$ also induces this same function-field isomorphism. By [lem-sfb-finite-constant-projective-graph] with $k=F$ and constant extension $F/F$, $v_a$ is projective and proper. Its image is closed by the definition of properness [def-weil-proper-morphism] and contains the generic point, so it is surjective. Properness includes separatedness and finite type. On affine charts over the Noetherian target, [lem-weil-pbc-finite-type-noetherian-finite-presentation] gives finite presentation of the ring maps; hence the map is locally of finite presentation by [def-sbc-locally-finite-presentation]. Applying [lem-sfb-birational-isomorphism-dense-open] gives a dense open of $Q_a$ over which $v_a$ is an isomorphism. In particular it has exactly one component generic point, with unchanged residue field.",
+   "uses": [
+    "lem-sfb-finite-quotient-generic-fields",
+    "lem-sfb-finite-constant-projective-graph",
+    "def-weil-proper-morphism",
+    "lem-sfb-birational-isomorphism-dense-open",
+    "lem-weil-pbc-finite-type-noetherian-finite-presentation",
+    "def-sbc-locally-finite-presentation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "X 2.3 Step 3, pp.151--152, the quotient projective modifications v and w; Stacks 0BAJ for the dense-open conclusion."
+   }
+  },
+  {
+   "text": "For the finite quotient $c_a:C_a\\to Q_a$, the effective Cartier ideal of $D_a$ is invertible by [lemma-nagata-effective-cartier-is-invertible]. By [lem-sfb-finite-trivialize-invertible-upstairs], near any $z\\in Q_a$ it has one generator $b$ on $c_a^{-1}V$. The product $N(b)=\\prod_{g\\in\\overline G_a}g(b)$ is invariant and descends to $c\\in\\mathcal O_{Q_a}(V)$. Each factor is a nonzerodivisor generating the same ideal up to a unit, so the product is a nonzerodivisor; injectivity of the invariant-ring inclusion gives the same for $c$. Its vanishing support is exactly $c_a(D_a)\\cap V$, because upstairs the zero set of the product is precisely $D_a$ and the quotient is surjective. This is the elementary conjugate-product argument after Stacks Tag 0BUT, not an application of a Cartier-image claim for arbitrary finite maps.",
+   "uses": [
+    "lem-sfb-finite-trivialize-invertible-upstairs",
+    "lemma-nagata-effective-cartier-is-invertible"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "X 2.3 Step 3, p.152, retaining the original subboundary; Stacks divisors.tex Tag 0BUT (lemma-finite-trivialize-invertible-upstairs)."
+   }
+  },
+  {
+   "text": "The smooth scheme $R_a$ is regular by [lem-weil-pbc-smooth-scheme-over-field-regular]. Smoothness also makes every intersection of components of $\\widetilde E_a$ regular; its pure codimension condition therefore gives the regular-intersection boundary of [def-trf-strict-normal-crossings-boundary]. By [lem-sfb-snc-boundary-parameter-criterion], its component equations at each point are distinct parameters $t_1,\\ldots,t_r$. The inverse image of $c_a(D_a)$ is contained in $\\widetilde E_a$ by construction. Pull back the equation $c$ of Step 7. It is nonzero, since $v_a$ is birational and $c$ is nonzero on integral $Q_a$, and is a unit off $\\widetilde E_a$. By [lem-trf-regular-local-ufd-boundary-factorization] it is $u\\prod t_i^{n_i}$. Thus its reduced zero set is precisely the union of the components with $n_i>0$. Globally the reduced inverse image $E_a=(v_a^{-1}c_a(D_a))_{\\mathrm{red}}$ is a union of components of $\\widetilde E_a$, hence is effective Cartier and relative SNC: every chosen intersection is one of the intersections for $\\widetilde E_a$. The same parameter equations prove the required absolute boundary and local-parameter clauses. The unit equation gives the empty divisor.",
+   "uses": [
+    "lem-weil-pbc-smooth-scheme-over-field-regular",
+    "def-trf-strict-normal-crossings-boundary",
+    "lem-sfb-snc-boundary-parameter-criterion",
+    "lem-trf-regular-local-ufd-boundary-factorization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "X 2.3 Step 3, final paragraph p.152; VIII Remark 4.2.2(i), p.118; Stacks more-algebra.tex Tag 0AG0 (lemma-regular-local-UFD)."
+   }
+  },
+  {
+   "text": "Form $R=\\coprod_a R_a$ and $v=\\coprod_a v_a$ using [lem-weil-pbc-scheme-coproduct-family], with target $Q=\\coprod_a Q_a$. The finite disjoint union is smooth by the source-local definition [def-sbc-smooth-morphisms]. To see projectivity explicitly, choose closed embeddings $R_a\\hookrightarrow\\mathbf P^{n_a}_F$ and place them in disjoint coordinate blocks of $\\mathbf P^{\\sum_a(n_a+1)-1}_F$. The block projective subspaces are pairwise disjoint closed subschemes, and their finite scheme-theoretic union is their coproduct (on each block's complement the other block ideals are units). This gives a closed embedding of $R$. The graph lemma [lem-sfb-finite-constant-projective-graph] now makes $v$ projective. Surjectivity, the dense isomorphism opens, the generic-point bijection and residue equalities hold on the clopen summands. The divisors $E_a$ glue on these disjoint summands; their support is exactly $v^{-1}(q(|D|))$, and their smooth intersections, parameter equations and boundary properties are local on those summands. If $Y$ is empty then $Q,R$ are empty, and all assertions hold with the empty divisor and empty open.",
+   "uses": [
+    "lem-weil-pbc-scheme-coproduct-family",
+    "def-sbc-smooth-morphisms",
+    "lem-sfb-finite-constant-projective-graph"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "X 2.3 Step 3, orbit induction and working separately over each orbit, pp.151--152; elementary finite coordinate-block embedding."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-finite-separable-extension-etale",
+  "lem-weil-pbc-etale-smooth-zero-dimensional-fibres",
+  "lem-trf-smooth-composition",
+  "lem-sfb-semilinear-quotient-projective-geometry",
+  "lem-sfb-clopen-geometric-categorical-quotient",
+  "lem-sfb-relative-separated-dominant-ext",
+  "def-weil-proper-morphism",
+  "lem-weil-pbc-smooth-restrict-open-subschemes",
+  "lem-sfb-free-characteristic-relative-nc-criterion",
+  "lem-sfb-field-log-smooth-gabber-modification",
+  "lem-trf-h-projective-composition",
+  "lem-sfb-finite-constant-projective-graph",
+  "lem-weil-pbc-image-universally-closed",
+  "lem-weil-pbc-scheme-theoretic-image-proper",
+  "def-weil-closed-immersion",
+  "def-kun-projective",
+  "lem-sfb-equivariant-log-smooth-fan-regularization",
+  "lem-sfb-relative-nc-maximal-branch-strictification",
+  "lem-sfb-projective-bundle-composition",
+  "def-weil-pbc-ample-invertible-module",
+  "lem-trf-projective-bundle-to-h-projective",
+  "lem-sfb-finite-quotient-generic-fields",
+  "lem-sfb-birational-isomorphism-dense-open",
+  "lem-weil-pbc-finite-type-noetherian-finite-presentation",
+  "def-sbc-locally-finite-presentation",
+  "lem-sfb-finite-trivialize-invertible-upstairs",
+  "lemma-nagata-effective-cartier-is-invertible",
+  "lem-weil-pbc-smooth-scheme-over-field-regular",
+  "def-trf-strict-normal-crossings-boundary",
+  "lem-sfb-snc-boundary-parameter-criterion",
+  "lem-trf-regular-local-ufd-boundary-factorization",
+  "lem-weil-pbc-scheme-coproduct-family",
+  "def-sbc-smooth-morphisms"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "X 2.3 Step 3, pp.151--152, with VIII 3.4.9 and VIII 4.1.6--4.1.8; explicit invariant-product subboundary and finite coordinate-block assembly arguments."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -67,7 +233,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-sfb-gabber-global-snc-alteration",
@@ -91,5 +257,121 @@
   },
   "same_as": [],
   "is": null
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-tame-snc-quotient-resolution",
+  "worker": "stage1",
+  "summary": "Preserved the statement. Split the ILO component-stabilizer/effective-action argument, log-smooth Gabber modification, relative fan resolution, strictification, original Cartier subboundary and finite assembly. Added one unsplit field-base logarithmic Gabber theorem; reused the existing fan, strictification, parameter, quotient and finite-local-trivialization nodes. Repair of returned head 38db1991dde: re-read the current fan-regularization statement and made its exact triviality-locus hypothesis explicit in Step 5 and in the field-base log-regular-pair input/output; refreshed verbatim citations against the current DAG.",
+  "blueprint": "det-thm-sf-ctf-stability-direct-images proof (3), alteration/tame-boundary reduction through the global alteration input; source-level implementation is ILO X 2.3 Step 3 diagrams (2.d)--(2.e) and final paragraph, pp.151--152. The existing ancestry has null from.node, as returned by blueprint_refs.py ancestor.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-finite-separable-extension-etale",
+    "why": "Used only for its stated A finite separable field extension is etale assertion in the ILO X 2.3 quotient-resolution route; it does not replace any unit-level argument."
+   },
+   {
+    "node": "lem-weil-pbc-etale-smooth-zero-dimensional-fibres",
+    "why": "Used only for its stated An etale morphism is smooth with zero-dimensional fibres assertion in the ILO X 2.3 quotient-resolution route; it does not replace any unit-level argument."
+   },
+   {
+    "node": "lem-trf-smooth-composition",
+    "why": "Used only for its stated Composition of smooth morphisms is smooth assertion in the ILO X 2.3 quotient-resolution route; it does not replace any unit-level argument."
+   },
+   {
+    "node": "def-weil-proper-morphism",
+    "why": "Used only for its stated Separated, universally closed and proper morphisms assertion in the ILO X 2.3 quotient-resolution route; it does not replace any unit-level argument."
+   },
+   {
+    "node": "lem-weil-pbc-smooth-restrict-open-subschemes",
+    "why": "Used only for its stated Smoothness under restriction to open subschemes, composition with an open immersion, and isomorphism assertion in the ILO X 2.3 quotient-resolution route; it does not replace any unit-level argument."
+   },
+   {
+    "node": "lem-trf-h-projective-composition",
+    "why": "Used only for its stated Composition of H-projective morphisms assertion in the ILO X 2.3 quotient-resolution route; it does not replace any unit-level argument."
+   },
+   {
+    "node": "def-weil-pbc-ample-invertible-module",
+    "why": "Used only for its stated Ample invertible module on a scheme (absolute ampleness) assertion in the ILO X 2.3 quotient-resolution route; it does not replace any unit-level argument."
+   },
+   {
+    "node": "lem-trf-projective-bundle-to-h-projective",
+    "why": "Used only for its stated Projective-bundle projectivity over an ample base implies H-projectivity assertion in the ILO X 2.3 quotient-resolution route; it does not replace any unit-level argument."
+   },
+   {
+    "node": "lem-weil-pbc-finite-type-noetherian-finite-presentation",
+    "why": "Used only for its stated Finite type over a Noetherian ring is finite presentation assertion in the ILO X 2.3 quotient-resolution route; it does not replace any unit-level argument."
+   },
+   {
+    "node": "def-sbc-locally-finite-presentation",
+    "why": "Used only for its stated Morphisms locally of finite presentation assertion in the ILO X 2.3 quotient-resolution route; it does not replace any unit-level argument."
+   },
+   {
+    "node": "lemma-nagata-effective-cartier-is-invertible",
+    "why": "Used only for its stated An effective Cartier ideal is invertible assertion in the ILO X 2.3 quotient-resolution route; it does not replace any unit-level argument."
+   },
+   {
+    "node": "lem-weil-pbc-smooth-scheme-over-field-regular",
+    "why": "Used only for its stated A scheme smooth over a field is regular assertion in the ILO X 2.3 quotient-resolution route; it does not replace any unit-level argument."
+   },
+   {
+    "node": "def-trf-strict-normal-crossings-boundary",
+    "why": "Used only for its stated Strict normal crossings boundary predicate assertion in the ILO X 2.3 quotient-resolution route; it does not replace any unit-level argument."
+   },
+   {
+    "node": "lem-trf-regular-local-ufd-boundary-factorization",
+    "why": "Used only for its stated Boundary-unit factorization in a regular local ring assertion in the ILO X 2.3 quotient-resolution route; it does not replace any unit-level argument."
+   },
+   {
+    "node": "lem-weil-pbc-scheme-coproduct-family",
+    "why": "Used only for its stated Coproducts of schemes: open coprojections with disjoint images covering assertion in the ILO X 2.3 quotient-resolution route; it does not replace any unit-level argument."
+   },
+   {
+    "node": "def-sbc-smooth-morphisms",
+    "why": "Used only for its stated Smooth morphisms assertion in the ILO X 2.3 quotient-resolution route; it does not replace any unit-level argument."
+   },
+   {
+    "node": "lem-weil-pbc-scheme-theoretic-image-proper",
+    "why": "Step 4 takes only its stated closedness of the image of a proper scheme in a separated finite-type one, to make the quasi-projective quotient P_a projective; no node of the unit gives it (reviewer fix replacing a dropped quotient citation)."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-finite-separable-extension-etale",
+  "lem-weil-pbc-etale-smooth-zero-dimensional-fibres",
+  "lem-trf-smooth-composition",
+  "def-weil-proper-morphism",
+  "lem-weil-pbc-smooth-restrict-open-subschemes",
+  "lem-trf-h-projective-composition",
+  "def-weil-pbc-ample-invertible-module",
+  "lem-trf-projective-bundle-to-h-projective",
+  "lem-weil-pbc-finite-type-noetherian-finite-presentation",
+  "def-sbc-locally-finite-presentation",
+  "lemma-nagata-effective-cartier-is-invertible",
+  "lem-weil-pbc-smooth-scheme-over-field-regular",
+  "def-trf-strict-normal-crossings-boundary",
+  "lem-trf-regular-local-ufd-boundary-factorization",
+  "lem-weil-pbc-scheme-coproduct-family",
+  "def-sbc-smooth-morphisms",
+  "lem-weil-pbc-scheme-theoretic-image-proper"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q89-72a3789ab",
+  "group": "Q89",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q89-72a3789ab (reviewer sub-agent of L); spot-checked: The worker re-pushed its own pre-review head, so my b0a29b6c FIX was lost; this FIX re-applies it. The landing had returned head 38db1991 because lem-sfb-equivariant-log-smooth-fan-regularization gained a hypothesis: the triviality locus must be exactly U. I diffed the fan statement against the b0a2 snapshot and that is its only change. The worker's new delta is correct and is kept: triviality-locus input and output clauses on the new node lem-sfb-field-log-smooth-gabber-modification, and Step 5 checking the fan theorem's hypotheses from the new node. Those clauses are true by ILO X Theorem 1.1, pp.135-136 (both (X',Z') and the quotient pair are log regular), and def-trf-log-regular-pair already contains exact triviality. I re-tested G=1, B empty, and Z/2 by x->-x on P^1 (T={0,inf}). The re-push again cites the dropped lem-per-projective-finite-group-quotient (drop line 1812, Steps 1 and 4; the C1 finding of both mechanical checks), and Step 6 again applies finite-quotient-generic-fields to W_a->P_a with no normality established. Fixes in fixes/dag/nodes/sec-six-functors-basics/: (1) Step 1 only uses that Q is proper and separated over F, as the semilinear-quotient node gives with e=F. (2) Step 4 makes P_a/F projective from the new node's quasi-projectivity plus image-universally-closed and scheme-theoretic-image-proper. It also states that f_a is an F-morphism, and adds that the converse clause of the free-characteristic criterion gives condition (a), including exact triviality locus, which the new node now requires. (3) Step 6 uses the invariant-fraction argument for kappa(P_a). (4) The new node's source.place no longer names the dropped quotient theorem. proof_deps are the exact union of uses; in tool_uses 1812 is removed and scheme-theoretic-image-proper added. All nine steps were re-read and are correct otherwise. The new node is X 1.1 over Spec F: no live duplicate exists and it does not restate the parent. Batch-5 flags: the trf/per definitions, 01WE, 087S, 0AG0, smooth composition, and the closures reaching trf ampleness, topology or definitions are all generic; none is a step of the trace formula or Poincare duality; accepted. Artin-Gabber finding: the 1812 cite is removed, and the item is outside that subtree. Maintainer notes: this is the second time the FIX on this item was lost, so re-apply it on any re-delivery; the sfb X 1.1 node is accepted for the ctf-stability route; the landed free-characteristic criterion still reaches the dropped lem-per-integral-monoid-unit-pushout; the item never states that v is over F.; 2 file(s) fixed by the reviewer"
  }
 }

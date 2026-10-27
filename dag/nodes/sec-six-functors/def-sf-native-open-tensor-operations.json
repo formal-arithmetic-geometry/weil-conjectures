@@ -1,0 +1,109 @@
+{
+ "id": "def-sf-native-open-tensor-operations",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "fix-lem-tensor-adjunction.proof.md Step 1 and fix-cor-verdier-exchange.proof.md Steps 1-2: the unchanged tensor and normalized open constructions used in the structural Hom chain; factoring the existing bundled construction into compilation layers.",
+   "via": [
+    "lem-sf-weil-verdier-exchange"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "definition",
+ "title": "Concrete native open operations and representative maps",
+ "statement": "Fix a finite field k₀ and a prime ℓ invertible in k₀, and use the actual Weil-sheaf categories, inverse images and open extensions of [def-sf-native-weil-derived-framework]. Localize each exact module pullback and exact open extension to their ordinary derived categories [def-weil-abstract-derived-category]. For composable k₀-maps j:V→W and p:W→Y, the comparison from localized p* followed by localized j* to localized (j≫p)* is the inverse exact-functor composition comparison followed by localization of the inverse of the existing upperStarCompIso. On separated finite-type schemes use the actual left-first sheaf tensor, total tensor and derived tensor of [def-sf-native-derived-tensor-layer]. The total summand map at p+q=n is exactly HomologicalComplex.ιMapBifunctor for the flipped native tensor bifunctor. The K-flat tensor model is the already proved natural comparison nativeDerivedTensor_models, evaluated on P,T and their two NativeIsKFlat proofs. For an open immersion j:U→Z between separated finite-type schemes, define forgetting/extension and forgetting/pullback comparison isomorphisms by the exact-functor composition factors, localization of the identity comparison on the underlying actual ordinary functors, and the final exact-functor composition factors. The ordinary tensor and forgetting comparisons are those fixed by [lem-sf-weil-native-closed-forgetful]. These are the unchanged concrete auxiliary operations of the existing native open tensor presentation; no existence assertion for a projection formula is part of this definition.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-package/fix-lem-tensor-adjunction.proof.md",
+  "place": "Step 1; the tensor-only component of def-sf-derived-weil-category-and-operations or the generic/concrete components of def-sf-native-open-tensor-presentation-data, using the original existing Lean declaration bodies unchanged."
+ },
+ "stmt_deps": [
+  "def-sf-native-weil-derived-framework",
+  "def-weil-abstract-derived-category",
+  "def-sf-native-derived-tensor-layer",
+  "lem-sf-weil-native-closed-forgetful"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Exact open pullback extension derived functors and tensor total summand insertions on Frobenius equivariant sheaves",
+   "results": "OK 8 hits; CategoryTheory.Functor.sheafPullbackConstruction.sheafPullback, TopCat.Sheaf.pullback, SheafOfModules.pullback, CategoryTheory.Functor.totalLeftDerived, AlgebraicGeometry.Scheme.Modules.pullback, CategoryTheory.Functor.totalRightDerived, SheafOfModules.pullbackPushforwardAdjunction, SheafOfModules.pullback_assoc",
+   "date": "2026-10-26",
+   "verdict": "No exact Mathlib match: the project-specific construction is reused from its existing Lean declarations."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"nativeOpenPullComp\"",
+   "results": "OK 0 hits; ",
+   "date": "2026-10-26",
+   "verdict": "No exact Mathlib match: the project-specific construction is reused from its existing Lean declarations."
+  },
+  {
+   "tool": "grep",
+   "query": "nativeOpenPullComp|nativeOpenTensorInsertion|nativeOpenForgetExtension",
+   "results": "OK 0 hits; ",
+   "date": "2026-10-26",
+   "verdict": "No exact Mathlib match: the project-specific construction is reused from its existing Lean declarations."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "WeilConjectures.WeilSheaf.VerdierDual",
+  "date": "2026-10-27",
+  "group": "C4"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.NativeOpenTensorOperations",
+  "file": "lean/Sheaf/Paper/NativeOpenTensorOperations.lean",
+  "declaration": "AlgebraicGeometry.ProEtaleWeilSheaf.nativeOpenPullComp",
+  "declarations": [
+   "AlgebraicGeometry.ProEtaleWeilSheaf.nativeOpenPull",
+   "AlgebraicGeometry.ProEtaleWeilSheaf.nativeOpenExtension",
+   "AlgebraicGeometry.ProEtaleWeilSheaf.nativeOpenPullComp",
+   "AlgebraicGeometry.ProEtaleWeilSheaf.nativeOpenSheafTensor",
+   "AlgebraicGeometry.ProEtaleWeilSheaf.nativeOpenSheafLeft",
+   "AlgebraicGeometry.ProEtaleWeilSheaf.nativeOpenSheafRight",
+   "AlgebraicGeometry.ProEtaleWeilSheaf.nativeOpenDerivedLeft",
+   "AlgebraicGeometry.ProEtaleWeilSheaf.nativeOpenDerivedRight",
+   "AlgebraicGeometry.ProEtaleWeilSheaf.nativeOpenTensorInsertion",
+   "AlgebraicGeometry.ProEtaleWeilSheaf.nativeOpenTensorModel",
+   "AlgebraicGeometry.ProEtaleWeilSheaf.nativeOpenForgetExtension",
+   "AlgebraicGeometry.ProEtaleWeilSheaf.nativeOpenForgetPull"
+  ],
+  "statement": "def nativeOpenPullComp {V W Y : Scheme.{u}} [V.Over (Spec (CommRingCat.of k₀))] [W.Over (Spec (CommRingCat.of k₀))] [Y.Over (Spec (CommRingCat.of k₀))] (j : V ⟶ W) (p : W ⟶ Y) [j.IsOver (Spec (CommRingCat.of k₀))] [p.IsOver (Spec (CommRingCat.of k₀))] : nativeOpenPull k₀ l p ⋙ nativeOpenPull k₀ l j ≅ nativeOpenPull k₀ l (j ≫ p)",
+  "branch": "sheaf-dag",
+  "by": "C4",
+  "date": "2026-10-27",
+  "note": "Construction component factored from existing bundled definitions, whose exact declaration names, signatures and bodies are preserved. There is no new mathematical object or unproved theorem; the original module re-exports this module."
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-1eafb",
+  "group": "C4",
+  "result": "fix",
+  "landing": "20261027T034622-L-3666564",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-1eafb",
+  "group": "C4",
+  "result": "fix",
+  "landing": "20261027T034622-L-3666564",
+  "kind": "interface",
+  "note": "independent cc review: Item exchange proof and the verbatim tensor-block and NativeOpenDerivedTensor extractions vs the clone (byte/line diff); sandbox compile of all 10 delivered modules plus VerdierDualLocalization, NativeWeilDualizingHomTransposition and root WeilConjectures, all OK; axioms propext/Classical.choice/Quot.sound plus sorryAx from existing holes"
+ }
+}

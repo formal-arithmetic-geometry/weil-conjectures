@@ -1,0 +1,361 @@
+{
+ "id": "lem-sfb-supported-continuous-omega-image-comparison",
+ "kind": "statement",
+ "title": "All-continuous Omega comparison for uniform supported-image upper bounds",
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-prop-sf-comp-coherence",
+ "statement": "Let $X$ be an affine scheme [def-pc-scheme]. Use the small étale and pro-étale sites in the small indexing universe [def-weil-pbc-etale-site, def-weil-pbc-proetale-site, def-weil-size-convention]. A support chain over $X$ means a finite chain $S=T_r\\xrightarrow{a_r}\\cdots\\xrightarrow{a_1}T_0=X$, where each arrow is a quasi-compact open immersion or a closed immersion with quasi-compact open complement [def-weil-open-immersion, def-weil-closed-immersion, def-weil-finite-type-morphism]. For a condensed coefficient ring $R$, put $R_T=p_T^*R$ and $\\mathcal A_{R,T}=\\operatorname{Mod}_{R_T}$. Write $J_R=J_{R,1}\\circ\\cdots\\circ J_{R,r}$, where $J_{R,t}=(a_t)_!$ in the open case and $J_{R,t}=(a_t)_*$ in the closed case [def-sfb-module-open-lower-shriek, def-sfb-module-lower-star]. For an affine pro-étale object $v:U\\to X$, set $F_{R,v}=v^*J_R$. The empty chain has $J_R=\\mathrm{id}$. All derived categories and $R\\Gamma$ are the ordinary uncompleted module-derived ones, with section complexes valued in abelian groups [sk-def-sfb-module-derived-pushpull].\n\nFix a prime $\\ell$ and an algebraic closure $\\Omega=\\overline{\\mathbf Q}_\\ell$ with its extended norm topology. Put $R_\\Omega(P)=\\{c\\in C(P,\\Omega):c(P)\\subseteq E\\text{ for some finite intermediate }E/\\mathbf Q_\\ell\\}$ on profinite sets, with restriction by precomposition and pointwise operations [sk-def-sfb-qlbar-condensed]. This is the finite-subextension-valued condensed coefficient ring, corresponding to the colimit-topology convention in Hemo–Richarz–Scholbach Lemma 7.9; it is not the ring of all norm-continuous $\\Omega$-valued functions. For every finite intermediate field $E/\\mathbf Q_\\ell$ put $R_E(P)=C(P,E)$ with its induced norm topology. The coefficient maps $R_E\\to R_\\Omega$ are postcomposition with $E\\hookrightarrow\\Omega$.\n\nA finite scalar local model means a module which on a pro-étale cover has the form $R_T\\otimes_{\\underline{R(*)}}\\underline P$, where $P$ is a finitely presented scalar $R(*)$-module, that is, a cokernel of a map between finite free scalar modules [sk-def-sfb-constructible]. The scalar modules and covers may differ for different terms. For any actual module map $f:L\\to M$ between such modules on $S$, write $I_f=\\operatorname{im}f$ in the abelian module category, not the closure of a topological image.\n\nLet $h\\geq0$ be an integer. Suppose that for every finite intermediate field $E$, every support chain over this $X$, every actual map $g$ between finite scalar local-model $R_{E,S}$-modules, and every affine pro-étale $v:U\\to X$,\n$$H^qR\\Gamma(U,F_{R_E,v}(I_g)[0])=0\\quad(q>h).$$\nThen for every support chain over $X$, every actual map $f$ between finite scalar local-model $R_{\\Omega,S}$-modules, and every affine pro-étale $v:U\\to X$,\n$$H^qR\\Gamma(U,F_{R_\\Omega,v}(I_f)[0])=0\\quad(q>h).$$\nThis is preservation of the same uniform upper estimate for the finite-subextension-valued condensed coefficient ring. No Noetherianity, torsion-cd or invertibility-of-$\\ell$ hypothesis on $X$ is imposed. Empty schemes, zero maps, identities and the empty chain are included.\n\nThe corresponding implication for the ring $P\\mapsto C(P,\\Omega)$ of all norm-continuous functions is false (already for $X=\\operatorname{Spec}k$, $k$ algebraically closed, $h=0$, the identity map and the empty chain), so this statement does not give that version.",
+ "source": {
+  "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
+  "place": "Section 8 proof of Lemma 8.6 and Section 7.2 Lemma 7.9 motivate finite-field transfer; Lemma 7.9 uses the colimit topology and does NOT give the all-continuous norm-topological assertion here. Agent comparison obligation; exact all-continuous arbitrary-image uniform-bound transfer reference WANTED."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-pbc-etale-site",
+  "def-weil-pbc-proetale-site",
+  "def-weil-size-convention",
+  "def-weil-open-immersion",
+  "def-weil-closed-immersion",
+  "def-weil-finite-type-morphism",
+  "def-sfb-module-open-lower-shriek",
+  "def-sfb-module-lower-star",
+  "sk-def-sfb-module-derived-pushpull",
+  "sk-def-sfb-constructible",
+  "sk-def-sfb-qlbar-condensed",
+  "def-sfb-qcqs-open-closed-tree",
+  "def-sfb-condensed-module-sections"
+ ],
+ "proof": [
+  {
+   "text": "Every $T_t$ is qcqs. Start with affine $X$. For a qc open in a qcqs scheme, take a finite affine cover; intersections are qc by [pqf-lem-qs-intersection-qc], hence it is quasi-separated by the affine-cover criterion. For a closed subscheme, intersect a finite affine cover of the target with it: each piece is affine by the closed-immersion definition, and intersections are closed subsets of the qc intersections of target affines, hence qc. The same criterion applies. This proves the claim inductively along the specified chain, without changing its factorization. In particular $S$ is qcqs. A finitely presented module over the scalar field $Omega$ is finite dimensional: its finite presentation gives finitely many generators, and a maximal independent subfamily is a finite basis. Thus the displayed scalar local models for $L,M$ are finite free, including rank zero. They are lisse in the exact sense of the descent node.",
+   "uses": [
+    "lem-weil-pbc-affine-scheme-qcqs",
+    "pqf-lem-qs-intersection-qc",
+    "lem-weil-pbc-quasi-separated-affine-cover-criterion",
+    "def-weil-closed-immersion"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
+    "place": "Lemma 7.9, qcqs hypothesis; elementary scheme-chart and scalar linear-algebra checks"
+   }
+  },
+  {
+   "text": "Apply lisse descent to $L,M$ on the qcqs scheme $S$, then take a finite compositum of their two coefficient fields, obtaining a common finite field $E$ and lisse $E_S$-modules $L_E,M_E$ whose $R_{Omega,S}$-extensions are $L,M$. Finite scalar extension preserves the local finite-free trivializations. The Hom-surjectivity clause of the same node represents the actual map $f$ by a map $g:L_F\to M_F$ over some finite $Fsupseteq E$. Replace $E$ by $F$. Equality here is equality of the actual module maps after the chosen extension isomorphisms, not merely an identification of their values at geometric points. Each $L_E,M_E$ is an allowed finite scalar local model, so $I_E=operatorname{im}g$ falls under the hypothesis. For every finite $Fsupseteq E$ put $g_F=F_Sotimes_{E_S}g$ and $I_F=operatorname{im}g_F$.",
+   "uses": [
+    "det-lem-coefficient-finite-descent-lisse"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
+    "place": "Lemma 7.9 and Proposition 5.2; blueprint latest sk-thm-sfb-qlbar-two-colimit/sk-lem-coefficient-finite-descent-lisse.md, clauses (1),(2)"
+   }
+  },
+  {
+   "text": "Flatness of $F_S/E_S$ and $R_{Omega,S}/E_S$ makes these extensions exact: extension is right exact by its tensor adjunction, and flatness supplies finite limits. Apply extension to the kernel/cokernel description of the image of $g$. This gives $I_Fcong F_Sotimes_{E_S}I_E$ and $I_fcong R_{Omega,S}otimes_{E_S}I_E$. The tail coefficient-colimit node identifies $R_{Omega,S}=\u000barinjlim_{Fsupseteq E}F_S$ as $E_S$-modules with the actual inclusion maps. Relative tensor, defined by its balanced coequalizer and tensor-Hom adjunction, preserves this colimit. Therefore, after restriction to $E_S$, $I_fcong\u000barinjlim_{Fsupseteq E}I_F$. These are sheaf colimits and ordinary abelian images; no closure of an image or norm limit is involved.",
+   "uses": [
+    "lem-sfb-subfield-flat",
+    "lem-sfb-qlbar-flat",
+    "lem-sfb-qlbar-tail-module-colimit",
+    "sk-def-sfb-change-of-scalars"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
+    "place": "Lemma 7.9; tensor/flatness and tail-colimit assembly of the finite-coefficient images"
+   }
+  },
+  {
+   "text": "Pass to underlying abelian sheaves. Both internal-to-section module equivalence and the module-sheaf forgetful node preserve these colimits. The underlying functors of the open extension and closed pushforward are respectively abelian extension by zero and abelian direct image. Open extension preserves colimits as a left adjoint. Each closed pushforward preserves filtered colimits by ringed open–closed localization, since its target is qcqs by step 1 and its open complement is qc by hypothesis. The pullback $v^*$ has underlying abelian inverse image by Cartesian coefficients, so also preserves colimits as a left adjoint. These descriptions are independent of which coefficient ring acts; they identify the transition maps with those induced by $I_F\to I_G$. Induction through the actual support chain therefore gives\n$$\bigl(v^*J_{R_Omega}(I_f)\bigr)_{\nm ab}cong\u000barinjlim_{Fsupseteq E}\bigl(v^*J_{R_F}(I_F)\bigr)_{\nm ab}.$$\nThe index is the small directed tail poset from the coefficient-colimit node, in the prescribed universe.",
+   "uses": [
+    "def-weil-pbc-internal-abelian-sheaf-module-equivalence",
+    "lem-weil-pbc-module-sheaves-colimits-forgetful",
+    "def-sfb-module-open-lower-shriek",
+    "def-sfb-module-lower-star",
+    "lem-weil-pbc-proetale-ringed-open-closed",
+    "sk-prop-sfb-cartesian-coefficients",
+    "def-sfb-module-upper-lower-adjunction",
+    "lem-sfb-qlbar-tail-module-colimit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
+    "place": "Lemma 5.3, degree-zero filtered diagrams; supported version using Stacks Tags 09AA, 09BM, 09BN and the open extension adjunction"
+   }
+  },
+  {
+   "text": "The affine test $U$ is qcqs. Apply bounded-below cohomology continuity on $X_{\nm proet}$ to the last diagram of underlying abelian sheaves as complexes in degree zero, using the constant integer ring and common lower bound zero. It gives, for every $q$, the canonical isomorphism\n$$H^q!left(U,\bigl(v^*J_{R_Omega}(I_f)\bigr)_{\nm ab}\night)cong\u000barinjlim_{Fsupseteq E}H^q!left(U,\bigl(v^*J_{R_F}(I_F)\bigr)_{\nm ab}\night).$$\nSmall ringed-site module categories have enough injectives: the K-injective existence node gives that they are Grothendieck, and the enough-injectives node applies. The module/abelian evaluation comparison, transported through the internal module equivalence, identifies these groups with exactly the module-derived section groups in the question. For $q>h$ every term on the right is zero by the assumed estimate, applied to $g_F$ on the same chain over the original $X$ and the same $v$. The colimit of zero groups is zero. This proves the corrected assertion with precisely the original bound $h$.",
+   "uses": [
+    "lem-weil-pbc-affine-scheme-qcqs",
+    "det-pe-bounded-continuity-sections",
+    "prop-pur-kinjective-resolutions-exist",
+    "lem-sp-grothendieck-enough-injectives",
+    "lem-weil-pbc-ringed-site-module-abelian-evaluation-comparison",
+    "def-weil-pbc-internal-abelian-sheaf-module-equivalence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
+    "place": "Lemma 5.3 and proof of Lemma 8.6; module-derived/abelian comparison is Stacks Tag 03FD, lemma-cohomology-modules-abelian-agree"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-affine-scheme-qcqs",
+  "pqf-lem-qs-intersection-qc",
+  "lem-weil-pbc-quasi-separated-affine-cover-criterion",
+  "def-weil-closed-immersion",
+  "det-lem-coefficient-finite-descent-lisse",
+  "lem-sfb-subfield-flat",
+  "lem-sfb-qlbar-flat",
+  "lem-sfb-qlbar-tail-module-colimit",
+  "sk-def-sfb-change-of-scalars",
+  "def-weil-pbc-internal-abelian-sheaf-module-equivalence",
+  "lem-weil-pbc-module-sheaves-colimits-forgetful",
+  "def-sfb-module-open-lower-shriek",
+  "def-sfb-module-lower-star",
+  "lem-weil-pbc-proetale-ringed-open-closed",
+  "sk-prop-sfb-cartesian-coefficients",
+  "def-sfb-module-upper-lower-adjunction",
+  "det-pe-bounded-continuity-sections",
+  "prop-pur-kinjective-resolutions-exist",
+  "lem-sp-grothendieck-enough-injectives",
+  "lem-weil-pbc-ringed-site-module-abelian-evaluation-comparison"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
+  "place": "Supported-image deduction from Lemma 7.9 with its colimit-topology convention, using Lemma 5.3 and the blueprint lisse finite descent and coefficient-flatness statements."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Positive cohomology of an all continuous norm topological algebraic closure coefficient sheaf image is generated by finite extension coefficient image classes without finite field descent of sections",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"groupCohomology.exists_mul_galRestrict_of_norm_eq_one\", \"module\": \"Mathlib/RepresentationTheory/Homological/GroupCohomology/Hilbert90\", \"type\": \"∀ {K L : Type} [inst : Field K] [inst_1 : Field L] [inst_2 : Algebra K L] [FiniteDimensional K L]\\n  [inst_4 : IsGalois K L] [IsCyclic Gal(L/K)] {g : Gal(L/K)} {A : Type u_1} {B : Type u_2} [inst_6 : CommRing A]\\n  [inst_7 : CommRing B] [inst_8 : Algebra A B] [inst_9 : Algebra A L] [inst_10 : Algebra \", \"doc\": \"In a cyclic Galois extension $ L/K $ with generator $ g $, if an element $ \\\\eta \\\\in B $ (the integral closure of $ A $ in $ L $) satisfies $ \\\\operatorname{Norm}_{L/K}(\\\\eta) = 1 $, then there exists a \"}\n  {\"name\": \"groupCohomology.Hilbert90.aux_ne_zero\", \"module\": \"Mathlib/RepresentationTheory/Homological/GroupCohomology/Hilbert90\", \"type\": \"∀ {K : Type u_1} {L : Type u_2} [inst : Field K] [inst_1 : Field L] [inst_2 : Algebra K L]\\n  [inst_3 : FiniteDimensional K L] (f : Gal(L/K) → Lˣ), groupCohomology.Hilbert90.aux f ≠ 0\", \"doc\": \"For any function $ f $ from the Galois group $ \\\\text{Gal}(L/K) $ to the multiplicative group $ L^\\\\times $, the linear map constructed as a finite-support combination of Galois actions scaled by $ f(\\\\v\"}\n  {\"name\": \"groupCohomology.Hilbert90.aux\", \"module\": \"Mathlib/RepresentationTheory/Homological/GroupCohomology/Hilbert90\", \"type\": \"{K : Type u_1} →\\n  {L : Type u_2} →\\n    [inst : Field K] → [inst_1 : Field L] → [inst_2 : Algebra K L] → [FiniteDimensional K L] → (Gal(L/K) → Lˣ) → L → L\", \"doc\": \"Given a function $ f $ from the Galois group $ \\\\text{Gal}(L/K) $ to the multiplicative group $ L^\\times $, this function constructs a linear map from $ L $ to $ L $ by taking the finite-support linear \"}\n  {\"name\": \"continuousCohomology\", \"module\": \"Mathlib/Algebra/Category/ContinuousCohomology/Basic\", \"type\": \"(R : Type u_1) →\\n  (G : Type u_2) →\\n    [inst : CommRing R] →\\n      [inst_1 : Group G] →\\n        [inst_2 : TopologicalSpace R] →\\n          [inst_3 : TopologicalSpace G] →\\n            [IsTopologicalGroup G] → ℕ → CategoryTheory.Functor (Action (TopModuleCat R) G) (TopModuleCat R)\", \"doc\": \"The functor computes the $n$-th continuous cohomology group by composing the homogeneous cochain complex construction (which forms $G$-equivariant cochains and extracts $G$-invariant submodules) with \"}\n  {\"name\": \"groupCohomology.isMulCoboundary₁_of_isMulCocycle₁_of_aut_to_units\", \"module\": \"Mathlib/RepresentationTheory/Homological/GroupCohomology/Hilbert90\", \"type\": \"∀ {K : Type u_1} {L : Type u_2} [inst : Field K] [inst_1 : Field L] [inst_2 : Algebra K L] [FiniteDimensional K L]\\n  (f : Gal(L/K) → Lˣ), groupCohomology.IsMulCocycle₁ f → groupCohomology.IsMulCoboundary₁ f\", \"doc\": \"In the context of Galois cohomology, if $ f : \\\\text{Gal}(L/K) \\\\to L^\\\\times $ is a 1-cocycle (satisfying $ f(gh) = g \\\\cdot f(h) \\\\cdot f(g) $ for all $ g, h \\\\in \\\\text{Gal}(L/K) $), then $ f $ is a 1-cob\"}\n  {\"name\": \"groupCohomology.H1ofAutOnUnitsUnique\", \"module\": \"Mathlib/RepresentationTheory/Homological/GroupCohomology/Hilbert90\", \"type\": \"(K L : Type) →\\n  [inst : Field K] →\\n    [inst_1 : Field L] →\\n      [inst_2 : Algebra K L] → [FiniteDimensional K L] → Unique ↑(groupCohomology.H1 (Rep.ofAlgebraAutOnUnits K L))\", \"doc\": \"For any finite field extension $ L/K $, the first group cohomology module $ H^1(\\text{Aut}(L/K), L^\\times) $ is trivial, meaning it contains only the zero element. This implies every 1-cocycle in this c\"}\n  {\"name\": \"Algebra.H1Cotangent\", \"module\": \"Mathlib/RingTheory/Extension/Cotangent/Basic\", \"type\": \"(R : Type u) → (S : Type v) → [inst : CommRing R] → [inst_1 : CommRing S] → [Algebra R S] → Type (max u v)\", \"doc\": \"The first cohomology group of the cotangent complex for an $ R $-algebra $ S $, constructed using the algebra's own elements as generators in the extension $ R \\to S $.\"}\n  {\"name\": \"ContinuousCohomology.homogeneousCochains\", \"module\": \"Mathlib/Algebra/Category/ContinuousCohomology/Basic\", \"type\": \"(R : Type u_1) →\\n  (G : Type u_2) →\\n    [inst : CommRing R] →\\n      [inst_1 : Group G] →\\n        [inst_2 : TopologicalSpace R] →\\n          [inst_3 : TopologicalSpace G] →\\n            [IsTopologicalGroup G] →\\n              CategoryTheory.Functor (Action (TopModuleCat R) G) (CochainComplex (TopModuleC\", \"doc\": \"The functor constructs cochain complexes in the category of topological $ R $-modules by first forming the $ G $-equivariant cochain complex $ \\\\text{MultiInd.complex} $, then applying the invariants f\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the displayed declarations concern scalar adic completion, ordinary sheaf constructions, finite-field algebra or generic exactness, and do not state this pro-etale coefficient comparison or estimate"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Comparison between finite ell adic coefficient fields and full continuous Q ell bar image sheaf cohomology on affine pro etale schemes",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"BDeRhamPlus\", \"module\": \"Mathlib/RingTheory/Perfectoid/BDeRham\", \"type\": \"(R : Type u) →\\n  [inst : CommRing R] →\\n    (p : ℕ) → [Fact (Nat.Prime p)] → [Fact ¬IsUnit ↑p] → [IsAdicComplete (Ideal.span {↑p}) R] → Type u\", \"doc\": \"The adic completion of the kernel of the Fontaine theta homomorphism (which inverts the prime $ p $) in the localization of Witt vectors away from $ p $.\"}\n  {\"name\": \"BDeRham\", \"module\": \"Mathlib/RingTheory/Perfectoid/BDeRham\", \"type\": \"(R : Type u) →\\n  [inst : CommRing R] →\\n    (p : ℕ) → [Fact (Nat.Prime p)] → [Fact ¬IsUnit ↑p] → [IsAdicComplete (Ideal.span {↑p}) R] → Type u\", \"doc\": \"The ring $\\\\mathbb{B}_{\\\\mathrm{dR}}^+$ is constructed as the localization of the adic completion of the kernel of the Fontaine theta homomorphism $\\\\Theta: \\\\mathbb{W}(R^\\\\flat) \\\\to R$ (which inverts the \"}\n  {\"name\": \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.exists_eq\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"∀ {I : Type u} [inst : CategoryTheory.Category.{u, u} I] {S X : AlgebraicGeometry.Scheme}\\n  {D : CategoryTheory.Functor I AlgebraicGeometry.Scheme} {t : D ⟶ (CategoryTheory.Functor.const I).obj S} {f : X ⟶ S}\\n  [inst_1 : ∀ (i : I), CompactSpace ↥(D.obj i)] [AlgebraicGeometry.LocallyOfFiniteType f]\\n \", \"doc\": \"Given a diagram $ D: \\\\mathcal{I} \\\\to \\\\text{Sch} $ of schemes, a natural transformation from $ D $ to the constant diagram at $ S $, and a morphism $ X \\\\to S $, there exists an index $ j $ in the refin\"}\n  {\"name\": \"AlgebraicGeometry.exists_appTop_map_eq_zero_of_isLimit\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"∀ {I : Type u} [inst : CategoryTheory.Category.{u, u} I] (D : CategoryTheory.Functor I AlgebraicGeometry.Scheme)\\n  (c : CategoryTheory.Limits.Cone D) (hc : CategoryTheory.Limits.IsLimit c) [CategoryTheory.IsCofiltered I]\\n  [∀ {i j : I} (f : i ⟶ j), AlgebraicGeometry.IsAffineHom (D.map f)] {i : I} [C\", \"doc\": \"Given a cofiltered diagram of schemes with affine transition morphisms and compact topological spaces, if a global section becomes zero under the limit cone's projection map, then there exists a morph\"}\n  {\"name\": \"AlgebraicGeometry.exists_map_preimage_le_map_preimage\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"∀ {I : Type u} [inst : CategoryTheory.Category.{u, u} I] (D : CategoryTheory.Functor I AlgebraicGeometry.Scheme)\\n  (c : CategoryTheory.Limits.Cone D) (hc : CategoryTheory.Limits.IsLimit c) [CategoryTheory.IsCofiltered I]\\n  [∀ {i j : I} (f : i ⟶ j), AlgebraicGeometry.IsAffineHom (D.map f)] {i : I} {U\", \"doc\": \"In a cofiltered diagram of schemes where all transition morphisms are affine, given a compact open subset $U$ and an open subset $V$ in some object $i$ such that the preimage of $U$ under the cone's p\"}\n  {\"name\": \"AlgebraicGeometry.exists_appTop_map_eq_zero_of_isAffine_of_isLimit\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"∀ {I : Type u} [inst : CategoryTheory.Category.{u, u} I] (D : CategoryTheory.Functor I AlgebraicGeometry.Scheme)\\n  (c : CategoryTheory.Limits.Cone D) (hc : CategoryTheory.Limits.IsLimit c) [CategoryTheory.IsCofiltered I]\\n  [∀ (i : I), AlgebraicGeometry.IsAffine (D.obj i)] (i : I) (s : ↑((D.obj i).pr\", \"doc\": \"Given a cofiltered diagram of affine schemes with a limit cone, if a global section of the structure sheaf of some object in the diagram maps to zero under the projection to the limit, then there exis\"}\n  {\"name\": \"AlgebraicGeometry.exists_appTop_π_eq_of_isLimit\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"∀ {I : Type u} [inst : CategoryTheory.Category.{u, u} I] (D : CategoryTheory.Functor I AlgebraicGeometry.Scheme)\\n  (c : CategoryTheory.Limits.Cone D) (hc : CategoryTheory.Limits.IsLimit c) [CategoryTheory.IsCofiltered I]\\n  [∀ {i j : I} (f : i ⟶ j), AlgebraicGeometry.IsAffineHom (D.map f)] (s : ↑(c.p\", \"doc\": \"Given a cofiltered diagram of schemes where each morphism is affine and each object is compact and quasi-separated, any global section of the structure sheaf of the limit scheme can be expressed as th\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.exists_hom_comp_eq_comp_of_locallyOfFiniteType\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"∀ {I : Type u} [inst : CategoryTheory.Category.{u, u} I] {S X : AlgebraicGeometry.Scheme}\\n  (D : CategoryTheory.Functor I AlgebraicGeometry.Scheme) (t : D ⟶ (CategoryTheory.Functor.const I).obj S) (f : X ⟶ S)\\n  (c : CategoryTheory.Limits.Cone D) (hc : CategoryTheory.Limits.IsLimit c) [∀ (i : I), Com\", \"doc\": \"Given a diagram of schemes with a morphism locally of finite type, if two morphisms from an object in the diagram to a scheme agree after composition with the diagram's morphism and a cone's projectio\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the displayed declarations concern scalar adic completion, ordinary sheaf constructions, finite-field algebra or generic exactness, and do not state this pro-etale coefficient comparison or estimate"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Finite coefficient field image classes surject onto positive cohomology of sheaf images with all continuous norm algebraic closure coefficients",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"FiniteField.norm_surjective\", \"module\": \"Mathlib.FieldTheory.Finite.GaloisField\", \"type\": \": Function.Surjective (Algebra.norm K (S := K'))\", \"doc\": \"For a finite field extension $ K' $ of a field $ K $, the norm function $ N_{K'/K} $ is surjective, meaning every element of $ K $ is the norm of some element in $ K' $.\"}\n  {\"name\": \"FiniteField.unitsMap_norm_surjective\", \"module\": \"Mathlib.FieldTheory.Finite.GaloisField\", \"type\": \": Function.Surjective (Units.map <| Algebra.norm K (S := K'))\", \"doc\": \"For a finite field extension $ K' / K $, the norm map $ N_{K'/K} : K'^\\\\times \\\\to K\\\\times $ induced by the algebraic norm is surjective, meaning every nonzero element of $ K $ is the norm of some nonze\"}\n  {\"name\": \"IsSepClosed.algebraMap_surjective\", \"module\": \"Mathlib.FieldTheory.IsSepClosed\", \"type\": \"[IsSepClosed k] [Algebra k K] [Algebra.IsSeparable k K] : Function.Surjective (algebraMap k K)\", \"doc\": \"If $ k $ is a separably closed field and $ K $ is a separable algebra over $ k $, then the canonical algebra homomorphism from $ k $ to $ K $ is surjective.\"}\n  {\"name\": \"AlgHom.fieldRange_eq_top\", \"module\": \"Mathlib.FieldTheory.IntermediateField.Adjoin.Defs\", \"type\": \"{f : E →ₐ[F] K} : f.fieldRange = ⊤ ↔ Function.Surjective f\", \"doc\": \"For a $K$-algebra homomorphism $f : E → K$ between fields, the image of $f$ coincides with the entire field $K$ (denoted $\\\\top$) if and only if $f$ is a surjective function. This equivalence establish\"}\n  {\"name\": \"AlgebraicClosure.isAlgClosed\", \"module\": \"Mathlib.FieldTheory.IsAlgClosed.AlgebraicClosure\", \"type\": \": IsAlgClosed (AlgebraicClosure k)\", \"doc\": \"The algebraic closure of any field is a field.\"}\n  {\"name\": \"AlgHom.Finite.of_surjective\", \"module\": \"Mathlib.RingTheory.Finiteness.Basic\", \"type\": \"(f : A →ₐ[R] B) (hf : Surjective f) : f.Finite\", \"doc\": \"If $ f : A \\\\to_\\\\mathcal{A}[R] B $ is a surjective algebra homomorphism between $ R $-algebras, then $ f $ is a finite algebra homomorphism, meaning $ B $ is a finitely generated $ A $-module under the\"}\n  {\"name\": \"IsAlgClosed.instIsAlgClosure\", \"module\": \"Mathlib.FieldTheory.IsAlgClosed.Basic\", \"type\": \"(F : Type*) [Field F] [IsAlgClosed F] : IsAlgClosure F F\", \"doc\": \"For any algebraically closed field $ F $, $ F $ is its own algebraic closure. This means that $ F $ satisfies the universal property of algebraic closures: every non-constant polynomial with coefficie\"}\n  {\"name\": \"algebraicClosure.isAlgebraic\", \"module\": \"Mathlib.FieldTheory.AlgebraicClosure\", \"type\": \": Algebra.IsAlgebraic F (algebraicClosure F E)\", \"doc\": \"The algebraic closure of a field $ F $ in an extension field $ E $ is algebraic over $ F $. This means every element of the algebraic closure satisfies a monic polynomial equation with coefficients in\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the displayed declarations concern scalar adic completion, ordinary sheaf constructions, finite-field algebra or generic exactness, and do not state this pro-etale coefficient comparison or estimate"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Condensed\", \"cohomology\"",
+   "results": "[loogle] OK 0 hit(s)",
+   "date": "2026-10-24",
+   "verdict": "no match: the displayed declarations concern scalar adic completion, ordinary sheaf constructions, finite-field algebra or generic exactness, and do not state this pro-etale coefficient comparison or estimate"
+  },
+  {
+   "tool": "grep",
+   "query": "(algebraicClosure|AlgebraicClosure|Qbar|Qℓ).*(cohomolog|[Ii]mage)|cohomolog.*(algebraicClosure|Qbar)",
+   "results": "[grep] OK 0 hit(s)",
+   "date": "2026-10-24",
+   "verdict": "no match: the displayed declarations concern scalar adic completion, ordinary sheaf constructions, finite-field algebra or generic exactness, and do not state this pro-etale coefficient comparison or estimate"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A uniform supported image cohomology bound for all finite ell adic coefficient fields transfers to the all continuous norm topological algebraic closure coefficient ring",
+   "results": "{\"t\": \"2026-10-23T21:31:10Z\", \"tool\": \"leanfinder\", \"query\": \"A uniform supported image cohomology bound for all finite ell adic coefficient fields transfers to the all continuous norm topological algebraic closure coefficient ring\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"BDeRhamPlus\", \"BDeRham\", \"spectralNorm.uniformSpace\", \"spectralNorm.nontriviallyNormedField\", \"spectralNorm.normedField\", \"spectralNorm.normedSpace\", \"spectralNorm.completeSpace\", \"NumberField.Embeddings.finite_of_norm_le\"], \"digest\": \"b20be726a8260523\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the actual returned names and types concern period rings, spectral norm structures and scalar norm inequalities; they do not state the image coefficient comparison"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Uniform cohomological upper bound comparison from every finite extension of Q ell to the full norm continuous Q ell bar coefficient sheaf for arbitrary image modules",
+   "results": "{\"t\": \"2026-10-23T21:31:10Z\", \"tool\": \"leansearch\", \"query\": \"Uniform cohomological upper bound comparison from every finite extension of Q ell to the full norm continuous Q ell bar coefficient sheaf for arbitrary image modules\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"NumberField.Embeddings.coeff_bdd_of_norm_le\", \"ZLattice.exists_forall_abs_repr_le_norm\", \"ModularGroup.exists_bound_of_subgroup_invariant\", \"Module.Basis.exists_opNorm_le\", \"CondensedMod.LocallyConstant.instFullModuleCatSheafCompHausCoherentTopologyConstantSheaf\", \"Module.Basis.opNNNorm_le\", \"ZLattice.normBound\", \"UniformSpace.Completion.instModule\"], \"digest\": \"4e26e2fdc88efb0a\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the actual returned names and types concern period rings, spectral norm structures and scalar norm inequalities; they do not state the image coefficient comparison"
+  },
+  {
+   "tool": "grep",
+   "query": "qlbar|PadicAlgCl.*[Cc]ohom|[Cc]ohom.*PadicAlgCl",
+   "results": "[grep] OK 0 hit(s)",
+   "date": "2026-10-24",
+   "verdict": "no match: no qlbar or PadicAlgCl/cohomology declaration found."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Higher sheaf cohomology of an image of a morphism of lisse modules over a filtered union of finite coefficient fields vanishes above a uniform bound",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"CategoryTheory.Sheaf.H\", \"module\": \"Mathlib.CategoryTheory.Sites.SheafCohomology.Basic\", \"type\": \"(n : ℕ) : Type w'\", \"doc\": \"For a sheaf $ F $ on a site with Grothendieck topology $ J $, the $ n $-th sheaf cohomology group is defined as the Ext group $ \\\\mathrm{Ext}^n $ between the constant sheaf associated to the integers $\"}\n  {\"name\": \"CategoryTheory.Sheaf.hasFilteredColimitsOfSize\", \"module\": \"Mathlib.CategoryTheory.Abelian.GrothendieckAxioms.Sheaf\", \"type\": \"[HasSheafify J A] [HasFilteredColimitsOfSize.{v₂, u₂} A] : HasFilteredColimitsOfSize.{v₂, u₂} (Sheaf J A)\", \"doc\": \"Given a category $\\\\mathcal{C}$ equipped with a Grothendieck topology $J$ and a category $\\\\mathcal{A}$ that has filtered colimits of size $(v₂, u₂)$ and a sheafification functor, the category of sheave\"}\n  {\"name\": \"SheafOfModules.isSheaf\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} C] {J : CategoryTheory.GrothendieckTopology C}\\n  {R : CategoryTheory.Sheaf J RingCat} (self : SheafOfModules R), CategoryTheory.Presheaf.IsSheaf J self.val.presheaf\", \"doc\": \"Given a category $\\\\mathcal{C}$ with a Grothendieck topology $J$ and a sheaf $R$ of rings on $\\\\mathcal{C}$, the underlying presheaf of any sheaf of modules over $R$ satisfies the sheaf condition with r\"}\n  {\"name\": \"SheafOfModules.Finite.hasFiniteLimits\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.Limits\", \"type\": \": HasFiniteLimits (SheafOfModules.{v} R)\", \"doc\": \"For any category $\\\\mathcal{C}$ with a Grothendieck topology $J$ and a sheaf $R$ of rings on $\\\\mathcal{C}$, the category of sheaves of modules over $R$ has all finite limits. This includes the existenc\"}\n  {\"name\": \"CategoryTheory.Sheaf.ab5ofSize\", \"module\": \"Mathlib.CategoryTheory.Abelian.GrothendieckAxioms.Sheaf\", \"type\": \"[HasFiniteLimits A] [HasSheafify J A] [HasFilteredColimitsOfSize.{v₂, u₂} A] [AB5OfSize.{v₂, u₂} A] :\\n  AB5OfSize.{v₂, u₂} (Sheaf J A)\", \"doc\": \"Given a category $\\\\mathcal{A}$ with finite limits, a sheafification functor, filtered colimits of size $(v₂, u₂)$, and satisfying the AB5 axiom, the category of sheaves on a site $(\\\\mathcal{C}, J)$ wi\"}\n  {\"name\": \"SheafOfModules.instHasColimitsOfSizeOfPresheafOfModulesValRingCat\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.Colimits\", \"type\": \"[HasColimitsOfSize.{w', w} (PresheafOfModules.{v} R.val)] : HasColimitsOfSize.{w', w} (SheafOfModules.{v} R)\", \"doc\": \"If the category of presheaves of modules over a presheaf of rings has colimits of a given size, then the category of sheaves of modules over the corresponding sheaf of rings also has colimits of that \"}\n  {\"name\": \"SheafOfModules.hasLimit\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.Limits\", \"type\": \": HasLimit F\", \"doc\": \"For any category $\\\\mathcal{C}$ with a Grothendieck topology $J$ and a sheaf $R$ of rings on $\\\\mathcal{C}$, the category of sheaves of modules over $R$ has all limits. This means that for any diagram (\"}\n  {\"name\": \"SheafOfModules.instHasColimitsOfShapeOfPresheafOfModulesValRingCat\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.Colimits\", \"type\": \"[HasColimitsOfShape K (PresheafOfModules.{v} R.val)] : HasColimitsOfShape K (SheafOfModules.{v} R)\", \"doc\": \"If the category of presheaves of modules over a presheaf of rings $ R $ admits colimits of shape $ K $, then the category of sheaves of modules over the corresponding sheaf of rings $ R $ also admits \"}",
+   "date": "2026-10-24",
+   "verdict": "no match: sheaf colimit and AB5 instances do not establish this coefficient descent/upper bound."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Sheaf\", \"cohomology\"",
+   "results": "[loogle] OK 7 hit(s)\n  {\"name\": \"CategoryTheory.Sheaf.cohomologyPresheaf\", \"module\": \"Mathlib.CategoryTheory.Sites.SheafCohomology.Basic\", \"type\": \" {C : Type u} [CategoryTheory.Category.{v, u} C] {J : CategoryTheory.GrothendieckTopology C} [CategoryTheory.HasSheafify J AddCommGrpCat] [CategoryTheory.HasExt (CategoryTheory.Sheaf J AddCommGrpCat)] (F : CategoryTheory.Sheaf J AddCommGrpCat) (n : ℕ) : CategoryTheory.Functor Cᵒᵖ AddCommGrpCat\", \"doc\": \"Given an abelian sheaf `F`, this is the presheaf which sends `U`\\nto the `n`th Ext-group from the free abelian sheaf generated by the\\npresheaf of sets `yoneda.obj U` to `F`.\"}\n  {\"name\": \"CategoryTheory.Sheaf.cohomologyFunctor\", \"module\": \"Mathlib.CategoryTheory.Sites.SheafCohomology.Basic\", \"type\": \" {C : Type u} [CategoryTheory.Category.{v, u} C] (J : CategoryTheory.GrothendieckTopology C) [CategoryTheory.HasSheafify J AddCommGrpCat] [CategoryTheory.HasExt (CategoryTheory.Sheaf J AddCommGrpCat)] (n : ℕ) : CategoryTheory.Functor (CategoryTheory.Sheaf J AddCommGrpCat) AddCommGrpCat\", \"doc\": \"**Alias** of `CategoryTheory.Sheaf.functorH`.\\n\\n---\\n\\n`H` as a functor.\"}\n  {\"name\": \"CategoryTheory.Sheaf.cohomologyPresheafFunctor\", \"module\": \"Mathlib.CategoryTheory.Sites.SheafCohomology.Basic\", \"type\": \" {C : Type u} [CategoryTheory.Category.{v, u} C] (J : CategoryTheory.GrothendieckTopology C) [CategoryTheory.HasSheafify J AddCommGrpCat] [CategoryTheory.HasExt (CategoryTheory.Sheaf J AddCommGrpCat)] (n : ℕ) : CategoryTheory.Functor (CategoryTheory.Sheaf J AddCommGrpCat) (CategoryTheory.Functor Cᵒᵖ\", \"doc\": \"The bifunctor which sends an abelian sheaf `F` and an object `U` to the\\n`n`th Ext-group from the free abelian sheaf generated by the\\npresheaf of sets `yoneda.obj U` to `F`.\"}\n  {\"name\": \"CategoryTheory.PresheafOfGroups.OneCohomologyRelation\", \"module\": \"Mathlib.CategoryTheory.Sites.NonabelianCohomology.H1\", \"type\": \" {C : Type u} [CategoryTheory.Category.{v, u} C] {G : CategoryTheory.Functor Cᵒᵖ GrpCat} {I : Type w'} {U : I → C} (γ₁ γ₂ : CategoryTheory.PresheafOfGroups.OneCochain G U) (α : CategoryTheory.PresheafOfGroups.ZeroCochain G U) : Prop\", \"doc\": \"The assertion that two cochains in `OneCochain G U` are cohomologous via\\nan explicit zero-cochain.\"}\n  {\"name\": \"CategoryTheory.PresheafOfGroups.OneCohomologyRelation.refl\", \"module\": \"Mathlib.CategoryTheory.Sites.NonabelianCohomology.H1\", \"type\": \" {C : Type u} [CategoryTheory.Category.{v, u} C] {G : CategoryTheory.Functor Cᵒᵖ GrpCat} {I : Type w'} {U : I → C} (γ : CategoryTheory.PresheafOfGroups.OneCochain G U) : CategoryTheory.PresheafOfGroups.OneCohomologyRelation γ γ 1\", \"doc\": \"\"}\n  {\"name\": \"CategoryTheory.PresheafOfGroups.OneCohomologyRelation.symm\", \"module\": \"Mathlib.CategoryTheory.Sites.NonabelianCohomology.H1\", \"type\": \" {C : Type u} [CategoryTheory.Category.{v, u} C] {G : CategoryTheory.Functor Cᵒᵖ GrpCat} {I : Type w'} {U : I → C} {γ₁ γ₂ : CategoryTheory.PresheafOfGroups.OneCochain G U} {α : CategoryTheory.PresheafOfGroups.ZeroCochain G U} (h : CategoryTheory.PresheafOfGroups.OneCohomologyRelation γ₁ γ₂ α) : Cate\", \"doc\": \"\"}\n  {\"name\": \"CategoryTheory.PresheafOfGroups.OneCohomologyRelation.trans\", \"module\": \"Mathlib.CategoryTheory.Sites.NonabelianCohomology.H1\", \"type\": \" {C : Type u} [CategoryTheory.Category.{v, u} C] {G : CategoryTheory.Functor Cᵒᵖ GrpCat} {I : Type w'} {U : I → C} {γ₁ γ₂ γ₃ : CategoryTheory.PresheafOfGroups.OneCochain G U} {α β : CategoryTheory.PresheafOfGroups.ZeroCochain G U} (h₁₂ : CategoryTheory.PresheafOfGroups.OneCohomologyRelation γ₁ γ₂ α)\", \"doc\": \"\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: generic sheaf cohomology definitions and nonabelian cochains do not give this comparison."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A uniform upper cohomology bound for images of maps of lisse pro etale modules over finite ell adic fields passes to the filtered colimit coefficient ring",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"BDeRham\", \"module\": \"Mathlib/RingTheory/Perfectoid/BDeRham\", \"type\": \"(R : Type u) →\\n  [inst : CommRing R] →\\n    (p : ℕ) → [Fact (Nat.Prime p)] → [Fact ¬IsUnit ↑p] → [IsAdicComplete (Ideal.span {↑p}) R] → Type u\", \"doc\": \"The ring $\\\\mathbb{B}_{\\\\mathrm{dR}}^+$ is constructed as the localization of the adic completion of the kernel of the Fontaine theta homomorphism $\\\\Theta: \\\\mathbb{W}(R^\\\\flat) \\\\to R$ (which inverts the \"}\n  {\"name\": \"BDeRhamPlus\", \"module\": \"Mathlib/RingTheory/Perfectoid/BDeRham\", \"type\": \"(R : Type u) →\\n  [inst : CommRing R] →\\n    (p : ℕ) → [Fact (Nat.Prime p)] → [Fact ¬IsUnit ↑p] → [IsAdicComplete (Ideal.span {↑p}) R] → Type u\", \"doc\": \"The adic completion of the kernel of the Fontaine theta homomorphism (which inverts the prime $ p $) in the localization of Witt vectors away from $ p $.\"}\n  {\"name\": \"localCohomology.ofDiagram\", \"module\": \"Mathlib/Algebra/Homology/LocalCohomology\", \"type\": \"{R : Type (max u v)} →\\n  [inst : CommRing R] →\\n    {D : Type v} →\\n      [inst_1 : CategoryTheory.SmallCategory D] →\\n        CategoryTheory.Functor D (Ideal R) → ℕ → CategoryTheory.Functor (ModuleCat R) (ModuleCat R)\", \"doc\": \"Given a commutative ring $ R $, a small category $ \\\\mathcal{D} $, and a functor $ I : \\\\mathcal{D} \\\\to \\\\text{Ideal}(R) $, this constructs an $ R $-linear endofunctor on the category of $ R $-modules by\"}\n  {\"name\": \"localCohomology.hasColimitDiagram\", \"module\": \"Mathlib/Algebra/Homology/LocalCohomology\", \"type\": \"∀ {R : Type (max u v)} [inst : CommRing R] {D : Type v} [inst_1 : CategoryTheory.SmallCategory D]\\n  (I : CategoryTheory.Functor D (Ideal R)) (i : ℕ), CategoryTheory.Limits.HasColimit (localCohomology.diagram I i)\", \"doc\": \"For a commutative ring $ R $, a small category $ \\\\mathcal{D} $, and a functor $ I : \\\\mathcal{D} \\\\to \\\\text{Ideal}(R) $, the diagram constructed via the $ i $-th extension functor $ \\\\text{Ext}^i_R $ app\"}\n  {\"name\": \"localCohomology.diagram\", \"module\": \"Mathlib/Algebra/Homology/LocalCohomology\", \"type\": \"{R : Type u} →\\n  [inst : CommRing R] →\\n    {D : Type v} →\\n      [inst_1 : CategoryTheory.SmallCategory D] →\\n        CategoryTheory.Functor D (Ideal R) →\\n          ℕ → CategoryTheory.Functor Dᵒᵖ (CategoryTheory.Functor (ModuleCat R) (ModuleCat R))\", \"doc\": \"For a commutative ring $ R $, a small category $ \\\\mathcal{D} $, and a functor $ I : \\\\mathcal{D} \\\\to \\\\text{Ideal}(R) $, this constructs a functor from $ \\\\mathcal{D}^{\\\\text{op}} $ to the category of $ R\"}\n  {\"name\": \"AdicCompletion.exists_smodEq_pow_smul_top_and_smodEq_pow_add_one_smul_top\", \"module\": \"Mathlib/RingTheory/AdicCompletion/Functoriality\", \"type\": \"∀ {R : Type u_1} [inst : CommRing R] {I : Ideal R} {M : Type u_2} [inst_1 : AddCommGroup M] [inst_2 : Module R M]\\n  {N : Type u_3} [inst_3 : AddCommGroup N] [inst_4 : Module R N] {f : M →ₗ[R] N},\\n  Function.Surjective ⇑((I • ⊤).mkQ ∘ₗ f) →\\n    ∀ {x : M} {y : N} {n : ℕ},\\n      f x ≡ y [SMOD I ^ n • ⊤\", \"doc\": \"Given a surjective linear map $ f : M \\\\to N $ composed with the quotient map to $ N/(I^n \\\\cdot N) $, for any $ x \\\\in M $, $ y \\\\in N $, and natural number $ n $, if $ f(x) \\\\equiv y \\\\mod I^n \\\\cdot N $, \"}\n  {\"name\": \"AdicCompletion.exists_smodEq_pow_smul_top_and_mkQ_eq\", \"module\": \"Mathlib/RingTheory/AdicCompletion/Functoriality\", \"type\": \"∀ {R : Type u_1} [inst : CommRing R] {I : Ideal R} {M : Type u_2} [inst_1 : AddCommGroup M] [inst_2 : Module R M]\\n  {N : Type u_3} [inst_3 : AddCommGroup N] [inst_4 : Module R N] {f : M →ₗ[R] N},\\n  Function.Surjective ⇑((I • ⊤).mkQ ∘ₗ f) →\\n    ∀ {x : M} {n : ℕ} {y : N ⧸ I ^ n • ⊤} {y' : N ⧸ I ^ (n +\", \"doc\": \"Given a surjective composition of the canonical quotient map $ N \\\\to N/(I^n \\\\bullet \\\\top) $ with an $ R $-linear map $ f: M \\\\to N $, for any $ x \\\\in M $, $ n \\\\in \\\\mathbb{N} $, and compatible elements \"}\n  {\"name\": \"localCohomology\", \"module\": \"Mathlib/Algebra/Homology/LocalCohomology\", \"type\": \"{R : Type u} → [inst : CommRing R] → Ideal R → ℕ → CategoryTheory.Functor (ModuleCat R) (ModuleCat R)\", \"doc\": \"Given a commutative ring $ R $ and an ideal $ J $, the $ i $-th local cohomology functor with respect to $ J $ is constructed as the colimit of a diagram formed by the descending chain of powers $ J^n\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: BDeRham and ordinary local cohomology do not state coefficient-image transfer on a pro-etale site."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Filtered colimit of finite coefficient fields and flat scalar extension preserve images of sheaf module homomorphisms and uniform pro etale cohomology vanishing",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.exists_appTop_map_eq_zero_of_isLimit\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"∀ {I : Type u} [inst : CategoryTheory.Category.{u, u} I] (D : CategoryTheory.Functor I AlgebraicGeometry.Scheme)\\n  (c : CategoryTheory.Limits.Cone D) (hc : CategoryTheory.Limits.IsLimit c) [CategoryTheory.IsCofiltered I]\\n  [∀ {i j : I} (f : i ⟶ j), AlgebraicGeometry.IsAffineHom (D.map f)] {i : I} [C\", \"doc\": \"Given a cofiltered diagram of schemes with affine transition morphisms and compact topological spaces, if a global section becomes zero under the limit cone's projection map, then there exists a morph\"}\n  {\"name\": \"AlgebraicGeometry.exists_app_map_eq_zero_of_isLimit\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"∀ {I : Type u} [inst : CategoryTheory.Category.{u, u} I] (D : CategoryTheory.Functor I AlgebraicGeometry.Scheme)\\n  (c : CategoryTheory.Limits.Cone D) (hc : CategoryTheory.Limits.IsLimit c) [CategoryTheory.IsCofiltered I]\\n  [∀ {i j : I} (f : i ⟶ j), AlgebraicGeometry.IsAffineHom (D.map f)] {i : I} {U\", \"doc\": \"Given a cofiltered diagram of schemes where all transition morphisms are affine, for any compact open subset $ U $ of a scheme in the diagram and a section $ s $ of the structure sheaf over $ U $ that\"}\n  {\"name\": \"AlgebraicGeometry.exists_appTop_map_eq_zero_of_isAffine_of_isLimit\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"∀ {I : Type u} [inst : CategoryTheory.Category.{u, u} I] (D : CategoryTheory.Functor I AlgebraicGeometry.Scheme)\\n  (c : CategoryTheory.Limits.Cone D) (hc : CategoryTheory.Limits.IsLimit c) [CategoryTheory.IsCofiltered I]\\n  [∀ (i : I), AlgebraicGeometry.IsAffine (D.obj i)] (i : I) (s : ↑((D.obj i).pr\", \"doc\": \"Given a cofiltered diagram of affine schemes with a limit cone, if a global section of the structure sheaf of some object in the diagram maps to zero under the projection to the limit, then there exis\"}\n  {\"name\": \"Algebra.FormallyUnramified.flat_of_restrictScalars\", \"module\": \"Mathlib/RingTheory/Unramified/Finite\", \"type\": \"∀ (R : Type u_1) (S : Type u_2) [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S] (M : Type u_3)\\n  [inst_3 : AddCommGroup M] [inst_4 : Module R M] [inst_5 : Module S M] [IsScalarTower R S M]\\n  [Algebra.FormallyUnramified R S] [Algebra.EssFiniteType R S] [Module.Flat R M], Module.Flat \", \"doc\": \"If $ M $ is a flat $ R $-module, then $ M $ remains flat as an $ S $-module when viewed through the scalar restriction induced by an $ S $-algebra structure on $ R $. This holds for any commutative ri\"}\n  {\"name\": \"Algebra.FormallyEtale.comp\", \"module\": \"Mathlib/RingTheory/Etale/Basic\", \"type\": \"∀ (R : Type u) (A : Type v) (B : Type u_1) [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A]\\n  [inst_3 : CommRing B] [inst_4 : Algebra R B] [inst_5 : Algebra A B] [IsScalarTower R A B] [Algebra.FormallyEtale R A]\\n  [Algebra.FormallyEtale A B], Algebra.FormallyEtale R B\", \"doc\": \"If $ A $ is a formally étale algebra over a commutative ring $ R $, and $ B $ is a formally étale algebra over $ A $, then $ B $ is a formally étale algebra over $ R $.\"}\n  {\"name\": \"AlgebraicGeometry.IsEtale.of_comp\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) {Z : AlgebraicGeometry.Scheme} (g : Y ⟶ Z)\\n  [AlgebraicGeometry.IsEtale (CategoryTheory.CategoryStruct.comp f g)] [AlgebraicGeometry.LocallyOfFiniteType g]\\n  [AlgebraicGeometry.FormallyUnramified g], AlgebraicGeometry.IsEtale f\", \"doc\": \"If the composition of a morphism $ f: X \\to Y $ with a morphism $ g: Y \\to Z $ is étale, and $ g $ is locally of finite type and formally unramified, then $ f $ is an étale morphism.\"}\n  {\"name\": \"Algebra.FormallyEtale.of_restrictScalars\", \"module\": \"Mathlib/RingTheory/Etale/Basic\", \"type\": \"∀ {R : Type u} {A : Type v} {B : Type u_1} [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A]\\n  [inst_3 : CommRing B] [inst_4 : Algebra R B] [inst_5 : Algebra A B] [IsScalarTower R A B]\\n  [Algebra.FormallyUnramified R A] [Algebra.FormallyEtale R B], Algebra.FormallyEtale A B\", \"doc\": \"If $ A $ is a formally unramified $ R $-algebra and $ B $ is a formally étale $ R $-algebra, then $ B $ is a formally étale $ A $-algebra.\"}\n  {\"name\": \"Algebra.FormallyEtale.Algebra.FormallyEtale.of_restrictScalars\", \"module\": \"Mathlib/RingTheory/Etale/Basic\", \"type\": \"∀ {R : Type u} {A : Type v} {B : Type u_1} [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A]\\n  [inst_3 : CommRing B] [inst_4 : Algebra R B] [inst_5 : Algebra A B] [IsScalarTower R A B]\\n  [Algebra.FormallyUnramified R A] [Algebra.FormallyEtale R B], Algebra.FormallyEtale A B\", \"doc\": \"Let $ R $, $ A $, and $ B $ be commutative rings with $ A $ and $ B $ as $ R $-algebras, and $ B $ as an $ A $-algebra satisfying the scalar tower condition $ R \\to A \\to B $. If $ A $ is formally unram\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: affine scheme limit and formally etale scalar restriction results are not the required sheaf coefficient theorem."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-supported-three-term-scalar-cd",
+  "date": "2026-10-24",
+  "group": "ND"
+ },
+ "blueprint": {
+  "from": {
+   "node": "det-sf-comp-coherence-cocycle",
+   "place": "Refinement proof (2), first paragraph: direct-sum preservation; the descendant affine heart-bound obligation. Repair of the scalar coefficient subargument: All-continuous Omega comparison for uniform supported-image upper bounds. This estimate is not stated in the blueprint paragraph.",
+   "via": [
+    "lem-sfb-supported-three-term-scalar-cd",
+    "lem-sfb-finite-constructible-complex-heart-cd",
+    "lem-sfb-torsion-cd-topological-serre-transfer",
+    "lem-sfb-affine-profinite-family-serre-cd",
+    "lem-sfb-profinite-geometric-family-heart-cd",
+    "lem-sfb-qcqs-proper-serre-heart-bound",
+    "lem-sfb-qcqs-proper-hull-tail-bound",
+    "lem-sfb-qcqs-proper-localizing-coproducts",
+    "lem-sfb-qcqs-proper-open-boundary-vanishing"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-supported-continuous-omega-image-comparison",
+  "worker": "stage1",
+  "summary": "STATEMENT-DISPUTED: the all-continuous norm-topological implication fails on an algebraically closed point with h=0, by the existing noncomplete profinite Cech obstruction. Corrected explicitly to the finite-subextension-valued coefficient ring used by HRS 7.9. Reused existing lisse finite descent, flatness, tail coefficient-colimit, support-continuity and module/abelian cohomology nodes; no new nodes. The parent all-continuous use must be reopened.",
+  "blueprint": "Ancestor det-sf-comp-coherence-cocycle, via refinement (2), first paragraph: direct-sum preservation. This descendant affine-heart estimate is not asserted in that paragraph. Steps 1–5 prove the HRS finite-subextension transfer that can legitimately support the source route; the false all-continuous strengthening does not follow and is explicitly disputed.",
+  "tool_uses": [
+   {
+    "node": "pqf-lem-qs-intersection-qc",
+    "why": "Generic Intersections of quasi-compact opens used exactly as stated in the cited proof step; this compactification unit has no coefficient-descent or module/site infrastructure substitute."
+   },
+   {
+    "node": "det-lem-coefficient-finite-descent-lisse",
+    "why": "Generic Descent of lisse $\\overline{\\mathbf Q}_\\ell$-sheaves and their morphisms used exactly as stated in the cited proof step; this compactification unit has no coefficient-descent or module/site infrastructure substitute."
+   },
+   {
+    "node": "lem-sfb-subfield-flat",
+    "why": "Generic $F_X$ is flat over $E_X$ used exactly as stated in the cited proof step; this compactification unit has no coefficient-descent or module/site infrastructure substitute."
+   },
+   {
+    "node": "lem-sfb-qlbar-flat",
+    "why": "Generic $\\overline{\\mathbf Q}_{\\ell,X}$ is flat over $E_X$ used exactly as stated in the cited proof step; this compactification unit has no coefficient-descent or module/site infrastructure substitute."
+   },
+   {
+    "node": "lem-sfb-qlbar-tail-module-colimit",
+    "why": "Generic The coefficient colimit above a fixed finite subextension in module sheaves used exactly as stated in the cited proof step; this compactification unit has no coefficient-descent or module/site infrastructure substitute."
+   },
+   {
+    "node": "sk-def-sfb-change-of-scalars",
+    "why": "Generic Restriction, extension and coextension of scalars used exactly as stated in the cited proof step; this compactification unit has no coefficient-descent or module/site infrastructure substitute."
+   },
+   {
+    "node": "def-weil-pbc-internal-abelian-sheaf-module-equivalence",
+    "why": "Generic Internal abelian module sheaves as sectionwise module sheaves used exactly as stated in the cited proof step; this compactification unit has no coefficient-descent or module/site infrastructure substitute."
+   },
+   {
+    "node": "lem-weil-pbc-module-sheaves-colimits-forgetful",
+    "why": "Generic Colimits of sheaves of modules and the forgetful functor to abelian sheaves used exactly as stated in the cited proof step; this compactification unit has no coefficient-descent or module/site infrastructure substitute."
+   },
+   {
+    "node": "def-sfb-module-open-lower-shriek",
+    "why": "Generic Extension by zero of module objects used exactly as stated in the cited proof step; this compactification unit has no coefficient-descent or module/site infrastructure substitute."
+   },
+   {
+    "node": "def-sfb-module-lower-star",
+    "why": "Generic Pushforward of module objects used exactly as stated in the cited proof step; this compactification unit has no coefficient-descent or module/site infrastructure substitute."
+   },
+   {
+    "node": "lem-weil-pbc-proetale-ringed-open-closed",
+    "why": "Generic Ringed pro-etale open-closed localization used exactly as stated in the cited proof step; this compactification unit has no coefficient-descent or module/site infrastructure substitute."
+   },
+   {
+    "node": "sk-prop-sfb-cartesian-coefficients",
+    "why": "Generic Inverse image of the coefficient sheaves used exactly as stated in the cited proof step; this compactification unit has no coefficient-descent or module/site infrastructure substitute."
+   },
+   {
+    "node": "def-sfb-module-upper-lower-adjunction",
+    "why": "Generic The adjunction $f^*\\dashv f_*$ on module objects used exactly as stated in the cited proof step; this compactification unit has no coefficient-descent or module/site infrastructure substitute."
+   },
+   {
+    "node": "det-pe-bounded-continuity-sections",
+    "why": "Generic Cohomology on a qcqs object commutes with bounded-below filtered colimits used exactly as stated in the cited proof step; this compactification unit has no coefficient-descent or module/site infrastructure substitute."
+   },
+   {
+    "node": "prop-pur-kinjective-resolutions-exist",
+    "why": "Generic Existence of K-injective resolutions of sheaves of modules used exactly as stated in the cited proof step; this compactification unit has no coefficient-descent or module/site infrastructure substitute."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-site-module-abelian-evaluation-comparison",
+    "why": "Generic Module and abelian cohomology over an object of a ringed site agree used exactly as stated in the cited proof step; this compactification unit has no coefficient-descent or module/site infrastructure substitute."
+   }
+  ]
+ },
+ "tool_uses": [
+  "pqf-lem-qs-intersection-qc",
+  "det-lem-coefficient-finite-descent-lisse",
+  "lem-sfb-subfield-flat",
+  "lem-sfb-qlbar-flat",
+  "lem-sfb-qlbar-tail-module-colimit",
+  "sk-def-sfb-change-of-scalars",
+  "def-weil-pbc-internal-abelian-sheaf-module-equivalence",
+  "lem-weil-pbc-module-sheaves-colimits-forgetful",
+  "def-sfb-module-open-lower-shriek",
+  "def-sfb-module-lower-star",
+  "lem-weil-pbc-proetale-ringed-open-closed",
+  "sk-prop-sfb-cartesian-coefficients",
+  "def-sfb-module-upper-lower-adjunction",
+  "det-pe-bounded-continuity-sections",
+  "prop-pur-kinjective-resolutions-exist",
+  "lem-weil-pbc-ringed-site-module-abelian-evaluation-comparison"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q24-f375c2016",
+  "group": "Q24",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q24-f375c2016 (reviewer sub-agent of L); spot-checked: Read the item, its live/side-live base statement, every cited node statement, HRS arXiv 2305.18131 at Lemma 7.9 (txt l.1581: Q̄ℓ = colim E with the colimit topology) and the use of 7.9 in Lemma 8.6. Statement-dispute (E7): the base all-continuous form R_Ω=C(P,Ω) is false. Counterexample: X=Spec k with k algebraically closed, h=0. Affine pro-étale tests are Spec LC(P,k), images of finite-E local-model maps are C(−,E)^m, and these are acyclic by finite-normed-scalar-section-acyclicity, so the antecedent holds. The cover from countable-split-profinite-cover, closed F_j exhausting Ω, and a_k∉F_k with a_k→0 give a Čech 1-cocycle with no continuous primitive (double-fibre obstruction, Baire re-checked). Čech H¹ injects into H¹ (Stacks 0A6G), so the conclusion fails for id and the empty chain. The correction to sk-def-sfb-qlbar-condensed is exactly HRS's colimit-topology Q̄ℓ. It is named under 'Source error' in the report. Every other part of the statement is verbatim against base, and the item is not a target. Proof: steps 1-5 are correct. Step 1: qcqs along the chain, and models are R^n because R_Ω(*)=Ω is a field. Step 2: det-lem lisse descent clauses 1-2 give E and g. Step 3: flatness plus right exactness gives image compatibility, and the tail colimit node gives I_f=colim I_F. Step 4: forget, j_!, v^* as left adjoints, and i_* filtered colimits with a qcqs target and qc complement. Step 5: bounded continuity on qcqs U, Grothendieck → enough injectives, and the module/abelian comparison. h is unchanged. No new nodes. Off-unit tool uses are generic and used as stated. Batch-5: the flagged lem-sfb-norm-algcl-profinite-cech-exact reaches lem-trf-spectral-norm-algebraic-extension, a generic spectral-norm fact that is not a trace-formula or PD proof step. In any case it was only a stmt_dep for the dispute paragraph. FIX (fixes/dag/nodes/sec-six-functors-basics/<item>.json): removed that theorem stmt_dep, replaced the STATEMENT-DISPUTED paragraph with one plain unbracketed sentence saying the all-continuous version is false and is not given, and renamed the title from 'All-continuous' to 'Finite-subextension'. Proof and proof_deps are unchanged. MAINTAINER: parent lem-sfb-supported-three-term-scalar-cd step 6 needs the all-continuous Ω conclusion, which this item no longer gives; that branch must be reopened.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.Paper.SupportedFiniteSubextensionImageComparison",
+  "declaration": "AlgebraicGeometry.ProEtale.supported_finite_subextension_image_cohomology_vanishes",
+  "file": "lean/Sheaf/Paper/SupportedFiniteSubextensionImageComparison.lean",
+  "statement": "theorem supported_finite_subextension_image_cohomology_vanishes (ℓ : ℕ) [Fact ℓ.Prime] (X : Scheme.{u}) [IsAffine X] (h : ℕ) (hfinite : ∀ (E : PadicAlgCl.FiniteIntermediateField ℓ) (S : Scheme.{u}) (tree : QcqsOpenClosedTree X) (p : tree.Path S) (L M : Mod (Sheaf (Scheme.ProEt.topology S) Ab.{u + 1}) (condensedRingObj (Profinite.continuousMapRingObj E) S)) (g : L ⟶ M), HasFiniteConstantLocalModel (Profinite.continuousMapRingObj E) S L → HasFiniteConstantLocalModel (Profinite.continuousMapRingObj E) S M → ∀ (U : X.ProEt) [IsAffine U.left] (q : ℤ), (h : ℤ) < q → IsZero ((DerivedCategory.homologyFunctor Ab.{u + 1} q).obj ((condensedModuleSections (Profinite.continuousMapRingObj E) U.left).rightDerivedFunctor.obj ((DerivedCategory.singleFunctor _ 0).obj ((CondensedRing.upperStar (Profinite.continuousMapRingObj E) U.hom).obj ((p.extension (Profinite.continuousMapRingObj E)).obj (image g))))))) (S : Scheme.{u}) (tree : QcqsOpenClosedTree X) (p : tree.Path S) (L M : Mod (Sheaf (Scheme.ProEt.topology S) Ab.{u + 1}) (condensedRingObj (Profinite.padicAlgClRingObj ℓ) S)) (f : L ⟶ M) (hL : HasFiniteConstantLocalModel (Profinite.padicAlgClRingObj ℓ) S L) (hM : HasFiniteConstantLocalModel (Profinite.padicAlgClRingObj ℓ) S M) (U : X.ProEt) [IsAffine U.left] (q : ℤ) (hq : (h : ℤ) < q) : IsZero ((DerivedCategory.homologyFunctor Ab.{u + 1} q).obj ((condensedModuleSections (Profinite.padicAlgClRingObj ℓ) U.left).rightDerivedFunctor.obj ((DerivedCategory.singleFunctor _ 0).obj ((CondensedRing.upperStar (Profinite.padicAlgClRingObj ℓ) U.hom).obj ((p.extension (Profinite.padicAlgClRingObj ℓ)).obj (image f))))))",
+  "branch": "sheaf-dag",
+  "by": "NO",
+  "date": "2026-10-23",
+  "existing": false,
+  "note": "States the current reviewed finite-subextension-valued assertion, not the false all-norm-continuous version. Every support chain over affine X is a path in a finite qcqs open-closed tree by adjoining complementary siblings as leaves; root paths encode empty chains. Uses the existing ordinary module-derived section functor. Added the two already-landed definition owners to stmt_deps; no statement or proof change."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-3f05061e0",
+  "group": "NO",
+  "result": "pass",
+  "note": "First stage-2 delivery: one theorem, proof sorry; lean.statement matches the file exactly. Clause by clause: affine X; finite-subextension Ω ring padicAlgClRingObj (not all-continuous); R_E = continuousMapRingObj E over FiniteIntermediateField; chains as QcqsOpenClosedTree paths, equivalent (complementary sibling leaves; root = empty chain); p.extension = composite of openImmersionLowerShriek/lowerStar; separate HasFiniteConstantLocalModel for L and M; abelian image; affine U : X.ProEt with upperStar U.hom; homology of condensedModuleSections.rightDerivedFunctor of single 0; same X and h, q > h. Added stmt_deps are landed def owners; all proof-dep modules imported; docstrings and 5-step plan present. Edge cases covered. Advisory: continuousMapRingObj/FiniteIntermediateField/upperStar owners not in stmt_deps (defs). Maintainer: title still 'All-continuous' (Q24 rename not on side-live); parent three-term-scalar-cd step 6 remains open."
+ }
+}

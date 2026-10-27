@@ -1,0 +1,248 @@
+{
+ "id": "lem-pur-etale-closed-output-bounds",
+ "kind": "statement",
+ "title": "Cohomological and Tor bounds on comparison pullback of etale closed-support values",
+ "statement": "Fix the finite purity datum [def-pur-conventions]: $k=\\overline{\\mathbf F}_q$, a prime $\\ell\\ne\\operatorname{char}k$, a finite extension $E/\\mathbf Q_\\ell$ with valuation ring $\\mathcal O_E$ and uniformizer $\\varpi_E$, and $n\\geq1$; put $A=\\mathcal O_E/\\varpi_E^n$. Use ordinary constant-$A$ module derived categories on the small etale and pro-etale sites [def-sf-categories], the comparison morphisms $\\nu_S:S_{\\mathrm{proet}}\\to S_{\\mathrm{et}}$ [def-weil-pbc-site-comparison-morphism], and intrinsically bounded constructible pro-etale complexes [def-weil-finite-torsion-constructibility].\n\nLet $i:Z\\hookrightarrow T$ be a closed immersion between finite-type $k$-schemes [def-weil-scheme-morphism-properties], with quasi-compact complementary open immersion $j:W\\hookrightarrow T$. Assume the ordinary etale open-complement condition at $A$ with constant $c\\geq0$ [def-exc-open-complement-bound]: $R^qj_*M=0$ for every etale $A$-module sheaf $M$ on $W$ and $q>c$, and $R^qj_*$ preserves constructible sheaves for every $q$. Let $i_e^!$ be the ambient ordinary etale right adjoint to closed direct image [lem-exc-closed-ambient]. For $K_e\\in D^b_c(T_{\\mathrm{et}},A)$ put $C_e=i_e^!K_e$ and $C_p=\\nu_Z^*C_e$. For all integers $r\\leq s$ the following two implications hold independently.\n\n(a) If $K_e$ has cohomology only in $[r,s]$, then $C_e\\in D_c^{[r,s+c+1]}(Z_{\\mathrm{et}},A)$ and $C_p\\in D_c^{[r,s+c+1]}(Z_{\\mathrm{proet}},A)$ [def-weil-constructible-intervals]. No finite-Tor hypothesis is required.\n\n(b) If $K_e$ has etale Tor amplitude in $[r,s]$ [def-kun-tor-amplitude], then $C_e$ is bounded constructible with etale Tor amplitude in $[r,s+c+1]$, and $C_p$ is intrinsically bounded constructible with pro-etale Tor amplitude in $[r,s+c+1]$ [def-weil-finite-tor-amplitude]. In particular, for every degree-zero pro-etale $A$-module sheaf $N$ on $Z$, with no etale-origin restriction,\n$$\\mathcal H^t(C_p\\otimes_A^LN)=0\\quad(t\\notin[r,s+c+1]).$$",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sp-et-proet/thm-pur-general-admissibility.proof.md",
+  "place": "Step 2, closed-support computations; extracted parent Steps 3 and 5. Ordinary etale bounds: main-20261015, sec-six-functors-basics/sk-prop-a1-kummer/lem-exc-closed-amplitude.proof.md and prop-exc-closed-tor.proof.md. Constructible interval pullback: Stacks Tag 09AL, proetale.tex, lemma-compare-constructible-derived. Tor pullback: main-20261015, sec-proetale-coefficients/sk-cor-pe-finite-tor-comparison/lem-sf-comparison-tor-amplitude.proof.md, (i)."
+ },
+ "stmt_deps": [
+  "def-pur-conventions",
+  "def-sf-categories",
+  "def-weil-pbc-site-comparison-morphism",
+  "def-weil-finite-torsion-constructibility",
+  "def-weil-scheme-morphism-properties",
+  "def-exc-open-complement-bound",
+  "lem-exc-closed-ambient",
+  "def-weil-constructible-intervals",
+  "def-kun-tor-amplitude",
+  "def-weil-finite-tor-amplitude"
+ ],
+ "proof": [
+  {
+   "text": "For (a), apply [lem-exc-closed-amplitude] with $(T,Z,i,j,A,a,b,c)=(T,Z,i,j,A,r,s,c)$. Its vanishing hypothesis is exactly the first part of the assumed open-complement condition, and its constructibility hypothesis is exactly the second part. The coefficient ring is finite, $c\\geq0$, $K_e$ is bounded constructible, and its stipulated cohomological interval is $[r,s]$. The constructible clause of that lemma therefore gives $C_e=i_e^!K_e\\in D_c^{[r,s+c+1]}(Z_{\\mathrm{et}},A)$. This application uses no Tor assumption. In Lean, first transport both clauses of the open-complement condition from the bounded-below derived direct image to the unbounded one using Functor.rightDerivedFunctorPlusCompatibility. Package the resulting interval and constructible cohomology as isBoundedConstructible.",
+   "uses": [
+    "lem-exc-closed-amplitude"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-a1-kummer/lem-exc-closed-amplitude.proof.md",
+    "place": "Both paragraphs: ordinary etale amplitude and the additional constructibility clause."
+   }
+  },
+  {
+   "text": "Apply the forward essential-image clause of [lem-weil-pbc-finite-ring-constructible-derived-origin] to the identity witness of the bounded constructible object C_e from Step 1. It supplies intrinsically constructible cohomology and a finite vanishing interval for the specified finiteCoefficientIntrinsicDerivedComparison. The nonzero cohomology support is contained in that finite integer interval, so it is finite. Exactness of the canonical comparison preserves homologyConcentratedIn [r,s+c+1] by the generic exact-functor t-structure lemma. Degreewise vanishing then puts its support in the same inclusive interval. This is [def-weil-constructible-intervals], completing (a).",
+   "uses": [
+    "lem-weil-pbc-finite-ring-constructible-derived-origin",
+    "def-weil-pbc-proetale-modules",
+    "def-weil-constructible-intervals"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 09AL, lemma-compare-constructible-derived; exact inverse image and cohomology compatibility: sites-modules.tex Tag 04JC (lemma-flat-pullback-exact), as stated by lem-sf-comparison-pullback-exact."
+   }
+  },
+  {
+   "text": "For (b), start independently with the Tor hypothesis on the bounded constructible K_e. Reuse the generic closed_support_boundedConstructible_torAmplitude proof of [prop-exc-closed-tor], with the constant residue module of the lifted coefficient ring. To instantiate its residue test [lem-exc-residue-tor-test], let r_0 be the image of the recorded uniformizer in A. The DVR statement [lem-weil-l-adic-extension-integers-dvr] for the data of [def-weil-l-adic-coefficient-extension] makes (r_0) maximal, and r_0^n=0 by the definition of the quotient and n>=1. The ring equivalence A ≃ ULift A maps this principal ideal to (ULift.up r_0), preserving maximality and nilpotence. The generic residue_test proof therefore applies literally to the universe-lifted ring. Its quotient residue module is finite as a quotient of a finite ring. The same open-complement hypotheses transported in Step 1 give bounded constructibility of C_e and Tor amplitude [r,s+c+1]. No cohomological premise of (a) is used.",
+   "uses": [
+    "prop-exc-closed-tor",
+    "lem-exc-residue-tor-test",
+    "def-weil-l-adic-coefficient-extension",
+    "lem-weil-l-adic-extension-integers-dvr"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-a1-kummer/prop-exc-closed-tor.proof.md",
+    "place": "Closed-support Tor bound, applied with input interval [r,s]."
+   }
+  },
+  {
+   "text": "The bounded constructible C_e from Step 3 belongs to D^+. Apply the forward implication of [lem-exc-comparison-tor-interval] with interval [r,s+c+1], which is ordered since c>=0. Its stated comparison is intrinsic realization after the bounded-below fixed-scalar inverse image. Functor.mapDerivedCategoryCompIso and mapDerivedCategoryPlusCompatibility identify this object with the specified unbounded intrinsic comparison of C_e. For each K-flat representative, compose its representing isomorphism with this identification and apply the Tor test. This retains the quantification over every degree-zero pro-etale module sheaf, without an etale-origin restriction, as in [def-weil-proetale-tor-amplitude]. Independently repeat the forward essential-image argument of Step 2 for intrinsic bounded constructibility. This completes (b).",
+   "uses": [
+    "lem-exc-comparison-tor-interval",
+    "lem-weil-pbc-finite-ring-constructible-derived-origin",
+    "def-weil-proetale-tor-amplitude"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-cor-pe-finite-tor-comparison/lem-exc-comparison-tor-interval.proof.md",
+    "place": "Forward implication: bounded flat model pulled back termwise and tensored with an arbitrary pro-etale module sheaf; constructibility is Tag 09AL, proetale.tex, lemma-compare-constructible-derived."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-exc-closed-amplitude",
+  "lem-weil-pbc-finite-ring-constructible-derived-origin",
+  "def-weil-pbc-proetale-modules",
+  "def-weil-constructible-intervals",
+  "prop-exc-closed-tor",
+  "lem-exc-residue-tor-test",
+  "def-weil-l-adic-coefficient-extension",
+  "lem-weil-l-adic-extension-integers-dvr",
+  "lem-exc-comparison-tor-interval",
+  "def-weil-proetale-tor-amplitude"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sp-et-proet/thm-pur-general-admissibility.proof.md",
+  "place": "H4, 2026-10-24: Lean proof following the same closed-support amplitude/residue/comparison route, with the canonical finite-ring intrinsic constructible comparison to avoid converting the continuous-coefficient origin presentation. Reuse the generic proved helpers of prop-exc-closed-tor and lem-exc-residue-tor-test for the coefficient ULift; explicit plus/unbounded and composite-comparison isomorphisms supply the interface glue."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "(closed|Closed).*(torAmplitude|TorAmplitude|constructible|Constructible)|(upperShriek|exceptionalInverseImage)",
+   "results": "Read returned hits: Mathlib/RingTheory/Spectrum/Prime/ConstructibleSet.lean, Mathlib/RingTheory/Spectrum/Prime/ConstructibleSet.lean, Mathlib/Topology/Spectral/ConstructibleTopology.lean, Mathlib/Topology/Spectral/ConstructibleTopology.lean, Mathlib/Topology/Spectral/ConstructibleTopology.lean, Mathlib/Topology/Constructible.lean, Mathlib/Topology/Constructible.lean, Mathlib/Topology/Constructible.lean",
+   "date": "2026-10-22",
+   "verdict": "no match: generic adjunction, topology, ring-etaleness, or cohomology support results do not supply this finite constructible comparison statement"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Etale closed support right adjoint cohomological amplitude and Tor amplitude bounds after proetale inverse image",
+   "results": "Read returned hits: AlgebraicGeometry.Scheme.IdealSheafData.support_comap, RingHom.Etale.propertyIsLocal, Algebra.FormallyEtale.comp, Algebra.IsEtaleAt.comp, Algebra.Etale.finitePresentation, RingHom.Etale, Algebra.FormallyEtale.of_unramified_and_smooth, RingHom.Etale.stableUnderComposition",
+   "date": "2026-10-22",
+   "verdict": "no match: generic adjunction, topology, ring-etaleness, or cohomology support results do not supply this finite constructible comparison statement"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.IsClosedImmersion, DerivedCategory",
+   "results": "No hits.",
+   "date": "2026-10-22",
+   "verdict": "no match: generic adjunction, topology, ring-etaleness, or cohomology support results do not supply this finite constructible comparison statement"
+  },
+  {
+   "tool": "grep",
+   "query": "torAmplitude|TorAmplitude|upperShriek|exceptionalInverseImage",
+   "results": "No hits.",
+   "date": "2026-10-22",
+   "verdict": "no match: generic adjunction, topology, ring-etaleness, or cohomology support results do not supply this finite constructible comparison statement"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Pullback to the proetale site of the etale closed immersion right adjoint preserves constructibility with cohomological and Tor upper bound s plus c plus one",
+   "results": "Read returned hits: AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified, AlgebraicGeometry.Scheme.instHasPullbacksEtale, AlgebraicGeometry.Scheme.etaleTopology, AlgebraicGeometry.IsEtale.of_comp, AlgebraicGeometry.Scheme.smallEtalePretopology, AlgebraicGeometry.Scheme.etalePretopology, AlgebraicGeometry.IsEtale.instHasOfPostcompPropertyScheme, AlgebraicGeometry.Scheme.smallEtaleTopology",
+   "date": "2026-10-22",
+   "verdict": "no match: generic adjunction, topology, ring-etaleness, or cohomology support results do not supply this finite constructible comparison statement"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finite coefficient closed support cohomology vanishes outside a b plus c plus one and comparison inverse image preserves this Tor bound against all sheaves",
+   "results": "Read returned hits: DerivedCategory.to_singleFunctor_obj_eq_zero_of_injective, DerivedCategory.from_singleFunctor_obj_eq_zero_of_projective, CochainComplex.isLE_iff, CochainComplex.cm5b.instIsStrictlyGEI, DerivedCategory.isZero_of_isGE, DerivedCategory.isGE_Q_obj_iff, CochainComplex.isGE_iff, DerivedCategory.isZero_of_isLE",
+   "date": "2026-10-22",
+   "verdict": "no match: generic adjunction, topology, ring-etaleness, or cohomology support results do not supply this finite constructible comparison statement"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Closed immersion exceptional pullback of finite coefficient sheaves has bounded constructible cohomology and bounded Tor amplitude",
+   "results": "Read returned hits: AlgebraicGeometry.IsClosedImmersion.mk, AlgebraicGeometry.IsClosedImmersion.casesOn, AlgebraicGeometry.IsClosedImmersion.recOn, AlgebraicGeometry.IsSeparated.instIsClosedImmersionMapDescScheme, AlgebraicGeometry.IsClosedImmersion.of_isPreimmersion, AlgebraicGeometry.IsClosedImmersion.instIsAffineHom, AlgebraicGeometry.IsClosedImmersion.iff_isFinite_and_mono, AlgebraicGeometry.IsClosedImmersion.instIsPreimmersion",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern scheme closed immersions, general cohomological support, or ring etaleness; none states closed-support constructibility and the specified Tor bound under full-site comparison"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a closed immersion with open complement of cohomological dimension c, exceptional inverse image preserves bounded constructibility and has cohomological and Tor bounds r through s+c+1 after proetale pullback",
+   "results": "Read returned hits: DerivedCategory.isGE_Q_obj_iff, DerivedCategory.instIsGEObjCochainComplexIntQOfIsGE, DerivedCategory.isLE_Q_obj_iff, DerivedCategory.instIsLEObjCochainComplexIntQOfIsLE, DerivedCategory.exists_iso_Q_obj_of_isGE_of_isLE, DerivedCategory.instIsGEObjSingleFunctor, DerivedCategory.left_fac_of_isStrictlyGE, DerivedCategory.exists_iso_Q_obj_of_isGE",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern scheme closed immersions, general cohomological support, or ring etaleness; none states closed-support constructibility and the specified Tor bound under full-site comparison"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Exact comparison inverse image from etale to proetale sheaves preserves cohomology intervals and Tor amplitude for all test module sheaves",
+   "results": "Read returned hits: Algebra.etaleLocus_eq_compl_support, HomotopyCategory.quotient_obj_mem_subcategoryAcyclic_iff_exactAt, Algebra.FormallyEtale.comp, Algebra.FormallyEtale.of_restrictScalars, KaehlerDifferential.tensorKaehlerEquivOfFormallyEtale, DerivedCategory.isGE_Q_obj_iff, Algebra.FormallyEtale.Algebra.FormallyEtale.of_restrictScalars, Algebra.Extension.exact_cotangentComplex_toKaehler",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern scheme closed immersions, general cohomological support, or ring etaleness; none states closed-support constructibility and the specified Tor bound under full-site comparison"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-pur-closed-etale-transport-bounds",
+  "date": "2026-10-22",
+  "group": "Q25"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-rf-shriek-preservation",
+ "blueprint": {
+  "from": {
+   "node": "thm-pur-general-admissibility",
+   "place": "Proof Step 2: closed-support computations using lem-exc-closed-amplitude and prop-exc-closed-tor; parent split Steps 3 and 5 (ordinary etale output bounds and their comparison pullbacks).",
+   "via": [
+    "lem-pur-closed-etale-transport-bounds"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-pur-etale-closed-output-bounds",
+  "worker": "stage1",
+  "summary": "Kept the statement and all its hypotheses unchanged. Split into four applications of existing results: ordinary etale cohomological/constructibility bounds, exact constructible comparison pullback, independent ordinary etale Tor bound, and full-site Tor comparison with arbitrary test modules. Read each cited statement and source, checked edge cases and project Lean candidates, ran logged Mathlib searches in two phrasings. No new nodes or Mathlib leaves.",
+  "blueprint": "Realizes thm-pur-general-admissibility proof Step 2, specifically its closed-support computations using lem-exc-closed-amplitude and prop-exc-closed-tor; parent lem-pur-closed-etale-transport-bounds Steps 3 and 5. Only the ordinary etale output and comparison pullback are treated here.",
+  "tool_uses": [
+   {
+    "node": "lem-exc-closed-amplitude",
+    "why": "Ordinary etale closed-support cohomological and constructibility bounds, explicitly required by ancestor Step 2; this generic closed-support bound does not replace the chart route."
+   },
+   {
+    "node": "lem-sf-proetale-constructible-origin",
+    "why": "Intrinsic bounded constructibility of comparison pullbacks, a generic coefficient-site comparison tool; it supplies no exceptional inverse-image preservation by itself."
+   },
+   {
+    "node": "lem-sf-comparison-pullback-exact",
+    "why": "Exact comparison inverse image and its cohomology isomorphism, needed to retain the specified interval; no closed-support route is replaced."
+   },
+   {
+    "node": "prop-exc-closed-tor",
+    "why": "Ordinary etale closed-support Tor bound, explicitly required by ancestor Step 2, before the comparison pullback."
+   },
+   {
+    "node": "lem-exc-comparison-tor-interval",
+    "why": "Generic full-site Tor-interval comparison, whose test sheaves include arbitrary pro-etale modules; it transports the etale result without assuming a pro-etale exceptional adjoint."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-exc-closed-amplitude",
+  "prop-exc-closed-tor",
+  "lem-exc-comparison-tor-interval"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-N8-1ba88fb32",
+  "group": "N8",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-N8-1ba88fb32 (reviewer sub-agent of L); spot-checked: Read the item in full; there are no new nodes. Step 1: lem-exc-closed-amplitude with (a,b)=(r,s). A=O_E/ϖ^n is finite, and the two clauses of def-exc-open-complement-bound are exactly the lemma's vanishing and constructibility hypotheses. This gives i_e^!K_e in étale D_c^{[r,s+c+1]}; the étale interval notation is defined in def-sf-categories. Step 2: clause (ii) of lem-sf-proetale-constructible-origin (Stacks 09AL, proetale.tex l.5357) gives intrinsic D^b_c(Z,A), which is the same category as def-weil-finite-torsion-constructibility. Clause (3) of lem-sf-comparison-pullback-exact (Stacks 04JC) keeps the interval. Step 3: prop-exc-closed-tor matches literally (A=O_E/ϖ^n, quasi-compact j, same def-kun-tor-amplitude) and does not use the premise of (a). Step 4: the forward direction of lem-exc-comparison-tor-interval applies to C_e, which is bounded and so in D^+. Its conclusion is def-weil-proetale-tor-amplitude, tested against every pro-étale N. Edge cases checked: Z empty, i=id, and 0 in A^1 with c=1, where i^!A=A(-1)[-2] lies in [0,2]. At n>1, (a) and (b) are correctly kept independent. Accepted tool_uses: lem-exc-closed-amplitude and prop-exc-closed-tor are named in the main-20261015 thm-pur-general-admissibility proof Step 2; lem-exc-comparison-tor-interval is a generic site-comparison tool. The other two declared tools are on route. No SGA source. The duplicate search found nothing equivalent (lem-exc-closed-residue-bound and lem-pur-etale-closed-chart-exceptional-preservation differ). Cosmetic only: the report lists sandbox-only files citations.json and searches.jsonl."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.EtaleClosedOutputBounds",
+  "declaration": "AlgebraicGeometry.ProEtale.etaleClosedOutput_bounds",
+  "file": "lean/Sheaf/AlgebraicGeometry/EtaleClosedOutputBounds.lean",
+  "statement": "theorem etaleClosedOutput_bounds (P : WeilConjectures.PurityFiniteSetting.{u}) {Z T W : Scheme.{u}} [Z.Over (Spec (.of P.field.k))] [T.Over (Spec (.of P.field.k))] [LocallyOfFiniteType (Z ↘ Spec (.of P.field.k))] [QuasiCompact (Z ↘ Spec (.of P.field.k))] [LocallyOfFiniteType (T ↘ Spec (.of P.field.k))] [QuasiCompact (T ↘ Spec (.of P.field.k))] (i : Z ⟶ T) [IsClosedImmersion i] [i.IsOver (Spec (.of P.field.k))] (j : W ⟶ T) [IsOpenImmersion j] [QuasiCompact j] (_hij : Set.range i.base = (Set.range j.base)ᶜ) (c : ℕ) (_hc : Scheme.HasOpenComplementCondition P.Coefficient j c) (K : Etale.DerivedCategoryModule P.Coefficient T) (_hK : Etale.DerivedCategory.isBoundedConstructible P.Coefficient T K) (r s : ℤ) (_hrs : r ≤ s) : (_root_.DerivedCategory.homologyConcentratedIn r s K → (Etale.DerivedCategory.isBoundedConstructible P.Coefficient Z ((R(Etale.lowerStar (ModuleCat.{u + 1} P.Coefficient) i)).rightAdjoint.obj K) ∧ _root_.DerivedCategory.homologyConcentratedIn r (s + (c : ℤ) + 1) ((R(Etale.lowerStar (ModuleCat.{u + 1} P.Coefficient) i)).rightAdjoint.obj K)) ∧ WeilConjectures.constructibleInterval P.coefficients.l P.extension P.level P.level_pos Z r (s + (c : ℤ) + 1) ((finiteCoefficientIntrinsicDerivedComparison Z P.Ring).obj ((R(Etale.lowerStar (ModuleCat.{u + 1} P.Coefficient) i)).rightAdjoint.obj K))) ∧ (Etale.DerivedCategory.hasTorAmplitudeIn P.Coefficient T r s K → (Etale.DerivedCategory.isBoundedConstructible P.Coefficient Z ((R(Etale.lowerStar (ModuleCat.{u + 1} P.Coefficient) i)).rightAdjoint.obj K) ∧ Etale.DerivedCategory.hasTorAmplitudeIn P.Coefficient Z r (s + (c : ℤ) + 1) ((R(Etale.lowerStar (ModuleCat.{u + 1} P.Coefficient) i)).rightAdjoint.obj K)) ∧ Scheme.intrinsicFiniteTorsionConstructible P.coefficients.l P.extension P.level P.level_pos Z ((finiteCoefficientIntrinsicDerivedComparison Z P.Ring).obj ((R(Etale.lowerStar (ModuleCat.{u + 1} P.Coefficient) i)).rightAdjoint.obj K)) ∧ Scheme.HasProEtaleTorAmplitude Z P.Ring ((finiteCoefficientIntrinsicDerivedComparison Z P.Ring).obj ((R(Etale.lowerStar (ModuleCat.{u + 1} P.Coefficient) i)).rightAdjoint.obj K)) r (s + (c : ℤ) + 1))",
+  "branch": "newtargets-dag",
+  "by": "Q73",
+  "date": "2026-10-22",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-b1edf1c35",
+  "group": "Q73",
+  "result": "pass",
+  "note": "Clause-by-clause match: PurityFiniteSetting; finite-type Z,T over k; closed i with quasi-compact complementary j; both HasOpenComplementCondition conjuncts; bounded constructible K; r<=s; i^! = canonical rightAdjoint of R(lowerStar i); C_p = canonical finiteCoefficientIntrinsicDerivedComparison. (a) has only the cohomology premise and gives etale isBoundedConstructible ∧ homologyConcentratedIn [r,s+c+1] plus pro-etale constructibleInterval. (b) has only the Tor premise and gives etale boundedConstructible ∧ hasTorAmplitudeIn, intrinsicFiniteTorsionConstructible, and HasProEtaleTorAmplitude, which tests every pro-etale module sheaf and underlies the stmt_dep finiteTorConstructible. Edge cases checked: empty Z, i=id with c=0, A^1 origin in [0,2]. lean.statement verbatim; docstrings with source, blueprint and proof steps; only sorry; public/plain imports correct. The def-sf-categories lean-only rebind to Mathlib DerivedCategory (existing:true, with note) is accepted: the old SfCategories module was deleted 2026-10-20 and no Lean uses it. Maintainer note: that record now binds only the ambient category. Advisory: canonical declarations whose owners are outside stmt_deps; stage 3 needs a coefficient transport for prop-exc-closed-tor (Type (u+1) E). No recompile, by instruction."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H4",
+  "result": "pass",
+  "landing": "20261024T185951-L-3804482",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

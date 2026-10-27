@@ -1,0 +1,255 @@
+{
+ "id": "lem-weil-pbc-ringed-space-algebra-quotient-cokernel",
+ "kind": "statement",
+ "title": "Algebra-sheaf quotient and underlying module cokernel with normalized projection",
+ "statement": "Let $X$ be a topological space, $\\mathcal O$ a sheaf of commutative rings, $\\mathcal B$ a commutative $\\mathcal O$-algebra sheaf [def-weil-pbc-ringed-space-algebra-module], and $\\mathcal I\\subseteq\\mathcal B$ an ideal subsheaf (a subsheaf whose sections on every open $U$ are an ideal of $\\mathcal B(U)$). Put $\\mathcal P(U)=\\mathcal B(U)/\\mathcal I(U)$, with induced restrictions, and let $\\theta:\\mathcal P\\to\\mathcal Q$ be its sheafification in commutative rings [def-weil-pbc-sheafification]. Write $p:\\mathcal B\\to\\mathcal P$ for the sectionwise quotient and $q=\\theta p$. The structure map $q\\sigma_{\\mathcal B}$ makes $\\mathcal Q$ a commutative $\\mathcal O$-algebra sheaf, and $q$ an algebra morphism. Let $c:\\mathcal B\\to\\mathcal C$ be the cokernel of the inclusion $\\mathcal I\\hookrightarrow\\mathcal B$ in sheaves of $\\mathcal O$-modules [def-weil-sheaf-of-modules-category]. There is a canonical module isomorphism $h:\\mathcal C\\xrightarrow{\\sim}\\mathcal Q$ with $hc=q$, using the module structures induced by the algebra structure maps. The map $q$ is locally surjective. For every commutative $\\mathcal O$-algebra sheaf $\\mathcal H$ and algebra map $\\chi:\\mathcal B\\to\\mathcal H$ that annihilates $\\mathcal I$ on every open, there is exactly one algebra map $\\bar\\chi:\\mathcal Q\\to\\mathcal H$ with $\\bar\\chi q=\\chi$.",
+ "source": {
+  "document": "literature/stacks-project/modules.tex",
+  "place": "Tag 01AH, lemma-limits-colimits (2), and the cokernel construction preceding Tag 01AG, lemma-abelian; comparison with commutative ring sheafification in Sheaves Tags 0087, lemma-sheafify-presheaf-structures, and 0089, lemma-sheafification-presheaf-modules"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-ringed-space-algebra-module",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-pbc-sheafification",
+  "def-weil-pbc-ideal-module-quotients",
+  "def-weil-pbc-ringed-site-ideal"
+ ],
+ "proof": [
+  {
+   "text": "Use the canonical sectionwise ring quotient P, its ring sheafification Q, and the projection q. Composition with the structure morphism of B equips Q with its O-algebra structure. The same ring maps are O-linear after restriction of scalars. The quotient map kills I because Ideal.Quotient.mk sends every element of I to zero, and the sheafification unit preserves zero.",
+   "uses": [
+    "def-weil-pbc-ringed-space-algebra-module",
+    "def-weil-pbc-ideal-module-quotients",
+    "def-weil-pbc-ringed-site-ideal"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/modules.tex",
+    "place": "Cokernel construction immediately preceding Tag 01AG, lemma-abelian; the quotient presheaf from the existing ideal-module-quotients definition"
+   }
+  },
+  {
+   "text": "The sheafification unit theta of P is locally surjective and locally injective on underlying sets, by the ring-sheafification result and Mathlib Presheaf.isLocallySurjective_toSheafify' / Presheaf.isLocallyInjective_toSheafify'. The sectionwise quotient projection p is surjective by Ideal.Quotient.mk_surjective. Local surjectivity is closed under composition, so q = p followed by theta is locally surjective.",
+   "uses": [
+    "lem-weil-pbc-ring-sheafification-space-underlying-abelian",
+    "def-weil-pbc-ideal-module-quotients"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sheaves.tex",
+    "place": "Tag 0087, lemma-sheafify-presheaf-structures (1)"
+   }
+  },
+  {
+   "text": "Regard the sectionwise quotient rings P as an O-module presheaf, by restricting scalars along O -> B -> P. The unit theta induces an O-linear map from this module presheaf to the underlying O-module of Q, with exactly the same functions on sections. It is locally bijective by the preceding step. For any O-module sheaf N and f: B -> N killing I, QuotientAddGroup.lift gives sectionwise additive maps P(U) -> N(U). Surjectivity of B(U) -> P(U) reduces naturality and O-linearity of these maps to those of f. Apply Mathlib PresheafOfModules.homEquivOfIsLocallyBijective to theta and N.isSheaf to descend this module-presheaf map uniquely to Q -> N. Its composite with q is f by the factorization p followed by theta; uniqueness follows from injectivity of the hom equivalence and sectionwise surjectivity of p. This proves the module cokernel property of the specified q directly, without computing its kernel on sections.",
+   "uses": [
+    "def-weil-sheaf-of-modules-category",
+    "def-weil-pbc-ringed-space-algebra-module",
+    "lem-weil-pbc-ring-sheafification-space-underlying-abelian",
+    "def-weil-pbc-ideal-module-quotients"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/modules.tex",
+    "place": "Cokernel construction immediately preceding Tag 01AG, lemma-abelian, using the module sheafification universal property of Sheaves Tag 0089, lemma-sheafification-presheaf-modules"
+   }
+  },
+  {
+   "text": "Construct the CokernelCofork with projection q, its zero relation proved in step 1, and the universal property proved in step 3. The unique isomorphism between this colimit and the chosen categorical cokernel gives h. The cocone comparison equation at WalkingParallelPair.one is exactly cokernel.pi followed by h.hom = q.",
+   "uses": [
+    "def-weil-sheaf-of-modules-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/modules.tex",
+    "place": "Cokernel universal property in the construction preceding Tag 01AG, lemma-abelian"
+   }
+  },
+  {
+   "text": "For an O-algebra sheaf H and an algebra map chi: B -> H annihilating I, form a ring-presheaf map P -> H with components Ideal.Quotient.lift chi. Naturality is checked on representatives. Ring sheafification gives a ring-sheaf map phi: Q -> H, and the sheafification unit equation implies q followed by phi = chi. This identity and the algebra compatibility of chi imply the structure-map identity for phi, so phi defines an Under O morphism. For uniqueness, use sheafify_hom_ext, then check equality on each quotient representative using Ideal.Quotient.mk_surjective and the assumed factorization through q.",
+   "uses": [
+    "def-weil-pbc-ringed-space-algebra-module",
+    "lem-weil-pbc-ring-sheafification-space-underlying-abelian",
+    "def-weil-pbc-ideal-module-quotients"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sheaves.tex",
+    "place": "Tag 0087, lemma-sheafify-presheaf-structures (2), applied to commutative rings"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-ringed-space-algebra-module",
+  "def-weil-pbc-ideal-module-quotients",
+  "def-weil-pbc-ringed-site-ideal",
+  "lem-weil-pbc-ring-sheafification-space-underlying-abelian",
+  "def-weil-sheaf-of-modules-category"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/modules.tex",
+  "place": "Cokernel construction preceding Tag 01AG, lemma-abelian, and Tag 01AH(2), lemma-limits-colimits; Sheaves Tags 0087 and 0089. J3 implements module descent using Mathlib PresheafOfModules.homEquivOfIsLocallyBijective, avoiding the separate kernel computation and local-section theorem."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "quotient|cokernel|ideal",
+   "results": " (source subdirectory: CategoryTheory/Sites/Algebra)",
+   "date": "2026-10-22",
+   "verdict": "no match in this search scope; broader semantic and source queries also run"
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules.cokernel",
+   "results": "; loogle: unknown identifier 'SheafOfModules.cokernel'",
+   "date": "2026-10-22",
+   "verdict": "no match: unresolved identifier in this query; alternative full-name and semantic queries also run"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Quotient of a commutative ring sheaf by an ideal subsheaf is the cokernel as a sheaf of modules",
+   "results": "ModuleCat.cokernelIsColimit; ModuleCat.cokernel_π_ext; ModuleCat.cokernel_π_cokernelIsoRangeQuotient_hom_apply; SheafOfModules.relationsOfIsCokernelFree_I; TopModuleCat.coker; ModuleCat.cokernelIsoRangeQuotient; AddCommGrpCat.cokernelIsoQuotient; SheafOfModules.presentationOfIsCokernelFree_generators",
+   "date": "2026-10-22",
+   "verdict": "no match: the retrieved declarations do not state this algebra-sheaf/module comparison"
+  },
+  {
+   "tool": "grep",
+   "query": "cokernel|quotient|CommRingCat",
+   "results": " (source subdirectory: Algebra/Category/ModuleCat/Sheaf/Abelian.lean)",
+   "date": "2026-10-22",
+   "verdict": "no match in this search scope; broader semantic and source queries also run"
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules.toPresheaf",
+   "results": "; loogle: unknown identifier 'SheafOfModules.toPresheaf'",
+   "date": "2026-10-22",
+   "verdict": "no match: unresolved identifier in this query; alternative full-name and semantic queries also run"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The ring sheafification of sectionwise quotients by an ideal subsheaf has underlying module canonically isomorphic to the module cokernel and satisfies the quotient algebra universal property",
+   "results": "SheafOfModules.Presentation.isColimit; SheafOfModules.generatorsOfIsCokernelFree_π; SheafOfModules.presentationOfIsCokernelFree; SheafOfModules.generatorsOfIsCokernelFree_s; SheafOfModules.generatorsOfIsCokernelFree_I; SheafOfModules.presentationOfIsCokernelFree_generators; SheafOfModules.generatorsOfIsCokernelFree; SheafOfModules.presentationOfIsCokernelFree_relations",
+   "date": "2026-10-22",
+   "verdict": "no match: the retrieved declarations do not state this algebra-sheaf/module comparison"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Sheafification of the presheaf of algebra quotients by ideals is also the cokernel of the inclusion in module sheaves with the same quotient map",
+   "results": "SheafOfModules.Presentation.isColimit; SheafOfModules.generatorsOfIsCokernelFree_π; SheafOfModules.relationsOfIsCokernelFree_s; SheafOfModules.relationsOfIsCokernelFree_I; SheafOfModules.generatorsOfIsCokernelFree_s; SheafOfModules.generatorsOfIsCokernelFree_I; SheafOfModules.presentationOfIsCokernelFree; SheafOfModules.presentationOfIsCokernelFree_relations",
+   "date": "2026-10-22",
+   "verdict": "no match: the retrieved declarations do not state this algebra-sheaf/module comparison"
+  },
+  {
+   "tool": "grep",
+   "query": "sheafification|cokernel|PreservesColimits",
+   "results": "8; 35; 37 (source subdirectory: Algebra/Category/ModuleCat/Sheaf/Colimits.lean)",
+   "date": "2026-10-22",
+   "verdict": "no match: the retrieved declarations do not state this algebra-sheaf/module comparison"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"SheafOfModules\", \"cokernel\"",
+   "results": "PresheafOfModules.freeYonedaCoproductsCokernelCofork; PresheafOfModules.isColimitFreeYonedaCoproductsCokernelCofork; SheafOfModules.generatorsOfIsCokernelFree; SheafOfModules.presentationOfIsCokernelFree; SheafOfModules.generatorsOfIsCokernelFree_I; SheafOfModules.presentationOfIsCokernelFree_generators; SheafOfModules.generatorsOfIsCokernelFree_π; SheafOfModules.generatorsOfIsCokernelFree_s",
+   "date": "2026-10-22",
+   "verdict": "no match: the retrieved declarations do not state this algebra-sheaf/module comparison"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A quotient of a sheaf of commutative algebras by an ideal subsheaf has underlying module the cokernel of the ideal inclusion",
+   "results": "ModuleCat.cokernelIsColimit; localCohomology.ringModIdeals; ModuleCat.cokernelIsoRangeQuotient; ModuleCon.Quotient; AlgebraicGeometry.Scheme.IdealSheafData.glueDataObjHom; SheafOfModules.presentationOfIsCokernelFree; ModuleCat.cokernelCocone; SheafOfModules.Presentation.isColimit",
+   "date": "2026-10-22",
+   "verdict": "no match: module cokernels and free-module sheaf presentations do not identify a ring-sheaf quotient with its underlying module cokernel"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Sheafification of the quotient of a commutative algebra sheaf by an ideal is the cokernel of the inclusion as sheaves of modules, and is the universal quotient algebra",
+   "results": "SheafOfModules.Presentation.isColimit; SheafOfModules.presentationOfIsCokernelFree; SheafOfModules.relationsOfIsCokernelFree; SheafOfModules.Presentation.map; SheafOfModules.relationsOfIsCokernelFree_I; SheafOfModules.relationsOfIsCokernelFree_s; SheafOfModules.presentationOfIsCokernelFree_relations; SheafOfModules.generatorsOfIsCokernelFree",
+   "date": "2026-10-22",
+   "verdict": "no match: module cokernels and free-module sheaf presentations do not identify a ring-sheaf quotient with its underlying module cokernel"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The underlying module of the sheafification of a presheaf of quotient rings is a cokernel in sheaves of modules",
+   "results": "SheafOfModules.Presentation.isColimit; SheafOfModules.generatorsOfIsCokernelFree_π; SheafOfModules.presentationOfIsCokernelFree; SheafOfModules.generatorsOfIsCokernelFree_s; SheafOfModules.generatorsOfIsCokernelFree_I; SheafOfModules.relationsOfIsCokernelFree_s; SheafOfModules.relationsOfIsCokernelFree_I; SheafOfModules.generatorsOfIsCokernelFree",
+   "date": "2026-10-22",
+   "verdict": "no match: module cokernels and free-module sheaf presentations do not identify a ring-sheaf quotient with its underlying module cokernel"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-quasi-coherent-algebra-kernel-image-ideal",
+  "date": "2026-10-22",
+  "group": "Q44"
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "blueprint": {
+  "from": {
+   "node": "lemma-weil-pbc-h1-constructible-representation",
+   "place": "Finite-pushforward representation in lemma-weil-pbc-h1-constructible-representation, current blueprint proof paragraph 2: finite finitely presented h_i; the integral-algebra finite approximation used below that step (Stacks 0817, proof (2): J_i = ker(Sym(F_i) → A) and Sym(F_i)/(E_ik)). General algebra-sheaf quotient and underlying module cokernel with normalized projection.",
+   "via": [
+    "lem-weil-pbc-quasi-coherent-algebra-kernel-image-ideal",
+    "lem-weil-pbc-integral-algebra-directed-colimit-finite",
+    "lem-weil-pbc-integral-morphism-limit-of-finite",
+    "lem-weil-pbc-constructible-module-finite-pushforward-noetherian",
+    "lem-weil-pbc-constructible-module-finite-pushforward-embedding"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-weil-pbc-ringed-space-algebra-quotient-cokernel",
+  "worker": "stage1",
+  "summary": "Proved all clauses using existing ring-sheafification and local-section nodes: construct the quotient algebra, prove local surjectivity and the kernel on every open, descend annihilating module maps by explicit gluing, compare the two cokernel maps with both inverse identities, and factor annihilating algebra maps. No statement change and no new nodes; six logged Mathlib searches found module presentations and ordinary module cokernels, but not this comparison. Repair of the returned ea9f8c461ca delivery: reconstructed the item over the current DAG fields, re-read every cited statement and verified all citation quotes, and made the unit-preserving transfer from standard set sheafification to the specified ring-sheafification unit explicit.",
+  "blueprint": "Realizes the algebra quotient needed for the finite-pushforward approximation beneath paragraph 2 of the current blueprint lemma-weil-pbc-h1-constructible-representation, through the existing 0817 integral-algebra approximation chain recorded in blueprint.from. The argument is below the unit-level route; it does not replace any unit step."
+ },
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q144-875c25c45",
+  "group": "Q144",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q144-875c25c45 (reviewer sub-agent of L); spot-checked: This is a promotion re-delivery of head ea9f8c46, which was PASSed in an earlier run; landing refused it on a side-completion/promotion ground, not the mathematics. There are 0 new nodes. Compared with ea9f8c46, the statement, stmt_deps, source, blueprint, unit and searches are identical, and steps 1, 3, 4 and 5 are byte-identical. The only real change is in step 2. The local-section node works with the set sheafification, and clause (2) of the ring-sheafification node says the underlying sets of P# with theta form a set sheafification. The new sentences use the universal property to get a unique isomorphism between the two units, then move local lifts along it and local equality back along its inverse. This is correct and elementary. The local-section node already accepts any sheafification in the sense of def-weil-pbc-sheafification, so the added text only clarifies. The summary gains one sentence. I re-read all 5 cited statements on the current base: ringed-space-algebra-module, sheaf-of-modules-category, pbc-sheafification, ring-sheafification-space-underlying-abelian clauses (1) and (2), and site-sheafification-sections-local (00WB/00WK). They still give exactly what each step uses. Step checks: step 1, I is an O-submodule and q is an algebra map. Step 2, q is locally surjective and ker q_U = I(U), by gluing inside the subsheaf I; the empty open is covered. Step 3, any annihilating O-linear map to an arbitrary module sheaf descends uniquely through q (independent of lifts, compatible with restriction, O-linear). Step 4, h: C->Q with hc=q and k: Q->C with kq=c; both composites are identities by uniqueness. Step 5, the algebra map factors uniquely, using surjectivity of p_U and clause (1). Edge cases: I=0, I=B (forces H=0), one point, empty open. The live node is still unsplit and there is no repair note. A search of the current snapshot found no duplicate: lem-pe-ring-sheafification-underlying-sets overlaps only the transfer tool used in step 2. The citer quasi-coherent-algebra-kernel-image-ideal is unchanged. No SGA citation, no tool_uses, route unchanged. Maintainer note: please promote and land."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.AlgebraSheafQuotientCokernel",
+  "declaration": "CategoryTheory.algebraSheafQuotient_cokernel",
+  "declarations": [
+   "CategoryTheory.algebraSheafQuotient",
+   "CategoryTheory.algebraSheafQuotientMap",
+   "CategoryTheory.algebraSheafIdealInclusion",
+   "CategoryTheory.algebraSheafQuotient_cokernel"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/AlgebraSheafQuotientCokernel.lean",
+  "statement": "theorem algebraSheafQuotient_cokernel : (∃ h : cokernel (algebraSheafIdealInclusion B I) ≅ commAlgebraSheafModule O (algebraSheafQuotient B I), cokernel.π (algebraSheafIdealInclusion B I) ≫ h.hom = (commAlgebraSheafModuleFunctor O).map (algebraSheafQuotientMap B I)) ∧ Presheaf.IsLocallySurjective (Opens.grothendieckTopology X) (RingedSiteIdeal.ringProjection I).hom ∧ (∀ (H : Under O) (χ : B ⟶ H), (∀ (U : Opens X) (a : I.sections U), χ.right.hom.app (op U) a.val = 0) → ∃! χbar : algebraSheafQuotient B I ⟶ H, algebraSheafQuotientMap B I ≫ χbar = χ)",
+  "branch": "sheaf-dag",
+  "by": "Q144",
+  "date": "2026-10-23",
+  "existing": false,
+  "note": "Uses the landed RingedSiteIdeal quotient construction from def-weil-pbc-ideal-module-quotients for the sectionwise quotient, sheafification and projection. The algebra structure is the composite with B.hom, and the module cokernel comparison uses the same canonical projection. No statement correction."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-b83c8e028",
+  "group": "Q144",
+  "result": "pass",
+  "note": "Re-delivery after the 7dee4b20 H4/H12 RETURN does exactly the requested correction and nothing else: the 7 duplicate quotient declarations are deleted, and the statement uses the existing RingedSiteIdeal.ringQuotientPresheaf/ringQuotientPresheafProjection/ringQuotient/ringProjection (checked in side-live IdealModuleQuotients.lean:68-101: quotient of sections, Ideal.Quotient.mk, presheafToSheaf, p≫toSheafify), with def-weil-pbc-ideal-module-quotients added to stmt_deps. Every clause matches: Under O algebra with structure map B.hom≫ringProjection; cokernel of restrictScalars(σ_B).map I.inclusion to commAlgebraSheafModule O B with ∃ iso h, c≫h.hom = q; IsLocallySurjective of ringProjection; unique factorization in Under O of χ killing I on every open. No extra hypotheses. Item node differs from side-live only in lean and stmt_deps; all 5 dependency records byte-identical to side-live; lean.statement verbatim; 4 declarations present; defs carry real data; only proof is sorry; docstrings and report sections OK. Advisories: redundant transitive imports (H9); u/u universes inherited from RingedSiteIdeal. No compile run (2026-10-21 rule, no file changed)."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J3",
+  "result": "pass",
+  "landing": "20261023T105050-L-3488942",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

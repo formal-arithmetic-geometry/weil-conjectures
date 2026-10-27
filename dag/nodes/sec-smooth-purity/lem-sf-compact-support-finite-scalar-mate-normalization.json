@@ -1,0 +1,123 @@
+{
+ "id": "lem-sf-compact-support-finite-scalar-mate-normalization",
+ "kind": "statement",
+ "title": "Finite mixed-unit normalization of the realized scalar comparison",
+ "statement": "Let $K_0$ be a field and $\\ell$ a prime invertible in $K_0$. Let $f:X\\to Y$ be a separated finite-type $K_0$-morphism between finite-type $K_0$-schemes, fix a compactification $c$, and let $E,L$ be finite extensions of $\\mathbf Q_\\ell$ with a $\\mathbf Q_\\ell$-algebra embedding $\\iota:E\\to L$. Equip $X,Y$ with the residue-field units induced by the given base-field unit [def-weil-scheme-morphism-properties]. Use the fixed integral functors $F_E,F_L$ [def-weil-compact-support-finite-action] and completed scalar extensions $T^W$ [def-weil-integral-scalar-extension]. For any integral natural isomorphism $b:F_ET^Y\\simeq T^XF_L$ whose ambient components are $T^Y(\\rho_E)\\,\\operatorname{coefficientExchange}(\\operatorname{systemCompactScalar})\\,\\rho_L^{-1}$ [def-weil-system-operation-exchange-realization], the predicate SfCompactSupportIntegralBetaSpec [def-weil-compact-support-coefficient-action] holds: at every input and quotient level the specified mixed output unit gives the Hom bijection for all derived targets, and reduction of $b$ followed by the fixed target reduction is exactly its uniquely determined finite compact-support mate. This asserts only normalization of a given comparison, not existence or invertibility of that comparison.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-sf-pf-reduction/lem-fix-operation-reduction.proof.md",
+  "place": "Compact-support and final paragraphs; normalized scalar isomorphisms proof steps 1, 5"
+ },
+ "stmt_deps": [
+  "def-weil-scheme-morphism-properties",
+  "def-weil-rationalization-karoubi",
+  "def-weil-integral-rational-qbar-compact-support",
+  "def-weil-compact-support-finite-action",
+  "def-weil-integral-scalar-extension",
+  "def-weil-compact-support-coefficient-action",
+  "def-weil-mixed-reduction-unit",
+  "def-weil-system-operation-exchange-realization"
+ ],
+ "proof": [
+  {
+   "text": "Fix K and n. Apply the generic completed mixed-unit Hom bijection at Y to the integral compact-support value F_E K. Precomposition by the inverse specified reduction isomorphism r_E is the Iso.homCongr equivalence. Compose these two bijections: by associativity this is exactly the output-unit function in SfCompactSupportIntegralBetaSpec, for every unbounded target.",
+   "uses": [
+    "lem-sf-mixed-completed-reduction-hom-bijective",
+    "def-weil-compact-support-finite-action"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Choose that proof hN of bijectivity. By injectivity of Equiv.ofBijective, equality with sfCompactSupportFiniteMate reduces to its specified transpose. Replace the ambient component of b by the hypothesis hb, apply the realized-scalar transpose equation, and cancel r_E inverse followed by r_E. This proves the precise beta specification without changing any comparison data.",
+   "uses": [
+    "lem-sf-compact-support-realized-scalar-transpose",
+    "def-weil-compact-support-coefficient-action"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sf-mixed-completed-reduction-hom-bijective",
+  "def-weil-compact-support-finite-action",
+  "lem-sf-compact-support-realized-scalar-transpose",
+  "def-weil-compact-support-coefficient-action"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-sf-pf-reduction/lem-fix-operation-reduction.proof.md",
+  "place": "T8 Lean reduction: transport the completed mixed-unit Hom bijection, then use the realized transpose equation and uniqueness of the finite mate."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Natural isomorphism scalar extension compact support integral derived coefficient systems",
+   "results": "Eight hits, all unrelated supported smooth-function or compactly supported integration statements; no normalized derived compact-support comparison.",
+   "date": "2026-10-25",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Normalized compact support coefficient extension isomorphism for integral constructible sheaves and rational localization",
+   "results": "Eight hits, including pointwise Kan extension under localization and unrelated test-function, coefficient-integer and condensed locally-constant statements; no exact comparison.",
+   "date": "2026-10-25",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "compactSupport.*(scalar|Scalar)|lowerShriek.*(scalar|Scalar)",
+   "results": "msearch grep returned 0 Mathlib hits. Project search found the assigned theorem and finite scalar transport, but no independent integral exchange invertibility, mixed-unit normalization, or rational component-localization statement usable without a cycle. Blueprint searches compact support scalar, rational scalar and mixed unit returned zero exact-phrase matches. Broader compact-support and scalar localization searches found the owning action and rationalization nodes and the parent comparisons, with no separate matching intermediate assertion.",
+   "date": "2026-10-25",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.CompactSupportNormalizedScalarIsomorphisms",
+  "date": "2026-10-25",
+  "group": "S7"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-def-sf-operations",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-compact-support-finite-field-independence",
+   "place": "First sentence, finite-stage compact-support scalar-extension comparisons",
+   "via": [
+    "lem-weil-compact-support-normalized-scalar-isomorphisms"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.CompactSupportFiniteScalarMateNormalization",
+  "file": "lean/Sheaf/Paper/CompactSupportFiniteScalarMateNormalization.lean",
+  "declaration": "WeilConjectures.sfCompactSupportFiniteScalarMateNormalization",
+  "statement": "theorem sfCompactSupportFiniteScalarMateNormalization\n    [∀ x : X, Invertible (l : X.residueField x)]\n    [∀ y : Y, Invertible (l : Y.residueField y)]\n    (E L : Type u) [Field E] [Field L]\n    [Algebra (Padic l) E] [Algebra (Padic l) L]\n    [FiniteDimensional (Padic l) E] [FiniteDimensional (Padic l) L]\n    (ι : E →ₐ[Padic l] L)\n    (b : sfCompactSupportFiniteIntegralFunctor l K₀ hl c E ⋙\n        sfConstructibleIntegralScalarExtension 0 l\n          (Nat.Prime.ne_zero (Fact.out : l.Prime)) E L ι Y ≅\n      sfConstructibleIntegralScalarExtension 0 l\n          (Nat.Prime.ne_zero (Fact.out : l.Prime)) E L ι X ⋙\n        sfCompactSupportFiniteIntegralFunctor l K₀ hl c L)\n    (hb : ∀ K : sfIntegralConstructibleCategory l E X,\n      (b.hom.app K).hom = (integralScalarExtension l E L ι Y).map\n          ((FrobeniusExchange.compactRealization l E K₀ hl f c).hom.app K) ≫\n        (FrobeniusExchange.coefficientExchange l E L ι\n          (FrobeniusExchange.systemDerivedOpen l E c.i ⋙ FrobeniusExchange.systemDirect l E c.g)\n          (FrobeniusExchange.systemDerivedOpen l L c.i ⋙ FrobeniusExchange.systemDirect l L c.g)\n          (FrobeniusExchange.systemCompactScalar l E L ι c)).app K ≫\n        (FrobeniusExchange.compactRealization l L K₀ hl f c).inv.app\n          ((sfConstructibleIntegralScalarExtension 0 l\n            (Nat.Prime.ne_zero (Fact.out : l.Prime)) E L ι X).obj K)) :\n    SfCompactSupportIntegralBetaSpec l K₀ hl c E L ι b",
+  "branch": "sheaf-dag",
+  "by": "S7",
+  "date": "2026-10-25"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S7",
+  "result": "pass",
+  "landing": "20261025T144029-L-1157101",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T8",
+  "result": "pass",
+  "landing": "20261027T084456-L-3684675",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

@@ -38,11 +38,12 @@
  ],
  "proof": [
   {
-   "text": "Put $L_p=A_{\\mathbf A^d_S}(d)[2d]$. Use the explicit ordered tower adjunction in [lem-amb-affine-space-top-trace], whose right functor is $p^*(-)(d)[2d]$. The unbounded composition comparisons of [lem-amb-unbounded-compact-support-comparisons] identify its left functor with the actual $Rp_!$; on $L_p$ this identification agrees with the bounded-below one used to define $t_p$. Thus this is an adjunction on the same ordinary categories as $Rp_!\\dashv p^\\times$, not merely a calculation of one compact-support group. By [det-sp-unique-right-adjoint], the counit-compatible comparison between their right adjoints is an isomorphism. At $A_S$ it is exactly $\\alpha_p$, because its transpose is the specified $t_p$. In particular $\\varepsilon_p\\circ Rp_!(\\alpha_p)=t_p$. This argument also applies over every Noetherian base under consideration, including $X=\\mathbf A^1_S$.",
+   "text": "Use [lem-trf-coordinate-tower-adjoint-isomorphism] for invertibility of towerAdjoint. For exists_coordinateCounitAdjunction, standardAdjoint is invertible: towerAdjoint is invertible, and the exceptional comparison for standardSquare is invertible because its base arrow is the identity (an open immersion). Start with the existing affine adjunction of [cor-amb-affine-space-adjunction]. Its right functor is pullback followed by tensor with the Tate object and an even shift. Apply the proved general normalization [lem-trf-tensor-right-adjunction-normalization], with the canonical pullback-unit/tensor-unitor comparison q and z=asIso(standardAdjoint). The definition of affineDualizingIso is exactly the right-adjoint uniqueness component followed by q. Thus the output adjunction satisfies IsNormalized. This includes dimension zero, empty bases, and the zero coefficient ring.",
    "uses": [
-    "lem-amb-affine-space-top-trace",
-    "lem-amb-unbounded-compact-support-comparisons",
-    "det-sp-unique-right-adjoint"
+    "lem-trf-coordinate-tower-adjoint-isomorphism",
+    "cor-amb-affine-space-adjunction",
+    "prop-asd-smooth-base-change",
+    "lem-trf-tensor-right-adjunction-normalization"
    ],
    "elementary": false,
    "source": {
@@ -51,12 +52,13 @@
    }
   },
   {
-   "text": "For $v:T\\to S$ write $v':\\mathbf A^d_T\\to\\mathbf A^d_S$, $p'=p_{d,T}$, and $C_K:v^*Rp_!K\\xrightarrow{\\sim}Rp'_!v'^*K$. Its normalization on $L_p$ is the exchange in [lem-amb-affine-space-top-trace], by [lem-amb-unbounded-compact-support-comparisons]. Let $\\varepsilon_p,\\varepsilon_{p'}$ denote the exceptional counits at the constant object. The counit-defined $\\beta$ of [prop-asd-smooth-base-change] satisfies\n$$\\varepsilon_{p'}\\circ Rp'_!(\\beta)=v^*\\varepsilon_p\\circ C_{\\omega_p}^{-1}.$$\nNaturality of $C$ and Step 1 therefore give\n$$\\begin{aligned}\n\\varepsilon_{p'}\\circ Rp'_!(\\beta\\circ v'^*\\alpha_p)\n&=v^*\\varepsilon_p\\circ C_{\\omega_p}^{-1}\\circ Rp'_!(v'^*\\alpha_p)\\\\\n&=v^*(\\varepsilon_p\\circ Rp_!\\alpha_p)\\circ C_{L_p}^{-1}\\\\\n&=v^*t_p\\circ C_{L_p}^{-1}=t_{p'}.\n\\end{aligned}$$\nThe last equality is precisely the arbitrary-Noetherian-base-change equality in the affine-space trace node. The adjunct of $\\alpha_{p'}$ is also $t_{p'}$. Injectivity of the adjunction bijection proves $\\beta\\circ v'^*\\alpha_p=\\alpha_{p'}$, with the canonical Tate identification of [lem-asd-etale-finite-twist-pullback]. Only the input $L_p$ in the trace calculation is bounded below; the exceptional adjunction and exchange remain the unbounded ones.",
+   "text": "For arbitrary Noetherian v:T→S, [lem-amb-ordinary-finite-p1-datum-uniqueness] supplies base change for the specified normalized t,D. Apply [lem-amb-affine-trace-tower-counit-base-change] at the constant coefficient and use counit naturality for ordinaryFiniteUnitPullback. This is the ordered tower trace equation. The comparison equation [lem-amb-affine-trace-unit-compact-base-change] transports it through affineLinearCompactComparison to ordinary compact supports. The proved coefficient identity [lem-trf-coordinate-coefficient-unit-base-change] identifies the final coefficient map with leftDerivedUpperStarUnitIso. The published map_rightDerivedUpperShriekBaseChangeMap_app_counit identity supplies the actual exceptional mate counit equation without unfolding its inverse exchange. Now transpose: the counit equation for the mate of inverse compact-support exchange, naturality of that inverse exchange, and the adjunction bijection identify pullback(towerAdjoint) followed by dualizingComplexBaseChangeMap with the right-object comparison followed by towerAdjoint over T. Injectivity of the adjunction bijection gives the displayed equality of actual maps. No flatness assumption on v or boundedness assumption on the adjunction is introduced.",
    "uses": [
+    "lem-amb-affine-trace-tower-counit-base-change",
+    "lem-amb-affine-trace-unit-compact-base-change",
+    "lem-amb-ordinary-finite-p1-datum-uniqueness",
     "prop-asd-smooth-base-change",
-    "lem-amb-affine-space-top-trace",
-    "lem-amb-unbounded-compact-support-comparisons",
-    "lem-asd-etale-finite-twist-pullback"
+    "lem-trf-coordinate-coefficient-unit-base-change"
    ],
    "elementary": false,
    "source": {
@@ -65,14 +67,14 @@
    }
   },
   {
-   "text": "In the standard deformation identification of the statement, $q=p_{d,X}$ and the section is $0_X$; at $t=1$, $x_j=u_j$, so its fibre chart is the original ordered coordinate chart. Write $B_S=A_S(d)[2d]$, $B_X=a^*B_S$, $o_C=0^*\\alpha_{p_d}:B_S\\xrightarrow{\\sim}C$ and $o_F=0_X^*\\alpha_q:B_X\\xrightarrow{\\sim}F$. Apply Step 2 over the Noetherian base $X$ to $i_1:S\\to X$ and restrict to the zero section. The actual section exceptional comparison is exactly this restriction, giving $\\theta\\circ i_1^*o_F=o_C$. Consequently, for $\\lambda_0=a^*o_C\\circ o_F^{-1}$,\n$$i_1^*\\lambda_0=o_C\\circ(i_1^*o_F)^{-1}=\\theta.$$\nThus $\\theta$ is the identity when its source and target are written in these Tate coordinates. The Tate identifications commute with the two section pullbacks by [lem-asd-etale-finite-twist-pullback]. The same calculation at $d=0$ uses the literal identity tower adjunction.",
+   "text": "Reuse the unchanged standard affine counit assertion now attached to lem-trf-standard-affine-section-orientation. Its normalized zero-section affine comparisons have rawComparison restricting at one to the actual standard sectionMap.",
    "uses": [
-    "lem-asd-etale-finite-twist-pullback"
+    "lem-trf-standard-affine-section-orientation"
    ],
-   "elementary": true,
+   "elementary": false,
    "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-thm-dnc/sk-thm-dnc.proof.md",
-    "place": "Local construction, standard model and its fibre at t=1"
+    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-thm-dnc/sk-thm-dnc.proof.md",
+    "place": "Local construction, standard affine model, etale Rees maps and restriction at t=1."
    }
   },
   {
@@ -102,32 +104,40 @@
    }
   },
   {
-   "text": "The two chart orientations in the item give the following explicit uncorrected comparison, where $\\lambda_0$ is Step 3 over $T$:\n$$\\lambda_U=a_T^*b_C^e\\circ\\lambda_0\\circ(b_F^e)^{-1},\\qquad\n\\lambda=(a_T^*b_C^j)^{-1}\\circ\\lambda_U\\circ b_F^j.$$\nUsing Step 3 and the first equality in Step 5 yields\n$$i_1^*\\lambda_U=b_C^e\\circ\\theta_0\\circ(i_1^*b_F^e)^{-1}=\\theta_U.$$\nThe second equality in Step 5 then gives\n$$i_1^*\\lambda=(b_C^j)^{-1}\\circ\\theta_U\\circ i_1^*b_F^j=\\theta_T=\\theta|_T.$$\nAll inverses exist by the cited locality isomorphisms. Therefore $h=(i_1^*\\lambda)\\circ(\\theta|_T)^{-1}=1_{C_T}$. The calculation proves the claimed normalization for the orientations themselves; it neither presupposes that correction nor uses an independently chosen identification at one.",
-   "uses": [],
-   "elementary": true,
+   "text": "For the centred-chart conclusion, choose the two normalized affine adjunctions supplied by exists_coordinateCounitAdjunction. The actual localSourceMap and localFamilyMap are isomorphisms: base restriction is along open immersions, locality and affine section comparisons are isomorphisms. Apply lem-trf-section-coordinate-orientation-square to these adjunctions. Naturality of the section compositor moves the inverse source orientation to the end; cancel the source orientation to identify restrictionAtOne(rawComparison) with restrictedTheta. Take theta to be that restriction isomorphism. The discrepancy is theta inverse followed by theta, hence the identity. The standard-pair theorem remains as in Step 3.",
+   "uses": [
+    "lem-trf-section-coordinate-orientation-square",
+    "prop-asd-smooth-base-change"
+   ],
+   "elementary": false,
    "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-thm-dnc/sk-thm-dnc.proof.md",
-    "place": "Local construction, comparison of the two orientations and normalization at t=1; explicit cancellation in an etale chart"
+    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-thm-dnc/sk-thm-dnc.proof.md",
+    "place": "Local construction, standard model; orientation-charts Step 3."
    }
   }
  ],
  "proof_deps": [
-  "lem-amb-affine-space-top-trace",
-  "lem-amb-unbounded-compact-support-comparisons",
-  "det-sp-unique-right-adjoint",
+  "lem-trf-coordinate-tower-adjoint-isomorphism",
+  "cor-amb-affine-space-adjunction",
   "prop-asd-smooth-base-change",
-  "lem-asd-etale-finite-twist-pullback",
+  "lem-trf-tensor-right-adjunction-normalization",
+  "lem-amb-affine-trace-tower-counit-base-change",
+  "lem-amb-affine-trace-unit-compact-base-change",
+  "lem-amb-ordinary-finite-p1-datum-uniqueness",
+  "lem-trf-coordinate-coefficient-unit-base-change",
+  "lem-trf-standard-affine-section-orientation",
   "lem-trf-section-rees-base-change-etale",
   "lem-weil-pbc-open-immersion-etale",
   "lem-weil-pbc-noetherian-open-subscheme-noetherian",
   "lem-weil-pbc-finite-type-over-noetherian",
   "lem-amb-etale-adjoint-locality",
-  "lem-trf-section-exceptional-fibre-coherence"
+  "lem-trf-section-exceptional-fibre-coherence",
+  "lem-trf-section-coordinate-orientation-square"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-thm-dnc/sk-thm-dnc.proof.md",
-  "place": "Local construction, standard model and normalization at t=1; detailed counit-transpose calculation and chart cancellation, following orientation-charts Step 3."
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-thm-dnc/sk-thm-dnc.proof.md",
+  "place": "Local construction, affine-space adjunction and counit base change; E8 implements the tower transpose and supplies its normalized standard-space adjunction by natural tensor automorphism transport."
  },
  "mathlib_searches": [
   {
@@ -253,7 +263,6 @@
   "declarations": [
    "AlgebraicGeometry.Etale.affineCoordinateCounit_baseChange",
    "AlgebraicGeometry.Etale.exists_coordinateCounitAdjunction",
-   "AlgebraicGeometry.Etale.sectionCoordinateCounit_standard",
    "AlgebraicGeometry.Etale.sectionCoordinateCounit_normalization"
   ],
   "file": "lean/Sheaf/Paper/SectionCoordinateCounitNormalization.lean",
@@ -271,5 +280,27 @@
   "group": "Q70",
   "result": "pass",
   "note": "Re-delivery fixes all three findings of the 8129faf75aff RETURN. (1) lem-pur-noetherian-etale-section-specialization is no longer cited; family/sectionMap/atOne come from SectionComparisonArrows (owner def-pur-noetherian-section-specialization-arrows, now in stmt_deps). (2) FiniteRingSectionDeformation is no longer imported; my recursive import walk (9138 modules) reaches neither it nor NoetherianEtaleSectionSpecialization; the two proof-only sibling imports form no cycle. The missing counit transpose has its own definition node def-trf-coordinate-counit-arrows (§1(A)) with real data: towerAdjoint = homEquiv(compact comparison inv ≫ tower counit ≫ unit iso), and standardAdjoint transports it by fixed coordinate-iso, Tate-pullback and Cartesian base-change maps (standardSquare and tateFlat are true). (3) S stays general with affine open c.b; the conclusion is restrictionAtOne(rawComparison oC oF).hom = restrictedTheta … c.b, i.e. θ|_T of the original family, plus discrepancy = refl. IsNormalized pins affineDualizingIso, through which every chart map depends on adj, so the existential adjunction is not a free orientation. t and D are unique and satisfy base change (OrdinaryFiniteP1DatumUniqueness), so no hidden hD hypothesis is needed. Hypotheses match the node (Noetherian S, N a unit, smooth separated quasi-compact compactifiable g, closed section, compactifiable Rees projection); edge cases d=0, empty schemes, A=0 and non-flat v are covered. Ordinary unbounded étale categories, no pro-étale substitute. lean.statement verbatim in both nodes; all 12 declarations exist; only sorry proofs; docstrings carry source and blueprint tags; only the four delivery files differ from live. No compile by me (no file changed); the worker's dry run reports both modules compiling. Advisories: the base-change clause is on the tower model rather than standard A^d; the landed Chart requires U affine; four proof-only imports (H9); pre-existing Rees-family stmt_dep gap."
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-bf585",
+  "group": "E9",
+  "result": "pass",
+  "landing": "20261027T021319-L-2756451",
+  "kind": "interface",
+  "note": "independent cc review: item + 3 new modules + parent extraction vs clone 7dea68d and their DAG nodes; sandbox compile of 5 delivered modules + AffineDiagonalTraceRestriction (43.3 s OK) + #print axioms"
  }
 }

@@ -1,0 +1,129 @@
+{
+ "id": "def-trf-affine-limit-tensor-pullback-comparison",
+ "kind": "definition",
+ "title": "Canonical tensor-pullback comparison along a scheme cone",
+ "status": "split",
+ "import_flags": [],
+ "statement": "Let $I$ be a small preordered set, let $D:I^{\\mathrm{op}}\\to\\mathit{Sch}$ be an inverse diagram of schemes [def-pc-scheme], and let $c=(Z,(q_i)_i)$ be a cone on $D$, so that for every $h:i\\leq j$ the transition $q_{ji}=D(h^{\\mathrm{op}}):D_j\\to D_i$ satisfies $q_j;q_{ji}=q_i$. For an $\\mathcal O_{D_i}$-module $M$ [def-weil-sheaf-of-modules-category], define the canonical comparison $$\\operatorname{cmp}_{c,h,M}:q_j^*(q_{ji}^*M)\\xrightarrow{\\sim}q_i^*M.$$ All pullbacks are tensor pullbacks [def-pc-module-pullback]. This comparison is the inverse of the section-normalized canonical composition isomorphism $(q_j;q_{ji})^*M\\xrightarrow{\\sim}q_j^*q_{ji}^*M$, followed by equality transport along the cone equation $q_j;q_{ji}=q_i$. The composition isomorphism is induced by the tensor-pullback adjunction whose unit sends every local section $m$ to $1\\otimes m$. No directedness, limit property, quasi-compactness, affineness, or finite presentation is needed for this definition.",
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-sheaf-of-modules-category",
+  "def-pc-module-pullback"
+ ],
+ "source": {
+  "document": "literature/stacks-project/limits.tex; literature/stacks-project/sheaves.tex",
+  "place": "Tag 01ZR, lemma-descend-modules-finite-presentation (2), canonical identification of base change; Tag 0097, lemma-push-pull-composition-modules."
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Canonical comparison between iterated tensor pullback along a cone projection and transition map and direct tensor pullback along another cone projection",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"CategoryTheory.Limits.pullbackComparison\", \"module\": \"Mathlib.CategoryTheory.Limits.Shapes.Pullback.HasPullback\", \"type\": \"(f : X ⟶ Z) (g : Y ⟶ Z) [HasPullback f g] [HasPullback (G.map f) (G.map g)] :\\n  G.obj (pullback f g) ⟶ pullback (G.map f) (G.map g)\", \"doc\": \"Given morphisms $f : X \\to Z$ and $g : Y \\to Z$ in a category $\\\\mathcal{C}$ with a pullback $P = X \\times_Z Y$, and a functor $G : \\\\mathcal{C} \\to \\\\mathcal{D}$ that preserves the pullback of $G(f)$ and $G\"}\n  {\"name\": \"CategoryTheory.Functor.IsFibered.pullbackPullbackIso\", \"module\": \"Mathlib.CategoryTheory.FiberedCategory.Fibered\", \"type\": \"{p : 𝒳 ⥤ 𝒮} [IsFibered p] {R S T : 𝒮} {a : 𝒳} (ha : p.obj a = S) (f : R ⟶ S) (g : T ⟶ R) :\\n  pullbackObj ha (g ≫ f) ≅ pullbackObj (pullbackObj_proj ha f) g\", \"doc\": \"For a fibered functor $ p : \\\\mathcal{X} \\\\to \\\\mathcal{S} $, given composable morphisms $ f : R \\\\to S $ and $ g : T \\\\to R $ in $ \\\\mathcal{S} $, and an object $ a \\\\in \\\\mathcal{X} $ with $ p(a) = S $, the\"}\n  {\"name\": \"CategoryTheory.GlueData.t'_jii\", \"module\": \"Mathlib.CategoryTheory.GlueData\", \"type\": \"(i j : D.J) : D.t' j i i = pullback.fst _ _ ≫ D.t j i ≫ inv (pullback.snd _ _)\", \"doc\": \"For gluing data $ D $ and objects $ i, j $ in the indexing category $ J $, the morphism $ D.t'(j, i, i) $ is equal to the composition of the first projection from the pullback, followed by the transpo\"}\n  {\"name\": \"TopCat.GlueData.MkCore.t'\", \"module\": \"Mathlib.Topology.Gluing\", \"type\": \"(h : MkCore.{u}) (i j k : h.J) :\\n  pullback (h.V i j).inclusion' (h.V i k).inclusion' ⟶ pullback (h.V j k).inclusion' (h.V j i).inclusion'\", \"doc\": \"Given a core gluing data structure $ h $ and indices $ i, j, k $ in its indexing set $ J $, this function constructs a continuous map between the pullbacks of inclusion maps $ V_{i,j} \\to X $ and $ V_{\"}\n  {\"name\": \"CategoryTheory.ChosenPullbacksAlong.pullbackCone\", \"module\": \"Mathlib.CategoryTheory.LocallyCartesianClosed.ChosenPullbacksAlong\", \"type\": \": PullbackCone f g\", \"doc\": \"The pullback cone constructed using the first projection $ \\\\text{fst}: P ⟶ Y $, the second projection $ \\\\text{snd}: P ⟶ Z $, and the commutativity condition $ f \\\\circ \\\\text{fst} = g \\\\circ \\\\text{snd} $\"}\n  {\"name\": \"CategoryTheory.Over.tensorHom_left_fst\", \"module\": \"Mathlib.CategoryTheory.Monoidal.Cartesian.Over\", \"type\": \"{S U : C} {R T : Over X} (fS : S ⟶ X) (fU : U ⟶ X) (f : R ⟶ mk fS) (g : T ⟶ mk fU) :\\n  (f ⊗ₘ g).left ≫ pullback.fst fS fU = pullback.fst R.hom T.hom ≫ f.left\", \"doc\": \"In a category $\\\\mathcal{C}$ with pullbacks, for any object $X$ and morphisms $f: R \\\\to S$ and $g: T \\\\to U$ in the over category $\\\\mathcal{C}/X$, the composition of the left projection of the tensor pr\"}\n  {\"name\": \"CategoryTheory.Over.tensorHom_left\", \"module\": \"Mathlib.CategoryTheory.Monoidal.Cartesian.Over\", \"type\": \"{R S T U : Over X} (f : R ⟶ S) (g : T ⟶ U) :\\n  (f ⊗ₘ g).left = pullback.map _ _ _ _ f.left g.left (𝟙 _) (by simp) (by simp)\", \"doc\": \"In the Cartesian monoidal category $\\\\mathcal{C}/X$, for any two morphisms $f: R \\\\to S$ and $g: T \\\\to U$ in the over category, the left projection of their tensor product $f \\\\otimes g$ corresponds to t\"}\n  {\"name\": \"CategoryTheory.Limits.PullbackCone.map\", \"module\": \"Mathlib.CategoryTheory.Limits.Preserves.Shapes.Pullbacks\", \"type\": \": PullbackCone (G.map f) (G.map g)\", \"doc\": \"Given a functor $ G : \\\\mathcal{C} \\\\to \\\\mathcal{D} $ and a pullback cone over morphisms $ f : X \\\\to Z $ and $ g : Y \\\\to Z $ in $ \\\\mathcal{C} $, applying $ G $ to the cone's first and second projections\"}\n",
+   "date": "2026-10-24",
+   "verdict": "No exact Mathlib match: generic categorical pullback or sheaf pullback composition does not give this tensorPullback cone-equation comparison. Reuse the existing project definition instead."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Canonical composition isomorphism for tensor pullbacks of sheaves of modules along compatible cone projections",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"SheafOfModules.pullback_assoc\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [inst_1 : CategoryTheory.Category.{v₂, u₂} D]\\n  {D' : Type u₃} [inst_2 : CategoryTheory.Category.{v₃, u₃} D'] {D'' : Type u₄}\\n  [inst_3 : CategoryTheory.Category.{v₄, u₄} D''] {J : CategoryTheory.GrothendieckTopology C}\\n  {K :\", \"doc\": \"Given categories $\\\\mathcal{C}, \\\\mathcal{D}, \\\\mathcal{E}$ with Grothendieck topologies $J, K$, continuous functors $F : \\\\mathcal{C} \\\\to \\\\mathcal{D}$, $G : \\\\mathcal{D} \\\\to \\\\mathcal{E}$, and ring sheaf m\"}\n  {\"name\": \"SheafOfModules.pullbackComp\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous\", \"type\": \"{C : Type u₁} →\\n  [inst : CategoryTheory.Category.{v₁, u₁} C] →\\n    {D : Type u₂} →\\n      [inst_1 : CategoryTheory.Category.{v₂, u₂} D] →\\n        {D' : Type u₃} →\\n          [inst_2 : CategoryTheory.Category.{v₃, u₃} D'] →\\n            {J : CategoryTheory.GrothendieckTopology C} →\\n              {K : C\", \"doc\": \"Given categories $\\\\mathcal{C}, \\\\mathcal{D}, \\\\mathcal{E}$ with Grothendieck topologies $J, K$, continuous functors $F : \\\\mathcal{C} \\\\to \\\\mathcal{D}$, $G : \\\\mathcal{D} \\\\to \\\\mathcal{E}$, and ring sheaf m\"}\n  {\"name\": \"SheafOfModules.conjugateEquiv_pullbackComp_inv\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [inst_1 : CategoryTheory.Category.{v₂, u₂} D]\\n  {D' : Type u₃} [inst_2 : CategoryTheory.Category.{v₃, u₃} D'] {J : CategoryTheory.GrothendieckTopology C}\\n  {K : CategoryTheory.GrothendieckTopology D} {F : CategoryTheory.Functo\", \"doc\": \"Given categories $\\\\mathcal{C}, \\\\mathcal{D}, \\\\mathcal{E}$ with Grothendieck topologies $J, K$, continuous functors $F : \\\\mathcal{C} \\\\to \\\\mathcal{D}$, $G : \\\\mathcal{D} \\\\to \\\\mathcal{E}$, and ring sheaf m\"}\n  {\"name\": \"SheafOfModules.freeFunctorCompPullbackIso\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackFree\", \"type\": \"{C : Type u₁} →\\n  [inst : CategoryTheory.Category.{v₁, u₁} C] →\\n    {D : Type u₂} →\\n      [inst_1 : CategoryTheory.Category.{v₂, u₂} D] →\\n        {J : CategoryTheory.GrothendieckTopology C} →\\n          {K : CategoryTheory.GrothendieckTopology D} →\\n            {F : CategoryTheory.Functor C D} →\\n     \", \"doc\": \"Given categories $\\\\mathcal{C}$ and $\\\\mathcal{D}$ with Grothendieck topologies $J$ and $K$, a continuous functor $F : \\\\mathcal{C} \\\\to \\\\mathcal{D}$, and a natural transformation $\\\\phi : S \\\\to F_*R$ betw\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.pullbackComp\", \"module\": \"Mathlib/AlgebraicGeometry/Modules/Sheaf\", \"type\": \"{X Y Z : AlgebraicGeometry.Scheme} →\\n  (f : X ⟶ Y) →\\n    (g : Y ⟶ Z) →\\n      (AlgebraicGeometry.Scheme.Modules.pullback g).comp (AlgebraicGeometry.Scheme.Modules.pullback f) ≅\\n        AlgebraicGeometry.Scheme.Modules.pullback (CategoryTheory.CategoryStruct.comp f g)\", \"doc\": \"For any schemes $X, Y, Z$ and morphisms $f : X \\\\to Y$, $g : Y \\\\to Z$, the composition of the pullback functors along $g$ and $f$ is naturally isomorphic to the pullback functor along the composition $\"}\n  {\"name\": \"SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackFree\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [inst_1 : CategoryTheory.Category.{v₂, u₂} D]\\n  {J : CategoryTheory.GrothendieckTopology C} {K : CategoryTheory.GrothendieckTopology D}\\n  {F : CategoryTheory.Functor C D} {S : CategoryTheory.Sheaf J RingCat} {R : CategoryTheor\", \"doc\": \"Given categories $\\\\mathcal{C}$ and $\\\\mathcal{D}$ with Grothendieck topologies $J$ and $K$, a continuous functor $F : \\\\mathcal{C} \\\\to \\\\mathcal{D}$, and a natural transformation $\\\\phi : S \\\\to F_*R$ betw\"}\n  {\"name\": \"SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom_assoc\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackFree\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [inst_1 : CategoryTheory.Category.{v₂, u₂} D]\\n  {J : CategoryTheory.GrothendieckTopology C} {K : CategoryTheory.GrothendieckTopology D}\\n  {F : CategoryTheory.Functor C D} {S : CategoryTheory.Sheaf J RingCat} {R : CategoryTheor\", \"doc\": \"Given categories $\\\\mathcal{C}$ and $\\\\mathcal{D}$ with Grothendieck topologies $J$ and $K$, a continuous functor $F : \\\\mathcal{C} \\\\to \\\\mathcal{D}$, and a natural transformation $\\\\phi : S \\\\to F_*R$ betw\"}\n  {\"name\": \"SheafOfModules.pullbackObjFreeIso\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackFree\", \"type\": \"{C : Type u₁} →\\n  [inst : CategoryTheory.Category.{v₁, u₁} C] →\\n    {D : Type u₂} →\\n      [inst_1 : CategoryTheory.Category.{v₂, u₂} D] →\\n        {J : CategoryTheory.GrothendieckTopology C} →\\n          {K : CategoryTheory.GrothendieckTopology D} →\\n            {F : CategoryTheory.Functor C D} →\\n     \", \"doc\": \"Given categories $\\\\mathcal{C}$ and $\\\\mathcal{D}$ with Grothendieck topologies $J$ and $K$, a continuous functor $F : \\\\mathcal{C} \\\\to \\\\mathcal{D}$, and a natural transformation $\\\\phi : S \\\\to F_*R$ betw\"}\n",
+   "date": "2026-10-24",
+   "verdict": "No exact Mathlib match: generic categorical pullback or sheaf pullback composition does not give this tensorPullback cone-equation comparison. Reuse the existing project definition instead."
+  },
+  {
+   "tool": "grep",
+   "query": "affineLimitTensorPullbackComparison|tensorPullbackSectionComp|tensorPullback.*[Cc]omp",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-24",
+   "verdict": "No exact Mathlib match: generic categorical pullback or sheaf pullback composition does not give this tensorPullback cone-equation comparison. Reuse the existing project definition instead."
+  },
+  {
+   "tool": "grep",
+   "query": "rg -n '(def|abbrev) affineLimitTensorPullbackComparison|def tensorPullbackSectionComp' lean/WeilConjectures",
+   "results": "(no matches)",
+   "date": "2026-10-24",
+   "verdict": "No source-library definition of this cone comparison."
+  },
+  {
+   "tool": "grep",
+   "query": "rg -n '(def|abbrev) affineLimitTensorPullbackComparison|def tensorPullbackSectionComp' lean/Sheaf",
+   "results": "/home/ubuntu/weil-conjectures-sheaf-shared/lean/Sheaf/AlgebraicGeometry/TensorPullbackSectionAdjunction.lean:84:noncomputable def tensorPullbackSectionComp {X Y Z : Scheme.{u}}\n/home/ubuntu/weil-conjectures-sheaf-shared/lean/Sheaf/AlgebraicGeometry/FinitePresentationAffineLimitDescent.lean:41:noncomputable def affineLimitTensorPullbackComparison\n",
+   "date": "2026-10-24",
+   "verdict": "The exact comparison is already a real definition in Sheaf.AlgebraicGeometry.FinitePresentationAffineLimitDescent, built from tensorPullbackSectionComp. Attach existing:true; do not duplicate it."
+  },
+  {
+   "tool": "grep",
+   "query": "rg affineLimitTensorPullbackComparison dag/nodes, followed by exact lean.declaration/declarations ownership check; tools/blueprint_refs.py search \"tensor pullback\"",
+   "results": "Only lem-trf-fp-modules-affine-limit-descent records this declaration in lean.declarations; its kind is statement. No definition node owns the declaration. 0 blueprint nodes match 'tensor pullback'.",
+   "date": "2026-10-24",
+   "verdict": "New definition node needed to own the existing plain definition; no duplicate definition node found."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-fp-module-limit-isomorphism-descent",
+  "date": "2026-10-24",
+  "group": "Q19"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "The eventual-isomorphism subargument below lem-trf-local-term-locality (Stacks 0B8W (2) via 01ZR (2),(3)): canonical identifications of successive and direct tensor pullbacks used in the specified-lift equations of lem-trf-fp-module-limit-isomorphism-descent.",
+   "via": [
+    "lem-trf-fp-module-limit-isomorphism-descent",
+    "lem-trf-invertible-affine-limit-descent",
+    "lem-trf-ample-neighbourhood",
+    "lem-trf-proper-fibrewise-ample-projective",
+    "lem-trf-temkin-stable-modification",
+    "lem-trf-stable-modification-flat-curve-pair",
+    "lem-trf-dejong-relative-marked-semistable",
+    "lem-trf-relative-marked-nodal-reduction",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.FinitePresentationAffineLimitDescent",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.affineLimitTensorPullbackComparison",
+  "statement": "def affineLimitTensorPullbackComparison\n    {I : Type u} [Preorder I] (D : Iᵒᵖ ⥤ Scheme.{u}) (c : Cone D)\n    {i j : I} (hij : i ≤ j) (M : (D.obj (op i)).Modules) :\n    (tensorPullback (c.π.app (op j))).obj\n        ((tensorPullback (D.map (homOfLE hij).op)).obj M) ≅\n      (tensorPullback (c.π.app (op i))).obj M",
+  "branch": "newtargets-dag",
+  "by": "Q19",
+  "date": "2026-10-24",
+  "existing": true,
+  "note": "Ownership repair explicitly requested by return H2 on b5c789450944. This existing plain definition is implemented in the module of lem-trf-fp-modules-affine-limit-descent, but does not use that theorem. Its data are the inverse section-normalized tensorPullbackSectionComp and eqToIso along c.w. This definition node owns the comparison without copying, moving, or redefining it; the isomorphism-descent item cites this node in stmt_deps while retaining the descent theorem in proof_deps."
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-b2dec8102",
+  "group": "Q19",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-b2dec8102",
+  "group": "Q19",
+  "result": "pass",
+  "note": "Re-delivery after RETURN H2 at b5c7. The Lean file is byte-identical to the b5c7 version I checked clause by clause, and lean.statement is verbatim in it. Against live, the item differs only in the added lean record and in stmt_deps, where the theorem node lem-trf-fp-modules-affine-limit-descent is replaced by the new definition node def-trf-affine-limit-tensor-pullback-comparison; the theorem node stays in proof_deps. The new node is existing:true on the real live definition (statement verbatim in FinitePresentationAffineLimitDescent.lean), describes it exactly (inverse of tensorPullbackSectionComp, then eqToIso along c.w, unit m to 1⊗m), assumes nothing extra, and cites def-pc-scheme, def-weil-sheaf-of-modules-category and def-pc-module-pullback with sources 01ZR (2) and 0097. Gates: nothing hollow, proof is sorry only, source and blueprint docstrings present, real Worker report and Second reading by Q19 sections. Advisory: the existing definition's docstring still names the theorem node as its blueprint node. No compile, since there is no fix and the file is unchanged."
+ }
+}

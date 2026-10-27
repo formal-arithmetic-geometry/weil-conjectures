@@ -1,0 +1,370 @@
+{
+ "id": "lem-sfb-space-proj-homogeneous-ideal-recovery",
+ "kind": "statement",
+ "title": "Recovery of a closed subspace of relative Proj by a homogeneous ideal",
+ "statement": "Let $S$ be a scheme [def-pc-scheme], let $X$ be an algebraic space over $S$ [def-trf-algebraic-space], and use the universes of [def-weil-size-convention]. Let $\\mathcal A=\\bigoplus_{n\\geq0}\\mathcal A_n$ be a commutative unital graded $\\mathcal O_X$-algebra [def-trf-etale-graded-module-algebra] whose components are quasi-coherent [def-trf-space-quasi-coherent-module]. Assume the structure morphism $p:P_X(\\mathcal A)\\to X$ of [lem-sfb-space-relative-proj-scheme-tests] is quasi-compact, meaning its pullback over every affine scheme has quasi-compact source. For every closed subspace $i:Z\\hookrightarrow P_X(\\mathcal A)$, where closed means representable by closed immersions on scheme tests [def-weil-closed-immersion], there is a homogeneous ideal $\\mathcal I=\\bigoplus_{n\\geq0}\\mathcal I_n\\subseteq\\mathcal A$ with each $\\mathcal I_n\\subseteq\\mathcal A_n$ quasi-coherent and with products $\\mathcal A_m\\mathcal I_n\\subseteq\\mathcal I_{m+n}$, such that the quotient-induced closed immersion identifies $$P_X(\\mathcal A/\\mathcal I)=Z$$ as closed subspaces of $P_X(\\mathcal A)$. Quotients and their induced closed immersions are [lem-sfb-space-qcoh-affine-chart-calculus, lem-sfb-space-relative-proj-quotient-closed-immersion]. No quasi-compactness or quasi-separatedness of $X$, finite presentation of $i$, or finite generation of the graded algebra is assumed.",
+ "source": {
+  "document": "literature/stacks-project/spaces-divisors.tex",
+  "place": "Tag 085L, lemma-closed-subscheme-proj; existential consequence of the canonical graded kernel construction in the statement. The quotient-induced identification is the statement of the lemma."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-trf-algebraic-space",
+  "def-weil-size-convention",
+  "def-trf-etale-graded-module-algebra",
+  "def-trf-space-quasi-coherent-module",
+  "lem-sfb-space-relative-proj-scheme-tests",
+  "def-weil-closed-immersion",
+  "lem-sfb-space-qcoh-affine-chart-calculus",
+  "lem-sfb-space-relative-proj-quotient-closed-immersion"
+ ],
+ "proof": [
+  {
+   "text": "First $p$ is separated. On an affine etale chart $U\\to X$, its pullback is $\\operatorname{Proj}C\\to U$ by [lem-sfb-space-relative-proj-scheme-tests] and [def-nagata-relative-proj], with $C=\\bigoplus_n\\mathcal A_n(U)$. The scheme $\\operatorname{Proj}C$ is separated over $\\operatorname{Spec}\\mathbf Z$ by [lem-trf-proj-separated]. Its diagonal over $U$ is the pullback of its absolute diagonal along $\\operatorname{Proj}C\\times_U\\operatorname{Proj}C\\to\\operatorname{Proj}C\\times_{\\mathbf Z}\\operatorname{Proj}C$, hence is closed by [lem-weil-pbc-closed-immersion-base-change]. The atlas may be refined by affine opens. Apply [lem-trf-space-qc-separated-etale-local] to this family: the pulled-back sources are quasi-compact by the hypothesis on $p$, and their maps are separated as just proved. Thus $p$ is quasi-compact separated, without any compactness assumption on $X$.",
+   "uses": [
+    "lem-sfb-space-relative-proj-scheme-tests",
+    "def-nagata-relative-proj",
+    "lem-trf-proj-separated",
+    "lem-weil-pbc-closed-immersion-base-change",
+    "lem-trf-space-qc-separated-etale-local"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-divisors.tex",
+    "place": "Tag 084E (lemma-relative-proj-separated), used in Tag 085L, first paragraph."
+   }
+  },
+  {
+   "text": "Write $B=i_*\\mathcal O_Z$. By [lem-sfb-space-ideal-closed-subspace-correspondence], $\\mathcal O_P\\twoheadrightarrow B$ has a quasi-coherent ideal kernel $K$. Hence $B=\\mathcal O_P/K$, the cokernel of $K\\to\\mathcal O_P$, is quasi-coherent by [lem-sfb-space-qcoh-kernels-colimits], with chart sections computed by [lem-sfb-space-qcoh-affine-chart-calculus]. Take $E_n,\\psi$ from [lem-sfb-space-relative-proj-graded-twists] and put $F_n=E_n\\otimes B$ for $n\\geq0$. Each $F_n$ is quasi-coherent by the tensor clause of the chart calculus. Its products are $(x\\otimes b)(y\\otimes c)=xy\\otimes bc$; the unit is the image of $1$. Composing $\\psi_n$ with $E_n\\to F_n$ and taking its adjunct gives $\\alpha_n:\\mathcal A_n\\to p_*F_n$ [def-trf-space-etale-module-functors]. Products of compatible sections give the graded multiplication on $(p_*F_n)_n$, and $\\alpha_{m+n}(ab)=\\alpha_m(a)\\alpha_n(b)$ because $\\psi$ and $\\mathcal O_P\\to B$ respect multiplication. The direct images $p_*F_n$ are quasi-coherent by [lem-trf-space-qc-separated-quasi-coherent-pushforward] and step 1. Define $\\mathcal I_n=\\ker\\alpha_n$. Its quasi-coherence is the kernel clause of [lem-sfb-space-qcoh-kernels-colimits], and the chart calculus computes it on affine charts; the displayed product equation gives $\\mathcal A_m\\mathcal I_n\\subseteq\\mathcal I_{m+n}$. Thus $\\mathcal I=\\bigoplus_n\\mathcal I_n$ is the required kind of homogeneous ideal and $\\mathcal A/\\mathcal I$ is a graded quasi-coherent quotient, degree by degree. No assertion that sections commute with infinite coproducts is used.",
+   "uses": [
+    "lem-sfb-space-ideal-closed-subspace-correspondence",
+    "lem-sfb-space-qcoh-affine-chart-calculus",
+    "lem-sfb-space-qcoh-kernels-colimits",
+    "lem-sfb-space-relative-proj-graded-twists",
+    "def-trf-space-etale-module-functors",
+    "lem-trf-space-qc-separated-quasi-coherent-pushforward"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-divisors.tex",
+    "place": "Tag 085L (lemma-closed-subscheme-proj), canonical kernel and quasi-coherence paragraph; Tag 084D supplies the twisting algebra."
+   }
+  },
+  {
+   "text": "Fix an affine etale chart $U\\to X$, and set $P_U=P\\times_XU$ and $Z_U=Z\\times_PP_U$. The first is a scheme by [lem-sfb-space-relative-proj-scheme-tests], and the second is a closed subscheme by the meaning of a representable closed immersion. Restricting the direct-image chart diagram of [def-trf-space-etale-module-functors] to an etale object $V\\to U$ gives exactly the diagram of charts over $P\\times_XV$. Therefore $(p_*F_n)|_U=(p_U)_*(F_n|_{P_U})$ with the same evaluation maps. Restriction also identifies $B|_{P_U}$ with $(i_U)_*\\mathcal O_{Z_U}$ by this diagram. The twisting comparison of step 2 and [lem-trf-scheme-zariski-etale-quasi-coherent-equivalence] identify these objects, products and maps with the ordinary scheme objects. Since kernels are computed on affine etale charts [lem-sfb-space-qcoh-affine-chart-calculus], the graded ideal $I=\\bigoplus_n\\mathcal I_n(U)$ is precisely the kernel of $C\\to\\bigoplus_{n\\geq0}\\Gamma(P_U,\\mathcal O_{P_U}(n)\\otimes(i_U)_*\\mathcal O_{Z_U})$, where $C=\\bigoplus_n\\mathcal A_n(U)$. This is restriction to an etale slice, not a claim of arbitrary nonflat base change for kernels or direct images.",
+   "uses": [
+    "lem-sfb-space-relative-proj-scheme-tests",
+    "def-trf-space-etale-module-functors",
+    "lem-trf-scheme-zariski-etale-quasi-coherent-equivalence",
+    "lem-sfb-space-qcoh-affine-chart-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-divisors.tex",
+    "place": "Tag 085L, last paragraph: etale localization; direct-image restriction spelled out."
+   }
+  },
+  {
+   "text": "Work on this affine base, writing $Q=\\operatorname{Proj}C$ and $H=(i_U)_*\\mathcal O_{Z_U}$. If $Q$ is empty there is nothing to compare. Otherwise its standard positive-degree homogeneous opens cover it by [def-pc-proj]: a relevant homogeneous prime misses a homogeneous positive-degree element. Since $Q$ is quasi-compact, select finitely many $D_+(f_j)$ covering $Q$. Replace $f_j$ by a positive power so all have the same degree $D>0$; the opens are unchanged because a prime contains a power exactly when it contains its base. By [lem-trf-proj-common-degree-twist-invertible], all $\\mathcal O_Q(kD)$ are invertible and multiply as tensor powers. On $D_+(f_j)$ their generator is $f_j^k$: by the fraction normalization of step 2, multiplication by $f_j^k$ identifies $(C_{f_j})_0$ with $(C_{f_j})_{kD}$, with inverse division by that power. Put $T_j=C_{(f_j)}$ and let $J_j=\\ker(T_j\\to H(D_+(f_j)))$. The ideal/closed-subspace correspondence of step 2 identifies these with the actual scheme-theoretic ideals of $Z_U$ on the charts.",
+   "uses": [
+    "def-pc-proj",
+    "lem-trf-proj-common-degree-twist-invertible"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/divisors.tex",
+    "place": "Reduction in divisors.tex Tag 0801 (lemma-closed-subscheme-proj), finite homogeneous cover and common multiple of degrees."
+   }
+  },
+  {
+   "text": "The quotient-induced closed immersion $Q'=\\operatorname{Proj}(C/I)\\hookrightarrow Q$ is the scheme test of [lem-sfb-space-relative-proj-quotient-closed-immersion]. On $D_+(f_j)$ it has ideal $J'_j=\\{g/f_j^e:g\\in I_{eD},\\ e\\geq0\\}\\subseteq T_j$. Indeed its chart map is the ordinary map $C_{(f_j)}\\to(C/I)_{(\\bar f_j)}$ induced by the quotient. It is onto by lifting homogeneous numerators. A degree-zero fraction maps to zero exactly when $f_j^l g\\in I$ for some $l\\geq0$, and then it equals $(f_j^l g)/f_j^{e+l}$; this proves the asserted kernel formula directly from the localization relation [def-nagata-homogeneous-localization-degree-zero]. For $g\\in I_{eD}$, its canonical section maps to zero in $\\Gamma(Q,\\mathcal O_Q(eD)\\otimes H)$ by step 3. Trivializing by $f_j^e$ shows that $g/f_j^e$ vanishes on $Z_U\\cap D_+(f_j)$. Hence $J'_j\\subseteq J_j$. This argument retains the full ideal, including nilpotents.",
+   "uses": [
+    "lem-sfb-space-relative-proj-quotient-closed-immersion",
+    "def-nagata-homogeneous-localization-degree-zero"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/divisors.tex",
+    "place": "divisors.tex Tag 0801, inclusion of chart ideals; quotient chart kernel written out."
+   }
+  },
+  {
+   "text": "Conversely fix $f=f_0$ and a fraction $g/f^e\\in J_0$, with $g\\in C_{eD}$. On each $D_+(f_j)$ set $a_j=f/f_j\\in T_j$ and let $t_j$ be the image of $g/f_j^e$ in the quasi-coherent module $H$ there. On $D(a_j)=D_+(f)\\cap D_+(f_j)$, this image equals $a_j^e$ times the restriction of $g/f^e$, so is zero. Apply [pqf-lem-qcoh-compact-section-power-torsion] to the affine scheme $D_+(f_j)$, its quasi-coherent module $H$, regular function $a_j$ and section $t_j$. Its conclusion gives $N_j\\geq0$ with $a_j^{N_j}t_j=0$. There are finitely many charts, so take $N\\geq N_j$ for all $j$. The section $f^Ng$ of $\\mathcal O_Q((e+N)D)\\otimes H$ has coefficient $a_j^N t_j=0$ in the frame $f_j^{e+N}$ on every chart. The sheaf axiom makes it zero globally; hence $f^Ng\\in I_{(e+N)D}$ by step 3. Thus $g/f^e=(f^Ng)/f^{e+N}\\in J'_0$. The argument works for any chosen chart, so $J_j=J'_j$ for all $j$.",
+   "uses": [
+    "pqf-lem-qcoh-compact-section-power-torsion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/divisors.tex",
+    "place": "divisors.tex Tag 0801, reverse inclusion: uniform powers on a finite cover, with degree-consistent denominators."
+   }
+  },
+  {
+   "text": "By [lem-sfb-space-relative-proj-quotient-closed-immersion], $P'=P_X(\\mathcal A/\\mathcal I)$ is a closed subspace of $P$, and its base change to $U$ is exactly $Q'\\hookrightarrow Q$. Steps 4--6 give equality of the ideal sheaves of $Z_U$ and $Q'$ on a standard open cover; they are therefore equal as closed subschemes. Apply this over an affine refinement of an etale scheme atlas of $X$. Its pullback covers $P$ by [lem-trf-space-fibre-products-etale-covers]. The correspondence [lem-sfb-space-ideal-closed-subspace-correspondence] identifies ideals of these closed subspaces on that cover with restrictions of their ideals on $P$. The two subsheaves of $\\mathcal O_P$ are equal: a section lies in one if and only if it does after this cover, where both membership conditions agree. Thus their ideals are equal globally and the same correspondence gives $Z=P'$ as closed subspaces. If any test $Q$ is empty both closed subspaces there are empty. If $Z$ is empty, $B=0$ and $\\mathcal I=\\mathcal A$; if $Z=P$, the construction can have a nonzero irrelevant-torsion kernel, but the chart argument still gives the identity closed subspace. No reducedness or finite-presentation assumption occurred.",
+   "uses": [
+    "lem-sfb-space-relative-proj-quotient-closed-immersion",
+    "lem-trf-space-fibre-products-etale-covers",
+    "lem-sfb-space-ideal-closed-subspace-correspondence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-divisors.tex",
+    "place": "Tag 085L, final equality of closed subspaces after etale localization."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-space-relative-proj-scheme-tests",
+  "def-nagata-relative-proj",
+  "lem-trf-proj-separated",
+  "lem-weil-pbc-closed-immersion-base-change",
+  "lem-trf-space-qc-separated-etale-local",
+  "lem-sfb-space-ideal-closed-subspace-correspondence",
+  "lem-sfb-space-qcoh-affine-chart-calculus",
+  "lem-sfb-space-qcoh-kernels-colimits",
+  "lem-sfb-space-relative-proj-graded-twists",
+  "def-trf-space-etale-module-functors",
+  "lem-trf-space-qc-separated-quasi-coherent-pushforward",
+  "lem-trf-scheme-zariski-etale-quasi-coherent-equivalence",
+  "def-pc-proj",
+  "lem-trf-proj-common-degree-twist-invertible",
+  "lem-sfb-space-relative-proj-quotient-closed-immersion",
+  "def-nagata-homogeneous-localization-degree-zero",
+  "pqf-lem-qcoh-compact-section-power-torsion",
+  "lem-trf-space-fibre-products-etale-covers"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/spaces-divisors.tex",
+  "place": "Tag 085L (lemma-closed-subscheme-proj), using the chart argument of divisors.tex Tag 0801 (lemma-closed-subscheme-proj)."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Every closed subspace of quasi compact relative Proj is Proj of a quotient by a quasi coherent homogeneous ideal",
+   "results": {
+    "hits": [
+     "AlgebraicGeometry.Proj.instQuasiCompactToSpecZeroOfFiniteTypeSubtypeMemOfNatNat",
+     "AlgebraicGeometry.Proj",
+     "ProjectiveSpectrum.isClosed_iff_zeroLocus",
+     "AlgebraicGeometry.Proj.instIsProperToSpecZeroOfFiniteTypeSubtypeMemOfNatNat",
+     "AlgebraicGeometry.Proj.instUniversallyClosedToSpecZeroOfFiniteTypeSubtypeMemOfNatNat",
+     "ProjectiveSpectrum.isClosed_zeroLocus",
+     "ProjectiveSpectrum",
+     "AlgebraicGeometry.ProjIsoSpecTopComponent.fromSpec"
+    ],
+    "n_hits": 8,
+    "note": "",
+    "subdirectory": "",
+    "digest": "853a71313a3ec554",
+    "source_read": "Read Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Topology.lean:87-108,305-309 and Functor.lean:148-164: vanishingIdeal is a point-set radical construction and isClosed_iff_zeroLocus is topological, whereas this statement recovers arbitrary nonreduced closed subspaces. Ordinary Proj functoriality does not assert this result."
+   },
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Proj\", \"ker\"",
+   "results": {
+    "hits": [
+     "Lean.Kernel.Exception.invalidProj",
+     "LinearMap.iInf_ker_proj",
+     "LinearMap.iSup_range_single_eq_iInf_ker_proj",
+     "LinearMap.iInf_ker_proj_le_iSup_range_single",
+     "LinearMap.iSup_range_single_le_iInf_ker_proj",
+     "LinearMap.iInfKerProjEquiv",
+     "Submodule.ker_projection",
+     "Submodule.IsCompl.projection_ker"
+    ],
+    "n_hits": 12,
+    "note": "",
+    "subdirectory": "",
+    "digest": "1a9556cffc993d0d",
+    "source_read": "Read Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Topology.lean:87-108,305-309 and Functor.lean:148-164: vanishingIdeal is a point-set radical construction and isClosed_iff_zeroLocus is topological, whereas this statement recovers arbitrary nonreduced closed subspaces. Ordinary Proj functoriality does not assert this result."
+   },
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "[Hh]omogeneous.*[Ii]deal|[Pp]roj.*quotient|[Pp]roj.*kernel",
+   "results": {
+    "hits": [
+     "Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Topology.lean",
+     "Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Topology.lean",
+     "Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Topology.lean",
+     "Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Topology.lean",
+     "Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Topology.lean",
+     "Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Scheme.lean",
+     "Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Scheme.lean",
+     "Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Scheme.lean"
+    ],
+    "n_hits": 22,
+    "note": "",
+    "subdirectory": "AlgebraicGeometry/ProjectiveSpectrum",
+    "digest": "e0efc7d373041982",
+    "source_read": "Read Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Topology.lean:87-108,305-309 and Functor.lean:148-164: vanishingIdeal is a point-set radical construction and isClosed_iff_zeroLocus is topological, whereas this statement recovers arbitrary nonreduced closed subspaces. Ordinary Proj functoriality does not assert this result."
+   },
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A closed subspace of relative Proj is defined by a graded quasi coherent ideal without finite generation assumptions",
+   "results": {
+    "hits": [
+     "ProjectiveSpectrum.zeroLocus_vanishingIdeal_eq_closure",
+     "AlgebraicGeometry.Proj.openCoverOfMapIrrelevantEqTop",
+     "AlgebraicGeometry.Proj.basicOpen",
+     "ProjectiveSpectrum.basicOpen",
+     "ProjectiveSpectrum.vanishingIdeal_closure",
+     "ProjectiveSpectrum.vanishingIdeal",
+     "ProjectiveSpectrum.isClosed_iff_zeroLocus",
+     "AlgebraicGeometry.Proj"
+    ],
+    "n_hits": 8,
+    "note": "",
+    "subdirectory": "",
+    "digest": "407637f4547a4193",
+    "source_read": "Read Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Topology.lean:87-108,305-309 and Functor.lean:148-164: vanishingIdeal is a point-set radical construction and isClosed_iff_zeroLocus is topological, whereas this statement recovers arbitrary nonreduced closed subspaces. Ordinary Proj functoriality does not assert this result."
+   },
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Recover an arbitrary closed subscheme of a quasi compact projective spectrum as the projective spectrum of a homogeneous quotient algebra",
+   "results": {
+    "hits": [
+     "ProjectiveSpectrum.isClosed_iff_zeroLocus",
+     "ProjectiveSpectrum.asHomogeneousIdeal",
+     "AlgebraicGeometry.ProjIsoSpecTopComponent.FromSpec.toFun",
+     "AlgebraicGeometry.Proj",
+     "ProjectiveSpectrum.vanishingIdeal",
+     "ProjectiveSpectrum.mk.inj",
+     "AlgebraicGeometry.ProjIsoSpecTopComponent.ToSpec.toFun",
+     "AlgebraicGeometry.ProjIsoSpecTopComponent.ToSpec.carrier"
+    ],
+    "n_hits": 8,
+    "note": "",
+    "subdirectory": "",
+    "digest": "488fce58441d2d88",
+    "source_read": "Read Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Topology.lean:87-108,305-309 and Functor.lean:148-164: vanishingIdeal is a point-set radical construction and isClosed_iff_zeroLocus is topological, whereas this statement recovers arbitrary nonreduced closed subspaces. Ordinary Proj functoriality does not assert this result."
+   },
+   "date": "2026-10-24",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-space-proj-finite-degree-equations",
+  "date": "2026-10-24",
+  "group": "N5"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "Stacks 085M, proof, first sentence: choose the quasi-coherent graded ideal cutting out Z by 085L. This serves the inherited Chow-modification prerequisite of the current blueprint det-thm-sf-ctf-stability-direct-images, proof (3), compactification. The ancestry command returns None for the inherited created.item chain.",
+   "via": [
+    "lem-sfb-space-proj-finite-degree-equations",
+    "lem-sfb-space-blowup-finite-degree-ideal-descent",
+    "lem-sfb-space-compose-admissible-blowups",
+    "lem-sfb-space-blowup-embedding-extension",
+    "lem-sfb-space-chow-dense-modification",
+    "lem-sfb-space-supported-adic-existence",
+    "lem-sfb-space-coherent-formal-effectivity",
+    "lem-sfb-space-coherent-stack-general",
+    "lem-sfb-space-quot-representability",
+    "lem-sfb-space-hilbert-representability",
+    "lem-sfb-space-hom-representability",
+    "lem-sfb-curve-descent-isom-spaces",
+    "lem-sfb-nodal-curve-stack-smooth",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-space-proj-homogeneous-ideal-recovery",
+  "worker": "stage1",
+  "summary": "Constructed the canonical homogeneous kernel using the general space-Proj twisting algebra, quasi-coherent quotient and tensor calculus, and qc separated direct image. Proved scheme-test recovery explicitly by uniform powers on a finite common-degree standard cover, then equality of ideal sheaves etale locally. No hypotheses or statement changed. One new statement-only twisting-algebra node, not a recovery restatement. Corrected apparent degree/formula typos in the 0801 proof, detailed in report.",
+  "blueprint": "Realizes the inherited compactification/Chow-modification prerequisite of latest det-thm-sf-ctf-stability-direct-images proof (3), specifically 085M first sentence invoking 085L. Ancestry command returns None; retained inherited from.node and via. Latest unit route read; no route change. The local algebra implements 0801 rather than creating a node restating the scheme case.",
+  "tool_uses": [
+   {
+    "node": "lem-trf-space-qc-separated-etale-local",
+    "why": "Generic algebraic-space, scheme, or quasi-coherent-module foundation used only in the relative-Proj kernel/chart construction; it does not replace any six-functors unit step."
+   },
+   {
+    "node": "lem-trf-space-qc-separated-quasi-coherent-pushforward",
+    "why": "Generic algebraic-space, scheme, or quasi-coherent-module foundation used only in the relative-Proj kernel/chart construction; it does not replace any six-functors unit step."
+   },
+   {
+    "node": "lem-trf-scheme-zariski-etale-quasi-coherent-equivalence",
+    "why": "Generic algebraic-space, scheme, or quasi-coherent-module foundation used only in the relative-Proj kernel/chart construction; it does not replace any six-functors unit step."
+   },
+   {
+    "node": "lem-trf-proj-common-degree-twist-invertible",
+    "why": "Generic algebraic-space, scheme, or quasi-coherent-module foundation used only in the relative-Proj kernel/chart construction; it does not replace any six-functors unit step."
+   },
+   {
+    "node": "pqf-lem-qcoh-compact-section-power-torsion",
+    "why": "Generic algebraic-space, scheme, or quasi-coherent-module foundation used only in the relative-Proj kernel/chart construction; it does not replace any six-functors unit step."
+   },
+   {
+    "node": "lem-trf-space-fibre-products-etale-covers",
+    "why": "Generic algebraic-space, scheme, or quasi-coherent-module foundation used only in the relative-Proj kernel/chart construction; it does not replace any six-functors unit step."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-trf-space-qc-separated-etale-local",
+  "lem-trf-space-qc-separated-quasi-coherent-pushforward",
+  "lem-trf-scheme-zariski-etale-quasi-coherent-equivalence",
+  "lem-trf-proj-common-degree-twist-invertible",
+  "pqf-lem-qcoh-compact-section-power-torsion",
+  "lem-trf-space-fibre-products-etale-covers"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q19-bbe29ffad",
+  "group": "Q19",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q19-bbe29ffad (reviewer sub-agent of L); spot-checked: Read the full item and new node against Stacks spaces-divisors 085L, divisors 0801 and spaces-divisors 084D/085C (01NR checked in tags). The item is still unsplit on live/side-live with an identical statement, and there is no repair note. Statement unchanged and true; the 0801 degree typo (g/f_0^d) is correctly repaired with a common degree D. Steps: 1 (separatedness via the absolute diagonal plus base change, then the étale-local qc/separated test) OK. 3 (étale slice of p_*, Zariski/étale comparison, I(U) as a kernel) OK. 4-6 (finite common-degree D_+ cover; J'⊆J by trivialising with f_j^e; J⊆J' by power-torsion with N=max N_j) checked degree by degree. 7 (étale-local equality of ideal sheaves) OK. One fault in step 2 (C4): the quasi-coherence of O_P/K and of ker α_n was taken from the chart-calculus node, whose statement only computes sections and never says kernels or cokernels are quasi-coherent. FIX: step 2 now cites lem-sfb-space-qcoh-kernels-colimits (same unit), added to uses and proof_deps; no cycle; nothing else changed. New node lem-sfb-space-relative-proj-graded-twists = 084D: true, since degree-n localisation commutes with base change and no invertibility is claimed. It is statement-only and self-contained, and does not restate the item. It does not duplicate lem-sfb-relative-proj-twists-degree-opens (scheme base), lem-sfb-graded-proj-quotient-twist-comparison (degree-1 generated) or lem-trf-relative-proj-invertible-twist; blueprint search finds nothing. Batch-5: every listed trf citation is a generic algebraic-space, Proj or quasi-coherent definition or lemma, not part of the trace-formula or Poincaré-duality proofs; accepted. All six declared tool_uses accepted as generic. No SGA.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SpaceProjHomogeneousIdealRecovery",
+  "declaration": "AlgebraicGeometry.AlgebraicSpace.space_proj_homogeneousIdeal_recovery",
+  "file": "lean/Sheaf/AlgebraicGeometry/SpaceProjHomogeneousIdealRecovery.lean",
+  "statement": "theorem space_proj_homogeneousIdeal_recovery {S : Scheme.{u}} (C : SpaceProjCoefficients S) (R : SpaceProjSystem C) (Q : SpaceProjQuotientSystem C R) {X : AlgebraicSpace S} (A : SpaceProjInput X) (hqc : ∀ (W : Over S) (g : schemeSpace W ⟶ X), IsAffine W.left → CompactSpace (spaceProjScheme W (C.scheme A W g).affine).left) (Z : AlgebraicSpace S) (i : Z ⟶ (R.realization A).space) (hi : IsRepresentableWith (fun _ _ p ↦ IsClosedImmersion p.left) i.hom.hom) : ∃ (B : SpaceProjInput X) (φ : EtaleGradedModuleAlgebra.Hom A.algebra B.algebra) (hφ : ∀ n : ℕ, Epi (φ.degree n)), (∀ n : ℕ, (kernel (φ.degree n)).IsQuasicoherent) ∧ (∀ (m n : ℕ) (V : X.EtaleSite) (a : (A.piece m).val.obj (op V)) (t : (kernel (φ.degree n)).val.obj (op V)), ∃ c : (kernel (φ.degree (m + n))).val.obj (op V), (kernel.ι (φ.degree (m + n))).val.app (op V) c = A.algebra.mul m n V a ((kernel.ι (φ.degree n)).val.app (op V) t)) ∧ ∃ e : (R.realization B).space ≅ Z, e.hom ≫ i = Q.map φ hφ",
+  "branch": "newtargets-dag",
+  "by": "NH",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-6aa100f9d",
+  "group": "NH",
+  "result": "pass",
+  "note": "Read item node, 9 stmt_dep records (identical to side-live), Stacks spaces-divisors 085L (l.3357-3386), delivered module, and dep Lean: SpaceProjInput/Coefficients/Realization(cartesian)/System, SpaceProjQuotientSystem.map/specification/closedImmersion, EtaleGradedModuleAlgebra.mul/Hom, IsRepresentableWith. Clause match: hqc = qc source of the pullback over every affine W via R.realization.cartesian, no qc/qs on X; hi = closed immersion on scheme tests (same form as Q.closedImmersion); I_n = kernel(φ.degree n) of a degreewise-Epi graded hom (B ≅ A/I), qc conjunct, sectionwise A_m I_n ⊆ I_{m+n} conjunct; ∃ e : P(B) ≅ Z with e.hom ≫ i = Q.map φ hφ keeps nilpotents. Existential form exactly as the node asks (not the canonical-kernel formula). Edge cases Z empty, Z = P, empty Proj or base, degree 0, non-reduced Z covered. lean.statement verbatim; only sorry; no new definitions; docstrings with source, blueprint id and 7 steps; Worker report + Second reading present (same-worker second pass). No compile rerun (no file changed). Non-blocking: proof-only deps kernels-colimits and graded-twists have no Lean record yet and are not imported."
+ }
+}

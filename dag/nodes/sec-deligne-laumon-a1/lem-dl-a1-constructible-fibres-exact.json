@@ -24,148 +24,52 @@
  ],
  "proof": [
   {
-   "text": "Work first at a finite coefficient field $E$. The scheme $Y$ is Noetherian by [lem-weil-pbc-finite-type-over-noetherian], since it is of finite type over a field. A $k$-linear point $y:s=\\operatorname{Spec}k\\to Y$ is a section of the separated structure morphism, so is a closed immersion by [lem-weil-pbc-section-separated-closed-immersion]. Every map $s\\to Y$ in the statement has this form up to an automorphism of $s$: its map on the base field is a self-embedding of $k=\\overline{\\mathbf F}_q$, hence an automorphism, because it permutes each finite subfield. A scheme automorphism is itself a locally closed immersion. Thus it suffices for exactness to treat locally closed immersions.",
+   "text": "A map $s=\\operatorname{Spec}k\\to Y$ is a closed $k$-point composed with an automorphism of $s$ (a self-embedding of $\\overline{\\mathbf F}_q$ permutes every finite subfield) [lem-weil-pbc-section-separated-closed-immersion]; the schemes are Noetherian [lem-weil-pbc-finite-type-over-noetherian]. For a locally closed immersion $a$, [lem-sf-immersion-completed-pullback-comparison] and [lem-weil-pbc-integral-stratified-perfect-characterization] give an exact integral inverse image, extended to $D^b_c(-,E)$ by [prop-weil-pbc-rational-transport]. It preserves each standard half: represent an object of that half by an integral object of the corresponding integral half [def-weil-constructible-standard-tstructure] and apply the integral inverse image; at $\\Qlb$ it acts stagewise. By [lem-a1-point-realization-standard-cohomology], $\\operatorname{Fib}_{s,E}$ and $\\operatorname{Fib}_{s,\\Qlb}$ are exact and $t$-exact with finite-dimensional values, so each composite is $t$-exact and exact on hearts [lem-weil-heart-short-exact-triangles](4).",
    "uses": [
     "lem-weil-pbc-finite-type-over-noetherian",
-    "lem-weil-pbc-section-separated-closed-immersion"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
-    "place": "Remark 6.8.15 (closed immersions); elementary reduction to closed k-points"
-   }
-  },
-  {
-   "text": "For a locally closed immersion $a:S\\to Y$, [lem-sf-immersion-completed-pullback-comparison] identifies completed integral pullback with ordinary exact inverse image and says it preserves integral constructibility. Since every scheme here is of finite type over $k$, hence Noetherian and finite-dimensional with $\\ell$ invertible, [lem-weil-pbc-integral-stratified-perfect-characterization] says that the integral category of [def-weil-derived-complete-integral-detailed] used by the constructible heart is exactly the category of [def-weil-pbc-bounded-constructible-complete], with the same completed ring sheaf; the two raw rationalizations therefore coincide. Its exact rationalization is [prop-weil-pbc-rational-transport]. It preserves each half of the rational standard pair: represent an object in that half by an integral object in the corresponding half, as in [def-weil-constructible-standard-tstructure], and apply the exact integral inverse image. Consequently $La^*$ is $t$-exact. In particular this applies to $y:s\\to Y$ and to every stratum immersion used below.",
-   "uses": [
-    "lem-sf-immersion-completed-pullback-comparison",
     "prop-weil-pbc-rational-transport",
-    "def-weil-constructible-standard-tstructure",
+    "lem-weil-pbc-section-separated-closed-immersion",
+    "lem-sf-immersion-completed-pullback-comparison",
     "lem-weil-pbc-integral-stratified-perfect-characterization",
-    "def-weil-derived-complete-integral-detailed",
-    "def-weil-pbc-bounded-constructible-complete"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
-    "place": "Remark 6.8.15: inverse image under locally closed immersions is naive inverse image"
-   }
-  },
-  {
-   "text": "At $s$, [lem-weil-point-proetale-sections-exact] gives $H^r\\Gamma(s,K)=\\Gamma(s,\\mathcal H^rK)$ at the integral stage. Tensoring these module complexes with $E$ is exact by [lem-weil-pbc-localization-module-exact]. Hence the point-fibre functor of [def-weil-finite-coefficient-point] preserves both halves of the rational standard pair. Its values are bounded complexes with finite-dimensional cohomology by [lem-weil-point-sections-finiteness]. Together with Step 2 this makes $\\operatorname{Fib}_sLy^*$ a triangulated, $t$-exact functor whose restriction to the heart takes values in finite-dimensional $E$-vector spaces. The short-exact/triangle correspondence in [lem-weil-heart-short-exact-triangles], applied before and after this functor, proves that this restriction is exact.",
-   "uses": [
-    "lem-weil-point-proetale-sections-exact",
-    "lem-weil-pbc-localization-module-exact",
-    "def-weil-finite-coefficient-point",
-    "lem-weil-point-sections-finiteness",
+    "def-weil-constructible-standard-tstructure",
+    "lem-a1-point-realization-standard-cohomology",
     "lem-weil-heart-short-exact-triangles"
    ],
    "elementary": false,
    "source": {
     "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
-    "place": "Proposition 6.8.14(2), Remark 6.8.15; evaluation on Spec k and passage to E"
+    "place": "§6.8, Proposition 6.8.14 and Remark 6.8.15; assembly of returned proof."
    }
   },
   {
-   "text": "Pass to $\\Qlb$ using the actual common-stage category, rather than a discrete constant-coefficient category. By [prop-weil-pbc-common-stage-calculus], every finite diagram of objects, arrows and asserted equalities has a representative at a common finite field. By [prop-constructible-truncations], truncations commute with finite scalar extension and with the coefficient transitions. Thus heart objects may be replaced by $H^0$ of their representatives; kernels and cokernels are obtained from cones by the formulas in [lem-weil-heart-short-exact-triangles], and are represented at the same stage. The immersion pullbacks of Step 2 preserve the two halves stagewise. The point-fibre scalar comparisons of [lem-weil-point-sections-scalar-extension] and [def-weil-finite-coefficient-point] make Step 3 independent of representatives. Finally [lem-weil-cohomology-commutes-scalar-extension] identifies its degree-zero value with the finite-stage vector space tensored with $\\Qlb$. The short-exact/triangle criterion again proves exactness of every fibre functor on $\\Sh_c(Y,\\Qlb)$.",
+   "text": "A heart object $(E,K)$ is isomorphic to $(E,F_E)$ with $F_E=\\tau^{\\ge0}\\tau^{\\le0}K\\in\\Sh_c(Y,E)$, truncations being computed at a finite stage [prop-constructible-truncations, prop-weil-pbc-common-stage-calculus]; its fibre at $\\bar y$ is $(E,\\operatorname{Fib}_{s,E}(L\\bar y^*F_E))$ [def-weil-finite-coefficient-point]. If it vanishes, so does $\\operatorname{Fib}_{s,E}(L\\bar y^*F_E)$, as $V\\otimes_E M=0$ forces $V=0$. [lem-dl-a1-heart-connected-lisse-strata] supplies connected lisse strata, and [lem-dl-a1-finite-stage-fibre-vanishing] computes their ranks and gives $F_E=0$ by open–closed devissage.",
    "uses": [
-    "prop-weil-pbc-common-stage-calculus",
     "prop-constructible-truncations",
-    "lem-weil-heart-short-exact-triangles",
-    "lem-weil-point-sections-scalar-extension",
+    "prop-weil-pbc-common-stage-calculus",
     "def-weil-finite-coefficient-point",
-    "lem-weil-cohomology-commutes-scalar-extension"
+    "lem-dl-a1-heart-connected-lisse-strata",
+    "lem-dl-a1-finite-stage-fibre-vanishing"
    ],
    "elementary": false,
    "source": {
     "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
-    "place": "Proposition 6.8.14 and the common-stage coefficient construction"
+    "place": "§6.8, Proposition 6.8.14 and Remark 6.8.15; assembly of returned proof."
    }
   },
   {
-   "text": "To prove zero-object detection, take $F\\in\\Sh_c(Y,\\Qlb)$ represented by a heart object $F_E$ over one finite field, as in Step 4. Use the equivalence $J_Y$ of [lem-weil-pbc-condensed-e-realization]; its source category is the raw rationalization of [def-weil-pbc-bounded-constructible-complete], which is the category $D^b_c(Y,E)$ containing $F_E$ by the identification of integral categories in [lem-weil-pbc-integral-stratified-perfect-characterization] (Step 2). Its coefficient ring is the sheaf of continuous $E$-valued functions, and it is induced by derived extension of scalars from the completed integral ring, not by extension to a discrete constant sheaf. That extension is exact by [lem-weil-pbc-continuous-integral-scalar-exact]; it therefore preserves cohomology by [lem-sp-exact-functor-preserves-homology]. The definitions of the rational standard pair imply that $J_Y$ sends both halves into the ambient standard halves. Thus $J_Y(F_E)$ is a sheaf in degree zero. The same realization lemma says its cohomology is stratified locally free of finite rank over the continuous coefficient sheaf. The essential-image assertion of [lem-tw-lisse-rational-realization] identifies these locally free sheaves with the lisse subcategory of the rational heart, so $F_E$ restricts to a lisse $E$-sheaf on each stratum. The pullback comparisons in that lemma identify these restrictions with $J_S(La^*F_E)$.",
+   "text": "By [lem-sp-exact-functor-preserves-homology], exact fibres preserve kernels, cokernels and images. Fibrewise invertibility of $u$ makes its kernel and cokernel zero by Step 2, so $u$ is invertible; fibrewise zero makes its image zero, so $u=0$. Apply [lem-weil-pbc-jointly-reflect-short-exact] to these exact, jointly conservative functors to obtain the short-exactness criterion.",
    "uses": [
-    "lem-weil-pbc-condensed-e-realization",
-    "lem-weil-pbc-continuous-integral-scalar-exact",
     "lem-sp-exact-functor-preserves-homology",
-    "def-weil-constructible-standard-tstructure",
-    "lem-tw-lisse-rational-realization",
-    "lem-weil-pbc-integral-stratified-perfect-characterization",
-    "def-weil-derived-complete-integral-detailed",
-    "def-weil-pbc-bounded-constructible-complete"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
-    "place": "Proposition 6.8.14(2), Definition 6.8.6; finite-stage realization bridge"
-   }
-  },
-  {
-   "text": "Refine the partition of Step 5 to a good stratification using [lem-sfb-noetherian-good-stratification-refinement]; the realized sheaf $L_S=J_S(La^*F_E)$ is still lisse on each refined stratum $S$, by restriction. Give $S$ its reduced subscheme structure: it is a separated finite-type $k$-scheme whose underlying space is Noetherian [lem-weil-pbc-finite-type-over-noetherian]. By [lem-sfb-noetherian-connected-components-open] its connected components $C$ are finitely many and open, so they form a finite Zariski open covering of $S$ by nonempty connected separated finite-type $k$-schemes. Each $C$ has a $k$-point $x:s\\to C$: a nonempty affine open $\\operatorname{Spec}A\\subset C$ has $A\\ne0$ finitely generated over $k$, and a maximal ideal of $A$ has residue field $k$ by [lem-wf-affine-nullstellensatz-vanishing](1). Its composite $s\\to C\\to S\\to Y$ is a point tested by the hypothesis. By [det-lem-stratified-lattice-rank] the rank loci of the lisse sheaf $L_S|_C$ are open and closed in $C$; since $C$ is connected, $L_S|_C$ has one constant rank $r_C\\ge0$, i.e. it is pro-etale locally isomorphic to $E_C^{\\oplus r_C}$.",
-   "uses": [
-    "lem-sfb-noetherian-good-stratification-refinement",
-    "lem-weil-pbc-finite-type-over-noetherian",
-    "lem-sfb-noetherian-connected-components-open",
-    "lem-wf-affine-nullstellensatz-vanishing",
-    "det-lem-stratified-lattice-rank"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
-    "place": "Definition 6.8.3 and Definition 6.8.6 (lisse = locally free of finite rank on strata); Stacks 04MF and the Nullstellensatz; reviewer repair of the point-fibre argument"
-   }
-  },
-  {
-   "text": "Suppose every displayed fibre of $F$ is zero; fix a component $C$ of a stratum $S$ and its $k$-point $x$ from Step 6, and let $b:C\\to Y$ be the immersion. By Steps 3 and 4, $\\operatorname{Fib}_sLx^*Lb^*F_E$ is an $E$-vector space in degree zero whose extension to $\\Qlb$ is the fibre of $F$ at $bx$, hence zero; so it is zero, since scalar extension of a nonzero vector space contains an extended basis vector. By [lem-tw-lisse-rational-realization] for $x:s\\to C$ (its comparisons hold for all scheme morphisms of finite-type $k$-schemes), this fibre is the sections at $s$ of the ordinary pullback $x^*L_C$ of the realized lisse sheaf $L_C=L_S|_C$, which the pullback comparisons of [lem-weil-pbc-condensed-e-realization] identify with $J_C(Lb^*F_E)$; and $x^*$ sends a local basis to a local basis, so $x^*L_C$ is pro-etale locally $E_s^{\\oplus r_C}$. Take a nonempty affine member $W=\\operatorname{Spec}B$ of such a trivializing covering of $s$. The one-point space $s$ is w-local with extremally disconnected component space and $k$ is strictly henselian [def-weil-pbc-w-local, def-weil-pbc-henselian-terminology], and $k\\to B$ is faithfully flat weakly etale, so [lem-weil-pbc-wcontractible-geometric-criterion] gives a retraction, i.e. a section $\\sigma:s\\to W$ over $s$. The sections of $x^*L_C$ at $s$ equal those of its restriction to $W$ at $(s,\\sigma)$, namely $E_s(s)^{\\oplus r_C}=E^{\\oplus r_C}$, using the continuous-function description of the coefficient ring in [lem-weil-pbc-condensed-e-realization]. Hence $r_C=0$, so $L_C$ is pro-etale locally zero and therefore zero. The components cover $S$, so [lem-sfb-sheaf-cover-local-isomorphism], applied to $0\\to L_S$, gives $L_S=0$. Since $J_S$ is an equivalence [lem-weil-pbc-condensed-e-realization], $La^*F_E=0$, i.e. $F_E|_S=0$ for every stratum.",
-   "uses": [
-    "lem-tw-lisse-rational-realization",
-    "lem-weil-pbc-condensed-e-realization",
-    "def-weil-pbc-w-local",
-    "def-weil-pbc-henselian-terminology",
-    "lem-weil-pbc-wcontractible-geometric-criterion",
-    "lem-sfb-sheaf-cover-local-isomorphism"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
-    "place": "Definition 6.8.3 (lisse E-sheaves locally free of finite rank) and Proposition 6.8.14(2); evaluation at the weakly contractible point Spec k; reviewer repair"
-   }
-  },
-  {
-   "text": "A finite good stratification has a stratum open in the union of the remaining strata: choose one maximal in the closure order; its complement is a finite union of closed strata-closures. Remove such an open stratum successively. At each stage [prop-sf-open-closed-triangle-all-stages] gives $j_!j^*F_E\\to F_E\\to i_*i^*F_E\\to$. The restriction to the removed stratum is zero by Step 7, and the restriction to its closed complement is zero by induction on the number of strata. Thus both outer terms are zero, and $F_E=0$. On the empty scheme the empty covering and the sheaf axiom force every module to be zero; this is the zero-stratum base case. Therefore $F=0$. This proves joint zero-object detection without any assertion about arbitrary pro-etale sheaves.",
-   "uses": [
-    "prop-sf-open-closed-triangle-all-stages"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
-    "place": "Definition 6.8.6, finite stratification devissage using open-closed triangles"
-   }
-  },
-  {
-   "text": "For a morphism $u:F\\to G$, exactness of the fibres (Step 4) identifies the fibres of $\\ker u$ and $\\operatorname{coker}u$ with the corresponding vector-space kernel and cokernel, by [lem-sp-exact-functor-preserves-homology](a). If every fibre map is an isomorphism, both objects have zero fibres, hence are zero by Step 8, so $u$ is an isomorphism. This is joint conservativity. If every fibre map is zero, [lem-sp-exact-functor-preserves-homology](b) gives zero fibres of $\\operatorname{im}u$; Step 8 gives $\\operatorname{im}u=0$, hence $u=0$.",
-   "uses": [
-    "lem-sp-exact-functor-preserves-homology"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
-    "place": "Lemma 6.8.7; elementary kernel, cokernel and image argument"
-   }
-  },
-  {
-   "text": "Apply [lem-weil-pbc-jointly-reflect-short-exact] to the abelian constructible heart and the family of geometric coefficient fibres. Step 4 supplies preservation of finite limits and colimits and zero morphisms (exact additive functors), and Step 9 supplies joint reflection of isomorphisms. Its conclusion is precisely the claimed equivalence between short exactness in the heart and short exactness of every sequence of finite-dimensional fibres.",
-   "uses": [
     "lem-weil-pbc-jointly-reflect-short-exact"
    ],
    "elementary": false,
    "source": {
     "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
-    "place": "Finite-stage stalk criterion (Stacks Tag 03PU), transferred to the constructible heart"
+    "place": "§6.8, Proposition 6.8.14 and Remark 6.8.15; assembly of returned proof."
    }
   },
   {
-   "text": "For Weil sheaves, Frobenius pullback preserves the standard truncations by [prop-constructible-truncations], and is an autoequivalence. In the fixed-pair description [def-weil-weil-sheaf-complex, def-weil-endofunctor-fixed-pair-category], the kernel of an equivariant arrow inherits its structure isomorphism by the kernel universal property, applied to the commuting square; its inverse is induced by the inverse Frobenius structures. The identical cokernel construction gives a cokernel fixed pair. Thus kernels and cokernels are created in the underlying heart, and the faithful forgetful functor is exact and reflects exactness and zero arrows. Steps 4, 9 and 10 therefore give all the stated Weil-sheaf assertions after forgetting structure.",
+   "text": "Frobenius pullback is an autoequivalence commuting with standard truncations [prop-constructible-truncations]. In the fixed-pair description [def-weil-weil-sheaf-complex, def-weil-endofunctor-fixed-pair-category], the kernel universal property applied to the equivariance square induces its Frobenius isomorphism; the inverse comes from the inverse structure maps. The cokernel has the dual construction. Thus forgetting creates kernels and cokernels and is faithful, exact and reflects exactness. Applying Steps 1–3 after forgetting proves the Weil assertions.",
    "uses": [
     "prop-constructible-truncations",
     "def-weil-weil-sheaf-complex",
@@ -174,57 +78,40 @@
    "elementary": true,
    "source": {
     "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
-    "place": "Weil structures: fixed pairs; Proposition 6.8.14 and ordinary heart operations"
+    "place": "§6.8, Proposition 6.8.14 and Remark 6.8.15; assembly of returned proof."
    }
   },
   {
-   "text": "Finally, on a locally finite-type $k_0$-scheme use separated finite-type affine opens. Restriction to an open is exact by the immersion argument of Step 2, locally at a finite coefficient stage. For a short complex form its kernel at the left, its middle homology and its cokernel at the right; [lem-sp-exact-functor-preserves-homology] says these restrict to the corresponding three defects. A locally constructible defect which restricts to zero on the covering is zero: it suffices to test this on every affine open $V$ of finite type, which is separated, so that $V$ is covered by its finitely many separated finite-type intersections with members of the covering; realize the defect on $V$ by Step 5 as a continuous-coefficient module sheaf and apply [lem-sfb-sheaf-cover-local-isomorphism] to its zero map. A finite subcover suffices there, so all required diagrams and their zero restrictions can be taken at a common finite coefficient stage by [prop-weil-pbc-common-stage-calculus]. Hence the three defects vanish globally exactly when they vanish on the covering. This proves the locality clause; no global finite coefficient field on a non-quasi-compact scheme is required.",
+   "text": "By [lem-dl-a1-local-heart-cover-defects], the left kernel, middle homology and right cokernel are computed on separated finite-type opens, and vanish exactly when their restrictions to the covering vanish. A short complex is short exact exactly when these three defects vanish; this gives the locality assertion, including non-quasi-compact schemes.",
    "uses": [
-    "lem-sp-exact-functor-preserves-homology",
-    "lem-sfb-sheaf-cover-local-isomorphism",
-    "prop-weil-pbc-common-stage-calculus"
+    "lem-dl-a1-local-heart-cover-defects"
    ],
    "elementary": false,
    "source": {
     "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
-    "place": "Remark 6.8.15 and sheaf locality for open covers"
+    "place": "§6.8, Proposition 6.8.14 and Remark 6.8.15; assembly of returned proof."
    }
   }
  ],
  "proof_deps": [
   "lem-weil-pbc-finite-type-over-noetherian",
+  "prop-weil-pbc-rational-transport",
   "lem-weil-pbc-section-separated-closed-immersion",
   "lem-sf-immersion-completed-pullback-comparison",
-  "prop-weil-pbc-rational-transport",
-  "def-weil-constructible-standard-tstructure",
   "lem-weil-pbc-integral-stratified-perfect-characterization",
-  "def-weil-derived-complete-integral-detailed",
-  "def-weil-pbc-bounded-constructible-complete",
-  "lem-weil-point-proetale-sections-exact",
-  "lem-weil-pbc-localization-module-exact",
-  "def-weil-finite-coefficient-point",
-  "lem-weil-point-sections-finiteness",
+  "def-weil-constructible-standard-tstructure",
+  "lem-a1-point-realization-standard-cohomology",
   "lem-weil-heart-short-exact-triangles",
-  "prop-weil-pbc-common-stage-calculus",
   "prop-constructible-truncations",
-  "lem-weil-point-sections-scalar-extension",
-  "lem-weil-cohomology-commutes-scalar-extension",
-  "lem-weil-pbc-condensed-e-realization",
-  "lem-weil-pbc-continuous-integral-scalar-exact",
+  "prop-weil-pbc-common-stage-calculus",
+  "def-weil-finite-coefficient-point",
+  "lem-dl-a1-heart-connected-lisse-strata",
+  "lem-dl-a1-finite-stage-fibre-vanishing",
   "lem-sp-exact-functor-preserves-homology",
-  "lem-tw-lisse-rational-realization",
-  "lem-sfb-noetherian-good-stratification-refinement",
-  "lem-sfb-noetherian-connected-components-open",
-  "lem-wf-affine-nullstellensatz-vanishing",
-  "det-lem-stratified-lattice-rank",
-  "def-weil-pbc-w-local",
-  "def-weil-pbc-henselian-terminology",
-  "lem-weil-pbc-wcontractible-geometric-criterion",
-  "lem-sfb-sheaf-cover-local-isomorphism",
-  "prop-sf-open-closed-triangle-all-stages",
   "lem-weil-pbc-jointly-reflect-short-exact",
   "def-weil-weil-sheaf-complex",
-  "def-weil-endofunctor-fixed-pair-category"
+  "def-weil-endofunctor-fixed-pair-category",
+  "lem-dl-a1-local-heart-cover-defects"
  ],
  "proof_origin": {
   "by": "agent",
@@ -337,11 +224,11 @@
   "is": null
  },
  "split_report": {
-  "date": "2026-10-18",
+  "date": "2026-10-22",
   "item": "lem-dl-a1-constructible-fibres-exact",
   "worker": "stage1",
-  "summary": "Proved finite-stage exactness, passed through the actual common-stage category, and detected zero objects by finite connected lisse strata and k-points; derived conservativity, zero-map detection, short exactness, Weil and locality clauses. No new nodes. No statement correction. Maintainer reader repair: Steps 2 and 5 cite the identification of the two integral constructible categories; Steps 6-7 detect zero by constant rank on connected components and point sections at Spec k instead of the monodromy/finite-system fibre route (cor-galois-lisse-representations and lem-sfb-etale-local-monodromy-realization no longer cited); Step 12 restricts the realization to separated affine opens.",
-  "blueprint": "p-dl-a1-exact.proof.md Step 1 final sentence and Step 5 final sentence: exact geometric fibres and their detection of zero connecting maps and short exactness.",
+  "summary": "Repair of the human re-split order: four independent statement-only nodes distribute point-section/common-stage exactness, the continuous realization and connected lisse stratification, finite-stage rank/vanishing detection, and local cartesian heart defects. The unchanged statement has a short assembly proof. All twelve returned proof steps, their sources and citations are preserved verbatim in report.md with an allocation map. Existing immersion lemmas are reused rather than duplicated. Reviewer repair (Q56 maintainer reader): the point-fibre node duplicated lem-a1-point-realization-standard-cohomology and was dropped; Step 1 restores the integral-half argument for preservation of standard halves; Step 2 cites the finite-stage representation over Y.",
+  "blueprint": "p-dl-a1-exact.proof.md Step 1 final sentence and Step 5 final sentence, with the original finite-stage sections/continuous realization route preserved.",
   "tool_uses": [
    {
     "node": "lem-weil-pbc-finite-type-over-noetherian",
@@ -360,80 +247,12 @@
     "why": "Extend the integral exact pullback to the raw rational coefficient category. This is a generic tool rather than a replacement of the unit weight-gap argument."
    },
    {
-    "node": "def-weil-constructible-standard-tstructure",
-    "why": "The two rational halves are defined by integral representatives, used to check t-exactness. This is a generic tool rather than a replacement of the unit weight-gap argument."
-   },
-   {
-    "node": "lem-weil-point-proetale-sections-exact",
-    "why": "Point sections are exact and commute with cohomology, unlike sections on a general scheme. This is a generic tool rather than a replacement of the unit weight-gap argument."
-   },
-   {
-    "node": "lem-weil-pbc-localization-module-exact",
-    "why": "Inverting the coefficient uniformizer preserves exactness of module complexes. This is a generic tool rather than a replacement of the unit weight-gap argument."
-   },
-   {
-    "node": "def-weil-finite-coefficient-point",
-    "why": "The specified coefficient fibre functor at E and at common finite stages. This is a generic tool rather than a replacement of the unit weight-gap argument."
-   },
-   {
-    "node": "lem-weil-point-sections-finiteness",
-    "why": "Finite-dimensional rational cohomology of the coefficient fibre. This is a generic tool rather than a replacement of the unit weight-gap argument."
-   },
-   {
-    "node": "lem-weil-heart-short-exact-triangles",
-    "why": "Heart exactness is characterized by distinguished triangles, and defects by truncated cones. This is a generic tool rather than a replacement of the unit weight-gap argument."
-   },
-   {
-    "node": "prop-weil-pbc-common-stage-calculus",
-    "why": "Finite diagrams and equalities descend to a common finite field. This is a generic tool rather than a replacement of the unit weight-gap argument."
-   },
-   {
     "node": "prop-constructible-truncations",
     "why": "Truncations commute with finite coefficient transitions and automorphism pullback. This is a generic tool rather than a replacement of the unit weight-gap argument."
    },
    {
-    "node": "lem-weil-point-sections-scalar-extension",
-    "why": "Point evaluation is compatible with finite coefficient extensions. This is a generic tool rather than a replacement of the unit weight-gap argument."
-   },
-   {
-    "node": "lem-weil-cohomology-commutes-scalar-extension",
-    "why": "The Qbar_l fibre is the scalar extension of finite-stage cohomology. This is a generic tool rather than a replacement of the unit weight-gap argument."
-   },
-   {
-    "node": "lem-weil-pbc-condensed-e-realization",
-    "why": "Explicit equivalence from the raw rational category to continuous-coefficient complexes with stratified locally free cohomology. This is a generic tool rather than a replacement of the unit weight-gap argument."
-   },
-   {
-    "node": "lem-weil-pbc-continuous-integral-scalar-exact",
-    "why": "The actual continuous scalar extension is exact, so realization preserves the standard halves. This is a generic tool rather than a replacement of the unit weight-gap argument."
-   },
-   {
     "node": "lem-sp-exact-functor-preserves-homology",
     "why": "Exact functors preserve the kernels, cokernels, images and homology defects used here. This is a generic tool rather than a replacement of the unit weight-gap argument."
-   },
-   {
-    "node": "lem-tw-lisse-rational-realization",
-    "why": "Identifies the lisse rational heart with continuous locally free sheaves, with the exact point-fibre normalization. This is a generic tool rather than a replacement of the unit weight-gap argument."
-   },
-   {
-    "node": "lem-sfb-noetherian-good-stratification-refinement",
-    "why": "Provides a finite frontier-compatible partition for the recollement induction. This is a generic tool rather than a replacement of the unit weight-gap argument."
-   },
-   {
-    "node": "lem-sfb-noetherian-connected-components-open",
-    "why": "Finite open connected components let one test a lisse stratum componentwise. This is a generic tool rather than a replacement of the unit weight-gap argument."
-   },
-   {
-    "node": "lem-wf-affine-nullstellensatz-vanishing",
-    "why": "A nonempty finite-type affine k-scheme has a maximal point with residue field k. This is a generic tool rather than a replacement of the unit weight-gap argument."
-   },
-   {
-    "node": "lem-sfb-sheaf-cover-local-isomorphism",
-    "why": "General-site sheaf locality on pro-etale slice covers, used for local constructible defects. This is a generic tool rather than a replacement of the unit weight-gap argument."
-   },
-   {
-    "node": "prop-sf-open-closed-triangle-all-stages",
-    "why": "Vanishing on an open and its closed complement implies vanishing in the actual rational adic category. This is a generic tool rather than a replacement of the unit weight-gap argument."
    },
    {
     "node": "lem-weil-pbc-jointly-reflect-short-exact",
@@ -452,12 +271,20 @@
     "why": "Identifies the integral category of the constructible heart with the integral category on which the condensed realization and rational transport are stated; no node of the unit gives this comparison."
    },
    {
-    "node": "det-lem-stratified-lattice-rank",
-    "why": "Rank of a lisse continuous-coefficient sheaf is locally constant, giving constant rank on a connected component; generic tool, the unit has no lisse-rank lemma."
+    "node": "lem-a1-point-realization-standard-cohomology",
+    "why": "Exactness, t-exactness and finite-dimensional heart values of the specified point functors at E and at the common stage; replaces the dropped duplicate point node."
    },
    {
-    "node": "lem-weil-pbc-wcontractible-geometric-criterion",
-    "why": "Faithfully flat weakly etale algebras over an algebraically closed field have a retraction, so point sections of a lisse sheaf compute its rank; generic tool."
+    "node": "lem-weil-heart-short-exact-triangles",
+    "why": "A t-exact triangulated functor is exact on hearts (short exact sequences = triangles in the heart)."
+   },
+   {
+    "node": "def-weil-constructible-standard-tstructure",
+    "why": "Rational standard halves are isomorphism closures of integral halves; used to show immersion pullback preserves them."
+   },
+   {
+    "node": "prop-weil-pbc-common-stage-calculus",
+    "why": "Finite diagrams of the common-stage category are represented at one finite coefficient field."
    }
   ]
  },
@@ -490,15 +317,16 @@
   "def-weil-endofunctor-fixed-pair-category",
   "lem-weil-pbc-integral-stratified-perfect-characterization",
   "det-lem-stratified-lattice-rank",
-  "lem-weil-pbc-wcontractible-geometric-criterion"
+  "lem-weil-pbc-wcontractible-geometric-criterion",
+  "lem-a1-point-realization-standard-cohomology"
  ],
  "reviewed": {
-  "date": "2026-10-18",
+  "date": "2026-10-22",
   "by": "L",
-  "reviewer": "NT-cc-Q133-3a03f04c4",
-  "group": "Q133",
+  "reviewer": "NT-cc-Q56-03d20db0a",
+  "group": "Q56",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q133-3a03f04c4 (reviewer sub-agent of L); spot-checked: Read the item, all 12 steps, the statement of every cited node, the coefficient definitions behind them, and Bhatt-Scholze section 6.8 in the PDF (Lemma 6.8.2, Def 6.8.3, Prop 6.8.4, Cor 6.8.5, Def 6.8.6, Lemma 6.8.7, Prop 6.8.14, Rem 6.8.15). The statement is true and unchanged, the delivery adds no new nodes, and there is no cycle. Three faults, all repaired in fixes/dag/nodes/sec-deligne-laumon-a1/lem-dl-a1-constructible-fibres-exact.json. (1) Steps 2 and 5 applied rational transport and the condensed realization J_Y, which are stated on the raw rationalization of def-weil-pbc-bounded-constructible-complete, to objects of def-weil-rationalization-karoubi over def-weil-derived-complete-integral-detailed. The two categories were identified silently; the steps now cite lem-weil-pbc-integral-stratified-perfect-characterization, which identifies them on Noetherian finite-dimensional schemes with l invertible. (2) Step 7 claimed lem-tw-lisse-rational-realization identifies the point fibre with the finite-system fibre of cor-galois-lisse-representations(2). It does not (error C4): it only gives sections at s of the pullback of the pro-etale realized sheaf, and the step also left the stable lattice uncited. Steps 6 and 7 are rewritten: finitely many open connected components of each stratum, each with a k-point (Nullstellensatz); constant rank on each component (existing det-lem-stratified-lattice-rank); sections at s of a lisse sheaf are E^r, using the retraction from lem-weil-pbc-wcontractible-geometric-criterion; then the sheaf cover criterion and the equivalence J_S. (3) Step 12 used J on non-separated finite-type opens; it now tests on separated affine opens. Batch-5 check: def-pod-ring-scalar-extension, reached through the condensed realization and the characterization lemma, is a general definition, so those citations stay. The repair removes the citations of lem-sfb-etale-local-monodromy-realization and cor-galois-lisse-representations. cor-galois is in any case the foundational lisse-sheaf/representation equivalence, given by neither assumption, and is already in the closure through rem-dl-a1-conventions. tool_uses adjusted accordingly. Details in review.md.; 1 file(s) fixed by the reviewer"
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q56-03d20db0a (reviewer sub-agent of L); spot-checked: Read the re-split note (keep_plan, at least 3 nodes, at most 3000 characters), the 12-step base proof, the unit sk-p-dl-a1-exact, the item and all four new nodes in full, and every cited statement. Checked the sources: Bhatt-Scholze Def 6.8.3, 6.8.6, Lemma 6.8.7, Prop 6.8.14, Rem 6.8.15, and Stacks 00FV, 04MF, 04TQ, 03PU (labels match). No SGA is used. Old steps 5-6, 7-8 and 12 became three sound, comparable statement-only nodes (strata, vanishing, local-defects); old steps 1-2, 9-10 and 11 stay as assembly steps that cite existing nodes or are elementary. Three faults, all repaired in fixes/dag/nodes/sec-deligne-laumon-a1/lem-dl-a1-constructible-fibres-exact.json (now 2937 characters). (1) C5/B9 duplicate: lem-dl-a1-point-fibre-stage-exact duplicates the existing, reviewed lem-a1-point-realization-standard-cohomology (Fib_{s,E} and Fib_{s,Omega} exact and t-exact with finite-dimensional values, phi coherence). Its remaining clauses are prop-weil-pbc-common-stage-calculus and item 4 of def-weil-finite-coefficient-point. I dropped it and cite the existing node, leaving 3 new nodes; no cycle, nothing added to the batch-5 closure. (2) Step 1 credited prop-weil-pbc-rational-transport with preserving the rational standard halves, but that node gives only exactness. I restored the dropped argument from old step 2 (integral-half representatives, def-weil-constructible-standard-tstructure; stagewise at Qlb) and added lem-weil-heart-short-exact-triangles(4) for exactness on hearts. (3) Step 2 cited the s-only point node for the finite-stage heart representative over Y; it now cites prop-constructible-truncations, prop-weil-pbc-common-stage-calculus and def-weil-finite-coefficient-point. I added the matching tool_uses. The new statements are true, including the edge cases T empty, rank 0, disconnected strata and infinite non-quasi-compact covers. lem-zl-raw-heart-adic-lisse-stratification is close to the strata node but works at a larger stage E' with a different J, so it is not a duplicate (maintainer note). Batch-5: all four flagged citations (condensed-e-realization, lem-tw-lisse-rational-realization, def-dl-a1-locally-constructible-adic-heart) were already in the base item's closure. The nodes they reach are general (geometric inverse image is exact, derived square pasting, a definition of local Frobenius and trace), not steps of the trace formula or Poincare duality, so I accept them. Details are in review.md.; 1 file(s) fixed by the reviewer"
  },
  "reviewed_lean": {
   "date": "2026-10-18",
@@ -524,5 +352,16 @@
   "date": "2026-10-18",
   "existing": false
  },
- "lean_audit": {}
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ }
 }

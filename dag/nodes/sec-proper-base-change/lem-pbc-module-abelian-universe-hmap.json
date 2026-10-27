@@ -1,0 +1,121 @@
+{
+ "id": "lem-pbc-module-abelian-universe-hmap",
+ "kind": "statement",
+ "title": "Ext universe transport commutes with the abelian h-map",
+ "statement": "For schemes X,Y, g:Y to X, modules F,G, phi:F to g_*G and degree q, moduleAbelianUniverseMap [def-pbc-module-abelian-universe-equiv] commutes with the abelian Ext h-map defined by invImage(g), constIso(g).symm and coeff(g,phi) [def-pc-flat-cohomology-comparison]: its value after the small-Ext map equals zariskiModuleHMap(g,phi,q) [def-pbc-qcoherent-zariski-cohomology-map] applied after universe change. The input is an arbitrary small abelian Ext class; no module-cohomology map or resolution equivalence occurs.",
+ "stmt_deps": [
+  "def-pbc-module-abelian-universe-equiv",
+  "def-pc-flat-cohomology-comparison",
+  "def-pbc-qcoherent-zariski-cohomology-map"
+ ],
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 03FD; canonical change of universe Ext.chgUniv and its exact-functor compatibility"
+ },
+ "proof": [
+  {
+   "text": "Unfold the cached universe maps. Apply the generic-site universe-transport identity for the composite of exact inverse image and coefficient postcomposition; its proof uses coherentSheafUniverseEquiv_naturality, Ext.mapExactFunctor_hom and Ext.homEquiv_chgUniv. Then apply zariskiModuleHMap_formula to identify the explicit large-Ext composite with the recorded Zariski h-map.",
+   "uses": [
+    "def-pbc-canonical-coherent-etale-comparison",
+    "def-pbc-qcoherent-zariski-cohomology-map",
+    "def-pbc-module-abelian-universe-equiv",
+    "lem-pbc-zariski-module-hmap-formula"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-pbc-canonical-coherent-etale-comparison",
+  "def-pbc-qcoherent-zariski-cohomology-map",
+  "def-pbc-module-abelian-universe-equiv",
+  "lem-pbc-zariski-module-hmap-formula"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 03FD; canonical change of universe Ext.chgUniv and its exact-functor compatibility"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Comparison module sheaf cohomology underlying abelian sheaf cohomology natural under morphism ringed spaces",
+   "results": "Generic sheaf cohomology and module forgetful APIs; no formula for this project-specific comparison.",
+   "date": "2026-10-26",
+   "verdict": "Use the existing component formula and prove the packaging equality directly."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Ext.chgUniv\"",
+   "results": "Ext.chgUniv found; it supplies universe transport, not the comparison component formula.",
+   "date": "2026-10-26",
+   "verdict": "Use the existing component formula and prove the packaging equality directly."
+  },
+  {
+   "tool": "grep",
+   "query": "moduleCohomologyExtResolutionEquiv_edge|moduleCohomology_transport_coefficient",
+   "results": "msearch no hits; direct rg found existing edge comparison and coefficient transport, but no exposed equality of the large comparison and fixed resolution equivalence.",
+   "date": "2026-10-26",
+   "verdict": "Use the existing component formula and prove the packaging equality directly."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.QcoherentModuleAbelianFMap",
+  "date": "2026-10-27",
+  "group": "H3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-direct-image-finiteness-proper",
+   "place": "Ext universe transport commutes with the abelian h-map extracted from lem-pbc-module-abelian-hmap.",
+   "via": [
+    "lem-pbc-module-abelian-hmap",
+    "lem-weil-pbc-qcoherent-normalized-pullback-square",
+    "lem-weil-pbc-smooth-curve-etale-structure-direct-images",
+    "lem-weil-pbc-proper-smooth-curves-prime-coefficients",
+    "lem-weil-pbc-etale-proper-smooth-curves-finite-module",
+    "lem-weil-pbc-etale-constant-shriek-rel-dim-1",
+    "lem-weil-pbc-etale-lisse-open-relative-line-constructibility",
+    "lem-weil-pbc-etale-affine-line-shriek-sheaf-constructible",
+    "lem-weil-pbc-etale-compactification-constructibility",
+    "lem-weil-pbc-etale-proper-direct-image-finiteness"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.ModuleAbelianUniverseHMap",
+  "file": "lean/Sheaf/AlgebraicGeometry/ModuleAbelianUniverseHMap.lean",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.moduleAbelianUniverseMap_hmap",
+  "statement": "theorem moduleAbelianUniverseMap_hmap {X Y : Scheme.{u}} (g : Y ⟶ X)\n    (F : X.Modules) (G : Y.Modules) (φ : F ⟶ (pushforward g).obj G)\n    (q : ℕ) (x : H F q) :\n    moduleAbelianUniverseMap Y G q\n      (Sheaf.H.map (coeff g φ) q\n        (Sheaf.H.mapFunctor (invImage g) (constIso g).symm\n          ((SheafOfModules.toSheaf X.ringCatSheaf).obj F) q x)) =\n      zariskiModuleHMap g φ q (moduleAbelianUniverseMap X F q x)",
+  "branch": "sheaf-dag",
+  "by": "H3",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H3",
+  "result": "pass",
+  "landing": "20261026T182407-L-3553549",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H3",
+  "result": "pass",
+  "landing": "20261026T182407-L-3553549",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

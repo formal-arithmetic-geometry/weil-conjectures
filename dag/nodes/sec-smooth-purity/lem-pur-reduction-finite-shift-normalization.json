@@ -1,0 +1,131 @@
+{
+ "id": "lem-pur-reduction-finite-shift-normalization",
+ "kind": "statement",
+ "title": "Finite-model normalization of the shift adjoint to total limit",
+ "statement": "Fix a prime l, a finite extension E/Q_l and an arbitrary scheme W, in independent universes. Use the actual sequence module category, exact restriction U and L = Rlim composed with D(U) of [def-coef-ringed-sequence-site], the unbounded cochain derived categories and integer shifts of [def-weil-abstract-derived-category], and the normalized helpers and equations of [def-coef-reduction-limit-shift-data]. For every coefficient calculus S and coherence witness hS of [lem-coef-derived-system-evaluation-calculus], equip L with the canonical composite shift totalLimitCommShift of [lem-pur-sequence-kinjective-comparison-shifts], and equip S.reduction with the left-adjoint mate shift for its actual adjunction S.reduction ⊣ L. There exist coherent integer-shift structures on all finite derived scalar extensions F_n such that (i) for every n, integer r, complex Q and K-flatness witnesses for Q and Q[r] in the sense of [def-pc-kflat-complex], the finite_shift_model equation of [def-coef-reduction-limit-shift-data] holds under coefficientFiniteReductionModel, and (ii) every supplied natural evaluation isomorphism S.reductionEvaluation n is shift compatible. Indices n denote coefficient exponent n+1. No Roos triangle, product structure, or choice of shift on the right adjoint is asserted.",
+ "stmt_deps": [
+  "def-coef-ringed-sequence-site",
+  "def-weil-abstract-derived-category",
+  "def-coef-reduction-limit-shift-data",
+  "lem-coef-derived-system-evaluation-calculus",
+  "lem-pur-sequence-kinjective-comparison-shifts",
+  "def-pc-kflat-complex"
+ ],
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-compatibility/fix-prop-coherence.proof.md",
+  "place": "Coefficient-comparison sentence: transport through the actual reduction/total-limit adjunction, with its unit and counit."
+ },
+ "proof": [
+  {
+   "text": "Derive finite tensor extension on K-flat complexes with its termwise shift. The shifted differential is (-1)^r d, so tensor followed by shift and shift followed by tensor have identical terms and differentials. The canonical left-derived comparison, characterized by the universal counit, identifies this comparison with coefficientFiniteReductionModel for every K-flat representative, not just flat-term choices. This gives the finite_shift_model equations.",
+   "uses": [
+    "lem-coef-derived-system-evaluation-calculus"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use simultaneous K-injective tower resolutions to compute the right adjoint. Exact restriction, Rlim of the replacement and its derived comparison are purCoefficientLimitModel. The generic replacement-shift lemma comparisonIso_shifts in the sequence-comparison module identifies the canonical composite shift with the termwise-limit comparison for j[r].",
+   "uses": [
+    "lem-pur-sequence-kinjective-comparison-shifts"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The ordinary quotient-diagram tensor/limit Hom bijection is termwise scalar transposition and commutes with the two cochain shifts. The coherence witness fixes the supplied derived adjunction and evaluation maps by these transposes and universal units/counits. Consequently the reduction shift just constructed is the mate of the fixed limit shift. Uniqueness of mates identifies it with S.adjunction.leftAdjointCommShift, giving each evaluation square as a natural transformation on systems before evaluation. This requires no faithfulness of derived evaluation.",
+   "uses": [
+    "lem-coef-derived-system-evaluation-calculus"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For r=0 all comparisons are identities; for r+s differential signs multiply, also for negative shifts. Zero complexes and the empty scheme give the same equations. No finite-field or finite-type hypothesis is used.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-coef-derived-system-evaluation-calculus",
+  "lem-pur-sequence-kinjective-comparison-shifts"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Sections on derived tensor and derived adjunction (06YY, 07A6); canonical derived-limit comparison (0941); derived.tex lemma-adjoint-is-exact (0A8D). Specialization and normalization by the fixed coefficient calculus."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Finite derived scalar extension shift compatibility on K-flat cochain models and evaluation of coefficient reduction",
+   "results": "8 generic cochain shift results including CochainComplex.shiftEval and CochainComplex.shiftEval_hom_app; no coefficient normalization theorem.",
+   "verdict": "Generic tools only.",
+   "date": "2026-10-25"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.NatTrans.CommShift",
+   "results": "12 generic CommShift declarations including id, ofIso and of_core; no coefficient normalization theorem.",
+   "verdict": "Generic tools only.",
+   "date": "2026-10-25"
+  },
+  {
+   "tool": "grep",
+   "query": "Roos.*[Ss]hift|[Ss]hift.*Roos|finite.*shift.*model",
+   "results": "0 Mathlib hits. Project search found the existing injective-term Roos theorem and the geometrically restricted sequence-adjoint comparison; neither supplies the statement here.",
+   "verdict": "No exact match.",
+   "date": "2026-10-25"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.PurReductionLimitShiftAdjunction",
+  "date": "2026-10-25",
+  "group": "C1"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-thm-sf-compatibility",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-pur-rational-and-qbar-purity",
+   "place": "Unit Step 2: transport the normalized strict-system construction through the reduction/total-limit adjunction; Finite-model normalization of the shift adjoint to total limit",
+   "via": [
+    "lem-pur-reduction-limit-shift-adjunction",
+    "lem-pur-integral-realization-shift-coherence",
+    "lem-pur-adic-projection-shift-coherence"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.PurReductionFiniteShiftNormalization",
+  "file": "lean/Sheaf/Paper/PurReductionFiniteShiftNormalization.lean",
+  "declaration": "WeilConjectures.purReductionFiniteShiftNormalization",
+  "statement": "theorem purReductionFiniteShiftNormalization\n    (S : CoefficientDerivedSystemCalculus l E W)\n    (hS : CoefficientDerivedSystemCoherence l E W S) :\n    letI := SequenceKInjectiveComparison.totalLimitCommShift l E W\n    letI := S.adjunction.leftAdjointCommShift ℤ\n    ∃ finite_reduction_shift :\n        ∀ n : ℕ, (coefficientFiniteDerivedExtension l E W n).CommShift ℤ,\n      (∀ (n : ℕ) (Q : CochainComplex (scalarReductionSource l E W) ℤ) (r : ℤ)\n      (hQ : CochainComplex.IsKFlatIndependentCoefficients\n        (J := Scheme.ProEt.topology W) (R := completedIntegralCommRingSheafUnrestricted l E W) Q)\n      (hQr : CochainComplex.IsKFlatIndependentCoefficients\n        (J := Scheme.ProEt.topology W) (R := completedIntegralCommRingSheafUnrestricted l E W)\n          (Q⟦r⟧)),\n      letI := finite_reduction_shift n\n      (coefficientFiniteDerivedExtension l E W n).map\n          ((DerivedCategory.Q.commShiftIso r).hom.app Q) ≫\n        ((coefficientFiniteDerivedExtension l E W n).commShiftIso r).hom.app\n          (DerivedCategory.Q.obj Q) ≫\n        (coefficientFiniteReductionModel l E W Q hQ n).hom⟦r⟧' =\n      (coefficientFiniteReductionModel l E W (Q⟦r⟧) hQr n).hom ≫\n        DerivedCategory.Q.map\n          ((((scalarReductionExtension l E W n).mapHomologicalComplex\n            (ComplexShape.up ℤ)).commShiftIso r).hom.app Q) ≫\n        (DerivedCategory.Q.commShiftIso r).hom.app\n          (((scalarReductionExtension l E W n).mapHomologicalComplex\n            (ComplexShape.up ℤ)).obj Q)) ∧\n      (∀ n : ℕ,\n      letI := finite_reduction_shift n\n      NatTrans.CommShift (S.reductionEvaluation n).hom ℤ)",
+  "branch": "sheaf-dag",
+  "by": "C1",
+  "date": "2026-10-25"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-5840a",
+  "group": "C1",
+  "result": "fix",
+  "landing": "20261025T205419-L-3232844",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-5840a",
+  "group": "C1",
+  "result": "fix",
+  "landing": "20261025T205419-L-3232844",
+  "kind": "interface",
+  "note": "independent cc review: item proof (assembly from totalLimitCommShift, left-adjoint mate shift, the two new split lemmas, derived products, Mathlib unit/counit shift lemmas) against lem-pur-reduction-limit-shift-adjunction and the unchanged PurReductionLimitShiftData fields; the two new sorry statements against their nodes and def-coef-reduction-limit-shift-data; the moved declarations against the published module; all 9 direct importers compiled against the delivered modules"
+ }
+}

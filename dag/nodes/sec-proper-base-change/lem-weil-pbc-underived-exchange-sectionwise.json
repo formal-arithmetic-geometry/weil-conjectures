@@ -168,7 +168,18 @@
   "def-weil-pbc-underived-exchange"
  ],
  "proof_split_by": "paragraphs",
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
  "chapter": "sec-proper-base-change",
  "unit": "sk-def-exchange",
  "split_report": {
@@ -217,5 +228,31 @@
   "group": "Q21",
   "result": "pass",
   "note": "Re-delivery of the statement already landed by NL (batch 416b4a1356): module byte-identical except one added docstring sentence; node JSON differs only in lean.by (NL to Q21) while the file header still credits NL (attribution oddity, no mathematical effect). Independent full review: every node clause matches. ChosenCartesianSquare hypothesis, F in AddCommGrpCat.{u+1}; generator = toSheafify of Lan.map a.op of leftKanExtensionUnit (definitionally g^*); helper sectionwiseBaseChangeHom is a real canonical double pullback lift with over-X' condition proved; unit before restriction (A^1 case well typed); first conjunct evaluates the recorded Etale.baseChangeMap; second conjunct is the adjunct with correct theta orientation. Edge cases (identity square, F=0, empty V/W, non-etale g) pass. lean.statement verbatim; no unbound variables or universes; recorded dependency declarations used, no duplicate; source and blueprint docstrings with 5-step proof; sorry only. nt_compile --json: rc 0, 6.9 s, clean; an injected-error control was reported."
+ },
+ "blueprint_update": {
+  "snapshot": "main-20261023-1620",
+  "commit": "7284bb09daf97437d544c51882b325f9c52cd345",
+  "changed": [
+   "statement",
+   "proof"
+  ],
+  "statement": "Let $\\square$ be a commutative square of schemes as in\n[def-weil-pbc-underived-exchange] (for instance a cartesian square\n[def-weil-pbc-cartesian-square]) and let $F\\in\\Ab(X_{\\Et})$. Let $W\\to Y$\nand $V\\to Y'$ be etale, let $\\phi:V\\to W$ be a morphism with\n$(W\\to Y)\\circ\\phi=g\\circ(V\\to Y')$, and let\n$s\\in(f_*F)(W)=F(X\\times_YW)$ [def-weil-pbc-direct-image]. Write\n$\\phi^*s\\in(g^{-1}f_*F)(V)$ for the pullback of $s$ along $\\phi$: the image\nof $s$ under the unit $(f_*F)(W)\\to(g_*g^{-1}f_*F)(W)=(g^{-1}f_*F)(W\\times_YY')$\nof $g^{-1}\\dashv g_*$ [def-weil-pbc-inverse-image], restricted along the\nmorphism $V\\to W\\times_YY'$ with components $\\phi$ and $V\\to Y'$ (it is the\nsection represented by $W$, $V\\to W\\times_YY'$ and $s$). Let\n$\\beta:X'\\times_{Y'}V\\to X\\times_YW$ be the morphism with components\n$X'\\times_{Y'}V\\to V\\xrightarrow{\\phi}W$ and\n$X'\\times_{Y'}V\\to X'\\xrightarrow{g'}X$. Then the underived exchange\nmorphism $\\Ex^0_{\\square,F}$ of [def-weil-pbc-underived-exchange] sends\n$\\phi^*s$ to the pullback $\\beta^*s$ of $s$ along $\\beta$ (a morphism over\n$g'$), as a section of $g'^{-1}F$ over $X'\\times_{Y'}V$, i.e. of\n$f'_*g'^{-1}F$ over $V$.",
+  "proof": [
+   {
+    "text": "By definition $\\phi^*s$ is the restriction, along $V\\to W\\times_YY'$, of the\nimage $\\eta_g(s)$ of $s$ under the unit $\\eta_g:f_*F\\to g_*g^{-1}f_*F$ at\n$W$. Since $\\Ex^0_{\\square,F}$ is a morphism of sheaves, it commutes with this\nrestriction, so it suffices to compute $g_*(\\Ex^0_{\\square,F})(\\eta_g(s))$,\na section of $f'_*g'^{-1}F$ over $W\\times_YY'$, and then restrict it to $V$.",
+    "uses": [],
+    "elementary": null
+   },
+   {
+    "text": "By [def-weil-pbc-underived-exchange], $\\Ex^0_{\\square,F}$ is the mate of the\nsquare isomorphism $\\theta_\\square$; taking the mate once more along the\nadjunctions $g^{-1}\\dashv g_*$ and $g'^{-1}\\dashv g'_*$ [def-weil-pbc-inverse-image]\ngives the unit form\n$$\n g_*(\\Ex^0_{\\square,F})\\circ\\eta_{g,f_*F}=c\\circ f_*(\\eta_{g',F}),\n$$\nwhere $c:f_*g'_*\\xrightarrow{\\sim}g_*f'_*$ is the composition isomorphism of\nthe direct images along $fg'=gf'$ [def-weil-pbc-direct-image]. Evaluated at\n$W$, the right side sends $s\\in F(X\\times_YW)$ to $\\eta_{g'}(s)$, a section of\n$g'^{-1}F$ over $(X\\times_YW)\\times_XX'$, transported along the canonical\nisomorphism of this scheme with $(W\\times_YY')\\times_{Y'}X'$. Restricting\nalong $V\\to W\\times_YY'$, i.e. along $X'\\times_{Y'}V\\to(W\\times_YY')\\times_{Y'}X'$,\nthe composite of these restrictions and of the unit of $g'^{-1}\\dashv g'_*$\nis the pullback of $s$ along the morphism $X'\\times_{Y'}V\\to X\\times_YW$ whose\ncomponents are the projection to $V$ followed by $\\phi$ and the projection to\n$X'$ followed by $g'$, which is $\\beta$. Hence\n$\\Ex^0_{\\square,F}(\\phi^*s)=\\beta^*s$.",
+    "uses": [
+     "def-weil-pbc-underived-exchange",
+     "def-weil-pbc-inverse-image",
+     "def-weil-pbc-direct-image"
+    ],
+    "elementary": false
+   }
+  ],
+  "note": "the current blueprint (main-20261023-1620, weil-conjectures-blueprint 7284bb09da) states or proves this differently; a worker who touches the node follows it"
  }
 }

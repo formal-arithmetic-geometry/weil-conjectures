@@ -1,0 +1,112 @@
+{
+ "id": "lem-sfb-local-ring-map-spread",
+ "kind": "statement",
+ "title": "Spread a local scheme morphism from a Noetherian source",
+ "statement": "Let $S,T,Z$ be schemes [def-pc-scheme], $a:T\\to S$ and $g:Z\\to S$ morphisms, with $T$ locally Noetherian [pqf-def-locnoeth] and $g$ locally of finite type [def-weil-finite-type-morphism]. Let $t\\in T$, and let $c_t:\\operatorname{Spec}\\mathcal O_{T,t}\\to T$ be the canonical morphism [lem-weil-pbc-spec-local-ring-canonical-morphism]. For every morphism $\\varphi:\\operatorname{Spec}\\mathcal O_{T,t}\\to Z$ satisfying $g\\circ\\varphi=a\\circ c_t$, there exist an open neighbourhood $W\\subseteq T$ of $t$ and a morphism $h:W\\to Z$ such that $g\\circ h=a|_W$ and $h\\circ c_{t,W}=\\varphi$, where $c_{t,W}:\\operatorname{Spec}\\mathcal O_{T,t}\\to W$ is the factorization of $c_t$ through $W$.",
+ "source": {
+  "document": "literature/stacks-project/morphisms.tex",
+  "place": "Tag 0BX6, lemma-morphism-defined-local-ring, (2)(c), expressed using Spec of a local ring; Mathlib SpreadingOut.lean lines 374–386 supplies the exact morphism form."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "pqf-def-locnoeth",
+  "def-weil-finite-type-morphism",
+  "lem-weil-pbc-spec-local-ring-canonical-morphism"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A morphism from the spectrum of a local ring of a locally Noetherian scheme to a scheme locally of finite type extends to an open neighbourhood over the base",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.spread_out_of_isGermInjective'\", \"module\": \"Mathlib/AlgebraicGeometry/SpreadingOut\", \"type\": \"∀ {X Y S : AlgebraicGeometry.Scheme} (sX : X ⟶ S) (sY : Y ⟶ S) [AlgebraicGeometry.LocallyOfFiniteType sY] {x : ↥X}\\n  [X.IsGermInjectiveAt x] (φ : AlgebraicGeometry.Spec (X.presheaf.stalk x) ⟶ Y),\\n  CategoryTheory.CategoryStruct.comp φ sY = CategoryTheory.CategoryStruct.comp (X.fromSpecStalk x) sX →\\n\", \"doc\": \"Let $X$ and $Y$ be schemes with $s_X: X \\\\to S$ and $s_Y: Y \\\\to S$ morphisms locally of finite type. For a point $x \\\\in X$ where the germ map at $x$ is injective, and a morphism $\\\\phi: \\\\operatorname{Sp\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.PartialMap.mem_domain_ofFromSpecStalk\", \"module\": \"Mathlib/AlgebraicGeometry/RationalMap\", \"type\": \"∀ {X Y S : AlgebraicGeometry.Scheme} (sX : X ⟶ S) (sY : Y ⟶ S) [inst : IrreducibleSpace ↥X]\\n  [inst_1 : AlgebraicGeometry.LocallyOfFiniteType sY] {x : ↥X} [inst_2 : X.IsGermInjectiveAt x]\\n  (φ : AlgebraicGeometry.Spec (X.presheaf.stalk x) ⟶ Y)\\n  (h : CategoryTheory.CategoryStruct.comp φ sY = Categor\", \"doc\": \"Given schemes $X,Y,S$ with morphisms $s_X:X\\\\to S$ and $s_Y:Y\\\\to S$ locally of finite type, a point $x\\\\in X$ where the germ map is injective, and a morphism $\\\\phi:\\\\operatorname{Spec}(\\\\mathcal{O}_{X,x})\"}\n  {\"name\": \"AlgebraicGeometry.instIsGermInjectiveOfIsLocallyNoetherian\", \"module\": \"Mathlib/AlgebraicGeometry/SpreadingOut\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} [AlgebraicGeometry.IsLocallyNoetherian X], X.IsGermInjective\", \"doc\": \"Every locally Noetherian scheme is germ-injective, meaning that for every point in the scheme, the natural map from the local ring to the stalk of the structure sheaf at that point is injective.\"}\n  {\"name\": \"AlgebraicGeometry.LocallyOfFiniteType.stalkMap\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FiniteType\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.LocallyOfFiniteType f] (x : ↥X),\\n  (CommRingCat.Hom.hom (AlgebraicGeometry.Scheme.Hom.stalkMap f x)).EssFiniteType\", \"doc\": \"For any morphism $ f: X \\\\to Y $ of schemes that is locally of finite type and any point $ x \\\\in X $, the induced ring homomorphism on the stalks $ \\\\mathcal{O}_{Y,f(x)} \\\\to \\\\mathcal{O}_{X,x} $ is of es\"}\n  {\"name\": \"AlgebraicGeometry.exists_lift_of_germInjective_aux\", \"module\": \"Mathlib/AlgebraicGeometry/SpreadingOut\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} {R A : CommRingCat} {U : X.Opens} {x : ↥X} (hxU : x ∈ U) (φ : A ⟶ X.presheaf.stalk x)\\n  (φRA : R ⟶ A) (φRX : R ⟶ X.presheaf.obj (Opposite.op U)),\\n  (CommRingCat.Hom.hom φRA).FiniteType →\\n    CategoryTheory.CategoryStruct.comp φRA φ = CategoryTheory.CategoryStruct.com\", \"doc\": \"Given a point $x$ in an open subset $U$ of a scheme $X$, a morphism $\\\\phi: A \\\\to \\\\mathcal{F}_x$ to the stalk of a presheaf $\\\\mathcal{F}$ at $x$, and compatible ring homomorphisms $\\\\phi_{RA}: R \\\\to A$ \"}\n  {\"name\": \"AlgebraicGeometry.LocallyOfFiniteType.isLocallyNoetherian\", \"module\": \"Mathlib/AlgebraicGeometry/Noetherian\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.LocallyOfFiniteType f]\\n  [AlgebraicGeometry.IsLocallyNoetherian Y], AlgebraicGeometry.IsLocallyNoetherian X\", \"doc\": \"If $ Y $ is a locally Noetherian scheme and $ f: X \\\\to Y $ is a morphism locally of finite type, then $ X $ is also a locally Noetherian scheme.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.local_affine\", \"module\": \"Mathlib/AlgebraicGeometry/Scheme\", \"type\": \"∀ (self : AlgebraicGeometry.Scheme) (x : ↑self.toTopCat),\\n  ∃ U R, Nonempty (self.restrict ⋯ ≅ AlgebraicGeometry.Spec.toLocallyRingedSpace.obj (Opposite.op R))\", \"doc\": \"For any scheme $X$ and any point $x$ in its underlying topological space, there exists an open neighborhood $U$ of $x$ and a commutative ring $R$ such that the restriction of $X$ to $U$ is isomorphic \"}\n  {\"name\": \"AlgebraicGeometry.exists_lift_of_germInjective\", \"module\": \"Mathlib/AlgebraicGeometry/SpreadingOut\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} {R A : CommRingCat} {x : ↥X} [X.IsGermInjectiveAt x] {U : X.Opens} (hxU : x ∈ U)\\n  (φ : A ⟶ X.presheaf.stalk x) (φRA : R ⟶ A) (φRX : R ⟶ X.presheaf.obj (Opposite.op U)),\\n  (CommRingCat.Hom.hom φRA).FiniteType →\\n    CategoryTheory.CategoryStruct.comp φRA φ = CategoryT\", \"doc\": \"Given a scheme $X$ with injective germ at a point $x$, an open subset $U$ containing $x$, and morphisms $\\\\phi: A \\\\to \\\\mathcal{F}_x$, $\\\\phi_{RA}: R \\\\to A$, and $\\\\phi_{RX}: R \\\\to \\\\Gamma(U, \\\\mathcal{F})$\"}\n",
+   "date": "2026-10-22",
+   "verdict": "match: AlgebraicGeometry.spread_out_of_isGermInjective', Mathlib/AlgebraicGeometry/SpreadingOut.lean:374–386, with the locally-Noetherian germ-injectivity instance at line 170."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Local ring homomorphisms over a base induce scheme morphisms on a neighbourhood of a point when the target is locally of finite type and the source locally Noetherian",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.HasRingHomProperty.stalkMap\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/RingHomProperties\", \"type\": \"∀ {P : CategoryTheory.MorphismProperty AlgebraicGeometry.Scheme}\\n  {Q : {R S : Type u} → [inst : CommRing R] → [inst_1 : CommRing S] → (R →+* S) → Prop}\\n  [AlgebraicGeometry.HasRingHomProperty P Q] {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y},\\n  (∀ {R S : Type u} [inst : CommRing R] [inst_1 : CommRi\", \"doc\": \"If a ring homomorphism property $ Q $ holds for a morphism $ f : R → S $ and all localizations at prime ideals $ J ⊆ S $, then $ Q $ also holds for the induced stalk map homomorphism $ (f_{x})_{\\text{h\"}\n  {\"name\": \"AlgebraicGeometry.spread_out_of_isGermInjective'\", \"module\": \"Mathlib/AlgebraicGeometry/SpreadingOut\", \"type\": \"∀ {X Y S : AlgebraicGeometry.Scheme} (sX : X ⟶ S) (sY : Y ⟶ S) [AlgebraicGeometry.LocallyOfFiniteType sY] {x : ↥X}\\n  [X.IsGermInjectiveAt x] (φ : AlgebraicGeometry.Spec (X.presheaf.stalk x) ⟶ Y),\\n  CategoryTheory.CategoryStruct.comp φ sY = CategoryTheory.CategoryStruct.comp (X.fromSpecStalk x) sX →\\n\", \"doc\": \"Let $X$ and $Y$ be schemes with $s_X: X \\\\to S$ and $s_Y: Y \\\\to S$ morphisms locally of finite type. For a point $x \\\\in X$ where the germ map at $x$ is injective, and a morphism $\\\\phi: \\\\operatorname{Sp\"}\n  {\"name\": \"AlgebraicGeometry.HasRingHomProperty.isLocal_ringHomProperty_of_isZariskiLocalAtSource_of_isZariskiLocalAtTarget\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/RingHomProperties\", \"type\": \"∀ (P : CategoryTheory.MorphismProperty AlgebraicGeometry.Scheme) [AlgebraicGeometry.IsZariskiLocalAtTarget P]\\n  [AlgebraicGeometry.IsZariskiLocalAtSource P],\\n  RingHom.PropertyIsLocal fun {R S} [CommRing R] [CommRing S] f => P (AlgebraicGeometry.Spec.map (CommRingCat.ofHom f))\", \"doc\": \"If a morphism property $ P $ is Zariski-local at both the source and target, then the corresponding property for ring homomorphisms (via the induced morphism of spectra) satisfies the local property c\"}\n  {\"name\": \"AlgebraicGeometry.HasRingHomProperty.isLocal_ringHomProperty\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/RingHomProperties\", \"type\": \"∀ (P : CategoryTheory.MorphismProperty AlgebraicGeometry.Scheme)\\n  {Q : outParam ({R S : Type u} → [inst : CommRing R] → [inst_1 : CommRing S] → (R →+* S) → Prop)}\\n  [self : AlgebraicGeometry.HasRingHomProperty P Q], RingHom.PropertyIsLocal fun {R S} [CommRing R] [CommRing S] => Q\", \"doc\": \"If a morphism property in the category of schemes is defined by a condition on the associated ring homomorphisms between commutative rings, then this condition is a local property for ring homomorphis\"}\n  {\"name\": \"AlgebraicGeometry.HasRingHomProperty.of_isLocalAtSource_of_isLocalAtTarget\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/RingHomProperties\", \"type\": \"∀ (P : CategoryTheory.MorphismProperty AlgebraicGeometry.Scheme) [AlgebraicGeometry.IsZariskiLocalAtTarget P]\\n  [AlgebraicGeometry.IsZariskiLocalAtSource P],\\n  AlgebraicGeometry.HasRingHomProperty P fun {R S} [CommRing R] [CommRing S] f =>\\n    P (AlgebraicGeometry.Spec.map (CommRingCat.ofHom f))\", \"doc\": \"If a morphism property $ P $ on schemes is Zariski-local at both the source and the target, then $ P $ is a ring homomorphism property. Specifically, for any ring homomorphism $ f : R \\\\to S $, the ind\"}\n  {\"name\": \"AlgebraicGeometry.HasRingHomProperty.iff_exists_appLE\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/RingHomProperties\", \"type\": \"∀ {P : CategoryTheory.MorphismProperty AlgebraicGeometry.Scheme}\\n  {Q : {R S : Type u} → [inst : CommRing R] → [inst_1 : CommRing S] → (R →+* S) → Prop}\\n  [AlgebraicGeometry.HasRingHomProperty P Q] {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y},\\n  (RingHom.StableUnderCompositionWithLocalizationAwaySou\", \"doc\": \"A morphism property $ P $ on a scheme morphism $ f $ is equivalent to the condition that for every point $ x $ in the domain, there exist affine open neighborhoods $ U $ in the codomain and $ V $ in t\"}\n  {\"name\": \"AlgebraicGeometry.HasRingHomProperty.of_stalkMap\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/RingHomProperties\", \"type\": \"∀ {P : CategoryTheory.MorphismProperty AlgebraicGeometry.Scheme}\\n  {Q : {R S : Type u} → [inst : CommRing R] → [inst_1 : CommRing S] → (R →+* S) → Prop}\\n  [AlgebraicGeometry.HasRingHomProperty P Q] {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y},\\n  (RingHom.OfLocalizationPrime fun {R S} [CommRing R] [C\", \"doc\": \"If a ring homomorphism property $ Q $, which is preserved under localization at prime ideals, holds for all stalk maps $ (f_{\\\\text{stalkMap}} x).\\\\text{hom} $ of a morphism $ f $, then the correspondin\"}\n  {\"name\": \"AlgebraicGeometry.HasRingHomProperty.of_isZariskiLocalAtSource_of_isZariskiLocalAtTarget\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/RingHomProperties\", \"type\": \"∀ (P : CategoryTheory.MorphismProperty AlgebraicGeometry.Scheme) [AlgebraicGeometry.IsZariskiLocalAtTarget P]\\n  [AlgebraicGeometry.IsZariskiLocalAtSource P],\\n  AlgebraicGeometry.HasRingHomProperty P fun {R S} [CommRing R] [CommRing S] f =>\\n    P (AlgebraicGeometry.Spec.map (CommRingCat.ofHom f))\", \"doc\": \"If a morphism property $ P $ is Zariski-local at both the source and the target, then $ P $ holds for the morphism of schemes $ \\\\operatorname{Spec}(S) \\\\to \\\\operatorname{Spec}(R) $ induced by any ring \"}\n",
+   "date": "2026-10-22",
+   "verdict": "match: AlgebraicGeometry.spread_out_of_isGermInjective', Mathlib/AlgebraicGeometry/SpreadingOut.lean:374–386, with the locally-Noetherian germ-injectivity instance at line 170."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"stalk\", \"exists\"",
+   "results": "[loogle] OK 1 hit(s)\n  {\"name\": \"AlgebraicGeometry.exists_smooth_of_formallySmooth_stalk\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Smooth\", \"type\": \" {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.LocallyOfFinitePresentation f] (x : ↥X) (H : (CommRingCat.Hom.hom (AlgebraicGeometry.Scheme.Hom.stalkMap f x)).FormallySmooth) : ∃ U, ∃ (_ : AlgebraicGeometry.IsAffineOpen U), ∃ V, ∃ (_ : AlgebraicGeometry.IsAffineOpen V) (hVU : V ≤ (T\", \"doc\": \"\"}\n",
+   "date": "2026-10-22",
+   "verdict": "match: AlgebraicGeometry.spread_out_of_isGermInjective', Mathlib/AlgebraicGeometry/SpreadingOut.lean:374–386, with the locally-Noetherian germ-injectivity instance at line 170."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Extend a morphism from Spec of a stalk to an open neighbourhood for a locally finite type target over a locally Noetherian scheme",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.spread_out_of_isGermInjective\", \"module\": \"Mathlib.AlgebraicGeometry.SpreadingOut\", \"type\": \"[LocallyOfFiniteType sY] {x : X} [X.IsGermInjectiveAt x] {y : Y} (e : sX x = sY y)\\n  (φ : Y.presheaf.stalk y ⟶ X.presheaf.stalk x)\\n  (h : sY.stalkMap y ≫ φ = S.presheaf.stalkSpecializes (Inseparable.of_eq e).specializes ≫ sX.stalkMap x) :\\n  ∃ (U : X.Opens) (hxU : x ∈ U) (f : U.toScheme ⟶ Y),\\n    Spe\", \"doc\": \"Let $s_X: X \\\\to S$ and $s_Y: Y \\\\to S$ be morphisms of schemes. Let $x \\\\in X$ and $y \\\\in Y$ be points such that $s_X(x) = s_Y(y)$. Let $\\\\phi: \\\\mathcal{O}_{Y,y} \\\\to \\\\mathcal{O}_{X,x}$ be a homomorphism \"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Opens.fromSpecStalkOfMem\", \"module\": \"Mathlib.AlgebraicGeometry.Stalk\", \"type\": \"{X : Scheme.{u}} (U : X.Opens) (x : X) (hxU : x ∈ U) : Spec (X.presheaf.stalk x) ⟶ U\", \"doc\": \"Given a scheme $X$, an open subset $U \\\\subseteq X$, and a point $x \\\\in U$, this constructs the morphism $\\\\operatorname{Spec}(\\\\mathcal{O}_{X,x}) \\\\to U$ by composing the inverse of the stalk map induced\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.fromSpecStalk\", \"module\": \"Mathlib.AlgebraicGeometry.Stalk\", \"type\": \"(X : Scheme) (x : X) : Spec (X.presheaf.stalk x) ⟶ X\", \"doc\": \"For a scheme $X$ and a point $x \\\\in X$, this constructs the morphism $\\\\operatorname{Spec}(\\\\mathcal{O}_{X,x}) \\\\to X$ by composing the morphism induced by the germ map $\\\\Gamma(U) \\\\to \\\\mathcal{O}_{X,x}$ \"}\n  {\"name\": \"AlgebraicGeometry.Scheme.fromSpecStalk_app\", \"module\": \"Mathlib.AlgebraicGeometry.Stalk\", \"type\": \"{x : X} (hxU : x ∈ U) :\\n  (X.fromSpecStalk x).app U =\\n    X.presheaf.germ U x hxU ≫\\n      (ΓSpecIso (X.presheaf.stalk x)).inv ≫ (Spec (X.presheaf.stalk x)).presheaf.map (homOfLE le_top).op\", \"doc\": \"For a scheme $X$ and a point $x \\\\in X$, the application of the morphism $\\\\operatorname{Spec}(\\\\mathcal{O}_{X,x}) \\\\to X$ at an open subset $U \\\\subseteq X$ containing $x$ is given by the composition of t\"}\n  {\"name\": \"AlgebraicGeometry.IsAffineOpen.fromSpecStalk\", \"module\": \"Mathlib.AlgebraicGeometry.Stalk\", \"type\": \"{X : Scheme} {U : X.Opens} (hU : IsAffineOpen U) {x : X} (hxU : x ∈ U) : Spec (X.presheaf.stalk x) ⟶ X\", \"doc\": \"For a scheme $X$, an affine open subset $U$, and a point $x \\\\in U$, this constructs the morphism $\\\\operatorname{Spec}(\\\\mathcal{O}_{X,x}) \\\\to X$ by composing the morphism induced by the germ map $\\\\Gamm\"}\n  {\"name\": \"AlgebraicGeometry.spread_out_of_isGermInjective'\", \"module\": \"Mathlib.AlgebraicGeometry.SpreadingOut\", \"type\": \"[LocallyOfFiniteType sY] {x : X} [X.IsGermInjectiveAt x] (φ : Spec (X.presheaf.stalk x) ⟶ Y)\\n  (h : φ ≫ sY = X.fromSpecStalk x ≫ sX) :\\n  ∃ (U : X.Opens) (hxU : x ∈ U) (f : U.toScheme ⟶ Y), φ = U.fromSpecStalkOfMem x hxU ≫ f ∧ f ≫ sY = U.ι ≫ sX\", \"doc\": \"Let $X$ and $Y$ be schemes with $s_X: X \\\\to S$ and $s_Y: Y \\\\to S$ morphisms locally of finite type. For a point $x \\\\in X$ where the germ map at $x$ is injective, and a morphism $\\\\phi: \\\\operatorname{Sp\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.PartialMap.fromSpecStalkOfMem\", \"module\": \"Mathlib.AlgebraicGeometry.RationalMap\", \"type\": \"(f : X.PartialMap Y) {x} (hx : x ∈ f.domain) : Spec (X.presheaf.stalk x) ⟶ Y\", \"doc\": \"Given a partial map $ f $ from a scheme $ X $ to a scheme $ Y $, and a point $ x $ in the domain of $ f $, this constructs the morphism $ \\\\operatorname{Spec}(\\\\mathcal{O}_{X,x}) \\\\to Y $ by composing th\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.instIsOverFromSpecStalkOfMem\", \"module\": \"Mathlib.AlgebraicGeometry.Stalk\", \"type\": \"{X : Scheme.{u}} (U : X.Opens) (x : X) (hxU : x ∈ U) : (U.fromSpecStalkOfMem x hxU).IsOver X\", \"doc\": \"The morphism from the spectrum of the stalk at a point $x$ to an open subset $U$ of a scheme $X$ is over $X$, meaning the composition with the inclusion of $U$ into $X$ commutes.\"}\n",
+   "date": "2026-10-22",
+   "verdict": "match: AlgebraicGeometry.spread_out_of_isGermInjective', Mathlib/AlgebraicGeometry/SpreadingOut.lean:374–386, with the locally-Noetherian germ-injectivity instance at line 170."
+  },
+  {
+   "tool": "grep",
+   "query": "(stalk|localRing).*(extend|exists.*[Hh]om)|[Hh]om.*(extend|spread)",
+   "results": "[grep] OK 2 hit(s)\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/Integral.lean\", \"line\": \"35\", \"text\": \"class IsIntegralHom {X Y : Scheme} (f : X ⟶ Y) : Prop extends IsAffineHom f where\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Birational/RationalMap.lean\", \"line\": \"217\", \"text\": \"  hom := (spread_out_of_isGermInjective' sX sY φ h).choose_spec.choose_spec.choose\"}\n",
+   "date": "2026-10-22",
+   "verdict": "match: AlgebraicGeometry.spread_out_of_isGermInjective', Mathlib/AlgebraicGeometry/SpreadingOut.lean:374–386, with the locally-Noetherian germ-injectivity instance at line 170."
+  },
+  {
+   "tool": "grep",
+   "query": "lemma Scheme.exists_germ_injective|IsLocallyNoetherian X.*IsGermInjective|lemma spread_out_of_isGermInjective'",
+   "results": "Mathlib/AlgebraicGeometry/SpreadingOut.lean:77 lemma Scheme.exists_germ_injective; :170 locally-Noetherian instance; :374 lemma spread_out_of_isGermInjective'. Full declarations read at 77–80, 170–191, 374–386.",
+   "date": "2026-10-22",
+   "verdict": "match: AlgebraicGeometry.spread_out_of_isGermInjective', Mathlib/AlgebraicGeometry/SpreadingOut.lean:374–386, with the locally-Noetherian germ-injectivity instance at line 170."
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "AlgebraicGeometry.spread_out_of_isGermInjective'",
+  "file": "Mathlib/AlgebraicGeometry/SpreadingOut.lean",
+  "how": "specializes in one line: apply spread_out_of_isGermInjective' a g φ h (lines 374–386), renaming X=T, Y=Z. AlgebraicGeometry.instIsGermInjectiveOfIsLocallyNoetherian (line 170, proof through 191) supplies germ injectivity at t. Its two equalities are exactly h ∘ c_{t,W}=φ and g ∘ h=a|_W, up to symmetry and Lean's left-to-right composition notation.",
+  "line": 374
+ },
+ "status": "mathlib",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-normal-modification-codimension-one",
+  "date": "2026-10-22",
+  "group": "Q03"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong §§3.9--3.12, Claim 3.10 and Lemma 3.13, printed p.609. Agent-formulated version: the proof of Lemma 3.13 uses only that rational exceptional curves have constant image in each target fibre; this property replaces its genus-at-least-two and pure-curve target hypotheses. This statement does not assert existence of a semistable source.; de Jong Lemma 3.13, rational exceptional-curve geometry before contraction; Step 5: isomorphism near every codimension-zero and codimension-one point of the regular resolution before applying point-blowup domination.; Stacks 0BFP repair: Tag 0BX6, lemma-morphism-defined-local-ring, (2)(c), expressed using Spec of a local ring; Mathlib SpreadingOut.lean lines 374–386 supplies the exact morphism form.",
+   "via": [
+    "lem-sfb-normal-modification-codimension-one",
+    "lem-sfb-nodal-trait-rational-domination",
+    "lem-sfb-high-genus-hom-closure",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ }
+}

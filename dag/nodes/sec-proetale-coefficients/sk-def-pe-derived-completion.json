@@ -40,47 +40,51 @@
    }
   },
   {
-   "text": "With the sheafified closed tensor of [det-def-sfb-sheaf-tensor-structure] and [sk-def-sfb-sheaf-tensor], use [lem-pe-internal-section-tensor-comparison] on a small site in the coefficient universe. Choose a flat-term K-flat representative $P$ of $K$ by [lem-pc-kflat-resolution]. $P$ is also K-flat in the sense of [sk-def-sfb-derived-categories]: for a quasi-isomorphism $u$, $\\operatorname{Tot}(P\\otimes_R\\operatorname{Cone}u)\\cong\\operatorname{Cone}(P\\otimes_Ru)$ is acyclic, and symmetrically. So the statement's derived extension [sk-def-sfb-derived-extension-of-scalars] and that of [lem-pur-derived-change-of-rings] are both computed by $P\\otimes_RB_n$ with unit $p\\mapsto p\\otimes1$; as left adjoints of the same exact restriction they agree with their units and adjoint transitions. Apply [lem-pe-kflat-scalar-tower-realization] to $R\\to B_n$: it identifies the actual derived reductions, transitions and scalar units with $P_n=P\\otimes_R B_n$, $t_n=1\\otimes(B_{n+1}\\to B_n)$ and $c_n(p)=p\\otimes1$. Both composites $t_nc_{n+1}$ and $c_n$ send $p$ to $p\\otimes1$, so the augmentation is strict.",
+   "text": "Apply lem-pe-internal-kflat-scalar-tower-realization directly in the native category Mod(Sheaf(X_proet,Ab),R). The canonical mapModComapIso identifies the pulled-back coefficient module with the restricted regular quotient module; its underlying identity makes the unit and transition hypotheses exactly the specified coefficient maps. The resulting level isomorphisms identify termwise tensor reductions and their units and transitions with integralLevel and integralStep, with no flat-term or section-module comparison.",
    "uses": [
-    "det-def-sfb-sheaf-tensor-structure",
-    "sk-def-sfb-sheaf-tensor",
-    "lem-pe-internal-section-tensor-comparison",
-    "lem-pc-kflat-resolution",
-    "sk-def-sfb-derived-categories",
-    "sk-def-sfb-derived-extension-of-scalars",
-    "lem-pur-derived-change-of-rings",
-    "lem-pe-kflat-scalar-tower-realization"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tags 06YS, lemma-K-flat-resolution, and 06YY, lemma-derived-base-change; the new scalar-tower realization lemma retains the actual units and transitions"
-   }
-  },
-  {
-   "text": "Countable products are exact by [lem-weil-proetale-countable-products-exact]. Hence [lem-weil-derived-limit-existence](2) computes their derived product by $V=\\prod_nP_n$. Define $s$ by $\\mathrm{pr}_ns=t_n\\mathrm{pr}_{n+1}$. The strict-augmentation clause of [lem-weil-strict-roos-comparison] identifies $(c,0):P\\to\\operatorname{Cone}(1-s)[-1]$ with the canonical derived-limit map. Its invertibility is independent of $P$ by [lem-pe-kflat-roos-representative-invariance]. Requiring this map to be invertible defines completeness.",
-   "uses": [
-    "lem-weil-proetale-countable-products-exact",
-    "lem-weil-derived-limit-existence",
-    "lem-weil-strict-roos-comparison",
-    "lem-pe-kflat-roos-representative-invariance"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/derived.tex",
-    "place": "Tag 08TC, definition-derived-limit, and lemma-products; the specified augmentation is supplied by the cited strict comparison"
-   }
-  },
-  {
-   "text": "Apply [lem-sfb-successive-derived-quotient-normalization] to $R\\to B_{n+1}\\to B_n$. Its natural isomorphism is the displayed reduction identity and respects the scalar units. The actual transition has formula $p\\otimes b\\mapsto p\\otimes\\bar b$; its adjoint is $(p\\otimes b)\\otimes a\\mapsto p\\otimes\\bar b a$, precisely that isomorphism. This proves normalization for the specified transitions.",
-   "uses": [
-    "lem-sfb-successive-derived-quotient-normalization",
+    "lem-pe-internal-kflat-scalar-tower-realization",
     "sk-def-sfb-derived-extension-of-scalars"
    ],
    "elementary": false,
    "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 0D6D, lemma-derived-pullback-composition, specialized to coefficient changes"
+    "document": "lean/WeilConjectures/CategoryTheory/ModuleObjects/DerivedExtendScalars.lean",
+    "place": "Native K-flat computation counit, exact restriction and derived extension-restriction adjunction"
+   }
+  },
+  {
+   "text": "Pro-etale repleteness gives the epimorphism of the zero projection of a countable inverse sequence in abelian sheaves. Mod.epiπAppZeroOfEpi lifts this to native internal modules, and CountableAB4Star.of_epi_π_app_zero gives exact countable products. Apply lem-weil-derived-countable-products-core to the termwise tower. Construct the signed coordinate isomorphism from mappingCocone(1-s) to the explicit roos complex, sending its second coordinate to its negative; verify its differential and inverse directly. Transport the distinguished cocone triangle through localization and the unique product comparison. Projecting its first map onto each factor and using the scalar-unit identities proves the displayed completionMap equation.",
+   "uses": [
+    "lem-weil-derived-countable-products-core",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tags 08TC and 07KC; the native repleteness API is WeilConjectures.AlgebraicGeometry.ProEtale.RepleteAddCommGrp and ModuleObjects.SequentialLimitEpi"
+   }
+  },
+  {
+   "text": "For representative independence refine a derived isomorphism to a common right-fraction roof and replace its vertex by a native K-flat resolution (the generic exists_quasiIso_flat_kFlat source theorem attached to lem-pc-source-module-kflat-resolution). Tensoring a quasi-isomorphism between K-flat complexes with any fixed coefficient preserves quasi-isomorphisms by acyclicity of its K-flat cone. Exact countable products preserve their levelwise quasi-isomorphisms. The explicit diagonal coordinate map of the two Roos models is a quasi-isomorphism by lem-pe-roos-coordinates-quasi-iso and commutes with the (unit,0) augmentations. Cancel the two localized roof legs; then cancel the representative isomorphism in completionMap. This proves isDerivedComplete_iff.",
+   "uses": [
+    "lem-pc-source-module-kflat-resolution",
+    "lem-pe-roos-coordinates-quasi-iso",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "lean/WeilConjectures/CategoryTheory/DerivedCategory/KFlatAcyclic.lean",
+    "place": "acyclic_tensorRight_of_kFlat, combined with Mathlib DerivedCategory.Fractions and HomologicalComplexLimits"
+   }
+  },
+  {
+   "text": "The reduction comparison is defined by left-adjoint uniqueness for the composite extension-restriction adjunction. The mate of the specified transition is its isomorphism by the triangle identities, proving derivedReduction_isNormalized. The same uniqueness identity identifies the composite of the two actual units with the direct unit, proving reductionUnit_compatible. No additional successive-quotient comparison theorem is used.",
+   "uses": [
+    "sk-def-sfb-derived-extension-of-scalars"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "lean/Sheaf/SixFunctors/ProEtale/DerivedCompletion.lean",
+    "place": "isIso_mate_unit and composed_unit_compatible, elementary adjunction calculations"
    }
   },
   {
@@ -101,24 +105,20 @@
   "sk-def-sfb-pulled-back-coefficients",
   "sk-def-sfb-derived-categories",
   "sk-def-sfb-derived-tensor-hom",
-  "det-def-sfb-sheaf-tensor-structure",
-  "sk-def-sfb-sheaf-tensor",
-  "lem-pe-internal-section-tensor-comparison",
-  "lem-pc-kflat-resolution",
+  "lem-pe-internal-kflat-scalar-tower-realization",
   "sk-def-sfb-derived-extension-of-scalars",
-  "lem-pur-derived-change-of-rings",
-  "lem-pe-kflat-scalar-tower-realization",
-  "lem-weil-proetale-countable-products-exact",
-  "lem-weil-derived-limit-existence",
-  "lem-weil-strict-roos-comparison",
-  "lem-pe-kflat-roos-representative-invariance",
-  "lem-sfb-successive-derived-quotient-normalization",
+  "lem-weil-derived-countable-products-core",
+  "def-weil-abstract-derived-category",
+  "lem-pc-source-module-kflat-resolution",
+  "lem-pe-roos-coordinates-quasi-iso",
   "lem-pe-two-term-reduction-cohomology"
  ],
  "proof_origin": {
-  "by": "agent",
-  "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-pe-derived-completion/_section.md",
-  "place": "Definition and normalization/cohomology paragraphs. Short assembly after extracting simultaneous scalar-tower realization and the explicit two-term cohomology witness as new statement-only nodes; uses Stacks 06YS, 06YY, 08TC and 0D6D and existing general comparisons."
+  "by": "worker",
+  "group": "T5",
+  "date": "2026-10-24",
+  "document": "literature/blueprint/latest/blueprint/sec-proetale-coefficients/sk-def-pe-derived-completion/_section.md",
+  "place": "Same definition and normalized quotient tower. Native K-flat roof proof of representative independence; direct signed mapping-cocone and exact-product proof of the limit triangle; scalar realization isolated as a native internal-module result."
  },
  "mathlib_searches": [
   {
@@ -260,18 +260,7 @@
    }
   ]
  },
- "tool_uses": [
-  "lem-pc-kflat-resolution",
-  "lem-weil-proetale-countable-products-exact",
-  "lem-weil-derived-limit-existence",
-  "lem-weil-pbc-profinite-point-pullback",
-  "lem-weil-pbc-site-pullback-abelian-exact",
-  "lem-pc-bounded-above-flat-kflat-site",
-  "def-weil-pbc-internal-abelian-sheaf-module-equivalence",
-  "lem-weil-strict-roos-comparison",
-  "lem-sfb-successive-derived-quotient-normalization",
-  "lem-pur-derived-change-of-rings"
- ],
+ "tool_uses": [],
  "reviewed": {
   "date": "2026-10-21",
   "by": "L",
@@ -280,7 +269,18 @@
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-O4-3703f66f3 (reviewer sub-agent of L); spot-checked: I read the item, both new nodes, every cited statement, the human re-split note of 2026-10-21 (at least 2 new nodes, at most 3000 characters, nothing summarised away) and main-20261015 _section.md. The item statement matches that file word for word, and stmt_deps and the unit are unchanged. No SGA source is used, the item is not on the dropped list and is not superseded live, and there is no cycle. Old-proof map: old step 3 (K-flat tower, units, transitions) became lem-pe-kflat-scalar-tower-realization; old steps 4-5 are carried by existing nodes whose statements contain the Roos complex and the zero-component normalization (strict-roos, representative-invariance); old steps 6-7 by lem-sfb-successive-derived-quotient-normalization; old step 8 became lem-pe-two-term-reduction-cohomology. The two new nodes are similar in size and do separate work. Neither restates the item. Node 1 is true: the unit equation is clause (1) of the sheaf-ring adjunction lemma, and the adjoint of (x⊗s)⊗t↦x⊗b(s)t is t_n. It is the general sheaf-ring version of lem-coef-normalized-dvr-kflat-*, not a duplicate. Node 2 is true: kernel of ℓ = C(S,ℓ^(n-1)Z/ℓ^n) ≅ F_ℓ; at ℓ=2, n=1, {0,2} in Z/4 maps to 0; H^0 transition is the identity; k_X⊗B_n ≅ k_X; k_X≠0 because X is nonempty; Ω algebraically closed meets the separably-closed hypothesis. I fixed two linked faults. (1) C4/E5 in item step 2, repeated from fa7b/Q30: the item's Layer B derived extension uses K-flat in the preserves-quasi-isomorphisms sense, but the new node and lem-pe-internal-section-tensor-comparison only give acyclic-test K-flatness, and the cone argument was dropped. I restored it (Tot(P⊗Cone u)=Cone(P⊗u)) and stated that the units and transitions agree because both functors are left adjoint to the same exact restriction. I added uses sk-def-sfb-derived-categories, sk-def-sfb-derived-extension-of-scalars and lem-pur-derived-change-of-rings, declared the last as a tool use, and recomputed proof_deps; the proof is now 2679 characters. (2) C1/E5 in lem-pe-kflat-scalar-tower-realization: it gave the lem-pur functors F_n, G_n the ring-object adjunction of sk-def-sfb-derived-extension-of-scalars, which is a different functor. I replaced it in the statement and stmt_deps with lem-pur-sheaf-ring-derived-coefficient-adjunction (small site, arbitrary ring map, normalized units); the mathematics is unchanged. Maintainer notes: node-level tool_uses still list point-pullback/K-flat/E_R nodes now used only by node 2; the DVR kflat nodes are specializations of node 1.; 2 file(s) fixed by the reviewer"
  },
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
  "lean": {
   "module": "Sheaf.SixFunctors.ProEtale.DerivedCompletion",
   "declaration": "AlgebraicGeometry.ProEtale.IsDerivedComplete",
@@ -296,6 +296,7 @@
    "AlgebraicGeometry.ProEtale.AdicCompletion.transitionRingSheaf",
    "AlgebraicGeometry.ProEtale.AdicCompletion.transitionRing",
    "AlgebraicGeometry.ProEtale.AdicCompletion.transition",
+   "AlgebraicGeometry.ProEtale.AdicCompletion.transition_isMonHom",
    "AlgebraicGeometry.ProEtale.AdicCompletion.coefficient_linearity",
    "AlgebraicGeometry.ProEtale.AdicCompletion.quotientUnit",
    "AlgebraicGeometry.ProEtale.AdicCompletion.quotientStep",
@@ -330,7 +331,20 @@
    "AlgebraicGeometry.ProEtale.AdicCompletion.integralStep",
    "AlgebraicGeometry.ProEtale.AdicCompletion.derivedTower",
    "AlgebraicGeometry.ProEtale.AdicCompletion.reductionUnit_compatible",
-   "AlgebraicGeometry.ProEtale.AdicCompletion.roos_isDerivedLimit"
+   "AlgebraicGeometry.ProEtale.AdicCompletion.roos_isDerivedLimit",
+   "AlgebraicGeometry.ProEtale.AdicCompletion.adjunctionAssociation",
+   "AlgebraicGeometry.ProEtale.AdicCompletion.ringMonoidalObject",
+   "AlgebraicGeometry.ProEtale.AdicCompletion.ringCommutative",
+   "AlgebraicGeometry.ProEtale.AdicCompletion.finiteRingMonoidalObject",
+   "AlgebraicGeometry.ProEtale.AdicCompletion.finiteRingCommutative",
+   "AlgebraicGeometry.ProEtale.AdicCompletion.modulesMonoidal",
+   "AlgebraicGeometry.ProEtale.AdicCompletion.modulesSymmetric",
+   "AlgebraicGeometry.ProEtale.AdicCompletion.modulesClosed",
+   "AlgebraicGeometry.ProEtale.AdicCompletion.modulesMonoidalPreadditive",
+   "AlgebraicGeometry.ProEtale.AdicCompletion.finiteModulesDerived",
+   "AlgebraicGeometry.ProEtale.AdicCompletion.modulesDerived",
+   "AlgebraicGeometry.ProEtale.AdicCompletion.modulesProducts",
+   "AlgebraicGeometry.ProEtale.AdicCompletion.complexProducts"
   ],
   "file": "lean/Sheaf/SixFunctors/ProEtale/DerivedCompletion.lean",
   "statement": "def IsDerivedComplete (l : ℕ) [Fact l.Prime] (E : Type u) [Field E] [Algebra (Padic l) E] [FiniteDimensional (Padic l) E] (X : Scheme.{u}) (K : DerivedCategory (AdicCompletion.Modules l E X)) : Prop",
@@ -349,13 +363,23 @@
   "note": "Repairs both H3 faults of return d2ecf223078d: the ambient category is Mod over condensedRingObj(DerivedNakayama.integerRing) (p_X^* of the continuous condensed O_E, recorded deps), not constant sheaves; normalization is declared in the finite-ring derived categories (finiteExtend over B_(n+2), canonical restrictComp/reductionComp via leftAdjointUniq, derivedStep, IsNormalized as the adjunction mate). IsDerivedComplete = exists a K-flat P (same quasiIso.kFlat predicate as the recorded PreservesKFlatQuasiIso/derived extension) with Q P ≅ K and Q(augmentation) iso, where augmentation = (product of p to p⊗1, 0) into the explicit Roos complex (d(x,y) = (dx,(1-s)x-dy), d² = 0 checked, 1-s = towerTransitionEndomorphism); representative independence and the derived-limit identification are stated as sorry'd theorems. Edge cases ok (empty X, levels n+1, unbounded K, no flatness of transitions). E : Type u tied to X is forced by the recorded Profinite.{u}/Ab.{u+1} interfaces and loses no case. No duplicate (def-weil-derived-complete is a different node), no name clash, no DAG cycle via DerivedNakayamaResolution; non-lean fields equal main; 46/46 declarations present; statement verbatim; docstrings and both report sections present; only sorry proofs. nt_compile --json of the snapshot file: rc 0, no errors or warnings, 44.5 s / 42.9 s."
  },
  "reviewed_proof": {
-  "date": "2026-10-19",
+  "date": "2026-10-24",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "V7",
-  "result": "pass",
-  "landing": "20261019T034331-L-422373",
-  "kind": "proof",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "reviewer": "C-ec24d",
+  "group": "T5",
+  "result": "fix",
+  "landing": "20261024T020553-L-2620352",
+  "kind": "interface",
+  "note": "independent cc review: delivered DerivedCompletion.lean + InternalKFlatScalarTowerRealization.lean + nodes + change record vs clones/live and the packet; 28 direct importers + 9 intermediates compiled with lcompile --all (exit 0); DiagonalTowerLimit times out on published too; #print axioms clean"
+ },
+ "blueprint_update": {
+  "snapshot": "main-20261023-1620",
+  "commit": "7284bb09daf97437d544c51882b325f9c52cd345",
+  "changed": [
+   "statement"
+  ],
+  "statement": "Let $E/\\Ql$ be finite, with uniformizer $\\pi_E$, and let\n$\\mathcal O_{E,X}=p_X^*\\underline{\\mathcal O_E}$ and $(\\mathcal O_E/\\pi_E^n)_X$ be\nthe integral and finite coefficient sheaves of\n[det-def-sfb-pulled-back-coefficients]. A complex\n$K\\in D(X_{\\Proet},\\mathcal O_E)$ is *derived complete* if its canonical map\n\n$$\nK\\longrightarrow R\\varprojlim_n\\bigl(K\\otimes^{\\mathbf L}_{\\mathcal O_{E,X}}(\\mathcal O_E/\\pi_E^n)_X\\bigr)\n$$\n\nis an isomorphism. For\n$K_n=K\\otimes^{\\mathbf L}_{\\mathcal O_{E,X}}(\\mathcal O_E/\\pi_E^n)_X$, the canonical\ntransitions satisfy the derived reduction identities\n$K_{n+1}\\otimes^{\\mathbf L}_{(\\mathcal O_E/\\pi_E^{n+1})_X}(\\mathcal O_E/\\pi_E^n)_X\\simeq K_n$;\na compatible tower with these identities is called *normalized*.\n\nNormalization is a property of the complexes $K_n$. Their cohomology sheaves\n$H^q(K_n)$ in general do not form a normalized tower under the ordinary\ntensor product.",
+  "proof": [],
+  "note": "the current blueprint (main-20261023-1620, weil-conjectures-blueprint 7284bb09da) states or proves this differently; a worker who touches the node follows it"
  }
 }

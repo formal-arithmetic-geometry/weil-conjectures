@@ -1,0 +1,264 @@
+{
+ "id": "lem-sfb-barsotti-chevalley-decomposition",
+ "kind": "statement",
+ "title": "Barsotti--Chevalley decomposition over an algebraically closed field",
+ "statement": "Let $k$ be an algebraically closed field [def-weil-field, def-weil-algebraic-closure] and let $H/k$ be a smooth connected separated group scheme of finite type [def-sc-group-scheme, def-sbc-smooth-morphisms, def-weil-connected-scheme, def-weil-finite-type-morphism, def-weil-pbc-scheme-conventions], not necessarily commutative. There exist a smooth connected affine $k$-group scheme $L$ of finite type, a closed normal subgroup inclusion $a:L\\hookrightarrow H$ [def-sc-group-scheme-subgroup], an abelian variety $C/k$ [def-sc-abelian-variety], and a homomorphism $p:H\\to C$ such that $a$ identifies $L$ with the scheme-theoretic kernel of $p$ and $p$ is locally surjective for the big fppf topology [def-pc-fppf-site]. Here affine means isomorphic to the spectrum of a commutative ring [def-pc-scheme]. The trivial group and zero-dimensional abelian variety are allowed.",
+ "source": {
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Theorem 8.27 and Note 8.30, printed pp.154--155; quotient map of Theorem 5.14 and Propositions 5.24--5.25, printed pp.102,104--105. Smoothness of the affine subgroup is part of the group-variety assertion over a perfect field. Algebraically closed specialization; fppf exactness is also explained in Conrad Definition 2.2. No Stacks tag states the Barsotti--Chevalley theorem."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-weil-algebraic-closure",
+  "def-sc-group-scheme",
+  "def-sbc-smooth-morphisms",
+  "def-weil-connected-scheme",
+  "def-weil-finite-type-morphism",
+  "def-weil-pbc-scheme-conventions",
+  "def-sc-abelian-variety",
+  "def-pc-scheme",
+  "def-sc-group-scheme-subgroup",
+  "def-pc-fppf-site"
+ ],
+ "proof": [
+  {
+   "text": "Apply [lem-sfb-affine-normal-subgroup-products] to the ambient group $H$. The dimensions of its smooth connected affine closed normal subgroups form a nonempty subset of $\\{0,\\ldots,\\dim H\\}$: the identity subgroup $1=\\operatorname{Spec}k$ is one such subgroup. Choose $L$ with greatest dimension, and let $a:L\\hookrightarrow H$ be its inclusion. This already gives smoothness, connectedness, affineness, finite type and closed normality of $L$.",
+   "uses": [
+    "lem-sfb-affine-normal-subgroup-products"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 8.2 and Proposition 6.42, printed pp.149,134: greatest-dimension choice."
+   }
+  },
+  {
+   "text": "If $M\\subseteq H$ is any other smooth connected affine closed normal subgroup, [lem-sfb-affine-normal-subgroup-products] gives such a subgroup $P=LM$ containing $L$ and $M$. A strict inclusion $L\\subsetneq P$ would give $\\dim L<\\dim P$, contrary to the choice of $L$. Thus $P=L$ and $M\\subseteq L$. In particular $L$ is the largest subgroup with the stated properties.",
+   "uses": [
+    "lem-sfb-affine-normal-subgroup-products"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 8.2 through Lemma 6.41 and Proposition 6.42, printed pp.149,134."
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-smooth-affine-normal-quotient-lifts] to $(H,L)$. Obtain a smooth connected separated finite-type group scheme $Q$ and a smooth surjective homomorphism $p:H\\to Q$ of finite presentation with scheme-theoretic kernel $L$. The lemma applies because step 1 gave every hypothesis on $L$; no commutativity or affineness of $H$ is required.",
+   "uses": [
+    "lem-sfb-smooth-affine-normal-quotient-lifts"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Theorem 5.14, Propositions 5.24--5.25, Corollary 5.26 and Proposition 1.62; printed pp.102,104--105,24."
+   }
+  },
+  {
+   "text": "Let $S\\subseteq Q$ be a smooth connected affine closed normal subgroup. By [lem-sfb-smooth-affine-normal-quotient-lifts], its inverse image $P=H\\times_Q S$ is a smooth connected affine closed normal subgroup of $H$ containing $L$, and $P\\to S$ has kernel $L$. Step 2 gives $P=L$. For any $s:T\\to S$, pull back $p$ along $T\\to S\\hookrightarrow Q$. The resulting $u:U\\to T$ is flat, surjective and finitely presented by the same lemma. It is fpqc [def-weil-pbc-fpqc-covering]: for an affine open $V\\subseteq T$, quasi-compactness gives a finite affine cover of $u^{-1}(V)$, whose images cover $V$. Its lift to $P=L$ shows that $s\\circ u$ is the identity section. By uniqueness in [lem-weil-pbc-fpqc-representable-descent], $s$ is the identity section. Taking $T=S$ and $s=\\mathrm{id}_S$ yields $e_S\\circ(S\\to\\operatorname{Spec}k)=\\mathrm{id}_S$; the reverse composite is the identity of $\\operatorname{Spec}k$. Hence $S$ is trivial.",
+   "uses": [
+    "lem-sfb-smooth-affine-normal-quotient-lifts",
+    "lem-weil-pbc-fpqc-representable-descent",
+    "def-weil-pbc-fpqc-covering"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 8.2 last sentence, printed p.149; Theorem 5.55, p.113. Local equality uses representable fpqc descent, Stacks Tag 023Q, descent.tex, lemma-fpqc-universal-effective-epimorphisms."
+   }
+  },
+  {
+   "text": "Step 4 verifies exactly the no-affine-normal-subgroup hypothesis of [lem-sfb-pseudoabelian-proper-algclosed] for $Q$; the other hypotheses hold by step 3 and the field hypothesis of the item. Hence $Q$ is proper. Put $C=Q$. By [def-sc-abelian-variety], properness, smoothness and connectedness are precisely the required abelian-variety properties. In particular no extra commutativity hypothesis has been used.",
+   "uses": [
+    "lem-sfb-pseudoabelian-proper-algclosed",
+    "def-sc-abelian-variety"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Theorems 8.26--8.27, printed pp.154--155; definition of complete group variety."
+   }
+  },
+  {
+   "text": "For a $k$-scheme $T$ and a point $x:T\\to C$, [lem-sfb-smooth-affine-normal-quotient-lifts] says that $H\\times_C T\\to T$ is flat, surjective and locally of finite presentation, hence is an fppf covering. Its first projection is a lift of $x$ to $H$ over that covering. This proves local surjectivity of $p$ in the big fppf topology. The kernel identification and inclusion are those of step 3, so $(L,a,C,p)$ has every property in the statement. The argument used no positive-dimension requirement on either $L$ or $C$, and includes the trivial group.",
+   "uses": [
+    "lem-sfb-smooth-affine-normal-quotient-lifts"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Propositions 5.24--5.25 and Corollary 5.27, printed pp.104--105; fppf interpretation of the quotient morphism."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-affine-normal-subgroup-products",
+  "lem-sfb-smooth-affine-normal-quotient-lifts",
+  "lem-weil-pbc-fpqc-representable-descent",
+  "def-weil-pbc-fpqc-covering",
+  "lem-sfb-pseudoabelian-proper-algclosed",
+  "def-sc-abelian-variety"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Theorem 8.27, proof on printed p.155 via Proposition 8.2 (p.149), Lemma 6.41 and Proposition 6.42 (p.134), Theorem 8.26 (p.154), and quotient theory of Chapter 5."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Every smooth connected group scheme over an algebraically closed field has a connected affine normal subgroup with abelian variety quotient",
+   "results": "{\"t\": \"2026-10-24T07:03:56Z\", \"tool\": \"leanfinder\", \"query\": \"Every smooth connected group scheme over an algebraically closed field has a connected affine normal subgroup with abelian variety quotient\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.PreGaloisCategory.exists_hom_from_galois_of_connected\", \"CategoryTheory.PreGaloisCategory.has_decomp_quotients\", \"CategoryTheory.PreGaloisCategory.has_decomp_connected_components\", \"CategoryTheory.PreGaloisCategory.has_decomp_connected_components'\", \"CategoryTheory.PreGaloisCategory.instIsPretransitiveCarrierObjFintypeCatOfIsConnected\", \"CategoryTheory.PreGaloisCategory.exists_lift_of_quotient_openSubgroup\", \"Field.absoluteGaloisGroupAbelianization\", \"CategoryTheory.PreGaloisCategory.IsGalois.toIsConnected\"], \"digest\": \"8bfbf51236cacd79\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: results concern abstract or topological groups, Lie groups, linear endomorphisms, affine-space maps, or sheaf categories; none states this algebraic-group-scheme assertion."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsAbelianVariety\", \"IsAffine\"",
+   "results": "{\"t\": \"2026-10-24T07:03:47Z\", \"tool\": \"loogle\", \"query\": \"\\\"IsAbelianVariety\\\", \\\"IsAffine\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: results concern abstract or topological groups, Lie groups, linear endomorphisms, affine-space maps, or sheaf categories; none states this algebraic-group-scheme assertion."
+  },
+  {
+   "tool": "grep",
+   "query": "Barsotti|Chevalley.*decomposition|affine.*abelian.*variety",
+   "results": "{\"t\": \"2026-10-24T07:03:47Z\", \"tool\": \"grep\", \"query\": \"Barsotti|Chevalley.*decomposition|affine.*abelian.*variety\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: results concern abstract or topological groups, Lie groups, linear endomorphisms, affine-space maps, or sheaf categories; none states this algebraic-group-scheme assertion."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Chevalley decomposition of a smooth connected algebraic group into affine group and abelian variety",
+   "results": "{\"t\": \"2026-10-24T07:03:47Z\", \"tool\": \"leansearch\", \"query\": \"Chevalley decomposition of a smooth connected algebraic group into affine group and abelian variety\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Module.End.exists_isNilpotent_isSemisimple\", \"Module.End.exists_isNilpotent_isSemisimple_of_separable_of_dvd_pow\", \"LibraryNote.Design_choices_about_smooth_algebraic_structures\", \"LieGroup\", \"GroupLieAlgebra\", \"LieGroup.casesOn\", \"LieGroup.recOn\", \"LieAddGroup.toContMDiffAdd\"], \"digest\": \"300f794452245f9a\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: results concern abstract or topological groups, Lie groups, linear endomorphisms, affine-space maps, or sheaf categories; none states this algebraic-group-scheme assertion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A connected algebraic group over a perfect field is an extension of an abelian variety by a smooth connected affine group",
+   "results": "{\"t\": \"2026-10-24T07:03:57Z\", \"tool\": \"leanfinder\", \"query\": \"A connected algebraic group over a perfect field is an extension of an abelian variety by a smooth connected affine group\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.PreGaloisCategory.exists_hom_from_galois_of_connected\", \"CategoryTheory.PreGaloisCategory.instIsPretransitiveCarrierObjFintypeCatOfIsConnected\", \"LieAlgebra.isExtension_of_surjective\", \"CategoryTheory.PreGaloisCategory.instFiniteAutOfIsConnected\", \"Field.absoluteGaloisGroupAbelianization\", \"instLieAddGroupOfTopWithTopENat\", \"IsSolvable\", \"CategoryTheory.PreGaloisCategory.has_decomp_connected_components'\"], \"digest\": \"7ff34035be708778\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: results concern abstract or topological groups, Lie groups, linear endomorphisms, affine-space maps, or sheaf categories; none states this algebraic-group-scheme assertion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Every smooth connected algebraic group has an affine normal subgroup with abelian variety quotient",
+   "results": "{\"t\": \"2026-10-24T07:32:17Z\", \"tool\": \"leanfinder\", \"query\": \"Every smooth connected algebraic group has an affine normal subgroup with abelian variety quotient\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.PreGaloisCategory.has_decomp_quotients\", \"instLieGroupOfNatWithTopENatOfIsTopologicalGroup\", \"TopologicalAbelianization\", \"CategoryTheory.PreGaloisCategory.exists_lift_of_quotient_openSubgroup\", \"solvable_quotient_of_solvable\", \"instLieAddGroupOfTopWithTopENat\", \"Field.absoluteGaloisGroup.commutator_closure_isNormal\", \"Subgroup.instFiniteQuotientSubtypeMemOpenSubgroupOfIsTopologicalGroupOfCompactSpace\"], \"digest\": \"f9d33031e973512e\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected hits; abstract/topological groups, Lie groups, general scheme morphisms or component predicates do not state this group-scheme assertion."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Barsotti Chevalley decomposition of algebraic group schemes",
+   "results": "{\"t\": \"2026-10-24T07:32:16Z\", \"tool\": \"leansearch\", \"query\": \"Barsotti Chevalley decomposition of algebraic group schemes\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Module.End.exists_isNilpotent_isSemisimple\", \"Module.End.exists_isNilpotent_isSemisimple_of_separable_of_dvd_pow\", \"AlgebraicGeometry.Scheme\", \"MonoidAlgebra.Submodule.instIsSemisimpleModule\", \"AddAction.orbitProdStabilizerEquivAddGroup\", \"AlgebraicGeometry.instIsAffineCoprodScheme\", \"DirectSum.decomposeAlgEquiv_symm_apply\", \"DirectSum.decompose_algebraMap\"], \"digest\": \"67aafa93c0e65302\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected hits; abstract/topological groups, Lie groups, general scheme morphisms or component predicates do not state this group-scheme assertion."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsAffine\", \"GrpObj\"",
+   "results": "{\"t\": \"2026-10-24T07:32:16Z\", \"tool\": \"loogle\", \"query\": \"\\\"IsAffine\\\", \\\"GrpObj\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"AlgebraicGeometry.instHopfAlgebraCarrierObjOppositeOpensCarrierCarrierCommRingCatPresheafOpOpensTopOfGrpObjOverSchemeSpecAsOverOfIsAffine\"], \"digest\": \"f974a08dec113b64\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected hits; abstract/topological groups, Lie groups, general scheme morphisms or component predicates do not state this group-scheme assertion."
+  },
+  {
+   "tool": "grep",
+   "query": "Barsotti|Chevalley.*decomposition|pseudo.?abelian",
+   "results": "{\"t\": \"2026-10-24T07:32:16Z\", \"tool\": \"grep\", \"query\": \"Barsotti|Chevalley.*decomposition|pseudo.?abelian\", \"sub\": \"\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/Algebra/Lie/AdjointAction/JordanChevalley.lean\", \"Mathlib/Algebra/Lie/AdjointAction/JordanChevalley.lean\", \"Mathlib/Dynamics/Newton.lean\", \"Mathlib/Dynamics/Newton.lean\", \"Mathlib/Dynamics/Newton.lean\", \"Mathlib/RingTheory/Perfectoid/BDeRham.lean\", \"Mathlib/RingTheory/Perfectoid/FontaineTheta.lean\", \"Mathlib/LinearAlgebra/JordanChevalley.lean\"], \"digest\": \"a84d39484403bc58\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected hits; abstract/topological groups, Lie groups, general scheme morphisms or component predicates do not state this group-scheme assertion."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-smooth-connected-semiabelian-subgroup",
+  "date": "2026-10-24",
+  "group": "Q69"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "Conrad Corollary 3.2, proof of the subgroup direction: the Chevalley affine part of the subgroup and its abelian quotient.",
+   "via": [
+    "lem-sfb-smooth-connected-semiabelian-subgroup",
+    "lem-sfb-semiabelian-closed-subgroup-trivial-torsion-finite",
+    "lem-sfb-generically-isomorphic-semiabelian-open-immersion",
+    "lem-sfb-trait-semiabelian-hom-extension",
+    "lem-sfb-semiabelian-generic-graph-proper",
+    "lem-sfb-normal-semiabelian-hom-extension",
+    "lem-sfb-symmetric-line-power-prolongation",
+    "lem-sfb-normal-symmetric-cubical-extension",
+    "lem-sfb-symmetric-ample-power-extension",
+    "lem-sfb-regular-group-generic-ampleness",
+    "lem-sfb-stable-picard-theta-ampleness",
+    "lem-sfb-stable-relative-picard-kummer",
+    "lem-sfb-stable-level-versal-branch-freeness",
+    "lem-sfb-stable-abelian-level-normalization",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-barsotti-chevalley-decomposition",
+  "worker": "stage1",
+  "summary": "Followed Milne Theorem 8.27 via the maximal affine normal subgroup and pseudo-abelian properness. Wrote the maximality and inverse-image contradiction explicitly, retaining noncommutative groups and fppf local surjectivity. Added three statement-only lemmas, after DAG/whole-blueprint/project/Mathlib searches; existing affine-only and commutative-only quotient nodes do not apply. The item statement is unchanged.",
+  "blueprint": "The ancestor tool reports no imported blueprint ancestor (from.node null); retained the recorded Conrad Corollary 3.2 subgroup-direction place and its via chain. This is the Chevalley decomposition input below the semiabelian subgroup proof. Latest blueprint whole-tree searches find no equivalent decomposition, product, general normal-quotient or pseudo-abelian node.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-fpqc-representable-descent",
+    "why": "Step 4 uses uniqueness of descent of scheme morphisms to detect equality after a quotient cover. This is a generic descent tool, not a replacement of the unit route."
+   },
+   {
+    "node": "def-weil-pbc-fpqc-covering",
+    "why": "Step 4 checks the precise fpqc covering definition for a flat surjective finitely presented pullback before invoking representable descent."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-fpqc-representable-descent",
+  "def-weil-pbc-fpqc-covering"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-NZ-c679e6c22",
+  "group": "NZ",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NZ-c679e6c22 (reviewer sub-agent of L); spot-checked: PASS, no fixes. I read the item and all three new nodes in full and checked them against Milne, Algebraic Groups (2017): Thm 8.27 (pp.154-155), Prop 8.2/8.6, Def 8.3, Thm 8.26, Lemma 6.41 and Prop 6.42 (p.134), Prop 8.1, 1.62 and 5.59, Thm 5.14, Prop 5.24-5.25, Cor 5.26 and Thm 5.55. The item is the algebraically closed, existence-only case of Thm 8.27, which does not weaken the source; its statement and stmt_deps are identical to live, where the item is still unsplit with no repair note. Proof check: steps 1-2 choose L of greatest dimension and use the product and strict dimension clauses of affine-normal-subgroup-products to show every other such subgroup lies in L (Milne 6.42). Step 3 applies smooth-affine-normal-quotient-lifts to (H,L). Step 4 shows the inverse image of S equals L, so any T-point of S becomes the identity after the pulled-back fpqc cover {u}; uniqueness in fpqc-representable-descent gives s = e∘π, so S is trivial. Step 5 uses pseudoabelian-proper-algclosed (exactly Milne Thm 8.26) and def-sc-abelian-variety. Step 6 gets fppf local surjectivity from the base-change covering clause. New nodes: the product MN is the image of M⋊N and is affine, smooth and connected by Prop 8.1; equal-dimension smooth connected subgroups coincide because they are irreducible and reduced; the quotient lemma's smoothness, finite presentation and inverse-image clauses follow from Prop 1.62, Prop 5.25 and Prop 8.1. Small cases tested: H=1, GL_n, A×GL_n, and μ_p (excluded by the smooth-kernel hypothesis). Not duplicates of affine-normal-quotient-geometry (needs affine G), algebraic-group-homomorphism-factorization (needs a given homomorphism), algebraic-group-homogeneous-quotient (no group structure), smooth-commutative-subgroup-quotient (commutative only), solvable-normal-subgroup-products (affine, solvable) or lem-ag-equal-dimension-subgroup (matrix groups over Q̄_ℓ). No new node restates the item. Form B1-B9: stmt_deps equal the cited ids, three search kinds recorded, blueprint chain inherited with same_as []. Accepted tool_uses: lem-weil-pbc-fpqc-representable-descent (status mathlib) and def-weil-pbc-fpqc-covering, both generic. coord/dag-sync.md is absent from the snapshot."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.BarsottiChevalleyDecomposition",
+  "declaration": "AlgebraicGeometry.exists_barsotti_chevalley_decomposition",
+  "file": "lean/Sheaf/AlgebraicGeometry/BarsottiChevalleyDecomposition.lean",
+  "statement": "theorem exists_barsotti_chevalley_decomposition (k : Type u) [Field k] [IsAlgClosed k] (H : Over (Spec (.of k))) [GrpObj H] [Smooth H.hom] [ConnectedSpace H.left] [IsSeparated H.hom] [LocallyOfFiniteType H.hom] [QuasiCompact H.hom] : ∃ (L C : Grp (Over (Spec (.of k)))) (a : L.X ⟶ H) (p : H ⟶ C.X), Smooth L.X.hom ∧ ConnectedSpace L.X.left ∧ IsAffine L.X.left ∧ LocallyOfFiniteType L.X.hom ∧ QuasiCompact L.X.hom ∧ IsClosedSubgroupScheme a ∧ IsNormalSubgroupScheme a ∧ IsAbelianVariety C.X ∧ IsMonHom p ∧ IsPullback a (toUnit L.X) p η[C.X] ∧ Presheaf.IsLocallySurjective (Scheme.fppfTopology.over (Spec (.of k))) (yoneda.map p)",
+  "branch": "newtargets-dag",
+  "by": "Q97",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-3817513d0",
+  "group": "Q97",
+  "result": "pass",
+  "note": "Clause check of exists_barsotti_chevalley_decomposition against node and Milne Thm 8.27/5.14/5.24-5.25: hypotheses Field+IsAlgClosed, GrpObj H over Spec k (no commutativity), Smooth/ConnectedSpace/IsSeparated/LocallyOfFiniteType+QuasiCompact match recorded deps with nothing extra. Conclusion ∃ L C : Grp(Over Spec k), a, p: L smooth/connected/IsAffine/finite type; IsClosedSubgroupScheme a (incl. closed immersion) and IsNormalSubgroupScheme a (read GroupScheme/Defs); IsAbelianVariety C.X = proper+smooth+connected; IsMonHom p; IsPullback a toUnit p η is the scheme-theoretic kernel (orientation checked); IsLocallySurjective (fppfTopology.over (Spec k)) (yoneda.map p) is the recorded big fppf site. Edge cases trivial H / affine H / abelian H fine, no empty/char/dimension/universe restriction. Node statement and stmt_deps equal live; lean.statement verbatim in file; no defs, sorry-only proof, docstrings with source, blueprint id and 6 steps; report has Worker report and Second reading by Q97. No existing duplicate (rg side-live lean trees, delivery searches). No file changed, so no compile."
+ }
+}

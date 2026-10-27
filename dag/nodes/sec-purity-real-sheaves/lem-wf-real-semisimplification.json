@@ -158,7 +158,18 @@
   "p-real-operations"
  ],
  "proof_split_by": "paragraphs",
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
  "chapter": "sec-purity-real-sheaves",
  "unit": "sk-r-real-linear",
  "split_report": {
@@ -194,5 +205,29 @@
   "group": "Q42",
   "result": "pass",
   "note": "Read the node (5 proof steps), the 3 stmt_deps (RepresentedDegreeDatum.asRepresentation, CompositionSeries.semisimplification, WeilSheaf.IsReal/IsRealizable in Stalk.lean), WeilGroup/IsLisse/localPolynomial/IsReal (Basic.lean:114,255; Weights.lean:78,111) and the upstream equivalence exists_equivalence_isLisse, which ties sheaf stalk Frobenius to rho(Frob_x). Every clause matches: lisse and iota-real hypotheses; conclusion IsLisse, IsReal and equal localPolynomial (charpolyRev) at every closed point. The statement quantifies over every finite rank (including 0) and every composition series; iota as a plain ring map is more general; Fact(ringChar K != l) is the upstream standing hypothesis; D's degree datum is unused and always exists. No new definition, sorry only, docstrings carry the source and blueprint tag and the 5 steps, the lean.statement field matches the file verbatim, only the lean field changed. nt_compile --json: clean, exit 0, 6.5 s. Second-reading section is the post-2026-10-17 placeholder."
+ },
+ "blueprint_update": {
+  "snapshot": "main-20261025",
+  "commit": "b767183f5ce5f281d407f582da76ab91d6176fe0",
+  "changed": [
+   "statement"
+  ],
+  "statement": "The semisimplification of an $\\iota$-real lisse Weil sheaf (of the\nWeil monodromy representation of\n[def-wf-geometric-monodromy-group], [def-wf-monodromy-data]) is $\\iota$-real and has the same local\ncharacteristic polynomials.",
+  "proof": [
+   {
+    "text": "Let $V$ be the global Weil representation from the monodromy datum\nof [def-wf-monodromy-data] and choose a composition\nseries $0=V_0\\subsetneq\\cdots\\subsetneq V_t=V$ as in\n[def-mg-weil-composition-series]. Under the lisse\nsheaf–representation correspondence, the $V_i$ give Weil-stable lisse\nsubsheaves $\\mathcal F_i$, and the semisimplification is\n$\\bigoplus_i\\mathcal F_i/\\mathcal F_{i-1}$ by\n[def-mg-weil-semisimplification]. At a closed point $x$, the local\nFrobenius of [def-weil-punctual-weights] acts through $\\rho(F_x)$ by [p-real-operations], so it preserves this filtration.\nIn a basis adapted to it, its matrix is upper block triangular, with\ndiagonal blocks the local Frobenius matrices on the quotients\n$\\mathcal F_i/\\mathcal F_{i-1}$. Therefore, by [p-linear-filtration],\n\n$$\n\\det(1-tF_x\\mid\\mathcal F_{\\bar x})\n=\\prod_i\\det(1-tF_x\\mid\n(\\mathcal F_i/\\mathcal F_{i-1})_{\\bar x}),\n$$\n\nwhich is exactly the characteristic polynomial of the direct-sum\nsemisimplification. Thus all local characteristic polynomials, and hence\n$\\iota$-reality in the sense of [def-wf-iota-real], are unchanged.",
+    "uses": [
+     "def-wf-monodromy-data",
+     "def-mg-weil-composition-series",
+     "def-mg-weil-semisimplification",
+     "def-weil-punctual-weights",
+     "p-real-operations",
+     "p-linear-filtration",
+     "def-wf-iota-real"
+    ],
+    "elementary": false
+   }
+  ],
+  "note": "the current blueprint (main-20261025, weil-conjectures-blueprint b767183f5c) states or proves this differently; a worker who touches the node follows it"
  }
 }

@@ -1,0 +1,608 @@
+{
+ "id": "lem-sfb-pure-coface-word-relations",
+ "kind": "statement",
+ "title": "Completeness of pure coface word relations within the endpoint degrees",
+ "statement": "Let $\\Delta$ be the category of nonempty finite ordinals $[r]=\\{0<\\cdots<r\\}$ and nondecreasing maps [def-weil-pbc-simplicial-set]. For $r\\geq1$ and $0\\leq i\\leq r$, let $\\delta_i^r:[r-1]\\to[r]$ be the increasing injection omitting $i$. Fix integers $0\\leq a\\leq b$. A coface word from $[a]$ to $[b]$ is a finite composable sequence of these maps, including the empty word when $a=b$; its value is their composite, with composition read right to left. If two coface words from $[a]$ to $[b]$ have equal values as maps of ordered sets, one can transform one word into the other by finitely many replacements of adjacent subwords, in either direction, using only the typed relations $$\\delta_j^{r+1}\\circ\\delta_i^r=\\delta_i^{r+1}\\circ\\delta_{j-1}^r\\qquad(r\\geq1,\\ 0\\leq i<j\\leq r+1).$$ All words and all replacements in the transformation involve only ordinals with degrees between $a$ and $b$; no codegeneracy or mixed relation is used.",
+ "source": {
+  "document": "literature/stacks-project/simplicial.tex",
+  "place": "Tag 0168 (lemma-face-degeneracy-category), pure-coface normal-form input to its omitted proof; the coface relation is Tag 0167 (lemma-relations-face-degeneracy), part (1)."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-simplicial-set",
+  "def-sfb-pure-coface-word"
+ ],
+ "proof": [
+  {
+   "text": "Put $k=b-a$. Reading a coface word from left to right (outermost map first), write it as $\\delta_{j_1}^{b}\\circ\\delta_{j_2}^{b-1}\\circ\\cdots\\circ\\delta_{j_k}^{a+1}$, with $0\\leq j_t\\leq b-t+1$. Each coface raises the degree by one, so every word has exactly this length and these intermediate degrees. For $k=0$ the only word is empty. The definition of the cofaces gives $\\delta_j^r(x)=x$ for $x<j$ and $x+1$ for $x\\geq j$ [def-weil-pbc-simplicial-set].",
+   "uses": [
+    "def-weil-pbc-simplicial-set"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/simplicial.tex",
+    "place": "Tag 0168 (lemma-face-degeneracy-category), omitted pure-coface presentation proof, supplied here by Q46; Tag 0167 (lemma-relations-face-degeneracy), part (1)"
+   }
+  },
+  {
+   "text": "Whenever an adjacent pair has outer index $j$ and inner index $i<j$, replace $\\delta_j^{r+1}\\circ\\delta_i^r$ by $\\delta_i^{r+1}\\circ\\delta_{j-1}^r$. The replacement is typed: $i\\leq r$ implies $i\\leq r+1$, while $0\\leq j-1\\leq r$ follows from $1\\leq j\\leq r+1$. Here $r\\geq a+1\\geq1$ because two consecutive cofaces occur. The two maps have equal values by [lem-weil-pbc-simplex-face-face-identity], and composing on either side preserves that equality. The sum of all indices decreases by exactly one: $j+i$ becomes $i+(j-1)$.",
+   "uses": [
+    "lem-weil-pbc-simplex-face-face-identity"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/simplicial.tex",
+    "place": "Tag 0168 (lemma-face-degeneracy-category), omitted pure-coface presentation proof, supplied here by Q46; Tag 0167 (lemma-relations-face-degeneracy), part (1)"
+   }
+  },
+  {
+   "text": "Induct strongly on the nonnegative sum of the indices to obtain a finite sequence of these replacements ending in a word $N$ with $j_1\\leq\\cdots\\leq j_k$. Indeed, if there is an adjacent decrease, step 2 gives a smaller sum and the induction hypothesis applies to that word; if there is none, the original word already has the required inequalities and needs zero replacements. The sum-zero case has only zero indices and hence no decrease. Every replacement keeps the degree sequence $a,a+1,\\ldots,b$ and, by step 2, the value.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/simplicial.tex",
+    "place": "Tag 0168 (lemma-face-degeneracy-category), omitted pure-coface presentation proof, supplied here by Q46; Tag 0167 (lemma-relations-face-degeneracy), part (1)"
+   }
+  },
+  {
+   "text": "For such an ordered word $N$, its omitted vertices in $[b]$ are exactly $j_1,j_2+1,\\ldots,j_k+k-1$, in strictly increasing order. Here is the induction on $k$: the empty word has empty complement; for $k>0$ write $N=\\delta_{j_1}^b\\circ T$. The tail $T$ is ordered and by induction has complement $\\{j_2,j_3+1,\\ldots,j_k+k-2\\}$ in $[b-1]$. All these entries are at least $j_1$. The formula in step 1 shifts each of them by one under $\\delta_{j_1}^b$, and the only vertex outside the image of this coface is $j_1$. Consequently $[b]\\setminus\\operatorname{im}(N)=\\{j_1\\}\\cup\\delta_{j_1}^b([b-1]\\setminus\\operatorname{im}(T))$, giving the claimed list. Its entries are strictly increasing since $j_t\\leq j_{t+1}$; they lie in $[b]$ since $j_t+t-1\\leq b$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/simplicial.tex",
+    "place": "Tag 0168 (lemma-face-degeneracy-category), omitted pure-coface presentation proof, supplied here by Q46; Tag 0167 (lemma-relations-face-degeneracy), part (1)"
+   }
+  },
+  {
+   "text": "Two ordered words with the same value have the same omitted set. The increasing lists in step 4 therefore agree: their first entries are both the least element of that set; remove it and repeat for each following entry. Thus $j_t+t-1=j_t^{\\prime}+t-1$ for every $t$, so $j_t=j_t^{\\prime}$ and the words are identical. Apply step 3 to the two words in the statement. Their ordered endpoints have equal values by step 2, hence are identical by this argument. Follow the first finite reduction and then the reverse of the second. This is the required transformation using only the stated coface relations; the degree bound is preserved at each move. For $k=1$ no replacement is needed and equality of the omitted singleton determines the sole index.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/simplicial.tex",
+    "place": "Tag 0168 (lemma-face-degeneracy-category), omitted pure-coface presentation proof, supplied here by Q46; Tag 0167 (lemma-relations-face-degeneracy), part (1)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-simplicial-set",
+  "lem-weil-pbc-simplex-face-face-identity"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/simplicial.tex",
+  "place": "Tag 0168 (lemma-face-degeneracy-category), omitted pure-coface presentation proof, supplied here by Q46; Tag 0167 (lemma-relations-face-degeneracy), part (1); elementary decreasing-index-sum normalization and omitted-vertex computation, not an appeal to the full mixed presentation"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "normal_form|standardδ|P_δ|simplicialInsert",
+   "results": {
+    "t": "2026-10-23T18:44:07Z",
+    "tool": "grep",
+    "query": "normal_form|standardδ|P_δ|simplicialInsert",
+    "sub": "AlgebraicTopology/SimplexCategory/GeneratorsRelations",
+    "ok": true,
+    "n_hits": 15,
+    "note": "",
+    "top": [
+     "Mathlib/AlgebraicTopology/SimplexCategory/GeneratorsRelations/Basic.lean",
+     "Mathlib/AlgebraicTopology/SimplexCategory/GeneratorsRelations/Basic.lean",
+     "Mathlib/AlgebraicTopology/SimplexCategory/GeneratorsRelations/Basic.lean",
+     "Mathlib/AlgebraicTopology/SimplexCategory/GeneratorsRelations/Basic.lean",
+     "Mathlib/AlgebraicTopology/SimplexCategory/GeneratorsRelations/Basic.lean",
+     "Mathlib/AlgebraicTopology/SimplexCategory/GeneratorsRelations/NormalForms.lean",
+     "Mathlib/AlgebraicTopology/SimplexCategory/GeneratorsRelations/NormalForms.lean",
+     "Mathlib/AlgebraicTopology/SimplexCategory/GeneratorsRelations/NormalForms.lean"
+    ],
+    "digest": "703514c1ca5efed3"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: coface relations and the unbounded mixed presentation do not state derivability using only coface relations; NormalForms.lean lines 31-35 leaves coface normal-form uniqueness as TODO."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Unique normal form for composites of coface maps using only face face identities",
+   "results": {
+    "t": "2026-10-23T18:44:08Z",
+    "tool": "leansearch",
+    "query": "Unique normal form for composites of coface maps using only face face identities",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "CategoryTheory.SimplicialObject.δ_comp_δ''_assoc",
+     "CategoryTheory.SimplicialObject.δ_comp_δ'_assoc",
+     "CategoryTheory.SimplicialObject.δ_comp_δ",
+     "CategoryTheory.CosimplicialObject.δ_comp_δ'",
+     "SSet.δ_comp_δ_apply",
+     "CategoryTheory.CosimplicialObject.δ_comp_δ_self",
+     "CategoryTheory.CosimplicialObject.δ_comp_σ_succ'_assoc",
+     "CategoryTheory.SimplicialObject.δ_comp_σ_self"
+    ],
+    "digest": "cb00d238ca9dbf03"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: coface relations and the unbounded mixed presentation do not state derivability using only coface relations; NormalForms.lean lines 31-35 leaves coface normal-form uniqueness as TODO."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"SimplexCategoryGenRel\", \"δ\"",
+   "results": {
+    "t": "2026-10-23T18:44:08Z",
+    "tool": "loogle",
+    "query": "\"SimplexCategoryGenRel\", \"δ\"",
+    "sub": "",
+    "ok": true,
+    "n_hits": 12,
+    "note": "",
+    "top": [
+     "SimplexCategoryGenRel.faces.δ",
+     "SimplexCategoryGenRel.generators.δ",
+     "SimplexCategoryGenRel.δ",
+     "SimplexCategoryGenRel.δ_comp_σ_self",
+     "SimplexCategoryGenRel.δ_comp_σ_succ",
+     "SimplexCategoryGenRel.toSimplexCategory_map_δ",
+     "SimplexCategoryGenRel.δ_comp_σ_self_assoc",
+     "SimplexCategoryGenRel.δ_comp_σ_succ_assoc"
+    ],
+    "digest": "578cc28824a968f8"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: coface relations and the unbounded mixed presentation do not state derivability using only coface relations; NormalForms.lean lines 31-35 leaves coface normal-form uniqueness as TODO."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Two words consisting only of elementary order preserving injections omitting a vertex represent the same map exactly when related by the coface commutation relations",
+   "results": {
+    "t": "2026-10-23T18:44:09Z",
+    "tool": "leanfinder",
+    "query": "Two words consisting only of elementary order preserving injections omitting a vertex represent the same map exactly when related by the coface commutation relations",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "SimplexCategoryGenRel.simplicialEvalσ_of_isAdmissible",
+     "SimplexCategoryGenRel.ext",
+     "SimplexCategoryGenRel.ext_iff",
+     "SimplexCategory.II.map'_eq_castSucc_iff",
+     "SimplexCategoryGenRel.exists_normal_form_P_σ",
+     "SimplexCategoryGenRel.σ_comp_σ_nat",
+     "SimplexCategoryGenRel.mem_isAdmissible_iff",
+     "SimplexCategoryGenRel.lt_and_eval_eq_eval_add_one_of_mem_isAdmissible"
+    ],
+    "digest": "3abb919c30deae75"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: coface relations and the unbounded mixed presentation do not state derivability using only coface relations; NormalForms.lean lines 31-35 leaves coface normal-form uniqueness as TODO."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Coface word normal form sorted omitted vertices and completeness of the relations delta j delta i equals delta i delta j minus one",
+   "results": {
+    "t": "2026-10-23T18:44:10Z",
+    "tool": "leanfinder",
+    "query": "Coface word normal form sorted omitted vertices and completeness of the relations delta j delta i equals delta i delta j minus one",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "SimplexCategoryGenRel.exists_normal_form_P_σ",
+     "SimplexCategoryGenRel.P_δ.δ",
+     "SimplexCategoryGenRel.generators.δ",
+     "FreeSimplexQuiver.homRel.δ_comp_δ",
+     "SimplexCategoryGenRel.faces.δ",
+     "SimplexCategoryGenRel.P_σ.σ",
+     "SimplexCategoryGenRel.standardσ",
+     "SimplexCategoryGenRel.mem_isAdmissible_iff"
+    ],
+    "digest": "27e94c8cd4c062fe"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: coface relations and the unbounded mixed presentation do not state derivability using only coface relations; NormalForms.lean lines 31-35 leaves coface normal-form uniqueness as TODO."
+  },
+  {
+   "tool": "grep",
+   "query": "normal_form|standardδ|P_δ|TODO",
+   "results": {
+    "t": "2026-10-23T19:19:38Z",
+    "tool": "grep",
+    "query": "normal_form|standardδ|P_δ|TODO",
+    "sub": "AlgebraicTopology/SimplexCategory/GeneratorsRelations",
+    "ok": true,
+    "n_hits": 15,
+    "note": "",
+    "top": [
+     "Mathlib/AlgebraicTopology/SimplexCategory/GeneratorsRelations/Basic.lean",
+     "Mathlib/AlgebraicTopology/SimplexCategory/GeneratorsRelations/Basic.lean",
+     "Mathlib/AlgebraicTopology/SimplexCategory/GeneratorsRelations/Basic.lean",
+     "Mathlib/AlgebraicTopology/SimplexCategory/GeneratorsRelations/Basic.lean",
+     "Mathlib/AlgebraicTopology/SimplexCategory/GeneratorsRelations/Basic.lean",
+     "Mathlib/AlgebraicTopology/SimplexCategory/GeneratorsRelations/NormalForms.lean",
+     "Mathlib/AlgebraicTopology/SimplexCategory/GeneratorsRelations/NormalForms.lean",
+     "Mathlib/AlgebraicTopology/SimplexCategory/GeneratorsRelations/NormalForms.lean"
+    ],
+    "digest": "12c866d97697d9cc"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: the hits give generators, the single face-face identity, sigma normal forms, or a factorization in the full mixed quotient; none states bounded derivability of raw words by coface relations alone. Read Basic.lean lines 202-205 and NormalForms.lean lines 22-35 (pure-delta uniqueness remains TODO). Reuse the existing node for the single face-face identity."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Unique normal form for pure coface words under face face relations without degeneracies",
+   "results": {
+    "t": "2026-10-23T19:19:38Z",
+    "tool": "leansearch",
+    "query": "Unique normal form for pure coface words under face face relations without degeneracies",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "SSet.N.mk'.noConfusion",
+     "SSet.N.noConfusion",
+     "SimplexCategoryGenRel.exists_P_σ_P_δ_factorization",
+     "FreeSimplexQuiver.Hom.σ.noConfusion",
+     "SimplexCategoryGenRel.faces.casesOn",
+     "SimplexCategoryGenRel.instHasFactorizationP_σP_δ",
+     "Monoid.PushoutI.NormalWord.mk.inj",
+     "Monoid.PushoutI.NormalWord.mk.injEq"
+    ],
+    "digest": "e48d3e758ee0afb4"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: the hits give generators, the single face-face identity, sigma normal forms, or a factorization in the full mixed quotient; none states bounded derivability of raw words by coface relations alone. Read Basic.lean lines 202-205 and NormalForms.lean lines 22-35 (pure-delta uniqueness remains TODO). Reuse the existing node for the single face-face identity."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"SimplexCategoryGenRel\", \"δ\"",
+   "results": {
+    "t": "2026-10-23T19:19:39Z",
+    "tool": "loogle",
+    "query": "\"SimplexCategoryGenRel\", \"δ\"",
+    "sub": "",
+    "ok": true,
+    "n_hits": 12,
+    "note": "",
+    "top": [
+     "SimplexCategoryGenRel.faces.δ",
+     "SimplexCategoryGenRel.generators.δ",
+     "SimplexCategoryGenRel.δ",
+     "SimplexCategoryGenRel.δ_comp_σ_self",
+     "SimplexCategoryGenRel.δ_comp_σ_succ",
+     "SimplexCategoryGenRel.toSimplexCategory_map_δ",
+     "SimplexCategoryGenRel.δ_comp_σ_self_assoc",
+     "SimplexCategoryGenRel.δ_comp_σ_succ_assoc"
+    ],
+    "digest": "578cc28824a968f8"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: the hits give generators, the single face-face identity, sigma normal forms, or a factorization in the full mixed quotient; none states bounded derivability of raw words by coface relations alone. Read Basic.lean lines 202-205 and NormalForms.lean lines 22-35 (pure-delta uniqueness remains TODO). Reuse the existing node for the single face-face identity."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Unique sorted normal form of a word of coface maps determined by the omitted vertices",
+   "results": {
+    "t": "2026-10-23T19:19:39Z",
+    "tool": "leanfinder",
+    "query": "Unique sorted normal form of a word of coface maps determined by the omitted vertices",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "SimplexCategoryGenRel.exists_normal_form_P_σ",
+     "SimplexCategoryGenRel.standardσ",
+     "SimplexCategoryGenRel.simplicialEvalσ",
+     "SimplexCategoryGenRel.simplicialEvalσ_of_isAdmissible",
+     "SimplexCategoryGenRel.generators.δ",
+     "SimplexCategoryGenRel.P_σ.σ",
+     "SimplexCategoryGenRel.generators.σ",
+     "SimplexCategoryGenRel.P_δ.δ"
+    ],
+    "digest": "75d4cecb23f06b1d"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: the hits give generators, the single face-face identity, sigma normal forms, or a factorization in the full mixed quotient; none states bounded derivability of raw words by coface relations alone. Read Basic.lean lines 202-205 and NormalForms.lean lines 22-35 (pure-delta uniqueness remains TODO). Reuse the existing node for the single face-face identity."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Completeness of pure coface relations for words of order preserving injections of finite ordinals using only cofaces within endpoint degrees",
+   "results": {
+    "t": "2026-10-23T19:19:41Z",
+    "tool": "leanfinder",
+    "query": "Completeness of pure coface relations for words of order preserving injections of finite ordinals using only cofaces within endpoint degrees",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "SimplexCategoryGenRel.P_δ.δ",
+     "SimplexCategoryGenRel.P_σ.σ",
+     "SimplexCategoryGenRel.P_δ",
+     "SimplexCategoryGenRel.exists_normal_form_P_σ",
+     "SimplexCategoryGenRel.P_σ",
+     "SimplexCategoryGenRel.generators.δ",
+     "SimplexCategoryGenRel.generators.σ",
+     "SimplexCategoryGenRel.faces.δ"
+    ],
+    "digest": "1a788ccdce7f0489"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: the hits give generators, the single face-face identity, sigma normal forms, or a factorization in the full mixed quotient; none states bounded derivability of raw words by coface relations alone. Read Basic.lean lines 202-205 and NormalForms.lean lines 22-35 (pure-delta uniqueness remains TODO). Reuse the existing node for the single face-face identity."
+  },
+  {
+   "tool": "grep",
+   "query": "perm_induction|induction_on.*Perm|swap.*Perm|perm.*swap",
+   "results": {
+    "t": "2026-10-23T19:17:12Z",
+    "tool": "grep",
+    "query": "perm_induction|induction_on.*Perm|swap.*Perm|perm.*swap",
+    "sub": "Data/List",
+    "ok": true,
+    "n_hits": 13,
+    "note": "",
+    "top": [
+     "Mathlib/Data/List/Sigma.lean",
+     "Mathlib/Data/List/AList.lean",
+     "Mathlib/Data/List/Sort.lean",
+     "Mathlib/Data/List/Permutation.lean",
+     "Mathlib/Data/List/Permutation.lean",
+     "Mathlib/Data/List/Lookmap.lean",
+     "Mathlib/Data/List/Lookmap.lean",
+     "Mathlib/Data/List/Lookmap.lean"
+    ],
+    "digest": "c4f751501e537306"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match for the item: these list-permutation and adjacent-swap results concern finite lists or symmetric groups, not raw typed coface words or derivations using only coface relations. The delivered proof instead gives a direct decreasing-sum induction; no permutation lemma is used."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Permutations of lists are generated by adjacent transpositions",
+   "results": {
+    "t": "2026-10-23T19:17:13Z",
+    "tool": "leansearch",
+    "query": "Permutations of lists are generated by adjacent transpositions",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "List.formPerm",
+     "List.isCycle_formPerm",
+     "permsOfList",
+     "List.permutations",
+     "List.Nodup.isCycleOn_formPerm",
+     "Cycle.formPerm_coe",
+     "List.formPerm_eq_one_iff",
+     "List.formPerm_apply_lt_getElem"
+    ],
+    "digest": "988f38dda11dd1ec"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match for the item: these list-permutation and adjacent-swap results concern finite lists or symmetric groups, not raw typed coface words or derivations using only coface relations. The delivered proof instead gives a direct decreasing-sum induction; no permutation lemma is used."
+  },
+  {
+   "tool": "loogle",
+   "query": "List.Perm",
+   "results": {
+    "t": "2026-10-23T19:17:13Z",
+    "tool": "loogle",
+    "query": "List.Perm",
+    "sub": "",
+    "ok": true,
+    "n_hits": 12,
+    "note": "",
+    "top": [
+     "List.Perm",
+     "List.Perm.nil",
+     "List.Perm.trans",
+     "List.Perm.cons",
+     "List.Perm.swap",
+     "List.Perm.eqv",
+     "List.Perm.refl",
+     "List.Perm.rfl"
+    ],
+    "digest": "a582faf9f4dd5971"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match for the item: these list-permutation and adjacent-swap results concern finite lists or symmetric groups, not raw typed coface words or derivations using only coface relations. The delivered proof instead gives a direct decreasing-sum induction; no permutation lemma is used."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Every permutation of a finite list can be obtained by finitely many swaps of adjacent entries",
+   "results": {
+    "t": "2026-10-23T19:17:17Z",
+    "tool": "leanfinder",
+    "query": "Every permutation of a finite list can be obtained by finitely many swaps of adjacent entries",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "Equiv.Perm.swapFactorsAux",
+     "Equiv.Perm.swapFactors",
+     "List.permutations_perm_permutations'",
+     "Equiv.Perm.mclosure_isSwap",
+     "Equiv.Perm.truncSwapFactors",
+     "Equiv.Perm.map_finRange_perm",
+     "List.formPerm",
+     "Equiv.Perm.closure_isSwap"
+    ],
+    "digest": "67f33aae76924031"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match for the item: these list-permutation and adjacent-swap results concern finite lists or symmetric groups, not raw typed coface words or derivations using only coface relations. The delivered proof instead gives a direct decreasing-sum induction; no permutation lemma is used."
+  },
+  {
+   "tool": "grep",
+   "query": "recOnSwap|perm_ext_iff|perm_of.*[Mm]em",
+   "results": {
+    "t": "2026-10-23T19:18:14Z",
+    "tool": "grep",
+    "query": "recOnSwap|perm_ext_iff|perm_of.*[Mm]em",
+    "sub": "Data/List",
+    "ok": true,
+    "n_hits": 12,
+    "note": "",
+    "top": [
+     "Mathlib/Data/List/Count.lean",
+     "Mathlib/Data/List/Permutation.lean",
+     "Mathlib/Data/List/Permutation.lean",
+     "Mathlib/Data/List/Permutation.lean",
+     "Mathlib/Data/List/Permutation.lean",
+     "Mathlib/Data/List/Permutation.lean",
+     "Mathlib/Data/List/FinRange.lean",
+     "Mathlib/Data/List/Perm/Subperm.lean"
+    ],
+    "digest": "8d0b52fa2739e3ba"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match for the item: these list-permutation and adjacent-swap results concern finite lists or symmetric groups, not raw typed coface words or derivations using only coface relations. The delivered proof instead gives a direct decreasing-sum induction; no permutation lemma is used."
+  },
+  {
+   "tool": "leansearch",
+   "query": "List Perm recOnSwap adjacent swaps induction principle",
+   "results": {
+    "t": "2026-10-23T19:18:14Z",
+    "tool": "leansearch",
+    "query": "List Perm recOnSwap adjacent swaps induction principle",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "Equiv.Perm.swap_induction_on",
+     "Equiv.Perm.swap_induction_on'",
+     "Tuple.bubble_sort_induction'",
+     "List.formPerm",
+     "Equiv.Perm.IsSwap",
+     "Equiv.Perm.cycle_induction_on",
+     "Equiv.Perm.mclosure_swap_castSucc_succ",
+     "Equiv.swap"
+    ],
+    "digest": "c72533f13b058ebf"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match for the item: these list-permutation and adjacent-swap results concern finite lists or symmetric groups, not raw typed coface words or derivations using only coface relations. The delivered proof instead gives a direct decreasing-sum induction; no permutation lemma is used."
+  },
+  {
+   "tool": "loogle",
+   "query": "List.Perm.recOnSwap",
+   "results": {
+    "t": "2026-10-23T19:18:14Z",
+    "tool": "loogle",
+    "query": "List.Perm.recOnSwap",
+    "sub": "",
+    "ok": true,
+    "n_hits": 0,
+    "note": "loogle: unknown identifier 'List.Perm.recOnSwap'",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-24",
+   "verdict": "query error: Loogle reports unknown identifier; this is not an absence claim. Other recorded searches supplied the candidates."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "List.Perm induction with a swap of two consecutive elements in an arbitrary prefix and suffix",
+   "results": {
+    "t": "2026-10-23T19:18:15Z",
+    "tool": "leanfinder",
+    "query": "List.Perm induction with a swap of two consecutive elements in an arbitrary prefix and suffix",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "List.permutationsAux.rec",
+     "List.formPerm_cons_cons",
+     "List.formPerm_append_pair",
+     "Equiv.Perm.swap_induction_on",
+     "List.mem_permutationsAux_of_perm",
+     "List.mem_permutationsAux2",
+     "Equiv.Perm.swap_induction_on'",
+     "List.mem_permutationsAux2'"
+    ],
+    "digest": "f1c21ca22ac461e1"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match for the item: these list-permutation and adjacent-swap results concern finite lists or symmetric groups, not raw typed coface words or derivations using only coface relations. The delivered proof instead gives a direct decreasing-sum induction; no permutation lemma is used."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-truncated-simplex-presentation",
+  "date": "2026-10-24",
+  "group": "Q29"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Smoothing a proper curve with isolated complete-intersection singularities. Supporting input: Compatible local deformations of isolated curve singularities lift globally. Affine part of the formal-lifting input: final sentence of the proof of Stacks 0DZP, application of lemma-isolated after lemma-affine. Supporting algebra: finite support of the obstruction and difference modules at the prescribed isolated points; finite polynomial resolution used to obtain finite free terms for the full cotangent complex (Stacks 08PX). Tag 08PX (proposition-polynomial), inductive polynomial replacement of the next degree; repaired compatible-degeneracy form using the split indexing of simplicial.tex Tag 017P (definition-split). Arbitrary independent lifts of degeneracies in the printed proof do not establish their identities; the new statement isolates the polynomial boundary attachment that supplies compatible lifts. Supporting categorical input: recognition of a truncated simplicial object from the face and degeneracy identities; bounded-degree version of Stacks 0168 and 016B. Pure-word input: Completeness of pure coface word relations within the endpoint degrees.",
+   "via": [
+    "lem-sfb-truncated-simplex-presentation",
+    "lem-sfb-split-polynomial-boundary-attachment",
+    "lem-sfb-finite-polynomial-simplicial-resolution",
+    "lem-sfb-cotangent-ext-smooth-support",
+    "lem-sfb-affine-isolated-deformation-lift",
+    "lem-sfb-isolated-curve-formal-lifting",
+    "lem-sfb-isolated-lci-curve-smoothing",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-pure-coface-word-relations",
+  "worker": "stage1",
+  "group": "Q46",
+  "summary": "Statement unchanged. Supplied the omitted pure-coface proof by a typed rewrite decreasing the index sum, a strong induction, and the explicit omitted-vertex formula for ordered words. Reused the existing Mathlib-leaf coface identity. No new nodes: the remaining arguments are short elementary arithmetic and set-image inductions, written in the proof rather than repackaged as lemmas. No project declaration states the restricted raw-word derivation; no Lean was written or compiled.",
+  "blueprint": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Smoothing a proper curve with isolated complete-intersection singularities. Supporting input: Compatible local deformations of isolated curve singularities lift globally. Affine part of the formal-lifting input: final sentence of the proof of Stacks 0DZP, application of lemma-isolated after lemma-affine. Supporting algebra: finite support of the obstruction and difference modules at the prescribed isolated points; finite polynomial resolution used to obtain finite free terms for the full cotangent complex (Stacks 08PX). Tag 08PX (proposition-polynomial), inductive polynomial replacement of the next degree; repaired compatible-degeneracy form using the split indexing of simplicial.tex Tag 017P (definition-split). Arbitrary independent lifts of degeneracies in the printed proof do not establish their identities; the new statement isolates the polynomial boundary attachment that supplies compatible lifts. Supporting categorical input: recognition of a truncated simplicial object from the face and degeneracy identities; bounded-degree version of Stacks 0168 and 016B. Pure-word input: Completeness of pure coface word relations within the endpoint degrees. Current latest direct-images proof (3), supporting bounded simplicial-recognition input of the polynomial boundary attachment. The ancestor command returns null, retained from the inherited record; whole-blueprint coface and adjacent searches found no equivalent blueprint node."
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q46-fc00e6b84",
+  "group": "Q46",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q46-fc00e6b84 (reviewer sub-agent of L); spot-checked: I read the item in full: the statement is unchanged and five steps were supplied, with no new nodes. Source: Stacks simplicial.tex Tag 0167 (lemma-relations-face-degeneracy) part (1) is δ^{n+1}_jδ^n_i=δ^{n+1}_iδ^n_{j-1} for 0≤i<j≤n+1, with proof Omitted; Tag 0168 (lemma-face-degeneracy-category) is the mixed presentation, also with proof Omitted. The item's typed relation matches 0167(1); it is a bounded, pure-coface strengthening, so proof_origin agent is right. Cited statements checked: def-weil-pbc-simplicial-set (δ_i = injection omitting i) and lem-weil-pbc-simplex-face-face-identity (Mathlib leaf δ_comp_δ, the same identity and range). Step 1: every word has length b−a with j_t≤b−t+1, and the coordinate formula comes from the def. Step 2: the move is typed (i≤r, 0≤j−1≤r, r≥1), preserves the value by the leaf, and lowers the index sum by exactly 1. Step 3: strong induction on the sum, with claim, base and step stated, ending in a nondecreasing word. Step 4: induction on k; the complement is {j_1}∪δ_{j_1}(tail complement), giving the list j_t+t−1, strictly increasing and ≤b; checked by hand on δ_0^2δ_0^1. Step 5: equal values give equal omitted sets, hence identical raw words; the transformation is one reduction followed by the reversed other, and the k=0 and k=1 edge cases are covered. My own plain-Python brute force (0≤a≤4, b≤a+4, 6909 words) checked typing at every move, value preservation, the omitted-vertex formula and uniqueness of the normal form, with 0 failures. proof_deps equals the union of the uses. The elementary flags are justified. There is no cycle, no SGA, no tool_uses, and both cited nodes are a definition and a Mathlib leaf, so the route is clean. Duplicate search (rg -L over dag/nodes for coface word / pure coface / normal form / 0168) found only mixed unbounded presentations (sc godement faithful; trf unique-lifts, word-evaluation-descent, operators-reconstruction) and unrelated tensor cofaces, so there is no duplicate. Mathlib's NormalForms.lean lists the unique P_δ normal form as a TODO, so the item is not a leaf, and all three search kinds are recorded. The citer lem-sfb-truncated-simplex-presentation step 3 uses exactly the bounded pure-coface clause. The item is unsplit on live and side-live, and there is no re-split note. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicTopology.PureCofaceWordRelations",
+  "declaration": "SimplexCategory.CofaceWord.related_of_eval_eq",
+  "file": "lean/Sheaf/AlgebraicTopology/PureCofaceWordRelations.lean",
+  "statement": "theorem related_of_eval_eq {a b : ℕ} (hab : a ≤ b) (w v : CofaceWord a b) (h : w.eval = v.eval) : Related w v",
+  "branch": "sheaf-dag",
+  "by": "NX",
+  "date": "2026-10-23",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-7c9c01951",
+  "group": "NX",
+  "result": "pass",
+  "note": "Clause-by-clause check of SimplexCategory.CofaceWord.related_of_eval_eq against the node and Stacks 0167(1)/0168. Step.context matches Mathlib δ_comp_δ (i ≤ j, j.succ / castSucc), which is the node's i<J≤r+1 with r=n+1, J=j+1, extremes included. Words are raw syntax with eval read right to left; Related = EqvGen Step gives finite steps in either direction. The indexed type CofaceWord a b keeps every degree in [a,b]; no codegeneracy letters. Edge cases a=b, b=a+1, a=0/b=2 (r=1), i=j are covered; hab is implied, so not stronger; no universes. New def node def-sfb-pure-coface-word is justified (no Mathlib/project/DAG equivalent; FreeSimplexQuiver is mixed; P_δ normal form TODO) and its 5 decls carry real data. Both lean.statement fields are verbatim the file signatures; the item record diff vs side-live is only lean + the new stmt_dep. Docstrings carry source place, blueprint tag and the 5 proof steps; proof is sorry only; both imports used. Item is not superseded on side-live. Report sections present. Not recompiled (2026-10-21 rule); no fixes."
+ }
+}

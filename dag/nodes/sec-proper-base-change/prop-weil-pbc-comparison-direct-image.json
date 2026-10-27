@@ -164,7 +164,18 @@
   "prop-weil-pbc-proetale-constant-exact"
  ],
  "proof_split_by": "paragraphs",
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
  "chapter": "sec-proper-base-change",
  "unit": "sk-thm-properbasechange",
  "split_report": {
@@ -217,5 +228,48 @@
   "landing": "20261019T093448-L-2314816",
   "kind": "interface",
   "note": "independent cc review: Item theorem unchanged and now proved from inverseImageComparisonCoherence, directImageMateCompatibility, the generalized isIso/_id/_comp of ComparisonDirectImage and classicalDirectImagePreservation; all 7 files compile clean; original SupportComparisonPullbackCoherence fails as reported; 31 direct importers compile; axioms only propext/choice/Quot.sound plus sorryAx from the still-open classicalDerivedEquivalence; change records cover the 3 interface changes in unclaimed modules"
+ },
+ "blueprint_update": {
+  "snapshot": "main-20261023-1620",
+  "commit": "7284bb09daf97437d544c51882b325f9c52cd345",
+  "changed": [
+   "statement",
+   "proof"
+  ],
+  "statement": "Let $u:U\\to V$ be quasi-compact and quasi-separated and let\n$L\\in\\Dplus(U_{\\Et},\\Lambda)$. There is a natural isomorphism\n\n$$\n \\nu_V^*Ru_{\\Et,*}L\n \\xrightarrow{\\sim}\n Ru_{\\Proet,*}\\nu_U^*L.\n$$\n\nIt is the base-change morphism of right derived functors induced by the mate\n$\\nu_V^*u_{\\Et,*}\\to u_{\\Proet,*}\\nu_U^*$ of the identification\n$\\nu_{V,*}u_{\\Proet,*}\\simeq u_{\\Et,*}\\nu_{U,*}$.",
+  "proof": [
+   {
+    "text": "*The underived map.* For etale $E\\to V$ both $\\nu_{V,*}u_{\\Proet,*}G$ and\n$u_{\\Et,*}\\nu_{U,*}G$ are $E\\mapsto G(E\\times_VU)$, as in the proof of\n[lem-weil-pbc-comparison-pullback]. Let\n$\\beta_F:\\nu_V^*u_{\\Et,*}F\\to u_{\\Proet,*}\\nu_U^*F$ be the mate of this\nidentification under the adjunctions $\\nu^*\\dashv\\nu_*$ of\n[def-weil-pbc-site-comparison-morphism]; it is natural in the etale sheaf $F$\non $U$. We show that $\\beta_F$ is an isomorphism. This is local on $V$, so take\n$V$ affine. By [lem-weil-pbc-ind-etale-basis] it suffices to evaluate on the\nbasis objects [def-weil-pbc-ind-etale-basis]. Let $W=\\varprojlim_iW_i$ be one,\nwith $W_i\\to V$ affine etale of finite presentation, and put\n$U_i=U\\times_VW_i$ and $U_W=U\\times_VW=\\varprojlim_iU_i$. The $U_i$ are\nquasi-compact, quasi-separated and etale over $U$, because $u$ is\nquasi-compact and quasi-separated, and the transition maps are affine. By\n[lem-weil-pbc-comparison-sections],\n\n$$\n (\\nu_V^*u_{\\Et,*}F)(W)=\\varinjlim_i(u_{\\Et,*}F)(W_i)=\\varinjlim_iF(U_i).\n$$\n\nOn the other side $(u_{\\Proet,*}\\nu_U^*F)(W)=(\\nu_U^*F)(U_W)$. Restricted to\n$U_W$, the sheaf $\\nu_U^*F$ is computed by the same section formula on the\ncofiltered system $(U_i)$, and continuity of sections\n[lem-weil-pbc-etale-section-continuity] gives\n$(\\nu_U^*F)(U_W)=\\varinjlim_iF(U_i)$. These identifications are compatible with\n$\\beta_F(W)$, which is therefore bijective. Hence $\\beta$ is an isomorphism.",
+    "uses": [
+     "lem-weil-pbc-comparison-pullback",
+     "def-weil-pbc-site-comparison-morphism",
+     "lem-weil-pbc-ind-etale-basis",
+     "def-weil-pbc-ind-etale-basis",
+     "lem-weil-pbc-comparison-sections",
+     "lem-weil-pbc-etale-section-continuity"
+    ],
+    "elementary": false
+   },
+   {
+    "text": "*Acyclicity of pulled-back injectives.* Let $I$ be an injective etale module\nsheaf on $U$. The higher direct images $R^qu_{\\Proet,*}\\nu_U^*I$ are the\nsheafifications of $W\\mapsto H^q(U_{W,\\Proet},(\\nu_U^*I)|_{U_W})$ on the basis\nobjects $W$, by [lem-weil-pbc-proetale-restriction-injectives]. For $q>0$ these\ngroups vanish: by [lem-weil-pbc-comparison-global-cohomology] they are the etale\ncohomology groups $H^q(U_{W,\\Et},I|_{U_W})$, by\n[lem-weil-pbc-derived-cohomology-continuity] these are\n$\\varinjlim_iH^q(U_{i,\\Et},I|_{U_i})$, and each $I|_{U_i}$ is injective by\n[lem-weil-pbc-etale-restriction-injectives]. So $\\nu_U^*I$ is acyclic for\n$u_{\\Proet,*}$.",
+    "uses": [
+     "lem-weil-pbc-proetale-restriction-injectives",
+     "lem-weil-pbc-comparison-global-cohomology",
+     "lem-weil-pbc-derived-cohomology-continuity",
+     "lem-weil-pbc-etale-restriction-injectives"
+    ],
+    "elementary": false
+   },
+   {
+    "text": "*The derived map.* Represent $L$ by a bounded-below complex $I^\\bullet$ of\ninjective etale module sheaves. Then $Ru_{\\Et,*}L=u_{\\Et,*}I^\\bullet$, and\n$\\nu_V^*$ is exact, so $\\nu_V^*Ru_{\\Et,*}L=\\nu_V^*u_{\\Et,*}I^\\bullet$. The\ncomplex $\\nu_U^*I^\\bullet$ represents $\\nu_U^*L$ and is a bounded-below\ncomplex of $u_{\\Proet,*}$-acyclic sheaves, so\n$Ru_{\\Proet,*}\\nu_U^*L=u_{\\Proet,*}\\nu_U^*I^\\bullet$ (the derived functors are\nthose of [def-weil-pbc-proetale-operations]; the inverse images are exact by\n[prop-weil-pbc-inverse-image-exact] and, applied with $\\mathcal A=\\Mod_\\Lambda$\non sheaves of $\\Lambda$-modules, [lem-sfb-finite-upper-star-exact]).\nApplied termwise, the isomorphism $\\beta$ gives the asserted isomorphism. By\nconstruction it is the base-change morphism of right derived functors induced\nby $\\beta$, hence natural in $L$. See\n[Stacks Project, Section 61.19](https://stacks.math.columbia.edu/tag/099R)\nfor the comparison's standard setting.",
+    "uses": [
+     "def-weil-pbc-proetale-operations",
+     "prop-weil-pbc-inverse-image-exact",
+     "lem-sfb-finite-upper-star-exact"
+    ],
+    "elementary": false
+   }
+  ],
+  "note": "the current blueprint (main-20261023-1620, weil-conjectures-blueprint 7284bb09da) states or proves this differently; a worker who touches the node follows it"
  }
 }

@@ -1,0 +1,159 @@
+{
+ "id": "lem-per-qe-jacobson-g-ring-criterion",
+ "kind": "statement",
+ "title": "Quasi-excellence from a G-ring and a quasi-excellent Jacobson quotient",
+ "statement": "Let $A$ be a commutative Noetherian ring [def-weil-pbc-noetherian-ring], and let $I\\subseteq A$ be an ideal contained in every maximal ideal of $A$. If $A$ is a G-ring [def-weil-pbc-g-ring] and $A/I$ is quasi-excellent [def-exc-excellent-ring], then $A$ is quasi-excellent.",
+ "source": {
+  "document": "https://www.isc.meiji.ac.jp/~kurano/ronbun/kurano40.pdf",
+  "place": "Kurano–Shimomoto, Ideal-adic completion of quasi-excellent rings (after Gabber), Theorem 4.1, printed p.4, applied by Theorem 5.1 Step 1 (1-3)."
+ },
+ "stmt_deps": [
+  "def-exc-excellent-ring",
+  "def-weil-pbc-g-ring",
+  "def-weil-pbc-noetherian-ring"
+ ],
+ "proof": [
+  {
+   "text": "Apply [lem-per-g-ring-quasi-excellent-closed-fibre] to this same ring $A$ and ideal $I$. Its ring is commutative, Noetherian and a G-ring, exactly as assumed here; its condition on $I$ is containment in every maximal ideal of $A$, again exactly the present hypothesis; and its quotient is the same $A/I$, assumed quasi-excellent. Its conclusion is that $A$ is quasi-excellent. No completeness, characteristic, dimension or universal catenarity hypothesis is required. This reuses an existing theorem with identical statement and does not introduce a new lemma.",
+   "uses": [
+    "lem-per-g-ring-quasi-excellent-closed-fibre"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.isc.meiji.ac.jp/~kurano/ronbun/kurano40.pdf",
+    "place": "Kurano–Shimomoto, Theorem 4.1, printed p.4 (proof printed pp.6–7); exact reuse of the existing reviewed node lem-per-g-ring-quasi-excellent-closed-fibre."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-per-g-ring-quasi-excellent-closed-fibre"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://www.isc.meiji.ac.jp/~kurano/ronbun/kurano40.pdf",
+  "place": "Exact reuse of the existing reviewed node lem-per-g-ring-quasi-excellent-closed-fibre (Kurano–Shimomoto Theorem 4.1); online source read, archival copy absent from literature/ and requested in report.md."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A Noetherian G ring whose quotient by an ideal in its Jacobson radical is quasi excellent is quasi excellent",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"QuotientMapQuotient.isNoetherian\", \"module\": \"Mathlib/RingTheory/Finiteness/Quotient\", \"type\": \"∀ {A : Type u_1} {B : Type u_2} [inst : CommRing A] [inst_1 : CommRing B] [inst_2 : Algebra A B] (p : Ideal A)\\n  [IsNoetherian A B], IsNoetherian (A ⧸ p) (B ⧸ Ideal.map (algebraMap A B) p)\", \"doc\": \"If $ A $ is a Noetherian $ B $-module, then the quotient module $ A/p $ is Noetherian over the quotient ring $ B/\\text{image}(p) $, where $ p $ is an ideal of $ A $ and $ \\text{image}(p) $ denotes the i\"}\n  {\"name\": \"isJacobsonRing_quotient\", \"module\": \"Mathlib/RingTheory/Jacobson/Ring\", \"type\": \"∀ {R : Type u_1} [inst : CommRing R] {I : Ideal R} [IsJacobsonRing R], IsJacobsonRing (R ⧸ I)\", \"doc\": \"If $ R $ is a Jacobson ring and $ I $ is an ideal of $ R $, then the quotient ring $ R/I $ is also a Jacobson ring. This means that every prime ideal in $ R/I $ is the intersection of maximal ideals c\"}\n  {\"name\": \"IsNoetherianRing.induction_on_isQuotientEquivQuotientPrime\", \"module\": \"Mathlib/RingTheory/Ideal/AssociatedPrime/Finiteness\", \"type\": \"∀ (A : Type u) [inst : CommRing A] [IsNoetherianRing A] ⦃M : Type v⦄ [inst_2 : AddCommGroup M] [inst_3 : Module A M]\\n  (x : Module.Finite A M)\\n  {motive : (N : Type v) → [inst_4 : AddCommGroup N] → [inst_5 : Module A N] → [Module.Finite A N] → Prop},\\n  (∀ (N : Type v) [inst_4 : AddCommGroup N] [inst\", \"doc\": \"For any commutative Noetherian ring $ A $ and finitely generated $ A $-module $ M $, a property $ P $ holds for $ M $ if: (1) $ P $ holds for trivial modules, (2) $ P $ holds for modules isomorphic to\"}\n  {\"name\": \"IsSemiprimaryRing.finite_of_isNoetherian\", \"module\": \"Mathlib/RingTheory/HopkinsLevitzki\", \"type\": \"∀ (R₀ : Type u_1) (R : Type u_2) (M : Type u) [inst : Ring R₀] [inst_1 : Ring R] [inst_2 : Module R₀ R]\\n  [inst_3 : AddCommGroup M] [inst_4 : Module R₀ M] [inst_5 : Module R M] [IsScalarTower R₀ R M] [IsSemiprimaryRing R]\\n  [inst_8 : IsScalarTower R₀ R R] [Module.Finite R₀ (R ⧸ Ring.jacobson R)] [Is\", \"doc\": \"If $ R $ is a semiprimary ring and $ M $ is a Noetherian $ R $-module, then $ M $ is finitely generated as an $ R $-module.\"}\n  {\"name\": \"isNoetherian_of_liesOver\", \"module\": \"Mathlib/RingTheory/Finiteness/Quotient\", \"type\": \"∀ {A : Type u_1} {B : Type u_2} [inst : CommRing A] [inst_1 : CommRing B] [inst_2 : Algebra A B] (P : Ideal B)\\n  (p : Ideal A) [inst_3 : P.LiesOver p] [IsNoetherian A B], IsNoetherian (A ⧸ p) (B ⧸ P)\", \"doc\": \"If $ A $ is a Noetherian $ B $-module and $ P $ is an ideal in $ B $ lying over an ideal $ p $ in $ A $ (i.e., $ P \\\\cap A = p $), then the quotient module $ A/p $ is Noetherian over the quotient ring \"}\n  {\"name\": \"Algebra.QuasiFinite.instQuotientIdeal\", \"module\": \"Mathlib/RingTheory/QuasiFinite/Basic\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S] (I : Ideal S)\\n  [Algebra.QuasiFinite R S], Algebra.QuasiFinite R (S ⧸ I)\", \"doc\": \"Given a commutative ring $ S $ with a quasi-finite $ R $-algebra structure (i.e., $ S $ is finitely generated as an $ R $-module) and an ideal $ I $ of $ S $, the quotient ring $ S/I $ inherits a cano\"}\n  {\"name\": \"Ideal.Quotient.isNoetherianRing\", \"module\": \"Mathlib/RingTheory/Ideal/Quotient/Noetherian\", \"type\": \"∀ {R : Type u_1} [inst : CommRing R] [IsNoetherianRing R] (I : Ideal R), IsNoetherianRing (R ⧸ I)\", \"doc\": \"For any Noetherian commutative ring $ R $ and any ideal $ I $ of $ R $, the quotient ring $ R/I $ is also Noetherian. This means that if every ideal of $ R $ is finitely generated, then every ideal of\"}\n  {\"name\": \"IsHausdorff.of_le_jacobson\", \"module\": \"Mathlib/RingTheory/AdicCompletion/Noetherian\", \"type\": \"∀ {R : Type u_1} [inst : CommRing R] (I : Ideal R) (M : Type u_2) [inst_1 : AddCommGroup M] [inst_2 : Module R M]\\n  [IsNoetherianRing R] [Module.Finite R M], I ≤ ⊥.jacobson → IsHausdorff I M\", \"doc\": \"For a commutative ring $ R $, an ideal $ I $, and an $ R $-module $ M $, if $ I $ is contained in the Jacobson radical of $ R $, then the intersection of $ I^n M $ over all positive integers $ n $ is \"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern Noetherian quotients, Jacobson rings, quasi-finiteness and smoothness, not J-2 or geometrically regular formal fibres"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsGRing\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern Noetherian quotients, Jacobson rings, quasi-finiteness and smoothness, not J-2 or geometrically regular formal fibres"
+  },
+  {
+   "tool": "grep",
+   "query": "Brodmann|Rotthaus|quasi.?excellent|IsGRing",
+   "results": "[grep] OK 2 hit(s)\n  {\"file\": \"Mathlib/Algebra/Homology/LocalCohomology.lean\", \"line\": \"32\", \"text\": \"* [M. Brodmann and R. Sharp, *Local cohomology: An algebraic introduction with geometric\"}\n  {\"file\": \"Mathlib/Algebra/Homology/LocalCohomology.lean\", \"line\": \"33\", \"text\": \"  applications*][brodmannsharp13]\"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern Noetherian quotients, Jacobson rings, quasi-finiteness and smoothness, not J-2 or geometrically regular formal fibres"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A Noetherian G ring whose quotient by an ideal in its Jacobson radical is quasi excellent is quasi excellent",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"Ideal.Quotient.isNoetherianRing\", \"module\": \"Mathlib.RingTheory.Ideal.Quotient.Noetherian\", \"type\": \"{R : Type*} [CommRing R] [IsNoetherianRing R] (I : Ideal R) : IsNoetherianRing (R ⧸ I)\", \"doc\": \"For any Noetherian commutative ring $ R $ and any ideal $ I $ of $ R $, the quotient ring $ R/I $ is also Noetherian. This means that if every ideal of $ R $ is finitely generated, then every ideal of\"}\n  {\"name\": \"QuotientMapQuotient.isNoetherian\", \"module\": \"Mathlib.RingTheory.Finiteness.Quotient\", \"type\": \"[IsNoetherian A B] : IsNoetherian (A ⧸ p) (B ⧸ p.map (algebraMap A B))\", \"doc\": \"If $ A $ is a Noetherian $ B $-module, then the quotient module $ A/p $ is Noetherian over the quotient ring $ B/\\text{image}(p) $, where $ p $ is an ideal of $ A $ and $ \\text{image}(p) $ denotes the i\"}\n  {\"name\": \"isLocalHom_of_le_jacobson_bot\", \"module\": \"Mathlib.RingTheory.Henselian\", \"type\": \"{R : Type*} [CommRing R] (I : Ideal R) (h : I ≤ Ideal.jacobson ⊥) : IsLocalHom (Ideal.Quotient.mk I)\", \"doc\": \"If $ I $ is an ideal of a commutative ring $ R $ such that $ I $ is contained in the Jacobson radical of $ R $, then the canonical quotient ring homomorphism $ R \\to R/I $ is a local homomorphism.\"}\n  {\"name\": \"Ring.jacobson_quotient_jacobson\", \"module\": \"Mathlib.RingTheory.Jacobson.Radical\", \"type\": \": jacobson (R ⧸ jacobson R) = ⊥\", \"doc\": \"The Jacobson radical of the quotient ring $ R / \\\\text{Jacobson}(R) $ is the zero ideal, i.e., $ \\\\text{Jacobson}(R / \\\\text{Jacobson}(R)) = \\\\{0\\\\} $.\"}\n  {\"name\": \"Ring.jacobson_quotient_of_le\", \"module\": \"Mathlib.RingTheory.Jacobson.Radical\", \"type\": \"{I : Ideal R} [I.IsTwoSided] (le : I ≤ jacobson R) :\\n  jacobson (R ⧸ I) = Submodule.map (Ideal.Quotient.mk I).toSemilinearMap (jacobson R)\", \"doc\": \"If $ I $ is a two-sided ideal of a ring $ R $ such that $ I \\\\subseteq \\\\mathrm{Jac}(R) $, then the Jacobson radical of the quotient ring $ R/I $ is equal to the image of $ \\\\mathrm{Jac}(R) $ under the c\"}\n  {\"name\": \"IsNoetherianRing\", \"module\": \"Mathlib.RingTheory.Noetherian.Defs\", \"type\": \"(R) [Semiring R]\", \"doc\": \"A semiring $ R $ is a Noetherian ring if every ideal of $ R $ is finitely generated.\"}\n  {\"name\": \"isJacobsonRing_quotient\", \"module\": \"Mathlib.RingTheory.Jacobson.Ring\", \"type\": \"[IsJacobsonRing R] : IsJacobsonRing (R ⧸ I)\", \"doc\": \"If $ R $ is a Jacobson ring and $ I $ is an ideal of $ R $, then the quotient ring $ R/I $ is also a Jacobson ring. This means that every prime ideal in $ R/I $ is the intersection of maximal ideals c\"}\n  {\"name\": \"Ideal.isRadical_of_eq_jacobson\", \"module\": \"Mathlib.RingTheory.Jacobson.Ideal\", \"type\": \"(h : jacobson I = I) : I.IsRadical\", \"doc\": \"If the Jacobson radical of an ideal $ I $ is equal to $ I $ itself, then $ I $ is a radical ideal, meaning it contains all elements $ x $ for which some power $ x^n $ belongs to $ I $.\"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern Noetherian quotients, Jacobson rings, quasi-finiteness and smoothness, not J-2 or geometrically regular formal fibres"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A ring with geometrically regular formal fibres and quasi excellent closed fibre is J2",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"Algebra.Smooth\", \"module\": \"Mathlib/RingTheory/Smooth/Basic\", \"type\": \"(R : Type u_4) → [inst : CommRing R] → (A : Type u) → [inst_1 : CommRing A] → [Algebra R A] → Prop\", \"doc\": \"The property that the commutative ring $ A $, equipped with an $ R $-algebra structure, is smooth over the commutative ring $ R $.\"}\n  {\"name\": \"Algebra.IsSmoothAt\", \"module\": \"Mathlib/RingTheory/Smooth/Locus\", \"type\": \"(R : Type u_1) →\\n  {A : Type u_2} → [inst : CommRing R] → [inst_1 : CommRing A] → [Algebra R A] → (p : Ideal A) → [p.IsPrime] → Prop\", \"doc\": \"The algebra $ A $ is formally smooth at the prime ideal $ \\\\mathfrak{p} $, meaning that the localization of $ A $ at $ \\\\mathfrak{p} $ satisfies the formal smoothness lifting property over the base comm\"}\n  {\"name\": \"Algebra.IsStandardSmooth\", \"module\": \"Mathlib/RingTheory/Smooth/StandardSmooth\", \"type\": \"(R : Type u) → (S : Type v) → [inst : CommRing R] → [inst_1 : CommRing S] → [Algebra R S] → Prop\", \"doc\": \"The property that $ S $ is a standard smooth algebra over $ R $, meaning $ S $ is isomorphic to a polynomial ring $ R[x_1, \\\\ldots, x_n] $ localized at an element $ f $, with the Jacobian matrix of the\"}\n  {\"name\": \"Algebra.quasiFinite_iff\", \"module\": \"Mathlib/RingTheory/QuasiFinite/Basic\", \"type\": \"∀ (R : Type u_1) (S : Type u_2) [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S],\\n  Algebra.QuasiFinite R S ↔\\n    autoParam (∀ (P : Ideal R) [inst_3 : P.IsPrime], Module.Finite P.ResidueField (P.Fiber S))\\n      Algebra.QuasiFinite.finite_fiber._autoParam\", \"doc\": \"For commutative rings $ R $ and $ S $, where $ S $ is an $ R $-algebra, $ S $ is quasi-finite over $ R $ if and only if for every prime ideal $ P $ in $ R $, the tensor product of the residue field of\"}\n  {\"name\": \"Algebra.QuasiFiniteAt\", \"module\": \"Mathlib/RingTheory/QuasiFinite/Basic\", \"type\": \"(R : Type u_1) →\\n  {S : Type u_2} → [inst : CommRing R] → [inst_1 : CommRing S] → [Algebra R S] → (p : Ideal S) → [p.IsPrime] → Prop\", \"doc\": \"For a prime ideal $ p $ in a commutative ring $ S $, this proposition asserts that the localization of $ S $ at the complement of $ p $ forms a quasi-finite algebra over the base commutative ring $ R \"}\n  {\"name\": \"Algebra.IsGeometricallyReduced\", \"module\": \"Mathlib/RingTheory/Nilpotent/GeometricallyReduced\", \"type\": \"(k : Type u_3) → (A : Type u_4) → [inst : Field k] → [inst_1 : Ring A] → [Algebra k A] → Prop\", \"doc\": \"Given a field $ k $ and a ring $ A $ equipped with a $ k $-algebra structure, the proposition that $ A $ is geometrically reduced over $ k $, meaning that for every field extension $ L $ of $ k $, the\"}\n  {\"name\": \"Algebra.Etale\", \"module\": \"Mathlib/RingTheory/Etale/Basic\", \"type\": \"(R : Type u) → (A : Type v) → [inst : CommRing R] → [inst_1 : CommRing A] → [Algebra R A] → Prop\", \"doc\": \"The property of an algebra $ A $ over a commutative ring $ R $ being étale.\"}\n  {\"name\": \"Algebra.IsUnramifiedAt\", \"module\": \"Mathlib/RingTheory/Unramified/Locus\", \"type\": \"(R : Type u_1) →\\n  {A : Type u_2} → [inst : CommRing R] → [inst_1 : CommRing A] → [Algebra R A] → (q : Ideal A) → [q.IsPrime] → Prop\", \"doc\": \"Given a prime ideal $ q $ in a commutative ring $ A $, this proposition asserts that the localization of $ A $ at the complement of $ q $ is formally unramified over the base commutative ring $ R $. I\"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern Noetherian quotients, Jacobson rings, quasi-finiteness and smoothness, not J-2 or geometrically regular formal fibres"
+  },
+  {
+   "tool": "grep",
+   "query": "quasi.?excellent|Brodmann|Rotthaus|IsGRing",
+   "results": "{\"t\": \"2026-10-24T07:03:12Z\", \"tool\": \"grep\", \"query\": \"quasi.?excellent|Brodmann|Rotthaus|IsGRing\", \"sub\": \"\", \"ok\": true, \"n_hits\": 2, \"note\": \"\", \"top\": [\"Mathlib/Algebra/Homology/LocalCohomology.lean\", \"Mathlib/Algebra/Homology/LocalCohomology.lean\"], \"digest\": \"3958cecd0071c401\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: returned declarations concern Jacobson radicals, Noetherian quotients, quasi-finite or smooth algebras; none states the G-ring/quasi-excellence criterion."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Quasi excellence lifts from a quotient by an ideal in the Jacobson radical for a Noetherian G ring",
+   "results": "{\"t\": \"2026-10-24T07:03:12Z\", \"tool\": \"leansearch\", \"query\": \"Quasi excellence lifts from a quotient by an ideal in the Jacobson radical for a Noetherian G ring\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Ring.jacobson_quotient_of_le\", \"isLocalHom_of_le_jacobson_bot\", \"Ring.jacobson_quotient_jacobson\", \"Module.jacobson_quotient_jacobson\", \"Ring.coe_jacobson_quotient\", \"Algebra.FormallySmooth.exists_lift\", \"Submodule.exists_injOn_mkQ_image_span_eq_of_span_eq_map_mkQ_of_le_jacobson_bot\", \"Algebra.QuasiFinite.instQuotientIdeal\"], \"digest\": \"6d586bfb6859a699\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: returned declarations concern Jacobson radicals, Noetherian quotients, quasi-finite or smooth algebras; none states the G-ring/quasi-excellence criterion."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"QuasiExcellent\"",
+   "results": "{\"t\": \"2026-10-24T07:03:12Z\", \"tool\": \"loogle\", \"query\": \"\\\"QuasiExcellent\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: returned declarations concern Jacobson radicals, Noetherian quotients, quasi-finite or smooth algebras; none states the G-ring/quasi-excellence criterion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A Noetherian G ring whose quotient by an ideal in its Jacobson radical is quasi excellent is quasi excellent",
+   "results": "{\"t\": \"2026-10-24T07:03:13Z\", \"tool\": \"leanfinder\", \"query\": \"A Noetherian G ring whose quotient by an ideal in its Jacobson radical is quasi excellent is quasi excellent\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"QuotientMapQuotient.isNoetherian\", \"isJacobsonRing_quotient\", \"IsNoetherianRing.induction_on_isQuotientEquivQuotientPrime\", \"IsSemiprimaryRing.finite_of_isNoetherian\", \"isNoetherian_of_liesOver\", \"Algebra.QuasiFinite.instQuotientIdeal\", \"Ideal.Quotient.isNoetherianRing\", \"IsHausdorff.of_le_jacobson\"], \"digest\": \"88704317adbf780b\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: returned declarations concern Jacobson radicals, Noetherian quotients, quasi-finite or smooth algebras; none states the G-ring/quasi-excellence criterion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A ring with geometrically regular formal fibres and quasi excellent closed fibre is J2",
+   "results": "{\"t\": \"2026-10-24T07:03:44Z\", \"tool\": \"leanfinder\", \"query\": \"A ring with geometrically regular formal fibres and quasi excellent closed fibre is J2\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.Smooth\", \"Algebra.IsSmoothAt\", \"Algebra.IsStandardSmooth\", \"Algebra.quasiFinite_iff\", \"Algebra.QuasiFiniteAt\", \"Algebra.IsGeometricallyReduced\", \"Algebra.Etale\", \"Algebra.IsUnramifiedAt\"], \"digest\": \"c112377ce65b3bab\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: returned declarations concern Jacobson radicals, Noetherian quotients, quasi-finite or smooth algebras; none states the G-ring/quasi-excellence criterion."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-per-qe-normal-counterexample-reduction",
+  "date": "2026-10-24",
+  "group": "Q23"
+ },
+ "chapter": "sec-deligne-laumon-a1",
+ "unit": "sk-p-dl-a1-perverse",
+ "blueprint": {
+  "from": {
+   "node": "lem-per-artin-gabber-affine-curve",
+   "place": "Ancestor proof Step 3, regular local model and purity, through the small-singular-locus completion in Temkin Theorem 3.4.1: quasi-excellence of completed rational affine charts is supplied by Theorem 2.1.6. Auxiliary completion proof: Theorem 5.1, Step 1 (1-1)–(1-4), printed pp.7–8; finite normalization properties recalled in Step 2, (5.3), and Step 3. Auxiliary input: Theorem 4.1, printed p.4, applied by Theorem 5.1 Step 1 (1-3).",
+   "via": [
+    "lem-per-qe-normal-counterexample-reduction",
+    "lem-per-qe-complete-pair-lifting",
+    "lem-per-small-divisor-formal-completion",
+    "lem-per-small-singular-locus-resolution",
+    "lem-per-qe-ordinary-regular-resolution",
+    "lem-per-characteristic-zero-log-resolution-independence",
+    "lem-per-complete-local-rigidification-comparison",
+    "lem-per-gabber-absolute-equivariant-modification",
+    "lem-per-gabber-log-smooth-equivariant-modification",
+    "lem-per-trait-prime-to-ell-log-alteration",
+    "lem-per-gabber-regular-pair-purity",
+    "lem-per-absolute-gysin-purity",
+    "lem-per-potential-dualizing-regular-unit",
+    "lem-per-finite-regular-reduction-dualizing",
+    "lem-per-qbar-generic-duality-model",
+    "lem-per-qbar-middle-tstructure"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-per-qe-jacobson-g-ring-criterion",
+  "worker": "stage1",
+  "summary": "Identified the item as an exact duplicate of the already split and reviewed lem-per-g-ring-quasi-excellent-closed-fibre. Reused that node after checking every hypothesis and the conclusion against its statement and Kurano–Shimomoto Theorem 4.1. No new nodes or changed statements; maintainer should merge the duplicate identities. Project Lean has no matching finished declaration; the logged Mathlib searches found no match.",
+  "blueprint": "Retains the imported ancestor provenance: lem-per-artin-gabber-affine-curve proof Step 3, through the auxiliary quasi-excellence completion branch, specifically Kurano–Shimomoto Theorem 5.1 Step 1 (1-3). The current latest blueprint has no separate statement of this commutative-algebra criterion (whole-blueprint searches for Jacobson and quasi-excellent returned zero). The auxiliary criterion is already carried by lem-per-g-ring-quasi-excellent-closed-fibre, in the same chapter and unit; no unit or chapter route is changed."
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q146-22a01154d",
+  "group": "Q146",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q146-22a01154d (reviewer sub-agent of L); spot-checked: I read the item and its single cited node in full. The delivery is one step that applies the landed, reviewed twin lem-per-g-ring-quasi-excellent-closed-fibre (Q90 PASS, 06:58). The two statements match hypothesis by hypothesis: a commutative Noetherian G-ring A, an ideal I contained in every maximal ideal, A/I quasi-excellent, conclusion A quasi-excellent; the stmt_deps are the same. Source: Kurano–Shimomoto Thm 4.1 (Gabber's generalization of Brodmann–Rotthaus). kurano40.pdf is not archived, but the report has a WANTED line and proof_origin is agent. Compared with live, the item's statement, stmt_deps, source and blueprint fields are unchanged. There are no new nodes, no unit change and no tool_uses (same chapter and unit). Edge cases checked: I=0, a field, the zero ring, I=A. The twin's closure (792 nodes) does not contain the item, so there is no cycle. Citing the twin answers point (2) of the Q100 return, as in the Q101 precedent. Batch 5: the only trace-formula-chapter node in the closure is lem-trf-regular-sequence-dimension-formula. It is a Mathlib Krull-dimension leaf (ringKrullDim_add_length_eq_ringKrullDim_of_isRegular, Regular.lean:210), pure commutative algebra outside both assumptions and their proofs, so I accept it. Maintainer notes: (1) merge the item into the twin and repoint lem-per-qe-normal-counterexample-reduction and lem-per-gabber-normal-counterexample-reduction; (2) a BFS that excludes route-pivot-dropped.txt does not reach the item (point (1) of Q100); this delivery adds nothing to the dropped machinery; (3) the twin's Step 1 cites the dropped lem-per-j2-finite-algebra-criterion (drop list line 1654); the Q155-style repoint to lem-exc-j2-residue-field-criterion is the fix; (4) archive kurano40.pdf."
+ }
+}

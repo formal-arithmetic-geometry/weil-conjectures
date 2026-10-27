@@ -1,0 +1,132 @@
+{
+ "id": "def-sfb-projective-representation-coordinates",
+ "kind": "definition",
+ "title": "Coordinate presentation of projective rational SL representations and restricted one-parameter coactions",
+ "status": "split",
+ "import_flags": [],
+ "statement": "Let $k$ be a field [def-weil-field], $E,V$ finite-dimensional $k$-vector spaces, and fix a basis $b$ of $V$. Use the coordinate group scheme $G=\\operatorname{SL}_{\\dim E,k}$ of [def-sc-general-linear-group], identified with $\\operatorname{SL}(E)$ by any basis of $E$, and let $\\rho:G\\to\\operatorname{GL}_{\\dim V,k}$ be a rational representation in the basis $b$. The space of lines in $V$ is the coordinate projective scheme $\\mathbf P(\\{1,\\ldots,\\dim V\\};k)$ [def-nagata-projective-space-base-change] over $k$ [def-pc-scheme], with homogeneous coordinates the linear coordinate forms dual to $b$; its twist $\\mathcal O(1)$ [def-pc-projective-space-twist] is the dual tautological line. For a morphism $j$ from a $k$-scheme $Y$ to it, the pulled-back line $L=j^*\\mathcal O(1)$, its coordinate sections, the equivariant action with induced dual tautological linearization [def-sfb-group-scheme-linearization] and the vector lifts of $k$-points are those of [def-sfb-projective-representation-linearization] for the index set of $b$; a vector $v$ lifts $j(y)$ when its coordinate vector $(b_i^\\vee(v))_i$ does. For a one-parameter subgroup $\\lambda:\\mathbf G_m\\to G$, define its restricted coaction by $b_q\\mapsto\\sum_i b_i\\otimes\\rho(\\lambda(t))_{iq}$ over $k[t,t^{-1}]$. A vector has a negative occurring weight if it admits a finite weight decomposition $v=\\sum_a z_a$, with $z_a\\in V_a$ for the recorded weight spaces [lem-sfb-gm-representation-weight-basis], and $z_a\\ne0$ for some $a<0$.",
+ "source": {
+  "document": "literature/mumford-fogarty-kirwan-geometric-invariant-theory.pdf",
+  "place": "Chapter 1, §1 and Chapter 2, §1, induced hyperplane linearization and vector lifts; Morrison arXiv:0810.2340 §2.1--2.2 pp.5--7, read online https://arxiv.org/pdf/0810.2340."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-sc-general-linear-group",
+  "def-pc-scheme",
+  "def-nagata-projective-space-base-change",
+  "def-pc-projective-space-twist",
+  "def-sfb-group-scheme-linearization",
+  "lem-sfb-gm-representation-weight-basis",
+  "def-sfb-projective-representation-linearization"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "rational representation induced linearization on dual tautological line projective space",
+   "results": "{\"t\": \"2026-10-24T06:25:23Z\", \"tool\": \"leansearch\", \"query\": \"rational representation induced linearization on dual tautological line projective space\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"LinearMap.BilinForm.toDual.congr_simp\", \"Projectivization.map\", \"LinearMap.dualMap\", \"LinearAlgebra.Projectivization.termℙ\", \"Projectivization.lift\", \"LinearMap.BilinForm.dualBasis\", \"Module.dual_projective\", \"LinearMap.BilinForm.dualSubmoduleToDual\"], \"digest\": \"d3a97e970056fc1a\"}",
+   "date": "2026-10-24",
+   "verdict": "No exact scheme-valued projective representation coordinate or induced hyperplane-line compatibility definition. Set-theoretic projectivization is not a scheme-valued line construction."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "projective action from rational group scheme representation dual tautological line coordinate formula",
+   "results": "{\"t\": \"2026-10-24T06:25:24Z\", \"tool\": \"leanfinder\", \"query\": \"projective action from rational group scheme representation dual tautological line coordinate formula\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Projectivization.instMulAction\", \"Projectivization.smul_def\", \"Projectivization.smul_mk\", \"Projectivization.exists_smul_eq_mk_rep\", \"Projectivization.rep\", \"Projectivization.generalLinearGroup_smul_def\", \"Projectivization.mk_rep\", \"WeierstrassCurve.Projective.smul_eq\"], \"digest\": \"db18408ec48fe2a8\"}",
+   "date": "2026-10-24",
+   "verdict": "No exact scheme-valued projective representation coordinate or induced hyperplane-line compatibility definition. Set-theoretic projectivization is not a scheme-valued line construction."
+  },
+  {
+   "tool": "grep",
+   "query": "tautological|Projectivization|linearization",
+   "results": "{\"t\": \"2026-10-24T06:25:24Z\", \"tool\": \"grep\", \"query\": \"tautological|Projectivization|linearization\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "No exact scheme-valued projective representation coordinate or induced hyperplane-line compatibility definition. Set-theoretic projectivization is not a scheme-valued line construction."
+  },
+  {
+   "tool": "grep",
+   "query": "rg Hilbert.Mumford|semistab|tautological|linearization|specialLinear in lean/WeilConjectures, lean/Sheaf; grep node id; rg induced.*hyperplane|dual.*tautological in dag/nodes; blueprint_refs.py search GIT and linearization",
+   "results": "No Hilbert--Mumford theorem. Reuse LinearGroupSchemes.specialLinear, GroupSchemeLinearization.Linearization and its IsStable, ProjectiveSpace.twist and GmRepresentation.weightSpace. HilbertPlucker.Presentation fixes a specialized determinant action; no arbitrary rational representation coordinate compatibility or vector-lift predicate. blueprint search GIT: 0; linearization: 7 unrelated nodes.",
+   "date": "2026-10-24",
+   "verdict": "New coordinate bridge needed; existing projective and stability notions are reused."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-hilbert-mumford-projective-representation",
+  "date": "2026-10-24",
+  "group": "Q15"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "Coordinate form of the rational SL representation, equivariant projective embedding, induced dual tautological line, vector lift and minimum weight in MFK Theorem 2.1, before the Hilbert--Mumford equivalence. Morrison §2.1--2.2 pp.5--7.",
+   "via": [
+    "lem-sfb-hilbert-mumford-projective-representation",
+    "lem-sfb-hilbert-monomial-numerical-criterion",
+    "lem-sfb-uniform-gieseker-codegree-criterion",
+    "lem-sfb-smooth-curve-high-degree-hilbert-stability",
+    "lem-sfb-gieseker-ten-canonical-hilbert-stability",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.ProjectiveRepresentationCoordinates",
+  "declaration": "AlgebraicGeometry.ProjectiveRepresentation.HasNegativeWeight",
+  "file": "lean/Sheaf/AlgebraicGeometry/ProjectiveRepresentationCoordinates.lean",
+  "statement": "def HasNegativeWeight (c : V →ₗ[k] V ⊗[k] LaurentPolynomial k) (v : V) : Prop",
+  "branch": "newtargets-dag",
+  "by": "Q15",
+  "date": "2026-10-24",
+  "existing": false,
+  "declarations": [
+   "AlgebraicGeometry.ProjectiveRepresentation.specialLinear",
+   "AlgebraicGeometry.ProjectiveRepresentation.lines",
+   "AlgebraicGeometry.ProjectiveRepresentation.restrictedCoaction",
+   "AlgebraicGeometry.ProjectiveRepresentation.HasNegativeWeight"
+  ],
+  "note": "Second-reader FIX (stage 2, heads 67436661a4c9 and 496d8be71fe7): the local hyperplane/coordinateSection/IsInduced/IsLift duplicated line/coordinate/LinearizedEmbedding/IsVectorLift of the landed def-sfb-projective-representation-linearization (one definition per notion, H4); removed, and the item is stated with the owning declarations. Earlier repair: ProjectiveRepresentation.entry is imported from ProjectiveRepresentationLinearization."
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-496d8be71",
+  "group": "Q15",
+  "result": "fix",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-496d8be71",
+  "group": "Q15",
+  "result": "fix",
+  "note": "Re-delivery after the 67436661 return (Q79 linearization node and module landed; this head correctly drops the bundled copy). H4: the coordinates module again redefines hyperplane/coordinateSection/IsInduced/IsLift, duplicating the landed line/coordinate/LinearizedEmbedding/IsVectorLift (twistRestrict vs tensorPullback model), and step 1 uses Q79's stable_iff_vectorOrbit_proper stated with the owning notions. Fix re-applies the 67436661 FIX verbatim (landed module byte-identical, node JSONs unchanged since that head): coordinates module keeps specialLinear/lines (asOver abbrev)/restrictedCoaction/HasNegativeWeight; item takes D : LinearizedEmbedding (G := specialLinear E) rho j and IsVectorLift (Pi.basisFun k _) j y (b.repr v), concludes D.linearization.IsStable; coordinates node title/statement/lean.declaration HasNegativeWeight/declarations/note updated, stmt_deps unchanged. H11: author's own second reading replaced by the independent reading. Maths clause by clause correct (alg. closed k, SL_{dim E} r>=2, rho group-scheme hom, IsHProjective, closed immersion, inverse-matrix linearization, reused IsStable, j(y)=[v], all lam != 1, min weight < 0, iff, no char/reduced/smooth assumption); edge cases empty Y, trivial rho, dim V=1, ker rho, char p, nonreduced stabilizers. Advisory: weight-basis theorem cited for plain def weightSpace, already in base stmt_deps. One nt_compile --json of both fixed modules: exit 0, no errors or warnings."
+ }
+}

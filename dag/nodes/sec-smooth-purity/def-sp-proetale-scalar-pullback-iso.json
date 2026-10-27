@@ -1,0 +1,110 @@
+{
+ "id": "def-sp-proetale-scalar-pullback-iso",
+ "kind": "definition",
+ "title": "Canonical pro-etale scalar/pullback comparison in module-coefficient universes",
+ "status": "split",
+ "import_flags": [],
+ "statement": "Let $u$ be a universe, let $A,B$ be commutative rings of type universe $u+1$, let $\\varphi:A\\to B$ be a unital ring homomorphism, and let $f:X\\to Y$ be a morphism of schemes of universe $u$ [def-pc-scheme]. On the small pro-etale sites [def-weil-pbc-proetale-site], use the constant coefficient ring sheaves $A_T,B_T$ [def-weil-pbc-constant-sheaf], their categories of module sheaves [def-weil-sheaf-of-modules-category], and their ordinary unbounded uncompleted derived categories $D(T,A),D(T,B)$ [def-weil-abstract-derived-category]. Write $S_T=-\\otimes^L_{A_T}B_T$ for the canonical derived scalar extension with its adjunction to exact restriction of scalars $\\operatorname{Res}_{\\varphi,T}$ [lem-pur-derived-change-of-rings], and $f_A^*,f_B^*$ for exact derived geometric pullback with the canonical constant-section coefficient identifications [def-weil-pbc-proetale-operations]. Define\n$$\\lambda_{\\varphi,f}:f_B^*S_Y\\xrightarrow{\\sim}S_Xf_A^*$$\nto be the inverse of the inverse scalar-adjunction mate [def-weil-pbc-adjunction-mate] of the canonical exact restriction/pullback square\n$$f_A^*\\operatorname{Res}_{\\varphi,Y}\\xrightarrow{\\sim}\\operatorname{Res}_{\\varphi,X}f_B^*.$$\nHere the reverse mate $S_Xf_A^*\\to f_B^*S_Y$ is invertible by [lem-sfb-proetale-scalar-pullback-mate-invertible], so its inverse is uniquely determined. This is the canonical derived tensor-balancing comparison, not an arbitrary natural isomorphism. No finiteness, flatness, boundedness, constructibility, or normalization assumption is imposed.",
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-pbc-proetale-site",
+  "def-weil-pbc-constant-sheaf",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-abstract-derived-category",
+  "lem-pur-derived-change-of-rings",
+  "def-weil-pbc-proetale-operations",
+  "def-weil-pbc-adjunction-mate",
+  "lem-sfb-proetale-scalar-pullback-mate-invertible"
+ ],
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 07A4 (lemma-pullback-tensor-product) and 0G7E (lemma-pullback-K-flat); canonical scalar-adjunction mate specialization used in latest blueprint sec-smooth-purity/sk-prop-sp-purity-bc/sk-prop-sp-purity-bc-factors.proof.md (1)."
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Derived scalar extension commutes with exact geometric inverse image of constant coefficient pro-etale module sheaves",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"LinearEquiv.extendScalarsOfSurjective_symm\", \"module\": \"Mathlib.Algebra.Algebra.Basic\", \"type\": \"(f : M ≃ₗ[R] N) : (f.extendScalarsOfSurjective h).symm = f.symm.extendScalarsOfSurjective h\", \"doc\": \"For a linear equivalence $ f : M \\\\simeq_R N $ and a surjective ring homomorphism $ h : R \\\\to S $, the inverse of the scalar extension of $ f $ along $ h $ is equal to the scalar extension of the inver\"}\n  {\"name\": \"LinearEquiv.extendScalarsOfIsLocalizationEquiv_apply\", \"module\": \"Mathlib.RingTheory.Localization.Module\", \"type\": \"∀ {R : Type u_3} [inst : CommSemiring R] (S : Submonoid R) (A : Type u_4) [inst_1 : CommSemiring A]\\n  [inst_2 : Algebra R A] [inst_3 : IsLocalization S A] {M : Type u_5} {N : Type u_6} [inst_4 : AddCommMonoid M]\\n  [inst_5 : Module R M] [inst_6 : Module A M] [inst_7 : IsScalarTower R A M] [inst_8 : A\", \"doc\": \"For a commutative semiring $ R $, its localization $ A $ at a submonoid $ S $, and modules $ M,N $ over $ A $, the operations of extending scalars from $ R $ to $ A $ and restricting scalars back to $\"}\n  {\"name\": \"LinearEquiv.extendScalarsOfIsLocalizationEquiv\", \"module\": \"Mathlib.RingTheory.Localization.Module\", \"type\": \": (M ≃ₗ[R] N) ≃ M ≃ₗ[A] N\", \"doc\": \"For a commutative semiring $ R $, its localization $ A $ at a submonoid $ S $, and modules $ M,N $ over $ A $, the operations of extending scalars from $ R $ to $ A $ and restricting scalars back to $\"}\n  {\"name\": \"PresheafOfModules.pullback\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Presheaf.Pullback\", \"type\": \": PresheafOfModules.{v} S ⥤ PresheafOfModules.{v} R\", \"doc\": \"Given a natural transformation $\\\\phi: R \\\\to S$ between presheaves of rings on a category $\\\\mathcal{C}$, this functor is the left adjoint to the pushforward operation. For a presheaf of modules $\\\\mathc\"}\n  {\"name\": \"ModuleCat.ExtendRestrictScalarsAdj.homEquiv_symm_apply\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.ChangeOfRings\", \"type\": \"∀ {R : Type u₁} {S : Type u₂} [inst : CommRing R] [inst_1 : CommRing S] (f : R →+* S) {X : ModuleCat R}\\n  {Y : ModuleCat S} (g : X ⟶ (ModuleCat.restrictScalars f).obj Y),\\n  (ModuleCat.ExtendRestrictScalarsAdj.homEquiv f).symm g =\\n    ModuleCat.ExtendRestrictScalarsAdj.HomEquiv.fromExtendScalars f g\", \"doc\": \"For commutative rings $ R $ and $ S $ with a ring homomorphism $ f : R → S $, an $ R $-module $ X $, an $ S $-module $ Y $, and an $ R $-linear map $ g : X → \\text{Res}_f(Y) $, the inverse of the natur\"}\n  {\"name\": \"LinearEquiv.extendScalarsOfIsLocalizationEquiv_symm_apply\", \"module\": \"Mathlib.RingTheory.Localization.Module\", \"type\": \"∀ {R : Type u_3} [inst : CommSemiring R] (S : Submonoid R) (A : Type u_4) [inst_1 : CommSemiring A]\\n  [inst_2 : Algebra R A] [inst_3 : IsLocalization S A] {M : Type u_5} {N : Type u_6} [inst_4 : AddCommMonoid M]\\n  [inst_5 : Module R M] [inst_6 : Module A M] [inst_7 : IsScalarTower R A M] [inst_8 : A\", \"doc\": \"For a commutative semiring $ R $, its localization $ A $ at a submonoid $ S $, and modules $ M,N $ over $ A $, the inverse of the equivalence between $ R $-linear equivalences and $ A $-linear equival\"}\n  {\"name\": \"ModuleCat.ExtendRestrictScalarsAdj.homEquiv\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.ChangeOfRings\", \"type\": \"{R : Type u₁} →\\n  {S : Type u₂} →\\n    [inst : CommRing R] →\\n      [inst_1 : CommRing S] →\\n        (f : R →+* S) →\\n          {X : ModuleCat R} →\\n            {Y : ModuleCat S} → ((ModuleCat.extendScalars f).obj X ⟶ Y) ≃ (X ⟶ (ModuleCat.restrictScalars f).obj Y)\", \"doc\": \"For commutative rings $ R $ and $ S $ with a ring homomorphism $ f : R → S $, there is a natural bijection between $ S $-linear maps from the extension of scalars of an $ R $-module $ X $ to an $ S $-\"}\n  {\"name\": \"ModuleCat.extendRestrictScalarsAdj\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.ChangeOfRings\", \"type\": \"{R : Type u₁} →\\n  {S : Type u₂} →\\n    [inst : CommRing R] →\\n      [inst_1 : CommRing S] → (f : R →+* S) → ModuleCat.extendScalars f ⊣ ModuleCat.restrictScalars f\", \"doc\": \"For commutative rings $ R $ and $ S $ with a ring homomorphism $ f : R → S $, the extension of scalars functor from $ R $-modules to $ S $-modules is left adjoint to the restriction of scalars functor\"}\n",
+   "date": "2026-10-25",
+   "verdict": "No exact Mathlib match; reuse the existing published pro-etale scalar/pullback construction."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Canonical pro-etale constant coefficient derived scalar extension pullback natural isomorphism, coefficients in Type (u+1) and schemes in universe u",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"StandardEtalePair.homEquiv\", \"module\": \"Mathlib/RingTheory/Etale/StandardEtale\", \"type\": \"{R : Type u_1} →\\n  {S : Type u_2} →\\n    [inst : CommRing R] →\\n      [inst_1 : CommRing S] →\\n        [inst_2 : Algebra R S] → (P : StandardEtalePair R) → (P.Ring →ₐ[R] S) ≃ { x // P.HasMap x }\", \"doc\": \"For a commutative ring $R$, a standard étale pair $P=(f,g)$ over $R$, and a commutative $R$-algebra $S$, there is a natural equivalence:\\\\n$$ \\\\operatorname{Hom}_{R\\\\text{-alg}}(P.\\\\text{Ring}, S) \\\\cong \\\\\"}\n  {\"name\": \"StandardEtalePair.homEquiv_apply_coe\", \"module\": \"Mathlib/RingTheory/Etale/StandardEtale\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S]\\n  (P : StandardEtalePair R) (f : P.Ring →ₐ[R] S), ↑(P.homEquiv f) = f P.X\", \"doc\": \"For a standard étale pair $ P $ over a commutative ring $ R $, and an $ R $-algebra homomorphism $ f: P.\\\\text{Ring} \\\\to S $, the equivalence $ P.\\\\text{homEquiv} $ sends $ f $ to the element $ f(X) \\\\in\"}\n  {\"name\": \"StandardEtalePair.homEquiv_symm_apply\", \"module\": \"Mathlib/RingTheory/Etale/StandardEtale\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S]\\n  (P : StandardEtalePair R) (x : { x // P.HasMap x }), P.homEquiv.symm x = P.lift ↑x ⋯\", \"doc\": \"For a commutative ring $ R $, a standard étale pair $ P $ over $ R $, and an $ R $-algebra $ S $, the inverse of the equivalence $ \\\\text{homEquiv} $ maps an element $ x \\\\in S $ satisfying $ P.\\\\text{Ha\"}\n  {\"name\": \"KaehlerDifferential.isBaseChange_of_formallyEtale\", \"module\": \"Mathlib/RingTheory/Etale/Kaehler\", \"type\": \"∀ (R : Type u_1) (S : Type u_2) (T : Type u_3) [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : CommRing T]\\n  [inst_3 : Algebra R S] [inst_4 : Algebra R T] [inst_5 : Algebra S T] [inst_6 : IsScalarTower R S T]\\n  [Algebra.FormallyEtale S T], IsBaseChange T (KaehlerDifferential.map R R S T)\", \"doc\": \"If $ S $ is a formally étale $ R $-algebra and $ T $ is an $ S $-algebra, then the module of Kähler differentials $ \\\\Omega_{T/S} $ is a base change of $ \\\\Omega_{S/R} $ via the algebra homomorphism $ S\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.instHasPullbacksEtale\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"∀ (X : AlgebraicGeometry.Scheme), CategoryTheory.Limits.HasPullbacks X.Etale\", \"doc\": \"For any scheme $ X $, the category of étale morphisms to $ X $ has all pullbacks. This means that for any pair of étale morphisms $ Y \\to X $ and $ Z \\to X $, and any morphism $ Y \\to Z $, the fiber prod\"}\n  {\"name\": \"AlgebraicGeometry.pullbackSpecIso_hom_base\", \"module\": \"Mathlib/AlgebraicGeometry/Pullbacks\", \"type\": \"∀ (R S T : Type u) [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : CommRing T] [inst_3 : Algebra R S]\\n  [inst_4 : Algebra R T],\\n  CategoryTheory.CategoryStruct.comp (AlgebraicGeometry.pullbackSpecIso R S T).hom\\n      (AlgebraicGeometry.Spec.map (CommRingCat.ofHom (algebraMap R (TensorProduct R S\", \"doc\": \"The pullback of the morphisms $\\\\operatorname{Spec}(S) \\\\to \\\\operatorname{Spec}(R)$ and $\\\\operatorname{Spec}(T) \\\\to \\\\operatorname{Spec}(R)$ induced by $R$-algebra structures on $S$ and $T$ is isomorphic\"}\n  {\"name\": \"Algebra.FormallyEtale.of_restrictScalars\", \"module\": \"Mathlib/RingTheory/Etale/Basic\", \"type\": \"∀ {R : Type u} {A : Type v} {B : Type u_1} [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A]\\n  [inst_3 : CommRing B] [inst_4 : Algebra R B] [inst_5 : Algebra A B] [IsScalarTower R A B]\\n  [Algebra.FormallyUnramified R A] [Algebra.FormallyEtale R B], Algebra.FormallyEtale A B\", \"doc\": \"If $ A $ is a formally unramified $ R $-algebra and $ B $ is a formally étale $ R $-algebra, then $ B $ is a formally étale $ A $-algebra.\"}\n  {\"name\": \"Algebra.FormallyEtale.Algebra.FormallyEtale.of_restrictScalars\", \"module\": \"Mathlib/RingTheory/Etale/Basic\", \"type\": \"∀ {R : Type u} {A : Type v} {B : Type u_1} [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A]\\n  [inst_3 : CommRing B] [inst_4 : Algebra R B] [inst_5 : Algebra A B] [IsScalarTower R A B]\\n  [Algebra.FormallyUnramified R A] [Algebra.FormallyEtale R B], Algebra.FormallyEtale A B\", \"doc\": \"Let $ R $, $ A $, and $ B $ be commutative rings with $ A $ and $ B $ as $ R $-algebras, and $ B $ as an $ A $-algebra satisfying the scalar tower condition $ R \\to A \\to B $. If $ A $ is formally unram\"}\n",
+   "date": "2026-10-25",
+   "verdict": "The existing project definition is reused; no exact Mathlib construction with these site and coefficient coordinates was returned."
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.ProEtale.scalarPullbackProEtaleIso",
+   "results": "[loogle] OK 0 hit(s) | loogle: unknown identifier 'AlgebraicGeometry.ProEtale.scalarPullbackProEtaleIso'\n",
+   "date": "2026-10-25",
+   "verdict": "The existing project definition is reused; no exact Mathlib construction with these site and coefficient coordinates was returned."
+  },
+  {
+   "tool": "grep",
+   "query": "scalarPullback.*Iso|Pullback.*Scalar.*Iso",
+   "results": "[grep] OK 0 hit(s)\n\nproject source:\nlean/Sheaf/Paper/EtaleProEtaleScalarMate.lean:56:def scalarPullbackReverseProEtale\nlean/Sheaf/Paper/EtaleProEtaleScalarMate.lean:100:    IsIso (scalarPullbackReverseProEtale a f) ∧\nlean/Sheaf/Paper/EtaleProEtaleScalarMate.lean:108:def scalarPullbackProEtaleIso\nlean/Sheaf/Paper/EtaleProEtaleScalarMate.lean:116:  (asIso (scalarPullbackReverseProEtale a f)).symm\nlean/Sheaf/Paper/EtaleProEtaleScalarMate.lean:245:      (TwoSquare.mk _ _ _ _ (scalarPullbackProEtaleIso a f).hom)).natTrans.app\n\nDAG definition ownership:\ndag/nodes/sec-six-functors-basics/lem-sfb-scalar-site-comparison-normalized-data.json\ndag/nodes/sec-six-functors-basics/lem-sfb-etale-proetale-scalar-pullback-cube.json\ndag/nodes/sec-six-functors-basics/lem-sfb-etale-proetale-scalar-mate.json\ndag/nodes/sec-six-functors-basics/lem-sfb-etale-proetale-scalar-counit-transposes.json\ndag/nodes/sec-smooth-purity/lem-sp-open-proetale-counit-scalar.json\n",
+   "date": "2026-10-25",
+   "verdict": "The existing project definition is reused; no exact Mathlib construction with these site and coefficient coordinates was returned."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-sp-orientation-scalar-tower-transport",
+  "date": "2026-10-25",
+  "group": "NM"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-sp-purity-bc-factors",
+   "place": "Proof (1), canonical scalar/pullback identification in transport of the finite orientation equation; definition ownership required by the H2 return of lem-sp-orientation-scalar-tower-transport.",
+   "via": [
+    "lem-sp-orientation-scalar-tower-transport"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sp-purity-bc",
+ "lean": {
+  "module": "Sheaf.Paper.EtaleProEtaleScalarMate",
+  "declaration": "AlgebraicGeometry.ProEtale.scalarPullbackProEtaleIso",
+  "statement": "def scalarPullbackProEtaleIso\n    {A B : Type (u + 1)} [CommRing A] [CommRing B]\n    (a : A →+* B) {X Y : Scheme.{u}} (f : X ⟶ Y) :\n    pbcFixedScalarExtension (Scheme.ProEt.topology Y) a ⋙\n        L(upperStar (ModuleCat.{u + 1} B) f) ≅\n      L(upperStar (ModuleCat.{u + 1} A) f) ⋙\n        pbcFixedScalarExtension (Scheme.ProEt.topology X) a",
+  "branch": "newtargets-dag",
+  "by": "NM",
+  "date": "2026-10-25",
+  "existing": true,
+  "note": "Definition ownership requested by the independent H2 return of bdbf541c84ad. Exact existing Type(u+1)-coefficient comparison, not the theorem etaleProEtale_scalar_mate. Its data are the inverse of the canonical scalar-adjunction mate, with the existing invertibility proof determining that inverse uniquely. No new Lean definition and no duplicate module; the prior constant-scalar-pullback definition has Type u coefficients and different ringed coordinates."
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-3a03bb6bf",
+  "group": "NM",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-3a03bb6bf",
+  "group": "NM",
+  "result": "pass",
+  "note": "Re-delivery after H2 RETURN bdbf541c84ad. (1) The theorem stmt_deps lem-sp-strict-line-heart-assembly and lem-sfb-etale-proetale-scalar-mate are removed; item stmt_deps = live 18 + new def-sp-proetale-scalar-pullback-iso, and statement/proof/proof_deps are unchanged against live. (2) The item-local abbrev towerEvaluation has the same body as live SpStrictLineHeart.ev over det-sp-coefficient-towers-abelian; universes t and v stay independent. (3) The new existing:true def node owns scalarPullbackProEtaleIso. Its lean.statement is verbatim the live EtaleProEtaleScalarMate:108-114; it is real inverse-mate data, it has no owner race, and its deps (including lem-sfb-proetale-scalar-pullback-mate-invertible) do not reach the item. The module diff is only the import swap and the abbrev; the other three theorems are byte-identical to the mathematics accepted in the previous review, and lean.statement is verbatim in the file. Advisories only: the scalarComparison model differs from det-sp-finite-general-ring; the def node cites a different but equivalent invertibility lemma; the tower theorem has E in the scheme universe because the API forces it."
+ }
+}

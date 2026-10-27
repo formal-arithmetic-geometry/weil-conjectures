@@ -5,9 +5,32 @@
   "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/thm-amb-p1-adjunction.md",
   "place": "Agent-written ordinary-etale coefficient interface for the diagonal-kernel proof; decomposition and trace in thm-amb-p1-decomposition.md and def-amb-p1-trace.md; Kummer sequence: Stacks Tag 03PL, etale-cohomology.tex, lemma-kummer-sequence; unbounded proper exchange: Tag 0F0C, lemma-proper-base-change-mod-n, extended to torsion rings"
  },
- "proof": [],
+ "proof": [
+  {
+   "text": "Evaluate the unchanged Ext realization formula in the universe-polymorphic ordinaryFiniteClassCore, with its derived-category and Ext instances abstract. Specialize it to moduleAbelianForget and ordinaryFiniteIntegralGenerator to obtain ordinaryFiniteClass. Unfolding the helper gives exactly the original composite; this changes neither class data nor target statements and avoids repeated kernel expansion of concrete localization instances.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Construct ordinaryFiniteDegreeZero by the canonical degree-zero embedding object. Construct ordinaryFiniteSingleFunctor from the canonical single-degree functor with that named value as its explicit object field, keeping its maps and functor laws. The original ordinaryFiniteSingleFunctor_eq remains reflexivity, so both functor and objects are definitionally unchanged. Concentration instances follow by unfolding the degree-zero object. The existing constant unit remains its ordinaryFiniteDegreeZero value.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Cache the canonical Ext.homEquiv as ordinaryFiniteExtHomEquiv, with source and target expressed through the already existing ordinaryFiniteSingleFunctor. Its body is the original Mathlib equivalence after unfolding that functor. Factor the realization formula through ordinaryFiniteExtClassCore on Ext representatives; ordinaryFiniteClassCore uses the usual inverse Ext.homEquiv, and ordinaryFiniteClass uses the identical cached equivalence. Keep the existing degree-zero constant unit. Prove the existing concentration instances by unfolding their canonical object. All data unfold to the original constructions; no mathematical statement or unit route changes. Reuse the HasSheafify and IsGrothendieckAbelian proposition instances already stored in DerivedCategoryModule when elaborating these constructions, so their canonical localization arguments match before taking object maps. Expose realization of a cached Ext representative as a proved equation, using inverse-equivalence cancellation; downstream proofs rewrite with this equation instead of unfolding the concrete class realization. Cache the same scalar-extended Kummer boundary on an arbitrary scheme and Picard class as ordinaryFiniteKummerClass; the original P1 definition is its specialization at O(1), with the same signature and definitionally identical data. Name the actual Picard class of O(1) as ordinaryFiniteP1PicardClass before applying the arbitrary-scheme Kummer construction, and expose the cached Ext equivalence by its defining equation. These keep the actual data abstract during specialization; unfolding gives the original constructions. The proved Chern-specification characterization exposes precisely this class equation at O(1), without unfolding the predicate at each use. Cache the identical canonical HasDerivedCategory.ofIsGrothendieckAbelian value as ordinaryFiniteDerivedCategoryInstance before taking its object projections; its local registration selects no different data.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
  "proof_deps": [],
- "proof_origin": null,
+ "proof_origin": {
+  "by": "agent",
+  "based_on": {
+   "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-lem-geo-p1-cohomology/thm-amb-p1-decomposition.proof.md",
+   "place": "The specified O(1) Kummer component and its base-change comparison."
+  },
+  "why": "Cache the same explicitly constructed canonical data and expose its defining equations; all old constructions unfold to the original formulas."
+ },
  "mathlib_match": null,
  "mathlib_searches": [
   {
@@ -77,7 +100,18 @@
   },
   "same_as": []
  },
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
  "chapter": "sec-smooth-purity",
  "unit": "sk-prop-sf-cbc",
  "id": "def-asd-ordinary-finite-p1-kummer-class",
@@ -105,14 +139,29 @@
    "AlgebraicGeometry.Etale.ordinaryFiniteLine",
    "AlgebraicGeometry.Etale.ordinaryFiniteUnit",
    "AlgebraicGeometry.Etale.ordinaryFiniteP1KummerClass",
-   "AlgebraicGeometry.Etale.ordinaryFiniteP1ChernSpec"
+   "AlgebraicGeometry.Etale.ordinaryFiniteP1ChernSpec",
+   "AlgebraicGeometry.Etale.ordinaryFiniteClassCore",
+   "AlgebraicGeometry.Etale.ordinaryFiniteDegreeZero",
+   "AlgebraicGeometry.Etale.ordinaryFiniteDegreeZero_isGE",
+   "AlgebraicGeometry.Etale.ordinaryFiniteDegreeZero_isLE",
+   "AlgebraicGeometry.Etale.ordinaryFiniteSingleFunctor",
+   "AlgebraicGeometry.Etale.ordinaryFiniteSingleFunctor_eq",
+   "AlgebraicGeometry.Etale.ordinaryFiniteExtHomEquiv",
+   "AlgebraicGeometry.Etale.ordinaryFiniteExtClassCore",
+   "AlgebraicGeometry.Etale.ordinaryFiniteClass_extHomEquiv",
+   "AlgebraicGeometry.Etale.ordinaryFiniteKummerClass",
+   "AlgebraicGeometry.Etale.ordinaryFiniteExtHomEquiv_eq",
+   "AlgebraicGeometry.Etale.ordinaryFiniteP1PicardClass",
+   "AlgebraicGeometry.Etale.ordinaryFiniteP1ChernSpec_iff",
+   "AlgebraicGeometry.Etale.ordinaryFiniteDerivedCategoryInstance"
   ],
   "file": "lean/Sheaf/AlgebraicGeometry/OrdinaryFiniteP1Kummer.lean",
   "statement": "def ordinaryFiniteP1KummerClass (A : Type (u + 1)) [CommRing A] (N : ℕ) (hA : (N : A) = 0) (S : Scheme.{u}) (hP : IsUnit (N : Γ(ProjectiveLine S, ⊤))) : Sheaf.H ((RawModuleScalarComparison.forget A (ProjectiveLine S)).obj (Scheme.finiteEtaleTateLine (ProjectiveLine S) N A hA)) 2",
   "branch": "newtargets-dag",
   "by": "Q43",
   "date": "2026-10-15",
-  "existing": false
+  "existing": false,
+  "note": "P2 preserves all public signatures and explicitly constructed Kummer data. The root generator is expressed as the scalar-extension adjunction transpose of the sheafification map, definitionally the old forgotten-unit composite; its naturality is a proved private general adjunction identity. Local transparency settings keep the derived-category localization construction abstract. No hypothesis, unit route or mathematical obligation changes. U8 names the existing degree-zero single-functor construction and uses it in the ordinary line. The Chern specification uses its identical arrow with a local transparency option for this wrapper; all existing signatures are unchanged. The coefficient interface already reexported by the current scalar-comparison source is imported publicly and directly so the same signatures also elaborate against the older published umbrella. Reviewer: public IsGE/IsLE degree-zero instances on the wrapper restore the Mathlib single-functor instances that consumers (SpP1NormalizedFamilyCore, BaseChangedLineTraceEvaluation, ProEtaleProjectiveLineTrace) find through ordinaryFiniteLine. A2 caches the canonical degree-zero functor and its single-degree comparisons without changing any existing signature or mathematical data. X7 constructs the canonical degree-zero functor with its named object as the explicit object field, caches the canonical Ext equivalence and exposes defining equations. No data or mathematical statement changes; the current unit and generic constant comparison are preserved. F1 repair of C-240da preserves the current published constructions and every auxiliary constant; the canonical finite adjunction record and proved component equations live in the separate OrdinaryFiniteCoefficientRecords module. No interface or published definition body in this module is changed by F1."
  },
  "reviewed": {
   "date": "2026-10-15",
@@ -131,13 +180,13 @@
   "note": "Wrote review.md. Checked immutable files, dependencies, source clauses, canonical maps, signatures, universes, edge cases, reports and pilot gates. All four modules passed scompile.py server confirmation within per-file limits. No fixes required; no repository mutations."
  },
  "reviewed_proof": {
-  "date": "2026-10-21",
+  "date": "2026-10-26",
   "by": "L",
-  "reviewer": "C-3bab2",
-  "group": "T3",
+  "reviewer": "C-efdbd",
+  "group": "F1",
   "result": "fix",
-  "landing": "20261021T134548-L-1367600",
+  "landing": "20261026T222636-L-676965",
   "kind": "interface",
-  "note": "independent cc review: 3bab2f2e head vs clones/live and the 9f44006e FIX (Lean identical except N1 forced adaptations); prior 3bab run's fixes cmp'd to live; compile logs /tmp/rv3bab2 (49/50 gate modules), rv3bab6 (instance test), rv3bab7 (final Defs + 17)"
+  "note": "independent cc review: item proof + 4 new modules + 4 adapted modules against published clone, DAG nodes and 6 change records; delivered set built in sandbox and 7 direct importers + 4 exposed transitive users (SfP1IntegralTransport, SfP1ChartExchange, SfP1ChartMapComposition, TowerP1KernelScalarData) compiled against it, all OK; #print axioms"
  }
 }

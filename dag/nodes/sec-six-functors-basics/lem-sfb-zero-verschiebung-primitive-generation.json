@@ -1,0 +1,326 @@
+{
+ "id": "lem-sfb-zero-verschiebung-primitive-generation",
+ "kind": "statement",
+ "title": "Zero Verschiebung forces generation by primitive functions",
+ "statement": "Let $k$ be a field [def-weil-field] of characteristic $p>0$, and let $G$ be a commutative affine $k$-group scheme [def-sc-group-scheme] of finite type [def-weil-finite-type-morphism]. Put $C=k[G]$ with comultiplication $\\Delta$ and counit $\\epsilon$ [lem-sfb-affine-group-coordinate-hopf]. Let $G^{(p)}$, $C^{(p)}$ and $V_G:G^{(p)}\\to G$ be the Frobenius twist and the canonical Verschiebung constructed in [lem-sfb-affine-group-frobenius-verschiebung]. Let $u^{(p)}:k\\to C^{(p)}$ be the structure map. If $V_G$ is the zero group homomorphism, meaning $V_G^*=u^{(p)}\\epsilon:C\\to C^{(p)}$, then $C$ is generated as a $k$-algebra by its primitive elements: every $c\\in C$ is a polynomial with coefficients in $k$ in finitely many elements $x$ satisfying $\\Delta(x)=x\\otimes1+1\\otimes x$. Neither smoothness nor connectedness of $G$, nor perfection of $k$, is assumed.",
+ "source": {
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Proposition 14.48, printed pp.295-296, together with the equivalent coordinate-algebra characterization in Definition 14.45, printed p.295. This is the primitive-generation consequence of the Verschiebung criterion, for arbitrary commutative affine algebraic groups."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-sc-group-scheme",
+  "def-weil-finite-type-morphism",
+  "lem-sfb-affine-group-coordinate-hopf",
+  "lem-sfb-affine-group-frobenius-verschiebung",
+  "def-sfb-coordinate-hopf-algebra"
+ ],
+ "proof": [
+  {
+   "text": "For any extension $K/k$, put $C_K=K\\otimes_k C$ and $P(C)=\\ker d$, where $d(c)=\\Delta(c)-c\\otimes1-1\\otimes c$. The scalar extension of the coordinate Hopf maps gives the maps for $G_K$. Choose a $k$-basis of $K$. Write an element of $C_K$ uniquely as a finite sum $\\sum_i\\lambda_i\\otimes c_i$ with distinct basis elements $\\lambda_i$. Its reduced coproduct is $\\sum_i\\lambda_i\\otimes d(c_i)$ in $K\\otimes_k(C\\otimes_k C)$, so it vanishes exactly when every $c_i\\in P(C)$. Thus $P(C_K)=K\\otimes_kP(C)$. This argument does not require finite-dimensional $C$. We will prove generation over an algebraic closure $K$ and descend using this equality in the last step.",
+   "uses": [
+    "lem-sfb-affine-group-coordinate-hopf",
+    "lem-weil-pbc-algebra-tensor-pushout-universal-property"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "14.48, p.296, opening field-extension reduction; kernel comparison written out"
+   }
+  },
+  {
+   "text": "Choose an algebraic closure $K/k$. By Verschiebung base change, $V_{G_K}=0$. If $D_K(M)\\hookrightarrow G_K$ is any diagonalizable closed subgroup, naturality gives $V_{D_K(M)}=0$. The diagonalizable clause makes this map an isomorphism. A zero isomorphism forces the group to be trivial: on every algebra-valued point its identity map is the constant identity-element map. Hence $G_K$ has no nontrivial diagonalizable closed subgroup. In the following steps all groups and maps are over $K$.",
+   "uses": [
+    "lem-sfb-verschiebung-naturality-diagonalizable",
+    "def-weil-algebraic-closure"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "14.48, p.296, preliminary unipotent reduction; 11.39(a),(c), pp.224-225"
+   }
+  },
+  {
+   "text": "Apply the additive-filtration theorem to $G_K$, obtaining $1=G_0\\subseteq\\cdots\\subseteq G_s=G_K$ with exact sequences $0\\to G_{j-1}\\to G_j\\xrightarrow{q_j}Q_j\\to0$ and closed embeddings $\\iota_j:Q_j\\hookrightarrow\\mathbf G_a$. Every $G_j$ has zero Verschiebung by the closed-subgroup clause. We prove by induction on $j$ that $G_j$ has a closed embedding into a finite power of $\\mathbf G_a$. For $j=0$, use the identity of the trivial group with $\\mathbf G_a^0$. Fix $j\\geq1$ and assume a closed embedding $z:N=G_{j-1}\\hookrightarrow\\mathbf G_a^r$ has been constructed. Put $B=G_j$, $Q=Q_j$, $q=q_j$.",
+   "uses": [
+    "lem-sfb-commutative-no-diagonalizable-additive-filtration",
+    "lem-sfb-verschiebung-naturality-diagonalizable"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "14.48, p.296, induction on a subnormal series; 14.21, pp.284-285"
+   }
+  },
+  {
+   "text": "For each coordinate homomorphism $\\varphi:N\\to\\mathbf G_a$ of $z$, apply the affine pushout theorem to form $E=(B\\times\\mathbf G_a)/\\{(n,-\\varphi(n))\\}$, with exact row $0\\to\\mathbf G_a\\xrightarrow{j}E\\xrightarrow{q'}Q\\to0$ and $b:B\\to E$ satisfying $bi=j\\varphi$. Both $B$ and $\\mathbf G_a$ have zero Verschiebung, the latter by the Witt calculation. The product and quotient clauses therefore give $V_E=0$, since $B\\times\\mathbf G_a\\to E$ is faithfully flat and finitely presented. This construction uses no surjectivity of $B(R)\\to Q(R)$ before an fppf covering.",
+   "uses": [
+    "lem-sfb-affine-commutative-extension-pushout",
+    "lem-sfb-verschiebung-naturality-diagonalizable",
+    "lem-sfb-length-two-witt-extension-verschiebung"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "14.48, p.296, pushout square and vanishing of V on its lower middle term"
+   }
+  },
+  {
+   "text": "The field $K$ is perfect, $Q$ is a closed subgroup of $\\mathbf G_a$, and the pushout row is a commutative affine finite-type extension by $\\mathbf G_a$. The Witt-pullback theorem supplies $h:Q\\to\\mathbf G_a$ and $a:E\\to W_{2,K}$ with $\\tau a=hq'$ and identifies $E$ with the pullback extension. Naturality gives $V_{W_2}a^{(p)}=aV_E=0$. By the explicit formula $V_{W_2}(x_0,x_1)=(0,x_0)$, the first-coordinate morphism of $a^{(p)}$ is zero. Equivalently $(\\tau a)^{(p)}=(hq')^{(p)}=0$, using the canonical twists of $W_2$ and $\\mathbf G_a$ over $\\mathbf F_p$. Over perfect $K$ the Frobenius automorphism is invertible, so twisting has an inverse scalar-transport functor and detects equality of morphisms. Consequently $hq'=0$. Since $q'$ is an epimorphism of fppf sheaves, $h=0$. This is an equality of twisted morphisms, not merely a statement about their geometric points or the $p$-th powers of their coordinate functions.",
+   "uses": [
+    "lem-sfb-additive-subgroup-commutative-extensions-witt",
+    "lem-sfb-verschiebung-naturality-diagonalizable",
+    "lem-sfb-length-two-witt-extension-verschiebung"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "14.48, p.296, Witt obstruction; 15.27, p.316; 11(j), p.227"
+   }
+  },
+  {
+   "text": "For $h=0$, the pullback is $Q\\times\\ker\\tau=Q\\times\\mathbf G_a$. Transport its second projection to a homomorphism $r_E:E\\to\\mathbf G_a$ with $r_Ej=1$. Then $\\widetilde\\varphi=r_Eb:B\\to\\mathbf G_a$ extends $\\varphi$, since $\\widetilde\\varphi i=r_Ej\\varphi=\\varphi$. Do this for the $r$ coordinates of $z$ and let $\\widetilde z:B\\to\\mathbf G_a^r$ be their product. Its restriction to $N$ is exactly $z$. The empty family when $r=0$ gives the unique map to the trivial group.",
+   "uses": [
+    "lem-sfb-additive-subgroup-commutative-extensions-witt",
+    "lem-sfb-length-two-witt-extension-verschiebung",
+    "lem-sfb-affine-commutative-extension-pushout"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "14.48, p.296, splitting the pushout gives extension of each coordinate homomorphism"
+   }
+  },
+  {
+   "text": "Define $u=(\\widetilde z,\\iota_jq):B\\to\\mathbf G_a^{r+1}$. Its scheme-theoretic kernel is trivial: on every commutative $K$-algebra $R$, an element in the kernel lies in $N(R)$ because $\\iota_j$ is a closed embedding and $\\ker q=N$; on $N(R)$ its first coordinates are $z_R$, whose kernel is trivial. These functorial identities identify the kernel scheme with the trivial group. Apply the homomorphism-factorization theorem to $u$. All groups are affine, hence separated, and of finite type. The quotient factor represents the fppf sheaf $B/1=B$, so it is an isomorphism; the other factor is a closed immersion. Thus $u$ is the required closed embedding. This proves the induction step and yields a closed embedding $G_K\\hookrightarrow\\mathbf G_a^n$ for some finite $n$.",
+   "uses": [
+    "lem-sfb-algebraic-group-homomorphism-factorization",
+    "lem-sfb-commutative-no-diagonalizable-additive-filtration",
+    "lem-sfb-affine-commutative-extension-pushout"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "14.48, p.296, last embedding argument; 5.39, p.108"
+   }
+  },
+  {
+   "text": "The pullback on coordinate rings of this closed embedding is a surjection $K[T_1,\\ldots,T_n]\\to C_K$, by the affine closed-immersion criterion. Let $x_i$ be the image of $T_i$. The coordinate coproduct of the additive group sends $T_i$ to $T_i\\otimes1+1\\otimes T_i$; preservation of multiplication of group schemes gives $\\Delta(x_i)=x_i\\otimes1+1\\otimes x_i$. Thus $C_K$ is generated by finitely many primitives. For $n=0$ the same surjection says that $C_K=K$.",
+   "uses": [
+    "lem-weil-pbc-closed-immersion-affine-cover-criterion",
+    "def-sc-gm-ga",
+    "lem-sfb-affine-group-coordinate-hopf"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "14.45, p.295, coordinate-algebra characterization; 14.48, p.296"
+   }
+  },
+  {
+   "text": "Let $A\\subseteq C$ be the $k$-subalgebra generated by $P(C)$. Step 1 shows that every primitive of $C_K$ is a finite $K$-linear combination of elements of $P(C)$, so the generation just proved says the image of $K\\otimes_k A\\to K\\otimes_k C$ is all of $C_K$. For $c\\in C$, express $1\\otimes c$ as $\\sum_{i=1}^t\\alpha_i\\otimes a_i$ with $a_i\\in A$. Choose a $k$-linear map $\\ell:K\\to k$ with $\\ell(1)=1$, by completing $1$ to a $k$-basis of $K$. Applying $\\ell\\otimes1_C$ gives $c=\\sum_i\\ell(\\alpha_i)a_i\\in A$. Hence $A=C$, with exactly the claimed finite-polynomial meaning of generation. No smoothness or connectedness has entered, and the original $k$ need not be perfect.",
+   "uses": [
+    "lem-weil-pbc-algebra-tensor-pushout-universal-property"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "14.48, p.296, descent after extending k; explicit coefficient retraction"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-affine-group-coordinate-hopf",
+  "lem-weil-pbc-algebra-tensor-pushout-universal-property",
+  "lem-sfb-verschiebung-naturality-diagonalizable",
+  "def-weil-algebraic-closure",
+  "lem-sfb-commutative-no-diagonalizable-additive-filtration",
+  "lem-sfb-affine-commutative-extension-pushout",
+  "lem-sfb-length-two-witt-extension-verschiebung",
+  "lem-sfb-additive-subgroup-commutative-extensions-witt",
+  "lem-sfb-algebraic-group-homomorphism-factorization",
+  "lem-weil-pbc-closed-immersion-affine-cover-criterion",
+  "def-sc-gm-ga"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Proposition 14.48, printed pp.295-296, sufficiency proof, with 14.45; preliminary scalar-extension and filtration reductions and Witt obstruction written explicitly."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "In characteristic p every commutative Hopf algebra whose Verschiebung is zero is generated as an algebra by primitive elements",
+   "results": "8 hits; Subalgebra.perfectClosure, PerfectClosure.isPRadical, PerfectRing, Perfection.perfectRing, PerfectField.toPerfectRing, PerfectClosure.R, PerfectClosure.instPerfectRing, CommSemiring.toHopfAlgebra",
+   "date": "2026-10-24",
+   "verdict": "no match: ordinary Hopf algebra instances, Witt-vector constructions and perfect closures do not state primitive generation from vanishing of group-scheme Verschiebung."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"HopfAlgebra\", \"primitive\"",
+   "results": "0 hits; ",
+   "date": "2026-10-24",
+   "verdict": "no match: ordinary Hopf algebra instances, Witt-vector constructions and perfect closures do not state primitive generation from vanishing of group-scheme Verschiebung."
+  },
+  {
+   "tool": "grep",
+   "query": "primitive|verschiebung|elementaryUnipotent",
+   "results": "0 hits; ; directory Mathlib/RingTheory/HopfAlgebra",
+   "date": "2026-10-24",
+   "verdict": "no match: ordinary Hopf algebra instances, Witt-vector constructions and perfect closures do not state primitive generation from vanishing of group-scheme Verschiebung."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The coordinate Hopf algebra of a commutative algebraic group killed by Verschiebung is generated by primitive functions",
+   "results": "8 hits; AddMonoidAlgebra.instHopfAlgebra, AddMonoidAlgebra.instHopfAlgebraStruct, HopfAlgCat.instHopfAlgebra, GroupLike.instCommGroup, HopfAlgCat.of_comul, CommSemiring.toHopfAlgebra, HopfAlgCat.instRing, HopfAlgebra.sum_mul_antipode_eq_algebraMap_counit",
+   "date": "2026-10-24",
+   "verdict": "no match: ordinary Hopf algebra instances, Witt-vector constructions and perfect closures do not state primitive generation from vanishing of group-scheme Verschiebung."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A commutative finite type affine group with zero Verschiebung has coordinate algebra generated by homomorphisms to the additive group, without smoothness or perfectness",
+   "results": "8 hits; MvPolynomial.R, WittVector.verschiebungPoly, WittVector.verschiebungFun_isPoly, WittVector.StandardOneDimIsocrystal, WittVector, WittVector.verschiebung_isPoly, WittVector.Isocrystal, WittVector.verschiebung",
+   "date": "2026-10-24",
+   "verdict": "no match: ordinary Hopf algebra instances, Witt-vector constructions and perfect closures do not state primitive generation from vanishing of group-scheme Verschiebung."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "In characteristic p every commutative Hopf algebra whose Verschiebung is zero is generated as an algebra by primitive elements",
+   "results": "8 hits; Subalgebra.perfectClosure, PerfectClosure.isPRadical, PerfectRing, Perfection.perfectRing, PerfectField.toPerfectRing, PerfectClosure.R, PerfectClosure.instPerfectRing, CommSemiring.toHopfAlgebra",
+   "date": "2026-10-24",
+   "verdict": "no match: returned perfect-closure, ordinary Hopf structure and WittVector declarations do not prove primitive generation for arbitrary group schemes"
+  },
+  {
+   "tool": "loogle",
+   "query": "HopfAlgebra, primitive, Verschiebung",
+   "results": "0 hits; ; loogle: unknown identifier 'primitive'",
+   "date": "2026-10-24",
+   "verdict": "query error: loogle: unknown identifier 'primitive'"
+  },
+  {
+   "tool": "grep",
+   "query": "primitive|verschiebung|elementaryUnipotent",
+   "results": "0 hits; ; directory Mathlib/RingTheory/HopfAlgebra",
+   "date": "2026-10-24",
+   "verdict": "invalid directory in initial grep: not used to conclude absence; corrected query with subdirectory RingTheory/HopfAlgebra follows"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The coordinate Hopf algebra of a commutative algebraic group killed by Verschiebung is generated by primitive functions",
+   "results": "8 hits; AddMonoidAlgebra.instHopfAlgebra, AddMonoidAlgebra.instHopfAlgebraStruct, HopfAlgCat.instHopfAlgebra, GroupLike.instCommGroup, HopfAlgCat.of_comul, CommSemiring.toHopfAlgebra, HopfAlgCat.instRing, HopfAlgebra.sum_mul_antipode_eq_algebraMap_counit",
+   "date": "2026-10-24",
+   "verdict": "no match: returned perfect-closure, ordinary Hopf structure and WittVector declarations do not prove primitive generation for arbitrary group schemes"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A commutative finite type affine group with zero Verschiebung has coordinate algebra generated by homomorphisms to the additive group without smoothness or perfectness",
+   "results": "8 hits; MvPolynomial.R, WittVector.verschiebungFun_isPoly, WittVector.verschiebungPoly, WittVector.StandardOneDimIsocrystal, WittVector.verschiebung_isPoly, WittVector, wittStructureRat_vars, WittVector.verschiebung",
+   "date": "2026-10-24",
+   "verdict": "no match: returned perfect-closure, ordinary Hopf structure and WittVector declarations do not prove primitive generation for arbitrary group schemes"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"HopfAlgebra\", \"primitive\"",
+   "results": "0 hits; ",
+   "date": "2026-10-24",
+   "verdict": "no match: returned perfect-closure, ordinary Hopf structure and WittVector declarations do not prove primitive generation for arbitrary group schemes"
+  },
+  {
+   "tool": "grep",
+   "query": "primitive|verschiebung|elementaryUnipotent",
+   "results": "0 hits; ; directory RingTheory/HopfAlgebra",
+   "date": "2026-10-24",
+   "verdict": "no match: returned perfect-closure, ordinary Hopf structure and WittVector declarations do not prove primitive generation for arbitrary group schemes"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-smooth-p-torsion-additive-embedding",
+  "date": "2026-10-24",
+  "group": "Q65"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Haboush symmetric-power lifting for a trivial quotient representation. Supporting representation-theoretic input: Central covering of a reductive group by a torus and a simply connected semisimple group. Milne central-cover construction: Multiplication by a central torus with semisimple quotient and the derived group. Supporting input: Semisimple algebraic groups are perfect. Root-subgroup structure and the torus conjugation formula used to realize the rank-one commutator calculation in Milne Corollary 21.50. Supporting lemma: A one-dimensional smooth connected unipotent group is additive. Supporting structural ingredient for the one-dimensional classification: Milne Corollary 14.55 (positive characteristic) and the central-series argument preceding the induction in Proposition 14.32 (characteristic zero). Supporting lemma: Smooth connected commutative exponent-p groups over a perfect field are vector groups. Supporting the first sentence of Milne Proposition 14.54: 14.49 gives the closed embedding meant by elementary unipotent (14.45). Supporting Proposition 14.48, printed pp.295-296, together with the equivalent coordinate-algebra characterization in Definition 14.45, printed p.295. This is the primitive-generation consequence of the Verschiebung criterion, for arbitrary commutative affine algebraic groups.",
+   "via": [
+    "lem-sfb-smooth-p-torsion-additive-embedding",
+    "lem-sfb-perfect-exponent-p-vector-group",
+    "lem-sfb-unipotent-central-additive-subgroup",
+    "lem-sfb-one-dimensional-unipotent-additive",
+    "lem-sfb-reductive-root-subgroup-parametrizations",
+    "lem-sfb-semisimple-group-perfect",
+    "lem-sfb-central-torus-semisimple-derived-product",
+    "lem-sfb-reductive-torus-simply-connected-cover",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-zero-verschiebung-primitive-generation",
+  "worker": "stage1",
+  "summary": "Read Milne 11.39-11.44, 14.21, 14.45-14.48, 15.27 and 16.13. Expose naturality/diagonalizable Verschiebung, the additive filtration, the explicit two-coordinate Witt group, its extension classification and the affine pushout as five statement-only inputs. Write the induction, Witt obstruction cancellation, closed-embedding argument and primitive scalar descent. Preserve the full imported statement. Reuse the existing homomorphism factorization and affine closed-immersion criterion.",
+  "blueprint": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Haboush symmetric-power lifting for a trivial quotient representation. Supporting representation-theoretic input: Central covering of a reductive group by a torus and a simply connected semisimple group. Milne central-cover construction: Multiplication by a central torus with semisimple quotient and the derived group. Supporting input: Semisimple algebraic groups are perfect. Root-subgroup structure and the torus conjugation formula used to realize the rank-one commutator calculation in Milne Corollary 21.50. Supporting lemma: A one-dimensional smooth connected unipotent group is additive. Supporting structural ingredient for the one-dimensional classification: Milne Corollary 14.55 (positive characteristic) and the central-series argument preceding the induction in Proposition 14.32 (characteristic zero). Supporting lemma: Smooth connected commutative exponent-p groups over a perfect field are vector groups. Supporting the first sentence of Milne Proposition 14.54: 14.49 gives the closed embedding meant by elementary unipotent (14.45). Supporting Proposition 14.48, printed pp.295-296, together with the equivalent coordinate-algebra characterization in Definition 14.45, printed p.295. This is the primitive-generation consequence of the Verschiebung criterion, for arbitrary commutative affine algebraic groups. The split realizes the Milne 14.48 prerequisite through the subnormal-series and Witt-extension argument. blueprint_refs.py ancestor returns null; its inherited provenance chain is retained.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-closed-immersion-affine-cover-criterion",
+    "why": "Generic affine-scheme criterion supplies surjectivity of the coordinate map for the vector-group embedding."
+   },
+   {
+    "node": "lem-weil-pbc-algebra-tensor-pushout-universal-property",
+    "why": "Generic tensor universal property identifies scalar-extended coordinate Hopf algebras and reduced coproducts."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-closed-immersion-affine-cover-criterion",
+  "lem-weil-pbc-algebra-tensor-pushout-universal-property"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q12-741cf2ecd",
+  "group": "Q12",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q12-741cf2ecd (reviewer sub-agent of L); spot-checked: I read the item, all nine steps, all five new statement-only nodes, every cited statement, and Milne iAG2017 at Def 14.45/Prop 14.48 (pp.295-296), 11.39-11.44 (pp.224-227), 15.25-15.27 (pp.315-316), 14.21 (pp.284-285) and 16.13(a) (p.328). This is a first delivery: there is no repair note, the item is still unsplit on live and side-live, and its statement and stmt_deps are byte-identical. The delivered nodes contain no SGA citation and no doubled backslashes. The proof follows 14.48 exactly. Step 1 descends primitives through a basis expansion. Step 2 rules out diagonalizable subgroups: V vanishes on them and is also an isomorphism, so they are trivial. Steps 3-4 set up an explicit induction over the 16.13(a)+14.21 filtration and form the antidiagonal pushout, with V_E=0 from the product and quotient clauses. Step 5 uses 15.27 over the perfect field K: V_{W2}a^(p)=aV_E=0 with V_{W2}(x0,x1)=(0,x0) gives (hq')^(p)=0, inverting the twist along Frobenius gives hq'=0, and h=0 because q' is an epimorphism. This is valid without reducedness. Step 6 builds the retraction; step 7 shows the kernel is trivial on all R-points and applies the factorization node; steps 8-9 give primitive generators and descend them with a k-linear l, l(1)=1. New-node tests: c_p equals Milne's f1, the W2 law is associative, and VF(a,b)=(0,a^p)=p(a,b). The perfect-field hypothesis on the 15.27 node is needed, since a·f1 is a pullback only for a p-th power a. The filtration node was checked on Z/p, alpha_p^r, Ga and the trivial group, and it excludes mu_p. None of the new nodes duplicates an existing node or restates the item: perfect-unipotent-additive-series and unipotent-central-additive-subgroup assume smooth and connected, Verschiebung naturality is new, and the pushout node only specialises affine-normal-quotient-geometry. Batch-5: lem-sfb-algebraic-group-homomorphism-factorization reaches lem-trf-fppf-covering-base-change, a Mathlib leaf saying fppf coverings are stable under base change. That is a generic site axiom, not part of the trace-formula or Poincaré-duality statements or their proofs, so I accept the citation. The declared tool_uses (closed-immersion affine-cover criterion, tensor pushout) are generic Mathlib leaves, and I accept them."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.ZeroVerschiebungPrimitiveGeneration",
+  "declaration": "AlgebraicGeometry.AffineGroupFrobeniusVerschiebung.zero_verschiebung_primitive_generation",
+  "file": "lean/Sheaf/AlgebraicGeometry/ZeroVerschiebungPrimitiveGeneration.lean",
+  "statement": "theorem zero_verschiebung_primitive_generation (k : Type u) [Field k] (p : ℕ) [Fact p.Prime] [CharP k p] (G : Scheme.{u}) [G.Over (Spec (CommRingCat.of k))] [IsAffine G] [GrpObj (G.asOver (Spec (CommRingCat.of k)))] [IsCommMonObj (G.asOver (Spec (CommRingCat.of k)))] [LocallyOfFiniteType (G ↘ Spec (CommRingCat.of k))] [QuasiCompact (G ↘ Spec (CommRingCat.of k))] (hV : ∀ c : Γ(G, ⊤), projection k p Γ(G, ⊤) (iteratedComul k Γ(G, ⊤) p c) = algebraMap k (twist k p Γ(G, ⊤)) (Coalgebra.counit (R := k) c)) : ∀ c : Γ(G, ⊤), ∃ (n : ℕ) (x : Fin n → Γ(G, ⊤)) (f : MvPolynomial (Fin n) k), (∀ i : Fin n, Coalgebra.comul (R := k) (x i) = x i ⊗ₜ[k] (1 : Γ(G, ⊤)) + (1 : Γ(G, ⊤)) ⊗ₜ[k] x i) ∧ MvPolynomial.aeval x f = c",
+  "branch": "sheaf-dag",
+  "by": "Q99",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-2c3a3c438",
+  "group": "Q99",
+  "result": "pass",
+  "note": "Re-delivery after H2 return of 566b2d63f0ec: node vs side-live differs only by stmt_deps += def-sfb-coordinate-hopf-algebra (landed existing:true owner of HopfAction.coordinateHopfAlgebra = Mathlib canonical instance) and the lean record; lean.statement verbatim equals file signature. hV = projection∘iteratedComul p (the dependency's Maps characterization of v, V.left = Spec.map v ≫ isoSpec.inv) equals algebraMap k twist ∘ counit, i.e. V_G^*=u^(p)ε; field/char p/affine/comm GrpObj/LocallyOfFiniteType+QuasiCompact match the node and the Verschiebung dependency with no extra assumptions; conclusion ∀c ∃ n, primitives x: Fin n→C, f∈k[X] with aeval x f = c matches the node's finite-polynomial generation. Edge cases n=0, c=0, p=2, imperfect k, nonreduced/disconnected groups, universes OK. twist/projection/iteratedComul are construction data of the cited Verschiebung node. No duplicate; proof-only imports exist; docstrings carry Milne 14.48/14.45 and the 9-step plan; sorry only; report has Worker report and Second reading by Q99. No file changed, no compile run."
+ }
+}

@@ -60,6 +60,8 @@ structure RingedSheafSliceAdjunctionData
   /-- Its module inverse image is the canonical sectionwise restriction. -/
   pullback : ringedSiteModules R ⥤
     ringedSiteModules (elementRing R A) := elementModulePullback R A
+  /-- The module inverse image is the canonical functor, including its action on maps. -/
+  pullback_eq : pullback = elementModulePullback R A
   /-- Inverse image is left adjoint to the induced module direct image. -/
   localization_modules : pullback ⊣ localization.modules
   pullback_formula :
@@ -160,6 +162,7 @@ theorem ringed_sheaf_slice_adjunction
     localization_inverse := hinverse
     localization_ringMap_identity := fun U x ↦ hring (op (op U)) x
     pullback := elementModulePullback R A
+    pullback_eq := rfl
     localization_modules := adj
     pullback_formula := fun _ _ _ ↦ rfl
     extensionByZero := elementModuleExtension R A

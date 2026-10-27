@@ -6,16 +6,8 @@ module
 
 public import Sheaf.Paper.IntegralCtfTriangulated
 public import Sheaf.Paper.FiniteFreeCompletedScalarComparison
-import Sheaf.Algebra.Homology.ChangeOfRingsKFlat
-import Sheaf.Algebra.Homology.DerivedChangeOfRingsCochainModel
-import Sheaf.Algebra.Homology.KFlatResolutionIndependentCoefficients
-import Sheaf.AlgebraicGeometry.CoefficientProEtaleTorAmplitude
-import Sheaf.Paper.DerivedScalarExtensionRestrictionAdjunction
-import Sheaf.Paper.FiniteTorAmplitudeSites
-import Sheaf.Paper.IntegralScalarExtensionConstructibleIntrinsic
-import Sheaf.Paper.NormalizedDVREffectivity
-import Sheaf.Paper.SfIntegralConstructible
-import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.Tensor
+import all Sheaf.Paper.AdicCoefficientDatum
+import all Sheaf.SecSmoothPurity.ScalarExtensionFunctor
 
 /-!
 # Finite coefficient extension preserves the uniform Tor interval
@@ -27,13 +19,55 @@ Unit Step 2: ordinary derived coefficient extension preserves the finite-Tor dom
 
 @[expose] public section
 set_option autoImplicit false
-set_option warn.sorry false
+attribute [local irreducible] HasDerivedCategory.standard
 
 universe d u
 
-open CategoryTheory AlgebraicGeometry.Scheme
+open CategoryTheory AlgebraicGeometry AlgebraicGeometry.Scheme
 
 namespace WeilConjectures
+
+/-- Ordinary completed scalar extension commutes with reduction at the same positive
+exponent. This comparison requires neither constructibility nor derived completeness.
+The integer inclusion sends the source uniformizer into the target maximal ideal,
+so the same exponent is always sufficient, even for ramified extensions.
+
+Source: blueprint scalar-extension tower proof, first paragraph; Stacks Tags 06YY
+and 0G7E (blueprint: lem-pur-adic-scalar-extension-tor-bound).
+
+Proof: the defining residue equation of `completedCoefficientMap` identifies the
+composites R -> S -> C and R -> A -> C. Resolve an arbitrary R-complex by a K-flat
+complex P with flat terms. Change of rings preserves these two properties. Thus
+both iterated derived extensions are computed by their termwise scalar extensions.
+Associativity sends (c tensor s) tensor p to c*s tensor p, and its inverse inserts
+1 in the intermediate scalar factor. Sheafification preserves these mutually inverse
+balanced maps. They commute with differentials and augmentations. The universal
+left-derived properties descend this natural comparison to the derived categories;
+the comparison is invertible because it is invertible on every K-flat resolution. -/
+private theorem completedScalarReductionComparison
+    (l : ℕ) [Fact l.Prime]
+    (E : Type u) [Field E] [Algebra (Padic l) E]
+    [FiniteDimensional (Padic l) E]
+    (L : Type u) [Field L] [Algebra (Padic l) L]
+    [FiniteDimensional (Padic l) L]
+    (ι : E →ₐ[Padic l] L) (W : Scheme.{u}) (n : ℕ) :
+    Nonempty (completedDerivedScalarExtension l E L ι W ⋙
+        scalarReductionDerivedExtension l L W n ≅
+      scalarReductionDerivedExtension l E W n ⋙
+        ProEtale.scalarExtensionFunctor (integralScalarQuotientMap l E L ι n) W) := by
+  let φ := completedCoefficientMap l E L ι W
+  let ψ := completedIntegralCommRingProjectionUnrestricted l L W n
+  let α := completedIntegralCommRingProjectionUnrestricted l E W n
+  let β := integralScalarQuotientSheafMap l E L ι W n
+  have hs : φ ≫ ψ = α ≫ β :=
+    (completedCoefficientMap_existsUnique l E L ι W).exists.choose_spec n
+  obtain ⟨f, hf, _⟩ := AlgebraicGeometry.Scheme.derivedReductionComposition
+    W φ ψ (α ≫ β) hs
+  obtain ⟨g, hg, _⟩ := AlgebraicGeometry.Scheme.derivedReductionComposition
+    W α β (α ≫ β) rfl
+  have := hf.1
+  have := hg.1
+  exact ⟨asIso f ≪≫ (asIso g).symm⟩
 
 /-- Finite coefficient extension preserves the uniform Tor interval: if every reduction of
 `K ∈ D^b_ctf(W, 𝒪_E)` has Tor amplitude in `[a,b]`, then every `L`-level reduction of the
@@ -88,6 +122,15 @@ theorem purAdicScalarExtensionTorBound
       HasProEtaleTorAmplitude W (Padic.coefficientExtensionRing l L (m + 1))
         ((integralDerivedReduction l L W D hl m).obj
           ((completedDerivedScalarExtension l E L ι W).obj K)) a b := by
-  sorry
+  have _ := he
+  have _ := hK
+  intro m
+  obtain ⟨c⟩ := completedScalarReductionComparison l E L ι W m
+  have ht := AlgebraicGeometry.ProEtale.scalarExtension_tor
+    (integralScalarQuotientMap l E L ι m) W _ a b (hab m)
+  refine ⟨ht.1, ?_⟩
+  intro N P hN f hf hP M i hi
+  obtain ⟨eN⟩ := hN
+  exact ht.2 N P ⟨eN ≪≫ c.app K⟩ f hf hP M i hi
 
 end WeilConjectures

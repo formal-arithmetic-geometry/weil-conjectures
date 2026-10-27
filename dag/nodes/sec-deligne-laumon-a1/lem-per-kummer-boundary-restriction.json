@@ -12,11 +12,141 @@
   "pqf-def-locnoeth",
   "def-trf-strict-normal-crossings-boundary",
   "def-trf-fs-log-blowup",
-  "def-nagata-effective-cartier-ideal"
+  "def-nagata-effective-cartier-ideal",
+  "def-trf-normal-crossings-divisor",
+  "def-per-fs-log-group-action",
+  "def-per-very-tame-fs-log-action",
+  "def-per-fs-log-smooth-etale",
+  "def-per-kummer-etale-g-cover",
+  "def-per-divisorial-log-cover-boundary"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Work etale locally at a point of $Y$, where the normal crossings divisor and its selected union $D$ are strict. The regular-boundary chart theorem gives a chart $P=\\mathbf N^r$, $e_i\\mapsto t_i$, for the canonical divisorial structure of $(Y,D)$, and proves it fs log regular. Apply the tame-inertia root normal form to $q$ with this smaller boundary. Its hypotheses hold: $V$ is normal and finite over the Noetherian $Y$, its geometric fibres are quotient orbits, the given action is tame and generically free, and $q$ is etale on $Y\\setminus D$. Thus on pointed etale neighbourhoods the underlying ring is $B^K$ for $B=A[x_i]/(x_i^n-t_i)$, with $n$ invertible locally. The normal form uses inertia, so no invertibility of $|G|$ is inferred. This applies to each local branch even when a global component of the boundary self-intersects.",
+   "uses": [
+    "lem-per-regular-boundary-divisorial-chart",
+    "lem-per-tame-inertia-snc-root-quotient"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "VIII 5.3.8, p.125, last paragraph; IX 2.1, pp.133--134"
+   }
+  },
+  {
+   "text": "Put $P=\\mathbf N^r$ and $L=\\{b/n\\in(1/n)\\mathbf Z^r:\\sum k_i b_i=0\\pmod n\\ (k\\in K)\\}$, $Q=L\\cap(1/n)\\mathbf N^r$. The invariant-monoid algebra theorem identifies $B^K=A\\otimes_{\\mathbf Z[P]}\\mathbf Z[Q]$, with $P\\hookrightarrow Q$ injective Kummer and finite group cokernel killed by $n$. Construct the associated log structure from $Q$; the toric comparison theorem gives the actual log morphism with this chart and isomorphic scheme comparison. The invertible-Kummer chart theorem now proves log regularity. A chart monomial becomes a unit precisely off the inverse image of $D$: its $n$th power is a product of the $t_i$, and the generators of $P$ are among these monomials. The log-regular divisorial theorem therefore identifies this log sheaf, as a subsheaf of functions, with $\\mathcal O_V\\cap j_*\\mathcal O_{V\\setminus q^{-1}D}^{\\times}$. Consequently the local sheaves and log maps agree on overlaps; they are the canonical smaller divisorial structures. This proves the Kummer etale chart assertion and fs log regularity globally.",
+   "uses": [
+    "lem-per-diagonal-root-invariant-monoid-algebra",
+    "lem-trf-associated-log-universal-stalks",
+    "lem-trf-toric-chart-compatible-comparison",
+    "lem-per-invertible-kummer-chart-log-regular",
+    "lem-trf-log-regular-divisorial-structure"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "IX 2.1, pp.133--134; VI 1.8 and 2.3, pp.70,73"
+   }
+  },
+  {
+   "text": "The original action preserves $q^{-1}D$, so acts on the constructed divisorial log structure. At the selected strict-local point the root normal form identifies inertia with $(\\mathbf Z/n\\mathbf Z)^r/K$. Finite character-annihilator duality identifies this quotient with $\\operatorname{Hom}(L/\\mathbf Z^r,\\mu_n)$, compatibly with $z^q\\mapsto\\chi_q z^q$. Hence its action is exactly the standard Kummer deck action. The standard-model theorem says that the canonical fs diagonal is the disjoint union of copies indexed by these characters. Inducing from the stabilizer to $G$ accounts for all the strict-local components of the finite cover, giving $\\coprod_G V\\simeq V\\times_Y^{\\rm fs}V$. Thus the smaller-boundary morphism is a $G$-cover, not merely a Kummer etale morphism. The standard comparison also verifies the original $G$-action: on the dense complement it is the given deck action, and on the normal affine model two maps agreeing on that dense open agree on functions.",
+   "uses": [
+    "lem-per-tame-inertia-snc-root-quotient",
+    "lem-per-finite-character-annihilator-duality",
+    "lem-per-kummer-strict-local-standard-model",
+    "lem-trf-finite-base-strict-localization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "VI 2.2--2.3, pp.72--73; IX 2.1; VIII 5.3.8"
+   }
+  },
+  {
+   "text": "For any finite Kummer etale $G$-cover of a locally Noetherian fs log regular base, apply the invertible-Kummer chart theorem to obtain log regularity of the source. Strict-locally the standard-model theorem writes a component as $\\operatorname{Spec}B$, $B=A\\otimes_{\\mathbf Z[P]}\\mathbf Z[Q]$, with sharp $P,Q$ and inertia the character deck group. Let $I=(z^p:p\\ne0)A$ and $J=(z^q:q\\ne0)B$. There is a canonical isomorphism $B/J=A/I$: quotienting the monoid algebra by all its nonconstant monomials leaves $\\mathbf Z$, and tensoring gives exactly this quotient of $A$. Every character fixes $A$ and scales monomials by units, so fixes $Q$ modulo units and acts identically on $B/J$. Its order divides a power of the invertible chart exponent, hence is invertible. These three computations are exactly very tameness on every strict-local stratum. They apply in particular to the smaller-boundary cover of Steps 1--3; no assertion that its underlying source scheme is regular is needed.",
+   "uses": [
+    "lem-per-invertible-kummer-chart-log-regular",
+    "lem-per-kummer-strict-local-standard-model",
+    "def-per-very-tame-fs-log-action"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "VI 2.3, formula (2.a), p.73; VI 3.1"
+   }
+  },
+  {
+   "text": "For arbitrary fs base change $Y'\\to Y$ take, etale locally, the chart $P\\to Q$ of the cover given by Kummer etaleness, and by the chart-existence clause of the saturated-pushout algebra theorem a chart $R$ of $Y'$ with a compatible map $P\\to R$. The saturated-pushout algebra theorem realizes the fs product by $S=(Q\\oplus_P R)^{\\rm int,sat}$. Its assertions give an injective Kummer map $R\\to S$ with the same finite group cokernel killed by an integer invertible on the new base. The comparison is the base change of the old etale chart comparison, hence etale by ordinary etale base change. The theorem's finite surjective comparison to the ordinary scheme product, followed by the ordinary base change of the finite cover, proves finiteness and surjectivity. The fs product universal property pulls back the isomorphism $\\coprod_G V\\simeq V\\times_Y^{\\rm fs}V$ to $\\coprod_G V'\\simeq V'\\times_{Y'}^{\\rm fs}V'$, preserving the given action and all compositions. These chart constructions glue by their universal property. Thus this is stability of $G$-covers for arbitrary fs bases, including non-Noetherian bases; local Noetherianity is used only for the separate regularity assertion.",
+   "uses": [
+    "lem-per-kummer-saturated-pushout-algebra",
+    "lem-weil-pbc-etale-scheme-base-change",
+    "lem-trf-finite-radicial-basechange"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "X 1.8, diagram (1.a), pp.146--147; VI 2.2"
+   }
+  },
+  {
+   "text": "On a trivial-log open, injectivity and the Kummer condition force the source characteristic monoid to be zero: a positive multiple of each element is zero and a sharp saturated monoid has no nonzero torsion. In the sharp strict-local standard model this is $P=Q=0$, so every component is the identity. The cover there is therefore ordinary finite etale, with its $G$-torsor action. For the general trivial-inertia assertion, take an affine base open and its finite, $G$-stable affine inverse image $\\operatorname{Spec}R$. The standard-model invariant equalities, applied to each strict-local component and its induced $G$-action, identify the base ring with $R^G$. At a point with trivial geometric inertia the inertia subgroup $I$ in the finite-group invariants lemma is $1$: its condition is precisely preservation of the prime and identity on its residue field. Thus $R^I=R$, and that lemma gives etaleness on an open neighbourhood of the point in $\\operatorname{Spec}R$. This proves etaleness on the entire trivial-inertia locus without a regularity assumption on the underlying source scheme.",
+   "uses": [
+    "lem-per-kummer-strict-local-standard-model",
+    "lem-dl-a1-finite-group-inertia-invariants-etale"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/pione.tex",
+    "place": "Tag 0BST, lemma-inertia-invariants-etale; for the trivial-log standard models, ILO VI 2.2--2.3, pp.72--73"
+   }
+  },
+  {
+   "text": "Let $b:Y'\\to Y$ now be a birational saturated log blowup of a locally Noetherian fs log regular base, and pull the finite Kummer cover back in fs log schemes. On each integral component the log-blowup theorem makes $Y'$ log regular and leaves the dense trivial-log open unchanged. Steps 4--5 give a finite log regular pullback $V'\\to Y'$. By the divisorial-structure theorem $V'$ is normal and its trivial-log locus is dense. The Kummer condition identifies that locus with the inverse image of the base's trivial-log locus, and Step 6 identifies the cover there with the ordinary pulled-back finite etale generic cover. Each component therefore has the original generic field over the corresponding birationally modified base component. Apply finite-normal-cover recognition on these integral components: its affine ring is precisely the integral closure of the modified base ring in that field. The canonical identifications glue, proving that the fs pullback is the normalization in the original generic cover. Finiteness comes from Step 5, with no excellence hypothesis.",
+   "uses": [
+    "lem-trf-log-blowup-normalization",
+    "lem-trf-log-regular-divisorial-structure",
+    "lem-sfb-finite-normal-cover-normalization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "VIII 3.3.9--3.3.11, pp.108--109; VIII 5.3.8--5.3.10, pp.125--126; IX 2.1(ii)"
+   }
+  },
+  {
+   "text": "A finite disjoint union has precisely the component log sheaves and local rings. Its fs fibre products, normalizations, and the canonical $G$-diagonal are computed componentwise, allowing $G$ to permute components. All pointwise chart, stratum and inertia computations above consequently apply to it. Empty boundaries give the ordinary finite etale case; empty unions and length-zero log blowups give the corresponding empty or identity constructions.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "VI 2.2--2.3; VIII 5.3.8"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-per-regular-boundary-divisorial-chart",
+  "lem-per-tame-inertia-snc-root-quotient",
+  "lem-per-diagonal-root-invariant-monoid-algebra",
+  "lem-trf-associated-log-universal-stalks",
+  "lem-trf-toric-chart-compatible-comparison",
+  "lem-per-invertible-kummer-chart-log-regular",
+  "lem-trf-log-regular-divisorial-structure",
+  "lem-per-finite-character-annihilator-duality",
+  "lem-per-kummer-strict-local-standard-model",
+  "lem-trf-finite-base-strict-localization",
+  "def-per-very-tame-fs-log-action",
+  "lem-per-kummer-saturated-pushout-algebra",
+  "lem-weil-pbc-etale-scheme-base-change",
+  "lem-trf-finite-radicial-basechange",
+  "lem-dl-a1-finite-group-inertia-invariants-etale",
+  "lem-trf-log-blowup-normalization",
+  "lem-sfb-finite-normal-cover-normalization"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "VIII 5.3.8--5.3.10; IX Proposition 2.1; VI 1.8,2.2--2.3; X 1.8. Explicit local algebra supplied in the steps."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -52,10 +182,45 @@
    "results": "{\"t\": \"2026-10-18T23:02:48Z\", \"tool\": \"leanfinder\", \"query\": \"A finite Kummer etale G cover is etale at points with trivial geometric inertia group\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.mem_etaleLocus_iff\", \"AlgebraicGeometry.IsEtale.instFormallyUnramified\", \"Algebra.etaleLocus\", \"Algebra.FormallyEtale.of_isSeparable_aux\", \"Algebra.Etale.iff_exists_algEquiv_prod\", \"AlgebraicGeometry.IsEtale.of_comp\", \"Algebra.instEtaleOfIsStandardEtale\", \"Algebra.IsEtaleAt.comp\"], \"digest\": \"b3265cf1a03775c7\"}; Returned ordinary normalization or etale-locus results, not the geometric logarithmic assertion.",
    "date": "2026-10-19",
    "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "Kummer|Abhyankar|logRegular|VeryTame",
+   "results": "{\"t\": \"2026-10-24T00:26:05Z\", \"tool\": \"grep\", \"query\": \"Kummer|Abhyankar|logRegular|VeryTame\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}; Read hits: ordinary etale algebras, ordinary integral pushouts, field Kummer theory and scheme cover constructors do not state this fs-monoid or tame normal-crossings assertion.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A finite tame cover etale away from a normal crossings divisor is Kummer etale for its divisorial log structures",
+   "results": "{\"t\": \"2026-10-24T00:26:05Z\", \"tool\": \"leansearch\", \"query\": \"A finite tame cover etale away from a normal crossings divisor is Kummer etale for its divisorial log structures\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Etale\", \"RingHom.Etale\", \"Algebra.FormallyEtale.iff_exists_algEquiv_prod\", \"AlgebraicGeometry.IsEtale\", \"Algebra.Etale.formallyEtale\", \"Algebra.FormallyEtale.of_unramified_and_smooth\", \"Algebra.FormallyEtale.instTensorProduct\", \"AlgebraicGeometry.IsEtale.instIsStableUnderBaseChangeScheme\"], \"digest\": \"62a89c1225a8b470\"}; Read hits: ordinary etale algebras, ordinary integral pushouts, field Kummer theory and scheme cover constructors do not state this fs-monoid or tame normal-crossings assertion.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Kummer\"",
+   "results": "{\"t\": \"2026-10-24T00:26:06Z\", \"tool\": \"loogle\", \"query\": \"\\\"Kummer\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"KummerExtension.«termK[_√_]»\", \"KummerDedekind.Ideal.irreducible_map_of_irreducible_minpoly\", \"KummerDedekind.normalizedFactorsMapEquivNormalizedFactorsMinPolyMk\", \"KummerDedekind.quotMapEquivQuotQuotMap\", \"KummerDedekind.emultiplicity_factors_map_eq_emultiplicity\", \"KummerDedekind.normalizedFactorsMapEquivNormalizedFactorsMinPolyMk_symm_apply_eq_span\", \"KummerDedekind.normalizedFactors_ideal_map_eq_normalizedFactors_min_poly_mk_map\", \"KummerDedekind.quotMapEquivQuotQuotMap_symm_apply\"], \"digest\": \"716f53183e49d042\"}; Read hits: ordinary etale algebras, ordinary integral pushouts, field Kummer theory and scheme cover constructors do not state this fs-monoid or tame normal-crossings assertion.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Deleting unramified components of a normal crossings divisor preserves tame Kummer etale covers",
+   "results": "{\"t\": \"2026-10-24T00:26:06Z\", \"tool\": \"leanfinder\", \"query\": \"Deleting unramified components of a normal crossings divisor preserves tame Kummer etale covers\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"StandardEtalePair.hasMap_X\", \"AlgebraicGeometry.IsEtale.instFormallyUnramified\", \"Algebra.etaleLocus_eq_unramfiedLocus_inter_smoothLocus\", \"Algebra.IsStandardSmoothOfRelativeDimension.exists_etale_mvPolynomial\", \"StandardEtalePresentation\", \"AlgebraicGeometry.IsEtale.of_comp\", \"Algebra.unramifiedLocus\", \"StandardEtalePair.instFormallyEtaleRing\"], \"digest\": \"70f76788b6fa3a85\"}; Read hits: ordinary etale algebras, ordinary integral pushouts, field Kummer theory and scheme cover constructors do not state this fs-monoid or tame normal-crossings assertion.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Finite Kummer log covers have trivial inertia on log strata and are preserved by saturated log base change",
+   "results": "{\"t\": \"2026-10-24T00:36:55Z\", \"tool\": \"leansearch\", \"query\": \"Finite Kummer log covers have trivial inertia on log strata and are preserved by saturated log base change\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsFinite.instIsStableUnderBaseChangeScheme\", \"AlgebraicGeometry.sourceLocalClosure.instIsStableUnderBaseChangeScheme\", \"AlgebraicGeometry.Scheme.instIsStableUnderBaseChangePrecoverageOfIsJointlySurjectivePreservingOfIsStableUnderBaseChange\", \"ValuationSubring.inertiaSubgroup\", \"AlgebraicGeometry.FormallyUnramified.instIsStableUnderBaseChangeScheme\", \"AlgebraicGeometry.IsEtale.instIsStableUnderBaseChangeScheme\", \"IsUnramifiedAtInfinitePlaces.bot\", \"AlgebraicGeometry.locallyOfFiniteType_isStableUnderBaseChange\"], \"digest\": \"c762e9bccc34e99e\"}; Read hits: ordinary etale algebras, ordinary integral pushouts, field Kummer theory and scheme cover constructors do not state this fs-monoid or tame normal-crossings assertion.",
+   "date": "2026-10-24",
+   "verdict": "no match"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-per-gabber-absolute-equivariant-modification",
@@ -83,5 +248,94 @@
   "same_as": [],
   "is": null
  },
- "lean_audit": {}
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-per-kummer-boundary-restriction",
+  "worker": "stage1",
+  "summary": "Eight-step argument following ILO VIII 5.3.8, IX 2.1 and VI 2.3. Two strictly smaller unsplit inputs: an underlying-scheme tame-inertia parameter-root normal form, and saturated Kummer pushout algebra without Noetherian assumptions. The characteristic and strict-local stratum actions are computed explicitly. Preserved the item statement and all inherited source/search records.",
+  "blueprint": "Realizes ancestor lem-per-artin-gabber-affine-curve proof Step 3, geometric regular-pair purity input through the absolute equivariant modification, specifically VIII 5.3.8 deletion of auxiliary boundary and fs pullback. Current latest blueprint inspected; no unit or chapter route changed.",
+  "tool_uses": [
+   {
+    "node": "lem-trf-toric-chart-compatible-comparison",
+    "why": "Actual monoid-algebra chart and log-map construction. Used only as a generic geometric tool; the perverse unit provides no replacement."
+   },
+   {
+    "node": "lem-trf-log-regular-divisorial-structure",
+    "why": "Normality, dense triviality locus and canonical divisorial sheaf identification. Used only as a generic geometric tool; the perverse unit provides no replacement."
+   },
+   {
+    "node": "lem-trf-finite-base-strict-localization",
+    "why": "Decomposes the finite cover into strict-local components. Used only as a generic geometric tool; the perverse unit provides no replacement."
+   },
+   {
+    "node": "lem-trf-log-blowup-normalization",
+    "why": "Log regularity and unchanged dense open of the saturated log blowup. Used only as a generic geometric tool; the perverse unit provides no replacement."
+   },
+   {
+    "node": "lem-sfb-finite-normal-cover-normalization",
+    "why": "Recognizes the finite normal pullback as the normalization in its generic field. Used only as a generic geometric tool; the perverse unit provides no replacement."
+   },
+   {
+    "node": "lem-dl-a1-finite-group-inertia-invariants-etale",
+    "why": "The generic invariant-ring etaleness theorem applies with trivial inertia; the perverse unit gives no algebraic replacement."
+   },
+   {
+    "node": "lem-trf-associated-log-universal-stalks",
+    "why": "Constructs the actual associated chart log sheaf and its unit-compatible maps; no such generic construction is supplied by the perverse unit."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-trf-toric-chart-compatible-comparison",
+  "lem-trf-log-regular-divisorial-structure",
+  "lem-trf-finite-base-strict-localization",
+  "lem-trf-log-blowup-normalization",
+  "lem-sfb-finite-normal-cover-normalization",
+  "lem-dl-a1-finite-group-inertia-invariants-etale",
+  "lem-trf-associated-log-universal-stalks"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q11-99aacbdb0",
+  "group": "Q11",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q11-99aacbdb0 (reviewer sub-agent of L); spot-checked: Read in full against the sources: the item (8 steps; statement and stmt_deps unchanged from the live unsplit node), both new nodes, and every cited statement. Sources: ILO VI 1.6-3.1 (pp.70-73), VIII 3.3.1-3.3.11 (pp.106-108), VIII 5.3.8-5.3.11 (pp.125-126, where the last paragraph deletes the auxiliary boundary via IX 2.1) and IX Prop 2.1 (pp.133-134). The mathematics is correct. Step 2 checks the triviality locus by c_q^n = prod t_i^{nq_i}. In Step 3 the kernel of (Z/n)^r -> Hom(L/Z^r, mu_n) is K by annihilator duality. Step 4 computes B/J = A tensor_{Z[P]} Z = A/I directly, with no completion or regularity. Step 6 applies 0BST with I=1. Step 7 needs no excellence. New node tame-inertia-snc-root-quotient is Abhyankar (IX 2.1) after strict localization with only the inertia order invertible. It is true, including the char-p Artin-Schreier case, and it generalizes lem-per-snc-parameter-root-quotient (which needs |G| invertible) rather than duplicating it. New node kummer-saturated-pushout-algebra is true: R^gp -> S^gp is injective because h^gp is, the cokernel is C, and the maps are finite. I checked surjectivity onto Spec Z[S_0] by the face/divisibility argument, using that P^gp/P_F^gp is torsion-free for saturated P. Neither new node restates a clause of the item. Route lock: the item and 4 of the 5 flagged 2026-10-19 drop-list nodes are already reachable at base through the accepted ctf-stability chain (lem-sfb-tame-snc-quotient-resolution, then lem-sfb-field-log-smooth-gabber-modification, then lem-per-gabber-absolute-equivariant-modification). A BFS from lem-per-artin-gabber-affine-curve reaches none of them, so the human's lock is untouched (same as the Q91 precedent). Only lem-per-diagonal-root-invariant-monoid-algebra is newly revived, and it is a split algebra lemma that adds no further nodes. Batch 5: the lem-trf citations (associated log structure, toric comparison, divisorial structure, finite-base strict localization, log-blowup normalization) and the closure reaches (definitions; generic etale descent) are generic log/scheme geometry, not trace-formula or Poincare-duality steps, so they are accepted. The 7 tool_uses are accepted. No SGA citation. FIX (3 files under fixes/dag/nodes/sec-deligne-laumon-a1/): (1) C1, Step 5 used existence of compatible charts for an fs morphism (Kato 2.10) with no node. I added that clause to the statement-only pushout node and made Step 5 cite it. (2) In the root-quotient node, the geometric inertia condition is now written out and strict localizations now cite def-weil-pbc-strict-henselization-limit (added to stmt_deps). Maintainer note: the inherited blueprint.from/via still names artin-gabber Step 3 and dropped ids (e.g. lem-per-qbar-middle-tstructure). That ancestry is stale, and so is the report's claim that the ancestor still uses the regular-pair branch.; 3 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.KummerBoundaryRestriction",
+  "declaration": "AlgebraicGeometry.kummer_boundary_restriction",
+  "declarations": [
+   "AlgebraicGeometry.kummer_boundary_restriction",
+   "AlgebraicGeometry.kummer_cover_fs_baseChange",
+   "AlgebraicGeometry.kummer_cover_logRegular_veryTame",
+   "AlgebraicGeometry.kummer_cover_logBlowup_normalization"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/KummerBoundaryRestriction.lean",
+  "statement": "theorem kummer_boundary_restriction {V Y : FineSaturatedLogScheme.{u}} [IsNoetherian Y.scheme] (hY : IsRegularScheme Y.scheme) (hVnormal : ∀ x : V.scheme, IsDomain (V.scheme.presheaf.stalk x) ∧ IsIntegrallyClosed (V.scheme.presheaf.stalk x)) {G : Type v} [Group G] [Finite G] (q : EtaleLogHom V Y) (a : FSLogGroupAction G V) (B D : Y.scheme.IdealSheafData) (hB : B.IsNormalCrossingsDivisor) (hD : D.IsReducedComponentUnion B) (hV : V.logStructure.IsDivisorialFor (q.base ⁻¹ᵁ B.support.compl)) (hlogY : Y.logStructure.IsDivisorialFor B.support.compl) (hcover : FSLogScheme.IsKummerEtaleGCover (X := V.toFSLogScheme) (Y := Y.toFSLogScheme) q.toLogMap (fun g ↦ (a.logMap g).toLogMap)) (htame : a.IsTame) (hfree : a.IsGenericallyFree) (horbits : ∀ (Ω : Type u) [Field Ω] [IsAlgClosed Ω] (s t : Spec (.of Ω) ⟶ V.scheme), s ≫ q.base = t ≫ q.base ↔ ∃ g : G, s ≫ (a.baseAction g).hom = t) (hinvariants : ∀ U : Y.scheme.Opens, Function.Injective (q.base.app U).hom ∧ ∀ s : Γ(V.scheme, q.base ⁻¹ᵁ U), s ∈ Set.range (q.base.app U).hom ↔ ∀ (g : G) (W : V.scheme.Opens) (hW : W ≤ q.base ⁻¹ᵁ U) (hWg : W ≤ (a.baseAction g).hom ⁻¹ᵁ (q.base ⁻¹ᵁ U)), ((a.baseAction g).hom.appLE (q.base ⁻¹ᵁ U) W hWg).hom s = (V.scheme.presheaf.map (homOfLE hW).op).hom s) (hetale : Etale (q.base ∣_ D.support.compl)) : ∃ (MV : EtaleLogStructure V.scheme) (MY : EtaleLogStructure Y.scheme) (hMV : MV.IsFineSaturated) (hMY : MY.IsFineSaturated) (f : EtaleLogHom ⟨V.scheme, V.locallyNoetherian, MV, hMV⟩ ⟨Y.scheme, Y.locallyNoetherian, MY, hMY⟩) (b : FSLogGroupAction G ⟨V.scheme, V.locallyNoetherian, MV, hMV⟩), MV.IsDivisorialFor (q.base ⁻¹ᵁ D.support.compl) ∧ MY.IsDivisorialFor D.support.compl ∧ f.base = q.base ∧ b.baseAction = a.baseAction ∧ FSLogScheme.IsKummerEtaleGCover (X := (FineSaturatedLogScheme.mk V.scheme V.locallyNoetherian MV hMV).toFSLogScheme) (Y := (FineSaturatedLogScheme.mk Y.scheme Y.locallyNoetherian MY hMY).toFSLogScheme) f.toLogMap (fun g ↦ (b.logMap g).toLogMap) ∧ (FineSaturatedLogScheme.mk V.scheme V.locallyNoetherian MV hMV).IsLogRegular ∧ b.IsVeryTame",
+  "branch": "newtargets-dag",
+  "by": "Q107",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-3587dd74d",
+  "group": "Q107",
+  "result": "pass",
+  "note": "Re-delivery after H13 RETURN at 9bcc. The def-trf-fs-log-blowup and def-per-fs-log-smooth-etale records are byte-identical to side-live. FineSaturatedLogCategory and FSLogChartGeneral are removed. The 13 helpers (FSLogScheme, category, forget, conversions, Chart family) moved into KummerEtaleGCover under def-per-kummer-etale-g-cover; their comment-stripped code is identical to the 9bcc bodies. They are listed in lean.declarations (15) and carry blueprint docstrings, the node statement was extended to match, and a lean.note justifies the chart Kummer criterion for non-Noetherian fs base change. Item module, divisorial module and node are unchanged from 9bcc, whose clause-by-clause math check passed. Statement fields verbatim for all 3 records. Item record vs live differs only in stmt_deps/lean. No live name clashes; live item still split with no lean record. Only sorry proofs, no hollow defs, independent universes u/v. Advisory: LogMorphismOperations owners are not stmt_deps; IsPullback in the full fs category vs Q56 IsFSPullback is fine; new node source.place omits X 1.2/Kato 3.5; stale blueprint.from ancestry."
+ }
 }

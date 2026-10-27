@@ -1,0 +1,232 @@
+{
+ "id": "lem-sfb-finite-locally-free-weil-restriction",
+ "kind": "statement",
+ "title": "Weil restriction of algebraic spaces along finite locally free scheme maps",
+ "statement": "Let $S$ be a scheme [def-pc-scheme], with universes as in [def-weil-size-convention]. Let $p:Z\\to T$ be a finite locally free morphism of $S$-schemes [def-pc-finite-locally-free], with rank allowed to vary and to be zero. Let $E$ be an algebraic space over $S$ [def-trf-algebraic-space] with a morphism $E\\to Z$. On $S$-schemes over $T$, define $R(T'\\to T)=\\operatorname{Hom}_Z(Z\\times_TT',E)$, with restriction given by precomposition with base change and fibre products as in [def-pc-fibre-product, lem-trf-space-fibre-products-etale-covers]. There is an algebraic space $R$ over $T$ whose functor of points is naturally isomorphic to this functor; this space is the Weil restriction $\\operatorname{Res}_{Z/T}(E)$. No separation, quasi-compactness, flatness or finite-presentation hypothesis on $E\\to Z$ is required.",
+ "source": {
+  "document": "literature/stacks-project/criteria.tex",
+  "place": "Tag 05YF (proposition-restriction-of-scalars-algebraic-space), criteria.tex, specialized to scheme Z and T."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-size-convention",
+  "def-pc-finite-locally-free",
+  "def-trf-algebraic-space",
+  "def-pc-fibre-product",
+  "lem-trf-space-fibre-products-etale-covers"
+ ],
+ "proof": [
+  {
+   "text": "Write $q:E\\to Z$ for the given map and give $E$ the $T$-structure $p\\circ q$. Regard $T$ and $Z$ as their representable algebraic spaces using [def-trf-scheme-algebraic-space]. Apply [lem-sfb-finite-locally-free-relative-hom-space] with targets $X=E$ and $X=Z$, both times using precisely the given finite locally free map $p:Z\\to T$. Obtain algebraic spaces $A=H_{Z,E/T}$ and $B=H_{Z,Z/T}$ over $T$, with the natural point descriptions in that node. This does not require any property of $q$.",
+   "uses": [
+    "def-trf-scheme-algebraic-space",
+    "lem-sfb-finite-locally-free-relative-hom-space"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/criteria.tex",
+    "place": "Tag 05YF (proposition-restriction-of-scalars-algebraic-space), first sentence, applying Tag 05Y7 twice."
+   }
+  },
+  {
+   "text": "The rule $(a,b)\\mapsto(a,q\\circ b)$ defines $c:A\\to B$. The rule $a:U\\to T\\mapsto(a,\\operatorname{pr}_Z:U\\times_TZ\\to Z)$ defines $e:h_T\\to B$. Both commute with restriction because composition with $q$ and the projection commute with base change. They are therefore morphisms of algebraic spaces, since [def-trf-algebraic-space] defines these as natural transformations. Their maps to $T$ both retain $a$, so both are over $T$.",
+   "uses": [
+    "def-trf-algebraic-space"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/criteria.tex",
+    "place": "Tag 05YE (lemma-fibre-diagram), explicit maps of the displayed cartesian diagram."
+   }
+  },
+  {
+   "text": "By [lem-trf-space-fibre-products-etale-covers], the sheaf fibre product $P=A\\times_{c,B,e}h_T$ is an algebraic space, over $T$ through its second projection. On a scheme $U$, a point is a pair $((a,b),a')$ satisfying $(a,q\\circ b)=(a',\\operatorname{pr}_Z)$. Equivalently $a=a'$ and $q\\circ b=\\operatorname{pr}_Z$. For a fixed $a:U\\to T$, this says exactly that $b:U\\times_TZ\\to E$ is a $Z$-morphism. Conversely any such $b$ is automatically a $T$-morphism because $p\\circ q\\circ b=p\\circ\\operatorname{pr}_Z=a\\circ\\operatorname{pr}_U$. The inverse maps send $((a,b),a)$ to $b$ and $b$ to $((a,b),a)$; precomposition with $V\\times_TZ\\to U\\times_TZ$ commutes with both. Thus $P$ has naturally the required functor of points, with the specified restriction maps. The argument uses neither positive constant rank nor an extra hypothesis on $q$.",
+   "uses": [
+    "lem-trf-space-fibre-products-etale-covers"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/criteria.tex",
+    "place": "Tags 05YE (lemma-fibre-diagram), pointwise verification of the omitted exercise, and 05YF (proposition-restriction-of-scalars-algebraic-space), concluding fibre product; spaces.tex Tag 04T9."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-trf-algebraic-space",
+  "def-trf-scheme-algebraic-space",
+  "lem-sfb-finite-locally-free-relative-hom-space",
+  "lem-trf-space-fibre-products-etale-covers"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/criteria.tex",
+  "place": "Tag 05YF (proposition-restriction-of-scalars-algebraic-space), using Tag 05Y7 and expanding the omitted functorial exercise in Tag 05YE (lemma-fibre-diagram)."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Weil restriction of an algebraic space along a finite locally free morphism is an algebraic space",
+   "results": "8 hits: AlgebraicGeometry.IsFinite.instIsStableUnderBaseChangeScheme; AlgebraicGeometry.IsFinite.instSndScheme; AlgebraicGeometry.IsFinite.instFstScheme; AlgebraicGeometry.locallyOfFiniteType_isStableUnderBaseChange; AlgebraicGeometry.AffineSpace.instLocallyOfFinitePresentationOverSchemeInferInstanceOverClassOfFinite; AlgebraicGeometry.instFiniteCarrierCarrierCommRingCatFiberOfIsFinite; AlgebraicGeometry.instLocallyOfFiniteTypeSndScheme; AlgebraicGeometry.IsFinite",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme base-change representability and module restriction of scalars do not represent this Weil-restriction functor"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Representability of the functor T maps to morphisms over Z from T times B Z into X for a finite flat Z over B",
+   "results": "8 hits: CategoryTheory.RepresentablyFlat; AlgebraicGeometry.Scheme.LocalRepresentability.representableBy; AlgebraicGeometry.Scheme.LocalRepresentability.isRepresentable; AlgebraicGeometry.UniversallyOpen.of_flat; AlgebraicGeometry.Flat.instFstScheme; AlgebraicGeometry.Flat.instSndScheme; AlgebraicGeometry.ExistsHomHomCompEqCompAux.D'; CategoryTheory.RepresentablyFlat.id",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme base-change representability and module restriction of scalars do not represent this Weil-restriction functor"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Restriction of scalars of arbitrary algebraic spaces along finite locally free covers is representable",
+   "results": "8 hits: SheafOfModules.restrictScalars; PresheafOfModules.restrictScalarsObj; RestrictScalars; PresheafOfModules.restrictScalars; AlgHom.restrictScalars; ModuleCat.RestrictScalars.obj'; AlgHom.coe_restrictScalars'; AlgHom.restrictScalars_apply",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme base-change representability and module restriction of scalars do not represent this Weil-restriction functor"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"Weil\"",
+   "results": "11 hits: AlgebraicGeometry.AlgebraicCycle.IsWeilDivisor; AlgebraicGeometry.AlgebraicCycle.weilDivisors; AlgebraicGeometry.AlgebraicCycle.isWeilDivisor_zero; AlgebraicGeometry.AlgebraicCycle.isWeilDivisor_single; AlgebraicGeometry.AlgebraicCycle.IsWeilDivisor.neg; AlgebraicGeometry.AlgebraicCycle.isWeilDivisor_neg; AlgebraicGeometry.AlgebraicCycle.isWeilDivisor_iff; AlgebraicGeometry.AlgebraicCycle.IsWeilDivisor.coheight_eq_one",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme base-change representability and module restriction of scalars do not represent this Weil-restriction functor"
+  },
+  {
+   "tool": "grep",
+   "query": "WeilRestrict|weil_restrict|restriction.of.scalars.*space",
+   "results": "1 hits: Mathlib/Analysis/InnerProductSpace/Continuous.lean",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme base-change representability and module restriction of scalars do not represent this Weil-restriction functor"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"Stack\"",
+   "results": "0 hits: ",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme base-change representability and module restriction of scalars do not represent this Weil-restriction functor"
+  },
+  {
+   "tool": "grep",
+   "query": "HilbertStack|hilbert_stack|finite.?Hilbert|AlgebraicStack",
+   "results": "1 hits: Mathlib/Analysis/InnerProductSpace/l2Space.lean",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme base-change representability and module restriction of scalars do not represent this Weil-restriction functor"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The relative Hom functor from a finite locally free scheme to any algebraic space is an algebraic space",
+   "results": "8 hits: AlgebraicGeometry.IsFinite.instSndScheme; AlgebraicGeometry.IsFinite.instFstScheme; AlgebraicGeometry.AffineSpace.instLocallyOfFinitePresentationOverSchemeInferInstanceOverClassOfFinite; AlgebraicGeometry.AffineSpace.instIsOverHomOfVectorOverSchemeInferInstanceOverClass; AlgebraicGeometry.Scheme.Over; AlgebraicGeometry.AffineSpace.over; AlgebraicGeometry.IsFinite; AlgebraicGeometry.IsFinite.instHasOfPostcompPropertySchemeIsSeparated",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern scheme base change, ordinary scheme morphisms, or Zariski-local representability with a supplied open atlas; none constructs relative Hom algebraic spaces from finite locally free sources."
+  },
+  {
+   "tool": "grep",
+   "query": "AlgebraicSpace|WeilRestrict|homFromFinite|hom_functor",
+   "results": "0 hits: ",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern scheme base change, ordinary scheme morphisms, or Zariski-local representability with a supplied open atlas; none constructs relative Hom algebraic spaces from finite locally free sources."
+  },
+  {
+   "tool": "leansearch",
+   "query": "For finite locally free Z over T the functor U maps to Hom over U from Z times T U to X times T U is represented by an algebraic space",
+   "results": "8 hits: AlgebraicGeometry.Scheme.LocalRepresentability.isRepresentable; AlgebraicGeometry.IsFinite.recOn; AlgebraicGeometry.Scheme.Cover.functorOfLocallyDirected_obj; AlgebraicGeometry.LocallyQuasiFinite.recOn; AlgebraicGeometry.Scheme.LocalRepresentability.representableBy; AlgebraicGeometry.IsFinite.finite_app; AlgebraicGeometry.Scheme.Hom.finite_app; AlgebraicGeometry.instHasRingHomPropertyLocallyQuasiFiniteQuasiFinite",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern scheme base change, ordinary scheme morphisms, or Zariski-local representability with a supplied open atlas; none constructs relative Hom algebraic spaces from finite locally free sources."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"Hom\"",
+   "results": "12 hits: AlgebraicGeometry.StructureSheaf.globalSectionsIso_hom; AlgebraicGeometry.StructureSheaf.comapₗ_eq_localRingHom; AlgebraicGeometry.PresheafedSpace.Hom; AlgebraicGeometry.PresheafedSpace.homInhabited; AlgebraicGeometry.PresheafedSpace.Hom.base; AlgebraicGeometry.PresheafedSpace.Hom.toPshHom; AlgebraicGeometry.PresheafedSpace.instCoeFunHomForallCarrierCarrier; AlgebraicGeometry.PresheafedSpace.Hom.c",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern scheme base change, ordinary scheme morphisms, or Zariski-local representability with a supplied open atlas; none constructs relative Hom algebraic spaces from finite locally free sources."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Representability of the scheme of maps from a finite flat family to an arbitrary algebraic space",
+   "results": "8 hits: AlgebraicGeometry.Scheme.LocalRepresentability.representableBy; AlgebraicGeometry.Scheme.LocalRepresentability.isRepresentable; AlgebraicGeometry.UniversallyOpen.of_flat; AlgebraicGeometry.Flat.instDescScheme; AlgebraicGeometry.Flat.instFstScheme; AlgebraicGeometry.Flat.instSndScheme; AlgebraicGeometry.IsFinite.instFstScheme; AlgebraicGeometry.IsFinite.instSndScheme",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern scheme base change, ordinary scheme morphisms, or Zariski-local representability with a supplied open atlas; none constructs relative Hom algebraic spaces from finite locally free sources."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-relative-finite-hilbert-algebraic",
+  "date": "2026-10-24",
+  "group": "Q132"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Power lifting implies universal submersiveness of an affine invariant quotient. Fppf presentation used after the affine invariant quotient construction. Supporting input: Apply the flat-groupoid algebraicity theorem to the action groupoid; unlike the smooth-groupoid theorem this does not require H smooth. Algebraicity step: criteria.tex Tag 06FI applies the general bootstrap theorem Tag 06DC to the flat locally finitely presented quotient presentation. Supporting input: Tag 06CI (lemma-hilbert-stack-relative-space); finite Hilbert construction in examples-stacks.tex Tag 05WC. Input to the Tag 06CI proof: Weil restriction of algebraic spaces along finite locally free scheme maps.",
+   "via": [
+    "lem-sfb-relative-finite-hilbert-algebraic",
+    "lem-sfb-fppf-stack-algebraicity-bootstrap",
+    "lem-sfb-flat-groupoid-algebraic-quotient",
+    "lem-sfb-flat-affine-action-stack-presentation",
+    "lem-sfb-power-lifting-quotient-submersive",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-finite-locally-free-weil-restriction",
+  "worker": "stage1",
+  "summary": "Followed Tag 05YF: two applications of relative-Hom representability, explicit postcomposition and identity maps, then the algebraic-space sheaf fibre product. Created one statement-only Tag 05Y7 input, after checking DAG, latest blueprint and Lean/Mathlib. Expanded the pointwise cartesian identification and restriction-map naturality. Statement preserved.",
+  "blueprint": "The inherited from.node is null (blueprint_refs.py ancestor reports None), but the full historical via chain and its precise place are preserved. This split realizes the Tag 05YF prerequisite of relative finite Hilbert algebraicity in that chain below det-thm-sf-ctf-stability-direct-images, proof (3). Checked the latest blueprint proof (3); this is an auxiliary input to the existing alteration/moduli chain, not a replacement route.",
+  "tool_uses": [
+   {
+    "node": "lem-trf-space-fibre-products-etale-covers",
+    "why": "Generic closure of algebraic spaces under sheaf fibre products, needed for the Tag 05YF cartesian square; the unit provides no replacement construction."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-trf-space-fibre-products-etale-covers"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-O1-654a9805f",
+  "group": "O1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-O1-654a9805f (reviewer sub-agent of L); spot-checked: Read Stacks criteria.tex 05Y2/05Y7 (lines 1260-1296, 1425-1430), the Res_{Z/B} definition (~line 1527), and 05YE/05YF (lines 1665-1712), plus every cited statement. The item's statement and stmt_deps are unchanged from base (diffed against live); it is 05YF specialised to a finite locally free scheme map Z->T, with no hypothesis on E->Z. Step 1 applies the new 05Y7 node to X=E (f=p∘q) and X=Z (f=p). Step 2 defines c(a,b)=(a,q∘b) and e(a)=(a,pr_Z); it is correctly marked elementary, with the T-condition and naturality checked. Step 3 takes the sheaf fibre product A×_B h_T from lem-trf-space-fibre-products-etale-covers: a=a' and q∘b=pr_Z gives exactly the Z-morphisms, both inverse maps are written, and this spells out the omitted 05YE proof. The new node lem-sfb-finite-locally-free-relative-hom-space matches 05Y7/05Y2 exactly (pairs (a,b), the restriction formula, structure map a). It is a statement-only node with B1-B9 satisfied and 5 recorded searches. It does not restate a clause of the parent: the item is its fibre over id_Z. Duplicate check: lem-sfb-space-hom-representability (0D1C) needs proper/flat/fp Z and separated/fp W; the parent applies the item to non-separated E (Isom sheaves, Z×_S 𝒳), so 0D1C does not cover it. No blueprint node states Weil restriction or Mor_B. Edge cases checked: p=id gives E; Z=∅ gives T; E=∅ with variable rank behaves correctly; surjectivity, separation and fp are never used. Batch-5: def-trf-scheme-algebraic-space and def-trf-algebraic-space are general definitions; lem-trf-space-fibre-products-etale-covers is the generic 02X2/04T9 fibre-product fact. Their closures reach only algebraic-space foundation nodes: no trace-formula/Poincare theorem, no sk-thm-trace-transport, no nt-assume leaf. All three accepted. tool_use of lem-trf-space-fibre-products-etale-covers accepted: 05YF's own proof calls 04T9 here, and the parent uses it in the same unit. Advisory: inherited blueprint.from.node=null along the chain (also on the parent); the report names citations.json/searches.jsonl, which are not on the branch. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.FiniteLocallyFreeWeilRestriction",
+  "declaration": "AlgebraicGeometry.AlgebraicSpace.exists_finiteLocallyFree_weilRestriction",
+  "file": "lean/Sheaf/AlgebraicGeometry/FiniteLocallyFreeWeilRestriction.lean",
+  "statement": "theorem exists_finiteLocallyFree_weilRestriction {S : Scheme.{u}} (Z T : Over S) (p : Z ⟶ T) [Scheme.Hom.IsFiniteLocallyFree p.left] (E : AlgebraicSpace S) (q : E.obj.obj ⟶ yoneda.obj Z) : ∃ (R : AlgebraicSpace S) (r : R.obj.obj ⟶ yoneda.obj T) (e : ∀ (U : Over S) (a : U ⟶ T), {x : R.obj.obj.obj (op U) // r.app (op U) x = a} ≃ {b : yoneda.obj (Limits.pullback p a) ⟶ E.obj.obj // b ≫ q = yoneda.map (pullback.fst p a)}), ∀ (U V : Over S) (v : V ⟶ U) (a : U ⟶ T) (x : {x : R.obj.obj.obj (op U) // r.app (op U) x = a}) (y : {y : R.obj.obj.obj (op V) // r.app (op V) y = v ≫ a}), R.obj.obj.map v.op x.val = y.val → (e V (v ≫ a) y).val = yoneda.map (pullback.map p (v ≫ a) p a (𝟙 Z) v (𝟙 T) (by simp) (by simp)) ≫ (e U a x).val",
+  "branch": "newtargets-dag",
+  "by": "Q95",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-a6d681bf6",
+  "group": "Q95",
+  "result": "fix",
+  "note": "Lean and node record correct: 05YF Res_{Z/T}(E) stated as ∃ R : AlgebraicSpace S, r : R→h_T, fibrewise ≃ {b : h_{Z×_T U} ⟶ E // b≫q = h(pr_Z)} plus naturality via pullback.map (𝟙 Z) v (𝟙 T); IsFiniteLocallyFree (no degree), no hypothesis on q, interface universes; edge cases Z=∅, variable rank, empty S/T/E, p=𝟙, v=𝟙 checked; no H4 duplicate; proof dep relative-hom-space unrecorded, correctly not imported; docstrings and verbatim statement OK. Sole fault H11 (same-worker self-check second reading) → fixes/lem-sfb-finite-locally-free-weil-restriction.report.md = worker report verbatim + clause-by-clause second reading. No Lean changed, no compile run."
+ }
+}

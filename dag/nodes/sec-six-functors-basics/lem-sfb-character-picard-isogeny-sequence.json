@@ -1,0 +1,253 @@
+{
+ "id": "lem-sfb-character-picard-isogeny-sequence",
+ "kind": "statement",
+ "title": "The character--Picard sequence of a multiplicative isogeny",
+ "statement": "Let $F$ be an algebraically closed field [def-weil-field, def-weil-algebraic-closure]. All groups below are affine $F$-group schemes [def-sc-group-scheme] of finite type [def-weil-finite-type-morphism]. Smoothness and connectedness are as in [def-sbc-smooth-morphisms, def-weil-connected-scheme]. Write $X^*(G)=\\operatorname{Hom}_{F\\text{-grp}}(G,\\mathbf G_m)$ for the abelian group of characters, with addition given by multiplication of values, where $\\mathbf G_m(A)=A^\\times$ [def-sc-gm-ga]. Write $\\operatorname{Pic}(G)$ for the abelian group of isomorphism classes of invertible $\\mathcal O_G$-modules, with tensor product as addition; zero is the class of $\\mathcal O_G$, and an invertible module is an $\\mathcal O_G$-module locally isomorphic to $\\mathcal O_G$. A multiplicative isogeny is a homomorphism $f:G\\to H$ for which $F[H]\\to F[G]$ is faithfully flat and whose scheme-theoretic kernel is finite and diagonalizable. Faithfully flat means that extension of scalars is exact and detects zero modules. Finite means finite-dimensional coordinate algebra. Diagonalizable means isomorphic to $D(M)=\\operatorname{Spec}F[M]$ for a finite abelian group $M$, where $F[M]$ has basis $e^m$, multiplication $e^me^n=e^{m+n}$, comultiplication $e^m\\mapsto e^m\\otimes e^m$, counit $e^m\\mapsto1$ and antipode $e^m\\mapsto e^{-m}$. Let $f:G_1\\to G_0$ be a multiplicative isogeny between smooth connected groups, and put $N=\\ker(f)$. There is an exact sequence of abelian groups $$0\\longrightarrow X^*(G_0)\\xrightarrow{f^*}X^*(G_1)\\xrightarrow{\\mathrm{res}_N}X^*(N)\\xrightarrow{\\delta}\\operatorname{Pic}(G_0)\\xrightarrow{f^*}\\operatorname{Pic}(G_1)\\longrightarrow0.$$ Here $f^*$ on characters is precomposition, $\\mathrm{res}_N$ is restriction, and $f^*$ on Picard groups is pullback of invertible modules. The connecting map $\\delta$ associates to a character the invertible module obtained by descent of the trivial line bundle along $f$, with the $N$-action given by that character (fix either sign convention). Exact means that the image of each arrow is the kernel of the next.",
+ "source": {
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Proposition 18.18, sequence (129), printed p.391, specialized to finite multiplicative kernel; all connected groups are split over the algebraically closed F."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-weil-algebraic-closure",
+  "def-sc-group-scheme",
+  "def-weil-finite-type-morphism",
+  "def-sbc-smooth-morphisms",
+  "def-weil-connected-scheme",
+  "def-sc-gm-ga",
+  "def-pc-scheme"
+ ],
+ "proof": [
+  {
+   "text": "Choose $B_0$ by [lem-sfb-borel-characteristic-picard-sequence] and put $B_1=f^{-1}B_0$. The comparison node makes $B_1$ Borel and identifies the two flag quotients with $Q=G_0/B_0$. Put $A_i=X^*(G_i)$, $C_i=X^*(B_i)$, $P=\\operatorname{Pic}(Q)$, $D_i=\\operatorname{Pic}(G_i)$. The characteristic node gives exact rows $0\\to A_i\\xrightarrow{j_i}C_i\\xrightarrow{c_i}P\\xrightarrow{p_i}D_i\\to0$. Write $u=f_B^*:C_0\\to C_1$, $v=f^*:A_0\\to A_1$, $w=f^*:D_0\\to D_1$ and $r:C_1\\to X^*(N)$. The comparison node says $u$ is injective, $r$ is surjective and $\\ker r=\\operatorname{im}u$.",
+   "uses": [
+    "lem-sfb-borel-characteristic-picard-sequence",
+    "lem-sfb-multiplicative-isogeny-borel-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 18.18, proof and diagram, printed p.391; Theorem 18.15 and section 18.f, pp.390,395-396."
+   }
+  },
+  {
+   "text": "These rows commute: $j_1v=uj_0$ is precomposition and $p_1=wp_0$ is composition of pullbacks. Also $c_1u=c_0$: pulling the contracted bundle for $\\beta:B_0\\to\\mathbf G_m$ back along the flag isomorphism replaces its relation by $(g,z)b=(gb,\\beta(f(b))^{-1}z)$, which is the contracted bundle for $u\\beta$. Thus, for $\\chi\\in X^*(N)$ choose $\\lambda\\in C_1$ with $r\\lambda=\\chi$ and set $\\Delta(\\chi)=p_0c_1\\lambda$. A different lift is $\\lambda+u\\beta$ and changes this by $p_0c_0\\beta=0$. Lifting sums shows $\\Delta$ is a homomorphism.",
+   "uses": [
+    "lem-sfb-borel-characteristic-picard-sequence",
+    "lem-sfb-multiplicative-isogeny-borel-comparison"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 18.18, proof and diagram, printed p.391; Theorem 18.15 and section 18.f, pp.390,395-396."
+   }
+  },
+  {
+   "text": "This $\\Delta$ is the stated descent map $\\delta$, with the convention using inverse characters in the right-action formula. Indeed, on $G_1$ the pullback of the bundle representing $c_1\\lambda$ has the frame $g\\mapsto[g,1]$. Since $N\\subseteq B_1$, the frame at $gn$ is $[gn,1]=[g,\\lambda(n)]$. Consequently the descent relation along $G_1\\to G_0$ is $(g,z)n=(gn,\\chi(n)^{-1}z)$, exactly the relation defining $\\delta(\\chi)$. This is a scheme-theoretic calculation, valid on every $F$-algebra. The map $G_1\\times N\\to G_1\\times_{G_0}G_1$ has inverse $(g,h)\\mapsto(g,g^{-1}h)$; hence this is the full descent datum. The map $f$ is an fpqc cover: it is faithfully flat by hypothesis and quasi-compact because both groups are affine and of finite type. By [lem-pc-fpqc-descent] (1) and (3), pullback from quasi-coherent $\\mathcal O_{G_0}$-modules to descent data along the fpqc covering $\\{f:G_1\\to G_0\\}$ is an equivalence and invertible descent data descend to invertible modules; full faithfulness identifies the descended line bundle $\\delta(\\chi)$ uniquely with $p_0c_1\\lambda$, whose pullback carries the same descent datum.",
+   "uses": [
+    "lem-sfb-borel-characteristic-picard-sequence",
+    "lem-sfb-multiplicative-isogeny-borel-comparison",
+    "lem-pc-fpqc-descent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 18.18, proof and diagram, printed p.391; Theorem 18.15 and section 18.f, pp.390,395-396."
+   }
+  },
+  {
+   "text": "Injectivity of $v$ follows from $j_1v=uj_0$ and injectivity of $u,j_0$. If $a\\in A_1$ restricts trivially to $N$, then $rj_1a=0$, so $j_1a=u\\beta$ for $\\beta\\in C_0$. Now $c_0\\beta=c_1j_1a=0$, so $\\beta=j_0a_0$ for some $a_0\\in A_0$; injectivity of $j_1$ gives $a=va_0$. Conversely $rj_1v=r uj_0=0$. This proves exactness through $A_1$.",
+   "uses": [
+    "lem-sfb-borel-characteristic-picard-sequence",
+    "lem-sfb-multiplicative-isogeny-borel-comparison"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 18.18, proof and diagram, printed p.391; Theorem 18.15 and section 18.f, pp.390,395-396."
+   }
+  },
+  {
+   "text": "For $\\chi=r\\lambda$, if $\\delta\\chi=0$ then $p_0c_1\\lambda=0$, hence $c_1\\lambda=c_0\\beta=c_1u\\beta$ for some $\\beta\\in C_0$. Thus $\\lambda-u\\beta=j_1a$ for some $a\\in A_1$, and $\\chi=rj_1a$. Conversely $p_0c_1j_1a=0$. Therefore $\\ker\\delta$ is exactly the image of restriction from $A_1$. Also $w\\delta(r\\lambda)=p_1c_1\\lambda=0$. If $d_0\\in D_0$ has $wd_0=0$, lift it to $z\\in P$ using surjectivity of $p_0$. Then $p_1z=0$, so $z=c_1\\lambda$ and $d_0=\\delta(r\\lambda)$. Finally any $d_1\\in D_1$ is $p_1z=wp_0z$ for some $z\\in P$, proving surjectivity of $w$. All displayed maps are the specified restriction and pullback maps by their definitions above, so the claimed sequence is exact.",
+   "uses": [
+    "lem-sfb-borel-characteristic-picard-sequence",
+    "lem-sfb-multiplicative-isogeny-borel-comparison"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 18.18, proof and diagram, printed p.391; Theorem 18.15 and section 18.f, pp.390,395-396."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-borel-characteristic-picard-sequence",
+  "lem-sfb-multiplicative-isogeny-borel-comparison",
+  "lem-pc-fpqc-descent"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Proposition 18.18, proof and diagram, printed p.391; Theorem 18.15 and section 18.f, pp.390,395-396."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Exact sequence of character groups and Picard groups for a surjective homomorphism of connected affine algebraic groups with multiplicative type kernel",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"Submodule.mulExact_unitsToPic_mapAlgebra\", \"module\": \"Mathlib/RingTheory/PicardGroup\", \"type\": \"∀ (R : Type u) (A : Type u_4) [inst : CommSemiring R] [inst_1 : CommSemiring A] [inst_2 : Algebra R A]\\n  [inst_3 : FaithfulSMul R A], Function.MulExact ⇑(Submodule.unitsToPic R A) ⇑(CommRing.Pic.mapAlgebra R A)\", \"doc\": \"The group homomorphism from the Picard group of $ R $ to the Picard group of $ A $, induced by an $ R $-algebra structure, satisfies the multiplicative exactness condition with respect to the monoid h\"}\n  {\"name\": \"Submodule.mulExact_unitsMap_spanSingleton_unitsToPic\", \"module\": \"Mathlib/RingTheory/PicardGroup\", \"type\": \"∀ (R : Type u) (A : Type u_4) [inst : CommSemiring R] [inst_1 : Semiring A] [inst_2 : Algebra R A]\\n  [inst_3 : FaithfulSMul R A], Function.MulExact ⇑(Units.map ↑(Submodule.spanSingleton R)) ⇑(Submodule.unitsToPic R A)\", \"doc\": \"The composition of the monoid homomorphism from units of $ R $ to invertible submodules of $ A $ (via span of singleton elements) and the homomorphism from invertible submodules to the Picard group $ \"}\n  {\"name\": \"Algebra.H1Cotangent.exact_map_δ\", \"module\": \"Mathlib/RingTheory/Kaehler/JacobiZariski\", \"type\": \"∀ (R : Type u₁) (S : Type u₂) [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S] (T : Type u₃)\\n  [inst_3 : CommRing T] [inst_4 : Algebra R T] [inst_5 : Algebra S T] [inst_6 : IsScalarTower R S T],\\n  Function.Exact ⇑(Algebra.H1Cotangent.map R S T T) ⇑(Algebra.H1Cotangent.δ R S T)\", \"doc\": \"The sequence involving the induced map on first cotangent cohomology and the connecting homomorphism δ in the Jacobi-Zariski exact sequence is exact, meaning the image of the map $ H^1(S \\\\to T) \\\\to T \"}\n  {\"name\": \"Algebra.Generators.H1Cotangent.exact_map_δ'\", \"module\": \"Mathlib/RingTheory/Kaehler/JacobiZariski\", \"type\": \"∀ {R : Type u₁} {S : Type u₂} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S] {T : Type u₃}\\n  [inst_3 : CommRing T] [inst_4 : Algebra R T] [inst_5 : Algebra S T] [inst_6 : IsScalarTower R S T] {ι : Type w₁}\\n  {σ : Type w₂} {τ : Type w₅} (Q : Algebra.Generators S T ι) (P : Algebra.Ge\", \"doc\": \"For an algebra extension homomorphism $ f $, the induced map on the first cotangent cohomology modules is exact at the image of $ f $, meaning the image of $ f $ is equal to the kernel of the connecti\"}\n  {\"name\": \"Algebra.Generators.H1Cotangent.exact_map_δ\", \"module\": \"Mathlib/RingTheory/Kaehler/JacobiZariski\", \"type\": \"∀ {R : Type u₁} {S : Type u₂} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S] {T : Type u₃}\\n  [inst_3 : CommRing T] [inst_4 : Algebra R T] [inst_5 : Algebra S T] [inst_6 : IsScalarTower R S T] {ι : Type w₁}\\n  {σ : Type w₂} (Q : Algebra.Generators S T ι) (P : Algebra.Generators R S σ\", \"doc\": \"The sequence involving the first cotangent cohomology modules is exact at $ H^1(Q) $ with the connecting homomorphism $ \\\\delta $, as established by the Snake Lemma applied to the cotangent complexes o\"}\n  {\"name\": \"Algebra.H1Cotangent.exact_δ_mapBaseChange\", \"module\": \"Mathlib/RingTheory/Kaehler/JacobiZariski\", \"type\": \"∀ (R : Type u₁) (S : Type u₂) [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S] (T : Type u₃)\\n  [inst_3 : CommRing T] [inst_4 : Algebra R T] [inst_5 : Algebra S T] [inst_6 : IsScalarTower R S T],\\n  Function.Exact ⇑(Algebra.H1Cotangent.δ R S T) ⇑(KaehlerDifferential.mapBaseChange R S T\", \"doc\": \"The image of the connecting homomorphism $\\\\delta: H^1(S \\\\to T) \\\\to T \\\\otimes_S \\\\Omega_{S/R}$ in the Jacobi-Zariski exact sequence equals the kernel of the base change map $\\\\Omega_{S/R} \\\\otimes_S B \\\\to\"}\n  {\"name\": \"Algebra.Generators.H1Cotangent.exact_δ_map\", \"module\": \"Mathlib/RingTheory/Kaehler/JacobiZariski\", \"type\": \"∀ {R : Type u₁} {S : Type u₂} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S] {T : Type u₃}\\n  [inst_3 : CommRing T] [inst_4 : Algebra R T] [inst_5 : Algebra S T] [inst_6 : IsScalarTower R S T] {ι : Type w₁}\\n  {σ : Type w₂} (Q : Algebra.Generators S T ι) (P : Algebra.Generators R S σ\", \"doc\": \"The sequence involving the connecting homomorphism $\\\\delta: H^1(Q) \\\\to T \\\\otimes_S \\\\Omega_{S/R}$ and the base change map $\\\\Omega_{A/R} \\\\otimes_A B \\\\to \\\\Omega_{B/R}$ is exact, establishing a fundamenta\"}\n  {\"name\": \"MonoidHom.surjective_of_surjective_of_injective_of_left_exact\", \"module\": \"Mathlib/Algebra/FiveLemma\", \"type\": \"∀ {M₁ : Type u_1} {M₂ : Type u_2} {M₃ : Type u_3} {N₁ : Type u_6} {N₂ : Type u_7} {N₃ : Type u_8} [inst : Group M₁]\\n  [inst_1 : Group M₂] [inst_2 : Group M₃] [inst_3 : Group N₁] [inst_4 : Group N₂] [inst_5 : Group N₃] (f₁ : M₁ →* M₂)\\n  (f₂ : M₂ →* M₃) (g₁ : N₁ →* N₂) (g₂ : N₂ →* N₃) (i₁ : M₁ →* N₁) \", \"doc\": \"In a commutative diagram of monoid homomorphisms with exact rows, if the map i₂ is surjective, i₃ is injective, and g₁ is injective, then the map i₁ is surjective. This result follows from the standar\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: the results do not state this theorem for affine group schemes; abstract groups, Lie algebras and ring Picard groups do not specialize to it"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a central multiplicative isogeny G prime to G there is an exact sequence X G to X G prime to X kernel to Pic G to Pic G prime",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"Submodule.mulExact_unitsToPic_mapAlgebra\", \"module\": \"Mathlib/RingTheory/PicardGroup\", \"type\": \"∀ (R : Type u) (A : Type u_4) [inst : CommSemiring R] [inst_1 : CommSemiring A] [inst_2 : Algebra R A]\\n  [inst_3 : FaithfulSMul R A], Function.MulExact ⇑(Submodule.unitsToPic R A) ⇑(CommRing.Pic.mapAlgebra R A)\", \"doc\": \"The group homomorphism from the Picard group of $ R $ to the Picard group of $ A $, induced by an $ R $-algebra structure, satisfies the multiplicative exactness condition with respect to the monoid h\"}\n  {\"name\": \"Submodule.mulExact_unitsMap_spanSingleton_unitsToPic\", \"module\": \"Mathlib/RingTheory/PicardGroup\", \"type\": \"∀ (R : Type u) (A : Type u_4) [inst : CommSemiring R] [inst_1 : Semiring A] [inst_2 : Algebra R A]\\n  [inst_3 : FaithfulSMul R A], Function.MulExact ⇑(Units.map ↑(Submodule.spanSingleton R)) ⇑(Submodule.unitsToPic R A)\", \"doc\": \"The composition of the monoid homomorphism from units of $ R $ to invertible submodules of $ A $ (via span of singleton elements) and the homomorphism from invertible submodules to the Picard group $ \"}\n  {\"name\": \"Algebra.H1Cotangent.exact_map_δ\", \"module\": \"Mathlib/RingTheory/Kaehler/JacobiZariski\", \"type\": \"∀ (R : Type u₁) (S : Type u₂) [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S] (T : Type u₃)\\n  [inst_3 : CommRing T] [inst_4 : Algebra R T] [inst_5 : Algebra S T] [inst_6 : IsScalarTower R S T],\\n  Function.Exact ⇑(Algebra.H1Cotangent.map R S T T) ⇑(Algebra.H1Cotangent.δ R S T)\", \"doc\": \"The sequence involving the induced map on first cotangent cohomology and the connecting homomorphism δ in the Jacobi-Zariski exact sequence is exact, meaning the image of the map $ H^1(S \\\\to T) \\\\to T \"}\n  {\"name\": \"groupCohomology.H1InfRes_exact\", \"module\": \"Mathlib/RepresentationTheory/Homological/GroupCohomology/Functoriality\", \"type\": \"∀ {k G : Type u} [inst : CommRing k] [inst_1 : Group G] (A : Rep k G) (S : Subgroup G) [inst_2 : S.Normal],\\n  (groupCohomology.H1InfRes A S).Exact\", \"doc\": \"For a group $ G $, its normal subgroup $ S \\trianglelefteq G $, and a $ k $-representation $ A $ of $ G $ over a commutative ring $ k $, the sequence of first group cohomology modules $ H^1(G/S, A^S) \\t\"}\n  {\"name\": \"Algebra.Generators.H1Cotangent.exact_map_δ'\", \"module\": \"Mathlib/RingTheory/Kaehler/JacobiZariski\", \"type\": \"∀ {R : Type u₁} {S : Type u₂} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S] {T : Type u₃}\\n  [inst_3 : CommRing T] [inst_4 : Algebra R T] [inst_5 : Algebra S T] [inst_6 : IsScalarTower R S T] {ι : Type w₁}\\n  {σ : Type w₂} {τ : Type w₅} (Q : Algebra.Generators S T ι) (P : Algebra.Ge\", \"doc\": \"For an algebra extension homomorphism $ f $, the induced map on the first cotangent cohomology modules is exact at the image of $ f $, meaning the image of $ f $ is equal to the kernel of the connecti\"}\n  {\"name\": \"Algebra.Generators.H1Cotangent.exact_map_δ\", \"module\": \"Mathlib/RingTheory/Kaehler/JacobiZariski\", \"type\": \"∀ {R : Type u₁} {S : Type u₂} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S] {T : Type u₃}\\n  [inst_3 : CommRing T] [inst_4 : Algebra R T] [inst_5 : Algebra S T] [inst_6 : IsScalarTower R S T] {ι : Type w₁}\\n  {σ : Type w₂} (Q : Algebra.Generators S T ι) (P : Algebra.Generators R S σ\", \"doc\": \"The sequence involving the first cotangent cohomology modules is exact at $ H^1(Q) $ with the connecting homomorphism $ \\\\delta $, as established by the Snake Lemma applied to the cotangent complexes o\"}\n  {\"name\": \"groupCohomology.mapShortComplex₁_exact\", \"module\": \"Mathlib/RepresentationTheory/Homological/GroupCohomology/LongExactSequence\", \"type\": \"∀ {k G : Type u} [inst : CommRing k] [inst_1 : Group G] {X : CategoryTheory.ShortComplex (Rep k G)} (hX : X.ShortExact)\\n  {i j : ℕ} (hij : i + 1 = j), (groupCohomology.mapShortComplex₁ hX hij).Exact\", \"doc\": \"For natural numbers $i$ and $j$ such that $i + 1 = j$, the second derived short complex constructed in the Snake Lemma diagram for group cohomology is exact, meaning the image of each differential equ\"}\n  {\"name\": \"groupCohomology.mapShortComplex₂_exact\", \"module\": \"Mathlib/RepresentationTheory/Homological/GroupCohomology/LongExactSequence\", \"type\": \"∀ {k G : Type u} [inst : CommRing k] [inst_1 : Group G] {X : CategoryTheory.ShortComplex (Rep k G)},\\n  X.ShortExact → ∀ (i : ℕ), (groupCohomology.mapShortComplex₂ X i).Exact\", \"doc\": \"The i-th group cohomology functor applied to a short exact sequence in the category of k-representations of a group G yields an exact sequence in the category of k-modules.\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: the results do not state this theorem for affine group schemes; abstract groups, Lie algebras and ring Picard groups do not specialize to it"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"character\", \"Picard\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-23",
+   "verdict": "no match: the results do not state this theorem for affine group schemes; abstract groups, Lie algebras and ring Picard groups do not specialize to it"
+  },
+  {
+   "tool": "grep",
+   "query": "[Cc]haracter.*[Pp]icard|[Pp]icard.*[Cc]haracter",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-23",
+   "verdict": "no match: the results do not state this theorem for affine group schemes; abstract groups, Lie algebras and ring Picard groups do not specialize to it"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Exact sequence of character groups and Picard groups for a surjective homomorphism of connected affine algebraic groups with multiplicative type kernel",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AddMonoidHom.exact_iff_of_surjective_of_bijective_of_injective\", \"module\": \"Mathlib.Algebra.Exact\", \"type\": \"∀ {M₁ : Type u_8} {M₂ : Type u_9} {M₃ : Type u_10} {N₁ : Type u_11} {N₂ : Type u_12} {N₃ : Type u_13}\\n  [inst : AddCommMonoid M₁] [inst_1 : AddCommMonoid M₂] [inst_2 : AddCommMonoid M₃] [inst_3 : AddCommMonoid N₁]\\n  [inst_4 : AddCommMonoid N₂] [inst_5 : AddCommMonoid N₃] (f : M₁ →+ M₂) (g : M₂ →+ M₃\", \"doc\": \"Given additive commutative monoids $M_1, M_2, M_3$ and $N_1, N_2, N_3$ with homomorphisms $f: M_1 →+ M_2$, $g: M_2 →+ M_3$, $f': N_1 →+ N_2$, $g': N_2 →+ N_3$, and compatible homomorphisms $\\\\tau_1: M_\"}\n  {\"name\": \"AddMonoidHom.exact_iff\", \"module\": \"Mathlib.Algebra.Exact\", \"type\": \"∀ {M : Type u_2} {N : Type u_4} {P : Type u_6} [inst : AddGroup M] [inst_1 : AddGroup N] [inst_2 : AddGroup P]\\n  {f : M →+ N} {g : N →+ P}, Function.Exact ⇑f ⇑g ↔ g.ker = f.range\", \"doc\": \"For additive groups $ M $, $ N $, and $ P $, and additive group homomorphisms $ f : M \\\\to N $ and $ g : N \\\\to P $, the exactness condition (that the image of $ f $ equals the kernel of $ g $) holds if\"}\n  {\"name\": \"Submodule.mulExact_unitsToPic_mapAlgebra\", \"module\": \"Mathlib.RingTheory.PicardGroup\", \"type\": \": Function.MulExact (unitsToPic R A) (mapAlgebra R A)\", \"doc\": \"The group homomorphism from the Picard group of $ R $ to the Picard group of $ A $, induced by an $ R $-algebra structure, satisfies the multiplicative exactness condition with respect to the monoid h\"}\n  {\"name\": \"Submodule.mulExact_unitsMap_spanSingleton_unitsToPic\", \"module\": \"Mathlib.RingTheory.PicardGroup\", \"type\": \": Function.MulExact (Units.map (spanSingleton R).toMonoidHom) (unitsToPic R A)\", \"doc\": \"The composition of the monoid homomorphism from units of $ R $ to invertible submodules of $ A $ (via span of singleton elements) and the homomorphism from invertible submodules to the Picard group $ \"}\n  {\"name\": \"MonoidHom.mulExact_iff\", \"module\": \"Mathlib.Algebra.Exact\", \"type\": \": MulExact f g ↔ ker g = range f\", \"doc\": \"For monoid homomorphisms $ f : G \\\\to H $ and $ g : H \\\\to K $, the multiplicative exactness condition (that $ g(y) = 1 $ if and only if $ y $ is in the image of $ f $) holds for all $ y \\\\in H $ if and \"}\n  {\"name\": \"Function.Exact.addMonoidHom_rangeRestrict\", \"module\": \"Mathlib.Algebra.Exact\", \"type\": \"∀ {M : Type u_2} {N : Type u_4} {P : Type u_6} [inst : AddGroup M] [inst_1 : AddGroup N] [inst_2 : AddGroup P]\\n  {f : M →+ N} {g : N →+ P}, Function.Exact ⇑f ⇑g → Function.Exact ⇑f.range.subtype ⇑g.rangeRestrict\", \"doc\": \"Given additive group homomorphisms $ f: M \\\\to N $ and $ g: N \\\\to P $, if the sequence is exact (i.e., $ \\\\mathrm{im}\\\\,f = \\\\ker g $), then the restricted homomorphism from the image of $ f $ to the imag\"}\n  {\"name\": \"groupCohomology.H1InfRes\", \"module\": \"Mathlib.RepresentationTheory.Homological.GroupCohomology.Functoriality\", \"type\": \": ShortComplex (ModuleCat k)\", \"doc\": \"A short complex in the category of modules over a commutative ring $ k $, consisting of the first group cohomology modules $ H^1(G/S, A^S) $, $ H^1(G, A) $, and $ H^1(S, A) $ for a group $ G $, its no\"}\n  {\"name\": \"AddGroupExtension.rightHom\", \"module\": \"Mathlib.GroupTheory.GroupExtension.Defs\", \"type\": \"{N : Type u_1} →\\n  {E : Type u_2} →\\n    {G : Type u_3} →\\n      [inst : AddGroup N] → [inst_1 : AddGroup E] → [inst_2 : AddGroup G] → AddGroupExtension N E G → E →+ G\", \"doc\": \"Given an additive group extension representing the short exact sequence $0 \\\\to N \\\\to E \\\\to G \\\\to 0$, this is the surjective additive group homomorphism from $E$ to $G$ that completes the sequence.\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: the results do not state this theorem for affine group schemes; abstract groups, Lie algebras and ring Picard groups do not specialize to it"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Character groups and Picard groups exact sequence for a finite diagonalizable isogeny of smooth connected affine algebraic groups",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"Submodule.mulExact_unitsToPic_mapAlgebra\", \"module\": \"Mathlib/RingTheory/PicardGroup\", \"type\": \"∀ (R : Type u) (A : Type u_4) [inst : CommSemiring R] [inst_1 : CommSemiring A] [inst_2 : Algebra R A]\\n  [inst_3 : FaithfulSMul R A], Function.MulExact ⇑(Submodule.unitsToPic R A) ⇑(CommRing.Pic.mapAlgebra R A)\", \"doc\": \"The group homomorphism from the Picard group of $ R $ to the Picard group of $ A $, induced by an $ R $-algebra structure, satisfies the multiplicative exactness condition with respect to the monoid h\"}\n  {\"name\": \"Submodule.mulExact_unitsMap_spanSingleton_unitsToPic\", \"module\": \"Mathlib/RingTheory/PicardGroup\", \"type\": \"∀ (R : Type u) (A : Type u_4) [inst : CommSemiring R] [inst_1 : Semiring A] [inst_2 : Algebra R A]\\n  [inst_3 : FaithfulSMul R A], Function.MulExact ⇑(Units.map ↑(Submodule.spanSingleton R)) ⇑(Submodule.unitsToPic R A)\", \"doc\": \"The composition of the monoid homomorphism from units of $ R $ to invertible submodules of $ A $ (via span of singleton elements) and the homomorphism from invertible submodules to the Picard group $ \"}\n  {\"name\": \"Algebra.H1Cotangent.exact_map_δ\", \"module\": \"Mathlib/RingTheory/Kaehler/JacobiZariski\", \"type\": \"∀ (R : Type u₁) (S : Type u₂) [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S] (T : Type u₃)\\n  [inst_3 : CommRing T] [inst_4 : Algebra R T] [inst_5 : Algebra S T] [inst_6 : IsScalarTower R S T],\\n  Function.Exact ⇑(Algebra.H1Cotangent.map R S T T) ⇑(Algebra.H1Cotangent.δ R S T)\", \"doc\": \"The sequence involving the induced map on first cotangent cohomology and the connecting homomorphism δ in the Jacobi-Zariski exact sequence is exact, meaning the image of the map $ H^1(S \\\\to T) \\\\to T \"}\n  {\"name\": \"Algebra.Generators.H1Cotangent.exact_map_δ\", \"module\": \"Mathlib/RingTheory/Kaehler/JacobiZariski\", \"type\": \"∀ {R : Type u₁} {S : Type u₂} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S] {T : Type u₃}\\n  [inst_3 : CommRing T] [inst_4 : Algebra R T] [inst_5 : Algebra S T] [inst_6 : IsScalarTower R S T] {ι : Type w₁}\\n  {σ : Type w₂} (Q : Algebra.Generators S T ι) (P : Algebra.Generators R S σ\", \"doc\": \"The sequence involving the first cotangent cohomology modules is exact at $ H^1(Q) $ with the connecting homomorphism $ \\\\delta $, as established by the Snake Lemma applied to the cotangent complexes o\"}\n  {\"name\": \"Algebra.Generators.H1Cotangent.exact_map_δ'\", \"module\": \"Mathlib/RingTheory/Kaehler/JacobiZariski\", \"type\": \"∀ {R : Type u₁} {S : Type u₂} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S] {T : Type u₃}\\n  [inst_3 : CommRing T] [inst_4 : Algebra R T] [inst_5 : Algebra S T] [inst_6 : IsScalarTower R S T] {ι : Type w₁}\\n  {σ : Type w₂} {τ : Type w₅} (Q : Algebra.Generators S T ι) (P : Algebra.Ge\", \"doc\": \"For an algebra extension homomorphism $ f $, the induced map on the first cotangent cohomology modules is exact at the image of $ f $, meaning the image of $ f $ is equal to the kernel of the connecti\"}\n  {\"name\": \"Algebra.Generators.H1Cotangent.exact_δ_map\", \"module\": \"Mathlib/RingTheory/Kaehler/JacobiZariski\", \"type\": \"∀ {R : Type u₁} {S : Type u₂} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S] {T : Type u₃}\\n  [inst_3 : CommRing T] [inst_4 : Algebra R T] [inst_5 : Algebra S T] [inst_6 : IsScalarTower R S T] {ι : Type w₁}\\n  {σ : Type w₂} (Q : Algebra.Generators S T ι) (P : Algebra.Generators R S σ\", \"doc\": \"The sequence involving the connecting homomorphism $\\\\delta: H^1(Q) \\\\to T \\\\otimes_S \\\\Omega_{S/R}$ and the base change map $\\\\Omega_{A/R} \\\\otimes_A B \\\\to \\\\Omega_{B/R}$ is exact, establishing a fundamenta\"}\n  {\"name\": \"Algebra.Generators.CotangentSpace.exact\", \"module\": \"Mathlib/RingTheory/Kaehler/JacobiZariski\", \"type\": \"∀ {R : Type u₁} {S : Type u₂} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S] {T : Type u₃}\\n  [inst_3 : CommRing T] [inst_4 : Algebra R T] [inst_5 : Algebra S T] [inst_6 : IsScalarTower R S T] {ι : Type w₁}\\n  {σ : Type w₂} (Q : Algebra.Generators S T ι) (P : Algebra.Generators R S σ\", \"doc\": \"Given algebra extensions $ P $ and $ Q $ with compatible generators, the sequence involving the cotangent spaces $ P.\\text{CotangentSpace} $, $ Q.\\text{CotangentSpace} $, and their composition is exact.\"}\n  {\"name\": \"SnakeLemma.δ_aux\", \"module\": \"Mathlib/Algebra/Module/SnakeLemma\", \"type\": \"∀ {R : Type u_3} [inst : CommRing R] {M₂ : Type u_4} {M₃ : Type u_5} {N₁ : Type u_2} {N₂ : Type u_1} {N₃ : Type u_7}\\n  [inst_1 : AddCommGroup M₂] [inst_2 : Module R M₂] [inst_3 : AddCommGroup M₃] [inst_4 : Module R M₃]\\n  [inst_5 : AddCommGroup N₁] [inst_6 : Module R N₁] [inst_7 : AddCommGroup N₂] [i\", \"doc\": \"For any element $x$ in $K_3$, the composition $g_1 \\\\circ \\\\rho \\\\circ i_2 \\\\circ \\\\sigma \\\\circ \\\\iota_3$ evaluated at $x$ equals $i_2 \\\\circ \\\\sigma \\\\circ \\\\iota_3(x)$. This equality establishes a key identit\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern ring Picard groups, abstract groups, Lie/root systems or measurable Borel spaces; none gives the algebraic-group-scheme assertion or a one-line specialization"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Picard group pullback cokernel characters of the kernel central isogeny algebraic groups",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"CommRing.Pic.mapAlgebra\", \"module\": \"Mathlib/RingTheory/PicardGroup\", \"type\": \"(R : Type u) →\\n  [inst : CommSemiring R] →\\n    (A : Type u_7) → [inst_1 : CommSemiring A] → [Algebra R A] → CommRing.Pic R →* CommRing.Pic A\", \"doc\": \"For a commutative semiring $ R $ and an $ R $-algebra $ A $, this defines a group homomorphism from the Picard group $ \\\\mathrm{Pic}(R) $ to $ \\\\mathrm{Pic}(A) $. It maps each isomorphism class of inver\"}\n  {\"name\": \"CommRing.relPic\", \"module\": \"Mathlib/RingTheory/PicardGroup\", \"type\": \"(R : Type u) →\\n  [inst : CommSemiring R] → (A : Type u_7) → [inst_1 : CommSemiring A] → [Algebra R A] → Subgroup (CommRing.Pic R)\", \"doc\": \"The subgroup of $ \\\\mathrm{Pic}(R) $ consisting of isomorphism classes of invertible $ R $-semimodules that become trivial when extended to the $ R $-algebra $ A $ via the tensor product. This is defin\"}\n  {\"name\": \"CommRing.Pic.functor\", \"module\": \"Mathlib/RingTheory/PicardGroup\", \"type\": \"CategoryTheory.Functor CommSemiRingCat CommGrpCat\", \"doc\": \"The functor from the category of commutative semirings to the category of commutative groups, which sends each commutative semiring $ R $ to its Picard group $ \\\\mathrm{Pic}(R) $ and each ring homomorp\"}\n  {\"name\": \"Submodule.mulExact_unitsToPic_mapAlgebra\", \"module\": \"Mathlib/RingTheory/PicardGroup\", \"type\": \"∀ (R : Type u) (A : Type u_4) [inst : CommSemiring R] [inst_1 : CommSemiring A] [inst_2 : Algebra R A]\\n  [inst_3 : FaithfulSMul R A], Function.MulExact ⇑(Submodule.unitsToPic R A) ⇑(CommRing.Pic.mapAlgebra R A)\", \"doc\": \"The group homomorphism from the Picard group of $ R $ to the Picard group of $ A $, induced by an $ R $-algebra structure, satisfies the multiplicative exactness condition with respect to the monoid h\"}\n  {\"name\": \"instCommGroupPic\", \"module\": \"Mathlib/RingTheory/PicardGroup\", \"type\": \"(R : Type u) → [inst : CommSemiring R] → CommGroup (CommRing.Pic R)\", \"doc\": \"For any commutative semiring $ R $, its Picard group $ \\\\mathrm{Pic}(R) $, which consists of isomorphism classes of invertible semimodules over $ R $ under tensor product, forms an abelian group. The g\"}\n  {\"name\": \"CommRing.Pic.mapRingHom\", \"module\": \"Mathlib/RingTheory/PicardGroup\", \"type\": \"{R : Type u} →\\n  [inst : CommSemiring R] → {S : Type u_9} → [inst_1 : CommSemiring S] → (R →+* S) → CommRing.Pic R →* CommRing.Pic S\", \"doc\": \"Given a ring homomorphism $ f : R \\to S $ between commutative semirings, this defines a group homomorphism from the Picard group $ \\\\mathrm{Pic}(R) $ to $ \\\\mathrm{Pic}(S) $. It maps each isomorphism cla\"}\n  {\"name\": \"CommRing.Pic.mapAlgebra_mapAlgebra\", \"module\": \"Mathlib/RingTheory/PicardGroup\", \"type\": \"∀ {R : Type u} [inst : CommSemiring R] {A : Type u_7} {B : Type u_8} [inst_1 : CommSemiring A] [inst_2 : CommSemiring B]\\n  [inst_3 : Algebra R A] [inst_4 : Algebra R B] [inst_5 : Algebra A B] [IsScalarTower R A B] {M : CommRing.Pic R},\\n  (CommRing.Pic.mapAlgebra A B) ((CommRing.Pic.mapAlgebra R A) M\", \"doc\": \"For any commutative semiring $ R $ and $ R $-algebras $ A $ and $ B $, the composition of the group homomorphism $ \\\\mathrm{Pic}(R) \\\\to \\\\mathrm{Pic}(A) $ followed by $ \\\\mathrm{Pic}(A) \\\\to \\\\mathrm{Pic}(\"}\n  {\"name\": \"CommRing.Pic.mapAlgebra_comp_mapAlgebra\", \"module\": \"Mathlib/RingTheory/PicardGroup\", \"type\": \"∀ {R : Type u} [inst : CommSemiring R] {A : Type u_7} {B : Type u_8} [inst_1 : CommSemiring A] [inst_2 : CommSemiring B]\\n  [inst_3 : Algebra R A] [inst_4 : Algebra R B] [inst_5 : Algebra A B] [IsScalarTower R A B],\\n  (CommRing.Pic.mapAlgebra A B).comp (CommRing.Pic.mapAlgebra R A) = CommRing.Pic.map\", \"doc\": \"For a commutative semiring $ R $ and $ R $-algebras $ A $ and $ B $, the composition of the group homomorphism $ \\\\mathrm{Pic}(R) \\\\to \\\\mathrm{Pic}(A) $ induced by the $ R $-algebra structure on $ A $ a\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern ring Picard groups, abstract groups, Lie/root systems or measurable Borel spaces; none gives the algebraic-group-scheme assertion or a one-line specialization"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Pic\", \"character\"",
+   "results": "[loogle] OK 0 hit(s)",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern ring Picard groups, abstract groups, Lie/root systems or measurable Borel spaces; none gives the algebraic-group-scheme assertion or a one-line specialization"
+  },
+  {
+   "tool": "grep",
+   "query": "[Cc]haracter.*[Pp]ic|[Pp]ic.*[Cc]haracter",
+   "results": "[grep] OK 2 hit(s)\n  {\"file\": \"Mathlib/Algebra/Group/AddChar.lean\", \"line\": \"39\", \"text\": \"https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Additive.20characters\"}\n  {\"file\": \"Mathlib/MeasureTheory/Constructions/Polish/Basic.lean\", \"line\": \"176\", \"text\": \"equivalent characterizations of this definition. For the definition, we pick one that avoids\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern ring Picard groups, abstract groups, Lie/root systems or measurable Borel spaces; none gives the algebraic-group-scheme assertion or a one-line specialization"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Exact sequence characters Picard groups multiplicative isogeny algebraic group schemes",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"Submodule.mulExact_unitsToPic_mapAlgebra\", \"module\": \"Mathlib.RingTheory.PicardGroup\", \"type\": \": Function.MulExact (unitsToPic R A) (mapAlgebra R A)\", \"doc\": \"The group homomorphism from the Picard group of $ R $ to the Picard group of $ A $, induced by an $ R $-algebra structure, satisfies the multiplicative exactness condition with respect to the monoid h\"}\n  {\"name\": \"Submodule.mulExact_unitsMap_spanSingleton_unitsToPic\", \"module\": \"Mathlib.RingTheory.PicardGroup\", \"type\": \": Function.MulExact (Units.map (spanSingleton R).toMonoidHom) (unitsToPic R A)\", \"doc\": \"The composition of the monoid homomorphism from units of $ R $ to invertible submodules of $ A $ (via span of singleton elements) and the homomorphism from invertible submodules to the Picard group $ \"}\n  {\"name\": \"CommRing.Pic.functor\", \"module\": \"Mathlib.RingTheory.PicardGroup\", \"type\": \": CommSemiRingCat.{u} ⥤ CommGrpCat.{u}\", \"doc\": \"The functor from the category of commutative semirings to the category of commutative groups, which sends each commutative semiring $ R $ to its Picard group $ \\\\mathrm{Pic}(R) $ and each ring homomorp\"}\n  {\"name\": \"CommRing.Pic.ext_iff\", \"module\": \"Mathlib.RingTheory.PicardGroup\", \"type\": \"{M N : Pic R} : M = N ↔ Nonempty (M ≃ₗ[R] N)\", \"doc\": \"For any two elements $ M $ and $ N $ in the Picard group $ \\\\mathrm{Pic}(R) $, $ M = N $ if and only if there exists an $ R $-linear isomorphism between the corresponding invertible modules $ M $ and $\"}\n  {\"name\": \"CommRing.Pic.mk_eq_iff\", \"module\": \"Mathlib.RingTheory.PicardGroup\", \"type\": \"{N : Pic R} : Pic.mk R M = N ↔ Nonempty (M ≃ₗ[R] N)\", \"doc\": \"For a commutative semiring $ R $, two invertible $ R $-modules $ M $ and $ N $ represent the same element in the Picard group $ \\\\mathrm{Pic}(R) $ if and only if $ M $ and $ N $ are isomorphic as $ R $\"}\n  {\"name\": \"Submodule.unitsQuotEquivRelPic_apply_coe\", \"module\": \"Mathlib.RingTheory.PicardGroup\", \"type\": \"∀ (R : Type u) (A : Type u_4) [inst : CommSemiring R] [inst_1 : CommSemiring A] [inst_2 : Algebra R A]\\n  [inst_3 : FaithfulSMul R A] (a : (Submodule R A)ˣ ⧸ (Units.map ↑(Submodule.spanSingleton R)).range),\\n  ↑((Submodule.unitsQuotEquivRelPic R A) a) =\\n    ↑((QuotientGroup.quotientKerEquivRange (Subm\", \"doc\": \"The quotient group of invertible submodules of an $ R $-module $ A $ by the subgroup of principal invertible submodules is multiplicatively isomorphic to the relative Picard subgroup $ \\\\mathrm{relPic}\"}\n  {\"name\": \"Submodule.unitsQuotEquivRelPic\", \"module\": \"Mathlib.RingTheory.PicardGroup\", \"type\": \": (Submodule R A)ˣ ⧸ (Units.map (spanSingleton R).toMonoidHom).range ≃* relPic R A\", \"doc\": \"The quotient group of invertible submodules of an $ R $-module $ A $ by the subgroup of principal invertible submodules (those generated by a single element) is multiplicatively isomorphic to the rela\"}\n  {\"name\": \"CommRing.Pic\", \"module\": \"Mathlib.RingTheory.PicardGroup\", \"type\": \"(R : Type u) [CommSemiring R] : Type u\", \"doc\": \"The Picard group of a commutative semiring $ R $ is defined as the group of units of the skeleton of the category of semimodules over $ R $, with the type shrunk to ensure smallness. This corresponds \"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern ring Picard groups, abstract groups, Lie/root systems or measurable Borel spaces; none gives the algebraic-group-scheme assertion or a one-line specialization"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-semisimple-multiplicative-universal-cover",
+  "date": "2026-10-23",
+  "group": "N5"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Haboush symmetric-power lifting for a trivial quotient representation. Supporting representation-theoretic input: Central covering of a reductive group by a torus and a simply connected semisimple group. Milne central-cover construction: Multiplicative simply connected covering of a semisimple algebraic group. Supporting Milne construction: Proposition 18.18, sequence (129), printed p.391, specialized to finite multiplicative kernel; all connected groups are split over the algebraically closed F.",
+   "via": [
+    "lem-sfb-semisimple-multiplicative-universal-cover",
+    "lem-sfb-reductive-torus-simply-connected-cover",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-character-picard-isogeny-sequence",
+  "worker": "stage1",
+  "summary": "Followed Milne Proposition 18.18 by two Borel characteristic sequences and a fully written element chase. Added two statement-only Borel inputs, identified the connecting map by its full fpqc descent datum, and retained all hypotheses and the original statement.",
+  "blueprint": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Haboush symmetric-power lifting for a trivial quotient representation. Supporting representation-theoretic input: Central covering of a reductive group by a torus and a simply connected semisimple group. Milne central-cover construction: Multiplicative simply connected covering of a semisimple algebraic group. Supporting Milne construction: Proposition 18.18, sequence (129), printed p.391, specialized to finite multiplicative kernel; all connected groups are split over the algebraically closed F. Expanded the supporting Milne Proposition 18.18 by its characteristic-sequence diagram.",
+  "tool_uses": [
+   {
+    "node": "lem-pc-fpqc-descent",
+    "why": "Generic fpqc descent of quasi-coherent and invertible modules (Stacks 023T) identifies the explicit contracted-bundle descent datum along the multiplicative isogeny; the stability unit supplies no descent theorem for this algebraic-group prerequisite."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pc-fpqc-descent"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q63-85ce228e5",
+  "group": "Q63",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q63-85ce228e5 (reviewer sub-agent of L); spot-checked: I read Milne Algebraic Groups 2017: 18.11, 18.14, Theorem 18.15 (128), Proposition 18.18 (129) with its proof diagram (pp.389-391), and section 18.f Theorem 18.32 with its specialisation to G->G/B (pp.395-396). The L(chi) sign rule (g,x)b=(gb,chi(b^-1)x) is the one used in both new nodes and in steps 2-3. The item agrees with (129) specialised to a finite diagonalizable kernel over an algebraically closed F. New node lem-sfb-borel-characteristic-picard-sequence is the Borel form of 18.15/18.32. It holds for nonreductive G because B is split solvable, the torsor is Zariski-locally trivial and Pic(B)=0. Tested on G_m, G_a and SL_2. New node lem-sfb-multiplicative-isogeny-borel-comparison is true even for non-reduced kernels. N is central of multiplicative type, so it lies in every maximal torus T1, hence N is in B'. B' and f^-1(B0) are both N-torsors over B0, so they are equal and f^-1(B0) is smooth. X*(T1)->X*(N) is surjective. Tested on [n] on G_m, SL_2->PGL_2 and SL_p->PGL_p in characteristic p. Neither new node duplicates an existing one: reductive-borel-pair-structure, homogeneous-line-bundle-sections, picard-trivial-multiplicative-cover and multiplicative-isogeny-composition all state other things. Neither restates a clause of the item. I checked every line of steps 1, 2, 4 and 5 against the two exact rows and the comparison row, and the chase is correct. In step 3 the frame identity [gn,1]=[g,lambda(n)], the full descent datum via G1xN = G1x_{G0}G1, and f being an fpqc cover are all correct. FIX: step 3 cited sk-thm-picard-descent, a Picard-framework node phrased for an unspecified X_T whose closure (about 5600 nodes) reaches def-pod-ring-scalar-extension and sec-trace-formula lemmas. That route is generic, not part of either assumed proof, but it is unneeded. I replaced it with lem-pc-fpqc-descent (Stacks 023T: equivalence with fpqc descent data plus descent of invertible modules, already used by other sfb nodes, 60-node closure). Step 3 uses, proof_deps and split_report.tool_uses are updated, and the item's closure no longer reaches sec-trace-formula or sec-poincare-duality. The statement and the new nodes are unchanged.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.CharacterPicardIsogenySequence",
+  "declaration": "AlgebraicGeometry.characterPicard_isogeny_sequence",
+  "declarations": [
+   "AlgebraicGeometry.characterPicard_multiplicativeComm",
+   "AlgebraicGeometry.characterPicard_precomp",
+   "AlgebraicGeometry.characterPicard_value",
+   "AlgebraicGeometry.characterPicard_frame",
+   "AlgebraicGeometry.IsCharacterPicardDescentClass",
+   "AlgebraicGeometry.characterPicard_isogeny_sequence"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/CharacterPicardIsogenySequence.lean",
+  "statement": "theorem characterPicard_isogeny_sequence [IsAlgClosed F] (G₁ G₀ : Over (Spec (.of F))) [GrpObj G₁] [GrpObj G₀] [IsAffine G₁.left] [IsAffine G₀.left] [LocallyOfFiniteType G₁.hom] [QuasiCompact G₁.hom] [LocallyOfFiniteType G₀.hom] [QuasiCompact G₀.hom] [Smooth G₁.hom] [Smooth G₀.hom] [ConnectedSpace G₁.left] [ConnectedSpace G₀.left] (f : G₁ ⟶ G₀) [IsMonHom f] (hflat : f.left.appTop.hom.FaithfullyFlat) (hfinite : IsFinite (GrpObj.ker f).hom) (hdiag : ∃ (M : Type u) (_ : CommGroup M) (_ : Finite M), Nonempty (Grp.mk (GrpObj.ker f) ≅ Grp.mk ((Spec (.of (MonoidAlgebra F M))).asOver (Spec (.of F))))) : ∃ δ : Additive (Grp.mk (GrpObj.ker f) ⟶ Grp.mk (StandardGroupSchemes.multiplicative F)) →+ Additive G₀.left.Pic, (∀ χ, IsCharacterPicardDescentClass f χ (δ χ)) ∧ Function.Injective (characterPicard_precomp f) ∧ Function.Exact (characterPicard_precomp f) (characterPicard_precomp (GrpObj.kerι f)) ∧ Function.Exact (characterPicard_precomp (GrpObj.kerι f)) δ ∧ Function.Exact δ (Scheme.Pic.mapHom f.left).toAdditive ∧ Function.Surjective (Scheme.Pic.mapHom f.left).toAdditive",
+  "branch": "sheaf-dag",
+  "by": "Q91",
+  "date": "2026-10-23",
+  "existing": false,
+  "note": "The canonical-arrow helpers are part of this node as authorized by the stage-2 brief. Characters are existing group-object Hom types, written additively. The diagonalizable kernel is stated directly by an isomorphism with the existing Spec of a finite commutative group algebra, with its canonical Hopf structure; no second notions are introduced. The connecting homomorphism is existential with its complete character-equivariant frame characterization, not an arbitrary map or choice of an unspecified object."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-3f8fbc33f",
+  "group": "Q91",
+  "result": "pass",
+  "note": "Read node, 8 stmt_deps, Milne pp.390-391 (Prop 18.18 (129), L(chi) convention), module, report (Worker report + Second reading by Q91 present). All hypotheses (IsAlgClosed, affine finite type, smooth, connected, IsMonHom, faithfully flat appTop, IsFinite kernel, Grp-iso of GrpObj.ker f with Spec MonoidAlgebra F M Hopf group) match, none stronger; X* = Grp homs into the recorded G_m with pointwise Hom.commGroup (same GrpObj instance as def-sc-gm-ga); res/f* = Yoneda precomposition; Pic pullback = Scheme.Pic.mapHom; existential additive delta pinned by the all-test-scheme frame equation s(gn)=chi(n)s(g), which determines delta uniquely via G1xN = G1x_G0 G1 and fpqc descent (sign allowed by node); five exactness clauses all present. Edge cases: identity, mu_p nonreduced kernels, trivial group, zero character, universes. Helpers non-hollow with source/blueprint docstrings; proof docstring carries 5 steps; sorry only; lean.statement verbatim; node otherwise equal to live, not stated elsewhere. Advisory: Scheme.Pic (def-sc-picard-group) and module-pullback API used outside stmt_deps; node defines Pic inline, S2 cannot change stmt_deps. No compile needed (no file changed)."
+ }
+}

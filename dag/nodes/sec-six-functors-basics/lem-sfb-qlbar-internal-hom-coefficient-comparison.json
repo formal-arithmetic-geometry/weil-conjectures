@@ -30,108 +30,86 @@
   "def-sfb-section-scalar-map-data",
   "def-sfb-scalar-hom-comparison-data",
   "def-sfb-internal-section-derived-tensor-comparison",
-  "def-coef-hom-representative-evaluation"
+  "def-coef-hom-representative-evaluation",
+  "def-sfb-internal-section-hom-comparison-data"
  ],
  "proof": [
   {
-   "text": "Let $I$ be the poset of finite intermediate fields of $\\Omega/\\mathbf Q_\\ell$, and $I_E$ its full subposet on fields containing $E$. These are small in the stipulated coefficient universe: an intermediate field is a subfield of the fixed set $\\Omega$, hence these collections are sets there. The finite-compositum statement gives $FG\\in I_E$ for $F,G\\in I_E$, while $E\\in I_E$. Thus $I_E$ is nonempty and filtered. For $H\\in I$, $EH$ is finite and contains both $E$ and $H$. More explicitly, the poset of objects of $I_E$ above $H$ contains $EH$ and is directed by composita. Hence the inclusion $I_E\\subseteq I$ is cofinal. These assertions require no condition on $X$.",
+   "text": "For the proved auxiliary clauses, naturality is the existing native scalar-Hom naturality after unfolding its identical evaluation transpose. The restriction equation is the generic uniqueness-of-right-adjoints mate identity. The small field tail is filtered and final by the existing finite-subextension order; its finite-free assertion follows directly from [sk-prop-sfb-cartesian-coefficients]. Extension of the regular module is identified with the target regular module by the bimodule right unitor, retaining its multiplication equation; naturality of mixedScalarMap gives the actual field and closure legs. Finally restrict [sk-prop-sfb-qlbar-colimit-x] along the final field functor to prove coefficientRingColimit.",
    "uses": [
-    "def-weil-size-convention",
-    "det-def-sfb-qlbar-condensed-subextensions"
+    "lem-sfb-internal-section-hom-continuity-comparison",
+    "det-def-sfb-qlbar-condensed-subextensions",
+    "sk-prop-sfb-cartesian-coefficients",
+    "lem-sfb-subfield-coefficient-map-comp",
+    "sk-prop-sfb-qlbar-colimit-x"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
-    "place": "Lemma 6.8.2(2), finite-subextension index; explicit finite-compositum and smallness verification."
-   }
+   "elementary": false
   },
   {
-   "text": "For $F\\in I_E$ put $A_F=F_X$ with its $S=E_X$-algebra structure induced by inclusion. For $F\\ne E$, the finite-free coefficient lemma gives $A_F\\cong S^{\\oplus[F:E]}$; for $F=E$ use the identity $S\\cong S^{\\oplus1}$. This only chooses bases to verify the finite-free hypothesis. It does not define any comparison map using those bases. All coefficient transitions and cocone legs are the maps induced by the actual field inclusions.",
+   "text": "For coefficient_comparison_roof, choose the normalized scalar Hom models and their adjunction from lem-sfb-dc-hom-scalar-adjunction. Apply homPresentation_nonempty and internal_section_hom_continuity_comparison to the prescribed models over both section rings. Their evaluation equations are precisely HomTransportNormalized; their ordinary and derived restriction comparisons give the section identity and the recorded localization normalization. Apply the normalized adjunction-transport equation to the identity of scalar extension of K. Expanding the two Hom transposes and cancelling the image of the inverse extension comparison proves the required unit equation. The hom field is the stated native comparison equation, since both comparison definitions are the same evaluation transpose. Attach the existing evaluationRoof witness.",
+   "uses": [
+    "lem-sfb-dc-hom-scalar-adjunction",
+    "lem-sfb-internal-section-hom-continuity-comparison",
+    "lem-sfb-hom-flat-evaluation-roof"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use fieldDiagram and coefficientModules directly for the filtered small index and the stage identifications. Convert the finite internal biproduct of regular modules to a coproduct, transport it by finite_free_iff, and identify its finite coproduct with the finite product required by the strict filtered-Hom theorem. For the specified coefficient cocone, apply nonempty_isColimit_coefficientComplexCocone to the regular E-module concentrated in degree zero and to the final field-tail functor. The section equivalence on complexes and degree-zero evaluation preserve this colimit; their image cocone is definitionally coefficientCocone. This avoids the larger finite-free algebra-presentation package and a separate sectionwise module-colimit reconstruction.",
    "uses": [
     "sk-prop-sfb-cartesian-coefficients",
-    "def-sfb-subfield-coefficient-map",
-    "def-sfb-subfield-to-qlbar-coefficient-map"
+    "lem-sfb-internal-section-hom-continuity-comparison",
+    "lem-weil-pbc-condensed-coefficient-complex-colimit"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-prop-sfb-cartesian-coefficients/_section.md",
-    "place": "Assertion (2), finite-free coefficient sheaves; identity extension treated separately."
-   }
+   "elementary": false
   },
   {
-   "text": "Write $a_{H,J}:H_X\\to J_X$ for an inclusion and $q_H:H_X\\to T$ for the closure coefficient map. The coefficient-composition lemma gives $q_Ja_{H,J}=q_H$; the maps $a$ themselves compose as their field inclusions do. The full ring-sheaf colimit is $T$ by the coefficient-colimit theorem. Its restriction to $I_E$ has the same universal property: given a ring-sheaf cocone $t_F:F_X\\to B$ on $I_E$, extend it to $I$ by $\\widetilde t_H=t_{EH}a_{H,EH}$. If $H\\subseteq J$, then $EH\\subseteq EJ$ and the cocone equation gives $\\widetilde t_Ja_{H,J}=\\widetilde t_H$. The full colimit therefore gives a unique $t:T\\to B$. For $F\\in I_E$, $EF=F$, so $tq_F=t_F$; conversely these equations force $tq_H=t_{EH}a_{H,EH}$ for every $H$, proving uniqueness. Thus the ring-sheaf colimit of the tail is $T$ with the specified $q_F$. For an $S$-algebra cocone, $tq_E=t_E$ is its structural map from $S$; the same universal map is therefore $S$-linear and gives the $S$-algebra colimit. The tail-module-colimit lemma supplies the underlying $S$-module colimit with these very same maps and actions. In particular $q_Fa_{E,F}=q_E$, as needed for a diagram of $S$-algebras.",
+   "text": "Unfold the supplied continuity hypothesis on the representative P. Apply the proved generic strictColimitFormula_of_finiteFree to the finite-free coefficient diagram and its prescribed colimit cocone. It supplies all eleven clauses of StrictColimitFormula, including evaluation normalization, both colimit squares, the separate Hom postcomparison, and the stage and vertex quasi-isomorphisms. The generic assembly is compiled as a separate proved support module; no additional unproved statement is introduced.",
    "uses": [
-    "lem-sfb-subfield-coefficient-map-comp",
-    "sk-prop-sfb-qlbar-colimit-x",
-    "def-weil-pbc-category-colimit",
-    "lem-sfb-qlbar-tail-module-colimit"
+    "lem-sfb-strict-finite-free-hom-colimit-formula"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
-    "place": "Lemma 6.8.2(2); explicit restriction of its coefficient-ring colimit to F containing E, followed by the existing tail module comparison."
-   }
+   "elementary": false
   },
   {
-   "text": "Filtered colimits of $S$-module sheaves are exact on the chosen small site. Indeed, forget a small filtered diagram of short exact sequences to abelian sheaves. The module forgetful functor is exact and preserves its colimit, and filtered colimits of abelian sheaves are exact. It is faithful, so the vanishing of the underlying kernel/image quotient implies its vanishing as a module sheaf; it therefore reflects exactness as well. This proves the required exactness for precisely the small filtered index $I_E$. These are sheaf colimits, rather than an assertion that arbitrary section functors preserve colimits.",
+   "text": "Choose a K-flat resolution of a complex representing the section image of K, retaining its termwise flatness, and a bounded-below complex representing the section image of L. The latter exists by the transported cohomological lower bound. Apply coefficient_colimit_formula. coefficientModules, the ordinary restriction comparison r, and the section-unit isomorphism identify the cocone vertex with the restricted regular closure module. Naturality of the strict numerator transports its quasi-isomorphism to this coefficient module. Compose the ordinary scalar adjunction with the two section equivalences. The already-given ordinary restriction isomorphism identifies its right adjoint with ordinary scalar restriction; uniqueness of left adjoints then transports exactness of native scalar extension to the scalar model used in coefficient_comparison_roof.",
    "uses": [
-    "lem-weil-pbc-module-sheaves-colimits-forgetful",
-    "lem-weil-pbc-site-abelian-sheaves-filtered-colimits-exact"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/sites-modules.tex",
-    "place": "Tag 03DA (lemma-abelian), Tag 03DB (lemma-limits-colimits), and Tag 03CO (lemma-limits-colimits-abelian-sheaves)."
-   }
-  },
-  {
-   "text": "Transport to ringed-site module sheaves. The item's $D(S)$, $D(T)$, $\\otimes^{\\mathrm L}$ and $R\\mathcal Hom$ are those of module objects over the ring objects $S=E_X$ and $T=\\Omega_X$ [sk-def-sfb-derived-tensor-hom], while the general comparison of step 6 is stated for sheaves of modules over a sheaf of rings, its K-flat tensor and the K-injective model $H_R$. Apply the module-object/ringed-site comparison to $B=S$ and to $B=T$: the equivalence $F$ leaves underlying abelian sheaves, sections and maps unchanged, its termwise extension $D(F)$ identifies the K-flat relative tensor with the ringed-site one (the tensor comparison: $F$ is exact, matches total tensor complexes and preserves and reflects K-flat complexes, so $T\\otimes^{\\mathrm L}_S-$ goes to derived scalar extension along the section-ring map $S_{\\mathrm{sec}}\\to T_{\\mathrm{sec}}$), and gives isomorphisms $D(F)R\\mathcal Hom_B(K,N)\\cong H_{B_{\\mathrm{sec}}}(D(F)K,D(F)N)$, natural in both variables and carrying evaluation to evaluation. Hence: (a) the finite-free and colimit statements of steps 2-3 hold verbatim for the section-ring sheaves, since $F$ does not change underlying sheaves or maps; (b) termwise colimits of complexes are unchanged by $D(F)$, and naturality in $N$ carries the evaluation-induced continuity map of the hypothesis on $K$ to the evaluation-induced map $\\varinjlim_iH(D(F)K,M_i^\\bullet)\\to H(D(F)K,\\varinjlim_iM_i^\\bullet)$, which is therefore an isomorphism; (c) since the evaluation-transpose comparison is defined from evaluation morphisms and the scalar adjunction, the comparison of step 6 for $D(F)K,D(F)L$ corresponds under these isomorphisms to the item's displayed map, and likewise each stage map of the three-arrow formula. The lower bound of $L$ is unchanged.",
-   "uses": [
-    "lem-sfb-module-object-ringed-site-derived-comparison",
+    "lem-pc-kflat-resolution",
+    "lem-weil-pbc-independent-sheaf-tensor-colimits",
+    "lem-sfb-internal-section-hom-continuity-comparison",
     "lem-pe-internal-section-tensor-comparison",
-    "sk-def-sfb-derived-tensor-hom"
+    "lem-sfb-qlbar-flat"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-modules.tex",
-    "place": "Tags 03DA/03DB (module sheaves over a ringed topos), used through the existing module-object/ringed-site comparison nodes; no SGA source."
-   }
+   "elementary": false
   },
   {
-   "text": "After the transport of step 5, apply the general filtered finite-free internal-Hom comparison to $D(F)K$ and $D(F)L$, with its base ring $R=S=E_X$, coefficient diagram $(S_i)=(A_F)_{F\\in I_E}$, and colimit algebra equal to our $T$. Step 1 verifies a small filtered index, step 2 verifies finite freeness, step 3 verifies both the algebra and underlying module colimits with their given legs, and step 4 verifies exact filtered colimits. The hypothesis on $K$ applies to every small filtered diagram, hence to this particular index; the required lower-bound hypothesis on $L$ is exactly the one assumed here. The general theorem gives the canonical evaluation-transpose isomorphism in $D(T)$ (transported back by step 5), natural in both inputs, and identifies its restriction with the three-arrow formula in the statement. Its formula uses a bounded-below representative of $L$; no bound on a representative of $R\\mathcal Hom_S(K,L)$ is required. The same theorem states that the finite-stage comparisons are induced by evaluation, commute with every transition of the algebra diagram, and are independent of finite bases. They give all the remaining clauses for our field diagram. No constructibility, completeness or site-perfectness hypothesis has entered this specialization.",
+   "text": "In the evaluation roof, exact scalar extension makes every representative-comparison map invertible, hence also sourceMap and targetMap. The denominator is a quasi-isomorphism by the stated K-flat and termwise-flat hypotheses. The roof equation and the vertex numerator quasi-isomorphism show that restrictedComparison is invertible for the chosen representatives. Its naturality transports this result to the given derived inputs. Conservative scalar restriction then gives invertibility of the ringed-site evaluation transpose. The final equation of coefficient_comparison_roof and the section equivalence reflect this invertibility back to evaluationComparison. Only the chosen representative of L is bounded below; no bound on internal Hom is used.",
    "uses": [
-    "lem-sfb-dc-hom-filtered-colimit"
+    "lem-sfb-hom-flat-evaluation-roof",
+    "lem-sfb-dc-hom-scalar-adjunction",
+    "lem-sfb-internal-section-hom-continuity-comparison"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
-    "place": "Proposition 6.8.14 and Remark 6.8.15 as motivation; apply the existing explicit-continuity general comparison, an agent formulation rather than a verbatim assertion of those results."
-   }
+   "elementary": false
   }
  ],
  "proof_deps": [
-  "def-weil-size-convention",
+  "lem-sfb-internal-section-hom-continuity-comparison",
   "det-def-sfb-qlbar-condensed-subextensions",
   "sk-prop-sfb-cartesian-coefficients",
-  "def-sfb-subfield-coefficient-map",
-  "def-sfb-subfield-to-qlbar-coefficient-map",
   "lem-sfb-subfield-coefficient-map-comp",
   "sk-prop-sfb-qlbar-colimit-x",
-  "def-weil-pbc-category-colimit",
-  "lem-sfb-qlbar-tail-module-colimit",
-  "lem-weil-pbc-module-sheaves-colimits-forgetful",
-  "lem-weil-pbc-site-abelian-sheaves-filtered-colimits-exact",
-  "lem-sfb-dc-hom-filtered-colimit",
-  "lem-sfb-module-object-ringed-site-derived-comparison",
-  "lem-pe-internal-section-tensor-comparison",
-  "sk-def-sfb-derived-tensor-hom",
+  "lem-sfb-dc-hom-scalar-adjunction",
   "lem-sfb-hom-flat-evaluation-roof",
-  "lem-sfb-internal-section-scalar-adjunction"
+  "lem-weil-pbc-condensed-coefficient-complex-colimit",
+  "lem-sfb-strict-finite-free-hom-colimit-formula",
+  "lem-pc-kflat-resolution",
+  "lem-weil-pbc-independent-sheaf-tensor-colimits",
+  "lem-pe-internal-section-tensor-comparison",
+  "lem-sfb-qlbar-flat"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
-  "place": "Lemma 6.8.2(2), Proposition 6.8.14 and Remark 6.8.15 motivate the coefficient passage. This split specializes the already existing general filtered finite-free internal-Hom comparison after explicitly verifying its coefficient-diagram hypotheses; the conditional continuity assertion is not attributed verbatim to Bhatt–Scholze."
+  "place": "Lemma 6.8.2(2), Proposition 6.8.14 and Remark 6.8.15 motivate the coefficient passage; the conditional continuity assertion is an agent formulation. Preserve the existing F6 auxiliary proofs and U4 evaluation-roof assembly. P4 proves the two remaining clauses by specializing the existing strict finite-free filtered-Hom theorem, using the already-proved canonical coefficient-complex colimit rather than the larger algebra-presentation package, and then combining the normalized evaluation roof with representative isomorphisms and conservative restriction. Generic K-flat resolutions and tensor-colimit preservation are categorical tools; the restricted-Hom route of the unit is retained. The proved generic strict-cocone assembly is factored into lem-sfb-strict-finite-free-hom-colimit-formula; all existing public declarations and definitions of this item are retained. The unchanged coefficient data and existing normalized roof are checked separately in QlbarInternalHomCoefficientData and publicly re-exported by the item."
  },
  "mathlib_searches": [
   {
@@ -225,31 +203,15 @@
   "is": null
  },
  "split_report": {
-  "date": "2026-10-21",
+  "date": "2026-10-22",
   "item": "lem-sfb-qlbar-internal-hom-coefficient-comparison",
   "worker": "stage1",
-  "summary": "No new nodes: use the existing general filtered finite-free internal-Hom comparison, finite-compositum theorem, coefficient finite-freeness and tail-module colimit. Explicitly verify smallness, cofinality and the ring-sheaf tail colimit, then filtered module exactness. Remove the unused constructibility statement dependency. Statement unchanged. All item Mathlib searches actually run through msearch.py; inherited searches retained. Reviewer FIX (Q34 maintainer reader): added step 5 transporting the item's module-object D(S), D(T), tensor and internal Hom to the ringed-site setting of the general comparison via lem-sfb-module-object-ringed-site-derived-comparison and lem-pe-internal-section-tensor-comparison.",
+  "summary": "Repair of the human re-split return: statement unchanged; old steps 1–3 are a new statement-only finite-free tail algebra presentation task, old step 5 and its map-normalization application are a separate statement-only continuity/evaluation transport task. The elementary exactness argument remains, and the parent applies the existing general filtered-Hom theorem. Every old proof paragraph is retained verbatim in report.md as a handoff, with its task mapping. At least two independent comparable tasks are now available.",
   "blueprint": "Algebraic-closure paragraph of lem-sfb-dc-hom-preserves.proof.md: finite-stage coefficient descent and passage to the filtered closure coefficient. The immediate parent is lem-sfb-dc-hom-small-coefficients step 4. The inherited created.item chain reaches a module name, so blueprint_refs.py ancestor returns None; retain its null from.node and its explicit from.place rather than invent provenance.",
   "tool_uses": [
    {
-    "node": "det-def-sfb-qlbar-condensed-subextensions",
-    "why": "Finite-compositum and finite-subextension facts verify the small filtered coefficient index; they are coefficient algebra tools, not a replacement of the unit Hom route."
-   },
-   {
-    "node": "sk-prop-sfb-cartesian-coefficients",
-    "why": "Gives the finite-free coefficient-sheaf hypothesis at each field stage; the restricted-functor unit has no separate coefficient-basis statement."
-   },
-   {
-    "node": "lem-sfb-subfield-coefficient-map-comp",
-    "why": "Identifies the actual closure cocone legs under a field inclusion, needed to preserve the evaluation-normalized coefficient diagram."
-   },
-   {
-    "node": "sk-prop-sfb-qlbar-colimit-x",
-    "why": "Provides the ambient ring-sheaf colimit over all finite subextensions, restricted here to the cofinal tail by an explicit universal-property argument."
-   },
-   {
-    "node": "lem-sfb-qlbar-tail-module-colimit",
-    "why": "Provides the underlying E_X-module colimit with the specified maps, a separate hypothesis of the general Hom comparison."
+    "node": "lem-sfb-qlbar-flat",
+    "why": "Exact coefficient extension on every scheme verifies the scalar-normalization hypothesis of the transport task; it is a coefficient tool, not a replacement of the restricted-Hom route."
    },
    {
     "node": "lem-weil-pbc-module-sheaves-colimits-forgetful",
@@ -258,10 +220,6 @@
    {
     "node": "lem-weil-pbc-site-abelian-sheaves-filtered-colimits-exact",
     "why": "Generic exactness of filtered colimits on the chosen small site verifies the abelian hypothesis; this node is already a Mathlib leaf."
-   },
-   {
-    "node": "lem-pe-internal-section-tensor-comparison",
-    "why": "Identifies the module-object relative K-flat tensor with the ringed-site tensor so that the general comparison, stated for sheaves of modules, applies to the item's module-object derived categories; no node of the restricted-functor unit gives this identification."
    }
   ]
  },
@@ -273,15 +231,16 @@
   "lem-sfb-qlbar-tail-module-colimit",
   "lem-weil-pbc-module-sheaves-colimits-forgetful",
   "lem-weil-pbc-site-abelian-sheaves-filtered-colimits-exact",
-  "lem-pe-internal-section-tensor-comparison"
+  "lem-pe-internal-section-tensor-comparison",
+  "lem-sfb-qlbar-flat"
  ],
  "reviewed": {
-  "date": "2026-10-21",
+  "date": "2026-10-22",
   "by": "L",
-  "reviewer": "NT-cc-Q34-444b69c31",
-  "group": "Q34",
+  "reviewer": "NT-cc-N5-6ab60e3ae",
+  "group": "N5",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q34-444b69c31 (reviewer sub-agent of L); spot-checked: I read the whole item, the statement of every cited node, BS Lemma 6.8.2 and Prop 6.8.14/Rem 6.8.15 (pp. 58-62), and Stacks 03CO/03DA/03DB. The delivery is a first split. It adds no new nodes and leaves the statement unchanged; dropping the bounded-constructible stmt_dep is correct. Live is still unsplit, there is no repair note, the item is not on the dropped list and there is no cycle. Steps 1-4 hold: I_E is small, filtered and cofinal by composita; finite freeness follows from cartesian-coefficients (2); the restriction of the colimit to the tail is written out with uniqueness and S-linearity via q_E; exact faithful forget reflects exactness. Step 5 matches lem-sfb-dc-hom-filtered-colimit hypothesis by hypothesis, and its conclusion gives every clause of the item. The base-change map is q_E: E_X -> Omega_X. Fault (C1/E6): step 5 silently treated the item's module-object categories (sk-def-sfb-derived-tensor-hom: relative K-flat tensor, closed-structure RHom) as the ringed-site setting of the generic theorem (sheaves of modules, def-pur K-injective H_R). The bridge is needed both to transfer the continuity hypothesis and to bring the conclusion back. FIX: I added a new step 5 that transports through lem-sfb-module-object-ringed-site-derived-comparison (same unit; RHom iso natural in both variables and compatible with evaluation) and lem-pe-internal-section-tensor-comparison (tensor and K-flat comparison, declared in tool_uses). Old step 5 is now step 6, and proof_deps equals the union of the uses. Edge cases checked: E=Q_l, F=E, X empty, K or L zero, a single stage, and L bounded below while RHom is unbounded. The continuity hypothesis cannot be dropped (RHom from an infinite direct sum).; 1 file(s) fixed by the reviewer"
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-N5-6ab60e3ae (reviewer sub-agent of L); spot-checked: This is a legitimate human re-split. The note in side-live/live coord/repair-notes was released 2026-10-22 05:47Z, the live item has reviewed (Q34) and reviewed_lean (N8) with reviewed_proof null, and the item is not on route-pivot-dropped. The statement and stmt_deps are byte-identical to live, so the target is not weakened. Step-by-step comparison with the base: old steps 1–3 (2254 chars) went into Task A, lem-sfb-qlbar-tail-finite-free-algebra-presentation (2151-char statement). It covers smallness, I_E nonempty and filtered, cofinality via EH, the composition equations, finite freeness of rank [F:E] including F=E, the ring/S-algebra universal property with the actual q_F legs, and the module colimit with the same legs. Old step 4 is kept verbatim as elementary step 2 (faithful exact forget plus the Mathlib-leaf exactness of filtered colimits of abelian sheaves). Old step 5 went into Task B, lem-sfb-internal-section-hom-continuity-comparison (3075 chars): transport of continuity, lower bounds, c^int to c^sec with stage maps and squares, and the cocones unchanged. Old step 6 became assembly step 4, with every hypothesis verification and conclusion clause of lem-sfb-dc-hom-filtered-colimit, the bounded-below representative of L and no bound on RHom. Nothing was dropped or blurred; the proof is 2360 chars in 4 steps, with two nodes of comparable size. I checked every cited statement: dc-hom-filtered-colimit, qlbar-flat (exactly B's exactness hypothesis on every scheme, which def-sfb-internal-scalar-tensor-comparison needs), tail-module-colimit, qlbar-colimit-x, cartesian-coefficients (2), subfield-map-comp, condensed-subextensions, module-object/ringed-site derived comparison, pe tensor comparison, internal-section scalar adjunction, and the pbc forgetful and filtered-exact lemmas. Sources: BS Lemma 6.8.2(2) p.58 (colimit over finite subextensions) and the blueprint lem-sfb-dc-hom-preserves.proof.md final sentence. Both new statements are true. I tested E=Q_ℓ, F=E (stationary tail), a=id, X empty and K=0. I read the duplicate candidates hom-flat-scalar-evaluation-model, hom-scalar-chain-identification, ind-finite-free-scalar-model, internal-hom-filtered-continuity and the section and scalar data defs; none states A or B. I accept the declared tool_uses: qlbar-flat (generic flatness), and the pbc forgetful and filtered-exact lemmas (the latter a Mathlib leaf). proof_deps equals the union of the step uses. FIX (B3): Task B used a_sec, the canonical tensor identification and the section-side derived scalar extension without definition citations. I added [def-sfb-section-scalar-map-data], [def-sfb-internal-section-derived-tensor-comparison] and [lem-pur-derived-change-of-rings] inline and to stmt_deps; the mathematics is unchanged and a script check shows no cycle. Maintainer note: the item is S2-landed and this changes only split-owned fields.; 1 file(s) fixed by the reviewer"
  },
  "lean": {
   "module": "Sheaf.Paper.QlbarInternalHomCoefficientComparison",
@@ -311,7 +270,7 @@
   "by": "N8",
   "date": "2026-10-21",
   "existing": false,
-  "note": "The declarations jointly express the node: evaluation transpose and scalar-unit restriction normalization; naturality; the small cofinal finite-free field tail and its ring/module cocones; and the strict evaluation-normalized termwise colimit formula. The representative conditions in coefficient_colimit_formula impose no extra condition on the derived inputs."
+  "note": "The declarations jointly express the node: evaluation transpose and scalar-unit restriction normalization; naturality; the small cofinal finite-free field tail and its ring/module cocones; and the strict evaluation-normalized termwise colimit formula. The representative conditions in coefficient_colimit_formula impose no extra condition on the derived inputs. P4 support extraction: the definitions and previously proved auxiliaries, including coefficient_comparison_roof, are publicly re-exported from Sheaf.Paper.QlbarInternalHomCoefficientData; the two formerly holed comparison theorems remain here with identical signatures."
  },
  "reviewed_lean": {
   "date": "2026-10-21",
@@ -320,5 +279,27 @@
   "group": "N8",
   "result": "pass",
   "note": "Re-delivery after H2 RETURN of e3ce9f8f. Lean file byte-identical (sha256 6c3a9e37…), lean record identical, statement verbatim. All 21 stmt_deps are now definitions: 5 new existing:true owners (def-sfb-native-derived-koszul-braiding→internalBraiding; def-sfb-qlbar-tail-module-objects→qlbarTailStage/Vertex; def-sfb-qlbar-ring-object-cocone→completedPointSubfieldDiagram/Cocone, completedSubfieldCocone/Inclusion/Leg; def-sfb-flat-hom-evaluation-roof-data→SfbFlatHom scalarTensor…EvaluationRoof; def-sfb-section-scalar-map-data→sectionScalarMap etc.) plus def-coef-hom-representative-evaluation for coefficientHomResolution. dc-hom-filtered-colimit dropped; the theorems stay in proof_deps (+hom-flat-evaluation-roof, +internal-section-scalar-adjunction). Checked in side-live source: each owned decl exists, is a plain def/abbrev/structure/instance (none .choose of a theorem), node statements match the Lean bodies, citations = stmt_deps, signatures verbatim, no cycle, no competing live owner, live item lean still null. Item module scan: every use from the 6 theorem modules is now owned. Mathematics (continuity, IsGE lower bound, IsIso, naturality, field tail, colimit formula, pinned normalizations), edge cases and universes reconfirmed. Advisories only: unused proof imports, redundant Nonempty EvaluationRoof conjunct, verbose retry logs in report. No FIX, so no compile; report records server dry-run OK 2da826511ba."
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-154e1",
+  "group": "P4",
+  "result": "pass",
+  "landing": "20261026T070455-L-3593981",
+  "kind": "interface",
+  "note": "independent cc review: delivered item, Data and StrictFiniteFree modules against the published item (clone ad190c2) by diff, nodes lem-sfb-qlbar-internal-hom-coefficient-comparison/def-sfb-qlbar-coefficient-module-cocone/lem-sfb-strict-finite-free-hom-colimit-formula against the Lean, 3 direct importers compiled against the delivered files, #print axioms"
  }
 }

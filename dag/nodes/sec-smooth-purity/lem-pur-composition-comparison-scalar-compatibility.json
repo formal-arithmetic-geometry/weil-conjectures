@@ -24,14 +24,9 @@
  ],
  "proof": [
   {
-   "text": "Check the coefficient domains before transporting maps. The schemes are noetherian by [lem-weil-pbc-finite-type-over-noetherian] applied over the field $k$, finite-dimensional by [lem-kun-dimension-finite-type], and have $\\ell$ invertible since $\\ell\\ne p$. The raw rational category [def-weil-pbc-rational-category] has exactly the integral objects as its objects. By [lem-weil-pbc-integral-stratified-perfect-characterization] these lattices are objects of the derived-complete category used by integral purity, and [lem-coef-integral-residue-tor] puts every lattice in its uniform finite-Tor subcategory. These assertions apply over both $E$ and $L$ and on $X,Y,Z$. By [lem-sbc-smooth-relative-dimension-permanence], $gf$ is smooth of dimension $d+e$. Thus the integral and rational comparisons for $f,g,gf$ have the asserted domains.",
+   "text": "For $R=E,L$, put $u^R_K:H_{gf,R}K\\xrightarrow{\\sim}H_{f,R}H_{g,R}K$ for the canonical pullback/twist/shift comparison, and $q^R_K=\\gamma_{f,R,G_{g,R}K}H_{f,R}(\\gamma_{g,R,K})$. Apply [lem-pur-rational-normalized-purity-diagrams]. It verifies all lattice and uniform finite-Tor domains and gives $c^R_K\\gamma_{gf,R,K}=q^R_Ku^R_K$ for the actual specified compositor, as well as $b_{h,M}T(\\gamma_{h,E,M})=\\gamma_{h,L,TM}a_{h,M}$ for $h=f,g,gf$. All maps are natural, with their specified unit, coefficient-associator and shift identifications.",
    "uses": [
-    "lem-weil-pbc-finite-type-over-noetherian",
-    "lem-kun-dimension-finite-type",
-    "def-weil-pbc-rational-category",
-    "lem-weil-pbc-integral-stratified-perfect-characterization",
-    "lem-coef-integral-residue-tor",
-    "lem-sbc-smooth-relative-dimension-permanence"
+    "lem-pur-rational-normalized-purity-diagrams"
    ],
    "elementary": false,
    "source": {
@@ -40,12 +35,9 @@
    }
   },
   {
-   "text": "For $R=E,L$ let $u^R_K:H_{gf,R}K\\xrightarrow{\\sim}H_{f,R}H_{g,R}K$ be the canonical pullback-composition, twist-addition and shift comparison. Put $q^R_K=\\gamma_{f,R,G_{g,R}K}\\circ H_{f,R}(\\gamma_{g,R,K})$. The integral composition-coherence assertion of [prop-pur-adic-reconstruction-trace-coherence], with the direction fixed by [thm-pur-composition-coherence], is $c^R_K\\gamma_{gf,R,K}=q^R_Ku^R_K$ before rationalization. Here, as in the statement, use the transported integral purity and composition maps, not arbitrary lifts with the same reductions. Apply the functor and natural-transformation extension of [prop-weil-pbc-rational-transport]. A functor preserves the composite and equality, so this same equation holds over $R$, for every lattice and hence every rational object. These are the purity maps of [thm-pur-rational-and-qbar-purity]. In particular this equation identifies the actual specified $c^R$; we have not defined a replacement for it by conjugation.",
+   "text": "Set $A_K=H_{f,L}(a_{g,K})a_{f,H_{g,E}K}$. By [lem-pur-iterated-purity-scalar-pasting], the canonical twisted-pullback compositor satisfies $A_KT_X(u^E_K)=u^L_{T_ZK}a_{gf,K}$, and horizontal pasting gives $\\beta_KT_X(q^E_K)=q^L_{T_ZK}A_K$. The lemma includes the ordered twist factors, even shifts, and the naturality moves for the two purity squares; these equations use the same comparisons as Step 1.",
    "uses": [
-    "prop-pur-adic-reconstruction-trace-coherence",
-    "thm-pur-composition-coherence",
-    "prop-weil-pbc-rational-transport",
-    "thm-pur-rational-and-qbar-purity"
+    "lem-pur-iterated-purity-scalar-pasting"
    ],
    "elementary": false,
    "source": {
@@ -54,42 +46,11 @@
    }
   },
   {
-   "text": "Write $a_{h,K}:T_{\\mathrm{source}(h)}H_{h,E}K\\to H_{h,L}T_{\\mathrm{target}(h)}K$ for the rationalized pullback/twist scalar comparison. Rationalize the natural purity square of [lem-pur-adic-purity-scalar-naturality] by [prop-weil-pbc-rational-transport]. It gives, for $h=f,g,gf$,\n$$b_{h,K}T(\\gamma_{h,E,K})=\\gamma_{h,L,TK}a_{h,K}.$$\nIt also supplies naturality of these maps and their unit, successive-extension and shift equations. The comparison used here is the specified counit-normalized map\n$$b_{h,K}:T_{\\mathrm{source}(h)}G_{h,E}K\\xrightarrow{\\sim}G_{h,L}T_{\\mathrm{target}(h)}K,$$\nnamely the transpose of the compact-support coefficient comparison followed by the counit. Thus no independent choice of an isomorphism between the two exceptional functors is being made.",
+   "text": "Precompose both proposed maps $T_XG_{gf,E}K\\to G_{f,L}G_{g,L}T_ZK$ with the isomorphism $T_X(\\gamma_{gf,E,K})$. The equations of [lem-pur-rational-normalized-purity-diagrams] and [lem-pur-iterated-purity-scalar-pasting] give\n$$\\begin{aligned}\n\\beta_KT_X(c^E_K)T_X(\\gamma_{gf,E,K})\n&=\\beta_KT_X(q^E_K)T_X(u^E_K)\\\\\n&=q^L_{T_ZK}A_KT_X(u^E_K)\n=q^L_{T_ZK}u^L_{T_ZK}a_{gf,K},\\\\\nc^L_{T_ZK}b_{gf,K}T_X(\\gamma_{gf,E,K})\n&=c^L_{T_ZK}\\gamma_{gf,L,T_ZK}a_{gf,K}\n=q^L_{T_ZK}u^L_{T_ZK}a_{gf,K}.\n\\end{aligned}$$\nCancel the common precomposition isomorphism. Since all factors are natural, component equality gives the claimed equality of natural transformations. The two cited lemmas assert these very equations with the specified identity-extension, successive-extension associators and shift comparisons. Substituting those equations into the displayed chains gives identical ordered factors on the two routes, and the same cancellation gives the required identifications.",
    "uses": [
-    "lem-pur-adic-purity-scalar-naturality",
-    "prop-weil-pbc-rational-transport"
+    "lem-pur-rational-normalized-purity-diagrams",
+    "lem-pur-iterated-purity-scalar-pasting"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-thm-purity-transport/prop-pur-rational-purity-trace-coherence.proof.md",
-    "place": "Composition-coherence transport paragraph; unit sk-thm-purity-transport Step 3"
-   }
-  },
-  {
-   "text": "Set $A_K=H_{f,L}(a_{g,K})a_{f,H_{g,E}K}$. The pullback comparisons of [prop-weil-pbc-scalar-extension] respect composition. With twists and shifts inserted they give\n$$A_KT_X(u^E_K)=u^L_{T_ZK}a_{gf,K}.$$\nThe additional twist check is explicit: by [def-coefficient-twists-detailed], a nonnegative twist is a tensor power of the same roots-of-unity object with its coefficient ring extended. Both routes preserve the ordered $e+d$ twist factors and multiply the coefficient factors in their original order. On pure tensors they send $((v\\otimes s)\\otimes t)$ to $v\\otimes st$; balancing gives equality, including when either tensor power is zero. These are the natural pullback/tensor comparisons of [lem-pur-integral-operations-scalar-extension], followed by rationalization. Reassociation of the shifts also agrees: $2d$ and $2e$ are even, so moving a twist past either shift contributes sign $+1$. This proves the displayed equation by the defining tensor maps and the cited pullback-composition compatibility.",
-   "uses": [
-    "prop-weil-pbc-scalar-extension",
-    "def-coefficient-twists-detailed",
-    "lem-pur-integral-operations-scalar-extension"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-thm-purity-transport/prop-pur-rational-purity-trace-coherence.proof.md",
-    "place": "Composition-coherence transport paragraph; unit sk-thm-purity-transport Step 3"
-   }
-  },
-  {
-   "text": "Suppress composition symbols, and object subscripts only where the functors determine them. From source $T_XH_{f,E}H_{g,E}K$ the calculation is\n$$\\begin{aligned}\n\\beta_KT_X(q^E_K)\n&=G_{f,L}(b_{g,K})b_{f,G_{g,E}K}T_X(\\gamma_{f,E,G_{g,E}K})T_XH_{f,E}(\\gamma_{g,E,K})\\\\\n&=G_{f,L}(b_{g,K})\\gamma_{f,L,T_YG_{g,E}K}a_{f,G_{g,E}K}T_XH_{f,E}(\\gamma_{g,E,K})\\\\\n&=\\gamma_{f,L,G_{g,L}T_ZK}H_{f,L}(b_{g,K})H_{f,L}T_Y(\\gamma_{g,E,K})a_{f,H_{g,E}K}\\\\\n&=\\gamma_{f,L,G_{g,L}T_ZK}H_{f,L}(\\gamma_{g,L,T_ZK})H_{f,L}(a_{g,K})a_{f,H_{g,E}K}\\\\\n&=q^L_{T_ZK}A_K.\n\\end{aligned}$$\nThe second line is Step 3's square for $f$ at $G_{g,E}K$. In the third line, naturality of $\\gamma_{f,L}$ moves $G_{f,L}(b_g)$ across it, and naturality of $a_f$ moves $T_XH_{f,E}(\\gamma_g)$ across $a_f$. The fourth line applies Step 3's square for $g$ inside $H_{f,L}$. These are substitution, naturality and preservation of composition by a functor.",
-   "uses": [],
-   "elementary": true,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-thm-purity-transport/prop-pur-rational-purity-trace-coherence.proof.md",
-    "place": "Composition-coherence transport paragraph; unit sk-thm-purity-transport Step 3"
-   }
-  },
-  {
-   "text": "Precompose the required equation with the isomorphism $T_X(\\gamma_{gf,E,K})$. Its left side becomes\n$$\\beta_KT_X(c^E_K\\gamma_{gf,E,K})\n=\\beta_KT_X(q^E_K)T_X(u^E_K)\n=q^L_{T_ZK}A_KT_X(u^E_K)\n=q^L_{T_ZK}u^L_{T_ZK}a_{gf,K}.$$\nIts right side becomes, by Step 3 and then Step 2,\n$$c^L_{T_ZK}b_{gf,K}T_X(\\gamma_{gf,E,K})\n=c^L_{T_ZK}\\gamma_{gf,L,T_ZK}a_{gf,K}\n=q^L_{T_ZK}u^L_{T_ZK}a_{gf,K}.$$\nCancel the common precomposition isomorphism. Every expression is a composite of natural transformations, so these component equalities give equality of natural transformations. For the unit, successive-extension associators and shifts, substitute the comparison equations of Steps 3 and 4 into the same calculation. Both sides then have the same ordered factors with the same tensor associators; naturality moves each comparison through these factors, and cancellation gives the same equality. Thus all identifications are the specified ones.",
-   "uses": [],
    "elementary": true,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-thm-purity-transport/prop-pur-rational-purity-trace-coherence.proof.md",
@@ -98,20 +59,8 @@
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-finite-type-over-noetherian",
-  "lem-kun-dimension-finite-type",
-  "def-weil-pbc-rational-category",
-  "lem-weil-pbc-integral-stratified-perfect-characterization",
-  "lem-coef-integral-residue-tor",
-  "lem-sbc-smooth-relative-dimension-permanence",
-  "prop-pur-adic-reconstruction-trace-coherence",
-  "thm-pur-composition-coherence",
-  "prop-weil-pbc-rational-transport",
-  "thm-pur-rational-and-qbar-purity",
-  "lem-pur-adic-purity-scalar-naturality",
-  "prop-weil-pbc-scalar-extension",
-  "def-coefficient-twists-detailed",
-  "lem-pur-integral-operations-scalar-extension"
+  "lem-pur-rational-normalized-purity-diagrams",
+  "lem-pur-iterated-purity-scalar-pasting"
  ],
  "proof_origin": {
   "by": "agent",
@@ -215,53 +164,12 @@
   "is": null
  },
  "split_report": {
-  "date": "2026-10-17",
+  "date": "2026-10-22",
   "item": "lem-pur-composition-comparison-scalar-compatibility",
   "worker": "stage1",
-  "summary": "Expanded the scalar-composition diagram using the actual transported integral composition comparison, the specified counit-normalized scalar purity square, and canonical pullback/twist comparisons; checked lattice domains. No new nodes or statement change.",
-  "blueprint": "Realizes the composition-coherence clause of the ancestor prop-pur-rational-purity-trace-coherence proof paragraph and unit Step 3: exact transport of the integral coherence diagram.",
-  "tool_uses": [
-   {
-    "node": "lem-weil-pbc-finite-type-over-noetherian",
-    "why": "Step 1 uses finite type over a noetherian field to verify the noetherian domain of the coefficient categories; this is a generic scheme finiteness tool."
-   },
-   {
-    "node": "lem-kun-dimension-finite-type",
-    "why": "Step 1 verifies finite-dimensionality of the schemes required for rationalization using the generic finite-type dimension theorem."
-   },
-   {
-    "node": "lem-weil-pbc-integral-stratified-perfect-characterization",
-    "why": "Step 1 identifies lattices in the raw rational category with the derived-complete integral inputs of purity on noetherian finite-dimensional schemes."
-   },
-   {
-    "node": "lem-coef-integral-residue-tor",
-    "why": "Step 1 puts all integral lattices in the uniform finite-Tor subcategory required by the scalar purity comparison; this is a coefficient-domain identification."
-   },
-   {
-    "node": "lem-sbc-smooth-relative-dimension-permanence",
-    "why": "Step 1 applies the generic dimension-addition assertion to f and g so that the comparison for gf is defined, including empty schemes."
-   },
-   {
-    "node": "thm-pur-composition-coherence",
-    "why": "Step 2 takes the finite purity composition formula and fixes the direction of the integral coherence supplied by the transport unit; this is its finite-stage input, not an alternate purity route."
-   },
-   {
-    "node": "prop-weil-pbc-rational-transport",
-    "why": "Steps 2 and 3 extend the supplied integral functors and natural transformations, preserving their equations under scalar localization."
-   },
-   {
-    "node": "lem-pur-adic-purity-scalar-naturality",
-    "why": "Step 3 supplies the specified counit-normalized exceptional scalar comparison, the purity square, and the unit, successive-extension and shift equations needed for the diagram calculation."
-   },
-   {
-    "node": "prop-weil-pbc-scalar-extension",
-    "why": "Step 4 uses the composition coherence of pullback scalar comparisons; the unit supplies no separate scalar-extension coherence package."
-   },
-   {
-    "node": "lem-pur-integral-operations-scalar-extension",
-    "why": "Step 4 uses the natural integral pullback/tensor comparisons to check the twist reassociation explicitly, before rationalization."
-   }
-  ]
+  "summary": "Repaired the mandatory 2026-10-22 re-split: extracted two comparable, statement-only unsplit arguments (old steps 1–3 and 4–5); retained the cancellation as a short assembly, with the original statement unchanged and the complete original argument preserved in report.md. No Lean changes.",
+  "blueprint": "Ancestor prop-pur-rational-purity-trace-coherence, composition-coherence paragraph: rational transport of normalized diagrams, scalar pasting of twisted pullback and iterated purity, then cancellation; unit Step 3.",
+  "tool_uses": []
  },
  "tool_uses": [
   "lem-weil-pbc-finite-type-over-noetherian",
@@ -276,12 +184,23 @@
   "lem-pur-integral-operations-scalar-extension"
  ],
  "reviewed": {
-  "date": "2026-10-17",
+  "date": "2026-10-22",
   "by": "L",
-  "reviewer": "NT-cc-Q57-80e263c52",
-  "group": "Q57",
+  "reviewer": "NT-cc-Q68-c327a0eba",
+  "group": "Q68",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q57-80e263c52 (reviewer sub-agent of L); spot-checked: I read the item, all 14 cited statements (and their blueprint_update texts), the unit sk-thm-purity-transport (Step 3), the main-20261015 blueprint statement and proof of prop-pur-rational-purity-trace-coherence and of prop-pur-adic-reconstruction-trace-coherence, and the parent node, which is the item's only citer. There are no new nodes and no SGA citations. Mechanical checks pass: stmt_deps match the statement, each step's citations match its uses, proof_deps equals the union of uses, every step is under 2000 characters, and the only doubled backslash is a TeX row break. The statement types check: both sides go T_X G_gf K -> G_fL G_gL T_Z K. b is exactly the counit-normalized transpose specified in lem-pur-adic-purity-scalar-naturality, and T = Q_L C as prop-weil-pbc-scalar-extension states, so no coefficient categories are silently identified. Step 1: the noetherian and finite-dimension checks on the schemes are correct, residue-tor's D^b_c = D^b_ctf puts every lattice in the finite-Tor domain, and the permanence lemma gives gf dimension d+e. Step 2: the composition-coherence formula gives c gamma_gf = q u, and rational transport preserves it. Step 3 is the rationalized purity square, used verbatim. Step 4 is marked elementary: the composition clause of the pullback comparisons is cited and the twists are flat rank-one objects, so I accept it, though it is borderline. Steps 5 and 6: I checked every line, including both naturality moves and the cancellation of T(gamma_gf). Edge cases checked: E=L gives c=c; d=0 or e=0, identity maps, empty schemes and K=0 are fine. Not a duplicate: det-prop-scalar-six-exceptional states the same kind of equation on Loc(D_ctf) of sk-thm-existence, a different framework. Off-route tool_uses accepted: lem-coef-integral-residue-tor, lem-kun-dimension-finite-type, lem-pur-adic-purity-scalar-naturality (all already accepted on the parent) and lem-pur-integral-operations-scalar-extension (generic pullback/tensor comparisons). Observation for the maintainer, not a fault: following the parent and thm-pur-rational-and-qbar-purity, the DAG takes gamma to be lem-pur-adic-purity-scalar-naturality's family and reads the reconstruction coherence as holding for it. This is sound because Hom between constructible O_E-complexes over F_p-bar is the limit of finite Hom groups, so the lift is unique. When that node is split, it should use, or be proved equal to, the coherent family Gamma of prop-pur-adic-reconstruction-trace-coherence. No fixes."
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q68-c327a0eba (reviewer sub-agent of L); spot-checked: This answers the human re-split note of 2026-10-21 (live repair-notes, state released; old proof 5435 characters, 6 steps). The live item is still the base version reviewed by Q57 on 2026-10-17, so the delivery is not superseded. The statement and stmt_deps are unchanged; only proof, proof_deps and split_report differ. Old step → new carrier: new node lem-pur-rational-normalized-purity-diagrams (statement 2783 characters) takes old step 1 (domains, gf of dimension d+e), old step 2 (c^R γ_gf = q^R u^R) and old step 3 (rationalized square b T(γ) = γ a, with unit, associator and shift equations). New node lem-pur-iterated-purity-scalar-pasting (statement 2377 characters) takes old step 4 (A T(u^E) = u^L a_gf) and old step 5 (β T(q^E) = q^L A). Old step 6, the cancellation, stays as item step 3. The full old texts are verbatim in the report. The assembly is 1902 characters and every step is under 2000. Assembly check: both chains end at q^L u^L a_gf, both maps go T_X G_gf,E K → G_f,L G_g,L T_Z K, and T_X(γ_gf,E,K) is an isomorphism, so cancelling it is valid. Against the cited statements: the direction c γ_gf = q u matches thm-pur-composition-coherence and its blueprint_update; b and a and the square match lem-pur-adic-purity-scalar-naturality verbatim; and the domains follow from rational-category (no Karoubi envelope), residue-tor, stratified-perfect-characterization and permanence (2). I re-checked the pasting chain for node B: the square for f, the naturality of γ_f and of a_f, then the square for g. The twist and shift compositor square holds by prop-weil-pbc-scalar-extension (composition, successive extension and shifts, even shifts so the sign is +1). Neither node restates the item: node A has c only in its identity with γ, and node B has no c at all. Both are self-contained and statement-only. Each node records grep, Loogle and LeanFinder searches, with LeanSearch recorded honestly as unavailable. blueprint.from is prop-pur-rational-purity-trace-coherence via [item] with same_as [], everything is on unit sk-thm-purity-transport, and there is no SGA citation. Duplicates ruled out: transitivity-summands, adic-reconstruction-trace-coherence, rational-and-qbar-purity, twist-rationalization, integral-operations-scalar-extension, integral-twist-scalar-coherence, normalized-pullback-composition-transport, smooth-exchange-scalar-compatibility and det-prop-scalar-six-exceptional. Edge cases E=L, d=0 or e=0, f or g the identity, K=0 and empty schemes all hold. Batch 5: both flagged citations (prop-pur-adic-reconstruction-trace-coherence and thm-pur-composition-coherence) were already proof_deps of the base item's old step 2, so the batch-5 closure does not change. Both are purity coherences that neither assumption provides and that are not steps of the trace formula or Poincare duality. Their path to sec-trace-formula ends at lem-trf-smooth-section-centred-coordinates (unit sk-i-curve-zero), a generic local-coordinates lemma, so I accept both flags. Advisory for the maintainer: the item's node-level tool_uses still lists 10 ids it no longer cites directly; prune them at merge. Node A's future worker must identify the γ of scalar-naturality with the reconstruction's coherent family; this is the Q57 observation, carried over. The sibling lem-pur-smooth-exchange-scalar-compatibility has a re-split note too, and a delivery there may create an overlapping rationalized-square node. No fixes."
  },
- "lean_audit": {}
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ }
 }

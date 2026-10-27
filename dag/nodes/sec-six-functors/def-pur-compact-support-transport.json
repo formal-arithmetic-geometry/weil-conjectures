@@ -103,7 +103,18 @@
   "def-weil-pbc-proetale-site",
   "def-weil-scheme-morphism-properties"
  ],
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
  "chapter": "sec-six-functors",
  "unit": "sk-thm-sf-package",
  "blueprint_update": {
@@ -126,5 +137,33 @@
   "group": "NK",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NK-cde58b976 (reviewer sub-agent of L); spot-checked: I read the whole item (no new nodes) against the main-20261015 blueprint, order 2581, which matches the node's blueprint_update. Both composites and their order match: phi_{f_!M}=Rf_!(phi_M) o Ex_! and u_N=phi_N o kappa_{T,N}. The binding repair is taken from the current text, all four coefficient stages are kept, and nothing is weakened. I read the full statements of all seven stmt_deps. The arrow directions check out: the ambient exchange mate goes Lg^*Rp_* -> Rp'_*Lgbar'^*; beta (lem-cbc-proetale-extension-zero-base-change) needs no hypothesis on g; def-cbc-completed-exchange-map is the integral component; kappa: LPhi^* -> Lg_gamma^* (prop-trf-scheme-galois-comparison, consistent with Phi=g_gamma o Fr and Fr^* = id). Typing and edge cases (M=0, f=id, d=0, X empty, n=1) are fine. There is no proof, so C and D are vacuous. Duplicate search: def-tw-frobenius-action and def-trf-weil-shriek-pushforward are different objects. The citer thm-pur-weil-equivariance-of-purity-and-trace is consistent with the item. Finding: the report's 'Source error'/STATEMENT-DISPUTED is false. def-exchange-projection applies directly to the semilinear square with base S=Y: X via f, Y via the identity and Y'=Y via the isomorphism g_{Y,gamma} are finite type over Y, both maps are separated finite-type Y-morphisms, and ell is invertible on Y. Do not record it in HUMAN.md. Fix written to fixes/dag/nodes/sec-six-functors/def-pur-compact-support-transport.json: the Ex_! sentence now cites def-exchange-projection with S=Y and lists the checked hypotheses; the stray comma before 'Here' is now a period; the misleading 'not k-morphisms' wording is removed; the split_report summary sentence is corrected. Explicit components and stmt_deps are unchanged. No tool_uses, no SGA.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.Paper.PurityCompactSupportTransport",
+  "declaration": "WeilConjectures.Purity.finiteCompactSupportWeilTransport",
+  "declarations": [
+   "WeilConjectures.Purity.finiteCompactSupportTransportExchange",
+   "WeilConjectures.Purity.finiteCompactSupportWeilTransport",
+   "WeilConjectures.Purity.compactSupportWeilTransport",
+   "WeilConjectures.Purity.completedCompactSupportWeilTransport",
+   "WeilConjectures.Purity.finiteSchemeFrobeniusForm",
+   "WeilConjectures.Purity.schemeFrobeniusForm",
+   "WeilConjectures.Purity.compactSupportWeilTransportRepresentative"
+  ],
+  "file": "lean/Sheaf/Paper/PurityCompactSupportTransport.lean",
+  "statement": "def finiteCompactSupportWeilTransport (P : PurityFiniteSetting.{u}) {X₀ Y₀ : Over (Spec (CommRingCat.of P.field.k₀))} (f₀ : X₀ ⟶ Y₀) (d : ℕ) [LocallyOfFiniteType X₀.hom] [QuasiCompact X₀.hom] [LocallyOfFiniteType Y₀.hom] [QuasiCompact Y₀.hom] [LocallyOfFiniteType f₀.left] [QuasiCompact f₀.left] [IsSeparated f₀.left] [SmoothOfRelativeDimension d (P.frobeniusMap f₀)] (c c' : Compactification (P.frobeniusMap f₀)) (gbar : c'.Z ⟶ c.Z) (properSquare : ChosenCartesianSquare gbar c'.g c.g (P.frobeniusGaloisMap Y₀)) (openSquare : IsPullback (P.frobeniusGaloisMap X₀) c'.i c.i gbar) (M : finiteTorConstructibleCategory P.coefficients.l P.extension P.level P.level_pos (P.frobeniusFiber X₀).left) (φM : (proEtaleConstantRingDerivedPullback P.Ring (P.frobeniusGaloisMap X₀)).obj M.obj ≅ M.obj) (comparison : sfIntrinsicDerivedOpen P.Ring c'.i ⋙ proEtaleRingDerivedDirectImage c'.g (proEtaleConstantRing (P.frobeniusFiber Y₀).left P.Ring) (proEtaleConstantRing c'.Z P.Ring) (proEtaleConstantRingComparison c'.g P.Ring) ≅ sfIntrinsicDerivedOpen P.Ring c.i ⋙ proEtaleRingDerivedDirectImage c.g (proEtaleConstantRing (P.frobeniusFiber Y₀).left P.Ring) (proEtaleConstantRing c.Z P.Ring) (proEtaleConstantRingComparison c.g P.Ring))",
+  "branch": "sheaf-dag",
+  "by": "NH",
+  "date": "2026-10-26",
+  "existing": false,
+  "note": "The finite definition is on the actual geometric base changes and recorded finite-Tor objects. The remaining declarations give the canonical ambient proper/open exchange, the specified completed exchange composite, the same composite on the supplied higher-stage closed domains, its rational/common-stage representative and the scheme-Frobenius forms. Supplied compactification comparisons are retained explicitly. No preservation, invertibility or compactification-independence theorem is asserted."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-773447e5f",
+  "group": "NH",
+  "result": "pass",
+  "note": "I read the item node, all 7 stmt_deps, the module, the report and the live declarations (constantOpenSquareExchange, SfOpenSquareExchangeData, proEtaleAmbientRingedExchange, ExchangeProjectionStage, PurityTateDatum, compactification_coherence). Hypotheses match exactly: f0 separated LFT+QC, X0/Y0 finite type, SmoothOfRelativeDimension d, M in finiteTorConstructibleCategory, phiM an Iso. Ex_! = ambient ringed exchange on properSquare (orientation checked; coefficient HEq proved) followed by Rp'_* of the canonical open-square exchange on openSquare. Composite order Ex_!, comparison, Rf_!(phiM) matches the node. The integral stage uses completedCompactSupportExchange and completedPull; the field stages use the recorded supplied-stage compactExchange and its coefficient representative. u_N = kappa.hom.app N then phiN, correct direction. No sorry, nothing hollow, docstrings and blueprint tags present, no line over 100 characters, only the lean field changed, lean.statement verbatim, both report sections present, edge cases and universes fine. No compile (no file changed). Advisories: (1) constantOpenSquareExchange is owned by the uncited statement node lem-trf-open-square-exchange; the cited beta node's declaration is in the ModuleCat presentation. (2) The comparison Rf_!^{c'} ≅ Rf_!^c is a free natural iso on the whole category; citers must pin it (canonical refinement comparison, or c'=c with Iso.refl). (3) phiM uses the raw constant-ring pullback rather than UniformPurityTateDatum's finiteReductionPullback; they are related by finiteReductionRawPullbackModel. (4) The generic kappa form and the generic gX/gY integral helper are generalizations."
  }
 }

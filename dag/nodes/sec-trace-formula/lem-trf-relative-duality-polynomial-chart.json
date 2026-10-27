@@ -20,7 +20,24 @@
   "def-weil-pbc-kahler-differentials",
   "def-pc-derived-pullback",
   "def-pur-pseudo-coherent-complex",
-  "pqf-def-locnoeth"
+  "pqf-def-locnoeth",
+  "def-trf-coherent-relative-dualizing-pair",
+  "def-trf-derived-coinduction",
+  "def-sc-direct-image-algebra-derived-category",
+  "def-pc-ringed-spaces-derived-direct-image",
+  "def-sc-sheaf-exterior-power",
+  "def-sc-relative-differential-sheaf",
+  "lem-sc-sheaf-coinduction-adjunction",
+  "lem-pc-ringed-spaces-derived-direct-image-composition",
+  "lem-sc-tilde-preserves-finite-limits",
+  "lem-weil-pbc-affine-tilde-gamma-adjunction",
+  "lem-weil-pbc-pushforward-spec-global-sections",
+  "def-trf-polynomial-duality-presentation-data",
+  "def-trf-polynomial-duality-restriction-atlas",
+  "def-trf-polynomial-duality-affine-atlas-comparison",
+  "def-trf-polynomial-duality-affine-compatibility",
+  "def-trf-polynomial-duality-restriction-primitives",
+  "def-trf-polynomial-duality-affine-realization"
  ],
  "proof": [
   {
@@ -337,5 +354,38 @@
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q89-c8171ef94 (reviewer sub-agent of L); spot-checked: Read the item, all four new nodes, cited statements, unit route, report, and Stacks sources (duality.tex 0E2T/0E2V/0E2W/0E2X; dualizing.tex 0BZI/0BZJ/0BZW/0E2E and 0A70/0A71/0BZN/0BZT/0C0F/0C0H; cohomology.tex 0D67/0D6C). Verified hypotheses, affine diagonal construction, BBD descent, Koszul normalization, lift independence, refinement coherence, edge cases, duplicate scope, and ordinary-derived route compliance. No SGA or dropped infinity/model-category machinery appears. Wrote review.md; no repairs required."
  },
- "lean_audit": {}
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.RelativeDualityPolynomialChart",
+  "file": "lean/Sheaf/AlgebraicGeometry/RelativeDualityPolynomialChart.lean",
+  "declaration": "AlgebraicGeometry.exists_relativeDualityPolynomialChart",
+  "declarations": [
+   "AlgebraicGeometry.exists_relativeDualityPolynomialChart"
+  ],
+  "statement": "theorem exists_relativeDualityPolynomialChart [∀ Z : RingedSpace.{u}, HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Z))] [∀ (Z : Scheme.{u}) (U : Z.Opens), HasDerivedCategory.{w} (SheafOfModules.{u} ((moduleRings Z.toRingedSpace).over U))] {X S : Scheme.{u}} (f : X ⟶ S) [IsSeparated f] [Flat f] [LocallyOfFinitePresentation f] [IsLocallyNoetherian S] : ∃ (K : schemeDerivedCategory X) (ξ : DerivedCategory.Q.obj (relativeDualizingDiagonalComplex f) ⟶ (derivedPullback (pullback.fst f f)).obj K), IsCoherentRelativeDualizingPair f K ξ ∧ ∃ atlas : PolynomialDualityChartAtlas f K, ∀ (R A : Type u) [CommRing R] [CommRing A] [Algebra R A] (jA : Spec (.of A) ⟶ X) (jR : Spec (.of R) ⟶ S) [IsOpenImmersion jA] [IsOpenImmersion jR], jA ≫ f = Spec.map (CommRingCat.ofHom (algebraMap R A)) ≫ jR → ∃ (M : DerivedCategory (ModuleCat.{u} A)) (e : (polynomialOpenRestriction jA).obj K ≅ (polynomialAffineTilde A).obj M) (F : PolynomialDualityPresentationSystem R A (algebraMap R A) M), IsPolynomialAffineAtlasCompatible atlas R A jA jR M e F ∧ IsPolynomialLocalizedAffineAtlasCompatible atlas R A jA jR M e F",
+  "branch": "newtargets-dag",
+  "by": "Q42",
+  "date": "2026-10-22",
+  "note": "Repair of return L on head 2f1e1018f9d5: replace the unused free-arrow restriction helper with unit-normalized direct-image square mates, require one geometric chart atlas with its canonical restriction equation, and pin every affine presentation identification to that same atlas through the ordinary tilde/Gamma unit, all-complex right-derived units and actual module coinduction counit. Native exact tilde replaces the unowned relativeDualizingAffineTilde. The node statement and proof remain unchanged."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-d1d518f86",
+  "group": "Q42",
+  "result": "pass",
+  "note": "Re-delivery after the 2f1e RETURN. F1 fixed: PolynomialDualityChartAtlas carries an independent restriction equation (coinduction-adjunct model restriction vs native restriction of K, unit-normalized direct-image squares; b unique, q pinned on wedges, F any left adjoint used on both sides; IsIso exchange holds in the basic D.U=C.U∩P_D case, so not vacuous). IsPolynomialAffineAtlasCompatible and the localized (ht-1, h^-1 volume) variant tie e and every F.identification to atlas.identification; sigma, q and tau are each pinned uniquely (tilde/Gamma unit, global volume, right-derived units on all complexes). Checked consistency: independence of eP and of the embedding; R Noetherian. F2 fixed: free-arrow helper deleted, all new definitions referenced. F3 fixed: coinduction-adjunction node cited; relativeDualizingAffineTilde replaced by native tilde mapDerivedCategory. Mechanical theorem-stmt_dep finding: PASS on that point. Coinduction and direct-image composition are choices from pinned existentials; tilde finite-limits is an instance needed to type the statement; tilde.adjunction and pushforwardSpecMapCompΓIso are the nodes' own recorded constructions. lean.statement verbatim; 6 new definition nodes' declarations match their modules; dependency records identical to live; no live collision; single sorry; universes u,w independent; edge cases n=0, empty, zero ring, h=0/1 covered. Advisory: realization node cites the atlas node without using it; singleδ sign used uniformly. No compile by reviewer (2026-10-21 rule)."
+ }
 }

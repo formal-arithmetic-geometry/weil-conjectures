@@ -1,0 +1,327 @@
+{
+ "id": "lem-sfb-trait-horizontal-closed-complement",
+ "kind": "statement",
+ "title": "A generic closed subset has fibrewise thin closure in a smooth trait scheme",
+ "statement": "Let $R$ be a discrete valuation ring [def-sc-discrete-valuation-ring], $F=\\operatorname{Frac}R$ its localization at all nonzero elements, $k=R/\\mathfrak m_R$, and $T=\\operatorname{Spec}R$ [def-weil-affine-spectrum]. Let $Y\\to T$ be a smooth separated morphism of finite type [def-pc-scheme, def-sbc-smooth-morphisms, def-weil-finite-type-morphism]; separated means that its diagonal is a closed immersion [def-weil-closed-immersion]. Write $Y_F$ and $Y_k$ for its generic and closed fibres [def-pc-base-change]. Let $Z_F\\hookrightarrow Y_F$ be a closed subscheme whose underlying closed subset contains no irreducible component of $Y_F$ [def-weil-irreducible-components]. Let $Z\\hookrightarrow Y$ be its scheme-theoretic closure, meaning the scheme-theoretic image of $Z_F\\to Y_F\\to Y$ [def-nagata-scheme-theoretic-image]. The open subscheme $Y\\setminus |Z|$ [def-weil-open-immersion] has generic fibre $Y_F\\setminus |Z_F|$ and is dense in every geometric fibre of $Y\\to T$: for each point $t\\in T$ and each algebraically closed extension $\\Omega/\\kappa(t)$, its pullback is dense in $Y\\times_T\\operatorname{Spec}\\Omega$. In particular $|Z|$ contains no irreducible component of $Y_k$. Empty fibres and $Z_F=\\varnothing$ are allowed.",
+ "source": {
+  "document": "literature/bosch-lutkebohmert-raynaud-neron-models.pdf",
+  "place": "BLR 6.5 Theorem 1 proof, printed p.162 (PDF p.168), paragraph choosing an affine dense generic open and removing the schematic closure of its complement (the assertion that this closure is trait-thin). Local PDF WANTED; primary scan read online.",
+  "url": "https://www.math.stonybrook.edu/~kamenova/homepage_files/Bosch_Raynaud_Neron_Model_tc.pdf"
+ },
+ "stmt_deps": [
+  "def-sc-discrete-valuation-ring",
+  "def-weil-affine-spectrum",
+  "def-weil-closed-immersion",
+  "def-pc-base-change",
+  "def-weil-irreducible-components",
+  "def-nagata-scheme-theoretic-image",
+  "def-weil-open-immersion",
+  "def-pc-scheme",
+  "def-sbc-smooth-morphisms",
+  "def-weil-finite-type-morphism"
+ ],
+ "proof": [
+  {
+   "text": "Choose a uniformizer $\\pi\\in R$. Apply smooth-trait infrastructure to $Y$: it is Noetherian and regular, the generic fibre is a quasi-compact open, the special fibre is reduced, and at every special-fibre component generic point $\\xi$ the ring $\\mathcal O_{Y,\\xi}$ is a DVR with uniformizer $\\pi$. Regularity and the normal-component decomposition imply that each point of $Y$ has an affine neighbourhood inside a single integral open-and-closed component. We will use these conclusions without any purity-of-relative-dimension assumption.",
+   "uses": [
+    "def-sc-discrete-valuation-ring",
+    "lem-sfb-smooth-trait-volume-infrastructure",
+    "rem-pc-regular-normal"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bosch-lutkebohmert-raynaud-neron-models.pdf",
+    "place": "BLR 6.5 Theorem 1 proof, printed p.162 (PDF p.168), thin-closure assertion; existing smooth-trait infrastructure and normal decomposition supply the local geometry."
+   }
+  },
+  {
+   "text": "For any affine open $U=\\operatorname{Spec}A\\subset Y$, the affine generic-fibre model identifies $U_F$ with $\\operatorname{Spec}A[1/\\pi]$. Write $Z_F\\cap U_F=\\operatorname{Spec}(A[1/\\pi]/J)$ using the affine description of a closed immersion. Thus $g:Z_F\\to Y$ has affine inverse image over every affine open and is affine, hence quasi-compact and quasi-separated. The quasi-compact scheme-image kernel theorem identifies the ideal of $Z\\cap U$ with\n$$I=\\ker(A\\longrightarrow A[1/\\pi]/J)=\\{a\\in A:a/1\\in J\\}.$$\nIt follows directly that $\\pi^na\\in I$ implies $a\\in I$, since $\\pi$ is a unit in the target ring. Also $IA[1/\\pi]=J$: for $a/\\pi^n\\in J$, its numerator $a/1$ lies in $J$, so $a\\in I$; the reverse inclusion follows from the definition of $I$.",
+   "uses": [
+    "lem-sbc-generic-fibre-affine-ring-models",
+    "def-weil-closed-immersion",
+    "lem-weil-pbc-affine-morphism-permanence",
+    "lem-weil-pbc-scheme-image-qc-kernel"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tags 01R8 (lemma-quasi-compact-scheme-theoretic-image), 01S7 (lemma-affine-separated); affine principal-open generic-fibre model and the displayed elementary contraction calculation."
+   }
+  },
+  {
+   "text": "Restrict the scheme-theoretic image of $g$ to the open $Y_F$. The open restriction theorem applies because $g$ is quasi-compact and quasi-separated, as just proved. The restricted morphism is the closed immersion $Z_F\\hookrightarrow Y_F$, whose scheme-theoretic image is its source. Consequently $Z\\times_Y Y_F=Z_F$ as closed subschemes, and the open complement $V=Y\\setminus|Z|$ has generic fibre $Y_F\\setminus|Z_F|$.",
+   "uses": [
+    "lemma-nagata-scheme-image-restrict-open",
+    "lemma-nagata-scheme-image-of-closed-immersion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 01R8, lemma-quasi-compact-scheme-theoretic-image, restriction to opens; a closed immersion is its own image."
+   }
+  },
+  {
+   "text": "Fix a generic point $\\xi$ of a nonempty special-fibre component. Choose an affine neighbourhood $U=\\operatorname{Spec}A$ inside its integral open-and-closed ambient component $C$, using the decomposition of step 1; thus $A$ is a domain. Let $\\mathfrak p\\subset A$ represent $\\xi$. The affine stalk theorem gives $A_{\\mathfrak p}\\cong\\mathcal O_{Y,\\xi}$, compatibly with germs, so the image of $\\pi$ in $A$ is nonzero (its image in that DVR is a uniformizer). Thus $U_F$ is nonempty. The open $C_F\\subset C$ is nonempty and irreducible, and is open-and-closed in $Y_F$, so it is an irreducible component of $Y_F$. The nonempty open $U_F$ is dense in $C_F$. If the ideal $J$ of step 2 were zero, the closed subset $|Z_F|$ would contain $U_F$ and hence $C_F$, contrary to the hypothesis. Therefore $J\\ne0$.",
+   "uses": [
+    "rem-pc-regular-normal",
+    "def-pc-integral-scheme",
+    "lem-weil-pbc-affine-open-stalk-localization",
+    "lem-sfb-smooth-trait-volume-infrastructure",
+    "def-weil-irreducible-components"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/properties.tex",
+    "place": "Normal Noetherian component decomposition (lemma-normal-locally-Noetherian); affine integral scheme definition; Schemes Tag 01HV (lemma-spec-sheaves), affine stalk localization. The open-subset irreducibility argument is written out."
+   }
+  },
+  {
+   "text": "Choose $0\\ne a/\\pi^n\\in J$. Since $A$ is a domain and $\\pi\\ne0$, its numerator $a$ is nonzero. Multiplication by $\\pi^n$ shows $a/1\\in J$, hence $a\\in I$. The map $A\\to B=A_{\\mathfrak p}$ is injective (if $a/1=0$, some $s\\notin\\mathfrak p$ has $sa=0$, impossible in a domain). Therefore $IB\\ne0$. Moreover $IB$ remains $\\pi$-saturated: if $\\pi^m b/s\\in IB$ with $s\\notin\\mathfrak p$, the definition of localization of an ideal gives $t\\notin\\mathfrak p$ with $t\\pi^mb\\in I$. Saturation of $I$ gives $tb\\in I$, hence $b/s\\in IB$.",
+   "uses": [
+    "lem-weil-pbc-affine-open-stalk-localization"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 01R8, affine kernel description, followed by the displayed numerator and localization calculation."
+   }
+  },
+  {
+   "text": "The ring $B\\cong\\mathcal O_{Y,\\xi}$ is the DVR of step 1 with uniformizer $\\pi$. Choose $0\\ne b\\in IB$. By the unit-times-uniformizer-power theorem, $b=u\\pi^m$ for a unit $u\\in B$. Multiplying by $u^{-1}$ gives $\\pi^m\\in IB$, and the saturation proved in step 5 gives $1\\in IB$. Hence $IB=B$. This means $I\\not\\subset\\mathfrak p$: indeed $1\\in IA_{\\mathfrak p}$ implies some element of $I$ lies outside $\\mathfrak p$. The affine closed-immersion description $Z\\cap U=\\operatorname{Spec}(A/I)$ now gives $\\xi\\notin|Z|$. This proves that $|Z|$ contains no special-fibre irreducible component.",
+   "uses": [
+    "lem-weil-pbc-dvr-unit-times-uniformizer-power",
+    "def-weil-closed-immersion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00PD, lemma-characterize-dvr, final assertion; apply it to the DVR stalk, then use saturation."
+   }
+  },
+  {
+   "text": "Every component of either ordinary fibre has a generic point, by sobriety of schemes. In the generic fibre the hypothesis and step 3 put each such generic point in $V_F$; in the special fibre step 6 puts each in $V_k$. For each component $D$ with generic point $\\eta_D$, the closure of $V_t$ contains $\\overline{\\{\\eta_D\\}}=D$. Components cover the fibre, so $V_t$ is dense for both points $t\\in T$. There are exactly these two points because $R$ is a DVR: every nonzero prime contains a nonzero element $u\\pi^m$, hence contains $\\pi$ and is the maximal ideal. Empty fibres have empty underlying space and satisfy the same density conclusion vacuously.",
+   "uses": [
+    "lem-sc-scheme-sober",
+    "lem-sc-irreducible-components-cover",
+    "lem-weil-pbc-dvr-unit-times-uniformizer-power"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Tag 01IS, lemma-scheme-sober; Topology Tag 004W, lemma-irreducible; Algebra Tag 00PD, lemma-characterize-dvr."
+   }
+  },
+  {
+   "text": "Apply smooth fibrewise-density base change to the open immersion $V\\hookrightarrow Y$: smoothness is assumed and density in every ordinary fibre was established in step 7. For $t\\in T$ and an algebraically closed extension $\\Omega/\\kappa(t)$, take $T'=\\operatorname{Spec}\\Omega\\to T$. Its unique fibre is $Y\\times_T\\operatorname{Spec}\\Omega$, so the cited theorem gives the required density there. If $Z_F$ is empty, its affine ideals $J$ are unit ideals, whence the contractions $I$ are unit ideals as well; thus $Z$ is empty and $V=Y$. Empty $Y$ is covered by the same argument. No perfection, completeness, or excellence assumption on $R$ has been used.",
+   "uses": [
+    "lem-sfb-smooth-fibrewise-dense-open-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bosch-lutkebohmert-raynaud-neron-models.pdf",
+    "place": "BLR 2.5 S-density base-change input, as isolated by the cited existing node; completes BLR 6.5 p.162 thin-closure assertion."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sc-discrete-valuation-ring",
+  "lem-sfb-smooth-trait-volume-infrastructure",
+  "rem-pc-regular-normal",
+  "lem-sbc-generic-fibre-affine-ring-models",
+  "def-weil-closed-immersion",
+  "lem-weil-pbc-affine-morphism-permanence",
+  "lem-weil-pbc-scheme-image-qc-kernel",
+  "lemma-nagata-scheme-image-restrict-open",
+  "lemma-nagata-scheme-image-of-closed-immersion",
+  "def-pc-integral-scheme",
+  "lem-weil-pbc-affine-open-stalk-localization",
+  "def-weil-irreducible-components",
+  "lem-weil-pbc-dvr-unit-times-uniformizer-power",
+  "lem-sc-scheme-sober",
+  "lem-sc-irreducible-components-cover",
+  "lem-sfb-smooth-fibrewise-dense-open-base-change"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/bosch-lutkebohmert-raynaud-neron-models.pdf",
+  "place": "BLR 6.5 Theorem 1 proof, printed p.162 (PDF p.168), asserts trait-thinness without the local calculation. Primary scan read online; the proof above supplies that omitted argument from existing DAG statements and explicit affine ideal arithmetic. Local PDF WANTED."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "On a smooth scheme over a discrete valuation ring the closure of a nowhere dense closed subset of the generic fibre contains no fibre component and commutes with flat base change",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Flat.generalizingMap\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/UniversallyOpen\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.Flat f],\\n  GeneralizingMap ⇑(CategoryTheory.ConcreteCategory.hom f.base)\", \"doc\": \"If $ f : X \\\\to Y $ is a flat morphism of schemes, then the underlying continuous map $ f $ satisfies the generalizing property: for any $ x \\\\in X $ and $ y \\\\in Y $ such that $ y $ specializes to $ f(x\"}\n  {\"name\": \"AlgebraicGeometry.ValuativeCriterion.Existence.specializingMap\", \"module\": \"Mathlib/AlgebraicGeometry/ValuativeCriterion\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y),\\n  AlgebraicGeometry.ValuativeCriterion.Existence f → SpecializingMap ⇑(CategoryTheory.ConcreteCategory.hom f.base)\", \"doc\": \"If a morphism $ f : X \\to Y $ of schemes satisfies the valuative criterion for existence, then $ f $ is a specializing map, meaning that specialization relations in the codomain can be lifted to the do\"}\n  {\"name\": \"AlgebraicGeometry.instIsDominantιCoborderRange\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Immersion\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [inst : AlgebraicGeometry.IsImmersion f],\\n  AlgebraicGeometry.IsDominant (AlgebraicGeometry.Scheme.Hom.coborderRange f).ι\", \"doc\": \"For any immersion $ f: X \\to Y $ of schemes, the inclusion morphism of the cobord of the image of $ f $ into $ Y $ is dominant. This means the image of this open subset is dense in $ Y $, as the cobord\"}\n  {\"name\": \"AlgebraicGeometry.instIsClosedImmersionLiftCoborder\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Immersion\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [inst : AlgebraicGeometry.IsImmersion f],\\n  AlgebraicGeometry.IsClosedImmersion (AlgebraicGeometry.Scheme.Hom.liftCoborder f)\", \"doc\": \"If $ f: X \\to Y $ is an immersion of schemes, then the morphism $ f $ lifted to the cobord of the image of $ f $ is a closed immersion. The cobord is the open subset of $ Y $ obtained as the complement\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.preimage_eq_top_of_closedPoint_mem\", \"module\": \"Mathlib/AlgebraicGeometry/Stalk\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} {R : CommRingCat} [inst : IsLocalRing ↑R] (f : AlgebraicGeometry.Spec R ⟶ X)\\n  {U : X.Opens},\\n  (CategoryTheory.ConcreteCategory.hom f.base) (IsLocalRing.closedPoint ↑R) ∈ U →\\n    (TopologicalSpace.Opens.map f.base).obj U = ⊤\", \"doc\": \"For any open subset $ U $ of a scheme $ X $, if the closed point of a local ring $ R $ is mapped into $ U $ by a morphism $ f $, then the preimage of $ U $ under $ f $ is the entire space $ X $, i.e.,\"}\n  {\"name\": \"AlgebraicGeometry.IsDominant\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/UnderlyingMap\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"The morphism $ f: X \\\\to Y $ is dominant if the image of $ f $ is dense in $ Y $.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.IdealSheafData.map_vanishingIdeal\", \"module\": \"Mathlib/AlgebraicGeometry/IdealSheaf/Functorial\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) (Z : TopologicalSpace.Closeds ↥X),\\n  (AlgebraicGeometry.Scheme.IdealSheafData.vanishingIdeal Z).map f =\\n    AlgebraicGeometry.Scheme.IdealSheafData.vanishingIdeal\\n      (TopologicalSpace.Closeds.closure (⇑(CategoryTheory.ConcreteCategory.hom f.base) '' \", \"doc\": \"For schemes $X$ and $Y$, a morphism $f: X \\to Y$, and a closed subset $Z$ of $X$, the pushforward of the vanishing ideal sheaf of $Z$ under $f$ equals the vanishing ideal sheaf of the closure of the im\"}\n  {\"name\": \"AlgebraicGeometry.finite_appTop_of_universallyClosed\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Proper\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} (K : Type u) [inst : Field K]\\n  (f : X ⟶ AlgebraicGeometry.Spec { carrier := K, commRing := Field.toEuclideanDomain.toCommRing })\\n  [AlgebraicGeometry.IsIntegral X] [AlgebraicGeometry.UniversallyClosed f] [AlgebraicGeometry.LocallyOfFiniteType f],\\n  (CommRingCat.Hom.\", \"doc\": \"Let $K$ be a field, and let $f: X \\\\to \\\\operatorname{Spec}(K)$ be a morphism from an integral scheme $X$. If $f$ is universally closed and locally of finite type, then the ring of global sections of $X\"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: read the returned signatures; they give generalizing maps, scheme-theoretic dominance, quasi-affine criteria or the general quasi-finite locus, not the horizontal fibre-density or special-fibre assertion stated here."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A thin closed subset in the generic fibre has fibrewise nowhere dense schematic closure in a smooth trait scheme",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.PartialMap.dense_domain\", \"module\": \"Mathlib/AlgebraicGeometry/RationalMap\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (self : X.PartialMap Y), Dense ↑self.domain\", \"doc\": \"For any partial map between schemes $X$ and $Y$, the open subset of $X$ on which the partial map is defined is dense in $X$.\"}\n  {\"name\": \"AlgebraicGeometry.specializingMap_isZariskiLocalAtTarget\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/UnderlyingMap\", \"type\": \"AlgebraicGeometry.IsZariskiLocalAtTarget (AlgebraicGeometry.topologically @SpecializingMap)\", \"doc\": \"The property of being a specializing map for scheme morphisms is Zariski local at the target. This means that if a morphism $ f : X \\to Y $ of schemes has the property that its underlying continuous ma\"}\n  {\"name\": \"AlgebraicGeometry.instIsDominantιCoborderRange\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Immersion\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [inst : AlgebraicGeometry.IsImmersion f],\\n  AlgebraicGeometry.IsDominant (AlgebraicGeometry.Scheme.Hom.coborderRange f).ι\", \"doc\": \"For any immersion $ f: X \\to Y $ of schemes, the inclusion morphism of the cobord of the image of $ f $ into $ Y $ is dominant. This means the image of this open subset is dense in $ Y $, as the cobord\"}\n  {\"name\": \"AlgebraicGeometry.IsDominant\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/UnderlyingMap\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"The morphism $ f: X \\\\to Y $ is dominant if the image of $ f $ is dense in $ Y $.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.RationalMap.dense_domain\", \"module\": \"Mathlib/AlgebraicGeometry/RationalMap\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X.RationalMap Y), Dense ↑f.domain\", \"doc\": \"For any rational map $ f $ between schemes $ X $ and $ Y $, the domain of $ f $ is a dense subset of $ X $.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.denseRange\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/UnderlyingMap\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.IsDominant f],\\n  DenseRange ⇑(CategoryTheory.ConcreteCategory.hom f.base)\", \"doc\": \"For any dominant morphism $ f: X \\to Y $ of schemes, the underlying continuous map between their topological spaces has dense image in $ Y $.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.preimage_eq_top_of_closedPoint_mem\", \"module\": \"Mathlib/AlgebraicGeometry/Stalk\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} {R : CommRingCat} [inst : IsLocalRing ↑R] (f : AlgebraicGeometry.Spec R ⟶ X)\\n  {U : X.Opens},\\n  (CategoryTheory.ConcreteCategory.hom f.base) (IsLocalRing.closedPoint ↑R) ∈ U →\\n    (TopologicalSpace.Opens.map f.base).obj U = ⊤\", \"doc\": \"For any open subset $ U $ of a scheme $ X $, if the closed point of a local ring $ R $ is mapped into $ U $ by a morphism $ f $, then the preimage of $ U $ under $ f $ is the entire space $ X $, i.e.,\"}\n  {\"name\": \"AlgebraicGeometry.IsDominant.isZariskiLocalAtTarget\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/UnderlyingMap\", \"type\": \"AlgebraicGeometry.IsZariskiLocalAtTarget @AlgebraicGeometry.IsDominant\", \"doc\": \"The property of being a dominant morphism is Zariski local at the target. This means that for any morphism $ f: X \\to Y $, if there exists a Zariski covering sieve on $ Y $ such that the pullback of $ \"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: read the returned signatures; they give generalizing maps, scheme-theoretic dominance, quasi-affine criteria or the general quasi-finite locus, not the horizontal fibre-density or special-fibre assertion stated here."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"schemeTheoreticImage\", \"Flat\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-24",
+   "verdict": "no match: read the returned signatures; they give generalizing maps, scheme-theoretic dominance, quasi-affine criteria or the general quasi-finite locus, not the horizontal fibre-density or special-fibre assertion stated here."
+  },
+  {
+   "tool": "grep",
+   "query": "(schematic|schemeTheoretic|closure).*(flat|generic)|generic.*(thin|closure)",
+   "results": "[grep] OK 23 hit(s)\n  {\"file\": \"Mathlib/Topology/Sober.lean\", \"line\": \"22\", \"text\": \"* `IsGenericPoint` : `x` is the generic point of `S` if `S` is the closure of `x`.\"}\n  {\"file\": \"Mathlib/Topology/Sober.lean\", \"line\": \"37\", \"text\": \"/-- `x` is a generic point of `S` if `S` is the closure of `x`. -/\"}\n  {\"file\": \"Mathlib/Topology/Sober.lean\", \"line\": \"42\", \"text\": \"theorem isGenericPoint_def {x : α} {S : Set α} : IsGenericPoint x S ↔ closure ({x} : Set α) = S :=\"}\n  {\"file\": \"Mathlib/Topology/Sober.lean\", \"line\": \"49\", \"text\": \"theorem isGenericPoint_closure {x : α} : IsGenericPoint x (closure ({x} : Set α)) :=\"}\n  {\"file\": \"Mathlib/Topology/Sober.lean\", \"line\": \"55\", \"text\": \"  simp only [specializes_iff_mem_closure, IsGenericPoint, Set.ext_iff]\"}\n  {\"file\": \"Mathlib/FieldTheory/AxGrothendieck.lean\", \"line\": \"174\", \"text\": \"    (AlgebraicClosure (ZMod p)), realize_genericPolyMapSurjOnOfInjOn]\"}\n  {\"file\": \"Mathlib/RingTheory/Spectrum/Prime/Topology.lean\", \"line\": \"286\", \"text\": \"      rw [IsGenericPoint, closure_singleton, zeroLocus_vanishingIdeal_eq_closure, h₂.closure_eq]⟩⟩\"}\n  {\"file\": \"Mathlib/RingTheory/AlgebraicIndependent/TranscendenceBasis.lean\", \"line\": \"367\", \"text\": \"  simp_rw [Matroid.closure, matroid_isFlat_of_subsingleton, true_and, matroid_e, inter_univ]\"}\n  {\"file\": \"Mathlib/RingTheory/Smooth/IntegralClosure.lean\", \"line\": \"20\", \"text\": \"- `TensorProduct.toIntegralClosure_injective_of_flat`:\"}\n  {\"file\": \"Mathlib/RingTheory/Smooth/IntegralClosure.lean\", \"line\": \"51\", \"text\": \"lemma TensorProduct.toIntegralClosure_injective_of_flat [Module.Flat R S] :\"}\n  {\"file\": \"Mathlib/RingTheory/Smooth/IntegralClosure.lean\", \"line\": \"131\", \"text\": \"  refine ⟨toIntegralClosure_injective_of_flat, ?_⟩\"}\n  {\"file\": \"Mathlib/RingTheory/Smooth/IntegralClosure.lean\", \"line\": \"371\", \"text\": \"  refine ⟨toIntegralClosure_injective_of_flat, ?_⟩\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Geometrically/Reduced.lean\", \"line\": \"80\", \"text\": \"      rw [Z.property.1.closure_genericPoint (isClosed_of_mem_irreducibleComponents _ Z.property)]\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/SchemeTheoreticallyDominant.lean\", \"line\": \"95\", \"text\": \"    [IsSchemeTheoreticallyDominant f] [QuasiCompact f] [Flat g] :\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/SchemeTheoreticallyDominant.lean\", \"line\": \"116\", \"text\": \"    [IsSchemeTheoreticallyDominant f] [QuasiCompact f] [Flat g] :\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/SchemeTheoreticallyDominant.lean\", \"line\": \"122\", \"text\": \"    [IsSchemeTheoreticallyDominant g] [QuasiCompact g] [Flat f] :\"}\n  {\"file\": \"Mathlib/Order/Closure.lean\", \"line\": \"196\", \"text\": \"/-- Construct a closure operator from an inflationary function `f` and a \\\"closedness\\\" predicate `p`\"}\n  {\"file\": \"Mathlib/CategoryTheory/Sites/Closed.lean\", \"line\": \"268\", \"text\": \"A closure (increasing, inflationary and idempotent) operation on sieves that commutes with pullback\"}\n  {\"file\": \"Mathlib/Combinatorics/Matroid/Closure.lean\", \"line\": \"19\", \"text\": \"The *closure* of a set `X` in a matroid `M` is the intersection of all flats of `M` containing `X`.\"}\n  {\"file\": \"Mathlib/Combinatorics/Matroid/Closure.lean\", \"line\": \"64\", \"text\": \"This also relates to flats; `F ⊆ M.E ∧ ClosureOperator.IsClosed F` is equivalent to `M.IsFlat F`.\"}\n  {\"file\": \"Mathlib/Combinatorics/Matroid/Closure.lean\", \"line\": \"117\", \"text\": \"  ClosureOperator.ofCompletePred (fun F ↦ M.IsFlat F.1) fun s hs ↦ by\"}\n  {\"file\": \"Mathlib/Combinatorics/Matroid/Closure.lean\", \"line\": \"126\", \"text\": \"  simpa [subtypeClosure] using IsFlat.subset_ground\"}\n  {\"file\": \"Mathlib/Combinatorics/Matroid/Closure.lean\", \"line\": \"128\", \"text\": \"lemma isClosed_iff_isFlat {F : Iic M.E} : M.subtypeClosure.IsClosed F ↔ M.IsFlat F := by\"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: read the returned signatures; they give generalizing maps, scheme-theoretic dominance, quasi-affine criteria or the general quasi-finite locus, not the horizontal fibre-density or special-fibre assertion stated here."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Closure of a nowhere dense generic fibre closed subset in a smooth scheme over a DVR is nowhere dense on every fibre",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"IsNowhereDense\", \"module\": \"Mathlib.Topology.GDelta.Basic\", \"type\": \"(s : Set X)\", \"doc\": \"A set $ s $ in a topological space is nowhere dense if the interior of its closure is empty, i.e., $ \\\\text{int}(\\\\overline{s}) = \\\\emptyset $. This means the closure of $ s $ contains no non-empty open \"}\n  {\"name\": \"IsNowhereDense.closure\", \"module\": \"Mathlib.Topology.GDelta.Basic\", \"type\": \"{s : Set X} (hs : IsNowhereDense s) : IsNowhereDense (closure s)\", \"doc\": \"If a set $ s $ is nowhere dense in a topological space $ X $, then its closure $ \\\\overline{s} $ is also nowhere dense in $ X $. This follows because the interior of $ \\\\overline{s} $ is empty by defini\"}\n  {\"name\": \"IsClosed.isNowhereDense_iff\", \"module\": \"Mathlib.Topology.GDelta.Basic\", \"type\": \"{s : Set X} (hs : IsClosed s) : IsNowhereDense s ↔ interior s = ∅\", \"doc\": \"A closed set $ s $ in a topological space is nowhere dense if and only if its interior is empty, i.e., $ \\\\operatorname{int}(s) = \\\\emptyset $.\"}\n  {\"name\": \"IsNowhereDense.mono\", \"module\": \"Mathlib.Topology.GDelta.Basic\", \"type\": \"{s t : Set X} (ht : t ⊆ s) (hs : IsNowhereDense s) : IsNowhereDense t\", \"doc\": \"If a set $ t $ is a subset of a nowhere dense set $ s $ in a topological space, then $ t $ is also nowhere dense. This follows because the closure of $ t $ is contained in the closure of $ s $, and th\"}\n  {\"name\": \"isClosed_isNowhereDense_iff_compl\", \"module\": \"Mathlib.Topology.GDelta.Basic\", \"type\": \"{s : Set X} : IsClosed s ∧ IsNowhereDense s ↔ IsOpen sᶜ ∧ Dense sᶜ\", \"doc\": \"A set $ s $ in a topological space is closed and nowhere dense if and only if its complement $ s^c $ is open and dense in the space.\"}\n  {\"name\": \"IsNowhereDense.isMeagre\", \"module\": \"Mathlib.Topology.GDelta.Basic\", \"type\": \"{s : Set X} (h : IsNowhereDense s) : IsMeagre s\", \"doc\": \"If a set $ s $ in a topological space is nowhere dense (i.e., the interior of its closure is empty), then it is meagre (i.e., its complement belongs to the residual filter generated by countable inter\"}\n  {\"name\": \"IsNowhereDense.of_isClosed_null\", \"module\": \"Mathlib.MeasureTheory.Measure.OpenPos\", \"type\": \"(h₁s : IsClosed s) (h₂s : μ s = 0) : IsNowhereDense s\", \"doc\": \"If $ s $ is a closed set in a topological space equipped with a measure $ \\\\mu $ that assigns positive measure to every non-empty open set, and $ \\\\mu(s) = 0 $, then $ s $ is nowhere dense.\"}\n  {\"name\": \"IsNowhereDense.subset_of_closed_isNowhereDense\", \"module\": \"Mathlib.Topology.GDelta.Basic\", \"type\": \"{s : Set X} (hs : IsNowhereDense s) : ∃ t : Set X, s ⊆ t ∧ IsNowhereDense t ∧ IsClosed t\", \"doc\": \"For any nowhere dense set $ s $ in a topological space $ X $, there exists a closed set $ t $ such that $ s \\\\subseteq t $ and $ t $ is nowhere dense.\"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: read the returned signatures; they give generalizing maps, scheme-theoretic dominance, quasi-affine criteria or the general quasi-finite locus, not the horizontal fibre-density or special-fibre assertion stated here."
+  },
+  {
+   "tool": "grep",
+   "query": "(trait|generic.*fiber|generic.*fibre|schematic.*closure)",
+   "results": "No hits. Subdirectory: AlgebraicGeometry.",
+   "digest": "4f53cda18c2baa0c",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits give topological nowhere-density, generalizing/specializing maps, dominance or rational-map domains; none gives the stated smooth-trait horizontal-closure and geometric-fibre assertion."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The schematic closure of a nowhere dense generic fibre closed subscheme is nowhere dense in every fibre of a smooth scheme over a DVR",
+   "results": "Read returned signatures: IsNowhereDense, IsNowhereDense.closure, isNowhereDense_iff_forall_notMem_nhds, IsNowhereDense.image_val, IsNowhereDense.subset_of_closed_isNowhereDense, AlgebraicGeometry.Scheme.IdealSheafData.subscheme, AlgebraicGeometry.IsIntegralHom.instUniversallyClosed, IsGenericPoint.def.",
+   "digest": "40bbdededf0492ad",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits give topological nowhere-density, generalizing/specializing maps, dominance or rational-map domains; none gives the stated smooth-trait horizontal-closure and geometric-fibre assertion."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"schemeTheoreticImage\", \"Smooth\"",
+   "results": "No hits.",
+   "digest": "4f53cda18c2baa0c",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits give topological nowhere-density, generalizing/specializing maps, dominance or rational-map domains; none gives the stated smooth-trait horizontal-closure and geometric-fibre assertion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "In a smooth finite type scheme over a discrete valuation ring the closure of a closed subset of the generic fibre containing no component contains no component of the special fibre",
+   "results": "Read returned signatures: AlgebraicGeometry.specializingMap_isZariskiLocalAtTarget, AlgebraicGeometry.ValuativeCriterion.Existence.specializingMap, AlgebraicGeometry.ValuativeCriterion.Existence.of_specializingMap, AlgebraicGeometry.IsClosedImmersion.Spec_map_residue, AlgebraicGeometry.Scheme.preimage_eq_top_of_closedPoint_mem, AlgebraicGeometry.instJacobsonSpaceCarrierCarrierCommRingCatFiberOfLocallyOfFiniteType, AlgebraicGeometry.instIsDominantιCoborderRange, AlgebraicGeometry.isClosed_singleton_iff_locallyOfFiniteType.",
+   "digest": "2a32b42ed4fc2828",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits give topological nowhere-density, generalizing/specializing maps, dominance or rational-map domains; none gives the stated smooth-trait horizontal-closure and geometric-fibre assertion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A closed subscheme of the generic fibre of a smooth scheme over a DVR with dense complement has schematic closure with fibrewise dense open complement",
+   "results": "Read returned signatures: AlgebraicGeometry.Scheme.PartialMap.dense_domain, AlgebraicGeometry.Scheme.RationalMap.dense_domain, AlgebraicGeometry.Scheme.PartialMap.Opens.isDominant_ι, AlgebraicGeometry.Scheme.Hom.denseRange, AlgebraicGeometry.IsDominant.denseRange, AlgebraicGeometry.instIsDominantιCoborderRange, AlgebraicGeometry.IsDominant, AlgebraicGeometry.IsDominant.isZariskiLocalAtTarget.",
+   "digest": "dff4aa0677aca57d",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits give topological nowhere-density, generalizing/specializing maps, dominance or rational-map domains; none gives the stated smooth-trait horizontal-closure and geometric-fibre assertion."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-trait-generic-effective-dense-affine",
+  "date": "2026-10-24",
+  "group": "Q82"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "BLR 6.5 Theorem 1 proof, printed p.162 (PDF p.168), paragraph choosing an affine dense generic open and removing the schematic closure of its complement (the assertion that this closure is trait-thin). Local PDF WANTED; primary scan read online.",
+   "via": [
+    "lem-sfb-trait-generic-effective-dense-affine",
+    "lem-sfb-smooth-group-field-trait-descent",
+    "lem-sfb-strict-birational-law-realization",
+    "lem-sfb-trait-birational-group-envelope",
+    "lem-sfb-bounded-group-local-neron-criterion",
+    "lem-sfb-abelian-neron-model",
+    "lem-sfb-semiabelian-neron-lft-existence",
+    "lem-sfb-trait-semiabelian-hom-extension",
+    "lem-sfb-semiabelian-generic-graph-proper",
+    "lem-sfb-normal-semiabelian-hom-extension",
+    "lem-sfb-symmetric-line-power-prolongation",
+    "lem-sfb-normal-symmetric-cubical-extension",
+    "lem-sfb-symmetric-ample-power-extension",
+    "lem-sfb-regular-group-generic-ampleness",
+    "lem-sfb-stable-picard-theta-ampleness",
+    "lem-sfb-stable-relative-picard-kummer",
+    "lem-sfb-stable-level-versal-branch-freeness",
+    "lem-sfb-stable-abelian-level-normalization",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-trait-horizontal-closed-complement",
+  "worker": "stage1",
+  "summary": "Unchanged statement. Expanded the thin-closure assertion by affine contraction and saturation of its ideal, the existing DVR stalks at special-fibre generic points, and the existing geometric fibre-density base-change theorem. Reused all supporting facts; no new nodes. Checked the primary BLR scan, cited statements, local Stacks sources, edge cases and project attachment searches.",
+  "blueprint": "The current blueprint sk-thm-sf-ctf-stability proof (proper and open direct-image paragraph) is the distant ancestor route. This item supplies the local horizontal-closure subargument of BLR 6.5 p.162 below lem-sfb-trait-generic-effective-dense-affine; its steps 1-8 realize that omitted thin-closure argument. The inherited blueprint.from.node is null, as confirmed by tools/blueprint_refs.py ancestor, and its already-specific place and via chain are retained. No blueprint node found with this assertion.",
+  "tool_uses": [
+   {
+    "node": "rem-pc-regular-normal",
+    "why": "Generic scheme/algebra tool: Regular schemes are normal; the normal decomposition. Supplies the indicated local geometric or ideal calculation; no six-functor unit step is replaced, and no node of this unit states this tool."
+   },
+   {
+    "node": "lem-sbc-generic-fibre-affine-ring-models",
+    "why": "Generic scheme/algebra tool: Canonical affine generic and closed fibre rings over a DVR. Supplies the indicated local geometric or ideal calculation; no six-functor unit step is replaced, and no node of this unit states this tool."
+   },
+   {
+    "node": "lemma-nagata-scheme-image-restrict-open",
+    "why": "Generic scheme/algebra tool: Restriction of a scheme-theoretic image to an open target. Supplies the indicated local geometric or ideal calculation; no six-functor unit step is replaced, and no node of this unit states this tool."
+   }
+  ]
+ },
+ "tool_uses": [
+  "rem-pc-regular-normal",
+  "lem-sbc-generic-fibre-affine-ring-models",
+  "lemma-nagata-scheme-image-restrict-open"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q29-a72e0f964",
+  "group": "Q29",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q29-a72e0f964 (reviewer sub-agent of L); spot-checked: I read the whole of Q29 lem-sfb-trait-horizontal-closed-complement @a72e0f96 (stage 1): the item, all 16 cited statements, the step of the parent lem-sfb-trait-generic-effective-dense-affine that uses it, and Stacks 01R8 (morphisms.tex l.848). BLR is not in the local literature (the report lists it as WANTED), so I checked the agent's proof directly against the cited statements. The delivery adds no new nodes and leaves the statement and stmt_deps unchanged. Steps: (1) The smooth-trait infrastructure node gives Noetherian, regular, reduced Y_k and DVR stalks with uniformizer pi; regular-normal (1),(2) gives integral clopen components. (2) The generic-fibre ring-model node needs a reduced closed fibre, which step 1 supplies. Affine permanence makes U_F affine and g affine, hence qc. The qc-kernel node gives I=ker(A->A[1/pi]/J). I checked saturation and I*A[1/pi]=J. (3) Image restricted to the open Y_F plus image of a closed immersion gives Z x_Y Y_F = Z_F, so V_F = Y_F\\|Z_F|. (4) A is a domain and pi is nonzero through the stalk localization (c). C_F is clopen and irreducible, so it is a component of Y_F. J=0 would contradict the hypothesis. (5) Elementary; the denominator t is written out explicitly. (6) The unit-times-pi^m node gives 1 in IB, so I is not in p and xi is not in Z. (7) Sobriety and components-cover give density in both fibres, and T has exactly two points. (8) The fibrewise-density base change with T'=Spec Omega gives the geometric-fibre clause. Edge cases checked: Y empty, Y_k empty, Z_F empty, A^1_R with V(x) and V(pi x-1), mixed relative dimensions, nonreduced Z_F. Declared tool_uses (rem-pc-regular-normal, lem-sbc-generic-fibre-affine-ring-models, lemma-nagata-scheme-image-restrict-open) are generic tools and I accept them. Batch-5 flag: lem-trf-flat-tensor-preserves-injection is the Mathlib leaf Module.Flat.lTensor_preserves_injective_linearMap. lem-trf-smooth-at-point-fibre-criterion is Stacks 01V9. Both are general algebra or scheme facts: neither assumption states them, and neither is a cohomological step of their proofs. Both are reached only through existing sfb nodes of the same unit, so they are outside the assumptions and I accept them. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.TraitHorizontalClosedComplement",
+  "declaration": "AlgebraicGeometry.trait_horizontal_closed_complement",
+  "file": "lean/Sheaf/AlgebraicGeometry/TraitHorizontalClosedComplement.lean",
+  "statement": "theorem trait_horizontal_closed_complement {R : Type u} [CommRing R] [IsDomain R] [IsDiscreteValuationRing R] {Y : Scheme.{u}} (f : Y ⟶ Spec (.of R)) [Smooth f] [IsSeparated f] [LocallyOfFiniteType f] [QuasiCompact f] {ZF : Scheme.{u}} (i : ZF ⟶ f.fiber (⟨⊥, Ideal.isPrime_bot⟩ : PrimeSpectrum R)) [IsClosedImmersion i] (hthin : ∀ C ∈ irreducibleComponents (f.fiber (⟨⊥, Ideal.isPrime_bot⟩ : PrimeSpectrum R)), ¬ C ⊆ (i.ker.support : Set (f.fiber (⟨⊥, Ideal.isPrime_bot⟩ : PrimeSpectrum R)))) : (f.fiberι (⟨⊥, Ideal.isPrime_bot⟩ : PrimeSpectrum R)) ⁻¹ᵁ (i ≫ f.fiberι (⟨⊥, Ideal.isPrime_bot⟩ : PrimeSpectrum R)).ker.support.compl = i.ker.support.compl ∧ (∀ (t : Spec (.of R)) (Ω : Type u) [Field Ω] [Algebra ((Spec (.of R)).residueField t) Ω] [IsAlgClosed Ω], Dense ((pullback.fst f (Spec.map (CommRingCat.ofHom (algebraMap ((Spec (.of R)).residueField t) Ω)) ≫ (Spec (.of R)).fromSpecResidueField t)) ⁻¹' ((i ≫ f.fiberι (⟨⊥, Ideal.isPrime_bot⟩ : PrimeSpectrum R)).ker.support : Set Y)ᶜ)) ∧ (∀ C ∈ irreducibleComponents (f.fiber (IsLocalRing.closedPoint R)), ¬ C ⊆ (f.fiberι (IsLocalRing.closedPoint R)) ⁻¹' ((i ≫ f.fiberι (⟨⊥, Ideal.isPrime_bot⟩ : PrimeSpectrum R)).ker.support : Set Y))",
+  "branch": "newtargets-dag",
+  "by": "Q116",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-876a1f937",
+  "group": "Q116",
+  "result": "pass",
+  "note": "Single new module TraitHorizontalClosedComplement; lean.statement verbatim equal to the file; node unchanged apart from lean (diffed against side-live). Each hypothesis/clause matches: IsDiscreteValuationRing; Smooth+IsSeparated+LocallyOfFiniteType+QuasiCompact (finite type per the def-weil-finite-type-morphism record); generic/closed fibres via Mathlib f.fiber at ⊥ and closedPoint; Z_F as IsClosedImmersion i; schematic closure = (i ≫ fiberι).ker (Hom.image := ker.subscheme, support = closure(range) since the composite is affine, hence qc); generic-fibre equality of opens; density over every t and every algebraically closed Ω via pullback.fst; no closed-fibre component in |Z|. No extra hypotheses; Ω : Type u forced by Scheme.{u} pullback. Edge cases (empty Y, empty fibres, empty Z_F, transcendental Ω) covered. Source/blueprint docstrings and 8-step proof present; sorry only; proof-only imports exist in side-live; Worker report and Second reading by Q116 present (done by the same worker, disclosed). No compile needed (no changes)."
+ }
+}

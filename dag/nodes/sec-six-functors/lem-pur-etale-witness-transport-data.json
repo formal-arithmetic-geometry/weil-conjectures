@@ -1,0 +1,262 @@
+{
+ "id": "lem-pur-etale-witness-transport-data",
+ "kind": "statement",
+ "title": "Etale origin witnesses and natural unit comparison for transported functors",
+ "statement": "Fix the finite purity datum [def-pur-conventions]: $k=\\overline{\\mathbf F}_q$, a prime $\\ell\\ne\\operatorname{char}k$, a finite extension $E/\\mathbf Q_\\ell$ with valuation ring $\\mathcal O_E$ and uniformizer $\\varpi_E$, and $n\\geq1$; put $A=\\mathcal O_E/\\varpi_E^n$. Use ordinary constant-$A$ module derived categories on the small etale and pro-etale sites [def-sf-categories], the comparison morphisms $\\nu_S:S_{\\mathrm{proet}}\\to S_{\\mathrm{et}}$ [def-weil-pbc-site-comparison-morphism], and intrinsically bounded constructible pro-etale complexes [def-weil-finite-torsion-constructibility].\n\nLet $T,Z$ be finite-type $k$-schemes [def-weil-scheme-morphism-properties]. Let $G:D^+(T_{\\mathrm{et}},A)\\to D^+(Z_{\\mathrm{et}},A)$ be a functor, and put $H=\\nu_Z^*G R\\nu_{T,*}$ on $D^+(T_{\\mathrm{proet}},A)$. For any integers $r\\leq s$ and $B\\in D^b_c(T_{\\mathrm{proet}},A)$ there exists $B_e\\in D^b_c(T_{\\mathrm{et}},A)$ with an isomorphism $\\alpha:\\nu_T^*B_e\\xrightarrow{\\sim}B$. For every such witness, $B_e$ has cohomology in $[r,s]$ if and only if $B$ does [def-weil-constructible-intervals]. If $B$ has pro-etale Tor amplitude in $[r,s]$ [def-weil-finite-tor-amplitude], every such witness has etale Tor amplitude in $[r,s]$ [def-kun-tor-amplitude], tested against every degree-zero etale module sheaf. Witness existence and cohomological interval reflection require no Tor hypothesis.\n\nThere is a natural isomorphism of derived functors $H\\nu_T^*\\cong\\nu_Z^*G$ on $D^+(T_{\\mathrm{et}},A)$. Write $F=\\nu_Z^*G$ and $\\eta:\\operatorname{id}\\to R\\nu_{T,*}\\nu_T^*$ for the derived comparison unit. For each bounded constructible witness $(B_e,\\alpha)$, its induced identification $\\delta_{B_e,\\alpha}:HB\\xrightarrow{\\sim}F(B_e)$ is characterized by\n$$\\delta_{B_e,\\alpha}^{-1}=F(R\\nu_{T,*}\\alpha)\\circ F(\\eta_{B_e}).$$\nFor $\\beta:B_e\\to B'_e$ and $h:B\\to B'$ satisfying $h\\alpha=\\alpha'\\nu_T^*\\beta$, these identifications satisfy\n$$\\delta_{B'_e,\\alpha'}\\circ H(h)=F(\\beta)\\circ\\delta_{B_e,\\alpha}.$$",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sp-et-proet/thm-pur-general-admissibility.proof.md",
+  "place": "Step 2, prerequisites to the closed-support bounds; extracted parent Steps 1, 2 and 4. Stacks Tags 09AL (proetale.tex, lemma-compare-constructible-derived), 09AK (lemma-compare-constructible), 099V (lemma-relative-comparison (2)), and 09B1 (lemma-compare-derived (2), module coefficients); Tor reflection: main-20261015, sec-proetale-coefficients/sk-cor-pe-finite-tor-comparison/lem-sf-comparison-tor-amplitude.proof.md, (ii)."
+ },
+ "stmt_deps": [
+  "def-pur-conventions",
+  "def-sf-categories",
+  "def-weil-pbc-site-comparison-morphism",
+  "def-weil-finite-torsion-constructibility",
+  "def-weil-scheme-morphism-properties",
+  "def-weil-constructible-intervals",
+  "def-weil-finite-tor-amplitude",
+  "def-kun-tor-amplitude"
+ ],
+ "proof": [
+  {
+   "text": "Put A = P.Ring and let E be the canonical exact equivalence from fixed-coefficient pro-etale module sheaves to intrinsic constant-ring module sheaves. Intrinsic finite-torsion constructibility gives finite cohomological support and constructibility of every cohomology sheaf. Bound the support by [min(a,b),b], where a and b are lower and upper bounds of that finite support. Apply the essential-image criterion of [lem-weil-pbc-finite-ring-constructible-derived-origin] to obtain a bounded constructible etale complex L and an isomorphism from its intrinsic comparison to E(B). Its cohomological bound makes L an object of D+. The exact-derived composition isomorphism identifies the intrinsic comparison with E after the fixed-coefficient comparison. Full faithfulness of the derived realization equivalence lifts the isomorphism to the fixed-coefficient categories. The compatibility isomorphism for mapDerivedCategoryPlus then gives the required alpha in D+. No Tor hypothesis occurs.",
+   "uses": [
+    "lem-weil-pbc-finite-ring-constructible-derived-origin",
+    "def-weil-pbc-proetale-modules"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 09AL, lemma-compare-constructible-derived, together with Tag 09AK, lemma-compare-constructible; bounded restriction as in the cited origin node, clause (ii)."
+   }
+  },
+  {
+   "text": "For an arbitrary witness alpha, compose its image under the derived intrinsic realization with mapDerivedCategoryPlusCompatibility and mapDerivedCategoryCompIso to identify the intrinsic comparison of B_e with E(B). Each homology functor transports vanishing along this isomorphism. Apply the interval equivalence in [lem-weil-pbc-finite-ring-constructible-derived-origin]. Convert homologyConcentratedIn to vanishing outside [r,s] using DerivedCategory.isGE_iff and isLE_iff; convert constructibleInterval to the same vanishing condition by its support inclusion, retaining the original intrinsic constructibility proof hB. This proves the iff for every witness, without using any Tor hypothesis.",
+   "uses": [
+    "lem-weil-pbc-finite-ring-constructible-derived-origin",
+    "def-weil-pbc-proetale-modules"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 09B1, lemma-compare-derived (2), and Tag 099V, lemma-relative-comparison (2); exact inverse image and termwise cohomology in the comparison discussion."
+   }
+  },
+  {
+   "text": "Apply the reverse implication of [lem-exc-comparison-tor-interval] directly to A = P.Ring, the ordered interval [r,s] and the D+ object B_e. Its pro-etale premise is the intrinsic realization of the fixed-coefficient comparison of B_e. The image of alpha under derived realization identifies that object with E(B). Transport HasProEtaleTorAmplitude along this isomorphism by composing each representative isomorphism with the image of alpha; the same K-flat complex, quasi-isomorphism and all module-sheaf tensor tests then apply verbatim. This proves Tor reflection for every witness and needs no additional coefficient-prime invertibility argument.",
+   "uses": [
+    "lem-exc-comparison-tor-interval",
+    "def-weil-proetale-tor-amplitude"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-cor-pe-finite-tor-comparison/lem-sf-comparison-tor-amplitude.proof.md",
+    "place": "Clause (ii), reflection for any bounded-below etale origin."
+   }
+  },
+  {
+   "text": "Write $R=R\\nu_{T,*}$, $N=\\nu_T^*$ and $F=\\nu_Z^*G$, so $H=FR$. By [thm-weil-pbc-site-comparison] the derived unit $\\eta:\\mathrm{id}\\xrightarrow{\\sim}RN$ is a natural isomorphism on all of $D^+(T_{\\mathrm{et}},A)$. Apply the functor $F$ to its components. This gives $\\sigma_C=F(\\eta_C):F(C)\\xrightarrow{\\sim}HN(C)$; its inverse is $F(\\eta_C^{-1})$, since a functor preserves composition and identities. For $\\beta:C\\to C'$, unit naturality $RN(\\beta)\\eta_C=\\eta_{C'}\\beta$ gives $HN(\\beta)\\sigma_C=\\sigma_{C'}F(\\beta)$. Thus $\\sigma$ is a natural isomorphism $F\\cong HN$, and its inverse is the asserted $H\\nu_T^*\\cong\\nu_Z^*G$. This argument uses neither bounded constructibility nor any additivity or exactness of $G$.",
+   "uses": [
+    "thm-weil-pbc-site-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tags 099V, lemma-relative-comparison (2), and 09B1, lemma-compare-derived (2); explicit functorial application of the natural comparison unit."
+   }
+  },
+  {
+   "text": "For a witness $(B_e,\\alpha)$ define $t_{B_e,\\alpha}=H(\\alpha)\\sigma_{B_e}:F(B_e)\\xrightarrow{\\sim}HB$ and $\\delta_{B_e,\\alpha}=t_{B_e,\\alpha}^{-1}$. Both factors are isomorphisms by Step 4 and the witness hypothesis; their explicit inverses compose in reverse order. Since $H(\\alpha)=F(R(\\alpha))$, this definition gives exactly $\\delta_{B_e,\\alpha}^{-1}=F(R\\nu_{T,*}\\alpha)\\circ F(\\eta_{B_e})$. An inverse to a fixed isomorphism is unique, so the displayed formula characterizes the identification.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sp-et-proet/thm-pur-general-admissibility.proof.md",
+    "place": "Step 2 comparison prerequisites: explicit elementary description of the witness-induced identification using the unit from Step 4 of this split."
+   }
+  },
+  {
+   "text": "Let $\\beta:B_e\\to B'_e$ and $h:B\\to B'$ satisfy $h\\alpha=\\alpha' N(\\beta)$. With the notation of Step 5, functoriality and the naturality equation proved in Step 4 give $H(h)t_{B_e,\\alpha}=H(h\\alpha)\\sigma_{B_e}=H(\\alpha')HN(\\beta)\\sigma_{B_e}=H(\\alpha')\\sigma_{B'_e}F(\\beta)=t_{B'_e,\\alpha'}F(\\beta)$. Compose on the left with $t_{B'_e,\\alpha'}^{-1}$ and on the right with $t_{B_e,\\alpha}^{-1}$. Cancel each inverse pair. The result is $\\delta_{B'_e,\\alpha'}\\circ H(h)=F(\\beta)\\circ\\delta_{B_e,\\alpha}$, as required. Neither $h$ nor $\\beta$ needs to be an isomorphism.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sp-et-proet/thm-pur-general-admissibility.proof.md",
+    "place": "Step 2 comparison prerequisites: elementary unit-naturality calculation for the witness-induced identifications, expanded here."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-finite-ring-constructible-derived-origin",
+  "def-weil-pbc-proetale-modules",
+  "lem-exc-comparison-tor-interval",
+  "def-weil-proetale-tor-amplitude",
+  "thm-weil-pbc-site-comparison"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sp-et-proet/thm-pur-general-admissibility.proof.md",
+  "place": "Step 2; E1 Lean proof reuses the existing general finite-ring constructible-derived origin and interval theorem and the general comparison Tor-interval equivalence directly. Canonical exact realization and derived-composition isomorphisms identify coefficient presentations. The comparison unit and elementary functoriality prove the normalization, inverse formula and arbitrary-morphism naturality."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "constructible.*(Tor|[Ii]nterval)|[Aa]djunction.*unit.*[Ii]so",
+   "results": "Read returned hits: Mathlib/Condensed/Light/TopCatAdjunction.lean, Mathlib/Condensed/Light/TopCatAdjunction.lean, Mathlib/Condensed/TopCatAdjunction.lean, Mathlib/Condensed/TopCatAdjunction.lean, Mathlib/RingTheory/Spectrum/Prime/ChevalleyComplexity.lean, Mathlib/RingTheory/Spectrum/Prime/ChevalleyComplexity.lean, Mathlib/CategoryTheory/Shift/Adjunction.lean, Mathlib/CategoryTheory/Adjunction/Reflective.lean",
+   "date": "2026-10-22",
+   "verdict": "no match: generic adjunction, topology, ring-etaleness, or cohomology support results do not supply this finite constructible comparison statement"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finite constructible etale origin with interval and Tor reflection and a natural comparison for a functor conjugated by derived site comparison",
+   "results": "Read returned hits: LightProfinite.instWEqualsLocallyBijectiveCoherentTopology, CategoryTheory.Functor.IsCocontinuous, CategoryTheory.Functor.IsLocallyFaithful, CategoryTheory.coherentTopology.coverPreserving, AlgebraicGeometry.Scheme.etaleTopology, AlgebraicGeometry.Scheme.smallEtaleTopology, CategoryTheory.Functor.inducedTopology_isCocontinuous, CategoryTheory.CompatiblePreserving",
+   "date": "2026-10-22",
+   "verdict": "no match: generic adjunction, topology, ring-etaleness, or cohomology support results do not supply this finite constructible comparison statement"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Etale proetale constructible witnesses reflect cohomological and Tor intervals with natural unit identification of conjugated functors",
+   "results": "Read returned hits: CondensedSet.LocallyConstant.functorFullyFaithful, Algebra.Etale.formallyEtale, AlgebraicGeometry.Scheme.etaleTopology, Algebra.FormallyEtale.instTensorProduct, AlgebraicGeometry.IsEtale.instIsStableUnderBaseChangeScheme, AlgebraicGeometry.Scheme.Etale.forgetFullyFaithful, AlgebraicGeometry.Scheme.instCategoryEtale, Algebra.formallyEtale_iff",
+   "date": "2026-10-22",
+   "verdict": "no match: generic adjunction, topology, ring-etaleness, or cohomology support results do not supply this finite constructible comparison statement"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.unit, CategoryTheory.Functor.FullyFaithful",
+   "results": "Read returned hits: CategoryTheory.Adjunction.fullyFaithfulLOfIsIsoUnit, CategoryTheory.Adjunction.map_restrictFullyFaithful_unit_app, CategoryTheory.Adjunction.map_restrictFullyFaithful_unit_app_assoc, CategoryTheory.Adjunction.restrictFullyFaithful_homEquiv_apply",
+   "date": "2026-10-22",
+   "verdict": "no match: generic adjunction, topology, ring-etaleness, or cohomology support results do not supply this finite constructible comparison statement"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Equivalence of bounded constructible etale and proetale complexes preserves intervals reflects Tor amplitude and identifies nu pullback G Rnu pushforward on origin witnesses",
+   "results": "Read returned hits: AlgebraicGeometry.IsEtale.of_comp, AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified, Algebra.FormallyEtale.iff_of_equiv, Algebra.FormallyEtale.of_equiv, AlgebraicGeometry.Scheme.etaleTopology, AlgebraicGeometry.IsEtale.instHasOfPostcompPropertyScheme, AlgebraicGeometry.Scheme.smallEtalePretopology, StandardEtalePair.homEquiv",
+   "date": "2026-10-22",
+   "verdict": "no match: generic adjunction, topology, ring-etaleness, or cohomology support results do not supply this finite constructible comparison statement"
+  },
+  {
+   "tool": "grep",
+   "query": "pro[Ee]tale|pro_etale|comparison.*[Tt]or|constructible.*[Dd]erived",
+   "results": "Read 25 returned hits: Mathlib/AlgebraicTopology/SimplicialSet/NerveAdjunction.lean, Mathlib/AlgebraicTopology/SimplicialSet/NerveAdjunction.lean, Mathlib/AlgebraicTopology/SimplicialSet/NerveAdjunction.lean, Mathlib/AlgebraicTopology/SimplicialSet/NerveAdjunction.lean, Mathlib/AlgebraicTopology/SimplicialSet/NerveAdjunction.lean, Mathlib/AlgebraicTopology/DoldKan/Normalized.lean, Mathlib/Algebra/Order/Sum.lean, Mathlib/RingTheory/WittVector/Compare.lean",
+   "date": "2026-10-22",
+   "verdict": "no match: the returned ring-etale, site, generic fully faithful or derived-category declarations do not state the joint constructible-witness and transported-functor comparison assertion"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.unit, CategoryTheory.Functor.FullyFaithful",
+   "results": "Read 4 returned hits: CategoryTheory.Adjunction.fullyFaithfulLOfIsIsoUnit, CategoryTheory.Adjunction.map_restrictFullyFaithful_unit_app, CategoryTheory.Adjunction.map_restrictFullyFaithful_unit_app_assoc, CategoryTheory.Adjunction.restrictFullyFaithful_homEquiv_apply",
+   "date": "2026-10-22",
+   "verdict": "no match: the returned ring-etale, site, generic fully faithful or derived-category declarations do not state the joint constructible-witness and transported-functor comparison assertion"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The derived comparison from etale to proetale sheaves is fully faithful and reflects cohomological intervals",
+   "results": "Read 8 returned hits: AlgebraicGeometry.Scheme.Etale.forgetFullyFaithful, CategoryTheory.fullyFaithfulSheafToPresheaf, CategoryTheory.coherentTopology.instIsDenseSubsite, AlgebraicGeometry.SheafedSpace.fullyFaithfulForgetToPresheafedSpace, CategoryTheory.instReflectsIsomorphismsSheafFunctorOppositeSheafToPresheaf, CategoryTheory.instFaithfulSheafFunctorOppositeSheafToPresheaf, lightToProfiniteFullyFaithful, CategoryTheory.GrothendieckTopology.yonedaFullyFaithful",
+   "date": "2026-10-22",
+   "verdict": "no match: the returned ring-etale, site, generic fully faithful or derived-category declarations do not state the joint constructible-witness and transported-functor comparison assertion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Etale proetale comparison bounded constructible derived origin witnesses and Tor amplitude reflection",
+   "results": "Read 8 returned hits: AlgebraicGeometry.IsEtale.of_comp, AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified, Algebra.FormallyEtale.comp, Algebra.Etale.exists_subalgebra_fg, AlgebraicGeometry.Scheme.smallEtalePretopology, Algebra.Etale.comp, Algebra.etaleLocus_eq_compl_support, AlgebraicGeometry.Scheme.etaleTopology",
+   "date": "2026-10-22",
+   "verdict": "no match: the returned ring-etale, site, generic fully faithful or derived-category declarations do not state the joint constructible-witness and transported-functor comparison assertion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An exact fully faithful etale proetale inverse image reflects cohomology vanishing and bounded constructible derived objects descend",
+   "results": "Read 8 returned hits: LightProfinite.instWEqualsLocallyBijectiveCoherentTopology, HomotopyCategory.quotient_obj_mem_subcategoryAcyclic_iff_exactAt, AlgebraicGeometry.Scheme.etaleTopology, DerivedCategory.instEssSurjCochainComplexIntQ, AlgebraicGeometry.Scheme.smallEtaleTopology, CategoryTheory.Presheaf.coherentExtensiveEquivalence, DerivedCategory.isGE_Q_obj_iff, CategoryTheory.Presheaf.isSheaf_coherent_of_projective_of_comp",
+   "date": "2026-10-22",
+   "verdict": "no match: the returned ring-etale, site, generic fully faithful or derived-category declarations do not state the joint constructible-witness and transported-functor comparison assertion"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-pur-closed-etale-transport-bounds",
+  "date": "2026-10-22",
+  "group": "Q25"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-rf-shriek-preservation",
+ "blueprint": {
+  "from": {
+   "node": "thm-pur-general-admissibility",
+   "place": "Proof Step 2: comparison prerequisites for the closed-support computations; parent split Steps 1, 2 and 4 (origin, the natural comparison-unit map, and reflection of each witness Tor interval).",
+   "via": [
+    "lem-pur-closed-etale-transport-bounds"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-pur-etale-witness-transport-data",
+  "worker": "stage1",
+  "summary": "Preserved the statement and all original metadata and searches. Reused the existing constructible-origin equivalence, exact comparison pullback, bounded-below natural unit and Tor-reflection theorem. Wrote interval reflection for every witness without Tor, then constructed the functor comparison and witness identification from the unit and proved the required naturality by an explicit composition calculation. No new nodes or Mathlib leaves.",
+  "blueprint": "thm-pur-general-admissibility.proof.md, Step 2, comparison prerequisites to the closed-support bounds, through the intermediate lem-pur-closed-etale-transport-bounds: Steps 1-3 supply origin and interval/Tor reflection, Steps 4-6 supply the unit-based identification and its naturality. The parent blueprint does not spell out this categorical calculation; it is expanded as an agent-written argument.",
+  "tool_uses": [
+   {
+    "node": "lem-sf-proetale-constructible-origin",
+    "why": "The existing finite-coefficient constructible equivalence supplies etale origins; the current unit has no separate origin equivalence and the blueprint comparison route needs this tool."
+   },
+   {
+    "node": "lem-sf-comparison-pullback-exact",
+    "why": "Generic exact comparison pullback with its cohomology formula, needed for interval reflection; this unit has no separate statement supplying that formula."
+   },
+   {
+    "node": "thm-weil-pbc-site-comparison",
+    "why": "Generic bounded-below site-comparison unit, used to reflect zero sheaves and build the natural comparison for arbitrary G; the unit has no different comparison-unit theorem."
+   }
+  ]
+ },
+ "tool_uses": [
+  "thm-weil-pbc-site-comparison"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q04-f0f902ebe",
+  "group": "Q04",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q04-f0f902ebe (reviewer sub-agent of L); spot-checked: Six-step first split of an item that was still unsplit live (created 2026-10-22 by the Q25 re-split of lem-pur-closed-etale-transport-bounds). The statement and metadata are byte-identical to live, the old searches are kept and 5 new ones appended, there are no new nodes, no SGA and no cycle. Step 1: lem-sf-proetale-constructible-origin (ii), Stacks 09AL/09AK (proetale.tex l.5357/5239), gives the bounded constructible witness. Step 2: interval reflection for every witness, using pullback-exact (2),(3); the converse uses the D^+ unit of thm-weil-pbc-site-comparison on M[0] only (Stacks 099V/09B1(2)). Step 3: lem-sf-comparison-tor-amplitude (ii) with K'=B_e and alpha^{-1}; ell is invertible on a k-scheme, and its etale clause equals def-kun-tor-amplitude, which tests all module sheaves. Step 4: sigma=F(eta), naturality checked. Steps 5-6: I checked the composition delta^{-1}=F(Rnu_*alpha)F(eta) and delta'H(h)=F(beta)delta in full; beta and h are not inverted. The coefficient sheaf Cont(pi0,Lambda)^# is the constant A for finite A, so all categories are the ordinary constant-A ones. No duplicate found; nearest is lem-pur-closed-finite-adjoint-counit-transport (i^!-specific). Tool uses accepted: constructible-origin (sk-prop-sf-comparison) and site-comparison (sk-thm-properbasechange) as generic comparison tools; pullback-exact is on the unit route via sk-def-sf-operations. Edge cases checked: empty T, identities, constant G, r=s, and A/ell over Z/ell^2 (witness exists with infinite Tor; the item never infers Tor from constructibility)."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.EtaleWitnessTransportData",
+  "declaration": "AlgebraicGeometry.ProEtale.etaleWitnessTransportData",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.witnessEtalePlus",
+   "AlgebraicGeometry.ProEtale.witnessProEtalePlus",
+   "AlgebraicGeometry.ProEtale.witnessTransportFunctor",
+   "AlgebraicGeometry.ProEtale.witnessTransportComparison",
+   "AlgebraicGeometry.ProEtale.witnessTransportIdentification",
+   "AlgebraicGeometry.ProEtale.etaleWitnessTransportData"
+  ],
+  "file": "lean/Sheaf/Paper/EtaleWitnessTransportData.lean",
+  "statement": "theorem etaleWitnessTransportData (P : WeilConjectures.PurityFiniteSetting.{u}) (T Z : Scheme.{u}) [T.Over (Spec (.of P.field.k))] [Z.Over (Spec (.of P.field.k))] [LocallyOfFiniteType (T ↘ Spec (.of P.field.k))] [QuasiCompact (T ↘ Spec (.of P.field.k))] [LocallyOfFiniteType (Z ↘ Spec (.of P.field.k))] [QuasiCompact (Z ↘ Spec (.of P.field.k))] (G : witnessEtalePlus P.Coefficient T ⥤ witnessEtalePlus P.Coefficient Z) (r s : ℤ) (_hrs : r ≤ s) : (∀ B : witnessProEtalePlus P.Coefficient T, Scheme.intrinsicFiniteTorsionConstructible P.coefficients.l P.extension P.level P.level_pos T ((finiteCoefficientIntrinsicRealization T P.Ring).mapDerivedCategory.obj B.obj) → (∃ B_e : witnessEtalePlus P.Coefficient T, Etale.DerivedCategory.isBoundedConstructible P.Coefficient T B_e.obj ∧ Nonempty ((comparisonUpperStar (ModuleCat.{u + 1} P.Coefficient) T).mapDerivedCategoryPlus.obj B_e ≅ B)) ∧ (∀ (B_e : witnessEtalePlus P.Coefficient T), Etale.DerivedCategory.isBoundedConstructible P.Coefficient T B_e.obj → ∀ _alpha : (comparisonUpperStar (ModuleCat.{u + 1} P.Coefficient) T).mapDerivedCategoryPlus.obj B_e ≅ B, (_root_.DerivedCategory.homologyConcentratedIn r s B_e.obj ↔ WeilConjectures.constructibleInterval P.coefficients.l P.extension P.level P.level_pos T r s ((finiteCoefficientIntrinsicRealization T P.Ring).mapDerivedCategory.obj B.obj)) ∧ (Scheme.HasProEtaleTorAmplitude T P.Ring ((finiteCoefficientIntrinsicRealization T P.Ring).mapDerivedCategory.obj B.obj) r s → Etale.DerivedCategory.hasTorAmplitudeIn P.Coefficient T r s B_e.obj))) ∧ (∀ C : witnessEtalePlus P.Coefficient T, (witnessTransportComparison P.Coefficient T Z G).inv.app C = (G ⋙ (comparisonUpperStar (ModuleCat.{u + 1} P.Coefficient) Z).mapDerivedCategoryPlus).map ((derivedComparisonAdjunctionPlus (ModuleCat.{u + 1} P.Coefficient) T).unit.app C)) ∧ (∀ (B : witnessProEtalePlus P.Coefficient T) (_hB : Scheme.intrinsicFiniteTorsionConstructible P.coefficients.l P.extension P.level P.level_pos T ((finiteCoefficientIntrinsicRealization T P.Ring).mapDerivedCategory.obj B.obj)) (B_e : witnessEtalePlus P.Coefficient T) (_hBe : Etale.DerivedCategory.isBoundedConstructible P.Coefficient T B_e.obj) (alpha : (comparisonUpperStar (ModuleCat.{u + 1} P.Coefficient) T).mapDerivedCategoryPlus.obj B_e ≅ B), (witnessTransportIdentification P.Coefficient T Z G B B_e alpha).inv = (G ⋙ (comparisonUpperStar (ModuleCat.{u + 1} P.Coefficient) Z).mapDerivedCategoryPlus).map ((derivedComparisonAdjunctionPlus (ModuleCat.{u + 1} P.Coefficient) T).unit.app B_e) ≫ (G ⋙ (comparisonUpperStar (ModuleCat.{u + 1} P.Coefficient) Z).mapDerivedCategoryPlus).map ((comparisonLowerStar (ModuleCat.{u + 1} P.Coefficient) T).rightDerivedFunctorPlus.map alpha.hom)) ∧ (∀ (B B' : witnessProEtalePlus P.Coefficient T) (_hB : Scheme.intrinsicFiniteTorsionConstructible P.coefficients.l P.extension P.level P.level_pos T ((finiteCoefficientIntrinsicRealization T P.Ring).mapDerivedCategory.obj B.obj)) (_hB' : Scheme.intrinsicFiniteTorsionConstructible P.coefficients.l P.extension P.level P.level_pos T ((finiteCoefficientIntrinsicRealization T P.Ring).mapDerivedCategory.obj B'.obj)) (B_e B'_e : witnessEtalePlus P.Coefficient T) (_hBe : Etale.DerivedCategory.isBoundedConstructible P.Coefficient T B_e.obj) (_hBe' : Etale.DerivedCategory.isBoundedConstructible P.Coefficient T B'_e.obj) (alpha : (comparisonUpperStar (ModuleCat.{u + 1} P.Coefficient) T).mapDerivedCategoryPlus.obj B_e ≅ B) (alpha' : (comparisonUpperStar (ModuleCat.{u + 1} P.Coefficient) T).mapDerivedCategoryPlus.obj B'_e ≅ B') (beta : B_e ⟶ B'_e) (h : B ⟶ B'), alpha.hom ≫ h = (comparisonUpperStar (ModuleCat.{u + 1} P.Coefficient) T).mapDerivedCategoryPlus.map beta ≫ alpha'.hom → (witnessTransportFunctor P.Coefficient T Z G).map h ≫ (witnessTransportIdentification P.Coefficient T Z G B' B'_e alpha').hom = (witnessTransportIdentification P.Coefficient T Z G B B_e alpha).hom ≫ (G ⋙ (comparisonUpperStar (ModuleCat.{u + 1} P.Coefficient) Z).mapDerivedCategoryPlus).map beta)",
+  "branch": "sheaf-dag",
+  "by": "Q75",
+  "date": "2026-10-22",
+  "existing": false,
+  "note": "The ordinary fixed-module D+ presentation is canonically realized over the constant commutative coefficient sheaf when evaluating intrinsic constructibility, intervals and Tor. The derived natural comparison and each witness identification are concrete composites of the recorded comparison unit and functorial images; they are not chosen isomorphisms. Reviewer FIX: the delivery's restored Sheaf.SixFunctors.SfCategories record of def-sf-categories is superseded by Q73's landed record (Mathlib DerivedCategory, existing: true; landed after this delivery's base) and is left out at landing; the item used none of its declarations, so its import is replaced by direct imports of the def-pur-conventions, finite-torsion constructibility and etale Tor-amplitude modules.",
+  "fixed_by": "NT-stage2-cc-89304c58c"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-89304c58c",
+  "group": "Q75",
+  "result": "fix",
+  "note": "Item statement matches node clause by clause: witness existence with no Tor premise, interval iff via homologyConcentratedIn/constructibleInterval, Tor reflection HasProEtaleTorAmplitude→hasTorAmplitudeIn, canonical comparison pinned to F(unit), delta inverse formula, naturality for arbitrary beta,h; no extra hypotheses; universes bound; docstrings and report sections OK. Mechanical fault: delivered def-sf-categories record (restored SfCategories) collides with Q73's existing:true Mathlib DerivedCategory record landed 10:22 UTC after this delivery's base (snapshot reviewed_lean still Q94), so landing auto-reverts it and drops SfCategories.lean, breaking the item's unused import. FIX: fixes/EtaleWitnessTransportData.lean with that import replaced by direct stmt_dep imports (PurityFiniteSetting, IntrinsicFiniteTorsionConstructibility, EtaleTorAmplitude); nt_compile --json vs live: 18.3 s rc 0 clean; lean-record.json keeps the verbatim statement and updates the note. A rebased re-push of the dep record would overwrite Q73's record (H13 RETURN).; reverted the delivery's change of existing node(s) def-sf-categories (--revert-nodes; kept as on sheaf-dag)"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E1",
+  "result": "pass",
+  "landing": "20261022T143123-L-964524",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

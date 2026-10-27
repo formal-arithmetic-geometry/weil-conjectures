@@ -1,0 +1,261 @@
+{
+ "id": "lem-sfb-quotient-pullback-tensor-coherence",
+ "kind": "statement",
+ "title": "Tensor coherence of the normalized integral quotient pullback square",
+ "statement": "Fix a prime $\\ell$, a finite extension $E/\\mathbf Q_\\ell$, its valuation ring $A=\\mathcal O_E$ and a uniformizer $\\pi$ [def-weil-l-adic-coefficient-extension]. For a scheme $T$ put $R_T=p_T^*\\underline{\\mathcal O_E}=\\varprojlim_{m\\geq1}(A/\\pi^m)_T$ [sk-def-sfb-pulled-back-coefficients, det-prop-sfb-qlbar-colimit-x-integral-limit], and $S_T=(A/\\pi^n)_T$, the constant finite quotient ring sheaf, for a fixed $n\\geq1$. Use the ordinary unbounded derived categories $D_R(T)=D(\\operatorname{Mod}_{R_T})$, $D_S(T)=D(\\operatorname{Mod}_{S_T})$ of internal module objects, the derived module pullback and pushforward with their derived adjunction [sk-def-sfb-module-derived-pushpull], and the uncompleted relative derived tensor [sk-def-sfb-derived-tensor-hom]. Set $D_{n,T}K=K\\otimes^L_{R_T}S_T$, the derived scalar extension of [lem-pur-derived-change-of-rings].\n\nFor any scheme morphism $f:X\\to Y$, write $D_T=D_{n,T}$, $L_R=L_{f,R}$ and $L_S=L_{f,S}$. Let $\\lambda:L_SD_Y\\xrightarrow{\\sim}D_XL_R$ be precisely the normalized comparison of [lem-sfb-integral-quotient-direct-image-comparison]. Use the actual internal pullback tensor maps $t_R,t_S$ of [def-sfb-module-object-projection-map] and the normalized scalar tensor isomorphisms $b_T$ characterized by [lem-sfb-quotient-section-tensor-normalization].\n\nConsider the square of ringed topoi with horizontal morphisms induced by $f$ and vertical morphisms $(T,S_T)\\to(T,R_T)$ induced by the identity topos and the actual quotient $R_T\\to S_T$. Its two composite structural ring maps agree under the canonical inverse-image compositor. More precisely, the coefficient identifications $\\alpha_f$ for $\\underline{\\mathcal O_E}$ and $A/\\pi^n$ of [sk-def-sfb-coefficient-morphisms] intertwine the actual quotient ring maps. The comparison $\\lambda$ is identified, under the internal/section equivalences, with the composition comparison between the two routes around this square, with its stated flat-term K-flat normalization.\n\nFor every $U,V\\in D_R(Y)$, the following equality holds in $D_S(X)$:\n$$b_{X,L_RU,L_RV}\\circ D_X(t_{R,U,V})\\circ\\lambda_{U\\otimes^L_{R_Y}V}\n=(\\lambda_U\\otimes^L_{S_X}\\lambda_V)\\circ t_{S,D_YU,D_YV}\\circ L_S(b_{Y,U,V}).$$\nBoth sides have source $L_SD_Y(U\\otimes^L_{R_Y}V)$ and target $D_XL_RU\\otimes^L_{S_X}D_XL_RV$. Thus the two composite tensorators $t_S\\circ L_S(b_Y)$ and $b_X\\circ D_X(t_R)$ are intertwined by this specified $\\lambda$, naturally in $U,V$. No interchange of the two homogeneous module variables occurs in these comparisons. The assertion holds for arbitrary unbounded complexes and for nonflat quotient maps; it assumes neither properness nor completeness.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sfb-proper-base-change/sk-thm-sfb-proper-base-change-integral.proof.md",
+  "place": "Paragraph (3), reduction of the canonical projection formula map: coefficient-square normalization and its tensor equation (returned proof steps 2 and 3).; Stacks sites-cohomology.tex, Tag 0D6D (lemma-derived-pullback-composition), compared along the two routes of the coefficient square; extracted tensor coherence assertion."
+ },
+ "stmt_deps": [
+  "def-weil-l-adic-coefficient-extension",
+  "sk-def-sfb-pulled-back-coefficients",
+  "det-prop-sfb-qlbar-colimit-x-integral-limit",
+  "sk-def-sfb-module-derived-pushpull",
+  "sk-def-sfb-derived-tensor-hom",
+  "lem-pur-derived-change-of-rings",
+  "lem-sfb-quotient-section-tensor-normalization",
+  "lem-sfb-integral-quotient-direct-image-comparison",
+  "def-sfb-module-object-projection-map",
+  "sk-def-sfb-coefficient-morphisms",
+  "def-pc-kflat-complex",
+  "def-pc-flat-sheaf-modules",
+  "def-sfb-integral-quotient-coefficients"
+ ],
+ "proof": [
+  {
+   "text": "Write $q:\\underline A\\to\\underline{A/\\pi^n}$ for the actual condensed quotient, and $q_T:R_T\\to S_T$ for its pullback. These are precisely the maps defined in [def-sfb-integral-quotient-coefficients], with its zero-based index $n-1$. By [sk-def-sfb-coefficient-morphisms], $\\alpha_{f,R}$ and $\\alpha_{f,S}$ are components of the same natural isomorphism $f^{-1}p_Y^*\\cong p_X^*$. Naturality at $q$ gives\n$$\\alpha_{f,S}\\circ f^{-1}(q_Y)=q_X\\circ\\alpha_{f,R}.$$\nThus the paths $(X,S_X)\\to(Y,S_Y)\\to(Y,R_Y)$ and $(X,S_X)\\to(X,R_X)\\to(Y,R_Y)$ have the same structural ring map after the canonical inverse-image compositor. This establishes commutation of the actual ringed square, rather than an arbitrary isomorphism between its corner rings.",
+   "uses": [
+    "def-sfb-integral-quotient-coefficients",
+    "sk-def-sfb-coefficient-morphisms"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sfb-proper-base-change/sk-thm-sfb-proper-base-change-integral.proof.md",
+    "place": "Paragraph (3), actual quotient maps and naturality of coefficient identifications; definitions sk-def-sfb-coefficient-morphisms and def-sfb-integral-quotient-coefficients"
+   }
+  },
+  {
+   "text": "Apply quotient_section_tensor_normalization to the given normalized tensor isomorphisms. Its ComparisonSpec supplies one family c of normalized scalar section data and, for f and the given normalized lam, a section comparison barLam satisfying both PullSectionCondition and SectionPullNormalized. Take c(X), c(Y) and that barLam. This proves the entire second conjunct without reconstructing a separate ringed composition comparison.",
+   "uses": [
+    "lem-sfb-quotient-section-tensor-normalization"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For flat-term K-flat complexes P and Q in the internal source module category, apply the representative tensor calculation of [lem-sfb-quotient-pullback-tensor-flat-model]. This gives precisely the last conjunct on the pair (Q(P),Q(Q)); its proof is the ordinary balancing calculation and signed-total argument.",
+   "uses": [
+    "lem-sfb-quotient-pullback-tensor-flat-model"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Regard the left and right composites in the tensor equation as natural transformations between functors on D_R(Y) times D_R(Y). For arbitrary U,V, take preimage complexes under the derived localization and apply CochainComplex.exists_quasiIso_flat_kFlat from [lem-sfb-abstract-kflat-resolution]. Their quasi-isomorphisms yield isomorphisms eP:Q(P) to U and eQ:Q(Q) to V. Naturality rewrites each transformation at (U,V), after precomposition by the source functor image of (eP,eQ), as its value at (Q(P),Q(Q)) followed by the target functor image. The representative equality of step 3 equates these expressions. Cancel the source image, which is an isomorphism, to get equality at (U,V). This is implemented by the proved private lemma natTrans_ext_flat. No two-variable localization or site descent theorem is required.",
+   "uses": [
+    "lem-sfb-abstract-kflat-resolution"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-sfb-integral-quotient-coefficients",
+  "sk-def-sfb-coefficient-morphisms",
+  "lem-sfb-quotient-section-tensor-normalization",
+  "lem-sfb-quotient-pullback-tensor-flat-model",
+  "lem-sfb-abstract-kflat-resolution"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 07A4, 0G7E, 06YY: representative calculation; assembly by existing section normalization and explicit naturality cancellation along flat K-flat resolutions (P3, 2026-10-27)."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "scalarTensor|scalar.*pullback|pullback.*scalar|IsMonoidal.*comp",
+   "results": "10 hits: Mathlib/CategoryTheory/Distributive/Monoidal.lean, Mathlib/CategoryTheory/Distributive/Monoidal.lean, Mathlib/CategoryTheory/Sites/Point/Monoidal.lean, Mathlib/CategoryTheory/Monoidal/Discrete.lean, Mathlib/CategoryTheory/Monoidal/Functor.lean, Mathlib/CategoryTheory/Monoidal/Functor.lean, Mathlib/CategoryTheory/Monoidal/Functor.lean, Mathlib/CategoryTheory/Monoidal/NaturalTransformation.lean",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary pullback composition and IsMonoidal.tensor do not establish monoidality of the independently normalized unbounded internal quotient comparisons or their coefficient-square ring maps",
+   "subdirectory": "CategoryTheory"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"NatTrans.IsMonoidal\", \"tensor\"",
+   "results": "2 hits: CategoryTheory.NatTrans.IsMonoidal.tensor, CategoryTheory.NatTrans.IsMonoidal.tensor_assoc",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary pullback composition and IsMonoidal.tensor do not establish monoidality of the independently normalized unbounded internal quotient comparisons or their coefficient-square ring maps"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A natural scalar pullback comparison between two composites of derived pullbacks is monoidal even for a nonflat quotient of sheaves of rings",
+   "results": "8 hits: CategoryTheory.ChosenPullbacksAlong.pullbackComp, SheafOfModules.pullbackComp, SheafOfModules.conjugateEquiv_pullbackComp_inv, PresheafOfModules.pullback_comp_id, SheafOfModules.pullback_assoc, AlgebraicGeometry.Scheme.Modules.pullbackComp, PresheafOfModules.pullbackComp, PresheafOfModules.pullback_id_comp",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary pullback composition and IsMonoidal.tensor do not establish monoidality of the independently normalized unbounded internal quotient comparisons or their coefficient-square ring maps"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The normalized derived scalar extension and pullback comparison for integral to uniformizer quotient internal module sheaves commutes with tensor balancing without flatness",
+   "results": "8 hits: Algebra.tensorH1CotangentOfIsLocalization_toLinearMap, KaehlerDifferential.tensorKaehlerEquiv_left_inv, AdicCompletion.tensor_map_id_left_eq_map, Algebra.Extension.lTensor_cotangentComplex_eq_cotangentComplexBaseChange, Algebra.tensorH1CotangentOfIsLocalization, Algebra.Extension.cotangentComplexBaseChange_eq_lTensor_cotangentComplex, Algebra.Extension.tensorCotangent, KaehlerDifferential.moduleBaseChange'",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary pullback composition and IsMonoidal.tensor do not establish monoidality of the independently normalized unbounded internal quotient comparisons or their coefficient-square ring maps"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived extension of scalars along a nonflat ring sheaf map is monoidal and its tensorator commutes with the normalized derived inverse image scalar comparison",
+   "results": "8 hits: CategoryTheory.Tor'_map_app, CategoryTheory.Tor_map, CategoryTheory.Tor'_obj_map, CategoryTheory.Tor', LightCondensed.instMonoidalFunctorOppositeLightProfiniteModuleCatSheafCoherentTopologyPresheafToSheaf, CategoryTheory.Tor'_obj_obj, CategoryTheory.Tor, ModuleCat.preservesFiniteLimits_tensorLeft_of_ringHomFlat",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary pullback composition and IsMonoidal.tensor do not establish monoidality of the independently normalized unbounded internal quotient comparisons or their coefficient-square ring maps"
+  },
+  {
+   "tool": "grep",
+   "query": "pullbackComp|IsMonoidal",
+   "results": "5 hits: Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary pullback composition and IsMonoidal.tensor do not establish monoidality of the independently normalized unbounded internal quotient comparisons or their coefficient-square ring maps",
+   "subdirectory": "Algebra/Category/ModuleCat/Sheaf"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"SheafOfModules.pullbackComp\"",
+   "results": "2 hits: PresheafOfModules.pullbackComp, SheafOfModules.pullbackComp",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary pullback composition and IsMonoidal.tensor do not establish monoidality of the independently normalized unbounded internal quotient comparisons or their coefficient-square ring maps"
+  },
+  {
+   "tool": "grep",
+   "query": "pullbackComp|derived.*[Tt]ensor|IsMonoidal",
+   "results": "5 hits: Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary pullback composition and conditional IsMonoidal equations do not state the specified unbounded internal quotient comparison, its coefficient-square normalization and tensor coherence",
+   "subdirectory": "Algebra/Category/ModuleCat/Sheaf"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived scalar extension and inverse image of sheaves of modules commute with tensor products along a commutative coefficient square",
+   "results": "8 hits: ModuleCat.extendScalars, ModuleCat.ExtendScalars.obj', PresheafOfModules.Monoidal.tensorObjMap, PresheafOfModules.pullback, SheafOfModules.restrictScalars, ModuleCat.extendRestrictScalarsAdj, PresheafOfModules.Monoidal.tensorHom, PresheafOfModules.pullbackPushforwardAdjunction",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary pullback composition and conditional IsMonoidal equations do not state the specified unbounded internal quotient comparison, its coefficient-square normalization and tensor coherence"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived pullback and extension of scalars along a commutative square of sheaves of rings commute compatibly with their tensor comparison maps",
+   "results": "8 hits: SheafOfModules.pullbackComp, SheafOfModules.pullback_assoc, SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom_assoc, SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom, SheafOfModules.conjugateEquiv_pullbackComp_inv, SheafOfModules.pullbackIso, SheafOfModules.pullbackObjUnitToUnit, SheafOfModules.pullback_id_comp",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary pullback composition and conditional IsMonoidal equations do not state the specified unbounded internal quotient comparison, its coefficient-square normalization and tensor coherence"
+  },
+  {
+   "tool": "grep",
+   "query": "pullback.*[Mm]onoidal|[Mm]onoidal.*pullback|derivedPullback.*[Tt]ensor|[Tt]ensor.*derivedPullback",
+   "results": "25 hits: Mathlib/CategoryTheory/LiftingProperties/PushoutProduct.lean, Mathlib/CategoryTheory/LocallyCartesianClosed/Over.lean, Mathlib/CategoryTheory/LocallyCartesianClosed/Over.lean, Mathlib/CategoryTheory/LocallyCartesianClosed/Over.lean, Mathlib/CategoryTheory/LocallyCartesianClosed/Over.lean, Mathlib/CategoryTheory/LocallyCartesianClosed/Over.lean, Mathlib/CategoryTheory/Monoidal/Grp.lean, Mathlib/CategoryTheory/Monoidal/Grp.lean",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary pullback composition and conditional IsMonoidal equations do not state the specified unbounded internal quotient comparison, its coefficient-square normalization and tensor coherence",
+   "subdirectory": "CategoryTheory"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The composition comparison for unbounded derived inverse image of sheaves of modules is monoidal on K-flat complexes even for nonflat coefficient homomorphisms",
+   "results": "8 hits: LightCondensed.instMonoidalFunctorOppositeLightProfiniteModuleCatSheafCoherentTopologyPresheafToSheaf, CategoryTheory.Tor', CategoryTheory.Sheaf.instMonoidalFunctorOppositePresheafToSheaf, LightCondensed.instMonoidalLightCondSetLightCondModFree, CategoryTheory.GrothendieckTopology.W.transport_isMonoidal, CategoryTheory.Tor, LightCondensed.instMonoidalCategorySheafLightProfiniteCoherentTopologyModuleCat, CategoryTheory.Tor_map",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary pullback composition and conditional IsMonoidal equations do not state the specified unbounded internal quotient comparison, its coefficient-square normalization and tensor coherence"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-integral-quotient-projection-comparison",
+  "date": "2026-10-22",
+  "group": "ND"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sfb-proper-base-change",
+ "blueprint": {
+  "from": {
+   "node": "det-thm-sfb-proper-base-change-integral",
+   "place": "Paragraph (3), reduction of the canonical projection formula map: coefficient-square normalization and its tensor equation (returned proof steps 2 and 3).",
+   "via": [
+    "lem-sfb-integral-quotient-projection-comparison"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sfb-quotient-pullback-tensor-coherence",
+  "worker": "stage1",
+  "summary": "NU checked the actual quotient ring square by naturality, identified the specified scalar/pullback comparison with its ringed composition comparison on flat-term K-flat representatives, computed both tensor composites on local generators with the same variable order, and descended the equality. No new nodes or statement changes. All needed K-flat, normalization and localization facts already exist.",
+  "blueprint": "det-thm-sfb-proper-base-change-integral, paragraph (3): the reduction of the canonical projection formula map is the torsion canonical map; this item supplies its normalized coefficient-square tensor compatibility. The unit proper-base-change step (3) is unchanged.",
+  "tool_uses": [
+   {
+    "node": "lem-pc-kflat-resolution",
+    "why": "Generic existence of flat-term K-flat resolutions on a small ringed site; this is the resolution input, not a replacement of the integral reduction route."
+   },
+   {
+    "node": "lem-pur-kflat-total-tensor-model",
+    "why": "Generic unbounded direct-sum tensor model and closure of the resolving class needed for the two-variable calculation."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-pullback-preserves-kflat",
+    "why": "Generic preservation of flat-term K-flat complexes for a ringed-topos pullback, allowing the nonflat quotient edges."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+    "why": "Generic ringed derived tensor/pullback comparison on the chosen resolutions."
+   },
+   {
+    "node": "lem-sfb-ringed-derived-monoidal-comparisons",
+    "why": "Generic normalized composition and ringed 2-isomorphism comparisons used only to identify the specified square comparison."
+   },
+   {
+    "node": "lem-weil-pbc-site-derived-tensor-descent",
+    "why": "Generic resolving-class localization and uniqueness of natural transformations on two derived variables."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pur-kflat-total-tensor-model",
+  "lem-weil-pbc-ringed-pullback-preserves-kflat",
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-NU-c7cfa2b01",
+  "group": "NU",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NU-c7cfa2b01 (reviewer sub-agent of L); spot-checked: I read the whole item: the unchanged statement, all 6 steps, the full statement of every cited node, the parent lem-sfb-integral-quotient-projection-comparison (its step 2 cites the item for exactly the displayed equation) and blueprint main-20261015 integral proof paragraph (3). I checked Stacks 0D6D (sites-cohomology l.3658), 07A4 (l.3684) and the tag/label pairs of 06YS, 0G7D, 07A2, 06YU, 0G7E, 06YY and 03EL. Step 1 is elementary and correct: alpha_f is one natural iso f^*p_Y^*≅p_X^*, so naturality at q makes the two structural ring maps of the square equal; the zero-based index n-1 is right. Step 2: lem-sfb-quotient-section-tensor-normalization states every identification the step uses (D, b, t_R/t_S, lambda's formula, adjunctions) as natural transformations, without flatness. Step 3: K-flat resolutions, the unbounded direct-sum total model, and preservation of flat-term K-flat complexes under u^* with no flatness of c, which covers the nonflat quotient edges. Step 4: the composition comparison and the 2-iso clause of lem-sfb-ringed-derived-monoidal-comparisons give chi = c_B h c_A^-1; its representative formula is lambda's, extended to all objects by naturality. Step 5: I recomputed the generator chase. Both sides send a⊗f^-1((p⊗q)⊗s) to (p~⊗1)⊗(q~⊗as'). Step 6: all maps are degree 0 and keep (i,j), so there is no Koszul sign; pullback commutes with direct sums, and the bifunctor uniqueness clause of lem-weil-pbc-site-derived-tensor-descent gives the descent. Edge cases tested: f=id, zero inputs, n=1 with nonflat Z_l→F_l, odd degrees, doubly unbounded inputs. No new nodes, no cycle, no SGA, proof_deps = union of uses. The DAG search for the equation's shape found no duplicate. I accept the 6 declared generic tool_uses (K-flat and ringed-monoidal machinery; the unit route is unchanged). Advisory: the inherited statement says 'ringed topoi' without citing def-weil-pbc-ringed-topos-morphism."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.QuotientPullbackTensorCoherence",
+  "declaration": "AlgebraicGeometry.ProEtale.IntegralQuotient.quotient_pullback_tensor_coherence",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.IntegralQuotient.quotientTensorPull",
+   "AlgebraicGeometry.ProEtale.IntegralQuotient.quotient_pullback_tensor_coherence"
+  ],
+  "file": "lean/Sheaf/Paper/QuotientPullbackTensorCoherence.lean",
+  "statement": "theorem quotient_pullback_tensor_coherence (l : ℕ) [Fact l.Prime] (E : Type u) [Field E] [Algebra (Padic l) E] [FiniteDimensional (Padic l) E] (n : ℕ) [∀ T : Scheme.{u}, HasDerivedCategory.{u + 1} (ModuleRingedComparison.modules (integral l E) T)] [∀ T : Scheme.{u}, HasDerivedCategory.{u + 1} (ModuleRingedComparison.modules (finite l E n) T)] (b : ∀ T : Scheme.{u}, TensorIso (reduction l E n) T) (_hb : ∀ T : Scheme.{u}, QuotientSectionTensor.TensorNormalized (reduction l E n) T (b T)) {X Y : Scheme.{u}} (f : X ⟶ Y) (lam : D (reduction l E n) Y ⋙ L (finite l E n) f ≅ L (integral l E) f ⋙ D (reduction l E n) X) (_hlam : PullNormalized (reduction l E n) f lam) : (ProEtale.upperStar Ab.{u + 1} f).map (coefficientMap (reduction l E n) Y) ≫ condensedPullbackHom (finite l E n) f = condensedPullbackHom (integral l E) f ≫ coefficientMap (reduction l E n) X ∧ (∃ (cX : ScalarSectionData (reduction l E n) X) (cY : ScalarSectionData (reduction l E n) Y), ScalarSectionNormalized (reduction l E n) X cX ∧ ScalarSectionNormalized (reduction l E n) Y cY ∧ ∃ barLam : cY.model.T ⋙ ModuleRingedComparison.derivedPullback (finite l E n) f ≅ ModuleRingedComparison.derivedPullback (integral l E) f ⋙ cX.model.T, PullSectionCondition (reduction l E n) f cX cY lam barLam ∧ SectionPullNormalized (reduction l E n) f cX cY barLam) ∧ ∀ U V : DerivedCategory (Modules (integral l E) Y), lam.hom.app (U ⊗ V) ≫ (D (reduction l E n) X).map (((quotientTensorPull (integral l E) f).app U).app V) ≫ (b X).hom.app ((L (integral l E) f).obj U, (L (integral l E) f).obj V) = (L (finite l E n) f).map ((b Y).hom.app (U, V)) ≫ ((quotientTensorPull (finite l E n) f).app ((D (reduction l E n) Y).obj U)).app ((D (reduction l E n) Y).obj V) ≫ (lam.hom.app U ⊗ₘ lam.hom.app V)",
+  "branch": "sheaf-dag",
+  "by": "Q118",
+  "date": "2026-10-22",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-677a0cfe8",
+  "group": "Q118",
+  "result": "pass",
+  "note": "Statement matches node clause by clause: ℓ, E and quotient level n+1 (n:ℕ, residue field included); λ = given lam fixed by PullNormalized (correct direction); b fixed by TensorNormalized; t_R/t_S = actual leftDerivedUpperStarTensor (the map used in def-sfb-module-object-projection-map); coefficient-square equation α_S∘f^{-1}q_Y = q_X∘α_R correctly typed; tensor equation in correct composition order with source L_S D_Y(U⊗V), target D_X L_R U ⊗ D_X L_R V, no U/V swap; no extra hypotheses or universe restrictions. lean.statement verbatim; stmt_deps only gained the landed def-sfb-integral-quotient-coefficients; docstrings with source, blueprint tag and 6 proof steps; proof sorry; helper is real data; worker report and second reading present. Advisories: the section-identification conclusion is the dep ComparisonSpec clause restated as the node's own recall sentence (accepted, tensor equation is on fixed maps); QuotientChange.*/coefficientMap/upperStar owners not in stmt_deps (same as the deps); quotientTensorPull wraps leftDerivedUpperStarTensor and no def node owns it. No compile run since no file changed (worker: clean 37.5 s/32.1 s)."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P3",
+  "result": "pass",
+  "landing": "20261027T012914-L-2345494",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

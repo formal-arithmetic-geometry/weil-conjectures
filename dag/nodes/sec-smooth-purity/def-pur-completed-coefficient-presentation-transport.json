@@ -183,25 +183,24 @@
   },
   "same_as": []
  },
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
  "chapter": "sec-smooth-purity",
  "unit": "sk-lem-sf-mate",
  "lean": {
   "module": "Sheaf.Paper.CompletedCoefficientPresentationTransport",
   "declaration": "WeilConjectures.purScalarModel",
   "declarations": [
-   "WeilConjectures.purCoefficientIso_existsUnique",
-   "WeilConjectures.purCoefficientIso",
-   "WeilConjectures.purOrdinaryCoefficientModel",
-   "WeilConjectures.purOrdinaryCoefficientModel_additive",
-   "WeilConjectures.purOrdinaryCoefficientModel_limits",
-   "WeilConjectures.purOrdinaryCoefficientModel_colimits",
-   "WeilConjectures.purOrdinaryCoefficientRoundTrip_existsUnique",
-   "WeilConjectures.purOrdinaryCoefficientRoundTrip",
-   "WeilConjectures.purDetailedTransport_isEquivalence",
-   "WeilConjectures.purDerivedCoefficientRoundTrip",
-   "WeilConjectures.purCoefficientModel",
-   "WeilConjectures.purCoefficientModel_predicates",
    "WeilConjectures.purCoefficientModel_bounded_predicate",
    "WeilConjectures.purRawTensorSection",
    "WeilConjectures.purOrdinaryScalarModel_existsUnique",
@@ -216,7 +215,10 @@
   "by": "Q55",
   "date": "2026-10-17",
   "existing": false,
-  "note": "Repair of the returned packet: reuse the landed integralCoefficientULift, integralDetailedCoefficientComparison and integralDetailedTransport; the CommRing helper forgets to that comparison and the explicit inverse restriction is obtained by changeFunctor from the inverse of the landed transport. Completeness is separate from the bounded identification, which carries Noetherian, finite-dimension and ell-invertibility hypotheses. Rational and common-stage compatibility carry the primary theorem geometric hypotheses."
+  "note": "Repair of the returned packet: reuse the landed integralCoefficientULift, integralDetailedCoefficientComparison and integralDetailedTransport; the CommRing helper forgets to that comparison and the explicit inverse restriction is obtained by changeFunctor from the inverse of the landed transport. Completeness is separate from the bounded identification, which carries Noetherian, finite-dimension and ell-invertibility hypotheses. Rational and common-stage compatibility carry the primary theorem geometric hypotheses. Q3: the independent prefix through purCoefficientModel_predicates is defined in IntegralCoefficientCompletenessTransport and publicly reexported here; the bounded predicate and scalar transports stay here.",
+  "supporting_modules": [
+   "Sheaf.Paper.IntegralCoefficientCompletenessTransport"
+  ]
  },
  "reviewed": {
   "date": "2026-10-17",
@@ -235,13 +237,13 @@
   "note": "Wrote review.md and a complete replacement report under fixes/. Repaired the H1/H11 placeholder second reading and recorded compiler evidence. Both immutable Lean modules passed scompile.py; no substantive mismatch found. No branch mutation performed."
  },
  "reviewed_proof": {
-  "date": "2026-10-21",
+  "date": "2026-10-24",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "M3",
+  "reviewer": "C-fd479",
+  "group": "Q3",
   "result": "pass",
-  "landing": "20261021T111331-L-75331",
+  "landing": "20261024T015708-L-2438656",
   "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "note": "independent cc review: integralStratifiedPerfectDetailed proof and the two new proved lemmas against the item node step 5 and the new nodes; moved blocks diffed against live (verbatim except one internal proof step); all 6 delivered modules incl. importer CCPT compiled with lcompile --all; axioms checked (sorryAx only via pre-existing Roos-transport hole)"
  }
 }

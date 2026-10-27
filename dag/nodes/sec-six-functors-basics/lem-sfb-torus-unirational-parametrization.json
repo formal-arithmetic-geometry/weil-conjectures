@@ -1,0 +1,219 @@
+{
+ "id": "lem-sfb-torus-unirational-parametrization",
+ "kind": "statement",
+ "title": "Unirational parametrization of a torus over an arbitrary field",
+ "statement": "Let $k$ be any field [def-weil-field], and let $T$ be a $k$-torus [def-sfb-tori-multiplicative-type], that is, a $k$-group scheme [def-sc-group-scheme] becoming $\\mathbf G_m^r$ over an algebraic closure for some finite $r\\geq0$. There exist an integer $n\\geq0$, a nonempty open subscheme $U\\subseteq\\mathbb A^n_k$ [def-weil-open-immersion, def-sbc-affine-space], and a $k$-morphism $q:U\\to T$ whose image is Zariski dense in $T$. Here $\\mathbb A^n_k=\\operatorname{Spec}k[x_1,\\ldots,x_n]$ [def-weil-affine-spectrum]; dense image means that every nonempty open subset of $T$ has nonempty inverse image under $q$. This includes the trivial torus and arbitrary imperfect or finite fields.",
+ "source": {
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Definition 12.59 and its equivalent dominant-open parametrization, printed p.250; Proposition 12.64, printed p.251, using Propositions 12.60 and 12.63."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-sfb-tori-multiplicative-type",
+  "def-sc-group-scheme",
+  "def-weil-open-immersion",
+  "def-sbc-affine-space",
+  "def-weil-affine-spectrum"
+ ],
+ "proof": [
+  {
+   "text": "Apply [lem-sfb-torus-induced-quotient] to $T$. Obtain $m\\geq1$, finite separable extensions $L_i/k$, $A=\\prod_i L_i$, the affine torus $P$ representing $R\\mapsto(A\\otimes_kR)^\\times$, and a homomorphism $\\pi:P\\to T$ surjective on scheme points. This uses no perfection or infinitude hypothesis on $k$.",
+   "uses": [
+    "lem-sfb-torus-induced-quotient"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 12.63, printed p.251, with Lemma 12.61 and Definition 12.62. The displayed product of restrictions has the stated unit functor. A redundant factor L=k allows m>=1, also for the trivial torus."
+   }
+  },
+  {
+   "text": "Choose a finite $k$-basis $e_1,\\ldots,e_d$ of $A$: concatenate bases of the finitely many finite-dimensional fields, placing each basis vector in its own component. The product is nonzero because $m\\geq1$, so $d\\geq1$. Apply [lem-sfb-finite-algebra-units-affine-chart] to this basis and to the representing affine scheme $P$ from step 1. It gives a nonempty principal open $U=D(N)\\subseteq\\mathbb A^d_k$ and an isomorphism $\\theta:U\\xrightarrow{\\sim}P$. In particular the coordinates of $1_A$ lie in $U$ because their determinant is $1$.",
+   "uses": [
+    "lem-sfb-finite-algebra-units-affine-chart"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 12.60, proof, printed p.250: basis coordinates and norm polynomial. The identical multiplication-matrix construction applies to any finite-dimensional commutative algebra. For arbitrary test algebras R, read norm invertible, rather than merely nonzero (see report Source error)."
+   }
+  },
+  {
+   "text": "Set $n=d$ and $q=\\pi\\circ\\theta:U\\to T$. For every scheme point $t$ of $T$, surjectivity of $\\pi$ supplies $p\\in P$ with $\\pi(p)=t$; the inverse isomorphism $\\theta^{-1}$ supplies $u\\in U$ with $q(u)=t$. Thus $q$ is surjective on scheme points, and every nonempty open $V\\subseteq T$ has a point $t$ and hence a point in $q^{-1}(V)$. Its image is therefore dense as required. For the trivial torus one may take $L_1=k$, so this construction also covers rank zero without any claim about density of rational points over finite fields.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 12.64, printed p.251, combining 12.60 and 12.63; Definition 12.59, printed p.250."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-torus-induced-quotient",
+  "lem-sfb-finite-algebra-units-affine-chart"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Proposition 12.64 via Propositions 12.60 and 12.63, printed pp.250-251."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Every algebraic torus over a field is dominated by a nonempty open subset of affine space",
+   "results": "{\"t\": \"2026-10-24T08:16:24Z\", \"tool\": \"leanfinder\", \"query\": \"Every algebraic torus over a field is dominated by a nonempty open subset of affine space\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.AffineSpace.isOpenMap_over\", \"AlgebraicGeometry.AffineSpace.instSurjectiveOverSchemeInferInstanceOverClass\", \"AlgebraicGeometry.Scheme.IsQuasiAffine\", \"AlgebraicGeometry.AffineSpace.not_isIntegralHom\", \"AlgebraicGeometry.AffineSpace.isIntegralHom_over_iff_isEmpty\", \"AlgebraicGeometry.AffineSpace\", \"AlgebraicGeometry.AffineSpace.instIsAffine\", \"AlgebraicGeometry.instIsDominantToSpecΓOfCompactSpaceCarrierCarrierCommRingCat\"], \"digest\": \"1f958d3bc0f79ea8\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: affine-space structure, rational-map interfaces, analytic tori and a conic parametrization do not supply a dominant parametrization for every algebraic torus."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Every torus is unirational over its field of definition",
+   "results": "{\"t\": \"2026-10-24T08:16:22Z\", \"tool\": \"leansearch\", \"query\": \"Every torus is unirational over its field of definition\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"UnitAddTorus\", \"AlgebraicGeometry.Scheme.RationalMap.ofFunctionField\", \"torusMap\", \"Algebra.IsGeometricallyReduced.casesOn\", \"UnitAddTorus.mFourierSubalgebra_separatesPoints\", \"AlgebraicGeometry.Scheme.RationalMap.fromFunctionField\", \"torusIntegral_const_mul\", \"torusIntegral_succ\"], \"digest\": \"b19f596c59702771\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: affine-space structure, rational-map interfaces, analytic tori and a conic parametrization do not supply a dominant parametrization for every algebraic torus."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"torus\", \"IsDominant\"",
+   "results": "{\"t\": \"2026-10-24T08:16:22Z\", \"tool\": \"loogle\", \"query\": \"\\\"torus\\\", \\\"IsDominant\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: affine-space structure, rational-map interfaces, analytic tori and a conic parametrization do not supply a dominant parametrization for every algebraic torus."
+  },
+  {
+   "tool": "grep",
+   "query": "unirational|Unirational|inducedTorus|IsTorus",
+   "results": "{\"t\": \"2026-10-24T08:16:22Z\", \"tool\": \"grep\", \"query\": \"unirational|Unirational|inducedTorus|IsTorus\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: affine-space structure, rational-map interfaces, analytic tori and a conic parametrization do not supply a dominant parametrization for every algebraic torus."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A torus is a quotient of an induced torus and therefore admits a dominant rational parametrization",
+   "results": "{\"t\": \"2026-10-24T08:16:28Z\", \"tool\": \"leanfinder\", \"query\": \"A torus is a quotient of an induced torus and therefore admits a dominant rational parametrization\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"torusMap\", \"UnitAddTorus\", \"torusMap_zero_radius\", \"torusMap_eq_center_iff\", \"circleEquivGen_apply\", \"AddCircle.isAddQuotientCoveringMap_nsmul_of_ne_zero\", \"AddCircle.isAddQuotientCoveringMap_zsmul_of_ne_zero\", \"circleEquivGen\"], \"digest\": \"c5c314625211afc7\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: affine-space structure, rational-map interfaces, analytic tori and a conic parametrization do not supply a dominant parametrization for every algebraic torus."
+  },
+  {
+   "tool": "grep",
+   "query": "unirational|Unirational|inducedTorus|IsTorus",
+   "results": "{\"t\": \"2026-10-24T08:55:16Z\", \"tool\": \"grep\", \"query\": \"unirational|Unirational|inducedTorus|IsTorus\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: returned declarations do not give the asserted algebraic-torus quotient or parametrization"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Every torus is unirational over its field of definition",
+   "results": "{\"t\": \"2026-10-24T08:55:16Z\", \"tool\": \"leansearch\", \"query\": \"Every torus is unirational over its field of definition\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"UnitAddTorus\", \"AlgebraicGeometry.Scheme.RationalMap.ofFunctionField\", \"torusMap\", \"Algebra.IsGeometricallyReduced.casesOn\", \"UnitAddTorus.mFourierSubalgebra_separatesPoints\", \"AlgebraicGeometry.Scheme.RationalMap.fromFunctionField\", \"torusIntegral_const_mul\", \"torusIntegral_succ\"], \"digest\": \"b19f596c59702771\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: returned declarations do not give the asserted algebraic-torus quotient or parametrization"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"torus\", \"IsDominant\"",
+   "results": "{\"t\": \"2026-10-24T08:55:16Z\", \"tool\": \"loogle\", \"query\": \"\\\"torus\\\", \\\"IsDominant\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: returned declarations do not give the asserted algebraic-torus quotient or parametrization"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Every algebraic torus over a field admits a dominant morphism from a nonempty open subset of affine space",
+   "results": "{\"t\": \"2026-10-24T08:55:22Z\", \"tool\": \"leanfinder\", \"query\": \"Every algebraic torus over a field admits a dominant morphism from a nonempty open subset of affine space\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.AffineSpace.instSurjectiveOverSchemeInferInstanceOverClass\", \"AlgebraicGeometry.AffineSpace.isOpenMap_over\", \"AlgebraicGeometry.AffineSpace.not_isIntegralHom\", \"AlgebraicGeometry.instIsDominantToSpecΓOfCompactSpaceCarrierCarrierCommRingCat\", \"AlgebraicGeometry.IsDominant\", \"AlgebraicGeometry.isDominant_of_of_appTop_injective\", \"AlgebraicGeometry.Scheme.IsQuasiAffine\", \"AlgebraicGeometry.AffineSpace\"], \"digest\": \"36630e416a45c8a9\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: linear-map determinant invertibility and basic-open APIs do not state representability or the coordinate isomorphism of the finite-algebra unit functor"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A torus has a rational parametrization with Zariski dense image over any field",
+   "results": "{\"t\": \"2026-10-24T08:55:23Z\", \"tool\": \"leanfinder\", \"query\": \"A torus has a rational parametrization with Zariski dense image over any field\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Rat.isDenseEmbedding_coe_real\", \"Rat.denseRange_cast\", \"NumberField.InfinitePlace.denseRange_algebraMap_pi\", \"LaurentSeries.coe_range_dense\", \"circleEquivGen\", \"NumberField.InfiniteAdeleRing.denseRange_algebraMap\", \"AlgebraicGeometry.Scheme.RationalMap.dense_domain\", \"AddCircle.denseRange_zsmul_coe_iff\"], \"digest\": \"9d406ea5b1955b66\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: returned declarations do not give the asserted algebraic-torus quotient or parametrization"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-infinite-field-reductive-rational-density",
+  "date": "2026-10-24",
+  "group": "Q78"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Haboush symmetric-power lifting for a trivial quotient representation. Supporting representation-theoretic input: Steinberg endomorphisms detect a nonzero fixed vector. Supporting Self-duality of rho section modules at characteristic-dependent weights. Supporting input: Positive-characteristic simplicity step, using irreducibility of the Steinberg induced module rather than assuming self-duality. Numerical input to the dimension comparison: Weyl dimension of the induced module. Supporting Kempf vanishing for dominant flag line bundles. Positive-characteristic Andersen–Haboush argument: trivial pushforward of M_((p^r-1)rho), before the Serre twisting calculation. Supporting input: Lemma 2.3, second assertion, and Lemma 2.1, printed pp.153--155: H^0(u,V(lambda))=K v_lambda for p-restricted dominant lambda. With roots positive in Lie(B), V(lambda)=Gamma(M_{-w0 lambda}). Supporting input: Simple-root distributions and infinitesimal subalgebra calculus. Supporting input: pinning-compatible integral-to-geometric distribution comparison, with all positive root divided powers, before simple-root generation. Integral-root-model prerequisite before the comparison: integral Chevalley construction and a positive-root coordinate chart; integral matrix-closure construction: the big cell and its Weyl translates, before identifying the special fibre. Supporting input: Integral closure atlas, exhaustion of each special fibre: exclude extra components using the generic and special identity-component big-cell dimensions. Supporting input: Lemma 3.7 (first assertion, the Iwahori--Matsumoto maximal-boundedness statement) and its application in Proposition 4.3, second paragraph, printed pp.7-8; Cartan double-coset input used to prove the maximal-boundedness prerequisite, before the torus-powers argument. Supporting input: Remark 3.5, forward implication, printed p.5: integral conjugation into a fixed maximal split torus. Only the complete-DVR case is needed here; the statement is the conjugacy input, not a Cartan factorization. Supporting input: Residue-field base case: rational conjugacy of split tori, before lifting a fixed conjugator. This is over a field and contains no complete-DVR lifting assertion. Supporting field argument, conjugacy step: Milne Theorem 25.10, rational conjugacy of the maximal containing split torus with the prescribed one. Supporting rational-conjugacy argument: Milne 25.10, passage from a rational fixed coset to an element of G(k), using 25.9(b). Supporting input to Milne 25.9(b): Theorem 17.93(b), used for the rational translate in 25.9(a). Milne 17.93(b), proof: 'which are unirational over k (see 12.64)'.",
+   "via": [
+    "lem-sfb-infinite-field-reductive-rational-density",
+    "lem-sfb-field-parabolic-quotient-rational-lift",
+    "lem-sfb-field-maximal-split-tori-conjugacy",
+    "lem-sfb-field-split-torus-rational-containment",
+    "lem-sfb-complete-dvr-torus-cocharacter-conjugacy",
+    "lem-sfb-split-reductive-dvr-cartan-decomposition",
+    "lem-sfb-split-reductive-integral-maximal-bounded",
+    "lem-sfb-quasi-reductive-special-connectedness",
+    "lem-sfb-integral-chevalley-weyl-atlas",
+    "lem-sfb-chevalley-integral-root-model",
+    "lem-sfb-borel-kostant-distribution-comparison",
+    "lem-sfb-borel-simple-root-distribution-calculus",
+    "lem-sfb-restricted-induced-infinitesimal-invariants",
+    "lem-sfb-flag-frobenius-rho-pushforward",
+    "lem-sfb-dominant-flag-line-kempf-vanishing",
+    "lem-sfb-induced-weyl-dimension-formula",
+    "lem-sfb-steinberg-induced-module-irreducible",
+    "lem-sfb-rho-section-self-duality",
+    "lem-sfb-steinberg-endomorphism-detection",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-torus-unirational-parametrization",
+  "worker": "stage1",
+  "summary": "Realize Milne 12.64 by a scheme-surjective quotient of an induced torus and determinant-open coordinates for its unit functor; retain arbitrary fields and rank zero. Correct the norm test in the supporting lemma to invertibility over arbitrary test algebras.",
+  "blueprint": "Current latest main-20261024 direct-images proof (3), open direct image preservation via sk-prop-open-coefficients and the inherited alteration prerequisite chain. This item serves the inherited Milne 17.93(b) torus-unirationality input. Steps 1-3 expand Milne 12.64 without changing any chapter or unit route. The ancestor command returns None for the existing ancestry; the null ancestor and inherited via list are retained."
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q60-e9a5db5c8",
+  "group": "Q60",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q60-e9a5db5c8 (reviewer sub-agent of L); spot-checked: PASS, no fixes written; review.md is in the run directory. The source is Milne iAG2017, printed pp.250-251. 12.64 is 'combine 12.60 with 12.63', and the three steps of the item make exactly that combination; the item statement is unchanged. New node lem-sfb-torus-induced-quotient is Milne 12.63, with the induced torus given by P(R)≅(A⊗_kR)^× for A=∏L_i, L_i finite separable. It asks only for surjectivity on scheme points, which is weaker than Milne's quotient and is what step 3 needs. m≥1 is reached by adding a factor L=k; rank 0 works with P=G_m→1; imperfect and finite fields are covered. It gives no affine-space parametrization, so it does not restate the item. New node lem-sfb-finite-algebra-units-affine-chart generalizes 12.60 to any finite-dimensional commutative algebra. I checked: M(x) is the matrix of multiplication by Σx_ie_i; U(R)={a : N(a)∈R^×}; an element is a unit iff its multiplication map is invertible iff det is a unit; Yoneda gives U≅P since both are affine; and N(coordinates of 1)=det I=1, so U is nonempty. I tested A=k, A=k×k and A=k[ε]/ε² (N=x1², which matches the units of R[ε] for R with nilpotents). The worker's correction of Milne's 'norm nonzero' to 'norm a unit' for general R is right: R=k×k, α=(1,0) is nonzero but not a unit. Duplicate search by rg -L over dag/nodes: lem-sfb-finite-free-algebra-map-coordinates, affine-weil-restriction-charts, affine-finite-free-hom, finite-free-universal-containment-loci, weil-restriction-geometric-properties and relative-torus-character-reconstruction all state something different. Both new nodes are statement-only, every notion cites a definition node, and grep, loogle, leansearch and leanfinder searches are recorded. Item steps: 1 and 2 take only what the cited statements say, and every hypothesis of the chart node holds; step 3 is a genuinely elementary composition of a surjection with an isomorphism, which gives dense image. Everything stays in unit sk-thm-sf-ctf-stability, no tool_uses are needed, and no SGA is cited."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.TorusUnirationalParametrization",
+  "declaration": "AlgebraicGeometry.torus_unirational_parametrization",
+  "file": "lean/Sheaf/AlgebraicGeometry/TorusUnirationalParametrization.lean",
+  "statement": "theorem torus_unirational_parametrization {k : Type u} [Field k] (T : Grp (Over (Spec (.of k)))) (hT : MultiplicativeType.IsTorus T) : ∃ (n : ℕ) (U : (AffineSpace (ULift.{u} (Fin n)) (Spec (.of k))).Opens), Nonempty U.toScheme ∧ ∃ q : U.toScheme ⟶ T.X.left, q ≫ T.X.hom = U.ι ≫ (AffineSpace (ULift.{u} (Fin n)) (Spec (.of k)) ↘ Spec (.of k)) ∧ IsDominant q",
+  "branch": "newtargets-dag",
+  "by": "Q88",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-5175c0eb1",
+  "group": "Q88",
+  "result": "pass",
+  "note": "Item lean.statement verbatim in TorusUnirationalParametrization.lean; node differs from live only in lean. Clause check: Field k (no extra hyps), T : Grp (Over (Spec k)) with owner MultiplicativeType.IsTorus (rank 0 allowed), ∃ n : ℕ, U : (AffineSpace (ULift.{u} (Fin n)) (Spec k)).Opens, Nonempty U.toScheme, q over k via q ≫ T.X.hom = U.ι ≫ (𝔸ⁿ ↘ Spec k), IsDominant q (DenseRange) = node's dense-image clause. Not vacuous: n=0 forces q : Spec k → T, not dominant for positive rank; trivial torus covered. Universes fine. No defs, only sorry, source/blueprint docstrings with 3 proof steps, report has both sections. Milne iAG2017 12.59/12.64 pp.250-251 checked; the node's dense-image form is weaker than Milne's but chosen at stage 1. No compile reproduced (no changes)."
+ }
+}

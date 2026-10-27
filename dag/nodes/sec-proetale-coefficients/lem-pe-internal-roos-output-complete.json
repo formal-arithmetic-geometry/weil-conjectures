@@ -1,0 +1,152 @@
+{
+ "id": "lem-pe-internal-roos-output-complete",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-prop-integral-criterion-reductions",
+   "place": "Final interpretation via the derived-completion reflector: its output is complete.",
+   "via": []
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Completeness of the internal quotient Roos output",
+ "statement": "For a prime l and finite coefficient extension E/Q_l [def-weil-l-adic-coefficient-extension], a scheme X, and any K-flat complex P of the internal integral modules [sk-def-pe-derived-completion], the derived object represented by the actual strict quotient Roos complex roos(P) is IsDerivedComplete [sk-def-pe-derived-completion]. The conclusion is completeness of the explicit completion output, with the specified augmentation, and has no assumption on boundedness or constructibility. The ambient module and derived categories are [def-weil-sheaf-of-modules-category] and [def-weil-abstract-derived-category].",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sfb-proper-base-change/sk-prop-integral-criterion-reductions.md",
+  "place": "Final coefficient interpretation and the output-completeness assertion of det-pbc-complete-derived-completion; Stacks Tags 099B and 0A0E."
+ },
+ "stmt_deps": [
+  "def-weil-l-adic-coefficient-extension",
+  "sk-def-pe-derived-completion",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-abstract-derived-category"
+ ],
+ "proof": [
+  {
+   "text": "Choose d from the proved coefficient resolution, with its pointwise uniformizer property. Apply the normalized internal quotient/principal cone comparison to P, obtaining cP from its principal completion to Q(roos(P)).",
+   "uses": [
+    "det-pe-derived-nakayama-resolution",
+    "lem-pe-internal-quotient-principal-cone-comparison"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Choose a flat-term K-flat quasi-isomorphism q:R -> roos(P). Let eR=asIso(Q(q)) and e=eR followed by inverse(cP). Thus Q(R) is isomorphic to the principal completion of P. Write v for the localized principal unit of R.",
+   "uses": [
+    "lem-pc-source-module-kflat-resolution"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "By surjectivity of precomposition with v into the principal completion of P, extend e.hom to r from the principal completion of R. Set s=r >> e.inv. Then v >> s=1. By injectivity of precomposition with v into the principal completion of R, v >> (s >> v)=v=v >> 1 implies s >> v=1. Hence v is invertible.",
+   "uses": [
+    "lem-pe-internal-principal-cone-hom-reflection"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The normalized comparison cR for R gives Q(augmentation(R))=v >> cR.hom, hence this quotient augmentation is invertible. The witness R, its K-flatness, and eR establish the existential definition of IsDerivedComplete for Q(roos(P)).",
+   "uses": [
+    "lem-pe-internal-quotient-principal-cone-comparison",
+    "sk-def-pe-derived-completion"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "det-pe-derived-nakayama-resolution",
+  "lem-pe-internal-quotient-principal-cone-comparison",
+  "lem-pc-source-module-kflat-resolution",
+  "lem-pe-internal-principal-cone-hom-reflection",
+  "sk-def-pe-derived-completion"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sfb-proper-base-change/sk-prop-integral-criterion-reductions.md",
+  "place": "Final coefficient interpretation; explicit categorical proof of invertibility from the normalized quotient comparison and the principal Hom reflector, V3, 2026-10-25."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A complex is derived adically complete if its canonical quotient units form a distinguished Roos triangle",
+   "results": "{\"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AdicCompletion.of_bijective_iff\", \"IsAdicComplete\", \"IsAdicComplete.mk\", \"AdicCompletion.of_surjective_iff\", \"IsAdicComplete.bot\", \"AdicCompletion\", \"AdicCompletion.of_injective_iff\", \"IsAdic.isAdicComplete_iff\"]}",
+   "date": "2026-10-24",
+   "verdict": "No exact statement or one-line specialization. The library normalization and Roos/Koszul comparison are needed."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsDerivedLimitTriangle\"",
+   "results": "{\"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": []}",
+   "date": "2026-10-24",
+   "verdict": "No exact statement or one-line specialization. The library normalization and Roos/Koszul comparison are needed."
+  },
+  {
+   "tool": "grep",
+   "query": "Roos|derivedComplete|restrictionIso",
+   "results": "{\"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": []}",
+   "date": "2026-10-24",
+   "verdict": "No exact statement or one-line specialization. The library normalization and Roos/Koszul comparison are needed."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The derived adic completion of any complex is itself derived complete",
+   "results": "8 hits concerning ordinary IsAdicComplete, IsPrecomplete and AdicCompletion.of_bijective_iff; none concerns derived internal-module completion.",
+   "date": "2026-10-24",
+   "verdict": "No exact internal derived output-completeness theorem. Ordinary algebraic adic completeness does not imply the required augmentation criterion."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.IntegralCriterionReductions",
+  "date": "2026-10-24",
+  "group": "C9"
+ },
+ "chapter": "sec-proetale-coefficients",
+ "unit": "sk-prop-integral-criterion",
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.SixFunctors.ProEtale.InternalRoosOutputComplete",
+  "file": "lean/Sheaf/SixFunctors/ProEtale/InternalRoosOutputComplete.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.AdicCompletion.isDerivedComplete_roos",
+  "statement": "theorem isDerivedComplete_roos\n    (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]\n    [Algebra (Padic l) E] [FiniteDimensional (Padic l) E] (X : Scheme.{u})\n    (P : CochainComplex (Modules l E X) ℤ)\n    (hP : (HomologicalComplex.quasiIso (Modules l E X) (.up ℤ)).kFlat P) :\n    IsDerivedComplete l E X (DerivedCategory.Q.obj (roos l E X P))",
+  "branch": "sheaf-dag",
+  "by": "C9",
+  "date": "2026-10-24"
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C9",
+  "result": "pass",
+  "landing": "20261023T230621-L-3452091",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V3",
+  "result": "pass",
+  "landing": "20261025T144225-L-1210924",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

@@ -1,0 +1,219 @@
+{
+ "id": "lem-trf-field-common-section",
+ "kind": "statement",
+ "title": "A common good section for two surjections over a field",
+ "statement": "Let $k$ be a field [def-weil-field], let $m,n\\geq0$, and let $a,b:k^{\\oplus n}\\to k^{\\oplus m}$ be surjective $k$-linear maps, where $k^{\\oplus t}$ is the module of $t$-tuples with componentwise operations [def-weil-pbc-free-module]. There exists a $k$-linear map $q:k^{\\oplus m}\\to k^{\\oplus n}$ such that $a\\circ q=\\mathrm{id}_{k^{\\oplus m}}$ and $b\\circ q$ is a linear isomorphism. No assumption that $k$ is infinite is imposed; empty coordinate sets are allowed.",
+ "source": {
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tag 0FJK (lemma-homotopic-surjections), final paragraph: the field common-complement assertion and its residue-field lift; details explicitly omitted in the source."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-weil-pbc-free-module"
+ ],
+ "proof": [
+  {
+   "text": "Write $V=k^{\\oplus n}$, $W=k^{\\oplus m}$, $P=\\ker a$, and $Q=\\ker b$. The standard coordinate vectors span $V$ and $W$. Every subspace $S\\subseteq V$ is finite-dimensional: choose a complement by [lem-trf-vector-subspace-complement]; projection onto $S$ along this complement is linear by uniqueness of the decomposition, and the projections of the finitely many standard vectors span $S$. Thus all subspaces used below are finite-dimensional. Apply [lem-weil-pbc-idempotent-charpoly-rank-nullity] to $a,b$. Surjectivity identifies both images with $W$, so $\\dim W+\\dim P=\\dim V=\\dim W+\\dim Q$, and cancellation gives $\\dim P=\\dim Q$.",
+   "uses": [
+    "lem-trf-vector-subspace-complement",
+    "lem-weil-pbc-idempotent-charpoly-rank-nullity"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0FJK (lemma-homotopic-surjections), final paragraph: the field common-complement assertion and its residue-field lift; details explicitly omitted in the source."
+   }
+  },
+  {
+   "text": "Set $I=P\\cap Q$. Applying [lem-trf-vector-subspace-complement] inside $P$ and $Q$ gives $P=I\\oplus P_1$ and $Q=I\\oplus Q_1$. Projection $P\\to I$ has image $I$ and kernel $P_1$; projection $Q\\to I$ has image $I$ and kernel $Q_1$. By [lem-weil-pbc-idempotent-charpoly-rank-nullity], $\\dim I+\\dim P_1=\\dim P$ and $\\dim I+\\dim Q_1=\\dim Q$. Step 1 and cancellation give $\\dim P_1=\\dim Q_1$. Also $P+Q=I\\oplus P_1\\oplus Q_1$: generation follows by the two decompositions; if $i+x+y=0$ with $i\\in I$, $x\\in P_1$, $y\\in Q_1$, then $y\\in P\\cap Q=I$, hence $y=0$, and then $i=x=0$.",
+   "uses": [
+    "lem-trf-vector-subspace-complement",
+    "lem-weil-pbc-idempotent-charpoly-rank-nullity"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0FJK (lemma-homotopic-surjections), final paragraph: the field common-complement assertion and its residue-field lift; details explicitly omitted in the source."
+   }
+  },
+  {
+   "text": "By [lem-trf-equal-dimension-linear-equivalence] choose a linear isomorphism $e:P_1\\to Q_1$. Let $D=\\{x+e(x):x\\in P_1\\}\\subseteq P+Q$, a subspace since $e$ is linear. If $x+e(x)\\in P$, then $e(x)\\in P\\cap Q_1=0$, so $x=0$; hence $D\\cap P=0$. If $x+e(x)\\in Q$, then $x\\in Q\\cap P_1=0$, so $D\\cap Q=0$. Moreover $P+D=P+Q$: for $y\\in Q_1$ put $x=e^{-1}(y)$ and use $y=(x+e(x))-x$; the remaining $I,P_1$ lie in $P$. Similarly $Q+D=P+Q$, using $x=(x+e(x))-e(x)$ for $x\\in P_1$. Thus $D$ complements both $P$ and $Q$ inside $P+Q$.",
+   "uses": [
+    "lem-trf-equal-dimension-linear-equivalence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0FJK (lemma-homotopic-surjections), final paragraph: the field common-complement assertion and its residue-field lift; details explicitly omitted in the source."
+   }
+  },
+  {
+   "text": "Choose a complement $R$ of $P+Q$ in $V$ using [lem-trf-vector-subspace-complement], and put $U=D+R$. Since $D\\subseteq P+Q$ and $(P+Q)\\cap R=0$, this sum is direct. Step 3 gives $P+U=V=Q+U$. If $d+r\\in P$ with $d\\in D$, $r\\in R$, then $r\\in(P+Q)\\cap R=0$, and $d\\in D\\cap P=0$. The same argument with $Q$ gives $U\\cap Q=0$. Consequently $V=P\\oplus U=Q\\oplus U$.",
+   "uses": [
+    "lem-trf-vector-subspace-complement"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0FJK (lemma-homotopic-surjections), final paragraph: the field common-complement assertion and its residue-field lift; details explicitly omitted in the source."
+   }
+  },
+  {
+   "text": "The restriction $a|_U:U\\to W$ is injective because $U\\cap\\ker a=0$. It is surjective: lift $w\\in W$ to $v\\in V$ using the given surjectivity, write $v=p+u$ in $P\\oplus U$, and obtain $a(u)=w$. The identical argument with $Q=\\ker b$ shows that $b|_U$ is bijective. Define $q(w)$ to be the unique $u\\in U$ with $a(u)=w$, viewed in $V$. Uniqueness and linearity of $a$ show $q(w+w')=q(w)+q(w')$ and $q(cw)=cq(w)$, so $q$ is linear and $a\\circ q=\\mathrm{id}_W$. Its map into $U$ is inverse to $a|_U$; hence $b\\circ q$ is bijective, with inverse $a|_U\\circ(b|_U)^{-1}$, which is linear by the same uniqueness argument. If $m=0$, both $q$ and the endomorphism of $W=0$ have the asserted properties; $n=0$ forces $m=0$ by surjectivity. The construction only uses addition, subtraction, and linear isomorphisms, so it also applies in characteristic $2$ and over every finite field.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0FJK (lemma-homotopic-surjections), final paragraph: the field common-complement assertion and its residue-field lift; details explicitly omitted in the source."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-trf-vector-subspace-complement",
+  "lem-weil-pbc-idempotent-charpoly-rank-nullity",
+  "lem-trf-equal-dimension-linear-equivalence"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tag 0FJK (lemma-homotopic-surjections), final paragraph: explicit graph-complement argument filling in the field linear-algebra details omitted there."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "common.*complement|exists.*isCompl.*isCompl|simultaneous.*complement|common.*[Ss]ection",
+   "results": "{\"t\": \"2026-10-22T06:44:01Z\", \"tool\": \"grep\", \"query\": \"common.*complement|exists.*isCompl.*isCompl|simultaneous.*complement|common.*[Ss]ection\", \"sub\": \"LinearAlgebra\", \"ok\": true, \"n_hits\": 4, \"note\": \"\", \"top\": [\"Mathlib/LinearAlgebra/Projection.lean\", \"Mathlib/LinearAlgebra/Projection.lean\", \"Mathlib/LinearAlgebra/Projection.lean\", \"Mathlib/LinearAlgebra/Basis/VectorSpace.lean\"], \"digest\": \"fac1ac88d89da5ff\"} Individual complements and individual right inverses do not supply one common complement to two kernels. Read Submodule.exists_isCompl at Mathlib/LinearAlgebra/Basis/VectorSpace.lean:280-283 and rank-nullity at Mathlib/LinearAlgebra/FiniteDimensional/Lemmas.lean:172-176.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Two surjective linear maps between finite dimensional vector spaces have a common complementary subspace to their kernels",
+   "results": "{\"t\": \"2026-10-22T06:44:02Z\", \"tool\": \"leansearch\", \"query\": \"Two surjective linear maps between finite dimensional vector spaces have a common complementary subspace to their kernels\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"LinearMap.coe_equivProdOfSurjectiveOfIsCompl\", \"LinearMap.injective_iff_surjective_of_finrank_eq_finrank\", \"Submodule.linearProjOfIsCompl_comp_surjective_of_exact\", \"LinearMap.IsProj.isCompl\", \"LinearMap.IsIdempotentElem.isCompl\", \"LinearMap.isCompl_iSup_ker_pow_iInf_range_pow\", \"Module.Dual.isCompl_ker_of_disjoint_of_ne_bot\", \"ContinuousLinearMap.equivProdOfSurjectiveOfIsCompl.congr_simp\"], \"digest\": \"fa2c35fe595224a0\"} Individual complements and individual right inverses do not supply one common complement to two kernels. Read Submodule.exists_isCompl at Mathlib/LinearAlgebra/Basis/VectorSpace.lean:280-283 and rank-nullity at Mathlib/LinearAlgebra/FiniteDimensional/Lemmas.lean:172-176.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "IsCompl, IsCompl",
+   "results": "{\"t\": \"2026-10-22T06:44:03Z\", \"tool\": \"loogle\", \"query\": \"IsCompl, IsCompl\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"IsCompl\", \"IsCompl.symm\", \"isCompl_comm\", \"IsCompl.codisjoint\", \"IsCompl.disjoint\", \"ComplementedLattice.exists_isCompl\", \"ComplementedLattice.mk\", \"complementedLattice_iff\"], \"digest\": \"a0647ae7e373df9b\"} Individual complements and individual right inverses do not supply one common complement to two kernels. Read Submodule.exists_isCompl at Mathlib/LinearAlgebra/Basis/VectorSpace.lean:280-283 and rank-nullity at Mathlib/LinearAlgebra/FiniteDimensional/Lemmas.lean:172-176.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For two surjective linear maps a and b from a finite dimensional vector space V to W over a field there exists a linear map q from W to V such that a q is the identity and b q is bijective",
+   "results": "{\"t\": \"2026-10-22T06:44:13Z\", \"tool\": \"leanfinder\", \"query\": \"For two surjective linear maps a and b from a finite dimensional vector space V to W over a field there exists a linear map q from W to V such that a q is the identity and b q is bijective\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"OrzechProperty.bijective_of_surjective_endomorphism\", \"LinearMap.surjective_of_comp_eq_id\", \"LinearMap.splittingOfFunOnFintypeSurjective_splits\", \"LinearMap.leftInverse_splittingOfFunOnFintypeSurjective\", \"LinearMap.surjective_compr₂_of_exists_rightInverse\", \"LinearMap.surjective_comp_left_of_exists_rightInverse\", \"OrzechProperty.injective_of_surjective_endomorphism\", \"ContinuousLinearMap.exists_right_inverse_of_surjective\"], \"digest\": \"0c05e8dbb70d7a8c\"} Individual complements and individual right inverses do not supply one common complement to two kernels. Read Submodule.exists_isCompl at Mathlib/LinearAlgebra/Basis/VectorSpace.lean:280-283 and rank-nullity at Mathlib/LinearAlgebra/FiniteDimensional/Lemmas.lean:172-176.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Two equal dimensional subspaces of a finite dimensional vector space have a common complement, obtained as the graph of an isomorphism after removing their intersection",
+   "results": "{\"t\": \"2026-10-22T06:44:39Z\", \"tool\": \"leanfinder\", \"query\": \"Two equal dimensional subspaces of a finite dimensional vector space have a common complement, obtained as the graph of an isomorphism after removing their intersection\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Submodule.isCompl_iff_disjoint\", \"Submodule.finrank_add_eq_of_isCompl\", \"Submodule.exists_isCompl\", \"Module.Dual.isCompl_ker_of_disjoint_of_ne_bot\", \"AffineSubspace.inter_eq_singleton_of_nonempty_of_isCompl\", \"Submodule.complementedLattice\", \"Submodule.isCompl_span_singleton_of_isCoatom_of_notMem\", \"Submodule.isCompl_comap_subtype_of_isCompl_of_le\"], \"digest\": \"c697db65368c56fb\"} Individual complements and individual right inverses do not supply one common complement to two kernels. Read Submodule.exists_isCompl at Mathlib/LinearAlgebra/Basis/VectorSpace.lean:280-283 and rank-nullity at Mathlib/LinearAlgebra/FiniteDimensional/Lemmas.lean:172-176.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "common.*complement|exists.*isCompl.*isCompl|simultaneous.*complement|common.*[Ss]ection",
+   "results": "{\"t\": \"2026-10-23T12:24:25Z\", \"tool\": \"grep\", \"query\": \"common.*complement|exists.*isCompl.*isCompl|simultaneous.*complement|common.*[Ss]ection\", \"sub\": \"LinearAlgebra\", \"ok\": true, \"n_hits\": 4, \"note\": \"\", \"top\": [\"Mathlib/LinearAlgebra/Projection.lean\", \"Mathlib/LinearAlgebra/Projection.lean\", \"Mathlib/LinearAlgebra/Projection.lean\", \"Mathlib/LinearAlgebra/Basis/VectorSpace.lean\"], \"digest\": \"fac1ac88d89da5ff\"} Read the hits: individual subspace complements, dimension equalities, splitting of a single surjection, and consequences of an already supplied complement do not assert existence of a simultaneous complement. Checked Submodule.exists_isCompl (Basis/VectorSpace.lean:280-282), Projection.lean:235-242, finite-dimensional dimension lemmas at Lemmas.lean:53-86 and 173-176, equal-rank linear equivalence at Dimension/Free.lean:239-242, and individual splitting at Finsupp/Pi.lean:171-191.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Two equal dimensional subspaces of a finite dimensional vector space have a common complement over any field",
+   "results": "{\"t\": \"2026-10-23T12:24:25Z\", \"tool\": \"leansearch\", \"query\": \"Two equal dimensional subspaces of a finite dimensional vector space have a common complement over any field\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Submodule.finrank_sup_add_finrank_inf_eq\", \"Submodule.exists_isCompl\", \"FiniteDimensional.nonempty_continuousLinearEquiv_of_finrank_eq\", \"Submodule.finrank_add_finrank_orthogonal\", \"Submodule.complementedLattice\", \"Subspace.isCompl_dualAnnihilator\", \"Submodule.ClosedComplemented.of_quotient_finiteDimensional\", \"Submodule.isCompl_iff_disjoint\"], \"digest\": \"b4bd531646298338\"} Read the hits: individual subspace complements, dimension equalities, splitting of a single surjection, and consequences of an already supplied complement do not assert existence of a simultaneous complement. Checked Submodule.exists_isCompl (Basis/VectorSpace.lean:280-282), Projection.lean:235-242, finite-dimensional dimension lemmas at Lemmas.lean:53-86 and 173-176, equal-rank linear equivalence at Dimension/Free.lean:239-242, and individual splitting at Finsupp/Pi.lean:171-191.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "IsCompl, IsCompl",
+   "results": "{\"t\": \"2026-10-23T12:24:26Z\", \"tool\": \"loogle\", \"query\": \"IsCompl, IsCompl\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"IsCompl\", \"IsCompl.symm\", \"isCompl_comm\", \"IsCompl.codisjoint\", \"IsCompl.disjoint\", \"ComplementedLattice.exists_isCompl\", \"ComplementedLattice.mk\", \"complementedLattice_iff\"], \"digest\": \"a0647ae7e373df9b\"} Read the hits: individual subspace complements, dimension equalities, splitting of a single surjection, and consequences of an already supplied complement do not assert existence of a simultaneous complement. Checked Submodule.exists_isCompl (Basis/VectorSpace.lean:280-282), Projection.lean:235-242, finite-dimensional dimension lemmas at Lemmas.lean:53-86 and 173-176, equal-rank linear equivalence at Dimension/Free.lean:239-242, and individual splitting at Finsupp/Pi.lean:171-191.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Two surjective linear maps between finite dimensional vector spaces over any field admit a common linear right section for the first whose composite with the second is bijective",
+   "results": "{\"t\": \"2026-10-23T12:24:28Z\", \"tool\": \"leanfinder\", \"query\": \"Two surjective linear maps between finite dimensional vector spaces over any field admit a common linear right section for the first whose composite with the second is bijective\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"LinearMap.surjective_compr₂ₛₗ_of_exists_rightInverse\", \"LinearMap.surjective_compr₂_of_exists_rightInverse\", \"LinearMap.surjective_comp_left_of_exists_rightInverse\", \"LinearMap.splittingOfFunOnFintypeSurjective_splits\", \"LinearMap.splittingOfFunOnFintypeSurjective_injective\", \"LinearMap.splittingOfFunOnFintypeSurjective\", \"OrzechProperty.injective_of_surjective_of_injective\", \"LinearMap.leftInverse_splittingOfFunOnFintypeSurjective\"], \"digest\": \"72929e34da4775c2\"} Read the hits: individual subspace complements, dimension equalities, splitting of a single surjection, and consequences of an already supplied complement do not assert existence of a simultaneous complement. Checked Submodule.exists_isCompl (Basis/VectorSpace.lean:280-282), Projection.lean:235-242, finite-dimensional dimension lemmas at Lemmas.lean:53-86 and 173-176, equal-rank linear equivalence at Dimension/Free.lean:239-242, and individual splitting at Finsupp/Pi.lean:171-191.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Equal dimensional subspaces P and Q in a finite dimensional vector space have a simultaneous common complement constructed using the graph of an isomorphism between complements of their intersection",
+   "results": "{\"t\": \"2026-10-23T12:25:35Z\", \"tool\": \"leanfinder\", \"query\": \"Equal dimensional subspaces P and Q in a finite dimensional vector space have a simultaneous common complement constructed using the graph of an isomorphism between complements of their intersection\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Submodule.exists_isCompl\", \"Submodule.isCompl_iff_disjoint\", \"Submodule.finrank_add_eq_of_isCompl\", \"Submodule.complementedLattice\", \"Submodule.finrank_add_inf_finrank_orthogonal'\", \"Module.Dual.isCompl_ker_of_disjoint_of_ne_bot\", \"Submodule.existsUnique_add_of_isCompl_prod\", \"Submodule.existsUnique_add_of_isCompl\"], \"digest\": \"b6b0589fb996c6bf\"} Read the hits: individual subspace complements, dimension equalities, splitting of a single surjection, and consequences of an already supplied complement do not assert existence of a simultaneous complement. Checked Submodule.exists_isCompl (Basis/VectorSpace.lean:280-282), Projection.lean:235-242, finite-dimensional dimension lemmas at Lemmas.lean:53-86 and 173-176, equal-rank linear equivalence at Dimension/Free.lean:239-242, and individual splitting at Finsupp/Pi.lean:171-191.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-local-common-summand-surjections",
+  "date": "2026-10-22",
+  "group": "Q26"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Proof (1)--(2), semistable-alteration input in the nearby-cycle branch: ILO Exposé X, Theorem 3.4, Step 3, invoking Temkin 2010, Theorems 1.5 and 1.1 for a semistable multipointed modification. Temkin proof component: Marked dualizing line bundle and contracted-component degrees. Auxiliary input: Local complete-intersection determinant adjunction underlying the marked dualizing construction, before the marking is inserted. Lower-level input: the homotopy and composition calculus for kernel-normalized determinant maps of surjective two-term complex maps, before passage to derived objects. Auxiliary module input: A common summand for two surjections of finite free modules over a local ring. Re-split of this auxiliary input: the field case of Stacks 0FJK, final paragraph; old proof steps 2--5: intersection, equal dimensions, graph complement, and its inverse section.",
+   "via": [
+    "lem-trf-local-common-summand-surjections",
+    "lem-trf-surjective-two-term-determinant-calculus",
+    "lem-trf-two-term-perfect-determinant",
+    "lem-trf-flat-lci-canonical-adjunction",
+    "lem-trf-marked-nodal-dualizing-degrees",
+    "lem-trf-temkin-stable-modification",
+    "lem-trf-stable-modification-flat-curve-pair",
+    "lem-trf-dejong-relative-marked-semistable",
+    "lem-trf-relative-marked-nodal-reduction",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-trf-field-common-section",
+  "worker": "stage1",
+  "summary": "Expanded the field common-section assertion of Stacks 0FJK by constructing a graph complement after removing the intersection of the two kernels. Reused the existing Mathlib leaves for subspace complements, rank-nullity and equal-dimensional linear equivalence; no new nodes. Checked finite fields, characteristic two and zero coordinate sets. The statement and statement dependencies are unchanged.",
+  "blueprint": "Auxiliary field linear-algebra input below lem-trf-local-term-locality, proof (1)--(2), via the existing determinant-calculus/common-summand chain in blueprint.from. The current latest ancestor proof states the contracting-correspondence argument; this delivery only fills the already-created algebraic input and does not change the unit route."
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q41-fbb14e9b4",
+  "group": "Q41",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q41-fbb14e9b4 (reviewer sub-agent of L); spot-checked: Read Stacks more-algebra.tex lemma-homotopic-surjections (0FJK) to the end of the proof. Its final paragraph says the field case is 'possible by linear algebra' and omits the details. The item states this field case in section form (aq=id, bq an isomorphism), which is equivalent to the common-summand form with U=im q; the parent lem-trf-local-common-summand-surjections step 2 uses exactly this form. One commit, no new nodes; statement and stmt_deps unchanged; proof_deps equals the union of the step uses. All three cited nodes are Mathlib leaves (vector-subspace-complement, equal-dimension-linear-equivalence, pbc rank-nullity), so no tool_uses are needed. No SGA. Steps: (1) subspaces are finite-dimensional via projection along a complement, and rank-nullity with surjectivity gives dim P = dim Q; (2) P = I+P1 and Q = I+Q1 with I = P∩Q, rank-nullity on the projections to I gives dim P1 = dim Q1, and the sum I+P1+Q1 is direct because P∩Q1 ⊆ I∩Q1 = 0; (3) the graph D of an isomorphism e: P1 -> Q1 meets P and Q trivially and P+D = Q+D = P+Q; (4) U = D+R with R a complement of P+Q gives V = P⊕U = Q⊕U; (5) elementary assembly, q = (a|U)^{-1}. Every hypothesis of each cited statement holds where it is applied. Checked by hand: F_2^2 with a=pr1 and b=pr2 (D = span(1,1), q(1) = (1,1)), a=b, m=0, and m=n. The rg -L searches found no duplicate of the field case. Minor: the report mentions citations.json and searches.jsonl, which are not in the commit; they are not required DAG files, so not a fault. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.LinearAlgebra.FieldCommonSection",
+  "declaration": "LinearMap.exists_common_section_of_surjective",
+  "file": "lean/Sheaf/LinearAlgebra/FieldCommonSection.lean",
+  "statement": "theorem exists_common_section_of_surjective (k : Type u) [Field k] (m n : ℕ) (a b : (Fin n → k) →ₗ[k] (Fin m → k)) (ha : Function.Surjective a) (hb : Function.Surjective b) : ∃ q : (Fin m → k) →ₗ[k] (Fin n → k), a.comp q = LinearMap.id ∧ Function.Bijective (b.comp q)",
+  "branch": "newtargets-dag",
+  "by": "Q15",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-97c7dbd18",
+  "group": "Q15",
+  "result": "pass",
+  "note": "Statement matches node and Stacks 0FJK final paragraph clause by clause: Field k (Type u, unrestricted), m n : ℕ, Fin t → k tuple modules, linear a b with separate surjectivity, ∃ linear q with a.comp q = id ∧ Bijective (b.comp q) (equivalent to linear iso). No extra assumptions; edge cases m=0, n=0⇒m=0, n=m, a=b, F₂ projections covered. No duplicate (local-ring exists_common_summand_surjections is the downstream consumer, different statement), no name clash, new module path. Node unchanged apart from lean; lean.statement verbatim; proof_deps = union of uses; no new nodes. Docstrings carry source place, blueprint id and all 5 proof steps; sorry only; report has Worker report and Second reading by Q15. No file changed, so no compile; worker reports clean 8 s server compile."
+ }
+}

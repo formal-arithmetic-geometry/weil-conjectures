@@ -17,49 +17,32 @@
  ],
  "proof": [
   {
-   "text": "Put $L=\\mathbf Z_\\ell^r$ and $Q=\\rho(H)$. The finite sum $e=|Q|^{-1}\\sum_{h\\in Q}h$ is a continuous $E$-linear idempotent: multiplication by any element of $Q$ permutes its summands, and $ev=v$ for a $Q$-fixed vector. Thus $\\operatorname{im}e=M^H=N$. Each $\\rho(\\gamma_i)$ commutes with $e$ because the $H$ and $L$ actions commute. Hence $N$ is a finite-dimensional continuous $L$-representation. Choose an $E$-basis of $N$ and extend it by a basis of $\\ker e$; in these coordinates $e=\\operatorname{diag}(1,0)$. Over both $F$ the same matrix acts on continuous functions. Its image is exactly $N_F$, and its fixed vectors under $H$ are the same image. This verifies the coefficient objects to be used in the reduction, without an infinite average.",
-   "uses": [],
-   "elementary": true,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
-    "place": "Paragraph (3), tame-boundary local calculation: analytic condensed tame-inertia input; agent proof step 1"
-   }
-  },
-  {
-   "text": "Every finite quotient of $H=(\\prod_{q\\ne p,\\ell}\\mathbf Z_q)^r$ has order prime to $\\ell$: its open kernel contains a basic product neighbourhood, leaving finitely many finite $q$-power factors, all with $q\\ne\\ell$. Apply the prime-to-ell reduction with $B=H$, $L=\\mathbf Z_\\ell^r$ and $V=M$. The finite-image and prime-to-ell hypotheses are precisely those of the item. It gives the inflation isomorphism $a_F:R\\Gamma_L(N_F)\\xrightarrow{\\sim}R\\Gamma_G(M_F)$. This step invokes the analytic reduction for the actual internal condensed modules; the finite sum in step 1 alone does not prove the vanishing of higher $H$-invariants.",
+   "text": "Apply the fixed-summand preparation to $H,L,M$. It gives $N=\\operatorname{im}e$, its continuous $L$-action, $(M_F)^H=N_F$, and the prime-to-$\\ell$ property of every finite quotient of $H$. The reduction therefore applies with $B=H,V=M$ and gives $a_F:R\\Gamma_L(N_F)\\xrightarrow{\\sim}R\\Gamma_G(M_F)$, with its naturality, invariant normalization and coefficient square.",
    "uses": [
+    "lem-sfb-tame-fixed-summand-preparation",
     "lem-sfb-prime-to-ell-derived-invariants-reduction"
    ],
    "elementary": false,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
-    "place": "Paragraph (3), tame-boundary local calculation: analytic condensed tame-inertia input; agent proof step 2"
+    "place": "Paragraph (3), analytic tame-boundary input below the open-coefficient preservation assertion; repaired assembly step 1"
    }
   },
   {
-   "text": "Apply dense-lattice restriction to the representation $V=N$ from step 1, with $D=\\mathbf Z^r$ and the coordinate homomorphism $\\iota:D\\to L$. It gives $b_F:R\\Gamma_L(N_F)\\xrightarrow{\\sim}R\\Gamma_D(\\operatorname{Res}_\\iota N_F)$. All coefficients here still consist of all continuous norm-topological functions. The input is a derived-category isomorphism, so no inference from isomorphisms of separate cohomology groups is needed.",
+   "text": "Apply dense-lattice restriction with $V=N$, $D=\\mathbf Z^r$ and $\\iota(e_i)=\\gamma_i$. This gives $b_F:R\\Gamma_L(N_F)\\xrightarrow{\\sim}R\\Gamma_D(\\operatorname{Res}_\\iota N_F)$. Apply the strict model construction with $A_i=\\rho(\\gamma_i)|_N-1$. The operators commute; its coordinates, differential and literal coefficient inclusions are those of $K_F(M)$. The discrete Koszul resolution, with $R=C_F$ and $P=\\operatorname{Res}_\\iota N_F$, then gives $\\lambda_F:K_F(M)\\xrightarrow{\\sim}R\\Gamma_D(\\operatorname{Res}_\\iota N_F)$, with exactly the alternating deletion sign.",
    "uses": [
-    "lem-sfb-dense-lattice-derived-invariants-comparison"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
-    "place": "Paragraph (3), tame-boundary local calculation: analytic condensed tame-inertia input; agent proof step 3"
-   }
-  },
-  {
-   "text": "Use the discrete-lattice Koszul resolution with $R=C_F$, $P=\\operatorname{Res}_\\iota N_F$, and $T_i=\\rho(\\gamma_i)|_{N_F}$. These are commuting automorphisms by the product-group action. Its complex is literally $K_F(M)$: label each exterior basis vector by its increasing subset $I$. Removing the $i$th element of $J$ has position $1+\\#\\{j\\in J:j<i\\}$, giving exactly the displayed sign. In $d^2$ each unordered pair $\\{i,j\\}$ occurs twice with opposite signs; the two operators commute, so they cancel. Thus the lattice input provides $\\lambda_F:K_F(M)\\xrightarrow{\\sim}R\\Gamma_D(\\operatorname{Res}_\\iota N_F)$ with the required convention, not just its cohomology.",
-   "uses": [
+    "lem-sfb-dense-lattice-derived-invariants-comparison",
+    "lem-sfb-norm-coefficient-koszul-realization",
     "lem-sfb-discrete-lattice-koszul-resolution"
    ],
    "elementary": false,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
-    "place": "Paragraph (3), tame-boundary local calculation: analytic condensed tame-inertia input; agent proof step 4"
+    "place": "Paragraph (3), analytic tame-boundary input below the open-coefficient preservation assertion; repaired assembly step 2"
    }
   },
   {
-   "text": "Define $\\kappa_F=a_F\\circ b_F^{-1}\\circ\\lambda_F$ in the derived category. All three factors are invertible by steps 2--4, so this is an isomorphism of the required direction. Naturality follows by composing the naturality squares of those three maps and inverting the square for $b_F$. On invariant elements, $\\lambda_F$ is their inclusion in degree zero, $b_F$ is the identity under the invariant identification, and $a_F$ is induced by $N_F\\hookrightarrow M_F$. Therefore this composite is compatible with the prescribed degree-zero inclusion.",
+   "text": "Define $\\kappa_F=a_Fb_F^{-1}\\lambda_F$. Composing naturality squares, with that for $b_F$ inverted, proves naturality. On invariant elements, $\\lambda_F$ is the degree-zero inclusion, $b_F$ is the identity under the invariant identification, and $a_F$ comes from $N_F\\hookrightarrow M_F$; hence the composite has the prescribed invariant normalization.",
    "uses": [
     "lem-sfb-prime-to-ell-derived-invariants-reduction",
     "lem-sfb-dense-lattice-derived-invariants-comparison",
@@ -68,12 +51,28 @@
    "elementary": true,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
-    "place": "Paragraph (3), tame-boundary local calculation: analytic condensed tame-inertia input; agent proof step 5"
+    "place": "Paragraph (3), analytic tame-boundary input below the open-coefficient preservation assertion; repaired assembly step 3"
    }
   },
   {
-   "text": "Write $u_A,u_B,u_C$ for the coefficient maps on $R\\Gamma_G(M_F)$, $R\\Gamma_L(N_F)$ and $R\\Gamma_D(\\operatorname{Res}_\\iota N_F)$, and $u_K$ for the termwise coefficient inclusion. The coefficient clauses of the three inputs give $u_Aa_E=(\\operatorname{Res}a_\\Omega)u_B$, $u_Cb_E=(\\operatorname{Res}b_\\Omega)u_B$, and $u_C\\lambda_E=(\\operatorname{Res}\\lambda_\\Omega)u_K$. Multiplying the middle equality by the inverses of $b_E$ and $\\operatorname{Res}b_\\Omega$ gives $u_Bb_E^{-1}=(\\operatorname{Res}b_\\Omega)^{-1}u_C$. Substitute into the first and third equalities to obtain $u_A\\kappa_E=(\\operatorname{Res}\\kappa_\\Omega)u_K$. The map $u_K$ is literally $x_I\\mapsto1\\otimes x_I$, since every differential matrix is over $E$. This is exactly the requested coefficient comparison.",
+   "text": "Let $u_A,u_B,u_C$ be the coefficient maps on the $G,L,D$ derived invariants, and $u_K$ the literal subset-coordinate map supplied by the strict model. The three coefficient clauses give $u_Aa_E=(\\operatorname{Res}a_\\Omega)u_B$, $u_Cb_E=(\\operatorname{Res}b_\\Omega)u_B$ and $u_C\\lambda_E=(\\operatorname{Res}\\lambda_\\Omega)u_K$. Inverting the middle square gives $u_Bb_E^{-1}=(\\operatorname{Res}b_\\Omega)^{-1}u_C$. Substitution yields $u_A\\kappa_E=(\\operatorname{Res}\\kappa_\\Omega)u_K$, the required coefficient comparison. Here $u_K$ sends $x_I$ to $1\\otimes x_I$, with every differential matrix over $E$.",
    "uses": [
+    "lem-sfb-prime-to-ell-derived-invariants-reduction",
+    "lem-sfb-dense-lattice-derived-invariants-comparison",
+    "lem-sfb-discrete-lattice-koszul-resolution",
+    "lem-sfb-norm-coefficient-koszul-realization"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), analytic tame-boundary input below the open-coefficient preservation assertion; repaired assembly step 4"
+   }
+  },
+  {
+   "text": "For $r=0$ the preparation gives $H=L=D=1$, $Q=1$, $e=1$ and $N=M$. The trivial-factor, rank-zero restriction and rank-zero Koszul normalizations make all three factors identities, so $\\kappa_F=1_{M_F[0]}$. If $M=0$ or $N=0$, the strict model is zero and the comparison is its unique isomorphism. Every object throughout uses all continuous norm-topological sections, without completion or a union of coefficient fields.",
+   "uses": [
+    "lem-sfb-tame-fixed-summand-preparation",
+    "lem-sfb-norm-coefficient-koszul-realization",
     "lem-sfb-prime-to-ell-derived-invariants-reduction",
     "lem-sfb-dense-lattice-derived-invariants-comparison",
     "lem-sfb-discrete-lattice-koszul-resolution"
@@ -81,26 +80,15 @@
    "elementary": true,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
-    "place": "Paragraph (3), tame-boundary local calculation: analytic condensed tame-inertia input; agent proof step 6"
-   }
-  },
-  {
-   "text": "If $r=0$, then $H=L=D=1$, $Q=1$, $e=1$ and $N=M$. The reduction for trivial $B$, the rank-zero lattice restriction, and the rank-zero Koszul identification are identities by their stated normalizations. The definition of $\\kappa_F$ is consequently the identity $M_F[0]$. If $M=0$, or if $N=0$, the same construction gives the zero complex and the unique corresponding isomorphism. No step changes to completed coefficients or to a union of finite-subextension coefficient sheaves.",
-   "uses": [
-    "lem-sfb-prime-to-ell-derived-invariants-reduction",
-    "lem-sfb-dense-lattice-derived-invariants-comparison",
-    "lem-sfb-discrete-lattice-koszul-resolution"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
-    "place": "Paragraph (3), tame-boundary local calculation: analytic condensed tame-inertia input; agent proof step 7"
+    "place": "Paragraph (3), analytic tame-boundary input below the open-coefficient preservation assertion; repaired assembly step 5"
    }
   }
  ],
  "proof_deps": [
+  "lem-sfb-tame-fixed-summand-preparation",
   "lem-sfb-prime-to-ell-derived-invariants-reduction",
   "lem-sfb-dense-lattice-derived-invariants-comparison",
+  "lem-sfb-norm-coefficient-koszul-realization",
   "lem-sfb-discrete-lattice-koszul-resolution"
  ],
  "proof_origin": {
@@ -194,17 +182,17 @@
   "date": "2026-10-22",
   "item": "lem-sfb-tame-inertia-continuous-koszul",
   "worker": "stage1",
-  "group": "NA",
-  "summary": "Statement retained. Split into prime-to-ell derived reduction, analytic dense-lattice restriction, and the discrete internal-module Koszul resolution. Checked finite averaging, differential signs, degree-zero normalization and the three explicit coefficient squares. Analytic inputs are statement-only WANTED obligations, not finite-coefficient or completed substitutes. No finished project attachment or Mathlib leaf found.",
-  "blueprint": "Realizes paragraph (3) of det-thm-sf-ctf-stability-direct-images below the tame-boundary comparison. The nearest-ancestor command returns None; its inherited null from.node and via chain are retained."
+  "group": "NR",
+  "summary": "Repair of the 4280-character proof return: extract two comparable independent statement-only obligations, tame-factor fixed-summand preparation and strict signed continuous-section Koszul realization. Retain the analytic reduction/restriction/resolution route, explicit inverse coefficient square and all rank-zero/zero normalizations. Item statement and existing metadata unchanged. All original arguments are reproduced with their allocation in the report.",
+  "blueprint": "Paragraph (3) of det-thm-sf-ctf-stability-direct-images supplies the open-coefficient context. New A realizes old setup and quotient argument; new B realizes signed model and literal coefficient maps; the item assembles the three derived comparisons. The ancestor command returns None, so inherited null from.node and the exact via chain are retained."
  },
  "reviewed": {
-  "date": "2026-10-21",
+  "date": "2026-10-22",
   "by": "L",
-  "reviewer": "NT-cc-NA-b49c0fe48",
-  "group": "NA",
+  "reviewer": "NT-cc-NR-23b1471fb",
+  "group": "NR",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NA-b49c0fe48 (reviewer sub-agent of L); spot-checked: PASS. I read the item, all 7 steps and the 3 new nodes in full. Source: the main-20261015 sk-thm-sf-ctf-stability-direct-images.proof.md paragraph (3) gives context only, so the split is agent-formulated as declared; no SGA is cited. The item statement and stmt_deps are identical to live, and live is still unsplit, so nothing is superseded; this is a first split, not a re-split. Steps: (1) the finite idempotent e gives N=M^H=im e and N_F=(M_F)^H sectionwise. (2) Every finite quotient of H=(prod_{q!=p,l} Z_q)^r has order prime to l (basic product neighbourhoods), and the finite-image hypotheses come from the item, so prime-to-ell-reduction applies with B=H and V=M and gives a_F. (3) dense-lattice applies with V=N and iota(e_i)=gamma_i, giving b_F. (4) The Koszul complex and sign agree exactly with the item's; I checked d^2=0 myself: for i<j the signs s(j,K-i)=s(j,K)-1 and s(i,K-j)=s(i,K) give opposite terms. (5) kappa=a b^-1 lambda has the right direction, and degree zero and naturality follow from the children's clauses. (6) The three coefficient clauses combine to u_A kappa_E = Res kappa_Omega u_K, since Res is exact. (7) For r=0 the composite is the identity. New nodes are self-contained, statement-only and in this unit. The discrete-lattice Koszul node is pure algebra and true (Laurent Koszul free resolution over Z[Z^r], Z[S] flat). The prime-to-ell and dense-lattice nodes hold in the F=E case (pro-prime-to-l vanishing, Hochschild-Serre, Tate's [V->V] for Z_l). Small cases tested: trivial B, a sign character, r=0, r=1 trivial or nontrivial character. They hold the inherited noncomplete-Omega analytic core, which was already flagged at the NF review; it is visibly WANTED with no completion or filtered-union substitute, and no target is weakened. Duplicate checks: procyclic-two-term, cochains-derived-invariants, cyclic-periodic-resolution, the condensed bar nodes, product-bar-comparison, product-action-inflation, prime-to-ell-linear-image-finite and root-tower-boundary-acyclicity; none is a duplicate, and no new node restates an item clause. Advisory: the analytic children define the action categories inline rather than citing def-sfb-condensed-action-module; later splits should reuse that and the condensed bar and product nodes."
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NR-23b1471fb (reviewer sub-agent of L); spot-checked: This answers the human re-split note of 2026-10-21, released 2026-10-22 and identical in live and side-live. Diffing the item against side-live, only proof, proof_deps and split_report change; the statement, stmt_deps, source and the lean records are byte-identical, so no target is weakened. All 7 old step texts occur verbatim in the report, and each argument reappears. (1) Averaging, idempotent, L-commutation, adapted basis and (M_F)^H=N_F, plus the finite-quotient argument of old step 2, go to new lem-sfb-tame-fixed-summand-preparation. (2) The subset sign, deletion position, d²=0 cancellation, literal 1⊗x coefficient map and r=0/V=0 models of old steps 4, 6 and 7 go to new lem-sfb-norm-coefficient-koszul-realization. (3) The parent keeps the three citations of the existing derived comparisons plus the categorical assembly, 2313 characters, essentially verbatim from old steps 5-7. The two new nodes are comparable (1857 and 2097 characters), statement-only, self-contained, with stmt_deps covering every citation and five or six real searches each; neither asserts a derived comparison, so neither restates the item (D1/D2). Checked the preparation node: finite quotients of (∏_{q≠p,ℓ}Z_q)^r factor through ∏_{q∈S}(Z/q^n)^r, so their order is prime to ℓ. e=|Q|⁻¹Σ is idempotent with image M^H and commutes with L. Over noncomplete Ω the E-adapted basis makes the subspace and product topologies agree. A section is fully fixed iff it is pointwise in F⊗N, using constant g for one direction and ρ(g(t))s(t)=s(t) for the other. Naturality across different images Q holds because e is the Haar average. Checked the Koszul node: for i<j the signs (−1)^{a+b−1} and (−1)^{a+b} cancel with commutation. ker d⁰=W_F by flatness and the adapted basis, and W=V when r=0. The coefficient map commutes because the matrices are over E. Checked the parent steps: the reduction applies with B=H, using the finite-quotient clause, the finite-image hypothesis, and (V^B)_F=N_F. Dense-lattice applies with V=N and ι(e_i)=γ_i. The discrete resolution's K_{C_F}(Res_ι N_F;T) is literally K_F(M). The coefficient-square algebra u_Bb_E⁻¹=(Res b_Ω)⁻¹u_C gives u_Aκ_E=Res κ_Ω u_K, and the r=0 clauses are present in all three cited statements. Small cases tested: r=0, M=0, sign character (N=0), r=1 with A=0 or A invertible, r=2. Duplicate checks: prime-to-ell-linear-image-finite, exc-tame-ell-coordinate (rank one only; advisory as a citation for A), discrete-lattice-koszul-resolution (automorphisms and derived only; advisory that B's complex coincides with it), and the cbc signed-koszul nodes; none is a duplicate. No SGA is used. No fixes written."
  },
  "lean": {
   "module": "Sheaf.Paper.TameInertiaContinuousKoszul",
@@ -270,5 +258,17 @@
   "group": "NN",
   "result": "pass",
   "note": "Read the item, its 7 steps, all 6 stmt_deps (landed CondensedActionModule ActionModule/Invariants, continuousMapRingObjOfUniverse) and the 640-line module. Node vs live: only lean added and stmt_deps gained the landed def-sfb-condensed-action-module (allowed). Statement verbatim; the 44 declarations match the file; the main theorem is the only sorry; docstrings present. Clauses match: primes; Ω an algebraic closure, not completed; E a finite intermediate field with subtype inclusion; G and H as product subgroups, γ_i; admissible = finite dimension + joint continuity + finite coprime Q; N = invariants = range of the average; M_F/N_F Models pinned to C(S, F⊗V) with scalar, restriction and action laws; Koszul complex with the exact sign and erase condition; κ a natural iso into the ordinary total right-derived invariants (landed normalized Invariants + IsRightDerivedFunctor); degree-0 normalization via the actual augmentation; coefficient square with E→Ω inclusion maps pinned and a canonical derivedCoefficient via rightDerivedDesc; r=0 clause. RestrictionUniversal is asserted, not assumed; it is needed for the node's map and true (bar resolution is C_E-split). Edge cases r=0, M=0/N=0, out-of-range degrees, empty S. Advisories: two documentation-only imports; unused N_F data in Realization; Ω, G and site share universe u (framework convention, not stated in the report). No compile: no file changed."
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
  }
 }

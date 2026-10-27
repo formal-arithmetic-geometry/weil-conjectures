@@ -1,0 +1,293 @@
+{
+ "id": "lem-sfb-finite-locally-free-function-norm",
+ "kind": "statement",
+ "title": "Function norm of a finite locally free morphism of positive constant degree",
+ "statement": "Let $f:Y\\to X$ be a finite locally free morphism of schemes of constant degree $d\\geq1$ [def-pc-scheme, def-pc-finite-locally-free]. For every open $V\\subseteq X$ there are maps $\\nu_V:\\Gamma(f^{-1}V,\\mathcal O_Y)\\to\\Gamma(V,\\mathcal O_X)$ preserving multiplication and $1$ and commuting with restriction to open subsets. They satisfy $\\nu_V(f^\\sharp a)=a^d$ for every $a\\in\\Gamma(V,\\mathcal O_X)$. For every $b\\in\\Gamma(f^{-1}V,\\mathcal O_Y)$ and $y\\in f^{-1}V$, $b(y)=0$ implies $\\nu_V(b)(f(y))=0$, where the values are in residue fields [def-weil-residue-field]. The maps can be chosen with the following local determinant characterization: on every affine open $U\\subseteq V$ on which $f_*\\mathcal O_Y$ is free of rank $d$, the restriction of $\\nu_V(b)$ is the determinant of the $d\\times d$ matrix of multiplication by $b|_{f^{-1}U}$ in any basis. Here $\\det(A)=\\sum_{\\sigma\\in S_d}\\operatorname{sgn}(\\sigma)\\prod_{i=1}^d A_{i,\\sigma(i)}$. No reducedness, separability or Noetherian hypothesis is imposed.",
+ "source": {
+  "document": "literature/stacks-project/divisors.tex",
+  "place": "Tag 0BD2, divisors-lemma-finite-locally-free-has-norm, statement and proof; Section 0BCX, divisors-section-norms, conditions (1) and (2). Only the function norm is asserted, without the extra arbitrary-base-change clause of 0BD2."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-finite-locally-free",
+  "def-weil-residue-field"
+ ],
+ "proof": [
+  {
+   "text": "Put $\\mathcal E=f_*\\mathcal O_Y$. By [lem-pc-flf-properties] it is locally free of rank $d$. Thus [def-amb-finite-locally-free-module] supplies open trivializations $\\mathcal E|_T\\simeq\\mathcal O_T^{\\oplus d}$. Refine them inside the requested open $V$ by affine opens $U$: affine neighbourhoods form a basis by the definition of a scheme [def-pc-scheme]. On each such $U$, taking sections of the trivialization gives $D_U=\\Gamma(f^{-1}U,\\mathcal O_Y)\\simeq R_U^d$, where $R_U=\\Gamma(U,\\mathcal O_X)$. Moreover $f^{-1}U$ is affine, since $f$ is finite [def-weil-finite-integral-morphism]. The trivialization restricts to every open subset of $U$; in particular every smaller affine open still has a $d$-element basis. No finiteness of the chosen open cover or affineness of its pairwise intersections is assumed.",
+   "uses": [
+    "lem-pc-flf-properties",
+    "def-amb-finite-locally-free-module",
+    "def-pc-scheme",
+    "def-weil-finite-integral-morphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/divisors.tex",
+    "place": "Tag 0BD2, divisors-lemma-finite-locally-free-has-norm, proof; Section 0BCX, divisors-section-norms"
+   }
+  },
+  {
+   "text": "For any affine $U$ on which $\\mathcal E$ is free of rank $d$, apply [lem-a1-principal-free-algebra-determinant-norm] to $R_U\\to D_U$, with $r=d$ and the singleton principal cover given by $1\\in R_U$. Its hypotheses hold because $D_U$ already has a $d$-element basis. Denote its norm by $N_U$. The same node, with the ring map $R_U\\to R_U$ and that basis, gives $N_U(b)=\\det(m_b)$ in every basis. Its final affine-open clause applies because $f_*\\mathcal O_Y$ is locally free, hence quasi-coherent by [def-amb-finite-locally-free-module]. Consequently for every affine $W\\subseteq U$ the restriction of $N_U(b)$ equals the determinant of multiplication by $b|_{f^{-1}W}$ in the restricted basis. Changing this basis leaves that determinant unchanged by [def-weil-endomorphism-determinant].",
+   "uses": [
+    "lem-a1-principal-free-algebra-determinant-norm",
+    "def-amb-finite-locally-free-module",
+    "def-weil-endomorphism-determinant"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/divisors.tex",
+    "place": "Tag 0BD2, divisors-lemma-finite-locally-free-has-norm, proof; Section 0BCX, divisors-section-norms"
+   }
+  },
+  {
+   "text": "Fix $b\\in\\Gamma(f^{-1}V,\\mathcal O_Y)$. On each chart $U$ of step 1 take $N_U(b|_{f^{-1}U})$. To compare charts $U,U'$, cover $U\\cap U'$ by affine opens $W$ contained in the intersection. Step 2 identifies both restricted sections on $W$ with the determinant of the same multiplication endomorphism; basis independence [def-weil-endomorphism-determinant] makes them equal. The equality and gluing axioms of the structure sheaf [def-pc-scheme] now give a unique section $\\nu_V(b)$ with these restrictions. This is an application of the sheaf axiom to the compatible family just constructed. It is independent of the chart cover: compare the two families on affine refinements of their intersections and use uniqueness. Adding any specified free affine $U\\subseteq V$ to the cover gives the asserted determinant characterization on that $U$, in any basis. For $V=\\varnothing$ the empty family glues to the unique section.",
+   "uses": [
+    "def-weil-endomorphism-determinant",
+    "def-pc-scheme"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/divisors.tex",
+    "place": "Tag 0BD2, divisors-lemma-finite-locally-free-has-norm, proof; Section 0BCX, divisors-section-norms"
+   }
+  },
+  {
+   "text": "For an open inclusion $V'\\subseteq V$, cover $V'$ by free affine charts $U\\subseteq V'$. The characterization in step 3 says both $\\nu_V(b)|_U$ and $\\nu_{V'}(b|_{f^{-1}V'})|_U$ equal $\\det(m_{b|_{f^{-1}U}})$. The equality axiom [def-pc-scheme] therefore proves $\\nu_V(b)|_{V'}=\\nu_{V'}(b|_{f^{-1}V'})$. This also proves the compatibility when either open is empty. Thus these sectionwise functions constitute a restriction-compatible map of multiplicative sheaves once the multiplication identity below is verified.",
+   "uses": [
+    "def-pc-scheme"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/divisors.tex",
+    "place": "Tag 0BD2, divisors-lemma-finite-locally-free-has-norm, proof; Section 0BCX, divisors-section-norms"
+   }
+  },
+  {
+   "text": "On a free affine chart, $m_{bc}=m_b\\circ m_c$, so in a common basis $M_{bc}=M_bM_c$. Apply the product identity of [lem-sfb-matrix-cramer-determinant-identities], with $n=d\\geq1$, to obtain $\\det(M_{bc})=\\det(M_b)\\det(M_c)$. Also $M_1=I_d$. For a pulled-back scalar $f^\\sharp a$, multiplication has matrix $(a|_U)I_d$. In the determinant formula [def-weil-pbc-matrix-determinant], every term except the identity permutation has a zero off-diagonal entry, so these last two determinants are respectively $1$ and $(a|_U)^d$. Equality of sections can be checked on this cover [def-pc-scheme], giving $\\nu_V(bc)=\\nu_V(b)\\nu_V(c)$, $\\nu_V(1)=1$, and $\\nu_V(f^\\sharp a)=a^d$. These computations hold over any commutative ring, including rings with nilpotents.",
+   "uses": [
+    "lem-sfb-matrix-cramer-determinant-identities",
+    "def-weil-pbc-matrix-determinant",
+    "def-pc-scheme"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/divisors.tex",
+    "place": "Tag 0BD2, divisors-lemma-finite-locally-free-has-norm, proof; Section 0BCX, divisors-section-norms"
+   }
+  },
+  {
+   "text": "Let $y\\in f^{-1}V$, put $x=f(y)$, and choose a free affine chart $U\\subseteq V$ containing $x$. Write $U=\\operatorname{Spec}R$ and $f^{-1}U=\\operatorname{Spec}D$, possible by finiteness [def-weil-finite-integral-morphism]. The points $x,y$ correspond to primes $\\mathfrak p\\subset R$, $\\mathfrak q\\subset D$, with $\\mathfrak q\\cap R=\\mathfrak p$ [def-weil-affine-spectrum]. The kernel of $D\\to\\kappa(y)$ is $\\mathfrak q$: in $D_{\\mathfrak q}/\\mathfrak qD_{\\mathfrak q}$ an element $c$ vanishes iff some $s\\notin\\mathfrak q$ has $sc\\in\\mathfrak q$, iff $c\\in\\mathfrak q$ by primality [def-weil-residue-field]. Thus $b(y)=0$ means $b|_{f^{-1}U}\\in\\mathfrak q$. Since $D$ is finite free over $R$, [lem-pd-finite-free-norm-prime-criterion] implies its norm belongs to $\\mathfrak p$ (otherwise $b$ avoids every prime over $\\mathfrak p$). By step 3 this norm is $\\nu_V(b)|_U$, whose value in $\\kappa(x)$ is consequently zero by the same residue-field kernel calculation. This proves the required pointwise vanishing without a reducedness, separability or Noetherian assumption.",
+   "uses": [
+    "def-weil-finite-integral-morphism",
+    "def-weil-affine-spectrum",
+    "def-weil-residue-field",
+    "lem-pd-finite-free-norm-prime-criterion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/divisors.tex",
+    "place": "Tag 0BD2, divisors-lemma-finite-locally-free-has-norm, proof; Section 0BCX, divisors-section-norms"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-flf-properties",
+  "def-amb-finite-locally-free-module",
+  "def-pc-scheme",
+  "def-weil-finite-integral-morphism",
+  "lem-a1-principal-free-algebra-determinant-norm",
+  "def-weil-endomorphism-determinant",
+  "lem-sfb-matrix-cramer-determinant-identities",
+  "def-weil-pbc-matrix-determinant",
+  "def-weil-affine-spectrum",
+  "def-weil-residue-field",
+  "lem-pd-finite-free-norm-prime-criterion"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/divisors.tex",
+  "place": "Tag 0BD2, divisors-lemma-finite-locally-free-has-norm, proof; Section 0BCX, divisors-section-norms"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A finite locally free morphism has a norm on regular functions multiplicative and taking pullback scalars to their degree power, vanishing when the function vanishes at a fibre point",
+   "results": "8 hits: Algebra.norm_localization, Algebra.intNormAux, Algebra.norm_eq_iff, Algebra.intNorm, AlgebraicGeometry.Scheme.Hom.toNormalization_app_preimage, Algebra.norm_eq_one_of_not_module_finite, FiniteField.algebraMap_norm_eq_prod_pow, isPowMul_spectralNorm_of_finiteDimensional_normal",
+   "date": "2026-10-24",
+   "verdict": "no match: scalar algebra norms, determinants, localization or unrelated normalization results; no norm morphism on scheme structure sheaves with all the stated properties"
+  },
+  {
+   "tool": "grep",
+   "query": "normAt|norm_charts|norm.*[Ss]heaf|[Ss]heaf.*norm",
+   "results": "5 hits: Mathlib/AlgebraicGeometry/Normalization.lean, Mathlib/AlgebraicGeometry/Normalization.lean, Mathlib/AlgebraicGeometry/Normalization.lean, Mathlib/AlgebraicGeometry/Normalization.lean, Mathlib/AlgebraicGeometry/Normalization.lean",
+   "date": "2026-10-24",
+   "verdict": "no match: scalar algebra norms, determinants, localization or unrelated normalization results; no norm morphism on scheme structure sheaves with all the stated properties"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A finite locally free morphism of schemes has a determinant norm on the structure sheaf preserving products and mapping scalars to their rank power",
+   "results": "8 hits: LinearMap.det_smul, AlgebraicGeometry.IsFinite.recOn, LinearMap.det_restrictScalars, LinearMap.det_prodMap, LinearMap.det, AlgebraicGeometry.IsFinite, Algebra.Norm.Transitivity.comp_det_mul_pow, AlgebraicGeometry.IsFinite.iff_isIntegralHom_and_locallyOfFiniteType",
+   "date": "2026-10-24",
+   "verdict": "no match: scalar algebra norms, determinants, localization or unrelated normalization results; no norm morphism on scheme structure sheaves with all the stated properties"
+  },
+  {
+   "tool": "loogle",
+   "query": "Algebra.norm, AlgebraicGeometry.Scheme",
+   "results": "0 hits: ",
+   "date": "2026-10-24",
+   "verdict": "no match: scalar algebra norms, determinants, localization or unrelated normalization results; no norm morphism on scheme structure sheaves with all the stated properties"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a finite locally free morphism of degree d there is a multiplicative restriction compatible norm of structure sheaves sending a scalar to its dth power and a function zero at a fibre point to zero downstairs",
+   "results": "8 hits: AlgebraicGeometry.StructureSheaf.normalize_finite_fraction_representation, AlgebraicGeometry.Scheme.Hom.normalizationDiagram, AlgebraicGeometry.Scheme.Hom.normalizationDiagramMap, Algebra.norm_localization, Algebra.intNormAux, AlgebraicGeometry.Scheme.Hom.toNormalization_app_preimage, isPowMul_spectralNorm_of_finiteDimensional_normal, FiniteField.algebraMap_norm_eq_prod_pow",
+   "date": "2026-10-24",
+   "verdict": "no match: scalar algebra norms, determinants, localization or unrelated normalization results; no norm morphism on scheme structure sheaves with all the stated properties"
+  },
+  {
+   "tool": "grep",
+   "query": "norm_algebraMap|norm_localization|norm_notMem_iff|def norm",
+   "results": "25 hits: Mathlib/RingTheory/IntegralClosure/IntegralRestrict.lean, Mathlib/RingTheory/FractionalIdeal/Norm.lean, Mathlib/RingTheory/FractionalIdeal/Norm.lean, Mathlib/RingTheory/Polynomial/Eisenstein/IsIntegral.lean, Mathlib/RingTheory/Polynomial/Eisenstein/IsIntegral.lean, Mathlib/RingTheory/Polynomial/Eisenstein/IsIntegral.lean, Mathlib/RingTheory/DedekindDomain/Ideal/Lemmas.lean, Mathlib/RingTheory/DedekindDomain/Ideal/Lemmas.lean",
+   "date": "2026-10-24",
+   "verdict": "no match: scalar algebra norms, determinants, localization or unrelated normalization results; no norm morphism on scheme structure sheaves with all the stated properties"
+  },
+  {
+   "tool": "grep",
+   "query": "normAt|norm_charts|norm.*[Ss]heaf|[Ss]heaf.*norm",
+   "results": "{\"t\": \"2026-10-23T22:58:32Z\", \"tool\": \"grep\", \"query\": \"normAt|norm_charts|norm.*[Ss]heaf|[Ss]heaf.*norm\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/Normalization.lean\", \"Mathlib/AlgebraicGeometry/Normalization.lean\", \"Mathlib/AlgebraicGeometry/Normalization.lean\", \"Mathlib/AlgebraicGeometry/Normalization.lean\", \"Mathlib/AlgebraicGeometry/Normalization.lean\"], \"digest\": \"b00c72ed2061e771\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: algebra norms and determinants are partial inputs; no restriction-compatible structure-sheaf norm with all the stated scheme clauses"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Finite locally free morphism has a canonical norm morphism of multiplicative structure sheaves satisfying the scalar power formula and pointwise vanishing",
+   "results": "{\"t\": \"2026-10-23T22:58:32Z\", \"tool\": \"leansearch\", \"query\": \"Finite locally free morphism has a canonical norm morphism of multiplicative structure sheaves satisfying the scalar power formula and pointwise vanishing\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"MulRingNorm.isPowMul\", \"Algebra.norm_localization\", \"MulAlgebraNormClass.map_smul_eq_mul\", \"Algebra.intNorm_eq_norm\", \"MulAlgebraNorm.mulAlgebraNormClass\", \"Algebra.norm\", \"MulAlgebraNormClass.mk\", \"FiniteField.algebraMap_norm_eq_prod_pow\"], \"digest\": \"25e44c3b90bcd547\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: algebra norms and determinants are partial inputs; no restriction-compatible structure-sheaf norm with all the stated scheme clauses"
+  },
+  {
+   "tool": "loogle",
+   "query": "Algebra.norm, AlgebraicGeometry.Scheme",
+   "results": "{\"t\": \"2026-10-23T22:58:32Z\", \"tool\": \"loogle\", \"query\": \"Algebra.norm, AlgebraicGeometry.Scheme\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: algebra norms and determinants are partial inputs; no restriction-compatible structure-sheaf norm with all the stated scheme clauses"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A finite locally free morphism of schemes of degree d has a restriction compatible multiplicative determinant norm on functions taking scalars to the dth power and vanishing at images of zeroes",
+   "results": "{\"t\": \"2026-10-23T22:58:33Z\", \"tool\": \"leanfinder\", \"query\": \"A finite locally free morphism of schemes of degree d has a restriction compatible multiplicative determinant norm on functions taking scalars to the dth power and vanishing at images of zeroes\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"LinearMap.det_restrictScalars\", \"AlgebraicGeometry.Scheme.Hom.toNormalization_app_preimage\", \"Algebra.norm_eq_zero_iff'\", \"Algebra.norm\", \"Algebra.norm_apply\", \"LinearMap.det_baseChange\", \"IsBaseChange.det_endHom\", \"Algebra.Norm.Transitivity.eval_zero_det_det\"], \"digest\": \"e50b2b9d45b79b20\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: algebra norms and determinants are partial inputs; no restriction-compatible structure-sheaf norm with all the stated scheme clauses"
+  },
+  {
+   "tool": "grep",
+   "query": "norm_eq_matrix_det|norm_algebraMap_of_basis|norm_apply|norm_localization",
+   "results": "{\"t\": \"2026-10-23T22:58:59Z\", \"tool\": \"grep\", \"query\": \"norm_eq_matrix_det|norm_algebraMap_of_basis|norm_apply|norm_localization\", \"sub\": \"RingTheory\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/FractionalIdeal/Norm.lean\", \"Mathlib/RingTheory/FractionalIdeal/Norm.lean\", \"Mathlib/RingTheory/FractionalIdeal/Norm.lean\", \"Mathlib/RingTheory/Ideal/Int.lean\", \"Mathlib/RingTheory/Ideal/Int.lean\", \"Mathlib/RingTheory/Ideal/Int.lean\", \"Mathlib/RingTheory/Ideal/Norm/AbsNorm.lean\", \"Mathlib/RingTheory/Ideal/Norm/AbsNorm.lean\"], \"digest\": \"6b87036f2b300fb9\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: algebra norms and determinants are partial inputs; no restriction-compatible structure-sheaf norm with all the stated scheme clauses"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The determinant of multiplication in a finite locally free algebra defines a morphism of sheaves of multiplicative monoids on a scheme and detects vanishing over residue fields",
+   "results": "{\"t\": \"2026-10-23T22:59:00Z\", \"tool\": \"leanfinder\", \"query\": \"The determinant of multiplication in a finite locally free algebra defines a morphism of sheaves of multiplicative monoids on a scheme and detects vanishing over residue fields\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.norm_eq_zero_iff'\", \"Algebra.PreSubmersivePresentation.jacobian\", \"Algebra.PreSubmersivePresentation.jacobian_eq_det_aevalDifferential\", \"Algebra.norm_apply\", \"AlgebraicGeometry.StructureSheaf.const_mul_cancel'\", \"LinearEquiv.det_baseChange\", \"IsBaseChange.det_endHom\", \"LinearMap.detAux_def\"], \"digest\": \"fec93bd0a501dbe7\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: algebra norms and determinants are partial inputs; no restriction-compatible structure-sheaf norm with all the stated scheme clauses"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-finite-locally-free-pullback-section-norm",
+  "date": "2026-10-24",
+  "group": "Q91"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Scheme representability of the stable abelian-level normalization. Supporting input: freeness at normalized boundary branches. Comparison of the full cohomology frame in the item with Deligne 3.3--3.5 Picard torsion frames; relative Picard existence for the pulled-back stable family. Supporting input for the present split: A relatively ample line module on the stable-curve multidegree-zero Picard space. Supporting input: Generic ampleness criterion for smooth connected group schemes. Raynaud input: existence, locally on a normal base, of an ample extension of a positive power of a symmetric line on the dense abelian open; comparison with the supplied line is a separate proof step. Cubical proof input: extension of cubical objects and isomorphisms, without positivity; supporting input: Local prolongation of a tensor power of a symmetric line; Moret-Bailly II 3.3.3 opening application of Raynaud XI 1.13 to generic ample modules; isolate the positive generic input before forming a tensor quotient and comparing over U. Supporting input for Q35: Algebraically trivial lines on a semiabelian variety: inversion and ampleness. Ampleness argument after the cube calculation: reflect ampleness along a finite prime-to-characteristic multiplication map. Supporting norm input: Stacks 0BCY pullback identity and 0BCZ applied to a section of a power of the pulled-back supplied line, before the 0BD0 affine-neighbourhood argument. Supporting input: Stacks 0BD2 constructs the multiplicative function norm with degree-power and pointwise vanishing axioms before applying 0BCY and 0BCZ.",
+   "via": [
+    "lem-sfb-finite-locally-free-pullback-section-norm",
+    "lem-sfb-finite-locally-free-ample-reflection",
+    "lem-sfb-semiabelian-algebraic-equivalence-norm",
+    "lem-sfb-raynaud-generic-ample-symmetrization",
+    "lem-sfb-symmetric-line-power-prolongation",
+    "lem-sfb-normal-symmetric-cubical-extension",
+    "lem-sfb-symmetric-ample-power-extension",
+    "lem-sfb-regular-group-generic-ampleness",
+    "lem-sfb-stable-picard-theta-ampleness",
+    "lem-sfb-stable-relative-picard-kummer",
+    "lem-sfb-stable-level-versal-branch-freeness",
+    "lem-sfb-stable-abelian-level-normalization",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-finite-locally-free-function-norm",
+  "worker": "stage1",
+  "summary": "Verified Stacks 0BD2 and 0BCX. Constructed the function norm by local finite-free determinants, cited the existing affine norm for restriction compatibility, and proved chart gluing, uniqueness, multiplicativity, scalar powers and pointwise vanishing. Reused existing nodes, with no new nodes or weakened hypotheses.",
+  "blueprint": "Supporting norm input in the inherited from.place: determinant construction of Stacks 0BD2 used before 0BCY and 0BCZ. The latest blueprint det-thm-sf-ctf-stability-direct-images proof (3) is the ancestor-level direct-image route; this split supplies the existing chain of generic algebraic-geometric tools, without changing that route. The inherited blueprint.from.node is null because the existing created.item chain is broken; its maintainer-owned value and via list are retained.",
+  "tool_uses": [
+   {
+    "node": "lem-a1-principal-free-algebra-determinant-norm",
+    "why": "Generic affine algebra norm with affine-restriction determinant characterization. The unit has no substitute for this algebraic restriction tool; it does not replace a six-functor route step."
+   },
+   {
+    "node": "lem-pd-finite-free-norm-prime-criterion",
+    "why": "Generic commutative-ring prime criterion used on a free affine chart to prove residue-field vanishing; the six-functor unit has no such algebraic input."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-a1-principal-free-algebra-determinant-norm",
+  "lem-pd-finite-free-norm-prime-criterion"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q108-6faf39951",
+  "group": "Q108",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q108-6faf39951 (reviewer sub-agent of L); spot-checked: I read the whole item and every cited statement; the delivery has no new nodes. Source: Stacks divisors.tex, Section 0BCX and Lemma 0BD2, statement and proof. The item matches the source hypothesis by hypothesis and drops only the base-change clause, which the report states. Step 1: lem-pc-flf-properties gives the rank-d pushforward, and def-amb-finite-locally-free-module gives affine free charts. Step 2: lem-a1-principal-free-algebra-determinant-norm is applied with the cover {1}, the R'=R base-change clause and its final affine-open clause; each comes from the node's statement, and quasi-coherence holds. Steps 3-4: gluing and restriction compatibility by the sheaf axioms are correct, including the empty open. Step 5: det(AB)=det(A)det(B) with n=d>=1 gives multiplicativity, and the permutation sum gives det(I)=1 and det(aI)=a^d. Step 6: ker(D->kappa(y))=q, and lem-pd-finite-free-norm-prime-criterion (no domain hypothesis) gives N(b) in p. Advisory: the stalk D_q of Spec is used without its own citation; it is part of the definition of Spec. Tested on X empty, d=1, R^d, k[eps]/eps^2 and the zero ring. Not duplicates: lem-pd-finite-locally-free-norm-charts (existence only), lem-a1 charpoly, lem-sfb-reduction-frobenius-sheaf-norm. No cycle, and proof_deps equals the union of the step uses. Accepted tool_uses: lem-a1-principal-free-algebra-determinant-norm and lem-pd-finite-free-norm-prime-criterion, both generic algebra tools. The item is still unsplit on live. Its inherited blueprint.from.node is null and unchanged; if landing refuses on that field, it is a fault of the base node."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.FiniteLocallyFreeFunctionNorm",
+  "declaration": "AlgebraicGeometry.exists_finiteLocallyFree_functionNorm",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.Hom.sectionMultiplicationMatrix",
+   "AlgebraicGeometry.exists_finiteLocallyFree_functionNorm"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/FiniteLocallyFreeFunctionNorm.lean",
+  "statement": "theorem exists_finiteLocallyFree_functionNorm {X Y : Scheme.{u}} (f : Y ⟶ X) (d : ℕ) (hd : 1 ≤ d) [f.IsFiniteLocallyFreeOfDegree d] : ∃ ν : ∀ V : X.Opens, Γ(Y, f ⁻¹ᵁ V) →* Γ(X, V), (∀ (V W : X.Opens) (hWV : W ≤ V) (b : Γ(Y, f ⁻¹ᵁ V)), X.presheaf.map (homOfLE hWV).op (ν V b) = ν W (Y.presheaf.map (homOfLE (f.preimage_mono hWV)).op b)) ∧ (∀ (V : X.Opens) (a : Γ(X, V)), ν V (f.app V a) = a ^ d) ∧ (∀ (V : X.Opens) (b : Γ(Y, f ⁻¹ᵁ V)) (y : Y) (hy : y ∈ f ⁻¹ᵁ V), Y.evaluation (f ⁻¹ᵁ V) y hy b = 0 → X.evaluation V (f y) hy (ν V b) = 0) ∧ (∀ (V U : X.Opens) (hUV : U ≤ V), IsAffineOpen U → ∀ (e : @Module.Basis (Fin d) Γ(X, U) Γ(Y, f ⁻¹ᵁ U) inferInstance inferInstance (f.app U).hom.toModule) (b : Γ(Y, f ⁻¹ᵁ V)), X.presheaf.map (homOfLE hUV).op (ν V b) = Matrix.det (f.sectionMultiplicationMatrix U d e (Y.presheaf.map (homOfLE (f.preimage_mono hUV)).op b)))",
+  "branch": "sheaf-dag",
+  "by": "Q09",
+  "date": "2026-10-23",
+  "existing": false,
+  "note": "The fully defined sectionMultiplicationMatrix uses the canonical module structure induced by f.app U; its i,j entry is the i-coordinate of b times the jth basis vector. The theorem supplies the single global restriction-compatible family, with all four clauses of the node. No statement correction."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-9fa386140",
+  "group": "Q09",
+  "result": "pass",
+  "note": "Matches the node and Stacks 0BD2/0BCX clause by clause: IsFiniteLocallyFreeOfDegree d with 1≤d and no extra hypotheses; one monoid-hom family ν_V; restriction compatibility; ν(f.app a)=a^d; vanishing via Scheme.evaluation into residue fields; det of the multiplication matrix in every Fin d basis (canonical toModule) on every affine U≤V, which pins ν because free affines cover V. Edge cases checked: empty opens/schemes, empty affine chart, d=1, nilpotent rings, any characteristic. Node differs from side-live only by the lean record; statement verbatim; docstrings and 6-step proof docstring present; imports are proof-dep modules; only proof is sorry. Not a duplicate of normAt or exists_finiteLocallyFree_norm_charts. Advisory only: the helper sectionMultiplicationMatrix duplicates Algebra.leftMulMatrix in substance but is a correct, fully defined helper in the item module. Not recompiled per instructions; worker reports a clean compile."
+ }
+}

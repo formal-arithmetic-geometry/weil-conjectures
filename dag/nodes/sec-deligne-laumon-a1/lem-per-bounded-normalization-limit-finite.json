@@ -1,0 +1,435 @@
+{
+ "id": "lem-per-bounded-normalization-limit-finite",
+ "kind": "statement",
+ "title": "Finite normalization limit of a good bounded formal prime family",
+ "statement": "Let $A$ be a commutative Noetherian Nagata integral domain [def-weil-pbc-noetherian-ring, def-weil-pbc-nagata-ring], and let $x\\in A$ be nonzero and not a unit. Assume $A$ is $(x)$-adically complete [def-weil-pbc-adically-complete-ring]. Fix a nonempty finite subset $\\gamma_0\\subset\\operatorname{Max}A$, and let $\\Gamma_0$ be all finite subsets $\\gamma\\subset\\operatorname{Max}A$ containing $\\gamma_0$. Put $A_\\gamma=(A\\setminus\\bigcup_{\\mathfrak m\\in\\gamma}\\mathfrak m)^{-1}A$, the ring of fractions with denominators outside those maximal ideals, and $D_\\gamma=\\varprojlim_{j\\ge1}A_\\gamma/x^jA_\\gamma$ [def-weil-pbc-adic-completion]. Suppose primes $p_\\gamma\\subset D_\\gamma$ satisfy $p_\\gamma\\cap A=(0)$ and the following compatibility: for $\\gamma\\subseteq\\delta$, the inverse image of $p_\\gamma$ under $D_\\delta\\to D_\\gamma$ is $p_\\delta$. Assume also $p_\\gamma=p_\\delta D_\\gamma$ for every $\\gamma\\subseteq\\delta$. Let $E_\\gamma$ be the integral closure of $D_\\gamma/p_\\gamma$ in its fraction field [def-weil-pbc-integral-closure]. The injective quotient maps $D_\\delta/p_\\delta\\to D_\\gamma/p_\\gamma$ extend to fraction fields and induce maps $E_\\delta\\to E_\\gamma$. Define $T=\\varprojlim_{\\gamma\\in\\Gamma_0}E_\\gamma$, explicitly the ring of tuples $(e_\\gamma)_\\gamma$ compatible with these maps. Suppose $\\Delta=\\bigcup_{\\gamma\\in\\Gamma_0}\\{Q\\cap A:Q\\text{ is prime minimal over }xE_\\gamma\\}$ is finite. Then the canonical map $A\\to T$ is injective, $T$ is a finitely generated $A$-module, and every prime $q$ minimal over $xT$ satisfies $q\\cap A\\in\\Delta$.",
+ "source": {
+  "document": "https://doi.org/10.1016/B978-0-12-348032-3.50006-2",
+  "place": "J. Nishimura and T. Nishimura, Ideal-adic Completion of Noetherian Rings II, Algebraic Geometry and Commutative Algebra II (1988), pp.453–467. Definitions 1.1–1.6 and Lemmas 1.10–1.17, pp.456–460, the normalization-limit construction in the proof of Theorem 1.9; in particular Lemma 1.11(1.11.1) and Lemmas 1.15 and 1.17."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-noetherian-ring",
+  "def-weil-pbc-nagata-ring",
+  "def-weil-pbc-adically-complete-ring",
+  "def-weil-pbc-adic-completion",
+  "def-weil-pbc-integral-closure"
+ ],
+ "proof": [
+  {
+   "text": "For each $P\\in\\Delta$ choose a maximal ideal containing $P$ by [lem-weil-pbc-proper-ideal-contained-in-maximal]. Adjoin these finitely many maximal ideals to $\\gamma_0$, obtaining $\\eta$. Every coordinate $A\\to D_\\gamma/p_\\gamma\\hookrightarrow E_\\gamma$ is injective because $p_\\gamma\\cap A=0$. These maps are compatible, so their tuple map $A\\to T$ is injective. Each $E_\\gamma$ is a domain, and the image of $x$ is nonzero; multiplication by $x$ is therefore injective on $T$ as well.",
+   "uses": [
+    "lem-weil-pbc-proper-ideal-contained-in-maximal"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00E0, lemma-Zariski-topology; coordinate argument written explicitly."
+   }
+  },
+  {
+   "text": "Each $A_\\gamma$ is Nagata by [lem-weil-pbc-nagata-localization], hence Noetherian. By [lem-weil-pbc-module-completion-complete] and [lem-weil-pbc-adic-completion-noetherian], $D_\\gamma$ is complete and Noetherian. The quotient $A_\\gamma/xA_\\gamma$ is Nagata by [lem-weil-pbc-finite-over-nagata-nagata]. By [lem-weil-pbc-adic-completion-mod-power] it is $D_\\gamma/xD_\\gamma$. Apply [lem-per-adic-nagata-lifting] to see that $D_\\gamma$ is Nagata. Its prime quotient $C_\\gamma=D_\\gamma/p_\\gamma$ is N-2 by [def-weil-pbc-nagata-ring]; [def-weil-pbc-japanese-domain] with the degree-one fraction-field extension makes $E_\\gamma$ finite over $C_\\gamma$, and hence finite over $D_\\gamma$. Thus [lem-weil-pbc-finite-module-complete-over-complete-noetherian] makes every $E_\\gamma$ complete and separated for powers of $x$.",
+   "uses": [
+    "lem-weil-pbc-nagata-localization",
+    "lem-weil-pbc-module-completion-complete",
+    "lem-weil-pbc-adic-completion-noetherian",
+    "lem-weil-pbc-finite-over-nagata-nagata",
+    "lem-weil-pbc-adic-completion-mod-power",
+    "lem-per-adic-nagata-lifting",
+    "def-weil-pbc-nagata-ring",
+    "def-weil-pbc-japanese-domain",
+    "lem-weil-pbc-finite-module-complete-over-complete-noetherian"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tags 032U, 05GG, 0316, 032T, 032R and 032F; Marot lifting as cited in lem-per-adic-nagata-lifting."
+   }
+  },
+  {
+   "text": "The ring $T$ is $x$-adically separated: if $t\\in\\bigcap_{n\\ge1}x^nT$, then $\\pi_\\gamma(t)\\in\\bigcap_nx^nE_\\gamma=0$ by Step 2 for every $\\gamma$. Thus all coordinates of $t$ vanish, so $t=0$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Agent coordinate argument using the separatedness established in Step 2."
+   }
+  },
+  {
+   "text": "Put $E=E_\\eta$. It is Noetherian: any ideal is a $D_\\eta$-submodule of the finite module $E$, so has finitely many $D_\\eta$-generators by [lem-weil-pbc-noetherian-submodule-finite]; the same elements generate it as an $E$-ideal. It is a normal domain by [lem-weil-pbc-integral-closure-finite-extension-normal], applied to $C_\\eta=D_\\eta/p_\\eta$ and its own fraction field. By [lem-trf-normalization-integral-closure-krull] it is Krull, and [lem-trf-krull-principal-primary-decomposition] gives finitely many height-one primes $Q_1,\\ldots,Q_s$ over $x$, with $xE=\\bigcap_i(E\\cap xE_{Q_i})$. These are exactly the primes minimal over $xE$: the radicals of the primary components are the $Q_i$, which are incomparable height-one primes. If $s=0$, then $xE=E$; [lem-per-formal-boundary-power-detection] at $n=1$ gives $T=xT$, contradicting Steps 1 and 3. Thus $s>0$. Write $P_i=Q_i\\cap A\\in\\Delta$.",
+   "uses": [
+    "lem-weil-pbc-noetherian-submodule-finite",
+    "lem-weil-pbc-integral-closure-finite-extension-normal",
+    "lem-trf-normalization-integral-closure-krull",
+    "lem-trf-krull-principal-primary-decomposition",
+    "lem-per-formal-boundary-power-detection"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.purdue.edu/~iswanso/book/SwansonHuneke.pdf",
+    "place": "Agent setup using Theorem 4.10.5 and Proposition 4.10.3, printed pp.89–91; normality is Stacks Tag 034L; module subobjects are Tag 00IK."
+   }
+  },
+  {
+   "text": "For each $i$, put $R_i=A/P_i$, $K_i=\\operatorname{Frac}(R_i)$ and $L_i=\\operatorname{Frac}(E/Q_i)$. Step 2 and [lem-weil-pbc-adic-completion-mod-power] give a finite injective ring map $(R_i)_\\eta\\to E/Q_i$, where $(R_i)_\\eta$ denotes localization at the image of $A\\setminus\\bigcup_{\\mathfrak m\\in\\eta}\\mathfrak m$. Injectivity is the definition of $P_i$; finiteness follows by quotienting the finite $D_\\eta$-module $E$, using $x\\in Q_i$ and $D_\\eta/xD_\\eta=A_\\eta/xA_\\eta$. Localizing at all nonzero elements of $R_i$ gives a finite-dimensional domain over $K_i$, hence a field by [lem-weil-pbc-finite-dimensional-domain-is-field]; it contains $E/Q_i$ and is inside its fraction field, so equals $L_i$. Therefore $L_i/K_i$ is finite. By [def-weil-pbc-nagata-ring] the domain $R_i$ is N-2; [def-weil-pbc-japanese-domain] gives a finite $R_i$-module $N_i$, its integral closure in $L_i$. By [lem-weil-pbc-integral-closure-finite-extension-normal], $N_i$ is integrally closed in $L_i$ and $\\operatorname{Frac}(N_i)=L_i$.",
+   "uses": [
+    "lem-weil-pbc-adic-completion-mod-power",
+    "lem-weil-pbc-finite-dimensional-domain-is-field",
+    "def-weil-pbc-nagata-ring",
+    "def-weil-pbc-japanese-domain",
+    "lem-weil-pbc-integral-closure-finite-extension-normal"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Agent residue-field bound from Tags 05GG, 032R, 032F and 034L; finite-dimensional-domain field criterion is rank–nullity."
+   }
+  },
+  {
+   "text": "Every $t\\in T$ has residue $\\overline{t_\\eta}\\in N_i\\subset L_i$. To prove this, fix any prime $\\mathfrak r$ of $R_i$, let $\\mathfrak p$ be its inverse image in $A$, and choose a maximal ideal $\\mathfrak m\\supseteq\\mathfrak p$ by [lem-weil-pbc-proper-ideal-contained-in-maximal]. Set $\\delta=\\eta\\cup\\{\\mathfrak m\\}$. The composite $E_\\delta\\to E_\\eta\\to L_i$ sends $t_\\delta$ to $\\overline{t_\\eta}$. Since $E_\\delta$ is finite over $D_\\delta$, [lem-weil-pbc-finite-algebra-is-integral] supplies a monic relation for $t_\\delta$ over $D_\\delta$. In $L_i$ this relation factors through $D_\\delta/xD_\\delta=A_\\delta/xA_\\delta$ by [lem-weil-pbc-adic-completion-mod-power]. Its coefficients therefore lie in $(R_i)_\\mathfrak r$: every allowed denominator avoids $\\mathfrak m$, hence avoids $\\mathfrak p$. Thus $\\overline{t_\\eta}$ is integral over every $(R_i)_\\mathfrak r$, and [lem-sfb-integral-element-prime-local-criterion], with ambient algebra $L_i$, makes it integral over $R_i$. It belongs to $N_i$ by definition. This compares residues using every enlarged coordinate, not only $\\eta$.",
+   "uses": [
+    "lem-weil-pbc-proper-ideal-contained-in-maximal",
+    "lem-weil-pbc-finite-algebra-is-integral",
+    "lem-weil-pbc-adic-completion-mod-power",
+    "lem-sfb-integral-element-prime-local-criterion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Agent comparison of coordinate residues, using Tags 00E0, 00GK, 05GG and 034K (lemma-integral-closure-stalks)."
+   }
+  },
+  {
+   "text": "By [lem-trf-normal-domain-principal-divisor-kernel], each $E_{Q_i}$ is a discrete valuation ring with normalized valuation $v_i$; choose a uniformizer $\\pi_i$ and put $e_i=v_i(x)>0$. Its residue field is $L_i$, since localization at $Q_i$ inverts exactly the nonzero classes of $E/Q_i$. Let $e$ be a positive common multiple of the $e_i$. For $0\\le k\\le e$ set $n_i(k)=\\lceil ke_i/e\\rceil$ and define the $A$-submodule $F_k=\\{t\\in T:t_\\eta\\in\\pi_i^{n_i(k)}E_{Q_i}\\text{ for every }i\\}$. Thus $F_0=T$. The primary intersection formula of Step 4 and [lem-per-formal-boundary-power-detection] at $n=1$ give $F_e=xT$. For $k\\ge1$, $t\\in F_k$ implies $v_i(t_\\eta^e)\\ge ke_i$ for all $i$ by [lem-sc-dvr-valuation-arithmetic]. Apply [lem-trf-krull-principal-primary-decomposition] to $x^k$ (with the same height-one primes) to obtain $t_\\eta^e\\in x^kE$. Power detection now gives a unique $u\\in T$ with $t^e=x^ku$; uniqueness follows from injectivity of multiplication by $x$. For $k=0$ put $u=t^e$.",
+   "uses": [
+    "lem-trf-normal-domain-principal-divisor-kernel",
+    "lem-per-formal-boundary-power-detection",
+    "lem-sc-dvr-valuation-arithmetic",
+    "lem-trf-krull-principal-primary-decomposition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.math.purdue.edu/~iswanso/book/SwansonHuneke.pdf",
+    "place": "Agent valuation filtration using Proposition 4.10.3 for x and x^k; DVR valuations use Stacks 00PD and 031T, as in the cited principal-divisor node."
+   }
+  },
+  {
+   "text": "Fix $0\\le k<e$. The integer $n_i(k+1)-n_i(k)$ is $1$ precisely for $i$ in $I_k=\\{i:e\\mid ke_i\\}$, and is $0$ otherwise (because $e_i\\mid e$). For $i\\in I_k$ set $a_i=ke_i/e$ and define $z_i(t)$ to be the residue of $t_\\eta/\\pi_i^{a_i}$ in $L_i$, for $t\\in F_k$. These are $A$-linear maps, with scalar action through $A\\to R_i\\subset L_i$. Their joint kernel is exactly $F_{k+1}$, by the definition of $F_k$ and the above ceiling calculation. Consequently they induce an injective $A$-linear map $F_k/F_{k+1}\\to\\prod_{i\\in I_k}L_i$. The empty product here is the zero module, and then $F_k=F_{k+1}$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Agent leading-coefficient calculation in the chosen discrete valuation rings; no finiteness of the quotient is assumed."
+   }
+  },
+  {
+   "text": "For $i\\in I_k$, put $c_{i,k}=\\operatorname{res}_{Q_i}(\\pi_i^{ke_i}/x^k)\\in L_i^\\times$, taking $c_{i,0}=1$. The element is nonzero because numerator and denominator have the same valuation. For $t\\in F_k$ and $u$ from Step 7, reduction of $u_\\eta=t_\\eta^e/x^k$ gives $\\overline{u_\\eta}=c_{i,k}z_i(t)^e$. Step 6 gives $\\overline{u_\\eta}\\in N_i$. As $\\operatorname{Frac}(N_i)=L_i$, write $c_{i,k}=a/b$ with nonzero $a,b\\in N_i$, and take $d_{i,k}=a$. Then $d_{i,k}^e/c_{i,k}=a^{e-1}b\\in N_i$, so $(d_{i,k}z_i(t))^e\\in N_i$. The element $d_{i,k}z_i(t)$ is a root of $X^e-(d_{i,k}z_i(t))^e\\in N_i[X]$, hence lies in $N_i$ by its integral closedness from Step 5. Thus $z_i(F_k)\\subseteq d_{i,k}^{-1}N_i$. This bounds every valuation layer, including the nilpotent layers of $E/xE$, by a fixed finite module.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Agent explicit power and denominator calculation from Steps 5–7 and the definition of integral closedness; no extraction of roots or separability is used."
+   }
+  },
+  {
+   "text": "For each $k$, the finite product $M_k=\\prod_{i\\in I_k}d_{i,k}^{-1}N_i$ is a finite $A/xA$-module: a finite generating set for each $N_i$ from Step 5, divided by $d_{i,k}$ and placed in its product coordinate, generates it; $x\\in P_i$ kills each coordinate. Steps 8–9 embed $F_k/F_{k+1}$ in $M_k$. The ring $A/xA$ is Noetherian, since its ideals correspond to ideals of $A$ containing $xA$. Therefore [lem-weil-pbc-noetherian-submodule-finite] gives finite generation of every $F_k/F_{k+1}$ over $A/xA$. The short exact sequences $0\\to F_{k+1}/F_e\\to F_k/F_e\\to F_k/F_{k+1}\\to0$, descending from $F_e/F_e=0$, and [lem-weil-pbc-module-finite-extension-of-finite] prove $F_0/F_e=T/xT$ finite over $A/xA$. This deduction uses the residue comparison and all its higher layers explicitly.",
+   "uses": [
+    "lem-weil-pbc-noetherian-submodule-finite",
+    "lem-weil-pbc-module-finite-extension-of-finite"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tags 00IK (lemma-Noetherian-basic) and 0519 (lemma-extension), applied to the finite filtration just constructed."
+   }
+  },
+  {
+   "text": "Apply [lem-weil-pbc-finite-over-complete-ring] with $I=(x)$ and $M=T$. The ring $A$ is $I$-adically complete by hypothesis; Step 3 gives $\\bigcap_nI^nT=0$; Step 10 proves $T/IT$ finite over $A/I$. Its three hypotheses hold, hence $T$ is finite over $A$.",
+   "uses": [
+    "lem-weil-pbc-finite-over-complete-ring"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 031D (lemma-finite-over-complete-ring), with all three hypotheses supplied before it is applied."
+   }
+  },
+  {
+   "text": "Let $q$ be minimal over $xT$. Step 4 and [lem-per-formal-boundary-power-detection] at $n=1$ give an injective ring map $T/xT\\to E/xE$. The quotient correspondence makes $q/xT$ a minimal prime of $T/xT$. By [lem-weil-pbc-injective-minimal-prime-lift] there is a prime $Q\\subset E$ containing $x$ whose inverse image in $T$ is $q$. By [lem-weil-pbc-prime-contains-minimal-prime], choose $Q_0\\subseteq Q$ minimal over $xE$. Its inverse image in $T$ is a prime containing $xT$ and contained in $q$, hence equals $q$ by minimality. Therefore $q\\cap A=Q_0\\cap A\\in\\Delta$.",
+   "uses": [
+    "lem-per-formal-boundary-power-detection",
+    "lem-weil-pbc-injective-minimal-prime-lift",
+    "lem-weil-pbc-prime-contains-minimal-prime"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tags 00FK (lemma-injective-minimal-primes-in-image) and 00E0 (lemma-Zariski-topology (4)); the original accepted minimality argument."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-proper-ideal-contained-in-maximal",
+  "lem-weil-pbc-nagata-localization",
+  "lem-weil-pbc-module-completion-complete",
+  "lem-weil-pbc-adic-completion-noetherian",
+  "lem-weil-pbc-finite-over-nagata-nagata",
+  "lem-weil-pbc-adic-completion-mod-power",
+  "lem-per-adic-nagata-lifting",
+  "def-weil-pbc-nagata-ring",
+  "def-weil-pbc-japanese-domain",
+  "lem-weil-pbc-finite-module-complete-over-complete-noetherian",
+  "lem-weil-pbc-noetherian-submodule-finite",
+  "lem-weil-pbc-integral-closure-finite-extension-normal",
+  "lem-trf-normalization-integral-closure-krull",
+  "lem-trf-krull-principal-primary-decomposition",
+  "lem-per-formal-boundary-power-detection",
+  "lem-weil-pbc-finite-dimensional-domain-is-field",
+  "lem-weil-pbc-finite-algebra-is-integral",
+  "lem-sfb-integral-element-prime-local-criterion",
+  "lem-trf-normal-domain-principal-divisor-kernel",
+  "lem-sc-dvr-valuation-arithmetic",
+  "lem-weil-pbc-module-finite-extension-of-finite",
+  "lem-weil-pbc-finite-over-complete-ring",
+  "lem-weil-pbc-injective-minimal-prime-lift",
+  "lem-weil-pbc-prime-contains-minimal-prime"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://doi.org/10.1016/B978-0-12-348032-3.50006-2",
+  "place": "Repair of returned head 276a70b18d2: explicit residue comparison using all semilocal coordinates, followed by a finite valuation filtration and power/denominator bounds for every layer. Only power detection remains a new statement-only input; the original chapter is WANTED, and its numbered lemmas remain unverified."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "lem-per-bounded-normalization-limit-finite: inverse limit of normalizations of compatible prime quotients of semilocal completions is finite over a complete Nagata domain if principal boundary contractions are finite",
+   "results": "{\"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Module.Finite.of_isLocalized_maximal\", \"Algebra.quasiFinite_iff\", \"Algebra.QuasiFiniteAt\", \"AlgHom.IsArithFrobAt.finite_quotient\", \"Algebra.instFiniteResidueFieldOfQuasiFiniteAt\", \"Algebra.QuasiFinite.finite_fiber\", \"IsDedekindDomain.HeightOneSpectrum.adicCompletion\", \"IsLocalRing.ResidueField.finite_of_finite\"]}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits give the construction of adic completion and Noetherian integral closure over a Dedekind domain, not finiteness of this normalization limit or its boundary contractions."
+  },
+  {
+   "tool": "grep",
+   "query": "(inverseLimit|inverse.limit|InverseLimit).*(normaliz|integralClosure)|(normaliz|integralClosure).*(inverseLimit|inverse.limit)",
+   "results": "{\"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": []}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits give the construction of adic completion and Noetherian integral closure over a Dedekind domain, not finiteness of this normalization limit or its boundary contractions."
+  },
+  {
+   "tool": "leansearch",
+   "query": "lem-per-bounded-normalization-limit-finite: a good bounded prime sequence has module finite inverse limit of the integral closures of its adic completed quotients",
+   "results": "{\"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AdicCompletion\", \"Padic.adicCompletionEquiv\", \"IsAdicComplete.of_lift\", \"Rat.HeightOneSpectrum.adicCompletion.padicEquiv\", \"AdicCompletion.subring\", \"IsAdicComplete.of_subsingleton\", \"Rat.HeightOneSpectrum.adicCompletionIntegers.padicIntEquiv\", \"AdicCompletion.of_apply\"]}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits give the construction of adic completion and Noetherian integral closure over a Dedekind domain, not finiteness of this normalization limit or its boundary contractions."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsIntegralClosure\", \"IsNoetherianRing\"",
+   "results": "{\"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"IsIntegralClosure.isNoetherianRing\"]}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits give the construction of adic completion and Noetherian integral closure over a Dedekind domain, not finiteness of this normalization limit or its boundary contractions."
+  },
+  {
+   "tool": "grep",
+   "query": "isNoetherianRing|theorem|lemma",
+   "results": "{\"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"22\", \"63\", \"83\", \"90\", \"102\"]}",
+   "date": "2026-10-24",
+   "verdict": "no match: the source hits concern integral closure of finite-dimensional field extensions and its localization; none states the inverse-limit theorem."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A good compatible family of prime ideals in semilocal adic completions with finitely many principal boundary contractions has finite normalization inverse limit",
+   "results": "{\"t\": \"2026-10-24T08:29:37Z\", \"tool\": \"leanfinder\", \"query\": \"A good compatible family of prime ideals in semilocal adic completions with finitely many principal boundary contractions has finite normalization inverse limit\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"IsAdicComplete.henselianRing\", \"AdicCompletion.piEquivFin\", \"AdicCompletion.piEquivOfFintype_apply\", \"AdicCompletion.piEquivFin_apply\", \"AdicCompletion.ofTensorProduct_bijective_of_pi_of_fintype\", \"IsDedekindDomain.HeightOneSpectrum.adicCompletion\", \"IsDedekindDomain.instDFunLikeFiniteAdeleRingHeightOneSpectrumAdicCompletion\", \"AdicCompletion.ofTensorProduct_bijective_of_finite_of_isNoetherian\"], \"digest\": \"878c19784ba49f07\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: ordinary completion, finite limits, semilocal finite-module descent and finite separable integral closure do not establish the given normalization inverse-limit statement."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AdicCompletion\", \"Module.Finite\"",
+   "results": "{\"t\": \"2026-10-24T08:30:22Z\", \"tool\": \"loogle\", \"query\": \"\\\"AdicCompletion\\\", \\\"Module.Finite\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: ordinary completion, finite limits, semilocal finite-module descent and finite separable integral closure do not establish the given normalization inverse-limit statement."
+  },
+  {
+   "tool": "grep",
+   "query": "(inverseLimit|InverseLimit|inverse.limit).*(normaliz|integralClosure)|(normaliz|integralClosure).*(inverseLimit|InverseLimit|inverse.limit)",
+   "results": "{\"t\": \"2026-10-24T08:30:22Z\", \"tool\": \"grep\", \"query\": \"(inverseLimit|InverseLimit|inverse.limit).*(normaliz|integralClosure)|(normaliz|integralClosure).*(inverseLimit|InverseLimit|inverse.limit)\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: ordinary completion, finite limits, semilocal finite-module descent and finite separable integral closure do not establish the given normalization inverse-limit statement."
+  },
+  {
+   "tool": "leansearch",
+   "query": "inverse limit of integral closures of completed localizations of a Noetherian Nagata domain is a finite module",
+   "results": "{\"t\": \"2026-10-24T08:30:22Z\", \"tool\": \"leansearch\", \"query\": \"inverse limit of integral closures of completed localizations of a Noetherian Nagata domain is a finite module\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AdicCompletion.ofTensorProductEquivOfFiniteNoetherian.congr_simp\", \"Module.Finite.of_localized_maximal\", \"IsIntegralClosure.finite\", \"Submodule.fg_of_localized_maximal\", \"AdicCompletion.ofTensorProductEquivOfFiniteNoetherian\", \"AdicCompletion.coe_ofTensorProductEquivOfFiniteNoetherian\", \"IsIntegralClosure.isNoetherian\", \"FGModuleCat.instFiniteCarrierLimitModuleCatCompForget₂\"], \"digest\": \"977d0c99371eae4c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: ordinary completion, finite limits, semilocal finite-module descent and finite separable integral closure do not establish the given normalization inverse-limit statement."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Integral closure commutes with the inverse limit of semilocal adic completed prime quotients when the height one primes above a principal ideal have finitely many contractions",
+   "results": "{\"t\": \"2026-10-24T08:31:49Z\", \"tool\": \"leanfinder\", \"query\": \"Integral closure commutes with the inverse limit of semilocal adic completed prime quotients when the height one primes above a principal ideal have finitely many contractions\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"IsDedekindDomain.HeightOneSpectrum.adicCompletion\", \"IsDedekindDomain.HeightOneSpectrum.algebraMap_adicCompletion\", \"IsDedekindDomain.HeightOneSpectrum.algebraMap_adicCompletionIntegers_apply\", \"IsDedekindDomain.HeightOneSpectrum.instAlgebraAdicCompletion\", \"IsDedekindDomain.HeightOneSpectrum.coe_mem_adicCompletionIntegers\", \"Rat.HeightOneSpectrum.adicCompletionIntegers.coe_padicIntEquiv_apply\", \"IsDedekindDomain.FiniteAdeleRing.instDFunLikeHeightOneSpectrumAdicCompletion\", \"Rat.HeightOneSpectrum.adicCompletionIntegers.padicIntEquiv\"], \"digest\": \"cf7322cd4e08cfbc\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: ordinary completion, finite limits, semilocal finite-module descent and finite separable integral closure do not establish the given normalization inverse-limit statement."
+  },
+  {
+   "tool": "grep",
+   "query": "normaliz|integralClosure|valuation",
+   "results": "{\"t\": \"2026-10-24T08:36:39Z\", \"tool\": \"grep\", \"query\": \"normaliz|integralClosure|valuation\", \"sub\": \"RingTheory/AdicCompletion\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/AdicCompletion/Completeness.lean\"], \"digest\": \"a9920f1b6e2b145d\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: ordinary completion, finite limits, semilocal finite-module descent and finite separable integral closure do not establish the given normalization inverse-limit statement."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-per-qe-rotthaus-finite-boundary",
+  "date": "2026-10-24",
+  "group": "Q29"
+ },
+ "chapter": "sec-deligne-laumon-a1",
+ "unit": "sk-p-dl-a1-perverse",
+ "blueprint": {
+  "from": {
+   "node": "lem-per-artin-gabber-affine-curve",
+   "place": "Ancestor proof Step 3, regular local model and purity, through the small-singular-locus completion in Temkin Theorem 3.4.1: quasi-excellence of completed rational affine charts is supplied by Theorem 2.1.6. Auxiliary completion proof: Theorem 5.3 (Rotthaus Hilfssatz), printed p.11, citing Nishimura–Nishimura Theorem 1.9 and Proposition 1.18. Auxiliary: Definitions 1.1–1.6 and Lemmas 1.10–1.17, pp.456–460, the normalization-limit construction in the proof of Theorem 1.9; in particular Lemma 1.11(1.11.1) and Lemmas 1.15 and 1.17.",
+   "via": [
+    "lem-per-qe-rotthaus-finite-boundary",
+    "lem-per-qe-complete-pair-lifting",
+    "lem-per-small-divisor-formal-completion",
+    "lem-per-small-singular-locus-resolution",
+    "lem-per-qe-ordinary-regular-resolution",
+    "lem-per-characteristic-zero-log-resolution-independence",
+    "lem-per-complete-local-rigidification-comparison",
+    "lem-per-gabber-absolute-equivariant-modification",
+    "lem-per-gabber-log-smooth-equivariant-modification",
+    "lem-per-trait-prime-to-ell-log-alteration",
+    "lem-per-gabber-regular-pair-purity",
+    "lem-per-absolute-gysin-purity",
+    "lem-per-potential-dualizing-regular-unit",
+    "lem-per-finite-regular-reduction-dualizing",
+    "lem-per-qbar-generic-duality-model",
+    "lem-per-qbar-middle-tstructure"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-per-bounded-normalization-limit-finite",
+  "worker": "stage1",
+  "summary": "Repair of D1/D2 and E5/D5: removed the conclusion-equivalent residue-lattice node. Kept the accepted power-detection input. Proved reduced-residue integrality over each A/P using every enlarged semilocal coordinate and the prime-local integrality criterion; bounded each valuation layer by a fractional copy of its finite Nagata normalization using t^e/x^k; assembled a finite filtration of T/xT, then applied Tag 031D. Accepted original injectivity, coordinate finiteness/separatedness and boundary arguments retained. Statement unchanged; one new node, no Mathlib leaves.",
+  "blueprint": "Historical algebra descendant of ancestor Step 3 through Temkin and Rotthaus, as recorded in blueprint.from; latest ancestor Step 3 is duality and does not contain this algebra theorem verbatim. This split realizes the existing auxiliary normalization-limit claim without changing the unit route.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-proper-ideal-contained-in-maximal",
+    "why": "Generic commutative algebra for normalization, prime ideals, valuation rings, completions or finite modules; the duality unit supplies no substitute."
+   },
+   {
+    "node": "lem-weil-pbc-nagata-localization",
+    "why": "Generic commutative algebra for normalization, prime ideals, valuation rings, completions or finite modules; the duality unit supplies no substitute."
+   },
+   {
+    "node": "lem-weil-pbc-module-completion-complete",
+    "why": "Generic commutative algebra for normalization, prime ideals, valuation rings, completions or finite modules; the duality unit supplies no substitute."
+   },
+   {
+    "node": "lem-weil-pbc-adic-completion-noetherian",
+    "why": "Generic commutative algebra for normalization, prime ideals, valuation rings, completions or finite modules; the duality unit supplies no substitute."
+   },
+   {
+    "node": "lem-weil-pbc-finite-over-nagata-nagata",
+    "why": "Generic commutative algebra for normalization, prime ideals, valuation rings, completions or finite modules; the duality unit supplies no substitute."
+   },
+   {
+    "node": "lem-weil-pbc-adic-completion-mod-power",
+    "why": "Generic commutative algebra for normalization, prime ideals, valuation rings, completions or finite modules; the duality unit supplies no substitute."
+   },
+   {
+    "node": "lem-weil-pbc-finite-module-complete-over-complete-noetherian",
+    "why": "Generic commutative algebra for normalization, prime ideals, valuation rings, completions or finite modules; the duality unit supplies no substitute."
+   },
+   {
+    "node": "lem-weil-pbc-noetherian-submodule-finite",
+    "why": "Generic commutative algebra for normalization, prime ideals, valuation rings, completions or finite modules; the duality unit supplies no substitute."
+   },
+   {
+    "node": "lem-weil-pbc-integral-closure-finite-extension-normal",
+    "why": "Generic commutative algebra for normalization, prime ideals, valuation rings, completions or finite modules; the duality unit supplies no substitute."
+   },
+   {
+    "node": "lem-trf-normalization-integral-closure-krull",
+    "why": "Generic height-one valuation or principal-primary-decomposition algebra, used to build and bound the explicit filtration; no trace-formula result or replacement of the unit route is involved."
+   },
+   {
+    "node": "lem-trf-krull-principal-primary-decomposition",
+    "why": "Generic height-one valuation or principal-primary-decomposition algebra, used to build and bound the explicit filtration; no trace-formula result or replacement of the unit route is involved."
+   },
+   {
+    "node": "lem-weil-pbc-finite-dimensional-domain-is-field",
+    "why": "Generic commutative algebra for normalization, prime ideals, valuation rings, completions or finite modules; the duality unit supplies no substitute."
+   },
+   {
+    "node": "lem-weil-pbc-finite-algebra-is-integral",
+    "why": "Generic commutative algebra for normalization, prime ideals, valuation rings, completions or finite modules; the duality unit supplies no substitute."
+   },
+   {
+    "node": "lem-sfb-integral-element-prime-local-criterion",
+    "why": "Tag 034K detects integrality of one residue in the finite field L_i over A/P_i, after testing every prime by enlarging gamma; it is a generic algebra tool, not a six-functor argument."
+   },
+   {
+    "node": "lem-trf-normal-domain-principal-divisor-kernel",
+    "why": "Generic height-one valuation or principal-primary-decomposition algebra, used to build and bound the explicit filtration; no trace-formula result or replacement of the unit route is involved."
+   },
+   {
+    "node": "lem-sc-dvr-valuation-arithmetic",
+    "why": "Generic commutative algebra for normalization, prime ideals, valuation rings, completions or finite modules; the duality unit supplies no substitute."
+   },
+   {
+    "node": "lem-weil-pbc-module-finite-extension-of-finite",
+    "why": "Generic commutative algebra for normalization, prime ideals, valuation rings, completions or finite modules; the duality unit supplies no substitute."
+   },
+   {
+    "node": "lem-weil-pbc-finite-over-complete-ring",
+    "why": "Generic commutative algebra for normalization, prime ideals, valuation rings, completions or finite modules; the duality unit supplies no substitute."
+   },
+   {
+    "node": "lem-weil-pbc-injective-minimal-prime-lift",
+    "why": "Generic commutative algebra for normalization, prime ideals, valuation rings, completions or finite modules; the duality unit supplies no substitute."
+   },
+   {
+    "node": "lem-weil-pbc-prime-contains-minimal-prime",
+    "why": "Generic commutative algebra for normalization, prime ideals, valuation rings, completions or finite modules; the duality unit supplies no substitute."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-proper-ideal-contained-in-maximal",
+  "lem-weil-pbc-nagata-localization",
+  "lem-weil-pbc-module-completion-complete",
+  "lem-weil-pbc-adic-completion-noetherian",
+  "lem-weil-pbc-finite-over-nagata-nagata",
+  "lem-weil-pbc-adic-completion-mod-power",
+  "lem-weil-pbc-finite-module-complete-over-complete-noetherian",
+  "lem-weil-pbc-noetherian-submodule-finite",
+  "lem-weil-pbc-integral-closure-finite-extension-normal",
+  "lem-trf-normalization-integral-closure-krull",
+  "lem-trf-krull-principal-primary-decomposition",
+  "lem-weil-pbc-finite-dimensional-domain-is-field",
+  "lem-weil-pbc-finite-algebra-is-integral",
+  "lem-sfb-integral-element-prime-local-criterion",
+  "lem-trf-normal-domain-principal-divisor-kernel",
+  "lem-sc-dvr-valuation-arithmetic",
+  "lem-weil-pbc-module-finite-extension-of-finite",
+  "lem-weil-pbc-finite-over-complete-ring",
+  "lem-weil-pbc-injective-minimal-prime-lift",
+  "lem-weil-pbc-prime-contains-minimal-prime"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-N0-699321908",
+  "group": "N0",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-N0-699321908 (reviewer sub-agent of L); spot-checked: Repair of the D1/D2 + E5/D5 return is complete. The residue-lattice node, which was equivalent to the conclusion, is gone and nothing cites it. Steps 5-10 now prove T/xT finite. Step 5 makes the reduction E/Q_i finite and injective over (R_i)_eta through D_eta/x = A_eta/x (05GG) and gets a finite N_i from N-2 of A/P_i. Step 6 enlarges eta to delta = eta U {m} for every prime of R_i, factors the 00GK monic relation through A_delta/x and applies 034K, giving t-bar in N_i. Step 7 sets up DVR valuations e_i and the filtration F_k by ceil(k e_i/e); the Krull principal decomposition and power detection give F_e = xT and t^e = x^k u. Step 8 jumps exactly when e | k e_i, checked on e_1=2, e=4. Step 9 is u-bar = c z^e, (az)^e = a^{e-1} b u-bar in N_i, then normality, with no separability needed. Step 10 is 00IK plus 0519 down the filtration. Steps 1-3, 11 (031D) and 12 (00FK, 00E0(4)) were re-checked and are correct. New node power-detection: statement-only, self-contained, unchanged. I checked it true: C_eta = C_gamma (x) D_eta, a prime over Q survives since Q cap A is in Delta and lies in some m in eta, lying over in E_eta, then DVR domination. It is strictly smaller than the item, and the rg -L search found no duplicate. Batch-5: lem-per-adic-nagata-lifting (closure reaches Mori-Nagata) and lem-trf-normalization-integral-closure-krull, lem-trf-krull-principal-primary-decomposition and lem-trf-normal-domain-principal-divisor-kernel are generic commutative algebra (Swanson-Huneke 4.10.3/4.10.5, 00PD/031T). None is part of either assumed statement or of their proofs, so all four are acceptable. The 20 tool_uses are generic algebra and I accept them. The Nishimura source is unavailable (WANTED); the proof is agent-written and checked on its own terms."
+ }
+}

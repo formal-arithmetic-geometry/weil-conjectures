@@ -1,0 +1,133 @@
+{
+ "id": "lem-sfb-adic-residue-coefficient-sequence",
+ "kind": "statement",
+ "title": "The consecutive quotient coefficient sequence on a localized completed site",
+ "statement": "Let X be a scheme, A a commutative Noetherian ring, I an ideal, U an object of the coefficient-sized pro-etale site, and n a natural number. Write B for the completed coefficient ring sheaf restricted to U and p_k:B -> (A/I^(k+1))_U for the projections of def-sfb-adic-residue-lift-comparisons. There exist a module sheaf N over (A/I)_U and a short exact sequence S of B-module sheaves such that S.X1 is isomorphic to restriction of N along p_0, S.X2 to restriction of the regular (A/I^(n+2))_U module along p_(n+1), and S.X3 to restriction of the regular (A/I^(n+1))_U module along p_n. The isomorphisms retain the given quotient actions. This assertion contains no complex, derived functor, vanishing, or completeness hypothesis.",
+ "stmt_deps": [
+  "def-sfb-adic-residue-lift-comparisons"
+ ],
+ "source": {
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tag 0G1T, lemma-derived-vanishing-mod-I (1), the consecutive-power filtration in its proof; proetale.tex Tag 09C6 for constant module realization and finite reductions; sites-modules.tex exact sheafification."
+ },
+ "proof": [
+  {
+   "text": "Put Bn=A/I^(n+2), D=A/I^(n+1), K=A/I, and let q:Bn -> D and r:Bn -> K be the canonical surjections. The ideal L=ker(q) embeds into Bn, and q is surjective, so 0 -> L -> Bn -> D -> 0 is short exact over Bn. For b in ker(r) and x in L, lift them to a in I and c in I^(n+1). Their product lies in I^(n+2), so bx=0. Descend the L-action through Bn/ker(r), and transport it by the first isomorphism theorem to a K-action. The identity on L is a Bn-linear isomorphism from L to restriction of this K-module. For I=0, L=0; for I=top, every term is zero.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Apply the constant Bn-module presheaf functor followed by module sheafification along the canonical constant-ring unit. The first functor preserves limits and colimits sectionwise; the second is exact. The resulting sequence of constant module sheaves is short exact. The same sheafification adjunction constructs the regular constant-module-to-ring-unit isomorphism. Its underlying map is locally bijective, hence invertible.",
+   "uses": [
+    "def-weil-pbc-constant-coefficient-scalar-extension",
+    "def-weil-presheaf-modules-sheafification"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For any ring map f:Bn -> E and E-module M, construct the comparison from the constant Bn-module sheaf of restriction of M to restriction of the constant E-module sheaf. On constants it is the additive sheafification unit of M. Its linearity is the naturality square of the ring sheafification unit. The module sheafification adjunction gives the map; its underlying additive map is locally bijective, so it is an isomorphism. Apply it to the residue module L and the regular D-module.",
+   "uses": [
+    "def-weil-pbc-constant-coefficient-scalar-extension",
+    "def-weil-presheaf-modules-sheafification"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Restrict the constructed sequence and comparisons to the slice, and then restrict scalar actions along the completion projection to Bn. Both functors are exact. The limit cone equations identify this projection followed by q and r with the original nth and residue projections. Restriction composition is the identity on underlying sections; thus the three isomorphisms have the required endpoint actions.",
+   "uses": [
+    "def-weil-pbc-ringed-derived-restriction",
+    "lem-weil-pbc-constant-completion-equivalence"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tag 0G1T consecutive-power filtration; the coefficient-sequence step of lem-sfb-adic-residue-vanishing-successor, formalized by N4 without any derived vanishing statement."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A short exact sequence of consecutive ideal power quotients has kernel annihilated by the ideal and remains exact under constant module sheafification",
+   "results": "8 hits, including AdicCompletion.map_exact, QuotSMulTop.map_exact, and Ideal.exact_mulQuot_quotOfMul. None constructs this ringed-slice short exact coefficient sequence.",
+   "date": "2026-10-26",
+   "verdict": "No direct match; use quotient and exact sheafification APIs."
+  },
+  {
+   "tool": "loogle",
+   "query": "Ideal.Quotient.factor",
+   "results": "12 hits including factor, factor_eq, factor_mk, factor_comp, and factor_surjective. These give the algebraic quotient maps and their coherence.",
+   "date": "2026-10-26",
+   "verdict": "Ingredients used."
+  },
+  {
+   "tool": "grep",
+   "query": "factorPow|IsTorsionBySet",
+   "results": "25 hits including Ideal.Quotient.factorPow and Module.IsTorsionBySet.module, which provides the descended quotient action. Local searches found only the DVR-specialized StrictDvrCoefficientSequence, not the arbitrary-ideal slice statement.",
+   "date": "2026-10-26",
+   "verdict": "Ingredients used; no duplicate arbitrary-ideal sequence."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.AdicResidueVanishingSuccessor",
+  "date": "2026-10-26",
+  "group": "N4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-lem-integral-models-stacks",
+   "place": "The elementary coefficient-sequence step of lem-sfb-adic-residue-vanishing-successor, below the finite reduction induction.",
+   "via": [
+    "lem-sfb-adic-residue-vanishing-successor",
+    "lem-sfb-adic-complete-residue-conservative",
+    "lem-sfb-adic-residue-lisse-perfect-lift",
+    "lem-sfb-adic-stratified-perfect",
+    "lem-sfb-integral-cohomological-adic-criterion"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-lem-integral-models",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.AdicResidueCoefficientSequence",
+  "file": "lean/Sheaf/Paper/AdicResidueCoefficientSequence.lean",
+  "declaration": "AlgebraicGeometry.Scheme.adicResidue_coefficient_sequence",
+  "statement": "theorem adicResidue_coefficient_sequence\n    (X : AlgebraicGeometry.Scheme.{u}) {A : Type (max v (u + 1))}\n    [CommRing A] [IsNoetherianRing A] (J : Ideal A)\n    (U : coefficientProEtaleSiteModel.{u, v} X) (n : ℕ) :\n    let B := (completed (coefficientProEtaleModelTopology.{u, v} X) A J).over U\n    let p := adicResidueLocalProjection.{u, v} X J U\n    ∃ (N : Mod ((finite (coefficientProEtaleModelTopology.{u, v} X) A J 0).over U))\n      (S : ShortComplex (Mod B)),\n      S.ShortExact ∧ Nonempty (S.X₁ ≅ (res (p 0)).obj N) ∧\n        Nonempty (S.X₂ ≅ (res (p (n + 1))).obj (SheafOfModules.unit _)) ∧\n        Nonempty (S.X₃ ≅ (res (p n)).obj (SheafOfModules.unit _))",
+  "branch": "sheaf-dag",
+  "by": "N4",
+  "date": "2026-10-26"
+ },
+ "proof_deps": [
+  "def-weil-pbc-constant-coefficient-scalar-extension",
+  "def-weil-presheaf-modules-sheafification",
+  "def-weil-pbc-ringed-derived-restriction",
+  "lem-weil-pbc-constant-completion-equivalence"
+ ],
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "N4",
+  "result": "pass",
+  "landing": "20261026T002059-L-55290",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "N4",
+  "result": "pass",
+  "landing": "20261026T002059-L-55290",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

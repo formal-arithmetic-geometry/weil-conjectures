@@ -8,11 +8,67 @@
   "place": "VIII 2.3.11 and 2.3.13, pp.93--94, referring to Bierstone--Milman, Invent. Math. 128 (1997), 207--302; detailed input Theorem 8.1, Definition 8.3 and Remarks 8.4 (pp.273--275). No Stacks tag states this result; journal text read through the publisher-version PDF online, absent from the repository literature."
  },
  "stmt_deps": [
-  "def-weil-pbc-multivariate-power-series"
+  "def-weil-pbc-multivariate-power-series",
+  "def-trf-supported-homogeneous-division"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "For $n\\ge1$ take $b=d+n(\\max(1,d)-1)+1$, where $d=\\max(\\{0\\}\\cup\\{d_i\\})$. If $k\\ge b$ and $\\mathcal P_k$ spans, [lem-trf-supported-coordinate-face-lifting] gives the lifts $Q$ for every coordinate face into $S=\\operatorname{Span}_A\\mathcal P_{k+1}$. All its generators have degree $k+1$. Since $k+1>0$, [lem-trf-homogeneous-coordinate-lifting-criterion] gives $S=V_{k+1}$. This $b$ depends only on the diagram, not on $A$ or the forms.",
+   "uses": [
+    "lem-trf-supported-coordinate-face-lifting",
+    "lem-trf-homogeneous-coordinate-lifting-criterion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Bierstone--Milman, Invent. Math. 128 (1997), Theorem 8.1 and its application in Theorem 9.6, pp.274--275 and 282; subarguments isolated as cited. Online PDF https://mahalex.net/seminars/gabber/Bierstone-Milman%20Canonical%20desingularization%20in%20characteristic%20zero.pdf"
+   }
+  },
+  {
+   "text": "Starting from the given $q\\ge b$, induct on $t-q$: the base is the assumed spanning at $q$, and Step 1 applied at $k=t\\ge b$ gives the successor. For $n=0$ choose $b=0$: the only nonzero homogeneous component is $V_0=A$, so spanning at $q$ propagates directly to all $t\\ge q$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Bierstone--Milman, Invent. Math. 128 (1997), Theorem 8.1 and its application in Theorem 9.6, pp.274--275 and 282; subarguments isolated as cited. Online PDF https://mahalex.net/seminars/gabber/Bierstone-Milman%20Canonical%20desingularization%20in%20characteristic%20zero.pdf"
+   }
+  },
+  {
+   "text": "In every degree, [lem-trf-supported-degree-coefficient-isomorphism] identifies the family indices with the finite monomial basis and shows that spanning makes its coefficient map bijective. Hence each spanning family is a basis. If every degree at most $b$ spans, Step 2 applied at $q=b$ gives spanning in all degrees. Its unique basis coefficients, grouped by vertex, are precisely the supported quotients and complementary remainder in [def-trf-supported-homogeneous-division]. Conversely unique division gives spanning in the test degrees. This also covers $n=0$.",
+   "uses": [
+    "lem-trf-supported-degree-coefficient-isomorphism",
+    "def-trf-supported-homogeneous-division"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Bierstone--Milman, Invent. Math. 128 (1997), Theorem 8.1 and its application in Theorem 9.6, pp.274--275 and 282; subarguments isolated as cited. Online PDF https://mahalex.net/seminars/gabber/Bierstone-Milman%20Canonical%20desingularization%20in%20characteristic%20zero.pdf"
+   }
+  },
+  {
+   "text": "By [lem-trf-monotone-prefix-essential-restriction], each degree prefix has exactly the retained ordered minimal vertices and unchanged quotient supports. Restricting either $D$ or a prefix to its own essential variables preserves monotonicity, ordered minimal vertices and degrees, with supports given by extension by zero. For each resulting diagram $D'$ let $n'$ be its number of variables and $d'=\\max(\\{0\\}\\cup\\{|\\alpha'_i|\\})$. Relabel the variables increasingly and apply Steps 1--3 with $b'=d'+n'(\\max(1,d')-1)+1$ if $n'>0$, and $b'=0$ if $n'=0$. The support identities identify the required indexed family exactly; all homogeneous forms over every commutative $A$ are allowed. Thus each prefix, restriction and prefix followed by restriction has its own bound independent of $A$ and the forms, as asserted. Empty prefixes and empty variable sets are included.",
+   "uses": [
+    "lem-trf-monotone-prefix-essential-restriction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Bierstone--Milman, Invent. Math. 128 (1997), Theorem 8.1 and its application in Theorem 9.6, pp.274--275 and 282; subarguments isolated as cited. Online PDF https://mahalex.net/seminars/gabber/Bierstone-Milman%20Canonical%20desingularization%20in%20characteristic%20zero.pdf"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-trf-supported-coordinate-face-lifting",
+  "lem-trf-homogeneous-coordinate-lifting-criterion",
+  "lem-trf-supported-degree-coefficient-isomorphism",
+  "def-trf-supported-homogeneous-division",
+  "lem-trf-monotone-prefix-essential-restriction"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "ILO VIII 2.3.11--2.3.13 for the inherited resolution route; BM 1997 Theorem 8.1 and Lemma 8.5, pp.274--275, read online at https://mahalex.net/seminars/gabber/Bierstone-Milman%20Canonical%20desingularization%20in%20characteristic%20zero.pdf. The explicit exceptional-box bound and prefix/essential-variable checks are written out by Q78; BM paper is absent from repository literature. Q19 repair redistributes all ten inherited proof steps among four independent statement-only nodes; short assembly retains the same argument."
+ },
  "mathlib_searches": [
   {
    "tool": "loogle",
@@ -55,10 +111,73 @@
    "results": "{\"t\": \"2026-10-19T15:48:20Z\", \"tool\": \"leansearch\", \"query\": \"lem-trf-initial-diagram-stabilization: monotone diagrams give a uniform finite test for division in all homogeneous degrees\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Finset.diag_mono\", \"CategoryTheory.IsFiltered.IsEventuallyConstant\", \"LightDiagram.isLimit\", \"CategoryTheory.Limits.limMap_mono\", \"HomologicalComplex.instMonoFιTruncLE\", \"CategoryTheory.IsGrothendieckAbelian.instIsStableUnderTransfiniteCompositionMonomorphisms\", \"HomologicalComplex.instMonoFOfHasFiniteLimits\", \"CategoryTheory.MorphismProperty.instIsStableUnderTransfiniteCompositionOfShapeFunctorMonomorphismsOfHasPullbacksOfHasIterationOfShape\"], \"digest\": \"122924e4f9473cdc\"}",
    "date": "2026-10-19",
    "verdict": "no match: inspected the recorded hits and the relevant polynomial division, formal-series order/inverse and smooth-presentation sources; none gives this formal diagram or regular Taylor-family theorem"
+  },
+  {
+   "tool": "grep",
+   "query": "monotone.?diagram|initial.?exponent|stabilization",
+   "results": "{\"t\": \"2026-10-22T04:36:34Z\", \"tool\": \"grep\", \"query\": \"monotone.?diagram|initial.?exponent|stabilization\", \"sub\": \"RingTheory\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: homogeneous component and monomial-order declarations, Chevalley complexity bounds, and ordinary division do not state eventual propagation with these disjoint quotient supports"
+  },
+  {
+   "tool": "leansearch",
+   "query": "lem-trf-initial-diagram-stabilization: eventual propagation of spanning in homogeneous polynomial degrees with prescribed monomial quotient supports",
+   "results": "{\"t\": \"2026-10-22T04:36:35Z\", \"tool\": \"leansearch\", \"query\": \"lem-trf-initial-diagram-stabilization: eventual propagation of spanning in homogeneous polynomial degrees with prescribed monomial quotient supports\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"MvPolynomial.homogeneousComponent_isHomogeneous\", \"MvPolynomial.homogeneousComponent\", \"MonomialOrder.span_leadingTerm_eq_span_monomial'\", \"CategoryTheory.IsFiltered.IsEventuallyConstant\", \"PowerSeries.IsWeierstrassDivisorAt.divCoeff\", \"MvPolynomial.homogeneousSubmodule_eq_finsupp_supported\", \"Ideal.Filtration.submodule_eq_span_le_iff_stable_ge\", \"Ideal.Filtration.Stable.exists_pow_smul_eq_of_ge\"], \"digest\": \"fbbb8a547310572b\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: homogeneous component and monomial-order declarations, Chevalley complexity bounds, and ordinary division do not state eventual propagation with these disjoint quotient supports"
+  },
+  {
+   "tool": "loogle",
+   "query": "MvPolynomial.IsHomogeneous",
+   "results": "{\"t\": \"2026-10-22T04:36:35Z\", \"tool\": \"loogle\", \"query\": \"MvPolynomial.IsHomogeneous\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"MvPolynomial.IsHomogeneous\", \"MvPolynomial.isHomogeneous_X\", \"MvPolynomial.isHomogeneous_of_isEmpty\", \"MvPolynomial.IsHomogeneous.totalDegree_le\", \"MvPolynomial.isHomogeneous_of_totalDegree_zero\", \"MvPolynomial.totalDegree_zero_iff_isHomogeneous\", \"MvPolynomial.isHomogeneous_one\", \"MvPolynomial.isHomogeneous_zero\"], \"digest\": \"c4288e164db318ef\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: homogeneous component and monomial-order declarations, Chevalley complexity bounds, and ordinary division do not state eventual propagation with these disjoint quotient supports"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "lem-trf-initial-diagram-stabilization: finite verification bound for supported homogeneous polynomial division with monotone monomial diagrams",
+   "results": "{\"t\": \"2026-10-22T04:36:37Z\", \"tool\": \"leanfinder\", \"query\": \"lem-trf-initial-diagram-stabilization: finite verification bound for supported homogeneous polynomial division with monotone monomial diagrams\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"ChevalleyThm.MvPolynomialC.numBound\", \"ChevalleyThm.MvPolynomialC.degBound\", \"ChevalleyThm.degBound\", \"ChevalleyThm.MvPolynomialC.degBound_le_degBound\", \"ChevalleyThm.MvPolynomialC.degBound_casesOn_succ\", \"ChevalleyThm.MvPolynomialC.degBound_pos\", \"ChevalleyThm.numBound\", \"MvPolynomial.exists_degree_lt\"], \"digest\": \"ea3cb2e6bd09ad92\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: homogeneous component and monomial-order declarations, Chevalley complexity bounds, and ordinary division do not state eventual propagation with these disjoint quotient supports"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "lem-trf-initial-diagram-stabilization: Bierstone Milman homogeneous stabilization theorem for supported polynomial division and finite degree tests",
+   "results": "{\"t\": \"2026-10-22T04:37:56Z\", \"tool\": \"leanfinder\", \"query\": \"lem-trf-initial-diagram-stabilization: Bierstone Milman homogeneous stabilization theorem for supported polynomial division and finite degree tests\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"MvPolynomial.exists_mem_support_not_dvd_of_forall_totalDegree_le\", \"ChevalleyThm.chevalley_polynomialC\", \"Polynomial.exists_partition_polynomial_aux\", \"Polynomial.exists_partition_polynomial\", \"ChevalleyThm.MvPolynomialC.degBound\", \"ChevalleyThm.chevalley_mvPolynomialC\", \"ChevalleyThm.MvPolynomialC.degBound_casesOn_succ\", \"chevalley_mvPolynomial_mvPolynomial\"], \"digest\": \"ad68e124a8600ebd\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: homogeneous component and monomial-order declarations, Chevalley complexity bounds, and ordinary division do not state eventual propagation with these disjoint quotient supports"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "lem-trf-initial-diagram-stabilization: uniform finite degree test for supported homogeneous division for a monotone monomial diagram over all commutative rings",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"MvPolynomial.monomial_mem_homogeneousSubmodule_pow_degree\", \"module\": \"Mathlib/RingTheory/MvPolynomial/Homogeneous\", \"type\": \"∀ {σ : Type u_1} {R : Type u_3} [inst : CommSemiring R] (r : R) (s : σ →₀ ℕ),\\n  (MvPolynomial.monomial s) r ∈ MvPolynomial.homogeneousSubmodule σ R 1 ^ Finsupp.degree s\", \"doc\": \"For any commutative semiring $ R $, type $ \\\\sigma $, coefficient $ r \\\\in R $, and finite support function $ s : \\\\sigma \\\\to_0 \\\\mathbb{N} $, the monomial $ r \\\\cdot \\\\mathbf{X}^s $ belongs to the $ \\\\deg(s\"}\n  {\"name\": \"MvPolynomial.homogeneousSubmodule_eq_finsupp_supported\", \"module\": \"Mathlib/RingTheory/MvPolynomial/Homogeneous\", \"type\": \"∀ (σ : Type u_1) (R : Type u_3) [inst : CommSemiring R] (n : ℕ),\\n  MvPolynomial.homogeneousSubmodule σ R n = Finsupp.supported R R {d | Finsupp.degree d = n}\", \"doc\": \"For a commutative semiring $ R $ and a type $ \\\\sigma $, the homogeneous submodule of degree $ n $ in the multivariate polynomial ring $ R[\\\\sigma] $ is equal to the submodule of finite support function\"}\n  {\"name\": \"HomogeneousLocalization.NumDenSameDeg\", \"module\": \"Mathlib/RingTheory/GradedAlgebra/HomogeneousLocalization\", \"type\": \"{ι : Type u_1} →\\n  {A : Type u_2} → {σ : Type u_3} → [inst : CommRing A] → [SetLike σ A] → (ι → σ) → Submonoid A → Type (max u_1 u_2)\", \"doc\": \"An inductive type defining the localization structure for a graded algebra where numerators and denominators are homogeneous elements of the same degree. It takes a type $\\\\iota$, a commutative ring $A\"}\n  {\"name\": \"HomogeneousLocalization.NumDenSameDeg.deg\", \"module\": \"Mathlib/RingTheory/GradedAlgebra/HomogeneousLocalization\", \"type\": \"{ι : Type u_1} →\\n  {A : Type u_2} →\\n    {σ : Type u_3} →\\n      [inst : CommRing A] →\\n        [inst_1 : SetLike σ A] → {𝒜 : ι → σ} → {x : Submonoid A} → HomogeneousLocalization.NumDenSameDeg 𝒜 x → ι\", \"doc\": \"Given a graded algebra localization structure where numerators and denominators are homogeneous elements of the same degree, this function assigns to each localization element its common degree in the\"}\n  {\"name\": \"Polynomial.homogenize_monomial_of_lt\", \"module\": \"Mathlib/Algebra/Polynomial/Homogenize\", \"type\": \"∀ {R : Type u_1} [inst : CommSemiring R] {m n : ℕ}, n < m → ∀ (r : R), ((Polynomial.monomial m) r).homogenize n = 0\", \"doc\": \"For any natural numbers $m$ and $n$ with $n < m$, and any element $r$ in the semiring $R$, the homogenization of the monomial $rX^m$ with respect to degree $n$ results in the zero polynomial.\"}\n  {\"name\": \"GradedAlgebra.exists_finset_adjoin_eq_top_and_homogeneous_ne_zero\", \"module\": \"Mathlib/RingTheory/GradedAlgebra/FiniteType\", \"type\": \"∀ {S : Type u_1} {σ : Type u_2} {ι : Type u_3} [inst : DecidableEq ι] [inst_1 : AddCommMonoid ι] [inst_2 : CommRing S]\\n  [inst_3 : SetLike σ S] [inst_4 : AddSubgroupClass σ S] (𝒜 : ι → σ) [inst_5 : GradedRing 𝒜]\\n  [Algebra.FiniteType (↥(𝒜 0)) S], ∃ s, Algebra.adjoin ↥(𝒜 0) ↑s = ⊤ ∧ ∀ i ∈ s, ∃ n, n ≠\", \"doc\": \"In a graded algebra $\\\\mathcal{A}$ over a commutative semiring $R$, there exists a finite subset $S$ of homogeneous elements (each belonging to a non-zero graded component $\\\\mathcal{A}_n$ for $n \\\\neq 0\"}\n  {\"name\": \"MvPolynomial.degreesLE\", \"module\": \"Mathlib/Algebra/MvPolynomial/Degrees\", \"type\": \"(R : Type u) → (σ : Type u_1) → [inst : CommSemiring R] → Multiset σ → Submodule R (MvPolynomial σ R)\", \"doc\": \"The submodule of the polynomial ring $ R[\\\\sigma] $ consisting of all polynomials whose multiset of variables (degrees) is bounded above by a given multiset $ s $. This submodule is defined by the cond\"}\n  {\"name\": \"HomogeneousLocalization.deg\", \"module\": \"Mathlib/RingTheory/GradedAlgebra/HomogeneousLocalization\", \"type\": \"{ι : Type u_1} →\\n  {A : Type u_2} →\\n    {σ : Type u_3} →\\n      [inst : CommRing A] → [inst_1 : SetLike σ A] → {𝒜 : ι → σ} → {x : Submonoid A} → HomogeneousLocalization 𝒜 x → ι\", \"doc\": \"The function assigns to each element of the homogeneous localization its common degree in the indexing type $\\\\iota$, determined by the degree of its representative fraction with homogeneous numerator \"}",
+   "date": "2026-10-22",
+   "verdict": "no match: no monotone-diagram finite supported-division test; general homogeneity facts alone do not specialize to it."
+  },
+  {
+   "tool": "loogle",
+   "query": "MvPolynomial.IsHomogeneous",
+   "results": "[loogle] OK 12 hit(s)\n  {\"name\": \"MvPolynomial.IsHomogeneous\", \"module\": \"Mathlib.RingTheory.MvPolynomial.Homogeneous\", \"type\": \" {σ : Type u_1} {R : Type u_3} [CommSemiring R] (φ : MvPolynomial σ R) (n : ℕ) : Prop\", \"doc\": \"A multivariate polynomial `φ` is homogeneous of degree `n`\\nif all monomials occurring in `φ` have degree `n`.\"}\n  {\"name\": \"MvPolynomial.isHomogeneous_X\", \"module\": \"Mathlib.RingTheory.MvPolynomial.Homogeneous\", \"type\": \" {σ : Type u_1} (R : Type u_3) [CommSemiring R] (i : σ) : (MvPolynomial.X i).IsHomogeneous 1\", \"doc\": \"\"}\n  {\"name\": \"MvPolynomial.isHomogeneous_of_isEmpty\", \"module\": \"Mathlib.RingTheory.MvPolynomial.Homogeneous\", \"type\": \" (σ : Type u_1) (R : Type u_3) [CommSemiring R] [IsEmpty σ] (f : MvPolynomial σ R) : f.IsHomogeneous 0\", \"doc\": \"\"}\n  {\"name\": \"MvPolynomial.IsHomogeneous.totalDegree_le\", \"module\": \"Mathlib.RingTheory.MvPolynomial.Homogeneous\", \"type\": \" {σ : Type u_1} {R : Type u_3} [CommSemiring R] {φ : MvPolynomial σ R} {n : ℕ} (hφ : φ.IsHomogeneous n) : φ.totalDegree ≤ n\", \"doc\": \"The homogeneous degree bounds the total degree.\\n\\nSee also `MvPolynomial.IsHomogeneous.totalDegree` when `φ` is non-zero.\"}\n  {\"name\": \"MvPolynomial.isHomogeneous_of_totalDegree_zero\", \"module\": \"Mathlib.RingTheory.MvPolynomial.Homogeneous\", \"type\": \" (σ : Type u_1) {R : Type u_3} [CommSemiring R] {p : MvPolynomial σ R} : p.totalDegree = 0 → p.IsHomogeneous 0\", \"doc\": \"**Alias** of the forward direction of `MvPolynomial.totalDegree_zero_iff_isHomogeneous`.\"}\n  {\"name\": \"MvPolynomial.totalDegree_zero_iff_isHomogeneous\", \"module\": \"Mathlib.RingTheory.MvPolynomial.Homogeneous\", \"type\": \" (σ : Type u_1) {R : Type u_3} [CommSemiring R] {p : MvPolynomial σ R} : p.totalDegree = 0 ↔ p.IsHomogeneous 0\", \"doc\": \"\"}\n  {\"name\": \"MvPolynomial.isHomogeneous_one\", \"module\": \"Mathlib.RingTheory.MvPolynomial.Homogeneous\", \"type\": \" (σ : Type u_1) (R : Type u_3) [CommSemiring R] : MvPolynomial.IsHomogeneous 1 0\", \"doc\": \"\"}\n  {\"name\": \"MvPolynomial.isHomogeneous_zero\", \"module\": \"Mathlib.RingTheory.MvPolynomial.Homogeneous\", \"type\": \" (σ : Type u_1) (R : Type u_3) [CommSemiring R] (n : ℕ) : MvPolynomial.IsHomogeneous 0 n\", \"doc\": \"\"}\n  {\"name\": \"MvPolynomial.IsHomogeneous.sum\", \"module\": \"Mathlib.RingTheory.MvPolynomial.Homogeneous\", \"type\": \" {σ : Type u_1} {R : Type u_3} [CommSemiring R] {ι : Type u_5} (s : Finset ι) (φ : ι → MvPolynomial σ R) (n : ℕ) (h : ∀ i ∈ s, (φ i).IsHomogeneous n) : (∑ i ∈ s, φ i).IsHomogeneous n\", \"doc\": \"\"}\n  {\"name\": \"MvPolynomial.isHomogeneous_X_pow\", \"module\": \"Mathlib.RingTheory.MvPolynomial.Homogeneous\", \"type\": \" {σ : Type u_1} {R : Type u_3} [CommSemiring R] (i : σ) (n : ℕ) : (MvPolynomial.X i ^ n).IsHomogeneous n\", \"doc\": \"\"}\n  {\"name\": \"MvPolynomial.IsHomogeneous.totalDegree\", \"module\": \"Mathlib.RingTheory.MvPolynomial.Homogeneous\", \"type\": \" {σ : Type u_1} {R : Type u_3} [CommSemiring R] {φ : MvPolynomial σ R} {n : ℕ} (hφ : φ.IsHomogeneous n) (h : φ ≠ 0) : φ.totalDegree = n\", \"doc\": \"\"}\n  {\"name\": \"MvPolynomial.IsHomogeneous.inj_right\", \"module\": \"Mathlib.RingTheory.MvPolynomial.Homogeneous\", \"type\": \" {σ : Type u_1} {R : Type u_3} [CommSemiring R] {φ : MvPolynomial σ R} {m n : ℕ} (hm : φ.IsHomogeneous m) (hn : φ.IsHomogeneous n) (hφ : φ ≠ 0) : m = n\", \"doc\": \"\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: no monotone-diagram finite supported-division test; general homogeneity facts alone do not specialize to it."
+  },
+  {
+   "tool": "grep",
+   "query": "monotone.?diagram|finiteDivisionTest|supported.?homogeneous.?division",
+   "results": "[grep] OK 0 hit(s)",
+   "date": "2026-10-22",
+   "verdict": "no match: no monotone-diagram finite supported-division test; general homogeneity facts alone do not specialize to it."
+  },
+  {
+   "tool": "leansearch",
+   "query": "lem-trf-initial-diagram-stabilization: spanning a supported normal form family in one sufficiently high homogeneous degree implies spanning in all higher degrees",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"Ideal.Filtration.Stable.exists_pow_smul_eq_of_ge\", \"module\": \"Mathlib.RingTheory.Filtration\", \"type\": \"(h : F.Stable) : ∃ n₀, ∀ n ≥ n₀, F.N n = I ^ (n - n₀) • F.N n₀\", \"doc\": \"For a stable filtration $\\\\{I^n M\\\\}$ of an $R$-module $M$ by an ideal $I$, there exists an integer $n_0$ such that for all $n \\\\geq n_0$, the submodule $I^n M$ is equal to $I^{n - n_0} \\\\cdot I^{n_0} M$.\"}\n  {\"name\": \"Ideal.Filtration.submodule_eq_span_le_iff_stable_ge\", \"module\": \"Mathlib.RingTheory.Filtration\", \"type\": \"(n₀ : ℕ) : F.submodule = Submodule.span _ (⋃ i ≤ n₀, single R i '' (F.N i : Set M)) ↔ ∀ n ≥ n₀, I • F.N n = F.N (n + 1)\", \"doc\": \"For a filtration $ F $ of an $ R $-module $ M $ associated with an ideal $ I $, the Rees algebra submodule $ F.\\text{submodule} $ equals the submodule generated by $ \\\\bigcup_{i \\\\leq n_0} \\\\text{single}_\"}\n  {\"name\": \"Ideal.Filtration.Stable\", \"module\": \"Mathlib.RingTheory.Filtration\", \"type\": \": Prop\", \"doc\": \"A filtration $\\\\{I^n M\\\\}_{n \\\\in \\\\mathbb{N}}$ of an $R$-module $M$ by powers of an ideal $I \\\\subseteq R$ is called stable if there exists an integer $n_0$ such that for all $n \\\\geq n_0$, the equality $I\"}\n  {\"name\": \"CategoryTheory.HasLiftingProperty.transfiniteComposition.hasLiftingPropertyFixedBot_ι_app_bot\", \"module\": \"Mathlib.CategoryTheory.SmallObject.TransfiniteCompositionLifting\", \"type\": \": HasLiftingPropertyFixedBot (c.ι.app ⊥) p g\", \"doc\": \"The transfinite composition of morphisms has the lifting property with respect to a fixed morphism at the initial object of the diagram's index category.\"}\n  {\"name\": \"Ideal.toIdeal_homogeneousHull_eq_iSup\", \"module\": \"Mathlib.RingTheory.GradedAlgebra.Homogeneous.Ideal\", \"type\": \": (I.homogeneousHull 𝒜).toIdeal = ⨆ i, Ideal.span (GradedRing.proj 𝒜 i '' I)\", \"doc\": \"The homogeneous hull of an ideal $ I $ in a graded ring $ \\\\mathcal{A} $ is equal to the supremum over all degrees $ i $ of the ideals generated by the homogeneous components of $ I $ in degree $ i $, \"}\n  {\"name\": \"Module.End.maxUnifEigenspaceIndex\", \"module\": \"Mathlib.LinearAlgebra.Eigenspace.Basic\", \"type\": \"(f : End R M) (μ : R)\", \"doc\": \"For an endomorphism $ f $ of an $ R $-module $ M $ and scalar $ \\\\mu \\\\in R $, this is the minimal index $ k \\\\in \\\\mathbb{N}^{\\\\top} $ such that the generalized eigenspace $ \\\\text{genEigenspace}_\\\\mu(f) $ \"}\n  {\"name\": \"CategoryTheory.MorphismProperty.IsStableUnderTransfiniteCompositionOfShape.of_isStableUnderColimitsOfShape.mem_map_bot_le\", \"module\": \"Mathlib.CategoryTheory.MorphismProperty.TransfiniteComposition\", \"type\": \"{j : J} (g : ⊥ ⟶ j) : W (hf.F.map g)\", \"doc\": \"If a morphism property $ W $ is stable under colimits of shape $ J $, then in the transfinite composition construction indexed by a well-ordered type $ J $, the image of the canonical morphism from th\"}\n  {\"name\": \"CategoryTheory.MorphismProperty.IsStableUnderTransfiniteCompositionOfShape.of_isStableUnderColimitsOfShape\", \"module\": \"Mathlib.CategoryTheory.MorphismProperty.TransfiniteComposition\", \"type\": \"[W.IsMultiplicative] [W.RespectsIso]\\n  (hJ : ∀ (J : Type w) [LinearOrder J] [SuccOrder J] [OrderBot J] [WellFoundedLT J], W.IsStableUnderColimitsOfShape J) :\\n  W.IsStableUnderTransfiniteCompositionOfShape J\", \"doc\": \"If a morphism property $ W $ in a category $ \\\\mathcal{C} $ is multiplicative, respects isomorphisms, and is stable under colimits of shape $ J $ for every well-ordered type $ J $ equipped with a linea\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: no monotone-diagram finite supported-division test; general homogeneity facts alone do not specialize to it."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-trf-regular-hilbert-coefficient-data",
@@ -70,7 +189,7 @@
  "blueprint": {
   "from": {
    "node": "lem-trf-local-term-locality",
-   "place": "Historical nearby-duality/alteration branch of lem-trf-local-term-locality, proof (1)--(2), through lem-trf-log-regular-desingularization: monoidal resolution used for the regular modification of nodal pairs; ILO VIII 3.3.15, pp.109--110. Expose VIII, Theorems 3.1.27 and 3.2.20, and Remark 3.2.21, pp.102,106; construction in 3.2.19 over k=Q. Supporting source: Expose VIII, Theorem 2.3.10, normalized restriction in 2.3.9 and Remark 2.3.12(i), equivariance in Corollary 2.3.17, printed pp.93--95; application in 3.2.19, p.106. Refinement in this split: Expose VIII, Theorem 2.3.10 restricted to finite-type Q-schemes, with tower conventions 2.1.4, 2.3.1, 2.3.4 and Remark 2.3.5(i), printed pp.87,91--93. This is ordinary resolution, not the normalized toric conclusion; no Stacks tag states this characteristic-zero resolution theorem. Lower input: embedded characteristic-zero resolution and invariant synchronization discussed in ILO VIII 2.3.11 and 2.3.13; the intrinsic gluing argument is supplied in this item. Lower input: Expose VIII 2.3.11 and 2.3.13, pp.93--94: local invariant input underlying the cited strong embedded algorithm; BMT sections 6.1--6.3, especially local embedding independence and the correction of synchronization for arbitrary smooth morphisms. Lower input: Local Hilbert--Samuel presentations and their admissible transforms. Lower input in this split: Regular coefficient data with division and Jacobian conditions; Bierstone--Milman, Invent. Math. 128 (1997), 207--302, conditions (7.1)--(7.2), Theorem 9.6 and its block induction (9.7)--(9.14); Bierstone--Milman--Temkin, arXiv:0905.3580, section 6.2. No Stacks tag states this algebraization theorem. Further local input: Theorem 8.1, Definition 8.3 and Remarks 8.4 (pp.273--275)",
+   "place": "Historical local-invariant branch of lem-trf-local-term-locality via ILO VIII 2.3.11--2.3.13 and the regular Hilbert--Samuel coefficient construction. Exact lower input: BM 1997 section 8, Theorem 8.1 and Lemma 8.5, printed pp.274--275, used in the finite testing paragraph concluding Theorem 9.6, p.282.",
    "via": [
     "lem-trf-regular-hilbert-coefficient-data",
     "lem-trf-hilbert-samuel-local-presentations",
@@ -91,5 +210,53 @@
   "same_as": [],
   "is": null
  },
- "lean_audit": {}
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-trf-initial-diagram-stabilization",
+  "worker": "stage1",
+  "summary": "Repair of L side/live landing refusal, audited 2026-10-23 12:17 UTC. Retained-delivery dry run 50606aeeb94 passed on the current server DAG. Compared returned snapshot to current item: no changed fields; reread all six external statements and four helper statements, with all five exact citations checked. Preserve statement, statement dependencies and maintainer fields. Refine assembly steps 1 and 4 to make the bound independent of the ring/forms and explicitly substitute each transformed diagram's own variable count and maximal vertex degree, including n'=0. Four statement-only work units retain all ten inherited arguments and 24 logged searches. Assembly now 2145 characters. Report records current statement fingerprints and point-by-point hypothesis audit; delivery tool builds on current server tip. No Lean or launcher changes.",
+  "blueprint": "Realizes the inherited local-invariant subclaim under lem-trf-local-term-locality through ILO VIII 2.3.11--2.3.13: regular Hilbert--Samuel coefficient data, finite-test step (BM Theorem 9.6, p.282). Steps 2--6 expand BM Theorem 8.1 rather than replace the unit route. Redistributes the finite testing input: old steps 1+7 to coefficient-isomorphism, 2--4 to coordinate-face-lifting, 5 to coordinate-lifting-criterion, 9--10 to prefix-essential-restriction; old 6 and 8 assemble these inputs.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q19-d07cd642c",
+  "group": "Q19",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q19-d07cd642c (reviewer sub-agent of L); spot-checked: This is the 7th push of the same re-split. The six earlier heads (ce31, 52a2, 33db, 4016, 59a9, 69a4) were all PASSed and then refused at landing because the side completion was not yet promoted, which is not a mathematical fault. After JSON normalisation, the four new nodes (supported-degree-coefficient-isomorphism, supported-coordinate-face-lifting, homogeneous-coordinate-lifting-criterion, monotone-prefix-essential-restriction) are byte-identical to 69a4. The item's statement, stmt_deps, proof_deps and steps 2-3 are unchanged, and tool_uses is empty. The delta has three parts. Step 1 adds the sentence that b=d+n(max(1,d)-1)+1 depends only on the diagram; this is correct, since b is a function of n and the vertex degrees. Step 4 now gives each prefix or restricted diagram D' its own bound: b'=d'+n'(max(1,d')-1)+1 for n'>0, and b'=0 for n'=0, which matches Step 2's n=0 case. The prefix/restriction node supplies the needed support identities (prefix supports unchanged, Δ̄_i=ι⁻¹Δ_i, the complement identity, and separate J_u for each prefix), so the restricted indexed family is exactly the one Steps 1-3 handle. The third part is a new split_report.summary. The six cited external statements are identical in this snapshot, in 69a4 and in clones/live. Live and side-live still hold the 10-step item, and none of the new ids exists there, so the delivery is not superseded. I reread the item and all four new statements. θ_t is the first-dividing-vertex bijection, and surjective implies bijective for the square matrix T_t by Stacks 05G8. b exceeds the exceptional degrees of the face-exceptions lemma (M=max(1,d)). The lifting criterion follows from telescoping plus induction, and ℓ>0 is needed (n=0, S=0 fails at ℓ=0). J is a final segment, and prefixes keep Δ_i. Re-split accounting: old steps 1+7, 2-4, 5 and 9-10 became the four new nodes, and steps 6 and 8 are the item's assembly steps; nothing was dropped. Sources: Bierstone-Milman Theorem 8.1 and Lemma 8.5 are not in the repository, so proof_origin is agent; ILO VIII 2.3.11-13 and Stacks 05G8 are cited; no SGA is used. No fixes. Maintainer: L should promote this head to end the landing loop."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.InitialDiagramStabilization",
+  "declaration": "MonomialDiagram.exists_finiteDivisionTest",
+  "declarations": [
+   "MonomialDiagram.exists_finiteDivisionTest"
+  ],
+  "file": "lean/Sheaf/RingTheory/InitialDiagramStabilization.lean",
+  "statement": "theorem exists_finiteDivisionTest (n s : ℕ) (D : Set (Fin n →₀ ℕ)) (a : Fin s → Fin n →₀ ℕ) (hD : IsMonotone D) (ha : IsOrderedVertexFamily D a) : (∃ b : ℕ, ∀ (A : Type u) (_ : CommRing A), IsFiniteDivisionTest D a A b) ∧ (∀ d : ℕ, ∃ b : ℕ, ∀ (A : Type u) (_ : CommRing A), IsFiniteDivisionTest (generated (prefixVertices a d)) (prefixVertices a d) A b) ∧ (∃ b : ℕ, ∀ (A : Type u) (_ : CommRing A), IsFiniteDivisionTest (generated (essentialVertices a)) (essentialVertices a) A b) ∧ (∀ d : ℕ, ∃ b : ℕ, ∀ (A : Type u) (_ : CommRing A), IsFiniteDivisionTest (generated (essentialVertices (prefixVertices a d))) (essentialVertices (prefixVertices a d)) A b)",
+  "branch": "sheaf-dag",
+  "by": "Q23",
+  "date": "2026-10-22",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-609a4f219",
+  "group": "Q23",
+  "result": "pass",
+  "note": "Item MonomialDiagram.exists_finiteDivisionTest matches the node clause by clause: IsMonotone (additive closure plus whole-coordinate move i<j), IsOrderedVertexFamily (Minimal = range, strict Finsupp.DegLex, which agrees with the (|α|,α_1..α_n) convention of face-exceptions and the move-precedes direction of the proof), quotientSupport = Δ_i, DivisionIndex is an indexed Sum family, SpansDegree uses homogeneousSubmodule, HasUniqueDivision is ∃! finsupp coefficients. IsFiniteDivisionTest (i) propagation from q ≥ b, (ii) linear independence whenever the family spans, (iii) finite test ↔ unique division in every degree. ∃ b comes before ∀ A : Type u commutative ring, with no extra assumptions. Separate bounds for each degree prefix (inherited subtype order, generated diagram), for the essential-variable restriction (subtypeDomain) and for prefix plus restriction. Edge cases n=0, D empty or full, empty prefixes and the zero ring are covered. The new §1(A) node def-trf-supported-homogeneous-division has the §5 fields, real definitions, 4 search kinds, the correct blueprint ancestry and stmt_deps equal to its citations. Statements verbatim, the only sorry is the item proof, docstrings carry source/blueprint and all 10 proof steps, proof-plan imports are FreeModule.Basic and FiniteType (OrzechProperty instance). The item differs from live only in lean and the added stmt_dep. The report has both sections. No compile, as instructed. Advisories: the definitions are general over σ/ι; MvPowerSeries.Basic is imported only as the cited dependency's module."
+ }
 }

@@ -1,0 +1,301 @@
+{
+ "id": "lem-sfb-scalar-endomorphisms-absolute-simplicity",
+ "kind": "statement",
+ "title": "Scalar endomorphisms imply absolute simplicity for rational algebraic-group modules",
+ "statement": "Let $k$ be a field [def-weil-field], and let $H$ be an affine group scheme of finite type over $k$ [def-sc-group-scheme]. Let $V\\ne0$ be a finite-dimensional rational $H$-representation [def-wf-algebraic-representations]. A rational subrepresentation is a $k$-linear subspace preserved after extension by the action of $H(A)$ for every commutative $k$-algebra $A$; simple means that the only rational subrepresentations are $0$ and $V$. A rational equivariant endomorphism is a $k$-linear map $f:V\\to V$ such that $1\\otimes f$ commutes with every element of $H(A)$ acting on $A\\otimes_kV$, for every commutative $k$-algebra $A$. Assume that $V$ is simple and that every rational equivariant endomorphism of $V$ is $a\\,\\mathrm{id}_V$ for some $a\\in k$. For every field extension $K/k$ [def-pc-field-extension], the rational representation $K\\otimes_kV$ of $H_K=H\\times_kK$ is simple: the only $K$-linear subspaces preserved after extension by $H_K(A)$ for every commutative $K$-algebra $A$ are $0$ and $K\\otimes_kV$. No smoothness, connectedness, reductivity, splitness or separability hypothesis is imposed.",
+ "source": {
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Proposition 4.19(b), printed pp.90--91; equivariant endomorphisms are defined in Remark 4.18, printed p.90."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-sc-group-scheme",
+  "def-wf-algebraic-representations",
+  "def-pc-field-extension",
+  "def-sfb-rational-natural-representation"
+ ],
+ "proof": [
+  {
+   "text": "Put $C=k[H]$ with its coalgebra maps from [lem-sfb-affine-group-coordinate-hopf]. By [lem-sfb-rational-representation-comodule-dictionary], the given rational action is a right coaction $\\rho:V\\to V\\otimes_k C$, and rational equivariant linear maps are precisely comodule maps. The subspaces in the item are precisely subcomodules: a subcomodule is stable by the displayed point-action formula in the dictionary; conversely an everywhere-stable subspace inherits the restricted natural action (the inverse action also preserves it), and the dictionary applied to its inclusion gives the restricted coaction. Thus $V$ has no nonzero proper subcomodule.",
+   "uses": [
+    "lem-sfb-affine-group-coordinate-hopf",
+    "lem-sfb-rational-representation-comodule-dictionary"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 4.19(b), printed pp.90–91; algebra reduction made explicit using Chapter 9(d), pp.174–175, and the double-centralizer theorem displayed in Proposition 14.1, p.279."
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-coalgebra-dual-action-detection] to $(C,V,\\rho)$. Let $B\\subseteq\\operatorname{End}_k(V)$ be the image of the resulting unital algebra map $C^*\\to\\operatorname{End}_k(V)$, $f\\mapsto T_f$. This is a unital $k$-subalgebra and acts faithfully by inclusion. A $B$-stable additive subgroup is a $k$-subspace because $B$ contains every scalar map. The cited detection of subcomodules and Step 1 make $V$ a simple left $B$-module. Every additive $B$-linear endomorphism is $k$-linear for the same reason, and the intertwiner clause makes it a comodule endomorphism. Step 1 and the hypothesis imply that $E=\\operatorname{End}_B(V)$ consists exactly of scalar maps $a1_V$, $a\\in k$.",
+   "uses": [
+    "lem-sfb-coalgebra-dual-action-detection"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 4.19(b), printed pp.90–91; algebra reduction made explicit using Chapter 9(d), pp.174–175, and the double-centralizer theorem displayed in Proposition 14.1, p.279."
+   }
+  },
+  {
+   "text": "Choose a basis of $V$ by [lem-weil-pbc-vector-space-free]. It is finite: the coordinates of finitely many generators of $V$ use only finitely many basis indices, and every basis vector must have its index among these. It is nonempty since $V\\ne0$. The same basis generates $V$ under the left $E$-action, since $E$ contains all scalars. All hypotheses of [lem-sfb-finite-simple-double-centralizer] hold for the faithful simple $B$-module $V$, finite over $E$. Every $k$-linear endomorphism $q$ commutes with $E$, since its elements are scalars, and so is $E$-linear. The cited surjectivity yields $b\\in B$ acting as $q$. Consequently $B=\\operatorname{End}_k(V)$: in particular every matrix unit for this basis equals some $T_f$.",
+   "uses": [
+    "lem-weil-pbc-vector-space-free",
+    "lem-sfb-finite-simple-double-centralizer"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 4.19(b), printed pp.90–91; algebra reduction made explicit using Chapter 9(d), pp.174–175, and the double-centralizer theorem displayed in Proposition 14.1, p.279."
+   }
+  },
+  {
+   "text": "Fix any field extension $K/k$ and put $V_K=K\\otimes_k V$, $C_K=K\\otimes_k C$. By [lem-weil-pbc-fibre-product-affine-spectra], $H_K$ is affine with coordinate algebra $C_K$ (using tensor symmetry). It is finite type over $K$ by [lem-sfb-finite-type-composition-base-change], applied to $H\\to\\operatorname{Spec}k$ and $\\operatorname{Spec}K\\to\\operatorname{Spec}k$. Under the dictionary [lem-sfb-rational-representation-comodule-dictionary], its scalar-extended action has coaction $\\rho_K(a\\otimes v)=\\sum_i(a\\otimes v_i)\\otimes_K(1\\otimes c_i)$ whenever $\\rho(v)=\\sum_i v_i\\otimes c_i$. Indeed, the dictionary evaluates this expression at a $K$-algebra point $x:C_K\\to R$ as $\\sum_i v_i\\otimes ax(1\\otimes c_i)$, exactly the original point action extended to $R$. The original coaction identities give those for $\\rho_K$ by the same generator formula. A rational subrepresentation $W\\subseteq V_K$ is therefore a $C_K$-subcomodule by Step 1 over $K$.",
+   "uses": [
+    "lem-weil-pbc-fibre-product-affine-spectra",
+    "lem-sfb-rational-representation-comodule-dictionary",
+    "lem-sfb-finite-type-composition-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 4.19(b), printed pp.90–91; algebra reduction made explicit using Chapter 9(d), pp.174–175, and the double-centralizer theorem displayed in Proposition 14.1, p.279."
+   }
+  },
+  {
+   "text": "For each $f\\in C^*$ let $f_K:C_K\\to K$ be the $K$-linear functional $f_K(a\\otimes c)=af(c)$, well-defined by the tensor universal property [def-weil-pbc-module-tensor-product]. Applying [lem-sfb-coalgebra-dual-action-detection] over $K$, the subcomodule $W$ is stable under $T_{f_K}$. The formula in Step 4 gives $T_{f_K}(a\\otimes v)=\\sum_i a f(c_i)\\otimes v_i=a\\otimes T_f(v)$. Thus $W$ is stable under the scalar extensions of every matrix unit from Step 3.",
+   "uses": [
+    "def-weil-pbc-module-tensor-product",
+    "lem-sfb-coalgebra-dual-action-detection"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 4.19(b), printed pp.90–91; algebra reduction made explicit using Chapter 9(d), pp.174–175, and the double-centralizer theorem displayed in Proposition 14.1, p.279."
+   }
+  },
+  {
+   "text": "The vectors $1\\otimes e_i$ form a $K$-basis of $V_K$: the inverse coordinate map sends $a\\otimes v$ to $(a e_i^*(v))_i$, by the tensor universal property [def-weil-pbc-module-tensor-product]. If $W=0$ there is nothing to prove. Otherwise choose $0\\ne w=\\sum_i a_i(1\\otimes e_i)\\in W$ and an index $j$ with $a_j\\ne0$. For every $i$, the extended matrix unit $E_{ij}$ sends $w$ to $a_j(1\\otimes e_i)$ in $W$. Multiplication by $a_j^{-1}$ puts every basis vector in $W$, hence $W=V_K$. Since $K$ was arbitrary, this is the requested absolute simplicity.",
+   "uses": [
+    "def-weil-pbc-module-tensor-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 4.19(b), printed pp.90–91; algebra reduction made explicit using Chapter 9(d), pp.174–175, and the double-centralizer theorem displayed in Proposition 14.1, p.279."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-affine-group-coordinate-hopf",
+  "lem-sfb-rational-representation-comodule-dictionary",
+  "lem-sfb-coalgebra-dual-action-detection",
+  "lem-weil-pbc-vector-space-free",
+  "lem-sfb-finite-simple-double-centralizer",
+  "lem-weil-pbc-fibre-product-affine-spectra",
+  "lem-sfb-finite-type-composition-base-change",
+  "def-weil-pbc-module-tensor-product"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Proposition 4.19(b), printed pp.90–91; algebra reduction made explicit using Chapter 9(d), pp.174–175, and the double-centralizer theorem displayed in Proposition 14.1, p.279. Milne omits the algebra-representation proof; Q09 supplies the convolution-action, density and matrix-unit argument."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "(simple|irreducible).*(baseChange|base.change|extendScalars)|((baseChange|extendScalars).*(simple|irreducible))",
+   "results": "[grep] OK 2 hit(s).  Returned: Mathlib/AlgebraicGeometry/Geometrically/Irreducible.lean, Mathlib/Algebra/Lie/Loop.lean",
+   "date": "2026-10-24",
+   "verdict": "no match: Schur lemmas assert scalar endomorphisms over an algebraically closed base, and FDRep.simple_iff_end_is_rank_one is for a finite abstract group over an algebraically closed field. Neither proves arbitrary scalar-extension simplicity for rational algebraic-group representations."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A simple finite dimensional comodule with endomorphism algebra equal to the ground field is absolutely simple",
+   "results": "[leansearch] OK 8 hit(s).  Returned: CategoryTheory.fieldEndOfFiniteDimensional, CategoryTheory.endomorphism_simple_eq_smul_id, simple_of_finrank_eq_one, simple_iff_isSimpleModule, CategoryTheory.finrank_endomorphism_simple_eq_one, FDRep.simple_iff_end_is_rank_one, CategoryTheory.instDivisionRingEndOfHasKernelsOfSimple, IsSimpleModule.finrank_eq_one_of_isMulCommutative",
+   "date": "2026-10-24",
+   "verdict": "no match: Schur lemmas assert scalar endomorphisms over an algebraically closed base, and FDRep.simple_iff_end_is_rank_one is for a finite abstract group over an algebraically closed field. Neither proves arbitrary scalar-extension simplicity for rational algebraic-group representations."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsSimpleModule\", \"TensorProduct\"",
+   "results": "[loogle] OK 0 hit(s).  Returned: ",
+   "date": "2026-10-24",
+   "verdict": "no match: Schur lemmas assert scalar endomorphisms over an algebraically closed base, and FDRep.simple_iff_end_is_rank_one is for a finite abstract group over an algebraically closed field. Neither proves arbitrary scalar-extension simplicity for rational algebraic-group representations."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An irreducible representation of an affine algebraic group whose equivariant endomorphisms are scalars remains irreducible over any field extension",
+   "results": "[leanfinder] OK 8 hit(s).  Returned: Representation.IsIrreducible, FDRep.simple_iff_end_is_rank_one, Representation.is_simple_module_iff_irreducible_ofModule, Representation.IsIrreducible.toIsSimpleOrder, FDRep.finrank_hom_simple_simple, Representation.irreducible_iff_isSimpleModule_asModule, Representation.isIrreducible_iff, Rep.instInjective",
+   "date": "2026-10-24",
+   "verdict": "no match: Schur lemmas assert scalar endomorphisms over an algebraically closed base, and FDRep.simple_iff_end_is_rank_one is for a finite abstract group over an algebraically closed field. Neither proves arbitrary scalar-extension simplicity for rational algebraic-group representations."
+  },
+  {
+   "tool": "grep",
+   "query": "(baseChange|extendScalars|tensor).*(IsSimpleModule|IsIrreducible)|((IsSimpleModule|IsIrreducible).*(baseChange|extendScalars|tensor))",
+   "results": "[grep] OK 0 hit(s).  Returned: ",
+   "date": "2026-10-24",
+   "verdict": "no match: Schur lemmas assert scalar endomorphisms over an algebraically closed base, and FDRep.simple_iff_end_is_rank_one is for a finite abstract group over an algebraically closed field. Neither proves arbitrary scalar-extension simplicity for rational algebraic-group representations."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Simple modules remain simple after extension of scalars when the endomorphism division algebra is the base field",
+   "results": "[leansearch] OK 8 hit(s).  Returned: CategoryTheory.fieldEndOfFiniteDimensional, CategoryTheory.instDivisionRingEndOfHasKernelsOfSimple, CategoryTheory.instDivisionRingEndOfHasKernelsOfSimple.congr_simp, IsSemisimpleRing.isSemisimpleModule, Module.End.instDivisionRing, IsSimpleModule.congr, LinearMap.instIsSimpleModuleEndOfNontrivial, instIsSimpleModuleSubtypeMemSubmoduleValSetSetOfNonemptyLinearEquivId",
+   "date": "2026-10-24",
+   "verdict": "no match: Schur lemmas assert scalar endomorphisms over an algebraically closed base, and FDRep.simple_iff_end_is_rank_one is for a finite abstract group over an algebraically closed field. Neither proves arbitrary scalar-extension simplicity for rational algebraic-group representations."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Absolute simplicity criterion for a finite dimensional coalgebra comodule with only scalar comodule endomorphisms",
+   "results": "[leanfinder] OK 8 hit(s).  Returned: simple_of_finrank_eq_one, FDRep.simple_iff_end_is_rank_one, CategoryTheory.finrank_endomorphism_simple_eq_one, IsSimpleModule.finrank_eq_one_of_isMulCommutative, is_simple_module_of_finrank_eq_one, isSimpleModule_iff_finrank_eq_one, CategoryTheory.finrank_hom_simple_simple_eq_one_iff, FDRep.finrank_hom_simple_simple",
+   "date": "2026-10-24",
+   "verdict": "no match: Schur lemmas assert scalar endomorphisms over an algebraically closed base, and FDRep.simple_iff_end_is_rank_one is for a finite abstract group over an algebraically closed field. Neither proves arbitrary scalar-extension simplicity for rational algebraic-group representations."
+  },
+  {
+   "tool": "grep",
+   "query": "(absolute|baseChange|extendScalars).*(IsSimpleModule|IsIrreducible)|((IsSimpleModule|IsIrreducible).*(baseChange|extendScalars))",
+   "results": "{\"t\": \"2026-10-24T13:52:17Z\", \"tool\": \"grep\", \"query\": \"(absolute|baseChange|extendScalars).*(IsSimpleModule|IsIrreducible)|((IsSimpleModule|IsIrreducible).*(baseChange|extendScalars))\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: Schur and FDRep results require algebraically closed fields (and FDRep.simple_iff_end_is_rank_one a finite abstract group). The general double-centralizer theorem supplies Step 3 through the existing Mathlib leaf but is not the rational scalar-extension statement."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A simple comodule with endomorphism ring equal to the field remains simple after any field extension",
+   "results": "{\"t\": \"2026-10-24T13:52:17Z\", \"tool\": \"leansearch\", \"query\": \"A simple comodule with endomorphism ring equal to the field remains simple after any field extension\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.fieldEndOfFiniteDimensional\", \"CategoryTheory.endomorphism_simple_eq_smul_id\", \"CategoryTheory.instDivisionRingEndOfHasKernelsOfSimple.congr_simp\", \"IsSimpleModule.congr\", \"CategoryTheory.finrank_endomorphism_simple_eq_one\", \"instIsSemisimpleModuleOfIsSimpleModule\", \"CategoryTheory.instDivisionRingEndOfHasKernelsOfSimple\", \"LinearMap.instIsSimpleModuleEndOfNontrivial\"], \"digest\": \"740b623c90c9369b\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: Schur and FDRep results require algebraically closed fields (and FDRep.simple_iff_end_is_rank_one a finite abstract group). The general double-centralizer theorem supplies Step 3 through the existing Mathlib leaf but is not the rational scalar-extension statement."
+  },
+  {
+   "tool": "loogle",
+   "query": "IsSimpleModule, TensorProduct",
+   "results": "{\"t\": \"2026-10-24T13:52:17Z\", \"tool\": \"loogle\", \"query\": \"IsSimpleModule, TensorProduct\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: Schur and FDRep results require algebraically closed fields (and FDRep.simple_iff_end_is_rank_one a finite abstract group). The general double-centralizer theorem supplies Step 3 through the existing Mathlib leaf but is not the rational scalar-extension statement."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A simple rational representation of an affine group scheme with scalar equivariant endomorphisms is absolutely simple",
+   "results": "{\"t\": \"2026-10-24T13:52:18Z\", \"tool\": \"leanfinder\", \"query\": \"A simple rational representation of an affine group scheme with scalar equivariant endomorphisms is absolutely simple\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"FDRep.simple_iff_end_is_rank_one\", \"simple_of_finrank_eq_one\", \"FDRep.finrank_hom_simple_simple\", \"CategoryTheory.endomorphism_simple_eq_smul_id\", \"CategoryTheory.finrank_endomorphism_simple_eq_one\", \"CSA.isSimple\", \"AlgebraicGeometry.AffineSpace.instIsAffineHomOverSchemeInferInstanceOverClass\", \"AlgebraicGeometry.AffineSpace.instIsAffine\"], \"digest\": \"b4f4452ba138f52d\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: Schur and FDRep results require algebraically closed fields (and FDRep.simple_iff_end_is_rank_one a finite abstract group). The general double-centralizer theorem supplies Step 3 through the existing Mathlib leaf but is not the rational scalar-extension statement."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finite dimensional coalgebra comodules are modules over the convolution dual algebra with the same invariant subspaces and intertwiners",
+   "results": "{\"t\": \"2026-10-24T13:54:14Z\", \"tool\": \"leanfinder\", \"query\": \"Finite dimensional coalgebra comodules are modules over the convolution dual algebra with the same invariant subspaces and intertwiners\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CoalgCat.moduleCat_of_toModuleCat\", \"CoalgCat.toModuleCat\", \"CoalgCat.instComonObjModuleCatOfCarrier\", \"FDRep.instFiniteDimensionalCarrierVFGModuleCat\", \"CoalgCat.comonEquivalence\", \"FDRep.instFiniteDimensionalHom\", \"CoalgCat.toComonObj_X\", \"FDRep.instRightRigidCategory\"], \"digest\": \"3f051f85e8aa215a\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: Schur and FDRep results require algebraically closed fields (and FDRep.simple_iff_end_is_rank_one a finite abstract group). The general double-centralizer theorem supplies Step 3 through the existing Mathlib leaf but is not the rational scalar-extension statement."
+  },
+  {
+   "tool": "grep",
+   "query": "simple_iff_end_is_rank_one|endomorphism_simple_eq_smul_id|toModuleEnd_moduleEnd_surjective",
+   "results": "{\"t\": \"2026-10-24T13:58:07Z\", \"tool\": \"grep\", \"query\": \"simple_iff_end_is_rank_one|endomorphism_simple_eq_smul_id|toModuleEnd_moduleEnd_surjective\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Mathlib/RepresentationTheory/FinGroupCharZero.lean\", \"Mathlib/RepresentationTheory/FinGroupCharZero.lean\", \"Mathlib/RepresentationTheory/FinGroupCharZero.lean\", \"Mathlib/CategoryTheory/Preadditive/Schur.lean\", \"Mathlib/CategoryTheory/Preadditive/Schur.lean\", \"Mathlib/CategoryTheory/Preadditive/Schur.lean\", \"Mathlib/CategoryTheory/Preadditive/Schur.lean\", \"Mathlib/RingTheory/SimpleModule/Basic.lean\"], \"digest\": \"be30c64d5ffd5b1b\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: Schur and FDRep results require algebraically closed fields (and FDRep.simple_iff_end_is_rank_one a finite abstract group). The general double-centralizer theorem supplies Step 3 through the existing Mathlib leaf but is not the rational scalar-extension statement."
+  },
+  {
+   "tool": "grep",
+   "query": "Comodule|comodule|contraction",
+   "results": "{\"t\": \"2026-10-24T13:59:16Z\", \"tool\": \"grep\", \"query\": \"Comodule|comodule|contraction\", \"sub\": \"RingTheory/Coalgebra\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: Schur and FDRep results require algebraically closed fields (and FDRep.simple_iff_end_is_rank_one a finite abstract group). The general double-centralizer theorem supplies Step 3 through the existing Mathlib leaf but is not the rational scalar-extension statement."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-split-simple-absolute-irreducibility",
+  "date": "2026-10-24",
+  "group": "Q16"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Haboush symmetric-power lifting for a trivial quotient representation. Supporting representation-theoretic input: Steinberg endomorphisms detect a nonzero fixed vector. Supporting Self-duality of rho section modules at characteristic-dependent weights. Supporting input: Positive-characteristic simplicity step, using irreducibility of the Steinberg induced module rather than assuming self-duality. Numerical input to the dimension comparison: Weyl dimension of the induced module. Supporting Kempf vanishing for dominant flag line bundles. Positive-characteristic Andersen–Haboush argument: trivial pushforward of M_((p^r-1)rho), before the Serre twisting calculation. Supporting input: Lemma 2.3, second assertion, and Lemma 2.1, printed pp.153--155: H^0(u,V(lambda))=K v_lambda for p-restricted dominant lambda. With roots positive in Lie(B), V(lambda)=Gamma(M_{-w0 lambda}). Supporting input: Simple-root distributions and infinitesimal subalgebra calculus. Supporting input: pinning-compatible integral-to-geometric distribution comparison, with all positive root divided powers, before simple-root generation. Integral-root-model prerequisite before the comparison: integral Chevalley construction and a positive-root coordinate chart; integral matrix-closure construction: the big cell and its Weyl translates, before identifying the special fibre. Supporting input: Integral closure atlas, exhaustion of each special fibre: exclude extra components using the generic and special identity-component big-cell dimensions. Supporting input: Lemma 3.7 (first assertion, the Iwahori--Matsumoto maximal-boundedness statement) and its application in Proposition 4.3, second paragraph, printed pp.7-8; Cartan double-coset input used to prove the maximal-boundedness prerequisite, before the torus-powers argument. Supporting input: Theorem 1.3, implication (1) to (3), printed pp.1, 6; Definition 3.4 and Lemma 3.6, printed pp.5-6. The complete-DVR cocharacter form, before the non-complete descent of Theorem 4.1. Supporting input: Section 2, Claim 2, printed p.2; Section 3, proof of Theorem 1.3, (1) implies (2), printed p.6, removes the residue-field and splitness restrictions. Supporting input: Claim 2: choose a linear embedding and use reductivity to make the homogeneous quotient affine. Supporting input: Alper, Adequate moduli spaces and geometrically reductive group schemes, Theorem 9.7.5, Proposition 9.3.1(i), Lemma 9.2.5(2),(3), printed pp.522,524,527--528. WANTED local copy; read https://content.algebraicgeometry.nl/2014-4/2014-4-022.pdf. Supporting input: Lemmas 9.7.2(1),(2), Remark 9.7.3, Lemma 9.7.4 and their combination in Theorem 9.7.5, printed pp.526--528. Use primitive v, not an arbitrary invariant vector; select arbitrarily large Steinberg weights when char(kappa)>0. Supporting integral input: Lemma 9.7.4(1),(2), printed p.527; Seshadri Property II, p.247. Part (2) is char(kappa)=p>0, as in the arXiv HTML; the PDF text extraction loses the not-equal sign. Repair of 4ec34095fce: Part II, 3.18--3.19, natural restriction embedding in the proof of the Steinberg theorem, with the infinitesimal induced object of II.3.7 and II.9.1; use this pre-Kempf argument, not II.8.8 or II.8.19. Supporting input: Extension of the infinitesimal Steinberg module from the Borel thickening. Supporting independent pre-Kempf input: specialize an integral highest-weight lattice of classical Weyl dimension; used to bound the source of the matrix-coefficient map into the infinitesimally induced module. Numerical characteristic-zero input: apply Weyl’s dimension formula before choosing and reducing the cyclic divided-power lattice. Supporting input to the classical dimension calculation: Theorem 22.52 and the definition of J immediately before Theorem 22.50, printed p.480; corrected by the appended errata, Chapter 22, entry for p.480, to characteristic zero. Highest-weight conventions: Chapter 22a and 22.53, printed p.481 (the split Lie/group highest-weight correspondence). Supporting geometric scalar-extension input for the characteristic-zero Weyl character calculation: 22.2--22.4, printed pp.463--464, especially 22.4: End(V(lambda))=k and simplicity after extension; supporting scalar-extension criterion 4.19(b), printed p.90. Supporting input: Milne 4.19(b), invoked in 22.4 after establishing End_G(V)=k; general affine-group scalar-extension criterion.",
+   "via": [
+    "lem-sfb-split-simple-absolute-irreducibility",
+    "lem-sfb-split-charzero-weyl-character-identity",
+    "lem-sfb-characteristic-zero-weyl-dimension",
+    "lem-sfb-integral-specialization-highest-weight-dimension",
+    "lem-sfb-steinberg-borel-thickening-extension",
+    "lem-sfb-steinberg-infinitesimal-restriction-injective",
+    "lem-sfb-dvr-rho-section-self-duality",
+    "lem-sfb-dvr-primitive-endomorphism-detector",
+    "lem-sfb-reductive-ring-invariant-power-lifting",
+    "lem-sfb-dvr-reductive-linear-affine-quotient",
+    "lem-sfb-reductive-nodal-equivariant-torsor-extension",
+    "lem-sfb-complete-dvr-cocharacter-cartan",
+    "lem-sfb-split-reductive-dvr-cartan-decomposition",
+    "lem-sfb-split-reductive-integral-maximal-bounded",
+    "lem-sfb-quasi-reductive-special-connectedness",
+    "lem-sfb-integral-chevalley-weyl-atlas",
+    "lem-sfb-chevalley-integral-root-model",
+    "lem-sfb-borel-kostant-distribution-comparison",
+    "lem-sfb-borel-simple-root-distribution-calculus",
+    "lem-sfb-restricted-induced-infinitesimal-invariants",
+    "lem-sfb-flag-frobenius-rho-pushforward",
+    "lem-sfb-dominant-flag-line-kempf-vanishing",
+    "lem-sfb-induced-weyl-dimension-formula",
+    "lem-sfb-steinberg-induced-module-irreducible",
+    "lem-sfb-rho-section-self-duality",
+    "lem-sfb-steinberg-endomorphism-detection",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-scalar-endomorphisms-absolute-simplicity",
+  "worker": "stage1",
+  "summary": "Q09 preserves the statement, supplies the omitted algebra proof via the convolution dual image, reuses the finite double-centralizer Mathlib leaf and the rational/comodule dictionary, and creates one general comodule-action/detection prerequisite. Arbitrary field extensions are handled by extended functionals and explicit matrix units; no separability, smoothness, reducedness or rational-point density is used.",
+  "blueprint": "Realizes the inherited supporting Milne 4.19(b) scalar-extension step after End_H(V)=k in 22.4, under the legacy det-thm-sf-ctf-stability-direct-images proof (3) chain. blueprint_refs.py ancestor reports None, retained as inherited; latest blueprint has no equivalent comodule or absolute-simplicity node. No chapter or unit route changes.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q09-b897caa4f",
+  "group": "Q09",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q09-b897caa4f (reviewer sub-agent of L); spot-checked: Read the whole delivery and passed it with no fixes. Statement and stmt_deps are byte-identical to the base, and it is a first split with no repair note. Source checked: Milne iAG 4.18 and 4.19(b) (pp.90–91) state exactly the item; Milne's proof only points to Bourbaki, so the delivery's own algebra argument (by: agent) is the real split. Milne §9d and Ex. 9.36 support the new node's source. Step by step: (1) the coordinate Hopf node plus the comodule dictionary (H is affine of finite type, as the dictionary needs) turn subrepresentations into subcomodules, using inverses to restrict the action; (2) the image B of the dual algebra C* in End_k(V) contains the scalars, acts faithfully, V is simple over it, and End_B(V)=k; (3) the double-centralizer Mathlib leaf (SimpleModule/Basic.lean:581) applies with all its hypotheses, giving B=End_k(V); (4) H_K=Spec(C⊗K), of finite type by clause (2) of the base-change leaf; I recomputed the point formula for ρ_K and it matches the scalar-extended action; (5) T_{f_K}(a⊗v)=a⊗T_f(v), checked; (6) the matrix-unit argument is genuinely elementary. New node lem-sfb-coalgebra-dual-action-detection is statement-only and self-contained. I proved each clause by hand: T_{f*g}=T_f∘T_g in that order, subspace detection via independent coefficients and extended dual functionals, and the intertwiner clause; I tested the zero coalgebra, C=k and infinite-dimensional C. It is a general bridge, strictly smaller than the item and not a restatement. Read the near-match nodes (finite subcomodule, subcomodule core, finite-coalgebra dual base change, finite dual Hopf module, coefficient coalgebra); none duplicates it. No cycle, no SGA, no doubled backslashes. Every dependency outside the unit is a Mathlib leaf, so no tool_uses are needed."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.ScalarEndomorphismsAbsoluteSimplicity",
+  "declaration": "AlgebraicGeometry.RationalRepresentation.scalar_endomorphisms_absolute_simplicity",
+  "file": "lean/Sheaf/AlgebraicGeometry/ScalarEndomorphismsAbsoluteSimplicity.lean",
+  "statement": "theorem scalar_endomorphisms_absolute_simplicity {k : Type u} [Field k] (H : Scheme.{u}) [H.Over (Spec (.of k))] [GrpObj (H.asOver (Spec (.of k)))] [IsAffine H] [LocallyOfFiniteType (H ↘ Spec (.of k))] [QuasiCompact (H ↘ Spec (.of k))] (V : Type u) [AddCommGroup V] [Module k V] [FiniteDimensional k V] [Nontrivial V] (r : NaturalRepresentation (k := k) H V) (hsimple : ∀ U : Submodule k V, (∀ (A : Type u) [CommRing A] [Algebra k A] (x : points (H.asOver (Spec (.of k))) A) (z : A ⊗[k] V), z ∈ U.baseChange A → r.action A x z ∈ U.baseChange A) → U = ⊥ ∨ U = ⊤) (hscalar : ∀ f : Module.End k V, (∀ (A : Type u) [CommRing A] [Algebra k A] (x : points (H.asOver (Spec (.of k))) A), f.baseChange A ∘ₗ (r.action A x).toLinearMap = (r.action A x).toLinearMap ∘ₗ f.baseChange A) → ∃ a : k, f = a • (LinearMap.id : Module.End k V)) : ∀ (K : Type u) [Field K] [Algebra k K] (W : Submodule K (K ⊗[k] V)), (∀ (A : Type u) [CommRing A] [Algebra K A] [Algebra k A] [IsScalarTower k K A] (x : points (H.asOver (Spec (.of k))) A) (z : A ⊗[K] (K ⊗[k] V)), z ∈ W.baseChange A → (_root_.TensorProduct.AlgebraTensorModule.cancelBaseChange k K A A V).symm (r.action A x (_root_.TensorProduct.AlgebraTensorModule.cancelBaseChange k K A A V z)) ∈ W.baseChange A) → W = ⊥ ∨ W = ⊤",
+  "branch": "newtargets-dag",
+  "by": "Q04",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "Uses NaturalRepresentation from its landed definition-owner node def-sfb-rational-natural-representation, added to stmt_deps. The dictionary theorem remains only a proof dependency. Subrepresentation stability and endomorphism equivariance are written out on every commutative algebra. For a K-algebra A, H_K(A) is canonically H(A), and the extended action is explicitly conjugated by the actual tensor cancellation equivalence. Repair of H2 on returned head 5265b1a8b88f; Lean source and signature unchanged."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-17e242a8c",
+  "group": "Q04",
+  "result": "pass",
+  "note": "Lean statement matches node and Milne 4.19(b) clause by clause. H affine of finite type over field k (IsAffine + LocallyOfFiniteType + QuasiCompact, GrpObj); V nonzero finite-dimensional; rep = landed NaturalRepresentation (basis-free owner, now cited via def-sfb-rational-natural-representation, fixing the H2 of 5265b1a8). Simplicity and scalar-endomorphism hypotheses quantify over all k-algebras A and points H(A). Conclusion covers all fields K/k and W ≤ K⊗V; K-algebras A with IsScalarTower, action conjugated by canonical cancelBaseChange k K A A V. Only changes vs main: lean record and the added def stmt_dep; statement/proof unchanged; lean.statement verbatim; sorry-only theorem with source/blueprint docstrings and 6-step proof. Universe u for K and A follows the NaturalRepresentation convention. No compile (no file changed)."
+ }
+}

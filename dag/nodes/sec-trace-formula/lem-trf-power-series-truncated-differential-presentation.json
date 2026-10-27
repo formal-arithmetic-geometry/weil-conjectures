@@ -1,0 +1,240 @@
+{
+ "id": "lem-trf-power-series-truncated-differential-presentation",
+ "kind": "statement",
+ "title": "Polynomial presentation and relation kernel for truncated power-series differentials",
+ "statement": "Let $F$ be a field, $n\\geq0$, $P=F[t_1,\\ldots,t_n]$ [def-weil-pbc-mv-polynomial-ring], $D=F[[t_1,\\ldots,t_n]]$ [def-weil-pbc-multivariate-power-series], $J=(t_1,\\ldots,t_n)\\subset P$ and $\\mathfrak n=(t_1,\\ldots,t_n)\\subset D$. Embed $P$ in $D$ as finite-support series. For each integer $r\\geq1$, set $Q_r=D/\\mathfrak n^r$ and $M=D^{\\oplus n}$. Then the map $P\\to Q_r$ is surjective with kernel $J^r$; the induced $F$-algebra isomorphism $P/J^r\\xrightarrow\\sim Q_r$ sends each coordinate class to the corresponding coordinate class, and the class of a series is represented by its polynomial truncation in total degrees $<r$. Using Kähler differentials [def-weil-pbc-kahler-differentials], give $\\Omega_{Q_r/F}$ its $D$-module structure through $D\\to Q_r$ and define $\\theta_r:M\\to\\Omega_{Q_r/F}$ by $\\theta_r(a)=\\sum_{i=1}^n(a_i\\bmod\\mathfrak n^r)\\,\\mathrm d(t_i\\bmod\\mathfrak n^r)$. The map $\\theta_r$ is $D$-linear and surjective, with kernel\n$$\\ker\\theta_r=\\mathfrak n^rM+\\operatorname{span}_D\\{(\\partial_i g)_{i=1}^n:g\\in J^r\\}.$$\nHere $\\partial_i g$ is the polynomial partial derivative [def-weil-pbc-polynomial-partial-derivative], embedded in $D$, and the span consists of finite $D$-linear combinations.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tag 00RU (lemma-differential-seq) and Tag 00RX (lemma-differentials-polynomial-ring). Agent-written finite-truncation presentation and scalar-lift kernel calculation, extracted from returned parent proof steps 1 and 2; these tags supply the conormal sequence and polynomial basis, not the truncation identification."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-mv-polynomial-ring",
+  "def-weil-pbc-multivariate-power-series",
+  "def-weil-pbc-kahler-differentials",
+  "def-weil-pbc-polynomial-partial-derivative"
+ ],
+ "proof": [
+  {
+   "text": "Apply [lem-weil-pbc-power-series-combined-ideal-coefficients] with coefficient ring $F$, base ideal $0$, number of variables $n$ and exponent $r$. Since $r-|E|>0$ for $|E|<r$, it says $h\\in\\mathfrak n^r$ exactly when all coefficients of $h$ in total degrees $<r$ vanish. There are finitely many such exponents: every coordinate is $<r$. The polynomial $p_r(h)=\\sum_{|E|<r}h_Et^E$ therefore exists, and $h-p_r(h)\\in\\mathfrak n^r$. The polynomial embedding preserves sums and products by the coefficient formulas in the two definitions and is injective since it preserves every coefficient. Hence the composite $P\\to D\\to Q_r$ is an $F$-algebra map and is surjective, with $p_r(h)$ representing the class of $h$.",
+   "uses": [
+    "lem-weil-pbc-power-series-combined-ideal-coefficients",
+    "def-weil-pbc-mv-polynomial-ring",
+    "def-weil-pbc-multivariate-power-series"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Agent-written truncation argument using the existing coefficient criterion (base ideal zero); Tag 032C motivates the coefficient lemma but does not state this truncation argument."
+   }
+  },
+  {
+   "text": "For a polynomial $g$, the criterion of step 1 says its image in $Q_r$ is zero exactly when every monomial with nonzero coefficient has degree at least $r$. This is equivalent to $g\\in J^r$: products of $r$ variables, multiplied by arbitrary polynomials and added, have no terms of degree $<r$; conversely each monomial $t^E$ of degree at least $r$ is divisible by a product of $r$ variables, obtained by selecting $r$ factors from its $|E|$ variable factors. The finite monomial expansion of $g$ proves the converse inclusion. Thus $\\ker(P\\to Q_r)=J^r$. Sending $g+J^r$ to its image in $Q_r$ is now a well-defined bijective $F$-algebra map $\\alpha:C=P/J^r\\to Q_r$: well-definedness and injectivity follow from this kernel equality and surjectivity from step 1. Its formula sends each coordinate class to the corresponding coordinate class.",
+   "uses": [
+    "def-weil-pbc-mv-polynomial-ring"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Agent-written finite monomial argument; quotient presentation needed to apply Tag 00RU (lemma-differential-seq)."
+   }
+  },
+  {
+   "text": "Apply [lem-weil-pbc-jacobi-zariski-differential-maps] to $A=F$, $B=P$, $\\mathfrak a=J^r$, $C=P/J^r$. Apply [lem-weil-pbc-polynomial-ring-kahler-basis-any-variables] with variable set $\\{1,\\ldots,n\\}$ and $P$-algebra $C$. Its base-changed basis identifies $C\\otimes_P\\Omega_{P/F}$ with $C^n$. The resulting $C$-linear surjection $w:C^n\\to\\Omega_{C/F}$ is $w(b)=\\sum_i b_i\\,\\mathrm d\\bar t_i$. By the explicit conormal map and the formula for $\\mathrm dg$ in the cited basis, its kernel is $\\operatorname{span}_C\\{(\\partial_i g\\bmod J^r)_i:g\\in J^r\\}$. Indeed the conormal source consists of classes of elements $g\\in J^r$; its image is a $C$-submodule (the quotient $P\\to C$ is surjective), and exactness identifies that image with the kernel.",
+   "uses": [
+    "lem-weil-pbc-jacobi-zariski-differential-maps",
+    "lem-weil-pbc-polynomial-ring-kahler-basis-any-variables"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tags 00RU (lemma-differential-seq, statement and proof) and 00RX (lemma-differentials-polynomial-ring, statement and proof)."
+   }
+  },
+  {
+   "text": "The isomorphism $\\alpha$ gives an isomorphism $U:\\Omega_{C/F}\\to\\Omega_{Q_r/F}$ with $U(\\mathrm dc)=\\mathrm d\\alpha(c)$, regarding the target as a $C$-module through $\\alpha$. Explicitly apply the universal property [def-weil-pbc-kahler-differentials] to the derivation $c\\mapsto\\mathrm d\\alpha(c)$; applying it to $\\alpha^{-1}$ gives the inverse. Their composites fix every universal differential and hence are identities by the same universal property. Thus, writing $\\alpha^n$ for coordinatewise application of $\\alpha$, the map $v=U\\circ w\\circ(\\alpha^n)^{-1}:Q_r^n\\to\\Omega_{Q_r/F}$ is $Q_r$-linear and surjective, with $v(b)=\\sum_i b_i\\,\\mathrm d(t_i\\bmod\\mathfrak n^r)$ and kernel the $Q_r$-span of the reduced polynomial gradients.",
+   "uses": [
+    "def-weil-pbc-kahler-differentials"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00RO (lemma-universal-omega), the universal property included in the cited definition; explicit isomorphism argument."
+   }
+  },
+  {
+   "text": "Let $\\rho:D^n\\to Q_r^n$ be coordinatewise reduction. It is $D$-linear and surjective by lifting its finitely many coordinates. Its kernel is $(\\mathfrak n^r)^n=\\mathfrak n^rM$: a vector with entries $a_i\\in\\mathfrak n^r$ is the finite sum $\\sum_i a_ie_i$, and the reverse inclusion follows coordinatewise. The displayed formulas give $\\theta_r=v\\circ\\rho$, so $\\theta_r$ is $D$-linear and surjective. It kills $\\mathfrak n^rM$ and each polynomial gradient because their reductions lie in $\\ker v$ by step 4. It therefore kills their $D$-span and sum.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Agent-written coordinate reduction and linearity argument assembling the maps obtained from Tags 00RU and 00RX."
+   }
+  },
+  {
+   "text": "Conversely, if $a\\in\\ker\\theta_r$, then $\\rho(a)\\in\\ker v$. By step 4 write $\\rho(a)=\\sum_{k=1}^N b_k\\rho(\\nabla g_k)$ for $g_k\\in J^r$ and $b_k\\in Q_r$. Choose lifts $\\widetilde b_k\\in D$. Then $\\rho(a-\\sum_k\\widetilde b_k\\nabla g_k)=0$, so step 5 puts that difference in $\\mathfrak n^rM$. This proves the remaining kernel inclusion and the asserted equality. All sums here are finite. If $n=0$, step 1 leaves only the constant monomial, $P=D=Q_r=F$, $J=\\mathfrak n=0$, and $M=\\Omega_{F/F}=0$ by the universal property; every construction and equality above still holds.",
+   "uses": [
+    "def-weil-pbc-kahler-differentials"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Agent-written finite scalar-lift kernel calculation; the exact kernel in the residue module was supplied by Tags 00RU and 00RX."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-kahler-differentials",
+  "def-weil-pbc-multivariate-power-series",
+  "def-weil-pbc-mv-polynomial-ring",
+  "lem-weil-pbc-jacobi-zariski-differential-maps",
+  "lem-weil-pbc-polynomial-ring-kahler-basis-any-variables",
+  "lem-weil-pbc-power-series-combined-ideal-coefficients"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tags 00RU (lemma-differential-seq), 00RX (lemma-differentials-polynomial-ring), and 00RO (lemma-universal-omega) provide the differential ingredients; finite polynomial truncation and lifting the relation kernel are agent-written using the existing coefficient-criterion node."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "KaehlerDifferential.*(ker|quotient)|ker.*Kaehler|trunc.*Kaehler",
+   "results": "{\"t\": \"2026-10-22T06:44:34Z\", \"tool\": \"grep\", \"query\": \"KaehlerDifferential.*(ker|quotient)|ker.*Kaehler|trunc.*Kaehler\", \"sub\": \"RingTheory\", \"ok\": true, \"n_hits\": 22, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/Smooth/Quotient.lean\", \"Mathlib/RingTheory/Smooth/Quotient.lean\", \"Mathlib/RingTheory/Smooth/Quotient.lean\", \"Mathlib/RingTheory/Smooth/Quotient.lean\", \"Mathlib/RingTheory/Smooth/Quotient.lean\", \"Mathlib/RingTheory/Extension/Cotangent/Free.lean\", \"Mathlib/RingTheory/Extension/Cotangent/Free.lean\", \"Mathlib/RingTheory/Extension/Cotangent/Free.lean\"], \"digest\": \"06e4486c5f9b1492\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary conormal maps, not the combined truncated-series presentation"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Kahler differentials of truncated multivariate power series as quotient by polynomial gradients",
+   "results": "{\"t\": \"2026-10-22T06:44:34Z\", \"tool\": \"leansearch\", \"query\": \"Kahler differentials of truncated multivariate power series as quotient by polynomial gradients\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CommRingCat.KaehlerDifferential\", \"KaehlerDifferential\", \"KaehlerDifferential.D_apply\", \"KaehlerDifferential.polynomial_D_apply\", \"KaehlerDifferential.polynomialEquiv\", \"KaehlerDifferential.mvPolynomialBasis_repr_apply\", \"Algebra.SubmersivePresentation.free_kaehlerDifferential\", \"KaehlerDifferential.polynomialEquiv_symm\"], \"digest\": \"ac443199aab38eba\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: polynomial basis and general presentation machinery only"
+  },
+  {
+   "tool": "loogle",
+   "query": "KaehlerDifferential, Ideal.Quotient",
+   "results": "{\"t\": \"2026-10-22T06:44:34Z\", \"tool\": \"loogle\", \"query\": \"KaehlerDifferential, Ideal.Quotient\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"loogle: unknown identifier 'Ideal.Quotient'\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "query error: guessed identifier was unknown; corrected query also run"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Kahler differentials of truncated formal power series are generated by coordinate differentials with kernel generated by gradients of polynomials in a power of the variable ideal",
+   "results": "{\"t\": \"2026-10-22T06:44:45Z\", \"tool\": \"leanfinder\", \"query\": \"Kahler differentials of truncated formal power series are generated by coordinate differentials with kernel generated by gradients of polynomials in a power of the variable ideal\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.Generators.toKaehler_cotangentSpaceBasis\", \"Algebra.Presentation.differentialsSolution\", \"Algebra.Presentation.differentialsSolution_isPresentation\", \"Algebra.PreSubmersivePresentation.cotangentComplexAux_apply\", \"Algebra.Generators.cotangentSpaceBasis_repr_one_tmul\", \"Algebra.Generators.cotangentSpaceBasis_apply\", \"Algebra.Presentation.differentialsRelations\", \"Algebra.Presentation.differentials\"], \"digest\": \"e91b20476285ddad\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: presentation results do not give the polynomial presentation of the formal-series truncation"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "module of differentials of polynomial quotient by ideal power conormal presentation",
+   "results": "{\"t\": \"2026-10-22T06:44:46Z\", \"tool\": \"leanfinder\", \"query\": \"module of differentials of polynomial quotient by ideal power conormal presentation\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.Presentation.differentials\", \"instR\", \"Algebra.Presentation.differentials.hom₁\", \"KaehlerDifferential.derivationQuotKerTotal\", \"Algebra.Presentation.differentialsSolution\", \"Algebra.Presentation.differentialsSolution_isPresentation\", \"KaehlerDifferential.derivationQuotKerTotal_apply\", \"Algebra.Extension.CotangentSpace\"], \"digest\": \"8d1c1304537c49e4\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: Algebra.Presentation.differentials requires a supplied presentation; identifying the series quotient with P/J^r and lifting the kernel are additional arguments"
+  },
+  {
+   "tool": "loogle",
+   "query": "KaehlerDifferential, Ideal",
+   "results": "{\"t\": \"2026-10-22T06:45:18Z\", \"tool\": \"loogle\", \"query\": \"KaehlerDifferential, Ideal\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"KaehlerDifferential.kerToTensor\", \"KaehlerDifferential.fromIdeal\", \"KaehlerDifferential.kerToTensor_apply\", \"KaehlerDifferential.kerCotangentToTensor_toCotangent\", \"KaehlerDifferential.fromIdeal_surjective\", \"KaehlerDifferential.D_apply\", \"KaehlerDifferential.DLinearMap_apply\", \"KaehlerDifferential.D_tensorProductTo\"], \"digest\": \"450c7a1c3f842d71\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: conormal maps only; constructing the truncated-series presentation is additional work"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Kahler differentials of truncated multivariate formal power series polynomial presentation kernel generated by gradients",
+   "results": "{\"t\": \"2026-10-23T09:39:10Z\", \"tool\": \"leanfinder\", \"query\": \"Kahler differentials of truncated multivariate formal power series polynomial presentation kernel generated by gradients\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.Presentation.differentials\", \"KaehlerDifferential.kerTotal\", \"Algebra.Presentation.differentialsRelations\", \"KaehlerDifferential.mvPolynomialBasis\", \"Algebra.SubmersivePresentation.basisKaehler_apply\", \"KaehlerDifferential.mvPolynomialEquiv\", \"Algebra.PreSubmersivePresentation.cotangentComplexAux_apply\", \"Algebra.PreSubmersivePresentation.differential\"], \"digest\": \"0c5375a48de7734a\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the presentation API supplies differentials after an algebra presentation is given; the formal-series truncation presentation and D-module lifted kernel still require proof"
+  },
+  {
+   "tool": "grep",
+   "query": "trunc.*[Kk]aehler|[Kk]aehler.*trunc|truncTotal|idealOfVars",
+   "results": "{\"t\": \"2026-10-23T09:39:41Z\", \"tool\": \"grep\", \"query\": \"trunc.*[Kk]aehler|[Kk]aehler.*trunc|truncTotal|idealOfVars\", \"sub\": \"RingTheory\", \"ok\": true, \"n_hits\": 22, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/MvPowerSeries/Substitution.lean\", \"Mathlib/RingTheory/MvPowerSeries/Substitution.lean\", \"Mathlib/RingTheory/MvPowerSeries/Substitution.lean\", \"Mathlib/RingTheory/MvPowerSeries/Substitution.lean\", \"Mathlib/RingTheory/MvPowerSeries/Substitution.lean\", \"Mathlib/RingTheory/MvPowerSeries/Equiv.lean\", \"Mathlib/RingTheory/MvPowerSeries/Equiv.lean\", \"Mathlib/RingTheory/MvPowerSeries/Equiv.lean\"], \"digest\": \"a9fb36612c37694f\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: truncTotal/idealOfVars or differentialsRelations are ingredients, not the full statement"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Differentials of a quotient of a multivariate power series ring by a power of the ideal of variables",
+   "results": "{\"t\": \"2026-10-23T09:39:41Z\", \"tool\": \"leansearch\", \"query\": \"Differentials of a quotient of a multivariate power series ring by a power of the ideal of variables\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"MvPolynomial.pderiv\", \"PowerSeries.derivative\", \"MvPolynomial.mkDerivation\", \"Algebra.Presentation.differentialsRelations\", \"PowerSeries.derivative_invOf\", \"PowerSeries.trunc_derivative'\", \"PowerSeries.termD⁄dX\", \"PowerSeries.derivativeFun\"], \"digest\": \"99cad83188e0290f\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: pderiv, formal derivative, and differentialsRelations do not state the combined truncation and relation-kernel claim"
+  },
+  {
+   "tool": "loogle",
+   "query": "MvPowerSeries, KaehlerDifferential",
+   "results": "{\"t\": \"2026-10-23T09:39:41Z\", \"tool\": \"loogle\", \"query\": \"MvPowerSeries, KaehlerDifferential\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: zero hits for the joint type query"
+  },
+  {
+   "tool": "grep",
+   "query": "def differentials|differentialsRelations|differentialsSolution_isPresentation",
+   "results": "{\"t\": \"2026-10-23T09:40:37Z\", \"tool\": \"grep\", \"query\": \"def differentials|differentialsRelations|differentialsSolution_isPresentation\", \"sub\": \"Algebra/Module/Presentation\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"Mathlib/Algebra/Module/Presentation/Differentials.lean\", \"Mathlib/Algebra/Module/Presentation/Differentials.lean\", \"Mathlib/Algebra/Module/Presentation/Differentials.lean\", \"Mathlib/Algebra/Module/Presentation/Differentials.lean\", \"Mathlib/Algebra/Module/Presentation/Differentials.lean\"], \"digest\": \"b5fec46f1880ed0f\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: truncTotal/idealOfVars or differentialsRelations are ingredients, not the full statement"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A quotient algebra presentation gives the module of Kahler differentials as generators dX and relations the gradients of the defining ideal",
+   "results": "{\"t\": \"2026-10-23T09:40:48Z\", \"tool\": \"leanfinder\", \"query\": \"A quotient algebra presentation gives the module of Kahler differentials as generators dX and relations the gradients of the defining ideal\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.Presentation.differentials\", \"Algebra.Presentation.differentialsSolution_isPresentation\", \"Algebra.Presentation.differentialsRelations\", \"Algebra.Presentation.differentialsSolution\", \"Algebra.Presentation.differentialsRelations_G\", \"Algebra.Presentation.differentialsRelations_R\", \"Algebra.Presentation.differentials.hom₁_single\", \"Algebra.Presentation.differentials.comm₂₃'\"], \"digest\": \"fef28f2135ecb813\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the presentation API supplies differentials after an algebra presentation is given; the formal-series truncation presentation and D-module lifted kernel still require proof"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-formal-power-series-continuous-free",
+  "date": "2026-10-22",
+  "group": "Q33"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "The Jacobian-cokernel/differential comparison in the first proof paragraph of the pointwise nodal ingredient (Curves 0C4D), specifically the continuous differentials of the ambient formal power-series ring. Finite polynomial truncation and conormal relation presentation: returned parent proof steps 1 and 2.",
+   "via": [
+    "lem-trf-formal-power-series-continuous-free",
+    "lem-trf-formal-power-series-continuous-differentials",
+    "lem-trf-completed-jacobian-differentials",
+    "lem-trf-separable-closed-point-formal-presentation",
+    "lem-trf-nodal-point-local-criterion",
+    "lem-trf-nodal-curve-lci-criterion",
+    "lem-trf-nodal-family-fitting-singular",
+    "lem-trf-projective-nodal-family-geometry",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-trf-power-series-truncated-differential-presentation",
+  "worker": "stage1",
+  "summary": "Kept the statement and its four definition dependencies unchanged. Proved truncation via the existing combined-ideal coefficient criterion with base ideal zero, computed the polynomial kernel by monomials, applied the existing Mathlib conormal and polynomial-basis nodes, explicitly constructed differential transport, and lifted the finite relation kernel to D. Six proof steps, no new nodes. Repeated item Mathlib searches with two phrasings and read the presentation candidates; they do not supply the truncation identification or scalar-lift kernel as a one-line specialization.",
+  "blueprint": "Inherited ancestry: lem-trf-local-term-locality through the recorded via chain. This item realizes finite-truncation presentation and scalar-lift kernel calculation from steps 1 and 2 of the returned parent lem-trf-formal-power-series-continuous-free, at the Jacobian/differential comparison in its recorded pointwise nodal ingredient. The latest blueprint local-term proof supplies no direct truncation lemma; the local algebra is the agent-written intermediate refinement, not a quotation of that proof.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-power-series-combined-ideal-coefficients",
+    "why": "Generic coefficient criterion for a power of the variables ideal, specialized to zero base ideal. No node of this unit supplies it independently of the continuous-differential parents (which would be circular); this retains the polynomial-truncation/conormal route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-power-series-combined-ideal-coefficients"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q119-7f9baca6b",
+  "group": "Q119",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q119-7f9baca6b (reviewer sub-agent of L); spot-checked: PASS with no changes. The item statement matches live exactly; only the proof, proof_deps, proof_origin, status, split_report and searches changed. The item is still unsplit on live, it is not a re-delivery, and there is no re-split note. Sources read: Stacks 00RU (algebra.tex lines 34102-34154) and 00RX (34310-34340). Step 1 applies the combined-ideal coefficient criterion with Λ=F and J=0; since 0^{r-|E|}=0, this gives truncation and surjectivity of P→Q_r. Step 2 is an elementary monomial argument showing ker=J^r, so α:P/J^r≅Q_r. Step 3 uses the conormal sequence and the base-changed basis; the image of δ is already a C-submodule, so ker w is the span of the reduced gradients. Step 4 transports Ω explicitly through the universal property in both directions. Steps 5-6 do coordinatewise reduction and lift the finitely many scalars. No characteristic or Noetherian assumption is used. Small cases checked: n=0; r=1, where the kernel is all of M; n=1, r=2 in characteristic 2 (kernel t^2D) and characteristic not 2 (kernel tD). No duplicate found (nearest are the sibling adic-gradient-control, formal-conormal-quotient-data and sbc augmentation truncations), and there is no cycle. Accepted tool use: lem-weil-pbc-power-series-combined-ideal-coefficients (sk-thm-p1), a generic lemma whose Lean is sorry-free. No SGA source is cited."
+ }
+}

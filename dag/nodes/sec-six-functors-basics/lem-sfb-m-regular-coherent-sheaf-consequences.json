@@ -1,0 +1,352 @@
+{
+ "id": "lem-sfb-m-regular-coherent-sheaf-consequences",
+ "kind": "statement",
+ "title": "Propagation, vanishing, generation and linear multiplication for regular coherent sheaves",
+ "statement": "Let $k$ be a field [def-weil-field], $n\\geq0$, $a\\in\\mathbf Z$, and $\\mathcal F$ a coherent module [pqf-def-coherent] on $\\mathbf P^n_k$. Write $\\mathcal F(d)=\\mathcal F\\otimes\\mathcal O(d)$ [def-pc-projective-space-twist], and let $H^j$ denote module sheaf cohomology [pqf-def-cohomology]. Assume\n$$H^j(\\mathbf P^n_k,\\mathcal F(a-j))=0\\quad(1\\leq j\\leq n).$$\nFor every integer $b\\geq a$, $\\mathcal F$ is $b$-regular, i.e. $H^j(\\mathbf P^n_k,\\mathcal F(b-j))=0$ for $1\\leq j\\leq n$. For all $d\\geq a$ and $j>0$ one has $H^j(\\mathbf P^n_k,\\mathcal F(d))=0$. For every $b\\geq a$ the evaluation morphism\n$$H^0(\\mathbf P^n_k,\\mathcal F(b))\\otimes_k\\mathcal O\\longrightarrow\\mathcal F(b)$$\nis surjective, as is the natural multiplication map\n$$H^0(\\mathbf P^n_k,\\mathcal F(b))\\otimes_k H^0(\\mathbf P^n_k,\\mathcal O(1))\\longrightarrow H^0(\\mathbf P^n_k,\\mathcal F(b+1)).$$",
+ "source": {
+  "document": "literature/stacks-project/varieties.tex",
+  "place": "Tags 08A6 (lemma-m-regular-up), 08A7 (lemma-m-regular-multiply), 08A8 (lemma-m-regular-globally-generated), with Tag 08A3 (definition-regularity); cohomology in degrees greater than n vanishes by the ordered standard affine-cover Cech calculation, coherent.tex Tag 01XD (lemma-cech-cohomology-quasi-coherent)."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "pqf-def-coherent",
+  "def-pc-projective-space-twist",
+  "pqf-def-cohomology",
+  "def-sfb-field-global-sections"
+ ],
+ "proof": [
+  {
+   "text": "First prove, simultaneously for all fields and all integers $m$, the following two assertions by induction on $n$: an $m$-regular sheaf is $(m+1)$-regular, and its degree-$m$ linear multiplication is surjective. For $n=0$, regularity has no conditions. The single standard chart is $\\operatorname{Spec}k$ and every twist has its global basis $e_0^{(d)}$; multiplication by the basis of $H^0(\\mathcal O(1))=k$ is an isomorphism. Higher cohomology vanishes by the cohomology bound. A quasi-coherent sheaf on $\\operatorname{Spec}k$ is the sheaf of its vector space of global sections, so its evaluation is surjective. This also settles all remaining conclusions when $n=0$.",
+   "uses": [
+    "def-pc-projective-space-twist",
+    "pqf-def-coherent",
+    "lem-pc-projective-space-cohomology-bound"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "08A6 and 08A7, induction base; 08A8 for n=0"
+   }
+  },
+  {
+   "text": "We may use any field extension $K/k$ in these two induction assertions. The pullback $\\mathcal F_K$ is quasi-coherent by the pullback node. Its local finite generating families pull back to finite generating families: tensor a local surjection from a finite free module, and the images of its basis still generate the tensor product. Standard chart rings $K[x_1,\\ldots,x_n]$ are Noetherian by the finite-type algebra node, since a field has only two ideals. Thus the coherent-versus-quasi-coherent-finite-type node shows $\\mathcal F_K$ is coherent. The same argument shows twists are coherent, since they are locally copies of $\\mathcal F$.",
+   "uses": [
+    "lem-weil-pbc-module-pullback-quasi-coherent",
+    "lem-weil-pbc-finite-type-algebra-noetherian",
+    "pqf-lem-coherent-ft-locnoeth",
+    "def-pc-projective-space-twist"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "08A4 and 08A7, field extension; coherent pullback hypotheses"
+   }
+  },
+  {
+   "text": "Apply flat base change to $P\\to\\operatorname{Spec}k$ and $\\operatorname{Spec}K\\to\\operatorname{Spec}k$ for every $\\mathcal F(d)$ and for $\\mathcal O(1)$. The first morphism is quasi-compact and quasi-separated by its finite standard affine cover with affine overlaps; the second is flat because tensoring vector spaces is exact. The gluing bases of the twists identify their pullbacks with the same twists over $K$. Pullback commutes with tensor products of modules, so $(\\mathcal F(d))_K=(\\mathcal F\\otimes\\mathcal O(d))_K\\cong\\mathcal F_K\\otimes\\mathcal O_K(d)=\\mathcal F_K(d)$, with $u\\otimes e\\mapsto u_K\\otimes e_K$ on local sections. We obtain $H^j(\\mathcal F_K(d))\\cong H^j(\\mathcal F(d))\\otimes_k K$. For $j=0$ the comparison sends $u\\otimes c$ to $c\\,u_K$; multiplication consequently sends $(u\\otimes c)\\otimes(v\\otimes e)$ to $(uv)\\otimes ce$. Thus the multiplication map over $K$ is exactly the scalar extension of the map over $k$. Scalar extension by a field extension detects zero vector spaces and surjectivity: choose a basis of a nonzero vector space, or of the cokernel, and its scalar extension remains nonzero. These statements also show the regularity hypothesis is preserved. Take $K=k(t)$, which is infinite since its distinct powers of $t$ are distinct. It therefore suffices to prove the two induction assertions over infinite fields.",
+   "uses": [
+    "lem-pc-flat-base-change-cohom",
+    "def-pc-projective-space-twist",
+    "lem-weil-pbc-module-pullback-tensor"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "08A4 (lemma-m-regular-extend-base-field) and 08A7, first paragraph"
+   }
+  },
+  {
+   "text": "Now let $n>0$, assume the induction assertions in dimension $n-1$ over every field, and work over an infinite field. Apply the hyperplane-sequence node to $\\mathcal F$ to obtain $s,H,i,\\mathcal G$. For $1\\leq j\\leq n-1$, its sequence at $d=m-j$ contains\n$$H^j(\\mathcal F(m-j))\\longrightarrow H^j(\\mathcal G(m-j))\\longrightarrow H^{j+1}(\\mathcal F(m-j-1)).$$\nThe outer terms vanish by $m$-regularity, since $1\\leq j<j+1\\leq n$. Exactness gives the middle vanishing. Thus $\\mathcal G$ is $m$-regular on $H\\cong\\mathbf P^{n-1}_k$.",
+   "uses": [
+    "lem-sfb-coherent-hyperplane-restriction-sequence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "08A5 (lemma-m-regular), entire proof"
+   }
+  },
+  {
+   "text": "By the dimension induction hypothesis, $\\mathcal G$ is $(m+1)$-regular. For $1\\leq j\\leq n$, the hyperplane sequence at $d=m+1-j$ gives\n$$H^j(\\mathcal F(m-j))\\longrightarrow H^j(\\mathcal F(m+1-j))\\longrightarrow H^j(\\mathcal G(m+1-j)).$$\nThe left term vanishes by the assumption on $\\mathcal F$. For $j<n$, the right term vanishes by $(m+1)$-regularity of $\\mathcal G$; for $j=n$ it vanishes by the cohomology bound on $\\mathbf P^{n-1}_k$. Exactness therefore gives $(m+1)$-regularity of $\\mathcal F$. Descend this result to the original field using step 3. Repeating the one-step assertion $b-a$ times proves $b$-regularity for every $b\\geq a$.",
+   "uses": [
+    "lem-sfb-coherent-hyperplane-restriction-sequence",
+    "lem-pc-projective-space-cohomology-bound"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "08A6 (lemma-m-regular-up), hyperplane induction and iteration"
+   }
+  },
+  {
+   "text": "For the multiplication assertion in dimension $n$, let $t\\in H^0(P,\\mathcal F(m+1))$. By step 4 and dimension induction for multiplication, write its restriction as $\\overline t=\\sum_\\nu g_\\nu\\ell_\\nu$, with $g_\\nu\\in H^0(H,\\mathcal G(m))$ and $\\ell_\\nu\\in H^0(H,\\mathcal O_H(1))$. Here the multiplication on $H$ is that of $\\mathbf P^{n-1}_k$ transported along the hyperplane node's isomorphism, which is compatible with the multiplication of twists. In the hyperplane sequence at $d=m$, the next term is $H^1(P,\\mathcal F(m-1))=0$ by $m$-regularity. Hence lift each $g_\\nu$ to $f_\\nu\\in H^0(P,\\mathcal F(m))$. Lift each $\\ell_\\nu$ to $v_\\nu\\in H^0(P,\\mathcal O_P(1))$ by the linear-section restriction clause. Multiplicativity of restriction gives $(t-\\sum_\\nu f_\\nu v_\\nu)|_H=0$. Exactness at $H^0(P,\\mathcal F(m+1))$ in the sequence at $d=m+1$ supplies $f\\in H^0(P,\\mathcal F(m))$ with $t-\\sum_\\nu f_\\nu v_\\nu=sf$. Therefore $t$ is the image of $\\sum_\\nu f_\\nu\\otimes v_\\nu+f\\otimes s$. Descend using step 3. This completes the dimension induction. Apply the result at $m=b$, using step 5, for the asserted multiplication map at every $b\\geq a$.",
+   "uses": [
+    "lem-sfb-coherent-hyperplane-restriction-sequence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "08A7 (lemma-m-regular-multiply), lifting and subtraction"
+   }
+  },
+  {
+   "text": "For $d\\geq a$ and $1\\leq j\\leq n$, set $b=d+j\\geq a$. Step 5 gives $H^j(\\mathcal F(d))=H^j(\\mathcal F(b-j))=0$. For $j>n$, use the cohomology bound. This proves all positive-degree vanishings, including degrees not present in the definition of regularity.",
+   "uses": [
+    "lem-pc-projective-space-cohomology-bound"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "08A6 plus cohomology bound from the standard affine cover"
+   }
+  },
+  {
+   "text": "It remains to prove generation, now over the original field. Choose a finite quotient $\\bigoplus_{\\nu=1}^r\\mathcal O(-m_\\nu)\\twoheadrightarrow\\mathcal F$ from the quotient-by-twists node (a field is Noetherian). Fix $b\\geq a$ and choose $d\\geq b$ and $d\\geq m_\\nu$ for every $\\nu$. Tensoring the quotient with $\\mathcal O(d)$ preserves surjectivity: locally it is tensoring with a free rank-one module. The twist-tensor isomorphism identifies its source with $\\bigoplus_\\nu\\mathcal O(d-m_\\nu)$. For every nonnegative integer $e$, the global coordinate monomials of degree $e$ generate $\\mathcal O(e)$: on $D_+(x_i)$, $x_i^e$ is its basis. Thus the images of these finitely many monomials generate $\\mathcal F(d)$. If $r=0$, the quotient already says $\\mathcal F=0$.",
+   "uses": [
+    "lem-pc-projective-space-twist-quotient",
+    "lem-pc-twist-tensor",
+    "def-pc-projective-space-twist"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "08A8 (lemma-m-regular-globally-generated), first sentence; coherent.tex lemma-coherent-projective (1)"
+   }
+  },
+  {
+   "text": "By step 6 at each degree $b,b+1,\\ldots,d-1$, every section of $\\mathcal F(d)$ is a finite sum $\\sum_\\alpha f_\\alpha v_{\\alpha,1}\\cdots v_{\\alpha,d-b}$ with $f_\\alpha\\in H^0(P,\\mathcal F(b))$ and $v_{\\alpha,q}\\in H^0(P,\\mathcal O(1))$; this follows by expanding one preimage tensor at each degree. On $U_i=D_+(x_i)$ trivialize all twists by powers of $x_i$. The section above divided by $x_i^{d-b}$ becomes\n$$\\sum_\\alpha f_\\alpha|_{U_i}\\prod_q(v_{\\alpha,q}/x_i).$$\nEvery coefficient is a regular function on $U_i$. Since sections of $\\mathcal F(d)$ generate and division by $x_i^{d-b}$ identifies $\\mathcal F(d)|_{U_i}$ with $\\mathcal F(b)|_{U_i}$, the restrictions of global sections of $\\mathcal F(b)$ generate on $U_i$. The $U_i$ cover $P$, so the evaluation map is surjective. For $d=b$, the products are empty and equal to $1$. This proves generation for every $b\\geq a$.",
+   "uses": [
+    "def-pc-projective-space-twist"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "08A8, last two sentences, with the corrected degree of its generating sections"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-projective-space-twist",
+  "lem-pc-flat-base-change-cohom",
+  "lem-pc-projective-space-cohomology-bound",
+  "lem-pc-projective-space-twist-quotient",
+  "lem-pc-twist-tensor",
+  "lem-sfb-coherent-hyperplane-restriction-sequence",
+  "lem-weil-pbc-finite-type-algebra-noetherian",
+  "lem-weil-pbc-module-pullback-quasi-coherent",
+  "lem-weil-pbc-module-pullback-tensor",
+  "pqf-def-coherent",
+  "pqf-lem-coherent-ft-locnoeth"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/varieties.tex",
+  "place": "Tags 08A4--08A8; hyperplane induction of 08A6 and lifting of 08A7, followed by 08A8 with its section-degree typo corrected. Higher-degree vanishing uses the existing standard-cover cohomology bound."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For an m regular coherent sheaf on projective space higher cohomology of large twists vanishes the m twist is globally generated and multiplication by linear forms is surjective",
+   "results": "{\"t\": \"2026-10-22T04:23:32Z\", \"tool\": \"leanfinder\", \"query\": \"For an m regular coherent sheaf on projective space higher cohomology of large twists vanishes the m twist is globally generated and multiplication by linear forms is surjective\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"DerivedCategory.from_singleFunctor_obj_eq_zero_of_projective\", \"CategoryTheory.ProjectiveResolution.instIsGECochainComplexOfNatInt\", \"CochainComplex.isKProjective_of_projective\", \"CochainComplex.IsKProjective\", \"CategoryTheory.ProjectiveResolution.instProjectiveXIntCochainComplex\", \"CategoryTheory.ProjectiveResolution.instIsStrictlyLECochainComplexOfNatInt\", \"Rep.isZero_Tor_succ_of_projective\", \"isZero_Ext_succ_of_projective\"], \"digest\": \"a6f8a3c8cf5f7e2d\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: abstract generating-section data and K-projective complexes do not give regularity, twisting cohomology or the specified linear multiplication theorem."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"globallyGenerated\"",
+   "results": "{\"t\": \"2026-10-22T04:23:32Z\", \"tool\": \"loogle\", \"query\": \"\\\"globallyGenerated\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: abstract generating-section data and K-projective complexes do not give regularity, twisting cohomology or the specified linear multiplication theorem."
+  },
+  {
+   "tool": "grep",
+   "query": "Castelnuovo|mumford|mRegular|globallyGenerated",
+   "results": "{\"t\": \"2026-10-22T04:23:32Z\", \"tool\": \"grep\", \"query\": \"Castelnuovo|mumford|mRegular|globallyGenerated\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: abstract generating-section data and K-projective complexes do not give regularity, twisting cohomology or the specified linear multiplication theorem."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Castelnuovo Mumford regular sheaf remains regular under positive twists and is generated by global sections with surjective section multiplication",
+   "results": "{\"t\": \"2026-10-22T04:23:33Z\", \"tool\": \"leansearch\", \"query\": \"Castelnuovo Mumford regular sheaf remains regular under positive twists and is generated by global sections with surjective section multiplication\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SheafOfModules.GeneratingSections.mk\", \"SheafOfModules.GeneratingSections.ofEpi_s\", \"SheafOfModules.GeneratingSections.opEpi_id\", \"SheafOfModules.GeneratingSections.IsFiniteType\", \"SheafOfModules.GeneratingSections.mk.injEq\", \"SheafOfModules.GeneratingSections.opEpi_comp\", \"SheafOfModules.GeneratingSections.ctorIdx\", \"AlgebraicGeometry.Proj.mul_apply\"], \"digest\": \"e9367d273024827b\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: abstract generating-section data and K-projective complexes do not give regularity, twisting cohomology or the specified linear multiplication theorem."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A coherent sheaf with vanishing H i of F m minus i has globally generated m twist and surjective multiplication of sections by degree one polynomials",
+   "results": "{\"t\": \"2026-10-22T04:23:40Z\", \"tool\": \"leanfinder\", \"query\": \"A coherent sheaf with vanishing H i of F m minus i has globally generated m twist and surjective multiplication of sections by degree one polynomials\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SheafOfModules.GeneratingSections\", \"SheafOfModules.GeneratingSections.I\", \"SheafOfModules.GeneratingSections.IsFiniteType\", \"SheafOfModules.LocalGeneratorsData.I\", \"SheafOfModules.LocalGeneratorsData.IsFiniteType\", \"SheafOfModules.LocalGeneratorsData.X\", \"SheafOfModules.LocalGeneratorsData\", \"SheafOfModules.localGeneratorsDataOfIsFiniteType\"], \"digest\": \"c981226a43c33c98\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: abstract generating-section data and K-projective complexes do not give regularity, twisting cohomology or the specified linear multiplication theorem."
+  },
+  {
+   "tool": "grep",
+   "query": "regularity|globallyGenerated|regular.*twist",
+   "results": "{\"t\": \"2026-10-22T04:43:17Z\", \"tool\": \"grep\", \"query\": \"regularity|globallyGenerated|regular.*twist\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: abstract generating-section constructors, Proj structure-sheaf operations and K-projective complexes do not state regularity or its consequences"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Regular coherent sheaf on projective space has surjective multiplication of sections by linear forms and is globally generated",
+   "results": "{\"t\": \"2026-10-22T04:43:18Z\", \"tool\": \"leansearch\", \"query\": \"Regular coherent sheaf on projective space has surjective multiplication of sections by linear forms and is globally generated\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SheafOfModules.GeneratingSections.mk\", \"SheafOfModules.GeneratingSections.IsFiniteType\", \"AlgebraicGeometry.Proj.pow_apply\", \"AlgebraicGeometry.Proj.mul_apply\", \"AlgebraicGeometry.ProjectiveSpectrum.Proj.structureSheaf\", \"AlgebraicGeometry.ProjectiveSpectrum.StructureSheaf.IsFraction\", \"SheafOfModules.GeneratingSections.ctorIdx\", \"AlgebraicGeometry.ProjectiveSpectrum.StructureSheaf.structureSheafInType\"], \"digest\": \"fb8a2a53979edc46\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: abstract generating-section constructors, Proj structure-sheaf operations and K-projective complexes do not state regularity or its consequences"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"regular\" \"cohomology\"",
+   "results": "{\"t\": \"2026-10-22T04:43:18Z\", \"tool\": \"loogle\", \"query\": \"\\\"regular\\\" \\\"cohomology\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"loogle: Function expected at\\n  \\\"regular\\\"\\nbut this term has type\\n  String\\n\\nNote: Expected a function because this term is being applied to the argument\\n  \\\"cohomology\\\"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "invalid query: Loogle reported a syntax error; not evidence of absence"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Castelnuovo Mumford regular coherent sheaf on projective space has vanishing cohomology positive twists globally generated and multiplication by linear forms surjective",
+   "results": "{\"t\": \"2026-10-22T04:43:21Z\", \"tool\": \"leanfinder\", \"query\": \"Castelnuovo Mumford regular coherent sheaf on projective space has vanishing cohomology positive twists globally generated and multiplication by linear forms surjective\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"DerivedCategory.from_singleFunctor_obj_eq_zero_of_projective\", \"AlgebraicGeometry.Proj.ext_iff\", \"Rep.standardComplex.x_projective\", \"AlgebraicGeometry.exists_of_res_zero_of_qcqs_of_top\", \"isZero_Ext_succ_of_projective\", \"CategoryTheory.ProjectiveResolution.instIsGECochainComplexOfNatInt\", \"CochainComplex.isKProjective_of_projective\", \"CochainComplex.IsKProjective\"], \"digest\": \"7762c26a4560c81a\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: abstract generating-section constructors, Proj structure-sheaf operations and K-projective complexes do not state regularity or its consequences"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Castelnuovo\"",
+   "results": "{\"t\": \"2026-10-22T04:45:53Z\", \"tool\": \"loogle\", \"query\": \"\\\"Castelnuovo\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: valid name search returned no declarations"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A sheaf F with H i of F m minus i zero has surjective multiplication by sections of O one and its m twist is generated by global sections",
+   "results": "{\"t\": \"2026-10-22T04:45:55Z\", \"tool\": \"leanfinder\", \"query\": \"A sheaf F with H i of F m minus i zero has surjective multiplication by sections of O one and its m twist is generated by global sections\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SheafOfModules.GeneratingSections\", \"SheafOfModules.GeneratingSections.I\", \"SheafOfModules.GeneratingSections.IsFiniteType\", \"SheafOfModules.LocalGeneratorsData.I\", \"SheafOfModules.LocalGeneratorsData.IsFiniteType\", \"SheafOfModules.GeneratingSections.ofEpi\", \"SheafOfModules.LocalGeneratorsData\", \"SheafOfModules.LocalGeneratorsData.X\"], \"digest\": \"7bfc0cd16a7c8bdd\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: generic generating-section structures and constructors do not imply the Castelnuovo Mumford regularity consequences"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-hilbert-uniform-section-bound",
+  "date": "2026-10-22",
+  "group": "N9"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong §§3.9--3.12, Claim 3.10 and Lemma 3.13, printed p.609. Agent-formulated version: the proof of Lemma 3.13 uses only that rational exceptional curves have constant image in each target fibre; this property replaces its genus-at-least-two and pure-curve target hypotheses. This statement does not assert existence of a semistable source.; de Jong 3.9, projective Hilbert schemes underlying the relative morphism scheme; Hilbert construction prerequisite: Uniform generation and section bounds for projective ideals with fixed Hilbert polynomial; Hilbert construction prerequisite, consequences of field regularity: Stacks 08A6--08A8",
+   "via": [
+    "lem-sfb-hilbert-uniform-section-bound",
+    "lem-sfb-projective-hilbert-polynomial-representability",
+    "lem-sfb-high-genus-hom-closure",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sfb-m-regular-coherent-sheaf-consequences",
+  "worker": "stage1",
+  "summary": "Expanded propagation and multiplication by simultaneous dimension induction over all fields; preserved finite-field cases using flat base change. Added only the independent hyperplane-section/cohomology prerequisite, not any regularity consequence. Reused existing scalar extension, cohomology bound and finite twist quotient nodes. Proved eventual generation from that quotient and low-degree generation locally. Recorded the section-degree typo in Stacks 08A8; item statement unchanged.",
+  "blueprint": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong §§3.9--3.12, Claim 3.10 and Lemma 3.13, printed p.609. Agent-formulated version: the proof of Lemma 3.13 uses only that rational exceptional curves have constant image in each target fibre; this property replaces its genus-at-least-two and pure-curve target hypotheses. This statement does not assert existence of a semistable source.; de Jong 3.9, projective Hilbert schemes underlying the relative morphism scheme; Hilbert construction prerequisite: Uniform generation and section bounds for projective ideals with fixed Hilbert polynomial; Hilbert construction prerequisite, consequences of field regularity: Stacks 08A6--08A8",
+  "tool_uses": [
+   {
+    "node": "lem-pc-flat-base-change-cohom",
+    "why": "Generic coherent cohomology scalar extension for the finite-field reduction of Stacks 08A6--08A7; no node of this unit supplies it."
+   },
+   {
+    "node": "lem-pc-projective-space-cohomology-bound",
+    "why": "Generic cohomology bound for the top hyperplane degree and all j>n, part of the given Stacks projective regularity route."
+   },
+   {
+    "node": "lem-pc-projective-space-twist-quotient",
+    "why": "Generic finite quotient by negative twists, used only to obtain the large globally generated twist in 08A8."
+   },
+   {
+    "node": "lem-pc-twist-tensor",
+    "why": "Canonical tensor identification for the twisted finite quotient, with no replacement of the unit route."
+   },
+   {
+    "node": "lem-weil-pbc-module-pullback-quasi-coherent",
+    "why": "Generic quasi-coherence of field pullback, required to apply hyperplane induction after scalar extension."
+   },
+   {
+    "node": "lem-weil-pbc-finite-type-algebra-noetherian",
+    "why": "Generic Hilbert basis theorem for standard chart rings over the extension field."
+   },
+   {
+    "node": "pqf-lem-coherent-ft-locnoeth",
+    "why": "Generic coherence criterion to check the field-pullback and twist hypotheses, not a replacement of the regularity argument."
+   },
+   {
+    "node": "lem-weil-pbc-module-pullback-tensor",
+    "why": "Generic pullback-of-tensor-product isomorphism identifying the scalar extension of each twist F(d) with F_K(d) in the flat base-change reduction of 08A4/08A7; no node of this unit gives it."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pc-flat-base-change-cohom",
+  "lem-pc-projective-space-cohomology-bound",
+  "lem-pc-projective-space-twist-quotient",
+  "lem-pc-twist-tensor",
+  "lem-weil-pbc-module-pullback-quasi-coherent",
+  "lem-weil-pbc-finite-type-algebra-noetherian",
+  "pqf-lem-coherent-ft-locnoeth",
+  "lem-weil-pbc-module-pullback-tensor"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q27-e3e010676",
+  "group": "Q27",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q27-e3e010676 (reviewer sub-agent of L); spot-checked: I read the item and the new node in full against Stacks varieties.tex 089Z, 08A0, 0EGK, 08A3 and 08A4-08A8 (l.6450-6750). This is the first split of a statement-only item, not a re-split, and the statement and stmt_deps are unchanged. The worker's source error is confirmed: 08A8 takes a basis of H^0(F) where it should be H^0(F(m)), and step 9 avoids the basis. The induction on n runs over all fields and does both assertions at once. Steps 1-2 hold: the n=0 base case is right, and F_K is coherent via pullback quasi-coherence, the Hilbert basis theorem and the coherence criterion. In step 3 the hypotheses of flat base change are checked (qcqs, flat, quasi-coherent) and K=k(t) is infinite. Step 4 is 08A5 with indices j, j+1 in [1,n]. Step 5 is 08A6, with the top degree j=n covered by the cohomology bound on P^{n-1}. Step 6 is 08A7 with the correct H^1(F(m-1)) lift and exactness at d=m+1. Step 7 handles j>n through the bound. Step 8 gets eventual generation from twist-quotient plus twist-tensor. Step 9 gives local generation on U_i by dividing by x_i^{d-b}. The new hyperplane node is true and matches 089Z/08A0/0EGK; it needs k infinite (it fails over F_2 on P^1 with skyscrapers at all three rational points). It contains no regularity clause, so it does not restate the item, and searches found no duplicate. FIX, two faults. (1) C1: step 3 used (F(d))_K = F_K(d) without citing anything; it now cites the existing generic lem-weil-pbc-module-pullback-tensor, also added to proof_deps and tool_uses. (2) The new node gave the isomorphism H = P^{n-1} for each twist separately, but step 6 transports the multiplication of twists along it. The statement now asserts compatibility with O(d)⊗O(e)->O(d+e), which holds because 089Z builds the isomorphism as Proj of a graded ring isomorphism. Step 6 now names this. I accept the 7 declared generic tool_uses. Fixes are in fixes/dag/nodes/sec-six-functors-basics/.; 2 file(s) fixed by the reviewer"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.ProjectiveSpace.MRegularConsequences",
+  "declaration": "AlgebraicGeometry.ProjectiveSpace.mRegular_coherent_consequences",
+  "declarations": [
+   "AlgebraicGeometry.ProjectiveSpace.mRegular_coherent_consequences",
+   "AlgebraicGeometry.ProjectiveSpace.fieldEvaluation",
+   "AlgebraicGeometry.ProjectiveSpace.regularityMultiplication"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/ProjectiveSpace/MRegularConsequences.lean",
+  "statement": "theorem mRegular_coherent_consequences (ι : Type u) [Fintype ι] (k : Type u) [Field k] (n : ℕ) (hι : Fintype.card ι = n + 1) (F : (ℙ(ι; Spec (.of k))).Modules) (hF : RingedSpace.IsCoherent (ℙ(ι; Spec (.of k))).toRingedSpace F) (a : ℤ) (hregular : ∀ j : ℕ, 1 ≤ j → j ≤ n → Subsingleton ((RingedSpace.moduleCohomology (ℙ(ι; Spec (.of k))).toRingedSpace j).obj (F ⊗ₘ twist ι (Spec (.of k)) (a - (j : ℤ))))) : (∀ b : ℤ, a ≤ b → ∀ j : ℕ, 1 ≤ j → j ≤ n → Subsingleton ((RingedSpace.moduleCohomology (ℙ(ι; Spec (.of k))).toRingedSpace j).obj (F ⊗ₘ twist ι (Spec (.of k)) (b - (j : ℤ))))) ∧ (∀ d : ℤ, a ≤ d → ∀ j : ℕ, 0 < j → Subsingleton ((RingedSpace.moduleCohomology (ℙ(ι; Spec (.of k))).toRingedSpace j).obj (F ⊗ₘ twist ι (Spec (.of k)) d))) ∧ (∀ b : ℤ, a ≤ b → Epi (fieldEvaluation k (ℙ(ι; Spec (.of k)) ↘ Spec (.of k)) (F ⊗ₘ twist ι (Spec (.of k)) b))) ∧ (∀ b : ℤ, a ≤ b → Function.Surjective (regularityMultiplication ι k F b))",
+  "branch": "sheaf-dag",
+  "by": "NM",
+  "date": "2026-10-22",
+  "existing": false,
+  "note": "Coherence in hF is rendered by the existing AlgebraicGeometry.RingedSpace.IsCoherent from the public import WeilConjectures.AlgebraicGeometry.Coherent: finite type and finite-type kernels of all finite-free maps on every open, exactly Stacks Tag 01BV and the coherent clause of pqf-def-coherent. The landed Q25 record for pqf-def-coherent (Sheaf.AlgebraicGeometry.CoherentFiniteType / IsQuasiCoherentFiniteType) is retained without rebinding; it supplies quasi-coherence plus finite type, rather than the general 01BV predicate used here. This consumer reuses the existing upstream definition, with no duplicate definition or strengthened hypothesis. The dependency-record discrepancy is left to the maintainer, as requested in the return of immutable head 289c855f62db. Maintenance 2026-10-24: fieldSections moved verbatim to Sheaf.AlgebraicGeometry.FieldGlobalSections, owned by def-sfb-field-global-sections; this module publicly re-exports it. Its theorem and remaining declarations are unchanged. This extraction resolves the H2 return of N7 head 0e5b17a239f5 without inventing a theorem prerequisite."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-3ca52a490",
+  "group": "NM",
+  "result": "pass",
+  "note": "Re-delivery after H13/H2 RETURN of 289c855f: pqf-def-coherent dep file dropped (snapshot record = live Q25 CoherentFiniteType/IsQuasiCoherentFiniteType; only lean_audit metadata differs); item node differs from live only in lean, with lean.note explaining the upstream RingedSpace.IsCoherent (Stacks 01BV, docstring blueprint pqf-def-coherent) rendering; Lean module byte-identical to the previously fully-checked head; lean.statement verbatim. Clauses re-checked: a-regularity over 1<=j<=n with int cast, b-regularity for b>=a, H^j(F(d))=0 for all j>0 and d>=a, Epi of the canonical tilde/pullback-pushforward counit evaluation, surjectivity of the restrictScalars-mu, tensorSectionsMap, associator, twistTensorIso multiplication; no hollow defs, sorry only, 9-step docstring, all 13 imports exist; n=0, F=0, finite fields and negative a covered. No compile run (no file changed; report gives clean 8.5/10.3 s scompile and a passing dry run). Advisory: twistTensorIso has no owning record; maintainer note: live pqf-def-coherent record is weaker than 01BV."
+ }
+}

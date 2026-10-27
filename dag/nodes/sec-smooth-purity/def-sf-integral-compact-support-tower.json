@@ -1,0 +1,106 @@
+{
+ "id": "def-sf-integral-compact-support-tower",
+ "kind": "definition",
+ "title": "The specified integral compact-support inverse system",
+ "source": {
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Definition 6.7.6 and its coefficient-reduction construction; Stacks Project, Tags 03DI, 0D6E and 0E8I."
+ },
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.SfIntegralCompactSupportConstructible",
+  "date": "2026-10-25",
+  "group": "E3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "def-weil-integral-rational-qbar-compact-support",
+   "place": "Statement, integral construction: the derived limit of the finite compact-support images, with the specified coefficient quotient transitions.",
+   "via": [
+    "lem-sf-integral-compact-support-constructible"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-def-sf-operations",
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Extension by zero for sheaves of modules commutes with restriction of scalar coefficients",
+   "results": "8 hits: SheafOfModules.restrictScalars and restrictScalars_obj_val; PresheafOfModules.restrictScalarsObj; ordinary module scalar adjunctions and linear-map zero lemmas. None compares the two pro-etale open models or the completed quotient towers.",
+   "date": "2026-10-25",
+   "verdict": "no specialized match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"leftAdjointUniq\"",
+   "results": "12 generic adjunction uniqueness identities, including leftAdjointUniq, unit_leftAdjointUniq_hom_app and transitivity. These supply the finite-adjunction step, not its pro-etale scalar and site identifications.",
+   "date": "2026-10-25",
+   "verdict": "generic tools only"
+  },
+  {
+   "tool": "grep",
+   "query": "compactSupport.*[Tt]ower|finiteExtension.*sfIntrinsic",
+   "results": "msearch grep returned 0 hits. Local source search found the existing specified tower definitions and CompactSupportProperImageTower; its systems use slice extension and coefficientProEtaleModuleDirectImage, rather than the intrinsic consumer definitions.",
+   "date": "2026-10-25",
+   "verdict": "reuse the existing definitions; no presentation comparison"
+  }
+ ],
+ "mathlib_match": null,
+ "statement": "Fix a coefficient prime l, a finite extension E of Q_l, schemes X,Y, a morphism f:X→Y and a compactification c=(j,p). Use the actual completed coefficient sheaf and its finite quotient projections [def-weil-completed-integral-coefficients], derived scalar extension and restriction [lem-weil-derived-scalar-extension-restriction-adjunction], and the fixed finite compact-support candidate [def-weil-compact-support-candidate]. For an arbitrary completed-coefficient complex K define the nth term to be Res_n Rp_{*,n} j_{!,n}(K tensor^L A_{n+1}). Its adjacent transition is Res_{n+1} applied to compact support of the scalar-extension adjunct of the lower reduction unit, followed by the specified compact-support scalar comparison [lem-sf-compact-support-restriction-of-scalars] and the canonical restriction associator. The latter uses equality of successive completed quotient projections. This extracts the existing definitions, with names, signatures, bodies and all transitions unchanged, from lem-sf-integral-compact-support-constructible.",
+ "stmt_deps": [
+  "def-weil-completed-integral-coefficients",
+  "lem-weil-derived-scalar-extension-restriction-adjunction",
+  "def-weil-compact-support-candidate",
+  "lem-sf-compact-support-restriction-of-scalars",
+  "def-weil-compactifications-refinements"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "lean": {
+  "module": "Sheaf.Paper.SfIntegralCompactSupportTower",
+  "file": "lean/Sheaf/Paper/SfIntegralCompactSupportTower.lean",
+  "declaration": "WeilConjectures.sfCompactSupportTerm",
+  "statement": "def sfCompactSupportTerm (K : DerivedCategory (scalarReductionSource.{u, u} l E X)) (n : ℕ) : DerivedCategory (scalarReductionSource.{u, u} l E Y)",
+  "branch": "sheaf-dag",
+  "by": "E3",
+  "date": "2026-10-25",
+  "existing": false,
+  "declarations": [
+   "WeilConjectures.sfCompactSupportCoefficientFinite",
+   "WeilConjectures.sfCompactSupportFiniteRestriction",
+   "WeilConjectures.sfCompactSupportFiniteRestrictionLimits",
+   "WeilConjectures.sfCompactSupportFiniteRestrictionColimits",
+   "WeilConjectures.sfCompactSupportRestrictionComp",
+   "WeilConjectures.sfCompactSupportDerivedRestrictionComp",
+   "WeilConjectures.sfCompactSupportReductionTransition",
+   "WeilConjectures.sfCompactSupportTerm",
+   "WeilConjectures.sfCompactSupportTransition",
+   "WeilConjectures.sfCompactSupportProjection_transition"
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-c744e",
+  "group": "E3",
+  "result": "fix",
+  "landing": "20261025T011011-L-3633664",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-c744e",
+  "group": "E3",
+  "result": "fix",
+  "landing": "20261025T011011-L-3633664",
+  "kind": "interface",
+  "note": "independent cc review: item node lem-sf-integral-compact-support-constructible + new nodes def-sf-integral-compact-support-tower / lem-sf-compact-support-slice-intrinsic-towers against the three delivered modules, the clone's CompactSupportProperImageTower / IntegralOpenReductionComparison / SfDerivedDirectImage definitions, and the change record; 18/20 direct importers compiled against the delivered modules"
+ }
+}

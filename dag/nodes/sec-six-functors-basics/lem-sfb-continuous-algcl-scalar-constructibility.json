@@ -1,0 +1,342 @@
+{
+ "id": "lem-sfb-continuous-algcl-scalar-constructibility",
+ "kind": "statement",
+ "title": "Continuous algebraic-closure scalar extension preserves constructibility and cohomological bounds",
+ "statement": "Fix a prime $\\ell$, a field $k$ of characteristic $p>0$ with $p\\ne\\ell$, and an algebraic closure $\\Omega/\\mathbf Q_\\ell$ with its extended $\\ell$-adic norm topology [def-weil-l-adic-numbers, def-weil-algebraic-closure]. All schemes are separated of finite type over $k$ [sk-def-sfb-dc-setting]. On profinite sets put $B(P)=C(P,\\Omega)$, using all continuous maps, and, for each finite intermediate field $\\mathbf Q_\\ell\\subseteq E\\subseteq\\Omega$, put $A_E(P)=C(P,E)$ with the restricted norm topology [def-sfb-continuous-map-condensed-ring]. For a scheme $Y$ put $B_Y=p_Y^*B$ and $A_{E,Y}=p_Y^*A_E$ [sk-def-sfb-pulled-back-coefficients]. The map $A_{E,Y}\\to B_Y$ is induced by postcomposition with $E\\hookrightarrow\\Omega$ [def-sfb-continuous-map-condensed-ring-map]. Use the ordinary unbounded derived categories of internal module objects [sk-def-sfb-module-objects, sk-def-sfb-derived-categories], and derived scalar extension $B_Y\\otimes^L_{A_{E,Y}}-$ [sk-def-sfb-derived-extension-of-scalars]. A module is constructible when it has finite constant local models on a finite constructible locally closed scheme stratification [sk-def-sfb-constructible, det-def-sfb-constructible-local-model, def-constructible-stratification]; $\\mathcal B_E(Y)$ and $\\mathcal B_B(Y)$ denote complexes with bounded constructible cohomology for $A_E$ and $B$, respectively.\n\nLet $T$ be such a scheme, fix a finite intermediate field $E$, and let $M\\in\\mathcal B_E(T)$. Let $r\\le s$ be integers such that $H^q(M)=0$ for $q\\notin[r,s]$. Then\n$$B_T\\otimes^L_{A_{E,T}}M\\in\\mathcal B_B(T),\\qquad H^q(B_T\\otimes^L_{A_{E,T}}M)=0\\quad(q\\notin[r,s]).$$\nMore precisely, there is a finite constructible locally closed stratification $T=\\coprod_a T_a$ refining simultaneous adapted stratifications of all the cohomology modules of $M$, and for every $a$ a pro-etale cover $\\{W_{ai}\\to T_a\\}$ [def-weil-pbc-proetale-site], such that for each member there is a bounded complex $P_{ai}$ of finite-dimensional $E$-vector spaces, zero outside $[r,s]$, and isomorphisms\n$$M|_{W_{ai}}\\cong A_{E,W_{ai}}\\otimes^L_{\\underline E}\\underline{P_{ai}},\\qquad (B_T\\otimes^L_{A_{E,T}}M)|_{W_{ai}}\\cong B_{W_{ai}}\\otimes^L_{\\underline\\Omega}\\underline{(\\Omega\\otimes_E P_{ai})}.$$\nUnderlines denote discrete constant sheaves, acting by constant sections [def-weil-pbc-constant-sheaf]. Both displayed isomorphisms are in the respective ordinary module derived categories. Empty schemes, the zero complex and single-degree intervals are allowed. No flatness of $B_T$ over $A_{E,T}$ on arbitrary modules, and no completeness of $\\Omega$, is assumed.",
+ "source": {
+  "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
+  "place": "Definition 3.3 and the stable-subcategory observation following it; Definition 3.5 and Theorem 4.13. Agent-stated finite-constant-cohomology consequence, extracted from returned lem-sfb-continuous-algcl-open-finiteness step 4; the finite-field vector-space splitting gives the stated interval."
+ },
+ "stmt_deps": [
+  "def-weil-l-adic-numbers",
+  "def-weil-algebraic-closure",
+  "sk-def-sfb-dc-setting",
+  "def-sfb-continuous-map-condensed-ring",
+  "sk-def-sfb-pulled-back-coefficients",
+  "def-sfb-continuous-map-condensed-ring-map",
+  "sk-def-sfb-module-objects",
+  "sk-def-sfb-derived-categories",
+  "sk-def-sfb-derived-extension-of-scalars",
+  "sk-def-sfb-constructible",
+  "det-def-sfb-constructible-local-model",
+  "def-constructible-stratification",
+  "def-weil-pbc-constant-sheaf",
+  "def-weil-pbc-proetale-site"
+ ],
+ "proof": [
+  {
+   "text": "Work with section-ring module sheaves using [lem-pe-internal-section-tensor-comparison] and [lem-sfb-internal-section-scalar-adjunction]. These statements give exact equivalences preserving the underlying sheaves, finite sums, relative tensors, K-flat complexes and derived scalar extension. Thus the cohomology and local quasi-isomorphism calculations below give precisely the specified internal-module derived objects, rather than a different coefficient category. For inverse image use [lem-sfb-internal-module-inverse-image-comparison] and [lem-sfb-finite-upper-star-exact]. The coefficients are pulled back from the point, so inverse-image composition identifies the pulled-back ring with the coefficient ring on the source, naturally also for the map $A_E\\to B$. Consequently geometric restriction here is exact on module sheaves and commutes with cohomology. For a morphism $h$ the derived module pullback of [sk-def-sfb-module-derived-pushpull] is $L(\\operatorname{Ext}_{\\alpha_h}\\circ\\operatorname{mapMod}(h^*))$; here $\\alpha_h$ is a ring isomorphism [sk-def-sfb-coefficient-morphisms], so $\\operatorname{Ext}_{\\alpha_h}$ is an equivalence, the composite is exact, and by the exact-functor clause of [sk-def-sfb-derived-categories] the derived pullback is the termwise restriction. This applies to strata and to arbitrary members of their pro-etale covers; those members need not be finite type.",
+   "uses": [
+    "lem-pe-internal-section-tensor-comparison",
+    "lem-sfb-internal-section-scalar-adjunction",
+    "lem-sfb-internal-module-inverse-image-comparison",
+    "lem-sfb-finite-upper-star-exact",
+    "sk-def-sfb-pulled-back-coefficients",
+    "sk-def-sfb-module-derived-pushpull",
+    "sk-def-sfb-coefficient-morphisms",
+    "sk-def-sfb-derived-categories"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
+    "place": "Section 3, Remark 3.2 and Definitions 3.3, 3.5; explicit finite-free cycle-lifting argument for the cohomology-defined subcategory"
+   }
+  },
+  {
+   "text": "For each of the finitely many $q\\in[r,s]$, choose an adapted finite constructible locally closed stratification for $H^q(M)$ using [sk-def-sfb-constructible]. Refine these simultaneously using [lemma-constructible-common-refinement] repeatedly. Since a refinement is only a containment of sets, use concretely the scheme fibre products $Z\\times_TZ'$ of strata: the projection to $Z$ is an immersion by [lem-weil-pbc-immersion-base-change-lft] (1), its composite with $Z\\to T$ is an immersion by [lem-weil-pbc-proper-fp-permanence] (e), and its image is the intersection of the two images. The finitely many intersections are disjoint, locally closed and cover $T$; they are constructible since $T$ is Noetherian [lem-weil-pbc-finite-type-over-noetherian], as in [sk-def-sfb-constructible]. Each refined stratum maps to the strata it came from, so restriction to it factors through restriction to those strata, and base change of a pro-etale cover along it is a pro-etale cover [def-weil-proetale-inverse-image]. The local model of a restricted cohomology module pulls back to the same scalar model, since inverse image preserves the balanced tensor presentation, or directly its finite constant-matrix presentation in [det-def-sfb-constructible-local-model]. For each resulting stratum $T_a$, take a common refinement of its finitely many trivializing pro-etale covers using [lem-weil-pbc-site-coverings-common-refinement]. Each finitely presented scalar $E$-module is a finite-dimensional vector space: a presentation makes it finitely generated, and a maximal independent subset of finitely many generators is a basis. Thus on each cover member $V$ all $H^q(M)|_V$ are finite free $A_{E,V}$-modules, say of ranks $n_q$.",
+   "uses": [
+    "sk-def-sfb-constructible",
+    "lemma-constructible-common-refinement",
+    "det-def-sfb-constructible-local-model",
+    "lem-weil-pbc-site-coverings-common-refinement",
+    "lem-weil-pbc-immersion-base-change-lft",
+    "lem-weil-pbc-proper-fp-permanence",
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "def-weil-proetale-inverse-image"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
+    "place": "Section 3, Remark 3.2 and Definitions 3.3, 3.5; explicit finite-free cycle-lifting argument for the cohomology-defined subcategory"
+   }
+  },
+  {
+   "text": "Choose a complex $K$ representing $M|_V$ and put $Z^q=\\ker(d_K^q)$ and $H^q=Z^q/\\operatorname{im}(d_K^{q-1})$. The underlying sheaf map $Z^q\\to H^q$ is epic. In internal notation this follows from the kernel and cokernel constructions [lem-sfb-modobj-kernels, lem-sfb-modobj-cokernels]; the colimit hypothesis on tensor in the latter holds by [sk-def-sfb-sheaf-tensor]. Apply [lem-weil-pbc-site-abelian-sheaf-epi-locally-surjective] to each of the finitely many sections of $H^q(V)$ given by the chosen bases, in the finitely many degrees $[r,s]$. Refine their lifting covers simultaneously by [lem-weil-pbc-site-coverings-common-refinement]. On every resulting member $W$ there are cycles $z_{qj}\\in Z^q(W)$ mapping to all those basis sections. Since $W$ is an object of the pro-etale site of $T_a$, inverse image to $W_{\\mathrm{pro\\acute et}}$ is slice restriction on underlying abelian sheaves [lem-sfb-proetale-object-inverse-image-restriction] (the pullback of [def-sfb-finite-upper-star] is the same left Kan extension followed by sheafification), so $z_{qj}$ are global cycles of $K|_W$ and $H^q(K|_W)=H^q(K)|_W$ has the restricted basis. This is the basis-lifting proof of Stacks Tag 08FN (sites-cohomology.tex, lemma-local-lift-map), written out here rather than assuming projectivity of a free sheaf as a global object.",
+   "uses": [
+    "lem-sfb-modobj-kernels",
+    "lem-sfb-modobj-cokernels",
+    "sk-def-sfb-sheaf-tensor",
+    "lem-weil-pbc-site-abelian-sheaf-epi-locally-surjective",
+    "lem-weil-pbc-site-coverings-common-refinement",
+    "lem-sfb-proetale-object-inverse-image-restriction",
+    "def-sfb-finite-upper-star"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 08FN, lemma-local-lift-map, proof by lifting finitely many basis sections; local surjectivity is Tag 03CN with Tag 00WM"
+   }
+  },
+  {
+   "text": "On this $W$ let $P^q=E^{n_q}$ for $r\\le q\\le s$, put $P^q=0$ otherwise, and give $P$ zero differential. Extend the assignment $e_j\\mapsto z_{qj}$ $A_{E,W}$-linearly. Because each $z_{qj}$ is a cycle, these maps form a chain map $F\\to K|_W$, where $F^q=A_{E,W}^{n_q}$ and $d_F=0$. On $H^q$ its map is the chosen basis isomorphism for $q\\in[r,s]$; outside this interval both sides have zero cohomology by exact restriction and the hypothesis on $M$. Hence this chain map is a quasi-isomorphism. This constructs the local derived model, including its degree interval, rather than deducing a complex-level trivialization merely from trivial cohomology.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
+    "place": "Section 3, Remark 3.2 and Definitions 3.3, 3.5; explicit finite-free cycle-lifting argument for the cohomology-defined subcategory"
+   }
+  },
+  {
+   "text": "The complex $F$ is K-flat directly: for any acyclic complex $N$, the total tensor $N\\otimes F$ is a finite direct sum, over $r\\le q\\le s$, of shifts of $N^{\\oplus n_q}$, since $F$ has zero differential. Each is acyclic and finite sums preserve the kernels and images computing cohomology. This also proves the two-sided K-flat test by symmetry. The same argument applies to $\\underline P$ over $\\underline E$, and to $\\underline{\\Omega\\otimes_E P}$ over $\\underline\\Omega$. Therefore [sk-def-sfb-derived-extension-of-scalars] computes $A_{E,W}\\otimes^L_{\\underline E}\\underline P$ by $F$, and computes $B_W\\otimes^L_{A_{E,W}}F$ by the zero-differential complex $(B_W^{n_q})_q$. Ordinary scalar extension of a free module is free of the same rank: the balanced maps $b\\otimes(a_j)_j\\mapsto(ba_j)_j$ and $(b_j)_j\\mapsto\\sum_j b_j\\otimes e_j$ are inverse. Thus no tensor-exactness assertion about arbitrary $A_{E,W}$-modules enters this computation.",
+   "uses": [
+    "sk-def-sfb-derived-extension-of-scalars"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
+    "place": "Section 3, Remark 3.2 and Definitions 3.3, 3.5; explicit finite-free cycle-lifting argument for the cohomology-defined subcategory"
+   }
+  },
+  {
+   "text": "Let $h:W\\to T$ be the composite of the stratum inclusion and the refined cover map. Apply [lem-sfb-internal-scalar-pullback-normalization] to the actual continuous coefficient map $A_E\\to B$. Its isomorphism $Lh_B^*D_{a,T}\\cong D_{a,W}Lh_{A_E}^*$ has no flatness or boundedness hypothesis. By the exact restriction established in step 1 these derived pullbacks are ordinary restrictions. Together with steps 4--5 it gives\n$$(B_T\\otimes^L_{A_{E,T}}M)|_W\\cong B_W\\otimes^L_{A_{E,W}}F\\cong(B_W^{n_q})_q.$$\nThe latter is also $B_W\\otimes^L_{\\underline\\Omega}\\underline{(\\Omega\\otimes_E P)}$, by the K-flat computation of step 5 and the basis $1\\otimes e_j$ of $\\Omega\\otimes_E E^{n_q}$. The coordinate isomorphism sends $b\\otimes(\\omega\\otimes v)$ to $b\\omega\\otimes v$; its inverse sends $b\\otimes v$ to $b\\otimes(1\\otimes v)$. These formulas respect both scalar balancing relations. This proves both requested derived isomorphisms for the same $P=P_{ai}$.",
+   "uses": [
+    "lem-sfb-internal-scalar-pullback-normalization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
+    "place": "Section 3, Remark 3.2 and Definitions 3.3, 3.5; explicit finite-free cycle-lifting argument for the cohomology-defined subcategory"
+   }
+  },
+  {
+   "text": "Write $L=B_T\\otimes^L_{A_{E,T}}M$. Exact restriction and step 6 identify $H^q(L)|_W$ with $B_W^{n_q}$ for $q\\in[r,s]$ and with zero otherwise. Vanishing of a sheaf on a cover implies vanishing: by [lem-sfb-proetale-object-inverse-image-restriction] its restriction to each member $W$ is the slice restriction, so every section restricts to zero on that cover and the separatedness clause of the sheaf condition makes the section zero. Thus on each stratum $H^q(L)$ has finite constant local models for every $q$, and vanishes outside $[r,s]$. For such an outside degree, apply [new-det-lem-coefficient-heart-common-stratification-exactness] to $0\\to H^q(L)$: on every stratum it is epic, so it is epic globally and $H^q(L)=0$. Its hypothesis holds because $T$ is a finite-type scheme over a field, hence Noetherian by [lem-weil-pbc-finite-type-over-noetherian] applied to $T\\to\\operatorname{Spec}k$ (the only ideals of a field are zero and the whole field), and the stratification is finite locally closed. Finally [sk-def-sfb-constructible] makes each $H^q(L)$ constructible and $L$ bounded constructible. Empty strata can be omitted; if $T$ is empty the same detection statement applies to the empty family. If $M=0$ all $n_q$ and all local complexes are zero; when $r=s$ the construction has a single term. No completion of $\\Omega$ or restriction on the images of continuous functions has been used.",
+   "uses": [
+    "new-det-lem-coefficient-heart-common-stratification-exactness",
+    "sk-def-sfb-constructible",
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "lem-sfb-proetale-object-inverse-image-restriction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
+    "place": "Section 3, Remark 3.2 and Definitions 3.3, 3.5; explicit finite-free cycle-lifting argument for the cohomology-defined subcategory"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-pe-internal-section-tensor-comparison",
+  "lem-sfb-internal-section-scalar-adjunction",
+  "lem-sfb-internal-module-inverse-image-comparison",
+  "lem-sfb-finite-upper-star-exact",
+  "sk-def-sfb-pulled-back-coefficients",
+  "sk-def-sfb-module-derived-pushpull",
+  "sk-def-sfb-coefficient-morphisms",
+  "sk-def-sfb-derived-categories",
+  "sk-def-sfb-constructible",
+  "lemma-constructible-common-refinement",
+  "det-def-sfb-constructible-local-model",
+  "lem-weil-pbc-site-coverings-common-refinement",
+  "lem-weil-pbc-immersion-base-change-lft",
+  "lem-weil-pbc-proper-fp-permanence",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "def-weil-proetale-inverse-image",
+  "lem-sfb-modobj-kernels",
+  "lem-sfb-modobj-cokernels",
+  "sk-def-sfb-sheaf-tensor",
+  "lem-weil-pbc-site-abelian-sheaf-epi-locally-surjective",
+  "lem-sfb-proetale-object-inverse-image-restriction",
+  "def-sfb-finite-upper-star",
+  "sk-def-sfb-derived-extension-of-scalars",
+  "lem-sfb-internal-scalar-pullback-normalization",
+  "new-det-lem-coefficient-heart-common-stratification-exactness"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
+  "place": "Section 3, Remark 3.2 and Definitions 3.3, 3.5; explicit finite-free cycle-lifting argument for the cohomology-defined subcategory"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "(Condensed|ProEtale).*(constructible|tExact)|(constructible|tExact).*(Condensed|ProEtale)",
+   "results": "0 hits: none",
+   "date": "2026-10-22",
+   "verdict": "no match: bounds in an abstract derived category, ordinary finite presentations and sheaf pullback do not state continuous-coefficient local scalar models"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived extension of continuous field sheaf coefficients preserves constructible complexes and cohomology bounds",
+   "results": "8 hits: CategoryTheory.ran_isSheaf_of_isCocontinuous; CategoryTheory.Functor.sheafPullbackConstruction.preservesFiniteLimits; LightCondensed.lanLightCondSet; CategoryTheory.Functor.sheafPullbackConstruction.instPreservesFiniteLimitsSheafSheafPullback; CategoryTheory.Functor.IsContinuous.op_comp_isSheaf_of_types; PresheafOfModules.instPreservesFiniteLimitsSheafOfModulesSheafification; ContinuousCohomology.MultiInd.complex; smoothSheafCommRing.coeFun",
+   "date": "2026-10-22",
+   "verdict": "no match: bounds in an abstract derived category, ordinary finite presentations and sheaf pullback do not state continuous-coefficient local scalar models"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"SheafOfModules\", \"homology\"",
+   "results": "0 hits: none",
+   "date": "2026-10-22",
+   "verdict": "no match: bounds in an abstract derived category, ordinary finite presentations and sheaf pullback do not state continuous-coefficient local scalar models"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Scalar extension on ringed topoi sends finite free local cohomology models to finite free cohomology in the same degrees",
+   "results": "8 hits: SheafOfModules.IsFiniteType; SheafOfModules.isFinitePresentation; SheafOfModules.IsFinitePresentation; LightCondMod.LocallyConstant.instHasSheafifyLightProfiniteCoherentTopologyModuleCat; LightCondensed.instIsGrothendieckAbelianLightCondMod; SheafOfModules.QuasicoherentData.IsFinitePresentation; Condensed.finFree; LightCondensed.free",
+   "date": "2026-10-22",
+   "verdict": "no match: bounds in an abstract derived category, ordinary finite presentations and sheaf pullback do not state continuous-coefficient local scalar models"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Bounded complexes of sheaves with locally finite free cohomology split locally and derived scalar extension preserves cohomological bounds",
+   "results": "8 hits: DerivedCategory.instIsGEObjCochainComplexIntQOfIsGE; DerivedCategory.isGE_Q_obj_iff; DerivedCategory.instIsLEObjCochainComplexIntQOfIsLE; DerivedCategory.to_singleFunctor_obj_eq_zero_of_injective; DerivedCategory.isLE_Q_obj_iff; DerivedCategory.from_singleFunctor_obj_eq_zero_of_projective; DerivedCategory.isGE_iff; DerivedCategory.isLE_iff",
+   "date": "2026-10-22",
+   "verdict": "no match: bounds in an abstract derived category, ordinary finite presentations and sheaf pullback do not state continuous-coefficient local scalar models"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-continuous-algcl-open-finiteness",
+  "date": "2026-10-22",
+  "group": "Q158"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": "det-thm-sf-ctf-stability-direct-images",
+   "place": "Proof paragraph (3), rational open-direct-image finiteness, retained all-continuous algebraic-closure scalar constructibility input; local scalar models justify the target-coefficient constructibility conclusion.",
+   "via": [
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sfb-continuous-algcl-scalar-constructibility",
+  "worker": "stage1",
+  "summary": "Explicit simultaneous finite-free cohomology trivialization, local cycle lifts, zero-differential interval models and K-flat scalar calculation; no new nodes or statement changes. Repaired missing blueprint ancestor.",
+  "blueprint": "Realizes the scalar constructibility input of direct-images paragraph (3); follows HRS Section 3 with explicit cohomological interval refinement.",
+  "tool_uses": [
+   {
+    "node": "lem-pe-internal-section-tensor-comparison",
+    "why": "Exact monoidal internal/section equivalence, used as a generic module-theory tool, not a replacement for the unit route."
+   },
+   {
+    "node": "lem-sfb-internal-section-scalar-adjunction",
+    "why": "Identification of the actual K-flat scalar functor under that equivalence."
+   },
+   {
+    "node": "lem-sfb-internal-module-inverse-image-comparison",
+    "why": "Underlying inverse-image comparison for arbitrary geometric restriction, including cover members not of finite type."
+   },
+   {
+    "node": "lem-sfb-finite-upper-star-exact",
+    "why": "Exactness of abelian inverse image for all scheme morphisms."
+   },
+   {
+    "node": "lemma-constructible-common-refinement",
+    "why": "Generic finite stratification refinement."
+   },
+   {
+    "node": "lem-weil-pbc-site-coverings-common-refinement",
+    "why": "Common refinement of finitely many covers for simultaneous basis lifts."
+   },
+   {
+    "node": "lem-sfb-modobj-kernels",
+    "why": "Kernels computed on underlying abelian sheaves."
+   },
+   {
+    "node": "lem-sfb-modobj-cokernels",
+    "why": "Cokernels computed on underlying abelian sheaves."
+   },
+   {
+    "node": "lem-weil-pbc-site-abelian-sheaf-epi-locally-surjective",
+    "why": "Local lifts of finitely many basis sections of cohomology."
+   },
+   {
+    "node": "lem-sfb-internal-scalar-pullback-normalization",
+    "why": "Actual scalar/restriction comparison without flatness."
+   },
+   {
+    "node": "new-det-lem-coefficient-heart-common-stratification-exactness",
+    "why": "Detection of vanishing on finite strata for arbitrary condensed coefficients, including all-continuous Omega."
+   },
+   {
+    "node": "lem-weil-pbc-finite-type-over-noetherian",
+    "why": "Generic finite-type Noetherianity used only to verify the finite-strata detection hypothesis."
+   },
+   {
+    "node": "lem-sfb-proetale-object-inverse-image-restriction",
+    "why": "Generic identification of inverse image along a pro-etale site object with slice restriction, used for sections and vanishing on cover members; no node of the unit gives it."
+   },
+   {
+    "node": "lem-weil-pbc-immersion-base-change-lft",
+    "why": "Mathlib leaf: base change of an immersion, for the scheme structure of refined strata."
+   },
+   {
+    "node": "lem-weil-pbc-proper-fp-permanence",
+    "why": "Mathlib leaf: composites of immersions, for the refined strata."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pe-internal-section-tensor-comparison",
+  "lem-sfb-internal-section-scalar-adjunction",
+  "lem-sfb-internal-module-inverse-image-comparison",
+  "lem-sfb-finite-upper-star-exact",
+  "lemma-constructible-common-refinement",
+  "lem-weil-pbc-site-coverings-common-refinement",
+  "lem-sfb-modobj-kernels",
+  "lem-sfb-modobj-cokernels",
+  "lem-weil-pbc-site-abelian-sheaf-epi-locally-surjective",
+  "lem-sfb-internal-scalar-pullback-normalization",
+  "new-det-lem-coefficient-heart-common-stratification-exactness",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-sfb-proetale-object-inverse-image-restriction",
+  "lem-weil-pbc-immersion-base-change-lft",
+  "lem-weil-pbc-proper-fp-permanence"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-NZ-197085c56",
+  "group": "NZ",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NZ-197085c56 (reviewer sub-agent of L); spot-checked: Read in full: the item (7 steps, 0 new nodes), every cited statement, HRS 2305.18131 §3 (Def 3.3 and the scalar-change preservation paragraph, Remark 3.2, Def 3.5), and Stacks sites-cohomology lemma-local-lift-map (Tag 08FN). The statement is unchanged from its Q158 creation, so nothing is weakened. It is true, and I tested M=0, T empty, r=s and n_q=0. The coefficient ring is all continuous maps to the norm-topology Ω, with no completeness assumption and no finite-subextension substitute. The citer open-finiteness step 3 uses exactly the statement's conclusion. No existing node duplicates or generalizes it: exact-scalar-extension assumes Ext is left exact, and the other scalar-extension nodes concern O_E→E, completed lattices, colimit-topology Ω, or the converse direction. Repaired three citation faults in fixes/dag/nodes/sec-six-functors-basics/lem-sfb-continuous-algcl-scalar-constructibility.json. (1) C3/E3, step 2: lemma-constructible-common-refinement only gives a refinement by set containment (def-constructible-refines), so the scheme structure of the fibre-product strata now cites lem-weil-pbc-immersion-base-change-lft(1) and lem-weil-pbc-proper-fp-permanence(e), plus Noetherianity for constructibility and base change of covers (def-weil-proetale-inverse-image). (2) C1, steps 3 and 7: passing between sections on a site object and pullback to its own pro-étale site now cites lem-sfb-proetale-object-inverse-image-restriction. (3) C1, step 1 (used in step 6): derived pullback equals termwise restriction now cites sk-def-sfb-module-derived-pushpull, sk-def-sfb-coefficient-morphisms (α an isomorphism) and the exact-functor clause of sk-def-sfb-derived-categories. Steps 4 and 5 (cycle-lift quasi-isomorphism, K-flatness of the zero-differential finite free complex, free scalar formula) and step 6 (the pullback/scalar normalization needs no flatness) were checked and are correct. Batch-5: lem-sfb-internal-module-inverse-image-comparison reaches def-trf-geometric-morphism and def-trf-abelian-inverse-image-presentation. Both are generic category-theory definitions, not steps of the trace-formula or Poincaré-duality proofs, so I accept the citation. The nodes I added reach neither chapter and create no cycle. Declared tool uses accepted; I added three: lem-sfb-proetale-object-inverse-image-restriction, lem-weil-pbc-immersion-base-change-lft, lem-weil-pbc-proper-fp-permanence. No SGA source is used.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.Paper.ContinuousAlgclScalarConstructibility",
+  "declaration": "AlgebraicGeometry.ProEtale.ContinuousAlgclScalar.scalar_constructibility",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.ContinuousAlgclScalar.inclusion",
+   "AlgebraicGeometry.ProEtale.ContinuousAlgclScalar.coefficientInclusion",
+   "AlgebraicGeometry.ProEtale.ContinuousAlgclScalar.coefficientInclusion_isMonHom",
+   "AlgebraicGeometry.ProEtale.ContinuousAlgclScalar.scalarInclusion",
+   "AlgebraicGeometry.ProEtale.ContinuousAlgclScalar.scalarInclusion_isMonHom",
+   "AlgebraicGeometry.ProEtale.ContinuousAlgclScalar.scalarExtension",
+   "AlgebraicGeometry.ProEtale.ContinuousAlgclScalar.constantPreservesColimits",
+   "AlgebraicGeometry.ProEtale.ContinuousAlgclScalar.constantModulesAdditive",
+   "AlgebraicGeometry.ProEtale.ContinuousAlgclScalar.scalarModel",
+   "AlgebraicGeometry.ProEtale.ContinuousAlgclScalar.scalar_constructibility"
+  ],
+  "file": "lean/Sheaf/Paper/ContinuousAlgclScalarConstructibility.lean",
+  "statement": "theorem scalar_constructibility (hNorm : ∀ x : Padic ℓ, ‖algebraMap (Padic ℓ) Ω x‖ = ‖x‖) [IsAlgClosure (Padic ℓ) Ω] [FiniteDimensional (Padic ℓ) E] (k : Type u) [Field k] (p : ℕ) [CharP k p] (hp : p.Prime) (hpℓ : p ≠ ℓ) (T : Scheme.{u}) (t : T ⟶ Spec (CommRingCat.of k)) [IsSeparated t] [LocallyOfFiniteType t] [QuasiCompact t] (M : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology T) Ab.{u + 1}) (condensedRingObj (Profinite.continuousCoefficientRingObj E) T))) (hM : constantModelBoundedConstructible (Profinite.continuousCoefficientRingObj E) T M) (r s : ℤ) (hrs : r ≤ s) (hAmplitude : ∀ q : ℤ, (q < r ∨ s < q) → IsZero ((DerivedCategory.homologyFunctor _ q).obj M)) : constantModelBoundedConstructible (Profinite.continuousCoefficientRingObj Ω) T ((scalarExtension ℓ Ω E T).obj M) ∧ (∀ q : ℤ, (q < r ∨ s < q) → IsZero ((DerivedCategory.homologyFunctor _ q).obj ((scalarExtension ℓ Ω E T).obj M))) ∧ ∃ S : Scheme.FiniteLocallyClosedStratification T, (∀ a : Fin S.n, Topology.IsConstructible (S.stratum a)) ∧ (∃ D : ℤ → Scheme.FiniteLocallyClosedStratification T, (∀ (q : ℤ) (b : Fin (D q).n), Topology.IsConstructible ((D q).stratum b)) ∧ (∀ (q : ℤ) (b : Fin (D q).n), HasFiniteConstantLocalModel (Profinite.continuousCoefficientRingObj E) ((D q).domain b) ((CondensedRing.upperStar (Profinite.continuousCoefficientRingObj E) ((D q).immersion b)).obj ((DerivedCategory.homologyFunctor _ q).obj M))) ∧ ∀ (q : ℤ) (a : Fin S.n), ∃ b : Fin (D q).n, S.stratum a ⊆ (D q).stratum b) ∧ ∀ a : Fin S.n, ∃ C : Scheme.Cover.{u} Scheme.proetalePrecoverage (S.domain a), ∀ i : C.I₀, ∃ P : CochainComplex (Mod Ab.{u + 1} (scalarRingObj (Profinite.continuousCoefficientRingObj E))) ℤ, (∀ q : ℤ, Mod.IsFree (scalarRingObj (Profinite.continuousCoefficientRingObj E)) (P.X q)) ∧ (∀ q : ℤ, (q < r ∨ s < q) → IsZero (P.X q)) ∧ Nonempty ((CondensedRing.moduleObjectDerivedPullback (Profinite.continuousCoefficientRingObj E) (C.f i ≫ S.immersion a)).obj M ≅ scalarModel (Profinite.continuousCoefficientRingObj E) (C.X i) P) ∧ Nonempty ((CondensedRing.moduleObjectDerivedPullback (Profinite.continuousCoefficientRingObj Ω) (C.f i ≫ S.immersion a)).obj ((scalarExtension ℓ Ω E T).obj M) ≅ scalarModel (Profinite.continuousCoefficientRingObj Ω) (C.X i) (((Mod.extendScalars (scalarInclusion ℓ Ω E)).mapHomologicalComplex (.up ℤ)).obj P))",
+  "branch": "sheaf-dag",
+  "by": "N9",
+  "date": "2026-10-22",
+  "existing": false,
+  "note": "The ordinary unbounded internal-module categories, finite constant local models, actual all-continuous norm-topology coefficient map, same cohomological interval, simultaneous stratification refinement, and both local derived isomorphisms for the same P. Scalar vector spaces are encoded as internal modules in Ab over the recorded scalarRingObj, with Mod.IsFree meaning finite rank. The continuousCoefficientRingObj alias is definitionally the recorded continuousMapRingObjOfUniverse at coefficient universe u; checked by scompile. Helpers only specialize the recorded canonical maps and existing structural instances; every construction has real data."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-9b420a704",
+  "group": "N9",
+  "result": "pass",
+  "note": "Clause-by-clause match of scalar_constructibility against the node: Ω NormedField+IsAlgClosure+hNorm (no completeness), E finite IntermediateField with the subtype topology, char p≠ℓ, T separated finite type over k; all-continuous coefficients with the recorded continuousMapRingObjMapOfUniverse postcomposition map pulled back by upperStarFromPoint.mapMon; hM = constantModelBoundedConstructible; same [r,s] vanishing; ∃ S (constructible FiniteLocallyClosedStratification) refining ∃ D adapted to every H^q(M) via HasFiniteConstantLocalModel∘upperStar; per-stratum proetalePrecoverage cover; per member one P with Mod.IsFree (finite rank) terms zero outside [r,s] and two derived-category isos (moduleObjectDerivedPullback vs scalarModel = derived extendScalars along scalarCoefficientHom of the termwise scalarConstant complex; B side uses extendScalars(scalarInclusion) of the same P). Edge cases (empty T, M=0, r=s, E=Q_ℓ, non-finite-type cover members) fine; universes u uniform and consistent with the citer. Node fields other than lean unchanged; lean.statement verbatim; 10 declarations present; docstrings carry source, blueprint tag and all 7 steps; only sorry is the theorem proof; helpers are real compositions/instances; no line over 100 chars. Advisory: continuousCoefficientRingObj alias, probe-checked rfl-equal (whole DerivedCategory Mod category) to the recorded continuousMapRingObjOfUniverse.{u,u} with continuousMapRingObjOfUniverseMonObj (nt_compile --json clean 1.8 s, mismatched control fails); upperStar/moduleObjectDerivedPullback owners not in stmt_deps (S2 cannot add them). Delivery compile not repeated."
+ }
+}

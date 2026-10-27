@@ -1,0 +1,352 @@
+{
+ "id": "lem-zl-finite-integral-fibre-reconstruction",
+ "kind": "statement",
+ "title": "Integral geometric-fibre reconstruction with projection-normalized restriction maps",
+ "statement": "Fix the finite-field datum $p,a,q,k_0=\\mathbf F_q,k=\\overline{\\mathbf F}_q$ [def-weil-finite-field-fiber], a prime $\\ell\\ne p$, and a finite extension $E/\\mathbf Q_\\ell$ with valuation ring $\\mathcal O_E$, uniformizer $\\varpi$, and $A_n=\\mathcal O_E/\\varpi^n$ for $n\\ge1$ [def-weil-l-adic-coefficient-extension]. Let $f:X\\to Y$ be a finite morphism of separated finite-type $k$-schemes [def-weil-finite-integral-morphism, def-weil-scheme-morphism-properties]. For a scheme $W$, write $R_W=\\varprojlim_n(A_n)_W$ on the small pro-etale site $W_{\\mathrm{proet}}$ [def-weil-completed-integral-coefficients, def-weil-pbc-proetale-site]. Use $D^b_c(W,\\mathcal O_E)$ of [def-weil-derived-complete-integral-detailed], the strict derived reductions $K_n=K\\otimes^L_{R_W}(A_n)_W$, and exact restriction of scalars $\\operatorname{Res}_n$ [def-pur-integral-derived-operations]. Let $Rf_*$ be the tower direct image of [def-weil-derived-direct-image].\n\nFor a geometric point $y:s=\\operatorname{Spec}k\\to Y$ [def-weil-geometric-point], set $S=X\\times_Ys$ with projections $v:S\\to X$, $h:S\\to s$ [def-pc-base-change], and $P_y=\\{x:s\\to X\\mid fx=y\\}$. For $x\\in P_y$ let $i_x:s\\to S$ be the unique lift, so $vi_x=x$ and $hi_x=\\operatorname{id}_s$. This is a finite set; an empty sum indexed by $P_y$ is the zero object. Write $L(-)^*$ for the completed integral pullback of [def-pur-integral-derived-operations], and $(-)_n^*$ for its exact finite-coefficient inverse image.\n\nFor every $K\\in D^b_c(X,\\mathcal O_E)$ the complexes $Rf_*K$ and $Lv^*K$ are integral constructible, and the canonical finite-reduction comparisons are isomorphisms of derived coefficient systems, including their transition maps:\n$$\\mathcal R_Y(Rf_*K)\\simeq(f_{*,n}K_n)_n,\\quad\n\\mathcal R_S(Lv^*K)\\simeq(v_n^*K_n)_n,\\quad\n\\mathcal R_s(Rh_*Lv^*K)\\simeq(h_{*,n}v_n^*K_n)_n.$$\nHere $\\mathcal R_W$ sends an integral complex to its strict derived reduction system, formed on one flat-term K-flat representative. Every displayed comparison is the counit of the derived reduction/total-limit adjunction, whose component is the scalar-extension adjoint of the actual limit projection; these are comparisons of systems, rather than separately chosen level isomorphisms. Use the coefficient-system category and counit specified in [lem-coef-derived-system-evaluation-calculus].\n\nThe level exchange and counit-germ arrows\n$$b_n:y_n^*f_{*,n}K_n\\to h_{*,n}v_n^*K_n,\\qquad\nr_n:h_{*,n}v_n^*K_n\\to\\bigoplus_{x\\in P_y}x_n^*K_n,$$\nformed on strict quotients as above, induce specified natural isomorphisms in $D^b_c(s,\\mathcal O_E)$\n$$b_K:Ly^*Rf_*K\\xrightarrow{\\sim}Rh_*Lv^*K,\\qquad\nr_K:Rh_*Lv^*K\\xrightarrow{\\sim}\\bigoplus_{x\\in P_y}Lx^*K.$$\nTheir total-limit projections are the preceding level arrows under the canonical system comparisons. In the strict Roos model $R\\varprojlim C_n=\\operatorname{Cone}(1-s:\\prod_nC_n\\to\\prod_nC_n)[-1]$, the comparison\n$$R\\varprojlim_n\\bigoplus_{x\\in P_y}\\operatorname{Res}_n x_n^*K_n\\xrightarrow{\\sim}\\bigoplus_{x\\in P_y}R\\varprojlim_n\\operatorname{Res}_n x_n^*K_n$$\nis the coordinate reindexing of products, with the same $1-s$, cone differentials and projections; it is the finite biproduct comparison. The empty-index comparison is the unique isomorphism between zero objects. These assertions are made in the derived category before applying point sections; no interchange of a point inverse image with an arbitrary inverse limit is asserted.",
+ "source": {
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Bhatt–Scholze Section 3.5, Lemma 3.5.7, and Section 6.7, Lemma 6.7.2; derived reduction-system reconstruction and finite Roos biproduct comparison, returned steps 6–7."
+ },
+ "stmt_deps": [
+  "def-weil-finite-field-fiber",
+  "def-weil-l-adic-coefficient-extension",
+  "def-weil-finite-integral-morphism",
+  "def-weil-scheme-morphism-properties",
+  "def-weil-completed-integral-coefficients",
+  "def-weil-pbc-proetale-site",
+  "def-weil-derived-complete-integral-detailed",
+  "def-pur-integral-derived-operations",
+  "def-weil-derived-direct-image",
+  "def-weil-geometric-point",
+  "def-pc-base-change",
+  "lem-coef-derived-system-evaluation-calculus",
+  "def-sp-varying-ring-operations",
+  "def-sf-integral-system-reduction",
+  "def-sf-finite-system-derived-pullback",
+  "def-sf-integral-pullback-reduction-comparison",
+  "def-coef-ringed-sequence-site",
+  "def-a1-flat-term-kflat-complex",
+  "def-a1-integral-finite-pullback-tower",
+  "def-pur-integral-operation-complex-models",
+  "def-sf-strict-roos-functor",
+  "def-weil-tower-transition-endomorphism",
+  "def-sf-scalar-reduction-categories-restriction",
+  "def-weil-integral-derived-reduction",
+  "def-sf-finite-reduction-computation",
+  "def-weil-pbc-proetale-operations",
+  "def-weil-proetale-inverse-image",
+  "def-cbc-strict-constant-tower-operations"
+ ],
+ "proof": [
+  {
+   "text": "Put $F=(f_{*,n}K_n)_n$ on $Y$ and $V=(v_n^*K_n)_n$ on $S$. The finite completed-image comparison gives $Rf_*K\\in D^b_c(Y,\\mathcal O_E)$, with canonical reduction maps $(Rf_*K)_n\\to F_n$ invertible. Integral pullback preservation gives $Lv^*K\\in D^b_c(S,\\mathcal O_E)$. The coherent pullback-system comparison identifies $\\mathcal R_S(Lv^*K)$ with $V$, at every level by the scalar adjoint of the actual Roos projection. Thus this is the counit $e_V$, rather than a choice of unrelated level identifications. These results apply because $f$ is finite between the stipulated separated finite-type $k$-schemes, and $v$ is a scheme morphism with $\\ell$ invertible on both schemes.",
+   "uses": [
+    "lem-zl-finite-completed-image-comparison",
+    "lem-pur-integral-operations-preserve-constructible",
+    "lem-pod-integral-pullback-system-comparison",
+    "lem-coef-derived-system-evaluation-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Lemma 3.5.7 (reduction/limit adjunction), Lemmas 6.5.9(5), 6.5.11(3), 6.7.2; specialization to finite geometric fibres of the blueprint finite-stalk paragraph."
+   }
+  },
+  {
+   "text": "In the derived system category form the actual counit $e_F:\\mathcal R_Y\\mathcal L_YF\\to F$. The tower-direct-image definition identifies $\\mathcal L_YF=Rf_*K$. By the coefficient calculus its evaluation is the scalar adjoint of the limit projection, exactly the canonical reduction map in Step 1. Every evaluation is invertible, so the calculus makes $e_F$ invertible as a system map, including quotient transitions. This proves the first displayed system comparison. It uses conservative evaluation only to detect invertibility of an already constructed map.",
+   "uses": [
+    "lem-coef-derived-system-evaluation-calculus",
+    "def-weil-derived-direct-image",
+    "lem-zl-finite-completed-image-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Lemma 3.5.7 (reduction/limit adjunction), Lemmas 6.5.9(5), 6.5.11(3), 6.7.2; specialization to finite geometric fibres of the blueprint finite-stalk paragraph."
+   }
+  },
+  {
+   "text": "The completed-image result also applies to the finite base change $h:S\\to s$. Apply it to $Lv^*K$ from Step 1. It makes $Rh_*Lv^*K$ integral constructible and its canonical reduction counit invertible at every evaluation. By the same conservative-evaluation argument the counit is invertible as a system map. Compose it with $h_{*,\\bullet}(e_V)$, using the coherent comparison of Step 1. The result identifies $\\mathcal R_s(Rh_*Lv^*K)$ with $C=(h_{*,n}v_n^*K_n)_n$. Naturality of the reduction/limit counit identifies this composite with $e_C$: its component is adjoint to the actual projection to $C_n$. Thus the third comparison has the required normalization and transition maps.",
+   "uses": [
+    "lem-zl-finite-completed-image-comparison",
+    "lem-coef-derived-system-evaluation-calculus",
+    "lem-pod-integral-pullback-system-comparison",
+    "def-weil-derived-direct-image"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Lemma 3.5.7 (reduction/limit adjunction), Lemmas 6.5.9(5), 6.5.11(3), 6.7.2; specialization to finite geometric fibres of the blueprint finite-stalk paragraph."
+   }
+  },
+  {
+   "text": "Use one flat-term K-flat representative of $K$. The strict counit-restriction theorem supplies $B=(y_n^*f_{*,n}K_n)_n\\xrightarrow{b}C\\xrightarrow{r}D=(\\bigoplus_{x\\in P_y}x_n^*K_n)_n$ as actual natural derived-system maps, represented by quotient-compatible chain maps; both are levelwise quasi-isomorphisms. It also supplies finiteness of $P_y$ and the empty-fibre convention. Their restricted total limits are therefore specified natural isomorphisms. The tower pullback definition gives $Ly^*Rf_*K=\\mathcal L_s(y_\\bullet^*\\mathcal R_Y(Rf_*K))$. Applying $\\mathcal L_s y_\\bullet^*$ to $e_F$ identifies this object with $\\mathcal L_sB$. Step 3 and the direct-image definition identify $Rh_*Lv^*K$ with $\\mathcal L_sC$. Define $b_K$ by these identifications and $\\mathcal L_s(b)$. This proves the first fibre isomorphism without pulling $y^*$ through an inverse limit.",
+   "uses": [
+    "lem-zl-finite-counit-restriction-towers",
+    "def-pur-integral-derived-operations",
+    "def-weil-derived-direct-image",
+    "lem-coef-derived-system-evaluation-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Lemma 3.5.7 (reduction/limit adjunction), Lemmas 6.5.9(5), 6.5.11(3), 6.7.2; specialization to finite geometric fibres of the blueprint finite-stalk paragraph."
+   }
+  },
+  {
+   "text": "For the strict chain comparison, only existence of countable products is needed. The functor taking a tower to its product is additive by product extensionality. The proved two-coordinate formula for the actual integralOperationsRoosFunctor map (the private roosMap_coordinates helper of the ambient-operation module) and mappingCocone.id_X show that this functor is additive too. Mathlib then makes both canonical finite-biproduct comparisons invertible. The product comparison is the map alpha whose (x,n) projection is pr_n followed by the x projection. The strict tower projection commutes with 1-s by integralOperationsRoos_square; composing the Roos map with mappingCocone.fst and pr_n gives the displayed level projection. For an empty point set the target biproduct is zero by projection extensionality, the isomorphism makes the source zero, and uniqueness of maps out of zero identifies every proposed isomorphism with the specified map. Countable product exactness and the normalized derived Roos comparison are still used by the unfinished reconstruction argument, but are not needed for this strict finite-coordinate theorem.",
+   "uses": [
+    "def-sf-strict-roos-functor",
+    "lem-pur-integral-ambient-operation-models",
+    "lem-weil-proetale-countable-products-exact"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0941, lemma-derived-limit-is-ok; elementary finite-coordinate reindexing of its product/cone model."
+   }
+  },
+  {
+   "text": "Define $r_K$ as the composite $Rh_*Lv^*K\\simeq\\mathcal L_sC\\xrightarrow{\\mathcal L_s(r)}\\mathcal L_sD\\simeq\\bigoplus_x\\mathcal L_s(x_n^*K_n)_n$. The first arrow is Step 3, the middle arrow is the specified strict counit-germ map of Step 4, and the last is exactly Step 5. By the definition of completed pullback each last summand is $Lx^*K$. All arrows are invertible. The pullback-preservation theorem makes these summands integral constructible; alternatively the resulting finite sum is isomorphic to the integral constructible object $Rh_*Lv^*K$. Thus both fibre arrows lie in the full integral constructible category.",
+   "uses": [
+    "def-pur-integral-derived-operations",
+    "lem-zl-finite-counit-restriction-towers",
+    "lem-pur-integral-operations-preserve-constructible"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Lemma 3.5.7 (reduction/limit adjunction), Lemmas 6.5.9(5), 6.5.11(3), 6.7.2; specialization to finite geometric fibres of the blueprint finite-stalk paragraph."
+   }
+  },
+  {
+   "text": "Finally the total-limit projection is natural for a strict map of towers. Applied to $b$ and $r$, this gives $\\pi_n\\mathcal L_s(b)=\\operatorname{Res}_n(b_n)\\pi_n$ and $\\pi_n\\mathcal L_s(r)=\\operatorname{Res}_n(r_n)\\pi_n$. The normalized Roos comparison preserves these projections, and Step 5 preserves every $(x,n)$ coordinate. Conjugating these equations by the counit system comparisons of Steps 1–3 gives exactly the projection identities claimed for $b_K$ and $r_K$. Naturality follows from naturality of the counits, strict fibre maps, and coordinate reindexing. All constructions took place over $s$ in derived categories before taking any sections.",
+   "uses": [
+    "lem-weil-strict-roos-comparison",
+    "lem-zl-finite-counit-restriction-towers",
+    "lem-coef-derived-system-evaluation-calculus"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Lemma 3.5.7 (reduction/limit adjunction), Lemmas 6.5.9(5), 6.5.11(3), 6.7.2; specialization to finite geometric fibres of the blueprint finite-stalk paragraph."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-zl-finite-completed-image-comparison",
+  "lem-pur-integral-operations-preserve-constructible",
+  "lem-pod-integral-pullback-system-comparison",
+  "lem-coef-derived-system-evaluation-calculus",
+  "def-weil-derived-direct-image",
+  "lem-zl-finite-counit-restriction-towers",
+  "def-pur-integral-derived-operations",
+  "def-sf-strict-roos-functor",
+  "lem-pur-integral-ambient-operation-models",
+  "lem-weil-proetale-countable-products-exact",
+  "lem-weil-strict-roos-comparison"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Bhatt–Scholze Section 3.5, Lemma 3.5.7, and Section 6.7, Lemma 6.7.2; derived reduction-system reconstruction and finite Roos biproduct comparison, returned steps 6–7. Step 5 formalized by B4 using additive finite-biproduct preservation and the proved strict cone-coordinate API."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Completed integral finite direct image geometric fibre exchange and finite sum of point pullbacks from derived reduction systems",
+   "results": "[leanfinder] OK 8 hit(s); AlgebraicGeometry.instFiniteCarrierCarrierCommRingCatFiberOfIsFinite; AlgebraicGeometry.finite_appTop_of_universallyClosed; AlgebraicGeometry.Scheme.exists_hom_comp_eq_comp_of_locallyOfFiniteType; AlgebraicGeometry.Scheme.exists_hom_hom_comp_eq_comp_of_locallyOfFiniteType; AlgebraicGeometry.IsFinite.instIsIntegralHom; AlgebraicGeometry.Scheme.Pullback.Triplet.Spec_ofPointTensor_SpecTensorTo; AlgebraicGeometry.Scheme.Pullback.Triplet.SpecMap_tensorInl_fromSpecResidueField; AlgebraicGeometry.Scheme.Pullback.Triplet.Spec_map_tensorInl_fromSpecResidueField. Finite geometric fibres and abstract limits or biproducts do not give the normalized derived-system counit reconstruction of these completed fibre maps.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"lim\", \"biproduct\"",
+   "results": "[loogle] OK 12 hit(s); CategoryTheory.Limits.HasFiniteBiproducts; CategoryTheory.Limits.HasBiproductsOfShape; CategoryTheory.Limits.HasBiproduct; CategoryTheory.Limits.hasFiniteCoproducts_of_hasFiniteBiproducts; CategoryTheory.Limits.hasFiniteProducts_of_hasFiniteBiproducts; CategoryTheory.Limits.hasZeroObject_of_hasFiniteBiproducts; CategoryTheory.Limits.biproduct; CategoryTheory.Limits.hasCoproductsOfShape_of_hasBiproductsOfShape; CategoryTheory.Limits.hasProductsOfShape_of_hasBiproductsOfShape; CategoryTheory.Limits.HasFiniteBiproducts.mk; CategoryTheory.Limits.HasFiniteBiproducts.out; CategoryTheory.Limits.hasBiproductsOfShape_finite. Finite geometric fibres and abstract limits or biproducts do not give the normalized derived-system counit reconstruction of these completed fibre maps.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "derived.*limit|roos|homotopyLimit",
+   "results": "[grep] OK 5 hit(s); Mathlib/CategoryTheory/Functor/Derived/PointwiseRightDerived.lean:63; Mathlib/CategoryTheory/Functor/Derived/PointwiseLeftDerived.lean:64; Mathlib/Topology/CantorBendixson.lean:89; Mathlib/Topology/CantorBendixson.lean:91; Mathlib/Topology/CantorBendixson.lean:109. Finite geometric fibres and abstract limits or biproducts do not give the normalized derived-system counit reconstruction of these completed fibre maps.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Completed integral finite direct image geometric fibre exchange and finite sum of point pullbacks from derived reduction systems",
+   "results": "[leansearch] OK 8 hit(s); AlgebraicGeometry.Scheme.Hom.fiber; AlgebraicGeometry.instFiniteCarrierCarrierCommRingCatFiberOfIsFinite; AlgebraicGeometry.IsFinite.finite_preimage_singleton; AlgebraicGeometry.IsFinite.instSndScheme; SSet.instFinitePullback; AlgebraicGeometry.IsIntegralHom.instFstScheme; AlgebraicGeometry.IsFinite.iff_isIntegralHom_and_locallyOfFiniteType; AlgebraicGeometry.Scheme.Modules.instAdditivePullback. Finite geometric fibres and abstract limits or biproducts do not give the normalized derived-system counit reconstruction of these completed fibre maps.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Reconstruct finite geometric fibre direct image from strict quotient towers preserving limit projections",
+   "results": "[leansearch] OK 8 hit(s); CategoryTheory.GrothendieckTopology.Point.instPreservesFiniteLimitsFunctorOppositePresheafFiberOfLocallySmallOfHasFiniteLimitsOfAB5OfSize; CategoryTheory.PreGaloisCategory.FiberFunctor.instPreservesFiniteLimitsFintypeCat; ProfiniteGrp.toLimit_fun; ProfiniteGrp.isIso_toLimit; AlgebraicGeometry.instFiniteCarrierCarrierCommRingCatFiberOfIsFinite; CategoryTheory.GrothendieckTopology.Point.instPreservesFiniteLimitsSheafSheafFiberOfLocallySmallOfHasFiniteLimitsOfAB5OfSize; AlgebraicGeometry.exists_appTop_π_eq_of_isLimit; Profinite.lim. Finite geometric fibres and abstract limits or biproducts do not give the normalized derived-system counit reconstruction of these completed fibre maps.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "Roos|reconstruction|finite.*(stalk|fiber|fibre)",
+   "results": "{\"t\": \"2026-10-22T12:01:44Z\", \"tool\": \"grep\", \"query\": \"Roos|reconstruction|finite.*(stalk|fiber|fibre)\", \"sub\": \"CategoryTheory\", \"ok\": true, \"n_hits\": 9, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Galois/Examples.lean\", \"Mathlib/CategoryTheory/Galois/Examples.lean\", \"Mathlib/CategoryTheory/Galois/Basic.lean\", \"Mathlib/CategoryTheory/Monoidal/Bimon_.lean\", \"Mathlib/CategoryTheory/Sites/Point/Skyscraper.lean\", \"Mathlib/CategoryTheory/Sites/Point/Basic.lean\", \"Mathlib/CategoryTheory/Sites/Point/Basic.lean\", \"Mathlib/CategoryTheory/Sites/Point/Basic.lean\"], \"digest\": \"28f5b55db01ef3c4\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary completion of modules, affine limits of schemes and abstract biproduct maps do not state this derived sheaf-system reconstruction with normalized fibre maps"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived inverse limit of finite direct sums of geometric point pullbacks of adic sheaves",
+   "results": "{\"t\": \"2026-10-22T12:01:45Z\", \"tool\": \"leansearch\", \"query\": \"Derived inverse limit of finite direct sums of geometric point pullbacks of adic sheaves\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AdicCompletion.sumEquivOfFintype_symm_apply\", \"AdicCompletion.sumInv_comp_sum\", \"AdicCompletion.sumEquivOfFintype_apply\", \"InverseSystem.isNatEquiv_piEquivLim\", \"AdicCompletion.sumInv_apply\", \"AddCommGroup.DirectLimit\", \"AdicCompletion.sumEquivOfFintype\", \"CategoryTheory.Functor.sheafPullbackConstruction.preservesFiniteLimits\"], \"digest\": \"9ab9d9109ffaab13\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary completion of modules, affine limits of schemes and abstract biproduct maps do not state this derived sheaf-system reconstruction with normalized fibre maps"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"biproduct\", \"map\"",
+   "results": "{\"t\": \"2026-10-22T12:01:45Z\", \"tool\": \"loogle\", \"query\": \"\\\"biproduct\\\", \\\"map\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"CategoryTheory.Limits.biproduct.mapIso\", \"CategoryTheory.Limits.biproduct.map\", \"CategoryTheory.Limits.biproduct.map'\", \"CategoryTheory.Limits.biproduct.map_epi\", \"CategoryTheory.Limits.biproduct.map_mono\", \"CategoryTheory.Limits.biproduct.map_eq_map'\", \"CategoryTheory.Limits.biproduct.mapIso_hom\", \"CategoryTheory.Limits.biproduct.mapIso_inv\"], \"digest\": \"e5a429aa6b30f305\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary completion of modules, affine limits of schemes and abstract biproduct maps do not state this derived sheaf-system reconstruction with normalized fibre maps"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Completed integral finite pushforward geometric fibre reconstruction from derived coefficient systems preserving limit projections",
+   "results": "{\"t\": \"2026-10-22T12:01:55Z\", \"tool\": \"leanfinder\", \"query\": \"Completed integral finite pushforward geometric fibre reconstruction from derived coefficient systems preserving limit projections\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.exists_hom_comp_eq_comp_of_locallyOfFiniteType\", \"AlgebraicGeometry.Scheme.exists_hom_hom_comp_eq_comp_of_locallyOfFiniteType\", \"AlgebraicGeometry.exists_appTop_π_eq_of_isLimit\", \"AlgebraicGeometry.exists_app_map_eq_map_of_isLimit\", \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.exists_eq\", \"AdicCompletion.transitionMap_comp_eval_apply\", \"AlgebraicGeometry.exists_appTop_map_eq_zero_of_isLimit\", \"AlgebraicGeometry.exists_app_map_eq_zero_of_isLimit\"], \"digest\": \"b170fbeff14505c7\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary completion of modules, affine limits of schemes and abstract biproduct maps do not state this derived sheaf-system reconstruction with normalized fibre maps"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Reduction total inverse limit adjunction for normalized adic sheaf systems and finite geometric fibre base change",
+   "results": "{\"t\": \"2026-10-22T12:03:05Z\", \"tool\": \"leanfinder\", \"query\": \"Reduction total inverse limit adjunction for normalized adic sheaf systems and finite geometric fibre base change\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.exists_appTop_π_eq_of_isLimit\", \"AlgebraicGeometry.exists_app_map_eq_map_of_isLimit\", \"AlgebraicGeometry.exists_app_map_eq_zero_of_isLimit\", \"AlgebraicGeometry.exists_appTop_map_eq_zero_of_isLimit\", \"AlgebraicGeometry.Scheme.exists_hom_comp_eq_comp_of_locallyOfFiniteType\", \"AlgebraicGeometry.Scheme.exists_hom_hom_comp_eq_comp_of_locallyOfFiniteType\", \"AlgebraicGeometry.Scheme.Hom.normalizationDiagramMap\", \"AlgebraicGeometry.exists_appTop_π_eq_of_isAffine_of_isLimit\"], \"digest\": \"a5be4eb4e90ce719\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary completion of modules, affine limits of schemes and abstract biproduct maps do not state this derived sheaf-system reconstruction with normalized fibre maps"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-zl-finite-adic-direct-image",
+  "date": "2026-10-22",
+  "group": "Q03"
+ },
+ "chapter": "sec-deligne-laumon-a1",
+ "unit": "sk-thm-dl-a1-upper",
+ "blueprint": {
+  "from": {
+   "node": "lem-zl-finite-pushforward",
+   "place": "The finite geometric-stalk paragraph of lem-zl-finite-pushforward.proof.md; reconstruct the strict exchange and counit-germ towers in the completed category, realizing returned parent steps 6–7.",
+   "via": [
+    "lem-zl-finite-adic-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-zl-finite-integral-fibre-reconstruction",
+  "worker": "stage1",
+  "summary": "Reused existing finite completed-image, strict fibre-map, coherent pullback-system and coefficient-calculus nodes; gave a seven-step proof with actual counits, derived-system replacements, explicit finite Roos coordinate reindexing, and projection identities. No new nodes or statement change.",
+  "blueprint": "Finite geometric-stalk paragraph in current main-20261015 lem-zl-finite-pushforward proof; parent finite-adic-direct-image returned steps 6–7.",
+  "tool_uses": [
+   {
+    "node": "lem-pur-integral-operations-preserve-constructible",
+    "why": "Generic completed-pullback constructibility theorem; used for v and the point maps, not as a replacement of the finite-stalk route."
+   },
+   {
+    "node": "lem-pod-integral-pullback-system-comparison",
+    "why": "Generic coherent reduction of completed pullback, with actual projection-adjoint normalization; no node in this unit supplies that system comparison."
+   },
+   {
+    "node": "lem-coef-derived-system-evaluation-calculus",
+    "why": "Generic reduction/total-limit adjunction and conservative evaluation needed to construct system counits rather than infer equality from level maps."
+   },
+   {
+    "node": "lem-weil-proetale-countable-products-exact",
+    "why": "Generic exact sectionwise countable products for pro-etale module sheaves; needed for the literal termwise Roos model."
+   },
+   {
+    "node": "lem-weil-strict-roos-comparison",
+    "why": "Generic normalized functorial strict Roos model preserving total-limit projections."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pur-integral-operations-preserve-constructible",
+  "lem-pod-integral-pullback-system-comparison",
+  "lem-coef-derived-system-evaluation-calculus",
+  "lem-weil-proetale-countable-products-exact",
+  "lem-weil-strict-roos-comparison"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-NX-9a8c90edf",
+  "group": "NX",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NX-9a8c90edf (reviewer sub-agent of L); spot-checked: PASS, no fixes. Shape: one commit (report + item), no new nodes. The statement and stmt_deps are byte-identical to the Q03-created base. The base was unsplit with an empty proof, so nothing could have been shortened, and there is no repair note. The item is still unsplit in live and side-live, so the delivery is not superseded. proof_deps equals the union of the step uses, every step is under 1100 characters, there is no SGA, and there is no cycle. Q03's original steps 6–7 assigned to this item are fully carried and made more explicit: steps 1–4 for the counit tower replacement, steps 5–6 for the finite Roos reindexing. Sources read: Bhatt–Scholze Lemma 3.5.7 (π^* = reductions, π_* = R lim) and Lemma 6.7.2 (f_*K⊗R/m ≃ f_*(K⊗R/m)), plus the finite-stalk paragraph of blueprint main-20261015 lem-zl-finite-pushforward.proof. Step checks: (1) the completed-image node gives Rf_*K in D^b_c and the reduction isomorphisms; preserve-constructible(1) applies to v since ℓ is invertible over k; the pod node gives evaluations equal to the scalar adjoints of the Roos projections, so e_V is invertible. (2) e_F's evaluation is literally the reduction comparison of def-weil-derived-direct-image, and conservative evaluation detects invertibility of an already constructed map. (3) The completed-image node explicitly covers h along the k-point y; R_s(Rh_*Lv^*K) ≅ h_•V = C, and counit naturality gives e_C. (4) The counit-restriction node's statement gives the strict natural b and r, levelwise quasi-isomorphisms and finiteness of P_y; Ly^* is L_s y_•^* R_Y by definition, so no y^* is commuted with a limit. (5) The coordinate reindexing commutes with d, s, the cone and the shift; I checked it on small cases including an empty fibre. (6) The summands are Lx^*K by definition and in D^b_c by preserve-constructible. (7) The projection identities follow from the Roos node's projection compatibility and naturality. Batch-5 finding: lem-pod-integral-pullback-system-comparison (sec-poincare-duality, unit sk-lem-finite, from lem-pod-integral-pullback-composition) is generic coherent pullback/system-reduction infrastructure, cited across the zl/a1/fd/trf chapters. It is not a step of the trace formula or of Poincaré duality, so the citation is accepted. The split_report tool_uses (generic coefficient infrastructure) are accepted; the unit route goes through its own completed-image and counit-tower nodes. The imported lemma-weil-pbc-finite-stalk-formula is étale/abelian only, so it is not a duplicate."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.ZlFiniteIntegralFibreReconstruction",
+  "declaration": "WeilConjectures.ZlFibreReconstruction.finite_integral_fibre_reconstruction",
+  "declarations": [
+   "WeilConjectures.ZlFibreReconstruction.rings",
+   "WeilConjectures.ZlFibreReconstruction.transition",
+   "WeilConjectures.ZlFibreReconstruction.pull",
+   "WeilConjectures.ZlFibreReconstruction.push",
+   "WeilConjectures.ZlFibreReconstruction.image",
+   "WeilConjectures.ZlFibreReconstruction.Points",
+   "WeilConjectures.ZlFibreReconstruction.pointLift",
+   "WeilConjectures.ZlFibreReconstruction.exchange",
+   "WeilConjectures.ZlFibreReconstruction.germ",
+   "WeilConjectures.ZlFibreReconstruction.pullSystem",
+   "WeilConjectures.ZlFibreReconstruction.pullEvaluation",
+   "WeilConjectures.ZlFibreReconstruction.PullNormalization",
+   "WeilConjectures.ZlFibreReconstruction.reductionComparison",
+   "WeilConjectures.ZlFibreReconstruction.imageSystem",
+   "WeilConjectures.ZlFibreReconstruction.exchangeSource",
+   "WeilConjectures.ZlFibreReconstruction.fibreSystem",
+   "WeilConjectures.ZlFibreReconstruction.fibreComparison",
+   "WeilConjectures.ZlFibreReconstruction.exchangeComparison",
+   "WeilConjectures.ZlFibreReconstruction.limitBiproduct",
+   "WeilConjectures.ZlFibreReconstruction.restriction",
+   "WeilConjectures.ZlFibreReconstruction.complexFiniteBiproducts",
+   "WeilConjectures.ZlFibreReconstruction.towerFiniteBiproducts",
+   "WeilConjectures.ZlFibreReconstruction.pointTower",
+   "WeilConjectures.ZlFibreReconstruction.roosBiproduct",
+   "WeilConjectures.ZlFibreReconstruction.finitePushforwardModel",
+   "WeilConjectures.ZlFibreReconstruction.imageEvaluation",
+   "WeilConjectures.ZlFibreReconstruction.imageProjection",
+   "WeilConjectures.ZlFibreReconstruction.ImageNormalization",
+   "WeilConjectures.ZlFibreReconstruction.finite_integral_fibre_reconstruction",
+   "WeilConjectures.ZlFibreReconstruction.finite_integral_fibre_roos"
+  ],
+  "file": "lean/Sheaf/Paper/ZlFiniteIntegralFibreReconstruction.lean",
+  "statement": "theorem finite_integral_fibre_reconstruction (D : FiniteFieldDatum.{u}) (_hl : l ≠ D.p) (X Y : Over (Spec (.of D.k))) [LocallyOfFiniteType X.hom] [QuasiCompact X.hom] [IsSeparated X.hom] [LocallyOfFiniteType Y.hom] [QuasiCompact Y.hom] [IsSeparated Y.hom] (f : X ⟶ Y) [IsFinite f.left] (y : Spec (.of D.k) ⟶ Y.left) : Finite (Points f.left y) ∧ ∀ [Finite (Points f.left y)], ∃ (cv : ∀ K : sfIntegralConstructibleCategory l E X.left, (integralDerivedPullback l E (Limits.pullback.fst f.left y)).obj K.obj ≅ (coefficientSequenceLimit l E (Limits.pullback f.left y)).obj (pullSystem l E (Limits.pullback.fst f.left y) K.obj)) (cy : ∀ K : sfIntegralConstructibleCategory l E X.left, (integralDerivedPullback l E y).obj ((image l E f.left).obj K.obj) ≅ (coefficientSequenceLimit l E (Spec (.of D.k))).obj (pullSystem l E y ((image l E f.left).obj K.obj))) (cx : ∀ (K : sfIntegralConstructibleCategory l E X.left) (x : Points f.left y), (integralDerivedPullback l E x.val).obj K.obj ≅ (coefficientSequenceLimit l E (Spec (.of D.k))).obj (pullSystem l E x.val K.obj)) (b : ∀ K : sfIntegralConstructibleCategory l E X.left, (integralDerivedPullback l E y).obj ((image l E f.left).obj K.obj) ≅ (image l E (Limits.pullback.snd f.left y)).obj ((integralDerivedPullback l E (Limits.pullback.fst f.left y)).obj K.obj)) (r : ∀ K : sfIntegralConstructibleCategory l E X.left, (image l E (Limits.pullback.snd f.left y)).obj ((integralDerivedPullback l E (Limits.pullback.fst f.left y)).obj K.obj) ≅ ⨁ (fun x : Points f.left y ↦ (integralDerivedPullback l E x.val).obj K.obj)), (∀ K : sfIntegralConstructibleCategory l E X.left, sfIntegralConstructible l E Y.left ((image l E f.left).obj K.obj) ∧ sfIntegralConstructible l E (Limits.pullback f.left y) ((integralDerivedPullback l E (Limits.pullback.fst f.left y)).obj K.obj) ∧ sfIntegralConstructible l E (Spec (.of D.k)) ((image l E (Limits.pullback.snd f.left y)).obj ((integralDerivedPullback l E (Limits.pullback.fst f.left y)).obj K.obj))) ∧ (∀ K : sfIntegralConstructibleCategory l E X.left, ImageNormalization l E f.left K.obj ∧ ImageNormalization l E (Limits.pullback.snd f.left y) ((integralDerivedPullback l E (Limits.pullback.fst f.left y)).obj K.obj)) ∧ (∀ K : sfIntegralConstructibleCategory l E X.left, PullNormalization l E (Limits.pullback.fst f.left y) K.obj (cv K) ∧ PullNormalization l E y ((image l E f.left).obj K.obj) (cy K) ∧ ∀ x : Points f.left y, PullNormalization l E x.val K.obj (cx K x)) ∧ (∀ K : sfIntegralConstructibleCategory l E X.left, IsIso ((coefficientDerivedSystemEvaluationCalculus l E Y.left).choose.adjunction.counit.app (imageSystem l E f.left K.obj)) ∧ IsIso (reductionComparison l E (Limits.pullback.fst f.left y) K.obj (cv K)) ∧ IsIso ((coefficientDerivedSystemEvaluationCalculus l E (Spec (.of D.k))).choose.reduction.map (fibreComparison l E f.left y K.obj (cv K)) ≫ (coefficientDerivedSystemEvaluationCalculus l E (Spec (.of D.k))).choose.adjunction.counit.app (fibreSystem l E f.left y K.obj))) ∧ (∀ K : sfIntegralConstructibleCategory l E X.left, (b K).hom ≫ fibreComparison l E f.left y K.obj (cv K) = exchangeComparison l E f.left y K.obj (cy K) ≫ (coefficientSequenceLimit l E (Spec (.of D.k))).map (exchange l E f.left y ((coefficientDerivedSystemEvaluationCalculus l E X.left).choose.reduction.obj K.obj))) ∧ (∀ K : sfIntegralConstructibleCategory l E X.left, (r K).hom = fibreComparison l E f.left y K.obj (cv K) ≫ (coefficientSequenceLimit l E (Spec (.of D.k))).map (restriction l E f.left y K.obj) ≫ limitBiproduct l E (fun x : Points f.left y ↦ pullSystem l E x.val K.obj) ≫ biproduct.map (fun x : Points f.left y ↦ (cx K x).inv)) ∧ (∀ (K : sfIntegralConstructibleCategory l E X.left) (n : ℕ), (b K).hom ≫ fibreComparison l E f.left y K.obj (cv K) ≫ (coefficientSequenceProjection l E (Spec (.of D.k)) n).app (fibreSystem l E f.left y K.obj) = exchangeComparison l E f.left y K.obj (cy K) ≫ (coefficientSequenceProjection l E (Spec (.of D.k)) n).app (exchangeSource l E f.left y K.obj) ≫ (coefficientFiniteDerivedRestriction l E (Spec (.of D.k)) n).map ((coefficientSequenceDerivedEvaluation l E (Spec (.of D.k)) n).map (exchange l E f.left y ((coefficientDerivedSystemEvaluationCalculus l E X.left).choose.reduction.obj K.obj)))) ∧ (∀ (K : sfIntegralConstructibleCategory l E X.left) (x : Points f.left y) (n : ℕ), (r K).hom ≫ biproduct.π (fun z : Points f.left y ↦ (integralDerivedPullback l E z.val).obj K.obj) x ≫ (cx K x).hom ≫ (coefficientSequenceProjection l E (Spec (.of D.k)) n).app (pullSystem l E x.val K.obj) = fibreComparison l E f.left y K.obj (cv K) ≫ (coefficientSequenceProjection l E (Spec (.of D.k)) n).app (fibreSystem l E f.left y K.obj) ≫ (coefficientFiniteDerivedRestriction l E (Spec (.of D.k)) n).map ((coefficientSequenceDerivedEvaluation l E (Spec (.of D.k)) n).map (germ l E f.left y ((coefficientDerivedSystemEvaluationCalculus l E X.left).choose.reduction.obj K.obj) x))) ∧ (∀ K : sfIntegralConstructibleCategory l E X.left, IsIso (limitBiproduct l E (fun x : Points f.left y ↦ pullSystem l E x.val K.obj))) ∧ (∀ (K L : sfIntegralConstructibleCategory l E X.left) (a : K ⟶ L), (integralDerivedPullback l E y).map ((image l E f.left).map a.hom) ≫ (b L).hom = (b K).hom ≫ (image l E (Limits.pullback.snd f.left y)).map ((integralDerivedPullback l E (Limits.pullback.fst f.left y)).map a.hom)) ∧ (∀ (K L : sfIntegralConstructibleCategory l E X.left) (a : K ⟶ L), (image l E (Limits.pullback.snd f.left y)).map ((integralDerivedPullback l E (Limits.pullback.fst f.left y)).map a.hom) ≫ (r L).hom = (r K).hom ≫ biproduct.map (fun x : Points f.left y ↦ (integralDerivedPullback l E x.val).map a.hom))",
+  "branch": "newtargets-dag",
+  "by": "Q47",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "Canonical pullback reduction normalization reuses integralSystemPullbackReductionIso for every constructible input and good representative, with residue invertibility implied by ell distinct from p; Roos arrows use integralOperationsRoosFunctor.map. The system maps are normalized adjunction mates and counit germs, and image normalization preserves every recorded direct-image projection."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-a49e80935",
+  "group": "Q47",
+  "result": "pass",
+  "note": "Re-delivery after 244e RETURN H2+H4: representativeEvaluation removed; PullNormalization uses landed def-sf-integral-pullback-reduction-comparison integralSystemPullbackReductionIso (same composite as the old copy, checked on side-live IntegralPullbackSystemComparison.lean:37) + pullEvaluation.inv; its internal ∀[Invertible ℓ residue]/hK tests are inhabited (ℓ≠p prime ⇒ unit in k and all residue fields of k-schemes; K.property / concluded constructibility of Rf_*K), so no added hypothesis and no vacuity. roosBiproduct uses integralOperationsRoosFunctor.map (def-sf-strict-roos-functor). The 12 requested def owners are cited; declaration-ownership scan over side-live nodes shows no theorem-owned name left in the statement. Item differs from live only in lean+stmt_deps; lean.statement verbatim; all stmt_deps on base; item still unlanded. Maths (hypotheses, Finite P_y, counit IsIso, pinned b/r with projection identities+naturality, Roos reindexing+empty case), no hollow defs, sorry-only theorems, docstrings, report sections all OK. Advisory: integralTowerModules has no declaration owner (landed practice); docstring spacing. No file changed, no compile."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B4",
+  "result": "pass",
+  "landing": "20261025T142851-L-809717",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

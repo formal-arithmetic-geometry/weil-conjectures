@@ -1,0 +1,129 @@
+{
+ "id": "lem-sfb-rational-p1-localizing-projection",
+ "kind": "lemma",
+ "title": "Invertibility of the fixed rational left projection on localizing objects",
+ "status": "split",
+ "statement": "Fix distinct primes ℓ,p, a field k of characteristic p, and c either a finite intermediate field E in the ℓ-adic algebraic closure or the closure itself. Let Λ be the selected continuous-function coefficient of [def-sfb-rational-tate-pullback-comparison]. Let X,S be separated finite-type k-schemes and f : X → S a proper k-morphism. For K in Loc(Dbc(S,Λ)) and N in Loc(Dbc(X,Λ)), the fixed left-factor projectionMap Λ f K N of [def-sfb-projective-diagonal-composition], from K tensor Rf*N to Rf*(Lf*K tensor N), is invertible. Dbc means precisely the finite-constant-model bounded category and Loc its full replete coproduct-closed triangulated closure.",
+ "stmt_deps": [
+  "def-sfb-rational-tate-pullback-comparison",
+  "def-sfb-projective-diagonal-composition",
+  "sk-def-sfb-constructible",
+  "sk-def-localizing-closure"
+ ],
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-p1-adjunction-rational/sk-prop-p1-adjunction-rational-unit-counit.proof.md",
+  "place": "Well-definedness (3), proof step 11; coefficient-unit argument in step 5"
+ },
+ "proof": [
+  {
+   "text": "For the selected coefficient, finite coefficient descent identifies finite-constant-model Dbc with bounded constructibility over the internal coefficient ring; the ctf-equals-bc theorem identifies the finite-Tor generators. Proper direct image, pullback and tensor preserve the required generators and localizing closures. Apply the already proved two-variable extension helper of the rational localizing projection formula, with its bounded projection formula input, to conclude that the native right-factor projection mate is invertible for N and K. Instantiate the helper directly with the selected coefficient, so finite E may retain its native universe and its actual continuousMapRingObj.",
+   "uses": [
+    "sk-thm-sfb-qlbar-two-colimit",
+    "det-def-localizing-closure-ctf-equals-bc",
+    "det-proper-image-localizing-proper",
+    "det-proper-base-change-unbounded-pullback",
+    "det-thm-sf-pf-field-tensor",
+    "det-thm-sf-pf-field-localizing",
+    "def-sfb-proetale-rational-localizing-projection-helpers",
+    "det-thm-sfb-proper-base-change-rational"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The native left-factor projection is the right-factor projection conjugated by braidings on S and by the direct image of the braiding on X. Both braidings and their images are isomorphisms. Unfold only the shared tensor bundle in the generic normalization statement, convert its heterogeneous equality to equality, and transport invertibility to the fixed normalized projectionMap. The proof applies to zero objects and empty schemes without any additional assumption.",
+   "uses": [
+    "def-sfb-projective-diagonal-composition",
+    "def-sfb-proetale-rational-localizing-projection-helpers",
+    "def-sfb-projective-diagonal-pullback"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "sk-thm-sfb-qlbar-two-colimit",
+  "det-def-localizing-closure-ctf-equals-bc",
+  "det-proper-image-localizing-proper",
+  "det-proper-base-change-unbounded-pullback",
+  "det-thm-sf-pf-field-tensor",
+  "det-thm-sf-pf-field-localizing",
+  "def-sfb-proetale-rational-localizing-projection-helpers",
+  "det-thm-sfb-proper-base-change-rational",
+  "def-sfb-projective-diagonal-composition",
+  "def-sfb-projective-diagonal-pullback"
+ ],
+ "proof_origin": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-p1-adjunction-rational/sk-prop-p1-adjunction-rational-unit-counit.proof.md",
+  "place": "Well-definedness (3), proof step 11; coefficient-unit argument in step 5"
+ },
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "proper rational localizing projection formula Tate line counit is isomorphism",
+   "results": "8 hits; localization_unit_isIso', localization_unit_isIso, AlgebraicGeometry.ProjectiveSpectrum.Proj.isIso_toSpec, AlgebraicGeometry.projIsoSpecTopComponent, AlgebraicGeometry.projIsoSpec",
+   "date": "2026-10-27",
+   "verdict": "No direct theorem for the fixed rational counit. Use existing internal-module projection and constructibility interfaces."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.IsIso",
+   "results": "12 hits; CategoryTheory.IsIso, CategoryTheory.IsIso.id, CategoryTheory.Iso.isIso_hom, CategoryTheory.Iso.isIso_inv, CategoryTheory.asIso",
+   "date": "2026-10-27",
+   "verdict": "No direct theorem for the fixed rational counit. Use existing internal-module projection and constructibility interfaces."
+  },
+  {
+   "tool": "grep",
+   "query": "Tate.*[Cc]onstruct|[Cc]onstruct.*Tate",
+   "results": "15 hits; Mathlib/NumberTheory/LSeries/RiemannZeta.lean, Mathlib/RingTheory/Spectrum/Prime/ChevalleyComplexity.lean, Mathlib/RingTheory/Spectrum/Prime/ChevalleyComplexity.lean, Mathlib/Control/Fold.lean, Mathlib/CategoryTheory/Enriched/Limits/HasConicalLimits.lean",
+   "date": "2026-10-27",
+   "verdict": "No direct theorem for the fixed rational counit. Use existing internal-module projection and constructibility interfaces."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.RationalP1UnitCounit",
+  "date": "2026-10-27",
+  "group": "C1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-prop-p1-adjunction-rational-unit-counit",
+   "place": "proof steps 5 and 11",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-prop-p1-adjunction-rational",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.RationalP1LocalizingProjection",
+  "file": "lean/Sheaf/Paper/RationalP1LocalizingProjection.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.RationalP1.projectionMap_isIso_localizing",
+  "statement": "theorem projectionMap_isIso_localizing\n    (l : ℕ) [Fact l.Prime] (c : Option (PadicAlgCl.FiniteIntermediateField l))\n    (k : Type u) [Field k] (p : ℕ) [Fact p.Prime] [CharP k p] (hpl : p ≠ l)\n    {X S : Scheme.{u}} [X.Over (Spec (.of k))] [S.Over (Spec (.of k))]\n    [LocallyOfFiniteType (X ↘ Spec (.of k))] [QuasiCompact (X ↘ Spec (.of k))]\n    [IsSeparated (X ↘ Spec (.of k))]\n    [LocallyOfFiniteType (S ↘ Spec (.of k))] [QuasiCompact (S ↘ Spec (.of k))]\n    [IsSeparated (S ↘ Spec (.of k))]\n    (f : X ⟶ S) [f.IsOver (Spec (.of k))] [IsProper f]\n    (K : DerivedCategory (Modules (coefficient l c).X S))\n    (N : DerivedCategory (Modules (coefficient l c).X X))\n    (hK : CategoryTheory.localizingClosure\n      (constantModelBoundedConstructible (coefficient l c).X S) K)\n    (hN : CategoryTheory.localizingClosure\n      (constantModelBoundedConstructible (coefficient l c).X X) N) :\n    IsIso (projectionMap (coefficient l c).X f K N)",
+  "branch": "sheaf-dag",
+  "by": "C1",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C1",
+  "result": "pass",
+  "landing": "20261027T012815-L-2333665",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C1",
+  "result": "pass",
+  "landing": "20261027T012815-L-2333665",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

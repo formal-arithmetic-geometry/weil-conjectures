@@ -1,0 +1,131 @@
+{
+ "id": "def-sfb-semiabelian-group-space",
+ "kind": "definition",
+ "title": "Semiabelian commutative group algebraic spaces over an algebraically closed field",
+ "status": "split",
+ "import_flags": [],
+ "statement": "Let $k$ be an algebraically closed field [def-weil-field, def-weil-algebraic-closure]. For a commutative group scheme $A$ over $k$, write $h_A$ for its functor of points, valued in abelian groups with additive notation. A semiabelian group algebraic space over $k$ is an algebraic space $G$ over $\\operatorname{Spec}k$ [def-trf-algebraic-space] (an fppf sheaf [def-pc-fppf-site] on schemes over $k$) with a natural commutative group law on its functor of points [def-sfb-smooth-integral-group-space], whose structure map $G\\to\\operatorname{Spec}k$ is smooth and of finite type, tested on etale scheme charts, and separated, its diagonal being representable by closed immersions [def-sfb-space-morphism-properties], and which admits an exact fppf extension $0\\to T\\xrightarrow{i}G\\xrightarrow{q}h_A\\to0$, where $A$ is an abelian variety [def-sc-abelian-variety] and $T=M_{\\operatorname{Spec}k,r}$ is the rank-$r$ split units functor of [def-sfb-relative-torus] for some $r\\in\\mathbf N$. Here $i,q$ are natural group homomorphisms, $i$ is injective on every test scheme, its image equals the kernel of $q$ on every test scheme, and sections of $h_A$ lift fppf locally through $q$. Rank zero is allowed. Its additive functor of points is $G$ with this group law, valued in abelian groups; homomorphisms of semiabelian group spaces are the natural transformations of these functors, i.e. the morphisms of algebraic spaces preserving the group laws, with pointwise addition. All test schemes and section values use the common scheme universe.",
+ "stmt_deps": [
+  "def-weil-field",
+  "def-weil-algebraic-closure",
+  "def-trf-algebraic-space",
+  "def-pc-fppf-site",
+  "def-sfb-smooth-integral-group-space",
+  "def-sfb-space-morphism-properties",
+  "def-sc-abelian-variety",
+  "def-sfb-relative-torus"
+ ],
+ "source": {
+  "document": "literature/deligne-le-lemme-de-gabber_Asterisque-127-1985.pdf",
+  "place": "Section 1.1, printed p.131, specialized to an algebraically closed field; the split torus units convention is Stacks 022U and Milne Algebraic Groups Section 12."
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Semiabelian algebraic space as a smooth separated finite type fppf sheaf of commutative groups extension of abelian variety by split torus",
+   "results": "{\"t\": \"2026-10-24T08:58:39Z\", \"tool\": \"leansearch\", \"query\": \"Semiabelian algebraic space as a smooth separated finite type fppf sheaf of commutative groups extension of abelian variety by split torus\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"smoothSheafCommGroup\", \"smoothPresheafCommGroup\", \"AlgebraicGeometry.AffineSpace\", \"smoothSheafAddCommGroup\", \"AddGroupExtension\", \"LibraryNote.Design_choices_about_smooth_algebraic_structures\", \"CommGroup\", \"AlgebraicGeometry.Scheme.instIsSeparatedOfIsAffine\"], \"digest\": \"01253acde515fa4c\"}",
+   "date": "2026-10-24",
+   "verdict": "No exact match: the returned declarations do not define semiabelian group algebraic spaces or their exact fppf extensions."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Semiabelian group algebraic space exact fppf extension split torus abelian variety",
+   "results": "{\"t\": \"2026-10-24T08:58:41Z\", \"tool\": \"leanfinder\", \"query\": \"Semiabelian group algebraic space exact fppf extension split torus abelian variety\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.H1Cotangent.exact_map_δ\", \"Algebra.Generators.H1Cotangent.exact_map_δ\", \"Algebra.Generators.H1Cotangent.exact_map_δ'\", \"Algebra.Generators.CotangentSpace.exact\", \"Algebra.Generators.Cotangent.exact\", \"Algebra.Generators.H1Cotangent.exact_δ_map\", \"Algebra.H1Cotangent.exact_δ_mapBaseChange\", \"CategoryTheory.ShortComplex.exact_iff_of_hasForget\"], \"digest\": \"7019d434c25bcfa6\"}",
+   "date": "2026-10-24",
+   "verdict": "No exact match: the returned declarations do not define semiabelian group algebraic spaces or their exact fppf extensions."
+  },
+  {
+   "tool": "grep",
+   "query": "IsSemiabelian|SemiabelianGroupSpace|semiabelian|SemiAbelian",
+   "results": "{\"t\": \"2026-10-24T08:58:41Z\", \"tool\": \"grep\", \"query\": \"IsSemiabelian|SemiabelianGroupSpace|semiabelian|SemiAbelian\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "No exact match: the returned declarations do not define semiabelian group algebraic spaces or their exact fppf extensions."
+  },
+  {
+   "tool": "grep",
+   "query": "rg -l Semiabelian|SemiAbelian|semiabelian|semiAbelian lean/Sheaf lean/WeilConjectures; rg -l IsSemiabelian|SemiabelianGroupSpace dag/nodes; python3 tools/blueprint_refs.py search semiabelian",
+   "results": "No occurrence in WeilConjectures. Sheaf has HasSemiabelianGeometricFibres for group SCHEMES, plus theorems using it; no group-algebraic-space predicate. The only DAG IsSemiabelian hit is an old search query in lem-sfb-cubical-ample-norm-reflection, not a definition. 0 blueprint nodes match semiabelian. RelativeTorus supplies relativeSplitTorusFunctor, which is reused.",
+   "date": "2026-10-24",
+   "verdict": "Need the group-algebraic-space predicate; reuse the existing algebraic-space, abelian-variety and split-torus notions."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-semiabelian-hom-finite-free",
+  "date": "2026-10-24",
+  "group": "Q119"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "The semiabelian k-group algebraic spaces and their exact fppf extensions in the finite free Hom supporting lemma.",
+   "via": [
+    "lem-sfb-semiabelian-hom-finite-free",
+    "lem-sfb-stable-picard-torsion-faithfulness",
+    "lem-sfb-stable-level-versal-branch-freeness",
+    "lem-sfb-stable-abelian-level-normalization",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SemiabelianGroupSpace",
+  "declaration": "AlgebraicGeometry.SemiabelianGroupSpace",
+  "file": "lean/Sheaf/AlgebraicGeometry/SemiabelianGroupSpace.lean",
+  "statement": "structure SemiabelianGroupSpace (k : Type u) [Field k] [IsAlgClosed k]",
+  "branch": "sheaf-dag",
+  "by": "Q119",
+  "date": "2026-10-24",
+  "existing": false,
+  "declarations": [
+   "AlgebraicGeometry.commutativeGroupSchemeAdditivePoints",
+   "AlgebraicGeometry.commutativeSpaceGroupPoints",
+   "AlgebraicGeometry.IsSemiabelianGroupSpace",
+   "AlgebraicGeometry.SemiabelianGroupSpace",
+   "AlgebraicGeometry.SemiabelianGroupSpace.additivePoints"
+  ],
+  "note": "Reviewer fix (H4): the space is the landed AlgebraicSpace with the landed natural commutative group law CommutativeSpaceGroup (def-sfb-smooth-integral-group-space); smoothness, separatedness and finite type are MapIsLocally Smooth, MapIsSeparated and MapIsFiniteType (def-sfb-space-morphism-properties) of groupSpaceProjection. commutativeSpaceGroupPoints is the CommGrpCat-valued functor of points of that law (restriction maps are the space's own, homomorphisms by map_mul/map_one); SemiabelianGroupSpace.additivePoints its additive form, whose natural transformations are the group-preserving space morphisms."
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-6ea7d705d",
+  "group": "Q119",
+  "result": "fix",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-6ea7d705d",
+  "group": "Q119",
+  "result": "fix",
+  "note": "H4: delivered IsSemiabelianGroupSpace re-encodes landed notions (AddCommGrpCat functor + atlas tests instead of AlgebraicSpace.CommutativeSpaceGroup from def-sfb-smooth-integral-group-space and MapIsLocally Smooth/MapIsSeparated/MapIsFiniteType from def-sfb-space-morphism-properties). Mathematics otherwise correct: k alg. closed, split torus via relativeSplitTorusFunctor (r=0 ok), IsAbelianVariety+GrpObj, kernel/injectivity/fppf local surjectivity exactness, Hom = natural transformations with pointwise addition, finite Fin n Z-basis, End ring with f*g=g≫f and 1=𝟙; edge cases (pure torus, pure abelian, G=0, any char) covered; proof sorry; docstrings ok. Fix: new module adds commutativeSpaceGroupPoints (real functor data), predicate via landed Map* tests, bundled SemiabelianGroupSpace k + additivePoints; item takes G H : SemiabelianGroupSpace k with Hom = additivePoints ⟶ additivePoints; new node statement/stmt_deps cite the two landed defs; item lean-record updated (statement verbatim checked). nt_compile --json on both fixed files: exit 0, no errors/warnings."
+ }
+}

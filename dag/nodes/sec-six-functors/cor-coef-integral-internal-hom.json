@@ -27,10 +27,11 @@
  ],
  "proof": [
   {
-   "text": "Put $H=R\\mathcal Hom_{\\widehat R_X}(K,L)$. The integral-category definition makes $L$ derived complete. Apply [lem-coef-integral-hom-reduction]: $H$ is derived complete, and for each $n\\geq1$ the evaluation-defined comparison $H_n\\xrightarrow{\\sim}T_n=R\\mathcal Hom_{(A_n)_X}(K_n,L_n)$ is an isomorphism in $D(X_{\\mathrm{proet}},A_n)$.",
+   "text": "Put $H=R\\mathcal Hom_{\\widehat R_X}(K,L)$. The integral-category definition makes $L$ derived complete. Apply [lem-coef-integral-hom-reduction]: $H$ is derived complete, and for each $n\\geq1$ the evaluation-defined comparison $H_n\\xrightarrow{\\sim}T_n=R\\mathcal Hom_{(A_n)_X}(K_n,L_n)$ is an isomorphism in $D(X_{\\mathrm{proet}},A_n)$. In Lean, integralHomReduction supplies normalized models and preservation of legacy derived completeness. The existing normalization theorem identifies their comparison with integralHomReductionComparison; rewriting transports IsIso to the exact canonical morphism in this statement.",
    "uses": [
     "def-weil-derived-complete-integral-detailed",
-    "lem-coef-integral-hom-reduction"
+    "lem-coef-integral-hom-reduction",
+    "lem-sfb-integral-hom-comparison-normalization"
    ],
    "elementary": false,
    "source": {
@@ -39,12 +40,14 @@
    }
   },
   {
-   "text": "By [lem-kun-dimension-finite-type], $\\dim X<\\infty$; its chain-supremum definition gives an integer $d_0\\geq0$ bounding it (take $d_0=0$ if $X=\\emptyset$). The integral-category definition makes $K_1,L_1$ bounded constructible. Choose support intervals $[\\alpha,\\beta]$, $[\\gamma,\\epsilon]$, choosing any nonempty interval for a zero input. Apply [lem-coef-residue-controlled-finite-homs] with $d_0$. Every $T_n$ is bounded constructible and has cohomology supported in the same interval $[\\gamma-\\beta-2d_0,\\epsilon-\\alpha+2d_0]$. Through step 1, all $H_n$ have these properties. Together with completeness from step 1 these are precisely the defining conditions for $H\\in D^b_c(X,R)$.",
+   "text": "By [lem-kun-dimension-finite-type], $\\dim X<\\infty$; its chain-supremum definition gives an integer $d_0\\geq0$ bounding it (take $d_0=0$ if $X=\\emptyset$). The integral-category definition makes $K_1,L_1$ bounded constructible. Choose support intervals $[\\alpha,\\beta]$, $[\\gamma,\\epsilon]$, choosing any nonempty interval for a zero input. Apply [lem-coef-residue-controlled-finite-homs] with $d_0$. Every $T_n$ is bounded constructible and has cohomology supported in the same interval $[\\gamma-\\beta-2d_0,\\epsilon-\\alpha+2d_0]$. Through step 1, all $H_n$ have these properties. Together with completeness from step 1 these are precisely the defining conditions for $H\\in D^b_c(X,R)$. The intrinsic sfIntegralConstructible input predicate is obtained from the legacy one using sfDerivedComplete_iff_legacy; the reduction functors and interval conditions are definitionally the same. Finite-level constructibility is transported by proEtale_bounded_constructible_isTriangulated, and support by the cohomology functor applied to the canonical isomorphism. The endpoint inequality follows from the input inequalities and d₀ ≥ 0.",
    "uses": [
     "lem-kun-dimension-finite-type",
     "def-kun-topological-krull-dimension",
     "def-weil-derived-complete-integral-detailed",
-    "lem-coef-residue-controlled-finite-homs"
+    "lem-coef-residue-controlled-finite-homs",
+    "lem-sf-derived-complete-legacy-comparison",
+    "lem-weil-proetale-dbc-triangulated"
    ],
    "elementary": false,
    "source": {
@@ -53,11 +56,13 @@
    }
   },
   {
-   "text": "For the quantitative clause use the supplied $a,b,c,e,d$. For $n=1$ test the assumed Tor bounds of $K_1,L_1$ against $(A_1)_X$ in degree zero. The tensor-unit identification follows on a K-flat representative $P$ from the inverse chain maps $P\\otimes(A_1)_X\\to P$, $x\\otimes r\\mapsto rx$, and $x\\mapsto x\\otimes1$. Thus their residue cohomology is supported in $[a,b]$ and $[c,e]$. Apply [lem-coef-residue-controlled-finite-homs] with these intervals and $d$ to get Tor amplitude $[c-b-2d,e-a+2d]$ for every $T_n$. The isomorphism in step 1 gives the same bound for $H_n$: for any degree-zero $(A_n)_X$-module $M$, tensoring that isomorphism with $M$ identifies the tested cohomology. Bounded constructibility and support in step 2 likewise pass along an isomorphism by applying cohomology. All tests remain over $(A_n)_X$.",
+   "text": "For the quantitative clause use the supplied $a,b,c,e,d$. For $n=1$ test the assumed Tor bounds of $K_1,L_1$ against $(A_1)_X$ in degree zero. The tensor-unit identification follows on a K-flat representative $P$ from the inverse chain maps $P\\otimes(A_1)_X\\to P$, $x\\otimes r\\mapsto rx$, and $x\\mapsto x\\otimes1$. Thus their residue cohomology is supported in $[a,b]$ and $[c,e]$. Apply [lem-coef-residue-controlled-finite-homs] with these intervals and $d$ to get Tor amplitude $[c-b-2d,e-a+2d]$ for every $T_n$. The isomorphism in step 1 gives the same bound for $H_n$: for any degree-zero $(A_n)_X$-module $M$, tensoring that isomorphism with $M$ identifies the tested cohomology. Bounded constructibility and support in step 2 likewise pass along an isomorphism by applying cohomology. All tests remain over $(A_n)_X$. The tensor-unit test is implemented using a K-flat representative and its cochain right unitor. Tor amplitude itself transports by composing each representative isomorphism with the canonical Hom reduction isomorphism; the quantified K-flat tensor test is otherwise unchanged.",
    "uses": [
     "def-weil-proetale-tor-amplitude",
     "def-weil-derived-tensor",
-    "lem-coef-residue-controlled-finite-homs"
+    "lem-coef-residue-controlled-finite-homs",
+    "lem-pc-kflat-resolution",
+    "lem-weil-pbc-independent-bounded-flat-kflat"
    ],
    "elementary": false,
    "source": {
@@ -69,16 +74,21 @@
  "proof_deps": [
   "def-weil-derived-complete-integral-detailed",
   "lem-coef-integral-hom-reduction",
+  "lem-sfb-integral-hom-comparison-normalization",
   "lem-kun-dimension-finite-type",
   "def-kun-topological-krull-dimension",
   "lem-coef-residue-controlled-finite-homs",
+  "lem-sf-derived-complete-legacy-comparison",
+  "lem-weil-proetale-dbc-triangulated",
   "def-weil-proetale-tor-amplitude",
-  "def-weil-derived-tensor"
+  "def-weil-derived-tensor",
+  "lem-pc-kflat-resolution",
+  "lem-weil-pbc-independent-bounded-flat-kflat"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-tower/cor-coef-integral-internal-hom.proof.md",
-  "place": "Same residue-Tor / finite-Hom / integral-reconstruction argument, with its uniform finite-level part extracted as a statement-only node"
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-tower/cor-coef-integral-internal-hom.proof.md",
+  "place": "Existing three-step extracted proof implemented in Lean by C6; canonical comparison normalization and legacy/intrinsic completeness bridges made explicit. No new mathematical reduction."
  },
  "mathlib_searches": [
   {
@@ -146,7 +156,18 @@
   "latex:corollary"
  ],
  "proof_split_by": "paragraphs",
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
  "chapter": "sec-six-functors",
  "unit": "sk-prop-sf-biduality-general",
  "split_report": {
@@ -190,5 +211,15 @@
   "by": "NH",
   "date": "2026-10-16",
   "existing": false
+ },
+ "reviewed_proof": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C6",
+  "result": "pass",
+  "landing": "20261024T224856-L-1819482",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

@@ -1,0 +1,130 @@
+{
+ "id": "lem-pur-transport-tate-level-representation",
+ "kind": "statement",
+ "title": "Finite etale representation of one integral root level",
+ "statement": "Let $\\ell$ be prime and let $Y$ be a scheme on which $\\ell$ is invertible in every residue field. For each $n\\in\\mathbf N$, let $M_n=R_Y\\otimes_{\\mathbf Z}\\mu_{\\ell^n,Y}$ be exactly tateModuleLevel Y ell n of [def-pur-condensed-tate-twists]. There exists an object V of the small pro-etale site of Y such that its structure map to Y is finite and etale, and the universe-lifted representable set sheaf h_V is isomorphic to the underlying set sheaf of M_n. The forgetful functor takes M_n.X as an abelian sheaf and then forgets the abelian group structure. This is one level only: no transition maps, morphism of bases, normalization or inverse-limit comparison is part of the assertion.",
+ "stmt_deps": [
+  "def-pur-condensed-tate-twists",
+  "def-weil-pbc-proetale-site"
+ ],
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-an/sk-prop-sfb-cartesian-coefficients-twists.proof.md",
+  "place": "Roots of unity paragraph (relative root scheme) and Integral twist paragraph (finite-level representation), specialized to the integral coefficient Z_ell."
+ },
+ "proof": [
+  {
+   "text": "Let N=ell^n. The canonical quotient R_Y -> (Z/N)_Y makes the root sheaf an R_Y-module. Multiplication R_Y tensor_Z mu_N -> mu_N and z -> 1 tensor z are inverse. Check the identities on the primitive-root cover: there the statement is the free constant residue comparison, obtained from the coefficient quotient cokernel. The maps are canonical so the identities descend. Use the generator-normalized root comparison to pass between the two existing presentations. The underlying set sheaf of M_n is thus the root sheaf.",
+   "uses": [
+    "def-pur-condensed-tate-twists",
+    "lem-poincare-integral-residue-free-comparison",
+    "lem-poincare-compatible-primitive-roots",
+    "def-pur-transport-root-coordinates"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Over Spec Gamma(Y,O_Y), use the monic algebra Gamma(Y,O_Y)[t]/(t^N-1) and pull it back along Y.toSpecGamma. affineRoots_representability gives the natural bijection from maps into that scheme to roots on every Y-scheme. Monicity makes this a finite map, and N*t^(N-1) is a unit on the root scheme, so AdjoinRoot.etale_X_pow_sub_C makes it etale. Invertibility of ell in residue fields implies its global section is a unit, by the ringed-space unit criterion and the local residue criterion. Compose the section bijection with the preceding module/sheaf comparison and apply lifted Yoneda. For n=0 the representation is Y and the root group is zero; the construction also includes the empty scheme.",
+   "uses": [
+    "lem-asd-affine-roots-representability",
+    "def-pur-condensed-tate-twists"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pur-condensed-tate-twists",
+  "lem-poincare-integral-residue-free-comparison",
+  "lem-poincare-compatible-primitive-roots",
+  "def-pur-transport-root-coordinates",
+  "lem-asd-affine-roots-representability"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-an/sk-prop-sfb-cartesian-coefficients-twists.proof.md",
+  "place": "Roots of unity paragraph (relative root scheme) and Integral twist paragraph (finite-level representation), specialized to the integral coefficient Z_ell.",
+  "group": "Q3",
+  "date": "2026-10-26"
+ },
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "The sheaf of roots of unity over a scheme is represented by a finite etale scheme when the order is invertible",
+   "results": "8 hits: rootsOfUnity.fintype, rootsOfUnity, membership and finiteness lemmas, structureSheafInType, Scheme.Etale and Scheme.Modules. No representability statement for the free integral root level.",
+   "date": "2026-10-26",
+   "verdict": "No match."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.GrothendieckTopology.uliftYoneda",
+   "results": "12 hits, including uliftYoneda, fullyFaithfulUliftYoneda and comparison with Yoneda. These supply the representable-sheaf interface, not representability of a particular root module.",
+   "date": "2026-10-26",
+   "verdict": "Reuse generic Yoneda; no matching root theorem."
+  },
+  {
+   "tool": "grep",
+   "query": "rg -n \"rootsOfUnity|[Rr]oots.*[Rr]epresent\" Mathlib/AlgebraicGeometry; rg -n \"finiteEtale.*representation|tateModuleLevel\" lean/Sheaf; blueprint_refs.py search \"finite root representability\"",
+   "results": "No Mathlib algebraic-geometry hits and no matching imported blueprint node. Project has affineRoots_representability for the root functor and spIntegralTwistLevel_finiteEtale_representation for a different O_E diagram. Neither states this all-natural-level free Z_ell module representation.",
+   "date": "2026-10-26",
+   "verdict": "No duplicate; affineRoots_representability is a proof dependency."
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.SecSmoothPurity.TransportPull",
+  "date": "2026-10-26",
+  "group": "Q3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "sk-thm-purity-transport",
+   "place": "Canonical base-change comparison of the root-tower Tate line in f* K(d)[2d]; the finite-level representation used before taking the inverse limit.",
+   "via": [
+    "def-pur-transport-canonical-pullback"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-thm-purity-transport",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.SecSmoothPurity.TransportTateLevelRepresentation",
+  "file": "lean/Sheaf/SecSmoothPurity/TransportTateLevelRepresentation.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.PurityTransport.tateLevelRepresentation",
+  "statement": "theorem tateLevelRepresentation (Y : Scheme.{u}) (ell : ℕ) [Fact ell.Prime]\n    [∀ y : Y, Invertible (ell : Y.residueField y)] (n : ℕ) :\n    ∃ V : Y.ProEt, IsFinite V.hom ∧ Etale V.hom ∧\n      Nonempty ((ProEt.topology Y).uliftYoneda.{u + 1}.obj V ≅\n        (sheafCompose (ProEt.topology Y) (forget Ab.{u + 1})).obj\n          (tateModuleLevel Y ell n).X)",
+  "branch": "sheaf-dag",
+  "by": "Q3",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q3",
+  "result": "pass",
+  "landing": "20261026T023813-L-603504",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q3",
+  "result": "pass",
+  "landing": "20261026T023813-L-603504",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

@@ -1,0 +1,381 @@
+{
+ "id": "lem-sfb-dg-injective-resolution-localization",
+ "kind": "statement",
+ "title": "Homotopically injective DG resolutions and their localization comparison",
+ "statement": "Work in the universes of [def-weil-size-convention]. A differential graded algebra over $\\mathbf Z$ means an associative unital graded ring $A=\\bigoplus_{i\\in\\mathbf Z}A^i$ with additive differential $d:A^i\\to A^{i+1}$ satisfying $d^2=0$ and $d(ab)=d(a)b+(-1)^ia\\,d(b)$ for $a\\in A^i$. A right differential graded $A$-module is a graded right module $M$ with $d^2=0$ and $d(ma)=d(m)a+(-1)^jm\\,d(a)$ for $m\\in M^j$. Write $D(A,d)$ for the homotopy category of these modules localized at the maps inducing isomorphisms on all cohomology groups; triangles are the distinguished mapping-cone triangles. For right DG modules $X,Y$ write $\\underline{\\operatorname{Hom}}_A(X,Y)^r$ for degree-$r$ graded right $A$-linear maps, with differential $df=d_Yf-(-1)^rfd_X$. Write $K(A,d)$ for DG modules with morphisms $H^0\\underline{\\operatorname{Hom}}_A(X,Y)$; its localization functor is $Q_A:K(A,d)\\to D(A,d)$. Call $I$ homotopically injective if $\\underline{\\operatorname{Hom}}_A(C,I)$ is acyclic for every acyclic right DG $A$-module $C$. Every right DG $A$-module $Y$ admits a quasi-isomorphism $Y\\to I$ with $I$ homotopically injective. For every such $I$ and every right DG module $X$, localization induces a bijection $\\operatorname{Hom}_{K(A,d)}(X,I)\\xrightarrow{\\sim}\\operatorname{Hom}_{D(A,d)}(Q_AX,Q_AI)$. These bijections are natural in both variables. Shifts of homotopically injective modules are homotopically injective. No boundedness or flatness assumption is imposed.",
+ "source": {
+  "document": "literature/stacks-project/dga.tex",
+  "place": "Tags 09KU, lemma-right-resolution; 09KS, lemma-property-I-K-injective, applied also to all shifts; 09KY, lemma-hom-derived, part (2) and its proof, which only uses homotopical injectivity."
+ },
+ "stmt_deps": [
+  "def-weil-size-convention",
+  "def-sfb-dg-derived-category",
+  "def-sfb-dg-homotopy-structure",
+  "def-sfb-dg-bimodule-models"
+ ],
+ "proof": [
+  {
+   "text": "Set $M_0=Y$. Inductively apply [lem-sfb-dg-good-character-embedding] to $M_i$, obtaining $u_i:M_i\\hookrightarrow E_i$, and put $M_{i+1}=E_i/u_i(M_i)$. Define $f_i:E_i\\to E_{i+1}$ by quotient followed by $u_{i+1}$. Thus $0\\to Y\\to E_0\\to E_1\\to\\cdots$ is exact degree by degree. Write $E_i^{\\prime}\\subset E_i$ for the graded-split DG submodule furnished by that node; both $E_i^{\\prime}$ and $E_i/E_i^{\\prime}$ are products of shifts of $A^\\vee$. This specifies the induction base, step and all horizontal maps.",
+   "uses": [
+    "lem-sfb-dg-good-character-embedding"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/dga.tex",
+    "place": "Tag 09KU, lemma-right-resolution, first paragraph; Tag 09KT, lemma-good-sub."
+   }
+  },
+  {
+   "text": "For each $n$ put $c_n(V)=V^n/d_V(V^{n-1})$. For $0\\to M_i\\to E_i\\to M_{i+1}\\to0$, the sequence $c_n(M_i)\\to c_n(E_i)\\to c_n(M_{i+1})\\to0$ is right exact: lift an element in degree $n$; if its image is a boundary, lift a preimage in degree $n-1$ and subtract its differential. The first arrow is injective by [lem-sfb-dg-good-character-embedding]. Splicing these short exact sequences proves exactness of all augmented cokernel rows. Apply [lem-sfb-good-coresolution-product-total] to the underlying abelian-group complexes. It gives a quasi-isomorphism $Y\\to I$, where $I^n=\\prod_{i\\ge0}E_i^{n-i}$ and $(d_Ix)_i=f_{i-1}(x_{i-1})+(-1)^i d_{E_i}x_i$ (first term zero for $i=0$). Give $I$ the coordinatewise right action. The two mixed terms in $d_I^2$ cancel since $f_i$ commutes with $d$; $f_if_{i-1}=0$ kills the horizontal square. For $x\\in I^n$, the internal Leibniz term has sign $(-1)^i(-1)^{n-i}=(-1)^n$, proving the DG Leibniz rule. The augmentation $(u_0,0,\\ldots)$ is DG-linear and a chain map.",
+   "uses": [
+    "lem-sfb-dg-good-character-embedding",
+    "lem-sfb-good-coresolution-product-total"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/dga.tex",
+    "place": "Tag 09KU, product-total construction and final quasi-isomorphism argument; homology.tex Tag 09J0."
+   }
+  },
+  {
+   "text": "Define $F_{2i}I^n$ by $x_j=0$ for $j<i$, and $F_{2i+1}I^n$ by the same equations plus $x_i\\in(E_i^{\\prime})^{n-i}$. These are DG submodules: horizontal differentials only increase $j$, and $E_i^{\\prime}$ is a DG submodule. Their successive quotients are $(E_i/E_i^{\\prime})[-i]$ and $E_i^{\\prime}[-i]$. They are products of shifts of $A^\\vee$ by Step 1. The quotient transition maps split after forgetting differentials by coordinate sections and the graded splitting in [lem-sfb-dg-good-character-embedding]. Compatible finite truncations specify each coordinate exactly once, so $I\\to\\varprojlim I/F_pI$ is an isomorphism. Apply [lem-sfb-dg-complete-cofree-orthogonality] to this filtration and to each shifted filtration $F_p(I[r])=(F_pI)[r]$; shifting preserves all displayed products, splittings and quotients. For acyclic $C$ it gives $\\operatorname{Hom}_{K(A,d)}(C,I[r])=0$ for every $r$. The identity on homogeneous maps identifies $\\underline{\\operatorname{Hom}}_A(C,I[r])$ with $\\underline{\\operatorname{Hom}}_A(C,I)[r]$, including the differential $(-1)^r d$. Hence $H^r\\underline{\\operatorname{Hom}}_A(C,I)=0$ for all $r$: $I$ is homotopically injective.",
+   "uses": [
+    "lem-sfb-dg-good-character-embedding",
+    "lem-sfb-dg-complete-cofree-orthogonality"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/dga.tex",
+    "place": "Tags 09KU and 09KS; corrected odd filtration indexing in lemma-right-resolution; all-shifts application of lemma-property-I-K-injective."
+   }
+  },
+  {
+   "text": "For an arbitrary homotopically injective $J$, the definition gives $\\operatorname{Hom}_{K(A,d)}(C,J)=H^0\\underline{\\operatorname{Hom}}_A(C,J)=0$ for every acyclic $C$. By [lem-sfb-dg-homotopy-acyclic-localization], $K(A,d)$ is triangulated, its acyclic modules form a strictly full triangulated subcategory $\\mathcal E$, and its cone class $W_{\\mathcal E}$ is exactly the quasi-isomorphisms. Thus $Q_A$ is a localization at that cone class. Apply [lem-sfb-right-orthogonal-localization-hom] to $J$, $Q_A$ and $X$. Its bijection is precisely $f\\mapsto Q_A(f)$, proving the comparison for every homotopically injective target, without requiring the filtration of Step 3.",
+   "uses": [
+    "lem-sfb-dg-homotopy-acyclic-localization",
+    "lem-sfb-right-orthogonal-localization-hom"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/dga.tex",
+    "place": "Tag 09KY, lemma-hom-derived, dual cone-and-localization argument for (2); generic right-orthogonal theorem in Mathlib/Triangulated/Orthogonal.lean:108."
+   }
+  },
+  {
+   "text": "For $a:X\\prime\\to X$ and a map $b:J\\to J\\prime$ between homotopically injective targets, functoriality gives $Q_A(bfa)=Q_A(b)Q_A(f)Q_A(a)$. This proves naturality of the comparison bijections in both variables; their inverses are natural by uniqueness. For arbitrary $J$ and $r$, the same identity of Hom complexes used in Step 3 gives $\\underline{\\operatorname{Hom}}_A(C,J[r])=\\underline{\\operatorname{Hom}}_A(C,J)[r]$. Its cohomology in degree $n$ is $H^{n+r}\\underline{\\operatorname{Hom}}_A(C,J)=0$, so every shift of $J$ is homotopically injective. Products throughout range over $i\\ge0$ and over sets of homogeneous characters, allowed by the fixed universe convention; no degree support or flatness was used.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/dga.tex",
+    "place": "Tag 09KY, canonical localization comparison; Hom-complex and shift definitions."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-dg-good-character-embedding",
+  "lem-sfb-good-coresolution-product-total",
+  "lem-sfb-dg-complete-cofree-orthogonality",
+  "lem-sfb-dg-homotopy-acyclic-localization",
+  "lem-sfb-right-orthogonal-localization-hom"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/dga.tex",
+  "place": "Tags 09KT, 09KU, 09KS and 09KY(2); the good product-total lemma is homology.tex Tag 09J0. The odd filtration index in 09KU is corrected explicitly."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "DG modules admit homotopically injective resolutions and morphisms into them in the derived category are homotopy classes",
+   "results": {
+    "t": "2026-10-24T00:36:20Z",
+    "tool": "leanfinder",
+    "query": "DG modules admit homotopically injective resolutions and morphisms into them in the derived category are homotopy classes",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "DerivedCategory.right_fac",
+     "CategoryTheory.injectiveResolutions",
+     "CategoryTheory.InjectiveResolution.descHomotopy",
+     "CategoryTheory.InjectiveResolution.extMk_hom",
+     "CategoryTheory.InjectiveResolution.iso",
+     "CategoryTheory.InjectiveResolution.rightDerivedToHomotopyCategory_app_eq",
+     "CategoryTheory.Functor.rightDerivedToHomotopyCategory",
+     "CochainComplex.IsKInjective.homotopyZero_def"
+    ],
+    "digest": "c5976237de2ad03b"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: CochainComplex.IsKInjective.Qh_map_bijective (Mathlib/Algebra/Homology/DerivedCategory/KInjective.lean:40) and ordinary injective resolutions concern complexes in an abelian category, not DG modules over an arbitrarily graded DG algebra. The required DG resolution and comparison do not follow by one-line specialization."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsKInjective\", \"bijective\"",
+   "results": {
+    "t": "2026-10-24T00:36:18Z",
+    "tool": "loogle",
+    "query": "\"IsKInjective\", \"bijective\"",
+    "sub": "",
+    "ok": true,
+    "n_hits": 3,
+    "note": "",
+    "top": [
+     "CochainComplex.HomComplex.CohomologyClass.bijective_toSmallShiftedHom_of_isKInjective",
+     "CochainComplex.IsKInjective.Qh_map_bijective",
+     "DerivedCategory.Plus.Qh_map_bijective_of_isKInjective"
+    ],
+    "digest": "0b264f7feda64dfb"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: CochainComplex.IsKInjective.Qh_map_bijective (Mathlib/Algebra/Homology/DerivedCategory/KInjective.lean:40) and ordinary injective resolutions concern complexes in an abelian category, not DG modules over an arbitrarily graded DG algebra. The required DG resolution and comparison do not follow by one-line specialization."
+  },
+  {
+   "tool": "grep",
+   "query": "IsKInjective.*(bijective|quasiIso)|DGModule|DGAlgebra",
+   "results": {
+    "t": "2026-10-24T00:36:18Z",
+    "tool": "grep",
+    "query": "IsKInjective.*(bijective|quasiIso)|DGModule|DGAlgebra",
+    "sub": "",
+    "ok": true,
+    "n_hits": 7,
+    "note": "",
+    "top": [
+     "Mathlib/Algebra/Homology/DerivedCategory/KInjective.lean",
+     "Mathlib/Algebra/Homology/DerivedCategory/KInjective.lean",
+     "Mathlib/Algebra/Homology/DerivedCategory/KInjective.lean",
+     "Mathlib/Algebra/Homology/DerivedCategory/DerivabilityStructureInjectives.lean",
+     "Mathlib/Algebra/Homology/DerivedCategory/DerivabilityStructureInjectives.lean",
+     "Mathlib/Algebra/Homology/DerivedCategory/Plus.lean",
+     "Mathlib/Algebra/Homology/DerivedCategory/Plus.lean"
+    ],
+    "digest": "41a4c84bdbe9806b"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: CochainComplex.IsKInjective.Qh_map_bijective (Mathlib/Algebra/Homology/DerivedCategory/KInjective.lean:40) and ordinary injective resolutions concern complexes in an abelian category, not DG modules over an arbitrarily graded DG algebra. The required DG resolution and comparison do not follow by one-line specialization."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Differential graded algebra module K injective resolutions unbounded",
+   "results": {
+    "t": "2026-10-24T00:36:18Z",
+    "tool": "leansearch",
+    "query": "Differential graded algebra module K injective resolutions unbounded",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "CochainComplex.cm5b.instIsStrictlyGEI",
+     "CochainComplex.IsKInjective",
+     "CategoryTheory.InjectiveResolution.of",
+     "CochainComplex.isKInjective_of_injective",
+     "CategoryTheory.InjectiveResolution.ofCocomplex",
+     "CategoryTheory.InjectiveResolution.self",
+     "CategoryTheory.InjectiveResolution.instHasInjectiveResolutions",
+     "CategoryTheory.injectiveResolutions"
+    ],
+    "digest": "07f25d3cec64b28b"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: CochainComplex.IsKInjective.Qh_map_bijective (Mathlib/Algebra/Homology/DerivedCategory/KInjective.lean:40) and ordinary injective resolutions concern complexes in an abelian category, not DG modules over an arbitrarily graded DG algebra. The required DG resolution and comparison do not follow by one-line specialization."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "DG modules have unbounded homotopically injective resolutions and localization computes maps into them",
+   "results": {
+    "t": "2026-10-24T01:21:47Z",
+    "tool": "leanfinder",
+    "query": "DG modules have unbounded homotopically injective resolutions and localization computes maps into them",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "CategoryTheory.injectiveResolutions",
+     "CategoryTheory.InjectiveResolution.rightDerivedToHomotopyCategory_app_eq",
+     "CochainComplex.IsKInjective.Qh_map_bijective",
+     "CategoryTheory.Functor.rightDerivedToHomotopyCategory",
+     "CategoryTheory.InjectiveResolution.toRightDerivedZero'",
+     "CategoryTheory.InjectiveResolution.descHomotopy",
+     "CategoryTheory.InjectiveResolution.isoRightDerivedToHomotopyCategoryObj",
+     "CategoryTheory.InjectiveResolution.descHomotopyZeroZero"
+    ],
+    "digest": "226909e59de477b4"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: KInjective.Qh_map_bijective concerns ordinary complexes in an abelian category and does not construct DG-linear resolutions over an arbitrarily graded DG algebra. Read Mathlib/Algebra/Homology/DerivedCategory/KInjective.lean:40-45 and Factorizations/CM5b.lean:35-92; no one-line specialization covers this item."
+  },
+  {
+   "tool": "grep",
+   "query": "DGModule|DGAlgebra|DifferentialGraded",
+   "results": {
+    "t": "2026-10-24T01:22:20Z",
+    "tool": "grep",
+    "query": "DGModule|DGAlgebra|DifferentialGraded",
+    "sub": "",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: KInjective.Qh_map_bijective concerns ordinary complexes in an abelian category and does not construct DG-linear resolutions over an arbitrarily graded DG algebra. Read Mathlib/Algebra/Homology/DerivedCategory/KInjective.lean:40-45 and Factorizations/CM5b.lean:35-92; no one-line specialization covers this item."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Differential graded modules injective resolutions complete cofree filtration",
+   "results": {
+    "t": "2026-10-24T01:22:20Z",
+    "tool": "leansearch",
+    "query": "Differential graded modules injective resolutions complete cofree filtration",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "CategoryTheory.InjectiveResolution.self",
+     "CategoryTheory.InjectiveResolution.ofCocomplex",
+     "CategoryTheory.injectiveResolutions",
+     "CategoryTheory.InjectiveResolution.of",
+     "CategoryTheory.InjectiveResolution.mk",
+     "CategoryTheory.InjectiveResolution.of_def",
+     "CategoryTheory.InjectiveResolution.ofCocomplex_d_0_1",
+     "CategoryTheory.InjectiveResolution.injective"
+    ],
+    "digest": "190e9d5eb8c2e761"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: KInjective.Qh_map_bijective concerns ordinary complexes in an abelian category and does not construct DG-linear resolutions over an arbitrarily graded DG algebra. Read Mathlib/Algebra/Homology/DerivedCategory/KInjective.lean:40-45 and Factorizations/CM5b.lean:35-92; no one-line specialization covers this item."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsKInjective\", \"bijective\"",
+   "results": {
+    "t": "2026-10-24T01:22:20Z",
+    "tool": "loogle",
+    "query": "\"IsKInjective\", \"bijective\"",
+    "sub": "",
+    "ok": true,
+    "n_hits": 3,
+    "note": "",
+    "top": [
+     "CochainComplex.HomComplex.CohomologyClass.bijective_toSmallShiftedHom_of_isKInjective",
+     "CochainComplex.IsKInjective.Qh_map_bijective",
+     "DerivedCategory.Plus.Qh_map_bijective_of_isKInjective"
+    ],
+    "digest": "0b264f7feda64dfb"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: KInjective.Qh_map_bijective concerns ordinary complexes in an abelian category and does not construct DG-linear resolutions over an arbitrarily graded DG algebra. Read Mathlib/Algebra/Homology/DerivedCategory/KInjective.lean:40-45 and Factorizations/CM5b.lean:35-92; no one-line specialization covers this item."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "K injective resolutions for modules over a noncommutative differential graded ring without boundedness assumptions",
+   "results": {
+    "t": "2026-10-24T01:27:02Z",
+    "tool": "leanfinder",
+    "query": "K injective resolutions for modules over a noncommutative differential graded ring without boundedness assumptions",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "CategoryTheory.InjectiveResolution.instIsKInjectiveCochainComplex",
+     "CategoryTheory.injectiveResolution",
+     "CategoryTheory.InjectiveResolution.instHasInjectiveResolutions",
+     "CategoryTheory.InjectiveResolution.ofCocomplex",
+     "CategoryTheory.InjectiveResolution",
+     "CochainComplex.cm5b.instInjectiveXIntI",
+     "CategoryTheory.HasInjectiveResolution",
+     "CategoryTheory.InjectiveResolution.injective"
+    ],
+    "digest": "d866cf2d7d111c5e"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: KInjective.Qh_map_bijective concerns ordinary complexes in an abelian category and does not construct DG-linear resolutions over an arbitrarily graded DG algebra. Read Mathlib/Algebra/Homology/DerivedCategory/KInjective.lean:40-45 and Factorizations/CM5b.lean:35-92; no one-line specialization covers this item."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-dg-bimodule-derived-adjunction",
+  "date": "2026-10-24",
+  "group": "Q59"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "Proof (3) of det-thm-sf-ctf-stability-direct-images, inherited coherent-family/Quot effectivity prerequisite: Tag 0CX8 (lemma-compute-over-affine), with its canonical maps from 0CX6 (lemma-compute-against-perfect). Supporting input: Tag 0CRW (lemma-computing-sections-as-colim), part (2) and its proof constructing hocolim E_m = Ru_*O_U; Tag 08IN (lemma-cohomology-base-change) supplies the normalized maps. The coefficient-linear version retains the commuting B-action in the same tensor and section construction. Supporting subargument: 0CRW proof, application of lemma-countable to the descended structure-sheaf image. Supporting argument in spaces-perfect Tag 0CRV, proof (2) to (1): Tag 0CRM, lemma-countable, implication (2) to (1); derived.tex Tags 090Z, definition-derived-colimit and 0CRH, remark-map-from-derived-colimit, for the legs. Supporting input for 0CRM (2) to (1): the reduction to the countable subalgebra A' by Tag 09S6, lemma-qis-equivalence. Supporting input for Tag 09S6: Tag 09LT, lemma-tensor-hom-adjoint; its derived tensor and Hom constructions and the canonical tensor/Hom shift comparisons in the preceding sections. Within Tag 09LT: Tags 09KU, lemma-right-resolution; 09KS, lemma-property-I-K-injective, applied also to all shifts; 09KY, lemma-hom-derived, part (2) and its proof, which only uses homotopical injectivity.",
+   "via": [
+    "lem-sfb-dg-bimodule-derived-adjunction",
+    "lem-sfb-dg-qis-restriction-equivalence",
+    "lem-sfb-dg-countable-compact-telescope",
+    "lem-sfb-space-countable-telescope",
+    "lem-sfb-space-etale-sections-perfect-telescope",
+    "lem-sfb-space-inverse-module-affine-base-change",
+    "lem-sfb-space-inverse-modules-near-special-fibre",
+    "lem-sfb-space-flat-proper-support-inverse-effectivity",
+    "lem-sfb-space-coherent-stack-general",
+    "lem-sfb-space-quot-representability",
+    "lem-sfb-space-hilbert-representability",
+    "lem-sfb-space-hom-representability",
+    "lem-sfb-curve-descent-isom-spaces",
+    "lem-sfb-nodal-curve-stack-smooth",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-dg-injective-resolution-localization",
+  "worker": "stage1",
+  "summary": "Q21 constructs a good coresolution and its product total, checks differential-cokernel exactness and the complete dual-free filtration, then obtains the Hom comparison using the generic right-orthogonal localization theorem. Four new nodes: three statement-only inputs and one exact Mathlib leaf. No statement change, Lean writing, compiler or repository mutation. The source indexing slips are documented in report.md.",
+  "blueprint": "Realizes the inherited supporting argument under current latest det-thm-sf-ctf-stability-direct-images proof (3): DG tensor/Hom adjunction in Tag 09LT requires 09KU/09KS/09KY. The null ancestor and via chain returned by blueprint_refs.py ancestor are retained; no unit or chapter route is changed."
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q21-8fa51f267",
+  "group": "Q21",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q21-8fa51f267 (reviewer sub-agent of L); spot-checked: I read the item, all 4 new nodes, the cited lem-sfb-dg-homotopy-acyclic-localization, Stacks dga.tex 09KR/09KS/09KT/09KU/09KY/09K4/09K2 (l.2100-2700) and homology.tex 09J0. All tags match tags/tags. The statement is unchanged. Step 1: the 09KT coresolution with f_{i+1}f_i=0. Step 2: cokernel rows are exact by right exactness plus the 09KT injection. I re-derived the product total's d^2=0 and its right-module Leibniz rule; the sign agrees with the 09J0 proof. Step 3: corrected 09KU filtration, F_{2i}: x_j=0 for j<i; F_{2i+1}: also x_i in E_i'. These are DG submodules, their layers are (E_i/E_i')[-i] and E_i'[-i], they have graded sections and are complete. 09KS is applied to all shifts, and I checked by hand that Hom(C,I[r]) = Hom(C,I)[r] with differential (-1)^r d. The source slip in 09KU (repeated I_1, undefined odd term) is a genuine slip and the repair keeps the route. Step 4: W_E=Qis from the cited node, and J is right orthogonal via H^0. Mathlib rightOrthogonal.map_bijective_of_isTriangulated (Orthogonal.lean:108-121, read) is an exact leaf, the mirror of the accepted left leaf at line 124. Step 5 is elementary. On the new nodes: A^dual action, differential sign, Leibniz and the chain-map=character correspondence all check, consistent with 09K4. Small cases M=0, A=0, A=Z deg 0, a single column, and constant filtration => I=0 behave correctly. No new node restates an item clause. The duplicate search (rg -L for tags and keywords; sp-cartan-eilenberg, trf filtered-injective, cbc right-resolution) found nothing. All cited statements are in the unit or are Mathlib leaves. No SGA, no tool_uses, no fixes."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.DgInjectiveResolutionLocalization",
+  "declaration": "CategoryTheory.DgAlgebra.dg_injective_resolution_localization",
+  "file": "lean/Sheaf/CategoryTheory/DgInjectiveResolutionLocalization.lean",
+  "statement": "theorem dg_injective_resolution_localization (A : Algebra.{u}) : (∀ Y : RightModule A, ∃ (I : RightModule A) (i : Y ⟶ I), quasiIsomorphisms A i ∧ IsHomotopicallyInjective A I) ∧ (∃ L : HomotopyCategory A ⥤ Derived A, homotopyQuotient A ⋙ L = Q A ∧ ∀ (X I : RightModule A), IsHomotopicallyInjective A I → Function.Bijective (L.map : ((homotopyQuotient A).obj X ⟶ (homotopyQuotient A).obj I) → (L.obj ((homotopyQuotient A).obj X) ⟶ L.obj ((homotopyQuotient A).obj I)))) ∧ (∀ I : RightModule A, IsHomotopicallyInjective A I → ∀ (r : ℤ) (S : RightModule A), ShiftComparison A r I S → IsHomotopicallyInjective A S)",
+  "branch": "newtargets-dag",
+  "by": "Q02",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-39bdf8b90",
+  "group": "Q02",
+  "result": "pass",
+  "note": "Read node, 3 dg stmt_dep modules (DgAlgebraDerivedCategory, DgAlgebraHomotopyStructure, DgBimoduleModels), DgHomotopyAcyclicLocalization and Stacks dga.tex 09KS/09KU/09KY(2). Clauses match: resolution Y⟶I quasi-iso with IsHomotopicallyInjective (full right-linear Hom complex acyclic in every degree, δ preserves sign-free linearity); unique L with homotopyQuotient⋙L=Q (canonical Q_A), bijective on Hom into every h-injective I for all X; naturality via the single functor; shift closure for all r:ℤ via ShiftComparison. No extra instances, boundedness or flatness, single universe u. Edge cases A=0, degree-0 A, Y=0, r≤0 and zero Homs OK. Node diff = lean + 3 used stmt_deps; statement verbatim; no name clash; sorry only; docstrings with source, blueprint and 5 steps; report sections present. No compile (no change); worker scompile clean."
+ }
+}

@@ -1,0 +1,253 @@
+{
+ "id": "lem-sfb-compact-symbol-frequency-kernel",
+ "kind": "statement",
+ "title": "Frequency kernel of a compactly supported matrix symbol",
+ "statement": "Use $\\mathbf R,\\mathbf C$ [def-weil-field]. Fix integers $m\\geq1$, $p,q\\geq0$ and $r\\in\\mathbf Z$. Give $\\mathbf C^p,\\mathbf C^q$ their Euclidean norms and matrices their operator norm. Let $b:\\mathbf R^m\\times\\mathbf R^m\\to\\operatorname{Hom}_{\\mathbf C}(\\mathbf C^p,\\mathbf C^q)$ be smooth. Suppose there is one compact set $K\\subset\\mathbf R^m$ such that $b(x,\\zeta)=0$ for every $x\\notin K$ and every $\\zeta$, and for all multi-indices $\\alpha,\\beta$ there is $c_{\\alpha\\beta}<\\infty$ with $$\\|\\partial_x^\\alpha\\partial_\\zeta^\\beta b(x,\\zeta)\\|\\leq c_{\\alpha\\beta}(1+|\\zeta|)^{r-|\\beta|}\\quad(x,\\zeta\\in\\mathbf R^m).$$ Write $\\widehat b_x(\\theta,\\zeta)=\\int e^{-2\\pi i x\\cdot\\theta}b(x,\\zeta)\\,dx$. For every integer $L\\geq0$ there is $C_L<\\infty$ such that $$\\|\\widehat b_x(\\theta,\\zeta)\\|\\leq C_L(1+|\\theta|)^{-L}(1+|\\zeta|)^r.$$ If $f:\\mathbf R^m\\to\\mathbf C^p$ is Schwartz (smooth with all derivatives rapidly decreasing), put $\\widehat f(\\xi)=\\int e^{-2\\pi i y\\cdot\\xi}f(y)\\,dy$ and $$T_b f(x)=\\int e^{2\\pi i x\\cdot\\xi}b(x,2\\pi\\xi)\\widehat f(\\xi)\\,d\\xi.$$ This integral is absolutely convergent, $T_b f$ is smooth and supported in $K$, and $$\\widehat{T_b f}(\\eta)=\\int\\widehat b_x(\\eta-\\xi,2\\pi\\xi)\\widehat f(\\xi)\\,d\\xi.$$ Finally, $T_b f$ equals the distributional oscillatory integral $\\operatorname{Op}(b)f=(2\\pi)^{-m}\\int e^{i(x-y)\\cdot\\zeta}b(x,\\zeta)f(y)\\,dy\\,d\\zeta$, where oscillatory means the limit against compactly supported smooth tests after insertion of a compactly supported smooth frequency cutoff equal to one near zero and dilated to infinity.",
+ "source": {
+  "document": "literature/demailly-hodge-ams.pdf",
+  "place": "WANTED locally: Part I §3.B, Theorem 3.6, printed p.13 (PDF page 25). Agent-supplied analytic prerequisite; the source PDF could not be fetched online during this split."
+ },
+ "stmt_deps": [
+  "def-weil-field"
+ ],
+ "proof": [
+  {
+   "text": "If $p=0$ or $q=0$, the symbol and output take values in zero spaces, so every assertion holds with $C_L=0$. Assume $p,q>0$. Work entrywise in the standard bases. Each scalar entry $g(x)=b_{aj}(x,\\zeta)$ and each of its $x$-derivatives is smooth and supported in $K$: outside the closed set $K$ the function is identically zero on a neighbourhood. They are Schwartz by [lem-sfb-schwartz-test-inclusion-integrability]. Fix $L\\geq0$. Repeatedly apply the directional derivative identity in [lem-sfb-schwartz-fourier-l2-identities] in the coordinate direction $e_k$. Induction from order zero gives\n$$(2\\pi i\\theta_k)^L\\widehat g(\\theta)=\\widehat{\\partial_k^L g}(\\theta).$$\nEach entry of $\\partial_k^Lb$ has absolute value bounded by $c_{Le_k,0}(1+|\\zeta|)^r\\mathbf1_K(x)$. The scalar integral majorant estimate bounds the last Fourier integral by $\\operatorname{vol}(K)c_{Le_k,0}(1+|\\zeta|)^r$. For $|\\theta|\\geq1$, choose $k$ with $|\\theta_k|\\geq |\\theta|/\\sqrt m$ and divide by $(2\\pi|\\theta_k|)^L$; for $|\\theta|\\leq1$, use the undifferentiated integral bound. Maximize over the finitely many $k$ and entries. Since $\\|M\\|\\leq\\sum_{a,j}|M_{aj}|$ and $|\\theta|^{-L}\\leq2^L(1+|\\theta|)^{-L}$ for $|\\theta|\\geq1$, enlarging the constant proves the asserted uniform $C_L$ bound, including $L=0$.",
+   "uses": [
+    "lem-sfb-schwartz-test-inclusion-integrability",
+    "lem-sfb-schwartz-fourier-l2-identities",
+    "lem-sfb-integrable-majorant-estimate"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/demailly-hodge-ams.pdf",
+    "place": "WANTED locally: Part I §3.B, Theorem 3.6, printed p.13 (PDF p.25). Agent Fourier-kernel argument; online fetch timed out."
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-schwartz-fourier-coordinate-rule] to each component of $f$: each component of $\\widehat f$ is Schwartz. For every real $d$, the function $(1+|\\xi|)^d\\|\\widehat f(\\xi)\\|$ is integrable. Indeed choose integers $M>m$ and $N>\\max(d,0)+M$. The Schwartz seminorms at powers $0,N$ give $\\|\\widehat f(\\xi)\\|\\leq A_N(1+|\\xi|)^{-N}$, by considering $|\\xi|\\leq1$ and $|\\xi|\\geq1$. The resulting majorant is at most $C(1+|\\xi|^2)^{-M/2}$, integrable by [lem-sfb-euclidean-bracket-integrable] with $s=M/2$. Apply [lem-sfb-integrable-majorant-estimate] componentwise. The same argument applies to $f$ itself. Write $w_d(\\xi)=(1+|\\xi|)^d\\|\\widehat f(\\xi)\\|$. Since $1+2\\pi|\\xi|$ and $1+|\\xi|$ have a ratio bounded above and below by positive constants, the symbol estimates give\n$$\\|\\partial_x^\\gamma b(x,2\\pi\\xi)\\widehat f(\\xi)\\|\\leq A_\\gamma w_r(\\xi)$$\nfor every $x$. The phase has modulus one. Thus the integral defining $T_bf$ converges absolutely for every $x$.",
+   "uses": [
+    "lem-sfb-schwartz-fourier-coordinate-rule",
+    "lem-sfb-euclidean-bracket-integrable",
+    "lem-sfb-integrable-majorant-estimate"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/demailly-hodge-ams.pdf",
+    "place": "WANTED locally: Part I §3.B, Theorem 3.6, printed p.13 (PDF p.25). Agent Fourier-kernel argument; online fetch timed out."
+   }
+  },
+  {
+   "text": "Put $F(x,\\xi)=e^{2\\pi i x\\cdot\\xi}b(x,2\\pi\\xi)\\widehat f(\\xi)$. The product rule gives\n$$\\partial_x^\\alpha F(x,\\xi)=e^{2\\pi i x\\cdot\\xi}\\sum_{\\gamma\\leq\\alpha}{\\alpha\\choose\\gamma}(2\\pi i\\xi)^{\\alpha-\\gamma}(\\partial_x^\\gamma b)(x,2\\pi\\xi)\\widehat f(\\xi).$$\nIts norm is bounded, uniformly for all $x$, by $A_\\alpha w_{r+|\\alpha|}(\\xi)$; the latter is integrable by step 2. All the integrands and their Fréchet derivatives in $x$ are continuous in $\\xi$, hence strongly measurable. Apply [lem-sfb-dominated-integral-frechet-derivative] over the real domain $\\mathbf R^m$, viewing the complex finite-dimensional codomain as real. Its neighbourhood may be any ball about $x_0$; the preceding bound for derivatives of the next order bounds the Fréchet derivative there, and step 2 supplies integrability at $x_0$. Induction, also for the finitely many derivative components, gives derivatives of every order of $T_bf$ equal to the corresponding integrals. Each derivative is itself differentiable by the next induction step, hence continuous. Thus $T_bf$ is smooth. For $x\\notin K$ the defining integrand is zero, so its support is contained in $K$.",
+   "uses": [
+    "lem-sfb-dominated-integral-frechet-derivative"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/demailly-hodge-ams.pdf",
+    "place": "WANTED locally: Part I §3.B, Theorem 3.6, printed p.13 (PDF p.25). Agent Fourier-kernel argument; online fetch timed out."
+   }
+  },
+  {
+   "text": "For fixed $\\eta$, the scalar components of the kernel\n$$H_\\eta(x,\\xi)=e^{-2\\pi i x\\cdot\\eta}e^{2\\pi i x\\cdot\\xi}b(x,2\\pi\\xi)\\widehat f(\\xi)$$\nare continuous and bounded in norm by $A\\mathbf1_K(x)w_r(\\xi)$. This is a product-integrable majorant: integrate the $x$ section to obtain $A\\operatorname{vol}(K)w_r(\\xi)$ and use step 2 and the product integrability criterion of [lem-sfb-product-fubini-integral-swap], with factors interchanged. The scalar majorant estimate then gives integrability of every component of $H_\\eta$. The same bound shows $T_bf$ is integrable in $x$. Both Euclidean Lebesgue spaces are sigma-finite. Fubini interchange therefore gives\n$$\\widehat{T_bf}(\\eta)=\\int\\left(\\int e^{-2\\pi i x\\cdot(\\eta-\\xi)}b(x,2\\pi\\xi)\\,dx\\right)\\widehat f(\\xi)\\,d\\xi.$$\nA fixed vector can be moved through a finite matrix integral entrywise. The inner matrix integral is exactly $\\widehat b_x(\\eta-\\xi,2\\pi\\xi)$, which proves the claimed frequency kernel formula with an absolutely convergent right-hand side.",
+   "uses": [
+    "lem-sfb-product-fubini-integral-swap",
+    "lem-sfb-integrable-majorant-estimate"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/demailly-hodge-ams.pdf",
+    "place": "WANTED locally: Part I §3.B, Theorem 3.6, printed p.13 (PDF p.25). Agent Fourier-kernel argument; online fetch timed out."
+   }
+  },
+  {
+   "text": "Take any $\\chi\\in C_c^\\infty(\\mathbf R^m)$ equal to one near zero and let $R>0$. Fix $x$. The cutoff kernel in $(y,\\zeta)$ is bounded by\n$$C\\|f(y)\\|\\mathbf1_{\\operatorname{supp}\\chi(\\cdot/R)}(\\zeta)(1+|\\zeta|)^r.$$\nThe frequency factor is bounded with compact support and the $y$ factor is integrable by step 2. The product criterion and scalar majorant estimate show absolute integrability. Fubini may therefore integrate in $y$ first. By the definition of $\\widehat f$, its value is $\\widehat f(\\zeta/(2\\pi))$. Apply [lem-sfb-euclidean-jacobian-integral] entrywise to the dilation $\\xi\\mapsto2\\pi\\xi$ of $\\mathbf R^m$, whose determinant is $(2\\pi)^m$. The cutoff operator consequently equals\n$$T_Rf(x)=\\int e^{2\\pi i x\\cdot\\xi}b(x,2\\pi\\xi)\\widehat f(\\xi)\\chi(2\\pi\\xi/R)\\,d\\xi.$$\nThis computes the actual regularized double integral and cancels the prefactor $(2\\pi)^{-m}$ exactly. No inversion or interchange of an unregularized $(y,\\zeta)$ integral is being assumed.",
+   "uses": [
+    "lem-sfb-product-fubini-integral-swap",
+    "lem-sfb-integrable-majorant-estimate",
+    "lem-sfb-euclidean-jacobian-integral"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/demailly-hodge-ams.pdf",
+    "place": "WANTED locally: Part I §3.B, Theorem 3.6, printed p.13 (PDF p.25). Agent Fourier-kernel argument; online fetch timed out."
+   }
+  },
+  {
+   "text": "Let $\\varphi$ be any smooth compactly supported complex test; vector-valued dual tests are handled by summing components. Put $B=\\sup|\\chi|<\\infty$. In the $(x,\\xi)$ pairing of step 5, the absolute value is bounded for every $R$ by\n$$AB|\\varphi(x)|\\mathbf1_K(x)w_r(\\xi).$$\nThe $x$ factor is integrable since $\\varphi$ is bounded and $K$ has finite volume. The product criterion in [lem-sfb-product-fubini-integral-swap] makes this an integrable majorant on the product space, and [lem-sfb-integrable-majorant-estimate] permits Fubini for the pairing with $T_Rf$. For fixed $\\xi$, $\\chi(2\\pi\\xi/R)\\to1$ as $R\\to+\\infty$. Apply [lem-sfb-oscillatory-cutoff-convergence] on this product space, with $E=\\mathbf C$ as a real Banach space and the real at-infinity filter having countable base $R>n$. All integrands are measurable and the uniform bound is the one just proved. The limit of the pairings is the pairing with $T_bf$, by the same Fubini calculation without the cutoff. Hence every allowable frequency cutoff gives the required distributional limit, equal to $T_bf$.",
+   "uses": [
+    "lem-sfb-product-fubini-integral-swap",
+    "lem-sfb-integrable-majorant-estimate",
+    "lem-sfb-oscillatory-cutoff-convergence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/demailly-hodge-ams.pdf",
+    "place": "WANTED locally: Part I §3.B, Theorem 3.6, printed p.13 (PDF p.25). Agent Fourier-kernel argument; online fetch timed out."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-dominated-integral-frechet-derivative",
+  "lem-sfb-euclidean-bracket-integrable",
+  "lem-sfb-euclidean-jacobian-integral",
+  "lem-sfb-integrable-majorant-estimate",
+  "lem-sfb-oscillatory-cutoff-convergence",
+  "lem-sfb-product-fubini-integral-swap",
+  "lem-sfb-schwartz-fourier-coordinate-rule",
+  "lem-sfb-schwartz-fourier-l2-identities",
+  "lem-sfb-schwartz-test-inclusion-integrability"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/demailly-hodge-ams.pdf",
+  "place": "WANTED locally: Part I §3.B, Theorem 3.6, printed p.13 (PDF p.25). Agent Fourier-kernel argument; online fetch timed out."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Fourier transform in x of a compactly supported symbol a(x,xi) has arbitrary polynomial decay in the dual x variable uniformly with symbol growth in xi",
+   "results": "{\"t\": \"2026-10-24T03:27:54Z\", \"tool\": \"leanfinder\", \"query\": \"Fourier transform in x of a compactly supported symbol a(x,xi) has arbitrary polynomial decay in the dual x variable uniformly with symbol growth in xi\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SchwartzMap.fourierTransformCLM\", \"SchwartzMap.fourier_evalCLM_eq\", \"SchwartzMap.instFourierTransform\", \"Real.pow_mul_norm_iteratedFDeriv_fourier_le\", \"SchwartzMap.instFourierPair\", \"Real.pow_mul_norm_iteratedFDeriv_fourierIntegral_le\", \"VectorFourier.pow_mul_norm_iteratedFDeriv_fourierIntegral_le\", \"SchwartzMap.instContinuousFourier\"], \"digest\": \"61968bb1c4d59c63\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: Real.pow_mul_norm_iteratedFDeriv_fourier_le supplies Fourier decay estimates, but not this parameter-uniform symbol bound together with the two-frequency kernel identity and equality with oscillatory quantization; these are additional comparisons."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A smooth compactly supported x dependent symbol has a Fourier frequency kernel with rapid off diagonal decay",
+   "results": "{\"t\": \"2026-10-24T03:29:19Z\", \"tool\": \"leanfinder\", \"query\": \"A smooth compactly supported x dependent symbol has a Fourier frequency kernel with rapid off diagonal decay\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Real.pow_mul_norm_iteratedFDeriv_fourier_le\", \"HasCompactSupport.toSchwartzMap\", \"VectorFourier.pow_mul_norm_iteratedFDeriv_fourierIntegral_le\", \"VectorFourier.norm_fourierPowSMulRight_iteratedFDeriv_fourierIntegral_le\", \"tendsto_integral_exp_inner_smul_cocompact_of_continuous_compact_support\", \"Real.pow_mul_norm_iteratedFDeriv_fourierIntegral_le\", \"tendsto_integral_exp_inner_smul_cocompact\", \"Real.zero_at_infty_fourier\"], \"digest\": \"69c0bb4f75decbc1\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: Real.pow_mul_norm_iteratedFDeriv_fourier_le supplies Fourier decay estimates, but not this parameter-uniform symbol bound together with the two-frequency kernel identity and equality with oscillatory quantization; these are additional comparisons."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Fourier transform of a compactly supported smooth function decreases faster than every inverse polynomial",
+   "results": "{\"t\": \"2026-10-24T03:27:51Z\", \"tool\": \"leansearch\", \"query\": \"Fourier transform of a compactly supported smooth function decreases faster than every inverse polynomial\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SchwartzMap.fourierTransformCLM\", \"Real.zero_at_infty_fourier\", \"SchwartzMap.instFourierTransform\", \"FourierTransform.fourier\", \"SchwartzMap.instFourierTransform.congr_simp\", \"tendsto_integral_exp_smul_cocompact\", \"Real.zero_at_infty_fourierIntegral\", \"SchwartzMap.instFourierPair\"], \"digest\": \"d33635d8a02fb146\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: Real.pow_mul_norm_iteratedFDeriv_fourier_le supplies Fourier decay estimates, but not this parameter-uniform symbol bound together with the two-frequency kernel identity and equality with oscillatory quantization; these are additional comparisons."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"pow_mul_norm_iteratedFDeriv_fourier\"",
+   "results": "{\"t\": \"2026-10-24T03:27:51Z\", \"tool\": \"loogle\", \"query\": \"\\\"pow_mul_norm_iteratedFDeriv_fourier\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 2, \"note\": \"\", \"top\": [\"Real.pow_mul_norm_iteratedFDeriv_fourier_le\", \"VectorFourier.pow_mul_norm_iteratedFDeriv_fourierIntegral_le\"], \"digest\": \"acd2ec966c276a3d\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: Real.pow_mul_norm_iteratedFDeriv_fourier_le supplies Fourier decay estimates, but not this parameter-uniform symbol bound together with the two-frequency kernel identity and equality with oscillatory quantization; these are additional comparisons."
+  },
+  {
+   "tool": "grep",
+   "query": "pow_mul_norm.*fourier|fourier.*integral.*integral",
+   "results": "{\"t\": \"2026-10-24T03:27:50Z\", \"tool\": \"grep\", \"query\": \"pow_mul_norm.*fourier|fourier.*integral.*integral\", \"sub\": \"Analysis/\", \"ok\": true, \"n_hits\": 22, \"note\": \"\", \"top\": [\"Mathlib/Analysis/Distribution/SchwartzSpace/Fourier.lean\", \"Mathlib/Analysis/Distribution/SchwartzSpace/Fourier.lean\", \"Mathlib/Analysis/Distribution/SchwartzSpace/Fourier.lean\", \"Mathlib/Analysis/Distribution/SchwartzSpace/Fourier.lean\", \"Mathlib/Analysis/Fourier/FourierTransform.lean\", \"Mathlib/Analysis/Fourier/FourierTransform.lean\", \"Mathlib/Analysis/Fourier/FourierTransform.lean\", \"Mathlib/Analysis/Fourier/FourierTransform.lean\"], \"digest\": \"eac15e2a8489b2f5\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: Real.pow_mul_norm_iteratedFDeriv_fourier_le supplies Fourier decay estimates, but not this parameter-uniform symbol bound together with the two-frequency kernel identity and equality with oscillatory quantization; these are additional comparisons."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Compactly supported smooth matrix symbol Fourier transform decay, kernel identity, and oscillatory integral quantization",
+   "results": "{\"t\": \"2026-10-24T04:02:54Z\", \"tool\": \"leansearch\", \"query\": \"Compactly supported smooth matrix symbol Fourier transform decay, kernel identity, and oscillatory integral quantization\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HasCompactSupport.toSchwartzMap\", \"SchwartzMap.fourierTransformCLM\", \"tendsto_integral_exp_smul_cocompact\", \"FourierTransform.term𝓕\", \"SchwartzMap.instFourierTransform\", \"tendsto_integral_exp_inner_smul_cocompact\", \"SchwartzMap.instContinuousFourier\", \"Real.zero_at_infty_fourierIntegral\"], \"digest\": \"bf78947f9fe76c0b\"}",
+   "date": "2026-10-24",
+   "verdict": "no match for the item: the Fourier derivative identity supplies a proof ingredient, not parameter-uniform symbol decay, variable-symbol kernel exchange, or the oscillatory comparison."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"fourier_lineDerivOp_eq\"",
+   "results": "{\"t\": \"2026-10-24T04:03:40Z\", \"tool\": \"loogle\", \"query\": \"\\\"fourier_lineDerivOp_eq\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 2, \"note\": \"\", \"top\": [\"SchwartzMap.fourier_lineDerivOp_eq\", \"TemperedDistribution.fourier_lineDerivOp_eq\"], \"digest\": \"14c2bd2c4623fe78\"}",
+   "date": "2026-10-24",
+   "verdict": "no match for the item: the Fourier derivative identity supplies a proof ingredient, not parameter-uniform symbol decay, variable-symbol kernel exchange, or the oscillatory comparison."
+  },
+  {
+   "tool": "grep",
+   "query": "fourier_lineDerivOp_eq|fourierIntegral",
+   "results": "{\"t\": \"2026-10-24T04:02:55Z\", \"tool\": \"grep\", \"query\": \"fourier_lineDerivOp_eq|fourierIntegral\", \"sub\": \"Analysis/Distribution/SchwartzSpace/\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"Mathlib/Analysis/Distribution/SchwartzSpace/Fourier.lean\", \"Mathlib/Analysis/Distribution/SchwartzSpace/Fourier.lean\", \"Mathlib/Analysis/Distribution/SchwartzSpace/Fourier.lean\", \"Mathlib/Analysis/Distribution/SchwartzSpace/Fourier.lean\", \"Mathlib/Analysis/Distribution/SchwartzSpace/Fourier.lean\"], \"digest\": \"3c19eab09b18a2a7\"}",
+   "date": "2026-10-24",
+   "verdict": "no match for the item: the Fourier derivative identity supplies a proof ingredient, not parameter-uniform symbol decay, variable-symbol kernel exchange, or the oscillatory comparison."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-symbol-operator-sobolev-boundedness",
+  "date": "2026-10-24",
+  "group": "O2"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Haboush symmetric-power lifting for a trivial quotient representation. Supporting representation-theoretic input: Steinberg endomorphisms detect a nonzero fixed vector. Supporting Self-duality of rho section modules at characteristic-dependent weights. Supporting input: Positive-characteristic simplicity step, using irreducibility of the Steinberg induced module rather than assuming self-duality. Numerical input to the dimension comparison: Weyl dimension of the induced module. Supporting Kempf vanishing for dominant flag line bundles. Characteristic-zero branch of Milne 22.51: apply Kodaira to M_(lambda+2rho). Supporting injectivity argument for Kodaira: Popa Theorem 1.6.6 used in the proof of Theorem 1.6.1. Supporting input: Popa Theorem 1.6.6 proof: Hodge-theory vanishing of the differential on structure-sheaf cohomology of the smooth projective root cover. Supporting input: Harmonic representatives on complex projective manifolds. Supporting analytic input: the decomposition of all forms underlying the representative assertion Analytic prerequisite: Kong Theorem 6.5(4), the general real elliptic-operator decomposition used on the realified type bundle. Supporting input: WANTED locally; Demailly, Complex Analytic and Differential Geometry, June 21, 2012, VI §2, Gårding inequality (2.3) and Sobolev lemma (2.1), printed p.289; smooth-right-hand-side consequence for bundle-valued systems; read online https://www-fourier.univ-grenoble-alpes.fr/~demailly/manuscripts/agbook.pdf Further analytic input: VI §2, weak Gårding inequality (2.3), printed p.289 (PDF page 289), finite-order regularity and norm estimate for an operator on one bundle. Parametrix proof of the finite-order weak estimate: Sobolev boundedness of bundle symbol operators. Supporting Fourier-estimate input: Frequency kernel of a compactly supported matrix symbol.",
+   "via": [
+    "lem-sfb-symbol-operator-sobolev-boundedness",
+    "lem-sfb-weak-garding-sobolev-estimate",
+    "lem-sfb-elliptic-adjoint-regularity",
+    "lem-sfb-elliptic-smooth-fredholm-decomposition",
+    "lem-sfb-hermitian-dolbeault-orthogonal-decomposition",
+    "lem-sfb-projective-harmonic-representatives",
+    "lem-sfb-hodge-first-differential-zero",
+    "lem-sfb-kollar-smooth-divisor-injectivity",
+    "lem-sfb-kodaira-vanishing",
+    "lem-sfb-dominant-flag-line-kempf-vanishing",
+    "lem-sfb-induced-weyl-dimension-formula",
+    "lem-sfb-steinberg-induced-module-irreducible",
+    "lem-sfb-rho-section-self-duality",
+    "lem-sfb-steinberg-endomorphism-detection",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-compact-symbol-frequency-kernel",
+  "worker": "stage1",
+  "summary": "Statement unchanged. Proved uniform decay by iterating the existing scalar Schwartz Fourier derivative identity entrywise; proved integrability, smoothness and support with explicit polynomial majorants; computed the frequency kernel by Fubini and the oscillatory realization by a regularized computation, its exact Jacobian, and dominated convergence. Two new Mathlib leaves supply the product integrability/Fubini tools and the general-filter dominated convergence theorem; no new unsplit node. All supporting Mathlib source declarations were read. Demailly is absent locally and its online fetch timed out, so the proof is explicitly agent-written. Zero ranks, empty support, L=0, either sign of the integer order, and arbitrary bounded complex cutoff were checked.",
+  "blueprint": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Haboush symmetric-power lifting for a trivial quotient representation. Supporting representation-theoretic input: Steinberg endomorphisms detect a nonzero fixed vector. Supporting Self-duality of rho section modules at characteristic-dependent weights. Supporting input: Positive-characteristic simplicity step, using irreducibility of the Steinberg induced module rather than assuming self-duality. Numerical input to the dimension comparison: Weyl dimension of the induced module. Supporting Kempf vanishing for dominant flag line bundles. Characteristic-zero branch of Milne 22.51: apply Kodaira to M_(lambda+2rho). Supporting injectivity argument for Kodaira: Popa Theorem 1.6.6 used in the proof of Theorem 1.6.1. Supporting input: Popa Theorem 1.6.6 proof: Hodge-theory vanishing of the differential on structure-sheaf cohomology of the smooth projective root cover. Supporting input: Harmonic representatives on complex projective manifolds. Supporting analytic input: the decomposition of all forms underlying the representative assertion Analytic prerequisite: Kong Theorem 6.5(4), the general real elliptic-operator decomposition used on the realified type bundle. Supporting input: WANTED locally; Demailly, Complex Analytic and Differential Geometry, June 21, 2012, VI §2, Gårding inequality (2.3) and Sobolev lemma (2.1), printed p.289; smooth-right-hand-side consequence for bundle-valued systems; read online https://www-fourier.univ-grenoble-alpes.fr/~demailly/manuscripts/agbook.pdf Further analytic input: VI §2, weak Gårding inequality (2.3), printed p.289 (PDF page 289), finite-order regularity and norm estimate for an operator on one bundle. Parametrix proof of the finite-order weak estimate: Sobolev boundedness of bundle symbol operators. Supporting Fourier-estimate input: Frequency kernel of a compactly supported matrix symbol. The six proof steps realize this Fourier-estimate prerequisite of the existing Sobolev route. The latest blueprint direct-images proof (3) was read; no chapter/unit route is changed. The null from.node is inherited and blueprint_refs ancestor reports None.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q120-c995742f7",
+  "group": "Q120",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q120-c995742f7 (reviewer sub-agent of L); spot-checked: Read the item, both new nodes and all 7 cited node statements in full. All cited nodes are Mathlib leaves in the item's unit sk-thm-sf-ctf-stability, so no tool_uses are needed. The item statement is unchanged. The source (Demailly, Hodge AMS Thm 3.6) is not in literature/; the proof is marked agent-written and the source WANTED. Step by step: (1) The decay bound comes from iterating the fourier_lineDerivOp identity (l2-identities, H=C, v=e_k) on compactly supported entries, which are Schwartz by test-inclusion, with the majorant vol(K)c(1+|ζ|)^r. The |θ|≥1 case uses |θ_k|≥|θ|/√m and |θ|^{-L}≤2^L(1+|θ|)^{-L}; the |θ|≤1 case uses the L=0 bound. Checked p,q=0, K empty and L=0. (2) Seminorms give ‖f̂‖≤A_N(1+|ξ|)^{-N}; with N>max(d,0)+M the bracket leaf at s=M/2 gives integrability. Checked both signs of r. (3) The Fréchet-derivative leaf hypotheses (neighbourhood, measurability, integrability at x0, uniform bound A·w_{r+|α|}) all hold; induction gives C^∞, and support lies in K because K is closed. (4) The majorant 1_K(x)w_r(ξ) is product-integrable via integrable_prod_iff; Fubini gives the inner integral b̂_x(η−ξ,2πξ), with correct sign and argument. (5) Integrating in y gives f̂(ζ/2π); the Jacobian leaf for ξ↦2πξ gives det (2π)^m, which cancels the prefactor (2π)^{-m}. (6) The uniform bound AB|φ|1_K w_r allows dominated convergence along R→∞, a countably generated filter, with χ(2πξ/R)→1. New nodes: product-fubini-integral-swap matches integrable_prod_iff (Prod.lean:231–235) and integral_integral_swap (482–484); oscillatory-cutoff-convergence matches tendsto_integral_filter_of_dominated_convergence (DominatedConvergence.lean:67–74). Both are generic tools rather than restated clauses. An rg -L search found no duplicates: tonelli-nonnegative-product is the lintegral version and l1-bilinear-fourier-duality is a different statement. No repair note, no SGA, no fixes."
+ },
+ "lean": {
+  "module": "Sheaf.Analysis.CompactSymbolFrequencyKernel",
+  "declaration": "EuclideanSpace.compactSymbol_frequencyKernel",
+  "declarations": [
+   "EuclideanSpace.symbolMultiIndexDeriv",
+   "EuclideanSpace.compactSymbolOperator",
+   "EuclideanSpace.cutoffSymbolOperator",
+   "EuclideanSpace.compactSymbol_frequencyKernel"
+  ],
+  "file": "lean/Sheaf/Analysis/CompactSymbolFrequencyKernel.lean",
+  "statement": "theorem compactSymbol_frequencyKernel (m p q : ℕ) (hm : 1 ≤ m) (r : ℤ) (b : EuclideanSpace ℝ (Fin m) × EuclideanSpace ℝ (Fin m) → EuclideanSpace ℂ (Fin p) →L[ℂ] EuclideanSpace ℂ (Fin q)) (hb : ContDiff ℝ ∞ b) (K : Set (EuclideanSpace ℝ (Fin m))) (hK : IsCompact K) (hsupp : ∀ x ζ : EuclideanSpace ℝ (Fin m), x ∉ K → b (x, ζ) = 0) (hest : ∀ α β : Fin m → ℕ, ∃ c : ℝ, ∀ x ζ : EuclideanSpace ℝ (Fin m), ‖symbolMultiIndexDeriv α β b (x, ζ)‖ ≤ c * (1 + ‖ζ‖) ^ (r - (∑ j, β j : ℕ))) : (∀ L : ℕ, ∃ C : ℝ, ∀ θ ζ : EuclideanSpace ℝ (Fin m), ‖𝓕 (fun x ↦ b (x, ζ)) θ‖ ≤ C * (1 + ‖θ‖) ^ (-(L : ℤ)) * (1 + ‖ζ‖) ^ r) ∧ ∀ f : SchwartzMap (EuclideanSpace ℝ (Fin m)) (EuclideanSpace ℂ (Fin p)), (∀ x : EuclideanSpace ℝ (Fin m), Integrable (fun ξ ↦ Complex.exp ((2 * (Real.pi : ℂ) * (inner ℝ x ξ : ℂ)) * Complex.I) • b (x, (2 * Real.pi) • ξ) (𝓕 f ξ)) volume) ∧ ContDiff ℝ ∞ (compactSymbolOperator b f) ∧ tsupport (compactSymbolOperator b f) ⊆ K ∧ (∀ η : EuclideanSpace ℝ (Fin m), 𝓕 (compactSymbolOperator b f) η = ∫ ξ, (𝓕 (fun x ↦ b (x, (2 * Real.pi) • ξ)) (η - ξ)) (𝓕 f ξ)) ∧ (∀ χ : EuclideanSpace ℝ (Fin m) → ℂ, ContDiff ℝ ∞ χ → HasCompactSupport χ → (∀ᶠ ζ in 𝓝 0, χ ζ = 1) → ∀ φ : EuclideanSpace ℝ (Fin m) → ℂ, ContDiff ℝ ∞ φ → HasCompactSupport φ → Tendsto (fun R : ℝ ↦ ∫ x, φ x • cutoffSymbolOperator b f χ R x) atTop (𝓝 (∫ x, φ x • compactSymbolOperator b f x)))",
+  "branch": "sheaf-dag",
+  "by": "N5",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-5a81c7a3a",
+  "group": "N5",
+  "result": "pass",
+  "note": "Snapshot node differs from live only in lean; lean.statement verbatim in file; existing:false, 4 declarations with source/blueprint docstrings. Clause-by-clause match: m≥1, p,q:ℕ, r:ℤ; op-norm →L[ℂ] on EuclideanSpace; ContDiff ℝ ∞ b; compact K with x-support uniform in ζ; hest via symbolMultiIndexDeriv (ζ- then x-coordinate fderiv folds) with zpow r-|β|; ∀L ∃C decay of 𝓕 (x↦b(x,ζ)) (Mathlib phase exp(-2πi⟪x,θ⟫), fourier_coe for Schwartz f); Integrable T_b integrand, ContDiff, tsupport⊆K (K closed), kernel identity at (η-ξ,2πξ); oscillatory limit with genuine cutoff product integral, (2π)^(-m), exp(i⟪x-y,ζ⟫), χ(R⁻¹ζ), complex χ/φ tests (more general, still true), R→atTop. Edge cases p=0/q=0, K=∅, L=0, α=β=0, m=1, r of either sign covered. No hollow defs; scalar multiIndexPartialDeriv cannot express operator-valued mixed derivatives, no other symbol/oscillatory declarations in live lean/Sheaf; proof is sorry only; H8 docstring has all 6 steps; no universes; report has Worker report and Second reading sections. Compile not reproduced per instruction; worker reports clean compiles. No findings."
+ }
+}

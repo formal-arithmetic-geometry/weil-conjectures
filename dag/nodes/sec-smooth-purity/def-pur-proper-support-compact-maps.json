@@ -14,9 +14,71 @@
   "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-an/thm-pur-projective-bundle-formula.proof.md",
   "place": "Step 1: compact-support Kunneth and the product of localized Kummer classes; finite-ring refinement of cor-kun-compact-kunneth, using Stacks Tag 0F1P (etale-cohomology.tex, label lemma-kunneth) via lem-pur-ordinary-kunneth-finite-ring"
  },
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Retain the existing scheme-theoretic proofs: the composite closed support is proper over the separated compactification and is an immersion, hence closed; the structure morphism of a product support is a composite of a base change of a proper morphism and a proper morphism.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "On the etale site compose direct images and apply the invertible counit of restriction/direct image for the compactifying open. Whiskering with the constant-sheaf functor gives j^* C_(ij) isomorphic to C_i. The unit compatibility of direct-image composition and coherence of constant-sheaf pullback show q_(ij) = q_j followed by j_*(q_i) and the direct-image composition map. Applying j^* and the counit proves exactly the required quotient normalization. Cancel the pulled-back epic quotient componentwise to prove uniqueness of the natural isomorphism.",
+   "uses": [
+    "lem-weil-pbc-inverse-image-composition",
+    "def-pur-supported-exterior-product",
+    "lem-sc-open-immersion-pushforward-fully-faithful"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For pro-etale restriction use the same direct-image composition and open counit. Identify the quotient with the sheafification of the constant direct-image map using the existing constant-sheaf adjunct normalization. Composition of the latter maps gives the quotient-composition equation. The counit calculation and cancellation of the epic quotient then prove existence and uniqueness with the specified normalization.",
+   "uses": [
+    "def-pur-proetale-supported-exterior-product",
+    "lem-pur-support-site-comparison",
+    "lem-pur-support-quotient-pair-pullback"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The square with upper arrow id_Z, left arrow i, right arrow ij and bottom arrow j is cartesian because j is monic. The right arrow is closed and therefore finite. Apply the finite-open comparison and the identification of extension by zero along id_Z with the identity. Whiskering with constants gives C_i followed by j_! isomorphic to C_(ij).",
+   "uses": [
+    "lemma-weil-pbc-finite-pushforward-extension-zero"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For the pro-etale ordinary extension isomorphism, transport the etale one through the existing isomorphisms comparing supported coefficients and commuting site inverse image with open extension by zero. The locally Noetherian hypotheses are exactly those needed by the supported-coefficient comparison.",
+   "uses": [
+    "lem-pur-support-site-comparison",
+    "lem-cbc-proetale-extension-zero-comparison"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Derive each ordinary extension isomorphism using exactness. Thus the closed supported coefficient complex is in the essential image of derived j_!. The open-adjunction unit is invertible, so j_! is fully faithful and its counit is invertible on this essential image. The specified extension map is j_! of the inverse normalized restriction followed by this counit, and hence is invertible. This proves the claims for arbitrary coefficient complexes, without boundedness restrictions.",
+   "uses": [
+    "lem-weil-pbc-extension-by-zero-unit-iso",
+    "lem-sfb-finite-extension-by-zero-fully-faithful"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-inverse-image-composition",
+  "def-pur-supported-exterior-product",
+  "lem-sc-open-immersion-pushforward-fully-faithful",
+  "def-pur-proetale-supported-exterior-product",
+  "lem-pur-support-site-comparison",
+  "lem-pur-support-quotient-pair-pullback",
+  "lemma-weil-pbc-finite-pushforward-extension-zero",
+  "lem-cbc-proetale-extension-zero-comparison",
+  "lem-weil-pbc-extension-by-zero-unit-iso",
+  "lem-sfb-finite-extension-by-zero-fully-faithful"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-an/thm-pur-projective-bundle-formula.proof.md",
+  "place": "Step 1, proper-support paragraph; H8 implements restriction using direct-image composition and quotient normalization, and extension using the finite-open comparison (Stacks 0GJ1) and the fully faithful open-adjunction counit criterion. Pro-etale extension is transported by the existing coefficient and open-shriek site comparisons."
+ },
  "mathlib_match": null,
  "mathlib_searches": [
   {
@@ -65,7 +127,18 @@
   },
   "same_as": []
  },
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
  "chapter": "sec-smooth-purity",
  "unit": "sk-prop-an",
  "lean": {
@@ -128,5 +201,15 @@
   "group": "Q73",
   "result": "fix",
   "note": "Substance correct: every node clause is rendered on the etale site and the specified pro-etale realizations. Covered: kappa_c invertible and natural for every compactification; u_Z = constant-section unit then counit image; supported classes for every a : Z; the u_{ZxW}.kappa^{Z,W} = kappa_c.(u_Z (x) u_W) square with the dependency's supportedExteriorProduct; excision for every D+ extension; signed-twist, even-degree, arbitrary-closed-support cup identity on both sites with the support identification; pro-etale square, unit/counit normalization and witness independence. Definitions are canonical: normalized Classical.choice/exists-unique data; the eqToHom equalities compactProductTensor_eq, compactProductExterior_eq, compactProductCoefficientUnit_eq and functorialCupComparisonTwist_eq all hold by rfl (checked). Advisory: proper_support_comparison only restates the dependency's IsIso; output_representative is an extra true conclusion. Mechanical faults, fixed: (1) the delivered SupportedCupFunctoriality is NE's stale text and reverts Q10's landed named-predicate refactor (22 record declarations dropped, no outside users). fixes/SupportedCupFunctoriality.lean is a clean diff3 merge of base->live and base->delivered: superset of both, statement unchanged. (2) The SupportedCup legacy-import change is unneeded, since the legacy TensorResolution path now re-exports the FiniteCoefficient one; fixes/SupportedCup.lean is the live text. nt_compile: all 15 new modules plus the merged dependency clean (dependency 26.6-49.7 s by load); live importers ClosedSupportedCupVanishing 13.9 s and PurityDivisorClass 16.3 s clean. Maintainer: --revert-nodes def-pur-supported-cup; re-add Q10's 22 names to the SupportedCupFunctoriality record if convenient; NE lem-pur-divisor-class must rebase or revert the same dependency."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H8",
+  "result": "pass",
+  "landing": "20261026T091749-L-3373192",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

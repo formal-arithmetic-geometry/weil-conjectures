@@ -1,0 +1,132 @@
+{
+ "id": "lem-sfb-constant-principal-complete-orthogonality",
+ "kind": "statement",
+ "title": "Orthogonality implies local principal completeness",
+ "statement": "On a small site (C,J), let A be a commutative Noetherian ring and n a natural number whose image in A is a nonzerodivisor. For an arbitrary unbounded derived sheaf of modules M over the constant ring sheaf A, orthogonality to every V on which multiplication by n is invertible implies local derived completeness for the kernel of constant A → constant A/(n), in the sense of [def-weil-pbc-locally-derived-ringed-ideal-complete] and [lem-weil-pbc-constant-completion-equivalence]. The derived categories are the specified standard localizations.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-diagonal-tower/sk-prop-diagonal-tower-trace.proof.md",
+  "place": "Stacks Tags 091Q and 0999; principal localization and local derived completeness"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-locally-derived-ringed-ideal-complete",
+  "lem-weil-pbc-constant-completion-equivalence"
+ ],
+ "proof": [
+  {
+   "text": "Use the kernel sections formula and the constant quotient kernel description in flat_and_quotients at exponent zero. Every constant element of (n) is divisible by n after constant sheafification, which preserves natural casts and multiplication. Ideal.span_le therefore puts every section of the kernel in the sectionwise principal ideal (n). Extract a factorization f = n*a.",
+   "uses": [
+    "lem-weil-pbc-constant-completion-equivalence"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "On the slice over U, restrict f = n*a along every structural arrow. In the actual sectionwise localization at f, the product of the images of n and a is a unit, hence the image of n is a unit. Multiplication by n is bijective on every localization ring, hence an isomorphism of underlying additive presheaves and of module presheaves. Additive module sheafification and the additive degree-zero derived functor preserve this isomorphism.",
+   "uses": [
+    "def-weil-pbc-ringed-section-localization"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The exact left adjoint of restriction to the slice exists by localized_restriction_extension_exists. Extend its adjunction degreewise to complexes and descend both exact functors through their standard quasi-isomorphism localizations. Additivity carries n-invertible objects on the slice to n-invertible global objects, so the derived adjunction transports global orthogonality to the restricted target.",
+   "uses": [
+    "new-localized-restriction-extension-exists"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "On a small ringed site, take the existing native symmetric derived tensor and its adjunction to the recorded derived internal Hom. Tensor functors are additive because they are left adjoints; symmetry gives additivity in the parameter. If L is n-invertible, then H tensor L is n-invertible for H = RHom(L,M). Orthogonality and tensor-Hom adjunction make End(H) a subsingleton. Thus its identity is zero and H is zero. Apply this on every slice with its localization at f, yielding exactly IsLocallyDerivedRingedIdealComplete for the kernel ideal.",
+   "uses": [
+    "lem-sf-ringed-derived-native-tensor",
+    "lem-sf-ringed-derived-tensor-hom-adjunction",
+    "def-weil-pbc-locally-derived-ringed-ideal-complete"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-constant-completion-equivalence",
+  "def-weil-pbc-ringed-section-localization",
+  "new-localized-restriction-extension-exists",
+  "lem-sf-ringed-derived-native-tensor",
+  "lem-sf-ringed-derived-tensor-hom-adjunction",
+  "def-weil-pbc-locally-derived-ringed-ideal-complete"
+ ],
+ "proof_origin": {
+  "kind": "adapted",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 08J9 (derived tensor-Hom), together with sites-modules.tex Tag 03DJ (exact slice extension), algebraization.tex Tag 0999 and more-algebra.tex Tag 091Q. G7 uses the endomorphism test instead of a family of shifted generators.",
+  "by": "G7"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Local derived completeness for a principal constant ideal is equivalent to orthogonality to complexes on which the generator acts invertibly",
+   "results": "LeanSearch returned ordinary IsAdicComplete and topological completeness lemmas, not a derived sheaf criterion.",
+   "date": "2026-10-27",
+   "verdict": "No exact match; the missing comparison is recorded here."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Local derived completeness for a principal constant ideal is equivalent to orthogonality to complexes on which the generator acts invertibly",
+   "results": "CochainComplex.isKInjective_iff_rightOrthogonal and ordinary derived-category orthogonality results; none compares local principal completeness.",
+   "date": "2026-10-27",
+   "verdict": "No exact match; the missing comparison is recorded here."
+  },
+  {
+   "tool": "grep",
+   "query": "derivedComplete|IsLocallyDerivedRingedIdealComplete in Mathlib/Algebra/Category/ModuleCat/Sheaf and Mathlib/CategoryTheory/Abelian: no matching criterion.",
+   "results": "derivedComplete|IsLocallyDerivedRingedIdealComplete in Mathlib/Algebra/Category/ModuleCat/Sheaf and Mathlib/CategoryTheory/Abelian: no matching criterion.",
+   "date": "2026-10-27",
+   "verdict": "No exact match; the missing comparison is recorded here."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.DiagonalCompleteScalarRestriction",
+  "date": "2026-10-27",
+  "group": "S4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sfb-diagonal-complete-scalar-restriction",
+   "place": "Stacks Tags 091Q and 0999; principal localization and local derived completeness",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-prop-diagonal-tower",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.ConstantPrincipalCompleteOrthogonality",
+  "file": "lean/Sheaf/Paper/ConstantPrincipalCompleteOrthogonality.lean",
+  "declaration": "CategoryTheory.ConstantCompletion.constantPrincipalComplete_of_orthogonal",
+  "statement": "theorem constantPrincipalComplete_of_orthogonal\n    {C : Type u} [SmallCategory C] (J : GrothendieckTopology C)\n    (A : Type u) [CommRing A] [IsNoetherianRing A] (n : ℕ)\n    (hn : (n : A) ∈ nonZeroDivisors A) (M : D (constant J A))\n    (hM : ∀ V : D (constant J A), IsIso (n • 𝟙 V) → Subsingleton (V ⟶ M)) :\n    IsComplete (quotient J A (Ideal.span {(n : A)}) 0) M",
+  "branch": "sheaf-dag",
+  "by": "S4",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S4",
+  "result": "pass",
+  "landing": "20261026T235936-L-1472267",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G7",
+  "result": "pass",
+  "landing": "20261027T012839-L-2338833",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

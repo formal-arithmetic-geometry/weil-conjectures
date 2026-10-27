@@ -1,0 +1,102 @@
+{
+ "id": "def-sf-derived-degree-zero-exchange-equation",
+ "kind": "definition",
+ "title": "The degree-zero exchange equation with specified comparisons",
+ "statement": "Let $A,B,C,D$ be abelian categories with derived categories and localization functors $Q$ [def-weil-abstract-derived-category], with enough K-injective resolutions in $A$ and $C$. Let $F:A\\to B$, $G:B\\to D$, $H:A\\to C$, and $J:C\\to D$ be additive functors, with $G,H$ exact. Write $RF,RJ$ for their total right derived functors [def-sfb-right-derived-functor], and $G_D,H_D$ for the functors on derived categories induced by the exact functors. Write $M[0]$ for the complex with $M$ in degree zero and zero in every other degree. Given natural transformations $e:G F\\Rightarrow J H$ and $\\delta:G_D RF\\Rightarrow RJ H_D$, and specified morphisms and isomorphisms\n$$c_F(M):Q(FM[0])\\to RF(Q(M[0])),\\quad c_J(N):Q(JN[0])\\to RJ(Q(N[0])),$$\n$$p_G(N):G_D(Q(N[0]))\\simeq Q(GN[0]),\\quad p_H(M):H_D(Q(M[0]))\\simeq Q(HM[0]),$$\ndefine $\\operatorname{DerivedDegreeZeroExchangeEquation}(F,G,H,J,e,\\delta,c_F,c_J,p_G,p_H,M)$ to be precisely the equality\n$$G_D(c_F(M))\\,;\\,\\delta_{Q(M[0])}\\,;\\,RJ(p_H(M))=p_G(FM)\\,;\\,Q(e_M[0])\\,;\\,c_J(HM).$$\nHere semicolon denotes composition in the order written, and each isomorphism in the formula denotes its forward morphism. This is a proposition defined by this equality, with no assertion of existence or invertibility of $e$, $\\delta$, $c_F$, or $c_J$.",
+ "stmt_deps": [
+  "def-weil-abstract-derived-category",
+  "def-sfb-right-derived-functor"
+ ],
+ "source": {
+  "document": "literature/stacks-project/derived.tex; literature/stacks-project/cohomology.tex",
+  "place": "Tags 070K and 09T5; the degree-zero normalization clause of lem-sf-ringed-restriction-exchange-open-descent."
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "degree zero exchange equation canonical comparison single complex right derived functor",
+   "results": "8 hits about zeroth right derived functors and injective resolutions, including Functor.toRightDerivedZero and Functor.rightDerivedZeroIsoSelf; no unbounded exchange equation predicate.",
+   "date": "2026-10-26",
+   "verdict": "No exact existing definition; retain the specified four comparisons as explicit arguments."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The derived exchange commutes with the canonical comparison from a module concentrated in degree zero",
+   "results": "8 hits, including DerivedCategory.singleFunctorIsoCompQ, Functor.mapDerivedCategorySingleFunctor and HomologicalComplex.singleMapHomologicalComplex_hom_app_self. No exchange equation with four specified comparisons.",
+   "date": "2026-10-26",
+   "verdict": "The single-complex comparison lemmas support the proof, but do not define this equation."
+  },
+  {
+   "tool": "grep",
+   "query": "DegreeZeroExchangeEquation|degreeZero.*[Ee]xchange|exchange.*degreeZero|rightDerivedBaseChange_single_unit in Mathlib, lean/WeilConjectures, and lean/Sheaf",
+   "results": "Mathlib: no matching predicate. WeilConjectures: bounded-below RightDerivedBaseChangeSingleUnit, Homology and ZeroUnit. Sheaf: the item and ContinuousAdicProperBaseChangeRestriction have particular normalization formulas; neither provides this generic predicate with explicit comparison arguments.",
+   "date": "2026-10-26",
+   "verdict": "Introduce only transparent notation for the existing equality; no new mathematical hypothesis."
+  }
+ ],
+ "status": "split",
+ "import_flags": [],
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.RingedRestrictionExchangeOpenDescent",
+  "date": "2026-10-26",
+  "group": "C5"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "Continuous-module proper exchange realization for prop-functor-package clause 2: returned proof steps 4, 5, 9 and 10 of lem-sf-continuous-adic-proper-base-change-restriction; independent normalized ringed restriction exchange and open descent argument. Transparent notation for the degree-zero equality, with all comparison maps explicit.",
+   "via": [
+    "lem-sf-ringed-restriction-exchange-open-descent",
+    "lem-sf-continuous-adic-proper-base-change-restriction",
+    "lem-sf-weil-open-immersion-compact-image-extension-by-zero"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-thm-sf-package",
+ "lean": {
+  "module": "Sheaf.CategoryTheory.DerivedDegreeZeroExchangeEquation",
+  "file": "lean/Sheaf/CategoryTheory/DerivedDegreeZeroExchangeEquation.lean",
+  "declaration": "CategoryTheory.DerivedDegreeZeroExchangeEquation",
+  "statement": "def DerivedDegreeZeroExchangeEquation\n    (F : A ⥤ B) (G : B ⥤ D) (H : A ⥤ C) (J : C ⥤ D)\n    [F.Additive] [G.Additive] [H.Additive] [J.Additive]\n    [PreservesFiniteLimits G] [PreservesFiniteColimits G]\n    [PreservesFiniteLimits H] [PreservesFiniteColimits H]\n    (e : F ⋙ G ⟶ H ⋙ J)\n    (δ : F.rightDerivedFunctor ⋙ G.mapDerivedCategory ⟶\n      H.mapDerivedCategory ⋙ J.rightDerivedFunctor)\n    (cF : ∀ M : A,\n      DerivedCategory.Q.obj ((HomologicalComplex.single B (.up ℤ) 0).obj (F.obj M)) ⟶\n        F.rightDerivedFunctor.obj\n          (DerivedCategory.Q.obj ((HomologicalComplex.single A (.up ℤ) 0).obj M)))\n    (cJ : ∀ M : C,\n      DerivedCategory.Q.obj ((HomologicalComplex.single D (.up ℤ) 0).obj (J.obj M)) ⟶\n        J.rightDerivedFunctor.obj\n          (DerivedCategory.Q.obj ((HomologicalComplex.single C (.up ℤ) 0).obj M)))\n    (pG : ∀ M : B,\n      G.mapDerivedCategory.obj\n          (DerivedCategory.Q.obj ((HomologicalComplex.single B (.up ℤ) 0).obj M)) ≅\n        DerivedCategory.Q.obj ((HomologicalComplex.single D (.up ℤ) 0).obj (G.obj M)))\n    (pH : ∀ M : A,\n      H.mapDerivedCategory.obj\n          (DerivedCategory.Q.obj ((HomologicalComplex.single A (.up ℤ) 0).obj M)) ≅\n        DerivedCategory.Q.obj ((HomologicalComplex.single C (.up ℤ) 0).obj (H.obj M)))\n    (M : A) : Prop",
+  "branch": "sheaf-dag",
+  "by": "C5",
+  "date": "2026-10-26",
+  "existing": false
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-285a2",
+  "group": "C5",
+  "result": "fix",
+  "landing": "20261026T222602-L-670542",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-285a2",
+  "group": "C5",
+  "result": "fix",
+  "landing": "20261026T222602-L-670542",
+  "kind": "interface",
+  "note": "independent cc review: delivered item + 4 new modules + 5 node files + 2 change records against clone master 20c80eb and the item node plan; set-compiled with the one direct importer NativeProperNaturalBaseChange (OK, sorry stub)"
+ }
+}

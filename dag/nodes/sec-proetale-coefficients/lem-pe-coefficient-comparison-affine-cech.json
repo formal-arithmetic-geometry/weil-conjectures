@@ -1,0 +1,138 @@
+{
+ "id": "lem-pe-coefficient-comparison-affine-cech",
+ "kind": "lemma",
+ "title": "Finite affine Cech vanishing for coefficient-sized intrinsic comparison",
+ "statement": "Let X be a scheme in universe u and A any commutative ring in max(v,u+1), with additive sheafification on the coefficient-sized etale and pro-etale site models of [lem-pe-coefficient-comparison-data]. Let I be injective in constant-A module sheaves on the etale model. Let V_a -> U be a finite covering in the precoverage associated to the pro-etale model topology, such that AsSmall.down(U) and every AsSmall.down(V_a) have proAffineEtale structure morphism to X [sk-def-pe-morphisms]. For every choice S of the iterated fibre products and index maps of [def-weil-pbc-site-cech-complex] and every q >= 0, the (q+1)-st Cech cohomology of the underlying abelian presheaf of the intrinsic comparison pullback of I is zero. There is no enough-injectives assumption and no derived functor in this statement. The finite family may be empty; X need not be affine, qcqs, or nonempty; A need not be finite.",
+ "stmt_deps": [
+  "lem-pe-coefficient-comparison-data",
+  "sk-def-pe-morphisms",
+  "def-weil-pbc-site-cech-complex",
+  "def-sp-injective-resolutions"
+ ],
+ "source": {
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Tag 099U, lemma-affine-vanishing, two inverse-limit reductions of finite Cech cohomology; Cohomology on Sites Tag 03FC, module-injective Cech calculation."
+ },
+ "proof": [
+  {
+   "text": "Construct compatible affine etale covering presentations of the whole prescribed nerve, with scheme limit cones on every intersection. This simultaneously implements the two geometric finite-cover reductions; it allows non-affine ambient X and repeated factors.",
+   "uses": [
+    "lem-pe-coefficient-affine-cech-presentation"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Pass from the injective constant-ring module sheaf I to its injective module presheaf. Enlarge Fin m to ULift Fin m to put indices and homs in the same coefficient universe. Apply the injective-presheaf cocycle lifting theorem and restrict the primitive back to Fin m. Thus every positive cocycle of each normalized etale stage has a primitive.",
+   "uses": [
+    "lem-weil-pbc-ringed-site-injective-module-injective-presheaf",
+    "lem-weil-pbc-injective-presheaf-module-cech-cocycle-lift",
+    "def-weil-pbc-site-cech-complex"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Prove constant-scalar restriction fully faithful and essentially surjective using module sheafification, and identify its canonical constant-section ring map with the comparison ring map. Uniqueness of left adjoints gives the natural intrinsic/fixed-scalar comparison isomorphism. On every nerve presentation, coefficient continuity gives a colimit of comparison sections. The fully faithful left Kan extension unit and the presentation sheafification isomorphisms replace its stages by the original etale sheaf sections.",
+   "uses": [
+    "lem-pe-coefficient-comparison-continuity",
+    "lem-pe-coefficient-comparison-presentation-sheafification"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Prove directly that finite cocycles descend through these filtered section colimits. Choose representatives of all finitely many components at a common stage. Naturality of every index map identifies the differentials. Each component of the differential is eventually zero; a filtered wide span gives one later stage where all vanish. Take a stage primitive, then compare it to the original cochains. The primitive equation proves ExactAt and hence zero positive homology. Transport homology along the intrinsic/fixed-scalar natural isomorphism.",
+   "uses": [
+    "def-weil-pbc-site-cech-complex"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-site-cech-complex",
+  "lem-pe-coefficient-affine-cech-presentation",
+  "lem-pe-coefficient-comparison-continuity",
+  "lem-pe-coefficient-comparison-presentation-sheafification",
+  "lem-weil-pbc-injective-presheaf-module-cech-cocycle-lift",
+  "lem-weil-pbc-ringed-site-injective-module-injective-presheaf"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "M1",
+  "date": "2026-10-26",
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Tag 099U; explicit finite cocycle representatives and eventual zero replace an abstract filtered-exactness invocation. All statements and coefficient universes are unchanged."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Finite Cech complexes and exact filtered colimits compute inverse images of injective etale sheaves with arbitrary large module coefficients",
+   "results": "8 hits: AlgebraicGeometry.Scheme.LocalRepresentability.instIsLocallyInjectiveHomObjForgetTypeYonedaGluedToSheaf, PresheafOfModules.instIsLocallyInjectiveToSheafify, CategoryTheory.Presheaf.isLocallyInjective_forget_iff, CategoryTheory.Sheaf.instIsLocallyInjectiveAppArrowPLocallySurjectiveLocallyInjectiveFunctorialLocallySurjectiveInjectiveFactorization, CategoryTheory.Presheaf.isLocallyInjective_of_isLocallyInjective_of_isLocallySurjective, CategoryTheory.Presheaf.isLocallyInjective_forget, CategoryTheory.Sheaf.isLocallyInjective_forget, CategoryTheory.Presheaf.isLocallyInjective_iff_of_fac",
+   "date": "2026-10-26",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules, CategoryTheory.Equivalence",
+   "results": "6 hits: SheafOfModules.pushforwardPushforwardEquivalence, SheafOfModules.pushforwardPushforwardEquivalence_unit_app_val_app, SheafOfModules.pushforwardPushforwardEquivalence_counit_app_val_app, TopologicalSpace.Opens.sheafOfModulesEquivOver, AlgebraicGeometry.Scheme.Modules.overEquiv, AlgebraicGeometry.tildeEquiv",
+   "date": "2026-10-26",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "cech.*[Ee]xact|[Ee]xact.*cech",
+   "results": "8 hits: Mathlib/Topology/Category/Stonean/Adjunctions.lean, Mathlib/Topology/Category/CompHaus/Basic.lean, Mathlib/Topology/Compactification/StoneCech.lean, Mathlib/Topology/Compactification/StoneCech.lean, Mathlib/Topology/Compactification/StoneCech.lean, Mathlib/Topology/Separation/CompletelyRegular.lean, Mathlib/Topology/Separation/CompletelyRegular.lean, Mathlib/Algebra/Lie/Weights/Chain.lean",
+   "date": "2026-10-26",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.CoefficientComparisonAffineSections",
+  "date": "2026-10-26",
+  "group": "W9"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "sk-thm-pe-constructible-comparison",
+   "place": "Affine finite Cech computation inside sk-lem-pe-injective-acyclicity, Stacks Tag 099U; excludes the Cech-to-derived criterion.",
+   "via": [
+    "lem-pe-coefficient-comparison-affine-sections"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proetale-coefficients",
+ "unit": "sk-thm-pe-constructible-comparison",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.CoefficientComparisonAffineCech",
+  "file": "lean/Sheaf/AlgebraicGeometry/CoefficientComparisonAffineCech.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.coefficientComparison_affineCech_vanishing",
+  "statement": "theorem coefficientComparison_affineCech_vanishing (X : Scheme.{u})\n    (A : Type (max v (u + 1))) [CommRing A]\n    [HasSheafify (Scheme.smallModelComparisonEtaleTopology.{u, v} X)\n      AddCommGrpCat.{max v (u + 1)}]\n    [HasSheafify (Scheme.coefficientProEtaleModelTopology.{u, v} X)\n      AddCommGrpCat.{max v (u + 1)}]\n    (I : ConstantCompletion.Mod (ConstantCompletion.constant\n      (Scheme.smallModelComparisonEtaleTopology.{u, v} X) A)) [Injective I]\n    (U : Scheme.coefficientProEtaleSiteModel.{u, v} X)\n    (m : ℕ) (V : Fin m → Scheme.coefficientProEtaleSiteModel.{u, v} X)\n    (f : ∀ a, V a ⟶ U)\n    (hU : proAffineEtale (AsSmall.down.obj U).hom)\n    (hV : ∀ a, proAffineEtale (AsSmall.down.obj (V a)).hom)\n    (hc : Presieve.ofArrows V f ∈\n      (Scheme.coefficientProEtaleModelTopology.{u, v} X).toPrecoverage U)\n    (S : SiteCechComplex V f) (q : ℕ) :\n    IsZero ((S.cohomologyFunctor (q + 1)).obj\n      ((constructibleComparisonPullback.{u, v} X A).obj I).val.presheaf)",
+  "branch": "sheaf-dag",
+  "by": "W9",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "W9",
+  "result": "pass",
+  "landing": "20261026T071440-L-3932849",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M1",
+  "result": "pass",
+  "landing": "20261026T102409-L-352769",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

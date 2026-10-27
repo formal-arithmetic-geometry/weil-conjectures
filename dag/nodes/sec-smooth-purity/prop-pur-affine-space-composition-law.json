@@ -21,179 +21,36 @@
  ],
  "proof": [
   {
-   "text": "Fix the coefficient and geometric domains. All the projections in the coordinate towers are separated of finite type between separated finite-type $k$-schemes, with their standard projective compactifications. Their bases and sources are Noetherian by [lem-weil-pbc-finite-type-over-noetherian], applied to their finite-type structural maps to $\\operatorname{Spec}k$: a field is Noetherian since its only ideals are $0$ and the unit ideal. The adjunction on bounded-below etale-origin inputs is [thm-sf-ambient-adjoint-class]; [thm-sf-preservation-class] implies that each intermediate exceptional pullback of $K$ is bounded constructible of finite Tor amplitude. Thus every occurrence of $\\gamma_{p_d,Rp_e^!K}$ is in its declared domain. Twists are locally free rank-one coefficient sheaves by [prop-weil-twist-preserves]. We may calculate compact-support morphisms on the ordinary etale site: [lem-sf-proetale-constructible-origin] supplies etale representatives, [thm-weil-pbc-site-comparison] is fully faithful on $D^+$, [lem-sf-class-compact-support-comparison] identifies the two compact-support functors, and [lem-weil-pbc-ringed-topoi-derived-tensor-pullback] applies to $\\nu$ as well as to scheme pullbacks. The exceptional adjunction is transported by the actual Hom bijection of [thm-sf-ambient-adjoint-class], rather than by an unbounded pro-etale adjoint assumption. The finite Tor condition is reflected on an etale representative: tensor it with any etale module sheaf and apply the exact, fully faithful, monoidal $\\nu^*$; the resulting tensor has the required cohomological vanishing, which is reflected on each cohomology sheaf by the faithful exact inverse image (faithfulness on sheaves follows from full faithfulness on complexes concentrated in degree zero). This reflection does not require applying bounded-below full faithfulness to an unbounded tensor complex. These facts identify the transposes and permit checking their equality on the etale site.",
+   "text": "Apply [lem-pur-affine-comparison-ordered-blocks] to the positive block lengths d+1 and e+1. This is the first conjunct, with precisely its displayed canonical coordinate transport. The canonical transports blockSchemeEq, blockProjection, transportedComparison and blockComposite in the statement are those of [def-pur-affine-comparison-coordinate-maps].",
    "uses": [
-    "thm-sf-ambient-adjoint-class",
-    "thm-sf-preservation-class",
-    "prop-weil-twist-preserves",
-    "lem-sf-proetale-constructible-origin",
-    "thm-weil-pbc-site-comparison",
-    "lem-sf-class-compact-support-comparison",
-    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
-    "lem-weil-pbc-finite-type-over-noetherian"
+    "lem-pur-affine-comparison-ordered-blocks",
+    "def-pur-affine-comparison-coordinate-maps"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-an/prop-pur-affine-space-composition-law.md",
-    "place": "Proof, Step 1: domains of the ordered affine-line comparisons; finite-level site and adjunction interfaces"
-   }
+   "elementary": false
   },
   {
-   "text": "The finite-level twist in the preceding identification is the usual etale torsion twist at every $n$, including ramified stages. Indeed choose $r\\geq1$ with $\\ell^rA=0$. From [def-coefficient-twists-detailed] and clauses (2)--(3) of [lem-pur-twist-sheaf-locally-free], associativity of ordinary tensor gives\n$$A(1)=\\mathbb Z_\\ell(1)\\otimes_{\\mathbb Z_\\ell}A\\cong(\\mathbb Z_\\ell(1)/\\ell^r)\\otimes_{\\mathbb Z/\\ell^r}A\\cong\\mu_{\\ell^r}\\otimes_{\\mathbb Z/\\ell^r}A.$$\nThese are rank-one locally free sheaves; this calculation uses no flatness of $A$ over $\\mathbb Z/\\ell^r$. Their powers give the same identification for the positive twists used here. It is compatible with pullback because roots of unity and all the displayed tensor constructions pull back. Thus the finite torsion trace construction with annihilator $\\ell^r$ is exactly the twist convention in the affine-line comparison of [def-pur-affine-line-purity-comparison]. No divisibility assumption on $n$ by the ramification index is introduced.",
-   "uses": [
-    "def-coefficient-twists-detailed",
-    "lem-pur-twist-sheaf-locally-free",
-    "def-pur-affine-line-purity-comparison"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-an/prop-pur-affine-space-composition-law.md",
-    "place": "Proof, Step 1: identification of the finite coefficient Tate factors"
-   }
+   "text": "The natural number (2(d+1))(2(e+1)) is even: multiply even_two_mul (d+1) by 2(e+1). Mathlib Even.neg_one_pow proves the second conjunct.",
+   "uses": [],
+   "elementary": true
   },
   {
-   "text": "Obtain the coherence of $c$ from adjunctions. For $X\\xrightarrow f Z\\xrightarrow g Y$, use the composite adjunction [def-weil-pbc-composite-adjunction], whose counit is $\\varepsilon_g\\circ Rg_!(\\varepsilon_f)$. The mate of $\\alpha_{g,f}:Rg_!Rf_!\\xrightarrow{\\sim}R(gf)_!$ from [thm-sf-comp-composition] identifies its right adjoint with $Rf^!Rg^!$ and is $c_{g,f}$. Pasting along the adjunctions in clause (2) of [lem-weil-pbc-mate-pasting] shows that the two $c$-composites for three arrows are the mates of the two $\\alpha$-composites. Those are equal by the associativity clause of [thm-sf-comp-composition]; the mate correspondence is a bijection, so the $c$-composites agree. When one arrow is an identity, the direct-image composition map is the identity by [thm-sf-comp-composition], and its mate is the identity of the right adjoint by clause (4) of [lem-weil-pbc-mate-pasting]; hence the corresponding $c$ is the unit identification. Pullback composition uses [lem-weil-pbc-proetale-derived-pullback-composition]; on constant coefficient sheaves it is termwise inverse-image composition. Tensor reassociation is that of the tensor powers defining the twists. This supplies the coherence actually needed when parentheses in the tower are changed.",
+   "text": "Apply [lem-pur-affine-comparison-coordinate-invariance] at r=(e+1)+d and the concrete blockPermutation (d+1) (e+1). Its dimension r+1 is definitionally (e+1)+(d+1), so it gives the third conjunct. Assemble the three clauses by conjunction introduction.",
    "uses": [
-    "def-weil-pbc-composite-adjunction",
-    "thm-sf-comp-composition",
-    "lem-weil-pbc-mate-pasting",
-    "lem-weil-pbc-proetale-derived-pullback-composition",
-    "def-coefficient-twists-detailed"
+    "lem-pur-affine-comparison-coordinate-invariance",
+    "def-pur-affine-comparison-coordinate-maps"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/categories.tex",
-    "place": "Lemma 0DV0 (lemma-compose-counits), Lemma 0B65 (lemma-transformation-between-functors-and-adjoints); applied to blueprint Proof, Step 2"
-   }
-  },
-  {
-   "text": "Prove the displayed composition identity by induction on the length of the first block. Abbreviate $F_f(M)=Lf^*M(a)[2a]$ for an $a$-coordinate projection. In the ordered tower [def-pur-affine-space-comparison], appending one line $u$ replaces $\\Gamma_{g,K}$ by\n$$c_{g,u}^{-1}\\circ\\gamma_{u,Rg^!K}\\circ F_u(\\Gamma_{g,K}),\\qquad\\Gamma_{\\mathrm{id},K}=\\mathrm{id}_K.$$\nThe assertion for a first block of length one is exactly this recursion. Suppose it holds for a first block $f$ of length $a$, and append $u$. Substitute $\\Gamma_{gf,K}=c_{g,f}^{-1}\\gamma_{f,Rg^!K}F_f(\\Gamma_{g,K})$ into the recursion. Naturality of $\\gamma_u$ moves $F_u(c_{g,f}^{-1})$ across $\\gamma_u$. Here naturality follows directly by transposing the natural projection-formula composite in [def-pur-affine-line-purity-comparison], with the natural projection map of [lem-weil-finite-compact-projection-formula]. The resulting two consecutive $c^{-1}$ maps equal the reassociated ones by Step 3. The remaining factors $\\gamma_u F_u(\\gamma_f)$ are precisely $\\gamma_{fu}$ at $Rg^!K$. This proves the induction step. Taking the two block lengths to be $d,e$ gives exactly the equality in the statement, with source $Lp_{d+e}^*K(d+e)[2d+2e]$ and target $Rp_{d+e}^!K$. This argument concerns regrouping a fixed ordered list; coordinate interchange is established separately below.",
-   "uses": [
-    "def-pur-affine-space-comparison",
-    "def-pur-affine-line-purity-comparison",
-    "lem-weil-finite-compact-projection-formula",
-    "lem-weil-pbc-mate-pasting",
-    "thm-sf-comp-composition"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-an/prop-pur-affine-space-composition-law.md",
-    "place": "Proof, Steps 1--2: induction spelling out the reassociation of the ordered tower"
-   }
-  },
-  {
-   "text": "Let $L_Y=\\mathbf A^1_Y$, $a:L_Y\\to Y$, $T=A_{L_Y}(1)[2]$, $U=Ra_!T$, and $t:U\\to A_Y$ the line integration of [def-pur-affine-line-purity-comparison]. It is compatible with change of base. To check the specific map, use its defining compactification $a=qj$, and put $\\bar T=A_{\\mathbf P^1_Y}(1)[2]$, so $j^*\\bar T=T$: the trace $t_q$ and its normalized counit commute with base change by [lem-asd-ordinary-finite-p1-adjunction], applied with annihilator $\\ell^r$ from Step 2. The open-extension comparison is [lem-weil-pbc-etale-shriek-base-change-modules], and the compact-support exchange and its pasting are [thm-cbc-finite-torsion]. Applying these to the open-adjunction counit followed by the projective trace, $Rq_*j_!j^*\\bar T\\to Rq_*\\bar T\\xrightarrow{t_q}A_Y$ yields, for a morphism $v:Y'\\to Y$ between separated finite-type $k$-schemes (hence between Noetherian schemes), the equality\n$$v^*t=t'\\circ\\operatorname{Ex}_!:\\ v^*Ra_!T\\longrightarrow A_{Y'}.$$\nThe module open-extension comparison is applied termwise here; $T$ is a shifted locally free sheaf and inverse image and extension by zero are exact. The transport of Step 1 gives the identical equality at the finite pro-etale stage. In particular every line trace in a product tower is the pullback of this one $t$.",
-   "uses": [
-    "def-pur-affine-line-purity-comparison",
-    "lem-asd-ordinary-finite-p1-adjunction",
-    "lem-weil-pbc-etale-shriek-base-change-modules",
-    "thm-cbc-finite-torsion"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-an/prop-pur-affine-space-composition-law.md",
-    "place": "Proof, Steps 3--4: base-change identity for the line trace needed to compare the two coordinate towers"
-   }
-  },
-  {
-   "text": "Write $X_m=L_Y^{\\times_Ym}=\\mathbf A^m_Y$, $T_m=A_{X_m}(m)[2m]$, $F_mK=p_m^*K\\otimes^LT_m$, and let $\\tau_{m,K}:Rp_{m!}F_mK\\to K$ be the exceptional transpose of the ordered $\\Gamma_{m,K}$. Put $I_m=\\tau_{m,A_Y}$; these are temporary morphisms in this proof. For a tower $f,g$, the composite-adjunction formula of Step 3 says that the transpose of $c_{g,f}^{-1}\\gamma_{f,Rg^!K}F_f(\\Gamma_{g,K})$ is\n$$\\varepsilon_{g,K}\\circ Rg_!(\\varepsilon_{f,Rg^!K})\\circ Rg_!Rf_!\\bigl(\\gamma_{f,Rg^!K}\\circ F_f(\\Gamma_{g,K})\\bigr).$$\nCombining the middle two factors first gives $Rg_!\\tau_{f,Rg^!K}\\circ Rg_!Rf_!F_f(\\Gamma_{g,K})$. Naturality of $\\tau_f$ changes this to $Rg_!(\\Gamma_{g,K})\\circ Rg_!(\\tau_{f,F_gK})$. The full transpose is therefore\n$$\\tau_{g,K}\\circ Rg_!(\\tau_{f,F_gK}).$$\nFor a line, its definition is $\\tau_{1,K}=(1_K\\otimes t)\\circ\\mathrm{PF}^{-1}$. Induction using this pasted formula and the composition pentagon and naturality of [prop-sf-pf-coherence] now gives\n$$\\tau_{m,K}=(1_K\\otimes I_m)\\circ\\mathrm{PF}_{p_m}^{-1}:Rp_{m!}(p_m^*K\\otimes^LT_m)\\longrightarrow K.$$\nSpecifically, two successive inverse projection maps identify the pasted source with $K\\otimes Rp_{m!}T_m$ by that pentagon; naturality moves $1_K$ past the inner trace, leaving the very same pasted map evaluated at $K=A_Y$, namely $I_m$. This proves the asserted formula and does not assume any coordinate invariance.",
-   "uses": [
-    "def-pur-affine-space-comparison",
-    "def-pur-affine-line-purity-comparison",
-    "def-weil-pbc-composite-adjunction",
-    "lem-weil-pbc-mate-pasting",
-    "lem-weil-finite-compact-projection-formula",
-    "prop-sf-pf-coherence"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-an/prop-pur-affine-space-composition-law.md",
-    "place": "Proof, Steps 2--4: explicit counit calculation reducing equality of comparisons to equality of integration maps"
-   }
-  },
-  {
-   "text": "First verify the one-factor object needed for the product-domain induction. Apply [lem-amb-affine-space-top-trace] only with $S=Y$, $d=1$, and $N=\\ell^r$ from Step 2. The ring $A$ is finite with $NA=0$, $N$ is invertible since $\\ell\\ne p$, and $Y$ is Noetherian by Step 1. Its bounded-below input is $A_{\\mathbf A^1_Y}(1)[2]$. The source of its isomorphic counit is the ordinary etale representative of $U$. Step 2 identifies its twist, and [lem-sf-class-compact-support-comparison] realizes this object on the pro-etale site, giving $U\\cong A_Y$. This is only an object isomorphism; no identification of $I_m$ with a higher-dimensional top-trace counit is used.",
-   "uses": [
-    "lem-amb-affine-space-top-trace",
-    "lem-sf-class-compact-support-comparison"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-an/prop-pur-affine-space-composition-law.md",
-    "place": "Proof Steps 3--4, as expanded in returned split Step 7: extracted product-domain and actual-integration arguments"
-   }
-  },
-  {
-   "text": "Apply [lem-pur-affine-space-product-domain] to $B=Y$, $f=a:L_Y\\to Y$, $M=T=A_{L_Y}(1)[2]$ and the object isomorphism $U\\cong A_Y$ just obtained. The source coefficient is bounded constructible of finite Tor amplitude because it is a shifted rank-one locally free Tate sheaf, by [prop-weil-twist-preserves]. Its relative external powers are $T_m$ by tensor-power additivity and the even shift identifications. The cited lemma supplies $V_m\\cong A_Y$, Tor amplitude $[0,0]$, and all the typed canonical binary product isomorphisms $\\kappa_{m,1}$. In particular the coefficient $V_m$ has its required finite Tor amplitude before the second projection formula is invoked; this is the original object induction, now a separate node.",
-   "uses": [
-    "lem-pur-affine-space-product-domain",
-    "prop-weil-twist-preserves"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-an/prop-pur-affine-space-composition-law.md",
-    "place": "Proof Steps 3--4, as expanded in returned split Step 7: extracted product-domain and actual-integration arguments"
-   }
-  },
-  {
-   "text": "The base-change identities of Step 5 hold over every separated finite-type base used in the tower; Step 6 identifies $I_m$ with the exceptional transpose specified in [lem-pur-affine-space-trace-factorization]. Its finite-Tor hypothesis is now Step 8, so that lemma gives\n$$I_1=t,\\qquad I_{m+1}=(I_m\\otimes t)\\kappa_{m,1}.$$\nDefine $\\kappa_1=1_U$ and $\\kappa_{m+1}=(\\kappa_m\\otimes1_U)\\kappa_{m,1}$. Induction substitutes $I_m=t^{\\otimes m}\\kappa_m$ into the binary equality, giving $I_{m+1}=t^{\\otimes(m+1)}\\kappa_{m+1}$, with tensor units suppressed. This substitution uses only functoriality of tensor. Clause (ii) of [lem-sf-kunneth-coherence] identifies every parenthesization with this same iterated product, and clause (iv) supplies its projection-formula identification.",
-   "uses": [
-    "lem-pur-affine-space-trace-factorization",
-    "lem-sf-kunneth-coherence"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-an/prop-pur-affine-space-composition-law.md",
-    "place": "Proof Steps 3--4, as expanded in returned split Step 7: extracted product-domain and actual-integration arguments"
-   }
-  },
-  {
-   "text": "For an adjacent transposition of the $m$ line factors, the symmetry clause of [lem-sf-kunneth-coherence] identifies the induced map on $Rp_{m!}T_m$ with the corresponding symmetry of $U^{\\otimes m}$. Tensor naturality gives\n$$(t\\otimes t)\\circ\\sigma_{U,U}=\\sigma_{A_Y,A_Y}\\circ(t\\otimes t)=t\\otimes t,$$\nsince the symmetry of two tensor units is the identity. On the source, the tensor sign symmetry of [def-kun-derived-tensor] is $x\\otimes y\\mapsto(-1)^{ij}y\\otimes x$; for $T=A(1)[2]$ the two degrees are $-2,-2$, so the sign is $+1$. Locally choose a generator $b$ of the rank-one twist [prop-weil-twist-preserves]; the unshifted interchange sends $b\\otimes b$ to itself, and consequently is the identity under the twist-additivity identification. For blocks of sizes $d,e$, interchange sends $b^{\\otimes d}\\otimes b^{\\otimes e}$ to $b^{\\otimes e}\\otimes b^{\\otimes d}$; both identify with $b^{\\otimes(d+e)}$, and the shift sign is $(-1)^{(-2d)(-2e)}=+1$. It follows from Step 9 that each adjacent coordinate transposition preserves $I_m$, and hence that every coordinate permutation does. By the projection-formula compatibility in [lem-sf-kunneth-coherence] and Step 6 it preserves $\\tau_{m,K}$ for every $K$, without moving $K$ past a shifted coordinate factor. Finally the exceptional Hom bijection of [thm-sf-ambient-adjoint-class] is injective and natural, so equality of these transposes proves equality of the two transported comparisons. Combined with Step 4 this gives the asserted composition law and equality for the two block orderings.",
-   "uses": [
-    "lem-sf-kunneth-coherence",
-    "def-kun-derived-tensor",
-    "prop-weil-twist-preserves",
-    "thm-sf-ambient-adjoint-class"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-an/prop-pur-affine-space-composition-law.md",
-    "place": "Proof, Steps 3--4: explicit Koszul sign and naturality calculation for coordinate permutations"
-   }
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "thm-sf-ambient-adjoint-class",
-  "thm-sf-preservation-class",
-  "prop-weil-twist-preserves",
-  "lem-sf-proetale-constructible-origin",
-  "thm-weil-pbc-site-comparison",
-  "lem-sf-class-compact-support-comparison",
-  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
-  "lem-weil-pbc-finite-type-over-noetherian",
-  "def-coefficient-twists-detailed",
-  "lem-pur-twist-sheaf-locally-free",
-  "def-pur-affine-line-purity-comparison",
-  "def-weil-pbc-composite-adjunction",
-  "thm-sf-comp-composition",
-  "lem-weil-pbc-mate-pasting",
-  "lem-weil-pbc-proetale-derived-pullback-composition",
-  "def-pur-affine-space-comparison",
-  "lem-weil-finite-compact-projection-formula",
-  "lem-asd-ordinary-finite-p1-adjunction",
-  "lem-weil-pbc-etale-shriek-base-change-modules",
-  "thm-cbc-finite-torsion",
-  "prop-sf-pf-coherence",
-  "lem-amb-affine-space-top-trace",
-  "lem-pur-affine-space-product-domain",
-  "lem-pur-affine-space-trace-factorization",
-  "lem-sf-kunneth-coherence",
-  "def-kun-derived-tensor"
+  "lem-pur-affine-comparison-ordered-blocks",
+  "lem-pur-affine-comparison-coordinate-invariance",
+  "def-pur-affine-comparison-coordinate-maps"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-an/prop-pur-affine-space-composition-law.md",
-  "place": "Proof, Steps 1--4, with the regrouping induction and the compact-support trace interchange written out"
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-composition/prop-pur-affine-space-composition-law.proof.md",
+  "place": "Steps 1--4; Lean assembly of separate ordered-block and coordinate-invariance arguments, with the sign proved by Mathlib parity"
  },
  "mathlib_searches": [
   {
@@ -327,87 +184,70 @@
   "def-weil-scheme-morphism-properties"
  ],
  "proof_split_by": "paragraphs",
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
  "chapter": "sec-smooth-purity",
  "unit": "sk-prop-an",
  "split_report": {
-  "date": "2026-10-17",
+  "date": "2026-10-22",
   "item": "prop-pur-affine-space-composition-law",
   "worker": "stage1",
-  "summary": "Made the implicit Y and K domains explicit, proved regrouping by induction using adjunction mates, and replaced the unsupported inference from even signs to equality of coordinate towers by a calculation of the transposed trace as a symmetric compact-support tensor product. Reused existing DAG nodes throughout; checked the ordinary-etale/pro-etale finite-stage bridge without imposing ramification divisibility. No new nodes, Lean edits, or compiles. Second reading checks finite-Tor domains of intermediate compact-support products using only the existing one-dimensional top trace, types the compactification counit explicitly, and spells out identity mates and block symmetry. Citation-drift repair rereads the expanded one-dimensional top-trace and twist-preservation statements, explicitly verifies the finite invertible-annihilator and Noetherian hypotheses, and refreshes their verbatim citations. Lock-return repair revalidates all 42 citations against the current DAG, distinguishes the unrelated NW metadata message, and writes out the object-isomorphism induction V_m ≅ A_Y so every product projection formula has its finite-Tor coefficient before it is applied. Q121 long-step repair: preserved the statement and Lean/audit records and the original route; extracted the finite-Tor product-domain induction and the binary actual-trace identification as two statement-only nodes. Replaced former 3097-character Step 7 by three short applications (new Steps 7--9), retained Steps 1--6 and the final symmetry calculation (now Step 10). All non-elementary steps are shorter than 2000 characters.",
-  "blueprint": "Realizes node Proof Steps 1--2 by steps 1--4 (typed ordered tower and coherent regrouping), and Steps 3--4 by steps 5--8 (base-changed line traces, pasted counits, relative product, and sign-free tensor symmetry). Retains unit sk-prop-an Step 6: iteration of the normalized affine-line comparisons. Q121 extracts the two hidden arguments of old Step 7 into lem-pur-affine-space-product-domain and lem-pur-affine-space-trace-factorization; new Steps 7--9 still realize blueprint Steps 3--4. The final permutation step is now Step 10.",
+  "summary": "Repair of the workload re-split: statement unchanged; three new statement-only unsplit nodes carry ordered adjoint coherence/regrouping, the transpose projection formula, and concrete symmetric tensor integration. Reuse existing site/Tor and trace-comparison nodes, one-dimensional normalized trace, product-domain and binary factorization. Original ten steps preserved verbatim in report with an argument-to-obligation map. Assembly has 2353 characters. No Lean changes or compiles.",
+  "blueprint": "Step 1 domains and finite twists; Step 2 ordered tower and reassociation; Steps 3--5 normalized trace, tensor factorization, signs and actual coordinate interchange. New nodes map exactly to blueprint proof Step 2 and Steps 3--4.",
   "tool_uses": [
    {
-    "node": "prop-sf-pf-coherence",
-    "why": "The trace-pasting calculation needs the generic projection-formula composition pentagon; the unit does not state that pentagon."
-   },
-   {
-    "node": "thm-sf-kunneth-relative",
-    "why": "Uses the relative compact-support tensor product of line factors to compare different coordinate towers, not a supports product or a smooth-purity theorem."
-   },
-   {
-    "node": "lem-sf-kunneth-coherence",
-    "why": "Uses precisely tensor symmetry, triple-product and projection-formula compatibility of the relative compact-support product, missing from the elementary sign argument in the imported proof."
+    "node": "thm-sf-preservation-class",
+    "why": "Generic domain, Tor/site comparison or normalized finite trace tool; does not replace the unit affine-line iteration route."
    },
    {
     "node": "thm-sf-ambient-adjoint-class",
-    "why": "Finite-level interface used only as a generic tool: The exceptional adjoint on the bounded comparison class. It supplies the exact functor/coefficient/adjunction assertion invoked in the citing step, without replacing the affine-line iteration route."
+    "why": "Generic domain, Tor/site comparison or normalized finite trace tool; does not replace the unit affine-line iteration route."
    },
    {
-    "node": "thm-sf-preservation-class",
-    "why": "Finite-level interface used only as a generic tool: The preservation clauses of exceptional-adjoint admissibility are theorems on the coefficient class. It supplies the exact functor/coefficient/adjunction assertion invoked in the citing step, without replacing the affine-line iteration route."
+    "node": "det-pe-finite-tor-comparison-noetherian",
+    "why": "Generic domain, Tor/site comparison or normalized finite trace tool; does not replace the unit affine-line iteration route."
+   },
+   {
+    "node": "lem-pur-vector-integration-site-comparison",
+    "why": "Generic domain, Tor/site comparison or normalized finite trace tool; does not replace the unit affine-line iteration route."
+   },
+   {
+    "node": "lem-amb-affine-space-top-trace",
+    "why": "Generic domain, Tor/site comparison or normalized finite trace tool; does not replace the unit affine-line iteration route."
    },
    {
     "node": "prop-weil-twist-preserves",
-    "why": "Finite-level interface used only as a generic tool: Twists preserve finiteness conditions. It supplies the exact functor/coefficient/adjunction assertion invoked in the citing step, without replacing the affine-line iteration route."
+    "why": "Generic domain, Tor/site comparison or normalized finite trace tool; does not replace the unit affine-line iteration route."
    },
    {
-    "node": "lem-sf-proetale-constructible-origin",
-    "why": "Finite-level interface used only as a generic tool: Constructible pro-étale coefficients are of étale origin. It supplies the exact functor/coefficient/adjunction assertion invoked in the citing step, without replacing the affine-line iteration route."
-   },
-   {
-    "node": "thm-weil-pbc-site-comparison",
-    "why": "Finite-level interface used only as a generic tool: Bounded-below site comparison. It supplies the exact functor/coefficient/adjunction assertion invoked in the citing step, without replacing the affine-line iteration route."
-   },
-   {
-    "node": "lem-sf-class-compact-support-comparison",
-    "why": "Finite-level interface used only as a generic tool: On the coefficient class the compact-support functor is computed on the étale site. It supplies the exact functor/coefficient/adjunction assertion invoked in the citing step, without replacing the affine-line iteration route."
-   },
-   {
-    "node": "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
-    "why": "Finite-level interface used only as a generic tool: Derived tensor comparison for arbitrary ringed topoi. It supplies the exact functor/coefficient/adjunction assertion invoked in the citing step, without replacing the affine-line iteration route."
-   },
-   {
-    "node": "lem-pur-twist-sheaf-locally-free",
-    "why": "Finite-level interface used only as a generic tool: The twisting sheaves are locally free of rank one and derived complete. It supplies the exact functor/coefficient/adjunction assertion invoked in the citing step, without replacing the affine-line iteration route."
-   },
-   {
-    "node": "thm-sf-comp-composition",
-    "why": "Finite-level interface used only as a generic tool: The composition law for $Rf_!$. It supplies the exact functor/coefficient/adjunction assertion invoked in the citing step, without replacing the affine-line iteration route."
-   },
-   {
-    "node": "lem-weil-pbc-proetale-derived-pullback-composition",
-    "why": "Finite-level interface used only as a generic tool: Composition of derived pro-etale module pullbacks. It supplies the exact functor/coefficient/adjunction assertion invoked in the citing step, without replacing the affine-line iteration route."
+    "node": "thm-sf-ctf-stability",
+    "why": "Only the finite-level preservation or canonical projection-map naturality clause is used to type the ordered-tower specialization; no smooth-purity conclusion is used."
    },
    {
     "node": "lem-weil-finite-compact-projection-formula",
-    "why": "Finite-level interface used only as a generic tool: Finite-coefficient compact-support projection formula. It supplies the exact functor/coefficient/adjunction assertion invoked in the citing step, without replacing the affine-line iteration route."
-   },
-   {
-    "node": "lem-asd-ordinary-finite-p1-adjunction",
-    "why": "Finite-level interface used only as a generic tool: Ordinary etale projective-line adjunction with arbitrary finite invertible-exponent coefficients. It supplies the exact functor/coefficient/adjunction assertion invoked in the citing step, without replacing the affine-line iteration route."
-   },
-   {
-    "node": "lem-weil-pbc-etale-shriek-base-change-modules",
-    "why": "Finite-level interface used only as a generic tool: Etale extension by zero commutes with base change for module sheaves. It supplies the exact functor/coefficient/adjunction assertion invoked in the citing step, without replacing the affine-line iteration route."
-   },
-   {
-    "node": "thm-cbc-finite-torsion",
-    "why": "Finite-level interface used only as a generic tool: Compact-support base change at finite coefficients. It supplies the exact functor/coefficient/adjunction assertion invoked in the citing step, without replacing the affine-line iteration route."
+    "why": "Only the finite-level preservation or canonical projection-map naturality clause is used to type the ordered-tower specialization; no smooth-purity conclusion is used."
    },
    {
     "node": "lem-weil-pbc-finite-type-over-noetherian",
-    "why": "Generic finite-type Noetherianity verifies the base hypotheses of the current ordinary-etale projective-line and affine-line trace interfaces; it does not replace the unit's affine-line iteration route."
+    "why": "Only the finite-level preservation or canonical projection-map naturality clause is used to type the ordered-tower specialization; no smooth-purity conclusion is used."
+   },
+   {
+    "node": "thm-sf-comp-composition",
+    "why": "Supplies the compact-support compositors and their associativity/identity equations, the hypotheses on alpha of the ordered regrouping node in Step 2 (review fix Q109)."
+   },
+   {
+    "node": "lem-pur-derived-pullback-tensor-iso",
+    "why": "Coherence of the pullback-twist identifications I_{r,K} of def-pur-affine-space-comparison, the hypotheses on phi of the ordered regrouping node in Step 2 (review fix Q109)."
    }
   ]
  },
@@ -429,40 +269,25 @@
   "lem-asd-ordinary-finite-p1-adjunction",
   "lem-weil-pbc-etale-shriek-base-change-modules",
   "thm-cbc-finite-torsion",
-  "lem-weil-pbc-finite-type-over-noetherian"
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "det-pe-finite-tor-comparison-noetherian",
+  "lem-pur-vector-integration-site-comparison",
+  "lem-amb-affine-space-top-trace",
+  "thm-sf-ctf-stability",
+  "lem-pur-derived-pullback-tensor-iso"
  ],
  "reviewed": {
-  "date": "2026-10-17",
+  "date": "2026-10-22",
   "by": "L",
-  "reviewer": "NT-cc-Q121-aa4531cb2",
-  "group": "Q121",
+  "reviewer": "NT-cc-Q109-ecf135be7",
+  "group": "Q109",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q121-aa4531cb2 (reviewer sub-agent of L); spot-checked: Read the whole item, all ten steps, both new nodes and every cited statement. Also read the sk-prop-an unit and the blueprint source in master and in main-20261015, which are identical; the item has no blueprint_update. The repair answers the one returned point. Old Step 7 is now two statement-only nodes and three short steps (7-9); Steps 1-6 are unchanged and old Step 8 is now Step 10. Statement, stmt_deps, lean_audit and import flags are unchanged. proof_deps equals the union of the step uses. Every cited id exists and is unmerged, there is no cycle and no SGA source. lem-pur-affine-space-product-domain: the base coefficients of the two inverse projection maps in kappa_{m,1} are M on X and V_m on B, as the statement says; the projection map of def-exchange-projection needs a finite-Tor base coefficient, so the induction is needed. It is true by Kunneth: V_{m+1} = V_m tensor Rf_!M = A tensor A = A_B, which is flat, so Tor amplitude [0,0]. I tested m=1, f=id with M=A, and empty B. lem-pur-affine-space-trace-factorization: I_1 = t_Y holds by the identity conventions. The recurrence I_{m+1} = (I_m tensor t) kappa_{m,1} is a Fubini identity that uses base change of I_m along a; the hypothesis that line traces commute with base change over every base Y' covers that. All shifts are even, so there are no signs, and there is no permutation claim, so it is not circular. Neither node restates a parent clause. Neither duplicates thm-sf-kunneth-relative, lem-sf-kunneth-coherence, lem-amb-affine-space-top-trace, lem-pur-vector-integration-site-comparison, det-sp-composition-factors or det-sp-trace-basic. Step 7: lem-amb-affine-space-top-trace applies with S=Y, d=1, N=ell^r, A finite with NA=0, N invertible and Y Noetherian; with the compact-support comparison it gives U = A_Y. Steps 8-9 meet their hypotheses from Steps 5 and 7. The tensor-power induction and lem-sf-kunneth-coherence clauses (ii) and (iv) are correct, and so is the Step 10 sign and symmetry argument. I accept 17 off-unit tool uses, listed in review.md. The split_report still declares thm-sf-kunneth-relative, which no proof step cites now; that is harmless and unchanged. No fixes written."
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q109-ecf135be7 (reviewer sub-agent of L); spot-checked: Re-split under the 2026-10-21 human note. Statement, stmt_deps and lean are byte-identical to live; only proof, proof_deps, proof_origin and split_report changed. Not superseded live. Old step -> new location: Tor reflection (1) is det-pe-finite-tor-comparison-noetherian; site transport and the A(1)=nu^*(mu_{l^r} tensor A) twist (1-2) are lem-pur-vector-integration-site-comparison; c-coherence and the ordered-block induction (3-4) are new lem-pur-ordered-adjoint-tower-regrouping; line-trace base change (5) is lem-amb-affine-space-top-trace at d=1 (its counit t_q o Rq_*(eps^j) is the integral, with base change over any Noetherian base); pasted counit and projection extraction (6) are new lem-pur-ordered-affine-transpose-projection; 7-8 are top-trace and the existing product-domain; 9-10 are trace-factorization plus new lem-pur-even-line-product-integration-symmetry. No argument is blurred, and no new node restates the item. Assembly: 5 steps, 2353 characters (2792 after fix), all under 2000 per step. Checks: regrouping node typed and proved by induction (naturality of eta, c-pentagon from alpha by mates, phi-pentagon), cases r=0, i=j and r=1; transpose node at m=0 and m=1 (tau_1 = a_K = (1 tensor integral)Pi_K), and the composite formula follows from the pasted counit and naturality of tau_f; symmetry node: signed swap on A(1)[2] is (-1)^4 times b tensor b -> b tensor b, so the identity; blocks give (-1)^{4de}=+1; (t tensor t)sigma = t tensor t; cases m=1, empty Y, l=2. Not duplicates: lem-trf-adjoint-composition-coherence, mate-pasting, finite-forward-product-symmetry, sf-kunneth-coherence (needs a six-functor datum); lem-amb-linear-trace-invariance would be another proof route, not a duplicate. Batch-5: all flagged citations (def-pur-affine-line-purity-comparison, def-pur-affine-space-comparison, thm-sf-kunneth-relative) were already in the base closure. The reached nodes lem-pod-lisse-module-sheaves-as-module-objects and lem-trf-site-functorial-flat-resolution are generic foundations, not steps of the trace formula or Poincare duality; accepted. No cycle, no SGA. FIXES: (C4) Step 2 took the alpha associativity/unit and phi-coherence hypotheses from the def node, which only mentions them; it now cites thm-sf-comp-composition and lem-pur-derived-pullback-tensor-iso, which are already in the closure; proof_deps and split_report.tool_uses updated. (B2) In the symmetry node the vague sentence 'kappa_m compatible with reassociation, permutations, projections' is replaced by precise clauses: every parenthesization equals kappa_m after the associators, and kappa_m o S_sigma = P_sigma o kappa_m. Advisories: the pro-etale transport of line-trace base change in Step 3 is as terse as old Step 5; the stale top-level tool_uses is left for L.; 2 file(s) fixed by the reviewer"
  },
  "lean": {
   "module": "Sheaf.Paper.AffineSpacePurityComposition",
   "declaration": "AlgebraicGeometry.ProEtale.AffineSpacePurity.affineSpacePurityComposition",
   "declarations": [
-   "AlgebraicGeometry.ProEtale.AffineSpacePurity.actionAddIso",
-   "AlgebraicGeometry.ProEtale.AffineSpacePurity.projectionSource",
-   "AlgebraicGeometry.ProEtale.AffineSpacePurity.twistPullbackIso",
-   "AlgebraicGeometry.ProEtale.AffineSpacePurity.blockSourceIso",
-   "AlgebraicGeometry.ProEtale.AffineSpacePurity.isoExceptional",
-   "AlgebraicGeometry.ProEtale.AffineSpacePurity.blockSchemeEq",
-   "AlgebraicGeometry.ProEtale.AffineSpacePurity.blockProjection",
-   "AlgebraicGeometry.ProEtale.AffineSpacePurity.coordinateMap",
-   "AlgebraicGeometry.ProEtale.AffineSpacePurity.coordinateMap_isIso",
-   "AlgebraicGeometry.ProEtale.AffineSpacePurity.coordinateIso",
-   "AlgebraicGeometry.ProEtale.AffineSpacePurity.coordinateProjection",
-   "AlgebraicGeometry.ProEtale.AffineSpacePurity.blockPermutation",
-   "AlgebraicGeometry.ProEtale.AffineSpacePurity.purityProjectionCompactification",
-   "AlgebraicGeometry.ProEtale.AffineSpacePurity.exceptionalPositive_obj_eq",
-   "AlgebraicGeometry.ProEtale.AffineSpacePurity.positiveComparison_existsUnique",
-   "AlgebraicGeometry.ProEtale.AffineSpacePurity.positiveComparison",
-   "AlgebraicGeometry.ProEtale.AffineSpacePurity.coordinateSourceIso",
-   "AlgebraicGeometry.ProEtale.AffineSpacePurity.transportedComparison",
-   "AlgebraicGeometry.ProEtale.AffineSpacePurity.blockProjectionCompactification",
-   "AlgebraicGeometry.ProEtale.AffineSpacePurity.blockComposite",
    "AlgebraicGeometry.ProEtale.AffineSpacePurity.affineSpacePurityComposition"
   ],
   "file": "lean/Sheaf/Paper/AffineSpacePurityComposition.lean",
@@ -480,5 +305,15 @@
   "group": "NN",
   "result": "pass",
   "note": "Read packet, check-brief2, full module (545 lines), live AffineSpacePurityComparison and upstream UpperShriekIso, UpperShriekFiniteness, UpperShriekCongr, AffineSpace coord and toIteratedAffineLine. Node diff vs live is the lean field only; the 5 dep nodes are identical to live; statement verbatim; 21 declarations exact; imports exist; sorry-only proofs with blueprint docstrings and the 10-step proof plan. Hypotheses equal the affineSpacePurityComparison domain (P, Y sep. finite type over k, K Plus + etale finite-Tor representative); d+1, e+1 cover every d,e>=1. Conjunct 1: the total gamma transported along the literal blockSchemeEq regrouping equals blockComposite = blockSourceIso then F_{p_d}(gamma_{e+1}) then gamma_{d+1} at Rp_e^!K (dependency stage witnesses) then compositionInverse, the node's display factor by factor. Conjunct 3: gamma is invariant under the genuine polynomial block-interchange automorphism (toIteratedAffineLine with coord after sigma, sigma = finCongr then finAddFlip). Transports are canonical (rightDerivedUpperShriekIsoOfIso is the adjoint-uniqueness iso, pullback compositor, twist pullback, congr = subst refl). positiveComparison is an exists-unique choice pinned by HEq with equal types, not hollow; the HEq sides are definitionally equal types and compactification instances are Props. Edge cases d=e=0, empty Y, level 1, universes u/u+1 checked. Advisories: the Koszul conjunct is an arithmetic tautology matching the node's parity sentence; some helper declarations come from modules outside stmt_deps but serve the dependencies' notions. No compile, no fixes."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-6dc2c",
+  "group": "A2",
+  "result": "fix",
+  "landing": "20261025T211934-L-4162362",
+  "kind": "interface",
+  "note": "independent cc review: item theorem statement vs clone (identical); moved Maps defs vs old item bodies (verbatim); two sorry lemmas vs item conjuncts 1 and 3 and their nodes; item node vs Lean (statement uses decls owned by def-pur-affine-comparison-coordinate-maps)"
  }
 }

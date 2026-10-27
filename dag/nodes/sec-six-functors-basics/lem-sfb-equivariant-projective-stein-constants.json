@@ -1,0 +1,288 @@
+{
+ "id": "lem-sfb-equivariant-projective-stein-constants",
+ "kind": "statement",
+ "title": "Equivariant projective Stein constants of a finite cover of a projective scheme",
+ "statement": "Let $k$ be a field, $S$ a projective finite-type $k$-scheme, $X$ a normal integral finite-type $k$-scheme, and $q:X\\to S$ a finite $k$-morphism. Put $F=k(X)$ and $e=\\Gamma(X,\\mathcal O_X)$, the ring of global regular functions, embedded in $F$ by the generic germ map. Then $e$ is a field finite over $k$ and its image in $F$ is exactly $\\{a\\in F:a\\text{ is algebraic over }k\\}$. The canonical evaluation morphism $h:X\\to\\operatorname{Spec}e$ is proper with geometrically connected fibres. The scheme $X$ is projective over $k$ and over $e$, and is of finite type over $e$. For every separated finite-type $k$-scheme $V$ and every $k$-morphism $f:X\\to V$, $f$ admits a closed immersion $X\\hookrightarrow\\mathbf P^n_V$ over $V$ for some $n\\geq0$.\n\nIf a finite group $J$ acts on $k$ and $X$ compatibly by field and scheme automorphisms, it preserves $e\\subset F$, acts there by $j(a)=(j^{-1})^*a$, and makes $h$ equivariant. This action restricts to the given action on $k$. If $l$ is an intermediate field $k\\subseteq l\\subseteq F$ whose inclusion is supplied by a compatible structure morphism $X\\to\\operatorname{Spec}l$, then this inclusion factors through $e$ and $e/l$ is finite. These assertions do not require faithful group actions.\n\nNormal means that every local ring is an integrally closed domain. Geometrically connected fibres here mean that $X\\times_e E$ is nonempty and connected for every extension field $E/e$. Projective always means a closed immersion in a finite-dimensional projective space over the target. Separated means that the diagonal is a closed immersion. Schemes, fields, integrality, finite type, finite morphisms, projectivity, properness, function fields, affine spectra, relative algebraic closure, field extensions, geometric connectedness and closed immersions use [def-pc-scheme], [def-weil-field], [def-pc-integral-scheme], [def-weil-finite-type-morphism], [def-weil-finite-integral-morphism], [def-kun-projective], [def-weil-proper-morphism], [def-sc-function-field], [def-weil-affine-spectrum], [def-weil-relative-algebraic-closure], [def-pc-field-extension], [def-pc-geometrically-irreducible] and [def-weil-closed-immersion].",
+ "source": {
+  "document": "literature/stacks-project/more-morphisms.tex",
+  "place": "Tag 03H0, theorem-stein-factorization-Noetherian, over Spec k with normal source; equivariance and constants as in de Jong (1997), Lemma 5.2 proof p.613 and Lemma 5.5 p.614. Projective graph argument: schemes.tex Tag 01KR, lemma-fibre-product-after-map."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-field",
+  "def-pc-integral-scheme",
+  "def-weil-finite-type-morphism",
+  "def-weil-finite-integral-morphism",
+  "def-kun-projective",
+  "def-weil-proper-morphism",
+  "def-sc-function-field",
+  "def-weil-affine-spectrum",
+  "def-weil-relative-algebraic-closure",
+  "def-pc-field-extension",
+  "def-pc-geometrically-irreducible",
+  "def-weil-closed-immersion"
+ ],
+ "proof": [
+  {
+   "text": "Write $p:X\\to\\operatorname{Spec}k$ for the structure map. The one-point affine scheme $\\operatorname{Spec}k$ is Noetherian: its section ring is a field, whose only ideals are $(0)$ and $(1)$. Apply [lem-fin-finite-over-projective] to $S\\to\\operatorname{Spec}k$ and the finite map $q$. Its affine-base conclusion gives a closed immersion $X\\hookrightarrow\\mathbf P^n_k$. Thus $p$ is projective, and [lem-kun-projective-implies-proper] makes $p$ proper.",
+   "uses": [
+    "lem-fin-finite-over-projective",
+    "lem-kun-projective-implies-proper"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tags 0B3I (lemma-finite-projective), 087S (lemma-projective-over-quasi-projective-is-H-projective) and 01WC (lemma-locally-projective-proper), over the affine base Spec k; affine-base finite-cover conclusion as stated by lem-fin-finite-over-projective."
+   }
+  },
+  {
+   "text": "The hypotheses make $X$ integral, separated (by properness), and of finite type over $k$, hence a variety by [def-pc-curve]. Clause (1) of [lem-pc-h0-proper-variety] says that $e=\\Gamma(X,\\mathcal O_X)$ is a finite field extension of $k$. The generic germ map is injective by [lem-sc-integral-scheme-stalks-in-function-field], so this identifies $e$ with the specified subfield of $F$.",
+   "uses": [
+    "def-pc-curve",
+    "lem-pc-h0-proper-variety",
+    "lem-sc-integral-scheme-stalks-in-function-field"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 04L2 (lemma-regular-functions-proper-variety), clause (1), with Tag 0BUG (lemma-proper-geometrically-reduced-global-sections), clauses (1)--(3)."
+   }
+  },
+  {
+   "text": "The map $p$ is dominant since $X$ is nonempty and $\\operatorname{Spec}k$ has one point. Apply [lem-sfb-normal-stein-constant-field] to $p$ (normal integral finite-type source and integral finite-type target). Its chart for the whole affine target identifies its Stein scheme with $\\operatorname{Spec}e$ and its first map with evaluation $h$. Therefore $h$ is proper with geometrically connected fibres, and $s:\\operatorname{Spec}e\\to\\operatorname{Spec}k$ is finite. By [lem-sc-integral-function-field-affine-fraction], $k(\\operatorname{Spec}e)=\\operatorname{Frac}e=e$ and $k(\\operatorname{Spec}k)=k$. The evaluation construction has identity pullback on $e$, so its generic-field embedding is precisely the germ embedding of step 2. The constant-field equality in the cited Stein statement consequently gives $e=\\{a\\in F:a\\text{ is algebraic over }k\\}$. Its geometric-connectedness conclusion is for all field extensions of the residue field; here the only residue field is $e$. Thus it gives exactly the required nonempty connected $X\\times_e E$ for every $E/e$.",
+   "uses": [
+    "lem-sfb-normal-stein-constant-field",
+    "lem-sc-integral-function-field-affine-fraction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 03H0 (theorem-stein-factorization-Noetherian), properties (1), (2), (4), (5), specialized over Spec k; constant-field identification in lem-sfb-normal-stein-constant-field."
+   }
+  },
+  {
+   "text": "The finite map $s$ is proper by [lem-weil-pbc-finite-proper], hence separated by [def-weil-proper-morphism]. Apply [lem-sfb-finite-constant-projective-graph] with its ground field $k$, its finite extension $k/k$, its projective source $X/k$ from step 1, and target $\\operatorname{Spec}e$ with map $h$. It gives a closed immersion $X\\hookrightarrow\\mathbf P^N_e$ over $e$. Thus $X$ is projective over $e$. Properness of $h$ from step 3 includes finite type by [def-weil-proper-morphism], so $X/e$ has the required finite-type structure as well.",
+   "uses": [
+    "lem-weil-pbc-finite-proper",
+    "def-weil-proper-morphism",
+    "lem-sfb-finite-constant-projective-graph"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 0C4Q (lemma-projective-permanence), closed-graph argument; Tag 01W1 (definition-proper)."
+   }
+  },
+  {
+   "text": "For the given separated finite-type $V/k$ and $k$-map $f:X\\to V$, apply [lem-sfb-finite-constant-projective-graph] again with extension $k/k$, source $X/k$ and target $V$. Its conclusion is the required closed immersion $(i,f):X\\hookrightarrow\\mathbf P^M_k\\times_k V\\cong\\mathbf P^M_V$ over $V$, for some $M\\geq0$.",
+   "uses": [
+    "lem-sfb-finite-constant-projective-graph"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Tag 01KR (lemma-fibre-product-after-map), separated clause, as assembled in lem-sfb-finite-constant-projective-graph."
+   }
+  },
+  {
+   "text": "Write $j_X$ for the automorphism of $X$ associated to $j\\in J$. It fixes the unique generic point, so pullback induces a field automorphism of $F$. Pullback sends a global section to a global section and commutes with its generic germ; hence the subfield $e\\subset F$ is preserved. Put $\\rho_j=(j_X^{-1})^*$ on $F$ and on $e$. Contravariance gives $\\rho_{ij}=\\rho_i\\rho_j$ and $\\rho_1=1$, so these are actions. Compatibility of the original structure map says $(j_X^{-1})^*p^*(a)=p^*(j(a))$ for $a\\in k$; thus $\\rho_j|_k$ is the given field action. On $\\operatorname{Spec}e$ take the action $b_j=\\operatorname{Spec}(\\rho_{j^{-1}})$. By the contravariant functoriality in [def-weil-affine-spectrum], $b_{ij}=b_i b_j$. The affine adjunction [lem-a1-locally-ringed-space-affine-adjunction] says that $h$ has pullback the identity on $e$ and determines maps into $\\operatorname{Spec}e$ by their global pullback. Both $h\\circ j_X$ and $b_j\\circ h$ have pullback $j_X^*=\\rho_{j^{-1}}:e\\to e$; they are equal. This proves equivariance for the very action stipulated in the statement. No injectivity of $J$ into any automorphism group was used.",
+   "uses": [
+    "def-weil-affine-spectrum",
+    "lem-a1-locally-ringed-space-affine-adjunction"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Tag 01I1 (lemma-morphism-into-affine), functoriality of pullback and the identity-section evaluation morphism."
+   }
+  },
+  {
+   "text": "Let $t:X\\to\\operatorname{Spec}l$ be the supplied compatible structure map. By [lem-a1-locally-ringed-space-affine-adjunction], its pullback is a ring map $u:l\\to e$ and $t=\\operatorname{Spec}(u)\\circ h$: the two morphisms have pullback $u$. The generic germ of $u$ is the stipulated inclusion $l\\subset F$, so $u$ is injective and its image is that same intermediate field inside $e\\subset F$. It respects $k$ by the compatibility assumption. Finally any finite $k$-spanning set of $e$ is also an $l$-spanning set: its $l$-span lies in $e$ and contains its $k$-span, which is all of $e$. Thus $e/l$ is finite, even when $l/k$ was not assumed finite.",
+   "uses": [
+    "lem-a1-locally-ringed-space-affine-adjunction"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Tag 01I1 (lemma-morphism-into-affine), factorization corresponding to the section-ring map; elementary spanning-set argument."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-curve",
+  "def-weil-affine-spectrum",
+  "def-weil-proper-morphism",
+  "lem-a1-locally-ringed-space-affine-adjunction",
+  "lem-fin-finite-over-projective",
+  "lem-kun-projective-implies-proper",
+  "lem-pc-h0-proper-variety",
+  "lem-sc-integral-function-field-affine-fraction",
+  "lem-sc-integral-scheme-stalks-in-function-field",
+  "lem-sfb-finite-constant-projective-graph",
+  "lem-sfb-normal-stein-constant-field",
+  "lem-weil-pbc-finite-proper"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/more-morphisms.tex",
+  "place": "Assembly of Tag 03H0 with varieties.tex Tag 04L2 and schemes.tex Tags 01I1 and 01KR. The semilinear action and intermediate-field factorization are written out from pullback functoriality; de Jong (1997), Lemmas 5.2 and 5.5, local PDF WANTED."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For a normal integral finite cover of a projective variety global functions are the finite algebraic constant field and the Stein morphism is equivariant and projective",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.AffineSpace.not_isIntegralHom\", \"module\": \"Mathlib/AlgebraicGeometry/AffineSpace\", \"type\": \"∀ {n : Type v} (S : AlgebraicGeometry.Scheme) [Nonempty ↥S] [Nonempty n],\\n  ¬AlgebraicGeometry.IsIntegralHom (AlgebraicGeometry.AffineSpace n S ↘ S)\", \"doc\": \"For any nonempty scheme $ S $ and nonempty type $ n $, the canonical morphism from the affine $ n $-space $ \\\\mathbb{A}^n_S $ to $ S $ is not an integral morphism of schemes.\"}\n  {\"name\": \"AlgebraicGeometry.finite_appTop_of_universallyClosed\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Proper\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} (K : Type u) [inst : Field K]\\n  (f : X ⟶ AlgebraicGeometry.Spec { carrier := K, commRing := Field.toEuclideanDomain.toCommRing })\\n  [AlgebraicGeometry.IsIntegral X] [AlgebraicGeometry.UniversallyClosed f] [AlgebraicGeometry.LocallyOfFiniteType f],\\n  (CommRingCat.Hom.\", \"doc\": \"Let $K$ be a field, and let $f: X \\\\to \\\\operatorname{Spec}(K)$ be a morphism from an integral scheme $X$. If $f$ is universally closed and locally of finite type, then the ring of global sections of $X\"}\n  {\"name\": \"AlgebraicGeometry.Proj.instLocallyOfFiniteTypeToSpecZeroOfFiniteTypeSubtypeMemOfNatNat\", \"module\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Proper\", \"type\": \"∀ {σ : Type u_1} {A : Type u_2} [inst : CommRing A] [inst_1 : SetLike σ A] [inst_2 : AddSubgroupClass σ A] (𝒜 : ℕ → σ)\\n  [inst_3 : GradedRing 𝒜] [Algebra.FiniteType (↥(𝒜 0)) A],\\n  AlgebraicGeometry.LocallyOfFiniteType (AlgebraicGeometry.Proj.toSpecZero 𝒜)\", \"doc\": \"Given a graded ring $\\\\mathcal{A}$ whose zero-graded component $\\\\mathcal{A}_0$ is a finitely generated algebra over a base ring $A$, the canonical morphism from the projective spectrum $\\\\operatorname{P\"}\n  {\"name\": \"AlgebraicGeometry.Proj.instIsProperToSpecZeroOfFiniteTypeSubtypeMemOfNatNat\", \"module\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Proper\", \"type\": \"∀ {σ : Type u_1} {A : Type u_2} [inst : CommRing A] [inst_1 : SetLike σ A] [inst_2 : AddSubgroupClass σ A] (𝒜 : ℕ → σ)\\n  [inst_3 : GradedRing 𝒜] [Algebra.FiniteType (↥(𝒜 0)) A],\\n  AlgebraicGeometry.IsProper (AlgebraicGeometry.Proj.toSpecZero 𝒜)\", \"doc\": \"If the zero-graded component $ \\\\mathcal{A}_0 $ of a graded ring $ \\\\mathcal{A} $ is a finitely generated $ A $-algebra, then the canonical morphism from the projective spectrum $ \\\\operatorname{Proj}(\\\\m\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.toNormalization\", \"module\": \"Mathlib/AlgebraicGeometry/Normalization\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} →\\n  (f : X ⟶ Y) →\\n    [inst : AlgebraicGeometry.QuasiCompact f] →\\n      [inst_1 : AlgebraicGeometry.QuasiSeparated f] → X ⟶ AlgebraicGeometry.Scheme.Hom.normalization f\", \"doc\": \"The morphism from a scheme $ X $ to the normalization of a scheme morphism $ f: X \\to Y $, constructed by gluing local normalization maps defined via the integral closure of structure sheaves over an a\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.instIsIntegralHomNormalizationDesc\", \"module\": \"Mathlib/AlgebraicGeometry/Normalization\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [inst : AlgebraicGeometry.QuasiCompact f]\\n  [inst_1 : AlgebraicGeometry.QuasiSeparated f] {T : AlgebraicGeometry.Scheme} (f₁ : X ⟶ T) (f₂ : T ⟶ Y)\\n  [inst_2 : AlgebraicGeometry.IsIntegralHom f₂] (H : f = CategoryTheory.CategoryStruct.comp f₁ f₂),\\n  Alge\", \"doc\": \"The normalization morphism associated with a scheme morphism $ f: X \\to Y $, constructed via the colimit diagram involving the affine Zariski site of $ Y $ and the Spec functor, is an integral morphism\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.instIsIntegralNormalization\", \"module\": \"Mathlib/AlgebraicGeometry/Normalization\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [inst : AlgebraicGeometry.QuasiCompact f]\\n  [inst_1 : AlgebraicGeometry.QuasiSeparated f] [AlgebraicGeometry.IsIntegral X],\\n  AlgebraicGeometry.IsIntegral (AlgebraicGeometry.Scheme.Hom.normalization f)\", \"doc\": \"If $ X $ is an integral scheme, then the normalization of a morphism $ f: X \\\\to Y $ is also an integral scheme. This instance asserts that the categorical construction of normalization preserves the i\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.instIsIntegralHomFromNormalization\", \"module\": \"Mathlib/AlgebraicGeometry/Normalization\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [inst : AlgebraicGeometry.QuasiCompact f]\\n  [inst_1 : AlgebraicGeometry.QuasiSeparated f],\\n  AlgebraicGeometry.IsIntegralHom (AlgebraicGeometry.Scheme.Hom.fromNormalization f)\", \"doc\": \"The canonical morphism from the normalization of a scheme morphism $ f: X \\to Y $ to the target scheme $ Y $ is an integral morphism of schemes.\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: global-section finiteness is only one clause; no match for the canonical constant-field identification, geometric Stein fibres and equivariant projectivity"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"finite_appTop\"",
+   "results": "[loogle] OK 2 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.finite_appTop\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Finite\", \"type\": \" {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.IsAffine Y] [AlgebraicGeometry.IsFinite f] : (CommRingCat.Hom.hom (AlgebraicGeometry.Scheme.Hom.appTop f)).Finite\", \"doc\": \"\"}\n  {\"name\": \"AlgebraicGeometry.finite_appTop_of_universallyClosed\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Proper\", \"type\": \" {X : AlgebraicGeometry.Scheme} (K : Type u) [Field K] (f : X ⟶ AlgebraicGeometry.Spec ↧K) [AlgebraicGeometry.IsIntegral X] [AlgebraicGeometry.UniversallyClosed f] [AlgebraicGeometry.LocallyOfFiniteType f] : (CommRingCat.Hom.hom (AlgebraicGeometry.Scheme.Hom.appTop f)).Finite\", \"doc\": \"If `X` is an integral scheme that is universally closed and of finite type over `Spec K`,\\nthen `Γ(X, ⊤)` is a finite field extension over `K`.\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: global-section finiteness is only one clause; no match for the canonical constant-field identification, geometric Stein fibres and equivariant projectivity"
+  },
+  {
+   "tool": "grep",
+   "query": "[Ss]tein|finite_appTop|toSpecΓ.*[Pp]rojective",
+   "results": "[grep] OK 5 hit(s)\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/Proper.lean\", \"line\": \"21\", \"text\": \"- `AlgebraicGeometry.finite_appTop_of_universallyClosed`:\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/Proper.lean\", \"line\": \"161\", \"text\": \"theorem finite_appTop_of_universallyClosed (f : X ⟶ (Spec <| .of K))\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/FlatRank.lean\", \"line\": \"69\", \"text\": \"  rw [CommRingCat.finrank_eq_of_isPushout this f.flat_appTop f.finite_appTop (T.isoSpec.hom t),\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/FlatRank.lean\", \"line\": \"121\", \"text\": \"  have hf₁ : (Spec.map f).appTop.hom.Finite := (Spec.map f).finite_appTop\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/Finite.lean\", \"line\": \"170\", \"text\": \"lemma Scheme.Hom.finite_appTop {X Y : Scheme.{u}} (f : X ⟶ Y) [IsAffine Y] [IsFinite f] :\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: global-section finiteness is only one clause; no match for the canonical constant-field identification, geometric Stein fibres and equivariant projectivity",
+   "directory": "AlgebraicGeometry"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A normal projective scheme is projective with geometrically connected fibres over its finite field of global functions with its induced group action",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"Projectivization.instMulAction\", \"module\": \"Mathlib.LinearAlgebra.Projectivization.Action\", \"type\": \": MulAction G (ℙ K V)\", \"doc\": \"For a group $G$ acting distributively on a module $V$ over a division ring $K$ (with commuting scalar multiplications between $G$ and $K$), this constructs a group action of $G$ on the projectivizatio\"}\n  {\"name\": \"AlgebraicGeometry.IsFinite.recOn\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Finite\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} →\\n  {f : X ⟶ Y} →\\n    {motive : AlgebraicGeometry.IsFinite f → Sort u} →\\n      (t : AlgebraicGeometry.IsFinite f) →\\n        ([toIsAffineHom : AlgebraicGeometry.IsAffineHom f] →\\n            (finite_app :\\n                ∀ (U : Y.Opens),\\n                  AlgebraicGeom\", \"doc\": \"A morphism $ f : X \\\\to Y $ of schemes is finite if it is affine and for every affine open subset $ U \\\\subseteq Y $, the induced ring homomorphism $ \\\\Gamma(Y, U) \\\\to \\\\Gamma(X, f^{-1}(U)) $ is finite, m\"}\n  {\"name\": \"Projectivization.smul_def\", \"module\": \"Mathlib.LinearAlgebra.Projectivization.Action\", \"type\": \"∀ {G : Type u_1} {K : Type u_2} {V : Type u_3} [inst : AddCommGroup V] [inst_1 : DivisionRing K] [inst_2 : Module K V]\\n  [inst_3 : Group G] [inst_4 : DistribMulAction G V] [inst_5 : SMulCommClass G K V] (g : G) (x : Projectivization K V),\\n  SMul.smul g x = Projectivization.map ((DistribMulAction.toM\", \"doc\": \"Given a group $G$ acting distributively on a module $V$ over a division ring $K$ with commuting scalar multiplications between $G$ and $K$, there exists a well-defined group action of $G$ on the proje\"}\n  {\"name\": \"Projectivization.instMulAction.congr_simp\", \"module\": \"Mathlib.Topology.Compactification.OnePoint.ProjectiveLine\", \"type\": \"∀ {G : Type u_1} {K : Type u_2} {V : Type u_3} [inst : AddCommGroup V] [inst_1 : DivisionRing K] [inst_2 : Module K V]\\n  [inst_3 : Group G] [inst_4 : DistribMulAction G V] [inst_5 : SMulCommClass G K V],\\n  Projectivization.instMulAction = Projectivization.instMulAction\", \"doc\": \"For a group $G$ acting distributively on a module $V$ over a division ring $K$ with commuting scalar multiplications between $G$ and $K$, there exists a well-defined group action of $G$ on the project\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.fiber\", \"module\": \"Mathlib.AlgebraicGeometry.Fiber\", \"type\": \"(f : X ⟶ Y) (y : Y) : Scheme\", \"doc\": \"Given a morphism of schemes $f: X \\\\to Y$ and a point $y \\\\in Y$, the fiber of $f$ over $y$ is the scheme obtained by taking the fiber product (pullback) of $f$ with the canonical morphism $\\\\operatornam\"}\n  {\"name\": \"AlgebraicGeometry.Proj.isSeparated\", \"module\": \"Mathlib.AlgebraicGeometry.ProjectiveSpectrum.Proper\", \"type\": \": IsSeparated (toSpecZero 𝒜)\", \"doc\": \"The canonical morphism from the projective spectrum $\\\\operatorname{Proj}(\\\\mathcal{A})$ of a graded ring $\\\\mathcal{A}$ to the affine scheme $\\\\operatorname{Spec}(\\\\mathcal{A}_0)$, where $\\\\mathcal{A}_0$ i\"}\n  {\"name\": \"AlgebraicGeometry.Proj\", \"module\": \"Mathlib.AlgebraicGeometry.ProjectiveSpectrum.Scheme\", \"type\": \": Scheme\", \"doc\": \"The projective spectrum $\\\\operatorname{Proj}(\\\\mathcal{A})$ of a graded ring $\\\\mathcal{A}$ is constructed as a scheme by equipping it with a locally ringed space structure. For every point $x \\\\in \\\\oper\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.instIsIntegralNormalization\", \"module\": \"Mathlib.AlgebraicGeometry.Normalization\", \"type\": \"[IsIntegral X] : IsIntegral f.normalization\", \"doc\": \"If $ X $ is an integral scheme, then the normalization of a morphism $ f: X \\\\to Y $ is also an integral scheme. This instance asserts that the categorical construction of normalization preserves the i\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: global-section finiteness is only one clause; no match for the canonical constant-field identification, geometric Stein fibres and equivariant projectivity"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Stein factorization of a normal projective variety over a field identifies global sections with algebraic closure of constants and is compatible with automorphisms",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.normalizationDesc\", \"module\": \"Mathlib/AlgebraicGeometry/Normalization\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} →\\n  (f : X ⟶ Y) →\\n    [inst : AlgebraicGeometry.QuasiCompact f] →\\n      [inst_1 : AlgebraicGeometry.QuasiSeparated f] →\\n        {T : AlgebraicGeometry.Scheme} →\\n          (f₁ : X ⟶ T) →\\n            (f₂ : T ⟶ Y) →\\n              [AlgebraicGeometry.IsIntegralHom f₂] →\\n \", \"doc\": \"A morphism from the normalization of a scheme morphism $ f: X \\to Y $ to another scheme $ T $, constructed as the colimit in the category of schemes of a diagram involving the affine Zariski site of $ \"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.toNormalization_app_preimage\", \"module\": \"Mathlib/AlgebraicGeometry/Normalization\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [inst : AlgebraicGeometry.QuasiCompact f]\\n  [inst_1 : AlgebraicGeometry.QuasiSeparated f] (U : ↑Y.affineOpens),\\n  let this := (CommRingCat.Hom.hom (AlgebraicGeometry.Scheme.Hom.app f ↑U)).toAlgebra;\\n  AlgebraicGeometry.Scheme.Hom.app (AlgebraicGeometry.\", \"doc\": \"For an affine open subset $U$ of a scheme $Y$, the application of the normalization morphism $f$ to the preimage of $U$ under the normalization map is equal to a composition of maps involving the inte\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.normalizationDiagramMap\", \"module\": \"Mathlib/AlgebraicGeometry/Normalization\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (f : X ⟶ Y) → Y.presheaf ⟶ AlgebraicGeometry.Scheme.Hom.normalizationDiagram f\", \"doc\": \"A morphism from the presheaf of a scheme $ Y $ to the normalization diagram associated with a morphism $ f $, which encodes the integral closure data of $ Y $ in the context of the morphism $ f $.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.ι_toNormalization\", \"module\": \"Mathlib/AlgebraicGeometry/Normalization\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [inst : AlgebraicGeometry.QuasiCompact f]\\n  [inst_1 : AlgebraicGeometry.QuasiSeparated f] (U : ↑Y.affineOpens),\\n  CategoryTheory.CategoryStruct.comp ((TopologicalSpace.Opens.map f.base).obj ↑U).ι\\n      (AlgebraicGeometry.Scheme.Hom.toNormalization f) =\\n\", \"doc\": \"For an affine open subset $U$ of a scheme $Y$, the composition of the inclusion morphism $f^{-1}(U) \\\\to X$ followed by the normalization morphism $X \\\\to \\\\overline{X}$ equals the composition of the can\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.SpecToEquivOfField\", \"module\": \"Mathlib/AlgebraicGeometry/ResidueField\", \"type\": \"(K : Type u) →\\n  [inst : Field K] →\\n    (X : AlgebraicGeometry.Scheme) →\\n      (AlgebraicGeometry.Spec { carrier := K, commRing := Field.toEuclideanDomain.toCommRing } ⟶ X) ≃\\n        (x : ↥X) × (X.residueField x ⟶ { carrier := K, commRing := Field.toEuclideanDomain.toCommRing })\", \"doc\": \"For any scheme $X$ and field $K$, there is a bijection between the set of morphisms $\\\\operatorname{Spec}(K) \\\\to X$ and the set of pairs $(x, \\\\phi)$ where $x \\\\in X$ is a point and $\\\\phi : \\\\kappa(x) \\\\to\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.normalizationDiagram\", \"module\": \"Mathlib/AlgebraicGeometry/Normalization\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → CategoryTheory.Functor Y.Opensᵒᵖ CommRingCat\", \"doc\": \"The functor assigns to each open subset $ U $ of $ Y $ the integral closure of the ring of sections $ \\\\Gamma(Y, U) $ in $ \\\\Gamma(X, f^{-1}(U)) $, and to each inclusion $ V \\\\subseteq U $ the induced ri\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.normalization.hom_ext\", \"module\": \"Mathlib/AlgebraicGeometry/Normalization\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [inst : AlgebraicGeometry.QuasiCompact f]\\n  [inst_1 : AlgebraicGeometry.QuasiSeparated f] {T : AlgebraicGeometry.Scheme}\\n  (f₁ f₂ : AlgebraicGeometry.Scheme.Hom.normalization f ⟶ T) (g : T ⟶ Y) [AlgebraicGeometry.IsAffineHom g],\\n  CategoryTheory.Categor\", \"doc\": \"Given two morphisms from the normalization of a scheme morphism $ f: X \\to Y $ to a scheme $ T $, if there exists an affine morphism $ g: T \\to Y $ such that both morphisms compose with $ g $ to yield t\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.toNormalization_normalizationDesc_assoc\", \"module\": \"Mathlib/AlgebraicGeometry/Normalization\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [inst : AlgebraicGeometry.QuasiCompact f]\\n  [inst_1 : AlgebraicGeometry.QuasiSeparated f] {T : AlgebraicGeometry.Scheme} (f₁ : X ⟶ T) (f₂ : T ⟶ Y)\\n  [inst_2 : AlgebraicGeometry.IsIntegralHom f₂] (H : f = CategoryTheory.CategoryStruct.comp f₁ f₂)\\n  {Z : \", \"doc\": \"For schemes $X, Y, T, Z$ and morphisms $f: X \\to Y$, $f₁: X \\to T$, $f₂: T \\to Y$ (with $f₂$ integral), the composition of the normalization morphism $X \\to \\text{Normalization}(f)$ with the normalization \"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: global-section finiteness is only one clause; no match for the canonical constant-field identification, geometric Stein fibres and equivariant projectivity"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A normal integral finite cover of a projective scheme over a field has finite algebraic global constants and equivariant geometrically connected Stein morphism",
+   "results": "{\"t\": \"2026-10-23T04:41:30Z\", \"tool\": \"leanfinder\", \"query\": \"A normal integral finite cover of a projective scheme over a field has finite algebraic global constants and equivariant geometrically connected Stein morphism\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.finite_appTop_of_universallyClosed\", \"AlgebraicGeometry.Scheme.Hom.instIsIntegralNormalization\", \"AlgebraicGeometry.Scheme.Hom.normalizationOpenCover\", \"AlgebraicGeometry.IsIntegral\", \"AlgebraicGeometry.Scheme.Hom.instIsIntegralHomFromNormalization\", \"AlgebraicGeometry.Scheme.Hom.instIsIntegralHomNormalizationDesc\", \"AlgebraicGeometry.IsFinite.instIsIntegralHom\", \"AlgebraicGeometry.isField_of_universallyClosed\"], \"digest\": \"17178a853381794f\"}; Read returned names and the source at Mathlib/AlgebraicGeometry/Morphisms/Proper.lean:138--174. isField_of_universallyClosed and finite_appTop_of_universallyClosed cover only the finite-field global-section clause; the normalization and affine-space hits do not state the constants identification, geometric Stein fibres, projective graph embeddings or semilinear action.",
+   "date": "2026-10-23",
+   "verdict": "no match for the whole item; finite-field global-section clause is already in Mathlib and is used through the existing node lem-pc-h0-proper-variety"
+  },
+  {
+   "tool": "grep",
+   "query": "[Ss]tein|finite_appTop|toSpecΓ.*[Pp]rojective",
+   "results": "{\"t\": \"2026-10-23T04:42:03Z\", \"tool\": \"grep\", \"query\": \"[Ss]tein|finite_appTop|toSpecΓ.*[Pp]rojective\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/Morphisms/Proper.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/Proper.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/FlatRank.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/FlatRank.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/Finite.lean\"], \"digest\": \"418ca0b14114963a\"}; Read returned names and the source at Mathlib/AlgebraicGeometry/Morphisms/Proper.lean:138--174. isField_of_universallyClosed and finite_appTop_of_universallyClosed cover only the finite-field global-section clause; the normalization and affine-space hits do not state the constants identification, geometric Stein fibres, projective graph embeddings or semilinear action.",
+   "date": "2026-10-23",
+   "verdict": "no match for the whole item; finite-field global-section clause is already in Mathlib and is used through the existing node lem-pc-h0-proper-variety",
+   "directory": "AlgebraicGeometry"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Stein factorization of a normal projective variety identifies global functions with the algebraic constant field and is compatible with semilinear automorphisms",
+   "results": "{\"t\": \"2026-10-23T04:42:03Z\", \"tool\": \"leansearch\", \"query\": \"Stein factorization of a normal projective variety identifies global functions with the algebraic constant field and is compatible with semilinear automorphisms\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"exists_finite_inj_algHom_of_fg\", \"AlgebraicGeometry.Scheme.Hom.toNormalization\", \"AlgebraicGeometry.functionField_isScalarTower\", \"AlgebraicGeometry.Scheme.Hom.instIsAffineHomToNormalization\", \"AlgEquiv.restrictNormalHom_apply\", \"AlgebraicGeometry.instAlgebraCarrierFunctionFieldSpec\", \"AlgebraicGeometry.Scheme.Hom.normalizationDesc\", \"AlgebraicGeometry.Scheme.Hom.toNormalization_normalizationDesc\"], \"digest\": \"5ff75ed46f80ec54\"}; Read returned names and the source at Mathlib/AlgebraicGeometry/Morphisms/Proper.lean:138--174. isField_of_universallyClosed and finite_appTop_of_universallyClosed cover only the finite-field global-section clause; the normalization and affine-space hits do not state the constants identification, geometric Stein fibres, projective graph embeddings or semilinear action.",
+   "date": "2026-10-23",
+   "verdict": "no match for the whole item; finite-field global-section clause is already in Mathlib and is used through the existing node lem-pc-h0-proper-variety"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"finite_appTop\"",
+   "results": "{\"t\": \"2026-10-23T04:42:04Z\", \"tool\": \"loogle\", \"query\": \"\\\"AlgebraicGeometry\\\", \\\"finite_appTop\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 2, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Hom.finite_appTop\", \"AlgebraicGeometry.finite_appTop_of_universallyClosed\"], \"digest\": \"c06bd9146319f782\"}; Read returned names and the source at Mathlib/AlgebraicGeometry/Morphisms/Proper.lean:138--174. isField_of_universallyClosed and finite_appTop_of_universallyClosed cover only the finite-field global-section clause; the normalization and affine-space hits do not state the constants identification, geometric Stein fibres, projective graph embeddings or semilinear action.",
+   "date": "2026-10-23",
+   "verdict": "no match for the whole item; finite-field global-section clause is already in Mathlib and is used through the existing node lem-pc-h0-proper-variety"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Global sections of a proper normal integral scheme over a field are its relative algebraic closure of the base field and the scheme is projective over those constants",
+   "results": "{\"t\": \"2026-10-23T04:44:20Z\", \"tool\": \"leanfinder\", \"query\": \"Global sections of a proper normal integral scheme over a field are its relative algebraic closure of the base field and the scheme is projective over those constants\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.isField_of_universallyClosed\", \"AlgebraicGeometry.finite_appTop_of_universallyClosed\", \"AlgebraicGeometry.Scheme.Hom.instIsIntegralNormalization\", \"AlgebraicGeometry.IsIntegral\", \"AlgebraicGeometry.compactSpace_of_universallyClosed\", \"AlgebraicGeometry.isIntegral_appTop_of_universallyClosed\", \"AlgebraicGeometry.Proj.instIsProperToSpecZeroOfFiniteTypeSubtypeMemOfNatNat\", \"AlgebraicGeometry.Scheme.Hom.instIsIsoToNormalizationOfIsIntegralHom\"], \"digest\": \"1d8932bab461b189\"}; Read returned names and the source at Mathlib/AlgebraicGeometry/Morphisms/Proper.lean:138--174. isField_of_universallyClosed and finite_appTop_of_universallyClosed cover only the finite-field global-section clause; the normalization and affine-space hits do not state the constants identification, geometric Stein fibres, projective graph embeddings or semilinear action.",
+   "date": "2026-10-23",
+   "verdict": "no match for the whole item; finite-field global-section clause is already in Mathlib and is used through the existing node lem-pc-h0-proper-variety"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-normal-alteration-constant-regularization",
+  "date": "2026-10-22",
+  "group": "Q134"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; prerequisite: de Jong (1997), Lemma 5.5 and proof, printed p.614, applied over Spec k: purely inseparable geometric reduction and Stein constants. Geometric-normal preparation is Stacks Tag 0BXT (varieties-lemma-finite-extension-geometrically-normal); the fixed-field conclusion uses the geometric integrality of Y.; extracted argument: returned proof steps 7, 8, 9, 10",
+   "via": [
+    "lem-sfb-normal-alteration-constant-regularization",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-equivariant-projective-stein-constants",
+  "worker": "stage1",
+  "summary": "NX: statement unchanged; seven steps reuse the existing finite-cover projectivity, proper global-functions, normal Stein constants, projective graph and affine-adjunction nodes. Explicit inverse-pullback formulas prove the action laws, restriction to k and evaluation equivariance; the actual l-structure map factors through global sections and a k-spanning set proves e/l finite. No new nodes. All step citations were read and quoted in citations.json; both Mathlib phrasings gave only partial clauses.",
+  "blueprint": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; prerequisite: de Jong (1997), Lemma 5.5 and proof, printed p.614, applied over Spec k: purely inseparable geometric reduction and Stein constants. Geometric-normal preparation is Stacks Tag 0BXT (varieties-lemma-finite-extension-geometrically-normal); the fixed-field conclusion uses the geometric integrality of Y.; extracted argument: returned proof steps 7, 8, 9, 10; realizes the extracted steps 7--10: projectivity, Stein constants, equivariant evaluation, and the intermediate-field clause. The inherited nearest blueprint ancestor is null; blueprint_refs.py ancestor confirms this broken ancestry in the base, and no invented ancestor is assigned.",
+  "tool_uses": [
+   {
+    "node": "lem-fin-finite-over-projective",
+    "why": "Its affine-base specialization supplies the projective embedding of the finite cover over Spec k; no node of the unit supplies this generic projectivity tool."
+   },
+   {
+    "node": "lem-kun-projective-implies-proper",
+    "why": "Generic implication projective implies proper, needed before the same Stein route."
+   },
+   {
+    "node": "lem-pc-h0-proper-variety",
+    "why": "Only clause (1), the global-section finite field theorem for a proper integral finite-type scheme; no replacement of the alteration route."
+   },
+   {
+    "node": "lem-sc-integral-scheme-stalks-in-function-field",
+    "why": "Generic injection identifies the global-section field with its specified image of germs in F."
+   },
+   {
+    "node": "lem-sc-integral-function-field-affine-fraction",
+    "why": "Generic affine identification k(Spec e)=e makes the same Stein statement give the exact constant subfield."
+   },
+   {
+    "node": "lem-weil-pbc-finite-proper",
+    "why": "Finite Spec e over Spec k is separated, the hypothesis of the projective closed-graph tool."
+   },
+   {
+    "node": "lem-a1-locally-ringed-space-affine-adjunction",
+    "why": "Generic ring/scheme adjunction supplies the identity evaluation pullback and detects the action and intermediate-field factorization equalities."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-fin-finite-over-projective",
+  "lem-kun-projective-implies-proper",
+  "lem-pc-h0-proper-variety",
+  "lem-sc-integral-scheme-stalks-in-function-field",
+  "lem-sc-integral-function-field-affine-fraction",
+  "lem-weil-pbc-finite-proper",
+  "lem-a1-locally-ringed-space-affine-adjunction"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-NX-50ed478fa",
+  "group": "NX",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NX-50ed478fa (reviewer sub-agent of L); spot-checked: I read the item in full, every cited statement, the parent's step 3 and Stacks 03H0 (more-morphisms l.15205). There are no new nodes and no repair note, and the statement and stmt_deps are unchanged. Step 1: Spec k is Noetherian, S is H-projective and quasi-compact by finite type, so the affine clause of finite-over-projective gives X in P^n_k, hence proper. Step 2: X is a variety in def-pc-curve, h0-proper-variety (1) applies, and the germ map is injective. Step 3: the reviewed normal-Stein node applies to the proper dominant map X->Spec k. Its affine chart is Spec e with evaluation h, and affine-fraction gives k(Spec e)=e, so e is the algebraic closure of k in F. Geometric connectedness includes nonemptiness (def-weil-connected-scheme). Steps 4-5: Spec e and V are separated k-schemes, and the graph node gives X in P^N_e and in P^M_V. Step 6: I checked that rho_j=(j_X^{-1})^* and b_j=Spec rho_{j^{-1}} are actions and that h is equivariant by the affine adjunction. 'Compatibly' is read as the left-action convention, the only one consistent with j(a)=(j^{-1})^*a. Step 7: t=Spec(u) o h and spanning sets give e/l finite. Edge cases (Spec L purely inseparable, P^n_k, P^n_L over k, trivial J, l=k or l=e) are consistent. No duplicate: equivariant-projective-stein-factor, normal-sections-algebraic-constants and smooth-cover-constant-field-marking are different statements. No SGA is cited. The 7 tool_uses are generic and accepted. Batch-5: h0-proper-variety reaches only the general definition def-trf-schematically-dense-open, and the projective-graph node reaches only def-trf-projective-bundle-morphism. Both are outside the trace formula and Poincare duality, so both are accepted. No changes made."
+ }
+}

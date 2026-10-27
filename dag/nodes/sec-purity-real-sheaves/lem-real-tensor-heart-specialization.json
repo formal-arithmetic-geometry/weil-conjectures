@@ -1,0 +1,149 @@
+{
+ "id": "lem-real-tensor-heart-specialization",
+ "kind": "statement",
+ "title": "Specialization of the specified derived tensor to the lisse heart",
+ "statement": "Fix D,l,E,X,a as in [def-real-tensor-pullback-comparison-data]. For every d:DerivedTensorRealization [lem-real-derived-tensor-calculation], there is a coherent lisse TensorAt t for a and a TensorNormalized t [def-real-lisse-tensor-normalization]. For all raw lisse objects K,L, the ordinary ambient derived tensor of a.J K and a.J L is isomorphic to the single in degree zero of a.sheaf K tensor a.sheaf L, and H0 of d.raw followed by this isomorphism and the standard single-H0 comparison equals exactly t.tensor K L. The derived input d, including its good-model and unit formulas, is assumed; this statement only constructs its heart specialization and proves the prescribed coherence and representative normalization.",
+ "source": {
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Remark 6.8.15; original tensor proof steps 3-4, with completed coherence from whole-tower substitution"
+ },
+ "stmt_deps": [
+  "def-real-lisse-tensor-normalization",
+  "def-real-tensor-pullback-comparison-data",
+  "lem-real-derived-tensor-calculation"
+ ],
+ "proof": [
+  {
+   "text": "Lisse realization is a finite locally free sheaf in degree zero. Such a sheaf is flat because tensoring on a trivializing slice is a finite direct sum of the identity, including rank zero. The flat-single tensor calculation and the H0-normalized single comparison identify its derived tensor with ordinary tensor in degree zero. Use this and d.raw to define t.tensor.",
+   "uses": [
+    "lem-tw-lisse-localization-restriction",
+    "lem-fd-ringed-flat-single-tensor-cohomology",
+    "lem-amb-derived-degree-zero-normalization"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The lisse criterion and d.unit show tensor and unit closure. Naturality follows by H0 from d.raw. Associativity, symmetry and unit constraints are checked on the actual good flat-term models of d.models: the balanced maps rearrange the same factors with signed interchange and multiply unit coefficients. Coherent whole-tower substitution, rather than just equality at each quotient, descends these equations. The existing canonical completed tensor constraints identify the resulting heart coherence equations.",
+   "uses": [
+    "lem-pur-completed-operation-tower-substitution",
+    "lem-pur-derived-pullback-tensor-iso",
+    "def-real-lisse-tensor-normalization"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply the scalar counit equations in d.models to local cocycles. The quotient pure-tensor formula gives exactly HomologyTensor. Descend equality through the two homology quotients to obtain TensorNormalized.models. The same H0-normalized isomorphism gives the final equality with t.tensor. Torsion in integral cohomology does not enter the flatness argument, which is rational and local.",
+   "uses": [
+    "def-real-lisse-tensor-normalization",
+    "lem-amb-derived-degree-zero-normalization"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-real-lisse-tensor-normalization",
+  "lem-amb-derived-degree-zero-normalization",
+  "lem-fd-ringed-flat-single-tensor-cohomology",
+  "lem-pur-completed-operation-tower-substitution",
+  "lem-pur-derived-pullback-tensor-iso",
+  "lem-tw-lisse-localization-restriction"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Remark 6.8.15; original tensor proof steps 3-4, with completed coherence from whole-tower substitution"
+ },
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A scalar extension realization of lisse sheaves preserves tensor products and pullback with normalized derived counits",
+   "results": "8 hits: LightCondensed.instMonoidalFunctorOppositeLightProfiniteModuleCatSheafCoherentTopologyPresheafToSheaf, SheafOfModules.freeFunctorCompPullbackIso, SheafOfModules.pullbackObjUnitToUnit, SheafOfModules.instIsIsoPullbackObjUnitToUnitOfFinal, SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom, SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom_assoc, SheafOfModules.pullbackComp, SheafOfModules.pullbackIso",
+   "date": "2026-10-25",
+   "verdict": "Reuse the ordinary tensor/pullback and localization APIs; none supplies the specified completed comparison with all good-model and degree-zero normalization equations."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.NatIso.ofComponents",
+   "results": "12 hits: CategoryTheory.NatIso.ofComponents, CategoryTheory.NatIso.ofComponents.app, CategoryTheory.NatIso.ofComponents_hom_app, CategoryTheory.NatIso.ofComponents_inv_app, CategoryTheory.opOpEquivalence_counitIso, CategoryTheory.opOpEquivalence_unitIso, CategoryTheory.Functor.opUnopEquiv_unitIso, CategoryTheory.Functor.opUnopEquiv_counitIso",
+   "date": "2026-10-25",
+   "verdict": "Reuse the ordinary tensor/pullback and localization APIs; none supplies the specified completed comparison with all good-model and degree-zero normalization equations."
+  },
+  {
+   "tool": "grep",
+   "query": "localization.*naturality|naturality.*localization|ScalarLocalization.*NatIso",
+   "results": "8 hits: Mathlib/Topology/Sheaves/CommRingCat.lean, Mathlib/RingTheory/Spectrum/Maximal/Localization.lean, Mathlib/RingTheory/Spectrum/Maximal/Localization.lean, Mathlib/RingTheory/Spectrum/Maximal/Localization.lean, Mathlib/RingTheory/Spectrum/Maximal/Localization.lean, Mathlib/CategoryTheory/Localization/Adjunction.lean, Mathlib/CategoryTheory/Localization/Adjunction.lean, Mathlib/CategoryTheory/Localization/Predicate.lean",
+   "date": "2026-10-25",
+   "verdict": "Reuse the ordinary tensor/pullback and localization APIs; none supplies the specified completed comparison with all good-model and degree-zero normalization equations."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A natural isomorphism between functors on a scalar localized category is determined by its restriction to integral objects",
+   "results": "8 hits: ModuleCat.restrictScalarsCongr, CategoryTheory.Localization.isoUniqFunctor, ModuleCat.restrictScalarsId, CategoryTheory.Localization.liftNatIso, ModuleCat.restrictScalarsId'App_hom_naturality, ModuleCat.restrictScalarsId', CategoryTheory.NatIso.isIso_app_of_isIso, CategoryTheory.Codiscrete.natIsoFunctor",
+   "date": "2026-10-25",
+   "verdict": "Localization.liftNatIso and fully faithful precomposition give the raw descent argument, which is proved in Lean in this delivery."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived scalar extension of completed constructible tensor products and its degree zero specialization to locally free sheaves",
+   "results": "8 hits: ModuleCat.ExtendScalars.obj', LinearEquiv.extendScalarsOfIsLocalizationEquiv, Algebra.TensorProduct.basisAux, Algebra.TensorProduct.instFree, Module.FinitePresentation.isLocalizedModule_mapExtendScalars, comonadicExtendScalars, AdicCompletion.instSMul, PiTensorProduct.instIsScalarTower",
+   "date": "2026-10-25",
+   "verdict": "Reuse the ordinary tensor/pullback and localization APIs; none supplies the specified completed comparison with all good-model and degree-zero normalization equations."
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.LisseTensorPullbackRealization",
+  "date": "2026-10-25",
+  "group": "B4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-tw-dual-negation",
+   "place": "Remark 6.8.15; original tensor proof steps 3-4, with completed coherence from whole-tower substitution",
+   "via": [
+    "lem-tw-lisse-tensor-pullback-realization",
+    "lem-tw-lisse-rational-realization",
+    "lem-tw-dual-stalk-frobenius"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-purity-real-sheaves",
+ "unit": "sk-r-real-linear",
+ "lean": {
+  "module": "Sheaf.Paper.TensorHeartSpecialization",
+  "file": "lean/Sheaf/Paper/TensorHeartSpecialization.lean",
+  "declaration": "WeilConjectures.LisseRealization.tensor_heart_specialization",
+  "declarations": [
+   "WeilConjectures.LisseRealization.tensor_heart_specialization"
+  ],
+  "statement": "theorem tensor_heart_specialization (X : Base D l hl) (a : At D l hl E X) (d : DerivedTensorRealization D l hl E X a) : ∃ t : TensorAt D l hl E X a, Nonempty (TensorNormalized D l hl E X a t) ∧ (∀ (K L : Raw D l hl E X) (hK : Lisse D l hl E X K) (hL : Lisse D l hl E X L), ∃ e : (realizationOrdinaryTensor D l hl E X).obj (a.J.obj K, a.J.obj L) ≅ (DerivedCategory.singleFunctor _ 0).obj ((a.sheaf D l hl E).obj K ⊗ (a.sheaf D l hl E).obj L), (DerivedCategory.homologyFunctor _ 0).map ((d.raw.app (K, L)).hom ≫ e.hom) ≫ (DerivedCategory.singleFunctorCompHomologyFunctorIso _ 0).hom.app _ = (t.tensor K L hK hL).hom)",
+  "branch": "sheaf-dag",
+  "by": "B4",
+  "date": "2026-10-25",
+  "existing": false
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-ec16d",
+  "group": "B4",
+  "result": "fix",
+  "landing": "20261025T122527-L-1780869",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-ec16d",
+  "group": "B4",
+  "result": "fix",
+  "landing": "20261025T122527-L-1780869",
+  "kind": "interface",
+  "note": "independent cc review: item theorem lisse_tensor_pullback_realization (signature unchanged) against node lem-tw-lisse-tensor-pullback-realization; 3 new sorried split statements + proved naturalIso_of_integral against their new nodes; moved data block byte-identical to old item; importer LissePointSectionsRealization compiled against delivered modules (exit 0); axioms checked"
+ }
+}

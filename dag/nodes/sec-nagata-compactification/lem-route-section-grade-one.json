@@ -1,0 +1,180 @@
+{
+ "id": "lem-route-section-grade-one",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lemma-nagata-relative-proj-exists",
+   "via": [
+    "lem-nagata-proj-affine-restriction"
+   ],
+   "place": "Proof of lemma-nagata-relative-proj-exists, first paragraph (The local squares): the graded section ring C = A(V); verifies its degree-zero unit from the sheaf input presentation, before the local Proj models are used."
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "The degree-zero unit belongs to the degree-zero subgroup.",
+ "statement": "Let $X$ be a scheme [def-pc-scheme], and let $\\mathcal A$ be a quasi-coherent commutative $\\mathcal O_X$-algebra sheaf [def-weil-pbc-quasi-coherent-algebra], with structure morphism $\\alpha:\\mathcal O_X\\to\\mathcal A$ [def-weil-pbc-comm-algebra-sheaf]. Let $(B_n)_{n\\in\\mathbb N}$ be sheaves of $\\mathcal O_X$-modules equipped with a commutative unital graded sheaf algebra structure [def-weil-pbc-graded-sheaf-structures], whose unit is $\\eta:\\mathcal O_X\\to B_0$. Suppose a specified isomorphism of underlying module sheaves $d:\\bigoplus_{n\\ge0}B_n\\xrightarrow{\\sim}\\mathcal A$ respects the multiplication and the unit. Write $i_n:B_n\\to\\mathcal A$ for its composite with the $n$th coproduct inclusion; unit compatibility means $i_0(U)(\\eta_U(r))=\\alpha_U(r)$ for every open $U\\subseteq X$ and every $r\\in\\Gamma(U,\\mathcal O_X)$. For an affine open $V\\subseteq X$, put $C_V=\\Gamma(V,\\mathcal A)$ and define the additive subgroup $C_{V,n}=\\operatorname{im}(i_n(V):\\Gamma(V,B_n)\\to C_V)$. Then $1_{C_V}\\in C_{V,0}$. These are the section ring and image subgroups denoted by $A.\\mathrm{sections}(V)$ and $A.\\mathrm{sectionGrade}(V,n)$ for the given relative Proj input algebra $A$.",
+ "source": {
+  "document": "literature/stacks-project/constructions.tex",
+  "place": "lem-nagata-proj-affine-restriction: the Lean of this node (its module Sheaf.AlgebraicGeometry.RelativeProjAffineRestriction imports Sheaf.AlgebraicGeometry.RelativeProjData (1 step)) reaches AlgebraicGeometry.RelativeProjAlgebra.sectionGrade_one, a sorry on the sorry route of batch3, batch4 with no node; Lean: SHEAF file lean/Sheaf/AlgebraicGeometry/RelativeProjData.lean, declaration AlgebraicGeometry.RelativeProjAlgebra.sectionGrade_one (module Sheaf.AlgebraicGeometry.RelativeProjData, lines 72-76, proof `sorry`)"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-pbc-quasi-coherent-algebra",
+  "def-weil-pbc-comm-algebra-sheaf",
+  "def-weil-pbc-graded-sheaf-structures"
+ ],
+ "proof": [
+  {
+   "text": "Apply the degree-zero unit map to the base-ring element 1. The equation unit_eq identifies its homogeneous inclusion with the image of 1 under the structural ring homomorphism, which equals 1.",
+   "uses": [
+    "def-weil-pbc-graded-sheaf-structures",
+    "def-weil-pbc-comm-algebra-sheaf"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-graded-sheaf-structures",
+  "def-weil-pbc-comm-algebra-sheaf"
+ ],
+ "proof_origin": {
+  "by": "G6",
+  "date": "2026-10-27",
+  "kind": "agent-written",
+  "document": "literature/stacks-project/constructions.tex",
+  "place": "Section relative-proj-via-glueing (01LH), lemma-proj-inclusion (01NO); direct Lean proof using the coproduct universal property and compact affine opens."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "grep -rlw 'sectionGrade_one' lean/.lake/packages/mathlib/Mathlib/",
+   "results": "none",
+   "date": "2026-10-27",
+   "verdict": "no match",
+   "note": "name grep by tools/route_nodes.py only; the stage-1 worker adds LeanSearch / Loogle / LeanFinder searches"
+  },
+  {
+   "tool": "grep",
+   "query": "sectionGrade_one|sectionGrade|RelativeProjAlgebra|one_mem",
+   "sub": "Algebra/GradedMonoid",
+   "results": "0 hits: none; the supplied subdirectory Algebra/GradedMonoid does not exist (the source is Algebra/GradedMonoid.lean), so this zero-hit invocation is not evidence of absence; corrected searches follow.",
+   "date": "2026-10-27",
+   "verdict": "inconclusive: corrected path searched subsequently"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The identity of a graded algebra sheaf is in its degree zero component because the unit factors through degree zero",
+   "sub": "",
+   "results": "8 hits: GradedMonoid.GOne.toOne, SetLike.GradedMonoid.toGradedOne, SetLike.gOne, SetLike.one_mem_graded, SetLike.isHomogeneousElem_one, SetLike.GradedOne.one_mem, SetLike.GradeZero.coe_one, GradedMonoid.GradeZero.one; SetLike.one_mem_graded assumes SetLike.GradedOne, which is the property to establish for these image subgroups; this assumption cannot be supplied from sectionGradedRing without circularity. Other hits concern ring-level direct sums or an already graded ring, not the sheaf-image presentation.",
+   "date": "2026-10-27",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "AddMonoidHom.mem_range, map_one",
+   "sub": "",
+   "results": "0 hits: none",
+   "date": "2026-10-27",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "In a graded algebra sheaf with unit-compatible direct-sum decomposition, the multiplicative identity lies in the image of the degree-zero summand on sections",
+   "sub": "",
+   "results": "8 hits: DirectSum.decompose_one, SetLike.one_mem_graded, SetLike.GradedOne.one_mem, DirectSum.of_zero_one, DirectSum.one_def, DirectSum.GAlgebra.map_one, AlgebraicGeometry.ProjectiveSpectrum.StructureSheaf.SectionSubring.one_mem', AlgebraicGeometry.Proj.one_apply; SetLike.one_mem_graded assumes SetLike.GradedOne, which is the property to establish for these image subgroups; this assumption cannot be supplied from sectionGradedRing without circularity. Other hits concern ring-level direct sums or an already graded ring, not the sheaf-image presentation.",
+   "date": "2026-10-27",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "SetLike.one_mem_graded",
+   "sub": "",
+   "results": "1 hits: SetLike.one_mem_graded",
+   "date": "2026-10-27",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "GradedOne|one_mem_graded|sectionGrade|RelativeProjAlgebra",
+   "sub": "Algebra/GradedMonoid.lean",
+   "results": "5 hits: 65, 72, 485, 489, 490; SetLike.one_mem_graded assumes SetLike.GradedOne, which is the property to establish for these image subgroups; this assumption cannot be supplied from sectionGradedRing without circularity. Other hits concern ring-level direct sums or an already graded ring, not the sheaf-image presentation.",
+   "date": "2026-10-27",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "If an additive map from a degree zero module into a commutative ring sends the unit section to one then one belongs to the range of that map",
+   "sub": "",
+   "results": "8 hits: AddSubmonoid.one_eq_mrange, Submodule.one_eq_range, Submodule.mem_one, ExteriorAlgebra.algebraMap_eq_one_iff, IsLocalizedModule.IsInteger, Submodule.map_one, HomogeneousLocalization.range_awayMapAux_subset, RootPairing.isValuedIn_iff_mem_range; these concern scalar images, submodules or localization, not the image of the specified degree-zero sheaf inclusion.",
+   "date": "2026-10-27",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "sectionGrade_one|sectionGrade|RelativeProjAlgebra",
+   "sub": "",
+   "results": "0 hits: none",
+   "date": "2026-10-27",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "one_mem_graded|class SetLike.GradedOne",
+   "sub": "Algebra",
+   "results": "7 hits: Mathlib/Algebra/DirectSum/Internal.lean, Mathlib/Algebra/DirectSum/Internal.lean, Mathlib/Algebra/GradedMonoid.lean, Mathlib/Algebra/GradedMonoid.lean, Mathlib/Algebra/GradedMonoid.lean, Mathlib/Algebra/GradedMonoid.lean, Mathlib/Algebra/GradedMonoid.lean; SetLike.one_mem_graded assumes SetLike.GradedOne, which is the property to establish for these image subgroups; this assumption cannot be supplied from sectionGradedRing without circularity. Other hits concern ring-level direct sums or an already graded ring, not the sheaf-image presentation.",
+   "date": "2026-10-27",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "maintainer",
+  "item": "lem-nagata-proj-affine-restriction",
+  "date": "2026-10-27",
+  "tool": "tools/route_nodes.py",
+  "why": "PROVISIONAL: sorried declaration on the sorry route (local/sorry-route.json) with no DAG node, recorded automatically after the route recompute (the human, 2026-10-23: every proof-related upstream sorry gets a node, and a node without a written proof goes to stage 1). The statement is only the Lean signature and docstring: the stage-1 worker writes it in words with [node] citations and stmt_deps, does the Mathlib searches (LeanSearch, Loogle or LeanFinder, local grep), fills blueprint.same_as, and splits it"
+ },
+ "chapter": "sec-nagata-compactification",
+ "unit": "sk-def-nagata-sketch-data",
+ "lean": {
+  "existing": true,
+  "module": "Sheaf.AlgebraicGeometry.RelativeProjData",
+  "file": "lean/Sheaf/AlgebraicGeometry/RelativeProjData.lean",
+  "declaration": "AlgebraicGeometry.RelativeProjAlgebra.sectionGrade_one",
+  "declarations": [
+   "AlgebraicGeometry.RelativeProjAlgebra.sectionGrade_one"
+  ],
+  "statement": "theorem sectionGrade_one (V : X.affineOpens) : 1 ∈ A.sectionGrade V 0 := by\n  sorry",
+  "by": "maintainer",
+  "date": "2026-10-27",
+  "note": "SHEAF declaration attached as it stands, proof still `sorry`; recorded by tools/route_nodes.py"
+ },
+ "split_report": {
+  "date": "2026-10-27",
+  "item": "lem-route-section-grade-one",
+  "worker": "stage1",
+  "summary": "Expanded the provisional Lean signature into the precise sheaf-input statement, including the unit-compatible direct-sum presentation and the definition of each image subgroup. The proof chooses eta_V(1), applies the stated unit equation, and uses preservation of 1 by the algebra structure map. Both steps are elementary; no auxiliary node is needed. Read the attached sorry declaration, current blueprint and Stacks 01NM/01NN, searched the whole DAG, blueprint, project Lean and Mathlib; no attachment or usable Mathlib leaf.",
+  "blueprint": "Supports the first paragraph (The local squares) of the current lemma-nagata-relative-proj-exists proof: the graded algebra of sections used for affine Proj. This establishes only the degree-zero unit condition of the local section grading."
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "NT-cc-NF-51ceb8339",
+  "group": "NF",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NF-51ceb8339 (reviewer sub-agent of L); spot-checked: I read the whole item. The statement says the same thing as RelativeProjData.lean RelativeProjAlgebra.sectionGrade_one, hypothesis by hypothesis: algebra, piece, graded, decomposition, mul_eq and unit_eq; sections = Γ(V,A); sectionGrade = image of i_n(V); conclusion 1 ∈ C_{V,0}. Nothing is weakened, and it does not assume a grading on C_V or that B_0 equals O_X. Step 1 cites def-weil-pbc-graded-sheaf-structures, which gives the O_X-linear unit η, and applies the hypothesis unit_eq at U=V, r=1 to get i_0(η_V 1)=α_V(1). Step 2 cites def-weil-pbc-comm-algebra-sheaf: α is a ring-sheaf morphism, so α_V(1)=1, and image membership follows. Both steps are genuinely elementary and proof_deps is the union of the uses. blueprint.from points to the paragraph 'The local squares' of the lemma-nagata-relative-proj-exists proof (C=A(V) graded, checked in latest/main-20261026 together with def-nagata-relative-proj.md). There is no cycle: the parent lem-nagata-proj-affine-restriction cites this item, and the item cites only definitions. There are no new nodes. I searched dag/nodes with rg -L: the sibling lem-route-unit-mem (α_V(r) ∈ C_{V,0} for all r) is a more general fact with its own Lean declaration, not a duplicate node. SetLike.one_mem_graded would be circular here because sectionGradedRing takes one_mem from this theorem. Edge cases hold: V empty, B_0=0, and B_0 larger than O_X. Affineness and quasi-coherence are kept to match the Lean but are not used. No SGA, no tool_uses, and no fixes."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G6",
+  "result": "pass",
+  "landing": "20261027T112350-L-1576056",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

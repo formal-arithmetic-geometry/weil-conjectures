@@ -1,0 +1,147 @@
+{
+ "kind": "statement",
+ "chapter": "sec-six-functors",
+ "unit": "sk-thm-sf-compatibility",
+ "id": "lem-sf-refinement-open-restriction",
+ "title": "The counit restriction to the distinguished open component is invertible",
+ "statement": "Let R be arbitrary compatible pro-etale ring-sheaf coefficients, c and d compactifications of f:X→Y, and r:c→d a refinement. Let hi identify R.pull(c.i ≫ r.hom) with the composite coefficient identification. On the whole unbounded derived module category of X, there exists a natural transformation θ from (c.i-extension by zero followed by r-direct image) followed by d.i-pullback to c.i-extension by zero followed by c.i-pullback. Its components are exactly refinementRestriction R r hi M: refinementPull.hom followed by c.i-pullback of the proper counit at c.i-extension by zero. It is invertible and commutes with the ordinary integer cochain shifts. The component condition determines θ uniquely. Define refinementRestrictionNat with precisely these components and its proved naturality. Its inverse has a uniquely determined value. Its composite with the c.i open unit has an open adjunct refinementOpenMap. This map has the literal unit/counit normalization and commutes with shifts. Pullback composition and its adjoint-conjugate proper composition also commute with shifts. Invertibility of refinementOpenMap on the ambient category is not asserted. The categorical inverse-transpose is the explicit normalizedOpenAdjunct word; its generic normalization and shift lemmas are proved before specialization.",
+ "source": {
+  "document": "literature/stacks-project/more-etale.tex",
+  "place": "Tags 0F7B and 0F7I, the restriction-to-open and proper base-change proof; completed coefficient transport as in Zheng Section 5, 5.13--5.15."
+ },
+ "stmt_deps": [
+  "def-pur-integral-compact-support-coefficient-data",
+  "def-weil-compactifications-refinements"
+ ],
+ "proof": [
+  {
+   "text": "Form V=c.Z×[d.Z]X. The section induced by c.i is open and closed: openness follows from c.i, and closedness from separatedness of r. Open restriction commutes with derived direct image since its left adjoint is exact, hence it preserves K-injectives. Pulling extension by zero to V gives extension from this clopen section.",
+   "uses": [
+    "lem-sfb-proetale-open-restriction-counit",
+    "lem-sf-proetale-open-pullback-preserves-kinjective",
+    "lem-sfb-proetale-identified-open-closed"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Clopen extension by zero is exact direct image. Composing it with V→X is identity, and the normalized counit is the projection onto that section. Thus the actual restriction transformation is invertible on unbounded complexes for arbitrary coefficient sheaves. Define its inverse, apply the open unit, and transpose using the open counit. The triangle identities give the exact normalization.",
+   "uses": [
+    "lem-weil-pbc-proetale-ringed-open-closed",
+    "lem-weil-pbc-proetale-derived-pullback-composition"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Exact localization gives the shift square for the pullback compositor. The canonical derived right adjunction gives shifts of its conjugate proper compositor. The exact open adjunction unit and counit commute with shifts. Express restriction as pullback composition followed by the proper counit; take its inverse and transpose. All factors, inverses and whiskerings commute with shifts.",
+   "uses": [
+    "lem-pur-exact-adjunction-unit-shift-descent",
+    "lem-sp-canonical-right-derived-adjunction-shift",
+    "lem-weil-pbc-commshift-nattrans-comp-whisker"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-proetale-open-restriction-counit",
+  "lem-sf-proetale-open-pullback-preserves-kinjective",
+  "lem-sfb-proetale-identified-open-closed",
+  "lem-weil-pbc-proetale-ringed-open-closed",
+  "lem-weil-pbc-proetale-derived-pullback-composition",
+  "lem-pur-exact-adjunction-unit-shift-descent",
+  "lem-sp-canonical-right-derived-adjunction-shift",
+  "lem-weil-pbc-commshift-nattrans-comp-whisker"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/more-etale.tex",
+  "place": "Tags 0F7B and 0F7I, extracted from lem-sf-ring-open-refinement steps 1--3."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "open restriction direct image extension by zero clopen section counit isomorphism",
+   "results": "Scheme.Modules.restrictFunctorAdjCounitIso and restrictAdjunction counit results for Zariski module sheaves; no pro-etale derived refinement statement.",
+   "date": "2026-10-27",
+   "verdict": "Different site and functors. Use project ringed restriction and clopen calculus."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.conjugateEquiv",
+   "results": "Mathlib.CategoryTheory.Adjunction.Mates: conjugateEquiv, conjugateIsoEquiv, conjugateEquiv_iso, conjugateEquiv_of_iso and their inverse variants.",
+   "date": "2026-10-27",
+   "verdict": "Useful for shifts and compositors; no geometric invertibility result."
+  },
+  {
+   "tool": "grep",
+   "query": "refinementRestriction|properOpenRefinementWord",
+   "results": "The logged Mathlib grep search returned zero hits. Separate project rg found IntegralCompactSupportCoefficientComparison.refinementProperOpen_existsUnique (extra absolute separatedness assumptions) and fixed-scalar ProperOpenCoefficientRefinement APIs.",
+   "date": "2026-10-27",
+   "verdict": "The hypotheses and encoding do not supply the desired steps directly."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.RingOpenRefinement",
+  "group": "T8",
+  "date": "2026-10-27"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "sk-thm-sf-tensor-hom",
+   "place": "Exceptional construction step 6: restrict the proper refinement image to X through its distinguished clopen section; retain the actual open-unit normalization and ordinary shift square.",
+   "via": [
+    "lem-sf-ring-open-refinement",
+    "lem-sf-constructible-ring-left-refinement",
+    "lem-sf-constructible-exceptional-left-refinements",
+    "lem-sf-constructible-exceptional-coefficient-construction"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.RefinementOpenRestriction",
+  "file": "lean/Sheaf/Paper/RefinementOpenRestriction.lean",
+  "declaration": "WeilConjectures.PurCompactSupport.exists_refinementRestriction",
+  "declarations": [
+   "WeilConjectures.PurCompactSupport.exists_refinementRestriction",
+   "WeilConjectures.PurCompactSupport.refinementRestrictionNat_isIso",
+   "WeilConjectures.PurCompactSupport.refinementRestrictionNat",
+   "WeilConjectures.PurCompactSupport.refinementOpenMap",
+   "WeilConjectures.PurCompactSupport.refinementOpenMap_normalization",
+   "WeilConjectures.PurCompactSupport.refinementOpenMap_shift",
+   "WeilConjectures.PurCompactSupport.geometricPullComposition_shift",
+   "WeilConjectures.PurCompactSupport.geometricPushComposition_shift",
+   "CategoryTheory.normalizedOpenAdjunct",
+   "WeilConjectures.PurCompactSupport.refinementRestriction_naturality",
+   "WeilConjectures.PurCompactSupport.refinementRestrictionNat_shift"
+  ],
+  "statement": "theorem exists_refinementRestriction :\n    ∃ θ : ((openExtension R c.i).mapDerivedCategory ⋙ push R r.hom) ⋙ pull R d.i ⟶\n        (openExtension R c.i).mapDerivedCategory ⋙ pull R c.i,\n      (∀ M, θ.app M = refinementRestriction R r hi M) ∧\n        IsIso θ ∧ θ.CommShift ℤ",
+  "branch": "sheaf-dag",
+  "by": "T8",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T8",
+  "result": "pass",
+  "landing": "20261027T112434-L-1583550",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T8",
+  "result": "pass",
+  "landing": "20261027T112434-L-1583550",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

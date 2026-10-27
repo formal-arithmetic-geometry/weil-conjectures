@@ -1,0 +1,140 @@
+{
+ "id": "def-sfb-native-derived-restriction-data",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-lem-int-tensor-product",
+   "place": "First paragraph: actual local dual and evaluation, with the internal/sectionwise tensor and Hom identifications.",
+   "via": [
+    "lem-sfb-internal-derived-closed-localization"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "definition",
+ "title": "Fixed native derived restriction and its monoidal data",
+ "statement": "For a commutative condensed ring $\\Lambda$ and a scheme morphism $f:Y\\to X$ [sk-def-sfb-condensed-ring, def-weil-pbc-proetale-site], package the existing native derived internal-module inverse image $\\mathbf L f^*$ together with exactly its canonical strong monoidal structure [lem-sfb-derived-pullback-strong-monoidal]. The package is the pair of this functor and this structure, with no choice and with no change to its tensorator or unit. A generic package consists of a functor $F:C\\to D$ between monoidal categories and a specified strong monoidal structure on $F$. The existing exact-pullback comparison $\\mathbf L f^*\\cong D(f^*)$ [def-sfb-left-derived-exact] gives, for every derived morphism $g$, that the packaged functor maps $g$ to an isomorphism if and only if $D(f^*)$ does.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-lem-int-tensor/det-lem-int-tensor-product.proof.md",
+  "place": "First paragraph: actual local dual and evaluation, with the internal/sectionwise tensor and Hom identifications."
+ },
+ "stmt_deps": [
+  "sk-def-sfb-condensed-ring",
+  "def-weil-pbc-proetale-site",
+  "sk-def-sfb-derived-tensor-hom",
+  "lem-sfb-derived-pullback-strong-monoidal"
+ ],
+ "proof": [
+  {
+   "text": "Define the generic package as a structure containing a functor and a strong monoidal structure on it. Instantiate it with the existing monoidal_leftDerivedUpperStar structure and its underlying functor. Both projections are therefore the original specified data.",
+   "uses": [
+    "lem-sfb-derived-pullback-strong-monoidal"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-lem-int-tensor/det-lem-int-tensor-product.proof.md",
+    "place": "First paragraph: actual local dual and evaluation, with the internal/sectionwise tensor and Hom identifications."
+   }
+  },
+  {
+   "text": "The existing canonical natural isomorphism from left-derived inverse image to exact termwise derived inverse image conjugates mapped morphisms. NatIso.isIso_map_iff therefore gives the stated API for the package, without unfolding any tensor data.",
+   "uses": [
+    "def-sfb-left-derived-exact"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-lem-int-tensor/det-lem-int-tensor-product.proof.md",
+    "place": "First paragraph: actual local dual and evaluation, with the internal/sectionwise tensor and Hom identifications."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-derived-pullback-strong-monoidal",
+  "def-sfb-left-derived-exact"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-lem-int-tensor/det-lem-int-tensor-product.proof.md",
+  "place": "First paragraph: actual local dual and evaluation, with the internal/sectionwise tensor and Hom identifications."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "structure MonoidalFunctor|structure.*Monoidal",
+   "results": "Mathlib/Tactic/Widget/StringDiagram.lean, Mathlib/Algebra/SkewMonoidAlgebra/Basic.lean, Mathlib/Algebra/Category/Grp/ZModuleEquivalence.lean, Mathlib/CategoryTheory/GradedObject/Trifunctor.lean, Mathlib/Algebra/MonoidAlgebra/Defs.lean, Mathlib/Algebra/MonoidAlgebra/Defs.lean, Mathlib/RingTheory/TensorProduct/Maps.lean, Mathlib/Algebra/Category/FGModuleCat/Basic.lean",
+   "date": "2026-10-24",
+   "verdict": "The existing classes supply the specified monoidal structure; no existing declaration fixes the native derived restriction functor together with that structure in one shared data value. The generic package is a structure of exactly these two existing fields.",
+   "digest": "c7d5916516e22cab"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"MonoidalFunctor\"",
+   "results": "CategoryTheory.LaxMonoidalFunctor, CategoryTheory.Equivalence.instMonoidalFunctorRefl, CategoryTheory.LaxMonoidalFunctor.toFunctor, CategoryTheory.LaxMonoidalFunctor.of, CategoryTheory.LaxMonoidalFunctor.laxMonoidal, CategoryTheory.LaxMonoidalFunctor.mk, CategoryTheory.Equivalence.instMonoidalFunctorSymmOfInverse, CategoryTheory.LaxMonoidalFunctor.of_toFunctor",
+   "date": "2026-10-24",
+   "verdict": "The existing classes supply the specified monoidal structure; no existing declaration fixes the native derived restriction functor together with that structure in one shared data value. The generic package is a structure of exactly these two existing fields.",
+   "digest": "520cece8a26e552a"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Functor together with its strong monoidal structure bundled monoidal functor",
+   "results": "CategoryTheory.Functor.Monoidal, CategoryTheory.Functor.CoreMonoidal.toMonoidal, CategoryTheory.Functor.CoreMonoidal, CategoryTheory.Functor.Monoidal.ofBifunctor, CategoryTheory.Functor.LaxMonoidal, CategoryTheory.Monoidal.InducingFunctorData, CategoryTheory.Functor.Monoidal.toLaxMonoidal, CategoryTheory.Functor.mapMon",
+   "date": "2026-10-24",
+   "verdict": "The existing classes supply the specified monoidal structure; no existing declaration fixes the native derived restriction functor together with that structure in one shared data value. The generic package is a structure of exactly these two existing fields.",
+   "digest": "5bdf35591502b8d2"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.InternalDerivedClosedLocalization",
+  "date": "2026-10-24",
+  "group": "F7"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-lem-int-tensor",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.NativeDerivedRestrictionData",
+  "file": "lean/Sheaf/Paper/NativeDerivedRestrictionData.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.CondensedRing.nativeDerivedRestrictionData",
+  "statement": "def nativeDerivedRestrictionData\n    (Λ : Profinite.CondensedRing.{u}) [IsCommMonObj Λ.X]\n    {X Y : Scheme.{u}} (f : Y ⟶ X) :\n    NativeMonoidalData (DerivedCategory (Internal Λ.X X))\n      (DerivedCategory (Internal Λ.X Y))",
+  "branch": "sheaf-dag",
+  "by": "F7",
+  "date": "2026-10-24",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.CondensedRing.NativeMonoidalData",
+   "AlgebraicGeometry.ProEtale.CondensedRing.dataOfMonoidal",
+   "AlgebraicGeometry.ProEtale.CondensedRing.nativeDerivedRestrictionData",
+   "AlgebraicGeometry.ProEtale.CondensedRing.nativeDerivedRestriction_isIso_map_iff"
+  ]
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "def-sfb-native-derived-restriction-data",
+  "worker": "stage3",
+  "summary": "Concrete data packaging of the existing native monoidal restriction, to share its tensor instances and avoid repeated conversion through geometric pullback. No proof hole, new choice, or changed tensor map.",
+  "blueprint": "First paragraph: actual local dual and evaluation, with the internal/sectionwise tensor and Hom identifications.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F7",
+  "result": "pass",
+  "landing": "20261024T185251-L-3494252",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F7",
+  "result": "pass",
+  "landing": "20261024T185251-L-3494252",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

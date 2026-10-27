@@ -1,0 +1,459 @@
+{
+ "id": "lem-sfb-perfect-tensor-tests-bounded-above",
+ "kind": "statement",
+ "title": "Perfect tensor cohomology detects upper boundedness",
+ "statement": "Let $X$ be a quasi-compact and quasi-separated scheme [def-pc-scheme, def-pc-morphism-conventions], and let $K\\in D_{\\mathrm{QCoh}}(\\mathcal O_X)$ [def-pc-derived-category]. Suppose that for every perfect object $P\\in D(\\mathcal O_X)$ [def-pc-perfect-complex] there is an integer $b_P$ such that $H^i(R\\Gamma(X,P\\otimes^L_{\\mathcal O_X}K))=0$ for all $i>b_P$ [def-pc-derived-direct-image, def-pc-scheme-derived-tensor-structure]. Then there is an integer $b$ such that $\\mathcal H^i(K)=0$ for all $i>b$. No uniform bound on the $b_P$ is required.",
+ "source": {
+  "document": "literature/stacks-project/perfect.tex",
+  "place": "Tag 0GEN, proposition-detecting-bounded-above, implication (7)(b) to (1)"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-derived-category",
+  "def-pc-morphism-conventions",
+  "def-pc-perfect-complex",
+  "def-pc-derived-direct-image",
+  "def-pc-scheme-derived-tensor-structure",
+  "def-pc-global-derived-rhom"
+ ],
+ "proof": [
+  {
+   "text": "For every perfect $Q$ on $X$, its dual $Q^\\vee$ is perfect and $R\\mathcal Hom(Q,K)\\cong K\\otimes^LQ^\\vee$ by the perfect RHom comparison. Derived tensor symmetry and the definition of global RHom give\n$$H^i(R\\Gamma(X,Q^\\vee\\otimes^LK))\\cong H^i(R\\operatorname{Hom}_X(Q,K))\\cong\\operatorname{Hom}(Q[-i],K).$$\nThe last comparison is the shifted-global-Hom equivalence with $f=\\mathrm{id}_X$, $m=-i$, $n=0$. The tensor-test hypothesis applied to $Q^\\vee$ therefore makes the right side zero for $i\\gg0$, separately for each $Q$. We prove below that this all-perfect-Hom condition forces upper boundedness on any qcqs scheme.",
+   "uses": [
+    "lem-pc-perfect-rhom-tensor-comparison",
+    "lem-sc-derived-internal-hom-adjunction",
+    "def-pc-global-derived-rhom",
+    "lem-sc-restricted-global-hom-shifted-equiv"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/perfect.tex",
+    "place": "Tag 0GEN, proposition-detecting-bounded-above, (7)(b) to (7)(a); cohomology.tex 08DQ and 0B6A"
+   }
+  },
+  {
+   "text": "For a qcqs scheme $T$, let $\\mathscr P(T)$ mean: every $E\\in D_{\\mathrm{QCoh}}(\\mathcal O_T)$ for which $\\operatorname{Hom}(Q[-i],E)=0$ for $i\\gg0$ for each perfect $Q$ is bounded above. Apply the qcqs-open induction principle to this property. For the affine base $T=\\operatorname{Spec}A$, take the perfect object $Q=\\mathcal O_T[0]$. The K-injective definition gives $R\\mathcal Hom(\\mathcal O_T[0],E)\\cong E$: evaluation at $1$ identifies its Hom complex with the chosen injective representative. Thus the shifted-global-Hom equivalence identifies the test with $H^i(R\\Gamma(T,E))$. These groups vanish above some $b$. The affine derived equivalence reconstructs $E$ from $M=R\\Gamma(T,E)$ by termwise tilde, and the existing tilde-homology comparison gives $\\mathcal H^i(E)\\cong\\widetilde{H^i(M)}=0$ for $i>b$. The empty affine also satisfies this argument.",
+   "uses": [
+    "lem-sc-invert-s-cohomology-induction",
+    "def-pc-perfect-complex",
+    "def-pur-derived-internal-hom",
+    "lem-sc-restricted-global-hom-shifted-equiv",
+    "lem-pc-affine-qcoh-derived-equivalence",
+    "new-affine-derived-tilde-homology-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/perfect.tex",
+    "place": "Tag 0GEN, affine base case; 06Z0, lemma-affine-compare-bounded; coherent.tex 08DR"
+   }
+  },
+  {
+   "text": "For the induction step write $T=U\\cup V$, with $U$ quasi-compact open, $V=\\operatorname{Spec}A$ affine, and assume $\\mathscr P(U)$, $\\mathscr P(V)$ and $\\mathscr P(U\\cap V)$. Let $E$ satisfy the all-perfect-Hom condition on $T$ and put $j:U\\hookrightarrow T$, $v:V\\hookrightarrow T$. A finite affine cover of $U$, together with quasi-compactness of intersections of affine opens in the quasi-separated scheme $T$, shows $W=U\\cap V$ is quasi-compact. Write the closed subset $V\\setminus W=V(I)$ for an ideal $I\\subset A$. The principal opens $D(f)$ with $f\\in I$ cover $W$ by the definition of the Zariski topology; quasi-compactness selects $f_1,\\ldots,f_r$ with $W=\\bigcup D(f_k)$. Let $C$ be their cochain Koszul object. The affine Koszul properties make $C$ perfect with cohomology supported on $Z=T\\setminus U$, which is closed in $T$ and contained in $V$.",
+   "uses": [
+    "lem-weil-pbc-qcqs-finite-affine-open-cover",
+    "lem-weil-pbc-quasi-separated-affine-cover-criterion",
+    "lem-pc-affine-koszul-geometric-properties"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/perfect.tex",
+    "place": "Tag 0GEN, gluing step, choice of f_1,...,f_r and the supported Koszul object"
+   }
+  },
+  {
+   "text": "Apply the supported open-pushforward theorem to $v$ and $C$. It gives a perfect object $C'=Rv_*C$ on $T$ and identifies it with $v_!C$. The open-extension adjunction consequently identifies\n$$\\operatorname{Hom}(C[-i],E|_V)\\cong\\operatorname{Hom}(v_!C[-i],E)\\cong\\operatorname{Hom}(C'[-i],E).$$\nBy the hypothesis on $E$, choose $a$ so that these groups vanish for every $i\\geq a$. The affine Koszul upper-localization lemma, applied on $V$ to $E|_V$ and $W\\hookrightarrow V$, now gives the isomorphism\n$$\\tau_{\\geq a}(E|_V)\\xrightarrow{\\sim}\\tau_{\\geq a}R(W\\hookrightarrow V)_*(E|_W).$$",
+   "uses": [
+    "lem-pc-supported-open-pushforward",
+    "lem-sc-derived-open-shriek-derived-adjunction",
+    "lem-sfb-affine-koszul-upper-localization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/perfect.tex",
+    "place": "Tag 0GEN, equation 0GEP and subsequent use of 0GEJ; cohomology.tex 08DP, 08DF, 08BS"
+   }
+  },
+  {
+   "text": "Set $F=Rj_*(E|_U)$ and let $u:E\\to F$ be the actual restriction-adjunction unit. On $U$ its restriction is an isomorphism, by the derived open-unit restriction theorem. On $V$, the open restriction/direct-image comparison identifies this unit with the unit used in step 4: both are induced by restriction of a K-injective representative, so their maps on sections agree. Hence $\\mathcal H^n(u)$ is an isomorphism for every $n\\geq a$, since it is so on the cover $U,V$. Complete $u$ to a triangle $E\\to F\\to B\\to E[1]$. Its cohomology sequence gives $\\mathcal H^n(B)=0$ for $n\\geq a$. The open immersion $j$ is qcqs by qcqs-morphism permanence, so $F$ has quasi-coherent cohomology; Apply the supported quasi-coherent triangulated-property theorem with support equal to all of $T$. Its shift stability and middle-term closure, applied to the rotated triangle $F\\to B\\to E[1]\\to F[1]$, give $B\\in D_{\\mathrm{QCoh}}(\\mathcal O_T)$.",
+   "uses": [
+    "lem-pc-derived-open-unit-restriction-iso",
+    "lem-pc-restrict-derived-direct-image-open",
+    "lem-pc-open-immersion-restriction-derived-properties",
+    "lem-sf-derived-homology-long-exact",
+    "lem-weil-pbc-qcqs-morphism-permanence",
+    "lem-pc-derived-direct-image-preserves-qcoh",
+    "lem-pc-supported-qcoh-triangulated"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/perfect.tex",
+    "place": "Tag 0GEN, canonical upper-truncation isomorphism on the two opens; cohomology.tex 08FE; perfect.tex 08D5"
+   }
+  },
+  {
+   "text": "Fix a perfect $Q$ on $T$. By perfect-gap vanishing there is a finite interval $[c,d]$ such that $\\operatorname{Hom}(Q,L)=0$ whenever the quasi-coherent $L$ has zero cohomology in that interval. Since $B\\in D^{\\leq a-1}$, we have $\\mathcal H^q(B[i])=\\mathcal H^{q+i}(B)=0$ for $q\\in[c,d]$ as soon as $i>a-1-c$; the same holds for $B[i-1]$ as soon as $i>a-c$. Thus $\\operatorname{Hom}(Q[-i],B)$ and $\\operatorname{Hom}(Q[-i],B[-1])$ are zero for large $i$. Apply Hom exactness to the triangle of step 5 and its rotations. The segment\n$$\\operatorname{Hom}(Q[-i],B[-1])\\to\\operatorname{Hom}(Q[-i],E)\\to\\operatorname{Hom}(Q[-i],F)\\to\\operatorname{Hom}(Q[-i],B)$$\nshows that $\\operatorname{Hom}(Q[-i],F)=0$ for $i\\gg0$. This writes out the two bounded-truncation comparisons used in Stacks 0GEL; no new bound uniform in $Q$ has been asserted.",
+   "uses": [
+    "lem-sc-perfect-ext-bounded-qcoh-vanishing",
+    "lem-weil-pbc-hom-into-triangle-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/perfect.tex",
+    "place": "Tag 0GEN, use of 0GEL (lemma-bounded-truncation), expanded via 09M4 (lemma-ext-from-perfect-into-bounded-QCoh)"
+   }
+  },
+  {
+   "text": "Let $P$ be any perfect object on $U$. Apply the perfect-support map-lifting lemma with ambient scheme $T$, closed support equal to all of $T$, target object zero, and map $P\\to0|_U$ equal to zero. Its support hypotheses are automatic and $T\\setminus T=\\varnothing$ is quasi-compact. It supplies a perfect $Q$ on $T$ and maps $P\\to Q|_U\\to P$ with composite $1_P$. For an open immersion, the module pullback/restriction comparison identifies $j^*$ with exact restriction. Applying the K-flat formula for derived pullback to a resolution, exactness of restriction identifies $Lj^*Q$ with $Q|_U$. Derived pullback/direct-image adjunction therefore identifies\n$$\\operatorname{Hom}(Q[-i],F)\\cong\\operatorname{Hom}((Q|_U)[-i],E|_U).$$\nStep 6 makes this group zero eventually. Precomposition with the displayed splitting makes $\\operatorname{Hom}(P[-i],E|_U)$ a retract of it, hence zero eventually. Since this holds for every $P$, the induction hypothesis $\\mathscr P(U)$ gives an integer $b$ with $\\mathcal H^n(E|_U)=0$ for $n>b$. This uses all perfect tests on $U$, so no additional single-generator detection theorem is needed.",
+   "uses": [
+    "lem-sc-perfect-support-map-lift",
+    "lem-pc-ringed-spaces-derived-adjoint",
+    "lem-weil-pbc-open-immersion-module-pullback-restriction",
+    "lem-sc-derived-open-restriction-adjunction-exact",
+    "def-pc-derived-pullback"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/perfect.tex",
+    "place": "Tag 0GEN, open-generator test; 09IQ (lemma-direct-summand-of-a-restriction), obtained from 09IM (lemma-lift-map-from-perfect-complex-with-support)"
+   }
+  },
+  {
+   "text": "Apply the uniform derived direct-image bound to $j:U\\to T$ and $(E|_U)[b]$, whose positive cohomology vanishes. The target $T$ is quasi-compact, and $j$ is qcqs as checked in step 5. For its integer $N>0$ we obtain $\\mathcal H^m(F[b])=0$ for $m\\geq N$, hence $\\mathcal H^n(F)=0$ for $n\\geq b+N$. For every $n\\geq\\max(a,b+N)$, step 5 identifies $\\mathcal H^n(E)$ with this zero sheaf. This proves $\\mathscr P(T)$ and completes the gluing implication. The induction principle in step 2 gives $\\mathscr P(X)$; applying it to the Hom tests of step 1 proves the stated bound for $K$. Every bound chosen was for an individual perfect object or an individual cover step, as permitted by the hypothesis.",
+   "uses": [
+    "lem-pc-derived-direct-image-uniform-truncation-bound"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/perfect.tex",
+    "place": "Tag 0GEN, last paragraph; 08D5 (lemma-quasi-coherence-direct-image), part (2)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-derived-pullback",
+  "def-pc-global-derived-rhom",
+  "def-pc-perfect-complex",
+  "def-pur-derived-internal-hom",
+  "lem-pc-affine-koszul-geometric-properties",
+  "lem-pc-affine-qcoh-derived-equivalence",
+  "lem-pc-derived-direct-image-preserves-qcoh",
+  "lem-pc-derived-direct-image-uniform-truncation-bound",
+  "lem-pc-derived-open-unit-restriction-iso",
+  "lem-pc-open-immersion-restriction-derived-properties",
+  "lem-pc-perfect-rhom-tensor-comparison",
+  "lem-pc-restrict-derived-direct-image-open",
+  "lem-pc-ringed-spaces-derived-adjoint",
+  "lem-pc-supported-open-pushforward",
+  "lem-pc-supported-qcoh-triangulated",
+  "lem-sc-derived-internal-hom-adjunction",
+  "lem-sc-derived-open-restriction-adjunction-exact",
+  "lem-sc-derived-open-shriek-derived-adjunction",
+  "lem-sc-invert-s-cohomology-induction",
+  "lem-sc-perfect-ext-bounded-qcoh-vanishing",
+  "lem-sc-perfect-support-map-lift",
+  "lem-sc-restricted-global-hom-shifted-equiv",
+  "lem-sf-derived-homology-long-exact",
+  "lem-sfb-affine-koszul-upper-localization",
+  "lem-weil-pbc-hom-into-triangle-exact",
+  "lem-weil-pbc-open-immersion-module-pullback-restriction",
+  "lem-weil-pbc-qcqs-finite-affine-open-cover",
+  "lem-weil-pbc-qcqs-morphism-permanence",
+  "lem-weil-pbc-quasi-separated-affine-cover-criterion",
+  "new-affine-derived-tilde-homology-comparison"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/perfect.tex",
+  "place": "Tag 0GEN, proposition-detecting-bounded-above, (7)(b) to (1): affine-open induction; use all perfect objects in place of a chosen generator, and expand 0GEL from 09M4."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "On a quasi compact quasi separated scheme a quasi coherent complex is bounded above if derived sections after tensoring every perfect complex are bounded above",
+   "results": "OK: 8 hits; DerivedCategory.instIsGEObjCochainComplexIntQOfIsGE, DerivedCategory.isLE_Q_obj_iff, DerivedCategory.instIsLEObjCochainComplexIntQOfIsLE, DerivedCategory.isGE_Q_obj_iff, DerivedCategory.IsGE, DerivedCategory.isZero_of_isGE, DerivedCategory.isLE_iff, DerivedCategory.exists_iso_Q_obj_of_isGE",
+   "date": "2026-10-23",
+   "verdict": "no match: these hits do not give the stated scheme-derived pseudo-coherence or tensor-test assertion."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"pseudoCoherent\"",
+   "results": "OK: 0 hits; ",
+   "date": "2026-10-23",
+   "verdict": "no match: these hits do not give the stated scheme-derived pseudo-coherence or tensor-test assertion."
+  },
+  {
+   "tool": "grep",
+   "query": "pseudoCoherent|PseudoCoherent|pseudo_coherent",
+   "results": "OK: 0 hits; ",
+   "date": "2026-10-23",
+   "verdict": "no match: these hits do not give the stated scheme-derived pseudo-coherence or tensor-test assertion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A derived quasi coherent object on a quasi compact quasi separated scheme is cohomologically bounded above if all perfect tensor cohomology tests eventually vanish",
+   "results": "OK: 8 hits; DerivedCategory.isLE_iff, DerivedCategory.isGE_iff, DerivedCategory.instIsGEObjCochainComplexIntQOfIsGE, DerivedCategory.isGE_Q_obj_iff, DerivedCategory.isLE_Q_obj_iff, DerivedCategory.IsGE, DerivedCategory.instIsLEObjCochainComplexIntQOfIsLE, DerivedCategory.exists_iso_Q_obj_of_isGE",
+   "date": "2026-10-23",
+   "verdict": "no match: these hits do not give the stated scheme-derived pseudo-coherence or tensor-test assertion."
+  },
+  {
+   "tool": "leansearch",
+   "query": "On a quasi compact quasi separated scheme a quasi coherent complex is bounded above if derived sections after tensoring every perfect complex are bounded above",
+   "results": "OK: 8 hits; AlgebraicGeometry.quasiSeparatedSpace_iff_quasiCompact_prod_lift, AlgebraicGeometry.quasiSeparated_iff_quasiSeparatedSpace, AlgebraicGeometry.quasiSeparated_iff, DerivedCategory.exists_iso_Q_obj_of_isGE_of_isLE, CategoryTheory.HasExt.instHasSmallLocalizedShiftedHomHomologicalComplexIntUpQuasiIsoOfIsGEOfIsLEOfNat, SheafOfModules.QuasicoherentData.IsFinitePresentation.isFinite_presentation, AlgebraicGeometry.QuasiSeparated.of_quasiSeparatedSpace, AlgebraicGeometry.Scheme.instQuasiSeparatedSpaceCarrierCarrierCommRingCatOfIsSeparated",
+   "date": "2026-10-23",
+   "verdict": "no match: these hits do not give the stated scheme-derived pseudo-coherence or tensor-test assertion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "On a quasi compact quasi separated scheme perfect tensor cohomology tests detect cohomological boundedness above",
+   "results": "{\"t\": \"2026-10-23T13:26:20Z\", \"tool\": \"leanfinder\", \"query\": \"On a quasi compact quasi separated scheme perfect tensor cohomology tests detect cohomological boundedness above\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"DerivedCategory.isGE_iff\", \"DerivedCategory.isLE_iff\", \"DerivedCategory.isGE_Q_obj_iff\", \"DerivedCategory.isZero_of_isGE\", \"DerivedCategory.isLE_Q_obj_iff\", \"DerivedCategory.instIsGEObjCochainComplexIntQOfIsGE\", \"DerivedCategory.IsGE\", \"DerivedCategory.instIsLEObjCochainComplexIntQOfIsLE\"], \"digest\": \"94027cd83a49dfbb\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the returned declarations concern generic truncations, ideal sheaves, or topological/group theoretic perfectness, not the asserted scheme-derived Koszul or tensor-test criterion."
+  },
+  {
+   "tool": "grep",
+   "query": "perfect.*[Bb]ound|[Bb]ound.*perfect",
+   "results": "{\"t\": \"2026-10-23T13:27:23Z\", \"tool\": \"grep\", \"query\": \"perfect.*[Bb]ound|[Bb]ound.*perfect\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the returned declarations concern generic truncations, ideal sheaves, or topological/group theoretic perfectness, not the asserted scheme-derived Koszul or tensor-test criterion."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Perfect complexes detect bounded above quasi coherent complexes by derived global tensor cohomology on a qcqs scheme",
+   "results": "{\"t\": \"2026-10-23T13:27:24Z\", \"tool\": \"leansearch\", \"query\": \"Perfect complexes detect bounded above quasi coherent complexes by derived global tensor cohomology on a qcqs scheme\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"DerivedCategory.right_fac_of_isStrictlyLE\", \"HomologicalComplexUpToQuasiIso.isIso_Q_map_iff_mem_quasiIso\", \"DerivedCategory.exists_iso_Q_obj_of_isGE_of_isLE\", \"CategoryTheory.HasExt.instHasSmallLocalizedShiftedHomHomologicalComplexIntUpQuasiIsoOfIsGEOfIsLEOfNat\", \"DerivedCategory\", \"HomologicalComplexUpToQuasiIso\", \"DerivedCategory.exists_iso_Q_obj_of_isGE\", \"HomologicalComplexUpToQuasiIso.Q\"], \"digest\": \"29151eb10d0f6b63\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the returned declarations concern generic truncations, ideal sheaves, or topological/group theoretic perfectness, not the asserted scheme-derived Koszul or tensor-test criterion."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Perfect\", \"Derived\"",
+   "results": "{\"t\": \"2026-10-23T13:27:24Z\", \"tool\": \"loogle\", \"query\": \"\\\"Perfect\\\", \\\"Derived\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 7, \"note\": \"\", \"top\": [\"Group.IsPerfect.derivedSeries_eq_top\", \"perfect_iff_eq_derivedSet\", \"preperfect_iff_subset_derivedSet\", \"preperfect_iff_eq_relDerivedSet\", \"CantorBendixson.iteratedDerivedSet_constant_iff_preperfect\", \"CantorBendixson.perfectKernel_subset_iteratedDerivedSet\", \"CantorBendixson.perfectKernel_eq_iteratedDerivedSet_of_mem_fixedPoints\"], \"digest\": \"8c070b5bade46902\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the returned declarations concern generic truncations, ideal sheaves, or topological/group theoretic perfectness, not the asserted scheme-derived Koszul or tensor-test criterion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A quasi coherent complex on a scheme is bounded above if shifted morphisms from every perfect complex vanish in sufficiently high degrees",
+   "results": "{\"t\": \"2026-10-23T13:49:34Z\", \"tool\": \"leanfinder\", \"query\": \"A quasi coherent complex on a scheme is bounded above if shifted morphisms from every perfect complex vanish in sufficiently high degrees\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"DerivedCategory.instIsGEObjCochainComplexIntQOfIsGE\", \"DerivedCategory.instIsLEObjCochainComplexIntQOfIsLE\", \"DerivedCategory.IsGE\", \"DerivedCategory.isGE_Q_obj_iff\", \"DerivedCategory.isLE_Q_obj_iff\", \"DerivedCategory.isLE_iff\", \"DerivedCategory.isGE_iff\", \"DerivedCategory.IsLE\"], \"digest\": \"685345a0a906c04a\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the returned declarations concern generic truncations, ideal sheaves, or topological/group theoretic perfectness, not the asserted scheme-derived Koszul or tensor-test criterion."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-perfect-tests-detect-pseudocoherence",
+  "date": "2026-10-23",
+  "group": "Q74"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Knudsen forgetful morphism as the universal stable curve. Section 2, Lemma 2.5 (printed pp.178--179), using Section 1, Corollary 1.5 and Lemma 1.6: multiplication and the pushforward exact sequences, retaining the twist by minus the old-marking divisor. Lemma 2.5, first paragraph and final evaluation: Corollary 1.5 supplies vanishing, base-flat direct images, arbitrary base change and generation for the five divisor modules. Corollary 1.5, printed p.167: the general cohomology-and-base-change tool whose conditions (1) and (2) the exceptional-fibre calculation must verify. General tool for Corollary 1.5: finite presentation of the acyclic image: detect pseudo-coherence by perfect tensor tests on V, using proper-support perfect direct image for U -> S. Supporting tool: 0GEN (proposition-detecting-bounded-above, implication (7)(b) to (1)).",
+   "via": [
+    "lem-sfb-perfect-tests-detect-pseudocoherence",
+    "lem-sfb-relative-acyclic-direct-image",
+    "lem-sfb-rational-contraction-line-cohomology",
+    "lem-sfb-elementary-contraction-evaluation",
+    "lem-sfb-knudsen-pointed-forgetful-universal-curve",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-perfect-tensor-tests-bounded-above",
+  "worker": "stage1",
+  "summary": "Statement unchanged. Followed Stacks 0GEN by affine-open induction, duality, supported Koszul extension and upper truncations. Created only the strictly smaller affine localization input 0GEJ. Reused 09IM with target zero for extension as a retract; expanded bounded-truncation invariance via the existing perfect-gap lemma. Checked actual citation statements and recorded live Mathlib searches. No Lean edits or compilation.",
+  "blueprint": "Realizes the inherited supporting 0GEN input in the pseudo-coherence tensor-test reduction of lem-sfb-perfect-tests-detect-pseudocoherence, below the existing direct-image stability route. The blueprint ancestor is null as reported by blueprint_refs.py; it is retained rather than invented.",
+  "tool_uses": [
+   {
+    "node": "def-pc-derived-pullback",
+    "why": "Generic scheme/derived-category tool used in the Stacks 0GEN affine-open proof; the constructible-coefficient unit has no replacement for this structure-sheaf assertion."
+   },
+   {
+    "node": "def-pc-global-derived-rhom",
+    "why": "Generic scheme/derived-category tool used in the Stacks 0GEN affine-open proof; the constructible-coefficient unit has no replacement for this structure-sheaf assertion."
+   },
+   {
+    "node": "def-pc-perfect-complex",
+    "why": "Generic scheme/derived-category tool used in the Stacks 0GEN affine-open proof; the constructible-coefficient unit has no replacement for this structure-sheaf assertion."
+   },
+   {
+    "node": "def-pur-derived-internal-hom",
+    "why": "Generic scheme/derived-category tool used in the Stacks 0GEN affine-open proof; the constructible-coefficient unit has no replacement for this structure-sheaf assertion."
+   },
+   {
+    "node": "lem-pc-affine-koszul-geometric-properties",
+    "why": "Generic scheme/derived-category tool used in the Stacks 0GEN affine-open proof; the constructible-coefficient unit has no replacement for this structure-sheaf assertion."
+   },
+   {
+    "node": "lem-pc-affine-qcoh-derived-equivalence",
+    "why": "Generic scheme/derived-category tool used in the Stacks 0GEN affine-open proof; the constructible-coefficient unit has no replacement for this structure-sheaf assertion."
+   },
+   {
+    "node": "lem-pc-derived-direct-image-preserves-qcoh",
+    "why": "Generic scheme/derived-category tool used in the Stacks 0GEN affine-open proof; the constructible-coefficient unit has no replacement for this structure-sheaf assertion."
+   },
+   {
+    "node": "lem-pc-derived-direct-image-uniform-truncation-bound",
+    "why": "Generic scheme/derived-category tool used in the Stacks 0GEN affine-open proof; the constructible-coefficient unit has no replacement for this structure-sheaf assertion."
+   },
+   {
+    "node": "lem-pc-derived-open-unit-restriction-iso",
+    "why": "Generic scheme/derived-category tool used in the Stacks 0GEN affine-open proof; the constructible-coefficient unit has no replacement for this structure-sheaf assertion."
+   },
+   {
+    "node": "lem-pc-open-immersion-restriction-derived-properties",
+    "why": "Generic scheme/derived-category tool used in the Stacks 0GEN affine-open proof; the constructible-coefficient unit has no replacement for this structure-sheaf assertion."
+   },
+   {
+    "node": "lem-pc-perfect-rhom-tensor-comparison",
+    "why": "Generic scheme/derived-category tool used in the Stacks 0GEN affine-open proof; the constructible-coefficient unit has no replacement for this structure-sheaf assertion."
+   },
+   {
+    "node": "lem-pc-restrict-derived-direct-image-open",
+    "why": "Generic scheme/derived-category tool used in the Stacks 0GEN affine-open proof; the constructible-coefficient unit has no replacement for this structure-sheaf assertion."
+   },
+   {
+    "node": "lem-pc-ringed-spaces-derived-adjoint",
+    "why": "Generic scheme/derived-category tool used in the Stacks 0GEN affine-open proof; the constructible-coefficient unit has no replacement for this structure-sheaf assertion."
+   },
+   {
+    "node": "lem-pc-supported-open-pushforward",
+    "why": "Generic scheme/derived-category tool used in the Stacks 0GEN affine-open proof; the constructible-coefficient unit has no replacement for this structure-sheaf assertion."
+   },
+   {
+    "node": "lem-pc-supported-qcoh-triangulated",
+    "why": "Generic scheme/derived-category tool used in the Stacks 0GEN affine-open proof; the constructible-coefficient unit has no replacement for this structure-sheaf assertion."
+   },
+   {
+    "node": "lem-sc-derived-internal-hom-adjunction",
+    "why": "Generic scheme/derived-category tool used in the Stacks 0GEN affine-open proof; the constructible-coefficient unit has no replacement for this structure-sheaf assertion."
+   },
+   {
+    "node": "lem-sc-derived-open-restriction-adjunction-exact",
+    "why": "Generic scheme/derived-category tool used in the Stacks 0GEN affine-open proof; the constructible-coefficient unit has no replacement for this structure-sheaf assertion."
+   },
+   {
+    "node": "lem-sc-derived-open-shriek-derived-adjunction",
+    "why": "Generic scheme/derived-category tool used in the Stacks 0GEN affine-open proof; the constructible-coefficient unit has no replacement for this structure-sheaf assertion."
+   },
+   {
+    "node": "lem-sc-invert-s-cohomology-induction",
+    "why": "Generic scheme/derived-category tool used in the Stacks 0GEN affine-open proof; the constructible-coefficient unit has no replacement for this structure-sheaf assertion."
+   },
+   {
+    "node": "lem-sc-perfect-ext-bounded-qcoh-vanishing",
+    "why": "Generic scheme/derived-category tool used in the Stacks 0GEN affine-open proof; the constructible-coefficient unit has no replacement for this structure-sheaf assertion."
+   },
+   {
+    "node": "lem-sc-perfect-support-map-lift",
+    "why": "Generic scheme/derived-category tool used in the Stacks 0GEN affine-open proof; the constructible-coefficient unit has no replacement for this structure-sheaf assertion."
+   },
+   {
+    "node": "lem-sc-restricted-global-hom-shifted-equiv",
+    "why": "Generic scheme/derived-category tool used in the Stacks 0GEN affine-open proof; the constructible-coefficient unit has no replacement for this structure-sheaf assertion."
+   },
+   {
+    "node": "lem-sf-derived-homology-long-exact",
+    "why": "Generic scheme/derived-category tool used in the Stacks 0GEN affine-open proof; the constructible-coefficient unit has no replacement for this structure-sheaf assertion."
+   },
+   {
+    "node": "lem-weil-pbc-hom-into-triangle-exact",
+    "why": "Generic scheme/derived-category tool used in the Stacks 0GEN affine-open proof; the constructible-coefficient unit has no replacement for this structure-sheaf assertion."
+   },
+   {
+    "node": "lem-weil-pbc-open-immersion-module-pullback-restriction",
+    "why": "Generic scheme/derived-category tool used in the Stacks 0GEN affine-open proof; the constructible-coefficient unit has no replacement for this structure-sheaf assertion."
+   },
+   {
+    "node": "lem-weil-pbc-qcqs-finite-affine-open-cover",
+    "why": "Generic scheme/derived-category tool used in the Stacks 0GEN affine-open proof; the constructible-coefficient unit has no replacement for this structure-sheaf assertion."
+   },
+   {
+    "node": "lem-weil-pbc-qcqs-morphism-permanence",
+    "why": "Generic scheme/derived-category tool used in the Stacks 0GEN affine-open proof; the constructible-coefficient unit has no replacement for this structure-sheaf assertion."
+   },
+   {
+    "node": "lem-weil-pbc-quasi-separated-affine-cover-criterion",
+    "why": "Generic scheme/derived-category tool used in the Stacks 0GEN affine-open proof; the constructible-coefficient unit has no replacement for this structure-sheaf assertion."
+   },
+   {
+    "node": "new-affine-derived-tilde-homology-comparison",
+    "why": "Generic scheme/derived-category tool used in the Stacks 0GEN affine-open proof; the constructible-coefficient unit has no replacement for this structure-sheaf assertion."
+   }
+  ]
+ },
+ "tool_uses": [
+  "def-pc-derived-pullback",
+  "def-pc-global-derived-rhom",
+  "def-pc-perfect-complex",
+  "def-pur-derived-internal-hom",
+  "lem-pc-affine-koszul-geometric-properties",
+  "lem-pc-affine-qcoh-derived-equivalence",
+  "lem-pc-derived-direct-image-preserves-qcoh",
+  "lem-pc-derived-direct-image-uniform-truncation-bound",
+  "lem-pc-derived-open-unit-restriction-iso",
+  "lem-pc-open-immersion-restriction-derived-properties",
+  "lem-pc-perfect-rhom-tensor-comparison",
+  "lem-pc-restrict-derived-direct-image-open",
+  "lem-pc-ringed-spaces-derived-adjoint",
+  "lem-pc-supported-open-pushforward",
+  "lem-pc-supported-qcoh-triangulated",
+  "lem-sc-derived-internal-hom-adjunction",
+  "lem-sc-derived-open-restriction-adjunction-exact",
+  "lem-sc-derived-open-shriek-derived-adjunction",
+  "lem-sc-invert-s-cohomology-induction",
+  "lem-sc-perfect-ext-bounded-qcoh-vanishing",
+  "lem-sc-perfect-support-map-lift",
+  "lem-sc-restricted-global-hom-shifted-equiv",
+  "lem-sf-derived-homology-long-exact",
+  "lem-weil-pbc-hom-into-triangle-exact",
+  "lem-weil-pbc-open-immersion-module-pullback-restriction",
+  "lem-weil-pbc-qcqs-finite-affine-open-cover",
+  "lem-weil-pbc-qcqs-morphism-permanence",
+  "lem-weil-pbc-quasi-separated-affine-cover-criterion",
+  "new-affine-derived-tilde-homology-comparison"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q26-164d7e55f",
+  "group": "Q26",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q26-164d7e55f (reviewer sub-agent of L); spot-checked: Live and side-live have the item unsplit, with the same statement and stmt_deps as delivered; there is no repair note, so this is not a re-split. The statement is unchanged and correct: it is Stacks 0GEN (7)(b)⇒(1), keeping a separate bound b_P for each perfect P. I read 0GEN, 0GEJ, 0GEL, 09IM and 08D5 in perfect.tex. Steps 1-8 are correct. Step 1 turns the tensor tests into Hom tests via perfect duality and the shifted global Hom equivalence (f=id, m=-i, n=0). Step 2 sets up the U∪V induction on the property 𝒫(T), which quantifies over all E and all perfect Q; the affine base uses O[0] and the tilde homology comparison. Step 3: W is quasi-compact by the qs criterion, the f_k are chosen in I, and Z=T∖U⊂V. Step 4: supported pushforward gives C' perfect with v_!C≅Rv_*C, the shriek adjunction gives the Hom identification, and the new node applies to E|_V. Step 5: the unit is glued on U and V by restricting a K-injective representative; the long exact sequence gives H^n(B)=0 for n≥a; B is in D_QCoh by supported-qcoh with support T. Step 6: I checked the shifts in the 09M4 interval argument (i≥a−c). Step 7: 09IM with T=X, E=0, α=0 gives P as a summand of Q|_U, and Lj*=restriction plus adjunction gives a retract, so no generator is needed. Step 8: 08D5(2) applied to (E|_U)[b] gives the bound max(a,b+N). New node lem-sfb-affine-koszul-upper-localization is exactly 0GEJ (2)⇒(1), with the same threshold a, the Koszul complex in cochain degree −q, the canonical unit, and a derived-form conclusion. I tested r=0, a unit f_k and f=0. It is B1-B5 clean, has four kinds of Mathlib search recorded, and is not a duplicate: lem-pc-perfect-generation-koszul-orthogonal (09IR) and lem-pc-koszul-powers-orthogonality need vanishing in every shift, and lem-pc-derived-open-unit-cone has no Hom test. It is strictly smaller than the item. I accept the off-unit tool_uses as generic structure-sheaf derived-category tools. The null blueprint.from.node is inherited from the base. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.PerfectTensorTestsBoundedAbove",
+  "declaration": "AlgebraicGeometry.isBoundedAbove_of_perfect_tensor_tests",
+  "file": "lean/Sheaf/AlgebraicGeometry/PerfectTensorTestsBoundedAbove.lean",
+  "statement": "theorem isBoundedAbove_of_perfect_tensor_tests (X : Scheme.{u}) [CompactSpace X] [QuasiSeparatedSpace X] [HasDerivedCategory.{wX} (SheafOfModules.{u} (moduleRings X.toRingedSpace))] [∀ U : X.Opens, HasDerivedCategory.{wX} (SheafOfModules.{u} ((moduleRings X.toRingedSpace).over U))] [HasDerivedCategory.{wΓ} (ModuleCat.{u} ((moduleRings X.toRingedSpace).obj.obj (op ⊤)))] (K : schemeDerivedCategory X) (hK : schemeDerivedQCohProperty X K) (hTests : ∀ P : schemeDerivedCategory X, Scheme.IsPerfect X P → ∃ bP : ℤ, ∀ i : ℤ, bP < i → IsZero ((DerivedCategory.homologyFunctor (ModuleCat.{u} ((moduleRings X.toRingedSpace).obj.obj (op ⊤))) i).obj ((schemeDerivedGlobalSections X).obj (P ⊗ K)))) : ∃ b : ℤ, ∀ i : ℤ, b < i → IsZero ((DerivedCategory.homologyFunctor (SheafOfModules.{u} (moduleRings X.toRingedSpace)) i).obj K)",
+  "branch": "newtargets-dag",
+  "by": "Q51",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-190394694",
+  "group": "Q51",
+  "result": "pass",
+  "note": "Checked against Stacks 0GEN (7)(b)=>(1). Clause by clause: qcqs via CompactSpace+QuasiSeparatedSpace; K in D_QCoh via schemeDerivedQCohProperty; all perfect P via Scheme.IsPerfect (08CM) with exists bP inside the quantifier; P⊗K via the global K-flat schemeDerivedTensorMonoidal; RΓ via schemeDerivedGlobalSections (the right derived functor of Γ); strict integer bounds; one upper bound on H^i(K) as conclusion. HasDerivedCategory binders are exactly those IsPerfect and RΓ need, with no geometric hypotheses. Only the item's lean and stmt_deps differ from side-live; the added def-pc-global-derived-rhom is landed, owns schemeDerivedGlobalSections and was already a proof dependency. lean.statement is verbatim; all imports exist; docstrings carry the source place, blueprint tag and the 8-step proof; the only proof is sorry. No duplicate: no 0GEN declaration in the project. Edge cases (empty scheme, K=0, P=0, negative bounds, affine) are fine. No compile needed since no FIX."
+ }
+}

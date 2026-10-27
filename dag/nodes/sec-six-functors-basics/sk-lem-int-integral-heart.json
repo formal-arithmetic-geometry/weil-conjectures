@@ -48,9 +48,8 @@
  ],
  "proof": [
   {
-   "text": "The opening hypotheses are the finite-type integral-model setting: [sk-lem-integral-models] supplies the separated finite-type $k$-scheme $X$, its Noetherianity, and the finite extension $E/\\mathbf Q_\\ell$ with coefficient ring $\\mathcal O_E$. Apply [det-lem-int-integral-heart-triangulated](1) to this integral coefficient category. Its statement gives all three assertions about $\\Dbc$: it is a triangulated subcategory of the indicated ambient derived category, every object is bounded, and both standard truncations preserve it. These are the first assertions of (1).",
+   "text": "Apply det-lem-int-integral-heart-triangulated to the given finite-type integral coefficient setting. Package its categorical conclusions with an explicit coefficient monoid structure, identify the canonical and cached structures by reflexivity, and transport the package along this equality. Its first three projections prove closure under isomorphisms, triangulation, boundedness, and stability under both truncations.",
    "uses": [
-    "sk-lem-integral-models",
     "det-lem-int-integral-heart-triangulated"
    ],
    "elementary": false,
@@ -60,9 +59,8 @@
    }
   },
   {
-   "text": "By [sk-def-sfb-constructible], $\\Dbc$ is defined by bounded constructible cohomology and $\\Cons$ is the full subcategory of constructible modules. For a module $C$ placed in degree $0$, its only possibly nonzero cohomology is $H^0=C$. Thus it belongs to $\\Dbc$ exactly when $C\\in\\Cons$. Apply [det-lem-int-integral-heart-triangulated](2) to this very full subcategory: kernels and cokernels computed in the ambient module category belong to it, it is closed under extensions, and it is essentially small. This proves the remaining assertions of (1), including the ambient, rather than merely abstract, abelian-subcategory assertion.",
+   "text": "The remaining projections of the same transported categorical package give full and faithful inclusion, the degree-zero essential-image characterization, abelianness, closure under kernels, cokernels and extensions, and essential smallness. Apply that characterization to the single complex of a constructible module, witnessed in the essential image by the module itself and the identity isomorphism. This single complex is bounded constructible.",
    "uses": [
-    "sk-def-sfb-constructible",
     "det-lem-int-integral-heart-triangulated"
    ],
    "elementary": false,
@@ -72,7 +70,7 @@
    }
   },
   {
-   "text": "Let $C\\in\\Cons$. Regard $C$ as a degree-zero object of $\\Dbc$, as established in step 2. Apply [det-lem-int-integral-heart-local-model](1),(2) to $K=C$ and take $q=0$. The finite stratification supplied in (1) is the same stratification on which (2) identifies $H^0(K)=C$ locally with the completion of the finitely generated module $H^0(M^\\bullet)$. No torsion-freeness is asserted or needed. This is (2).",
+   "text": "Apply det-lem-int-integral-heart-local-model to this single complex, keeping its finite locally closed stratification, constructibility proofs, and covers. For each chart take q = 0 in the cohomology-model clause and choose N = H^0(P). The local-model theorem proves N finite. Pull back the inverse of singleFunctorCompHomologyFunctorIso at C and compose with the supplied chart isomorphism. This gives the required finite-module realization of C without any torsion-free hypothesis.",
    "uses": [
     "det-lem-int-integral-heart-local-model"
    ],
@@ -83,7 +81,7 @@
    }
   },
   {
-   "text": "Fix any stratum $S$ of the stratification in step 3. The sheaf $C$ is constructible and on $S$ has exactly the finite-module local model required by [det-lem-int-integral-heart-dualizable]. Its statement therefore supplies the derived dual $R\\mathcal{H}om(C|_S,\\mathcal O_{E,S})$, dualizability on all of $S$, Tor amplitude $[-1,0]$ for $C|_S$, and Tor amplitude $[0,1]$ for that dual. This proves (3), without replacing the derived dual by the underived module dual. In particular the cited statement explicitly includes the torsion example $\\mathcal O_E/\\pi_E$ with dual $\\mathcal O_E/\\pi_E[-1]$.",
+   "text": "Add the supplied constructibility proofs to the finite locally closed stratification to form a Scheme.Stratification with exactly the same domains and immersion maps. Apply det-lem-int-integral-heart-dualizable to each stratum with the finite-module chart models just constructed. It supplies an exact pairing with the canonical derived dual and both Tor intervals. Choose this dual as the witness and use the derived braiding and exactPairing_swap to put it first in the pairing. Retain the two Tor bounds.",
    "uses": [
     "det-lem-int-integral-heart-dualizable"
    ],
@@ -95,16 +93,14 @@
   }
  ],
  "proof_deps": [
-  "sk-lem-integral-models",
   "det-lem-int-integral-heart-triangulated",
-  "sk-def-sfb-constructible",
   "det-lem-int-integral-heart-local-model",
   "det-lem-int-integral-heart-dualizable"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-int-integral-heart/sk-lem-int-integral-heart.proof.md",
-  "place": "paragraphs 1–5, assembled using the three existing detail-node statements"
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-lem-int-integral-heart/_section.md",
+  "place": "Assertions (1)--(3), implemented directly from existing detail declarations; repair of C-26f9f. The change record declares the definitionally equal cached coefficient presentation in clauses (2)--(3)."
  },
  "mathlib_searches": [
   {
@@ -256,12 +252,23 @@
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q01-853bddeb0 (reviewer sub-agent of L); spot-checked: I read the item, the delivered unit, the blueprint unit (statement and five proof paragraphs), and the full statements of sk-lem-integral-models, sk-def-sfb-constructible, sk-def-sfb-dc-setting and the three det-lem-int-integral-heart-* nodes. I checked the Stacks TeX: 09C2 (lemma-describe-constructible-complexes) needs X quasi-compact; 09C7 (proposition-Noetherian-adic-constructible) needs X and Λ Noetherian; 09C4 (definition-adic-constructible) has finite projective Λ^-modules, which are free over O_E; 099I is the algebraization label. The added opening scope is exactly the chapter setting of sk-def-sfb-dc-setting and sk-lem-integral-models: k of characteristic p≠ℓ, X separated of finite type (hence Noetherian), E/Q_ℓ finite. The blueprint proof already relies on it ('our schemes'). All three conclusions are verbatim and no target is weakened. The non-Noetherian counterexample is excluded, and all nine citers are imported nodes of the same chapter. The coefficient sheaf is O_{E,X}=p_X^*O_E throughout and is not identified with constant coefficients; the item is not a target node. Step 1 uses triangulated(1). Step 2 is the definitional degree-0 identification plus triangulated(2), which gives ambient kernels/cokernels, extensions and smallness. Step 3 applies local-model(1),(2) with K=C, q=0, whose hypothesis comes from step 2. Step 4 applies dualizable, whose hypotheses come from step 3, and gives the derived dual and the Tor intervals. proof_deps equals the union of uses. There is no cycle, and all cited nodes are on the unit's route, so no tool_uses are needed. Small cases checked: 0, free modules ([0,0]), O_E/π^r (resolution in degrees [-1,0]; dual O_E/π^r[-1] in [1,1]⊂[0,1]). The unit differs from its base only in realized/realized_by, and every proof paragraph is covered. That coverage is slightly smaller than the previous reader's fix but correct. There are no new nodes, no SGA, and no fixes. For maintenance: the imported det-* statements leave X/E/O_E implicit (B2) and need the scope sentence when they are split."
  },
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
  "lean": {
   "module": "Sheaf.Paper.IntegralConstructibleHeart",
   "declaration": "AlgebraicGeometry.ProEtale.integral_constructible_heart",
   "file": "lean/Sheaf/Paper/IntegralConstructibleHeart.lean",
-  "statement": "theorem integral_constructible_heart (k : Type u) [Field k] (p : ℕ) [CharP k p] (_hp : 0 < p) (ℓ : ℕ) [Fact ℓ.Prime] (_hℓ : ℓ ≠ p) (E : Type v) [Field E] [Algebra (Padic ℓ) E] [FiniteDimensional (Padic ℓ) E] (X : Scheme.{u}) [X.Over (Spec (.of k))] [IsSeparated (X ↘ Spec (.of k))] [LocallyOfFiniteType (X ↘ Spec (.of k))] [QuasiCompact (X ↘ Spec (.of k))] : ObjectProperty.IsClosedUnderIsomorphisms (constantModelBoundedConstructible (integralHeartCoefficientRingObj ℓ E) X) ∧ ObjectProperty.IsTriangulated (constantModelBoundedConstructible (integralHeartCoefficientRingObj ℓ E) X) ∧ (∀ K, constantModelBoundedConstructible (integralHeartCoefficientRingObj ℓ E) X K → DerivedCategory.TStructure.t.bounded K ∧ ∀ n : ℤ, constantModelBoundedConstructible (integralHeartCoefficientRingObj ℓ E) X ((DerivedCategory.TStructure.t.truncLE n).obj K) ∧ constantModelBoundedConstructible (integralHeartCoefficientRingObj ℓ E) X ((DerivedCategory.TStructure.t.truncGE n).obj K)) ∧ (ObjectProperty.ι (IsConstantModelConstructible (integralHeartCoefficientRingObj ℓ E) X) ⋙ DerivedCategory.singleFunctor _ 0).Full ∧ (ObjectProperty.ι (IsConstantModelConstructible (integralHeartCoefficientRingObj ℓ E) X) ⋙ DerivedCategory.singleFunctor _ 0).Faithful ∧ (∀ K, (ObjectProperty.ι (IsConstantModelConstructible (integralHeartCoefficientRingObj ℓ E) X) ⋙ DerivedCategory.singleFunctor _ 0).essImage K ↔ constantModelBoundedConstructible (integralHeartCoefficientRingObj ℓ E) X K ∧ DerivedCategory.TStructure.t.le 0 K ∧ DerivedCategory.TStructure.t.ge 0 K) ∧ Nonempty (Abelian (ConstantModelConstructible (integralHeartCoefficientRingObj ℓ E) X)) ∧ ObjectProperty.IsClosedUnderKernels (IsConstantModelConstructible (integralHeartCoefficientRingObj ℓ E) X) ∧ ObjectProperty.IsClosedUnderCokernels (IsConstantModelConstructible (integralHeartCoefficientRingObj ℓ E) X) ∧ ObjectProperty.IsClosedUnderExtensions (IsConstantModelConstructible (integralHeartCoefficientRingObj ℓ E) X) ∧ EssentiallySmall.{u + 1} (ConstantModelConstructible (integralHeartCoefficientRingObj ℓ E) X) ∧ (∀ C : SmallAdicCompletion.Modules ℓ E X, IsConstantModelConstructible (integralHeartCoefficientRingObj ℓ E) X C → ∃ s : Scheme.FiniteLocallyClosedStratification X, (∀ a : Fin s.n, Topology.IsConstructible (s.stratum a)) ∧ ∀ a : Fin s.n, (∃ 𝒰 : Scheme.Cover.{u} Scheme.proetalePrecoverage (s.domain a), ∀ i : 𝒰.I₀, ∃ N : ModuleCat.{u + 1} (integralHeartScalars.{u} ℓ E), Module.Finite (integralHeartScalars.{u} ℓ E) N ∧ Nonempty ((CondensedRing.upperStar (integralHeartCoefficientRingObj ℓ E) (𝒰.f i ≫ s.immersion a)).obj C ≅ (integralHeartRealization.{u} ℓ E (𝒰.X i)).obj N)) ∧ ∃ D : integralHeartDerivedCategory.{u} ℓ E (s.domain a), Nonempty (ExactPairing D ((DerivedCategory.singleFunctor _ 0).obj ((CondensedRing.upperStar (integralHeartCoefficientRingObj ℓ E) (s.immersion a)).obj C))) ∧ DerivedCategory.torAmplitudeIn _ (-1) 0 ((DerivedCategory.singleFunctor _ 0).obj ((CondensedRing.upperStar (integralHeartCoefficientRingObj ℓ E) (s.immersion a)).obj C)) ∧ DerivedCategory.torAmplitudeIn _ 0 1 D)",
+  "statement": "theorem integral_constructible_heart (k : Type u) [Field k] (p : ℕ) [CharP k p] (_hp : 0 < p) (ℓ : ℕ) [Fact ℓ.Prime] (_hℓ : ℓ ≠ p) (E : Type v) [Field E] [Algebra (Padic ℓ) E] [FiniteDimensional (Padic ℓ) E] (X : Scheme.{u}) [X.Over (Spec (.of k))] [IsSeparated (X ↘ Spec (.of k))] [LocallyOfFiniteType (X ↘ Spec (.of k))] [QuasiCompact (X ↘ Spec (.of k))] : ObjectProperty.IsClosedUnderIsomorphisms (constantModelBoundedConstructible (integralHeartCoefficientRingObj ℓ E) X) ∧ ObjectProperty.IsTriangulated (constantModelBoundedConstructible (integralHeartCoefficientRingObj ℓ E) X) ∧ (∀ K, constantModelBoundedConstructible (integralHeartCoefficientRingObj ℓ E) X K → DerivedCategory.TStructure.t.bounded K ∧ ∀ n : ℤ, constantModelBoundedConstructible (integralHeartCoefficientRingObj ℓ E) X ((DerivedCategory.TStructure.t.truncLE n).obj K) ∧ constantModelBoundedConstructible (integralHeartCoefficientRingObj ℓ E) X ((DerivedCategory.TStructure.t.truncGE n).obj K)) ∧ (ObjectProperty.ι (IsConstantModelConstructible (integralHeartCoefficientRingObj ℓ E) X) ⋙ DerivedCategory.singleFunctor _ 0).Full ∧ (ObjectProperty.ι (IsConstantModelConstructible (integralHeartCoefficientRingObj ℓ E) X) ⋙ DerivedCategory.singleFunctor _ 0).Faithful ∧ (∀ K, (ObjectProperty.ι (IsConstantModelConstructible (integralHeartCoefficientRingObj ℓ E) X) ⋙ DerivedCategory.singleFunctor _ 0).essImage K ↔ constantModelBoundedConstructible (integralHeartCoefficientRingObj ℓ E) X K ∧ DerivedCategory.TStructure.t.le 0 K ∧ DerivedCategory.TStructure.t.ge 0 K) ∧ Nonempty (Abelian (ConstantModelConstructible (integralHeartCoefficientRingObj ℓ E) X)) ∧ ObjectProperty.IsClosedUnderKernels (IsConstantModelConstructible (integralHeartCoefficientRingObj ℓ E) X) ∧ ObjectProperty.IsClosedUnderCokernels (IsConstantModelConstructible (integralHeartCoefficientRingObj ℓ E) X) ∧ ObjectProperty.IsClosedUnderExtensions (IsConstantModelConstructible (integralHeartCoefficientRingObj ℓ E) X) ∧ EssentiallySmall.{u + 1} (ConstantModelConstructible (integralHeartCoefficientRingObj ℓ E) X) ∧ (∀ C : SmallAdicCompletion.Modules ℓ E X, IsConstantModelConstructible (SmallAdicCompletion.Coefficients.integerRing ℓ E) X C → ∃ s : Scheme.FiniteLocallyClosedStratification X, (∀ a : Fin s.n, Topology.IsConstructible (s.stratum a)) ∧ ∀ a : Fin s.n, (∃ 𝒰 : Scheme.Cover.{u} Scheme.proetalePrecoverage (s.domain a), ∀ i : 𝒰.I₀, ∃ N : ModuleCat.{u + 1} (integralHeartScalars.{u} ℓ E), Module.Finite (integralHeartScalars.{u} ℓ E) N ∧ Nonempty ((CondensedRing.upperStar (SmallAdicCompletion.Coefficients.integerRing ℓ E) (𝒰.f i ≫ s.immersion a)).obj C ≅ (integralHeartRealization.{u} ℓ E (𝒰.X i)).obj N)) ∧ ∃ D : integralHeartDerivedCategory.{u} ℓ E (s.domain a), Nonempty (ExactPairing D (integralHeartStratumComplex ℓ E (s.immersion a) C)) ∧ DerivedCategory.torAmplitudeIn _ (-1) 0 (integralHeartStratumComplex ℓ E (s.immersion a) C) ∧ DerivedCategory.torAmplitudeIn _ 0 1 D)",
   "branch": "newtargets-dag",
   "by": "Q06",
   "date": "2026-10-18",
@@ -275,5 +282,15 @@
   "group": "Q06",
   "result": "fix",
   "note": "Item correct (H3): ℓ prime, char k = p > 0 with p ≠ ℓ, X separated of finite type over k, E/Q_ℓ finite in an independent universe. (1) triangulated, bounded and truncation-stable; constructible sheaves = degree-0 objects in both directions; abelian heart with ambient kernels/cokernels, extension-closed, essentially small. (2) one finite stratification, pro-étale charts with finite O_E-modules, torsion allowed. (3) ExactPairing dual on the same strata, Tor amplitude [-1,0] for C and [0,1] for the dual, both on Mod.derivedMonoidalCategory. Edge cases: empty X, C = 0, O_E/π. F1 (H13/H2): to get round missing published oleans the delivery re-sent three landed modules (IntegralHeartLocalModel, SmallCoefficientDerivedCompletion, IntegralModels) changed only by a trailing comment, and rewrote the NW/NW/NZ dependency records' by/note to say 'unusable'. Fixed: fixes/ hold the byte-identical landed texts. M1: land with --revert-nodes det-lem-int-integral-heart-local-model def-sfb-small-coefficient-derived-completion sk-lem-integral-models; a missing olean at landing is an infrastructure retry. F2 (H9): unused import Sheaf.Paper.IntegralModels dropped; signature unchanged. Advisory: plain declarations from the det-lem-int-integral-heart-triangulated and det-lem-int-integral-heart-local-model theorem modules and from def-sfb-small-coefficient-derived-completion are used outside stmt_deps. nt_compile --json of the exact fix set clean, exit 0 (41.1/24.4/6.9/15.4 s)."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "C-7cae8",
+  "group": "F5",
+  "result": "pass",
+  "landing": "20261023T231053-L-3539352",
+  "kind": "interface",
+  "note": "independent cc review: delivered integral_constructible_heart (proof via integralConstantModelHeart, integralHeartLocalModel q=0, integralHeartDualizable + exactPairing_swap) against node sk-lem-int-integral-heart, change record F5-integral-heart-proof-elaboration, live abbrev bodies (integralHeartCoefficientRingObj = integerRing, integralHeartStratumComplex) and the 3 direct importers compiled against it"
  }
 }

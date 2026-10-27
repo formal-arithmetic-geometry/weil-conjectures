@@ -1,0 +1,141 @@
+{
+ "id": "lem-sfb-continuous-finite-etale-sheet-matrices",
+ "kind": "statement",
+ "title": "Continuous matrix coordinates for a finite family of sheet embeddings",
+ "statement": "Fix a prime l, a finite-dimensional totally disconnected normed Q_l-extension E, a scheme X, a locally finite free internal continuous E-module P, a finite etale surjection p:U→X, a locally finite free internal continuous A-module M on U for A=continuousIntegers(l,E), and a specified rationalization e:Ext(M)≅p*P. There is a pro-etale cover C of X with a positive finite number d of sections t_j of p on each Y=C_s and a rank r. There are functions G_j:|Y|→GL_r(E) whose entries and inverse entries are continuous. For every open W of Y, the induced sections split U×_X W as d copies of W, and there is a continuous-function presentation c of the restricted rational module. For every pro-etale B over W, the range under c of the actual sheet embedding is exactly the set of continuous f:|B|→E^r such that every coordinate of G_j(b)^(-1) f(b) lies in A for every b. The G_j are allowed to vary; no locally constant coset, fixed lattice, integral basis of a fixed lattice or discrete lattice-class sheaf is asserted.",
+ "stmt_deps": [
+  "def-weil-pbc-continuous-integral-coefficients",
+  "lem-weil-pbc-continuous-locally-free-pullback",
+  "def-sfb-finite-etale-lattice-sheet-maps",
+  "def-sfb-continuous-function-module-presentation",
+  "def-sfb-continuous-function-presentation-range"
+ ],
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-lem-stratified-lattice/sk-lem-stratified-lattice-trace.proof.md",
+  "place": "Local computation, paragraphs 1--2: split the finite etale morphism and choose the rational and integral local frames, before making their matrix cosets constant"
+ },
+ "proof": [
+  {
+   "text": "Use the already proved exists_split_sections helper of FiniteEtaleLocallyFreeModels at each point to get a positive finite set of sections and its coproduct cofan. Form the etale cover indexed by points and weaken it to a pro-etale cover. Pull P and every sheet pullback of M back to each chart, apply locallyFree_upperStar and finiteCommonCover to the Option(Fin d)-indexed family of rational and integral free covers. The free_standardPullback and free_standard_refine helpers and upperStarComp give globally free normalized pullbacks after refinement. Compose the refinements with exists_cover_of_local_property, keeping the member predicate abstract.",
+   "uses": [
+    "lem-weil-pbc-finite-etale-locally-free-models",
+    "lem-weil-pbc-continuous-locally-free-pullback",
+    "lem-weil-pbc-condensed-qbar-cover-composition"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply continuousFreeSheet_frames only to the already globally free modules on the refined chart. It gives continuous matrices, their continuous inverses, rational and integral section presentations on each open, and the forward coordinate equation for the actual sheet embedding. No covering, coproduct or range assertion is supplied by that lemma.",
+   "uses": [
+    "lem-sfb-continuous-free-sheet-frames"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Prove directly that the section cofan stays a coproduct under any base change: its induced section squares are pullback squares by pullback uniqueness, and finite coproducts of schemes are universal. Apply this once to the free-cover refinement and once to each open immersion W.",
+   "uses": [
+    "lem-sc-etale-fibre-product-base-change-coproduct"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Unfold continuousFunctionPresentationRange using its equation. In forward coordinates the actual map is G times an integral vector, so the inverse matrix has integral values on its range. Conversely, given a rational continuous vector satisfying the inverse-matrix membership test, apply the continuous inverse matrix, then restrict its codomain coordinatewise to the subring using the induced topology. The integral presentation is surjective and produces a section with these coordinates. The forward coordinate equation and the matrix inverse identity give exactly the original rational vector. This works for empty test objects and rank zero.",
+   "uses": [
+    "def-sfb-continuous-function-presentation-range"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "G4",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-lem-stratified-lattice/sk-lem-stratified-lattice-trace.proof.md",
+  "place": "Local computation, paragraphs 1--2: split the finite etale morphism and choose the rational and integral local frames, before making their matrix cosets constant",
+  "note": "Explicit common-free-cover construction, preservation of the section cofan under arbitrary refinement, and the inverse-matrix range criterion are proved in Lean. The remaining normalized coefficient frame calculation is isolated as a strictly smaller globally free forward-coordinate lemma."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Continuous matrices representing finite locally free integral subsheaves of a rational module sheaf",
+   "results": "Module.Basis.continuous_toMatrix; continuous_matrix; Continuous.matrix_submatrix. These address ordinary matrices, not the internal coefficient encoding or normalized sheet embeddings.",
+   "verdict": "no exact match",
+   "date": "2026-10-26"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "finite family of locally free integral lattices in a free rational sheaf simultaneously locally constant",
+   "results": "Module.isLocallyConstant_rankAtStalk_freeLocus; LocallyConstant.freeOfProfinite; SheafOfModules.IsFiniteType.exists_localGeneratorsData. No normalized internal sheet-matrix statement.",
+   "verdict": "no exact match",
+   "date": "2026-10-26"
+  },
+  {
+   "tool": "grep",
+   "query": "sheet.*matri|matri.*sheet|continuous.*frame in Mathlib, Sheaf/Paper, and current blueprint stratified lattice unit",
+   "results": "Existing lattice-pair matrix lemmas use a different sectionwise coefficient ring and slice-module encoding; the internal sheet matrices and their normalization are not stated. The blueprint has local bases as the first part of the Local computation argument, not a separate duplicate node.",
+   "verdict": "no exact match",
+   "date": "2026-10-26"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.ContinuousFiniteEtaleLatticeSheetCharts",
+  "date": "2026-10-26",
+  "group": "T9"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "sk-lem-stratified-lattice",
+   "place": "Trace proof, Local computation, paragraphs 1--2: split the finite etale morphism, choose rational and integral frames, before making the lattice cosets constant",
+   "via": [
+    "lem-sfb-continuous-finite-etale-lattice-sheet-charts",
+    "lem-sfb-continuous-finite-etale-trace-image-charts",
+    "lem-sfb-continuous-finite-etale-trace-lattice"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-lem-stratified-lattice",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.ContinuousFiniteEtaleSheetMatrices",
+  "file": "lean/Sheaf/Paper/ContinuousFiniteEtaleSheetMatrices.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.CondensedRing.continuousFiniteEtaleLattice_sheet_matrices",
+  "statement": "theorem continuousFiniteEtaleLattice_sheet_matrices\n    (l : ℕ) [Fact l.Prime] (E : Type) [NormedField E]\n    [NormedAlgebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]\n    [TotallyDisconnectedSpace E] (X : Scheme.{u})\n    (P : Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})\n      (condensedRingObj (Profinite.continuousMapRingObj E) X))\n    (hP : LocallyFree (condensedRingObj (Profinite.continuousMapRingObj E) X) P)\n    {U : Scheme.{u}} (p : U ⟶ X) [IsFinite p] [Etale p] [Surjective p]\n    (M : Mod (Sheaf (Scheme.ProEt.topology U) Ab.{u + 1})\n      (condensedRingObj (integralCoeff l E) U))\n    (hM : LocallyFree (condensedRingObj (integralCoeff l E) U) M)\n    (e : (Mod.extendScalars (coefficientMap (integralScalarMap l E) U)).obj M ≅\n      (upperStar (Profinite.continuousMapRingObj E) p).obj P) :\n    ∃ C : Scheme.Cover.{u} Scheme.proetalePrecoverage X, ∀ s : C.I₀,\n      ∃ (r d : ℕ) (_ : 0 < d) (t : Fin d → (C.X s ⟶ U))\n        (_w : ∀ j, t j ≫ p = C.f s),\n      ∃ G : Fin d → (C.X s) → Matrix.GeneralLinearGroup (Fin r) E,\n        (∀ j i k, Continuous (fun y ↦ (G j y).val i k)) ∧\n        (∀ j i k, Continuous (fun y ↦ ((G j y)⁻¹).val i k)) ∧\n        ∀ W : (C.X s).Opens,\n          ∃ w' : ∀ j, (W.ι ≫ t j) ≫ p = W.ι ≫ C.f s,\n          Nonempty (IsColimit (Cofan.mk (pullback p (W.ι ≫ C.f s))\n            (fun j ↦ pullback.lift (W.ι ≫ t j) (𝟙 W.toScheme)\n              (by simpa using w' j)))) ∧\n          ∃ c : ContinuousFunctionPresentation W.toScheme (continuousIntegers l E)\n              (Fin r → E) ((Mod.comap\n                (coefficientMap (integralScalarMap l E) W.toScheme)).obj\n                ((upperStar (Profinite.continuousMapRingObj E) (W.ι ≫ C.f s)).obj P)),\n            ∀ (j : Fin d) (B : W.toScheme.ProEt),\n              continuousFunctionPresentationRange (continuousIntegers l E) c\n                (finiteEtaleLatticeSheetEmbedding (integralScalarMap l E) P p M e\n                  (W.ι ≫ C.f s) (W.ι ≫ t j) (w' j)) B =\n                {f : C(B.left, Fin r → E) | ∀ z i,\n                  (((G j (W.ι (B.hom z)))⁻¹).val *ᵥ f z) i ∈ continuousIntegers l E}",
+  "branch": "sheaf-dag",
+  "by": "T9",
+  "date": "2026-10-26",
+  "note": "The encoded actual section range is abbreviated by finiteEtaleLatticeSheetSectionRange, whose real body is exactly the former range formula; no mathematical hypothesis or conclusion changes."
+ },
+ "proof_deps": [
+  "lem-weil-pbc-finite-etale-locally-free-models",
+  "lem-weil-pbc-continuous-locally-free-pullback",
+  "lem-sfb-continuous-free-sheet-frames",
+  "lem-sc-etale-fibre-product-base-change-coproduct",
+  "def-sfb-continuous-function-presentation-range",
+  "lem-weil-pbc-condensed-qbar-cover-composition"
+ ],
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T9",
+  "result": "pass",
+  "landing": "20261026T130714-L-3495016",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-71e87",
+  "group": "G4",
+  "result": "pass",
+  "landing": "20261026T154434-L-1658518",
+  "kind": "interface",
+  "note": "independent cc review: item proof + new sorry lemma continuousFreeSheet_frames against nodes lem-sfb-continuous-finite-etale-sheet-matrices / lem-sfb-continuous-free-sheet-frames, Mod.IsFree, finiteEtaleLatticeSheetEmbedding, ContinuousFunctionPresentation; importer ContinuousFiniteEtaleLatticeSheetCharts compiled against delivered files"
+ }
+}

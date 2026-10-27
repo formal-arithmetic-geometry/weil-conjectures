@@ -1,0 +1,262 @@
+{
+ "id": "lem-sfb-maximal-torus-overgroup-root-generation",
+ "kind": "statement",
+ "title": "Root subgroups generate smooth connected overgroups of a maximal torus",
+ "statement": "Let $F$ be an algebraically closed field [def-weil-field, def-weil-algebraic-closure]. Let $G$ be a reductive $F$-group scheme [def-sc-group-scheme, lem-sfb-reductive-borel-pair-structure], meaning smooth, connected, affine and of finite type with no nontrivial smooth connected normal unipotent subgroup. Smoothness, connectedness and finite type mean [def-sbc-smooth-morphisms, def-weil-connected-scheme, def-weil-finite-type-morphism]. Unipotent means that all geometric points are unipotent matrices in a faithful finite-dimensional representation. Let $T\\subseteq G$ be a split maximal torus: a closed subgroup [def-sc-group-scheme-subgroup] isomorphic to $\\mathbf G_m^r$ for some $r\\geq0$ and maximal among torus subgroups, with $\\mathbf G_m$ as in [def-sc-gm-ga]. Write $X^*(T)=\\operatorname{Hom}_{F\\text{-grp}}(T,\\mathbf G_m)$ and let $\\Phi\\subseteq X^*(T)\\setminus\\{0\\}$ be the nonzero character weights of $T$ acting by conjugation on the tangent space $\\operatorname{Lie}(G)$ at $1$. For each $\\alpha\\in\\Phi$, let $U_\\alpha\\subseteq G$ be the smooth connected root subgroup with $\\operatorname{Lie}(U_\\alpha)=\\operatorname{Lie}(G)_\\alpha$ supplied by [lem-sfb-reductive-root-subgroup-parametrizations]. Let $H\\subseteq G$ be any smooth connected closed subgroup containing $T$, and put $\\Phi_H=\\{\\alpha\\in\\Phi:\\operatorname{Lie}(H)_\\alpha\\ne0\\}$. Then $U_\\alpha\\subseteq H$ if and only if $\\alpha\\in\\Phi_H$, and $H$ is the smallest closed subgroup scheme of $G$ containing $T$ and all $U_\\alpha$ with $\\alpha\\in\\Phi_H$. Explicitly, every closed subgroup scheme $J\\subseteq G$ containing those subgroup schemes also contains $H$; no smoothness or connectedness is required of $J$. These are inclusions of subgroup schemes and thus hold as inclusions of functors on all commutative $F$-algebras. Neither reductivity nor parabolicity is required of $H$. Every characteristic and the empty root set are allowed.",
+ "source": {
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Milne 21.66, printed p.444, with H containing T; the root-containment criterion is stated there using 21.11(c), and the generation assertion is its final sentence (using 10.17)."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-weil-algebraic-closure",
+  "def-sc-group-scheme",
+  "def-sc-group-scheme-subgroup",
+  "def-sbc-smooth-morphisms",
+  "def-weil-connected-scheme",
+  "def-weil-finite-type-morphism",
+  "def-sc-gm-ga",
+  "lem-sfb-reductive-borel-pair-structure",
+  "lem-sfb-reductive-root-subgroup-parametrizations",
+  "def-sfb-reductive-torus-centralizer-terminology",
+  "def-sfb-tori-multiplicative-type",
+  "def-sfb-torus-character-tangent-weights",
+  "def-sfb-rank-one-root-interfaces"
+ ],
+ "proof": [
+  {
+   "text": "Write $\\mathfrak h=\\operatorname{Lie}(H)$ and $\\mathfrak t=\\operatorname{Lie}(T)$. Since $T\\subseteq H$, conjugation by $T$ preserves $H$: for every $F$-algebra $A$, $t h t^{-1}\\in H(A)$ for $t\\in T(A)$ and $h\\in H(A)$, by [def-sc-group-scheme-subgroup]. By [def-sc-scheme-tangent-space], the inclusion on tangent vectors sends a dual-number point to the same point in $G$; it is injective because subgroup inclusions are injective on all algebra points. Its linearity and compatibility with composition are supplied by [lem-sfb-affine-group-lie-tangent-calculus]. Differentiating conjugation therefore makes $\\mathfrak h$ a $T$-stable vector subspace of $\\mathfrak g$, containing $\\mathfrak t$. The group $H$ is affine of finite type: if $G=\\operatorname{Spec}A$, then $H=\\operatorname{Spec}(A/I)$ by [def-weil-closed-immersion], and the images of any finite algebra generators of $A$ generate $A/I$.",
+   "uses": [
+    "def-sc-group-scheme-subgroup",
+    "def-sc-scheme-tangent-space",
+    "lem-sfb-affine-group-lie-tangent-calculus",
+    "def-weil-closed-immersion"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "21.66, printed p.444; Theorem 21.11(b),(c), pp.428--430; Proposition 16.64, pp.348--349; Corollary 10.17, p.191."
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-trivial-torus-coherent-weight-decomposition] on $\\operatorname{Spec}F$ to the finite-dimensional representation $\\mathfrak h$ (a coherent module on the Noetherian one-point scheme). Its weight summands map into the corresponding summands of $\\mathfrak g$: an equivariant inclusion sends a vector with character $\\chi$ to a vector with the same character. By [lem-sfb-reductive-rank-one-reflections], $\\mathfrak g_0=\\mathfrak t$, the nonzero weights form the finite set $\\Phi$, and every $\\mathfrak g_\\alpha$ is one-dimensional. Since $\\mathfrak t\\subseteq\\mathfrak h$, its zero summand is exactly $\\mathfrak t$; every other nonzero summand equals the ambient line. Thus $$\\mathfrak h=\\mathfrak t\\oplus\\bigoplus_{\\alpha\\in\\Phi_H}\\mathfrak g_\\alpha.$$ This uses character weights rather than differentials of characters, including in positive characteristic.",
+   "uses": [
+    "lem-sfb-trivial-torus-coherent-weight-decomposition",
+    "lem-sfb-reductive-rank-one-reflections"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "21.66, printed p.444; Theorem 21.11(b),(c), pp.428--430; Proposition 16.64, pp.348--349; Corollary 10.17, p.191."
+   }
+  },
+  {
+   "text": "Fix $\\alpha\\in\\Phi$. By [lem-sfb-reductive-rank-one-reflections], the only roots rationally proportional to $\\alpha$ are $\\alpha,-\\alpha$, so the positive-ray space $V_\\alpha$ in $\\operatorname{Lie}(G)$ is exactly $\\mathfrak g_\\alpha$. Apply [lem-sfb-torus-positive-ray-subgroup] to conjugation by $T$ on $G$. Its smooth connected $T$-stable subgroup with tangent space $V_\\alpha$ is $U_\\alpha$, by the uniqueness clause of [lem-sfb-reductive-root-subgroup-parametrizations]. If $\\alpha\\in\\Phi_H$, Step 2 gives $V_\\alpha=\\mathfrak g_\\alpha\\subseteq\\mathfrak h$, and the positive-ray containment assertion, with $K=H$, gives $U_\\alpha\\subseteq H$. All its hypotheses hold: $H$ is smooth connected closed and $T$-stable; no reductivity of $H$ is used. Conversely, if $U_\\alpha\\subseteq H$, the tangent inclusion puts its nonzero tangent line $\\mathfrak g_\\alpha$ in $\\mathfrak h$, so $\\alpha\\in\\Phi_H$.",
+   "uses": [
+    "lem-sfb-reductive-rank-one-reflections",
+    "lem-sfb-torus-positive-ray-subgroup",
+    "lem-sfb-reductive-root-subgroup-parametrizations"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "21.66, printed p.444; Theorem 21.11(b),(c), pp.428--430; Proposition 16.64, pp.348--349; Corollary 10.17, p.191."
+   }
+  },
+  {
+   "text": "Let $J\\subseteq G$ be a closed subgroup scheme containing $T$ and the $U_\\alpha$ for $\\alpha\\in\\Phi_H$. Put $K=H\\times_GJ$. Explicitly, for ideals $I_H,I_J\\subseteq A=\\mathcal O(G)$, $K=\\operatorname{Spec}(A/(I_H+I_J))$, a closed subscheme of $H$ by [def-weil-closed-immersion]. Its algebra points are $H(A')\\cap J(A')$ for every $F$-algebra $A'$, so it is a subgroup by [def-sc-group-scheme-subgroup]; every specified generator factors through it. The family consisting of $T$ and the finitely many $U_\\alpha\\subseteq H$ is smooth and connected: use [lem-sfb-multiplicative-type-largest-subtorus] for $T$ and [lem-sfb-reductive-root-subgroup-parametrizations] for the root groups. Their tangent spaces span $\\mathfrak h$ by Step 2. Apply [lem-sfb-smooth-subgroup-tangent-generation] with ambient group $H$ and containing subgroup $K$. It yields $K=H$ without requiring $K$ to be smooth or connected. In affine ideals this says $I_H+I_J=I_H$, hence $I_J\\subseteq I_H$ and $H\\subseteq J$ as subgroup schemes.",
+   "uses": [
+    "def-weil-closed-immersion",
+    "def-sc-group-scheme-subgroup",
+    "lem-sfb-multiplicative-type-largest-subtorus",
+    "lem-sfb-reductive-root-subgroup-parametrizations",
+    "lem-sfb-smooth-subgroup-tangent-generation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "21.66, printed p.444; Theorem 21.11(b),(c), pp.428--430; Proposition 16.64, pp.348--349; Corollary 10.17, p.191."
+   }
+  },
+  {
+   "text": "Step 3 shows that $H$ itself contains all the claimed generators; Step 4 shows it lies in every closed subgroup containing them, proving the asserted minimality. If $\\Phi_H$ is empty, the family in Step 4 is still the singleton $\\{T\\}$ and Step 2 says $\\mathfrak h=\\mathfrak t$, so the argument is unchanged. In particular it covers $\\Phi=\\varnothing$ and rank zero. All factorizations above are morphisms of subgroup schemes; evaluating them on any commutative $F$-algebra gives the stated functor inclusions. No hypothesis on $J$ beyond closed subgroup was introduced.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "21.66, printed p.444; Theorem 21.11(b),(c), pp.428--430; Proposition 16.64, pp.348--349; Corollary 10.17, p.191."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sc-group-scheme-subgroup",
+  "def-sc-scheme-tangent-space",
+  "lem-sfb-affine-group-lie-tangent-calculus",
+  "def-weil-closed-immersion",
+  "lem-sfb-trivial-torus-coherent-weight-decomposition",
+  "lem-sfb-reductive-rank-one-reflections",
+  "lem-sfb-torus-positive-ray-subgroup",
+  "lem-sfb-reductive-root-subgroup-parametrizations",
+  "lem-sfb-multiplicative-type-largest-subtorus",
+  "lem-sfb-smooth-subgroup-tangent-generation"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "21.66, printed p.444; Theorem 21.11(b),(c), pp.428--430; Proposition 16.64, pp.348--349; Corollary 10.17, p.191."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A smooth connected subgroup of a reductive algebraic group containing a maximal torus is generated by that torus and the root subgroups occurring in its Lie algebra",
+   "results": "{\"t\": \"2026-10-24T08:17:03Z\", \"tool\": \"leanfinder\", \"query\": \"A smooth connected subgroup of a reductive algebraic group containing a maximal torus is generated by that torus and the root subgroups occurring in its Lie algebra\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"RootPairing.GeckConstruction.h_mem_cartanSubalgebra'\", \"LieAlgebra.cartan_sup_iSup_rootSpace_eq_top\", \"RootPairing.GeckConstruction.cartanSubalgebra'\", \"RootPairing.GeckConstruction.cartanSubalgebra_eq_lieSpan\", \"RootPairing.GeckConstruction.cartanSubalgebra_le_lieAlgebra\", \"RootPairing.GeckConstruction.instHasTrivialRadical\", \"RootPairing.GeckConstruction.cartanSubalgebra\", \"LieAlgebra.zeroRootSubalgebra_eq_of_is_cartan\"], \"digest\": \"e0fca0279d85bdda\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: abstract root pairings, Lie algebra root spaces, roots of unity and parabolic matrices do not state this theorem about smooth algebraic subgroup schemes."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A connected smooth overgroup of a maximal torus in a reductive algebraic group is generated scheme theoretically by the torus and its root subgroups",
+   "results": "{\"t\": \"2026-10-24T08:16:54Z\", \"tool\": \"leansearch\", \"query\": \"A connected smooth overgroup of a maximal torus in a reductive algebraic group is generated scheme theoretically by the torus and its root subgroups\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"LieSubalgebra.lieSpan\", \"RootPairing.weylGroup_toSubmonoid\", \"RootPairing.weylGroup\", \"LieAlgebra.cartan_sup_iSup_rootSpace_eq_top\", \"MulAction.IwasawaStructure.is_generator\", \"RootPairing.IsRootSystem.span_coroot_eq_top\", \"RootPairing.IsRootSystem.span_root_eq_top\", \"RootPairing.span_orbit_eq_top\"], \"digest\": \"dfa57460eb8edeff\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: abstract root pairings, Lie algebra root spaces, roots of unity and parabolic matrices do not state this theorem about smooth algebraic subgroup schemes."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"root\", \"Subgroup\"",
+   "results": "{\"t\": \"2026-10-24T08:16:54Z\", \"tool\": \"loogle\", \"query\": \"\\\"root\\\", \\\"Subgroup\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 4, \"note\": \"\", \"top\": [\"Subgroup.instHasUniqueRootsSubtypeMem\", \"card_nthRoots_subgroup_units\", \"instSubsingletonSubtypeUnitsMemSubgroupRootsOfUnityOfNatNat\", \"instFiniteSubtypeUnitsMemSubgroupRootsOfUnity\"], \"digest\": \"b79adae41baf7600\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: abstract root pairings, Lie algebra root spaces, roots of unity and parabolic matrices do not state this theorem about smooth algebraic subgroup schemes."
+  },
+  {
+   "tool": "grep",
+   "query": "rootSubgroup|root_subgroup|BorelSubgroup|cocharacter",
+   "results": "{\"t\": \"2026-10-24T08:16:53Z\", \"tool\": \"grep\", \"query\": \"rootSubgroup|root_subgroup|BorelSubgroup|cocharacter\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: abstract root pairings, Lie algebra root spaces, roots of unity and parabolic matrices do not state this theorem about smooth algebraic subgroup schemes."
+  },
+  {
+   "tool": "grep",
+   "query": "rootSubgroup|root_subgroup|BorelSubgroup|cocharacter",
+   "results": "{\"t\": \"2026-10-24T08:39:23Z\", \"tool\": \"grep\", \"query\": \"rootSubgroup|root_subgroup|BorelSubgroup|cocharacter\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern abstract groups, root pairings, Lie algebras or topology, not smooth algebraic subgroup schemes and scheme-theoretic root generation."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A connected algebraic subgroup normalized by a maximal torus is generated by its torus intersection and the root groups it contains",
+   "results": "{\"t\": \"2026-10-24T08:39:24Z\", \"tool\": \"leansearch\", \"query\": \"A connected algebraic subgroup normalized by a maximal torus is generated by its torus intersection and the root groups it contains\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"LieSubalgebra.IsCartanSubalgebra.self_normalizing\", \"RootPairing.weylGroup\", \"Subgroup.closure\", \"LieSubalgebra.normalizer_eq_self_of_isCartanSubalgebra\", \"LieAlgebra.cartan_sup_iSup_rootSpace_eq_top\", \"LieSubalgebra.IsCartanSubalgebra.casesOn\", \"LieSubalgebra.lieSpan\", \"Subgroup.normal_of_comm\"], \"digest\": \"de63f200722c8498\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern abstract groups, root pairings, Lie algebras or topology, not smooth algebraic subgroup schemes and scheme-theoretic root generation."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"root\", \"Subgroup\"",
+   "results": "{\"t\": \"2026-10-24T08:39:24Z\", \"tool\": \"loogle\", \"query\": \"\\\"root\\\", \\\"Subgroup\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 4, \"note\": \"\", \"top\": [\"Subgroup.instHasUniqueRootsSubtypeMem\", \"card_nthRoots_subgroup_units\", \"instSubsingletonSubtypeUnitsMemSubgroupRootsOfUnityOfNatNat\", \"instFiniteSubtypeUnitsMemSubgroupRootsOfUnity\"], \"digest\": \"b79adae41baf7600\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern abstract groups, root pairings, Lie algebras or topology, not smooth algebraic subgroup schemes and scheme-theoretic root generation."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A smooth connected closed subgroup containing a maximal torus of a reductive algebraic group is generated by its torus and root subgroups",
+   "results": "{\"t\": \"2026-10-24T08:39:26Z\", \"tool\": \"leanfinder\", \"query\": \"A smooth connected closed subgroup containing a maximal torus of a reductive algebraic group is generated by its torus and root subgroups\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"MulAction.IwasawaStructure.is_generator\", \"closureCommutatorRepresentatives\", \"RootPairing.range_weylGroup_weightHom\", \"RootPairing.GeckConstruction.h_mem_cartanSubalgebra'\", \"LieAlgebra.cartan_sup_iSup_rootSpace_eq_top\", \"Subgroup.connectedComponentOfOne\", \"RootPairing.GeckConstruction.cartanSubalgebra_le_lieAlgebra\", \"LieAlgebra.IsKilling.biSup_corootSpace_eq_top\"], \"digest\": \"2e94c77e02d9e7f2\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern abstract groups, root pairings, Lie algebras or topology, not smooth algebraic subgroup schemes and scheme-theoretic root generation."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Scheme theoretic generation of a reductive group torus overgroup by its nonzero tangent character root groups",
+   "results": "{\"t\": \"2026-10-24T08:40:19Z\", \"tool\": \"leanfinder\", \"query\": \"Scheme theoretic generation of a reductive group torus overgroup by its nonzero tangent character root groups\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"RootPairing.GeckConstruction.cartanSubalgebra'\", \"RootPairing.span_orbit_eq_top\", \"RootPairing.EmbeddedG2.span_eq_top\", \"RootPairing.GeckConstruction.h_mem_cartanSubalgebra'\", \"RootPairing.GeckConstruction.span_range_h'_eq_top\", \"RootPairing.GeckConstruction.h_mem_cartanSubalgebra\", \"LieAlgebra.IsKilling.span_weight_isNonZero_eq_top\", \"NumberField.Units.closure_fundSystem_sup_torsion_eq_top\"], \"digest\": \"b7dd4d45b78fe630\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern abstract groups, root pairings, Lie algebras or topology, not smooth algebraic subgroup schemes and scheme-theoretic root generation."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-split-parabolic-root-sign-cone",
+  "date": "2026-10-24",
+  "group": "Q143"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Haboush symmetric-power lifting for a trivial quotient representation. Supporting representation-theoretic input: Steinberg endomorphisms detect a nonzero fixed vector. Supporting Self-duality of rho section modules at characteristic-dependent weights. Supporting input: Positive-characteristic simplicity step, using irreducibility of the Steinberg induced module rather than assuming self-duality. Numerical input to the dimension comparison: Weyl dimension of the induced module. Supporting Kempf vanishing for dominant flag line bundles. Positive-characteristic Andersen–Haboush argument: trivial pushforward of M_((p^r-1)rho), before the Serre twisting calculation. Supporting input: Lemma 2.3, second assertion, and Lemma 2.1, printed pp.153--155: H^0(u,V(lambda))=K v_lambda for p-restricted dominant lambda. With roots positive in Lie(B), V(lambda)=Gamma(M_{-w0 lambda}). Supporting input: Simple-root distributions and infinitesimal subalgebra calculus. Supporting input: pinning-compatible integral-to-geometric distribution comparison, with all positive root divided powers, before simple-root generation. Integral-root-model prerequisite before the comparison: integral Chevalley construction and a positive-root coordinate chart; integral matrix-closure construction: the big cell and its Weyl translates, before identifying the special fibre. Supporting input: Integral closure atlas, exhaustion of each special fibre: exclude extra components using the generic and special identity-component big-cell dimensions. Supporting input: Lemma 3.7 (first assertion, the Iwahori--Matsumoto maximal-boundedness statement) and its application in Proposition 4.3, second paragraph, printed pp.7-8; Cartan double-coset input used to prove the maximal-boundedness prerequisite, before the torus-powers argument. Supporting input: Remark 3.5, forward implication, printed p.5: integral conjugation into a fixed maximal split torus. Only the complete-DVR case is needed here; the statement is the conjugacy input, not a Cartan factorization. Supporting input: Residue-field base case: rational conjugacy of split tori, before lifting a fixed conjugator. This is over a field and contains no complete-DVR lifting assertion. Supporting field argument, conjugacy step: Milne Theorem 25.10, rational conjugacy of the maximal containing split torus with the prescribed one. Supporting rational-conjugacy argument: Milne 25.10, compare centralizers after putting both maximal split tori in a minimal parabolic; corrected 25.6(b),(c). Supporting input in this split: Theorem 25.1, printed p.544, converse and Galois averaging in a maximal torus of P; choose that torus through the prescribed S. The prescribed-torus choice is the preparatory assertion in the proof of Theorem 25.6(b), printed p.546, before the centralizer and semidirect-product conclusions. Only P=P(lambda) is asserted here, with no centralizer, Levi or conjugacy conclusion. Supporting input: Theorem 21.91 and Corollary 21.92, printed pp.453--455; Theorem 25.1, printed p.544, equation (166) and the preceding paragraph. Nonemptiness uses a dominant rational cocharacter on the face indexed by I, multiplied by a positive integer to lie in X_*(T). Supporting input in Q143: Milne 21.66: scheme-theoretic generation by torus and root subgroups, used to pass from a root-sign calculation to equality of parabolics.",
+   "via": [
+    "lem-sfb-split-parabolic-root-sign-cone",
+    "lem-sfb-parabolic-prescribed-split-cocharacter",
+    "lem-sfb-minimal-parabolic-split-centralizers",
+    "lem-sfb-field-maximal-split-tori-conjugacy",
+    "lem-sfb-field-split-torus-rational-containment",
+    "lem-sfb-complete-dvr-torus-cocharacter-conjugacy",
+    "lem-sfb-split-reductive-dvr-cartan-decomposition",
+    "lem-sfb-split-reductive-integral-maximal-bounded",
+    "lem-sfb-quasi-reductive-special-connectedness",
+    "lem-sfb-integral-chevalley-weyl-atlas",
+    "lem-sfb-chevalley-integral-root-model",
+    "lem-sfb-borel-kostant-distribution-comparison",
+    "lem-sfb-borel-simple-root-distribution-calculus",
+    "lem-sfb-restricted-induced-infinitesimal-invariants",
+    "lem-sfb-flag-frobenius-rho-pushforward",
+    "lem-sfb-dominant-flag-line-kempf-vanishing",
+    "lem-sfb-induced-weyl-dimension-formula",
+    "lem-sfb-steinberg-induced-module-irreducible",
+    "lem-sfb-rho-section-self-duality",
+    "lem-sfb-steinberg-endomorphism-detection",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-maximal-torus-overgroup-root-generation",
+  "worker": "stage1",
+  "summary": "Proved the root-containment criterion from the existing positive-ray subgroup comparison and the one-dimensional reduced root decomposition, then applied the existing tangent-spanning generation theorem inside H to its scheme-theoretic intersection with any candidate J. Reused existing nodes throughout, with no new nodes, no statement change and no reductivity hypothesis on H or smoothness hypothesis on J. Checked characteristic-independent character weights, empty roots and nonreduced containing subgroup schemes.",
+  "blueprint": "Latest blueprint sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md, (3), inherited alteration/moduli/PGL/reductive-group prerequisite chain recorded in blueprint.from.place. This split supplies the Milne 21.66 root-generation input in the root-sign proof of the prescribed-cocharacter parabolic construction; it changes no unit or chapter route."
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-NA-386f43dc3",
+  "group": "NA",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NA-386f43dc3 (reviewer sub-agent of L); spot-checked: A first split of an unsplit item, with no new nodes. Compared with the side-live copy, the statement, stmt_deps, source and blueprint are unchanged; only status, proof, proof_deps, proof_origin, searches and split_report differ. Read Milne 21.66 (p.444) and Cor 10.17 (p.191): the item is 21.66 with T⊆H, and Φ_H defined by Lie(H)_α≠0 is equivalent to Milne's U_α⊆H since dim g_α=1. Step 1 (elementary): the subgroup, tangent-space and tangent-calculus definitions give a T-stable 𝔥 ⊆ 𝔤 and H of finite type. Step 2: the coherent weight decomposition on Spec F plus rank-one-reflections (𝔤=Lie T⊕⊕g_α, dim g_α=1) give 𝔥=𝔱⊕⊕_{Φ_H}g_α. Step 3: the positive-ray node with S=T on G; V_α=g_α since 0∉R_α and Qα∩Φ={±α}; the parametrization node's uniqueness identifies U_η=U_α; K=H gives containment and the converse is the tangent inclusion. Containment is correctly not taken from the parametrization node, which does not state it. Step 4: K=H×_G J; T and U_α are smooth connected (largest-subtorus and parametrization nodes); the tangent-generation node in H allows non-smooth K, so K=H and H⊆J. Step 5 covers Φ_H=∅, G=T and rank 0. Small cases checked: GL_2 Borels, H=T, non-reduced J, characteristic p. No cycle (closure of 14564 nodes); proof_deps equals the union of step uses. No duplicate found: lem-sfb-unipotent-root-intersection-products, which also cites 21.66, states the B∩B' products. All cited lemmas are in the item's unit, and the cross-chapter citations are definitions, so no tool_uses. Batch 5: the reached trf nodes are lem-trf-projective-exterior-scalar-comparisons (exterior/determinant base change), lem-trf-smooth-fpqc-base-descent (Stacks 02VL Mathlib leaf) and lem-trf-split-lattice-torus-projection (split torus smooth and reduced products). All three are general algebra outside the trace-formula and Poincaré-duality assumptions, so accepted. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.GroupScheme.MaximalTorusOvergroupRootGeneration",
+  "declaration": "AlgebraicGeometry.RankOneRoots.maximal_torus_overgroup_root_generation",
+  "file": "lean/Sheaf/AlgebraicGeometry/GroupScheme/MaximalTorusOvergroupRootGeneration.lean",
+  "statement": "theorem maximal_torus_overgroup_root_generation {F : Type u} [Field F] [IsAlgClosed F] (G T : Grp (Over (Spec (.of F)))) (hG : ReductiveTorusCentralizer.IsReductive G) (iT : T ⟶ G) (hT : ReductiveTorusCentralizer.IsMaximalTorus iT) (hsplit : ∃ r : ℕ, Nonempty (T ≅ MultiplicativeType.splitTorus F r)) (aG : ModObj T.X G.X) (haG : aG.smul = adjointMap iT) (U : roots T G aG → Grp (Over (Spec (.of F)))) (iU : ∀ α : roots T G aG, U α ⟶ G) (hU : ∀ α : roots T G aG, IsClosedSubgroupScheme (iU α).hom.hom ∧ Smooth (U α).X.hom ∧ ConnectedSpace (U α).X.left ∧ @TorusCharacterTangent.IsStable F _ T G aG _ (iU α) ∧ (GrpObj.differential (iU α).hom.hom).toLinearMap.range = weight T G aG α.val) (H : Grp (Over (Spec (.of F)))) (iH : H ⟶ G) (hHclosed : IsClosedSubgroupScheme iH.hom.hom) (hHsmooth : Smooth H.X.hom) (hHconn : ConnectedSpace H.X.left) (jT : T ⟶ H) (hjT : jT ≫ iH = iT) (aH : ModObj T.X H.X) (haH : aH.smul = adjointMap jT) : (∀ α : roots T G aG, (∃ f : U α ⟶ H, f ≫ iH = iU α) ↔ weight T H aH α.val ≠ ⊥) ∧ ∀ (J : Grp (Over (Spec (.of F)))) (iJ : J ⟶ G), IsClosedSubgroupScheme iJ.hom.hom → (∃ f : T ⟶ J, f ≫ iJ = iT) → (∀ α : roots T G aG, weight T H aH α.val ≠ ⊥ → ∃ f : U α ⟶ J, f ≫ iJ = iU α) → ∃ f : H ⟶ J, f ≫ iJ = iH",
+  "branch": "newtargets-dag",
+  "by": "NB",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "Uses the recorded root set and character weight spaces with both actions fixed to conjugation. The root family is specified by the closed/smooth/connected/stable/tangent properties of the recorded root-subgroup theorem. Both containment and minimality are group-scheme factorizations; J is an arbitrary closed subgroup. The four added stmt_deps are already landed definition nodes used in the signature; no statement correction or new definition."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-d2b9ad07f",
+  "group": "NB",
+  "result": "pass",
+  "note": "Single theorem maximal_torus_overgroup_root_generation, sorry only, no new defs; node diff = lean record + 4 landed def stmt_deps used in signature; statement verbatim. Checked vs Milne 21.66: IsReductive/IsMaximalTorus/hsplit as in landed root-subgroup parametrizations; aG/aH pinned to adjointMap = same conjugation as hconj; roots/weight = landed character weightSpace; U family specified by exactly the closed/smooth/connected/IsStable/tangent-range properties whose existence+uniqueness the parametrization theorem gives; containment iff weight T H aH α ≠ ⊥; minimality over arbitrary closed J (no smooth/connected). Edge cases Φ=∅, rank 0, H=T, char p, nonreduced J fine; single universe. Proof-dep imports exist in side-live; report has Worker report and Second reading by NB. Not recompiled (no change)."
+ }
+}

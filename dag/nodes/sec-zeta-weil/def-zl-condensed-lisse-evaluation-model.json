@@ -2,7 +2,7 @@
  "id": "def-zl-condensed-lisse-evaluation-model",
  "kind": "definition",
  "title": "Canonical functors for condensed lisse evaluation",
- "statement": "For a commutative condensed ring [sk-def-sfb-condensed-ring], use its pulled-back coefficient [sk-def-sfb-pulled-back-coefficients] and section-ring presentation. On a ringed site define A=O(U), F as exact constant realization [def-sfb-site-derived-constant-module-functor] followed by the fixed universal derived coefficient extension [def-zl-derived-change-of-rings-model] and the section-module equivalence, and G as total right derived terminal evaluation. Define perfect objects [def-pc-perfect-ring-complex], lisse objects as dualizable objects, and Statement as full faithfulness, triangulated strong symmetry, and the specified perfect/lisse equivalence with inverse G. On a profinite slice define the restricted coefficient, actual scalar homomorphism, and point-realization restriction using [def-zl-condensed-scalar-realization] and [def-zl-ring-derived-scalar-extension]. For an affine scheme use the uniquely characterized relative test functor [lem-zl-component-relative-profinite-site] to define the actual inverse image, its coefficient-transported derived module functor, and the component/scalar comparison propositions. These are exactly the data definitions of the restored evaluation module; no data or formula changes.",
+ "statement": "For a commutative condensed ring [sk-def-sfb-condensed-ring], use its pulled-back coefficient [sk-def-sfb-pulled-back-coefficients] and section-ring presentation. On a ringed site define A=O(U), F as exact constant realization [def-sfb-site-derived-constant-module-functor] followed by the fixed universal derived coefficient extension [def-zl-derived-change-of-rings-model] and the section-module equivalence, and G as total right derived terminal evaluation. Define perfect objects [def-pc-perfect-ring-complex], lisse objects as dualizable objects, and Statement as full faithfulness, triangulated strong symmetry, and the specified perfect/lisse equivalence with inverse G. On a profinite slice define the restricted coefficient, actual scalar homomorphism, and point-realization restriction using [def-zl-condensed-scalar-realization] and [def-zl-ring-derived-scalar-extension]. For an affine scheme use the uniquely characterized relative test functor [lem-zl-component-relative-profinite-site] to define the actual inverse image, its coefficient-transported derived module functor, and the component/scalar comparison propositions. The component comparison section-ring isomorphism is normalized on point scalars: its composite with the actual profinite scalar map sends a scalar to the section obtained by monoidal point inverse image and evaluation on the sheafification-unit image of 1. This is the explicit affineScalarSection construction, also used by the projective calculus.",
  "source": {
   "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
   "place": "Section 3 equations (3.1)-(3.2), Remark 3.2; Lemma 4.1(1)-(2) and Proposition 4.3(3)"
@@ -115,7 +115,8 @@
    "AlgebraicGeometry.ProEtale.CondensedRing.componentDerived",
    "AlgebraicGeometry.ProEtale.CondensedRing.componentSymmetric",
    "AlgebraicGeometry.ProEtale.CondensedRing.componentComparisons",
-   "AlgebraicGeometry.ProEtale.CondensedRing.componentClause"
+   "AlgebraicGeometry.ProEtale.CondensedRing.componentClause",
+   "AlgebraicGeometry.ProEtale.CondensedRing.affineScalarSection"
   ]
  },
  "reviewed": {
@@ -129,13 +130,87 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-21",
+  "date": "2026-10-24",
   "by": "L",
-  "reviewer": "C-c6182",
-  "group": "S1",
+  "reviewer": "COMPILER",
+  "group": "Q3",
   "result": "pass",
-  "landing": "20261021T061639-L-1805080",
+  "landing": "20261024T015546-L-2418254",
   "kind": "interface",
-  "note": "independent cc review: c6182125 Lean files byte-identical to reviewed-PASS head 9b2e5f6694; delivered CondensedLisseEvaluationModel vs current live CondensedWContractibleLisseEvaluation (label-mapped diff: only plain imports and the theorem removed); item theorem signature vs live; item node vs live node (only proof/proof_deps/proof_origin/lean.declarations/note); compiled all 7 modules plus both direct importers; #print axioms"
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "statement_change": {
+  "date": "2026-10-24",
+  "by": "Q3 stage 3",
+  "old_statement": "For a commutative condensed ring [sk-def-sfb-condensed-ring], use its pulled-back coefficient [sk-def-sfb-pulled-back-coefficients] and section-ring presentation. On a ringed site define A=O(U), F as exact constant realization [def-sfb-site-derived-constant-module-functor] followed by the fixed universal derived coefficient extension [def-zl-derived-change-of-rings-model] and the section-module equivalence, and G as total right derived terminal evaluation. Define perfect objects [def-pc-perfect-ring-complex], lisse objects as dualizable objects, and Statement as full faithfulness, triangulated strong symmetry, and the specified perfect/lisse equivalence with inverse G. On a profinite slice define the restricted coefficient, actual scalar homomorphism, and point-realization restriction using [def-zl-condensed-scalar-realization] and [def-zl-ring-derived-scalar-extension]. For an affine scheme use the uniquely characterized relative test functor [lem-zl-component-relative-profinite-site] to define the actual inverse image, its coefficient-transported derived module functor, and the component/scalar comparison propositions. These are exactly the data definitions of the restored evaluation module; no data or formula changes.",
+  "what": "componentComparisons previously allowed an unspecified section-ring isomorphism; its scalar comparison could not identify the explicit map required by projective calculus. Add the point-scalar normalization already described in HRS (3.2), Remark 3.2 and Proposition 4.3(3). Move the original projectiveCalculusScalarSection construction verbatim to affineScalarSection; the former definition is a definitional alias. All F, G, scalar maps and derived-category constructions are unchanged.",
+  "source": {
+   "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
+   "place": "Section 3 equations (3.1)-(3.2), Remark 3.2; Lemma 4.1(1)-(2) and Proposition 4.3(3)"
+  },
+  "citers": [
+   {
+    "id": "lem-zl-contractible-realization-adjunction",
+    "holds": true,
+    "note": "Scalar normalization strengthens the component comparison; existing conclusions remain. The existing evaluation proof passes through the repaired predicate unchanged; projective calculus uses the new normalization."
+   },
+   {
+    "id": "lem-zl-condensed-component-inverse-image",
+    "holds": true,
+    "note": "Scalar normalization strengthens the component comparison; existing conclusions remain. The existing evaluation proof passes through the repaired predicate unchanged; projective calculus uses the new normalization."
+   },
+   {
+    "id": "lem-zl-contractible-lisse-evaluation",
+    "holds": true,
+    "note": "Scalar normalization strengthens the component comparison; existing conclusions remain. The existing evaluation proof passes through the repaired predicate unchanged; projective calculus uses the new normalization."
+   },
+   {
+    "id": "lem-zl-condensed-wcontractible-lisse-evaluation",
+    "holds": true,
+    "note": "Scalar normalization strengthens the component comparison; existing conclusions remain. The existing evaluation proof passes through the repaired predicate unchanged; projective calculus uses the new normalization."
+   },
+   {
+    "id": "lem-zl-condensed-component-pullback-compatibility",
+    "holds": true,
+    "note": "Scalar normalization strengthens the component comparison; existing conclusions remain. The existing evaluation proof passes through the repaired predicate unchanged; projective calculus uses the new normalization."
+   },
+   {
+    "id": "lem-zl-condensed-profinite-scalar-compatibility",
+    "holds": true,
+    "note": "Scalar normalization strengthens the component comparison; existing conclusions remain. The existing evaluation proof passes through the repaired predicate unchanged; projective calculus uses the new normalization."
+   },
+   {
+    "id": "lem-zl-component-derived-pullback-square",
+    "holds": true,
+    "note": "Scalar normalization strengthens the component comparison; existing conclusions remain. The existing evaluation proof passes through the repaired predicate unchanged; projective calculus uses the new normalization."
+   },
+   {
+    "id": "lem-zl-condensed-wcontractible-projective-calculus",
+    "holds": true,
+    "note": "Scalar normalization strengthens the component comparison; existing conclusions remain. The existing evaluation proof passes through the repaired predicate unchanged; projective calculus uses the new normalization."
+   },
+   {
+    "id": "lem-sfb-component-pullback-unbounded-evaluation",
+    "holds": true,
+    "note": "Scalar normalization strengthens the component comparison; existing conclusions remain. The existing evaluation proof passes through the repaired predicate unchanged; projective calculus uses the new normalization."
+   },
+   {
+    "id": "lem-sfb-wcontractible-component-derived-hom",
+    "holds": true,
+    "note": "Scalar normalization strengthens the component comparison; existing conclusions remain. The existing evaluation proof passes through the repaired predicate unchanged; projective calculus uses the new normalization."
+   }
+  ]
  }
 }

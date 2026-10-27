@@ -1,0 +1,194 @@
+{
+ "id": "def-sfb-affine-action-quotient-stack",
+ "kind": "definition",
+ "title": "Quotient groupoid of an affine scheme by an affine group scheme",
+ "statement": "Let $k$ be a field [def-weil-field], $G$ a smooth affine group scheme of finite type over $k$ [def-sc-group-scheme, def-sbc-smooth-morphisms, def-weil-finite-type-morphism], and $U=\\operatorname{Spec}E$ [def-weil-affine-spectrum] for a finitely generated commutative $k$-algebra $E$ [def-weil-pbc-finite-type-algebra]. Schemes over $k$ and their morphisms use [def-weil-scheme-over-base], and all fibre products use [def-pc-fibre-product]. Fix a left action $a:G\\times_kU\\to U$: it is a $k$-morphism satisfying $a\\circ(m\\times\\mathrm{id}_U)=a\\circ(\\mathrm{id}_G\\times a)$ and $a\\circ(e\\times\\mathrm{id}_U)=\\mathrm{id}_U$, with the canonical fibre-product identifications, where $m$ and $e$ are the multiplication and identity of $G$.\n\nDefine $[U/G]$ over the big fppf site of $k$ [def-pc-fppf-site] by the following data. For a $k$-scheme $T$ in this site, put $G_T=G\\times_kT$. A left $G_T$-torsor is a $T$-scheme $P\\to T$ with a left $G_T$-action such that there is some fppf covering $\\{T_i\\to T\\}$ for which each $P\\times_TT_i$ is equivariantly isomorphic over $T_i$ to $G\\times_kT_i$ with left translation. Objects over $T$ are pairs $(P,f)$ with such a torsor and a $k$-morphism $f:P\\to U$ satisfying $f(g\\cdot p)=g\\cdot f(p)$; this is equality of the two morphisms $G\\times_kP\\to U$. The arrows over $\\mathrm{id}_T$ are the equivariant $T$-isomorphisms commuting with $f$; identities and composition are those of scheme isomorphisms. Thus each fibre is a groupoid, meaning a category with all arrows invertible.\n\nFor $h:T'\\to T$, pullback sends $(P,f)$ to $(P\\times_TT',f\\circ\\operatorname{pr}_P)$ with the action given on points over any test scheme by $g\\cdot(p,t')=(g\\cdot p,t')$; equivalently this is the morphism induced by the original action on $P$ and the projection to $T'$. On an equivariant $T$-isomorphism $r:P_1\\to P_2$ commuting with the maps to $U$, pullback is $r\\times_T\\mathrm{id}_{T'}$. More generally an arrow over $h$ from $(P',f')$ over $T'$ to $(P,f)$ over $T$ is a $G$-equivariant morphism $q:P'\\to P$ over $h$ such that $(q,p'):P'\\to P\\times_TT'$ is an isomorphism and $f'=f\\circ q$, where $p':P'\\to T'$ is the structure map. The identity of $(P,f)$ over $T$ is $(\\mathrm{id}_T,\\mathrm{id}_P)$. The composite of $(h,q)$ with $(h',q')$ is $(h\\circ h',q\\circ q')$; its required base-change isomorphism is the composite of the given base-change isomorphisms and the canonical associativity isomorphism of fibre products. The projection functor sends an object $(P,f)$ over $T$ to $T$ and a total arrow $(h,q)$ to $h$. The chosen pullback arrow over $h:T'\\to T$ has torsor map $\\operatorname{pr}_P:P\\times_TT'\\to P$. These data specify the category over the chosen big fppf site with its fibre-product pullbacks.\n\nThe canonical map $\\pi:U\\to[U/G]$ sends $x:T\\to U$ to the trivial torsor $G_T\\to T$ with equivariant map $(g,t)\\mapsto a(g,x(t))$, and on a base arrow $h:T'\\to T$ with $x'=x\\circ h$ sends $(g,t')$ to $(g,h(t'))$ on the trivial torsors. These point formulas specify morphisms on points over every test scheme. For an algebraic space $Z/k$ [def-trf-algebraic-space], its discrete fibred groupoid has objects over $T$ the maps $z:T\\to Z$, and exactly one arrow over $h:T'\\to T$ from $z'$ to $z$ when $z'=z\\circ h$, and no such arrow otherwise. Maps $[U/G]\\to Z$ mean functors over $k$-schemes to this discrete fibred groupoid, taken up to natural isomorphism over $k$-schemes.",
+ "source": {
+  "document": "literature/stacks-project/examples-stacks.tex",
+  "place": "Tag 04WM (proposition-equal-quotient-stacks), with Situation (situation-quotient-stack); quotient convention of spaces-groupoids.tex Tag 044Q (definition-quotient-stack)."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-sc-group-scheme",
+  "def-sbc-smooth-morphisms",
+  "def-weil-finite-type-morphism",
+  "def-weil-affine-spectrum",
+  "def-pc-fppf-site",
+  "def-trf-algebraic-space",
+  "def-weil-pbc-finite-type-algebra",
+  "def-weil-scheme-over-base",
+  "def-pc-fibre-product",
+  "def-sfb-scheme-action-torsor-groupoids",
+  "def-sfb-stable-pointed-moduli-groupoids"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Define quotient stack of a group scheme acting on a scheme using torsors",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"Action.FintypeCat.term_⧸ₐ_\", \"module\": \"Mathlib/CategoryTheory/Action/Concrete\", \"type\": \"Lean.TrailingParserDescr\", \"doc\": \"The parser for the notation $⧸ₐ$, used to represent the quotient of a set by a group or monoid action in category theory contexts.\"}\n  {\"name\": \"MulAction.ofQuotientStabilizer\", \"module\": \"Mathlib/GroupTheory/GroupAction/Quotient\", \"type\": \"(α : Type u) → {β : Type v} → [inst : Group α] → [inst_1 : MulAction α β] → (x : β) → α ⧸ MulAction.stabilizer α x → β\", \"doc\": \"For a group action of $G$ on a set $\\\\alpha$ and a fixed element $x \\\\in \\\\alpha$, this defines the induced action of the quotient group $G / \\\\text{Stab}(x)$ on $\\\\beta$. Given a coset $g \\\\cdot \\\\text{Stab\"}\n  {\"name\": \"AlgebraicGeometry.LocallyRingedSpace.coequalizer\", \"module\": \"Mathlib/Geometry/RingedSpace/LocallyRingedSpace/HasColimits\", \"type\": \"{X Y : AlgebraicGeometry.LocallyRingedSpace} → (X ⟶ Y) → (X ⟶ Y) → AlgebraicGeometry.LocallyRingedSpace\", \"doc\": \"Given two morphisms $ f, g : X \\to Y $ in the category of locally ringed spaces, their coequalizer exists and is constructed as the coequalizer in the category of sheafed spaces over commutative rings,\"}\n  {\"name\": \"CategoryTheory.FintypeCat.isoQuotientStabilizerOfIsConnected\", \"module\": \"Mathlib/CategoryTheory/Galois/Examples\", \"type\": \"{G : Type u} →\\n  [inst : Group G] →\\n    (X : Action FintypeCat G) →\\n      [CategoryTheory.PreGaloisCategory.IsConnected X] →\\n        (x : X.V.carrier) →\\n          [inst_2 : Fintype (G ⧸ MulAction.stabilizer G x)] →\\n            X ≅ Action.FintypeCat.ofMulAction G { carrier := G ⧸ MulAction.stabilizer\", \"doc\": \"For a connected action $ X $ of a group $ G $ on the category of finite types and any element $ x $ in the underlying type of $ X $, there exists an isomorphism between $ X $ and the quotient $ G / \\te\"}\n  {\"name\": \"CategoryTheory.PreGaloisCategory.fiberIsoQuotientStabilizer\", \"module\": \"Mathlib/CategoryTheory/Galois/EssSurj\", \"type\": \"{C : Type u₁} →\\n  [inst : CategoryTheory.Category.{u₂, u₁} C] →\\n    {F : CategoryTheory.Functor C FintypeCat} →\\n      [inst_1 : CategoryTheory.GaloisCategory C] →\\n        [CategoryTheory.PreGaloisCategory.FiberFunctor F] →\\n          (X : C) →\\n            [CategoryTheory.PreGaloisCategory.IsConnected\", \"doc\": \"For a connected object $ X $ in a pre-Galois category $\\\\mathcal{C}$ with fiber functor $ F : \\\\mathcal{C} \\\\to \\\\text{FintypeCat} $, and for any element $ x $ in the finite type $ F(X) $, there exists an\"}\n  {\"name\": \"MulAction.ofQuotientStabilizer_mk\", \"module\": \"Mathlib/GroupTheory/GroupAction/Quotient\", \"type\": \"∀ (α : Type u) {β : Type v} [inst : Group α] [inst_1 : MulAction α β] (x : β) (g : α),\\n  MulAction.ofQuotientStabilizer α x ↑g = g • x\", \"doc\": \"For any element $ g $ in the group $ G $, the induced action of the quotient group $ G / \\\\text{Stab}(x) $ on the set $ \\\\alpha $, when applied to the coset represented by $ g $, results in the same ele\"}\n  {\"name\": \"CategoryTheory.Limits.SingleObj.Types.colimitEquivQuotient\", \"module\": \"Mathlib/CategoryTheory/Limits/Shapes/SingleObj\", \"type\": \"{G : Type v} →\\n  [inst : Group G] →\\n    (J : CategoryTheory.Functor (CategoryTheory.SingleObj G) (Type u)) →\\n      CategoryTheory.Limits.colimit J ≃ MulAction.orbitRel.Quotient G (J.obj (CategoryTheory.SingleObj.star G))\", \"doc\": \"For a group $G$ and a functor $J$ from the single-object category associated with $G$ to the category of types, there exists a canonical equivalence between the colimit of $J$ and the quotient of the \"}\n  {\"name\": \"AlgebraicGeometry.AffineSpace.over\", \"module\": \"Mathlib/AlgebraicGeometry/AffineSpace\", \"type\": \"(n : Type v) → (S : AlgebraicGeometry.Scheme) → (AlgebraicGeometry.AffineSpace n S).CanonicallyOver S\", \"doc\": \"For any scheme $ S $ and type $ n $, the affine space $ \\\\mathbb{A}^n_S $ is equipped with a canonical morphism to $ S $, making it an object in the category of schemes over $ S $. This structure arise\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern scheme morphisms, abstract group actions, invariant representations or general categorical descent; none states this algebraic-stack construction or theorem"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Stackification of an algebraic action groupoid",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"IsFreeGroupoid.actionGroupoidIsFree\", \"module\": \"Mathlib/GroupTheory/FreeGroup/NielsenSchreier\", \"type\": \"{G A : Type u} →\\n  [inst : Group G] → [IsFreeGroup G] → [inst_2 : MulAction G A] → IsFreeGroupoid (CategoryTheory.ActionCategory G A)\", \"doc\": \"Given a free group $G$ acting on a set $A$, the action groupoid $\\\\mathrm{ActionCategory}(G, A)$ is a free groupoid. This follows because the generators of the free group $G$ induce generating morphism\"}\n  {\"name\": \"CategoryTheory.ActionCategory.instGroupoid\", \"module\": \"Mathlib/CategoryTheory/Action\", \"type\": \"{X : Type u} →\\n  {G : Type u_2} →\\n    [inst : Group G] → [inst_1 : MulAction G X] → CategoryTheory.Groupoid (CategoryTheory.ActionCategory G X)\", \"doc\": \"For any group $G$ acting on a type $X$, the action category $\\\\mathrm{ActionCategory}(G, X)$ forms a groupoid. This follows because the single-object category associated to $G$ is itself a groupoid (as\"}\n  {\"name\": \"CategoryTheory.ActionCategory\", \"module\": \"Mathlib/CategoryTheory/Action\", \"type\": \"(M : Type u_1) → [inst : Monoid M] → (X : Type u) → [MulAction M X] → Type (max 0 u)\", \"doc\": \"The category of elements for the functor representing the monoid action, whose objects are pairs consisting of the single object from the monoid's single-object category and elements of the type $X$, \"}\n  {\"name\": \"classifyingSpaceUniversalCover_obj\", \"module\": \"Mathlib/RepresentationTheory/Homological/Resolution\", \"type\": \"∀ (G : Type u) [inst : Monoid G] (n : SimplexCategoryᵒᵖ),\\n  (classifyingSpaceUniversalCover G).obj n = Action.ofMulAction G (Fin ((Opposite.unop n).len + 1) → G)\", \"doc\": \"For any monoid $G$ and any object $n$ in the opposite simplex category $\\\\Delta^\\\\text{op}$, the object component of the universal cover of the classifying space of $G$ at $n$ is given by the $G$-action\"}\n  {\"name\": \"classifyingSpaceUniversalCover\", \"module\": \"Mathlib/RepresentationTheory/Homological/Resolution\", \"type\": \"(G : Type u) → [inst : Monoid G] → CategoryTheory.SimplicialObject (Action (Type u) G)\", \"doc\": \"For a monoid $G$, this is a simplicial object in the category of $G$-actions on types, constructed as follows: at level $n$, it consists of the set of functions $\\\\text{Fin}(n+1) \\to G$ equipped with th\"}\n  {\"name\": \"CategoryTheory.PreGaloisCategory.functorToContAction_obj_obj\", \"module\": \"Mathlib/CategoryTheory/Galois/Equivalence\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{u₂, u₁} C] (F : CategoryTheory.Functor C FintypeCat) (X : C),\\n  ((CategoryTheory.PreGaloisCategory.functorToContAction F).obj X).obj =\\n    (CategoryTheory.PreGaloisCategory.functorToAction F).obj X\", \"doc\": \"For any object $X$ in category $\\\\mathcal{C}$, the object part of the functor from $\\\\mathcal{C}$ to continuous actions of $\\\\mathrm{Aut}(F)$ on finite types, when applied to $X$, coincides with the obje\"}\n  {\"name\": \"CategoryTheory.FintypeCat.instPreGaloisCategoryActionFintypeCat\", \"module\": \"Mathlib/CategoryTheory/Galois/Examples\", \"type\": \"∀ (G : Type u) [inst : Group G], CategoryTheory.PreGaloisCategory (Action FintypeCat G)\", \"doc\": \"The category of actions of a group $ G $ on the category of finite types is equipped with a pre-Galois category structure. This means that for any group $ G $, the category whose objects are $ G $-act\"}\n  {\"name\": \"CategoryTheory.FintypeCat.instFiberFunctorActionFintypeCatForget₂\", \"module\": \"Mathlib/CategoryTheory/Galois/Examples\", \"type\": \"∀ (G : Type u) [inst : Group G],\\n  CategoryTheory.PreGaloisCategory.FiberFunctor (CategoryTheory.forget₂ (Action FintypeCat G) FintypeCat)\", \"doc\": \"For any group $ G $, the category whose objects are $ G $-actions on finite types and morphisms are $ G $-equivariant maps between them is equipped with a pre-Galois category structure. This means the\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern scheme morphisms, abstract group actions, invariant representations or general categorical descent; none states this algebraic-stack construction or theorem"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"torsor\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern scheme morphisms, abstract group actions, invariant representations or general categorical descent; none states this algebraic-stack construction or theorem"
+  },
+  {
+   "tool": "grep",
+   "query": "quotientStack|quotient_stack|classifyingStack",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern scheme morphisms, abstract group actions, invariant representations or general categorical descent; none states this algebraic-stack construction or theorem"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Quotient stack objects are torsors with an equivariant morphism",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"Action.HomSubtype\", \"module\": \"Mathlib.CategoryTheory.Action.Basic\", \"type\": \"{FV : V → V → Type*} {CV : V → Type*} [∀ X Y, FunLike (FV X Y) (CV X) (CV Y)] [ConcreteCategory V FV]\\n  (M N : Action V G)\", \"doc\": \"The type of morphisms $ f $ from $ M $ to $ N $ in the category $ V $ such that for every element $ g $ of the monoid $ G $, the equation $ f \\\\circ \\\\rho_M(g) = \\\\rho_N(g) \\\\circ f $ holds, where $ \\\\rho_\"}\n  {\"name\": \"CategoryTheory.Quotient.functor\", \"module\": \"Mathlib.CategoryTheory.Quotient\", \"type\": \": C ⥤ Quotient r\", \"doc\": \"The canonical functor from a category $\\\\mathcal{C}$ to its quotient category $\\\\mathcal{C}/R$, which maps each object to itself and each morphism to its equivalence class under the composition-closed r\"}\n  {\"name\": \"TopCat.effectiveEpiStructOfQuotientMap\", \"module\": \"Mathlib.Topology.Category.TopCat.EffectiveEpi\", \"type\": \"{B X : TopCat.{u}} (π : X ⟶ B) (hπ : IsQuotientMap π) : EffectiveEpiStruct π\", \"doc\": \"Given a quotient map $\\\\pi: X \\\\to B$ in the category of topological spaces, this constructs the effective epimorphism structure on $\\\\pi$. Specifically, $\\\\pi$ coequalizes its kernel pair (the pullback o\"}\n  {\"name\": \"AddAction.selfEquivSigmaOrbitsQuotientStabilizer\", \"module\": \"Mathlib.GroupTheory.GroupAction.Quotient\", \"type\": \"(α : Type u) →\\n  (β : Type v) →\\n    [inst : AddGroup α] →\\n      [inst_1 : AddAction α β] → β ≃ (ω : Quotient (AddAction.orbitRel α β)) × α ⧸ AddAction.stabilizer α ω.out\", \"doc\": \"For an additive group $\\\\alpha$ acting on a type $\\\\beta$, this establishes a canonical bijection between $\\\\beta$ and the disjoint union over all orbits $\\\\omega \\\\in \\\\beta/\\\\alpha$ of the quotient groups \"}\n  {\"name\": \"MulAction.selfEquivSigmaOrbits'\", \"module\": \"Mathlib.GroupTheory.GroupAction.Defs\", \"type\": \": α ≃ Σ ω : Ω, ω.orbit\", \"doc\": \"The equivalence between the set $\\\\alpha$ and the disjoint union of its orbits under the group action, represented as the sigma type $\\\\Sigma_{\\\\omega \\\\in \\\\Omega} \\\\omega.\\\\text{orbit}$, where $\\\\Omega$ is \"}\n  {\"name\": \"MulAction.orbitRel.Quotient\", \"module\": \"Mathlib.GroupTheory.GroupAction.Defs\", \"type\": \": Type _\", \"doc\": \"The quotient of the set $ \\\\alpha $ by the orbit equivalence relation induced by the group action, resulting in the set of orbits under the action.\"}\n  {\"name\": \"CategoryTheory.Pseudofunctor.IsStackFor.mk\", \"module\": \"Mathlib.CategoryTheory.Sites.Descent.DescentData\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C]\\n  {F : CategoryTheory.Pseudofunctor (CategoryTheory.LocallyDiscrete Cᵒᵖ) CategoryTheory.Cat} {S : C}\\n  {R : CategoryTheory.Presieve S}, (F.toDescentData fun f => f.obj.hom).IsEquivalence → F.IsStackFor R\", \"doc\": \"If the descent data functor associated to $ F $ is an equivalence of categories, then $ F $ satisfies the stack condition for the presieve $ R $ on $ S $.\"}\n  {\"name\": \"CategoryTheory.Quotient.essSurj_functor\", \"module\": \"Mathlib.CategoryTheory.Quotient\", \"type\": \": (functor r).EssSurj\", \"doc\": \"There exists a canonical functor from a category $\\\\mathcal{C}$ to its quotient category $\\\\mathcal{C}/R$, which maps each object to itself and each morphism to its equivalence class under the compositi\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern scheme morphisms, abstract group actions, invariant representations or general categorical descent; none states this algebraic-stack construction or theorem"
+  },
+  {
+   "tool": "grep",
+   "query": "quotientStack|quotient_stack|classifyingStack",
+   "results": "0 hits: ",
+   "date": "2026-10-22",
+   "verdict": "no match: no Mathlib declaration with these quotient-stack names"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Quotient stack objects are torsors with an equivariant morphism",
+   "results": "8 hits: HasQuotient.Quotient, CategoryTheory.Quotient.functor, TopCat.effectiveEpiStructOfQuotientMap, AddAction.selfEquivSigmaOrbitsQuotientStabilizer, MulAction.selfEquivSigmaOrbits', MulAction.orbitRel.Quotient, CategoryTheory.Pseudofunctor.IsStackFor.mk, CategoryTheory.Quotient.essSurj_functor",
+   "date": "2026-10-22",
+   "verdict": "no match: quotient types and categories, orbit decompositions and a general stack criterion do not define the scheme-torsor groupoid"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"torsor\"",
+   "results": "0 hits: ",
+   "date": "2026-10-22",
+   "verdict": "no match: zero hits"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Define quotient stack of a group scheme acting on a scheme using torsors",
+   "results": "8 hits: Action.FintypeCat.term_⧸ₐ_, MulAction.ofQuotientStabilizer, AlgebraicGeometry.LocallyRingedSpace.coequalizer, CategoryTheory.FintypeCat.isoQuotientStabilizerOfIsConnected, CategoryTheory.PreGaloisCategory.fiberIsoQuotientStabilizer, MulAction.ofQuotientStabilizer_mk, CategoryTheory.Limits.SingleObj.Types.colimitEquivQuotient, AlgebraicGeometry.AffineSpace.over",
+   "date": "2026-10-22",
+   "verdict": "no match: abstract group-action quotients, locally ringed-space coequalizers and affine space do not define this fppf groupoid"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Stackification of an algebraic action groupoid",
+   "results": "8 hits: CategoryTheory.ActionCategory.instGroupoid, IsFreeGroupoid.actionGroupoidIsFree, CategoryTheory.PreGaloisCategory.IsFundamentalGroup.toIsNaturalSMul, classifyingSpaceUniversalCover_obj, classifyingSpaceUniversalCover, CategoryTheory.FintypeCat.instFiberFunctorActionFintypeCatForget₂, CategoryTheory.Pseudofunctor.IsStack.toIsPrestack, CategoryTheory.PreGaloisCategory.functorToContAction",
+   "date": "2026-10-22",
+   "verdict": "no match: action groupoids of types, classifying-space simplicial objects and general stack predicates do not define scheme-torsor objects"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-affine-pgl-finite-stabilizer-quotient",
+  "date": "2026-10-22",
+  "group": "N8"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Affine PGL quotients with closed orbits and zero-dimensional stabilizers. Supporting affine-quotient step: Quotient groupoid of an affine scheme by an affine group scheme.",
+   "via": [
+    "lem-sfb-affine-pgl-finite-stabilizer-quotient",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "def-sfb-affine-action-quotient-stack",
+  "worker": "stage1",
+  "summary": "Repair of the latest landing return, head 939c30c90ee (2026-10-22 14:46 UTC): retained the approved torsor construction, report, citations and logged searches; compared all current item fields and re-read all ten current statement dependencies and Stacks 04WL/04WM/044Q. Explicitly specified the projection functor and chosen pullback arrow in the total category, completing the earlier arrow data without changing the object. Initial required dry run passed at f1bd6da03ad; deliver.py rebases the repaired delivery onto current origin/sheaf-dag. No new nodes or Mathlib leaves.",
+  "blueprint": "The inherited from.place identifies the affine quotient vocabulary needed below det-thm-sf-ctf-stability-direct-images paragraph (3), through the existing alteration and stable-moduli chain. This definition supplies the torsor groupoid and its canonical map only; lem-sfb-affine-action-stack-presentation separately states algebraicity, the atlas and invariant-map properties. No change to the unit or its route; the inherited null blueprint ancestor is preserved."
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q40-32cc2e0a1",
+  "group": "Q40",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q40-32cc2e0a1 (reviewer sub-agent of L); spot-checked: This head (32cc2e0a1b98) still has the wrong torsor clause, so I re-applied, now for the fourth time, the same one-line FIX given at 58eafd045acd, 824848ae8283 and 939c30c90eea. Each earlier FIX was lost when its landing was returned. The delivery is a definition with no new nodes and no proof steps, so citations=[] is correct and C1-C8 have nothing to check. Against live (still unsplit, 7 stmt_deps), it expands the statement, adds three stmt_deps (def-weil-pbc-finite-type-algebra, def-weil-scheme-over-base, def-pc-fibre-product) and changes status, split_report and searches. Blueprint, source, created, chapter and unit are unchanged. There is no repair note, no SGA, and the item is not the unit's key node. Against 939c the head adds only the projection functor ((P,f)->T, (h,q)->h, which is Stacks' p) and the chosen pullback arrow pr_P (an arrow over h, since (pr_P,pr_T') = id); both are correct. Sources read: Stacks examples-stacks.tex Situation situation-quotient-stack (04WL) and the [[X/G]] construction (lines 1201-1265), Prop. 04WM, and spaces-groupoids definition-principal-homogeneous-space (2) (existential tau covering) and 044Q. The hypotheses are identical to the base. The arrow (h,q) with (q,p') an iso and f'=f.q matches Stacks (f,g) in direction. The composite's base-change isomorphism comes from fibre-product associativity. pi(x)=(G_T,a(g,x(t))) is equivariant by the action law, and over h it uses q=id_G x h with f.q=f'. Scheme torsors are harmless because G is affine (fppf descent of affine morphisms). No algebraicity or atlas claim is hidden; those stay in lem-sfb-affine-action-stack-presentation, so there is no cycle. All ten stmt_deps are read and unmerged, and each says what it is cited for. The four citers use the object consistently. rg -L over dag/nodes found no duplicate; def-sfb-formal-moduli-quotient defines a different object. Edge cases checked: G trivial, U=Spec k (BG keeps its automorphisms), U empty, T empty, a nontrivial stabilizer, and a composite of pullbacks. FIX (E4, wrong object): 'such that for an fppf covering {T_i->T} each P x_T T_i is ...' read universally applies to the trivial covering, forcing every torsor to be trivial and collapsing BG. Stacks and the live base are existential. It now reads 'such that there is some fppf covering {T_i->T} for which each ...'. The corrected file is fixes/dag/nodes/sec-six-functors-basics/def-sfb-affine-action-quotient-stack.json; a script check confirmed only the statement differs from the delivered file. Maintainer: please make sure this FIX lands. No tool_uses, no drop_nodes.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.AffineActionQuotientStack",
+  "declaration": "AlgebraicGeometry.affineActionQuotientStack",
+  "declarations": [
+   "AlgebraicGeometry.SchemeAction.pullback_action_compatible",
+   "AlgebraicGeometry.SchemeAction.torsorPullbackActionMap",
+   "AlgebraicGeometry.SchemeAction.pullback_action_laws",
+   "AlgebraicGeometry.SchemeAction.torsorPullbackAction",
+   "AlgebraicGeometry.SchemeAction.pullback_object_laws",
+   "AlgebraicGeometry.SchemeAction.torsorPullback",
+   "AlgebraicGeometry.SchemeAction.pullback_projection_equivariant",
+   "AlgebraicGeometry.SchemeAction.torsorPullbackArrow",
+   "AlgebraicGeometry.SchemeAction.pullback_map_compatible",
+   "AlgebraicGeometry.SchemeAction.torsorPullbackMap",
+   "AlgebraicGeometry.SchemeAction.pullback_map_laws",
+   "AlgebraicGeometry.SchemeAction.torsorPullbackHom",
+   "AlgebraicGeometry.SchemeAction.torsorFiber",
+   "AlgebraicGeometry.SchemeAction.torsor_fiber_isGroupoid",
+   "AlgebraicGeometry.SchemeAction.fiber_pullback_compatible",
+   "AlgebraicGeometry.SchemeAction.torsorFiberPullbackObj",
+   "AlgebraicGeometry.SchemeAction.torsorFiberPullbackMap",
+   "AlgebraicGeometry.SchemeAction.fiber_pullback_functor_laws",
+   "AlgebraicGeometry.SchemeAction.torsorPullbackFunctor",
+   "AlgebraicGeometry.SchemeAction.schemeToActionGroupoid",
+   "AlgebraicGeometry.SchemeAction.quotientAtlas",
+   "AlgebraicGeometry.SchemeAction.quotientSpaceMapSetoid",
+   "AlgebraicGeometry.SchemeAction.quotientSpaceMaps",
+   "AlgebraicGeometry.affineActionScheme",
+   "AlgebraicGeometry.affineActionQuotientStack"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/AffineActionQuotientStack.lean",
+  "statement": "def affineActionQuotientStack (k E : Type u) [Field k] [CommRing E] [Algebra k E] [Algebra.FiniteType k E] (G : Over (Spec (CommRingCat.of k))) [GrpObj G] [Smooth G.hom] [IsAffineHom G.hom] [LocallyOfFiniteType G.hom] [QuasiCompact G.hom] [ModObj G (affineActionScheme k E)] : BasedCategory (Over (Spec (CommRingCat.of k)))",
+  "branch": "sheaf-dag",
+  "by": "Q109",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "Reuses the landed SchemeAction.torsorGroupoid, torsor objects/arrows and trivialTorsorFunctor. Adds actual fibre-product pullbacks and their fibre functor, the canonical map from Spec E, and maps to algebraic spaces modulo vertical natural isomorphism. All postponed theorems are structural proof fields of these specified constructions or the fibre-groupoid assertion of this definition."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-d4f74f178",
+  "group": "Q109",
+  "result": "pass",
+  "note": "Item changes only lean + two already-landed stmt_deps (def-sfb-scheme-action-torsor-groupoids, def-sfb-stable-pointed-moduli-groupoids). No cycle; no target closure grows (all 836 ancestors already reach the added node). Statement kept verbatim with the existential-covering stage-1 FIX; lean.statement verbatim; all 25 declarations present. Clause-by-clause match with Stacks 04WL/04WM [[X/G]] (examples-stacks.tex 1201-1265): Field k, Algebra.FiniteType E, U = Spec E via algebraMap, GrpObj G with Smooth/IsAffineHom/LocallyOfFiniteType+QuasiCompact, ModObj action, existential fppf-sieve torsors, cartesian equivariant arrows with f'=f.q, Functor.Fiber fibres, chosen pullback (P x_T T', f.pr_P) with the explicit lifted action, pullback arrow pr_P over h, r x id on vertical arrows, fibre pullback functor, pi = schemeToActionGroupoid (label 1) composed with trivialTorsorFunctor giving (g,t)->a(g,x(t)) and (g,h t'), maps to AlgebraicSpace = BasedFunctor to discreteModuli modulo Nonempty iso over the base. The 9 sorried structural laws were each checked true; no sorry in any definition; no stronger hypotheses; edge cases E=0, T empty, G trivial, BG, stabilizers, universes OK. No duplicate quotient stack in Sheaf/WeilConjectures/slopmaster2. Advisory only: affineActionScheme is defeq to AffinePGL.affineOver (def-sfb-affine-pgl-action helper); possibly redundant imports. No file changed, so no compile; worker reports a clean scompile and an OK deliver2 dry run."
+ }
+}

@@ -1,0 +1,121 @@
+{
+ "id": "def-weil-pbc-descent-interfaces",
+ "kind": "definition",
+ "title": "Exact coherent stage families and normalized rational pullback",
+ "statement": "For the stage systems of [def-weil-pbc-finite-stage-pair-category], an exact coherent family consists of a StageSystem.Morphism together with additive and integer-shift structures on its stage functors, shift compatibility of its beta comparisons, and preservation of distinguished triangles. For a scheme morphism whose actual completed pullback preserves the integral bounded constructible complete subcategories, define its rational pullback by restricting that actual operation and applying raw scalar localization as in [prop-weil-pbc-rational-transport]. Its canonical scalar-comparison predicate says that the inverse beta, conjugated by the integral/scalar comparisons at its two endpoints, equals the unique rationalized actual completed-pullback scalar comparison of [prop-weil-pbc-scalar-extension] on every integral object, also at equal fields. These are existing definitions extracted verbatim from the descent proposition; the direct-image analogues remain attached to [def-per-rational-direct-image-family].",
+ "stmt_deps": [
+  "def-weil-pbc-finite-stage-pair-category",
+  "prop-weil-pbc-rational-transport",
+  "prop-weil-pbc-scalar-extension",
+  "def-per-rational-direct-image-family"
+ ],
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-proper-base-change/sk-thm-properbasechange/prop-weil-pbc-descent-functors.md",
+  "place": "Exact scalar-compatible family hypothesis and the final operation paragraph; existing Lean interface definitions extracted without alteration.; Lean module Sheaf.Paper.PbcDescentInterfaces, declaration CategoryTheory.StageSystem.CoherentExactMorphism"
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "status": "split",
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Exact scalar compatible direct image and completed pullback families descend from integral derived categories to rational coefficient stages, and their exchange is scalar compatible",
+   "results": "8 hits: IsScalarTower.rat, PresheafOfModules.pullback and pullbackPushforwardAdjunction, sheafificationCompPullback, scalar towers and scalar-localized modules. None provides the normalized derived coefficient family or its exchange compatibility.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A scalar compatible family of direct image or completed pullback functors on derived coefficient categories is coherent and exact after rational localization",
+   "results": "8 hits about linear derived functors, derived localization, and Ext; none supplies normalized coefficient-stage coherence or exchange compatibility.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.NatTrans.CommShift",
+   "results": "12 hits: CommShift, identities, composition, ofIso_compatibility and ofComp_compatibility; useful local shift interfaces, no coefficient-family theorem.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "scalar.*[Ee]xchange|[Ee]xchange.*scalar",
+   "results": "No Mathlib hits. Project search finds the ambient pbcScalarCompletedExchange and rationalized equation, but no normalized StageSystem.Morphism.Hom construction.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.PbcDescentFunctors",
+  "date": "2026-10-22",
+  "group": "A4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-weil-pbc-descent-functors",
+   "place": "Definitions of exact coherent input and actual rational pullback",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "module": "Sheaf.Paper.PbcDescentInterfaces",
+  "file": "lean/Sheaf/Paper/PbcDescentInterfaces.lean",
+  "declaration": "CategoryTheory.StageSystem.CoherentExactMorphism",
+  "declarations": [
+   "CategoryTheory.StageSystem.CoherentExactMorphism",
+   "AlgebraicGeometry.Scheme.pbcDescentPullback",
+   "AlgebraicGeometry.Scheme.PbcPullbackBetaSpec"
+  ],
+  "statement": "structure CoherentExactMorphism {I : Type w} [Preorder I]\n    {C : I → Type u} [∀ i, Category.{v} (C i)]\n    {D : I → Type u'} [∀ i, Category.{v'} (D i)]\n    (S : StageSystem C) (S' : StageSystem D)\n    [∀ i, Preadditive (C i)] [∀ i, Preadditive (D i)]\n    [∀ i, HasZeroObject (C i)] [∀ i, HasZeroObject (D i)]\n    [∀ i, HasShift (C i) ℤ] [∀ i, HasShift (D i) ℤ]\n    [∀ i, ∀ n : ℤ, (shiftFunctor (C i) n).Additive]\n    [∀ i, ∀ n : ℤ, (shiftFunctor (D i) n).Additive]\n    [∀ i, Pretriangulated (C i)] [∀ i, Pretriangulated (D i)]\n    [∀ (i j : I) (h : i ≤ j), (S.T h).CommShift ℤ]\n    [∀ (i j : I) (h : i ≤ j), (S'.T h).CommShift ℤ]",
+  "branch": "sheaf-dag",
+  "by": "A4",
+  "date": "2026-10-22",
+  "existing": false,
+  "note": "Only the location and node attachments of these definitions change; names, signatures, attributes and bodies are identical to the original PbcDescentFunctors definitions. No mathematical notion is redefined."
+ },
+ "merged_into": null,
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "def-weil-pbc-descent-interfaces",
+  "worker": "stage3",
+  "summary": "Extract a separate finite-stage input, or the unchanged interfaces it uses, from the concrete application of the descent proposition. No target statement changes.",
+  "blueprint": "Serves the final operations/exchange sentence of prop-weil-pbc-descent-functors; the general descent and the unit route remain. Searches of the whole blueprint for scalar-compatible and exchange maps find the parent proposition and more specialized exchange nodes, but no separate equivalent statement.",
+  "edge_cases": "Identity morphisms, empty schemes, repeated coefficient fields, independently sized coefficient algebraic closures, and proof-irrelevant preservation witnesses keep the same statement."
+ },
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "C-f13bb",
+  "group": "A4",
+  "result": "pass",
+  "landing": "20261022T113810-L-253425",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "C-f13bb",
+  "group": "A4",
+  "result": "pass",
+  "landing": "20261022T113810-L-253425",
+  "kind": "interface",
+  "note": "independent cc review: delivered PbcDescentFunctors + 8 new modules and nodes against the clone (moved defs byte-identical), the item/sorry statements against PbcScalarExtension exchange routes, and the 9 direct importers compiled against the delivered modules (all rc 0); #print axioms only upstream sorryAx"
+ }
+}

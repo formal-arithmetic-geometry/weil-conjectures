@@ -1,0 +1,126 @@
+{
+ "id": "def-trf-permissible-coordinate-chart-ring",
+ "kind": "definition",
+ "title": "Presented permissible coordinate chart ring and labelled boundary equations",
+ "statement": "Let $R$ be a commutative ring, $d\\ge0$, $t=(t_i)_{i\\in\\{1,\\ldots,d\\}}$ a family in $R$, $J\\subseteq\\{1,\\ldots,d\\}$, and $j\\in\\{1,\\ldots,d\\}$. In the polynomial ring [def-weil-pbc-mv-polynomial-ring] $P=R[u_i\\mid i\\in J\\setminus\\{j\\}]$, put $L=(t_i-t_ju_i\\mid i\\in J\\setminus\\{j\\})$ and $A_j=P/L$, with its quotient $R$-algebra structure and ratio classes $\\bar u_i$. Define $q_i\\in A_j$ by $q_j=1$, $q_i=\\bar u_i$ for $i\\in J\\setminus\\{j\\}$, and $q_i=\\bar t_i$ for $i\\notin J$. Use labels $\\{\\ast\\}\\sqcup\\{1,\\ldots,d\\}$, with equation $e_\\ast=\\bar t_j$ and $e_i=q_i$. For any subset $I\\subseteq\\{1,\\ldots,d\\}$ define the boundary label set $\\Lambda(I,j)=\\{\\ast\\}\\cup\\{i\\mid i\\in I\\setminus\\{j\\}\\}$. For every subset $S$ of the label set define the intersection ideal $(e_k\\mid k\\in S)$ and the union ideal $\\bigcap_{k\\in S}(e_k)$ in $A_j$, with empty intersection ideal $0$ and empty union ideal $A_j$. These are just ring and ideal constructions; no regularity or identification with an intrinsic blowup chart is asserted.",
+ "source": {
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "Expose VIII, Lemma 4.2.9 coordinate-chart proof, printed p. 121; coordinate intersection notation from Remark 4.2.2(i), printed p. 118."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-mv-polynomial-ring"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Quotient polynomial ring R[u_i] by relations t_i - t_j u_i for a coordinate blowup chart",
+   "results": "{\"t\": \"2026-10-23T12:15:14Z\", \"tool\": \"leansearch\", \"query\": \"Quotient polynomial ring R[u_i] by relations t_i - t_j u_i for a coordinate blowup chart\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.Presentation.Quotient\", \"Algebra.Presentation.naive\", \"Ideal.polynomialQuotientEquivQuotientPolynomial\", \"Polynomial.quotientSpanCXSubCAlgEquiv\", \"Algebra.Generators.naive\", \"Polynomial.quotientSpanCXSubCXSubCAlgEquiv\", \"Algebra.Presentation.ModelOfHasCoeffs\", \"Algebra.Generators.naive_val\"], \"digest\": \"4d5169fda459d1af\"}",
+   "date": "2026-10-23",
+   "verdict": "no exact Mathlib match"
+  },
+  {
+   "tool": "loogle",
+   "query": "MvPolynomial, Ideal.Quotient",
+   "results": "{\"t\": \"2026-10-23T12:15:15Z\", \"tool\": \"loogle\", \"query\": \"MvPolynomial, Ideal.Quotient\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"loogle: unknown identifier 'Ideal.Quotient'\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no exact Mathlib match"
+  },
+  {
+   "tool": "grep",
+   "query": "strictEquation|unionIdeal|PermissibleCoordinateChart",
+   "results": "{\"t\": \"2026-10-23T12:15:15Z\", \"tool\": \"grep\", \"query\": \"strictEquation|unionIdeal|PermissibleCoordinateChart\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no exact Mathlib match"
+  },
+  {
+   "tool": "grep",
+   "query": "rg -n \"PermissibleCoordinateChart|strictEquation|unionIdeal\" lean/WeilConjectures lean/Sheaf/AlgebraicGeometry/PermissibleCoordinateChart.lean",
+   "results": "No WeilConjectures match. The landed Sheaf.AlgebraicGeometry.PermissibleCoordinateChart module defines relations (54), Chart (61), ratio (66), strictEquation (73), equation (81), labels (89), intersection (95), unionIdeal (102). Reuse these exact definitions.",
+   "date": "2026-10-23",
+   "verdict": "existing project definitions; no duplicate definition"
+  },
+  {
+   "tool": "grep",
+   "query": "rg -l \"strictEquation|unionIdeal|PermissibleCoordinateChart.Chart|coordinate chart ring|quotient presentation\" dag/nodes --glob \"def-*.json\"; python3 tools/blueprint_refs.py search \"coordinate chart ring\"",
+   "results": "No definition node owns the displayed quotient or labelled equations. Other matches concern unrelated quotient presentations. blueprint_refs: 0 blueprint nodes match coordinate chart ring. def-nagata-blowup-chart-ring is the intrinsic subalgebra R[K/t_j], not this presented quotient with labelled equations; def-weil-pbc-mv-polynomial-ring supplies the polynomial ring only. The chart theorem uses the definitions but its conclusion is not needed to state this notion.",
+   "date": "2026-10-23",
+   "verdict": "no existing owning DAG definition node"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-permissible-boundary-etale-charts",
+  "date": "2026-10-23",
+  "group": "Q118"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "The permissible-boundary coordinate calculation used in the nearby-duality alteration reduction: the displayed quotient ring and labelled equations needed to state the actual etale chart lemma.",
+   "via": [
+    "lem-trf-permissible-boundary-etale-charts",
+    "lem-trf-permissible-boundary-preservation",
+    "lem-trf-normal-crossings-strictification",
+    "lem-trf-nodal-pair-projective-resolution",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.PermissibleCoordinateChart",
+  "declaration": "AlgebraicGeometry.PermissibleCoordinateChart.Chart",
+  "declarations": [
+   "AlgebraicGeometry.PermissibleCoordinateChart.relations",
+   "AlgebraicGeometry.PermissibleCoordinateChart.Chart",
+   "AlgebraicGeometry.PermissibleCoordinateChart.ratio",
+   "AlgebraicGeometry.PermissibleCoordinateChart.strictEquation",
+   "AlgebraicGeometry.PermissibleCoordinateChart.equation",
+   "AlgebraicGeometry.PermissibleCoordinateChart.labels",
+   "AlgebraicGeometry.PermissibleCoordinateChart.intersection",
+   "AlgebraicGeometry.PermissibleCoordinateChart.unionIdeal"
+  ],
+  "statement": "abbrev Chart (t : Fin d → R) (J : Finset (Fin d)) (j : Fin d)",
+  "branch": "sheaf-dag",
+  "by": "Q118",
+  "date": "2026-10-23",
+  "existing": true,
+  "note": "Owns the existing plain definitions at PermissibleCoordinateChart.lean lines 54-104, as requested by the return of b0d9e9fba769. With the explicit surrounding variables {R : Type u} [CommRing R] {d : ℕ}, Chart is exactly the quotient by relations; ratio, strictEquation, equation, labels, intersection and unionIdeal implement each displayed formula. No theorem conclusion or regular-local hypothesis is used in these definitions. Existing declarations are reused without a new Lean file."
+ },
+ "import_flags": [],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-4d16eb992",
+  "group": "Q118",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-4d16eb992",
+  "group": "Q118",
+  "result": "pass",
+  "note": "Re-delivery repairing H2 of b0d9e9fba769: the Lean module is byte-identical (sha256 135e149c). The item changes only stmt_deps (theorem lem-trf-permissible-coordinate-chart replaced by new def node def-trf-permissible-coordinate-chart-ring; the theorem stays in proof_deps) and lean.note. The new def node is existing:true over the unchanged PermissibleCoordinateChart module and owns relations/Chart/ratio/strictEquation/equation/labels/intersection/unionIdeal, all plain defs (read at l.46-104). The 6 used by the item are all listed. Its TeX statement matches the Lean; the record statement is verbatim (l.61); it has H12 fields, cites def-weil-pbc-mv-polynomial-ring, has no duplicate or cycle, and follows the pattern accepted at Q07 9184. Independent reread of the statement against the node (hypotheses, étale V over y with e(w)=b(y), parameters/I/J, component label equivalence, φ compatible with R→O_{V,z}, scheme-theoretic strict transforms, C/D/B^st/H^st unionIdeals, intersection regularity/codim) and edge cases (I=∅, |J|=1, r=0 excluded, S=∅, unit equations) OK. Gates OK; the live item has no lean, so it is not superseded; no compile (no file changed)."
+ }
+}

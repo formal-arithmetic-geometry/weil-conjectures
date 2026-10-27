@@ -1,0 +1,255 @@
+{
+ "id": "lem-sfb-finite-locally-free-ample-reflection",
+ "kind": "statement",
+ "title": "Finite locally free surjections reflect ampleness of the supplied line",
+ "statement": "Let $f:Y\\to X$ be a surjective finite locally free morphism of schemes [def-pc-scheme, def-pc-finite-locally-free, def-weil-surjective-morphism]. Thus $f$ is finite, flat and locally of finite presentation, and is surjective on underlying points. Let $L$ be an invertible $\\mathcal O_X$-module [def-sc-invertible-module]. If its tensor pullback $f^*L$ [def-pc-module-pullback] is ample, then $L$ is ample, both in the absolute sense [def-weil-pbc-ample-invertible-module]. No properness, normality, Noetherianity or constant-degree hypothesis is imposed.",
+ "source": {
+  "document": "literature/stacks-project/divisors.tex",
+  "place": "Tags 0BD2 (lemma-finite-locally-free-has-norm), 0BCY (lemma-norm-invertible), and 0BD0 (lemma-norm-ample, its proof for the specified norm line); Norm_f(f^*L)=L^{\\otimes d}, applied on the open-and-closed constant-rank pieces."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-finite-locally-free",
+  "def-weil-surjective-morphism",
+  "def-sc-invertible-module",
+  "def-pc-module-pullback",
+  "def-weil-pbc-ample-invertible-module"
+ ],
+ "proof": [
+  {
+   "text": "Put $M=f^*L$. By the definition of ampleness, $Y$ is quasi-compact. For an open cover of $X$, its inverse images cover $Y$; a finite subcover of $Y$ covers $X$ because $f$ is surjective. Thus $X$ is quasi-compact. If $X$ is empty the affine-section condition is vacuous, so $L$ is ample.",
+   "uses": [
+    "def-weil-pbc-ample-invertible-module",
+    "def-weil-surjective-morphism"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/divisors.tex",
+    "place": "Tag 0BD0 (divisors-lemma-norm-ample), quasi-compactness paragraph; empty case from the definition."
+   }
+  },
+  {
+   "text": "Fix $x\\in X$. Apply the locally constant rank assertion to $f$, and put $d=r_f(x)$ and $U=r_f^{-1}(d)$. Then $U$ is open and closed and contains $x$. Moreover $d>0$: a point of $Y$ over $x$ exists by surjectivity, so the fibre algebra admits a unital map to the nonzero residue field of that point, which therefore cannot have dimension zero. Write $Y_U=f^{-1}U$ and $f_U:Y_U\\to U$. Restriction to an open of the target keeps the same finite, flat, finitely presented affine algebra charts, so $f_U$ is finite locally free of degree $d$; the fibre dimensions are unchanged. Choose an affine open $V$ of $X$ containing $x$ and contained in $U$, using the affine-open basis of a scheme.",
+   "uses": [
+    "lem-weil-pbc-finite-flat-rank-iso",
+    "def-pc-finite-locally-free",
+    "def-weil-surjective-morphism",
+    "def-pc-scheme"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 04MH (morphisms-lemma-finite-locally-free), degree strata; Tag 0BD2 applied on a positive-degree stratum."
+   }
+  },
+  {
+   "text": "The fibre $E=f^{-1}(\\{x\\})$ is finite. Apply the finite-set ample-section lemma to the ample line $M$ on the whole scheme $Y$ and the open $W=f^{-1}V$. It gives $n>0$ and $s\\in\\Gamma(Y,M^{\\otimes n})$ with $E\\subseteq Y_s\\subseteq f^{-1}V$. Restrict $s$ to $Y_U$. Pullback composition identifies $M|_{Y_U}$ with $f_U^*(L|_U)$, and its tensor powers restrict by the tensor section formula. Apply the norm-section lemma to $f_U,L|_U,n,s|_{Y_U}$. Obtain $t_U\\in\\Gamma(U,(L|_U)^{\\otimes(dn)})$ with $U_{t_U}=\\{z\\in U:f^{-1}(\\{z\\})\\subseteq Y_s\\}$. Hence $x\\in U_{t_U}\\subseteq V$: the first inclusion uses $E\\subseteq Y_s$; for the second, lift $z$ to a point $y$ using surjectivity, so $y\\in Y_s\\subseteq f^{-1}V$ implies $z\\in V$.",
+   "uses": [
+    "lem-weil-pbc-finite-closed-map-finite-fibres",
+    "lem-sc-ample-finite-principal-affine",
+    "lem-weil-pbc-invertible-pullback-tensor",
+    "lem-sfb-finite-locally-free-pullback-section-norm",
+    "def-weil-surjective-morphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/divisors.tex",
+    "place": "Tag 0BD0 (divisors-lemma-norm-ample), finite-fibre section and its norm; Tags 0BD2, 0BCY, 0BCZ for the specified line."
+   }
+  },
+  {
+   "text": "On the disjoint open cover $X=U\\cup(X\\setminus U)$, glue $t_U$ and the zero section of $L^{\\otimes(dn)}|_{X\\setminus U}$. The sheaf axiom applies because their overlap is empty. This gives a global $t\\in\\Gamma(X,L^{\\otimes(dn)})$ with $X_t=U_{t_U}\\subseteq V$ and $x\\in X_t$. The affine-cap-section lemma gives $V\\cap X_t=X_t$ affine. Since $dn>0$, this is a global positive-power affine-section witness for $L$ at $x$. Together with step 1 and the definition of ampleness, the witnesses for all $x$ prove $L$ ample.",
+   "uses": [
+    "def-weil-sheaf-of-modules-category",
+    "lem-sc-affine-cap-section-open",
+    "def-weil-pbc-ample-invertible-module"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/divisors.tex",
+    "place": "Tag 0BD0 (divisors-lemma-norm-ample), final affine-section criterion; agent elaboration for clopen varying-rank pieces."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-ample-invertible-module",
+  "def-weil-surjective-morphism",
+  "lem-weil-pbc-finite-flat-rank-iso",
+  "def-pc-finite-locally-free",
+  "def-pc-scheme",
+  "lem-weil-pbc-finite-closed-map-finite-fibres",
+  "lem-sc-ample-finite-principal-affine",
+  "lem-weil-pbc-invertible-pullback-tensor",
+  "lem-sfb-finite-locally-free-pullback-section-norm",
+  "def-weil-sheaf-of-modules-category",
+  "lem-sc-affine-cap-section-open"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/divisors.tex",
+  "place": "Tag 0BD0 proof, with Tags 0BD2, 0BCY, 0BCZ and the elementary extension by zero from a clopen rank stratum (Morphisms 04MH)."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "An invertible sheaf whose pullback along a finite locally free surjective scheme morphism is ample is itself ample, without properness",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.instIsStableUnderBaseChangeSchemeLocallyQuasiFinite\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiFinite\", \"type\": \"CategoryTheory.MorphismProperty.IsStableUnderBaseChange @AlgebraicGeometry.LocallyQuasiFinite\", \"doc\": \"The property of being a locally quasi-finite morphism of schemes is stable under base change. That is, if a morphism $ f: X \\\\to Y $ is locally quasi-finite, then any base change (pullback) of $ f $ is\"}\n  {\"name\": \"AlgebraicGeometry.AffineTargetMorphismProperty.IsStableUnderBaseChange\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Basic\", \"type\": \"AlgebraicGeometry.AffineTargetMorphismProperty → Prop\", \"doc\": \"A morphism property $ P $ with affine target is stable under base change if, whenever $ g: Y \\to S $ has property $ P $ and there is a pullback square involving $ g $, then the induced morphism $ g': Z\"}\n  {\"name\": \"AlgebraicGeometry.IsFinite.instIsStableUnderBaseChangeScheme\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Finite\", \"type\": \"CategoryTheory.MorphismProperty.IsStableUnderBaseChange @AlgebraicGeometry.IsFinite\", \"doc\": \"The property of being a finite morphism of schemes is stable under base change. That is, if $ f : X \\to Y $ is a finite morphism of schemes and $ Y' \\to Y $ is any morphism of schemes, then the base cha\"}\n  {\"name\": \"AlgebraicGeometry.Surjective.instIsStableUnderBaseChangeScheme\", \"module\": \"Mathlib/AlgebraicGeometry/PullbackCarrier\", \"type\": \"CategoryTheory.MorphismProperty.IsStableUnderBaseChange @AlgebraicGeometry.Surjective\", \"doc\": \"The property of being a surjective morphism of schemes is stable under base change. That is, if $ f: X \\to Y $ is a surjective morphism of schemes and $ g: Z \\to Y $ is any morphism of schemes, then the\"}\n  {\"name\": \"AlgebraicGeometry.locallyOfFiniteType_isStableUnderBaseChange\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FiniteType\", \"type\": \"CategoryTheory.MorphismProperty.IsStableUnderBaseChange @AlgebraicGeometry.LocallyOfFiniteType\", \"doc\": \"The property of a morphism of schemes being locally of finite type is stable under base change. That is, if a morphism $ f: X \\to Y $ is locally of finite type, then any base change (pullback) of $ f $\"}\n  {\"name\": \"AlgebraicGeometry.quasiCompact_isStableUnderBaseChange\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiCompact\", \"type\": \"CategoryTheory.MorphismProperty.IsStableUnderBaseChange @AlgebraicGeometry.QuasiCompact\", \"doc\": \"If a morphism of schemes is quasi-compact, then any base change (pullback) of the morphism is also quasi-compact.\"}\n  {\"name\": \"AlgebraicGeometry.HasAffineProperty.descendsAlong_of_affineAnd\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Descent\", \"type\": \"∀ (P P' : CategoryTheory.MorphismProperty AlgebraicGeometry.Scheme)\\n  (Q Q' : {R S : Type u} → [inst : CommRing R] → [inst_1 : CommRing S] → (R →+* S) → Prop) [P'.IsStableUnderBaseChange]\\n  [P'.IsStableUnderComposition] [P.IsStableUnderBaseChange],\\n  @AlgebraicGeometry.IsLocalIso ⊓ @AlgebraicGeometr\", \"doc\": \"If a morphism property $ P $ is defined by requiring the source scheme to be affine and satisfying a ring-theoretic condition $ Q $, and if $ Q $ is invariant under ring isomorphisms and satisfies a c\"}\n  {\"name\": \"AlgebraicGeometry.isAffineHom_isStableUnderBaseChange\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Affine\", \"type\": \"CategoryTheory.MorphismProperty.IsStableUnderBaseChange @AlgebraicGeometry.IsAffineHom\", \"doc\": \"The property of being an affine morphism of schemes is stable under base change. That is, if a morphism $ f: X \\to Y $ is affine, then any base change (pullback) of $ f $ is also an affine morphism.\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits state morphism base-change and flat descent properties, not ampleness of invertible sheaves"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Ampleness of a line bundle descends along finite flat surjective maps by the norm of its pullback",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.instDescendsAlongSchemeMinMorphismPropertySurjectiveFlatLocallyOfFinitePresentationOfQuasiCompactOfIsZariskiLocalAtTarget\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.FlatDescent\", \"type\": \"(P : MorphismProperty Scheme) [P.DescendsAlong (@Surjective ⊓ @Flat ⊓ @QuasiCompact)] [IsZariskiLocalAtTarget P] :\\n  P.DescendsAlong (@Surjective ⊓ @Flat ⊓ @LocallyOfFinitePresentation)\", \"doc\": \"If a morphism property $ P $ is Zariski local at the target and descends along morphisms that are surjective, flat, and quasi-compact, then $ P $ also descends along morphisms that are surjective, fla\"}\n  {\"name\": \"AlgebraicGeometry.descendsAlong_isomorphisms_surjective_inf_flat_inf_quasicompact\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.FlatDescent\", \"type\": \": (isomorphisms Scheme.{u}).DescendsAlong (@Surjective ⊓ @Flat ⊓ @QuasiCompact)\", \"doc\": \"In the category of schemes, the property of being an isomorphism descends along morphisms that are simultaneously surjective, flat, and quasi-compact. This means that if a morphism $ f: X \\to Y $ is su\"}\n  {\"name\": \"AlgebraicGeometry.Flat.isStableUnderBaseChange\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Flat\", \"type\": \": MorphismProperty.IsStableUnderBaseChange @Flat\", \"doc\": \"The property of being a flat morphism of schemes is stable under base change, meaning that if a morphism of schemes is flat, then any base change (pullback) of this morphism is also flat.\"}\n  {\"name\": \"AlgebraicGeometry.descendsAlong_universallyClosed_surjective_inf_flat_inf_quasicompact\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.FlatDescent\", \"type\": \": DescendsAlong @UniversallyClosed (@Surjective ⊓ @Flat ⊓ @QuasiCompact)\", \"doc\": \"The property of being universally closed descends along morphisms that are simultaneously surjective, flat, and quasi-compact. This means that if a morphism $ f: X \\to Y $ is surjective, flat, and quas\"}\n  {\"name\": \"Seminorm.pullback\", \"module\": \"Mathlib.Analysis.Seminorm\", \"type\": \"(f : E →ₛₗ[σ₁₂] E₂) : Seminorm 𝕜₂ E₂ →+ Seminorm 𝕜 E\", \"doc\": \"Given a semilinear map $f: E \\\\to E_2$ between modules over seminormed rings $\\\\mathbb{K}$ and $\\\\mathbb{K}_2$ respectively, the pullback is an additive monoid homomorphism from the space of seminorms on\"}\n  {\"name\": \"AlgebraicGeometry.Flat.surjective_descendsAlong_surjective_inf_flat_inf_quasicompact\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.FlatDescent\", \"type\": \": DescendsAlong @Surjective (@Surjective ⊓ @Flat ⊓ @QuasiCompact)\", \"doc\": \"The property of being a surjective morphism of schemes descends along morphisms that are simultaneously surjective, flat, and quasi-compact. In other words, if a morphism becomes surjective after a ba\"}\n  {\"name\": \"PrimeSpectrum.specComap_surjective_of_faithfullyFlat\", \"module\": \"Mathlib.RingTheory.Flat.FaithfullyFlat.Algebra\", \"type\": \"∀ {A : Type u_1} {B : Type u_2} [inst : CommRing A] [inst_1 : CommRing B] [inst_2 : Algebra A B]\\n  [Module.FaithfullyFlat A B], Function.Surjective (PrimeSpectrum.comap (algebraMap A B))\", \"doc\": \"For commutative rings $ A $ and $ B $ with $ B $ a faithfully flat $ A $-algebra, the induced map on prime spectra $ \\\\operatorname{Spec}(B) \\\\to \\\\operatorname{Spec}(A) $ given by taking preimages of pr\"}\n  {\"name\": \"Ideal.comap_surjective_of_faithfullyFlat\", \"module\": \"Mathlib.RingTheory.Flat.FaithfullyFlat.Algebra\", \"type\": \": Function.Surjective (Ideal.comap (algebraMap A B))\", \"doc\": \"If $ B $ is a faithfully flat $ A $-algebra, then the canonical ring homomorphism $ A \\\\to B $ induces a surjective map between the sets of ideals, where each ideal in $ A $ is the preimage of some ide\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits state morphism base-change and flat descent properties, not ampleness of invertible sheaves"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsAmple\"",
+   "results": "[loogle] OK 0 hit(s)",
+   "date": "2026-10-24",
+   "verdict": "no match: hits state morphism base-change and flat descent properties, not ampleness of invertible sheaves"
+  },
+  {
+   "tool": "grep",
+   "query": "ample|ampleness",
+   "results": "[grep] OK 10 hit(s)\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/AffineAnd.lean\", \"line\": \"22\", \"text\": \"Typical examples of this are affine morphisms (where `Q` is trivial), finite morphisms\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/AffineSpace.lean\", \"line\": \"493\", \"text\": \"example (R : CommRingCat) :\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Sites/AffineEtale.lean\", \"line\": \"8\", \"text\": \"-- these `ModuleCat` instances are only used by the `example` below, which `shake` cannot see\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Sites/AffineEtale.lean\", \"line\": \"154\", \"text\": \"example (R : Type u) [Ring R] :\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Sites/Affine.lean\", \"line\": \"24\", \"text\": \"this can be used to show that the `P`-site admits sheafification. For an example,\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/EllipticCurve/NormalForms.lean\", \"line\": \"24\", \"text\": \"  If 2 is invertible in the ring (for example, if it is a field of characteristic ≠ 2),\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/EllipticCurve/NormalForms.lean\", \"line\": \"35\", \"text\": \"  If 2 and 3 are invertible in the ring (for example, if it is a field of characteristic ≠ 2 or 3),\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/IsIso.lean\", \"line\": \"45\", \"text\": \"example : IsZariskiLocalAtTarget (isomorphisms Scheme) := inferInstance\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Limits.lean\", \"line\": \"725\", \"text\": \"example {U X Y : Scheme.{u}} (f : U ⟶ X) (g : U ⟶ Y)\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/IdealSheaf/IrreducibleComponent.lean\", \"line\": \"18\", \"text\": \"For example, if `X` is irreducible then this will give back the original scheme `X`.\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits state morphism base-change and flat descent properties, not ampleness of invertible sheaves"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a finite faithfully flat morphism, a line bundle is ample if its tensor inverse image is ample",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Flat.isStableUnderBaseChange\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Flat\", \"type\": \"CategoryTheory.MorphismProperty.IsStableUnderBaseChange @AlgebraicGeometry.Flat\", \"doc\": \"The property of being a flat morphism of schemes is stable under base change, meaning that if a morphism of schemes is flat, then any base change (pullback) of this morphism is also flat.\"}\n  {\"name\": \"AlgebraicGeometry.Flat\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Flat\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"The property that a morphism $ f : X \\to Y $ of schemes is flat.\"}\n  {\"name\": \"AlgebraicGeometry.Flat.flat_appLE\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Flat\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [self : AlgebraicGeometry.Flat f] {U : Y.Opens},\\n  AlgebraicGeometry.IsAffineOpen U →\\n    ∀ {V : X.Opens},\\n      AlgebraicGeometry.IsAffineOpen V →\\n        ∀ (e : V ≤ (TopologicalSpace.Opens.map f.base).obj U),\\n          (CommRingCat.Hom.hom (AlgebraicG\", \"doc\": \"If $ f : X \\\\to Y $ is a flat morphism of schemes, then for every affine open subset $ U \\\\subseteq Y $ and every affine open subset $ V \\\\subseteq X $ such that $ V \\\\subseteq f^{-1}(U) $, the induced ri\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.flat_appLE\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Flat\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [self : AlgebraicGeometry.Flat f] {U : Y.Opens},\\n  AlgebraicGeometry.IsAffineOpen U →\\n    ∀ {V : X.Opens},\\n      AlgebraicGeometry.IsAffineOpen V →\\n        ∀ (e : V ≤ (TopologicalSpace.Opens.map f.base).obj U),\\n          (CommRingCat.Hom.hom (AlgebraicG\", \"doc\": \"Let $f: X \\\\to Y$ be a flat morphism of schemes. For any affine open subset $U \\\\subseteq Y$ and any affine open subset $V \\\\subseteq f^{-1}(U)$, the corresponding ring homomorphism $\\\\mathcal{O}_Y(U) \\\\to\"}\n  {\"name\": \"AlgebraicGeometry.Flat.flat_and_surjective_iff_faithfullyFlat_of_isAffine\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Flat\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.IsAffine X] [AlgebraicGeometry.IsAffine Y],\\n  AlgebraicGeometry.Flat f ∧ AlgebraicGeometry.Surjective f ↔\\n    (CommRingCat.Hom.hom (AlgebraicGeometry.Scheme.Hom.appTop f)).FaithfullyFlat\", \"doc\": \"For affine schemes $X$ and $Y$, a morphism $f : X \\to Y$ is flat and surjective if and only if the induced ring homomorphism on global sections $f_{\\text{appTop}}$ is faithfully flat.\"}\n  {\"name\": \"RingHom.FaithfullyFlat.isStableUnderBaseChange\", \"module\": \"Mathlib/RingTheory/RingHom/FaithfullyFlat\", \"type\": \"RingHom.IsStableUnderBaseChange fun {R S} [CommRing R] [CommRing S] => RingHom.FaithfullyFlat\", \"doc\": \"For commutative rings $ R, S, R', S' $ with compatible algebra structures and scalar tower conditions, if the ring homomorphism $ R \\\\to S $ is faithfully flat, then the base change homomorphism $ R' \\\\\"}\n  {\"name\": \"AlgebraicGeometry.Flat.flat_of_affine_subset\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Flat\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [self : AlgebraicGeometry.Flat f] {U : Y.Opens},\\n  AlgebraicGeometry.IsAffineOpen U →\\n    ∀ {V : X.Opens},\\n      AlgebraicGeometry.IsAffineOpen V →\\n        ∀ (e : V ≤ (TopologicalSpace.Opens.map f.base).obj U),\\n          (CommRingCat.Hom.hom (AlgebraicG\", \"doc\": \"If $ f : X \\\\to Y $ is a flat morphism of schemes, then for any affine open subset $ U \\\\subseteq Y $ and affine open subset $ V \\\\subseteq X $ satisfying $ V \\\\subseteq f^{-1}(U) $, the induced ring homo\"}\n  {\"name\": \"AlgebraicGeometry.flat_iff\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Flat\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y),\\n  AlgebraicGeometry.Flat f ↔\\n    ∀ {U : Y.Opens},\\n      AlgebraicGeometry.IsAffineOpen U →\\n        ∀ {V : X.Opens},\\n          AlgebraicGeometry.IsAffineOpen V →\\n            ∀ (e : V ≤ (TopologicalSpace.Opens.map f.base).obj U),\\n              (CommRingC\", \"doc\": \"Let $f: X \\\\to Y$ be a morphism of schemes. The morphism $f$ is flat if and only if for every affine open subset $U$ of $Y$ and every affine open subset $V$ of $X$ such that the image of $V$ under the \"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits state morphism base-change and flat descent properties, not ampleness of invertible sheaves"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A finite locally free surjective morphism of schemes reflects absolute ampleness of a line bundle",
+   "results": "8 hits: AlgebraicGeometry.Scheme.IsJointlySurjectivePreserving, AlgebraicGeometry.Scheme.isJointlySurjectivePreserving, AlgebraicGeometry.Surjective.instIsStableUnderBaseChangeScheme, AlgebraicGeometry.instHasOfPrecompPropertySchemeSurjective, AlgebraicGeometry.Scheme.instIsJointlySurjectivePreservingIsOpenImmersion, AlgebraicGeometry.IsFinite.instIsStableUnderBaseChangeScheme, AlgebraicGeometry.AffineSpace.instSurjectiveOverSchemeInferInstanceOverClass, AlgebraicGeometry.SurjectiveOnStalks.stableUnderBaseChange",
+   "date": "2026-10-24",
+   "verdict": "no match: no scheme ampleness theorem; hits concern other morphism properties or ordinary bundles"
+  },
+  {
+   "tool": "grep",
+   "query": "\\bample\\b|ampleness|IsAmple",
+   "results": "0 hits: ",
+   "date": "2026-10-24",
+   "verdict": "no match: no scheme ampleness theorem; hits concern other morphism properties or ordinary bundles"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A line bundle is ample if its pullback under a finite faithfully flat map is ample",
+   "results": "8 hits: Bundle.Pullback, RingHom.FaithfullyFlat, AlgebraicGeometry.Flat.isStableUnderBaseChange, AlgebraicGeometry.instIsAffinePullbackSchemeOfIsAffineHom_1, AlgebraicGeometry.Scheme.Modules.instAdditivePullback, AlgebraicGeometry.Flat.flat_and_surjective_iff_faithfullyFlat_of_isAffine, AlgebraicGeometry.IsFinite.toIsAffineHom, VectorBundle.pullback",
+   "date": "2026-10-24",
+   "verdict": "no match: no scheme ampleness theorem; hits concern other morphism properties or ordinary bundles"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsAmple\"",
+   "results": "0 hits: ",
+   "date": "2026-10-24",
+   "verdict": "no match: no scheme ampleness theorem; hits concern other morphism properties or ordinary bundles"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-semiabelian-algebraic-equivalence-norm",
+  "date": "2026-10-24",
+  "group": "Q56"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Scheme representability of the stable abelian-level normalization. Supporting input: freeness at normalized boundary branches. Comparison of the full cohomology frame in the item with Deligne 3.3--3.5 Picard torsion frames; relative Picard existence for the pulled-back stable family. Supporting input for the present split: A relatively ample line module on the stable-curve multidegree-zero Picard space. Supporting input: Generic ampleness criterion for smooth connected group schemes. Raynaud input: existence, locally on a normal base, of an ample extension of a positive power of a symmetric line on the dense abelian open; comparison with the supplied line is a separate proof step. Cubical proof input: extension of cubical objects and isomorphisms, without positivity; supporting input: Local prolongation of a tensor power of a symmetric line; Moret-Bailly II 3.3.3 opening application of Raynaud XI 1.13 to generic ample modules; isolate the positive generic input before forming a tensor quotient and comparing over U. Supporting input for Q35: Algebraically trivial lines on a semiabelian variety: inversion and ampleness. Ampleness argument after the cube calculation: reflect ampleness along a finite prime-to-characteristic multiplication map.",
+   "via": [
+    "lem-sfb-semiabelian-algebraic-equivalence-norm",
+    "lem-sfb-raynaud-generic-ample-symmetrization",
+    "lem-sfb-symmetric-line-power-prolongation",
+    "lem-sfb-normal-symmetric-cubical-extension",
+    "lem-sfb-symmetric-ample-power-extension",
+    "lem-sfb-regular-group-generic-ampleness",
+    "lem-sfb-stable-picard-theta-ampleness",
+    "lem-sfb-stable-relative-picard-kummer",
+    "lem-sfb-stable-level-versal-branch-freeness",
+    "lem-sfb-stable-abelian-level-normalization",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-finite-locally-free-ample-reflection",
+  "worker": "stage1",
+  "summary": "Checked the supplied line version of the norm argument in Stacks 0BD0/0BCY/0BD2. Reused the rank and finite-fibre nodes, finite-set section avoidance, tensor pullback and affine-cap input. One new statement-only lemma supplies norms of sections of pulled-back line powers. Varying degree is handled at each point by a clopen rank locus and explicit extension by zero. The item statement is unchanged.",
+  "blueprint": "The inherited ancestry serves the old det-thm-sf-ctf-stability-direct-images (3) alteration/ample-descent branch, specifically reflection along the multiplication map in lem-sfb-semiabelian-algebraic-equivalence-norm. The latest direct-images proof and unit were read: they now organize (3) by compactification. This remains a supporting algebraic-geometric tool below the inherited branch, not a replacement of that unit proof. blueprint_refs.py ancestor returns None, as in the inherited field; preserved.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-finite-flat-rank-iso",
+    "why": "Uses only locally constant rank to isolate a positive-degree clopen stratum; no statement of the current unit supplies this general geometric tool."
+   },
+   {
+    "node": "lem-weil-pbc-finite-closed-map-finite-fibres",
+    "why": "Uses finite fibres, without Noetherian hypotheses, in the prescribed norm proof."
+   },
+   {
+    "node": "lem-sc-ample-finite-principal-affine",
+    "why": "Finite-set avoidance is the explicit Stacks 09NV input to the prescribed 0BD0 norm proof."
+   },
+   {
+    "node": "lem-sc-affine-cap-section-open",
+    "why": "Uses only that the section locus inside the chosen affine neighbourhood is affine; it is the final 01PV input in 0BD0."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-finite-flat-rank-iso",
+  "lem-weil-pbc-finite-closed-map-finite-fibres",
+  "lem-sc-ample-finite-principal-affine",
+  "lem-sc-affine-cap-section-open"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q76-e7bf0523c",
+  "group": "Q76",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q76-e7bf0523c (reviewer sub-agent of L); spot-checked: I read the item and the new node in full, and Stacks divisors.tex 3586-3830 (0BCX-0BD2). The item statement is unchanged and true: it is the specified-line form of the 0BD0 proof, using 0BCY Norm(f^*L)=L^d and the 0BD2 determinant norm, applied on clopen rank strata. Step 1: X is quasi-compact as the surjective image of Y. Step 2: lem-weil-pbc-finite-flat-rank-iso(1) (04MH) gives a clopen stratum U; d>0 holds because the fibre algebra maps unitally to κ(y)≠0; f_U is finite locally free of degree d; choose an affine V with x∈V⊆U. Step 3: the fibre E is finite (finite-closed-map-finite-fibres(2), no Noetherian hypothesis); 09NV applied on Y gives E⊆Y_s⊆f^{-1}V; restriction is identified with the pullback via pullback-tensor(2), which is Lean-closed; the new node gives t_U, and U_t⊆V uses surjectivity correctly. Step 4: glue t_U with 0 on the disjoint clopen cover, so X_t=U_t⊆V, which is affine by 01PV, with dn>0. New node lem-sfb-finite-locally-free-pullback-section-norm: I checked the cocycle w_ij^{dn} gluing via 0BD2 property (1), and the vanishing equivalence via 0BD2 property (2) plus units in the finite fibre algebra. Small cases checked: d=1, split covers, k[ε]/ε² where Nm(a+bε)=a², characteristic dividing d, empty X. It is not a restatement of the parent. It is not a duplicate of lem-sfb-finite-norm-invertible-sections, which only gives some N with no identification N≅L^d; nor of norm-frame-gluing, function-norm-nonvanishing, pd norm-charts, finite-normal-ample-descent or trf Noetherian-proper reflection; live has nothing newer. Searches cover all three kinds. The declared tool_uses are accepted as generic Stacks inputs (04MH, finite fibres, 09NV, 01PV). No SGA. Live item is still unsplit with no repair note. No changes made."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.FiniteLocallyFreeAmpleReflection",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.isAmple_of_tensorPullback_finiteLocallyFree_surjective",
+  "file": "lean/Sheaf/AlgebraicGeometry/FiniteLocallyFreeAmpleReflection.lean",
+  "statement": "theorem isAmple_of_tensorPullback_finiteLocallyFree_surjective {X Y : Scheme.{u}} (f : Y ⟶ X) [f.IsFiniteLocallyFree] [Surjective f] (L : X.Modules) [L.IsInvertible] (hL : @IsAmple Y ((tensorPullback f).obj L) ((invertible_pullback_tensor f).1 L).2) : IsAmple X L",
+  "branch": "newtargets-dag",
+  "by": "N8",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-b1016fc59",
+  "group": "N8",
+  "result": "pass",
+  "note": "Signature matches node clause by clause: IsFiniteLocallyFree (finite+flat+lfp, no degree), AlgebraicGeometry.Surjective, IsInvertible L, hypothesis absolute Scheme.Modules.IsAmple of tensorPullback f L with proved instance from invertible_pullback_tensor (Prop, no extra assumption), conclusion Scheme.Modules.IsAmple X L; no proper/Noetherian/constant-degree hypotheses; universe u free; lean.statement verbatim; empty X, varying rank, nonreduced fibres covered; no duplicate (FiniteSurjectiveAmpleReflection needs proper over Noetherian R); no definitions, sorry only, source/blueprint docstrings with 4 proof steps; imports exist; not recompiled (no file changed)."
+ }
+}

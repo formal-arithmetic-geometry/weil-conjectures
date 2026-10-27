@@ -1,0 +1,99 @@
+{
+ "id": "def-sf-intrinsic-compact-support-restriction",
+ "kind": "definition",
+ "title": "Canonical intrinsic compact-support restriction comparison",
+ "status": "split",
+ "statement": "Let $A,B$ be finite commutative rings in universe $u$, $\\varphi:A\\to B$ a homomorphism, $X,Z,Y$ schemes in universe $u$, $j:X\\to Z$ an open immersion and $r:Z\\to Y$ any morphism. Use the ordinary constant-ring module derived categories and geometric operations [def-weil-pbc-proetale-modules] [def-weil-pbc-proetale-operations], scalar restriction [def-pc-sheaf-restrict-scalars], and the termwise intrinsic open extension $J_{j,A}$ [def-weil-extension-by-zero]. Put $F_A=Rr_{*,A}J_{j,A}$, the reductionCompactSupport presentation [def-sp-reduction-direct-image-comparison]. Define $\\rho_{j,r}:F_A\\operatorname{Res}_X\\xrightarrow{\\sim}\\operatorname{Res}_YF_B$ by first applying the section-normalized open restriction comparison $J_{j,A}\\operatorname{Res}_X\\cong\\operatorname{Res}_ZJ_{j,B}$ and then the inverse of the K-injective-normalized ring-sheaf direct-image restriction comparison [lem-weil-proetale-direct-image-restriction-of-scalars]. This is the existing intrinsicCompactSupportRestriction construction. No properness, boundedness or coefficient-composition equation is asserted by this definition.",
+ "stmt_deps": [
+  "def-weil-pbc-proetale-modules",
+  "def-weil-pbc-proetale-operations",
+  "def-pc-sheaf-restrict-scalars",
+  "def-weil-extension-by-zero",
+  "def-sp-reduction-direct-image-comparison",
+  "lem-weil-proetale-direct-image-restriction-of-scalars"
+ ],
+ "source": {
+  "document": "literature/stacks-project/more-etale.tex",
+  "place": "Tag 0GL6, remark-Rf-lower-shriek-change-of-rings; normalized scalar-unit construction, with Tag 07A6 for derived scalar extension"
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "compactSupport.*(Restriction|Coefficient)|intrinsicCompactSupport|compactScalar|compactRestriction",
+   "results": "0 hits: ",
+   "date": "2026-10-22",
+   "verdict": "No Mathlib compact-support comparison. Existing project maps are reused; this node supplies definition ownership or their prescribed scalar coordinates."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Canonical compact support restriction of scalars comparison and coefficient tensor comparison defined by scalar adjunction unit",
+   "results": "8 hits: ModuleCat.RestrictionCoextensionAdj.HomEquiv.toRestriction_hom_apply, ModuleCat.ExtendRestrictScalarsAdj.unit, RestrictScalars, ModuleCat.restrictCoextendScalarsAdj, ModuleCat.extendRestrictScalarsAdj_unit_app_apply, ModuleCat.RestrictionCoextensionAdj.HomEquiv.toRestriction, ModuleCat.ExtendRestrictScalarsAdj.Unit.map, NonUnitalAlgHom.restrictScalars",
+   "date": "2026-10-22",
+   "verdict": "No Mathlib compact-support comparison. Existing project maps are reused; this node supplies definition ownership or their prescribed scalar coordinates."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Compact support restriction comparison Rp_* j_! Res isomorphic Res Rp_* j_! and scalar coefficient comparison as its adjunction mate",
+   "results": "8 hits: CompHausLike.LocallyConstant.adjunction_left_triangle, CondensedSet.instIsIsoFunctorCompactlyGeneratedCounitCompactlyGeneratedAdjunction, CompHausLike.LocallyConstant.adjunction, AlgebraicGeometry.Scheme.Modules.instIsIsoFunctorCounitRestrictAdjunction, AlgebraicGeometry.Scheme.Modules.restrictFunctorAdjCounitIso, AlgebraicGeometry.Scheme.Modules.restrictAdjunction, CondensedMod.LocallyConstant.adjunction, CondensedSet.compactlyGeneratedAdjunction Repository and DAG search: No upstream match. Sheaf has intrinsicCompactSupportRestriction in the recorded theorem module; no definition node owns it. The two PfReductionFactors maps occur only in the saved delivery. Existing def-coef-compact-support-tensor-comparison records intrinsicCompactSupportCoefficientComparison in other chosen scalar/open coordinates. Blueprint searches each return 0.",
+   "date": "2026-10-22",
+   "verdict": "No Mathlib compact-support comparison. Existing project maps are reused; this node supplies definition ownership or their prescribed scalar coordinates."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-sf-pf-reduction-proper-open-identities",
+  "date": "2026-10-22",
+  "group": "Q96"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-sf-pf-reduction",
+   "place": "The canonical compact-support coefficient map in the transpose/counit proof paragraph",
+   "via": [
+    "lem-sf-pf-reduction-proper-open-identities"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sf-pf-reduction",
+ "lean": {
+  "module": "Sheaf.SecSmoothPurity.IntrinsicCompactSupportRestriction",
+  "declaration": "AlgebraicGeometry.ProEtale.intrinsicCompactSupportRestriction",
+  "statement": "def intrinsicCompactSupportRestriction\n    {A B : Type u} [CommRing A] [CommRing B] [Finite A] [Finite B]\n    (φ : A →+* B) {X Z Y : Scheme.{u}} (j : X ⟶ Z) [IsOpenImmersion j] (h : Z ⟶ Y) :\n    scalarRestriction φ X ⋙ reductionCompactSupport A j h ≅\n      reductionCompactSupport B j h ⋙ scalarRestriction φ Y",
+  "branch": "sheaf-dag",
+  "by": "Q96",
+  "date": "2026-10-22",
+  "existing": true,
+  "note": "Definition ownership for the already published concrete canonical comparison. The theorem node lem-sf-compact-support-restriction-of-scalars retains its composition theorem; this node records only its plain definition, with no source change."
+ },
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-f80db5e0b",
+  "group": "Q96",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-f80db5e0b",
+  "group": "Q96",
+  "result": "pass",
+  "note": "Re-delivery after RETURN c221b884 (H2); both findings repaired. (a) The theorem stmt_dep lem-sf-compact-support-restriction-of-scalars is replaced by the new def node def-sf-intrinsic-compact-support-restriction (existing:true on the unchanged live module; statement verbatim to the live def header); the theorem stays in proof_deps. (b) compactRestriction/compactScalar moved verbatim into the new module Sheaf.Paper.CompactSupportScalarCoordinates, owned by def-sf-compact-support-scalar-coordinates, which cites def-coef-compact-support-tensor-comparison. compactScalar = homEquiv.symm(G_A J_A(eta_X) then R) is def-coef's presentation-generic universal arrow in scalarPair/openExtension coordinates; reductionOpenModel directions checked; the recorded intrinsicCompactSupportCoefficientComparison is in pbcDerivedExtend/sfIntrinsicCompactSupport coordinates and cannot be used. Item module byte-identical apart from the moved defs and one added import; signature, five conjuncts, 8-step docstring and single sorry unchanged. 15 stmt_deps, 13 definitions; no def from the two remaining theorem-dep modules (lem-fix-operation-reduction, lem-fix-compact-support-coefficient-change) is used. Statements verbatim, lines <=95, new module has no sorry. Advisory: the new restriction node cites lem-weil-proetale-direct-image-restriction-of-scalars, while the Lean uses proEtaleRingRestrictionDerivedDirectImage (lem-weil-pbc-ring-sheaf-change-adjunction); step 8 identifies the two and the base theorem node cites the same way. No compile (no file changed)."
+ }
+}

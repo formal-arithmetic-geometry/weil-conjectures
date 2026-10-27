@@ -1,0 +1,305 @@
+{
+ "id": "lem-coef-dualizing-construction",
+ "kind": "statement",
+ "title": "Bounded etale dualizing objects and their coefficient counit mates",
+ "statement": "Fix $k=\\overline{\\mathbf F}_q$ of characteristic $p$, a prime $\\ell\\ne p$, a finite extension $E/\\mathbf Q_\\ell$ with valuation ring $\\mathcal O_E$ and uniformizer $\\varpi$, and $1\\le m\\le n$. Set $A=\\mathcal O_E/(\\varpi^n)$, $B=\\mathcal O_E/(\\varpi^m)$ [def-weil-finite-field-fiber]. For a separated finite-type $k$-scheme $Y$ [def-weil-proper-morphism, def-weil-finite-type-morphism], write $a_Y:Y\\to s=\\operatorname{Spec}k$, $F_{Y,R}=Ra_{Y,R!}\\dashv G_{Y,R}=a_{Y,R}^{\\times}$, $\\omega_{Y,R}=G_{Y,R}R_s$, and $\\varepsilon_{Y,R}:F_{Y,R}\\omega_{Y,R}\\to R_s$, for $R=A,B$, on ordinary small etale module derived categories [def-weil-pbc-derived-categories, def-amb-etale-compact-support, thm-amb-etale-exceptional-adjoint]. Let $T_Y=-\\otimes_A^LB$ [def-kun-derived-tensor], and denote the canonical compact-support coefficient comparison by $c_{Y,K}:T_sF_{Y,A}K\\to F_{Y,B}T_YK$ [lem-fix-compact-support-coefficient-change]. Here bounded constructible finite-Tor means constructible cohomology, zero outside a finite interval, and integers $a\\le b$ such that tensoring with every degree-zero module sheaf has cohomology only in $[a,b]$ [def-weil-pbc-constructible-complexes, def-kun-tor-amplitude]. For every such $Y$, the compactification-independent functors $F_{Y,R}$ and their ordinary etale right adjoints exist, $Y$ is Noetherian, and $\\omega_{Y,R}$ belongs to $D^b_{ctf}(Y_{\\mathrm{et}},R)$. Whenever $\\omega_{Y,A}$ is bounded constructible of finite Tor amplitude, define $u_Y:T_Y\\omega_{Y,A}\\to\\omega_{Y,B}$ to be the unique map with $\\varepsilon_{Y,B}F_{Y,B}(u_Y)=(T_s\\varepsilon_{Y,A})c_{Y,\\omega_{Y,A}}^{-1}$, using $T_sA_s\\cong B_s$. The same assertions hold at every further positive quotient level $C=\\mathcal O_E/(\\varpi^h)$, $h\\le m$. There is the following normalization for their use in a factorization $Y\\xrightarrow i P\\xrightarrow p s$: whenever $Q$ and $Q'$ are bounded-below objects representing the same functor $L\\mapsto\\operatorname{Hom}(F_{pi}L,N)$ on $D^+$, the comparison induced by those Hom bijections is the unique counit-compatible isomorphism. Under $F_pF_i\\cong F_{pi}$ its counit is $\\varepsilon_{pi}=\\varepsilon_pF_p(\\varepsilon_i)$ [def-weil-pbc-composite-adjunction]. On bounded constructible finite-Tor inputs the canonical coefficient comparisons obey $c_{pi,K}=F_{p,B}(c_{i,K})c_{p,F_{i,A}K}$ with the compact-support composition identifications [lem-amb-etale-compact-comparisons, lem-sf-compact-coefficient-composition].",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-tower/lem-coef-finite-dualizing.proof.md",
+  "place": "Proof paragraph 1: regular coefficient dual and construction of the displayed adjoint; paragraph 2: composition of ambient right adjoints (including its D+ counit normalization); extraction of the expanded retained stage-1 proof, steps 1,2,3"
+ },
+ "stmt_deps": [
+  "def-amb-etale-compact-support",
+  "def-kun-derived-tensor",
+  "def-kun-tor-amplitude",
+  "def-weil-finite-field-fiber",
+  "def-weil-finite-type-morphism",
+  "def-weil-pbc-composite-adjunction",
+  "def-weil-pbc-constructible-complexes",
+  "def-weil-pbc-derived-categories",
+  "def-weil-proper-morphism",
+  "lem-amb-etale-compact-comparisons",
+  "lem-fix-compact-support-coefficient-change",
+  "lem-sf-compact-coefficient-composition",
+  "thm-amb-etale-exceptional-adjoint",
+  "def-pur-exceptional-coefficient-tensor-maps",
+  "def-per-exceptional-coefficient-maps",
+  "def-pur-exceptional-coefficient-normalizations",
+  "def-weil-pbc-witness-compatibility",
+  "def-sf-etale-support-compositor"
+ ],
+ "proof": [
+  {
+   "text": "At a positive coefficient level, use the existing finite_coefficientExtensionRing theorem [def-weil-l-adic-coefficient-extension], registered by finiteCompositionCoefficient. Finite type over the Noetherian field spectrum gives IsLocallyNoetherian Y, and quasi-compactness gives CompactSpace Y; these combine to IsNoetherian Y [lem-weil-pbc-finite-type-over-noetherian]. The existing Nagata compactification instance supplies the chosen compactification [thm-nagata-compactification]. No new valuation-theory construction is needed.",
+   "uses": [
+    "def-weil-l-adic-coefficient-extension",
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "thm-nagata-compactification"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-tower/lem-coef-finite-dualizing.proof.md",
+    "place": "Paragraph 1, existence of the structure-morphism operations at a finite coefficient level; hypotheses supplied explicitly"
+   }
+  },
+  {
+   "text": "The existing ordinary etale compact-support functor has its right adjoint by the finite-coefficient isLeftAdjoint_rightDerivedLowerShriek instance [thm-amb-etale-exceptional-adjoint]. The requested left-adjoint clause is discharged by this instance. The right adjoint applied to the coefficient unit is precisely dualizingComplex, as in the statement [def-amb-etale-compact-support].",
+   "uses": [
+    "def-amb-etale-compact-support",
+    "thm-amb-etale-exceptional-adjoint"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-etale.tex",
+    "place": "Tags 0F7H (section-derived-lower-shriek-compactification), 0F7I (lemma-shriek-well-defined), 0F7J (lemma-shriek-composition); right-adjoint existence is the separately cited theorem"
+   }
+  },
+  {
+   "text": "The regular coefficient unit is the degree-zero single complex of the regular sheaf, via DerivedCategory.singleFunctorObjUnitIso. The regular sheaf is constructible and flat. The existing boundedConstructible_singleFunctor_obj and torAmplitudeIn_singleFunctor_obj_of_flat give bounded constructibility and Tor amplitude [0,0], transported across this isomorphism. This is the private proved helper regular_unit_ctf; the two recorded bounded-constructible predicates are identified by the proved boundedConstructible_iff helper of preservation-strata.",
+   "uses": [
+    "def-weil-pbc-constructible-complexes",
+    "def-kun-derived-tensor",
+    "def-kun-tor-amplitude"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-rf-shriek-preservation/lem-weil-verdier-preservation-strata.proof.md",
+    "place": "Final sentence, taking K=A_X; verification that the regular coefficient object is in D^b_ctf"
+   }
+  },
+  {
+   "text": "Apply verdier_preserves_boundedConstructible_finiteTor [lem-weil-verdier-preservation-strata] to the regular unit from step 3. The definition finiteStageDualizingComplex is the very dualizingComplex used here, since all intervening instance proofs are propositionally irrelevant. Internal Hom from the unit is isomorphic to the identity: derivedTensorHomAdjunction [def-pur-derived-internal-hom] and the tensor left unitor give the isomorphism by uniqueness of right adjoints. Transport bounded constructibility and Tor amplitude through its component at omega. If the supplied interval is [c,d], widen it to [min(c,d),d] to supply the explicit ordered-endpoint clause, including for the empty scheme.",
+   "uses": [
+    "lem-weil-verdier-preservation-strata",
+    "def-pur-derived-internal-hom"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-rf-shriek-preservation/lem-weil-verdier-preservation-strata.proof.md",
+    "place": "Preservation statement and final sentence: taking K=A_X proves the dualizing object is bounded constructible of finite Tor amplitude"
+   }
+  },
+  {
+   "text": "For the finite quotient homomorphism, apply the already proved compactSupport_isIso helper in ExceptionalCoefficientComparison: properFiniteCoefficientExtension is invertible on every input, and the open scalar comparison is an isomorphism. This is the ordinary-etale compact-scalar coherence argument [lem-pur-etale-compact-scalar-coherence]. Unfold the normalized dualizingScalarMap into mateMap followed by the right adjoint of unitIso. Naturality of the B-counit moves this unit map after the counit; the inverse adjunction Hom bijection evaluated at mateMap then gives comparisonInverse followed by scalar extension of the A-counit and unitIso. Finally injectivity of the inverse Hom bijection proves that a map obeys this counit equation if and only if it equals dualizingScalarMap [lem-weil-pbc-adjunction-of-natural-bijection, def-per-exceptional-coefficient-maps].",
+   "uses": [
+    "lem-pur-etale-compact-scalar-coherence",
+    "lem-weil-pbc-adjunction-of-natural-bijection",
+    "def-per-exceptional-coefficient-maps"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-tower/lem-coef-finite-dualizing.proof.md",
+    "place": "Paragraph 1: the compact-support coefficient comparison constructs the displayed adjoint map"
+   }
+  },
+  {
+   "text": "Put $\\mathcal C=D^+(Y_{\\mathrm{et}},R)$ and $H(L)=\\operatorname{Hom}(F_{pi}L,N)$. For the two representing objects, write $\\phi_L:\\operatorname{Hom}(L,Q)\\cong H(L)$ and $\\phi'_L:\\operatorname{Hom}(L,Q')\\cong H(L)$ for the given natural bijections. The natural isomorphism $\\beta_L=(\\phi'_L)^{-1}\\phi_L$ is represented by a unique map $\\theta:Q\\to Q'$ by [lem-galois-yoneda-fully-faithful]. Explicitly $\\theta=\\beta_Q(1_Q)$ and naturality gives $\\beta_L(f)=\\theta f$. The inverse natural isomorphism gives $\\theta':Q'\\to Q$; faithfulness gives $\\theta'\\theta=1_Q$ and $\\theta\\theta'=1_{Q'}$. Write $e=\\phi_Q(1_Q)$ and $e'=\\phi'_{Q'}(1_{Q'})$ for the universal counit maps. Naturality now says $e'F_{pi}(\\theta)=e$. Conversely a map $t$ satisfying this equation has $\\phi'_Q(t)=e=\\phi_Q(1_Q)$, hence $t=\\theta$ by injectivity. This proves the claimed unique counit-compatible isomorphism wholly inside $D^+$; the bounded-below hypotheses ensure that $Q$ and $Q'$ themselves are allowable test objects.",
+   "uses": [
+    "lem-galois-yoneda-fully-faithful"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Tag 001P (lemma-yoneda), applied to the full bounded-below derived category and the given representing bijections"
+   }
+  },
+  {
+   "text": "For a factorization in the statement, use the compact-support composition identification $F_pF_i\\cong F_{pi}$ and compose the two adjunction Hom bijections. By [def-weil-pbc-composite-adjunction], their composite has right adjoint $G_iG_p$ and counit at $N$\n$$F_pF_iG_iG_pN\\xrightarrow{F_p(\\varepsilon_{i,G_pN})}F_pG_pN\\xrightarrow{\\varepsilon_{p,N}}N.$$\nThus whenever this composite and another bounded-below object represent the stipulated functor on $D^+$, step 6 identifies them by exactly the unique comparison preserving this counit. After the specified composition identifications, the formula is $\\varepsilon_{pi}=\\varepsilon_p\\circ F_p(\\varepsilon_i)$. This is a normalization conditional on the representing objects in the statement, and requires no claim that an arbitrary unbounded right adjoint preserves $D^+$.",
+   "uses": [
+    "def-weil-pbc-composite-adjunction"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Tag 0DV0 (lemma-compose-counits), with the two Hom bijections composed and step 6 applied"
+   }
+  },
+  {
+   "text": "For the factorization i then p, obtain Noetherian source and middle scheme from their finite-type structure maps [lem-weil-pbc-finite-type-over-noetherian]. Finite Tor amplitude makes the scalar extension of K bounded below: tensor with the coefficient sheaf B and use scalarTensorIso and exact faithful scalar restriction to detect homology vanishing, as proved in scalarExtension_plus_of_finiteTor [lem-fix-compact-support-coefficient-change]. Apply the exact existing etaleCompactScalarComposition theorem [lem-pur-etale-compact-scalar-coherence]. Its compactScalarChosenMap component is definitionally ExceptionalCoefficients.compactSupportMap at the chosen compactification, so this is exactly the required equality with unboundedEtaleLowerShriekCompIso. No conversion to arbitrary CoefficientTensorModel presentations or extra compatibility statement is required.",
+   "uses": [
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "lem-fix-compact-support-coefficient-change",
+    "lem-pur-etale-compact-scalar-coherence",
+    "lem-amb-unbounded-compact-support-comparisons"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-etale.tex",
+    "place": "Tag 0F7J (lemma-shriek-composition) and coefficient-composition identity as stated in lem-sf-compact-coefficient-composition"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-amb-etale-compact-support",
+  "def-kun-derived-tensor",
+  "def-kun-tor-amplitude",
+  "def-per-exceptional-coefficient-maps",
+  "def-pur-derived-internal-hom",
+  "def-weil-l-adic-coefficient-extension",
+  "def-weil-pbc-composite-adjunction",
+  "def-weil-pbc-constructible-complexes",
+  "lem-amb-unbounded-compact-support-comparisons",
+  "lem-fix-compact-support-coefficient-change",
+  "lem-galois-yoneda-fully-faithful",
+  "lem-pur-etale-compact-scalar-coherence",
+  "lem-weil-pbc-adjunction-of-natural-bijection",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-weil-verdier-preservation-strata",
+  "thm-amb-etale-exceptional-adjoint",
+  "thm-nagata-compactification"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-tower/lem-coef-finite-dualizing.proof.md",
+  "place": "Paragraphs 1–2; Lean realization by Y2 of the regular-unit, counit-transpose and Yoneda arguments. The factorization coefficient equation uses the exact published ordinary-etale scalar composition theorem rather than changing tensor presentations."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The compact support right adjoint applied to the regular finite coefficient sheaf is bounded constructible of finite Tor amplitude and defines a coefficient change mate",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"LightCondensed.instMonoidalClosedSheafLightProfiniteCoherentTopologyModuleCat\", \"module\": \"Mathlib/Condensed/Light/Monoidal\", \"type\": \"(R : Type u) →\\n  [inst : CommRing R] →\\n    CategoryTheory.MonoidalClosed (CategoryTheory.Sheaf (CategoryTheory.coherentTopology LightProfinite) (ModuleCat R))\", \"doc\": \"For any commutative ring $ R $, the category of sheaves on light profinite spaces (compact Hausdorff, totally disconnected, second-countable topological spaces) equipped with the coherent Grothendieck\"}\n  {\"name\": \"LightCondMod.LocallyConstant.instHasSheafifyLightProfiniteCoherentTopologyModuleCat\", \"module\": \"Mathlib/Condensed/Discrete/Module\", \"type\": \"∀ (R : Type u) [inst : Ring R],\\n  CategoryTheory.HasSheafify (CategoryTheory.coherentTopology LightProfinite) (ModuleCat R)\", \"doc\": \"For the coherent Grothendieck topology on the category of totally disconnected, second-countable compact Hausdorff spaces (light profinite spaces), there exists a sheafification functor from the categ\"}\n  {\"name\": \"LightCondMod.LocallyConstant.adjunction\", \"module\": \"Mathlib/Condensed/Discrete/Module\", \"type\": \"(R : Type u) → [inst : Ring R] → LightCondMod.LocallyConstant.functor R ⊣ LightCondensed.underlying (ModuleCat R)\", \"doc\": \"For any ring $ R $, there is an adjunction between the locally constant module functor and the underlying functor in the category of light condensed $ R $-modules. This adjunction is constructed using\"}\n  {\"name\": \"LightCondensed.free_internallyProjective_iff_tensor_condition'\", \"module\": \"Mathlib/Condensed/Light/InternallyProjective\", \"type\": \"∀ (R : Type u) [inst : CommRing R] (P : LightCondSet),\\n  CategoryTheory.InternallyProjective ((LightCondensed.free R).obj P) ↔\\n    ∀ {A B : LightCondMod R} (e : A ⟶ B) [CategoryTheory.Epi e] (S : LightProfinite)\\n      (g : (LightCondensed.free R).obj (CategoryTheory.MonoidalCategoryStruct.tensorObj \", \"doc\": \"For any commutative ring $ R $, the category of light condensed $ R $-modules forms a monoidal closed category. This structure arises from the adjunction between sheafification and inclusion functors,\"}\n  {\"name\": \"LightCondensed.free_internallyProjective_iff_tensor_condition\", \"module\": \"Mathlib/Condensed/Light/InternallyProjective\", \"type\": \"∀ (R : Type u) [inst : CommRing R] (P : LightCondSet),\\n  CategoryTheory.InternallyProjective ((LightCondensed.free R).obj P) ↔\\n    ∀ {A B : LightCondMod R} (e : A ⟶ B) [CategoryTheory.Epi e] (S : LightProfinite)\\n      (g : (LightCondensed.free R).obj (CategoryTheory.MonoidalCategoryStruct.tensorObj \", \"doc\": \"For a light condensed set $ P $, the free $ R $-module $ \\\\text{free}_R(P) $ is internally projective in the category of light condensed $ R $-modules if and only if for every epimorphism $ e : A \\\\to B\"}\n  {\"name\": \"LightCondensed.freeForgetAdjunction\", \"module\": \"Mathlib/Condensed/Light/Module\", \"type\": \"(R : Type u) → [inst : Ring R] → LightCondensed.free R ⊣ LightCondensed.forget R\", \"doc\": \"The adjunction between the free light condensed $ R $-module functor (constructed by applying the free module functor and sheafifying with respect to the coherent Grothendieck topology on light profin\"}\n  {\"name\": \"CondensedMod.LocallyConstant.adjunction\", \"module\": \"Mathlib/Condensed/Discrete/Module\", \"type\": \"(R : Type (u + 1)) → [inst : Ring R] → CondensedMod.LocallyConstant.functor R ⊣ Condensed.underlying (ModuleCat R)\", \"doc\": \"For any ring $ R $, there is an adjunction where the left adjoint assigns to each $ R $-module $ M $ the condensed $ R $-module of locally constant functions from discrete spaces to $ M $, and the rig\"}\n  {\"name\": \"Condensed.freeForgetAdjunction\", \"module\": \"Mathlib/Condensed/Module\", \"type\": \"(R : Type (u + 1)) → [inst : Ring R] → Condensed.free R ⊣ Condensed.forget R\", \"doc\": \"For any ring $ R $, the free condensed $ R $-module functor from condensed sets to condensed $ R $-modules is left adjoint to the forgetful functor that forgets the $ R $-module structure. This adjunc\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: The hits concern condensed free adjunctions, counits, and generic derived adjunctions; none constructs the ordinary etale dualizing object or proves its constructible finite-Tor bound."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Regular coefficient sheaf Verdier dual finite Tor constructible exceptional adjunction counit",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"CategoryTheory.Adjunction.counit\", \"module\": \"Mathlib.CategoryTheory.Adjunction.Basic\", \"type\": \"{C : Type u₁} →\\n  [inst : CategoryTheory.Category.{v₁, u₁} C] →\\n    {D : Type u₂} →\\n      [inst_1 : CategoryTheory.Category.{v₂, u₂} D] →\\n        {F : CategoryTheory.Functor C D} →\\n          {G : CategoryTheory.Functor D C} → (F ⊣ G) → (G.comp F ⟶ CategoryTheory.Functor.id D)\", \"doc\": \"Given categories $\\\\mathcal{C}$ and $\\\\mathcal{D}$, and functors $F : \\\\mathcal{C} \\\\to \\\\mathcal{D}$ and $G : \\\\mathcal{D} \\\\to \\\\mathcal{C}$, the counit of an adjunction between $F$ and $G$ is a natural tra\"}\n  {\"name\": \"CategoryTheory.Adjunction.CoreUnitCounit.counit\", \"module\": \"Mathlib.CategoryTheory.Adjunction.Basic\", \"type\": \"{C : Type u₁} →\\n  [inst : CategoryTheory.Category.{v₁, u₁} C] →\\n    {D : Type u₂} →\\n      [inst_1 : CategoryTheory.Category.{v₂, u₂} D] →\\n        {F : CategoryTheory.Functor C D} →\\n          {G : CategoryTheory.Functor D C} →\\n            CategoryTheory.Adjunction.CoreUnitCounit F G → (G.comp F ⟶ Cat\", \"doc\": \"Given categories $\\\\mathcal{C}$ and $\\\\mathcal{D}$, and functors $F : \\\\mathcal{C} \\\\to \\\\mathcal{D}$ and $G : \\\\mathcal{D} \\\\to \\\\mathcal{C}$, the counit is a natural transformation from the composition $G \\\\\"}\n  {\"name\": \"CategoryTheory.Adjunction.CoreHomEquivUnitCounit.counit\", \"module\": \"Mathlib.CategoryTheory.Adjunction.Basic\", \"type\": \"{C : Type u₁} →\\n  [inst : CategoryTheory.Category.{v₁, u₁} C] →\\n    {D : Type u₂} →\\n      [inst_1 : CategoryTheory.Category.{v₂, u₂} D] →\\n        {F : CategoryTheory.Functor C D} →\\n          {G : CategoryTheory.Functor D C} →\\n            CategoryTheory.Adjunction.CoreHomEquivUnitCounit F G → (G.comp\", \"doc\": \"The counit of an adjunction between functors $ F: \\\\mathcal{C} \\\\to \\\\mathcal{D} $ and $ G: \\\\mathcal{D} \\\\to \\\\mathcal{C} $, which is a natural transformation from the composition $ G \\\\circ F $ to the iden\"}\n  {\"name\": \"CategoryTheory.Adjunction.derivedε\", \"module\": \"Mathlib.CategoryTheory.Functor.Derived.Adjunction\", \"type\": \": F' ⋙ G' ⟶ 𝟭 D₂\", \"doc\": \"The natural transformation $\\\\varepsilon': F' \\\\circ G' \\\\Rightarrow \\\\text{id}_{\\\\mathcal{D}_2}$ constructed as the right derived functor description, combining whiskered natural transformations $\\\\beta$, \"}\n  {\"name\": \"CategoryTheory.isIso_sheafificationAdjunction_counit\", \"module\": \"Mathlib.CategoryTheory.Sites.Sheafification\", \"type\": \"(P : Sheaf J D) : IsIso ((sheafificationAdjunction J D).counit.app P)\", \"doc\": \"For any sheaf $ P $ on a category $\\\\mathcal{C}$ with respect to a Grothendieck topology $ J $, the counit component of the sheafification adjunction at $ P $ is an isomorphism. This establishes that t\"}\n  {\"name\": \"CategoryTheory.Adjunction.functorialityCounit\", \"module\": \"Mathlib.CategoryTheory.Adjunction.Limits\", \"type\": \": functorialityRightAdjoint adj K ⋙ Cocones.functoriality _ F ⟶ 𝟭 (Cocone (K ⋙ F))\", \"doc\": \"Given an adjunction between functors $ F : \\\\mathcal{C} \\\\to \\\\mathcal{D} $ and $ G : \\\\mathcal{D} \\\\to \\\\mathcal{C} $, this natural transformation arises from the counit $ \\\\epsilon : G \\\\circ F \\\\Rightarrow \"}\n  {\"name\": \"CategoryTheory.Functor.sheafAdjunctionCocontinuous_counit_app_val\", \"module\": \"Mathlib.CategoryTheory.Sites.CoverLifting\", \"type\": \"(F : Sheaf J A) : ((G.sheafAdjunctionCocontinuous A J K).counit.app F).val = (G.op.ranAdjunction A).counit.app F.val\", \"doc\": \"For a cocontinuous functor $ G : \\\\mathcal{C} \\\\to \\\\mathcal{D} $ between sites with Grothendieck topologies $ J $ and $ K $, the counit of the adjunction between the continuous and cocontinuous sheaf pu\"}\n  {\"name\": \"CategoryTheory.sheafificationAdjunction_counit_app_val\", \"module\": \"Mathlib.CategoryTheory.Sites.Sheafification\", \"type\": \"(P : Sheaf J D) : ((sheafificationAdjunction J D).counit.app P).val = sheafifyLift J (𝟙 P.val) P.cond\", \"doc\": \"For any sheaf $P$ with respect to a Grothendieck topology $J$, the counit of the sheafification adjunction evaluated at $P$, when expressed as a presheaf, coincides with the unique morphism obtained b\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: The hits concern condensed free adjunctions, counits, and generic derived adjunctions; none constructs the ordinary etale dualizing object or proves its constructible finite-Tor bound."
+  },
+  {
+   "tool": "loogle",
+   "query": "DerivedCategory, CategoryTheory.Adjunction",
+   "results": "[loogle] OK 0 hit(s)",
+   "date": "2026-10-22",
+   "verdict": "no match: The hits concern condensed free adjunctions, counits, and generic derived adjunctions; none constructs the ordinary etale dualizing object or proves its constructible finite-Tor bound."
+  },
+  {
+   "tool": "grep",
+   "query": "dualizing|verdier|exceptional",
+   "results": "[grep] OK 25 hit(s)\n  {\"file\": \"Mathlib/Algebra/Jordan/Basic.lean\", \"line\": \"61\", \"text\": \"There are also exceptional Jordan algebras which can be shown not to be the symmetrization of any\"}\n  {\"file\": \"Mathlib/Tactic/Translate/ToDual.lean\", \"line\": \"27\", \"text\": \"  We may also want this feature for dualizing results about bicategories.\"}\n  {\"file\": \"Mathlib/Algebra/Lie/SerreConstruction.lean\", \"line\": \"34\", \"text\": \"### Exceptional Lie algebras\"}\n  {\"file\": \"Mathlib/Algebra/Lie/SerreConstruction.lean\", \"line\": \"151\", \"text\": \"/-- The exceptional split Lie algebra of type e₆. -/\"}\n  {\"file\": \"Mathlib/Algebra/Lie/SerreConstruction.lean\", \"line\": \"154\", \"text\": \"/-- The exceptional split Lie algebra of type e₇. -/\"}\n  {\"file\": \"Mathlib/Algebra/Lie/SerreConstruction.lean\", \"line\": \"157\", \"text\": \"/-- The exceptional split Lie algebra of type e₈. -/\"}\n  {\"file\": \"Mathlib/Algebra/Lie/SerreConstruction.lean\", \"line\": \"160\", \"text\": \"/-- The exceptional split Lie algebra of type f₄. -/\"}\n  {\"file\": \"Mathlib/LinearAlgebra/Matrix/Cartan.lean\", \"line\": \"18\", \"text\": \"This file defines Cartan matrices for simple Lie algebras, both the exceptional types\"}\n  {\"file\": \"Mathlib/LinearAlgebra/Matrix/Cartan.lean\", \"line\": \"23\", \"text\": \"### Exceptional types\"}\n  {\"file\": \"Mathlib/LinearAlgebra/Matrix/Cartan.lean\", \"line\": \"52\", \"text\": \"/-! ### Exceptional Cartan matrices -/\"}\n  {\"file\": \"Mathlib/LinearAlgebra/Matrix/Cartan.lean\", \"line\": \"215\", \"text\": \"/-! ### Exceptional matrix diagonal entries -/\"}\n  {\"file\": \"Mathlib/LinearAlgebra/Matrix/Cartan.lean\", \"line\": \"228\", \"text\": \"/-! ### Exceptional matrix off-diagonal entries -/\"}\n  {\"file\": \"Mathlib/CategoryTheory/Shift/CommShift.lean\", \"line\": \"20\", \"text\": \"Verdier's thesis (I 1.2.3/1.2.4), although the language is different. (In Verdier's thesis,\"}\n  {\"file\": \"Mathlib/CategoryTheory/Shift/CommShift.lean\", \"line\": \"27\", \"text\": \"* [Jean-Louis Verdier, *Des catégories dérivées des catégories abéliennes*][verdier1996]\"}\n  {\"file\": \"Mathlib/CategoryTheory/Presentable/Directed.lean\", \"line\": \"33\", \"text\": \"* [Alexander Grothendieck and Jean-Louis Verdier, *Exposé I : Préfaisceaux*,\"}\n  {\"file\": \"Mathlib/Algebra/Homology/HomotopyFiber.lean\", \"line\": \"82\", \"text\": \"/-- The path object of a homological complex is defined here by dualizing\"}\n  {\"file\": \"Mathlib/Algebra/Homology/SpectralObject/Page.lean\", \"line\": \"28\", \"text\": \"* [Jean-Louis Verdier, *Des catégories dérivées des catégories abéliennes*, II.4][verdier1996]\"}\n  {\"file\": \"Mathlib/Algebra/Homology/SpectralObject/Basic.lean\", \"line\": \"19\", \"text\": \"* [Jean-Louis Verdier, *Des catégories dérivées des catégories abéliennes*, II.4][verdier1996]\"}\n  {\"file\": \"Mathlib/Algebra/Homology/HomotopyCategory/Pretriangulated.lean\", \"line\": \"24\", \"text\": \"complexes. Here, we follow the original definitions in [Verdier's thesis, I.3][verdier1996]\"}\n  {\"file\": \"Mathlib/Algebra/Homology/HomotopyCategory/Pretriangulated.lean\", \"line\": \"29\", \"text\": \"* [Jean-Louis Verdier, *Des catégories dérivées des catégories abéliennes*][verdier1996]\"}\n  {\"file\": \"Mathlib/Algebra/Homology/SpectralObject/Cycles.lean\", \"line\": \"35\", \"text\": \"* [Jean-Louis Verdier, *Des catégories dérivées des catégories abéliennes*, II.4][verdier1996]\"}\n  {\"file\": \"Mathlib/Algebra/Homology/SpectralObject/EpiMono.lean\", \"line\": \"19\", \"text\": \"* [Jean-Louis Verdier, *Des catégories dérivées des catégories abéliennes*, II.4][verdier1996]\"}\n  {\"file\": \"Mathlib/Algebra/Homology/SpectralObject/Differentials.lean\", \"line\": \"20\", \"text\": \"* [Jean-Louis Verdier, *Des catégories dérivées des catégories abéliennes*, II.4][verdier1996]\"}\n  {\"file\": \"Mathlib/Tactic/Linarith/Oracle/FourierMotzkin.lean\", \"line\": \"263\", \"text\": \"The linarith monad extends an exceptional monad with a `LinarithData` state.\"}\n  {\"file\": \"Mathlib/Algebra/Homology/DerivedCategory/Plus.lean\", \"line\": \"86\", \"text\": \"instance : (HomotopyCategory.plus C).IsVerdierRightLocalizing\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: The hits concern condensed free adjunctions, counits, and generic derived adjunctions; none constructs the ordinary etale dualizing object or proves its constructible finite-Tor bound."
+  },
+  {
+   "tool": "grep",
+   "query": "dualizing|Verdier|exceptional",
+   "results": "[grep] OK 0 hit(s)",
+   "date": "2026-10-22",
+   "verdict": "no match: The hits concern condensed free adjunctions, counits, and generic derived adjunctions; none constructs the ordinary etale dualizing object or proves its constructible finite-Tor bound."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Regular coefficient sheaf Verdier dual finite Tor constructible exceptional adjunction counit in ordinary etale derived categories",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"Condensed.profiniteSolidCounit\", \"module\": \"Mathlib/Condensed/Solid\", \"type\": \"(R : Type (u + 1)) → [inst : Ring R] → FintypeCat.toProfinite.comp (Condensed.profiniteSolid R) ⟶ Condensed.finFree R\", \"doc\": \"The natural transformation from the composition of the finite type to profinite space functor followed by the profinite solid module functor to the free condensed $ R $-module functor on finite types,\"}\n  {\"name\": \"CategoryTheory.Functor.sheafAdjunctionCocontinuous_counit_app_val\", \"module\": \"Mathlib/CategoryTheory/Sites/CoverLifting\", \"type\": \"∀ {C : Type u_1} {D : Type u_2} [inst : CategoryTheory.Category.{v_1, u_1} C]\\n  [inst_1 : CategoryTheory.Category.{v_2, u_2} D] (G : CategoryTheory.Functor C D) (A : Type w)\\n  [inst_2 : CategoryTheory.Category.{w', w} A] (J : CategoryTheory.GrothendieckTopology C)\\n  (K : CategoryTheory.GrothendieckT\", \"doc\": \"For a cocontinuous functor $ G : \\\\mathcal{C} \\\\to \\\\mathcal{D} $ between sites with Grothendieck topologies $ J $ and $ K $, the counit of the adjunction between the continuous and cocontinuous sheaf pu\"}\n  {\"name\": \"SheafOfModules.pushforwardPushforwardAdj_counit_app_val_app\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [inst_1 : CategoryTheory.Category.{v₂, u₂} D]\\n  {J : CategoryTheory.GrothendieckTopology C} {K : CategoryTheory.GrothendieckTopology D}\\n  {F : CategoryTheory.Functor C D} {G : CategoryTheory.Functor D C} {S : CategoryTheory.Sh\", \"doc\": \"For any sheaf $ M $ of modules over a ring sheaf $ R $, the counit of the adjunction between the pushforward functors $ F_* $ and $ G_* $ evaluated at $ M $, an object $ U $ in the site $ \\\\mathcal{C} \"}\n  {\"name\": \"LightCondMod.LocallyConstant.adjunction\", \"module\": \"Mathlib/Condensed/Discrete/Module\", \"type\": \"(R : Type u) → [inst : Ring R] → LightCondMod.LocallyConstant.functor R ⊣ LightCondensed.underlying (ModuleCat R)\", \"doc\": \"For any ring $ R $, there is an adjunction between the locally constant module functor and the underlying functor in the category of light condensed $ R $-modules. This adjunction is constructed using\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.restrictFunctorAdjCounitIso\", \"module\": \"Mathlib/AlgebraicGeometry/Modules/Sheaf\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} →\\n  (f : X ⟶ Y) →\\n    [inst : AlgebraicGeometry.IsOpenImmersion f] →\\n      (AlgebraicGeometry.Scheme.Modules.pushforward f).comp (AlgebraicGeometry.Scheme.Modules.restrictFunctor f) ≅\\n        CategoryTheory.Functor.id X.Modules\", \"doc\": \"For a morphism $ f : X \\to Y $ of schemes, the composition of the pushforward functor along $ f $ followed by the restriction functor induced by $ f $ is naturally isomorphic to the identity functor on\"}\n  {\"name\": \"SheafOfModules.pushforwardPushforwardAdj\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous\", \"type\": \"{C : Type u₁} →\\n  [inst : CategoryTheory.Category.{v₁, u₁} C] →\\n    {D : Type u₂} →\\n      [inst_1 : CategoryTheory.Category.{v₂, u₂} D] →\\n        {J : CategoryTheory.GrothendieckTopology C} →\\n          {K : CategoryTheory.GrothendieckTopology D} →\\n            {F : CategoryTheory.Functor C D} →\\n     \", \"doc\": \"Given categories $\\\\mathcal{C}$ and $\\\\mathcal{D}$ with Grothendieck topologies $J$ and $K$, and continuous functors $F : \\\\mathcal{C} \\\\to \\\\mathcal{D}$ and $G : \\\\mathcal{D} \\\\to \\\\mathcal{C}$ forming an ad\"}\n  {\"name\": \"CategoryTheory.Functor.sheafAdjunctionCocontinuous_unit_app_val\", \"module\": \"Mathlib/CategoryTheory/Sites/CoverLifting\", \"type\": \"∀ {C : Type u_1} {D : Type u_2} [inst : CategoryTheory.Category.{v_1, u_1} C]\\n  [inst_1 : CategoryTheory.Category.{v_2, u_2} D] (G : CategoryTheory.Functor C D) (A : Type w)\\n  [inst_2 : CategoryTheory.Category.{w', w} A] (J : CategoryTheory.GrothendieckTopology C)\\n  (K : CategoryTheory.GrothendieckT\", \"doc\": \"For a cocontinuous functor $ G : \\\\mathcal{C} \\\\to \\\\mathcal{D} $ between sites with Grothendieck topologies $ J $ and $ K $, the underlying presheaf of the unit of the adjunction between cocontinuous an\"}\n  {\"name\": \"CategoryTheory.Functor.sheafAdjunctionCocontinuous_homEquiv_apply_val\", \"module\": \"Mathlib/CategoryTheory/Sites/CoverLifting\", \"type\": \"∀ {C : Type u_1} {D : Type u_2} [inst : CategoryTheory.Category.{v_1, u_1} C]\\n  [inst_1 : CategoryTheory.Category.{v_2, u_2} D] (G : CategoryTheory.Functor C D) (A : Type w)\\n  [inst_2 : CategoryTheory.Category.{w', w} A] (J : CategoryTheory.GrothendieckTopology C)\\n  (K : CategoryTheory.GrothendieckT\", \"doc\": \"For a cocontinuous functor $ G : \\\\mathcal{C} \\\\to \\\\mathcal{D} $ between sites with Grothendieck topologies $ J $ and $ K $, the hom-set equivalence in the adjunction between the continuous and cocontin\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: The hits concern condensed free adjunctions, counits, and generic derived adjunctions; none constructs the ordinary etale dualizing object or proves its constructible finite-Tor bound."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Bounded constructible finite Tor etale dualizing complex is right adjoint of compact support with coefficient change counit",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"CategoryTheory.Adjunction.counit\", \"module\": \"Mathlib.CategoryTheory.Adjunction.Basic\", \"type\": \"{C : Type u₁} →\\n  [inst : CategoryTheory.Category.{v₁, u₁} C] →\\n    {D : Type u₂} →\\n      [inst_1 : CategoryTheory.Category.{v₂, u₂} D] →\\n        {F : CategoryTheory.Functor C D} →\\n          {G : CategoryTheory.Functor D C} → (F ⊣ G) → (G.comp F ⟶ CategoryTheory.Functor.id D)\", \"doc\": \"Given categories $\\\\mathcal{C}$ and $\\\\mathcal{D}$, and functors $F : \\\\mathcal{C} \\\\to \\\\mathcal{D}$ and $G : \\\\mathcal{D} \\\\to \\\\mathcal{C}$, the counit of an adjunction between $F$ and $G$ is a natural tra\"}\n  {\"name\": \"CategoryTheory.Adjunction.CoreUnitCounit.counit\", \"module\": \"Mathlib.CategoryTheory.Adjunction.Basic\", \"type\": \"{C : Type u₁} →\\n  [inst : CategoryTheory.Category.{v₁, u₁} C] →\\n    {D : Type u₂} →\\n      [inst_1 : CategoryTheory.Category.{v₂, u₂} D] →\\n        {F : CategoryTheory.Functor C D} →\\n          {G : CategoryTheory.Functor D C} →\\n            CategoryTheory.Adjunction.CoreUnitCounit F G → (G.comp F ⟶ Cat\", \"doc\": \"Given categories $\\\\mathcal{C}$ and $\\\\mathcal{D}$, and functors $F : \\\\mathcal{C} \\\\to \\\\mathcal{D}$ and $G : \\\\mathcal{D} \\\\to \\\\mathcal{C}$, the counit is a natural transformation from the composition $G \\\\\"}\n  {\"name\": \"CategoryTheory.Adjunction.derivedε\", \"module\": \"Mathlib.CategoryTheory.Functor.Derived.Adjunction\", \"type\": \": F' ⋙ G' ⟶ 𝟭 D₂\", \"doc\": \"The natural transformation $\\\\varepsilon': F' \\\\circ G' \\\\Rightarrow \\\\text{id}_{\\\\mathcal{D}_2}$ constructed as the right derived functor description, combining whiskered natural transformations $\\\\beta$, \"}\n  {\"name\": \"CategoryTheory.Adjunction.CoreHomEquivUnitCounit.counit\", \"module\": \"Mathlib.CategoryTheory.Adjunction.Basic\", \"type\": \"{C : Type u₁} →\\n  [inst : CategoryTheory.Category.{v₁, u₁} C] →\\n    {D : Type u₂} →\\n      [inst_1 : CategoryTheory.Category.{v₂, u₂} D] →\\n        {F : CategoryTheory.Functor C D} →\\n          {G : CategoryTheory.Functor D C} →\\n            CategoryTheory.Adjunction.CoreHomEquivUnitCounit F G → (G.comp\", \"doc\": \"The counit of an adjunction between functors $ F: \\\\mathcal{C} \\\\to \\\\mathcal{D} $ and $ G: \\\\mathcal{D} \\\\to \\\\mathcal{C} $, which is a natural transformation from the composition $ G \\\\circ F $ to the iden\"}\n  {\"name\": \"CategoryTheory.Adjunction.counitAsIsoOfIso\", \"module\": \"Mathlib.CategoryTheory.Monad.Adjunction\", \"type\": \"(adj : L ⊣ R) (j : R ⋙ L ≅ 𝟭 D) : R ⋙ L ≅ 𝟭 D\", \"doc\": \"Given categories $\\\\mathcal{C}$ and $\\\\mathcal{D}$, functors $L: \\\\mathcal{C} \\\\to \\\\mathcal{D}$ and $R: \\\\mathcal{D} \\\\to \\\\mathcal{C}$ forming an adjunction $L \\\\dashv R$, and a natural isomorphism $j: R \\\\ci\"}\n  {\"name\": \"CategoryTheory.Adjunction.derivedε.congr_simp\", \"module\": \"Mathlib.CategoryTheory.Functor.Derived.Adjunction\", \"type\": \"∀ {C₁ : Type u_1} {C₂ : Type u_2} {D₁ : Type u_3} {D₂ : Type u_4} [inst : CategoryTheory.Category.{v_1, u_1} C₁]\\n  [inst_1 : CategoryTheory.Category.{v_2, u_2} C₂] [inst_2 : CategoryTheory.Category.{v_3, u_3} D₁]\\n  [inst_3 : CategoryTheory.Category.{v_4, u_4} D₂] {G : CategoryTheory.Functor C₁ C₂} {\", \"doc\": \"The natural transformation $\\\\varepsilon': F' \\\\circ G' \\\\Rightarrow \\\\text{id}_{\\\\mathcal{D}_2}$ is constructed via the right derived functor description, combining whiskered natural transformations $\\\\bet\"}\n  {\"name\": \"CategoryTheory.instIsReflexivePairMapAppCounitObj\", \"module\": \"Mathlib.CategoryTheory.Limits.Shapes.Reflexive\", \"type\": \"(B : D) : IsReflexivePair (F.map (G.map (adj.counit.app B))) (adj.counit.app (F.obj (G.obj B)))\", \"doc\": \"Given an adjunction between functors $ F : \\\\mathcal{C} \\\\to \\\\mathcal{D} $ and $ G : \\\\mathcal{D} \\\\to \\\\mathcal{C} $, for any object $ B $ in $ \\\\mathcal{D} $, the pair of morphisms $ F(G(\\\\epsilon_B)) $ an\"}\n  {\"name\": \"ModuleCat.RestrictionCoextensionAdj.counit'\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.ChangeOfRings\", \"type\": \": coextendScalars f ⋙ restrictScalars f ⟶ 𝟭 (ModuleCat R)\", \"doc\": \"The counit of the adjunction between coextension of scalars and restriction of scalars functors, which provides a natural transformation from the composition $\\\\operatorname{Coext}_f \\\\circ \\\\operatornam\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern generic counits, derived t-structures, or unrelated exceptional/dual terminology; none states the ordinary etale geometric dualizing construction and all its coefficient and counit clauses."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Etale Verdier dual of the constant coefficient sheaf is bounded with finite tor dimension",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"DerivedCategory.instIsGEObjSingleFunctor\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/TStructure\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Abelian C]\\n  [inst_2 : HasDerivedCategory C] (X : C) (n : ℤ), ((DerivedCategory.singleFunctor C n).obj X).IsGE n\", \"doc\": \"For any object $X$ in an abelian category $\\\\mathcal{C}$ and integer $n$, the image of $X$ under the single-term complex functor concentrated in degree $n$ (mapping to the derived category) satisfies t\"}\n  {\"name\": \"DerivedCategory.IsGE\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/TStructure\", \"type\": \"{C : Type u} →\\n  [inst : CategoryTheory.Category.{v, u} C] →\\n    [inst_1 : CategoryTheory.Abelian C] → [inst_2 : HasDerivedCategory C] → DerivedCategory C → ℤ → Prop\", \"doc\": \"For an object $ X $ in the derived category of an abelian category $ \\\\mathcal{C} $ and integer $ n $, this proposition holds if $ X $ belongs to the family $ \\\\mathcal{G}_n $ of the T-structure defined\"}\n  {\"name\": \"DerivedCategory.instIsLEObjSingleFunctor\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/TStructure\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Abelian C]\\n  [inst_2 : HasDerivedCategory C] (X : C) (n : ℤ), ((DerivedCategory.singleFunctor C n).obj X).IsLE n\", \"doc\": \"An object $ X $ in the derived category belongs to the subcategory $ \\\\mathcal{L}_n $, which consists of objects isomorphic to cochain complexes strictly supported in degrees $ \\\\leq n $, as defined by \"}\n  {\"name\": \"DerivedCategory.TStructure.t\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/TStructure\", \"type\": \"{C : Type u} →\\n  [inst : CategoryTheory.Category.{v, u} C] →\\n    [inst_1 : CategoryTheory.Abelian C] →\\n      [inst_2 : HasDerivedCategory C] → CategoryTheory.Triangulated.TStructure (DerivedCategory C)\", \"doc\": \"The T-structure on the derived category of an abelian category is defined by two families of objects: $\\\\mathcal{L}_n$ consisting of objects isomorphic to cochain complexes strictly supported in degree\"}\n  {\"name\": \"DerivedCategory.IsLE\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/TStructure\", \"type\": \"{C : Type u} →\\n  [inst : CategoryTheory.Category.{v, u} C] →\\n    [inst_1 : CategoryTheory.Abelian C] → [inst_2 : HasDerivedCategory C] → DerivedCategory C → ℤ → Prop\", \"doc\": \"This proposition asserts that an object $ X $ in the derived category belongs to the subcategory $ \\\\mathcal{L}_n $, consisting of objects isomorphic to cochain complexes strictly supported in degrees \"}\n  {\"name\": \"CondensedMod.IsSolid\", \"module\": \"Mathlib/Condensed/Solid\", \"type\": \"(R : Type (u + 1)) → [inst : Ring R] → CondensedMod R → Prop\", \"doc\": \"A property of a condensed module $ M $ over a ring $ R $ indicating that $ M $ is solid, i.e., satisfies the defining conditions of solidity in the context of condensed mathematics.\"}\n  {\"name\": \"LightCondMod.LocallyConstant.instHasSheafifyLightProfiniteCoherentTopologyModuleCat\", \"module\": \"Mathlib/Condensed/Discrete/Module\", \"type\": \"∀ (R : Type u) [inst : Ring R],\\n  CategoryTheory.HasSheafify (CategoryTheory.coherentTopology LightProfinite) (ModuleCat R)\", \"doc\": \"For the coherent Grothendieck topology on the category of totally disconnected, second-countable compact Hausdorff spaces (light profinite spaces), there exists a sheafification functor from the categ\"}\n  {\"name\": \"DerivedCategory.isGE_Q_obj_iff\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/TStructure\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Abelian C]\\n  [inst_2 : HasDerivedCategory C] (K : CochainComplex C ℤ) (n : ℤ), (DerivedCategory.Q.obj K).IsGE n ↔ K.IsGE n\", \"doc\": \"For a cochain complex $ K $ in an abelian category and integer $ n $, the image of $ K $ under the localization functor $ Q $ to the derived category satisfies the cohomological support condition $ \\\\t\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern generic counits, derived t-structures, or unrelated exceptional/dual terminology; none states the ordinary etale geometric dualizing construction and all its coefficient and counit clauses."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-coef-finite-dualizing",
+  "date": "2026-10-22",
+  "group": "O4"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "blueprint": {
+  "from": {
+   "node": "lem-coef-finite-dualizing",
+   "place": "Proof paragraph 1: regular coefficient dual and construction of the displayed adjoint; paragraph 2: composition of ambient right adjoints (including its D+ counit normalization)",
+   "via": []
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-coef-dualizing-construction",
+  "worker": "stage1",
+  "summary": "Eight steps prove existence on ordinary unbounded small-etale categories, the finite-Tor constructibility of the dualizing object by regular-coefficient Verdier preservation, the uniquely defined coefficient counit mate, and both normalizations. All non-elementary inputs reuse existing nodes. The item statement is unchanged. No new nodes or Mathlib leaves.",
+  "blueprint": "lem-coef-finite-dualizing.proof.md paragraph 1 is realized by steps 1--5 (regular coefficient dual and adjoint map); paragraph 2 composition of right adjoints and the counit calculation are realized by steps 6--8. The downstream closed-immersion and purity arguments proving the mate invertible are not needed for this construction item.",
+  "tool_uses": [
+   {
+    "node": "thm-amb-etale-exceptional-adjoint",
+    "why": "step 2 takes only the existence of the ordinary etale right adjoint of compact support (unit sk-prop-sf-cbc); the item's statement is formed with it and no node of sk-prop-sf-biduality-general or its cited units supplies it"
+   },
+   {
+    "node": "lem-amb-unbounded-compact-support-comparisons",
+    "why": "steps 2 and 8 take compactification independence on unbounded categories and its agreement with the bounded-below comparisons (unit sk-prop-an); the item's route has no compact-support comparison node"
+   },
+   {
+    "node": "lem-fix-compact-support-coefficient-change",
+    "why": "step 5 takes invertibility of the compact-support coefficient comparison on bounded finite-Tor input (unit sk-prop-sf-trace-perfectness), exactly as the blueprint paragraph 1 cites it; the item's statement already names this map"
+   },
+   {
+    "node": "lem-amb-etale-compact-comparisons",
+    "why": "step 8 reads from it the hypotheses (separated finite type) under which the statement's bounded-below composition identification F_pF_i = F_pi is defined; the item's statement already names it"
+   }
+  ]
+ },
+ "tool_uses": [
+  "thm-amb-etale-exceptional-adjoint",
+  "lem-amb-unbounded-compact-support-comparisons",
+  "lem-fix-compact-support-coefficient-change"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q04-929e0a77a",
+  "group": "Q04",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q04-929e0a77a (reviewer sub-agent of L); spot-checked: I read the whole delivery: the item, its 8 steps, every cited statement, the main-20261015 lem-coef-finite-dualizing proof (paragraphs 1–2), the last sentence of the preservation-strata proof, Stacks tags 01T6/0F7H-J/08J7/0037/001P/0DV0, and O4's retained old steps 1–3. Every old argument is carried. The item is live-unsplit, so the delivery is not superseded. No SGA citation and no cycle: neither the item nor its parent is reached from any dependency. Each step holds. Step 3: A_Y[0] is K-flat with Tor amplitude [0,0]. Step 4: preservation applies at K=A_Y, and evaluation at 1 gives RHom(A_Y,ω)=ω. Step 5: lem-fix makes c invertible at ω_A, and the natural-bijection adjunction gives a unique u with the counit identity, with no flatness of B over A assumed. Step 6: I re-derived the Yoneda argument in D^+. Step 7: it is a correct instance of the composite counit. Step 8: the m/n indexing is checked. Edge cases checked: empty Y, Y=s, m=n, h=m, singular Y, ramified E, non-flat quotients. I repaired three faults. FIX 1 (C1/E1): step 1 used valued-dvr-finite-quotients, which needs a nonarchimedean absolute value, without citing it; I added lem-weil-l-adic-extension-absolute-value. FIX 2 (E1): step 8 applied lem-sf-compact-coefficient-composition without checking that P is a separated finite-type k-scheme and i is separated of finite type; these follow from lem-amb-etale-compact-comparisons (already a stmt_dep), which I now cite. FIX 3 (C8): four off-route tools were undeclared: lem-amb-unbounded-compact-support-comparisons, thm-amb-etale-exceptional-adjoint, lem-fix-compact-support-coefficient-change and lem-amb-etale-compact-comparisons. I added split_report.tool_uses and accept all four. The statement is unchanged and proof_deps are recomputed. The corrected item is in fixes/dag/nodes/sec-six-functors/.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.SixFunctors.CoefDualizingConstruction",
+  "declaration": "AlgebraicGeometry.Etale.coefDualizingConstruction",
+  "declarations": [
+   "AlgebraicGeometry.Etale.coefDualizingConstruction",
+   "AlgebraicGeometry.Etale.coefDualizingConstruction_mate",
+   "AlgebraicGeometry.Etale.coefDualizingConstruction_representing",
+   "AlgebraicGeometry.Etale.coefDualizingConstruction_factorization"
+  ],
+  "file": "lean/Sheaf/SixFunctors/CoefDualizingConstruction.lean",
+  "statement": "theorem coefDualizingConstruction (D : WeilConjectures.FiniteFieldDatum.{u}) (l : ℕ) [Fact l.Prime] (_hl : l ≠ D.p) (E : Type u) [Field E] [Algebra (Padic l) E] [FiniteDimensional (Padic l) E] (Y : Scheme.{u}) [Y.Over (Spec (.of D.k))] [IsSeparated (Y ↘ Spec (.of D.k))] [LocallyOfFiniteType (Y ↘ Spec (.of D.k))] [QuasiCompact (Y ↘ Spec (.of D.k))] (n : ℕ+) : IsNoetherian Y ∧ (rightDerivedLowerShriek (ModuleCat.{u + 1} (ULift.{u + 1} (Padic.coefficientExtensionRing l E n))) (Y ↘ Spec (.of D.k))).IsLeftAdjoint ∧ DerivedCategory.isBoundedConstructible (ULift.{u + 1} (Padic.coefficientExtensionRing l E n)) Y (dualizingComplex (ModuleCat.{u + 1} (ULift.{u + 1} (Padic.coefficientExtensionRing l E n))) (Y ↘ Spec (.of D.k))) ∧ ∃ a b : ℤ, a ≤ b ∧ DerivedCategory.hasTorAmplitudeIn (ULift.{u + 1} (Padic.coefficientExtensionRing l E n)) Y a b (dualizingComplex (ModuleCat.{u + 1} (ULift.{u + 1} (Padic.coefficientExtensionRing l E n))) (Y ↘ Spec (.of D.k)))",
+  "branch": "sheaf-dag",
+  "by": "Q67",
+  "date": "2026-10-22",
+  "existing": false,
+  "note": "Four statements give the positive-level construction, unique counit mate, bounded-below representing-object normalization, and composite counit/coefficient equations. Canonical ordinary-etale maps and their unit normalization are reused from the added landed dependencies; no new definition or statement correction. The compactification of the factorization map is supplied explicitly by the existing Nagata construction, without a compactifiability hypothesis. Repair of return 7ac019698df8: cite the landed definition owners def-sf-etale-support-compositor and def-weil-pbc-witness-compatibility; coefficient arrows use compactSupportMap directly, without compactScalarChosenMap or its theorem node."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-d2faa8541",
+  "group": "Q67",
+  "result": "pass",
+  "note": "Re-delivery of 7ac019698df8 (H2 RETURN) applies exactly the three named corrections. (1) lem-amb-unbounded-compact-support-comparisons replaced by live existing:true def-sf-etale-support-compositor, which owns unboundedEtaleLowerShriekCompIso; record signature matches UnboundedEtaleCompactSupportComparisons.lean:194. (2) compactScalarChosenMap replaced by ExceptionalCoefficients.compactSupportMap at HasCompactification.compactification, the same map by definition (compactScalarMap.app := compactSupportMap); lem-pur-etale-compact-scalar-coherence and its import dropped; Nagata proof for i still explicit. (3) lem-pur-derived-change-of-rings replaced by def-weil-pbc-witness-compatibility, owner of pbcFixedScalarExtension, which the scalarExtension abbrev unfolds to; the cochain-model plain import is owned by a def node. All 5 added stmt_deps are landed def nodes that are really used; no dropped theorem is still used in the statement. Item node differs from live only in stmt_deps/lean; lean.statement is verbatim in the file; no defs, all sorry; docstrings carry source and blueprint; small-étale only; no universe equation imposed; edge cases (empty Y, m=n, h=1, ramified E, non-flat A→B) are covered. No compile run since nothing changed; worker reports a clean scompile. Advisories: the Second reading is the worker's own reread; stage 3 must cite the compactSupportMap vs compactSupportCoefficientComparisonPlus identification on D+; EtaleDerivedScalarTensor has no owning node but scalarExtension abbreviates an owned def."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Y2",
+  "result": "pass",
+  "landing": "20261025T101925-L-3752747",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

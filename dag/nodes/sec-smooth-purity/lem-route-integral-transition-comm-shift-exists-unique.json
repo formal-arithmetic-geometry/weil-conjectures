@@ -1,0 +1,182 @@
+{
+ "id": "lem-route-integral-transition-comm-shift-exists-unique",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "via": [
+    "lem-general-algebraically-closed-coefficient-stages"
+   ],
+   "place": "Retained algebraically closed coefficient construction, exact scalar-transition clause of def-weil-algebraically-closed-coefficients: integral comparison normalized by ordinary derived scalar extension, as specified by integralTransitionCommShift_existsUnique in SfAlgebraicallyClosedCoefficients.lean:108-147. Current blueprint sk-thm-sfb-qlbar-two-colimit clauses (2) and (4) give the finite coefficient transition context; the ancestry through the module-created parent is mechanically null."
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "The integral transition inherits the ordinary tensor shift through its canonical quotient-completion comparison, not through an arbitrary exact-functo",
+ "statement": "Fix a finite-field datum $D$ with characteristic $p$ [def-weil-finite-field-fiber], a prime $\\ell\\ne p$, an algebraic closure $\\Omega$ of $\\mathbf Q_\\ell$ [def-weil-l-adic-numbers, def-weil-algebraic-closure], and any scheme $Y$. Let $E\\subseteq L$ be finite coefficient subfields of $\\Omega$ [def-weil-finite-subextension-directed-set], represented by the specified coefficient models and inclusion $\\iota:E\\to L$. Write $\\mathcal C_E=D^b_c(Y,\\mathcal O_E)$ and $\\mathcal C_L=D^b_c(Y,\\mathcal O_L)$ for the intrinsic derived-complete full subcategories [def-weil-derived-complete-integral-detailed], with their inherited integer shifts [lem-weil-integral-constructible-triangulated] and inclusions $I_E,I_L$. Let $F:\\mathcal C_E\\to\\mathcal C_L$ be the restriction of completed integral scalar extension [def-weil-integral-scalar-extension, lem-weil-integral-scalar-extension-constructible], namely sfConstructibleIntegralScalarExtension with the parameters $D.p,\\ell,\\ell\\ne D.p,E,L,\\iota,Y$. Let $G:D(Y,\\mathcal O_E)\\to D(Y,\\mathcal O_L)$ be ordinary derived extension of the completed coefficient rings, namely integralOrdinaryDerivedScalar, and put $H=G\\circ I_E$. Give $H$ its specified ordinary derived integer-shift comparison $h_{n,K}:H(K[n])\\xrightarrow{\\sim}H(K)[n]$, obtained by composing the inherited inclusion comparison with the termwise-derived tensor comparison [lem-weil-pbc-exact-functor-derived-factorization, lem-weil-finite-free-completed-scalar-comparison]. Let\n$$\\chi:H\\xrightarrow{\\sim}I_L\\circ F$$\nbe the fixed ordinary-to-completed natural isomorphism sfIntegralOrdinaryComparison [def-zl-normalized-integral-scalar-comparison], using the canonical identification of a restricted functor followed by its inclusion with the ambient functor. Write $\\beta_{n,Z}:I_L(Z[n])\\xrightarrow{\\sim}I_L(Z)[n]$ for the inherited inclusion comparison. There is exactly one coherent integer-shift structure on $F$, that is, a family of natural isomorphisms\n$$c_{n,K}:F(K[n])\\xrightarrow{\\sim}F(K)[n]\\qquad(n\\in\\mathbf Z,\\ K\\in\\mathcal C_E)$$\nsatisfying the zero and addition equations, such that\n$$\n I_L(c_{n,K});\\beta_{n,F(K)}\n =\\chi_{K[n]}^{-1};h_{n,K};\\chi_K[n]\n \\quad\\text{for every }n,K.\n$$\nHere $u;v$ denotes composition first $u$, then $v$. The equality is in $D(Y,\\mathcal O_L)$ after the canonical inclusion identifications; equivalently it is the heterogeneous equality in the recorded Lean declaration. No structure map from $Y$ to a finite field is assumed.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sfb-qlbar-two-colimit/_section.md",
+  "place": "lem-general-algebraically-closed-coefficient-stages: the Lean of this node (its declaration uses) reaches WeilConjectures.SfAlgebraicallyClosedCoefficients.integralTransitionCommShift_existsUnique, a sorry on the sorry route of batch5 with no node; Lean: SHEAF file lean/Sheaf/Paper/SfAlgebraicallyClosedCoefficients.lean, declaration WeilConjectures.SfAlgebraicallyClosedCoefficients.integralTransitionCommShift_existsUnique (module Sheaf.Paper.SfAlgebraicallyClosedCoefficients, lines 108-147, proof `sorry`)"
+ },
+ "stmt_deps": [
+  "def-weil-finite-field-fiber",
+  "def-weil-l-adic-numbers",
+  "def-weil-algebraic-closure",
+  "def-weil-finite-subextension-directed-set",
+  "def-weil-derived-complete-integral-detailed",
+  "lem-weil-integral-constructible-triangulated",
+  "def-weil-integral-scalar-extension",
+  "lem-weil-integral-scalar-extension-constructible",
+  "lem-weil-pbc-exact-functor-derived-factorization",
+  "lem-weil-finite-free-completed-scalar-comparison",
+  "def-zl-normalized-integral-scalar-comparison"
+ ],
+ "proof": [
+  {
+   "text": "Apply the fully faithful functor shift-lifting construction Functor.CommShift.ofComp to the inverse of sfIntegralOrdinaryComparison, with target inclusion (sfIntegralConstructible l L Y).ι and ordinary derived tensor comparison. Its component formula is the displayed HEq after composing with the inclusion shift. For uniqueness, compare each integer-shift natural isomorphism component after applying the faithful inclusion, cancel its invertible shift component, and use the two normalization equations. Extensionality of natural transformations, isomorphisms and CommShift structures finishes.",
+   "uses": [
+    "lem-weil-scalar-extension-composition",
+    "lem-weil-integral-constructible-triangulated"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-scalar-extension-composition",
+  "lem-weil-integral-constructible-triangulated",
+  "lem-route-transition-exact"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sfb-qlbar-two-colimit/_section.md",
+  "place": "D6: fully faithful lift of the ordinary tensor shift, followed by componentwise uniqueness from the normalization equation; Mathlib Functor.CommShift.ofComp."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "grep -rlw 'integralTransitionCommShift_existsUnique' lean/.lake/packages/mathlib/Mathlib/",
+   "results": "none",
+   "date": "2026-10-27",
+   "verdict": "no match",
+   "note": "name grep by tools/route_nodes.py only; the stage-1 worker adds LeanSearch / Loogle / LeanFinder searches"
+  },
+  {
+   "tool": "grep",
+   "query": "ofComp|map_iso_hom_app|ofComp_compatibility",
+   "results": "Hits: 527, 531, 539, 558, 563",
+   "date": "2026-10-27",
+   "verdict": "no match for the concrete normalized integral transition; generic categorical tool found",
+   "subdirectory": "CategoryTheory/Shift/CommShift.lean"
+  },
+  {
+   "tool": "loogle",
+   "query": "Functor.CommShift.ofComp",
+   "results": "No hits. loogle: unknown identifier 'Functor.CommShift.ofComp'",
+   "date": "2026-10-27",
+   "verdict": "no match for the concrete normalized integral transition; generic categorical tool found"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Lift a shift commutation structure through a fully faithful functor with a prescribed composite comparison",
+   "results": "Hits: CategoryTheory.Functor.CommShift.ofComp.congr_simp, CategoryTheory.Functor.map_shiftFunctorComm_hom_app, CategoryTheory.Functor.CommShift.ofHasShiftOfFullyFaithful, CategoryTheory.Functor.CommShift.ofComp, CategoryTheory.Functor.map_shiftFunctorComm, CategoryTheory.Quotient.LiftCommShift.iso, CategoryTheory.Functor.CommShift₂.commShift_map, CategoryTheory.Functor.shiftFunctorIso_ofHasShiftOfFullyFaithful",
+   "date": "2026-10-27",
+   "verdict": "no match for the concrete normalized integral transition; generic categorical tool found"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A functor inherits a coherent integer shift comparison from its composite with a fully faithful shift compatible functor and a natural isomorphism",
+   "results": "Hits: CategoryTheory.Functor.CommShift.ofComp_compatibility, CategoryTheory.Functor.CommShift.ofComp, CategoryTheory.Functor.CommShift.ofHasShiftOfFullyFaithful, CategoryTheory.Functor.shiftFunctorIso_ofHasShiftOfFullyFaithful, CategoryTheory.shiftFunctor_of_induced, CategoryTheory.Functor.CommShift.OfComp.iso, CategoryTheory.Functor.FullyFaithful.hasShift, CategoryTheory.Functor.CommShift.OfComp.map_iso_hom_app",
+   "date": "2026-10-27",
+   "verdict": "no match for the concrete normalized integral transition; generic categorical tool found"
+  },
+  {
+   "tool": "grep",
+   "query": "noncomputable def ofComp|lemma map_iso_hom_app|lemma ofComp_compatibility",
+   "results": "Hits: Mathlib/CategoryTheory/Shift/CommShift.lean, Mathlib/CategoryTheory/Shift/CommShift.lean, Mathlib/CategoryTheory/Shift/CommShift.lean",
+   "date": "2026-10-27",
+   "verdict": "no match for the concrete normalized integral transition; generic categorical tool found",
+   "subdirectory": "CategoryTheory/Shift"
+  },
+  {
+   "tool": "grep",
+   "query": "integralTransitionCommShift|sfIntegralOrdinaryComparison",
+   "results": "No hits",
+   "date": "2026-10-27",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.CommShift",
+   "results": "Hits: CategoryTheory.Functor.CommShift.id, CategoryTheory.Functor.CommShift, CategoryTheory.Functor.CommShift.ofIso, CategoryTheory.NatTrans.CommShift.id, CategoryTheory.NatTrans.CommShift.isoRefl_hom, CategoryTheory.NatTrans.CommShift, CategoryTheory.Functor.CommShift.comp, CategoryTheory.NatTrans.CommShiftCore",
+   "date": "2026-10-27",
+   "verdict": "no match for the concrete normalized integral transition; generic categorical tool found"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Normalized integral coefficient scalar extension commuting with integer shifts through the ordinary to completed comparison on a full constructible subcategory",
+   "results": "Hits: CategoryTheory.ShiftedHom.comp_smul, AlgebraicGeometry.Scheme.Hom.preservesLocalization_normalizationDiagramMap, CategoryTheory.ShiftedHom.smul_comp, AlgebraicGeometry.Scheme.Hom.normalizationDiagram, CategoryTheory.Functor.mapExactFunctor_smul, CategoryTheory.ShiftedHom.map_smul, AlgebraicGeometry.Scheme.Hom.toNormalization_app_preimage, AlgebraicGeometry.Scheme.Hom.normalizationDesc_comp",
+   "date": "2026-10-27",
+   "verdict": "no match for the concrete normalized integral transition; generic categorical tool found"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "maintainer",
+  "item": "lem-general-algebraically-closed-coefficient-stages",
+  "date": "2026-10-27",
+  "tool": "tools/route_nodes.py",
+  "why": "PROVISIONAL: sorried declaration on the sorry route (local/sorry-route.json) with no DAG node, recorded automatically after the route recompute (the human, 2026-10-23: every proof-related upstream sorry gets a node, and a node without a written proof goes to stage 1). The statement is only the Lean signature and docstring: the stage-1 worker writes it in words with [node] citations and stmt_deps, does the Mathlib searches (LeanSearch, Loogle or LeanFinder, local grep), fills blueprint.same_as, and splits it"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-def-sf-operations",
+ "lean": {
+  "existing": true,
+  "module": "Sheaf.Paper.SfAlgebraicallyClosedCoefficients",
+  "file": "lean/Sheaf/Paper/SfAlgebraicallyClosedCoefficients.lean",
+  "declaration": "WeilConjectures.SfAlgebraicallyClosedCoefficients.integralTransitionCommShift_existsUnique",
+  "declarations": [
+   "WeilConjectures.SfAlgebraicallyClosedCoefficients.integralTransitionCommShift_existsUnique"
+  ],
+  "statement": "theorem integralTransitionCommShift_existsUnique (E L : Index l Ω) (h : E ≤ L) :\n    ∃! c : (sfConstructibleIntegralScalarExtension D.p l hl\n        (Coefficient.{u} l Ω E) (Coefficient.{u} l Ω L)\n        (coefficientInclusion l Ω E L h) Y).CommShift ℤ,\n      (fun [commInst : (sfConstructibleIntegralScalarExtension D.p l hl\n          (Coefficient.{u} l Ω E) (Coefficient.{u} l Ω L)\n          (coefficientInclusion l Ω E L h) Y).CommShift ℤ] ↦\n        ∀ (n : ℤ) (K : sfIntegralConstructibleCategory l (Coefficient.{u} l Ω E) Y),\n          HEq ((((sfConstructibleIntegralScalarExtension D.p l hl\n            (Coefficient.{u} l Ω E) (Coefficient.{u} l Ω L)\n            (coefficientInclusion l Ω E L h) Y).commShiftIso n).hom.app K).hom ≫\n              ((sfIntegralConstructible l (Coefficient.{u} l Ω L) Y).ι.commShiftIso n).hom.app\n                ((sfConstructibleIntegralScalarExtension D.p l hl\n                  (Coefficient.{u} l Ω E) (Coefficient.{u} l Ω L)\n                  (coefficientInclusion l Ω E L h) Y).obj K))\n            ((sfIntegralOrdinaryComparison l (Coefficient.{u} l Ω E)\n                (Coefficient.{u} l Ω L) (coefficientInclusion l Ω E L h) Y).inv.app\n                  ((shiftFunctor (sfIntegralConstructibleCategory l\n                    (Coefficient.{u} l Ω E) Y) n).obj K) ≫\n              (Functor.commShiftIso\n                ((sfIntegralConstructible l (Coefficient.{u} l Ω E) Y).ι ⋙\n                  integralOrdinaryDerivedScalar l (Coefficient.{u} l Ω E)\n                    (Coefficient.{u} l Ω L) (coefficientInclusion l Ω E L h) Y) n).hom.app K ≫\n              (shiftFunctor (DerivedCategory (scalarReductionSource.{u, u} l\n                (Coefficient.{u} l Ω L) Y)) n).map\n                  ((sfIntegralOrdinaryComparison l (Coefficient.{u} l Ω E)\n                    (Coefficient.{u} l Ω L) (coefficientInclusion l Ω E L h) Y).hom.app K)))\n        (commInst := c) := by\n  sorry",
+  "by": "maintainer",
+  "date": "2026-10-27",
+  "note": "SHEAF declaration attached as it stands, proof still `sorry`; recorded by tools/route_nodes.py"
+ },
+ "split_report": {
+  "date": "2026-10-27",
+  "item": "lem-route-integral-transition-comm-shift-exists-unique",
+  "worker": "stage1",
+  "summary": "Replace the provisional truncated signature prose by the complete normalized existence-and-uniqueness statement with all parameters and the ambient component equation. Retain the recorded Lean signature. Apply the existing intrinsic subcategory, scalar preservation, finite-free ordinary scalar and normalized comparison statements; add only one generic Mathlib leaf for fully faithful composite shift lifting. Prove uniqueness explicitly by cancellation and component extensionality. No Lean files changed or compiled.",
+  "blueprint": "Realizes the retained exact scalar-transition clause attributed to def-weil-algebraically-closed-coefficients by the source docstring; current latest sk-thm-sfb-qlbar-two-colimit clauses (2) and (4) supply its coefficient diagram context. No unit route is replaced. The ancestor command reports null because the parent was created for a module, so that computed ancestry is retained.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "NT-cc-NB-2b44aee8f",
+  "group": "NB",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NB-2b44aee8f (reviewer sub-agent of L); spot-checked: Read the item, the new leaf, every cited node statement, the Lean source and the Mathlib source in full. Item: integralTransitionCommShift_existsUnique (SfAlgebraicallyClosedCoefficients.lean:97-147). Its words match the Lean: D.p, prime l != p, Omega, any Y, E<=L Index. chi=sfIntegralOrdinaryComparison is an iso from iota_E then integralOrdinaryDerivedScalar to iota_E then integralScalarExtension (SfScalarExtensionComposition.lean:729-806). F is the lift (Intrinsic:99-115), so F then iota_L is definitionally the ambient functor and the HEq is a real equation. Steps: (1) full subcategories, inherited shifts and the restriction come from the cited statements, and lambda has identity components. (2) Only the finite-free clause is used: exactness, then the exact-derived factorization leaf, whose clause (2) pins h. (3) The new leaf with e=chi^-1 gives I_L(c)=chi^-1_{K[n]};h;chi_K[n];beta^-1. I checked this term by term against Mathlib OfComp.map_iso_hom_app (CommShift.lean:539, ofComp 563, coherence 565-578); postcomposing with beta gives the Lean equation. (4) Uniqueness by cancelling beta, faithfulness of the inclusion and CommShift extensionality; correctly marked elementary. New node lem-pur-fully-faithful-composite-shift is a correct one-line specialization of Functor.CommShift.ofComp (triangulated hypothesis only narrows it). It is self-contained, its three kinds of search really ran, it is generic and does not restate a clause of the item. rg -L found no duplicate: def-fd-integral-scalar-shift-structures and lem-pod-completed-scalar-extension-texact are different setups. Route is in unit sk-def-sf-operations; the other uses are definitions or Mathlib leaves, so no tool_uses and no SGA. blueprint.from.node is null as the tool computes it (parent created for a Lean module). Edge cases checked: Y empty, E=L (chi is not the identity), negative n, n=0. Advisory only: the item title is truncated ('exact-functo'). No fixes."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D2",
+  "result": "pass",
+  "landing": "20261027T135059-L-3664847",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)",
+  "sorry_before": [
+   "WeilConjectures.SfAlgebraicallyClosedCoefficients.shift_existsUnique",
+   "WeilConjectures.SfAlgebraicallyClosedCoefficients.stageSystem_existsUnique",
+   "WeilConjectures.SfAlgebraicallyClosedCoefficients.transitionIso_commShift"
+  ],
+  "sorry_after": [
+   "WeilConjectures.SfAlgebraicallyClosedCoefficients.shift_existsUnique",
+   "WeilConjectures.SfAlgebraicallyClosedCoefficients.transitionIso_commShift"
+  ]
+ }
+}

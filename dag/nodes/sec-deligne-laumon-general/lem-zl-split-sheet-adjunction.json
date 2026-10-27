@@ -1,0 +1,306 @@
+{
+ "id": "lem-zl-split-sheet-adjunction",
+ "kind": "statement",
+ "title": "Split geometric projection: derived adjunction and diagonal unit",
+ "statement": "Fix $q=p^a$, $k_0=\\mathbf F_q$, $k=\\overline{\\mathbf F}_q$, a prime $\\ell\\ne p$, a finite extension $E/\\mathbf Q_\\ell$ in $\\Qlb=\\overline{\\mathbf Q}_\\ell$, and $\\Lambda\\in\\{E,\\Qlb\\}$. Use the rationalized and common-stage constructible categories and hearts [def-weil-constructible-heart], and the derived inverse and direct images [def-weil-derived-pullback-tensor-hom, def-weil-derived-direct-image]. Let $X$ be a separated finite-type $k$-scheme and $h:Y\\to X$ a morphism with a specified finite nonempty clopen decomposition $Y=\\coprod_{i\\in I}Y_i$ and isomorphisms $s_i:X\\xrightarrow{\\sim}Y_i$ satisfying $h s_i=\\operatorname{id}_X$.\nUnder the coefficient-compatible clopen equivalence [lem-pur-finite-clopen-derived-decomposition], the actual derived adjunction $Lh^*\\dashv Rh_*$ of [fix-prop-adjunctions] identifies with the diagonal/product adjunction:\n$$Lh^*K\\longleftrightarrow(K)_{i\\in I},\\qquad Rh_*H\\simeq\\prod_{i\\in I}s_i^*(H|_{Y_i}).$$\nThese are identifications in the derived categories, natural in $K,H$ and compatible with finite coefficient extension. On constructible hearts the finite product is the biproduct. The Hom bijection sends a tuple $(u_i:K\\to s_i^*(H|_{Y_i}))_i$ to the map to the product with components $u_i$; the unit on $K$ is the diagonal and the counit on each sheet is the corresponding projection.\nIn particular, for $M$ in the heart there is a canonical identification $h_*h^*M\\simeq\\bigoplus_{i\\in I}M$. The morphism $T_M:h_*h^*M\\to M$ whose restriction to each summand is $\\operatorname{id}_M$ has geometric-stalk map $(v_i)_i\\mapsto\\sum_i v_i$, and $T_M\\eta_M=|I|\\operatorname{id}_M$. These assertions hold also for $X=\\varnothing$.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-general/sk-i-dl-general-real/thm-zl-real-mixed-by-curves.proof.md",
+  "place": "Paragraph 5, sentences beginning “Etale-locally”: old mixed-descent Step 4 and the diagonal/sum computation of Step 6; derived clopen comparison and prescribed adjunction, not an unspecified stalk identification."
+ },
+ "stmt_deps": [
+  "def-weil-constructible-heart",
+  "def-weil-derived-pullback-tensor-hom",
+  "def-weil-derived-direct-image",
+  "lem-pur-finite-clopen-derived-decomposition",
+  "fix-prop-adjunctions"
+ ],
+ "proof": [
+  {
+   "text": "Write $j_i:Y_i\\hookrightarrow Y$ and $a_i=j_i s_i:X\\to Y$, so $h a_i=\\mathrm{id}_X$. For an affine open $U=\\operatorname{Spec}A\\subset X$, $h^{-1}U=\\coprod_iU=\\operatorname{Spec}(\\prod_i A)$. This algebra is a finite free $A$-module, generated as an algebra by its finitely many coordinate idempotents. Thus $h$ is finite and finite type. In $Y\\times_XY=\\coprod_{i,j}X$, its diagonal is the identity on diagonal pairs and empty on off-diagonal pairs, hence is closed. Thus $h$ is separated. Also $Y$ is finite type over $k$ as a finite union of copies of $X$. Its absolute diagonal is the closed diagonal of $X$ on diagonal pairs in $\\coprod_{i,j}(X\\times_kX)$, and empty otherwise, so $Y$ is separated over $k$. The adjunction and clopen-comparison hypotheses hold, also for empty $X$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-general/sk-i-dl-general-real/thm-zl-real-mixed-by-curves.proof.md",
+    "place": "Paragraph 5: split finite etale projection; affine verification of the hypotheses"
+   }
+  },
+  {
+   "text": "Put $\\Phi H=(Ls_i^*Lj_i^*H)_i$. On integral constructible objects open restriction to $Y_i$ is naturally isomorphic to $Lj_i^*$ [lem-pur-open-completed-restriction-identification], and $Ls_i^*\\cong s_i^{-1}$ [lem-weil-isomorphism-derived-pullback], an exact equivalence [lem-weil-proetale-isomorphism-inverse-image]. So at each finite coefficient field $\\Phi$ is isomorphic to the equivalence of [lem-pur-finite-clopen-derived-decomposition] followed by these sheet equivalences, hence an equivalence. At $\\Qlb$, Hom sets are colimits over common stages; $\\Phi$ gives stagewise bijections compatible with stage transitions, as the comparisons of [lem-pur-integral-operations-scalar-extension] are natural and tower-compatible; so $\\Phi$ is an equivalence. These isomorphisms serve only this equivalence property. Its cohomology is componentwise. At finite coefficients, [lem-weil-pbc-proetale-derived-pullback-composition] identifies $La_i^*Lh^*$ with $L(h a_i)^*$; at integral coefficients this is [lem-pod-integral-pullback-composition], applied also to $s_i,j_i$. For the identity morphism, identify this last functor with the identity using the inverse of the SPECIFIED comparison $\\kappa^{\\mathrm{id}}$, invertible on complete objects by [lem-weil-isomorphism-derived-pullback-comparison-normalization]. This chooses the normalized comparison, rather than an arbitrary isomorphism $L\\mathrm{id}^*\\cong\\mathrm{id}$. This gives a natural comparison $\\alpha:\\Phi Lh^*\\xrightarrow{\\sim}\\Delta$, where $\\Delta K=(K)_i$. Rationalize these integral comparisons on Hom groups, and use representatives at a common finite field for $\\Qlb$, exactly as in [def-weil-derived-pullback-tensor-hom]. Coefficient coherence of these specified comparisons is checked in step 6.",
+   "uses": [
+    "lem-pur-finite-clopen-derived-decomposition",
+    "lem-weil-pbc-proetale-derived-pullback-composition",
+    "lem-pod-integral-pullback-composition",
+    "lem-weil-isomorphism-derived-pullback",
+    "def-weil-derived-pullback-tensor-hom",
+    "lem-weil-proetale-isomorphism-inverse-image",
+    "lem-weil-isomorphism-derived-pullback-comparison-normalization",
+    "lem-pur-open-completed-restriction-identification",
+    "lem-pur-integral-operations-scalar-extension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0D6D, lemma-derived-pullback-composition; integral extension via Tag 099N, proetale-lemma-pushforward-Noetherian-case (2),(5)"
+   }
+  },
+  {
+   "text": "Put $H_i=(\\Phi H)_i$ and $R_H=Rh_*H$. Full faithfulness of $\\Phi$, $\\alpha$, and the actual Hom bijection of [fix-prop-adjunctions] give natural bijections\n$$b_{K,H}:\\prod_i\\operatorname{Hom}(K,H_i)\\xrightarrow{\\sim}\\operatorname{Hom}(K,R_H).$$\nExplicitly, regard $(u_i)$ as $\\Delta K\\to\\Phi H$, precompose with $\\alpha_K$, lift through the fully faithful $\\Phi$, and take its actual $h$-adjunct. Define $p_i:R_H\\to H_i$ by $(p_i)_i=b_{R_H,H}^{-1}(\\mathrm{id}_{R_H})$. Naturality in $K$ gives $p_i b_{K,H}(u)=u_i$. Hence $(R_H,(p_i))$ is a product cone: existence of its map from $K$ is $b_{K,H}(u)$ and uniqueness is injectivity of $b$. This constructs the derived product without an assumption about products in a heart or any passage through stalks. Naturality in $H$ follows from naturality of $b$. The comparison with any chosen product is the unique isomorphism preserving every projection, since the two maps supplied by the product properties compose to identities.",
+   "uses": [
+    "lem-pur-finite-clopen-derived-decomposition",
+    "fix-prop-adjunctions"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Tag 0037, definition-adjoint and following discussion; explicit product universal-property calculation"
+   }
+  },
+  {
+   "text": "The actual unit is the adjunct of $\\mathrm{id}_{Lh^*K}$. Transporting the latter by $\\alpha$ gives $(\\mathrm{id}_K)_i$, so $p_i\\eta_K=\\mathrm{id}_K$ for every $i$: the unit is the diagonal. The actual counit at $H$ is the inverse adjunct of $\\mathrm{id}_{R_H}$. By the definition of $p_i$ in step 3 its $i$-th component is $p_i$. Thus the comparison identifies the prescribed adjunction, including its Hom bijection, unit and counit, rather than only its two functors.",
+   "uses": [
+    "fix-prop-adjunctions"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Tag 0037, definition-adjoint: unit and counit as the identity transposes"
+   }
+  },
+  {
+   "text": "Finite products here are biproducts. In the additive derived category [def-weil-abstract-derived-category], define $\\iota_i:H_i\\to P=\\prod_jH_j$ by $p_j\\iota_i=\\delta_{ji}\\mathrm{id}$ (zero when $j\\ne i$). Projectionwise verification gives $\\sum_i\\iota_i p_i=\\mathrm{id}_P$. Therefore $\\sum_i f_i p_i:P\\to N$ is the unique map whose composites with the $\\iota_i$ are prescribed maps $f_i:H_i\\to N$. This proves the coproduct property. If the $H_i$ lie in the standard constructible heart [def-weil-constructible-heart], their finite biproduct lies there: its cohomology outside degree zero is the finite sum of zero cohomology objects. Thus the product comparison restricts to the hearts. In particular $h_*h^*M=\\bigoplus_iM$ with the diagonal unit of step 4.",
+   "uses": [
+    "def-weil-abstract-derived-category",
+    "def-weil-constructible-heart"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Tag 0037 and finite additive product calculation; standard cohomology computed on finite direct sums of complexes"
+   }
+  },
+  {
+   "text": "The comparison $\\alpha$ uses the specified integral composition comparisons and the identity-isomorphism pullback comparison, not independent choices at each coefficient field. Their compatibility with $E\\subset L$ is [lem-pod-pullback-identities-scalar-extension], clause 1, and [lem-weil-isomorphism-comparison-scalar-extension] applied to the identity isomorphism. The functor $\\Phi=(Ls_i^*Lj_i^*)_i$ commutes with scalar extension through the natural comparisons $\\alpha^{j_i},\\alpha^{s_i}$ of [lem-pur-integral-operations-scalar-extension]; by naturality, lifting a morphism through the fully faithful $\\Phi$ commutes with scalar extension. Finally [lem-pur-ordinary-adjunction-scalar-compatibility] says that the actual ordinary Hom bijections and their inverses commute with these coefficient comparisons, after rationalization and on common-stage representatives. Applying these equalities to the explicit construction of $b$ in step 3 proves coefficient compatibility of $b$ and of every $p_i$. Thus the product comparison, its unit and counit, and the biproduct injections characterized by $p_j\\iota_i=\\delta_{ji}$ all commute with finite coefficient extension. The same equalities at a common finite field make all constructions independent of the representative at $\\Qlb$.",
+   "uses": [
+    "lem-pod-pullback-identities-scalar-extension",
+    "lem-weil-isomorphism-comparison-scalar-extension",
+    "lem-pur-ordinary-adjunction-scalar-compatibility",
+    "lem-pur-integral-operations-scalar-extension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-general/sk-i-dl-general-real/thm-zl-real-mixed-by-curves.proof.md",
+    "place": "Paragraph 5: diagonal and summation, expanded using the specified coefficient-comparison statements"
+   }
+  },
+  {
+   "text": "For the repeated family $M$, define $T_M=\\sum_i p_i:\\bigoplus_iM\\to M$. Then $T_M\\iota_j=\\mathrm{id}_M$ and uniqueness follows from the coproduct property. Also\n$$T_M\\eta_M=\\sum_i p_i\\eta_M=\\sum_i\\mathrm{id}_M=|I|\\mathrm{id}_M.$$\nAt any geometric point $\\bar x:\\operatorname{Spec}\\Omega\\to X$, its stalk operation on morphisms is additive: for module sheaves, addition of germs is addition after a common pointed refinement [def-weil-proetale-geometric-stalk], so $(f+g)_{\\bar x}=f_{\\bar x}+g_{\\bar x}$. Applying this termwise to complexes, then taking cohomology or the compatible integral coefficient towers, preserves the same addition equation. Raw rationalization and common finite stages extend this equation linearly. For $\\Omega=k$ the point-evaluation model is explicitly [def-weil-finite-coefficient-point], with the linear coefficient formulas of [def-weil-derived-pullback-tensor-hom]. Applying the additive stalk operation to the equations for $p_i,\\iota_i$ preserves their finite biproduct equations, and sends $T_M$ to $\\sum_i(p_i)_{\\bar x}$. Hence its stalk map is exactly $(v_i)_i\\mapsto\\sum_i v_i$. For $X=\\varnothing$, every $Y_i$ and $Y$ is empty. The empty-cover clause of [lem-pur-finite-clopen-derived-decomposition] makes these derived categories zero categories. All comparisons and equations above are then the unique morphisms, and the stalk assertion has no points to test. For $|I|=1$ the same formulas give identity unit and summation.",
+   "uses": [
+    "def-weil-finite-coefficient-point",
+    "def-weil-derived-pullback-tensor-hom",
+    "lem-pur-finite-clopen-derived-decomposition",
+    "def-weil-proetale-geometric-stalk"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-general/sk-i-dl-general-real/thm-zl-real-mixed-by-curves.proof.md",
+    "place": "Paragraph 5: summation and the equality Tr composed with eta = d id; empty-base check"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-pur-finite-clopen-derived-decomposition",
+  "lem-weil-pbc-proetale-derived-pullback-composition",
+  "lem-pod-integral-pullback-composition",
+  "lem-weil-isomorphism-derived-pullback",
+  "def-weil-derived-pullback-tensor-hom",
+  "lem-weil-proetale-isomorphism-inverse-image",
+  "lem-weil-isomorphism-derived-pullback-comparison-normalization",
+  "fix-prop-adjunctions",
+  "def-weil-abstract-derived-category",
+  "def-weil-constructible-heart",
+  "lem-pod-pullback-identities-scalar-extension",
+  "lem-weil-isomorphism-comparison-scalar-extension",
+  "lem-pur-ordinary-adjunction-scalar-compatibility",
+  "def-weil-finite-coefficient-point",
+  "def-weil-proetale-geometric-stalk",
+  "lem-pur-open-completed-restriction-identification",
+  "lem-pur-integral-operations-scalar-extension"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-general/sk-i-dl-general-real/thm-zl-real-mixed-by-curves.proof.md",
+  "place": "Paragraph 5, expanded by the finite-clopen equivalence, pullback composition, and an explicit product universal-property calculation; Stacks Tags 04TS, 0D6D, 099N and 0037"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "(diagonal|Diagonal).*(adjunction|Adjunction)|(adjunction|Adjunction).*(diagonal|Diagonal)",
+   "results": "Actual search: 0 hits; ",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern topological sheaves, ordinary ringed-site adjunctions or identity pullbacks; none supplies the rational/common-stage constructible derived comparison with the prescribed split projection adjunction"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction, CategoryTheory.Limits.biproduct",
+   "results": "Actual search: 0 hits; ",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern topological sheaves, ordinary ringed-site adjunctions or identity pullbacks; none supplies the rational/common-stage constructible derived comparison with the prescribed split projection adjunction"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Constructible adic sheaves on finite clopen sheets pullback pushforward adjunction product diagonal unit",
+   "results": "Actual search: 8 hits; TopCat.Sheaf.instIsLeftAdjointPullback, SheafOfModules.PullbackConstruction.adjunction, CategoryTheory.Functor.sheafPullbackConstruction.sheafAdjunctionContinuous, SheafOfModules.pushforwardPushforwardAdj_unit_app_val_app, TopCat.Sheaf.pullback, TopCat.Sheaf.pullbackPushforwardAdjunction, CategoryTheory.Functor.sheafAdjunctionContinuous, SheafOfModules.pushforwardPushforwardAdj",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern topological sheaves, ordinary ringed-site adjunctions or identity pullbacks; none supplies the rational/common-stage constructible derived comparison with the prescribed split projection adjunction"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived pullback and direct image for a disjoint union of finitely many identity morphisms identify the adjunction unit with the diagonal and counit with projections",
+   "results": "Actual search: 8 hits; CategoryTheory.ExponentiableMorphism.unit_pushforwardId_hom, CategoryTheory.ExponentiableMorphism.pushforwardId_hom_counit, CompHausLike.LocallyConstant.adjunction_unit, CategoryTheory.ChosenPullbacksAlong.pullbackId_hom_counit, CategoryTheory.ChosenPullbacksAlong.unit_pullbackId_hom, CompHausLike.LocallyConstant.adjunction_left_triangle, CategoryTheory.ExponentiableMorphism.id, SheafOfModules.pullbackPushforwardAdjunction_homEquiv_pullbackObjUnitToUnit",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern topological sheaves, ordinary ringed-site adjunctions or identity pullbacks; none supplies the rational/common-stage constructible derived comparison with the prescribed split projection adjunction"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Direct image of a sheaf on a finite disjoint union is product and its inverse image adjunction is the diagonal product adjunction",
+   "results": "Actual search: 8 hits; CompHausLike.LocallyConstant.functorIso, CompHausLike.LocallyConstant.sigmaComparison_comp_sigmaIso, TopCat.Presheaf.SheafConditionPairwiseIntersections.coneEquivCounitIso, CompHausLike.sigmaComparison_eq_comp_isos, TopCat.Sheaf.isProductOfDisjoint, AlgebraicGeometry.Scheme.coprodPresheafObjIso, CompHausLike.LocallyConstant.functorToPresheavesIso, CompHausLike.isIsoSigmaComparison",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern topological sheaves, ordinary ringed-site adjunctions or identity pullbacks; none supplies the rational/common-stage constructible derived comparison with the prescribed split projection adjunction"
+  },
+  {
+   "tool": "grep",
+   "query": "diag.*(Adjunction|adjunction)|finite.*clopen|splitSheet",
+   "results": "Actual search: 0 hits; ",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary sheaf or condensed locally constant adjunctions do not state the rationalized/common-stage constructible derived comparison and its prescribed adjunction maps"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction, CategoryTheory.Functor.diag",
+   "results": "Actual search: 0 hits; ",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary sheaf or condensed locally constant adjunctions do not state the rationalized/common-stage constructible derived comparison and its prescribed adjunction maps"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Constructible adic derived sheaves pullback along a finite disjoint union of identity maps is diagonal and its right adjoint is product, with unit diagonal",
+   "results": "Actual search: 8 hits; SheafOfModules.PullbackConstruction.adjunction, SheafOfModules.instIsIsoPullbackObjUnitToUnitOfFinal, SheafOfModules.pullbackObjUnitToUnit, AlgebraicGeometry.Scheme.Modules.instIsLeftAdjointPullback, SheafOfModules.instIsLeftAdjointPullback, SheafOfModules.pullback_id_comp, SheafOfModules.pullback_comp_id, SheafOfModules.pullbackPushforwardAdjunction_homEquiv_pullbackObjUnitToUnit",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary sheaf or condensed locally constant adjunctions do not state the rationalized/common-stage constructible derived comparison and its prescribed adjunction maps"
+  },
+  {
+   "tool": "leansearch",
+   "query": "For constructible rational adic sheaves on a finite disjoint union of copies of a scheme, derived inverse image and direct image are the diagonal product adjunction",
+   "results": "Actual search: 8 hits; AlgebraicGeometry.Scheme.Modules.pullbackPushforwardAdjunction, TopCat.Sheaf.pullbackPushforwardAdjunction, SheafOfModules.PullbackConstruction.adjunction, TopCat.Sheaf.instIsLeftAdjointPullback, CategoryTheory.Functor.sheafPullbackConstruction.sheafAdjunctionContinuous, AlgebraicGeometry.Scheme.Modules.restrictAdjunction, CategoryTheory.Functor.sheafAdjunctionContinuous, CategoryTheory.Functor.sheafAdjunctionCocontinuous",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary sheaf or condensed locally constant adjunctions do not state the rationalized/common-stage constructible derived comparison and its prescribed adjunction maps"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Direct image of a sheaf on finitely many clopen components is the product of the component sheaves, compatible with rationalization and completed integral coefficients",
+   "results": "Actual search: 8 hits; CompHausLike.LocallyConstantModule.functor, CompHausLike.LocallyConstant.counit_app_val, CompHausLike.LocallyConstant.functor, CompHausLike.LocallyConstant.counitApp_app, CompHausLike.LocallyConstant.counitAppApp, CompHausLike.LocallyConstant.sigmaComparison_comp_sigmaIso, CompHausLike.LocallyConstant.incl_of_counitAppApp, CompHausLike.LocallyConstant.functorIso",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary sheaf or condensed locally constant adjunctions do not state the rationalized/common-stage constructible derived comparison and its prescribed adjunction maps"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-zl-constant-extension-mixed-descent",
+  "date": "2026-10-22",
+  "group": "NU"
+ },
+ "chapter": "sec-deligne-laumon-general",
+ "unit": "sk-i-dl-general-real",
+ "blueprint": {
+  "from": {
+   "node": "thm-zl-real-mixed-by-curves",
+   "place": "Paragraph 5, sentences beginning “Etale-locally”: old mixed-descent Step 4 and the diagonal/sum computation of Step 6; derived clopen comparison and prescribed adjunction, not an unspecified stalk identification.",
+   "via": [
+    "lem-zl-constant-extension-mixed-descent"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-zl-split-sheet-adjunction",
+  "worker": "stage1",
+  "summary": "Kept the statement and its coefficient categories unchanged. Identified the actual derived adjunction through its Hom bijection, constructed the product cone and calculated its unit/counit. Wrote out the finite additive biproduct calculation, the scalar-comparison compatibility, the stalk summation formula and the empty-base case. All non-elementary inputs already have nodes; no new nodes were needed.",
+  "blueprint": "thm-zl-real-mixed-by-curves.proof.md paragraph 5: the split geometric model behind the diagonal unit, local summation map, and Tr eta = d id. This item does not assert descent or Frobenius equivariance.",
+  "tool_uses": [
+   {
+    "node": "lem-pur-finite-clopen-derived-decomposition",
+    "why": "Finite-clopen equivalence, componentwise cohomology and coefficient compatibility; no node of this unit replaces this general geometric tool."
+   },
+   {
+    "node": "lem-weil-pbc-proetale-derived-pullback-composition",
+    "why": "General finite-coefficient pullback composition for h a_i = id; used only to compute the pullback on each split sheet."
+   },
+   {
+    "node": "lem-pod-integral-pullback-composition",
+    "why": "The same composition on the actual completed integral categories before raw rationalization."
+   },
+   {
+    "node": "lem-weil-isomorphism-derived-pullback",
+    "why": "The identity scheme isomorphism has its specified natural inverse-image/pullback comparison."
+   },
+   {
+    "node": "fix-prop-adjunctions",
+    "why": "Supplies the actual ordinary constructible adjunction whose unit and counit this item calculates."
+   },
+   {
+    "node": "lem-pod-pullback-identities-scalar-extension",
+    "why": "General scalar coherence of the chosen pullback composition comparisons."
+   },
+   {
+    "node": "lem-weil-isomorphism-comparison-scalar-extension",
+    "why": "Scalar coherence of the chosen identity-isomorphism pullback comparison."
+   },
+   {
+    "node": "lem-pur-ordinary-adjunction-scalar-compatibility",
+    "why": "Scalar coherence of the prescribed actual Hom bijection and its inverse, needed rather than an arbitrary adjunction."
+   },
+   {
+    "node": "lem-weil-proetale-isomorphism-inverse-image",
+    "why": "Identifies a specified scheme isomorphism with an exact site equivalence; used to relabel the clopen sheets."
+   },
+   {
+    "node": "lem-weil-isomorphism-derived-pullback-comparison-normalization",
+    "why": "Ensures the specified identity comparison kappa is invertible on complete inputs, so the scalar-compatibility theorem applies to the very same map."
+   },
+   {
+    "node": "lem-pur-open-completed-restriction-identification",
+    "why": "Identifies open restriction with completed Lj_i^* on integral constructible objects, so Phi=(Ls_i^*Lj_i^*)_i is an equivalence (reviewer Q19 FIX)."
+   },
+   {
+    "node": "lem-pur-integral-operations-scalar-extension",
+    "why": "Natural, tower-compatible scalar comparisons of Lj_i^*, Ls_i^*; used for the Qlb equivalence and coefficient compatibility of Phi (reviewer Q19 FIX)."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pur-finite-clopen-derived-decomposition",
+  "lem-weil-pbc-proetale-derived-pullback-composition",
+  "lem-pod-integral-pullback-composition",
+  "lem-weil-isomorphism-derived-pullback",
+  "fix-prop-adjunctions",
+  "lem-pod-pullback-identities-scalar-extension",
+  "lem-weil-isomorphism-comparison-scalar-extension",
+  "lem-pur-ordinary-adjunction-scalar-compatibility",
+  "lem-weil-proetale-isomorphism-inverse-image",
+  "lem-weil-isomorphism-derived-pullback-comparison-normalization",
+  "lem-pur-open-completed-restriction-identification",
+  "lem-pur-integral-operations-scalar-extension"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q19-b0ccc3bff",
+  "group": "Q19",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q19-b0ccc3bff (reviewer sub-agent of L); spot-checked: I read the item in full (7 steps, no new nodes, statement and stmt_deps unchanged), every cited statement, and the blueprint main-20261015 thm-zl-real-mixed-by-curves proof, paragraph 'To descend the initial constant extension…' (étale-locally d copies, Tr = summation, Tr∘η = d·id). The statement holds on small cases (|I|=1, |I|=2, X=∅, M=0) and divides by nothing. Step 1 is correct: h^{-1}(Spec A)=Spec(∏A), so h is finite and separated, as fix-prop-adjunctions and the clopen node need. Steps 3–5 and 7 are correct: b_K(p∘f)=f gives p_i b(u)=u_i, b(α^{-1})=η gives the diagonal unit, Φ(ε)=p∘α gives the counit as projections, the biproduct is defined by p_jι_i=δ, T_M=Σp_i with T_Mη=|I|·id, and stalks are additive by germ addition in def-weil-proetale-geometric-stalk. One fault, repaired (C3): Step 2 wrote (ΦH)_i=Ls_i^*Lj_i^*H 'by' lem-pur-finite-clopen-derived-decomposition, but that node states its equivalence through ordinary restriction; only its proof identifies restriction with Lj^*. Step 6 then applied the clopen node's scalar compatibility, stated for restriction, to the Lj^* form. The FIX defines Φ=(Ls_i^*Lj_i^*)_i. At each finite coefficient field it is naturally isomorphic to the clopen equivalence followed by s_i^{-1}, via lem-pur-open-completed-restriction-identification, lem-weil-isomorphism-derived-pullback and lem-weil-proetale-isomorphism-inverse-image; at Q̄_ℓ it is an equivalence via the natural, tower-compatible α^f of lem-pur-integral-operations-scalar-extension. Step 6 now takes Φ's coefficient compatibility from those α^f. proof_deps and tool_uses are updated, and both added nodes were already in the item's closure. Batch-5 flags, all accepted: lem-weil-isomorphism-derived-pullback-comparison-normalization (invertibility of κ on complete objects) and lem-pod-pullback-identities-scalar-extension (scalar coherence of the composition and inverse-identity isos) are generic coefficient coherence; lem-weil-isomorphism-comparison-scalar-extension reaches trf only through that first node; lem-pur-ordinary-adjunction-scalar-compatibility reaches only lem-pod-completed-integral-scalar-regular, which is generic algebra. The stmt_deps closure already has 13512 nodes; the proof adds 5, of which only 2 generic sk-lem-finite pod nodes are trf/pd. No nt-assume leaf, thm-trf, nt-target or sk-thm-trace-transport is reached.; 1 file(s) fixed by the reviewer"
+ }
+}

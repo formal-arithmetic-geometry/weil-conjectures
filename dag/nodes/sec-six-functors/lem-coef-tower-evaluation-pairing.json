@@ -3,179 +3,37 @@
  "kind": "statement",
  "proof": [
   {
-   "text": "Use the ringed sequence sites of [def-coef-ringed-sequence-site], indexed by positive exponents as in [lem-coef-tower-trace-rectification]. Write $\\mathcal A=(A_n)_n$ for the ring on the one-point sequence topos $\\mathscr P$, $\\rho_W:(W^{\\mathrm{Tow}},\\mathcal Q_W)\\to(W^{\\mathrm{Tow}},R_W^{\\mathrm{const}})$ for scalar restriction, and $g_W^{\\mathcal Q}:(W^{\\mathrm{Tow}},\\mathcal Q_W)\\to(\\mathscr P,\\mathcal A)$ for point sections. Write $\\rho_0:(\\mathscr P,\\mathcal A)\\to(\\mathscr P,R)$ for constant-ring restriction and $g_W^R$ for sections with the constant scalar action $R\\to R_W$. Thus $g_W^R\\rho_W=\\rho_0g_W^{\\mathcal Q}$. Every $R\\Gamma^{\\mathrm{Tow}}$ below means $Rg_{W*}^{\\mathcal Q}$, not inverse limit. Restriction along each $\\rho$ is exact: kernels and cokernels have the unchanged underlying sheaves. The separately derived composite $F^{\\mathcal Q}=Rp_*^{\\mathcal Q}j_!$ is the fixed one in [lem-coef-tower-trace-rectification].",
+   "text": "Apply the compactification-model comparison to obtain S, G, all finite frames, eH, eB and eQcompact, with support transitions and the finite pairing equality.",
    "uses": [
-    "def-coef-ringed-sequence-site",
-    "lem-coef-tower-trace-rectification"
+    "lem-coef-pairing-compactification-models"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-tower/prop-coef-integral-dualizing.proof.md",
-    "place": "Proof paragraph 2: mapping-complex adjunction and specified natural maps before taking limits; ringed-sequence-site expansion of parent step 10."
-   }
+   "elementary": false
   },
   {
-   "text": "Put $V=\\operatorname{const}K$. Choose a flat-term K-flat $P\\to K$ using [lem-pc-kflat-resolution] and a K-injective tower $I$ representing $\\rho_{X*}Q_\\bullet$ as in [def-pur-derived-internal-hom]. The constant complex $\\operatorname{const}P$ is K-flat on the constant-ring tower site: tensoring an acyclic tower with it evaluates to tensoring an acyclic complex with $P$ at every index. By [lem-pur-hom-kflat-into-kinjective], $\\mathcal Hom^\\bullet(\\operatorname{const}P,I)$ is K-injective there. Its component at $n$ is $\\mathcal Hom^\\bullet(P,I_n)$: on the index slice ending at $n$, a map from a constant system is determined by its component at $n$, with earlier components obtained by the target transitions. Applying $g_{X*}^R$ therefore gives exactly the termwise global Hom tower defining $\\mathsf H(K)$, as an object of the derived tower category. Thus $\\mathsf H(K)\\cong Rg_{X*}^R R\\mathcal Hom_{R_X^{\\mathrm{const}}}(V,\\rho_{X*}Q_\\bullet)$. By [lem-weil-tower-evaluation-kinjective], $I_n$ is K-injective, so its evaluations are $\\mathbf R\\operatorname{Hom}_{R_X}(K,\\operatorname{Res}_n\\omega_n)$. The internal-Hom scalar adjunction $\\operatorname{Res}_nR\\mathcal Hom_{A_n}(K_n,\\omega_n)\\cong R\\mathcal Hom_{R_X}(K,\\operatorname{Res}_n\\omega_n)$ of [lem-sfb-dc-hom-scalar-adjunction], followed by derived global sections and the composition comparison [lem-weil-pbc-ringed-topoi-derived-pushforward-composition] for $\\operatorname{Res}_n$ and sections, identifies these with $\\mathbf R\\operatorname{Hom}_{X,A_n}(K_n,\\omega_n)$ as complexes; on $H^0$ of shifts it is the Hom adjunction [lem-weil-derived-scalar-extension-restriction-adjunction] with its actual reduction unit.",
+   "text": "Apply the Hom representative comparison to this S and Q. Transport its integral finite Hom natural isomorphisms along the given eQ. Define scalarIso as eIntegralHom inverse followed by eH; its required factorization is the isomorphism cancellation law.",
    "uses": [
-    "lem-pc-kflat-resolution",
-    "def-pur-derived-internal-hom",
-    "lem-pur-hom-kflat-into-kinjective",
-    "lem-weil-tower-evaluation-kinjective",
-    "lem-weil-derived-scalar-extension-restriction-adjunction",
-    "lem-sfb-dc-hom-scalar-adjunction",
-    "lem-weil-pbc-ringed-topoi-derived-pushforward-composition"
+    "lem-coef-pairing-hom-representative-comparison"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-tower/prop-coef-integral-dualizing.proof.md",
-    "place": "Proof paragraph 2: mapping-complex adjunction and specified natural maps before taking limits; ringed-sequence-site expansion of parent step 10."
-   }
+   "elementary": false
   },
   {
-   "text": "Let $\\mathsf K=L\\rho_X^*V$ and $D_K=R\\mathcal Hom_{\\mathcal Q_X}(\\mathsf K,Q_\\bullet)$ using [def-coef-ringed-tensor-hom-model]; the closed symmetric monoidal structure, its tensor-Hom bijection and evaluation counit exist on both sequence sites by [lem-sf-ringed-derived-closed-symmetric-monoidal]. Put $h_K=Rg_{X*}^{\\mathcal Q}D_K$. The scalar-adjunction identification is an identification of derived systems: for every test object $T$ on the constant-ring tower site, closed transposition, the ringed adjunction, and the pullback tensor comparison give\n$$\\operatorname{Hom}(T,\\rho_{X*}D_K)\\cong\\operatorname{Hom}(L\\rho_X^*T\\otimes^L\\mathsf K,Q_\\bullet)\\cong\\operatorname{Hom}(L\\rho_X^*(T\\otimes^LV),Q_\\bullet)\\cong\\operatorname{Hom}(T\\otimes^LV,\\rho_{X*}Q_\\bullet).$$\nHere the adjunction and tensor comparison are [lem-weil-pbc-ringed-projection-mate-exact]; all are on the sequence topoi, without flatness of the quotient map. These natural bijections identify $\\rho_{X*}D_K$ with $R\\mathcal Hom(V,\\rho_{X*}Q_\\bullet)$ and identify their evaluation counits. Apply $Rg_{X*}^R$ and the canonical direct-image composition comparison [lem-weil-pbc-ringed-topoi-derived-pushforward-composition] to the equality $g_X^R\\rho_X=\\rho_0g_X^{\\mathcal Q}$. Step 2 then gives a natural tower isomorphism $\\mathsf H(K)\\cong\\rho_{0*}h_K$. This uses the full system adjunction, not isomorphisms of its evaluated objects.",
+   "text": "Apply whole-system frame dinaturality to S.reduction.map f. The remaining clauses are the witnesses already obtained.",
    "uses": [
-    "def-coef-ringed-tensor-hom-model",
-    "lem-weil-pbc-ringed-projection-mate-exact",
-    "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
-    "lem-sf-ringed-derived-closed-symmetric-monoidal"
+    "lem-coef-pairing-frame-dinaturality"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-tower/prop-coef-integral-dualizing.proof.md",
-    "place": "Proof paragraph 2: mapping-complex adjunction and specified natural maps before taking limits; ringed-sequence-site expansion of parent step 10."
-   }
-  },
-  {
-   "text": "Set $b_K=Rg_{s*}^{\\mathcal Q}Rp_*^{\\mathcal Q}j_!\\mathsf K$, so $B_K=\\rho_{0*}b_K$. To check its specified reduction-tower interpretation, $\\operatorname{const}P$ computes $L\\rho_X^*V$ by the K-flat pullback model [lem-weil-pbc-ringed-topoi-derived-pullback]; its components are exactly $P\\otimes_{R_X}(A_n)_X$ with the quotient maps. Restriction through $j_!$ leaves its extension-by-zero presheaves and sheafification unchanged. Restriction through the separately derived $p_*$ and $g_{s*}$ is the canonical comparison of derived composite direct images [lem-weil-pbc-ringed-topoi-derived-pushforward-composition], applied to the equal underlying composites with their structural scalar maps. Hence this is the reduction, exact open extension, separately derived proper direct image and restriction composite lifted by $\\mathcal T_a^c$ in [lem-weil-compact-support-reduction-tower-functor], followed by tower sections; the comparison is on derived tower functors. On constant-ring towers [lem-weil-ringed-tower-pushforward-limit-comparison] identifies evaluation with finite direct image, including the actual projections. Thus $\\operatorname{ev}_nB_K=\\Gamma(s,F_nK_n)=C_n$ by [def-weil-finite-coefficient-point]; its horizontal maps are compact support of the quotient maps, with the coefficient-restriction comparisons specified in $\\mathcal T_a^c$.",
-   "uses": [
-    "lem-weil-pbc-ringed-topoi-derived-pullback",
-    "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
-    "lem-weil-compact-support-reduction-tower-functor",
-    "lem-weil-ringed-tower-pushforward-limit-comparison",
-    "def-weil-finite-coefficient-point"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-tower/prop-coef-integral-dualizing.proof.md",
-    "place": "Proof paragraph 2: mapping-complex adjunction and specified natural maps before taking limits; ringed-sequence-site expansion of parent step 10."
-   }
-  },
-  {
-   "text": "We need the open-extension tensor comparison on the sequence site. Construct it on actual module complexes, not by lifting derived fiber maps. The site localization of [lem-weil-proetale-weakly-etale-localization], applied vertically, identifies $j^{-1}\\mathcal Q_{\\overline X}$ with $\\mathcal Q_X$, including quotient restrictions. The natural module-sheaf isomorphism of [lem-weil-pbc-ringed-slice-extension-tensor] sends $j_!M\\otimes L$ to $j_!(M\\otimes j^{-1}L)$; apply its actual sheafified tensor map in each bidegree. It commutes with the quotient transitions because its component on a local pure tensor is $m\\otimes l\\mapsto m\\otimes l|_X$, the same formula before and after scalar restriction. Totalization therefore gives a chain map of strict systems. Replace $L$ by a flat-term K-flat complex. Restriction of this complex is K-flat by [lem-weil-pbc-ringed-topoi-derived-tensor-pullback], so both sides compute the indicated derived tensors. Exactness of $j_!$ from [lem-weil-pbc-ringed-slice-extension-exactness], applied vertically, makes this a natural derived isomorphism\n$$\\gamma_{M,L}:j_!M\\otimes^L_{\\mathcal Q_{\\overline X}}L\\xrightarrow{\\sim}j_!(M\\otimes^L_{\\mathcal Q_X}Lj^*L).$$\nIts finite evaluations are the same open tensor maps, not maps chosen in the finite derived categories.",
-   "uses": [
-    "lem-weil-proetale-weakly-etale-localization",
-    "lem-weil-pbc-ringed-slice-extension-tensor",
-    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
-    "lem-weil-pbc-ringed-slice-extension-exactness"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-tower/prop-coef-integral-dualizing.proof.md",
-    "place": "Proof paragraph 2: mapping-complex adjunction and specified natural maps before taking limits; ringed-sequence-site expansion of parent step 10."
-   }
-  },
-  {
-   "text": "Use $g_X^{\\mathcal Q}=g_s^{\\mathcal Q}a^{\\mathcal Q}$ and put $L_K=Lg_s^{\\mathcal Q*}h_K$. Pullback composition and its adjunction-compatible normalization are [lem-sfb-ringed-derived-monoidal-comparisons]. The counit of $Lg_X^{\\mathcal Q*}\\dashv Rg_{X*}^{\\mathcal Q}$ gives $La^{\\mathcal Q*}L_K\\to D_K$. Follow it by closed tensor-Hom evaluation to define, on the $X$ sequence site,\n$$v_K:\\mathsf K\\otimes^L La^{\\mathcal Q*}L_K\\longrightarrow \\mathsf K\\otimes^L D_K\\longrightarrow Q_\\bullet.$$\nThe symmetry is the canonical graded symmetry. Evaluation here is exactly the counit of the closed structure [lem-sf-ringed-derived-closed-symmetric-monoidal], with the representative model of [def-coef-ringed-tensor-hom-model], represented by $x\\otimes y\\mapsto\\phi(x)(y)$ with the stated symmetry convention. In particular it is not supplied by a projection-formula theorem. All these are morphisms and natural transformations of the ringed sequence derived categories.",
-   "uses": [
-    "lem-sfb-ringed-derived-monoidal-comparisons",
-    "def-coef-ringed-tensor-hom-model",
-    "lem-weil-pbc-ringed-projection-mate-exact",
-    "lem-sf-ringed-derived-closed-symmetric-monoidal"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-tower/prop-coef-integral-dualizing.proof.md",
-    "place": "Proof paragraph 2: mapping-complex adjunction and specified natural maps before taking limits; ringed-sequence-site expansion of parent step 10."
-   }
-  },
-  {
-   "text": "For $p^{\\mathcal Q}$ use the general counit-defined projection mate of [lem-weil-pbc-ringed-projection-mate-exact], with $E=j_!\\mathsf K$ and $P=L_K$. Compose it with Step 5 and $Lj^*Lp^*\\cong La^*$ from [lem-sfb-ringed-derived-monoidal-comparisons]. This gives the actual compact-support transformation\n$$\\Pi_K:F^{\\mathcal Q}\\mathsf K\\otimes^L L_K\\xrightarrow{\\pi_p}Rp_*^{\\mathcal Q}(j_!\\mathsf K\\otimes^LLp^*L_K)\\xrightarrow{Rp_*(\\gamma)}F^{\\mathcal Q}(\\mathsf K\\otimes^LLa^*L_K).$$\nThen $F^{\\mathcal Q}(v_K)\\Pi_K$ has target $F^{\\mathcal Q}Q_\\bullet$. No finite-Tor-amplitude or etale-origin condition on $L_K$ is used: the cited mate exists for arbitrary objects. We have constructed this composite in the derived category of the sequence site before evaluating at any index.",
-   "uses": [
-    "lem-weil-pbc-ringed-projection-mate-exact",
-    "lem-sfb-ringed-derived-monoidal-comparisons"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-tower/prop-coef-integral-dualizing.proof.md",
-    "place": "Proof paragraph 2: mapping-complex adjunction and specified natural maps before taking limits; ringed-sequence-site expansion of parent step 10."
-   }
-  },
-  {
-   "text": "Apply the same general projection mate [lem-weil-pbc-ringed-projection-mate-exact] to $g_s^{\\mathcal Q}$, $E=F^{\\mathcal Q}\\mathsf K$, $P=h_K$, then apply $Rg_{s*}^{\\mathcal Q}$ to the last composite. This defines $b_K\\otimes^L_{\\mathcal A}h_K\\to b_\\omega$, where $b_\\omega=Rg_{s*}^{\\mathcal Q}F^{\\mathcal Q}Q_\\bullet$. The scalar restriction $\\rho_{0*}$ has the canonical tensor comparison: for $U,V\\in D(\\mathcal A)$ it is the projection mate followed by the scalar counit,\n$$\\rho_{0*}U\\otimes_R^L\\rho_{0*}V\\longrightarrow\\rho_{0*}(U\\otimes_{\\mathcal A}^LL\\rho_0^*\\rho_{0*}V)\\longrightarrow\\rho_{0*}(U\\otimes_{\\mathcal A}^LV).$$\nThis uses the same ringed mate, hence does not assume flatness of $\\mathcal A$ over $R$. Apply it to $U=h_K,V=b_K$, use the symmetry for the preceding pairing, and use $\\mathsf H(K)\\cong\\rho_{0*}h_K$ from Step 3. This defines the required $\\beta_K:\\mathsf H(K)\\otimes_R^LB_K\\to B_\\omega$ in the derived tower category. The target is exactly the fixed object of [lem-coef-tower-trace-rectification].",
-   "uses": [
-    "lem-weil-pbc-ringed-projection-mate-exact",
-    "lem-coef-tower-trace-rectification"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-tower/prop-coef-integral-dualizing.proof.md",
-    "place": "Proof paragraph 2: mapping-complex adjunction and specified natural maps before taking limits; ringed-sequence-site expansion of parent step 10."
-   }
-  },
-  {
-   "text": "Evaluate the constructed map at $n$. First use the direct-image composition comparisons of [lem-weil-pbc-ringed-topoi-derived-pushforward-composition] to move scalar restriction past each separately derived direct image. Then the evaluation comparison of [lem-weil-ringed-tower-pushforward-limit-comparison], now on constant-ring towers, identifies these with the finite direct images and their actual quotient projections. On the quotient-ring sequence sites, [lem-coef-semilinear-derived-sections] gives section models of $Lg^*$, $Rg_*$, $j_!$, derived tensor, pullback-composition identifications, the adjunction units and counits and their mates, whose evaluations are the finite $u^{-1}$, $Ru_{*,n}$, tensor, counits and mates; no K-injectivity of evaluations is used. The derived-fraction normalization [lem-pc-pre-derived-adjoint-functors-general] fixes the finite counits as the ordinary adjunct formula. Pullback composition is [lem-sfb-ringed-derived-monoidal-comparisons]; Step 5 fixes the open comparison on complexes. Consequently the adjoint defining $\\pi_p$ evaluates to $(\\varepsilon_{p,j_!K_n}\\otimes1)\\mu_p$; its adjunct is the finite $\\pi_p$ in [def-exchange-projection]. The global-sections mate and the counit in Step 6 evaluate to the ordinary finite section-evaluation map. With the scalar adjunction of [lem-weil-derived-scalar-extension-restriction-adjunction], the result is therefore\n$$\\mathbf R\\operatorname{Hom}_{X,A_n}(K_n,\\omega_n)\\otimes_R^LC_n\\to\\mathbf R\\operatorname{Hom}_{X,A_n}(K_n,\\omega_n)\\otimes_{A_n}^LC_n\\to\\Gamma(s,F_n\\omega_n),$$\nwhere the last arrow is the specified ambient compact-support projection followed by evaluation. The first arrow is the balancing map from Step 8. These identifications apply to the one already constructed system map, so no fullness, uniqueness or naturality of a lift of finite derived maps is invoked.",
-   "uses": [
-    "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
-    "lem-weil-ringed-tower-pushforward-limit-comparison",
-    "lem-sfb-ringed-derived-monoidal-comparisons",
-    "def-exchange-projection",
-    "lem-weil-derived-scalar-extension-restriction-adjunction",
-    "lem-pc-pre-derived-adjoint-functors-general",
-    "lem-coef-semilinear-derived-sections"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-tower/prop-coef-integral-dualizing.proof.md",
-    "place": "Proof paragraph 2: mapping-complex adjunction and specified natural maps before taking limits; ringed-sequence-site expansion of parent step 10."
-   }
-  },
-  {
-   "text": "For $f:K\\to K'$, let $\\mathsf f:\\mathsf K\\to\\mathsf K'$ be its derived scalar extension. Contravariance of the recorded internal Hom [def-pur-derived-internal-hom] gives $D_{K'}\\to D_K$ and thus $h_{K'}\\to h_K$. Closed evaluation, natural in both variables by [lem-sf-ringed-derived-closed-symmetric-monoidal] and modelled in [def-coef-ringed-tensor-hom-model], gives the identity $\\operatorname{ev}_K(1\\otimes D(\\mathsf f))=\\operatorname{ev}_{K'}(\\mathsf f\\otimes1)$ on $\\mathsf K\\otimes D_{K'}$ (with the same symmetry). Naturality of the $g_X$ counit makes the corresponding identity hold for $v_K$ on $\\mathsf K\\otimes La^*Lg_s^*h_{K'}$. Apply $j_!$, then the natural open comparison from Step 5 and the natural projection mates for $p$, $g_s$ and $\\rho_0$ of [lem-weil-pbc-ringed-projection-mate-exact]. The identity becomes $\\beta_K(\\mathsf H(f)\\otimes1)=\\beta_{K'}(1\\otimes B(f))$ on $\\mathsf H(K')\\otimes_R^LB_K$. Every equality here is in the appropriate sequence-site derived category and survives the final restriction functor. The map ends at $B_\\omega$; the finite counits to $A_n$ in [lem-coef-tower-trace-rectification] have not been composed into it.",
-   "uses": [
-    "def-pur-derived-internal-hom",
-    "def-coef-ringed-tensor-hom-model",
-    "lem-weil-pbc-ringed-projection-mate-exact",
-    "lem-coef-tower-trace-rectification",
-    "lem-sf-ringed-derived-closed-symmetric-monoidal"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-tower/prop-coef-integral-dualizing.proof.md",
-    "place": "Proof paragraph 2: mapping-complex adjunction and specified natural maps before taking limits; ringed-sequence-site expansion of parent step 10."
-   }
+   "elementary": false
   }
  ],
  "proof_deps": [
-  "def-coef-ringed-sequence-site",
-  "def-coef-ringed-tensor-hom-model",
-  "def-exchange-projection",
-  "def-pur-derived-internal-hom",
-  "def-weil-finite-coefficient-point",
-  "lem-coef-semilinear-derived-sections",
-  "lem-coef-tower-trace-rectification",
-  "lem-pc-kflat-resolution",
-  "lem-pc-pre-derived-adjoint-functors-general",
-  "lem-pur-hom-kflat-into-kinjective",
-  "lem-sf-ringed-derived-closed-symmetric-monoidal",
-  "lem-sfb-dc-hom-scalar-adjunction",
-  "lem-sfb-ringed-derived-monoidal-comparisons",
-  "lem-weil-compact-support-reduction-tower-functor",
-  "lem-weil-derived-scalar-extension-restriction-adjunction",
-  "lem-weil-pbc-ringed-projection-mate-exact",
-  "lem-weil-pbc-ringed-slice-extension-exactness",
-  "lem-weil-pbc-ringed-slice-extension-tensor",
-  "lem-weil-pbc-ringed-topoi-derived-pullback",
-  "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
-  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
-  "lem-weil-proetale-weakly-etale-localization",
-  "lem-weil-ringed-tower-pushforward-limit-comparison",
-  "lem-weil-tower-evaluation-kinjective"
+  "lem-coef-pairing-hom-representative-comparison",
+  "lem-coef-pairing-compactification-models",
+  "lem-coef-pairing-frame-dinaturality"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-tower/prop-coef-integral-dualizing.proof.md",
-  "place": "Proof paragraph 2: mapping-complex adjunction and specified natural maps before taking limits; ringed-sequence-site expansion of parent step 10.",
-  "description": "Ringed-sequence-site expansion following the maintainer repair route: derive scalar adjunction before evaluation; construct the pairing on the sequence topoi; use naturality there, never a lift of compatible finite derived morphisms."
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-tower/prop-coef-integral-dualizing.proof.md",
+  "place": "Paragraph 2: derived mapping-complex adjunction and finite compact-support pairing before taking limits.",
+  "description": "Assembly from separate Hom and compactification comparisons; whole-system frame dinaturality proved directly."
  },
  "mathlib_match": null,
  "status": "split",
@@ -286,103 +144,21 @@
   "is": null
  },
  "split_report": {
-  "date": "2026-10-17",
+  "date": "2026-10-22",
   "item": "lem-coef-tower-evaluation-pairing",
   "worker": "stage1",
-  "summary": "Replaced the returned levelwise-lift argument by a single ringed-sequence-site scalar-adjunction/evaluation/projection composite. Identified the original Hom tower and the compact-support reduction tower by canonical derived system comparisons. Used the general projection map, not its invertibility theorem, and derived the open tensor comparison from the generic ringed-slice module formula. Finite evaluations and dinaturality follow from the constructed transformations. Statement and hypotheses unchanged; no new nodes.",
-  "blueprint": "Realizes prop-coef-integral-dualizing proof paragraph 2, mapping-complex adjunction and specified natural maps before limits (parent step 10; compatible with steps 9-14).",
-  "tool_uses": [
-   {
-    "node": "lem-pc-kflat-resolution",
-    "why": "Generic flat-term K-flat resolutions compute scalar extension and the original Hom tower."
-   },
-   {
-    "node": "lem-pur-hom-kflat-into-kinjective",
-    "why": "Generic ringed-site Hom K-flat/K-injective theorem identifies the original termwise Hom tower with derived tower sections."
-   },
-   {
-    "node": "lem-weil-tower-evaluation-kinjective",
-    "why": "Generic evaluation theorem identifies the original Hom-tower evaluations."
-   },
-   {
-    "node": "lem-weil-derived-scalar-extension-restriction-adjunction",
-    "why": "Generic derived scalar adjunction fixes the finite mapping-complex identifications and their reduction units."
-   },
-   {
-    "node": "lem-weil-pbc-ringed-projection-mate-exact",
-    "why": "Generic ringed-topos derived adjunction and natural projection map, used on the sequence topoi and scalar ring maps, with no invertibility assertion."
-   },
-   {
-    "node": "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
-    "why": "Generic canonical comparison of total derived direct images gives system-level scalar-restriction and sections identifications."
-   },
-   {
-    "node": "lem-weil-pbc-ringed-topoi-derived-pullback",
-    "why": "Generic K-flat model computes the actual quotient reduction system."
-   },
-   {
-    "node": "lem-weil-compact-support-reduction-tower-functor",
-    "why": "Generic exact-linear compact-support reduction-system functor identifies the input tower, with all quotient maps."
-   },
-   {
-    "node": "lem-weil-ringed-tower-pushforward-limit-comparison",
-    "why": "Generic evaluation comparison is used after restriction to constant-ring towers, without taking any inverse limit."
-   },
-   {
-    "node": "lem-weil-proetale-weakly-etale-localization",
-    "why": "Generic localization of the pro-etale site identifies the open inverse image vertically."
-   },
-   {
-    "node": "lem-weil-pbc-ringed-slice-extension-tensor",
-    "why": "Generic arbitrary-ringed-site module tensor formula constructs the open comparison on actual complexes."
-   },
-   {
-    "node": "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
-    "why": "Generic tensor-pullback theorem preserves K-flatness for the open comparison."
-   },
-   {
-    "node": "lem-weil-pbc-ringed-slice-extension-exactness",
-    "why": "Generic exact open extension permits termwise extension of complexes on the sequence site."
-   },
-   {
-    "node": "lem-sfb-ringed-derived-monoidal-comparisons",
-    "why": "Generic canonical monoidal pullback and adjunction-compatible composition comparisons identify the counits in the tower and finite constructions."
-   },
-   {
-    "node": "lem-pc-pre-derived-adjoint-functors-general",
-    "why": "Generic derived-fraction normalization identifies evaluated ringed adjunction counits with the canonical finite counits, by evaluating the same ordinary adjunct formula."
-   },
-   {
-    "node": "lem-sfb-dc-hom-scalar-adjunction",
-    "why": "Generic internal-Hom extension/restriction adjunction gives the finite mapping-complex identification in Step 2 as complexes; no node of sk-prop-sf-biduality-general states it. Added by the maintainer reader."
-   }
-  ]
+  "summary": "Repair of the human re-split return: preserved the exact statement and all historical metadata, distributed all ten old arguments among five statement-only unsplit nodes, and replaced the 12516-character proof by a short assembly. The report retains every original proof step verbatim and maps it to its extracted job.",
+  "blueprint": "prop-coef-integral-dualizing proof paragraph 2, mapping-complex adjunction and specified natural maps before inverse limits; old pairing expansion steps 1-10.",
+  "tool_uses": []
  },
- "tool_uses": [
-  "lem-pc-kflat-resolution",
-  "lem-pur-hom-kflat-into-kinjective",
-  "lem-weil-tower-evaluation-kinjective",
-  "lem-weil-derived-scalar-extension-restriction-adjunction",
-  "lem-weil-pbc-ringed-projection-mate-exact",
-  "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
-  "lem-weil-pbc-ringed-topoi-derived-pullback",
-  "lem-weil-compact-support-reduction-tower-functor",
-  "lem-weil-ringed-tower-pushforward-limit-comparison",
-  "lem-weil-proetale-weakly-etale-localization",
-  "lem-weil-pbc-ringed-slice-extension-tensor",
-  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
-  "lem-weil-pbc-ringed-slice-extension-exactness",
-  "lem-sfb-ringed-derived-monoidal-comparisons",
-  "lem-pc-pre-derived-adjoint-functors-general",
-  "lem-sfb-dc-hom-scalar-adjunction"
- ],
+ "tool_uses": [],
  "reviewed": {
-  "date": "2026-10-17",
+  "date": "2026-10-22",
   "by": "L",
-  "reviewer": "NT-cc-Q91-fb7312072",
-  "group": "Q91",
+  "reviewer": "NT-cc-Q131-809701ab3",
+  "group": "Q131",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q91-fb7312072 (reviewer sub-agent of L); spot-checked: Read the item's statement and all 10 steps in full, every cited node's statement, the parent prop-coef-integral-dualizing (step 10), the consumer lem-coef-tower-natural-currying, and blueprint main-20261015 prop-coef-integral-dualizing.proof.md paragraph 2. The statement is unchanged and not weakened. Small cases tested: point with K=R (pairing A_n⊗^L_R A_n→A_n through the balancing map), f=ϖ, K=R/ϖ, X empty. The B_K = T_a^c claim holds in the sense of agreeing evaluations and transitions, which is all that node's existence statement fixes. No new nodes, no duplicates, no cycle, no SGA. Three citation faults, all repaired in fixes/: (1) C4: the existence of the closed tensor-Hom structure and its evaluation counit was cited only to the definition def-coef-ringed-tensor-hom-model; Steps 3, 6 and 10 now also cite lem-sf-ringed-derived-closed-symmetric-monoidal (same unit). (2) C4: Step 2 identified the finite mapping complexes using only the Hom-set scalar adjunction; it now cites lem-sfb-dc-hom-scalar-adjunction with RΓ and the composition comparison, and I accepted that as an added tool use. (3) Step 9 evaluated counits and mates on the quotient-ring sequence sites as if evaluation preserved K-injectives, which it need not because the left adjoint of e_n is not exact; it now cites lem-coef-semilinear-derived-sections (same unit, reviewed), which gives these evaluations with no K-injectivity claim. I accept the 13 declared tool uses. Details are in review.md.; 1 file(s) fixed by the reviewer"
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q131-809701ab3 (reviewer sub-agent of L); spot-checked: Read the item statement, which is byte-identical to the base, along with all 10 base steps, all 5 new nodes in full, every cited statement and the source. The source is blueprint main-20261015 prop-coef-integral-dualizing.proof.md, paragraph 2: mapping-complex adjunction before limits, with counit-defined transitions. The re-split meets the 2026-10-22 note. Each of the 10 old steps is reproduced verbatim in the report and assigned to one new node: steps 1-3 to the Hom tower, 4-5 to support/open, 6-8 to the projection-evaluation word, 9 to the finite normalization and 10 to dinaturality. The assembly is 5 steps and 1732 characters. The node statements are 3.2-4.3k characters each, all unsplit and statement-only, with leanfinder, loogle, grep and leansearch searches. No new node restates the item. F^Q and B_omega agree with lem-coef-tower-trace-rectification (Q_W(n,U)=(A_n)_W, indexed n>=1). The support-node hypotheses match lem-weil-compact-support-reduction-tower-functor. I type-checked every arrow of v, Pi, q, the balancing c and both dinaturality identities. The projection mates of lem-weil-pbc-ringed-projection-mate-exact apply to rho0, and no Tor or invertibility condition is used. Small cases pass: the point with K=R (balancing kills Tor_1), K=R/varpi, f=varpi including n=1, X empty and j=p=id. The item is not in the dropped list, there is no SGA and there is no cycle. I found two repairable clause-level restatements (B/C duplicate references) and fixed both in fixes/dag/nodes/sec-six-functors. (1) The gamma paragraph of lem-coef-support-open-tensor-model restated the open tensor isomorphism j_!M⊗N≅j_!(M⊗j*N) on the vertical sequence site, which lem-sf-open-tensor-normalization already asserts for diagram topoi of arbitrary strict inverse systems. The report missed that node. Gamma now cites it and adds it as a stmt_dep. The new content is kept: the chain-level pure-tensor representative and its finite evaluations. (2) In lem-coef-hom-tower-scalar-model, the internal comparison rho_*RHom_Q(Lrho*V,N)≅RHom(V,rho_*N), normalized by evaluation, is exactly lem-sfb-dc-hom-scalar-adjunction for R^const->Q. The clause now cites it and adds it as a stmt_dep. The representative and finite isomorphisms remain the node's own work. No node is dropped. The item's inherited tool_uses are accepted unchanged.; 2 file(s) fixed by the reviewer"
  },
  "reviewed_lean": {
   "date": "2026-10-18",
@@ -396,36 +172,6 @@
   "module": "Sheaf.SixFunctors.CoefTowerEvaluationPairing",
   "declaration": "WeilConjectures.coefTowerEvaluationPairing",
   "declarations": [
-   "WeilConjectures.coefPairingModules",
-   "WeilConjectures.coefPairingModules_grothendieck",
-   "WeilConjectures.coefPairingModules_flat",
-   "WeilConjectures.coefPairingDerived",
-   "WeilConjectures.coefPairingTensor",
-   "WeilConjectures.coefPairingSections",
-   "WeilConjectures.coefPairingHom",
-   "WeilConjectures.coefPairingSupport",
-   "CategoryTheory.CoefPairingFrame",
-   "CategoryTheory.CoefPairingFrame.leftMate",
-   "CategoryTheory.CoefPairingFrame.projection",
-   "CategoryTheory.CoefPairingFrame.pairing",
-   "WeilConjectures.coefPairingOrdinarySections_additive",
-   "WeilConjectures.coefPairingOrdinaryIntegralSections",
-   "WeilConjectures.coefPairingOrdinaryIntegralSections_additive",
-   "WeilConjectures.coefPairingComplexTower_shape",
-   "WeilConjectures.coefPairingComplexTower_d_comp_d",
-   "WeilConjectures.coefPairingComplexTower",
-   "WeilConjectures.coefPairingHomComplex",
-   "WeilConjectures.coefPairingIntegralSections",
-   "WeilConjectures.coefPairingFiniteSections",
-   "WeilConjectures.coefPairingFiniteHom",
-   "WeilConjectures.coefPairingIntegralHom",
-   "WeilConjectures.coefPairingSequenceGrothendieck",
-   "WeilConjectures.CoefPairingSystem",
-   "WeilConjectures.CoefPairingSystem.beta",
-   "WeilConjectures.coefPairingFiniteSupport",
-   "WeilConjectures.CoefPairingFiniteFrame",
-   "WeilConjectures.coefPairingFiniteBeta",
-   "WeilConjectures.coefPairingFiniteC",
    "WeilConjectures.coefTowerEvaluationPairing"
   ],
   "file": "lean/Sheaf/SixFunctors/CoefTowerEvaluationPairing.lean",
@@ -436,25 +182,25 @@
   "existing": false
  },
  "reviewed_proof": {
-  "date": "2026-10-20",
+  "date": "2026-10-25",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "J1",
-  "result": "pass",
-  "landing": "20261020T051410-L-1667439",
+  "reviewer": "C-58ee7",
+  "group": "Q9",
+  "result": "fix",
+  "landing": "20261025T123614-L-1883187",
   "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)",
-  "sorry_before": [
-   "WeilConjectures.coefPairingComplexTower_d_comp_d",
-   "WeilConjectures.coefPairingComplexTower_shape",
-   "WeilConjectures.coefPairingModules_flat",
-   "WeilConjectures.coefPairingModules_grothendieck",
-   "WeilConjectures.coefPairingOrdinarySections_additive",
-   "WeilConjectures.coefTowerEvaluationPairing"
-  ],
-  "sorry_after": [
-   "WeilConjectures.coefTowerEvaluationPairing"
-  ]
+  "note": "independent cc review: item theorem stmt byte-identical to live; Data module = old item text minus theorem (diff); new sorry stmts vs item clauses and CoefficientDerivedSystemCalculus adjunction pinning; node fields vs live; 5 modules + 2 direct importers compiled"
  },
- "lean_audit": {}
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ }
 }

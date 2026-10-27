@@ -1,0 +1,316 @@
+{
+ "id": "lem-trf-quasi-finite-henselian-tensor-factor",
+ "kind": "statement",
+ "title": "Finite henselian factor of a quasi-finite tensor base change",
+ "statement": "Let $A\\to B$ be a finite-type homomorphism of commutative rings, let $\\mathfrak q\\subset B$ be a prime over $\\mathfrak p\\subset A$, and suppose $A\\to B$ is quasi-finite at $\\mathfrak q$ [def-weil-pbc-ring-map-quasi-finite-at-prime]. Let $(R,\\mathfrak m_R)$ be a henselian local ring [def-weil-pbc-henselian-terminology] with a local homomorphism $A_{\\mathfrak p}\\to R$, where local means that the inverse image of the target maximal ideal is the source maximal ideal [def-weil-pbc-localization-at-prime]. Put $C=R\\otimes_A B$. For every prime $\\mathfrak n\\subset C$ whose contractions to $R$ and $B$ are $\\mathfrak m_R$ and $\\mathfrak q$, respectively, $R\\to C$ is quasi-finite at $\\mathfrak n$ and the canonical map $R\\to C_{\\mathfrak n}$ is finite and local. Here finite means that $C_{\\mathfrak n}$ is finitely generated as an $R$-module. Moreover $C_{\\mathfrak n}$ is henselian. No ind-etaleness, residue-field isomorphism or Noetherian hypothesis is imposed on $R$.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tag 05WP (lemma-quasi-finite-henselization), proof, lines 43600--43615"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-ring-map-quasi-finite-at-prime",
+  "def-weil-pbc-henselian-terminology",
+  "def-weil-pbc-localization-at-prime",
+  "lem-weil-pbc-algebra-tensor-pushout-universal-property",
+  "def-weil-pbc-module-tensor-product"
+ ],
+ "proof": [
+  {
+   "text": "Use the tensor algebra structure of [lem-weil-pbc-algebra-tensor-pushout-universal-property]. The square $A\\to B$, $A\\to R$, $B\\to C$, $R\\to C$ commutes. Every tensor is a finite sum of pure tensors by [def-weil-pbc-module-tensor-product], and $r\\otimes b=(r\\otimes1)(1\\otimes b)$. Thus the images of $B$ and $R$ generate $C$ in the precise sum-of-products sense of [lem-weil-pbc-quasi-finite-four-rings]. Apply that node with $(R,S,R',S')=(A,B,R,C)$ and primes $(\\mathfrak p,\\mathfrak q,\\mathfrak m_R,\\mathfrak n)$. It gives both finite type of $R\\to C$ and quasi-finiteness at $\\mathfrak n$.",
+   "uses": [
+    "lem-weil-pbc-algebra-tensor-pushout-universal-property",
+    "def-weil-pbc-module-tensor-product",
+    "lem-weil-pbc-quasi-finite-four-rings"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tags 05WP (lemma-quasi-finite-henselization), first sentence of proof, and 00PN (lemma-four-rings)."
+   }
+  },
+  {
+   "text": "Apply [lem-weil-pbc-henselian-finite-type-product-decomposition] to $R\\to C$: write $C\\cong A_1\\times\\cdots\\times A_t\\times D$, with each $A_i$ local and module-finite over $R$ and with no quasi-finite prime of $D$ above $\\mathfrak m_R$. A prime of a finite product selects exactly one factor: among the orthogonal coordinate idempotents summing to $1$, exactly one is outside the prime (at least one because the sum is $1$, at most one because their products are zero); all other factors lie in the prime. If $\\mathfrak n$ selected $D$, its corresponding prime $\\mathfrak d$ would still contract to $\\mathfrak m_R$. Apply [lem-weil-pbc-quasi-finite-four-rings] with $(R,S,R',S')=(R,C,R,D)$ and $\\mathfrak q'=\\mathfrak d$. Its contraction to $C$ is $\\mathfrak n$, and $R\\to C$ is finite type by Step 1. Surjectivity of $C\\to D$ gives the sum-of-products condition (take the $R$-factor to be $1$). Thus Step 1 implies quasi-finiteness of $R\\to D$ at $\\mathfrak d$, contradicting the remainder clause. Hence $\\mathfrak n$ selects some $A_i$ and a prime $P\\subset A_i$ over $\\mathfrak m_R$.",
+   "uses": [
+    "lem-weil-pbc-henselian-finite-type-product-decomposition",
+    "lem-weil-pbc-quasi-finite-four-rings"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 04GH (lemma-finite-over-henselian), proof of (3), using 04GJ (lemma-mop-up)."
+   }
+  },
+  {
+   "text": "The domain $A_i/P$ is a finite-dimensional algebra over the field $k=R/\\mathfrak m_R$: any finite $R$-module generating family of $A_i$ maps to a spanning family, since $\\mathfrak m_R$ acts by zero. By [lem-weil-pbc-finite-dimensional-domain-is-field], $A_i/P$ is a field. Thus $P$ is maximal and, since $A_i$ is local, it is its unique maximal ideal. Let $\\pi_i:C\\to A_i$ be the coordinate projection through the product decomposition of Step 2. For $s\\notin\\mathfrak n$, $\\pi_i(s)\\notin P$ is a unit. The fraction formula $c/s\\mapsto\\pi_i(c)\\pi_i(s)^{-1}$ therefore defines $C_{\\mathfrak n}\\to A_i$. Its inverse sends $a$ to the image in $C_{\\mathfrak n}$ of the coordinate vector with entry $a$ at $i$ and zeros elsewhere. Indeed the coordinate idempotent $e_i\\notin\\mathfrak n$ becomes the unit $1$ after localization (an invertible idempotent equals $1$), and all other factors become zero. These formulas are inverse unital $R$-algebra homomorphisms. Consequently $C_{\\mathfrak n}\\cong A_i$ is module-finite over $R$.",
+   "uses": [
+    "lem-weil-pbc-finite-dimensional-domain-is-field"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 04GH (lemma-finite-over-henselian), proof of (3); Tag 00GS (lemma-integral-over-field), (1)."
+   }
+  },
+  {
+   "text": "By [def-weil-pbc-localization-at-prime], $C_{\\mathfrak n}$ is local with maximal ideal $\\mathfrak nC_{\\mathfrak n}$. The fraction criterion gives $c/1\\in\\mathfrak nC_{\\mathfrak n}$ exactly when $c\\in\\mathfrak n$: if $sc\\in\\mathfrak n$ with $s\\notin\\mathfrak n$, primality forces $c\\in\\mathfrak n$. Its inverse image in $R$ is therefore $\\mathfrak n\\cap R=\\mathfrak m_R$, proving locality of the canonical structural map. Finally apply [lem-weil-pbc-finite-local-henselian] to this local module-finite $R$-algebra, with the given henselian ring $R$, to conclude that $C_{\\mathfrak n}$ is henselian. All maps used are the canonical structural maps or $R$-algebra isomorphisms, so finiteness concerns precisely the map in the statement.",
+   "uses": [
+    "def-weil-pbc-localization-at-prime",
+    "lem-weil-pbc-finite-local-henselian"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 04GH (lemma-finite-over-henselian), (2) and (3)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-localization-at-prime",
+  "def-weil-pbc-module-tensor-product",
+  "lem-weil-pbc-algebra-tensor-pushout-universal-property",
+  "lem-weil-pbc-finite-dimensional-domain-is-field",
+  "lem-weil-pbc-finite-local-henselian",
+  "lem-weil-pbc-henselian-finite-type-product-decomposition",
+  "lem-weil-pbc-quasi-finite-four-rings"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tag 05WP (lemma-quasi-finite-henselization), first two sentences of proof, expanded using Tags 00PN, 04GJ, 04GH and 00GS."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "henselian.*(quasiFinite|quasi.finite)|(quasiFinite|quasi.finite).*henselian",
+   "results": "0 hits: none.  The residue-field finiteness and localization stability hits do not assert finiteness over a henselian base.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "HenselianLocalRing, Algebra.QuasiFiniteAt",
+   "results": "0 hits: none.  The residue-field finiteness and localization stability hits do not assert finiteness over a henselian base.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Localization of a finite type algebra at a quasi finite point over the closed point of a henselian local base is finite and henselian",
+   "results": "8 hits: RingHom.QuasiFinite.holdsForLocalizationAway, RingHom.finiteType_localizationPreserves, Algebra.QuasiFinite.of_isIntegral_of_finiteType, Algebra.EssFiniteType.of_isLocalization, Algebra.QuasiFinite.recOn, Algebra.QuasiFinite.of_isLocalization, instHenselianRingMaximalIdeal, RingHom.QuasiFinite.ofLocalizationSpanTarget.  The residue-field finiteness and localization stability hits do not assert finiteness over a henselian base.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A quasi-finite finite type algebra after base change to a henselian local ring has finite henselian localization at a prime over the maximal ideal",
+   "results": "8 hits: Algebra.instFiniteResidueFieldOfQuasiFiniteAt, Algebra.QuasiFiniteAt, RingHom.EssFiniteType.residueFieldMap, Algebra.quasiFinite_iff, Algebra.QuasiFinite.instResidueField, HenselianLocalRing.toIsLocalRing, IsLocalRing.ResidueField.finite_of_finite, Algebra.QuasiFinite.instFiniteResidueField.  The residue-field finiteness and localization stability hits do not assert finiteness over a henselian base.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "henselian.*(quasiFinite|quasi.finite)|(quasiFinite|quasi.finite).*henselian",
+   "results": {
+    "t": "2026-10-23T12:43:27Z",
+    "tool": "grep",
+    "query": "henselian.*(quasiFinite|quasi.finite)|(quasiFinite|quasi.finite).*henselian",
+    "sub": "",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Localization at a quasi finite closed fibre point of a finite type algebra over a henselian local ring is finite and henselian",
+   "results": {
+    "t": "2026-10-23T12:43:28Z",
+    "tool": "leansearch",
+    "query": "Localization at a quasi finite closed fibre point of a finite type algebra over a henselian local ring is finite and henselian",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "RingHom.QuasiFinite.holdsForLocalizationAway",
+     "Algebra.QuasiFinite.instLocalization",
+     "instHenselianRingMaximalIdeal",
+     "Algebra.QuasiFinite.of_isIntegral_of_finiteType",
+     "RingHom.finiteType_localizationPreserves",
+     "RingHom.localization_away_map_finite",
+     "Algebra.QuasiFinite.of_isLocalization",
+     "Algebra.QuasiFinite.recOn"
+    ],
+    "digest": "1b7bf9e729c82466"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "HenselianLocalRing, Algebra.QuasiFiniteAt",
+   "results": {
+    "t": "2026-10-23T12:43:28Z",
+    "tool": "loogle",
+    "query": "HenselianLocalRing, Algebra.QuasiFiniteAt",
+    "sub": "",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A quasi finite point over the closed point of a henselian local ring has a finite henselian localization after tensor base change",
+   "results": {
+    "t": "2026-10-23T12:43:29Z",
+    "tool": "leanfinder",
+    "query": "A quasi finite point over the closed point of a henselian local ring has a finite henselian localization after tensor base change",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "Algebra.QuasiFiniteAt.baseChange",
+     "Algebra.instFiniteResidueFieldOfQuasiFiniteAt",
+     "Algebra.QuasiFinite.instResidueField",
+     "Algebra.QuasiFiniteAt",
+     "Algebra.quasiFinite_iff",
+     "RingHom.EssFiniteType.residueFieldMap",
+     "HenselianLocalRing.TFAE",
+     "RingHom.QuasiFinite.propertyIsLocal"
+    ],
+    "digest": "f11487bdf16bf7aa"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "(Finite|finite).*(Henselian|henselian)|(Henselian|henselian).*(Finite|finite)",
+   "results": {
+    "t": "2026-10-23T12:44:31Z",
+    "tool": "grep",
+    "query": "(Finite|finite).*(Henselian|henselian)|(Henselian|henselian).*(Finite|finite)",
+    "sub": "RingTheory",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A finite type algebra over a henselian local ring splits into local finite algebras and a remainder with no isolated points in the closed fibre",
+   "results": {
+    "t": "2026-10-23T12:44:32Z",
+    "tool": "leanfinder",
+    "query": "A finite type algebra over a henselian local ring splits into local finite algebras and a remainder with no isolated points in the closed fibre",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "HenselianLocalRing",
+     "HenselianLocalRing.TFAE",
+     "instHenselianRingMaximalIdeal",
+     "HenselianLocalRing.toIsLocalRing",
+     "HenselianRing",
+     "Field.henselian",
+     "Algebra.instFiniteResidueFieldOfFormallyUnramified",
+     "HenselianLocalRing.is_henselian"
+    ],
+    "digest": "8f1fe7eac9b79a30"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-henselization-quasi-finite-ring",
+  "date": "2026-10-22",
+  "group": "Q76"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Historical auxiliary henselization chain below lem-trf-local-term-locality, Tag 05WP proof: transfer quasi-finiteness to the tensor square and extract the finite henselian factor (returned item steps 2-3).",
+   "via": [
+    "lem-trf-henselization-quasi-finite-ring",
+    "lem-trf-henselization-quotient-at-prime",
+    "lem-trf-henselizations-common-normal-cover",
+    "lem-trf-artin-join-theorem-6-3"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-trf-quasi-finite-henselian-tensor-factor",
+  "worker": "stage1",
+  "summary": "Expanded the two applications in 05WP into tensor generation, four-rings base change, henselian finite-type decomposition, explicit prime selection and localization, and finite-local henselianity. Reuses only existing nodes; no new nodes. Statement unchanged; tensor notions added to statement dependencies. Repair rebase: reread all current cited statements and verified all citation quotes; made the second four-rings substitution and its finite-type, contraction and generation hypotheses explicit.",
+  "blueprint": "Historical auxiliary henselization chain from lem-trf-local-term-locality, via the recorded ancestors: Tag 05WP proof first two sentences. Current latest locality proof no longer uses this historical chain; no change to its contracting-correspondence route.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-quasi-finite-four-rings",
+    "why": "General ring-theoretic base-change tool used expressly by Tag 05WP, no replacement in the trace-formula unit."
+   },
+   {
+    "node": "lem-weil-pbc-henselian-finite-type-product-decomposition",
+    "why": "Henselian finite-type algebra decomposition is the 04GH proof ingredient; the trace-formula unit supplies no commutative-algebra substitute."
+   },
+   {
+    "node": "lem-weil-pbc-finite-local-henselian",
+    "why": "Finite-local henselian permanence, exactly 04GH(2), used by 04GH(3)."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-quasi-finite-four-rings",
+  "lem-weil-pbc-henselian-finite-type-product-decomposition",
+  "lem-weil-pbc-finite-local-henselian"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q29-4587e8740",
+  "group": "Q29",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q29-4587e8740 (reviewer sub-agent of L); spot-checked: I read the item and all 9 cited statements in full, plus Stacks 05WP (algebra.tex 43581-43615) and 04GH (42385-42416). This head is a re-push after a landing refusal of the previously PASSed fc1b98b5 (svc.log 21:05:53, 'completed in this project's DAG but not in the ...'), which is not a mathematical fault. The diff against fc1b98b5 changes only Step 1 notation (R' instead of R\\prime), the Step 2 wording (the second four-rings application is now written out explicitly) and the split_report summary. There are no repair notes and no new nodes. The statement keeps all hypotheses and is a correct generalization of the first two sentences of 05WP's proof to any henselian local R with a local map A_p->R, which is exactly what 04GH(3) needs. Step 1: the tensor pushout plus pure-tensor generation give the four-rings hypothesis for (A,B,R,C), so R->C is of finite type and quasi-finite at n. Step 2: the 04GJ decomposition applies and prime selection by idempotents is elementary. The remainder D is excluded by four-rings on (R,C,R,D): C->D is surjective, the inverse images of d are n and m_R, so R->D would be quasi-finite at d, a contradiction. Step 3: P∩R=m_R, so A_i/P is a finite-dimensional k-domain, hence a field (Mathlib leaf), and P is the maximal ideal of A_i. I checked both composites of the explicit C_n≅A_i comparison. Step 4: locality follows from the fraction criterion, and 04GH(2)'s hypotheses hold exactly, giving henselian. Edge cases checked: R a field (k[e]/e^2), C=0, t=0, a non-quasi-finite remainder, and the role of the m_R-contraction in maximality. A DAG grep for 04GH/05WP finds no duplicate: finite-over-henselian-local-product covers only the finite case, and the parent and 05WR siblings are different statements. I accept the declared tool uses: four-rings, the finite-type decomposition and finite-local-henselian, all generic algebra that the sibling node also uses. There is no SGA citation. No changes."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.QuasiFiniteHenselianTensorFactor",
+  "declaration": "Algebra.quasiFinite_henselian_tensor_factor",
+  "file": "lean/Sheaf/RingTheory/QuasiFiniteHenselianTensorFactor.lean",
+  "statement": "theorem quasiFinite_henselian_tensor_factor (A : Type u) (B : Type v) (R : Type w) [CommRing A] [CommRing B] [CommRing R] [Algebra A B] [Algebra.FiniteType A B] (p : PrimeSpectrum A) (q : PrimeSpectrum B) (hqp : q.asIdeal.comap (algebraMap A B) = p.asIdeal) (hq : IsQuasiFiniteAtPrime A B q) [HenselianLocalRing R] [Algebra A R] [Algebra (Localization.AtPrime p.asIdeal) R] [IsScalarTower A (Localization.AtPrime p.asIdeal) R] (hlocal : (IsLocalRing.maximalIdeal R).comap (algebraMap (Localization.AtPrime p.asIdeal) R) = IsLocalRing.maximalIdeal (Localization.AtPrime p.asIdeal)) (n : PrimeSpectrum (R ⊗[A] B)) (hnR : n.asIdeal.comap (algebraMap R (R ⊗[A] B)) = IsLocalRing.maximalIdeal R) (hnB : n.asIdeal.comap (Algebra.TensorProduct.includeRight : B →ₐ[A] R ⊗[A] B).toRingHom = q.asIdeal) : IsQuasiFiniteAtPrime R (R ⊗[A] B) n ∧ Module.Finite R (Localization.AtPrime n.asIdeal) ∧ (IsLocalRing.maximalIdeal (Localization.AtPrime n.asIdeal)).comap (algebraMap R (Localization.AtPrime n.asIdeal)) = IsLocalRing.maximalIdeal R ∧ HenselianLocalRing (Localization.AtPrime n.asIdeal)",
+  "branch": "sheaf-dag",
+  "by": "Q48",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-6a6473c81",
+  "group": "Q48",
+  "result": "pass",
+  "note": "Statement matches node and Stacks 05WP clause by clause: FiniteType A B, q over p (hqp), IsQuasiFiniteAtPrime A B q (recorded def), HenselianLocalRing R, local A_p→R via comap equality with harmless IsScalarTower pin, n contracting to m_R (algebraMap) and q (includeRight); conclusions quasi-finite at n (FiniteType via Mathlib instance FiniteType.baseChange), Module.Finite R C_n, locality as comap equality, HenselianLocalRing C_n. No extra assumptions, independent universes, edge cases B=0/C=0 vacuous. lean.statement verbatim equals the file signature; sorry-only proof; source and blueprint docstrings with proof steps; proof-dep modules imported non-public and exist live; report has Worker report and Second reading sections. No findings, no files changed, no compile needed."
+ }
+}

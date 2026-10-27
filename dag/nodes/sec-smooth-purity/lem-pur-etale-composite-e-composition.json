@@ -1,0 +1,135 @@
+{
+ "id": "lem-pur-etale-composite-e-composition",
+ "kind": "statement",
+ "title": "Composition of the normalized etale source comparison",
+ "statement": "Fix the finite coefficient setting [def-pur-conventions] and the canonical exceptional composition, normalized etale source comparison and derived pullback composition [def-pur-finite-exceptional-composition, lem-pur-finite-etale-dualizing-normalization, lem-weil-pbc-proetale-derived-pullback-composition]. Let $q:A\\to B$, $J:R\\to A$ and $H:W\\to R$ be separated finite-type $k$-morphisms between finite-type $k$-schemes [def-weil-scheme-morphism-properties], with $J,H$ etale [def-weil-etale-morphism]. Put $\\omega_q=Rq^!\\Lambda$. The canonical map $E_{HJ,q}:\\omega_{(HJ)q}\\to L(HJ)^*\\omega_q$ is the following composite: first the canonical exceptional congruence for $((H J)q)=H(Jq)$ at $\\Lambda$, then $E_{H,Jq}$, then $LH^*E_{J,q}$, then the inverse canonical pullback compositor $LH^*LJ^*\\omega_q\\to L(HJ)^*\\omega_q$. No smoothness or Cartesian hypothesis is required.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-composition/thm-pur-composition-coherence.proof.md",
+  "place": "Step 1, normalized etale composition and naturality of rho; original tower Step 5"
+ },
+ "stmt_deps": [
+  "def-weil-finite-tor-amplitude",
+  "def-weil-pbc-proetale-site",
+  "def-pur-conventions",
+  "def-weil-scheme-morphism-properties",
+  "def-weil-derived-pullback-tensor-hom",
+  "def-weil-exceptional-inverse-image",
+  "def-pur-finite-exceptional-composition",
+  "def-pur-co-smoothness",
+  "def-sbc-smooth-morphisms",
+  "lem-weil-pbc-proetale-derived-pullback-composition",
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+  "def-weil-etale-morphism",
+  "lem-pur-finite-etale-dualizing-normalization",
+  "def-pc-fibre-product"
+ ],
+ "proof": [
+  {
+   "text": "Expand E_HJ,q as c_HJ,q followed by rho_HJ at omega_q. The mate-pasting law applied to compact-support composition associativity identifies c_HJ,q followed by c_H,J at omega_q with the associativity congruence followed by c_H,Jq and H-exceptional pullback of c_J,q. Substitute the normalization composition law for rho_HJ. Naturality of rho_H moves the exceptional pullback of c_J,q through rho_H to its ordinary derived pullback. Compose with the pullback compositor inverse and cancel its hom. The resulting factors are exactly E_H,Jq followed by H-pullback of E_J,q and the inverse pullback compositor, as asserted.",
+   "uses": [
+    "thm-sf-comp-composition",
+    "lem-weil-pbc-mate-pasting",
+    "def-pur-finite-exceptional-composition",
+    "lem-pur-finite-etale-dualizing-normalization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sp-composition/thm-pur-composition-coherence.proof.md",
+    "place": "Step 1, etale localization and the pentagon for the twofold diagonal: compare towers through one Cartesian square and two etale factors (old item step 10); agent-written refinement of the blueprint argument"
+   }
+  }
+ ],
+ "proof_deps": [
+  "thm-sf-comp-composition",
+  "lem-weil-pbc-mate-pasting",
+  "def-pur-finite-exceptional-composition",
+  "lem-pur-finite-etale-dualizing-normalization"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-composition/thm-pur-composition-coherence.proof.md",
+  "place": "Step 1, normalized etale composition and naturality of rho; original tower Step 5"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "The counit normalized etale exceptional comparison composes through two etale source maps",
+   "results": "Eight hits including ComonadicityInternal.comparisonAdjunction_counit, ExponentiableMorphism.pushforwardComp_hom_counit_assoc, and Equivalence.counit_naturality_assoc. None states exceptional inverse-image normalization or its geometric composition law.",
+   "date": "2026-10-26",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "normalized etale exceptional comparison E composition through two etale source arrows",
+   "results": "Eight hits: IsEtale.of_comp, Scheme.Hom normalization composition lemmas and IsEtale.instHasOfPostcompPropertyScheme. No normalized exceptional comparison.",
+   "date": "2026-10-26",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.conjugateEquiv_comp",
+   "results": "CategoryTheory.conjugateEquiv_comp in Mathlib.CategoryTheory.Adjunction.Mates. It transports vertical composition but does not assert the geometric normalized E equation.",
+   "date": "2026-10-26",
+   "verdict": "tool only"
+  },
+  {
+   "tool": "grep",
+   "query": "sourceEtale.*comp|comp.*sourceEtale",
+   "results": "msearch grep returned zero hits. Existing normalization composition controls rho; compact-support associativity and mate pasting control exceptional composition, but none directly states this composite E equation. blueprint_refs.py search etale composite comparison returned zero blueprint nodes.",
+   "date": "2026-10-26",
+   "verdict": "no duplicate"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.EtaleCartesianTowerTensorComparison",
+  "date": "2026-10-26",
+  "group": "V6"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-pur-composition-coherence",
+   "place": "Step 1, coherence of the composition package and etale localization",
+   "via": [
+    "lem-pur-etale-cartesian-tower-tensor-comparison",
+    "lem-pur-diagonal-section-pasting"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-thm-smooth-purity",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.EtaleCompositeEComposition",
+  "file": "lean/Sheaf/Paper/EtaleCompositeEComposition.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.etale_composite_e_composition",
+  "statement": "theorem etale_composite_e_composition\n    (P : WeilConjectures.PurityFiniteSetting.{u})\n    {B A R W : Scheme.{u}}\n    [B.Over (Spec (.of P.field.k))]\n    [LocallyOfFiniteType (B ↘ Spec (.of P.field.k))]\n    [QuasiCompact (B ↘ Spec (.of P.field.k))]\n    [A.Over (Spec (.of P.field.k))]\n    [LocallyOfFiniteType (A ↘ Spec (.of P.field.k))]\n    [QuasiCompact (A ↘ Spec (.of P.field.k))]\n    [R.Over (Spec (.of P.field.k))]\n    [LocallyOfFiniteType (R ↘ Spec (.of P.field.k))]\n    [QuasiCompact (R ↘ Spec (.of P.field.k))]\n    [W.Over (Spec (.of P.field.k))]\n    [LocallyOfFiniteType (W ↘ Spec (.of P.field.k))]\n    [QuasiCompact (W ↘ Spec (.of P.field.k))]\n    (q : A ⟶ B) [q.IsOver (Spec (.of P.field.k))]\n    [IsSeparated q] [LocallyOfFiniteType q] [QuasiCompact q]\n    (J : R ⟶ A) [J.IsOver (Spec (.of P.field.k))]\n    [IsSeparated J] [LocallyOfFiniteType J] [QuasiCompact J]\n    (H : W ⟶ R) [H.IsOver (Spec (.of P.field.k))]\n    [IsSeparated H] [LocallyOfFiniteType H] [QuasiCompact H]\n    [Etale J] [Etale H] :\n    (sourceEtale P (H ≫ J) q).hom =\n      (FiniteEtaleNormalization.congr P ((H ≫ J) ≫ q)\n        (H ≫ J ≫ q) (Category.assoc H J q)).hom.app\n        (coefficientUnit (ModuleCat.{u + 1} P.Coefficient) B) ≫\n      (sourceEtale P H (J ≫ q)).hom ≫\n      (pull P H).map (sourceEtale P J q).hom ≫\n      (Etale.leftDerivedUpperStarComp (ModuleCat.{u + 1} P.Coefficient) H J).inv.app\n        (omega P q)",
+  "branch": "sheaf-dag",
+  "by": "V6",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V6",
+  "result": "pass",
+  "landing": "20261025T203523-L-2824393",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V6",
+  "result": "pass",
+  "landing": "20261025T203523-L-2824393",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

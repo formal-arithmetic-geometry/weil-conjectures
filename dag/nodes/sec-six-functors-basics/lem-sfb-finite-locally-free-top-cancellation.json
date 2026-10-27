@@ -1,0 +1,254 @@
+{
+ "id": "lem-sfb-finite-locally-free-top-cancellation",
+ "kind": "statement",
+ "title": "Local cancellation of one acyclic top degree of a finite locally free sheaf complex",
+ "statement": "Let $X$ be a scheme [def-pc-scheme], $r\\in\\mathbf Z$, and $P^\\bullet$ a cochain complex of $\\mathcal O_X$-modules [def-pc-cochain-complex-modules]. Assume that every $P^i$ is finite locally free [def-sc-finite-locally-free-sheaf], that $P^i=0$ for $i>r$, and that $H^r(P^\\bullet)=0$, where $H^i=\\ker(d^i)/\\operatorname{im}(d^{i-1})$. Then for every $x\\in X$ there exist an open neighbourhood $V$ of $x$, a cochain complex $Q^\\bullet$ of finite locally free $\\mathcal O_V$-modules with $Q^i=0$ for $i>r-1$, and a chain map $Q^\\bullet\\to P^\\bullet|_V$ inducing an isomorphism on every cohomology sheaf. No lower bound on $P^\\bullet$ is assumed.",
+ "source": {
+  "document": "literature/stacks-project/cohomology.tex; literature/stacks-project/modules.tex",
+  "place": "Tag 08DN, lemma-finite-cohomology, proof of (1), cancellation of the top degree, also used in (2); Tag 08C6, lemma-local-lift-map, for the local section; Tag 0BCI, lemma-direct-summand-of-locally-free-is-locally-free, for the new top term. The same single-degree construction does not use boundedness below."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-cochain-complex-modules",
+  "def-sc-finite-locally-free-sheaf"
+ ],
+ "proof": [
+  {
+   "text": "Put $\\delta=d^{r-1}:P^{r-1}\\to P^r$. Since $P^{r+1}=0$, $d^r=0$ and hence $H^r(P)=P^r/\\operatorname{im}\\delta=\\operatorname{Coker}\\delta$. The hypothesis makes this cokernel zero. By [lem-weil-pbc-ringed-space-module-exactness-local-lifting] (1), $\\delta$ is an epimorphism and every section of $P^r$ lifts locally through it. This uses sheaf surjectivity, not surjectivity on sections of an arbitrary open.",
+   "uses": [
+    "lem-weil-pbc-ringed-space-module-exactness-local-lifting"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/cohomology.tex; literature/stacks-project/modules.tex",
+    "place": "Tag 08DN, lemma-finite-cohomology, proof (1), surjectivity of the last differential; Tag 01AF, section-kernels"
+   }
+  },
+  {
+   "text": "Fix $x\\in X$. Apply [new-sbc-local-section-of-epi] to $\\delta$ and its finite locally free target $P^r$. Obtain an open $U$ containing $x$ and $s:P^r|_U\\to P^{r-1}|_U$ with $\\delta s=1$. By [def-sc-finite-locally-free-sheaf], shrink $U$ so that $A=P^{r-1}|_U$ is finite free. Write $B=P^r|_U$ and $K=\\ker(\\delta|_U)$, explicitly the subsheaf $W\\mapsto\\{a\\in A(W):\\delta(a)=0\\}$. The kernel description is supplied by [lem-weil-pbc-ringed-space-module-exactness-local-lifting].",
+   "uses": [
+    "new-sbc-local-section-of-epi",
+    "def-sc-finite-locally-free-sheaf",
+    "lem-weil-pbc-ringed-space-module-exactness-local-lifting"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/cohomology.tex; literature/stacks-project/modules.tex",
+    "place": "Tag 08C6, lemma-local-lift-map, applied to the identity of the locally finite free target; Tag 01C6, definition-locally-free"
+   }
+  },
+  {
+   "text": "Let $i:K\\hookrightarrow A$. The formula $p(a)=a-s\\delta(a)$ takes values in $K$, since $\\delta(a-s\\delta(a))=0$, and $pi=1_K$. All formulas are linear and commute with restrictions. Thus $K$ is a retract of the finite free sheaf $A$. Apply [new-pc-single-retract-sheaf-affine-trivialization] at $x$ with the open $U$ and the splitting $(i,p)$, composed with the chosen trivialization of $A$. Obtain a smaller open $V$ containing $x$ on which $K|_V$ is finite free. This supplies precisely the new finite locally free top term. The local-ring hypothesis in Tag 0BCI is satisfied because $X$ is a scheme; the cited retract theorem is already stated for schemes.",
+   "uses": [
+    "new-pc-single-retract-sheaf-affine-trivialization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/cohomology.tex; literature/stacks-project/modules.tex",
+    "place": "Tag 0BCI, lemma-direct-summand-of-locally-free-is-locally-free; explicit retract from the section in Tag 08DN"
+   }
+  },
+  {
+   "text": "On $V$ define $Q^j=P^j|_V$ for $j\\le r-2$, $Q^{r-1}=K|_V$, and $Q^j=0$ for $j\\ge r$. Keep the original differentials for $j\\le r-3$; define $d_Q^{r-2}$ to be $d_P^{r-2}$ with codomain restricted to $K|_V$, and set all later differentials to zero. This codomain restriction is valid because $\\delta d_P^{r-2}=0$. The relation $d_Q^{r-2}d_Q^{r-3}=0$ follows after the injective inclusion into $P^{r-1}|_V$; all other square-zero relations are unchanged or zero. Define $f:Q\\to P|_V$ by identities in degrees $\\le r-2$, the inclusion $i$ in degree $r-1$, and zero above. At degree $r-2$ the chain-map equation is the defining factorization, at degree $r-1$ it is $\\delta i=0$, and elsewhere it is an identity or zero. These are exactly the complex and morphism conditions of [def-pc-cochain-complex-modules]. Restrictions of the local trivializations in [def-sc-finite-locally-free-sheaf] show that the unchanged terms remain finite locally free, and zero has rank zero.",
+   "uses": [
+    "def-pc-cochain-complex-modules",
+    "def-sc-finite-locally-free-sheaf"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/cohomology.tex; literature/stacks-project/modules.tex",
+    "place": "Tag 08DN, lemma-finite-cohomology, proof (1), definition of the shortened complex, expanded degreewise"
+   }
+  },
+  {
+   "text": "For $j\\le r-3$ the cycles and boundaries for $f$ are identical. In degree $r-2$, replacing the codomain of the outgoing map by its subsheaf $K|_V$ leaves its kernel unchanged, and the incoming map is unchanged, so the induced cohomology map is an isomorphism. In degree $r-1$, the cycles of $P|_V$ are exactly $K|_V$, and its boundary subsheaf is the image of the same map $P^{r-2}|_V\\to K|_V$ as for $Q$. These image identifications can be checked by the local-lifting criterion (2) of [lem-weil-pbc-ringed-space-module-exactness-local-lifting]: a section is a boundary exactly when it locally lifts through that same incoming map. Hence the quotients, and the map induced by $i$, agree. In degree $r$, $H^r(Q)=0$ and $H^r(P|_V)=0$ because the restricted section $s|_V$ still splits $\\delta|_V$. In degrees $j>r$ both complexes have zero terms. Thus $f$ induces isomorphisms in every degree and $Q^j=0$ for $j>r-1$. Only the two highest degrees were changed, so the argument applies for every integer $r$ without any lower bound.",
+   "uses": [
+    "lem-weil-pbc-ringed-space-module-exactness-local-lifting"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/cohomology.tex; literature/stacks-project/modules.tex",
+    "place": "Tag 08DN, lemma-finite-cohomology, proof (1), invariance under removing the split identity pair; Tag 01AF, section-kernels; Tag 01AG, lemma-abelian"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-ringed-space-module-exactness-local-lifting",
+  "new-sbc-local-section-of-epi",
+  "def-sc-finite-locally-free-sheaf",
+  "new-pc-single-retract-sheaf-affine-trivialization",
+  "def-pc-cochain-complex-modules"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/cohomology.tex; literature/stacks-project/modules.tex",
+  "place": "Tag 08DN, lemma-finite-cohomology, proof (1), one-degree cancellation; Tag 08C6 and Tag 0BCI. Expanded construction and cohomology verification do not use a lower bound."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "cancel.*top|split.*top|top.*cancel|locallyFree.*homotopy|homotopy.*locallyFree",
+   "results": "OK: 25 hits; Mathlib/Algebra/Category/Grp/EpiMono.lean, Mathlib/Algebra/Category/Grp/EpiMono.lean, Mathlib/Algebra/CubicDiscriminant.lean, Mathlib/Algebra/CubicDiscriminant.lean, Mathlib/NumberTheory/LSeries/SumCoeff.lean, Mathlib/AlgebraicTopology/SimplicialSet/NonDegenerateSimplicesColimit.lean, Mathlib/Algebra/Category/ModuleCat/EpiMono.lean, Mathlib/Probability/Independence/Kernel/IndepFun.lean",
+   "date": "2026-10-23",
+   "verdict": "no match: homotopy/truncation infrastructure only; no local cancellation theorem preserving finite locally free sheaf terms."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A bounded above complex of finite locally free sheaves with zero top cohomology can locally have its top degree removed",
+   "results": "OK: 8 hits; CochainComplex.isZero_of_isStrictlyGE, HomologicalComplex.truncGE'.truncGE'_hasHomology, CochainComplex.instIsIsoIntπTruncGEOfIsStrictlyGE, HomologicalComplex.isZero_stupidTrunc_iff, HomologicalComplex.stupidTrunc, CochainComplex.isStrictlyLE_iff, CochainComplex.isStrictlyGE_iff, CategoryTheory.HasExt.instHasSmallLocalizedShiftedHomHomologicalComplexIntUpQuasiIsoOfIsGEOfIsLEOfNat",
+   "date": "2026-10-23",
+   "verdict": "no match: homotopy/truncation infrastructure only; no local cancellation theorem preserving finite locally free sheaf terms."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"SheafOfModules\", \"HomotopyEquiv\"",
+   "results": "OK: 0 hits; ",
+   "date": "2026-10-23",
+   "verdict": "no match: homotopy/truncation infrastructure only; no local cancellation theorem preserving finite locally free sheaf terms."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Cancel one acyclic top degree of a bounded above complex of finite locally free sheaves on a scheme by a local chain homotopy equivalence",
+   "results": "OK: 8 hits; HomotopyCategory.subcategoryAcyclic, CochainComplex.IsKProjective.homotopyZero_def, CochainComplex.IsKProjective.homotopyZero, DerivedCategory.from_singleFunctor_obj_eq_zero_of_projective, CochainComplex.IsKProjective.nonempty_homotopy_zero, CochainComplex.cm5b, CochainComplex.IsKProjective.leftOrthogonal, DerivedCategory.to_singleFunctor_obj_eq_zero_of_injective",
+   "date": "2026-10-23",
+   "verdict": "no match: homotopy/truncation infrastructure only; no local cancellation theorem preserving finite locally free sheaf terms."
+  },
+  {
+   "tool": "grep",
+   "query": "SheafOfModules.*(cancel|trunc|homotopy)|finiteLocallyFree.*(kernel|split)",
+   "results": "OK: 0 hits; ",
+   "date": "2026-10-23",
+   "verdict": "no match: homotopy/truncation infrastructure only; no local cancellation theorem preserving finite locally free sheaf terms."
+  },
+  {
+   "tool": "grep",
+   "query": "cancel.*top|split.*top|finiteLocallyFree.*trunc|IsFiniteLocallyFree.*kernel",
+   "results": "{\"t\": \"2026-10-23T13:02:04Z\", \"tool\": \"grep\", \"query\": \"cancel.*top|split.*top|finiteLocallyFree.*trunc|IsFiniteLocallyFree.*kernel\", \"sub\": \"\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Functor.lean\", \"Mathlib/AlgebraicGeometry/Birational/RationalMap.lean\", \"Mathlib/Probability/Independence/Kernel/IndepFun.lean\", \"Mathlib/Probability/Independence/Basic.lean\", \"Mathlib/AlgebraicGeometry/Sites/ConstantSheaf.lean\", \"Mathlib/AlgebraicGeometry/AffineSpace.lean\", \"Mathlib/AlgebraicGeometry/AffineSpace.lean\", \"Mathlib/Probability/Kernel/Disintegration/Basic.lean\"], \"digest\": \"658ac2007086584f\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: generic truncation, quasi-isomorphism and presentation infrastructure only; no local shortening retaining finite locally free sheaf terms."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A complex of finite locally free sheaves with vanishing highest cohomology admits locally a shorter quasi-isomorphic complex",
+   "results": "{\"t\": \"2026-10-23T13:02:04Z\", \"tool\": \"leansearch\", \"query\": \"A complex of finite locally free sheaves with vanishing highest cohomology admits locally a shorter quasi-isomorphic complex\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.ShortComplex.QuasiIso\", \"ChainComplex.quasiIsoAt₀_iff\", \"CochainComplex.quasiIsoAt₀_iff\", \"CategoryTheory.ShortComplex.QuasiIso.mk\", \"CategoryTheory.ShortComplex.quasiIso_of_isIso\", \"HomologicalComplexUpToQuasiIso\", \"HomologicalComplexUpToQuasiIso.Q\", \"CategoryTheory.ShortComplex.quasiIso_iff_isIso_descOpcycles\"], \"digest\": \"6c9b5fae9ef4d2a9\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: generic truncation, quasi-isomorphism and presentation infrastructure only; no local shortening retaining finite locally free sheaf terms."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"SheafOfModules\", \"QuasiIso\"",
+   "results": "{\"t\": \"2026-10-23T13:02:04Z\", \"tool\": \"loogle\", \"query\": \"\\\"SheafOfModules\\\", \\\"QuasiIso\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: generic truncation, quasi-isomorphism and presentation infrastructure only; no local shortening retaining finite locally free sheaf terms."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Remove the highest acyclic degree of a bounded above complex of finite locally free sheaves locally on a scheme",
+   "results": "{\"t\": \"2026-10-23T13:02:06Z\", \"tool\": \"leanfinder\", \"query\": \"Remove the highest acyclic degree of a bounded above complex of finite locally free sheaves locally on a scheme\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HomologicalComplex.acyclic_truncGE_iff_isSupportedOutside\", \"HomologicalComplex.acyclic_truncLE_iff_isSupportedOutside\", \"AlgebraicGeometry.exists_appTop_map_eq_zero_of_isAffine_of_isLimit\", \"DerivedCategory.isZero_of_isGE\", \"DerivedCategory.isGE_iff\", \"DerivedCategory.IsGE\", \"DerivedCategory.isZero_of_isLE\", \"DerivedCategory.to_singleFunctor_obj_eq_zero_of_injective\"], \"digest\": \"910dfd47e40bb2f1\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: generic truncation, quasi-isomorphism and presentation infrastructure only; no local shortening retaining finite locally free sheaf terms."
+  },
+  {
+   "tool": "grep",
+   "query": "truncLE.*[Qq]uasiIso|quasiIso.*[Tt]runcLE|IsFiniteLocallyFree",
+   "results": "{\"t\": \"2026-10-23T13:06:36Z\", \"tool\": \"grep\", \"query\": \"truncLE.*[Qq]uasiIso|quasiIso.*[Tt]runcLE|IsFiniteLocallyFree\", \"sub\": \"Algebra/Homology\", \"ok\": true, \"n_hits\": 15, \"note\": \"\", \"top\": [\"Mathlib/Algebra/Homology/Embedding/CochainComplex.lean\", \"Mathlib/Algebra/Homology/Embedding/CochainComplex.lean\", \"Mathlib/Algebra/Homology/Embedding/CochainComplex.lean\", \"Mathlib/Algebra/Homology/Embedding/CochainComplex.lean\", \"Mathlib/Algebra/Homology/Embedding/CochainComplex.lean\", \"Mathlib/Algebra/Homology/Embedding/AreComplementary.lean\", \"Mathlib/Algebra/Homology/Embedding/AreComplementary.lean\", \"Mathlib/Algebra/Homology/Embedding/AreComplementary.lean\"], \"digest\": \"9fa74a6e6884dbb6\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: generic truncation, quasi-isomorphism and presentation infrastructure only; no local shortening retaining finite locally free sheaf terms."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The canonical truncation of a bounded above complex preserves finite locally free sheaves if the top differential is locally split surjective",
+   "results": "{\"t\": \"2026-10-23T13:06:38Z\", \"tool\": \"leanfinder\", \"query\": \"The canonical truncation of a bounded above complex preserves finite locally free sheaves if the top differential is locally split surjective\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SheafOfModules.isFinitePresentation\", \"SheafOfModules.IsFinitePresentation\", \"SheafOfModules.IsFiniteType\", \"CochainComplex.truncGE\", \"CochainComplex.truncLE\", \"SheafOfModules.LocalGeneratorsData.IsFiniteType\", \"ComplexShape.Embedding.truncGEFunctor_obj\", \"SheafOfModules.LocalGeneratorsData.IsFiniteType.isFiniteType\"], \"digest\": \"1c7c3f33ff849585\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: generic truncation, quasi-isomorphism and presentation infrastructure only; no local shortening retaining finite locally free sheaf terms."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-pseudocoherent-top-cohomology-fp",
+  "date": "2026-10-23",
+  "group": "Q104"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Knudsen forgetful morphism as the universal stable curve. Section 2, Lemma 2.5 (printed pp.178--179), using Section 1, Corollary 1.5 and Lemma 1.6: multiplication and the pushforward exact sequences, retaining the twist by minus the old-marking divisor. Lemma 2.5, first paragraph and final evaluation: Corollary 1.5 supplies vanishing, base-flat direct images, arbitrary base change and generation for the five divisor modules. Corollary 1.5, printed p.167: the general cohomology-and-base-change tool whose conditions (1) and (2) the exceptional-fibre calculation must verify. General tool for Corollary 1.5: pass from pseudo-coherent Rf_*F, concentrated in degree zero, to finite presentation of its degree-zero module. In Tag 08DN, the one-degree cancellation in the proof of (1), reused by (2).",
+   "via": [
+    "lem-sfb-pseudocoherent-top-cohomology-fp",
+    "lem-sfb-relative-acyclic-direct-image",
+    "lem-sfb-rational-contraction-line-cohomology",
+    "lem-sfb-elementary-contraction-evaluation",
+    "lem-sfb-knudsen-pointed-forgetful-universal-curve",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-finite-locally-free-top-cancellation",
+  "worker": "stage1",
+  "summary": "Q136 reuses existing local-section and finite-free-retract nodes. Constructs the shortened complex and its inclusion explicitly, and checks all cohomology degrees without a lower bound. No new nodes or statement changes.",
+  "blueprint": "The inherited from.place traces the prerequisite for pseudo-coherent degree-zero finite presentation to the one-degree cancellation of Stacks 08DN. Steps 1–3 supply its local splitting and finite locally free kernel; steps 4–5 construct and verify the shortening. The current latest direct-image blueprint proof was read; this auxiliary construction does not replace a unit step.",
+  "tool_uses": [
+   {
+    "node": "new-sbc-local-section-of-epi",
+    "why": "Generic local section for an epimorphism onto a finite locally free sheaf; supplies the 08C6 local lift, not a replacement of the unit route."
+   },
+   {
+    "node": "new-pc-single-retract-sheaf-affine-trivialization",
+    "why": "Generic scheme finite-free-retract theorem, supplying the new kernel term of 0BCI; the unit has no separate local-freeness tool."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-space-module-exactness-local-lifting",
+    "why": "Generic sheaf epimorphism, sectionwise kernel and local-boundary criterion needed to interpret cancellation as a sheaf cohomology argument."
+   }
+  ]
+ },
+ "tool_uses": [
+  "new-sbc-local-section-of-epi",
+  "new-pc-single-retract-sheaf-affine-trivialization",
+  "lem-weil-pbc-ringed-space-module-exactness-local-lifting"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q136-7b8c231a2",
+  "group": "Q136",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q136-7b8c231a2 (reviewer sub-agent of L); spot-checked: Read the item, all six cited statements and Stacks cohomology.tex 08DN (lemma-finite-cohomology, proof (1)) and 08C6 (lemma-local-lift-map), plus modules.tex 0BCI; tags checked against tags/tags. The statement is unchanged and is exactly the one-degree cancellation of 08DN; dropping the lower bound is valid because only degrees r-2..r are touched. Step 1: H^r = Coker δ = 0, so δ is epi by exactness-local-lifting (1). Step 2: new-sbc-local-section-of-epi applies (finite locally free target, no quasi-coherence needed), then a shrink to trivialize P^{r-1}. Step 3: p = 1 - sδ lands in K with p∘i = 1; composing with the trivialization meets the hypothesis of new-pc-single-retract-sheaf-affine-trivialization, which gives K|_V free. Step 4: the codomain factorization exists since δd^{r-2} = 0, d² = 0 follows via the mono i, and the chain-map squares check. Step 5: cohomology checked in each degree (r-2 kernel unchanged, r-1 cycles = K with the same boundaries, r split, above r zero). Edge cases: empty X, P^r = 0, P^{r-1} = 0, identity pair, rank 0, nonreduced X, unbounded below. Duplicate check: no sheaf-level duplicate; lem-pc-finite-free-split-top-cancellation is ring-level with a given section. The citer lem-sfb-pseudocoherent-top-cohomology-fp step 2 uses exactly the stated conclusion. No SGA, no re-split note, no new nodes. Accepted split_report tool_uses: local-section-of-epi, single-retract trivialization, ringed-space exactness local lifting (generic)."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.FiniteLocallyFreeTopCancellation",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.exists_local_finiteLocallyFree_top_cancellation",
+  "file": "lean/Sheaf/AlgebraicGeometry/FiniteLocallyFreeTopCancellation.lean",
+  "statement": "theorem exists_local_finiteLocallyFree_top_cancellation (X : Scheme.{u}) (r : ℤ) (P : CochainComplex X.Modules ℤ) (hfree : ∀ i : ℤ, (P.X i).IsFiniteLocallyFree) (hzero : ∀ i : ℤ, r < i → IsZero (P.X i)) (hcohomology : IsZero (P.homology r)) : ∀ x : X, ∃ V : X.Opens, x ∈ V ∧ ∃ Q : CochainComplex V.toScheme.Modules ℤ, (∀ i : ℤ, (Q.X i).IsFiniteLocallyFree) ∧ (∀ i : ℤ, r - 1 < i → IsZero (Q.X i)) ∧ ∃ f : Q ⟶ ((restrictFunctor V.ι).mapHomologicalComplex (ComplexShape.up ℤ)).obj P, QuasiIso f",
+  "branch": "newtargets-dag",
+  "by": "NZ",
+  "date": "2026-10-23",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-81fada32c",
+  "group": "NZ",
+  "result": "pass",
+  "note": "Clause-by-clause match of exists_local_finiteLocallyFree_top_cancellation with the node: Scheme X, r:ℤ, CochainComplex X.Modules ℤ, IsFiniteLocallyFree for every term (variable rank; u₁ is the site universe, no free universe), IsZero above r, IsZero (homology r); ∀x ∃V∋x ∃Q on V.toScheme with finite locally free terms vanishing above r-1 and a specified f : Q ⟶ restrictFunctor V.ι mapped P with QuasiIso f. No extra hypotheses, no lower bound. lean.statement verbatim; node otherwise identical to side-live. Proof-dep decls (exists_local_section_of_epi, exists_affine_trivialization_of_finite_retract, module_exactness_local_lifting) exist and are imported non-public. Stacks 08DN/08C6/0BCI checked in the tags file. Not a duplicate of exists_split_top_differential_cancellation (lower bound 0, given split, flat/qc/fp, homotopy equivalence). Only sorry, docstrings and blueprint tag present, report has both sections. No findings."
+ }
+}

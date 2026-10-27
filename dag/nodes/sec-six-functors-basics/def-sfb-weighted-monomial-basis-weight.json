@@ -1,0 +1,126 @@
+{
+ "id": "def-sfb-weighted-monomial-basis-weight",
+ "kind": "definition",
+ "title": "Weighted flags, monomial bases and minimum Hilbert weight",
+ "status": "split",
+ "statement": "Let $k$ be a field [def-weil-field], $r=n+2\\geq2$, and $i:X\\to\\mathbf P^{r-1}_k$ a morphism of schemes [def-pc-scheme], using the standard projective space [def-nagata-projective-space-base-change] and the coordinate index of [lem-sfb-hilbert-plucker-pgl-linearization]. Let $V=k[x_1,\\ldots,x_r]_1$ be the degree-one homogeneous subspace of the polynomial ring [def-weil-pbc-mv-polynomial-ring]. Put $H_m=H^0(X,i^*\\mathcal O(m))$ [def-pc-projective-space-twist], [def-pc-module-pullback], [def-sc-ringed-space-module-cohomology], with scalars restricted along the structural map to $\\operatorname{Spec}k$, as in [lem-sfb-uniform-projective-fibre-vanishing]. Given a basis $b=(b_j)$ of $V$ and weights $w_j\\in\\mathbf N$, define its increasing weighted flag by $F_s=\\operatorname{span}_k\\{b_j:w_j\\leq s\\}$ for $s\\in\\mathbf N$. For $m\\in\\mathbf N$ and an exponent vector $e\\in\\mathbf N^r$ with $\\sum_j e_j=m$, define $b^e=\\prod_j b_j^{e_j}\\in k[x_1,\\ldots,x_r]_m$ (constructed by homogeneous projection, which fixes this product). Given a $k$-linear arrow $\\rho:k[x_1,\\ldots,x_r]_m\\to H_m$, a finite set $S$ of such exponent vectors is a monomial basis if $(\\rho(b^e))_{e\\in S}$ is linearly independent and spans $H_m$. Define $W_w(S)=\\sum_{e\\in S}\\sum_j w_j e_j$ and $w_{\\rho,b,w}(m)=\\inf\\{W_w(S):S\\text{ is a monomial basis}\\}\\in\\mathbf N$, where $\\inf\\varnothing=0$ is the totalized natural-number infimum convention. When a monomial basis exists this infimum is the attained minimum; no existence assertion is part of this definition.",
+ "stmt_deps": [
+  "def-weil-field",
+  "def-pc-scheme",
+  "def-nagata-projective-space-base-change",
+  "lem-sfb-hilbert-plucker-pgl-linearization",
+  "def-weil-pbc-mv-polynomial-ring",
+  "def-pc-projective-space-twist",
+  "def-pc-module-pullback",
+  "def-sc-ringed-space-module-cohomology",
+  "lem-sfb-uniform-projective-fibre-vanishing"
+ ],
+ "source": {
+  "document": "literature/morrison-git-stable-curves-arXiv-0810.2340.pdf",
+  "place": "Section 2.2, weighted bases and filtrations preceding Proposition 1, printed pp.6--7; read https://arxiv.org/pdf/0810.2340."
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "weighted flag minimum total weight monomial basis of projective scheme sections",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"MvPolynomial.le_weightedTotalDegree\", \"module\": \"Mathlib.RingTheory.MvPolynomial.WeightedHomogeneous\", \"type\": \"(w : σ → M) {φ : MvPolynomial σ R} {d : σ →₀ ℕ} (hd : d ∈ φ.support) : weight w d ≤ φ.weightedTotalDegree w\", \"doc\": \"For any multivariate polynomial $\\\\varphi$ over a commutative semiring $R$ with variables indexed by $\\\\sigma$, any weighting function $w : \\\\sigma \\\\to M$ where $M$ is a sup-semilattice, and any monomial\"}\n  {\"name\": \"MvPolynomial.weightedGradedAlgebra\", \"module\": \"Mathlib.RingTheory.MvPolynomial.WeightedHomogeneous\", \"type\": \"[DecidableEq M] : GradedAlgebra (weightedHomogeneousSubmodule R w)\", \"doc\": \"For a commutative semiring $ R $, type $ \\\\sigma $, additive commutative monoid $ M $, and weight function $ w : \\\\sigma \\\\to M $, this defines a graded algebra structure on the multivariate polynomial r\"}\n  {\"name\": \"MvPolynomial.IsWeightedHomogeneous.mul\", \"module\": \"Mathlib.RingTheory.MvPolynomial.WeightedHomogeneous\", \"type\": \"{w : σ → M} (hφ : IsWeightedHomogeneous w φ m) (hψ : IsWeightedHomogeneous w ψ n) :\\n  IsWeightedHomogeneous w (φ * ψ) (m + n)\", \"doc\": \"Let $ R $ be a commutative semiring, $ \\\\sigma $ an index type, and $ w : \\\\sigma \\\\to M $ a weight function. If $ \\\\varphi $ and $ \\\\psi $ are weighted homogeneous polynomials in $ R[\\\\sigma] $ with weight\"}\n  {\"name\": \"MvPolynomial.IsWeightedHomogeneous.sum\", \"module\": \"Mathlib.RingTheory.MvPolynomial.WeightedHomogeneous\", \"type\": \"{ι : Type*} (s : Finset ι) (φ : ι → MvPolynomial σ R) (n : M) {w : σ → M}\\n  (h : ∀ i ∈ s, IsWeightedHomogeneous w (φ i) n) : IsWeightedHomogeneous w (∑ i ∈ s, φ i) n\", \"doc\": \"Let $ R $ be a commutative semiring, $ \\\\sigma $ an index type, and $ w : \\\\sigma \\\\to M $ a weight function. If $ \\\\{\\\\varphi_i\\\\}_{i \\\\in s} $ is a finite family of multivariate polynomials in $ R[\\\\sigma] \"}\n  {\"name\": \"MvPolynomial.isWeightedHomogeneous_monomial\", \"module\": \"Mathlib.RingTheory.MvPolynomial.WeightedHomogeneous\", \"type\": \"(w : σ → M) (d : σ →₀ ℕ) (r : R) {m : M} (hm : weight w d = m) : IsWeightedHomogeneous w (monomial d r) m\", \"doc\": \"For a weight function $ w : \\\\sigma \\\\to M $, a monomial $ r \\\\cdot X^d $ in the polynomial ring $ R[\\\\sigma] $, and a weight $ m \\\\in M $, if the weighted sum $ \\\\sum_{i \\\\in \\\\text{support } d} d(i) \\\\cdot w\"}\n  {\"name\": \"MvPowerSeries.weightedOrder_eq_nat\", \"module\": \"Mathlib.RingTheory.MvPowerSeries.Order\", \"type\": \"{n : ℕ} : f.weightedOrder w = n ↔ (∃ d, coeff d f ≠ 0 ∧ weight w d = n) ∧ ∀ d, weight w d < n → coeff d f = 0\", \"doc\": \"For a multivariate power series $ f $ over a semiring $ R $ with variables indexed by $ \\\\sigma $ and a weight function $ w : \\\\sigma \\\\to \\\\mathbb{N} $, the weighted order of $ f $ is equal to $ n $ if a\"}\n  {\"name\": \"MvPolynomial.weightedHomogeneousComponent_apply\", \"module\": \"Mathlib.RingTheory.MvPolynomial.WeightedHomogeneous\", \"type\": \"[DecidableEq M] : weightedHomogeneousComponent w n φ = ∑ d ∈ φ.support with weight w d = n, monomial d (coeff d φ)\", \"doc\": \"For a multivariate polynomial $ \\\\varphi $, a weight function $ w : \\\\sigma \\\\to M $, and a degree $ n \\\\in M $, the weighted homogeneous component of $ \\\\varphi $ of degree $ n $ is the sum of all monomia\"}\n  {\"name\": \"MvPolynomial.isWeightedHomogeneous_zero_iff_weightedTotalDegree_eq_zero\", \"module\": \"Mathlib.RingTheory.MvPolynomial.WeightedHomogeneous\", \"type\": \"{p : MvPolynomial σ R} : IsWeightedHomogeneous w p 0 ↔ p.weightedTotalDegree w = 0\", \"doc\": \"A multivariate polynomial $ p $ is weighted homogeneous of weight $ 0 $ with respect to the weight function $ w $ if and only if its weighted total degree $ \\\\deg_w(p) $ is equal to $ 0 $.\"}\n",
+   "date": "2026-10-24",
+   "verdict": "No exact match: polynomial weighted-homogeneous components and weighted degrees do not define weighted flags on linear forms, monomial bases of H⁰, or their minimum total weight."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "weighted flag minimum total weight monomial basis of projective scheme sections",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"MvPolynomial.weightedDecomposition\", \"module\": \"Mathlib/RingTheory/MvPolynomial/WeightedHomogeneous\", \"type\": \"(R : Type u_1) →\\n  {M : Type u_2} →\\n    [inst : CommSemiring R] →\\n      {σ : Type u_3} →\\n        (w : σ → M) →\\n          [inst_1 : AddCommMonoid M] →\\n            [inst_2 : DecidableEq M] → DirectSum.Decomposition (MvPolynomial.weightedHomogeneousSubmodule R w)\", \"doc\": \"For a commutative semiring $ R $, a type $ \\\\sigma $, an additive commutative monoid $ M $, and a weight function $ w : \\\\sigma \\\\to M $, this defines a direct sum decomposition of the multivariate polyn\"}\n  {\"name\": \"MvPolynomial.weightedHomogeneousSubmodule\", \"module\": \"Mathlib/RingTheory/MvPolynomial/WeightedHomogeneous\", \"type\": \"(R : Type u_1) →\\n  {M : Type u_2} →\\n    [inst : CommSemiring R] → {σ : Type u_3} → [AddCommMonoid M] → (σ → M) → M → Submodule R (MvPolynomial σ R)\", \"doc\": \"For a commutative semiring $ R $, a type $ \\\\sigma $, an additive commutative monoid $ M $, a weight function $ w : \\\\sigma \\\\to M $, and a weight $ m \\\\in M $, this is the submodule of the multivariate p\"}\n  {\"name\": \"MvPolynomial.weightedHomogeneousComponent\", \"module\": \"Mathlib/RingTheory/MvPolynomial/WeightedHomogeneous\", \"type\": \"{R : Type u_1} →\\n  {M : Type u_2} →\\n    [inst : CommSemiring R] → {σ : Type u_3} → [AddCommMonoid M] → (σ → M) → M → MvPolynomial σ R →ₗ[R] MvPolynomial σ R\", \"doc\": \"For a multivariate polynomial ring $ R[\\\\sigma] $, a weight function $ w : \\\\sigma \\\\to M $, and a value $ n \\\\in M $, this is the linear map that sends each polynomial to its weighted homogeneous compone\"}\n  {\"name\": \"MvPolynomial.weightedGradedAlgebra\", \"module\": \"Mathlib/RingTheory/MvPolynomial/WeightedHomogeneous\", \"type\": \"(R : Type u_1) →\\n  {M : Type u_2} →\\n    [inst : CommSemiring R] →\\n      {σ : Type u_3} →\\n        (w : σ → M) →\\n          [inst_1 : AddCommMonoid M] →\\n            [inst_2 : DecidableEq M] → GradedAlgebra (MvPolynomial.weightedHomogeneousSubmodule R w)\", \"doc\": \"For a commutative semiring $ R $, type $ \\\\sigma $, additive commutative monoid $ M $, and weight function $ w : \\\\sigma \\\\to M $, this defines a graded algebra structure on the multivariate polynomial r\"}\n  {\"name\": \"MvPolynomial.weightedHomogeneousComponent_apply\", \"module\": \"Mathlib/RingTheory/MvPolynomial/WeightedHomogeneous\", \"type\": \"∀ {R : Type u_1} {M : Type u_2} [inst : CommSemiring R] {σ : Type u_3} [inst_1 : AddCommMonoid M] {w : σ → M} (n : M)\\n  (φ : MvPolynomial σ R) [inst_2 : DecidableEq M],\\n  (MvPolynomial.weightedHomogeneousComponent w n) φ =\\n    ∑ d ∈ φ.support with (Finsupp.weight w) d = n, (MvPolynomial.monomial d) \", \"doc\": \"For a multivariate polynomial $ \\\\varphi $, a weight function $ w : \\\\sigma \\\\to M $, and a degree $ n \\\\in M $, the weighted homogeneous component of $ \\\\varphi $ of degree $ n $ is the sum of all monomia\"}\n  {\"name\": \"MvPolynomial.weightedDecomposition.decompose'_eq\", \"module\": \"Mathlib/RingTheory/MvPolynomial/WeightedHomogeneous\", \"type\": \"∀ (R : Type u_1) {M : Type u_2} [inst : CommSemiring R] {σ : Type u_3} (w : σ → M) [inst_1 : AddCommMonoid M]\\n  [inst_2 : DecidableEq M],\\n  DirectSum.Decomposition.decompose' = fun φ =>\\n    (DirectSum.mk (fun i => ↥(MvPolynomial.weightedHomogeneousSubmodule R w i))\\n        (Finset.image (⇑(Finsupp.w\", \"doc\": \"The decompose' function for the weighted decomposition of a multivariate polynomial ring $ R[\\\\sigma] $ is equal to the canonical map that constructs the direct sum of weighted homogeneous components. \"}\n  {\"name\": \"MvPolynomial.weightedHomogeneousSubmodule_eq_finsupp_supported\", \"module\": \"Mathlib/RingTheory/MvPolynomial/WeightedHomogeneous\", \"type\": \"∀ (R : Type u_1) {M : Type u_2} [inst : CommSemiring R] {σ : Type u_3} [inst_1 : AddCommMonoid M] (w : σ → M) (m : M),\\n  MvPolynomial.weightedHomogeneousSubmodule R w m = Finsupp.supported R R {d | (Finsupp.weight w) d = m}\", \"doc\": \"For a commutative semiring $ R $, a type $ \\\\sigma $, an additive commutative monoid $ M $, a weight function $ w : \\\\sigma \\\\to M $, and a weight $ m \\\\in M $, the weighted homogeneous polynomial submodu\"}\n  {\"name\": \"MvPolynomial.isWeightedHomogeneous_monomial\", \"module\": \"Mathlib/RingTheory/MvPolynomial/WeightedHomogeneous\", \"type\": \"∀ {R : Type u_1} {M : Type u_2} [inst : CommSemiring R] {σ : Type u_3} [inst_1 : AddCommMonoid M] (w : σ → M)\\n  (d : σ →₀ ℕ) (r : R) {m : M},\\n  (Finsupp.weight w) d = m → MvPolynomial.IsWeightedHomogeneous w ((MvPolynomial.monomial d) r) m\", \"doc\": \"For a weight function $ w : \\\\sigma \\\\to M $, a monomial $ r \\\\cdot X^d $ in the polynomial ring $ R[\\\\sigma] $, and a weight $ m \\\\in M $, if the weighted sum $ \\\\sum_{i \\\\in \\\\text{support } d} d(i) \\\\cdot w\"}\n",
+   "date": "2026-10-24",
+   "verdict": "No exact match: polynomial weighted-homogeneous components and weighted degrees do not define weighted flags on linear forms, monomial bases of H⁰, or their minimum total weight."
+  },
+  {
+   "tool": "grep",
+   "query": "HilbertWeight|hilbertWeight|weightedFlag|WeightedFlag|minimum.*weight",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-24",
+   "verdict": "No exact match: polynomial weighted-homogeneous components and weighted degrees do not define weighted flags on linear forms, monomial bases of H⁰, or their minimum total weight."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-bounded-hilbert-weight-polynomials",
+  "date": "2026-10-24",
+  "group": "Q112"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "Morrison Section 2.2: the weighted linear-form filtration and minimum monomial-basis weight used throughout steps 2--8 of lem-sfb-bounded-hilbert-weight-polynomials, supporting the inherited direct-image alteration chain.",
+   "via": [
+    "lem-sfb-bounded-hilbert-weight-polynomials",
+    "lem-sfb-gieseker-potential-stability",
+    "lem-sfb-gieseker-ten-canonical-hilbert-stability",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.WeightedMonomialBasisWeight",
+  "declaration": "AlgebraicGeometry.BoundedHilbertWeight.weight",
+  "declarations": [
+   "AlgebraicGeometry.BoundedHilbertWeight.sections",
+   "AlgebraicGeometry.BoundedHilbertWeight.LinearForms",
+   "AlgebraicGeometry.BoundedHilbertWeight.flag",
+   "AlgebraicGeometry.BoundedHilbertWeight.monomial",
+   "AlgebraicGeometry.BoundedHilbertWeight.IsMonomialBasis",
+   "AlgebraicGeometry.BoundedHilbertWeight.totalWeight",
+   "AlgebraicGeometry.BoundedHilbertWeight.weight"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/WeightedMonomialBasisWeight.lean",
+  "statement": "def weight {k : Type u} [Field k] {n : ℕ} {X : Scheme.{u}} {i : X ⟶ ℙ(HilbertPlucker.Coordinates.{u} n; Spec (.of k))} {m : ℕ} (ρ : ModuleCat.of k (MvPolynomial.homogeneousSubmodule (HilbertPlucker.Coordinates.{u} n) k m) ⟶ sections k n i m) (b : Module.Basis (HilbertPlucker.Coordinates.{u} n) k (LinearForms k n)) (w : HilbertPlucker.Coordinates.{u} n → ℕ) : ℕ",
+  "branch": "newtargets-dag",
+  "by": "Q112",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "import_flags": [],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-8c60d6e56",
+  "group": "Q112",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-8c60d6e56",
+  "group": "Q112",
+  "result": "pass",
+  "note": "Checked every clause against the Lean: r=n+2, d>0 in ℕ, c in ℤ, B≥1; m0 and A chosen before k, X, basis and weights; closed immersion plus IsCoordinatePolynomial; topologicalKrullDim X = 1; restriction ρ fixed on every standard chart exactly as in the uniform-vanishing β interface, hence unique; surjectivity, finiteness and finrank = dm+c for m≥m0; the minimum weight is attained by a monomial basis for m≥m0; a_F in ½ℤ with |w−a m²| ≤ A m; a_F constant on equal weighted flags (flag = span of b_j with w_j ≤ s); IsHilbertSemistable picks the actual Hilbert point (Mathlib comap = ker of the fibre product) with sl_line semistability, and the ∃ D E is not loose because representability, coordinate_action, sl_restriction and determinant_formula fix the data; inequality points the same way as Morrison Prop. 1. New def node def-sfb-weighted-monomial-basis-weight: real data, correct fields, verbatim lean record, no duplicate in the DAG or Sheaf Lean. Item changed only in lean and by adding the new node to stmt_deps; docstrings with proof steps; single sorry; imports are proof_dep modules; lines ≤100. Not compiled (no file changed). Advisory: new def node lists theorem nodes hilbert-plucker-pgl-linearization and uniform-projective-fibre-vanishing in stmt_deps only for the plain Coordinates and cohomology/zeroSections; IsHilbertSemistable lives in the theorem module."
+ }
+}

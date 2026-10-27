@@ -10,64 +10,40 @@
  "status": "split",
  "proof": [
   {
-   "text": "Let $P=\\mathbf Z[x_1,\\ldots,x_r]$ map to $R$ by $x_i\\mapsto f_i$, with $J=(x_1,\\ldots,x_r)$ and $\\mathbf Z=P/J$. The Koszul-regularity hypothesis [def-weil-pbc-koszul-regular-sequence] is exactly the hypothesis of [lem-trf-koszul-derived-quotient], whose canonical augmentation identifies $R\\otimes_P^{\\mathbf L}\\mathbf Z$ with $B[0]$. This also handles $r=0$, where $P=\\mathbf Z$, $I=J=0$, and $B=R$.",
+   "text": "Apply the polynomial base-change concentration theorem: Koszul regularity makes the quotient cotangent complex both at least and at most degree −1. This uses the original polynomial Koszul resolution, Tor-independent cotangent base change, and free polynomial augmentation conormal calculation.",
    "uses": [
-    "lem-trf-koszul-derived-quotient",
-    "def-weil-pbc-koszul-regular-sequence"
+    "lem-trf-koszul-cotangent-concentration"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/cotangent.tex",
-    "place": "Tag 08SJ, proof: the Koszul resolution of $\\mathbf Z$ over $\\mathbf Z[x_1,\\ldots,x_r]$ and the derived tensor identification."
-   }
+   "elementary": false
   },
   {
-   "text": "Apply [lem-trf-cotangent-flat-base-change] to the commutative square with $(A,C,A',C')=(P,\\mathbf Z,R,B)$: the top map is the augmentation $P\\to\\mathbf Z$, the lower map is $R\\to R/I=B$, the vertical maps are $x_i\\mapsto f_i$ and $\\mathbf Z\\to B$. Step 1 gives the required canonical quasi-isomorphism $\\mu:\\mathbf Z\\otimes_P^{\\mathbf L}R\\to B[0]$: either order of the tensor factors is computed by tensoring the free Koszul resolution of $\\mathbf Z$ over $P$ with $R$. Thus the square-induced morphism $\\beta:L_{\\mathbf Z/P}\\otimes_{\\mathbf Z}^{\\mathbf L}B\\longrightarrow L_{B/R}$ is an isomorphism in $D(B)=D(\\operatorname{Mod}(B))$. All objects here are complexes of ordinary modules. The hypothesis used is precisely $\\mu$, with no flatness hypothesis on $P\\to R$ or $\\mathbf Z\\to R$.",
+   "text": "Independently, apply the general quotient conormal homology theorem to I=(f). It identifies H⁻¹ of the standard differential complex with I/I² and carries every displayed standard relation cycle to a mod I².",
    "uses": [
-    "lem-trf-cotangent-flat-base-change",
-    "lem-trf-koszul-derived-quotient",
-    "lem-trf-cotangent-resolution-coherence"
+    "lem-trf-quotient-cotangent-conormal-homology"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/cotangent.tex",
-    "place": "Tag 08SJ (lemma-mod-regular-sequence), application of Tag 08QQ (lemma-flat-base-change-cotangent-complex) to the square (P, Z, R, B)."
-   }
+   "elementary": false
   },
   {
-   "text": "By [lem-trf-cotangent-polynomial-special-case], $L_{\\mathbf Z/P}\\simeq(J/J^2)[1]$, where $J/J^2$ has the finite free $\\mathbf Z$-basis $[x_i]$. This free module, concentrated in degree zero, is already a projective resolution of itself, so the derived tensor with $B$ is $((J/J^2)\\otimes_{\\mathbf Z}B)[1]$, whose module has $B$-basis $[x_i]\\otimes1$. The canonical conormal map sends $[x_i]\\otimes1$ to $[f_i]$; it is well-defined since the ring map takes $J$ into $I$ and $J^2$ into $I^2$. By [lem-sc-koszul-conormal-basis] the $[f_i]$ are a $B$-basis of $I/I^2$, so this map is an isomorphism, with inverse determined by $[f_i]\\mapsto[x_i]\\otimes1$. Composing with the inverse of $\\beta$ from Step 2 gives the stated canonical isomorphism $L_{B/R}\\simeq(I/I^2)[1]$ in $D(B)$.",
-   "uses": [
-    "lem-trf-cotangent-polynomial-special-case",
-    "lem-sc-koszul-conormal-basis"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/cotangent.tex",
-    "place": "Tag 08SJ, final derived-tensor computation using Tag 08SI (lemma-special-case); conormal basis: more-algebra.tex Tags 0CEM and 062I (lemma-koszul-regular-H1-regular and lemma-H1-regular-quasi-regular)."
-   }
-  },
-  {
-   "text": "The module $I/I^2$ placed in degree $-1$ has cohomology only in degree $-1$: its only nonzero term is the shifted module itself, so $H^{-1}((I/I^2)[1])=I/I^2$ and $H^i((I/I^2)[1])=0$ for $i\\ne-1$. Transporting this along the isomorphism of Step 3 proves the asserted vanishing. For the empty sequence, $I=0$ and the same statement says $L_{R/R}=0$.",
+   "text": "Use the localization/homology comparison to obtain the prescribed H⁻¹ isomorphism from L to I/I². An object concentrated in one degree is isomorphic to a single object. Correct such an isomorphism by the single of its H⁻¹ automorphism so that its induced homology map is exactly the prescribed one. Composing with the concrete-complex homology comparison then gives the required normalization on every relation cycle.",
    "uses": [],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/cotangent.tex",
-    "place": "Tag 08SJ, conclusion after the derived tensor computation."
-   }
+   "elementary": true
+  },
+  {
+   "text": "For i≠−1, either i<−1 or i>−1. The two t-structure bounds give IsZero Hⁱ(L) in the respective cases. All steps are valid for the empty sequence, the unit ideal, and the zero ring.",
+   "uses": [],
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "def-weil-pbc-koszul-regular-sequence",
-  "lem-sc-koszul-conormal-basis",
-  "lem-trf-cotangent-flat-base-change",
-  "lem-trf-cotangent-polynomial-special-case",
-  "lem-trf-cotangent-resolution-coherence",
-  "lem-trf-koszul-derived-quotient"
+  "lem-trf-koszul-cotangent-concentration",
+  "lem-trf-quotient-cotangent-conormal-homology"
  ],
  "proof_origin": {
-  "by": "document",
+  "by": "agent",
   "document": "literature/stacks-project/cotangent.tex",
-  "place": "Tag 08SJ (lemma-mod-regular-sequence), expanded using the exact derived base-change hypothesis of Tag 08QQ and the polynomial special case Tag 08SI."
+  "group": "J5",
+  "date": "2026-10-24",
+  "description": "Stacks Tag 08SJ for concentration, combined with the general quotient comparison of lemma-surjection for the canonical H⁻¹ normalization; categorical lift via the standard t-structure."
  },
  "mathlib_match": null,
  "mathlib_searches": [
@@ -154,9 +130,7 @@
    }
   ]
  },
- "tool_uses": [
-  "lem-sc-koszul-conormal-basis"
- ],
+ "tool_uses": [],
  "reviewed": {
   "date": "2026-10-17",
   "by": "L",
@@ -191,5 +165,26 @@
   "result": "pass",
   "note": "Delivery changes only the item node's lean field; dependency records equal live; lean.statement matches the file verbatim. Every clause is rendered: CommRing R, r>=0 with Fin r -> R, recorded IsKoszulRegular, I = span(range f), B = R/I via quotientArrow, the recorded cotangentComplex of Coherence.{u} in D(ModuleCat (R/I)), I.Cotangent placed in degree -1 = (I/I^2)[1], vanishing for all i != -1, no Noetherian hypothesis. The canonical iso is pinned: relationVector 1 ⊗ d([C a]-[C 0]) is a genuine cycle (faces give a and 0, checked against standardFace) and is required to map to toCotangent a for every a in I. These classes cover I/I^2, so H^-1(e) and hence e are determined; not a bare Nonempty. Sign +[a] is a convention the node leaves open; the statement is true either way. Edge cases r=0, a unit in the sequence (B=0) and the zero ring are covered. Helpers carry real data, proof is sorry, the docstring has the four node steps, no duplicate in the project or Mathlib (H1Cotangent is the naive notion). nt_compile --json: 2.4 s, exit 0. Advisory: unused proof-dep imports KoszulConormalBasis/KoszulDerivedQuotient."
  },
- "lean_audit": {}
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "reviewed_proof": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J5",
+  "result": "pass",
+  "landing": "20261023T231636-L-3628872",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
 }

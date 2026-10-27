@@ -1,0 +1,130 @@
+{
+ "id": "lem-pur-integral-strict-reduction",
+ "kind": "statement",
+ "title": "The fixed strict integral exchange and composition reduction squares",
+ "statement": "Fix the same finite purity setting P, integral datum d and base S. The actual strict pullback identity and compositor commute with the canonical completedReductionTower pullback comparisons. For the chosen proper isomorphism base-change square, a complete input with retained finite-origin witness at each positive quotient has four commuting evaluation squares at the fixed properFiniteCorner maps; no corners are chosen existentially. The strict open comparison commutes with scalar restriction and its finite evaluation agrees with cbcFiniteExchange. The actual PurIntegralTower.exchange at a complete K commutes with reduction through exactly exchangeReductionSource and exchangeReductionTarget, and its evaluation commutes through exactly finiteCorner at every n. For a compatible compactification triangle, the actual PurIntegralTower.composition at a complete K with compatible etale origins commutes through compositionReductionSource and supportReduction with the ordinary cbcTowerCompositionMap, and likewise at every finite evaluation. This is precisely PurIntegralStrictReduction d S of [def-pur-strict-integral-exchange-data], including all its geometrical hypotheses, canonical corners and quantified choices of ideal generators. It asserts no strict horizontal/vertical law or completed equation.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-package/prop-pur-weil-equivariance-compatibilities.proof.md",
+  "place": "Original normalization steps 2--3, 7--8, 13--14: strict quotient reduction and specified finite corners."
+ },
+ "stmt_deps": [
+  "def-pur-strict-integral-exchange-data"
+ ],
+ "proof": [
+  {
+   "text": "on a flat-term K-flat representative of the whole diagram, both pullback\nunit and compositor comparisons send each pure tensor to the same tensor with\nits relabeled quotient scalar, proving the first two equations. The proper\nprojection is the counit-tensor adjunct. Apply the strict exchange/projection\nrectangle to identify towerV with the reduced ambient mate; naturality of\ncompletedReductionEvaluation gives its finite square with the prescribed corners\n0 and 2. Corners 1 and 3 are defined by conjugating with H and H prime, so their\nsquares follow by canceling those isomorphisms. The four-arrow rectangle and\nv prime = H inverse, v, H prime give the fourth equation. For the open scalar\nsquare use the generator-normalized strict open comparison, whose inverse is the\npulled open unit. Scalar restriction and open reduction preserve that unit,\nproving the strict equality before evaluation. completedRingStrictFiniteExchange\ngives its finite square. Whisker the strict proper reduction rectangle with open\nextension, then use the strict open square and naturality of towerProjection.\nCancel adjacent proper and open reduction isomorphisms to obtain the exchange\nreduction square with exactly exchangeReductionSource and exchangeReductionTarget.\nFor composition do the same with its proper/open mate and open compositor; the\nproper projection comparisons are mates of the tensor comparisons and therefore\nrespect pasting. This gives the square with compositionReductionSource and\nsupportReduction. Apply the evaluation functor and naturality of\ncompletedReductionEvaluation to each of these last two strict squares; its fixed\nfiniteCorner is precisely the resulting corner. Every construction retains all\nquotient transitions. No faithfulness of evaluation or choice of finite corners\nis used. Zero complexes, empty schemes and the zero level index n = 0 satisfy the\nsame identities (the latter denotes the positive quotient exponent 1).",
+   "uses": [
+    "lem-weil-pbc-completed-reduction-pullback-square",
+    "lem-weil-pbc-strict-tower-exchange-mate-normalization",
+    "lem-cbc-ringed-open-strict-reduction",
+    "lem-cbc-completed-open-strict-mate-identification",
+    "lem-cbc-completed-ring-strict-finite-exchange",
+    "lem-fix-operation-reduction",
+    "lem-weil-pbc-ringed-exchange-tensor-coherence",
+    "lem-cbc-strict-tower-proper-open-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-package/prop-pur-weil-equivariance-compatibilities.proof.md",
+    "place": "Original normalization steps 2--3, 7--8, 13--14: strict quotient reduction and specified finite corners."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-completed-reduction-pullback-square",
+  "lem-weil-pbc-strict-tower-exchange-mate-normalization",
+  "lem-cbc-ringed-open-strict-reduction",
+  "lem-cbc-completed-open-strict-mate-identification",
+  "lem-cbc-completed-ring-strict-finite-exchange",
+  "lem-fix-operation-reduction",
+  "lem-weil-pbc-ringed-exchange-tensor-coherence",
+  "lem-cbc-strict-tower-proper-open-calculus"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "reason": "The blueprint constituent paragraph assembles compatibilities. These explicit strict-tower arguments expand its integral normalization steps.",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-package/prop-pur-weil-equivariance-compatibilities.proof.md"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Natural adjunction mates commute with inverse limits and tensor coefficient reduction",
+   "results": "CategoryTheory.Limits.constLimAdj, CategoryTheory.mateEquiv_apply, CategoryTheory.mateEquiv, CategoryTheory.preservesLimitNatIso_inv_app; generic infrastructure only.",
+   "date": "2026-10-25",
+   "verdict": "no match for these specified completed coefficient and strict quotient comparisons"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.mateEquiv",
+   "results": "CategoryTheory.mateEquiv, mateEquiv_counit, mateEquiv_vcomp, mateEquiv_hcomp and conjugateEquiv variants, Mathlib.CategoryTheory.Adjunction.Mates.",
+   "date": "2026-10-25",
+   "verdict": "no match; none specializes in one line to the specified reduction, completed pullback and proper/open maps"
+  },
+  {
+   "tool": "grep",
+   "query": "rg mate|whisker Mathlib/CategoryTheory/Adjunction/Mates.lean; rg PurIntegralProperNormalization|PurIntegralStrictHorizontal|purStrictIntegral lean/Sheaf lean/WeilConjectures",
+   "results": "Mates supplies the generic bijection and pasting. PurStrictIntegralExchangeNormalization has the parent statement only; SemilinearExchangeReindexing repeats it in a parent conjunction and imports the item, so cannot supply a proof.",
+   "date": "2026-10-25",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.PurStrictIntegralExchangeNormalization",
+  "date": "2026-10-25",
+  "group": "T1"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-thm-sf-package",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-pur-weil-equivariance-compatibilities",
+   "place": "Original normalization steps 2--3, 7--8, 13--14: strict quotient reduction and specified finite corners.",
+   "via": [
+    "lem-pur-isomorphism-strict-integral-exchange-normalization",
+    "lem-pur-weil-semilinear-exchange-reindexing"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.PurIntegralStrictReduction",
+  "file": "lean/Sheaf/Paper/PurIntegralStrictReduction.lean",
+  "declaration": "AlgebraicGeometry.Scheme.purIntegralStrictReduction",
+  "statement": "theorem purIntegralStrictReduction (P : WeilConjectures.PurityFiniteSetting.{t}) :\n    PurIntegralStrictReduction (pbcIntegralDatum P.coefficients.l P.extension)\n      (Spec (.of P.field.k))",
+  "branch": "sheaf-dag",
+  "by": "T1",
+  "date": "2026-10-25"
+ },
+ "split_report": {
+  "date": "2026-10-25",
+  "worker": "stage3",
+  "item": "Sheaf.Paper.PurStrictIntegralExchangeNormalization",
+  "summary": "Extract the indicated strict part of the integral normalization argument as one independently provable statement; keep the specified constructions and all domains.",
+  "blueprint": "Original normalization steps 2--3, 7--8, 13--14: strict quotient reduction and specified finite corners."
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-477d0",
+  "group": "T1",
+  "result": "fix",
+  "landing": "20261025T205604-L-3299132",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-477d0",
+  "group": "T1",
+  "result": "fix",
+  "landing": "20261025T205604-L-3299132",
+  "kind": "interface",
+  "note": "independent cc review: old item module vs new PurStrictIntegralExchangeData + item (defs verbatim, statement byte-identical); delivered item node vs base node under stage3_delivery/check_statement_change; importer SemilinearExchangeReindexingData compiled with delivered modules"
+ }
+}

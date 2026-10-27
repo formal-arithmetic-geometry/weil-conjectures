@@ -1,0 +1,263 @@
+{
+ "id": "lem-sfb-fppf-flat-lfp-zero-cohomology",
+ "kind": "statement",
+ "title": "Fppf cohomology vanishes for modules zero on flat locally finitely presented tests",
+ "statement": "Fix universes and small presentations of sites as in [def-weil-size-convention]. Let $S$ be a scheme [def-pc-scheme], and let $\\mathcal C_S=(\\mathit{Sch}/S)_{\\mathrm{fppf}}$ be its big fppf site [def-pc-fppf-site] with structure sheaf $\\mathcal O(v:V\\to S)=\\Gamma(V,\\mathcal O_V)$. Let $P$ be a sheaf of $\\mathcal O$-modules [def-weil-sheaf-of-modules-category]. Suppose $P(V)=0$ for every object $v:V\\to S$ which is flat [def-weil-flat-morphism] and locally of finite presentation [def-sbc-locally-finite-presentation]. Then, for every such $v$ and every integer $q\\geq0$, $$R^q\\Gamma_{\\mathrm{Mod}}(V,-)(P)=0.$$ Here $\\Gamma_{\\mathrm{Mod}}(V,-)$ is evaluation at $v$ with values in abelian groups, and its right derived functors are computed by injective resolutions in the category of structure-module sheaves [def-sp-injective-resolutions]. In particular all these groups vanish at $\\operatorname{id}_S$. No affineness or quasi-coherence assumption on $S,V,P$ is imposed, and nothing is assumed about $P(W)$ for maps $W\\to S$ outside the specified class.",
+ "source": {
+  "document": "literature/stacks-project/descent.tex",
+  "place": "Tag 0755 (lemma-cohomology-parasitic), part (1), tau = fppf; the hypothesis is the explicit sectionwise form of being parasitic for the fppf topology in Tag 06ZL (definition-parasitic). Cohomology of modules agrees with underlying abelian cohomology by sites-cohomology.tex Tag 03FD (lemma-cohomology-modules-abelian-agree)."
+ },
+ "stmt_deps": [
+  "def-weil-size-convention",
+  "def-pc-scheme",
+  "def-pc-fppf-site",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-flat-morphism",
+  "def-sbc-locally-finite-presentation",
+  "def-sp-injective-resolutions",
+  "def-sfb-big-fppf-structure-sheaf"
+ ],
+ "proof": [
+  {
+   "text": "Let $\\mathcal B$ consist of the objects $v:V\\to S$ that are flat and locally of finite presentation, and let $\\mathrm{Cov}$ consist of all fppf coverings of objects of $\\mathcal B$. By the definition of the big fppf site each covering arrow $V_i\\to V$ is flat and locally of finite presentation. Composition preserves both properties by [lem-pc-flat-compose] and [lem-sbc-locally-finite-presentation-composition], so $V_i\\to S$ belongs to $\\mathcal B$. For a tuple $(i_0,\\ldots,i_p)$ define $W_0=V_{i_0}$ and $W_r=W_{r-1}\\times_V V_{i_r}$ for $1\\le r\\le p$. The projection $W_r\\to W_{r-1}$ is a base change of $V_{i_r}\\to V$, hence is flat by [lem-weil-pbc-flat-morphism-base-change] and locally of finite presentation by clause (3) of [lem-weil-pbc-qcqs-morphism-permanence]. Induction on $r$, starting with the preceding assertion for $W_0$, and the same composition results show $W_r\\to S\\in\\mathcal B$. Thus all nonempty iterated fibre products required in the Cech criterion lie in $\\mathcal B$. Every covering of an object in $\\mathcal B$ already belongs to $\\mathrm{Cov}$, so the cofinality requirement is satisfied by the covering itself and its identity refinement. No quasi-compactness or quasi-separatedness assertion is used.",
+   "uses": [
+    "def-pc-fppf-site",
+    "lem-pc-flat-compose",
+    "lem-sbc-locally-finite-presentation-composition",
+    "lem-weil-pbc-flat-morphism-base-change",
+    "lem-weil-pbc-qcqs-morphism-permanence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/descent.tex",
+    "place": "Tag 0755, label lemma-cohomology-parasitic, proof for the fppf topology; sites-cohomology.tex Tag 03F9, label lemma-cech-vanish-collection"
+   }
+  },
+  {
+   "text": "Let $F=P_{ab}$ be the underlying abelian sheaf. For every covering $\\mathcal U=\\{V_i\\to V\\}$ in $\\mathrm{Cov}$ and $p\\ge0$, the preceding step places every $W_{i_0\\ldots i_p}$ in $\\mathcal B$, so the hypothesis gives $F(W_{i_0\\ldots i_p})=0$. By [def-weil-pbc-site-cech-complex] the degree-$p$ term is $\\prod_{(i_0,\\ldots,i_p)}F(W_{i_0\\ldots i_p})=0$. Therefore every differential has zero source and target, and $\\check H^p(\\mathcal U,F)=\\ker(0\\to0)/\\operatorname{im}(0\\to0)=0$. This also handles an empty index set: the empty product in abelian groups is the zero group.",
+   "uses": [
+    "def-weil-pbc-site-cech-complex"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/descent.tex",
+    "place": "Tag 0755, label lemma-cohomology-parasitic, proof for the fppf topology; sites-cohomology.tex Tag 03F9, label lemma-cech-vanish-collection"
+   }
+  },
+  {
+   "text": "Apply [lem-weil-pbc-site-cech-vanishing-criterion] to $\\mathcal C_S$, $\\mathcal B$, $\\mathrm{Cov}$ and $F$: closure of covering objects and intersections, cofinality, and positive Cech vanishing were verified in steps 1 and 2. It follows that $H^q(V,F)=0$ for every $V\\to S$ in $\\mathcal B$ and $q>0$. In the small presentation fixed in the statement, [lem-weil-pbc-ring-sheaves-grothendieck] applies to the actual structure ring sheaf $\\mathcal O$, and [lem-sp-grothendieck-enough-injectives] gives enough injectives in $\\operatorname{Mod}(\\mathcal O)$. Consequently [lem-weil-pbc-ringed-site-module-abelian-evaluation-comparison] applies at every object $V$ and gives $R^q\\Gamma_{\\mathrm{Mod}}(V,-)(P)\\cong H^q(V,F)=0$ for $q>0$. This is comparison for a variable structure sheaf, not for constant coefficients; it does not assume that forgetting scalars preserves injectivity.",
+   "uses": [
+    "lem-weil-pbc-site-cech-vanishing-criterion",
+    "lem-weil-pbc-ring-sheaves-grothendieck",
+    "lem-sp-grothendieck-enough-injectives",
+    "lem-weil-pbc-ringed-site-module-abelian-evaluation-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 03F9, label lemma-cech-vanish-collection; Tag 03FD, label lemma-cohomology-modules-abelian-agree, equality over an object; injectives.tex Tags 079Q and 079H for module injective resolutions"
+   }
+  },
+  {
+   "text": "In degree zero the comparison of [lem-weil-pbc-ringed-site-module-abelian-evaluation-comparison] is the identity of $P(V)$, so $R^0\\Gamma_{\\mathrm{Mod}}(V,-)(P)=P(V)=0$ by hypothesis. Finally $\\operatorname{id}_S$ is flat and locally of finite presentation: its stalk maps are identity maps, a ring is flat over itself (tensoring with it is the identity), and on an affine chart its identity algebra has a presentation with no variables and no relations. These are exactly the flatness and local finite-presentation definitions. Hence $\\operatorname{id}_S\\in\\mathcal B$, giving the stated particular case, including when $S$ is empty.",
+   "uses": [
+    "lem-weil-pbc-ringed-site-module-abelian-evaluation-comparison",
+    "def-weil-flat-morphism",
+    "def-sbc-locally-finite-presentation"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/descent.tex",
+    "place": "Tag 0755, label lemma-cohomology-parasitic, part (1); sites-cohomology.tex Tag 03FD, degree-zero normalization"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-fppf-site",
+  "lem-pc-flat-compose",
+  "lem-sbc-locally-finite-presentation-composition",
+  "lem-weil-pbc-flat-morphism-base-change",
+  "lem-weil-pbc-qcqs-morphism-permanence",
+  "def-weil-pbc-site-cech-complex",
+  "lem-weil-pbc-site-cech-vanishing-criterion",
+  "lem-weil-pbc-ring-sheaves-grothendieck",
+  "lem-sp-grothendieck-enough-injectives",
+  "lem-weil-pbc-ringed-site-module-abelian-evaluation-comparison",
+  "def-weil-flat-morphism",
+  "def-sbc-locally-finite-presentation"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/descent.tex",
+  "place": "Tag 0755, label lemma-cohomology-parasitic, fppf proof via sites-cohomology.tex Tag 03F9; module/abelian identification by Tag 03FD"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A sheaf zero on every flat locally finitely presented scheme over S has zero cohomology on those objects in the big fppf site",
+   "results": "{\"t\": \"2026-10-23T20:47:31Z\", \"tool\": \"leanfinder\", \"query\": \"A sheaf zero on every flat locally finitely presented scheme over S has zero cohomology on those objects in the big fppf site\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SheafOfModules.isFinitePresentation\", \"SheafOfModules.IsFinitePresentation\", \"SheafOfModules.quasicoherentDataOfIsFinitePresentation\", \"AlgebraicGeometry.exists_appTop_map_eq_zero_of_isLimit\", \"AlgebraicGeometry.Scheme.Modules.instAbelian\", \"AlgebraicGeometry.exists_appTop_map_eq_zero_of_isAffine_of_isLimit\", \"AlgebraicGeometry.exists_app_map_eq_zero_of_isLimit\", \"SheafOfModules.instIsFiniteTypeOfIsFinitePresentation\"], \"digest\": \"0e3a1417a931db13\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: quasi-coherence constructors, general cohomology definitions, zero sections detected by an open cover, and nonabelian H1 relations do not prove vanishing of derived evaluation for a sheaf zero only on this collection of fppf objects."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Parasitic sheaves of modules on the big fppf site have zero cohomology on flat locally finitely presented objects",
+   "results": "{\"t\": \"2026-10-23T20:48:10Z\", \"tool\": \"leansearch\", \"query\": \"Parasitic sheaves of modules on the big fppf site have zero cohomology on flat locally finitely presented objects\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SheafOfModules.QuasicoherentData.IsFinitePresentation\", \"SheafOfModules.free\", \"SheafOfModules.instIsFiniteTypeOfIsFinitePresentation\", \"SheafOfModules.IsFinitePresentation.mk\", \"SheafOfModules.QuasicoherentData.presentation\", \"SheafOfModules.Presentation\", \"SheafOfModules.QuasicoherentData.IsFinitePresentation.isFinite_presentation\", \"SheafOfModules.IsFinitePresentation\"], \"digest\": \"6f2443cfc5534bcf\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: quasi-coherence constructors, general cohomology definitions, zero sections detected by an open cover, and nonabelian H1 relations do not prove vanishing of derived evaluation for a sheaf zero only on this collection of fppf objects."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Sheaf\", \"cohomology\", \"zero\"",
+   "results": "{\"t\": \"2026-10-23T20:48:10Z\", \"tool\": \"loogle\", \"query\": \"\\\"Sheaf\\\", \\\"cohomology\\\", \\\"zero\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: quasi-coherence constructors, general cohomology definitions, zero sections detected by an open cover, and nonabelian H1 relations do not prove vanishing of derived evaluation for a sheaf zero only on this collection of fppf objects."
+  },
+  {
+   "tool": "grep",
+   "query": "parasitic|cech.*vanish.*collection|zero.*cohomology",
+   "results": "{\"t\": \"2026-10-23T20:48:10Z\", \"tool\": \"grep\", \"query\": \"parasitic|cech.*vanish.*collection|zero.*cohomology\", \"sub\": \"CategoryTheory/Sites\", \"ok\": true, \"n_hits\": 2, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Sites/NonabelianCohomology/H1.lean\", \"Mathlib/CategoryTheory/Sites/NonabelianCohomology/H1.lean\"], \"digest\": \"32d84fa2ea7c8175\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: quasi-coherence constructors, general cohomology definitions, zero sections detected by an open cover, and nonabelian H1 relations do not prove vanishing of derived evaluation for a sheaf zero only on this collection of fppf objects."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Cohomology over objects in a covering stable collection vanishes for a sheaf whose sections vanish on the collection",
+   "results": "{\"t\": \"2026-10-23T20:48:13Z\", \"tool\": \"leanfinder\", \"query\": \"Cohomology over objects in a covering stable collection vanishes for a sheaf whose sections vanish on the collection\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.zero_of_zero_cover\", \"CategoryTheory.Sheaf.H\", \"CategoryTheory.Sheaf.cohomologyPresheaf\", \"CategoryTheory.plusPlusSheaf_preservesZeroMorphisms\", \"CategoryTheory.Sheaf.cohomologyPresheafFunctor\", \"SheafOfModules.QuasicoherentData.coversTop\", \"CategoryTheory.PresheafOfGroups.H1\", \"CategoryTheory.Sheaf.instAddCommGroupH\"], \"digest\": \"b8a400751749c855\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: quasi-coherence constructors, general cohomology definitions, zero sections detected by an open cover, and nonabelian H1 relations do not prove vanishing of derived evaluation for a sheaf zero only on this collection of fppf objects."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A sheaf zero on every flat locally finitely presented scheme over S has zero cohomology on those objects in the big fppf site",
+   "results": "{\"t\": \"2026-10-23T21:36:10Z\", \"tool\": \"leanfinder\", \"query\": \"A sheaf zero on every flat locally finitely presented scheme over S has zero cohomology on those objects in the big fppf site\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SheafOfModules.isFinitePresentation\", \"SheafOfModules.IsFinitePresentation\", \"SheafOfModules.quasicoherentDataOfIsFinitePresentation\", \"AlgebraicGeometry.exists_appTop_map_eq_zero_of_isLimit\", \"AlgebraicGeometry.Scheme.Modules.instAbelian\", \"AlgebraicGeometry.exists_appTop_map_eq_zero_of_isAffine_of_isLimit\", \"AlgebraicGeometry.exists_app_map_eq_zero_of_isLimit\", \"SheafOfModules.instIsFiniteTypeOfIsFinitePresentation\"], \"digest\": \"0e3a1417a931db13\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: read the hits; finite presentation of module sheaves, structure-section zero detection, definitions of cohomology and nonabelian H1 do not give the collectionwise derived vanishing asserted here."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Sheaf\", \"cohomology\", \"zero\"",
+   "results": "{\"t\": \"2026-10-23T21:36:29Z\", \"tool\": \"loogle\", \"query\": \"\\\"Sheaf\\\", \\\"cohomology\\\", \\\"zero\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: read the hits; finite presentation of module sheaves, structure-section zero detection, definitions of cohomology and nonabelian H1 do not give the collectionwise derived vanishing asserted here."
+  },
+  {
+   "tool": "grep",
+   "query": "parasitic|cech.*vanish.*collection|zero.*cohomology",
+   "results": "{\"t\": \"2026-10-23T21:36:30Z\", \"tool\": \"grep\", \"query\": \"parasitic|cech.*vanish.*collection|zero.*cohomology\", \"sub\": \"CategoryTheory/Sites\", \"ok\": true, \"n_hits\": 2, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Sites/NonabelianCohomology/H1.lean\", \"Mathlib/CategoryTheory/Sites/NonabelianCohomology/H1.lean\"], \"digest\": \"32d84fa2ea7c8175\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: read the hits; finite presentation of module sheaves, structure-section zero detection, definitions of cohomology and nonabelian H1 do not give the collectionwise derived vanishing asserted here."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Parasitic sheaves of modules on the big fppf site have zero cohomology on flat locally finitely presented objects",
+   "results": "{\"t\": \"2026-10-23T21:36:30Z\", \"tool\": \"leansearch\", \"query\": \"Parasitic sheaves of modules on the big fppf site have zero cohomology on flat locally finitely presented objects\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SheafOfModules.QuasicoherentData.IsFinitePresentation\", \"SheafOfModules.free\", \"SheafOfModules.instIsFiniteTypeOfIsFinitePresentation\", \"SheafOfModules.IsFinitePresentation.mk\", \"SheafOfModules.QuasicoherentData.presentation\", \"SheafOfModules.Presentation\", \"SheafOfModules.QuasicoherentData.IsFinitePresentation.isFinite_presentation\", \"SheafOfModules.IsFinitePresentation\"], \"digest\": \"6f2443cfc5534bcf\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: read the hits; finite presentation of module sheaves, structure-section zero detection, definitions of cohomology and nonabelian H1 do not give the collectionwise derived vanishing asserted here."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Cohomology over objects in a covering stable collection vanishes for a sheaf whose sections vanish on the collection",
+   "results": "{\"t\": \"2026-10-23T21:36:54Z\", \"tool\": \"leanfinder\", \"query\": \"Cohomology over objects in a covering stable collection vanishes for a sheaf whose sections vanish on the collection\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.zero_of_zero_cover\", \"CategoryTheory.Sheaf.H\", \"CategoryTheory.Sheaf.cohomologyPresheaf\", \"CategoryTheory.plusPlusSheaf_preservesZeroMorphisms\", \"CategoryTheory.Sheaf.cohomologyPresheafFunctor\", \"SheafOfModules.QuasicoherentData.coversTop\", \"CategoryTheory.PresheafOfGroups.H1\", \"CategoryTheory.Sheaf.instAddCommGroupH\"], \"digest\": \"b8a400751749c855\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: read the hits; finite presentation of module sheaves, structure-section zero detection, definitions of cohomology and nonabelian H1 do not give the collectionwise derived vanishing asserted here."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-scheme-fppf-flat-lfp-affine-acyclicity",
+  "date": "2026-10-24",
+  "group": "Q68"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Affine PGL quotients with closed orbits and zero-dimensional stabilizers. Supporting affine-quotient step: Finite inertia gives an adequate coarse moduli space. Supporting input to the finite-inertia coarse-space construction: Passage from invariant global power liftings on the affine rank charts to adequate moduli spaces, then etale descent to the glued map. Flat scalar-section comparison needed in the descent of a power lying in the image of a global algebra map; this does not assert adequate-moduli locality. General cohomological input: preservation of locally quasi-coherent modules and flat comparison maps under qcqs stack direct images. Supporting input: Etale-fppf comparison under locally finitely presented flat comparisons. Scheme-local affine acyclicity input to the topology-comparison prerequisite. Supporting parasitic-kernel and parasitic-cokernel vanishing in the proof of Stacks Tag 0756.",
+   "via": [
+    "lem-sfb-scheme-fppf-flat-lfp-affine-acyclicity",
+    "lem-sfb-stack-lqc-lfp-topology-comparison",
+    "lem-sfb-stack-higher-images-flat-comparison",
+    "lem-sfb-stack-flat-scalar-sections",
+    "lem-sfb-adequate-moduli-etale-locality",
+    "lem-sfb-finite-inertia-adequate-coarse-space",
+    "lem-sfb-affine-pgl-finite-stabilizer-quotient",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-fppf-flat-lfp-zero-cohomology",
+  "worker": "stage1",
+  "summary": "Checked the exact Stacks 0755(1) fppf statement and its 03F9 proof. Reused existing general-site Cech criterion, four scheme permanence facts and the arbitrary-ring-sheaf module/abelian evaluation comparison. Expanded closure of all nerve terms by finite induction, computed their zero Cech complexes directly, and checked enough injectives and degree zero. Statement unchanged; no new nodes and no Lean attachment.",
+  "blueprint": "Realizes the inherited from.place: the parasitic-kernel/cokernel vanishing in the proof of Stacks 0756, under the scheme-local fppf affine-acyclicity prerequisite of det-thm-sf-ctf-stability-direct-images proof (3). The current latest blueprint direct-images proof was read. The existing record has from.node = null and the ancestor command confirms None; its inherited via chain and place are retained. No unit route change.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-site-cech-vanishing-criterion",
+    "why": "The general-site Cech vanishing criterion 03F9 is exactly the black box invoked in the fppf proof of Stacks 0755; this unit has no alternative general-site criterion."
+   },
+   {
+    "node": "lem-weil-pbc-ring-sheaves-grothendieck",
+    "why": "General small ringed-site module-category theorem supplies enough-injectives prerequisites through the Grothendieck criterion; it does not replace any geometric unit step."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-site-module-abelian-evaluation-comparison",
+    "why": "Stacks 03FD over any object identifies the module-derived evaluation in the item with the abelian cohomology of 03F9. Constant-coefficient and global-only comparison nodes do not suffice."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-site-cech-vanishing-criterion",
+  "lem-weil-pbc-ring-sheaves-grothendieck",
+  "lem-weil-pbc-ringed-site-module-abelian-evaluation-comparison"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q84-0ea9a77e5",
+  "group": "Q84",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q84-0ea9a77e5 (reviewer sub-agent of L); spot-checked: I read the item in full; it has no new nodes. The statement and stmt_deps are byte-identical to Q68 744d, where the node was created, so nothing was weakened, and no SGA source is cited. Source: descent.tex 0755(1) with tau=fppf; the proof applies sites-cohomology 03F9 with B = flat lfp U->S and Cov = all fppf coverings of B, and 06ZL is the sectionwise hypothesis; I read 03F9 and 03FD and both match the DAG nodes. Step 1: covering arrows are flat lfp (def-pc-fppf-site); composition (lem-pc-flat-compose, lem-sbc-...-composition) and base change (01U9 node; qcqs-permanence clause (3), which is independent of the qcqs clauses) put the iterated W_r in B; this also follows from site axiom (iii); cofinality is trivial because Cov holds every covering. Step 2 is elementary: every Cech term is a product of zeros, and the empty product is 0. Step 3: criterion hypotheses (1)-(3) hold, so H^q(V,P_ab)=0 for q>0. Enough injectives come from ring-sheaves-grothendieck (arbitrary ring sheaf, small site) plus grothendieck-enough-injectives, and the objectwise 03FD comparison gives the module-derived groups. Step 4: the comparison is the identity in degree 0, and id_S is flat lfp by the definitions (n=m=0). Edge cases checked: q=0, empty S/V/covers, infinite or repeated indices, V not qc or qs, nothing used outside B. The citer affine-acyclicity applies the item at id_U with q>=0, which is covered. rg -L for 0755/parasitic found no duplicate, and a BFS found no cycle. I accept the tool_uses 03F9, Grothendieck module category and 03FD as general inputs. Advisory: fppf-sheafness of O is presupposed by the inherited statement, as in sibling nodes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.FppfFlatLfpZeroCohomology",
+  "declaration": "AlgebraicGeometry.Scheme.fppf_flat_lfp_zero_cohomology",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.fppfStructureModuleEnoughInjectives",
+   "AlgebraicGeometry.Scheme.fppf_flat_lfp_zero_cohomology"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/FppfFlatLfpZeroCohomology.lean",
+  "statement": "theorem fppf_flat_lfp_zero_cohomology (S : Scheme.{u}) (P : ringedSiteModules.{max (u + 1) w} (sfbFppfRings S)) (hP : ∀ V : Over S, Flat V.hom → LocallyOfFinitePresentation V.hom → Subsingleton (P.val.obj (op V))) : (∀ V : Over S, Flat V.hom → LocallyOfFinitePresentation V.hom → ∀ q : ℕ, IsZero (((SheafOfModules.toSheaf (sfbFppfRings S) ⋙ sheafToPresheaf (fppfTopology.over S) AddCommGrpCat.{max (u + 1) w} ⋙ (CategoryTheory.evaluation (Over S)ᵒᵖ AddCommGrpCat.{max (u + 1) w}).obj (op V)).rightDerived q).obj P)) ∧ (∀ q : ℕ, IsZero (((SheafOfModules.toSheaf (sfbFppfRings S) ⋙ sheafToPresheaf (fppfTopology.over S) AddCommGrpCat.{max (u + 1) w} ⋙ (CategoryTheory.evaluation (Over S)ᵒᵖ AddCommGrpCat.{max (u + 1) w}).obj (op (Over.mk (𝟙 S)))).rightDerived q).obj P))",
+  "branch": "newtargets-dag",
+  "by": "N5",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "Uses the existing sfbFppfRings and sfbFppfStructureSheaf declarations through def-sfb-big-fppf-structure-sheaf, an existing:true definition node. The quasi-coherent equivalence theorem is not a statement dependency. Module values range over max (u+1) w; enough injectives is a real Grothendieck construction. All nonnegative degrees and the identity-arrow particular case use right derived evaluation in module sheaves."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-0b9c224c1",
+  "group": "N5",
+  "result": "pass",
+  "note": "Re-delivery of ceda640af9e7, which was returned only for H2 (a theorem node cited only for its plain defs). The Lean module is byte-identical (cmp), so the earlier clause-by-clause reading stands. I re-checked it: S, fppfTopology.over S, sfbFppfRings, P in ringedSiteModules.{max(u+1) w}, the Subsingleton hypothesis on flat+lfp objects, rightDerived of the composite module→abelian evaluation for all q:ℕ, and the identity conjunct. There is no extra hypothesis, w is free, the enough-injectives instance is real, the only sorry is the proof, and the docstrings are complete. The item node diff is only the stmt_dep swap to def-sfb-big-fppf-structure-sheaf plus the note. The new node is existing:true on SchemeBigFppfQuasicoherentEquivalence, records sfbFppfStructureSheaf and sfbFppfRings, cites Stacks 03DU, and its lean.statement is verbatim equal to the live source lines 136-146; both are plain defs with no .choose of the theorem. No other definition node owns them in the live DAG or blueprint index. lean.statement is a verbatim substring of the item file. No compile was run: no file changed."
+ }
+}

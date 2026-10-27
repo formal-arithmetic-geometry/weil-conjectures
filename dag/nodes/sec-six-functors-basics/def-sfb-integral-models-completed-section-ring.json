@@ -1,0 +1,145 @@
+{
+ "id": "def-sfb-integral-models-completed-section-ring",
+ "kind": "definition",
+ "title": "Normalized completed integral ring in continuous section coordinates",
+ "statement": "For a prime l, a finite extension E of Q_l and a scheme X, completedSectionIso is a specified isomorphism from the completed constant coefficient ring [def-sfb-adic-stratified-perfect-data] to the reconstructed section ring of the continuous integral coefficients [def-sfb-integral-models-stacks-data]. It composes pbcCompletedComparison, the CommRing lift purCoefficientIso, the inverse integralSectionRingIso, and reconstruction of the pointComparison [def-sfb-integral-constant-model-realization].",
+ "source": {
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Integral-models proof (1), normalized coefficient comparison; section-derived-completion-noetherian"
+ },
+ "stmt_deps": [
+  "def-sfb-adic-stratified-perfect-data",
+  "def-sfb-integral-models-stacks-data",
+  "def-sfb-integral-constant-model-realization",
+  "det-prop-integral-criterion-reductions",
+  "lem-weil-pbc-integral-coefficient-completeness-transport"
+ ],
+ "proof": [
+  {
+   "text": "Map the fixed point monoid isomorphism through the monoidal pullback, forget commutativity fully faithfully, reconstruct commutative rings on sections, and whisker by the commutative-ring equivalence. Its inverse laws follow functorially.",
+   "uses": [
+    "def-sfb-integral-constant-model-realization",
+    "def-weil-pbc-internal-abelian-sheaf-module-equivalence"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Compose the fixed completed coefficient comparison, its fully faithful CommRing lift, the inverse integral section comparison, and the reconstructed point comparison. This is a real composite of specified isomorphisms, with no new choice of data.",
+   "uses": [
+    "def-sfb-adic-stratified-perfect-data",
+    "det-prop-integral-criterion-reductions",
+    "lem-weil-pbc-integral-coefficient-completeness-transport"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-sfb-integral-constant-model-realization",
+  "def-weil-pbc-internal-abelian-sheaf-module-equivalence",
+  "def-sfb-adic-stratified-perfect-data",
+  "det-prop-integral-criterion-reductions",
+  "lem-weil-pbc-integral-coefficient-completeness-transport"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Lemma completion-flat; projection normalization from integral-models proof (1) and integral-criterion reductions."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Local derived completeness preserved by equivalence of sites and isomorphism of coefficient ring sheaves",
+   "results": "8 hits: CategoryTheory.Equivalence.transportIsoSheafToPresheaf, CategoryTheory.Equivalence.sheafCongrPrecoherent, CategoryTheory.Equivalence.sheafCongr, CategoryTheory.Equivalence.sheafCongr.functor, CategoryTheory.Equivalence.sheafCongr.functor_obj_val_obj, CategoryTheory.Equivalence.sheafCongr_functor, CategoryTheory.Equivalence.hasSheafCompose, CategoryTheory.Functor.IsDenseSubsite.sheafEquiv",
+   "date": "2026-10-25",
+   "verdict": "No comparison of these specified integral coefficient presentations. Ideal.map_span supplies the generic image-of-generated-ideal calculation only."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsLocallyDerivedRingedIdealComplete\"",
+   "results": "0 hits: ",
+   "date": "2026-10-25",
+   "verdict": "No comparison of these specified integral coefficient presentations. Ideal.map_span supplies the generic image-of-generated-ideal calculation only."
+  },
+  {
+   "tool": "grep",
+   "query": "IsSfbAdicComplete|complete_section_predicate",
+   "results": "0 hits: ",
+   "date": "2026-10-25",
+   "verdict": "No comparison of these specified integral coefficient presentations. Ideal.map_span supplies the generic image-of-generated-ideal calculation only."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The extension of the residue kernel ideal equals the completed residue kernel under the constant to continuous coefficient map",
+   "results": "8 hits: ContinuousLinearMap.completion_apply_coe, ContinuousLinearMap.coe_completion, ContinuousLinearMap.completion, UniformSpace.Completion.extensionHom_coe, PowerSeries.ker_coeff_eq_max_ideal, UniformSpace.Completion.extensionHom, AdicCompletion.kerProj.congr_simp, NormedAddGroupHom.ker_completion",
+   "date": "2026-10-25",
+   "verdict": "No comparison of these specified integral coefficient presentations. Ideal.map_span supplies the generic image-of-generated-ideal calculation only."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Ideal.map_span\"",
+   "results": "2 hits: Ideal.map_span, Ideal.map_spanIntNorm",
+   "date": "2026-10-25",
+   "verdict": "No comparison of these specified integral coefficient presentations. Ideal.map_span supplies the generic image-of-generated-ideal calculation only."
+  },
+  {
+   "tool": "grep",
+   "query": "kernel.*extension|extension.*kernel|sectionRingMap",
+   "results": "10 hits; no statement about these specified coefficient presentations.",
+   "date": "2026-10-25",
+   "verdict": "No exact match."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.IntegralModelsCompleteSectionPredicate",
+  "date": "2026-10-25",
+  "group": "T6"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sfb-integral-models-complete-section-predicate",
+   "place": "Integral-models proof (1), normalized coefficient comparison; section-derived-completion-noetherian",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-lem-integral-models",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.IntegralModelsCompletedSectionRing",
+  "file": "lean/Sheaf/AlgebraicGeometry/IntegralModelsCompletedSectionRing.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.IntegralModelsStacks.completedSectionIso",
+  "statement": "def completedSectionIso (l : ℕ) [Fact l.Prime]\n    (E : Type u) [Field E] [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]\n    (X : Scheme.{u}) :\n    Scheme.adicLisseCompletedRing X (IntegralConstantCompletion.ideal l E) ≅\n      InternalAbelianSheafModule.sectionRingSheaf.{u + 1, u + 1, u}\n        (Scheme.ProEt.topology X) (condensedRingObj (integersObj l E) X)",
+  "branch": "sheaf-dag",
+  "by": "T6",
+  "date": "2026-10-25",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.IntegralModelsStacks.pointSectionIso",
+   "AlgebraicGeometry.ProEtale.IntegralModelsStacks.completedSectionIso"
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T6",
+  "result": "pass",
+  "landing": "20261025T181144-L-4082858",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T6",
+  "result": "pass",
+  "landing": "20261025T181144-L-4082858",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

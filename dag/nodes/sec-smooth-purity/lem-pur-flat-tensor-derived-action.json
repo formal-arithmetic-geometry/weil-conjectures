@@ -1,0 +1,107 @@
+{
+ "id": "lem-pur-flat-tensor-derived-action",
+ "kind": "statement",
+ "title": "FlatTensorDerivedAction",
+ "statement": "Let F be an additive exact functor between the two module-sheaf categories, L and M flat fixed sheaves, and gamma:(- tensor L)⋙F≅F⋙(- tensor M). Then there exists b:DerivedActionData(F,L,M) satisfying DerivedAction(F,L,M,gamma,b) [def-pur-signed-line-derived-action-data]. Thus its resolving comparisons have the prescribed representative normalization and its derived comparison is the unique natural isomorphism whose square on every localized complex is the termwise image of gamma.",
+ "stmt_deps": [
+  "def-weil-sheaf-of-modules-category",
+  "def-pur-signed-line-derived-action-data"
+ ],
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tags 03D2, 03D3, 03EL and 0FNY; for derived localization use derived.tex Tags 06YU, 07A4 and 015F. Specialization of the Powers and duals paragraph of the current blueprint."
+ },
+ "proof": [
+  {
+   "text": "Obtain the two flat-factor resolving comparisons. Compose them with the exact derived-functor factorization and the termwise image of gamma to obtain an isomorphism after the source cochain localization. Lift it by Localization.liftNatIso. Its application formula and cancellation give the required square. For uniqueness, cancel the resolving comparisons and use faithfulness of localization whiskering.",
+   "uses": [
+    "lem-pur-flat-line-resolving-normalization",
+    "lem-weil-pbc-exact-functor-derived-factorization"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-pur-flat-line-resolving-normalization",
+  "lem-weil-pbc-exact-functor-derived-factorization"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-an/sk-prop-sfb-cartesian-coefficients-twists.proof.md",
+  "place": "Powers and duals, including unit, positive tensor recursion, evaluation, and unbounded derived action. The component proof is given below and in the attached Lean module."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "An isomorphism of pullback invertible module sheaves extends to all signed tensor powers and derived tensor products",
+   "results": "8 hits; AlgebraicGeometry.Scheme.Pullback.Triplet.tensorCongr_inv, SheafOfModules.pullbackObjFreeIso, SheafOfModules.freeFunctorCompPullbackIso, SheafOfModules.conjugateEquiv_pullbackComp_inv, AlgebraicGeometry.Scheme.Pullback.Triplet.tensorCongr_symm, SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom, SheafOfModules.pullbackIso, AlgebraicGeometry.Scheme.Pullback.Triplet.tensorCongr_refl",
+   "date": "2026-10-24",
+   "verdict": "No complete match; use the published component APIs."
+  },
+  {
+   "tool": "loogle",
+   "query": "Functor.mapDerivedCategory",
+   "results": "0 hits; loogle: unknown identifier 'Functor.mapDerivedCategory'",
+   "date": "2026-10-24",
+   "verdict": "No complete match; use the published component APIs."
+  },
+  {
+   "tool": "grep",
+   "query": "signed_line_derived_base_change|SignedLinePullbackNormalized",
+   "results": "0 hits; ",
+   "date": "2026-10-24",
+   "verdict": "No complete match; use the published component APIs."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Algebra.Homology.SignedLineDerivedBaseChange",
+  "date": "2026-10-24",
+  "group": "V1"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-an",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pur-signed-line-derived-base-change",
+   "place": "The corresponding strict component of its proof.",
+   "via": []
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Algebra.Homology.FlatTensorDerivedAction",
+  "file": "lean/Sheaf/Algebra/Homology/FlatTensorDerivedAction.lean",
+  "declaration": "SheafOfModules.SignedLineDerivedBaseChange.flat_tensor_derived_action",
+  "declarations": [
+   "SheafOfModules.SignedLineDerivedBaseChange.flat_tensor_derived_action"
+  ],
+  "statement": "theorem flat_tensor_derived_action\n    [HasDerivedCategory.{z} (KFlatFixedTensor.Modules R)]\n    [HasDerivedCategory.{z} (KFlatFixedTensor.Modules S)]\n    (F : KFlatFixedTensor.Modules R ⥤ KFlatFixedTensor.Modules S)\n    [F.Additive] [PreservesFiniteLimits F] [PreservesFiniteColimits F]\n    (L : KFlatFixedTensor.Modules R) (M : KFlatFixedTensor.Modules S)\n    (hL : IsFlatOnSite (J := J) (R := R) L)\n    (hM : IsFlatOnSite (J := K) (R := S) M)\n    (γ : siteSheafTensorRight L ⋙ F ≅ F ⋙ siteSheafTensorRight M) :\n    ∃ b : DerivedActionData F L M, DerivedAction F L M γ b",
+  "branch": "sheaf-dag",
+  "by": "V1",
+  "date": "2026-10-24"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-dfce3",
+  "group": "V1",
+  "result": "pass",
+  "landing": "20261025T124047-L-1930969",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-dfce3",
+  "group": "V1",
+  "result": "pass",
+  "landing": "20261025T124047-L-1930969",
+  "kind": "interface",
+  "note": "independent cc review: item theorem vs published statement (byte-identical); relocated Data definitions vs published bodies (structure/inductive repackaging, same content, change record); 18 delivered modules + 3 direct importers compiled together in a sandbox (no errors; CartesianCoefficientTwists 84 s vs 81 s for the published file, so its slowness was already there); #print axioms only propext/choice/Quot.sound plus sorryAx from cited open library statements"
+ }
+}

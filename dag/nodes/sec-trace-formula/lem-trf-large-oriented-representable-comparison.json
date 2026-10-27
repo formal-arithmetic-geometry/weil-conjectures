@@ -1,0 +1,161 @@
+{
+ "id": "lem-trf-large-oriented-representable-comparison",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Proof of (1) and (2), normal-cone specialization: the external-product comparison used by lem-trf-trace-specialization; existence and universal property of the oriented product on which the vanishing topos of def-trf-oriented-nearby-cycles is built; ILO XI §1.3; Stacks Tag 00X6; adjunction/Yoneda determination of direct images on site objects, XI 1.3 and 1.6.",
+   "via": [
+    "lem-trf-oriented-product-universal",
+    "lem-trf-specialization-external-product",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Direct-image transformations are determined by inverse-image mates on associated representables",
+ "statement": "Let C be a category with object universe w and hom universe v and J a Grothendieck topology. Let E be any category and a,b geometric morphisms from E to the sheaf category of sets in Type(max v w), in the sense of [def-trf-geometric-morphism]. Let A=largeAssociated J be the associated-representable functor of [def-trf-large-oriented-site-data]. For every natural transformation delta:A composed with b.inverse to A composed with a.inverse, there is a unique natural transformation tau:a.direct to b.direct whose inverse-image mate at A(U) is delta(U), for every U in C. No topological subcanonicity or finite-limit assumptions on C are required. Moreover an isomorphism delta of those inverse-image restrictions extends to an isomorphism of direct images with the same prescribed mate.",
+ "source": {
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "ILO XI §§1.3 and 1.6; Lean: lean/Sheaf/CategoryTheory/Sites/OrientedProductLargeRepresentableComparison.lean"
+ },
+ "stmt_deps": [
+  "def-trf-geometric-morphism",
+  "def-trf-large-oriented-site-data",
+  "def-weil-pbc-sheafification"
+ ],
+ "proof": [
+  {
+   "text": "For each M in E and U in C, the sheafification adjunction and lifted Yoneda identify sections of a.direct(M) at U with maps a.inverse(A(U)) to M. Precomposition with delta(U), followed by the inverse identification for b, defines a map of sections. Naturality in U follows from delta.naturality and the naturality of the adjunction/Yoneda equivalences. Naturality in M follows from their right-variable naturality. Thus these section maps form a transformation tau of direct-image functors.",
+   "uses": [
+    "def-trf-large-oriented-site-data",
+    "def-weil-pbc-sheafification",
+    "lem-galois-yoneda-hom-bijection"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "ILO XI 1.3, direct-image section construction; 1.6 uniqueness"
+   }
+  },
+  {
+   "text": "The conjugate-unit identity for the two adjunctions, applied to A(U), identifies the inverse-image mate of the constructed transformation with delta(U), since the unit corresponds to the identity under the Hom equivalence. For any proposed tau, naturality at a map a.inverse(A(U)) to M and the same conjugate-unit identity express its effect on the corresponding section as precomposition with its mate at A(U). Those sections exhaust all sections by adjunction and Yoneda. Hence a transformation with the prescribed mate agrees with the constructed one on every section of every sheaf, proving uniqueness.",
+   "uses": [
+    "def-trf-geometric-morphism",
+    "lem-galois-yoneda-hom-bijection"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "ILO XI 1.6, determination of the direct image from Hom on associated representables"
+   }
+  },
+  {
+   "text": "Apply the unique-extension theorem to delta.hom and delta.inv. Mates reverse compositions and preserve identities, so the mate of either composite is the identity on each associated representable. The unique-extension theorem therefore identifies both composites with identities. These two maps define the desired direct-image isomorphism, with its mate formula inherited from the hom extension.",
+   "uses": [
+    "def-trf-geometric-morphism",
+    "lem-galois-yoneda-hom-bijection"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "ILO XI 1.6, isomorphism and uniqueness of the direct-image comparison"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-trf-geometric-morphism",
+  "def-trf-large-oriented-site-data",
+  "def-weil-pbc-sheafification",
+  "lem-galois-yoneda-hom-bijection"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "ILO XI 1.3 and 1.6; adjunction, Yoneda, and the conjugate-unit identity."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Natural transformations of right adjoints into a sheaf category are determined by inverse image mates on associated representables",
+   "results": "CategoryTheory.Functor.IsCoverDense.sheafYonedaHom; CategoryTheory.Sheaf.natTransΓRes; CategoryTheory.Functor.IsCoverDense.sheafHom; CategoryTheory.Functor.IsCoverDense.homOver; CategoryTheory.Functor.IsCoverDense.sheafCoyonedaHom; CategoryTheory.sheafHomSectionsEquiv_symm_apply_coe_apply; CategoryTheory.GrothendieckTopology.plusLift; CategoryTheory.sheafificationAdjunction",
+   "date": "2026-10-23",
+   "verdict": "Generic adjunction, Yoneda, sheafification and cover-dense comparison lemmas; no same statement on mates restricted to associated representables."
+  },
+  {
+   "tool": "grep",
+   "query": "conjugateEquiv|uliftYonedaEquiv_naturality",
+   "results": "Mathlib/AlgebraicGeometry/Modules/Sheaf.lean; Mathlib/AlgebraicGeometry/Modules/Sheaf.lean; Mathlib/AlgebraicGeometry/Modules/Sheaf.lean; Mathlib/AlgebraicGeometry/Modules/Sheaf.lean; Mathlib/AlgebraicGeometry/Modules/Sheaf.lean; Mathlib/AlgebraicTopology/SimplicialSet/StdSimplex.lean; Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean; Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean",
+   "date": "2026-10-23",
+   "verdict": "Generic adjunction, Yoneda, sheafification and cover-dense comparison lemmas; no same statement on mates restricted to associated representables."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A natural transformation between direct images is uniquely determined by its mate on sheafified representables using Yoneda",
+   "results": "CategoryTheory.RanIsSheafOfIsCocontinuous.hom_ext; CategoryTheory.sheafComposeNatTrans_app_uniq; CategoryTheory.sheafify_hom_ext; CategoryTheory.GrothendieckTopology.plus_hom_ext; CategoryTheory.GrothendieckTopology.sheafify_hom_ext; CategoryTheory.GrothendieckTopology.hom_ext_yoneda; CategoryTheory.Subfunctor.to_sheafify_lift_unique; CategoryTheory.GrothendieckTopology.hom_ext_uliftYoneda",
+   "date": "2026-10-23",
+   "verdict": "Generic adjunction, Yoneda, sheafification and cover-dense comparison lemmas; no same statement on mates restricted to associated representables."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.CategoryTheory.Sites.OrientedProductLargeSites",
+  "date": "2026-10-24",
+  "group": "P8"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.Sites.OrientedProductLargeRepresentableComparison",
+  "file": "lean/Sheaf/CategoryTheory/Sites/OrientedProductLargeRepresentableComparison.lean",
+  "declaration": "CategoryTheory.OrientedProduct.largeDirectImageFromRepresentables",
+  "statement": "theorem largeDirectImageFromRepresentables {C : Type w} [Category.{v} C]\n    {E : Type e} [Category.{ve} E] (J : GrothendieckTopology C)\n    (a b : GeometricMorphism E (Sheaf J (Type (max v w))))\n    (δ : largeAssociated J ⋙ b.inverse ⟶ largeAssociated J ⋙ a.inverse) :\n    ∃! τ : a.direct ⟶ b.direct, ∀ U : C,\n      (GeometricMorphism.inverseMate τ).app ((largeAssociated J).obj U) = δ.app U",
+  "branch": "sheaf-dag",
+  "by": "P8",
+  "date": "2026-10-24",
+  "declarations": [
+   "CategoryTheory.OrientedProduct.largeDirectImageFromRepresentables",
+   "CategoryTheory.OrientedProduct.largeDirectImageIsoFromRepresentables"
+  ]
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-trf-large-oriented-representable-comparison",
+  "worker": "stage3",
+  "summary": "Extract and prove the adjunction/Yoneda extension already needed by the orientation and the uniqueness calculation; no added sorry.",
+  "blueprint": "ILO XI 1.3 and the uniqueness step of 1.6, within the oriented-product construction for normal-cone specialization."
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "C-15aea",
+  "group": "P8",
+  "result": "pass",
+  "landing": "20261024T015523-L-2412674",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "C-15aea",
+  "group": "P8",
+  "result": "pass",
+  "landing": "20261024T015523-L-2412674",
+  "kind": "interface",
+  "note": "independent cc review: item statement byte-identical to live; 12 moved defs vs live item block (docstring tags only); 2 sorry lift lemmas vs ILO XI 1.5/1.6; 25 direct importers compiled against the delivered modules"
+ }
+}

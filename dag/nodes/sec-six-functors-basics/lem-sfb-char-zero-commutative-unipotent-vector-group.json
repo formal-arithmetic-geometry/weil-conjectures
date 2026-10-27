@@ -1,0 +1,314 @@
+{
+ "id": "lem-sfb-char-zero-commutative-unipotent-vector-group",
+ "kind": "statement",
+ "title": "Commutative unipotent groups in characteristic zero are vector groups",
+ "statement": "Let $k$ be a field [def-weil-field]. All groups are affine $k$-group schemes [def-sc-group-scheme] of finite type [def-weil-finite-type-morphism], and subgroups are closed subgroup schemes [def-sc-group-scheme-subgroup]. Smoothness and connectedness mean [def-sbc-smooth-morphisms, def-weil-connected-scheme]. Assume $\\operatorname{char}k=0$. Let $G$ be smooth, connected and commutative. Suppose there is a closed immersion of group schemes $G\\hookrightarrow U_n$ for some $n\\geq1$, where $U_n(R)$ is the group of upper triangular $n\\times n$ matrices with diagonal entries $1$, for every commutative $k$-algebra $R$. Then for some integer $d\\geq0$ there is an isomorphism of $k$-group schemes $\\mathbf G_a^d\\xrightarrow{\\sim}G$. Here $\\mathbf G_a(R)=(R,+)$ for every commutative $k$-algebra $R$ [def-sc-gm-ga], and $\\mathbf G_a^0$ is the trivial group $1=\\operatorname{Spec}k$.",
+ "source": {
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Proposition 14.32 and Corollary 14.33, printed p.289. Only the commutative consequence is used; 14.32 is proved through the characteristic-zero central series of 14.21 and 14.24, independently of Corollary 14.55."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-sc-group-scheme",
+  "def-weil-finite-type-morphism",
+  "def-sbc-smooth-morphisms",
+  "def-weil-connected-scheme",
+  "def-sc-group-scheme-subgroup",
+  "def-sc-gm-ga"
+ ],
+ "proof": [
+  {
+   "text": "For every smooth connected commutative group $V$ admitting a closed unitriangular embedding, put $\\mathfrak v=T_eV$. By [lem-sfb-unipotent-exponential-construction] it is a finite-dimensional space of strictly upper triangular matrices and has a morphism $\\exp_V:\\mathfrak v_a\\to V$. We prove that this morphism is an isomorphism by strong induction on $d=\\dim_k\\mathfrak v$, simultaneously for all such $V$ over the fixed field $k$. The trivial group has tangent space zero and its exponential is the identity between one-point schemes. For a nontrivial $V$, steps 2--6 below construct $N\\simeq\\mathbf G_a$ and a quotient satisfying the same hypotheses with tangent dimension $d-1$; in particular they show that a nontrivial $V$ cannot have $d=0$.",
+   "uses": [
+    "lem-sfb-unipotent-exponential-construction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 14.32, printed p.289: induction, indexed here by tangent dimension; 14.31 constructs the morphism."
+   }
+  },
+  {
+   "text": "Suppose $V\\ne1$ and embed it in $U_n$. Intersect the coordinate filtration of [lem-sfb-unitriangular-coordinate-filtration] with $V$, writing $H_r=V\\cap U^{(r)}$. Since $H_0=V$ and $H_m=1$, choose the largest $r$ with $H_r\\ne1$. Then $H_{r+1}=1$, and the restricted coordinate homomorphism $p_{r+1}:H_r\\to\\mathbf G_a$ has trivial scheme-theoretic kernel. Factor it as $H_r\\xrightarrow{u}I\\hookrightarrow\\mathbf G_a$ by [lem-sfb-affine-homomorphism-flat-image]. For every $k$-algebra $R$, if $u_R(x)=u_R(y)$ then $xy^{-1}$ lies in that trivial kernel, so $x=y$. Thus $u^*:k[I]\\to k[H_r]$ is an epimorphism of commutative rings: maps out of $k[H_r]$ agreeing on $k[I]$ induce the same $k$-algebra structure on their target, and then agree by this injectivity on points. It is faithfully flat by the factorization. Apply [lem-sfb-faithfully-flat-ring-epimorphism-isomorphism] to conclude that $u$ is an isomorphism. In particular $I\\ne1$.",
+   "uses": [
+    "lem-sfb-unitriangular-coordinate-filtration",
+    "lem-sfb-affine-homomorphism-flat-image",
+    "lem-sfb-faithfully-flat-ring-epimorphism-isomorphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "14.21 proof, printed pp.284--285, using 6.49; make the last nontrivial intersection and its image explicit."
+   }
+  },
+  {
+   "text": "If $I\\subsetneq\\mathbf G_a$, [lem-sfb-additive-subgroup-polynomial-quotient] gives a monic defining polynomial $P$ of positive degree $a$ with $P(X+Y)=P(X)+P(Y)$ and $P(0)=0$. If $a>1$, the coefficient of $X^{a-1}Y$ on the left is $a\\ne0$ and on the right is zero, a contradiction in characteristic zero. Thus $a=1$ and $P(T)=T$, which gives $I=1$, also a contradiction. Hence $I=\\mathbf G_a$. Set $N=H_r$ and let $a:\\mathbf G_a\\simeq N$ be the resulting isomorphism. It is a closed subgroup of $V$, and is central since $V$ is commutative. The standard embedding $t\\mapsto I+tE_{12}$ of $\\mathbf G_a$ has square-zero tangent matrices, so the finite exponential formula in [lem-sfb-unipotent-exponential-construction] gives $\\exp_{\\mathbf G_a}(t)=t$. Its naturality for $a$ therefore identifies $\\exp_N:(T_eN)_a\\to N$ with $a$, using $\\mathrm da:k\\simeq T_eN$. In particular $\\dim_k T_eN=1$.",
+   "uses": [
+    "lem-sfb-additive-subgroup-polynomial-quotient",
+    "lem-sfb-unipotent-exponential-construction",
+    "def-sc-gm-ga"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Remark 14.24(a), printed p.285; Proposition 14.32, printed p.289, base case Ga. The coefficient proof also covers nonreduced subgroup schemes."
+   }
+  },
+  {
+   "text": "The identity point of $V$ and [lem-sbc-connected-rational-point-geometrically-connected] make $V$ geometrically connected. Since $N$ is central, [lem-sfb-affine-normal-quotient-geometry] gives $q:V\\to Q=V/N$, an affine finite-type, smooth geometrically connected group, with kernel $N$ and with $q$ faithfully flat and finitely presented. It also gives the torsor isomorphism $(v,n)\\mapsto(v,vn):V\\times N\\simeq V\\times_QV$. Commutativity descends to $Q$: any two sections lift fppf locally along $q$, where their commutator is the identity; equality then descends. The torsor is locally trivial on the fppf cover $V\\to Q$, with its diagonal section. Over $Q$, $N_Q\\simeq\\mathbf G_{a,Q}$ is smooth affine and finitely presented: a polynomial coordinate lifts across every square-zero quotient. Therefore [lem-sfb-smooth-affine-group-torsor-representability] applied over $Q$ shows that $q$ itself is smooth. Smoothness of $\\mathbf G_a$ also follows directly from [def-sbc-smooth-morphisms]: its one polynomial coordinate can be lifted across any square-zero quotient.",
+   "uses": [
+    "lem-sbc-connected-rational-point-geometrically-connected",
+    "lem-sfb-affine-normal-quotient-geometry",
+    "lem-sfb-smooth-affine-group-torsor-representability",
+    "def-sbc-smooth-morphisms",
+    "def-sc-gm-ga"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 14.32, printed p.289, quotient and torsor square; smoothness of a torsor under a smooth group supplies the tangent lifting argument."
+   }
+  },
+  {
+   "text": "To verify unipotence of $Q$ over $k$, first note that smoothness of $V$ is preserved by field extension directly from [def-sbc-smooth-morphisms]: forget the extension-field structure in a lifting square, lift over $k$, and pair that lift with the prescribed map to the new base; tensoring a finite presentation preserves its generators and relations. Extend the quotient to an algebraic closure $\\bar k$ using [lem-sfb-affine-normal-quotient-geometry]. Apply [lem-sfb-unipotent-normal-quotient-image] with its $A=N=V_{\\bar k}$, $D=I=Q_{\\bar k}$, $f=u=q_{\\bar k}$ and $j=\\mathrm{id}$. Its hypotheses hold: $V_{\\bar k}$ is smooth, connected and unitriangular, and $q_{\\bar k}$ is faithfully flat. It yields unipotence of $Q_{\\bar k}$. The field-extension detection and faithful-matrix criterion of [lem-sfb-unipotent-to-multiplicative-trivial] give unipotence of the smooth group $Q$. Apply [lem-sfb-normal-subgroup-representation-kernel] to the trivial subgroup of $Q$, obtaining $\\rho:Q\\to\\mathrm{GL}_{r,k}$ with trivial kernel, hence injective on every algebra's points. Its geometric matrices are unipotent: the definition of unipotence just verified gives a closed immersion $i':Q_{\\bar k}\\hookrightarrow\\mathcal U_{n',\\bar k}$, injective on all $\\bar k$-algebra points with $(i'(g)-I)^{n'}=0$ for $g\\in Q(\\bar k)$, and [lem-sfb-rational-representation-unipotent-point] with $K=\\bar k$, faithful $i'$ and $r=\\rho_{\\bar k}$ makes every $\\rho(g)$, $g\\in Q(\\bar k)$, unipotent. Thus [lem-sfb-geometric-unipotence-unitriangular-embedding] gives a closed unitriangular embedding of $Q$ over $k$. This verifies precisely the embedding hypothesis required by the induction, rather than just an embedding after field extension.",
+   "uses": [
+    "def-sbc-smooth-morphisms",
+    "lem-sfb-affine-normal-quotient-geometry",
+    "lem-sfb-unipotent-normal-quotient-image",
+    "lem-sfb-unipotent-to-multiplicative-trivial",
+    "lem-sfb-normal-subgroup-representation-kernel",
+    "lem-sfb-rational-representation-unipotent-point",
+    "lem-sfb-geometric-unipotence-unitriangular-embedding"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "14.7 and 14.9, printed p.282: quotients and field extensions of unipotent groups; used implicitly for G/Ga in 14.32."
+   }
+  },
+  {
+   "text": "The tangent sequence is $0\\to\\mathfrak n\\xrightarrow{\\mathrm di}\\mathfrak v\\xrightarrow{\\mathrm dq}\\mathfrak q\\to0$, where $\\mathfrak n=T_eN$ and $\\mathfrak q=T_eQ$ [def-sc-scheme-tangent-space]. Indeed a dual-number point of $V$ mapping to the identity in $Q$ factors uniquely through the scheme-theoretic fibre $N$, which proves injectivity and the kernel assertion. For surjectivity, a vector of $\\mathfrak q$ gives a map $\\operatorname{Spec}k[\\epsilon]/\\epsilon^2\\to Q$ whose closed point is the identity. Smoothness of $q$ and the lifting property in [def-sbc-smooth-morphisms], applied to the identity $\\operatorname{Spec}k\\to V$, lift it to a vector of $\\mathfrak v$. The maps are linear by the tangent-space definition. Step 3 now gives $\\dim\\mathfrak q=d-1$; thus nontrivial $V$ forces $d\\geq1$, completing the zero-dimensional base case. Choose a linear section $s:\\mathfrak q\\to\\mathfrak v$ of $\\mathrm dq$ by lifting a basis. Then every element of $R\\otimes\\mathfrak v$ is uniquely $s(y)+\\mathrm di(z)$ with $y\\in R\\otimes\\mathfrak q$ and $z\\in R\\otimes\\mathfrak n$, since this direct-sum decomposition tensors to every $k$-algebra $R$.",
+   "uses": [
+    "def-sc-scheme-tangent-space",
+    "def-sbc-smooth-morphisms"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "10.14, printed p.190, tangent kernel sequence; the right-surjectivity needed in 14.32 is expanded directly by smooth infinitesimal lifting (Stacks Tag 02H0, definition-formally-smooth)."
+   }
+  },
+  {
+   "text": "By induction $\\exp_Q:\\mathfrak q_a\\to Q$ is an isomorphism, since step 5 verifies all group hypotheses and step 6 strictly lowers the induction integer. Naturality in [lem-sfb-unipotent-exponential-construction] gives\n$$q\\circ\\exp_V=\\exp_Q\\circ\\mathrm dq,\\qquad i\\circ\\exp_N=\\exp_V\\circ\\mathrm di.$$\nIn the commutative group $V$, any two tangent matrices commute. To check this without assuming a Lie-bracket theorem, use $B=R[\\epsilon,\\eta]/(\\epsilon^2,\\eta^2)$. The points $I+\\epsilon X$ and $I+\\eta Y$ belong to $V(B)$ by the tangent-coordinate description in that node. Their commutator is $I+\\epsilon\\eta(XY-YX)$. Commutativity of $V(B)$ and the freeness of $B$ on $1,\\epsilon,\\eta,\\epsilon\\eta$ force $XY-YX=0$. The commuting-vector identity of the same node therefore gives $\\exp_V(X+Y)=\\exp_V(X)\\exp_V(Y)$ for every $R$. In particular $\\exp_V(s(y)+\\mathrm di(z))=\\exp_V(s(y))i(\\exp_N(z))$.",
+   "uses": [
+    "lem-sfb-unipotent-exponential-construction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "14.31, formula (93) and the naturality square; 14.32, printed p.289, equivariance and commutative clause. Mixed-dual-number calculation writes out why the tangent matrices commute."
+   }
+  },
+  {
+   "text": "Here is an explicit inverse, so no torsor-comparison theorem is left implicit. For $v\\in V(R)$ put $y=\\exp_Q^{-1}(q(v))$ and $t=\\exp_V(s(y))$. The naturality square gives $q(t)=q(v)$, so $t^{-1}v\\in N(R)$ by the kernel clause of [lem-sfb-affine-normal-quotient-geometry]. Put $z=\\exp_N^{-1}(t^{-1}v)$ and $F(v)=s(y)+\\mathrm di(z)$. These formulas are morphisms of schemes: the factorization of $t^{-1}v$ through the closed kernel is given by its defining fibre square, and all the other operations are morphisms already constructed. Step 7 gives $\\exp_V(F(v))=t(t^{-1}v)=v$. Conversely, for $X=s(y)+\\mathrm di(z)$, that same formula gives $q(\\exp_V(X))=\\exp_Q(y)$ and $t^{-1}\\exp_V(X)=\\exp_N(z)$, so $F(\\exp_V(X))=X$. Thus $\\exp_V$ is an isomorphism of schemes. Step 7 proves it respects multiplication, so it is an isomorphism of group schemes. This completes the induction.",
+   "uses": [
+    "lem-sfb-affine-normal-quotient-geometry"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 14.32, printed p.289: expand the equivariant torsor-isomorphism argument (the source cites 2.71) using a linear section and the already proved exponential on the quotient."
+   }
+  },
+  {
+   "text": "Apply the induction result to the given $G$. Choose a $k$-basis $b_1,\\ldots,b_d$ of $T_eG$. The coordinate map $(r_1,\\ldots,r_d)\\mapsto\\sum r_jb_j$ and its inverse coordinate functionals identify its additive vector scheme with $\\mathbf G_a^d$ [def-sc-gm-ga]. Composing this isomorphism with $\\exp_G$ gives the required $\\mathbf G_a^d\\simeq G$. When $d=0$, both the vector scheme and $G$ are the trivial group by the induction's zero case; hence the empty-product clause is included.",
+   "uses": [
+    "def-sc-gm-ga"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Corollary 14.33 and its following paragraph, printed p.289: choosing a basis of Lie(G)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-unipotent-exponential-construction",
+  "lem-sfb-unitriangular-coordinate-filtration",
+  "lem-sfb-affine-homomorphism-flat-image",
+  "lem-sfb-faithfully-flat-ring-epimorphism-isomorphism",
+  "lem-sfb-additive-subgroup-polynomial-quotient",
+  "def-sc-gm-ga",
+  "lem-sbc-connected-rational-point-geometrically-connected",
+  "lem-sfb-affine-normal-quotient-geometry",
+  "lem-sfb-smooth-affine-group-torsor-representability",
+  "def-sbc-smooth-morphisms",
+  "lem-sfb-unipotent-normal-quotient-image",
+  "lem-sfb-unipotent-to-multiplicative-trivial",
+  "lem-sfb-normal-subgroup-representation-kernel",
+  "lem-sfb-rational-representation-unipotent-point",
+  "lem-sfb-geometric-unipotence-unitriangular-embedding",
+  "def-sc-scheme-tangent-space"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "14.28--14.33, printed pp.287--289, with the central-series input 14.21 and 14.24, pp.284--285. The torsor comparison in 14.32 is expanded by an explicit inverse after a linear splitting; tangent dimension indexes the same induction."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A commutative unipotent algebraic group over a field of characteristic zero is isomorphic to a finite product of additive group schemes via the exponential map",
+   "date": "2026-10-24",
+   "results": "[leanfinder] OK 8 hit(s); NumberField.mixedEmbedding.fundamentalCone.expMapBasis_apply, NumberField.mixedEmbedding.fundamentalCone.expMapBasis_apply', NumberField.mixedEmbedding.fundamentalCone.expMapBasis_apply'', NumberField.mixedEmbedding.fundamentalCone.expMap_basis_of_eq, NumberField.mixedEmbedding.fundamentalCone.expMapBasis, NumberField.Units.logEmbeddingEquiv_apply, WithZero.expEquiv, NumberField.Units.logEmbeddingEquiv",
+   "verdict": "no match: returned results concern abstract groups, Lie algebras, rings, analytic groups or number fields; none states this theorem about affine group schemes."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsUnipotent\", \"exp\"",
+   "date": "2026-10-24",
+   "results": "[loogle] OK 0 hit(s); none",
+   "verdict": "no match: returned results concern abstract groups, Lie algebras, rings, analytic groups or number fields; none states this theorem about affine group schemes."
+  },
+  {
+   "tool": "grep",
+   "query": "unipotent|exponential|vector.group",
+   "date": "2026-10-24",
+   "results": "[grep] OK 0 hit(s); none",
+   "verdict": "no match: returned results concern abstract groups, Lie algebras, rings, analytic groups or number fields; none states this theorem about affine group schemes."
+  },
+  {
+   "tool": "leansearch",
+   "query": "In characteristic zero a smooth commutative unipotent algebraic group is a vector group",
+   "date": "2026-10-24",
+   "results": "[leansearch] OK 8 hit(s); Rep.instInjective, CharP.charP_zero_iff_charZero, Algebra.instEtaleOfIsStandardSmoothOfRelativeDimensionOfNatNat, CharP.charP_to_charZero, LibraryNote.Design_choices_about_smooth_algebraic_structures, FreeAlgebra.charZero, instLieAlgebraAddGroupLieAlgebra, Rep.instAddCommGroupCarrierVModuleCat",
+   "verdict": "no match: returned results concern abstract groups, Lie algebras, rings, analytic groups or number fields; none states this theorem about affine group schemes."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The exponential map from the additive Lie algebra to a commutative unipotent group is a group scheme isomorphism in characteristic zero",
+   "date": "2026-10-24",
+   "results": "[leanfinder] OK 8 hit(s); LieDerivation.exp, LieDerivation.exp_apply, LieDerivation.exp_map_apply, WithZero.coe_expEquiv_apply, NumberField.mixedEmbedding.fundamentalCone.expMap_add, WithZero.expEquiv, IsNilpotent.map_exp, WithZero.expEquiv_symm",
+   "verdict": "no match: returned results concern abstract groups, Lie algebras, rings, analytic groups or number fields; none states this theorem about affine group schemes."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A commutative unipotent affine algebraic group over a characteristic zero field is isomorphic to a finite product of additive group schemes",
+   "results": "8 hits; AlgebraicGeometry.AffineSpace, AlgebraicGeometry.AffineSpace.isoOfIsAffine_inv, AlgebraicGeometry.AffineSpace.isoOfIsAffine_inv_appTop_coord, AlgebraicGeometry.AffineSpace.isoOfIsAffine_hom_appTop, AlgebraicGeometry.AffineSpace.instIsIsoSchemeOverInferInstanceOverClassOfIsEmpty, AlgebraicGeometry.AffineSpace.isoOfIsAffine_inv_over, AlgebraicGeometry.AffineSpace.isoOfIsAffine_hom, AlgebraicGeometry.AffineSpace.isoOfIsAffine",
+   "date": "2026-10-24",
+   "verdict": "no match: the returned finite matrix exponentials, Lie derivation exponentials, abstract groups and affine-space descriptions do not assert a group-scheme-valued exponential or the vector-group classification."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsUnipotent\", \"exp\"",
+   "results": "0 hits; ",
+   "date": "2026-10-24",
+   "verdict": "no match: the returned finite matrix exponentials, Lie derivation exponentials, abstract groups and affine-space descriptions do not assert a group-scheme-valued exponential or the vector-group classification."
+  },
+  {
+   "tool": "grep",
+   "query": "unipotent|exponential|vector.group",
+   "results": "0 hits; ",
+   "date": "2026-10-24",
+   "verdict": "no match: the returned finite matrix exponentials, Lie derivation exponentials, abstract groups and affine-space descriptions do not assert a group-scheme-valued exponential or the vector-group classification."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Every smooth connected commutative unipotent algebraic group in characteristic zero is a vector group",
+   "results": "8 hits; Rep.instInjective, LibraryNote.Design_choices_about_smooth_algebraic_structures, ContMDiffSection.instAddCommGroup, instLieAlgebraAddGroupLieAlgebra, instCommGroupObjOppositeOpensCarrierOfPresheafSmoothSheaf, smoothSheafCommGroup, contMDiff_mulInvariantVectorField, contMDiffAt_addInvariantVectorField",
+   "date": "2026-10-24",
+   "verdict": "no match: the returned finite matrix exponentials, Lie derivation exponentials, abstract groups and affine-space descriptions do not assert a group-scheme-valued exponential or the vector-group classification."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An abelian closed subgroup scheme of the upper unitriangular matrix group over a field containing the rationals is isomorphic to Ga to a finite power",
+   "results": "8 hits; Matrix.GeneralLinearGroup.upperRightHom_apply, Subgroup.instIsArithmeticRangeSpecialLinearGroupFinOfNatNatIntGeneralLinearGroupRealMapGL, Field.absoluteGaloisGroupAbelianization, Matrix.SpecialLinearGroup.center_equiv_rootsOfUnity'_apply, Matrix.SpecialLinearGroup.center_equiv_rootsOfUnity, SpecialLinearGroup.centerEquivRootsOfUnity, SpecialLinearGroup.centerCongr_toLin_equiv_trans_centerEquivRootsOfUnity_eq, Matrix.SpecialLinearGroup.center_equiv_rootsOfUnity'",
+   "date": "2026-10-24",
+   "verdict": "no match: the returned finite matrix exponentials, Lie derivation exponentials, abstract groups and affine-space descriptions do not assert a group-scheme-valued exponential or the vector-group classification."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-unipotent-central-additive-subgroup",
+  "date": "2026-10-24",
+  "group": "Q47"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Haboush symmetric-power lifting for a trivial quotient representation. Supporting representation-theoretic input: Central covering of a reductive group by a torus and a simply connected semisimple group. Milne central-cover construction: Multiplication by a central torus with semisimple quotient and the derived group. Supporting input: Semisimple algebraic groups are perfect. Root-subgroup structure and the torus conjugation formula used to realize the rank-one commutator calculation in Milne Corollary 21.50. Supporting lemma: A one-dimensional smooth connected unipotent group is additive. Supporting structural ingredient for the one-dimensional classification: Milne Corollary 14.55 (positive characteristic) and the central-series argument preceding the induction in Proposition 14.32 (characteristic zero). Supporting lemma: Commutative unipotent groups in characteristic zero are vector groups.",
+   "via": [
+    "lem-sfb-unipotent-central-additive-subgroup",
+    "lem-sfb-one-dimensional-unipotent-additive",
+    "lem-sfb-reductive-root-subgroup-parametrizations",
+    "lem-sfb-semisimple-group-perfect",
+    "lem-sfb-central-torus-semisimple-derived-product",
+    "lem-sfb-reductive-torus-simply-connected-cover",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-char-zero-commutative-unipotent-vector-group",
+  "worker": "stage1",
+  "summary": "Q86 follows Milne 14.32--14.33 without the circular perfect-unipotent-additive-series or central-additive-subgroup nodes. A last nontrivial matrix-filtration intersection is Ga by the existing additive-polynomial node. Smooth quotient lifting proves tangent exactness, and a linear section gives an explicit exponential inverse. One new statement-only node isolates the construction and functoriality of the exponential, not its invertibility. The statement is unchanged.",
+  "blueprint": "The latest blueprint proof of det-thm-sf-ctf-stability-direct-images (3) is the inherited direct-image support route. This item supplies its already seeded characteristic-zero unipotent prerequisite. blueprint_refs.py ancestor returns None, so the inherited null ancestor and via list are retained. Steps 2--3 realize Milne 14.21/14.24; steps 4--8 realize the induction of 14.32; step 9 realizes 14.33. The new node serves the 14.31 exponential input immediately preceding that induction.",
+  "tool_uses": [
+   {
+    "node": "lem-sbc-connected-rational-point-geometrically-connected",
+    "why": "Step 4 takes geometric connectedness of the connected group V from its identity rational point; generic scheme fact, no node of sk-thm-sf-ctf-stability states it."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sbc-connected-rational-point-geometrically-connected"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q86-e010c13fc",
+  "group": "Q86",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q86-e010c13fc (reviewer sub-agent of L); spot-checked: Read in full: the item, the new node lem-sfb-unipotent-exponential-construction and every cited statement, against Milne Algebraic Groups 14.21 and 14.24(a) (pp.284–285) and 14.28–14.33 (pp.287–289). There is no repair note, so the re-split rule does not apply; the statement is unchanged and true in char 0. The new node is true and statement-only: by 14.31 (Tannaka through the faithful representation i), the truncated matrix exponential lands in G(R), is independent of the embedding, is natural, and is additive on commuting matrices. Its tangent description holds over every R because R is flat over k. It is not a duplicate and does not restate the item, since invertibility is excluded. Edge cases checked: n=1, G_a in U_2, U_3. Steps: 2 (last nontrivial filtration piece, ring epimorphism plus faithful flatness gives an isomorphism) is correct. 3: the X^{a-1}Y coefficient argument forces I=G_a; T^p−T shows char 0 is needed. 4: the hypotheses of the quotient node and of torsor-representability were checked, so q is smooth. 6: tangent sequence exactness via formal smoothness. 7: the mixed-dual-number commutator shows tangent matrices commute. 8: the explicit inverse is correct in both directions. 9: choosing a basis. No cycle back to the item. Fault C4 in step 5: the step said the unipotent-to-multiplicative-trivial criterion makes the geometric matrices of an arbitrary faithful ρ unipotent, but that node's statement only speaks of 'a faithful representation'. FIX: step 5 now cites lem-sfb-rational-representation-unipotent-point (same unit) with K=k̄, the closed unitriangular immersion of Q_k̄ and r=ρ_k̄; it is added to the step's uses and to proof_deps. Also recorded split_report.tool_uses for lem-sbc-connected-rational-point-geometrically-connected (a generic off-unit tool, step 4). Batch-5 flags: the trf nodes reached are flat-tensor-preserves-injection, fppf-covering-is-fpqc, scheme-cover-descent-datum (a definition) and vector-subspace-complement. All are generic algebra, descent or linear-algebra facts, not steps of the trace formula or of Poincaré duality, so all seven cited routes are accepted. No SGA.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.CharZeroCommutativeUnipotentVectorGroup",
+  "declaration": "AlgebraicGeometry.charZero_commutative_unipotent_vectorGroup",
+  "file": "lean/Sheaf/AlgebraicGeometry/CharZeroCommutativeUnipotentVectorGroup.lean",
+  "statement": "theorem charZero_commutative_unipotent_vectorGroup {k : Type u} [Field k] [CharZero k] (G : Grp (Over (Spec (.of k)))) [IsAffine G.X.left] [LocallyOfFiniteType G.X.hom] [QuasiCompact G.X.hom] [Smooth G.X.hom] [ConnectedSpace G.X.left] [IsCommMonObj G.X] (hunitriangular : ∃ (n : ℕ), 0 < n ∧ ∃ r : G.X ⟶ GeneralLinearGroup (ULift.{u} (Fin n)) k, IsClosedSubgroupScheme r ∧ ∀ (R : Type u) [CommRing R] [Algebra k R] (x : (Spec (.of R)).asOver (Spec (.of k)) ⟶ G.X), (∀ i : Fin n, (GeneralLinearGroup.homMulEquiv (ULift.{u} (Fin n)) k R (x ≫ r)).val ⟨i⟩ ⟨i⟩ = 1) ∧ (∀ i j : Fin n, j < i → (GeneralLinearGroup.homMulEquiv (ULift.{u} (Fin n)) k R (x ≫ r)).val ⟨i⟩ ⟨j⟩ = 0)) : ∃ d : ℕ, Nonempty ((∏ᶜ (fun _ : Fin d ↦ Grp.mk (StandardGroupSchemes.additive k))) ≅ G)",
+  "branch": "newtargets-dag",
+  "by": "NH",
+  "date": "2026-10-23",
+  "existing": false,
+  "note": "The unitriangular embedding is expressed by a closed group-scheme immersion in the existing GL_n and the defining diagonal/below-diagonal equations on every algebra point. These are precisely the equations of U_n, so the immersion factors through U_n as a closed immersion. The conclusion is an isomorphism in Grp (Over (Spec k)) from the finite categorical power of the recorded additive group scheme; the empty product includes d=0. The accepted stage-1 split is unchanged."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-9878f9e34",
+  "group": "NH",
+  "result": "pass",
+  "note": "Statement matches node and Milne 14.32/14.33: k Field+CharZero; G : Grp(Over Spec k) affine, LocallyOfFiniteType+QuasiCompact, Smooth, ConnectedSpace, IsCommMonObj; unitriangular embedding = IsClosedSubgroupScheme into GL(ULift(Fin n)) with diagonal 1 / below-diagonal 0 equations on all universe-u R-points (exactly U_n, not stronger), n>0; conclusion ∃ d, iso in Grp(Over Spec k) from ∏ᶜ of recorded StandardGroupSchemes.additive (law pinned by existsUnique), d=0 gives terminal group. Edge cases n=1, Ga⊂U_2, U_3 excluded, char p excluded. Snapshot node = live except lean (live lean null, module new). Statement verbatim; stmt_deps unchanged; no defs, only sorry; docstrings with source/blueprint and 9 steps; plain imports are existing proof-dep modules. SolvableGroupStructure.IsUnipotent is a different, uncited notion, so no H4 issue. No compile (no FIX); worker dry run OK."
+ }
+}

@@ -1,0 +1,285 @@
+{
+ "id": "lem-sfb-polynomial-zero-section-dimension",
+ "kind": "statement",
+ "title": "Topological dimension at the zero section of a polynomial algebra",
+ "statement": "Let $k$ be a field, $B$ a finite type $k$-algebra [def-weil-pbc-finite-type-algebra], $r\\geq0$, and $C=B[x_1,\\ldots,x_r]$ [def-weil-pbc-mv-polynomial-ring]. For a prime ideal $\\mathfrak q\\subset B$ let $\\mathfrak Q=\\mathfrak q C+(x_1,\\ldots,x_r)$, the inverse image of $\\mathfrak q$ under evaluation $C\\to B$ at zero. Then, for affine spectra [def-weil-affine-spectrum] and topological dimension at a point [def-kun-topological-dimension-at-point], both dimensions in the following formula are finite nonnegative integers and $$\\dim_{\\mathfrak Q}\\operatorname{Spec}C=\\dim_{\\mathfrak q}\\operatorname{Spec}B+r.$$ No reducedness, equidimensionality or perfectness hypothesis is imposed. For $B=0$ there is no prime $\\mathfrak q$, and the assertion is vacuous.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tag 00OT (lemma-dimension-at-a-point-finite-type-over-field), dimension at a point as the maximum dimension of components through it; Tag 00P0 (lemma-dimension-prime-polynomial-ring), dimension of each finite type domain equals transcendence degree. Applied to the components of polynomial affine space over Spec B."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-finite-type-algebra",
+  "def-weil-pbc-mv-polynomial-ring",
+  "def-weil-affine-spectrum",
+  "def-kun-topological-dimension-at-point"
+ ],
+ "proof": [
+  {
+   "text": "Choose finite algebra generators $b_1,\\ldots,b_s$ for $B$. Together with $x_1,\\ldots,x_r$ they generate $C$ over $k$, so $C$ is finite type by [def-weil-pbc-finite-type-algebra]. Evaluation at zero followed by $B\\to B/\\mathfrak q$ is surjective and has kernel $\\mathfrak Q$: a polynomial $f$ lies in that kernel exactly when its constant coefficient $f(0)$ lies in $\\mathfrak q$, and since $f-f(0)\\in(x_1,\\ldots,x_r)$ this holds exactly when $f\\in\\mathfrak qC+(x_1,\\ldots,x_r)$; conversely $\\mathfrak qC+(x_1,\\ldots,x_r)$ maps into $\\mathfrak q$. In particular $\\mathfrak Q\\cap B=\\mathfrak q$. Thus $C/\\mathfrak Q\\cong B/\\mathfrak q$ is a nonzero domain, and $\\mathfrak Q$ is prime. This also verifies that the point in the statement exists.",
+   "uses": [
+    "def-weil-pbc-finite-type-algebra",
+    "def-weil-pbc-mv-polynomial-ring"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00OT (lemma-dimension-at-a-point-finite-type-over-field), component-maximum formula; polynomial component calculation using the coefficient description of polynomials and Mathlib/RingTheory/KrullDimension/Polynomial.lean:120-121"
+   }
+  },
+  {
+   "text": "For every ideal $\\mathfrak a\\subset B$, coefficient reduction gives $C/\\mathfrak aC\\cong(B/\\mathfrak a)[x_1,\\ldots,x_r]$: its kernel consists exactly of polynomials all of whose coefficients lie in $\\mathfrak a$, each a sum of coefficient multiples of monomials. If $\\mathfrak a$ is prime, this quotient is a domain by [lem-weil-pbc-polynomial-ring-domain], so $\\mathfrak aC$ is prime and contracts to $\\mathfrak a$. If $P$ is a minimal prime of $C$, choose a minimal prime $\\mathfrak a\\subset P\\cap B$ by [lem-weil-pbc-prime-contains-minimal-prime]. Then $\\mathfrak aC\\subset P$ is prime, so $P=\\mathfrak aC$. Conversely, if $\\mathfrak a$ is minimal and a prime $P\\subset\\mathfrak aC$, contraction gives $P\\cap B=\\mathfrak a$ and hence $\\mathfrak aC\\subset P$, proving minimality. Finally $\\mathfrak aC\\subset\\mathfrak Q$ if and only if $\\mathfrak a\\subset\\mathfrak q$, by contraction and extension. These operations are inverse bijections on the indicated minimal primes.",
+   "uses": [
+    "def-weil-pbc-mv-polynomial-ring",
+    "lem-weil-pbc-polynomial-ring-domain",
+    "lem-weil-pbc-prime-contains-minimal-prime"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00OT (lemma-dimension-at-a-point-finite-type-over-field), component-maximum formula; polynomial component calculation using the coefficient description of polynomials and Mathlib/RingTheory/KrullDimension/Polynomial.lean:120-121"
+   }
+  },
+  {
+   "text": "For each minimal prime $\\mathfrak a\\subset\\mathfrak q$, the images of the chosen $b_j$ generate $B/\\mathfrak a$ over $k$. A field is Noetherian since its only ideals are $0$ and $k$. Hence [lem-weil-pbc-finite-type-algebra-noetherian] makes $B/\\mathfrak a$ Noetherian. Apply [lem-sf-noetherian-polynomial-dimension] with the $r$ variables to the coefficient-reduction isomorphism of step 2, obtaining $$\\dim(C/\\mathfrak aC)=\\dim(B/\\mathfrak a)+r.$$ A ring isomorphism gives inverse inclusion-preserving maps on prime ideals, so preserves these dimensions directly from their definition [def-weil-pbc-krull-dimension-ring].",
+   "uses": [
+    "def-weil-pbc-finite-type-algebra",
+    "lem-weil-pbc-finite-type-algebra-noetherian",
+    "lem-sf-noetherian-polynomial-dimension",
+    "def-weil-pbc-krull-dimension-ring"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00OT (lemma-dimension-at-a-point-finite-type-over-field), component-maximum formula; polynomial component calculation using the coefficient description of polynomials and Mathlib/RingTheory/KrullDimension/Polynomial.lean:120-121"
+   }
+  },
+  {
+   "text": "Apply [lem-weil-pbc-dimension-at-point-components] first to $(B,\\mathfrak q)$ and then to $(C,\\mathfrak Q)$; both are finite type over the same field by step 1. Its minimal-prime formulation gives a finite nonempty list $\\mathfrak a_1,\\ldots,\\mathfrak a_t$ below $\\mathfrak q$, and by step 2 the corresponding list below $\\mathfrak Q$ is $\\mathfrak a_iC$. Thus step 3 gives $$\\dim_{\\mathfrak Q}\\operatorname{Spec}C=\\max_i(\\dim(B/\\mathfrak a_i)+r)=\\max_i\\dim(B/\\mathfrak a_i)+r=\\dim_{\\mathfrak q}\\operatorname{Spec}B+r.$$ The middle equality holds because adding $r$ preserves order and a finite nonempty maximum is attained. The same cited theorem asserts that each dimension at a point is a finite nonnegative integer. For $r=0$ the calculation is unchanged; for $B=0$ there is no prime and nothing to prove.",
+   "uses": [
+    "lem-weil-pbc-dimension-at-point-components"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00OT (lemma-dimension-at-a-point-finite-type-over-field), component-maximum formula; polynomial component calculation using the coefficient description of polynomials and Mathlib/RingTheory/KrullDimension/Polynomial.lean:120-121"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-finite-type-algebra",
+  "def-weil-pbc-mv-polynomial-ring",
+  "lem-weil-pbc-polynomial-ring-domain",
+  "lem-weil-pbc-prime-contains-minimal-prime",
+  "lem-weil-pbc-finite-type-algebra-noetherian",
+  "lem-sf-noetherian-polynomial-dimension",
+  "def-weil-pbc-krull-dimension-ring",
+  "lem-weil-pbc-dimension-at-point-components"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Assembly of Tag 00OT with the existing Noetherian polynomial dimension theorem; coefficientwise minimal-prime correspondence written out explicitly."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "krullDim|ringKrullDim|height",
+   "results": "{\"t\": \"2026-10-23T14:33:30Z\", \"tool\": \"grep\", \"query\": \"krullDim|ringKrullDim|height\", \"sub\": \"RingTheory/MvPolynomial\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits give global polynomial-ring Krull dimension, lower bounds, or presentation dimension; none gives topological dimension at a specified zero-section point"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The local topological dimension at a zero section point of a polynomial algebra over a finite type field algebra is the dimension at the base point plus the number of variables",
+   "results": "{\"t\": \"2026-10-23T14:33:31Z\", \"tool\": \"leansearch\", \"query\": \"The local topological dimension at a zero section point of a polynomial algebra over a finite type field algebra is the dimension at the base point plus the number of variables\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"MvPolynomial.ringKrullDim_of_isNoetherianRing\", \"ringKrullDim_add_natCard_le_ringKrullDim_mvPolynomial\", \"ringKrullDim_mvPolynomial_of_isEmpty\", \"Algebra.IsStandardSmooth.relativeDimension\", \"Algebra.Presentation.localizationAway_dimension_zero\", \"IsAdjoinRootMonic.powerBasis_dim\", \"Algebra.IsStandardSmoothOfRelativeDimension.localization_away\", \"MvPolynomial.zeroLocus_bot\"], \"digest\": \"ca12dea8eeef0ebb\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits give global polynomial-ring Krull dimension, lower bounds, or presentation dimension; none gives topological dimension at a specified zero-section point"
+  },
+  {
+   "tool": "loogle",
+   "query": "ringKrullDim, MvPolynomial",
+   "results": "{\"t\": \"2026-10-23T14:33:31Z\", \"tool\": \"loogle\", \"query\": \"ringKrullDim, MvPolynomial\", \"sub\": \"\", \"ok\": true, \"n_hits\": 6, \"note\": \"\", \"top\": [\"ringKrullDim_mvPolynomial_of_isEmpty\", \"ringKrullDim_mvPolynomial_of_infinite\", \"ringKrullDim_add_enatCard_le_ringKrullDim_mvPolynomial\", \"ringKrullDim_add_natCard_le_ringKrullDim_mvPolynomial\", \"MvPolynomial.ringKrullDim_of_isNoetherianRing\", \"MvPolynomial.ringKrullDim_of_isNoetherianRing_of_finite\"], \"digest\": \"006a2642b71e2abf\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits give global polynomial-ring Krull dimension, lower bounds, or presentation dimension; none gives topological dimension at a specified zero-section point"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Let B be a finite type algebra over a field k and q a prime of B. The topological dimension at the zero section point (q,X1,...,Xr) of Spec B[X1,...,Xr] equals the topological dimension of Spec B at q plus r",
+   "results": "{\"t\": \"2026-10-23T14:33:38Z\", \"tool\": \"leanfinder\", \"query\": \"Let B be a finite type algebra over a field k and q a prime of B. The topological dimension at the zero section point (q,X1,...,Xr) of Spec B[X1,...,Xr] equals the topological dimension of Spec B at q plus r\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"ringKrullDim_add_natCard_le_ringKrullDim_mvPolynomial\", \"Algebra.PreSubmersivePresentation.dimension_comp_eq_dimension_add_dimension\", \"MvPolynomial.ringKrullDim_of_isNoetherianRing\", \"ringKrullDim_add_enatCard_le_ringKrullDim_mvPolynomial\", \"Algebra.IsStandardSmooth.relativeDimension\", \"Algebra.IsStandardSmoothOfRelativeDimension.out\", \"ringKrullDim_succ_le_ringKrullDim_polynomial\", \"ringKrullDim_le_ringKrullDim_add_card\"], \"digest\": \"d21784e37b914d76\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits give global polynomial-ring Krull dimension, lower bounds, or presentation dimension; none gives topological dimension at a specified zero-section point"
+  },
+  {
+   "tool": "grep",
+   "query": "dimensionAt|krullDim.*[Pp]olynomial|ringKrullDim_of_isNoetherianRing",
+   "results": "{\"t\": \"2026-10-23T14:34:15Z\", \"tool\": \"grep\", \"query\": \"dimensionAt|krullDim.*[Pp]olynomial|ringKrullDim_of_isNoetherianRing\", \"sub\": \"RingTheory/KrullDimension\", \"ok\": true, \"n_hits\": 11, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/KrullDimension/NonZeroDivisors.lean\", \"Mathlib/RingTheory/KrullDimension/NonZeroDivisors.lean\", \"Mathlib/RingTheory/KrullDimension/NonZeroDivisors.lean\", \"Mathlib/RingTheory/KrullDimension/NonZeroDivisors.lean\", \"Mathlib/RingTheory/KrullDimension/NonZeroDivisors.lean\", \"Mathlib/RingTheory/KrullDimension/Polynomial.lean\", \"Mathlib/RingTheory/KrullDimension/Polynomial.lean\", \"Mathlib/RingTheory/KrullDimension/Polynomial.lean\"], \"digest\": \"2d1273ec2ee3a3b0\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits give global polynomial-ring Krull dimension, lower bounds, or presentation dimension; none gives topological dimension at a specified zero-section point"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a finite type k algebra B the dimension of Spec B[X1,...,Xr] at a prime Q is dim at its contraction q of Spec B plus r, using irreducible components",
+   "results": "{\"t\": \"2026-10-23T14:34:19Z\", \"tool\": \"leanfinder\", \"query\": \"For a finite type k algebra B the dimension of Spec B[X1,...,Xr] at a prime Q is dim at its contraction q of Spec B plus r, using irreducible components\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"ringKrullDim_add_natCard_le_ringKrullDim_mvPolynomial\", \"MvPolynomial.ringKrullDim_of_isNoetherianRing\", \"ringKrullDim_add_enatCard_le_ringKrullDim_mvPolynomial\", \"Algebra.PreSubmersivePresentation.dimension_comp_eq_dimension_add_dimension\", \"Algebra.IsStandardSmoothOfRelativeDimension.out\", \"ringKrullDim_succ_le_ringKrullDim_polynomial\", \"Polynomial.ringKrullDim_of_isNoetherianRing\", \"Algebra.IsStandardSmooth.relativeDimension\"], \"digest\": \"a5a8ecfa0b87f87b\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits give global polynomial-ring Krull dimension, lower bounds, or presentation dimension; none gives topological dimension at a specified zero-section point"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Dimension at a point of Spec of a finite type algebra at the zero section after adjoining r polynomial variables increases by r",
+   "results": "{\"t\": \"2026-10-23T15:29:24Z\", \"tool\": \"leanfinder\", \"query\": \"Dimension at a point of Spec of a finite type algebra at the zero section after adjoining r polynomial variables increases by r\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"MvPolynomial.ringKrullDim_of_isNoetherianRing\", \"ringKrullDim_add_natCard_le_ringKrullDim_mvPolynomial\", \"ringKrullDim_add_enatCard_le_ringKrullDim_mvPolynomial\", \"Algebra.IsStandardSmoothOfRelativeDimension.out\", \"Algebra.PreSubmersivePresentation.dimension_comp_eq_dimension_add_dimension\", \"Algebra.Presentation.localizationAway_dimension_zero\", \"Algebra.IsStandardSmooth.relativeDimension\", \"Algebra.Presentation.id_dimension\"], \"digest\": \"90142f6ad51c7722\"}",
+   "date": "2026-10-23",
+   "verdict": "no match for the item: global polynomial dimension is the existing leaf lem-sf-noetherian-polynomial-dimension; the other hits concern smooth presentations or general minimal-prime operations, not topological dimension at the specified point."
+  },
+  {
+   "tool": "grep",
+   "query": "topologicalKrullDimAt|dimensionAtPoint|zeroSection",
+   "results": "{\"t\": \"2026-10-23T15:29:46Z\", \"tool\": \"grep\", \"query\": \"topologicalKrullDimAt|dimensionAtPoint|zeroSection\", \"sub\": \"RingTheory\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match for the item: global polynomial dimension is the existing leaf lem-sf-noetherian-polynomial-dimension; the other hits concern smooth presentations or general minimal-prime operations, not topological dimension at the specified point."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The dimension of a finite type affine scheme at a zero section point of its relative affine r space equals the dimension at the base point plus r",
+   "results": "{\"t\": \"2026-10-23T15:29:46Z\", \"tool\": \"leansearch\", \"query\": \"The dimension of a finite type affine scheme at a zero section point of its relative affine r space equals the dimension at the base point plus r\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.IsStandardSmooth.relativeDimension\", \"AlgebraicGeometry.AffineSpace\", \"Algebra.IsStandardSmoothOfRelativeDimension.localization_away\", \"AlgebraicGeometry.instIsSmoothOfRelativeDimensionOfNatNatOfIsOpenImmersion\", \"AlgebraicGeometry.AffineSpace.instIsIsoSchemeOverInferInstanceOverClassOfIsEmpty\", \"AlgebraicGeometry.Scheme.mk.sizeOf_spec\", \"AlgebraicGeometry.instIsSmoothOfRelativeDimensionOfNatNatCompScheme\", \"AlgebraicGeometry.AffineSpace.instIsOverHomOfVectorOverSchemeInferInstanceOverClass\"], \"digest\": \"3fb9d77139baae67\"}",
+   "date": "2026-10-23",
+   "verdict": "no match for the item: global polynomial dimension is the existing leaf lem-sf-noetherian-polynomial-dimension; the other hits concern smooth presentations or general minimal-prime operations, not topological dimension at the specified point."
+  },
+  {
+   "tool": "loogle",
+   "query": "MvPolynomial, \"topologicalKrullDim\"",
+   "results": "{\"t\": \"2026-10-23T15:29:47Z\", \"tool\": \"loogle\", \"query\": \"MvPolynomial, \\\"topologicalKrullDim\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match for the item: global polynomial dimension is the existing leaf lem-sf-noetherian-polynomial-dimension; the other hits concern smooth presentations or general minimal-prime operations, not topological dimension at the specified point."
+  },
+  {
+   "tool": "grep",
+   "query": "ringKrullDim_of_isNoetherianRing|topologicalKrullDimAt",
+   "results": "{\"t\": \"2026-10-23T15:30:43Z\", \"tool\": \"grep\", \"query\": \"ringKrullDim_of_isNoetherianRing|topologicalKrullDimAt\", \"sub\": \"RingTheory/KrullDimension\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/KrullDimension/Polynomial.lean\", \"Mathlib/RingTheory/KrullDimension/Polynomial.lean\", \"Mathlib/RingTheory/KrullDimension/Polynomial.lean\", \"Mathlib/RingTheory/KrullDimension/Polynomial.lean\", \"Mathlib/RingTheory/KrullDimension/Polynomial.lean\"], \"digest\": \"1fcdbe67d0091e24\"}",
+   "date": "2026-10-23",
+   "verdict": "no match for the item: global polynomial dimension is the existing leaf lem-sf-noetherian-polynomial-dimension; the other hits concern smooth presentations or general minimal-prime operations, not topological dimension at the specified point."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Local topological dimension of affine space over a finite type field algebra is dimension of base plus number of indeterminates at a point, computed as maximum dimensions of irreducible components",
+   "results": "{\"t\": \"2026-10-23T15:30:44Z\", \"tool\": \"leanfinder\", \"query\": \"Local topological dimension of affine space over a finite type field algebra is dimension of base plus number of indeterminates at a point, computed as maximum dimensions of irreducible components\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.IsStandardSmooth.relativeDimension\", \"ringKrullDim_add_natCard_le_ringKrullDim_mvPolynomial\", \"Algebra.IsStandardSmoothOfRelativeDimension.out\", \"Algebra.SubmersivePresentation.isStandardSmoothOfRelativeDimension\", \"MvPolynomial.ringKrullDim_of_isNoetherianRing\", \"ringKrullDim_add_enatCard_le_ringKrullDim_mvPolynomial\", \"MvPolynomial.rank_R\", \"Algebra.IsStandardSmoothOfRelativeDimension\"], \"digest\": \"8f4b738bf56112e1\"}",
+   "date": "2026-10-23",
+   "verdict": "no match for the item: global polynomial dimension is the existing leaf lem-sf-noetherian-polynomial-dimension; the other hits concern smooth presentations or general minimal-prime operations, not topological dimension at the specified point."
+  },
+  {
+   "tool": "grep",
+   "query": "minimalPrimes|map.*IsPrime|MvPolynomial.*IsPrime",
+   "results": "{\"t\": \"2026-10-23T15:32:30Z\", \"tool\": \"grep\", \"query\": \"minimalPrimes|map.*IsPrime|MvPolynomial.*IsPrime\", \"sub\": \"RingTheory\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/Spectrum/Prime/Noetherian.lean\", \"Mathlib/RingTheory/RegularLocalRing/Polynomial.lean\", \"Mathlib/RingTheory/RegularLocalRing/Polynomial.lean\", \"Mathlib/RingTheory/Spectrum/Prime/Jacobson.lean\", \"Mathlib/RingTheory/Smooth/StandardSmoothOfFree.lean\", \"Mathlib/RingTheory/Artinian/Module.lean\", \"Mathlib/RingTheory/Spectrum/Prime/RingHom.lean\", \"Mathlib/RingTheory/Spectrum/Prime/RingHom.lean\"], \"digest\": \"4d47a2a724e7f87c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match for the item: global polynomial dimension is the existing leaf lem-sf-noetherian-polynomial-dimension; the other hits concern smooth presentations or general minimal-prime operations, not topological dimension at the specified point."
+  },
+  {
+   "tool": "loogle",
+   "query": "Ideal.IsPrime, Ideal.map, MvPolynomial",
+   "results": "{\"t\": \"2026-10-23T15:32:30Z\", \"tool\": \"loogle\", \"query\": \"Ideal.IsPrime, Ideal.map, MvPolynomial\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match for the item: global polynomial dimension is the existing leaf lem-sf-noetherian-polynomial-dimension; the other hits concern smooth presentations or general minimal-prime operations, not topological dimension at the specified point."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Minimal primes of B[X_1,...,X_r] contained in (q,X_1,...,X_r) are exactly q_i B[X_1,...,X_r] for minimal primes q_i contained in q",
+   "results": "{\"t\": \"2026-10-23T15:32:31Z\", \"tool\": \"leanfinder\", \"query\": \"Minimal primes of B[X_1,...,X_r] contained in (q,X_1,...,X_r) are exactly q_i B[X_1,...,X_r] for minimal primes q_i contained in q\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Ideal.mem_minimalPrimes_span_of_mem_minimalPrimes_span_insert\", \"Ideal.minimalPrimes_eq_comap\", \"Ideal.map_sup_mem_minimalPrimes_of_map_quotientMk_mem_minimalPrimes\", \"Ideal.minimalPrimes\", \"Ideal.mem_minimalPrimes_sup\", \"IsLocalization.minimalPrimes_comap\", \"Ideal.exists_minimalPrimes_comap_eq\", \"IsLocalization.minimalPrimes_map\"], \"digest\": \"fbd5d769f6924d7c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match for the item: global polynomial dimension is the existing leaf lem-sf-noetherian-polynomial-dimension; the other hits concern smooth presentations or general minimal-prime operations, not topological dimension at the specified point."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-syntomic-polynomial-fibre-cut",
+  "date": "2026-10-23",
+  "group": "Q117"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Algebraicity and smoothness of the stack of all nodal curves. Supporting input: Tag 0DZX (lemma-big-smooth-part-curves), clauses (1) and (3), with the open substack lci+ in the statement. This is the full isolated-lci locus, not the nodal locus. Supporting input for the intersection construction and smoothness argument of Tag 0DZX: Unobstructed deformations of a separated curve with isolated lci singularities. Tag 0DZQ, proof: Tag 0DZH (lemma-lci-unobstructed), scheme formulation via Tag 0DYX (lemma-affine), with example-schemes and section-general; formal-defos.tex, definition-CLambda specifies the coefficient identifications. Ring-theoretic input: Tag 0DZH proof invokes Smoothing Ring Maps Tag 07M8 (1) after recognizing the given deformation algebra as syntomic. Supporting input: 07M8(1), final claim: cutting lifts of the polynomial coordinates and localizing away from the bad locus. Dimension comparison needed before appending the lifted coordinate equations: at the zero section of a polynomial fibre, dimension drops by the number of coordinates.",
+   "via": [
+    "lem-sfb-syntomic-polynomial-fibre-cut",
+    "lem-sfb-syntomic-algebra-surjection-lift",
+    "lem-sfb-affine-lci-artinian-lift",
+    "lem-sfb-isolated-lci-curve-unobstructed",
+    "lem-sfb-isolated-lci-curve-smooth-open",
+    "lem-sfb-nodal-curve-stack-smooth",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-polynomial-zero-section-dimension",
+  "worker": "stage1",
+  "summary": "Statement unchanged. Four steps identify the zero-section prime, give the coefficientwise minimal-prime correspondence, compute the polynomial dimension of each component, and take the finite maximum using the existing dimension-at-point-components theorem. No new nodes: the component correspondence is a few-line application of the existing prime-existence and polynomial-domain statements. Reused the existing Mathlib polynomial dimension leaf. Checked generic points, nilpotents, unequal-dimensional components, zero variables and the zero ring.",
+  "blueprint": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Algebraicity and smoothness of the stack of all nodal curves. Supporting input: Tag 0DZX (lemma-big-smooth-part-curves), clauses (1) and (3), with the open substack lci+ in the statement. This is the full isolated-lci locus, not the nodal locus. Supporting input for the intersection construction and smoothness argument of Tag 0DZX: Unobstructed deformations of a separated curve with isolated lci singularities. Tag 0DZQ, proof: Tag 0DZH (lemma-lci-unobstructed), scheme formulation via Tag 0DYX (lemma-affine), with example-schemes and section-general; formal-defos.tex, definition-CLambda specifies the coefficient identifications. Ring-theoretic input: Tag 0DZH proof invokes Smoothing Ring Maps Tag 07M8 (1) after recognizing the given deformation algebra as syntomic. Supporting input: 07M8(1), final claim: cutting lifts of the polynomial coordinates and localizing away from the bad locus. Dimension comparison needed before appending the lifted coordinate equations: at the zero section of a polynomial fibre, dimension drops by the number of coordinates.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-finite-type-algebra-noetherian",
+    "why": "Generic Hilbert basis theorem for each finite type component ring; the unit contains no replacement for this algebraic tool."
+   },
+   {
+    "node": "lem-weil-pbc-prime-contains-minimal-prime",
+    "why": "Generic existence of a minimal prime below the contraction of a polynomial minimal prime; not a replacement for a unit step."
+   },
+   {
+    "node": "lem-weil-pbc-polynomial-ring-domain",
+    "why": "Generic polynomial-domain permanence makes the extended component ideal prime; not a coefficient-category or six-functor route change."
+   },
+   {
+    "node": "lem-weil-pbc-dimension-at-point-components",
+    "why": "Generic Tag 00OT component-maximum formula is precisely the item source input; the unit has no substitute for this commutative algebra tool."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-finite-type-algebra-noetherian",
+  "lem-weil-pbc-prime-contains-minimal-prime",
+  "lem-weil-pbc-polynomial-ring-domain",
+  "lem-weil-pbc-dimension-at-point-components"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-NI-127d65b71",
+  "group": "NI",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NI-127d65b71 (reviewer sub-agent of L); spot-checked: Read the item and every cited statement, Stacks 00OT (algebra.tex:27787ff, (1)=(2) and the component proof), 00P0 (:28178), and Mathlib KrullDimension/Polynomial.lean:118-121. The statement is true and unchanged, and it matches the parent's use in step 3 of lem-sfb-syntomic-polynomial-fibre-cut. Tested on k[t] at (0) (dim at a point is 1, not the local-ring dimension 0), k[eps]/eps^2, k[u,v,w]/((u)∩(v,w)) at (v,w) (1+r, not dim B+r), r=0 and B=0. The four steps are correct: Q is prime with Q∩B=q; the minimal primes of C below Q are exactly the aC for the minimal primes a of B below q (via 00E0(4) and polynomial-domain); dim C/aC = dim B/a + r from the Noetherian leaf; then the finite nonempty maximum of 00OT. No new nodes. No duplicate: lem-per-smooth-local-dimension is off-route (sk-p-dl-a1-perverse), not closed, and not a one-line specialization. tool_uses accepted: dimension-at-point-components is the generic 00OT tool; the other three are Mathlib leaves. No SGA. Two small faults repaired in fixes/dag/nodes/sec-six-functors-basics/lem-sfb-polynomial-zero-section-dimension.json: step 1 now shows that the kernel equals qC+(x) (f−f(0)∈(x)) and that Q∩B=q, which step 2 uses; step 3 now cites def-weil-pbc-krull-dimension-ring for isomorphism invariance (added to uses and proof_deps).; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.PolynomialZeroSectionDimension",
+  "declaration": "AlgebraicGeometry.topologicalKrullDimAt_polynomial_zero_section",
+  "file": "lean/Sheaf/RingTheory/PolynomialZeroSectionDimension.lean",
+  "statement": "theorem topologicalKrullDimAt_polynomial_zero_section {k : Type u} [Field k] {B : Type v} [CommRing B] [Algebra k B] [Algebra.FiniteType k B] (r : ℕ) (q : Spec (CommRingCat.of B)) : ∃ d : ℕ, topologicalKrullDimAt q = (d : WithBot ℕ∞) ∧ topologicalKrullDimAt (X := Spec (CommRingCat.of (MvPolynomial (Fin r) B))) (PrimeSpectrum.comap (MvPolynomial.eval (fun _ : Fin r ↦ (0 : B))) q) = ((d + r : ℕ) : WithBot ℕ∞)",
+  "branch": "sheaf-dag",
+  "by": "Q96",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-0dac97ed2",
+  "group": "Q96",
+  "result": "pass",
+  "note": "Lean matches node clause by clause: Field k, Algebra.FiniteType k B (independent universes u,v), r:ℕ with MvPolynomial (Fin r) B, q : Spec B, upstairs point = PrimeSpectrum.comap (MvPolynomial.eval 0) q (= qC+(x), node's own description), topologicalKrullDimAt (open-nbhd dim, WeilConjectures/Mathlib/Topology/KrullDimension.lean:343), ∃ d:ℕ, dimAt q = d ∧ dimAt Q = d+r encodes finiteness of both and the formula. No extra hypotheses. Edge cases r=0, B=0, k[t] at (0), nonreduced, mixed-dimension components and imperfect k all checked. lean.statement verbatim (script check); docstrings carry source place, blueprint id and all 4 proof steps; proof is sorry only; no defs; report has Worker report and Second reading by Q96; node change is the lean record only. No duplicate in side-live Sheaf/WeilConjectures (nearest: polynomial-quotient height-difference and chart dimension theorems). No compile needed (no FIX)."
+ }
+}

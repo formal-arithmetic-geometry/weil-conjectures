@@ -1,0 +1,116 @@
+{
+ "kind": "statement",
+ "source": {
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Definition 3.4.10 and Lemma 6.5.5, pp. 22 and 49–50, canonical augmented tensor quotient tower; proved extraction of the parent construction."
+ },
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Definition 3.4.10 and Lemma 6.5.5, pp. 22 and 49–50, canonical augmented tensor quotient tower; proved extraction of the parent construction."
+ },
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.SixFunctors.ConstructibleTensorCompletion",
+  "date": "2026-10-27",
+  "group": "E8"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-fix-weil-operations",
+   "place": "Proof, paragraph beginning \"For an admissible exceptional adjoint\", sentence \"Evaluation is natural in the two Weil maps and their inverses, so its square commutes\": the ordinary-to-completed integral tensor comparison for evaluation.",
+   "via": [
+    "lem-fix-constructible-tensor-completion"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-rem-sf-pf-done",
+ "id": "lem-fix-constructible-tensor-completion-comparison",
+ "title": "Normalized descended comparison for ordinary and completed tensor",
+ "statement": "Fix a prime ell, a finite extension E of Q_ell and a scheme W whose residue fields invert ell. Use the actual ordinary tensor, completion unit and representative isomorphism of lem-fix-constructible-tensor-completion-presentation and the natural chain map of lem-fix-constructible-tensor-completion-chain. There exists a natural transformation tau from ordinary derived tensor to the specified completed tensor whose representative equation is exactly the localization of that chain map. Whenever the canonical completion unit on the ordinary tensor of M,N is invertible, tau on M,N is invertible. No constructibility hypothesis or completeness conclusion is part of this statement.",
+ "stmt_deps": [
+  "lem-fix-constructible-tensor-completion-presentation",
+  "lem-fix-constructible-tensor-completion-chain"
+ ],
+ "proof": [
+  {
+   "text": "Take beta from the recorded normalized tensor completion model. Define tau as beta after the canonical completion unit, whiskered by ordinary tensor. Left-compose the model equation with the representative isomorphism. Cancel its composite with its inverse and use the component equation of the canonical chain map to obtain the stated representative normalization.",
+   "uses": [
+    "lem-fix-constructible-tensor-completion-presentation",
+    "lem-fix-constructible-tensor-completion-chain"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Definition 3.4.10 and Lemma 6.5.5, pp. 22 and 49–50, canonical augmented tensor quotient tower; proved extraction of the parent construction."
+   }
+  },
+  {
+   "text": "On any pair with invertible completion unit, tau is the composite of two invertible arrows, so is invertible.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-fix-constructible-tensor-completion-presentation",
+  "lem-fix-constructible-tensor-completion-chain"
+ ],
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.ConstructibleTensorCompletionComparison",
+  "file": "lean/Sheaf/Paper/ConstructibleTensorCompletionComparison.lean",
+  "declaration": "WeilConjectures.ConstructibleTensorModel.tensorCompletionComparison",
+  "statement": "theorem tensorCompletionComparison\n    [∀ w : W, Invertible (l : W.residueField w)] :\n    ∃ τ : ordinaryTensor l E W ⟶ integralCompletedTensor l E W,\n      (∀ P Q : (integralOperationsGoodComplex l E W).FullSubcategory,\n        (tensorRepresentativeIso l E W).hom.app (P, Q) ≫\n          τ.app (DerivedCategory.Q.obj P.obj, DerivedCategory.Q.obj Q.obj) ≫\n          (integralCompletedTensorComparison l E W).hom.app (P, Q) =\n        DerivedCategory.Q.map ((tensorCompletionChain l E W).app (P.obj, Q.obj))) ∧\n      ∀ M N : DerivedCategory (integralTowerModules l E W),\n        IsIso ((tensorCompletionUnit l E W).app ((ordinaryTensor l E W).obj (M, N))) →\n          IsIso (τ.app (M, N))",
+  "branch": "sheaf-dag",
+  "by": "E8",
+  "date": "2026-10-27"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A normalized comparison between the completion of an ordinary derived sheaf tensor and its completed tensor, compatible with the canonical augmentation",
+   "results": "AdicCompletion tensor and naturality lemmas; light condensed monoidal instances.",
+   "date": "2026-10-27",
+   "verdict": "No exact Mathlib statement. The existing project construction is used with the indicated elementary categorical glue."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.isoWhiskerLeft",
+   "results": "12 isoWhiskerLeft and whiskering laws.",
+   "date": "2026-10-27",
+   "verdict": "No exact Mathlib statement. The existing project construction is used with the indicated elementary categorical glue."
+  },
+  {
+   "tool": "grep",
+   "query": "tensorOperationUnit|tensor.*completion.*comparison",
+   "results": "No matches in Mathlib. Existing project integralAmbientOperationModels supplies the normalized comparison.",
+   "date": "2026-10-27",
+   "verdict": "No exact Mathlib statement. The existing project construction is used with the indicated elementary categorical glue."
+  }
+ ],
+ "mathlib_match": null,
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-fa5ac",
+  "group": "E8",
+  "result": "fix",
+  "landing": "20261026T222635-L-676636",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-fa5ac",
+  "group": "E8",
+  "result": "fix",
+  "landing": "20261026T222635-L-676636",
+  "kind": "interface",
+  "note": "independent cc review: item theorem vs node lem-fix-constructible-tensor-completion (signature unchanged, proof via 6 proved helpers + 1 true local sorry projectiveTensorChartComplete); removed unit import IntrinsicFiniteTorsionConstructibility vs unit sk-rem-sf-pf-done realized (empty; node realized only in sk-def-sf-setting, still in public import closure); 18 direct importers compiled OK in sandbox"
+ }
+}

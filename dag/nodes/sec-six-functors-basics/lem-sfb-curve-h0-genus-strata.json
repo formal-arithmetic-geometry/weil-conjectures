@@ -1,0 +1,271 @@
+{
+ "id": "lem-sfb-curve-h0-genus-strata",
+ "kind": "statement",
+ "title": "Scalar H0 and genus strata in proper flat curve families",
+ "statement": "Let $T$ be a scheme [def-pc-scheme] and $f:X\\to T$ a flat, proper, finitely presented morphism of algebraic spaces [def-trf-algebraic-space], with geometric fibres of dimension at most one. Flatness and finite presentation for spaces are tested on etale scheme charts; proper means separated, of finite type and universally closed. For $t\\in T$ put $X_t=X\\times_T\\operatorname{Spec}\\kappa(t)$; geometric fibres use an algebraic closure of $\\kappa(t)$ [def-weil-geometric-fibre]. These fibres are schemes. There is a base-change-compatible open subscheme $U\\subset T$ with\n$$|U|=\\{t:\\dim X_t=1\\text{ and }\\kappa(t)\\xrightarrow{\\sim}H^0(X_t,\\mathcal O_{X_t})\\}.$$\nFor every $T'\\to T$, factorization through $U$ is equivalent to every fibre of $f_{T'}$ having dimension one and the scalar map to its $H^0$ being an isomorphism. On $U$, $\\mathcal O_U\\xrightarrow{\\sim}f_*\\mathcal O_{X_U}$ universally, and $E=R^1f_*\\mathcal O_{X_U}$ is finite locally free [def-amb-finite-locally-free-module] with $h^*E\\xrightarrow{\\sim}R^1(f_{U'})_*\\mathcal O_{X_{U'}}$ for every $h:U'\\to U$. Hence for each integer $g\\geq0$ the rank-$g$ locus $U_g$ is open and closed in $U$, commutes with arbitrary base change, and is characterized by the additional condition $\\dim_{\\kappa(t)}H^1(X_t,\\mathcal O_{X_t})=g$. Here cohomology of spaces is cohomology of the structure module on the small etale site; on the scheme fibres it agrees with ordinary structure-sheaf cohomology [def-sc-sheaf-cohomology-functor]. For a geometrically reduced nonempty one-dimensional fibre, the scalar $H^0$ condition is equivalent to geometric connectedness.",
+ "source": {
+  "document": "literature/stacks-project/moduli-curves.tex",
+  "place": "Tags 0E6I (lemma-pre-genus-curves), 0E1J (lemma-genus), 0E6K (lemma-pre-genus-one-piece-per-genus), 0E6L (lemma-geomredcon-in-h0-1); schematic fibres: spaces-over-fields.tex Tag 0ADD (lemma-codim-1-point-in-schematic-locus)."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-trf-algebraic-space",
+  "def-weil-geometric-fibre",
+  "def-sc-sheaf-cohomology-functor",
+  "def-amb-finite-locally-free-module"
+ ],
+ "proof": [
+  {
+   "text": "Apply [lem-sfb-proper-flat-space-fibre-dimension] to $f$. Its base-change clause identifies the dimension of $X_t$ with that of its geometric fibre, so it is at most one. By [lem-sfb-space-proper-base-change] each ordinary or geometric fibre is proper over its field, hence separated and of finite type. It is therefore a scheme by [lem-sfb-separated-space-dimension-one-scheme]. The field spectrum is Noetherian (its only ideals are zero and the whole field), so [lem-weil-pbc-finite-type-over-noetherian] makes the fibre Noetherian. For its structure module the comparison of [lem-sc-etale-zariski-qcoh-comparison] identifies etale and ordinary cohomology. The vanishing theorem [lem-sc-noetherian-cohomology-above-dimension] gives $H^i(X_t,\\mathcal O)=0$ for $i>1$. Negative cohomology is zero by the definition of right derived cohomology of a module in degree zero. This also covers empty fibres.",
+   "uses": [
+    "lem-sfb-proper-flat-space-fibre-dimension",
+    "lem-sfb-space-proper-base-change",
+    "lem-sfb-separated-space-dimension-one-scheme",
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "lem-sc-etale-zariski-qcoh-comparison",
+    "lem-sc-noetherian-cohomology-above-dimension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/moduli-curves.tex",
+    "place": "Tag 0E1J (lemma-genus), fibre vanishing; schematic fibres via Tag 0ADD."
+   }
+  },
+  {
+   "text": "Use [lem-sfb-proper-flat-space-derived-base-change] with $\\mathcal F=\\mathcal O_X$: it has the one-generator presentation and is flat over $T$ because $f$ is flat. Thus $K=K_f(\\mathcal O_X)$ is perfect, and for every $h:T'\\to T$ there is the canonical unit-compatible isomorphism $Lh^*K\\simeq K_{f_{T'}}(\\mathcal O_{X_{T'}})$. At $h=i_t:\\operatorname{Spec}\\kappa(t)\\to T$, the target is $R\\Gamma(X_{t,\\mathrm{et}},\\mathcal O)$, since a module sheaf on the one-point Zariski space is its module of global sections. Applying the cohomology functor gives the fibre groups used below; in particular its negative cohomology vanishes. These are consequences of the specified derived isomorphism, not an assumption that underived pullback commutes with higher direct image. The same theorem gives the derived counit $\\epsilon_T^*K\\simeq Rf_{\\mathrm{et},*}\\mathcal O_X$ and exactness of $\\epsilon_T^*$. Applying cohomology identifies the etale higher direct images with the associated etale module sheaves of $H^i(K)$; hence the ensuing Zariski local-free calculation proves the asserted etale statements as well.",
+   "uses": [
+    "lem-sfb-proper-flat-space-derived-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-perfect.tex",
+    "place": "Tag 0CTM (lemma-flat-proper-perfect-direct-image-general), specialized to the structure module."
+   }
+  },
+  {
+   "text": "Let $V=\\{t:\\dim X_t=1\\}$. By [lem-sfb-proper-flat-space-fibre-dimension], $V$ is open and closed and commutes with arbitrary base change. On $V$ every fibre is nonempty. A unital map from a field to its nonzero global-functions ring is injective: its kernel is an ideal of the field and cannot contain $1$. Consequently the scalar condition on $V$ is precisely $\\dim H^0(X_t,\\mathcal O)=1$. If it holds at $t$, apply [lem-sc-perfect-finite-free-residue-model] to $K$ at $t$. All negative terms of the resulting finite free complex are zero and its degree-zero term has rank one. On its affine neighbourhood intersected with $V$, every residue complex therefore has degree-zero cohomology of dimension at most one, while the scalar injection gives dimension at least one. Thus the scalar condition holds throughout that neighbourhood. The set $U\\subset V$ of such points is open in $T$. This is the $h^0\\leq1$ semicontinuity argument of 0E6I, written using the existing minimal-complex lemma.",
+   "uses": [
+    "lem-sfb-proper-flat-space-fibre-dimension",
+    "lem-sc-perfect-finite-free-residue-model"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/moduli-curves.tex",
+    "place": "Tag 0E6I (lemma-pre-genus-curves), first two sentences of the proof; minimal model Tag 0BCD."
+   }
+  },
+  {
+   "text": "For a point $t'$ over $t$, put $k=\\kappa(t)$ and $k'=\\kappa(t')$. The fibres are related by $X_{t'}=X_t\\times_k k'$. Apply [lem-pc-flat-base-change-cohom] to the proper (hence quasi-compact and quasi-separated) scheme $X_t$ and the field extension $k\\to k'$. Write $A=H^0(X_t,\\mathcal O)$. Its canonical degree-zero base-change map is $A\\otimes_k k'\\xrightarrow{\\sim}H^0(X_{t'},\\mathcal O)$, sending $a\\otimes b$ to $b$ times the pullback of $a$. In particular $1\\otimes b$ maps to $b\\cdot1$. Under $k\\otimes_k k'=k'$, the scalar map is therefore exactly the tensor extension of $k\\to A$. A field extension is flat since every vector space has a basis; tensoring a linear map extends the bases of its kernel and cokernel and kills neither nonzero space. Thus the map is an isomorphism exactly when its extension is. The dimension comparison in [lem-sfb-proper-flat-space-fibre-dimension] gives the same equivalence for dimension one. Hence the good-point set on $T'$ is the inverse image of $|U|$. A map factors through an open subscheme exactly when its image lies there. This proves both the universal factorization criterion and the base-change equality of the open loci.",
+   "uses": [
+    "lem-pc-flat-base-change-cohom",
+    "lem-sfb-proper-flat-space-fibre-dimension"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/moduli-curves.tex",
+    "place": "Tag 0E6I (lemma-pre-genus-curves), base-change-invariant open-locus criterion."
+   }
+  },
+  {
+   "text": "For the open immersion $j:U\\hookrightarrow T$, [lem-sfb-proper-flat-space-derived-base-change] identifies $K|_U=Lj^*K$ with $K_{f_U}(\\mathcal O_{X_U})$ and identifies the scalar units. Write $u:\\mathcal O_U\\to K|_U$ for this unit. The fibre calculations above verify both hypotheses of [lem-sc-perfect-degree-zero-fibre-criterion]: $H^0(Li_t^*u)$ is an isomorphism at every point and all negative fibre cohomology vanishes. Therefore $\\mathcal O_U\\to H^0(K|_U)=f_*\\mathcal O_{X_U}$ is an isomorphism, and locally $K|_U\\simeq\\mathcal O_U\\oplus P$ with $P$ perfect of Tor-amplitude in $[1,\\infty)$. For any $h:U'\\to U$, the same criterion applies to $Lh^*K$, using the canonical derived comparison of [lem-sfb-proper-flat-space-derived-base-change] and the fibre condition of Step 4. It gives the scalar isomorphism for $f_{U'}$, proving that the degree-zero assertion holds universally, even on a nonreduced base.",
+   "uses": [
+    "lem-sc-perfect-degree-zero-fibre-criterion",
+    "lem-sfb-proper-flat-space-derived-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/moduli-curves.tex",
+    "place": "Tag 0E1J (lemma-genus), applying spaces-perfect lemma-proper-flat-h0 and its positive-degree perfect summand."
+   }
+  },
+  {
+   "text": "On a neighbourhood carrying that decomposition, $Li_t^*P$ has zero cohomology except in degree one: positive-degree cohomology is that of $X_t$, which vanishes above one by Step 1, and the Tor-amplitude bound removes degrees below one. Apply [lem-sc-perfect-finite-free-residue-model] to $P$ at $t$. At this fixed point $t$, all residue cohomology dimensions other than $d_1=g$ are zero. The cited model has term rank exactly $d_i$ on the entire neighbourhood, so after shrinking its terms are actually zero outside degree one and its sole term is $\\mathcal O^{\\oplus g}$, where $g=\\dim_{\\kappa(t)}H^1(X_t,\\mathcal O)$. Thus the differential is zero as a module map, even if the base has nilpotents; no inference from a differential vanishing on residue fields is needed. Thus locally $K\\simeq\\mathcal O[0]\\oplus\\mathcal O^{\\oplus g}[-1]$, and $E=H^1(K)=R^1f_*\\mathcal O_{X_U}$ is finite locally free: every point has an open neighbourhood on which it is a finite direct sum of the structure module. Apply [def-amb-finite-locally-free-module] on each such neighbourhood, where the rank is constant; no common rank on all of $U$ is asserted.",
+   "uses": [
+    "lem-sc-perfect-finite-free-residue-model",
+    "def-amb-finite-locally-free-module"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/moduli-curves.tex",
+    "place": "Tag 0E1J (lemma-genus), applying More on Algebra Tag 0BCD to the positive-degree summand."
+   }
+  },
+  {
+   "text": "On any neighbourhood in Step 6 the ordinary and derived pullbacks of the displayed free terms coincide. The canonical map $h^*H^1(K)\\to H^1(Lh^*K)$ is the identity on $h^*(\\mathcal O^{\\oplus g})$, as follows by taking degree-one cycles in the two-term complex with zero differential. Compose with the cohomology of the canonical derived base-change isomorphism of [lem-sfb-proper-flat-space-derived-base-change]. This composite is the usual higher-direct-image base-change map $h^*E\\to R^1(f_{U'})_*\\mathcal O$. It is locally an isomorphism and hence an isomorphism globally. The construction uses the canonical comparison throughout; a chosen local splitting is used only to check invertibility, not to choose the map.",
+   "uses": [
+    "lem-sfb-proper-flat-space-derived-base-change"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/moduli-curves.tex",
+    "place": "Tag 0E1J (lemma-genus), final sentence, arbitrary base change after the one-degree calculation."
+   }
+  },
+  {
+   "text": "On each of the trivializing neighbourhoods of Step 6, the fibre dimension of $E$ is the constant integer $g$. Consequently $U_g=\\{t\\in U:\\operatorname{rank}E_t=g\\}$ is open, and its complement is the union of the other open rank loci, so it is also closed. At every $t\\in U$ the field case of Step 7 identifies $E\\otimes\\kappa(t)$ with $H^1(X_t,\\mathcal O)$; hence this is exactly the locus in the statement. A pullback of $\\mathcal O^{\\oplus g}$ is $\\mathcal O^{\\oplus g}$, so ranks, and thus the open-and-closed subschemes $U_g$, commute with every base change. The empty base and the rank-zero case satisfy the same argument.",
+   "uses": [
+    "def-amb-finite-locally-free-module"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/moduli-curves.tex",
+    "place": "Tag 0E6K (lemma-pre-genus-one-piece-per-genus), decomposition by locally constant rank."
+   }
+  },
+  {
+   "text": "For a geometrically reduced nonempty one-dimensional fibre, Step 1 supplies a proper scheme over its residue field. Apply [lem-pc-h0-geom-connected], whose hypotheses are exactly properness and geometric reducedness. Its equivalence identifies the canonical scalar $H^0$ isomorphism with geometric connectedness; it does not require smoothness, irreducibility or a rational point. This proves the last clause.",
+   "uses": [
+    "lem-pc-h0-geom-connected"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/moduli-curves.tex",
+    "place": "Tag 0E6L (lemma-geomredcon-in-h0-1), using the full criterion from varieties lemma-proper-geometrically-reduced-global-sections."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-proper-flat-space-fibre-dimension",
+  "lem-sfb-space-proper-base-change",
+  "lem-sfb-separated-space-dimension-one-scheme",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-sc-etale-zariski-qcoh-comparison",
+  "lem-sc-noetherian-cohomology-above-dimension",
+  "lem-sfb-proper-flat-space-derived-base-change",
+  "lem-sc-perfect-finite-free-residue-model",
+  "lem-pc-flat-base-change-cohom",
+  "lem-sc-perfect-degree-zero-fibre-criterion",
+  "def-amb-finite-locally-free-module",
+  "lem-pc-h0-geom-connected"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/moduli-curves.tex",
+  "place": "Tags 0E6I, 0E1J, 0E6K and 0E6L; the semicontinuity specialization and positive-degree perfect reduction are expanded using Tag 0BCD."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "In a flat proper finitely presented family of curves the fibre H0 equals the residue field on an open locus and the first structure sheaf cohomology is locally free and commutes with base change",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.fiberToSpecResidueField\", \"module\": \"Mathlib/AlgebraicGeometry/Fiber\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} →\\n  (f : X ⟶ Y) → (y : ↥Y) → AlgebraicGeometry.Scheme.Hom.fiber f y ⟶ AlgebraicGeometry.Spec (Y.residueField y)\", \"doc\": \"For a morphism $ f : X \\\\to Y $ of schemes and a point $ y \\\\in Y $, this is the morphism from the fiber product $ X \\\\times_Y \\\\operatorname{Spec}(\\\\kappa(y)) $ to $ \\\\operatorname{Spec}(\\\\kappa(y)) $, whic\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.fiberToSpecResidueField_apply\", \"module\": \"Mathlib/AlgebraicGeometry/Fiber\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) (y : ↥Y) (x : ↥(AlgebraicGeometry.Scheme.Hom.fiber f y)),\\n  (CategoryTheory.ConcreteCategory.hom (AlgebraicGeometry.Scheme.Hom.fiberToSpecResidueField f y).base) x =\\n    IsLocalRing.closedPoint ↑(Y.residueField y)\", \"doc\": \"Let $f: X \\\\to Y$ be a morphism of schemes and let $y \\\\in Y$ be a point. Let $\\\\kappa(y)$ be the residue field of $Y$ at $y$. The canonical projection from the fiber $X_y := X \\\\times_Y \\\\operatorname{Spe\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.fiberOverSpecResidueField\", \"module\": \"Mathlib/AlgebraicGeometry/Fiber\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} →\\n  (f : X ⟶ Y) → (y : ↥Y) → (AlgebraicGeometry.Scheme.Hom.fiber f y).Over (AlgebraicGeometry.Spec (Y.residueField y))\", \"doc\": \"For a morphism $ f : X \\\\to Y $ of schemes and a point $ y \\\\in Y $, this constructs the fiber product $ X \\\\times_Y \\\\operatorname{Spec}(\\\\kappa(y)) $ equipped with its canonical projection morphism to $ \"}\n  {\"name\": \"AlgebraicGeometry.Flat\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Flat\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"The property that a morphism $ f : X \\to Y $ of schemes is flat.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.instIsOverMapResidueFieldMapOverInferInstanceOverClass\", \"module\": \"Mathlib/AlgebraicGeometry/ResidueField\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} [inst : X.Over Y] (x : ↥X),\\n  AlgebraicGeometry.Scheme.Hom.IsOver\\n    (AlgebraicGeometry.Spec.map (AlgebraicGeometry.Scheme.Hom.residueFieldMap (X ↘ Y) x)) Y\", \"doc\": \"For a morphism of schemes $f: X \\\\to Y$ and a point $x \\\\in X$, let $\\\\phi: k(f(x)) \\\\to k(x)$ be the induced homomorphism on residue fields. The induced morphism of schemes $\\\\mathrm{Spec}(\\\\phi): \\\\mathrm{\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Pullback.residueFieldCongr_inv_residueFieldMap_ofPoint\", \"module\": \"Mathlib/AlgebraicGeometry/PullbackCarrier\", \"type\": \"∀ {X Y S : AlgebraicGeometry.Scheme} {f : X ⟶ S} {g : Y ⟶ S} (t : ↥(CategoryTheory.Limits.pullback f g)),\\n  CategoryTheory.CategoryStruct.comp\\n      (CategoryTheory.CategoryStruct.comp (AlgebraicGeometry.Scheme.residueFieldCongr ⋯).inv\\n        (AlgebraicGeometry.Scheme.Hom.residueFieldMap f (Algebra\", \"doc\": \"For a point $ t $ in the pullback of morphisms $ f: X \\to S $ and $ g: Y \\to S $ of schemes, the composition of the inverse of the residue field isomorphism at $ t $'s image in $ X $ with the residue fi\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Pullback.ofPointTensor\", \"module\": \"Mathlib/AlgebraicGeometry/PullbackCarrier\", \"type\": \"{X Y S : AlgebraicGeometry.Scheme} →\\n  {f : X ⟶ S} →\\n    {g : Y ⟶ S} →\\n      (t : ↥(CategoryTheory.Limits.pullback f g)) →\\n        (AlgebraicGeometry.Scheme.Pullback.Triplet.ofPoint t).tensor ⟶\\n          (CategoryTheory.Limits.pullback f g).residueField t\", \"doc\": \"For any morphisms $f : X \\to S$ and $g : Y \\to S$ of schemes and any point $t$ in the fiber product $X \\times_S Y$, this constructs the canonical morphism from the pushout of residue field maps induced b\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Pullback.Triplet.Spec_ofPointTensor_SpecTensorTo\", \"module\": \"Mathlib/AlgebraicGeometry/PullbackCarrier\", \"type\": \"∀ {X Y S : AlgebraicGeometry.Scheme} {f : X ⟶ S} {g : Y ⟶ S} (T : AlgebraicGeometry.Scheme.Pullback.Triplet f g)\\n  (p : ↥(AlgebraicGeometry.Spec T.tensor)),\\n  CategoryTheory.CategoryStruct.comp\\n      (AlgebraicGeometry.Spec.map (AlgebraicGeometry.Scheme.Hom.residueFieldMap T.SpecTensorTo p))\\n      (\", \"doc\": \"For a pullback triplet $T$ in the category of schemes and a point $p$ in the spectrum of $T.tensor$, the composition of the morphisms $\\\\mathrm{Spec.map}(\\\\mathrm{Hom.residueFieldMap}(T.\\\\mathrm{SpecTens\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: fibre definitions and algebraic flatness do not give coherent cohomology, the scalar H0 locus, or genus strata for algebraic spaces"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The arithmetic genus is locally constant in proper flat families with geometrically connected reduced curve fibres",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Flat\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Flat\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"The property that a morphism $ f : X \\to Y $ of schemes is flat.\"}\n  {\"name\": \"AlgebraicGeometry.Flat.generalizingMap\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/UniversallyOpen\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.Flat f],\\n  GeneralizingMap ⇑(CategoryTheory.ConcreteCategory.hom f.base)\", \"doc\": \"If $ f : X \\\\to Y $ is a flat morphism of schemes, then the underlying continuous map $ f $ satisfies the generalizing property: for any $ x \\\\in X $ and $ y \\\\in Y $ such that $ y $ specializes to $ f(x\"}\n  {\"name\": \"AlgebraicGeometry.Flat.isStableUnderBaseChange\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Flat\", \"type\": \"CategoryTheory.MorphismProperty.IsStableUnderBaseChange @AlgebraicGeometry.Flat\", \"doc\": \"The property of being a flat morphism of schemes is stable under base change, meaning that if a morphism of schemes is flat, then any base change (pullback) of this morphism is also flat.\"}\n  {\"name\": \"Module.isLocallyConstant_rankAtStalk\", \"module\": \"Mathlib/RingTheory/Spectrum/Prime/FreeLocus\", \"type\": \"∀ {R : Type uR} {M : Type uM} [inst : CommRing R] [inst_1 : AddCommGroup M] [inst_2 : Module R M]\\n  [Module.FinitePresentation R M] [Module.Flat R M], IsLocallyConstant (Module.rankAtStalk M)\", \"doc\": \"If $ M $ is a finitely presented and flat module over a commutative semiring $ R $, then the function assigning to each prime ideal $ \\\\mathfrak{p} \\\\in \\\\operatorname{Spec}(R) $ the rank of the localiza\"}\n  {\"name\": \"AlgebraicGeometry.IsSmoothOfRelativeDimension\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"ℕ → {X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"For a natural number $n$ and a morphism $f: X \\\\to Y$ of schemes, the proposition that $f$ is smooth of relative dimension $n$.\"}\n  {\"name\": \"AlgebraicGeometry.Flat.instIsMultiplicativeScheme\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Flat\", \"type\": \"CategoryTheory.MorphismProperty.IsMultiplicative @AlgebraicGeometry.Flat\", \"doc\": \"The property of being a flat morphism of schemes is multiplicative. That is, if $ f : X \\\\to Y $ and $ g : Y \\\\to Z $ are flat morphisms of schemes, then their composition $ g \\\\circ f : X \\\\to Z $ is als\"}\n  {\"name\": \"AlgebraicGeometry.UniversallyOpen.of_flat\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/UniversallyOpen\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.Flat f]\\n  [AlgebraicGeometry.LocallyOfFinitePresentation f], AlgebraicGeometry.UniversallyOpen f\", \"doc\": \"A morphism of schemes that is flat and locally of finite presentation is universally open. This means that for any base change $ Y' \\to Y $, the induced morphism $ X \\times_Y Y' \\to Y' $ is an open map o\"}\n  {\"name\": \"AlgebraicGeometry.Flat.instHasRingHomPropertyFlat\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Flat\", \"type\": \"AlgebraicGeometry.HasRingHomProperty @AlgebraicGeometry.Flat fun {R S} [CommRing R] [CommRing S] => RingHom.Flat\", \"doc\": \"The property of being a flat morphism of schemes is characterized by the flatness of the corresponding ring homomorphism. Specifically, a morphism of schemes is flat if and only if the associated ring\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: fibre definitions and algebraic flatness do not give coherent cohomology, the scalar H0 locus, or genus strata for algebraic spaces"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"cohomology\"",
+   "results": "[loogle] OK 3 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.EllAdicCohomology\", \"module\": \"Mathlib.AlgebraicGeometry.Sites.ElladicCohomology\", \"type\": \" (X : AlgebraicGeometry.Scheme) (ℓ : ℕ) [Fact (Nat.Prime ℓ)] (n : ℕ) : Type (u + 1)\", \"doc\": \"`ℓ`-adic cohomology of a scheme in degree `n`.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.instAddCommGroupEllAdicCohomology\", \"module\": \"Mathlib.AlgebraicGeometry.Sites.ElladicCohomology\", \"type\": \" (X : AlgebraicGeometry.Scheme) (ℓ : ℕ) [Fact (Nat.Prime ℓ)] (n : ℕ) : AddCommGroup (X.EllAdicCohomology ℓ n)\", \"doc\": \"\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.instSubsingletonEllAdicCohomologyOfIsEmptyCarrierCarrierCommRingCat\", \"module\": \"Mathlib.AlgebraicGeometry.Sites.ElladicCohomology\", \"type\": \" (X : AlgebraicGeometry.Scheme) (ℓ : ℕ) [Fact (Nat.Prime ℓ)] [IsEmpty ↥X] (n : ℕ) : Subsingleton (X.EllAdicCohomology ℓ n)\", \"doc\": \"`ℓ`-adic cohomology is trivial for the empty scheme.\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: fibre definitions and algebraic flatness do not give coherent cohomology, the scalar H0 locus, or genus strata for algebraic spaces"
+  },
+  {
+   "tool": "grep",
+   "query": "genus|semicontinu|cohomology.*baseChange",
+   "results": "[grep] OK 25 hit(s)\n  {\"file\": \"Mathlib/InformationTheory/KullbackLeibler/DataProcessing.lean\", \"line\": \"52\", \"text\": \"  hf_cvx.map_condExp_le_trim hm (hf_cvx.continuousOn_Ici hf_cont_at).lowerSemicontinuousOn hf\"}\n  {\"file\": \"Mathlib/InformationTheory/KullbackLeibler/DataProcessing.lean\", \"line\": \"72\", \"text\": \"    hf_cvx.exists_affine_le_real isClosed_Ici hf_cont.lowerSemicontinuousOn\"}\n  {\"file\": \"Mathlib/InformationTheory/KullbackLeibler/DataProcessing.lean\", \"line\": \"103\", \"text\": \"    hf_cvx.exists_affine_le_real isClosed_Ici hf_cont.lowerSemicontinuousOn\"}\n  {\"file\": \"Mathlib/Dynamics/TopologicalEntropy/Subset.lean\", \"line\": \"29\", \"text\": \"spaces, and then prove the semicontinuity of the topological entropy. It would be a nice\"}\n  {\"file\": \"Mathlib/Topology/EMetricSpace/BoundedVariation.lean\", \"line\": \"14\", \"text\": \"public import Mathlib.Topology.Semicontinuity.Defs\"}\n  {\"file\": \"Mathlib/Topology/EMetricSpace/BoundedVariation.lean\", \"line\": \"228\", \"text\": \"theorem lowerSemicontinuous_aux {ι : Type*} {F : ι → α → E} {p : Filter ι} {f : α → E} {s : Set α}\"}\n  {\"file\": \"Mathlib/Topology/EMetricSpace/BoundedVariation.lean\", \"line\": \"241\", \"text\": \"/-- The map `(eVariationOn · s)` is lower semicontinuous for pointwise convergence *on `s`*.\"}\n  {\"file\": \"Mathlib/Topology/EMetricSpace/BoundedVariation.lean\", \"line\": \"245\", \"text\": \"protected theorem lowerSemicontinuous (s : Set α) :\"}\n  {\"file\": \"Mathlib/Topology/EMetricSpace/BoundedVariation.lean\", \"line\": \"246\", \"text\": \"    LowerSemicontinuous fun f : α →ᵤ[s.image singleton] E => eVariationOn f s := fun f ↦ by\"}\n  {\"file\": \"Mathlib/Topology/Sion.lean\", \"line\": \"20\", \"text\": \"- for all `x ∈ X`, `f(x, ⬝)` is upper semicontinuous and quasiconcave\"}\n  {\"file\": \"Mathlib/Topology/Sion.lean\", \"line\": \"21\", \"text\": \"- for all `y ∈ Y`, `f(⬝, y)` is lower semicontinuous and quasiconvex\"}\n  {\"file\": \"Mathlib/Topology/Sion.lean\", \"line\": \"100\", \"text\": \"/-- From lower semicontinuity of `f(·, y)` and compactness  of `X`,\"}\n  {\"file\": \"Mathlib/Topology/Sion.lean\", \"line\": \"104\", \"text\": \"    (hfy : ∀ y ∈ Y, LowerSemicontinuousOn (fun x : E => f x y) X)\"}\n  {\"file\": \"Mathlib/Topology/Sion.lean\", \"line\": \"108\", \"text\": \"  obtain ⟨x, hx, hx_le⟩ := LowerSemicontinuousOn.exists_isMinOn ne_X kX (hfy y hy)\"}\n  {\"file\": \"Mathlib/Geometry/Manifold/SmoothApprox.lean\", \"line\": \"47\", \"text\": \"- the precision function `ε : M → ℝ` may be assumed `LowerSemicontinuous` instead of `Continuous`,\"}\n  {\"file\": \"Mathlib/Topology/Semicontinuity/Lindelof.lean\", \"line\": \"8\", \"text\": \"public import Mathlib.Topology.Semicontinuity.Basic\"}\n  {\"file\": \"Mathlib/Topology/Semicontinuity/Lindelof.lean\", \"line\": \"12\", \"text\": \"# Envelopes of Semicontinuous functions on Hereditarily Lindelöf spaces\"}\n  {\"file\": \"Mathlib/Topology/Semicontinuity/Lindelof.lean\", \"line\": \"15\", \"text\": \"of upper semicontinuous functions on `X`, then there is a countable subfamily `𝓕'`\"}\n  {\"file\": \"Mathlib/Topology/Semicontinuity/Lindelof.lean\", \"line\": \"23\", \"text\": \"Of course we also provide the dual statements for lower semicontinuous functions.\"}\n  {\"file\": \"Mathlib/Topology/Semicontinuity/Lindelof.lean\", \"line\": \"51\", \"text\": \"/-- If a function `s : X → E` can be written as the infimum of a family `𝓕` of upper semicontinuous\"}\n  {\"file\": \"Mathlib/Topology/Semicontinuity/Basic.lean\", \"line\": \"8\", \"text\": \"public import Mathlib.Topology.Semicontinuity.Defs\"}\n  {\"file\": \"Mathlib/Topology/Semicontinuity/Basic.lean\", \"line\": \"14\", \"text\": \"# Lower and Upper Semicontinuity\"}\n  {\"file\": \"Mathlib/Topology/Semicontinuity/Basic.lean\", \"line\": \"16\", \"text\": \"This file develops key properties of upper and lower semicontinuous functions.\"}\n  {\"file\": \"Mathlib/Topology/Semicontinuity/Basic.lean\", \"line\": \"20\", \"text\": \"We have some equivalent definitions of lower- and upper-semicontinuity (under certain\"}\n  {\"file\": \"Mathlib/Topology/Semicontinuity/Basic.lean\", \"line\": \"22\", \"text\": \"* `lowerSemicontinuous_iff_isOpen_preimage` in a linear order;\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: fibre definitions and algebraic flatness do not give coherent cohomology, the scalar H0 locus, or genus strata for algebraic spaces"
+  },
+  {
+   "tool": "leansearch",
+   "query": "In a flat proper finitely presented family of curves the fibre H0 equals the residue field on an open locus and the first structure sheaf cohomology is locally free and commutes with base change",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.instLocallyOfFinitePresentationOfIsSmooth\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Smooth\", \"type\": \"[hf : IsSmooth f] : LocallyOfFinitePresentation f\", \"doc\": \"Every smooth morphism of schemes is locally of finite presentation.\"}\n  {\"name\": \"AlgebraicGeometry.Flat.mk\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Flat\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y},\\n  (∀ {U : Y.Opens},\\n      AlgebraicGeometry.IsAffineOpen U →\\n        ∀ {V : X.Opens},\\n          AlgebraicGeometry.IsAffineOpen V →\\n            ∀ (e : V ≤ (TopologicalSpace.Opens.map f.base).obj U),\\n              (CommRingCat.Hom.hom (AlgebraicGeometry.\", \"doc\": \"Let $f: X \\\\to Y$ be a morphism of schemes. If for every affine open subset $U$ of $Y$ and every affine open subset $V$ of $X$ such that $V \\\\subseteq f^{-1}(U)$, the ring homomorphism $\\\\Gamma(U, \\\\mathc\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.fiberOverSpecResidueField\", \"module\": \"Mathlib.AlgebraicGeometry.Fiber\", \"type\": \"(f : X ⟶ Y) (y : Y) : (f.fiber y).Over (Spec (Y.residueField y))\", \"doc\": \"For a morphism $ f : X \\\\to Y $ of schemes and a point $ y \\\\in Y $, this constructs the fiber product $ X \\\\times_Y \\\\operatorname{Spec}(\\\\kappa(y)) $ equipped with its canonical projection morphism to $ \"}\n  {\"name\": \"AlgebraicGeometry.Flat.isStableUnderBaseChange\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Flat\", \"type\": \": MorphismProperty.IsStableUnderBaseChange @Flat\", \"doc\": \"The property of being a flat morphism of schemes is stable under base change, meaning that if a morphism of schemes is flat, then any base change (pullback) of this morphism is also flat.\"}\n  {\"name\": \"AlgebraicGeometry.Flat.instMorphismRestrict\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Flat\", \"type\": \"(f : X ⟶ Y) (V : Y.Opens) [Flat f] : Flat (f ∣_ V)\", \"doc\": \"If a morphism $ f : X \\to Y $ of schemes is flat, then its restriction to any open subset $ V $ of the target scheme $ Y $ remains flat. This means the property of flatness is maintained when restricti\"}\n  {\"name\": \"RingHom.finitePresentation_isLocal\", \"module\": \"Mathlib.RingTheory.RingHom.FinitePresentation\", \"type\": \": PropertyIsLocal @FinitePresentation\", \"doc\": \"The property of a ring homomorphism between commutative rings being finitely presented is local, meaning it can be checked after localization at prime ideals or on an open cover.\"}\n  {\"name\": \"Module.freeLocus_eq_univ\", \"module\": \"Mathlib.RingTheory.Spectrum.Prime.FreeLocus\", \"type\": \"[Module.Finite R M] [Module.Flat R M] : freeLocus R M = Set.univ\", \"doc\": \"For a commutative ring $ R $ and an $ R $-module $ M $ that is finitely generated and flat, the free locus of $ M $—the set of prime ideals $ \\\\mathfrak{p} $ in the prime spectrum of $ R $ where the lo\"}\n  {\"name\": \"AlgebraicGeometry.UniversallyOpen.of_flat\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.UniversallyOpen\", \"type\": \"[Flat f] [LocallyOfFinitePresentation f] : UniversallyOpen f\", \"doc\": \"A morphism of schemes that is flat and locally of finite presentation is universally open. This means that for any base change $ Y' \\to Y $, the induced morphism $ X \\times_Y Y' \\to Y' $ is an open map o\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: fibre definitions and algebraic flatness do not give coherent cohomology, the scalar H0 locus, or genus strata for algebraic spaces"
+  },
+  {
+   "tool": "grep",
+   "query": "genus|semicontinu|cohomology.*baseChange",
+   "results": "[grep] OK 0 hit(s)\n\nSearch directory: Mathlib/AlgebraicGeometry",
+   "date": "2026-10-22",
+   "verdict": "no match: fibre definitions and algebraic flatness do not give coherent cohomology, the scalar H0 locus, or genus strata for algebraic spaces"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "In a flat proper finitely presented family of curves the scalar global functions locus is open and first coherent cohomology is locally free with arbitrary base change, defining open and closed genus strata",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"Algebra.isOpen_smoothLocus\", \"module\": \"Mathlib/RingTheory/Smooth/Locus\", \"type\": \"∀ {R : Type u_1} {A : Type u_2} [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A]\\n  [Algebra.FinitePresentation R A], IsOpen (Algebra.smoothLocus R A)\", \"doc\": \"If $ A $ is a finitely presented algebra over a commutative ring $ R $, then the smooth locus of $ A $ over $ R $ is an open subset of the prime spectrum $ \\\\operatorname{Spec}(A) $ equipped with the Z\"}\n  {\"name\": \"Algebra.isOpen_unramifiedLocus\", \"module\": \"Mathlib/RingTheory/Unramified/Locus\", \"type\": \"∀ {R : Type u_1} {A : Type u_2} [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A]\\n  [Algebra.EssFiniteType R A], IsOpen (Algebra.unramifiedLocus R A)\", \"doc\": \"If $ A $ is a commutative ring of essential finite type over a commutative ring $ R $, then the set of prime ideals $ \\\\mathfrak{p} \\\\in \\\\operatorname{Spec}(A) $ where $ A $ is unramified over $ R $ for\"}\n  {\"name\": \"AlgebraicGeometry.UniversallyOpen.of_flat\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/UniversallyOpen\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.Flat f]\\n  [AlgebraicGeometry.LocallyOfFinitePresentation f], AlgebraicGeometry.UniversallyOpen f\", \"doc\": \"A morphism of schemes that is flat and locally of finite presentation is universally open. This means that for any base change $ Y' \\to Y $, the induced morphism $ X \\times_Y Y' \\to Y' $ is an open map o\"}\n  {\"name\": \"Algebra.isOpen_etaleLocus\", \"module\": \"Mathlib/RingTheory/Etale/Locus\", \"type\": \"∀ {R : Type u_1} {A : Type u_2} [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A]\\n  [Algebra.FinitePresentation R A], IsOpen (Algebra.etaleLocus R A)\", \"doc\": \"The set of prime ideals $\\\\mathfrak{p} \\\\in \\\\operatorname{Spec}(A)$ where the algebra $A$ over the commutative ring $R$ is étale forms an open subset of the prime spectrum $\\\\operatorname{Spec}(A)$ under\"}\n  {\"name\": \"AlgebraicGeometry.Flat\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Flat\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"The property that a morphism $ f : X \\to Y $ of schemes is flat.\"}\n  {\"name\": \"AlgebraicGeometry.IsSmoothOfRelativeDimension\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"ℕ → {X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"For a natural number $n$ and a morphism $f: X \\\\to Y$ of schemes, the proposition that $f$ is smooth of relative dimension $n$.\"}\n  {\"name\": \"Algebra.smoothLocus_eq_compl_support_inter\", \"module\": \"Mathlib/RingTheory/Smooth/Locus\", \"type\": \"∀ {R : Type u_1} {A : Type u_2} [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A]\\n  [Algebra.EssFiniteType R A],\\n  Algebra.smoothLocus R A = (Module.support A (Algebra.H1Cotangent R A))ᶜ ∩ Module.freeLocus A Ω[A⁄R]\", \"doc\": \"For a commutative $ R $-algebra $ A $ of essential finite type, the smooth locus $ \\\\operatorname{smoothLocus}_R(A) $ coincides with the intersection of the complement of the support of the first cotan\"}\n  {\"name\": \"AlgebraicGeometry.Flat.generalizingMap\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/UniversallyOpen\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.Flat f],\\n  GeneralizingMap ⇑(CategoryTheory.ConcreteCategory.hom f.base)\", \"doc\": \"If $ f : X \\\\to Y $ is a flat morphism of schemes, then the underlying continuous map $ f $ satisfies the generalizing property: for any $ x \\\\in X $ and $ y \\\\in Y $ such that $ y $ specializes to $ f(x\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: the returned scheme/ring flatness and smooth-locus results do not state the scalar-H0 or genus-strata theorem for algebraic-space curve families"
+  },
+  {
+   "tool": "grep",
+   "query": "genus|semicontinu|cohomology.*baseChange",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-22",
+   "verdict": "no match: the returned scheme/ring flatness and smooth-locus results do not state the scalar-H0 or genus-strata theorem for algebraic-space curve families"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-stable-and-smooth-family-open-loci",
+  "date": "2026-10-22",
+  "group": "Q38"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Stable genus and smooth-family open loci in curve families. Supporting input: 0E76 proof, reduction to prestable curves, and 0E78 proof, decomposition by genus before imposing stability.",
+   "via": [
+    "lem-sfb-stable-and-smooth-family-open-loci",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-curve-h0-genus-strata",
+  "worker": "stage1",
+  "summary": "Checked the four moduli-curves source lemmas and their hypotheses. The nine-step argument constructs the scalar-H0 open, verifies its universal point criterion, and computes the positive perfect summand to prove local freeness, canonical base change and genus strata, using two statement-only general algebraic-space tools. Repaired the promotion return for head 7978ac3b104 by rebuilding against the current server DAG (initial dry run 9560fada6b0), rereading all twelve cited statements, and verifying all 18 retained quotations. Their statements and the item statement are unchanged. Step 4 now gives the explicit formula for the canonical field-base-change map and its value on the scalar unit, removing an implicit compatibility assertion. Earlier neighbourhood-rank and restricted-unit clarifications are retained. No dependency, statement or search-question change was needed.",
+  "blueprint": "The inherited null blueprint ancestor and via chain are preserved. Realizes the genus-open prerequisite of the 0E76/0E78 reduction used by the ancestor direct-image alteration route: 0E6I open scalar-H0 and dimension locus, 0E1J positive perfect summand, 0E6K genus decomposition, 0E6L geometric connectedness.",
+  "tool_uses": [
+   {
+    "node": "lem-sc-etale-zariski-qcoh-comparison",
+    "why": "Generic coherent-cohomology, schematicity or perfect-complex tool used in the source proof; it supplies this local prerequisite and replaces no alteration or constructibility step of the unit."
+   },
+   {
+    "node": "lem-sc-perfect-finite-free-residue-model",
+    "why": "Generic coherent-cohomology, schematicity or perfect-complex tool used in the source proof; it supplies this local prerequisite and replaces no alteration or constructibility step of the unit."
+   },
+   {
+    "node": "lem-sc-perfect-degree-zero-fibre-criterion",
+    "why": "Generic coherent-cohomology, schematicity or perfect-complex tool used in the source proof; it supplies this local prerequisite and replaces no alteration or constructibility step of the unit."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sc-etale-zariski-qcoh-comparison",
+  "lem-sc-perfect-finite-free-residue-model",
+  "lem-sc-perfect-degree-zero-fibre-criterion"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q24-9059868f3",
+  "group": "Q24",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q24-9059868f3 (reviewer sub-agent of L); spot-checked: This is the fifth delivery of the same split (side-completion promotion loop). Compared field by field with the prior head 7978ac3b104: both new nodes are byte-identical, and the item changes only in the Step 4 text, which now writes out the canonical flat-base-change map a⊗b ↦ b·pullback(a), so 1⊗b ↦ b·1; this is correct and makes the step more explicit. Statement, stmt_deps, proof_deps, source and blueprint fields are unchanged, and the snapshot has no repair note. I re-read Stacks moduli-curves 0E6I with its proof, spaces-perfect 0CTM(2) (line 6232) and spaces-more-morphisms 0D4R (line 7247) and 0D4N (line 7183), together with every cited statement. Steps 1-9 hold. Step 1: fibres are proper Noetherian schemes of dimension at most 1 with H^i=0 for i>1, using fibre-dimension, space-proper-base-change, the dimension-one schematicity node, the finite-type-over-Noetherian node, the étale-Zariski comparison and the cohomology-above-dimension node. Step 2: Li_t^*K = RΓ(X_t,O). Step 3: U is open, because the residue model gives h^0 ≤ 1 nearby and the scalars inject on the clopen dimension-one locus V. Step 4: flat base change along field extensions. Step 5: the degree-zero criterion applies universally. Step 6: P ≅ O^g[-1] with literally zero differential. Steps 7 and 8: the canonical R^1 base-change map is an isomorphism and the rank strata are clopen. Step 9 is lem-pc-h0-geom-connected. Edge cases checked: empty base and empty fibres; Spec k (dimension 0, excluded); P^1 (g=0); an elliptic curve (g=1); two disjoint P^1 (excluded); a dual-number base. Batch-5 flags: every flagged path ends at a general definition (def-trf-algebraic-space, def-pod-ring-scalar-extension, def-trf-schematically-dense-open), not at a step of the trace formula or Poincaré duality proofs, so all are accepted and no assumption leaf is needed. No SGA is cited. The three declared tool_uses (étale-Zariski comparison, finite-free residue model, degree-zero fibre criterion) are accepted. No fixes. Maintainer note: side-completion promotion loop; L must promote the item."
+ }
+}

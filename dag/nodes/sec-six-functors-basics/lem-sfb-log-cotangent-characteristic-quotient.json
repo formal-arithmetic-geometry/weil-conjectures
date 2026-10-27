@@ -1,0 +1,292 @@
+{
+ "id": "lem-sfb-log-cotangent-characteristic-quotient",
+ "kind": "statement",
+ "title": "Characteristic quotient of the logarithmic cotangent fibre over a trivial log field",
+ "statement": "Let $F$ be a field [def-weil-field], let $(X,M)$ be a locally Noetherian fs log scheme [def-trf-fs-log-blowup], and let $f:(X,M)\\to(\\operatorname{Spec}F,F^\\times)$ be a morphism to the trivial log field. Fix a geometric point $\\bar x$, put $A=\\mathcal O_{X,\\bar x}$, $k=A/\\mathfrak m_A$ [def-weil-pbc-geometric-stalks], and let $C=(M_{\\bar x}/A^\\times)^{\\rm gp}$ be the group completion of its characteristic monoid. Use the logarithmic differential module $\\omega_{f,\\bar x}$ of [def-per-log-differential-stalk]. There is a canonical surjective $k$-linear map\n$$\\pi:k\\otimes_A\\omega_{f,\\bar x}\\longrightarrow k\\otimes_{\\mathbf Z}C$$\nwith $\\pi(1\\otimes d\\log m)=1\\otimes[m]$ for every $m\\in M_{\\bar x}$ and $\\pi(1\\otimes da)=0$ for every $a\\in A$. In particular these formulas are well defined on the differential relations and on the quotient by units. Log smoothness is not required. Tensor products and scalar extension have their usual module meanings [def-weil-pbc-module-tensor-product, def-weil-module-base-change].",
+ "source": {
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "Expose X proof of Proposition 1.2, printed pp.136--137, canonical map (1) and its surjectivity; its formula is a consequence of the differential relations and does not require log smoothness. No Stacks tag states this logarithmic assertion."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-trf-fs-log-blowup",
+  "def-weil-pbc-geometric-stalks",
+  "def-per-log-differential-stalk",
+  "def-weil-pbc-module-tensor-product",
+  "def-weil-module-base-change",
+  "def-per-log-cotangent-comparison"
+ ],
+ "proof": [
+  {
+   "text": "Use A = strictLocalRing X t and its actual quotient k = A / Ideal.span {a | not IsUnit a} from [def-per-log-cotangent-comparison]. Every nonunit maps to zero by Ideal.subset_span and Ideal.Quotient.eq_zero_iff_mem. This calculation needs neither an affine-neighbourhood comparison nor a separate locality theorem.",
+   "uses": [
+    "def-per-log-cotangent-comparison",
+    "def-weil-pbc-geometric-stalks"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Write $L=M_{\\bar x}$ and $T=k\\otimes_{\\mathbf Z}C$, with its usual $k$-module structure and $A$-action $a\\cdot t=\\rho(a)t$ [def-weil-module-base-change]. The quotient and group-completion presentation of [def-trf-fs-log-blowup] gives a monoid-to-additive-group homomorphism $c:L\\to C$ satisfying $c(mm')=c(m)+c(m')$ and $c(u)=0$ for $u\\in A^\\times$. Let $E$ be the free $A$-module on the symbols $da$ and $d\\log m$ used in [def-per-log-differential-stalk]. Define an $A$-linear map $h_0:E\\to T$ by $h_0(da)=0$ and $h_0(d\\log m)=1\\otimes c(m)$: explicitly apply these prescriptions termwise to a finite formal sum, reducing each coefficient by $\\rho$. This definition has no choices of charts or representatives of characteristic classes.",
+   "uses": [
+    "def-weil-module-base-change",
+    "def-trf-fs-log-blowup",
+    "def-per-log-differential-stalk"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose X proof of Proposition 1.2, printed pp.136--137, construction and surjectivity of map (1), with the differential-relation checks expanded."
+   }
+  },
+  {
+   "text": "Check the additive, Leibniz and multiplicative-log relations of [def-per-log-differential-stalk]. Both $h_0(d(a+b)-da-db)$ and $h_0(d(ab)-a\\,db-b\\,da)$ are zero because every ordinary symbol is sent to zero. For $m,n\\in L$ the image of $d\\log(mn)-d\\log m-d\\log n$ is $1\\otimes(c(mn)-c(m)-c(n))=0$, using the group-completion relations of [def-trf-fs-log-blowup]. In particular the logarithmic identity symbol also maps to zero.",
+   "uses": [
+    "def-per-log-differential-stalk",
+    "def-trf-fs-log-blowup"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose X proof of Proposition 1.2, printed pp.136--137, construction and surjectivity of map (1), with the differential-relation checks expanded."
+   }
+  },
+  {
+   "text": "For dα(m) − α(m)dlog(m), split on IsUnit (α(m)). In the nonunit case its residue is zero by the explicit quotient in [def-per-log-cotangent-comparison]. In the unit case reflectsUnits in [def-trf-fs-log-blowup] makes m a unit; Associates.mk_eq_one makes c(m)=0. Thus h₀ kills the structural relation of [def-per-log-differential-stalk].",
+   "uses": [
+    "def-per-log-differential-stalk",
+    "def-per-log-cotangent-comparison",
+    "def-trf-fs-log-blowup"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose X proof of Proposition 1.2, printed pp.136--137, construction and surjectivity of map (1), with the differential-relation checks expanded."
+   }
+  },
+  {
+   "text": "For the base log relations of [def-per-log-differential-stalk], construct the monoid map N_(f(t)) → M_t directly by the colimit universal property [def-weil-pbc-geometric-stalks]: pull each pointed base neighbourhood back along f, apply sectionMap and then germ. Naturality of f.sectionMap and the pointed colimit equations make this a cocone. For any relative diagram V → W the comparison V → X ×_Y W and naturality show that the image of germ_W(b) is germ_V(f.sectionMap(b)). Since the triviality locus is all of the base, Associates (N_(f(t))) is subsingleton; hence every base germ is a unit by Associates.mk_eq_one. The constructed monoid map preserves its inverse. Thus every base logarithmic generator has zero characteristic class. Base ordinary generators already map to zero.",
+   "uses": [
+    "def-per-log-differential-stalk",
+    "def-trf-fs-log-blowup",
+    "def-weil-pbc-geometric-stalks"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose X proof of Proposition 1.2, printed pp.136--137, construction and surjectivity of map (1), with the differential-relation checks expanded."
+   }
+  },
+  {
+   "text": "The preceding checks show that $h_0$ kills the $A$-span of every defining relation, so it descends to an $A$-linear map $h:\\omega_{f,\\bar x}\\to T$ through the explicit quotient of [def-per-log-differential-stalk]: two representatives differ by a finite $A$-linear sum of the checked relations and have equal images. Define $\\pi(b\\otimes w)=b\\,h(w)$ for $b\\in k$. The pairing is additive in each variable and $A$-balanced, since $b\\,h(aw)=b\\rho(a)h(w)$. The tensor-product construction of [def-weil-pbc-module-tensor-product] therefore induces a map on $k\\otimes_A\\omega_{f,\\bar x}$. It is $k$-linear, since multiplying the first tensor factor by $b_0\\in k$ multiplies its value by $b_0$, as in [def-weil-module-base-change]. Its values are precisely $\\pi(1\\otimes da)=0$ and $\\pi(1\\otimes d\\log m)=1\\otimes c(m)$.",
+   "uses": [
+    "def-per-log-differential-stalk",
+    "def-weil-pbc-module-tensor-product",
+    "def-weil-module-base-change"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose X proof of Proposition 1.2, printed pp.136--137, construction and surjectivity of map (1), with the differential-relation checks expanded."
+   }
+  },
+  {
+   "text": "By the group-completion presentation of [def-trf-fs-log-blowup], every $g\\in C$ is a finite integer sum $g=\\sum_j n_jc(m_j)$ with $m_j\\in L$. Thus each pure tensor $b\\otimes g\\in T$ has the preimage $\\sum_j(bn_j)\\otimes d\\log m_j$ under $\\pi$. Pure tensors generate $T$ by [def-weil-pbc-module-tensor-product], and sums of their displayed preimages give a preimage for every element. Hence $\\pi$ is surjective. Finally the symbols $da,d\\log m$ generate the presented module [def-per-log-differential-stalk], so their tensors with $1$ generate its scalar extension [def-weil-module-base-change]; the prescribed values uniquely determine $\\pi$. This proves canonicity as well as existence. The argument nowhere uses log smoothness, log regularity or perfection of $F$.",
+   "uses": [
+    "def-trf-fs-log-blowup",
+    "def-weil-pbc-module-tensor-product",
+    "def-per-log-differential-stalk",
+    "def-weil-module-base-change"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose X proof of Proposition 1.2, printed pp.136--137, construction and surjectivity of map (1), with the differential-relation checks expanded."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-per-log-cotangent-comparison",
+  "def-per-log-differential-stalk",
+  "def-trf-fs-log-blowup",
+  "def-weil-module-base-change",
+  "def-weil-pbc-geometric-stalks",
+  "def-weil-pbc-module-tensor-product"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "Expose X proof of Proposition 1.2, printed pp.136--137, map (1) and its surjectivity; relation checks expanded using the explicit LogDifferential presentation. The residue quotient kills nonunits by definition, so the affine strict-henselization comparison and locality lemmas are unnecessary. The base-log check constructs the stalk map from pointed pullbacks and naturality. Surjectivity uses the fraction presentation of GrothendieckGroup; uniqueness uses quotient and Finsupp induction."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Logarithmic differentials at a geometric point surject onto the residue field tensor the group completion of the characteristic monoid over a field with trivial logarithmic structure",
+   "results": "{\"t\": \"2026-10-22T05:10:55Z\", \"tool\": \"leanfinder\", \"query\": \"Logarithmic differentials at a geometric point surject onto the residue field tensor the group completion of the characteristic monoid over a field with trivial logarithmic structure\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.residue_surjective\", \"KaehlerDifferential.tensorProductTo_surjective\", \"KaehlerDifferential.map_surjective\", \"Algebra.SubmersivePresentation.cotangentComplexAux_surjective\", \"Algebra.Extension.Cotangent.mk_surjective\", \"KaehlerDifferential.linearCombination_surjective\", \"KaehlerDifferential.map_surjective_of_surjective\", \"KaehlerDifferential.mapBaseChange_surjective\"], \"digest\": \"d3cdef273323285a\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the returned signatures concern ordinary scheme smoothness or ordinary Kahler/cotangent modules, not fs log structures or their characteristic monoids; Differential.logDeriv is the logarithmic derivative in a differential ring"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Log\", \"Characteristic\", \"Differential\"",
+   "results": "{\"t\": \"2026-10-22T05:11:01Z\", \"tool\": \"loogle\", \"query\": \"\\\"Log\\\", \\\"Characteristic\\\", \\\"Differential\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the returned signatures concern ordinary scheme smoothness or ordinary Kahler/cotangent modules, not fs log structures or their characteristic monoids; Differential.logDeriv is the logarithmic derivative in a differential ring"
+  },
+  {
+   "tool": "grep",
+   "query": "characteristicMonoid|logarithmic.*differential|[Ll]og[Dd]ifferential",
+   "results": "{\"t\": \"2026-10-22T05:11:00Z\", \"tool\": \"grep\", \"query\": \"characteristicMonoid|logarithmic.*differential|[Ll]og[Dd]ifferential\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"Mathlib/FieldTheory/Differential/Basic.lean\"], \"digest\": \"8d2baca0704d3778\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the returned signatures concern ordinary scheme smoothness or ordinary Kahler/cotangent modules, not fs log structures or their characteristic monoids; Differential.logDeriv is the logarithmic derivative in a differential ring"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Log differential fibre maps surjectively to residue field tensor characteristic group, sending dlog m to the class of m",
+   "results": "{\"t\": \"2026-10-22T05:11:01Z\", \"tool\": \"leansearch\", \"query\": \"Log differential fibre maps surjectively to residue field tensor characteristic group, sending dlog m to the class of m\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"KaehlerDifferential.map_surjective_of_surjective\", \"KaehlerDifferential.tensorProductTo_surjective\", \"KaehlerDifferential.ker_map_of_surjective\", \"Algebra.Presentation.differentials.surjective_hom₁\", \"Differential.logDeriv\", \"Algebra.FormallySmooth.iff_injective_lTensor_residueField\", \"KaehlerDifferential.linearCombination_surjective\", \"CommRingCat.KaehlerDifferential.map\"], \"digest\": \"099df7a2c3f9f4a4\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the returned signatures concern ordinary scheme smoothness or ordinary Kahler/cotangent modules, not fs log structures or their characteristic monoids; Differential.logDeriv is the logarithmic derivative in a differential ring"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The characteristic group of a fine saturated logarithmic scheme is a quotient of its logarithmic cotangent space at a point over a trivial log field",
+   "results": "{\"t\": \"2026-10-22T05:11:13Z\", \"tool\": \"leanfinder\", \"query\": \"The characteristic group of a fine saturated logarithmic scheme is a quotient of its logarithmic cotangent space at a point over a trivial log field\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.H1Cotangent\", \"Algebra.Generators.cotangentCompAwaySec\", \"Algebra.Generators.cotangentCompAwaySec_apply\", \"Algebra.Extension.Cotangent.val\", \"Algebra.Extension.instAddCommGroupCotangent\", \"Algebra.Generators.cMulXSubOneCotangent\", \"Algebra.Extension.toKaehler\", \"KaehlerDifferential.quotientCotangentIdealRingEquiv\"], \"digest\": \"e1f459253d2402e0\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the returned signatures concern ordinary scheme smoothness or ordinary Kahler/cotangent modules, not fs log structures or their characteristic monoids; Differential.logDeriv is the logarithmic derivative in a differential ring"
+  },
+  {
+   "tool": "grep",
+   "query": "characteristicMonoid|logarithmic.*differential|[Ll]og[Dd]ifferential",
+   "results": "{\"t\": \"2026-10-22T05:34:42Z\", \"tool\": \"grep\", \"query\": \"characteristicMonoid|logarithmic.*differential|[Ll]og[Dd]ifferential\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"Mathlib/FieldTheory/Differential/Basic.lean\"], \"digest\": \"8d2baca0704d3778\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: returned signatures concern ordinary Kahler/cotangent modules, scheme residues, or differential-field logarithmic derivatives; none concerns a sheaf of log monoids or its characteristic group"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Log differential fibre maps surjectively to residue field tensor characteristic group, sending dlog m to the class of m",
+   "results": "{\"t\": \"2026-10-22T05:34:42Z\", \"tool\": \"leansearch\", \"query\": \"Log differential fibre maps surjectively to residue field tensor characteristic group, sending dlog m to the class of m\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"KaehlerDifferential.map_surjective_of_surjective\", \"KaehlerDifferential.tensorProductTo_surjective\", \"KaehlerDifferential.ker_map_of_surjective\", \"Algebra.Presentation.differentials.surjective_hom₁\", \"Differential.logDeriv\", \"Algebra.FormallySmooth.iff_injective_lTensor_residueField\", \"KaehlerDifferential.linearCombination_surjective\", \"CommRingCat.KaehlerDifferential.map\"], \"digest\": \"099df7a2c3f9f4a4\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: returned signatures concern ordinary Kahler/cotangent modules, scheme residues, or differential-field logarithmic derivatives; none concerns a sheaf of log monoids or its characteristic group"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"LogDifferential\"",
+   "results": "{\"t\": \"2026-10-22T05:34:42Z\", \"tool\": \"loogle\", \"query\": \"\\\"LogDifferential\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: returned signatures concern ordinary Kahler/cotangent modules, scheme residues, or differential-field logarithmic derivatives; none concerns a sheaf of log monoids or its characteristic group"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The characteristic group of a fine saturated logarithmic scheme is a quotient of its logarithmic cotangent space at a point over a trivial log field",
+   "results": "{\"t\": \"2026-10-22T05:34:43Z\", \"tool\": \"leanfinder\", \"query\": \"The characteristic group of a fine saturated logarithmic scheme is a quotient of its logarithmic cotangent space at a point over a trivial log field\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.H1Cotangent\", \"KaehlerDifferential.quotientCotangentIdeal\", \"Algebra.Extension.H1Cotangent\", \"Algebra.Generators.cotangentCompAwaySec\", \"Algebra.Extension.CotangentSpace\", \"KaehlerDifferential.quotientCotangentIdealRingEquiv\", \"Algebra.SubmersivePresentation.cotangentEquiv_apply\", \"Algebra.SubmersivePresentation.sectionCotangent\"], \"digest\": \"42b035bf6e28c540\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: returned signatures concern ordinary Kahler/cotangent modules, scheme residues, or differential-field logarithmic derivatives; none concerns a sheaf of log monoids or its characteristic group"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Logarithmic differentials at a geometric point surject onto the residue field tensor the group completion of the characteristic monoid over a field with trivial logarithmic structure",
+   "results": "{\"t\": \"2026-10-22T05:34:45Z\", \"tool\": \"leanfinder\", \"query\": \"Logarithmic differentials at a geometric point surject onto the residue field tensor the group completion of the characteristic monoid over a field with trivial logarithmic structure\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.residue_surjective\", \"KaehlerDifferential.tensorProductTo_surjective\", \"KaehlerDifferential.map_surjective\", \"Algebra.SubmersivePresentation.cotangentComplexAux_surjective\", \"Algebra.Extension.Cotangent.mk_surjective\", \"KaehlerDifferential.linearCombination_surjective\", \"KaehlerDifferential.map_surjective_of_surjective\", \"KaehlerDifferential.mapBaseChange_surjective\"], \"digest\": \"d3cdef273323285a\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: returned signatures concern ordinary Kahler/cotangent modules, scheme residues, or differential-field logarithmic derivatives; none concerns a sheaf of log monoids or its characteristic group"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-free-characteristic-relative-nc-criterion",
+  "date": "2026-10-22",
+  "group": "NV"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction: ILO X Lemma 2.2 proof, p.149, the successive modification of a marked nodal curve and the following smooth-pair-over-a-field sentence; the relative smoothness, rather than mere regularity, of the final free-characteristic charts; the characteristic quotient detecting the independence of chart dlog generators in repaired Step 3",
+   "via": [
+    "lem-sfb-free-characteristic-relative-nc-criterion",
+    "lem-sfb-equivariant-nodal-smooth-pair-resolution",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sfb-log-cotangent-characteristic-quotient",
+  "worker": "stage1",
+  "summary": "Verified ILO X map (1), retained the statement without log smoothness, and proved the quotient map in seven steps. The only structural ring input is locality of the geometric stalk and the unit criterion; all log relations, neighbourhood base symbols, scalar extension, surjectivity and uniqueness are checked explicitly. No new nodes are needed. The related lem-per-log-cotangent-characteristic-quotient has a log-smooth hypothesis and cannot supply the present non-smooth assertion.",
+  "blueprint": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction: ILO X Lemma 2.2 proof, p.149, the successive modification of a marked nodal curve and the following smooth-pair-over-a-field sentence; the relative smoothness, rather than mere regularity, of the final free-characteristic charts; the characteristic quotient detecting the independence of chart dlog generators in repaired Step 3 The seven steps supply the characteristic-quotient input in the free-chart dlog-independence argument, without replacing the alteration route. The ancestor command returns None for the inherited chain; its inherited null node and via list are retained.",
+  "tool_uses": [
+   {
+    "node": "lemma-weil-pbc-affine-neighbourhood-cofinal",
+    "why": "Generic affine cofinality for the geometric-stalk colimit in Step 1; it is not a replacement for an alteration or log-geometric step."
+   },
+   {
+    "node": "lem-weil-pbc-strict-henselization-local-structure",
+    "why": "Generic locality of the pointed affine ring colimit in Step 1; the unit has no alternative node establishing locality of this stalk."
+   },
+   {
+    "node": "lem-weil-pbc-local-ring-unit-criterion",
+    "why": "Generic commutative algebra unit test for the residue coefficients in Steps 1 and 4."
+   }
+  ]
+ },
+ "tool_uses": [],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-NN-23a9bd53d",
+  "group": "NN",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NN-23a9bd53d (reviewer sub-agent of L); spot-checked: I read ILO X Prop 1.2 proof, pp.136-137 (PDF 142-143): map (1) k(x)⊗Ω→k(x)⊗M^gp_{X/Y,x} with 1⊗dlog t↦1⊗t, which the source calls surjective. Over the trivial log field the base log sections are units, so the target is (M_x/A^×)^gp. The relation checks do not use log smoothness, so the statement without that hypothesis is correct, not weakened, and gives the citer's Step 3 what it uses. Base and live statements are identical and the item is unsplit in live and side-live. Neither the item, its citer, nor any of its 15 deps is in route-pivot-dropped.txt, and the dropped lem-per sibling (l.1697) is not cited. There is no repair note, no new node and no duplicate: def-per-log-cotangent-comparison is a different construction. Step checks: (1) all-neighbourhood colimit → affine cofinal → representative category J → strictly henselian local ring, then Tag 00E9 shows ρ kills nonunits. (2) h_0 is defined on the free module of def-per-log-differential-stalk, with c from the M/A^× and P^gp presentation of def-trf-fs-log-blowup. (3) Additivity, Leibniz and dlog(mm') relations map to 0. (4) dα(m)−α(m)dlog m maps to 0: a nonunit α(m) has residue 0, and a unit α(m) gives c(m)=0 through α^{-1}(O^×)≅O^×. (5) In the explicit neighbourhood base relations, N(W)=Γ(W,O)^×, and log-morphism compatibility gives α(f^♭b)=k^♯b, a unit, so the class is 0. (6) Descent through the quotient, A-balanced pairing, tensor universal property, k-linearity. (7) C is spanned by the c(m), giving explicit preimages; the generators 1⊗da and 1⊗dlog m give uniqueness. Tested on: trivial log structure (π=0), standard log point N^r (identity on k^r), a coordinate that is a unit at one point and a nonunit at another. Accepted tool uses, all generic stalk/commutative-algebra facts that replace no alteration-route step: lemma-weil-pbc-affine-neighbourhood-cofinal, lem-weil-pbc-strict-henselization-local-structure, lem-weil-pbc-local-ring-unit-criterion. No changes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.LogCotangentCharacteristicQuotientTrivialBase",
+  "declaration": "AlgebraicGeometry.EtaleLogHom.existsUnique_logCotangent_characteristicQuotient_of_trivialBase",
+  "file": "lean/Sheaf/AlgebraicGeometry/LogCotangentCharacteristicQuotientTrivialBase.lean",
+  "statement": "theorem existsUnique_logCotangent_characteristicQuotient_of_trivialBase {F : Type u} [Field F] (X : FineSaturatedLogScheme.{u}) (N : EtaleLogStructure (Spec (.of F))) (hN : N.IsFineSaturated) (f : EtaleLogHom X ⟨Spec (.of F), inferInstance, N, hN⟩) (htriv : N.trivialityLocus = Set.univ) {Ω : Type u} [Field Ω] [IsAlgClosed Ω] (t : Spec (.of Ω) ⟶ X.scheme) : ∃! π : LogCotangentTarget f t →ₗ[logCotangentResidue t] TensorProduct ℤ (logCotangentResidue t) (Additive (Algebra.GrothendieckGroup (X.logStructure.characteristic t))), Function.Surjective π ∧ (∀ m : X.logStructure.stalk t, π (TensorProduct.tmul (strictLocalRing X.scheme t) 1 (f.logDLog t m)) = TensorProduct.tmul ℤ 1 (Additive.ofMul (Algebra.GrothendieckGroup.of (Associates.mk m)))) ∧ ∀ a : strictLocalRing X.scheme t, π (TensorProduct.tmul (strictLocalRing X.scheme t) 1 (f.logD t a)) = 0",
+  "branch": "newtargets-dag",
+  "by": "Q35",
+  "date": "2026-10-22",
+  "existing": false,
+  "note": "Uses the landed LogCotangentTarget and logCotangentResidue from def-per-log-cotangent-comparison, added as an existing statement dependency. The base log structure is presented by N with N.trivialityLocus = Set.univ, which identifies it canonically with ring units by the log unit condition. The proof of local Noetherianity of Spec F is synthesized, not imposed as an extra hypothesis. Unique existence expresses canonicity of the surjection with both prescribed symbol formulas; log smoothness is not assumed."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-68bf13592",
+  "group": "Q35",
+  "result": "fix",
+  "note": "Statement matches node and ILO X Prop 1.2 pp.136-137 map (1) clause by clause: trivial base log structure as trivialityLocus=univ (equivalent to O^x via log unit axiom, hN harmless), k=strictLocalRing/(nonunits)=A/m_A, C=GrothendieckGroup(Associates stalk), source LogCotangentTarget=k⊗_A LogDifferential, ∃! surjective k-linear π with both symbol formulas for all m, a; uniqueness valid since symbols generate LogDifferential; existence checked against every relation incl. base log sections (units via compatibility+reflectsUnits); no log smoothness or extra hypotheses. Item differs from base only in lean and stmt_deps (+ landed reviewed def-per-log-cotangent-comparison, allowed); nothing dropped; statement verbatim; check_lean_text/check_record clean; docstrings carry source, blueprint id, 7 steps. FIX (H9): dropped 4 unused plain imports (WeilConjectures StrictHenselization, StrictHenselizationCompatibility, Sites.StrictHenselization, Mathlib LocalRing.MaximalIdeal.Basic), none in the public import closure; fixes/LogCotangentCharacteristicQuotientTrivialBase.lean + lean-record.json pinning verbatim statement; nt_compile --json clean 4.4 s. Advisory: second reading was a self re-read; three redundant public imports kept."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G4",
+  "result": "pass",
+  "landing": "20261023T123535-L-1207566",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

@@ -1,0 +1,404 @@
+{
+ "id": "lem-sfb-space-schemehood-local-ring-test",
+ "kind": "statement",
+ "title": "Schemehood of a qcqs space can be tested over local rings at image points",
+ "statement": "Let $S$ be a scheme [def-pc-scheme], let $T$ be an $S$-scheme and $X$ an algebraic space over $S$ [def-trf-algebraic-space], in the universes [def-weil-size-convention]. Use the point topology [def-a1-space-point-topology] and sheaf fibre products [lem-trf-space-fibre-products-etale-covers]. Let $g:X\\to h_T$ be quasi-compact and quasi-separated: for every affine $S$-scheme $V\\to h_T$ the point space of $X\\times_{h_T}h_V$ is quasi-compact, and the relative diagonal $X\\to X\\times_{h_T}X$ is quasi-compact in the same sense. For $t\\in T$, let $\\mathcal O_{T,t}$ be the stalk of the structure sheaf at $t$, with its canonical scheme map $\\operatorname{Spec}\\mathcal O_{T,t}\\to T$; spectra are [def-weil-affine-spectrum]. If for every $x\\in|X|$, with image $t=g(x)$, the space $X\\times_{h_T}h_{\\operatorname{Spec}\\mathcal O_{T,t}}$ is represented by an $S$-scheme, then $X$ is represented by an $S$-scheme.",
+ "source": {
+  "document": "literature/stacks-project/spaces-limits.tex",
+  "place": "Tag 0B80 (lemma-enough-local)."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-trf-algebraic-space",
+  "def-weil-size-convention",
+  "lem-trf-space-fibre-products-etale-covers",
+  "def-a1-space-point-topology",
+  "def-weil-affine-spectrum",
+  "def-sfb-proper-curve-moduli"
+ ],
+ "proof": [
+  {
+   "text": "First reconcile the quasi-compactness conventions in the cited tools. Point-space quasi-compactness is equivalent to a quasi-compact scheme atlas. If $a:E\\to F$ satisfies the affine-test condition and $C\\to F$ is a quasi-compact algebraic space, choose a surjective etale affine scheme atlas $P\\to C$. Then $E\\times_FP$ is quasi-compact by the affine test. Its map to $E\\times_FC$ is surjective etale by pullback of the covering $P\\to C$. The etale-image lemma makes its whole target point space quasi-compact, and the atlas criterion applies again. Conversely testing all quasi-compact spaces includes testing affine schemes. Thus the item and the cited tools use equivalent quasi-compactness predicates, also for diagonals.",
+   "uses": [
+    "lem-a1-space-etale-open-image",
+    "lem-sfb-qc-space-affine-etale-atlas",
+    "lem-trf-space-fibre-products-etale-covers"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-properties.tex",
+    "place": "Tags 03E4 (lemma-quasi-compact-space), 03H6 (lemma-quasi-compact-affine-cover); comparison of the conventions in the proof of 0B80."
+   }
+  },
+  {
+   "text": "Fix $x\\in|X|$ and put $t=g(x)$. Let $N_t$ be the directed set of affine open neighbourhoods $W$ of $t$, ordered by reverse inclusion. The local-ring limit lemma gives nonemptiness, directedness, affine transition inclusions and the compatible limit $L=\\operatorname{Spec}\\mathcal O_{T,t}=\\varprojlim_{W\\in N_t}W$ over $T$. Put $X_W=X\\times_{h_T}h_W$, an algebraic space. Each $X_W$ is quasi-compact by the hypothesis on $g$. Quasi-separatedness of $g$ survives base change, so $X_W\\to W$ is quasi-separated. The affine scheme $W$ is absolutely quasi-separated; the quasi-separated-source theorem therefore makes $X_W$ absolutely quasi-separated as well. Here absolute properties forget the structural map to $S$, and step 1 reconciles the atlas and affine-test conventions.",
+   "uses": [
+    "lem-weil-pbc-local-ring-spec-limit-affine-neighbourhoods",
+    "lem-trf-space-fibre-products-etale-covers",
+    "lem-sfb-space-quasiseparated-test-calculus",
+    "lem-weil-pbc-affine-scheme-qcqs",
+    "lem-sfb-space-qcqs-source-products"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-limits.tex",
+    "place": "Tag 0B80 (lemma-enough-local), proof."
+   }
+  },
+  {
+   "text": "For $W\\subseteq V$ in $N_t$, the transition $X_W\\to X_V$ is the pullback of the affine inclusion $W\\to V$, hence affine. The sheaf limit is $X_L:=X\\times_{h_T}h_L$. Indeed, on a test $S$-scheme $A$, a compatible family of sections of $X_W$ is a single $a\\in X(A)$ and compatible maps $b_W:A\\to W$ with $g(a)=j_Wb_W$; the transition maps preserve $a$, and directedness makes all these $a$ equal. The local-ring limit property gives a unique $b:A\\to L$ with these projections. Composing through any $W$ gives $g(a)=j_Lb$. Conversely $(a,b)$ gives exactly this family. These inverse bijections are natural in $A$, proving the asserted sheaf-limit identification.",
+   "uses": [
+    "lem-sfb-space-affine-locality",
+    "lem-weil-pbc-local-ring-spec-limit-affine-neighbourhoods"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-limits.tex",
+    "place": "Tag 0B80 (lemma-enough-local), proof."
+   }
+  },
+  {
+   "text": "By the hypothesis at the chosen point $x$, $X_L$ is represented by an $S$-scheme. Apply the schematic-stage clause of the affine inverse-limit theorem to $(X_W)_{W\\in N_t}$. The indexing set is small in the prescribed universes, nonempty and directed; every stage is quasi-compact and quasi-separated by step 2, every transition is affine by step 3, and its sheaf limit is $X_L$. It follows that $X_W$ is represented by a scheme for some affine open neighbourhood $W$ of $t$.",
+   "uses": [
+    "lem-sfb-space-affine-limits-schematic-stages"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-limits.tex",
+    "place": "Tag 0B80 (lemma-enough-local), proof."
+   }
+  },
+  {
+   "text": "The pullback $X_W\\to X$ of the open immersion $W\\to T$ is an open subspace with point set $|g|^{-1}(|W|)$, so it contains $x$. The largest schematic open $X_{\\mathrm{sch}}\\subseteq X$ contains this $X_W$. Repeating for every $x\\in|X|$ gives $|X_{\\mathrm{sch}}|=|X|$. The bijection between open subspaces and open subsets identifies $X_{\\mathrm{sch}}$ with $X$. Since $X_{\\mathrm{sch}}$ is represented by an $S$-scheme, so is $X$. This also handles $|X|=\\varnothing$: the largest schematic open has the same empty point set, hence equals $X$.",
+   "uses": [
+    "lem-a1-space-open-factor-scheme-tests",
+    "lem-sfb-space-largest-schematic-open",
+    "lem-a1-space-etale-open-image"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-limits.tex",
+    "place": "Tag 0B80 (lemma-enough-local), proof."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-a1-space-etale-open-image",
+  "lem-sfb-qc-space-affine-etale-atlas",
+  "lem-trf-space-fibre-products-etale-covers",
+  "lem-weil-pbc-local-ring-spec-limit-affine-neighbourhoods",
+  "lem-sfb-space-quasiseparated-test-calculus",
+  "lem-weil-pbc-affine-scheme-qcqs",
+  "lem-sfb-space-qcqs-source-products",
+  "lem-sfb-space-affine-locality",
+  "lem-sfb-space-affine-limits-schematic-stages",
+  "lem-a1-space-open-factor-scheme-tests",
+  "lem-sfb-space-largest-schematic-open"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/spaces-limits.tex",
+  "place": "Tag 0B80 (lemma-enough-local), proof."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "AlgebraicSpace|enough_local|isScheme|is_scheme",
+   "results": {
+    "hits": [
+     "Mathlib/AlgebraicGeometry/Geometrically/Reduced.lean",
+     "Mathlib/AlgebraicGeometry/Geometrically/Reduced.lean",
+     "Mathlib/AlgebraicGeometry/Geometrically/Reduced.lean",
+     "Mathlib/AlgebraicGeometry/Morphisms/SchemeTheoreticallyDominant.lean",
+     "Mathlib/AlgebraicGeometry/Morphisms/SchemeTheoreticallyDominant.lean",
+     "Mathlib/AlgebraicGeometry/Morphisms/SchemeTheoreticallyDominant.lean",
+     "Mathlib/AlgebraicGeometry/Morphisms/SchemeTheoreticallyDominant.lean",
+     "Mathlib/AlgebraicGeometry/Morphisms/SchemeTheoreticallyDominant.lean"
+    ],
+    "n_hits": 8,
+    "note": "",
+    "subdirectory": "AlgebraicGeometry",
+    "digest": "3de25b3c85f46b5b"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: results concern qcqs morphisms already between schemes; none tests representability of an algebraic space over local rings. Read scheme QuasiSeparated and QuasiCompact candidates; the source category is Scheme, not algebraic spaces."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Schemehood of a quasi compact quasi separated algebraic space can be tested over local rings of its scheme base",
+   "results": {
+    "hits": [
+     "AlgebraicGeometry.quasiSeparatedSpace_iff_affine",
+     "AlgebraicGeometry.Scheme.mk.noConfusion",
+     "AlgebraicGeometry.Scheme.instQuasiSeparatedSpaceCarrierCarrierCommRingCatOfIsSeparated",
+     "AlgebraicGeometry.quasiSeparatedSpace_iff_forall_affineOpens",
+     "AlgebraicGeometry.quasiSeparatedSpace_iff_quasiSeparated",
+     "AlgebraicGeometry.quasiSeparatedSpace_iff_quasiCompact_prod_lift",
+     "AlgebraicGeometry.instQuasiCompactLiftSchemeIdOfQuasiSeparatedSpaceCarrierCarrierCommRingCat",
+     "AlgebraicGeometry.IsSeparated.instQuasiSeparated"
+    ],
+    "n_hits": 8,
+    "note": "",
+    "subdirectory": "",
+    "digest": "7c4f3ddeae216fe0"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: results concern qcqs morphisms already between schemes; none tests representability of an algebraic space over local rings. Read scheme QuasiSeparated and QuasiCompact candidates; the source category is Scheme, not algebraic spaces."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An algebraic space quasi compact and quasi separated over a scheme is a scheme if its pullback to the local ring at the image of each point is a scheme",
+   "results": {
+    "hits": [
+     "AlgebraicGeometry.instQuasiCompactLiftSchemeIdOfQuasiSeparatedSpaceCarrierCarrierCommRingCat",
+     "AlgebraicGeometry.QuasiCompact",
+     "AlgebraicGeometry.quasiCompact_of_compactSpace",
+     "AlgebraicGeometry.quasiCompact_affineProperty_iff_quasiSeparatedSpace",
+     "AlgebraicGeometry.QuasiSeparated.of_quasiSeparatedSpace",
+     "AlgebraicGeometry.quasiCompact_over_affine_iff",
+     "AlgebraicGeometry.quasiSeparated_iff",
+     "AlgebraicGeometry.quasiSeparatedSpace_iff_quasiCompact_prod_lift"
+    ],
+    "n_hits": 8,
+    "note": "",
+    "subdirectory": "",
+    "digest": "d6ee1cf7b93d4e5f"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: results concern qcqs morphisms already between schemes; none tests representability of an algebraic space over local rings. Read scheme QuasiSeparated and QuasiCompact candidates; the source category is Scheme, not algebraic spaces."
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.IsAffine, AlgebraicGeometry.QuasiCompact",
+   "results": {
+    "hits": [
+     "AlgebraicGeometry.instHasAffinePropertyQuasiCompactCompactSpaceCarrierCarrierCommRingCat"
+    ],
+    "n_hits": 1,
+    "note": "",
+    "subdirectory": "",
+    "digest": "8716ad3b845c396f"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: results concern qcqs morphisms already between schemes; none tests representability of an algebraic space over local rings. Read scheme QuasiSeparated and QuasiCompact candidates; the source category is Scheme, not algebraic spaces."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A quasi compact quasi separated algebraic space is a scheme if it is a scheme after localization of the base at every image point",
+   "results": {
+    "hits": [
+     "AlgebraicGeometry.quasiCompact_over_affine_iff",
+     "AlgebraicGeometry.instHasAffinePropertyQuasiSeparatedQuasiSeparatedSpaceCarrierCarrierCommRingCat",
+     "AlgebraicGeometry.instHasAffinePropertyQuasiCompactCompactSpaceCarrierCarrierCommRingCat",
+     "AlgebraicGeometry.quasiCompact_of_compactSpace",
+     "AlgebraicGeometry.Scheme.Hom.instQuasiCompactToNormalization",
+     "AlgebraicGeometry.quasiCompact_affineProperty_iff_quasiSeparatedSpace",
+     "AlgebraicGeometry.quasiCompact_iff_compactSpace",
+     "AlgebraicGeometry.Scheme.Hom.instQuasiSeparatedToNormalization"
+    ],
+    "n_hits": 8,
+    "note": "",
+    "subdirectory": "",
+    "digest": "4a52eb26825d7870"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: results concern qcqs morphisms already between schemes; none tests representability of an algebraic space over local rings. Read scheme QuasiSeparated and QuasiCompact candidates; the source category is Scheme, not algebraic spaces."
+  },
+  {
+   "tool": "grep",
+   "query": "AlgebraicSpace|enough_local|schemehood",
+   "results": {
+    "hits": [],
+    "n_hits": 0,
+    "note": "",
+    "subdirectory": "AlgebraicGeometry",
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: candidates concern morphisms whose source is already a scheme or general Zariski local representability. None deduces schemehood of a qcqs algebraic space from local-ring pullbacks. Read the scheme-only QuasiSeparated definitions; LocalRepresentability.isRepresentable does not supply the local-ring-to-open-neighbourhood step."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Schemehood of a quasi compact quasi separated algebraic space can be checked over local rings of the base scheme",
+   "results": {
+    "hits": [
+     "AlgebraicGeometry.quasiSeparatedSpace_iff_quasiCompact_prod_lift",
+     "AlgebraicGeometry.quasiSeparatedSpace_iff_affine",
+     "AlgebraicGeometry.Scheme.mk.noConfusion",
+     "AlgebraicGeometry.quasiSeparatedSpace_iff_quasiSeparated",
+     "AlgebraicGeometry.Scheme.instQuasiSeparatedSpaceCarrierCarrierCommRingCatOfIsSeparated",
+     "AlgebraicGeometry.instQuasiCompactLiftSchemeIdOfQuasiSeparatedSpaceCarrierCarrierCommRingCat",
+     "AlgebraicGeometry.quasiSeparatedSpace_iff_forall_affineOpens",
+     "AlgebraicGeometry.quasiSeparated_iff_quasiSeparatedSpace"
+    ],
+    "n_hits": 8,
+    "note": "",
+    "subdirectory": "",
+    "digest": "3d470bcb879e96c0"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: candidates concern morphisms whose source is already a scheme or general Zariski local representability. None deduces schemehood of a qcqs algebraic space from local-ring pullbacks. Read the scheme-only QuasiSeparated definitions; LocalRepresentability.isRepresentable does not supply the local-ring-to-open-neighbourhood step."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicSpace\", \"IsScheme\"",
+   "results": {
+    "hits": [],
+    "n_hits": 0,
+    "note": "",
+    "subdirectory": "",
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: candidates concern morphisms whose source is already a scheme or general Zariski local representability. None deduces schemehood of a qcqs algebraic space from local-ring pullbacks. Read the scheme-only QuasiSeparated definitions; LocalRepresentability.isRepresentable does not supply the local-ring-to-open-neighbourhood step."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Representability by schemes descends from all localizations of the scheme base for a quasi compact quasi separated algebraic space",
+   "results": {
+    "hits": [
+     "AlgebraicGeometry.Scheme.LocalRepresentability.representableBy",
+     "AlgebraicGeometry.Scheme.LocalRepresentability.isRepresentable",
+     "AlgebraicGeometry.IsLocalAtTarget.descendsAlong_inf_quasiCompact",
+     "AlgebraicGeometry.IsZariskiLocalAtTarget.descendsAlong_inf_quasiCompact",
+     "AlgebraicGeometry.descendsAlong_isOpenImmersion_surjective_inf_flat_inf_quasicompact'",
+     "AlgebraicGeometry.descendsAlong_isomorphisms_surjective_inf_flat_inf_quasicompact",
+     "AlgebraicGeometry.instDescendsAlongSchemeMinMorphismPropertySurjectiveFlatLocallyOfFinitePresentationOfQuasiCompactOfIsZariskiLocalAtTarget",
+     "AlgebraicGeometry.descendsAlong_universallyOpen_surjective_inf_flat_inf_quasicompact"
+    ],
+    "n_hits": 8,
+    "note": "",
+    "subdirectory": "",
+    "digest": "92632cf5a6b049c9"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: candidates concern morphisms whose source is already a scheme or general Zariski local representability. None deduces schemehood of a qcqs algebraic space from local-ring pullbacks. Read the scheme-only QuasiSeparated definitions; LocalRepresentability.isRepresentable does not supply the local-ring-to-open-neighbourhood step."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A quasi compact quasi separated algebraic space is a scheme if its pullback over the local ring at the image of every point is a scheme",
+   "results": {
+    "hits": [
+     "AlgebraicGeometry.instHasOfPostcompPropertySchemeQuasiCompactQuasiSeparated",
+     "AlgebraicGeometry.instQuasiCompactLiftSchemeIdOfQuasiSeparatedSpaceCarrierCarrierCommRingCat",
+     "AlgebraicGeometry.QuasiCompact",
+     "AlgebraicGeometry.quasiCompact_affineProperty_iff_quasiSeparatedSpace",
+     "AlgebraicGeometry.quasiCompact_over_affine_iff",
+     "AlgebraicGeometry.quasiCompact_of_compactSpace",
+     "AlgebraicGeometry.quasiSeparated_iff",
+     "AlgebraicGeometry.Scheme.instQuasiSeparatedSpaceCarrierCarrierCommRingCatOfIsSeparated"
+    ],
+    "n_hits": 8,
+    "note": "",
+    "subdirectory": "",
+    "digest": "effa90ae5594924d"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: candidates concern morphisms whose source is already a scheme or general Zariski local representability. None deduces schemehood of a qcqs algebraic space from local-ring pullbacks. Read the scheme-only QuasiSeparated definitions; LocalRepresentability.isRepresentable does not supply the local-ring-to-open-neighbourhood step."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-space-flat-monomorphism-representable",
+  "date": "2026-10-24",
+  "group": "Q120"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "Supporting subargument for proper-support Grothendieck existence in Stacks Tag 08BE, serving the inherited compactification/direct-image prerequisite chain of sk-thm-sf-ctf-stability; the Chow modification in the third paragraph. Construction input: Tag 088S proof, apply 088R to the chosen open immersion into projective space; affine-base projectivity is handled separately. Supporting Tag 088Q (lemma-find-common-blowups); U-admissible centres as defined in spaces-divisors.tex Tag 086B (definition-admissible-blowup).. Supporting Tag 088Q proof, choice of the two blowups whose strict transforms are open subspaces. Precise input to the Tag 087F proof: Tag 0879 (lemma-zariski), statement, hypotheses (1)--(3). Supporting input for Tag 0879: Tag 0B8A (lemma-flat-case), David Rydh. Supporting Tag 0B8A proof: Tag 0B80 (lemma-enough-local).",
+   "via": [
+    "lem-sfb-space-flat-monomorphism-representable",
+    "lem-sfb-space-flat-isomorphism-dense-open",
+    "lem-sfb-space-zariski-after-admissible-blowup",
+    "lem-sfb-space-common-admissible-blowups",
+    "lem-sfb-space-blowup-embedding-extension",
+    "lem-sfb-space-chow-dense-modification",
+    "lem-sfb-space-supported-adic-existence",
+    "lem-sfb-space-coherent-formal-effectivity",
+    "lem-sfb-space-coherent-stack-general",
+    "lem-sfb-space-quot-representability",
+    "lem-sfb-space-hilbert-representability",
+    "lem-sfb-space-hom-representability",
+    "lem-sfb-curve-descent-isom-spaces",
+    "lem-sfb-nodal-curve-stack-smooth",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-space-schemehood-local-ring-test",
+  "worker": "stage1",
+  "summary": "Split Stacks 0B80 along its affine-neighbourhood inverse-limit proof, reusing existing local-ring limit, algebraic-space affine-limit and largest schematic-open nodes. Wrote the sheaf-limit comparison explicitly and reconciled the point-space/atlas quasi-compactness conventions. No statement change, no new nodes, no Mathlib match.",
+  "blueprint": "Supports the inherited compactification/direct-image prerequisite branch recorded in blueprint.from.place. Read the latest sk-thm-sf-ctf-stability unit and sk-thm-sf-ctf-stability-direct-images.proof.md, clause (3). This is the inherited Tag 0B80 input to the Tag 0B8A/0879 blowup chain, not a replacement for any unit-level argument. blueprint_refs.py ancestor returns None; inherited provenance retained.",
+  "tool_uses": [
+   {
+    "node": "lem-a1-space-etale-open-image",
+    "why": "Generic atlas/topology quasi-compactness criterion and open-subspace/point-open correspondence; no same-unit replacement supplies these foundational statements."
+   },
+   {
+    "node": "lem-trf-space-fibre-products-etale-covers",
+    "why": "Generic existence of sheaf fibre products and base change of etale covers."
+   },
+   {
+    "node": "lem-weil-pbc-local-ring-spec-limit-affine-neighbourhoods",
+    "why": "Generic local-ring affine-neighbourhood limit, used exactly as in Stacks 0B80; no same-unit node supplies this scheme-limit construction."
+   },
+   {
+    "node": "lem-a1-space-open-factor-scheme-tests",
+    "why": "Generic pullback of open subspaces and its point preimage, needed to show each obtained scheme neighbourhood contains the chosen point."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-a1-space-etale-open-image",
+  "lem-trf-space-fibre-products-etale-covers",
+  "lem-weil-pbc-local-ring-spec-limit-affine-neighbourhoods",
+  "lem-a1-space-open-factor-scheme-tests"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q127-941d11e43",
+  "group": "Q127",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q127-941d11e43 (reviewer sub-agent of L); spot-checked: I read the item and every cited statement in full. The item is unchanged and matches Stacks spaces-limits.tex Tag 0B80 (lemma-enough-local) hypothesis by hypothesis; the qcqs condition is written with affine tests. The proof follows 0B80 together with 07SR (Situation 084R). Step 1 (elementary) shows the point-space affine-test form of quasi-compactness is equivalent to the qc-space-test form, via the last clause of a1-space-etale-open-image, the qc-space-affine-etale-atlas node and base change of étale covers. Step 2: for each affine neighbourhood W, X_W is quasi-compact by the hypothesis on g; X_W -> W is quasi-separated by the base-change clause of quasiseparated-test-calculus; X_W is absolutely quasi-separated by the first clause of qcqs-source-products, which matches the Spec Z convention of the sibling nodes, and absolute implies quasi-separated over S anyway. Step 3: the transitions are affine by base change of W->V (affine-locality). The sheaf-limit identification X_L = lim X_W is written out correctly on S-scheme tests, using clause (3) of local-ring-spec-limit-affine-neighbourhoods. Step 4: every hypothesis of affine-limits-schematic-stages is checked (small directed nonempty index, qcqs stages, affine transitions, scheme limit). Step 5: the J_G clause of a1-open-factor-scheme-tests makes X_W an open subspace containing x; largest-schematic-open and the open-subspace bijection then give X_sch = X, including when X is empty. No new nodes, no cycle (DFS over the 10812-node closure), and proof_deps equals the union of the steps' uses. The off-unit generic tool_uses are accepted. Batch-5: all 8 flagged citations reach sec-trace-formula only through the general definition def-trf-algebraic-space, so none is a step of the proof of the trace formula or of Poincaré duality. Advisory: the same-unit lem-sfb-space-quasicompact-affine-tests could also have been cited in step 1. No SGA is cited. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SpaceSchemehoodLocalRingTest",
+  "declaration": "AlgebraicGeometry.AlgebraicSpace.isScheme_of_local_ring_tests",
+  "file": "lean/Sheaf/AlgebraicGeometry/SpaceSchemehoodLocalRingTest.lean",
+  "statement": "theorem isScheme_of_local_ring_tests {S : Scheme.{u}} (T : Over S) (X : AlgebraicSpace S) (g : X.obj.obj ⟶ yoneda.obj T) (hqc : MapIsQuasiCompact g) (hqs : MapIsQuasiCompact (pullback.diagonal g)) (hlocal : ∀ (x : Point X.obj.obj) (t : T.left), mapPoint g x = schemePointMap (𝟙 (yoneda.obj T)) t → ∃ U : Over S, Nonempty (Limits.pullback g (yoneda.map (Over.homMk (U := Over.mk (T.left.fromSpecStalk t ≫ T.hom)) (V := T) (T.left.fromSpecStalk t) rfl)) ≅ yoneda.obj U)) : ∃ U : Over S, Nonempty (X.obj.obj ≅ yoneda.obj U)",
+  "branch": "sheaf-dag",
+  "by": "Q56",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "Uses the existing MapIsQuasiCompact and mapPoint from the landed def-sfb-proper-curve-moduli node, added to stmt_deps. The point-image equation identifies an ordinary base point with g(x); the pullback uses the canonical Scheme.fromSpecStalk map."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-25fd3eee0",
+  "group": "Q56",
+  "result": "pass",
+  "note": "Statement matches node and Stacks 0B80 clause by clause: T:Over S, X:AlgebraicSpace S, g to yoneda T; hqc = MapIsQuasiCompact g (affine tests, pointTopologicalSpace); hqs = MapIsQuasiCompact (pullback.diagonal g), the relative diagonal; tests only at image points via mapPoint g x = schemePointMap (𝟙) t; Spec O_{T,t} map is Mathlib fromSpecStalk with composite structure map; local and final representability unrestricted ∃ U : Over S. No extra assumptions; single universe u; edge cases (empty X/T, non-surjective g, non-closed points) covered. lean.statement verbatim in file; def-sfb-proper-curve-moduli (landed owner of mapPoint/MapIsQuasiCompact) added to stmt_deps; proof-only imports exist live; sorry-only, no definitions; source/blueprint docstrings and 5-step proof present; Worker report and Second reading sections present. Advisory: hqs inlines the body of existing MapIsQuasiSeparated (def-sfb-stack-qcqs-morphism), definitionally equal; node spells it out itself and a stage-2 fix cannot add stmt_deps, so note only. Not recompiled (no file changed)."
+ }
+}

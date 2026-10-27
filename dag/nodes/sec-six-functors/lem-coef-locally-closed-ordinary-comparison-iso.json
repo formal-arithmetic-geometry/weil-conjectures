@@ -1,0 +1,119 @@
+{
+ "id": "lem-coef-locally-closed-ordinary-comparison-iso",
+ "kind": "statement",
+ "title": "Ordinary coefficient comparison through a locally closed immersion",
+ "statement": "Over the finite-field datum, for a quasi-compact finite-type X over its separably closed field, a closed immersion g:Z to X, an open immersion j:S to Z, positive coefficient levels m<=n and a bounded constructible finite-Tor Q on S, the published ordinaryComparison from scalar extension of Rg_*Rj_* Q to Rg_*Rj_* of scalar extension Q is invertible.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-tower/thm-coef-finite-hom.proof.md",
+  "place": "Proof paragraph 4, Ordinary coefficient comparison through a locally closed immersion"
+ },
+ "stmt_deps": [
+  "def-coef-internal-adjunction-comparison-maps"
+ ],
+ "proof": [
+  {
+   "text": "X is Noetherian and quasi-compact, as is its closed subscheme Z. The open S is Noetherian, hence the open immersion j is quasi-compact. Thus j followed by g is separated and finite type, and S is quasi-compact finite type over the field. The target coefficient ring is finite, hence a finite module for the reduction algebra. Apply finiteCoefficientDirectImageMap_isIso to Q and the composite. Use finiteCoefficientDirectImageMap_comp to identify the factorization up to the two canonical compositors. Both compositors are isomorphisms, so cancel them to obtain invertibility of ordinaryComparison.",
+   "uses": [
+    "lem-coef-finite-direct-image",
+    "def-coef-internal-adjunction-comparison-maps",
+    "lem-weil-pbc-noetherian-scheme-closed-subsets-minimal",
+    "lem-sfb-noetherian-space-compact-subsets"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-coef-finite-direct-image",
+  "def-coef-internal-adjunction-comparison-maps",
+  "lem-weil-pbc-noetherian-scheme-closed-subsets-minimal",
+  "lem-sfb-noetherian-space-compact-subsets"
+ ],
+ "proof_origin": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-tower/thm-coef-finite-hom.proof.md",
+  "place": "Proof paragraph 4, Ordinary coefficient comparison through a locally closed immersion",
+  "by": "agent"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Functor maps preserve inverse cancellation of an invertible morphism in a composite pairing equation",
+   "results": "Functor.map_inv_hom_assoc and seven other generic cancellation results; none identifies the specified geometric word.",
+   "date": "2026-10-25",
+   "verdict": "partial match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"inv_comp_eq\"",
+   "results": "Five hits including CategoryTheory.IsIso.inv_comp_eq; generic categorical cancellation only.",
+   "date": "2026-10-25",
+   "verdict": "partial match"
+  },
+  {
+   "tool": "grep",
+   "query": "finiteCoefficientDirectImageMap_comp|PairingChangeEquation",
+   "results": "0 Mathlib hits. Local direct-image composition theorem gives the required factorization, not its locally closed finite-stage specialization.",
+   "date": "2026-10-25",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.LocallyClosedHomGenerator",
+  "date": "2026-10-25",
+  "group": "W3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-coef-finite-hom",
+   "place": "Proof paragraph 4, Ordinary coefficient comparison through a locally closed immersion",
+   "via": [
+    "lem-coef-locally-closed-hom-generator"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "merged_into": null,
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.LocallyClosedOrdinaryComparisonIso",
+  "file": "lean/Sheaf/Paper/LocallyClosedOrdinaryComparisonIso.lean",
+  "declaration": "AlgebraicGeometry.Etale.locallyClosedOrdinaryComparison_isIso",
+  "statement": "theorem locallyClosedOrdinaryComparison_isIso\n    (D : WeilConjectures.FiniteFieldDatum.{u}) (l : ℕ) [Fact l.Prime] (_hl : l ≠ D.p)\n    (E : Type u) [Field E] [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]\n    (n m : ℕ+) (hmn : m ≤ n) {X : Scheme.{u}}\n    [X.Over (Spec (CommRingCat.of D.k))]\n    [LocallyOfFiniteType (X ↘ Spec (CommRingCat.of D.k))]\n    [QuasiCompact (X ↘ Spec (CommRingCat.of D.k))]\n    {S Z : Scheme.{u}} (g : Z ⟶ X) [IsClosedImmersion g]\n    (j : S ⟶ Z) [IsOpenImmersion j]\n    (Q : DerivedCategoryModule (coefficient l E n) S)\n    (hQ : WeilConjectures.finiteTorConstructibleEtale l E n n.property S Q) :\n    IsIso (ordinaryComparison (reduction l E n m hmn) g j Q)",
+  "branch": "sheaf-dag",
+  "by": "W3",
+  "date": "2026-10-25"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "mathlib": {
+   "state": "none"
+  }
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "W3",
+  "result": "pass",
+  "landing": "20261025T203559-L-2830098",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "W3",
+  "result": "pass",
+  "landing": "20261025T203559-L-2830098",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

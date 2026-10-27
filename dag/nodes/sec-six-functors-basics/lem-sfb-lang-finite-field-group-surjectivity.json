@@ -1,0 +1,316 @@
+{
+ "id": "lem-sfb-lang-finite-field-group-surjectivity",
+ "kind": "statement",
+ "title": "Lang surjectivity for connected affine groups over a finite field",
+ "statement": "Let $k$ be a finite field [def-weil-field, def-weil-finite-field-q-elements], put $q=|k|$, and let $\\bar k$ be an algebraic closure [def-weil-algebraic-closure]. Let $G$ be an affine $k$-group scheme [def-sc-group-scheme] of finite type [def-weil-finite-type-morphism], smooth [def-sbc-smooth-morphisms] and connected [def-weil-connected-scheme]. Write $C=\\Gamma(G,\\mathcal O_G)$ and identify $G(\\bar k)$ with the $k$-algebra homomorphisms $C\\to\\bar k$. Let $\\sigma:G(\\bar k)\\to G(\\bar k)$ send $x$ to $(c\\mapsto x(c)^q)$, the action of arithmetic Frobenius [def-weil-frobenius-substitution]. Then the map $G(\\bar k)\\to G(\\bar k)$, $g\\mapsto g^{-1}\\sigma(g)$, is surjective: for every $h\\in G(\\bar k)$ there exists $g\\in G(\\bar k)$ with $g^{-1}\\sigma(g)=h$. No reductivity or commutativity hypothesis is imposed.",
+ "source": {
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Section 17.k, Corollary 17.97, printed p.383, and Theorem 17.96. The displayed map there is x F(x^{-1}); substituting x=g^{-1} gives g^{-1}F(g). On algebraic-closure points F is arithmetic Frobenius, as specified immediately before Definition 17.95, p.382."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-weil-finite-field-q-elements",
+  "def-weil-algebraic-closure",
+  "def-sc-group-scheme",
+  "def-weil-finite-type-morphism",
+  "def-sbc-smooth-morphisms",
+  "def-weil-connected-scheme",
+  "def-weil-frobenius-substitution"
+ ],
+ "proof": [
+  {
+   "text": "Put $K=\\bar k$ and $H=G\\times_kK$. The identity is a $k$-rational section, so [lem-sbc-connected-rational-point-geometrically-connected] makes $H$ connected. The coordinate algebra of $H$ is $C\\otimes_kK$, so it is affine. It is of finite type by [lem-sfb-finite-type-composition-base-change]. It is smooth by [lem-sfb-scheme-lfp-smooth-flat-base-change]: the original smooth morphism is locally finitely presented, and $K/k$ is flat, since a vector-space basis makes tensoring with $K$ a direct sum of copies of the identity functor on $k$-vector spaces. Affineness makes $H$ separated by [lem-weil-pbc-affine-source-morphism-separated]. Smoothness gives regularity by [lem-weil-pbc-smooth-scheme-over-field-regular], and connectedness and [lem-sc-regular-connected-integral] give integrality, in particular irreducibility. Finally $d=\\dim H$ is a finite nonnegative integer: apply [lem-kun-finite-type-local-dimension] at the identity and [lem-ag-group-identity-local-dimension] to identify its local dimension with $\\dim H$.",
+   "uses": [
+    "lem-sbc-connected-rational-point-geometrically-connected",
+    "lem-sfb-finite-type-composition-base-change",
+    "lem-sfb-scheme-lfp-smooth-flat-base-change",
+    "lem-weil-pbc-affine-source-morphism-separated",
+    "lem-weil-pbc-smooth-scheme-over-field-regular",
+    "lem-sc-regular-connected-integral",
+    "lem-kun-finite-type-local-dimension",
+    "lem-ag-group-identity-local-dimension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Theorem 17.96 and Corollary 17.97, printed p.383; Proposition 1.66, pp.27–28."
+   }
+  },
+  {
+   "text": "The $k$-algebra endomorphism $C\\to C$, $c\\mapsto c^q$, defines a $k$-group endomorphism $F:G\\to G$. Indeed $q$ is a positive power of the characteristic, $a^q=a$ for $a\\in k$, and raising to $q$ commutes with the coproduct, counit and antipode. Base change gives a $K$-group endomorphism $F:H\\to H$. Its action on $H(K)=G(K)$ is exactly $\\sigma$, since evaluation of $c^q$ is $x(c)^q$; coefficients in $K$ are fixed in this base-changed morphism. Define a right action on $H$ by $x\\cdot a=a^{-1}xF(a)$. The identities $x\\cdot1=x$ and $(x\\cdot a)\\cdot b=(ab)^{-1}xF(ab)=x\\cdot(ab)$ prove the action laws without commuting any factors. Equivalently $a\\star x=x\\cdot a^{-1}$ is a left action with the same orbits and stabilizers.",
+   "uses": [
+    "def-sc-group-scheme",
+    "def-weil-frobenius-substitution",
+    "def-weil-finite-field-q-elements"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Paragraph before Definition 17.95, p.382, and first sentence of Theorem 17.96 proof, p.383."
+   }
+  },
+  {
+   "text": "For each $x\\in H(K)$ let $S_x$ be the scheme-theoretic stabilizer. Its $K$-points satisfy $a^{-1}xF(a)=x$, equivalently $xF(a)x^{-1}=a$. Thus [lem-sfb-inner-frobenius-fixed-points-finite] makes $S_x(K)$ finite. All hypotheses of [lem-sfb-zero-dimensional-stabilizer-finite-orbit] hold by step 1: $K$ is algebraically closed, the acting group $H$ is smooth connected affine of finite type, and its target $H$ is separated of finite type. Consequently $\\dim S_x=0$; this implication does not assume that the stabilizer is reduced. Applying [lem-sfb-smooth-group-orbit-geometry] gives a locally closed reduced orbit $O_x$ with $\\dim O_x=\\dim H-\\dim S_x=d$, and a surjective orbit map $H\\to O_x$.",
+   "uses": [
+    "lem-sfb-inner-frobenius-fixed-points-finite",
+    "lem-sfb-zero-dimensional-stabilizer-finite-orbit",
+    "lem-sfb-smooth-group-orbit-geometry"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Theorem 17.96 and Corollary 17.97, printed p.383; Proposition 1.66, pp.27–28."
+   }
+  },
+  {
+   "text": "Take the orbit $O_e$ of the identity. If its boundary $B=\\overline{O_e}\\setminus O_e$ were nonempty, it would contain a $K$-rational point $y$: the boundary is closed in $H$ because the orbit is locally closed and open in its closure; apply [lem-sc-lft-over-field-jacobson-space] to this nonempty closed subset and [lem-weil-pbc-closed-point-residue-field-base] to a closed point in it. By the boundary assertion of [lem-sfb-smooth-group-orbit-geometry], $\\dim O_y<\\dim O_e$. But step 3 gives both dimensions equal to $d$, a contradiction. Therefore $O_e$ is closed. It is irreducible, being the continuous image of irreducible $H$. If $O_e$ were a proper closed subset of $H$, any chain of irreducible closed subsets in $O_e$ could be extended by adjoining $H$; since $d$ is finite, this would give $\\dim H\\ge\\dim O_e+1=d+1$. Thus $O_e=H$. This is the minimum-orbit/dimension argument of Milne, with all orbit dimensions already known to equal $d$.",
+   "uses": [
+    "lem-sc-lft-over-field-jacobson-space",
+    "lem-weil-pbc-closed-point-residue-field-base",
+    "lem-sfb-smooth-group-orbit-geometry"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Theorem 17.96 and Corollary 17.97, printed p.383; Proposition 1.66, pp.27–28."
+   }
+  },
+  {
+   "text": "For $h\\in H(K)$, step 3 and $O_e=H$ make the fibre of the orbit map $H\\to H$, $a\\mapsto a^{-1}F(a)$, over $h$ nonempty. It is of finite type over $K$: it is the closed subscheme cut out in affine finite-type $H$ by the coordinate equations $a^{-1}F(a)=h$, so its coordinate algebra is a quotient of a finitely generated $K$-algebra. It has a closed point by [lem-sc-lft-over-field-jacobson-space], and that point has residue field $K$ by [lem-weil-pbc-closed-point-residue-field-base]. Its corresponding $g\\in G(\\bar k)$ satisfies $g^{-1}\\sigma(g)=h$, as required. This step distinguishes surjectivity on scheme points from the asserted surjectivity on algebraic-closure-valued points.",
+   "uses": [
+    "lem-sc-lft-over-field-jacobson-space",
+    "lem-weil-pbc-closed-point-residue-field-base"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Theorem 17.96 and Corollary 17.97, printed p.383; Proposition 1.66, pp.27–28."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sbc-connected-rational-point-geometrically-connected",
+  "lem-sfb-finite-type-composition-base-change",
+  "lem-sfb-scheme-lfp-smooth-flat-base-change",
+  "lem-weil-pbc-affine-source-morphism-separated",
+  "lem-weil-pbc-smooth-scheme-over-field-regular",
+  "lem-sc-regular-connected-integral",
+  "lem-kun-finite-type-local-dimension",
+  "lem-ag-group-identity-local-dimension",
+  "def-sc-group-scheme",
+  "def-weil-frobenius-substitution",
+  "def-weil-finite-field-q-elements",
+  "lem-sfb-inner-frobenius-fixed-points-finite",
+  "lem-sfb-zero-dimensional-stabilizer-finite-orbit",
+  "lem-sfb-smooth-group-orbit-geometry",
+  "lem-sc-lft-over-field-jacobson-space",
+  "lem-weil-pbc-closed-point-residue-field-base"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Theorem 17.96 and Corollary 17.97, printed p.383; Proposition 1.66, pp.27–28."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Lang theorem: for a smooth connected affine group over a finite field, the map g to g inverse times Frobenius g is surjective on algebraic closure points",
+   "results": "{\"t\": \"2026-10-24T07:00:32Z\", \"tool\": \"leanfinder\", \"query\": \"Lang theorem: for a smooth connected affine group over a finite field, the map g to g inverse times Frobenius g is surjective on algebraic closure points\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"FixedPoints.toAlgAut_surjective\", \"FiniteField.norm_surjective\", \"surjective_frobenius\", \"FiniteField.frobeniusAlgEquivOfAlgebraic_symm_apply\", \"FiniteField.unitsMap_norm_surjective\", \"IsFractionRing.stabilizerHom_surjective\", \"FiniteField.bijective_frobeniusAlgEquivOfAlgebraic_pow\", \"FiniteField.bijective_frobeniusAlgHom_pow\"], \"digest\": \"6bb81a630549fd88\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: field Frobenius, field norms, and automorphism-group results do not assert Lang surjectivity for general smooth connected affine group schemes; the grep Language.reverse_surjective hit concerns formal languages."
+  },
+  {
+   "tool": "grep",
+   "query": "LangSteinberg|langMap|lang_map|[Ll]ang.*[Ss]urjective|[Ss]urjective.*[Ll]ang",
+   "results": "{\"t\": \"2026-10-24T07:01:03Z\", \"tool\": \"grep\", \"query\": \"LangSteinberg|langMap|lang_map|[Ll]ang.*[Ss]urjective|[Ss]urjective.*[Ll]ang\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"Mathlib/Computability/Language.lean\"], \"digest\": \"774e3b14785fea90\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: field Frobenius, field norms, and automorphism-group results do not assert Lang surjectivity for general smooth connected affine group schemes; the grep Language.reverse_surjective hit concerns formal languages."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Lang theorem for smooth connected algebraic groups over finite fields",
+   "results": "{\"t\": \"2026-10-24T07:01:04Z\", \"tool\": \"leansearch\", \"query\": \"Lang theorem for smooth connected algebraic groups over finite fields\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.FormallySmooth.of_perfectField\", \"Algebra.smoothLocus_eq_univ\", \"Algebra.Smooth.finitePresentation\", \"Algebra.Smooth.formallySmooth\", \"Algebra.smoothLocus_eq_univ_iff\", \"LibraryNote.Design_choices_about_smooth_algebraic_structures\", \"IsGaloisGroup.finite\", \"FiniteField.orderOf_frobeniusAlgEquivOfAlgebraic\"], \"digest\": \"f522caec0e4999b6\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: field Frobenius, field norms, and automorphism-group results do not assert Lang surjectivity for general smooth connected affine group schemes; the grep Language.reverse_surjective hit concerns formal languages."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Frobenius\", \"surjective\"",
+   "results": "{\"t\": \"2026-10-24T07:01:04Z\", \"tool\": \"loogle\", \"query\": \"\\\"Frobenius\\\", \\\"surjective\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"surjective_frobenius\"], \"digest\": \"b7ee2a51eab90401\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: field Frobenius, field norms, and automorphism-group results do not assert Lang surjectivity for general smooth connected affine group schemes; the grep Language.reverse_surjective hit concerns formal languages."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a connected linear algebraic group over Fq every element over the algebraic closure is g inverse times g to the q Frobenius",
+   "results": "{\"t\": \"2026-10-24T07:01:05Z\", \"tool\": \"leanfinder\", \"query\": \"For a connected linear algebraic group over Fq every element over the algebraic closure is g inverse times g to the q Frobenius\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"FiniteField.frobeniusAlgEquivOfAlgebraic\", \"arithFrobAt\", \"FiniteField.frobeniusAlgEquivOfAlgebraic_symm_apply\", \"FiniteField.frobeniusAlgEquivOfAlgebraic_apply\", \"FiniteField.coe_frobeniusAlgEquivOfAlgebraic\", \"FiniteField.Extension.exists_frob_pow_eq\", \"FiniteField.bijective_frobeniusAlgEquivOfAlgebraic_pow\", \"FiniteField.orderOf_frobeniusAlgEquivOfAlgebraic\"], \"digest\": \"4ecf6eec071bc5ae\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: field Frobenius, field norms, and automorphism-group results do not assert Lang surjectivity for general smooth connected affine group schemes; the grep Language.reverse_surjective hit concerns formal languages."
+  },
+  {
+   "tool": "grep",
+   "query": "LangSteinberg|langMap|lang_map|[Ll]ang.*[Ss]urjective|[Ss]urjective.*[Ll]ang",
+   "results": "{\"t\": \"2026-10-24T07:28:36Z\", \"tool\": \"grep\", \"query\": \"LangSteinberg|langMap|lang_map|[Ll]ang.*[Ss]urjective|[Ss]urjective.*[Ll]ang\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"Mathlib/Computability/Language.lean\"], \"digest\": \"774e3b14785fea90\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the returned field Frobenius, Galois-group and formal-language statements do not assert Lang surjectivity for general affine group schemes."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Lang theorem surjectivity g inverse times Frobenius g for connected smooth affine group scheme over a finite field",
+   "results": "{\"t\": \"2026-10-24T07:28:37Z\", \"tool\": \"leanfinder\", \"query\": \"Lang theorem surjectivity g inverse times Frobenius g for connected smooth affine group scheme over a finite field\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"surjective_frobenius\", \"FixedPoints.toAlgAut_surjective\", \"FiniteField.frobeniusAlgEquivOfAlgebraic_symm_apply\", \"FiniteField.bijective_frobeniusAlgHom_pow\", \"FiniteField.norm_surjective\", \"FiniteField.bijective_frobeniusAlgEquivOfAlgebraic_pow\", \"Perfection.coeff_surjective\", \"PerfectClosure.mk_surjective\"], \"digest\": \"d705cd82d8de9e6d\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the returned field Frobenius, Galois-group and formal-language statements do not assert Lang surjectivity for general affine group schemes."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Lang theorem for connected affine algebraic groups over finite fields",
+   "results": "{\"t\": \"2026-10-24T07:30:17Z\", \"tool\": \"leansearch\", \"query\": \"Lang theorem for connected affine algebraic groups over finite fields\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"FiniteField.frobeniusAlgEquivOfAlgebraic.congr_simp\", \"Field.absoluteGaloisGroup\", \"FiniteField.orderOf_frobeniusAlgEquivOfAlgebraic\", \"Algebra.IsInvariant.isIntegral\", \"FiniteField.frobeniusAlgEquivOfAlgebraic_apply\", \"IsGaloisGroup.finite\", \"FiniteField.orderOf_frobeniusAlgHom\", \"FiniteField.frobeniusAlgEquivOfAlgebraic\"], \"digest\": \"c2b4397ca480be56\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the returned field Frobenius, Galois-group and formal-language statements do not assert Lang surjectivity for general affine group schemes."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Frobenius\", \"surjective\"",
+   "results": "{\"t\": \"2026-10-24T07:30:18Z\", \"tool\": \"loogle\", \"query\": \"\\\"Frobenius\\\", \\\"surjective\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"surjective_frobenius\"], \"digest\": \"b7ee2a51eab90401\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the returned field Frobenius, Galois-group and formal-language statements do not assert Lang surjectivity for general affine group schemes."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Every twisted Frobenius conjugacy orbit in a connected algebraic group over the algebraic closure of a finite field is the whole group",
+   "results": "{\"t\": \"2026-10-24T07:31:18Z\", \"tool\": \"leanfinder\", \"query\": \"Every twisted Frobenius conjugacy orbit in a connected algebraic group over the algebraic closure of a finite field is the whole group\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"isConj_arithFrobAt\", \"IsArithFrobAt.conj\", \"FiniteField.bijective_frobeniusAlgEquivOfAlgebraic_pow\", \"IsArithFrobAt.exists_primesOver_isConj\", \"FiniteField.coe_frobeniusAlgEquivOfAlgebraic\", \"FiniteField.frobeniusAlgEquivOfAlgebraic\", \"FiniteField.frobeniusAlgEquivOfAlgebraic_apply\", \"FiniteField.frobeniusAlgEquivOfAlgebraic_symm_apply\"], \"digest\": \"d3beb2d47abe192a\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the returned field Frobenius, Galois-group and formal-language statements do not assert Lang surjectivity for general affine group schemes."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-finite-field-geometric-maximal-torus",
+  "date": "2026-10-24",
+  "group": "Q117"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "Supporting input to Milne Proposition 17.99, first proof paragraph, printed p.384: solve the Frobenius conjugacy equation by Theorem 17.96 / Corollary 17.97, before descending a Frobenius-invariant torus. This serves the finite-field input in Proposition 17.81, p.379, on the inherited direct-image/alteration prerequisite route.",
+   "via": [
+    "lem-sfb-finite-field-geometric-maximal-torus",
+    "lem-sfb-torus-free-implies-unipotent-arbitrary-field",
+    "lem-sfb-maximal-torus-field-extension",
+    "lem-sfb-split-reductive-characteristic-sequence",
+    "lem-sfb-affine-group-picard-field-invariance",
+    "lem-sfb-affine-group-picard-stable-exponent",
+    "lem-sfb-normal-line-bundle-power-linearization",
+    "lem-sfb-normal-quasiprojective-equivariant-immersion",
+    "lem-sfb-sumihiro-normal-torus-affine-neighbourhood",
+    "lem-sfb-torus-invariant-affine-filtration",
+    "lem-sfb-torus-nonfixed-complement-annihilation",
+    "lem-sfb-torus-coherent-concentration",
+    "lem-sfb-torus-coherent-fixed-point-formula",
+    "lem-sfb-flag-line-euler-alternant",
+    "lem-sfb-induced-weyl-dimension-formula",
+    "lem-sfb-steinberg-induced-module-irreducible",
+    "lem-sfb-rho-section-self-duality",
+    "lem-sfb-steinberg-endomorphism-detection",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-lang-finite-field-group-surjectivity",
+  "worker": "stage1",
+  "summary": "Read Milne 17.96–17.97 and 1.66; retained the exact statement and supplied the twisted-conjugacy orbit proof. Reused orbit geometry and zero-dimensional stabilizer nodes. One statement-only arithmetic input isolates inner-twisted Frobenius fixed-point finiteness, with no connectedness/smoothness assumption. Checked all cited statements, nonreduced stabilizers and rational-point lifting. No Lean attachment or Mathlib leaf.",
+  "blueprint": "Inherited null ancestor and explicit via chain retained (ancestor command returns None). Serves finite-field Borel/maximal-torus descent, Milne 17.99, supporting the alteration prerequisites of current latest sk-thm-sf-ctf-stability-direct-images proof (3). Steps realize Milne 17.96 closed-orbit argument and 17.97 Frobenius specialization. Whole blueprint searches found no duplicate.",
+  "tool_uses": [
+   {
+    "node": "lem-sbc-connected-rational-point-geometrically-connected",
+    "why": "Connectedness after extension using the identity section; a generic field-geometric tool, not an alternate route. No lemma in the unit states this generic implication."
+   },
+   {
+    "node": "lem-weil-pbc-affine-source-morphism-separated",
+    "why": "Affineness supplies separatedness needed by the orbit lemma. No lemma in the unit states this generic implication."
+   },
+   {
+    "node": "lem-weil-pbc-smooth-scheme-over-field-regular",
+    "why": "Smooth-over-field regularity needed to establish irreducibility. No lemma in the unit states this generic implication."
+   },
+   {
+    "node": "lem-sc-regular-connected-integral",
+    "why": "Regular connected implies integral; a generic scheme tool. No lemma in the unit states this generic implication."
+   },
+   {
+    "node": "lem-kun-finite-type-local-dimension",
+    "why": "Finite local dimension at the identity; generic dimension tool. No lemma in the unit states this generic implication."
+   },
+   {
+    "node": "lem-ag-group-identity-local-dimension",
+    "why": "Identify group dimension with identity local dimension. No lemma in the unit states this generic implication."
+   },
+   {
+    "node": "lem-sc-lft-over-field-jacobson-space",
+    "why": "Detect nonempty closed subsets and nonempty finite-type fibres by closed points. No lemma in the unit states this generic implication."
+   },
+   {
+    "node": "lem-weil-pbc-closed-point-residue-field-base",
+    "why": "Closed points over an algebraically closed field are rational, for the boundary and orbit fibre. No lemma in the unit states this generic implication."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sbc-connected-rational-point-geometrically-connected",
+  "lem-weil-pbc-affine-source-morphism-separated",
+  "lem-weil-pbc-smooth-scheme-over-field-regular",
+  "lem-sc-regular-connected-integral",
+  "lem-kun-finite-type-local-dimension",
+  "lem-ag-group-identity-local-dimension",
+  "lem-sc-lft-over-field-jacobson-space",
+  "lem-weil-pbc-closed-point-residue-field-base"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q95-550476ea1",
+  "group": "Q95",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q95-550476ea1 (reviewer sub-agent of L); spot-checked: I read Milne iAG2017 p.382 (Frobenius on coordinates, before Def 17.95) and p.383 (Thm 17.96 proof, Cor 17.97). The item statement is unchanged and faithful: g^{-1}σ(g) is Milne's gF(g^{-1}) after g↦g^{-1}, σ is arithmetic Frobenius, and affineness is only a restriction of the source. Step 1: every citation checked. Geometric connectedness comes from the identity section, finite type from base change, smoothness from the lfp+flat point criterion (lfp is part of def-sbc-smooth), then separated, regular, integral (connected includes nonempty), and finite d from the identity local dimension. Step 2: genuinely elementary. The q-power map is a Hopf endomorphism in char p, it acts by σ on K-points, and the right-action law is verified; the left action has the same orbits and stabilizers. Step 3: the stabilizer is {a: xF(a)x^{-1}=a}. The new node gives finitely many K-points, the zero-dimensional-stabilizer node gives dim 0 (nonreduced stabilizers allowed), and the orbit node gives dim O_x=d. Step 4: the boundary is closed and has a K-point (Jacobson + rational closed points). It is invariant and its orbits have smaller dimension, contradicting d. So O_e is closed, and the chain argument with finite d gives O_e=H. Step 5: the fibre over h is a nonempty finite-type K-scheme, so it has a K-rational closed point. The left-action orbit map differs by the inversion automorphism; step 2 states that the orbits agree, which is acceptable. New node lem-sfb-inner-frobenius-fixed-points-finite: statement-only, self-contained and true. Milne's argument checks: f^j=Int(xσ(x)…σ^{j-1}(x))σ^j, y∈A(k_m) has finite order r, f^{mr}=σ^{mr}, so the fixed points lie in finite A(k_{mr}). Tested on G_a (u^q=u), G_m, finite constant groups and μ_p. It is strictly smaller than the item and is no duplicate: lem-sc-lang-steinberg is about vector spaces, thm-trf-frobenius-fixed-points is about untwisted fixed schemes, and the AV Lang unit is about abelian varieties. No cycle. The sole citer, finite-field-geometric-maximal-torus, is unaffected. The generic off-unit tool uses listed in split_report are accepted. Batch-5 flag: the cited lfp-smooth-flat-base-change node reaches lem-trf-smooth-at-point-fibre-criterion. That is the generic 01V9 fibre criterion, given by neither the trace-formula nor the Poincaré-duality assumption and no step of their proofs, so the citation is accepted. No changes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.GroupScheme.LangFiniteFieldSurjectivity",
+  "declaration": "AlgebraicGeometry.lang_finite_field_surjective",
+  "file": "lean/Sheaf/AlgebraicGeometry/GroupScheme/LangFiniteFieldSurjectivity.lean",
+  "statement": "theorem lang_finite_field_surjective {k K : Type u} [Field k] [Fintype k] [Field K] [Algebra k K] [IsAlgClosure k K] (G : Over (Spec (.of k))) [GrpObj G] [IsAffine G.left] [LocallyOfFiniteType G.hom] [QuasiCompact G.hom] [Smooth G.hom] [ConnectedSpace G.left] : ∀ h : (Spec (.of K)).asOver (Spec (.of k)) ⟶ G, ∃ g : (Spec (.of K)).asOver (Spec (.of k)) ⟶ G, g⁻¹ * ((Spec.map (CommRingCat.ofHom (FiniteField.frobeniusAlgEquivOfAlgebraic k K).toAlgHom.toRingHom)).asOver (Spec (.of k)) ≫ g) = h",
+  "branch": "newtargets-dag",
+  "by": "Q11",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-789f3f95b",
+  "group": "Q11",
+  "result": "pass",
+  "note": "Checked the node, all 8 stmt_dep records, Milne 17.95–17.97 as recorded, the module and the report (both sections present). Every clause matches its dependency declaration (Fintype field k, IsAlgClosure K, GrpObj over Spec k, IsAffine, LocallyOfFiniteType+QuasiCompact, Smooth, ConnectedSpace); QuasiCompact and LocallyOfFiniteType are implied, so not stronger. Spec.map of frobeniusAlgEquivOfAlgebraic composed with g has comorphism c ↦ g(c)^q, i.e. σ; g⁻¹*(σ g)=h in Hom.group keeps the node's order and quantifiers. Edge cases covered (trivial, dim 0, noncommutative, any q); the single universe u is harmless. Statement verbatim, stmt_deps unchanged, no name clash, imports exist, sorry only, docstrings complete. No findings; not recompiled because no file changed."
+ }
+}

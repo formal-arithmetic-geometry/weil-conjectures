@@ -1,0 +1,373 @@
+{
+ "id": "lem-per-proper-henselian-derived-restriction",
+ "kind": "statement",
+ "title": "Derived closed-fibre restriction for proper schemes over henselian pairs",
+ "statement": "Let $(A,I)$ be a henselian pair [def-weil-pbc-henselian-terminology], let $f:Y\\to X=\\operatorname{Spec}A$ be a proper morphism of schemes [def-weil-affine-spectrum, def-weil-proper-morphism], and put $Y_0=Y\\times_X\\operatorname{Spec}(A/I)$ with its projection $i:Y_0\\to Y$ [def-pc-fibre-product]. Let $K\\in D^+(Y_{\\mathrm{et}})$ have torsion abelian cohomology sheaves, with the derived category and torsion convention of [def-weil-pbc-derived-categories]. The canonical restriction morphism is an isomorphism in $D(\\mathbf{Ab})$:\n$$\\rho_{Y,K}:R\\Gamma(Y_{\\mathrm{et}},K)\\xrightarrow{\\sim}R\\Gamma((Y_0)_{\\mathrm{et}},i^{-1}K).$$\nHere inverse image on abelian sheaves is exact [prop-weil-pbc-inverse-image-exact], $R\\Gamma$ means total right derived global sections computed by bounded-below injective resolutions [def-sp-kinjective-bridge], and the arrow is the derived cohomological pullback induced by the adjunction unit [def-weil-pbc-cohomology-pullback]. The isomorphisms are natural in $K$. More generally, if $(A,I)\\to(B,J)$ is a morphism of henselian pairs, $g:V\\to\\operatorname{Spec}B$ is proper, $h:V\\to Y$ is compatible with the base morphism, $L\\in D^+(V_{\\mathrm{et}})$ has torsion cohomology, and $h^{-1}K\\to L$ is specified, then the square of the two restriction morphisms $\\rho_{Y,K},\\rho_{V,L}$ with the induced cohomological pullbacks is commutative. Finite generation of $I$, Noetherianity, excellence, and invertibility of torsion primes are not assumed.",
+ "source": {
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tags 09ZI (theorem-gabber), 0DDE (lemma-proper-base-change), 0DDD (lemma-torsion-direct-image); derived proper henselian-pair restriction obtained by applying these to the proper structural morphism and canonical truncations."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-henselian-terminology",
+  "def-weil-affine-spectrum",
+  "def-weil-proper-morphism",
+  "def-pc-fibre-product",
+  "def-weil-pbc-derived-categories",
+  "prop-weil-pbc-inverse-image-exact",
+  "def-sp-kinjective-bridge",
+  "def-weil-pbc-cohomology-pullback",
+  "def-weil-pbc-etale-sheaves"
+ ],
+ "proof": [
+  {
+   "text": "For any scheme map u, identify canonical restriction with the derived unit followed by the Leray comparison. Use the shift-compatible exact right-derived base-change transformation, whose source is derived sections followed by the exact derivation of the identity. The canonical identity comparison identifies its components with the canonical restrictions and preserves invertibility. Both functors are triangulated and preserve every lower cohomology bound. Apply the bounded-below heart test to the desired restriction along the closed-fibre projection i. It suffices to prove invertibility on F[0] for each torsion cohomology sheaf F of K.",
+   "uses": [
+    "lem-weil-pbc-cohomology-pullback-derived-unit",
+    "lem-weil-pbc-derived-unit-classical-pullback-coherence",
+    "def-weil-pbc-derived-inverse-image",
+    "prop-weil-pbc-inverse-image-exact",
+    "lem-weil-pbc-derived-functor-negative-vanishing",
+    "lem-weil-pbc-heart-test-bounded-below"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tags 05SE, 05TC and 08J5; cohomology.tex Tags 01F8 and 01F9."
+   }
+  },
+  {
+   "text": "Fix a torsion abelian sheaf F on Y. Properness gives that f is quasi-compact and quasi-separated by the standard scheme morphism instances. Put E=Rf_*F[0]. For n>=0, apply the qcqs higher-image torsion theorem with the set of all primes to H^n(E); use the geometric-stalk characterization to obtain local torsion. For n<0, the lower bound zero of F[0] gives H^n(E)=0, which is torsion. This avoids proving preservation of torsion for arbitrary derived complexes and avoids the general truncation spectral sequence.",
+   "uses": [
+    "def-weil-proper-morphism",
+    "lem-sbc-qcqs-higher-images-prime-torsion",
+    "lem-weil-pbc-derived-functor-negative-vanishing",
+    "lem-weil-pbc-torsion-sheaf-characterizations"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 0DDD (lemma-torsion-direct-image), applied to a sheaf rather than a complex."
+   }
+  },
+  {
+   "text": "For every torsion abelian sheaf G on Spec A, use the equivalence with sheaves of ULift Z-modules and apply Gabber comparison. The derived-global/Ext pullback comparison identifies each nonnegative homology map of canonical restriction on G[0] with the classical cohomology map under additive equivalences. It is therefore invertible. Both source and target have zero negative homology. Cohomology detects isomorphisms in D+, so restriction on G[0] is an isomorphism. Apply the bounded-below heart test to E, whose cohomology is torsion by the preceding step, to prove that restriction along z:Spec(A/I)->Spec A is invertible on E.",
+   "uses": [
+    "prop-weil-pbc-gabber-pair-comparison",
+    "lem-weil-pbc-abelian-derived-global-ext-pullback",
+    "lem-weil-pbc-derived-functor-negative-vanishing",
+    "lem-weil-pbc-heart-test-bounded-below",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 09ZI; derived.tex Tags 05TC and 08J5."
+   }
+  },
+  {
+   "text": "Proper base change gives the canonical isomorphism beta:z^-1 E -> Rf0_*i^-1 F[0]. Thus restriction along z on E, followed by derived sections of beta and the Leray comparison for f0, is invertible.",
+   "uses": [
+    "thm-weil-pbc-bounded-below",
+    "def-weil-pbc-derived-exchange",
+    "prop-weil-pbc-inverse-image-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 0DDE (lemma-proper-base-change)."
+   }
+  },
+  {
+   "text": "Prove composition of canonical restriction directly from the bounded-below derived adjunction unit composition law and associativity of the right-derived composition isomorphisms. The ordinary direct-image/terminal-section comparisons associate because the maps to the terminal object agree. Derive this equation to obtain associativity of Leray. Naturality of Leray, followed by the derived unit composition law, then proves restriction composition. Exact derivation respects composition and inverse of natural isomorphisms by its localization characterization, so the recorded square compositor is the inverse of one diagonal compositor followed by the other. It follows that restriction respects every commutative square.",
+   "uses": [
+    "prop-weil-pbc-derived-inverse-image-adjunction",
+    "def-weil-pbc-derived-inverse-image",
+    "lem-weil-pbc-cohomology-pullback-derived-unit"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 015M; cohomology.tex Tag 01F8. The private helpers give the localization and adjunction calculation in Lean."
+   }
+  },
+  {
+   "text": "Expand beta into its derived adjunction unit, square inverse-image comparison and pulled-back counit. Move the two coefficient maps past Leray by naturality, use the restriction square from the preceding step, and move the counit past restriction by naturality. The triangle identity then contracts restriction along f followed by derived sections of its counit to the Leray map for f. Hence the invertible composite of step 4 is Leray_f followed by canonical restriction along i. Cancel the invertible Leray factor. This proves the sheaf case F[0], and the first heart test gives the assertion for K.",
+   "uses": [
+    "def-weil-pbc-derived-exchange",
+    "prop-weil-pbc-derived-inverse-image-adjunction",
+    "lem-weil-pbc-cohomology-pullback-derived-unit"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 07A7; derived.tex Tag 015M, the adjunction triangle identity and the mate calculation."
+   }
+  },
+  {
+   "text": "Naturality in K is the naturality equation of the right-derived descent defining the canonical pullback. For a morphism of henselian pairs, the quotient ring map and the fibre-product projection identity give the commutative square with its canonical fibre map. Apply restriction composition along its two diagonals and naturality along the specified coefficient morphism a. The square compositor is exactly abelianDerivedSquareInverseImageIso, so the resulting coefficient map is exactly abelianDerivedSquareCoefficientMap. Neither properness nor torsion is needed for this equality; those hypotheses give invertibility of its restriction sides.",
+   "uses": [
+    "lem-weil-pbc-cohomology-pullback-derived-unit",
+    "def-weil-pbc-derived-inverse-image",
+    "prop-weil-pbc-derived-inverse-image-adjunction"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/cohomology.tex",
+    "place": "Tag 01F8 (lemma-functoriality); derived.tex Tag 015M."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-cohomology-pullback-derived-unit",
+  "lem-weil-pbc-derived-unit-classical-pullback-coherence",
+  "def-weil-pbc-derived-inverse-image",
+  "prop-weil-pbc-inverse-image-exact",
+  "lem-weil-pbc-derived-functor-negative-vanishing",
+  "lem-weil-pbc-heart-test-bounded-below",
+  "def-weil-proper-morphism",
+  "lem-sbc-qcqs-higher-images-prime-torsion",
+  "lem-weil-pbc-torsion-sheaf-characterizations",
+  "prop-weil-pbc-gabber-pair-comparison",
+  "lem-weil-pbc-abelian-derived-global-ext-pullback",
+  "def-weil-abstract-derived-category",
+  "thm-weil-pbc-bounded-below",
+  "def-weil-pbc-derived-exchange",
+  "prop-weil-pbc-derived-inverse-image-adjunction"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "W6: Tags 09ZI, 0DDD and 0DDE, using two applications of the existing bounded-below heart test. Only higher images of degree-zero torsion sheaves are needed. The canonical-map and square equalities use the bounded-below derived adjunction and Leray composition APIs directly."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "If X is proper over a henselian pair A I then derived etale global sections of a bounded below complex with torsion cohomology are unchanged on the closed fibre",
+   "results": "{\"t\": \"2026-10-24T10:09:59Z\", \"tool\": \"leanfinder\", \"query\": \"If X is proper over a henselian pair A I then derived etale global sections of a bounded below complex with torsion cohomology are unchanged on the closed fibre\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"StandardEtalePair.instFormallyEtaleRing\", \"StandardEtalePair.existsUnique_hasMap_of_hasMap_quotient_of_sq_eq_bot\", \"Algebra.etaleLocus_eq_compl_support\", \"Algebra.Etale.formallyEtale\", \"Algebra.exists_etale_isIdempotentElem_forall_liesOver_eq\", \"Algebra.IsEtaleAt\", \"Algebra.FormallyEtale.localization_base\", \"Algebra.FormallyEtale.localization_map\"], \"digest\": \"1882c6c30b280dd5\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern locally constant functions, continuous group cohomology, or formal etale algebra; none gives this derived sheaf-cohomology comparison."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Etale cohomology rigidity for a proper scheme over a henselian pair and a bounded below torsion complex, natural restriction to Spec A modulo I",
+   "results": "{\"t\": \"2026-10-24T10:09:54Z\", \"tool\": \"leansearch\", \"query\": \"Etale cohomology rigidity for a proper scheme over a henselian pair and a bounded below torsion complex, natural restriction to Spec A modulo I\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsEtale\", \"RingHom.Etale\", \"Algebra.FormallyEtale.of_unramified_and_smooth\", \"Algebra.Etale.formallyEtale\", \"RingHom.Etale.toAlgebra\", \"RingHom.Etale.propertyIsLocal\", \"Algebra.Etale.of_isLocalizationAway\", \"Algebra.Etale.finitePresentation\"], \"digest\": \"4851db1aa01ec351\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern locally constant functions, continuous group cohomology, or formal etale algebra; none gives this derived sheaf-cohomology comparison."
+  },
+  {
+   "tool": "loogle",
+   "query": "IsHenselianRing, AlgebraicGeometry.IsProper",
+   "results": "{\"t\": \"2026-10-24T10:09:54Z\", \"tool\": \"loogle\", \"query\": \"IsHenselianRing, AlgebraicGeometry.IsProper\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"loogle: unknown identifier 'IsHenselianRing'\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern locally constant functions, continuous group cohomology, or formal etale algebra; none gives this derived sheaf-cohomology comparison."
+  },
+  {
+   "tool": "grep",
+   "query": "henselian.*cohomolog|cohomolog.*henselian|henselian.*proper",
+   "results": "{\"t\": \"2026-10-24T10:09:54Z\", \"tool\": \"grep\", \"query\": \"henselian.*cohomolog|cohomolog.*henselian|henselian.*proper\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern locally constant functions, continuous group cohomology, or formal etale algebra; none gives this derived sheaf-cohomology comparison."
+  },
+  {
+   "tool": "grep",
+   "query": "henselian.*cohomolog|cohomolog.*henselian|henselian.*proper",
+   "results": "{\"t\": \"2026-10-24T10:55:00Z\", \"tool\": \"grep\", \"query\": \"henselian.*cohomolog|cohomolog.*henselian|henselian.*proper\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: no matching Mathlib declaration in the recorded source search."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Gabber henselian pair proper scheme restriction derived global sections torsion cohomology",
+   "results": "{\"t\": \"2026-10-24T10:55:00Z\", \"tool\": \"leansearch\", \"query\": \"Gabber henselian pair proper scheme restriction derived global sections torsion cohomology\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.termΓ(_,_)\", \"AlgebraicGeometry.Scheme.Γ\", \"AlgebraicGeometry.IsProper.instMorphismRestrict\", \"AlgebraicGeometry.Scheme.Γ_def\", \"AlgebraicGeometry.Scheme.germ_stalkClosedPointTo_Spec\", \"AlgebraicGeometry.Scheme.ΓSpecIso_inv\", \"AlgebraicGeometry.Scheme.restrict\", \"AlgebraicGeometry.Scheme.ΓSpecIso\"], \"digest\": \"0a0b49076e58cd52\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits are scheme sections, scheme restrictions and properness instances, not derived torsion rigidity."
+  },
+  {
+   "tool": "loogle",
+   "query": "HenselianRing, AlgebraicGeometry.IsProper",
+   "results": "{\"t\": \"2026-10-24T10:55:00Z\", \"tool\": \"loogle\", \"query\": \"HenselianRing, AlgebraicGeometry.IsProper\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the valid HenselianRing and IsProper pattern returned no theorem."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived etale cohomology of a proper scheme over a henselian pair agrees with the closed fibre for bounded below torsion complexes",
+   "results": "{\"t\": \"2026-10-24T10:55:01Z\", \"tool\": \"leanfinder\", \"query\": \"Derived etale cohomology of a proper scheme over a henselian pair agrees with the closed fibre for bounded below torsion complexes\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"StandardEtalePair.instFormallyEtaleRing\", \"Algebra.etaleLocus_eq_compl_support\", \"Algebra.FormallyEtale.subsingleton_h1Cotangent\", \"Algebra.Etale.formallyEtale\", \"Algebra.exists_etale_isIdempotentElem_forall_liesOver_eq\", \"Algebra.formallyEtale_iff\", \"AlgebraicGeometry.IsEtale.of_comp\", \"Algebra.FormallyEtale.instForallOfFinite\"], \"digest\": \"701473a3f37f8349\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits are formal-etale algebra or general derived-category truncation lemmas, not proper henselian-pair cohomology restriction."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Etale cohomological rigidity for a henselian pair with proper support and torsion coefficients in the bounded below derived category",
+   "results": "{\"t\": \"2026-10-24T10:55:47Z\", \"tool\": \"leanfinder\", \"query\": \"Etale cohomological rigidity for a henselian pair with proper support and torsion coefficients in the bounded below derived category\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"StandardEtalePair.instFormallyEtaleRing\", \"Algebra.FormallyEtale.subsingleton_h1Cotangent\", \"Algebra.etaleLocus_eq_compl_support\", \"Algebra.Etale.formallyEtale\", \"DerivedCategory.to_singleFunctor_obj_eq_zero_of_injective\", \"DerivedCategory.from_singleFunctor_obj_eq_zero_of_projective\", \"Algebra.formallyEtale_iff\", \"CochainComplex.cm5b\"], \"digest\": \"b41bc1a26cf646ec\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits are formal-etale algebra or general derived-category truncation lemmas, not proper henselian-pair cohomology restriction."
+  },
+  {
+   "tool": "grep",
+   "query": "hypercohomology|cohomology.*restriction|restriction.*cohomology",
+   "results": "{\"t\": \"2026-10-24T10:57:43Z\", \"tool\": \"grep\", \"query\": \"hypercohomology|cohomology.*restriction|restriction.*cohomology\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: no matching Mathlib declaration in the recorded source search."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-per-admissible-modification-cohomology-presentation",
+  "date": "2026-10-24",
+  "group": "Q49"
+ },
+ "chapter": "sec-deligne-laumon-a1",
+ "unit": "sk-p-dl-a1-perverse",
+ "blueprint": {
+  "from": {
+   "node": "lem-per-artin-gabber-affine-curve",
+   "place": "The proper-base-change input for (**) in ILO XX 4.4, used in the completion part of proof Step 3 of the blueprint ancestor.",
+   "via": [
+    "lem-per-admissible-modification-cohomology-presentation",
+    "lem-per-henselian-completion-open-rigidity",
+    "lem-per-punctual-strict-completion-test",
+    "lem-per-punctual-purity-trait-test",
+    "lem-per-gabber-regular-pair-purity",
+    "lem-per-absolute-gysin-purity",
+    "lem-per-potential-dualizing-regular-unit",
+    "lem-per-finite-regular-reduction-dualizing",
+    "lem-per-qbar-generic-duality-model",
+    "lem-per-qbar-middle-tstructure"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-per-proper-henselian-derived-restriction",
+  "worker": "stage1",
+  "summary": "Kept the statement. Reused Gabber pair comparison, torsion higher images, truncation convergence and the general heart test; no new nodes. Proved canonical-map identification by unit/Leray pasting and the adjunction triangle identity, then wrote the coefficient-map functoriality square in the derived category. Checked arbitrary torsion, negative lower bounds and non-Noetherian pairs.",
+  "blueprint": "Serves the existing proper-base-change input for (**) in ILO XX 4.4 in the completion branch of Step 3 of lem-per-artin-gabber-affine-curve, through the existing ancestor chain; no change to the unit or chapter route.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-affine-scheme-qcqs",
+    "why": "Affine schemes are quasi-compact and quasi-separated is used as a general sheaf, derived-category, or morphism tool for this proper henselian-pair input; the perverse-curve unit supplies no replacement for it."
+   },
+   {
+    "node": "lem-weil-pbc-abelian-etale-sheaves-grothendieck",
+    "why": "Abelian sheaves on the small etale site form a Grothendieck abelian category is used as a general sheaf, derived-category, or morphism tool for this proper henselian-pair input; the perverse-curve unit supplies no replacement for it."
+   },
+   {
+    "node": "lem-weil-pbc-derived-functor-negative-vanishing",
+    "why": "Right derived functors move to the right is used as a general sheaf, derived-category, or morphism tool for this proper henselian-pair input; the perverse-curve unit supplies no replacement for it."
+   },
+   {
+    "node": "thm-sp-truncation-e2",
+    "why": "The truncation hypercohomology spectral sequence is used as a general sheaf, derived-category, or morphism tool for this proper henselian-pair input; the perverse-curve unit supplies no replacement for it."
+   },
+   {
+    "node": "lem-sbc-qcqs-higher-images-prime-torsion",
+    "why": "Qcqs higher direct images preserve a fixed set of torsion primes is used as a general sheaf, derived-category, or morphism tool for this proper henselian-pair input; the perverse-curve unit supplies no replacement for it."
+   },
+   {
+    "node": "prop-weil-pbc-geometric-stalks-exact",
+    "why": "Exactness of geometric stalks is used as a general sheaf, derived-category, or morphism tool for this proper henselian-pair input; the perverse-curve unit supplies no replacement for it."
+   },
+   {
+    "node": "lem-weil-pbc-torsion-sheaf-characterizations",
+    "why": "Characterizations of torsion abelian sheaves on the etale site is used as a general sheaf, derived-category, or morphism tool for this proper henselian-pair input; the perverse-curve unit supplies no replacement for it."
+   },
+   {
+    "node": "lem-weil-pbc-cohomology-pullback-derived-unit",
+    "why": "The cohomology pullback is induced by the unit of the derived adjunction is used as a general sheaf, derived-category, or morphism tool for this proper henselian-pair input; the perverse-curve unit supplies no replacement for it."
+   },
+   {
+    "node": "lem-pur-site-derived-sections-unit-pasting",
+    "why": "Derived sections pullback and unit-Leray pasting for geometric morphisms is used as a general sheaf, derived-category, or morphism tool for this proper henselian-pair input; the perverse-curve unit supplies no replacement for it."
+   },
+   {
+    "node": "lem-weil-pbc-derived-direct-image-triangulated",
+    "why": "The derived direct image on bounded below derived categories is a triangulated functor is used as a general sheaf, derived-category, or morphism tool for this proper henselian-pair input; the perverse-curve unit supplies no replacement for it."
+   },
+   {
+    "node": "prop-weil-pbc-inverse-image-exact",
+    "why": "Exactness of inverse image is used as a general sheaf, derived-category, or morphism tool for this proper henselian-pair input; the perverse-curve unit supplies no replacement for it."
+   },
+   {
+    "node": "lem-weil-pbc-cohomology-pullback-functorial",
+    "why": "The pullback on etale cohomology is well defined and functorial is used as a general sheaf, derived-category, or morphism tool for this proper henselian-pair input; the perverse-curve unit supplies no replacement for it."
+   },
+   {
+    "node": "prop-weil-pbc-gabber-pair-comparison",
+    "why": "Gabber's affine comparison for a henselian pair is used as a general sheaf, derived-category, or morphism tool for this proper henselian-pair input; the perverse-curve unit supplies no replacement for it."
+   },
+   {
+    "node": "lem-weil-pbc-heart-test-bounded-below",
+    "why": "A heart test for bounded-below left t-exact transformations is used as a general sheaf, derived-category, or morphism tool for this proper henselian-pair input; the perverse-curve unit supplies no replacement for it."
+   },
+   {
+    "node": "thm-weil-pbc-bounded-below",
+    "why": "Bounded-below derived proper base change is used as a general sheaf, derived-category, or morphism tool for this proper henselian-pair input; the perverse-curve unit supplies no replacement for it."
+   },
+   {
+    "node": "prop-weil-pbc-derived-inverse-image-adjunction",
+    "why": "Derived adjunction of inverse and direct image on D^+ is used as a general sheaf, derived-category, or morphism tool for this proper henselian-pair input; the perverse-curve unit supplies no replacement for it."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-derived-functor-negative-vanishing",
+  "lem-sbc-qcqs-higher-images-prime-torsion",
+  "lem-weil-pbc-torsion-sheaf-characterizations",
+  "lem-weil-pbc-cohomology-pullback-derived-unit",
+  "prop-weil-pbc-inverse-image-exact",
+  "prop-weil-pbc-gabber-pair-comparison",
+  "lem-weil-pbc-heart-test-bounded-below",
+  "thm-weil-pbc-bounded-below",
+  "prop-weil-pbc-derived-inverse-image-adjunction"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q143-205e1a82c",
+  "group": "Q143",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q143-205e1a82c (reviewer sub-agent of L); spot-checked: I read the whole item. The delivery is first split of an item that was unsplit with no proof on the base, so it is not a re-split. It creates no new nodes, and statement and stmt_deps are byte-identical to the base. The closure has no cycle. Sources read: Stacks etale-cohomology.tex theorem-gabber 09ZI (l.15205), lemma-torsion-direct-image 0DDD (l.13924) and lemma-proper-base-change 0DDE (l.18708). Coefficients are abelian étale sheaves in D^+ with torsion cohomology, and the base-change map is the def-weil-pbc-derived-exchange mate. Step 1: proper implies qcqs, directly from the definitions (elementary). Step 2: torsion of Rf_*K comes from thm-sp-truncation-e2 clauses 2-6 and the sheaf-level torsion lemma with P = all primes, passed through exact stalks and the stalk characterization; this is 0DDD(2) without a duplicate node. Steps 3-4: Φ = RΓ_X and Ψ = RΓ_Z z^{-1} are triangulated and preserve lower bounds. T_z is natural (unit-pasting) and equals the cohomology pullback (derived-unit clause 2), the shift equation is argued, and Gabber gives T_z(F[0]) invertible. All hypotheses of the heart test hold. Step 5: thm-weil-pbc-bounded-below is applied to the square (f, f_0, z, i), whose notation matches. Step 6: I redid the mate calculation (λ naturality, the unit-pasting composition law for z f_0 = f i, naturality of T_i, the triangle identity) and it gives C = T_i(K) = ρ. Step 7: IB ⊆ J gives h_0 with hj = i h_0, and the square follows from naturality and composition in D(Ab). Edge cases checked: I = 0, Y empty, K = F[n], K unbounded above, p-torsion, non-Noetherian A. Batch-5 check, all three accepted as outside both assumptions: unit-pasting is a general derived-functor fact reaching only def-trf-geometric-morphism, a general definition; Gabber (09ZI) reaches only def-trf-schematically-dense-open, a definition; proper base change (0DDE) reaches only lem-pod-lisse-module-sheaves-as-module-objects, a general equivalence, not Poincaré duality. The 16 tool_uses entries are all general tools and are accepted. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.ProperHenselianDerivedRestriction",
+  "declaration": "AlgebraicGeometry.Etale.proper_henselian_derived_restriction",
+  "declarations": [
+   "AlgebraicGeometry.Etale.henselianClosedFibreMap",
+   "AlgebraicGeometry.Etale.abelianDerivedSquareInverseImageIso",
+   "AlgebraicGeometry.Etale.abelianDerivedSquareCoefficientMap",
+   "AlgebraicGeometry.Etale.proper_henselian_derived_restriction",
+   "AlgebraicGeometry.Etale.proper_henselian_derived_restriction_naturality",
+   "AlgebraicGeometry.Etale.proper_henselian_derived_restriction_pairs"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/ProperHenselianDerivedRestriction.lean",
+  "statement": "theorem proper_henselian_derived_restriction (A : Type u) [CommRing A] (I : Ideal A) [HenselianRing A I] {Y : Scheme.{u}} (f : Y ⟶ Spec (.of A)) [IsProper f] (K : _root_.DerivedCategory.Plus (Sheaf Y.smallEtaleTopology AddCommGrpCat.{u + 1})) (hK : Y.HasTorsionEtaleCohomology K.obj) : IsIso (abelianDerivedCohomologyPullback (pullback.fst f (Spec.map (CommRingCat.ofHom (Ideal.Quotient.mk I)))) K)",
+  "branch": "newtargets-dag",
+  "by": "Q122",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "The three theorem declarations state invertibility, naturality in K, and naturality for arbitrary compatible maps of henselian pairs with a specified derived coefficient map. The three auxiliary definitions construct the canonical fibre map and coefficient identification from quotient maps, fibre products and exact derived inverse-image compositors. D+(Ab) is the full bounded-below subcategory of D(Ab), so its IsIso and square equality are exactly the asserted ambient derived statements."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-6d928a9bc",
+  "group": "Q122",
+  "result": "pass",
+  "note": "Node unchanged except lean record and added landed stmt_dep def-weil-pbc-etale-sheaves (owner of HasTorsionEtaleCohomology = all H^r Sheaf.IsTorsion). Main theorem: IsIso of the cited canonical abelianDerivedCohomologyPullback (rightDerivedDesc of unit-induced section pullback) along pullback.fst f (Spec.map (Quotient.mk I)); HenselianRing A I, IsProper f, K in DerivedCategory.Plus of abelian etale sheaves; no extra Noetherian/finite-generation/nontrivial assumptions. Naturality square orientation correct. Pairs clause: φ with I ≤ J.comap φ, h with h≫f = g≫Spec.map φ (not proper or cartesian), L torsion, arbitrary a; helpers are canonical (pullback.map via Ideal.quotientMap, derived upperStarComp compositors, direction checked), square types checked end to end. Edge cases I=0, I=⊤, empty, unbounded above covered; universes per convention; docstrings, sorry-only proofs and lean.statement verbatim OK; report has both sections (second reading is a self-reading). No fixes, no compile needed."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "W6",
+  "result": "pass",
+  "landing": "20261025T022611-L-1782948",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

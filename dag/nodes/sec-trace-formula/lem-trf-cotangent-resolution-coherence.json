@@ -20,119 +20,45 @@
  "status": "split",
  "proof": [
   {
-   "text": "Apply [lem-trf-adjunction-standard-simplicial-homotopy] to the adjunction $F_A:\\mathrm{Set}\\rightleftarrows A\\text{-}\\mathrm{Alg}:U$; its adjunction bijection sends an algebra map $A[E]\\to C$ to its values on the variables. This gives exactly the faces, degeneracies and augmentation in the statement, and gives a simplicial-set homotopy inverse to the underlying standard augmentation. Each term is polynomial. Each evaluation $A[UC]\\to C$ is surjective because $[c]\\mapsto c$; iterating these evaluations shows that every standard augmentation is surjective. The unit is a map of sets; no additivity of this section is asserted.",
+   "text": "Apply [lem-trf-polynomial-augmentation-boundary] to $A\\to B$. Its standard simplicial algebra has precisely the stated terms and operators, is termwise polynomial and surjective, and its alternating augmentation is a quasi-isomorphism. Its criterion also makes every polynomial resolution $Q$ of the statement a trivial Kan fibration over $B$.",
    "uses": [
-    "lem-trf-adjunction-standard-simplicial-homotopy"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/simplicial.tex",
-    "place": "Tags 08NC, 08ND; cotangent Tags 08PM and 08PN"
-   }
-  },
-  {
-   "text": "Forget the standard augmented simplicial algebra of Step 1 to simplicial abelian groups. Its underlying simplicial-set augmentation is a homotopy equivalence, so [lem-trf-simplicial-abelian-set-homotopy-quasi-iso] applies directly and gives a quasi-isomorphism $s(P^{\\mathrm{std}})\\to s(\\operatorname{const}B)$. The map $s(\\operatorname{const}B)\\to B[0]$ is the identity in degree zero. In degree $-n$ its differential for $n>0$ is zero when $n$ is odd and the identity when $n$ is even, since it is the alternating sum of $n+1$ identity maps. Consequently its negative degrees form exact two-term identity pairs and it is a quasi-isomorphism. Composing these two maps proves that the standard augmentation is a polynomial resolution in exactly the stated sense. The homotopy inverse used here is only a map of simplicial sets; it is not asserted to be additive.",
-   "uses": [
-    "lem-trf-simplicial-abelian-set-homotopy-quasi-iso"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/simplicial.tex",
-    "place": "Tag 08P2 (lemma-homotopy-equivalence); cotangent Tag 08PT (lemma-pi-shriek-standard), first proof, and Tag 08QI (remark-resolution)."
-   }
-  },
-  {
-   "text": "Let $Q_\\bullet\\to B$ be any polynomial resolution in the statement. Forgetting multiplication makes its augmentation a morphism of simplicial abelian groups, termwise surjective by hypothesis. The hypothesis gives a quasi-isomorphism $s(Q)\\to B[0]$. Factor it as $s(Q)\\to s(\\operatorname{const}B)\\to B[0]$. The second map induces isomorphisms on cohomology by the constant-complex calculation of Step 2, so the first one does also: on each cohomology group its map is the inverse of the second map followed by the given isomorphism. Thus [lem-trf-simplicial-abelian-surjective-quasi-iso-boundary-lifting] applies and says that $Q\\to\\operatorname{const}B$ has every boundary lift, including dimension zero. In particular it is a trivial Kan fibration in the boundary-defined sense of [def-weil-pbc-trivial-kan-fibration]. The same applies to the standard resolution by Steps 1 and 2.",
-   "uses": [
-    "lem-trf-simplicial-abelian-surjective-quasi-iso-boundary-lifting",
-    "def-weil-pbc-trivial-kan-fibration"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/simplicial.tex",
-    "place": "Tag 08P1 (lemma-qis-simplicial-abelian-groups); cotangent Tag 08QI (remark-resolution)."
-   }
-  },
-  {
-   "text": "Choose universes $\\mathcal U\\in\\mathcal V$ as in [def-weil-size-convention], with the rings and all the resolutions in question $\\mathcal U$-small. Let $\\mathcal D_{B/A}$ have as objects all $\\mathcal U$-small polynomial $A$-algebras $T$ equipped with an $A$-algebra map $T\\to B$ (not required to be surjective), and as arrows algebra maps over $B$. All their structure data and maps form sets in $\\mathcal V$, so this is a small category there; complexes and modules below are taken in $\\mathcal V$. A resolution is a simplicial object of this category. For $T=A[E]\\to B$, maps $T\\to Q_n$ over $B$ are precisely choices, for every $e\\in E$, of an element of $Q_n$ mapping to the prescribed image of $e$ in $B$. This bijection commutes with all simplicial operators, by evaluation on generators.",
-   "uses": [
-    "def-weil-size-convention"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/cotangent.tex",
-    "place": "Category of polynomial presentations in section-comparison; Tag 08PS and its size-bound footnote; a containing universe is used here"
-   }
-  },
-  {
-   "text": "The simplicial set $\\operatorname{Hom}_{\\mathcal D_{B/A}}(T,Q_\\bullet)$ maps to a singleton by a trivial Kan fibration. To check the boundary lifting condition of [def-weil-pbc-trivial-kan-fibration], a boundary of algebra maps is, on each generator $e$, a boundary in $Q$ above the constant simplex $\\epsilon_T(e)\\in B$. Step 3 supplies a filler for each generator; choose these fillers and extend them uniquely to an algebra map out of $A[E]$. This gives the required filler of algebra maps, and degree-zero surjectivity is proved by the same choice of generator lifts. This works for an empty set or an infinite set of generators, without finite-generation assumptions. Now [lem-weil-pbc-trivial-kan-homotopy-equivalence] supplies a homotopy equivalence with the singleton. This argument applies both to $Q$ and to the standard resolution.",
-   "uses": [
-    "def-weil-pbc-trivial-kan-fibration",
-    "lem-weil-pbc-trivial-kan-homotopy-equivalence"
+    "lem-trf-polynomial-augmentation-boundary"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/cotangent.tex",
-    "place": "Tag 08PS (lemma-identify-pi-shriek), the generator-fibre argument; simplicial Tag 08NS"
+    "place": "Tags 08PM (definition-standard-resolution), 08PT (lemma-pi-shriek-standard), first proof, and 08QI (remark-resolution); simplicial.tex Tags 08ND (lemma-standard-simplicial-homotopy), 08P2 (lemma-homotopy-equivalence), 08P1 (lemma-qis-simplicial-abelian-groups)."
    }
   },
   {
-   "text": "Define the covariant functor $\\mathcal F_{B/A}(T)=\\Omega^1_{T/A}\\otimes_T B$ on $\\mathcal D_{B/A}$. An arrow $v:T\\to T'$ induces $dt\\otimes b\\mapsto d(vt)\\otimes b$; existence and equality under composition follow from the universal derivation in [def-weil-pbc-kahler-differentials]. Set $K(Q)=s(\\mathcal F_{B/A}(Q_\\bullet))$ and $H_{B/A}=\\mathbf H(\\mathcal D_{B/A},\\mathcal F_{B/A})$. Steps 4 and 5 verify precisely the smallness and representable-contractibility assumptions of [lem-trf-simplicial-derived-colimit-computation]. Its isomorphisms are $a_Q:K(Q)\\simeq H_{B/A}$ and $a_{\\mathrm{std}}:L_{B/A}\\simeq H_{B/A}$. Define $c_Q=a_{\\mathrm{std}}^{-1}a_Q$. Its naturality says $a_R K(h)=a_Q$ for any augmented resolution morphism $h:Q\\to R$, so $c_R K(h)=c_Q$. This proves the canonical comparison and its naturality in the derived category [def-weil-abstract-derived-category]. No maps in both directions between arbitrary algebra resolutions have been assumed.",
+   "text": "Choose the universes $\\mathcal U\\in\\mathcal V$ of [lem-trf-polynomial-presentation-homology] with $A$, $B$ and all the resolutions in question $\\mathcal U$-small, so that every term lies in $\\mathcal D_{B/A}$. For these augmentations apply [lem-trf-polynomial-presentation-homology] with $R=B$ and $F(T)=\\Omega^1_{T/A}\\otimes_T B$. The functor sends $\\mathrm dx\\otimes b$ to $\\mathrm d(vx)\\otimes b$; its existence and composition follow from [def-weil-pbc-kahler-differentials]. Write $H=\\mathbf H(\\mathcal D_{B/A},F)$ and $K(Q)=s(F(Q))$. We obtain $a_Q:K(Q)\\simeq H$ and $a_P:L_{B/A}\\simeq H$. Set $c_Q=a_P^{-1}a_Q$. The cited naturality gives $c_RK(h)=a_P^{-1}a_RK(h)=c_Q$ for every resolution map $h:Q\\to R$. In particular $c_P=1$.",
    "uses": [
-    "def-weil-pbc-kahler-differentials",
-    "lem-trf-simplicial-derived-colimit-computation",
-    "def-weil-abstract-derived-category"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/cotangent.tex",
-    "place": "Tags 08PS, 08QI; sites-cohomology Tag 08Q9"
-   }
-  },
-  {
-   "text": "For a ring square $(\\alpha:A\\to A',\\beta:B\\to B')$, define $t_{-1}=\\beta$ and recursively $t_{n+1}:A[UP_n]\\to A'[UP'_n]$ by $a\\mapsto\\alpha(a)$ and $[p]\\mapsto[t_n(p)]$; similarly $t_0:A[UB]\\to A'[UB']$. Evaluation commutes with these maps because both composites send $[p]$ to $t_n(p)$. Insertion of the unit commutes as well because both composites send a variable to the variable labelled by its image. Applying this at the relevant iteration gives commutation with every face, degeneracy and augmentation. For an identity square the recursion fixes coefficients and variables; for two squares the composite recursion sends $[p]$ to $[t'_nt_n(p)]$. Uniqueness of a map from a polynomial algebra with specified generator values therefore gives strict identity and composition in every degree. Finally the rule $dp\\otimes b\\mapsto d(t_np)\\otimes\\beta(b)$ is balanced and kills the relative-derivation relations, by [def-weil-pbc-kahler-differentials]; it gives the required semilinear map of differential complexes and preserves those strict identities.",
-   "uses": [
+    "lem-trf-polynomial-presentation-homology",
     "def-weil-pbc-kahler-differentials"
    ],
-   "elementary": true,
+   "elementary": false,
    "source": {
     "document": "literature/stacks-project/cotangent.tex",
-    "place": "Section Functoriality, Tag 08QL; explicit map P_0=A[B] to A′[B′] and its iteration"
+    "place": "Tag 08PS (lemma-identify-pi-shriek), including the generator-fibre argument; Tag 08QI (remark-resolution); sites-cohomology.tex Tag 08Q9 (lemma-compute-by-cosimplicial-resolution); containing-universe formulation of the category."
    }
   },
   {
-   "text": "The square also defines a functor $u:\\mathcal D_{B/A}\\to\\mathcal D_{B'/A'}$ by $T\\mapsto T\\otimes_A A'$ with augmentation $t\\otimes a'\\mapsto\\beta(\\epsilon_T(t))a'$. It remains polynomial: $A[E]\\otimes_A A'\\simeq A'[E]$, as follows from the mutually inverse maps fixing coefficients and variables. The maps $dt\\otimes b\\mapsto d(t\\otimes1)\\otimes\\beta(b)$ define $\\theta:\\mathcal F_{B/A}\\to\\operatorname{Res}_\\beta(\\mathcal F_{B'/A'}\\circ u)$ by [def-weil-pbc-kahler-differentials]. A supplied semilinear augmented simplicial map $h:Q\\to Q'$ gives $k:uQ\\to Q'$ by $q\\otimes a'\\mapsto h(q)a'$, and the standard map of Step 7 gives such a $k$ for the standard resolutions. Neither $uQ$ nor its augmentation is claimed to be a resolution: only the endpoints $Q,Q'$ need be resolutions.",
+   "text": "For a ring square, [lem-trf-polynomial-square-bar-naturality] gives the recursive standard map $t$, its strict identity and composition laws, and the indicated differential maps. Its comparison identities are $a_{Q'}K(h)=H(\\alpha,\\beta)a_Q$ and $a_{P'}K(t)=H(\\alpha,\\beta)a_P$, with target scalars restricted. Substituting $c_Q=a_P^{-1}a_Q$ yields $c_{Q'}K(h)=K(t)c_Q$. For arbitrary choices of endpoint resolutions, the transported map is therefore $c_{Q'}^{-1}K(t)c_Q$ and agrees with every supplied $h$. Identity, composition and transitive change of resolution follow by cancelling adjacent $c_Qc_Q^{-1}$ and using the strict laws for $t$.",
    "uses": [
-    "def-weil-pbc-kahler-differentials"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/cotangent.tex",
-    "place": "Functoriality: category of polynomial presentations and u(P)=P⊗_A A′, following Tag 08QL"
-   }
-  },
-  {
-   "text": "Apply the reindexing naturality clause of [lem-trf-simplicial-derived-colimit-computation] to the data of Step 8. Write $H(\\alpha,\\beta)=\\mathbf H(u,\\theta)$. It gives $a_{Q'}K(h)=H(\\alpha,\\beta)a_Q$; for standard resolutions it gives $a'_{\\mathrm{std}}K(t)=H(\\alpha,\\beta)a_{\\mathrm{std}}$. Restriction of scalars is understood on every target. Substituting $c_Q=a_{\\mathrm{std}}^{-1}a_Q$ and $c_{Q'}=(a'_{\\mathrm{std}})^{-1}a_{Q'}$ yields $c_{Q'}K(h)=K(t)c_Q$. Thus whenever a map between chosen resolutions is supplied it gives exactly the standard derived map through the canonical comparisons. For arbitrary choices of resolutions define the transported map by $c_{Q'}^{-1}K(t)c_Q$; the same equation proves agreement with every supplied $h$. Its identity law is $c_Q^{-1}c_Q=1$, and its composition law follows by cancelling the middle $c_{Q'}c_{Q'}^{-1}$ and using the strict composition of Step 7. Changing resolutions is likewise transitive by cancelling the common factor. This proves the final compatibility clause without asserting the existence of algebra homotopy inverses.",
-   "uses": [
-    "lem-trf-simplicial-derived-colimit-computation"
+    "lem-trf-polynomial-square-bar-naturality"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/cotangent.tex",
-    "place": "Functoriality via Tag 08PD and example-morphism-categories; compatibility with Tag 08QI comparisons follows from Tag 08Q9 comparison roofs"
+    "place": "Tag 08QL (section-functoriality), both the iterated polynomial maps and the presentation-category base-change construction; sites-cohomology.tex Tags 08PD (remark-morphism-fibred-categories) and 08Q9 (lemma-compute-by-cosimplicial-resolution), for the comparison identity omitted at the end of 08QL."
    }
   }
  ],
  "proof_deps": [
-  "def-weil-abstract-derived-category",
   "def-weil-pbc-kahler-differentials",
-  "def-weil-pbc-trivial-kan-fibration",
-  "def-weil-size-convention",
-  "lem-trf-adjunction-standard-simplicial-homotopy",
-  "lem-trf-simplicial-abelian-set-homotopy-quasi-iso",
-  "lem-trf-simplicial-abelian-surjective-quasi-iso-boundary-lifting",
-  "lem-trf-simplicial-derived-colimit-computation",
-  "lem-weil-pbc-trivial-kan-homotopy-equivalence"
+  "lem-trf-polynomial-augmentation-boundary",
+  "lem-trf-polynomial-presentation-homology",
+  "lem-trf-polynomial-square-bar-naturality"
  ],
  "proof_origin": {
   "by": "document",
@@ -229,17 +155,11 @@
   "is": null
  },
  "split_report": {
-  "date": "2026-10-18",
+  "date": "2026-10-22",
   "item": "lem-trf-cotangent-resolution-coherence",
   "worker": "stage1",
-  "summary": "Q13 repair of the dedicated handoff: replace Steps 2–3, which used the dropped weak-equivalence, simplicial-module model and Kan–Quillen machinery, by direct Stacks 08P2 and 08P1 inputs. Retain the standard-adjunction construction, representable generator lifts, small-category derived-colimit comparison, and explicit ring-square functoriality. Two new statement-only generic simplicial abelian-group lemmas; statement, historical provenance and maintainer-owned metadata unchanged.",
-  "blueprint": "Historical support chain from the lci-cotangent-presentation auxiliary input, recorded in blueprint.from. Steps 1–6 provide standard and arbitrary polynomial-resolution comparisons; Steps 7–9 supply ring-square functoriality. This is not a replacement realization of the current sk-i-curve-zero unit, whose two steps remain owned by lem-trf-local-term-locality.",
-  "tool_uses": [
-   {
-    "node": "lem-weil-pbc-trivial-kan-homotopy-equivalence",
-    "why": "Stacks 08NS supplies a simplicial homotopy inverse for a boundary-defined trivial Kan fibration. This generic tool proves contractibility of representable evaluations and does not replace any geometric unit step."
-   }
-  ]
+  "summary": "Q18 repair of the human re-split order: distribute the former nine-step argument over three independent statement-only tasks (augmentation criterion, presentation homology, square/bar naturality), retaining the entire old proof verbatim and its ownership map in report.md. Statement and route unchanged. New assembly is under 3000 characters.",
+  "blueprint": "Historical support chain from the lci-cotangent-presentation auxiliary input, recorded in blueprint.from. Steps 1–6 provide standard and arbitrary polynomial-resolution comparisons; Steps 7–9 supply ring-square functoriality. This is not a replacement realization of the current sk-i-curve-zero unit, whose two steps remain owned by lem-trf-local-term-locality. Re-split ownership: old Steps 1–3, 4–6 and 7–9 are carried respectively by the three new nodes; assembly defines c_Q and checks cancellation."
  },
  "tool_uses": [
   "lem-cbc-normalized-alternating-homotopy-equivalence",
@@ -249,12 +169,12 @@
   "lem-weil-pbc-trivial-kan-homotopy-equivalence"
  ],
  "reviewed": {
-  "date": "2026-10-18",
+  "date": "2026-10-22",
   "by": "L",
-  "reviewer": "NT-cc-Q13-2ea633985",
-  "group": "Q13",
+  "reviewer": "NT-cc-Q18-d9a794966",
+  "group": "Q18",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q13-2ea633985 (reviewer sub-agent of L); spot-checked: Read the item, both new nodes, every cited node's statement and the sources: Stacks simplicial 08P1 (l.5836-5881), 08P2 (l.5884-5961), 019K/definition-homotopy-equivalent, 08ND; cotangent 08PT, both proofs. Steps 1-3 follow the first proof of 08PT: 08ND, then 08P2, then 08P1. The constant-complex calculation is checked: d^{-n} is 1 for even n and 0 for odd n, so s(const B) has cohomology B[0]. Steps 4-5 follow the second proof of 08PT: lifting generator by generator over constant simplices, including n=0, empty and infinite E, then 08NS. Step 6 uses only the 'natural in Q' clause of the derived-colimit node. In Steps 7-9 the recursive t_n, u(T)=T⊗A', theta and k are checked, and the cancellation c_{Q'}K(h)=K(t)c_Q is verified. New nodes: self-contained, statement-only, not restatements of the item; rg over the DAG for 08P1/08P2/simplicial abelian group finds no duplicate; blueprint from/via correct. FIX (one repair, B/C4-type): lem-trf-simplicial-abelian-set-homotopy-quasi-iso required single homotopies 'gf≃id' whose direction was ambiguous, while 08ND and the adjunction node supply only 'homotopic' in the 019K chain sense. Its hypothesis is changed to that sense, matching 08P2 exactly; the corrected file is in fixes/dag/nodes/sec-trace-formula/. The split_report tool use 08NS (lem-weil-pbc-trivial-kan-homotopy-equivalence) is accepted. The item's old maintainer tool_uses (lem-cbc-normalized-alternating-homotopy-equivalence, lem-cbc-realization-weak-equivalence, lem-cbc-simplicial-module-model, lem-coef-kan-quillen-right-proper) are unused and can be removed at landing. The dropped-machinery return is repaired.; 1 file(s) fixed by the reviewer"
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q18-d9a794966 (reviewer sub-agent of L); spot-checked: Read the item, all three new nodes, every cited node's statement, and the sources at the cited places: Stacks cotangent.tex 08PS (l.229-260), 08QL (l.867-940), and the tags 08PM/08PN/08PT/08QI/08ND/08P1/08P2/08Q9/08PD, all present with correct labels. The re-split follows the human's note: old Steps 1-3 now sit in lem-trf-polynomial-augmentation-boundary (the standard simplicial algebra, the constant-complex quasi-isomorphism, and the criterion that a surjective quasi-isomorphism is a trivial Kan fibration). Old Steps 4-6 sit in lem-trf-polynomial-presentation-homology (V-small D_{B/A}, the generator-fibre product, contractible Hom(T,Q), and a_Q^F natural in F and h). Old Steps 7-9 sit in lem-trf-polynomial-square-bar-naturality (recursive t_n with strict identity/composition, u, theta, k, and a_{Q'}K(h)=H(u,theta)a_Q; checked that s(F'(k)theta_Q)=K(h)). The item keeps the Kähler functor, c_Q and the cancellation c_{Q'}K(h)=K(t)c_Q, which I verified. No argument is shortened or dropped. The assembly is 1511 characters (1721 after the fix). The new statements are 1588, 2072 and 2525 characters, comparable in size, and none restates the item. Edge cases checked: B=0, empty or infinite E, non-flat alpha. Searched the DAG for 08PS/08PM/08PT/08QL/08QI and for 'standard resolution' and 'polynomial resolution': no duplicates. pair-categories and lower-shriek-polynomial-top are different statements and depend on the item; resolution-data and the bar-system are definitions only. Mechanical route-pivot points: def-weil-pbc-trivial-kan-fibration is a mathlib leaf for the combinatorial boundary-lifting property, already used by the base after the route-pivot repair of 2026-10-18; it serves as the conclusion of 08P1 and the hypothesis of 08PS, and is accepted. 'simplicial set' means elementary underlying sets, acceptable. 'quillen' occurs only in split_report text that lists removed citations, a negation, acceptable. The inherited tool_uses are unchanged from the base. FIX (2 repairs): (1) B2: square-bar-naturality did not state that Q and Q' are U-small, which the cited a_Q needs; added. (2) Item Step 2: restored old Step 4's choice of universes U in V with A, B and the resolutions U-small. No statement or target change.; 2 file(s) fixed by the reviewer"
  },
  "lean": {
   "module": "Sheaf.RingTheory.CotangentResolutionCoherence",
@@ -301,5 +221,16 @@
   "result": "pass",
   "note": "Read the item, both stmt_deps (Mathlib DerivedCategory/HasDerivedCategory, KaehlerDifferential via CommRingCat.KaehlerDifferential), the module (25 decls) and the report. Statement field verbatim; the snapshot node differs from live only in lean. Clause checks: standardTerm/Base/Augmentation/Face/Degeneracy match the comonad formulas d_i=G^i eps G^{n+1-i}, s_i=G^i delta G^{n-i} (same convention as def-trf-comonad-standard-resolution); IsStandard pins objects, base, augmentation, all delta and sigma by HEq; negativeComplex = alternating complex extended along n->-n; IsPolynomialResolution = A-algebra iso A[E]~P_n, surjectivity, QuasiIso to B[0]; DifferentialModel and DifferentialMap pinned on generators b(x)dx; standardMap pinned to the recursive standardSquareMap with strict id/comp. Nonempty record not hollow: the only free field, comparison, is pinned by comparison_standard=refl plus compatibility with an augmented map std->P (std is levelwise free with generator-preserving degeneracies, so it lifts against the trivial fibration), hence it is the canonical 08QI comparison. Edge cases B=0, empty or infinite E, n=0, identity squares; no extra hypotheses; HasDerivedCategory.{u+1} family always satisfiable. No duplicate L_{B/A} (cotangent citers have no lean record; Mathlib cotangentComplex is the conormal map). nt_compile --json: 6.5 s, exit 0, clean. Advisory: second reading is the author's self-check; the two proof-only non-public imports are unused; the proof-only TrivialKanFibration source is missing from the checkout (maintainer note)."
  },
- "lean_audit": {}
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ }
 }

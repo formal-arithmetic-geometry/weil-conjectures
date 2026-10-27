@@ -1,0 +1,287 @@
+{
+ "id": "lem-pod-isomorphism-pullback-texact-coefficients",
+ "kind": "statement",
+ "title": "Isomorphism pullback gives a coherent t-exact rational coefficient family",
+ "chapter": "sec-poincare-duality",
+ "unit": "sk-lem-finite",
+ "statement": "Fix a prime $\\ell$ and an algebraic closure $\\Omega$ of $\\mathbf Q_\\ell$. Let $g:X\\xrightarrow{\\sim}Y$ be an isomorphism of noetherian finite-dimensional schemes on which $\\ell$ is invertible [def-weil-scheme-morphism-properties]; noetherian and finite-dimensional mean a finite affine noetherian cover and a bound on chains of irreducible closed subsets. For every finite subextension $E\\subset\\Omega$ choose its valuation ring $A_E$ and uniformizer $\\varpi_E$ [def-weil-l-adic-coefficient-extension]. Use the completed coefficient sheaves $R_{E,W}=\\varprojlim_n(A_E/\\varpi_E^n)_W$ for $W=X,Y$ [def-weil-completed-integral-coefficients], the integral categories $\\mathcal C_{E,W}=D^b_c(W,A_E)$ [def-weil-derived-complete-integral-detailed], and their raw rationalizations $\\mathcal D_{E,W}=\\mathcal C_{E,W}[1/\\varpi_E]$ [def-weil-rationalization-karoubi]. Equip the integral categories with their bounded standard t-structures [prop-weil-pbc-integral-tstructure] and the rational ones with the t-structures whose halves are the isomorphism closures of the integral halves [prop-weil-localized-tstructure].\n\nThe actual completed integral pullback $F_E^{\\mathrm{int}}=Lg_E^*$ [def-weil-derived-pullback-tensor-hom] maps $\\mathcal C_{E,Y}$ into $\\mathcal C_{E,X}$ and is $A_E$-linear, exact and t-exact. Its exact shift structure is the transport of the termwise inverse-image shift structure through the canonical derived isomorphism $Lg_E^*K\\cong g^{-1}K$, with coefficient action transported along $g^{-1}R_{E,Y}\\cong R_{E,X}$. Its rationalization is the actual prescribed $F_E=Lg_E^*:\\mathcal D_{E,Y}\\to\\mathcal D_{E,X}$, and is exact and t-exact.\n\nFor $E\\subset L$ write $T^W_{L/E}$ for the completed integral scalar-extension functor [def-weil-integral-scalar-extension] or its rationalization, as appropriate. The integral pullback scalar-extension comparison $\\alpha_{L/E,K}:(Lg_E^*K)\\otimes_{\\mathcal O_E}\\mathcal O_L\\xrightarrow{\\sim}Lg_L^*(K\\otimes_{\\mathcal O_E}\\mathcal O_L)$ of [lem-pur-integral-operations-scalar-extension], which is the comparison $\\theta^{g^*}$ used for pullback in [def-weil-derived-pullback-tensor-hom], extends to an exact natural isomorphism\n$$\\beta_{L/E}:T^X_{L/E}F_E\\xrightarrow{\\sim}F_LT^Y_{L/E}.$$\nOn integral arrows it is the image of $\\alpha_{L/E}$; it is obtained by semilinear scalar localization for $A_E\\to A_L$, sending a fraction $u/\\varpi_E^n$ to the image of $u$ multiplied by $\\varpi_E^{-n}$ in $L$. These are comparisons of the actual functors on all rational morphisms. They preserve shift comparisons, are identities for $L=E$, and satisfy the tower equation with the canonical scalar associators of [prop-weil-pbc-scalar-extension].",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-poincare-duality/sk-lem-finite/prop-constructible-truncations.md",
+  "place": "Proof, final sentence on automorphism pullback: completed-to-termwise comparison, t-exactness, and rational scalar/shift coherence (previous steps 8-9); agent extraction of the existing corrected stage-1 argument, not a quoted theorem of the blueprint"
+ },
+ "stmt_deps": [
+  "def-weil-scheme-morphism-properties",
+  "def-weil-l-adic-coefficient-extension",
+  "def-weil-completed-integral-coefficients",
+  "def-weil-derived-complete-integral-detailed",
+  "def-weil-rationalization-karoubi",
+  "prop-weil-pbc-integral-tstructure",
+  "prop-weil-localized-tstructure",
+  "def-weil-derived-pullback-tensor-hom",
+  "def-weil-integral-scalar-extension",
+  "lem-pur-integral-operations-scalar-extension",
+  "prop-weil-pbc-scalar-extension",
+  "def-weil-t-structure",
+  "def-weil-constructible-standard-tstructure",
+  "def-weil-algebraically-closed-coefficients",
+  "lem-weil-scalar-extension-composition",
+  "def-weil-inverse-image-pullback-comparison"
+ ],
+ "proof": [
+  {
+   "text": "For each small finite coefficient model apply the raw-stage lemma and assemble IsomorphismPullbackCoefficientStage field by field. The theorem provides normalized comparisons, exact shifts, linearity, and preservation of both standard halves. Choose these stage witnesses inside the theorem proof.",
+   "uses": [
+    "lem-pod-isomorphism-pullback-raw-stage"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Assemble the specified integral scalar comparison into a natural isomorphism using the naturality clause of specifiedPullbackComparisonAlpha. Apply the scalar-shift lemma to the same chosen stage shifts and normalized inverse-image comparisons. The rational comparison normalization is the existing prescribed component theorem.",
+   "uses": [
+    "lem-weil-specified-pullback-comparison-alpha",
+    "lem-pod-isomorphism-pullback-scalar-shift",
+    "def-weil-derived-pullback-tensor-hom"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply the unit and tower lemmas to the integral natural-isomorphism family (B E L h).integral, with its component normalization fields. Their integral equations now refer directly to that same family, so no separate transport of a large component equality is needed. Their rational equations use the existing prescribed rational comparisons and the canonical rational unitor and associator. The shared field-structured inclusion presentation is used consistently.",
+   "uses": [
+    "lem-pod-isomorphism-pullback-unit-laws",
+    "lem-pod-isomorphism-pullback-tower-laws",
+    "def-weil-algebraically-closed-coefficients",
+    "lem-weil-scalar-extension-composition",
+    "def-pod-isomorphism-coefficient-inclusions"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-pod-isomorphism-pullback-raw-stage",
+  "lem-weil-specified-pullback-comparison-alpha",
+  "lem-pod-isomorphism-pullback-scalar-shift",
+  "def-weil-derived-pullback-tensor-hom",
+  "lem-pod-isomorphism-pullback-unit-laws",
+  "lem-pod-isomorphism-pullback-tower-laws",
+  "def-weil-algebraically-closed-coefficients",
+  "lem-weil-scalar-extension-composition",
+  "def-pod-isomorphism-coefficient-inclusions"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-poincare-duality/sk-thm-frobenius/prop-constructible-truncations.proof.md",
+  "place": "S5 reduction into finite stage, scalar shift, unit, and tower steps; Lean assembles packages and transports coefficient inclusion equalities."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Automorphism pullback on completed integral constructible pro-etale complexes is t-exact and rationalizes with coherent semilinear finite coefficient field comparison isomorphisms",
+   "results": "8 hits: KaehlerDifferential.tensorKaehlerEquivOfFormallyEtale, KaehlerDifferential.isBaseChange_of_formallyEtale, AlgebraicGeometry.IsEtale.of_comp, StandardEtalePair.homEquiv, KaehlerDifferential.tensorKaehlerEquivOfFormallyEtale_apply, Algebra.FormallyEtale.comp, AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified, Algebra.FormallyEtale.of_restrictScalars",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary scheme-module pullback, abstract derived exact functors and unrelated etale algebra do not give completed constructible pullback with coefficient-localization coherence"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"DerivedCategory\", \"mapDerivedCategory\"",
+   "results": "12 hits: CategoryTheory.Functor.mapDerivedCategory, CategoryTheory.Functor.instCommShiftDerivedCategoryMapDerivedCategoryInt, CategoryTheory.Functor.mapDerivedCategoryIdIso, CategoryTheory.Functor.mapDerivedCategorySingleFunctor, CategoryTheory.Functor.instIsTriangulatedDerivedCategoryMapDerivedCategory, CategoryTheory.Functor.instLinearDerivedCategoryMapDerivedCategory, CategoryTheory.NatTrans.instCommShiftDerivedCategoryMapDerivedCategoryInt, CategoryTheory.Functor.instLiftingCochainComplexIntDerivedCategoryQQuasiIsoUpMapDerivedCategoryId",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary scheme-module pullback, abstract derived exact functors and unrelated etale algebra do not give completed constructible pullback with coefficient-localization coherence"
+  },
+  {
+   "tool": "grep",
+   "query": "automorphism.*(constructible|t.exact)|semilinear.*localization|isomorphism.*derived.*pullback",
+   "results": "2 hits: Mathlib/RingTheory/FractionalIdeal/Operations.lean, Mathlib/RingTheory/FractionalIdeal/Operations.lean",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary scheme-module pullback, abstract derived exact functors and unrelated etale algebra do not give completed constructible pullback with coefficient-localization coherence"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Rationalized completed integral pullback along a scheme isomorphism is t-exact and commutes coherently with finite extensions of l-adic coefficients",
+   "results": "8 hits: AlgebraicGeometry.Scheme.Modules.pullbackCongr, AlgebraicGeometry.pullbackSpecIso, AlgebraicGeometry.Scheme.OpenCover.pullbackCoverAffineRefinementObjIso_inv_pullbackHom, AlgebraicGeometry.pullbackRestrictIsoRestrict, AlgebraicGeometry.Scheme.Modules.pullbackId, AlgebraicGeometry.Scheme.Modules.pseudofunctor_mapId_hom_τl, SheafOfModules.pullbackIso, SheafOfModules.pullbackObjFreeIso",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary scheme-module pullback, abstract derived exact functors and unrelated etale algebra do not give completed constructible pullback with coefficient-localization coherence"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For an isomorphism of schemes the completed integral derived inverse image is t-exact and its fraction extension respects coefficient field associativity and shift comparisons",
+   "results": "8 hits: CategoryTheory.Functor.complete_distinguished_essImageDistTriang_morphism, CategoryTheory.Functor.essImageDistTriang_mem_of_iso, CategoryTheory.Functor.IsHomological.of_iso, CategoryTheory.Functor.mapDerivedCategorySingleFunctor, CategoryTheory.Functor.instCommShiftHomologicalComplexIntUpFunctorQuasiIsoMapHomologicalComplexUpToQuasiIsoLocalizerMorphism, DerivedCategory.instCommShiftHomologicalComplexIntUpHomFunctorQuotientCompQhIso, DerivedCategory.exists_iso_singleFunctor_obj_of_isGE_of_isLE, DerivedCategory.singleFunctorIsoCompQ",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary scheme-module pullback, abstract derived exact functors and unrelated etale algebra do not give completed constructible pullback with coefficient-localization coherence"
+  },
+  {
+   "tool": "grep",
+   "query": "isomorphism.*(t.exact|completed)|semilinear.*localization|mapDerivedCategory.*homology",
+   "results": "9 hits: Mathlib/Algebra/Category/ModuleCat/Biproducts.lean, Mathlib/Algebra/Category/ModuleCat/Biproducts.lean, Mathlib/RingTheory/FractionalIdeal/Operations.lean, Mathlib/RingTheory/FractionalIdeal/Operations.lean, Mathlib/CategoryTheory/GuitartExact/Basic.lean, Mathlib/CategoryTheory/Abelian/LeftDerived.lean, Mathlib/CategoryTheory/Abelian/LeftDerived.lean, Mathlib/CategoryTheory/Abelian/RightDerived.lean",
+   "date": "2026-10-22",
+   "verdict": "no match: none states completed constructible pullback with its prescribed canonical scalar comparisons and rational localization coherence"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Functor.mapDerivedCategory\", \"CommShift\"",
+   "results": "0 hits: ",
+   "date": "2026-10-22",
+   "verdict": "no match: none states completed constructible pullback with its prescribed canonical scalar comparisons and rational localization coherence"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived inverse image for an isomorphism of ringed topoi preserves standard t-structures and scalar extension",
+   "results": "8 hits: AlgebraicGeometry.Scheme.inv_app, AlgebraicGeometry.Scheme.inv_appTop, AlgebraicGeometry.PresheafedSpace.stalkMap.isIso, AlgebraicGeometry.LocallyRingedSpace.stalkMap_inv_hom_assoc, SheafOfModules.pushforwardNatIso_inv, AlgebraicGeometry.Scheme.Hom.inv_appTop, AlgebraicGeometry.LocallyRingedSpace.restrictStalkIso_inv_eq_germ_apply, AlgebraicGeometry.Scheme.Hom.inv_app",
+   "date": "2026-10-22",
+   "verdict": "no match: none states completed constructible pullback with its prescribed canonical scalar comparisons and rational localization coherence"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Exact inverse image equivalence of sheaves induces a t-exact functor of derived categories compatible with shifts and scalar localization",
+   "results": "8 hits: CategoryTheory.Functor.isHomological_of_localization, CategoryTheory.Functor.instCommShiftDerivedCategoryMapDerivedCategoryInt, CategoryTheory.Functor.mapDerivedCategoryFactorsh, CategoryTheory.Functor.mapDerivedCategory, CategoryTheory.Abelian.Ext.mapExactFunctor_hom, CategoryTheory.Functor.instLiftingCochainComplexIntDerivedCategoryQQuasiIsoUpCompHomologicalComplexMapHomologicalComplexMapDerivedCategory, CategoryTheory.Functor.map_distinguished_op_exact, CategoryTheory.Functor.mapDerivedCategoryFactors",
+   "date": "2026-10-22",
+   "verdict": "no match: none states completed constructible pullback with its prescribed canonical scalar comparisons and rational localization coherence"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Completed integral pro-etale pullback along an isomorphism of schemes is t-exact and coherently commutes with finite l-adic coefficient extensions after rationalization",
+   "results": "8 hits: AlgebraicGeometry.Scheme.instHasPullbacksEtale, AlgebraicGeometry.IsEtale.instHasOfPostcompPropertyScheme, AlgebraicGeometry.IsEtale.instIsStableUnderBaseChangeScheme, RingHom.Etale.respectsIso, AlgebraicGeometry.of_pullback_fst_Spec_of_codescendsAlong, StandardEtalePresentation.mapEquiv, AlgebraicGeometry.pullbackSpecIso_hom_base, AlgebraicGeometry.Scheme.instCategoryEtale",
+   "date": "2026-10-22",
+   "verdict": "no match: none states completed constructible pullback with its prescribed canonical scalar comparisons and rational localization coherence"
+  },
+  {
+   "tool": "grep",
+   "query": "mapDerivedCategory|CommShift|IsTriangulated|Linear",
+   "results": "5 hits: 9, 16, 36, 39, 41",
+   "date": "2026-10-22",
+   "verdict": "no match: none states completed constructible pullback with its prescribed canonical scalar comparisons and rational localization coherence"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "prop-constructible-truncations",
+  "date": "2026-10-22",
+  "group": "Q90"
+ },
+ "blueprint": {
+  "from": {
+   "node": "prop-constructible-truncations",
+   "place": "Proof, final sentence on automorphism pullback: completed-to-termwise comparison, t-exactness, and rational scalar/shift coherence (previous steps 8-9)",
+   "via": []
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-pod-isomorphism-pullback-texact-coefficients",
+  "worker": "stage1",
+  "summary": "NE split the actual completed pullback argument into eight steps using existing nodes only. Proved integral t-exactness from exact reindexing and ambient cohomology, pinned comparison choices through the entire tower counit, checked signed cone shifts explicitly, and localized semilinearly on all rational arrows. Statement unchanged; no new nodes.",
+  "blueprint": "Realizes the final automorphism sentence in prop-constructible-truncations.proof.md: Steps 1-3 identify actual integral pullback and prove t-exactness; Steps 4-5 pin scalar comparisons and verify exact shifts; Steps 6-8 rationalize and prove all-arrow naturality and tower/unit coherence.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-proetale-isomorphism-inverse-image",
+    "why": "Site reindexing and completed-ring identification are a generic input to the final automorphism clause."
+   },
+   {
+    "node": "lem-weil-sheaf-scalar-extension-ring-iso",
+    "why": "Transport of module actions along a ring isomorphism; no construction in this unit replaces it."
+   },
+   {
+    "node": "lem-weil-isomorphism-derived-pullback",
+    "why": "Generic canonical identification and constructible preservation for actual completed pullback."
+   },
+   {
+    "node": "lem-weil-isomorphism-derived-pullback-comparison-normalization",
+    "why": "Pins the inverse-image comparison to the actual completion unit on whole cones."
+   },
+   {
+    "node": "lem-weil-pbc-exact-functor-derived-factorization",
+    "why": "Generic passage from exact module functors to derived triangulated functors with termwise shifts."
+   },
+   {
+    "node": "prop-weil-pbc-integral-tstructure",
+    "why": "Supplies the ambient-cohomology description of integral halves."
+   },
+   {
+    "node": "lem-pur-integral-operations-scalar-extension",
+    "why": "The prescribed integral scalar comparison, its naturality and tower equations."
+   },
+   {
+    "node": "lem-trf-integral-pullback-comparison-realization",
+    "why": "Pins that scalar comparison to the full strict-tower counit construction for arbitrary schemes."
+   },
+   {
+    "node": "prop-weil-pbc-scalar-extension",
+    "why": "Canonical scalar associators and their exact shift structures."
+   },
+   {
+    "node": "lem-pur-semilinear-scalar-localization",
+    "why": "Generic extension of exact semilinear functors, natural isomorphisms and their equations to raw fractions."
+   },
+   {
+    "node": "prop-weil-localized-tstructure",
+    "why": "Rational halves are isomorphism closures of integral halves."
+   },
+   {
+    "node": "lem-weil-l-adic-extension-integers-dvr",
+    "why": "Identifies the localized valuation ring with the coefficient field, ensuring denominators invert."
+   },
+   {
+    "node": "lem-weil-finite-free-completed-scalar-comparison",
+    "why": "Its completion isomorphism chi identifies ordinary change of completed rings with the strict-tower scalar extension, transporting the balancing associators of prop-weil-pbc-scalar-extension to the T^W; no node of this unit gives it."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-proetale-isomorphism-inverse-image",
+  "lem-weil-isomorphism-derived-pullback-comparison-normalization",
+  "lem-pur-integral-operations-scalar-extension",
+  "lem-pur-semilinear-scalar-localization",
+  "lem-weil-finite-free-completed-scalar-comparison"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-NE-fa5229f71",
+  "group": "NE",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NE-fa5229f71 (reviewer sub-agent of L); spot-checked: I read the whole split: the item, unchanged statement and stmt_deps, eight steps and no new nodes. It is not superseded: live, clones/live and side-live all hold the item unsplit, and no other run exists. It is not on the drop list, has no repair note, has no cycle and cites no SGA. Source: main-20261015 prop-constructible-truncations.proof.md, final sentence. The worker is right that 'exact triangulated ⇒ commutes with truncations' is invalid ([1] is a counterexample), and the proof derives t-exactness from exactness of inverse image on sheaves. Steps 1-3: proetale-isomorphism-inverse-image (1)-(3) give c_E, G_E exact and A_E-linear. Normalization θκ=G(u) gives κ^{-1}=G(u)^{-1}θ, invertible on derived complete inputs. The exact-functor factorization gives the termwise shift. H^i(F K)≅G H^i(K) preserves the ambient-cohomology halves of prop-weil-pbc-integral-tstructure. Step 4: α=μ^{-1}λ from lem-trf (generic; arbitrary morphisms; no Tor hypothesis). Step 5: I verified J_r(x,y)=(x,(-1)^r y) by substitution under both cone sign conventions, and the unit (q,0) commutes with it; elementary accepted. Steps 6-8: semilinear localization gives the def-weil-derived-pullback-tensor-hom rational formula. Rational t-exactness follows from the isomorphism-closure halves. ϖ_E is invertible in L by the DVR node (1),(5), ramified case included. The tower, identity and shift equations survive by whiskering and composition. Edge cases checked: g=id, the empty scheme, degree-0 modules, ramified E⊂L, torsion arrows. FIX (C4): Step 4 identified lem-trf's χ-conjugated ordinary tensor associator with the balancing associators of prop-weil-pbc-scalar-extension without citing χ. I added lem-weil-finite-free-completed-scalar-comparison to Step 4 uses and proof_deps, with the transport written out, and declared it in tool_uses; no cycle. Maintainer note (inherited from Q90): the statement equips def-weil-derived-complete-integral-detailed categories with the t-structures of nodes stated on def-weil-pbc-bounded-constructible-complete (étale-origin witnesses). No node identifies these categories. The proof uses only the ambient-cohomology halves, so it is unaffected.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.Paper.IsomorphismPullbackTExactCoefficients",
+  "declaration": "WeilConjectures.isomorphismPullback_tExact_coefficients",
+  "declarations": [
+   "WeilConjectures.isomorphismPullbackShiftSquare",
+   "WeilConjectures.IsomorphismPullbackCoefficientStage",
+   "WeilConjectures.isomorphismPullbackIntegralAssociator",
+   "WeilConjectures.isomorphismPullbackIntegralUnitor",
+   "WeilConjectures.isomorphismPullbackRationalScalarLaws",
+   "WeilConjectures.IsomorphismPullbackScalarComparison",
+   "WeilConjectures.IsomorphismPullbackCoefficientCoherence",
+   "WeilConjectures.isomorphismPullbackResidueUnits",
+   "WeilConjectures.isomorphismPullback_tExact_coefficients"
+  ],
+  "file": "lean/Sheaf/Paper/IsomorphismPullbackTExactCoefficients.lean",
+  "statement": "theorem isomorphismPullback_tExact_coefficients\n    (l : ℕ) [Fact l.Prime]\n    (Ω : Type v) [Field Ω] [Algebra ℚ_[l] Ω] [IsAlgClosure ℚ_[l] Ω]\n    {X Y : Scheme.{u}} (g : X ⟶ Y) [IsIso g]\n    [IsNoetherian X] [IsNoetherian Y]\n    (_hDimX : ∃ n : ℕ, topologicalKrullDim X ≤ n)\n    (_hDimY : ∃ n : ℕ, topologicalKrullDim Y ≤ n)\n    (hX : ∀ x : X, IsUnit (l : X.presheaf.stalk x))\n    (hY : ∀ y : Y, IsUnit (l : Y.presheaf.stalk y)) :\n    (fun [_iX : ∀ x : X, Invertible (l : X.residueField x)]\n      [_iY : ∀ y : Y, Invertible (l : Y.residueField y)] ↦\n        ∃ S : ∀ E : Index l Ω,\n            IsomorphismPullbackCoefficientStage l (Coefficient.{u} l Ω E) g hX hY,\n          ∃ B : ∀ (E L : Index l Ω) (h : E ≤ L),\n            IsomorphismPullbackScalarComparison l Ω g hX hY S E L h,\n            IsomorphismPullbackCoefficientCoherence l Ω g hX hY S B)\n      (_iX := isomorphismPullbackResidueUnits l X hX)\n      (_iY := isomorphismPullbackResidueUnits l Y hY)",
+  "branch": "newtargets-dag",
+  "by": "Q83",
+  "date": "2026-10-22",
+  "existing": false,
+  "note": "States the actual intrinsic integral and raw rational pullbacks. T-exactness uses the already recorded sfIntegralStandardClass and sfRationalStandardClass, exactly the halves specified in the statement; no etale-origin category is substituted. The fixed inverse-image comparison normalizes the integral shift. Scalar comparisons equal the existing alpha and beta on whole derived maps and satisfy the displayed shift, identity and tower equations. Small coefficient models retain independent scheme and closure universes. Owning helper structures and predicates only package the node clauses; associator/unit adapters compose existing canonical maps."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-c498dae7c",
+  "group": "Q83",
+  "result": "pass",
+  "note": "First Lean delivery of the item: one module, statement verbatim, only sorry is the main theorem, all other snapshot nodes identical to side-live. Hypotheses (IsIso, IsNoetherian, Krull-dim bound, stalk units, residue units derived) match the node; universes of Omega and schemes independent. Integral pullback comparison pinned componentwise to inverseImagePullbackComparisonDerived, which fixes integralShift uniquely; linear/exact/t-exact on both standard halves. Rational shift pinned at 1 with provably equal types (shift-1 functor equality and Q comm-iso = id), which determines the Z-shift; rational exact/t-exact. alpha pinned to integralPullbackScalarComparison and beta is rationalPullbackScalarComparison, with full NatTrans.CommShift squares; unit/tower equations use canonical unitors/associators and match the node. Mechanical finding: sfIntegralScalarComp/Unit are .choose of the theorem's existsUnique (constructed objects), PASS on that point. Advisory: sfConstructibleIntegralScalarExtension (theorem-node owner) and inverseImageIntegralDerived used via dep definitions; redundant normalization conjunct in rational_laws. No fixes, no compile."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-4d672",
+  "group": "S5",
+  "result": "pass",
+  "landing": "20261026T002644-L-105314",
+  "kind": "interface",
+  "note": "independent cc review: item proof assembled from raw-stage (proved) + 4 sorried sub-statements vs node lem-pod-isomorphism-pullback-texact-coefficients steps; adapter/inclusion changes vs change record (defeq aliases); importer IsomorphismFieldTransport compiled against the delivered modules"
+ }
+}

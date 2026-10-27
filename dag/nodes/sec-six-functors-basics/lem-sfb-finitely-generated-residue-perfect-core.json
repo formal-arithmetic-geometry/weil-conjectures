@@ -1,0 +1,306 @@
+{
+ "id": "lem-sfb-finitely-generated-residue-perfect-core",
+ "kind": "statement",
+ "title": "Perfect core of a finitely generated extension of a perfect field",
+ "statement": "Let $p$ be prime, let $k\\subseteq l$ be fields of characteristic $p$ [def-weil-field, def-pc-field-extension], and suppose that $x\\mapsto x^p$ is surjective on $k$. Suppose $l$ is generated as a field by finitely many elements over $k$. Put $l_{\\mathrm{perf}}=\\bigcap_{n\\geq0}\\{x^{p^n}:x\\in l\\}$. Every element of $l_{\\mathrm{perf}}$ is separable algebraic over $k$ [def-weil-pbc-separable-algebraic-extension]. The case $l/k$ algebraic and the empty set of field generators are included.",
+ "source": {
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "Expose IV 3.2.1 and Proposition 3.2.3(ii),(iii), printed pp. 55-56: finite extension and rational-function subfield consequence of the Laurent-series calculation."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-pc-field-extension",
+  "def-weil-pbc-separable-algebraic-extension"
+ ],
+ "proof": [
+  {
+   "text": "Write $l=k(a_1,\\ldots,a_m)$. Choose a finite transcendence basis $t_1,\\ldots,t_r$ using [lem-weil-pbc-finitely-generated-field-finite-transcendence-basis], and put $F=k(t_1,\\ldots,t_r)$. Then $l/F$ is algebraic. Since $k\\subseteq F\\subseteq l$, we also have $l=F(a_1,\\ldots,a_m)$. Each $a_j$ is algebraic over $F$, so [lem-weil-pbc-algebraic-generators-finite-extension] gives $[l:F]<\\infty$. This includes $r=0$ and $m=0$.",
+   "uses": [
+    "lem-weil-pbc-finitely-generated-field-finite-transcendence-basis",
+    "lem-weil-pbc-algebraic-generators-finite-extension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/fields.tex",
+    "place": "Tags 030F (lemma-transcendence-degree) and 09GH (lemma-algebraic-finitely-generated)"
+   }
+  },
+  {
+   "text": "For any characteristic-$p$ field $H$, take $z=\\sum_i b_it^i\\in H((t))$ [def-weil-pbc-laurent-series]. Choose an integer $N\\geq0$ so that $t^Nz\\in H[[t]]$. Apply [lem-weil-pbc-power-series-frobenius-coefficientwise] in one variable and multiply by $t^{-pN}$: $z^p=\\sum_i b_i^pt^{pi}$. Iterating this identity, with the zeroth iterate the identity, gives $z^{p^n}=\\sum_i b_i^{p^n}t^{p^ni}$ for every $n\\geq0$. The shifts cancel because $(t^N)^p=t^{pN}$.",
+   "uses": [
+    "def-weil-pbc-laurent-series",
+    "lem-weil-pbc-power-series-frobenius-coefficientwise"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose IV, Proposition 3.2.3(ii),(iii), printed p. 56"
+   }
+  },
+  {
+   "text": "For $z\\in H((t))_{\\mathrm{perf}}$, choose a $p^n$-th root for each $n$. The preceding coefficient formula forces every exponent in the support of $z$ to be divisible by every $p^n$. A nonzero integer cannot have this property, since $p^n$ eventually exceeds its absolute value. Hence $z$ is a constant $c\\in H$. The coefficient at exponent zero in each chosen root gives a $p^n$-th root of $c$ in $H$. Conversely constant roots in $H$ are roots in $H((t))$. Thus $H((t))_{\\mathrm{perf}}=H_{\\mathrm{perf}}$ as constant subfields; zero is included.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose IV, Proposition 3.2.3(ii),(iii), printed p. 56"
+   }
+  },
+  {
+   "text": "Set $L_0=k$ and $L_i=L_{i-1}((T_i))$ for $1\\leq i\\leq r$; these are fields by [lem-weil-pbc-laurent-series-field]. The polynomial map $k[X_1,\\ldots,X_r]\\to L_r$, $X_i\\mapsto T_i$, is injective: group a finite polynomial by its exponent of $X_r$ and compare Laurent coefficients, then repeat for the remaining variables. Therefore fractions give an embedding $F\\hookrightarrow L_r$, sending $t_i$ to $T_i$, since the transcendence basis gives the same polynomial presentation of $F$ [def-weil-pbc-transcendence-basis]. A root in $F$ maps to a root in $L_r$. Applying the preceding core equality successively gives $(L_r)_{\\mathrm{perf}}=k_{\\mathrm{perf}}=k$, the last equality following by repeated surjectivity of Frobenius on $k$. Thus $F_{\\mathrm{perf}}\\subseteq k$; conversely all elements of $k$ have their roots already in $k\\subseteq F$. Hence $F_{\\mathrm{perf}}=k$. For $r=0$ the embedding is the identity.",
+   "uses": [
+    "lem-weil-pbc-laurent-series-field",
+    "def-weil-pbc-transcendence-basis"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose IV, Proposition 3.2.3(ii),(iii), printed p. 56"
+   }
+  },
+  {
+   "text": "Apply [lem-per-finite-extension-perfect-core] to the finite extension $F\\subseteq l$ from Step 1. It gives that every $x\\in l_{\\mathrm{perf}}$ is algebraic over $F_{\\mathrm{perf}}$. Step 4 identifies this coefficient field with the given $k$, so $x$ is algebraic over $k$. No separability of $l/F$ is needed.",
+   "uses": [
+    "lem-per-finite-extension-perfect-core"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose IV, Proposition 3.2.3(ii),(iii), printed p. 56"
+   }
+  },
+  {
+   "text": "Let $P\\in k[T]$ be the monic irreducible minimal polynomial of such an $x$ [def-weil-pbc-separable-algebraic-extension]. If $P\\prime=0$, every nonzero coefficient has exponent divisible by $p$. Taking $p$-th roots of its finitely many coefficients in $k$ expresses $P=Q^p$ with $\\deg Q=\\deg P/p>0$, contradicting irreducibility. Thus $P\\prime\\ne0$. Any nonconstant common divisor of $P$ and $P\\prime$ would force the irreducible $P$ to divide the smaller-degree polynomial $P\\prime$, which is impossible. They are coprime, so $x$ is separable over $k$ by the cited definition. This also covers $x=0$ and algebraic $l/k$.",
+   "uses": [
+    "def-weil-pbc-separable-algebraic-extension"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose IV, Proposition 3.2.3(ii),(iii), printed p. 56"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-laurent-series",
+  "def-weil-pbc-separable-algebraic-extension",
+  "def-weil-pbc-transcendence-basis",
+  "lem-per-finite-extension-perfect-core",
+  "lem-weil-pbc-algebraic-generators-finite-extension",
+  "lem-weil-pbc-finitely-generated-field-finite-transcendence-basis",
+  "lem-weil-pbc-laurent-series-field",
+  "lem-weil-pbc-power-series-frobenius-coefficientwise"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "Expose IV 3.2.1 and Proposition 3.2.3(ii),(iii), printed pp. 55-56; rational-function consequence via the Laurent coefficient calculation; finite transcendence basis from Stacks 030F and 09GH."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "In a finitely generated field extension of a perfect field of positive characteristic every infinitely p divisible element is algebraic over the base field",
+   "results": "{\"t\": \"2026-10-24T04:44:28Z\", \"tool\": \"leanfinder\", \"query\": \"In a finitely generated field extension of a perfect field of positive characteristic every infinitely p divisible element is algebraic over the base field\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"IsPurelyInseparable.isAlgebraic\", \"perfectClosure.isAlgebraic\", \"Algebra.IsAlgebraic.perfectField\", \"IsPurelyInseparable.elemExponent_def'\", \"IsPurelyInseparable.pow_mem\", \"IsPurelyInseparable.HasExponent.has_exponent\", \"IsPurelyInseparable.hasExponent_iff'\", \"isPurelyInseparable_iff_pow_mem\"], \"digest\": \"47d8e980c0e888bf\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: perfectClosure is the purely inseparable algebraic closure inside an extension, not the intersection of all Frobenius images; separating transcendence bases do not assert this perfect-core bound."
+  },
+  {
+   "tool": "loogle",
+   "query": "PerfectField, Algebra.EssFiniteType",
+   "results": "{\"t\": \"2026-10-24T04:44:27Z\", \"tool\": \"loogle\", \"query\": \"PerfectField, Algebra.EssFiniteType\", \"sub\": \"\", \"ok\": true, \"n_hits\": 3, \"note\": \"\", \"top\": [\"exists_isTranscendenceBasis_and_isSeparable_of_perfectField\", \"Algebra.FormallySmooth.of_perfectField\", \"instIsSeparablyGeneratedOfPerfectFieldOfEssFiniteType\"], \"digest\": \"764a4fa6250df60d\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: perfectClosure is the purely inseparable algebraic closure inside an extension, not the intersection of all Frobenius images; separating transcendence bases do not assert this perfect-core bound."
+  },
+  {
+   "tool": "grep",
+   "query": "perfectCore|perfect.*subfield|subfield.*perfect|iInf.*frobenius|frobenius.*iInf",
+   "results": "{\"t\": \"2026-10-24T04:44:26Z\", \"tool\": \"grep\", \"query\": \"perfectCore|perfect.*subfield|subfield.*perfect|iInf.*frobenius|frobenius.*iInf\", \"sub\": \"FieldTheory\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: perfectClosure is the purely inseparable algebraic closure inside an extension, not the intersection of all Frobenius images; separating transcendence bases do not assert this perfect-core bound."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The maximal perfect subfield of a finitely generated field over a perfect field is algebraic over the base",
+   "results": "{\"t\": \"2026-10-24T04:44:27Z\", \"tool\": \"leansearch\", \"query\": \"The maximal perfect subfield of a finitely generated field over a perfect field is algebraic over the base\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.IsAlgebraic.perfectField\", \"perfectClosure.isAlgebraic\", \"separableClosure_inf_perfectClosure\", \"IsSepClosure.isAlgClosure_of_perfectField\", \"IntermediateField.isPurelyInseparable_sup\", \"exists_isTranscendenceBasis_and_isSeparable_of_perfectField\", \"le_perfectClosure\", \"Algebra.IsAlgebraic.isSeparable_of_perfectField\"], \"digest\": \"d972a81297a4ad52\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: perfectClosure is the purely inseparable algebraic closure inside an extension, not the intersection of all Frobenius images; separating transcendence bases do not assert this perfect-core bound."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The intersection of all p power subfields of a finitely generated function field over a perfect field consists of algebraic constants",
+   "results": "{\"t\": \"2026-10-24T04:44:30Z\", \"tool\": \"leanfinder\", \"query\": \"The intersection of all p power subfields of a finitely generated function field over a perfect field consists of algebraic constants\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"perfectClosure\", \"perfectClosure.isAlgebraic\", \"FunctionField\", \"FunctionField.ringOfIntegers.not_isField\", \"perfectClosure.perfectField\", \"functionField_iff\", \"separableClosure_inf_perfectClosure\", \"isPurelyInseparable_iff_perfectClosure_eq_top\"], \"digest\": \"db6fa9121bc90b8d\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: perfectClosure is the purely inseparable algebraic closure inside an extension, not the intersection of all Frobenius images; separating transcendence bases do not assert this perfect-core bound."
+  },
+  {
+   "tool": "grep",
+   "query": "frobenius|iterateFrobenius",
+   "results": "{\"t\": \"2026-10-24T05:11:59Z\", \"tool\": \"grep\", \"query\": \"frobenius|iterateFrobenius\", \"sub\": \"RingTheory/HahnSeries\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "Supporting search only: no exact item match; coefficientwise Frobenius and Laurent field results are already represented by lem-weil-pbc-power-series-frobenius-coefficientwise and lem-weil-pbc-laurent-series-field, which are reused."
+  },
+  {
+   "tool": "grep",
+   "query": "perfectCore|perfect.*subfield|iInf.*frobenius|frobenius.*iInf",
+   "results": "{\"t\": \"2026-10-24T05:11:59Z\", \"tool\": \"grep\", \"query\": \"perfectCore|perfect.*subfield|iInf.*frobenius|frobenius.*iInf\", \"sub\": \"FieldTheory\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match for the item; the relative perfect closure and separating-basis results do not compute the intersection of all Frobenius images."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Every element with p power roots of every order in a finitely generated extension of a perfect field is algebraic",
+   "results": "{\"t\": \"2026-10-24T05:11:59Z\", \"tool\": \"leansearch\", \"query\": \"Every element with p power roots of every order in a finitely generated extension of a perfect field is algebraic\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"isAlgebraic_of_mem_rootSet\", \"IsPurelyInseparable.isPRadical\", \"mem_perfectClosure_iff\", \"mem_perfectClosure_iff_pow_mem\", \"IsPurelyInseparable\", \"perfectClosure\", \"Subalgebra.mem_perfectClosure_iff\", \"PerfectField.toPerfectRing\"], \"digest\": \"c17f863e4b3800b3\"}",
+   "date": "2026-10-24",
+   "verdict": "no match for the item; the relative perfect closure and separating-basis results do not compute the intersection of all Frobenius images."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Coefficients of p power of Laurent series in characteristic p are supported on exponents divisible by p",
+   "results": "{\"t\": \"2026-10-24T05:11:59Z\", \"tool\": \"leansearch\", \"query\": \"Coefficients of p power of Laurent series in characteristic p are supported on exponents divisible by p\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"PowerSeries.coeff_expand\", \"PowerSeries.support_expand_subset\", \"PowerSeries.coeff_expand_mul\", \"PowerSeries.coeff_expand_of_not_dvd\", \"Polynomial.coeff_expand_mul\", \"MvPowerSeries.support_expand_subset\", \"Perfection.coeff_pow_p\", \"MvPowerSeries.support_expand\"], \"digest\": \"76075b468c2a921a\"}",
+   "date": "2026-10-24",
+   "verdict": "Supporting search only: no exact item match; coefficientwise Frobenius and Laurent field results are already represented by lem-weil-pbc-power-series-frobenius-coefficientwise and lem-weil-pbc-laurent-series-field, which are reused."
+  },
+  {
+   "tool": "loogle",
+   "query": "PerfectField, Algebra.EssFiniteType",
+   "results": "{\"t\": \"2026-10-24T05:12:00Z\", \"tool\": \"loogle\", \"query\": \"PerfectField, Algebra.EssFiniteType\", \"sub\": \"\", \"ok\": true, \"n_hits\": 3, \"note\": \"\", \"top\": [\"exists_isTranscendenceBasis_and_isSeparable_of_perfectField\", \"Algebra.FormallySmooth.of_perfectField\", \"instIsSeparablyGeneratedOfPerfectFieldOfEssFiniteType\"], \"digest\": \"764a4fa6250df60d\"}",
+   "date": "2026-10-24",
+   "verdict": "no match for the item; the relative perfect closure and separating-basis results do not compute the intersection of all Frobenius images."
+  },
+  {
+   "tool": "loogle",
+   "query": "HahnSeries, frobenius",
+   "results": "{\"t\": \"2026-10-24T05:12:00Z\", \"tool\": \"loogle\", \"query\": \"HahnSeries, frobenius\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "Supporting search only: no exact item match; coefficientwise Frobenius and Laurent field results are already represented by lem-weil-pbc-power-series-frobenius-coefficientwise and lem-weil-pbc-laurent-series-field, which are reused."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The intersection of all iterated Frobenius images in a finitely generated field extension of a perfect field is algebraic over the base",
+   "results": "{\"t\": \"2026-10-24T05:12:00Z\", \"tool\": \"leanfinder\", \"query\": \"The intersection of all iterated Frobenius images in a finitely generated field extension of a perfect field is algebraic over the base\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"perfectClosure.isAlgebraic\", \"perfectClosure\", \"Algebra.IsAlgebraic.perfectField\", \"perfectClosure.perfectField\", \"perfectClosure.isPurelyInseparable\", \"perfectClosure.perfectRing\", \"le_perfectClosure\", \"IsPRadical.isPurelyInseparable\"], \"digest\": \"17b689dad8772ee0\"}",
+   "date": "2026-10-24",
+   "verdict": "no match for the item; the relative perfect closure and separating-basis results do not compute the intersection of all Frobenius images."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The maximal perfect subfield of a Laurent series field K((t)) is the maximal perfect subfield of K",
+   "results": "{\"t\": \"2026-10-24T05:12:01Z\", \"tool\": \"leanfinder\", \"query\": \"The maximal perfect subfield of a Laurent series field K((t)) is the maximal perfect subfield of K\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"LaurentSeries.RatFuncAdicCompl\", \"LaurentSeries.instAlgebraRatFuncAdicCompl\", \"LaurentSeries.LaurentSeriesPkg\", \"LaurentSeries.instLaurentSeriesComplete\", \"LaurentSeries.powerSeries_as_subring\", \"LaurentSeries.instIsFractionRingPowerSeries\", \"LaurentSeries.exists_ratFunc_eq_v\", \"LaurentSeries.ratfuncAdicComplRingEquiv_apply\"], \"digest\": \"279482587bf7a0cd\"}",
+   "date": "2026-10-24",
+   "verdict": "Supporting search only: no exact item match; coefficientwise Frobenius and Laurent field results are already represented by lem-weil-pbc-power-series-frobenius-coefficientwise and lem-weil-pbc-laurent-series-field, which are reused."
+  },
+  {
+   "tool": "grep",
+   "query": "map_frobenius|frobenius|pow.*coeff|coeff.*pow",
+   "results": "{\"t\": \"2026-10-24T05:13:29Z\", \"tool\": \"grep\", \"query\": \"map_frobenius|frobenius|pow.*coeff|coeff.*pow\", \"sub\": \"RingTheory/PowerSeries\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/PowerSeries/GaussNorm.lean\", \"Mathlib/RingTheory/PowerSeries/GaussNorm.lean\", \"Mathlib/RingTheory/PowerSeries/GaussNorm.lean\", \"Mathlib/RingTheory/PowerSeries/Binomial.lean\", \"Mathlib/RingTheory/PowerSeries/Binomial.lean\", \"Mathlib/RingTheory/PowerSeries/Binomial.lean\", \"Mathlib/RingTheory/PowerSeries/CoeffMulMem.lean\", \"Mathlib/RingTheory/PowerSeries/CoeffMulMem.lean\"], \"digest\": \"b151dfe4a2e33b65\"}",
+   "date": "2026-10-24",
+   "verdict": "Supporting search only: no exact item match; coefficientwise Frobenius and Laurent field results are already represented by lem-weil-pbc-power-series-frobenius-coefficientwise and lem-weil-pbc-laurent-series-field, which are reused."
+  },
+  {
+   "tool": "loogle",
+   "query": "PowerSeries, pow, CharP",
+   "results": "{\"t\": \"2026-10-24T05:13:30Z\", \"tool\": \"loogle\", \"query\": \"PowerSeries, pow, CharP\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"loogle: unknown identifier 'pow'\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "Supporting search only: no exact item match; coefficientwise Frobenius and Laurent field results are already represented by lem-weil-pbc-power-series-frobenius-coefficientwise and lem-weil-pbc-laurent-series-field, which are reused."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Frobenius on a Laurent series over a field of characteristic p raises each coefficient to the pth power and multiplies every exponent by p",
+   "results": "{\"t\": \"2026-10-24T05:13:30Z\", \"tool\": \"leanfinder\", \"query\": \"Frobenius on a Laurent series over a field of characteristic p raises each coefficient to the pth power and multiplies every exponent by p\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"MvPowerSeries.map_frobenius_expand\", \"Perfection.coeff_frobenius\", \"WittVector.StandardOneDimIsocrystal.frobenius_apply\", \"MvPowerSeries.map_iterateFrobenius_expand\", \"Polynomial.map_frobenius_expand\", \"Polynomial.expand_char\", \"frobenius_def\", \"LaurentSeries.hasseDeriv\"], \"digest\": \"b397524e63ea171f\"}",
+   "date": "2026-10-24",
+   "verdict": "Supporting search only: no exact item match; coefficientwise Frobenius and Laurent field results are already represented by lem-weil-pbc-power-series-frobenius-coefficientwise and lem-weil-pbc-laurent-series-field, which are reused."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-epp-weak-perfect-residue",
+  "date": "2026-10-24",
+  "group": "Q118"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "Historical supporting input to det-thm-sf-ctf-stability-direct-images, proof (3), through the creation chain of lem-sfb-epp-essentially-finite-type-traits. Current latest direct-image proof (3) does not state this auxiliary algebra result. Weak Epp at each normalized branch over the perfect-residue algebraic preparation. Supporting Perfect core of a finitely generated extension of a perfect field.",
+   "via": [
+    "lem-sfb-epp-weak-perfect-residue",
+    "lem-sfb-epp-essentially-finite-type-traits",
+    "lem-sfb-raynaud-faltings-normalized-reduction",
+    "lem-sfb-group-model-potential-smooth-normalization",
+    "lem-sfb-quasi-reductive-special-connectedness",
+    "lem-sfb-integral-chevalley-weyl-atlas",
+    "lem-sfb-chevalley-integral-root-model",
+    "lem-sfb-borel-kostant-distribution-comparison",
+    "lem-sfb-borel-simple-root-distribution-calculus",
+    "lem-sfb-restricted-induced-infinitesimal-invariants",
+    "lem-sfb-flag-frobenius-rho-pushforward",
+    "lem-sfb-dominant-flag-line-kempf-vanishing",
+    "lem-sfb-induced-weyl-dimension-formula",
+    "lem-sfb-steinberg-induced-module-irreducible",
+    "lem-sfb-rho-section-self-duality",
+    "lem-sfb-steinberg-endomorphism-detection",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-finitely-generated-residue-perfect-core",
+  "worker": "stage1",
+  "summary": "Statement unchanged. Reused the existing finite-extension perfect-core theorem and Mathlib leaves for finite transcendence bases, finite algebraic adjunctions, Laurent-series fields, and coefficientwise power-series Frobenius. Wrote the Laurent shift, support calculation, rational-field embedding and perfect-base separability argument explicitly. No new nodes are needed.",
+  "blueprint": "Historical supporting algebra for direct-image preservation, through lem-sfb-epp-weak-perfect-residue. The latest det-thm-sf-ctf-stability-direct-images proof (3) now cites the proper/open preservation theorems and does not itself state this auxiliary algebra. The original null ancestor and full creation chain are retained.",
+  "tool_uses": [
+   {
+    "node": "lem-per-finite-extension-perfect-core",
+    "why": "Generic finite-extension theorem for intersections of Frobenius images; used only after reducing to a finite extension of a rational function field. No node in this unit supplies that theorem."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-per-finite-extension-perfect-core"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-NC-7411962a9",
+  "group": "NC",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NC-7411962a9 (reviewer sub-agent of L); spot-checked: I read the whole item (statement unchanged, 6 steps), every cited statement and ILO Exposé IV 3.2.1–3.2.3 (printed pp.55–56, PDF pp.61–62). The delivery has no new nodes. Step 1 combines the finite transcendence basis and finite algebraic adjunction (both Mathlib leaves); the hypotheses hold over F=k(t). Step 2 gets the Laurent Frobenius identity from the one-variable coefficientwise power-series leaf by shifting with t^N. Step 3 shows that support divisible by every p^n leaves only constants, and the constant terms give the roots (ILO (iii), written out). Step 4 embeds F as a k-algebra into iterated Laurent fields, which gives F_perf=k. Step 5 applies lem-per-finite-extension-perfect-core to F⊆l; its hypotheses are only finite dimension and char p. Step 6 shows a perfect k gives a separable minimal polynomial. I tested l=k, finite fields, k(t), an inseparable finite tail over k(t), r=0, m=0, x=0 and p=2. A search of dag/nodes (rg -L) found no duplicate; lem-per-epp-perfect-core-complete-local is a different statement. On the listed mechanical point, the citation of dropped-route node lem-per-finite-extension-perfect-core is accepted. The Step 5 text and split_report.tool_uses name and justify the use as a generic finite-extension theorem. The node is pure field theory (ILO 3.2.2/3.2.3(ii)) and uses none of the inputs the lem-per-artin-gabber-affine-curve repair note forbids. Its status is still split, with a Q51 PASS review. This item is in sec-six-functors-basics and is not reachable from the artin-gabber subtree. Maintainer note: this item makes lem-per-finite-extension-perfect-core, lem-per-separable-closure-perfect-core and lem-per-finite-extension-separable-core-bounded-exponent reachable from live targets again, so do not delete them with the dropped cluster. Minor: the report lists citations.json and searches.jsonl, which are not on the branch. No changes."
+ },
+ "lean": {
+  "module": "Sheaf.FieldTheory.FinitelyGeneratedResiduePerfectCore",
+  "declaration": "isSeparable_of_fg_of_forall_exists_pow_eq",
+  "file": "lean/Sheaf/FieldTheory/FinitelyGeneratedResiduePerfectCore.lean",
+  "statement": "theorem isSeparable_of_fg_of_forall_exists_pow_eq {k : Type u} {L : Type v} [Field k] [Field L] [Algebra k L] (p : ℕ) [Fact p.Prime] [CharP k p] [CharP L p] (hperfect : Function.Surjective (fun a : k ↦ a ^ p)) (hfg : (⊤ : IntermediateField k L).FG) (x : L) (hx : ∀ n : ℕ, ∃ y : L, y ^ (p ^ n) = x) : IsSeparable k x",
+  "branch": "newtargets-dag",
+  "by": "Q43",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-42d7b9c15",
+  "group": "Q43",
+  "result": "pass",
+  "note": "Clause-by-clause match: Fact p.Prime; Field k, Field L, Algebra k L with independent universes u, v; CharP k/L p; hperfect is surjectivity of a↦a^p on k; (⊤ : IntermediateField k L).FG (Stacks 09FZ, empty set allowed); perfect-core membership as ∀ n, ∃ y, y^(p^n)=x; conclusion IsSeparable k x (algebraicity built in via IsSeparable.isIntegral). No extra assumptions. Edge cases n=0, x=0, L=k/no generators, algebraic and transcendental L, p=2 covered. lean.statement verbatim; only the lean field changed vs live; stmt_deps and status split unchanged. Single sorry, source and blueprint docstrings, 6-step proof plan, worker report and second-reading sections present; no duplicate in Mathlib or the project. No compile needed (no file changed); worker compiled clean."
+ }
+}

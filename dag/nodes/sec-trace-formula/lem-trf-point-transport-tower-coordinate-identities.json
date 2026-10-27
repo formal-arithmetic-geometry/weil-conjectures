@@ -1,0 +1,149 @@
+{
+ "id": "lem-trf-point-transport-tower-coordinate-identities",
+ "kind": "statement",
+ "title": "Whole shifted-coordinate vanishing and the actual derived identity",
+ "statement": "Fix the finite-field datum D, a prime $\\ell\\ne p$, and a finite extension $E/\\mathbf Q_\\ell$ with integer ring $\\mathcal O_E$, as in [def-trf-coefficient-conventions]. Put $s=\\operatorname{Spec}k$. Use the actual source augmentation, strict source/target towers and point transport of [lem-trf-point-transport-cone-comparison-descent], and the sectionwise Roos comparison of [lem-trf-point-quotient-augmentation-diagram]. The augmentation has zero entire shifted coordinate on every complex. Further, let P be any good complex and v a strict map from its actual reduction tower to its actual point-pullback tower. Suppose every finite augmentation square with the actual point-restriction sigma and inverse-image reduction theta commutes. Then the actual localized integral point transport followed by the derived pullback comparison, exact-section localization comparison and target Roos comparison is the source localization comparison followed by the localized actual augmentation and the localized Roos map of v. This is an equality of the actual derived morphisms, not merely of their individual finite evaluations.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-d-weil/prop-trf-rational-frobenius-integral-model.proof.md",
+  "place": "clause *(3)*: the integral point transport is the derived limit of the levelwise maps, via its specified cone map; implementation module PointTransportTowerRealizationIdentities"
+ },
+ "stmt_deps": [
+  "def-trf-coefficient-conventions",
+  "def-weil-derived-complete-integral-detailed",
+  "def-weil-pbc-adic-coefficient-datum",
+  "def-weil-finite-coefficient-point",
+  "def-weil-derived-pullback-tensor-hom",
+  "def-weil-frobenius-point-transport",
+  "def-weil-inverse-image-pullback-comparison",
+  "lem-trf-point-transport-cone-comparison-descent",
+  "lem-trf-point-quotient-augmentation-diagram"
+ ],
+ "proof": [
+  {
+   "text": "The actual augmentation is the mapping-cocone lift whose homotopy coordinate is zero. Apply lift_f_snd_v to obtain the equality with zero before projecting to any product factor.",
+   "uses": [
+    "lem-trf-point-transport-cone-comparison-descent",
+    "lem-pur-integral-operations-well-defined"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply the existing normalized_identity to P,v and the finite commuting squares. Expand only the named source/target and sectionwise comparisons, their whiskering and composition maps. Associativity identifies its two sides with the displayed actual transport identity.",
+   "uses": [
+    "lem-trf-point-transport-cone-comparison-descent",
+    "lem-trf-point-pullback-cone-localization",
+    "lem-trf-point-quotient-augmentation-diagram"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-trf-point-transport-cone-comparison-descent",
+  "lem-pur-integral-operations-well-defined",
+  "lem-trf-point-pullback-cone-localization",
+  "lem-trf-point-quotient-augmentation-diagram"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-d-weil/prop-trf-rational-frobenius-integral-model.proof.md",
+  "place": "clause *(3)*: the integral point transport is the derived limit of the levelwise maps, via its specified cone map; implementation module PointTransportTowerRealizationIdentities"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "exact evaluation of inverse towers commutes with the two-coordinate Roos mapping cocone, natural quotient augmentation, and finite Frobenius point transport",
+   "results": "Generic limits and cocone comparison equations, tensor quotient maps, and inverse Frobenius on perfect rings; no coefficient-sheaf point construction. Existing project constructions are reused.",
+   "date": "2026-10-27",
+   "verdict": "ingredients only; project-specific interface"
+  },
+  {
+   "tool": "loogle",
+   "query": "CochainComplex.mappingCocone",
+   "results": "Mathlib.Algebra.Homology.HomotopyCategory.MappingCocone: mappingCocone, fst, snd, liftCochain and projection equations. These are the generic ingredients, not the specified integral point data.",
+   "date": "2026-10-27",
+   "verdict": "ingredients only"
+  },
+  {
+   "tool": "grep",
+   "query": "pointTransportTowerRealization|finitePointIterate|mapHomologicalComplex.*mappingCocone|ofOpSequence",
+   "results": "Mathlib.CategoryTheory.Functor.OfSequence supplies ofOpSequence and NatTrans.ofOpSequence. No specialized realization or finite point iterate; source constructions already exist in Sheaf.",
+   "date": "2026-10-27",
+   "verdict": "no exact Mathlib match; reuse the project API"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.IntegralPointTransportTowerRealization",
+  "group": "G6",
+  "date": "2026-10-27"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-trf-rational-frobenius-integral-model",
+   "place": "clause (3), Whole shifted-coordinate vanishing and the actual derived identity",
+   "via": [
+    "lem-trf-integral-point-transport-tower-realization"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-d-weil",
+ "lean": {
+  "module": "Sheaf.Paper.PointTransportTowerRealizationIdentities",
+  "file": "lean/Sheaf/Paper/PointTransportTowerRealizationIdentities.lean",
+  "declaration": "WeilConjectures.pointTransportTowerRealization_identity",
+  "statement": "theorem pointTransportTowerRealization_identity (hl : l ≠ D.p)\n    (P : (integralOperationsGoodComplex l E (Spec (.of D.k))).FullSubcategory)\n    (v : (PointTransportCone.reductionTowers D l E).obj P.obj ⟶\n      (PointTransportCone.pullbackTowers D l E).obj P.obj)\n    (hv : ∀ n : ℕ, frobeniusPointIntegralSigma D l E P.obj ≫\n      (PointTransportCone.sections D l E).map\n        (inverseImageReductionTheta l E (frobeniusPointIso D).hom n P.obj) =\n      PointTransportCone.reductionUnit D l E P.obj n ≫ v.app (op n)) :\n    frobeniusPointTransportIntegral D l hl E (DerivedCategory.Q.obj P.obj) ≫\n      (pointFibreIntegralAmbient D l E).map\n        ((integralDerivedPullbackComparison l E (frobeniusPointIso D).hom).hom.app P) ≫\n      (PointTransportCone.sectionsFactors D l E).hom.app\n        ((integralOperationsPullbackComplexFunctor l E (frobeniusPointIso D).hom).obj P.obj) ≫\n      (PointTransportCone.moduleQ l E).map\n        ((PointQuotientAugmentation.roosComparison (pointIntegralSections l E D.k)).hom.app\n          ((integralOperationsPullbackTowerFunctor l E (frobeniusPointIso D).hom).obj P.obj)) =\n    (PointTransportCone.sectionsFactors D l E).hom.app P.obj ≫\n      (PointTransportCone.moduleQ l E).map (PointTransportCone.augmentation D l E P.obj) ≫\n      (PointTransportCone.moduleQ l E).map (integralOperationsRoosMap v)",
+  "branch": "sheaf-dag",
+  "by": "G6",
+  "date": "2026-10-27",
+  "existing": false
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "split_report": {
+  "date": "2026-10-27",
+  "item": "lem-trf-point-transport-tower-coordinate-identities",
+  "worker": "stage3",
+  "summary": "A compiled implementation helper; no new unresolved theorem.",
+  "tool_uses": [
+   {
+    "node": "lem-pur-integral-operations-well-defined",
+    "why": "Uses the existing generic coefficient, exact-section, or cone API in the explicit construction described in the proof, without replacing a unit step."
+   }
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-b2da0",
+  "group": "G6",
+  "result": "pass",
+  "landing": "20261027T050602-L-240395",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-b2da0",
+  "group": "G6",
+  "result": "pass",
+  "landing": "20261027T050602-L-240395",
+  "kind": "interface",
+  "note": "independent cc review: re-delivery b2da vs returned 8fe8 (diff -r: LFTN split removed, C5 fix and item stmt_deps fix taken, Lean otherwise identical); spec vs published statement (earlier defeq check, published blob unchanged cb8c8b5c887); delivered set + 3 direct importers compiled in sandbox; #print axioms; nodes vs Lean"
+ }
+}

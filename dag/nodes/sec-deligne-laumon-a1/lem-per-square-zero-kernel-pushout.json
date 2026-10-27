@@ -1,0 +1,256 @@
+{
+ "id": "lem-per-square-zero-kernel-pushout",
+ "kind": "statement",
+ "title": "Explicit coefficient pushout of a square-zero algebra extension",
+ "statement": "Let $R$ and $B$ be commutative rings with an $R$-algebra structure on $B$. Let $K,N$ be $B$-modules and let $0\\to K\\xrightarrow{j}E\\xrightarrow{p}B\\to0$ be an exact sequence of additive groups in which $E$ is a commutative $R$-algebra, $p$ is an $R$-algebra map, $j(K)$ is a square-zero ideal, and $e\\,j(k)=j(p(e)k)$ for $e\\in E$, $k\\in K$. For any $B$-linear map $v:K\\to N$, give $T=E\\oplus N$ the trivial square-zero multiplication of [def-sc-trivial-square-zero-extension], with $E$ acting on $N$ through $p$. The additive subgroup\n$$J_v=\\{(j(k),-v(k)):k\\in K\\}\\subset T$$\nis an ideal. Put $E_v=T/J_v$, $j_v(n)=[(0,n)]$, $p_v([(e,n)])=p(e)$, and $q_v(e)=[(e,0)]$. These maps are well-defined, $E_v$ is a commutative $R$-algebra, $q_v,p_v$ are $R$-algebra maps, and\n$$0\\to N\\xrightarrow{j_v}E_v\\xrightarrow{p_v}B\\to0$$\nis exact with square-zero kernel and its prescribed $B$-action. Moreover $q_vj=j_vv$.\nFor any $B$-module $L$, any such square-zero $R$-algebra extension $0\\to L\\xrightarrow{j_D}D\\xrightarrow{p_D}B\\to0$, any $B$-linear map $w:N\\to L$, and any $R$-algebra map $h:E\\to D$ with $p_Dh=p$ and $hj=j_Dwv$, there is a unique $R$-algebra map $\\bar h:E_v\\to D$ satisfying $\\bar hq_v=h$ and $\\bar hj_v=j_Dw$. It is given by $\\bar h([(e,n)])=h(e)+j_D(w(n))$ and satisfies $p_D\\bar h=p_v$. This is the coefficient pushout of the extension along $v$. No flatness or finiteness hypothesis is required.",
+ "source": {
+  "document": "literature/stacks-project/defos.tex",
+  "place": "Tag 0GPW, remark-extensions-of-algebras-functorial, first displayed diagram and the sentence defining (N times B prime)/M with antidiagonal M; explicit ring law and universal property of this coefficient-pushout construction."
+ },
+ "stmt_deps": [
+  "def-sc-trivial-square-zero-extension",
+  "def-weil-pbc-algebra-hom-quotient"
+ ],
+ "proof": [
+  {
+   "text": "Restrict the $B$-module structure on $N$ along $p:E\\to B$. By [def-sc-trivial-square-zero-extension], $T$ has multiplication $(e,n)(e',n')=(ee',p(e)n'+p(e')n)$, unit $(1,0)$ and componentwise addition. Its $R$-structure is $r\\mapsto(\\iota_E(r),0)$. This agrees with the restricted action since $p$ is an $R$-algebra map.",
+   "uses": [
+    "def-sc-trivial-square-zero-extension"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/defos.tex",
+    "place": "Tag 0GPW, remark-extensions-of-algebras-functorial, first displayed diagram and the sentence defining (N times B prime)/M with antidiagonal M; explicit ring law and universal property of this coefficient-pushout construction."
+   }
+  },
+  {
+   "text": "The map $k\\mapsto(j(k),-v(k))$ is additive, so its image $J_v$ is an additive subgroup. For $e\\in E,n\\in N,k\\in K$, the multiplication formula gives\n$$(e,n)(j(k),-v(k))=(e j(k),-p(e)v(k)+p(j(k))n)=(j(p(e)k),-v(p(e)k)).$$\nHere $p j=0$, the prescribed action gives the first coordinate, and $B$-linearity of $v$ gives the second. Thus $J_v$ is closed under multiplication by arbitrary elements of $T$ and is an ideal.",
+   "uses": [
+    "def-sc-trivial-square-zero-extension"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/defos.tex",
+    "place": "Tag 0GPW, remark-extensions-of-algebras-functorial, first displayed diagram and the sentence defining (N times B prime)/M with antidiagonal M; explicit ring law and universal property of this coefficient-pushout construction."
+   }
+  },
+  {
+   "text": "Apply [def-weil-pbc-algebra-hom-quotient] to $T,J_v$: $E_v=T/J_v$ is a commutative $R$-algebra with surjective quotient map. Representatives $(e,n),(e',n')$ give the same class exactly when $(e-e',n-n')=(j(k),-v(k))$ for some $k$. Hence $p(e)=p(e')$, so $p_v$ is well-defined. The formula for multiplication shows $p_v$ preserves products and the unit; addition and the $R$-structure are immediate. The inclusion $e\\mapsto(e,0)$ also preserves all these operations, hence so does $q_v$. The map $j_v$ is additive.",
+   "uses": [
+    "def-weil-pbc-algebra-hom-quotient",
+    "def-sc-trivial-square-zero-extension"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/defos.tex",
+    "place": "Tag 0GPW, remark-extensions-of-algebras-functorial, first displayed diagram and the sentence defining (N times B prime)/M with antidiagonal M; explicit ring law and universal property of this coefficient-pushout construction."
+   }
+  },
+  {
+   "text": "If $j_v(n)=0$, then $(0,n)=(j(k),-v(k))$ for some $k$. Injectivity of $j$ gives $k=0$, hence $n=0$. Surjectivity of $p$ gives surjectivity of $p_v$. If $p_v([(e,n)])=0$, exactness of the original extension gives $e=j(k)$ for some $k$, and the defining relation yields $[(e,n)]=[(0,n+v(k))]=j_v(n+v(k))$. Conversely $p_v j_v=0$. This proves exactness. Also $(j(k),-v(k))\\in J_v$ gives $q_v j(k)=j_v v(k)$.",
+   "uses": [
+    "def-weil-pbc-algebra-hom-quotient"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/defos.tex",
+    "place": "Tag 0GPW, remark-extensions-of-algebras-functorial, first displayed diagram and the sentence defining (N times B prime)/M with antidiagonal M; explicit ring law and universal property of this coefficient-pushout construction."
+   }
+  },
+  {
+   "text": "The multiplication formula gives $(0,n)(0,n')=(0,0)$ and $(e,m)(0,n)=(0,p(e)n)$. Passing to classes proves that the kernel $j_v(N)$ has square zero and that $xj_v(n)=j_v(p_v(x)n)$ for every $x\\in E_v$. Thus its induced $B$-module action is the prescribed one, independently of the lift of an element of $B$.",
+   "uses": [
+    "def-sc-trivial-square-zero-extension"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/defos.tex",
+    "place": "Tag 0GPW, remark-extensions-of-algebras-functorial, first displayed diagram and the sentence defining (N times B prime)/M with antidiagonal M; explicit ring law and universal property of this coefficient-pushout construction."
+   }
+  },
+  {
+   "text": "For the given $D,w,h$, set $F(e,n)=h(e)+j_D(w(n))$. This is additive, sends $(1,0)$ to $1$, and sends $(\\iota_E(r),0)$ to $\\iota_D(r)$. Using the prescribed action in $D$, $p_Dh=p$, $B$-linearity of $w$, and $j_D(L)^2=0$, expand to obtain\n$$F(e,n)F(e',n')=h(ee')+j_D(p(e)w(n')+p(e')w(n))=F(ee',p(e)n'+p(e')n).$$\nSo $F:T\\to D$ is an $R$-algebra map. Moreover $F(j(k),-v(k))=hj(k)-j_Dwv(k)=0$, so it kills $J_v$.",
+   "uses": [
+    "def-sc-trivial-square-zero-extension"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/defos.tex",
+    "place": "Tag 0GPW, remark-extensions-of-algebras-functorial, first displayed diagram and the sentence defining (N times B prime)/M with antidiagonal M; explicit ring law and universal property of this coefficient-pushout construction."
+   }
+  },
+  {
+   "text": "If two representatives differ by $(j(k),-v(k))$, their $F$-values differ by zero by the preceding calculation. Thus $\\bar h([(e,n)])=F(e,n)$ is well-defined. Since addition, multiplication and the $R$-structure on the quotient are induced on representatives, the corresponding identities for $F$ prove that $\\bar h$ is an $R$-algebra map. Substitution of $(e,0)$ and $(0,n)$ gives $\\bar hq_v=h$ and $\\bar hj_v=j_Dw$. Also $p_D\\bar h([(e,n)])=p(e)$ since $p_Dj_D=0$, proving $p_D\\bar h=p_v$.",
+   "uses": [
+    "def-weil-pbc-algebra-hom-quotient"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/defos.tex",
+    "place": "Tag 0GPW, remark-extensions-of-algebras-functorial, first displayed diagram and the sentence defining (N times B prime)/M with antidiagonal M; explicit ring law and universal property of this coefficient-pushout construction."
+   }
+  },
+  {
+   "text": "Every class decomposes as $[(e,n)]=q_v(e)+j_v(n)$. Any $R$-algebra map with the two required restrictions must therefore send it to $h(e)+j_Dw(n)$, proving uniqueness. This is precisely the coefficient-pushout universal property asserted in the statement. Each construction and calculation used only the stated exactness, module actions and square-zero identities; no flatness, finiteness, splitting, or injectivity of $v$ was used.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/defos.tex",
+    "place": "Tag 0GPW, remark-extensions-of-algebras-functorial, first displayed diagram and the sentence defining (N times B prime)/M with antidiagonal M; explicit ring law and universal property of this coefficient-pushout construction."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sc-trivial-square-zero-extension",
+  "def-weil-pbc-algebra-hom-quotient"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/defos.tex",
+  "place": "Tag 0GPW (remark-extensions-of-algebras-functorial), first displayed diagram and antidiagonal quotient; explicit verification of the ring law, exactness and universal property."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "pushout|antidiagonal",
+   "results": "{\"t\": \"2026-10-24T07:43:01Z\", \"tool\": \"grep\", \"query\": \"pushout|antidiagonal\", \"sub\": \"RingTheory/Extension\", \"ok\": true, \"n_hits\": 2, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/Extension/Cotangent/BaseChange.lean\", \"Mathlib/RingTheory/Extension/Cotangent/BaseChange.lean\"], \"digest\": \"0866112a69fd137d\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: TrivSqZeroExt.lift, liftEquiv and map treat split extensions; general pushouts and tensor-product pushouts do not give the antidiagonal quotient and exact marked kernel for an arbitrary nonsplit square-zero extension.",
+   "subdirectory": "RingTheory/Extension"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Pushout of a square zero algebra extension along a module homomorphism",
+   "results": "{\"t\": \"2026-10-24T07:43:02Z\", \"tool\": \"leansearch\", \"query\": \"Pushout of a square zero algebra extension along a module homomorphism\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.IsAlgebraic.instIsPushout_1\", \"Algebra.pushoutDesc\", \"instIsPushout\", \"CategoryTheory.IsPushout.mk\", \"CommRingCat.isPushout_iff_isPushout\", \"CategoryTheory.Square.IsPushout\", \"CategoryTheory.IsPushout.desc\", \"Algebra.IsPushout.mk\"], \"digest\": \"d24af9414d62cd4d\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: TrivSqZeroExt.lift, liftEquiv and map treat split extensions; general pushouts and tensor-product pushouts do not give the antidiagonal quotient and exact marked kernel for an arbitrary nonsplit square-zero extension."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Pushout of a commutative ring square zero extension along a linear map on its kernel is the quotient of the semidirect product by the antidiagonal kernel",
+   "results": "{\"t\": \"2026-10-24T07:43:03Z\", \"tool\": \"leanfinder\", \"query\": \"Pushout of a commutative ring square zero extension along a linear map on its kernel is the quotient of the semidirect product by the antidiagonal kernel\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"TrivSqZeroExt.liftEquiv_apply\", \"TrivSqZeroExt.liftEquiv\", \"retractionOfSectionOfKerSqZero\", \"TrivSqZeroExt.lift\", \"TrivSqZeroExt.lift_def\", \"TrivSqZeroExt.liftEquivOfComm_apply\", \"TrivSqZeroExt.lift_apply_inr\", \"sectionOfRetractionKerToTensorAux\"], \"digest\": \"b72e165f60fa61fe\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: TrivSqZeroExt.lift, liftEquiv and map treat split extensions; general pushouts and tensor-product pushouts do not give the antidiagonal quotient and exact marked kernel for an arbitrary nonsplit square-zero extension."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Changing coefficients of a square zero extension of commutative algebras by quotienting a trivial square zero extension by the graph of a module map",
+   "results": "{\"t\": \"2026-10-24T07:43:46Z\", \"tool\": \"leanfinder\", \"query\": \"Changing coefficients of a square zero extension of commutative algebras by quotienting a trivial square zero extension by the graph of a module map\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"TrivSqZeroExt.map\", \"TrivSqZeroExt.lift\", \"TrivSqZeroExt.liftEquiv\", \"TrivSqZeroExt.liftEquiv_apply\", \"TrivSqZeroExt.liftEquivOfComm_apply\", \"TrivSqZeroExt.lift_def\", \"TrivSqZeroExt.lift_apply_inr\", \"TrivSqZeroExt.liftEquivOfComm\"], \"digest\": \"becf2f461208a793\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: TrivSqZeroExt.lift, liftEquiv and map treat split extensions; general pushouts and tensor-product pushouts do not give the antidiagonal quotient and exact marked kernel for an arbitrary nonsplit square-zero extension."
+  },
+  {
+   "tool": "loogle",
+   "query": "TrivSqZeroExt",
+   "results": "{\"t\": \"2026-10-24T07:44:01Z\", \"tool\": \"loogle\", \"query\": \"TrivSqZeroExt\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"TrivSqZeroExt\", \"TrivSqZeroExt.fst\", \"TrivSqZeroExt.snd\", \"TrivSqZeroExt.inl\", \"TrivSqZeroExt.inr\", \"TrivSqZeroExt.add\", \"TrivSqZeroExt.addCommGroup\", \"TrivSqZeroExt.addCommMonoid\"], \"digest\": \"bb97561e5a994e76\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: TrivSqZeroExt.lift, liftEquiv and map treat split extensions; general pushouts and tensor-product pushouts do not give the antidiagonal quotient and exact marked kernel for an arbitrary nonsplit square-zero extension."
+  },
+  {
+   "tool": "grep",
+   "query": "pushout|quotient|antidiagonal|def lift|def map",
+   "results": "{\"t\": \"2026-10-24T07:45:08Z\", \"tool\": \"grep\", \"query\": \"pushout|quotient|antidiagonal|def lift|def map\", \"sub\": \"Algebra/TrivSqZeroExt\", \"ok\": true, \"n_hits\": 4, \"note\": \"\", \"top\": [\"Mathlib/Algebra/TrivSqZeroExt/Basic.lean\", \"Mathlib/Algebra/TrivSqZeroExt/Basic.lean\", \"Mathlib/Algebra/TrivSqZeroExt/Basic.lean\", \"Mathlib/Algebra/TrivSqZeroExt/Basic.lean\"], \"digest\": \"a941380794b75e3a\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: TrivSqZeroExt.lift, liftEquiv and map treat split extensions; general pushouts and tensor-product pushouts do not give the antidiagonal quotient and exact marked kernel for an arbitrary nonsplit square-zero extension.",
+   "subdirectory": "Algebra/TrivSqZeroExt"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Pushout of an arbitrary square zero extension of commutative algebras along a linear map of kernel modules, constructed as an antidiagonal quotient",
+   "results": "{\"t\": \"2026-10-24T08:07:07Z\", \"tool\": \"leanfinder\", \"query\": \"Pushout of an arbitrary square zero extension of commutative algebras along a linear map of kernel modules, constructed as an antidiagonal quotient\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.pushoutDesc\", \"TrivSqZeroExt.lift\", \"TrivSqZeroExt.map\", \"Algebra.IsPushout\", \"TrivSqZeroExt.liftEquiv\", \"TrivSqZeroExt.lift_def\", \"TrivSqZeroExt.liftEquiv_apply\", \"TrivSqZeroExt.lift_apply_inr\"], \"digest\": \"b519e7f4f79633fe\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: TrivSqZeroExt.lift and liftEquiv construct maps out of a split extension; map changes coefficients of split extensions only. Neither supplies the antidiagonal quotient, marked exact kernel, and coefficient-pushout property for an arbitrary nonsplit extension. General algebra pushouts and tensor base-change results do not state this construction."
+  },
+  {
+   "tool": "grep",
+   "query": "pushout|antidiagonal|def lift|def map",
+   "results": "{\"t\": \"2026-10-24T08:09:44Z\", \"tool\": \"grep\", \"query\": \"pushout|antidiagonal|def lift|def map\", \"sub\": \"Algebra/TrivSqZeroExt\", \"ok\": true, \"n_hits\": 4, \"note\": \"\", \"top\": [\"Mathlib/Algebra/TrivSqZeroExt/Basic.lean\", \"Mathlib/Algebra/TrivSqZeroExt/Basic.lean\", \"Mathlib/Algebra/TrivSqZeroExt/Basic.lean\", \"Mathlib/Algebra/TrivSqZeroExt/Basic.lean\"], \"digest\": \"a941380794b75e3a\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: TrivSqZeroExt.lift and liftEquiv construct maps out of a split extension; map changes coefficients of split extensions only. Neither supplies the antidiagonal quotient, marked exact kernel, and coefficient-pushout property for an arbitrary nonsplit extension. General algebra pushouts and tensor base-change results do not state this construction.",
+   "subdirectory": "Algebra/TrivSqZeroExt"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Pushout of square zero commutative algebra extensions along homomorphisms of kernel modules",
+   "results": "{\"t\": \"2026-10-24T08:09:45Z\", \"tool\": \"leansearch\", \"query\": \"Pushout of square zero commutative algebra extensions along homomorphisms of kernel modules\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CommRingCat.isPushout_iff_isPushout\", \"Algebra.pushoutDesc\", \"instIsPushout\", \"CategoryTheory.Square.IsPushout\", \"CommRingCat.isPushout_of_isPushout\", \"CategoryTheory.IsPushout.zero_right\", \"Algebra.IsAlgebraic.instIsPushout_1\", \"CategoryTheory.IsPushout.zero_left\"], \"digest\": \"cfba76b9d12666b4\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: TrivSqZeroExt.lift and liftEquiv construct maps out of a split extension; map changes coefficients of split extensions only. Neither supplies the antidiagonal quotient, marked exact kernel, and coefficient-pushout property for an arbitrary nonsplit extension. General algebra pushouts and tensor base-change results do not state this construction."
+  },
+  {
+   "tool": "loogle",
+   "query": "TrivSqZeroExt.lift",
+   "results": "{\"t\": \"2026-10-24T08:09:45Z\", \"tool\": \"loogle\", \"query\": \"TrivSqZeroExt.lift\", \"sub\": \"\", \"ok\": true, \"n_hits\": 10, \"note\": \"\", \"top\": [\"TrivSqZeroExt.lift\", \"TrivSqZeroExt.lift_comp_inlHom\", \"TrivSqZeroExt.lift_apply_inl\", \"TrivSqZeroExt.lift_apply_inr\", \"TrivSqZeroExt.range_liftAux\", \"TrivSqZeroExt.lift_def\", \"TrivSqZeroExt.lift_inlAlgHom_inrHom\", \"TrivSqZeroExt.lift_comp_inrHom\"], \"digest\": \"96073840413f13b2\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: TrivSqZeroExt.lift and liftEquiv construct maps out of a split extension; map changes coefficients of split extensions only. Neither supplies the antidiagonal quotient, marked exact kernel, and coefficient-pushout property for an arbitrary nonsplit extension. General algebra pushouts and tensor base-change results do not state this construction."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Changing the kernel module of a nonsplit square zero ring extension by quotient of E direct sum N by the graph of a module homomorphism",
+   "results": "{\"t\": \"2026-10-24T08:09:46Z\", \"tool\": \"leanfinder\", \"query\": \"Changing the kernel module of a nonsplit square zero ring extension by quotient of E direct sum N by the graph of a module homomorphism\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"TrivSqZeroExt.map\", \"TrivSqZeroExt.liftEquiv\", \"TrivSqZeroExt.liftEquiv_apply\", \"TrivSqZeroExt.lift\", \"retractionOfSectionOfKerSqZero\", \"TrivSqZeroExt\", \"TrivSqZeroExt.lift_def\", \"TrivSqZeroExt.range_liftAux\"], \"digest\": \"985abb5e26e303b9\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: TrivSqZeroExt.lift and liftEquiv construct maps out of a split extension; map changes coefficients of split extensions only. Neither supplies the antidiagonal quotient, marked exact kernel, and coefficient-pushout property for an arbitrary nonsplit extension. General algebra pushouts and tensor base-change results do not state this construction."
+  },
+  {
+   "tool": "grep",
+   "query": "pushout|antidiagonal|square.zero",
+   "results": "{\"t\": \"2026-10-24T08:11:30Z\", \"tool\": \"grep\", \"query\": \"pushout|antidiagonal|square.zero\", \"sub\": \"RingTheory/Extension\", \"ok\": true, \"n_hits\": 2, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/Extension/Cotangent/BaseChange.lean\", \"Mathlib/RingTheory/Extension/Cotangent/BaseChange.lean\"], \"digest\": \"0866112a69fd137d\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: TrivSqZeroExt.lift and liftEquiv construct maps out of a split extension; map changes coefficients of split extensions only. Neither supplies the antidiagonal quotient, marked exact kernel, and coefficient-pushout property for an arbitrary nonsplit extension. General algebra pushouts and tensor base-change results do not state this construction.",
+   "subdirectory": "RingTheory/Extension"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-per-conormal-extension-class-cokernel",
+  "date": "2026-10-24",
+  "group": "Q28"
+ },
+ "chapter": "sec-deligne-laumon-a1",
+ "unit": "sk-p-dl-a1-perverse",
+ "blueprint": {
+  "from": {
+   "node": "lem-per-artin-gabber-affine-curve",
+   "place": "Inherited auxiliary formal-resolution branch of ancestor Step 3, via the item's recorded creation chain; §3.2.2 and Proposition 3.2.1(i),(ii), with Remark 3.2.2(i),(ii); the smooth-extension case only of the transitivity assertion. The latest ancestor proof has no separate formal-resolution sentence. Supporting calculation: dual conormal presentation of square-zero extension classes, used to prove smooth transitivity of the obstruction ideal. Auxiliary construction used in the conormal classification: pushout of the universal square-zero extension P/I^2 along a conormal map, and coefficient pushout.",
+   "via": [
+    "lem-per-conormal-extension-class-cokernel",
+    "lem-per-gabber-ramero-ideal-calculus",
+    "lem-per-elkik-smooth-span-lifting",
+    "lem-per-rig-formal-resolution-intrinsic",
+    "lem-per-rig-regular-formal-resolution",
+    "lem-per-small-singular-locus-resolution",
+    "lem-per-qe-ordinary-regular-resolution",
+    "lem-per-characteristic-zero-log-resolution-independence",
+    "lem-per-complete-local-rigidification-comparison",
+    "lem-per-gabber-absolute-equivariant-modification",
+    "lem-per-gabber-log-smooth-equivariant-modification",
+    "lem-per-trait-prime-to-ell-log-alteration",
+    "lem-per-gabber-regular-pair-purity",
+    "lem-per-absolute-gysin-purity",
+    "lem-per-potential-dualizing-regular-unit",
+    "lem-per-finite-regular-reduction-dualizing",
+    "lem-per-qbar-generic-duality-model",
+    "lem-per-qbar-middle-tstructure"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-per-square-zero-kernel-pushout",
+  "worker": "stage1",
+  "summary": "Retained the full statement, original citations and search records. Expanded the antidiagonal construction of Stacks 0GPW into eight explicit elementary calculations. Reused the trivial square-zero construction and quotient algebra definition; no new nodes or Lean changes. Checked nonsplit and noninjective coefficient maps as well as zero modules.",
+  "blueprint": "Inherited auxiliary conormal-extension calculation through the recorded creation chain from lem-per-artin-gabber-affine-curve. The latest ancestor has no separate formal-resolution paragraph; the proof realizes the coefficient pushout required by lem-per-conormal-extension-class-cokernel, without changing the fixed unit route.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q102-9fc8c3dda",
+  "group": "Q102",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q102-9fc8c3dda (reviewer sub-agent of L); spot-checked: I read Stacks defos.tex Tag 0GPW (remark-extensions-of-algebras-functorial, line 309 onward). The item states the source's B'_1=(N×B')/M with M embedded antidiagonally. It correctly reads that product as the trivial square-zero extension E⊕N, with E acting on N through p. It also states the pushout's universal property, with w arbitrary. No new nodes, no tool_uses, and no repair note, so this is not a 2026-10-21 re-split. The two cited nodes are definitions. def-sc-trivial-square-zero-extension gives the product (r,m)(s,t)=(rs,rt+sm). def-weil-pbc-algebra-hom-quotient gives the quotient algebra, its surjective quotient map and its kernel J. I recomputed every step. Step 2: J_v is an ideal, using pj=0, e j(k)=j(p(e)k) and B-linearity of v. Step 4: j_v is injective because j is (v need not be), and ker p_v=im j_v via [(j(k),n)]=[(0,n+v(k))]. Step 5: the kernel has square zero and carries the prescribed B-action. Step 6: F is multiplicative, using p_D h=p, the action in D and j_D(L)^2=0, and F kills J_v because hj=j_D w v. Steps 7-8: the induced map descends, satisfies p_D h̄=p_v, and is unique by additivity. All steps are genuinely elementary. Edge cases checked: v=0 gives B⊕N; N=0 gives B; K=0 gives B⊕N; v=id gives E; the nonsplit Z/4→F_2 case returns Z/4; characteristic 2 needs no sign exception. Duplicate search (rg -L for antidiagonal, 0GPW, and square-zero with pushout) found nothing equivalent; lem-sfb-affine-commutative-extension-pushout is about group schemes. The only citer, lem-per-conormal-extension-class-cokernel steps 4/5/7/8, uses exactly q_v j=j_v v, the universal property with w=id, and p_D h̄=p_v, all stated. The item cites only definitions, so there is no cycle. The statement is unchanged; the added stmt_dep def-weil-pbc-algebra-hom-quotient is genuinely used. Searches cover leansearch, leanfinder, loogle and grep."
+ }
+}

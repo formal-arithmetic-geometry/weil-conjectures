@@ -1,0 +1,494 @@
+{
+ "id": "lem-sfb-smooth-proper-coherent-trace-pairing",
+ "kind": "statement",
+ "title": "Smooth proper coherent trace pairings and their geometric naturality",
+ "statement": "Let $k$ be a field [def-weil-field] and let $f:Y\\to\\operatorname{Spec}k$ be a smooth proper morphism of pure relative dimension $d\\geq0$ [def-pc-scheme, def-sbc-smooth-morphisms, def-weil-proper-morphism]. Put $\\omega_Y=\\bigwedge^d\\Omega^1_{Y/k}$ [def-sc-relative-differential-sheaf, def-sc-sheaf-exterior-power]. For an $\\mathcal O_Y$-module $\\mathcal E$ locally isomorphic on a Zariski open cover to $\\mathcal O_Y^{\\oplus r}$ for a finite integer $r$ (allowed to vary between components), put $\\mathcal E^\\vee=\\mathcal H om_{\\mathcal O_Y}(\\mathcal E,\\mathcal O_Y)$. Cohomology means right-derived global sections of Zariski module sheaves [pqf-def-cohomology], and cup product is the usual sheaf-cohomology product [def-sc-module-cohomology-cup-product]. There is a canonical $k$-linear map $t_Y:H^d(Y,\\omega_Y)\\to k$, the degree-zero map of the adjunction counit $R\\Gamma(Y,f^!k)\\to k$ under the smooth dualizing identification $f^!k\\simeq\\omega_Y[d]$; here $f^!$ is the right adjoint to $Rf_*$ on complexes with quasi-coherent cohomology, and $[d]$ is the cohomological shift. For every $0\\leq i\\leq d$, all the groups below are finite-dimensional and the pairing\n$$P_{Y,\\mathcal E,i}:H^i(Y,\\mathcal E)\\times H^{d-i}(Y,\\mathcal E^\\vee\\otimes\\omega_Y)\\longrightarrow k,\\qquad (u,v)\\longmapsto t_Y(\\operatorname{ev}_*(u\\cup v))$$\nis perfect: the induced maps from either factor to the linear dual of the other are bijective. Evaluation is $e\\otimes(\\lambda\\otimes w)\\mapsto\\lambda(e)w$.\nFor every commutative $k$-algebra $A$, put $Y_A=Y\\times_k\\operatorname{Spec}A$. The canonical maps $A\\otimes_kH^j(Y,\\mathcal F)\\to H^j(Y_A,\\mathcal F_A)$ are isomorphisms for $\\mathcal F=\\mathcal E,\\mathcal E^\\vee\\otimes\\omega_Y,\\omega_Y$ and every $j\\geq0$. There is a canonical trace $t_{Y_A}:H^d(Y_A,\\omega_{Y_A/A})\\to A$, equal to $1_A\\otimes t_Y$ under these maps. The cup-evaluation pairings over $A$ are the scalar extensions of $P_{Y,\\mathcal E,i}$. For any $A$-automorphism $h:Y_A\\to Y_A$, the differential identification $h^*\\omega_{Y_A/A}\\simeq\\omega_{Y_A/A}$ satisfies $t_{Y_A}(h^*z)=t_{Y_A}(z)$. If in addition $\\eta:h^*\\mathcal E_A\\simeq\\mathcal E_A$ is given, let $h_\\eta^*$ act on cohomology by pullback followed by $\\eta$, and let $h_{\\eta^\\vee}^*$ use the induced isomorphism on $\\mathcal E_A^\\vee\\otimes\\omega_{Y_A/A}$ (the dual of $\\eta^{-1}$ and the differential on $\\omega$). Then\n$$P_{Y_A,\\mathcal E_A,i}(h_\\eta^*u,h_{\\eta^\\vee}^*v)=P_{Y_A,\\mathcal E_A,i}(u,v).$$\nThese compatibilities respect composition of isomorphisms and of scalar extensions. The assertions include $d=0$, with $\\omega_Y=\\mathcal O_Y$.",
+ "source": {
+  "document": "literature/stacks-project/duality.tex",
+  "place": "Tag 0FVV, lemma-duality-proper-over-field (5),(7); Tag 0FVW, remark-duality-proper-over-field; Tag 0FVY, lemma-duality-proper-over-field-perfect; Tag 0FW0, remark-rework-duality-locally-free-CM; Tag 0B6J, lemma-trace-map-and-base-change; Tag 0AAB, lemma-proper-flat-base-change. Isomorphism naturality is the counit naturality with the canonical smooth differential normalization."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-pc-scheme",
+  "def-sbc-smooth-morphisms",
+  "def-weil-proper-morphism",
+  "def-sc-relative-differential-sheaf",
+  "def-sc-sheaf-exterior-power",
+  "pqf-def-cohomology",
+  "def-sc-module-cohomology-cup-product",
+  "def-pc-derived-category",
+  "def-pc-derived-direct-image",
+  "def-pur-sheaf-hom",
+  "def-pur-sheaf-tensor-product",
+  "def-pc-module-pullback",
+  "def-pc-base-change",
+  "def-sc-ringed-space-module-cohomology",
+  "def-sc-field-linear-module-cohomology-operations",
+  "def-pc-single-complex-base-change-stalk-condition",
+  "def-pc-derived-base-change-map",
+  "def-weil-pbc-koszul-complex",
+  "def-trf-polynomial-duality-presentation-data",
+  "def-weil-pbc-module-cohomology-fmap",
+  "lem-weil-pbc-module-pullback-tensor",
+  "def-sfb-relative-dualizing-adjunction",
+  "def-sfb-derived-pullback-unit-identification",
+  "def-sfb-sheaf-dual-evaluation",
+  "def-sfb-global-section-module-map",
+  "def-pc-derived-pullback",
+  "lem-pc-module-pullback-adjunction",
+  "def-sc-finite-locally-free-sheaf",
+  "def-pc-affine-global-hom-base-change-map"
+ ],
+ "proof": [
+  {
+   "text": "Put $K_f=f^!k$ and write $\\tau_f:R\\Gamma K_f\\to k[0]$ for the counit. Also use $K_p=p^!\\mathcal O_S$ and $\\tau_p$ for $p=f_A:Y_A\\to\\operatorname{Spec}A$, for any commutative $k$-algebra $A$, as well as for $p=f$. Smoothness supplies local finite presentation; properness supplies quasi-compactness and separatedness, so $p$ is of finite presentation. Apply [lem-sfb-proper-flat-dualizing-polynomial-model] to obtain $K_p$ with its normalized polynomial-chart models and adjunction trace. Flatness for $f$ follows from [lem-pc-flat-field]; after base change it follows by tensoring the same flat algebra charts. The trace-pair characterization, uniqueness and arbitrary-base-change compatibility are those of [lem-sfb-proper-flat-space-derived-duality], including its explicit agreement with Zariski proper duality when the spaces are schemes and the base affine. Thus no Noetherian hypothesis on an eventual $A$ is introduced.",
+   "uses": [
+    "def-sbc-smooth-morphisms",
+    "def-weil-proper-morphism",
+    "lem-pc-flat-field",
+    "lem-sfb-proper-flat-dualizing-polynomial-model",
+    "lem-sfb-proper-flat-space-derived-duality"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/duality.tex",
+    "place": "Tags 0E4P, 0B6J; spaces-duality.tex Tags 0E61, 0E6C, 0E6E (proper dualizing pair and trace)"
+   }
+  },
+  {
+   "text": "Normalize $K_p$ by the differential line. Take the standard-smooth affine charts of [lem-sc-standard-smooth-local-relative-dimension], of dimension $n-c=d$. Their closed immersions into polynomial affine space are immersions between smooth $S$-schemes. Apply [lem-pur-smooth-pair-regular-immersion] locally, and [lem-weil-pbc-regular-sequence-koszul-regular] to their regular equations. The conormal description of [lem-trf-lci-cotangent-presentation] then gives $[C\\to V]\\simeq L_{Z/S}$, with $V$ of rank $n$. Since $p$ is smooth this complex is $\\Omega^1_{Z/S}[0]$; its differential cokernel is locally free of rank $d$ by [lem-sc-smooth-omega-finite-locally-free], so locally this conormal sequence splits. It follows that $C$ has rank $n-d=c$. On these charts [lem-trf-lci-koszul-duality-determinant-comparison] identifies the normalized polynomial model of step 1 with $(\\det C)^\\vee\\otimes\\det V[d]$. The equality of ranks concerns these local charts, not a chosen global presentation.",
+   "uses": [
+    "lem-sc-standard-smooth-local-relative-dimension",
+    "lem-pur-smooth-pair-regular-immersion",
+    "lem-weil-pbc-regular-sequence-koszul-regular",
+    "lem-trf-lci-cotangent-presentation",
+    "lem-trf-lci-koszul-duality-determinant-comparison",
+    "lem-sc-smooth-omega-finite-locally-free"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/duality.tex",
+    "place": "Tag 0BV2 (local upper-shriek calculation), Tag 0BRT (smooth determinant calculation); divisors.tex Tag 067U"
+   }
+  },
+  {
+   "text": "By [lem-trf-lci-determinant-descent-smooth], the relation-first determinant map $(\\det C)^\\vee\\otimes\\det V\\to\\bigwedge^d\\Omega^1_{Z/S}$ agrees with the intrinsic determinant and with its overlap maps. The polynomial comparisons in [lem-trf-lci-koszul-duality-determinant-comparison] use precisely these maps, including contraction of an extra relation $t-a$ with $d(t-a)$ to $1$. These local calculations imply that $K_p$ has cohomology only in degree $-d$. By [lem-sf-derived-concentrated-single] it is that cohomology sheaf shifted by $d$; the determinant maps identify this sheaf globally. Thus they give a specified $\\kappa_p:K_p\\simeq\\omega_{Z/S}[d]$. Its isomorphism naturality can be checked using transported presentations: a family isomorphism takes the conormal map $[C\\to V]$ to the transported map, hence on its cokernel it takes $db$ to $d(h^\\sharp b)$. The induced map of determinant lines is exactly $\\bigwedge^d dh$. Changing the chosen presentations changes neither map, by the cited refinement comparison. This identifies the action on the actual differential sheaf, rather than an arbitrary identification with a line.",
+   "uses": [
+    "lem-trf-lci-determinant-descent-smooth",
+    "lem-trf-lci-koszul-duality-determinant-comparison",
+    "lem-sf-derived-concentrated-single"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/duality.tex",
+    "place": "Tag 0BRT; dualizing.tex Tag 0BZJ with the differential-form normalization; ordered Koszul and conormal determinant comparisons"
+   }
+  },
+  {
+   "text": "Set $t_Y=H^0(\\tau_f\\circ R\\Gamma(\\kappa_f^{-1}))$, using $H^0R\\Gamma(\\omega_Y[d])=H^d(Y,\\omega_Y)$. The rank-$d$ statement [lem-sc-smooth-omega-finite-locally-free] makes $\\omega_Y$ a line (in a local basis its generator is the wedge of the $d$ basis vectors). In a local frame $\\mathcal E\\simeq\\mathcal O^r$, the dual has the dual frame, and $\\mathcal E^\\vee\\otimes\\omega_Y$ is finite free of rank $r$. These sheaves are quasi-coherent and finitely presented by their local free presentations; $\\mathcal E[0]$ is perfect by [def-pc-perfect-complex]. Apply [lem-fin-proper-coherent-finite-dimensional] to each of $\\mathcal E$, $\\mathcal E^\\vee\\otimes\\omega_Y$, and $\\omega_Y$. This proves the required finiteness without connectedness or an algebraic-closure hypothesis.",
+   "uses": [
+    "lem-sc-smooth-omega-finite-locally-free",
+    "pqf-def-coherent",
+    "def-pc-perfect-complex",
+    "lem-fin-proper-coherent-finite-dimensional"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/duality.tex",
+    "place": "Tags 0FVW and 0FVV (7); coherent.tex Tag 02O5"
+   }
+  },
+  {
+   "text": "For any complex $C$ of $k$-vector spaces, $\\operatorname{Hom}_{D(k)}(C[i],k[0])\\cong\\operatorname{Hom}_k(H^iC,k)$. Indeed $k$ is injective: extend a functional from a subspace by choosing a basis complement and setting it to zero there. Apply [new-stage3-derived-homology-injective-bijective] to $C[i]$; it says that this particular comparison is the map induced by cohomology, hence sends a derived morphism to its action on $H^0$. Apply it with $C=R\\Gamma\\mathcal E$. The adjunction characterization in [lem-sfb-proper-flat-space-derived-duality], with the object $\\mathcal E[i]$, identifies $\\operatorname{Hom}_Y(\\mathcal E[i],K_f)$ with this vector-space dual. The map sends $a:\\mathcal E[i]\\to K_f$ to $\\tau_f\\circ R\\Gamma a$, not to an unspecified linear equivalence.",
+   "uses": [
+    "new-stage3-derived-homology-injective-bijective",
+    "lem-sfb-proper-flat-space-derived-duality"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/duality.tex",
+    "place": "Tag 0FVV (5) and its adjunction proof; injective-target cohomology comparison"
+   }
+  },
+  {
+   "text": "Use [lem-pc-perfect-rhom-tensor-comparison] for $\\mathcal E[0]$ and $K_f=\\omega_Y[d]$, and [lem-sfb-ringed-global-hom-cup-comparison] to identify the left side of step 5 with $H^{d-i}(Y,\\mathcal E^\\vee\\otimes\\omega_Y)$. The latter node also identifies the action of $R\\Gamma a$ with cup followed by evaluation; [def-sc-module-cohomology-cup-product] identifies this with the stated module cup. Its order is the dual class followed by the $\\mathcal E$ class. Interchanging the two total-complex cocycles multiplies by $(-1)^{i(d-i)}$, since the tensor symmetry on degrees $i,d-i$ is exactly that sign. Thus the transpose of the ordered pairing $P(u,v)$ differs, if required by this order convention, from the bijection of step 5 by multiplication by this unit sign. It is consequently bijective. Both spaces are finite dimensional by step 4, so the other transpose is also bijective: in bases its matrix is the transpose of an invertible square matrix. This proves perfectness for the pairing with the order and evaluation in the statement.",
+   "uses": [
+    "lem-pc-perfect-rhom-tensor-comparison",
+    "lem-sfb-ringed-global-hom-cup-comparison",
+    "def-sc-module-cohomology-cup-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/duality.tex",
+    "place": "Tags 0FVY, 0FVB; perfect evaluation and global-Hom cup comparison"
+   }
+  },
+  {
+   "text": "Let $A$ be any commutative $k$-algebra. It is a flat $k$-module (choose a $k$-basis), so [lem-sc-flat-base-change-coherent] applies, for every $j\\geq0$, to the three quasi-coherent sheaves in step 4. Since $Y$ is separated and quasi-compact over $k$, its isomorphism is the specified canonical comparison of [lem-pc-flat-cohomology-separated], $\\beta^j:A\\otimes_kH^j(Y,\\mathcal F)\\to H^j(Y_A,\\mathcal F_A)$, $b\\otimes x\\mapsto b\\,p^*x$, and this map is bijective. By [lem-trf-relative-differential-sheaf-base-change], the differential map is $b\\otimes da\\mapsto b\\,d(1\\otimes a)$; its top wedge identifies $(\\omega_Y)_A$ with $\\omega_{Y_A/A}$. Duals and tensor products of $\\mathcal E$ commute with this pullback: in a frame the dual basis is carried to the dual basis and evaluation remains $\\sum e_j\\lambda_j$. Hence the three sheaves used in base change are precisely the sheaves occurring over $A$.",
+   "uses": [
+    "lem-sc-flat-base-change-coherent",
+    "lem-pc-flat-cohomology-separated",
+    "lem-trf-relative-differential-sheaf-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/duality.tex",
+    "place": "Tags 02KH and 0B6J; morphisms.tex, cartesian differential comparison"
+   }
+  },
+  {
+   "text": "The arbitrary-base-change trace-pair identification $\\beta:Lp^*K_f\\simeq K_{f_A}$ of [lem-sfb-proper-flat-space-derived-duality] identifies $K_{f_A}$ and its counit with the pullback pair of $K_f$. To compare $\\beta$ with the differential normalization, use the pulled-back charts of step 2: $B_A=B\\otimes_kA$ with $P_A=P\\otimes_kA$. Their relative dimensions remain $n-c=d$ by [lem-weil-pbc-standard-smooth-base-change]. By [lem-sfb-proper-flat-polynomial-model-base-change], under the polynomial-chart comparisons on both sides, $\\beta|_{U_A}$ is the coinduction base-change map $R\\operatorname{Hom}_P(B,\\Omega^n_{P/k})[n]\\otimes_BB_A\\to R\\operatorname{Hom}_{P_A}(B_A,\\Omega^n_{P_A/A})[n]$. That node imposes no Noetherian hypothesis on $A$. The cotangent comparisons of [lem-trf-lci-cotangent-presentation] commute with this flat, hence Tor-independent, base change. The dual Koszul comparison of [lem-trf-lci-koszul-duality-determinant-comparison] for the pulled-back equations is obtained by the same contractions after tensoring. The base change is flat, so the free Koszul resolutions remain resolutions, and a contraction of the ordered top relation with its dual is $1$ before and after tensoring. Hence on $H^{-d}$ the map $\\kappa_{f_A}\\circ\\beta\\circ p^*\\kappa_f^{-1}$ is the determinant of the conormal and differential base-change maps, that is, the top wedge of the differential base-change map of step 7. Taking $H^0R\\Gamma$ of the trace-pair equality, with the comparison $\\beta^d$ of step 7, proves $t_{Y_A}=1_A\\otimes t_Y$. This uses flatness over $k$, not Noetherianity of $A$.",
+   "uses": [
+    "lem-sfb-proper-flat-space-derived-duality",
+    "lem-weil-pbc-standard-smooth-base-change",
+    "lem-sfb-proper-flat-polynomial-model-base-change",
+    "lem-trf-lci-cotangent-presentation",
+    "lem-trf-lci-koszul-duality-determinant-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/duality.tex",
+    "place": "Tags 0B6J, 0AAB and 0E2Y; dualizing.tex Tag 0E2F (arbitrary base change of the polynomial model); differential-form normalization and flat Koszul extension"
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-ringed-space-derived-cup-base-change] to the square $Y_A\\to Y$ over $\\operatorname{Spec}A\\to\\operatorname{Spec}k$, with the two vector-bundle complexes and their evaluation coefficient map. Together with [def-sc-module-cohomology-cup-product] and step 7, its equality says on pure tensors that the cup-evaluation class of $a\\otimes u,b\\otimes v$ is $ab\\otimes\\operatorname{ev}_*(u\\cup v)$. After step 8 its trace is $ab\\,t_Y(\\operatorname{ev}_*(u\\cup v))$. Pure tensors generate both scalar extensions, so the pairing over $A$ is exactly $A\\otimes_kP$.",
+   "uses": [
+    "lem-sfb-ringed-space-derived-cup-base-change",
+    "def-sc-module-cohomology-cup-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/duality.tex",
+    "place": "Tag 0H99 (derived relative cup/base-change square), followed by Tag 0B6J"
+   }
+  },
+  {
+   "text": "Let $h:Y_A\\to Y_A$ be an $A$-isomorphism. Pull the dualizing trace pair back by $h$. For each derived quasi-coherent $M$, its represented Hom functor is unchanged: $\\operatorname{Hom}(M,h^*K)\\cong\\operatorname{Hom}((h^{-1})^*M,K)\\cong\\operatorname{Hom}_A(R\\Gamma((h^{-1})^*M),A)\\cong\\operatorname{Hom}_A(R\\Gamma M,A)$. The last isomorphism is the canonical identification of global sections under an isomorphism, with inverse the one induced by $h^{-1}$. Thus uniqueness of the trace pair in [lem-sfb-proper-flat-space-derived-duality] supplies its trace-preserving comparison. This is the intrinsic comparison on the polynomial models of [lem-sfb-proper-flat-dualizing-polynomial-model]. Step 3 computes it, using transported charts, as $\\bigwedge^d dh$ on $\\omega$. Consequently its degree-zero counit equation is $t_{Y_A}(h^*z)=t_{Y_A}(z)$. This argument is over $A$ itself and allows $h$ which does not descend to $k$.",
+   "uses": [
+    "lem-sfb-proper-flat-space-derived-duality",
+    "lem-sfb-proper-flat-dualizing-polynomial-model",
+    "lem-trf-lci-koszul-duality-determinant-comparison",
+    "lem-trf-lci-determinant-descent-smooth"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/duality.tex",
+    "place": "Trace-pair uniqueness (spaces-duality.tex Tag 0E5Z); Tag 0BV2 and differential determinant normalization"
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-ringed-space-derived-cup-base-change] with $g=\\mathrm{id}_{\\operatorname{Spec}A}$, $g'=h$, $f=f_A=f'$, and the coefficient maps induced by $\\eta$ and its specified dual. This is a commutative square, which need not be presented as a Cartesian square. On local sections $e,\\lambda,w$ the coefficient identity is\n$$((\\eta^{-1})^*\\lambda)(\\eta e)\\,dh(w)=\\lambda(e)\\,dh(w).$$\nHence cup-evaluation of the transformed classes is $h^*$ of the original evaluated class. Step 10 removes this pullback after applying the trace. This proves the displayed invariance of $P$ with the dual of $\\eta^{-1}$, including its inverse in exactly the required position.",
+   "uses": [
+    "lem-sfb-ringed-space-derived-cup-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/duality.tex",
+    "place": "Tag 0H99 with coefficient naturality; trace-preserving family-isomorphism comparison"
+   }
+  },
+  {
+   "text": "Composition requires no new choices: trace-pair comparisons compose because both composites induce the same functional on every test object, so uniqueness in [lem-sfb-proper-flat-space-derived-duality] identifies them. The intrinsic cotangent comparisons in [lem-trf-lci-cotangent-presentation] respect compositions, and their determinant maps do too by the cocycle of [lem-trf-lci-determinant-descent-smooth]. At the cochain level the base-change map sends $a\\otimes s$ to $a\\,s_A$; for $A\\to B$ its composite sends $b\\otimes(a\\otimes s)$ to $ba\\,s_B$, the direct map. Thus steps 7--11 respect composition of scalar extensions and isomorphisms. If $d=0$ the exterior power is the empty wedge $\\mathcal O$, with the same normalized contractions and all signs equal to $1$. Empty schemes or rank-zero bundles give zero cohomology spaces and the unique maps; their zero pairings induce the unique isomorphisms $0\\simeq0$. The proof applies componentwise with no connectedness assumption.",
+   "uses": [
+    "lem-sfb-proper-flat-space-derived-duality",
+    "lem-trf-lci-cotangent-presentation",
+    "lem-trf-lci-determinant-descent-smooth"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/duality.tex",
+    "place": "Trace-pair uniqueness and base-change composition; determinant cocycle; dimension-zero specialization"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sbc-smooth-morphisms",
+  "def-weil-proper-morphism",
+  "lem-pc-flat-field",
+  "lem-sfb-proper-flat-dualizing-polynomial-model",
+  "lem-sfb-proper-flat-space-derived-duality",
+  "lem-sc-standard-smooth-local-relative-dimension",
+  "lem-pur-smooth-pair-regular-immersion",
+  "lem-weil-pbc-regular-sequence-koszul-regular",
+  "lem-trf-lci-cotangent-presentation",
+  "lem-trf-lci-koszul-duality-determinant-comparison",
+  "lem-sc-smooth-omega-finite-locally-free",
+  "lem-trf-lci-determinant-descent-smooth",
+  "lem-sf-derived-concentrated-single",
+  "pqf-def-coherent",
+  "def-pc-perfect-complex",
+  "lem-fin-proper-coherent-finite-dimensional",
+  "new-stage3-derived-homology-injective-bijective",
+  "lem-pc-perfect-rhom-tensor-comparison",
+  "lem-sfb-ringed-global-hom-cup-comparison",
+  "def-sc-module-cohomology-cup-product",
+  "lem-sc-flat-base-change-coherent",
+  "lem-trf-relative-differential-sheaf-base-change",
+  "lem-weil-pbc-standard-smooth-base-change",
+  "lem-sfb-ringed-space-derived-cup-base-change",
+  "lem-pc-flat-cohomology-separated",
+  "lem-sfb-proper-flat-polynomial-model-base-change"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/duality.tex",
+  "place": "Assembly of proper adjunction duality and normalized polynomial/Koszul comparisons: Tags 0FVV--0FW0, 0BRT, 0BV2, 0B6J; new generic cup prerequisite is cohomology.tex Tag 0H99."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "Serre.duality|dualizing|dualising|canonicalSheaf",
+   "results": "0 hits: . ",
+   "date": "2026-10-24",
+   "verdict": "no match: abstract perfect-pairing algebra, algebra traces and smooth-ring cotangent modules do not state coherent Serre duality, its trace, or its compatibility with automorphisms"
+  },
+  {
+   "tool": "grep",
+   "query": "trace.*cohomology|cohomology.*trace|Serre.*pair",
+   "results": "0 hits: . ",
+   "date": "2026-10-24",
+   "verdict": "no match: abstract perfect-pairing algebra, algebra traces and smooth-ring cotangent modules do not state coherent Serre duality, its trace, or its compatibility with automorphisms"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Serre duality trace perfect pairing for coherent cohomology on a smooth proper scheme",
+   "results": "8 hits: LinearMap.IsPerfPair.dualEval, LinearMap.IsPerfPair, LinearMap.apply_symm_toPerfPair_self, LinearMap.IsPerfPair.mk, LinearMap.IsPerfectCompl, LinearEquiv.instIsPerfPair, LinearMap.IsPerfPair.compl₁₂, LinearMap.flip.instIsPerfPair. ",
+   "date": "2026-10-24",
+   "verdict": "no match: abstract perfect-pairing algebra, algebra traces and smooth-ring cotangent modules do not state coherent Serre duality, its trace, or its compatibility with automorphisms"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"cohomology\", \"dual\"",
+   "results": "0 hits: . ",
+   "date": "2026-10-24",
+   "verdict": "no match: abstract perfect-pairing algebra, algebra traces and smooth-ring cotangent modules do not state coherent Serre duality, its trace, or its compatibility with automorphisms"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Serre\", \"dual\"",
+   "results": "0 hits: . ",
+   "date": "2026-10-24",
+   "verdict": "no match: abstract perfect-pairing algebra, algebra traces and smooth-ring cotangent modules do not state coherent Serre duality, its trace, or its compatibility with automorphisms"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Smooth proper scheme over a field Serre duality gives a perfect cup product pairing between cohomology of a vector bundle and its dual tensor the canonical bundle",
+   "results": "8 hits: FGModuleCat.exactPairing, LinearMap.IsPerfPair.dualEval, Algebra.smoothLocus_eq_compl_support_inter, Algebra.instFiniteH1CotangentOfFinitePresentationOfProjectiveKaehlerDifferential, Algebra.FormallySmooth.projective_kaehlerDifferential, FGModuleCat.FGModuleCatEvaluation, Algebra.IsStandardSmooth.iff_exists_basis_kaehlerDifferential, FGModuleCat.rightRigidCategory. ",
+   "date": "2026-10-24",
+   "verdict": "no match: abstract perfect-pairing algebra, algebra traces and smooth-ring cotangent modules do not state coherent Serre duality, its trace, or its compatibility with automorphisms"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The trace from top cohomology of the canonical bundle on a smooth proper variety commutes with field algebra base change and automorphisms",
+   "results": "8 hits: Algebra.intTraceAux, LinearMap.trace_baseChange, Algebra.normalizedTrace_comp_algHom, trace_eq_sum_automorphisms, Algebra.normalizedTrace_algebraMap, Algebra.normalizedTrace, Algebra.normalizedTrace_map, Algebra.normalizedTrace_trans. ",
+   "date": "2026-10-24",
+   "verdict": "no match: abstract perfect-pairing algebra, algebra traces and smooth-ring cotangent modules do not state coherent Serre duality, its trace, or its compatibility with automorphisms"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Coherent Serre duality trace cup product for a finite locally free sheaf on a smooth proper scheme over a field",
+   "results": "8 hits: LinearMap.trace_eq_contract, LinearMap.trace_eq_contract_apply, LinearMap.trace_eq_contract', Module.Basis.trace_mul_traceDual, FGModuleCat.FGModuleCatEvaluation, LinearMap.trace_eq_contract_of_basis, LinearMap.trace_transpose, FGModuleCat.rightRigidCategory",
+   "date": "2026-10-24",
+   "verdict": "no match: algebra trace, underived module adjunction and vector-space linear algebra do not give coherent smooth-proper trace duality"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"cohomology\", \"dual\"",
+   "results": "0 hits: ",
+   "date": "2026-10-24",
+   "verdict": "no match: algebra trace, underived module adjunction and vector-space linear algebra do not give coherent smooth-proper trace duality"
+  },
+  {
+   "tool": "grep",
+   "query": "Serre.duality|dualizing|dualising|canonicalSheaf",
+   "results": "14 hits: Mathlib/Data/Set/Defs.lean, Mathlib/AlgebraicTopology/ModelCategory/FibrantObjectHomotopy.lean, Mathlib/CategoryTheory/ObjectProperty/ColimitsClosure.lean, Mathlib/CategoryTheory/Adjunction/PartialAdjoint.lean, Mathlib/Analysis/InnerProductSpace/Dual.lean, Mathlib/Algebra/Homology/ShortComplex/RightHomology.lean, Mathlib/Algebra/Homology/ShortComplex/RightHomology.lean, Mathlib/Tactic/Translate/ToDual.lean",
+   "date": "2026-10-24",
+   "verdict": "no match: algebra trace, underived module adjunction and vector-space linear algebra do not give coherent smooth-proper trace duality"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Canonical coherent trace is invariant under automorphisms of smooth proper schemes and commutes with scalar extension",
+   "results": "8 hits: Algebra.trace_eq_of_algEquiv, Algebra.trace_eq_of_ringEquiv, Algebra.trace_comp_trace, Algebra.trace_eq_of_equiv_equiv, LinearMap.trace_baseChange, Algebra.trace_trace, LinearMap.trace_map, Algebra.trace",
+   "date": "2026-10-24",
+   "verdict": "no match: algebra trace, underived module adjunction and vector-space linear algebra do not give coherent smooth-proper trace duality"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "All modules over a division ring are injective objects in the category of modules",
+   "results": "8 hits: ModuleCat.enoughInjectives, Module.Injective, instEnoughInjectivesModuleCatOfSmall, Module.injective_iff_injective_object, Module.injective_object_of_injective_module, Module.Baer.injective, Module.injective_module_of_injective_object, Module.injective_iff",
+   "date": "2026-10-24",
+   "verdict": "no match: algebra trace, underived module adjunction and vector-space linear algebra do not give coherent smooth-proper trace duality"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-flag-line-equivariant-serre-pairing",
+  "date": "2026-10-24",
+  "group": "Q54"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Haboush symmetric-power lifting for a trivial quotient representation. Supporting representation-theoretic input: Steinberg endomorphisms detect a nonzero fixed vector. Supporting Self-duality of rho section modules at characteristic-dependent weights. Supporting input: Positive-characteristic simplicity step, using irreducibility of the Steinberg induced module rather than assuming self-duality. Numerical input to the dimension comparison: Dimension of the simple module at the first restricted rho weight. Supporting general input: dominant induced-module composition factors, multiplicity one at the highest weight and affine linkage; used to exclude all lower factors at (p-1)rho. Repair of the strong-linkage input: Simple image of top-to-bottom line cohomology maps. Serre-duality input: canonical homogeneous line and invariant trace pairing before the elementary map-space argument. General coherent-duality input, after computing the canonical character: the smooth proper trace pairing and its compatibility with isomorphisms and scalar extension.",
+   "via": [
+    "lem-sfb-flag-line-equivariant-serre-pairing",
+    "lem-sfb-top-bottom-cohomology-simple-image",
+    "lem-sfb-induced-composition-linkage",
+    "lem-sfb-restricted-rho-simple-dimension",
+    "lem-sfb-steinberg-induced-module-irreducible",
+    "lem-sfb-rho-section-self-duality",
+    "lem-sfb-steinberg-endomorphism-detection",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-smooth-proper-coherent-trace-pairing",
+  "worker": "stage1",
+  "summary": "Retained the complete statement; assembled normalized polynomial/Koszul smooth duality, the proper trace-pair universal property, finite-dimensionality, and arbitrary algebra base change. Added only the general ringed-space derived cup/base-change square. Isomorphism trace invariance is proved over the algebra itself with the actual differential normalization.",
+  "blueprint": "The inherited from.place identifies the supporting coherent-duality input to flag-line-equivariant-serre-pairing; steps 1--6 prove the pairing, 7--9 its scalar compatibility, and 10--12 its geometric equivariance and coherence. The item has no blueprint ancestor according to blueprint_refs.py ancestor. The latest blueprint has no statement of this full coherent-duality input.",
+  "tool_uses": [
+   {
+    "node": "lem-sc-standard-smooth-local-relative-dimension",
+    "why": "Generic coherent-duality, differential, cohomology or homological-algebra input used with its stated hypotheses; it supports the inherited coherent trace subargument and does not replace a unit-level finite-coefficient route."
+   },
+   {
+    "node": "lem-pur-smooth-pair-regular-immersion",
+    "why": "Generic coherent-duality, differential, cohomology or homological-algebra input used with its stated hypotheses; it supports the inherited coherent trace subargument and does not replace a unit-level finite-coefficient route."
+   },
+   {
+    "node": "lem-weil-pbc-regular-sequence-koszul-regular",
+    "why": "Generic coherent-duality, differential, cohomology or homological-algebra input used with its stated hypotheses; it supports the inherited coherent trace subargument and does not replace a unit-level finite-coefficient route."
+   },
+   {
+    "node": "lem-trf-lci-cotangent-presentation",
+    "why": "Generic coherent-duality, differential, cohomology or homological-algebra input used with its stated hypotheses; it supports the inherited coherent trace subargument and does not replace a unit-level finite-coefficient route."
+   },
+   {
+    "node": "lem-trf-lci-koszul-duality-determinant-comparison",
+    "why": "Generic coherent-duality, differential, cohomology or homological-algebra input used with its stated hypotheses; it supports the inherited coherent trace subargument and does not replace a unit-level finite-coefficient route."
+   },
+   {
+    "node": "lem-trf-lci-determinant-descent-smooth",
+    "why": "Generic coherent-duality, differential, cohomology or homological-algebra input used with its stated hypotheses; it supports the inherited coherent trace subargument and does not replace a unit-level finite-coefficient route."
+   },
+   {
+    "node": "lem-fin-proper-coherent-finite-dimensional",
+    "why": "Generic coherent-duality, differential, cohomology or homological-algebra input used with its stated hypotheses; it supports the inherited coherent trace subargument and does not replace a unit-level finite-coefficient route."
+   },
+   {
+    "node": "new-stage3-derived-homology-injective-bijective",
+    "why": "Generic coherent-duality, differential, cohomology or homological-algebra input used with its stated hypotheses; it supports the inherited coherent trace subargument and does not replace a unit-level finite-coefficient route."
+   },
+   {
+    "node": "lem-pc-perfect-rhom-tensor-comparison",
+    "why": "Generic coherent-duality, differential, cohomology or homological-algebra input used with its stated hypotheses; it supports the inherited coherent trace subargument and does not replace a unit-level finite-coefficient route."
+   },
+   {
+    "node": "lem-trf-relative-differential-sheaf-base-change",
+    "why": "Generic coherent-duality, differential, cohomology or homological-algebra input used with its stated hypotheses; it supports the inherited coherent trace subargument and does not replace a unit-level finite-coefficient route."
+   },
+   {
+    "node": "lem-sf-derived-concentrated-single",
+    "why": "Generic derived-category concentration theorem used to pass from local cohomology-sheaf concentration to a global shifted line; no six-functor unit route is replaced."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sc-standard-smooth-local-relative-dimension",
+  "lem-pur-smooth-pair-regular-immersion",
+  "lem-weil-pbc-regular-sequence-koszul-regular",
+  "lem-trf-lci-cotangent-presentation",
+  "lem-trf-lci-koszul-duality-determinant-comparison",
+  "lem-trf-lci-determinant-descent-smooth",
+  "lem-fin-proper-coherent-finite-dimensional",
+  "new-stage3-derived-homology-injective-bijective",
+  "lem-pc-perfect-rhom-tensor-comparison",
+  "lem-trf-relative-differential-sheaf-base-change",
+  "lem-sf-derived-concentrated-single"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q66-40f10fa4e",
+  "group": "Q66",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q66-40f10fa4e (reviewer sub-agent of L); spot-checked: I read the item's 12 steps, the delivered new node and every cited statement in full. Sources checked at the cited places: Stacks cohomology 0H99, duality 0B6J/0AAB/0E2Y/0BV2 and dualizing 0E2F. The statement is unchanged from live; the added stmt_deps are notions the statement already uses. This is the first split, with no re-split note, and live is still unsplit. No SGA. Steps 1-6 and 9-12 are sound: the polynomial-model/Koszul/determinant gluing of kappa (same pattern as gorenstein-curve-relative-dualizing steps 3-4), finiteness from lem-fin-proper-coherent-finite-dimensional, the injective-target Hom over k, perfectness via the global-Hom cup comparison with sign (-1)^{i(d-i)}, h-invariance from trace-pair uniqueness, and the non-Cartesian square used for eta. Edge cases checked: d=0, empty Y, rank 0, disconnected Y, A=0, char 2. New node lem-sfb-ringed-space-derived-cup-base-change: I checked it by transposing both sides under the adjunction; it reduces to monoidality of the pullback composition isomorphisms. True, general, not a duplicate. FIX (2 repairs): (1) Step 8 asserted, without any cited statement, that the trace-pair base change Lp^*K_f = K_{f_A} agrees with the polynomial-model base change. The existing lem-sfb-relative-duality-polynomial-base-change needs S and S' locally Noetherian, but the item allows any k-algebra A; without this link the two base changes of omega could differ by a unit. I added the statement-only node lem-sfb-proper-flat-polynomial-model-base-change (Stacks 0E2F/0E2Y, any base, any base change; beta on charts = coinduction base change of RHom_P(B,Omega^n)[n]) and step 8 now cites it. (2) Step 7: lem-sc-flat-base-change-coherent gives only an abstract isomorphism; the step now also cites lem-pc-flat-cohomology-separated for the canonical map b⊗x -> b p^*x. proof_deps updated. Batch-5: with a closure diff stopped at the trf/pd chapters and the batch-4 targets, the only trf node new to the frontier is lem-trf-lci-determinant-descent-smooth (Stacks 0FJX on 08SL, generic). lci-cotangent-presentation, lci-koszul-duality-determinant-comparison and relative-differential-sheaf-base-change are already reached from many non-trf nodes. The proper-flat dualizing/space-duality nodes, proper-coherent-finite-dimensional and ringed-site cup product reach trf only through definitions (coherent-relative-dualizing-pair, algebraic-space, schematically-dense-open). None of these is trace-formula or Poincaré content, so all are accepted. Advisory: the parent only uses A=F[S], which is Noetherian.; 2 file(s) fixed by the reviewer; 1 statement node(s) added by the reviewer (FIX more, RETURN less)"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SmoothProperCoherentTracePairing",
+  "declaration": "AlgebraicGeometry.SmoothProperCoherentTrace.exists_smoothProperCoherentTracePairing",
+  "declarations": [
+   "AlgebraicGeometry.SmoothProperCoherentTrace.cohomology",
+   "AlgebraicGeometry.SmoothProperCoherentTrace.omega",
+   "AlgebraicGeometry.SmoothProperCoherentTrace.dualCoefficient",
+   "AlgebraicGeometry.SmoothProperCoherentTrace.evaluation",
+   "AlgebraicGeometry.SmoothProperCoherentTrace.coefficientMap",
+   "AlgebraicGeometry.SmoothProperCoherentTrace.pull",
+   "AlgebraicGeometry.SmoothProperCoherentTrace.pairing",
+   "AlgebraicGeometry.SmoothProperCoherentTrace.DifferentialIso",
+   "AlgebraicGeometry.SmoothProperCoherentTrace.tensorComparison",
+   "AlgebraicGeometry.SmoothProperCoherentTrace.DualIso",
+   "AlgebraicGeometry.SmoothProperCoherentTrace.IsPerfect",
+   "AlgebraicGeometry.SmoothProperCoherentTrace.graphComplex",
+   "AlgebraicGeometry.SmoothProperCoherentTrace.graphWedge",
+   "AlgebraicGeometry.SmoothProperCoherentTrace.single",
+   "AlgebraicGeometry.SmoothProperCoherentTrace.shiftedOmega",
+   "AlgebraicGeometry.SmoothProperCoherentTrace.diagonalModule",
+   "AlgebraicGeometry.SmoothProperCoherentTrace.restrictClass",
+   "AlgebraicGeometry.SmoothProperCoherentTrace.IsNormalizedDiagonal",
+   "AlgebraicGeometry.SmoothProperCoherentTrace.directImageUnit",
+   "AlgebraicGeometry.SmoothProperCoherentTrace.derivedCoefficientMap",
+   "AlgebraicGeometry.SmoothProperCoherentTrace.derivedOmegaMap",
+   "AlgebraicGeometry.SmoothProperCoherentTrace.diagonalProjection",
+   "AlgebraicGeometry.SmoothProperCoherentTrace.counit",
+   "AlgebraicGeometry.SmoothProperCoherentTrace.TraceNormalization",
+   "AlgebraicGeometry.SmoothProperCoherentTrace.scalarEnd",
+   "AlgebraicGeometry.SmoothProperCoherentTrace.IsCounitTrace",
+   "AlgebraicGeometry.SmoothProperCoherentTrace.ScalarChange",
+   "AlgebraicGeometry.SmoothProperCoherentTrace.ScalarChange.bundle",
+   "AlgebraicGeometry.SmoothProperCoherentTrace.HasBaseChange",
+   "AlgebraicGeometry.SmoothProperCoherentTrace.compositeCoefficient",
+   "AlgebraicGeometry.SmoothProperCoherentTrace.composeIso",
+   "AlgebraicGeometry.SmoothProperCoherentTrace.TraceSystem",
+   "AlgebraicGeometry.SmoothProperCoherentTrace.BundleCompatibility",
+   "AlgebraicGeometry.SmoothProperCoherentTrace.exists_smoothProperCoherentTracePairing"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/SmoothProperCoherentTracePairing.lean",
+  "statement": "theorem exists_smoothProperCoherentTracePairing {k : Type u} [Field k] {Y : Scheme.{u}} (f : Y ⟶ Spec (.of k)) (d : ℕ) [SmoothOfRelativeDimension d f] [IsProper f] : ∃ (N : TraceNormalization f d) (t : cohomology f (omega f d) d →ₗ[k] k) (S : TraceSystem f d t), IsCounitTrace f d N t ∧ FiniteDimensional k (cohomology f (omega f d) d) ∧ ∀ E : Y.Modules, E.IsFiniteLocallyFree → Nonempty (BundleCompatibility f d t S E)",
+  "branch": "sheaf-dag",
+  "by": "NR",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-97ab15cdf",
+  "group": "NR",
+  "result": "pass",
+  "note": "Re-delivery of the 737909f H2 return. Lean differs only in imports; the definitions and theorem signature are byte-identical and lean.statement is verbatim in the file. The item node changes only in lean and stmt_deps, with the statement text unchanged. Four existing:true def nodes were added: def-sfb-relative-dualizing-adjunction (NodalRelativeDualizingAdjunction/.complex, 0A9E), def-sfb-derived-pullback-unit-identification (zariskiTracePullbackUnitIso = εIso of the canonical monoidal realization, 079U), def-sfb-sheaf-dual-evaluation (dual/dualEvaluation) and def-sfb-global-section-module-map (homOfGlobalSection). Each statement matches its construction, and no other def node owns these declarations in live. The §1(B) lean-only repair of def-pc-affine-global-hom-base-change-map points the record to the WeilConjectures module, which really holds affineGlobalHomBaseChangeMap (general M K) and canonicalPullbackAdjunction; the Sheaf module only re-imports it. Mechanical theorem-stmt_dep finding judged PASS: pull uses choose(exists_tensorPullbackAdjunction), whose module contains only that theorem and whose adjunction is pinned by the unit formula (the earlier review asked for this dep); tensorComparison = choose(module_pullback_tensor), pinned by naturality and the pure-tensor formula. Both are genuine theorem conclusions. Mathematics re-read clause by clause against Stacks 0FVV/0FVY/0FW0/0B6J/0AAB: counit-normalized trace, perfectness with both transposes, canonical base change for all k-algebras, t_A = 1⊗t, invariance under automorphisms with dual(η⁻¹), composition laws, and edge cases (d=0, empty Y, rank 0, A=0, non-Noetherian A, char 2, single universe u). nt_incremental2.check on live plus the snapshot nodes gives []. Gates: no hollow defs, docstrings carry source and blueprint, the only sorry is the main theorem. Advisory: dual is also listed under def-pc-divisor-line-bundle; the new unit-identification node does not cite lem-sc-mixed-hom-tensor-pullback-iso; def-trf-polynomial-duality-presentation-data is an unused stmt_dep/import; the ProperFlatSpaceDerivedDuality import clash is a stage-3 matter. No compile run, since no file was changed."
+ }
+}

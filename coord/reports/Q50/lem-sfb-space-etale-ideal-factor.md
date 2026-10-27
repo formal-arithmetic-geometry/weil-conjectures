@@ -1,0 +1,72 @@
+## Worker report
+
+Files written, all under the sandbox's `dag/nodes/sec-six-functors-basics/`:
+
+- `lem-sfb-space-etale-ideal-factor.json`: statement, now split into eight proof steps. Statement and statement dependencies are unchanged.
+- `lem-sfb-space-etale-finite-fp-envelope.json`: new statement-only node, unsplit; no exact Mathlib match.
+- `lem-sfb-space-finite-fp-module-direct-image.json`: new statement-only node, unsplit; no exact Mathlib match.
+- `lem-sfb-space-fitting-ideal-calculus.json`: new statement-only node, unsplit; no exact Mathlib match.
+
+Also written: `citations.json`, and this report. Search transcripts and `searches.jsonl` remain available in the sandbox. No Lean was written or compiled. No repository file was edited and no git command was run by the worker.
+
+Attachments: none. Searches of `lean/WeilConjectures/` for the item tag, push-ideal, ideal-factor and algebraic-space terminology found no declaration stating the item. The principal-thickening and coherent-generic-mono ideal-factor declarations concern different problems. The existing item has no completed Lean declaration attached.
+
+WANTED: none. All sources used are present under `literature/stacks-project/`.
+
+The source route is Stacks 087B (spaces-more-morphisms.tex, lemma-push-ideal): compactify, extend an ideal, take a finite direct image, and use its zeroth Fitting ideal. Existing nodes already give finite-type submodule extension (0853), closed ideal correspondence (03MB), the finite-presentation criterion for closed immersions (084Q), affine module base change (07U8), and the separated etale diagonal (03HK). These were reused rather than recreated. Every current statement cited by a proof step was opened; citations.json copies those statements verbatim. No existing dependency was edited.
+
+The new nodes do not restate clauses of the item. The first is a compactification theorem about a morphism with no ideal data, the second is a finiteness theorem about arbitrary modules, and the third constructs Fitting ideals and proves their pullback property for arbitrary finitely presented modules. The assembly constructs J and I' and proves the factorization itself.
+
+## Sources and Mathlib searches
+
+For the finite envelope I read spaces-more-morphisms.tex Tags 082K (lemma-quasi-finite-separated-pass-through-finite) and 0874 (lemma-quasi-finite-separated-pass-through-finite-addendum), including the addendum's approximation proof. The node specializes these to a quasi-compact separated etale morphism: etale supplies local finite presentation and local quasi-finiteness, without assuming that its source is a scheme. There is no Noetherian assumption. The existing integral compactification only accepts a scheme source and does not supply a finite or finitely presented envelope.
+
+For finite direct image I read spaces-descent.tex Tag 0610 (lemma-finite-finitely-presented-module), which states precisely the equivalence under a finite finitely presented morphism. Its proof reduces to scheme charts. I also read the existing affine direct-image statement, which supplies quasi-coherence. Merely finite is not substituted for finite and finitely presented.
+
+For Fitting ideals I read spaces-divisors.tex Tags 0CZ3 (section-fitting-ideals), 0CZ4 (lemma-base-change-fitting-ideal), and 0CZ5 (lemma-fitting-ideal-of-finitely-presented). The new node has the affine etale chart characterization, finite type, and the image-ideal pullback identity. The zero-module convention is the empty determinant. I separately read more-algebra.tex Tag 07ZA (lemma-fitting-ideal-basics), parts (1), (2), (3), (4), (8), for the local calculation; the non-elementary direct-sum identity is supplied by the existing ring-level node lem-trf-fitting-ideal-direct-sum. The cyclic-quotient identity is proved directly from its one-generator presentation in step 7 and is not a new node.
+
+Each new node has five actual msearch.py searches: LeanFinder twice with different phrasings, Loogle, grep, and LeanSearch. The exact queries and complete returned transcripts are recorded, without inventing searches. All services answered. For the finite envelope, the hits are scheme immersion/permanence results and the ring-level Algebra.ZariskisMainProperty, not an algebraic-space finite-presentation envelope. For direct image, Module.FinitePresentation.trans and Module.FinitePresentation.of_finite_of_finitePresentation are genuine useful algebra inputs; their statements do not identify algebraic-space module direct image with restriction of scalars or state the sheaf equivalence. General sheaf finite-presentation definitions also do not state that equivalence. For Fitting ideals, Loogle and grep return Lie-module Fitting decompositions, not presentation ideals; semantic searches return sheaf local-presentation facts and ordinary finite-module/base-change results. There is no exact match or one-line specialization for any of the three new geometric statements.
+
+I searched the whole DAG by source tags and statements, and the whole imported blueprint with blueprint_refs.py (Fitting, quasi-finite, finite presentation, finitely presented module, finite direct image, 0CZ3, 0610, 0874). The scheme Zariski Main theorem and scheme Fitting-sheaf nodes are different, and no blueprint node states these algebraic-space inputs. All new ids were checked against the DAG before being created. Their blueprint.from follows the existing item's null-ancestor supporting chain (the ancestor tool prints None), with the item prepended to via, and specifies the relevant paragraph of 087B. I read the chapter, unit, and the latest blueprint's direct-images proof (3); no chapter or unit route was changed.
+
+## Not duplicates
+
+lem-sfb-space-finite-fp-module-direct-image vs lem-sfb-space-closed-structure-finite-presentation: the existing node treats a closed immersion and only its structure module, identifying finite type of its defining ideal with finite presentation; the new node treats every quasi-coherent module under every finite finitely presented morphism, which need not be a closed immersion. It is not an instance of the existing node.
+
+lem-sfb-space-etale-finite-fp-envelope vs lem-sfb-space-quasifinite-integral-compactification: the existing statement requires a scheme source and produces an integral envelope; the new statement permits a space source and produces a finite finitely presented envelope over a qcqs base.
+
+lem-sfb-space-etale-finite-fp-envelope vs lem-sfb-space-finite-fp-approximation: the existing statement starts with a finite map and approximates it by finite finitely presented maps; it does not give an open immersion from the prescribed etale source into a stage.
+
+lem-sfb-space-fitting-ideal-calculus vs lem-trf-fitting-ideal-sheaf-pullback: the existing statement is for schemes with their scheme quasi-coherent sheaf construction; the new node states the chartwise ideal and pullback on algebraic spaces, including the requisite etale descent and finite type.
+
+lem-sfb-space-fitting-ideal-calculus vs lem-trf-fitting-ideal-direct-sum: the existing statement is the algebraic direct-sum identity; the new node neither replaces nor duplicates it and the item cites the existing node for precisely that identity.
+
+## Source error
+
+The proof of Stacks 087B writes W times_Y Z both in its decomposition and its displayed base-change calculation. This must be W times_T Z, with T denoting its base X. The graph part of W times_T Z is W times_Y Z, which is the closed subspace defined by I; it is only one summand, not the entire base change.
+
+For a concrete check take T=Spec k, W=Y=Spec(k times k), j the identity, U empty, I=0, I_2=0 and Z=Y. Then the pullback of tau_*O_Z to W has rank two over O_W, whereas the direct image of W times_Y Z=W has rank one. Thus the source's displayed identification with the latter is false. The corrected W times_T Z has two copies of W and the graph selects one; its complementary copy is essential. Steps 5-7 explicitly use this corrected object. This is a proof typo only: the item statement is correct and unchanged, and no STATEMENT-DISPUTED correction is required.
+
+## Review by Q50
+
+I checked the item against 087B with all its hypotheses: the base T is qcqs, U is a quasi-compact open, phi is quasi-compact separated etale, I is finite type quasi-coherent and unit over the indicated inverse image. The source's V(I) disjointness is equivalent to the unit-ideal restriction, tested on affine etale charts. No surjectivity, density, Noetherianity or flatness of the finite envelope has been inserted. The two conclusions are both retained, with pullback interpreted as an image ideal. I checked all three new statements against the source places above; they contain statements only and do not hide proof sketches.
+
+Step 1 takes the finite finitely presented envelope exactly from the new envelope node. Integral qcqs permanence gives Y qcqs and affine separated pi. The quasi-compact morphism node permits arbitrary quasi-compact space tests, so both W and Y_U really are quasi-compact; their finite union V is quasi-compact. This is the hypothesis needed later by 0853.
+
+Step 2 uses the finite-type submodule extension statement on O_Y over the quasi-compact open V, not on a merely arbitrary open or a non-qcqs ambient space. The ideals agree as subobjects on their overlap. Ordinary sheaf gluing gives an ideal and the local-presentation definition of quasi-coherence cited in this step makes its locality explicit; finite generation is local as well. Extension inside O_Y, rather than just extension as an abstract module, gives an ideal with the required restrictions.
+
+Step 3 uses closed-ideal correspondence to construct Z and its quotient structure module, the closed-structure finite-presentation criterion to obtain i fp, and the fp-composition statement to obtain tau fp. Finiteness is the explicit quotient-of-a-finite-algebra chart calculation written in the step. Unit ideal on Y_U makes Z_U empty; no density argument is used.
+
+Step 4 uses the new finite-direct-image equivalence only for the finite fp morphism tau and the free rank-one structure module. The affine base-change node applies because tau is finite, hence affine by integral permanence; its statement allows the open base change U -> T without extra hypotheses. The new Fitting node gives a finite-type ideal J and computes its restriction. The empty source has zero structure-module direct image, whose rank-zero presentation gives unit Fitting ideal. Thus J is unit on U.
+
+Step 5 takes only the open-diagonal assertion from the existing separated-etale-diagonal node. The closedness in the whole product is separately proved by pulling back the diagonal of pi. This avoids the invalid inference that an immersion closed in an open subset is closed everywhere. The graph, its two maps, and its pullback description are written explicitly. Open and closed immersion pullback can be checked directly on the scheme tests in the cited definitions.
+
+Step 6 uses closed-ideal correspondence for the restriction to W, hence identifies the graph intersection with the closed space of the original ideal I, with its scheme structure. The corrected total product is Q=W times_T Z. Relative Spec correspondence supplies the affine algebra/property tests and arbitrary base-change comparison. Tensoring a finite algebra presentation and adding the single idempotent relation for a clopen summand prove the needed finite-fp permanence in two chart computations; these are elementary steps, not missing geometric lemmas. Only then is the new finite-direct-image result applied to tau'. In particular it is not applied to a merely finite map with unproved fp.
+
+Step 7 uses the actual affine base-change isomorphism of the existing node, the quotient identification of closed-ideal correspondence, the new Fitting node's chart description, and the existing ring direct-sum formula, whose statement is exactly I_0(M direct sum N)=I_0(M)I_0(N). It does not take the formula from a definition. The cyclic quotient calculation and the two-factor section/product identification are written in the step. The new Fitting node applies to N because step 6 established finite presentation, and gives finite type for I'. Step 8 applies that same node's image-ideal identity to phi and substitutes step 7, proving precisely the requested product equality. No tensor-pullback injection is assumed.
+
+For B1-B10 I checked complete hypotheses and objects, single TeX escapes, source tags and labels, dependency meanings, real logged searches, and blueprint references. For C1-C8 I opened the cited statements, recorded verbatim quotations, checked the only off-unit proof input is the generic ring direct-sum formula (declared in split_report.tool_uses for maintainer review), and checked no new node depends on the item. For D1-D5 the assembly contains the construction and ideal calculation itself, with no invocation of a renamed copy of either conclusion. For E1-E7 I checked the exact fibre products, finite-presentation hypotheses, and graph closedness as above. All non-elementary steps are under 1100 characters, so none meets the 2000-character long-step threshold.
+
+Small cases: W empty (the construction can use the empty envelope), T empty, U=T (I must be unit, F is zero), U empty, I unit, the identity morphism, and a quasi-compact non-surjective open immersion. For a two-sheet trivial finite etale cover with ideals I_1,I_2, J is their product and the complementary factor upstairs is the ideal on the other sheet; the source-typo example above also tests this case. For the Fitting node I checked the zero module (unit ideal), a free rank-one module (zero ideal), a cyclic quotient, and the zero ring. For the module-direct-image node, identity and closed immersions recover the familiar module presentations, and disjoint finite covers give finite direct sums. None requires Noetherianity. For the envelope node the empty and open-immersion cases fit the stated hypotheses without requiring surjectivity.
+
+The substantive corrections during self-review were to expose the source's wrong fibre product, separate open graph from global closed graph, keep every finite-presentation hypothesis explicit, and reuse the existing algebraic direct-sum theorem instead of adding a duplicate sheaf version. Nothing remains mathematically unfinished in this one-level split; the three statement-only new inputs intentionally enter the stage-1 queue.

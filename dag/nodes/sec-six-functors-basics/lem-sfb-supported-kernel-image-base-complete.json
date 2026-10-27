@@ -1,0 +1,123 @@
+{
+ "id": "lem-sfb-supported-kernel-image-base-complete",
+ "kind": "statement",
+ "title": "The source kernel and image of finite scalar local models are derived complete",
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-prop-sf-comp-coherence",
+ "statement": "The source kernel and image of finite scalar local models are derived complete. The precise assertion, including all universes and canonical-unit conditions, is:\n\ntheorem supported_kernel_image_base_complete\n    (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]\n    [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]\n    {X : Scheme.{u}} (L M : AdicCompletion.Modules l E X) (f : L ⟶ M)\n    (hL : HasFiniteConstantLocalModel (DerivedNakayama.integerRing l E) X L)\n    (hM : HasFiniteConstantLocalModel (DerivedNakayama.integerRing l E) X M) :\n    IsDerivedComplete l E X ((DerivedCategory.singleFunctor _ 0).obj (kernel f)) ∧\n    IsDerivedComplete l E X ((DerivedCategory.singleFunctor _ 0).obj (image f))\n\nDefinitions and statement dependencies: [sk-def-sfb-constructible] [sk-def-pe-derived-completion].",
+ "source": {
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Lemma 3.4.12, Lemma 3.4.14, Proposition 3.5.1; support calculation also uses Stacks proetale.tex Tags 09AA, 09AH, 09BM, 09BN. Specialization of steps 1--5 of lem-sfb-supported-image-derived-completeness."
+ },
+ "stmt_deps": [
+  "sk-def-sfb-constructible",
+  "sk-def-pe-derived-completion"
+ ],
+ "proof": [
+  {
+   "text": "Finite scalar local models L and M are derived complete, using the existing finite-model theorem and the canonical degree-zero localization isomorphism.",
+   "uses": [
+    "lem-sfb-finite-scalar-local-model-complete"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Choose the simultaneous strict completion presentations and section-action comparison. The principal-model comparison identifies the section unit complete locus. Naturality and the derived section equivalence make invertibility of the internal unit equivalent to invertibility of the principal unit on the section module in degree zero.",
+   "uses": [
+    "lem-sfb-strict-completion-restriction-comparison",
+    "lem-sfb-section-integral-principal-completion-model",
+    "lem-pe-completion-triangle-comparison"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply complete_heart_kernels to the actual section-action map. Transport ordinary kernel and image through the exact equivalence using PreservesKernel.iso and PreservesImage.iso, then back through the complete-locus equivalence.",
+   "uses": [
+    "lem-sfb-principal-complete-heart-kernels"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-finite-scalar-local-model-complete",
+  "lem-sfb-strict-completion-restriction-comparison",
+  "lem-sfb-section-integral-principal-completion-model",
+  "lem-pe-completion-triangle-comparison",
+  "lem-sfb-principal-complete-heart-kernels"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Lemma 3.4.12 and Lemma 3.4.14, specialized to the normalized integral coefficient presentations; Stacks 09AH for the support iteration."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Kernels and images of derived complete modules remain derived complete",
+   "results": "{\"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"IsAdicComplete.toIsPrecomplete\", \"IsPrecomplete.top\", \"AdicCompletion.map_exact\", \"IsPrecomplete\", \"IsAdicComplete\", \"IsAdicComplete.toIsHausdorff\", \"AdicCompletion.instIsHausdorff\", \"Hausdorffification.instIsHausdorff\"]}",
+   "date": "2026-10-25",
+   "verdict": "No exact match for normalized integral section/principal completion comparison or supported completeness; Mathlib exact-functor preservation and natural-unit transport are used."
+  },
+  {
+   "tool": "loogle",
+   "query": "IsDerivedComplete",
+   "results": "{\"ok\": true, \"n_hits\": 0, \"note\": \"loogle: unknown identifier 'IsDerivedComplete'\", \"top\": []}",
+   "date": "2026-10-25",
+   "verdict": "No exact match for normalized integral section/principal completion comparison or supported completeness; Mathlib exact-functor preservation and natural-unit transport are used."
+  },
+  {
+   "tool": "grep",
+   "query": "IsDerivedComplete|complete_heart_kernels",
+   "results": "{\"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": []}",
+   "date": "2026-10-25",
+   "verdict": "No exact match for normalized integral section/principal completion comparison or supported completeness; Mathlib exact-functor preservation and natural-unit transport are used."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.SupportedImageDerivedCompleteness",
+  "date": "2026-10-25",
+  "group": "C3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sfb-supported-image-derived-completeness",
+   "place": "steps 1--2",
+   "via": []
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.SupportedKernelImageBaseComplete",
+  "file": "lean/Sheaf/Paper/SupportedKernelImageBaseComplete.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.supported_kernel_image_base_complete",
+  "statement": "theorem supported_kernel_image_base_complete\n    (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]\n    [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]\n    {X : Scheme.{u}} (L M : AdicCompletion.Modules l E X) (f : L ⟶ M)\n    (hL : HasFiniteConstantLocalModel (DerivedNakayama.integerRing l E) X L)\n    (hM : HasFiniteConstantLocalModel (DerivedNakayama.integerRing l E) X M) :\n    IsDerivedComplete l E X ((DerivedCategory.singleFunctor _ 0).obj (kernel f)) ∧\n    IsDerivedComplete l E X ((DerivedCategory.singleFunctor _ 0).obj (image f))",
+  "branch": "sheaf-dag",
+  "by": "C3",
+  "date": "2026-10-25"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C3",
+  "result": "pass",
+  "landing": "20261025T094926-L-3274518",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C3",
+  "result": "pass",
+  "landing": "20261025T094926-L-3274518",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

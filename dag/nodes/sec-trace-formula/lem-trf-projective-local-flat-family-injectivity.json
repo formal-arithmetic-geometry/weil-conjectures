@@ -1,0 +1,241 @@
+{
+ "id": "lem-trf-projective-local-flat-family-injectivity",
+ "kind": "statement",
+ "title": "Projective modules detected by flat local families with injective residue maps",
+ "statement": "Let $R$ be a commutative ring and let $M$ be a projective $R$-module, with no finite-generation assumption [def-weil-pbc-projective-module]. For every prime $\\mathfrak p\\in\\operatorname{Spec}R$ [def-weil-affine-spectrum], put $A_{\\mathfrak p}=R_{\\mathfrak p}$, $\\mathfrak m_{\\mathfrak p}=\\mathfrak pA_{\\mathfrak p}$ and $M_{\\mathfrak p}=(R\\setminus\\mathfrak p)^{-1}M$ [def-weil-pbc-localization-at-prime, def-weil-pbc-module-localization]. Suppose that $N_{\\mathfrak p}$ is a flat $A_{\\mathfrak p}$-module [def-weil-pbc-flat-ring-map] and that $v_{\\mathfrak p}:M\\to N_{\\mathfrak p}$ is $R$-linear (using restriction of scalars). Let $u_{\\mathfrak p}:M_{\\mathfrak p}\\to N_{\\mathfrak p}$ be the induced $A_{\\mathfrak p}$-linear map $x/s\\mapsto s^{-1}v_{\\mathfrak p}(x)$. Assume for every $\\mathfrak p$ that its reduction $$M_{\\mathfrak p}/\\mathfrak m_{\\mathfrak p}M_{\\mathfrak p}\\longrightarrow N_{\\mathfrak p}/\\mathfrak m_{\\mathfrak p}N_{\\mathfrak p}$$ is injective. Then each $M_{\\mathfrak p}$ is projective over $A_{\\mathfrak p}$, each $u_{\\mathfrak p}$ is universally injective (for every $A_{\\mathfrak p}$-module $L$, the map $L\\otimes_{A_{\\mathfrak p}}M_{\\mathfrak p}\\to L\\otimes_{A_{\\mathfrak p}}N_{\\mathfrak p}$ is injective [def-weil-pbc-module-tensor-product]), and the $R$-linear map $$M\\longrightarrow\\prod_{\\mathfrak p\\in\\operatorname{Spec}R}N_{\\mathfrak p},\\qquad x\\longmapsto(v_{\\mathfrak p}(x))_{\\mathfrak p}$$ is injective.",
+ "source": {
+  "document": "literature/stacks-project/flat.tex",
+  "place": "Tag 05FQ, lemma-universally-injective-local, applied prime by prime to the local-to-global product argument in Tag 0810, lemma-helper-blowup-affine-space, final proof paragraph; general module form of the localized-splitting and annihilator argument."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-projective-module",
+  "def-weil-affine-spectrum",
+  "def-weil-pbc-localization-at-prime",
+  "def-weil-pbc-module-localization",
+  "def-weil-pbc-flat-ring-map",
+  "def-weil-pbc-module-tensor-product"
+ ],
+ "proof": [
+  {
+   "text": "Fix a prime $\\mathfrak p$. By [def-weil-pbc-localization-at-prime], $A_{\\mathfrak p}$ is local with maximal ideal $\\mathfrak m_{\\mathfrak p}$. Apply [lem-weil-pbc-localization-projective] with $S=R\\setminus\\mathfrak p$ and $P=M$. It gives projectivity of $M_{\\mathfrak p}$ over $A_{\\mathfrak p}$, without a finite-generation assumption.",
+   "uses": [
+    "def-weil-pbc-localization-at-prime",
+    "lem-weil-pbc-localization-projective"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/flat.tex",
+    "place": "Tag 05FQ, lemma-universally-injective-local, hypotheses; projectivity under localization: algebra.tex, Tag 05A3, lemma-ascend-properties-modules (4)"
+   }
+  },
+  {
+   "text": "Apply [lem-trf-local-universal-injective-residue] to the local ring $A_{\\mathfrak p}$ and the map $u_{\\mathfrak p}$. Step 1 supplies projectivity of the source, and the hypotheses supply flatness of $N_{\\mathfrak p}$ and injectivity modulo $\\mathfrak m_{\\mathfrak p}$. Hence $1_L\\otimes u_{\\mathfrak p}$ is injective for every $A_{\\mathfrak p}$-module $L$, giving the asserted universal injectivity at every prime.",
+   "uses": [
+    "lem-trf-local-universal-injective-residue"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/flat.tex",
+    "place": "Tag 05FQ, lemma-universally-injective-local"
+   }
+  },
+  {
+   "text": "In step 2 take $L=A_{\\mathfrak p}$. For any module $T$ over a commutative ring $A$, the tensor universal property [def-weil-pbc-module-tensor-product] gives $A\\otimes_A T\\to T$, $a\\otimes t\\mapsto at$, inverse to $t\\mapsto1\\otimes t$: on a generator $a\\otimes t$, the other composite is $1\\otimes at=a\\otimes t$. Under these identifications $1_A\\otimes u_{\\mathfrak p}$ is $u_{\\mathfrak p}$, so every $u_{\\mathfrak p}$ is injective.",
+   "uses": [
+    "def-weil-pbc-module-tensor-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/flat.tex",
+    "place": "Tag 05FQ, specialize universal injectivity to L=A; tensor universal property: algebra.tex, Tag 00CX, lemma-tensor-product"
+   }
+  },
+  {
+   "text": "Let $x$ lie in the kernel of the product map. Then $u_{\\mathfrak p}(x/1)=v_{\\mathfrak p}(x)=0$ for every prime, so step 3 gives $x/1=0$ in every $M_{\\mathfrak p}$. If $x\\ne0$, the ideal $I=\\{r\\in R:rx=0\\}$ is proper, since $1x=x\\ne0$. By [lem-weil-pbc-minimal-prime-over-proper-ideal], choose a prime $\\mathfrak p\\supseteq I$. The zero criterion of [def-weil-pbc-module-localization] gives $s\\in R\\setminus\\mathfrak p$ with $sx=0$. But then $s\\in I\\subseteq\\mathfrak p$, a contradiction. Thus the kernel is zero; applying this to a difference proves injectivity.",
+   "uses": [
+    "lem-weil-pbc-minimal-prime-over-proper-ideal",
+    "def-weil-pbc-module-localization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/flat.tex",
+    "place": "Tag 0810, lemma-helper-blowup-affine-space, final paragraph, product injectivity; elementary annihilator expansion using algebra.tex, Tag 00E0, lemma-Zariski-topology (2),(4),(8), and Tag 07JZ, definition-localization-module"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-localization-at-prime",
+  "lem-weil-pbc-localization-projective",
+  "lem-trf-local-universal-injective-residue",
+  "def-weil-pbc-module-tensor-product",
+  "lem-weil-pbc-minimal-prime-over-proper-ideal",
+  "def-weil-pbc-module-localization"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/flat.tex",
+  "place": "Tag 05FQ, lemma-universally-injective-local, applied prime by prime; Tag 0810, lemma-helper-blowup-affine-space, final paragraph, product inclusion, with its annihilator argument expanded using algebra.tex Tags 00E0 and 07JZ."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A projective module maps injectively into a product of flat modules over the base local rings if each induced residue field map is injective.",
+   "results": "{\"t\": \"2026-10-22T06:42:46Z\", \"tool\": \"leanfinder\", \"query\": \"A projective module maps injectively into a product of flat modules over the base local rings if each induced residue field map is injective.\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Module.free_of_lTensor_residueField_injective\", \"IsLocalRing.split_injective_iff_lTensor_residueField_injective\", \"Module.IsLocalRing.linearCombination_bijective_of_flat\", \"Module.FaithfullyFlat\", \"Module.free_of_maximalIdeal_rTensor_injective\", \"Module.Flat.tfae_equational_criterion\", \"TensorProduct.map_injective_of_flat_flat_of_isDomain\", \"Module.Flat.iff_rTensor_injective'\"], \"digest\": \"10d9cb11c95b7848\"}; Read injective_of_isLocalized_maximal and injective_of_localized_maximal (RingTheory/LocalProperties/Exactness.lean:59-62,103-106): these assume injective localized maps, not injective reductions into arbitrary varying flat local targets. IsLocalRing.split_injective_iff_lTensor_residueField_injective requires finite modules and a free target, which are not assumed here. Flat tensor criteria and projective lifting results do not give the full residue-to-local-to-product implication in one line. No complete match.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "Module.Projective, Function.Injective",
+   "results": "{\"t\": \"2026-10-22T06:42:41Z\", \"tool\": \"loogle\", \"query\": \"Module.Projective, Function.Injective\", \"sub\": \"\", \"ok\": true, \"n_hits\": 4, \"note\": \"\", \"top\": [\"Module.Finite.exists_comp_eq_id_of_projective\", \"Module.map_eval_injective\", \"Module.eval_apply_injective\", \"Module.finitePresentation_of_projective_of_exact\"], \"digest\": \"441e32b34ec5b89f\"}; Read injective_of_isLocalized_maximal and injective_of_localized_maximal (RingTheory/LocalProperties/Exactness.lean:59-62,103-106): these assume injective localized maps, not injective reductions into arbitrary varying flat local targets. IsLocalRing.split_injective_iff_lTensor_residueField_injective requires finite modules and a free target, which are not assumed here. Flat tensor criteria and projective lifting results do not give the full residue-to-local-to-product implication in one line. No complete match.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "[Ii]njective.*[Ll]ocal|[Ll]ocal.*[Ii]njective|[Pp]rojective.*[Ii]njective",
+   "results": "{\"t\": \"2026-10-22T06:42:41Z\", \"tool\": \"grep\", \"query\": \"[Ii]njective.*[Ll]ocal|[Ll]ocal.*[Ii]njective|[Pp]rojective.*[Ii]njective\", \"sub\": \"RingTheory\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/Spectrum/Prime/Noetherian.lean\", \"Mathlib/RingTheory/LocalProperties/InjectiveDimension.lean\", \"Mathlib/RingTheory/LocalProperties/InjectiveDimension.lean\", \"Mathlib/RingTheory/LocalProperties/InjectiveDimension.lean\", \"Mathlib/RingTheory/LocalProperties/InjectiveDimension.lean\", \"Mathlib/RingTheory/LocalProperties/InjectiveDimension.lean\", \"Mathlib/RingTheory/LocalProperties/Projective.lean\", \"Mathlib/RingTheory/LocalProperties/Projective.lean\"], \"digest\": \"03cad300159760ea\"}; Read injective_of_isLocalized_maximal and injective_of_localized_maximal (RingTheory/LocalProperties/Exactness.lean:59-62,103-106): these assume injective localized maps, not injective reductions into arbitrary varying flat local targets. IsLocalRing.split_injective_iff_lTensor_residueField_injective requires finite modules and a free target, which are not assumed here. Flat tensor criteria and projective lifting results do not give the full residue-to-local-to-product implication in one line. No complete match.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A projective module embeds into a family of flat local modules when the maps on all residue fibres are injective",
+   "results": "{\"t\": \"2026-10-22T06:42:41Z\", \"tool\": \"leansearch\", \"query\": \"A projective module embeds into a family of flat local modules when the maps on all residue fibres are injective\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Module.Flat.iff_lTensor_injective'\", \"Module.projective_of_localization_maximal'\", \"Module.Flat.of_projective\", \"Module.Flat.mk\", \"Module.Flat.iff_rTensor_injective'\", \"Module.Flat.iff_lTensor_injectiveₛ\", \"Module.Flat.iff_lift_lsmul_comp_subtype_injective\", \"Module.Projective.of_lifting_property\"], \"digest\": \"889c6dacd6164818\"}; Read injective_of_isLocalized_maximal and injective_of_localized_maximal (RingTheory/LocalProperties/Exactness.lean:59-62,103-106): these assume injective localized maps, not injective reductions into arbitrary varying flat local targets. IsLocalRing.split_injective_iff_lTensor_residueField_injective requires finite modules and a free target, which are not assumed here. Flat tensor criteria and projective lifting results do not give the full residue-to-local-to-product implication in one line. No complete match.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Let M be any projective module over R. For every prime p let Np be flat over R_p and let M_p to Np be injective modulo p. Then M to the product of Np is injective.",
+   "results": "{\"t\": \"2026-10-22T06:43:02Z\", \"tool\": \"leanfinder\", \"query\": \"Let M be any projective module over R. For every prime p let Np be flat over R_p and let M_p to Np be injective modulo p. Then M to the product of Np is injective.\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"injective_of_isLocalized_span\", \"LinearMap.lTensor_injective_of_exact_of_flat\", \"Module.Flat.iff_rTensor_injective'\", \"Module.Flat.iff_lTensor_injective'\", \"Module.Flat.iff_rTensor_injective\", \"Module.Flat.iff_lTensor_injective\", \"Module.Flat.iff_lift_lsmul_comp_subtype_injective\", \"TensorProduct.map_injective_of_flat_flat_of_isDomain\"], \"digest\": \"07e8cdcee891d266\"}; Read injective_of_isLocalized_maximal and injective_of_localized_maximal (RingTheory/LocalProperties/Exactness.lean:59-62,103-106): these assume injective localized maps, not injective reductions into arbitrary varying flat local targets. IsLocalRing.split_injective_iff_lTensor_residueField_injective requires finite modules and a free target, which are not assumed here. Flat tensor criteria and projective lifting results do not give the full residue-to-local-to-product implication in one line. No complete match.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "universally|residue|[Ii]njective.*[Pp]rojective|[Pp]rojective.*[Ii]njective",
+   "results": "{\"t\": \"2026-10-22T06:42:58Z\", \"tool\": \"grep\", \"query\": \"universally|residue|[Ii]njective.*[Pp]rojective|[Pp]rojective.*[Ii]njective\", \"sub\": \"RingTheory/Flat\", \"ok\": true, \"n_hits\": 2, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/Flat/Basic.lean\", \"Mathlib/RingTheory/Flat/Basic.lean\"], \"digest\": \"4a01769f2babc903\"}; Read injective_of_isLocalized_maximal and injective_of_localized_maximal (RingTheory/LocalProperties/Exactness.lean:59-62,103-106): these assume injective localized maps, not injective reductions into arbitrary varying flat local targets. IsLocalRing.split_injective_iff_lTensor_residueField_injective requires finite modules and a free target, which are not assumed here. Flat tensor criteria and projective lifting results do not give the full residue-to-local-to-product implication in one line. No complete match.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "Module.Projective|Module.Flat|residue|[Ii]njective",
+   "results": "{\"t\": \"2026-10-22T06:42:58Z\", \"tool\": \"grep\", \"query\": \"Module.Projective|Module.Flat|residue|[Ii]njective\", \"sub\": \"RingTheory/LocalProperties/Exactness.lean\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"59\", \"60\", \"61\", \"74\", \"93\"], \"digest\": \"c31b647e215a2668\"}; Read injective_of_isLocalized_maximal and injective_of_localized_maximal (RingTheory/LocalProperties/Exactness.lean:59-62,103-106): these assume injective localized maps, not injective reductions into arbitrary varying flat local targets. IsLocalRing.split_injective_iff_lTensor_residueField_injective requires finite modules and a free target, which are not assumed here. Flat tensor criteria and projective lifting results do not give the full residue-to-local-to-product implication in one line. No complete match.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "injective_of.*[Ll]ocal|residueField_injective|projective_of_isLocalizedModule",
+   "results": "{\"t\": \"2026-10-23T14:42:23Z\", \"tool\": \"grep\", \"query\": \"injective_of.*[Ll]ocal|residueField_injective|projective_of_isLocalizedModule\", \"sub\": \"RingTheory\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/Jacobson/Ring.lean\", \"Mathlib/RingTheory/LocalProperties/Injective.lean\", \"Mathlib/RingTheory/LocalProperties/Injective.lean\", \"Mathlib/RingTheory/LocalProperties/Injective.lean\", \"Mathlib/RingTheory/LocalProperties/Injective.lean\", \"Mathlib/RingTheory/LocalProperties/Injective.lean\", \"Mathlib/RingTheory/Smooth/Local.lean\", \"Mathlib/RingTheory/LocalProperties/Exactness.lean\"], \"digest\": \"5939069d8b4a8e85\"}; Read RingTheory/LocalProperties/Projective.lean:70-77 (projectivity of arbitrary localized modules), LocalProperties/Exactness.lean:59-62,103-106 (injectivity of a fixed map from injective localizations), and LocalRing/Module.lean:329-340 (finite source and finite free target only). These cover inputs, not the full residue-to-universal-to-varying-product assertion.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Injectivity of a projective module into varying flat local modules detected on all residue fibres",
+   "results": "{\"t\": \"2026-10-23T14:42:24Z\", \"tool\": \"leansearch\", \"query\": \"Injectivity of a projective module into varying flat local modules detected on all residue fibres\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Module.projective_of_localization_maximal'\", \"Module.Flat.iff_lift_lsmul_comp_subtype_injective\", \"injective_of_localized_maximal\", \"Module.flat_iff\", \"Module.Flat.iff_lTensor_injective'\", \"Module.Flat.iff_lTensor_injectiveₛ\", \"Module.Flat.iff_lTensor_preserves_injective_linearMap\", \"Module.Flat.mk\"], \"digest\": \"db58a74bbc9b39da\"}; Eight hits include injective_of_localized_maximal, Module.projective_of_localization_maximal', and flat tensor criteria. Read Exactness.lean:103-106: a fixed map with injective localizations, not maps into independently varying flat local targets. Not the full item.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "Module.Projective, Function.Injective",
+   "results": "{\"t\": \"2026-10-23T14:42:24Z\", \"tool\": \"loogle\", \"query\": \"Module.Projective, Function.Injective\", \"sub\": \"\", \"ok\": true, \"n_hits\": 4, \"note\": \"\", \"top\": [\"Module.Finite.exists_comp_eq_id_of_projective\", \"Module.map_eval_injective\", \"Module.eval_apply_injective\", \"Module.finitePresentation_of_projective_of_exact\"], \"digest\": \"441e32b34ec5b89f\"}; Four hits: Module.Finite.exists_comp_eq_id_of_projective, Module.map_eval_injective, Module.eval_apply_injective, Module.finitePresentation_of_projective_of_exact. None states the local residue criterion or varying-product conclusion.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A projective module maps injectively to a product of flat modules over prime localizations when every residue map is injective",
+   "results": "{\"t\": \"2026-10-23T14:42:25Z\", \"tool\": \"leanfinder\", \"query\": \"A projective module maps injectively to a product of flat modules over prime localizations when every residue map is injective\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Module.FaithfullyFlat\", \"injective_of_isLocalized_span\", \"Module.flat_of_isLocalized_span\", \"Module.free_of_lTensor_residueField_injective\", \"Module.Flat.tfae_equational_criterion\", \"Module.Flat.iff_rTensor_injective'\", \"Module.Flat.iff_rTensor_injective\", \"Module.Flat.iff_lTensor_injective'\"], \"digest\": \"0e652ecee20881ab\"}; Eight hits include local finite-module residue splitting, faithful flatness, localized-map injectivity and flat tensor criteria. Read LocalRing/Module.lean:329-340: requires finite source and finite free target, unlike this item. Read Exactness.lean:59-62,103-106: does not give residue injectivity to local universal injectivity. No full match.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "split_injective_iff_lTensor_residueField_injective|universally.*injective",
+   "results": "{\"t\": \"2026-10-23T14:43:09Z\", \"tool\": \"grep\", \"query\": \"split_injective_iff_lTensor_residueField_injective|universally.*injective\", \"sub\": \"RingTheory\", \"ok\": true, \"n_hits\": 3, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/Smooth/Local.lean\", \"Mathlib/RingTheory/LocalRing/Module.lean\", \"Mathlib/RingTheory/LocalRing/Module.lean\"], \"digest\": \"3828dbe9dd8813c4\"}; Read RingTheory/LocalProperties/Projective.lean:70-77 (projectivity of arbitrary localized modules), LocalProperties/Exactness.lean:59-62,103-106 (injectivity of a fixed map from injective localizations), and LocalRing/Module.lean:329-340 (finite source and finite free target only). These cover inputs, not the full residue-to-universal-to-varying-product assertion.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Over a local ring a map from an arbitrary projective module to a flat module injective modulo the maximal ideal is universally injective",
+   "results": "{\"t\": \"2026-10-23T14:43:13Z\", \"tool\": \"leanfinder\", \"query\": \"Over a local ring a map from an arbitrary projective module to a flat module injective modulo the maximal ideal is universally injective\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"IsLocalRing.split_injective_iff_lTensor_residueField_injective\", \"Module.flat_of_isLocalized_maximal\", \"injective_of_localized_maximal\", \"Module.FaithfullyFlat.of_flat_of_isLocalHom\", \"Module.free_of_maximalIdeal_rTensor_injective\", \"Module.FaithfullyFlat\", \"Module.Flat.iff_rTensor_injective\", \"Module.Flat.iff_lTensor_injective\"], \"digest\": \"3b8a877eb1034b25\"}; Eight hits include local finite-module residue splitting, faithful flatness, localized-map injectivity and flat tensor criteria. Read LocalRing/Module.lean:329-340: requires finite source and finite free target, unlike this item. Read Exactness.lean:59-62,103-106: does not give residue injectivity to local universal injectivity. No full match.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-affine-generic-localization-intersection",
+  "date": "2026-10-22",
+  "group": "O2"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Proof (1)--(2), semistable-alteration input through the flattening-by-blowup branch: Tag 0810, final paragraph, the base-localized algebra injects into its fibre-generic localization, hence into the product over base primes. Extracts returned item steps 2, 5 and 6.",
+   "via": [
+    "lem-trf-affine-generic-localization-intersection",
+    "lem-trf-affine-generic-rank-blowup",
+    "lem-trf-generic-free-blowup",
+    "lem-trf-flattening-module-by-admissible-blowup",
+    "lem-trf-flattening-by-admissible-blowup",
+    "lem-trf-flatification-horizontal-curve-pair",
+    "lem-trf-dejong-relative-marked-semistable",
+    "lem-trf-relative-marked-nodal-reduction",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-trf-projective-local-flat-family-injectivity",
+  "worker": "stage1",
+  "summary": "Four short steps reuse existing localization-projectivity and local universal-injectivity nodes, explicitly identify A tensor T with T, and prove product injectivity by a proper annihilator and the localization zero criterion. The statement and its hypotheses are unchanged. No new nodes. All cited statements were opened and literal citation quotes checked. Six fresh logged Mathlib searches supplement the retained original searches; no full match or upstream project attachment was found.",
+  "blueprint": "Proof (1)--(2), semistable-alteration input through the flattening-by-blowup branch: Tag 0810, final paragraph, the base-localized algebra injects into its fibre-generic localization, hence into the product over base primes. Extracts returned item steps 2, 5 and 6. Steps 1–4 realize the supporting commutative-algebra product-inclusion argument in Stacks 0810, not a replacement of the ancestor unit route."
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q66-4bdea3435",
+  "group": "Q66",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q66-4bdea3435 (reviewer sub-agent of L); spot-checked: Shape: one commit; item node plus report; no new nodes. Compared with clones/live, the statement, stmt_deps, source and blueprint are unchanged and only proof, proof_deps, proof_origin, status, split_report and mathlib_searches changed. Live is still unsplit and there is no repair note, so this is not a re-split. There is no SGA and no cycle (checked the 55-node closure); the only citer, lem-trf-affine-generic-localization-intersection, uses the statement as stated. Source: Stacks flat 05FQ (lines ~1946-1975) matches the per-prime hypotheses exactly (local ring, projective M, flat N, injective residue map, conclusion universally injective); 0810's final paragraph is the product-inclusion argument; algebra 05A3(4), 00CX, 00E0 and 07JZ were checked. Step 1: def-weil-pbc-localization-at-prime gives R_p local with maximal ideal pR_p, and lem-weil-pbc-localization-projective (Mathlib leaf, arbitrary S and P) gives M_p projective. Step 2: lem-trf-local-universal-injective-residue is exactly 05FQ and all its hypotheses are supplied; its proof deps do not reach the item. Step 3, marked elementary: A⊗_A T ≅ T via the universal property of def-weil-pbc-module-tensor-product, so u_p is injective; it really is a few lines. Step 4: x/1=0 in every M_p; Ann(x) is proper; lem-weil-pbc-minimal-prime-over-proper-ideal gives a prime p ⊇ Ann(x); the zero criterion stated in def-weil-pbc-module-localization gives s ∉ p with sx=0, a contradiction. Small cases checked: R=0 (no primes, empty product), M=0, N_p=0 (forces M_p=0, consistent), infinite-rank M (no finite generation used); without the residue hypothesis the product claim fails (v_p=0), so that hypothesis is used. Cross-unit citations are Mathlib leaves or definitions, so no tool_uses entry is needed. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.ProjectiveLocalFlatFamilyInjectivity",
+  "declaration": "Module.projective_local_flat_family_injectivity",
+  "declarations": [
+   "LinearMap.liftToPrimeLocalization",
+   "Module.projective_local_flat_family_injectivity"
+  ],
+  "file": "lean/Sheaf/RingTheory/ProjectiveLocalFlatFamilyInjectivity.lean",
+  "statement": "theorem projective_local_flat_family_injectivity {R : Type u} [CommRing R] {M : Type v} [AddCommGroup M] [Module R M] [Module.Projective R M] (N : PrimeSpectrum R → Type w) [∀ p, AddCommGroup (N p)] [∀ p, Module R (N p)] [∀ p, Module (Localization.AtPrime p.asIdeal) (N p)] [∀ p, IsScalarTower R (Localization.AtPrime p.asIdeal) (N p)] [∀ p, Module.Flat (Localization.AtPrime p.asIdeal) (N p)] (v : ∀ p, M →ₗ[R] N p) (hres : ∀ p, Function.Injective ((LinearMap.liftToPrimeLocalization p (v p)).lTensor (IsLocalRing.ResidueField (Localization.AtPrime p.asIdeal)))) : (∀ p : PrimeSpectrum R, Module.Projective (Localization.AtPrime p.asIdeal) (LocalizedModule p.asIdeal.primeCompl M)) ∧ (∀ (p : PrimeSpectrum R) (L : Type (max u v w z)) [AddCommGroup L] [Module (Localization.AtPrime p.asIdeal) L], Function.Injective ((LinearMap.liftToPrimeLocalization p (v p)).lTensor L)) ∧ Function.Injective (LinearMap.pi v)",
+  "branch": "newtargets-dag",
+  "by": "Q73",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-64fc802a3",
+  "group": "Q73",
+  "result": "pass",
+  "note": "Node diff vs live: only lean field; lean.statement verbatim equals file signature; declarations list helper + theorem. All six stmt_dep records and the proof-dep Module.universallyInjective_of_residueField_injective read (same residue-tensor hypothesis, same Type (max u v w z) universe convention). Clause check: R CommRing, M projective without finiteness, A_p = Localization.AtPrime, M_p = LocalizedModule primeCompl, N_p flat with restriction-of-scalars tower (no extra condition), u_p = canonical liftToPrimeLocalization (LocalizedModule.lift + extendScalarsOfIsLocalization, real data, docstrings with source/blueprint, no existing owner), hres = residue-field lTensor injectivity = node quotient map; conclusions projectivity, universal injectivity for all L (free z), LinearMap.pi v injective, all match the node and Stacks 05FQ (flat.tex:1946). Edge cases (zero ring, M=0, zero targets, all primes) fine. Only sorry is the whole proof; no hollow defs, no pro-etale, no H4 duplicate found. No file changed, so no compile."
+ }
+}

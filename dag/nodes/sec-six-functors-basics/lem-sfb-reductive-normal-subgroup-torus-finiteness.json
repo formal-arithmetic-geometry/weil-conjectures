@@ -1,0 +1,287 @@
+{
+ "id": "lem-sfb-reductive-normal-subgroup-torus-finiteness",
+ "kind": "statement",
+ "title": "A normal subgroup meeting a maximal torus finitely is finite",
+ "statement": "Let $F$ be an algebraically closed field [def-weil-field, def-weil-algebraic-closure]. Let $H$ be a reductive affine $F$-group scheme [def-sc-group-scheme] of finite type [def-weil-finite-type-morphism], and let $S\\subseteq H$ be a split maximal torus, with reductivity and maximal tori as in [lem-sfb-reductive-borel-pair-structure]. Let $N\\subseteq H$ be a closed normal subgroup scheme [def-sc-group-scheme-subgroup]; normal means that $hnh^{-1}\\in N(A)$ for every commutative $F$-algebra $A$, $h\\in H(A)$ and $n\\in N(A)$. If the scheme-theoretic intersection $N\\times_H S$ is finite over $F$, then $N$ is finite over $F$. Here finite means that the coordinate algebra is finite-dimensional over $F$. No smoothness, connectedness or reducedness of $N$ is assumed. The trivial group and a torus $H=S$ are included.",
+ "source": {
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Corollary 17.85, printed p.379; Corollary 21.53, printed p.441; reduction of the kernel in 23.24, printed p.492. Supporting formulation for arbitrary closed normal subgroup schemes, by applying these results to the reduced identity component over the algebraically closed (hence perfect) field."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-weil-algebraic-closure",
+  "def-sc-group-scheme",
+  "def-weil-finite-type-morphism",
+  "lem-sfb-reductive-borel-pair-structure",
+  "def-sc-group-scheme-subgroup"
+ ],
+ "proof": [
+  {
+   "text": "Put $C=N^\\circ$ and $M=C_{\\mathrm{red}}$. By [lem-sfb-locally-algebraic-group-identity-component], $C$ is an open and closed subgroup of $N$, and $M$ is a smooth connected finite-type subgroup with $|M|=|C|$. The reduction inclusion is closed by [def-weil-pbc-scheme-reduction]. Composing the closed inclusions into $H$ using [lem-weil-pbc-closed-immersion-products] and applying [lem-weil-pbc-closed-immersion-affine-cover-criterion] shows that $N,C,M$ are affine. Thus $M$ is a smooth connected closed subgroup of $H$.",
+   "uses": [
+    "lem-sfb-locally-algebraic-group-identity-component",
+    "def-weil-pbc-scheme-reduction",
+    "lem-weil-pbc-closed-immersion-products",
+    "lem-weil-pbc-closed-immersion-affine-cover-criterion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Propositions 1.34 and 1.38, Corollary 1.39, printed pp.16-18; reduced-identity-component reduction in 23.24, p.492."
+   }
+  },
+  {
+   "text": "For $h\\in H(F)$, normality of $N$ makes conjugation by $h$ an automorphism of $N$, with inverse conjugation by $h^{-1}$. It fixes the identity, hence preserves its connected component $C$. On coordinate rings this automorphism preserves nilpotent elements, so it preserves $M=C_{\\mathrm{red}}$ as a subgroup scheme, not merely its $F$-points. Apply [lem-sfb-smooth-ambient-normality-geometric] with ambient group $H$ and algebraic closure $F$ itself: $H$ is smooth by reductivity. It follows that $M$ is normal in $H$.",
+   "uses": [
+    "def-weil-pbc-scheme-reduction",
+    "lem-sfb-smooth-ambient-normality-geometric"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 1.52 and Corollaries 1.85-1.87, printed pp.22 and 32; 23.24, p.492."
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-connected-normal-subgroup-reductive] to $M\\subseteq H$: all its smoothness, connectedness, closedness and normality hypotheses hold by Steps 1-2. Thus $M$ is reductive. Apply [lem-sfb-normal-subgroup-maximal-torus-intersection] to $G=H$, its normal subgroup $M$, and the given maximal torus $S$. It gives the split maximal torus $R=((M\\times_H S)_{\\mathrm{red}})^\\circ\\subseteq M$, with closed inclusion $R\\subseteq M\\times_H S$.",
+   "uses": [
+    "lem-sfb-connected-normal-subgroup-reductive",
+    "lem-sfb-normal-subgroup-maximal-torus-intersection"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Corollaries 21.53 and 17.85, printed pp.441 and 379-380."
+   }
+  },
+  {
+   "text": "The inclusion $M\\subseteq N$ induces a closed immersion $M\\times_H S\\to N\\times_H S$ by [lem-weil-pbc-closed-immersion-base-change]. Its composite with $R\\to M\\times_H S$ is closed by [lem-weil-pbc-closed-immersion-products]. Write $N\\times_H S=\\operatorname{Spec}A$ with $A$ finite-dimensional by hypothesis. The affine closed-immersion criterion [lem-weil-pbc-closed-immersion-affine-cover-criterion] expresses $F[R]$ as a quotient of $A$, hence finite-dimensional. If $R\\simeq\\mathbf G_m^r$ had $r>0$, its Laurent coordinate monomials $1,t_1,t_1^2,\\ldots$ would be linearly independent, a contradiction. Thus $r=0$ and $R=1$.",
+   "uses": [
+    "lem-weil-pbc-closed-immersion-base-change",
+    "lem-weil-pbc-closed-immersion-products",
+    "lem-weil-pbc-closed-immersion-affine-cover-criterion",
+    "def-sc-gm-ga"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Corollary 17.85 and the finite-intersection hypothesis; explicit finite-dimensional quotient and split-torus coordinate calculation."
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-reductive-torus-self-centralizer] to the reductive group $M$ and its maximal torus $R=1$. It gives $C_M(1)=1$ as subgroup functors on all commutative $F$-algebras. Every element commutes with the identity after every algebra extension, so $C_M(1)(A)=M(A)$ for every $A$. Therefore $M=1$ as a group scheme.",
+   "uses": [
+    "lem-sfb-reductive-torus-self-centralizer"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 17.61(a), printed p.372, applied to the rank-zero maximal torus."
+   }
+  },
+  {
+   "text": "Since $|C|=|M|$, Step 5 makes $C$ a one-point space. By [lem-sfb-group-neutral-component-translates], $N$ has finitely many open and closed connected components, each a translate of $C$. Thus $|N|$ is finite discrete. Its nonempty irreducible closed subsets are singletons, so its topological Krull dimension is zero. The dimension comparison [lem-pc-scheme-dimension-local-rings] gives the same scheme dimension. Apply [lem-pc-algebraic-dim-zero-affine-finite] to the finite-type $F$-scheme $N$ to obtain finiteness. By [def-weil-finite-integral-morphism], over $\\operatorname{Spec}F$ this says exactly that $F[N]$ is finite-dimensional. Nilpotents in $N$ have not been discarded in this last application.",
+   "uses": [
+    "lem-sfb-group-neutral-component-translates",
+    "lem-pc-scheme-dimension-local-rings",
+    "lem-pc-algebraic-dim-zero-affine-finite",
+    "def-weil-finite-integral-morphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Dimension discussion before Proposition 1.37, printed pp.17-18, and Propositions 11.1-11.2, pp.209-210; Stacks Tag 06LH, varieties.tex, lemma-algebraic-scheme-dim-0."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-locally-algebraic-group-identity-component",
+  "def-weil-pbc-scheme-reduction",
+  "lem-weil-pbc-closed-immersion-products",
+  "lem-weil-pbc-closed-immersion-affine-cover-criterion",
+  "lem-sfb-smooth-ambient-normality-geometric",
+  "lem-sfb-connected-normal-subgroup-reductive",
+  "lem-sfb-normal-subgroup-maximal-torus-intersection",
+  "lem-weil-pbc-closed-immersion-base-change",
+  "def-sc-gm-ga",
+  "lem-sfb-reductive-torus-self-centralizer",
+  "lem-sfb-group-neutral-component-translates",
+  "lem-pc-scheme-dimension-local-rings",
+  "lem-pc-algebraic-dim-zero-affine-finite",
+  "def-weil-finite-integral-morphism"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Corollaries 17.85 and 21.53 with the reduced-identity-component reduction of 23.24; Proposition 17.61(a) supplies the rank-zero conclusion; Propositions 11.1-11.2 supply final finiteness."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A closed normal subgroup scheme of a reductive group whose intersection with a maximal torus is finite is finite",
+   "results": "{\"t\": \"2026-10-23T23:02:08Z\", \"tool\": \"leanfinder\", \"query\": \"A closed normal subgroup scheme of a reductive group whose intersection with a maximal torus is finite is finite\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Subgroup.quotient_finite_of_isOpen'\", \"Subgroup.quotient_finite_of_isOpen\", \"Subgroup.isOpen_of_isClosed_of_finiteIndex\", \"Group.IsVirtuallyNilpotent\", \"Subgroup.instFiniteQuotientSubtypeMemOpenSubgroupOfIsTopologicalGroupOfCompactSpace\", \"Subgroup.instFiniteQuotientOfContinuousMulOfCompactSpace\", \"Subgroup.finiteIndex_center\", \"instDiscreteTopologySubtypeGeneralLinearGroupMemSubgroupAdjoinNegOneOfIsTopologicalRingOfT2Space\"], \"digest\": \"5754c41fe1a5e4a8\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the returned abstract-group, Lie-algebra, field-theory and topology declarations do not concern normal subgroup schemes of reductive algebraic groups or finite coordinate algebras."
+  },
+  {
+   "tool": "loogle",
+   "query": "Subgroup.center",
+   "results": "{\"t\": \"2026-10-23T23:02:09Z\", \"tool\": \"loogle\", \"query\": \"Subgroup.center\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"Subgroup.center\", \"Subgroup.centerCharacteristic\", \"Subgroup.instNormalCenter\", \"Group.commGroupOfCenterEqTop\", \"CommGroup.center_eq_top\", \"Subgroup.center_le_normalizer\", \"Subgroup.center_toSubmonoid\", \"Subgroup.normal_of_le_center\"], \"digest\": \"b2e62780948e2323\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the returned abstract-group, Lie-algebra, field-theory and topology declarations do not concern normal subgroup schemes of reductive algebraic groups or finite coordinate algebras."
+  },
+  {
+   "tool": "grep",
+   "query": "reductive|isogeny|normalSubgroup",
+   "results": "{\"t\": \"2026-10-23T23:02:09Z\", \"tool\": \"grep\", \"query\": \"reductive|isogeny|normalSubgroup\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the returned abstract-group, Lie-algebra, field-theory and topology declarations do not concern normal subgroup schemes of reductive algebraic groups or finite coordinate algebras."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A normal subgroup of a reductive algebraic group has dimension zero if its maximal torus is finite",
+   "results": "{\"t\": \"2026-10-23T23:02:10Z\", \"tool\": \"leansearch\", \"query\": \"A normal subgroup of a reductive algebraic group has dimension zero if its maximal torus is finite\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Subgroup.Normal\", \"AddSubgroup.fintypeOfIndexNeZero\", \"NormalizerCondition\", \"QuotientAddGroup.image_coe\", \"AddSubgroup.fintypeBot\", \"Subgroup.FiniteIndex.index_ne_zero\", \"Subgroup.index_ne_zero_iff_finite\", \"AddSubgroup.index_ne_zero_iff_finite\"], \"digest\": \"0dc75b2f9e15f4a5\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the returned abstract-group, Lie-algebra, field-theory and topology declarations do not concern normal subgroup schemes of reductive algebraic groups or finite coordinate algebras."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Normal subgroups of reductive algebraic groups are finite when they meet a maximal torus in a finite scheme",
+   "results": "{\"t\": \"2026-10-23T23:02:11Z\", \"tool\": \"leanfinder\", \"query\": \"Normal subgroups of reductive algebraic groups are finite when they meet a maximal torus in a finite scheme\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Subgroup.finiteIndex_normalCore\", \"Subgroup.finiteIndex_center\", \"frattini\", \"Sylow.instFiniteQuotientSubgroupNormalizerOfFactPrime\", \"Subgroup.SchurZassenhausInduction.step7\", \"normalizerCondition_of_isNilpotent\", \"frattini_nilpotent\", \"instFiniteElemProdCommutatorRepresentatives\"], \"digest\": \"a6b77ceae1b87084\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the returned abstract-group, Lie-algebra, field-theory and topology declarations do not concern normal subgroup schemes of reductive algebraic groups or finite coordinate algebras."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A closed normal subgroup of a reductive algebraic group with finite intersection with a maximal torus has finite coordinate algebra",
+   "results": "{\"t\": \"2026-10-23T23:03:57Z\", \"tool\": \"leanfinder\", \"query\": \"A closed normal subgroup of a reductive algebraic group with finite intersection with a maximal torus has finite coordinate algebra\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"instFiniteObjOpenNormalSubgroupStabilizerHomSurjectiveAuxFunctor\", \"RootPairing.GeckConstruction.instHasTrivialRadical\", \"IntermediateField.fixingSubgroup_isClosed\", \"FixedPoints.instFiniteDimensionalSubtypeMemSubfieldSubfield\", \"krullTopology_discreteTopology_of_finiteDimensional\", \"LieAlgebra.exists_isCartanSubalgebra_engel_of_finrank_le_card\", \"MonoidAlgebra.finiteType_iff_group_fg\", \"Field.absoluteGaloisGroup.commutator_closure_isNormal\"], \"digest\": \"eb37e8daee6ba8d9\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the returned abstract-group, Lie-algebra, field-theory and topology declarations do not concern normal subgroup schemes of reductive algebraic groups or finite coordinate algebras."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A closed normal subgroup scheme of a reductive algebraic group with finite intersection with a maximal torus is finite",
+   "results": "{\"t\": \"2026-10-23T23:41:59Z\", \"tool\": \"leanfinder\", \"query\": \"A closed normal subgroup scheme of a reductive algebraic group with finite intersection with a maximal torus is finite\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Subgroup.quotient_finite_of_isOpen'\", \"Subgroup.quotient_finite_of_isOpen\", \"Subgroup.instFiniteQuotientSubtypeMemOpenSubgroupOfIsTopologicalGroupOfCompactSpace\", \"Subgroup.isOpen_of_isClosed_of_finiteIndex\", \"Subgroup.instFiniteQuotientOfContinuousMulOfCompactSpace\", \"instDiscreteTopologySubtypeGeneralLinearGroupMemSubgroupAdjoinNegOneOfIsTopologicalRingOfT2Space\", \"Subgroup.finiteIndex_center\", \"AddSubgroup.instFiniteQuotientSubtypeMemOpenAddSubgroupOfIsTopologicalAddGroupOfCompactSpace\"], \"digest\": \"0a843ae0483c7e23\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern abstract or topological subgroups, Frattini groups, or Lie algebras, not tori and reductivity of affine group schemes; the AlgebraicGeometry grep and Loogle return no hits."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"torus\", \"finite\"",
+   "results": "{\"t\": \"2026-10-23T23:41:56Z\", \"tool\": \"loogle\", \"query\": \"\\\"torus\\\", \\\"finite\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern abstract or topological subgroups, Frattini groups, or Lie algebras, not tori and reductivity of affine group schemes; the AlgebraicGeometry grep and Loogle return no hits."
+  },
+  {
+   "tool": "grep",
+   "query": "reductive|isogeny|normalSubgroup",
+   "results": "{\"t\": \"2026-10-23T23:41:55Z\", \"tool\": \"grep\", \"query\": \"reductive|isogeny|normalSubgroup\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern abstract or topological subgroups, Frattini groups, or Lie algebras, not tori and reductivity of affine group schemes; the AlgebraicGeometry grep and Loogle return no hits."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A normal subgroup of a reductive group scheme meeting a maximal torus in a finite scheme has dimension zero",
+   "results": "{\"t\": \"2026-10-23T23:41:56Z\", \"tool\": \"leansearch\", \"query\": \"A normal subgroup of a reductive group scheme meeting a maximal torus in a finite scheme has dimension zero\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Subgroup.Normal\", \"AddSubgroup.Normal\", \"QuotientAddGroup.image_coe\", \"NormalizerCondition\", \"Ring.KrullDimLE.of_isMaximal_nilradical\", \"Subgroup.normal_in_normalizer\", \"LieSubmodule.ucs_le_of_normalizer_eq_self\", \"fixedPointsSubMulOfNormal\"], \"digest\": \"a73b9a7c672e7f07\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern abstract or topological subgroups, Frattini groups, or Lie algebras, not tori and reductivity of affine group schemes; the AlgebraicGeometry grep and Loogle return no hits."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Normal subgroup schemes of reductive algebraic groups have positive rank unless they are finite",
+   "results": "{\"t\": \"2026-10-23T23:42:01Z\", \"tool\": \"leanfinder\", \"query\": \"Normal subgroup schemes of reductive algebraic groups have positive rank unless they are finite\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"frattini\", \"Subgroup.rank_commutator_le_card\", \"Subgroup.rank_le_index_mul_rank\", \"Subgroup.relIndex_adjoinNegOne_ne_zero\", \"LieAlgebra.rank_le_finrank\", \"IsZGroup.commutator_lt\", \"IsSolvable.commutator_lt_top_of_nontrivial\", \"Subgroup.isSimpleGroup_iff\"], \"digest\": \"b80641958d7a8375\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern abstract or topological subgroups, Frattini groups, or Lie algebras, not tori and reductivity of affine group schemes; the AlgebraicGeometry grep and Loogle return no hits."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-torus-simple-root-isomorphism-criterion",
+  "date": "2026-10-24",
+  "group": "Q26"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Haboush symmetric-power lifting for a trivial quotient representation. Supporting representation-theoretic input: Steinberg endomorphisms detect a nonzero fixed vector. Supporting Borel pairs and actual rho section modules. Supporting input: Integrality of the half sum of positive roots supporting the rho section modules in the Steinberg endomorphism detection input. Supporting lattice proof: Appendix C.35, printed p.615; Theorem 23.55 and Corollary 23.56, printed p.501; Theorem 23.9, printed p.487; Proposition 23.5, printed pp.485--486, centrality and isomorphism criteria. Theorem 23.9 and Proposition 23.5: realize the explicitly verified root-datum inclusion and detect centrality and isomorphism. Supporting input: Construction 23.17 and assertions 23.19--23.24, printed pp.490--492, including the final root-subgroup and Weyl-conjugacy paragraph completing 23.18; generation in Section 2h and 21.62. The based-root-datum assertion records the roots and coroots of the displayed rank-one graphs under the first torus projection. Supporting input for the compatible-graph proof: Argument of 23.24 and the final paragraph completing 23.18, printed p.492, in the general form of a surjective reductive homomorphism with an isomorphism on maximal tori and lifted simple root groups; rank comparison and Weyl conjugation use 21.51 and 21.39, and the big cells use 21.84. This is a supporting criterion, not the isogeny existence theorem. Supporting kernel-finiteness step: Milne Corollary 17.85 and Corollary 21.53, applied to the reduced identity component of a closed normal subgroup.",
+   "via": [
+    "lem-sfb-torus-simple-root-isomorphism-criterion",
+    "lem-sfb-compatible-rank-one-graph-geometry",
+    "lem-sfb-root-datum-isogeny-realization",
+    "lem-sfb-central-lattice-enlargement",
+    "lem-sfb-simply-connected-character-lattice",
+    "lem-sfb-rho-section-modules",
+    "lem-sfb-steinberg-endomorphism-detection",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-reductive-normal-subgroup-torus-finiteness",
+  "worker": "stage1",
+  "group": "NR",
+  "summary": "NR gives six explicit steps following the stated Milne reduction, reuses existing smooth reduction, geometric normality, self-centralizer, component translation and zero-dimensional finiteness nodes, and creates two statement-only structural inputs (Corollaries 17.85 and 21.53). The item statement is unchanged, including arbitrary nonreduced and disconnected normal subgroups.",
+  "blueprint": "The inherited from.place names this kernel-finiteness input of lem-sfb-torus-simple-root-isomorphism-criterion. Steps 1-6 supply it below the existing chain serving det-thm-sf-ctf-stability-direct-images proof (3). Read the latest blueprint sk-thm-sf-ctf-stability unit and direct-images proof: no route change. blueprint_refs.py ancestor returns None; the inherited from.node=null and via chain are retained. Whole imported-blueprint searches torus, maximal torus, normal subgroup variety, reductive, 17.85 and 21.53 found no equivalent imported nodes.",
+  "tool_uses": [
+   {
+    "node": "lem-pc-scheme-dimension-local-rings",
+    "why": "Generic comparison of topological Krull dimension with the supremum of local-ring dimensions in Step 6; no group-specific theorem is substituted for the unit route."
+   },
+   {
+    "node": "lem-pc-algebraic-dim-zero-affine-finite",
+    "why": "Generic Stacks Tag 06LH finiteness of a zero-dimensional finite-type scheme over a field in Step 6, after the group-theoretic argument has proved dimension zero; no node of the group-specific route supplies this geometric theorem."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pc-scheme-dimension-local-rings",
+  "lem-pc-algebraic-dim-zero-affine-finite"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-NR-2eff0c328",
+  "group": "NR",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NR-2eff0c328 (reviewer sub-agent of L); spot-checked: Read the item's 6 steps, both new nodes and every cited statement, with Milne iAG2017 checked at Cor 17.85 (pp.379-380, with 12.29 D^t = (D_red)°), Cor 21.53 (p.441; its proof's R_u(G) is a typo for R_u(N), the statement is true) and 17.61(a)/17.84. Statement unchanged, no repair note. Step 1: the identity-component node gives C=N° clopen and M=C_red smooth; closed immersions compose; affine. Step 2: Int(h) preserves N, C and its nilradical, so it preserves M; smooth-ambient-normality with J=H smooth and k̄=F gives scheme-theoretic normality. Step 3: the hypotheses of both new nodes hold (H smooth connected affine, M smooth connected closed normal), and their statements give M reductive and R=((M×_H S)_red)° maximal in M. Step 4: M×_H S→N×_H S closed by base change, F[R] is a quotient of finite A, so rank 0 (elementary). Step 5: self-centralizer with T=1 gives M=1 as schemes. Step 6: translates node plus finitely many components give |N| finite discrete; 04MU comparison and 06LH (finite type, dim 0) give F[N] finite-dimensional, nilpotents kept. Small cases: μ_n ⊂ GL_2 in char p, N=SL_2 fails the hypothesis, M=1, M=G, GL_2⊃SL_2 diagonal torus. New nodes are statement-only and self-contained, are not item clauses, and no duplicate was found (DAG scan of normal/reductive/maximal-torus statements, 17.85/21.53 hits only in the delivery and its parent). No cycle. Batch-5: lem-trf-split-lattice-torus-projection (ILO VIII 3.2.12(i), smoothness/reducedness of Spec k[L]) is generic torus geometry, neither a trace-formula nor a Poincaré-duality step, so no return. The tool_uses of the two generic pc dimension nodes are accepted. No changes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.GroupScheme.ReductiveNormalSubgroupTorusFiniteness",
+  "declaration": "AlgebraicGeometry.reductive_normal_subgroup_finite_of_torus_intersection_finite",
+  "file": "lean/Sheaf/AlgebraicGeometry/GroupScheme/ReductiveNormalSubgroupTorusFiniteness.lean",
+  "statement": "theorem reductive_normal_subgroup_finite_of_torus_intersection_finite {F : Type u} [Field F] [IsAlgClosed F] (H S N : Grp (Over (Spec (.of F)))) (hH : ReductiveTorusCentralizer.IsReductive H) (iS : S ⟶ H) (hS : ReductiveTorusCentralizer.IsMaximalTorus iS) (hSplit : ∃ r : ℕ, Nonempty (S ≅ MultiplicativeType.splitTorus F r)) (iN : N ⟶ H) [IsClosedSubgroupScheme iN.hom.hom] [IsNormalSubgroupScheme iN.hom.hom] (hFinite : IsFinite (pullback iN.hom.hom iS.hom.hom).hom) : IsFinite N.X.hom",
+  "branch": "newtargets-dag",
+  "by": "NW",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-69cc39b7b",
+  "group": "NW",
+  "result": "pass",
+  "note": "Statement matches node clause by clause: IsAlgClosed F; IsReductive H (includes affine/finite type, smooth, geometrically connected, no smooth connected normal unipotent); IsMaximalTorus iS (closed, torus, maximal) plus split; N closed and normal on all A-points; IsFinite of the Over-pullback (N x_H S) structure map; conclusion IsFinite N.X.hom. No extra assumptions on N. Edge cases: H=S torus (IsUnipotent requires Smooth, so mu_p does not count), rank 0, nonreduced finite N, SL2/GL2 and N=H fail the hypothesis. Node differs from live only in the lean record; lean.statement verbatim; proof is sorry only; source and blueprint docstrings and 6-step plan present; proof-dep imports exist; report has Worker report and Second reading by NW; no duplicate found. No compile needed (no file changed)."
+ }
+}

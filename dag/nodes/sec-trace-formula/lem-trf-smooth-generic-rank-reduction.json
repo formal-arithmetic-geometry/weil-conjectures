@@ -1,0 +1,389 @@
+{
+ "id": "lem-trf-smooth-generic-rank-reduction",
+ "kind": "statement",
+ "title": "Generic free subtraction with smaller fibre support after a blowup",
+ "statement": "Let $S$ be an affine scheme, $n\\geq0$, and $f:X\\to S$ an affine smooth morphism of relative dimension $n$ [def-sbc-smooth-morphisms] whose fibres are geometrically integral, meaning integral after every residue-field extension. Let $\\mathcal F$ be a finite-type quasi-coherent $\\mathcal O_X$-module and $U\\subset S$ a quasi-compact open such that $\\mathcal F|_{X_U}$ is finitely presented and flat over $U$. There exist a $U$-admissible blowup $b:T\\to S$ and a finite affine open covering $T=\\bigcup_a T_a$ with the following properties. Put $U_a=T_a\\cap b^{-1}(U)$, $X_a=X\\times_ST_a$, and $\\mathcal F_a=(\\mathcal F^b)|_{X_a}$. The family $X_a\\to T_a$ is affine smooth of relative dimension $n$ with geometrically integral fibres; $U_a$ is quasi-compact; $\\mathcal F_a$ is quasi-coherent of finite type and is finitely presented and flat over $U_a$. There are an integer $r_a\\geq0$, a map $\\alpha_a:\\mathcal O_{X_a}^{\\oplus r_a}\\to\\mathcal F_a$ and an open $W_a\\subset X_a$ surjecting onto $T_a$ such that $\\alpha_a|_{W_a}$ is an isomorphism. The sequence $0\\to\\mathcal O_{X_a}^{\\oplus r_a}\\xrightarrow{\\alpha_a}\\mathcal F_a\\to\\mathcal H_a\\to0$, with $\\mathcal H_a=\\operatorname{coker}\\alpha_a$, remains exact after pullback along every $T'\\to T_a$. The module $\\mathcal H_a$ is quasi-coherent of finite type, its restriction over $U_a$ is finitely presented and flat over $U_a$, and for every $t\\in T_a$ one has $\\dim\\operatorname{Supp}((\\mathcal H_a)_t)\\leq n-1$, with empty support assigned dimension $-1$. Here support is the locus of nonzero stalks and dimension is topological Krull dimension [def-kun-topological-krull-dimension]; in particular every fibre of $\\mathcal H_a$ is zero when $n=0$. Pullbacks are as in [def-pc-module-pullback]. Schemes and quasi-compactness conventions are as in [def-weil-pbc-scheme-conventions, def-weil-quasi-separated-morphism], quasi-coherence and finite type as in [pqf-def-coherent], finite presentation of module sheaves as in [def-weil-pbc-module-finite-type-presentation], and relative flatness as in [def-pc-scheme-module-flat-over]. Admissible blowups retain their finite-type centre ideals [def-nagata-admissible-blowup], and all module strict transforms use those specified ideals [def-trf-module-strict-transform].",
+ "source": {
+  "document": "literature/stacks-project/flat.tex",
+  "place": "Tag 0815, theorem-flatten-module, proof paragraph 3 through the definition of H and its induction hypotheses; Tag 0811, lemma-flatten-module-pre."
+ },
+ "stmt_deps": [
+  "def-sbc-smooth-morphisms",
+  "def-kun-topological-krull-dimension",
+  "def-pc-module-pullback",
+  "def-weil-pbc-scheme-conventions",
+  "def-weil-quasi-separated-morphism",
+  "pqf-def-coherent",
+  "def-weil-pbc-module-finite-type-presentation",
+  "def-pc-scheme-module-flat-over",
+  "def-nagata-admissible-blowup",
+  "def-trf-module-strict-transform"
+ ],
+ "proof": [
+  {
+   "text": "First apply [lem-pc-smooth-flat]: $f$ is flat and locally of finite presentation. Since $S$ is affine and $X\\to S$ is affine, $X$ is affine. The affine finite-presentation criterion [lem-weil-pbc-lfp-affine-opens-finite-presentation] makes $f$ finitely presented. The original flatness over $U$ holds in particular at all fibre generic points over $U$. Thus every hypothesis of [lem-trf-generic-free-blowup] holds, and it supplies a $U$-admissible blowup $b:T\\to S$ and an open $V\\subset X_T$ surjecting onto $T$ on which $\\mathcal G=\\mathcal F^b$ is finite locally free. Keep its specified centre ideal throughout.",
+   "uses": [
+    "lem-pc-smooth-flat",
+    "lem-weil-pbc-lfp-affine-opens-finite-presentation",
+    "lem-trf-generic-free-blowup"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/flat.tex",
+    "place": "Tag 0815, theorem-flatten-module, paragraph beginning Next; Tag 0811, lemma-flatten-module-pre"
+   }
+  },
+  {
+   "text": "By [lem-trf-generic-rank-admissible-invariance], applied to the same original family and this one blowup, $T$ is quasi-compact and quasi-separated, $X_T\\to T$ is affine flat of finite presentation with geometrically integral fibres, and $\\mathcal G$ is quasi-coherent of finite type. Over $U_T=b^{-1}U$ it identifies with the original module over $U$, hence is finitely presented and flat there. Also $U_T\\cong U$ by [lemma-nagata-admissible-blowup-over-open], so $U_T$ is quasi-compact. By [lem-sbc-smooth-relative-dimension-permanence](1), $X_T\\to T$ is smooth of relative dimension $n$. No flattening theorem is being invoked here: only the preliminary generic-free blowup of Step 1.",
+   "uses": [
+    "lem-trf-generic-rank-admissible-invariance",
+    "lem-sbc-smooth-relative-dimension-permanence",
+    "lem-trf-module-admissible-blowup-calculus",
+    "lemma-nagata-admissible-blowup-over-open"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/flat.tex",
+    "place": "Tag 0811, lemma-flatten-module-pre, permanence observations; Tag 0815, theorem-flatten-module, paragraph 3"
+   }
+  },
+  {
+   "text": "Fix $t\\in T$ and take an affine neighbourhood $A\\subset T$ using [lem-weil-pbc-affine-opens-basis]. Write $X_A=\\operatorname{Spec}B$ and $N=\\Gamma(X_A,\\mathcal G)$. By [lem-weil-pbc-quasi-coherent-finite-type-affine], $N$ has a finite generating list. Let $\\xi$ be the generic point of the integral fibre $(X_A)_t$. The nonempty open $V_t$ contains $\\xi$. By [lem-sbc-affine-module-germ-localization], the images of the generators of $N$ span $\\mathcal G_\\xi\\otimes\\kappa(\\xi)$. Choose a subset forming a basis, of size $r$; send the standard basis to these global sections, using the affine sheaf-module adjunction [lem-weil-pbc-affine-tilde-gamma-adjunction], defining $\\alpha:\\mathcal O_{X_A}^{\\oplus r}\\to\\mathcal G|_{X_A}$. Shrink a trivializing open inside $V$ about $\\xi$ so its rank is $r$. In these frames $\\alpha$ is a square matrix whose determinant is nonzero in $\\kappa(\\xi)$, hence is a unit in the local ring at $\\xi$. The open where that determinant is invertible is an open $W\\subset X_A$ containing $\\xi$ on which $\\alpha$ is an isomorphism. If $r=0$, the trivialization is already the zero module and the same conclusion holds.",
+   "uses": [
+    "lem-weil-pbc-affine-opens-basis",
+    "lem-weil-pbc-quasi-coherent-finite-type-affine",
+    "lem-sbc-affine-module-germ-localization",
+    "lem-weil-pbc-affine-tilde-gamma-adjunction"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/flat.tex",
+    "place": "Tag 0815, theorem-flatten-module, paragraph 3: choice of alpha and W; Tag 05I3, lemma-induction-step, existence paragraph"
+   }
+  },
+  {
+   "text": "The smooth map $X_A\\to A$ is flat and locally of finite presentation by [lem-pc-smooth-flat], so [lem-weil-pbc-flat-lfp-open] makes the image of $W$ an open neighbourhood of $t$. Choose an affine neighbourhood $T_t$ of $t$ inside that image by [lem-weil-pbc-affine-opens-basis]. Replace $W$ by its inverse image over $T_t$; it now surjects onto $T_t$. Perform this construction for every $t$. Quasi-compactness of $T$ selects finitely many of these affine opens, denoted $T_a$, with their maps $\\alpha_a$, ranks $r_a$, and opens $W_a$. Restricting the base-changed family preserves all properties of Step 2; in particular smoothness of relative dimension $n$ follows again from [lem-sbc-smooth-relative-dimension-permanence](1).",
+   "uses": [
+    "lem-pc-smooth-flat",
+    "lem-weil-pbc-flat-lfp-open",
+    "lem-weil-pbc-affine-opens-basis",
+    "lem-sbc-smooth-relative-dimension-permanence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/flat.tex",
+    "place": "Tag 0815, theorem-flatten-module, paragraph 3: shrink S so W surjects"
+   }
+  },
+  {
+   "text": "For each $a$, $U_a=T_a\\cap U_T$ is quasi-compact. Indeed cover the quasi-compact open $U_T$ by finitely many affine opens of $T$ using [lem-weil-pbc-affine-opens-basis]. Their intersections with $T_a$ are quasi-compact by [lem-weil-pbc-quasi-separated-affine-cover-criterion](1), since $T$ is quasi-separated, and their finite union is $U_a$. The restrictions of $\\mathcal G$ to $X_a$ are quasi-coherent of finite type, and their restrictions over $U_a$ are finitely presented and flat, by Step 2.",
+   "uses": [
+    "lem-weil-pbc-affine-opens-basis",
+    "lem-weil-pbc-quasi-separated-affine-cover-criterion"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Tag 01KV, lemma-quasi-separated-affine; finite affine subcover argument"
+   }
+  },
+  {
+   "text": "Fix $a$ and write $T_a=\\operatorname{Spec}R$, $X_a=\\operatorname{Spec}B$, $N=\\Gamma(X_a,\\mathcal F_a)$. By [lem-weil-pbc-flat-morphism-affine-criterion] and [lem-weil-pbc-lfp-affine-opens-finite-presentation], $R\\to B$ is flat and finitely presented; $N$ is finite by [lem-weil-pbc-quasi-coherent-finite-type-affine]. For every prime of $R$, its fibre is integral and its generic point lies in $W_a$, since $(W_a)_t$ is nonempty open in that integral fibre. There $\\alpha_a$ is an isomorphism, and $\\mathcal F_a$ is free over $\\mathcal O_{X_a}$, hence flat over the base because $X_a\\to T_a$ is flat. In the affine stalk identifications of [lem-sbc-affine-module-germ-localization], these are exactly the generic-stalk flatness and residue-field-isomorphism hypotheses of [lem-trf-free-subtraction-flatness]. That node therefore makes $B^{\\oplus r_a}\\to N$ universally injective over $R$, and gives the equivalence of relative flatness of $N$ and its cokernel at every stalk.",
+   "uses": [
+    "lem-weil-pbc-flat-morphism-affine-criterion",
+    "lem-weil-pbc-lfp-affine-opens-finite-presentation",
+    "lem-weil-pbc-quasi-coherent-finite-type-affine",
+    "lem-sbc-affine-module-germ-localization",
+    "lem-trf-free-subtraction-flatness"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/flat.tex",
+    "place": "Tag 0815, theorem-flatten-module, paragraph 3: Tag 05I3, lemma-induction-step, globalized by Algebra Tag 05CL"
+   }
+  },
+  {
+   "text": "Set $\\mathcal H_a=\\operatorname{coker}\\alpha_a$. By [lem-weil-pbc-quasi-coherent-module-cokernel-image] it is quasi-coherent, and its affine module is $Q=N/\\operatorname{im}\\alpha_a$; the images of finitely many generators of $N$ generate $Q$, so it is of finite type. For an arbitrary $T'\\to T_a$, work on each affine open $\\operatorname{Spec}R'\\subset T'$. Use [lem-weil-pbc-affine-tilde-gamma-adjunction] to identify the original quasi-coherent modules with their affine section modules, and [lem-weil-pbc-tilde-pullback-base-change] to identify their tensor pullbacks. The pulled-back sequence is associated to $0\\to R'\\otimes_R B^{\\oplus r_a}\\to R'\\otimes_R N\\to R'\\otimes_R Q\\to0$. Its left map is injective by Step 6, taking the $R$-module $L=R'$; the remaining exactness follows from the quotient presentation of $Q$. Localization preserves this module exactness by [lem-weil-pbc-localization-module-exact], so it is exact on every stalk and hence as a sheaf sequence on this affine cover and hence on $X_a\\times_{T_a}T'$. This proves the asserted universal exactness, including the original sequence by $R'=R$.",
+   "uses": [
+    "lem-weil-pbc-quasi-coherent-module-cokernel-image",
+    "lem-weil-pbc-affine-tilde-gamma-adjunction",
+    "lem-weil-pbc-tilde-pullback-base-change",
+    "lem-weil-pbc-localization-module-exact"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/flat.tex",
+    "place": "Tag 0815, theorem-flatten-module, paragraph 3: universal injectivity and the definition of H"
+   }
+  },
+  {
+   "text": "At each point lying over $U_a$, $\\mathcal F_a$ is flat over $U_a$ by Step 2. The stalkwise flatness equivalence in [lem-trf-free-subtraction-flatness] therefore proves that $\\mathcal H_a|_{X_{U_a}}$ is flat over $U_a$. On that open $\\mathcal O^{\\oplus r_a}$ is of finite type and $\\mathcal F_a$ is of finite presentation. Thus [lem-weil-pbc-module-finite-presentation-cokernel] makes $\\mathcal H_a|_{X_{U_a}}$ finitely presented. Neither conclusion requires global finite presentation of $\\mathcal F_a$.",
+   "uses": [
+    "lem-trf-free-subtraction-flatness",
+    "lem-weil-pbc-module-finite-presentation-cokernel"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/flat.tex",
+    "place": "Tag 0815, theorem-flatten-module, paragraph 3: induction hypotheses for H; Modules Tag 0H96, lemma-cokernel-finite-finite-presentation"
+   }
+  },
+  {
+   "text": "For $t\\in T_a$, the fibre of $\\mathcal H_a$ is finite type with closed support $Z_t\\subset(X_a)_t$, by [lem-weil-pbc-support-pullback-finite-type]. It vanishes on the nonempty open $(W_a)_t$ because $\\alpha_a$ is an isomorphism there. Thus $Z_t$ is a proper closed subset of the integral fibre. By [def-sbc-smooth-morphisms], $\\dim_x((X_a)_t)=n$ for every $x\\in(X_a)_t$, with $\\dim_x$ as in [def-kun-dimension]. For any chain of nonempty irreducible closed subsets $Z_0\\subsetneq\\cdots\\subsetneq Z_k$ in $Z_t$, the same subsets are closed in $(X_a)_t$, and appending the irreducible closed set $(X_a)_t$ gives a chain of length $k+1$ in $(X_a)_t$. Pick $x\\in Z_0$ and an open $O\\ni x$ of $(X_a)_t$. Each member of the chain is irreducible and meets $O$, so its intersection with $O$ is a nonempty open, hence irreducible and dense, subset of it; the intersections form a chain of irreducible closed subsets of $O$, strict because their closures are the original members. Thus $\\dim O\\ge k+1$ for every such $O$, so $k+1\\le\\dim_x((X_a)_t)=n$ [def-kun-topological-krull-dimension]. Hence $\\dim Z_t\\le n-1$ if $Z_t$ is nonempty. If $n=0$, a nonempty $Z_t$ would already give a chain of length one, a contradiction, so the fibre sheaf is zero. Assigning empty support dimension $-1$, the bound holds for every $t$. If $T$ is empty take the empty finite cover; rank zero and empty $U$ impose no additional conditions. This completes all clauses.",
+   "uses": [
+    "lem-weil-pbc-support-pullback-finite-type",
+    "def-sbc-smooth-morphisms",
+    "def-kun-topological-krull-dimension",
+    "def-kun-dimension"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/flat.tex",
+    "place": "Tag 0815, theorem-flatten-module, paragraph 3: smaller-support induction; definition of topological Krull dimension"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-smooth-flat",
+  "lem-weil-pbc-lfp-affine-opens-finite-presentation",
+  "lem-trf-generic-free-blowup",
+  "lem-trf-generic-rank-admissible-invariance",
+  "lem-sbc-smooth-relative-dimension-permanence",
+  "lem-trf-module-admissible-blowup-calculus",
+  "lemma-nagata-admissible-blowup-over-open",
+  "lem-weil-pbc-affine-opens-basis",
+  "lem-weil-pbc-quasi-coherent-finite-type-affine",
+  "lem-sbc-affine-module-germ-localization",
+  "lem-weil-pbc-affine-tilde-gamma-adjunction",
+  "lem-weil-pbc-flat-lfp-open",
+  "lem-weil-pbc-quasi-separated-affine-cover-criterion",
+  "lem-weil-pbc-flat-morphism-affine-criterion",
+  "lem-trf-free-subtraction-flatness",
+  "lem-weil-pbc-quasi-coherent-module-cokernel-image",
+  "lem-weil-pbc-tilde-pullback-base-change",
+  "lem-weil-pbc-localization-module-exact",
+  "lem-weil-pbc-module-finite-presentation-cokernel",
+  "lem-weil-pbc-support-pullback-finite-type",
+  "def-sbc-smooth-morphisms",
+  "def-kun-topological-krull-dimension",
+  "def-kun-dimension"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/flat.tex",
+  "place": "Tag 0815, theorem-flatten-module, paragraph 3; Tag 0811, lemma-flatten-module-pre; Tag 05I3, lemma-induction-step. Finite affine covering and proper-closed-support chain argument written out."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "generic.*(basis|rank)|universally.*injective|flattening",
+   "results": "13 hits.  Candidates: Mathlib/AlgebraicGeometry/Morphisms/QuasiFinite.lean, Mathlib/AlgebraicGeometry/Morphisms/QuasiFinite.lean, Mathlib/AlgebraicGeometry/Morphisms/FlatDescent.lean, Mathlib/AlgebraicGeometry/Morphisms/FlatDescent.lean, Mathlib/AlgebraicGeometry/Morphisms/FlatDescent.lean, Mathlib/AlgebraicGeometry/Morphisms/FlatDescent.lean, Mathlib/AlgebraicGeometry/Morphisms/FlatDescent.lean, Mathlib/AlgebraicGeometry/Morphisms/UniversallyInjective.lean. Smooth morphism instances and local bases do not construct an admissible modification with the stated smaller-support cokernel.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "Module.Flat, Module.Finite",
+   "results": "12 hits.  Candidates: Module.Flat.mk, Module.Flat.out, Module.flat_iff, Submodule.finrank_span_eq_finrank_span, Submodule.finrank_span_eq_finrank, Module.Flat.exists_factorization_of_apply_eq_zero_of_free, Module.Flat.exists_factorization_of_comp_eq_zero_of_free, Module.free_of_flat_of_isLocalRing. Smooth morphism instances and local bases do not construct an admissible modification with the stated smaller-support cokernel.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a smooth affine family with geometrically integral fibres an admissible blowup locally admits a universally injective free module map whose cokernel has strictly smaller fibre support dimension",
+   "results": "8 hits.  Candidates: AlgebraicGeometry.isSmoothOfRelativeDimension_iff, AlgebraicGeometry.IsSmoothOfRelativeDimension.exists_isStandardSmoothOfRelativeDimension, AlgebraicGeometry.IsSmoothOfRelativeDimension, AlgebraicGeometry.AffineSpace.not_isIntegralHom, AlgebraicGeometry.instHasRingHomPropertyIsSmoothOfRelativeDimensionLocallyIsStandardSmoothOfRelativeDimension, AlgebraicGeometry.IsPreimmersion.of_isLocalization, AlgebraicGeometry.IsSmooth.exists_isStandardSmooth, RingHom.IsStandardSmoothOfRelativeDimension. Smooth morphism instances and local bases do not construct an admissible modification with the stated smaller-support cokernel.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Generic basis of a finite type quasi coherent module after blowup gives a cokernel vanishing at all fibre generic points",
+   "results": "8 hits.  Candidates: SheafOfModules.QuasicoherentData.localGeneratorsData_generators, SheafOfModules.generatorsOfIsCokernelFree_I, SheafOfModules.generatorsOfIsCokernelFree_s, SheafOfModules.generatorsOfIsCokernelFree, SheafOfModules.presentationOfIsCokernelFree_generators, SheafOfModules.QuasicoherentData.localGeneratorsData_I, SheafOfModules.localGeneratorsDataOfIsFiniteType, SheafOfModules.QuasicoherentData.localGeneratorsData. Smooth morphism instances and local bases do not construct an admissible modification with the stated smaller-support cokernel.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "For a smooth affine family with geometrically integral fibres an admissible blowup locally admits a universally injective free module map whose cokernel has strictly smaller fibre support dimension",
+   "results": "8 hits.  Candidates: AlgebraicGeometry.IsSmooth.casesOn, Module.supportDim_le_of_injective, Module.support_subset_of_injective, AlgebraicGeometry.instLocallyOfFinitePresentationOfIsSmooth, AlgebraicGeometry.IsSmooth.recOn, Module.supportDim_le_of_surjective, AlgebraicGeometry.isSmoothOfRelativeDimension_comp, AlgebraicGeometry.instIsGermInjectiveOfIsIntegral. Smooth morphism instances and local bases do not construct an admissible modification with the stated smaller-support cokernel.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "generic.*(basis|rank)|universally.*injective|flattening",
+   "results": "13 hits; read candidates: Mathlib/AlgebraicGeometry/RelativeGluing.lean, Mathlib/AlgebraicGeometry/Morphisms/FlatDescent.lean, Mathlib/AlgebraicGeometry/Morphisms/FlatDescent.lean, Mathlib/AlgebraicGeometry/Morphisms/FlatDescent.lean, Mathlib/AlgebraicGeometry/Morphisms/FlatDescent.lean, Mathlib/AlgebraicGeometry/Morphisms/FlatDescent.lean, Mathlib/AlgebraicGeometry/Morphisms/UniversallyInjective.lean, Mathlib/AlgebraicGeometry/Morphisms/UniversallyInjective.lean. Smoothness, flat-module criteria, and local generator constructions do not give this admissible blowup and universally exact smaller-support subtraction.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Generic free subtraction of a quasi coherent module on a smooth affine family after an admissible blowup",
+   "results": "8 hits; read candidates: AlgebraicGeometry.Scheme.Modules.Hom.sub_app, IsLocalizedModule.mk'_sub, IsLocalizedModule.mk'_sub_mk', ContMDiffSection.coe_sub, SheafOfModules.IsQuasicoherent.recOn, SheafOfModules.IsQuasicoherent.casesOn, SheafOfModules.IsQuasicoherent.rec, Module.free_of_isLocalizedModule. Smoothness, flat-module criteria, and local generator constructions do not give this admissible blowup and universally exact smaller-support subtraction.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "Module.Flat, Module.Finite",
+   "results": "12 hits; read candidates: Module.Flat.mk, Module.Flat.out, Module.flat_iff, Submodule.finrank_span_eq_finrank_span, Submodule.finrank_span_eq_finrank, Module.Flat.exists_factorization_of_apply_eq_zero_of_free, Module.Flat.exists_factorization_of_comp_eq_zero_of_free, Module.free_of_flat_of_isLocalRing. Smoothness, flat-module criteria, and local generator constructions do not give this admissible blowup and universally exact smaller-support subtraction.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a smooth affine family with geometrically integral fibres an admissible blowup admits locally a free module subtraction with universally exact cokernel of smaller fibre support dimension",
+   "results": "8 hits; read candidates: Algebra.IsStandardSmoothOfRelativeDimension, Algebra.smoothLocus_eq_compl_support_inter, AlgebraicGeometry.IsSmoothOfRelativeDimension.exists_isStandardSmoothOfRelativeDimension, AlgebraicGeometry.IsSmoothOfRelativeDimension, AlgebraicGeometry.instHasRingHomPropertyIsSmoothOfRelativeDimensionLocallyIsStandardSmoothOfRelativeDimension, RingHom.IsStandardSmoothOfRelativeDimension, Algebra.IsStandardSmoothOfRelativeDimension.exists_subalgebra_fg, AlgebraicGeometry.IsSmooth.exists_isStandardSmooth. Smoothness, flat-module criteria, and local generator constructions do not give this admissible blowup and universally exact smaller-support subtraction.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A finite type quasi coherent sheaf that is locally free on a fibrewise dense open has a free submodule with flat quotient after modifying the base",
+   "results": "8 hits; read candidates: SheafOfModules.localGeneratorsDataOfIsFiniteType, SheafOfModules.IsFiniteType.exists_localGeneratorsData, SheafOfModules.LocalGeneratorsData.IsFiniteType, SheafOfModules.LocalGeneratorsData.IsFiniteType.isFiniteType, SheafOfModules.generatorsOfIsCokernelFree, SheafOfModules.QuasicoherentData.IsFinitePresentation, SheafOfModules.isFinitePresentation, SheafOfModules.IsFinitePresentation.exists_quasicoherentData. Smoothness, flat-module criteria, and local generator constructions do not give this admissible blowup and universally exact smaller-support subtraction.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-flattening-module-by-admissible-blowup",
+  "date": "2026-10-22",
+  "group": "Q148"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Proof (1)--(2), semistable-alteration input: the Raynaud--Gruson flattening argument is applied to the finite-type module i_* O_X on an affine-space neighbourhood. Expansion of Stacks 0815: Tag 0815, theorem-flatten-module, proof paragraph 3 through the definition of H and its induction hypotheses; Tag 0811, lemma-flatten-module-pre.",
+   "via": [
+    "lem-trf-flattening-module-by-admissible-blowup",
+    "lem-trf-flattening-by-admissible-blowup",
+    "lem-trf-flatification-horizontal-curve-pair",
+    "lem-trf-dejong-relative-marked-semistable",
+    "lem-trf-relative-marked-nodal-reduction",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-trf-smooth-generic-rank-reduction",
+  "worker": "stage1",
+  "summary": "Expanded Stacks 0815 paragraph 3 using existing generic-free blowup and universal free-subtraction nodes. Constructed alpha and the surjective isomorphism open locally on the modified base; proved universal exactness, finiteness and the support bound including n=0. No new nodes or statement changes.",
+  "blueprint": "Historical semistable-alteration ancestry recorded in blueprint.from: the module-flattening input is expanded via Stacks 0815 paragraph 3 and 0811. The current main-20261015 locality proof uses contracting correspondences; this assigned supporting item is treated on its recorded flattening route. No chapter or unit route replaced.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-lfp-affine-opens-finite-presentation",
+    "why": "Converts local finite presentation to finite presentation of the affine ring map required by the generic-free and free-subtraction lemmas. No statement of sk-i-curve-zero supplies this general algebraic-geometric tool."
+   },
+   {
+    "node": "lem-sbc-smooth-relative-dimension-permanence",
+    "why": "Base-change permanence of smooth relative dimension, used to retain the prescribed n after the blowup and restriction. No statement of sk-i-curve-zero supplies this general algebraic-geometric tool."
+   },
+   {
+    "node": "lem-weil-pbc-affine-opens-basis",
+    "why": "Chooses affine base neighbourhoods and a finite affine subcover of a quasi-compact open. No statement of sk-i-curve-zero supplies this general algebraic-geometric tool."
+   },
+   {
+    "node": "lem-weil-pbc-quasi-coherent-finite-type-affine",
+    "why": "Provides finite generators of the affine section module for the explicit choice of alpha. No statement of sk-i-curve-zero supplies this general algebraic-geometric tool."
+   },
+   {
+    "node": "lem-sbc-affine-module-germ-localization",
+    "why": "Identifies affine section localizations with sheaf stalks in applying the algebraic criterion. No statement of sk-i-curve-zero supplies this general algebraic-geometric tool."
+   },
+   {
+    "node": "lem-weil-pbc-flat-lfp-open",
+    "why": "Openness allows shrinking the base so the isomorphism open surjects. No statement of sk-i-curve-zero supplies this general algebraic-geometric tool."
+   },
+   {
+    "node": "lem-weil-pbc-quasi-separated-affine-cover-criterion",
+    "why": "Quasi-compactness of affine intersections proves U_a quasi-compact. No statement of sk-i-curve-zero supplies this general algebraic-geometric tool."
+   },
+   {
+    "node": "lem-weil-pbc-flat-morphism-affine-criterion",
+    "why": "Converts geometric flatness into flatness of the affine ring map. No statement of sk-i-curve-zero supplies this general algebraic-geometric tool."
+   },
+   {
+    "node": "lem-weil-pbc-quasi-coherent-module-cokernel-image",
+    "why": "Quasi-coherent cokernels and their affine quotient sections. No statement of sk-i-curve-zero supplies this general algebraic-geometric tool."
+   },
+   {
+    "node": "lem-weil-pbc-module-finite-presentation-cokernel",
+    "why": "Preserves finite presentation on the distinguished open after taking the cokernel. No statement of sk-i-curve-zero supplies this general algebraic-geometric tool."
+   },
+   {
+    "node": "lem-weil-pbc-support-pullback-finite-type",
+    "why": "Closed support and preservation of finite type on fibres, used before the elementary dimension-chain argument. No statement of sk-i-curve-zero supplies this general algebraic-geometric tool."
+   },
+   {
+    "node": "lemma-nagata-admissible-blowup-over-open",
+    "why": "Identifies the inverse image of U with U to retain quasi-compactness. This is a generic tool, not another proof route for the unit."
+   },
+   {
+    "node": "lem-weil-pbc-affine-tilde-gamma-adjunction",
+    "why": "Constructs the sheaf map from the chosen global section vectors and identifies affine module models. This is a generic tool, not another proof route for the unit."
+   },
+   {
+    "node": "lem-weil-pbc-tilde-pullback-base-change",
+    "why": "Identifies arbitrary affine tensor pullbacks with scalar extension of the section module. This is a generic tool, not another proof route for the unit."
+   },
+   {
+    "node": "lem-weil-pbc-localization-module-exact",
+    "why": "Passes the exact module sequence after scalar extension to exactness of its sheaf stalks. This is a generic tool, not another proof route for the unit."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-lfp-affine-opens-finite-presentation",
+  "lem-sbc-smooth-relative-dimension-permanence",
+  "lem-weil-pbc-affine-opens-basis",
+  "lem-weil-pbc-quasi-coherent-finite-type-affine",
+  "lem-sbc-affine-module-germ-localization",
+  "lem-weil-pbc-flat-lfp-open",
+  "lem-weil-pbc-quasi-separated-affine-cover-criterion",
+  "lem-weil-pbc-flat-morphism-affine-criterion",
+  "lem-weil-pbc-quasi-coherent-module-cokernel-image",
+  "lem-weil-pbc-module-finite-presentation-cokernel",
+  "lem-weil-pbc-support-pullback-finite-type",
+  "lemma-nagata-admissible-blowup-over-open",
+  "lem-weil-pbc-affine-tilde-gamma-adjunction",
+  "lem-weil-pbc-tilde-pullback-base-change",
+  "lem-weil-pbc-localization-module-exact"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q106-02316f24e",
+  "group": "Q106",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q106-02316f24e (reviewer sub-agent of L); spot-checked: Read the item's nine steps in full against Stacks flat.tex 0815 paragraph 3, 0811 and 05I3. The delivery has no new nodes, the statement matches live, live still has the item unsplit, there is no repair note, and nothing cites SGA. Steps 1-8 check out: generic-free-blowup (every hypothesis checked: affine flat fp, geometrically integral fibres, flat at fibre generic points over U); rank-admissible-invariance together with nagata over-open for qcqs, U_T≅U and flat/fp over U_T; the α/determinant/W construction at ξ∈V_t; the open image from flat-lfp-open, so W surjects onto an affine T_t, and quasi-compactness of T gives the finite cover; U_a quasi-compact via qs-affine-cover-criterion(1); every hypothesis of free-subtraction-flatness holds (ξ_p∈W_a, N_ξ free, B flat); universal exactness via tilde-pullback-base-change with L=R' and localization-exact; flatness over U_a via the stalkwise equivalence and finite presentation via module-fp-cokernel. FIX in step 9: 'ambient dimension is n' was not justified, since def-sbc-smooth-morphisms gives only dim_x=n. I wrote out that the chain meets every open O∋x in a strict chain, so k+1≤dim_x=n, and added def-kun-dimension to uses/proof_deps. Edge cases checked: empty T, r=0, empty U, n=0 (fibre zero). Duplicate search found no duplicate (generic-free-cokernel-dimension-drop, local-generic-basis-universal-injective, small-support-cokernel-induction and generic-basis-base-open-universal-injectivity are local/étale variants). All 15 off-unit nodes are generic scheme basics, either Mathlib leaves or declared tool_uses; accepted.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SmoothGenericRankReduction",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.exists_admissibleBlowup_smooth_genericRankReduction",
+  "file": "lean/Sheaf/AlgebraicGeometry/SmoothGenericRankReduction.lean",
+  "statement": "theorem exists_admissibleBlowup_smooth_genericRankReduction {X S : Scheme.{u}} [IsAffine S] (n : ℕ) (f : X ⟶ S) [IsAffineHom f] [SmoothOfRelativeDimension n f] [GeometricallyIntegral f] (F : X.Modules) [F.IsQuasicoherent] [F.IsFiniteType] (U : S.Opens) (hU : IsCompact (U : Set S)) (hfp : (F.restrict (f ⁻¹ᵁ U).ι).IsFinitePresentation) (hflat : (F.restrict (f ⁻¹ᵁ U).ι).IsFlatOver (f ∣_ U)) : ∃ (B : IsAdmissible S U) (m : ℕ) (V : Fin m → B.I.blowup.Opens), (⨆ a, V a) = ⊤ ∧ (∀ a : Fin m, IsAffineOpen (V a)) ∧ ∀ a : Fin m, ∃ (g : ((pullback.snd f B.I.blowupMap) ⁻¹ᵁ V a).toScheme ⟶ (V a).toScheme) (G : ((pullback.snd f B.I.blowupMap) ⁻¹ᵁ V a).toScheme.Modules) (Ua : (V a).toScheme.Opens), g = (pullback.snd f B.I.blowupMap) ∣_ V a ∧ G = (@moduleStrictTransform X S f B.I (B.I.isFiniteType_toModules_sheaf B.finiteType) F inferInstance).restrict ((pullback.snd f B.I.blowupMap) ⁻¹ᵁ V a).ι ∧ Ua = (V a).ι ⁻¹ᵁ (B.I.blowupMap ⁻¹ᵁ U) ∧ IsAffineHom g ∧ SmoothOfRelativeDimension n g ∧ GeometricallyIntegral g ∧ IsCompact (Ua : Set (V a).toScheme) ∧ G.IsQuasicoherent ∧ G.IsFiniteType ∧ (G.restrict (g ⁻¹ᵁ Ua).ι).IsFinitePresentation ∧ (G.restrict (g ⁻¹ᵁ Ua).ι).IsFlatOver (g ∣_ Ua) ∧ ∃ (r : ℕ) (α : SheafOfModules.free (R := ((pullback.snd f B.I.blowupMap) ⁻¹ᵁ V a).toScheme.ringCatSheaf) (ULift.{u} (Fin r)) ⟶ G) (W : ((pullback.snd f B.I.blowupMap) ⁻¹ᵁ V a).toScheme.Opens), Surjective (W.ι ≫ g) ∧ IsIso ((restrictFunctor W.ι).map α) ∧ (ShortComplex.mk α (cokernel.π α) (cokernel.condition α)).ShortExact ∧ (∀ (T' : Scheme.{u}) (t' : T' ⟶ (V a).toScheme), ∃ w : (tensorPullback (pullback.fst g t')).map α ≫ (tensorPullback (pullback.fst g t')).map (cokernel.π α) = 0, (ShortComplex.mk ((tensorPullback (pullback.fst g t')).map α) ((tensorPullback (pullback.fst g t')).map (cokernel.π α)) w).ShortExact) ∧ (cokernel α).IsQuasicoherent ∧ (cokernel α).IsFiniteType ∧ ((restrictFunctor (g ⁻¹ᵁ Ua).ι).obj (cokernel α)).IsFinitePresentation ∧ ((restrictFunctor (g ⁻¹ᵁ Ua).ι).obj (cokernel α)).IsFlatOver (g ∣_ Ua) ∧ (∀ t : (V a).toScheme, topologicalKrullDim {x : g.fiber t | ¬ Subsingleton (((tensorPullback (g.fiberι t)).obj (cokernel α)).presheaf.stalk x)} < (n : WithBot ℕ∞)) ∧ (n = 0 → ∀ t : (V a).toScheme, IsZero ((tensorPullback (g.fiberι t)).obj (cokernel α)))",
+  "branch": "newtargets-dag",
+  "by": "Q51",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-35008e07f",
+  "group": "Q51",
+  "result": "pass",
+  "note": "Read node, all 10 stmt_dep records, the module and report. Hypotheses match exactly (IsAffine S, IsAffineHom + SmoothOfRelativeDimension n, Mathlib GeometricallyIntegral = integral after every field base change, F qcoh finite type, U compact, fp + IsFlatOver over U); no extra assumptions. Conclusion: IsAdmissible blowup with retained centre B.I, finite affine cover with ⨆ = ⊤, chart family/strict-transform restriction/U_a pinned by equalities, permanence clauses, α : free(ULift (Fin r)) → F_a, W surjecting with α|_W iso, short exact original sequence and after tensorPullback along pullback.fst g t' for all t', cokernel qcoh/finite type/fp and flat over U_a, fibre support topologicalKrullDim < n (= ≤ n−1 with empty ↦ ⊥, n = 0 forces zero), plus the implied n = 0 IsZero clause. Edge cases: empty T (m = 0), r = 0, U empty or all of S, n = 0. Docstrings carry source, blueprint id and all 9 steps; proof only sorry; statement verbatim; imports exist; item not yet landed. No compile reproduced, no file changed. Note: the second reading was written by the same worker (stated openly)."
+ }
+}

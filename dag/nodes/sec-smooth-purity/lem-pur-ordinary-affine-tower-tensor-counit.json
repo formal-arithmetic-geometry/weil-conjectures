@@ -1,0 +1,120 @@
+{
+ "id": "lem-pur-ordinary-affine-tower-tensor-counit",
+ "kind": "statement",
+ "title": "Tensor counit square for the ordered affine tower",
+ "statement": "Let A be finite commutative, N annihilate A, and S be Noetherian with N invertible. For normalized transport t and projective-line data D on every Noetherian intermediate scheme [def-asd-ordinary-finite-p1-data], the actual ordered affine adjunction counit [def-amb-affine-trace-construction] commutes with action and strength [def-pur-ordinary-affine-tensor-actions] at every dimension d and every pair H,K of arbitrary unbounded input complexes.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-an/lem-amb-affine-space-top-trace.proof.md",
+  "place": "last paragraph: projection formula on chosen compactifications and the ordered affine-line tower; categorical calculations making coefficient normalization explicit"
+ },
+ "stmt_deps": [
+  "lem-pur-ordinary-affine-line-tensor-counit",
+  "lem-pur-counit-tensor-tower",
+  "def-pur-ordinary-affine-tensor-actions"
+ ],
+ "proof": [
+  {
+   "text": "apply counitTensor_tower with coefficient endofunctor tensoring on the left\nby the ordered pullback of H. At coordinate e, ordinaryAffineLine_tensorCounit is\nexactly the required one-step square. The tower definitions give the pasted action\nand strength. No equation asserting determination of a map by its unit value is used.",
+   "uses": [
+    "lem-pur-ordinary-affine-line-tensor-counit",
+    "lem-pur-counit-tensor-tower",
+    "def-pur-ordinary-affine-tensor-actions"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-an/lem-amb-affine-space-top-trace.proof.md",
+    "place": "last paragraph: projection formula on chosen compactifications and the ordered affine-line tower; categorical calculations making coefficient normalization explicit"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-pur-ordinary-affine-line-tensor-counit",
+  "lem-pur-counit-tensor-tower",
+  "def-pur-ordinary-affine-tensor-actions"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-an/lem-amb-affine-space-top-trace.proof.md",
+  "place": "last paragraph: projection formula on chosen compactifications and the ordered affine-line tower; categorical calculations making coefficient normalization explicit"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "An iterated tensor pullback and associator source comparison intertwines the canonical projection formula for compact support with the pasted coefficient action along a tower",
+   "results": "AlgebraicGeometry.Scheme.Pullback.Triplet.tensorCongr_trans_hom_assoc; AlgebraicGeometry.Scheme.Pullback.Triplet.tensorCongr_trans; AlgebraicGeometry.Scheme.Pullback.tensorCongr_SpecTensorTo_assoc; AlgebraicGeometry.Scheme.Pullback.ofPointTensor_SpecTensorTo_assoc; AlgebraicGeometry.Scheme.Pullback.Triplet.tensorCongr_trans_hom; AlgebraicGeometry.Scheme.Pullback.Triplet.specTensorTo_snd_assoc; AlgebraicGeometry.Scheme.Pullback.Triplet.tensorCongr_symm; AlgebraicGeometry.Scheme.Pullback.tensorCongr_SpecTensorTo",
+   "date": "2026-10-25",
+   "verdict": "No exact statement; the general identities below are specialized and combined in the Lean proof."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction, \"counit\"",
+   "results": "CategoryTheory.Adjunction.mkOfUnitCounit; CategoryTheory.Adjunction.counit; CategoryTheory.Adjunction.ext_counit; CategoryTheory.Adjunction.ofNatIsoLeft_counit; CategoryTheory.Adjunction.ofNatIsoRight_counit; CategoryTheory.Adjunction.counit_naturality; CategoryTheory.Adjunction.counit_naturality_assoc; CategoryTheory.Adjunction.toEquivalence_counitIso_hom_app",
+   "date": "2026-10-25",
+   "verdict": "No exact statement; the general identities below are specialized and combined in the Lean proof."
+  },
+  {
+   "tool": "grep",
+   "query": "projectionMap.*counit|counit.*projectionMap",
+   "results": "No matches",
+   "date": "2026-10-25",
+   "verdict": "No exact statement; the general identities below are specialized and combined in the Lean proof."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.OrdinaryAffineCounitTensorNormalization",
+  "date": "2026-10-25",
+  "group": "G2"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-an",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "cor-pur-vector-bundle-purity",
+   "place": "proof paragraph 2: composition of the explicit projective-line adjunctions and the same iterated counit for direct sums",
+   "via": [
+    "lem-pur-ordinary-affine-counit-tensor-normalization"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.OrdinaryAffineTowerTensorCounit",
+  "file": "lean/Sheaf/AlgebraicGeometry/OrdinaryAffineTowerTensorCounit.lean",
+  "declaration": "AlgebraicGeometry.Etale.ordinaryAffineTower_tensorCounit",
+  "declarations": [
+   "AlgebraicGeometry.Etale.ordinaryAffineTower_tensorCounit"
+  ],
+  "statement": "theorem ordinaryAffineTower_tensorCounit\n    (A : Type (u + 1)) [CommRing A] [Finite A] (N : ℕ) (hA : (N : A) = 0)\n    (t : OrdinaryFiniteTwistTransport A N hA)\n    (D : ∀ (T : Scheme.{u}) [IsNoetherian T] (hT : IsUnit (N : Γ(T, ⊤))),\n      OrdinaryFiniteP1Datum A N hA t T hT)\n    (S : Scheme.{u}) [IsNoetherian S] (hS : IsUnit (N : Γ(S, ⊤)))\n    (d : ℕ) (H K : DerivedCategoryModule A S) :\n    (action A S H d).app ((affineTraceRight A N hA S d).obj K) ≫\n      (affineTraceLeft A S d).map (strength A N hA S H d K).hom ≫\n      (affineTraceAdjunction A N hA t D S hS d).counit.app\n        (((ordinaryFiniteTensor A S).obj H).obj K) =\n      ((ordinaryFiniteTensor A S).obj H).map\n        ((affineTraceAdjunction A N hA t D S hS d).counit.app K)",
+  "statements": [
+   "theorem ordinaryAffineTower_tensorCounit\n    (A : Type (u + 1)) [CommRing A] [Finite A] (N : ℕ) (hA : (N : A) = 0)\n    (t : OrdinaryFiniteTwistTransport A N hA)\n    (D : ∀ (T : Scheme.{u}) [IsNoetherian T] (hT : IsUnit (N : Γ(T, ⊤))),\n      OrdinaryFiniteP1Datum A N hA t T hT)\n    (S : Scheme.{u}) [IsNoetherian S] (hS : IsUnit (N : Γ(S, ⊤)))\n    (d : ℕ) (H K : DerivedCategoryModule A S) :\n    (action A S H d).app ((affineTraceRight A N hA S d).obj K) ≫\n      (affineTraceLeft A S d).map (strength A N hA S H d K).hom ≫\n      (affineTraceAdjunction A N hA t D S hS d).counit.app\n        (((ordinaryFiniteTensor A S).obj H).obj K) =\n      ((ordinaryFiniteTensor A S).obj H).map\n        ((affineTraceAdjunction A N hA t D S hS d).counit.app K)"
+  ],
+  "existing": false,
+  "branch": "sheaf-dag",
+  "by": "G2",
+  "date": "2026-10-25"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-e2b21",
+  "group": "G2",
+  "result": "pass",
+  "landing": "20261025T204611-L-2980818",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-e2b21",
+  "group": "G2",
+  "result": "pass",
+  "landing": "20261025T204611-L-2980818",
+  "kind": "interface",
+  "note": "independent cc review: item theorem statement byte-identical to clone; the 5 moved defs byte-identical in OrdinaryAffineCounitTensorMaps (public re-export, 0 importers); 3 sorry holes checked against OrdinaryFiniteP1Datum.counit_normalization, derivedOpenImmersionLowerShriekProjectionMap (= adjunction projectionMap) and the canonical compact-support compositor lemmas; #print axioms of item, tower, line and the 5 categorical lemmas on a scratch build"
+ }
+}

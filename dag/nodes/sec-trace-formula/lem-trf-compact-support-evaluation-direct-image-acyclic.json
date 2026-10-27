@@ -1,0 +1,120 @@
+{
+ "id": "lem-trf-compact-support-evaluation-direct-image-acyclic",
+ "kind": "statement",
+ "title": "Evaluated K-injective systems are acyclic for finite direct image",
+ "statement": "theorem compactSupportEvaluationDirectImage_acyclic\n    {Z Y : Scheme.{t}} (p : Z ⟶ Y) (n : ℕ)\n    [(compactSupportLevelDirectImage l E p n).Additive]\n    [Abelian.HasKInjectiveResolutions (normalizedDVRModules l E Z n)]\n    (J : CochainComplex (coefficientSequenceModules l E Z) ℤ) [J.IsKInjective] :\n    IsIso ((compactSupportLevelDirectImage l E p n).rightDerivedFunctorUnitQ\n      (((coefficientSequenceEvaluation l E Z n).mapHomologicalComplex (.up ℤ)).obj J))",
+ "source": {
+  "document": "literature/zheng-six-operations-lefschetz-verdier-DM-stacks_arXiv-1006.3810.pdf",
+  "place": "Construction 4.1 and Lemma 4.10; Evaluated K-injective systems are acyclic for finite direct image"
+ },
+ "stmt_deps": [
+  "def-trf-compact-support-system-evaluation-diagram"
+ ],
+ "proof": [
+  {
+   "text": "Restrict the coefficient-system scalars to the constant integral ring system, and take a K-injective resolution T. Scalar-restriction section acyclicity makes this resolution sectionwise a quasi-isomorphism. The explicit constant-system equivalence with diagrams of integral module sheaves shows that evaluation preserves K-injectives: evaluation has an exact coproduct left adjoint. Evaluate T at n. Given a K-injective resolution r of J_n over the finite ring, restrict r to integral scalars. The K-injective comparison principle factors the evaluated resolution through this restricted r up to homotopy; the resulting comparison is a quasi-isomorphism. Apply scalar-restriction section acyclicity to that comparison, then homotopy invariance and two-out-of-three to conclude that r is sectionwise a quasi-isomorphism. Finite geometric direct image evaluates r on base-changed site objects, hence preserves its quasi-isomorphism by sectionwise detection. Naturality of the derived unit and its invertibility on the K-injective target of r show that the unit at J_n is invertible.",
+   "uses": [
+    "lem-coef-restriction-sections-evaluation-acyclic",
+    "lem-sp-kinjective-comparison-principle",
+    "lem-pur-quasi-iso-of-sections-universes",
+    "lem-pur-native-constant-restriction-acyclicity",
+    "def-weil-completed-integral-coefficients",
+    "prop-pur-kinjective-resolutions-exist",
+    "lem-weil-tower-evaluation-kinjective",
+    "lem-weil-pbc-module-sheaves-colimits-forgetful",
+    "def-coef-ringed-sequence-site"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-coef-restriction-sections-evaluation-acyclic",
+  "lem-sp-kinjective-comparison-principle",
+  "lem-pur-quasi-iso-of-sections-universes",
+  "lem-pur-native-constant-restriction-acyclicity",
+  "def-weil-completed-integral-coefficients",
+  "prop-pur-kinjective-resolutions-exist",
+  "lem-weil-tower-evaluation-kinjective",
+  "lem-weil-pbc-module-sheaves-colimits-forgetful",
+  "def-coef-ringed-sequence-site"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/zheng-six-operations-lefschetz-verdier-DM-stacks_arXiv-1006.3810.pdf",
+  "place": "Construction 4.1 and Lemma 4.10; sectionwise scalar-restriction comparison, E6."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "derived direct image of coefficient systems commutes with evaluation",
+   "results": "General derived adjunction results; no specific acyclicity result.",
+   "date": "2026-10-27",
+   "verdict": "Use library exact-adjunction normalization."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.mateEquiv",
+   "results": "No matching indexed declaration.",
+   "date": "2026-10-27",
+   "verdict": "Local source search found the mates API."
+  },
+  {
+   "tool": "grep",
+   "query": "rightDerivedFunctorCompIso; sequenceModulePullbackEvaluation; evaluation acyclic",
+   "results": "Local rg found SequenceModulePullbackEvaluation, UnboundedExactAdjunctionSquare and the finite derived-extension argument in SemilinearOperationsExistence.",
+   "date": "2026-10-27",
+   "verdict": "Ordinary mate proved from an existing theorem; isolate only finite direct-image acyclicity."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.TraceFormula.CompactSupportDirectImageDerivedEvaluation",
+  "date": "2026-10-27",
+  "group": "Q4"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-thm-trace-transport",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-trf-compact-support-direct-image-derived-evaluation",
+   "place": "Strict substep of derived evaluation: Evaluated K-injective systems are acyclic for finite direct image",
+   "via": [
+    "lem-trf-compact-support-direct-image-derived-evaluation"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.TraceFormula.CompactSupportEvaluationDirectImageAcyclic",
+  "file": "lean/Sheaf/TraceFormula/CompactSupportEvaluationDirectImageAcyclic.lean",
+  "declaration": "WeilConjectures.compactSupportEvaluationDirectImage_acyclic",
+  "statement": "theorem compactSupportEvaluationDirectImage_acyclic\n    {Z Y : Scheme.{t}} (p : Z ⟶ Y) (n : ℕ)\n    [(compactSupportLevelDirectImage l E p n).Additive]\n    [Abelian.HasKInjectiveResolutions (normalizedDVRModules l E Z n)]\n    (J : CochainComplex (coefficientSequenceModules l E Z) ℤ) [J.IsKInjective] :\n    IsIso ((compactSupportLevelDirectImage l E p n).rightDerivedFunctorUnitQ\n      (((coefficientSequenceEvaluation l E Z n).mapHomologicalComplex (.up ℤ)).obj J))",
+  "branch": "sheaf-dag",
+  "by": "Q4",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q4",
+  "result": "pass",
+  "landing": "20261027T084442-L-3681928",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E6",
+  "result": "pass",
+  "landing": "20261027T103421-L-1070687",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

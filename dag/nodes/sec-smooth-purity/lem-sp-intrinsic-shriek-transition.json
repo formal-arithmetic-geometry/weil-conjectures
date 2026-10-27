@@ -1,0 +1,141 @@
+{
+ "id": "lem-sp-intrinsic-shriek-transition",
+ "kind": "statement",
+ "title": "Actual shriek transition in section-normalized intrinsic tower coordinates",
+ "statement": "Fix a prime $\\ell$, a finite extension $E/\\mathbf Q_\\ell$, a field $k$ of characteristic $p>0$ with $p\\ne\\ell$, and the section-preserving tower base and operations b,o of [det-sp-tower-shriek-levels]. Let q be coordinates for the actual strict tower category, whose ordinary evaluation comparisons preserve sections and whose scalar comparisons preserve the specified adjunction units [def-sp-coefficient-tower-shriek-interfaces]. For every n≥0 put $A_n=\\mathcal O_E/(\\ell)^{n+1}$, and for m≤n use the actual quotient $A_n\\to A_m$. Let $f:X\\to Y$ be a k-morphism between separated finite-type k-schemes and c its open/proper compactification, also over k with separated finite-type middle scheme. Fix evaluations $v_n:(F_fG)_n\\simeq F_{f,n}G_n$ with exactly the normalization equation in Evaluation. For every actual constructible finite-Tor tower G with common cohomological and Tor intervals [sk-def-sp-normalized-towers], its actual reduction [det-sp-coefficient-towers-abelian] satisfies\n$$T(v_n)\\,b_f(G_n)\\,F_{f,m}(r_G)=r_{F_fG}\\,v_m.$$\nHere composition is in Lean order (left to right), $T=(-)\\otimes^L_{A_n}A_m$ [det-sp-scalar-extension-functor], and b is literally the proper-counit/open-tensor map of [det-sp-reduction-direct-image]. No smoothness, exceptional representing pair, normalization of G, or flatness hypothesis is needed.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-tower-geometric/sk-prop-sp-tower-geometric-gluing.proof.md",
+  "place": "Levels, final sentence; coordinate transport of Step 2 of lem-sp-tower-reduction-transpose."
+ },
+ "stmt_deps": [
+  "sk-def-sfb-dc-setting",
+  "def-weil-l-adic-coefficient-extension",
+  "sk-def-sp-coefficient-towers",
+  "det-sp-coefficient-towers-abelian",
+  "sk-def-sp-normalized-towers",
+  "det-sp-tower-shriek-levels",
+  "def-sp-coefficient-tower-shriek-interfaces",
+  "det-sp-scalar-extension-functor",
+  "det-sp-reduction-direct-image"
+ ],
+ "proof": [
+  {
+   "text": "The exact level evaluations of [det-sp-coefficient-towers-abelian] commute with cohomology. The common lower bound on G therefore makes its realized strict system bounded below; levelwise vanishing detects the zero cohomology tower. The section equations of [def-sp-coefficient-tower-shriek-interfaces] identify its finite levels with those of G. Transport their ctf property along b.ideals to obtain GoodLevel.",
+   "uses": [
+    "det-sp-coefficient-towers-abelian",
+    "def-sp-coefficient-tower-shriek-interfaces",
+    "det-sp-tower-shriek-levels"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply [lem-sp-shriek-normalized-transition-comparison] to the realized bounded-below G. Its quotientMap agrees with quotient: precompose both homomorphisms with the surjection from the ring of integers and induct on the index interval. Section preservation identifies the two exact evaluation functors, their transitions, and their localized reductions. The unit equation in ScalarCoordinates identifies the scalar comparison uniquely as a left-adjoint comparison, so the intrinsic reduction is the conjugate of rho.",
+   "uses": [
+    "lem-sp-shriek-normalized-transition-comparison",
+    "def-sp-coefficient-tower-shriek-interfaces",
+    "det-sp-coefficient-towers-abelian"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Expand the normalization equation of v at n and m. Naturality of the realization counit and the equivalence triangle identities cancel the realization-inverse factors. The actual = word identity from Step 2 becomes T(v_n) b F_m(r_G) = r_FG v_m, the displayed assertion. This is transport of an equality on the actual derived system model; no faithfulness of derived evaluation, no normalization of G and no flatness of A_m over A_n are used.",
+   "uses": [
+    "def-sp-coefficient-tower-shriek-interfaces",
+    "det-sp-tower-shriek-levels",
+    "lem-sp-shriek-normalized-transition-comparison"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "det-sp-coefficient-towers-abelian",
+  "def-sp-coefficient-tower-shriek-interfaces",
+  "det-sp-tower-shriek-levels",
+  "lem-sp-shriek-normalized-transition-comparison"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-tower-geometric/sk-prop-sp-tower-geometric-gluing.proof.md",
+  "place": "Levels, final sentence; coordinate transport of Step 2 of lem-sp-tower-reduction-transpose."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Derived reduction of strict varying coefficient tower compact support compatible with quotient scalar extension normalized evaluation isomorphism",
+   "results": "8 hits, including ContDiffMapSupportedIn.structureMapLM_eq_of_scalars and Profinite.NobelingProof.GoodProducts.square_commutes; none concerns derived tower transitions.",
+   "date": "2026-10-25",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.leftAdjointUniq",
+   "results": "12 hits; leftAdjointUniq and its unit/counit equations supply categorical uniqueness only, not compatibility of strict tower models.",
+   "date": "2026-10-25",
+   "verdict": "generic adjunction uniqueness is used for the coordinate proof; no specialized match"
+  },
+  {
+   "tool": "grep",
+   "query": "spCoefficientEvaluation|systemDerivedTensor|reductionDirectImageComparison",
+   "results": "0 Mathlib hits from msearch. Direct project rg found the generic ShriekNormalizedTransitionComparison and CoefficientTowerTransitionCompatibility. The former has different system/scalar coordinates; the latter requires a global FiniteNormalization record.",
+   "date": "2026-10-25",
+   "verdict": "no match; existing project neighbors were read and compared, and neither has these supplied coordinates and evaluation hypotheses"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Exact evaluation of coefficient towers and the natural scalar extension comparison for compact support",
+   "results": "8 hits, including CompactlySupportedContinuousMap.instIsScalarTower and Finsupp.isScalarTower; no tower-derived compact-support result.",
+   "date": "2026-10-25",
+   "verdict": "no match"
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.SmoothPurityTowerReductionTranspose",
+  "date": "2026-10-25",
+  "group": "B2"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sp-tower-geometric",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-sp-tower-gluing",
+   "place": "Levels, final sentence: coordinate conversion of the actual compact-support transition, Step 2 of lem-sp-tower-reduction-transpose.",
+   "via": [
+    "lem-sp-tower-reduction-transpose"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.TowerIntrinsicShriekTransition",
+  "file": "lean/Sheaf/Paper/TowerIntrinsicShriekTransition.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.tower_intrinsic_shriek_transition",
+  "statement": "theorem tower_intrinsic_shriek_transition\n    (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]\n    [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]\n    (b : SpTowerShriek.Base l E) (o : SpTowerShriek.Operations l E b)\n    (q : Coordinates l E b)\n    (pchar : ℕ) (hp : 0 < pchar) (hne : pchar ≠ l)\n    (k : Type u) [Field k] [CharP k pchar]\n    {X Y : Scheme.{u}} {f : X ⟶ Y} (c : Compactification f)\n    [X.Over (Spec (.of k))] [IsSeparated (X ↘ Spec (.of k))]\n    [LocallyOfFiniteType (X ↘ Spec (.of k))] [QuasiCompact (X ↘ Spec (.of k))]\n    [Y.Over (Spec (.of k))] [IsSeparated (Y ↘ Spec (.of k))]\n    [LocallyOfFiniteType (Y ↘ Spec (.of k))] [QuasiCompact (Y ↘ Spec (.of k))]\n    [f.IsOver (Spec (.of k))]\n    [c.Z.Over (Spec (.of k))] [IsSeparated (c.Z ↘ Spec (.of k))]\n    [LocallyOfFiniteType (c.Z ↘ Spec (.of k))] [QuasiCompact (c.Z ↘ Spec (.of k))]\n    [c.i.IsOver (Spec (.of k))] [c.g.IsOver (Spec (.of k))]\n    (v : ∀ n : ℕ, Evaluation l E b o q c n) (G : C l E b q X)\n    {m n : ℕ} (h : m ≤ n) :\n    (scalarExtensionFunctor (quotient l E h) Y).map\n        ((v n).comparison.hom.app G.obj) ≫\n      (reductionDirectImageComparison (quotient l E h) c.i c.g).app\n        ((spDerivedCoefficientEvaluation l E X (q.abelian X) n).obj G.obj) ≫\n      (reductionCompactSupport (SpTowerShriek.R l E m) c.i c.g).map\n        (reduction l E X (q.abelian X) h (q.scalar X h) G.obj) =\n    reduction l E Y (q.abelian Y) h (q.scalar Y h) ((F l E b o q c).obj G.obj) ≫\n      (v m).comparison.hom.app G.obj",
+  "branch": "sheaf-dag",
+  "by": "B2",
+  "date": "2026-10-25"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B2",
+  "result": "pass",
+  "landing": "20261025T161937-L-157678",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B2",
+  "result": "pass",
+  "landing": "20261025T161937-L-157678",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

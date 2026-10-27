@@ -69,17 +69,22 @@
  "statement": "Let C be a locally v-small Grothendieck abelian category with an additive closed symmetric monoidal structure, and R a commutative monoid object of C. Let Mod(C,R) be the category of left internal R-modules, with its relative tensor product defined as the coequalizer of the two R-actions. For every M in Mod(C,R), the functor M tensor_R (-) has a right adjoint. Consequently Mod(C,R) is monoidal closed.",
  "proof": [
   {
-   "text": "For M,N form the cofork in internal modules whose source is the ordinary tensor M.X tensor N.X with the action on M. Its parallel arrows are the left action on N and the right action on M transported across the associator. The quotient map is linear by whiskerLeft_tensorπ_smul. Reflect the coequalizer along forget R and construct its descent using the defining ambient coequalizer of the monoidal tensor. Associator inverse cancellation identifies the two relations.",
+   "text": "Recover additivity of the ambient tensor from closedness: both tensor functors are left adjoints, preserve finite coproducts and zero morphisms, and hence are additive. This avoids adding a MonoidalPreadditive parameter absent from the original elaborated monoidalClosed signature. The existing Mod.isGrothendieckAbelian now supplies the Grothendieck structure on modules.",
    "uses": [],
    "elementary": true
   },
   {
-   "text": "Compare this coequalizer with the previously constructed Mod.tensorLeft N using diagramIsoParallelPair and uniqueness of colimits. Naturality follows by colimit.hom_ext and naturality of the tensor quotient map. The older functor preserves colimits, so the actual monoidal tensorRight N does too; the braiding transports this to tensorLeft N.",
+   "text": "For a fixed module M, put F0 = forget R followed by ambient tensorRight R and ambient tensorRight M.X, and F1 = forget R followed by ambient tensorRight M.X. The two natural transformations F0 to F1 act on N by rightAct N tensor M.X and by the associator followed by N.X tensor act M.X. Naturality follows from linearity, braiding naturality, and associator naturality. Form their parallel-pair diagram D in the functor category.",
    "uses": [],
    "elementary": true
   },
   {
-   "text": "The already proved Mod.isGrothendieckAbelian provides a separator in Mod(C,R). Apply Mathlib isLeftAdjoint_of_preservesColimits_of_isSeparating to tensorLeft M. Its right adjoint and Adjunction.ofIsLeftAdjoint give the required Closed instance for each M.",
+   "text": "The ambient tensor functors and forget R preserve small colimits. Pointwise evaluation therefore shows D.flip preserves colimits, and so does D.flip followed by colim. The coequalizer isomorphism induced by diagramIsoParallelPair and isColimitTensorPi identifies this functor naturally with monoidal tensorRight M followed by forget R. For naturality, cancel the colimit inclusions and use tensorObjPi_whiskerRight; at the source of the parallel pair also use naturality of its first arrow. This is the same coequalizer comparison used by the separately bundled module-tensor proof, constructed directly in the ambient category.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Reflect preservation of colimits along forget R, then use the descended symmetry to obtain preservation for monoidal tensorLeft M. The module category is Grothendieck abelian, so the special adjoint functor theorem isLeftAdjoint_of_preservesColimits_of_isSeparating applies to its separator. Functor.rightAdjoint and Adjunction.ofIsLeftAdjoint package the resulting uniquely specified adjoint into Closed M and hence MonoidalClosed. All data are determined up to the usual adjunction isomorphism; no arbitrary object is selected from an unproved existence statement.",
    "uses": [],
    "elementary": true
   }
@@ -88,7 +93,7 @@
  "proof_origin": {
   "by": "agent",
   "document": "lean/WeilConjectures/CategoryTheory/ModuleObjects/GrothendieckAbelian.lean",
-  "place": "Existing module-docstring argument for free flat modules, with the explicit coequalizer comparison and special adjoint theorem route formalized by F2; all steps are now proved."
+  "place": "C2, 2026-10-22: direct pointwise ambient-coequalizer implementation of the existing special-adjoint-functor-theorem route, inside monoidalClosed; the public instance needs no private data or new public import."
  },
  "lean": {
   "existing": false,
@@ -116,14 +121,25 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-15",
+  "date": "2026-10-22",
   "by": "L",
-  "reviewer": "X-6a485",
-  "group": "F2",
+  "reviewer": "COMPILER",
+  "group": "C2",
   "result": "pass",
-  "landing": "20261015T154210-L-164098",
+  "landing": "20261022T113839-L-302719",
   "kind": "interface",
-  "note": "independent Codex review: Delivered module compiled cleanly; printed axioms are limited to propext, Classical.choice, Quot.sound; mechanical findings are none; direct importer DerivedCategory also compiles; statements and signatures are unchanged."
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  },
- "lean_audit": {}
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ }
 }

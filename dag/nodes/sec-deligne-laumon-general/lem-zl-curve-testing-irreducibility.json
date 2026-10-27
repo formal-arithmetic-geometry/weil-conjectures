@@ -18,90 +18,34 @@
  ],
  "proof": [
   {
-   "text": "For $d\\geq2$, choose $s\\in S$ and use $\\bar x=s$ as geometric base point. Apply [lem-zl-common-irreducibility-detecting-cover] to the geometric local systems on $X$. Here $X$ is connected by geometric connectedness, and is Noetherian and separated since it is affine of finite type over $\\overline{\\mathbf F}_q$; $\\ell$ is invertible. Obtain $q:\\pi_1(X,\\bar x)\\twoheadrightarrow Q$ and a connected finite etale $T\\to X$ with fibre the regular $Q$-set. Any subgroup surjecting onto $Q$ acts irreducibly on every geometric stalk.",
+   "text": "On the geometric fibre, smooth base change supplies relative dimension d; the fibre is affine and connected. For d>=2 apply the pro-etale detector to the geometric carriers, obtaining one connected finite etale cover whose connected restriction to a smooth connected affine curve detects all irreducibility conditions.",
    "uses": [
-    "lem-zl-common-irreducibility-detecting-cover"
+    "lem-zl-proetale-irreducibility-detector"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-general/sk-i-dl-general-real/lem-zl-curve-testing-irreducibility.proof.md",
-    "place": "proof, finite representations, matrix witnesses and common quotient cover"
-   }
+   "elementary": false
   },
   {
-   "text": "Apply [lem-zl-bertini-finite-cover-curve] to $X_0,T\\to X,S$: smoothness, affineness, geometric connectedness and $d\\geq2$ are the hypotheses, and $T$ is connected. Obtain $i:C\\hookrightarrow X$ through $S$, with $C$ smooth, connected and affine, $T\\times_X C$ connected, and an automorphism $\\varphi$ satisfying $i\\circ\\varphi=(\\mathrm{id}_{X_0}\\times\\sigma)^m\\circ i$ for some $m\\geq1$.",
-   "uses": [
-    "lem-zl-bertini-finite-cover-curve"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-general/sk-i-dl-general-real/lem-zl-curve-testing-irreducibility.proof.md",
-    "place": "proof, Bertini and finite-field descent sentences"
-   }
-  },
-  {
-   "text": "Since $C$ contains $s$, choose $\\bar c$ with $i\\bar c=s=\\bar x$. By [lem-galois-finite-etale-connected-object], $T\\times_XC$ is a connected finite-etale object. By [lem-galois-transitive] and base-change compatibility in [thm-galois-fundamental], $H=\\operatorname{im}(i_*)$ acts transitively on $Q$ by left multiplication through $q$. Its orbit of $1$ is $q(H)$, so $q(H)=Q$.",
-   "uses": [
-    "lem-galois-finite-etale-connected-object",
-    "lem-galois-transitive",
-    "thm-galois-fundamental"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-general/sk-i-dl-general-real/lem-zl-curve-testing-irreducibility.proof.md",
-    "place": "proof, connected restricted torsor and transitive monodromy"
-   }
-  },
-  {
-   "text": "The detecting property of [lem-zl-common-irreducibility-detecting-cover] makes every geometric stalk representation irreducible on $H$. At each finite lattice level, [thm-galois-fundamental] identifies pullback fibres and their actions through $i_*$. Taking inverse limits, rationalizing and extending coefficients as in [def-pod-lisse-l-adic-sheaves] gives the action $\\rho_j\\circ i_*$ on the stalk of $i^*\\mathcal S_j$. The exact equivalence [cor-galois-lisse-representations](2) now makes each pullback an irreducible local system.",
-   "uses": [
-    "lem-zl-common-irreducibility-detecting-cover",
-    "thm-galois-fundamental",
-    "def-pod-lisse-l-adic-sheaves",
-    "cor-galois-lisse-representations"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-general/sk-i-dl-general-real/lem-zl-curve-testing-irreducibility.proof.md",
-    "place": "proof, finite matrix conclusion and identification of restricted representations"
-   }
-  },
-  {
-   "text": "The automorphism $\\varphi$ of $C$ with $i\\circ\\varphi=(\\mathrm{id}_{X_0}\\times\\sigma)^m\\circ i$, $m\\geq1$, is the last conclusion of [lem-zl-bertini-finite-cover-curve] obtained in Step 2; this is the clause \"$C$ is defined over $\\mathbf F_{q^m}$\" of the statement, no further finite-field model being asserted. (For the record: iterating the Weil datum $\\Phi_X^*\\mathcal S_j\\cong\\mathcal S_j$ of [def-wf-fundamental-representation] $m$ times and pulling it back along $i$, using $i\\circ\\varphi=\\Phi_X^m\\circ i$, gives $\\varphi^*i^*\\mathcal S_j\\cong i^*\\mathcal S_j$, the inherited Weil structure; the statement does not require it.)",
+   "text": "Apply the existing Bertini theorem to that cover and the prescribed geometric points. It supplies a closed smooth connected affine curve through every point and connectedness of the restricted cover, as well as the positive Frobenius power and its curve automorphism. The detector gives simultaneous irreducibility of all pulled-back carriers. Return the Bertini witnesses and this conclusion.",
    "uses": [
     "lem-zl-bertini-finite-cover-curve",
-    "def-wf-fundamental-representation"
+    "lem-zl-proetale-irreducibility-detector"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-general/sk-i-dl-general-real/lem-zl-curve-testing-irreducibility.proof.md",
-    "place": "proof, curve and inclusion descend and restrictions inherit Weil structures"
-   }
+   "elementary": false
   },
   {
-   "text": "For $d=1$, take $C=X$, $i=\\mathrm{id}_X$, $m=1$ and $\\varphi=\\mathrm{id}_{X_0}\\times\\sigma$. All restrictions are unchanged and every point of $S$ lies on $C$.",
+   "text": "If 2<=d fails, positivity forces d=1. Take the whole geometric fibre with its identity immersion, m=1, and its geometric Galois Frobenius. Identity pullback is isomorphic to each original carrier, so irreducibility is unchanged; every prescribed point factors through the identity.",
    "uses": [],
-   "elementary": true,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-general/sk-i-dl-general-real/lem-zl-curve-testing-irreducibility.proof.md",
-    "place": "proof, final sentence"
-   }
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "cor-galois-lisse-representations",
-  "def-pod-lisse-l-adic-sheaves",
-  "def-wf-fundamental-representation",
-  "lem-galois-finite-etale-connected-object",
-  "lem-galois-transitive",
-  "lem-zl-bertini-finite-cover-curve",
-  "lem-zl-common-irreducibility-detecting-cover",
-  "thm-galois-fundamental"
+  "lem-zl-proetale-irreducibility-detector",
+  "lem-zl-bertini-finite-cover-curve"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-general/sk-i-dl-general-real/lem-zl-curve-testing-irreducibility.proof.md",
-  "place": "proof"
+  "document": "literature/blueprint/latest/blueprint/sec-deligne-laumon-general/sk-cor-wgen-bertini-irreducible/lem-zl-curve-testing-irreducibility.proof.md",
+  "place": "Bertini assembly and the final dimension-one sentence, with the finite-quotient argument isolated in lem-zl-proetale-irreducibility-detector."
  },
  "mathlib_searches": [
   {
@@ -160,7 +104,34 @@
   "lem-zl-finite-matrix-irreducibility"
  ],
  "proof_split_by": "paragraphs",
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": [
+    "AlgebraicGeometry.WeilSheaf.exists_isClosedImmersion_isIrreducibleLocalSystem_upperStar"
+   ]
+  },
+  "slopmaster2": {
+   "state": "sorry_here",
+   "decls": [
+    {
+     "name": "AlgebraicGeometry.WeilSheaf.exists_isClosedImmersion_isIrreducibleLocalSystem_upperStar",
+     "module": "WeilConjectures.DeligneLaumon.Reduction.RealSheaves",
+     "lines": [
+      87,
+      115
+     ],
+     "kind": "theorem",
+     "sorry": true
+    }
+   ],
+   "missing": [
+    "AlgebraicGeometry.LAdicWeilSheaf.exists_isClosedImmersion_isIrreducibleLocalSystem_upperStar"
+   ],
+   "open": []
+  }
+ },
  "chapter": "sec-deligne-laumon-general",
  "unit": "sk-i-dl-general-real",
  "lean": {
@@ -175,21 +146,27 @@
   "note": "recorded by L at 04:46 UTC from lean_audit (stage 2, rule 2 of the human: one definition per notion; a node whose notion has a declaration in the source repository is not stated again; audit state sorry_here)"
  },
  "blueprint_update": {
-  "snapshot": "main-20261015",
-  "statement": "Let $X_0$ be a smooth, geometrically connected, affine scheme of\nrelative dimension $d\\geq1$ over a finite field $k_0=\\mathbf F_q$, with\n$X=X_0\\times_{k_0}\\overline{\\mathbf F}_q$, and let\n$\\mathcal S_1,\\ldots,\\mathcal S_r$ be $\\Qlb$-Weil sheaves on $X_0$ whose\ngeometric restrictions to $X$ are irreducible local systems. Let $S$ be\na nonempty finite set of $\\overline{\\mathbf F}_q$-points of $X$. There\nare a smooth connected affine curve $C$ over $\\overline{\\mathbf F}_q$\nand a closed immersion $i:C\\hookrightarrow X$ whose image contains $S$,\nsuch that every $i^*\\mathcal S_j$ is an irreducible local system on $C$,\nand $C$ is defined over a finite extension $\\mathbf F_{q^m}$, $m\\ge1$:\nthere is an automorphism $\\varphi$ of $C$ with\n$i\\circ\\varphi=(\\mathrm{id}_{X_0}\\times\\sigma)^m\\circ i$, where\n$\\mathrm{id}_{X_0}\\times\\sigma$ is the geometric Galois Frobenius of\n$X$.",
+  "snapshot": "main-20261023",
+  "commit": "c9b5f3ad18a6654dbbee6f7d7b4b4af85e01463f",
+  "changed": [
+   "statement",
+   "proof"
+  ],
+  "statement": "Let $X_0$ be a smooth, geometrically connected, affine scheme of\nrelative dimension $d\\geq1$ over a finite field $k_0=\\mathbf F_q$, with\n$X=X_0\\times_{k_0}\\overline{\\mathbf F}_q$, and let\n$\\mathcal S_1,\\ldots,\\mathcal S_r$ be lisse $\\Qlb$-Weil sheaves on $X_0$\n(lisse $\\QbarX$-modules on $X_{\\mathrm{proét}}$ [sk-lem-coefficient-heart]\nwith a Weil structure [def-weil-weil-sheaf-complex]) whose\ngeometric restrictions to $X$ are irreducible local systems. Let $S$ be\na nonempty finite set of $\\overline{\\mathbf F}_q$-points of $X$. There\nare a smooth connected affine curve $C$ over $\\overline{\\mathbf F}_q$\nand a closed immersion $i:C\\hookrightarrow X$ whose image contains $S$,\nsuch that every $i^*\\mathcal S_j$ is an irreducible local system on $C$,\nand $C$ is defined over a finite extension $\\mathbf F_{q^m}$, $m\\ge1$:\nthere is an automorphism $\\varphi$ of $C$ with\n$i\\circ\\varphi=(\\mathrm{id}_{X_0}\\times\\sigma)^m\\circ i$, where\n$\\mathrm{id}_{X_0}\\times\\sigma$ is the geometric Galois Frobenius of\n$X$.",
   "proof": [
    {
-    "text": "Use the geometric representations of\n[def-wf-fundamental-representation], and choose finite coefficient\nfields for them as allowed in [def-weil-pbc-qbar-category].\nBy [lem-zl-finite-matrix-irreducibility], each has a finite\nreduction quotient detecting absolute irreducibility. Intersect\ntheir open normal kernels in $\\pi_1(X)$, where\n$X=X_0\\times\\overline{\\mathbf F}_q$. The resulting finite quotient\n$Q$ corresponds to a connected finite etale Galois cover $T\\to X$.\nFor $\\dim X\\geq2$, apply\n[lem-zl-bertini-finite-cover-curve]. Connectedness of the\nrestricted $Q$-torsor means that the image of $\\pi_1(C)$ acts\ntransitively on $Q$, hence is all of $Q$. It surjects onto each\nchosen reduction quotient. The finite matrix witnesses show that\nall the restricted geometric representations remain irreducible.\nThe curve and inclusion descend to a finite constant extension;\nthe restrictions inherit their Weil structures over that field.\nFor dimension one take $C=X$, with its given finite-field model.",
+    "text": "Use the geometric representations of\n[def-wf-fundamental-representation]. By\n[thm-lisse-qlbar-representations], each is a continuous representation\nof $\\pi_1(X)$ defined over some finite extension $E/\\mathbf Q_\\ell$\ninside $\\Qlb$; enlarging $E$, one $E$ serves for all of them. As in\n[p-real-integral], compactness of $\\pi_1(X)$ gives a stable\n$\\mathcal O_E$-lattice in each, i.e. a basis in which all matrices have\nentries in $\\mathcal O_E$. By [lem-zl-finite-matrix-irreducibility],\napplied with $\\mathcal O=\\mathcal O_E$, each has a finite\nreduction quotient detecting absolute irreducibility. Intersect\ntheir open normal kernels in $\\pi_1(X)$, where\n$X=X_0\\times\\overline{\\mathbf F}_q$. The resulting finite quotient\n$Q$ corresponds to a connected finite etale Galois cover $T\\to X$.\nFor $\\dim X\\geq2$, apply\n[lem-zl-bertini-finite-cover-curve]. Connectedness of the\nrestricted $Q$-torsor means that the image of $\\pi_1(C)$ acts\ntransitively on $Q$, hence is all of $Q$. It surjects onto each\nchosen reduction quotient. The finite matrix witnesses show that\nall the restricted geometric representations remain irreducible.\nThe curve and inclusion descend to a finite constant extension;\nthe restrictions inherit their Weil structures over that field.\nFor dimension one take $C=X$, with its given finite-field model.",
     "uses": [
      "def-wf-fundamental-representation",
-     "def-weil-pbc-qbar-category",
+     "thm-lisse-qlbar-representations",
+     "p-real-integral",
      "lem-zl-finite-matrix-irreducibility",
      "lem-zl-bertini-finite-cover-curve"
     ],
     "elementary": false
    }
   ],
-  "note": "the current blueprint (aligned 2026-10-15 with the six-functors notes) states or proves this differently; a worker who touches the node follows it"
+  "note": "the current blueprint (main-20261023, weil-conjectures-blueprint c9b5f3ad18) states or proves this differently; a worker who touches the node follows it"
  },
  "split_report": {
   "date": "2026-10-21",
@@ -230,5 +207,19 @@
   "group": "Q126",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q126-16bf3380b (reviewer sub-agent of L); spot-checked: Re-split delivery that answers the 2026-10-21 human note. Live and side-live still hold the base 8-step proof (4739 characters), so the item is not superseded, and neither it nor any cited node is in route-pivot-dropped. Every old step has a home: old steps 1-3 and the group-theoretic half of 6 move into the new node; old 4 becomes parent step 2 (lem-zl-bertini-finite-cover-curve states i∘φ=(id×σ)^m∘i directly, so the old descent computation was redundant); old 5 is step 3, with the explicit orbit-of-1 computation giving q(H)=Q; old 6 is step 4, with finite-level base change through thm-galois-fundamental, the def-pod-lisse limits and cor-galois-lisse-representations(2); old 7 and 8 are steps 5 and 6. The parent proof is 2341 characters, 2615 after the fix. New node lem-zl-common-irreducibility-detecting-cover is a true statement. Fibres become continuous E_j-representations by cor(2), with stable lattices. An invariant Q̄_ℓ-subspace descends to a finite L, so V_j⊗Q̄_ℓ is irreducible, and the old finite-matrix lemma then gives L_j and N_j. The kernels are open and normal, so q:Π→Q is a continuous surjection onto a finite group, and the regular Q-set gives a connected T by thm-galois-fundamental. If q(H)=Q, then H has the same image as Π at each finite level, so it acts irreducibly. Edge cases checked: r=0 (Q=1, T=X), rank 1, X a point. The node is statement-only, self-contained, sourced to the main-20261015 proof.md, has four searches and is strictly smaller than the item. rg -L over the DAG found no duplicate. Coefficient category: def-wf-fundamental-representation makes the geometric restriction a lisse Q̄_ℓ-sheaf of def-pod-lisse, which is the new node's input. The hypotheses of Bertini, transitivity and base change hold at steps 2-4. Tool uses thm-galois-fundamental, lem-galois-finite-etale-connected-object, lem-galois-transitive and cor-galois-lisse-representations are generic; accepted. Batch-5: def-pod-lisse-l-adic-sheaves and def-pod-l-adic-representations are general definitions, and cor-galois-lisse-representations is the generic lisse/π_1 equivalence, not part of the trace formula or Poincaré duality. All three were already in the base closure through the item's stmt_dep def-wf-fundamental-representation. A recomputed closure diff shows that only the new node is added; accepted. FIX (C4): delivered step 5 asserted a finite-field model C=C_1×F̄_q, φ=id×σ^m, which no cited node gives. It is rewritten to take φ and its equation from the Bertini conclusion of step 2, keeping the inherited Weil isomorphism as an elementary remark. Note: the report says the item's source now points to main-20261015 order 3176, but it is unchanged (master, order 2832).; 1 file(s) fixed by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q4",
+  "result": "pass",
+  "landing": "20261025T123541-L-1878963",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)",
+  "sorry_before": [
+   "AlgebraicGeometry.WeilSheaf.IsReal.isMixed"
+  ],
+  "sorry_after": []
  }
 }

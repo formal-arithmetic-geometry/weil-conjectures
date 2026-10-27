@@ -1,0 +1,307 @@
+{
+ "id": "lem-sfb-space-higher-image-etale-restriction",
+ "kind": "statement",
+ "title": "Higher module direct images commute with etale restriction on spaces",
+ "statement": "Let $S$ be a scheme [def-pc-scheme], let $f:X\\to Y$ and $g:Y'\\to Y$ be morphisms of algebraic spaces over $S$ [def-trf-algebraic-space], and suppose $g$ is etale. Put $X'=X\\times_YY'$, with projections $h:X'\\to X$ and $f':X'\\to Y'$ [lem-trf-space-fibre-products-etale-covers]. Use the small etale ringed topoi and module direct images of [def-trf-space-etale-module-functors]. For any sheaf $M$ of $\\mathcal O_X$-modules and any integer $q\\geq0$ there is a canonical natural isomorphism\n$$ (R^qf_*M)|_{Y'}\\;\\cong\\;R^qf'_*(M|_{X'}). $$\nHere higher direct images are the right derived functors of module direct image, computed by injective resolutions in the categories of all module sheaves. The restrictions are tensor pullbacks along $g$ and $h$, equivalently restrictions to the localized etale sites [lem-trf-space-etale-module-pushforward-restriction]. There is no quasi-coherence, properness or Noetherian assumption.",
+ "source": {
+  "document": "literature/stacks-project/spaces-properties.tex",
+  "place": "Tag 03LX, lemma-pushforward-etale-base-change-modules, higher direct image assertion."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-trf-algebraic-space",
+  "lem-trf-space-fibre-products-etale-covers",
+  "def-trf-space-etale-module-functors",
+  "lem-trf-space-etale-module-pushforward-restriction",
+  "def-weil-sheaf-of-modules-category",
+  "def-sp-left-exact-additive",
+  "def-sp-injective-resolutions",
+  "def-sfb-space-small-ringed-model",
+  "def-sfb-space-derived-module-calculus",
+  "def-sfb-space-derived-tensor-pullback"
+ ],
+ "proof": [
+  {
+   "text": "Present each small etale module category by the enlarged etale ringed site $\\mathcal C_Z$ of algebraic-space objects, chosen small in a common larger sheaf universe. The enlarged-site-model statement identifies the topoi, structure sheaves and module categories, and identifies an etale map with localization. The degree-zero restriction statement identifies both $g^*$ and $h^*$ with these module restrictions. The etale map $g$ is representable etale in the sense of [def-trf-algebraic-space], and it is chartwise etale: for a representable etale map $U\\to Y'$ from a scheme and a scheme $T\\to Y$, the fibre product $T\\times_YU=(T\\times_YY')\\times_{Y'}U$ [lem-trf-space-fibre-products-etale-covers] is a scheme etale over the scheme $T\\times_YY'$, which is etale over $T$, so $U\\to Y$ is representable etale. Hence $h$ is chartwise etale by the arbitrary-base-change clause of the chartwise-etale-permanence statement applied to $g$ and $f$; it is also representable etale, since $T\\times_XX'=T\\times_YY'$ for every scheme $T\\to X$. No surjectivity of $g$ is needed. The exact localized-module adjunction therefore makes both restrictions exact and supplies an exact left adjoint $j_!$ to each restriction. No scheme presentation for $Y'$ itself is required.",
+   "uses": [
+    "lem-trf-space-enlarged-etale-ringed-site-model",
+    "lem-trf-space-etale-module-pushforward-restriction",
+    "lem-trf-space-chartwise-etale-permanence",
+    "lem-pur-site-restriction-module-adjunction-exact",
+    "def-trf-algebraic-space",
+    "lem-trf-space-fibre-products-etale-covers"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-properties.tex",
+    "place": "Tags 03LR (lemma-pushforward-etale-base-change), proof, and 03LX (lemma-pushforward-etale-base-change-modules); ringed localization Tags 04LY, 04LZ; sites-modules.tex Tags 03DH, 03DJ (lemma-extension-by-zero-exact)"
+   }
+  },
+  {
+   "text": "Apply the right-adjoint-preserves-injectives statement to the exact functor $j_!$ left adjoint to $h^*$. Thus $h^*$ preserves injective module sheaves. This is preservation in the categories of modules over the restricted structure sheaf; no claim that arbitrary module pullback preserves injectives is used.",
+   "uses": [
+    "lem-pur-site-restriction-module-adjunction-exact",
+    "lem-sp-right-adjoint-preserves-injectives"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03DJ, lemma-extension-by-zero-exact, combined with the exact adjunction of Tag 03DH; the module version of the injective restriction used in spaces-properties.tex Tag 03LR"
+   }
+  },
+  {
+   "text": "On the small ringed-site presentations the category of modules is Grothendieck abelian by the ringed-site resolution-existence statement. Hence it has enough injectives by the Grothendieck-enough-injectives statement. The injective-resolution existence statement gives $M\\to I^\\bullet$ with $I^r=0$ for $r<0$. By Steps 1 and 2, $h^*M\\to h^*I^\\bullet$ is an injective resolution: exactness preserves the augmented exact sequence, and each $h^*I^r$ is injective. These facts apply also to the target module categories. The direct-image functors are the additive right adjoints of the tensor-pullback adjunction, hence preserve finite limits and are left exact.",
+   "uses": [
+    "prop-pur-kinjective-resolutions-exist",
+    "lem-sp-grothendieck-enough-injectives",
+    "lem-weil-pbc-left-exact-injective-resolution-degree-zero",
+    "def-trf-space-etale-module-functors"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 07A5, section-unbounded, first paragraph; injectives.tex Tag 079H (theorem-injective-embedding-grothendieck); derived.tex Tag 013K (lemma-injective-resolutions-exist), part (1)"
+   }
+  },
+  {
+   "text": "Write $\\beta_N:g^*f_*N\\xrightarrow{\\sim}f'_*h^*N$ for the cited ordinary module comparison. Apply it to $N=I^r$ in each degree. Naturality for $d^r:I^r\\to I^{r+1}$ says $f'_*h^*(d^r)\\circ\\beta_{I^r}=\\beta_{I^{r+1}}\\circ g^*f_*(d^r)$, so these maps give an isomorphism of complexes $\\beta_I:g^*f_*I^\\bullet\\xrightarrow{\\sim}f'_*h^*I^\\bullet$. They are maps of $\\mathcal O_{Y'}$-modules because the cited comparison is the identity on compatible chart sections with their restricted scalar action.",
+   "uses": [
+    "lem-trf-space-etale-module-pushforward-restriction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-properties.tex",
+    "place": "Tag 03LX, lemma-pushforward-etale-base-change-modules; apply the ordinary comparison in the injective-resolution argument of Tag 03LR"
+   }
+  },
+  {
+   "text": "The resolution comparison for right derived functors computes $R^qf_*M$ as $H^q(f_*I^\\bullet)$ and $R^qf'_*(h^*M)$ as $H^q(f'_*h^*I^\\bullet)$, using the resolution from Step 3. Exactness of $g^*$ and the exact-functor cohomology statement give the canonical isomorphism $g^*H^q(f_*I^\\bullet)\\cong H^q(g^*f_*I^\\bullet)$. Compose it with $H^q(\\beta_I)$ and the two resolution comparisons. This is the asserted isomorphism for each $q\\geq0$. In degree zero it is $\\beta_M$, since the augmented comparison commutes with $M\\to I^0$ and the degree-zero resolution identification is induced on kernels.",
+   "uses": [
+    "lem-weil-pbc-derived-functor-map-via-lift",
+    "lem-weil-pbc-exact-functor-complex-cohomology",
+    "lem-weil-pbc-left-exact-injective-resolution-degree-zero"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-properties.tex",
+    "place": "Tag 03LX and the injective-resolution proof of Tag 03LR; homology.tex Tag 010N (lemma-exact-functor); derived.tex Tags 05TD (lemma-left-exact-higher-derived), 013K"
+   }
+  },
+  {
+   "text": "For $a:M\\to N$, choose resolutions $I,J$ as in Step 3 and lift $a$ to $t:I\\to J$ by the injective-resolution lifting statement. Restriction gives a lift $h^*t$ of $h^*a$. Naturality of the ordinary comparison gives $f'_*h^*t\\circ\\beta_I=\\beta_J\\circ g^*f_*t$. Taking cohomology and using naturality of the exact-functor comparison makes the isomorphisms of Step 5 commute with $a$, because the map-via-lift statement identifies the right-derived maps with precisely these cohomology maps. Taking $a=\\mathrm{id}_M$ with two different resolutions proves that their formulas agree under the canonical resolution identifications; the same statement holds for every lift, so the formula is independent of that choice. Thus the comparison is canonical and natural in $M$. All constructions are in all module sheaves; none uses quasi-coherence or a finiteness hypothesis on $f$.",
+   "uses": [
+    "lem-weil-pbc-injective-resolution-lift-exists",
+    "lem-trf-space-etale-module-pushforward-restriction",
+    "lem-weil-pbc-exact-functor-complex-cohomology",
+    "lem-weil-pbc-derived-functor-map-via-lift"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 013P (lemma-morphisms-lift), part (2), and the injective-resolution computation of right derived morphisms; spaces-properties.tex Tag 03LX; homology.tex Tag 010N"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-trf-space-enlarged-etale-ringed-site-model",
+  "lem-trf-space-etale-module-pushforward-restriction",
+  "lem-trf-space-chartwise-etale-permanence",
+  "lem-pur-site-restriction-module-adjunction-exact",
+  "def-trf-algebraic-space",
+  "lem-trf-space-fibre-products-etale-covers",
+  "lem-sp-right-adjoint-preserves-injectives",
+  "prop-pur-kinjective-resolutions-exist",
+  "lem-sp-grothendieck-enough-injectives",
+  "lem-weil-pbc-left-exact-injective-resolution-degree-zero",
+  "def-trf-space-etale-module-functors",
+  "lem-weil-pbc-derived-functor-map-via-lift",
+  "lem-weil-pbc-exact-functor-complex-cohomology",
+  "lem-weil-pbc-injective-resolution-lift-exists"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/spaces-properties.tex",
+  "place": "Tag 03LX, lemma-pushforward-etale-base-change-modules, via the injective-resolution proof of Tag 03LR (lemma-pushforward-etale-base-change), with module restriction exactness supplied by sites-modules.tex Tags 03DH and 03DJ."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Higher direct image of a sheaf of structure sheaf modules on algebraic spaces commutes with etale localization on the base",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.restrictFunctor\", \"module\": \"Mathlib/AlgebraicGeometry/Modules/Sheaf\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} →\\n  (f : X ⟶ Y) → [AlgebraicGeometry.IsOpenImmersion f] → CategoryTheory.Functor Y.Modules X.Modules\", \"doc\": \"The functor from the category of sheaves of modules over scheme $ Y $ to the category of sheaves of modules over scheme $ X $, induced by an open immersion $ f : X \\to Y $. It is constructed by composi\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.restrictFunctorComp\", \"module\": \"Mathlib/AlgebraicGeometry/Modules/Sheaf\", \"type\": \"{X Y Z : AlgebraicGeometry.Scheme} →\\n  (f : X ⟶ Y) →\\n    (g : Y ⟶ Z) →\\n      [inst : AlgebraicGeometry.IsOpenImmersion f] →\\n        [inst_1 : AlgebraicGeometry.IsOpenImmersion g] →\\n          AlgebraicGeometry.Scheme.Modules.restrictFunctor (CategoryTheory.CategoryStruct.comp f g) ≅\\n            (Alge\", \"doc\": \"For two open immersions $ f : X \\\\to Y $ and $ g : Y \\\\to Z $ between schemes, the restriction functor for the composition $ g \\\\circ f $ is naturally isomorphic to the composition of the restriction fun\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.pushforward\", \"module\": \"Mathlib/AlgebraicGeometry/Modules/Sheaf\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → CategoryTheory.Functor X.Modules Y.Modules\", \"doc\": \"Given a morphism $ f : X \\to Y $ of schemes, this functor maps the category of sheaves of modules over the structure sheaf of $ X $ to the category of sheaves of modules over the structure sheaf of $ Y\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.pushforwardComp\", \"module\": \"Mathlib/AlgebraicGeometry/Modules/Sheaf\", \"type\": \"{X Y Z : AlgebraicGeometry.Scheme} →\\n  (f : X ⟶ Y) →\\n    (g : Y ⟶ Z) →\\n      (AlgebraicGeometry.Scheme.Modules.pushforward f).comp (AlgebraicGeometry.Scheme.Modules.pushforward g) ≅\\n        AlgebraicGeometry.Scheme.Modules.pushforward (CategoryTheory.CategoryStruct.comp f g)\", \"doc\": \"For any schemes $X, Y, Z$ and morphisms $f : X \\\\to Y$, $g : Y \\\\to Z$, the pushforward functor of sheaves of modules along the composition $g \\\\circ f$ is naturally isomorphic to the composition of the \"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.toRingCatSheafHom\", \"module\": \"Mathlib/AlgebraicGeometry/Modules/Presheaf\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} →\\n  (f : X ⟶ Y) →\\n    Y.ringCatSheaf ⟶\\n      ((TopologicalSpace.Opens.map f.base).sheafPushforwardContinuous RingCat (Opens.grothendieckTopology ↥Y)\\n            (Opens.grothendieckTopology ↥X)).obj\\n        X.ringCatSheaf\", \"doc\": \"Given a morphism $ f : X \\to Y $ of schemes, this function constructs the induced morphism between the ring sheaf of $ Y $ and the pushforward of the ring sheaf of $ X $ along the continuous base map $\"}\n  {\"name\": \"AlgebraicGeometry.StructureSheaf.toPushforwardStalk_comp_assoc\", \"module\": \"Mathlib/AlgebraicGeometry/Spec\", \"type\": \"∀ {R S : CommRingCat} (f : R ⟶ S) (p : PrimeSpectrum ↑R) {Z : CommRingCat}\\n  (h :\\n    ((TopCat.Presheaf.pushforward CommRingCat (AlgebraicGeometry.Spec.topMap f)).obj\\n            (AlgebraicGeometry.Spec.structureSheaf ↑S).val).stalk\\n        p ⟶\\n      Z),\\n  CategoryTheory.CategoryStruct.comp f\\n      \", \"doc\": \"Let $R$ and $S$ be commutative rings, and let $f: R \\\\to S$ be a ring homomorphism. Let $p$ be a prime ideal of $R$. This theorem establishes the commutativity of a diagram involving canonical maps to \"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.pullbackPushforwardAdjunction\", \"module\": \"Mathlib/AlgebraicGeometry/Modules/Sheaf\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} →\\n  (f : X ⟶ Y) → AlgebraicGeometry.Scheme.Modules.pullback f ⊣ AlgebraicGeometry.Scheme.Modules.pushforward f\", \"doc\": \"For any morphism $ f : X \\to Y $ of schemes, the pullback functor from the category of sheaves of modules over $ Y $'s structure sheaf to the category of sheaves of modules over $ X $'s structure sheaf\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.pseudofunctor_map_r\", \"module\": \"Mathlib/AlgebraicGeometry/Modules/Sheaf\", \"type\": \"∀ {X Y : CategoryTheory.LocallyDiscrete AlgebraicGeometry.Schemeᵒᵖ} (f : X ⟶ Y),\\n  (AlgebraicGeometry.Scheme.Modules.pseudofunctor.map f).r =\\n    (AlgebraicGeometry.Scheme.Modules.pushforward f.as.unop).toCatHom\", \"doc\": \"For any morphism $ f : X \\to Y $ of schemes, the right adjoint component of the pseudofunctor's action on $ f $ equals the pushforward functor $ f_* $ between the module categories of $ X $ and $ Y $.\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits give ordinary scheme module pushforward, open restriction, stalk localization or stability of etaleness, not higher direct image base change on algebraic spaces"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "In a cartesian square of algebraic spaces with etale base map the derived pushforward restricted to the new base equals pushforward of the restricted module",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.pushforward_map_app\", \"module\": \"Mathlib/AlgebraicGeometry/Modules/Sheaf\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} {M N : X.Modules} (f : X ⟶ Y) (φ : M ⟶ N) (U : Y.Opens),\\n  AlgebraicGeometry.Scheme.Modules.Hom.app ((AlgebraicGeometry.Scheme.Modules.pushforward f).map φ) U =\\n    AlgebraicGeometry.Scheme.Modules.Hom.app φ ((TopologicalSpace.Opens.map f.base).obj U)\", \"doc\": \"For any morphism $\\\\phi: M \\\\to N$ of sheaves of modules over a scheme $X$ and any open subset $U \\\\subseteq Y$, the component of the pushforward $f_*\\\\phi$ at $U$ equals the component of $\\\\phi$ at the pr\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.pushforward_obj_presheaf_map\", \"module\": \"Mathlib/AlgebraicGeometry/Modules/Sheaf\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} {M : X.Modules} (f : X ⟶ Y) {U V : Y.Opens} (i : U ⟶ V),\\n  ((AlgebraicGeometry.Scheme.Modules.pushforward f).obj M).presheaf.map i.op =\\n    M.presheaf.map ((TopologicalSpace.Opens.map f.base).map i).op\", \"doc\": \"For a morphism $ f : X \\\\to Y $ of schemes and a sheaf of modules $ M $ over $ X $, the restriction map of the pushforward sheaf $ f_*M $ on an inclusion $ U \\\\subset V $ in $ Y $'s open sets is equal t\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.pushforwardComp\", \"module\": \"Mathlib/AlgebraicGeometry/Modules/Sheaf\", \"type\": \"{X Y Z : AlgebraicGeometry.Scheme} →\\n  (f : X ⟶ Y) →\\n    (g : Y ⟶ Z) →\\n      (AlgebraicGeometry.Scheme.Modules.pushforward f).comp (AlgebraicGeometry.Scheme.Modules.pushforward g) ≅\\n        AlgebraicGeometry.Scheme.Modules.pushforward (CategoryTheory.CategoryStruct.comp f g)\", \"doc\": \"For any schemes $X, Y, Z$ and morphisms $f : X \\\\to Y$, $g : Y \\\\to Z$, the pushforward functor of sheaves of modules along the composition $g \\\\circ f$ is naturally isomorphic to the composition of the \"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.pullbackPushforwardAdjunction\", \"module\": \"Mathlib/AlgebraicGeometry/Modules/Sheaf\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} →\\n  (f : X ⟶ Y) → AlgebraicGeometry.Scheme.Modules.pullback f ⊣ AlgebraicGeometry.Scheme.Modules.pushforward f\", \"doc\": \"For any morphism $ f : X \\to Y $ of schemes, the pullback functor from the category of sheaves of modules over $ Y $'s structure sheaf to the category of sheaves of modules over $ X $'s structure sheaf\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.pullback\", \"module\": \"Mathlib/AlgebraicGeometry/Modules/Sheaf\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → CategoryTheory.Functor Y.Modules X.Modules\", \"doc\": \"Given a morphism $ f : X \\to Y $ of schemes, this defines the pullback functor from the category of sheaves of modules over $ Y $'s structure sheaf to the category of sheaves of modules over $ X $'s st\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.pseudofunctor_map_r\", \"module\": \"Mathlib/AlgebraicGeometry/Modules/Sheaf\", \"type\": \"∀ {X Y : CategoryTheory.LocallyDiscrete AlgebraicGeometry.Schemeᵒᵖ} (f : X ⟶ Y),\\n  (AlgebraicGeometry.Scheme.Modules.pseudofunctor.map f).r =\\n    (AlgebraicGeometry.Scheme.Modules.pushforward f.as.unop).toCatHom\", \"doc\": \"For any morphism $ f : X \\to Y $ of schemes, the right adjoint component of the pseudofunctor's action on $ f $ equals the pushforward functor $ f_* $ between the module categories of $ X $ and $ Y $.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.pushforwardComp_hom_app_app\", \"module\": \"Mathlib/AlgebraicGeometry/Modules/Sheaf\", \"type\": \"∀ {X Y Z : AlgebraicGeometry.Scheme} {M : X.Modules} (f : X ⟶ Y) (g : Y ⟶ Z) (U : Z.Opens),\\n  AlgebraicGeometry.Scheme.Modules.Hom.app ((AlgebraicGeometry.Scheme.Modules.pushforwardComp f g).hom.app M) U =\\n    CategoryTheory.CategoryStruct.id\\n      ((((AlgebraicGeometry.Scheme.Modules.pushforward f)\", \"doc\": \"For any open subset $U \\\\subseteq Z$, the component of the natural isomorphism between the pushforward functors composed along $g \\\\circ f$ and the composition of pushforwards along $g$ and $f$, evaluat\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.pushforward_obj_obj\", \"module\": \"Mathlib/AlgebraicGeometry/Modules/Sheaf\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) (M : X.Modules) (U : Y.Opens),\\n  ((AlgebraicGeometry.Scheme.Modules.pushforward f).obj M).presheaf.obj (Opposite.op U) =\\n    M.presheaf.obj (Opposite.op ((TopologicalSpace.Opens.map f.base).obj U))\", \"doc\": \"For any morphism $ f : X \\to Y $ of schemes, any sheaf of modules $ M $ over the structure sheaf of $ X $, and any open subset $ U $ of $ Y $, the sections of the pushforward sheaf $ f_*M $ over $ U $ \"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits give ordinary scheme module pushforward, open restriction, stalk localization or stability of etaleness, not higher direct image base change on algebraic spaces"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"SheafOfModules\", \"rightDerived\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits give ordinary scheme module pushforward, open restriction, stalk localization or stability of etaleness, not higher direct image base change on algebraic spaces"
+  },
+  {
+   "tool": "grep",
+   "query": "higherDirectImage.*restrict|rightDerived.*[Ee]tale|etale.*baseChange",
+   "results": "[grep] OK 2 hit(s)\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale.lean\", \"line\": \"74\", \"text\": \"instance etale_isStableUnderBaseChange : MorphismProperty.IsStableUnderBaseChange @Etale :=\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale.lean\", \"line\": \"75\", \"text\": \"  HasRingHomProperty.isStableUnderBaseChange RingHom.Etale.isStableUnderBaseChange\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits give ordinary scheme module pushforward, open restriction, stalk localization or stability of etaleness, not higher direct image base change on algebraic spaces"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Higher direct image of a sheaf of structure sheaf modules on algebraic spaces commutes with etale localization on the base",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.StructureSheaf.localizationToStalk_stalkSpecializes_apply\", \"module\": \"Mathlib.AlgebraicGeometry.StructureSheaf\", \"type\": \"∀ {R : Type u_1} [inst : CommRing R] {x y : PrimeSpectrum R} (h : x ⤳ y)\\n  (x_1 : CategoryTheory.ToType { carrier := Localization.AtPrime y.asIdeal, commRing := OreLocalization.instCommRing }),\\n  (CategoryTheory.ConcreteCategory.hom ((AlgebraicGeometry.Spec.structureSheaf R).presheaf.stalkSpecialize\", \"doc\": \"For a commutative ring $ R $ and points $ x, y $ in $\\\\operatorname{Spec}(R)$ where $ x $ specializes to $ y $, the composition of the specialization-induced morphism $\\\\mathcal{O}_{\\\\operatorname{Spec}(\"}\n  {\"name\": \"AlgebraicGeometry.StructureSheaf.localizationToStalk_stalkSpecializes\", \"module\": \"Mathlib.AlgebraicGeometry.StructureSheaf\", \"type\": \"{R : Type*} [CommRing R] {x y : PrimeSpectrum R} (h : x ⤳ y) :\\n  StructureSheaf.localizationToStalk R y ≫ (structureSheaf R).presheaf.stalkSpecializes h =\\n    CommRingCat.ofHom (PrimeSpectrum.localizationMapOfSpecializes h) ≫ StructureSheaf.localizationToStalk R x\", \"doc\": \"Given a commutative ring $ R $, prime ideals $ \\\\mathfrak{p} $ and $ \\\\mathfrak{q} $ in $ \\\\operatorname{Spec}(R) $ with $ \\\\mathfrak{p} $ specializing to $ \\\\mathfrak{q} $, the composition of the canonica\"}\n  {\"name\": \"AlgebraicGeometry.LocallyRingedSpace.𝒪\", \"module\": \"Mathlib.Geometry.RingedSpace.LocallyRingedSpace\", \"type\": \": Sheaf CommRingCat X.toTopCat\", \"doc\": \"The sheaf $\\\\mathcal{O}_X$ of commutative rings on the underlying topological space of a locally ringed space $X$, where every stalk is a local ring. This is the canonical sheaf associated to the local\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.restrictStalkNatIso\", \"module\": \"Mathlib.AlgebraicGeometry.Modules.Sheaf\", \"type\": \"(f : X ⟶ Y) [IsOpenImmersion f] (x : X) :\\n  restrictFunctor f ⋙ toPresheaf _ ⋙ TopCat.Presheaf.stalkFunctor _ x ≅\\n    toPresheaf _ ⋙ TopCat.Presheaf.stalkFunctor _ (f x)\", \"doc\": \"For an open immersion of schemes $f: X \\\\to Y$ and a point $x \\\\in X$, this definition establishes a natural isomorphism between the functor that computes the stalk at $x$ of the pullback of a sheaf of \"}\n  {\"name\": \"AlgebraicGeometry.LocallyRingedSpace.isLocalHomStalkMap'\", \"module\": \"Mathlib.Geometry.RingedSpace.LocallyRingedSpace\", \"type\": \"{X Y : LocallyRingedSpace.{u}} (f : X ⟶ Y) (x : X) : IsLocalHom (f.toHom.stalkMap x).hom\", \"doc\": \"For any morphism $f : X \\\\to Y$ between two locally ringed spaces, and for any point $x \\\\in X$, the ring homomorphism $\\\\mathcal{O}_{Y, f(x)} \\\\to \\\\mathcal{O}_{X, x}$ induced by $f$ at $x$ is a local rin\"}\n  {\"name\": \"AlgebraicGeometry.StructureSheaf.comap_basicOpen\", \"module\": \"Mathlib.AlgebraicGeometry.StructureSheaf\", \"type\": \"(f : R →+* S) (x : R) :\\n  comap f (PrimeSpectrum.basicOpen x) (PrimeSpectrum.basicOpen (f x)) (PrimeSpectrum.comap_basicOpen f x).le =\\n    IsLocalization.map (M := .powers x) (T := .powers (f x)) _ f (Submonoid.powers_le.mpr (Submonoid.mem_powers _))\", \"doc\": \"Let $f: R \\\\to S$ be a homomorphism of commutative rings, and let $x \\\\in R$. The `comap` associated with $f$ provides a ring homomorphism from the ring of sections of the structure sheaf on $\\\\operatorn\"}\n  {\"name\": \"AlgebraicGeometry.StructureSheaf.localizationToStalk\", \"module\": \"Mathlib.AlgebraicGeometry.StructureSheaf\", \"type\": \"(x : PrimeSpectrum.Top R) : CommRingCat.of (Localization.AtPrime x.asIdeal) ⟶ (structureSheaf R).presheaf.stalk x\", \"doc\": \"For a commutative ring $ R $ and a point $ x $ in its prime spectrum $ \\\\operatorname{Spec}(R) $, this is the canonical ring homomorphism from the localization $ R_{\\\\mathfrak{p}} $ (at the prime ideal \"}\n  {\"name\": \"RingHom.Etale.ofLocalizationSpanTarget\", \"module\": \"Mathlib.RingTheory.RingHom.Etale\", \"type\": \": OfLocalizationSpanTarget Etale\", \"doc\": \"If $ S $ is a localization of a commutative ring $ R $, then the natural ring homomorphism $ R \\to S $ is étale, as $ S $ is finitely presented as an $ R $-algebra and the module of Kähler differential\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits give ordinary scheme module pushforward, open restriction, stalk localization or stability of etaleness, not higher direct image base change on algebraic spaces"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"SheafOfModules\", \"rightDerived\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern ordinary scheme pushforward, scheme etaleness or stalk restriction, not higher module direct images on algebraic spaces"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Higher direct images of structure sheaf modules on algebraic spaces commute with etale base change",
+   "results": "[leanfinder] OK 8 hit(s)\nAlgebraicGeometry.Scheme.Modules.instIsRightAdjointPushforward\nAlgebraicGeometry.Scheme.Modules.pushforwardComp_hom_app_app\nAlgebraicGeometry.Scheme.Modules.pushforward\nAlgebraicGeometry.Scheme.Modules.pushforwardComp\nAlgebraicGeometry.Scheme.Modules.pullback\nAlgebraicGeometry.Scheme.Modules.pullbackPushforwardAdjunction\nAlgebraicGeometry.Scheme.Modules.pullbackComp\nAlgebraicGeometry.Scheme.Modules.pseudofunctor_map_r",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern ordinary scheme pushforward, scheme etaleness or stalk restriction, not higher module direct images on algebraic spaces"
+  },
+  {
+   "tool": "grep",
+   "query": "higherDirectImage.*restrict|rightDerived.*[Ee]tale|AlgebraicSpace.*[Rr]estrict",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern ordinary scheme pushforward, scheme etaleness or stalk restriction, not higher module direct images on algebraic spaces"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Higher direct images of structure sheaf modules on algebraic spaces commute with etale base change",
+   "results": "[leansearch] OK 8 hit(s)\nAlgebraicGeometry.Scheme.Modules.instAdditivePushforward\nAlgebraicGeometry.IsEtale.instIsStableUnderBaseChangeScheme\nAlgebraicGeometry.Scheme.etalePretopology\nAlgebraicGeometry.Scheme.Modules.Hom\nAlgebraicGeometry.Scheme.Etale\nAlgebraicGeometry.Scheme.Modules.restrictStalkNatIso\nAlgebra.Etale.baseChange\nIsBaseChange.directSumPow",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern ordinary scheme pushforward, scheme etaleness or stalk restriction, not higher module direct images on algebraic spaces"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Restriction to a localized ringed site preserves injective module resolutions and computes higher pushforward after etale localization",
+   "results": "[leanfinder] OK 8 hit(s)\nPresheafOfModules.IsLocallyInjective\nPresheafOfModules.instIsLocallyInjectiveToSheafify\nAlgebra.FormallyEtale.localization_map\nSheafOfModules.bijective_pushforwardSections\nCategoryTheory.Sheaf.isLocallyInjective_forget\nCategoryTheory.Presheaf.isLocallyInjective_of_isLocallyInjective_fac\nAlgebra.FormallyEtale.localization_base\nCategoryTheory.Presheaf.isLocallyInjective_of_isLocallyInjective",
+   "date": "2026-10-23",
+   "verdict": "no match: local injectivity of morphisms and ring localizations are different from injective objects or higher direct image comparison"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-proper-space-curve-qcoh-bound",
+  "date": "2026-10-23",
+  "group": "Q74"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Stable genus and smooth-family open loci in curve families. Supporting input: 0E76 proof via lemma-stable: the relative dualizing sheaf used to detect fibrewise stability by ampleness. Supporting input: Quasi-coherent cohomological dimension of algebraic-space curve families. Supporting cohomology input: descent of the higher direct image vanishing along the scheme-producing etale covering.",
+   "via": [
+    "lem-sfb-proper-space-curve-qcoh-bound",
+    "lem-sfb-nodal-relative-dualizing-line",
+    "lem-sfb-stable-and-smooth-family-open-loci",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-space-higher-image-etale-restriction",
+  "worker": "stage1",
+  "summary": "Q78: proved higher-image etale restriction by localizing enlarged ringed sites, preserving injective resolutions using exact extension by zero, applying the existing degree-zero comparison termwise, and taking cohomology; wrote the map-lift argument for naturality and choice independence. All non-elementary inputs already occur in the DAG, so no new nodes. Statement unchanged; added the generic definitions of module sheaves, right derived functors and resolutions to statement dependencies.",
+  "blueprint": "Supporting cohomological descent input in the imported ancestry: det-thm-sf-ctf-stability-direct-images, proof (3), through the algebraic-space curve-family cohomological bound. The current latest blueprint places this direct-image clause in sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md, paragraph (3). Historical from/via ancestry is preserved.",
+  "tool_uses": [
+   {
+    "node": "lem-trf-space-enlarged-etale-ringed-site-model",
+    "why": "Generic presentation and localization of small etale ringed topoi of spaces; the unit has no replacement for this site-theoretic input."
+   },
+   {
+    "node": "lem-trf-space-etale-module-pushforward-restriction",
+    "why": "Existing degree-zero module comparison, including identification of etale tensor pullback with restriction, used before deriving it."
+   },
+   {
+    "node": "lem-pur-site-restriction-module-adjunction-exact",
+    "why": "Generic localized ringed-site restriction and its exact left adjoint, for arbitrary structure-ring modules."
+   },
+   {
+    "node": "prop-pur-kinjective-resolutions-exist",
+    "why": "Only the general ringed-site module category being Grothendieck abelian is used, to obtain enough injectives; not a replacement for the unit direct-image argument."
+   },
+   {
+    "node": "lem-trf-space-chartwise-etale-permanence",
+    "why": "Generic arbitrary-base-change stability of etale maps of spaces, requiring no jointly surjective covering hypothesis."
+   },
+   {
+    "node": "lem-trf-space-fibre-products-etale-covers",
+    "why": "Generic algebraic-space fibre products, used only to check in Step 1 that the etale g is chartwise etale and that its base change h is representable etale."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-trf-space-enlarged-etale-ringed-site-model",
+  "lem-trf-space-etale-module-pushforward-restriction",
+  "lem-pur-site-restriction-module-adjunction-exact",
+  "prop-pur-kinjective-resolutions-exist",
+  "lem-trf-space-chartwise-etale-permanence",
+  "lem-trf-space-fibre-products-etale-covers"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q78-69caef26c",
+  "group": "Q78",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q78-69caef26c (reviewer sub-agent of L); spot-checked: I read the item in full: statement unchanged, three generic definition stmt_deps added, six steps, no new nodes. Live is still unsplit, so this is not superseded. The statement matches Stacks 03LX (spaces-properties l.4421) hypothesis by hypothesis, and the proof is 03LR(2) written out: localization on the enlarged site, restriction exact with exact j_! so it preserves injectives, the degree-zero β applied termwise to an injective resolution, cohomology via map-via-lift and exact-functor H^q, and naturality and independence via the lift lemma. Every cited statement says what its step takes from it. The smallness hypothesis of prop-pur-kinjective-resolutions-exist holds by the size convention. Edge cases checked: q=0 gives β_M, f=id, Y' empty, non-surjective g, M=0. No duplicate in the DAG; 03LX on lem-trf-space-etale-module-pushforward-restriction is degree 0 only. Batch-5: lem-trf-space-enlarged-etale-ringed-site-model and lem-trf-space-chartwise-etale-permanence are generic algebraic-space site and étale-permanence foundations. Their closures (328 and 292 nodes) contain no trace-formula theorem, no Poincaré duality node and no nt-assume leaf, so I accept them as outside the assumptions. FIX: Step 1 applied the chartwise base-change clause to g without showing that the representable-étale g is chartwise étale. I added the two-line argument via T×_Y U=(T×_Y Y')×_{Y'} U, plus representability of h via T×_X X'=T×_Y Y'. I added def-trf-algebraic-space and lem-trf-space-fibre-products-etale-covers to the step's uses and proof_deps, and a tool_use entry for the fibre-products node. Nothing else changed.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SpaceHigherImageEtaleRestriction",
+  "declaration": "AlgebraicGeometry.AlgebraicSpace.derived_moduleDirectImage_etale_restriction",
+  "declarations": [
+   "AlgebraicGeometry.AlgebraicSpace.tensorEtaleModuleBaseChange",
+   "AlgebraicGeometry.AlgebraicSpace.smallTensorEtaleModuleBaseChange",
+   "AlgebraicGeometry.AlgebraicSpace.derived_moduleDirectImage_etale_restriction",
+   "AlgebraicGeometry.AlgebraicSpace.higher_moduleDirectImage_etale_restriction"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/SpaceHigherImageEtaleRestriction.lean",
+  "statement": "theorem derived_moduleDirectImage_etale_restriction (f : X ⟶ Y) (g : Y' ⟶ Y) (h : X' ⟶ X) (f' : X' ⟶ Y') (hg : IsEtale g.hom.hom) (hp : IsPullback h.hom f'.hom f.hom g.hom) : ∃! beta : derivedDirectImage f ⋙ (smallModuleTensorPullback g).rightDerivedFunctor ≅ (smallModuleTensorPullback h).rightDerivedFunctor ⋙ derivedDirectImage f', ∀ K : HomotopyCategory X.SmallModules (ComplexShape.up ℤ), (Functor.rightDerivedFunctorCompUnit (smallModuleDirectImage f) (smallModuleTensorPullback g)).app K ≫ beta.hom.app (DerivedCategory.Qh.obj K) = DerivedCategory.Qh.map ((NatTrans.mapHomotopyCategory (smallTensorEtaleModuleBaseChange f g h f' hg hp).hom (.up ℤ)).app K) ≫ (Functor.rightDerivedFunctorCompUnit (smallModuleTensorPullback h) (smallModuleDirectImage f')).app K",
+  "branch": "newtargets-dag",
+  "by": "Q35",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "The main declaration is the uniquely right-derived-unit-normalized comparison; higher_moduleDirectImage_etale_restriction states its per-degree natural isomorphism on all modules. The existing equivalent small ringed module models preserve the original coefficient universe. The two helper definitions transport the recorded chart-normalized ordinary comparison using the fixed module equivalences. Added only the three already-landed statement dependencies providing these small-model and derived interfaces; the mathematical node statement is unchanged."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-62709c248",
+  "group": "Q35",
+  "result": "pass",
+  "note": "Item node vs side-live: only new lean record and three landed, used stmt_deps (small-ringed-model, derived-module-calculus, derived-tensor-pullback); all 11 dep records byte-identical; lean.statement verbatim. Matches Stacks 03LX clause by clause: any S, IsPullback square, IsEtale g without surjectivity, all modules via the landed universe-u small-model equivalence, q:ℕ incl. 0, R^q = H^q of K-injective derivedDirectImage on M[0], tensor-pullback restrictions, no QCoh/proper/Noetherian. Main theorem: ∃! beta pinned against rightDerivedFunctorCompUnit and Qh.map of the ordinary comparison; true and canonical (g^* exact; h^* preserves K-injectives via exact j_!). Derived-form rule satisfied with per-degree companion. Helper defs have real data; .choose only on witnesses pinned by chart projections or local tensors. Proofs sorry; source+blueprint docstrings with six proof steps; report sections present. Not recompiled, no files changed. Advisory: per-degree companion is Nonempty (canonical map is H^q of the main beta); derived restriction is R(g^*) rather than derivedTensorPullback (canonically isomorphic for étale g)."
+ }
+}

@@ -1,0 +1,249 @@
+{
+ "kind": "statement",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tag 00K1, proposition-graded-hilbert-polynomial, first two middle paragraphs: induction on the nilpotence exponent, then the largest x-nilpotent submodule and the x-injective quotient. The uniform exponent and homogeneity are the explicit graded finite-generation argument in the returned eight-step proof."
+ },
+ "proof": [
+  {
+   "text": "For every finite graded module $V$ under consideration, choose finite generators and replace them by all their homogeneous components $v_j\\in V_{a_j}$. Their $S$-span contains the original generators, so still equals $V$. Choose degree-one algebra generators $z_1,\\ldots,z_t$ using [def-pc-standard-graded-algebra]. Projecting a generating expression to degree $n$ shows that $V_n$ is spanned by the monomials $z_1^{e_1}\\cdots z_t^{e_t}v_j$ with $\\sum e_i=n-a_j$. There are finitely many such tuples, also when $t=0$; hence every $V_n$ is finite-dimensional.",
+   "uses": [
+    "def-pc-standard-graded-algebra"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00K0, lemma-graded-module-fg, homogeneous-generator monomial argument preceding 00K1."
+   }
+  },
+  {
+   "text": "Prove the first assertion by induction on $r\\ge1$, simultaneously for all finite graded $L$ with $x^rL=0$. The case $r=1$ is the hypothesis. For $r>1$ put $A=xL$ and $B=L/xL$. Images under multiplication by $x$ of finite generators generate $A$, and images of generators of $L$ generate $B$. If $l=\\sum l_n$, then the degree-$n$ component of $xl$ is $xl_{n-1}$ (zero for $n=0$). Thus $A$ is graded with $A_n=xL_{n-1}$ for $n\\ge1$ and $A_0=0$. Give $B$ the grading $B_n=\\operatorname{im}(L_n\\to B)$: every element is a sum of such images; if a sum of homogeneous representatives lies in $A$, each component lies in $A$, proving directness. Scalar multiplication respects these degrees. We have $x^{r-1}A=0$ and $xB=0$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00K1, proposition-graded-hilbert-polynomial, first middle paragraph: explicit choice of the smaller-exponent modules."
+   }
+  },
+  {
+   "text": "For each $n$, the maps induced by inclusion and quotient give $0\\to A_n\\to L_n\\to B_n\\to0$: the last map is onto by the definition of $B_n$, and its kernel is $L_n\\cap A=A_n$. Step 1 makes these spaces finite-dimensional. A basis of $A_n$ together with arbitrary lifts of a basis of $B_n$ is a basis of $L_n$: projecting proves independence of the lifted vectors modulo $A_n$, and subtracting their linear combination leaves an element of $A_n$. By the induction hypothesis applied to $A$ with exponent $r-1$ and the original hypothesis applied to $B$, choose eventual polynomials $P_A,P_B$ and thresholds $d_A,d_B$. Therefore $P_L=P_A+P_B$ works for $n\\ge\\max(d_A,d_B)$. This completes the induction, including zero modules.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00K1, proposition-graded-hilbert-polynomial, nilpotent induction and degreewise additive relation."
+   }
+  },
+  {
+   "text": "Now let $M$ be any finite graded module and put $T=\\{m:\\exists r\\ge1,\\ x^rm=0\\}$. It contains zero. If $x^am=0$ and $x^bn=0$, then $x^{\\max(a,b)}(m+n)=0$, and for $s\\in S$, commutativity gives $x^a(sm)=s(x^am)=0$; additive inverses are treated the same way. Thus $T$ is an $S$-submodule. If $m=\\sum m_n\\in T$ with $x^rm=0$, its summands $x^rm_n$ have distinct degrees $n+r$, so directness implies $x^rm_n=0$ for every $n$. Consequently $T=\\bigoplus_n(T\\cap M_n)$ is graded.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00K1, proposition-graded-hilbert-polynomial, second middle paragraph: construction and homogeneity of the largest nilpotent submodule."
+   }
+  },
+  {
+   "text": "Since $S$ is Noetherian and $M$ is finite, [lem-weil-pbc-noetherian-submodule-finite] applied to the submodule $T\\subseteq M$ proves that $T$ is a finite $S$-module. These are exactly the ring and module hypotheses of the cited statement.",
+   "uses": [
+    "lem-weil-pbc-noetherian-submodule-finite"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00IK, lemma-Noetherian-basic, second assertion, used to justify the largest nilpotent submodule in 00K1."
+   }
+  },
+  {
+   "text": "Choose generators $t_1,\\ldots,t_h$ of $T$. For each $j$ choose $r_j\\ge1$ with $x^{r_j}t_j=0$, and set $r=\\max(\\{1\\}\\cup\\{r_j:1\\le j\\le h\\})$. Then $x^rt_j=0$ for every generator, hence $x^rT=0$ by $S$-linearity. The already proved nilpotent assertion applies to the finite graded module $T$ and gives $P_T$ and $d_T$. If $T=0$ the empty generating list permits $r=1$ and $P_T=0$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00K1, proposition-graded-hilbert-polynomial, largest nilpotent submodule: uniform exponent made explicit using finite generators."
+   }
+  },
+  {
+   "text": "Images of finite generators of $M$ generate $N=M/T$. Put $N_n=\\operatorname{im}(M_n\\to N)$. The sum of these subspaces is all of $N$; if $\\sum m_n\\in T$, step 4 gives $m_n\\in T$ for each $n$, proving that the sum is direct. For $s\\in S_i$ and $m\\in M_j$, $s\\overline m=\\overline{sm}\\in N_{i+j}$, so this is the asserted quotient grading. Finally, if $x\\overline m=0$, then $xm\\in T$; some $a\\ge1$ satisfies $x^a(xm)=0$. Thus $x^{a+1}m=0$, so $m\\in T$ and $\\overline m=0$. Multiplication by $x$ on $N$ is injective. For $x=0$ this says $T=M$ and $N=0$, as required.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00K1, proposition-graded-hilbert-polynomial, second middle paragraph: quotient by the largest nilpotent submodule has injective x-action."
+   }
+  }
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tags 00K0 (lemma-graded-module-fg), 00K1 (proposition-graded-hilbert-polynomial, nilpotent induction and largest nilpotent submodule), and 00IK (lemma-Noetherian-basic). Explicit homogeneous-component and finite-generator arguments fill the source omissions."
+ },
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-standard-graded-hilbert-function",
+  "date": "2026-10-22",
+  "group": "Q112"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "id": "lem-trf-graded-power-torsion-polynomial-devissage",
+ "title": "Nilpotent devissage and bounded homogeneous power torsion",
+ "statement": "Let $k$ be a field, let $S=\\bigoplus_{n\\ge0}S_n$ be a standard graded $k$-algebra [def-pc-standard-graded-algebra] which is Noetherian [def-weil-pbc-noetherian-ring], and fix $x\\in S_1$. A nonnegatively graded $S$-module $L=\\bigoplus_{n\\ge0}L_n$ means a direct sum of $k$-subspaces with $S_iL_j\\subseteq L_{i+j}$; finite means finitely generated as an $S$-module [def-weil-finitely-generated-module]. Assume that for every such finite $L$ satisfying $xL=0$ there are $P_L\\in\\mathbf Q[X]$ and $d_L\\in\\mathbf N$ with $\\dim_kL_n=P_L(n)$ for all $n\\ge d_L$. Then the same conclusion holds for every finite nonnegatively graded $L$ satisfying $x^rL=0$ for some integer $r\\ge1$. Moreover, for every finite nonnegatively graded $S$-module $M$, the subset $T=\\{m\\in M:\\exists r\\ge1,\\ x^rm=0\\}$ is a finite graded $S$-submodule, with grading $T_n=T\\cap M_n$, and there is a single integer $r\\ge1$ such that $x^rT=0$. There are $P_T\\in\\mathbf Q[X]$ and $d_T\\in\\mathbf N$ with $\\dim_kT_n=P_T(n)$ for all $n\\ge d_T$. The quotient $N=M/T$, graded by $N_n=\\operatorname{im}(M_n\\to M/T)$, is finite and multiplication by $x$ on $N$ is injective. Zero modules and the zero polynomial are allowed.",
+ "stmt_deps": [
+  "def-pc-standard-graded-algebra",
+  "def-weil-pbc-noetherian-ring",
+  "def-weil-finitely-generated-module"
+ ],
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For a finite nonnegatively graded module over a Noetherian standard graded algebra and a degree one element x, its x power torsion is a finite graded submodule killed by one uniform power; eventual polynomial Hilbert functions for modules killed by x imply the same for this torsion submodule",
+   "results": "{\"t\": \"2026-10-22T06:09:19Z\", \"tool\": \"leanfinder\", \"query\": \"For a finite nonnegatively graded module over a Noetherian standard graded algebra and a degree one element x, its x power torsion is a finite graded submodule killed by one uniform power; eventual polynomial Hilbert functions for modules killed by x imply the same for this torsion submodule\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Submodule.isTorsion'_powers_iff\", \"Ideal.iInf_pow_smul_eq_bot_of_isTorsionFree\", \"Submodule.isInternal_prime_power_torsion\", \"Submodule.exists_isInternal_prime_power_torsion\", \"Ideal.iInf_pow_smul_eq_bot_of_noZeroSMulDivisors\", \"Ideal.exists_pow_inf_eq_pow_smul\", \"Submodule.isInternal_prime_power_torsion_of_is_torsion_by_ideal\", \"Submodule.isInternal_prime_power_torsion_of_pid\"], \"digest\": \"94aa0b72e0b1a8f5\"}; Read Algebra/Module/Torsion/PrimaryComponent.lean:49-64 and the returned torsion/filtration signatures. Ideal.primaryComponent gives an ungraded power-torsion construction; no hit states the graded nilpotent Hilbert-function devissage or its polynomial conclusion. Ideal.IsNilpotent.induction_on is an induction principle for ideals, not this module assertion.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"torsionBySet\"",
+   "results": "{\"t\": \"2026-10-22T06:09:09Z\", \"tool\": \"loogle\", \"query\": \"\\\"torsionBySet\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"Module.IsTorsionBySet\", \"Submodule.torsionBySet\", \"Module.isTorsionBySet_singleton_iff\", \"Module.isTorsionBySet_of_subset\", \"Module.isTorsionBySet_annihilator\", \"Submodule.torsionBySet_singleton_eq\", \"Module.isTorsionBySet_iff_is_torsion_by_span\", \"Submodule.torsionBySet_univ\"], \"digest\": \"33dc1b9d1befebd4\"}; Read Algebra/Module/Torsion/PrimaryComponent.lean:49-64 and the returned torsion/filtration signatures. Ideal.primaryComponent gives an ungraded power-torsion construction; no hit states the graded nilpotent Hilbert-function devissage or its polynomial conclusion. Ideal.IsNilpotent.induction_on is an induction principle for ideals, not this module assertion.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "torsionBySet|IsNilpotent|isTorsionBySet",
+   "results": "{\"t\": \"2026-10-22T06:09:08Z\", \"tool\": \"grep\", \"query\": \"torsionBySet|IsNilpotent|isTorsionBySet\", \"sub\": \"Algebra/Module\", \"ok\": true, \"n_hits\": 16, \"note\": \"\", \"top\": [\"Mathlib/Algebra/Module/PID.lean\", \"Mathlib/Algebra/Module/Torsion/Basic.lean\", \"Mathlib/Algebra/Module/Torsion/Basic.lean\", \"Mathlib/Algebra/Module/Torsion/Basic.lean\", \"Mathlib/Algebra/Module/Torsion/Basic.lean\", \"Mathlib/Algebra/Module/Torsion/Basic.lean\", \"Mathlib/Algebra/Module/Torsion/PrimaryComponent.lean\", \"Mathlib/Algebra/Module/Torsion/PrimaryComponent.lean\"], \"digest\": \"3e43c9a7940abf7d\"}; Read Algebra/Module/Torsion/PrimaryComponent.lean:49-64 and the returned torsion/filtration signatures. Ideal.primaryComponent gives an ungraded power-torsion construction; no hit states the graded nilpotent Hilbert-function devissage or its polynomial conclusion. Ideal.IsNilpotent.induction_on is an induction principle for ideals, not this module assertion.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "If all finite graded modules killed by a homogeneous element have eventually polynomial Hilbert functions then finite modules killed by a power of this element do too",
+   "results": "{\"t\": \"2026-10-22T06:09:09Z\", \"tool\": \"leansearch\", \"query\": \"If all finite graded modules killed by a homogeneous element have eventually polynomial Hilbert functions then finite modules killed by a power of this element do too\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"GradedAlgebra.exists_finset_adjoin_eq_top_and_homogeneous\", \"HomogeneousLocalization.Away.finiteType\", \"HomogeneousSubmodule.ext_iff\", \"HomogeneousLocalization.Away.span_mk_prod_pow_eq_top\", \"HomogeneousIdeal.radical\", \"AlgebraicGeometry.ProjIsoSpecTopComponent.FromSpec.mem_carrier_iff_of_mem_mul\", \"Ideal.homogeneous_span\", \"HomogeneousLocalization.Away.eventually_smul_mem\"], \"digest\": \"117400f524043716\"}; Read Algebra/Module/Torsion/PrimaryComponent.lean:49-64 and the returned torsion/filtration signatures. Ideal.primaryComponent gives an ungraded power-torsion construction; no hit states the graded nilpotent Hilbert-function devissage or its polynomial conclusion. Ideal.IsNilpotent.induction_on is an induction principle for ideals, not this module assertion.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Hilbert polynomial nilpotent devissage: induction on r using xL and L/xL, and uniform bounded exponent of x power torsion in a Noetherian graded module",
+   "results": "{\"t\": \"2026-10-22T06:09:20Z\", \"tool\": \"leanfinder\", \"query\": \"Hilbert polynomial nilpotent devissage: induction on r using xL and L/xL, and uniform bounded exponent of x power torsion in a Noetherian graded module\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Ideal.exists_pow_inf_eq_pow_smul\", \"Ideal.IsNilpotent.induction_on\", \"IsNoetherianRing.induction_on_isQuotientEquivQuotientPrime\", \"Ideal.Filtration.Stable.exists_pow_smul_eq_of_ge\", \"Ideal.Filtration.Stable.exists_pow_smul_eq\", \"RingTheory.Sequence.IsWeaklyRegular.ndrecIterModByRegular\", \"IsNoetherianRing.exists_relSeries_isQuotientEquivQuotientPrime\", \"RingTheory.Sequence.IsRegular.ndrecIterModByRegularWithRing\"], \"digest\": \"e3a1b73fb1be18cd\"}; Read Algebra/Module/Torsion/PrimaryComponent.lean:49-64 and the returned torsion/filtration signatures. Ideal.primaryComponent gives an ungraded power-torsion construction; no hit states the graded nilpotent Hilbert-function devissage or its polynomial conclusion. Ideal.IsNilpotent.induction_on is an induction principle for ideals, not this module assertion.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "primaryComponent|IsHomogeneous|IsNoetherian",
+   "results": "{\"t\": \"2026-10-22T06:09:33Z\", \"tool\": \"grep\", \"query\": \"primaryComponent|IsHomogeneous|IsNoetherian\", \"sub\": \"Algebra/Module/Torsion/PrimaryComponent.lean\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"24\", \"49\", \"50\", \"52\", \"53\"], \"digest\": \"029c54b250df6820\"}; Read Algebra/Module/Torsion/PrimaryComponent.lean:49-64 and the returned torsion/filtration signatures. Ideal.primaryComponent gives an ungraded power-torsion construction; no hit states the graded nilpotent Hilbert-function devissage or its polynomial conclusion. Ideal.IsNilpotent.induction_on is an induction principle for ideals, not this module assertion.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Noetherian graded module x-power torsion is finite graded submodule killed by a uniform power and quotient has injective x",
+   "results": "{\"t\": \"2026-10-23T04:20:21Z\", \"tool\": \"leanfinder\", \"query\": \"Noetherian graded module x-power torsion is finite graded submodule killed by a uniform power and quotient has injective x\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"IsNoetherianRing.exists_relSeries_isQuotientEquivQuotientPrime\", \"IsHausdorff.of_isTorsionFree\", \"IsNoetherianRing.induction_on_isQuotientEquivQuotientPrime\", \"Ideal.iInf_pow_smul_eq_bot_of_isTorsionFree\", \"Ideal.exists_pow_inf_eq_pow_smul\", \"Module.exists_smul_eq_zero_and_mk_eq\", \"Ideal.iInf_pow_smul_eq_bot_of_noZeroSMulDivisors\", \"Ideal.mem_iInf_smul_pow_eq_bot_iff\"], \"digest\": \"b1e199652a645692\"}; Read PrimaryComponent.lean:49-64 and HilbertPoly.lean:18-42. Power torsion and formal-series Hilbert polynomials are present, but none of these results states the conditional graded nilpotent polynomial devissage. HilbertPoly explicitly lists module Hilbert polynomials as TODO.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "Submodule.torsionBySet, IsNoetherianRing, graded module",
+   "results": "{\"t\": \"2026-10-23T04:20:22Z\", \"tool\": \"loogle\", \"query\": \"Submodule.torsionBySet, IsNoetherianRing, graded module\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"loogle: Unknown identifier `graded`\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}; Read PrimaryComponent.lean:49-64 and HilbertPoly.lean:18-42. Power torsion and formal-series Hilbert polynomials are present, but none of these results states the conditional graded nilpotent polynomial devissage. HilbertPoly explicitly lists module Hilbert polynomials as TODO.",
+   "date": "2026-10-23",
+   "verdict": "query error: unknown identifier; corrected by the subsequent quoted torsionBySet search; no absence inference from this query"
+  },
+  {
+   "tool": "grep",
+   "query": "torsionBySet|Submodule.*finite|Noetherian.*submodule",
+   "results": "{\"t\": \"2026-10-23T04:20:22Z\", \"tool\": \"grep\", \"query\": \"torsionBySet|Submodule.*finite|Noetherian.*submodule\", \"sub\": \"Algebra/Module\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/Algebra/Module/Lattice.lean\", \"Mathlib/Algebra/Module/Lattice.lean\", \"Mathlib/Algebra/Module/Lattice.lean\", \"Mathlib/Algebra/Module/DedekindDomain.lean\", \"Mathlib/Algebra/Module/DedekindDomain.lean\", \"Mathlib/Algebra/Module/DedekindDomain.lean\", \"Mathlib/Algebra/Module/DedekindDomain.lean\", \"Mathlib/Algebra/Module/DedekindDomain.lean\"], \"digest\": \"5d313a9a86563082\"}; Read PrimaryComponent.lean:49-64 and HilbertPoly.lean:18-42. Power torsion and formal-series Hilbert polynomials are present, but none of these results states the conditional graded nilpotent polynomial devissage. HilbertPoly explicitly lists module Hilbert polynomials as TODO.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "If finite graded modules annihilated by x have eventually polynomial Hilbert functions then the same holds for modules annihilated by x to a power",
+   "results": "{\"t\": \"2026-10-23T04:29:45Z\", \"tool\": \"leansearch\", \"query\": \"If finite graded modules annihilated by x have eventually polynomial Hilbert functions then the same holds for modules annihilated by x to a power\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Module.End.pow_map_zero_of_le\", \"Polynomial.hilbertPoly\", \"Polynomial.hilbertPoly_mul_one_sub_pow_add\", \"Polynomial.hilbertPoly_X_pow_succ\", \"HomogeneousLocalization.Away.mk\", \"HomogeneousIdeal.radical\", \"MvPolynomial.isNoetherianRing\", \"Ideal.IsHomogeneous.radical\"], \"digest\": \"9cda58a0c766458a\"}; Read PrimaryComponent.lean:49-64 and HilbertPoly.lean:18-42. Power torsion and formal-series Hilbert polynomials are present, but none of these results states the conditional graded nilpotent polynomial devissage. HilbertPoly explicitly lists module Hilbert polynomials as TODO.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Hilbert polynomial devissage by the filtration xL and L/xL and bounded power torsion of a finite graded module",
+   "results": "{\"t\": \"2026-10-23T04:29:47Z\", \"tool\": \"leanfinder\", \"query\": \"Hilbert polynomial devissage by the filtration xL and L/xL and bounded power torsion of a finite graded module\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Ideal.Filtration.submodule\", \"Ideal.Filtration.Stable\", \"IsNoetherianRing.exists_relSeries_isQuotientEquivQuotientPrime\", \"Ideal.Filtration.Stable.exists_pow_smul_eq\", \"Ideal.Filtration.Stable.exists_pow_smul_eq_of_ge\", \"Ideal.Filtration.mem_submodule\", \"Ideal.Filtration\", \"Ideal.Filtration.N\"], \"digest\": \"644438b5e959aa73\"}; Read PrimaryComponent.lean:49-64 and HilbertPoly.lean:18-42. Power torsion and formal-series Hilbert polynomials are present, but none of these results states the conditional graded nilpotent polynomial devissage. HilbertPoly explicitly lists module Hilbert polynomials as TODO.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"torsionBySet\"",
+   "results": "{\"t\": \"2026-10-23T04:29:48Z\", \"tool\": \"loogle\", \"query\": \"\\\"torsionBySet\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"Module.IsTorsionBySet\", \"Submodule.torsionBySet\", \"Module.isTorsionBySet_singleton_iff\", \"Module.isTorsionBySet_of_subset\", \"Module.isTorsionBySet_annihilator\", \"Submodule.torsionBySet_singleton_eq\", \"Module.isTorsionBySet_iff_is_torsion_by_span\", \"Submodule.torsionBySet_univ\"], \"digest\": \"33dc1b9d1befebd4\"}; Read PrimaryComponent.lean:49-64 and HilbertPoly.lean:18-42. Power torsion and formal-series Hilbert polynomials are present, but none of these results states the conditional graded nilpotent polynomial devissage. HilbertPoly explicitly lists module Hilbert polynomials as TODO.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "hilbertPoly|hilbert.*series|graded.*module",
+   "results": "{\"t\": \"2026-10-23T04:29:48Z\", \"tool\": \"grep\", \"query\": \"hilbertPoly|hilbert.*series|graded.*module\", \"sub\": \"RingTheory/Polynomial/HilbertPoly.lean\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"23\", \"27\", \"29\", \"34\", \"35\"], \"digest\": \"fb6ac8ec971df632\"}; Read PrimaryComponent.lean:49-64 and HilbertPoly.lean:18-42. Power torsion and formal-series Hilbert polynomials are present, but none of these results states the conditional graded nilpotent polynomial devissage. HilbertPoly explicitly lists module Hilbert polynomials as TODO.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  }
+ ],
+ "proof_deps": [
+  "def-pc-standard-graded-algebra",
+  "lem-weil-pbc-noetherian-submodule-finite"
+ ],
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Historical nearby-duality/alteration algebra under lem-trf-local-term-locality proof (1)--(2), through lem-trf-log-smooth-log-regular: ILO VI 1.6(i)--(ii) formal chart models; this input expands the formal-monoid dimension argument. Hilbert--Samuel dimension theorem explicitly named in the dimension input to the completed formal models. The graded-ring calculation underlying the Hilbert--Samuel input (Stacks 00K8). Within this algebra input: Stacks 00K1 nilpotent devissage and power-torsion reduction (old steps 4--5 and the injectivity assertion of step 6).",
+   "via": [
+    "lem-trf-standard-graded-hilbert-function",
+    "lem-trf-hilbert-samuel-growth-dimension",
+    "lem-trf-formal-monoid-ring-dimension",
+    "lem-trf-log-smooth-log-regular",
+    "lem-trf-nodal-log-regularity",
+    "lem-trf-nodal-pair-projective-resolution",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-trf-graded-power-torsion-polynomial-devissage",
+  "worker": "stage1",
+  "summary": "Unchanged statement. Wrote the nilpotent induction explicitly using xL and L/xL, including degreewise exactness and basis additivity. Constructed homogeneous power torsion, reused the existing Noetherian-submodule Mathlib leaf for finiteness, bounded its exponent on generators, and proved the quotient grading and injectivity directly. No new nodes, no Lean edits or compiler runs.",
+  "blueprint": "Refines the historical algebra input recorded in blueprint.from.place, specifically Stacks 00K1 first two middle paragraphs inside the Hilbert--Samuel calculation. Current main-20261015 local-term statement was read; no change to its contracting-correspondence route. Searches of the entire blueprint for graded, Hilbert, torsion and submodule found no equivalent blueprint statement."
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q102-4247063c8",
+  "group": "Q102",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q102-4247063c8 (reviewer sub-agent of L); spot-checked: Read the item in full against Stacks algebra.tex 00K1 (proposition-graded-hilbert-polynomial, its two middle paragraphs), 00K0 (lemma-graded-module-fg) and 00IK (lemma-Noetherian-basic, second assertion); I checked the tag mappings. The delivery is one commit with the item and its report. It adds no new nodes, leaves the statement and stmt_deps unchanged, and proof_deps equals the union of the step uses. Steps: (1) each degree piece is finite-dimensional by the monomial argument; this needs S_0=k and degree-one generators, which def-pc-standard-graded-algebra gives. (2-3) A correctly set-up induction on r through A=xL (graded with A_n=xL_{n-1}) and B=L/xL; the degreewise sequence is exact and dimensions add by a basis argument. (4) T is a submodule by commutativity and homogeneous because the components x^r m_n sit in distinct degrees. (5) T is finite by the Mathlib leaf lem-weil-pbc-noetherian-submodule-finite; S Noetherian and M finite are item hypotheses. (6) A common exponent is the maximum over generators, with the empty case handled; the result is not circular. (7) The quotient grading holds and x is injective on N. Small cases checked: M=0, x=0 or S=k, r=1, k[x]/(x^r), and k[x]⊕k[x]/(x^2). No SGA is used, no tool_uses are needed, and this is not a re-split order. The parent's step 4 uses every clause of the item, and no duplicate exists in the DAG. Full checks are in review.md."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.GradedPowerTorsionPolynomialDevissage",
+  "declaration": "GradedAlgebra.IsStandard.power_torsion_polynomial_devissage",
+  "file": "lean/Sheaf/RingTheory/GradedPowerTorsionPolynomialDevissage.lean",
+  "statement": "theorem power_torsion_polynomial_devissage {k : Type u} {S : Type v} [Field k] [CommRing S] [Algebra k S] (𝒜 : ℕ → Submodule k S) [GradedAlgebra 𝒜] [IsStandard 𝒜] [IsNoetherianRing S] (x : S) (hx : x ∈ 𝒜 1) (hbase : ∀ (L : Type w) [AddCommGroup L] [Module S L] [Module k L] [IsScalarTower k S L] (ℒ : ℕ → Submodule k L) [DirectSum.Decomposition ℒ] [SetLike.GradedSMul 𝒜 ℒ] [Module.Finite S L], (∀ l : L, x • l = 0) → ∃ P : Polynomial ℚ, ∃ d : ℕ, ∀ n : ℕ, d ≤ n → (Module.finrank k (ℒ n) : ℚ) = P.eval (n : ℚ)) : (∀ (L : Type w) [AddCommGroup L] [Module S L] [Module k L] [IsScalarTower k S L] (ℒ : ℕ → Submodule k L) [DirectSum.Decomposition ℒ] [SetLike.GradedSMul 𝒜 ℒ] [Module.Finite S L], (∃ r : ℕ, 1 ≤ r ∧ ∀ l : L, x ^ r • l = 0) → ∃ P : Polynomial ℚ, ∃ d : ℕ, ∀ n : ℕ, d ≤ n → (Module.finrank k (ℒ n) : ℚ) = P.eval (n : ℚ)) ∧ (∀ (M : Type w) [AddCommGroup M] [Module S M] [Module k M] [IsScalarTower k S M] (ℳ : ℕ → Submodule k M) [DirectSum.Decomposition ℳ] [SetLike.GradedSMul 𝒜 ℳ] [Module.Finite S M], ∃ T : Submodule S M, (∀ m : M, m ∈ T ↔ ∃ r : ℕ, 1 ≤ r ∧ x ^ r • m = 0) ∧ Module.Finite S T ∧ T.IsHomogeneous ℳ ∧ DirectSum.IsInternal (fun n : ℕ => (ℳ n).comap (T.subtype.restrictScalars k)) ∧ SetLike.GradedSMul 𝒜 (fun n : ℕ => (ℳ n).comap (T.subtype.restrictScalars k)) ∧ (∃ r : ℕ, 1 ≤ r ∧ ∀ t : T, x ^ r • t = 0) ∧ (∃ P : Polynomial ℚ, ∃ d : ℕ, ∀ n : ℕ, d ≤ n → (Module.finrank k ((ℳ n).comap (T.subtype.restrictScalars k)) : ℚ) = P.eval (n : ℚ)) ∧ Module.Finite S (M ⧸ T) ∧ DirectSum.IsInternal (fun n : ℕ => (ℳ n).map (T.mkQ.restrictScalars k)) ∧ SetLike.GradedSMul 𝒜 (fun n : ℕ => (ℳ n).map (T.mkQ.restrictScalars k)) ∧ Function.Injective (fun q : M ⧸ T => x • q))",
+  "branch": "sheaf-dag",
+  "by": "Q63",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-bb556c144",
+  "group": "Q63",
+  "result": "pass",
+  "note": "Read node (only the lean field differs from side-live; statement/stmt_deps/proof unchanged), Stacks 00K1 middle paragraphs, IsStandard (Standard.lean:86), Submodule.IsHomogeneous, and the parent lem-trf-standard-graded-hilbert-function encoding (compatible). Every clause matches: hbase (xL=0 → eventual P), conclusion for x^r L=0 with r≥1, T given by an exact membership iff, Module.Finite T, IsHomogeneous plus IsInternal/GradedSMul of the T∩M_n comap family, uniform ∃r outside ∀t, eventual polynomial on T_n, M⧸T finite with image grading IsInternal/GradedSMul, x• injective on the quotient. Universes u/v/w independent; hbase restricted to Type w is weaker than the node's hypothesis, so the theorem is at least as strong and still provable (xL, L/xL, T, M/T stay in w). Edge cases M=0, x=0, r=1 and the zero ring are covered. No definitions, single sorry, docstrings carry the source place, blueprint tag and 7 proof steps; lean.statement verbatim; no live write; no duplicate (primaryComponent/torsionBySet are ungraded, StandardGradedHilbertFunction is the parent). Report has Worker report and Second reading sections. Not recompiled (no change)."
+ }
+}

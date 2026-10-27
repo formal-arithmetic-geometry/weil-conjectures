@@ -1,0 +1,116 @@
+{
+ "id": "lem-per-constant-scalar-cokernel",
+ "kind": "statement",
+ "title": "Constant module realization preserves cokernels without flatness",
+ "statement": "Let (C,J) be a site with independent object and morphism universes, R a commutative ring in their maximum universe, B a commutative ring sheaf, and σ:R_constant→B. Use the constant module sheaf functor [def-sf-site-constant-module-functor], scalar extension [def-pur-sheaf-tensor-product], and module sheaves [def-weil-sheaf-of-modules-category]. Assume weak sheafification for additive groups, rings and commutative rings, compatibility of forgetting commutativity with sheaves, and that the additive sheafification equivalences are precisely locally bijective maps. For every R-module morphism d:M→N there is an isomorphism E_B(coker d)≅coker(E_B(d)) whose composite with E_B of the cokernel projection is the new cokernel projection. No flatness is required.",
+ "source": {
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Proposition 6.8.14(2), finite-presentation calculation; Stacks, algebra.tex lemma-tensor-product-exact; sites-modules.tex section-constant and section-tensor-product."
+ },
+ "stmt_deps": [
+  "def-sf-site-constant-module-functor",
+  "def-pur-sheaf-tensor-product",
+  "def-weil-sheaf-of-modules-category"
+ ],
+ "proof": [
+  {
+   "text": "The composite of the constant-module functor and the forgetful functor to additive sheaves preserves finite colimits; additive constant sheafification and the module forgetful functor preserve these colimits. Reflection by the module-sheaf forgetful functor gives preservation by the constant-module functor.",
+   "uses": [
+    "lem-sfb-constant-finite-free-presentation-extension"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Scalar extension is left adjoint to restriction by the existing explicit generic tensor adjunction. Compose the two finite-colimit-preserving functors.",
+   "uses": [
+    "lem-pur-inverse-image-scalar-comparison"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use PreservesCokernel.iso and its projection equation.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-pur-inverse-image-scalar-comparison",
+  "lem-sfb-constant-finite-free-presentation-extension"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "proof step 4: right exactness of constant module realization; explicit algebraic/categorical implementation by F8."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A constant sheaf module realization followed by scalar extension preserves a matrix cokernel and its quotient projection, and an invertible change of rows identifies the cokernel with the remaining coordinates",
+   "results": "ModuleCat.cokernelIsoRangeQuotient, ModuleCat.cokernelIsColimit, Module.Presentation.ofExact, SheafOfModules.presentationOfIsCokernelFree and related generic presentation infrastructure. No complete normalized finite-power scalar and row-operation comparison. Used categorical cokernel infrastructure.",
+   "date": "2026-10-27",
+   "verdict": "no direct match"
+  },
+  {
+   "tool": "loogle",
+   "query": "ModuleCat.isColimitCokernelCofork; CategoryTheory.Limits.PreservesCokernel.iso",
+   "results": "Found ModuleCat.isColimitCokernelCofork and PreservesCokernel.iso with its projection equation. These are used to construct the normalized comparisons; neither supplies the coefficientwise finite-power normalization or the rank-tail computation.",
+   "date": "2026-10-27",
+   "verdict": "generic tools used"
+  },
+  {
+   "tool": "grep",
+   "query": "cokernel.*(matrix|Matrix)|rank.normal.*cokernel|tail.*(cokernel|quotient)|constant.*scalar.*cokernel",
+   "results": "Read Mathlib ModuleCat/Kernels, ChangeOfRings, TensorProduct/Pi, Matrix/ToLin, Limits/Preserves/Shapes/Kernels. Project search found the parent presentationModels hole, ScalarNormalizedConstantModels (different internal-module encoding), and IntegralScalarModelCoordinates (different discrete-model setting). No duplicate of these normalized helpers.",
+   "date": "2026-10-27",
+   "verdict": "no duplicate"
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.RationalStratumFiniteFreeModel",
+  "date": "2026-10-27",
+  "group": "F8"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-per-rational-stratum-finite-free-model",
+   "place": "proof step 4: right exactness of constant module realization",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-deligne-laumon-a1",
+ "unit": "sk-p-dl-a1-perverse",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.ConstantScalarCokernel",
+  "file": "lean/Sheaf/CategoryTheory/ConstantScalarCokernel.lean",
+  "declaration": "CategoryTheory.ConstantFiniteFreePresentationExtension.constantScalarCokernel",
+  "statement": "theorem constantScalarCokernel {C : Type u} [Category.{v} C] (J : GrothendieckTopology C) (R : Type (max u v)) [CommRing R] [J.HasSheafCompose (forget₂ CommRingCat.{max u v} RingCat.{max u v})] [J.WEqualsLocallyBijective AddCommGrpCat.{max u v}] [HasWeakSheafify J AddCommGrpCat.{max u v}] [HasWeakSheafify J RingCat.{max u v}] [HasWeakSheafify J CommRingCat.{max u v}] (B : Sheaf J CommRingCat.{max u v}) (σ : (constantSheaf J CommRingCat.{max u v}).obj (CommRingCat.of R) ⟶ B) {M N : ModuleCat.{max u v} R} (d : M ⟶ N) : ∃ w : extension J R B σ (cokernel d) ≅ cokernel (extensionMap J R B σ d), extensionMap J R B σ (cokernel.π d) ≫ w.hom = cokernel.π (extensionMap J R B σ d)",
+  "branch": "sheaf-dag",
+  "by": "F8",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F8",
+  "result": "pass",
+  "landing": "20261026T235858-L-1464850",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F8",
+  "result": "pass",
+  "landing": "20261026T235858-L-1464850",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

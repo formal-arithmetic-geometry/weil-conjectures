@@ -1,276 +1,152 @@
 /-
 Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
-Authors: SHEAF group Q50
+Authors: SHEAF group B5
 -/
 module
 
-public import Sheaf.Paper.CompletedOperationTowerSubstitution
-public import Mathlib.CategoryTheory.Monoidal.Functor
-public import Sheaf.SecSmoothPurity.CochainPullbackTensorCoherence
-public import Sheaf.Algebra.Category.ModuleCat.Sheaf.FlatOnSite
-import Sheaf.Paper.SystemNormalizedTensorClosure
-import Sheaf.Algebra.Homology.KFlatTotalTensorModel
-import Sheaf.Algebra.Homology.ChangeOfRingsKFlat
-import Sheaf.Algebra.Homology.DerivedChangeOfRingsIndependentCoefficients
-import Sheaf.Paper.KFlatRingedToposPullback
-import Sheaf.AlgebraicGeometry.ProEtaleConstantExact
-import Sheaf.Paper.NormalizedDVREffectivity
-import Sheaf.CategoryTheory.RingedStrictTowerHomotopyLimitIndependentCoefficients
+public import Sheaf.Paper.IntegralCoherenceData
+import Sheaf.Paper.IntegralStrictPullbackComparisons
+import Sheaf.Paper.IntegralGoodQuotientPresentation
+import Sheaf.Paper.IntegralStrictExpressionRealization
 
-public import Sheaf.Algebra.Homology.KFlatIndependentCoefficients
-import Sheaf.Algebra.Homology.DerivedChangeOfRingsCochainModel
-import Sheaf.Algebra.Homology.KFlat
-import Sheaf.AlgebraicGeometry.ProEtaleInverseImage
-import Sheaf.Paper.CompletedIntegralConstantMapOfUniverses
-import Sheaf.Paper.NormalizedDVRTower
-/-! # Integral coherence before and after the derived limit
+/-! # Strict expression models before derived inverse limit
 
-Source: Stacks Project, sites-cohomology.tex, Tags 07A4 and 0941;
-blueprint main-20261015, coefficient twists, simultaneous strict quotient-tower extraction
-(blueprint: lem-pur-integral-coherence-tower).
-
-The ringed sequence site encodes strict semilinear quotient towers. Thus every
-cochain map below commutes with every quotient transition before localization.
-The index n denotes the positive exponent n+1; there is no boundedness condition.
+Source: Stacks 07A4 and 0941; integral coherence, strict-model step.
 -/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
-set_option genInjectivity false
-set_option genSizeOfSpec false
+set_option Elab.async false
 set_option synthInstance.maxSize 4096
-set_option backward.isDefEq.respectTransparency false
-set_option backward.isDefEq.respectTransparency.types false
+set_option backward.isDefEq.respectTransparency true
+set_option backward.isDefEq.respectTransparency.types true
 attribute [-instance] CategoryTheory.GrothendieckTopology.hasSheafify_of_essentiallySmall
 attribute [-instance] WeilConjectures.sfAbSheafify WeilConjectures.sfAbBijective
+attribute [local instance 2000] SheafOfModules.cochainModulesMonoidal
+attribute [local irreducible] SheafOfModules.monoidalCategory
 
 universe t u s i j
 open CategoryTheory CategoryTheory.Limits CategoryTheory.Functor MonoidalCategory
 open Opposite AlgebraicGeometry
 namespace WeilConjectures.IntegralCoherence
-
 variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]
-
-/-- Strict quotient systems of unbounded cochains, not towers in a derived category.
-Source: Stacks 0941 (blueprint: lem-pur-integral-coherence-tower). -/
-abbrev Complex (W : Scheme.{t}) := CochainComplex (coefficientSequenceModules l E W) ℤ
-
-/-- The actual termwise inverse image on the sequence site.
-Source: Stacks 07A4 (blueprint: lem-pur-integral-coherence-tower). -/
-abbrev pull {X Y : Scheme.{t}} (f : X ⟶ Y) :=
-  (integralComparisonSequencePullback l E f).mapHomologicalComplex (.up ℤ)
-
-/-- The adjunction-normalized composition map, lifted termwise before localization.
-Source: Stacks 0D6D, 07A4 (blueprint: lem-pur-integral-coherence-tower). -/
-def compositor {X Y Z : Scheme.{t}} (h : Z ⟶ X) (f : X ⟶ Y) :
-    pull l E (h ≫ f) ≅ pull l E f ⋙ pull l E h :=
-  (Functor.mapHomologicalComplexCompIso
-    (integralComparisonSequenceComposition l E h f).symm (.up ℤ)).symm
-
-/-- The actual adjunction-unit generator, read as a section on the base-changed object.
-Source: Stacks 03D2 (blueprint: lem-pur-integral-coherence-tower). -/
-def generator {X Y : Scheme.{t}} (f : X ⟶ Y)
-    (M : coefficientSequenceModules l E Y) (n : ℕ) (U : Y.ProEt)
-    (x : M.val.obj (op (n, U))) :
-    ((integralComparisonSequencePullback l E f).obj M).val.obj
-      (op (n, (Scheme.proEtaleBaseChange f).obj U)) :=
-  integralComparisonSequenceGenerator l E f M n U x
-
-/-- The normalized total comparison on strict systems. Its generator equation fixes
-c on 1 tensor (x tensor y); linearity gives the stated s tensor formula, and the
-inverse contracts the two scalars. Units are fixed by the action equations below.
-Source: Stacks 07A4, 03EL (blueprint: lem-pur-integral-coherence-tower). -/
-structure PullbackComparison {X Y : Scheme.{t}} (f : X ⟶ Y)
-    extends (pull l E f).CoreMonoidal where
-  generators : ∀ (P Q : Complex l E Y) (p q k : ℤ) (hpq : p + q = k)
-    (n : ℕ) (U : Y.ProEt) (x : (P.X p).val.obj (op (n, U)))
-    (y : (Q.X q).val.obj (op (n, U))),
-    ((μIso P Q).inv.f k).val.app (op (n, (Scheme.proEtaleBaseChange f).obj U))
-      (generator l E f ((P ⊗ Q).X k) n U
-        (coefficientTensorGenerator.{u, t+1, t}
-          (coefficientSequenceTopology (Scheme.ProEt.topology Y))
-          (coefficientSequenceCommRingSheaf l E Y) P Q p q k hpq (op (n, U)) x y)) =
-      coefficientTensorGenerator.{u, t+1, t}
-        (coefficientSequenceTopology (Scheme.ProEt.topology X))
-        (coefficientSequenceCommRingSheaf l E X)
-        ((pull l E f).obj P) ((pull l E f).obj Q) p q k hpq
-        (op (n, (Scheme.proEtaleBaseChange f).obj U))
-        (generator l E f (P.X p) n U x)
-        (generator l E f (Q.X q) n U y)
-
-/-- The forward cochain comparison; CoreMonoidal records its naturality,
-associativity and both action-unit equations in the inverse orientation.
-Source: Stacks 07A4 (blueprint: lem-pur-integral-coherence-tower). -/
-def PullbackComparison.tensor {X Y : Scheme.{t}} {f : X ⟶ Y}
-    (c : PullbackComparison l E f) (P Q : Complex l E Y) := (c.μIso P Q).symm
-
-/-- The action-unit identification, with the coefficient in degree zero.
-Source: Stacks 03EL (blueprint: lem-pur-integral-coherence-tower). -/
-def PullbackComparison.unit {X Y : Scheme.{t}} {f : X ⟶ Y}
-    (c : PullbackComparison l E f) := c.εIso.symm
-
-/-- Signed symmetry for the same CoreMonoidal comparison. Its other fields
-are exactly the naturality, associativity and two action-unit equations.
-Source: Stacks 07A4 (blueprint: lem-pur-integral-coherence-tower). -/
-def Coherent {X Y : Scheme.{t}} (f : X ⟶ Y) (c : PullbackComparison l E f) : Prop :=
-  ∀ P Q : Complex l E Y,
-    (pull l E f).map (CochainComplex.Monoidal.braiding P Q).hom ≫ (c.tensor l E Q P).hom =
-      (c.tensor l E P Q).hom ≫
-        (CochainComplex.Monoidal.braiding ((pull l E f).obj P) ((pull l E f).obj Q)).hom
-
-/-- The composition identity with the prescribed adjunction-normalized compositor.
-Source: Stacks 07A4, 0D6D (blueprint: lem-pur-integral-coherence-tower). -/
-def CompositionLaw {X Y Z : Scheme.{t}} (h : Z ⟶ X) (f : X ⟶ Y)
-    (cf : PullbackComparison l E f) (ch : PullbackComparison l E h)
-    (chf : PullbackComparison l E (h ≫ f)) : Prop :=
-  ∀ P Q : Complex l E Y,
-    (chf.tensor l E P Q).hom ≫
-        ((compositor l E h f).hom.app P ⊗ₘ (compositor l E h f).hom.app Q) =
-      (compositor l E h f).hom.app (P ⊗ Q) ≫
-        (pull l E h).map (cf.tensor l E P Q).hom ≫
-          (ch.tensor l E ((pull l E f).obj P) ((pull l E f).obj Q)).hom
-
 variable {S : Type s} {W : S → Scheme.{t}}
 
-/-- A finite expression evaluated on strict quotient complexes. The syntax is the
-recorded completed-operation syntax; only its interpretation changes here.
-Source: node first two paragraphs, Stacks 07A4 and 0941
-(blueprint: lem-pur-integral-coherence-tower). -/
-def value {I : Type i} {location : I → S}
-    (N : ∀ k : I, Complex l E (W (location k))) {a : S} :
-    CompletedOperations.Expression W location a → Complex l E (W a)
-  | .input k => N k
-  | .unit _ => 𝟙_ _
-  | .tensor P Q => value N P ⊗ value N Q
-  | .pullback f P => (pull l E f).obj (value N P)
+private theorem normalized_of_iso {V : Scheme.{t}}
+    {A B : coefficientSequenceDerived l E V} (e : A ≅ B)
+    (hA : IsNormalizedCoefficientSequence l E V A) :
+    IsNormalizedCoefficientSequence l E V B := by
+  intro m n h P
+  let F := coefficientSequenceDerivedEvaluation l E V m
+  let G := coefficientSequenceDerivedEvaluation l E V n
+  let U := normalizedDVRRes l E V h
+  let τ := coefficientSequenceDerivedTransition l E V h
+  constructor
+  · intro f g hfg
+    apply (cancel_epi (G.map e.hom)).1
+    apply (hA h P).1
+    simp only [Functor.map_comp]
+    change τ.app A ≫ (G ⋙ U).map e.hom ≫ U.map f =
+      τ.app A ≫ (G ⋙ U).map e.hom ≫ U.map g
+    change τ.app B ≫ U.map f = τ.app B ≫ U.map g at hfg
+    rw [← τ.naturality_assoc e.hom, ← τ.naturality_assoc e.hom, hfg]
+  · intro f
+    obtain ⟨g, hg⟩ := (hA h P).2 (F.map e.hom ≫ f)
+    refine ⟨G.map e.inv ≫ g, ?_⟩
+    apply (cancel_epi (F.map e.hom)).1
+    rw [← Category.assoc, τ.naturality e.hom]
+    simp only [Functor.comp_map, Category.assoc, Functor.map_comp]
+    rw [← U.map_comp_assoc, ← G.map_comp, Iso.hom_inv_id, G.map_id, U.map_id,
+      Category.id_comp]
+    exact hg
 
-/-- K-flatness with flat terms in the recorded independent-coefficient interface.
-This predicate merely joins the two hypotheses, without defining either again.
-Source: Stacks 06YN, 07A4 (blueprint: lem-pur-integral-coherence-tower). -/
-def Good (a : S) (P : Complex l E (W a)) : Prop :=
-  CochainComplex.IsKFlatIndependentCoefficients
-      (R := coefficientSequenceCommRingSheaf l E (W a)) P ∧
-    ∀ k : ℤ, SheafOfModules.IsFlatOnSite
-      (J := coefficientSequenceTopology (Scheme.ProEt.topology (W a)))
-      (R := coefficientSequenceCommRingSheaf l E (W a)) (P.X k)
+private theorem realization_of_system (M : CompletedOperations.Models l E W)
+    (hM : CompletedOperations.ComparisonLaws.{t, u, s, i} l E M)
+    {I : Type i} {location : I → S} (N : ∀ k : I, Complex l E (W (location k)))
+    (hg : ∀ {a : S} (P : CompletedOperations.Expression W location a),
+      Good l E (W := W) a (value l E N P))
+    (hn : ∀ {a : S} (P : CompletedOperations.Expression W location a),
+      IsNormalizedCoefficientSequence l E (W a) (DerivedCategory.Q.obj (value l E N P)))
+    (e : ∀ {a : S} (P : CompletedOperations.Expression W location a),
+      DerivedCategory.Q.obj (value l E N P) ≅
+        (CompletedOperations.systemValue l E M P).obj (fun k ↦ DerivedCategory.Q.obj (N k)))
+    (hi : ∀ k : I, e (.input k) = Iso.refl _)
+    (hu : ∀ a : S, e (.unit a) = (by
+      with_unfolding_all exact Iso.refl (CompletedOperations.unit l E (W := W) a)))
+    (ht : ∀ {a : S} (P Q : CompletedOperations.Expression W location a),
+      e (.tensor P Q) =
+        CoefficientTensorModels.iso
+          (coefficientSequenceTopology (Scheme.ProEt.topology (W a)))
+          (coefficientSequenceCommRingSheaf l E (W a)) (M.system a).closed (M.system a).models
+          (value l E N P) (value l E N Q) (hg P).1 (hg Q).1 ≪≫
+        (CompletedOperations.tensor l E M a).mapIso (Iso.prod (e P) (e Q)))
+    (hf : ∀ {a b : S} (f : W a ⟶ W b)
+      (P : CompletedOperations.Expression W location b),
+      e (.pullback f P) =
+        ((integralComparisonSequencePullback l E f).mapDerivedCategoryFactors.app
+          (value l E N P)).symm ≪≫
+          (integralComparisonDerivedSequencePullback l E f).mapIso (e P))
+    (hs : ∀ {a : S} {P Q : CompletedOperations.Expression W location a}
+      (α : CompletedOperations.StructuralMap P Q),
+      DerivedCategory.Q.map (structuralValue l E N α).hom ≫ (e Q).hom =
+        (e P).hom ≫ (CompletedOperations.structuralValue l E M α
+          (fun k ↦ DerivedCategory.Q.obj (N k))).hom) :
+    Nonempty (Realization l E M N) := by
+  let b {a : S} (P : CompletedOperations.Expression W location a) :=
+    CompletedOperations.comparison l E M P (fun k ↦ DerivedCategory.Q.obj (N k))
+  have hb {a : S} (P : CompletedOperations.Expression W location a) : IsIso (b P) :=
+    (hM.invertible P (fun k ↦ DerivedCategory.Q.obj (N k))
+      (fun k ↦ hn (.input k))).1
+  let c {a : S} (P : CompletedOperations.Expression W location a) :=
+    letI := hb P
+    asIso (b P) ≪≫ (coefficientSequenceLimit l E (W a)).mapIso (e P).symm
+  have hc {a : S} (P : CompletedOperations.Expression W location a) :
+      IsIso ((M.calculus a).adjunction.counit.app
+        (DerivedCategory.Q.obj (value l E N P))) := hM.counit a _ (hn P)
+  let d {a : S} (P : CompletedOperations.Expression W location a) :=
+    letI := hc P
+    (M.calculus a).reduction.mapIso (c P) ≪≫
+      asIso ((M.calculus a).adjunction.counit.app
+        (DerivedCategory.Q.obj (value l E N P)))
+  refine ⟨{
+    good := hg
+    normalized := hn
+    system := e
+    system_input := hi
+    system_unit := hu
+    system_tensor := ht
+    system_pullback := hf
+    structural := hs
+    completed := c
+    completed_normalization := ?_
+    reduction := d
+    reduction_normalization := ?_ }⟩
+  · intro a P
+    dsimp only [c, Iso.trans_hom, Functor.mapIso_hom, Iso.symm_hom, asIso_hom]
+    rw [Category.assoc, ← Functor.map_comp, Iso.inv_hom_id,
+      CategoryTheory.Functor.map_id, Category.comp_id]
+  · intro a P
+    rfl
 
-/-- A simultaneous quotient presentation with the actual transitions and the fixed
-finite derived-reduction comparison. This reuses the dependency's normalization.
-Source: node paragraph 1, Stacks 06YY and 0941
-(blueprint: lem-pur-integral-coherence-tower). -/
-structure QuotientPresentation (M : CompletedOperations.Models l E W) (a : S)
-    (P : CochainComplex (scalarReductionSource l E (W a)) ℤ)
-    (hP : CochainComplex.IsKFlatIndependentCoefficients
-      (R := completedIntegralCommRingSheafUnrestricted l E (W a)) P) where
-  complex : Complex l E (W a)
-  good : Good l E (W := W) a complex
-  iso : (M.calculus a).reduction.obj (DerivedCategory.Q.obj P) ≅ DerivedCategory.Q.obj complex
-  evaluation : ∀ n : ℕ,
-    ((coefficientSequenceEvaluation l E (W a) n).mapHomologicalComplex (.up ℤ)).obj complex ≅
-      ((scalarReductionExtension l E (W a) n).mapHomologicalComplex (.up ℤ)).obj P
-  transitions : CoefficientReductionPresentation l E (W a)
-    (M.calculus a).toCoefficientDerivedSystemReduction P hP complex iso evaluation
-
-/-- Interpret the named structural maps on strict cochain systems, including their
-inverses and contexts. Symmetry is the existing Koszul-signed cochain braiding.
-Source: Stacks 07A4 and 0D6D (blueprint: lem-pur-integral-coherence-tower). -/
-def structuralValue {I : Type i} {location : I → S}
-    (N : ∀ k : I, Complex l E (W (location k))) {a : S}
-    {P Q : CompletedOperations.Expression W location a}
-    (α : CompletedOperations.StructuralMap P Q) : value l E N P ≅ value l E N Q :=
-  match α with
-  | .associator P Q H => α_ (value l E N P) (value l E N Q) (value l E N H)
-  | .leftUnitor P => λ_ (value l E N P)
-  | .rightUnitor P => ρ_ (value l E N P)
-  | .symmetry P Q => CochainComplex.Monoidal.braiding (value l E N P) (value l E N Q)
-  | .composition h f P => (compositor l E h f).app (value l E N P)
-  | .identity _ => Iso.refl _
-  | .inverse α => (structuralValue N α).symm
-  | .compose α β => structuralValue N α ≪≫ structuralValue N β
-  | .tensor α β => tensorIso (structuralValue N α) (structuralValue N β)
-  | .pullback f α => (pull l E f).mapIso (structuralValue N α)
-
-/-- The simultaneous realization of every finite strict expression. The recursive
-normalizations fix its vertices and structural arrows; the completed and reduction
-isomorphisms are pinned by the coherent counit, including quotient transitions.
-Source: node last paragraph, Stacks 07A4 and 0941
-(blueprint: lem-pur-integral-coherence-tower). -/
-structure Realization (M : CompletedOperations.Models l E W)
-    {I : Type i} {location : I → S} (N : ∀ k : I, Complex l E (W (location k))) where
-  good : ∀ {a : S} (P : CompletedOperations.Expression W location a),
-    Good l E (W := W) a (value l E N P)
-  normalized : ∀ {a : S} (P : CompletedOperations.Expression W location a),
-    IsNormalizedCoefficientSequence l E (W a) (DerivedCategory.Q.obj (value l E N P))
-  system : ∀ {a : S} (P : CompletedOperations.Expression W location a),
-    DerivedCategory.Q.obj (value l E N P) ≅
-      (CompletedOperations.systemValue l E M P).obj (fun k ↦ DerivedCategory.Q.obj (N k))
-  system_input : ∀ k : I, system (.input k) = Iso.refl _
-  system_unit : ∀ a : S, system (.unit a) = Iso.refl _
-  system_tensor : ∀ {a : S} (P Q : CompletedOperations.Expression W location a),
-    system (.tensor P Q) =
-      CoefficientTensorModels.iso
-        (coefficientSequenceTopology (Scheme.ProEt.topology (W a)))
-        (coefficientSequenceCommRingSheaf l E (W a)) (M.system a).closed (M.system a).models
-        (value l E N P) (value l E N Q) (good P).1 (good Q).1 ≪≫
-      (CompletedOperations.tensor l E M a).mapIso (Iso.prod (system P) (system Q))
-  system_pullback : ∀ {a b : S} (f : W a ⟶ W b)
-    (P : CompletedOperations.Expression W location b),
-    system (.pullback f P) =
-      ((integralComparisonSequencePullback l E f).mapDerivedCategoryFactors.app
-        (value l E N P)).symm ≪≫
-        (integralComparisonDerivedSequencePullback l E f).mapIso (system P)
-  structural : ∀ {a : S} {P Q : CompletedOperations.Expression W location a}
-    (α : CompletedOperations.StructuralMap P Q),
-    DerivedCategory.Q.map (structuralValue l E N α).hom ≫ (system Q).hom =
-      (system P).hom ≫ (CompletedOperations.structuralValue l E M α
-        (fun k ↦ DerivedCategory.Q.obj (N k))).hom
-  completed : ∀ {a : S} (P : CompletedOperations.Expression W location a),
-    (CompletedOperations.completedValue l E P).obj
-        (fun k ↦ (coefficientSequenceLimit l E _).obj (DerivedCategory.Q.obj (N k))) ≅
-      (coefficientSequenceLimit l E (W a)).obj (DerivedCategory.Q.obj (value l E N P))
-  completed_normalization : ∀ {a : S} (P : CompletedOperations.Expression W location a),
-    (completed P).hom ≫ (coefficientSequenceLimit l E (W a)).map (system P).hom =
-      CompletedOperations.comparison l E M P (fun k ↦ DerivedCategory.Q.obj (N k))
-  reduction : ∀ {a : S} (P : CompletedOperations.Expression W location a),
-    (M.calculus a).reduction.obj
-        ((CompletedOperations.completedValue l E P).obj
-          (fun k ↦ (coefficientSequenceLimit l E _).obj (DerivedCategory.Q.obj (N k)))) ≅
-      DerivedCategory.Q.obj (value l E N P)
-  reduction_normalization : ∀ {a : S} (P : CompletedOperations.Expression W location a),
-    (reduction P).hom = (M.calculus a).reduction.map (completed P).hom ≫
-      (M.calculus a).adjunction.counit.app (DerivedCategory.Q.obj (value l E N P))
-
-/-- Transport a strict chain map by the fixed whole-expression identifications.
-This applies in particular to c, its inverse, and every structural arrow.
-Source: node last paragraph, Stacks 0941
-(blueprint: lem-pur-integral-coherence-tower). -/
-def completedArrow (M : CompletedOperations.Models l E W)
+private theorem reductionLaw_of_realization (M : CompletedOperations.Models l E W)
     {I : Type i} {location : I → S} {N : ∀ k : I, Complex l E (W (location k))}
-    (R : Realization l E M N) {a : S}
-    {P Q : CompletedOperations.Expression W location a}
-    (v : value l E N P ⟶ value l E N Q) :=
-  (R.completed P).hom ≫ (coefficientSequenceLimit l E (W a)).map
-    (DerivedCategory.Q.map v) ≫ (R.completed Q).inv
+    (R : Realization l E M N) : ReductionLaw l E M R := by
+  intro a P Q v
+  constructor
+  · rw [R.reduction_normalization, R.reduction_normalization]
+    dsimp only [completedArrow]
+    simp only [Functor.map_comp, Category.assoc]
+    rw [← Functor.map_comp_assoc _ (R.completed Q).inv (R.completed Q).hom,
+      Iso.inv_hom_id, CategoryTheory.Functor.map_id, Category.id_comp]
+    simpa only [Functor.comp_map, Functor.id_map, Category.assoc] using
+      congrArg ((M.calculus a).reduction.map (R.completed P).hom ≫ ·)
+        ((M.calculus a).adjunction.counit.naturality (DerivedCategory.Q.map v))
+  · intro m n h
+    exact ((coefficientSequenceDerivedTransition l E (W a) h).naturality
+      (R.reduction P).hom).symm
 
-/-- Coherent finite reduction of every transported arrow. The second square is the
-explicit compatibility for every quotient B_m -> B_n, including m=n.
-Source: node final sentence, Stacks 0941
-(blueprint: lem-pur-integral-coherence-tower). -/
-def ReductionLaw (M : CompletedOperations.Models l E W)
-    {I : Type i} {location : I → S} {N : ∀ k : I, Complex l E (W (location k))}
-    (R : Realization l E M N) : Prop :=
-  ∀ {a : S} {P Q : CompletedOperations.Expression W location a}
-    (v : value l E N P ⟶ value l E N Q),
-    ((M.calculus a).reduction.map (completedArrow l E M R v) ≫ (R.reduction Q).hom =
-      (R.reduction P).hom ≫ DerivedCategory.Q.map v) ∧
-    (∀ {m n : ℕ} (h : n ≤ m),
-      (coefficientSequenceDerivedTransition l E (W a) h).app _ ≫
-          (normalizedDVRRes l E (W a) h).map
-            ((coefficientSequenceDerivedEvaluation l E (W a) n).map (R.reduction P).hom) =
-        (coefficientSequenceDerivedEvaluation l E (W a) m).map (R.reduction P).hom ≫
-          (coefficientSequenceDerivedTransition l E (W a) h).app _)
 
 /-- Strict integral quotient-tower coherence, with its completed-operation and finite
 reduction realizations. Families only name the schemes and the three inputs: take S=Fin 3,
@@ -328,6 +204,20 @@ theorem integralCoherenceTower (W : S → Scheme.{t})
           (R := completedIntegralCommRingSheafUnrestricted l E (W (location k))) (P k))
         (T : ∀ k : I, QuotientPresentation l E M (location k) (P k) (hP k)),
         ∃ R : Realization l E M (fun k ↦ (T k).complex), ReductionLaw l E M R) := by
-  sorry
+  obtain ⟨M, hc, hs, ht⟩ :=
+    CompletedOperations.completedOperationTowerSubstitution.{t, u, s, i, j} l E W _hl
+  refine ⟨M, hc, hs, ht, strictPullbackComparisons l E W, ?_, ?_⟩
+  · intro a P hP hflat
+    exact goodQuotientPresentation l E M a P hP hflat
+  · intro I location P hP T
+    have hn (k : I) : IsNormalizedCoefficientSequence l E (W (location k))
+        (DerivedCategory.Q.obj (T k).complex) :=
+      normalized_of_iso l E (T k).iso
+        ((M.calculus (location k)).reduction_normalized _)
+    obtain ⟨A⟩ := strictExpressionRealization l E M hc
+      (fun k ↦ (T k).complex) (fun k ↦ (T k).good) hn
+    obtain ⟨R⟩ := realization_of_system l E M hc _ A.good A.normalized A.system
+      A.system_input A.system_unit A.system_tensor A.system_pullback A.structural
+    exact ⟨R, reductionLaw_of_realization l E M R⟩
 
 end WeilConjectures.IntegralCoherence

@@ -1,0 +1,125 @@
+{
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.NativeWeilTensorRingedBridge",
+  "date": "2026-10-27",
+  "group": "J2"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "Nearest blueprint ancestor lookup for lem-sf-native-weil-tensor-ringed-bridge returns None. Source paragraph: cor-coef-verdier-weil-equivariance, internal Hom/evaluation and normalized action-site restriction. Ordinary Hom naturality of the native Frobenius ringed model.",
+   "via": [
+    "lem-sf-native-weil-tensor-ringed-bridge",
+    "lem-sf-native-weil-tensor-geometry",
+    "lem-sf-native-weil-ringed-tensor-model",
+    "lem-sf-native-weil-tensor-constraint-lifts",
+    "lem-sf-native-weil-tensor-coherence",
+    "lem-sf-native-weil-tensor-lift",
+    "lem-sf-weil-native-tensor-transport",
+    "lem-sf-weil-native-closed-forgetful"
+   ]
+  },
+  "same_as": []
+ },
+ "id": "lem-sf-native-normalized-ordinary-hom",
+ "kind": "statement",
+ "title": "Assemble the ordinary model Hom maps naturally",
+ "statement": "For a specified NativeFrobeniusRingedModel A [lem-sf-native-frobenius-ringed-model], there exists a natural isomorphism from ringed internal Hom followed by A.E to ordinary adic internal Hom after A.E on both variables, whose component at (M,N) is precisely A.hom(M,N).hom.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-package/cor-coef-verdier-weil-equivariance.proof.md",
+  "place": "Ordinary Hom naturality of the native Frobenius ringed model."
+ },
+ "stmt_deps": [
+  "lem-sf-native-frobenius-ringed-model",
+  "def-sf-native-weil-closed-models"
+ ],
+ "proof": [
+  {
+   "text": "Apply NatIso.ofComponents to A.hom. The bifunctorial naturality equation is exactly A.hom_naturality for the contravariant source map and covariant target map. The component normalization is reflexivity.",
+   "uses": [
+    "lem-sf-native-frobenius-ringed-model"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-package/cor-coef-verdier-weil-equivariance.proof.md",
+    "place": "Ordinary Hom naturality of the native Frobenius ringed model."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sf-native-frobenius-ringed-model"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "J2",
+  "date": "2026-10-27",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-package/cor-coef-verdier-weil-equivariance.proof.md",
+  "place": "Ordinary Hom naturality of the native Frobenius ringed model."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Equivalence between categories of modules compatible with internal Hom preserves tensor unit and restriction along action site preserves tensor and Hom",
+   "results": "8 hits: ModuleCat.extendRestrictScalarsAdj_unit_app_apply, Rep.MonoidalClosed.linearHomEquivComm, Rep.MonoidalClosed.linearHomEquiv, Rep.instIsRightAdjointActionModuleCatRes, ModuleCat.ExtendRestrictScalarsAdj.HomEquiv.toRestrictScalars_hom_apply, Rep.instIsLeftAdjointActionModuleCatRes, ModuleCat.extendRestrictScalarsAdj_homEquiv_apply, CategoryTheory.Mod_.comap_obj_mod",
+   "date": "2026-10-27",
+   "verdict": "No exact recognition or normalized-component statement among these hits. Use tensor-Hom adjunction, uniqueness of adjoints, or NatIso.ofComponents with the given component maps."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Equivalence",
+   "results": "12 hits: CategoryTheory.Equivalence, CategoryTheory.Equivalence.refl, CategoryTheory.Equivalence.instInhabited, CategoryTheory.Equivalence.instPowInt, CategoryTheory.Equivalence.instCategory, CategoryTheory.Equivalence.pow, CategoryTheory.Equivalence.powNat, CategoryTheory.Equivalence.functor",
+   "date": "2026-10-27",
+   "verdict": "No exact recognition or normalized-component statement among these hits. Use tensor-Hom adjunction, uniqueness of adjoints, or NatIso.ofComponents with the given component maps."
+  },
+  {
+   "tool": "grep",
+   "query": "preservesKInjectiveComplexes|tensorHomEquiv",
+   "results": "17 hits: Mathlib/LinearAlgebra/Trace.lean, Mathlib/LinearAlgebra/Trace.lean, Mathlib/LinearAlgebra/Trace.lean, Mathlib/LinearAlgebra/Trace.lean, Mathlib/LinearAlgebra/Trace.lean, Mathlib/LinearAlgebra/TensorProduct/Associator.lean, Mathlib/LinearAlgebra/Contraction.lean, Mathlib/LinearAlgebra/Contraction.lean",
+   "date": "2026-10-27",
+   "verdict": "No exact recognition or normalized-component statement among these hits. Use tensor-Hom adjunction, uniqueness of adjoints, or NatIso.ofComponents with the given component maps."
+  },
+  {
+   "tool": "grep",
+   "query": "ordinaryIhomBifunctor",
+   "results": "Sheaf/Paper/NativeWeilClosedModels.lean:42 defines the ordinary bifunctor. NativeFrobeniusRingedModel supplies its component maps and their naturality.",
+   "date": "2026-10-27",
+   "verdict": "Reuse the existing proved API; only naturality assembly or uniqueness of adjoints remains."
+  }
+ ],
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.NativeNormalizedOrdinaryHom",
+  "file": "lean/Sheaf/Paper/NativeNormalizedOrdinaryHom.lean",
+  "declaration": "AlgebraicGeometry.ProEtaleWeilSheaf.normalized_ordinary_hom",
+  "statement": "theorem normalized_ordinary_hom\n    {k₀ : Type u} [Field k₀] [Finite k₀] {l : ℕ} [Fact l.Prime]\n    {X : Scheme.{u}} [X.Over (Spec (CommRingCat.of k₀))]\n    (A : NativeFrobeniusRingedModel k₀ l X) :\n    ∃ h : Functor.uncurry.obj (SheafOfModules.homFunctor (R := A.R)) ⋙ A.E.functor ≅\n        (A.E.functor.op.prod A.E.functor) ⋙ Functor.uncurry.obj\n          (ordinaryIhomBifunctor l (X ↘ Spec (CommRingCat.of k₀)).geometricFiber),\n      ∀ M N, h.hom.app (op M, N) = (A.hom M N).hom",
+  "branch": "sheaf-dag",
+  "by": "J2",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-3a85c",
+  "group": "J2",
+  "result": "fix",
+  "landing": "20261027T135426-L-3704573",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-3a85c",
+  "group": "J2",
+  "result": "fix",
+  "landing": "20261027T135426-L-3704573",
+  "kind": "interface",
+  "note": "independent cc review: delivered BridgeData structure+attributes vs published item (byte-identical); underived_restriction vs Presentation fields (tensor_pure/unit_sections/evaluation/symmetry) and Underived/TensorCoherence; new node records vs Lean; 2 direct importers compiled OK against delivery"
+ }
+}

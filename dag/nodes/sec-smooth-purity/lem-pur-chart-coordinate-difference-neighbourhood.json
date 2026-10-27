@@ -1,0 +1,120 @@
+{
+ "id": "lem-pur-chart-coordinate-difference-neighbourhood",
+ "kind": "statement",
+ "title": "Centred etale coordinate differences along the diagonal",
+ "statement": "Let h:U→V be a scheme morphism with a separated etale coordinate map [def-weil-etale-morphism] u:U→A^d_V [def-sbc-affine-space] over V, including d=0. Define the difference map U×_V U→A^d_U over the first projection by the coordinate functions y_i−x_i. There is an open neighbourhood O of the diagonal and a section s:U→O whose composite with the inclusion is the diagonal, such that the difference map restricted to O is etale and its square with s, the identity of U and the standard zero section is Cartesian. The statement includes empty U.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-orientation/sk-prop-sp-orientation-charts.proof.md",
+  "place": "Step 1: etale coordinate differences and the centred Cartesian zero-section neighbourhood"
+ },
+ "stmt_deps": [
+  "def-weil-etale-morphism",
+  "def-sbc-affine-space"
+ ],
+ "proof": [
+  {
+   "text": "Base-change u to obtain the raw second-coordinate map over U. Translation by minus the first coordinates is an affine-space automorphism. Its composite with the raw map is the difference map, so that map is etale. Cache this calculation before the cone argument.",
+   "uses": [
+    "def-weil-etale-morphism",
+    "def-sbc-affine-space"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The centred etale chart geometry gives an open neighbourhood O, a section lifting the diagonal, and a pullback square over the affine-space diagonal. The difference coordinates vanish on the section. For a cone over the difference map and zero section, the structure-map equation identifies its base map, and coordinatewise y_i−x_i=0 supplies the original affine-diagonal cone equation. Its universal lift therefore satisfies both required cone equations and is unique. The same argument handles zero coordinates and the empty scheme.",
+   "uses": [
+    "lem-pur-chart-normal-differential"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-etale-morphism",
+  "def-sbc-affine-space",
+  "lem-pur-chart-normal-differential"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "G5",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-orientation/sk-prop-sp-orientation-charts.proof.md",
+  "place": "Step 1: etale coordinate differences and the centred Cartesian zero-section neighbourhood"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For an etale coordinate chart U to affine space over V, coordinate differences on U times V U are etale and have a Cartesian zero-section neighbourhood of the diagonal",
+   "results": "8 hits: Algebra.IsStandardSmoothOfRelativeDimension.exists_etale_mvPolynomial, StandardEtalePair.hasMap_X, StandardEtalePresentation.P, StandardEtalePresentation.hasMap, Algebra.instEtaleOfIsStandardEtale, StandardEtalePair.instEtaleRing, Algebra.isOpen_etaleLocus, StandardEtalePair.instFormallyEtaleRing",
+   "date": "2026-10-26",
+   "verdict": "The standard affine-space pullback lemma is used in the retained proof; no exact centred scheme-neighbourhood theorem was found in Mathlib."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry.AffineSpace.isPullback_map\"",
+   "results": "1 hits: AlgebraicGeometry.AffineSpace.isPullback_map",
+   "date": "2026-10-26",
+   "verdict": "The standard affine-space pullback lemma is used in the retained proof; no exact centred scheme-neighbourhood theorem was found in Mathlib."
+  },
+  {
+   "tool": "grep",
+   "query": "coordinateDifferences|centred.*diagonal",
+   "results": "0 hits: ",
+   "date": "2026-10-26",
+   "verdict": "The standard affine-space pullback lemma is used in the retained proof; no exact centred scheme-neighbourhood theorem was found in Mathlib."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.DiagonalDncChartNormalization",
+  "date": "2026-10-26",
+  "group": "G5"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-thm-smooth-purity",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-pur-composition-coherence",
+   "place": "Coordinate-neighbourhood geometry in the normalized diagonal chart assembly",
+   "via": [
+    "lem-pur-diagonal-dnc-chart-normalization"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.ChartCoordinateDifferenceNeighbourhood",
+  "file": "lean/Sheaf/Paper/ChartCoordinateDifferenceNeighbourhood.lean",
+  "declaration": "WeilConjectures.PurityFiniteSetting.chartCoordinateDifferences_neighbourhood",
+  "declarations": [
+   "WeilConjectures.PurityFiniteSetting.chartCoordinateDifferences",
+   "WeilConjectures.PurityFiniteSetting.chartCoordinateDifferences_neighbourhood"
+  ],
+  "statement": "theorem chartCoordinateDifferences_neighbourhood {U V : Scheme.{u}}\n    (d : ℕ) (h : U ⟶ V) (u : U ⟶ AffineSpace (ULift.{u} (Fin d)) V)\n    [Etale u] [IsSeparated u]\n    (w : u ≫ (AffineSpace (ULift.{u} (Fin d)) V ↘ V) = h) :\n    ∃ (O : (pullback h h).Opens) (s : U ⟶ O.toScheme),\n      s ≫ O.ι = pullback.diagonal h ∧\n      Etale (O.ι ≫ chartCoordinateDifferences d h u) ∧\n      IsPullback s (𝟙 U) (O.ι ≫ chartCoordinateDifferences d h u)\n        (AffineSpace.zeroSection (ULift.{u} (Fin d)) U)",
+  "branch": "sheaf-dag",
+  "by": "G5",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-fe345",
+  "group": "G5",
+  "result": "pass",
+  "landing": "20261026T222700-L-681626",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-fe345",
+  "group": "G5",
+  "result": "pass",
+  "landing": "20261026T222700-L-681626",
+  "kind": "interface",
+  "note": "independent cc review: item node lem-pur-diagonal-dnc-chart-normalization and new nodes lem-pur-chart-coordinate-difference-neighbourhood / lem-pur-vector-integration-identity-adjunct against the delivered Lean; relocated chartCoordinateDifferences(+_neighbourhood) against the clone (identical, publicly re-exported); 16 direct importers compiled OK against the delivered set; #print axioms (sorryAx only via pre-existing affineTranspose_unit_coordinates)"
+ }
+}

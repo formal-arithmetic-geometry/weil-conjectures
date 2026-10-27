@@ -1,0 +1,132 @@
+{
+ "id": "lem-coef-semilinear-tensor-coherence",
+ "kind": "statement",
+ "title": "Normalized system tensor models and their reduction compatibility",
+ "statement": "On the site and ring tower of [def-coef-semilinear-system-models], fix any SystemScalarCoherence of [lem-coef-semilinear-scalar-coherence]. There is SystemTensorCoherence as defined in the attached Lean module: closed monoidal structures against the recorded derived internal Hom on the actual sequence category and its levels, K-flat total tensor models, evaluation and scalar-tensor isomorphisms with their specified chain, counit and pure-tensor normalization, and the equation saying reduction of a system tensor is tensor of its two reductions under these comparisons. This assertion contains no cartesian internal-Hom evaluation or Hom transition law.",
+ "source": {
+  "document": "literature/zheng-six-operations-lefschetz-verdier-DM-stacks_arXiv-1006.3810.pdf",
+  "place": "Construction 4.1, printed p. 21; Stacks 07A4, 07A6 and 08J9; tensor part of steps 3, 6 and 7 of lem-coef-semilinear-system-existence."
+ },
+ "stmt_deps": [
+  "def-coef-semilinear-derived-calculus",
+  "def-coef-semilinear-system-models",
+  "lem-coef-semilinear-scalar-coherence"
+ ],
+ "proof": [
+  {
+   "text": "Obtain the closed structures and K-flat total tensor models on the sequence site and at every coefficient level.",
+   "uses": [
+    "lem-coef-semilinear-tensor-base"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Obtain the normalized evaluation and scalar tensor comparisons and their representative models for those chosen structures.",
+   "uses": [
+    "lem-coef-semilinear-tensor-comparisons"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Obtain the strict representative reduction equation and assemble all fields into SystemTensorCoherence.",
+   "uses": [
+    "lem-coef-semilinear-tensor-reduction"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-coef-semilinear-tensor-base",
+  "lem-coef-semilinear-tensor-comparisons",
+  "lem-coef-semilinear-tensor-reduction"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/zheng-six-operations-lefschetz-verdier-DM-stacks_arXiv-1006.3810.pdf",
+  "place": "Construction 4.1; Lean assembly from three strict component statements."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Derived category of inverse systems of sheaves of modules varying ring tensor internal Hom evaluation adjunction",
+   "results": "{\"t\": \"2026-10-26T03:36:13Z\", \"tool\": \"leanfinder\", \"query\": \"Derived category of inverse systems of sheaves of modules varying ring tensor internal Hom evaluation adjunction\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"LightCondensed.instMonoidalClosedSheafLightProfiniteCoherentTopologyModuleCat\", \"LightCondensed.instMonoidalClosedLightCondMod\", \"LightCondensed.ihomPoints\", \"LightCondensed.internallyProjective_iff_tensor_condition'\", \"LightCondensed.internallyProjective_iff_tensor_condition\", \"LightCondensed.free_internallyProjective_iff_tensor_condition\", \"LightCondensed.ihomPoints_symm_comp\", \"LightCondensed.free_internallyProjective_iff_tensor_condition'\"], \"digest\": \"efcb0a4204fb273a\"}",
+   "date": "2026-10-26",
+   "verdict": "No theorem supplies the normalized varying-ring sequence-site construction; the generic adjunction and localization APIs are available."
+  },
+  {
+   "tool": "grep",
+   "query": "SemilinearSystemData|HomReductionFormula|reduction_cocycle",
+   "results": "{\"t\": \"2026-10-26T03:36:37Z\", \"tool\": \"grep\", \"query\": \"SemilinearSystemData|HomReductionFormula|reduction_cocycle\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-26",
+   "verdict": "No theorem supplies the normalized varying-ring sequence-site construction; the generic adjunction and localization APIs are available."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived tensor product sheaves of modules evaluation commutes with internal Hom for cartesian systems",
+   "results": "{\"t\": \"2026-10-26T03:40:49Z\", \"tool\": \"leansearch\", \"query\": \"Derived tensor product sheaves of modules evaluation commutes with internal Hom for cartesian systems\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Sheaf.tensorProd_isSheaf\", \"CategoryTheory.Types.tensorProductAdjunction\", \"CategoryTheory.CartesianMonoidalCategory.fullSubcategory_tensorHom_hom\", \"CategoryTheory.exp.ev\", \"CategoryTheory.MonoidalClosed.internalHomAdjunction₂\", \"SheafOfModules.evaluation\", \"CategoryTheory.ihom.ev\", \"CategoryTheory.Pi.closedCounit\"], \"digest\": \"102a4753a2013610\"}",
+   "date": "2026-10-26",
+   "verdict": "No theorem supplies the normalized varying-ring sequence-site construction; the generic adjunction and localization APIs are available."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.SemilinearSystemsExistence",
+  "date": "2026-10-26",
+  "group": "Q1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-coef-integral-exceptional-adjoint",
+   "place": "Proof paragraphs 1-2: actual ordinary derived coefficient systems and their canonical scalar/tensor/Hom operations before the inverse limit; Construction 4.1, printed p. 21; Stacks 07A4, 07A6 and 08J9; tensor part of steps 3, 6 and 7 of lem-coef-semilinear-system-existence.",
+   "via": [
+    "lem-coef-semilinear-system-existence",
+    "lem-coef-semilinear-derived-sections",
+    "lem-coef-finite-adjunction-diagram-realization"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.SemilinearTensorCoherence",
+  "file": "lean/Sheaf/Paper/SemilinearTensorCoherence.lean",
+  "declaration": "WeilConjectures.SemilinearSections.systemTensorCoherence_nonempty",
+  "statement": "theorem systemTensorCoherence_nonempty :\n    Nonempty (SystemTensorCoherence.{c, v, r} J B τ S)",
+  "branch": "sheaf-dag",
+  "by": "Q1",
+  "date": "2026-10-26"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q1",
+  "result": "pass",
+  "landing": "20261026T070536-L-3606604",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P5",
+  "result": "pass",
+  "landing": "20261026T092234-L-3416155",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

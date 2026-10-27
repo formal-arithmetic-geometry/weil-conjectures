@@ -1,0 +1,275 @@
+{
+ "id": "lem-trf-finite-dvr-branch-completion",
+ "kind": "statement",
+ "title": "Completion of an injective finite algebra with DVR branches",
+ "statement": "Let $(A,\\mathfrak m)$ be a commutative Noetherian local ring [def-weil-pbc-noetherian-ring] of Krull dimension $1$ [def-weil-pbc-krull-dimension-ring], where local means that $\\mathfrak m$ is the unique maximal ideal. Let $A\\hookrightarrow B$ be an injective homomorphism of commutative rings making $B$ a finite $A$-module [def-weil-finitely-generated-module]. Assume that $B_{\\mathfrak q}$ is a discrete valuation ring [def-sc-discrete-valuation-ring] for every prime $\\mathfrak q\\subset B$ contracting to $\\mathfrak m$, where localization at primes is as in [def-weil-pbc-localization-at-prime]. Put $R=\\widehat A=\\varprojlim_n A/\\mathfrak m^n$ and $C=B\\otimes_A R$ [def-weil-pbc-adic-completion, def-weil-module-base-change]. Then the set of primes $\\mathfrak q$ over $\\mathfrak m$ is finite and there is a canonical isomorphism $$C\\cong\\prod_{\\mathfrak q\\mid\\mathfrak m}\\widehat{B_{\\mathfrak q}}$$ compatible with both the $B$- and $R$-algebra structures. Each factor is a discrete valuation ring, hence a normal domain, meaning a domain integrally closed in its fraction field [def-weil-pbc-integral-closure]. The map $A\\to R$ is flat [def-weil-pbc-flat-ring-map], and the structural map $i:R\\to C$, $r\\mapsto1\\otimes r$, is injective. Both $R$ and $C$ are reduced (they have no nonzero nilpotent elements); $R$ is Noetherian local of dimension $1$; and $C$ is a finite $R$-module, integral over $R$, and Noetherian. Finally $C$ is integrally closed in $Q(C)$, where $Q(C)$ is its localization at all non-zero-divisors (elements $s$ such that $sx=0$ implies $x=0$).",
+ "source": {
+  "document": "literature/stacks-project/varieties.tex",
+  "place": "Tag 0C3V (lemma-normalization-same-after-completion), final paragraph: product of completed local DVRs. Agent-explicit finite-algebra formulation, also recording flat injection and normality before any birational comparison."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-noetherian-ring",
+  "def-weil-pbc-krull-dimension-ring",
+  "def-weil-finitely-generated-module",
+  "def-sc-discrete-valuation-ring",
+  "def-weil-pbc-localization-at-prime",
+  "def-weil-pbc-adic-completion",
+  "def-weil-module-base-change",
+  "def-weil-pbc-integral-closure",
+  "def-weil-pbc-flat-ring-map"
+ ],
+ "proof": [
+  {
+   "text": "Apply [lem-weil-pbc-completion-finite-extension] to the finite map $A\\to B$ at $\\mathfrak m$. Since every element outside $\\mathfrak m$ is a unit, $A_{\\mathfrak m}=A$ by $a/s\\mapsto as^{-1}$. The cited statement gives finiteness of the primes over $\\mathfrak m$ and an isomorphism $R\\otimes_A B\\cong\\prod_{\\mathfrak q\\mid\\mathfrak m}D_{\\mathfrak q}$, where $D_{\\mathfrak q}=\\widehat{B_{\\mathfrak q}}$, compatible with $B$ and $R$. Precompose with tensor symmetry $b\\otimes r\\mapsto r\\otimes b$. In particular $b\\otimes r$ maps in coordinate $\\mathfrak q$ to the product of the completion image of $b$ and the image of $r$ under the completed local map $R\\to D_{\\mathfrak q}$; this gives exactly both algebra compatibilities in the statement.",
+   "uses": [
+    "lem-weil-pbc-completion-finite-extension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 07N9, lemma-completion-finite-extension; specialize at the maximal ideal"
+   }
+  },
+  {
+   "text": "For every indexing prime, $B_{\\mathfrak q}$ is a DVR by hypothesis. Its Noetherian local-domain and nonzero principal-maximal-ideal characterization is included in [def-sc-discrete-valuation-ring], so [lem-weil-pbc-completion-of-dvr-is-dvr] applies and gives that $D_{\\mathfrak q}$ is a DVR. Each $D_{\\mathfrak q}$ is therefore a principal ideal domain by that definition, and [lem-weil-pbc-pid-noetherian-normal] makes it a normal domain, in particular integrally closed in its fraction field.",
+   "uses": [
+    "def-sc-discrete-valuation-ring",
+    "lem-weil-pbc-completion-of-dvr-is-dvr",
+    "lem-weil-pbc-pid-noetherian-normal"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0AP1, lemma-completion-dvr; Algebra Tag 00PD (lemma-characterize-dvr) and Tag 00GZ (lemma-PID-normal)"
+   }
+  },
+  {
+   "text": "The map $A\\to R$ is flat by [lem-weil-pbc-noetherian-completion-flat]. The definition [def-weil-pbc-flat-ring-map] thus sends the injective $A$-linear map $A\\hookrightarrow B$ to an injection $A\\otimes_A R\\to B\\otimes_A R$. Under $A\\otimes_A R\\cong R$, $a\\otimes r\\mapsto ar$ with inverse $r\\mapsto1\\otimes r$, this injection is $i(r)=1\\otimes r$. This proves injectivity of $i$.",
+   "uses": [
+    "lem-weil-pbc-noetherian-completion-flat",
+    "def-weil-pbc-flat-ring-map"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00MB, lemma-completion-flat (1); Tag 00HB, definition-flat (1)"
+   }
+  },
+  {
+   "text": "If $c^n=0$ in $C$, every coordinate of its image under step 1 is nilpotent in the domain $D_{\\mathfrak q}$, hence zero, so $c=0$. Thus $C$ is reduced. If $r^n=0$ in $R$, then $i(r)^n=0$, so $i(r)=0$ and injectivity from step 3 implies $r=0$. Thus $R$ is reduced as well.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 0C3V, lemma-normalization-same-after-completion, final paragraph; elementary reducedness consequence of the displayed product"
+   }
+  },
+  {
+   "text": "By [lem-weil-pbc-adic-completion-noetherian] and [lem-weil-pbc-local-completion-local-ring], $R$ is Noetherian local. By [lem-weil-pbc-completion-dimension], $\\dim R=\\dim A=1$. Choose finite $A$-module generators $b_1,\\ldots,b_t$ of $B$. The elements $b_j\\otimes1$ generate $C$ over $R$: if $b=\\sum_j a_jb_j$ then $b\\otimes r=\\sum_j (b_j\\otimes1)(a_jr)$, and every tensor is a finite sum of pure tensors. Therefore $C$ is finite over $R$. Apply [lem-weil-pbc-finite-algebra-is-integral] and [lem-weil-pbc-finite-algebra-noetherian] to $R\\to C$ to obtain integrality and Noetherianity.",
+   "uses": [
+    "lem-weil-pbc-adic-completion-noetherian",
+    "lem-weil-pbc-local-completion-local-ring",
+    "lem-weil-pbc-completion-dimension",
+    "lem-weil-pbc-finite-algebra-is-integral",
+    "lem-weil-pbc-finite-algebra-noetherian"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tags 0316 (lemma-completion-Noetherian-Noetherian), 05GI (lemma-radical-completion), 00GK (lemma-finite-is-integral), 00FN (lemma-Noetherian-permanence); More on Algebra Tag 07NV (lemma-completion-dimension)"
+   }
+  },
+  {
+   "text": "Use the product in step 1 to write $C=\\prod D_{\\mathfrak q}$. Let $x=c/s\\in Q(C)$ be integral over $C$, so $s$ is a non-zero-divisor. Every coordinate $s_{\\mathfrak q}$ is nonzero: otherwise $s$ annihilates the nonzero tuple supported at $\\mathfrak q$ with coordinate $1$. The coordinate fraction $c_{\\mathfrak q}/s_{\\mathfrak q}$ satisfies the projected monic equation for $x$, and hence belongs to $D_{\\mathfrak q}$ by step 2. Write it as $d_{\\mathfrak q}$ and let $d=(d_{\\mathfrak q})\\in C$. Coordinatewise $c=sd$, so $x=d/1$ by the fraction relation [def-weil-pbc-module-localization]. Thus every element integral over $C$ lies in $C$, precisely integral closedness [def-weil-pbc-integral-closure].",
+   "uses": [
+    "def-weil-pbc-module-localization",
+    "def-weil-pbc-integral-closure"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tags 07JZ (definition-localization-module), 00GI and 00GP (definition-integral-closure); elementary monic-equation calculation using step 2"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-completion-finite-extension",
+  "def-sc-discrete-valuation-ring",
+  "lem-weil-pbc-completion-of-dvr-is-dvr",
+  "lem-weil-pbc-pid-noetherian-normal",
+  "lem-weil-pbc-noetherian-completion-flat",
+  "def-weil-pbc-flat-ring-map",
+  "lem-weil-pbc-adic-completion-noetherian",
+  "lem-weil-pbc-local-completion-local-ring",
+  "lem-weil-pbc-completion-dimension",
+  "lem-weil-pbc-finite-algebra-is-integral",
+  "lem-weil-pbc-finite-algebra-noetherian",
+  "def-weil-pbc-module-localization",
+  "def-weil-pbc-integral-closure"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/varieties.tex",
+  "place": "Tag 0C3V, lemma-normalization-same-after-completion, final paragraph; auxiliary completion facts in Algebra 07N9 and More on Algebra 0AP1. Reducedness and the last fraction calculation are elementary consequences written explicitly."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "([Cc]ompletion.*[Dd]iscrete[Vv]aluation|[Dd]iscrete[Vv]aluation.*[Cc]ompletion|[Cc]ompletion.*[Ii]ntegrally[Cc]losed)",
+   "results": "{\"t\": \"2026-10-22T06:05:01Z\", \"tool\": \"grep\", \"query\": \"([Cc]ompletion.*[Dd]iscrete[Vv]aluation|[Dd]iscrete[Vv]aluation.*[Cc]ompletion|[Cc]ompletion.*[Ii]ntegrally[Cc]losed)\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"Mathlib/NumberTheory/NumberField/Completion/FinitePlace.lean\"], \"digest\": \"58dc49a0163603a6\"}; No match. Returned AdicValuation declarations concern the valuation completion of a Dedekind fraction field. FinitePlace.lean:76 treats its valuation subring, not the ideal-adic completion and finite-algebra tensor product here; a nontrivial comparison would still be needed. No hit supplies this finite product together with reducedness descent and integral closedness in total fractions.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A finite algebra with discrete valuation local branches has normal completed tensor product and the base completion is reduced",
+   "results": "{\"t\": \"2026-10-22T06:05:01Z\", \"tool\": \"leansearch\", \"query\": \"A finite algebra with discrete valuation local branches has normal completed tensor product and the base completion is reduced\", \"sub\": \"\", \"ok\": false, \"n_hits\": 0, \"note\": \"service unavailable: {\\\"error\\\":\\\"Rate limit exceeded: 60 per 1 minute\\\"}\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}; service unavailable: {\"error\":\"Rate limit exceeded: 60 per 1 minute\"}",
+   "date": "2026-10-22",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "loogle",
+   "query": "AdicCompletion, IsDiscreteValuationRing",
+   "results": "{\"t\": \"2026-10-22T06:05:01Z\", \"tool\": \"loogle\", \"query\": \"AdicCompletion, IsDiscreteValuationRing\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}; No match. Returned AdicValuation declarations concern the valuation completion of a Dedekind fraction field. FinitePlace.lean:76 treats its valuation subring, not the ideal-adic completion and finite-algebra tensor product here; a nontrivial comparison would still be needed. No hit supplies this finite product together with reducedness descent and integral closedness in total fractions.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Completion of an injective finite algebra over a Noetherian local ring whose closed fibre localizations are DVRs is a product of complete DVRs and is integrally closed",
+   "results": "{\"t\": \"2026-10-22T06:05:12Z\", \"tool\": \"leanfinder\", \"query\": \"Completion of an injective finite algebra over a Noetherian local ring whose closed fibre localizations are DVRs is a product of complete DVRs and is integrally closed\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"IsDedekindDomain.HeightOneSpectrum.instAlgebraAdicCompletion\", \"IsDedekindDomain.HeightOneSpectrum.instAlgebraSubtypeAdicCompletionMemValuationSubringAdicCompletionIntegers\", \"instIsDiscreteValuationRingSubtypeAdicCompletionMemValuationSubringAdicCompletionIntegers\", \"IsDedekindDomain.HeightOneSpectrum.adicCompletion\", \"IsDedekindDomain.HeightOneSpectrum.adicCompletion.mul_nonZeroDivisor_mem_adicCompletionIntegers\", \"IsDedekindDomain.HeightOneSpectrum.instIsTorsionFreeSubtypeAdicCompletionMemValuationSubringAdicCompletionIntegers\", \"IsDedekindDomain.HeightOneSpectrum.algebraMap_adicCompletion\", \"IsDedekindDomain.HeightOneSpectrum.coe_algebraMap_mem\"], \"digest\": \"e0d08ee3b638b325\"}; No match. Returned AdicValuation declarations concern the valuation completion of a Dedekind fraction field. FinitePlace.lean:76 treats its valuation subring, not the ideal-adic completion and finite-algebra tensor product here; a nontrivial comparison would still be needed. No hit supplies this finite product together with reducedness descent and integral closedness in total fractions.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Tensoring a finite extension with a local adic completion gives a finite product of completions of local discrete valuation rings",
+   "results": "{\"t\": \"2026-10-22T06:06:32Z\", \"tool\": \"leanfinder\", \"query\": \"Tensoring a finite extension with a local adic completion gives a finite product of completions of local discrete valuation rings\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"IsDedekindDomain.HeightOneSpectrum.instAlgebraAdicCompletion\", \"IsDedekindDomain.HeightOneSpectrum.instAlgebraSubtypeAdicCompletionMemValuationSubringAdicCompletionIntegers\", \"IsDedekindDomain.HeightOneSpectrum.adicCompletion\", \"IsDedekindDomain.HeightOneSpectrum.instIsTorsionFreeSubtypeAdicCompletionMemValuationSubringAdicCompletionIntegers\", \"instIsDiscreteValuationRingSubtypeAdicCompletionMemValuationSubringAdicCompletionIntegers\", \"IsDedekindDomain.HeightOneSpectrum.adicCompletion.instIsScalarTower'\", \"IsDedekindDomain.HeightOneSpectrum.algebraMap_adicCompletion\", \"IsDedekindDomain.HeightOneSpectrum.instInhabitedSubtypeAdicCompletionMemValuationSubringAdicCompletionIntegers\"], \"digest\": \"bb0c931f5f12fbd9\"}; No match. Returned AdicValuation declarations concern the valuation completion of a Dedekind fraction field. FinitePlace.lean:76 treats its valuation subring, not the ideal-adic completion and finite-algebra tensor product here; a nontrivial comparison would still be needed. No hit supplies this finite product together with reducedness descent and integral closedness in total fractions.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A finite algebra over a Noetherian local ring completed at the maximal ideal is a product of the completions of its local rings at primes in the closed fibre",
+   "results": "{\"t\": \"2026-10-23T04:15:14Z\", \"tool\": \"leanfinder\", \"query\": \"A finite algebra over a Noetherian local ring completed at the maximal ideal is a product of the completions of its local rings at primes in the closed fibre\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"IsDedekindDomain.HeightOneSpectrum.instAlgebraAdicCompletion\", \"IsDedekindDomain.HeightOneSpectrum.adicCompletion\", \"IsDedekindDomain.HeightOneSpectrum.algebraMap_adicCompletion\", \"IsDedekindDomain.FiniteAdeleRing.instDFunLikeHeightOneSpectrumAdicCompletion\", \"IsDedekindDomain.instDFunLikeFiniteAdeleRingHeightOneSpectrumAdicCompletion\", \"Algebra.quasiFinite_iff\", \"AdicCompletion.piEquivFin_apply\", \"Algebra.instFiniteResidueFieldOfQuasiFiniteAt\"], \"digest\": \"1591f0598af85de3\"}; Read AdicValuation.lean:576-624: adicCompletion there wraps the valuation completion of a fraction field, unlike ideal-adic completion here; no exact or one-line match.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "AdicCompletion, Module.Finite",
+   "results": "{\"t\": \"2026-10-23T04:16:12Z\", \"tool\": \"loogle\", \"query\": \"AdicCompletion, Module.Finite\", \"sub\": \"\", \"ok\": true, \"n_hits\": 10, \"note\": \"\", \"top\": [\"AdicCompletion.map_injective\", \"AdicCompletion.map_exact\", \"AdicCompletion.ofTensorProductEquivOfFiniteNoetherian\", \"AdicCompletion.coe_ofTensorProductEquivOfFiniteNoetherian\", \"AdicCompletion.ofTensorProduct_surjective_of_finite\", \"AdicCompletion.ofTensorProduct_bijective_of_finite_of_isNoetherian\", \"AdicCompletion.ofTensorProductEquivOfFiniteNoetherian_symm_of\", \"AdicCompletion.tensor_map_id_left_injective_of_injective\"], \"digest\": \"8a5cf2405d66ccdb\"}; AsTensorProduct.lean:321-340 supplies only the finite-module completion tensor equivalence, not the local-factor product or the DVR clauses.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "completion_finite_extension|completion.*[Dd][Vv][Rr]|[Dd][Vv][Rr].*completion|AdicCompletion.*IsDiscreteValuationRing",
+   "results": "{\"t\": \"2026-10-23T04:16:13Z\", \"tool\": \"grep\", \"query\": \"completion_finite_extension|completion.*[Dd][Vv][Rr]|[Dd][Vv][Rr].*completion|AdicCompletion.*IsDiscreteValuationRing\", \"sub\": \"RingTheory\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}; No hits in Mathlib/RingTheory for this regex.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A finite algebra with discrete valuation local branches has completed tensor product a product of complete discrete valuation rings",
+   "results": "{\"t\": \"2026-10-23T04:16:14Z\", \"tool\": \"leansearch\", \"query\": \"A finite algebra with discrete valuation local branches has completed tensor product a product of complete discrete valuation rings\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AdicCompletion.ofTensorProductEquivOfFiniteNoetherian\", \"AdicCompletion.ofTensorProductEquivOfFiniteNoetherian.congr_simp\", \"AdicCompletion.coe_ofTensorProductEquivOfFiniteNoetherian\", \"Algebra.TensorProduct.instRing\", \"Algebra.EssFiniteType.baseChange\", \"Valued.integer.compactSpace_iff_completeSpace_and_isDiscreteValuationRing_and_finite_residueField\", \"RingHom.Finite.tensorProductMap\", \"IsDiscreteValuationRing.toIsLocalRing\"], \"digest\": \"790c09ecc8587916\"}; The completion tensor equivalence, tensor ring and finite-map results cover pieces only; the valued-integer statement has a different completion and does not give this conjunction.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Tensoring an injective finite ring extension with the maximal ideal adic completion gives an integrally closed product of complete discrete valuation rings",
+   "results": "{\"t\": \"2026-10-23T04:17:08Z\", \"tool\": \"leanfinder\", \"query\": \"Tensoring an injective finite ring extension with the maximal ideal adic completion gives an integrally closed product of complete discrete valuation rings\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"IsDedekindDomain.HeightOneSpectrum.instAlgebraAdicCompletion\", \"IsDedekindDomain.HeightOneSpectrum.adicCompletion\", \"IsDedekindDomain.HeightOneSpectrum.instAlgebraSubtypeAdicCompletionMemValuationSubringAdicCompletionIntegers\", \"IsDedekindDomain.HeightOneSpectrum.instFaithfulSMulSubtypeAdicCompletionMemValuationSubringAdicCompletionIntegers\", \"IsDedekindDomain.HeightOneSpectrum.algebraMap_adicCompletion\", \"IsDedekindDomain.HeightOneSpectrum.instIsTorsionFreeSubtypeAdicCompletionMemValuationSubringAdicCompletionIntegers\", \"IsDedekindDomain.HeightOneSpectrum.coe_algebraMap_mem\", \"IsDedekindDomain.HeightOneSpectrum.adicCompletion.instIsScalarTower'\"], \"digest\": \"c8a3c15c845b2458\"}; Read AdicValuation.lean:576-624: adicCompletion there wraps the valuation completion of a fraction field, unlike ideal-adic completion here; no exact or one-line match.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-curve-normalization-completion",
+  "date": "2026-10-22",
+  "group": "Q72"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Proof (1)--(2), semistable-alteration input in the nearby-cycle branch: ILO Exposé X, Theorem 3.4, Step 3, invoking Temkin 2010, Theorems 1.5 and 1.1 for a semistable multipointed modification. Temkin proof component: Marked dualizing line bundle and contracted-component degrees. Auxiliary input: Normalization and simple-pole branch calculation, prior to any numerical degree computation. Local input: Normalization of the completed local nodal branches, before the simple-pole calculation. Re-split argument: Completion of an injective finite algebra with DVR branches.",
+   "via": [
+    "lem-trf-curve-normalization-completion",
+    "lem-trf-nodal-normalization-adjunction",
+    "lem-trf-marked-nodal-dualizing-degrees",
+    "lem-trf-temkin-stable-modification",
+    "lem-trf-stable-modification-flat-curve-pair",
+    "lem-trf-dejong-relative-marked-semistable",
+    "lem-trf-relative-marked-nodal-reduction",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-trf-finite-dvr-branch-completion",
+  "worker": "stage1",
+  "summary": "Preserved the statement. Reused existing finite-completion, DVR-completion, flatness, PID-normality and dimension nodes. Wrote the tensor injection, finite generating set, nilpotence descent and coordinate monic-equation argument explicitly. No new nodes. Read every cited statement; exact quotations accompany all citations.",
+  "blueprint": "Proof (1)--(2), semistable-alteration input in the nearby-cycle branch: ILO Exposé X, Theorem 3.4, Step 3, invoking Temkin 2010, Theorems 1.5 and 1.1 for a semistable multipointed modification. Temkin proof component: Marked dualizing line bundle and contracted-component degrees. Auxiliary input: Normalization and simple-pole branch calculation, prior to any numerical degree computation. Local input: Normalization of the completed local nodal branches, before the simple-pole calculation. Re-split argument: Completion of an injective finite algebra with DVR branches.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-completion-finite-extension",
+    "why": "General finite-algebra completion and simultaneous algebra compatibilities; this unit supplies no commutative-algebra replacement."
+   },
+   {
+    "node": "lem-weil-pbc-completion-of-dvr-is-dvr",
+    "why": "Preservation of the DVR property under completion; generic commutative-algebra input."
+   },
+   {
+    "node": "lem-weil-pbc-adic-completion-noetherian",
+    "why": "Noetherianity of the completed base; generic algebra tool."
+   },
+   {
+    "node": "lem-weil-pbc-completion-dimension",
+    "why": "Dimension preservation under local completion; generic algebra tool."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-completion-finite-extension",
+  "lem-weil-pbc-completion-of-dvr-is-dvr",
+  "lem-weil-pbc-adic-completion-noetherian",
+  "lem-weil-pbc-completion-dimension"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-NW-bed614be2",
+  "group": "NW",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NW-bed614be2 (reviewer sub-agent of L); spot-checked: I read the item and its six steps in full. There are no new nodes and the statement is unchanged. No re-split note exists for this item, so the 2026-10-21 rules do not apply. Source: Stacks varieties.tex Tag 0C3V, final paragraph. The item abstracts its argument (A'⊗A^∧ = ∏ completed local rings by 07N9; each completion is a DVR by 0AP1), with the DVR branches taken as a hypothesis. Step 1: completion-finite-extension applied at p=m with A_m=A; its factors are the q-adic completions, which match the item, and it gives the S-algebra and completed-base compatibilities. Step 2: the DVR definition records the 00PD(4) equivalence, which is what completion-of-dvr-is-dvr needs, and it makes D_q a PID, so the PID-normal leaf applies. Step 3: completion is flat and flatness keeps A↪B injective, so i is injective; the injectivity hypothesis is needed (A=k[t]_(t)[e]/(e²) with B=A/(e) gives a non-reduced R). Step 4: reducedness via the product of domains and via injective i. Step 5: Noetherian, local and dim 1 for R from the completion nodes; C finite over R with explicit generators; then the integral and Noetherian leaves. Step 6: an elementary but complete coordinate argument for integral closedness in Q(C), since non-zero-divisors have all coordinates nonzero. proof_deps equals the union of the uses. Duplicate search found no node stating this lemma (checked lem-per-normalization-completion-base-change, lem-trf-nagata-normalization-dvr-branches, lem-trf-flat-birational-normalization-comparison, lem-sfb-nodal-completed-normalization-model); the existing 07N9 and 0AP1 nodes are reused. I accept the four generic-algebra tool_uses. No SGA citation. Small cases checked: one ramified branch, two split branches, and the two-branch node k[[u,v]]/(uv)."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.FiniteDVRBranchCompletion",
+  "declaration": "AdicCompletion.finite_dvr_branch_completion",
+  "file": "lean/Sheaf/RingTheory/FiniteDVRBranchCompletion.lean",
+  "statement": "theorem finite_dvr_branch_completion (A : Type u) (B : Type v) [CommRing A] [CommRing B] [Algebra A B] [IsNoetherianRing A] [IsLocalRing A] [Module.Finite A B] (hinj : Function.Injective (algebraMap A B)) (hdim : ringKrullDim A = 1) (hbranch : ∀ q : (IsLocalRing.maximalIdeal A).primesOver B, ∃ _ : IsDomain (Localization.AtPrime q.1), IsDiscreteValuationRing (Localization.AtPrime q.1)) : Finite ((IsLocalRing.maximalIdeal A).primesOver B) ∧ (∃ (e : (B ⊗[A] AdicCompletion (IsLocalRing.maximalIdeal A) A) ≃ₐ[B] (∀ q : (IsLocalRing.maximalIdeal A).primesOver B, AdicCompletion (IsLocalRing.maximalIdeal (Localization.AtPrime q.1)) (Localization.AtPrime q.1))) (g : ∀ q : (IsLocalRing.maximalIdeal A).primesOver B, AdicCompletion (IsLocalRing.maximalIdeal A) A →+* AdicCompletion (IsLocalRing.maximalIdeal (Localization.AtPrime q.1)) (Localization.AtPrime q.1)), (∀ (q : (IsLocalRing.maximalIdeal A).primesOver B) (n : ℕ) (a : AdicCompletion (IsLocalRing.maximalIdeal A) A) (r : A), AdicCompletion.evalₐ (IsLocalRing.maximalIdeal A) n a = Ideal.Quotient.mk ((IsLocalRing.maximalIdeal A) ^ n) r → AdicCompletion.evalₐ (IsLocalRing.maximalIdeal (Localization.AtPrime q.1)) n (g q a) = Ideal.Quotient.mk ((IsLocalRing.maximalIdeal (Localization.AtPrime q.1)) ^ n) (algebraMap A (Localization.AtPrime q.1) r)) ∧ (∀ (a : AdicCompletion (IsLocalRing.maximalIdeal A) A) (q : (IsLocalRing.maximalIdeal A).primesOver B), e ((1 : B) ⊗ₜ[A] a) q = g q a)) ∧ (∀ q : (IsLocalRing.maximalIdeal A).primesOver B, ∃ _ : IsDomain (AdicCompletion (IsLocalRing.maximalIdeal (Localization.AtPrime q.1)) (Localization.AtPrime q.1)), IsDiscreteValuationRing (AdicCompletion (IsLocalRing.maximalIdeal (Localization.AtPrime q.1)) (Localization.AtPrime q.1)) ∧ IsIntegrallyClosed (AdicCompletion (IsLocalRing.maximalIdeal (Localization.AtPrime q.1)) (Localization.AtPrime q.1))) ∧ RingHom.Flat (algebraMap A (AdicCompletion (IsLocalRing.maximalIdeal A) A)) ∧ Function.Injective (Algebra.TensorProduct.includeRight (R := A) (A := B) (B := AdicCompletion (IsLocalRing.maximalIdeal A) A)) ∧ IsReduced (AdicCompletion (IsLocalRing.maximalIdeal A) A) ∧ IsReduced (B ⊗[A] AdicCompletion (IsLocalRing.maximalIdeal A) A) ∧ IsNoetherianRing (AdicCompletion (IsLocalRing.maximalIdeal A) A) ∧ IsLocalRing (AdicCompletion (IsLocalRing.maximalIdeal A) A) ∧ ringKrullDim (AdicCompletion (IsLocalRing.maximalIdeal A) A) = 1 ∧ RingHom.Finite (Algebra.TensorProduct.includeRight (R := A) (A := B) (B := AdicCompletion (IsLocalRing.maximalIdeal A) A)).toRingHom ∧ RingHom.IsIntegral (Algebra.TensorProduct.includeRight (R := A) (A := B) (B := AdicCompletion (IsLocalRing.maximalIdeal A) A)).toRingHom ∧ IsNoetherianRing (B ⊗[A] AdicCompletion (IsLocalRing.maximalIdeal A) A) ∧ IsIntegrallyClosed (B ⊗[A] AdicCompletion (IsLocalRing.maximalIdeal A) A)",
+  "branch": "newtargets-dag",
+  "by": "Q28",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-d8ac32aa4",
+  "group": "Q28",
+  "result": "pass",
+  "note": "Read the node, the Stacks 0C3V final paragraph, all 9 stmt_dep records, the delivered module and report.md. Every hypothesis matches the node with nothing stronger: Noetherian local A of dimension 1, A→B injective and finite, DVR condition over all primesOver m. The product isomorphism e is a B-algebra iso onto the completed localizations, pinned by the level-wise completed local maps g and e(1⊗a)q = g q a, the same encoding as completion_finite_extension at p=m. All conclusion clauses are present: finite branches, DVR and normal factors, flat A→Â, injective includeRight, reduced R and C, R Noetherian local of dimension 1, C finite/integral/Noetherian, IsIntegrallyClosed C (FractionRing is the total fraction ring, no domain assumption). Edge cases checked: empty branch set, zero ring, field branch, several branches with zero divisors. lean.statement is verbatim in the file, existing:false is correct (no duplicate found), imports are public/plain as required, proof is sorry only, docstrings and line widths pass. def-sc-discrete-valuation-ring has only a mathlib_match and no lean record; this predates the delivery and the declaration is exactly IsDiscreteValuationRing. No change made, so no compile run."
+ }
+}

@@ -1,0 +1,162 @@
+{
+ "id": "def-sfb-hermitian-dolbeault-data",
+ "kind": "definition",
+ "title": "Smooth Hermitian Dolbeault forms, metric pairing and operators",
+ "status": "split",
+ "statement": "Use the usual real and complex fields $\\mathbf R$ and $\\mathbf C$ [def-weil-field]. Let $n\\geq0$ and let $M$ be a complex manifold without boundary modeled on $E=\\mathbf C^n$. A complex differential form is represented by its real alternating covariant tensors in the holomorphic chart chosen at each point. Its coefficients in any other holomorphic chart $e$ are obtained by pullback under the derivative of the coordinate transition from $e$ to the chosen chart at the base point. Let $A^\\bullet(M)$ be the complex span of those fields whose coefficients in every holomorphic chart are real $C^\\infty$ functions. For integers $p,q$, define $A^{p,q}(M)=0$ when either index lies outside $[0,n]$; otherwise define it as the complex span of the fields supported in exterior degree $k=p+q$ which satisfy $\\sum_{j=1}^k\\alpha(v_1,\\ldots,Jv_j,\\ldots,v_k)=i(p-q)\\alpha(v_1,\\ldots,v_k)$, where $Jv=iv$. These generating sets are complex vector spaces, so their spans are precisely the indicated spaces of smooth forms. A smooth Hermitian metric is a positive definite Hermitian matrix in each chosen tangent frame, with real-smooth transformed matrix coefficients in every holomorphic chart. Its real metric is $g=\\operatorname{Re}h$. A metric volume measure is a Borel measure whose restriction to any chart, pushed into $E$, has density $\\sqrt{\\det G_e}$ against real Lebesgue measure, where $G_e$ is the Gram matrix of $g$ in the coordinate real basis. On $k$-forms its induced pointwise Hermitian pairing is $\\frac1{k!}\\sum_{a,b}\\overline{\\alpha(e_{a_1},\\ldots,e_{a_k})}\\,\\beta(e_{b_1},\\ldots,e_{b_k})\\prod_{j=1}^k(G^{-1})_{a_jb_j}$. Define the $L^2$ pairing by integrating these pointwise pairings and summing exterior degrees $0$ through $2n$. A Dolbeault operator presentation consists of complex-linear maps $D,\\partial,D^*:A^\\bullet(M)\\to A^\\bullet(M)$, of bidegrees $(0,1),(1,0),(0,-1)$ respectively, such that $D+\\partial$ is the ordinary coordinate exterior derivative, $D^2=0$, and $\\langle D\\alpha,\\beta\\rangle_{L^2}=\\langle\\alpha,D^*\\beta\\rangle_{L^2}$ for all smooth forms. Thus the differential and its adjoint are fixed by their canonical characterizations, not arbitrary maps. Put $\\Delta_D=DD^*+D^*D$, $H^{p,q}=A^{p,q}\\cap\\ker\\Delta_D$, $B^{p,q}=D(A^{p,q-1})$ and $C^{p,q}=D^*(A^{p,q+1})$, with actual smooth images and no closures.",
+ "stmt_deps": [
+  "def-weil-field"
+ ],
+ "source": {
+  "document": "literature/kong-complex-geometry-notes.pdf",
+  "place": "WANTED locally; read online https://cims.nyu.edu/~wk805/files/Complex_Geometry_Notes.pdf. Sections 3.1 (complex structure, tensor types, exterior derivative), 6.1 (metric, volume, L2 pairing, formal adjoints) and 6.2 Theorem 6.7. Coordinate presentation and tensor contraction formula spell out these definitions."
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Smooth differential forms of type p q on complex manifolds Dolbeault derivative Hermitian metric volume and formal adjoint",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"LinearPMap.IsFormalAdjoint\", \"module\": \"Mathlib.Analysis.InnerProductSpace.LinearPMap\", \"type\": \"(T : E →ₗ.[𝕜] F) (S : F →ₗ.[𝕜] E) : Prop\", \"doc\": \"Given $ R $-linear maps $ T : E → F $ and $ S : F → E $ between inner product spaces over a real closed-like field $ \\\\mathbb{K} $, the proposition that $ T $ and $ S $ are formal adjoints, meaning tha\"}\n  {\"name\": \"extDeriv_extDeriv\", \"module\": \"Mathlib.Analysis.Calculus.DifferentialForm.Basic\", \"type\": \"(h : ContDiff 𝕜 r ω) (hr : minSmoothness 𝕜 2 ≤ r) : extDeriv (extDeriv ω) = 0\", \"doc\": \"For a continuously differentiable differential form $\\\\omega$ of degree $n$ over a nontrivially normed field $\\\\mathbb{K}$, if the smoothness order $r$ satisfies $\\\\min\\\\text{Smoothness}(\\\\mathbb{K}, 2) \\\\l\"}\n  {\"name\": \"extDeriv_extDeriv_apply\", \"module\": \"Mathlib.Analysis.Calculus.DifferentialForm.Basic\", \"type\": \"(hω : ContDiffAt 𝕜 r ω x) (hr : minSmoothness 𝕜 2 ≤ r) : extDeriv (extDeriv ω) x = 0\", \"doc\": \"If $\\\\omega$ is a differential form of degree $n$ that is continuously differentiable of order $r$ at a point $x$, where $r$ is at least the minimal smoothness required for the field $\\\\mathbb{K}$, then\"}\n  {\"name\": \"extDeriv\", \"module\": \"Mathlib.Analysis.Calculus.DifferentialForm.Basic\", \"type\": \"(ω : E → E [⋀^Fin n]→L[𝕜] F) (x : E) : E [⋀^Fin (n + 1)]→L[𝕜] F\", \"doc\": \"Given a differential form $\\\\omega$ of degree $n$ and a point $x$ in the normed vector space $E$, the exterior derivative $d\\\\omega$ at $x$ is defined as the alternatization of the Fréchet derivative of\"}\n  {\"name\": \"extDerivWithin_extDerivWithin_apply\", \"module\": \"Mathlib.Analysis.Calculus.DifferentialForm.Basic\", \"type\": \"(hω : ContDiffWithinAt 𝕜 r ω s x) (hr : minSmoothness 𝕜 2 ≤ r) (hs : UniqueDiffOn 𝕜 s) (hx : x ∈ closure (interior s))\\n  (h'x : x ∈ s) : extDerivWithin (extDerivWithin ω s) s x = 0\", \"doc\": \"For a differential form $\\\\omega$ over a nontrivially normed field $\\\\mathbb{K}$, if $\\\\omega$ is $C^r$-smooth within a set $s$ at a point $x \\\\in s$ with $r \\\\geq \\\\min\\\\text{Smoothness}(\\\\mathbb{K}, 2)$, an\"}\n  {\"name\": \"extDerivWithin_pullback\", \"module\": \"Mathlib.Analysis.Calculus.DifferentialForm.Basic\", \"type\": \"{ω : F → F [⋀^Fin n]→L[𝕜] G} {f : E → F} {t : Set F} (hω : DifferentiableWithinAt 𝕜 ω t (f x))\\n  (hf : ContDiffWithinAt 𝕜 r f s x) (hr : minSmoothness 𝕜 2 ≤ r) (hs : UniqueDiffOn 𝕜 s)\\n  (hxc : x ∈ closure (interior s)) (hxs : x ∈ s) (hst : MapsTo f s t) :\\n  extDerivWithin (fun x ↦ (ω (f x)).compCont\", \"doc\": \"Let $\\\\mathbb{K}$ be a nontrivially normed field, $E,F,G$ be normed vector spaces over $\\\\mathbb{K}$, $n \\\\in \\\\mathbb{N}^\\\\top$, and $s \\\\subseteq E$, $t \\\\subseteq F$ be sets. Suppose $\\\\omega : F \\\\to \\\\Lamb\"}\n  {\"name\": \"Filter.EventuallyEq.extDerivWithin_eq_of_insert\", \"module\": \"Mathlib.Analysis.Calculus.DifferentialForm.Basic\", \"type\": \"(hs : ω₁ =ᶠ[𝓝[insert x s] x] ω₂) : extDerivWithin ω₁ s x = extDerivWithin ω₂ s x\", \"doc\": \"If two differential forms $\\\\omega_1$ and $\\\\omega_2$ are equal on a neighborhood of $x$ within the set $\\\\{x\\\\} \\\\cup s$, then their exterior derivatives at $x$ within $s$ are equal, i.e., $\\\\mathrm{extDer\"}\n  {\"name\": \"InnerProduct.term_†\", \"module\": \"Mathlib.Analysis.InnerProductSpace.Adjoint\", \"type\": \": Lean.TrailingParserDescr✝\", \"doc\": \"The dagger symbol denotes the adjoint operator in an inner product space.\"}\n",
+   "date": "2026-10-24",
+   "verdict": "No manifold Dolbeault construction or Hodge decomposition. The chart exterior derivative is reused; matrix, manifold and integration infrastructure are reused."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Definition of smooth differential forms on a complex Hermitian manifold Dolbeault operators with the canonical L2 inner product",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"Manifold.term𝒅ₕ\", \"module\": \"Mathlib/Geometry/Manifold/DerivationBundle\", \"type\": \"Lean.ParserDescr\", \"doc\": \"The symbol $\\\\mathsf{d}_\\\\mathrm{h}$ denotes the horizontal component of a derivative in the context of derivation bundles over manifolds, used to represent specific differential operators in geometric \"}\n  {\"name\": \"Manifold.term𝒅\", \"module\": \"Mathlib/Geometry/Manifold/DerivationBundle\", \"type\": \"Lean.ParserDescr\", \"doc\": \"Defines a parser for the symbol '𝒅' used in the context of manifold terms, typically representing differentials or derivative notations in differential geometry.\"}\n  {\"name\": \"Orientation.kahler\", \"module\": \"Mathlib/Analysis/InnerProductSpace/TwoDim\", \"type\": \"{E : Type u_1} →\\n  [inst : NormedAddCommGroup E] →\\n    [inst_1 : InnerProductSpace ℝ E] → [Fact (Module.finrank ℝ E = 2)] → Orientation ℝ E (Fin 2) → E →ₗ[ℝ] E →ₗ[ℝ] ℂ\", \"doc\": \"The Kähler structure is defined as a complex-linear map constructed by combining the real inner product $\\\\langle \\\\cdot, \\\\cdot \\\\rangle$ with the complex structure $i$ and symplectic form $\\\\omega$. Spec\"}\n  {\"name\": \"Complex.kahler\", \"module\": \"Mathlib/Analysis/InnerProductSpace/TwoDim\", \"type\": \"∀ (w z : ℂ), (Complex.orientation.kahler w) z = z * (starRingEnd ℂ) w\", \"doc\": \"The Kähler structure on the complex numbers $\\\\mathbb{C}$, viewed as a 2-dimensional real inner product space, is defined by the complex-bilinear map $(w, z) \\\\mapsto z \\\\cdot \\\\overline{w}$, where $\\\\over\"}\n  {\"name\": \"Orientation.kahler_apply_apply\", \"module\": \"Mathlib/Analysis/InnerProductSpace/TwoDim\", \"type\": \"∀ {E : Type u_1} [inst : NormedAddCommGroup E] [inst_1 : InnerProductSpace ℝ E] [inst_2 : Fact (Module.finrank ℝ E = 2)]\\n  (o : Orientation ℝ E (Fin 2)) (x y : E), (o.kahler x) y = ↑(inner ℝ x y) + (o.areaForm x) y • Complex.I\", \"doc\": \"For any vectors $x, y$ in a two-dimensional real inner product space $E$, the Kähler structure $o.\\text{kahler}$ evaluated at $x$ and $y$ equals the real inner product $\\\\langle x, y\\\\rangle$ plus the sy\"}\n  {\"name\": \"extDeriv_extDeriv\", \"module\": \"Mathlib/Analysis/Calculus/DifferentialForm/Basic\", \"type\": \"∀ {𝕜 : Type u_1} {E : Type u_2} {F : Type u_3} [inst : NontriviallyNormedField 𝕜] [inst_1 : NormedAddCommGroup E]\\n  [inst_2 : NormedSpace 𝕜 E] [inst_3 : NormedAddCommGroup F] [inst_4 : NormedSpace 𝕜 F] {n : ℕ} {r : WithTop ℕ∞}\\n  {ω : E → E [⋀^Fin n]→L[𝕜] F}, ContDiff 𝕜 r ω → minSmoothness 𝕜 2 ≤ r → \", \"doc\": \"For a continuously differentiable differential form $\\\\omega$ of degree $n$ over a nontrivially normed field $\\\\mathbb{K}$, if the smoothness order $r$ satisfies $\\\\min\\\\text{Smoothness}(\\\\mathbb{K}, 2) \\\\l\"}\n  {\"name\": \"InnerProductSpace.InnerProduct.laplacian\", \"module\": \"Mathlib/Analysis/InnerProductSpace/Laplacian\", \"type\": \"{E : Type v} → {F : outParam (Type w)} → [self : Laplacian E F] → E → F\", \"doc\": \"The Laplacian operator $ \\\\Delta $ maps elements of the inner product space $ E $ to elements of $ F $, representing the second-order linear differential operator in distribution theory.\"}\n  {\"name\": \"extDeriv_extDeriv_apply\", \"module\": \"Mathlib/Analysis/Calculus/DifferentialForm/Basic\", \"type\": \"∀ {𝕜 : Type u_1} {E : Type u_2} {F : Type u_3} [inst : NontriviallyNormedField 𝕜] [inst_1 : NormedAddCommGroup E]\\n  [inst_2 : NormedSpace 𝕜 E] [inst_3 : NormedAddCommGroup F] [inst_4 : NormedSpace 𝕜 F] {n : ℕ} {r : WithTop ℕ∞}\\n  {ω : E → E [⋀^Fin n]→L[𝕜] F} {x : E}, ContDiffAt 𝕜 r ω x → minSmoothnes\", \"doc\": \"If $\\\\omega$ is a differential form of degree $n$ that is continuously differentiable of order $r$ at a point $x$, where $r$ is at least the minimal smoothness required for the field $\\\\mathbb{K}$, then\"}\n",
+   "date": "2026-10-24",
+   "verdict": "No manifold Dolbeault construction or Hodge decomposition. The chart exterior derivative is reused; matrix, manifold and integration infrastructure are reused."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Dolbeault\", \"Hermitian\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-24",
+   "verdict": "No manifold Dolbeault construction or Hodge decomposition. The chart exterior derivative is reused; matrix, manifold and integration infrastructure are reused."
+  },
+  {
+   "tool": "grep",
+   "query": "Dolbeault|HodgeDecomposition|HermitianManifold|differentialForm|DifferentialForm",
+   "results": "[grep] OK 1 hit(s)\n  {\"file\": \"Mathlib/Analysis/Calculus/DifferentialForm/VectorField.lean\", \"line\": \"8\", \"text\": \"public import Mathlib.Analysis.Calculus.DifferentialForm.Basic\"}\n",
+   "date": "2026-10-24",
+   "verdict": "No manifold Dolbeault construction or Hodge decomposition. The chart exterior derivative is reused; matrix, manifold and integration infrastructure are reused."
+  },
+  {
+   "tool": "grep",
+   "query": "rg -n 'Dolbeault|dolbeault|HermitianMetric|hermitian_dolbeault|smoothForms|typeForms' lean/WeilConjectures lean/Sheaf; rg -n 'lem-sfb-hermitian-dolbeault-orthogonal-decomposition' lean/WeilConjectures; rg -l '\"id\": \"def-.*(dolbeault|hermitian|complex-manifold|smooth-form)' dag/nodes",
+   "results": "No matches (exit code 1 for each search).",
+   "date": "2026-10-24",
+   "verdict": "No existing definition node, upstream declaration or Sheaf declaration of this notion."
+  },
+  {
+   "tool": "blueprint_refs.py",
+   "query": "python3 tools/blueprint_refs.py search 'Dolbeault'; python3 tools/blueprint_refs.py ancestor lem-sfb-hermitian-dolbeault-orthogonal-decomposition",
+   "results": "0 blueprint nodes match 'Dolbeault'\na node created for lem-sfb-hermitian-dolbeault-orthogonal-decomposition has blueprint.from.node = None",
+   "date": "2026-10-24",
+   "verdict": "New analytic prerequisite, with the inherited null blueprint ancestor."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-hermitian-dolbeault-orthogonal-decomposition",
+  "date": "2026-10-24",
+  "group": "Q72"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Haboush symmetric-power lifting for a trivial quotient representation. Supporting representation-theoretic input: Steinberg endomorphisms detect a nonzero fixed vector. Supporting Self-duality of rho section modules at characteristic-dependent weights. Supporting input: Positive-characteristic simplicity step, using irreducibility of the Steinberg induced module rather than assuming self-duality. Numerical input to the dimension comparison: Weyl dimension of the induced module. Supporting Kempf vanishing for dominant flag line bundles. Characteristic-zero branch of Milne 22.51: apply Kodaira to M_(lambda+2rho). Supporting injectivity argument for Kodaira: Popa Theorem 1.6.6 used in the proof of Theorem 1.6.1. Supporting input: Popa Theorem 1.6.6 proof: Hodge-theory vanishing of the differential on structure-sheaf cohomology of the smooth projective root cover. Supporting input: Harmonic representatives on complex projective manifolds. Supporting analytic input: the decomposition of all forms underlying the representative assertion; coordinate definitions of smooth Hermitian Dolbeault forms and canonical operators used in the orthogonal decomposition.",
+   "via": [
+    "lem-sfb-hermitian-dolbeault-orthogonal-decomposition",
+    "lem-sfb-projective-harmonic-representatives",
+    "lem-sfb-hodge-first-differential-zero",
+    "lem-sfb-kollar-smooth-divisor-injectivity",
+    "lem-sfb-kodaira-vanishing",
+    "lem-sfb-dominant-flag-line-kempf-vanishing",
+    "lem-sfb-induced-weyl-dimension-formula",
+    "lem-sfb-steinberg-induced-module-irreducible",
+    "lem-sfb-rho-section-self-duality",
+    "lem-sfb-steinberg-endomorphism-detection",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "lean": {
+  "module": "Sheaf.Geometry.Manifold.HermitianDolbeaultData",
+  "declaration": "ComplexManifold.DolbeaultOperators",
+  "declarations": [
+   "ComplexManifold.Model",
+   "ComplexManifold.FormFields",
+   "ComplexManifold.chartTangent",
+   "ComplexManifold.formCoordinates",
+   "ComplexManifold.smoothForms",
+   "ComplexManifold.typeForms",
+   "ComplexManifold.realCoordinateVector",
+   "ComplexManifold.metricPair",
+   "ComplexManifold.chartGram",
+   "ComplexManifold.HermitianMetric",
+   "ComplexManifold.MetricVolume",
+   "ComplexManifold.tangentGram",
+   "ComplexManifold.pointwiseFormPair",
+   "ComplexManifold.l2Pair",
+   "ComplexManifold.DolbeaultOperators",
+   "ComplexManifold.DolbeaultOperators.laplacian",
+   "ComplexManifold.DolbeaultOperators.harmonic",
+   "ComplexManifold.DolbeaultOperators.exact",
+   "ComplexManifold.DolbeaultOperators.coexact"
+  ],
+  "file": "lean/Sheaf/Geometry/Manifold/HermitianDolbeaultData.lean",
+  "statement": "structure DolbeaultOperators (g : HermitianMetric n M) (μ : MetricVolume g)",
+  "branch": "sheaf-dag",
+  "by": "Q72",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "Actual continuous alternating tensors, smoothness in holomorphic coordinates, type eigenspaces, positive Hermitian matrices, coordinate density, inverse-metric tensor contraction, and Bochner integration ground every datum. No arbitrary form spaces, arbitrary pairings, arbitrary unnormalized differentials, existence choices, or postponed proofs occur in the definitions."
+ },
+ "import_flags": [],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-5a2106c77",
+  "group": "Q72",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-5a2106c77",
+  "group": "Q72",
+  "result": "pass",
+  "note": "Item node differs from side-live only in lean + stmt_deps (+def-sfb-hermitian-dolbeault-data); statement and proof steps unchanged; lean.statement verbatim; first delivery, no repair note. Clause check vs Kong Thm 6.7: complex manifold (ChartedSpace Fin n→ℂ, IsManifold 𝓘(ℂ) ∞, T2, Compact), n:ℕ with no positivity, Hermitian metric positive and smooth in every chart, typeForms = J-derivation eigenspace i(p−q) in degree p+q (exactly type (p,q)), ⊥ out of range; L² = (1/k!) inverse-Gram contraction (matches alternatizeUncurryFin convention) integrated against a chart-characterized sqrt det volume; DolbeaultOperators pinned uniquely by bidegree laws + chart extDerivWithin sum + formal adjoint (no arbitrary maps); harmonic/exact/coexact are actual images; conclusion = sup + 3 orthogonalities + ∃! components. Edge cases empty, n=0, out-of-range, q=0/n covered. No existing DAG def node, project Lean or Mathlib declaration for these notions (side-live DAG, lean/Sheaf, lean/WeilConjectures, Mathlib). Def module has no sorry/opaque/axiom/choice; docstrings carry source + blueprint id; report sections present. No file changed, so no compile. Advisory: square_zero field is redundant."
+ }
+}

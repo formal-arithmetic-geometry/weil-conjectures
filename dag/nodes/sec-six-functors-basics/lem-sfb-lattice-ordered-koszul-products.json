@@ -1,0 +1,246 @@
+{
+ "id": "lem-sfb-lattice-ordered-koszul-products",
+ "kind": "statement",
+ "title": "Ordered subset products in the trivial internal Koszul complex",
+ "statement": "Let $R$ be any commutative condensed ring on the small coherent profinite site [sk-def-sfb-condensed-ring, def-weil-size-convention]. Use internal $R$-modules [sk-def-sfb-module-objects] and their ordinary derived category [def-weil-abstract-derived-category]. Let $r\\geq0$ and let $D=\\mathbf Z^r$ be discrete, with trivial action on $R$ [def-sfb-condensed-action-module]. Put $K=K_R(R;1)$ with the signs of [lem-sfb-discrete-lattice-koszul-resolution]. For $q\\geq0$ let $S_q=R[0][-q]$ be the single-term complex, and write $u_I:S_{|I|}\\to K$ for the chain map equal to $1_R$ on the subset $I$ and zero on the other subsets. Give $K$ the chain pairing $\\star$ of [lem-sfb-lattice-koszul-triangulated-cup-comparison] for the coefficient algebra $B=R$ with trivial action; explicitly,\n$$(x\\star y)_J=\\sum_{A\\sqcup C=J,\\ |A|=p}(-1)^{\\#\\{(a,c)\\in A\\times C:c<a\\}}x_Ay_C\\quad(x\\in K^p,\\ y\\in K^q).$$\nLet $m_{p,q}:S_p\\otimes_R S_q\\xrightarrow{\\sim}S_{p+q}$ be the standard shift-tensor comparison followed by regular multiplication, in the displayed factor order, with no symmetry of factors: in its only nonzero degree $p+q$ it is the multiplication $R\\otimes_RR\\to R$ with no sign. After localization it is the derived identification $R[-p]\\otimes^{\\mathrm L}_RR[-q]\\cong R[-p-q]$ that first removes the shift of the first factor and then that of the second, followed by the unitor.\n\nThe differential of $K$ is zero, and the subset inclusions give its canonical complex identification with $\\bigoplus_I S_{|I|}$. The complex $K$ is K-flat (tensoring it with an acyclic complex gives an acyclic total complex). For all subsets $A,C$, as chain maps $S_{|A|}\\otimes_R S_{|C|}\\to K$,\n$$\\star\\circ(u_A\\otimes u_C)=\\begin{cases}(-1)^{\\#\\{(a,c)\\in A\\times C:c<a\\}}u_{A\\cup C}\\circ m_{|A|,|C|},&A\\cap C=\\varnothing,\\\\0,&A\\cap C\\ne\\varnothing.\\end{cases}$$\nFor every strictly increasing list $i_1<\\cdots<i_q$, the iterated chain product of $u_{\\{i_1\\}},\\ldots,u_{\\{i_q\\}}$, using these ordered tensor identifications, equals $u_{\\{i_1,\\ldots,i_q\\}}$ with coefficient $+1$ and zero in all other subset components. The empty product is $u_\\varnothing$. These equalities hold also after localization $Q$ as equalities of derived morphisms, with $Q(\\star)$ representing the derived tensor pairing. For $r=0$ the complex is $R[0]$ and the empty inclusion is its identity. The zero ring is allowed; no characteristic or completeness assumption is used.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+  "place": "Paragraph (3), algebraic dense-lattice normalization below the ordinary-open-direct-image route; returned parent proof steps 1 and 4, and rank-zero part of step 5: zero differential, subset inclusions, trivial-action shuffle pairing and ordered tensor normalization. Agent formulation extracted from the returned parent proof, not a theorem asserted by the blueprint paragraph; exact internal-module reference WANTED."
+ },
+ "stmt_deps": [
+  "sk-def-sfb-condensed-ring",
+  "def-weil-size-convention",
+  "sk-def-sfb-module-objects",
+  "def-weil-abstract-derived-category",
+  "def-sfb-condensed-action-module",
+  "lem-sfb-discrete-lattice-koszul-resolution",
+  "lem-sfb-lattice-koszul-triangulated-cup-comparison",
+  "def-sfb-modobj-relative-tensor",
+  "def-sfb-lattice-derived-invariants-tensor"
+ ],
+ "proof": [
+  {
+   "text": "Use the supplied Koszul differential coordinates. For the trivial regular action every generator acts by identity, so differentialEntry is zero. Extend this to all degrees using the complex shape and biproduct extensionality.",
+   "uses": [
+    "lem-sfb-discrete-lattice-koszul-resolution"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Apply [lem-sfb-koszul-trivial-subset-decomposition] to the vanishing differentials to obtain the canonical inclusions, decomposition, empty unit and normalized rank-zero inverse. K-flatness is the given cup comparison field, without a new specialization or existence choice.",
+   "uses": [
+    "lem-sfb-koszul-trivial-subset-decomposition",
+    "lem-sfb-lattice-koszul-triangulated-cup-comparison"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Take the single-complex shift and unsigned tensor isomorphisms and the invertible localization comparisons from [lem-sfb-koszul-single-tensor-normalization]. Apply [lem-sfb-koszul-subset-shuffle-binary] to the canonical inclusion and tensor coordinates to obtain the binary chain formula.",
+   "uses": [
+    "lem-sfb-koszul-single-tensor-normalization",
+    "lem-sfb-koszul-subset-shuffle-binary"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Induct on the length of an increasing Fin-indexed list. Split off the final element. Every element in the earlier image is smaller than it, giving disjointness and an empty inversion filter. The binary identity therefore has coefficient one. Cancel mul.inv with mul.hom and use cardinality transports and the equality of the full image with the earlier image union the final singleton. The zero case is the empty inclusion.",
+   "uses": [
+    "lem-sfb-koszul-subset-shuffle-binary"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Prove by induction for every list (with no monotonicity hypothesis) that derivedOrderedProduct equals Q.map orderedProduct. The successor step uses tensorator naturality and cancellation of its specified inverse. Tensorator naturality, additivity of Q, and the binary chain formula give derived_binary in both the disjoint and intersecting cases. The chain increasing identity then gives derived_increasing. Assemble all fields of Products.",
+   "uses": [
+    "def-sfb-lattice-derived-invariants-tensor",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-discrete-lattice-koszul-resolution",
+  "lem-sfb-koszul-trivial-subset-decomposition",
+  "lem-sfb-lattice-koszul-triangulated-cup-comparison",
+  "lem-sfb-koszul-single-tensor-normalization",
+  "lem-sfb-koszul-subset-shuffle-binary",
+  "def-sfb-lattice-derived-invariants-tensor",
+  "def-weil-abstract-derived-category"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+  "place": "A3 Lean reduction: canonical subset decomposition, single-complex normalization and binary shuffle are separate argument steps. Zero differentials, increasing induction, K-flatness from cup and localization naturality are proved in the item."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "(koszul.*(mul|prod|cup)|(mul|prod|cup).*koszul|exterior.*subset)",
+   "results": "{\"t\": \"2026-10-22T05:58:13Z\", \"tool\": \"grep\", \"query\": \"(koszul.*(mul|prod|cup)|(mul|prod|cup).*koszul|exterior.*subset)\", \"sub\": \"\", \"ok\": true, \"n_hits\": 2, \"note\": \"\", \"top\": [\"Mathlib/Topology/MetricSpace/Thickening.lean\", \"Mathlib/Topology/MetricSpace/Thickening.lean\"], \"digest\": \"6ce4308d58d604e6\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: ExteriorAlgebra.ιMulti_family, ι_mul_prod_list and ordinary exterior-basis multiplication concern elements of algebraic exterior algebras, not morphisms between shifted internal-module complexes and their derived tensor localization. Read ExteriorAlgebra/Basic.lean:250,358,364 and ExteriorAlgebra/Basis.lean:58; identifying that algebra with this signed complex is not a one-line specialization."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Ordered products of shifted singleton summand chain maps equal the subset summand inclusion in a finite exterior complex of internal ring modules after derived tensor localization",
+   "results": "{\"t\": \"2026-10-22T05:58:13Z\", \"tool\": \"leansearch\", \"query\": \"Ordered products of shifted singleton summand chain maps equal the subset summand inclusion in a finite exterior complex of internal ring modules after derived tensor localization\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"IsLocalizedModule.pi\", \"IsLocalizedModule.prodMap\", \"PiTensorProduct.mapIncl\", \"ExteriorAlgebra.ιMulti_family\", \"HomologicalComplex.tensorHom\", \"exteriorPower.ιMulti_family_apply_coe\", \"exteriorPower.ιMulti_family\", \"AddSubmonoid.IsLocalizationMap.pi\"], \"digest\": \"c5051e49e132f063\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: ExteriorAlgebra.ιMulti_family, ι_mul_prod_list and ordinary exterior-basis multiplication concern elements of algebraic exterior algebras, not morphisms between shifted internal-module complexes and their derived tensor localization. Read ExteriorAlgebra/Basic.lean:250,358,364 and ExteriorAlgebra/Basis.lean:58; identifying that algebra with this signed complex is not a one-line specialization."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"ExteriorAlgebra\", \"prod\"",
+   "results": "{\"t\": \"2026-10-22T05:58:13Z\", \"tool\": \"loogle\", \"query\": \"\\\"ExteriorAlgebra\\\", \\\"prod\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"ExteriorAlgebra.ι_mul_prod_list\", \"exteriorPower.instInnerProductSpaceRealSubtypeExteriorAlgebraMemSubmoduleExteriorPower\", \"ExteriorAlgebra.prodEquivTensor\", \"ExteriorAlgebra.prodEquivTensorForward\", \"ExteriorAlgebra.prodEquivTensorInverse\", \"ExteriorAlgebra.prodEquivTensor_inverse_comp_forward\", \"ExteriorAlgebra.prodEquivTensorInverse_one_tmul_ι\", \"ExteriorAlgebra.prodEquivTensorInverse_ι_tmul_one\"], \"digest\": \"41000d76b53a8033\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: ExteriorAlgebra.ιMulti_family, ι_mul_prod_list and ordinary exterior-basis multiplication concern elements of algebraic exterior algebras, not morphisms between shifted internal-module complexes and their derived tensor localization. Read ExteriorAlgebra/Basic.lean:250,358,364 and ExteriorAlgebra/Basis.lean:58; identifying that algebra with this signed complex is not a one-line specialization."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Increasing ordered singleton basis inclusions multiply to the corresponding subset inclusion with sign plus one in the zero differential internal Koszul exterior complex over an arbitrary condensed ring",
+   "results": "{\"t\": \"2026-10-22T05:58:25Z\", \"tool\": \"leanfinder\", \"query\": \"Increasing ordered singleton basis inclusions multiply to the corresponding subset inclusion with sign plus one in the zero differential internal Koszul exterior complex over an arbitrary condensed ring\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Rep.standardComplex.d_comp_ε\", \"ExteriorAlgebra.ι_mul_prod_list\", \"Rep.standardComplex.d_of\", \"HomologicalComplex.alternatingConst_d\", \"Rep.barComplex.d_single\", \"KaehlerDifferential.kerTotal_mkQ_single_mul\", \"ExteriorAlgebra.GradedAlgebra.ι_sq_zero\", \"Rep.standardComplex.d\"], \"digest\": \"a1e049672e6edcdb\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: ExteriorAlgebra.ιMulti_family, ι_mul_prod_list and ordinary exterior-basis multiplication concern elements of algebraic exterior algebras, not morphisms between shifted internal-module complexes and their derived tensor localization. Read ExteriorAlgebra/Basic.lean:250,358,364 and ExteriorAlgebra/Basis.lean:58; identifying that algebra with this signed complex is not a one-line specialization."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For the trivial lattice Koszul complex the subset indexed shuffle multiplication gives wedge signs on disjoint subsets zero on intersecting subsets and normalized ordered products in the derived category",
+   "results": "{\"t\": \"2026-10-22T05:58:25Z\", \"tool\": \"leanfinder\", \"query\": \"For the trivial lattice Koszul complex the subset indexed shuffle multiplication gives wedge signs on disjoint subsets zero on intersecting subsets and normalized ordered products in the derived category\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Rep.standardComplex.d_of\", \"ComplexShape.ε₁_ε₂\", \"ComplexShape.σ_ε₁\", \"ExteriorAlgebra.ι_mul_prod_list\", \"ComplexShape.σ_ε₂\", \"ComplexShape.ε₂_ε₁\", \"ComplexShape.TensorSigns\", \"ExteriorAlgebra.ιMulti_family\"], \"digest\": \"17da5150050b685e\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: ExteriorAlgebra.ιMulti_family, ι_mul_prod_list and ordinary exterior-basis multiplication concern elements of algebraic exterior algebras, not morphisms between shifted internal-module complexes and their derived tensor localization. Read ExteriorAlgebra/Basic.lean:250,358,364 and ExteriorAlgebra/Basis.lean:58; identifying that algebra with this signed complex is not a one-line specialization."
+  },
+  {
+   "tool": "grep",
+   "query": "ιMulti_family|ι_mul_prod_list",
+   "results": "{\"t\": \"2026-10-22T05:58:27Z\", \"tool\": \"grep\", \"query\": \"ιMulti_family|ι_mul_prod_list\", \"sub\": \"LinearAlgebra/ExteriorAlgebra\", \"ok\": true, \"n_hits\": 10, \"note\": \"\", \"top\": [\"Mathlib/LinearAlgebra/ExteriorAlgebra/Basic.lean\", \"Mathlib/LinearAlgebra/ExteriorAlgebra/Basic.lean\", \"Mathlib/LinearAlgebra/ExteriorAlgebra/Basic.lean\", \"Mathlib/LinearAlgebra/ExteriorAlgebra/Basic.lean\", \"Mathlib/LinearAlgebra/ExteriorAlgebra/Basic.lean\", \"Mathlib/LinearAlgebra/ExteriorAlgebra/Basis.lean\", \"Mathlib/LinearAlgebra/ExteriorAlgebra/Basis.lean\", \"Mathlib/LinearAlgebra/ExteriorAlgebra/Basis.lean\"], \"digest\": \"7e2b319c7b1e0d2a\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: ExteriorAlgebra.ιMulti_family, ι_mul_prod_list and ordinary exterior-basis multiplication concern elements of algebraic exterior algebras, not morphisms between shifted internal-module complexes and their derived tensor localization. Read ExteriorAlgebra/Basic.lean:250,358,364 and ExteriorAlgebra/Basis.lean:58; identifying that algebra with this signed complex is not a one-line specialization."
+  },
+  {
+   "tool": "grep",
+   "query": "koszul.*(mul|prod|cup)|(mul|prod|cup).*koszul|ι_mul_prod_list|ιMulti_family",
+   "results": "{\"t\": \"2026-10-22T11:18:14Z\", \"tool\": \"grep\", \"query\": \"koszul.*(mul|prod|cup)|(mul|prod|cup).*koszul|ι_mul_prod_list|ιMulti_family\", \"sub\": \"\", \"ok\": true, \"n_hits\": 24, \"note\": \"\", \"top\": [\"Mathlib/Analysis/InnerProductSpace/ExteriorPower.lean\", \"Mathlib/Analysis/InnerProductSpace/ExteriorPower.lean\", \"Mathlib/Analysis/InnerProductSpace/ExteriorPower.lean\", \"Mathlib/Analysis/InnerProductSpace/ExteriorPower.lean\", \"Mathlib/LinearAlgebra/ExteriorAlgebra/Basic.lean\", \"Mathlib/LinearAlgebra/ExteriorAlgebra/Basic.lean\", \"Mathlib/LinearAlgebra/ExteriorAlgebra/Basic.lean\", \"Mathlib/LinearAlgebra/ExteriorAlgebra/Basic.lean\"], \"digest\": \"6411918ad9fc86f9\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary exterior algebra element identities and standard group resolution formulas do not state the internal-module chain-map and derived-tensor normalization. Read Mathlib/LinearAlgebra/ExteriorAlgebra/Basic.lean:250 and 358-375; these would require a separate exterior algebra comparison."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Ordered products of singleton summand maps in a zero differential Koszul complex of internal ring modules represent derived exterior products",
+   "results": "{\"t\": \"2026-10-22T11:18:14Z\", \"tool\": \"leansearch\", \"query\": \"Ordered products of singleton summand maps in a zero differential Koszul complex of internal ring modules represent derived exterior products\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"ExteriorAlgebra\", \"ModuleCat.exteriorPower.iso₀\", \"ExteriorAlgebra.ι_mul_prod_list\", \"ContinuousAlternatingMap.prod\", \"AlternatingMap.prod\", \"ExteriorAlgebra.ιMulti_family\", \"ExteriorAlgebra.ιMulti\", \"AlternatingMap.pi\"], \"digest\": \"a6433d1714380c30\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary exterior algebra element identities and standard group resolution formulas do not state the internal-module chain-map and derived-tensor normalization. Read Mathlib/LinearAlgebra/ExteriorAlgebra/Basic.lean:250 and 358-375; these would require a separate exterior algebra comparison."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"ExteriorAlgebra\", \"prod\"",
+   "results": "{\"t\": \"2026-10-22T11:18:14Z\", \"tool\": \"loogle\", \"query\": \"\\\"ExteriorAlgebra\\\", \\\"prod\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"ExteriorAlgebra.ι_mul_prod_list\", \"exteriorPower.instInnerProductSpaceRealSubtypeExteriorAlgebraMemSubmoduleExteriorPower\", \"ExteriorAlgebra.prodEquivTensor\", \"ExteriorAlgebra.prodEquivTensorForward\", \"ExteriorAlgebra.prodEquivTensorInverse\", \"ExteriorAlgebra.prodEquivTensor_inverse_comp_forward\", \"ExteriorAlgebra.prodEquivTensorInverse_one_tmul_ι\", \"ExteriorAlgebra.prodEquivTensorInverse_ι_tmul_one\"], \"digest\": \"41000d76b53a8033\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary exterior algebra element identities and standard group resolution formulas do not state the internal-module chain-map and derived-tensor normalization. Read Mathlib/LinearAlgebra/ExteriorAlgebra/Basic.lean:250 and 358-375; these would require a separate exterior algebra comparison."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "In the trivial lattice Koszul cochain complex over a condensed commutative ring, increasing products of singleton summand inclusions equal the subset inclusion and the finite zero differential complex is K flat",
+   "results": "{\"t\": \"2026-10-22T11:18:17Z\", \"tool\": \"leanfinder\", \"query\": \"In the trivial lattice Koszul cochain complex over a condensed commutative ring, increasing products of singleton summand inclusions equal the subset inclusion and the finite zero differential complex is K flat\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Module.FaithfullyFlat.finsupp\", \"CochainComplex.IsKProjective\", \"CochainComplex.isKProjective_of_projective\", \"Module.Flat.tfae_equational_criterion\", \"Module.Flat.of_forall_isTrivialRelation\", \"Module.Flat.of_forall_exists_factorization\", \"Module.Flat.dfinsupp_iff\", \"CochainComplex.cm5b.I\"], \"digest\": \"b3a898cd8a10f143\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary exterior algebra element identities and standard group resolution formulas do not state the internal-module chain-map and derived-tensor normalization. Read Mathlib/LinearAlgebra/ExteriorAlgebra/Basic.lean:250 and 358-375; these would require a separate exterior algebra comparison."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The shuffle multiplication of a finite subset indexed cochain complex with zero differential sends two disjoint basis summands to the union with inversion sign and intersecting summands to zero",
+   "results": "{\"t\": \"2026-10-22T11:19:06Z\", \"tool\": \"leanfinder\", \"query\": \"The shuffle multiplication of a finite subset indexed cochain complex with zero differential sends two disjoint basis summands to the union with inversion sign and intersecting summands to zero\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"inhomogeneousCochains.d\", \"Rep.standardComplex.d_of\", \"Rep.barComplex.d_single\", \"ExteriorAlgebra.ι_mul_prod_list\", \"ComplexShape.ε₁_ε₂\", \"CochainComplex.ConnectData.d\", \"CochainComplex.HomComplex.Cochain.δ_toSingleMk\", \"ComplexShape.TensorSigns\"], \"digest\": \"25d56fc06d661f15\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary exterior algebra element identities and standard group resolution formulas do not state the internal-module chain-map and derived-tensor normalization. Read Mathlib/LinearAlgebra/ExteriorAlgebra/Basic.lean:250 and 358-375; these would require a separate exterior algebra comparison."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-discrete-lattice-cup-exterior",
+  "date": "2026-10-22",
+  "group": "N8"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "Paragraph (3), algebraic dense-lattice normalization below the ordinary-open-direct-image route; returned parent proof steps 1 and 4, and rank-zero part of step 5: zero differential, subset inclusions, trivial-action shuffle pairing and ordered tensor normalization.",
+   "via": [
+    "lem-sfb-discrete-lattice-cup-exterior",
+    "lem-sfb-dense-lattice-derived-invariants-comparison",
+    "lem-sfb-tame-inertia-continuous-koszul",
+    "lem-sfb-continuous-algcl-tame-boundary-comparison",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-lattice-ordered-koszul-products",
+  "worker": "stage1",
+  "summary": "Proved zero differential, finite subset decomposition, K-flatness by the existing flat-algebra cup comparison, the precise unsigned first-then-second shift convention, binary subset multiplication, increasing-list induction and natural K-flat localization. No new nodes and no mathematical statement change. Promotion-return repair: rebased by the delivery tool onto the current live DAG, re-read all cited statements, and made the current comparison theorem's explicit B=R unital-cup specialization visible in step 2. The statement and all six original arguments are retained.",
+  "blueprint": "Paragraph (3) of sk-thm-sf-ctf-stability-direct-images.proof.md, the ordinary open direct image coefficient route: the dense-lattice normalization below that route, with the empty subset/rank-zero case. Ancestor tool reports blueprint.from.node = None; retained the existing from/via chain. Whole-blueprint searches for Koszul, ordered subset and shuffle found no equivalent node.",
+  "tool_uses": [
+   {
+    "node": "lem-sfb-relative-tensor-finite-free-coordinates",
+    "why": "Generic coordinate and unitor identities for internal relative tensors on any small site; used only for finite free terms, without changing the lattice route."
+   },
+   {
+    "node": "lem-weil-pbc-total-tensor-integer-shifts",
+    "why": "Generic additive-bifunctor integer shift formulas determine the first-then-second sign normalization; no local unit node states these general formulas."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sfb-relative-tensor-finite-free-coordinates",
+  "lem-weil-pbc-total-tensor-integer-shifts"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q10-ac942e56b",
+  "group": "Q10",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q10-ac942e56b (reviewer sub-agent of L); spot-checked: PASS with no fixes; I read all six proof steps and the full statement of every node they cite. This head re-delivers the reviewed 53c0cf0cad89 after a promotion return, not a mathematical one. The item is still unsplit in live and side-live, and its statement is byte-identical to live. The only change from 53c0 is one sentence in step 2, plus a new split_report date and summary. That sentence is correct: the current lem-sfb-lattice-koszul-triangulated-cup-comparison statement says that for B=R with trivial action, cup_R is the unital derived cup product of lem-sfb-condensed-derived-restriction-calculus. Step checks: (1) every T_i-1 is 0, so d=0 and K is the sum of the S_|I|; r=0 gives R[0]. (2) The unitor normalization makes R⊗_R- the identity, so B=R is flat, and the cup comparison gives K-flatness, the shuffle pairing and the unit. (3) In lem-weil-pbc-total-tensor-integer-shifts the first extraction is unsigned and the second carries (-1)^{(-q)·0}=1, so m_{p,q} has no sign. (4) Only the (A,C) shuffle term survives: it is zero when A and C overlap and ε·μ otherwise. (5) Increasing lists have no inversions, and the induction is set up properly. (6) S_p⊗E has differential (-1)^p d_E, so S_p is K-flat, and the K-flat model comparison is natural, so the equalities carry over after localization. Small cases checked: r=0,1,2,3 (u_13⋆u_2=-u_123), F_2 and the zero ring. Source: blueprint main-20261015 direct-images.proof.md paragraph (3), an honest agent formulation with a reference WANTED. No SGA is cited, there is no duplicate and no cycle. Batch 5: the flagged lem-pod-derived-exact-square-composition is a general pasting lemma for derived exact functors from the localization universal property (Stacks 05S7/014F). It only sits in the Poincaré-duality chapter and is not part of that proof. The other trace-formula and Poincaré-duality chapter nodes in the closure are generic too, so I accept the citation. I accept both tool_uses: finite-free coordinates is generic, and total-tensor integer shifts is a Mathlib leaf."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.LatticeOrderedKoszulProducts",
+  "declaration": "Profinite.DiscreteLattice.OrderedKoszul.lattice_ordered_koszul_products",
+  "declarations": [
+   "Profinite.DiscreteLattice.OrderedKoszul.complexBiproducts",
+   "Profinite.DiscreteLattice.OrderedKoszul.single",
+   "Profinite.DiscreteLattice.OrderedKoszul.orderedProduct",
+   "Profinite.DiscreteLattice.OrderedKoszul.derivedOrderedProduct",
+   "Profinite.DiscreteLattice.OrderedKoszul.Products",
+   "Profinite.DiscreteLattice.OrderedKoszul.lattice_ordered_koszul_products"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/LatticeOrderedKoszulProducts.lean",
+  "statement": "theorem lattice_ordered_koszul_products (r : ℕ) (K : KoszulModel R r) (c : Comparison R r K) (cup : TriangulatedCup.CupComparison R r K c (Mon.trivial (Equivariant R r))) : Nonempty (Products R r K c cup)",
+  "branch": "sheaf-dag",
+  "by": "N7",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-8892b9218",
+  "group": "N7",
+  "result": "pass",
+  "note": "Snapshot: only the item lean field differs from side-live; 9 stmt_dep nodes byte-identical; statement verbatim; record complete; worker report and second-reading sections present. Clause check: R any commutative CondensedRing.{u}, no extra hypotheses or universe restriction (Q at u+2 as in deps); K = KoszulModel at 𝟙_ (trivial action) with Mon.trivial cup, whose coordinates give the shuffle sign #{c<a} (r=2 gives -1). incl, decomposition, mul (unsigned λ on the (p,q) summand), single_shift and rank_zero_iso are each fixed by coordinate fields, so Nonempty(Products) is not a free existential. differential_zero, kflat, binary (overlap gives 0), left-assoc orderedProduct increasing for StrictMono incl q=0, empty_unit = cup.unit, tensor_model, derived_binary/derived_increasing with the real inverse of μ, rank-zero identity all present. Theorem stmt_deps koszul-resolution/cup-comparison come from stage 1 and the node takes K and ⋆ from them; same interface as the PASSed cup node; no mechanical finding. No hollow def; only sorry is the item theorem with 6-step docstring; no duplicate (DiscreteLatticeCupExterior is a consumer). No compile (no file changed). Advisory: the localized identification of m_{p,q} with the derived first-then-second shift iso is not a separate clause; m is fixed at chain level and the derived equalities go through Q(m)."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A3",
+  "result": "pass",
+  "landing": "20261026T080745-L-1560557",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

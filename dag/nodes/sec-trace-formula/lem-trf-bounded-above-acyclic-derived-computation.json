@@ -14,9 +14,9 @@
  ],
  "proof": [
   {
-   "text": "Fix $b$ with $X^i=0$ for $i>b$. Construct $a:P\\to X$ by downward recursion, with $P^i=0$ above $b$. The induction invariant is that $Z^{n+1}(P)\\to Z^{n+1}(X)$ is epic, where $Z^i=\\ker d^i$; above $b$ this is the identity of zero. Form the compatible-pair object $T^n=X^n\\times_{Z^{n+1}(X)} Z^{n+1}(P)$, using the corestriction of $d_X^n$ and the cycle map induced by $a$. Choose a projective epimorphism $P^n\\twoheadrightarrow T^n$ by enough projectives. Its two components define $a^n$ and $d_P^n$, the latter followed by $Z^{n+1}(P)\\hookrightarrow P^{n+1}$. Thus $d_P^{n+1}d_P^n=0$ and $a^{n+1}d_P^n=d_X^na^n$. To check $a^n$ is epic, refine an arbitrary generalized element $x$ of $X^n$ to lift $d_Xx$ through the epic cycle map, then refine again through $P^n\\twoheadrightarrow T^n$. The refinement criterion (a) proves the assertion. If $x$ is a cycle, lift the pair $(x,0)$ instead; its lifts are cycles, so the same criterion proves $Z^n(P)\\to Z^n(X)$ epic and closes the induction. This constructs all degrees, indexed by $b-n\\in\\mathbf N$, without a limit operation.",
+   "text": "For $X^i=0$ above $b$, set $P^i=0$ there and descend in $n\\le b$. Form $T^n=X^n\\times_{Z^{n+1}(X)}Z^{n+1}(P)$ and choose a projective epimorphism $P^n\\twoheadrightarrow T^n$. At $n=b$ this pullback is $X^b$, since both next-cycle objects vanish. Its projections define $a^n$ and $d_P^n$; the cycle inclusion gives $d_P^{n+1}d_P^n=0$, and the pullback equation gives $a^{n+1}d_P^n=d_X^na^n$. Recursion is indexed by $b-n\\in\\mathbf N$; above $b$ the compatible-pair maps are identities of zero. Hence that lemma applies in every degree and makes $a:P\\to X$ a quasi-isomorphism. Thus the resolution has projective terms and the prescribed bound.",
    "uses": [
-    "lem-sp-abelian-refinements"
+    "lem-trf-compatible-pair-quasi-iso"
    ],
    "elementary": false,
    "source": {
@@ -25,23 +25,10 @@
    }
   },
   {
-   "text": "The epic cycle maps from Step 1 imply that $H^n(a)$ is epic. For injectivity, take a generalized cycle $p:T\\to P^n$ whose image class in $H^n(X)$ is zero. By the cokernel refinement criterion (c), after an epimorphic refinement there is $x:T'\\to X^{n-1}$ with $a^np=d_X^{n-1}x$. Then $(x,p)$ is a generalized element of $T^{n-1}$, since $p$ is a cycle. Lift it after a further epimorphic refinement through $P^{n-1}\\twoheadrightarrow T^{n-1}$. Its lift $r$ satisfies $d_P^{n-1}r=p$. Hence the class of $p$ is zero. Generalized elements of $H^n(P)$ themselves lift after refinement through $Z^n(P)\\twoheadrightarrow H^n(P)$, so this proves the kernel of $H^n(a)$ is zero by criteria (a)--(c). Therefore $a$ is a quasi-isomorphism. All terms are projective and the specified upper bound is retained, proving the first clause.",
-   "uses": [
-    "lem-sp-abelian-refinements",
-    "def-weil-abstract-derived-category"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/derived.tex",
-    "place": "Tag 0646, lemma-projective-resolutions-exist (3), verification of the recursive resolution using generalized elements."
-   }
-  },
-  {
-   "text": "Let $P$ be any bounded above complex of projectives. It is K-projective by the cited bounded-above criterion: its Hom complex into every acyclic $N$ is acyclic. Degree-zero cocycles of that complex are the chain maps $P\\to N$ and degree-zero coboundaries are the maps $d_Nh+hd_P$, so every chain map $P\\to N$ is null-homotopic, which is the K-projectivity of the cited Hom bijection. For every quasi-isomorphism $s:Y\\to P$ in $K(\\mathcal A)$, the cited Hom bijection lifts $Q(s)^{-1}$ uniquely to $t_s:P\\to Y$ in $K(\\mathcal A)$. Its injectivity gives $s t_s=1_P$. It also gives $u t_s=t_{s'}$ whenever $s'u=s$, because the two maps have the same image under $Q$. Thus $1_P$ is an initial object of the denominator category $S/P$, with unique arrows $t_s:1_P\\to s$. Put $F=Q\\circ V$ on the homotopy category. The maps $F(t_s):F(P)\\to F(Y)$ form a cone on the denominator diagram. In the definition of essentially constant pro-diagram, choose stage $j_0=1_P$, retraction $r=1_{F(P)}$, and common stage $k=1_P$ for every $s$. The factorization condition is then the identity $F(t_s)=F(t_s)$. This diagram therefore has essential value $F(P)$, and its canonical map to its stage $1_P$ is an isomorphism. By the assumed meaning of $LV$ in Situation 05S8 and Definition 05S9 this map is $\\varepsilon_P$. This proves projective-complex computation directly, including projective objects placed in degree zero and the zero object.",
+   "text": "A bounded above projective complex $P$ is K-projective by the cited criterion: degree-zero cocycles and boundaries of its Hom complex are chain maps and null-homotopic maps. Apply the denominator lemma with $F=Q\\circ V$. Its essential value is $F(P)$ and its identity-stage leg is the identity. By the assumed denominator-diagram definition of $LV$ and its canonical comparison, $\\varepsilon_P$ is invertible. This includes projective objects in degree zero and zero.",
    "uses": [
     "lem-sc-bounded-above-projective-kprojective",
-    "lem-coef-kprojective-derived-hom-bijection",
-    "def-pc-essentially-constant-pro-diagram",
+    "lem-trf-kprojective-denominator-initial",
     "def-pur-saturated-triangulated-localization"
    ],
    "elementary": false,
@@ -51,7 +38,7 @@
    }
   },
   {
-   "text": "Let $\\mathcal E$ denote the class of left $V$-acyclic objects. By Step 3 it contains all projectives and zero. Applied to the split short exact sequence $0\\to A\\to A\\oplus B\\to B\\to0$, clause (1) of the cited short-exact-sequence lemma shows that $\\mathcal E$ is closed under finite direct sums. Clause (2) says that for an epimorphism between objects of $\\mathcal E$ its kernel again belongs to $\\mathcal E$, and applying $V$ to that short exact sequence remains short exact. The lemma applies because $V$ is additive and right exact, $\\mathcal A$ has enough projectives, and its everywhere-defined total left derived comparison is exactly the one assumed in the item.",
+   "text": "Let $\\mathcal E$ be the left $V$-acyclic objects. Naturality makes $\\mathcal E$ invariant under isomorphisms; Step 2 puts projectives and all zero objects in it. Clause (1) of the short-exact-sequence lemma, applied to $0\\to A\\to A\\oplus B\\to B\\to0$, gives finite-sum closure. Clause (2) gives kernel closure and short exact image sequences for epimorphisms between members of $\\mathcal E$. Its hypotheses are precisely those imposed on $V,LV$ here.",
    "uses": [
     "lem-trf-left-acyclic-short-exact"
    ],
@@ -62,10 +49,10 @@
    }
   },
   {
-   "text": "Now let $C$ be bounded above and termwise in $\\mathcal E$, and choose $a:P\\to C$ by Steps 1--2. Its mapping cone $E=\\operatorname{Cone}(a)$ is acyclic by the cited cone criterion and has terms $E^n=C^n\\oplus P^{n+1}\\in\\mathcal E$ by Steps 3--4. Choose $b$ above which $E$ vanishes. Descend from $Z^{b+1}(E)=0\\in\\mathcal E$. Acyclicity gives short exact sequences $0\\to Z^n(E)\\to E^n\\to Z^{n+1}(E)\\to0$. At each stage clause (2) of the short-exact-sequence lemma, with middle term $E^n$ and quotient $Z^{n+1}(E)$, puts $Z^n(E)$ in $\\mathcal E$ and makes the image sequence under $V$ short exact. Since $d_{V(E)}^n$ factors as the epic map $V(E^n)\\to V(Z^{n+1}(E))$ followed by its monic inclusion in $V(E^{n+1})$, these sequences give $\\operatorname{im}d_{V(E)}^{n-1}=V(Z^n(E))=\\ker d_{V(E)}^n$ in every degree. Thus $V(E)$ is acyclic. The cone formula uses only a finite direct sum, additive maps and a minus sign, so additivity identifies $V(E)$ with $\\operatorname{Cone}(V(a))$. The cone criterion now shows $V(a)$ is a quasi-isomorphism.",
+   "text": "Resolve a bounded above termwise $\\mathcal E$ complex $C$ by $a:P\\to C$ from Step 1. The cone criterion makes $E=\\operatorname{Cone}(a)$ acyclic. Its terms $C^n\\oplus P^{n+1}$ belong to $\\mathcal E$ by Steps 2--3, and it vanishes above the same bound $b$ as $C$, since $P$ was chosen with that bound. The descending-cycle lemma makes $V(E)$ acyclic. The cone formula and additivity identify $V(E)$ with $\\operatorname{Cone}(V(a))$ (the matrix entries are $V(d_C),V(a),0,-V(d_P)$). The cone criterion therefore makes $V(a)$ a quasi-isomorphism.",
    "uses": [
     "lem-pur-quasi-iso-cone-acyclic",
-    "lem-trf-left-acyclic-short-exact",
+    "lem-trf-resolving-class-cycle-acyclicity",
     "def-weil-abstract-derived-category"
    ],
    "elementary": false,
@@ -75,10 +62,8 @@
    }
   },
   {
-   "text": "Naturality of the given canonical comparison at $a:P\\to C$ gives $Q(V(a))\\,\\varepsilon_P=\\varepsilon_C\\,LV(Qa)$. Step 3 makes $\\varepsilon_P$ invertible, Step 5 makes $Q(V(a))$ invertible, and $Qa$ is invertible because $a$ is a quasi-isomorphism. Solving gives $\\varepsilon_C=Q(V(a))\\varepsilon_P LV(Qa)^{-1}$, so $\\varepsilon_C$ is an isomorphism. For any quasi-isomorphism $c:C\\to X$ with bounded above termwise acyclic $C$, this gives the required canonical identification $I_c=\\varepsilon_C LV(Qc)^{-1}$. This construction uses only the specified comparison and localization, so it does not depend on the auxiliary projective resolution.",
-   "uses": [
-    "def-weil-abstract-derived-category"
-   ],
+   "text": "Naturality at $a$ gives $Q(V(a))\\varepsilon_P=\\varepsilon_C LV(Qa)$. All factors except $\\varepsilon_C$ are invertible by Steps 1, 2 and 4, so $\\varepsilon_C=Q(V(a))\\varepsilon_P LV(Qa)^{-1}$ is invertible. For any augmented resolution $c:C\\to X$ as in the statement, the canonical identification is consequently $\\varepsilon_C LV(Qc)^{-1}$, independent of the auxiliary $P$.",
+   "uses": [],
    "elementary": true,
    "source": {
     "document": "literature/stacks-project/derived.tex",
@@ -86,7 +71,7 @@
    }
   },
   {
-   "text": "For the square $a'f=ha$ of the statement, naturality gives $Q(V(f))\\varepsilon_C=\\varepsilon_{C'}LV(Qf)$, and functoriality gives $LV(Qa')LV(Qf)=LV(Qh)LV(Qa)$. Multiplying the latter equality by the two inverses yields $LV(Qf)LV(Qa)^{-1}=LV(Qa')^{-1}LV(Qh)$. Substitution in the former equality proves $Q(V(f))\\varepsilon_C LV(Qa)^{-1}=\\varepsilon_{C'}LV(Qa')^{-1}LV(Qh)$, exactly the claimed naturality equation.",
+   "text": "For $a'f=ha$, naturality gives $Q(V(f))\\varepsilon_C=\\varepsilon_{C'}LV(Qf)$ and functoriality gives $LV(Qa')LV(Qf)=LV(Qh)LV(Qa)$. Multiplication by the two augmentation inverses gives $LV(Qf)LV(Qa)^{-1}=LV(Qa')^{-1}LV(Qh)$. Substituting proves exactly the naturality equation in the statement.",
    "uses": [],
    "elementary": true,
    "source": {
@@ -96,14 +81,14 @@
   }
  ],
  "proof_deps": [
-  "lem-sp-abelian-refinements",
-  "def-weil-abstract-derived-category",
+  "lem-trf-compatible-pair-quasi-iso",
   "lem-sc-bounded-above-projective-kprojective",
-  "lem-coef-kprojective-derived-hom-bijection",
-  "def-pc-essentially-constant-pro-diagram",
+  "lem-trf-kprojective-denominator-initial",
   "def-pur-saturated-triangulated-localization",
   "lem-trf-left-acyclic-short-exact",
-  "lem-pur-quasi-iso-cone-acyclic"
+  "lem-pur-quasi-iso-cone-acyclic",
+  "lem-trf-resolving-class-cycle-acyclicity",
+  "def-weil-abstract-derived-category"
  ],
  "proof_origin": {
   "by": "agent",
@@ -209,15 +194,15 @@
   "is": null
  },
  "split_report": {
-  "date": "2026-10-19",
+  "date": "2026-10-23",
   "item": "lem-trf-bounded-above-acyclic-derived-computation",
   "worker": "stage1",
-  "summary": "Retained the statement and provenance. Replaced the earlier clause-sized children and unsupported limiting argument with an explicit projective-resolution recursion, K-projective denominator sections, a descending-cycle induction and the exact naturality calculation. One new object-level short-exact-sequence lemma remains unsplit; existing Mathlib Hom/refinement leaves and the existing cone criterion are reused.",
+  "summary": "Repair of batch5 re-split return: statement unchanged. Three independent statement-only unsplit lemmas isolate compatible-pair homology detection, K-projective denominator initiality and essential constancy, and descending-cycle exact-image acyclicity. The parent is a short assembly. report.md preserves every original proof step verbatim and allocates its argument to the new lemmas or the remaining explicit assembly; all new nodes have freshly logged searches and blueprint provenance. Live-DAG landing return repaired: rechecked the retained split against the current parent and all current cited statements; the current seven-step parent equals the archived returned original, while the three children are still absent. Kept the reviewed argument and made the common upper bound for the cone explicit. Delivery is rebuilt on current origin/sheaf-dag by the authorized tool. Rechecked for the landing refusal at 9ff4a95436c: made the compatible-pair epimorphism hypothesis explicit also above the recursion bound; all current citation quotes were revalidated after the initial passing dry run at 9c46baa654b. Revalidated the current live parent and all nine baseline dependencies on 2026-10-23: none changed; all three children remain absent. Made the recursion base explicit by identifying the degree-b compatible-pair pullback with X^b. The retained split is overlaid on the current live base by deliver.py.",
   "blueprint": "Proof (1)--(2), semistable-alteration input in the nearby-cycle branch: ILO Exposé X, Theorem 3.4, Step 3, invoking Temkin 2010, Theorems 1.5 and 1.1 for a semistable multipointed modification. Temkin proof component: Marked dualizing line bundle and contracted-component degrees. Auxiliary input: Local complete-intersection determinant adjunction underlying the marked dualizing construction, before the marking is inserted. Supporting ring/sheaf input: Transitivity triangle for ring cotangent complexes. Proof of the supporting transitivity triangle: polynomial differential sequence, derived category homology comparisons, and identification of functoriality maps. Generic homological input to the category bar resolution: Bounded above acyclic complexes compute a left derived functor.",
   "tool_uses": [
    {
     "node": "lem-pur-quasi-iso-cone-acyclic",
-    "why": "Generic mapping-cone criterion used twice in Step 5. The trace-formula unit supplies no competing homological cone criterion."
+    "why": "Generic mapping-cone criterion used twice in Step 4. The trace-formula unit supplies no competing homological cone criterion."
    }
   ]
  },
@@ -225,12 +210,12 @@
   "lem-pur-quasi-iso-cone-acyclic"
  ],
  "reviewed": {
-  "date": "2026-10-19",
+  "date": "2026-10-23",
   "by": "L",
-  "reviewer": "NT-cc-Q68-85ea81473",
-  "group": "Q68",
+  "reviewer": "NT-cc-O4-ed8e5856a",
+  "group": "O4",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q68-85ea81473 (reviewer sub-agent of L); spot-checked: Read the item's 7 steps, the new unsplit node lem-trf-left-acyclic-short-exact, every cited statement, and derived.tex at 0646 (l.6729), 06XN (l.5092), 015C/015D (l.5619/5644) and 015E (l.5717); the tags were verified in tags/tags. Steps 1-2: the downward recursion with T^n = X^n ×_{Z^{n+1}X} Z^{n+1}P and refinements (a)-(c) is correct, including the base case and both directions on H^n. Step 3: t_s lifts Q(s)^{-1}, s t_s = 1, and u t_s = t_{s'}, so 1_P is initial in S/P. Checked against def-pc-essentially-constant-pro-diagram verbatim (j0 = k = 1_P, r = 1), so ε_P is an isomorphism. Fault fixed: the step treated the K-projectivity notions of lem-sc-bounded-above-projective-kprojective (acyclic Hom complex) and lem-coef-kprojective-derived-hom-bijection (null-homotopic maps) as the same without saying so. I added the one-line degree-0 cocycle/coboundary bridge in the corrected item file. Steps 4-5: closure under finite sums and under kernels of epis, then descending cycle exactness of V(Cone a) = Cone(V a) with the cone criterion. Correct. Steps 6-7: the naturality algebra re-derived; it matches the item's equation exactly. New node: true dual of 015D(1)/(3). Proof sketch: LV is exact, H^0(ε_M) ≅ V(M) through a projective resolution and right exactness, then the long exact sequence. Tested on zero and split sequences and on V = −⊗Z/2 over Ab (acyclic means no 2-torsion), where 0→Z→Z→Z/2→0 is correctly excluded. It is object-level, so it does not restate a clause of the item, and an rg search of dag/nodes found no duplicate. Accepted tool_use: lem-pur-quasi-iso-cone-acyclic (a generic cone criterion). No cycle and no SGA. Advisory: Steps 1-2 reprove 05T7(1), which is the existing node lem-sfb-subcategory-left-resolution of another unit; reproving inline is legitimate.; 1 file(s) fixed by the reviewer"
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-O4-ed8e5856a (reviewer sub-agent of L); spot-checked: This is the fourth delivery of the batch5 re-split; heads 54b72732, 9ff4a954 and 08989aea all PASSed with no fixes, and the landings were refused as side completions never promoted. In clones/live and clones/side-live the item is still the 7-step node of 2026-10-19 and none of the three new ids exists, so the delivery is not superseded. Compared as normalized JSON with 08989aea, the three children (compatible-pair-quasi-iso, kprojective-denominator-initial, resolving-class-cycle-acyclicity) are byte-identical, and the statement and Steps 2-6 are unchanged. The only proof change is one new sentence in Step 1: 'At n=b this pullback is X^b'. It is correct because Z^{b+1}(X)=Z^{b+1}(P)=0, and it states the base of the recursion. I reread every cited statement: abelian-refinements (a)-(c), bounded-above-projective-kprojective, kprojective-derived-hom-bijection, essentially-constant-pro-diagram (the witnesses j0=k=1_P and r=1 fit verbatim), left-acyclic-short-exact (1)/(2), and quasi-iso-cone-acyclic, the accepted tool_use. I re-derived the three children. Compatible pair: lifting (x,0), (x,y) and (x,p) shows that z^n and a^n are epic and H^n(a) is injective; no bound is needed. Denominator: the section t_s is unique, so 1_P is initial and eps_P is invertible. Cycles: descending from Z^{b+1}=0 gives ker = im = V(Z^n). I also re-derived Steps 5-6. The Stacks sources in derived.tex are confirmed: 0646 at l.6729, 05S8/05S9 at l.4519/4536, 015D at l.5644 and 015E at l.5717. The assembly is 2770 chars and every old argument maps to a step or a child. A duplicate search over nodes created since 10-19 (K-projective, left-acyclic, enough projectives, denominator) found nothing that duplicates a child. There is no cycle and no SGA. Advisories carried over: some search records are attached to the wrong child, and the new nodes have no lean_audit. No fixes."
  },
  "lean": {
   "module": "Sheaf.CategoryTheory.DerivedCategory.BoundedAboveAcyclicComputation",
@@ -255,5 +240,16 @@
   "result": "pass",
   "note": "Every hypothesis and clause matches the node: Abelian A,B with independent universes; EnoughProjectives; Additive + PreservesFiniteColimits (right exact). LV/ε comes with IsLeftDerivedFunctor, and hdefined is the unfolded body of IsTriangulatedLeftDerivedDefinedAt (F = V.mapHomotopyCategory ⋙ Qh, S = quasiIso) using the recorded IsEssentiallyConstantProDiagram. Resolution theorem keeps the bound b; the projective, acyclic (IsIso ε on single 0), identification and naturality conjuncts have the right composition order. Node differs from base only in lean; statement verbatim; deps unchanged; both proofs sorry; docstrings carry source, blueprint and steps; lines ≤100; plain imports are the proof deps' modules. nt_compile --json clean (rc 0, 1.5 s) with a failing control. Advisory: the resolution clause is the projective case of the landed CochainComplex.exists_subcategory_left_resolution (lem-sfb-subcategory-left-resolution); it is an item clause, not a duplicate notion."
  },
- "lean_audit": {}
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ }
 }

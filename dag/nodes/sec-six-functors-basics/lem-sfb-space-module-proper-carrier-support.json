@@ -1,0 +1,299 @@
+{
+ "id": "lem-sfb-space-module-proper-carrier-support",
+ "kind": "statement",
+ "title": "Proper closed carriers and scheme-theoretic support on algebraic spaces",
+ "statement": "Let $S$ be a scheme [def-pc-scheme] and work with algebraic spaces over $S$ [def-trf-algebraic-space], in the universes of [def-weil-size-convention]. Closed immersions are representable and become closed immersions of schemes on every scheme test [def-weil-closed-immersion]. Modules are on the small etale ringed sites, with quasi-coherence [def-trf-space-quasi-coherent-module] and tensor pullback and direct image [def-trf-space-etale-module-functors]. Let $f:X\\to Y$ be locally of finite type on etale scheme charts and let $M$ be a finite type quasi-coherent $\\mathcal O_X$-module; finite type means etale locally finitely generated. Proper and locally of finite type are as in [def-sfb-space-morphism-properties]. The annihilator ideal $\\operatorname{Ann}(M)\\subseteq\\mathcal O_X$ consists of local functions acting as zero on every local section of $M$. It is quasi-coherent and defines a closed subspace $Z_M\\hookrightarrow X$, the scheme-theoretic support. The following are equivalent: $Z_M\\to Y$ is proper; there exist a closed immersion $j:W\\hookrightarrow X$ with $W\\to Y$ proper and a finite type quasi-coherent $\\mathcal O_W$-module $G$ with $j_*G\\simeq M$. In particular, for every closed immersion $i:Z\\hookrightarrow X$, the scheme-theoretic support of $i_*\\mathcal O_Z$ is $Z$, and $i_*\\mathcal O_Z$ admits such a proper closed carrier if and only if $Z\\to Y$ is proper. No Noetherian or flatness hypothesis is imposed.",
+ "source": {
+  "document": "literature/stacks-project/spaces-perfect.tex",
+  "place": "Tag 0CZI, lemma-module-support-proper-over-base, (2) iff (3); scheme-theoretic support in spaces-morphisms.tex Tags 07U1 (definition-scheme-theoretic-support) and 07U0 (lemma-scheme-theoretic-support). The structure quotient case uses its annihilator ideal."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-trf-algebraic-space",
+  "def-weil-size-convention",
+  "def-weil-closed-immersion",
+  "def-weil-sheaf-of-modules-category",
+  "def-trf-space-quasi-coherent-module",
+  "def-trf-space-etale-module-functors",
+  "def-sfb-space-morphism-properties",
+  "lem-sfb-space-closed-ideal-correspondence"
+ ],
+ "proof": [
+  {
+   "text": "For an etale scheme chart U→X, pass from M|U to its Zariski quasi-coherent module using lem-trf-scheme-zariski-etale-quasi-coherent-equivalence. It is finite type by lem-sfb-space-qcoh-affine-chart-calculus. By lem-weil-pbc-scheme-theoretic-support its annihilator A_U is quasi-coherent, with affine sections Ann_R(N), where U contains Spec R and N is the section module of M. For a morphism between affine etale charts, the ring map R→B is flat by def-weil-etale-morphism. The restricted section module is B⊗_R N by the chart calculus, so lem-trf-annihilator-finite-flat-base-change identifies its annihilator with A_U B. These comparisons are equalities of ideals inside the restricted structure sheaf; hence their identities and cocycle conditions hold. Apply lem-sfb-space-qcoh-cartesian-chart-family, with the scheme etale comparison, to obtain a quasi-coherent ideal A⊆O_X. On every chart, a belongs to A exactly when it kills all restricted local sections of M (the scheme annihilator criterion and the same flat-base-change equality on further etale charts). Thus A is the annihilator defined in the statement, and AM=0.",
+   "uses": [
+    "lem-trf-scheme-zariski-etale-quasi-coherent-equivalence",
+    "lem-sfb-space-qcoh-affine-chart-calculus",
+    "lem-weil-pbc-scheme-theoretic-support",
+    "def-weil-etale-morphism",
+    "lem-trf-annihilator-finite-flat-base-change",
+    "lem-sfb-space-qcoh-cartesian-chart-family"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-morphisms.tex",
+    "place": "Tag 07U0, lemma-scheme-theoretic-support, chart construction; algebra.tex Tag 07T8; spaces-properties.tex Tag 03LZ"
+   }
+  },
+  {
+   "text": "By lem-sfb-space-ideal-closed-subspace-correspondence, A cuts out a closed subspace i:Z_M→X. Since AM=0, lem-sfb-space-closed-immersion-quasi-coherent-modules supplies G∈QCoh(Z_M) and i_*G≅M. If j:W→X is any closed carrier for M, its ideal J annihilates j_*G' by the same essential-image assertion, so J⊆Ann(M)=A. The inclusion-reversing correspondence therefore gives a closed inclusion Z_M⊆W over X. Thus Z_M is the smallest closed carrier, which is precisely the scheme-theoretic support of Tag 07U1.",
+   "uses": [
+    "lem-sfb-space-ideal-closed-subspace-correspondence",
+    "lem-sfb-space-closed-immersion-quasi-coherent-modules"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-morphisms.tex",
+    "place": "Tags 07U0 and 07U1, lemma-scheme-theoretic-support and definition-scheme-theoretic-support; Tags 03MB and 04CJ"
+   }
+  },
+  {
+   "text": "The module G is finite type. Indeed choose an etale affine chart U→X and put Z_U=Z_M×_XU. By lem-trf-space-etale-module-pushforward-restriction, (i_U)_*(G|Z_U)≅M|U. By lem-sfb-space-closed-subspace-proper the closed immersion i_U is proper, hence quasi-compact and separated, so lem-trf-scheme-zariski-etale-quasi-coherent-equivalence identifies this with the scheme module direct image. The ideal A_U kills M|U. By lem-weil-pbc-closed-immersion-pushforward-annihilated its scheme tensor pullback H=i_U^*(M|U) is finite type and (i_U)_*H≅M|U. Fully faithfulness in lem-sfb-space-closed-immersion-quasi-coherent-modules identifies G|Z_U with H. These Z_U form an etale scheme cover of Z_M, so finite type follows from lem-sfb-space-qcoh-affine-chart-calculus. Consequently, if Z_M→Y is proper, i and this G are the required proper closed carrier.",
+   "uses": [
+    "lem-trf-space-etale-module-pushforward-restriction",
+    "lem-trf-scheme-zariski-etale-quasi-coherent-equivalence",
+    "lem-weil-pbc-closed-immersion-pushforward-annihilated",
+    "lem-sfb-space-closed-immersion-quasi-coherent-modules",
+    "lem-sfb-space-qcoh-affine-chart-calculus",
+    "lem-sfb-space-closed-subspace-proper"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-morphisms.tex",
+    "place": "Tag 07U0(3), lemma-scheme-theoretic-support; Tag 04CJ; morphisms.tex Tag 01QY"
+   }
+  },
+  {
+   "text": "Conversely suppose j:W→X is a proper closed carrier with j_*G'≅M. Step 2 gives a closed immersion k:Z_M→W and j k=i, from the actual ideal inclusion J⊆A; mere containment of point sets is not used. The map k is proper by lem-sfb-space-closed-subspace-proper. Since W→Y is proper by hypothesis, lem-sfb-space-proper-composition makes Z_M→W→Y proper. To use its absolute-base formulation, forget the S-structures and regard these same spaces as algebraic spaces over Spec Z; the small etale sites, diagonals, scheme charts, and tests for universal closedness are unchanged. This proves the converse, without any Noetherian or flatness assumption.",
+   "uses": [
+    "lem-sfb-space-closed-subspace-proper",
+    "lem-sfb-space-proper-composition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-perfect.tex",
+    "place": "Tag 0CZI, lemma-module-support-proper-over-base, (3)⇒(2), via the smallest closed carrier; spaces-morphisms.tex Tags 04XZ and 04XY"
+   }
+  },
+  {
+   "text": "For a closed immersion i:Z→X with ideal I, lem-sfb-space-closed-ideal-correspondence gives i_*O_Z≅O_X/I. It is quasi-coherent, and on each affine etale chart its section module is R/I, generated by 1, by lem-sfb-space-qcoh-affine-chart-calculus. Hence it is finite type. A local function a annihilates O_X/I if and only if a·1=0 in that quotient, equivalently a∈I; the converse holds on all further restrictions. Thus Ann(i_*O_Z)=I, and the closed-ideal bijection identifies its scheme-theoretic support with Z. Apply the equivalence proved in steps 3–4 to obtain the final properness assertion.",
+   "uses": [
+    "lem-sfb-space-closed-ideal-correspondence",
+    "lem-sfb-space-qcoh-affine-chart-calculus"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-morphisms.tex",
+    "place": "Tag 03MB, lemma-closed-immersion-ideals, quotient description; Tags 07U0 and 07U1"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-trf-scheme-zariski-etale-quasi-coherent-equivalence",
+  "lem-sfb-space-qcoh-affine-chart-calculus",
+  "lem-weil-pbc-scheme-theoretic-support",
+  "def-weil-etale-morphism",
+  "lem-trf-annihilator-finite-flat-base-change",
+  "lem-sfb-space-qcoh-cartesian-chart-family",
+  "lem-sfb-space-ideal-closed-subspace-correspondence",
+  "lem-sfb-space-closed-immersion-quasi-coherent-modules",
+  "lem-trf-space-etale-module-pushforward-restriction",
+  "lem-weil-pbc-closed-immersion-pushforward-annihilated",
+  "lem-sfb-space-closed-subspace-proper",
+  "lem-sfb-space-proper-composition",
+  "lem-sfb-space-closed-ideal-correspondence"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/spaces-morphisms.tex",
+  "place": "Tag 07U0 construction and Tag 04CJ; spaces-perfect.tex Tag 0CZI(2) iff (3), expanded using the smallest carrier and Tags 04XY/04XZ."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Proper support of a finite type quasi coherent module on an algebraic space is equivalent to properness of its scheme theoretic support",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.IdealSheafData.support_map\", \"module\": \"Mathlib/AlgebraicGeometry/IdealSheaf/Functorial\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (I : X.IdealSheafData) (f : X ⟶ Y) [AlgebraicGeometry.QuasiCompact f],\\n  (I.map f).support = TopologicalSpace.Closeds.closure (⇑(CategoryTheory.ConcreteCategory.hom f.base) '' ↑I.support)\", \"doc\": \"Given an ideal sheaf $\\\\mathcal{I}$ on a scheme $X$ and a quasi-compact morphism $f: X \\\\to Y$, the support of the ideal sheaf $\\\\mathcal{I}.\\\\text{map}(f)$ on $Y$ is equal to the topological closure of t\"}\n  {\"name\": \"AlgebraicGeometry.exists_of_res_zero_of_qcqs\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiSeparated\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} {U : TopologicalSpace.Opens ↥X},\\n  IsCompact U.carrier →\\n    IsQuasiSeparated U.carrier →\\n      ∀ {f s : ↑(X.presheaf.obj (Opposite.op U))},\\n        TopCat.Presheaf.restrictOpen f (X.basicOpen s) ⋯ = 0 → ∃ n, s ^ n * f = 0\", \"doc\": \"Let $ X $ be a scheme and $ U $ an open subset of $ X $ that is both quasi-compact and quasi-separated. Suppose $ f $ and $ s $ are sections of the structure sheaf $ \\\\mathcal{O}_X $ over $ U $, and th\"}\n  {\"name\": \"AlgebraicGeometry.exists_of_res_zero_of_qcqs_of_top\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiSeparated\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} [CompactSpace ↥X] [QuasiSeparatedSpace ↥X] {f s : ↑(X.presheaf.obj (Opposite.op ⊤))},\\n  TopCat.Presheaf.restrictOpen f (X.basicOpen s) ⋯ = 0 → ∃ n, s ^ n * f = 0\", \"doc\": \"Let $X$ be a quasi-compact and quasi-separated scheme, and let $f$ and $s$ be global sections of the structure sheaf $\\\\mathcal{O}_X$. If the restriction of $f$ to the basic open subset $D(s)$ defined \"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.support_ker\", \"module\": \"Mathlib/AlgebraicGeometry/IdealSheaf/Basic\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.QuasiCompact f],\\n  ↑(AlgebraicGeometry.Scheme.Hom.ker f).support = closure (Set.range ⇑(CategoryTheory.ConcreteCategory.hom f.base))\", \"doc\": \"For any quasi-compact morphism $ f: X \\\\to Y $ of schemes, the support of the kernel sheaf of $ f $ is equal to the closure of the image of $ f $.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.IdealSheafData.coe_support_mkOfMemSupportIff\", \"module\": \"Mathlib/AlgebraicGeometry/IdealSheaf/Basic\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} (ideal : (U : ↑X.affineOpens) → Ideal ↑(X.presheaf.obj (Opposite.op ↑U)))\\n  (map_ideal_basicOpen :\\n    ∀ (U : ↑X.affineOpens) (f : ↑(X.presheaf.obj (Opposite.op ↑U))),\\n      Ideal.map (CommRingCat.Hom.hom (X.presheaf.map (CategoryTheory.homOfLE ⋯).op)) (ideal U) =\\n  \", \"doc\": \"For a scheme $X$, given compatible ideals $\\\\mathfrak{a}_U$ on affine open subsets $U \\\\subseteq X$ and a support set defined as the intersection $\\\\bigcap_U V(\\\\mathfrak{a}_U)$ of their zero loci, the su\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.IdealSheafData.mem_support_iff\", \"module\": \"Mathlib/AlgebraicGeometry/IdealSheaf/Basic\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} {I : X.IdealSheafData} {x : ↥X},\\n  x ∈ I.support ↔ ∀ (U : ↑X.affineOpens), x ∈ X.zeroLocus ↑(I.ideal U)\", \"doc\": \"A point $x$ lies in the support of an ideal sheaf $\\\\mathcal{I}$ on a scheme $X$ if and only if, for every affine open subset $U \\\\subseteq X$ containing $x$, the point $x$ is contained in the zero locu\"}\n  {\"name\": \"AlgebraicGeometry.exists_pow_mul_eq_zero_of_res_basicOpen_eq_zero_of_isCompact\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiCompact\", \"type\": \"∀ (X : AlgebraicGeometry.Scheme) {U : X.Opens},\\n  IsCompact U.carrier →\\n    ∀ (x f : ↑(X.presheaf.obj (Opposite.op U))),\\n      TopCat.Presheaf.restrictOpen x (X.basicOpen f) ⋯ = 0 → ∃ n, f ^ n * x = 0\", \"doc\": \"Let $X$ be a scheme and $U$ be a compact open subset of $X$. For any sections $f, x \\\\in \\\\mathcal{O}_X(U)$ of the structure sheaf, if $x$ vanishes on the basic open subset $D(f) \\\\subseteq U$ (the locus\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.IdealSheafData.mem_supportSet_iff\", \"module\": \"Mathlib/AlgebraicGeometry/IdealSheaf/Basic\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} {I : X.IdealSheafData} {x : ↥X},\\n  x ∈ I.supportSet ↔ ∀ (U : ↑X.affineOpens), x ∈ X.zeroLocus ↑(I.ideal U)\", \"doc\": \"For a scheme $X$, an ideal sheaf $I$, and a point $x \\\\in X$, the point $x$ belongs to the support set of $I$ if and only if for every affine open subset $U \\\\subseteq X$ containing $x$, the point $x$ l\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern scheme ideal supports, module support closedness and proper scheme morphisms, not the proper-carrier equivalence for algebraic spaces"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A finite type quasi coherent sheaf carried by a proper closed subspace has proper scheme theoretic support over the base algebraic space",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.exists_of_res_zero_of_qcqs\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiSeparated\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} {U : TopologicalSpace.Opens ↥X},\\n  IsCompact U.carrier →\\n    IsQuasiSeparated U.carrier →\\n      ∀ {f s : ↑(X.presheaf.obj (Opposite.op U))},\\n        TopCat.Presheaf.restrictOpen f (X.basicOpen s) ⋯ = 0 → ∃ n, s ^ n * f = 0\", \"doc\": \"Let $ X $ be a scheme and $ U $ an open subset of $ X $ that is both quasi-compact and quasi-separated. Suppose $ f $ and $ s $ are sections of the structure sheaf $ \\\\mathcal{O}_X $ over $ U $, and th\"}\n  {\"name\": \"AlgebraicGeometry.exists_of_res_zero_of_qcqs_of_top\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiSeparated\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} [CompactSpace ↥X] [QuasiSeparatedSpace ↥X] {f s : ↑(X.presheaf.obj (Opposite.op ⊤))},\\n  TopCat.Presheaf.restrictOpen f (X.basicOpen s) ⋯ = 0 → ∃ n, s ^ n * f = 0\", \"doc\": \"Let $X$ be a quasi-compact and quasi-separated scheme, and let $f$ and $s$ be global sections of the structure sheaf $\\\\mathcal{O}_X$. If the restriction of $f$ to the basic open subset $D(s)$ defined \"}\n  {\"name\": \"AlgebraicGeometry.Scheme.IdealSheafData.support_map\", \"module\": \"Mathlib/AlgebraicGeometry/IdealSheaf/Functorial\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (I : X.IdealSheafData) (f : X ⟶ Y) [AlgebraicGeometry.QuasiCompact f],\\n  (I.map f).support = TopologicalSpace.Closeds.closure (⇑(CategoryTheory.ConcreteCategory.hom f.base) '' ↑I.support)\", \"doc\": \"Given an ideal sheaf $\\\\mathcal{I}$ on a scheme $X$ and a quasi-compact morphism $f: X \\\\to Y$, the support of the ideal sheaf $\\\\mathcal{I}.\\\\text{map}(f)$ on $Y$ is equal to the topological closure of t\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.support_ker\", \"module\": \"Mathlib/AlgebraicGeometry/IdealSheaf/Basic\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.QuasiCompact f],\\n  ↑(AlgebraicGeometry.Scheme.Hom.ker f).support = closure (Set.range ⇑(CategoryTheory.ConcreteCategory.hom f.base))\", \"doc\": \"For any quasi-compact morphism $ f: X \\\\to Y $ of schemes, the support of the kernel sheaf of $ f $ is equal to the closure of the image of $ f $.\"}\n  {\"name\": \"AlgebraicGeometry.exists_pow_mul_eq_zero_of_res_basicOpen_eq_zero_of_isCompact\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiCompact\", \"type\": \"∀ (X : AlgebraicGeometry.Scheme) {U : X.Opens},\\n  IsCompact U.carrier →\\n    ∀ (x f : ↑(X.presheaf.obj (Opposite.op U))),\\n      TopCat.Presheaf.restrictOpen x (X.basicOpen f) ⋯ = 0 → ∃ n, f ^ n * x = 0\", \"doc\": \"Let $X$ be a scheme and $U$ be a compact open subset of $X$. For any sections $f, x \\\\in \\\\mathcal{O}_X(U)$ of the structure sheaf, if $x$ vanishes on the basic open subset $D(f) \\\\subseteq U$ (the locus\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.IdealSheafData.isClosed_supportSet\", \"module\": \"Mathlib/AlgebraicGeometry/IdealSheaf/Basic\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} (I : X.IdealSheafData), IsClosed I.supportSet\", \"doc\": \"The support set of an ideal sheaf on a scheme, defined as the set of points where the stalk of the ideal sheaf is non-zero, is a closed subset of the underlying topological space of the scheme.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.IdealSheafData.coe_support_mkOfMemSupportIff\", \"module\": \"Mathlib/AlgebraicGeometry/IdealSheaf/Basic\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} (ideal : (U : ↑X.affineOpens) → Ideal ↑(X.presheaf.obj (Opposite.op ↑U)))\\n  (map_ideal_basicOpen :\\n    ∀ (U : ↑X.affineOpens) (f : ↑(X.presheaf.obj (Opposite.op ↑U))),\\n      Ideal.map (CommRingCat.Hom.hom (X.presheaf.map (CategoryTheory.homOfLE ⋯).op)) (ideal U) =\\n  \", \"doc\": \"For a scheme $X$, given compatible ideals $\\\\mathfrak{a}_U$ on affine open subsets $U \\\\subseteq X$ and a support set defined as the intersection $\\\\bigcap_U V(\\\\mathfrak{a}_U)$ of their zero loci, the su\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.IdealSheafData.instQuasiCompactSubschemeι\", \"module\": \"Mathlib/AlgebraicGeometry/IdealSheaf/Subscheme\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} (I : X.IdealSheafData), AlgebraicGeometry.QuasiCompact I.subschemeι\", \"doc\": \"The canonical morphism from the closed subscheme defined by an ideal sheaf to the original scheme is quasi-compact.\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern scheme ideal supports, module support closedness and proper scheme morphisms, not the proper-carrier equivalence for algebraic spaces"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"support\", \"IsProper\"",
+   "results": "[loogle] OK 0 hit(s)",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern scheme ideal supports, module support closedness and proper scheme morphisms, not the proper-carrier equivalence for algebraic spaces"
+  },
+  {
+   "tool": "grep",
+   "query": "schemeTheoreticSupport|support.*proper|proper.*support",
+   "results": "[grep] OK 1 hit(s)\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/Basic.lean\", \"line\": \"20\", \"text\": \"local at the target, and special support for those properties whose `AffineTargetMorphismProperty`\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern scheme ideal supports, module support closedness and proper scheme morphisms, not the proper-carrier equivalence for algebraic spaces"
+  },
+  {
+   "tool": "leansearch",
+   "query": "For a finite type quasi coherent module on an algebraic space locally of finite type over a base proper support is equivalent to a proper closed carrier",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.isProper_eq\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Proper\", \"type\": \": @IsProper = (@IsSeparated ⊓ @UniversallyClosed : MorphismProperty Scheme) ⊓ @LocallyOfFiniteType\", \"doc\": \"A morphism of schemes is proper if and only if it is separated, universally closed, and locally of finite type.\"}\n  {\"name\": \"AlgebraicGeometry.IsProper.toLocallyOfFiniteType\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Proper\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y} [self : AlgebraicGeometry.IsProper f],\\n  AlgebraicGeometry.LocallyOfFiniteType f\", \"doc\": \"If $ f: X \\\\to Y $ is a proper morphism of schemes, then $ f $ is locally of finite type.\"}\n  {\"name\": \"AlgebraicGeometry.isProper_iff\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Proper\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y),\\n  AlgebraicGeometry.IsProper f ↔\\n    AlgebraicGeometry.IsSeparated f ∧ AlgebraicGeometry.UniversallyClosed f ∧ AlgebraicGeometry.LocallyOfFiniteType f\", \"doc\": \"A morphism of schemes is proper if and only if it is separated, universally closed, and locally of finite type.\"}\n  {\"name\": \"Module.isClosed_support\", \"module\": \"Mathlib.RingTheory.Spectrum.Prime.Module\", \"type\": \"[Module.Finite R M] : IsClosed (Module.support R M)\", \"doc\": \"For a finitely generated module $ M $ over a commutative semiring $ R $, the support of $ M $ in the prime spectrum $ \\\\operatorname{Spec}(R) $ is a closed set in the Zariski topology. This means the s\"}\n  {\"name\": \"AlgebraicGeometry.IsProper.instOfIsFinite\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Proper\", \"type\": \"[IsFinite f] : IsProper f\", \"doc\": \"Every finite morphism of schemes is a proper morphism.\"}\n  {\"name\": \"SheafOfModules.isQuasicoherent\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent\", \"type\": \": ObjectProperty (SheafOfModules.{u} R)\", \"doc\": \"A property asserting that a sheaf of modules over a ring sheaf satisfies local bijectivity conditions between hom-sets and module morphisms, ensuring compatibility with the ring structure and sheaf ax\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.IdealSheafData.Simps.coe_support\", \"module\": \"Mathlib.AlgebraicGeometry.IdealSheaf.Basic\", \"type\": \": Set X\", \"doc\": \"The closed subset of a scheme $X$ consisting of points where the stalk of the ideal sheaf is non-zero, constructed by pairing the support set with its closedness proof.\"}\n  {\"name\": \"SheafOfModules.QuasicoherentData.IsFinitePresentation.isFinite_presentation\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent\", \"type\": \"∀ {C : Type u'} {inst : CategoryTheory.Category.{v', u'} C} {J : CategoryTheory.GrothendieckTopology C}\\n  {R : CategoryTheory.Sheaf J RingCat}\\n  {inst_1 : ∀ (X : C), (J.over X).HasSheafCompose (CategoryTheory.forget₂ RingCat AddCommGrpCat)}\\n  {inst_2 : ∀ (X : C), CategoryTheory.HasWeakSheafify (J.ov\", \"doc\": \"For a quasicoherent sheaf $\\\\mathcal{M}$ over a ring sheaf $\\\\mathcal{O}$ on a site $(\\\\mathcal{C}, J)$, under conditions ensuring sheaf composition, weak sheafification, and local bijectivity for additi\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern scheme ideal supports, module support closedness and proper scheme morphisms, not the proper-carrier equivalence for algebraic spaces"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Proper scheme theoretic support of a finite type quasi coherent module on an algebraic space is equivalent to a proper closed carrier",
+   "results": "{\"t\": \"2026-10-23T13:57:40Z\", \"tool\": \"leanfinder\", \"query\": \"Proper scheme theoretic support of a finite type quasi coherent module on an algebraic space is equivalent to a proper closed carrier\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.IdealSheafData.isClosed_supportSet\", \"AlgebraicGeometry.Scheme.IdealSheafData.support\", \"AlgebraicGeometry.Scheme.IdealSheafData.Simps.coe_support\", \"Module.isClosed_support\", \"AlgebraicGeometry.Scheme.IdealSheafData.coe_support_mkOfMemSupportIff\", \"AlgebraicGeometry.Scheme.IdealSheafData.supportSet\", \"AlgebraicGeometry.Scheme.IdealSheafData.support_eq_bot_iff\", \"AlgebraicGeometry.Scheme.IdealSheafData.support_map\"], \"digest\": \"1d93e76c2363d445\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme ideal supports, ordinary module support and scheme properness do not state the algebraic-space proper-carrier equivalence"
+  },
+  {
+   "tool": "grep",
+   "query": "schemeTheoreticSupport|support.*proper|proper.*support",
+   "results": "{\"t\": \"2026-10-23T14:10:47Z\", \"tool\": \"grep\", \"query\": \"schemeTheoreticSupport|support.*proper|proper.*support\", \"sub\": \"\", \"ok\": true, \"n_hits\": 20, \"note\": \"\", \"top\": [\"Mathlib/Topology/ContinuousMap/CompactlySupported.lean\", \"Mathlib/Topology/LocallyFinsupp.lean\", \"Mathlib/Algebra/Notation/Support.lean\", \"Mathlib/Algebra/Order/Ring/Ordering/Basic.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/Basic.lean\", \"Mathlib/Analysis/Normed/Lp/lpSpace.lean\", \"Mathlib/Combinatorics/SimpleGraph/Paths.lean\", \"Mathlib/Algebra/Group/Support.lean\"], \"digest\": \"590fff180966f74a\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme ideal supports, ordinary module support and scheme properness do not state the algebraic-space proper-carrier equivalence"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A quasi coherent sheaf carried by a proper closed subspace has proper scheme theoretic support",
+   "results": "{\"t\": \"2026-10-23T14:10:47Z\", \"tool\": \"leansearch\", \"query\": \"A quasi coherent sheaf carried by a proper closed subspace has proper scheme theoretic support\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.IdealSheafData.support\", \"AlgebraicGeometry.Scheme.IdealSheafData.Simps.coe_support\", \"AlgebraicGeometry.Scheme.IdealSheafData.coe_support_vanishingIdeal\", \"AlgebraicGeometry.Scheme.IdealSheafData.isClosed_supportSet\", \"AlgebraicGeometry.Scheme.IdealSheafData.range_subschemeι\", \"AlgebraicGeometry.Scheme.IdealSheafData.support_top\", \"AlgebraicGeometry.Scheme.IdealSheafData.gc\", \"AlgebraicGeometry.Scheme.Hom.support_ker\"], \"digest\": \"416a5bbde6bc467c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme ideal supports, ordinary module support and scheme properness do not state the algebraic-space proper-carrier equivalence"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"support\", \"IsProper\"",
+   "results": "{\"t\": \"2026-10-23T14:10:48Z\", \"tool\": \"loogle\", \"query\": \"\\\"support\\\", \\\"IsProper\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme ideal supports, ordinary module support and scheme properness do not state the algebraic-space proper-carrier equivalence"
+  },
+  {
+   "tool": "grep",
+   "query": "annihilator|IsProper",
+   "results": "{\"t\": \"2026-10-23T14:11:49Z\", \"tool\": \"grep\", \"query\": \"annihilator|IsProper\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/ZariskisMainTheorem.lean\", \"Mathlib/AlgebraicGeometry/ZariskisMainTheorem.lean\", \"Mathlib/AlgebraicGeometry/ZariskisMainTheorem.lean\", \"Mathlib/AlgebraicGeometry/ZariskisMainTheorem.lean\", \"Mathlib/AlgebraicGeometry/ZariskisMainTheorem.lean\", \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Proper.lean\", \"Mathlib/AlgebraicGeometry/ValuativeCriterion.lean\", \"Mathlib/AlgebraicGeometry/ValuativeCriterion.lean\"], \"digest\": \"70692c4a6336db59\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme ideal supports, ordinary module support and scheme properness do not state the algebraic-space proper-carrier equivalence"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Annihilator ideals of finite type quasi coherent modules and modules on closed subspaces of algebraic spaces",
+   "results": "{\"t\": \"2026-10-23T14:11:52Z\", \"tool\": \"leanfinder\", \"query\": \"Annihilator ideals of finite type quasi coherent modules and modules on closed subspaces of algebraic spaces\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Module.support_eq_zeroLocus\", \"AlgebraicGeometry.exists_of_res_zero_of_qcqs_of_top\", \"AlgebraicGeometry.exists_of_res_zero_of_qcqs\", \"Module.mem_support_iff_of_finite\", \"AlgebraicGeometry.Scheme.IdealSheafData.supportSet\", \"AlgebraicGeometry.Scheme.IdealSheafData.ofIdealTop\", \"AlgebraicGeometry.Scheme.IdealSheafData.mkOfMemSupportIff_ideal\", \"Module.annihilator_le_of_mem_support\"], \"digest\": \"c506cdae72e80227\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme ideal supports, ordinary module support and scheme properness do not state the algebraic-space proper-carrier equivalence"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-space-hilbert-is-quot",
+  "date": "2026-10-23",
+  "group": "Q29"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Algebraicity and smoothness of the stack of all nodal curves. Supporting input: Tags 0D52 (lemma-curves-stack) and 0D53 (lemma-curves-diagonal), with situation-curves. Supporting input: The four Mor functors in the fibre-product argument of quot-lemma-spaces-diagonal, used by quot-lemma-curves-diagonal. Supporting input: Tag 0D01, quot-proposition-hilb, the Hilbert-space input in the proof of Tag 0D1C. Supporting input: Tag 0D00, quot-lemma-hilb-is-quot, including naturality of the displayed mutually inverse constructions. Supporting input for properness in the inverse construction under the proper-carrier convention of the Quot definition.",
+   "via": [
+    "lem-sfb-space-hilbert-is-quot",
+    "lem-sfb-space-hilbert-representability",
+    "lem-sfb-space-hom-representability",
+    "lem-sfb-curve-descent-isom-spaces",
+    "lem-sfb-nodal-curve-stack-smooth",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-space-module-proper-carrier-support",
+  "worker": "stage1",
+  "summary": "Proved the carrier equivalence using the annihilator on etale charts, the existing closed-module equivalence, and properness of closed immersions and composites. Supplied finite type of the descended carrier module through the scheme tensor-pullback theorem. No new nodes and no statement change.",
+  "blueprint": "The inherited supporting input serves the Hilbert-is-Quot inverse construction under the proper-carrier convention, in the det-thm-sf-ctf-stability-direct-images proof (3) alteration/moduli chain. The latest blueprint direct-images proof (3) was read; no separate blueprint node states this carrier lemma. Existing blueprint.from.node=null and via are retained as computed by blueprint_refs.py ancestor.",
+  "tool_uses": [
+   {
+    "node": "lem-trf-scheme-zariski-etale-quasi-coherent-equivalence",
+    "why": "Generic scheme/etale-chart or module-algebra tool used in the indicated proof step; supplies the precise chart, annihilator, or closed-pullback comparison needed below the inherited Hilbert/Quot supporting route; no in-unit node replaces this statement."
+   },
+   {
+    "node": "lem-weil-pbc-scheme-theoretic-support",
+    "why": "Generic scheme/etale-chart or module-algebra tool used in the indicated proof step; supplies the precise chart, annihilator, or closed-pullback comparison needed below the inherited Hilbert/Quot supporting route; no in-unit node replaces this statement."
+   },
+   {
+    "node": "def-weil-etale-morphism",
+    "why": "Generic scheme/etale-chart or module-algebra tool used in the indicated proof step; supplies the precise chart, annihilator, or closed-pullback comparison needed below the inherited Hilbert/Quot supporting route; no in-unit node replaces this statement."
+   },
+   {
+    "node": "lem-trf-annihilator-finite-flat-base-change",
+    "why": "Generic scheme/etale-chart or module-algebra tool used in the indicated proof step; supplies the precise chart, annihilator, or closed-pullback comparison needed below the inherited Hilbert/Quot supporting route; no in-unit node replaces this statement."
+   },
+   {
+    "node": "lem-trf-space-etale-module-pushforward-restriction",
+    "why": "Generic scheme/etale-chart or module-algebra tool used in the indicated proof step; supplies the precise chart, annihilator, or closed-pullback comparison needed below the inherited Hilbert/Quot supporting route; no in-unit node replaces this statement."
+   },
+   {
+    "node": "lem-weil-pbc-closed-immersion-pushforward-annihilated",
+    "why": "Generic scheme/etale-chart or module-algebra tool used in the indicated proof step; supplies the precise chart, annihilator, or closed-pullback comparison needed below the inherited Hilbert/Quot supporting route; no in-unit node replaces this statement."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-trf-scheme-zariski-etale-quasi-coherent-equivalence",
+  "lem-weil-pbc-scheme-theoretic-support",
+  "def-weil-etale-morphism",
+  "lem-trf-annihilator-finite-flat-base-change",
+  "lem-trf-space-etale-module-pushforward-restriction",
+  "lem-weil-pbc-closed-immersion-pushforward-annihilated"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-NM-fd208eaed",
+  "group": "NM",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NM-fd208eaed (reviewer sub-agent of L); spot-checked: I read the whole item: statement, 5 steps and all 13 cited statements, against Stacks 0CZI (spaces-perfect l.1031) and 07U0 (spaces-morphisms l.2897). The statement is unchanged and faithful to (2)⇔(3), and the structure-quotient corollary follows directly. Step 1 builds the étale annihilator as a qcoh ideal from scheme annihilators on affine charts. The flat base change of annihilators (07T8) gives equal subsheaves, so cocycles hold automatically and the cartesian-family descent applies; membership is checked on charts. Step 2 shows Z_M is the smallest carrier: the essential image of 04CJ(3) gives J⊆Ann, then the order-reversing 03MB bijection applies. Step 3 proves G has finite type through 03LX restriction, the Zariski/étale direct-image comparison and the scheme pushforward-annihilated lemma; this fills in what Stacks 07U0(3) leaves 'omitted'. Step 4 gets (3)⇒(2) from the proper closed immersion k:Z_M→W (k being a closed immersion is elementary) and composition (04XY). It forgets S for the node stated over Spec Z, as other reviewed citers do. Step 5 shows Ann(O_X/I)=I. Edge cases checked: M=0, O_X on A¹, non-f.g. I, and k[ε]/ε². No new nodes. The delivery is not superseded (the item is still unsplit in live and side-live). The 6 declared tool_uses are generic and accepted. Batch-5: the three newly cited lem-trf nodes (Zariski/étale qcoh equivalence, annihilator flat base change, étale pushforward restriction) are general foundations. The four sfb nodes reach sec-trace-formula only through def-trf-algebraic-space, a definition. None of them is part of the trace-formula or Poincaré proof. No SGA. No changes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.AlgebraicSpaceModuleProperCarrierSupport",
+  "declaration": "AlgebraicGeometry.AlgebraicSpace.module_proper_carrier_support",
+  "declarations": [
+   "AlgebraicGeometry.AlgebraicSpace.module_proper_carrier_support",
+   "AlgebraicGeometry.AlgebraicSpace.structure_module_proper_carrier_support"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/AlgebraicSpaceModuleProperCarrierSupport.lean",
+  "statement": "theorem module_proper_carrier_support {S : Scheme.{u}} {X Y : AlgebraicSpace S} (f : X ⟶ Y) (hf : MapIsLocally (@LocallyOfFiniteType) f) (M : X.Modules) (hMq : M.IsQuasicoherent) (hMt : M.IsFiniteType) : ∃ (A : QuasiCoherentIdeal X) (C : ClosedSubspace X), (∀ (U : X.EtaleSite) (a : X.structureSheaf.obj.obj (op U)), a ∈ Set.range (A.val.arrow.val.app (op U)) ↔ ∀ (V : X.EtaleSite) (r : V ⟶ U) (s : M.val.obj (op V)), X.structureSheaf.obj.map r.op a • s = 0) ∧ A.val = kernelSubobject (moduleStructureMap C.val.arrow) ∧ (MapIsProper (C.val.arrow ≫ f) ↔ ∃ (W : AlgebraicSpace S) (j : W ⟶ X) (G : W.Modules), IsRepresentableWith (fun _ _ p ↦ IsClosedImmersion p.left) j.hom.hom ∧ MapIsProper (j ≫ f) ∧ G.IsQuasicoherent ∧ G.IsFiniteType ∧ Nonempty ((moduleDirectImage j).obj G ≅ M))",
+  "branch": "newtargets-dag",
+  "by": "O4",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "The annihilator is specified by its sectionwise inclusion and annihilation on all further etale restrictions; its equality with the kernel of the closed-support structure map fixes the scheme structure. A second theorem states the direct-image structure-module case for every closed subspace, including quasi-coherence, finite type and the proper-carrier equivalence."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-8def89762",
+  "group": "O4",
+  "result": "pass",
+  "note": "Read the item, all 9 stmt_deps (unchanged vs side-live), Stacks 0CZI (spaces-perfect l.1031), 07U0/07U1 (spaces-morphisms l.2897/2959) and the used declarations (ClosedSubspace, QuasiCoherentIdeal, moduleStructureMap, IsRepresentableWith, MapIsLocally/MapIsProper, moduleDirectImage, closed_ideal_correspondence). Annihilator characterised over all restrictions and sections; quasi-coherence concluded; A = kernelSubobject(moduleStructureMap C.arrow) pins Z_M with its scheme structure through the corr bijection; carrier equivalence matches 0CZI (2)<=>(3) with the same closed-immersion predicate as ClosedSubspace; the second theorem covers every closed subspace (qcoh, finite type, Ann = I, carrier iff proper). No Noetherian/flatness/universe extras. Edge cases M=0, empty X, O on A^1, k[e]/e^2 and non-f.g. I checked. Item differs from live only in lean; statement verbatim; docstrings, source and blueprint present; sorry only; imports exist; report has both sections. Advisory: ClosedSubspace/QuasiCoherentIdeal/moduleStructureMap owner def nodes are reached only via the stage-1 theorem stmt_dep lem-sfb-space-closed-ideal-correspondence (not added by this delivery). No recompile (no file changed)."
+ }
+}

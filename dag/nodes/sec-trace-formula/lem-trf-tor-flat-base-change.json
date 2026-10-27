@@ -15,50 +15,28 @@
  ],
  "proof": [
   {
-   "text": "Choose a free resolution $P_\\bullet\\to M$ over $R$: existence follows, for example, by applying [lem-weil-pbc-free-resolution-ses-split] to $0\\to M\\xrightarrow{1}M\\to0\\to0$ and retaining its first resolution. Put $C_\\bullet=P_\\bullet\\otimes_R A$ and $D_\\bullet=P_\\bullet\\otimes_R B$, with $C_{-1}=D_{-1}=0$ (the augmentations to $M$ are not included in these complexes). By [def-weil-pbc-tor-modules], $H_n(C_\\bullet)=\\operatorname{Tor}^R_n(M,A)$ and $H_n(D_\\bullet)=\\operatorname{Tor}^R_n(M,B)$ for all $n\\ge0$. Multiplication on the second tensor factor makes $C_\\bullet$ a complex of $A$-modules and $D_\\bullet$ a complex of $B$-modules; these actions induce the coefficient actions on Tor.",
+   "text": "Choose a free $R$-resolution $P\\to M$ by applying [lem-weil-pbc-free-resolution-ses-split] to $0\\to M\\xrightarrow{1}M\\to0\\to0$. Put $C=P\\otimes_R A$, $D=P\\otimes_R B$, omitting augmentations and extending $P$ by zero below degree zero. By [lem-trf-tor-resolution-coefficient-actions], the canonical maps $\\iota_A:\\operatorname{Tor}^R_n(M,A)\\cong H_n(C)$ and $\\iota_B:\\operatorname{Tor}^R_n(M,B)\\cong H_n(D)$ respect the coefficient actions and their scalar tower.",
    "uses": [
     "lem-weil-pbc-free-resolution-ses-split",
-    "def-weil-pbc-tor-modules"
+    "lem-trf-tor-resolution-coefficient-actions"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/algebra.tex",
-    "place": "Tag 00LY (algebra-section-tor), resolution definition; Tag 065P (algebra-lemma-reverse-long-exact-seq-ext), free resolutions of a short exact sequence"
+    "place": "Tags 00M7 (algebra-section-functoriality-tor) and 00M8 (algebra-lemma-flat-base-change-tor), fixed-base coefficient adaptation."
    }
   },
   {
-   "text": "Write $g:A\\to B$ for the coefficient map. The tensor universal property [def-weil-pbc-module-tensor-product] gives mutually inverse $B$-linear maps in each degree\n$$\\theta_j:(P_j\\otimes_R A)\\otimes_A B\\longrightarrow P_j\\otimes_R B,\\quad(p\\otimes a)\\otimes b\\longmapsto p\\otimes g(a)b,$$\n$$\\eta_j:p\\otimes b\\longmapsto(p\\otimes1)\\otimes b.$$\nThe $R$-balancing relation holds because the two maps $R\\to B$ agree, and the $A$-balancing relation holds because $g(aa')b=g(a)g(a')b$. The composites are identities on generators: $\\theta_j\\eta_j(p\\otimes b)=p\\otimes b$ and $\\eta_j\\theta_j((p\\otimes a)\\otimes b)=(p\\otimes1)\\otimes g(a)b=(p\\otimes a)\\otimes b$. Both differential composites send $(p\\otimes a)\\otimes b$ to $d_P(p)\\otimes g(a)b$. Thus $\\theta:C_\\bullet\\otimes_A B\\xrightarrow{\\sim}D_\\bullet$ is an isomorphism of complexes.",
+   "text": "Use [lem-trf-tor-coefficient-resolution-map] to obtain the coefficient chain map $\\phi:C\\to\\operatorname{Res}_gD$ and its $B$-linear homology extension $\\alpha_n$. Apply [lem-pc-flat-scalar-extension-homology-adjunct] with its rings $(A,E,D)$ replaced by $(R,A,B)$ and its complex $Q^j=P_{-j}$ with differential $d_P$. The lemma's coefficient-left formula $a\\otimes p\\mapsto g(a)\\otimes p$ is exactly $\\phi$ after the tensor switches $p\\otimes a\\leftrightarrow a\\otimes p$. Its hypotheses require only the assumed flatness of $A\\to B$. Degree $-n$ gives that $\\alpha_n$ is invertible, including $n=0$. The commuting square in [lem-trf-tor-coefficient-resolution-map] gives $c_n=\\iota_B^{-1}\\alpha_n(\\iota_A\\otimes1_B)$. All three factors are $B$-linear isomorphisms; hence the specified canonical map is an isomorphism.",
    "uses": [
+    "lem-trf-tor-coefficient-resolution-map",
+    "lem-pc-flat-scalar-extension-homology-adjunct",
     "def-weil-pbc-module-tensor-product"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Tag 00M8 (algebra-lemma-flat-base-change-tor), tensor-complex identification in the free-resolution proof, with fixed base R"
-   }
-  },
-  {
-   "text": "Since $B$ is flat over $A$, [lem-weil-pbc-flat-tensor-exact] makes $F=-\\otimes_A B:\\operatorname{Mod}_A\\to\\operatorname{Mod}_B$ exact: apply its assertion to each three-term part of a short exact sequence, including the zeros at its ends. Tensor is additive by its defining formula on maps. Apply [lem-sp-exact-functor-preserves-homology](c) to $C_{n+1}\\to C_n\\to C_{n-1}$ for each $n\\ge0$. Its inverse comparison gives\n$$\\kappa_n:H_n(C_\\bullet)\\otimes_A B\\xrightarrow{\\sim}H_n(C_\\bullet\\otimes_A B).$$\nThe cited statement says that this comparison is induced by cycles and their quotient by boundaries: if $z\\in\\ker d_{C,n}$, then $\\kappa_n([z]\\otimes b)=[z\\otimes b]$. There is no boundedness assumption; only these three terms are used, including $C_{-1}=0$ for $n=0$.",
-   "uses": [
-    "lem-weil-pbc-flat-tensor-exact",
-    "lem-sp-exact-functor-preserves-homology"
    ],
    "elementary": false,
    "source": {
-    "document": "literature/stacks-project/homology.tex",
-    "place": "Tag 010N (homology-lemma-exact-functor), exact functors and kernels/cokernels; tensor exactness is algebra Tag 00HD (algebra-lemma-flat)"
-   }
-  },
-  {
-   "text": "Compose $\\kappa_n$ with $H_n(\\theta)$. In the Tor identifications of step 1 this is a $B$-linear isomorphism from $\\operatorname{Tor}^R_n(M,A)\\otimes_A B$ to $\\operatorname{Tor}^R_n(M,B)$. To identify the map, let $z=\\sum_i p_i\\otimes a_i$ be a cycle in $C_n$. The composite sends\n$$[z]\\otimes b\\longmapsto\\left[\\sum_i p_i\\otimes g(a_i)b\\right].$$\nBy functoriality in the coefficient module in [def-weil-pbc-tor-modules], the map $A\\to B$ induces $[z]\\mapsto[\\sum_i p_i\\otimes g(a_i)]$. Its $B$-linear extension across tensor with $B$ gives exactly the displayed formula, hence the canonical coefficient-base-change map. Equality on these generators proves equality of the maps by [def-weil-pbc-module-tensor-product]; the isomorphism therefore proves the assertion for the specified map, not just an abstract isomorphism of the modules.",
-   "uses": [
-    "def-weil-pbc-tor-modules",
-    "def-weil-pbc-module-tensor-product"
-   ],
-   "elementary": true,
-   "source": {
     "document": "literature/stacks-project/algebra.tex",
-    "place": "Tag 00LY (algebra-section-tor), functoriality in the second variable; Tag 00M8 (algebra-lemma-flat-base-change-tor), natural comparison on a resolution"
+    "place": "Tags 00M7 (algebra-section-functoriality-tor) and 00M8 (algebra-lemma-flat-base-change-tor), fixed-base coefficient adaptation."
    }
   },
   {
@@ -76,16 +54,16 @@
  ],
  "proof_deps": [
   "lem-weil-pbc-free-resolution-ses-split",
-  "def-weil-pbc-tor-modules",
+  "lem-trf-tor-resolution-coefficient-actions",
+  "lem-trf-tor-coefficient-resolution-map",
+  "lem-pc-flat-scalar-extension-homology-adjunct",
   "def-weil-pbc-module-tensor-product",
-  "lem-weil-pbc-flat-tensor-exact",
-  "lem-sp-exact-functor-preserves-homology",
   "def-weil-pbc-faithfully-flat-ring-map"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/algebra.tex",
-  "place": "Adaptation of Tag 00M8 (algebra-lemma-flat-base-change-tor), fixing R and tensoring the coefficient complex over A; details from Tags 00LY, 00HD, 00HB and homology Tag 010N."
+  "place": "Fixed-base adaptation of Tag 00M8, with coefficient actions from Tag 00M7; reuse the existing flat scalar-extension homology adjunct for the tensor-complex and exact-homology arguments."
  },
  "mathlib_searches": [
   {
@@ -195,19 +173,25 @@
   "is": null
  },
  "split_report": {
-  "date": "2026-10-18",
+  "date": "2026-10-22",
   "item": "lem-trf-tor-flat-base-change",
   "worker": "stage1",
-  "summary": "Proved fixed-base coefficient change using an R-free resolution, an explicit tensor-complex isomorphism, flat tensor exactness and the existing exact-functor homology comparison. Identified the resulting isomorphism on cycle representatives with the canonical coefficient map, including n=0, and deduced faithful-flat vanishing from reflection of exactness. No new nodes. Clarified that Stacks 00M8 is the model proof, not the literal fixed-base statement.",
-  "blueprint": "Realizes the coefficient-base-change input to lem-trf-local-term-locality proof (1)--(2), through the monomial Tor-independence reduction in lem-trf-log-regular-monomial-tor; retains the inherited blueprint ancestor and via chain. No change to the contracting-correspondence unit route."
+  "summary": "Repair of the 2026-10-22 re-split return: two new statement-only tasks for coefficient-linear resolution computation and canonical-map identification. Reuse the existing, more general flat scalar-extension homology adjunct instead of duplicating its tensor-associativity/exact-homology proof. Keep the original statement and faithful-flat argument. The full original proof and allocation of every argument are retained in report.md.",
+  "blueprint": "Retains the lem-trf-local-term-locality ancestor and inherited monomial-Tor reduction route. The two tasks expose the coefficient-action and coefficient-map work inside the fixed-base coefficient input.",
+  "tool_uses": [
+   {
+    "node": "lem-pc-flat-scalar-extension-homology-adjunct",
+    "why": "Generic algebraic homology adjunct for an arbitrary coefficient tower and complex, with only the final map flat. It supplies the tensor-associativity and exact-homology argument already present in returned steps 2--3, not a replacement geometric route; no such node occurs in sk-i-curve-zero."
+   }
+  ]
  },
  "reviewed": {
-  "date": "2026-10-17",
+  "date": "2026-10-22",
   "by": "L",
-  "reviewer": "NT-cc-Q38-e3dabe9f1",
-  "group": "Q38",
+  "reviewer": "NT-cc-Q28-337f6f868",
+  "group": "Q28",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q38-e3dabe9f1 (reviewer sub-agent of L); spot-checked: I read all five steps against the cited statements and Stacks 00M8 (label lemma-flat-base-change-tor, line 18735), 00LY, 00HD, 00HB, 010N and 065P. 00M8 changes the base ring, while this item fixes R and changes only the coefficient A->B; proof_origin correctly records the proof as an agent adaptation. The statement is true and needs no flatness of A or B over R. Small cases agree: Z/2 with Z->Q; Z/4->Z/4[x], where both sides are (Z/2)[x]; and n=0. Step 1 gets a free resolution by applying the free-resolution lemma to 0->M->M->0->0, which is valid. Step 2 (the termwise isomorphism (P(x)A)(x)_A B = P(x)B) is elementary, with R- and A-balancing checked. Step 3 combines the Mathlib leaves on flat tensor exactness and clause (c) of the exact-functor homology lemma; that clause gives the cycle-induced comparison [z](x)b -> [z(x)b] with no boundedness assumption. Step 4 identifies the composite with the B-linear extension of Tor(M,g), so the stated map is the isomorphism. Step 5 proves T=0 from the faithful-flatness definition applied to 0->T->0. There are no new nodes. No existing node duplicates the item: the closest candidates (tor-one-surjective-flat-middle, flat-scalar-extension-tor-comparison, tor-localization-on-spec) differ. Every cited node is a definition, a Mathlib leaf or a Lean-closed node, so there is no route departure and no tool_uses. Changes: none. Note for the maintainer: the maintainer-owned source.place still says the 00M8 proof 'applies verbatim' and would read better as 'adapted'."
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q28-337f6f868 (reviewer sub-agent of L); spot-checked: Read in full: the item, both new nodes, every cited statement (including the proof of lem-pc-flat-scalar-extension-homology-adjunct, which is Lean-finished and has no sorry), Stacks 00M7 (algebra.tex 18714, item (1)) and 00M8 (18735), and the live repair note (batch5 re-split, 5 old steps, 3756 chars). Nothing in the old proof is shortened or dropped. Old step 1 is now new step 1 plus lem-trf-tor-resolution-coefficient-actions. Old steps 2-3 (the θ isomorphism and the exact-functor/homology argument) are carried by the existing closed node lem-pc-flat-scalar-extension-homology-adjunct, so a new node for them would have been a C5 duplicate. Old step 4 is lem-trf-tor-coefficient-resolution-map. Old step 5 is kept verbatim as an elementary step. The item proof is a 3-step assembly of about 1.9k chars. The two statement-only new nodes are of comparable size, and neither has flatness or an isomorphism conclusion, so neither restates the item (no D1/D2). The item statement is unchanged and not weakened. Step 2 substitution checked: (A,E,D)=(R,A,B), Q^j=P_{-j}, degree -n, n=0 included. Tensor switches turn the adjunct transpose into α_n, and the only hypothesis is flatness of B over A. Step 3 uses only the two-sided definition of faithful flatness (0->T->0). Small cases tested: Z/2 with Z/4 -> (Z/4)[x]; non-flat Z/4 -> Z/2, where c_1=0 and equality still holds; M=0; zero rings; n=0. Duplicate search (rg -L over 42 Tor/resolution nodes) found no duplicate. Both new nodes are close to the Mathlib leaf lem-weil-pbc-tor-map-via-resolution-lift(2) (clause 1 is that leaf with ψ = multiplication by s), but they add coefficient linearity, the scalar tower and the tensor-extension square, and they are real Lean tasks; this is noted for their proof writers. Accepted tool_use: lem-pc-flat-scalar-extension-homology-adjunct, a generic algebra lemma that is Lean-closed and replaces no step of the unit's route. One FIX (B3, well-formedness): lem-trf-tor-coefficient-resolution-map used ι_{A,n}⊗_A 1_B and c_n on Tor⊗_A B. Both are defined only given that ι_A is A-linear and that the A-action on Tor(M,B) is restricted from its B-action, which is the content of lem-trf-tor-resolution-coefficient-actions, and the node did not cite it. The statement now cites it, and it is added to stmt_deps (no cycle). Corrected file: fixes/dag/nodes/sec-trace-formula/lem-trf-tor-coefficient-resolution-map.json. Maintainer note: the item's source.place still says the proof 'applies verbatim' and should say 'adapted'.; 1 file(s) fixed by the reviewer"
  },
  "reviewed_lean": {
   "date": "2026-10-17",
@@ -235,5 +219,19 @@
   "note": "Maintainer repair H4/H9: reuse the landed coefficient action and coefficient-linear map from def-trf-tor-coefficient-module, Sheaf.RingTheory.TorCoefficientModule. Removed duplicate ModuleCat.torCoefficientLinearMap and the private coefficient-module construction. Only the compatibility of the existing A and B actions and the canonical tensor extensions are local helpers. The natural statement and its statement dependencies are unchanged.",
   "fixed_by": "NT-stage2-Codex-a140aa699"
  },
- "lean_audit": {}
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "tool_uses": [
+  "lem-pc-flat-scalar-extension-homology-adjunct"
+ ]
 }

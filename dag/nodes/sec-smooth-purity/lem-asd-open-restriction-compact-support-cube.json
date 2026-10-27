@@ -1,0 +1,198 @@
+{
+ "id": "lem-asd-open-restriction-compact-support-cube",
+ "kind": "statement",
+ "title": "Compact-support exchange cube for an arbitrary open restriction",
+ "statement": "Let Λ be a finite commutative ring and let sq=(g',f',f,g), sqU=(a,p,f,j), sqj=(c,j',j,g), sq'=(b,p',p,c), sqV=(a',p',f',j'), and sqA=(b,a',a,g') be cartesian squares of schemes. Assume f,f',p,p' compactifiable, f',p' quasi-compact, and j,a,j',a' open immersions. On ordinary unbounded derived categories, use the specified support comparisons E of def-asd-open-restriction-comparisons. Let α_f and α_p be the inverses of the named compact-support base-change maps for sq and sq', and O_j and O_a the derived open-extension base-change isomorphisms for sqj and sqA. Then the vertical pasting α_p followed by O_j, postcomposed with the image of E_sqU along Lg*, equals the vertical pasting O_a followed by α_f, precomposed with the image of E_sqV along Lb*. Precisely, (TwoSquare.vComp α_p O_j).whiskerLeft E_sqU.hom = (TwoSquare.vComp O_a α_f).whiskerRight E_sqV.hom. This is a compact-support morphism equation before transposing any exceptional adjunction; it asserts neither invertibility of exceptional base change nor a hypothesis about that invertibility.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-sf-cbc/prop-asd-smooth-base-change.proof.md",
+  "place": "Coherences (i) and (iii): restriction of the compactification diagram to an open and adjunction transposition."
+ },
+ "stmt_deps": [
+  "def-asd-open-restriction-comparisons",
+  "def-amb-etale-compact-support",
+  "def-pc-fibre-product",
+  "def-weil-pbc-inverse-image"
+ ],
+ "proof": [
+  {
+   "text": "Apply the cube calculation with the chosen input compactifications and their literal base changes.",
+   "uses": [
+    "lem-asd-open-support-base-changed-cube"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Factor each named exchange into raw compactification exchange and the output common-refinement comparison. Apply naturality of the open-support comparison in those two output compactifications. Naturality of the output comparison moves it past the open exchange, and its inverse cancels. Componentwise cancellation and natural-transformation extensionality give the asserted equality.",
+   "uses": [
+    "lem-asd-open-support-compactification-naturality"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-asd-open-support-base-changed-cube",
+  "lem-asd-open-support-compactification-naturality"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-sf-cbc/prop-asd-smooth-base-change.proof.md",
+  "place": "Coherences (i) and (iii): restriction of the compactification diagram to an open and adjunction transposition."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "exceptional inverse image base change restricted to an open immersion canonical mate compatibility",
+   "date": "2026-10-25",
+   "results": {
+    "t": "2026-10-25T13:02:35Z",
+    "tool": "leanfinder",
+    "query": "exceptional inverse image base change restricted to an open immersion canonical mate compatibility",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "AlgebraicGeometry.IsOpenImmersion.map_ΓIso_inv_apply",
+     "AlgebraicGeometry.Scheme.Hom.appLE_appIso_inv",
+     "AlgebraicGeometry.Scheme.Hom.app_invApp'",
+     "AlgebraicGeometry.Scheme.Hom.appLE_appIso_inv_apply",
+     "AlgebraicGeometry.Scheme.Hom.appIso_inv_app",
+     "AlgebraicGeometry.IsOpenImmersion.app_eq_appIso_inv_app_of_comp_eq",
+     "AlgebraicGeometry.Scheme.Hom.app_appIso_inv",
+     "AlgebraicGeometry.Scheme.Hom.app_appIso_inv_assoc"
+    ],
+    "digest": "282178561d345f78"
+   },
+   "verdict": "No compact-support open-restriction comparison or cube theorem in Mathlib. The generic mate-pasting lemmas apply only after the geometric support equation is supplied."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.mateEquiv",
+   "date": "2026-10-25",
+   "results": {
+    "t": "2026-10-25T13:06:34Z",
+    "tool": "loogle",
+    "query": "CategoryTheory.mateEquiv",
+    "sub": "",
+    "ok": true,
+    "n_hits": 12,
+    "note": "",
+    "top": [
+     "CategoryTheory.mateEquiv",
+     "CategoryTheory.mateEquiv_counit",
+     "CategoryTheory.mateEquiv_counit_symm",
+     "CategoryTheory.unit_mateEquiv",
+     "CategoryTheory.unit_mateEquiv_symm",
+     "CategoryTheory.conjugateEquiv_mateEquiv_vcomp",
+     "CategoryTheory.mateEquiv_conjugateEquiv_vcomp",
+     "CategoryTheory.mateEquiv_vcomp"
+    ],
+    "digest": "b8ac30fd6644aa85"
+   },
+   "verdict": "No compact-support open-restriction comparison or cube theorem in Mathlib. The generic mate-pasting lemmas apply only after the geometric support equation is supplied."
+  },
+  {
+   "tool": "grep",
+   "query": "mateEquiv.*(paste|comp)|baseChange.*restriction",
+   "date": "2026-10-25",
+   "results": {
+    "t": "2026-10-25T13:07:20Z",
+    "tool": "grep",
+    "query": "mateEquiv.*(paste|comp)|baseChange.*restriction",
+    "sub": "",
+    "ok": true,
+    "n_hits": 15,
+    "note": "",
+    "top": [
+     "Mathlib/CategoryTheory/Adjunction/Mates.lean",
+     "Mathlib/CategoryTheory/Adjunction/Mates.lean",
+     "Mathlib/CategoryTheory/Adjunction/Mates.lean",
+     "Mathlib/CategoryTheory/Adjunction/Mates.lean",
+     "Mathlib/CategoryTheory/Adjunction/Mates.lean",
+     "Mathlib/CategoryTheory/Bicategory/Adjunction/Mate.lean",
+     "Mathlib/CategoryTheory/Bicategory/Adjunction/Mate.lean",
+     "Mathlib/CategoryTheory/Bicategory/Adjunction/Mate.lean"
+    ],
+    "digest": "1fa264d7adfe28dd"
+   },
+   "verdict": "No compact-support open-restriction comparison or cube theorem in Mathlib. The generic mate-pasting lemmas apply only after the geometric support equation is supplied."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Canonical compact support base change exchange commutes with extension by zero for restriction to an open immersion",
+   "date": "2026-10-25",
+   "results": {
+    "t": "2026-10-25T13:44:56Z",
+    "tool": "leansearch",
+    "query": "Canonical compact support base change exchange commutes with extension by zero for restriction to an open immersion",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "HasCompactSupport.extend_zero",
+     "HasCompactSupport.continuous_extend_zero",
+     "AlgebraicGeometry.LocallyRingedSpace.IsOpenImmersion.isoRestrict_hom_ofRestrict_assoc",
+     "HasCompactSupport.tsupport_extend_zero",
+     "Finsupp.restrictSupportEquiv",
+     "AlgebraicGeometry.SheafedSpace.IsOpenImmersion.isoRestrict_inv_ofRestrict",
+     "HasCompactSupport",
+     "HasCompactSupport.comp_isClosedEmbedding"
+    ],
+    "digest": "e98f787d66a3dbfb"
+   },
+   "verdict": "No compact-support open-restriction comparison or cube theorem in Mathlib. The generic mate-pasting lemmas apply only after the geometric support equation is supplied."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.SixFunctors.ExceptionalBaseChangeOpenRestriction",
+  "date": "2026-10-25",
+  "group": "S3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-asd-smooth-base-change",
+   "place": "Coherences (i) and (iii): restriction of the compactification diagram to an open and adjunction transposition.",
+   "via": [
+    "lem-asd-exceptional-base-change-open-restriction"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sf-cbc",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.SixFunctors.OpenRestrictionCompactSupportCube",
+  "file": "lean/Sheaf/SixFunctors/OpenRestrictionCompactSupportCube.lean",
+  "declaration": "AlgebraicGeometry.Etale.openRestrictionCompactSupport_cube",
+  "statement": "theorem openRestrictionCompactSupport_cube\n    (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ]\n    {X Y X' Y' U V U' V' : Scheme.{u}}\n    {f : X ⟶ Y} {g : Y' ⟶ Y} {f' : X' ⟶ Y'} {g' : X' ⟶ X}\n    [HasCompactification f] [HasCompactification f'] [QuasiCompact f']\n    (sq : IsPullback g' f' f g)\n    {j : U ⟶ Y} [IsOpenImmersion j] {a : V ⟶ X} [IsOpenImmersion a]\n    {p : V ⟶ U} (sqU : IsPullback a p f j) [HasCompactification p]\n    {c : U' ⟶ U} {j' : U' ⟶ Y'} [IsOpenImmersion j']\n    (sqj : IsPullback c j' j g)\n    {b : V' ⟶ V} {p' : V' ⟶ U'} (sq' : IsPullback b p' p c)\n    [HasCompactification p'] [QuasiCompact p']\n    {a' : V' ⟶ X'} [IsOpenImmersion a'] (sqV : IsPullback a' p' f' j')\n    (sqA : IsPullback b a' a g') :\n    letI := isIso_rightDerivedLowerShriekBaseChangeMap Λ sq\n    letI := isIso_rightDerivedLowerShriekBaseChangeMap Λ sq'\n    (TwoSquare.vComp\n      (TwoSquare.mk _ _ _ _ (inv (rightDerivedLowerShriekBaseChangeMap Λ sq')))\n      (TwoSquare.mk _ _ _ _\n        (derivedOpenImmersionLowerShriekBaseChangeIso (ModuleCat.{u + 1} Λ) sqj).hom)\n      ).whiskerLeft (openRestrictionCompactSupportIso Λ sqU).hom =\n    (TwoSquare.vComp\n      (TwoSquare.mk _ _ _ _\n        (derivedOpenImmersionLowerShriekBaseChangeIso (ModuleCat.{u + 1} Λ) sqA).hom)\n      (TwoSquare.mk _ _ _ _ (inv (rightDerivedLowerShriekBaseChangeMap Λ sq)))\n      ).whiskerRight (openRestrictionCompactSupportIso Λ sqV).hom",
+  "branch": "sheaf-dag",
+  "by": "S3",
+  "date": "2026-10-25"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S3",
+  "result": "pass",
+  "landing": "20261025T164246-L-987459",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G6",
+  "result": "pass",
+  "landing": "20261025T204636-L-2988247",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

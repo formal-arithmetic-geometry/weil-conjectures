@@ -1,0 +1,333 @@
+{
+ "id": "lem-sfb-group-hom-dimension-kernel-image",
+ "kind": "statement",
+ "title": "Kernel-image dimension formula and surjectivity criterion for algebraic groups",
+ "statement": "Let $k$ be an algebraically closed field [def-weil-field, def-weil-algebraic-closure], let $G,H$ be affine $k$-group schemes [def-sc-group-scheme] of finite type [def-weil-finite-type-morphism], and let $f:G\\to H$ be a homomorphism. Let $L=\\ker f=G\\times_{H,f,e_H}\\operatorname{Spec}k$ be its scheme-theoretic kernel, and let $f=j\\circ q$ be its homomorphism factorization [lem-sfb-algebraic-group-homomorphism-factorization], with $q:G\\to I$ faithfully flat and finitely presented and $j:I\\hookrightarrow H$ a closed immersion. Thus $I$ is its closed image group scheme. Fibre products are [def-pc-fibre-product]; closed immersions are [def-weil-closed-immersion]. For topological Krull dimension [def-kun-topological-krull-dimension], one has $\\dim G=\\dim I+\\dim L$. If $H$ is smooth [def-sbc-smooth-morphisms] and connected [def-weil-connected-scheme], then $f$ is faithfully flat if and only if $\\dim G=\\dim H+\\dim L$. Here faithfully flat means flat and surjective on underlying spaces. All dimensions in these equalities are finite nonnegative integers. Neither $G$ nor $L$ is required to be smooth or connected, and no separability hypothesis on $f$ is imposed.",
+ "source": {
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Proposition 5.23, printed p.104, and Remark 5.42 following Theorem 5.39, printed pp.108--109 (kernel-image dimension formula). The surjectivity criterion is its full-dimensional-image consequence, using Corollary 1.35, printed p.17, and the dimension drop for proper closed subsets of an irreducible algebraic variety. Used for the two homomorphisms in Lemma 16.39, printed p.338."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-weil-algebraic-closure",
+  "def-sc-group-scheme",
+  "def-weil-finite-type-morphism",
+  "lem-sfb-algebraic-group-homomorphism-factorization",
+  "def-pc-fibre-product",
+  "def-weil-closed-immersion",
+  "def-kun-topological-krull-dimension",
+  "def-sbc-smooth-morphisms",
+  "def-weil-connected-scheme",
+  "def-weil-affine-spectrum",
+  "def-weil-flat-morphism"
+ ],
+ "proof": [
+  {
+   "text": "Affine schemes are separated by [lem-weil-pbc-affine-source-morphism-separated], so the hypotheses of [lem-sfb-algebraic-group-homomorphism-factorization] hold. Its specified factorization gives finite-type group schemes $I,L$, flat finitely presented $q:G\\to I$, and $\\ker q=L$. Every group scheme here is nonempty, since it has an identity section. By [lem-kun-dimension-finite-type], all four schemes $G,H,I,L$ have finite dimension. Their dimensions are nonnegative because a nonempty space has a length-zero chain. The definitions [def-kun-dimension, def-kun-topological-krull-dimension] give the same dimension, as both count chains of nonempty irreducible closed subsets.",
+   "uses": [
+    "lem-weil-pbc-affine-source-morphism-separated",
+    "lem-sfb-algebraic-group-homomorphism-factorization",
+    "lem-kun-dimension-finite-type",
+    "def-kun-dimension",
+    "def-kun-topological-krull-dimension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Theorem 5.39 and Remark 5.42, printed p.108; finite-dimensionality input as in Proposition 5.23"
+   }
+  },
+  {
+   "text": "Apply [lem-sbc-flat-composite-fibre-dimension-at-point] to $G\\xrightarrow{q}I\\to\\operatorname{Spec}k$ at the identity $e_G$, whose image is $e_I$. Both morphisms are locally of finite type, and $q$ is flat. The total fibres over the unique base point are $G,I$, and the fibre of $q$ over $e_I$ is $L$ with its identity point. The resulting equality is $\\dim_{e_G}G=\\dim_{e_L}L+\\dim_{e_I}I$. All three identity sections are $k$-rational. For each of $G,L,I$, [lem-ag-rational-point-stalk-topological-local-dimension] equates this point-dimension with the dimension of its local ring, and [lem-ag-group-identity-local-dimension] equates that local-ring dimension with its global dimension. Thus $\\dim G=\\dim L+\\dim I=\\dim I+\\dim L$. No smoothness or reducedness of $G,L,I$ was used.",
+   "uses": [
+    "lem-sbc-flat-composite-fibre-dimension-at-point",
+    "lem-ag-rational-point-stalk-topological-local-dimension",
+    "lem-ag-group-identity-local-dimension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 02JS (lemma-dimension-fibre-at-a-point-additive), equality for a flat first morphism; Milne Proposition 5.23 and Remark 5.42"
+   }
+  },
+  {
+   "text": "Now suppose $H$ is smooth and connected. By [sbc-lem-smooth-geometrically-reduced], its sole fibre over $\\operatorname{Spec}k$, namely $H$, is reduced after every separably closed extension of $k$; taking the trivial extension $k$ itself, which is separably closed because it is algebraically closed, $H$ is reduced. The affine-local smooth-ring characterization in [def-sbc-smooth-morphisms] and [lem-weil-pbc-smooth-over-field-regular-local] show that its local rings are regular. Apply [lem-wf-smooth-components-disjoint]: the irreducible components of the affine finite-type scheme $H$ are its connected components. Since $H$ is nonempty and connected, it is irreducible. Write $H=\\operatorname{Spec}A$. The domain assertion of [lem-wf-affine-dimension-drop] shows that its finitely generated reduced coordinate algebra $A$ is a domain.",
+   "uses": [
+    "sbc-lem-smooth-geometrically-reduced",
+    "def-sbc-smooth-morphisms",
+    "lem-weil-pbc-smooth-over-field-regular-local",
+    "lem-wf-smooth-components-disjoint",
+    "lem-wf-affine-dimension-drop"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tags 056S (lemma-smooth-regular) and 056T (lemma-smooth-geometrically-normal); Milne Corollary 1.35, printed p.17"
+   }
+  },
+  {
+   "text": "By the affine description in [def-weil-closed-immersion], $j$ identifies $I$ with $\\operatorname{Spec}(A/J)$ for an ideal $J\\subseteq A$, and its underlying space with the closed subset $V(J)\\subseteq H$. If $J\\ne0$, the prime ideal $(0)$ of the domain $A$ does not contain $J$, so $V(J)$ is proper. By [lem-weil-pbc-spec-topological-krull-dimension-ring], the topological Krull dimensions of $H=\\operatorname{Spec}A$ and of $I\\cong\\operatorname{Spec}(A/J)$, which is homeomorphic to $V(J)$, are the Krull dimensions of the rings $A$ and $A/J$; the latter equals that of the coordinate algebra $A/\\sqrt J$ of $V(J)$, which has the same prime ideals. The dimension-drop assertion of [lem-wf-affine-dimension-drop], stated for these prime-chain dimensions, therefore gives $\\dim I=\\dim V(J)\\leq\\dim H-1$. Hence $\\dim I=\\dim H$ forces $J=0$. Conversely $J=0$ makes $j$ an isomorphism and the dimensions equal. This argument does not require $I$ to be reduced.",
+   "uses": [
+    "def-weil-closed-immersion",
+    "lem-weil-pbc-spec-topological-krull-dimension-ring",
+    "lem-wf-affine-dimension-drop"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-algebraic-groups-lie-algebras/sk-p-geometry/lem-wf-affine-dimension-drop.proof.md",
+    "place": "Strict drop paragraph; affine closed-immersion description in Stacks Tag 01QO"
+   }
+  },
+  {
+   "text": "If $f$ is faithfully flat, it is surjective, so $f=j\\circ q$ implies that $j$ is surjective. In the description $j:\\operatorname{Spec}(A/J)\\to\\operatorname{Spec}A$ of [def-weil-closed-immersion], the prime $(0)$ must then contain $J$, giving $J=0$. Conversely, if $J=0$, $j$ is the isomorphism given by the quotient $A\\to A/0$. The map $f=j\\circ q$ is flat and surjective because $q$ is so by [lem-sfb-algebraic-group-homomorphism-factorization]: the isomorphism merely identifies the target points and local rings, so the flatness condition of [def-weil-flat-morphism] is identical. Therefore $f$ is faithfully flat if and only if $J=0$, equivalently if and only if $\\dim I=\\dim H$ by Step 4.",
+   "uses": [
+    "def-weil-closed-immersion",
+    "lem-sfb-algebraic-group-homomorphism-factorization",
+    "def-weil-flat-morphism"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Theorem 5.39 and Remark 5.42, printed p.108; elementary affine-coordinate consequence for a reduced irreducible target"
+   }
+  },
+  {
+   "text": "Using Step 2 and cancellation of the finite nonnegative integer $\\dim L$, the equality $\\dim G=\\dim H+\\dim L$ is equivalent to $\\dim I=\\dim H$. Step 5 identifies the latter condition with faithful flatness of $f$, proving both directions of the criterion.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Remark 5.42, printed p.108, full-dimensional-image consequence"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-affine-source-morphism-separated",
+  "lem-sfb-algebraic-group-homomorphism-factorization",
+  "lem-kun-dimension-finite-type",
+  "def-kun-dimension",
+  "def-kun-topological-krull-dimension",
+  "lem-sbc-flat-composite-fibre-dimension-at-point",
+  "lem-ag-rational-point-stalk-topological-local-dimension",
+  "lem-ag-group-identity-local-dimension",
+  "sbc-lem-smooth-geometrically-reduced",
+  "def-sbc-smooth-morphisms",
+  "lem-weil-pbc-smooth-over-field-regular-local",
+  "lem-wf-smooth-components-disjoint",
+  "lem-wf-affine-dimension-drop",
+  "lem-weil-pbc-spec-topological-krull-dimension-ring",
+  "def-weil-closed-immersion",
+  "def-weil-flat-morphism"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Proposition 5.23 and Remark 5.42: Q32 assembles the dimension proof through the flat local dimension formula at the identity, Stacks Tag 02JS; the criterion uses the cited affine dimension-drop statement."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For a homomorphism of finite type affine group schemes dimension of the source equals dimension of the image plus dimension of the scheme theoretic kernel; onto a smooth connected target exactly when dimension of source equals dimension of target plus dimension of kernel",
+   "results": "8 hits: AlgebraicGeometry.IsSmoothOfRelativeDimension, Algebra.SubmersivePresentation.isStandardSmoothOfRelativeDimension, Algebra.IsStandardSmoothOfRelativeDimension.out, AlgebraicGeometry.AffineSpace.instSurjectiveOverSchemeInferInstanceOverClass, Algebra.IsStandardSmoothOfRelativeDimension, Algebra.IsStandardSmooth.relativeDimension, AlgebraicGeometry.instIsMultiplicativeSchemeIsSmoothOfRelativeDimensionOfNatNat, AlgebraicGeometry.AffineSpace.not_isIntegralHom.  Logged digest 3f178fc2f3c7a593.",
+   "date": "2026-10-24",
+   "verdict": "no match: linear rank-nullity, standard smooth presentations and unrelated group ranks do not state Krull dimensions of scheme-theoretic image and kernel; the Group/ grep also found no formula"
+  },
+  {
+   "tool": "grep",
+   "query": "(kernel|image).*(dimension|krullDim)|(dimension|krullDim).*(kernel|image)",
+   "results": "0 hits: none.  Logged digest 4f53cda18c2baa0c. Searched Mathlib/AlgebraicGeometry/.",
+   "date": "2026-10-24",
+   "verdict": "no match: linear rank-nullity, standard smooth presentations and unrelated group ranks do not state Krull dimensions of scheme-theoretic image and kernel; the Group/ grep also found no formula"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Dimension of a finite type algebraic group equals dimension of its image plus dimension of its kernel; dimension criterion for a homomorphism onto a smooth connected group",
+   "results": "8 hits: LinearMap.finrank_range_add_finrank_ker, DivisionRing.hasRankNullity, Group.rank_range_le, IntermediateField.finrank_comap, Group.fintypeOfKerLeRange, Algebra.PreSubmersivePresentation.dimension_comp_eq_dimension_add_dimension, IntermediateField.rank_comap, Group.fintypeOfKerOfCodom.  Logged digest 23104d849e128a9e.",
+   "date": "2026-10-24",
+   "verdict": "no match: linear rank-nullity, standard smooth presentations and unrelated group ranks do not state Krull dimensions of scheme-theoretic image and kernel; the Group/ grep also found no formula"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"GroupScheme\", \"krullDim\"",
+   "results": "0 hits: none.  Logged digest 4f53cda18c2baa0c.",
+   "date": "2026-10-24",
+   "verdict": "no match: linear rank-nullity, standard smooth presentations and unrelated group ranks do not state Krull dimensions of scheme-theoretic image and kernel; the Group/ grep also found no formula"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Krull dimension rank nullity formula for a morphism of algebraic groups and full dimensional closed subgroups of a connected smooth algebraic group",
+   "results": "8 hits: HasRankNullity, IsDomain.hasRankNullity, DivisionRing.hasRankNullity, LinearMap.rank_range_add_rank_ker, LinearMap.rank_eq_of_surjective, LinearMap.lift_rank_range_add_rank_ker, Group.rank_range_le, LinearMap.lift_rank_eq_of_surjective.  Logged digest d08f702b5eed9d54.",
+   "date": "2026-10-24",
+   "verdict": "no match: linear rank-nullity, standard smooth presentations and unrelated group ranks do not state Krull dimensions of scheme-theoretic image and kernel; the Group/ grep also found no formula"
+  },
+  {
+   "tool": "grep",
+   "query": "(ker|kernel|image).*(krullDim|dimension)|(krullDim|dimension).*(ker|kernel|image)",
+   "results": "0 hits: none.  Logged digest 4f53cda18c2baa0c. Searched Mathlib/AlgebraicGeometry/Group/.",
+   "date": "2026-10-24",
+   "verdict": "no match: linear rank-nullity, standard smooth presentations and unrelated group ranks do not state Krull dimensions of scheme-theoretic image and kernel; the Group/ grep also found no formula"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"krullDim\", \"ker\"",
+   "results": "0 hits: none.  Logged digest 4f53cda18c2baa0c.",
+   "date": "2026-10-24",
+   "verdict": "no match: linear rank-nullity, standard smooth presentations and unrelated group ranks do not state Krull dimensions of scheme-theoretic image and kernel; the Group/ grep also found no formula"
+  },
+  {
+   "tool": "grep",
+   "query": "(kernel|ker|image).*(topologicalKrullDim|ringKrullDim)|(topologicalKrullDim|ringKrullDim).*(kernel|ker|image)",
+   "results": "0 hits: none. Logged digest 4f53cda18c2baa0c. Searched Mathlib/AlgebraicGeometry/.",
+   "date": "2026-10-24",
+   "verdict": "no match: scheme ideal-sheaf kernels are not group-scheme kernels; presentation dimensions, group generator rank and linear-disjoint ranks do not state the group Krull-dimension formula or its surjectivity criterion."
+  },
+  {
+   "tool": "leansearch",
+   "query": "For a homomorphism of algebraic group schemes the dimension of the source is the sum of the dimensions of its image and kernel",
+   "results": "8 hits: AlgebraicGeometry.Scheme.Hom.ker, Algebra.PreSubmersivePresentation.dimension_comp_eq_dimension_add_dimension, AlgebraicGeometry.Scheme.Hom.ker_comp_of_isIso, AlgebraicGeometry.Scheme.Hom.ker_comp, AlgebraicGeometry.Scheme.Hom.le_ker_comp, Group.rank_range_le, AlgHom.ker_coe, AlgebraicGeometry.Scheme.Hom.ker_apply. Logged digest 55cbc56e2c60e0f1.",
+   "date": "2026-10-24",
+   "verdict": "no match: scheme ideal-sheaf kernels are not group-scheme kernels; presentation dimensions, group generator rank and linear-disjoint ranks do not state the group Krull-dimension formula or its surjectivity criterion."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"topologicalKrullDim\", \"ker\"",
+   "results": "0 hits: none. Logged digest 4f53cda18c2baa0c.",
+   "date": "2026-10-24",
+   "verdict": "no match: scheme ideal-sheaf kernels are not group-scheme kernels; presentation dimensions, group generator rank and linear-disjoint ranks do not state the group Krull-dimension formula or its surjectivity criterion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Dimension of the scheme theoretic kernel and image of a homomorphism of finite type algebraic group schemes",
+   "results": "8 hits: AlgebraicGeometry.Scheme.Hom.ker, AlgebraicGeometry.Scheme.Hom.range_subset_ker_support, AlgebraicGeometry.Scheme.Hom.toImage_app, AlgebraicGeometry.Scheme.Hom.le_ker_comp, AlgebraicGeometry.Scheme.Hom.ker_comp, AlgebraicGeometry.Scheme.kerFunctor_obj, AlgebraicGeometry.Scheme.IdealSheafData.map_ker, AlgebraicGeometry.Scheme.kerFunctor_map. Logged digest afe6602c1b8dd865.",
+   "date": "2026-10-24",
+   "verdict": "no match: scheme ideal-sheaf kernels are not group-scheme kernels; presentation dimensions, group generator rank and linear-disjoint ranks do not state the group Krull-dimension formula or its surjectivity criterion."
+  },
+  {
+   "tool": "grep",
+   "query": "(topologicalKrullDim|ringKrullDim).*(Hom|hom|group)|(Hom|hom|group).*(topologicalKrullDim|ringKrullDim)",
+   "results": "0 hits: none. Logged digest 4f53cda18c2baa0c. Searched Mathlib/AlgebraicGeometry/Group/.",
+   "date": "2026-10-24",
+   "verdict": "no match: scheme ideal-sheaf kernels are not group-scheme kernels; presentation dimensions, group generator rank and linear-disjoint ranks do not state the group Krull-dimension formula or its surjectivity criterion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Rank nullity for Krull dimension of a faithfully flat homomorphism of algebraic groups and a closed subgroup of full dimension",
+   "results": "8 hits: Subalgebra.LinearDisjoint.rank_eq_one_of_flat_of_self_of_inj, Subalgebra.LinearDisjoint.rank_inf_eq_one_of_flat_left_of_inj, Subalgebra.LinearDisjoint.rank_inf_eq_one_of_flat_right_of_inj, Subalgebra.LinearDisjoint.rank_inf_eq_one_of_flat_of_inj, Submodule.LinearDisjoint.rank_le_one_of_flat_of_self, Algebra.lift_rank_le_of_surjective_injective, Algebra.rank_le_of_surjective_injective, Submodule.LinearDisjoint.rank_inf_le_one_of_flat_right. Logged digest 3472bae5ad6d91bf.",
+   "date": "2026-10-24",
+   "verdict": "no match: scheme ideal-sheaf kernels are not group-scheme kernels; presentation dimensions, group generator rank and linear-disjoint ranks do not state the group Krull-dimension formula or its surjectivity criterion."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-semisimple-commutative-unipotent-commutator",
+  "date": "2026-10-24",
+  "group": "Q84"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Reductive group-scheme structure of PGL. Supporting input: Corollary 17.62(b)--(d), printed pp.372--373; Sections 6.44--6.46, printed p.135, and Chapter 19(a)--(b), printed pp.397--400. The quotient is by the smooth central torus, with the usual algebraic-group quotient of Theorem 5.28 and Propositions 5.24--5.27. Supporting lemma: The scheme-theoretic centre of a reductive group is of multiplicative type. Supporting input for Corollary 17.62(a): Proposition 17.61(a), printed p.372; centralizer functor as in Proposition 1.92, printed pp.33--34. Only the self-centralizer assertion (a) is used, not the centre containment assertion (b). Supporting input in the proof of Proposition 17.61(a): Corollary 13.10, printed p.257 (smoothness); Theorem 17.38, printed p.363 (connectedness), applied after extension to an algebraic closure; Proposition 1.92 and following paragraph, printed pp.33--34 (centralizer functor). Supporting input for the centralizer proof: Theorem 16.40, printed pp.338–339, connectedness assertion; the proof is induction using Lemma 16.39 and the quotient sequence. The extra unipotent-factor assertion of the theorem is not needed. Supporting input for Milne 16.40: Lemma 16.39, printed p.338. The rational-point decomposition is the rational-point consequence of its surjective morphism $N\times C_N(s)\to N$ over an algebraically closed field. Supporting input: Proposition 5.23, printed p.104, and Remark 5.42 following Theorem 5.39, printed pp.108--109 (kernel-image dimension formula). The surjectivity criterion is its full-dimensional-image consequence, using Corollary 1.35, printed p.17, and the dimension drop for proper closed subsets of an irreducible algebraic variety. Used for the two homomorphisms in Lemma 16.39, printed p.338.",
+   "via": [
+    "lem-sfb-semisimple-commutative-unipotent-commutator",
+    "lem-sfb-solvable-semisimple-centralizer-connected",
+    "lem-sfb-torus-centralizer-smooth-connected",
+    "lem-sfb-reductive-torus-self-centralizer",
+    "lem-sfb-reductive-centre-multiplicative-type",
+    "lem-sfb-reductive-radical-quotient",
+    "lem-sfb-pgl-reductive-structure",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-group-hom-dimension-kernel-image",
+  "worker": "stage1",
+  "summary": "Q32 checked Milne 5.23, 5.39, 5.42 and 1.35, found no exact project or Mathlib proof, and split using existing flat-fibre, identity-local-dimension and affine dimension-drop nodes. All scheme-theoretic kernels, nonreduced and inseparable cases are retained. No new nodes and no statement change.",
+  "blueprint": "Inherited from.place: supporting kernel-image dimension input to Milne Lemma 16.39 along det-thm-sf-ctf-stability-direct-images proof (3). Steps 1-2 prove the dimension formula; Steps 3-6 prove the full-dimensional-image criterion. Whole-blueprint searches kernel image and dimension kernel found no equivalent node.",
+  "tool_uses": [
+   {
+    "node": "lem-sbc-flat-composite-fibre-dimension-at-point",
+    "why": "General flat fibre-dimension formula at the identity, valid without smoothness; no node of the item unit supplies it."
+   },
+   {
+    "node": "lem-ag-rational-point-stalk-topological-local-dimension",
+    "why": "Converts point-dimensions at rational identities to local-ring dimensions; general dimension tool absent from the item unit."
+   },
+   {
+    "node": "lem-ag-group-identity-local-dimension",
+    "why": "Global group dimension equals local dimension at the identity even for nonreduced groups; absent from the item unit."
+   },
+   {
+    "node": "sbc-lem-smooth-geometrically-reduced",
+    "why": "Gives reducedness of the smooth target over a field, a general geometry tool absent from the item unit."
+   },
+   {
+    "node": "lem-weil-pbc-smooth-over-field-regular-local",
+    "why": "Gives regular local rings in affine smooth charts of H; general smoothness tool absent from the item unit."
+   },
+   {
+    "node": "lem-wf-smooth-components-disjoint",
+    "why": "Identifies connected and irreducible components of the smooth affine target; general geometry tool absent from the item unit."
+   },
+   {
+    "node": "lem-wf-affine-dimension-drop",
+    "why": "Gives that the target coordinate algebra is a domain and excludes a proper full-dimensional closed image; general affine geometry tool absent from the item unit."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sbc-flat-composite-fibre-dimension-at-point",
+  "lem-ag-rational-point-stalk-topological-local-dimension",
+  "lem-ag-group-identity-local-dimension",
+  "sbc-lem-smooth-geometrically-reduced",
+  "lem-weil-pbc-smooth-over-field-regular-local",
+  "lem-wf-smooth-components-disjoint",
+  "lem-wf-affine-dimension-drop"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q32-78a35f4d0",
+  "group": "Q32",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q32-78a35f4d0 (reviewer sub-agent of L); spot-checked: Read in full: the item (0 new nodes, statement byte-identical to live and side-live, where the item is still unsplit), every cited statement, and Milne iAG 5.23, 5.39, 5.42, the proof of 5.43 (c)=>(a) and 1.35. Step 1: affine-source separatedness meets the separated hypothesis of the factorization node, which gives q flat and finitely presented with ker q = L, and all dimensions are finite. Step 2: the flat composite-fibre node applies to q and I->Spec k at e_G with fibre L, because kappa(e_I)=k; the rational-point stalk node and the group-identity node (nonreduced allowed) then give dim G = dim L + dim I. This is a characteristic-free route, stronger than Milne's reduced-scheme route. Step 3 is correct, but sbc-lem-smooth-geometrically-reduced only gives reducedness after separably closed extensions. FIX: the step now says the trivial extension k qualifies because k is algebraically closed. Step 4 (C1/C4): lem-wf-affine-dimension-drop measures dimension by prime chains of the coordinate algebra, while the item uses topological Krull dimension, and the step switched between them uncited. FIX: cite the existing Mathlib leaf lem-weil-pbc-spec-topological-krull-dimension-ring (dim H = dim A, dim I = dim A/J = dim A/sqrt J), added to uses and proof_deps. Steps 5 and 6 are correct and match Milne 5.43. Small cases: Frobenius on G_a with alpha_p kernel, mu_n into G_m, the zero map, e into alpha_p (smoothness needed) and a component inclusion (connectedness needed). No duplicates; lem-ag-equal-dimension-subgroup needs characteristic 0. Accepted tool_uses: the 7 general geometry nodes in split_report. No SGA.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.GroupScheme.HomDimensionKernelImage",
+  "declaration": "AlgebraicGeometry.algebraicGroup_hom_dimension_kernel_image",
+  "file": "lean/Sheaf/AlgebraicGeometry/GroupScheme/HomDimensionKernelImage.lean",
+  "statement": "theorem algebraicGroup_hom_dimension_kernel_image {k : Type u} [Field k] [IsAlgClosed k] (G H I : Grp (Over (Spec (.of k)))) [IsAffine G.X.left] [IsAffine H.X.left] [LocallyOfFiniteType G.X.hom] [QuasiCompact G.X.hom] [LocallyOfFiniteType H.X.hom] [QuasiCompact H.X.hom] (f : G ⟶ H) (q : G ⟶ I) (j : I ⟶ H) (hfactor : q ≫ j = f) [Flat q.hom.hom.left] [Surjective q.hom.hom.left] [LocallyOfFinitePresentation q.hom.hom.left] [QuasiCompact q.hom.hom.left] [QuasiSeparated q.hom.hom.left] [IsClosedImmersion j.hom.hom.left] : (∃ dG dH dI dL : ℕ, topologicalKrullDim G.X.left = (dG : WithBot ℕ∞) ∧ topologicalKrullDim H.X.left = (dH : WithBot ℕ∞) ∧ topologicalKrullDim I.X.left = (dI : WithBot ℕ∞) ∧ topologicalKrullDim (GrpObj.ker f.hom.hom).left = (dL : WithBot ℕ∞)) ∧ topologicalKrullDim G.X.left = topologicalKrullDim I.X.left + topologicalKrullDim (GrpObj.ker f.hom.hom).left ∧ (Smooth H.X.hom → ConnectedSpace H.X.left → ((Flat f.hom.hom.left ∧ Surjective f.hom.hom.left) ↔ topologicalKrullDim G.X.left = topologicalKrullDim H.X.left + topologicalKrullDim (GrpObj.ker f.hom.hom).left))",
+  "branch": "newtargets-dag",
+  "by": "Q66",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-8d596dac3",
+  "group": "Q66",
+  "result": "pass",
+  "note": "Every clause of the node matches the Lean: affine finite-type Grp(Over Spec k) with k algebraically closed; scheme-theoretic kernel GrpObj.ker; finite ℕ dimensions; dim G = dim I + dim L; smooth and connected H scoped to the criterion; flat ∧ surjective. The factorization is a parameter (q faithfully flat and finitely presented, j a closed immersion, q≫j=f). That is equivalent to the specified one, since faithfully flat q makes I the scheme-theoretic image and j mono gives ker q = ker f, so no arbitrary map. Edge cases: Frobenius/α_p, the trivial map, e→α_p and a disconnected target. No extra assumptions or universe restriction. No duplicate: SmoothGroupOrbitGeometry is a different statement. lean.statement is verbatim in the file; one sorry, no definitions; docstrings give source and blueprint plus the six-step proof; all imports exist. Not recompiled per instructions (worker's compile clean). No findings."
+ }
+}

@@ -1,0 +1,423 @@
+{
+ "id": "lem-sfb-torus-invariant-affine-filtration",
+ "kind": "statement",
+ "title": "Invariant affine filtration for a split torus action",
+ "statement": "Let $F$ be an algebraically closed field [def-weil-field, def-weil-algebraic-closure], let $r\\geq0$, and let $T\\simeq\\mathbf G_{m,F}^r$ be a split torus [def-sc-group-scheme], where $\\mathbf G_m(B)=B^\\times$ for every commutative $F$-algebra $B$. Let $T$ act on a separated finite-type $F$-scheme $Y$ [def-pc-scheme, def-weil-proper-morphism, def-weil-finite-type-morphism], and let $V\\subseteq Y$ be an invariant open subscheme [def-weil-open-immersion]; invariant means that the action restricts to $T\\times_FV\\to V$. The scheme $V$ is separated and of finite type over $F$. Its reduction $V_{\\mathrm{red}}$ is the reduced closed subscheme [def-pc-reduced-scheme, def-weil-closed-immersion] defined by the sheaf of nilpotent sections of $\\mathcal O_V$; it has the same underlying space as $V$. There exist an action on $V_{\\mathrm{red}}$ making its inclusion into $V$ equivariant, an integer $N\\geq0$, and a finite descending chain of invariant reduced closed subschemes\n$$V_{\\mathrm{red}}=Z_0\\supseteq Z_1\\supseteq\\cdots\\supseteq Z_N=\\varnothing$$\nsuch that every open complement $S_j=Z_j\\setminus Z_{j+1}$, for $0\\leq j<N$, is affine [def-weil-affine-spectrum]. Every $Z_j$ and $S_j$ is separated and of finite type over $F$, and all inclusions are equivariant for the induced actions. The empty $V$ case permits $N=0$. No normality, smoothness, projectivity, effective-action hypothesis, or restriction on the characteristic is imposed.",
+ "source": {
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Agent-formulated geometric supporting input for the concentration prerequisite to Section 22d, Theorem 22.50, printed p.480; not stated or proved in Milne. WANTED: H. Sumihiro, Equivariant completion, J. Math. Kyoto Univ. 14 (1974), 1--28, Corollary 2 (invariant affine neighborhoods on normal torus varieties), followed by reduction and Noetherian induction. The full arbitrary-scheme filtration is the agent-formulated statement. No Stacks tag is asserted for this equivariant result."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-weil-algebraic-closure",
+  "def-sc-group-scheme",
+  "def-pc-scheme",
+  "def-weil-proper-morphism",
+  "def-weil-finite-type-morphism",
+  "def-weil-open-immersion",
+  "def-pc-reduced-scheme",
+  "def-weil-closed-immersion",
+  "def-weil-affine-spectrum",
+  "def-sfb-tori-multiplicative-type"
+ ],
+ "proof": [
+  {
+   "text": "A field is Noetherian, since each ideal is zero or the whole field. Hence $Y$ is Noetherian by [lem-weil-pbc-finite-type-over-noetherian]. The open immersion $V\\to Y$ is quasi-compact by [lem-sfb-noetherian-open-immersion-qc], therefore finite type by [lem-weil-pbc-qc-open-immersion-finite-type]. Composition [lem-sfb-finite-type-composition-base-change] makes $V$ finite type over $F$. Its diagonal is the pullback of the closed diagonal of $Y$ to $V\\times_FV$, so [lem-weil-pbc-closed-immersion-base-change] proves separatedness. The locally closed stratum theorem [lem-dl-a1-locally-closed-stratum-separated-finite-type], applied in $Y$ to the subset $|V|$ and open $V$, makes $X=V_{\\mathrm{red}}$ separated and finite type. Its reduced induced structure agrees with the reduction by [lem-weil-pbc-reduced-induced-closed-subscheme].",
+   "uses": [
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "lem-sfb-noetherian-open-immersion-qc",
+    "lem-weil-pbc-qc-open-immersion-finite-type",
+    "lem-sfb-finite-type-composition-base-change",
+    "lem-weil-pbc-closed-immersion-base-change",
+    "lem-dl-a1-locally-closed-stratum-separated-finite-type",
+    "lem-weil-pbc-reduced-induced-closed-subscheme"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tags 01T6 (lemma-finite-type-noetherian), 01T3 (lemma-composition-finite-type); properties.tex Tag 01OX; schemes.tex Tags 01J3 and 01JY."
+   }
+  },
+  {
+   "text": "Put $i:X\\hookrightarrow V$. Use [lem-trf-split-lattice-torus-projection] with $L=\\mathbf Z^r$: $T\\times_FX$ is reduced. Thus the composite $T\\times_FX\\to T\\times_FV\\to V$ factors through $i$ by [lem-weil-pbc-reduced-source-factors-through-closed-subscheme]. This supplies $a_X:T\\times_FX\\to X$. The identity and associativity laws hold after composition with $i$, by the laws on $V$. They therefore hold on $X$: a closed immersion cancels on morphisms, since on affine charts its ring maps are surjective and maps out of a quotient are determined by their composites. The same cancellation proves equivariance of $i$. This argument uses the whole algebraic action, including nonreduced test algebras, rather than just its $F$-points.",
+   "uses": [
+    "lem-trf-split-lattice-torus-projection",
+    "lem-weil-pbc-reduced-source-factors-through-closed-subscheme",
+    "def-weil-closed-immersion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Tag 0356 (lemma-map-into-reduction); torus reduced-product input as in the cited split-lattice projection node."
+   }
+  },
+  {
+   "text": "The scheme $X$ is Noetherian by [lem-weil-pbc-finite-type-over-noetherian]. By [lem-weil-pbc-noetherian-scheme-closed-subsets-minimal], every nonempty family of closed subsets of $|X|$ has an inclusion-minimal member. We prove by this well-founded induction that every invariant reduced closed subscheme $C\\subseteq X$ has the required finite filtration, where the action on $C$ and its equivariant inclusion are included in the induction's data. The empty $C$ has the length-zero filtration. For a nonempty $C$, assume the assertion for every invariant reduced closed subscheme with strictly smaller support. The stratum theorem [lem-dl-a1-locally-closed-stratum-separated-finite-type], applied to $|C|\\subseteq |Y|$, makes $C$ separated and finite type over $F$. Thus the following steps may be carried out for this $C$.",
+   "uses": [
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "lem-weil-pbc-noetherian-scheme-closed-subsets-minimal",
+    "lem-dl-a1-locally-closed-stratum-separated-finite-type"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/properties.tex",
+    "place": "Tag 01OZ (lemma-Noetherian-topology); agent Noetherian induction with empty base case."
+   }
+  },
+  {
+   "text": "The field $F$ is perfect: in characteristic $p>0$, every $b\\in F$ has a root of $z^p-b$; in characteristic zero every field is perfect. Since $C$ is reduced and finite type, [lem-kun-geometric-reduced-perfect] gives geometric reducedness and finite presentation over $F$. Let $W$ be its smooth locus. By [lem-pur-geometrically-reduced-dense-smooth-open], $W$ is the union of its smooth open subschemes and is dense in $C$. It is nonempty because $C$ is nonempty. Source locality [lem-weil-pbc-smooth-local-on-source] makes $W\\to\\operatorname{Spec}F$ smooth. By [lem-weil-pbc-smooth-scheme-over-field-regular] it is regular, and by [rem-pc-regular-normal](1) it is normal. As a reduced locally closed subscheme of $Y$, it is also separated and finite type by [lem-dl-a1-locally-closed-stratum-separated-finite-type].",
+   "uses": [
+    "lem-kun-geometric-reduced-perfect",
+    "lem-pur-geometrically-reduced-dense-smooth-open",
+    "lem-weil-pbc-smooth-local-on-source",
+    "lem-weil-pbc-smooth-scheme-over-field-regular",
+    "rem-pc-regular-normal",
+    "lem-dl-a1-locally-closed-stratum-separated-finite-type"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tags 056V (lemma-geometrically-reduced-dense-smooth-open), 0B8X (lemma-dense-smooth-open-variety-over-perfect-field), 056S (lemma-smooth-regular); agent assembly of their cited statements."
+   }
+  },
+  {
+   "text": "Write $a:T\\times_F C\\to C$, $p:T\\times_F C\\to C$, and $q:T\\times_F C\\to T$ for the action and the two projections. The structural morphism $T\\to\\operatorname{Spec}F$ is smooth by [lem-trf-split-lattice-torus-projection], hence flat by [lem-pc-smooth-flat]. The structure map of $C$ is finitely presented by step 4. Applying [lem-sfb-scheme-lfp-smooth-flat-base-change] to it shows that the smooth locus of $q$ is precisely $p^{-1}W$. The shear $\\theta(t,c)=(t,a(t,c))$ is an isomorphism over $T$, with inverse $(t,c)\\mapsto(t,a(t^{-1},c))$; the group identities verify both composites. Smoothness on an open is unchanged by an isomorphism [lem-weil-pbc-smooth-restrict-open-subschemes](c). Since $q\\theta=q$, its smooth locus is $\\theta^{-1}(p^{-1}W)$. Therefore $a^{-1}W=p^{-1}W$. In particular the action on $T\\times_FW$ factors through $W$ by [lem-weil-pbc-morphism-factors-through-open-subscheme]. Its laws follow by composing with the open inclusion and cancelling it using [lem-weil-pbc-open-immersion-monomorphism]. Thus $W$ is an invariant normal open, with scheme-theoretic action.",
+   "uses": [
+    "lem-trf-split-lattice-torus-projection",
+    "lem-pc-smooth-flat",
+    "lem-sfb-scheme-lfp-smooth-flat-base-change",
+    "lem-weil-pbc-smooth-restrict-open-subschemes",
+    "lem-weil-pbc-morphism-factors-through-open-subscheme",
+    "lem-weil-pbc-open-immersion-monomorphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 02V4 (lemma-set-points-where-fibres-smooth), case (2); agent shear-isomorphism argument; Tag 01V6 (lemma-smooth-characterize) and schemes open factorization."
+   }
+  },
+  {
+   "text": "Choose $w\\in W$. Apply [lem-sfb-sumihiro-normal-torus-affine-neighbourhood] to the normal separated finite-type $F$-scheme $W$ with its restricted $T$-action. It gives an invariant affine open $A\\subseteq W$ containing $w$. Then $A$ is also an open of $C$, nonempty, and its inclusion into $C$ is equivariant. The shear of step 5 restricts to an automorphism of $T\\times_FA$: the action and the action by inverse both restrict to $A$. Consequently, as open subsets of $T\\times_FC$, $a^{-1}A=p^{-1}A$. Taking complements gives $a^{-1}(|C|\\setminus A)=p^{-1}(|C|\\setminus A)$.",
+   "uses": [
+    "lem-sfb-sumihiro-normal-torus-affine-neighbourhood"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Agent concentration prerequisite; WANTED: Sumihiro, Equivariant completion (1974), Corollary 2. Milne Theorem 22.50, p.480, motivates the prerequisite but does not prove it."
+   }
+  },
+  {
+   "text": "Let $D\\hookrightarrow C$ be the reduced induced closed subscheme with support $|C|\\setminus A$, supplied by [lem-weil-pbc-reduced-induced-closed-subscheme]. The source $T\\times_FD$ is reduced by [lem-trf-split-lattice-torus-projection]. Its map to $C$ under the action has image in $|D|$: $T\\times_FD$ is the pullback of the closed immersion $D\\to C$ along $p$, so its map to $T\\times_FC$ is a closed immersion by [lem-weil-pbc-closed-immersion-base-change], with underlying image $p^{-1}|D|$. Indeed the image lies in $p^{-1}|D|$ since the square commutes; conversely, for $z\\in T\\times_FC$ with $p(z)=c\\in|D|$, let $e\\in D$ be the point over $c$; [lem-weil-pbc-fibre-product-points] gives points over $(z,e)$ in bijection with $\\operatorname{Spec}(\\kappa(z)\\otimes_{\\kappa(c)}\\kappa(e))$, which is nonempty because a tensor product of two field extensions of $\\kappa(c)$ is a nonzero ring. The complement equality in step 6 then puts that image in $a^{-1}|D|$. Apply [lem-weil-pbc-reduced-source-factors-through-closed-subscheme] to factor the action through $D$. The group identities follow by cancelling its closed immersion, exactly as in step 2. The composite $D\\to X$ is a closed immersion by [lem-weil-pbc-closed-immersion-products]; hence $D$ is an invariant reduced closed subscheme of $X$. Its support is strictly smaller than that of $C$, since $A$ is nonempty.",
+   "uses": [
+    "lem-weil-pbc-reduced-induced-closed-subscheme",
+    "lem-trf-split-lattice-torus-projection",
+    "lem-weil-pbc-closed-immersion-base-change",
+    "lem-weil-pbc-fibre-product-points",
+    "lem-weil-pbc-reduced-source-factors-through-closed-subscheme",
+    "lem-weil-pbc-closed-immersion-products"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Tags 01J3 (lemma-reduced-closed-subscheme), 0356 (lemma-map-into-reduction), 01JT (lemma-points-fibre-product); morphisms.tex Tag 01QR for the base-changed closed immersion. Agent complement argument."
+   }
+  },
+  {
+   "text": "Apply the induction hypothesis to $D$, obtaining $D=D_0\\supseteq\\cdots\\supseteq D_m=\\varnothing$. Prepend $C$ to this chain. The new first difference is exactly the open subscheme $A$, since $D$ was defined by its reduced closed complement; all later differences are those of the chain on $D$. The new first difference is affine by step 6, and all later ones are affine by induction. Closed inclusions compose by [lem-weil-pbc-closed-immersion-products]. Each member and difference is a reduced locally closed subscheme of $Y$, so [lem-dl-a1-locally-closed-stratum-separated-finite-type] gives separatedness and finite type over $F$ for each. Every inclusion is equivariant: the new ones are restrictions of the action constructed in step 7 and the given action on $A$, and the remaining ones are equivariant by induction. This proves the induction step. Taking $C=X$ gives the desired chain on $V_{\\mathrm{red}}$, with $N=m+1$ in the nonempty step and $N=0$ for empty $V$.",
+   "uses": [
+    "lem-weil-pbc-closed-immersion-products",
+    "lem-dl-a1-locally-closed-stratum-separated-finite-type"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Agent finite-chain assembly from the preceding induction, with Tags 01J3, 01T3, 01T5 and 01KU through the cited permanence nodes."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-closed-immersion",
+  "lem-dl-a1-locally-closed-stratum-separated-finite-type",
+  "lem-kun-geometric-reduced-perfect",
+  "lem-pc-smooth-flat",
+  "lem-pur-geometrically-reduced-dense-smooth-open",
+  "lem-sfb-finite-type-composition-base-change",
+  "lem-sfb-noetherian-open-immersion-qc",
+  "lem-sfb-scheme-lfp-smooth-flat-base-change",
+  "lem-sfb-sumihiro-normal-torus-affine-neighbourhood",
+  "lem-trf-split-lattice-torus-projection",
+  "lem-weil-pbc-closed-immersion-base-change",
+  "lem-weil-pbc-closed-immersion-products",
+  "lem-weil-pbc-fibre-product-points",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-weil-pbc-morphism-factors-through-open-subscheme",
+  "lem-weil-pbc-noetherian-scheme-closed-subsets-minimal",
+  "lem-weil-pbc-open-immersion-monomorphism",
+  "lem-weil-pbc-qc-open-immersion-finite-type",
+  "lem-weil-pbc-reduced-induced-closed-subscheme",
+  "lem-weil-pbc-reduced-source-factors-through-closed-subscheme",
+  "lem-weil-pbc-smooth-local-on-source",
+  "lem-weil-pbc-smooth-restrict-open-subschemes",
+  "lem-weil-pbc-smooth-scheme-over-field-regular",
+  "rem-pc-regular-normal"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Agent reduction, invariant smooth-locus argument and Noetherian induction supporting the concentration prerequisite of Section 22d, Theorem 22.50, p.480. WANTED Sumihiro (1974), Corollary 2; its theorem is separated as a statement-only node. Scheme tools are read in the cited Stacks sources."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "Sumihiro|torus.*stratif|invariant.*affine.*(open|strat)",
+   "results": "{\"t\": \"2026-10-23T23:38:54Z\", \"tool\": \"grep\", \"query\": \"Sumihiro|torus.*stratif|invariant.*affine.*(open|strat)\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits give ordinary affine covers, finite coproducts of affine schemes, Noetherian spaces and unrelated finite group actions; none gives a torus-invariant affine filtration or specializes to it in one line"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A split torus acting on a finite type separated scheme admits a finite invariant closed filtration of its reduction with affine strata",
+   "results": "{\"t\": \"2026-10-23T23:38:54Z\", \"tool\": \"leansearch\", \"query\": \"A split torus acting on a finite type separated scheme admits a finite invariant closed filtration of its reduction with affine strata\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.isProper_eq\", \"AlgebraicGeometry.IsNoetherian.noetherianSpace\", \"AlgebraicGeometry.instIsAffineOfFiniteOfDiscreteTopologyCarrierCarrierCommRingCat\", \"AlgebraicGeometry.Scheme.instIsSeparatedOfIsAffine\", \"AlgebraicGeometry.IsSeparated.of_isAffineHom\", \"AlgebraicGeometry.IsSeparated.casesOn\", \"Ideal.Filtration.noConfusionType\", \"AlgebraicGeometry.Scheme.instIsSeparatedOfIsSeparated\"], \"digest\": \"7e7c352949c75ad4\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits give ordinary affine covers, finite coproducts of affine schemes, Noetherian spaces and unrelated finite group actions; none gives a torus-invariant affine filtration or specializes to it in one line"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Scheme, \"stratification\"",
+   "results": "{\"t\": \"2026-10-23T23:38:54Z\", \"tool\": \"loogle\", \"query\": \"AlgebraicGeometry.Scheme, \\\"stratification\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits give ordinary affine covers, finite coproducts of affine schemes, Noetherian spaces and unrelated finite group actions; none gives a torus-invariant affine filtration or specializes to it in one line"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Sumihiro theorem invariant affine stratification of a torus variety",
+   "results": "{\"t\": \"2026-10-23T23:38:55Z\", \"tool\": \"leanfinder\", \"query\": \"Sumihiro theorem invariant affine stratification of a torus variety\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Proj.affineOpenCover\", \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.h𝒰S\", \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.𝒰D\", \"AlgebraicGeometry.Proj.affineOpenCoverOfIrrelevantLESpan\", \"AlgebraicGeometry.Scheme.affineOpenCover_I₀\", \"AlgebraicGeometry.Scheme.affineBasisCover\", \"AlgebraicGeometry.Scheme.isAffine_affineBasisCover\", \"AlgebraicGeometry.instIsAffineXSchemeAffineCover\"], \"digest\": \"40d65a5064a1d915\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits give ordinary affine covers, finite coproducts of affine schemes, Noetherian spaces and unrelated finite group actions; none gives a torus-invariant affine filtration or specializes to it in one line"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Every separated finite type scheme with a split multiplicative torus action has a finite decomposition into invariant affine locally closed reduced subschemes",
+   "results": "{\"t\": \"2026-10-23T23:42:56Z\", \"tool\": \"leanfinder\", \"query\": \"Every separated finite type scheme with a split multiplicative torus action has a finite decomposition into invariant affine locally closed reduced subschemes\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsFinite.instHasAffinePropertyAndIsAffineFiniteCarrierObjOppositeOpensCarrierCarrierCommRingCatPresheafOpOpensTopHomAppTop\", \"CategoryTheory.PreGaloisCategory.has_decomp_quotients\", \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.h𝒰S\", \"AlgebraicGeometry.Scheme.exists_hom_hom_comp_eq_comp_of_locallyOfFiniteType\", \"AlgebraicGeometry.Scheme.exists_isOpenCover_and_isAffine\", \"AlgebraicGeometry.instIsAffineOfFiniteOfDiscreteTopologyCarrierCarrierCommRingCat\", \"AlgebraicGeometry.exists_mem_of_isClosed_of_nonempty\", \"AlgebraicGeometry.instIsAffineSigmaObjScheme\"], \"digest\": \"a646b1644287ad21\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits give ordinary affine covers, finite coproducts of affine schemes, Noetherian spaces and unrelated finite group actions; none gives a torus-invariant affine filtration or specializes to it in one line"
+  },
+  {
+   "tool": "grep",
+   "query": "Sumihiro|invariant.*affine|torus.*stratif",
+   "results": "{\"t\": \"2026-10-24T00:08:35Z\", \"tool\": \"grep\", \"query\": \"Sumihiro|invariant.*affine|torus.*stratif\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: returned affine covers and normalization charts have no invariance clause for a torus action; none specializes in one line to the stated equivariant neighbourhood theorem"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Finite filtration by invariant closed subschemes with affine differences for a torus action",
+   "results": "{\"t\": \"2026-10-24T00:08:35Z\", \"tool\": \"leansearch\", \"query\": \"Finite filtration by invariant closed subschemes with affine differences for a torus action\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"IsFiltration.casesOn\", \"IsFiltration.rec\", \"Ideal.Filtration.Stable\", \"Ideal.Filtration.recOn\", \"IsModuleFiltration.toIsFiltration\", \"Ideal.stableFiltration_stable\", \"Ideal.Filtration\", \"IsFiltration.F_lt_le_F\"], \"digest\": \"c34b76e08f7e22f6\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: returned affine covers and normalization charts have no invariance clause for a torus action; none specializes in one line to the stated equivariant neighbourhood theorem"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A split algebraic torus action on a separated finite type scheme admits a finite invariant affine stratification of its reduction",
+   "results": "{\"t\": \"2026-10-24T00:08:36Z\", \"tool\": \"leanfinder\", \"query\": \"A split algebraic torus action on a separated finite type scheme admits a finite invariant affine stratification of its reduction\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.ExistsHomHomCompEqCompAux.h𝒰S\", \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.𝒰D\", \"AlgebraicGeometry.Scheme.exists_isOpenCover_and_isAffine\", \"AlgebraicGeometry.IsFinite.instHasAffinePropertyAndIsAffineFiniteCarrierObjOppositeOpensCarrierCarrierCommRingCatPresheafOpOpensTopHomAppTop\", \"AlgebraicGeometry.instIsAffineOfFiniteOfDiscreteTopologyCarrierCarrierCommRingCat\", \"AlgebraicGeometry.Scheme.exists_hom_hom_comp_eq_comp_of_locallyOfFiniteType\", \"AlgebraicGeometry.instIsAffineXSchemeFiniteSubcover\", \"AlgebraicGeometry.instIsAffineSigmaObjScheme\"], \"digest\": \"484f3277e6a8beac\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: returned affine covers and normalization charts have no invariance clause for a torus action; none specializes in one line to the stated equivariant neighbourhood theorem"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Sumihiro theorem normal varieties torus invariant affine open cover",
+   "results": "{\"t\": \"2026-10-24T00:09:33Z\", \"tool\": \"leanfinder\", \"query\": \"Sumihiro theorem normal varieties torus invariant affine open cover\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Hom.normalizationOpenCover\", \"AlgebraicGeometry.Scheme.affineBasisCover\", \"AlgebraicGeometry.Scheme.affineOpenCover\", \"AlgebraicGeometry.Proj.affineOpenCover\", \"AlgebraicGeometry.Proj.affineOpenCoverOfIrrelevantLESpan\", \"AlgebraicGeometry.Scheme.affineCover\", \"AlgebraicGeometry.Scheme.AffineOpenCover\", \"AlgebraicGeometry.Scheme.OpenCover.affineRefinement\"], \"digest\": \"354b75ffb64cfa9c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: returned affine covers and normalization charts have no invariance clause for a torus action; none specializes in one line to the stated equivariant neighbourhood theorem"
+  },
+  {
+   "tool": "grep",
+   "query": "smoothLocus|dense.*[Ss]mooth|[Ss]mooth.*dense|exists.*[Ss]mooth",
+   "results": "{\"t\": \"2026-10-24T00:14:56Z\", \"tool\": \"grep\", \"query\": \"smoothLocus|dense.*[Ss]mooth|[Ss]mooth.*dense|exists.*[Ss]mooth\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 10, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/Group/Smooth.lean\", \"Mathlib/AlgebraicGeometry/Group/Smooth.lean\", \"Mathlib/AlgebraicGeometry/Group/Smooth.lean\", \"Mathlib/AlgebraicGeometry/Group/Smooth.lean\", \"Mathlib/AlgebraicGeometry/Group/Smooth.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/Smooth.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/Smooth.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/Smooth.lean\"], \"digest\": \"03464acb3e592ce3\"}",
+   "date": "2026-10-24",
+   "verdict": "supporting result found: Scheme.Hom.dense_smoothLocus_of_perfectField and smoothLocus in Mathlib/AlgebraicGeometry/Morphisms/Smooth.lean:305,368; these do not state the torus-invariant affine filtration. The more general existing DAG node lem-pur-geometrically-reduced-dense-smooth-open is reused, with lem-kun-geometric-reduced-perfect, so no duplicate density node is created."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A reduced scheme locally of finite type over a perfect field has a dense open smooth locus equal to the regular locus",
+   "results": "{\"t\": \"2026-10-24T00:14:57Z\", \"tool\": \"leansearch\", \"query\": \"A reduced scheme locally of finite type over a perfect field has a dense open smooth locus equal to the regular locus\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.smoothLocus\", \"AlgebraicGeometry.instLocallyOfFinitePresentationOfIsSmooth\", \"Algebra.isOpen_smoothLocus\", \"Algebra.smoothLocus_eq_univ_iff\", \"Algebra.smoothLocus_eq_univ\", \"Algebra.basicOpen_subset_smoothLocus_iff_smooth\", \"AlgebraicGeometry.isIntegral_of_irreducibleSpace_of_isReduced\", \"AlgebraicGeometry.isReduced_of_isReduced_stalk\"], \"digest\": \"73e6102f08213659\"}",
+   "date": "2026-10-24",
+   "verdict": "supporting result found: Scheme.Hom.dense_smoothLocus_of_perfectField and smoothLocus in Mathlib/AlgebraicGeometry/Morphisms/Smooth.lean:305,368; these do not state the torus-invariant affine filtration. The more general existing DAG node lem-pur-geometrically-reduced-dense-smooth-open is reused, with lem-kun-geometric-reduced-perfect, so no duplicate density node is created."
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Scheme, \"smoothLocus\"",
+   "results": "{\"t\": \"2026-10-24T00:14:57Z\", \"tool\": \"loogle\", \"query\": \"AlgebraicGeometry.Scheme, \\\"smoothLocus\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Hom.smoothLocus\", \"AlgebraicGeometry.Scheme.Hom.dense_smoothLocus_of_perfectField\", \"AlgebraicGeometry.Scheme.Hom.genericPoint_mem_smoothLocus_of_perfectField\", \"AlgebraicGeometry.Scheme.Hom.smoothLocus_eq_top\", \"AlgebraicGeometry.Scheme.Hom.smoothLocus_eq_top_iff\", \"AlgebraicGeometry.Scheme.Hom.preimage_smoothLocus_eq\", \"AlgebraicGeometry.Scheme.Hom.isOpen_smoothLocus\", \"AlgebraicGeometry.Scheme.Hom.mem_smoothLocus\"], \"digest\": \"336f5d6238974823\"}",
+   "date": "2026-10-24",
+   "verdict": "supporting result found: Scheme.Hom.dense_smoothLocus_of_perfectField and smoothLocus in Mathlib/AlgebraicGeometry/Morphisms/Smooth.lean:305,368; these do not state the torus-invariant affine filtration. The more general existing DAG node lem-pur-geometrically-reduced-dense-smooth-open is reused, with lem-kun-geometric-reduced-perfect, so no duplicate density node is created."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Smooth locus dense in a reduced finite type scheme over a perfect field",
+   "results": "{\"t\": \"2026-10-24T00:14:58Z\", \"tool\": \"leanfinder\", \"query\": \"Smooth locus dense in a reduced finite type scheme over a perfect field\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.smoothLocus\", \"Algebra.smoothLocus_eq_univ\", \"Algebra.isOpen_smoothLocus\", \"Algebra.smoothLocus_eq_univ_iff\", \"AlgebraicGeometry.IsSmooth.exists_isStandardSmooth\", \"Algebra.IsSmoothAt.exists_notMem_smooth\", \"Algebra.basicOpen_subset_smoothLocus_iff\", \"AlgebraicGeometry.IsReduced\"], \"digest\": \"76f928c398520a7f\"}",
+   "date": "2026-10-24",
+   "verdict": "supporting result found: Scheme.Hom.dense_smoothLocus_of_perfectField and smoothLocus in Mathlib/AlgebraicGeometry/Morphisms/Smooth.lean:305,368; these do not state the torus-invariant affine filtration. The more general existing DAG node lem-pur-geometrically-reduced-dense-smooth-open is reused, with lem-kun-geometric-reduced-perfect, so no duplicate density node is created."
+  },
+  {
+   "tool": "grep",
+   "query": "dense_smoothLocus_of_perfectField|genericPoint_mem_smoothLocus_of_perfectField|smoothLocus",
+   "results": "{\"t\": \"2026-10-24T00:16:08Z\", \"tool\": \"grep\", \"query\": \"dense_smoothLocus_of_perfectField|genericPoint_mem_smoothLocus_of_perfectField|smoothLocus\", \"sub\": \"AlgebraicGeometry/Morphisms/Smooth.lean\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"251\", \"296\", \"305\", \"306\", \"308\"], \"digest\": \"18c85c5a539cd15a\"}",
+   "date": "2026-10-24",
+   "verdict": "supporting result found: Scheme.Hom.dense_smoothLocus_of_perfectField and smoothLocus in Mathlib/AlgebraicGeometry/Morphisms/Smooth.lean:305,368; these do not state the torus-invariant affine filtration. The more general existing DAG node lem-pur-geometrically-reduced-dense-smooth-open is reused, with lem-kun-geometric-reduced-perfect, so no duplicate density node is created."
+  },
+  {
+   "tool": "grep",
+   "query": "Sumihiro|[Ii]nvariant.*[Aa]ffine|[Aa]ffine.*[Ii]nvariant",
+   "results": "{\"t\": \"2026-10-24T00:18:56Z\", \"tool\": \"grep\", \"query\": \"Sumihiro|[Ii]nvariant.*[Aa]ffine|[Aa]ffine.*[Ii]nvariant\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: returned affine covers and normalization charts have no invariance clause for a torus action; none specializes in one line to the stated equivariant neighbourhood theorem"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Every point of a normal separated finite type scheme over an algebraically closed field with a split torus action has an invariant affine open neighborhood",
+   "results": "{\"t\": \"2026-10-24T00:18:56Z\", \"tool\": \"leansearch\", \"query\": \"Every point of a normal separated finite type scheme over an algebraically closed field with a split torus action has an invariant affine open neighborhood\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.exists_isAffineOpen_mem_and_subset\", \"AlgebraicGeometry.Scheme.exists_affine_mem_range_and_range_subset\", \"AlgebraicGeometry.Scheme.affineCover\", \"AlgebraicGeometry.Scheme.local_affine\", \"AlgebraicGeometry.Scheme.affineOpenCover\", \"AlgebraicGeometry.IsAffineOpen\", \"AlgebraicGeometry.Scheme.affineOpens\", \"AlgebraicGeometry.Scheme.isBasis_affineOpens\"], \"digest\": \"80256b949c192b13\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: returned affine covers and normalization charts have no invariance clause for a torus action; none specializes in one line to the stated equivariant neighbourhood theorem"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Scheme, \"invariant\"",
+   "results": "{\"t\": \"2026-10-24T00:18:57Z\", \"tool\": \"loogle\", \"query\": \"AlgebraicGeometry.Scheme, \\\"invariant\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: returned affine covers and normalization charts have no invariance clause for a torus action; none specializes in one line to the stated equivariant neighbourhood theorem"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Normal algebraic variety torus invariant affine neighborhood of each point Sumihiro",
+   "results": "{\"t\": \"2026-10-24T00:18:57Z\", \"tool\": \"leanfinder\", \"query\": \"Normal algebraic variety torus invariant affine neighborhood of each point Sumihiro\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.instIsAffineXSchemeAffineCover\", \"AlgebraicGeometry.Scheme.affineOpenCover_X\", \"AlgebraicGeometry.reduce_to_affine_nbhd\", \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.h𝒰S\", \"AlgebraicGeometry.Scheme.affineOpenCover_idx\", \"AlgebraicGeometry.exists_isAffineOpen_mem_and_subset\", \"AlgebraicGeometry.Proj.affineOpenCover\", \"AlgebraicGeometry.Scheme.local_affine\"], \"digest\": \"03567df49dafc768\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: returned affine covers and normalization charts have no invariance clause for a torus action; none specializes in one line to the stated equivariant neighbourhood theorem"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-torus-nonfixed-complement-annihilation",
+  "date": "2026-10-24",
+  "group": "Q14"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Haboush symmetric-power lifting for a trivial quotient representation. Supporting representation-theoretic input: Steinberg endomorphisms detect a nonzero fixed vector. Supporting Self-duality of rho section modules at characteristic-dependent weights. Supporting input: Positive-characteristic simplicity step, using irreducibility of the Steinberg induced module rather than assuming self-duality. Numerical input to the dimension comparison: Weyl dimension of the induced module. Supporting Integral Euler character of arbitrary flag line bundles. Section 22d, proof of Theorem 22.50, p.480: general fixed-point input, stated here in its integral equivariant form; Example 22.36, pp.473--474, for formal characters. WANTED: Nielsen 1974 general fixed-point theorem and Iversen 1976, 9.4; neither document is present. The integral formulation is an agent-supplied supporting statement. Supporting input: Section 22d, proof of Theorem 22.50, p.480: agent-supplied concentration prerequisite, not the numerical fixed-point formula itself. WANTED: Thomason, Une formule de Lefschetz en K-theorie equivariante algebrique, Duke Math. J. 53 (1986), concentration theorem; not present locally. No proof of concentration is claimed to occur in Milne. Supporting step: The concentration theorem's nonfixed-locus annihilation argument in the proof of the item. Geometric input to nonfixed-locus annihilation: invariant affine strata of the reduction, before the Laurent-coefficient and localization arguments.",
+   "via": [
+    "lem-sfb-torus-nonfixed-complement-annihilation",
+    "lem-sfb-torus-coherent-concentration",
+    "lem-sfb-torus-coherent-fixed-point-formula",
+    "lem-sfb-flag-line-euler-alternant",
+    "lem-sfb-induced-weyl-dimension-formula",
+    "lem-sfb-steinberg-induced-module-irreducible",
+    "lem-sfb-rho-section-self-duality",
+    "lem-sfb-steinberg-endomorphism-detection",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-torus-invariant-affine-filtration",
+  "worker": "stage1",
+  "summary": "Unchanged statement. Constructed the action on the reduction, proved invariance of the dense smooth locus by a shear isomorphism, applied one new normal-case Sumihiro neighbourhood input, and wrote Noetherian induction with the reduced complement and explicit finite-chain assembly. Reused existing generic tools instead of creating reduced-action, dense-open, or induction duplicates.",
+  "blueprint": "Read literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/_section.md and sk-thm-sf-ctf-stability-direct-images.proof.md paragraph (3). The inherited ancestry has from.node=null; it records the descendant concentration prerequisite below the alteration chain. Steps 1-2 handle its reduction; steps 3-8 realize its invariant-affine-filtration geometric input before nonfixed-locus annihilation. No chapter or unit route changed. Whole-blueprint searches for Sumihiro, invariant affine neighbourhood, normal torus, torus invariant and dense smooth gave no equivalent theorem.",
+  "tool_uses": [
+   {
+    "node": "lem-dl-a1-locally-closed-stratum-separated-finite-type",
+    "why": "Generic permanence for reduced locally closed subschemes, used only to check geometric hypotheses throughout the filtration."
+   },
+   {
+    "node": "lem-kun-geometric-reduced-perfect",
+    "why": "Generic perfect-field geometric reducedness, not a Kunneth or purity theorem; needed only to apply density of smooth points."
+   },
+   {
+    "node": "lem-pur-geometrically-reduced-dense-smooth-open",
+    "why": "Generic density of the smooth locus over a field (Stacks 056V), not smooth purity; needed on each reduced closed induction piece."
+   },
+   {
+    "node": "lem-trf-split-lattice-torus-projection",
+    "why": "Generic split-torus smoothness and reduced-product tool; its statement covers arbitrary schemes and rank zero, and does not use a trace formula."
+   },
+   {
+    "node": "lem-weil-pbc-closed-immersion-products",
+    "why": "Generic scheme-theoretic tool used exactly as stated to construct the invariant filtration and check its hypotheses; no step of another unit is substituted for the current unit route."
+   },
+   {
+    "node": "lem-weil-pbc-reduced-induced-closed-subscheme",
+    "why": "Generic scheme-theoretic tool used exactly as stated to construct the invariant filtration and check its hypotheses; no step of another unit is substituted for the current unit route."
+   },
+   {
+    "node": "lem-weil-pbc-reduced-source-factors-through-closed-subscheme",
+    "why": "Generic scheme-theoretic tool used exactly as stated to construct the invariant filtration and check its hypotheses; no step of another unit is substituted for the current unit route."
+   },
+   {
+    "node": "lem-weil-pbc-smooth-scheme-over-field-regular",
+    "why": "Generic scheme-theoretic tool used exactly as stated to construct the invariant filtration and check its hypotheses; no step of another unit is substituted for the current unit route."
+   },
+   {
+    "node": "rem-pc-regular-normal",
+    "why": "Generic regular-implies-normal result, used only on the smooth open before Sumihiro."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-dl-a1-locally-closed-stratum-separated-finite-type",
+  "lem-kun-geometric-reduced-perfect",
+  "lem-pur-geometrically-reduced-dense-smooth-open",
+  "lem-trf-split-lattice-torus-projection",
+  "lem-weil-pbc-closed-immersion-products",
+  "lem-weil-pbc-reduced-induced-closed-subscheme",
+  "lem-weil-pbc-reduced-source-factors-through-closed-subscheme",
+  "lem-weil-pbc-smooth-scheme-over-field-regular",
+  "rem-pc-regular-normal"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q46-f0497eb00",
+  "group": "Q46",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q46-f0497eb00 (reviewer sub-agent of L); spot-checked: Read the item and the new node in full, the statement of every cited node, Stacks 02V4(2), 056V and 01OZ, and the node records for 01J3, 0356, 01JT and 01QR. The item's statement is unchanged and true. The proof goes: action on V_red via reduced T×X (step 2); dense smooth locus W, which is regular and therefore normal (step 4); W invariant via the shear and flat base change of the smooth locus (step 5); Sumihiro on W (step 6); reduced complement with its action (step 7); Noetherian induction (steps 3 and 8). Hypotheses were checked step by step. Edge cases: empty V, r=0, Spec F[ε]/ε², nodal G_m-curve. New node lem-sfb-sumihiro-normal-torus-affine-neighbourhood: true (Sumihiro Corollary 2, applied componentwise since T is connected), honestly marked WANTED, statement only, self-contained. It is strictly smaller than the item and is not a duplicate: the smooth-projective cover node is a special case and cannot serve the non-proper W. Two faults are FIXED by swapping duplicate algebraic-space citations for existing scheme-level Mathlib leaves. Step 3: lem-sfb-noetherian-space-topology (04ZF) becomes lem-weil-pbc-noetherian-scheme-closed-subsets-minimal (01OZ). Step 7: lem-sfb-space-reduced-closed-support (an algebraic-space theorem with a closure of about 10.7k nodes, including trf space lemmas) becomes lem-weil-pbc-closed-immersion-base-change plus lem-weil-pbc-fibre-product-points (01JT), with the point argument written out. proof_deps recomputed. Batch-5 flags: these two are removed by the FIX. lem-sfb-scheme-lfp-smooth-flat-base-change (reaching trf 01V9/02H6 smoothness criteria) and lem-trf-split-lattice-torus-projection (torus smoothness and reduced products, ILO VIII 3.2.12) are generic scheme facts, neither assumed nor proof steps of the trace formula or Poincaré duality; accepted. tool_uses accepted as generic. No SGA.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.TorusInvariantAffineFiltration",
+  "declaration": "AlgebraicGeometry.exists_torus_invariant_affine_filtration",
+  "file": "lean/Sheaf/AlgebraicGeometry/TorusInvariantAffineFiltration.lean",
+  "statement": "theorem exists_torus_invariant_affine_filtration (F : Type u) [Field F] [IsAlgClosed F] (r : ℕ) (T : Grp (Over (Spec (.of F)))) (hT : Nonempty (T ≅ MultiplicativeType.splitTorus F r)) (Y V : CategoryTheory.Mod (Over (Spec (.of F))) T.X) [IsSeparated Y.X.hom] [LocallyOfFiniteType Y.X.hom] [QuasiCompact Y.X.hom] (j : V ⟶ Y) [IsOpenImmersion j.hom.left] : IsSeparated V.X.hom ∧ LocallyOfFiniteType V.X.hom ∧ QuasiCompact V.X.hom ∧ ∃ (R : CategoryTheory.Mod (Over (Spec (.of F))) T.X) (i : R ⟶ V), IsReduced R.X.left ∧ IsClosedImmersion i.hom.left ∧ i.hom.left.ker = Scheme.IdealSheafData.vanishingIdeal ⊤ ∧ Set.range i.hom.left = Set.univ ∧ ∃ (N : ℕ) (Z : Fin (N + 1) → CategoryTheory.Mod (Over (Spec (.of F))) T.X) (inclusion : ∀ a : Fin N, Z a.succ ⟶ Z a.castSucc) (S : Fin N → CategoryTheory.Mod (Over (Spec (.of F))) T.X) (stratum : ∀ a : Fin N, S a ⟶ Z a.castSucc), Z 0 = R ∧ IsEmpty (Z (Fin.last N)).X.left ∧ (∀ a, IsReduced (Z a).X.left ∧ IsSeparated (Z a).X.hom ∧ LocallyOfFiniteType (Z a).X.hom ∧ QuasiCompact (Z a).X.hom) ∧ (∀ a, IsClosedImmersion (inclusion a).hom.left) ∧ (∀ a, IsOpenImmersion (stratum a).hom.left ∧ Set.range (stratum a).hom.left = (Set.range (inclusion a).hom.left)ᶜ ∧ IsAffine (S a).X.left ∧ IsSeparated (S a).X.hom ∧ LocallyOfFiniteType (S a).X.hom ∧ QuasiCompact (S a).X.hom)",
+  "branch": "newtargets-dag",
+  "by": "Q68",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-9d800ca48",
+  "group": "Q68",
+  "result": "pass",
+  "note": "Read item node, module, report, all stmt_deps incl. added landed def-sfb-tori-multiplicative-type (splitTorus = G_m^r, rank 0 = trivial group). Node differs from live only in lean + that stmt_dep; lean.statement verbatim; one sorry theorem, no defs; all proof_dep modules imported and exist. Clause match: Mod (Over Spec F) T.X actions with equivariant arrows; Y separated+LOFT+QC; open immersion j; V sep/f.t.; R with closed immersion, ker = vanishingIdeal ⊤ (nilradical), range univ = actual V_red; Fin (N+1) chain of reduced closed equivariant immersions, Z 0 = R, last empty; strata open immersions with range = complement, affine, sep/f.t. Edge cases r=0, empty V (N=0), nonreduced Y, non-normal V, char p OK; no extra hypotheses or universe restriction. Docstrings with source and blueprint, 8 proof steps. Advisory: Second-reading section is the dispatcher no-second-worker wording (worker report is clause-by-clause); IsReduced R redundant. No files changed, no compile."
+ }
+}

@@ -1,0 +1,250 @@
+{
+ "id": "lem-weil-pbc-finite-coefficient-derived-model-comparison",
+ "kind": "statement",
+ "title": "Derived finite-coefficient comparison on pullbacks and constant complexes",
+ "statement": "Let $B$ be a finite commutative ring with the discrete topology and let $f:U\\to X$ be any morphism of schemes [def-pc-scheme]. Use the small etale and pro-etale sites [def-weil-pbc-etale-site, def-weil-pbc-proetale-site], constant sheaves [def-weil-pbc-constant-sheaf], module sheaves [def-weil-sheaf-of-modules-category] and ordinary unbounded derived categories [def-weil-abstract-derived-category]. For every scheme $T$ put $\\mathscr B_T=(W\\mapsto\\operatorname{Cont}(\\pi_0(|W|),B))^\\#$, the coefficient ring sheaf of [def-weil-pbc-proetale-modules]. Let $E_T$ be the exact coefficient-realization equivalence from sheaves of $B$-modules on $T_{\\mathrm{proet}}$ to $\\operatorname{Mod}(\\mathscr B_T)$, normalized by the constant-section identification. Write $N_T=E_T\\circ\\nu_T^*$ for the comparison of [def-weil-pbc-site-comparison-morphism] in this presentation, and $F_f=E_U\\circ f_{\\mathrm{proet}}^{-1}\\circ E_X^{-1}$ for the exact identified-coefficient inverse image [def-weil-pbc-proetale-operations]. Superscript $D$ denotes their functors obtained by termwise localization. Then there are natural isomorphisms\n$$ F_f^D\\circ N_X^D\\ \\cong\\ N_U^D\\circ f_{\\mathrm{et}}^{-1,D},\\qquad\n N_T^D\\bigl(Q\\underline{P^\\bullet}_{T,\\mathrm{et}}\\bigr)\\ \\cong\\ E_T^D\\bigl(Q\\underline{P^\\bullet}_{T,\\mathrm{proet}}\\bigr) $$\nfor every scheme $T$ and every integer-indexed cochain complex $P^\\bullet$ of $B$-modules, with no boundedness or finiteness condition on its terms. Here $Q$ is localization at quasi-isomorphisms and underlining means termwise constant sheaf with differential induced by that of $P^\\bullet$. The first isomorphism is the canonical etale/pro-etale pullback comparison conjugated by $E$, using the unit to cancel $E_X^{-1}E_X$, and then localized. The second is induced by the constant-sheaf comparison natural in every $B$-linear map; in degree $q$ its term is the comparison for $P^q$, and its chain-map square uses $d^q:P^q\\to P^{q+1}$. Both are isomorphisms of whole derived objects, natural in derived inputs and in chain maps, using the recorded coefficient realization and canonical coefficient pullbacks.",
+ "source": {
+  "document": "literature/stacks-project/sites.tex",
+  "place": "Tag 0H7J, example-constant-sheaf; Tag 00YV, proposition-functoriality-algebraic-structures-topoi. Canonical comparison in literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-properbasechange/lem-weil-pbc-comparison-pullback.md; exact derived realization extracted from lean/Sheaf/Paper/FiniteFieldStratifiedPerfectModels.lean, coefficientComparisonPullbackIso, derivedCoefficientComparisonPullbackIso and comparisonConstantComplexIso."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-pbc-etale-site",
+  "def-weil-pbc-proetale-site",
+  "def-weil-pbc-constant-sheaf",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-abstract-derived-category",
+  "def-weil-pbc-proetale-modules",
+  "def-weil-pbc-site-comparison-morphism",
+  "def-weil-pbc-proetale-operations"
+ ],
+ "proof": [
+  {
+   "text": "The chosen coefficient realization and identified-coefficient pullback are already exact, as are the published etale upperStar and comparisonUpperStar functors. Their Additive, PreservesFiniteLimits and PreservesFiniteColimits instances are supplied by the existing library definitions. Use the exact termwise localizations and mapDerivedCategoryFactors of [lem-weil-pbc-exact-functor-derived-factorization]; no new generic geometric-morphism lift or site-tensor construction is needed here.",
+   "uses": [
+    "lem-weil-pbc-exact-functor-derived-factorization"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 015F, lemma-right-derived-exact-functor, especially (3)-(4); termwise exact functor localization."
+   }
+  },
+  {
+   "text": "Let $u_X:\\mathrm{id}\\xrightarrow{\\sim}E_X^{-1}E_X$ be the unit of the specified coefficient equivalence, and let $c_f:\\nu_U^*f_{\\mathrm{et}}^{-1}\\xrightarrow{\\sim}f_{\\mathrm{proet}}^{-1}\\nu_X^*$ be [lem-weil-pbc-comparison-pullback] for the fixed ring $B$. For an etale $B$-module sheaf $A$ define $b_{f,A}$ by the composite $$E_U f_{\\mathrm{proet}}^{-1}E_X^{-1}E_X\\nu_X^*A\\xrightarrow{E_U f_{\\mathrm{proet}}^{-1}(u_{X,\\nu_X^*A}^{-1})}E_U f_{\\mathrm{proet}}^{-1}\\nu_X^*A\\xrightarrow{E_U(c_{f,A}^{-1})}E_U\\nu_U^*f_{\\mathrm{et}}^{-1}A.$$ Each factor is an isomorphism natural in $A$. Thus $b_f:F_fN_X\\xrightarrow{\\sim}N_U f_{\\mathrm{et}}^{-1}$ is precisely the conjugated comparison with unit cancellation specified in the statement. In Lean take exactly the module-functor isomorphism prescribed by the first equality, using comparisonUpperStarCompUpperStarIso and the inverse unit of finiteCoefficientRealization.asEquivalence; reflexivity proves its normalization.",
+   "uses": [
+    "lem-weil-pbc-comparison-pullback"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-thm-pe-direct-image-comparison/lem-weil-pbc-comparison-pullback.proof.md",
+    "place": "Last sentence, exact comparison on complexes; coefficient-conjugation assembly is written here, following FiniteFieldStratifiedPerfectModels.lean:126-146."
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-exact-derived-natural-iso] to $b_f$ between the exact functors $F_fN_X$ and $N_U f_{\\mathrm{et}}^{-1}$. Using the normalized composition isomorphisms of [lem-sfb-exact-derived-composition] on either side gives $$F_f^D N_X^D\\cong(F_fN_X)^D\\xrightarrow{D(b_f)}(N_U f_{\\mathrm{et}}^{-1})^D\\cong N_U^D f_{\\mathrm{et}}^{-1,D}.$$ The normalization in those two cited statements identifies its value on every localized complex with the localization of the termwise $b_f$ from step 2, through the factors $a_H$. It is therefore the required canonical first comparison, natural on the whole derived category. The published Functor.mapDerivedCategoryNatIso and Functor.mapDerivedCategoryCompIso implement these normalized localizations directly. Take the composite prescribed by the second equality; its normalization is reflexive, without using a separate uniqueness theorem.",
+   "uses": [
+    "lem-sfb-exact-derived-natural-iso",
+    "lem-sfb-exact-derived-composition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Tag 04VG, lemma-properties-left-localization; normalized natural-isomorphism descent as stated by the cited DAG nodes, using fully faithful localization precomposition."
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-geometric-inverse-image-constant-module] to $\\nu_T$ and every $B$-module $M$. It supplies $k_M:\\nu_T^*\\underline M_{T,\\mathrm{et}}\\xrightarrow{\\sim}\\underline M_{T,\\mathrm{proet}}$, natural in every $B$-linear map, with the canonical constant-scalar identification. For the arbitrary complex $P^\\bullet$, set $k_P^q=k_{P^q}$. Naturality at $d^q$ gives $$k_{P^{q+1}}\\,\\nu_T^*(\\underline {d^q}_{T,\\mathrm{et}})=\\underline {d^q}_{T,\\mathrm{proet}}\\,k_{P^q}.$$ Thus the degreewise maps form a chain map; multiplying this equation by the component inverses gives the chain-map equation for $(k_P^q)^{-1}$. They are inverse chain maps, yielding an isomorphism $k_P:C(\\nu_T^*)\\underline {P^\\bullet}_{T,\\mathrm{et}}\\xrightarrow{\\sim}\\underline {P^\\bullet}_{T,\\mathrm{proet}}$. For any chain map $v:P^\\bullet\\to R^\\bullet$, naturality at each $v^q$ gives the chain-level naturality square for $k_P$. In the published fixed-ring sheaf presentation this natural comparison is already constructed as comparisonUpperStarConstantSheafIso, by uniqueness of left adjoints to global sections. Functor.mapHomologicalComplexCompIso gives the complete chain-level natural isomorphism, including its inverse, so no conversion from the general ringed-module lift is necessary.",
+   "uses": [
+    "lem-sfb-geometric-inverse-image-constant-module"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Tag 00YV, proposition-functoriality-algebraic-structures-topoi, fixed-ring modules; Tag 0H7J, example-constant-sheaf."
+   }
+  },
+  {
+   "text": "Put $K=\\underline {P^\\bullet}_{T,\\mathrm{et}}$. By [lem-sfb-exact-derived-composition], [lem-weil-pbc-exact-functor-derived-factorization], and step 4, compose $$N_T^D(QK)\\cong E_T^D(\\nu_T^{*,D}(QK))\\xrightarrow{E_T^D(a_{\\nu_T^*,K})}E_T^D(Q C(\\nu_T^*)K)\\xrightarrow{E_T^D(Q(k_P))}E_T^D(Q\\underline {P^\\bullet}_{T,\\mathrm{proet}}).$$ All arrows are isomorphisms of whole derived objects. The chain-map equations and naturality from step 4 persist under $Q$ and $E_T^D$, and the first two arrows are natural by the cited factorizations. This proves the second comparison and its naturality in chain maps, using exactly the chosen $E_T$. The construction works separately in every integer degree, including zero terms and infinite modules, so imposes no bounds or termwise finiteness. Whisker the composition comparison on the left by the constant-complex functor followed by Q; whisker the comparison localization factor by realization, then whisker the chain comparison by Q and realization. Their composite is gamma as a natural isomorphism of functors. Iso.ext, the component equations for whiskering and functoriality reduce the stated component formula to reflexivity.",
+   "uses": [
+    "lem-sfb-exact-derived-composition",
+    "lem-weil-pbc-exact-functor-derived-factorization"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 015F, lemma-right-derived-exact-functor, especially (3)-(4); termwise exact functor localization."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-exact-functor-derived-factorization",
+  "lem-weil-pbc-comparison-pullback",
+  "lem-sfb-exact-derived-natural-iso",
+  "lem-sfb-exact-derived-composition",
+  "lem-sfb-geometric-inverse-image-constant-module"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites.tex",
+  "place": "Tags 00YV and 0H7J, together with derived.tex Tag 015F and categories.tex Tag 04VG; formal assembly from the existing canonical comparisonUpperStarCompUpperStarIso, comparisonUpperStarConstantSheafIso, mapDerivedCategoryNatIso, mapDerivedCategoryCompIso, mapDerivedCategoryFactors, and mapHomologicalComplexCompIso. Exactness is supplied by the published fixed-ring functor instances."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "comparisonUpperStar|finiteCoefficientDerived|pro[Ee]tale.*constant",
+   "results": "0 hits: ",
+   "date": "2026-10-22",
+   "verdict": "no match: general constant-sheaf or pullback results do not state the realized derived comparison and its constant-complex identification"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived change of topology for finite ring module sheaves commutes with scheme inverse image and termwise constant complexes",
+   "results": "8 hits: AlgebraicGeometry.Scheme.Modules.pullback, SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom, SheafOfModules.pullback, SheafOfModules.pullbackObjFreeIso.congr_simp, SheafOfModules.IsFiniteType, AlgebraicGeometry.Scheme.Modules, SheafOfModules.sheafificationCompPullback, SheafOfModules.instIsLeftAdjointPullback",
+   "date": "2026-10-22",
+   "verdict": "no match: general constant-sheaf or pullback results do not state the realized derived comparison and its constant-complex identification"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Sheaf\", \"constant\", \"Iso\"",
+   "results": "7 hits: CategoryTheory.Sheaf.isConstant_of_iso, CategoryTheory.Sheaf.isConstant_of_isIso_counit_app, CategoryTheory.Sheaf.instIsIsoAppCounitConstantSheafAdjOfFaithfulOfFullConstantSheafOfIsConstant, CategoryTheory.Sheaf.isConstant_iff_isIso_counit_app, CategoryTheory.Sheaf.isConstant_iff_isIso_counit_app', CategoryTheory.GrothendieckTopology.IsLocalSite.coconstantSheafΓNatIsoId, CompHausLike.LocallyConstant.instIsIsoFunctorTypeUnitSheafCoherentTopologyAdjunction",
+   "date": "2026-10-22",
+   "verdict": "no match: general constant-sheaf or pullback results do not state the realized derived comparison and its constant-complex identification"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Canonical derived etale proetale finite coefficient comparison commutes with pullback and sends a constant cochain complex to the same constant complex with continuous function coefficients",
+   "results": "8 hits: StandardEtalePair.homEquiv_apply_coe, StandardEtalePair.homEquiv, RingHom.IsStandardSmooth.exists_etale_mvPolynomial, StandardEtalePair.HasMap.map, RingHom.IsStandardSmoothOfRelativeDimension.exists_etale_mvPolynomial, StandardEtalePair.homEquiv_symm_apply, StandardEtalePresentation.toSubmersivePresentation_map, Algebra.FormallyEtale.comp",
+   "date": "2026-10-22",
+   "verdict": "no match: general constant-sheaf or pullback results do not state the realized derived comparison and its constant-complex identification"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An exact change of topology functor on sheaves preserves constant complexes naturally in differentials and commutes with pullback after coefficient realization",
+   "results": "8 hits: CategoryTheory.Sheaf.isConstant_iff_of_equivalence, CompHausLike.LocallyConstantModule.functor, CategoryTheory.Sheaf.isConstant_of_forget, CategoryTheory.instIsConstantObjSheafSheafCompose, CategoryTheory.Sheaf.isConstant_iff_forget, CompHausLike.LocallyConstant.functor, CondensedMod.LocallyConstant.functor, topCatToSheafCompHausLike",
+   "date": "2026-10-22",
+   "verdict": "no match: general constant-sheaf or pullback results do not state the realized derived comparison and its constant-complex identification"
+  },
+  {
+   "tool": "grep",
+   "query": "mapDerivedCategoryNatIso|mapDerivedCategoryCompIso|mapHomologicalComplexCompIso",
+   "results": "2 hits: Mathlib/Algebra/Homology/Additive.lean, Mathlib/Algebra/Homology/HomotopyCategory.lean",
+   "date": "2026-10-22",
+   "verdict": "no match for the full item: the generic localization and constant-sheaf ingredients do not state the coefficient-realized etale/proetale comparisons"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived etale proetale comparison for finite coefficient module sheaves commutes with inverse image and constant complexes",
+   "results": "8 hits: SheafOfModules.sheafificationCompPullback, CategoryTheory.Equivalence.sheafCongrPrecoherent_inverse_map_val_app, SheafOfModules.pushforwardCongr_inv_app_val_app, SheafOfModules.pushforwardNatIso_inv, SheafOfModules.pushforwardComp_inv_app_val_app, CategoryTheory.Equivalence.sheafCongrPrecoherent_inverse_obj_val_obj, AlgebraicGeometry.Scheme.etalePretopology, SheafOfModules.pullbackObjFreeIso",
+   "date": "2026-10-22",
+   "verdict": "no match for the full item: the generic localization and constant-sheaf ingredients do not state the coefficient-realized etale/proetale comparisons"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.mapDerivedCategoryNatIso, CategoryTheory.Functor.mapDerivedCategoryCompIso",
+   "results": "0 hits: ; loogle: unknown identifier 'CategoryTheory.Functor.mapDerivedCategoryNatIso'",
+   "date": "2026-10-22",
+   "verdict": "no match for the full item: the generic localization and constant-sheaf ingredients do not state the coefficient-realized etale/proetale comparisons"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Exact functors between abelian categories induce derived functors commuting with composition and natural isomorphisms, and change of topology preserves constant module sheaves",
+   "results": "8 hits: CategoryTheory.Abelian.Ext.mapExactFunctor_hom, CategoryTheory.Abelian.Ext.mapExactFunctor, CategoryTheory.Functor.mapDerivedCategoryFactorsh, CategoryTheory.Functor.mapDerivedCategorySingleFunctor, CategoryTheory.Functor.mapDerivedCategoryFactors, CategoryTheory.instIsConstantObjSheafSheafCompose, CategoryTheory.Functor.mapDerivedCategoryFactorsh_hom_app, CategoryTheory.Functor.rightDerivedZeroIsoSelf_inv_hom_id_assoc",
+   "date": "2026-10-22",
+   "verdict": "no match for the full item: the generic localization and constant-sheaf ingredients do not state the coefficient-realized etale/proetale comparisons"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Inverse image for a geometric morphism of topoi sends an arbitrary constant module sheaf to the constant module sheaf, naturally in linear maps",
+   "results": "8 hits: SheafOfModules.ιFree_mapFree_inv, CompHausLike.LocallyConstantModule.functorToPresheaves_obj_map, SheafOfModules.pullbackObjFreeIso, SheafOfModules.pullbackObjFreeIso_hom_naturality, CompHausLike.LocallyConstantModule.functorToPresheaves_map_app, SheafOfModules.pullbackObjFreeIso_hom_naturality_assoc, SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom, SheafOfModules.unitToPushforwardObjUnit",
+   "date": "2026-10-22",
+   "verdict": "no match for the full item: the generic localization and constant-sheaf ingredients do not state the coefficient-realized etale/proetale comparisons"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-finite-field-stratified-perfect-models",
+  "date": "2026-10-22",
+  "group": "NA"
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "blueprint": {
+  "from": {
+   "node": "thm-weil-pbc-finite-extension",
+   "place": "Proof, first sentence, \"Choose an integral lattice for K\": residue-field stratification before integral lifting; old item proof steps 5 and 6, realization-unit cancellation, exact descent and constant-complex differential naturality",
+   "via": [
+    "lem-weil-pbc-finite-field-stratified-perfect-models",
+    "lem-weil-pbc-integral-stratified-perfect-characterization",
+    "lem-weil-pbc-condensed-e-realization",
+    "nt-target-proetale-e"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-weil-pbc-finite-coefficient-derived-model-comparison",
+  "worker": "stage1",
+  "summary": "Kept the complete statement, all hypotheses, coefficient normalization and statement dependencies. Reused six existing results: module inverse-image exactness, exact unbounded derived factorization, the canonical etale/pro-etale pullback comparison, normalized exact-derived isomorphism descent and composition, and constant-module preservation natural in all linear maps. Wrote unit cancellation, the differential and chain-map squares, and the final localized object isomorphisms explicitly. No new nodes; no Lean writing or compiling.",
+  "blueprint": "Serves the first sentence of thm-weil-pbc-finite-extension.proof.md (choose an integral lattice) through the recorded residue-stratification ancestry. Gives the coefficient-realized pullback and constant-complex identifications needed in old steps 5-6 of lem-weil-pbc-finite-field-stratified-perfect-models. Reuses the final exact-complex sentence of lem-weil-pbc-comparison-pullback.proof.md; no unit or chapter route change.",
+  "tool_uses": [
+   {
+    "node": "lem-pe-constant-left-module-inverse-image",
+    "why": "Generic exact fixed-ring inverse image for geometric morphisms; needed for unbounded localization, not a replacement for the unit proof route."
+   },
+   {
+    "node": "lem-sfb-exact-derived-composition",
+    "why": "Generic normalized composition of exact functors on unbounded derived categories; this unit has no more specific composition lemma."
+   },
+   {
+    "node": "lem-sfb-geometric-inverse-image-constant-module",
+    "why": "Generic preservation of arbitrary constant module sheaves, natural in every linear map; provides differential compatibility without restricting terms to finite modules."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pe-constant-left-module-inverse-image",
+  "lem-sfb-exact-derived-composition",
+  "lem-sfb-geometric-inverse-image-constant-module"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q101-185d8b8b7",
+  "group": "Q101",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q101-185d8b8b7 (reviewer sub-agent of L); spot-checked: Read the item, its five steps, all six cited statements, the stmt_dep definitions, the citer (finite-field-stratified-perfect-models step 4), Stacks 015F/04VG/00YV/0H7J at their labels, the main-20261015 blueprint comparison-pullback text and the Lean reference FiniteFieldStratifiedPerfectModels.lean:126-170. Statement and stmt_deps are unchanged, with no bound or finiteness on P and 𝓑_T kept as Cont(π0,B)^#. One fault (C1/C4), repaired: step 1 applies lem-pe-constant-left-module-inverse-image to f_et as a geometric morphism with no node saying it is one. Fix: step 1 now argues it from lem-weil-pbc-etale-base-change-continuous (1)-(2) (base change keeps coverings and fibre products; it sends the final object X to U) and lem-weil-pbc-left-exact-site-inverse-image-tensor (the left adjoint preserves finite limits, so geometric morphism). It also cites def-weil-pbc-inverse-image. All three are added to uses and proof_deps; they are on route (sk-def-exchange and the same unit, plus a definition), there is no cycle, and proof_deps equals the union of uses. Step 2: c_f^{-1} composed with the inverse unit at ν_X^*A has the right domain and codomain, and comparison-pullback covers fixed finite discrete B. Step 3: μ^{-1}, D(b_f) and μ have the correct types, and the normalisations come from statements. Step 4: the equation at d^q gives inverse chain maps, natural in v; it holds for infinite modules and unbounded complexes. Step 5 matches comparisonConstantComplexIso. No new nodes and no SGA. The three declared tool uses are accepted as generic. Maintainer note: the statement uses f_et^{-1} without def-weil-pbc-inverse-image in its stmt_deps; it is inherited from the parent split, so left unchanged.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.Paper.FiniteCoefficientDerivedModelComparison",
+  "declaration": "AlgebraicGeometry.ProEtale.finite_coefficient_derived_model_comparison",
+  "file": "lean/Sheaf/Paper/FiniteCoefficientDerivedModelComparison.lean",
+  "statement": "theorem finite_coefficient_derived_model_comparison (B : Type (u + 1)) [CommRing B] [Finite B] [TopologicalSpace B] [DiscreteTopology B] {U X : Scheme.{u}} (f : U ⟶ X) : ∃ b : finiteCoefficientComparison X B ⋙ finiteCoefficientPullback X B f ≅ Etale.upperStar (ModuleCat.{u + 1} B) f ⋙ finiteCoefficientComparison U B, b = Functor.isoWhiskerLeft (comparisonUpperStar (ModuleCat.{u + 1} B) X) (Functor.isoWhiskerRight (finiteCoefficientRealization X B).asEquivalence.unitIso.symm (upperStar (ModuleCat.{u + 1} B) f ⋙ finiteCoefficientRealization U B)) ≪≫ Functor.isoWhiskerRight (comparisonUpperStarCompUpperStarIso (ModuleCat.{u + 1} B) f) (finiteCoefficientRealization U B) ∧ ∃ beta : finiteCoefficientDerivedComparison X B ⋙ finiteCoefficientDerivedPullback X B f ≅ (Etale.upperStar (ModuleCat.{u + 1} B) f).mapDerivedCategory ⋙ finiteCoefficientDerivedComparison U B, beta = (Functor.mapDerivedCategoryCompIso _ _).symm ≪≫ Functor.mapDerivedCategoryNatIso b ≪≫ Functor.mapDerivedCategoryCompIso _ _ ∧ ∀ T : Scheme.{u}, ∃ gamma : (constantSheaf T.smallEtaleTopology (ModuleCat.{u + 1} B)).mapHomologicalComplex (ComplexShape.up ℤ) ⋙ DerivedCategory.Q ⋙ finiteCoefficientDerivedComparison T B ≅ (constantSheaf (Scheme.ProEt.topology T) (ModuleCat.{u + 1} B)).mapHomologicalComplex (ComplexShape.up ℤ) ⋙ DerivedCategory.Q ⋙ (finiteCoefficientRealization T B).mapDerivedCategory, ∀ P : CochainComplex (ModuleCat.{u + 1} B) ℤ, gamma.app P = (Functor.mapDerivedCategoryCompIso (comparisonUpperStar (ModuleCat.{u + 1} B) T) (finiteCoefficientRealization T B)).app (DerivedCategory.Q.obj (((constantSheaf T.smallEtaleTopology (ModuleCat.{u + 1} B)).mapHomologicalComplex (ComplexShape.up ℤ)).obj P)) ≪≫ (finiteCoefficientRealization T B).mapDerivedCategory.mapIso ((comparisonUpperStar (ModuleCat.{u + 1} B) T).mapDerivedCategoryFactors.app (((constantSheaf T.smallEtaleTopology (ModuleCat.{u + 1} B)).mapHomologicalComplex (ComplexShape.up ℤ)).obj P) ≪≫ DerivedCategory.Q.mapIso ((Functor.mapHomologicalComplexCompIso (comparisonUpperStarConstantSheafIso B T) (ComplexShape.up ℤ)).app P))",
+  "branch": "newtargets-dag",
+  "by": "Q19",
+  "date": "2026-10-23",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-6d1fd7b45",
+  "group": "Q19",
+  "result": "pass",
+  "note": "Read the item node, all 9 stmt_dep records, the module, the report and the exact side-live declarations (finiteCoefficientRealization/Comparison/DerivedComparison, finiteCoefficientPullback/DerivedPullback, comparisonUpperStarCompUpperStarIso = canonical conjugate c_f^-1, comparisonUpperStarConstantSheafIso = leftAdjointUniq, mapDerivedCategoryNatIso/CompIso, mapHomologicalComplexCompIso). Every hypothesis matches the node: B Type (u+1) finite discrete CommRing at the published coefficient universe, arbitrary f, real Mathlib pro-etale site, recorded realization. b/beta/gamma formulas match proof steps 2-5 and are term-for-term the private constructions in FiniteFieldStratifiedPerfectModels.lean:126-170, which compile live. gamma is natural in unbounded complexes with no finiteness condition. Edge cases checked: zero ring, empty scheme, zero and unbounded complexes, no extra universe equality. sorry only, docstrings with source and blueprint tag, statement verbatim, record changes only lean. Not recompiled (no file changed). Advisory: upstream canonical isos not recorded under stmt_dep nodes; finiteCoefficientPullback/DerivedPullback missing from def-weil-pbc-proetale-operations declarations; inherited f_et^-1 stmt_dep note."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J3",
+  "result": "pass",
+  "landing": "20261023T102935-L-3011316",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

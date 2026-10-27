@@ -137,7 +137,18 @@
   "lem-weil-pbc-proper-open-section"
  ],
  "proof_split_by": "paragraphs",
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
  "chapter": "sec-smooth-purity",
  "unit": "sk-def-sf-operations",
  "split_report": {
@@ -243,5 +254,27 @@
   "landing": "20261018T092903-L-3440950",
   "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ },
+ "blueprint_update": {
+  "snapshot": "main-20261023-1620",
+  "commit": "7284bb09daf97437d544c51882b325f9c52cd345",
+  "changed": [
+   "statement"
+  ],
+  "statement": "Let $u:T_1\\to T_2$ and $v:T_2\\to T_3$ be proper maps with\nopen immersions $j_i:X\\hookrightarrow T_i$ satisfying\n$u j_1=j_2$ and $v j_2=j_3$. For $K\\in D^+(X_{\\Et},\\Lambda)$\nwith $\\Lambda$ a commutative ring, the maps of\nthe comparison-map\nconstruction satisfy\n\n$$\n\\alpha_{vu,K}\n= (Rv_*\\alpha_{u,K})\\circ\\alpha_{v,K},\n$$\n\nunder the canonical identification $R(vu)_*=Rv_*Ru_*$.\nFor the identity map the comparison is the identity.",
+  "proof": [
+   {
+    "text": "Both sides have source $j_{3!}K$. By the adjunction in\n[def-weil-pbc-extension-by-zero], it suffices to compare their\nrestrictions to $X$. Apply\n[lem-weil-pbc-derived-open-restriction] successively along\n$v$ and $u$. In each inverse image of $X$, the distinguished\ncomponent $X$ is open and closed by\n[lem-weil-pbc-proper-open-section], and all the complexes\n$j_{i!}K$ vanish on the complementary components. Restriction of the\ntwo composites to this component is therefore the identity of $K$.\nThe same is true for $\\alpha_{vu,K}$, whose comparison isomorphism is\nthe one of [lem-weil-pbc-proper-open-identification] for the\ncomposite proper map, by\n[def-weil-pbc-proper-open-comparison]. The section identifications\nin the open-restriction lemma agree for composite maps, so these are\nthe same adjoint morphism. This proves the displayed identity.\nFor $u=\\operatorname{id}$, that adjoint morphism is already the\nidentity; uniqueness under the adjunction proves the last assertion.",
+    "uses": [
+     "def-weil-pbc-extension-by-zero",
+     "lem-weil-pbc-derived-open-restriction",
+     "lem-weil-pbc-proper-open-section",
+     "lem-weil-pbc-proper-open-identification",
+     "def-weil-pbc-proper-open-comparison"
+    ],
+    "elementary": false
+   }
+  ],
+  "note": "the current blueprint (main-20261023-1620, weil-conjectures-blueprint 7284bb09da) states or proves this differently; a worker who touches the node follows it"
  }
 }

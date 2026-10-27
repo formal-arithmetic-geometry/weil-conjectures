@@ -1,0 +1,262 @@
+{
+ "id": "lem-sf-adic-qbar-constructible-realization",
+ "kind": "statement",
+ "title": "Evaluation-compatible realization of common-stage coefficients as native adic modules",
+ "statement": "Fix $k=\\overline{\\mathbf F}_q$, a prime $\\ell\\ne\\operatorname{char}k$, and $\\Omega=\\overline{\\mathbf Q}_\\ell$ [def-weil-finite-field-fiber]. Let $T$ be separated of finite type over $k$. Let $R_T=p_T^*\\underline\\Omega$ be the finite-extension-valued coefficient ring of [sk-def-sfb-qlbar-condensed, sk-prop-sfb-qlbar-colimit-x], and write $\\mathcal A_T=\\operatorname{Mod}(R_T)$ [def-weil-sheaf-of-modules-category]. Let $\\mathcal C_T$ be the common-stage category of [def-weil-algebraically-closed-coefficients], using the raw rationalizations of [def-weil-rationalization-karoubi]. Write $D^b_{\\mathrm{cons}}(\\mathcal A_T)$ for the full subcategory of $D(\\mathcal A_T)$ [def-weil-abstract-derived-category] with bounded cohomology, each cohomology sheaf admitting a finite locally closed stratification on which it is pro-etale locally finite free over the restricted coefficient ring.\n\nThere is a canonical exact equivalence\n$$\\rho_T:\\mathcal C_T\\xrightarrow{\\sim}D^b_{\\mathrm{cons}}(\\mathcal A_T).$$\nOn $(E,M)$ it is derived scalar extension to $R_T$ of the continuous $E$-coefficient realization of an integral representative of $M$; it sends a common-stage arrow to the scalar extension of the same finite-stage arrow. Its scalar comparisons are induced by balanced tensor multiplication. The equivalence is symmetric strong monoidal and preserves the coefficient unit. Whenever $M,N$ and the coefficient-passage internal Hom $H=R\\mathcal Hom(M,N)$ belong to $\\mathcal C_T$, its evaluation-transpose comparison\n$$\\rho_T H\\xrightarrow{\\sim}R\\mathcal Hom_{R_T}(\\rho_TM,\\rho_TN)$$\nis an isomorphism in the ambient derived category, natural in both variables and carrying the evaluation $H\\otimes M\\to N$ to module evaluation. The tensor and Hom on the left are precisely those of [def-weil-derived-pullback-tensor-hom]. These comparisons respect symmetry, finite coefficient-field extension and the identity and composition maps of scheme isomorphisms, including geometric Frobenius. Thus the ordinary module category here is the native adic module presentation, not a category over discrete $\\Omega$.",
+ "source": {
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Definition 6.8.8, Proposition 6.8.14 and Remark 6.8.15; Hemo--Richarz--Scholbach, literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf, Proposition 5.2 and Theorem 7.7; evaluation-normalized comparison formulated by Q10 for these native coefficient presentations."
+ },
+ "stmt_deps": [
+  "def-weil-finite-field-fiber",
+  "sk-def-sfb-qlbar-condensed",
+  "sk-prop-sfb-qlbar-colimit-x",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-abstract-derived-category",
+  "def-weil-algebraically-closed-coefficients",
+  "def-weil-rationalization-karoubi",
+  "def-weil-derived-pullback-tensor-hom",
+  "def-sf-common-stage-inclusion-tensor-comparison",
+  "def-sf-locally-finite-adic-realization-data",
+  "def-zl-ringed-derived-closed-symmetric-monoidal-data",
+  "def-sf-constructible-tensor-completion-presentation",
+  "def-sf-adic-closed-reindexing-maps",
+  "def-sf-proetale-sectionwise-module-inverse-image",
+  "def-sf-native-adic-realization-data",
+  "def-sf-native-adic-reindexing-data",
+  "def-sf-native-adic-finite-normalization",
+  "def-sf-native-adic-tensor-reindexing"
+ ],
+ "proof": [
+  {
+   "text": "For each geometric space T, apply the normalized coefficient construction to the identity of T and its proper identity compactification. The native compact-support realization theorem supplies NativeGeometry and its source Realization. Retain only this Realization and NativeGeometry.equivalence T. These give the normalized raw common-stage realization and the equivalence of its native internal and ordinary section-module presentations. This reuses the already packaged realization instead of repeating finite cocone and common-stage descent. All hypotheses hold because T is finite type over the fixed geometric field and the identity is separated, finite type and proper.",
+   "uses": [
+    "lem-sf-constructible-exceptional-coefficient-construction",
+    "lem-sf-locally-finite-adic-compact-support-realization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Definition 6.8.8, Proposition 6.8.14 and Remark 6.8.15; Hemo--Richarz--Scholbach, literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf, Proposition 5.2 and Theorem 7.7; evaluation-normalized comparison formulated by Q10 for these native coefficient presentations."
+   }
+  },
+  {
+   "text": "Apply completed-tensor realization descent to this Realization. Transport its residue-field invertibility instance to the fixed one by subsingleton equality. Copy its symmetric tensor, unit, coherence and finite quotient normalization into TensorInput; no Hom invertibility is assumed at this stage.",
+   "uses": [
+    "lem-sf-adic-completed-tensor-realization-descent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Definition 6.8.8, Proposition 6.8.14 and Remark 6.8.15; Hemo--Richarz--Scholbach, literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf, Proposition 5.2 and Theorem 7.7; evaluation-normalized comparison formulated by Q10 for these native coefficient presentations."
+   }
+  },
+  {
+   "text": "Reuse the already specified podCommonClosed and its finite normalization, given by podCommonClosed_existsUnique. Its partial closed data contain the bijective transpose. The tensor-evaluation identity follows from parameter_naturality applied to the identity of the Hom object and inverse cancellation. Apply ambient-Hom evaluation comparison to TensorInput, the section-module equivalence and this fixed normalized closed structure. Its isIso field supplies At.hom_isIso. Copy its naturality and evaluation laws. For any pairing f, apply its transpose equation to source.transpose f; the tensor-evaluation identity simplifies the realized pairing to f and gives HomLaws.transpose. The finite tensor normalization has identical fields after adding hom_isIso, so retain every finite representative equation.",
+   "uses": [
+    "lem-pod-derived-automorphism-hom-evaluation",
+    "lem-sf-adic-ambient-hom-evaluation-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Definition 6.8.8, Proposition 6.8.14 and Remark 6.8.15; Hemo--Richarz--Scholbach, literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf, Proposition 5.2 and Theorem 7.7; evaluation-normalized comparison formulated by Q10 for these native coefficient presentations."
+   }
+  },
+  {
+   "text": "Choose the established objectwise realizations, presentations, tensor data, finite normalizations and Hom laws simultaneously, inside this existence proof. Apply isomorphism normalization to these same data. Its Family includes all integral, identity, composition, tensor, unit and Hom comparison equations, with no k-linearity condition. Forget the additional mixed-scalar equation and retain the resulting Family. No data definition is chosen from a mere existence theorem.",
+   "uses": [
+    "lem-sf-adic-realization-isomorphism-normalization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Definition 6.8.8, Proposition 6.8.14 and Remark 6.8.15; Hemo--Richarz--Scholbach, literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf, Proposition 5.2 and Theorem 7.7; evaluation-normalized comparison formulated by Q10 for these native coefficient presentations."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sf-constructible-exceptional-coefficient-construction",
+  "lem-sf-locally-finite-adic-compact-support-realization",
+  "lem-sf-adic-completed-tensor-realization-descent",
+  "lem-pod-derived-automorphism-hom-evaluation",
+  "lem-sf-adic-ambient-hom-evaluation-comparison",
+  "lem-sf-adic-realization-isomorphism-normalization"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "BS 6.8.14--6.8.15 and HRS 7.9; Lean assembly reuses the native compact-support realization at an identity compactification, then the stated tensor, transpose, ambient-Hom and isomorphism results."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Bounded constructible pro etale Q l bar sheaves are a filtered colimit of finite coefficient field derived categories with internal Hom comparison",
+   "results": "8 hits: LightProfinite.hasSheafify, Condensed.profiniteSolidCounit, Condensed.profiniteSolid, Condensed.lanSheafProfinite, LightCondensed.instIsGrothendieckAbelianLightCondMod, LightCondensed.isColimitLocallyConstantPresheafDiagram, Condensed.isColimitLocallyConstantPresheafDiagram, LightCondensed.free_lightProfinite_internallyProjective_iff_tensor_condition'; none states the native derived comparison for constructible Weil sheaves.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"DerivedCategory\", \"ModuleCat\"",
+   "results": "0 hits: ; none states the native derived comparison for constructible Weil sheaves.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "constructible.*[Cc]olimit|[Cc]olimit.*constructible|[Rr]ationalization",
+   "results": "0 hits: ; none states the native derived comparison for constructible Weil sheaves.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "constructible l adic coefficient realization equivalence rationalization finite extensions internal Hom",
+   "results": "8 hits: Rep.ihom, Padic.adicCompletionEquiv, LightCondensed.ihomPoints_apply, LightCondensed.ihomPoints, Rep.MonoidalClosed.linearHomEquiv, CategoryTheory.Abelian.Ext.linearEquiv₀, AdicCompletion.congr, PadicInt.adicCompletionIntegersEquiv; none states the native derived comparison for constructible Weil sheaves.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Exact symmetric monoidal equivalence between the common finite field rationalized constructible l adic category and bounded constructible continuous algebraic closure coefficient modules",
+   "results": "8 hits: Condensed.profiniteSolidCounit, Condensed.finFree, Condensed.profiniteSolid, LightCondensed.instMonoidalClosedFunctorOppositeLightProfiniteModuleCat, Condensed.profiniteFree, CondensedMod.LocallyConstant.fullyFaithfulFunctor, LightCondMod.LocallyConstant.fullyFaithfulFunctor, InfiniteGalois.asProfiniteGaloisGroupFunctor; none states this constructible adic realization equivalence.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "constructible.*[Rr]ational|[Rr]ational.*constructible|[Aa]dic.*[Ee]quivalence",
+   "results": "9 hits: Mathlib/LinearAlgebra/QuadraticForm/Radical.lean, Mathlib/LinearAlgebra/QuadraticForm/Radical.lean, Mathlib/CategoryTheory/Monad/Adjunction.lean, Mathlib/CategoryTheory/Monad/Adjunction.lean, Mathlib/Algebra/Homology/LocalCohomology.lean, Mathlib/Algebra/Homology/LocalCohomology.lean, Mathlib/Algebra/Homology/LocalCohomology.lean, Mathlib/RingTheory/DedekindDomain/AdicValuation.lean; none states this constructible adic realization equivalence.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The constructible l adic category over an algebraic closure is the filtered colimit of raw rationalized integral constructible categories and the realization preserves tensor and internal Hom",
+   "results": "8 hits: ModuleCat.FilteredColimits.colimit, ModuleCat.FilteredColimits.M, ModuleCat.FilteredColimits.M.mk, instPreservesHomologyFunctorAddCommGrpCatColim, instPreservesFiniteLimitsFunctorAddCommGrpCatColim, CategoryTheory.Limits.IndObjectPresentation.mk, CategoryTheory.instPreservesColimitsTensorLeft, Condensed.hasExactLimitsOfShape; none states this constructible adic realization equivalence.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"DerivedCategory\", \"MonoidalClosed\"",
+   "results": "0 hits: ; none states this constructible adic realization equivalence.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Constructible sheaves of modules over continuous Q l bar coefficient sheaves descend to finite extensions and rationalized integral sheaves preserving tensor and internal Hom",
+   "results": "8 hits: LightCondensed.instMonoidalClosedSheafLightProfiniteCoherentTopologyModuleCat, LightCondensed.instMonoidalCategorySheafLightProfiniteCoherentTopologyModuleCat, CompHausLike.LocallyConstantModule.functor, LightCondensed.instMonoidalFunctorOppositeLightProfiniteModuleCatSheafCoherentTopologyPresheafToSheaf, LightCondensed.instMonoidalClosedLightCondMod, CondensedMod.ofSheafCompHaus, LightCondMod.LocallyConstant.instHasSheafifyLightProfiniteCoherentTopologyModuleCat, LightCondensed.instIsGrothendieckAbelianLightCondMod; none states this constructible adic realization equivalence.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sf-weil-verdier-biduality",
+  "date": "2026-10-22",
+  "group": "Q10"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "The parent is a maintainer-created native Lean obligation with no created.item ancestor (blueprint_refs.py ancestor prints None). Its supplied textual provenance is lem-a1-local-boundary-duality, using Weil biduality, and the evaluation and biduality sentence of thm-coef-qbar-verdier; this comparison realizes that sentence in the native derived category.",
+   "via": [
+    "lem-sf-weil-verdier-biduality"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sf-adic-qbar-constructible-realization",
+  "worker": "stage1",
+  "summary": "Repair of the human 2026-10-21 re-split order: all twelve old arguments distributed to six independent statement-only unsplit nodes; original arguments and dependency/source audit retained verbatim in report.md. Parent statement and statement dependencies unchanged. Short assembly checks hypotheses of the cocone, descent, tensor, transpose, ambient-Hom and isomorphism lemmas. All six new nodes searched by LeanFinder, Loogle, grep and two LeanSearch phrasings; no Mathlib match.",
+  "blueprint": "The parent is a maintainer-created native Lean obligation with no created.item ancestor (blueprint_refs.py ancestor prints None). Its supplied textual provenance is lem-a1-local-boundary-duality, using Weil biduality, and the evaluation and biduality sentence of thm-coef-qbar-verdier; this comparison realizes that sentence in the native derived category."
+ },
+ "tool_uses": [
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-kun-dimension-finite-type",
+  "lem-weil-pbc-integral-stratified-perfect-characterization",
+  "lem-weil-pbc-condensed-e-realization",
+  "lem-weil-pbc-condensed-qbar-lfp-local-triviality",
+  "lem-weil-finite-free-completed-scalar-comparison",
+  "lem-weil-pbc-condensed-flat-coefficient-calculus",
+  "lem-sfb-internal-tensor-composition-unit-normalization",
+  "lem-pur-derived-change-of-rings",
+  "sk-thm-sfb-qlbar-two-colimit",
+  "lem-fix-constructible-tensor-completion",
+  "lem-sf-ringed-finite-free-tensor-data",
+  "lem-pur-cochain-pullback-tensor-coherence",
+  "lem-pur-normalized-tensor-constraint-transport",
+  "lem-sf-scalar-localization-monoidal",
+  "lem-coef-completed-tensor-hom-transpose",
+  "lem-sfb-dc-hom-preserves",
+  "lem-pur-scalar-hom-comparison-tower",
+  "lem-sfb-scalar-hom-tensor-coherence",
+  "lem-weil-proetale-isomorphism-inverse-image",
+  "sk-prop-sfb-cartesian-coefficients",
+  "lem-weil-isomorphism-derived-pullback",
+  "lem-weil-isomorphism-comparison-scalar-extension",
+  "lem-pur-isomorphism-inverse-image-tensor-hom"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q53-5a66924c2",
+  "group": "Q53",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q53-5a66924c2 (reviewer sub-agent of L); spot-checked: Faithful re-split under the released stage-1 note of 2026-10-21/22 (11382 characters, at least 3 nodes, keep_plan). The live and side-live item is still the 12-step NW-PASSed split, so the delivery is not superseded. Neither the item nor any cited id is in route-pivot-dropped, and no SGA source is used. All 12 old step texts appear verbatim in the report. They map to six statement-only unsplit nodes: finite-realization-cocone (old steps 1-3), common-stage-descent-equivalence (4-6), completed-tensor-realization-descent (7-8), common-stage-hom-transpose (9), ambient-hom-evaluation-comparison (10-11) and realization-isomorphism-normalization (12). The statements are of comparable size (2.6-3.3k). The parent keeps its statement and stmt_deps byte-identical and is a 4-step assembly of 1880 characters; each step's claim is literally in the new statements it cites, and step 3's ambient-node hypotheses (rho, mu, transpose) are supplied by steps 1-2 and hom-transpose. Truth checks: (1) cocone: the domain bounds hold; the integral categories agree by integral-stratified-perfect-characterization; lfp and locally finite free agree for E_T (condensed-e-realization) and for R_T (lfp-local-triviality); j = chi^{-1} followed by balanced multiplication satisfies the identity and tower equations. (2) Descent: sk-thm-sfb-qlbar-two-colimit (2) with r=0 and (3), with J_F fully faithful at the compositum. (3) Tensor: chi is invertible by lem-fix-constructible-tensor-completion, and the constraints are pinned levelwise. (4) Transpose: BS 3.4.11 rationalized. (5) Ambient Hom: I re-derived that the composite Hom bijection is postcomposition with c for any natural mu, and Q is constructible by dc-hom-preserves, so the two-test argument makes c invertible. (6) Isomorphisms: inverse image is site reindexing and R_T is k-independent, so semilinear Frobenius is covered. Small cases T empty, T a point, M=0, L=0 and E=F all pass. B1-B5 hold: stmt_deps equal the bracketed ids and all exist; there are 5 searches per node. Sources read: BS Def 3.4.10, Lemma 3.4.11, Def 6.8.8/6.8.10, Props 6.8.11/6.8.14 and Rem 6.8.15; HRS Prop 5.2, Thm 7.7 and Lemma 7.9. Maintainer notes (advisory): (1) lem-sf-locally-finite-adic-constructible-realization (Q06; its Omega^lf sheaf is R_T) overlaps the cocone and descent nodes together, but it has none of the tensor, Hom or isomorphism normalizations, so it is not a duplicate; (2) lem-sf-framework-common-stage-descent and lem-sf-common-stage-full-faithfulness are pair-to-pair descents that a later worker can cite; (3) the item's node-level tool_uses still list the old proof dependencies and are stale. No fixes written."
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "lean": {
+  "module": "Sheaf.Paper.AdicQbarConstructibleRealization",
+  "declaration": "WeilConjectures.AdicQbarRealization.adic_qbar_constructible_realization",
+  "declarations": [
+   "WeilConjectures.AdicQbarRealization.adic_qbar_constructible_realization"
+  ],
+  "file": "lean/Sheaf/Paper/AdicQbarConstructibleRealization.lean",
+  "statement": "theorem adic_qbar_constructible_realization (D : FiniteFieldDatum.{u}) (l : ℕ) [Fact l.Prime] (hl : l ≠ D.p) : Nonempty (Family l D)",
+  "branch": "newtargets-dag",
+  "by": "NL",
+  "date": "2026-10-23",
+  "existing": false,
+  "note": "Exact ambient realization with the existing native bounded constructible predicate in ordinary section-module coordinates; canonical quotient/balanced tensor normalization, ambient evaluation-transpose Hom, and pointwise-normalized arbitrary-scheme-isomorphism comparisons with identity/composition equations. The native fixed coefficient closure is PadicAlgCl l, as in the recorded coefficient-ring dependency."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-25a6777c9",
+  "group": "NL",
+  "result": "fix",
+  "note": "Re-delivery of RETURNed 0705. H3 repaired: Family.sourceId_unit (pullbackTensorCommonComposition 𝟙 𝟙 M ≫ sourceId at F M = 𝟙, HEq along id_comp) is the pseudofunctor left-unit law; it fixes sourceId through essential surjectivity and naturality, so identity is no longer vacuous. H2 repaired: theorem stmt_deps replaced by def-zl-ringed-...-data plus four existing:true owners; each statement is verbatim in its unchanged module and all declarations exist; the other five Lean files are byte-identical to 0705. FIX: def-sf-adic-closed-reindexing-maps re-owned PodPartialClosed, .evaluation and podPairPullback, already owned by the on-base def-pod-partial-closed-interfaces (Q69, landed 15:55Z 10-22); fixes/def-sf-adic-closed-reindexing-maps.json removes them, cites the owner and rewrites the TeX. Advisory: def-sf-proetale-sectionwise-module-inverse-image duplicates Q15 def-weil-proetale-iso-sectionwise-inverse-image, landed 05:13Z after base 04:33Z; it cannot be cited by a FIX, so the maintainer should merge the nodes. No Lean changed and no compile was run."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-31dd2",
+  "group": "A8",
+  "result": "fix",
+  "landing": "20261025T013854-L-4029309",
+  "kind": "interface",
+  "note": "independent cc review: item theorem signature + moved Family defs (verbatim) vs clone and change record; node proof/proof_deps vs Lean proof; delivered modules + 5 of 7 direct importers compiled in sandbox"
+ }
+}

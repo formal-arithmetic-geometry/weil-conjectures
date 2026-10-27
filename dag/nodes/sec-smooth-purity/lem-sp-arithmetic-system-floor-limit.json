@@ -1,0 +1,122 @@
+{
+ "id": "lem-sp-arithmetic-system-floor-limit",
+ "kind": "statement",
+ "title": "Common-coefficient total-limit comparison for a given floor extension",
+ "statement": "Let B, e≥1, r and hf be as in the ordinary arithmetic floor construction, and suppose a specified additive exact functor R and its ArithmeticSystemOrdinaryFloorData d are GIVEN. Let a ring sheaf A map compatibly to B by α, and let β map to the selected coefficient sequence with β_n=α_(r n). For a specified total right derived inverse-limit pair RF,η on A-module towers, assume its right-derived universal property and its computation on K-injective towers, in any chosen derived morphism universe. Then there are the normalized termwise scalar-forgetting functors F and G and ArithmeticSystemLimitData of [def-sp-arithmetic-system-adjunction-data] for them. In particular (R ⋙ F) followed by arithmetic selection is naturally isomorphic to G, identically on underlying selected sections, and their total derived limits have the comparison normalized by the ordinary limit map. There is no construction or existence assertion for R here and no exactness assumption on countable products.\n\nPrecise Lean statement (the cited definitions fix all notation):\n```lean\nuniverse u v w z\nopen CategoryTheory CategoryTheory.Limits Opposite\nnamespace SheafOfModules\nvariable {C : Type u} [Category.{v} C] {J : GrothendieckTopology C}\n  [J.HasSheafCompose (forget₂ CommRingCat.{w} RingCat.{w})]\n  [J.WEqualsLocallyBijective AddCommGrpCat.{w}] [HasSheafify J AddCommGrpCat.{w}]\n  [EssentiallySmall.{w} C]\ntheorem arithmeticSystemFloorLimitComparison\n    (B : ℕᵒᵖ ⥤ Sheaf J CommRingCat.{w}) (e : ℕ) (he : 1 ≤ e)\n    (r : ℕ ↪o ℕ) (hr : ∀ n : ℕ, r n = e * (n + 1) - 1)\n    (hf : ∀ k : ℕ, e ≤ k + 1 → r ((k + 1) / e - 1) ≤ k)\n    (R : StrictRingSystem (selectedSystemRings B r) ⥤ StrictRingSystem B)\n    [R.Additive] [PreservesFiniteLimits R] [PreservesFiniteColimits R]\n    (d : ArithmeticSystemOrdinaryFloorData B e r hf R)\n    (A : Sheaf J CommRingCat.{w})\n    (α : (Functor.const ℕᵒᵖ).obj A ⟶ B)\n    (β : (Functor.const ℕᵒᵖ).obj A ⟶ selectedSystemRings B r)\n    (hβ : ∀ n : ℕ, β.app (op n) = α.app (op (r n)))\n    [HasDerivedCategory.{z} (SheafOfModules.{w}\n      (derivedChangeRingIndependentCoefficients J A))]\n    [HasDerivedCategory.{z} (ℕᵒᵖ ⥤ SheafOfModules.{w}\n      (derivedChangeRingIndependentCoefficients J A))]\n    (RF : DerivedCategory.{z} (ℕᵒᵖ ⥤ SheafOfModules.{w}\n      (derivedChangeRingIndependentCoefficients J A)) ⥤\n      DerivedCategory.{z} (SheafOfModules.{w}\n        (derivedChangeRingIndependentCoefficients J A)))\n    (η : CategoryTheory.StrictTowerArithmetic.limitComplex _ ⋙ DerivedCategory.Q ⟶\n      DerivedCategory.Q ⋙ RF)\n    (hRF : RF.IsRightDerivedFunctor η\n      (HomologicalComplex.quasiIso (ℕᵒᵖ ⥤ SheafOfModules.{w}\n        (derivedChangeRingIndependentCoefficients J A)) (.up ℤ)))\n    (hη : ∀ I, CochainComplex.IsKInjective I → IsIso (η.app I)) :\n    ∃ (F : ArithmeticSystemScalarForgetting B A α)\n      (G : ArithmeticSystemScalarForgetting (selectedSystemRings B r) A β),\n      Nonempty (ArithmeticSystemLimitData B e r R A α β F G RF η)\nend SheafOfModules\n```",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-tower/sk-lem-sp-tower-equivalence.proof.md",
+  "place": "Adjunction paragraph; arithmetic-restriction expansion in lem-sp-arithmetic-system-right-adjoint, steps 1–6"
+ },
+ "stmt_deps": [
+  "def-sp-arithmetic-system-adjunction-data",
+  "def-pur-system-level-left-extension-basic",
+  "def-sp-strict-tower-arithmetic-restriction-data",
+  "def-sfb-derived-change-of-rings-cochain-model"
+ ],
+ "proof": [
+  {
+   "text": "Let $F_B$ and $F_r$ denote termwise forgetting scalars to $A$. They are exact by the scalar-exactness theorem used in Step 2 and componentwise exactness. Write $r_e$ for arithmetic restriction of constant-$A$ towers. The compatible maps $A\\to B_k$ give the equality of underlying $A$-towers $r_e F_B J C=F_r C$: at $en$ the action and component are those of $C_n$, and the selected transitions are its original transitions. This equality holds on complexes and descends to the derived categories. Apply [lem-sp-strict-tower-arithmetic-restriction] to $X=F_B JC$. Its natural restriction isomorphism is\n$$\\mathcal L_B JC=R\\lim F_B JC\\xrightarrow{\\rho_{e,X}}R\\lim r_eF_B JC=R\\lim F_r C=\\mathcal L_{B_r}C.$$\nThe total-limit functors here are exactly those of [lem-weil-pbc-ringed-strict-tower-homotopy-limit]. The projection equation in the arithmetic-restriction theorem reads $p_n\\rho_{e,X}=p_{en}$, so this isomorphism preserves every specified selected projection, as required. Naturality is inherited from $\\rho_e$ and the equality of functors. The cited theorem explicitly imposes no exactness of countable products. For the independent coefficient universe, transport the construction and the ordinary limit normalization through the coefficient-universe small-site model used in [lem-weil-pbc-ringed-strict-tower-homotopy-limit]; equivalences preserve all the limit cones and localization factorization maps. Alternatively its same universal-right-derived comparison argument works in the independent universe using the Grothendieck category of A-module towers. This is a required part of this obligation, not an assumed universe identification.",
+   "uses": [
+    "lem-pur-sheaf-ring-derived-coefficient-adjunction",
+    "lem-sp-strict-tower-arithmetic-restriction",
+    "def-pur-system-level-left-extension-basic",
+    "lem-weil-pbc-ringed-strict-tower-homotopy-limit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 0940 (section-derived-limits), 0941 (lemma-derived-limit-is-ok); canonical arithmetic restriction comparison of the existing DAG theorem"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-pur-sheaf-ring-derived-coefficient-adjunction",
+  "lem-sp-strict-tower-arithmetic-restriction",
+  "def-pur-system-level-left-extension-basic",
+  "lem-weil-pbc-ringed-strict-tower-homotopy-limit"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-tower/sk-lem-sp-tower-equivalence.proof.md",
+  "place": "Adjunction paragraph; arithmetic-restriction expansion in lem-sp-arithmetic-system-right-adjoint, steps 1–6"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Exact right adjoint floor extension of strict inverse systems of modules over varying sheaves of rings",
+   "results": "SheafOfModules.hasLimit (Mathlib.Algebra.Category.ModuleCat.Sheaf.Limits), pullbackPushforwardAdjunction (Mathlib.Algebra.Category.ModuleCat.Sheaf.PullbackContinuous), FloorRing.ofFloor (Mathlib.Algebra.Order.Floor.Defs). Read the change-of-rings definitions and the generic adjunction interfaces: none constructs the normalized varying-ring floor extension or the scalar-forgetting limit comparison.",
+   "date": "2026-10-25",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Exact right adjoint to arithmetic subsequence restriction of varying-ring module sheaf systems",
+   "results": "LightCondMod.LocallyConstant.adjunction, CondensedMod.LocallyConstant.adjunction, localCohomology.diagram, Profinite.NobelingProof.succ_exact. These concern constant-ring or unrelated categories, not StrictRingSystem or its normalized floor construction.",
+   "date": "2026-10-25",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "floor.*extension|ArithmeticSystem|arithmetic.*restriction (Mathlib via msearch.py grep); StrictRingSystem and floor extension in lean/Sheaf, lean/WeilConjectures and dag/nodes",
+   "results": "No Mathlib hits. Project search finds only the parent ArithmeticSystemRightAdjoint definitions and theorem; the ordinary construction and common-coefficient comparison have no separate declaration. Existing arithmetic comparison concerns constant coefficients, with a larger coefficient universe.",
+   "date": "2026-10-25",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.CategoryTheory.ArithmeticSystemRightAdjoint",
+  "date": "2026-10-25",
+  "group": "B6"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sp-integral-adjunction",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-sp-integral-adjunction-bijection",
+   "place": "Adjunction: arithmetic restriction and its right adjoint, as expanded in the parent node",
+   "via": [
+    "lem-sp-arithmetic-system-right-adjoint",
+    "det-sp-normalized-equivalence"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.ArithmeticSystemFloorLimitComparison",
+  "file": "lean/Sheaf/CategoryTheory/ArithmeticSystemFloorLimitComparison.lean",
+  "declaration": "SheafOfModules.arithmeticSystemFloorLimitComparison",
+  "declarations": [
+   "SheafOfModules.arithmeticSystemFloorLimitComparison"
+  ],
+  "statement": "theorem arithmeticSystemFloorLimitComparison (B : ℕᵒᵖ ⥤ Sheaf J CommRingCat.{w}) (e : ℕ) (he : 1 ≤ e) (r : ℕ ↪o ℕ) (hr : ∀ n : ℕ, r n = e * (n + 1) - 1) (hf : ∀ k : ℕ, e ≤ k + 1 → r ((k + 1) / e - 1) ≤ k) (R : StrictRingSystem (selectedSystemRings B r) ⥤ StrictRingSystem B) [R.Additive] [PreservesFiniteLimits R] [PreservesFiniteColimits R] (d : ArithmeticSystemOrdinaryFloorData B e r hf R) (A : Sheaf J CommRingCat.{w}) (α : (Functor.const ℕᵒᵖ).obj A ⟶ B) (β : (Functor.const ℕᵒᵖ).obj A ⟶ selectedSystemRings B r) (hβ : ∀ n : ℕ, β.app (op n) = α.app (op (r n))) [HasDerivedCategory.{z} (SheafOfModules.{w} (derivedChangeRingIndependentCoefficients J A))] [HasDerivedCategory.{z} (ℕᵒᵖ ⥤ SheafOfModules.{w} (derivedChangeRingIndependentCoefficients J A))] (RF : DerivedCategory.{z} (ℕᵒᵖ ⥤ SheafOfModules.{w} (derivedChangeRingIndependentCoefficients J A)) ⥤ DerivedCategory.{z} (SheafOfModules.{w} (derivedChangeRingIndependentCoefficients J A))) (η : CategoryTheory.StrictTowerArithmetic.limitComplex _ ⋙ DerivedCategory.Q ⟶ DerivedCategory.Q ⋙ RF) (hRF : RF.IsRightDerivedFunctor η (HomologicalComplex.quasiIso (ℕᵒᵖ ⥤ SheafOfModules.{w} (derivedChangeRingIndependentCoefficients J A)) (.up ℤ))) (hη : ∀ I, CochainComplex.IsKInjective I → IsIso (η.app I)) : ∃ (F : ArithmeticSystemScalarForgetting B A α) (G : ArithmeticSystemScalarForgetting (selectedSystemRings B r) A β), Nonempty (ArithmeticSystemLimitData B e r R A α β F G RF η)",
+  "branch": "sheaf-dag",
+  "by": "B6",
+  "date": "2026-10-25"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-e5624",
+  "group": "B6",
+  "result": "fix",
+  "landing": "20261025T094857-L-3269256",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-e5624",
+  "group": "B6",
+  "result": "fix",
+  "landing": "20261025T094857-L-3269256",
+  "kind": "interface",
+  "note": "independent cc review: item statement vs clone (byte-identical); moved records vs old item lines 47-188 (verbatim); two new sorry statements vs the item and plan steps 1-4/6 (true, strictly smaller); sandbox compile + #print axioms (sorryAx only from the two split statements); node stmt_deps vs the declarations used in their statements"
+ }
+}

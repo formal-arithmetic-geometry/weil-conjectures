@@ -10,6 +10,7 @@ public import Sheaf.CategoryTheory.InternalAbelianSheafModuleEquivalence
 public import Mathlib.Topology.ContinuousMap.Algebra
 public import Mathlib.Topology.Algebra.ContinuousMonoidHom
 public import Mathlib.CategoryTheory.Preadditive.AdditiveFunctor
+public import Mathlib.Combinatorics.Quiver.ReflQuiver
 
 /-! # Internal modules with an action of a profinite condensed group
 
@@ -85,7 +86,26 @@ theorem equivariant_closure (M N L : ActionModule R P) :
     (∀ (f g : M.module ⟶ N.module), Equivariant M N f → Equivariant M N g →
       Equivariant M N (f + g)) ∧
     (∀ (f : M.module ⟶ N.module), Equivariant M N f → Equivariant M N (-f)) := by
-  sorry
+  refine ⟨?_, ?_, ?_, ?_, ?_⟩
+  · intro S g m
+    rfl
+  · intro f g hf hg S a m
+    change (g.hom.hom.app (op S)).hom
+        ((f.hom.hom.app (op S)).hom (M.act S a m)) =
+      L.act S a ((g.hom.hom.app (op S)).hom ((f.hom.hom.app (op S)).hom m))
+    rw [hf S a m, hg S a ((f.hom.hom.app (op S)).hom m)]
+  · intro S g m
+    change 0 = N.act S g 0
+    exact (map_zero (N.act S g)).symm
+  · intro f g hf hg S a m
+    change (f.hom.hom.app (op S)).hom (M.act S a m) +
+        (g.hom.hom.app (op S)).hom (M.act S a m) =
+      N.act S a ((f.hom.hom.app (op S)).hom m + (g.hom.hom.app (op S)).hom m)
+    rw [map_add, hf S a m, hg S a m]
+  · intro f hf S g m
+    change -((f.hom.hom.app (op S)).hom (M.act S g m)) =
+      N.act S g (-((f.hom.hom.app (op S)).hom m))
+    rw [map_neg, hf S g m]
 
 /-- The additive subgroup of equivariant internal-module morphisms.
 Source: blueprint paragraph (3) (blueprint: def-sfb-condensed-action-module). -/

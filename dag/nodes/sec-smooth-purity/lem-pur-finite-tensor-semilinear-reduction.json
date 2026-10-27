@@ -1,0 +1,138 @@
+{
+ "kind": "statement",
+ "status": "split",
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-thm-purity-transport",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-reduction/thm-pur-finite-reduction-of-purity.proof.md",
+  "place": "Step 2: compatibility with the invertible twist by associativity of derived tensor, using the reduced coefficient twists of def-coefficient-twists-detailed; ordinary signed maps and derived single-complex computation."
+ },
+ "mathlib_match": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.FiniteTensorSignedReduction",
+  "date": "2026-10-25",
+  "group": "W4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-pur-finite-reduction-of-purity",
+   "place": "Proof Step 2: compatibility of finite scalar reduction with invertible signed coefficient twists.",
+   "via": [
+    "def-pur-finite-signed-reduction-comparisons",
+    "lem-pur-finite-tensor-presentation-reduction"
+   ]
+  },
+  "same_as": []
+ },
+ "proof_origin": "V3, 2026-10-26: implement the ordinary signed-line plan using the actual scalar-extension tower comparison and the proved signed-line comparison theorem. Replace local-basis uniqueness by scalar-extension and tensor extensionality, then dual evaluation extensionality after the positive comparison isomorphism. Source: the recorded finite reduction Step 2 and coefficient-twist conventions; scalar extension and dual evaluation as in Stacks 03EK, 03EM and 04TT.",
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Normalized extension of scalars for signed powers and internal duals of a rank one sheaf",
+   "results": "8 hits: NormedSpace.normalize_smul, LinearMap.extendScalarsOfIsLocalizationEquiv, Bornology.IsVonNBounded.extend_scalars, LinearMap.extendTo𝕜, ModuleCat.extendRestrictScalarsAdj, LinearEquiv.extendScalarsOfIsLocalization, LinearEquiv.extendScalarsOfIsLocalizationEquiv, LinearMap.norm_extendTo𝕜'_apply_sq. No exact finite signed-line normalization statement.",
+   "date": "2026-10-25",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Extension of scalars of signed tensor powers of an invertible sheaf commutes with duals and is uniquely normalized by evaluation",
+   "results": "8 hits: SheafOfModules.ιFree_mapFree_inv, CommRing.Pic.mk_tensor, Module.Invertible.linearEquiv, ModuleCat.exteriorPower.natIso₁, CommRing.Pic.mapAlgebra, SheafOfModules.unitHomEquiv_symm_freeHomEquiv_apply, CommRing.Pic.mapAlgebra_apply, exteriorPower.oneEquiv_naturality. No exact finite signed-line normalization statement.",
+   "date": "2026-10-25",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.homEquiv",
+   "results": "12 hits: CategoryTheory.Adjunction.homEquiv, CategoryTheory.Adjunction.mk'_homEquiv, CategoryTheory.Adjunction.mkOfHomEquiv_homEquiv, CategoryTheory.Adjunction.corepresentableBy_homEquiv, CategoryTheory.Adjunction.representableBy_homEquiv, CategoryTheory.Adjunction.comp_homEquiv, CategoryTheory.Adjunction.homEquiv_apply, CategoryTheory.Adjunction.homEquiv_unit. No exact finite signed-line normalization statement.",
+   "date": "2026-10-25",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "restrict.*[Dd]ual|extend.*[Dd]ual|homEquiv.*injective",
+   "results": "25 hits: Mathlib/CategoryTheory/Yoneda.lean, Mathlib/CategoryTheory/Yoneda.lean, Mathlib/CategoryTheory/Types/Basic.lean, Mathlib/CategoryTheory/Triangulated/Adjunction.lean, Mathlib/CategoryTheory/Triangulated/Adjunction.lean, Mathlib/CategoryTheory/Triangulated/Adjunction.lean, Mathlib/CategoryTheory/Triangulated/Adjunction.lean, Mathlib/CategoryTheory/Monad/Monadicity.lean. No exact finite signed-line normalization statement.",
+   "date": "2026-10-25",
+   "verdict": "no exact match"
+  }
+ ],
+ "id": "lem-pur-finite-tensor-semilinear-reduction",
+ "title": "Unique normalized ordinary signed-line reduction",
+ "statement": "Fix a finite coefficient setting P [def-pur-conventions], positive levels $1\\le m\\le n=P.level$, and a scheme T over $\\operatorname{Spec}(P.field.k)$. Use the actual integral-reduced signed module sheaves $A_T(r)$ and $B_T(r)$, the quotient $A_n\\to A_m$, and the semilinear-map predicate of [def-pur-finite-tensor-reduction-data]. There exists exactly one family $c_r:A_T(r)\\to\\operatorname{Res}_{A_n}^{A_m}B_T(r)$ normalized by the coefficient quotient at r=0, integral scalar balancing at r=1, the ordered tensor recursion at positive r, and dual evaluation at negative r. This statement concerns ordinary sheaf maps only, without derived objects or chosen derived isomorphisms.",
+ "stmt_deps": [
+  "def-pur-conventions",
+  "def-pur-finite-tensor-reduction-data"
+ ],
+ "proof": [
+  {
+   "text": "Identify each positive-level first line with the actual scalar extension of purTwistIntegralOne. The quotient maps compose, so scalarExtensionTowerIso gives the degree-one comparison. Its pure-section formula is exactly integral balancing.",
+   "uses": [
+    "def-pur-finite-tensor-reduction-data",
+    "def-coefficient-twists-detailed",
+    "lem-sp-scalar-extension-dual-tower-core"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Obtain trivializing covers for the first lines from their existing rank-one theorem. Apply exists_signedLineComparison to the degree-one comparison, and compose each comparison with scalarExtensionEmbedding. The unit comparison formula, ordered tensor recursion and signed evaluation formula give all four normalization clauses.",
+   "uses": [
+    "lem-pur-twist-sheaf-locally-free",
+    "lem-pur-signed-line-scalar-tensor-tower",
+    "lem-sp-scalar-extension-binary-coherence",
+    "lem-sp-scalar-extension-dual-tower-core",
+    "def-pur-finite-tensor-reduction-data"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The normalization fixes degree zero. The scalar-extension hom extensionality theorem and the integral-balancing clause fix degree one; tensor hom extensionality and two-step induction fix all positive degrees. For negative degrees lift two competing semilinear maps along scalar extension and precompose their dual values with the positive comparison isomorphism. scalarExtensionDual_hom_ext detects equality on pure tensors, where the evaluation normalization gives the same value. Cancel the invertible precomposition map, and evaluate the scalar-extension lifts on x tensor 1 to recover equality of the original maps. Function extensionality yields equality of the full families.",
+   "uses": [
+    "def-pur-finite-tensor-reduction-data",
+    "lem-sp-scalar-extension-binary-coherence",
+    "lem-sp-scalar-extension-dual-evaluation",
+    "lem-pur-signed-line-scalar-tensor-tower"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pur-finite-tensor-reduction-data",
+  "def-coefficient-twists-detailed",
+  "lem-sp-scalar-extension-dual-tower-core",
+  "lem-pur-twist-sheaf-locally-free",
+  "lem-pur-signed-line-scalar-tensor-tower",
+  "lem-sp-scalar-extension-binary-coherence",
+  "lem-sp-scalar-extension-dual-evaluation"
+ ],
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.FiniteTensorSemilinearReduction",
+  "file": "lean/Sheaf/Paper/FiniteTensorSemilinearReduction.lean",
+  "declaration": "WeilConjectures.PurityFiniteSetting.existsUnique_finiteTensorSemilinearReduction",
+  "statement": "theorem existsUnique_finiteTensorSemilinearReduction (P : PurityFiniteSetting.{u}) (m : ℕ) (hm : 1 ≤ m) (hmn : m ≤ P.level) (T : Scheme.{u}) [T.Over (Spec (.of P.field.k))] : ∃! c : P.FiniteTensorLineMaps m hm hmn T, P.FiniteTensorLineMapsNormalized m hm hmn T c",
+  "branch": "sheaf-dag",
+  "by": "W4",
+  "date": "2026-10-25"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "W4",
+  "result": "pass",
+  "landing": "20261025T203628-L-2835384",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V3",
+  "result": "pass",
+  "landing": "20261026T003033-L-140853",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

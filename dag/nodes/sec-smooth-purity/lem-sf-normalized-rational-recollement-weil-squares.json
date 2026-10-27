@@ -1,0 +1,146 @@
+{
+ "id": "lem-sf-normalized-rational-recollement-weil-squares",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-sf-open-closed-triangle-all-stages",
+   "place": "The triangle, Hom vanishing, constructibility, and Weil structures paragraphs",
+   "via": []
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "First two Frobenius squares for normalized rational recollement maps",
+ "statement": "Fix a finite-field datum $D$, a prime $l$ distinct from its characteristic, and a finite extension $E/\\mathbf Q_l$. Let $X_0$ be separated and finite type over the base finite field and $i_0:Z_0\\hookrightarrow X_0$ a closed immersion with $Z_0$ finite type. Let $i$ be its actual geometric base change. Let $P$ and $Q$ be integral and rational recollement presentations on the geometric fibre, normalized by the completed sheaf kernel and the actual closed unit, then by raw rational localization [def-sf-recollement-presentation-data]. For every fixed pair $(K,\\theta:GK\\simeq K)$ for the specified rational geometric Frobenius pullback $G$ [def-weil-weil-sheaf-complex], there exist isomorphisms $a:G(Q_{\\mathrm{open}}K)\\simeq Q_{\\mathrm{open}}K$ and $c:G(Q_{\\mathrm{closed}}K)\\simeq Q_{\\mathrm{closed}}K$ satisfying $G(\\varepsilon_K);\\theta=a;\\varepsilon_K$ and $G(\\eta_K);c=\\theta;\\eta_K$, where semicolons denote composition in diagrammatic order. No triangle, uniqueness, or connecting-map equivariance is claimed.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sf-localization/prop-sf-open-closed-triangle-all-stages.proof.md",
+  "place": "The triangle, Hom vanishing, constructibility, and Weil structures paragraphs"
+ },
+ "stmt_deps": [
+  "def-sf-recollement-presentation-data",
+  "def-weil-weil-sheaf-complex"
+ ],
+ "proof": [
+  {
+   "text": "Use the normalized rational closed comparison to identify Q.closedTerm, with its unit, with the actual rational pullback followed by its proper right adjoint. This comparison has no Frobenius assertion.",
+   "uses": [
+    "lem-sf-normalized-rational-closed-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sf-localization/prop-sf-open-closed-triangle-all-stages.proof.md",
+    "place": "The triangle, Hom vanishing, constructibility, and Weil structures paragraphs"
+   }
+  },
+  {
+   "text": "Let d be fieldWeilPullSquare and c be fieldWeilProperExchange, the published invertible right mate of d inverse. The generic unit_mateEquiv equation gives G(eta_K);c_{i*K}=eta_{GK};i_*(d_K inverse). Compose with i_*(d_K) and i_*i*(theta). Inverse cancellation and naturality of eta give the closed Weil square. Conjugate by the comparison from the preceding step and its image under G to obtain the square for Q.unit.",
+   "uses": [
+    "def-zl-field-weil-shriek-shift-data"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sf-localization/prop-sf-open-closed-triangle-all-stages.proof.md",
+    "place": "The triangle, Hom vanishing, constructibility, and Weil structures paragraphs"
+   }
+  },
+  {
+   "text": "The specified geometric Frobenius pullback is exact, and normalization supplies a distinguished localization triangle for K. Map that triangle by Frobenius. Rotate the mapped and original triangles. Their first two components are now theta and the already constructed closed isomorphism, and the closed square is exactly the required first-arrow equation. TR3 and the two-out-of-three isomorphism lemma give an isomorphism of these rotated triangles. Apply inverse rotation and its unit isomorphisms. The first component is the required open isomorphism and its first square is the open counit equation. Pair the two isomorphisms. This only uses underlying distinguished triangles; it assumes no triangulation on Weil pairs.",
+   "uses": [
+    "lem-sf-normalized-rational-recollement-triangles",
+    "lem-sf-automorphism-constructible-stage-equivalence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sf-localization/prop-sf-open-closed-triangle-all-stages.proof.md",
+    "place": "The triangle, Hom vanishing, constructibility, and Weil structures paragraphs"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sf-normalized-rational-closed-comparison",
+  "def-zl-field-weil-shriek-shift-data",
+  "lem-sf-normalized-rational-recollement-triangles",
+  "lem-sf-automorphism-constructible-stage-equivalence"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sf-localization/prop-sf-open-closed-triangle-all-stages.proof.md",
+  "place": "The triangle, Hom vanishing, constructibility, and Weil structures paragraphs",
+  "note": "E5: closed-unit mate plus rotation of the independently normalized localization triangle. No open mate construction or coefficient common-stage extension is needed."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "The unit and counit of open closed recollement commute with Frobenius via adjunction mates and scalar extension",
+   "results": "ModuleCat.ExtendRestrictScalarsAdj.unit, ModuleCat.ExtendRestrictScalarsAdj.Unit.map, CategoryTheory.frobeniusMorphism_mate, ModuleCat.ExtendRestrictScalarsAdj.unit_app, ModuleCat.extendRestrictScalarsAdj_unit_app_apply, ModuleCat.restrictCoextendScalarsAdj, CategoryTheory.frobeniusMorphism, ModuleCat.ExtendRestrictScalarsAdj.counit_app",
+   "date": "2026-10-25",
+   "verdict": "No direct match; use the recorded sheaf and coefficient theory."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.unit",
+   "results": "CategoryTheory.Adjunction.unit, CategoryTheory.Adjunction.id_unit, CategoryTheory.Adjunction.mk'_unit, CategoryTheory.Adjunction.mkOfUnitCounit_unit, CategoryTheory.Equivalence.toAdjunction_unit, CategoryTheory.Adjunction.ext, CategoryTheory.Adjunction.ext_iff, CategoryTheory.Adjunction.toEquivalence",
+   "date": "2026-10-25",
+   "verdict": "Generic ingredients only, no normalized recollement theorem."
+  },
+  {
+   "tool": "grep",
+   "query": "NatTrans.*CommShift|triangle_morphism_extension|SfRecollement",
+   "results": "Mathlib/CategoryTheory/ObjectProperty/Shift.lean, Mathlib/CategoryTheory/Shift/Localization.lean, Mathlib/CategoryTheory/Shift/Localization.lean, Mathlib/CategoryTheory/Shift/Localization.lean, Mathlib/CategoryTheory/Shift/Localization.lean, Mathlib/CategoryTheory/Shift/Localization.lean, Mathlib/CategoryTheory/Shift/Opposite.lean, Mathlib/CategoryTheory/Shift/Opposite.lean",
+   "date": "2026-10-25",
+   "verdict": "The generic shift and triangle interfaces do not state normalized recollement transport."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sf-open-closed-triangle",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.SfOpenClosedTriangleAllStages",
+  "date": "2026-10-25",
+  "group": "P2"
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.SfNormalizedRationalWeilSquares",
+  "file": "lean/Sheaf/Paper/SfNormalizedRationalWeilSquares.lean",
+  "declaration": "WeilConjectures.sfNormalizedRationalRecollement_weil_squares",
+  "declarations": [
+   "WeilConjectures.sfNormalizedRationalRecollement_weil_squares"
+  ],
+  "statement": "theorem sfNormalizedRationalRecollement_weil_squares\n    (D : FiniteFieldDatum.{u}) (hl : l ≠ D.p)\n    (X₀ Z₀ : Over (Spec (.of D.k₀)))\n    [LocallyOfFiniteType X₀.hom] [QuasiCompact X₀.hom] [IsSeparated X₀.hom]\n    [LocallyOfFiniteType Z₀.hom] [QuasiCompact Z₀.hom]\n    (i₀ : Z₀ ⟶ X₀) [IsClosedImmersion i₀.left]\n    (i : (D.geometricFiber Z₀).left ⟶ (D.geometricFiber X₀).left)\n    [IsClosedImmersion i]\n    (_hi : i = ((Over.pullback\n      (Spec.map (CommRingCat.ofHom (algebraMap D.k₀ D.k)))).map i₀).left)\n    (P : SfRecollementPresentation\n      (sfIntegralConstructibleCategory l E (D.geometricFiber X₀).left))\n    (Q : SfRecollementPresentation\n      (sfRationalConstructibleCategory l E (D.geometricFiber X₀).left))\n    (_hP : SfIntegralRecollementNormalization l E i (sfRecollementGeometricNoetherian D X₀) P)\n    (_hQ : SfRationalRecollementNormalization l E (D.geometricFiber X₀).left P Q) :\n    ∀ K : CategoryTheory.Endofunctor.IsoAlgebra (sfWeilFrobeniusPullback D l hl X₀ E),\n      ∃ ac : ((sfWeilFrobeniusPullback D l hl X₀ E).obj (Q.openTerm.obj K.carrier) ≅\n          Q.openTerm.obj K.carrier) ×\n        ((sfWeilFrobeniusPullback D l hl X₀ E).obj (Q.closedTerm.obj K.carrier) ≅\n          Q.closedTerm.obj K.carrier),\n        (sfWeilFrobeniusPullback D l hl X₀ E).map (Q.counit.app K.carrier) ≫ K.str.hom =\n          ac.1.hom ≫ Q.counit.app K.carrier ∧\n        (sfWeilFrobeniusPullback D l hl X₀ E).map (Q.unit.app K.carrier) ≫ ac.2.hom =\n          K.str.hom ≫ Q.unit.app K.carrier",
+  "branch": "sheaf-dag",
+  "by": "P2",
+  "date": "2026-10-25"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P2",
+  "result": "pass",
+  "landing": "20261025T095659-L-3464608",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E5",
+  "result": "pass",
+  "landing": "20261025T122810-L-1807992",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

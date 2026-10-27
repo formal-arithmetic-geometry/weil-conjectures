@@ -1,0 +1,231 @@
+{
+ "id": "lem-sfb-split-reductive-local-quotient-points",
+ "kind": "statement",
+ "title": "Split reductive points lift across quotients of a local ring",
+ "statement": "Let $A$ be a nonzero commutative Noetherian local ring [def-weil-pbc-noetherian-ring], with unique maximal ideal $\\mathfrak m$, and let $J\\subseteq\\mathfrak m$ be an ideal. An $A$-group scheme has multiplication, identity and inverse satisfying the diagrams of [def-sc-group-scheme] with base $\\operatorname{Spec}A$. A reductive $A$-group scheme here means a smooth [def-sbc-smooth-morphisms] affine finite-type [def-weil-finite-type-morphism] $A$-group scheme with reductive geometric fibres: over every algebraically closed field a fibre is connected [def-weil-connected-scheme], with no nontrivial smooth connected normal unipotent subgroup. Unipotent means that all geometric points are unipotent matrices in a faithful representation. Write $\\mathbf G_{m,A}=\\operatorname{Spec}A[z,z^{-1}]$ with multiplication of units. For an $A$-algebra $B$, $H(B)$ means $A$-scheme morphisms $\\operatorname{Spec}B\\to H$, with the induced group law. A cocharacter is an $A$-group homomorphism $\\mathbf G_{m,A}\\to H$. Let $H$ be a reductive $A$-group scheme and $S\\hookrightarrow H$ a closed subgroup [def-weil-closed-immersion] with a specified isomorphism $S\\simeq\\mathbf G_{m,A}^{r}$, $r\\geq0$, whose geometric fibres are maximal tori. A torus over an algebraically closed field is a finite product of $\\mathbf G_m$, maximal for subgroup inclusion. Then the homomorphism $H(A)\\to H(A/J)$ induced by the quotient map $A\\to A/J$ is surjective. No henselianity or completeness of $A$ is assumed.",
+ "source": {
+  "document": "literature/alper-halpern-leistner-heinloth-cartan-iwahori-matsumoto.pdf",
+  "place": "WANTED locally; read author-hosted https://sites.math.washington.edu/~jarod/papers/iwahori.pdf. Theorem 4.1, proof, printed p.7: Bruhat cells and approximation by integral root-group coordinates. Agent strengthening of that approximation input to all split reductive points over a local quotient; proof plan retained in report.md, with no proof stored in this unsplit node."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-noetherian-ring",
+  "def-sc-group-scheme",
+  "def-sbc-smooth-morphisms",
+  "def-weil-finite-type-morphism",
+  "def-weil-connected-scheme",
+  "def-weil-closed-immersion",
+  "def-sfb-split-torus-over-ring",
+  "def-sfb-reductive-torus-centralizer-terminology"
+ ],
+ "proof": [
+  {
+   "text": "Apply [lem-sfb-split-reductive-local-gauss-atlas] to $(A,H,S)$ with exactly the hypotheses in the statement. Obtain open charts $\\theta_i:V\\to H$ covering $H$, where $V=\\operatorname{Spec}A[x_1,\\ldots,x_d,z_1^{\\pm1},\\ldots,z_r^{\\pm1}]$. This is relative structure over $A$, rather than structure over an algebraic closure of its residue field.",
+   "uses": [
+    "lem-sfb-split-reductive-local-gauss-atlas"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://math.stanford.edu/~conrad/papers/luminysga3smf.pdf",
+    "place": "Conrad, Reductive group schemes, Definition 5.1.1 and discussion (printed p.136), Corollary 5.1.11 (pp.142-143), Theorem 5.1.13 (pp.143-144); finite translated-cell cover is the agent-formulated consequence of the relative open cell and geometric Bruhat charts. For the field charts see Milne, Algebraic Groups (2017), Theorems 21.73 and 21.84 (printed pp.447 and 451). Original Conrad PDF WANTED locally; no Stacks tag supplies relative reductive-group structure."
+   }
+  },
+  {
+   "text": "Put $B=A/J$ and let $h:\\operatorname{Spec}B\\to H$ be an $A$-point. Every maximal ideal of $B$ pulls back to a maximal ideal of $A$, so $B$ is nonzero local with unique maximal ideal $\\mathfrak m/J$. Choose a chart image $U_i$ containing the image of this closed point under $h$. The open $h^{-1}(U_i)$ contains the closed point of $\\operatorname{Spec}B$, hence is the whole spectrum: it contains a basic open $D(b)$ containing that point; then $b\\notin\\mathfrak m/J$, so $b$ is a unit and $D(b)=\\operatorname{Spec}B$. By [def-weil-open-immersion], $U_i$ is the open subscheme isomorphic to $V$. Restricting the structure-sheaf map of $h$ to this open gives a morphism $\\widetilde h:\\operatorname{Spec}B\\to V$ with $\\theta_i\\widetilde h=h$. This is the explicit open-factorization argument in the proof of Stacks 01J6, not a lifting assertion from smoothness.",
+   "uses": [
+    "def-weil-open-immersion"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Tag 01J6, lemma-morphism-from-spec-local-ring, last paragraph of proof; elementary application to the chart atlas, followed by explicit quotient-coordinate lifting."
+   }
+  },
+  {
+   "text": "By [def-weil-affine-spectrum], $\\widetilde h$ corresponds to an $A$-algebra map from the displayed Laurent-polynomial algebra to $B$. Write $\\bar a_j\\in B$ for the images of $x_j$ and $\\bar u_l\\in B^\\times$ for the images of $z_l$. Choose lifts $a_j,u_l\\in A$, and lift $\\bar u_l^{-1}$ to $v_l\\in A$. Then $u_lv_l=1+j_l$ for some $j_l\\in J\\subseteq\\mathfrak m$. The element $1+j_l$ is outside $\\mathfrak m$ (otherwise subtract $j_l$), hence is a unit in the local ring $A$. Thus $u_l$ is a unit with inverse $v_l(1+j_l)^{-1}$. Sending $x_j\\mapsto a_j$, $z_l\\mapsto u_l$ and $z_l^{-1}\\mapsto u_l^{-1}$ defines an $A$-algebra map to $A$: all relations $z_lz_l^{-1}=1$ hold. Its composite with $A\\to B$ is exactly the map of $\\widetilde h$, on constants and on every generator.",
+   "uses": [
+    "def-weil-affine-spectrum"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Tag 01J6, lemma-morphism-from-spec-local-ring, last paragraph of proof; elementary application to the chart atlas, followed by explicit quotient-coordinate lifting."
+   }
+  },
+  {
+   "text": "Contravariant functoriality of the affine spectrum [def-weil-affine-spectrum] turns this algebra map into an $A$-point $v:\\operatorname{Spec}A\\to V$ reducing exactly to $\\widetilde h$. Therefore $g=\\theta_i v\\in H(A)$ reduces to $\\theta_i\\widetilde h=h$. Since $h$ was arbitrary, the reduction homomorphism is surjective. With no polynomial or torus coordinates the same construction uses the unique map on the empty list; $J=0$, $J=\\mathfrak m$, and $H=1$ are included.",
+   "uses": [
+    "def-weil-affine-spectrum"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Tag 01J6, lemma-morphism-from-spec-local-ring, last paragraph of proof; elementary application to the chart atlas, followed by explicit quotient-coordinate lifting."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-split-reductive-local-gauss-atlas",
+  "def-weil-open-immersion",
+  "def-weil-affine-spectrum"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/schemes.tex",
+  "place": "Tag 01J6 proof, combined with the relative toric atlas; explicit coordinate argument extending the approximation input of the original source, Theorem 4.1 proof."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For a split reductive group scheme over a local ring the homomorphism of points to points over any local quotient ring is surjective",
+   "results": "{\"t\": \"2026-10-24T03:15:44Z\", \"tool\": \"leanfinder\", \"query\": \"For a split reductive group scheme over a local ring the homomorphism of points to points over any local quotient ring is surjective\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.pointsPi_surjective\", \"AlgebraicGeometry.Scheme.residue_surjective\", \"surjective_of_isLocalization_isMaximal\", \"AlgebraicGeometry.pointsPi_surjective_of_isAffine\", \"Ideal.surjectiveOnStalks_residueField\", \"AlgebraicGeometry.specTargetImageRingHom_surjective\", \"PrimeSpectrum.piLocalizationToMaximal_surjective\", \"IsLocalization.surjective_piRingHom_algebraMap_comp_piEvalRingHom\"], \"digest\": \"4c0821a4c6f9f741\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: quotient maps of rings, points of products of rings and units of a valuation ring are not the reduction-surjectivity theorem for arbitrary split reductive group schemes."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Integral points of a split reductive group over a DVR surject onto points modulo every power of the uniformizer",
+   "results": "{\"t\": \"2026-10-24T03:15:42Z\", \"tool\": \"leansearch\", \"query\": \"Integral points of a split reductive group over a DVR surject onto points modulo every power of the uniformizer\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"ValuationSubring.surjective_unitGroupToResidueFieldUnits\", \"Valuation.IsUniformizer.not_isUnit\", \"Valuation.IsUniformizer\", \"Irreducible.maximalIdeal_pow_eq_setOf_le_v_coe_pow\", \"Valuation.exists_pow_Uniformizer\", \"Valuation.Integers.maximalIdeal_pow_eq_setOf_le_v_algebraMap_pow\", \"Valuation.Uniformizer.val\", \"IsDedekindDomainDvr.isIntegrallyClosed\"], \"digest\": \"8681f26fc47795ea\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: quotient maps of rings, points of products of rings and units of a valuation ring are not the reduction-surjectivity theorem for arbitrary split reductive group schemes."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsLocalRing\", \"GeneralLinearGroup\", Function.Surjective",
+   "results": "{\"t\": \"2026-10-24T03:15:42Z\", \"tool\": \"loogle\", \"query\": \"\\\"IsLocalRing\\\", \\\"GeneralLinearGroup\\\", Function.Surjective\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: quotient maps of rings, points of products of rings and units of a valuation ring are not the reduction-surjectivity theorem for arbitrary split reductive group schemes."
+  },
+  {
+   "tool": "grep",
+   "query": "reductive|Chevalley|congruence.*surject",
+   "results": "{\"t\": \"2026-10-24T03:15:42Z\", \"tool\": \"grep\", \"query\": \"reductive|Chevalley|congruence.*surject\", \"sub\": \"\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/Morphisms/UniversallyOpen.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation.lean\", \"Mathlib/RingTheory/Spectrum/Prime/ChevalleyComplexity.lean\", \"Mathlib/RingTheory/Spectrum/Prime/ChevalleyComplexity.lean\", \"Mathlib/RingTheory/Spectrum/Prime/ChevalleyComplexity.lean\", \"Mathlib/RingTheory/Spectrum/Prime/ChevalleyComplexity.lean\"], \"digest\": \"4984cd6a56bb3ed5\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: quotient maps of rings, points of products of rings and units of a valuation ring are not the reduction-surjectivity theorem for arbitrary split reductive group schemes."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Reduction modulo an ideal in the maximal ideal is surjective on points of a Chevalley group over any commutative local ring",
+   "results": "{\"t\": \"2026-10-24T03:16:17Z\", \"tool\": \"leanfinder\", \"query\": \"Reduction modulo an ideal in the maximal ideal is surjective on points of a Chevalley group over any commutative local ring\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Ideal.toCotangent_surjective\", \"IsLocalRing.residue_surjective\", \"AdicCompletion.evalOneₐ_surjective\", \"AdicCompletion.surjective_evalₐ\", \"Ideal.algebraMap_residueField_surjective\", \"Ideal.Quotient.stabilizerHom_surjective_of_profinite\", \"PrimeSpectrum.piLocalizationToMaximal_surjective\", \"IsLocalization.surjective_quotientMap_of_maximal_of_localization\"], \"digest\": \"415b8505991b2d2d\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: quotient maps of rings, points of products of rings and units of a valuation ring are not the reduction-surjectivity theorem for arbitrary split reductive group schemes."
+  },
+  {
+   "tool": "grep",
+   "query": "reductive|Chevalley|congruence.*surject",
+   "results": "{\"t\": \"2026-10-24T03:38:27Z\", \"tool\": \"grep\", \"query\": \"reductive|Chevalley|congruence.*surject\", \"sub\": \"\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/Algebra/Lie/AdjointAction/JordanChevalley.lean\", \"Mathlib/Algebra/Lie/AdjointAction/JordanChevalley.lean\", \"Mathlib/Algebra/Lie/AdjointAction/JordanChevalley.lean\", \"Mathlib/Algebra/Lie/Basis/Basic.lean\", \"Mathlib/Algebra/Lie/Basis/Basic.lean\", \"Mathlib/Algebra/Lie/Basis/Basic.lean\", \"Mathlib/Algebra/Lie/CartanCriterion.lean\", \"Mathlib/Algebra/Lie/CartanCriterion.lean\"], \"digest\": \"850b9479b6de2cb7\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: residue-ring surjectivity, square-zero etale lifting, valuation-ring units and the special-linear bottom row do not state reduction-surjectivity for arbitrary split reductive groups."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The reduction map on points of a split reductive group over a local ring is surjective modulo any proper ideal",
+   "results": "{\"t\": \"2026-10-24T03:38:28Z\", \"tool\": \"leansearch\", \"query\": \"The reduction map on points of a split reductive group over a local ring is surjective modulo any proper ideal\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"LinearMap.reduceModIdeal\", \"IsLocalRing.residue_surjective\", \"LinearMap.reduceModIdeal_apply\", \"WeierstrassCurve.reduction\", \"IsLocalRing.map_mkQ_eq_top\", \"AlgebraicGeometry.Scheme.residue_surjective\", \"IsLocalRing.residue\", \"Ideal.algebraMap_residueField_surjective\"], \"digest\": \"b8cd26cc23f7f7ce\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: residue-ring surjectivity, square-zero etale lifting, valuation-ring units and the special-linear bottom row do not state reduction-surjectivity for arbitrary split reductive groups."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsLocalRing\", \"Surjective\", \"GeneralLinearGroup\"",
+   "results": "{\"t\": \"2026-10-24T03:38:28Z\", \"tool\": \"loogle\", \"query\": \"\\\"IsLocalRing\\\", \\\"Surjective\\\", \\\"GeneralLinearGroup\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: residue-ring surjectivity, square-zero etale lifting, valuation-ring units and the special-linear bottom row do not state reduction-surjectivity for arbitrary split reductive groups."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Surjectivity of the reduction homomorphism for Chevalley groups over local rings",
+   "results": "{\"t\": \"2026-10-24T03:38:31Z\", \"tool\": \"leanfinder\", \"query\": \"Surjectivity of the reduction homomorphism for Chevalley groups over local rings\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"IsLocalRing.residue_surjective\", \"ModularGroup.bottom_row_surj\", \"ValuationSubring.surjective_unitGroupToResidueFieldUnits\", \"IsLocalization.surjective_piRingHom_algebraMap_comp_piEvalRingHom\", \"IsLocalRing.exists_surjective_of_not_isLocalRing\", \"ClassGroup.mkMMem_surjective\", \"PerfectClosure.mk_surjective\", \"Algebra.SubmersivePresentation.cotangentComplexAux_surjective\"], \"digest\": \"b5677bb2dfd737ad\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: residue-ring surjectivity, square-zero etale lifting, valuation-ring units and the special-linear bottom row do not state reduction-surjectivity for arbitrary split reductive groups."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Points of a split reductive group scheme over a local ring lift from a quotient by an ideal in the maximal ideal",
+   "results": "{\"t\": \"2026-10-24T03:38:32Z\", \"tool\": \"leanfinder\", \"query\": \"Points of a split reductive group scheme over a local ring lift from a quotient by an ideal in the maximal ideal\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"StandardEtalePair.existsUnique_hasMap_of_hasMap_quotient_of_sq_eq_bot\", \"AlgebraicGeometry.SpecToEquivOfLocalRing_apply_fst\", \"Algebra.FormallyUnramified.isField_quotient_map_maximalIdeal\", \"HenselianLocalRing\", \"AlgebraicGeometry.Scheme.residue_surjective\", \"Algebra.instFormallyUnramifiedResidueField\", \"AlgebraicGeometry.Scheme.fromSpecResidueField_apply\", \"IsLocalRing.PrimeSpectrum.comap_residue\"], \"digest\": \"092b6579606ae9d7\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: residue-ring surjectivity, square-zero etale lifting, valuation-ring units and the special-linear bottom row do not state reduction-surjectivity for arbitrary split reductive groups."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-split-reductive-dvr-cartan-decomposition",
+  "date": "2026-10-24",
+  "group": "Q143"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Haboush symmetric-power lifting for a trivial quotient representation. Supporting representation-theoretic input: Steinberg endomorphisms detect a nonzero fixed vector. Supporting Self-duality of rho section modules at characteristic-dependent weights. Supporting input: Positive-characteristic simplicity step, using irreducibility of the Steinberg induced module rather than assuming self-duality. Numerical input to the dimension comparison: Weyl dimension of the induced module. Supporting Kempf vanishing for dominant flag line bundles. Positive-characteristic Andersen–Haboush argument: trivial pushforward of M_((p^r-1)rho), before the Serre twisting calculation. Supporting input: Lemma 2.3, second assertion, and Lemma 2.1, printed pp.153--155: H^0(u,V(lambda))=K v_lambda for p-restricted dominant lambda. With roots positive in Lie(B), V(lambda)=Gamma(M_{-w0 lambda}). Supporting input: Simple-root distributions and infinitesimal subalgebra calculus. Supporting input: pinning-compatible integral-to-geometric distribution comparison, with all positive root divided powers, before simple-root generation. Integral-root-model prerequisite before the comparison: integral Chevalley construction and a positive-root coordinate chart; integral matrix-closure construction: the big cell and its Weyl translates, before identifying the special fibre. Supporting input: Integral closure atlas, exhaustion of each special fibre: exclude extra components using the generic and special identity-component big-cell dimensions. Supporting input: Lemma 3.7 (first assertion, the Iwahori--Matsumoto maximal-boundedness statement) and its application in Proposition 4.3, second paragraph, printed pp.7-8; Cartan double-coset input used to prove the maximal-boundedness prerequisite, before the torus-powers argument. Supporting input: Theorem 4.1, proof, printed p.7: Bruhat cells and approximation by integral root-group coordinates. Agent strengthening of that approximation input to all split reductive points over a local quotient; proof plan retained in report.md, with no proof stored in this unsplit node.",
+   "via": [
+    "lem-sfb-split-reductive-dvr-cartan-decomposition",
+    "lem-sfb-split-reductive-integral-maximal-bounded",
+    "lem-sfb-quasi-reductive-special-connectedness",
+    "lem-sfb-integral-chevalley-weyl-atlas",
+    "lem-sfb-chevalley-integral-root-model",
+    "lem-sfb-borel-kostant-distribution-comparison",
+    "lem-sfb-borel-simple-root-distribution-calculus",
+    "lem-sfb-restricted-induced-infinitesimal-invariants",
+    "lem-sfb-flag-frobenius-rho-pushforward",
+    "lem-sfb-dominant-flag-line-kempf-vanishing",
+    "lem-sfb-induced-weyl-dimension-formula",
+    "lem-sfb-steinberg-induced-module-irreducible",
+    "lem-sfb-rho-section-self-duality",
+    "lem-sfb-steinberg-endomorphism-detection",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-split-reductive-local-quotient-points",
+  "worker": "stage1",
+  "summary": "Kept the full local-quotient statement and all original metadata. Isolated the relative Laurent-polynomial atlas as one structural prerequisite, avoiding use of algebraically-closed-field Bruhat nodes over A. Proved chart factorization and unit lifting explicitly; no henselianity, completeness or nilpotence is used. Recorded all actual Mathlib searches, source and duplicate review, and citation extracts.",
+  "blueprint": "Supports the original from.place approximation input to Cartan decomposition. Read latest main-20261024 unit sk-thm-sf-ctf-stability and direct-image proof (3). This is a descendant structural tool on the already recorded alteration route, not a replacement for a unit step. blueprint_refs ancestor prints None; retained the inherited null ancestor and exact via chain. Whole-blueprint searches Bruhat, split reductive, root subgroup, Gauss and toric affine atlas found no equivalent blueprint node.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q107-78ba27457",
+  "group": "Q107",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q107-78ba27457 (reviewer sub-agent of L); spot-checked: Stage 1, one commit, no repair note. I read the item, the new node lem-sfb-split-reductive-local-gauss-atlas, every cited definition statement and the parent Cartan node. The item statement is byte-identical to the base copy in the Q143 snapshot; only the proof fields and split_report changed. The atlas statement is true: Spec A is local, hence connected, and S is split, so the roots are constant and the root lines are free. So (H,S) is split in the sense of Conrad Def 5.1.1. Conrad Cor 5.1.11 gives Weyl representatives in N(S)(A). Conrad Thm 5.1.13 gives the open cell U^- x S x U^+, isomorphic to affine space times G_m^r. Its translates by the Weyl representatives cover every geometric fibre, because they are preimages of the opposite big cells of G/B at the points wB. I tested H=1, H=G_m^r, SL2 (the a-invertible and c-invertible charts) and GLn. The atlas statement contains no J, quotient or lifting, so it is not a restatement of the item. It is self-contained and statement-only, and each notion cites its definition node. Conrad is not SGA and the route-lock regex does not match. No duplicate: integral-chevalley-weyl-atlas is a specific Z-model built from a Chevalley lattice; the big-cell, Bruhat and Luna nodes are over an algebraically closed field; the torus-lift and neutral-lift nodes are over complete or henselian bases. Item steps: step 1 applies the atlas with matching hypotheses. Step 2 works because an open set containing the closed point of local Spec A/J is the whole spectrum, so the point factors through the open subscheme given by def-weil-open-immersion. Step 3 lifts coordinates; units lift because uv=1+j with j in m, which is a unit. Step 4 gives the lift by Spec functoriality. Edge cases J=0, J=m, Z_(p) with J=(p), k[eps] and empty variable lists all go through. No henselian or nilpotence hypothesis is used. Advisory: the item's source.place, unchanged from the base, still says 'no proof stored in this unsplit node'. tool_uses empty; no changes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.GroupScheme.SplitReductiveLocalQuotientPoints",
+  "declaration": "AlgebraicGeometry.splitReductive_local_quotient_points",
+  "file": "lean/Sheaf/AlgebraicGeometry/GroupScheme/SplitReductiveLocalQuotientPoints.lean",
+  "statement": "theorem splitReductive_local_quotient_points (A : Type u) [CommRing A] [IsNoetherianRing A] [IsLocalRing A] (J : Ideal A) (hJ : J ≤ IsLocalRing.maximalIdeal A) (H S : Grp (Over (Spec (.of A)))) [Smooth H.X.hom] [IsAffine H.X.left] [LocallyOfFiniteType H.X.hom] [QuasiCompact H.X.hom] (i : S ⟶ H) [IsClosedImmersion i.hom.hom.left] (r : ℕ) (e : S ≅ RingGroupSchemes.splitTorus A r) (hred : ∀ (F : Type u) [Field F] [IsAlgClosed F] (f : A →+* F), ReductiveTorusCentralizer.IsReductive ((Over.pullback (Spec.map (CommRingCat.ofHom f))).mapGrp.obj H)) (hmax : ∀ (F : Type u) [Field F] [IsAlgClosed F] (f : A →+* F), ReductiveTorusCentralizer.IsMaximalTorus ((Over.pullback (Spec.map (CommRingCat.ofHom f))).mapGrp.map i)) : Function.Surjective (fun g : 𝟙_ (Over (Spec (.of A))) ⟶ H.X ↦ toUnit (Over.mk (Spec.map (CommRingCat.ofHom (Ideal.Quotient.mk J)))) ≫ g)",
+  "branch": "sheaf-dag",
+  "by": "Q03",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-45a32c92a",
+  "group": "Q03",
+  "result": "pass",
+  "note": "Clause-by-clause check of item Lean against node: Noetherian local A (IsLocalRing gives nonzero), J ≤ maximalIdeal, H,S : Grp(Over Spec A), smooth/affine/LOFT+QC, closed-immersion group morphism i, e : S ≅ RingGroupSchemes.splitTorus A r (landed Q74), hred/hmax over all alg-closed F:Type u and A→+*F using landed Q23 IsReductive/IsMaximalTorus on actual pulled-back group/morphism; conclusion is surjectivity of g ↦ toUnit(Over.mk Spec(mk J)) ≫ g, canonical reduction by toUnit_left. Hypotheses identical to landed proof-dep splitReductive_local_gauss_atlas. Node diff vs live: lean + 2 landed def stmt_deps only; statement verbatim; Q11 parallel S2 was RETURNed, no race. Edge cases J=0, J=m, r=0, H=1, non-nilpotent J ok; Type u test fields not a real restriction. Sorry-only, no defs, docstrings with source/blueprint/4-step plan, imports correct. No file changed, no compile. No findings."
+ }
+}

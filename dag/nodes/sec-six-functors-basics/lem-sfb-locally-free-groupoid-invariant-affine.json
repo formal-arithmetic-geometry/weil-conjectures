@@ -1,0 +1,242 @@
+{
+ "id": "lem-sfb-locally-free-groupoid-invariant-affine",
+ "kind": "statement",
+ "title": "Invariant affine shrinking for a finite locally free groupoid",
+ "statement": "Let $(U,R,s,t,e,i,c)$ be a groupoid scheme [def-a1-groupoid-scheme]. Assume $s,t$ are finite locally free [def-pc-finite-locally-free]. For $x\\in U$ write $O(x)=t(s^{-1}(\\{x\\}))$ for its orbit; arrows can be compared and composed after extending their residue fields to a common field. Let $x\\in U$ and suppose $O(x)$ is contained in an affine open subscheme of $U$. Then there is an affine open $W\\subseteq U$ containing $O(x)$ and satisfying $s^{-1}(W)=t^{-1}(W)$ as open subschemes of $R$. No Noetherian, separatedness or dimension hypothesis on $U$ is imposed.",
+ "source": {
+  "document": "literature/stacks-project/groupoids.tex",
+  "place": "Tag 03JE (lemma-find-invariant-affine), statement."
+ },
+ "stmt_deps": [
+  "def-a1-groupoid-scheme",
+  "def-pc-finite-locally-free"
+ ],
+ "proof": [
+  {
+   "text": "Write O(y)=t(s⁻¹({y})). The identity and inverse laws of [def-a1-groupoid-scheme] make the arrow relation reflexive and symmetric. Given arrows r₁:y→z and r₂:z→v, apply [lem-weil-pbc-scheme-pullback-compatible-point], namely Scheme.Pullback.exists_preimage_pullback, to (r₂,r₁) in R×_{s,U,t}R. The composition source and target equations evaluate at this point to give an arrow y→v. Thus the relation is transitive. By [def-pc-finite-locally-free], s is finite, and [lem-weil-pbc-finite-closed-map-finite-fibres] makes O(x) finite. The identity puts x in O(x).",
+   "uses": [
+    "def-a1-groupoid-scheme",
+    "def-pc-finite-locally-free",
+    "lem-weil-pbc-scheme-pullback-compatible-point",
+    "lem-weil-pbc-finite-closed-map-finite-fibres"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/groupoids.tex",
+    "place": "Tag 03JE (lemma-find-invariant-affine), proof, first paragraph and orbit equivalence"
+   }
+  },
+  {
+   "text": "Define H(E)=U\\s(t⁻¹(U\\E)) for each open E. It is open because t is continuous and s is closed by [lem-weil-pbc-finite-closed-map-finite-fibres]. Membership means precisely that every arrow starting at y ends in E. The identity gives H(E)⊆E. The relation's symmetry and transitivity from step 1 give s⁻¹(H(E))=t⁻¹(H(E)). Transitivity also gives O(x)⊆H(E) whenever O(x)⊆E. Choose the affine open A of the hypothesis and set B=H(A). Then O(x)⊆B⊆A and B is invariant.",
+   "uses": [
+    "def-a1-groupoid-scheme",
+    "lem-weil-pbc-finite-closed-map-finite-fibres"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/groupoids.tex",
+    "place": "Tag 03JE (lemma-find-invariant-affine), proof, second paragraph, invariant open inside the chosen affine"
+   }
+  },
+  {
+   "text": "Use [def-pc-scheme] and [def-weil-affine-spectrum] to write A as Spec Γ(A). In the private helper finite_subset_basicOpen, form the ideal J of sections f whose basic open D_A(f) is contained in B. It is an ideal: D(0) is empty, D(f+g)⊆D(f)∪D(g), and D(af)=D(a)∩D(f). Pull the finite orbit back along the injective open immersion hA.fromSpec, obtaining a finite nonempty family T of prime ideals. For each q in T, [lem-weil-pbc-spec-localization-away-basic-open] (IsAffineOpen.exists_basicOpen_le) gives f in J with f outside q, so J is contained in none of these primes. Apply [lem-weil-pbc-prime-avoidance] (Ideal.subset_union_prime_finite, with both exceptional indices equal to a chosen member of T). Its contrapositive supplies f in J outside every q in T. IsAffineOpen.fromSpec_preimage_basicOpen then yields O(x)⊆D_A(f)⊆B.",
+   "uses": [
+    "def-pc-scheme",
+    "def-weil-affine-spectrum",
+    "lem-weil-pbc-spec-localization-away-basic-open",
+    "lem-weil-pbc-prime-avoidance"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/groupoids.tex",
+    "place": "Tag 03JE (lemma-find-invariant-affine), proof, choice of f by Algebra Tag 00DS (lemma-silly)"
+   }
+  },
+  {
+   "text": "Set W=H(D_A(f)). Step 2 gives O(x)⊆W⊆D_A(f)⊆B and s⁻¹(W)=t⁻¹(W). By the chosen orientation of H, W is already the complement of s(t⁻¹(U\\D_A(f))). Intersecting it with B leaves W unchanged, since W⊆B. This is the exact complement-image formula needed by the norm-locus lemma; no inverse-image exchange remains to prove.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/groupoids.tex",
+    "place": "Tag 03JE (lemma-find-invariant-affine), proof, orbit description of the norm nonvanishing locus"
+   }
+  },
+  {
+   "text": "Apply [lem-pd-descent-norm-locus-affine] with its $V=U$, its affine open $A$ equal to ours, its open $W=B$, its section $f$ equal to ours, and its output open $U=W$. Its hypotheses hold: $s$ is finite, flat and locally of finite presentation by [def-pc-finite-locally-free]; if $s(r)\\in B$ then $t(r)\\in B\\subseteq A$ by invariance, giving $s^{-1}(B)\\subseteq t^{-1}(A)$; step 3 gives $D_A(f)\\subseteq B$; step 4 gives both $W\\subseteq D_A(f)$ and the required complement-image formula. The lemma therefore makes $W$ affine. Its norm is formed on $B$ and restricted to the affine principal open $D_A(f)$; neither affineness of $B$ nor globally constant degree is needed. Finally step 4 gives $O(x)\\subseteq W$ and invariance. Equal inverse-image open subsets determine equal open subschemes, as required.",
+   "uses": [
+    "def-pc-finite-locally-free",
+    "lem-pd-descent-norm-locus-affine"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/groupoids.tex",
+    "place": "Tag 03JE (lemma-find-invariant-affine), proof, final norm argument and affineness conclusion"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-a1-groupoid-scheme",
+  "def-pc-finite-locally-free",
+  "def-pc-scheme",
+  "def-weil-affine-spectrum",
+  "lem-pd-descent-norm-locus-affine",
+  "lem-weil-pbc-finite-closed-map-finite-fibres",
+  "lem-weil-pbc-prime-avoidance",
+  "lem-weil-pbc-scheme-pullback-compatible-point",
+  "lem-weil-pbc-spec-localization-away-basic-open"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/groupoids.tex",
+  "place": "Tag 03JE (lemma-find-invariant-affine), proof; point composition uses the exact Mathlib pullback-point leaf, and H is written in the source-image orientation required by the norm-locus theorem."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A groupoid scheme with finite locally free source and target admits an invariant affine open neighbourhood of any orbit contained in an affine open",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.h𝒰S\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"∀ {I : Type u} [inst : CategoryTheory.Category.{u, u} I] {S X : AlgebraicGeometry.Scheme}\\n  {D : CategoryTheory.Functor I AlgebraicGeometry.Scheme} {t : D ⟶ (CategoryTheory.Functor.const I).obj S} {f : X ⟶ S}\\n  (self : AlgebraicGeometry.ExistsHomHomCompEqCompAux D t f) (i : self.𝒰S.I₀), AlgebraicGeo\", \"doc\": \"Given a category $\\\\mathcal{I}$, a diagram $D:\\\\mathcal{I}\\\\to\\\\text{Sch}$ of schemes, a natural transformation from $D$ to the constant diagram at $S$, and a morphism $X\\\\to S$, every element of the zerot\"}\n  {\"name\": \"AlgebraicGeometry.exists_isAffineOpen_mem_and_subset\", \"module\": \"Mathlib/AlgebraicGeometry/AffineScheme\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} {x : ↥X} {U : X.Opens},\\n  x ∈ U → ∃ W, AlgebraicGeometry.IsAffineOpen W ∧ x ∈ W ∧ W.carrier ⊆ ↑U\", \"doc\": \"For any scheme $X$, point $x \\\\in X$, and open subset $U \\\\subseteq X$ containing $x$, there exists an affine open subset $W \\\\subseteq X$ such that $x \\\\in W$ and $W \\\\subseteq U$.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.affineOpenCover_X\", \"module\": \"Mathlib/AlgebraicGeometry/Cover/Open\", \"type\": \"∀ (X : AlgebraicGeometry.Scheme) (x : ↑X.toTopCat), X.affineOpenCover.X x = Classical.choose ⋯\", \"doc\": \"For any scheme $X$ and any point $x$ in its underlying topological space, the $X$-component of the affine open cover at $x$ is the affine open neighborhood selected by the classical choice function, e\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.exists_affine_mem_range_and_range_subset\", \"module\": \"Mathlib/AlgebraicGeometry/OpenImmersion\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} {x : ↥X} {U : X.Opens},\\n  x ∈ U →\\n    ∃ R f,\\n      AlgebraicGeometry.IsOpenImmersion f ∧\\n        x ∈ Set.range ⇑(CategoryTheory.ConcreteCategory.hom f.base) ∧\\n          Set.range ⇑(CategoryTheory.ConcreteCategory.hom f.base) ⊆ ↑U\", \"doc\": \"For any point $x$ in an open subset $U$ of a scheme $X$, there exists an affine scheme $\\\\operatorname{Spec}(R)$ and an open immersion $f: \\\\operatorname{Spec}(R) \\\\to X$ such that $x$ lies in the image \"}\n  {\"name\": \"AlgebraicGeometry.instIsAffineXSchemeAffineCover\", \"module\": \"Mathlib/AlgebraicGeometry/FunctionField\", \"type\": \"∀ (X : AlgebraicGeometry.Scheme) (x : ↥X), AlgebraicGeometry.IsAffine (X.affineCover.X x)\", \"doc\": \"Each element of the affine open cover of a scheme is an affine scheme.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.affineOpenCover_idx\", \"module\": \"Mathlib/AlgebraicGeometry/Cover/Open\", \"type\": \"∀ (X : AlgebraicGeometry.Scheme) (x : ↥X), X.affineOpenCover.idx x = ⋯.choose\", \"doc\": \"For any scheme $X$ and any point $x \\\\in X$, the index function of the affine open cover assigns to $x$ an index in the indexing set corresponding to an affine open subscheme containing $x$. This ensur\"}\n  {\"name\": \"AlgebraicGeometry.reduce_to_affine_nbhd\", \"module\": \"Mathlib/AlgebraicGeometry/Properties\", \"type\": \"∀ (P : (X : AlgebraicGeometry.Scheme) → ↥X → Prop),\\n  (∀ (R : CommRingCat) (x : ↥(AlgebraicGeometry.Spec R)), P (AlgebraicGeometry.Spec R) x) →\\n    (∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.IsOpenImmersion f] (x : ↥X),\\n        P X x → P Y ((CategoryTheory.ConcreteCategory.ho\", \"doc\": \"If a property $ P $ holds for all affine schemes $ \\\\operatorname{Spec}(R) $ at every point, and if $ P $ is preserved under open immersions (i.e., whenever $ P $ holds for a point $ x $ in a scheme $ \"}\n  {\"name\": \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.𝒰D\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"{I : Type u} →\\n  [inst : CategoryTheory.Category.{u, u} I] →\\n    {S X : AlgebraicGeometry.Scheme} →\\n      {D : CategoryTheory.Functor I AlgebraicGeometry.Scheme} →\\n        {t : D ⟶ (CategoryTheory.Functor.const I).obj S} →\\n          {f : X ⟶ S} →\\n            [inst_1 : ∀ (i : I), CompactSpace ↥(D.obj\", \"doc\": \"The open cover of the diagram object $ D(i') $ formed by refining the open cover $ \\\\mathcal{U}_{D₀} $ with affine open immersions, ensuring each point lies in an affine open subscheme and compatibilit\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: returned signatures do not state this lemma or a one-line generalization; scheme affine-open and immersion facts alone do not supply the groupoid construction or this affineness criterion"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Norm construction shrinks an affine neighbourhood of a finite locally free scheme groupoid orbit to an invariant affine open",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.local_affine\", \"module\": \"Mathlib.AlgebraicGeometry.Scheme\", \"type\": \"∀ (self : AlgebraicGeometry.Scheme) (x : ↑self.toTopCat),\\n  ∃ U R, Nonempty (self.restrict ⋯ ≅ AlgebraicGeometry.Spec.toLocallyRingedSpace.obj (Opposite.op R))\", \"doc\": \"For any scheme $X$ and any point $x$ in its underlying topological space, there exists an open neighborhood $U$ of $x$ and a commutative ring $R$ such that the restriction of $X$ to $U$ is isomorphic \"}\n  {\"name\": \"AlgebraicGeometry.IsAffineOpen\", \"module\": \"Mathlib.AlgebraicGeometry.AffineScheme\", \"type\": \"{X : Scheme} (U : X.Opens) : Prop\", \"doc\": \"A predicate indicating that an open subset $ U $ of a scheme $ X $ is affine, meaning the restricted scheme structure on $ U $ is affine.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.affineOpens\", \"module\": \"Mathlib.AlgebraicGeometry.AffineScheme\", \"type\": \"(X : Scheme) : Set X.Opens\", \"doc\": \"For a scheme $ X $, the set of affine open subsets of $ X $, i.e., open subsets $ U $ for which the restricted scheme structure is affine.\"}\n  {\"name\": \"AlgebraicGeometry.reduce_to_affine_nbhd\", \"module\": \"Mathlib.AlgebraicGeometry.Properties\", \"type\": \"(P : ∀ (X : Scheme) (_ : X), Prop) (h₁ : ∀ R x, P (Spec R) x)\\n  (h₂ : ∀ {X Y} (f : X ⟶ Y) [IsOpenImmersion f] (x : X), P X x → P Y (f x)) : ∀ (X : Scheme) (x : X), P X x\", \"doc\": \"If a property $ P $ holds for all affine schemes $ \\\\operatorname{Spec}(R) $ at every point, and if $ P $ is preserved under open immersions (i.e., whenever $ P $ holds for a point $ x $ in a scheme $ \"}\n  {\"name\": \"AlgebraicGeometry.Scheme.affineBasicOpen\", \"module\": \"Mathlib.AlgebraicGeometry.AffineScheme\", \"type\": \"(X : Scheme) {U : X.affineOpens} (f : Γ(X, U)) : X.affineOpens\", \"doc\": \"For a scheme $ X $, given an affine open subset $ U $ of $ X $ and a section $ f $ of the structure sheaf $ \\\\mathcal{O}_X $ over $ U $, the basic open subset $ D(f) = \\\\{x \\\\in U \\\\mid f_x \\\\in \\\\mathcal{O\"}\n  {\"name\": \"AlgebraicGeometry.exists_isAffineOpen_mem_and_subset\", \"module\": \"Mathlib.AlgebraicGeometry.AffineScheme\", \"type\": \"{X : Scheme.{u}} {x : X} {U : X.Opens} (hxU : x ∈ U) : ∃ W : X.Opens, IsAffineOpen W ∧ x ∈ W ∧ W.1 ⊆ U\", \"doc\": \"For any scheme $X$, point $x \\\\in X$, and open subset $U \\\\subseteq X$ containing $x$, there exists an affine open subset $W \\\\subseteq X$ such that $x \\\\in W$ and $W \\\\subseteq U$.\"}\n  {\"name\": \"AlgebraicGeometry.IsAffineOpen.instIsAffineToSchemeBasicOpen\", \"module\": \"Mathlib.AlgebraicGeometry.AffineScheme\", \"type\": \"[IsAffine X] (r : Γ(X, ⊤)) : IsAffine (X.basicOpen r)\", \"doc\": \"For any affine scheme $X$ and global section $r$ of its structure sheaf, the basic open subset $X_{\\text{basicOpen}}(r)$ defined by $r$ is also an affine scheme.\"}\n  {\"name\": \"Shrink.instNormedAddCommGroup\", \"module\": \"Mathlib.Analysis.Normed.Module.Shrink\", \"type\": \"[NormedAddCommGroup α] : NormedAddCommGroup (Shrink.{v} α)\", \"doc\": \"For any small type $\\\\alpha$ that is a normed additive commutative group, the type $\\\\mathrm{Shrink}\\\\ \\\\alpha$ is also a normed additive commutative group, with the norm defined by transferring through t\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: returned signatures do not state this lemma or a one-line generalization; scheme affine-open and immersion facts alone do not supply the groupoid construction or this affineness criterion"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Groupoid\", \"IsAffineOpen\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-22",
+   "verdict": "no match: returned signatures do not state this lemma or a one-line generalization; scheme affine-open and immersion facts alone do not supply the groupoid construction or this affineness criterion"
+  },
+  {
+   "tool": "grep",
+   "query": "invariant.*affine|affine.*invariant",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-22",
+   "verdict": "no match: returned signatures do not state this lemma or a one-line generalization; scheme affine-open and immersion facts alone do not supply the groupoid construction or this affineness criterion"
+  },
+  {
+   "tool": "grep",
+   "query": "invariant.*affine|affine.*invariant|GroupoidScheme|IsGroupoidScheme",
+   "results": "{\"t\": \"2026-10-23T09:27:35Z\", \"tool\": \"grep\", \"query\": \"invariant.*affine|affine.*invariant|GroupoidScheme|IsGroupoidScheme\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "An orbit of a finite flat scheme groupoid contained in an affine open admits an invariant affine neighborhood",
+   "results": "{\"t\": \"2026-10-23T09:27:35Z\", \"tool\": \"leansearch\", \"query\": \"An orbit of a finite flat scheme groupoid contained in an affine open admits an invariant affine neighborhood\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.exists_isAffineOpen_mem_and_subset\", \"AlgebraicGeometry.IsAffineOpen\", \"AlgebraicGeometry.Scheme.affineOpens\", \"AlgebraicGeometry.Scheme.exists_affine_mem_range_and_range_subset\", \"AlgebraicGeometry.Flat.flat_appLE\", \"AlgebraicGeometry.Flat.flat_of_affine_subset\", \"AlgebraicGeometry.flat_iff\", \"MulAction.IsFixedBlock.orbit\"], \"digest\": \"77a72e509a552a95\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: affine point-neighbourhood results do not impose groupoid invariance or contain an entire orbit"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Groupoid\", \"IsAffineOpen\"",
+   "results": "{\"t\": \"2026-10-23T09:27:35Z\", \"tool\": \"loogle\", \"query\": \"\\\"Groupoid\\\", \\\"IsAffineOpen\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A finite locally free groupoid scheme has an invariant affine open neighborhood of an orbit contained in an affine open",
+   "results": "{\"t\": \"2026-10-23T09:27:43Z\", \"tool\": \"leanfinder\", \"query\": \"A finite locally free groupoid scheme has an invariant affine open neighborhood of an orbit contained in an affine open\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.exists_isAffineOpen_mem_and_subset\", \"AlgebraicGeometry.Scheme.exists_affine_mem_range_and_range_subset\", \"AlgebraicGeometry.Scheme.affineOpenCover_X\", \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.h𝒰S\", \"AlgebraicGeometry.instIsAffineXSchemeAffineCover\", \"AlgebraicGeometry.Scheme.local_affine\", \"AlgebraicGeometry.Scheme.affineOpenCover_idx\", \"AlgebraicGeometry.Scheme.OpenCover.affineRefinement\"], \"digest\": \"89d6f74dddca170d\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: affine point-neighbourhood results do not impose groupoid invariance or contain an entire orbit"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-finite-groupoid-codimension-one-invariant-affine",
+  "date": "2026-10-22",
+  "group": "NA"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Algebraicity and smoothness of the stack of all nodal curves. Supporting input: Tag 0ADD (lemma-codim-1-point-in-schematic-locus), applied at every point; a locally finite-type space over a field is locally Noetherian and dimension at most one bounds all local dimensions. Supporting input: the invariant affine neighbourhood W in the second paragraph of the proof of Tag 0ADD. Proof of Tag 0ABI: lemma-find-invariant-affine.",
+   "via": [
+    "lem-sfb-finite-groupoid-codimension-one-invariant-affine",
+    "lem-sfb-separated-space-dimension-one-scheme",
+    "lem-sfb-nodal-curve-stack-smooth",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-locally-free-groupoid-invariant-affine",
+  "worker": "stage1",
+  "summary": "Followed Tag 03JE with explicit invariant interiors and prime avoidance. Reused the general norm-locus affineness node instead of duplicating its norm construction or the descent-datum shrinking theorem. No new nodes or statement changes.",
+  "blueprint": "Supporting Tag 03JE in the existing alteration/moduli chain below det-thm-sf-ctf-stability-direct-images, proof (3). Current latest proof (3) was read; the historical supporting chain is retained. The ancestor command returns None because created.item terminates before a blueprint_kind node; existing from.node=null and the explicit place/via are retained.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-common-extension-fields",
+    "why": "Field amalgamation composes arrows with a common underlying endpoint; generic field tool, not replacement of the unit route."
+   },
+   {
+    "node": "lem-pd-descent-norm-locus-affine",
+    "why": "Generic norm-locus affineness criterion for arbitrary scheme morphisms, applied to the groupoid shrinking; no norm construction in this unit."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pd-descent-norm-locus-affine"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-NV-619400a3b",
+  "group": "NV",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NV-619400a3b (reviewer sub-agent of L); spot-checked: I read the whole delivery against Stacks groupoids.tex Tag 03JE (lemma-find-invariant-affine). It has no new nodes, and the item statement is byte-identical to live and side-live (both still unsplit, no repair note). The item matches the source hypothesis by hypothesis: an absolute groupoid, s,t finite locally free, O(x) inside an affine open; the conclusion asks for an affine invariant W containing O(x), which is equivalent because an invariant open set containing x contains O(x). No target is weakened and no SGA is used. Step 1: reflexivity and symmetry come from e and i; transitivity composes field-valued arrows over a common field from lem-weil-common-extension-fields, and the finite fibre uses clause (2) of lem-weil-pbc-finite-closed-map-finite-fibres (def-pc-finite-locally-free includes finite). Step 2: H(E)=U\\t(s^-1(U\\E)) is the source's W'; it is open by clause (1) applied to t, and I checked the direction of y in H(E) iff O(y) contained in E. Step 3: Tag 00DS through the basis clause (i) of lem-weil-pbc-spec-localization-away-basic-open and lem-weil-pbc-prime-avoidance; the prime avoidance is applied to a finite nonempty family of primes, and D(f) is contained in B. Step 4: inversion swaps t(s^-1 Z) and s(t^-1 Z), which gives the complement formula. Step 5: lem-pd-descent-norm-locus-affine with V=U, A=A, W=B, U=W; its hypotheses are checked (s^-1(B) contained in t^-1(A) by invariance), and I checked the criterion itself: the norm is nonvanishing exactly on that set, which is a basic open of the affine D(f); empty fibres give norm 1. No affine intersections, Noetherian, separatedness or constant-rank hypotheses are used. Duplicate search (03JE / invariant affine): the pd descent-datum shrinking nodes and the parent codimension-one node are narrower, so none states this item. I accept the declared tool_uses lem-pd-descent-norm-locus-affine and lem-weil-common-extension-fields as generic black boxes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.LocallyFreeGroupoidInvariantAffine",
+  "declaration": "AlgebraicGeometry.exists_invariant_affine_of_finiteLocallyFree_groupoid",
+  "file": "lean/Sheaf/AlgebraicGeometry/LocallyFreeGroupoidInvariantAffine.lean",
+  "statement": "theorem exists_invariant_affine_of_finiteLocallyFree_groupoid {U R : Scheme.{u}} (s t : R ⟶ U) (e : U ⟶ R) (i : R ⟶ R) (c : pullback s t ⟶ R) (_hG : IsGroupoidScheme s t e i c) [s.IsFiniteLocallyFree] [t.IsFiniteLocallyFree] (x : U) (hx : ∃ A : U.Opens, IsAffineOpen A ∧ t '' (s ⁻¹' {x}) ⊆ (A : Set U)) : ∃ W : U.Opens, IsAffineOpen W ∧ t '' (s ⁻¹' {x}) ⊆ (W : Set U) ∧ s ⁻¹ᵁ W = t ⁻¹ᵁ W",
+  "branch": "newtargets-dag",
+  "by": "Q12",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-813e38356",
+  "group": "Q12",
+  "result": "pass",
+  "note": "Item node unchanged apart from the lean record (diffed against side-live). The Lean statement matches the node and Stacks 03JE (absolute groupoid, stronger than over S): IsGroupoidScheme (fields read, c on pullback s t), [IsFiniteLocallyFree] for s and t (recorded class, no degree), orbit t''(s⁻¹'{x}), hypothesis ∃ affine A ⊇ orbit, conclusion ∃ affine W ⊇ orbit with s⁻¹ᵁW = t⁻¹ᵁW as equality of opens. No extra hypotheses; single universe u. lean.statement verbatim in module; no name collision; stmt_dep records present and imported publicly, proof-only imports non-public and their declarations exist. Docstrings give source place, blueprint id and the five proof steps; proof is sorry only; report has Worker report and Second reading sections. Not compiled: no files changed."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G4",
+  "result": "pass",
+  "landing": "20261026T091604-L-3356215",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

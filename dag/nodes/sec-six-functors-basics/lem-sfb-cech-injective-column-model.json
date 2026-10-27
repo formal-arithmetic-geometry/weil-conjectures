@@ -1,0 +1,321 @@
+{
+ "id": "lem-sfb-cech-injective-column-model",
+ "kind": "statement",
+ "title": "Compatible injective columns for a ringed-topos Cech nerve",
+ "statement": "Let $\\mathcal X,\\mathcal Y$ be topoi presented by small sites in fixed larger coefficient universes [def-weil-pbc-sites-and-cohomology, def-weil-size-convention], with sheaves of commutative rings $R_X,R_Y$ and module categories [def-weil-sheaf-of-modules-category]. Let $f:(\\mathcal X,R_X)\\to(\\mathcal Y,R_Y)$ be a morphism of ringed topoi [def-weil-pbc-ringed-topos-morphism] with Cartesian coefficient identification and exact module inverse image. Let $V\\to1_{\\mathcal X}$ be an epimorphism of sheaves of sets, $V_n=V^{\\times(n+1)}$, and $v_n:\\mathcal X/V_n\\to\\mathcal X$ the slice localizations with rings $v_n^*R_X$ [def-pur-localized-ringed-site]. All diagrams are small. Use ordinary unbounded module derived categories with localization functor $Q$ [def-weil-abstract-derived-category], and finite-diagonal total complexes with differential $d_{\\mathrm{Cech}}+(-1)^n d_I$ in Cech degree $n$ [def-sp-double-complex-total]. For every $R_X$-module $K$ there exists an injective resolution $a:K[0]\\to I^\\bullet$ with $I^q=0$ for $q<0$ [def-sp-injective-resolutions]. The canonical element-site localization functors admit a coherent Cech image model [def-sfb-element-site-localization, def-sfb-coherent-cech-image-model]. For every such resolution and canonical model, $I$ and all $v_n^*I$ are K-injective [def-pur-kinjective-complex], and $v_n^*a$ is a quasi-isomorphism. The objects\n$$B_V(I)^{n,q}=(fv_n)_*v_n^*I^q\\quad(n,q\\geq0)$$\nwith the actual face and degeneracy restrictions form a cosimplicial complex, whose alternating differential commutes with $d_I$ and squares to zero. The localization units define a chain map $a_V:f_*I\\to B_V(I)^{0,\\bullet}$ killed by the first Cech differential and a chain augmentation $b_{V,I}:f_*I\\to\\operatorname{Tot}B_V(I)$ whose degree-$q$ component is $a_V^q$ followed by the $(0,q)$ inclusion. There are specified canonical derived-comparison isomorphisms\n$$Q(f_*I)\\cong Rf_*(K[0]),\\qquad Q(B_V(I)^{n,\\bullet})\\cong R(fv_n)_*(v_n^*K[0]).$$\nThey are the comparisons at $a$ and $v_n^*a$ from the right-derived units. The actual restriction maps on this one resolution, with their strict simplicial identities, give a coherent resolution model for the cosimplicial derived direct images and their augmentation.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 03FC (lemma-injective-module-trivial-cech), 08FI (lemma-restrict-K-injective-to-open), and section-unbounded; sites-modules.tex Tags 04IE (lemma-localize-ringed-topos) and 04J4 (lemma-relocalize-ringed-topos); agent coherent sheaf-valued formulation of the construction, returned proof steps 1-2."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-sites-and-cohomology",
+  "def-weil-size-convention",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-pbc-ringed-topos-morphism",
+  "def-pur-localized-ringed-site",
+  "def-weil-abstract-derived-category",
+  "def-sp-double-complex-total",
+  "def-sp-injective-resolutions",
+  "def-pur-kinjective-complex",
+  "def-sfb-element-site-localization",
+  "def-sfb-coherent-cech-image-model"
+ ],
+ "proof": [
+  {
+   "text": "Apply the Grothendieck theorem for module sheaves to the chosen small presentation of $\\mathcal X$, in the common larger universe containing its site and coefficients. Its module category has enough injectives. Clause (1) of the injective-resolution existence statement therefore gives $a:K[0]\\to I$ with injective terms and $I^q=0$ for $q<0$. This is existence of an ordinary nonnegative resolution; the rest of the argument works for every such $a$.",
+   "uses": [
+    "lem-weil-pbc-ring-sheaves-grothendieck",
+    "lem-sp-grothendieck-enough-injectives",
+    "lem-weil-pbc-left-exact-injective-resolution-degree-zero"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 013K, lemma-injective-resolutions-exist (1); sites-cohomology.tex Tag 07A5, section-unbounded, first paragraph"
+   }
+  },
+  {
+   "text": "The canonical element-module extension is left adjoint to canonical element-site restriction. The presheaf extension theorem proves that its presheaf pullback preserves finite limits; forgetting module sheaves and sheafification also preserve finite limits. The canonical pullback comparison therefore proves that elementModuleExtension preserves finite limits. The right-adjoint injectivity lemma makes elementModulePullback preserve injectives. Restriction is also left adjoint to the localization direct image, hence exact, and preserves the resolution quasi-isomorphism.",
+   "uses": [
+    "lem-weil-pbc-element-presheaf-extension",
+    "lem-weil-pbc-element-module-extension-adjunction",
+    "def-sfb-element-site-localization",
+    "lem-sp-right-adjoint-preserves-injectives",
+    "def-sp-injective-resolutions"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tags 04IE, lemma-localize-ringed-topos; 04J4, lemma-relocalize-ringed-topos; elementary adjunction lifting argument"
+   }
+  },
+  {
+   "text": "The bounded-below injective-complex theorem applies both to $I$ and to every $j_{V_n}^*I$, since Step 2 gives injective terms and the same bound $0$. Hence these complexes are K-injective, with exactly the definition of K-injectivity used here. This does not require preservation of K-injectivity by a general exact inverse image; the exact extension-by-zero adjoint of the slice was essential in Step 2.",
+   "uses": [
+    "lem-weil-pbc-bounded-below-injectives-kinjective",
+    "def-pur-kinjective-complex"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 08FI, lemma-restrict-K-injective-to-open, and its exact-left-adjoint argument; derived.tex lemma-acyclic-is-zero"
+   }
+  },
+  {
+   "text": "Choose the direct images $j_{A*}$ of the canonical element-site localizations. Their module adjunctions can be obtained from continuous-cocontinuous ringed restriction: the projection $(U,s)\\mapsto U$ is continuous because covers on the element site are induced covers, and cocontinuous because a cover of $U$ lifts at $(U,s)$ by restricting $s$ to every member. Thus the cited theorem supplies the additive right adjoints with identity coefficient maps. For $b:B\\to A$, the element functor $p_b:(U,t)\\mapsto(U,b(t))$ satisfies $p_Ap_b=p_B$; it is continuous, since a family covers in $J_B$ or $J_A$ exactly when its image in $\\mathcal C$ covers, and it has the same cover-lifting property. So $j_b^*$ of the element-site definition is defined. Relocalization identifies $j_b^*j_A^*$ with $j_B^*$ sectionwise. Set $E_A=j_{A*}j_A^*$. Define $r_b:E_A M\\to E_B M$ to be the $j_B^*\\dashv j_{B*}$ transpose of $j_b^*(\\epsilon_A):j_b^*j_A^*j_{A*}j_A^*M\\to j_b^*j_A^*M$, where $\\epsilon_A$ is the counit at $j_A^*M$.",
+   "uses": [
+    "lem-weil-pbc-element-site-descent",
+    "lem-weil-pbc-continuous-cocontinuous-ringed-restriction",
+    "def-sfb-element-site-localization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tags 04IE and 04J4; sites.tex Tag 00XO; canonical adjunction construction on the element sites"
+   }
+  },
+  {
+   "text": "These arrows obey $r_{\\mathrm{id}}=\\mathrm{id}$ and $r_c r_b=r_{bc}$ for $c:C\\to B$. Indeed their adjoint transposes are obtained by successive restrictions of the same counit; naturality of the counit and $\\epsilon\\circ j^*\\eta=\\mathrm{id}$ cancel the intermediate unit-counit pair. Sectionwise this says that restriction along $(U,t)\\mapsto(U,b(t))\\mapsto(U,b(c(t)))$ equals restriction along $(U,t)\\mapsto(U,(bc)(t))$; identity restriction is identity. The units $u_A:M\\to E_A M$ satisfy $r_bu_A=u_B$: transposing the left side gives $j_b^*(\\epsilon_A\\circ j_A^*u_A)=\\mathrm{id}_{j_B^*M}$, the transpose of $u_B$. Every arrow is natural and additive in $M$, since restriction and the adjunctions are additive. Applying these functors termwise to a complex is therefore additive, including the alternating coface functor. This constructs all the data of a coherent Cech image model. For any supplied canonical model the same transpose characterization gives these same arrows.",
+   "uses": [
+    "def-sfb-coherent-cech-image-model",
+    "def-sfb-element-site-localization"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 04J4, lemma-relocalize-ringed-topos; elementary counit naturality and triangle identities"
+   }
+  },
+  {
+   "text": "Apply $f_*$ to $E_{V_n}(I^q)$ and to the restrictions just constructed. The direct image of a composite can be represented by the composite direct image: both are right adjoint to the same composite inverse image, and the unique adjunction-compatible comparison identifies their restrictions and units. Thus the entries are precisely $(fv_n)_*v_n^*I^q$. The coordinate deletion and repetition maps of $V^{n+1}$ satisfy the simplicial identities, since both composites in each identity select the same coordinates. Contravariant functoriality of $E$ makes these the strict cosimplicial identities on this one chosen model. Naturality in $I^q$ gives $d_I r_b=r_b d_I$. For $d_C^n=\\sum_{i=0}^{n+1}(-1)^i\\delta_i$, every composite of two cofaces occurs twice in $d_C^{n+1}d_C^n$, with opposite signs, by $\\delta_j\\delta_i=\\delta_i\\delta_{j-1}$ for $i<j$; hence $d_C^2=0$. This provides the claimed cosimplicial complex and commuting horizontal and vertical differentials.",
+   "uses": [
+    "def-sfb-coherent-cech-image-model",
+    "def-weil-pbc-ringed-topos-morphism"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 04J4, lemma-relocalize-ringed-topos; coordinate simplicial identities and additive cancellation"
+   }
+  },
+  {
+   "text": "Let $a_V^q=f_*(u_V(I^q))$. Naturality of $u_V$ with respect to $d_I^q$ proves that $a_V$ is a chain map. The two maps $V^2\\to V$ give the same composite with $u_V$, namely $u_{V^2}$ by Step 5; therefore $(\\delta_0-\\delta_1)a_V=0$. In total degree $q$, put $b^q=\\iota_{0,q}a_V^q$. The $(1,q)$ part of $d_{\\mathrm{Tot}}b^q$ is zero by the preceding equality. Its $(0,q+1)$ part is $a_V^{q+1}f_*d_I^q$, since the vertical sign at $n=0$ is $+1$. These are all its components, proving $d_{\\mathrm{Tot}}b=bd$. The total differential squares to zero: the cross terms on $B^{n,q}$ are $(-1)^{n+1}d_Id_C+(-1)^nd_Cd_I=0$. Degree $m$ has only the summands $0\\leq n\\leq m$, as stipulated in the total-complex definition.",
+   "uses": [
+    "def-sfb-coherent-cech-image-model",
+    "def-sp-double-complex-total"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 03FC, lemma-injective-module-trivial-cech, restriction augmentation; elementary first-quadrant total differential calculation"
+   }
+  },
+  {
+   "text": "Use the source library Functor.rightDerivedFunctor for each additive direct-image functor. Grothendieck module categories have K-injective resolutions, so its defining right-derived unit is universal on the homotopy category and invertible at K-injective complexes. Transport that unit through the quotient factorization to a unit on complexes. Whiskering by the full essentially-surjective homotopy quotient is fully faithful, hence the quotient factorization is a left Kan extension; composition of left Kan extensions proves the required universal property on complexes. Define each comparison by the unit at the K-injective resolution followed by the inverse derived image of its quasi-isomorphism. These formulas immediately give the displayed normalizations.",
+   "uses": [
+    "lem-weil-pbc-ring-sheaves-grothendieck",
+    "lem-sfb-grothendieck-k-injective",
+    "def-pur-kinjective-complex"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 07A5, section-unbounded; derived.tex Tags 070Y, lemma-K-injective-defined and 070K, lemma-enough-K-injectives-implies"
+   }
+  },
+  {
+   "text": "Retain the complexes $f_*I$, $B^{n,\\bullet}$ and all the actual restrictions, together with the comparisons of Step 8, as the resolution model of the derived diagram. Explicitly, if $c_n:Q(B^{n,\\bullet})\\to R(fv_n)_*(v_n^*K[0])$ is the displayed comparison, the derived arrow associated to a restriction $r:B^{n,\\bullet}\\to B^{m,\\bullet}$ is $c_m Q(r)c_n^{-1}$; the derived augmentation is $c_0Q(a_V)c_{-1}^{-1}$ with $c_{-1}$ the first comparison. Multiplying two such arrows cancels the adjacent $c_n^{-1}c_n$, so every simplicial and augmentation identity follows from the strict identity in Step 6. This construction records the strict complexes and maps themselves, which is the coherent resolution model asserted in the statement. It does not infer coherence from an unspecified diagram in a triangulated category.",
+   "uses": [
+    "def-sfb-coherent-cech-image-model"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 07A5, section-unbounded; elementary transport of the actual diagram by the specified comparison isomorphisms"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-ring-sheaves-grothendieck",
+  "lem-sp-grothendieck-enough-injectives",
+  "lem-weil-pbc-left-exact-injective-resolution-degree-zero",
+  "lem-weil-pbc-element-presheaf-extension",
+  "lem-weil-pbc-element-module-extension-adjunction",
+  "def-sfb-element-site-localization",
+  "lem-sp-right-adjoint-preserves-injectives",
+  "def-sp-injective-resolutions",
+  "lem-weil-pbc-bounded-below-injectives-kinjective",
+  "def-pur-kinjective-complex",
+  "lem-weil-pbc-element-site-descent",
+  "lem-weil-pbc-continuous-cocontinuous-ringed-restriction",
+  "def-sfb-coherent-cech-image-model",
+  "def-weil-pbc-ringed-topos-morphism",
+  "def-sp-double-complex-total",
+  "lem-sfb-grothendieck-k-injective"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "X5 Lean proof from canonical element-site adjunctions, Mathlib bounded-below injective complexes, and the proved source-library K-injective right-derived functor; the strict diagram is transported through unit-normalized comparisons. Stacks Tags 04IE, 04J4, 03FC, 08FI, 07A5, 070Y and 070K."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A single injective resolution on a ringed topos gives compatible Cech slice derived direct image complexes",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"PresheafOfModules.Sheafify.app_eq_of_isLocallyInjective\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Presheaf/Sheafify\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} C] {J : CategoryTheory.GrothendieckTopology C}\\n  {R₀ R : CategoryTheory.Functor Cᵒᵖ RingCat} (α : R₀ ⟶ R) [CategoryTheory.Presheaf.IsLocallyInjective J α]\\n  {M₀ : PresheafOfModules R₀} {A : CategoryTheory.Functor Cᵒᵖ AddCommGrpCat} (φ : M₀.pre\", \"doc\": \"For a presheaf of modules $\\\\mathcal{M}$ over a presheaf of rings $\\\\mathcal{R}$ on a category $\\\\mathcal{C}$, if the natural transformations $\\\\alpha: \\\\mathcal{R} \\\\Rightarrow \\\\mathcal{R}'$ and $\\\\phi: \\\\ma\"}\n  {\"name\": \"PresheafOfModules.IsLocallyInjective\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf\", \"type\": \"{C : Type u₁} →\\n  [inst : CategoryTheory.Category.{v₁, u₁} C] →\\n    CategoryTheory.GrothendieckTopology C →\\n      {R : CategoryTheory.Functor Cᵒᵖ RingCat} → {M₁ M₂ : PresheafOfModules R} → (M₁ ⟶ M₂) → Prop\", \"doc\": \"A morphism $ f $ between presheaves of modules over a presheaf of rings $ R $ is locally injective if, after applying the forgetful functor to presheaves of abelian groups, the induced natural transfo\"}\n  {\"name\": \"PresheafOfModules.instIsLocallyInjectiveToSheafify\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Presheaf/Sheafify\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} C] {J : CategoryTheory.GrothendieckTopology C}\\n  {R₀ : CategoryTheory.Functor Cᵒᵖ RingCat} {R : CategoryTheory.Sheaf J RingCat} (α : R₀ ⟶ R.val)\\n  [inst_1 : CategoryTheory.Presheaf.IsLocallyInjective J α] [inst_2 : CategoryTheory.Presheaf.IsLo\", \"doc\": \"The canonical morphism from a presheaf of modules $M_0$ to the restriction of scalars of its sheafification via a natural transformation $\\\\alpha: R_0 \\\\to R$ is locally injective with respect to the Gr\"}\n  {\"name\": \"CategoryTheory.Presheaf.isLocallyInjective_comp\", \"module\": \"Mathlib/CategoryTheory/Sites/LocallyInjective\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] {D : Type u'} [inst_1 : CategoryTheory.Category.{v', u'} D]\\n  {FD : D → D → Type u_1} {CD : D → Type w} [inst_2 : (X Y : D) → FunLike (FD X Y) (CD X) (CD Y)]\\n  [inst_3 : CategoryTheory.ConcreteCategory D FD] (J : CategoryTheory.GrothendieckTop\", \"doc\": \"Given a Grothendieck topology $J$ on a category $\\\\mathcal{C}$, if $\\\\varphi:F_1\\\\Rightarrow F_2$ and $\\\\psi:F_2\\\\Rightarrow F_3$ are locally injective natural transformations between presheaves (functors \"}\n  {\"name\": \"CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex_X₁\", \"module\": \"Mathlib/CategoryTheory/Sites/MayerVietorisSquare\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] {J : CategoryTheory.GrothendieckTopology C}\\n  [inst_1 : CategoryTheory.HasWeakSheafify J (Type v)] [inst_2 : CategoryTheory.HasSheafify J AddCommGrpCat]\\n  (S : J.MayerVietorisSquare),\\n  S.shortComplex.X₁ =\\n    (CategoryTheory.presheafToSheaf J\", \"doc\": \"For a Mayer-Vietoris square $ S $ in a category $ \\\\mathcal{C} $ equipped with a Grothendieck topology $ J $, the first object $ X_1 $ of the associated Mayer-Vietoris short complex is given by sheafif\"}\n  {\"name\": \"CategoryTheory.Sheaf.IsLocallyInjective\", \"module\": \"Mathlib/CategoryTheory/Sites/LocallyInjective\", \"type\": \"{C : Type u} →\\n  [inst : CategoryTheory.Category.{v, u} C] →\\n    {D : Type u'} →\\n      [inst_1 : CategoryTheory.Category.{v', u'} D] →\\n        {FD : D → D → Type u_1} →\\n          {CD : D → Type w} →\\n            [inst_2 : (X Y : D) → FunLike (FD X Y) (CD X) (CD Y)] →\\n              [CategoryTheory.Con\", \"doc\": \"A morphism $\\\\phi: F_1 \\\\to F_2$ between sheaves on a category $\\\\mathcal{C}$ with respect to a Grothendieck topology $J$ is locally injective if for every object $X$ in $\\\\mathcal{C}$, there exists a cov\"}\n  {\"name\": \"CategoryTheory.Presheaf.isLocallyInjective_of_injective\", \"module\": \"Mathlib/CategoryTheory/Sites/LocallyInjective\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] {D : Type u'} [inst_1 : CategoryTheory.Category.{v', u'} D]\\n  {FD : D → D → Type u_1} {CD : D → Type w} [inst_2 : (X Y : D) → FunLike (FD X Y) (CD X) (CD Y)]\\n  [inst_3 : CategoryTheory.ConcreteCategory D FD] (J : CategoryTheory.GrothendieckTop\", \"doc\": \"If each component of a natural transformation $\\\\phi : F_1 \\\\Rightarrow F_2$ between presheaves (functors $\\\\mathcal{C}^{\\\\text{op}} \\\\to \\\\mathcal{D}$) is injective, then $\\\\phi$ is locally injective with r\"}\n  {\"name\": \"CategoryTheory.Presheaf.isLocallyInjective_iff_of_fac\", \"module\": \"Mathlib/CategoryTheory/Sites/LocallyInjective\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] {D : Type u'} [inst_1 : CategoryTheory.Category.{v', u'} D]\\n  {FD : D → D → Type u_1} {CD : D → Type w} [inst_2 : (X Y : D) → FunLike (FD X Y) (CD X) (CD Y)]\\n  [inst_3 : CategoryTheory.ConcreteCategory D FD] (J : CategoryTheory.GrothendieckTop\", \"doc\": \"Given natural transformations $\\\\phi: F_1 \\\\to F_3$ and $\\\\psi: F_1 \\\\to F_3$ between presheaves on a category $\\\\mathcal{C}$ equipped with a Grothendieck topology $J$, if the composition $\\\\phi\\\\psi$ equals\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: local injectivity, scheme open-restriction adjunctions and scalar-restriction definitions do not construct coherent Cech slice columns computing derived direct images on arbitrary ringed topoi."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Restriction to slices of a topos preserves injective resolutions and computes derived pushforward of module sheaves",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.restrictAdjunction\", \"module\": \"Mathlib.AlgebraicGeometry.Modules.Sheaf\", \"type\": \": restrictFunctor f ⊣ pushforward f\", \"doc\": \"Given an open immersion $ f: X \\to Y $ of schemes, there is an adjunction between the restriction functor (mapping sheaves of modules on $ Y $ to those on $ X $) and the pushforward functor (mapping sh\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.restrict_obj\", \"module\": \"Mathlib.AlgebraicGeometry.Modules.Sheaf\", \"type\": \"(M : Y.Modules) (f : X ⟶ Y) [IsOpenImmersion f] (U) : Γ(M.restrict f, U) = Γ(M, f ''ᵁ U)\", \"doc\": \"For any open subset $U$ of $X$, the sections of the restricted module sheaf over $U$ are equal to the sections of the original module sheaf over the image $f(U)$ in $Y$, where $f : X \\to Y$ is an open \"}\n  {\"name\": \"SheafOfModules.pushforwardSections\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.PullbackFree\", \"type\": \"[Functor.IsContinuous.{v} F J K] {M : SheafOfModules.{v} R} (s : M.sections) : ((pushforward φ).obj M).sections\", \"doc\": \"Given a continuous functor $ F : \\\\mathcal{C} \\\\to \\\\mathcal{D} $ between sites with Grothendieck topologies $ J $ and $ K $, a natural transformation $ \\\\phi : S \\\\to F_*R $ between sheaves of rings, and \"}\n  {\"name\": \"CategoryTheory.Sheaf.ΓRes\", \"module\": \"Mathlib.CategoryTheory.Sites.GlobalSections\", \"type\": \"[HasGlobalSectionsFunctor J A] (F : Sheaf J A) (U : Cᵒᵖ) : (Γ J A).obj F ⟶ F.val.obj U\", \"doc\": \"For a sheaf $ F $ on a category $\\\\mathcal{C}$ with values in $\\\\mathcal{A}$, this is the morphism from the global sections $\\\\Gamma(F)$ to the sections $F(U)$ over an object $U$ in $\\\\mathcal{C}^\\\\text{op\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.restrictFunctor\", \"module\": \"Mathlib.AlgebraicGeometry.Modules.Sheaf\", \"type\": \": Y.Modules ⥤ X.Modules\", \"doc\": \"The functor from the category of sheaves of modules over scheme $ Y $ to the category of sheaves of modules over scheme $ X $, induced by an open immersion $ f : X \\to Y $. It is constructed by composi\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.restrictFunctorAdjCounitIso\", \"module\": \"Mathlib.AlgebraicGeometry.Modules.Sheaf\", \"type\": \": pushforward f ⋙ restrictFunctor f ≅ 𝟭 _\", \"doc\": \"For a morphism $ f : X \\to Y $ of schemes, the composition of the pushforward functor along $ f $ followed by the restriction functor induced by $ f $ is naturally isomorphic to the identity functor on\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.restrict\", \"module\": \"Mathlib.AlgebraicGeometry.Modules.Sheaf\", \"type\": \"(M : Y.Modules) (f : X ⟶ Y) [IsOpenImmersion f] : X.Modules\", \"doc\": \"Given a sheaf of modules $ M $ over a scheme $ Y $ and an open immersion $ f : X \\\\to Y $, this function returns the restricted sheaf of modules over $ X $ obtained by applying the restriction functor \"}\n  {\"name\": \"SheafOfModules.restrictScalars\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.ChangeOfRings\", \"type\": \": SheafOfModules.{v} R' ⥤ SheafOfModules.{v} R\", \"doc\": \"Given a natural transformation $\\\\alpha: R \\\\to R'$ between sheaves of rings on a category $\\\\mathcal{C}$ with a Grothendieck topology $J$, this defines a functor from the category of sheaves of modules \"}",
+   "date": "2026-10-22",
+   "verdict": "no match: local injectivity, scheme open-restriction adjunctions and scalar-restriction definitions do not construct coherent Cech slice columns computing derived direct images on arbitrary ringed topoi."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Sheaf\", \"rightDerivedFunctor\"",
+   "results": "[loogle] OK 0 hit(s)",
+   "date": "2026-10-22",
+   "verdict": "no match: local injectivity, scheme open-restriction adjunctions and scalar-restriction definitions do not construct coherent Cech slice columns computing derived direct images on arbitrary ringed topoi."
+  },
+  {
+   "tool": "grep",
+   "query": "(cech|Cech).*(injective|derived)|(injective|derived).*(cech|Cech)",
+   "results": "[grep] OK 5 hit(s)\n  {\"file\": \"Mathlib/Topology/Separation/CompletelyRegular.lean\", \"line\": \"264\", \"text\": \"lemma injective_stoneCechUnit_of_t35Space [T35Space X] :\"}\n  {\"file\": \"Mathlib/Topology/Separation/CompletelyRegular.lean\", \"line\": \"265\", \"text\": \"    Function.Injective (stoneCechUnit : X → StoneCech X) := by\"}\n  {\"file\": \"Mathlib/Topology/Separation/CompletelyRegular.lean\", \"line\": \"274\", \"text\": \"  injective := injective_stoneCechUnit_of_t35Space\"}\n  {\"file\": \"Mathlib/Topology/Separation/CompletelyRegular.lean\", \"line\": \"279\", \"text\": \"  injective := injective_stoneCechUnit_of_t35Space\"}\n  {\"file\": \"Mathlib/Topology/Compactification/StoneCech.lean\", \"line\": \"25\", \"text\": \"injective, so one cannot always think of `α` as being “inside” its compactification `StoneCech α`.\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: local injectivity, scheme open-restriction adjunctions and scalar-restriction definitions do not construct coherent Cech slice columns computing derived direct images on arbitrary ringed topoi."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Sheaves of modules ringed topos compatible Cech injective resolution and slice derived pushforward",
+   "results": "{\"t\": \"2026-10-22T06:58:16Z\", \"tool\": \"leansearch\", \"query\": \"Sheaves of modules ringed topos compatible Cech injective resolution and slice derived pushforward\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SheafOfModules.noConfusionType\", \"SheafOfModules\", \"SheafOfModules.pushforward\", \"SheafOfModules.pushforward_map_val\", \"SheafOfModules.pushforwardSections\", \"SheafOfModules.over\", \"SheafOfModules.pushforwardSections_unitHomEquiv\", \"SheafOfModules.pushforward_obj_val\"], \"digest\": \"3ed5e83d0ef260aa\"}",
+   "date": "2026-10-22",
+   "verdict": "No match for the full coherent ringed-topos Cech assertion. Hits read: local injectivity and module/direct-image definitions; InjectiveResolution.ofCocomplex supplies only resolution existence, not the slice or coherent derived comparisons."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A single injective resolution on a ringed topos computes all Cech slice derived direct images as a coherent cosimplicial complex",
+   "results": "{\"t\": \"2026-10-22T06:58:24Z\", \"tool\": \"leanfinder\", \"query\": \"A single injective resolution on a ringed topos computes all Cech slice derived direct images as a coherent cosimplicial complex\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Presheaf.isLocallyInjective_toPlus\", \"CategoryTheory.Presheaf.isLocallyInjective_forget\", \"CategoryTheory.InjectiveResolution.ofCocomplex\", \"CategoryTheory.Presheaf.isLocallyInjective_of_injective\", \"CategoryTheory.InjectiveResolution.instInjectiveXNatOfCocomplex\", \"CategoryTheory.Presheaf.isLocallyInjective_forget_iff\", \"CategoryTheory.Presheaf.isLocallyInjective_presheafToSheaf_map_iff\", \"CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex_X₁\"], \"digest\": \"629193a67a913498\"}",
+   "date": "2026-10-22",
+   "verdict": "No match for the full coherent ringed-topos Cech assertion. Hits read: local injectivity and module/direct-image definitions; InjectiveResolution.ofCocomplex supplies only resolution existence, not the slice or coherent derived comparisons."
+  },
+  {
+   "tool": "grep",
+   "query": "(cech|cosimplicial).*(injective|derived)|(injective|derived).*(cech|cosimplicial)",
+   "results": "{\"t\": \"2026-10-22T06:58:35Z\", \"tool\": \"grep\", \"query\": \"(cech|cosimplicial).*(injective|derived)|(injective|derived).*(cech|cosimplicial)\", \"sub\": \"CategoryTheory\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "No match for the full coherent ringed-topos Cech assertion. Hits read: local injectivity and module/direct-image definitions; InjectiveResolution.ofCocomplex supplies only resolution existence, not the slice or coherent derived comparisons."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"SheafOfModules\", \"cech\"",
+   "results": "{\"t\": \"2026-10-22T06:58:36Z\", \"tool\": \"loogle\", \"query\": \"\\\"SheafOfModules\\\", \\\"cech\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "No match for the full coherent ringed-topos Cech assertion. Hits read: local injectivity and module/direct-image definitions; InjectiveResolution.ofCocomplex supplies only resolution existence, not the slice or coherent derived comparisons."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-derived-cech-image-totalization",
+  "date": "2026-10-22",
+  "group": "Q71"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "Paragraph (3), open direct image: agent expansion of the tame-boundary Kummer calculation; Normalized derived Cech descent followed by exact inverse image; Returned proof steps 1-2: construction of one compatible first-quadrant injective model and its canonical column comparisons.",
+   "via": [
+    "lem-sfb-derived-cech-image-totalization",
+    "lem-sfb-tame-stratum-kummer-descent",
+    "lem-sfb-continuous-algcl-tame-boundary-comparison",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sfb-cech-injective-column-model",
+  "worker": "stage1",
+  "group": "Q36",
+  "summary": "Constructed the coherent restrictions from the actual localization adjunctions, checked their identities and the signed total augmentation, and normalized both derived comparisons at the supplied resolutions. Reused all necessary general lemmas; no new nodes or statement changes.",
+  "blueprint": "Main 20261015 sk-thm-sf-ctf-stability-direct-images.proof.md paragraph (3), open direct image; the existing chain of agent refinements through derived Cech image totalization, specifically its returned steps 1-2. The inherited created.item chain has no blueprint_kind ancestor, so blueprint.from.node remains null, as blueprint_refs.py ancestor reports.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-ring-sheaves-grothendieck",
+    "why": "Generic module sheaves over arbitrary ring sheaves are grothendieck input to the explicit Cech resolution construction; no step of the unit route is replaced."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-sheaf-slice-adjunction",
+    "why": "Generic ringed slice over an arbitrary sheaf: element-site presentation and exact extension by zero input to the explicit Cech resolution construction; no step of the unit route is replaced."
+   },
+   {
+    "node": "lem-weil-pbc-continuous-cocontinuous-ringed-restriction",
+    "why": "Generic continuous cocontinuous restriction as a ringed geometric inverse image input to the explicit Cech resolution construction; no step of the unit route is replaced."
+   },
+   {
+    "node": "lem-sfb-grothendieck-k-injective",
+    "why": "Generic grothendieck abelian categories have k-injective resolutions input to the explicit Cech resolution construction; no step of the unit route is replaced."
+   },
+   {
+    "node": "lem-weil-pbc-kinjective-total-derived",
+    "why": "Generic enough k-injectives compute total right derived functors input to the explicit Cech resolution construction; no step of the unit route is replaced."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-ring-sheaves-grothendieck",
+  "lem-weil-pbc-continuous-cocontinuous-ringed-restriction",
+  "lem-sfb-grothendieck-k-injective"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q36-70d85e930",
+  "group": "Q36",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q36-70d85e930 (reviewer sub-agent of L); spot-checked: I read the delivery in full: 0 new nodes and 9 steps. The statement and stmt_deps are byte-identical to the base (the Q71 run snapshot). The item is unsplit in live and side-live, has no repair note and is not in a drop list; it was created by Q71 on 2026-10-22, so this is an ordinary S1 split and not a 2026-10-21 re-split order. There is no SGA source. Stacks sources checked: 08FI (sites-cohomology.tex l.4314, restriction preserves K-injectives via the exact j_!), 03FC, section-unbounded, 04IE and 04J4. Steps 1-9 checked against the cited statements: (1) a module category over a ring sheaf on a small site is Grothendieck, so it has enough injectives and a nonnegative resolution; (2) the slice adjunction for an arbitrary sheaf A gives exact j_A^* with an exact left adjoint j_{A!}, so injectives are preserved and v_n^*a is a quasi-isomorphism; (3) a bounded-below complex of injectives is K-injective in the sense of def-pur-kinjective-complex (H^0 of Hom^•); (4)-(5) I recomputed r_b u_A = u_B by the triangle identity and r_c r_b = r_{bc} sectionwise; (6) d_C^2 = 0 via δ_jδ_i = δ_iδ_{j-1}; (7) the sign at n=0 is +1 and (δ_0-δ_1)a_V = 0; (8) checked the orientation RF(Qa)^{-1}η_I; (9) the derived arrows c_m Q(r) c_n^{-1} inherit the strict identities. Edge cases: V=1, K=0, a non-subterminal A (j_! is a sum, j_* a product), negative degrees. Accepted tool_uses: ring-sheaves-grothendieck, ringed-sheaf-slice-adjunction, continuous-cocontinuous-ringed-restriction, kinjective-total-derived, sfb-grothendieck-k-injective; all are generic black boxes. FIX (2 small repairs): step 2 now cites the existing Mathlib leaf lem-sp-right-adjoint-preserves-injectives (C5; previously only inlined), and proof_deps is updated; step 4 now checks continuity of p_b (p_A p_b = p_B, with both topologies induced), which def-sfb-element-site-localization needs before j_b^* is defined and which the coherent-model definition requires; only cover-lifting had been stated. Advisory, inherited and not changed: the statement cites def-pur-localized-ringed-site (localization at an object) for slices at the sheaves V_n.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.CechInjectiveColumnModel",
+  "declaration": "CategoryTheory.cech_injective_column_model",
+  "declarations": [
+   "CategoryTheory.cechColumnRestrictComplex",
+   "CategoryTheory.cech_injective_column_model"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/CechInjectiveColumnModel.lean",
+  "statement": "theorem cech_injective_column_model {C X : Type u} [SmallCategory C] [SmallCategory X] {J : GrothendieckTopology C} {L : GrothendieckTopology X} (R : Sheaf J RingCat.{u}) (S : Sheaf L RingCat.{u}) (_hR : ∀ (U : Cᵒᵖ) (x y : R.obj.obj U), x * y = y * x) (_hS : ∀ (U : Xᵒᵖ) (x y : S.obj.obj U), x * y = y * x) [HasDerivedCategory.{wX} (ringedSiteModules.{u} R)] [HasDerivedCategory.{wY} (ringedSiteModules.{u} S)] [∀ A : Sheaf J (Type u), HasDerivedCategory.{wSlice} (ringedSiteModules.{u} (elementRing R A))] (f : RingedToposMorphism R S) [IsIso f.ringMap] (fInverse : ringedSiteModules.{u} S ⥤ ringedSiteModules.{u} R) [fInverse.Additive] [PreservesFiniteLimits fInverse] [PreservesFiniteColimits fInverse] (_adj : fInverse ⊣ f.modules) (V : Sheaf J (Type u)) [Epi (terminal.from V)] (M : ringedSiteModules.{u} R) : Nonempty (InjectiveResolution M) ∧ Nonempty (CoherentCechImageModel R) ∧ ∀ (I : InjectiveResolution M) (D : CoherentCechImageModel R), CochainComplex.IsKInjective (I.cocomplex.extend ComplexShape.embeddingUpNat) ∧ (∀ n : SimplexCategory, CochainComplex.IsKInjective ((cechColumnRestrictComplex D ((sheafCoverNerve V).obj (op n))).obj (I.cocomplex.extend ComplexShape.embeddingUpNat)) ∧ QuasiIso ((cechColumnRestrictComplex D ((sheafCoverNerve V).obj (op n))).map (HomologicalComplex.extendMap I.ι ComplexShape.embeddingUpNat))) ∧ ∃ (B : CosimplicialObject (CochainComplex (ringedSiteModules.{u} S) ℕ)) (σ : ∀ n : SimplexCategory, B.obj n ≅ (D.bicomplex f.modules V I.cocomplex).X n.len) (α : (Functor.const SimplexCategory).obj ((f.modules.mapHomologicalComplex (.up ℕ)).obj I.cocomplex) ⟶ B) (a : (f.modules.mapHomologicalComplex (.up ℕ)).obj I.cocomplex ⟶ (D.bicomplex f.modules V I.cocomplex).X 0) (b : (f.modules.mapHomologicalComplex (.up ℕ)).obj I.cocomplex ⟶ (D.bicomplex f.modules V I.cocomplex).total (.up ℕ)) (RF : DerivedCategory (ringedSiteModules.{u} R) ⥤ DerivedCategory (ringedSiteModules.{u} S)) (η : f.modules.mapHomologicalComplex (.up ℤ) ⋙ DerivedCategory.Q ⟶ DerivedCategory.Q ⋙ RF) (RFslice : ∀ n : SimplexCategory, DerivedCategory (ringedSiteModules.{u} (elementRing R ((sheafCoverNerve V).obj (op n)))) ⥤ DerivedCategory (ringedSiteModules.{u} S)) (ηslice : ∀ n : SimplexCategory, ((D.push ((sheafCoverNerve V).obj (op n))) ⋙ f.modules).mapHomologicalComplex (.up ℤ) ⋙ DerivedCategory.Q ⟶ DerivedCategory.Q ⋙ RFslice n) (κ : ∀ n : SimplexCategory, (B.obj n).extend ComplexShape.embeddingUpNat ≅ ((((D.push ((sheafCoverNerve V).obj (op n))) ⋙ f.modules).mapHomologicalComplex (.up ℤ)).obj ((cechColumnRestrictComplex D ((sheafCoverNerve V).obj (op n))).obj (I.cocomplex.extend ComplexShape.embeddingUpNat)))) (c : DerivedCategory.Q.obj (((f.modules.mapHomologicalComplex (.up ℕ)).obj I.cocomplex).extend ComplexShape.embeddingUpNat) ≅ RF.obj (DerivedCategory.Q.obj (((CochainComplex.single₀ _).obj M).extend ComplexShape.embeddingUpNat))) (T : CosimplicialObject (DerivedCategory (ringedSiteModules.{u} S))) (hT : ∀ n : SimplexCategory, T.obj n = (RFslice n).obj (DerivedCategory.Q.obj ((cechColumnRestrictComplex D ((sheafCoverNerve V).obj (op n))).obj (((CochainComplex.single₀ _).obj M).extend ComplexShape.embeddingUpNat)))) (e : B ⋙ ComplexShape.embeddingUpNat.extendFunctor (ringedSiteModules.{u} S) ⋙ DerivedCategory.Q ≅ T) (β : (Functor.const SimplexCategory).obj (RF.obj (DerivedCategory.Q.obj (((CochainComplex.single₀ _).obj M).extend ComplexShape.embeddingUpNat))) ⟶ T), (∀ (n m : SimplexCategory) (θ : n ⟶ m) (q : ℕ), (σ n).inv.f q ≫ (B.map θ).f q ≫ (σ m).hom.f q = f.modules.map ((D.image.map (((sheafCoverNerve V).map θ.op).op)).app (I.cocomplex.X q))) ∧ (∀ (n : SimplexCategory) (q : ℕ), (α.app n).f q ≫ (σ n).hom.f q = f.modules.map ((D.augmentation ((sheafCoverNerve V).obj (op n))).app (I.cocomplex.X q))) ∧ α.app (SimplexCategory.mk 0) ≫ (σ (SimplexCategory.mk 0)).hom = a ∧ a ≫ (D.bicomplex f.modules V I.cocomplex).d 0 1 = 0 ∧ (∀ q : ℕ, b.f q = a.f q ≫ (D.bicomplex f.modules V I.cocomplex).ιTotal (.up ℕ) 0 q q (zero_add q)) ∧ RF.IsRightDerivedFunctor η (HomologicalComplex.quasiIso (ringedSiteModules.{u} R) (.up ℤ)) ∧ (∀ n : SimplexCategory, (RFslice n).IsRightDerivedFunctor (ηslice n) (HomologicalComplex.quasiIso (ringedSiteModules.{u} (elementRing R ((sheafCoverNerve V).obj (op n)))) (.up ℤ))) ∧ (∀ (n : SimplexCategory) (q : ℕ), ((B.obj n).extendXIso ComplexShape.embeddingUpNat (i := q) rfl).inv ≫ (κ n).hom.f (q : ℤ) ≫ ((D.push ((sheafCoverNerve V).obj (op n))) ⋙ f.modules).map ((elementModulePullback R ((sheafCoverNerve V).obj (op n))).map (I.cocomplex.extendXIso ComplexShape.embeddingUpNat (i := q) rfl).hom) = (σ n).hom.f q ≫ f.modules.map ((D.imageIso ((sheafCoverNerve V).obj (op n))).hom.app (I.cocomplex.X q))) ∧ c.hom ≫ RF.map (DerivedCategory.Q.map (HomologicalComplex.extendMap I.ι ComplexShape.embeddingUpNat)) = DerivedCategory.Q.map (I.cocomplex.mapExtendIso ComplexShape.embeddingUpNat f.modules).inv ≫ η.app (I.cocomplex.extend ComplexShape.embeddingUpNat) ∧ (∀ n : SimplexCategory, (e.app n).hom ≫ eqToHom (hT n) ≫ (RFslice n).map (DerivedCategory.Q.map ((cechColumnRestrictComplex D ((sheafCoverNerve V).obj (op n))).map (HomologicalComplex.extendMap I.ι ComplexShape.embeddingUpNat))) = DerivedCategory.Q.map (κ n).hom ≫ (ηslice n).app ((cechColumnRestrictComplex D ((sheafCoverNerve V).obj (op n))).obj (I.cocomplex.extend ComplexShape.embeddingUpNat))) ∧ (∀ n : SimplexCategory, β.app n = c.inv ≫ DerivedCategory.Q.map (HomologicalComplex.extendMap (α.app n) ComplexShape.embeddingUpNat) ≫ (e.app n).hom)",
+  "branch": "newtargets-dag",
+  "by": "Q27",
+  "date": "2026-10-22",
+  "existing": false,
+  "note": "The theorem states existence of ordinary resolutions and canonical coherent models and works for every supplied resolution and model. The derived functors are existentially supplied with their defining total-right-derived universal properties and units. The comparison equations at the actual resolution fix their isomorphisms, while a natural isomorphism of cosimplicial diagrams and its normalized augmentation record all restrictions coherently. cechColumnRestrictComplex is only the existing canonical restriction applied degreewise, with its zero-preservation instance obtained from the recorded adjunction."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-eff0db6ae",
+  "group": "Q27",
+  "result": "pass",
+  "note": "Q27 lem-sfb-cech-injective-column-model eff0db6a: node unchanged except lean record; statement verbatim; 1 sorry; cechColumnRestrictComplex = elementModulePullback.mapHomologicalComplex with adjunction-derived Additive (real construction). Hypotheses match node: commutativity of RingCat sheaves, RingedToposMorphism, IsIso ringMap, exact fInverse ⊣ f.modules, Epi V→1, actual sheafCoverNerve; universe u forced by recorded interfaces. Clauses: Nonempty resolution and model, ∀ I D, IsKInjective of I and v_n^*I, QuasiIso v_n^*a; B pinned via σ to D.image maps (faces and degeneracies), κ pinned to imageIso, a/b pinned (= IsAugmentation), d 0 1 kills a; RF/RFslice existential with IsRightDerivedFunctor (def-sfb-right-derived-functor is only a proof_dep); c, e_n, T maps and β fully pinned via invertible Q(a), Q(v_n^*a); derived isos, not per-degree. Edge cases M=0, empty topos, V=1, non-representable V_n, n=q=0 checked. No duplicates; no downstream imports; docstrings with source and blueprint and 9 proof steps. Advisory (inherited): statement cites def-pur-localized-ringed-site for sheaf slices."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "X5",
+  "result": "pass",
+  "landing": "20261024T022154-L-2934838",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

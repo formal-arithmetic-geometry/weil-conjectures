@@ -20,98 +20,50 @@
  ],
  "proof": [
   {
-   "text": "Write $L_R=u_R^{-1}$ and $G_R=Ru_*^R$ for $R=A,B$. There are canonical natural identifications $h_{W,N}:U_WS_WN\\cong N\\otimes^L_{A_W}B_W$. Indeed [lem-pur-change-of-rings-tensor-comparison] identifies restricted ordinary change of rings with the sheaf tensor, naturally in the module. Choose its canonical tensor identification: before sheafification it is the identity on the balanced tensor, with the symmetry putting the coefficient last [def-pur-sheaf-tensor-product]. Restriction changes only the action, so the underlying associated abelian sheaf is the same. For a K-flat resolution $P\\to N$, [lem-pur-derived-change-of-rings] computes $S_WN$ by $P\\otimes_{A_W}B_W$; the same complex computes $N\\otimes^L_{A_W}B_W$ by the one-K-flat-factor computation in [lem-weil-pbc-ringed-projection-mate-exact]. These identifications are natural in resolutions and hence in $N$. They use the representative normalization of [lem-pur-sheaf-ring-derived-coefficient-adjunction]: the scalar unit is $x\\mapsto x\\otimes1$, and scalar extension of a map is tensor of that map with $1$. In particular $h_{W,N'}U_WS_W(f)=(f\\otimes1)h_{W,N}$.",
+   "text": "Use the normalized scalar-to-tensor identifications of [def-sp-proetale-scalar-mate-identifications]. Their ordinary and derived existence-uniqueness helpers specialize the arbitrary ring-sheaf comparisons in [lem-sfb-derived-scalar-mate-thick-locus]; no new construction of derived tensor is required.",
    "uses": [
-    "lem-pur-change-of-rings-tensor-comparison",
-    "def-pur-sheaf-tensor-product",
-    "lem-pur-derived-change-of-rings",
-    "lem-weil-pbc-ringed-projection-mate-exact",
-    "lem-pur-sheaf-ring-derived-coefficient-adjunction",
-    "lem-pc-kflat-resolution"
+    "def-sp-proetale-scalar-mate-identifications",
+    "lem-sfb-derived-scalar-mate-thick-locus"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 0B56, equation-projection-formula-map; Tags 07A4 (lemma-pullback-tensor-product), 07A6 (lemma-adjoint), and 0D6E (lemma-derived-pushforward-composition); explicit coefficient-change specialization"
-   }
+   "elementary": true
   },
   {
-   "text": "Apply [lem-weil-pbc-ring-sheaf-change-adjunction] with $R_W=A_W$, $S_W=B_W$ and their constant-coefficient inverse-image identifications $c_A:u^{-1}A_V\\xrightarrow{\\sim}A_T$, $c_B:u^{-1}B_V\\xrightarrow{\\sim}B_T$, which are isomorphisms of ring sheaves by [prop-weil-pbc-proetale-constant-ring-map]. The square $a_Tc_A=c_B\\,u^{-1}(a_V)$ commutes: by [prop-weil-pbc-proetale-constant-ring-map] both sides are adjoint to the maps $A_V\\to u_*B_T$ sending a constant section $x$ to the constant section $a(x)$, and these sections generate the sheafified constant presheaf. It gives $b:U_TL_B\\cong L_AU_V$ and $d:U_VG_B\\cong G_AU_T$, with their stated adjunction compatibility. The ordinary unbounded operations here are exactly [def-weil-pbc-proetale-operations]: inverse image is exact and direct image is computed using K-injectives. Thus this application does not require restriction of scalars to preserve K-injective complexes; $d$ is the canonical composite-ringed-topos comparison of the cited statement.",
+   "text": "Transpose the B-scalar mate using [lem-weil-pbc-ring-sheaf-change-adjunction]. The constant coefficient square is supplied by [prop-weil-pbc-proetale-constant-ring-map]. The resulting A-adjunct is restriction of the B-mate followed by the canonical restriction/direct-image comparison. Precompose with the inverse source tensor identification and postcompose with the direct image of the target identification, using naturality of the adjunction Hom equivalence.",
    "uses": [
     "lem-weil-pbc-ring-sheaf-change-adjunction",
-    "def-weil-pbc-proetale-operations",
     "prop-weil-pbc-proetale-constant-ring-map"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 0B56, equation-projection-formula-map; Tags 07A4 (lemma-pullback-tensor-product), 07A6 (lemma-adjoint), and 0D6E (lemma-derived-pushforward-composition); explicit coefficient-change specialization"
-   }
+   "elementary": true
   },
   {
-   "text": "Let $v:L_AB_V=A_T\\otimes_{u^{-1}A_V}u^{-1}B_V\\cong B_T$ be the constant-coefficient identification induced by $c_A^{-1}$ and $c_B$ [prop-weil-pbc-proetale-constant-ring-map], and put $\\mu^B_N=(1\\otimes v)\\mu_{N,B_V}$, using [lem-weil-pbc-ringed-topoi-derived-tensor-pullback]. The canonical tensor maps satisfy\n$$h_{T,L_AN}\\,U_T(\\lambda_{u,N})\\,b_{S_VN}^{-1}\\,(L_Ah_{V,N})^{-1}=\\mu^B_N.$$\nHere is the representative check, including a possibly nonflat $B$. Choose K-flat flat-term resolutions $P\\to N$ and $Q\\to B_V[0]$ [lem-pc-kflat-resolution]. The pullback theorem says $L_AP,L_AQ$ are again K-flat with flat terms. The ordinary pullback/tensor comparison [lem-weil-pbc-ringed-topoi-module-pullback-tensor] on each bidegree is the canonical balanced tensor map. Under $b$ and the identifications $h$, both routes send a pullback tensor $x\\otimes q$ to the pullbacks of $x$ and $q$ in the same order; after $Q\\to B_V$, this is $x\\otimes c$ with $c$ carried to $B_T$. This follows directly from the sectionwise tensor and its sheafification [def-pur-sheaf-tensor-product]. These maps preserve bidegrees, so they commute with the signed total differential [def-pc-tensor-complex-sheaves]. The vertical maps $P\\otimes Q\\to P\\otimes B_V$ and $L_AP\\otimes L_AQ\\to L_AP\\otimes B_T$ are quasi-isomorphisms since their first factors are K-flat: their cones are tensors with the acyclic resolution cones [def-pc-kflat-complex]. Cancel them after localization. Naturality under changes of resolutions and the resolving-class equivalence in [lem-weil-pbc-site-derived-tensor-descent] give the displayed equality for every $N$.",
+   "text": "The first conjunct of [lem-sp-proetale-scalar-tensor-normalization], valid for arbitrary finite coefficient rings, identifies the pullback of the inverse source comparison, the inverse restriction/pullback map, restriction of the scalar/pullback comparison and the target tensor comparison with canonical tensor pullback followed by coefficient pullback. Naturality of the target scalar/tensor comparison moves the A-counit to the first tensor factor. Functoriality of tensor commutes this first-factor counit with the second-factor coefficient map.",
    "uses": [
-    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
-    "lem-pc-kflat-resolution",
-    "lem-weil-pbc-ringed-topoi-module-pullback-tensor",
-    "def-pur-sheaf-tensor-product",
-    "lem-weil-pbc-site-derived-tensor-descent",
-    "def-pc-kflat-complex",
-    "def-pc-tensor-complex-sheaves",
-    "prop-weil-pbc-proetale-constant-ring-map"
+    "lem-sp-proetale-scalar-tensor-normalization"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 0B56, equation-projection-formula-map; Tags 07A4 (lemma-pullback-tensor-product), 07A6 (lemma-adjoint), and 0D6E (lemma-derived-pushforward-composition); explicit coefficient-change specialization"
-   }
+   "elementary": true
   },
   {
-   "text": "Put $N=G_AM$, $t=S_T(\\varepsilon^A_{u,M})\\lambda_{u,N}:L_BS_VN\\to S_TM$. By [def-weil-pbc-adjunction-mate], its B-adjunct is exactly $\\chi_{u,M}$. The compatibility in [lem-weil-pbc-ring-sheaf-change-adjunction] says that the A-adjunct of $U_T(t)b_{S_VN}^{-1}$ is $d_{S_TM}U_V(\\chi_{u,M})$. Precompose the former with $(L_Ah_{V,N})^{-1}$ and postcompose with $h_{T,M}$. Naturality of adjunction therefore makes its adjunct\n$$\\psi=G_A(h_{T,M})\\,d_{S_TM}\\,U_V(\\chi_{u,M})\\,h_{V,N}^{-1}.$$\nBy step 1 and the equality in step 3, the map being transposed is precisely\n$$(\\varepsilon^A_{u,M}\\otimes1)\\,\\mu^B_{G_AM}:L_A(G_AM\\otimes_A^LB_V)\\longrightarrow M\\otimes_A^LB_T.$$\nThe statement of [lem-weil-pbc-ringed-projection-mate-exact], specialized to $E=M$ and $P=B_V[0]$, defines its projection transformation as the adjunct of this very map. Injectivity of the adjunction bijection gives $\\psi=\\pi^A_{u;M,B_V}$. No strict-perfect or boundedness hypothesis is present in that cited statement.",
+   "text": "By [def-weil-pbc-projection-formula-arrows], the projection map is the adjunct of canonical tensor pullback followed by tensor of the geometric counit with identity. Naturality in the codomain of the adjunction moves the coefficient map outside the adjunct. Injectivity of the Hom equivalence proves the requested projection equality. Mathlib mateEquiv_counit proves the second conjunct directly from the specified mate definition, with no restriction of scalars.",
    "uses": [
-    "def-weil-pbc-adjunction-mate",
-    "lem-weil-pbc-ring-sheaf-change-adjunction",
-    "lem-weil-pbc-ringed-projection-mate-exact"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 0B56, equation-projection-formula-map; Tags 07A4 (lemma-pullback-tensor-product), 07A6 (lemma-adjoint), and 0D6E (lemma-derived-pushforward-composition); explicit coefficient-change specialization"
-   }
-  },
-  {
-   "text": "The counit formula for the mate in [def-weil-pbc-adjunction-mate] gives, before restriction of scalars,\n$$\\varepsilon^B_{u,S_TM}\\,L_B(\\chi_{u,M})=t=S_T(\\varepsilon^A_{u,M})\\lambda_{u,G_AM},$$\nwhich is the asserted counit equation. All comparisons in steps 1--4 and the adjunction bijections are natural, so their displayed equality is natural in $M$. Both K-flat resolutions and the operations used above allow unbounded complexes; nowhere was $B_W$ itself assumed K-flat or $a$ flat. This proves all the claimed assertions.",
-   "uses": [
+    "def-weil-pbc-projection-formula-arrows",
     "def-weil-pbc-adjunction-mate"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 0B56, equation-projection-formula-map; Tags 07A4 (lemma-pullback-tensor-product), 07A6 (lemma-adjoint), and 0D6E (lemma-derived-pushforward-composition); explicit coefficient-change specialization"
-   }
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "lem-pur-change-of-rings-tensor-comparison",
-  "def-pur-sheaf-tensor-product",
-  "lem-pur-derived-change-of-rings",
-  "lem-weil-pbc-ringed-projection-mate-exact",
-  "lem-pur-sheaf-ring-derived-coefficient-adjunction",
-  "lem-pc-kflat-resolution",
+  "def-sp-proetale-scalar-mate-identifications",
+  "lem-sfb-derived-scalar-mate-thick-locus",
   "lem-weil-pbc-ring-sheaf-change-adjunction",
-  "def-weil-pbc-proetale-operations",
-  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
-  "lem-weil-pbc-ringed-topoi-module-pullback-tensor",
-  "lem-weil-pbc-site-derived-tensor-descent",
-  "def-pc-kflat-complex",
-  "def-pc-tensor-complex-sheaves",
-  "def-weil-pbc-adjunction-mate",
-  "prop-weil-pbc-proetale-constant-ring-map"
+  "prop-weil-pbc-proetale-constant-ring-map",
+  "lem-sp-proetale-scalar-tensor-normalization",
+  "def-weil-pbc-projection-formula-arrows",
+  "def-weil-pbc-adjunction-mate"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/sites-cohomology.tex",
-  "place": "Tag 0B56, equation-projection-formula-map; Tags 07A4 (lemma-pullback-tensor-product), 07A6 (lemma-adjoint), and 0D6E (lemma-derived-pushforward-composition); explicit coefficient-change specialization"
+  "place": "Tag 0B56, equation-projection-formula-map: adjunction transposition with the existing normalized tensor-pullback square."
  },
  "mathlib_searches": [
   {
@@ -169,7 +121,18 @@
   "same_as": [],
   "is": null
  },
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
  "split_report": {
   "date": "2026-10-21",
   "item": "lem-fix-proetale-scalar-mate-normalization",
@@ -220,15 +183,7 @@
   ]
  },
  "tool_uses": [
-  "lem-pur-change-of-rings-tensor-comparison",
-  "lem-pur-derived-change-of-rings",
-  "lem-pur-sheaf-ring-derived-coefficient-adjunction",
-  "lem-weil-pbc-ringed-projection-mate-exact",
   "lem-weil-pbc-ring-sheaf-change-adjunction",
-  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
-  "lem-pc-kflat-resolution",
-  "lem-weil-pbc-ringed-topoi-module-pullback-tensor",
-  "lem-weil-pbc-site-derived-tensor-descent",
   "prop-weil-pbc-proetale-constant-ring-map"
  ],
  "reviewed": {
@@ -243,23 +198,6 @@
   "module": "Sheaf.Paper.ProEtaleScalarMateNormalization",
   "declaration": "AlgebraicGeometry.ProEtale.proEtaleScalarMateNormalization",
   "declarations": [
-   "AlgebraicGeometry.ProEtale.scalarMateRestriction",
-   "AlgebraicGeometry.ProEtale.scalarMateCoefficient",
-   "AlgebraicGeometry.ProEtale.scalarMateCoefficientComplex",
-   "AlgebraicGeometry.ProEtale.scalarMateOrdinaryTensor",
-   "AlgebraicGeometry.ProEtale.scalarMateTensorSection",
-   "AlgebraicGeometry.ProEtale.IsScalarMateOrdinaryTensor",
-   "AlgebraicGeometry.ProEtale.scalarMateOrdinaryTensorIso_existsUnique",
-   "AlgebraicGeometry.ProEtale.scalarMateOrdinaryTensorIso",
-   "AlgebraicGeometry.ProEtale.scalarMateRestrictionPush",
-   "AlgebraicGeometry.ProEtale.scalarMateOrdinaryComplexIso",
-   "AlgebraicGeometry.ProEtale.IsScalarMateDerivedTensor",
-   "AlgebraicGeometry.ProEtale.scalarMateDerivedTensorIso_existsUnique",
-   "AlgebraicGeometry.ProEtale.scalarMateDerivedTensorIso",
-   "AlgebraicGeometry.ProEtale.scalarMateUnit",
-   "AlgebraicGeometry.ProEtale.scalarMateUnitPullback",
-   "AlgebraicGeometry.ProEtale.scalarMateCoefficientPullback",
-   "AlgebraicGeometry.ProEtale.scalarMateDerivedCoefficientPullback",
    "AlgebraicGeometry.ProEtale.proEtaleScalarMateNormalization"
   ],
   "file": "lean/Sheaf/Paper/ProEtaleScalarMateNormalization.lean",
@@ -276,5 +214,15 @@
   "group": "Q11",
   "result": "pass",
   "note": "Identical re-push of the PASSed c9154b16 (module sha256 da1b7f3b, same dag/nodes and lean trees; only base files and a report self-check section differ); returned at landing only for a Sandbox0 60 s timeout. All 9 stmt_dep records equal side-live; only the item's lean field differs. Re-checked: χ = mateEquiv of directImageScalarPullbackIso (λ) for the A/B geometric adjunctions; conjunct 1 types match derivedProjectionFormulaMate (E=M, F=B_V[0]) ≫ Ru_*(1⊗v) against h_V⁻¹, U_V(χ), d, Ru_*(h_T); conjunct 2 is the node's counit equation; h and d are ∃!-pinned, nonflat B kept, no extra hypotheses; theorems sorry only, docstrings and both report sections present. Compile: clean 44.0 s at load ~176 but 5 timeouts at load 170-237. Kernel hot spots are in dependency interfaces: a.representative.hom of ProEtaleTensorModel (8-10 s alone) and the choose from proEtaleProjectionUnit_existsUnique (8-12 s _proof re-check). Linter-off, .1 projection, direct choose and import drops gave no reliable gain back to back. Maintainer: land at low load (≲120) or raise the limit for this module; a future dependency-side speed-up is a named predicate and chosen iso for proEtaleProjectionUnit_existsUnique. Advisories A1-A3 as in the c9154b16 review."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-f502f",
+  "group": "H1",
+  "result": "fix",
+  "landing": "20261025T101113-L-3657498",
+  "kind": "interface",
+  "note": "independent cc review: item proof + two existsUnique specializations of DerivedScalarMate.{ordinary,derived}TensorIso_existsUnique against def-sp-proetale-scalar-mate-identifications / lem-fix-proetale-scalar-mate-normalization nodes; strengthened proEtaleScalarTensorNormalization (ℓ binders dropped) against its node + change record; 8 item importers + adapted DirectImageChangeRingTranspose compiled against the sandbox"
  }
 }

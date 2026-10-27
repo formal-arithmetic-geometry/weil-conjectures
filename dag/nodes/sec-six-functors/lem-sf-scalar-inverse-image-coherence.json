@@ -1,0 +1,115 @@
+{
+ "id": "lem-sf-scalar-inverse-image-coherence",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "Coefficient preservation of tensor reassociation, evaluation, adjunction units and counits, and their mates in latest fix-prop-coherence.proof.md; scalar-square steps as identified below.",
+   "via": [
+    "lem-sf-system-proper-open-scalar-square",
+    "lem-sf-exceptional-refinement-mates",
+    "lem-sf-constructible-exceptional-coefficient-construction"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Composition and identity for the normalized scalar inverse-image comparison",
+ "chapter": "sec-six-functors",
+ "unit": "sk-thm-sf-compatibility",
+ "statement": "Fix the compatible ring sequences, bases and comparisons of [def-sf-system-finite-free-scalar-data]. For any composable scheme maps v:X→Y and w:Y→Z and N in Derived(A,Z), ell_(v≫w)(N) ≫ T_X(pComp_A(v,w)(N)) = pComp_B(v,w)(T_Z N) ≫ PB(v)(ell_w(N)) ≫ ell_v(PA(w)N). For every scheme X and N in Derived(A,X), ell_id(N) ≫ T_X(pId_A(X)(N)) = pId_B(X)(T_X N). Here pComp and pId are the prescribed inverse-image compositors of [def-sf-semilinear-proper-open-comparisons]. These identities are for inverse images only and do not assert any proper/open or direct-image scalar-mate equation.",
+ "source": {
+  "document": "literature/zheng-six-operations-lefschetz-verdier-DM-stacks_arXiv-1006.3810.pdf",
+  "place": "Section 5, Lemma 5.13 and Constructions 5.14–5.15 (pp. 34–35), coefficient-system proper/open operations. Agent-formulated finite-free scalar naturality of their intrinsic mate, including non-Cartesian squares; not a verbatim assertion of Zheng."
+ },
+ "stmt_deps": [
+  "def-sf-system-finite-free-scalar-data",
+  "def-sf-semilinear-proper-open-comparisons"
+ ],
+ "proof": [
+  {
+   "text": "Use the section normalization of restrictionPush_existsUnique: the two pasted restriction/direct-image squares for v,w agree with the single square for v≫w under pushComp, because both are identity on sections. For identity morphisms compare with pushId, whose section map is the pullbackId site map. Conjugating by the scalar and inverse-image adjunctions gives the corresponding ordinary ellOrdinary equations. Applying the exact functors to complexes and localizing preserves these equations and inserts precisely the canonical pComp and pId comparisons. The equations hold for zero systems, identity maps, empty schemes and arbitrary unbounded complexes.",
+   "uses": [
+    "def-sf-system-finite-free-scalar-data",
+    "def-sf-semilinear-proper-open-comparisons",
+    "lem-weil-pbc-localization-universal-property"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tags 03CZ, 03D7 and 07A7; scalar-square step 6 before taking proper mates"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sf-semilinear-proper-open-comparisons",
+  "def-sf-system-finite-free-scalar-data",
+  "lem-weil-pbc-localization-universal-property"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/zheng-six-operations-lefschetz-verdier-DM-stacks_arXiv-1006.3810.pdf",
+  "place": "Extracted from lem-sf-system-proper-open-scalar-square; Section 5, Lemma 5.13 and Constructions 5.14–5.15 (pp. 34–35), coefficient-system proper/open operations. Agent-formulated finite-free scalar naturality of their intrinsic mate, including non-Cartesian squares; not a verbatim assertion of Zheng."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Extension of scalars inverse image functor comparison preserves composition and the identity and clopen projection",
+   "results": "ModuleCat.extendScalarsComp, ModuleCat.extendScalarsId and CommRingCat.moduleCatExtendScalarsPseudofunctor_mapComp; no theorem for strict sheaf systems and their specified comparisons.",
+   "date": "2026-10-27",
+   "verdict": "no match: ring-module pseudofunctor laws alone do not identify the sheaf-system maps"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Extension of scalars commutes with an adjunction mate and composition of inverse image functors",
+   "results": "ModuleCat.homEquiv_extendScalarsComp; ModuleCat.homEquiv_extendScalarsId; CategoryTheory.mateEquiv_apply.",
+   "date": "2026-10-27",
+   "verdict": "no match: these give algebraic components or the mate formula, not the required normalized system identities"
+  },
+  {
+   "tool": "grep",
+   "query": "rg mateEquiv_hcomp|conjugateEquiv_mateEquiv_vcomp in Mathlib/CategoryTheory/Adjunction/Mates.lean; scalarIntrinsicAlphaCube|scalarInverseImageCoherence across lean/Sheaf and lean/WeilConjectures",
+   "results": "Mathlib has generic mate composition; no existing declaration for these coefficient-system cubes. Other scalar coherence modules use finite constant coefficients or different model choices.",
+   "date": "2026-10-27",
+   "verdict": "no match for the geometric scalar cube or the specified ell coherence"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.SixFunctors.SystemProperOpenScalarSquare",
+  "date": "2026-10-27",
+  "group": "A2"
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.SixFunctors.ScalarInverseImageCoherence",
+  "file": "lean/Sheaf/SixFunctors/ScalarInverseImageCoherence.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.SemilinearProperOpen.Scalar.scalarInverseImageCoherence",
+  "statement": "theorem scalarInverseImageCoherence :\n    (∀ {X Y Z : Scheme.{u}} (v : X ⟶ Y) (w : Y ⟶ Z) (N : Derived A a Z),\n      (ell A B a b φ hφ d hd e (v ≫ w)).hom.app N ≫\n          (T A B a b φ hφ d hd e X).map ((pComp A a v w).hom.app N) =\n        (pComp B b v w).hom.app ((T A B a b φ hφ d hd e Z).obj N) ≫\n          (P B b v).map ((ell A B a b φ hφ d hd e w).hom.app N) ≫\n          (ell A B a b φ hφ d hd e v).hom.app ((P A a w).obj N)) ∧\n    (∀ (X : Scheme.{u}) (N : Derived A a X),\n      (ell A B a b φ hφ d hd e (𝟙 X)).hom.app N ≫\n          (T A B a b φ hφ d hd e X).map ((pId A a X).hom.app N) =\n        (pId B b X).hom.app ((T A B a b φ hφ d hd e X).obj N))",
+  "branch": "sheaf-dag",
+  "by": "A2",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-29e45",
+  "group": "A2",
+  "result": "fix",
+  "landing": "20261027T021254-L-2751689",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-29e45",
+  "group": "A2",
+  "result": "fix",
+  "landing": "20261027T021254-L-2751689",
+  "kind": "interface",
+  "note": "independent cc review: delivered Data module vs clone's item prefix (verbatim except private-helper rename); new sorry statements vs pinned pComp/pId/ell/alpha definitions in SemilinearProperOpenMatePasting; item proof vs node steps; both direct importers + transitive EISM compiled against delivered files"
+ }
+}

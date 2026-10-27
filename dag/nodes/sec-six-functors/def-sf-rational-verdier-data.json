@@ -1,0 +1,127 @@
+{
+ "id": "def-sf-rational-verdier-data",
+ "kind": "definition",
+ "title": "Rationalized Verdier data and coherence predicate",
+ "statement": "Fix a finite-field datum $D$ with $k=\\overline{\\mathbf F}_q$, a prime $\\ell\\ne\\operatorname{char}k$, and a separated finite-type $k$-scheme $X$. Use the coefficient categories, derived tensor and internal Hom, and constructible exceptional functors of [def-fix-six-functor-datum]. For a finite extension $E/\\mathbf Q_\\ell$ and a coherent integral dualizing datum $w$ of [def-sf-coherent-integral-dualizing-datum], a rational Verdier datum consists of an ordinary integral tensor presentation with signed symmetry and the quotient-normalized ordinary-to-completed tensor comparison, preservation of integral constructibility, an exact additive $E$-linear contravariant equivalence on the raw rationalized category, its object and pure-tensor arrow formulas as the rationalization of the integral dual, and its evaluation and biduality with their integral localization equations. The rational conclusion predicate means that such data are supplied simultaneously for every finite coefficient field and every coherent integral dualizing presentation, together with finite scalar-extension comparisons rationalizing the integral comparison and preserving evaluation and biduality, with normalized identity and associator equations. The predicate quantifies over the supplied family and its comparisons; this definition does not assert it.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-functor-package.proof.md",
+  "place": "prop-functor-package proof, Sentences of \"For (7), ...\" on the exchange, general finite-stage biduality, boundary exchange, and \"The integral and field anti-equivalences are ...\""
+ },
+ "stmt_deps": [
+  "def-fix-six-functor-datum",
+  "def-sf-coherent-integral-dualizing-datum"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Verdier duality finite integral rational algebraic closure coefficient realization data and canonical exchange predicates",
+   "results": "{\"n_hits\": 8, \"top\": [\"mem_algebraicClosure_iff'\", \"algebraicClosure.isIntegralClosure\", \"Rat.intEquiv\", \"Ring.instFiniteNormalClosure_1\", \"IsIntegrallyClosedIn.integralClosure_eq_bot_iff\", \"integralClosure.isIntegralClosure\", \"IsIntegralClosure\", \"IsIntegralClosure.rec\"], \"note\": \"\", \"digest\": \"679a996881cc6999\"}",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Equivalence.op",
+   "results": "{\"n_hits\": 12, \"top\": [\"CategoryTheory.Equivalence.op\", \"CategoryTheory.Equivalence.op_functor\", \"CategoryTheory.Equivalence.op_inverse\", \"CategoryTheory.Equivalence.op_counitIso\", \"CategoryTheory.Equivalence.op_unitIso\", \"CategoryTheory.Equivalence.leftOp_inverse_map\", \"CategoryTheory.Equivalence.leftOp_functor_map\", \"CategoryTheory.Equivalence.rightOp_functor_map\"], \"note\": \"\", \"digest\": \"c04c5a7fe465d41f\"}",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "FiniteProEtaleVerdierBiduality|IntegralVerdier|RationalVerdier|CoefQbarVerdier|VerdierExchange|HomIdentification|DualizingDatum",
+   "results": "{\"n_hits\": 0, \"top\": [], \"note\": \"\", \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "DAG definition records and Lean declarations: WeilConjectures.RationalVerdier.Datum, WeilConjectures.RationalVerdier.Conclusion",
+   "results": "No definition-node lean record carries these exact declarations. tools/blueprint_refs.py search Verdier finds the related theorem nodes. rg in lean/WeilConjectures finds only the abstract etale VerdierExchange section; the exact definitions are present in lean/Sheaf/SixFunctors/RationalVerdier.lean. They are reused with existing:true; no new Lean declaration.",
+   "date": "2026-10-22",
+   "verdict": "existing project definitions; new definition ownership only"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sf-package-verdier-coefficient-realization",
+  "date": "2026-10-22",
+  "group": "Q20"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-functor-package",
+   "place": "For (7): finite-stage biduality, boundary consequence, integral and field anti-equivalences and evaluation-defined exchange; the existing defining interfaces of Sheaf.SixFunctors.RationalVerdier",
+   "via": [
+    "lem-sf-package-verdier-coefficient-realization"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-thm-sf-package",
+ "lean": {
+  "module": "Sheaf.SixFunctors.RationalVerdierModels",
+  "declaration": "WeilConjectures.RationalVerdier.Datum",
+  "declarations": [
+   "WeilConjectures.RationalVerdier.units",
+   "WeilConjectures.RationalVerdier.integralTensor",
+   "WeilConjectures.RationalVerdier.tensor",
+   "WeilConjectures.RationalVerdier.completionChain",
+   "WeilConjectures.RationalVerdier.Completion",
+   "WeilConjectures.RationalVerdier.Datum",
+   "WeilConjectures.RationalVerdier.scalar",
+   "WeilConjectures.RationalVerdier.integralScalar",
+   "WeilConjectures.RationalVerdier.Extension",
+   "WeilConjectures.RationalVerdier.ExtensionProperties",
+   "WeilConjectures.RationalVerdier.Conclusion",
+   "WeilConjectures.RationalVerdier.third_exists_first"
+  ],
+  "statement": "structure Datum (w : IntegralFiniteExtension.DualizingDatum l X D hl E)",
+  "branch": "sheaf-dag",
+  "by": "Q115",
+  "date": "2026-10-24",
+  "existing": true,
+  "note": "Section 1(B) ownership repair explicitly requested by L in the return of a97424933e00 (H2). The previous existing:true record owned only Datum and Conclusion, leaving their plain canonical units/tensor/scalar helpers unowned. Extend the same record to include exactly these three already published definitions: units transports finiteFieldDatumPrimeUnit through the structure map to residue fields, tensor abbreviates rationalDerivedTensor with these units, and scalar abbreviates sfRationalScalarExtension with auxiliary characteristic 0. They give the coefficient categories, derived tensor and finite scalar transitions used by the node. Retain Datum/Conclusion, the primary declaration and signature, and the entire node statement; no new Lean construction or theorem hypothesis is introduced. H7 definition repair (2026-10-25): completionChain permutes the existing theorem’s three existential witnesses using Exists.imp and exists_comm, then chooses the cochain witness directly. Its full original normalization predicate and all signatures are retained. No theorem proof route is replaced and no import is added. B6: same definitions moved verbatim to RationalVerdierModels and publicly reexported from RationalVerdier to allow acyclic proof-step modules. B6: third_exists_first is a proved elementary witness-permutation helper used in the public normalized completion construction; its proof is existential elimination and introduction, with no new axiom or hole.",
+  "file": "lean/Sheaf/SixFunctors/RationalVerdierModels.lean"
+ },
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-46fe0e50b",
+  "group": "Q20",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-54e88c379",
+  "group": "Q115",
+  "result": "pass",
+  "note": "Re-delivery of 706ac052572a (RETURN H2), all 4 points addressed. Lean file byte-identical (sha 6ef7d16d) to the reviewed 706a/a974 snapshots; earlier full clause reading still holds (witness iff, pinned S via PodCommonTransposeNormalization, evaluation formula + bijection, 3-variable naturality, Koszul swap, arbitrary-target scalar-transpose square). stmt_deps: the theorems lem-pod-derived-automorphism-hom-evaluation/lem-pur-derived-pullback-tensor-iso are replaced by def-sf-adic-closed-reindexing-maps/def-sf-rational-common-tensor-symmetries (+ def-sf-rational-verdier-data, def-pod-partial-closed-interfaces); every statement constant has a cited definition owner. Reindexing-maps existing:true record extended lean-only with podRationalClosed (choose of ∃!, canonical) + _existsUnique (theorem-node double listing as for PodCommonTransposeNormalization). Against side-live 9a9a239: only lean/stmt_deps differ, nothing landed is overwritten, statement verbatim, no cycle. No compile (no file changed)."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-06a6b",
+  "group": "B6",
+  "result": "fix",
+  "landing": "20261025T122531-L-1781499",
+  "kind": "interface",
+  "note": "independent cc review: delivered RationalVerdierModels vs clone RationalVerdier.lean (identical except irreducible completionChain via third_exists_first, change-recorded); four split statements vs Conclusion and IntegralVerdier.SignedSymmetry/delta definitions; 12 direct importers compiled against sandboxed delivery (11 ok, VerdierCoefficientRealization pre-existing missing olean)"
+ }
+}

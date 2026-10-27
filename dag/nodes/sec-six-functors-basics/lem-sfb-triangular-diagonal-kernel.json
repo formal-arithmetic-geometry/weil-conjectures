@@ -1,0 +1,269 @@
+{
+ "id": "lem-sfb-triangular-diagonal-kernel",
+ "kind": "statement",
+ "title": "Scheme-theoretic diagonal kernel of a triangular matrix group",
+ "statement": "Let $k$ be a field [def-weil-field]. All groups below are affine group schemes [def-sc-group-scheme] of finite type [def-weil-finite-type-morphism] over $k$; subgroups are closed subgroup schemes [def-sc-group-scheme-subgroup]. Smoothness and connectedness are as in [def-sbc-smooth-morphisms] and [def-weil-connected-scheme]. For $n\\geq1$, let $B_n\\subseteq\\operatorname{GL}_n$ be the group of invertible upper triangular matrices and $U_n\\subseteq B_n$ its subgroup of matrices with every diagonal entry equal to $1$. Thus their $A$-points, for a commutative $k$-algebra $A$, are the matrices just described. The general linear group is [def-sc-general-linear-group]. Let $J\\subseteq B_n$ be a closed subgroup. The diagonal map $\\delta:J\\to(\\mathbf G_m)^n$, $g\\mapsto(g_{11},\\ldots,g_{nn})$, is a group-scheme homomorphism, with $\\mathbf G_m$ as in [def-sc-gm-ga]. Put $V=\\ker\\delta=J\\cap U_n$, the scheme-theoretic intersection. The subgroup $V$ is normal in $J$ and is unipotent in the scheme-theoretic sense of admitting a closed immersion into an upper unitriangular matrix group. The fppf sheaf quotient $D=J/V$ is represented by a group scheme, and $\\delta$ induces a closed immersion $D\\hookrightarrow(\\mathbf G_m)^n$. If $k$ is algebraically closed, the quotient homomorphism $q:J\\to D$ admits a group-scheme section $s:D\\to J$; multiplication $(v,d)\\mapsto v s(d)$ is an isomorphism of schemes $V\\times_kD\\simeq J$. In this case, if $J$ is smooth and connected, so are $V$ and $D$. In a smooth group this scheme-theoretic notion of unipotence is equivalent to every geometric point being a unipotent matrix in a faithful representation, that is, $(u-I)^N=0$ for some $N\\geq1$. The fppf quotient means sheafification of $A\\mapsto J(A)/V(A)$ for faithfully flat finitely presented coverings of commutative $k$-algebras.",
+ "source": {
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Proposition 16.2(c)⇒(d), printed p.325; Theorem 16.26(a), printed pp.332–333 (splitting over an algebraically closed field); Note 16.10, printed p.326 (smoothness and connectedness via that splitting); Corollary 14.12, printed p.283 (geometric-point comparison for smooth groups)."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-sc-group-scheme",
+  "def-weil-finite-type-morphism",
+  "def-sc-group-scheme-subgroup",
+  "def-sbc-smooth-morphisms",
+  "def-weil-connected-scheme",
+  "def-sc-general-linear-group",
+  "def-sc-gm-ga",
+  "def-weil-algebraic-closure",
+  "def-sfb-solvable-group-structure",
+  "def-sfb-fppf-group-quotient-presentation"
+ ],
+ "proof": [
+  {
+   "text": "For upper triangular matrices over any commutative $k$-algebra $A$, $(gh)_{ii}=g_{ii}h_{ii}$ and $(g^{-1})_{ii}=g_{ii}^{-1}$. The diagonal coordinate functions therefore define a group-scheme homomorphism $\\delta$. By [lem-sc-kernel-subgroup], its kernel is a closed subgroup, whose $A$-points are exactly the matrices of $J(A)$ with diagonal $1$. Thus it is the scheme-theoretic intersection $V=J\\cap U_n$. For $j\\in J(A)$ and $v\\in V(A)$, $\\delta(jvj^{-1})=1$, proving normality on every algebra. Affinely, imposing the equations of $J$ on $U_n$ gives a quotient of $k[x_{ij}:i<j]$, hence a closed immersion $V\\hookrightarrow U_n$. This is the asserted scheme-theoretic unipotence.",
+   "uses": [
+    "lem-sc-kernel-subgroup"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 16.2(c)⇒(d), printed p.325; the kernel calculation is on all algebras, not only field-valued points."
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-algebraic-group-homomorphism-factorization] to $\\delta:J\\to\\mathbf G_m^n$. The kernel computed in step 1 is $V$, so this gives the represented fppf quotient $q:J\\to D=J/V$ and a closed immersion $D\\hookrightarrow\\mathbf G_m^n$ inducing $\\delta$. The groups are affine of finite type and hence separated, as required by the cited factorization. No assumption on $k$ beyond being a field is used here. For the rest of the proof assume $k$ algebraically closed. Apply the current statement of [lem-sfb-split-torus-subgroups-diagonalizable] with $F=k$, $r=n$ and $K=D$, using precisely the closed immersion just obtained. It gives an isomorphism of $k$-group schemes $D\\simeq\\operatorname{Spec}k[M]$ for a finitely generated abelian group $M$, with the group-algebra structure specified there. No smoothness, connectedness or finiteness of $D$ is needed for this conclusion.",
+   "uses": [
+    "lem-sfb-algebraic-group-homomorphism-factorization",
+    "lem-sfb-split-torus-subgroups-diagonalizable"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 16.2(c)⇒(d), p.325; Theorem 5.39, p.108; Theorems 12.8 and 12.9(a),(c), pp.233--234."
+   }
+  },
+  {
+   "text": "Take the filtration $U^{(r)}$ of [lem-sfb-unitriangular-coordinate-filtration], and put $V_r=J\\cap U^{(r)}$. It is a series of subgroups normal in $J$, from $V_0=V$ to $V_m=1$. Restrict $p_r$ to $V_{r-1}$. Its scheme-theoretic kernel is $V_r$, so [lem-sfb-algebraic-group-homomorphism-factorization] identifies $V_{r-1}/V_r$ with a closed subgroup of $\\mathbf G_a$. The conjugation formula in the filtration node shows that this embedding is equivariant for the scalar character $t_{i_r}t_{j_r}^{-1}$ restricted to $D\\subseteq\\mathbf G_m^n$. Equality descends from $J$ to $D$ because $q$ is a sheaf quotient and the formula depends only on its diagonal image. Thus $V$ acts trivially on each factor. Equal successive $V_r$ can be omitted.",
+   "uses": [
+    "lem-sfb-unitriangular-coordinate-filtration",
+    "lem-sfb-algebraic-group-homomorphism-factorization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Example 6.49 and Theorem 16.21 proof, printed pp.136--137,330."
+   }
+  },
+  {
+   "text": "Prove the following induction claim: an extension $1\\to W\\to E\\to D\\to1$ of affine finite-type groups, with $D$ diagonalizable and $W=W_0\\supsetneq\\cdots\\supsetneq W_l=1$ normal in $E$, splits whenever each $W_{r-1}/W_r$ has a closed embedding in $\\mathbf G_a$ equivariant for a scalar character of $D$. Induct on $l$. For $l=0$ the quotient map is an isomorphism. For $l>0$, put $N=W_{l-1}$. The quotient and correspondence assertions of [lem-sfb-affine-normal-quotient-geometry] give $E/N\\to D$ with kernel $W/N$ and its shorter inherited filtration. The induction hypothesis supplies a group section $s_N:D\\to E/N$. In the pullback $P=E\\times_{E/N,s_N}D$, the map $P\\to D$ is an extension with kernel $N$. Indeed it is the base change of the quotient map $E\\to E/N$, and the fibre and locally surjective sheaf descriptions are unchanged by pullback. The last factor embeds $N$ as a closed subgroup of $\\mathbf G_a$ and gives exactly its scalar conjugation action through $D$. Apply [lem-sfb-additive-subgroup-diagonalizable-extension-splitting] to get a group section $t:D\\to P$. Composing $t$ with $P\\to E$ splits $E\\to D$. This completes the induction. Step 3 verifies every filtration hypothesis for $E=J$, $W=V$, so we obtain $s:D\\to J$.",
+   "uses": [
+    "lem-sfb-affine-normal-quotient-geometry",
+    "lem-sfb-additive-subgroup-diagonalizable-extension-splitting"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Theorem 16.26 proof, printed pp.332--333, induction and pullback diagram (118); Theorem 15.34(d), p.319."
+   }
+  },
+  {
+   "text": "The multiplication map $F:V\\times_kD\\to J$, $(v,d)\\mapsto vs(d)$, has inverse $g\\mapsto(g\\,s(q(g))^{-1},q(g))$. The first component lies in $V$ since its image under $q$ is $q(g)q(g)^{-1}=1$. Both formulas are morphisms of schemes: they use multiplication, inverse, the section and the kernel's defining fibre product. Substituting either formula into the other gives the identity on every algebra, and the same identities hold for the morphisms. This proves the scheme isomorphism; no commutativity of $J$ or $V$ is asserted.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Theorem 16.26(a), pp.332--333; semidirect product interpretation, Section 2.34."
+   }
+  },
+  {
+   "text": "Suppose also $J$ smooth and connected. Step 5 supplies scheme retractions $r_V:J\\to V$ and $q:J\\to D$, with sections $v\\mapsto v$ and $s$. For $X=V$ or $D$, a map $T\\to X$ from an affine first-order thickening $T\\subset T'$ can first be composed with its section into $J$, lifted to $T'\\to J$ by smoothness, and then composed with the retraction. Thus $X$ is formally smooth, directly by [def-sbc-smooth-morphisms]. Both $X$ are affine finite type: for $V$ use step 1, and for $D$ its closed immersion in the torus. Their coordinate algebras are finite type by [lem-pc-affine-finite-type-algebra] and finitely presented by [lem-weil-pbc-finite-type-noetherian-finite-presentation], since a field is Noetherian (its only ideals are $0$ and $k$). Hence $X\\to\\operatorname{Spec}k$ is locally of finite presentation and the cited definition makes it smooth. Each retraction is a continuous surjection. A separation of $X$ into nonempty clopen subsets would pull back to one of connected $J$, so both $V$ and $D$ are connected.",
+   "uses": [
+    "def-sbc-smooth-morphisms",
+    "lem-pc-affine-finite-type-algebra",
+    "lem-weil-pbc-finite-type-noetherian-finite-presentation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Note 16.10, printed p.326; explicit smooth-retraction lifting argument for the scheme product provided by 16.26(a)."
+   }
+  },
+  {
+   "text": "Finally let $G$ be a smooth affine finite-type group over an arbitrary field. If a faithful representation has all geometric points unipotent, [lem-sfb-geometric-unipotence-unitriangular-embedding] gives a closed immersion over the field into some upper unitriangular group. Conversely such an immersion is itself a faithful representation and every matrix $u=I+N$ in that group satisfies $N^n=0$: an entry of $N^n$ is a sum over strictly increasing chains of $n+1$ indices in a set of size $n$, and there are none. This proves the stated equivalence with the geometric-point formulation, with the smoothness hypothesis retained.",
+   "uses": [
+    "lem-sfb-geometric-unipotence-unitriangular-embedding"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Corollary 14.12 and Theorem 14.5, printed pp.281--283."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sc-kernel-subgroup",
+  "lem-sfb-algebraic-group-homomorphism-factorization",
+  "lem-sfb-split-torus-subgroups-diagonalizable",
+  "lem-sfb-unitriangular-coordinate-filtration",
+  "lem-sfb-affine-normal-quotient-geometry",
+  "lem-sfb-additive-subgroup-diagonalizable-extension-splitting",
+  "def-sbc-smooth-morphisms",
+  "lem-pc-affine-finite-type-algebra",
+  "lem-weil-pbc-finite-type-noetherian-finite-presentation",
+  "lem-sfb-geometric-unipotence-unitriangular-embedding"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Proposition 16.2(c)⇒(d); Example 6.49; Theorems 16.21,16.26(a); Note 16.10; Corollary 14.12. Step 6 writes out the smooth-retraction argument."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The kernel of the diagonal map on a closed subgroup scheme of upper triangular invertible matrices is unipotent and the quotient is diagonalizable",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"Matrix.GeneralLinearGroup.isParabolic_iff_of_upperTriangular\", \"module\": \"Mathlib/LinearAlgebra/Matrix/GeneralLinearGroup/FinTwo\", \"type\": \"∀ {K : Type u_2} [inst : Field K] {g : GL (Fin 2) K}, ↑g 1 0 = 0 → (g.IsParabolic ↔ ↑g 0 0 = ↑g 1 1 ∧ ↑g 0 1 ≠ 0)\", \"doc\": \"For a 2×2 invertible upper triangular matrix $g$ over a semiring $K$, $g$ is parabolic if and only if its diagonal entries are equal ($g_{0,0} = g_{1,1}$) and its superdiagonal entry ($g_{0,1}$) is no\"}\n  {\"name\": \"Subgroup.HasDetPlusMinusOne.isParabolic_iff_of_upperTriangular\", \"module\": \"Mathlib/NumberTheory/ModularForms/Cusps\", \"type\": \"∀ {K : Type u_1} [inst : Field K] [inst_1 : LinearOrder K] [IsStrictOrderedRing K] {𝒢 : Subgroup (GL (Fin 2) K)}\\n  [𝒢.HasDetPlusMinusOne] {g : GL (Fin 2) K},\\n  g ∈ 𝒢 →\\n    ↑g 1 0 = 0 →\\n      (g.IsParabolic ↔\\n        (∃ x, x ≠ 0 ∧ g = Matrix.GeneralLinearGroup.upperRightHom x) ∨\\n          ∃ x, x ≠ 0 \", \"doc\": \"For a matrix $ g $ in the subgroup of $ \\\\mathrm{GL}(2, R) $ with determinant $ \\\\pm 1 $ and $ g_{1,0} = 0 $, $ g $ is parabolic if and only if there exists a non-zero $ x \\\\in R $ such that $ g $ equals\"}\n  {\"name\": \"RootPairing.GeckConstruction.instIsTriangularizableSubtypeMatrixSumMemFinsetSupportLieSubalgebraLieAlgebraCartanSubalgebra'Forall\", \"module\": \"Mathlib/LinearAlgebra/RootSystem/GeckConstruction/Basic\", \"type\": \"∀ {ι : Type u_1} {R : Type u_2} {M : Type u_3} {N : Type u_4} [inst : CommRing R] [inst_1 : AddCommGroup M]\\n  [inst_2 : Module R M] [inst_3 : AddCommGroup N] [inst_4 : Module R N] {P : RootPairing ι R M N}\\n  [inst_5 : P.IsCrystallographic] {b : P.Base} [inst_6 : Finite ι] [inst_7 : IsDomain R] [inst\", \"doc\": \"The Cartan subalgebra obtained via the Geck construction acts triangularizably on the module of functions from the disjoint union of the finite support set and $\\\\iota$ to the commutative ring $R$. Thi\"}\n  {\"name\": \"Matrix.GeneralLinearGroup.isParabolic_iff_of_upperTriangular_of_det\", \"module\": \"Mathlib/LinearAlgebra/Matrix/GeneralLinearGroup/FinTwo\", \"type\": \"∀ {K : Type u_2} [inst : Field K] [inst_1 : LinearOrder K] [IsStrictOrderedRing K] {g : GL (Fin 2) K},\\n  Matrix.GeneralLinearGroup.det g = 1 ∨ Matrix.GeneralLinearGroup.det g = -1 →\\n    ↑g 1 0 = 0 →\\n      (g.IsParabolic ↔\\n        (∃ x, x ≠ 0 ∧ g = Matrix.GeneralLinearGroup.upperRightHom x) ∨\\n       \", \"doc\": \"For a 2×2 invertible matrix $ g $ over a linearly ordered ring $ K $ with determinant $ \\\\pm 1 $ and zero entry at position $ (1,0) $, $ g $ is parabolic if and only if there exists a nonzero $ x \\\\in K\"}\n  {\"name\": \"Matrix.SpecialLinearGroup.center_equiv_rootsOfUnity'_apply\", \"module\": \"Mathlib/LinearAlgebra/Matrix/SpecialLinearGroup\", \"type\": \"∀ {n : Type u} [inst : DecidableEq n] [inst_1 : Fintype n] {R : Type v} [inst_2 : CommRing R] (i : n)\\n  (A : ↥(Subgroup.center (Matrix.SpecialLinearGroup n R))),\\n  (Matrix.SpecialLinearGroup.center_equiv_rootsOfUnity' i) A = rootsOfUnity.mkOfPowEq (↑↑A i i) ⋯\", \"doc\": \"For a finite type $n$ with cardinality $\\\\#n$ and a commutative ring $R$, each element $A$ in the center of the special linear group $\\\\text{SL}(n, R)$ corresponds to a $\\\\#n$-th root of unity $\\\\zeta$ su\"}\n  {\"name\": \"Matrix.ker_diagonal_toLin'\", \"module\": \"Mathlib/LinearAlgebra/Matrix/Diagonal\", \"type\": \"∀ {m : Type u_1} [inst : Fintype m] {K : Type u} [inst_1 : Semifield K] [inst_2 : DecidableEq m] (w : m → K),\\n  (Matrix.toLin' (Matrix.diagonal w)).ker = ⨆ i ∈ {i | w i = 0}, (LinearMap.single K (fun x => K) i).range\", \"doc\": \"The kernel of the linear map represented by a diagonal matrix with entries $ w : m → K $ consists of all vectors whose support is contained in the set of indices $ i $ where $ w_i = 0 $. This kernel i\"}\n  {\"name\": \"Matrix.isParabolic_iff_exists\", \"module\": \"Mathlib/LinearAlgebra/Matrix/GeneralLinearGroup/FinTwo\", \"type\": \"∀ {K : Type u_1} [inst : Field K] {m : Matrix (Fin 2) (Fin 2) K} [NeZero 2],\\n  m.IsParabolic ↔ ∃ a n, m = (Matrix.scalar (Fin 2)) a + n ∧ n ≠ 0 ∧ n ^ 2 = 0\", \"doc\": \"A matrix $ m $ is parabolic if and only if there exists a scalar $ a $ and a non-zero matrix $ n $ such that $ m = aI + n $ and $ n^2 = 0 $, where $ I $ denotes the identity matrix.\"}\n  {\"name\": \"RootPairing.GeckConstruction.h_eq_diagonal\", \"module\": \"Mathlib/LinearAlgebra/RootSystem/GeckConstruction/Basic\", \"type\": \"∀ {ι : Type u_1} {R : Type u_2} {M : Type u_3} {N : Type u_4} [inst : CommRing R] [inst_1 : AddCommGroup M]\\n  [inst_2 : Module R M] [inst_3 : AddCommGroup N] [inst_4 : Module R N] {P : RootPairing ι R M N}\\n  [inst_5 : P.IsCrystallographic] {b : P.Base} [inst_6 : DecidableEq ι] (i : ↥b.support),\\n  Ro\", \"doc\": \"For each element $i$ in the finite support of the root pairing $P$, the corresponding diagonal entry of the Geck construction matrix $h$ is equal to the integer-valued pairing $P(i)$ evaluated at $i$.\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: matrix linear kernels, parabolic elements and Lie-module triangularization do not give the scheme-theoretic unitriangular kernel or the splitting of a triangular group."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A smooth connected triangular algebraic group over an algebraically closed field has smooth connected unitriangular kernel and diagonal torus quotient",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"Algebra.FormallySmooth.iff_subsingleton_and_projective\", \"module\": \"Mathlib.RingTheory.Smooth.Basic\", \"type\": \"∀ (R : Type u) (A : Type v) [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A],\\n  Algebra.FormallySmooth R A ↔ Module.Projective A Ω[A⁄R] ∧ Subsingleton (Algebra.H1Cotangent R A)\", \"doc\": \"An $ R $-algebra $ A $ is formally smooth if and only if its module of Kähler differentials $ \\\\Omega_{A/R} $ is a projective $ A $-module and its first cohomology group of the cotangent complex $ H^1(\"}\n  {\"name\": \"LieModule.instIsTriangularizableOfIsAlgClosed\", \"module\": \"Mathlib.Algebra.Lie.Weights.Basic\", \"type\": \"[IsAlgClosed K] : IsTriangularizable K L M\", \"doc\": \"Given a commutative ring $ R $, a Lie algebra $ L $ over $ R $, and an $ R $-module $ M $ equipped with a compatible Lie module structure over $ L $, if the field $ K $ is algebraically closed, then $\"}\n  {\"name\": \"LieGroup\", \"module\": \"Mathlib.Geometry.Manifold.Algebra.LieGroup\", \"type\": \"{𝕜 : Type u_1} →\\n  [inst : NontriviallyNormedField 𝕜] →\\n    {H : Type u_2} →\\n      [inst_1 : TopologicalSpace H] →\\n        {E : Type u_3} →\\n          [inst_2 : NormedAddCommGroup E] →\\n            [inst_3 : NormedSpace 𝕜 E] →\\n              ModelWithCorners 𝕜 E H →\\n                WithTop ℕ∞ → (G : Ty\", \"doc\": \"A Lie group is a group $G$ equipped with a topological space structure and a charted space structure modeled on $H$, such that the group operations (multiplication and inversion) are smooth maps compa\"}\n  {\"name\": \"LibraryNote.Design_choices_about_smooth_algebraic_structures\", \"module\": \"Mathlib.Geometry.Manifold.Algebra.Monoid\", \"type\": \": LibraryNote✝\", \"doc\": \"A note outlining the design decisions made regarding the implementation of smooth algebraic structures in the library.\"}\n  {\"name\": \"topologicalAddGroup_of_lieAddGroup\", \"module\": \"Mathlib.Geometry.Manifold.Algebra.LieGroup\", \"type\": \"∀ {𝕜 : Type u_1} [inst : NontriviallyNormedField 𝕜] {H : Type u_2} [inst_1 : TopologicalSpace H] {E : Type u_3}\\n  [inst_2 : NormedAddCommGroup E] [inst_3 : NormedSpace 𝕜 E] (I : ModelWithCorners 𝕜 E H) (n : WithTop ℕ∞)\\n  {G : Type u_4} [inst_4 : TopologicalSpace G] [inst_5 : ChartedSpace H G] [inst_\", \"doc\": \"Let $\\\\mathbb{K}$ be a nontrivially normed field, $H$ a topological space, $E$ a normed vector space over $\\\\mathbb{K}$, and $I$ a model with corners on $E$ and $H$. For a topological space $G$ with a c\"}\n  {\"name\": \"LieModule.IsTriangularizable.casesOn\", \"module\": \"Mathlib.Algebra.Lie.Weights.Basic\", \"type\": \"{R : Type u_2} →\\n  {L : Type u_3} →\\n    {M : Type u_4} →\\n      [inst : CommRing R] →\\n        [inst_1 : LieRing L] →\\n          [inst_2 : LieAlgebra R L] →\\n            [inst_3 : AddCommGroup M] →\\n              [inst_4 : Module R M] →\\n                [inst_5 : LieRingModule L M] →\\n                  [in\", \"doc\": \"For a triangularizable Lie module $ M $ over a Lie algebra $ \\\\mathfrak{g} $, the case analysis principle asserts that for every $ x \\\\in \\\\mathfrak{g} $, the maximal generalized eigenspaces of the endom\"}\n  {\"name\": \"LieModule.IsTriangularizable.congr_simp\", \"module\": \"Mathlib.Algebra.Lie.LieTheorem\", \"type\": \"∀ (R : Type u_2) (L : Type u_3) (M : Type u_4) [inst : CommRing R] [inst_1 : LieRing L] [inst_2 : LieAlgebra R L]\\n  [inst_3 : AddCommGroup M] [inst_4 : Module R M] [inst_5 : LieRingModule L M] [inst_6 : LieModule R L M],\\n  LieModule.IsTriangularizable R L M = LieModule.IsTriangularizable R L M\", \"doc\": \"The triangularizability condition for a Lie module is preserved under congruence, meaning that if two Lie modules are equivalent under the given commutative ring $ R $, Lie algebra $ L $, and module s\"}\n  {\"name\": \"LieAlgebra.IsKilling.rootSystem.congr_simp\", \"module\": \"Mathlib.Algebra.Lie.Weights.RootSystem\", \"type\": \"∀ {K : Type u_1} {L : Type u_2} [inst : Field K] [inst_1 : CharZero K] [inst_2 : LieRing L] [inst_3 : LieAlgebra K L]\\n  [inst_4 : LieAlgebra.IsKilling K L] [inst_5 : FiniteDimensional K L] (H : LieSubalgebra K L)\\n  [inst_6 : H.IsCartanSubalgebra] [inst_7 : LieModule.IsTriangularizable K (↥H) L],\\n  L\", \"doc\": \"For a Lie algebra $\\\\mathfrak{g}$ over a field $K$ of characteristic zero with non-degenerate Killing form, and a Cartan subalgebra $\\\\mathfrak{h} \\\\subseteq \\\\mathfrak{g}$ such that $\\\\mathfrak{g}$ is tri\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: matrix linear kernels, parabolic elements and Lie-module triangularization do not give the scheme-theoretic unitriangular kernel or the splitting of a triangular group."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"BlockTriangular\", \"ker\"",
+   "results": "[loogle] OK 0 hit(s)",
+   "date": "2026-10-23",
+   "verdict": "no match: matrix linear kernels, parabolic elements and Lie-module triangularization do not give the scheme-theoretic unitriangular kernel or the splitting of a triangular group."
+  },
+  {
+   "tool": "grep",
+   "query": "diagonal.*(unipotent|unitriangular)|trigonalizable|triangular.*groupScheme",
+   "results": "[grep] OK 0 hit(s)",
+   "date": "2026-10-23",
+   "verdict": "no match: matrix linear kernels, parabolic elements and Lie-module triangularization do not give the scheme-theoretic unitriangular kernel or the splitting of a triangular group."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The scheme theoretic kernel of the diagonal homomorphism of an upper triangular algebraic group is unipotent and the diagonal quotient splits over an algebraically closed field",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"LieModule.instIsTriangularizableOfIsAlgClosed\", \"module\": \"Mathlib/Algebra/Lie/Weights/Basic\", \"type\": \"∀ (K : Type u_1) (L : Type u_3) (M : Type u_4) [inst : LieRing L] [inst_1 : AddCommGroup M] [inst_2 : LieRingModule L M]\\n  [inst_3 : Field K] [inst_4 : LieAlgebra K L] [inst_5 : Module K M] [inst_6 : LieModule K L M] [FiniteDimensional K M]\\n  [IsAlgClosed K], LieModule.IsTriangularizable K L M\", \"doc\": \"Given a commutative ring $ R $, a Lie algebra $ L $ over $ R $, and an $ R $-module $ M $ equipped with a compatible Lie module structure over $ L $, if the field $ K $ is algebraically closed, then $\"}\n  {\"name\": \"RootPairing.GeckConstruction.instHasTrivialRadical\", \"module\": \"Mathlib/LinearAlgebra/RootSystem/GeckConstruction/Semisimple\", \"type\": \"∀ {ι : Type u_1} {K : Type u_2} {M : Type u_3} {N : Type u_4} [inst : Field K] [inst_1 : CharZero K]\\n  [inst_2 : DecidableEq ι] [inst_3 : Fintype ι] [inst_4 : AddCommGroup M] [inst_5 : Module K M]\\n  [inst_6 : AddCommGroup N] [inst_7 : Module K N] {P : RootPairing ι K M N} [P.IsRootSystem]\\n  [inst_9 \", \"doc\": \"The Lie algebra constructed via the Geck construction from a root pairing over an algebraically closed field has a trivial radical, hence is semisimple. Specifically, the Lie subalgebra of the matrix \"}\n  {\"name\": \"IsSemisimpleRing.exists_algEquiv_pi_matrix_of_isAlgClosed\", \"module\": \"Mathlib/RingTheory/SimpleModule/IsAlgClosed\", \"type\": \"∀ (F : Type u_1) (R : Type u_2) [inst : Field F] [IsAlgClosed F] [inst_2 : Ring R] [inst_3 : Algebra F R]\\n  [IsSemisimpleRing R] [FiniteDimensional F R],\\n  ∃ n d, (∀ (i : Fin n), NeZero (d i)) ∧ Nonempty (R ≃ₐ[F] (i : Fin n) → Matrix (Fin (d i)) (Fin (d i)) F)\", \"doc\": \"Let `F` be an algebraically closed field and `R` be a finite-dimensional semisimple algebra over `F`. Then there exists a natural number `n` and a sequence of positive integers $d_0, d_1, \\\\ldots, d_{n\"}\n  {\"name\": \"AlgebraicGeometry.FormallyUnramified.isOpenImmersion_diagonal\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FormallyUnramified\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.FormallyUnramified f]\\n  [AlgebraicGeometry.LocallyOfFiniteType f],\\n  AlgebraicGeometry.IsOpenImmersion (CategoryTheory.Limits.pullback.diagonal f)\", \"doc\": \"If a morphism of schemes is formally unramified and locally of finite type, then its diagonal morphism in the pullback is an open immersion.\"}\n  {\"name\": \"RootPairing.GeckConstruction.instIsTriangularizableSubtypeMatrixSumMemFinsetSupportLieSubalgebraLieAlgebraCartanSubalgebra'Forall\", \"module\": \"Mathlib/LinearAlgebra/RootSystem/GeckConstruction/Basic\", \"type\": \"∀ {ι : Type u_1} {R : Type u_2} {M : Type u_3} {N : Type u_4} [inst : CommRing R] [inst_1 : AddCommGroup M]\\n  [inst_2 : Module R M] [inst_3 : AddCommGroup N] [inst_4 : Module R N] {P : RootPairing ι R M N}\\n  [inst_5 : P.IsCrystallographic] {b : P.Base} [inst_6 : Finite ι] [inst_7 : IsDomain R] [inst\", \"doc\": \"The Cartan subalgebra obtained via the Geck construction acts triangularizably on the module of functions from the disjoint union of the finite support set and $\\\\iota$ to the commutative ring $R$. Thi\"}\n  {\"name\": \"Matrix.ker_diagonal_toLin'\", \"module\": \"Mathlib/LinearAlgebra/Matrix/Diagonal\", \"type\": \"∀ {m : Type u_1} [inst : Fintype m] {K : Type u} [inst_1 : Semifield K] [inst_2 : DecidableEq m] (w : m → K),\\n  (Matrix.toLin' (Matrix.diagonal w)).ker = ⨆ i ∈ {i | w i = 0}, (LinearMap.single K (fun x => K) i).range\", \"doc\": \"The kernel of the linear map represented by a diagonal matrix with entries $ w : m → K $ consists of all vectors whose support is contained in the set of indices $ i $ where $ w_i = 0 $. This kernel i\"}\n  {\"name\": \"RootPairing.GeckConstruction.isNilpotent_e\", \"module\": \"Mathlib/LinearAlgebra/RootSystem/GeckConstruction/Semisimple\", \"type\": \"∀ {ι : Type u_1} {R : Type u_2} {M : Type u_3} {N : Type u_4} [inst : CommRing R] [inst_1 : IsDomain R]\\n  [inst_2 : CharZero R] [inst_3 : AddCommGroup M] [inst_4 : Module R M] [inst_5 : AddCommGroup N] [inst_6 : Module R N]\\n  {P : RootPairing ι R M N} [inst_7 : P.IsCrystallographic] [P.IsReduced] {b\", \"doc\": \"For each index $i$ in the finite support set of the base structure $b$, the Geck construction matrix $e(i)$ associated with the root pairing $P$ is nilpotent. Specifically, there exists a natural numb\"}\n  {\"name\": \"RootPairing.GeckConstruction.isNilpotent_f\", \"module\": \"Mathlib/LinearAlgebra/RootSystem/GeckConstruction/Semisimple\", \"type\": \"∀ {ι : Type u_1} {R : Type u_2} {M : Type u_3} {N : Type u_4} [inst : CommRing R] [inst_1 : IsDomain R]\\n  [inst_2 : CharZero R] [inst_3 : AddCommGroup M] [inst_4 : Module R M] [inst_5 : AddCommGroup N] [inst_6 : Module R N]\\n  {P : RootPairing ι R M N} [inst_7 : P.IsCrystallographic] [P.IsReduced] {b\", \"doc\": \"The block matrix $ f_i $ constructed in Geck's method for root pairings is nilpotent, i.e., there exists a natural number $ n $ such that $ (f_i)^n = 0 $.\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: Lie-module triangularization and abstract group semidirect products do not prove the assertions for finite-type group schemes; matrix diagonal kernels are linear-map kernels."
+  },
+  {
+   "tool": "leansearch",
+   "query": "An algebraic subgroup scheme of upper triangular matrices is a semidirect product of its unitriangular subgroup and a diagonalizable group over an algebraically closed field",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"Subgroup.strictPeriods\", \"module\": \"Mathlib.NumberTheory.ModularForms.Cusps\", \"type\": \": AddSubgroup R\", \"doc\": \"The additive subgroup of $ R $ consisting of elements $ x $ such that the upper-right matrix $ \\\\begin{pmatrix} 1 & x \\\\\\\\ 0 & 1 \\\\end{pmatrix} $ belongs to the subgroup $ \\\\mathcal{G} \\\\subseteq \\\\mathrm{GL\"}\n  {\"name\": \"LieModule.instIsTriangularizableOfIsAlgClosed\", \"module\": \"Mathlib.Algebra.Lie.Weights.Basic\", \"type\": \"[IsAlgClosed K] : IsTriangularizable K L M\", \"doc\": \"Given a commutative ring $ R $, a Lie algebra $ L $ over $ R $, and an $ R $-module $ M $ equipped with a compatible Lie module structure over $ L $, if the field $ K $ is algebraically closed, then $\"}\n  {\"name\": \"Subgroup.HasDetPlusMinusOne.isParabolic_iff_of_upperTriangular\", \"module\": \"Mathlib.NumberTheory.ModularForms.Cusps\", \"type\": \"{g} (hg : g ∈ 𝒢) (hg10 : g 1 0 = 0) : g.IsParabolic ↔ (∃ x ≠ 0, g = upperRightHom x) ∨ (∃ x ≠ 0, g = -upperRightHom x)\", \"doc\": \"For a matrix $ g $ in the subgroup of $ \\\\mathrm{GL}(2, R) $ with determinant $ \\\\pm 1 $ and $ g_{1,0} = 0 $, $ g $ is parabolic if and only if there exists a non-zero $ x \\\\in R $ such that $ g $ equals\"}\n  {\"name\": \"Subgroup.periods\", \"module\": \"Mathlib.NumberTheory.ModularForms.Cusps\", \"type\": \": AddSubgroup R\", \"doc\": \"The additive subgroup of $ R $ consisting of elements $ x $ such that the upper-right matrix $ \\\\begin{pmatrix} 1 & x \\\\\\\\ 0 & 1 \\\\end{pmatrix} $ belongs to the subgroup $ \\\\mathcal{G} \\\\subseteq \\\\mathrm{GL\"}\n  {\"name\": \"SemidirectProduct.mulEquivSubgroup\", \"module\": \"Mathlib.GroupTheory.SemidirectProduct\", \"type\": \"{H K : Subgroup G} [H.Normal] (h : H.IsComplement' K) :\\n  H ⋊[(H.normalizerMonoidHom).comp (inclusion (H.normalizer_eq_top ▸ le_top))] K ≃* G\", \"doc\": \"Given a normal subgroup $ H $ and a complementary subgroup $ K $ of a group $ G $, the semidirect product $ H \\rtimes K $ (constructed via the normalizer homomorphism and inclusion) is multiplicatively\"}\n  {\"name\": \"LieModule.IsTriangularizable\", \"module\": \"Mathlib.Algebra.Lie.Weights.Basic\", \"type\": \"(R : Type u_2) →\\n  (L : Type u_3) →\\n    (M : Type u_4) →\\n      [inst : CommRing R] →\\n        [inst_1 : LieRing L] →\\n          [inst_2 : LieAlgebra R L] →\\n            [inst_3 : AddCommGroup M] → [inst_4 : Module R M] → [inst_5 : LieRingModule L M] → [LieModule R L M] → Prop\", \"doc\": \"Given a commutative ring $ R $, a Lie algebra $ L $ over $ R $, and an $ R $-module $ M $ equipped with a compatible Lie module structure over $ L $, the proposition that $ M $ is triangularizable as \"}\n  {\"name\": \"GroupExtension.Splitting.semidirectProductMulEquiv\", \"module\": \"Mathlib.GroupTheory.GroupExtension.Basic\", \"type\": \": N ⋊[s.conjAct] G ≃* E\", \"doc\": \"Given a split group extension $1 \\\\to N \\\\to E \\\\to G \\\\to 1$ with splitting $s : G \\\\to E$, the semidirect product $N \\\\rtimes_{s.\\\\text{conjAct}} G$ is multiplicatively equivalent to $E$ via the group isom\"}\n  {\"name\": \"LieModule.instIsTriangularizableSubtypeMemLieSubalgebra\", \"module\": \"Mathlib.Algebra.Lie.Weights.Basic\", \"type\": \"(L' : LieSubalgebra R L) [IsTriangularizable R L M] : IsTriangularizable R L' M\", \"doc\": \"If a Lie module $ M $ over a Lie algebra $ \\\\mathfrak{g} $ over a commutative ring $ R $ is triangularizable, then $ M $ is also triangularizable as a module over any Lie subalgebra $ \\\\mathfrak{g}' $ o\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: Lie-module triangularization and abstract group semidirect products do not prove the assertions for finite-type group schemes; matrix diagonal kernels are linear-map kernels."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"GrpObj\", \"ker\"",
+   "results": "[loogle] OK 8 hit(s)\n  {\"name\": \"CategoryTheory.AddGrpObj.whiskerLeft_η_addCommutator\", \"module\": \"Mathlib.CategoryTheory.Monoidal.Cartesian.Grp\", \"type\": \" {C : Type u} [CategoryTheory.Category.{v, u} C] [CategoryTheory.CartesianMonoidalCategory C] {G : C} [CategoryTheory.AddGrpObj G] : CategoryTheory.CategoryStruct.comp (CategoryTheory.MonoidalCategoryStruct.whiskerLeft G CategoryTheory.AddMonObj.zero) (CategoryTheory.AddGrpObj.addCommutator G) = Cat\", \"doc\": \"\"}\n  {\"name\": \"CategoryTheory.AddGrpObj.η_whiskerRight_addCommutator\", \"module\": \"Mathlib.CategoryTheory.Monoidal.Cartesian.Grp\", \"type\": \" {C : Type u} [CategoryTheory.Category.{v, u} C] [CategoryTheory.CartesianMonoidalCategory C] {G : C} [CategoryTheory.AddGrpObj G] : CategoryTheory.CategoryStruct.comp (CategoryTheory.MonoidalCategoryStruct.whiskerRight CategoryTheory.AddMonObj.zero G) (CategoryTheory.AddGrpObj.addCommutator G) = Ca\", \"doc\": \"\"}\n  {\"name\": \"CategoryTheory.GrpObj.whiskerLeft_η_commutator\", \"module\": \"Mathlib.CategoryTheory.Monoidal.Cartesian.Grp\", \"type\": \" {C : Type u} [CategoryTheory.Category.{v, u} C] [CategoryTheory.CartesianMonoidalCategory C] {G : C} [CategoryTheory.GrpObj G] : CategoryTheory.CategoryStruct.comp (CategoryTheory.MonoidalCategoryStruct.whiskerLeft G CategoryTheory.MonObj.one) (CategoryTheory.GrpObj.commutator G) = CategoryTheory.C\", \"doc\": \"\"}\n  {\"name\": \"CategoryTheory.GrpObj.η_whiskerRight_commutator\", \"module\": \"Mathlib.CategoryTheory.Monoidal.Cartesian.Grp\", \"type\": \" {C : Type u} [CategoryTheory.Category.{v, u} C] [CategoryTheory.CartesianMonoidalCategory C] {G : C} [CategoryTheory.GrpObj G] : CategoryTheory.CategoryStruct.comp (CategoryTheory.MonoidalCategoryStruct.whiskerRight CategoryTheory.MonObj.one G) (CategoryTheory.GrpObj.commutator G) = CategoryTheory.\", \"doc\": \"\"}\n  {\"name\": \"CategoryTheory.AddGrpObj.whiskerLeft_η_addCommutator_assoc\", \"module\": \"Mathlib.CategoryTheory.Monoidal.Cartesian.Grp\", \"type\": \" {C : Type u} [CategoryTheory.Category.{v, u} C] [CategoryTheory.CartesianMonoidalCategory C] {G : C} [CategoryTheory.AddGrpObj G] {Z : C} (h : G ⟶ Z) : CategoryTheory.CategoryStruct.comp (CategoryTheory.MonoidalCategoryStruct.whiskerLeft G CategoryTheory.AddMonObj.zero) (CategoryTheory.CategoryStru\", \"doc\": \"\"}\n  {\"name\": \"CategoryTheory.AddGrpObj.η_whiskerRight_addCommutator_assoc\", \"module\": \"Mathlib.CategoryTheory.Monoidal.Cartesian.Grp\", \"type\": \" {C : Type u} [CategoryTheory.Category.{v, u} C] [CategoryTheory.CartesianMonoidalCategory C] {G : C} [CategoryTheory.AddGrpObj G] {Z : C} (h : G ⟶ Z) : CategoryTheory.CategoryStruct.comp (CategoryTheory.MonoidalCategoryStruct.whiskerRight CategoryTheory.AddMonObj.zero G) (CategoryTheory.CategoryStr\", \"doc\": \"\"}\n  {\"name\": \"CategoryTheory.GrpObj.whiskerLeft_η_commutator_assoc\", \"module\": \"Mathlib.CategoryTheory.Monoidal.Cartesian.Grp\", \"type\": \" {C : Type u} [CategoryTheory.Category.{v, u} C] [CategoryTheory.CartesianMonoidalCategory C] {G : C} [CategoryTheory.GrpObj G] {Z : C} (h : G ⟶ Z) : CategoryTheory.CategoryStruct.comp (CategoryTheory.MonoidalCategoryStruct.whiskerLeft G CategoryTheory.MonObj.one) (CategoryTheory.CategoryStruct.comp\", \"doc\": \"\"}\n  {\"name\": \"CategoryTheory.GrpObj.η_whiskerRight_commutator_assoc\", \"module\": \"Mathlib.CategoryTheory.Monoidal.Cartesian.Grp\", \"type\": \" {C : Type u} [CategoryTheory.Category.{v, u} C] [CategoryTheory.CartesianMonoidalCategory C] {G : C} [CategoryTheory.GrpObj G] {Z : C} (h : G ⟶ Z) : CategoryTheory.CategoryStruct.comp (CategoryTheory.MonoidalCategoryStruct.whiskerRight CategoryTheory.MonObj.one G) (CategoryTheory.CategoryStruct.com\", \"doc\": \"\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: Lie-module triangularization and abstract group semidirect products do not prove the assertions for finite-type group schemes; matrix diagonal kernels are linear-map kernels."
+  },
+  {
+   "tool": "grep",
+   "query": "triangular.*(groupScheme|diagonal)|unitriangular|trigonalizable",
+   "results": "[grep] OK 17 hit(s)\n  {\"file\": \"Mathlib/LinearAlgebra/Matrix/Charpoly/Basic.lean\", \"line\": \"127\", \"text\": \"  rw [charmatrix, scalar_apply, RingHom.mapMatrix_apply, (blockTriangular_diagonal _).sub_iff_right]\"}\n  {\"file\": \"Mathlib/LinearAlgebra/Matrix/SchurComplement.lean\", \"line\": \"76\", \"text\": \"/-- An upper-block-triangular matrix is invertible if its diagonal is. -/\"}\n  {\"file\": \"Mathlib/LinearAlgebra/Matrix/SchurComplement.lean\", \"line\": \"85\", \"text\": \"/-- A lower-block-triangular matrix is invertible if its diagonal is. -/\"}\n  {\"file\": \"Mathlib/LinearAlgebra/Matrix/SchurComplement.lean\", \"line\": \"168\", \"text\": \"/-- An upper block-triangular matrix is invertible iff both elements of its diagonal are.\"}\n  {\"file\": \"Mathlib/LinearAlgebra/Matrix/SchurComplement.lean\", \"line\": \"177\", \"text\": \"/-- A lower block-triangular matrix is invertible iff both elements of its diagonal are.\"}\n  {\"file\": \"Mathlib/LinearAlgebra/Matrix/Block.lean\", \"line\": \"29\", \"text\": \"  a triangular matrix is the product of the entries along the diagonal\"}\n  {\"file\": \"Mathlib/LinearAlgebra/Matrix/Block.lean\", \"line\": \"64\", \"text\": \"/-- `M` is upper triangular: entries below the diagonal vanish. -/\"}\n  {\"file\": \"Mathlib/LinearAlgebra/Matrix/Block.lean\", \"line\": \"68\", \"text\": \"/-- `M` is lower triangular: entries above the diagonal vanish. -/\"}\n  {\"file\": \"Mathlib/LinearAlgebra/Matrix/Block.lean\", \"line\": \"144\", \"text\": \"theorem blockTriangular_diagonal [DecidableEq m] (d : m → R) : BlockTriangular (diagonal d) b :=\"}\n  {\"file\": \"Mathlib/LinearAlgebra/Matrix/Block.lean\", \"line\": \"147\", \"text\": \"theorem blockTriangular_blockDiagonal' [DecidableEq α] (d : ∀ i : α, Matrix (m' i) (m' i) R) :\"}\n  {\"file\": \"Mathlib/LinearAlgebra/Eigenspace/Semisimple.lean\", \"line\": \"23\", \"text\": \"  triangularizable if and only if it is diagonalizable.\"}\n  {\"file\": \"Mathlib/LinearAlgebra/Eigenspace/Semisimple.lean\", \"line\": \"77\", \"text\": \"/-- A finitely-semisimple endomorphism is triangularizable if and only if it is diagonalizable. -/\"}\n  {\"file\": \"Mathlib/LinearAlgebra/Eigenspace/Semisimple.lean\", \"line\": \"82\", \"text\": \"/-- A semisimple endomorphism is triangularizable if and only if it is diagonalizable. -/\"}\n  {\"file\": \"Mathlib/LinearAlgebra/Matrix/Echelon/Decomposition.lean\", \"line\": \"41\", \"text\": \"is lower triangular with nonzero diagonal, and `σ` the permutation on the rows\"}\n  {\"file\": \"Mathlib/Analysis/Matrix/LDL.lean\", \"line\": \"14\", \"text\": \"decomposed as `S = LDLᴴ` where `L` is a lower-triangular matrix and `D` is a diagonal matrix.\"}\n  {\"file\": \"Mathlib/Analysis/Matrix/LDL.lean\", \"line\": \"95\", \"text\": \"by some lower triangular matrix and get a diagonal matrix. -/\"}\n  {\"file\": \"Mathlib/Analysis/Matrix/LDL.lean\", \"line\": \"114\", \"text\": \"decomposed as `S = LDLᴴ` where `L` is a lower-triangular matrix and `D` is a diagonal matrix. -/\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: Lie-module triangularization and abstract group semidirect products do not prove the assertions for finite-type group schemes; matrix diagonal kernels are linear-map kernels."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-perfect-solvable-unipotent-torus",
+  "date": "2026-10-23",
+  "group": "ND"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Reductive group-scheme structure of PGL. Supporting input: Corollary 17.62(b)--(d), printed pp.372--373; Sections 6.44--6.46, printed p.135, and Chapter 19(a)--(b), printed pp.397--400. The quotient is by the smooth central torus, with the usual algebraic-group quotient of Theorem 5.28 and Propositions 5.24--5.27. Supporting lemma: Unipotent part and torus quotient of a smooth connected solvable group over a perfect field. Supporting input in the present split: Milne Theorem 16.33 proof, use of 16.6 and 16.10; the concrete matrix kernel in present proof step 1, before descent.",
+   "via": [
+    "lem-sfb-perfect-solvable-unipotent-torus",
+    "lem-sfb-reductive-radical-quotient",
+    "lem-sfb-pgl-reductive-structure",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-triangular-diagonal-kernel",
+  "worker": "stage1",
+  "summary": "Q108 checked Milne and the current blueprint route, retained the full statement, computed the kernel on all algebras, reused the represented homomorphism quotient and diagonalizable-subgroup inputs, exposed the coordinate central filtration and additive-kernel splitting inputs, and wrote the finite-length induction, product inverse and smooth-retraction lifting argument. No Lean proof attaches. Repair of the refused landing: rebased retained fields against the current DAG, re-read every cited statement, revalidated the revised split-torus subgroup statement at F=k, r=n, K=D, and replaced its stale citation quote; the statement and proof route are unchanged.",
+  "blueprint": "Supporting group-theoretic input on the existing alteration chain for det-thm-sf-ctf-stability-direct-images, proof (3), as recorded in blueprint.from.place; current latest blueprint checked. The inherited ancestor command returns None; no new blueprint ancestor was invented.",
+  "tool_uses": [
+   {
+    "node": "lem-pc-affine-finite-type-algebra",
+    "why": "Generic affine finite-type algebra or finite-presentation input used to check smoothness of the two scheme retracts; the unit has no replacement for this algebraic fact."
+   },
+   {
+    "node": "lem-weil-pbc-finite-type-noetherian-finite-presentation",
+    "why": "Generic affine finite-type algebra or finite-presentation input used to check smoothness of the two scheme retracts; the unit has no replacement for this algebraic fact."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pc-affine-finite-type-algebra",
+  "lem-weil-pbc-finite-type-noetherian-finite-presentation"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q108-d912f5e55",
+  "group": "Q108",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q108-d912f5e55 (reviewer sub-agent of L); spot-checked: This is a re-delivery after the landing was refused because the cited lem-sfb-split-torus-subgroups-diagonalizable had changed; the earlier head 57a98b3e was PASSed. I diffed it against that snapshot. The item's statement, stmt_deps, proof_deps and steps 1 and 3-7 are byte-identical. Both new nodes are identical. The statements of every other cited node are unchanged. The only changes are the step-2 text, the step-2 source place (Milne 12.8 and 12.9(a),(c)) and the split_report. The revised split-torus statement still says that a closed subgroup of G_m^r over an algebraically closed F is isomorphic to D(M) with M finitely generated; only unused vocabulary was dropped. Step 2 applies it with F=k, r=n, K=D through the closed immersion from the factorization node, and only after assuming k algebraically closed. That application is correct. I re-read all seven steps: the kernel on all algebras; the represented quotient; the B_n-weighted coordinate filtration; the induction with the pullback P, which is Milne 16.26(a) and diagram (118) with 15.34(d); the scheme-product inverse; smoothness by retraction plus lifting, with lfp from the two declared generic algebra tool_uses; and the geometric-unipotence equivalence. I checked the filtration node by hand. The splitting node is Milne 15.34(d), and I checked the cases N=1, G_a and α_p acted on by μ_p. Neither new node restates the item. The item is still unsplit on live and side-live, with no repair note. No proof_dep closure contains the item, so there is no cycle. Among nodes added since the earlier review, triangular-quotient-section-conjugacy (conjugacy of given sections), one-dimensional-unipotent-additive and split-solvable-torsors are not duplicates. No SGA source is used. Batch-5 flags: lem-trf-fppf-covering-base-change (Stacks 021O(3), a Mathlib leaf) and def-trf-scheme-cover-descent-datum (Stacks 02W5, a general definition) are general site and descent facts. Neither is an assumption of the trace formula or Poincaré duality, nor a step of their proofs, so both are accepted. No changes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.GroupScheme.TriangularDiagonalKernel",
+  "declaration": "AlgebraicGeometry.triangular_diagonal_kernel",
+  "declarations": [
+   "AlgebraicGeometry.triangular_diagonal_kernel",
+   "AlgebraicGeometry.smooth_unitriangular_iff_geometric_unipotent"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/GroupScheme/TriangularDiagonalKernel.lean",
+  "statement": "theorem triangular_diagonal_kernel {k : Type u} [Field k] (n : ℕ) (hn : 0 < n) (J : Grp (Over (Spec (.of k)))) [IsAffine J.X.left] [LocallyOfFiniteType J.X.hom] [QuasiCompact J.X.hom] (r : J.X ⟶ GeneralLinearGroup (ULift.{u} (Fin n)) k) [IsClosedSubgroupScheme r] (hupper : ∀ (A : Type u) [CommRing A] [Algebra k A] (x : (Spec (.of A)).asOver (Spec (.of k)) ⟶ J.X) (i j : Fin n), j < i → (GeneralLinearGroup.homMulEquiv (ULift.{u} (Fin n)) k A (x ≫ r)).val ⟨i⟩ ⟨j⟩ = 0) : ∃ (δ : J ⟶ ∏ᶜ (fun _ : Fin n ↦ Grp.mk (StandardGroupSchemes.multiplicative k))) (V : Grp (Over (Spec (.of k)))) (iV : V ⟶ J) (D : Grp (Over (Spec (.of k)))) (q : J ⟶ D) (d : D ⟶ ∏ᶜ (fun _ : Fin n ↦ Grp.mk (StandardGroupSchemes.multiplicative k))), (∀ (A : Type u) [CommRing A] [Algebra k A] (x : (Spec (.of A)).asOver (Spec (.of k)) ⟶ J.X) (i : Fin n), (WithConv.ofConv (Spec.mapMulEquiv.symm (x ≫ δ.hom.hom ≫ (Pi.π (fun _ : Fin n ↦ Grp.mk (StandardGroupSchemes.multiplicative k)) i).hom.hom))) (LaurentPolynomial.T 1) = (GeneralLinearGroup.homMulEquiv (ULift.{u} (Fin n)) k A (x ≫ r)).val ⟨i⟩ ⟨i⟩) ∧ IsClosedSubgroupScheme iV.hom.hom ∧ IsNormalSubgroupScheme iV.hom.hom ∧ IsAffine V.X.left ∧ LocallyOfFiniteType V.X.hom ∧ QuasiCompact V.X.hom ∧ IsPullback iV.hom.hom (toUnit V.X) δ.hom.hom η[(∏ᶜ (fun _ : Fin n ↦ Grp.mk (StandardGroupSchemes.multiplicative k))).X] ∧ (∀ (A : Type u) [CommRing A] [Algebra k A] (x : (Spec (.of A)).asOver (Spec (.of k)) ⟶ J.X), (∃ v : (Spec (.of A)).asOver (Spec (.of k)) ⟶ V.X, v ≫ iV.hom.hom = x) ↔ ∀ i : Fin n, (GeneralLinearGroup.homMulEquiv (ULift.{u} (Fin n)) k A (x ≫ r)).val ⟨i⟩ ⟨i⟩ = 1) ∧ IsClosedSubgroupScheme (iV.hom.hom ≫ r) ∧ (∀ (A : Type u) [CommRing A] [Algebra k A] (v : (Spec (.of A)).asOver (Spec (.of k)) ⟶ V.X), (∀ i : Fin n, (GeneralLinearGroup.homMulEquiv (ULift.{u} (Fin n)) k A (v ≫ iV.hom.hom ≫ r)).val ⟨i⟩ ⟨i⟩ = 1) ∧ (∀ i j : Fin n, j < i → (GeneralLinearGroup.homMulEquiv (ULift.{u} (Fin n)) k A (v ≫ iV.hom.hom ≫ r)).val ⟨i⟩ ⟨j⟩ = 0)) ∧ IsAffine D.X.left ∧ LocallyOfFiniteType D.X.hom ∧ QuasiCompact D.X.hom ∧ IsFppfGroupQuotient iV q ∧ q ≫ d = δ ∧ IsClosedSubgroupScheme d.hom.hom ∧ (IsAlgClosed k → ∃ s : D ⟶ J, s ≫ q = 𝟙 D ∧ IsIso (lift (fst V.X D.X ≫ iV.hom.hom) (snd V.X D.X ≫ s.hom.hom) ≫ μ[J.X]) ∧ (Smooth J.X.hom → ConnectedSpace J.X.left → Smooth V.X.hom ∧ ConnectedSpace V.X.left ∧ Smooth D.X.hom ∧ ConnectedSpace D.X.left))",
+  "branch": "newtargets-dag",
+  "by": "Q02",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "Closed subgroup of B_n is given by its closed GL_n inclusion with upper-triangular equations on every algebra. The diagonal map is specified by evaluating the Laurent coordinate of every G_m projection. The kernel square and the diagonal-one point criterion specify J intersect U_n scheme-theoretically; its closed GL_n inclusion with unitriangular equations gives the required closed U_n immersion. The second theorem is the final smooth geometric-unipotence comparison clause. Reuses the existing IsUnipotent and IsFppfGroupQuotient definitions, whose landed owner nodes are added to stmt_deps."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-35a8bd540",
+  "group": "Q02",
+  "result": "pass",
+  "note": "Clause-by-clause check against node and Milne 16.2/16.26(a)/16.10/14.12: J closed in GL_n with upper-triangular equations on every algebra; delta a Grp hom to prod G_m pinned by T-coordinate = diagonal entry on all A-points; V = kernel by IsPullback with toUnit/eta plus the diagonal-one point criterion; V closed and normal; iV>>r closed with unitriangular equations = closed U_n embedding; D affine finite type, IsFppfGroupQuotient iV q, q>>d=delta with d closed; under IsAlgClosed: Grp section s, IsIso of lift(fst>>iV, snd>>s)>>mu, and smooth+connected J gives smooth+connected V and D. Second theorem: smooth G, unitriangular embedding with n>0 iff IsUnipotent (n=0 only for trivial G, which embeds in U_1). Edge cases n=1, mu_p, alpha_p, zero algebra, char p and imperfect k, single universe u with ULift Fin n all checked. Node diff vs side-live is only lean plus stmt_deps (+def-sfb-solvable-group-structure, +def-sfb-fppf-group-quotient-presentation, both landed def owners, the latter before the delivery base). lean.statement verbatim. No B_n/U_n duplicate definition anywhere. Docstrings have source and blueprint; sorry only; report sections present. No file changed, no compile. Note only: unneeded non-public proof-dep imports."
+ }
+}

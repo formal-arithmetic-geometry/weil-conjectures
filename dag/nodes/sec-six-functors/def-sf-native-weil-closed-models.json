@@ -1,0 +1,130 @@
+{
+ "id": "def-sf-native-weil-closed-models",
+ "kind": "definition",
+ "title": "Native row-sign closed comparison interface",
+ "statement": "Fix a finite field $k_0$, a prime $\\ell\\ne\\operatorname{char}(k_0)$ and a scheme $X$ over $k_0$ [def-weil-finite-field-fiber, def-weil-frobenius-detailed]. Use the actual native category of Frobenius-fixed pro-etale coefficient modules and its derived category [def-weil-endofunctor-fixed-pair-category, def-weil-abstract-derived-category]. Define the ordinary sheaf-Hom bifunctor by precomposition and postcomposition, and the curried ordinary tensor by Mod.tensorLeft. Let $U$ be the termwise derived forgetful functor. A NativeClosedHomModels consists of native and ordinary derived Hom bifunctors, their source-slice identifications with the recorded bifunctorRHom, and natural product-total Hom models for arbitrary source and K-injective target, in the native row-sign convention. A NativeClosedComparison equips these models with closed monoidal structures, coefficient units in degree zero, symmetries, the ordinary K-flat total-tensor and unsigned adjunction normalization, and invertible natural tensor and Hom comparisons for $U$. Its Compatible predicate requires the Hom arrow to be the transpose of mapped evaluation, its projectionwise representative square, tensor unit and associativity coherence, preservation of symmetry and evaluation, and naturality and preservation of the bidual arrow defined by transposing evaluation after symmetry. These are precisely the pre-existing definitions extracted verbatim from NativeWeilClosedForgetful; no construction or normalization is altered.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-package/cor-coef-verdier-weil-equivariance.proof.md",
+  "place": "Internal-Hom comparison, naturality of evaluation, and transposition paragraph; native refinement of lem-sf-weil-native-closed-forgetful."
+ },
+ "stmt_deps": [
+  "def-weil-finite-field-fiber",
+  "def-weil-frobenius-detailed",
+  "sk-def-sfb-qlbar-condensed",
+  "sk-prop-sfb-qlbar-colimit-x",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-endofunctor-fixed-pair-category",
+  "def-weil-abstract-derived-category",
+  "def-pur-kinjective-complex",
+  "def-pur-derived-internal-hom",
+  "lem-sf-ringed-derived-closed-symmetric-monoidal"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-package/cor-coef-verdier-weil-equivariance.proof.md",
+  "place": "Internal-Hom comparison, naturality of evaluation, and transposition paragraph; native refinement of lem-sf-weil-native-closed-forgetful."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Closed symmetric monoidal structure with a specified internal Hom bifunctor evaluation and tensor comparison",
+   "results": "MonoidalClosed, exp.ev, MonoidalClosed.closed and internalHom provide abstract closedness, but not the specified native representative models or derived forgetful comparison.",
+   "date": "2026-10-25",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"mapDerivedCategory\"",
+   "results": "The exact derived functor exists, but the specified representative comparison interface does not.",
+   "date": "2026-10-25",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "CoefficientClosedStructure|nativeBidual|nativeHomComparison",
+   "results": "No Mathlib match; the native interface already exists in the parent module and is moved verbatim.",
+   "date": "2026-10-25",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.NativeWeilClosedForgetful",
+  "date": "2026-10-25",
+  "group": "V6"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "The ancestor command returns None for the native obligation. This is the stated native refinement of the internal-Hom/evaluation/transposition paragraph in cor-coef-verdier-weil-equivariance.",
+   "via": [
+    "lem-sf-weil-native-closed-forgetful"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.NativeWeilClosedModels",
+  "file": "lean/Sheaf/Paper/NativeWeilClosedModels.lean",
+  "declaration": "AlgebraicGeometry.ProEtaleWeilSheaf.NativeClosedComparison",
+  "statement": "structure NativeClosedComparison",
+  "branch": "sheaf-dag",
+  "by": "V6",
+  "date": "2026-10-25",
+  "declarations": [
+   "AlgebraicGeometry.ProEtaleWeilSheaf.ordinaryIhomBifunctor",
+   "AlgebraicGeometry.ProEtaleWeilSheaf.ordinaryIhomBifunctor_additive",
+   "AlgebraicGeometry.ProEtaleWeilSheaf.ordinaryIhomBifunctor_obj_additive",
+   "AlgebraicGeometry.ProEtaleWeilSheaf.ordinaryTensorBifunctor",
+   "AlgebraicGeometry.ProEtaleWeilSheaf.ordinaryTensorBifunctor_additive",
+   "AlgebraicGeometry.ProEtaleWeilSheaf.ordinaryTensorBifunctor_obj_additive",
+   "AlgebraicGeometry.ProEtaleWeilSheaf.ordinaryTensorTotal",
+   "AlgebraicGeometry.ProEtaleWeilSheaf.nativeForget",
+   "AlgebraicGeometry.ProEtaleWeilSheaf.nativeBidual",
+   "AlgebraicGeometry.ProEtaleWeilSheaf.NativeHomRepresentatives",
+   "AlgebraicGeometry.ProEtaleWeilSheaf.NativeHomRepresentativeCompatibility",
+   "AlgebraicGeometry.ProEtaleWeilSheaf.NativeClosedHomModels",
+   "AlgebraicGeometry.ProEtaleWeilSheaf.nativeHomComparison",
+   "AlgebraicGeometry.ProEtaleWeilSheaf.NativeSymmetryCompatibility",
+   "AlgebraicGeometry.ProEtaleWeilSheaf.NativeTensorCoherence",
+   "AlgebraicGeometry.ProEtaleWeilSheaf.NativeEvaluationCompatibility",
+   "AlgebraicGeometry.ProEtaleWeilSheaf.NativeBidualNaturality",
+   "AlgebraicGeometry.ProEtaleWeilSheaf.NativeBidualCompatibility",
+   "AlgebraicGeometry.ProEtaleWeilSheaf.NativeOrdinaryKFlat",
+   "AlgebraicGeometry.ProEtaleWeilSheaf.NativeOrdinarySignedSwap",
+   "AlgebraicGeometry.ProEtaleWeilSheaf.NativeAdjunctionNormalization",
+   "AlgebraicGeometry.ProEtaleWeilSheaf.NativeOrdinaryTensorModels",
+   "AlgebraicGeometry.ProEtaleWeilSheaf.NativeClosedComparison",
+   "AlgebraicGeometry.ProEtaleWeilSheaf.NativeClosedComparison.unitComparison",
+   "AlgebraicGeometry.ProEtaleWeilSheaf.NativeClosedComparison.Compatible"
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-556bf",
+  "group": "V6",
+  "result": "pass",
+  "landing": "20261025T124141-L-1939079",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-556bf",
+  "group": "V6",
+  "result": "pass",
+  "landing": "20261025T124141-L-1939079",
+  "kind": "interface",
+  "note": "independent cc review: delivered item + 4 new modules/nodes against clone (byte-identical moved defs and unchanged item statement), node statements vs Lean, 6 direct importers compiled in sandbox, #print axioms"
+ }
+}

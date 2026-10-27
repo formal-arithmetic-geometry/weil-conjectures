@@ -1,0 +1,135 @@
+{
+ "id": "lem-per-orbit-tensor-local-frames",
+ "kind": "statement",
+ "title": "Explicit orbit frames locally generate all tensor powers",
+ "statement": "Let $H$ be a finite type, $X,Y$ schemes [def-pc-scheme], $a:H\\to\\operatorname{Aut}(X)$ a family of automorphisms, and $q:X\\to Y$ finite [def-weil-finite-integral-morphism] with $a_h;q=q$ for every $h$. Let $L$ be invertible [def-sc-invertible-module]. For every $y\\in Y$ there are an open $T\\ni y$ and $s\\in\\Gamma(q^{-1}T,L)$ such that the explicit orbit section $n=\\bigotimes_h a_h^*s$ is a free generator [def-sc-local-free-generator] of $N=\\bigotimes_h a_h^*L$ on $q^{-1}T$, and $n^{\\otimes d}$ is a free generator of $N^{\\otimes d}$ there for every $d\\geq0$. All sections and degree-zero conventions are those of [def-per-orbit-tensor-section-comparisons]. No group law on $H$ is required.",
+ "stmt_deps": [
+  "def-per-orbit-tensor-section-comparisons",
+  "def-weil-finite-integral-morphism",
+  "def-sc-invertible-module",
+  "def-sc-local-free-generator"
+ ],
+ "source": {
+  "document": "literature/stacks-project/divisors.tex",
+  "place": "Tag 0BUT (divisors-lemma-finite-trivialize-invertible-upstairs) in divisors.tex; Tags 01CA and 01CD in modules.tex. Parent proof Steps 1 and the frame part of Step 2; the proof uses the existing source free-generator API and normalized-adjunction uniqueness."
+ },
+ "proof": [
+  {
+   "text": "Apply [lem-sfb-finite-trivialize-invertible-upstairs] at y to obtain T and an isomorphism from the restriction of L over q inverse T to the structure module. Transport it through overEquiv and use exists_isFreeGenerator_of_iso to obtain s.",
+   "uses": [
+    "lem-sfb-finite-trivialize-invertible-upstairs",
+    "def-sc-local-free-generator"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The Mathlib-pullback unit carries s to a free generator by the proved source lemma IsFreeGenerator.pullback_unit_app. Compare ordinary and normalized tensor pullback by uniqueness of left adjoints. Its unit equation identifies the transported section with tensorPullbackSection. Restrict along the equality of invariant opens to obtain a free generator for each translated factor.",
+   "uses": [
+    "def-pc-module-pullback",
+    "def-sc-local-free-generator"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Use the proved source IsFreeGenerator.tmulSection and induct on the enumerating list to obtain the orbit frame. In the empty case, unitSectionsEquiv carries the section 1 to a free generator: coefficient multiplication is the unit sections equivalence itself. Induct on d with the same tensor lemma and unit case to obtain every pure power.",
+   "uses": [
+    "def-per-orbit-tensor-section-comparisons",
+    "def-sc-local-free-generator"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-finite-trivialize-invertible-upstairs",
+  "def-sc-local-free-generator",
+  "def-pc-module-pullback",
+  "def-per-orbit-tensor-section-comparisons"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/divisors.tex",
+  "place": "Tag 0BUT (divisors-lemma-finite-trivialize-invertible-upstairs) in divisors.tex; Tags 01CA and 01CD in modules.tex. Parent proof Steps 1 and the frame part of Step 2; the proof uses the existing source free-generator API and normalized-adjunction uniqueness."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "An invertible sheaf on the source of a finite morphism has orbit tensor free generators over preimages of neighbourhoods downstairs",
+   "results": "{\"t\": \"2026-10-26T08:10:48Z\", \"tool\": \"leansearch\", \"query\": \"An invertible sheaf on the source of a finite morphism has orbit tensor free generators over preimages of neighbourhoods downstairs\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsFinite.recOn\", \"SheafOfModules.GeneratingSections.IsFiniteType.mk\", \"AlgebraicGeometry.IsFinite.finite_app\", \"AlgebraicGeometry.instFiniteCarrierCarrierCommRingCatFiberOfIsFinite\", \"AlgebraicGeometry.IsFinite.finite_preimage_singleton\", \"SheafOfModules.GeneratingSections.ofEpi_s\", \"SheafOfModules.GeneratingSections.IsFiniteType\", \"AlgebraicGeometry.IsFinite.instHasAffinePropertyAndIsAffineFiniteCarrierObjOppositeOpensCarrierCarrierCommRingCatPresheafOpOpensTopHomAppTop\"], \"digest\": \"322c0662d34601cf\"}",
+   "date": "2026-10-26",
+   "verdict": "Finite fibres and general sheaf generators do not give these explicit orbit frames."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Local frames of an invertible sheaf remain free generators under normalized sheaf pullback and iterated tensor products",
+   "results": "{\"t\": \"2026-10-26T08:13:29Z\", \"tool\": \"leanfinder\", \"query\": \"Local frames of an invertible sheaf remain free generators under normalized sheaf pullback and iterated tensor products\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SheafOfModules.Presentation.map_generators_I\", \"IsLocalFrameOn.generating\", \"SheafOfModules.LocalGeneratorsData.generators\", \"SheafOfModules.Presentation.mapGenerators\", \"SheafOfModules.QuasicoherentData.localGeneratorsData_generators\", \"SheafOfModules.LocalGeneratorsData.I\", \"SheafOfModules.generatorsOfIsCokernelFree_I\", \"SheafOfModules.generatorsOfIsCokernelFree_s\"], \"digest\": \"3e54b8c67a470475\"}",
+   "date": "2026-10-26",
+   "verdict": "No exact Mathlib theorem; reuse the source FreeGenerator, PullbackFreeGenerator and TensorSection APIs."
+  },
+  {
+   "tool": "grep",
+   "query": "orbitTensor|orbit_tensor|invariant_frame_line|tensorPullbackSection",
+   "results": "{\"t\": \"2026-10-26T08:13:27Z\", \"tool\": \"grep\", \"query\": \"orbitTensor|orbit_tensor|invariant_frame_line|tensorPullbackSection\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-26",
+   "verdict": "No matching Mathlib declarations; the named section constructions are project definitions."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.OrbitTensorLineDescent",
+  "date": "2026-10-26",
+  "group": "A4"
+ },
+ "chapter": "sec-deligne-laumon-a1",
+ "unit": "sk-p-dl-a1-perverse",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-per-artin-gabber-affine-curve",
+   "place": "Expose XVI, section 3.7, printed pp.254--255: the scheme quotient X double-prime/H is projective over X. This lemma supplies descent of the orbit tensor of a line bundle through an already constructed finite quotient; it asserts neither existence of that quotient nor ampleness. Substep: Explicit orbit frames locally generate all tensor powers.",
+   "via": [
+    "lem-per-orbit-tensor-line-descent",
+    "lem-per-projective-finite-group-quotient",
+    "lem-per-trait-prime-to-ell-log-alteration",
+    "lem-per-gabber-regular-pair-purity",
+    "lem-per-absolute-gysin-purity",
+    "lem-per-potential-dualizing-regular-unit",
+    "lem-per-finite-regular-reduction-dualizing",
+    "lem-per-qbar-generic-duality-model",
+    "lem-per-qbar-middle-tstructure"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.OrbitTensorLocalFrames",
+  "file": "lean/Sheaf/AlgebraicGeometry/OrbitTensorLocalFrames.lean",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.exists_orbit_tensor_local_frames",
+  "statement": "theorem exists_orbit_tensor_local_frames {H : Type v} [Finite H] {X Y : Scheme.{u}}\n    (a : H → (X ≅ X)) (q : X ⟶ Y) [IsFinite q]\n    (aq : ∀ h : H, (a h).hom ≫ q = q) (L : X.Modules) [L.IsInvertible] (y : Y) :\n    ∃ (T : Y.Opens) (s : Γ(L, q ⁻¹ᵁ T)), y ∈ T ∧\n      IsFreeGenerator (orbitTensorFrame a L (q ⁻¹ᵁ T)\n        (fun h ↦ congrArg (fun k : X ⟶ Y ↦ k ⁻¹ᵁ T) (aq h)) s) ∧\n      ∀ d : ℕ, IsFreeGenerator\n        (orbitPowerSection (pencilOrbitBundle a L) (q ⁻¹ᵁ T) d\n          (fun _ ↦ orbitTensorFrame a L (q ⁻¹ᵁ T)\n            (fun h ↦ congrArg (fun k : X ⟶ Y ↦ k ⁻¹ᵁ T) (aq h)) s))",
+  "branch": "sheaf-dag",
+  "by": "A4",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-23da1",
+  "group": "A4",
+  "result": "pass",
+  "landing": "20261026T091041-L-3301973",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-23da1",
+  "group": "A4",
+  "result": "pass",
+  "landing": "20261026T091041-L-3301973",
+  "kind": "interface",
+  "note": "independent cc review: orbit_tensor_line_descent signature vs clone (identical); 7 moved defs vs clone bodies (verbatim); new sorry statements vs their nodes and the item's needs; #print axioms of the item and local-frames theorem in a /tmp sandbox"
+ }
+}

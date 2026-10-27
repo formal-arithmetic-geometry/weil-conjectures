@@ -1,0 +1,271 @@
+{
+ "id": "lem-sfb-adic-smooth-fixed-residue-lifting",
+ "kind": "statement",
+ "title": "Fixed-residue Artinian lifting tests adic formal smoothness",
+ "statement": "Let $(R,\\mathfrak m_R)$ be a commutative Noetherian local ring [def-weil-pbc-noetherian-ring], and let $k$ be a finite extension of $R/\\mathfrak m_R$ [def-weil-field]. A local ring here has exactly one maximal ideal. Let $(C,\\mathfrak m_C)$ be a complete Noetherian local $R$-algebra, with local structure map and a specified $R$-algebra identification $C/\\mathfrak m_C\\cong k$; completeness is for the maximal-ideal-adic topology [def-weil-pbc-adic-completion]. Let $\\mathcal C_{R,k}$ have as objects Artinian local commutative $R$-algebras with specified $R$-algebra identification of their residue field with $k$, and as morphisms local $R$-algebra maps inducing the identity on $k$. Artinian means every descending chain of ideals stabilizes. For $A\\in\\mathcal C_{R,k}$ let $h_C(A)=\\operatorname{Hom}_{R,\\mathrm{loc},\\mathrm{cont}}(C,A)$ be the set of local $R$-algebra maps $C\\to A$ inducing the identity on $k$ under the specified identifications and continuous, where continuity means that the map kills $\\mathfrak m_C^n$ for some $n\\geq1$. Then $R\\to C$ is formally smooth for the $\\mathfrak m_C$-adic topology [def-weil-pbc-formally-smooth-adic] if and only if, for every surjection $p:A'\\twoheadrightarrow A$ in $\\mathcal C_{R,k}$ and every $u\\in h_C(A)$, there exists $u'\\in h_C(A')$ with $p\\circ u'=u$.",
+ "source": {
+  "document": "literature/stacks-project/formal-defos.tex",
+  "place": "Tag 0DYL, lemma-smooth, equivalence (1) and (2), and its proof; the converse uses More on Algebra, Tag 0DYG (more-algebra.tex, lemma-fs-local), equivalence with small-extension tests. The category is Tag 06GC, definition-CLambda."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-noetherian-ring",
+  "def-weil-field",
+  "def-weil-pbc-adic-completion",
+  "def-weil-pbc-formally-smooth-adic"
+ ],
+ "proof": [
+  {
+   "text": "Assume $R\\to C$ is formally smooth for $\\mathfrak m_C$. Let $p:A'\\twoheadrightarrow A$ and $u\\in h_C(A)$ be given, and put $I=\\ker p$. Since $p$ respects residue fields, $I\\subseteq\\mathfrak m_{A'}$. By [lem-weil-pbc-artinian-local-noetherian-nilpotent], choose $N\\geq1$ with $\\mathfrak m_{A'}^N=0$; thus $I^N=0$. Identify $A'/I$ with $A$. For $1\\leq j<N$, the quotient map $A'/I^{j+1}\\to A'/I^j$ has square-zero kernel: $I^{2j}\\subseteq I^{j+1}$. These quotients are local with the same residue field as $A'$: an element invertible modulo a nilpotent ideal is invertible, since $1-z$ has inverse $1+z+\\cdots+z^{N-1}$ when $z^N=0$.",
+   "uses": [
+    "lem-weil-pbc-artinian-local-noetherian-nilpotent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/formal-defos.tex",
+    "place": "Tag 0DYL, lemma-smooth, forward direction; nilpotence input Algebra Tag 00J8, lemma-artinian-radical-nilpotent"
+   }
+  },
+  {
+   "text": "Starting with $u_1=u:C\\to A'/I$, lift inductively through $A'/I^{j+1}\\to A'/I^j$ using [def-weil-pbc-formally-smooth-adic]. If $u_j$ kills $\\mathfrak m_C^t$, every algebra lift $u_{j+1}$ sends $\\mathfrak m_C^t$ into the square-zero kernel and therefore kills $\\mathfrak m_C^{2t}$. The induced residue map of a lift is the residue map of $u_j$, since the quotient induces a residue-field isomorphism. It is consequently the prescribed identity on $k$. Its inverse image of the maximal ideal is $\\mathfrak m_C$, because this residue map is an isomorphism, so the lift is local as well as continuous. The base case has these properties by definition of $h_C$. At $j=N$ this gives $u_N:C\\to A'$ with $pu_N=u$, as required. If $N=1$, $p$ is already an isomorphism and its inverse composed with $u$ gives the lift.",
+   "uses": [
+    "def-weil-pbc-formally-smooth-adic"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/formal-defos.tex",
+    "place": "Tag 0DYL, lemma-smooth, forward direction, expanding the square-zero lifting definition"
+   }
+  },
+  {
+   "text": "Conversely assume the lifting property for $h_C$. Consider any small extension $B'\\twoheadrightarrow B$, local map $R\\to B'$, and local $R$-algebra map $g:C\\to B$ inducing a residue isomorphism, as in [lem-sfb-local-square-zero-small-extension-reduction] with $S=C$. Write $\\alpha:C/\\mathfrak m_C\\to k$ for the given identification and $\\bar g:C/\\mathfrak m_C\\to B/\\mathfrak m_B$. Give $B$ the residue identification $\\alpha\\bar g^{-1}$ and $B'$ the one obtained by composing this with the quotient-induced residue isomorphism. They are $R$-algebra identifications; all maps now respect $k$. Since $g$ is local and $\\mathfrak m_B$ is nilpotent by [lem-weil-pbc-artinian-local-noetherian-nilpotent], $g$ kills a power of $\\mathfrak m_C$, so $g\\in h_C(B)$. The hypothesis supplies its lift. This verifies every small-extension test in the reduction lemma. Apply that lemma: $C$ is Noetherian and $R\\to C$ is local. We obtain lifts for every local square-zero test ring with nilpotent maximal ideal and residue isomorphism, including non-Artinian test rings.",
+   "uses": [
+    "lem-sfb-local-square-zero-small-extension-reduction",
+    "lem-weil-pbc-artinian-local-noetherian-nilpotent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0DYL, lemma-smooth, converse; Tag 0DYG, lemma-fs-local, (3) implies (2)"
+   }
+  },
+  {
+   "text": "To verify [def-weil-pbc-formally-smooth-adic], take any $R$-algebra $D$, ideal $J$ with $J^2=0$, and $g:C\\to D/J$ killing $\\mathfrak m_C^t$, $t\\geq1$. Put $T=g(C)$ and let $E\\subseteq D$ be the inverse image of $T$. It is an $R$-subalgebra containing $J$, and $E/J=T$. Since $\\ker g$ contains $\\mathfrak m_C^t$ and is proper, it is contained in $\\mathfrak m_C$: anything outside the latter is a unit and cannot belong to a proper ideal. Thus $T=C/\\ker g$ is local, with maximal ideal $g(\\mathfrak m_C)$, its $t$th power zero, and residue field $C/\\mathfrak m_C$. The inverse image $M$ of this maximal ideal in $E$ satisfies $M^t\\subseteq J$ and $M^{2t}=0$, and $E/M$ is that same residue field. Every element outside $M$ is invertible: lift an inverse in $T$ and correct the product $1+j$ using $(1+j)^{-1}=1-j$, since $j^2=0$. Thus $E$ is local with maximal ideal $M$. The maps $R\\to E$ and $C\\to E/J$ are local, as is seen on their residue fields; $C\\to E/J$ induces a residue isomorphism. Apply the local square-zero lifting property obtained in step 3 to $E,J$. Compose the resulting lift $C\\to E$ with $E\\hookrightarrow D$. This lifts $g$ in the arbitrary diagram. If $D/J$ is the zero ring, $J=D$ and $J^2=0$ force $D=0$, and the unique map is a lift. This proves adic formal smoothness and finishes the converse.",
+   "uses": [
+    "def-weil-pbc-formally-smooth-adic"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0DYG, lemma-fs-local, (2) implies (1), inverse-image-subring construction"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-artinian-local-noetherian-nilpotent",
+  "def-weil-pbc-formally-smooth-adic",
+  "lem-sfb-local-square-zero-small-extension-reduction"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/formal-defos.tex",
+  "place": "Tag 0DYL, lemma-smooth, (1) iff (2); More on Algebra Tag 0DYG, lemma-fs-local, small-extension reduction and inverse-image-subring argument"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "loogle",
+   "query": "Algebra.FormallySmooth, IsArtinianRing",
+   "results": "[loogle] OK 0 hit(s)",
+   "date": "2026-10-23",
+   "verdict": "no match: the returned results concern discrete formal smoothness, cotangent criteria or henselian rings; none is the fixed-residue Artinian characterization of maximal-ideal-adic formal smoothness"
+  },
+  {
+   "tool": "grep",
+   "query": "FormallySmoothAdic|formallySmooth.*[Aa]rtin|[Aa]rtin.*formallySmooth",
+   "results": "[grep] OK 0 hit(s)",
+   "date": "2026-10-23",
+   "verdict": "no match: the returned results concern discrete formal smoothness, cotangent criteria or henselian rings; none is the fixed-residue Artinian characterization of maximal-ideal-adic formal smoothness"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Adic formal smoothness of a complete Noetherian local algebra is equivalent to lifting local maps through surjections of Artinian local algebras with fixed residue field",
+   "results": "[leanfinder] OK 8 hit(s); returned hits include: Algebra.FormallySmooth.exists_mkₐ_comp_eq_of_isAdicComplete, Algebra.FormallySmooth.exists_adicCompletionEvalOneₐ_comp_eq, Algebra.FormallySmooth.exists_lift, Algebra.FormallySmooth.iff_comp_surjective, IsAdicComplete.henselianRing, Algebra.FormallySmooth.of_comp_surjective, Algebra.FormallySmooth.iff_injective_cotangentComplexBaseChange_residueField, Algebra.FormallySmooth.exists_kerProj_comp_eq_id",
+   "date": "2026-10-23",
+   "verdict": "no match: the returned results concern discrete formal smoothness, cotangent criteria or henselian rings; none is the fixed-residue Artinian characterization of maximal-ideal-adic formal smoothness"
+  },
+  {
+   "tool": "grep",
+   "query": "FormallySmooth|IsArtinianRing",
+   "results": "[grep] OK 25 hit(s); returned hits include: Mathlib/RingTheory/Smooth/StandardSmoothCotangent.lean, Mathlib/RingTheory/Smooth/StandardSmoothCotangent.lean, Mathlib/RingTheory/Smooth/StandardSmoothCotangent.lean, Mathlib/RingTheory/Smooth/Local.lean, Mathlib/RingTheory/Smooth/Local.lean, Mathlib/RingTheory/Smooth/Local.lean, Mathlib/RingTheory/Smooth/Local.lean, Mathlib/RingTheory/Smooth/Local.lean",
+   "date": "2026-10-23",
+   "verdict": "no match: the returned results concern discrete formal smoothness, cotangent criteria or henselian rings; none is the fixed-residue Artinian characterization of maximal-ideal-adic formal smoothness"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Adic formal smoothness of a complete Noetherian local algebra is equivalent to lifting local maps through surjections of Artinian local algebras with fixed residue field",
+   "results": "[leansearch] OK 8 hit(s); returned hits include: Algebra.Smooth.formallySmooth, Algebra.FormallySmooth.lift, Algebra.FormallySmooth.exists_mkₐ_comp_eq_of_isAdicComplete, RingHom.FormallySmooth, Algebra.FormallySmooth.exists_lift, Algebra.FormallySmooth.exists_kerProj_comp_eq_id, Algebra.FormallySmooth.iff_split_surjection, Algebra.FormallySmooth.iff_comp_surjective",
+   "date": "2026-10-23",
+   "verdict": "no match: the returned results concern discrete formal smoothness, cotangent criteria or henselian rings; none is the fixed-residue Artinian characterization of maximal-ideal-adic formal smoothness"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A local homomorphism of Noetherian local rings is formally smooth for the maximal ideal topology if and only if it lifts maps to Artinian local rings with prescribed residue field",
+   "results": "[leanfinder] OK 8 hit(s); returned hits include: Algebra.FormallyUnramified.of_map_maximalIdeal, Algebra.FormallyUnramified.iff_map_maximalIdeal_eq, Algebra.FormallySmooth.iff_injective_cotangentComplexBaseChange_residueField, HenselianLocalRing, Algebra.FormallySmooth.iff_injective_lTensor_residueField, Algebra.Smooth.formallySmooth, Algebra.IsSmoothAt, Algebra.FormallyUnramified.isField_quotient_map_maximalIdeal",
+   "date": "2026-10-23",
+   "verdict": "no match: the returned results concern discrete formal smoothness, cotangent criteria or henselian rings; none is the fixed-residue Artinian characterization of maximal-ideal-adic formal smoothness"
+  },
+  {
+   "tool": "grep",
+   "query": "FormallySmoothAdic|formallySmooth.*[Aa]rtin|[Aa]rtin.*formallySmooth",
+   "results": "Read 0 hits: ",
+   "date": "2026-10-23",
+   "verdict": "no match: discrete formal smoothness, trivial square-zero extension constructions, or nilpotence results do not give the reduction from small Artinian tests to arbitrary local square-zero tests"
+  },
+  {
+   "tool": "loogle",
+   "query": "Algebra.FormallySmooth, IsArtinianRing",
+   "results": "Read 0 hits: ",
+   "date": "2026-10-23",
+   "verdict": "no match: discrete formal smoothness, trivial square-zero extension constructions, or nilpotence results do not give the reduction from small Artinian tests to arbitrary local square-zero tests"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Adic formal smoothness is equivalent to fixed residue Artinian lifting",
+   "results": "Read 8 hits: RingHom.FormallySmooth, Algebra.FormallySmooth.iff_injective_lTensor_residueField, Algebra.Smooth.formallySmooth, Algebra.FormallySmooth.exists_adicCompletionEvalOneₐ_comp_eq, Algebra.FormallySmooth.iff_comp_surjective, Algebra.FormallySmooth.exists_lift, Algebra.IsSmoothAt, Algebra.FormallySmooth.iff_split_surjection",
+   "date": "2026-10-23",
+   "verdict": "no match: discrete formal smoothness, trivial square-zero extension constructions, or nilpotence results do not give the reduction from small Artinian tests to arbitrary local square-zero tests"
+  },
+  {
+   "tool": "loogle",
+   "query": "Algebra.FormallySmooth, IsLocalRing",
+   "results": "Read 4 hits: Algebra.FormallySmooth.iff_injective_cotangentComplexBaseChange, Algebra.FormallySmooth.iff_injective_cotangentComplexBaseChange_residueField, Algebra.FormallySmooth.iff_injective_lTensor_residueField, Algebra.FormallySmooth.of_formallySmooth_residueField_tensor",
+   "date": "2026-10-23",
+   "verdict": "no match: discrete formal smoothness, trivial square-zero extension constructions, or nilpotence results do not give the reduction from small Artinian tests to arbitrary local square-zero tests"
+  },
+  {
+   "tool": "grep",
+   "query": "smallExtension|small_extension|FormallySmoothAdic",
+   "results": "Read 0 hits: ",
+   "date": "2026-10-23",
+   "verdict": "no match: discrete formal smoothness, trivial square-zero extension constructions, or nilpotence results do not give the reduction from small Artinian tests to arbitrary local square-zero tests"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Formal smoothness for adic topology tested on small extensions of local Artinian rings",
+   "results": "Read 8 hits: RingHom.FormallySmooth, Algebra.Smooth.formallySmooth, Algebra.FormallySmooth.iff_comp_surjective, Algebra.FormallySmooth.iff_injective_lTensor_residueField, Algebra.formallySmooth_iff, Algebra.FormallySmooth.mk, Algebra.FormallySmooth.of_comp_surjective, Algebra.FormallySmooth",
+   "date": "2026-10-23",
+   "verdict": "no match: discrete formal smoothness, trivial square-zero extension constructions, or nilpotence results do not give the reduction from small Artinian tests to arbitrary local square-zero tests"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Adic formal smoothness of a complete Noetherian local algebra is equivalent to lifting local maps through surjections of Artinian local algebras with fixed residue field",
+   "results": "Read 8 hits: Algebra.FormallySmooth.exists_mkₐ_comp_eq_of_isAdicComplete, Algebra.FormallySmooth.exists_adicCompletionEvalOneₐ_comp_eq, Algebra.FormallySmooth.exists_lift, Algebra.FormallySmooth.iff_comp_surjective, IsAdicComplete.henselianRing, Algebra.FormallySmooth.of_comp_surjective, Algebra.FormallySmooth.iff_injective_cotangentComplexBaseChange_residueField, Algebra.FormallySmooth.exists_kerProj_comp_eq_id",
+   "date": "2026-10-23",
+   "verdict": "no match: discrete formal smoothness, trivial square-zero extension constructions, or nilpotence results do not give the reduction from small Artinian tests to arbitrary local square-zero tests"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A local ring homomorphism with Noetherian target is formally smooth for the maximal ideal topology if every residue isomorphism diagram through a small Artinian extension has a lift",
+   "results": "Read 8 hits: RingHom.FormallySmooth.holdsForLocalizationAway, Algebra.FormallySmooth.exists_lift, Algebra.Smooth.formallySmooth, HenselianLocalRing, Algebra.FormallySmooth.flat_of_algHom_of_isNoetherianRing, Algebra.IsSmoothAt, Algebra.FormallySmooth.of_isLocalization, Algebra.FormallySmooth.lift",
+   "date": "2026-10-23",
+   "verdict": "no match: discrete formal smoothness, trivial square-zero extension constructions, or nilpotence results do not give the reduction from small Artinian tests to arbitrary local square-zero tests"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The infinitesimal lifting criterion for maximal ideal adic formal smoothness can be tested on one dimensional kernels annihilated by the maximal ideal",
+   "results": "Read 8 hits: Algebra.FormallySmooth.iff_injective_cotangentComplexBaseChange, Algebra.FormallySmooth.exists_lift, Algebra.FormallySmooth.iff_injective_cotangentComplexBaseChange_residueField, Algebra.FormallySmooth.exists_mkₐ_comp_eq_of_isAdicComplete, Algebra.Smooth.formallySmooth, Algebra.FormallySmooth.iff_comp_surjective, Algebra.FormallySmooth.iff_injective_lTensor_residueField, Algebra.FormallyEtale.instFormallySmooth",
+   "date": "2026-10-23",
+   "verdict": "no match: discrete formal smoothness, trivial square-zero extension constructions, or nilpotence results do not give the reduction from small Artinian tests to arbitrary local square-zero tests"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A local homomorphism of Noetherian local rings is formally smooth for the maximal ideal topology if and only if it lifts maps to Artinian local rings with prescribed residue field",
+   "results": "Read 8 hits: Algebra.FormallyUnramified.of_map_maximalIdeal, Algebra.FormallyUnramified.iff_map_maximalIdeal_eq, Algebra.FormallySmooth.iff_injective_cotangentComplexBaseChange_residueField, HenselianLocalRing, Algebra.FormallySmooth.iff_injective_lTensor_residueField, Algebra.Smooth.formallySmooth, Algebra.IsSmoothAt, Algebra.FormallyUnramified.isField_quotient_map_maximalIdeal",
+   "date": "2026-10-23",
+   "verdict": "no match: discrete formal smoothness, trivial square-zero extension constructions, or nilpotence results do not give the reduction from small Artinian tests to arbitrary local square-zero tests"
+  },
+  {
+   "tool": "grep",
+   "query": "FormallySmooth|IsArtinianRing",
+   "results": "Read 25 hits: Mathlib/AlgebraicGeometry/Artinian.lean, Mathlib/AlgebraicGeometry/Artinian.lean, Mathlib/AlgebraicGeometry/Artinian.lean, Mathlib/AlgebraicGeometry/Artinian.lean, Mathlib/AlgebraicGeometry/Artinian.lean, Mathlib/Topology/Algebra/Ring/Compact.lean, Mathlib/Topology/Algebra/Ring/Compact.lean, Mathlib/Topology/Algebra/Ring/Compact.lean",
+   "date": "2026-10-23",
+   "verdict": "no match: discrete formal smoothness, trivial square-zero extension constructions, or nilpotence results do not give the reduction from small Artinian tests to arbitrary local square-zero tests"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Adic formal smoothness of a complete Noetherian local algebra is equivalent to lifting local maps through surjections of Artinian local algebras with fixed residue field",
+   "results": "Read 8 hits: Algebra.Smooth.formallySmooth, Algebra.FormallySmooth.lift, Algebra.FormallySmooth.exists_mkₐ_comp_eq_of_isAdicComplete, RingHom.FormallySmooth, Algebra.FormallySmooth.exists_lift, Algebra.FormallySmooth.exists_kerProj_comp_eq_id, Algebra.FormallySmooth.iff_split_surjection, Algebra.FormallySmooth.iff_comp_surjective",
+   "date": "2026-10-23",
+   "verdict": "no match: discrete formal smoothness, trivial square-zero extension constructions, or nilpotence results do not give the reduction from small Artinian tests to arbitrary local square-zero tests"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-versal-unobstructed-adic-criterion",
+  "date": "2026-10-23",
+  "group": "Q81"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Algebraicity and smoothness of the stack of all nodal curves. Supporting input: Tag 0DZX (lemma-big-smooth-part-curves), clauses (1) and (3), with the open substack lci+ in the statement. This is the full isolated-lci locus, not the nodal locus. Supporting input for the intersection construction and smoothness argument of Tag 0DZX: Smooth points of the stack of curves detected by unobstructed deformations. Supporting input for Tag 0DZU: the final application of the general smoothness criterion after identifying the two deformation groupoids. Supporting input: Versal formal objects detect unobstructedness by adic formal smoothness. Ring-theoretic input to Tag 0DZK: Tag 0DYL (1) iff (2), proved using Tag 0DYG, identifies lifting by h_C with maximal-ideal-adic formal smoothness.",
+   "via": [
+    "lem-sfb-versal-unobstructed-adic-criterion",
+    "lem-sfb-stack-artinian-smoothness-criterion",
+    "lem-sfb-curve-smooth-locus-deformation-test",
+    "lem-sfb-isolated-lci-curve-smooth-open",
+    "lem-sfb-nodal-curve-stack-smooth",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-adic-smooth-fixed-residue-lifting",
+  "worker": "stage1",
+  "summary": "Statement unchanged. Expanded the forward lift by square-zero powers, including locality, continuity and the residue marking. Reduced the converse to small tests, cited only the genuine nontrivial small-extension-to-bounded-local-test reduction as a new node, and wrote out the inverse-image subring construction for arbitrary square-zero test rings. Reused the existing Artinian nilpotence leaf.",
+  "blueprint": "Realizes the inherited supporting chain from det-thm-sf-ctf-stability-direct-images (3) through nodal-curve moduli and the versal unobstructedness criterion, specifically Stacks 0DYL (1) iff (2). Read the current latest direct-images proof; its compactification presentation differs from the inherited alteration supporting chain. No unit route changed. blueprint_refs ancestor returns None, retained rather than inventing an ancestor."
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q74-78d9d4525",
+  "group": "Q74",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q74-78d9d4525 (reviewer sub-agent of L); spot-checked: I read Stacks 0DYL (lemma-smooth (1)<=>(2) and its proof), 0DYG (lemma-fs-local, both paragraphs) and the 02HS definition. The item statement is unchanged and matches 0DYL in the local-R, finite-k form. Step 1: I=ker p is inside m_{A'}, I^N=0, and the tower steps have square-zero kernels, using the Artinian nilpotence Mathlib leaf. Step 2: the induction through def-weil-pbc-formally-smooth-adic is correct, including continuity (m^t to m^{2t}), the residue marking, locality and the N=1 case. Step 3: the marking beta=alpha∘ḡ^{-1} turns a small-extension test into a surjection in C_{R,k}. g lies in h_C(B) because m_B is nilpotent, so the new node's hypothesis is checked exactly, with S=C Noetherian. Step 4 is the first paragraph of 0DYG, written out in full: E=q^{-1}(g(C)) is local with M^{2t}=0 and the unit correction 1-j; R→E is local; the zero-ring case is handled; the new node's conclusion is then applied and composed with E⊆D. It is long for an elementary step, but it uses only the definitions. The new node lem-sfb-local-square-zero-small-extension-reduction is 0DYG (3)=>(2). It is self-contained, statement-only and true: I re-derived the m^iJ filtration, the subring reduction, the codimension-1 small extensions and the product splitting A''=A⊕M. I tested it on k[x]/x² (lift exists) and k[ε]/ε² (hypothesis fails, so the node is vacuous there). It is not a restatement of the item. rg -L found no duplicate among the 0DYG/small-extension nodes, including trf-smooth-stalk-artinian-criterion, artin-local-test-algebra, artin-tangent-ring-lift-criterion, versal-unobstructed-adic-criterion and finite-type-completed-local-smoothness. Four kinds of Mathlib search are recorded. There is no SGA reference, no tool_uses and no cycle, and no repair note applies to this item."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.AdicSmoothFixedResidueLifting",
+  "declaration": "Algebra.formallySmoothAdic_iff_fixed_residue_artinian_lifting",
+  "file": "lean/Sheaf/RingTheory/AdicSmoothFixedResidueLifting.lean",
+  "statement": "theorem formallySmoothAdic_iff_fixed_residue_artinian_lifting (R : Type u) (C : Type v) (k : Type w) [CommRing R] [IsLocalRing R] [IsNoetherianRing R] [CommRing C] [IsLocalRing C] [IsNoetherianRing C] [Algebra R C] [IsLocalHom (algebraMap R C)] [IsAdicComplete (IsLocalRing.maximalIdeal C) C] [Field k] [Algebra R k] [Algebra (IsLocalRing.ResidueField R) k] [IsScalarTower R (IsLocalRing.ResidueField R) k] [Module.Finite (IsLocalRing.ResidueField R) k] (eC : IsLocalRing.ResidueField C ≃ₐ[R] k) : FormallySmoothAdic R C (IsLocalRing.maximalIdeal C) ↔ ∀ (A' A : Type (max u v w)) [CommRing A'] [IsLocalRing A'] [IsArtinianRing A'] [Algebra R A'] [CommRing A] [IsLocalRing A] [IsArtinianRing A] [Algebra R A] (eA' : IsLocalRing.ResidueField A' ≃ₐ[R] k) (eA : IsLocalRing.ResidueField A ≃ₐ[R] k) (p : A' →ₐ[R] A), IsLocalHom p → Function.Surjective p → (∀ a' : A', eA (IsLocalRing.residue A (p a')) = eA' (IsLocalRing.residue A' a')) → ∀ f : C →ₐ[R] A, IsLocalHom f → (∀ c : C, eA (IsLocalRing.residue A (f c)) = eC (IsLocalRing.residue C c)) → (∃ n : ℕ, 1 ≤ n ∧ ∀ c ∈ IsLocalRing.maximalIdeal C ^ n, f c = 0) → ∃ f' : C →ₐ[R] A', IsLocalHom f' ∧ (∀ c : C, eA' (IsLocalRing.residue A' (f' c)) = eC (IsLocalRing.residue C c)) ∧ (∃ n : ℕ, 1 ≤ n ∧ ∀ c ∈ IsLocalRing.maximalIdeal C ^ n, f' c = 0) ∧ p.comp f' = f",
+  "branch": "newtargets-dag",
+  "by": "Q123",
+  "date": "2026-10-23",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-55c2edfa6",
+  "group": "Q123",
+  "result": "pass",
+  "note": "Item theorem Algebra.formallySmoothAdic_iff_fixed_residue_artinian_lifting matches node/Stacks 0DYL(1)<=>(2)+06GC clause by clause: R Noetherian local; k finite over ResidueField R with R acting through it (IsScalarTower); C complete (IsAdicComplete m_C) Noetherian local with IsLocalHom structure map and eC : ResidueField C ≃ₐ[R] k; tests Artinian local R-algebras with residue AlgEquivs; p local surjective marked; f local, marked, kills m_C^n for some n≥1; conclusion: f' local, marked, continuous, with p.comp f' = f; ↔ FormallySmoothAdic R C m_C (upstream WeilConjectures module = recorded stmt_dep). Test universe max u v w loses nothing: Artinian rings with residue field k are essentially u-small. No extra hypotheses, no definitions, sorry only, docstrings have source + blueprint tags, lean.statement verbatim (string check), node otherwise identical to side-live. HopkinsLevitzki plain import = proof_dep match (acceptable). No duplicate in Mathlib or lean/Sheaf, lean/WeilConjectures (SmallKernelCriterion 07NQ and SmoothFixedResidueArtinianTest 02HX are different results). Advisory: def-sfb-artin-deformation-test-category exists without Lean and is not an item stmt_dep; the inline expansion is correct. No compile: no file changed; worker scompile was clean."
+ }
+}

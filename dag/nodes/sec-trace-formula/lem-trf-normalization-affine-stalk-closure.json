@@ -1,0 +1,362 @@
+{
+ "id": "lem-trf-normalization-affine-stalk-closure",
+ "kind": "statement",
+ "title": "Affine and stalk integral-closure models of finite normalization",
+ "statement": "Let $k$ be a field [def-weil-field], let $X$ be a reduced finite-type $k$-scheme [def-pc-reduced-scheme, def-weil-finite-type-morphism], and let $\\nu:X^\\nu\\to X$ be its componentwise normalization [def-weil-pbc-reduced-normalization]. Then $X$ and $X^\\nu$ are Noetherian (their affine section rings satisfy the ascending chain condition on ideals and their underlying spaces are quasi-compact), $X$ has finitely many irreducible components, and $\\nu$ is finite and surjective [def-weil-finite-integral-morphism, def-weil-surjective-morphism]. The locus $N$ of points whose local rings are integrally closed domains [def-weil-pbc-normal-ring] is dense open, $\\nu^{-1}N\\to N$ is an isomorphism, and normalization restricts to every open subscheme. For every nonempty affine open $U=\\operatorname{Spec}R\\subseteq X$ [def-weil-affine-spectrum], list its minimal prime ideals as $\\mathfrak p_1,\\ldots,\\mathfrak p_t$, put $K_i=\\operatorname{Frac}(R/\\mathfrak p_i)$ and let $B_i$ be the integral closure [def-weil-pbc-integral-closure] of $R/\\mathfrak p_i$ in $K_i$. If $T=\\Gamma(\\nu^{-1}U,\\mathcal O_{X^\\nu})$, there are canonical identifications\n$$T=\\prod_{i=1}^t B_i\\subseteq Q(R)=\\prod_{i=1}^t K_i,$$\nunder which $R\\to T$ is the injective structural map and $T$ is its integral closure in $Q(R)$ and is finite as an $R$-module [def-weil-finitely-generated-module]. Here $Q(D)$ denotes the localization of a reduced ring $D$ at all its non-zero-divisors. For $x\\in U$ corresponding to a prime $\\mathfrak p\\subset R$, set $A_x=\\mathcal O_{X,x}$ and $C_x=(\\nu_*\\mathcal O_{X^\\nu})_x$. Canonically,\n$$A_x=R_{\\mathfrak p},\\quad C_x=(R\\setminus\\mathfrak p)^{-1}T\\subseteq Q(A_x)=\\prod_{\\mathfrak p_i\\subseteq\\mathfrak p}K_i.$$\nThe ring $A_x$ is reduced Noetherian and $C_x$ is the finite integral closure of $A_x$ in $Q(A_x)$, with its structural inclusion. These identifications respect the maps induced by restriction and localization. If $X$ is empty all pointwise assertions are vacuous and $\\nu$ is the empty morphism.",
+ "source": {
+  "document": "literature/stacks-project/morphisms.tex",
+  "place": "Tag 0C3B (lemma-stalk-normalization), Tag 0CDV (lemma-normalization-in-terms-of-components); varieties.tex Tag 0BXR (lemma-normalization-locally-algebraic), specialized to reduced finite-type schemes over a field."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-pc-reduced-scheme",
+  "def-weil-finite-type-morphism",
+  "def-weil-pbc-reduced-normalization",
+  "def-weil-finite-integral-morphism",
+  "def-weil-surjective-morphism",
+  "def-weil-pbc-normal-ring",
+  "def-weil-affine-spectrum",
+  "def-weil-pbc-integral-closure",
+  "def-weil-finitely-generated-module"
+ ],
+ "proof": [
+  {
+   "text": "The field $k$ is Noetherian since its only ideals are $0$ and $k$, and $\\operatorname{Spec}k$ is quasi-compact. Apply [lem-weil-pbc-finite-type-over-noetherian] to $X\\to\\operatorname{Spec}k$: $X$ is Noetherian. Its irreducible components are finite in number by [lem-weil-pbc-noetherian-finitely-many-components], and every affine open ring is Noetherian by [pqf-lem-affine-open-locnoeth]. Reducedness of these rings follows from [def-pc-reduced-scheme]. Each reduced component $Z_j$ is integral by [def-weil-pbc-reduced-normalization] and is of finite type over $k$: a finite affine cover of $X$ by finitely generated $k$-algebras restricts to the finite affine cover of $Z_j$ by their quotient algebras. Thus [lem-sc-normalization-exists] applies to each $Z_j$, giving a finite, surjective normalization $Z_j^\\nu\\to Z_j$.",
+   "uses": [
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "lem-weil-pbc-noetherian-finitely-many-components",
+    "pqf-lem-affine-open-locnoeth",
+    "def-pc-reduced-scheme",
+    "def-weil-pbc-reduced-normalization",
+    "lem-sc-normalization-exists"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 01T6 (lemma-finite-type-noetherian); varieties.tex Tag 0BXR (lemma-normalization-locally-algebraic), componentwise application"
+   }
+  },
+  {
+   "text": "Normalization restricts to every open $V\\subseteq X$. Indeed the components of $V$ are exactly the nonempty $Z_j\\cap V$: [lem-sc-components-open-injection] gives that these intersections are distinct components, and [lem-sc-irreducible-components-cover] gives exhaustiveness. A nonempty open of the integral scheme $Z_j$ has the same function field, as identified on its affine opens by [lem-sc-integral-function-field-affine-fraction]. In the construction [def-sc-normalization], restricting the integral-closure sheaf to this open restricts the base ring and keeps this field; hence its relative spectrum is precisely $(Z_j^\\nu)|_{Z_j\\cap V}$. Taking the disjoint union in [def-weil-pbc-reduced-normalization] gives $X^\\nu\\times_XV=V^\\nu$, with its structural map. These are identifications of the constructed maps, not merely abstract isomorphisms.",
+   "uses": [
+    "lem-sc-components-open-injection",
+    "lem-sc-irreducible-components-cover",
+    "lem-sc-integral-function-field-affine-fraction",
+    "def-sc-normalization",
+    "def-weil-pbc-reduced-normalization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 0CDV (lemma-normalization-in-terms-of-components); Tag 035E (definition-normalization); restriction of the integral-closure sheaf"
+   }
+  },
+  {
+   "text": "Let $U=\\operatorname{Spec}R$ be affine. By Step 1, $R$ is reduced Noetherian, so [lem-sc-finite-minimal-primes-over-ideal] with the ideal $0$ gives finitely many minimal primes $\\mathfrak p_1,\\ldots,\\mathfrak p_t$, and [lem-weil-pbc-spec-irreducible-components-minimal-primes] shows that the components of $U$ are the $V(\\mathfrak p_i)$, without repetition. By Step 2 these are the $Z_i\\cap U$ for the distinct components $Z_i$ of $X$ meeting $U$. As $\\mathfrak p_i$ is the radical ideal with $V(\\mathfrak p_i)=Z_i\\cap U$, [lem-weil-pbc-reduced-induced-closed-subscheme] (1), (2) identifies the open $Z_i\\cap U$ of the reduced induced $Z_i$ with $\\operatorname{Spec}(R/\\mathfrak p_i)$, over $U$ via $R\\to R/\\mathfrak p_i$. By [def-weil-pbc-reduced-normalization] and [lem-weil-pbc-scheme-coproduct-family], $\\nu^{-1}U$ is the disjoint union of the opens $W_i\\subseteq Z_i^\\nu$ lying over $Z_i\\cap U$; summands of components missing $U$ contribute nothing. Step 1 makes $Z_i^\\nu\\to Z_i$ finite, so [def-weil-finite-integral-morphism] gives $W_i=\\operatorname{Spec}T_i$ with $T_i$ a finite $R/\\mathfrak p_i$-module, hence a finite $R$-module: lift the coefficients of a generating family through the quotient. By [lem-weil-pbc-finite-affine-coproduct-spectrum] and [def-weil-affine-spectrum], $\\nu^{-1}U=\\operatorname{Spec}T$ with $T=\\prod_iT_i$ and structural map $r\\mapsto(r\\bmod\\mathfrak p_i)_i$; the coordinate embeddings of the generating families generate $T$ over $R$. Hence $\\nu$ is finite, by that same definition. If $U=\\varnothing$, then $t=0$ and $T=0$.",
+   "uses": [
+    "lem-sc-finite-minimal-primes-over-ideal",
+    "lem-weil-pbc-spec-irreducible-components-minimal-primes",
+    "lem-weil-pbc-reduced-induced-closed-subscheme",
+    "def-weil-pbc-reduced-normalization",
+    "lem-weil-pbc-scheme-coproduct-family",
+    "def-weil-finite-integral-morphism",
+    "lem-weil-pbc-finite-affine-coproduct-spectrum",
+    "def-weil-affine-spectrum"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tags 035P (lemma-description-normalization), 0CDV; varieties.tex Tag 0BXR; algebra.tex Tag 00FN (lemma-Noetherian-permanence)"
+   }
+  },
+  {
+   "text": "$\\nu$ is surjective by [lem-sfb-componentwise-normalization-generic-properties], as $X$ is locally Noetherian. Module generators of $T$ also generate it as an $R$-algebra, so $T$ is Noetherian by [lem-weil-pbc-finite-type-algebra-noetherian]; the finite affine cover of Step 1 has affine inverse images, so $X^\\nu$ is Noetherian. Every quasi-compact open of $X$ is Noetherian, hence has finitely many components by [lem-weil-pbc-noetherian-finitely-many-components]. Thus [lem-sfb-normalization-affine-total-fractions] applies: $\\nu^{-1}U\\simeq\\operatorname{Spec}\\overline R$ over $U$, with $\\overline R$ the integral closure of $R$ in $Q(R)$, and [def-weil-affine-spectrum] turns this into an $R$-algebra isomorphism $T\\simeq\\overline R$. By [lem-weil-pbc-reduced-noetherian-total-ring-fractions], $Q(R)=\\prod_iR_{\\mathfrak p_i}=\\prod_iK_i$: the reduced local ring at a minimal prime is a field, and its map from $R/\\mathfrak p_i$ inverts exactly the nonzero elements. $R\\to Q(R)$ is injective: $r/1=0$ means $sr=0$ for a non-zero-divisor $s$, so $r=0$. A tuple $(x_i)\\in\\prod_iK_i$ is integral over $R$ iff each $x_i$ is integral over $R/\\mathfrak p_i$: project a monic equation; conversely lift monic equations of the $x_i$ to monic $F_i$ over $R$, and $\\prod_iF_i$ kills $(x_i)$ coordinatewise. So $\\overline R=\\prod_iB_i$. Any $R$-algebra map $\\varphi:\\overline R\\to Q(R)$ is the inclusion: for $b=r/s$, $s\\varphi(b)=r$ with $s$ a unit. Hence $T=\\prod_iB_i\\subseteq Q(R)$, $R\\to T$ is injective, and $T$ is the integral closure, finite by Step 3. The idempotent of $T_i$ is killed by an element of $\\mathfrak p_i$ outside the other (incomparable) minimal primes, so $T_i$ is the factor $B_i$.",
+   "uses": [
+    "lem-sfb-componentwise-normalization-generic-properties",
+    "lem-weil-pbc-finite-type-algebra-noetherian",
+    "lem-weil-pbc-noetherian-finitely-many-components",
+    "lem-sfb-normalization-affine-total-fractions",
+    "def-weil-affine-spectrum",
+    "lem-weil-pbc-reduced-noetherian-total-ring-fractions"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 035P (lemma-description-normalization); algebra.tex Tag 02LX (lemma-total-ring-fractions-no-embedded-points)"
+   }
+  },
+  {
+   "text": "Fix $x\\in U$ with prime $\\mathfrak p$ and put $S=R\\setminus\\mathfrak p$. By [lem-weil-pbc-affine-open-stalk-localization] and [lem-sc-affine-pushforward-stalk-localization], the germ maps identify $A_x=R_{\\mathfrak p}$ and $C_x=S^{-1}T$, with their given structural map. The first ring is Noetherian by [lem-weil-pbc-localization-noetherian] and reduced by [lem-weil-pbc-localization-preserves-reduced]. If $b_1,\\ldots,b_n$ generate $T$ over $R$, their images $b_j/1$ generate $S^{-1}T$ over $S^{-1}R$: localize an expression $b=\\sum r_jb_j$ and divide its coefficients by $s$. In particular $C_x$ is finite over $A_x$.",
+   "uses": [
+    "lem-weil-pbc-affine-open-stalk-localization",
+    "lem-sc-affine-pushforward-stalk-localization",
+    "lem-weil-pbc-localization-noetherian",
+    "lem-weil-pbc-localization-preserves-reduced"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 0C3B (lemma-stalk-normalization); perfect.tex Tag 0AVW (lemma-affine-morphism-equivalence), affine stalk paragraph"
+   }
+  },
+  {
+   "text": "Localizing $Q(R)=\\prod_iK_i$ at $S$ deletes precisely the factors with $\\mathfrak p_i\\not\\subseteq\\mathfrak p$. For such an $i$, choose $s_i\\in\\mathfrak p_i\\setminus\\mathfrak p$; it becomes zero in $K_i$ and is inverted, killing that factor. For a surviving factor every $s\\in S$ is already a nonzero unit. Localization commutes with this finite product directly: a tuple of fractions has the common denominator given by the product of its finitely many denominators, and the same operation witnesses equality of tuples. By [lem-weil-pbc-primes-of-localization], the minimal primes of $R_{\\mathfrak p}$ are exactly $\\mathfrak p_iR_{\\mathfrak p}$ with $\\mathfrak p_i\\subseteq\\mathfrak p$. Their minimal-prime localizations are $R_{\\mathfrak p_i}$ by [lem-weil-pbc-localize-localization-at-prime]. Applying [lem-weil-pbc-reduced-noetherian-total-ring-fractions] to $A_x$ therefore identifies $Q(A_x)=\\prod_{\\mathfrak p_i\\subseteq\\mathfrak p}K_i=S^{-1}Q(R)$, canonically over $R$. Finally [lem-weil-pbc-integral-closure-commutes-localization], applied to $R\\to Q(R)$, identifies $S^{-1}T$ injectively with the integral closure of $S^{-1}R$ in this ring. Together with Step 5 this gives exactly the required $C_x\\subseteq Q(A_x)$ and its finite integral-closure property.",
+   "uses": [
+    "lem-weil-pbc-primes-of-localization",
+    "lem-weil-pbc-localize-localization-at-prime",
+    "lem-weil-pbc-reduced-noetherian-total-ring-fractions",
+    "lem-weil-pbc-integral-closure-commutes-localization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 0C3B (lemma-stalk-normalization), localization proof; algebra.tex Tags 00E3, 02LX, 0307"
+   }
+  },
+  {
+   "text": "On $U$ put $M=T/R$, a finite $R$-module since the images of generators of $T$ generate its quotient. Localized fractions give $M_{\\mathfrak p}=C_x/A_x$: the map $b/s\\mapsto(b+R)/s$ is surjective, and its kernel consists of fractions for which some multiple of the numerator lies in $R$, exactly the image of $R_{\\mathfrak p}$. By [lem-weil-pbc-reduced-normal-iff-integrally-closed-total-fractions] and Step 6, $M_{\\mathfrak p}=0$ is equivalent to $A_x$ being normal; for this local ring, normality is equivalent to being an integrally closed domain, using [def-weil-pbc-normal-ring] and [lem-weil-pbc-localization-normal-domain]. Thus $N\\cap U$ is the complement of $\\operatorname{Supp}M$, which is closed by [lem-weil-pbc-finite-module-support-annihilator]. This proves openness of $N$. At each minimal prime $\\mathfrak p_i$, the local ring is the field $K_i$ by [lem-weil-pbc-minimal-prime-reduced-localization-field], so every generic point belongs to $N$. Their closures cover $X$, hence $N$ is dense. For $x\\in N\\cap U$, the support formula supplies $a\\in\\operatorname{Ann}_R(M)\\setminus\\mathfrak p$. Then $M_a=0$, so $T_a=R_a$ and $\\nu^{-1}D(a)\\to D(a)$ is an isomorphism. These neighborhoods cover $N$; the isomorphisms are induced by the structural map, and their inverses agree on overlaps. Consequently $\\nu^{-1}N\\to N$ is an isomorphism.",
+   "uses": [
+    "lem-weil-pbc-reduced-normal-iff-integrally-closed-total-fractions",
+    "def-weil-pbc-normal-ring",
+    "lem-weil-pbc-localization-normal-domain",
+    "lem-weil-pbc-finite-module-support-annihilator",
+    "lem-weil-pbc-minimal-prime-reduced-localization-field"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "algebra.tex Tags 030C (lemma-characterize-reduced-ring-normal), 00L2 (lemma-support-closed), 00EU (lemma-minimal-prime-reduced-ring); agent assembly of normal-locus argument"
+   }
+  },
+  {
+   "text": "Every identification above uses structural maps, germs, or the unique extension to a localization: on a fraction it sends $b/s$ to the image of $b$ times the inverse image of $s$. Hence the two composites in every restriction/localization square agree on numerators and on inverses of denominators, and therefore agree. For arbitrary open restrictions use Step 2 and test on affine neighborhoods; the component coordinates are indexed by the same generic points, with precisely the absent components omitted as in Step 6. This verifies the asserted compatibility. If $X=\\varnothing$, its normalization is the empty disjoint union by [def-weil-pbc-reduced-normalization]; the empty scheme is Noetherian, the map is finite and surjective, and $N=\\varnothing$ is dense open in the empty space. There are no nonempty affine opens or points to check.",
+   "uses": [
+    "def-weil-pbc-reduced-normalization"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tags 0CDV and 0C3B; fraction formulas and the empty component family"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-weil-pbc-noetherian-finitely-many-components",
+  "pqf-lem-affine-open-locnoeth",
+  "def-pc-reduced-scheme",
+  "def-weil-pbc-reduced-normalization",
+  "lem-sc-normalization-exists",
+  "lem-sc-components-open-injection",
+  "lem-sc-irreducible-components-cover",
+  "lem-sc-integral-function-field-affine-fraction",
+  "def-sc-normalization",
+  "lem-sc-finite-minimal-primes-over-ideal",
+  "lem-weil-pbc-spec-irreducible-components-minimal-primes",
+  "lem-weil-pbc-reduced-induced-closed-subscheme",
+  "lem-weil-pbc-scheme-coproduct-family",
+  "def-weil-finite-integral-morphism",
+  "lem-weil-pbc-finite-affine-coproduct-spectrum",
+  "def-weil-affine-spectrum",
+  "lem-sfb-componentwise-normalization-generic-properties",
+  "lem-weil-pbc-finite-type-algebra-noetherian",
+  "lem-sfb-normalization-affine-total-fractions",
+  "lem-weil-pbc-reduced-noetherian-total-ring-fractions",
+  "lem-weil-pbc-affine-open-stalk-localization",
+  "lem-sc-affine-pushforward-stalk-localization",
+  "lem-weil-pbc-localization-noetherian",
+  "lem-weil-pbc-localization-preserves-reduced",
+  "lem-weil-pbc-primes-of-localization",
+  "lem-weil-pbc-localize-localization-at-prime",
+  "lem-weil-pbc-integral-closure-commutes-localization",
+  "lem-weil-pbc-reduced-normal-iff-integrally-closed-total-fractions",
+  "def-weil-pbc-normal-ring",
+  "lem-weil-pbc-localization-normal-domain",
+  "lem-weil-pbc-finite-module-support-annihilator",
+  "lem-weil-pbc-minimal-prime-reduced-localization-field"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/morphisms.tex",
+  "place": "Tags 035P, 0C3B, 0CDV and varieties.tex 0BXR, with an explicit finite-module-support proof of the normal locus"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For a reduced finite type scheme over a field the affine rings and stalks of its componentwise normalization are the finite integral closures in the total rings of fractions",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.instIsIntegralNormalization\", \"module\": \"Mathlib/AlgebraicGeometry/Normalization\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [inst : AlgebraicGeometry.QuasiCompact f]\\n  [inst_1 : AlgebraicGeometry.QuasiSeparated f] [AlgebraicGeometry.IsIntegral X],\\n  AlgebraicGeometry.IsIntegral (AlgebraicGeometry.Scheme.Hom.normalization f)\", \"doc\": \"If $ X $ is an integral scheme, then the normalization of a morphism $ f: X \\\\to Y $ is also an integral scheme. This instance asserts that the categorical construction of normalization preserves the i\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.instIsReducedNormalization\", \"module\": \"Mathlib/AlgebraicGeometry/Normalization\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [inst : AlgebraicGeometry.QuasiCompact f]\\n  [inst_1 : AlgebraicGeometry.QuasiSeparated f] [AlgebraicGeometry.IsReduced X],\\n  AlgebraicGeometry.IsReduced (AlgebraicGeometry.Scheme.Hom.normalization f)\", \"doc\": \"If $ X $ is a reduced scheme, then the normalization of any morphism $ f: X \\\\to Y $ is also a reduced scheme. This instance asserts that the categorical normalization construction preserves the reduce\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.instIsIntegralHomFromNormalization\", \"module\": \"Mathlib/AlgebraicGeometry/Normalization\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [inst : AlgebraicGeometry.QuasiCompact f]\\n  [inst_1 : AlgebraicGeometry.QuasiSeparated f],\\n  AlgebraicGeometry.IsIntegralHom (AlgebraicGeometry.Scheme.Hom.fromNormalization f)\", \"doc\": \"The canonical morphism from the normalization of a scheme morphism $ f: X \\to Y $ to the target scheme $ Y $ is an integral morphism of schemes.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.normalizationDiagram\", \"module\": \"Mathlib/AlgebraicGeometry/Normalization\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → CategoryTheory.Functor Y.Opensᵒᵖ CommRingCat\", \"doc\": \"The functor assigns to each open subset $ U $ of $ Y $ the integral closure of the ring of sections $ \\\\Gamma(Y, U) $ in $ \\\\Gamma(X, f^{-1}(U)) $, and to each inclusion $ V \\\\subseteq U $ the induced ri\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.instIsAffineHomToNormalization\", \"module\": \"Mathlib/AlgebraicGeometry/Normalization\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [inst : AlgebraicGeometry.QuasiCompact f]\\n  [inst_1 : AlgebraicGeometry.QuasiSeparated f] [AlgebraicGeometry.IsAffineHom f],\\n  AlgebraicGeometry.IsAffineHom (AlgebraicGeometry.Scheme.Hom.toNormalization f)\", \"doc\": \"For any scheme morphism $ f: X \\to Y $, the induced morphism from $ X $ to the normalization of $ f $ is affine.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.ι_toNormalization\", \"module\": \"Mathlib/AlgebraicGeometry/Normalization\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [inst : AlgebraicGeometry.QuasiCompact f]\\n  [inst_1 : AlgebraicGeometry.QuasiSeparated f] (U : ↑Y.affineOpens),\\n  CategoryTheory.CategoryStruct.comp ((TopologicalSpace.Opens.map f.base).obj ↑U).ι\\n      (AlgebraicGeometry.Scheme.Hom.toNormalization f) =\\n\", \"doc\": \"For an affine open subset $U$ of a scheme $Y$, the composition of the inclusion morphism $f^{-1}(U) \\\\to X$ followed by the normalization morphism $X \\\\to \\\\overline{X}$ equals the composition of the can\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.instIsIntegralHomNormalizationDesc\", \"module\": \"Mathlib/AlgebraicGeometry/Normalization\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [inst : AlgebraicGeometry.QuasiCompact f]\\n  [inst_1 : AlgebraicGeometry.QuasiSeparated f] {T : AlgebraicGeometry.Scheme} (f₁ : X ⟶ T) (f₂ : T ⟶ Y)\\n  [inst_2 : AlgebraicGeometry.IsIntegralHom f₂] (H : f = CategoryTheory.CategoryStruct.comp f₁ f₂),\\n  Alge\", \"doc\": \"The normalization morphism associated with a scheme morphism $ f: X \\to Y $, constructed via the colimit diagram involving the affine Zariski site of $ Y $ and the Spec functor, is an integral morphism\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.toNormalization_app_preimage\", \"module\": \"Mathlib/AlgebraicGeometry/Normalization\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [inst : AlgebraicGeometry.QuasiCompact f]\\n  [inst_1 : AlgebraicGeometry.QuasiSeparated f] (U : ↑Y.affineOpens),\\n  let this := (CommRingCat.Hom.hom (AlgebraicGeometry.Scheme.Hom.app f ↑U)).toAlgebra;\\n  AlgebraicGeometry.Scheme.Hom.app (AlgebraicGeometry.\", \"doc\": \"For an affine open subset $U$ of a scheme $Y$, the application of the normalization morphism $f$ to the preimage of $U$ under the normalization map is equal to a composition of maps involving the inte\"} Read Mathlib/AlgebraicGeometry/Normalization.lean:15-76,327-345. The hits construct relative normalization and show integrality/reducedness; none identifies the stalk of finite componentwise normalization with the integral closure in the local total fraction ring. This is not a one-line specialization.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Componentwise normalization of a reduced algebraic scheme is finite and has stalk the integral closure of the local ring in its total quotient ring",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.instIsIsoToNormalizationOfIsIntegralHom\", \"module\": \"Mathlib.AlgebraicGeometry.Normalization\", \"type\": \"[IsIntegralHom f] : IsIso f.toNormalization\", \"doc\": \"For any integral morphism $ f: X \\to Y $ of schemes, the normalization morphism from $ X $ to the normalization of $ f $ is an isomorphism.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.instIsReducedNormalization\", \"module\": \"Mathlib.AlgebraicGeometry.Normalization\", \"type\": \"[IsReduced X] : IsReduced f.normalization\", \"doc\": \"If $ X $ is a reduced scheme, then the normalization of any morphism $ f: X \\\\to Y $ is also a reduced scheme. This instance asserts that the categorical normalization construction preserves the reduce\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.normalization\", \"module\": \"Mathlib.AlgebraicGeometry.Normalization\", \"type\": \": Scheme\", \"doc\": \"The normalization of a scheme morphism $ f: X \\to Y $ is defined as the colimit in the category of schemes of a diagram constructed by composing the opposite of the affine Zariski site inclusion functo\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.normalizationDesc\", \"module\": \"Mathlib.AlgebraicGeometry.Normalization\", \"type\": \"(H : f = f₁ ≫ f₂) : f.normalization ⟶ T\", \"doc\": \"A morphism from the normalization of a scheme morphism $ f: X \\to Y $ to another scheme $ T $, constructed as the colimit in the category of schemes of a diagram involving the affine Zariski site of $ \"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.instIsAffineHomToNormalization\", \"module\": \"Mathlib.AlgebraicGeometry.Normalization\", \"type\": \"[IsAffineHom f] : IsAffineHom f.toNormalization\", \"doc\": \"For any scheme morphism $ f: X \\to Y $, the induced morphism from $ X $ to the normalization of $ f $ is affine.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.instIsIntegralNormalization\", \"module\": \"Mathlib.AlgebraicGeometry.Normalization\", \"type\": \"[IsIntegral X] : IsIntegral f.normalization\", \"doc\": \"If $ X $ is an integral scheme, then the normalization of a morphism $ f: X \\\\to Y $ is also an integral scheme. This instance asserts that the categorical construction of normalization preserves the i\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.instIsIntegralHomNormalizationDesc\", \"module\": \"Mathlib.AlgebraicGeometry.Normalization\", \"type\": \"(H : f = f₁ ≫ f₂) : IsIntegralHom (f.normalizationDesc f₁ f₂ H)\", \"doc\": \"The normalization morphism associated with a scheme morphism $ f: X \\to Y $, constructed via the colimit diagram involving the affine Zariski site of $ Y $ and the Spec functor, is an integral morphism\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.instIsIntegralHomFromNormalization\", \"module\": \"Mathlib.AlgebraicGeometry.Normalization\", \"type\": \": IsIntegralHom f.fromNormalization\", \"doc\": \"The canonical morphism from the normalization of a scheme morphism $ f: X \\to Y $ to the target scheme $ Y $ is an integral morphism of schemes.\"} Read Mathlib/AlgebraicGeometry/Normalization.lean:15-76,327-345. The hits construct relative normalization and show integrality/reducedness; none identifies the stalk of finite componentwise normalization with the integral closure in the local total fraction ring. This is not a one-line specialization.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"normalization\", \"stalk\"",
+   "results": "[loogle] OK 0 hit(s) Read Mathlib/AlgebraicGeometry/Normalization.lean:15-76,327-345. The hits construct relative normalization and show integrality/reducedness; none identifies the stalk of finite componentwise normalization with the integral closure in the local total fraction ring. This is not a one-line specialization.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "normalization.*stalk|stalk.*normalization|integralClosure.*(localization|stalk)",
+   "results": "[grep] OK 0 hit(s) Read Mathlib/AlgebraicGeometry/Normalization.lean:15-76,327-345. The hits construct relative normalization and show integrality/reducedness; none identifies the stalk of finite componentwise normalization with the integral closure in the local total fraction ring. This is not a one-line specialization.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The normalization of a reduced affine scheme is the product of the integral closures of its components and commutes with localization at primes",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.instIsReducedNormalization\", \"module\": \"Mathlib/AlgebraicGeometry/Normalization\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [inst : AlgebraicGeometry.QuasiCompact f]\\n  [inst_1 : AlgebraicGeometry.QuasiSeparated f] [AlgebraicGeometry.IsReduced X],\\n  AlgebraicGeometry.IsReduced (AlgebraicGeometry.Scheme.Hom.normalization f)\", \"doc\": \"If $ X $ is a reduced scheme, then the normalization of any morphism $ f: X \\\\to Y $ is also a reduced scheme. This instance asserts that the categorical normalization construction preserves the reduce\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.instIsIntegralNormalization\", \"module\": \"Mathlib/AlgebraicGeometry/Normalization\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [inst : AlgebraicGeometry.QuasiCompact f]\\n  [inst_1 : AlgebraicGeometry.QuasiSeparated f] [AlgebraicGeometry.IsIntegral X],\\n  AlgebraicGeometry.IsIntegral (AlgebraicGeometry.Scheme.Hom.normalization f)\", \"doc\": \"If $ X $ is an integral scheme, then the normalization of a morphism $ f: X \\\\to Y $ is also an integral scheme. This instance asserts that the categorical construction of normalization preserves the i\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.normalizationDesc\", \"module\": \"Mathlib/AlgebraicGeometry/Normalization\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} →\\n  (f : X ⟶ Y) →\\n    [inst : AlgebraicGeometry.QuasiCompact f] →\\n      [inst_1 : AlgebraicGeometry.QuasiSeparated f] →\\n        {T : AlgebraicGeometry.Scheme} →\\n          (f₁ : X ⟶ T) →\\n            (f₂ : T ⟶ Y) →\\n              [AlgebraicGeometry.IsIntegralHom f₂] →\\n \", \"doc\": \"A morphism from the normalization of a scheme morphism $ f: X \\to Y $ to another scheme $ T $, constructed as the colimit in the category of schemes of a diagram involving the affine Zariski site of $ \"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.normalization\", \"module\": \"Mathlib/AlgebraicGeometry/Normalization\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} →\\n  (f : X ⟶ Y) → [AlgebraicGeometry.QuasiCompact f] → [AlgebraicGeometry.QuasiSeparated f] → AlgebraicGeometry.Scheme\", \"doc\": \"The normalization of a scheme morphism $ f: X \\to Y $ is defined as the colimit in the category of schemes of a diagram constructed by composing the opposite of the affine Zariski site inclusion functo\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.instIsIntegralHomFromNormalization\", \"module\": \"Mathlib/AlgebraicGeometry/Normalization\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [inst : AlgebraicGeometry.QuasiCompact f]\\n  [inst_1 : AlgebraicGeometry.QuasiSeparated f],\\n  AlgebraicGeometry.IsIntegralHom (AlgebraicGeometry.Scheme.Hom.fromNormalization f)\", \"doc\": \"The canonical morphism from the normalization of a scheme morphism $ f: X \\to Y $ to the target scheme $ Y $ is an integral morphism of schemes.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.toNormalization_app_preimage\", \"module\": \"Mathlib/AlgebraicGeometry/Normalization\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [inst : AlgebraicGeometry.QuasiCompact f]\\n  [inst_1 : AlgebraicGeometry.QuasiSeparated f] (U : ↑Y.affineOpens),\\n  let this := (CommRingCat.Hom.hom (AlgebraicGeometry.Scheme.Hom.app f ↑U)).toAlgebra;\\n  AlgebraicGeometry.Scheme.Hom.app (AlgebraicGeometry.\", \"doc\": \"For an affine open subset $U$ of a scheme $Y$, the application of the normalization morphism $f$ to the preimage of $U$ under the normalization map is equal to a composition of maps involving the inte\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.instIsIsoToNormalizationOfIsIntegralHom\", \"module\": \"Mathlib/AlgebraicGeometry/Normalization\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [inst : AlgebraicGeometry.QuasiCompact f]\\n  [inst_1 : AlgebraicGeometry.QuasiSeparated f] [AlgebraicGeometry.IsIntegralHom f],\\n  CategoryTheory.IsIso (AlgebraicGeometry.Scheme.Hom.toNormalization f)\", \"doc\": \"For any integral morphism $ f: X \\to Y $ of schemes, the normalization morphism from $ X $ to the normalization of $ f $ is an isomorphism.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.instIsAffineHomToNormalization\", \"module\": \"Mathlib/AlgebraicGeometry/Normalization\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [inst : AlgebraicGeometry.QuasiCompact f]\\n  [inst_1 : AlgebraicGeometry.QuasiSeparated f] [AlgebraicGeometry.IsAffineHom f],\\n  AlgebraicGeometry.IsAffineHom (AlgebraicGeometry.Scheme.Hom.toNormalization f)\", \"doc\": \"For any scheme morphism $ f: X \\to Y $, the induced morphism from $ X $ to the normalization of $ f $ is affine.\"} Read Mathlib/AlgebraicGeometry/Normalization.lean:15-76,327-345. The hits construct relative normalization and show integrality/reducedness; none identifies the stalk of finite componentwise normalization with the integral closure in the local total fraction ring. This is not a one-line specialization.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A reduced finite type scheme over a field has finite normalization whose affine rings and stalks are integral closures in total quotient rings",
+   "results": "8 hits: AlgebraicGeometry.Scheme.Hom.instIsIntegralNormalization, AlgebraicGeometry.Scheme.Hom.instIsReducedNormalization, AlgebraicGeometry.Scheme.Hom.instIsIntegralHomFromNormalization, AlgebraicGeometry.IsIntegral, AlgebraicGeometry.finite_appTop_of_universallyClosed, AlgebraicGeometry.instIsIntegralSpecOfIsDomainCarrier, AlgebraicGeometry.Scheme.Hom.normalization, AlgebraicGeometry.instIsDomainCarrierStalkCommRingCatPresheafOfIsIntegral. Read Normalization.lean:15-76,327-345: relative normalization construction and integrality, not the full finite componentwise normalization and stalk statement.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "normalization.*stalk|stalk.*normalization|normalization.*[Ff]inite",
+   "results": "3 hits: Mathlib/AlgebraicGeometry/ZariskisMainTheorem.lean, Mathlib/AlgebraicGeometry/ZariskisMainTheorem.lean, Mathlib/AlgebraicGeometry/ZariskisMainTheorem.lean. Read Normalization.lean:15-76,327-345: relative normalization construction and integrality, not the full finite componentwise normalization and stalk statement.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"normalization\", \"stalk\"",
+   "results": "0 hits: . Read Normalization.lean:15-76,327-345: relative normalization construction and integrality, not the full finite componentwise normalization and stalk statement.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Normalization of a reduced algebraic scheme is finite and its local rings are integral closures",
+   "results": "8 hits: AlgebraicGeometry.Scheme.Hom.normalization, AlgebraicGeometry.Scheme.Hom.instIsIsoToNormalizationOfIsIntegralHom, AlgebraicGeometry.Scheme.Hom.instIsIntegralNormalization, AlgebraicGeometry.Scheme.Hom.instIsReducedNormalization, AlgebraicGeometry.isIntegral_of_irreducibleSpace_of_isReduced, AlgebraicGeometry.Scheme.Hom.normalizationDesc, AlgebraicGeometry.Scheme.Hom.ker_toNormalization, AlgebraicGeometry.Scheme.Hom.instIsIntegralHomFromNormalization. Read Normalization.lean:15-76,327-345: relative normalization construction and integrality, not the full finite componentwise normalization and stalk statement.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The normalization of a reduced affine scheme is a product of integral closures of its irreducible components and commutes with localization",
+   "results": "8 hits: AlgebraicGeometry.Scheme.Hom.instIsReducedNormalization, AlgebraicGeometry.Scheme.Hom.normalization, AlgebraicGeometry.Scheme.Hom.toNormalization_app_preimage, AlgebraicGeometry.Scheme.Hom.instIsIntegralNormalization, AlgebraicGeometry.Scheme.Hom.ι_fromNormalization, AlgebraicGeometry.Scheme.Hom.ι_toNormalization, AlgebraicGeometry.Scheme.Hom.ι_fromNormalization_assoc, AlgebraicGeometry.Scheme.Hom.normalizationDesc. Read Normalization.lean:15-76,327-345: relative normalization construction and integrality, not the full finite componentwise normalization and stalk statement.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-normalization-singular-skyscraper",
+  "date": "2026-10-22",
+  "group": "Q96"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Normalization exact sequence in the numerical exceptional-fibre argument: affine component products and stalk integral closures (old normalization-singular-skyscraper steps 1--3).",
+   "via": [
+    "lem-trf-normalization-singular-skyscraper",
+    "lem-trf-nodal-normalization-quotient",
+    "lem-trf-nodal-curve-normalization-euler",
+    "lem-trf-nodal-contraction-euler-defect",
+    "lem-trf-smooth-target-modification-exceptional-tree",
+    "lem-trf-valuation-marking-semistable-separation",
+    "lem-trf-valuation-stable-reduction",
+    "lem-trf-temkin-stable-modification",
+    "lem-trf-stable-modification-flat-curve-pair",
+    "lem-trf-dejong-relative-marked-semistable",
+    "lem-trf-relative-marked-nodal-reduction",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-trf-normalization-affine-stalk-closure",
+  "worker": "stage1",
+  "summary": "Reused existing affine normalization, component, localization, total-fraction and support lemmas; proved finiteness, stalk models, the normal locus and compatibility in eight steps. No statement correction and no new nodes.",
+  "blueprint": "lem-trf-local-term-locality: auxiliary normalization exact-sequence argument reached through normalization-singular-skyscraper; realizes the affine component products and stalk integral closures named in blueprint.from.place. The latest blueprint locality proof itself remains the contracting-correspondence proof.",
+  "tool_uses": [
+   {
+    "node": "lem-sc-normalization-exists",
+    "why": "Generic normalization, commutative-algebra or affine-scheme tool used with its stated hypotheses; this unit has no replacement for this auxiliary normalization calculation."
+   },
+   {
+    "node": "lem-sfb-componentwise-normalization-generic-properties",
+    "why": "Generic normalization, commutative-algebra or affine-scheme tool used with its stated hypotheses; this unit has no replacement for this auxiliary normalization calculation."
+   },
+   {
+    "node": "lem-weil-pbc-reduced-noetherian-total-ring-fractions",
+    "why": "Generic normalization, commutative-algebra or affine-scheme tool used with its stated hypotheses; this unit has no replacement for this auxiliary normalization calculation."
+   },
+   {
+    "node": "lem-sfb-normalization-affine-total-fractions",
+    "why": "Generic normalization, commutative-algebra or affine-scheme tool used with its stated hypotheses; this unit has no replacement for this auxiliary normalization calculation."
+   },
+   {
+    "node": "lem-sc-affine-pushforward-stalk-localization",
+    "why": "Generic normalization, commutative-algebra or affine-scheme tool used with its stated hypotheses; this unit has no replacement for this auxiliary normalization calculation."
+   },
+   {
+    "node": "lem-weil-pbc-reduced-normal-iff-integrally-closed-total-fractions",
+    "why": "Generic normalization, commutative-algebra or affine-scheme tool used with its stated hypotheses; this unit has no replacement for this auxiliary normalization calculation."
+   },
+   {
+    "node": "lem-weil-pbc-reduced-induced-closed-subscheme",
+    "why": "Generic reduced-induced closed-subscheme chart (Lean-closed), used in Step 3 to identify the component chart with Spec(R/p_i)."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sc-normalization-exists",
+  "lem-sfb-componentwise-normalization-generic-properties",
+  "lem-weil-pbc-reduced-noetherian-total-ring-fractions",
+  "lem-sfb-normalization-affine-total-fractions",
+  "lem-sc-affine-pushforward-stalk-localization",
+  "lem-weil-pbc-reduced-normal-iff-integrally-closed-total-fractions",
+  "lem-weil-pbc-reduced-induced-closed-subscheme"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-NL-615327a97",
+  "group": "NL",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NL-615327a97 (reviewer sub-agent of L); spot-checked: One fault, repaired. I read the statement, all 8 steps, every cited statement, and Stacks 035P, 0C3B and 0CDV. The statement is unchanged from the base and there are no new nodes. Mechanical finding confirmed: Step 3 cited lem-per-componentwise-normalization-affine-charts, which is on line 1474 of route-pivot-dropped.txt (section 2026-10-19 artin-gabber), and no step justifies it. Its content is generic (Stacks 035P/0CDV), so I rebuilt it from live nodes. New Step 3 uses finite minimal primes (00FR), components of Spec as V(minimal prime) (00ES), the reduced induced chart Z_i∩U=Spec R/p_i (01J3, Lean-closed), the scheme coproduct and finite affine coproduct spectrum, and finiteness of each Z_i^ν→Z_i from Step 1. Together these give ν⁻¹U=Spec ∏T_i with T_i finite and the map r↦(r mod p_i). Step 4 adds the missing hypothesis check for lem-sfb-normalization-affine-total-fractions (quasi-compact opens of a Noetherian scheme have finitely many components). It also writes out that an integral closure inside a finite product of fields is the product of the integral closures (project a monic relation; multiply lifted monics). Since any R-algebra map R̄→Q(R) is the inclusion, T=∏B_i⊆∏K_i canonically, and T_i lands on the factor B_i. I recomputed proof_deps as the union of the step uses and removed the dropped node from split_report.tool_uses, adding the reduced-induced-closed-subscheme tool. The fixed closure (170 nodes) contains no dropped id and no cycle. Steps 1, 2 and 5–8 are correct as delivered. Edge cases checked: the empty scheme, k×k, k[u,v]/(uv), and the cusp k[t²,t³]. No SGA. Advisory: lem-weil-pbc-reduced-algebraic-normalization-field-change already states the global clauses (finite and surjective, dense open normal locus, restriction to opens) and could have been cited.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.NormalizationAffineStalkClosure",
+  "declaration": "AlgebraicGeometry.normalization_affine_stalk_closure",
+  "file": "lean/Sheaf/AlgebraicGeometry/NormalizationAffineStalkClosure.lean",
+  "statement": "theorem normalization_affine_stalk_closure {k : Type u} [Field k] {X : Scheme.{u}} [X.Over (Spec (.of k))] [IsReduced X] [LocallyOfFiniteType (X ↘ Spec (.of k))] [QuasiCompact (X ↘ Spec (.of k))] : IsNoetherian X ∧ IsNoetherian X.reducedNormalization ∧ Finite (irreducibleComponents X) ∧ IsFinite X.fromReducedNormalization ∧ Surjective X.fromReducedNormalization ∧ (∃ N : X.Opens, (∀ x : X, x ∈ N ↔ IsDomain (X.presheaf.stalk x) ∧ IsIntegrallyClosed (X.presheaf.stalk x)) ∧ Dense (N : Set X) ∧ IsIso (X.fromReducedNormalization ∣_ N)) ∧ (∀ V : X.Opens, ∃ e : (X.fromReducedNormalization ⁻¹ᵁ V).toScheme ≅ V.toScheme.reducedNormalization, e.hom ≫ V.toScheme.fromReducedNormalization = (X.fromReducedNormalization ∣_ V)) ∧ ∃ (jU : ∀ U : X.affineOpens, Γ(X.reducedNormalization, X.fromReducedNormalization ⁻¹ᵁ U.1) →+* FractionRing Γ(X, U.1)) (jx : ∀ x : X, ((TopCat.Presheaf.pushforward CommRingCat X.fromReducedNormalization.base).obj X.reducedNormalization.presheaf).stalk x →+* FractionRing (X.presheaf.stalk x)), (∀ x : X, _root_.IsReduced (X.presheaf.stalk x) ∧ IsNoetherianRing (X.presheaf.stalk x) ∧ Function.Injective ((TopCat.Presheaf.stalkFunctor CommRingCat x).map X.fromReducedNormalization.c).hom ∧ ((TopCat.Presheaf.stalkFunctor CommRingCat x).map X.fromReducedNormalization.c).hom.Finite ∧ Function.Injective (jx x) ∧ (jx x).comp ((TopCat.Presheaf.stalkFunctor CommRingCat x).map X.fromReducedNormalization.c).hom = algebraMap (X.presheaf.stalk x) (FractionRing (X.presheaf.stalk x)) ∧ Set.range (jx x) = (integralClosure (X.presheaf.stalk x) (FractionRing (X.presheaf.stalk x)) : Set (FractionRing (X.presheaf.stalk x)))) ∧ (∀ (U : X.affineOpens) (_ : (U.1 : Set X).Nonempty), Function.Injective (X.fromReducedNormalization.app U.1).hom ∧ (X.fromReducedNormalization.app U.1).hom.Finite ∧ Function.Injective (jU U) ∧ (jU U).comp (X.fromReducedNormalization.app U.1).hom = algebraMap Γ(X, U.1) (FractionRing Γ(X, U.1)) ∧ Set.range (jU U) = (integralClosure Γ(X, U.1) (FractionRing Γ(X, U.1)) : Set (FractionRing Γ(X, U.1))) ∧ ∃ (t : ℕ) (p : Fin t ≃ {p : Ideal Γ(X, U.1) // p ∈ minimalPrimes Γ(X, U.1)}) (q : FractionRing Γ(X, U.1) ≃+* (∀ i : Fin t, FractionRing (Γ(X, U.1) ⧸ (p i).1))) (b : Γ(X.reducedNormalization, X.fromReducedNormalization ⁻¹ᵁ U.1) ≃+* (∀ i : Fin t, integralClosure (Γ(X, U.1) ⧸ (p i).1) (FractionRing (Γ(X, U.1) ⧸ (p i).1)))), (∀ (r : Γ(X, U.1)) (i : Fin t), q (algebraMap Γ(X, U.1) (FractionRing Γ(X, U.1)) r) i = algebraMap (Γ(X, U.1) ⧸ (p i).1) (FractionRing (Γ(X, U.1) ⧸ (p i).1)) (Ideal.Quotient.mk (p i).1 r)) ∧ (∀ (s : Γ(X.reducedNormalization, X.fromReducedNormalization ⁻¹ᵁ U.1)) (i : Fin t), (b s i).val = q (jU U s) i) ∧ (∀ x : U.1, @IsLocalization _ _ (U.2.primeIdealOf x).asIdeal.primeCompl (X.presheaf.stalk x.1) _ (X.presheaf.germ U.1 x.1 x.2).hom.toAlgebra ∧ @IsLocalization _ _ ((U.2.primeIdealOf x).asIdeal.primeCompl.map (X.fromReducedNormalization.app U.1).hom) (((TopCat.Presheaf.pushforward CommRingCat X.fromReducedNormalization.base).obj X.reducedNormalization.presheaf).stalk x.1) _ (((TopCat.Presheaf.pushforward CommRingCat X.fromReducedNormalization.base).obj X.reducedNormalization.presheaf).germ U.1 x.1 x.2).hom.toAlgebra ∧ ∃ (qx : FractionRing (X.presheaf.stalk x.1) ≃+* (∀ i : {i : Fin t // (p i).1 ≤ (U.2.primeIdealOf x).asIdeal}, FractionRing (Γ(X, U.1) ⧸ (p i.1).1))) (ρ : FractionRing Γ(X, U.1) →+* FractionRing (X.presheaf.stalk x.1)), ρ.comp (algebraMap Γ(X, U.1) (FractionRing Γ(X, U.1))) = (algebraMap (X.presheaf.stalk x.1) (FractionRing (X.presheaf.stalk x.1))).comp (X.presheaf.germ U.1 x.1 x.2).hom ∧ (∀ (z : FractionRing Γ(X, U.1)) (i : {i : Fin t // (p i).1 ≤ (U.2.primeIdealOf x).asIdeal}), qx (ρ z) i = q z i.1) ∧ (∀ s : Γ(X.reducedNormalization, X.fromReducedNormalization ⁻¹ᵁ U.1), ρ (jU U s) = jx x.1 (((TopCat.Presheaf.pushforward CommRingCat X.fromReducedNormalization.base).obj X.reducedNormalization.presheaf).germ U.1 x.1 x.2 s)))) ∧ (∀ (U V : X.affineOpens) (h : V.1 ≤ U.1), ∃ ρ : FractionRing Γ(X, U.1) →+* FractionRing Γ(X, V.1), ρ.comp (algebraMap Γ(X, U.1) (FractionRing Γ(X, U.1))) = (algebraMap Γ(X, V.1) (FractionRing Γ(X, V.1))).comp (X.presheaf.map (homOfLE h).op).hom ∧ ∀ s : Γ(X.reducedNormalization, X.fromReducedNormalization ⁻¹ᵁ U.1), ρ (jU U s) = jU V (X.reducedNormalization.presheaf.map (homOfLE (X.fromReducedNormalization.preimage_mono h)).op s))",
+  "branch": "newtargets-dag",
+  "by": "Q65",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-9671d190c",
+  "group": "Q65",
+  "result": "pass",
+  "note": "Node unchanged apart from lean; lean.statement matches the file signature exactly; proof is sorry only. Hypotheses: Field k : Type u, X : Scheme.{u} over Spec k, IsReduced, LocallyOfFiniteType+QuasiCompact (per the def-weil-finite-type-morphism record); no extra assumptions. Uses the actual reducedNormalization/fromReducedNormalization (checked in side-live). All clauses present: Noetherian X and normalization, finitely many components, IsFinite/Surjective, open dense normal locus (IsDomain ∧ IsIntegrallyClosed stalks) with IsIso over it, restriction to opens; affine clause for nonempty U only: injective finite structural map, jU onto integralClosure in FractionRing, minimal-prime enumeration, q/b product equivalences pinned to the base and to jU; stalk IsLocalization via germs, surviving-factor qx, germ and affine restriction squares. All chosen maps are uniquely determined (localization universal property; flatness gives the restriction/germ extensions). Empty X/U and the crossing/cusp cases are fine. C_x is inlined rather than importing the downstream theorem-owned normalizationPushforwardStalk abbrev: correct. Docstrings carry the source, blueprint id and 8 steps; Worker report and Second reading sections present (the second reading is self-described as the same worker; advisory only). No file changed, so no compile."
+ }
+}

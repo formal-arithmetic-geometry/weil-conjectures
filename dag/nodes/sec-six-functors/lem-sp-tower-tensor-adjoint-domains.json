@@ -1,0 +1,140 @@
+{
+ "id": "lem-sp-tower-tensor-adjoint-domains",
+ "kind": "statement",
+ "title": "Domain witnesses for the smooth tower tensor adjoint",
+ "statement": "Fix a PurityFiniteSetting P, its normalized strict-tower Base b, Operations o and Coordinates q. Let X,Y be separated finite-type schemes over the algebraic closure in P, let f:X→Y be smooth separated of pure relative dimension d, and let c be a compactification. Suppose the given compact-support functor preserves the full uniform constructible finite-Tor subcategories and is left adjoint to a given G between them. Then there exist normalized TensorData on X and Y and a proof that the actual inverse-realized coefficient unit belongs to C_Y. For every K in C_Y, f* K tensor G(unit), in the fixed section-preserving ordinary derived tower coordinates, inverse-realizes into C_X; moreover the specified compactification projection PF_(G(unit),K) is invertible. No retagging, orientation, normalization of K, counit-comparison or transpose-comparison hypothesis is required.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-tower-geometric/sk-prop-sp-tower-geometric-gamma.proof.md",
+  "place": "Clause (2), existence of the inverse-projection composite and its tensor source; the domain-witness part of retagging Step 3."
+ },
+ "stmt_deps": [
+  "def-pur-conventions",
+  "sk-def-sp-coefficient-towers",
+  "sk-def-sp-normalized-towers",
+  "det-sp-tower-shriek-levels",
+  "det-sp-tower-gluing",
+  "det-sp-tower-gamma"
+ ],
+ "proof": [
+  {
+   "text": "Use the normalized K-flat sequence-site tensor models to obtain the signed symmetry and scalar unit data on X and Y. The actual coefficient unit has common cohomological and Tor interval [0,0], with constructible levels, so its inverse realization belongs to C_Y. These are precisely the tensorX, tensorY and unit_mem witnesses appearing in the gamma package.",
+   "uses": [
+    "det-sp-tower-gamma",
+    "sk-def-sp-normalized-towers"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Construct the exceptional adjoint with its chart counits using tower gluing. Canonical compactification comparison and uniqueness of right adjoints identify its representing pair with the given adjunction for c. Applying the smooth tower gamma construction and retaining only tensor_mem and projection_iso provides the required predicates for the given G. Equivalently, the chart description identifies G(unit) locally with a shifted locally free rank-one tower; tensoring the smooth pullback of K translates both uniform bounds by -2d. The finite projection formula at each coefficient level and tower conservativity make the specified projection invertible. No orientation equation, retagging equation or comparison of transposes is asserted.",
+   "uses": [
+    "det-sp-tower-gamma",
+    "det-sp-tower-gluing",
+    "det-sp-tower-shriek-levels"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "det-sp-tower-gamma",
+  "sk-def-sp-normalized-towers",
+  "det-sp-tower-gluing",
+  "det-sp-tower-shriek-levels"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-tower-geometric/sk-prop-sp-tower-geometric-gamma.proof.md",
+  "place": "Clause (2), existence of the inverse-projection composite and its tensor source; the domain-witness part of retagging Step 3."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "The derived tensor of a smooth pullback and the exceptional image of the coefficient unit has uniform constructible finite Tor bounds and invertible projection formula",
+   "results": "8 hits, including CategoryTheory.Tor, Tor prime, Tor prime obj obj and Algebra.Smooth.baseChange; none concerns strict coefficient towers or their full constructible finite-Tor domains.",
+   "date": "2026-10-25",
+   "verdict": "No matching Mathlib statement."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.IsIso",
+   "results": "12 generic IsIso declarations, including asIso, hom/inverse instances, and isIso_iff_of_thin.",
+   "date": "2026-10-25",
+   "verdict": "Generic invertibility API only; no geometric tower domain theorem."
+  },
+  {
+   "tool": "grep",
+   "query": "spConstructibleTorTowers|tensor_adjoint_domains",
+   "results": "msearch Mathlib grep: 0 hits. Repository search finds the stronger orientation- and Levels-dependent TwistedPullbackTowerDomain and the gamma Purity fields, but no standalone domain conclusion for an arbitrary given adjunction. Blueprint search tensor transpose: 0 matches.",
+   "date": "2026-10-25",
+   "verdict": "A strict domain-only extraction is needed; existing gamma remains its mathematical source."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.TowerTensorTransposeGroundFieldRetagging",
+  "date": "2026-10-25",
+  "group": "F3"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-thm-sf-package",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-pur-weil-equivariance-of-purity-and-trace",
+   "place": "Inverse-projection domain witnesses in gamma clause (2), used by retagging proof Step 3.",
+   "via": [
+    "lem-pur-tower-tensor-transpose-ground-field-retagging",
+    "lem-pur-tower-purity-ground-field-retagging"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.TowerTensorAdjointDomains",
+  "file": "lean/Sheaf/Paper/TowerTensorAdjointDomains.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.SpTowerTensorRetagging.tensor_adjoint_domains",
+  "statement": "theorem tensor_adjoint_domains\n    (X Y : Over (Spec (CommRingCat.of P.field.k))) (f : X ⟶ Y) (d : ℕ)\n    [IsSeparated X.hom] [LocallyOfFiniteType X.hom] [QuasiCompact X.hom]\n    [IsSeparated Y.hom] [LocallyOfFiniteType Y.hom] [QuasiCompact Y.hom]\n    [IsSeparated f.left] [SmoothOfRelativeDimension d f.left]\n    (c : Compactification f.left)\n    (hF : ∀ M : SpTowerCalculus.C P.coefficients.l P.extension b q X.left,\n      spConstructibleTorTowers P.coefficients.l P.extension Y.left (q.abelian Y.left)\n        ((SpTowerCalculus.F P.coefficients.l P.extension b o q c).obj M.obj))\n    (G : SpTowerCalculus.C P.coefficients.l P.extension b q Y.left ⥤\n      SpTowerCalculus.C P.coefficients.l P.extension b q X.left)\n    (adj : SpTowerGluing.support P.coefficients.l P.extension b o q c hF ⊣ G) :\n    ∃ tx : SpTowerP1.TensorData P.coefficients.l P.extension b X.left,\n    ∃ ty : SpTowerP1.TensorData P.coefficients.l P.extension b Y.left,\n    ∃ hU : spConstructibleTorTowers P.coefficients.l P.extension Y.left (q.abelian Y.left)\n      (SpTowerGamma.originalUnit P.coefficients.l P.extension b q Y.left),\n    ∀ K : SpTowerCalculus.C P.coefficients.l P.extension b q Y.left,\n      spConstructibleTorTowers P.coefficients.l P.extension X.left (q.abelian X.left)\n        ((SpTowerCalculus.realization P.coefficients.l P.extension b X.left\n          (q.abelian X.left)).inverse.obj\n          ((SpTowerGamma.tensorSource P.coefficients.l P.extension b o q f.left\n            ((SpTowerGamma.exceptional P.coefficients.l P.extension b q G).obj\n              ⟨SpTowerGamma.originalUnit P.coefficients.l P.extension b q Y.left,\n                hU⟩)).obj K)) ∧\n      IsIso (SpTowerShriek.projection P.coefficients.l P.extension b o c\n        ((SpTowerGamma.exceptional P.coefficients.l P.extension b q G).obj\n          ⟨SpTowerGamma.originalUnit P.coefficients.l P.extension b q Y.left, hU⟩)\n        ((SpTowerGamma.realization P.coefficients.l P.extension b q Y.left).obj K))",
+  "branch": "sheaf-dag",
+  "by": "F3",
+  "date": "2026-10-25"
+ },
+ "split_report": {
+  "blueprint": "Extracts only domain and inverse-projection existence from the gamma clause (2) used in the original retagging node Step 3.",
+  "tool_uses": [
+   {
+    "node": "det-sp-tower-gamma",
+    "why": "Used only for its ordinary strict-tower domain, projection or adjunction construction."
+   },
+   {
+    "node": "det-sp-tower-gluing",
+    "why": "Used only for its ordinary strict-tower domain, projection or adjunction construction."
+   },
+   {
+    "node": "det-sp-tower-shriek-levels",
+    "why": "Used only for its ordinary strict-tower domain, projection or adjunction construction."
+   }
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F3",
+  "result": "pass",
+  "landing": "20261025T162333-L-426843",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F3",
+  "result": "pass",
+  "landing": "20261025T162333-L-426843",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

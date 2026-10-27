@@ -1,0 +1,130 @@
+{
+ "id": "lem-sf-open-extension-good-complex-extension",
+ "kind": "statement",
+ "title": "Completed-ring open extension preserves good representatives",
+ "statement": "For every open immersion j : X → Y and every good complex P on X, the completed-coefficient open extension of P is good on Y.",
+ "stmt_deps": [
+  "def-sf-integral-system-canonical-bridge",
+  "def-a1-flat-term-kflat-complex"
+ ],
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex; literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 03DI, 03DJ, 0E8I and 0G7E."
+ },
+ "proof": [
+  {
+   "text": "Retain the concrete coefficient and section maps from the ringed-open comparison argument. Composition with the open object is left adjoint to base change. Uniqueness of the induced left adjoints on ring sheaves gives the coefficient isomorphism. The concrete slice equivalence and its module_transport helper give q, together with its equality after forgetting to module presheaves. The ring-unit compatibility and the site-adjunction triangle identify actual module inverse image with slice restriction followed by q.functor. Compose the scalar equivalence and q.inverse with literal slice extension. The resulting adjunction and uniqueness of left adjoints identify this composite with actual completed-coefficient open extension.",
+   "uses": [
+    "lem-weil-proetale-weakly-etale-localization",
+    "def-weil-pbc-proetale-operations",
+    "lem-pur-site-restriction-module-adjunction-exact"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The ordinary tensor comparison for a ringed site equivalence applies both to scalar restriction along the coefficient isomorphism and to the concrete functor underlying q. The equality after forgetting gives the natural isomorphism to q.functor. Cancel q.functor, using the counit twice, to obtain the binary tensor comparison for q.inverse. The already proved generic sfCbcKFlatTransport and sfCbcFlatTransport helpers transport independent-coefficient K-flatness and exactness of tensorRight through each equivalence. Translate tensorRight exactness to site-flatness using siteSheafTensorRightIso.",
+   "uses": [
+    "lem-sf-ringed-site-equivalence-tensor",
+    "lem-sf-cbc-extension-zero-completion"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply both the K-flat and flat-term clauses of ringedOpen_preserves_flat_resolution to the transported complex on the slice. Map the actual-extension isomorphism to cochain complexes and factor the two composite functors degreewise. The proved kFlat_iso_independent and flatOnSite_of_iso helpers transport the two conclusions back to the actual extended complex. Their conjunction is exactly integralOperationsGoodComplex, without any boundedness or quasi-compactness assumption.",
+   "uses": [
+    "lem-cbc-ringed-open-flat-resolution",
+    "lem-weil-pbc-ringed-topos-kflat-pullback"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-proetale-weakly-etale-localization",
+  "def-weil-pbc-proetale-operations",
+  "lem-pur-site-restriction-module-adjunction-exact",
+  "lem-sf-ringed-site-equivalence-tensor",
+  "lem-sf-cbc-extension-zero-completion",
+  "lem-cbc-ringed-open-flat-resolution",
+  "lem-weil-pbc-ringed-topos-kflat-pullback"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "Z9",
+  "date": "2026-10-27",
+  "document": "literature/stacks-project/sites-modules.tex; literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 03DI, 03DJ and 0E8I; explicit tensor-compatible ringed-slice presentation and transport of the two good-complex predicates."
+ },
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.SixFunctors.OpenExtensionGoodComplex",
+  "date": "2026-10-27",
+  "group": "P8"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-thm-sf-compatibility",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sf-open-extension-good-complex",
+   "place": "Conjunct component of the preservation argument.",
+   "via": [
+    "lem-sf-open-extension-good-complex"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.SixFunctors.OpenExtensionGoodComplexExtension",
+  "file": "lean/Sheaf/SixFunctors/OpenExtensionGoodComplexExtension.lean",
+  "declaration": "WeilConjectures.IntegralSystemRealization.openExtension_goodComplex_extension",
+  "statement": "theorem openExtension_goodComplex_extension {X Y : Scheme.{u}}\n    (j : X ⟶ Y) [IsOpenImmersion j]\n    (P : (integralOperationsGoodComplex l E X).FullSubcategory) :\n    integralOperationsGoodComplex l E Y\n      (((PurCompactSupport.openExtension\n        (PurCompactSupport.completed l E) j).mapHomologicalComplex\n         (.up ℤ)).obj P.obj)",
+  "branch": "sheaf-dag",
+  "by": "P8",
+  "date": "2026-10-27"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "completed open extension preserves K-flat complexes with flat terms",
+   "results": "No direct match; generic flat tensor lemmas only.",
+   "date": "2026-10-27",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "open extension by zero preserves K-flat flat-term complexes",
+   "results": "No direct match.",
+   "date": "2026-10-27",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "openExtension goodComplex KFlat flat",
+   "results": "No existing concrete theorem found.",
+   "date": "2026-10-27",
+   "verdict": "no match"
+  }
+ ],
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P8",
+  "result": "pass",
+  "landing": "20261027T012918-L-2346562",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Z9",
+  "result": "pass",
+  "landing": "20261027T034820-L-3689376",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

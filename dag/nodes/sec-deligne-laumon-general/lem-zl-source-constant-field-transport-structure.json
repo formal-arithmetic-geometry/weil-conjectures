@@ -1,0 +1,128 @@
+{
+ "id": "lem-zl-source-constant-field-transport-structure",
+ "kind": "statement",
+ "title": "Canonical carrier comparison for iterated source constant-field structure maps",
+ "statement": "Let $k_0,k_1$ be finite fields, $\\ell$ invertible in both, $X/k_0$ and $Y/k_1$ schemes, and $\\theta:\\bar X\\simeq\\bar Y$ an isomorphism of geometric fibers. Let $r,m\\in\\mathbf N$ and suppose $\\theta\\operatorname{Fr}_1=\\operatorname{Fr}_0^r\\theta$. Put $R=\\operatorname{constantFieldRestriction}(\\theta,r)$ [def-zl-source-constant-field-restriction]. For any constructible source Weil sheaf $F$ and $G=RF$, let $j=\\theta^{-1}$ and $\\alpha:j^*F\\xrightarrow{\\sim}\\theta_*F=G$ be the canonical inverse-pullback/pushforward comparison. Write $\\psi_{F,n}:(\\operatorname{Fr}_0^n)^*F\\to F$ and $\\psi_{G,m}:(\\operatorname{Fr}_1^m)^*G\\to G$ for the underlying iterated structure maps [def-weil-local-frobenius-trace]. If $h_c:\\operatorname{Fr}_1^m j=j\\operatorname{Fr}_0^{rm}$, then the following maps from $(\\operatorname{Fr}_1^m j)^*F$ to $G$ agree: first the pullback compositor, then $(\\operatorname{Fr}_1^m)^*\\alpha$, then $\\psi_{G,m}$; or first the pullback congruence along $h_c$, then the compositor for $j\\operatorname{Fr}_0^{rm}$, then $j^*\\psi_{F,rm}$, then $\\alpha$. No cartesian constant-field square, residue field, finite point, stalk comparison or Frobenius-module equivalence is asserted.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-deligne-laumon-general/sk-i-dl-general-real/thm-zl-real-mixed-by-curves.proof.md",
+  "place": "First paragraph: the extension preserves reality because local Frobenius becomes a positive integral power; the iterated source structure-map calculation in step 2 of lem-zl-source-constant-field-restriction-stalk."
+ },
+ "stmt_deps": [
+  "def-zl-source-constant-field-restriction",
+  "def-weil-local-frobenius-trace"
+ ],
+ "proof": [
+  {
+   "text": "Transfer the existing ordered addition formula upperStarFactor_hom_app_comp_frobeniusPowStr_add to the underlying inverse-pushforward maps using upperStarIsoLowerStarInv_hom_app_trans and naturality. Cancel the comparison isomorphism to obtain the ordered addition identity for the underlying maps of frobeniusPowIso. For the zero second summand, use the identity comparison, naturality of lowerStarId, and the right unit law of lowerStarComp. This includes r=0 without imposing positivity.",
+   "uses": [
+    "def-weil-local-frobenius-trace"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "From the intertwining hypothesis, inductively obtain theta Fr_1^(-m)=Fr_0^(-rm) theta. Induct on m to identify the underlying transported iterated structure with the lower-star square comparison followed by theta_* of the old rm-th iterated structure. At m=0 use lowerStarFactor_exchange_id. At a successor use forget_map_frobeniusPowIso_succ_hom and the underlying transport_obj_str formula (identifying its comparison by the existing transportCommIso_eq before projection), move the old structure map by naturality of the first exchange, and paste exchanges using lowerStarFactor_exchange_comp. Apply the ordered addition identity from the previous step to rm and r. All composition equalities here are in the underlying sheaf category.",
+   "uses": [
+    "def-weil-local-frobenius-trace",
+    "def-zl-source-constant-field-restriction"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use the proved generic inverse-pullback exchange identity of natural transformations in lem-zl-source-constant-field-comparison-square, specialized to theta inverse and the two Frobenius powers. Specialize the inverse isomorphism before taking the component at the carrier. The hom intertwining equality is hc and the inverse equality is the power identity obtained in the induction. Naturality on the old iterated structure map, together with the transported-iterate formula, gives the displayed equation. An explicit underlying-sheaf map wrapper avoids unfolding adic module actions during this last comparison. The generic comparison is itself proved from the factorisation form and a lower-star factor triangle, using the existing factorisation of upperStarCompIso and cancellation of the first upper-star factor before inserting the concrete composite. No additional mathematical hypothesis is used.",
+   "uses": [
+    "def-weil-local-frobenius-trace",
+    "def-zl-source-constant-field-restriction",
+    "lem-zl-source-constant-field-comparison-square"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-local-frobenius-trace",
+  "def-zl-source-constant-field-restriction",
+  "lem-zl-source-constant-field-comparison-square"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-deligne-laumon-general/sk-i-dl-general-real/thm-zl-real-mixed-by-curves.proof.md",
+  "place": "First paragraph: the extension preserves reality because local Frobenius becomes a positive integral power; the iterated source structure-map calculation in step 2 of lem-zl-source-constant-field-restriction-stalk. A9: inverse-pushforward coherence proof of the source structure-map calculation."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "The canonical identification of pullback by the inverse of an isomorphism with pushforward intertwines the iterated Weil structure maps after finite field transport",
+   "results": "8 hits, including TopCat.Presheaf.pullbackInvIsoPushforwardHom and pullbackHomIsoPushforwardInv, ChosenPullbacksAlong iso and isoInv lemmas. These compare presheaf pullbacks and pushforwards but do not state the iterated source Weil structure equation.",
+   "date": "2026-10-26",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Pullback of sheaves along an isomorphism identifies iterated Frobenius structures after transport of a Weil sheaf",
+   "results": "8 WittVector isocrystal hits, including IsocrystalEquiv.frob_equivariant. None concerns the source pro-etale Weil sheaf transport.",
+   "date": "2026-10-26",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "frobeniusPowStr.*transport|transport.*frobeniusPowStr",
+   "results": "0 Mathlib hits from msearch. Local source search also found no such theorem; BaseChangeField.Transport supplies transport_obj_str, while BaseChangeField.Comparison supplies the analogous same-field lowerStar_obj_frobeniusPowIso, not this equation.",
+   "date": "2026-10-26",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.DeligneLaumon.ConstantFieldRestrictionStalk",
+  "date": "2026-10-26",
+  "group": "K5"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-zl-real-mixed-by-curves",
+   "place": "First paragraph, the sentence saying the extension preserves reality because local Frobenius becomes a positive integral power; only the source structure-map compatibility used in that calculation.",
+   "via": [
+    "lem-zl-source-constant-field-restriction-stalk",
+    "lem-zl-geometric-constituent-orbit",
+    "lem-zl-pair-eigenvalue-geometric-constituent",
+    "lem-zl-pair-eigenvalue-curve-test",
+    "lem-zl-smooth-affine-constituent-purity"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-deligne-laumon-general",
+ "unit": "sk-i-dl-general-real",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.DeligneLaumon.ConstantFieldTransportStructure",
+  "file": "lean/Sheaf/DeligneLaumon/ConstantFieldTransportStructure.lean",
+  "declaration": "AlgebraicGeometry.WeilSheaf.frobeniusPowStr_constantFieldRestriction",
+  "statement": "theorem frobeniusPowStr_constantFieldRestriction\n    {k₀ k₁ : Type u} [Field k₀] [Finite k₀] [Field k₁] [Finite k₁]\n    {l : ℕ} [Fact l.Prime] [Fact (ringChar k₀ ≠ l)] [Fact (ringChar k₁ ≠ l)]\n    {X Y : Scheme.{u}} [X.Over (Spec (CommRingCat.of k₀))]\n    [Y.Over (Spec (CommRingCat.of k₁))]\n    (θ : (X ↘ Spec (CommRingCat.of k₀)).geometricFiber ≅\n      (Y ↘ Spec (CommRingCat.of k₁)).geometricFiber) (r : ℕ)\n    (hθ : θ.hom ≫ (Y ↘ Spec (CommRingCat.of k₁)).geometricGaloisFrobenius.hom =\n      ((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius ^ r).hom ≫ θ.hom)\n    (F : WeilSheaf k₀ l X) (m : ℕ)\n    (hc : ((Y ↘ Spec (CommRingCat.of k₁)).geometricGaloisFrobenius ^ m).hom ≫ θ.inv =\n      θ.inv ≫ ((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius ^ (r * m)).hom) :\n    (upperStarComp _ _ _).hom.app F.obj.carrier.X ≫\n      (((Y ↘ Spec (CommRingCat.of k₁)).geometricGaloisFrobenius ^ m).hom)^*[_].map\n        (constantFieldRestrictionCarrierIso θ r hθ F).hom ≫\n          ((constantFieldRestriction θ r hθ).obj F).frobeniusPowStr m =\n    (upperStarCongr _ hc).hom.app F.obj.carrier.X ≫\n      (upperStarComp _ _ _).hom.app F.obj.carrier.X ≫\n      (θ.inv)^*[_].map (F.frobeniusPowStr (r * m)) ≫\n      (constantFieldRestrictionCarrierIso θ r hθ F).hom",
+  "branch": "sheaf-dag",
+  "by": "K5",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K5",
+  "result": "pass",
+  "landing": "20261026T070205-L-3448403",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A9",
+  "result": "pass",
+  "landing": "20261026T222549-L-668606",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

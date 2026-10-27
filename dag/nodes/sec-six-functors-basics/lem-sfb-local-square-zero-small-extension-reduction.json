@@ -1,0 +1,213 @@
+{
+ "id": "lem-sfb-local-square-zero-small-extension-reduction",
+ "kind": "statement",
+ "title": "Small Artinian tests imply local square-zero lifting with nilpotent maximal ideal",
+ "statement": "Let $(R,\\mathfrak m)$ and $(S,\\mathfrak n)$ be commutative local rings and let $R\\to S$ be a local homomorphism. Here local means having exactly one maximal ideal and a local homomorphism has inverse image of the target maximal ideal equal to the source maximal ideal. Suppose $S$ is Noetherian [def-weil-pbc-noetherian-ring]. A small extension is a surjection $B'\\twoheadrightarrow B$ of commutative Artinian local rings whose kernel $I$ is nonzero, is annihilated by $\\mathfrak m_{B'}$, and has dimension one as a vector space over $B'/\\mathfrak m_{B'}$. Artinian means that every descending chain of ideals stabilizes. Assume that for every such small extension, every local map $R\\to B'$, and every local $R$-algebra map $g:S\\to B$ inducing an isomorphism $S/\\mathfrak n\\xrightarrow{\\sim}B/\\mathfrak m_B$, there is an $R$-algebra lift $g':S\\to B'$ of $g$. Then for every commutative local $R$-algebra $(A,\\mathfrak m_A)$ with local structure map and $\\mathfrak m_A^N=0$ for some $N\\geq1$, every ideal $J\\subset A$ with $J^2=0$, and every local $R$-algebra map $v:S\\to A/J$ inducing an isomorphism $S/\\mathfrak n\\xrightarrow{\\sim}(A/J)/\\mathfrak m_{A/J}$, there exists an $R$-algebra map $w:S\\to A$ with $(A\\to A/J)\\circ w=v$. The test ring $A$ is not required to be Artinian or Noetherian.",
+ "source": {
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tag 0DYG, lemma-fs-local, implication (3) to (2) and the last paragraph of its proof. Small extensions are Algebra Tag 02HS, algebra.tex, definition-small-extension."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-noetherian-ring"
+ ],
+ "proof": [
+  {
+   "text": "First reduce to kernels annihilated by the maximal ideal. Put $K_t=\\mathfrak m_A^tJ$ for $0\\leq t\\leq N$ and $A_t=A/K_t$. Then $K_0=J$, $K_N=0$, and $A_{t+1}\\twoheadrightarrow A_t$ has square-zero kernel $K_t/K_{t+1}$ annihilated by $\\mathfrak m_{A_{t+1}}$. Each $K_t\\subseteq J\\subseteq\\mathfrak m_A$, so these rings are local with the original residue field and nilpotent maximal ideal, and $R\\to A_t$ is local. Indeed a unit modulo a square-zero ideal is a unit: if $xy=1+j$, then $y(1-j)$ is an inverse. Thus the inverse image of the maximal ideal under each quotient is the maximal ideal. Starting with $v:S\\to A_0$, solve successively these $N$ lifting problems. Any lift is local and has the same residue isomorphism, because its composite with the quotient does. Consequently it suffices to solve every test problem with $\\mathfrak m_AJ=0$. A zero kernel is immediate: use the inverse of the quotient isomorphism. In steps 2--6 assume $J\\ne0$ and $\\mathfrak m_AJ=0$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0DYG (lemma-fs-local), proof of (3) implies (2), last paragraph; small extensions: algebra.tex Tag 02HS (definition-small-extension)."
+   }
+  },
+  {
+   "text": "Write $q:A\\to A/J$, $D=v(S)$, and $C=q^{-1}(D)\\subseteq A$. The structure map from $R$ lands in $C$, and $C/J=D$. Let $L=\\ker(v:S\\to D)$. Locality gives $L\\subseteq\\mathfrak n$, while $\\mathfrak n^N\\subseteq L$ because $\\mathfrak m_A^N=0$. Apply [lem-weil-pbc-noetherian-local-quotient-artinian-local] with ring $S$, ideal $L$, and exponent $N$: $D\\cong S/L$ is Artinian local. Its residue field is $k=S/\\mathfrak n$, identified with $A/\\mathfrak m_A$ by the hypothesis. The ring $C$ is local with maximal ideal $C\\cap\\mathfrak m_A$: if $c$ has nonzero residue, its image in $D$ is invertible; lift that inverse to $b\\in C$, write $cb=1+j$, and use $b(1-j)\\in C$ as inverse. Its maximal ideal has $N$th power zero. Thus $R\\to C$ is local, $S\\to D$ is a local $R$-algebra map with residue isomorphism, and $\\mathfrak m_CJ=0$. A lift to $C$ composed with $C\\subseteq A$ solves the given problem. Hence from now on construct a lift for $S\\to D=C/J$, retaining this $C$, $J$ and $k$.",
+   "uses": [
+    "lem-weil-pbc-noetherian-local-quotient-artinian-local"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0DYG (lemma-fs-local), proof of (3) implies (2), last paragraph; small extensions: algebra.tex Tag 02HS (definition-small-extension)."
+   }
+  },
+  {
+   "text": "The action of $C$ on $J$ factors through $k=C/\\mathfrak m_C$, so $J$ is a $k$-vector space. Every $k$-subspace $H\\subseteq J$ is a $C$-ideal. Let $\\mathcal H$ be the set of subspaces with one-dimensional quotient $J/H$. They separate the elements of $J$. For $0\\ne j\\in J$, apply [lem-trf-vector-subspace-complement] to the line $kj\\subseteq J$, obtaining $J=kj\\oplus H$. Projection along $H$ identifies $J/H$ with $kj$, so $H\\in\\mathcal H$ and $j\\notin H$. In particular $\\mathcal H$ is nonempty and $\\bigcap_{H\\in\\mathcal H}H=0$. No finite-dimensionality of $J$ is needed.",
+   "uses": [
+    "lem-trf-vector-subspace-complement"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0DYG (lemma-fs-local), proof of (3) implies (2), last paragraph; small extensions: algebra.tex Tag 02HS (definition-small-extension)."
+   }
+  },
+  {
+   "text": "For $H\\in\\mathcal H$ put $E_H=C/H$ and $U_H=J/H$. The quotient $E_H\\to D$ is surjective with nonzero one-dimensional kernel $U_H$ annihilated by the maximal ideal. The ring $E_H$ is local with residue field $k$, since $H\\subseteq\\mathfrak m_C$ and units of $C$ descend. It is Artinian: in any descending chain of its ideals, the images in the Artinian ring $D$ stabilize, as do the intersections with the one-dimensional $k$-space $U_H$. For nested ideals $V'\\subseteq V$ with equal images and equal intersections, any $x\\in V$ has $y\\in V'$ with the same image; then $x-y\\in V\\cap U_H=V'\\cap U_H$, so $x\\in V'$. The chain therefore stabilizes. Hence $E_H\\twoheadrightarrow D$ is a small extension as defined in the statement. The maps $R\\to E_H$ and $S\\to D$ are local and the latter has residue isomorphism. The assumed small-extension test supplies a lift $f_H:S\\to E_H$ over $R$. Choose such a lift for each $H$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0DYG (lemma-fs-local), proof of (3) implies (2), last paragraph; small extensions: algebra.tex Tag 02HS (definition-small-extension)."
+   }
+  },
+  {
+   "text": "Form the ring $P$ of tuples $(e_H)_{H\\in\\mathcal H}\\in\\prod_HE_H$ whose images in $D$ all equal a single element. Operations are coordinatewise. Since $\\mathcal H\\ne\\varnothing$, their common image defines a surjection $p:P\\to D$: lift an element of $D$ first to $C$ and then take all its quotient images. The canonical map $i:C\\to P$, $c\\mapsto(c\\bmod H)_H$, is injective. Indeed if $i(c)=0$, then $c\\in J$ and $c\\in H$ for every $H$, so step 3 gives $c=0$. Its restriction embeds $J$ into $J'=\\ker p=\\prod_H(J/H)$. This ideal has square zero. Coordinatewise multiplication shows that the action of $P$ on $J'$ is multiplication by the common residue in $k$: each $\\mathfrak m_{E_H}$ annihilates $J/H$. In particular $J'$ is a $k$-vector space and $i|_J$ is $k$-linear. The tuple $f=(f_H)_H:S\\to P$ is an $R$-algebra map, since every $f_H$ reduces to the same map $S\\to D$; the structural $R$-map of $P$ is the composite $R\\to C\\xrightarrow{i}P$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0DYG (lemma-fs-local), proof of (3) implies (2), last paragraph; small extensions: algebra.tex Tag 02HS (definition-small-extension)."
+   }
+  },
+  {
+   "text": "Apply [lem-trf-vector-subspace-complement] to the subspace $i(J)\\subseteq J'$ to obtain $J'=i(J)\\oplus M$. The subspace $M$ is an ideal of $P$, because the $P$-action on $J'$ is its residue scalar action. Every $e\\in P$ has a unique expression $e=i(c)+m$ with $c\\in C$ and $m\\in M$. For existence, lift $p(e)$ to $c_0\\in C$, and decompose $e-i(c_0)=i(j)+m$ in $J'$, giving $c=c_0+j$. For uniqueness, $i(c-c')\\in M\\subseteq J'$ forces $c-c'\\in J$, and $i(J)\\cap M=0$ with injectivity of $i$ gives $c=c'$. Define $\\rho(e)=c$. Uniqueness makes $\\rho$ additive, and $M$ being an ideal makes it multiplicative: $(i(c)+m)(i(d)+n)-i(cd)\\in M$. It fixes $i(C)$, hence is unital and preserves the structural $R$-map. Moreover $q_C\\rho=p$, where $q_C:C\\to D$. Thus $\\rho f:S\\to C$, followed by $C\\subseteq A$, lifts the original $v$ in the socle case. Apply this result successively to the finite tower in step 1 to obtain $w:S\\to A$ for arbitrary $J$.",
+   "uses": [
+    "lem-trf-vector-subspace-complement"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0DYG (lemma-fs-local), proof of (3) implies (2), last paragraph; small extensions: algebra.tex Tag 02HS (definition-small-extension)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-noetherian-local-quotient-artinian-local",
+  "lem-trf-vector-subspace-complement"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tag 0DYG (lemma-fs-local), proof of (3) implies (2), last paragraph; small extensions: algebra.tex Tag 02HS (definition-small-extension)."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "small.*extension|smallExtension|small_extension|square.zero.*[Aa]rtin",
+   "results": "Read 5 hits: Mathlib/FieldTheory/SplittingField/IsSplittingField.lean, Mathlib/FieldTheory/CardinalEmb.lean, Mathlib/FieldTheory/PerfectClosure.lean, Mathlib/CategoryTheory/SmallObject/Construction.lean, Mathlib/Topology/Algebra/Module/LinearPMap.lean",
+   "date": "2026-10-23",
+   "verdict": "no match: discrete formal smoothness, trivial square-zero extension constructions, or nilpotence results do not give the reduction from small Artinian tests to arbitrary local square-zero tests"
+  },
+  {
+   "tool": "loogle",
+   "query": "IsArtinianRing, IsLocalRing, AlgHom",
+   "results": "Read 0 hits: ",
+   "date": "2026-10-23",
+   "verdict": "no match: discrete formal smoothness, trivial square-zero extension constructions, or nilpotence results do not give the reduction from small Artinian tests to arbitrary local square-zero tests"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Reduce local square zero lifting problems with nilpotent maximal ideal to small Artinian extensions when the source algebra is Noetherian",
+   "results": "Read 8 hits: TrivSqZeroExt.lift_def, liftOfDerivationToSquareZero, isArtinianRing_iff_isNilpotent_maximalIdeal, liftOfDerivationToSquareZero_apply, Algebra.FormallySmooth.exists_lift, TrivSqZeroExt.lift, StandardEtalePair.existsUnique_hasMap_of_hasMap_quotient_of_sq_eq_bot, TrivSqZeroExt.liftEquivOfComm_apply",
+   "date": "2026-10-23",
+   "verdict": "no match: discrete formal smoothness, trivial square-zero extension constructions, or nilpotence results do not give the reduction from small Artinian tests to arbitrary local square-zero tests"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Testing infinitesimal ring lifting on kernels of dimension one over the residue field suffices for arbitrary square zero kernels in rings with nilpotent maximal ideal",
+   "results": "Read 8 hits: Algebra.FormallySmooth.exists_lift, Algebra.FormallySmooth.lift, Algebra.FormallyUnramified.iff_comp_injective_of_small, Algebra.FormallyUnramified.lift_unique_of_ringHom, Algebra.FormallyEtale.iff_comp_bijective, Algebra.Extension.homInfinitesimal, Algebra.FormallyUnramified.lift_unique, Algebra.FormallyUnramified.lift_unique'",
+   "date": "2026-10-23",
+   "verdict": "no match: discrete formal smoothness, trivial square-zero extension constructions, or nilpotence results do not give the reduction from small Artinian tests to arbitrary local square-zero tests"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a local homomorphism with Noetherian target, lifts against small Artinian extensions imply lifts against every square zero local extension with nilpotent maximal ideal and the same residue field",
+   "results": "Read 8 hits: HenselianLocalRing, Algebra.FormallySmooth.exists_lift, Algebra.FormallySmooth.lift, Algebra.FormallyUnramified.iff_comp_injective_of_small, Algebra.FormallySmooth.flat_of_algHom_of_isNoetherianRing, Algebra.FormallySmooth.mk_lift, Algebra.FormallySmooth.of_comp_surjective, Algebra.FormallySmooth.iff_comp_surjective",
+   "date": "2026-10-23",
+   "verdict": "no match: discrete formal smoothness, trivial square-zero extension constructions, or nilpotence results do not give the reduction from small Artinian tests to arbitrary local square-zero tests"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a local homomorphism with Noetherian target, small Artinian extension lifting tests imply square zero lifting for local test rings with nilpotent maximal ideal",
+   "results": "{\"t\": \"2026-10-23T14:29:28Z\", \"tool\": \"leanfinder\", \"query\": \"For a local homomorphism with Noetherian target, small Artinian extension lifting tests imply square zero lifting for local test rings with nilpotent maximal ideal\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"isArtinianRing_iff_isNilpotent_maximalIdeal\", \"Algebra.FormallySmooth.exists_lift\", \"Algebra.FormallySmooth.lift\", \"HenselianLocalRing\", \"Algebra.FormallyUnramified.iff_comp_injective_of_small\", \"TrivSqZeroExt.isUnit_or_isNilpotent_of_isMaximal_isNilpotent\", \"Algebra.FormallySmooth.mk_lift\", \"Algebra.FormallySmooth.flat_of_algHom_of_isNoetherianRing\"], \"digest\": \"745d4acaf17b0934\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the returned formal-smoothness, conormal-retraction or nilpotence facts do not assert this small-Artinian-test reduction; read the displayed hits. No new leaf is claimed."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Small Artinian extension lifting implies local square zero lifting for nilpotent maximal ideal test rings and fixed residue field",
+   "results": "{\"t\": \"2026-10-23T14:30:05Z\", \"tool\": \"leansearch\", \"query\": \"Small Artinian extension lifting implies local square zero lifting for nilpotent maximal ideal test rings and fixed residue field\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"liftOfDerivationToSquareZero\", \"TrivSqZeroExt.lift_apply_inr\", \"TrivSqZeroExt.lift\", \"liftOfDerivationToSquareZero_apply\", \"IsLocalRing.ResidueField.lift\", \"TrivSqZeroExt.lift_def\", \"derivationToSquareZeroEquivLift\", \"Ideal.ResidueField.liftₐ\"], \"digest\": \"4d24768d12016820\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the returned formal-smoothness, conormal-retraction or nilpotence facts do not assert this small-Artinian-test reduction; read the displayed hits. No new leaf is claimed."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A local square zero extension with kernel killed by the maximal ideal is a retract of the fiber product of its quotients by all codimension one subspaces of the kernel",
+   "results": "{\"t\": \"2026-10-23T14:30:07Z\", \"tool\": \"leanfinder\", \"query\": \"A local square zero extension with kernel killed by the maximal ideal is a retract of the fiber product of its quotients by all codimension one subspaces of the kernel\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"retractionOfSectionOfKerSqZero\", \"retractionKerToTensorEquivSection\", \"retractionOfSectionOfKerSqZero_comp_kerToTensor\", \"retractionOfSectionOfKerSqZero_tmul_D\", \"toAlgHom_comp_sectionOfRetractionKerToTensor\", \"toAlgHom_comp_sectionOfRetractionKerToTensorAux\", \"Algebra.FormallySmooth.of_split\", \"Algebra.FormallySmooth.iff_injective_cotangentComplexBaseChange\"], \"digest\": \"e6754eaef5199450\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the returned formal-smoothness, conormal-retraction or nilpotence facts do not assert this small-Artinian-test reduction; read the displayed hits. No new leaf is claimed."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-adic-smooth-fixed-residue-lifting",
+  "date": "2026-10-23",
+  "group": "Q74"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Algebraicity and smoothness of the stack of all nodal curves. Supporting input: Tag 0DZX (lemma-big-smooth-part-curves), clauses (1) and (3), with the open substack lci+ in the statement. This is the full isolated-lci locus, not the nodal locus. Supporting input for the intersection construction and smoothness argument of Tag 0DZX: Smooth points of the stack of curves detected by unobstructed deformations. Supporting input for Tag 0DZU: the final application of the general smoothness criterion after identifying the two deformation groupoids. Supporting input: Versal formal objects detect unobstructedness by adic formal smoothness. Ring-theoretic input to Tag 0DZK: Tag 0DYL (1) iff (2), proved using Tag 0DYG, identifies lifting by h_C with maximal-ideal-adic formal smoothness. Supporting algebraic reduction: Tag 0DYG, proof of (3) implies (2), before the inverse-image-subring reduction from arbitrary test rings.",
+   "via": [
+    "lem-sfb-adic-smooth-fixed-residue-lifting",
+    "lem-sfb-versal-unobstructed-adic-criterion",
+    "lem-sfb-stack-artinian-smoothness-criterion",
+    "lem-sfb-curve-smooth-locus-deformation-test",
+    "lem-sfb-isolated-lci-curve-smooth-open",
+    "lem-sfb-nodal-curve-stack-smooth",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-local-square-zero-small-extension-reduction",
+  "worker": "stage1",
+  "summary": "Statement unchanged. Expanded the maximal-ideal filtration, the inverse-image subring, the one-dimensional small-extension tests, and the product/complement retraction of Stacks 0DYG. Reused existing Mathlib leaves for Artinian local quotients and arbitrary vector-subspace complements; no new node is needed. Wrote out the Artinian descending-chain argument and the multiplicative R-algebra retraction rather than assuming the test ring Artinian.",
+  "blueprint": "Supporting algebra for inherited det-thm-sf-ctf-stability-direct-images (3), through the recorded deformation/versal chain: Tag 0DYG (3) implies (2). Read the latest direct-images proof and its unit. Its current compactification presentation differs from the inherited alteration ancestry; no route or statement change is made. blueprint_refs ancestor prints None, so the existing null ancestor, precise place and via list are retained. Whole-blueprint searches for 0DYG, small extension, square zero lifting, Artinian and retraction give no equivalent imported node."
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-N8-954ac49d3",
+  "group": "N8",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-N8-954ac49d3 (reviewer sub-agent of L); spot-checked: I read the whole item. The statement is unchanged and matches Stacks more-algebra.tex Tag 0DYG lemma-fs-local (3)=>(2) for Noetherian S, with small extensions as in algebra.tex Tag 02HS. All six steps check out. (1) The filtration m_A^t J ends at 0 because m_A^N=0; each kernel is square-zero and killed by m, and the unit trick (1+j)(1-j)=1 keeps every lift local with the residue isomorphism. (2) The hypotheses of lem-weil-pbc-noetherian-local-quotient-artinian-local hold with K=ker v: n^N is in ker v and ker v is in n. The inverse-image subring C is local by the b(1-j) inverse. (3) The complement leaf has no finite-dimensionality assumption; the hyperplanes are C-ideals, separate J, and intersect to 0. (4) The Artinian proof for C/H holds: images in D and intersections with the one-dimensional kernel both stabilise. It is a small extension in the statement's sense and the hypothesis data match. (5) P is well defined, p is onto, i is injective, ker p is a square-zero k-space, and the tuple of lifts is an R-algebra map into P. (6) The complement M is an ideal, the decomposition i(c)+m exists and is unique, and rho is a ring retraction with q_C rho=p. Edge cases checked: J=0, N=1, dim J=1, infinite-dimensional J with A not Artinian, mixed characteristic. There are no new nodes and no cycle (the parent adic-smooth-fixed-residue-lifting cites the item). No duplicate turned up in rg -L searches for 0DYG, small extension and exists_isCompl. No SGA source is used. Batch-5: lem-trf-vector-subspace-complement is generic linear algebra (Mathlib Submodule.exists_isCompl, no dependencies besides def-weil-field), outside the trace-formula and Poincare assumptions, so I accept it. Both cited nodes are Mathlib leaves, so no tool_uses are needed. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.LocalSquareZeroSmallExtensionReduction",
+  "declaration": "Algebra.local_square_zero_lifting_of_small_artinian_tests",
+  "file": "lean/Sheaf/RingTheory/LocalSquareZeroSmallExtensionReduction.lean",
+  "statement": "theorem local_square_zero_lifting_of_small_artinian_tests (R : Type u) (S : Type v) [CommRing R] [IsLocalRing R] [CommRing S] [IsLocalRing S] [IsNoetherianRing S] [Algebra R S] [IsLocalHom (algebraMap R S)] (hlift : ∀ (B' B : Type (max u v w)) [CommRing B'] [IsLocalRing B'] [IsArtinianRing B'] [Algebra R B'] [IsLocalHom (algebraMap R B')] [CommRing B] [IsLocalRing B] [IsArtinianRing B] [Algebra R B] (p : B' →ₐ[R] B), Function.Surjective p → Module.length B' (RingHom.ker p.toRingHom) = 1 → ∀ (g : S →ₐ[R] B) [IsLocalHom g.toRingHom], Function.Bijective (IsLocalRing.ResidueField.map g.toRingHom) → ∃ g' : S →ₐ[R] B', p.comp g' = g) (A : Type w) [CommRing A] [IsLocalRing A] [Algebra R A] [IsLocalHom (algebraMap R A)] (N : ℕ) (hN : 1 ≤ N) (hnil : IsLocalRing.maximalIdeal A ^ N = ⊥) (J : Ideal A) (hJ : J ^ 2 = ⊥) [IsLocalRing (A ⧸ J)] (v : S →ₐ[R] A ⧸ J) [IsLocalHom v.toRingHom] (hres : Function.Bijective (IsLocalRing.ResidueField.map v.toRingHom)) : ∃ w : S →ₐ[R] A, (Ideal.Quotient.mkₐ R J).comp w = v",
+  "branch": "newtargets-dag",
+  "by": "NZ",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-de5775330",
+  "group": "NZ",
+  "result": "pass",
+  "note": "Only item node lean field + new module changed; lean.statement verbatim in file. Clause-by-clause vs Stacks 0DYG (3)=>(2)/02HS: local R,S, local algebraMap, IsNoetherianRing S (recorded dep); small-extension kernel as Module.length = 1 (equivalent to nonzero, m-annihilated, residue-dim 1); omitted IsLocalHom R->B is automatic; residue maps are the induced ones; tests in Type (max u v w) only weaken hypothesis (ULift suffices for proof); A not Artinian/Noetherian, m_A^N=0 with N>=1; [IsLocalRing (A/J)] forced by J^2=0; conclusion exact. Edge cases J=0, N=1, infinite-dim J ok. Proof-dep Mathlib decls exist; parent adic-smooth lemma can use the interface. Docstrings with source/blueprint/6 proof steps, single sorry, no new defs, report sections present. No compile needed (no change)."
+ }
+}

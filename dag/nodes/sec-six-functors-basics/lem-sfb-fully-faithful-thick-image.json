@@ -1,0 +1,248 @@
+{
+ "id": "lem-sfb-fully-faithful-thick-image",
+ "kind": "statement",
+ "title": "Thick generation of a fully faithful exact essential image",
+ "statement": "Let $\\mathcal C,\\mathcal D$ be triangulated categories [def-weil-triangulated-category]. Assume $\\mathcal C$ is idempotent complete, meaning that for every $e:X\\to X$ with $e^2=e$ there are $Y$, $i:Y\\to X$, $r:X\\to Y$ with $ri=1_Y$ and $ir=e$. Let $F:\\mathcal C\\to\\mathcal D$ be an exact fully faithful functor (its maps on morphism sets are bijective, it commutes coherently with integer shifts, and it sends distinguished triangles to distinguished triangles). Let $G$ be a class of objects of $\\mathcal C$. A thick subcategory means a strictly full subcategory containing zero and closed under integer shifts, extensions in distinguished triangles and retracts; a retract of $X$ is an object $Y$ with maps $i:Y\\to X$, $r:X\\to Y$ satisfying $ri=1_Y$. Suppose the smallest thick subcategory of $\\mathcal C$ containing $G$ is $\\mathcal C$ itself. Then the essential image $\\{Y\\in\\mathcal D:\\exists X\\in\\mathcal C,\\ Y\\cong F(X)\\}$ is a thick subcategory of $\\mathcal D$, and it equals the smallest thick subcategory of $\\mathcal D$ containing $\\{F(g):g\\in G\\}$. No smallness assumption on the class $G$ and no idempotent-completeness assumption on $\\mathcal D$ are imposed.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-sf-flat-model/sk-lem-sf-flat-model.proof.md",
+  "place": "First paragraph (comparison and generation by shifts, finite extensions and direct summands), and complement (thick generation); categorical essential-image argument extracted by NR. Splitting criterion: literature/stacks-project/homology.tex, Tag 09SH, lemma-karoubian; the essential-image consequence is an agent formulation, not a literal assertion of that tag.",
+  "external": [
+   {
+    "document": "literature/stacks-project/homology.tex",
+    "place": "Tag 09SH, lemma-karoubian, lines 526–538 (idempotent-splitting criterion)"
+   }
+  ]
+ },
+ "stmt_deps": [
+  "def-weil-triangulated-category"
+ ],
+ "proof": [
+  {
+   "text": "Write $\\mathcal I$ for the essential image, as a strictly full subcategory. It is closed under isomorphisms by composing the isomorphisms in its definition. Exactness includes additivity [def-weil-triangulated-category], so $1_{F(0)}=F(1_0)=F(0)=0$; composing any morphism to or from $F(0)$ with this identity shows it is zero, so $F(0)$ is a zero object. Thus $0\\in\\mathcal I$. If $Y\\cong F(X)$, then $Y[n]\\cong F(X)[n]\\cong F(X[n])$ for every integer $n$, using the given coherent shift isomorphisms. Thus $\\mathcal I$ is shift-stable.",
+   "uses": [
+    "def-weil-triangulated-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-sf-flat-model/sk-lem-sf-flat-model.proof.md",
+    "place": "First paragraph and complement: closure operations on the comparison image; elementary verification of zero, isomorphisms and shifts."
+   }
+  },
+  {
+   "text": "We check cone closure, including the comparison map. Given a distinguished triangle $A\\xrightarrow{u}B\\to C\\to A[1]$ in $\\mathcal D$ with isomorphisms $s:F(X)\\xrightarrow{\\sim}A$ and $t:F(Y)\\xrightarrow{\\sim}B$, fullness lifts $t^{-1}us$ to $f:X\\to Y$. By TR1 of [def-weil-triangulated-category] choose a distinguished triangle $X\\xrightarrow{f}Y\\to Z\\to X[1]$. Its image is distinguished by exactness of $F$. Since $tF(f)=us$, TR3 gives a morphism from this image triangle to the given triangle with first two components $s,t$. By [lem-sf-triangle-morphism-iso], its third component $F(Z)\\to C$ is an isomorphism. Hence $C\\in\\mathcal I$. For extension closure, if instead $A,C\\in\\mathcal I$ in the original triangle, rotate twice by TR2 to get the distinguished triangle $C\\to A[1]\\to B[1]\\to C[1]$ (with the prescribed rotation signs on its last two arrows). The first two vertices are in $\\mathcal I$, so cone closure gives $B[1]\\in\\mathcal I$ and shift stability gives $B\\in\\mathcal I$.",
+   "uses": [
+    "def-weil-triangulated-category",
+    "lem-sf-triangle-morphism-iso"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tags 0145 and 05QL (definition-triangulated-category and definition-exact-functor); Tag 014A, lemma-third-isomorphism-triangle. The TR1/TR3 argument is the proof of Tag 014B, lemma-cone-triangle-unique-isomorphism, applied with the displayed endpoint isomorphisms."
+   }
+  },
+  {
+   "text": "For retract closure it suffices, after replacing an object by its specified image isomorphism, to take $i:Y\\to F(X)$, $r:F(X)\\to Y$ with $ri=1_Y$. Put $e=ir$. Then $e^2=e$. Fullness gives $p:X\\to X$ with $F(p)=e$, and faithfulness gives $p^2=p$. Idempotent completeness of $\\mathcal C$, in exactly the splitting form assumed in the statement, gives $a:X'\\to X$, $b:X\\to X'$ with $ba=1_{X'}$, $ab=p$. Define $\\alpha=F(b)i:Y\\to F(X')$ and $\\beta=rF(a):F(X')\\to Y$. Directly,\n$$\\alpha\\beta=F(b)eF(a)=F(baba)=1_{F(X')},\\qquad \\beta\\alpha=rF(ab)i=re i=riri=1_Y.$$\nThus $Y\\cong F(X')$ belongs to $\\mathcal I$. Together with the preceding steps this proves that $\\mathcal I$ is thick. This uses a splitting only in $\\mathcal C$, never one in $\\mathcal D$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/homology.tex",
+    "place": "Tag 09SH, lemma-karoubian: splitting criterion for idempotents. Here a splitting is already a hypothesis, and the lifting and inverse equations are an elementary calculation."
+   }
+  },
+  {
+   "text": "Let $\\mathcal S$ be any thick subcategory of $\\mathcal D$ containing every $F(g)$, $g\\in G$. Its full inverse image has object class $\\mathcal P=\\{X\\in\\mathcal C:F(X)\\in\\mathcal S\\}$. Functors preserve isomorphisms; step 1 gives $F(0)\\cong0$ and the shift comparisons; and exactness [def-weil-triangulated-category] sends a distinguished triangle to a distinguished triangle. These facts and the defining closure properties of $\\mathcal S$ show that $\\mathcal P$ is strictly full, contains zero, and is stable under integer shifts and extensions. If $ri=1_Y$ exhibits $Y$ as a retract of $X$ in $\\mathcal C$, then $F(r)F(i)=1_{F(Y)}$, so $F(Y)\\in\\mathcal S$ whenever $F(X)\\in\\mathcal S$. Thus $\\mathcal P$ is thick and contains $G$. The generation hypothesis implies $\\mathcal P=\\mathcal C$. Consequently every $F(X)$, and then every object isomorphic to one, is in $\\mathcal S$, so $\\mathcal I\\subseteq\\mathcal S$.",
+   "uses": [
+    "def-weil-triangulated-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-sf-flat-model/sk-lem-sf-flat-model.proof.md",
+    "place": "Complement, final thick-generation conclusion: inverse-image argument for the minimal thick subcategory, written out for an arbitrary thick subcategory."
+   }
+  },
+  {
+   "text": "Every $F(g)$ belongs to $\\mathcal I$ by its definition. The first three steps show that $\\mathcal I$ is thick, and step 4 shows that it is contained in every thick subcategory containing these images. This is precisely the defining minimality of the smallest thick subcategory containing $\\{F(g):g\\in G\\}$. Hence that subcategory equals $\\mathcal I$. The argument quantifies over an arbitrary class $G$ and an arbitrary thick subcategory; it never forms a coproduct indexed by $G$ or assumes $G$ is small.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-sf-flat-model/sk-lem-sf-flat-model.proof.md",
+    "place": "First paragraph and complement: categorical thick-essential-image consequence of generation, concluding the extracted lemma."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-triangulated-category",
+  "lem-sf-triangle-morphism-iso"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-sf-flat-model/sk-lem-sf-flat-model.proof.md",
+  "place": "First paragraph and complement (thick generation); the fully faithful essential-image and minimality argument is written explicitly by Q108, using Stacks Tags 0145, 05QL, 014A and the assumed splitting form discussed at Tag 09SH."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "essImage|essentialImage",
+   "results": "0 hits",
+   "date": "2026-10-22",
+   "verdict": "no match: essImage and image-of-triangles definitions, triangulated image without retract closure, or Karoubi universal properties; no theorem of thick image equality under the stated hypotheses"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"essImage\", \"retract\"",
+   "results": "0 hits",
+   "date": "2026-10-22",
+   "verdict": "no match: essImage and image-of-triangles definitions, triangulated image without retract closure, or Karoubi universal properties; no theorem of thick image equality under the stated hypotheses"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The essential image of a fully faithful functor from an idempotent complete category is closed under retracts",
+   "results": "CategoryTheory.Idempotents.instEssSurjKaroubiToKaroubiOfIsIdempotentComplete, CategoryTheory.Idempotents.whiskeringLeftObjToKaroubiFullyFaithful, CategoryTheory.Idempotents.functorExtension, CategoryTheory.Functor.obj_mem_essImage, CategoryTheory.Idempotents.instFullKaroubiToKaroubi, CategoryTheory.Idempotents.instFullKaroubiFunctorKaroubiFunctorCategoryEmbedding, CategoryTheory.Idempotents.karoubiUniversal₂, CategoryTheory.Functor.toEssImage",
+   "date": "2026-10-22",
+   "verdict": "no match: essImage and image-of-triangles definitions, triangulated image without retract closure, or Karoubi universal properties; no theorem of thick image equality under the stated hypotheses"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The essential image of a fully faithful exact functor from an idempotent complete triangulated category is thick and closed under retracts",
+   "results": "CategoryTheory.Functor.essImage, CategoryTheory.Functor.essImageDistTriang, CategoryTheory.Functor.essImage.witness, CategoryTheory.Functor.essImage.liftFunctor, CategoryTheory.Functor.mem_mapTriangle_essImage_of_distinguished, CategoryTheory.IsTriangulated.of_fully_faithful_triangulated_functor, CategoryTheory.Functor.obj_mem_essImage, CategoryTheory.Functor.toEssImage",
+   "date": "2026-10-22",
+   "verdict": "no match: essImage and image-of-triangles definitions, triangulated image without retract closure, or Karoubi universal properties; no theorem of thick image equality under the stated hypotheses"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For an exact full faithful functor between triangulated categories with idempotent complete source every direct summand of an image object is again in its essential image",
+   "results": "CategoryTheory.Functor.contractible_mem_essImageDistTriang, CategoryTheory.Functor.essImageDistTriang_mem_of_iso, CategoryTheory.Functor.essImageDistTriang, CategoryTheory.Functor.mem_mapTriangle_essImage_of_distinguished, CategoryTheory.Functor.complete_distinguished_essImageDistTriang_morphism, CategoryTheory.IsTriangulated.of_fully_faithful_triangulated_functor, CategoryTheory.Functor.rotate_essImageDistTriang, CategoryTheory.Functor.map_distinguished_exact",
+   "date": "2026-10-22",
+   "verdict": "no match: essImage and image-of-triangles definitions, triangulated image without retract closure, or Karoubi universal properties; no theorem of thick image equality under the stated hypotheses"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"triangEnvelope\", \"essImage\"",
+   "results": "0 hits",
+   "date": "2026-10-22",
+   "verdict": "no match: essImage and image-of-triangles definitions, triangulated image without retract closure, or Karoubi universal properties; no theorem of thick image equality under the stated hypotheses"
+  },
+  {
+   "tool": "grep",
+   "query": "essImage.*[Rr]etract|[Rr]etract.*essImage|essImage.*triangEnvelope|triangEnvelope.*essImage",
+   "results": "0 hits",
+   "date": "2026-10-22",
+   "verdict": "no match: essImage and image-of-triangles definitions, triangulated image without retract closure, or Karoubi universal properties; no theorem of thick image equality under the stated hypotheses"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A fully faithful exact functor with idempotent complete triangulated source generated thickly by G has essential image equal to the thick closure of the images of G",
+   "results": "CategoryTheory.Functor.essImageDistTriang, CategoryTheory.Functor.complete_distinguished_essImageDistTriang_morphism, CategoryTheory.Functor.contractible_mem_essImageDistTriang, CategoryTheory.Functor.mem_mapTriangle_essImage_of_distinguished, CategoryTheory.Functor.essImageDistTriang_mem_of_iso, CategoryTheory.Functor.rotate_essImageDistTriang, CategoryTheory.isTriangulated_of_essSurj_mapComposableArrows_two, CategoryTheory.Triangulated.Localization.pretriangulated",
+   "date": "2026-10-22",
+   "verdict": "no match: essImage and image-of-triangles definitions, triangulated image without retract closure, or Karoubi universal properties; no theorem of thick image equality under the stated hypotheses"
+  },
+  {
+   "tool": "grep",
+   "query": "essImage.*(retract|thick|triang)|((retract|thick|triang).*essImage)",
+   "results": "Mathlib/CategoryTheory/Triangulated/Subcategory.lean, Mathlib/CategoryTheory/Triangulated/Functor.lean, Mathlib/CategoryTheory/Triangulated/Functor.lean, Mathlib/CategoryTheory/Localization/Triangulated.lean, Mathlib/CategoryTheory/Localization/Triangulated.lean, Mathlib/CategoryTheory/Localization/Triangulated.lean, Mathlib/CategoryTheory/Localization/Triangulated.lean, Mathlib/CategoryTheory/Localization/Triangulated.lean",
+   "date": "2026-10-22",
+   "verdict": "no match for the full statement: the triangulated essential-image instance proves closure under shifts and extensions only, not retract closure or equality with the thick closure of generators"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A fully faithful triangulated functor with idempotent complete source has thick essential image generated by the images of any thick generators",
+   "results": "CategoryTheory.Functor.mem_mapTriangle_essImage_of_distinguished, CategoryTheory.IsTriangulated.of_fully_faithful_triangulated_functor, CategoryTheory.Functor.essImageDistTriang, CategoryTheory.Functor.essImage, CategoryTheory.Functor.essImage.liftFunctor, CategoryTheory.Functor.FullyFaithful.faithful, CategoryTheory.Functor.IsTriangulated.mk, CategoryTheory.Equivalence.fullyFaithfulToEssImage",
+   "date": "2026-10-22",
+   "verdict": "no match for the full statement: the triangulated essential-image instance proves closure under shifts and extensions only, not retract closure or equality with the thick closure of generators"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"essImage\", \"triangulated\"",
+   "results": "CategoryTheory.ObjectProperty.instIsTriangulatedEssImageOfIsTriangulatedOfFull, CategoryTheory.Triangulated.TStructure.essImage_ιHeart, CategoryTheory.Triangulated.TStructure.Heart.essImage_eq_heart",
+   "date": "2026-10-22",
+   "verdict": "no match for the full statement: the triangulated essential-image instance proves closure under shifts and extensions only, not retract closure or equality with the thick closure of generators"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The essential image of a fully faithful exact functor from an idempotent complete triangulated category is thick and equals the thick closure of the images of thick generators",
+   "results": "CategoryTheory.Functor.essImageDistTriang, CategoryTheory.Functor.essImageDistTriang_mem_of_iso, CategoryTheory.Functor.mem_mapTriangle_essImage_of_distinguished, CategoryTheory.Functor.contractible_mem_essImageDistTriang, CategoryTheory.Functor.complete_distinguished_essImageDistTriang_morphism, CategoryTheory.Functor.rotate_essImageDistTriang, CategoryTheory.Functor.instIsTriangulatedHomologicalKernel, CategoryTheory.Triangulated.Localization.pretriangulated",
+   "date": "2026-10-22",
+   "verdict": "no match for the full statement: the triangulated essential-image instance proves closure under shifts and extensions only, not retract closure or equality with the thick closure of generators"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"essImage\", \"Retract\"",
+   "results": "0 hits",
+   "date": "2026-10-22",
+   "verdict": "no match for the full statement: the triangulated essential-image instance proves closure under shifts and extensions only, not retract closure or equality with the thick closure of generators"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An exact full faithful functor with Karoubian source has essential image closed under direct summands and finite extensions",
+   "results": "CategoryTheory.Functor.exact_tfae, CategoryTheory.ObjectProperty.instIsSerreClassInverseImageOfPreservesFiniteLimitsOfPreservesFiniteColimits, CategoryTheory.Abelian.freyd_mitchell, CategoryTheory.ExactFunctor.of_fst, CategoryTheory.Functor.preservesFiniteLimits_tfae, CategoryTheory.Functor.preservesFiniteColimits_tfae, CategoryTheory.exactFunctor_iff, CategoryTheory.ObjectProperty.instIsClosedUnderExtensionsInverseImageOfPreservesZeroMorphismsOfPreservesFiniteLimitsOfPreservesFiniteColimits",
+   "date": "2026-10-22",
+   "verdict": "no match for the full statement: the triangulated essential-image instance proves closure under shifts and extensions only, not retract closure or equality with the thick closure of generators"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "sk-lem-sf-flat-model",
+  "date": "2026-10-22",
+  "group": "NR"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-lem-sf-flat-model",
+ "blueprint": {
+  "from": {
+   "node": "sk-lem-sf-flat-model",
+   "place": "Proof, first paragraph: generation using direct summands after comparison; complement: thick closure. Extracts the retract-projector lifting and thick-essential-image argument of the item’s former final step.",
+   "via": []
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sfb-fully-faithful-thick-image",
+  "worker": "stage1",
+  "summary": "Q108 retains the statement and splits its full categorical argument into five steps: zero/shifts, explicit cone comparison and extension closure, projector lifting and retract closure, inverse image of an arbitrary thick subcategory, and minimality. The only non-elementary auxiliary theorem is the existing Mathlib leaf lem-sf-triangle-morphism-iso. No new nodes are needed. The current main-20261015 proof is the blueprint route; the archived unit record still names the older smooth-purity flat-model statement.",
+  "blueprint": "sk-lem-sf-flat-model, current main-20261015 proof first paragraph and complement: generation using shifts and finite extensions, with retract closure in the extracted categorical comparison-image argument; steps 1-3 establish thickness and steps 4-5 the exact thick-generation conclusion."
+ },
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q108-2d3898f3d",
+  "group": "Q108",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q108-2d3898f3d (reviewer sub-agent of L); spot-checked: Read in full; no faults; no fixes made. The delivery changes only the item node and adds the report, with 0 new nodes. Its statement, stmt_deps and source are unchanged. The item was created by NR on 2026-10-22 from sk-lem-sf-flat-model, so it is not a 10-21 re-split and is not in the 10-19 dropped list. Parent use: sk-lem-sf-flat-model step 6 applies it to E=Dctf(X_et,B), which is idempotent complete through thm-weil-karoubian-bounded-t, with the fully faithful exact comparison nu^* and E=thick(G). These are exactly the item's hypotheses. Both cited nodes are Mathlib leaves (def-weil-triangulated-category for TR1-3 and additive exact functors; lem-sf-triangle-morphism-iso = isIso₂_of_isIso₁₃ and siblings), so they are not route and no tool_uses are needed. Step 1: F(0)=0 by additivity; shifts through the commutation isomorphism. Step 2: preimage of t^-1us, TR1 cone, image triangle distinguished, TR3 since tF(f)=us, third map invertible by the cited statement; extension closure by rotating twice to C->A[1]->B[1]. Step 3: lifted projector p^2=p by faithfulness, split in C only; I recomputed alpha beta=F(baba)=1 and beta alpha=riri=1. Step 4: the full inverse image of any thick S is thick (isomorphisms, zero, shifts, distinguished triangles, F(r)F(i)=1), so it contains thick(G)=C and the image lies in S. Step 5: minimality. Edge cases: empty G (forces C=0), the identity functor, e=0 or 1; idempotent completeness of C is needed and is used only in step 3. rg -L over the DAG for essential image/thick/retract/Karoubian and thick inverse-image statements found no duplicate. The Mathlib searches cover three kinds; the essImage IsTriangulated instance lacks retracts, so the item is not a leaf. Source: main-20261015 flat-model proof, first paragraph and complement, with proof_origin agent. No SGA source cited and no tags in the step texts."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.Triangulated.FullyFaithfulThickImage",
+  "declaration": "CategoryTheory.Functor.essImage_thick_eq_triangEnvelope",
+  "file": "lean/Sheaf/CategoryTheory/Triangulated/FullyFaithfulThickImage.lean",
+  "statement": "theorem essImage_thick_eq_triangEnvelope {C : Type u} [Category.{v} C] [HasZeroObject C] [HasShift C ℤ] [Preadditive C] [∀ (n : ℤ), (shiftFunctor C n).Additive] [Pretriangulated C] [CategoryTheory.IsTriangulated C] {D : Type u'} [Category.{v'} D] [HasZeroObject D] [HasShift D ℤ] [Preadditive D] [∀ (n : ℤ), (shiftFunctor D n).Additive] [Pretriangulated D] [CategoryTheory.IsTriangulated D] [IsIdempotentComplete C] (F : C ⥤ D) [F.Full] [F.Faithful] [F.CommShift ℤ] [F.IsTriangulated] (G : ObjectProperty C) (hG : (G ⊔ IsZero).triangEnvelope = ⊤) : F.essImage.IsTriangulated ∧ Nonempty F.essImage.IsStableUnderRetracts ∧ F.essImage = (G.map F ⊔ IsZero).triangEnvelope",
+  "branch": "newtargets-dag",
+  "by": "NH",
+  "date": "2026-10-22",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-b3283b850",
+  "group": "NH",
+  "result": "pass",
+  "note": "Only the lean field changed; lean.statement is verbatim in the file. The hypotheses are faithful: C and D triangulated with free universes, IsIdempotentComplete C only, F Full+Faithful+CommShift+IsTriangulated, G an arbitrary ObjectProperty. Thickness is IsTriangulated (zero, shifts, extensions up to iso) plus IsStableUnderRetracts (which also gives iso-closure). (P ⊔ IsZero).triangEnvelope is exactly thick(P), by its retract and triangulated instances and triangEnvelope_le_iff; binary products are split extensions. So hG means thick(G)=C and the conclusion means essImage = thick(F(G)) via G.map F. Edge cases covered: empty G, zero categories, D not idempotent complete. No duplicate in side-live or Mathlib; no name or module collision. Docstrings carry the source place, blueprint tag and 5 steps; no hollow defs, proof is sorry only. No compile run (no file changed); the worker reports a clean scompile."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "AUTO",
+  "group": "T4",
+  "result": "pass",
+  "landing": "20261023T103312-L-3095250",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)",
+  "sorry_before": [
+   "CategoryTheory.Functor.essImage_thick_eq_triangEnvelope"
+  ],
+  "sorry_after": []
+ }
+}

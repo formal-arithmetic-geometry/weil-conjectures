@@ -1,0 +1,147 @@
+{
+ "id": "lem-sfb-diagonal-trace-completed-hom-bijection",
+ "kind": "statement",
+ "title": "Full faithfulness for the two complete trace objects",
+ "statement": "For a Presentation p over ULift(Q_l) on Noetherian X and S, with l invertible on S, the map on Hom(Rc(completedLine(l,X)[2]),completedUnit(l,S)) induced by diagonalCompletedUnderlying(l,S) is bijective. This is independent of the splitting and chooses no trace.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-diagonal-tower/sk-prop-diagonal-tower-trace.proof.md",
+  "place": "paragraph (1), full faithfulness for the two complete trace objects"
+ },
+ "stmt_deps": [
+  "def-sfb-diagonal-trace-presentation",
+  "def-sfb-diagonal-trace-models",
+  "def-sfb-diagonal-trace-coefficients"
+ ],
+ "proof": [
+  {
+   "text": "Apply completeness of actual completed-coefficient rank-one modules to the regular unit. Pull l invertibility from S to X through the global-sections map and then to each residue field. The existing Tate-line local-freeness theorem makes the root-limit line rank one, so the same completeness theorem applies. An additive shift adjunction preserves orthogonality, and the restriction functor commutes with shifts; this handles the shift by two.",
+   "uses": [
+    "lem-sfb-diagonal-completed-line-complete",
+    "lem-pur-twist-sheaf-locally-free"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For any additive adjunction L ⊣ R, L preserves l-invertible objects. Transporting Hom by the adjunction shows that R takes orthogonal objects to orthogonal objects. Apply this to the exact constant-coefficient pro-etale inverse image and its unbounded derived direct image. Construct the canonical cochain unit for the usual rightDerivedFunctor and use rightDerivedUnique to compare it with p.Rf.R. The specified p.completed.iso identifies the underlying trace source with that complete direct image.",
+   "uses": [
+    "def-sfb-diagonal-trace-presentation"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Both completed trace objects now belong to the preimage complete full subcategory. Apply full faithfulness of its scalar-restriction composite. For injectivity, regard the two ambient morphisms as full-subcategory morphisms and use faithfulness, then forget the subtype equality. For surjectivity, lift a constant-coefficient morphism by fullness and forget its full-subcategory wrapper. Both maps are definitionally the actual diagonalCompletedUnderlying.map.",
+   "uses": [
+    "lem-sfb-diagonal-complete-scalar-restriction"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-diagonal-completed-line-complete",
+  "lem-pur-twist-sheaf-locally-free",
+  "def-sfb-diagonal-trace-presentation",
+  "lem-sfb-diagonal-complete-scalar-restriction"
+ ],
+ "proof_origin": {
+  "kind": "adapted",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-diagonal-tower/sk-prop-diagonal-tower-trace.proof.md",
+  "place": "paragraph (1); completeness of direct image proved by the exact inverse-image adjunction, with the two coefficient interfaces extracted",
+  "by": "C4"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "The trace on a projective line is the second projection after the inverse of its unit and Chern class decomposition; restriction from completed to constant coefficients is fully faithful on derived complete sheaves",
+   "results": "8 hits, all algebraic or linear traces, including Algebra.trace and LinearMap.trace_eq_contract; no projective-line sheaf trace or derived-complete coefficient comparison.",
+   "date": "2026-10-26",
+   "verdict": "No exact match. Use existing categorical biproduct identities and retain the separate geometric comparisons."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A morphism in the derived category of inverse systems of modules is an isomorphism if its evaluations at every level are isomorphisms",
+   "results": "8 hits, including DerivedCategory.isIso_Q_map_iff_quasiIso and componentwise isomorphisms of complexes; no geometric trace presentation.",
+   "date": "2026-10-26",
+   "verdict": "Use the existing semilinear calculus joint conservativity; no exact existence theorem."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Limits.biprod.desc_comp",
+   "results": "No hit under that name. The biproduct inclusion/projection identities are in Mathlib.",
+   "date": "2026-10-26",
+   "verdict": "Use the standard biprod.inl_snd and biprod.inr_snd identities in the assembly proof."
+  },
+  {
+   "tool": "grep",
+   "query": "DiagonalTrace|TowerClasses|IsIso.*Ev|Bijective.*dres; rg over lean/Sheaf, lean/WeilConjectures and quarantine/Sheaf/Paper",
+   "results": "The trace Model and Presentation are records. TowerClasses is also a record, with no inhabitance theorem. The semilinear Data.detects theorem is already available. ConstantCompletion.equivalence is the general completeness equivalence.",
+   "date": "2026-10-26",
+   "verdict": "No theorem directly supplies the normalized presentation, the component compatibility, or the specialized complete-object Hom bijection."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Restriction of scalars from a completed ring sheaf to its constant ring sheaf is fully faithful on derived complete objects",
+   "results": "8 hits, including CondensedMod.LocallyConstant.fullyFaithfulFunctor and SheafOfModules.fullyFaithfulForget; these concern discrete condensed modules or sheaves into presheaves, rather than completed derived coefficient restriction.",
+   "date": "2026-10-26",
+   "verdict": "No exact match; retain the geometric intermediate statement."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.DiagonalTracePresentationExistence",
+  "date": "2026-10-26",
+  "group": "N1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-prop-diagonal-tower-trace",
+   "place": "paragraph (1)",
+   "via": [
+    "lem-sfb-diagonal-trace-presentation-existence"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-prop-diagonal-tower",
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.DiagonalTraceCompletedHomBijection",
+  "file": "lean/Sheaf/Paper/DiagonalTraceCompletedHomBijection.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.DiagonalTrace.diagonalTrace_completedHom_bijective",
+  "statement": "theorem diagonalTrace_completedHom_bijective\n    (l : ℕ) [Fact l.Prime] {X S : Scheme.{u}}\n    [IsNoetherian X] [IsNoetherian S]\n    [DiagonalTraceLocalizations l X] [DiagonalTraceLocalizations l S]\n    {f : X ⟶ S} (p : Presentation l (ULift.{u} (Padic l)) f)\n    (hS : IsUnit (l : Γ(S, ⊤))) :\n    Function.Bijective (fun t : p.Rc.R.obj ((completedLine l X)⟦(2 : ℤ)⟧) ⟶\n      completedUnit l S ↦ (diagonalCompletedUnderlying l S).map t)",
+  "branch": "sheaf-dag",
+  "by": "N1",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "N1",
+  "result": "pass",
+  "landing": "20261026T183548-L-3751290",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C4",
+  "result": "pass",
+  "landing": "20261026T222600-L-670134",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

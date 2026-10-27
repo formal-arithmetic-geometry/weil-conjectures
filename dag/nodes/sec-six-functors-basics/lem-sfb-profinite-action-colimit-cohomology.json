@@ -1,0 +1,442 @@
+{
+ "id": "lem-sfb-profinite-action-colimit-cohomology",
+ "kind": "statement",
+ "title": "Action-site cohomology of a filtered colimit of equivariant condensed modules",
+ "statement": "Let $R$ be a commutative condensed ring on the small site $P$ of profinite sets with finite jointly surjective coverings [sk-def-sfb-condensed-ring, def-weil-size-convention]. Let $J$ be a compact Hausdorff totally disconnected topological group, and let $\\mathcal A_J(R)$ be internal $R$-modules with $R$-linear actions of $\\underline J(S)=C(S,J)$, natural in profinite parameters [def-sfb-condensed-action-module, sk-def-sfb-module-objects]. Let $I$ be a small filtered category (nonempty, and every finite diagram has a cocone) and $N:I\\to\\mathcal A_J(R)$ a diagram with a colimit cocone $(\\iota_i:N_i\\to L)_{i\\in I}$ in $\\mathcal A_J(R)$ [def-weil-pbc-category-colimit].\n\nUse the site $P_J$ of profinite continuous left $J$-spaces with finite jointly surjective equivariant coverings, the coefficient ring sheaf $\\mathcal R_J=\\Phi(R)$, and the exact additive equivalence $\\Phi:\\mathcal A_J(R)\\simeq\\operatorname{Mod}(\\mathcal R_J)$ normalized by $\\Phi(M)(T)=\\operatorname{Hom}_{\\operatorname{Sh}(P)^{\\underline J}}(h_T,M)$, as specified in [lem-sfb-profinite-action-coherent-presentation]. Here $h_T(S)=C(S,T)$, $R$ has trivial action, and $\\operatorname{Mod}(\\mathcal R_J)$ means sheaves of modules over this ring sheaf [def-weil-sheaf-of-modules-category].\n\nPut $F_i=\\Phi(N_i)$ and $F=\\Phi(L)$. The maps $\\Phi(\\iota_i)$ exhibit $F$ as their colimit in $\\operatorname{Mod}(\\mathcal R_J)$, and their underlying abelian maps exhibit $F_{ab}$ as $\\operatorname{colim}_i(F_i)_{ab}$. For every object $T\\in P_J$ and $q\\geq0$, object cohomology [def-weil-pbc-sites-and-cohomology] gives an isomorphism\n$$c_{T,q}:\\operatorname{colim}_iH^q(T,(F_i)_{ab})\\xrightarrow{\\sim}H^q(T,F_{ab}),$$\nwhose $i$-leg is exactly $H^q(T,\\Phi(\\iota_i)_{ab})$. The maps $c_{T,q}$ commute with every restriction along an equivariant map $T'\\to T$ and with morphisms of diagrams $N\\to N'$ and the induced map of the chosen colimits. In particular they give an isomorphism of abelian presheaves on $P$ after $T=tS$, where $tS$ is $S$ with trivial action. All sites, parameters, cohomology groups and indexing categories are in the compatible universes fixed above.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 09YP, lemma-colimit, constant-site specialization over the opposite of an arbitrary small filtered category, together with the agent-formulated coefficient transport through the coherent action-site presentation. Blueprint main-20261015, direct-images proof paragraph (3), filtered passage."
+ },
+ "stmt_deps": [
+  "sk-def-sfb-condensed-ring",
+  "def-weil-size-convention",
+  "def-sfb-condensed-action-module",
+  "sk-def-sfb-module-objects",
+  "def-weil-pbc-category-colimit",
+  "lem-sfb-profinite-action-coherent-presentation",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-pbc-sites-and-cohomology"
+ ],
+ "proof": [
+  {
+   "text": "By [lem-sfb-profinite-action-coherent-presentation], $P_J$ is small, has finite limits, and has finite covering families stable under pullback and finite composition. An equivariant isomorphism is surjective on underlying spaces, so its singleton family is a finite jointly surjective covering. Thus every finite-cover-site hypothesis used below is satisfied. The same node supplies the specified equivalence $\\Phi$. Apply [lem-galois-equivalence-preserves-limits] to this equivalence and the given colimit cocone of $N$: the cocone with vertex $F=\\Phi(L)$ and legs $\\lambda_i=\\Phi(\\iota_i):F_i\\to F$ is colimiting in $\\operatorname{Mod}(\\mathcal R_J)$. Preservation is of this cocone, so its legs are the original transported maps.",
+   "uses": [
+    "lem-sfb-profinite-action-coherent-presentation",
+    "lem-galois-equivalence-preserves-limits"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Tag 0038, lemma-adjoint-exact; applied to the normalized equivalence in the coherent-presentation node."
+   }
+  },
+  {
+   "text": "Check the sheafification hypothesis for the general module-sheaf colimit theorem. Abelian groups are $\\mathbb Z$-modules: the action is $n\\cdot x=x+\\cdots+x$ for $n\\ge0$, and its negative for $n<0$; every additive map preserves it. Thus the Grothendieck-abelian assertion of [lem-weil-pbc-ring-modules-grothendieck-abelian] at $R=\\mathbb Z$ applies to $\\operatorname{Ab}$ in the chosen coefficient universe. Since $P_J$ is small in that universe, [lem-sfb-grothendieck-sheafification] gives sheafification of every abelian presheaf on $P_J$. Here the universe is the compatible one fixed in the statement, rather than an enlargement of the indexing category.",
+   "uses": [
+    "lem-weil-pbc-ring-modules-grothendieck-abelian",
+    "lem-sfb-grothendieck-sheafification"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/injectives.tex",
+    "place": "Tag 079B, definition-grothendieck-conditions, and Algebra Tag 00DB; general small-site coefficient sheafification as stated in lem-sfb-grothendieck-sheafification."
+   }
+  },
+  {
+   "text": "Apply clause (3) of [lem-weil-pbc-module-sheaves-colimits-forgetful] on $P_J$ with the ring sheaf $\\mathcal R_J$; its sheafification assumption was checked in step 2. The forgetful functor sends the colimiting cocone of step 1 to a colimiting cocone in abelian sheaves. Consequently $F_{ab}$, with legs $(\\lambda_i)_{ab}$, is a colimit of the diagram $(F_i)_{ab}$. This uses the theorem for an arbitrary ring sheaf, not a constant-coefficient or an etale-site specialization.",
+   "uses": [
+    "lem-weil-pbc-module-sheaves-colimits-forgetful"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03DB, lemma-limits-colimits, forgetful functor to abelian sheaves commutes with colimits."
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-finite-cover-derived-presheaf-continuity] to the finite-cover site $P_J$, the small filtered category $I$, and the abelian colimit cocone of step 3. The hypotheses are precisely those checked in step 1; the diagram retains all its morphisms, including parallel arrows. The cited statement gives an isomorphism $\\delta$ in the derived category of abelian presheaves and explicitly identifies the evaluation of $H^q(\\delta)$ at $T$ with the actual coprojection-induced map $c_{T,q}:\\operatorname{colim}_iH^q(T,(F_i)_{ab})\\to H^q(T,F_{ab})$. Since a functor sends an inverse to an inverse, $H^q(\\delta)$ and its evaluation are isomorphisms. Under the cited identifications, for each source coprojection $j_{i,T}$ the map therefore satisfies $c_{T,q}j_{i,T}=H^q(T,(\\lambda_i)_{ab})=H^q(T,(\\Phi(\\iota_i))_{ab})$. This proves both the comparison isomorphism and its specified legs using the current node statement; no construction from its proof or change of index category is used.",
+   "uses": [
+    "lem-sfb-finite-cover-derived-presheaf-continuity"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 09YP, lemma-colimit, constant-site specialization with initial zero coefficient; derived-presheaf and original-leg formulation in lem-sfb-finite-cover-derived-presheaf-continuity."
+   }
+  },
+  {
+   "text": "The continuity identification is natural in $T$ and in coefficient diagrams by [lem-sfb-finite-cover-derived-presheaf-continuity]. Explicitly, if $r:T\\to T\\!\\prime$ is an equivariant map, both composites in its restriction square send a stage class $j_{i,T\\!\\prime}(x)$ to $H^q(T,(\\lambda_i)_{ab})(r^*x)$. For a diagram morphism $a:N\\to N\\!\\prime$ and its induced colimit map $b:L\\to L\\!\\prime$, the equation $b\\iota_i=\\iota_i\\!\\prime a_i$ gives, after $\\Phi$, forgetting scalars and $H^q(T,-)$, equality of the two comparison composites on every stage. Maps out of a colimit are determined by these legs, which proves both squares commute for the chosen colimits. Finally, the trivial-action functor $t:P\\to P_J$ and its behavior on parameter maps are supplied by [lem-sfb-profinite-action-coherent-presentation]. Restrict the natural family $c_{T,q}$ along $t$. Its components are isomorphisms, so their inverses commute with the restriction maps as well (multiply the naturality equation by the two inverses). This is the claimed isomorphism of abelian presheaves on $P$.",
+   "uses": [
+    "lem-sfb-finite-cover-derived-presheaf-continuity",
+    "lem-sfb-profinite-action-coherent-presentation"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 09YP, lemma-colimit: coprojection-induced comparison; elementary naturality and restriction along the trivial-action functor."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-profinite-action-coherent-presentation",
+  "lem-galois-equivalence-preserves-limits",
+  "lem-weil-pbc-ring-modules-grothendieck-abelian",
+  "lem-sfb-grothendieck-sheafification",
+  "lem-weil-pbc-module-sheaves-colimits-forgetful",
+  "lem-sfb-finite-cover-derived-presheaf-continuity"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 09YP (lemma-colimit), via the existing finite-cover derived-presheaf continuity node; coefficient transport assembled using Tags 0038 and 03DB, serving main-20261015 direct-images proof paragraph (3)."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Filtered colimits of internal modules with a profinite group action are created on sections and their transported action-site sheaf cohomology commutes with the colimit",
+   "results": {
+    "t": "2026-10-22T06:06:01Z",
+    "tool": "leanfinder",
+    "query": "Filtered colimits of internal modules with a profinite group action are created on sections and their transported action-site sheaf cohomology commutes with the colimit",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "LightCondensed.isColimitLocallyConstantPresheaf",
+     "Condensed.isColimitLocallyConstantPresheaf",
+     "LightCondMod.LocallyConstant.instHasSheafifyLightProfiniteCoherentTopologyModuleCat",
+     "LightCondensed.isColimitLocallyConstantPresheafDiagram",
+     "LightCondensed.isColimitLocallyConstantPresheaf_desc_apply",
+     "Condensed.isColimitLocallyConstantPresheafDiagram",
+     "Condensed.isColimitLocallyConstantPresheaf_desc_apply",
+     "LightCondMod.ofSheafLightProfinite"
+    ],
+    "digest": "9ff83e6b45806566"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern locally constant presheaves, ordinary condensed module constructions, or nonabelian H1; none gives the equivariant sectionwise colimit together with its transported coefficient cohomology and original legs."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Condensed\", \"colimit\", \"Action\"",
+   "results": {
+    "t": "2026-10-22T06:05:47Z",
+    "tool": "loogle",
+    "query": "\"Condensed\", \"colimit\", \"Action\"",
+    "sub": "",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern locally constant presheaves, ordinary condensed module constructions, or nonabelian H1; none gives the equivariant sectionwise colimit together with its transported coefficient cohomology and original legs."
+  },
+  {
+   "tool": "grep",
+   "query": "(colimit|filtered).*(action|equivariant)|(action|equivariant).*(colimit|filtered)",
+   "results": {
+    "t": "2026-10-22T06:05:46Z",
+    "tool": "grep",
+    "query": "(colimit|filtered).*(action|equivariant)|(action|equivariant).*(colimit|filtered)",
+    "sub": "Condensed",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern locally constant presheaves, ordinary condensed module constructions, or nonabelian H1; none gives the equivariant sectionwise colimit together with its transported coefficient cohomology and original legs."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Cohomology of sheaves on the site of profinite group spaces commutes with filtered colimits of internal action modules",
+   "results": {
+    "t": "2026-10-22T06:05:46Z",
+    "tool": "leansearch",
+    "query": "Cohomology of sheaves on the site of profinite group spaces commutes with filtered colimits of internal action modules",
+    "sub": "",
+    "ok": false,
+    "n_hits": 0,
+    "note": "service unavailable: {\"error\":\"Rate limit exceeded: 60 per 1 minute\"}",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-22",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Transport a filtered diagram of condensed group representations to sheaves on compact group spaces and compute colimits of object cohomology with the original cocone maps",
+   "results": {
+    "t": "2026-10-22T06:06:50Z",
+    "tool": "leanfinder",
+    "query": "Transport a filtered diagram of condensed group representations to sheaves on compact group spaces and compute colimits of object cohomology with the original cocone maps",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "Condensed.isColimitLocallyConstantPresheaf",
+     "LightCondensed.isColimitLocallyConstantPresheaf",
+     "Condensed.isColimitLocallyConstantPresheaf_desc_apply",
+     "Condensed.isColimitLocallyConstantPresheafDiagram",
+     "LightCondensed.isColimitLocallyConstantPresheafDiagram",
+     "LightCondensed.isColimitLocallyConstantPresheaf_desc_apply",
+     "LightCondensed.isColimitLocallyConstantPresheafDiagram_desc_apply",
+     "Condensed.isColimitLocallyConstantPresheafDiagram_desc_apply"
+    ],
+    "digest": "b30d56d4415409fe"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern locally constant presheaves, ordinary condensed module constructions, or nonabelian H1; none gives the equivariant sectionwise colimit together with its transported coefficient cohomology and original legs."
+  },
+  {
+   "tool": "grep",
+   "query": "(cohomolog|rightDerived).*(filtered|colimit)|(filtered|colimit).*(cohomolog|rightDerived)",
+   "results": {
+    "t": "2026-10-22T06:06:39Z",
+    "tool": "grep",
+    "query": "(cohomolog|rightDerived).*(filtered|colimit)|(filtered|colimit).*(cohomolog|rightDerived)",
+    "sub": "CategoryTheory/Sites",
+    "ok": true,
+    "n_hits": 1,
+    "note": "",
+    "top": [
+     "Mathlib/CategoryTheory/Sites/NonabelianCohomology/H1.lean"
+    ],
+    "digest": "e5e85254713439d9"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern locally constant presheaves, ordinary condensed module constructions, or nonabelian H1; none gives the equivariant sectionwise colimit together with its transported coefficient cohomology and original legs."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Filtered colimits of equivariant condensed modules transported to sheaves on profinite group spaces commute with object cohomology with their original cocone legs",
+   "results": {
+    "t": "2026-10-22T12:03:21Z",
+    "tool": "leanfinder",
+    "query": "Filtered colimits of equivariant condensed modules transported to sheaves on profinite group spaces commute with object cohomology with their original cocone legs",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "Condensed.isColimitLocallyConstantPresheaf_desc_apply",
+     "LightCondensed.isColimitLocallyConstantPresheafDiagram",
+     "LightCondensed.isColimitLocallyConstantPresheaf_desc_apply",
+     "Condensed.isColimitLocallyConstantPresheafDiagram",
+     "Condensed.isColimitLocallyConstantPresheaf",
+     "LightCondensed.isColimitLocallyConstantPresheaf",
+     "LightCondensed.isColimitLocallyConstantPresheafDiagram_desc_apply",
+     "Condensed.isColimitLocallyConstantPresheafDiagram_desc_apply"
+    ],
+    "digest": "28c733357dd92232"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: hits give locally constant condensed presheaf colimits, general sheaf colimits/AB5, or definitions of cohomology; none states the action-site comparison with all cocone and naturality clauses."
+  },
+  {
+   "tool": "grep",
+   "query": "(cohomolog|rightDerived).*(filtered|colimit)|(filtered|colimit).*(cohomolog|rightDerived)",
+   "results": {
+    "t": "2026-10-22T12:03:45Z",
+    "tool": "grep",
+    "query": "(cohomolog|rightDerived).*(filtered|colimit)|(filtered|colimit).*(cohomolog|rightDerived)",
+    "sub": "CategoryTheory/Sites",
+    "ok": true,
+    "n_hits": 1,
+    "note": "",
+    "top": [
+     "Mathlib/CategoryTheory/Sites/NonabelianCohomology/H1.lean"
+    ],
+    "digest": "e5e85254713439d9"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: hits give locally constant condensed presheaf colimits, general sheaf colimits/AB5, or definitions of cohomology; none states the action-site comparison with all cocone and naturality clauses."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Sheaf object cohomology commutes with small filtered colimits on a site with finite covering families",
+   "results": {
+    "t": "2026-10-22T12:03:45Z",
+    "tool": "leansearch",
+    "query": "Sheaf object cohomology commutes with small filtered colimits on a site with finite covering families",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "CategoryTheory.GrothendieckTopology.Point.instPreservesColimitsOfSizeSheafSheafFiberOfHasSheafifyOfWEqualsLocallyBijectiveOfReflectsIsomorphismsOfPreservesFilteredColimitsOfSizeForgetOfLocallySmall",
+     "CategoryTheory.Sheaf.hasFilteredColimitsOfSize",
+     "CategoryTheory.isSheaf_pointwiseColimit",
+     "AlgebraicGeometry.SheafedSpace.instHasColimitsOfShapeOfSmallOfHasLimitsOfShapeOpposite",
+     "CategoryTheory.GrothendieckTopology.preservesLimitsOfShape_sheafification",
+     "AlgebraicGeometry.SheafedSpace.instEpiTopCatBaseHomPresheafedSpaceπ",
+     "CategoryTheory.IsGrothendieckAbelian.isColimitMapCoconeOfSubobjectMkEqISup",
+     "CategoryTheory.preservesFiniteLimits_presheafToSheaf"
+    ],
+    "digest": "78d8ad23bfc3be3e"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: hits give locally constant condensed presheaf colimits, general sheaf colimits/AB5, or definitions of cohomology; none states the action-site comparison with all cocone and naturality clauses."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Sheaf\", \"H\", \"colimit\"",
+   "results": {
+    "t": "2026-10-22T12:03:48Z",
+    "tool": "loogle",
+    "query": "\"Sheaf\", \"H\", \"colimit\"",
+    "sub": "",
+    "ok": true,
+    "n_hits": 12,
+    "note": "",
+    "top": [
+     "CategoryTheory.Presheaf.colimitOfRepresentable",
+     "CategoryTheory.Presheaf.preservesColimitsOfSize_leftKanExtension",
+     "CategoryTheory.Presheaf.preservesColimitsOfSize_of_isLeftKanExtension",
+     "CategoryTheory.Presheaf.isColimitTautologicalCocone",
+     "CategoryTheory.Presheaf.isColimitTautologicalCocone'",
+     "CategoryTheory.Presheaf.isLeftKanExtension_of_preservesColimits",
+     "CategoryTheory.Presheaf.instIsLeftKanExtensionFunctorOppositeTypeIdCompUliftYonedaOfPreservesColimitsOfSizeOfHasPointwiseLeftKanExtension",
+     "CategoryTheory.Presheaf.isLeftAdjoint_of_preservesColimits"
+    ],
+    "digest": "7770837e5b6d36b6"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: hits give locally constant condensed presheaf colimits, general sheaf colimits/AB5, or definitions of cohomology; none states the action-site comparison with all cocone and naturality clauses."
+  },
+  {
+   "tool": "grep",
+   "query": "condensed.*action|action.*condensed|cohomology.*colimit",
+   "results": {
+    "t": "2026-10-22T12:05:20Z",
+    "tool": "grep",
+    "query": "condensed.*action|action.*condensed|cohomology.*colimit",
+    "sub": "Condensed",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: hits give locally constant condensed presheaf colimits, general sheaf colimits/AB5, or definitions of cohomology; none states the action-site comparison with all cocone and naturality clauses."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "On a site with finite covers, higher sheaf cohomology preserves filtered colimits of coefficient abelian sheaves naturally in the object",
+   "results": {
+    "t": "2026-10-22T12:05:30Z",
+    "tool": "leanfinder",
+    "query": "On a site with finite covers, higher sheaf cohomology preserves filtered colimits of coefficient abelian sheaves naturally in the object",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "CategoryTheory.Sheaf.ab5ofSize",
+     "CategoryTheory.Sheaf.hasFilteredColimitsOfSize",
+     "CategoryTheory.Sheaf.instIsGrothendieckAbelian",
+     "CategoryTheory.Sheaf.cohomologyPresheaf",
+     "CategoryTheory.Sheaf.instHasExactColimitsOfShapeOfHasFiniteLimitsOfPreservesColimitsOfShapeFunctorOppositeSheafToPresheaf",
+     "CategoryTheory.Sheaf.cohomologyPresheafFunctor",
+     "CategoryTheory.Sheaf.H",
+     "CategoryTheory.Sheaf.hasExactColimitsOfShape"
+    ],
+    "digest": "8cf03ef22c64bc2b"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: hits give locally constant condensed presheaf colimits, general sheaf colimits/AB5, or definitions of cohomology; none states the action-site comparison with all cocone and naturality clauses."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-profinite-invariants-filtered-continuity",
+  "date": "2026-10-22",
+  "group": "Q73"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "Paragraph (3), quasi-compact open direct image: filtered internal-invariant passage. Original steps 2–3: transport of the equivariant colimit through the coherent presentation, and constant-site cohomology continuity with the forward-arrow cofinality and original legs.",
+   "via": [
+    "lem-sfb-profinite-invariants-filtered-continuity",
+    "lem-sfb-ind-unipotent-procyclic-difference",
+    "lem-sfb-polynomial-translation-acyclic",
+    "lem-sfb-polynomial-derived-bar-comparison",
+    "lem-sfb-trivial-ladic-derived-exterior",
+    "lem-sfb-dense-lattice-derived-invariants-comparison",
+    "lem-sfb-tame-inertia-continuous-koszul",
+    "lem-sfb-continuous-algcl-tame-boundary-comparison",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-profinite-action-colimit-cohomology",
+  "worker": "stage1",
+  "summary": "Rebased the retained split against the current sheaf-dag after the prior landing was not promoted. Re-read the item statement and every cited dependency on the current DAG; all statements, hypotheses, original-leg identifications, and naturality clauses remain unchanged. Retained the six existing dependencies, no new nodes, and the recorded Mathlib searches. Made the singleton-isomorphism covering check explicit and aligned the cohomology step directly with the live continuity statement and its specified coprojections.",
+  "blueprint": "Realizes the filtered internal-invariant passage below main-20261015 sk-thm-sf-ctf-stability-direct-images.proof.md paragraph (3), through the inherited creation chain. After rebase, blueprint_refs ancestor remains None; whole-blueprint searches for profinite action and cohomology colimit found no equal blueprint statement.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-module-sheaves-colimits-forgetful",
+    "why": "Generic ringed-site coefficient-forgetting colimit theorem, for the nonconstant ring sheaf R_J; no geometric step or unit route is replaced."
+   },
+   {
+    "node": "lem-weil-pbc-ring-modules-grothendieck-abelian",
+    "why": "Generic algebraic coefficient fact at Z checks Ab satisfies the hypothesis of small-site sheafification; the item unit supplies no separate coefficient theorem."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-module-sheaves-colimits-forgetful",
+  "lem-weil-pbc-ring-modules-grothendieck-abelian"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q146-9b5085d89",
+  "group": "Q146",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q146-9b5085d89 (reviewer sub-agent of L); spot-checked: I read the item in full. It has 0 new nodes and one commit (item plus report). The statement and stmt_deps are unchanged from live, where the item is still unsplit in both live and side-live; it has no repair note. This is a re-delivery of the PASSed head 3fbed5d5. The diff changes only steps 1 and 4: step 1 now states that a singleton isomorphism is a jointly surjective cover, which is true, and step 4 is reworded. The six cited statements are unchanged. The re-split note on coherent-presentation is resolved with keep_plan and its statement is unchanged. Step 1: coherent-presentation gives a small P_J with finite limits and finite covers stable under pullback and composition, which covers every hypothesis of the continuity node. The equivalence-preservation leaf gives the colimiting cocone Φ(ι_i) (Stacks 0038). Step 2: Ab = Mod(ℤ) is Grothendieck, so lem-sfb-grothendieck-sheafification applies on P_J; the Hom(T,−) sheaf condition agrees with the ordinary one, which is elementary. Step 3: clause (3) of the forgetful node holds for the arbitrary ring sheaf R_J (Stacks 03DB). Step 4: lem-sfb-finite-cover-derived-presheaf-continuity allows any small filtered I and identifies H^q(δ) at T with the actual coprojection-induced map, so the item's legs follow from its statement (Stacks 09YP, sites-cohomology l.2905). Step 5: naturality and restriction along t are elementary. proof_deps equals the union of uses, there is no cycle and no SGA source. rg -L over P_J nodes finds no duplicate: sheafified-cohomology, finite-cover-site and module-lift are different statements. Edge cases checked: one-object I, parallel arrows, q=0, J=1, T=∅, R=0. Accepted tool_uses: the forgetful-colimit node and the Mod(R)-Grothendieck leaf, both generic coefficient facts. No changes."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.ProfiniteActionColimitCohomology",
+  "declaration": "Profinite.CondensedAction.CoherentPresentation.profiniteAction_colimit_cohomology",
+  "declarations": [
+   "Profinite.CondensedAction.CoherentPresentation.abelianCoefficients",
+   "Profinite.CondensedAction.CoherentPresentation.actionCohomology",
+   "Profinite.CondensedAction.CoherentPresentation.actionCohomologyColimitComparison",
+   "Profinite.CondensedAction.CoherentPresentation.profiniteAction_colimit_cohomology"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/ProfiniteActionColimitCohomology.lean",
+  "statement": "theorem profiniteAction_colimit_cohomology [IsFiltered I] (c : Cocone N) (hc : IsColimit c) : Nonempty (IsColimit (Φ.data.equivalence.functor.mapCocone c)) ∧ Nonempty (IsColimit ((abelianCoefficients J P R Φ).mapCocone c)) ∧ ∀ q : ℕ, IsIso (actionCohomologyColimitComparison J P R Φ c q) ∧ (∀ T : Space J, IsIso ((actionCohomologyColimitComparison J P R Φ c q).app (op T))) ∧ (∀ (i : I) (T : Space J), colimit.ι ((N ⋙ actionCohomology J P R Φ q).flip.obj (op T)) i ≫ (actionCohomologyColimitComparison J P R Φ c q).app (op T) = ((actionCohomology J P R Φ q).map (c.ι.app i)).app (op T)) ∧ (∀ (T T' : Space J) (f : T' ⟶ T), (pointwiseCocone (N ⋙ actionCohomology J P R Φ q)).pt.map f.op ≫ (actionCohomologyColimitComparison J P R Φ c q).app (op T') = (actionCohomologyColimitComparison J P R Φ c q).app (op T) ≫ ((actionCohomology J P R Φ q).obj c.pt).map f.op) ∧ (∀ (N' : I ⥤ ActionModule R J) (c' : Cocone N') (_hc' : IsColimit c') (a : N ⟶ N') (b : c.pt ⟶ c'.pt), (∀ i : I, c.ι.app i ≫ b = a.app i ≫ c'.ι.app i) → ∀ T : Space J, colim.map ((Functor.whiskerRight a (actionCohomology J P R Φ q)).flipApp (op T)) ≫ (actionCohomologyColimitComparison J P R Φ c' q).app (op T) = (actionCohomologyColimitComparison J P R Φ c q).app (op T) ≫ ((actionCohomology J P R Φ q).map b).app (op T)) ∧ IsIso (Functor.whiskerLeft ((AsSmall.up ⋙ trivialParameter J).op) (actionCohomologyColimitComparison J P R Φ c q))",
+  "branch": "sheaf-dag",
+  "by": "Q42",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "The comparison is defined by the pointwise colimit universal property, retaining the actual group-colimit source and original cocone legs. The theorem states transport, objectwise invertibility, restriction and diagram naturality, and the presheaf comparison on original profinite parameters. HasExt at u+1 records the compatible cohomology-size convention."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-7b457c753",
+  "group": "Q42",
+  "result": "pass",
+  "note": "Read node (only lean field differs from side-live, no statement_change), module, report (Worker report + Second reading by Q42), stmt-dep declarations (CoherentPresentation Space/coverage/trivialParameter/ModuleData.equivalence/ring, CondensedRing, ActionModule, ringedSiteModules=SheafOfModules, Mathlib cohomologyPresheafFunctor/pointwiseCocone). All clauses rendered: Mod(R_J) and abelian colimit cocones (Nonempty IsColimit of mapCocone), comparison = pointwiseIsColimit.desc with actual colimit source, IsIso globally and per T, i-leg = H^q(T,Phi(iota_i)_ab), restriction square for every f:T'->T, diagram-morphism square for any b compatible with the legs (so b is the induced chosen-colimit map), IsIso after whiskering along (AsSmall.up ⋙ trivialParameter).op on Profinite^op. Hypotheses exact (comm condensed ring, compact T2 totally disconnected topological group, arbitrary normalized presentation, arbitrary small filtered I : Type (u+1) at the site universe). HasExt.{u+1} is the satisfiable size witness of the site-cohomology convention, not a stronger assumption. Per-degree canonical-map IsIso is the node's own form, so the derived-form rule does not apply. Edge cases (one-object I, parallel arrows, q=0, T empty, trivial J, R=0, arbitrary chosen colimits) covered; no duplicate or parallel landing; helper defs have real data, docstrings carry source and blueprint, proof is only sorry, lean.statement appears verbatim in the file. Not recompiled (no change; worker reports a clean compile). Advisory: helper defs in a theorem module, so citers must list the theorem as a stmt_dep."
+ }
+}

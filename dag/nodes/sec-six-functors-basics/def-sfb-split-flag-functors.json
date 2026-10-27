@@ -1,0 +1,146 @@
+{
+ "id": "def-sfb-split-flag-functors",
+ "kind": "definition",
+ "title": "Coset quotient, normalizer and fixed functors for split flags",
+ "status": "split",
+ "import_flags": [],
+ "statement": "Let $F$ be a field [def-weil-field], let $B,T,H$ be $F$-group schemes [def-sc-group-scheme], let $i_B:B\\to H$ and $i_T:T\\to H$ be homomorphisms, and let $\\pi:H\\to Q$ be a morphism of $F$-schemes. Say that $\\pi$ represents the fppf coset quotient by $B$ if its natural map from the coequalizer of $h_{H\\times B}\\rightrightarrows h_H$, given by $(g,b)\\mapsto g$ and $(g,b)\\mapsto gi_B(b)$, is a sheafification for the fppf topology [def-pc-fppf-site]: precomposition induces a bijection on maps to every sheaf. For a commutative $F$-algebra $A$ and $g\\in H(A)$, say that $g$ universally normalizes $T$ if after every $F$-algebra map $A\\to A\\prime$, conjugation by $g_{A\\prime}$ preserves the image of $T(A\\prime)$ in $H(A\\prime)$ as a set. For such a quotient and $x\\in Q(A)$, say that $x$ is universally $T$-fixed if for every $A\\to A\\prime$, every lift $g\\in H(A\\prime)$ of $x_{A\\prime}$, and every $t\\in T(A\\prime)$, one has $\\pi(i_T(t)g)=\\pi(g)$. Local lifts exist for the fppf quotient, so this expresses fixation by the canonical left action without choosing the action. A map $e:E\\to Q$ represents the closed fixed functor if it is a closed immersion [def-weil-closed-immersion] and for every $A$ and $x\\in Q(A)$, universal fixation is equivalent to existence of a unique $y\\in E(A)$ with $e(y)=x$. All test algebras, including nonreduced ones, are allowed. Scalar extension of a rational point to a field extension $L/F$ [def-pc-field-extension] uses the unit comparison of scheme pullback, and agrees with the scalar-extension convention [def-sfb-tori-multiplicative-type].",
+ "stmt_deps": [
+  "def-weil-field",
+  "def-sc-group-scheme",
+  "def-pc-fppf-site",
+  "def-weil-closed-immersion",
+  "def-pc-field-extension",
+  "def-sfb-tori-multiplicative-type"
+ ],
+ "source": {
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Definition 5.20, pp.104--105; Proposition 21.1, p.424; Section 21h, paragraph before Proposition 21.70, p.446. Universal fixed functor also Section 7b, pp.138--139."
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "The fppf coset sheaf of a subgroup scheme, its normalizer on all algebra extensions and the torus fixed subfunctor",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"Sylow.mem_fixedPoints_mul_left_cosets_iff_mem_normalizer\", \"module\": \"Mathlib.GroupTheory.Sylow\", \"type\": \"{H : Subgroup G} [Finite (H : Set G)] {x : G} : (x : G ⧸ H) ∈ MulAction.fixedPoints H (G ⧸ H) ↔ x ∈ normalizer H\", \"doc\": \"An element $ x \\\\in G $ is a fixed point under the action of $ H $ on the quotient group $ G/H $ if and only if $ x $ lies in the normalizer of $ H $ in $ G $.\"}\n  {\"name\": \"AddSubgroup.normalizer\", \"module\": \"Mathlib.Algebra.Group.Subgroup.Defs\", \"type\": \"{G : Type u_1} → [inst : AddGroup G] → AddSubgroup G → AddSubgroup G\", \"doc\": \"For an additive group $G$ and an additive subgroup $H \\\\subseteq G$, the normalizer of $H$ in $G$ is the additive subgroup consisting of all elements $a \\\\in G$ such that for every $n \\\\in G$, $n \\\\in H$ \"}\n  {\"name\": \"AddSubgroup.normalizer_eq_top_iff\", \"module\": \"Mathlib.Algebra.Group.Subgroup.Basic\", \"type\": \"∀ {G : Type u_1} [inst : AddGroup G] {H : AddSubgroup G}, H.normalizer = ⊤ ↔ H.Normal\", \"doc\": \"For any additive group $ G $ and its additive subgroup $ H $, the normalizer of $ H $ equals the entire group $ G $ if and only if $ H $ is a normal subgroup of $ G $.\"}\n  {\"name\": \"AddSubgroup.map_equiv_normalizer_eq\", \"module\": \"Mathlib.Algebra.Group.Subgroup.Basic\", \"type\": \"∀ {G : Type u_1} [inst : AddGroup G] {N : Type u_5} [inst_1 : AddGroup N] (H : AddSubgroup G) (f : G ≃+ N),\\n  AddSubgroup.map f.toAddMonoidHom H.normalizer = (AddSubgroup.map f.toAddMonoidHom H).normalizer\", \"doc\": \"For additive groups $G$ and $N$, an additive equivalence $f : G ≃+ N$, and an additive subgroup $H ⊆ G$, the normalizer of the image $f(H)$ in $N$ is equal to the image under $f$ of the normalizer of \"}\n  {\"name\": \"Subgroup.map_equiv_normalizer_eq\", \"module\": \"Mathlib.Algebra.Group.Subgroup.Basic\", \"type\": \"(H : Subgroup G) (f : G ≃* N) : H.normalizer.map f.toMonoidHom = (H.map f.toMonoidHom).normalizer\", \"doc\": \"Let $ H $ be a subgroup of a group $ G $, and let $ f : G \\\\to N $ be a group isomorphism. Then the image of the normalizer of $ H $ in $ G $ under $ f $ is equal to the normalizer of the image of $ H \"}\n  {\"name\": \"Subgroup.normalizerMonoidHom\", \"module\": \"Mathlib.GroupTheory.Subgroup.Centralizer\", \"type\": \": H.normalizer →* MulAut H\", \"doc\": \"The group homomorphism from the normalizer of a subgroup $ H $ in $ G $ to the automorphism group $ \\\\mathrm{Aut}(H) $, which maps each element $ g $ of the normalizer to the automorphism of $ H $ give\"}\n  {\"name\": \"AddSubgroup.setNormalizer\", \"module\": \"Mathlib.Algebra.Group.Subgroup.Defs\", \"type\": \"{G : Type u_1} → [inst : AddGroup G] → Set G → AddSubgroup G\", \"doc\": \"For an additive group $G$ and a subset $S \\\\subseteq G$, the normalizer of $S$ is the additive subgroup of $G$ consisting of all elements $g \\\\in G$ such that for every $n \\\\in G$, $n \\\\in S$ if and only \"}\n  {\"name\": \"Subgroup.normalizer_eq_top_iff\", \"module\": \"Mathlib.Algebra.Group.Subgroup.Basic\", \"type\": \": H.normalizer = ⊤ ↔ H.Normal\", \"doc\": \"For a subgroup $H$ of a group $G$, the normalizer of $H$ equals the entire group $G$ if and only if $H$ is a normal subgroup of $G$. This equivalence characterizes normal subgroups as those whose norm\"}\n",
+   "date": "2026-10-24",
+   "verdict": "No exact match: existing IsFppfGroupQuotient and SolvableGroupStructure.IsFppfQuotient concern normal subgroups and group-valued quotients; the flag quotient need not be a group. The homogeneous quotient theorems inline a sheafification universal property but supply no reusable nonnormal quotient predicate. Abstract group normalizers/fixed points and root-pairing Weyl groups do not give the scheme-theoretic universal algebra-extension conditions."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The universal torus fixed point condition for the scheme theoretic flag quotient",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.𝒰D\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"{I : Type u} →\\n  [inst : CategoryTheory.Category.{u, u} I] →\\n    {S X : AlgebraicGeometry.Scheme} →\\n      {D : CategoryTheory.Functor I AlgebraicGeometry.Scheme} →\\n        {t : D ⟶ (CategoryTheory.Functor.const I).obj S} →\\n          {f : X ⟶ S} →\\n            [inst_1 : ∀ (i : I), CompactSpace ↥(D.obj\", \"doc\": \"The open cover of the diagram object $ D(i') $ formed by refining the open cover $ \\\\mathcal{U}_{D₀} $ with affine open immersions, ensuring each point lies in an affine open subscheme and compatibilit\"}\n  {\"name\": \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.h𝒰S\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"∀ {I : Type u} [inst : CategoryTheory.Category.{u, u} I] {S X : AlgebraicGeometry.Scheme}\\n  {D : CategoryTheory.Functor I AlgebraicGeometry.Scheme} {t : D ⟶ (CategoryTheory.Functor.const I).obj S} {f : X ⟶ S}\\n  (self : AlgebraicGeometry.ExistsHomHomCompEqCompAux D t f) (i : self.𝒰S.I₀), AlgebraicGeo\", \"doc\": \"Given a category $\\\\mathcal{I}$, a diagram $D:\\\\mathcal{I}\\\\to\\\\text{Sch}$ of schemes, a natural transformation from $D$ to the constant diagram at $S$, and a morphism $X\\\\to S$, every element of the zerot\"}\n  {\"name\": \"AlgebraicGeometry.AffineSpace\", \"module\": \"Mathlib/AlgebraicGeometry/AffineSpace\", \"type\": \"Type v → AlgebraicGeometry.Scheme → AlgebraicGeometry.Scheme\", \"doc\": \"For a scheme $ S $ and a type $ n $, the affine space $ \\\\mathbb{A}^n_S $ is constructed as the fiber product (pullback) of $ S $ and the affine $ n $-space over the integers $ \\\\operatorname{Spec}(\\\\mat\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.exists_hom_hom_comp_eq_comp_of_locallyOfFiniteType\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"∀ {I : Type u} [inst : CategoryTheory.Category.{u, u} I] {S X : AlgebraicGeometry.Scheme}\\n  (D : CategoryTheory.Functor I AlgebraicGeometry.Scheme) (t : D ⟶ (CategoryTheory.Functor.const I).obj S) (f : X ⟶ S)\\n  (c : CategoryTheory.Limits.Cone D) (hc : CategoryTheory.Limits.IsLimit c) [∀ (i : I), Com\", \"doc\": \"Given a diagram of schemes locally of finite type, if two morphisms from objects in the diagram to a scheme $X$ satisfy compatibility conditions with respect to a cone, then there exists an index $k$ \"}\n  {\"name\": \"AlgebraicGeometry.exists_appTop_π_eq_of_isLimit\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"∀ {I : Type u} [inst : CategoryTheory.Category.{u, u} I] (D : CategoryTheory.Functor I AlgebraicGeometry.Scheme)\\n  (c : CategoryTheory.Limits.Cone D) (hc : CategoryTheory.Limits.IsLimit c) [CategoryTheory.IsCofiltered I]\\n  [∀ {i j : I} (f : i ⟶ j), AlgebraicGeometry.IsAffineHom (D.map f)] (s : ↑(c.p\", \"doc\": \"Given a cofiltered diagram of schemes where each morphism is affine and each object is compact and quasi-separated, any global section of the structure sheaf of the limit scheme can be expressed as th\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.exists_hom_comp_eq_comp_of_locallyOfFiniteType\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"∀ {I : Type u} [inst : CategoryTheory.Category.{u, u} I] {S X : AlgebraicGeometry.Scheme}\\n  (D : CategoryTheory.Functor I AlgebraicGeometry.Scheme) (t : D ⟶ (CategoryTheory.Functor.const I).obj S) (f : X ⟶ S)\\n  (c : CategoryTheory.Limits.Cone D) (hc : CategoryTheory.Limits.IsLimit c) [∀ (i : I), Com\", \"doc\": \"Given a diagram of schemes with a morphism locally of finite type, if two morphisms from an object in the diagram to a scheme agree after composition with the diagram's morphism and a cone's projectio\"}\n  {\"name\": \"AlgebraicGeometry.exists_appTop_map_eq_zero_of_isLimit\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"∀ {I : Type u} [inst : CategoryTheory.Category.{u, u} I] (D : CategoryTheory.Functor I AlgebraicGeometry.Scheme)\\n  (c : CategoryTheory.Limits.Cone D) (hc : CategoryTheory.Limits.IsLimit c) [CategoryTheory.IsCofiltered I]\\n  [∀ {i j : I} (f : i ⟶ j), AlgebraicGeometry.IsAffineHom (D.map f)] {i : I} [C\", \"doc\": \"Given a cofiltered diagram of schemes with affine transition morphisms and compact topological spaces, if a global section becomes zero under the limit cone's projection map, then there exists a morph\"}\n  {\"name\": \"AlgebraicGeometry.exists_mem_of_isClosed_of_nonempty\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"∀ {I : Type u} [inst : CategoryTheory.Category.{u, u} I] (D : CategoryTheory.Functor I AlgebraicGeometry.Scheme)\\n  (c : CategoryTheory.Limits.Cone D) (hc : CategoryTheory.Limits.IsLimit c) [CategoryTheory.IsCofilteredOrEmpty I]\\n  [∀ {i j : I} (f : i ⟶ j), AlgebraicGeometry.IsAffineHom (D.map f)] (Z \", \"doc\": \"Given a cofiltered diagram of schemes where each transition morphism is affine, and for each scheme in the diagram a closed, non-empty, compact subset $ Z_i $ that is compatible with the morphisms, th\"}\n",
+   "date": "2026-10-24",
+   "verdict": "No exact match: existing IsFppfGroupQuotient and SolvableGroupStructure.IsFppfQuotient concern normal subgroups and group-valued quotients; the flag quotient need not be a group. The homogeneous quotient theorems inline a sheafification universal property but supply no reusable nonnormal quotient predicate. Abstract group normalizers/fixed points and root-pairing Weyl groups do not give the scheme-theoretic universal algebra-extension conditions."
+  },
+  {
+   "tool": "grep",
+   "query": "IsCosetQuotient|RepresentsFixed|normalizerPoints|IsFixed.*Scheme",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-24",
+   "verdict": "No exact match: existing IsFppfGroupQuotient and SolvableGroupStructure.IsFppfQuotient concern normal subgroups and group-valued quotients; the flag quotient need not be a group. The homogeneous quotient theorems inline a sheafification universal property but supply no reusable nonnormal quotient predicate. Abstract group normalizers/fixed points and root-pairing Weyl groups do not give the scheme-theoretic universal algebra-extension conditions."
+  },
+  {
+   "tool": "rg",
+   "query": "IsBorelGroupScheme|IsFieldBorel|IsCosetQuotient|RepresentsFixed|normalizerPoints|lem-sfb-split-flag-rational-fixed-scheme lean/WeilConjectures lean/Sheaf",
+   "results": "/home/ubuntu/weil-conjectures-sheaf-shared/lean/Sheaf/AlgebraicGeometry/RhoSectionModules.lean:36:    IsBorelGroupScheme j.hom.hom ∧ k ≫ j = i\n/home/ubuntu/weil-conjectures-sheaf-shared/lean/Sheaf/AlgebraicGeometry/GroupScheme/BorelQuotientLifting.lean:55:    (C : Over (Spec (.of F))) [GrpObj C] (iC : C ⟶ H) (hC : IsBorelGroupScheme iC) :\n/home/ubuntu/weil-conjectures-sheaf-shared/lean/Sheaf/AlgebraicGeometry/GroupScheme/BorelQuotientLifting.lean:57:      IsBorelGroupScheme iB ∧ ∃ r : B ⟶ C,\n/home/ubuntu/weil-conjectures-sheaf-shared/lean/Sheaf/AlgebraicGeometry/GroupScheme/ChevalleyIntegralRootModel.lean:148:    (hB : IsBorelGroupScheme iB.hom.hom)\n/home/ubuntu/weil-conjectures-sheaf-shared/lean/Sheaf/AlgebraicGeometry/GroupScheme/HomogeneousLineBundleSections.lean:85:    (hB : IsBorelGroupScheme iB.hom.hom) (j : T ⟶ B) (hj : j ≫ iB = iT)\n/home/ubuntu/weil-conjectures-sheaf-shared/lean/Sheaf/AlgebraicGeometry/GroupScheme/BorelRootProductCoordinates.lean:73:    (iB : B ⟶ G) (hB : IsBorelGroupScheme iB.hom.hom)\n/home/ubuntu/weil-conjectures-sheaf-shared/lean/Sheaf/AlgebraicGeometry/GroupScheme/TorusCentralizerBorelIntersection.lean:113:    (iB : B ⟶ G) (hB : IsBorelGroupScheme iB.hom.hom)\n/home/ubuntu/weil-conjectures-sheaf-shared/lean/Sheaf/AlgebraicGeometry/GroupScheme/TorusCentralizerBorelIntersection.lean:123:          IsBorelGroupScheme jC.hom.hom := by\n/home/ubuntu/weil-conjectures-sheaf-shared/lean/Sheaf/AlgebraicGeometry/GroupScheme/BorelQuotientProperGeometry.lean:49:having a finite affine cover with Noetherian coordinate rings. `IsBorelGroupScheme`\n/home/ubuntu/weil-conjectures-sheaf-shared/lean/Sheaf/AlgebraicGeometry/GroupScheme/BorelQuotientProperGeometry.lean:114:      GeometricallyIntegral p.left ∧ (IsBorelGroupScheme i → IsProper X.hom) := by\n/home/ubuntu/weil-conjectures-sheaf-shared/lean/Sheaf/AlgebraicGeometry/GroupScheme/BorelConjugationCover.lean:34:on rational points. Solvability in `IsBorelGroupScheme` is termination of the\n/home/ubuntu/weil-conjectures-sheaf-shared/lean/Sheaf/AlgebraicGeometry/GroupScheme/BorelConjugationCover.lean:74:    (∃ (B : Over (Spec (.of k))) (_ : GrpObj B) (i : B ⟶ G), IsBorelGroupScheme i) ∧\n/home/ubuntu/weil-conjectures-sheaf-shared/lean/Sheaf/AlgebraicGeometry/GroupScheme/BorelConjugationCover.lean:75:      (∀ (B : Over (Spec (.of k))) [GrpObj B] (i : B ⟶ G), IsBorelGroupScheme i →\n/home/ubuntu/weil-conjectures-sheaf-shared/lean/Sheaf/AlgebraicGeometry/GroupScheme/BruhatLongestCellCharts.lean:106:    (iB : B ⟶ G) (hB : IsBorelGroupScheme iB.hom.hom)\n/home/ubuntu/weil-conjectures-sheaf-shared/lean/Sheaf/AlgebraicGeometry/GroupScheme/Borel.lean:31:def IsBorelGroupScheme {F : Type u} [Field F] [IsAlgClosed F]\n/home/ubuntu/weil-conjectures-sheaf-shared/lean/Sheaf/AlgebraicGeometry/GroupScheme/BorelKostantDistributionComparison.lean:100:    (hB : IsBorelGroupScheme iB.hom.hom)\n/home/ubuntu/weil-conjectures-sheaf-shared/lean/Sheaf/AlgebraicGeometry/GroupScheme/GeneralBorelFlagVariety.lean:93:        @IsBorelGroupScheme k _ _ G.X (B : Over (Spec (.of k))) G.grp h B.arrow} ≃\n/home/ubuntu/weil-conjectures-sheaf-shared/lean/Sheaf/AlgebraicGeometry/GroupScheme/CentralIsogenyBorelRootCompatibility.lean:90:      IsBorelGroupScheme iB.hom.hom → ∀ j : T ⟶ B, j ≫ iB = iT →\n/home/ubuntu/weil-conjectures-sheaf-shared/lean/Sheaf/AlgebraicGeometry/GroupScheme/CentralIsogenyBorelRootCompatibility.lean:112:        IsBorelGroupScheme iBH.hom.hom ∧ jH ≫ iBH = iTH ∧\n/home/ubuntu/weil-conjectures-sheaf-shared/lean/Sheaf/AlgebraicGeometry/GroupScheme/CentralIsogenyBorelRootCompatibility.lean:203:    (hBH : @IsBorelGroupScheme F _ _ (Z ⊗ S).X BH.X\n/home/ubuntu/weil-conjectures-sheaf-shared/lean/Sheaf/AlgebraicGeometry/GroupScheme/CentralIsogenyBorelRootCompatibility.lean:222:      IsBorelGroupScheme iBS.hom.hom ∧ jS ≫ iBS = iTS ∧\n/home/ubuntu/weil-conjectures-sheaf-shared/lean/Sheaf/AlgebraicGeometry/GroupScheme/SimplyConnectedCharacterLattice.lean:71:    (hB : IsBorelGroupScheme iB.hom.hom) (hj : j ≫ iB = iT)\n/home/ubuntu/weil-conjectures-sheaf-shared/lean/Sheaf/AlgebraicGeometry/GroupScheme/TorusCommutingPointCommonBorel.lean:86:      IsBorelGroupScheme j.hom.hom ∧ (∃ f : T ⟶ B, f ≫ j = i) ∧\n/home/ubuntu/weil-conjectures-sheaf-shared/lean/Sheaf/AlgebraicGeometry/GroupScheme/StandardParabolicLeviCharts.lean:205:    (iB : B ⟶ G) (hB : IsBorelGroupScheme iB.hom.hom)\n/home/ubuntu/weil-conjectures-sheaf-shared/lean/Sheaf/AlgebraicGeometry/GroupScheme/StandardParabolicLeviCharts.lean:248:      IsBorelGroupScheme bL.hom.hom ∧ tBI ≫ bB = j ∧ tBI ≫ bL = tL ∧\n/home/ubuntu/weil-conjectures-sheaf-shared/lean/Sheaf/AlgebraicGeometry/GroupScheme/BottSamelsonGalleryGeometry.lean:103:    (iB : B ⟶ G) (hB : IsBorelGroupScheme iB.hom.hom)\n/home/ubuntu/weil-conjectures-sheaf-shared/lean/Sheaf/AlgebraicGeometry/GroupScheme/BorelQuotientAffineSpaceCell.lean:60:    (i : B ⟶ G) (hB : IsBorelGroupScheme i)\n/home/ubuntu/weil-conjectures-sheaf-shared/lean/Sheaf/AlgebraicGeometry/GroupScheme/SimpleModuleDualHighestWeight.lean:71:    (hB : IsBorelGroupScheme iB.hom.hom) (hj : j ≫ iB = iT)\n/home/ubuntu/weil-conjectures-sheaf-shared/lean/Sheaf/AlgebraicGeometry/GroupScheme/BorelCharacteristicPicardSequence.lean:87:      IsBorelGroupScheme i₀.hom.hom) ∧\n/home/ubuntu/weil-conjectures-sheaf-shared/lean/Sheaf/AlgebraicGeometry/GroupScheme/BorelCharacteristicPicardSequence.lean:89:      IsBorelGroupScheme i.hom.hom →\n/home/ubuntu/weil-conjectures-sheaf-shared/lean/Sheaf/AlgebraicGeometry/GroupScheme/BorelMaximalTorusConjugacy.lean:87:      IsBorelGroupScheme iB.hom.hom →\n/home/ubuntu/weil-conjectures-sheaf-shared/lean/Sheaf/AlgebraicGeometry/GroupScheme/BorelHomomorphismRigidity.lean:68:    (i : B ⟶ G) (hB : IsBorelGroupScheme i)\n/home/ubuntu/weil-conjectures-sheaf-shared/lean/Sheaf/AlgebraicGeometry/GroupScheme/BorelOppositeRootDichotomy.lean:76:    (hB : IsBorelGroupScheme iB.hom.hom) (hj : j ≫ iB = iT) :\n/home/ubuntu/weil-conjectures-sheaf-shared/lean/Sheaf/AlgebraicGeometry/GroupScheme/ReductiveBorelPairStructure.lean:97:      IsBorelGroupScheme iB.hom.hom ∧ ∃ j : T ⟶ B, j ≫ iB = iT) ∧\n/home/ubuntu/weil-conjectures-sheaf-shared/lean/Sheaf/AlgebraicGeometry/GroupScheme/ReductiveBorelPairStructure.lean:101:      IsBorelGroupScheme iB.hom.hom → ∀ j : T ⟶ B, j ≫ iB = iT →\n/home/ubuntu/weil-conjectures-sheaf-shared/lean/Sheaf/AlgebraicGeometry/GroupScheme/SplitReductiveCharacteristicSequence.lean:47:    IsBorelGroupScheme\n/home/ubuntu/weil-conjectures-sheaf-shared/lean/Sheaf/AlgebraicGeometry/GroupScheme/BorelSimpleRootDistributionCalculus.lean:84:    (hB : IsBorelGroupScheme iB.hom.hom)\n/home/ubuntu/weil-conjectures-sheaf-shared/lean/Sheaf/AlgebraicGeometry/GroupScheme/BorelSchemeNormalizer.lean:101:    (i : B ⟶ G) (hB : IsBorelGroupScheme i)\n/home/ubuntu/weil-conjectures-sheaf-shared/lean/Sheaf/AlgebraicGeometry/GroupScheme/RhoRegularWeylOrbit.lean:54:    (iB : B ⟶ G) (hB : IsBorelGroupScheme iB.hom.hom)\n/home/ubuntu/weil-conjectures-sheaf-shared/lean/Sheaf/AlgebraicGeometry/GroupScheme/BorelQuotientAffineCell.lean:80:    (i : B ⟶ G) (hB : IsBorelGroupScheme i)\n",
+   "date": "2026-10-24",
+   "verdict": "Only the algebraically-closed-field Borel definition and its consumers exist. No arbitrary-field Borel predicate, nonnormal coset-quotient predicate, universal-normalizer predicate or fixed-functor representation predicate exists."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-split-flag-rational-fixed-scheme",
+  "date": "2026-10-24",
+  "group": "Q95"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Haboush symmetric-power lifting for a trivial quotient representation. Supporting representation-theoretic input: Steinberg endomorphisms detect a nonzero fixed vector. Supporting Self-duality of rho section modules at characteristic-dependent weights. Supporting input: Positive-characteristic simplicity step, using irreducibility of the Steinberg induced module rather than assuming self-duality. Numerical input to the dimension comparison: Weyl dimension of the induced module. Supporting Integral Euler character of arbitrary flag line bundles. Section 22d, proof of Theorem 22.50, p.480: general fixed-point input, stated here in its integral equivariant form; Example 22.36, pp.473--474, for formal characters. WANTED: Nielsen 1974 general fixed-point theorem and Iversen 1976, 9.4; neither document is present. The integral formulation is an agent-supplied supporting statement. Supporting input: Section 22d, proof of Theorem 22.50, p.480: agent-supplied concentration prerequisite, not the numerical fixed-point formula itself. WANTED: Thomason, Une formule de Lefschetz en K-theorie equivariante algebrique, Duke Math. J. 53 (1986), concentration theorem; not present locally. No proof of concentration is claimed to occur in Milne. Supporting step: The concentration theorem's nonfixed-locus annihilation argument in the proof of the item. Geometric input to nonfixed-locus annihilation: invariant affine strata of the reduction, before the Laurent-coefficient and localization arguments. Supporting normal-case neighbourhood input used after passing to the invariant smooth locus, before removing one affine open in the Noetherian induction. Supporting proof input: Linearize the normal quasi-projective neighborhood by an immersion into projective space of a rational representation. Supporting line-bundle prerequisite: replace an ample invertible module by a positive tensor power carrying an algebraic G-linearization, before choosing invariant sections. Supporting Picard input: a tensor exponent uniform over the generic residue fields of all normal components, before applying the generic-line pullback criterion. Supporting base-change input: Brion Lemma 2.3, pullback Pic(G) to Pic(G_K), specialized using Remark 2.2(v). Supporting substep: Brion, On Linearization of Line Bundles, Lemma 2.3 proof, printed p.118, the Pic(G/B) and root-datum paragraph, citing Iversen 1976 Proposition 5.2 and Theorem 5.3. The explicit split Schubert-boundary basis and its scalar-extension form are the geometric input unpacked here; also Milne Lemma 18.21, printed p.392, the split affine-cell argument. The statement concerns split groups over arbitrary fields, not only algebraically closed fields. Supporting geometry: the split Bruhat stratification before the boundary-divisor argument; Milne Theorems 21.73 and 21.80. Supporting input: Chapter 21 standing arbitrary field, printed p.424; Proposition 21.1, p.424 (constant Weyl group and rational representatives); Summary 21.41, p.436; the fixed-scheme paragraph immediately before Proposition 21.70, p.446. Scalar-extension stability of split Borel pairs is used throughout Section 21h. The fixed-scheme assertion is scheme-theoretic, not just a statement about rational points. Definition of the subgroup and functor interfaces in the supporting split-flag lemma.",
+   "via": [
+    "lem-sfb-split-flag-rational-fixed-scheme",
+    "lem-sfb-split-bruhat-affine-stratification",
+    "lem-sfb-split-flag-schubert-picard-lattice",
+    "lem-sfb-affine-group-picard-field-invariance",
+    "lem-sfb-affine-group-picard-stable-exponent",
+    "lem-sfb-normal-line-bundle-power-linearization",
+    "lem-sfb-normal-quasiprojective-equivariant-immersion",
+    "lem-sfb-sumihiro-normal-torus-affine-neighbourhood",
+    "lem-sfb-torus-invariant-affine-filtration",
+    "lem-sfb-torus-nonfixed-complement-annihilation",
+    "lem-sfb-torus-coherent-concentration",
+    "lem-sfb-torus-coherent-fixed-point-formula",
+    "lem-sfb-flag-line-euler-alternant",
+    "lem-sfb-induced-weyl-dimension-formula",
+    "lem-sfb-steinberg-induced-module-irreducible",
+    "lem-sfb-rho-section-self-duality",
+    "lem-sfb-steinberg-endomorphism-detection",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.GroupScheme.SplitFlagFunctors",
+  "declaration": "AlgebraicGeometry.SplitFlag.IsCosetQuotient",
+  "file": "lean/Sheaf/AlgebraicGeometry/GroupScheme/SplitFlagFunctors.lean",
+  "statement": "def IsCosetQuotient {F : Type u} [Field F] {B H : Grp (Over (Spec (.of F)))} (i : B ⟶ H) {Q : Over (Spec (.of F))} (q : H.X ⟶ Q) : Prop",
+  "branch": "sheaf-dag",
+  "by": "Q95",
+  "date": "2026-10-24",
+  "existing": false,
+  "declarations": [
+   "AlgebraicGeometry.SplitFlag.IsCosetQuotient",
+   "AlgebraicGeometry.SplitFlag.Normalizes",
+   "AlgebraicGeometry.SplitFlag.IsFixed",
+   "AlgebraicGeometry.SplitFlag.RepresentsFixed",
+   "AlgebraicGeometry.SplitFlag.extendPoint"
+  ],
+  "fixed_by": "NT-stage2-cc-4775ea586"
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-4775ea586",
+  "group": "Q95",
+  "result": "fix",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-4775ea586",
+  "group": "Q95",
+  "result": "fix",
+  "note": "Item statement matches node clause by clause; no extra hypotheses; edge cases covered (rank 0, H=T, nonreduced test algebras, every characteristic). New nodes def-sfb-field-borel-subgroup (IsFieldBorel; IsBorelGroupScheme needs IsAlgClosed) and def-sfb-split-flag-functors (IsCosetQuotient as fppf-sheafification universal property, Normalizes, IsFixed, RepresentsFixed, extendPoint) are real definitions, not duplicates, fields correct. FIX: (1) StandardGroupSchemes.affine/map (owner def-sc-gm-ga, uncited in item and new node) inlined as algSpec obj/map in the item and SplitFlagFunctors, adding Mathlib.AlgebraicGeometry.Group.Affine and dropping the now-unused ToriMultiplicativeType import; (2) item clause IsClosedSubgroupScheme iN (owner def-sc-group-scheme-subgroup uncited; node does not assert closedness) replaced by Mono iN.hom.hom, which with the point characterization pins N. Item lean-record.json carries the verbatim new statement and a note. nt_compile --json on FieldBorel plus both fixed modules: about 15.6 s each, EXIT 0, no errors or warnings."
+ }
+}

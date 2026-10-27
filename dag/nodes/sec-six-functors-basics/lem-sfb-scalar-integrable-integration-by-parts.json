@@ -1,0 +1,105 @@
+{
+ "id": "lem-sfb-scalar-integrable-integration-by-parts",
+ "kind": "statement",
+ "title": "Scalar integration by parts under integrability and supportwise differentiability",
+ "statement": "Use $\\mathbf R,\\mathbf C$ [def-weil-field] with their usual Euclidean structures. Let $m\\geq1$, let $f,g:\\mathbf R^m\\to\\mathbf C$ be functions, and let $w\\in\\mathbf R^m$. Put $S_h=\\overline{\\{x:h(x)\\ne0\\}}$ for any such function $h$. Write $D h(x)$ for its real Fréchet derivative (the real-linear map giving its first-order approximation), with value the zero linear map when that derivative does not exist. Assume $f$ is real differentiable at every point of $S_g$ and $g$ is real differentiable at every point of $S_f$. Assume the three complex functions $x\\mapsto (D f(x)w)g(x)$, $x\\mapsto f(x)(D g(x)w)$ and $x\\mapsto f(x)g(x)$ are Lebesgue integrable. Then $$\\int_{\\mathbf R^m} f(x)(D g(x)w)\\,dx=-\\int_{\\mathbf R^m}(D f(x)w)g(x)\\,dx.$$ No differentiability away from the indicated closed supports is assumed.",
+ "source": {
+  "document": "Mathlib/Analysis/Calculus/LineDeriv/IntegrationByParts.lean",
+  "place": "integral_mul_fderiv_eq_neg_fderiv_mul_of_integrable, lines 226–237 (read), especially differentiability only on the other closed support."
+ },
+ "stmt_deps": [
+  "def-weil-field"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Integration by parts for smooth functions on an open Euclidean domain when one factor has compact support",
+   "results": "Returned integral_mul_fderiv_eq_neg_fderiv_mul_of_integrable, integral_bilinear_fderiv_right_eq_neg_left_of_integrable, and SchwartzMap integration-by-parts results.",
+   "date": "2026-10-24",
+   "verdict": "match: the scalar global theorem is precisely this leaf; the open-domain localization is proved in the item, not claimed to be a one-line specialization."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For scalar C1 functions f and g on an arbitrary open set, integration by parts holds without boundary term if f or g has compact support in that open set",
+   "results": "Returned integral_mul_fderiv_eq_neg_fderiv_mul_of_integrable (Mathlib/Analysis/Calculus/LineDeriv/IntegrationByParts), along with SchwartzMap and LipschitzWith variants.",
+   "date": "2026-10-24",
+   "verdict": "match: the scalar global theorem is precisely this leaf; the open-domain localization is proved in the item, not claimed to be a one-line specialization."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A smooth function on an open subset of Euclidean space with compact support in the open set has integral of each partial derivative equal to zero",
+   "results": "Returned SchwartzMap integration-by-parts results, TestFunction.hasCompactSupport, and exists_smooth_tsupport_subset.",
+   "date": "2026-10-24",
+   "verdict": "match: the scalar global theorem is precisely this leaf; the open-domain localization is proved in the item, not claimed to be a one-line specialization."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"integral_mul_fderiv_eq_neg_fderiv_mul_of_integrable\"",
+   "results": "[loogle] OK 1 hit(s): integral_mul_fderiv_eq_neg_fderiv_mul_of_integrable, Mathlib.Analysis.Calculus.LineDeriv.IntegrationByParts.",
+   "date": "2026-10-24",
+   "verdict": "match: the scalar global theorem is precisely this leaf; the open-domain localization is proved in the item, not claimed to be a one-line specialization."
+  },
+  {
+   "tool": "grep",
+   "query": "integral_mul_fderiv_eq_neg_fderiv_mul_of_integrable|integral.*[Cc]ompact|[Cc]ompact.*integral",
+   "results": "[grep] OK 2 hit(s): Mathlib/Analysis/Calculus/LineDeriv/IntegrationByParts.lean:33 (overview) and :226 (theorem integral_mul_fderiv_eq_neg_fderiv_mul_of_integrable).",
+   "date": "2026-10-24",
+   "verdict": "match: the scalar global theorem is precisely this leaf; the open-domain localization is proved in the item, not claimed to be a one-line specialization."
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "integral_mul_fderiv_eq_neg_fderiv_mul_of_integrable",
+  "file": "Mathlib/Analysis/Calculus/LineDeriv/IntegrationByParts.lean",
+  "line": 226,
+  "how": "specializes in one line: E = Fin m → R, scalar field C, measure volume, direction w; lines 226–237 give exactly the three integrability hypotheses and differentiability on tsupport of the other factor. fderiv is zero at points where no derivative exists."
+ },
+ "status": "mathlib",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-coordinate-weighted-adjoint",
+  "date": "2026-10-24",
+  "group": "Q02"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Haboush symmetric-power lifting for a trivial quotient representation. Supporting representation-theoretic input: Steinberg endomorphisms detect a nonzero fixed vector. Supporting Self-duality of rho section modules at characteristic-dependent weights. Supporting input: Positive-characteristic simplicity step, using irreducibility of the Steinberg induced module rather than assuming self-duality. Numerical input to the dimension comparison: Weyl dimension of the induced module. Supporting Kempf vanishing for dominant flag line bundles. Characteristic-zero branch of Milne 22.51: apply Kodaira to M_(lambda+2rho). Supporting injectivity argument for Kodaira: Popa Theorem 1.6.6 used in the proof of Theorem 1.6.1. Supporting input: Popa Theorem 1.6.6 proof: Hodge-theory vanishing of the differential on structure-sheaf cohomology of the smooth projective root cover. Supporting input: Harmonic representatives on complex projective manifolds. Supporting analytic input: the decomposition of all forms underlying the representative assertion Analytic prerequisite: Kong Lemmas 6.2 and 6.4, smooth formal adjoints and ellipticity of the Dolbeault Laplacian. Supporting input: Localize the adjunction calculation to a real coordinate chart with arbitrary Hermitian Gram matrices and volume density. Supporting scalar calculus input: Scalar integration by parts under integrability and supportwise differentiability.",
+   "via": [
+    "lem-sfb-coordinate-weighted-adjoint",
+    "lem-sfb-dolbeault-laplacian-elliptic",
+    "lem-sfb-hermitian-dolbeault-orthogonal-decomposition",
+    "lem-sfb-projective-harmonic-representatives",
+    "lem-sfb-hodge-first-differential-zero",
+    "lem-sfb-kollar-smooth-divisor-injectivity",
+    "lem-sfb-kodaira-vanishing",
+    "lem-sfb-dominant-flag-line-kempf-vanishing",
+    "lem-sfb-induced-weyl-dimension-formula",
+    "lem-sfb-steinberg-induced-module-irreducible",
+    "lem-sfb-rho-section-self-duality",
+    "lem-sfb-steinberg-endomorphism-detection",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ }
+}

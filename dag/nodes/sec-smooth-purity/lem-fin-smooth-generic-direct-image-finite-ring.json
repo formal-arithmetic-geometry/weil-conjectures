@@ -1,0 +1,333 @@
+{
+ "id": "lem-fin-smooth-generic-direct-image-finite-ring",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-fin-deligne-generic-open",
+   "place": "the Lean proof of thm-fin-deligne-generic-open's declarations uses (or, for the batch import closure, sits beside) AlgebraicGeometry.Etale.smoothGenericDirectImage (found by the 2026-10-22 maintainer audit of upstream sorries without a DAG node); in blueprint terms: the smooth case feeding the induction on the generic fibre dimension",
+   "via": []
+  },
+  "same_as": [
+   "lem-asd-smooth-generic-direct-image"
+  ]
+ },
+ "kind": "statement",
+ "title": "Generic base change for a smooth morphism with finite locally constant coefficients (finite ring)",
+ "statement": "Let $\\Lambda$ be a finite commutative ring. Let $k$ be a field, $S$ an integral scheme of finite type over $k$ on which the exponent of $\\Lambda$ is invertible, $a\\colon X\\to S$ a separated, quasi-compact, smooth morphism, and $F$ a finite locally constant sheaf of $\\Lambda$-modules on $X_{\\mathrm{et}}$ [def-constructible-locally-constant]. Then there is a nonempty open $U\\subseteq S$ such that $Ra_{U,*}(F|_{X_U})$ is bounded with constructible cohomology sheaves [def-weil-pbc-constructible-complexes] and for every morphism $v\\colon T\\to U$ from a Noetherian scheme the base change map $v^*Ra_{U,*}(F|_{X_U})\\to Ra_{T,*}(F|_{X_T})$ [sbc-def-base-change-map] is an isomorphism.",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/thm-fin-deligne-generic-open.md",
+  "place": "thm-fin-deligne-generic-open: the smooth case feeding the induction on the generic fibre dimension; Lean: upstream file lean/WeilConjectures/SixFunctors/Etale/Derived/Finiteness/Deligne.lean, declaration AlgebraicGeometry.Etale.smoothGenericDirectImage (module WeilConjectures.SixFunctors.Etale.Derived.Finiteness.Deligne, lines 82-83, proof `sorry`)"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-constructible-complexes",
+  "def-weil-pbc-derived-categories",
+  "def-weil-pbc-scheme-conventions",
+  "sbc-def-base-change-map",
+  "def-constructible-locally-constant",
+  "def-constructible-finite-locally-constant",
+  "def-sbc-smooth-morphisms",
+  "def-pc-integral-scheme"
+ ],
+ "proof": [
+  {
+   "text": "Choose a positive integer n annihilating the finite coefficient ring and invertible on S. Prove the assertion for any finite locally constant sheaf annihilated by such an n, by strong induction on n. If n=1 the sheaf is zero and U=S works. Otherwise write n=p*m with p prime. Then 0<m<n and both p and m are invertible on S. Since S is nonempty, p differs from char(k): otherwise p is zero in the global sections, contradicting invertibility after passage to any stalk. Smoothness supplies local finite type for the prime-field theorem.",
+   "uses": [
+    "def-sbc-smooth-morphisms"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-cor-geo-open-finiteness/cor-fin-deligne-open-finite-coefficients.proof.md",
+    "place": "Finite coefficient devissage; elementary induction on a positive annihilator"
+   }
+  },
+  {
+   "text": "Let K be the kernel of p acting on F and Q the cokernel of K -> F. These are finite locally constant by the kernel and cokernel closure. K is killed by p. Q is the coimage of multiplication by p, so m kills Q because m*p kills F. This gives the short exact sequence 0 -> K -> F -> Q -> 0. Lift the underlying abelian sheaf of K to an actual ULift(ZMod p)-module sheaf H using the sectionwise killed-sheaf construction. The underlying-sheaf isomorphism transfers finite local constancy to H.",
+   "uses": [
+    "lemma-constructible-flc-serre",
+    "lem-weil-pbc-killed-sheaf-module-lift",
+    "lem-pod-module-local-constancy-of-finite-underlying"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-cor-geo-open-finiteness/cor-fin-deligne-open-finite-coefficients.proof.md",
+    "place": "Finite torsion devissage, with kernels and coimages rather than an explicit prime-factor filtration"
+   }
+  },
+  {
+   "text": "Apply the prime-field smooth generic theorem to H. On its nonempty open U the unbounded derived direct image is bounded with finite locally constant cohomology. Convert to the bounded-below model by the upper-star and right-derived comparison isomorphisms. For a noetherian test square with image in U, its lower-left scheme is isomorphic to the noetherian test scheme, so is noetherian. Factor its map to S through U. Pullback preserves bounded constructibility, and the prime-field exchange identifies this pullback with the required test direct image. Paste with the open restriction square, whose exchange is invertible, to obtain precisely the exchange for the original square over S.",
+   "uses": [
+    "lem-asd-smooth-generic-direct-image",
+    "def-weil-pbc-constructible-complexes",
+    "prop-weil-pbc-inverse-image-modules-exact",
+    "sbc-lem-identity-and-base-change-composition",
+    "pqf-lem-locnoeth-lft",
+    "sbc-def-base-change-map"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-lem-geo-smooth-generic/lem-asd-smooth-generic-direct-image.proof.md",
+    "place": "Smooth generic theorem; open restriction and horizontal exchange pasting"
+   }
+  },
+  {
+   "text": "Transfer this property from H to K through the isomorphism of their underlying abelian sheaves. The canonical coefficient comparisons identify the derived pullbacks, direct images and exchanges for both rings. Their homology comparisons identify underlying abelian cohomology sheaves. On each constructibility stratum finite local constancy transfers through the same underlying-sheaf isomorphism; vanishing is reflected by the faithful forgetful functor. Exchange compatibility identifies the forgotten exchange with the abelian exchange, and forgetting reflects its invertibility by the cohomology criterion. Thus K has the full required property on U.",
+   "uses": [
+    "lem-weil-pbc-module-abelian-derived-exchange-compatibility",
+    "lem-pod-module-local-constancy-of-finite-underlying",
+    "lem-weil-pbc-derived-plus-iso-on-cohomology"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-cor-geo-open-finiteness/cor-fin-deligne-open-finite-coefficients.proof.md",
+    "place": "Coefficient-independent direct image and exchange, with constructibility checked on strata"
+   }
+  },
+  {
+   "text": "The induction hypothesis for m and Q gives a nonempty open V. Since S is integral, U intersect V is nonempty. Restrict both properties to the intersection by monotonicity of the allowed image set. The short exact sequence K -> F -> Q supplies a distinguished triangle of degree-zero bounded-below complexes. Apply HasDirectImageBaseChangeOnPlus.of_distTriang2: derived direct image of pullback preserves distinguished triangles, bounded constructibility is triangulated, and the exchange is a morphism of triangles, so invertibility at the first and third terms implies invertibility at the second. This proves the property for F and completes induction. Finally apply the induction to the ring annihilator, which annihilates every section of F.",
+   "uses": [
+    "lem-weil-pbc-complex-ses-triangle",
+    "lem-weil-pbc-derived-direct-image-triangulated",
+    "thm-constructible-serre"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-cor-geo-open-finiteness/cor-fin-deligne-open-finite-coefficients.proof.md",
+    "place": "Finite devissage via the existing distinguished-triangle closure API"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sbc-smooth-morphisms",
+  "lemma-constructible-flc-serre",
+  "lem-weil-pbc-killed-sheaf-module-lift",
+  "lem-pod-module-local-constancy-of-finite-underlying",
+  "lem-asd-smooth-generic-direct-image",
+  "def-weil-pbc-constructible-complexes",
+  "prop-weil-pbc-inverse-image-modules-exact",
+  "sbc-lem-identity-and-base-change-composition",
+  "pqf-lem-locnoeth-lft",
+  "sbc-def-base-change-map",
+  "lem-weil-pbc-module-abelian-derived-exchange-compatibility",
+  "lem-weil-pbc-derived-plus-iso-on-cohomology",
+  "lem-weil-pbc-complex-ses-triangle",
+  "lem-weil-pbc-derived-direct-image-triangulated",
+  "thm-constructible-serre"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-cor-geo-open-finiteness/cor-fin-deligne-open-finite-coefficients.proof.md",
+  "place": "Finite coefficient devissage, formalized by strong induction on an invertible annihilator; canonical coefficient comparisons and the existing triangulated closure API"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "derived pushforward along proper morphism preserves bounded constructible complexes; generic base change",
+   "results": "Scheme.Hom.isLocallyConstructible_image (constructible sets) only",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "generic base change: smooth morphism, direct image of locally constant sheaf is locally constant over a dense open",
+   "results": "isSmooth_isStableUnderBaseChange, isSmoothOfRelativeDimension_isStableUnderBaseChange (Mathlib.AlgebraicGeometry.Morphisms.Smooth), Profinite.exists_locallyConstant_finite_aux: no sheaf cohomology",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rlE 'smallEtaleTopology|tensorBaseChange|Kunneth' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/",
+   "results": "the étale site files only (Mathlib/AlgebraicGeometry/Sites/*); no direct image or base change theorem",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Smooth morphism of schemes, finite locally constant etale sheaf over a finite ring, generically bounded constructible derived direct image and universal base change",
+   "results": "8 hits: AlgebraicGeometry.IsSmooth, AlgebraicGeometry.IsSmooth.exists_isStandardSmooth, AlgebraicGeometry.IsSmoothOfRelativeDimension, AlgebraicGeometry.instLocallyOfFinitePresentationOfIsSmooth, AlgebraicGeometry.IsEtale.instIsSmooth, AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified, AlgebraicGeometry.isSmooth_iff, AlgebraicGeometry.IsEtale",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Smooth, Sheaf",
+   "results": "loogle: unknown identifier 'Sheaf'; 0 hits: none",
+   "date": "2026-10-22",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "grep",
+   "query": "smoothGenericDirectImage|generic.*[Bb]ase[Cc]hange|[Bb]ounded[Cc]onstructible",
+   "results": "0 hits: none",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived etale pushforward of a finite local system commutes with arbitrary base change after shrinking an integral base",
+   "results": "8 hits: AlgebraicGeometry.IsEtale.instIsStableUnderBaseChangeScheme, RingHom.Etale.isStableUnderBaseChange, AlgebraicGeometry.IsEtale.instHasOfPostcompPropertyScheme, AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified, Algebra.Etale.baseChange, StandardEtalePair.HasMap.map, KaehlerDifferential.isBaseChange_of_formallyEtale, SheafOfModules.pushforwardCongr",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Generic base change and bounded constructibility for a smooth scheme morphism with finite coefficients",
+   "results": "8 hits: AlgebraicGeometry.isSmooth_isStableUnderBaseChange, Algebra.Smooth.baseChange, AlgebraicGeometry.isSmoothOfRelativeDimension_isStableUnderBaseChange, RingHom.Smooth.isStableUnderBaseChange, RingHom.isStandardSmoothOfRelativeDimension_isStableUnderBaseChange, Algebra.IsStandardSmoothOfRelativeDimension.baseChange, RingHom.isStandardSmooth_isStableUnderBaseChange, IsBaseChange.finitePow",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.IsSmooth, CategoryTheory.Sheaf",
+   "results": "loogle: unknown identifier 'AlgebraicGeometry.IsSmooth'; 0 hits: none",
+   "date": "2026-10-22",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"baseChange\"",
+   "results": "12 hits: Lean.RecordedDeps.baseChangeLogPos, Submodule.baseChange, LinearMap.baseChange, LinearEquiv.baseChange, LinearMap.baseChange_id, Submodule.baseChange_bot, Submodule.baseChange_top, Submodule.tmul_mem_baseChange_of_mem",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "constructible|higherDirectImage|higher.*[Dd]irect|generic.*[Cc]ohom",
+   "results": "0 hits: none",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "maintainer",
+  "item": null,
+  "date": "2026-10-22",
+  "why": "upstream sorried declaration in a batch target's import closure without a DAG node (maintainer audit of dag/lean_audit.json with_sorry_and_no_node, 2026-10-22, the human's order); no sorry-free SHEAF proof found; recorded so that stage 1 splits it"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": [
+    "AlgebraicGeometry.Etale.smoothGenericDirectImage"
+   ]
+  },
+  "slopmaster2": {
+   "state": "sorry_here",
+   "decls": [
+    {
+     "name": "AlgebraicGeometry.Etale.smoothGenericDirectImage",
+     "module": "WeilConjectures.SixFunctors.Etale.Derived.Finiteness.Deligne",
+     "lines": [
+      69,
+      83
+     ],
+     "kind": "theorem",
+     "sorry": true
+    }
+   ],
+   "missing": [],
+   "open": []
+  }
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sf-cbc",
+ "lean": {
+  "existing": true,
+  "module": "WeilConjectures.SixFunctors.Etale.Derived.Finiteness.Deligne",
+  "file": "lean/WeilConjectures/SixFunctors/Etale/Derived/Finiteness/Deligne.lean",
+  "declaration": "AlgebraicGeometry.Etale.smoothGenericDirectImage",
+  "declarations": [
+   "AlgebraicGeometry.Etale.smoothGenericDirectImage"
+  ],
+  "statement": "theorem smoothGenericDirectImage : SmoothGenericDirectImage Λ :=\n  sorry",
+  "branch": "slopmaster2",
+  "by": "maintainer",
+  "date": "2026-10-22",
+  "note": "upstream declaration (verbatim in live), proof still `sorry`; no node recorded it before 2026-10-22; blueprint form lem-asd-smooth-generic-direct-image (F_ℓ coefficients, finite locally constant cohomology); SHEAF's Sheaf.AlgebraicGeometry.SmoothGenericDirectImage states the F_ℓ form and is sorried"
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-fin-smooth-generic-direct-image-finite-ring",
+  "worker": "stage1",
+  "summary": "Retains the finite-ring statement and the upstream sorried attachment. Reduces finite locally constant coefficients through an explicit prime-factor filtration to the existing prime-field smooth generic lemma, compares the canonical exchanges by forgetting coefficients, restricts to a common open by the composition formula, and reconstructs bounded constructibility and universal exchange by long exact sequences. All lemmas already exist; no new nodes.",
+  "blueprint": "thm-fin-deligne-generic-open: smooth-source second step, using lem-asd-smooth-generic-direct-image; supplies its finite-ring form by the finite-coefficient devissage of cor-fin-deligne-open-finite-coefficients, without using the open-immersion finiteness theorem.",
+  "tool_uses": [
+   {
+    "node": "def-sbc-smooth-morphisms",
+    "why": "Generic definition, coefficient comparison, or exact-sequence tool used only as stated; the finite-ring smooth item has no local replacement for this algebraic operation."
+   },
+   {
+    "node": "lemma-constructible-flc-serre",
+    "why": "Generic definition, coefficient comparison, or exact-sequence tool used only as stated; the finite-ring smooth item has no local replacement for this algebraic operation."
+   },
+   {
+    "node": "lem-weil-pbc-exchange-forget-coefficients",
+    "why": "Generic definition, coefficient comparison, or exact-sequence tool used only as stated; the finite-ring smooth item has no local replacement for this algebraic operation."
+   },
+   {
+    "node": "lem-pod-module-local-constancy-of-finite-underlying",
+    "why": "Generic definition, coefficient comparison, or exact-sequence tool used only as stated; the finite-ring smooth item has no local replacement for this algebraic operation."
+   },
+   {
+    "node": "def-weil-pbc-constructible-complexes",
+    "why": "Generic definition, coefficient comparison, or exact-sequence tool used only as stated; the finite-ring smooth item has no local replacement for this algebraic operation."
+   },
+   {
+    "node": "sbc-lem-identity-and-base-change-composition",
+    "why": "Generic definition, coefficient comparison, or exact-sequence tool used only as stated; the finite-ring smooth item has no local replacement for this algebraic operation."
+   },
+   {
+    "node": "prop-weil-pbc-inverse-image-modules-exact",
+    "why": "Generic definition, coefficient comparison, or exact-sequence tool used only as stated; the finite-ring smooth item has no local replacement for this algebraic operation."
+   },
+   {
+    "node": "lem-weil-pbc-derived-direct-image-triangulated",
+    "why": "Generic definition, coefficient comparison, or exact-sequence tool used only as stated; the finite-ring smooth item has no local replacement for this algebraic operation."
+   },
+   {
+    "node": "thm-constructible-serre",
+    "why": "Generic definition, coefficient comparison, or exact-sequence tool used only as stated; the finite-ring smooth item has no local replacement for this algebraic operation."
+   },
+   {
+    "node": "lemma-weil-pbc-five-lemma-transfer",
+    "why": "Generic definition, coefficient comparison, or exact-sequence tool used only as stated; the finite-ring smooth item has no local replacement for this algebraic operation."
+   },
+   {
+    "node": "sbc-def-base-change-map",
+    "why": "Generic definition, coefficient comparison, or exact-sequence tool used only as stated; the finite-ring smooth item has no local replacement for this algebraic operation."
+   }
+  ]
+ },
+ "tool_uses": [
+  "def-sbc-smooth-morphisms",
+  "lemma-constructible-flc-serre",
+  "lem-pod-module-local-constancy-of-finite-underlying",
+  "def-weil-pbc-constructible-complexes",
+  "sbc-lem-identity-and-base-change-composition",
+  "prop-weil-pbc-inverse-image-modules-exact",
+  "lem-weil-pbc-derived-direct-image-triangulated",
+  "thm-constructible-serre",
+  "sbc-def-base-change-map"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-O4-4758f7310",
+  "group": "O4",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-O4-4758f7310 (reviewer sub-agent of L); spot-checked: No new nodes. The statement is unchanged and matches the finite-ring Λ form of the Lean SmoothGenericDirectImage docstring (Deligne.lean:69-83), the form its only citer thm-fin-deligne-generic-open needs. All 7 steps read against all 18 cited statements; no hypothesis gap. Step 1: smooth ⇒ lfp ⇒ lft, plus qc ⇒ finite type; S is Noetherian by 01T6; ℓ_i invertible on nonempty S gives ℓ_i ≠ char k; Λ=0 handled. Step 2: the consecutive prime filtration G_i=ℓ_iG_{i-1} uses flc-serre ker/coker and gives ℓ_iQ_i=0; tested on Z/4, Z/6 and F_2[ε]/ε². Step 3: lem-asd applied to L_i, exactly its statement. Step 4: exchange-forget-coefficients (2)/(3)/iff plus pod finite-underlying local constancy give lisse Λ-cohomology and the Λ-exchange. Step 5: on U=∩U_i the composition formula BC_{jv}=BC_v∘v^*BC_j cancels the isomorphism BC_j. Steps 6-7: triangle, long exact sequence, constructible-Serre ker/coker/extension, five-lemma transfer and the cohomology criterion, by backwards induction from G_r=0. The route is the main-20261015 dévissage of cor-fin-deligne-open-finite-coefficients.proof.md with the smooth prime-field lemma as input; no SGA. The snapshot has no cycle: the closure of every cited node excludes the item and thm-fin-deligne-generic-open, and the 178-node base cycle in the earlier preflight log was fixed before the final dry run. No duplicate found by a whole-DAG statement search. Batch 5: (1) lem-asd-smooth-generic-direct-image is generic smooth finiteness/base change, not a trace-formula step. The flagged chain ends in lem-trf-field-complex-cohomology-splitting, pure linear algebra already in the batch-5 closure via lem-weil-point-fd-morphism-descent. All 24 trf/pod nodes in lem-asd's own closure are generic tools. Accepted. (2) lem-pod-module-local-constancy-of-finite-underlying is general sheaf algebra, not a Poincaré-duality step, already under the accepted generic lem-pod-lisse-module-sheaves-as-module-objects, and reaches no other trf/pod node. Accepted. The 11 tool_uses are generic and used only as stated."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S2",
+  "result": "pass",
+  "landing": "20261024T020230-L-2571720",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

@@ -1,0 +1,313 @@
+{
+ "id": "lem-sfb-flat-proper-pseudocoherent-direct-image",
+ "kind": "statement",
+ "title": "Flat proper finitely presented direct image preserves pseudo-coherence",
+ "statement": "Let $f:Y\\to S$ be a flat proper morphism of finite presentation between schemes [def-pc-scheme, def-pc-morphism-conventions, def-weil-flat-morphism, def-weil-proper-morphism]. For every pseudo-coherent $E\\in D(\\mathcal O_Y)$ [def-pc-derived-category, def-pur-pseudo-coherent-complex], $Rf_*E$ is pseudo-coherent on $S$ [def-pc-derived-direct-image]. No Noetherian hypothesis or lower cohomological bound on $E$ is imposed.",
+ "source": {
+  "document": "literature/stacks-project/perfect.tex",
+  "place": "Tag 0CSD, lemma-flat-proper-pseudo-coherent-direct-image-general, pseudo-coherence conclusion"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-derived-category",
+  "def-pc-morphism-conventions",
+  "def-pc-derived-direct-image",
+  "def-weil-flat-morphism",
+  "def-weil-proper-morphism",
+  "def-pur-pseudo-coherent-complex"
+ ],
+ "proof": [
+  {
+   "text": "Pseudo-coherence is local on the base by [def-pur-pseudo-coherent-complex]. For an affine open $V\\subseteq S$, [lem-pc-restrict-derived-direct-image-open] identifies $(Rf_*E)|_V$ with $R(f_V)_*(E|_{Y_V})$, where $Y_V=f^{-1}V$. The map $f_V$ is proper by [lem-weil-pbc-proper-base-change] and of finite presentation by [lem-weil-pbc-qcqs-morphism-permanence](3). It is flat because its source and target stalk maps are the original stalk maps of $f$ [def-weil-flat-morphism]. Its source is quasi-compact and quasi-separated by [lem-weil-pbc-qcqs-over-affine], since a proper morphism is separated and of finite type [def-weil-proper-morphism]. Restriction of the local finite-free models makes $E|_{Y_V}$ pseudo-coherent. Thus replace $S,Y,f,E$ by $V,Y_V,f_V,E|_{Y_V}$ for the rest of the argument. This reduction makes $S$ affine and $Y$ quasi-compact and quasi-separated; it imposes no global quasi-compactness on the original $S$.",
+   "uses": [
+    "def-pur-pseudo-coherent-complex",
+    "lem-pc-restrict-derived-direct-image-open",
+    "lem-weil-pbc-proper-base-change",
+    "lem-weil-pbc-qcqs-morphism-permanence",
+    "def-weil-flat-morphism",
+    "lem-weil-pbc-qcqs-over-affine",
+    "def-weil-proper-morphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/perfect.tex",
+    "place": "Tag 0CSD, lemma-flat-proper-pseudo-coherent-direct-image-general; expanded approximation proof of Tag 0CSC, lemma-base-change-tensor-pseudo-coherent, with the structure sheaf in degree zero"
+   }
+  },
+  {
+   "text": "By [lem-sc-pseudo-coherent-qcoh], $E$ has quasi-coherent cohomology. Since $f$ is of finite presentation it is quasi-compact and quasi-separated. Apply [lem-pc-derived-direct-image-uniform-truncation-bound] on the now affine base to choose a positive integer $N$ such that $H^i(Rf_*A)=0$ for $i\\geq N$ whenever $A\\in D_{\\mathrm{QCoh}}(\\mathcal O_Y)$ has no positive cohomology. Fix an arbitrary integer $m$, and put $a=m-N-1$. Apply [lem-sfb-pseudocoherent-perfect-approximation] to obtain a perfect $P\\in D_{\\mathrm{QCoh}}(\\mathcal O_Y)$ and $u:P\\to E$ such that $H^i(u)$ is an isomorphism for $i>a$ and $H^a(u)$ is surjective. Neither this approximation theorem nor the uniform bound requires a lower bound on $E$.",
+   "uses": [
+    "lem-sc-pseudo-coherent-qcoh",
+    "lem-pc-derived-direct-image-uniform-truncation-bound",
+    "lem-sfb-pseudocoherent-perfect-approximation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/perfect.tex",
+    "place": "Tag 0CSD, lemma-flat-proper-pseudo-coherent-direct-image-general; expanded approximation proof of Tag 0CSC, lemma-base-change-tensor-pseudo-coherent, with the structure sheaf in degree zero"
+   }
+  },
+  {
+   "text": "Complete $u$ to a distinguished triangle $P\\to E\\to C\\to P[1]$ using [def-weil-triangulated-category]. The quasi-coherent subcategory is triangulated by [lem-pc-supported-qcoh-triangulated] with the supporting subset all of $Y$, so $C$ has quasi-coherent cohomology. The long exact cohomology sequence [lem-sf-derived-homology-long-exact] shows $H^i(C)=0$ for $i\\geq a$: for $i=a$ use the surjectivity of $H^a(u)$ and injectivity of $H^{a+1}(u)$, and for $i>a$ use the two adjacent isomorphisms. Consequently $C[a-1]$ has no positive cohomology, with the cochain convention $H^j(C[r])=H^{j+r}(C)$ of [def-weil-abstract-derived-category].",
+   "uses": [
+    "def-weil-triangulated-category",
+    "lem-pc-supported-qcoh-triangulated",
+    "lem-sf-derived-homology-long-exact",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/perfect.tex",
+    "place": "Tag 0CSD, lemma-flat-proper-pseudo-coherent-direct-image-general; expanded approximation proof of Tag 0CSC, lemma-base-change-tensor-pseudo-coherent, with the structure sheaf in degree zero"
+   }
+  },
+  {
+   "text": "Apply [lem-pc-proper-support-perfect-direct-image] to $P$ and $\\mathcal G^\\bullet=\\mathcal O_Y[0]$. Its sole nonzero term is finitely presented, having the presentation $0\\to\\mathcal O_Y\\xrightarrow{1}\\mathcal O_Y\\to0$; all other terms are zero. It is flat over $S$: at $y$, its stalk is $\\mathcal O_{Y,y}$, flat over $\\mathcal O_{S,f(y)}$ by [def-weil-flat-morphism] and [def-pc-scheme-module-flat-over]. Its support is all of $Y$ (the local ring at a scheme point is nonzero), proper over $S$ by [lem-weil-pbc-closed-subset-proper-over-base-properties](1), using $Y$ itself as a closed subscheme structure. The zero terms have empty support, also proper by part (2). The finite-presentation hypothesis on $f$ is unchanged. Thus $Rf_*(P\\otimes^L\\mathcal O_Y[0])$ is perfect. The right unitor of [def-pc-scheme-derived-tensor-structure] identifies this object with $Rf_*P$.",
+   "uses": [
+    "lem-pc-proper-support-perfect-direct-image",
+    "def-weil-flat-morphism",
+    "def-pc-scheme-module-flat-over",
+    "lem-weil-pbc-closed-subset-proper-over-base-properties",
+    "def-pc-scheme-derived-tensor-structure"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/perfect.tex",
+    "place": "Tag 0CSD, lemma-flat-proper-pseudo-coherent-direct-image-general; expanded approximation proof of Tag 0CSC, lemma-base-change-tensor-pseudo-coherent, with the structure sheaf in degree zero"
+   }
+  },
+  {
+   "text": "Apply the bound from step 2 to $C[a-1]$. The unbounded right derived functor commutes with shifts and preserves distinguished triangles by [lem-pc-right-derived-functor-triangulated]. Hence $H^j(Rf_*C)=0$ for $j\\geq N+a-1=m-2$, in particular for $j\\geq m-1$. Apply [lem-sf-derived-homology-long-exact] to the image triangle $Rf_*P\\to Rf_*E\\to Rf_*C\\to (Rf_*P)[1]$. For every $i\\geq m$, both adjacent groups $H^{i-1}(Rf_*C)$ and $H^i(Rf_*C)$ vanish, so $H^i(Rf_*u)$ is an isomorphism. Explicitly the shift calculation is $H^i(Rf_*(C[a-1]))=H^{i+a-1}(Rf_*C)$, so the threshold in degree $j=i+a-1$ is $N+a-1$.",
+   "uses": [
+    "lem-pc-derived-direct-image-uniform-truncation-bound",
+    "lem-pc-right-derived-functor-triangulated",
+    "lem-sf-derived-homology-long-exact",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/perfect.tex",
+    "place": "Tag 0CSD, lemma-flat-proper-pseudo-coherent-direct-image-general; expanded approximation proof of Tag 0CSC, lemma-base-change-tensor-pseudo-coherent, with the structure sheaf in degree zero"
+   }
+  },
+  {
+   "text": "The perfect object $Rf_*P$ is locally represented by a strictly perfect complex by [def-pc-perfect-complex]. Compose each local identification with $Rf_*u$. Step 5 gives cohomology isomorphisms in every degree $>m$ and even an isomorphism, hence a surjection, in degree $m$. These are precisely the witnesses that $Rf_*E$ is $m$-pseudo-coherent in [def-sfb-m-pseudo-coherent-complex]. Since $m$ was arbitrary, the all-$m$ characterization of [def-pur-pseudo-coherent-complex] gives pseudo-coherence. Return through the isomorphisms of step 1 and the affine open covering of the original base. The argument allows empty schemes, zero complexes, non-Noetherian bases, and complexes unbounded below.",
+   "uses": [
+    "def-pc-perfect-complex",
+    "def-sfb-m-pseudo-coherent-complex",
+    "def-pur-pseudo-coherent-complex"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/perfect.tex",
+    "place": "Tag 0CSD, lemma-flat-proper-pseudo-coherent-direct-image-general; expanded approximation proof of Tag 0CSC, lemma-base-change-tensor-pseudo-coherent, with the structure sheaf in degree zero"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-perfect-complex",
+  "def-pc-scheme-derived-tensor-structure",
+  "def-pc-scheme-module-flat-over",
+  "def-pur-pseudo-coherent-complex",
+  "def-sfb-m-pseudo-coherent-complex",
+  "def-weil-abstract-derived-category",
+  "def-weil-flat-morphism",
+  "def-weil-proper-morphism",
+  "def-weil-triangulated-category",
+  "lem-pc-derived-direct-image-uniform-truncation-bound",
+  "lem-pc-proper-support-perfect-direct-image",
+  "lem-pc-restrict-derived-direct-image-open",
+  "lem-pc-right-derived-functor-triangulated",
+  "lem-pc-supported-qcoh-triangulated",
+  "lem-sc-pseudo-coherent-qcoh",
+  "lem-sf-derived-homology-long-exact",
+  "lem-sfb-pseudocoherent-perfect-approximation",
+  "lem-weil-pbc-closed-subset-proper-over-base-properties",
+  "lem-weil-pbc-proper-base-change",
+  "lem-weil-pbc-qcqs-morphism-permanence",
+  "lem-weil-pbc-qcqs-over-affine"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/perfect.tex",
+  "place": "Tag 0CSD, lemma-flat-proper-pseudo-coherent-direct-image-general; expanded approximation proof of Tag 0CSC, lemma-base-change-tensor-pseudo-coherent, with the structure sheaf in degree zero"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Derived direct image of a pseudo coherent complex under a proper flat finitely presented morphism of schemes is pseudo coherent",
+   "results": "8 hits: AlgebraicGeometry.Scheme.Modules.pushforward, AlgebraicGeometry.Scheme.Modules.pseudofunctor_map_r, AlgebraicGeometry.Scheme.Modules.instIsRightAdjointPushforward, AlgebraicGeometry.Scheme.Modules.instAdditivePushforward, AlgebraicGeometry.Flat, AlgebraicGeometry.Scheme.Modules.pseudofunctor_mapComp_hom_τr, AlgebraicGeometry.Scheme.Modules.pseudofunctor, AlgebraicGeometry.Scheme.Modules.pseudofunctor_mapComp_inv_τr",
+   "date": "2026-10-23",
+   "verdict": "no match: results concern ordinary sheaf pushforward, projective spectra or flat morphisms; none states this derived pseudo-coherence or graph-kernel assertion."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Proper flat finite presentation pushforward preserves pseudo coherence for unbounded derived complexes over arbitrary rings",
+   "results": "8 hits: PresheafOfModules.pushforward₀, SheafOfModules.IsFinitePresentation.mk, Module.Flat.projective_of_finitePresentation, PresheafOfModules.pushforward₀_obj_obj_isModule, ModuleCat.preservesFiniteLimits_tensorLeft_of_ringHomFlat, SheafOfModules.pushforward_obj_val, Module.Flat.iff_rTensor_preserves_shortComplex_exact, SheafOfModules.instIsQuasicoherentOfIsFinitePresentation",
+   "date": "2026-10-23",
+   "verdict": "no match: results concern ordinary sheaf pushforward, projective spectra or flat morphisms; none states this derived pseudo-coherence or graph-kernel assertion."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"PseudoCoherent\"",
+   "results": "0 hits: ",
+   "date": "2026-10-23",
+   "verdict": "no match: results concern ordinary sheaf pushforward, projective spectra or flat morphisms; none states this derived pseudo-coherence or graph-kernel assertion."
+  },
+  {
+   "tool": "grep",
+   "query": "pseudo.?coherent|pseudoCoherent",
+   "results": "0 hits: ",
+   "date": "2026-10-23",
+   "verdict": "no match: results concern ordinary sheaf pushforward, projective spectra or flat morphisms; none states this derived pseudo-coherence or graph-kernel assertion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "On a flat proper morphism of finite presentation pushforward preserves locally bounded above finite free resolutions",
+   "results": "8 hits: AlgebraicGeometry.UniversallyOpen.of_flat, AlgebraicGeometry.Flat.isStableUnderBaseChange, AlgebraicGeometry.Flat, AlgebraicGeometry.instDescendsAlongSchemeMinMorphismPropertySurjectiveFlatLocallyOfFinitePresentationOfQuasiCompactOfIsZariskiLocalAtTarget, AlgebraicGeometry.locallyOfFinitePresentation_isStableUnderBaseChange, AlgebraicGeometry.Flat.instHasRingHomPropertyFlat, AlgebraicGeometry.Flat.instIsStableUnderCompositionScheme, AlgebraicGeometry.Flat.instIsMultiplicativeScheme",
+   "date": "2026-10-23",
+   "verdict": "no match: results concern ordinary sheaf pushforward, projective spectra or flat morphisms; none states this derived pseudo-coherence or graph-kernel assertion."
+  },
+  {
+   "tool": "grep",
+   "query": "pseudo.?coherent|pseudoCoherent",
+   "results": "0 hits: ",
+   "date": "2026-10-23",
+   "verdict": "no match: inspected hits concern ordinary pushforward, module flatness, fractions of complexes or condensed modules; none states pseudo-coherent derived pushforward"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived direct image of pseudo coherent tensor product with a bounded above relatively flat finite presentation complex and proper support",
+   "results": "8 hits: Module.Flat.lTensor_shortComplex_exact, Module.Flat.rTensor_shortComplex_exact, DerivedCategory.right_fac_of_isStrictlyLE, Module.Flat.iff_rTensor_preserves_shortComplex_exact, ModuleCat.preservesFiniteLimits_tensorLeft_of_ringHomFlat, SheafOfModules.QuasicoherentData.IsFinitePresentation, DerivedCategory.right_fac_of_isStrictlyLE_of_isStrictlyGE, SheafOfModules.instIsQuasicoherentOfIsFinitePresentation",
+   "date": "2026-10-23",
+   "verdict": "no match: inspected hits concern ordinary pushforward, module flatness, fractions of complexes or condensed modules; none states pseudo-coherent derived pushforward"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"PseudoCoherent\"",
+   "results": "0 hits: ",
+   "date": "2026-10-23",
+   "verdict": "no match: inspected hits concern ordinary pushforward, module flatness, fractions of complexes or condensed modules; none states pseudo-coherent derived pushforward"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived pushforward of a pseudo coherent complex tensored with a bounded above complex of finitely presented modules flat over the base with proper support is pseudo coherent",
+   "results": "8 hits: LightCondensed.instMonoidalClosedSheafLightProfiniteCoherentTopologyModuleCat, CategoryTheory.Tor', CategoryTheory.Tor'_obj_obj, CategoryTheory.Tor, CategoryTheory.Tor_obj, LightCondensed.instMonoidalClosedLightCondMod, LightCondensed.instMonoidalCategorySheafLightProfiniteCoherentTopologyModuleCat, LightCondensed.free_internallyProjective_iff_tensor_condition",
+   "date": "2026-10-23",
+   "verdict": "no match: inspected hits concern ordinary pushforward, module flatness, fractions of complexes or condensed modules; none states pseudo-coherent derived pushforward"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Proper flat finite presentation morphism derived pushforward preserves pseudo coherent complexes",
+   "results": "8 hits: SheafOfModules.IsFinitePresentation.mk, AlgebraicGeometry.Flat.flat_of_affine_subset, AlgebraicGeometry.IsProper.instOfIsFinite, AlgebraicGeometry.Scheme.Modules.instFaithfulPushforward, AlgebraicGeometry.Scheme.Modules.pushforwardComp, AlgebraicGeometry.Scheme.Modules.instFullPushforward, SheafOfModules.instIsQuasicoherentOfIsFinitePresentation, AlgebraicGeometry.instLocallyOfFinitePresentationOfIsSmooth",
+   "date": "2026-10-23",
+   "verdict": "no match: inspected hits concern ordinary pushforward, module flatness, fractions of complexes or condensed modules; none states pseudo-coherent derived pushforward"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Pseudo coherence of derived global sections of a tensor product with a relatively flat complex of finite presentation and proper support",
+   "results": "8 hits: LightCondensed.free_internallyProjective_iff_tensor_condition, LightCondensed.free_internallyProjective_iff_tensor_condition', LightCondensed.free_lightProfinite_internallyProjective_iff_tensor_condition, LightCondensed.internallyProjective_iff_tensor_condition, LightCondensed.free_lightProfinite_internallyProjective_iff_tensor_condition', LightCondensed.internallyProjective_iff_tensor_condition', LightCondensed.instMonoidalClosedSheafLightProfiniteCoherentTopologyModuleCat, LightCondensed.instMonoidalFunctorOppositeLightProfiniteModuleCatSheafCoherentTopologyPresheafToSheaf",
+   "date": "2026-10-23",
+   "verdict": "no match: inspected hits concern ordinary pushforward, module flatness, fractions of complexes or condensed modules; none states pseudo-coherent derived pushforward"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Proper flat finite presentation morphism derived pushforward preserves pseudo coherent complexes",
+   "results": "8 hits: AlgebraicGeometry.Scheme.Modules.pushforward, AlgebraicGeometry.Scheme.Modules.pseudofunctor_map_r, AlgebraicGeometry.Flat.isStableUnderBaseChange, AlgebraicGeometry.Scheme.Modules.pseudofunctor_mapComp_hom_τr, AlgebraicGeometry.Scheme.Modules.pushforwardComp, SheafOfModules.pushforwardComp, SheafOfModules.pushforward_assoc, SheafOfModules.pushforward_obj_val",
+   "date": "2026-10-23",
+   "verdict": "no match: inspected hits concern ordinary pushforward, module flatness, fractions of complexes or condensed modules; none states pseudo-coherent derived pushforward"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-pseudocoherent-tensor-relative-criterion",
+  "date": "2026-10-23",
+  "group": "O1"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Knudsen forgetful morphism as the universal stable curve. Section 2, Lemma 2.5 (printed pp.178--179), using Section 1, Corollary 1.5 and Lemma 1.6: multiplication and the pushforward exact sequences, retaining the twist by minus the old-marking divisor. Lemma 2.5, first paragraph and final evaluation: Corollary 1.5 supplies vanishing, base-flat direct images, arbitrary base change and generation for the five divisor modules. Corollary 1.5, printed p.167: the general cohomology-and-base-change tool whose conditions (1) and (2) the exceptional-fibre calculation must verify. General tool for Corollary 1.5: finite presentation of the acyclic image: detect pseudo-coherence by perfect tensor tests on V, using proper-support perfect direct image for U -> S. Supporting tool: 0CSL (lemma-characterize-pseudo-coherent). Supporting argument in Tag 0CSL: Tag 0CSD, lemma-flat-proper-pseudo-coherent-direct-image-general, pseudo-coherence conclusion",
+   "via": [
+    "lem-sfb-pseudocoherent-tensor-relative-criterion",
+    "lem-sfb-perfect-tests-detect-pseudocoherence",
+    "lem-sfb-relative-acyclic-direct-image",
+    "lem-sfb-rational-contraction-line-cohomology",
+    "lem-sfb-elementary-contraction-evaluation",
+    "lem-sfb-knudsen-pointed-forgetful-universal-curve",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-flat-proper-pseudocoherent-direct-image",
+  "worker": "stage1",
+  "group": "Q42",
+  "summary": "Expanded the perfect-approximation argument behind 0CSC specialized to the structure sheaf, using only existing DAG statements. Made the shifted cohomological estimate and local all-m conclusion explicit. No statement change and no new nodes.",
+  "blueprint": "Supporting coherent-complex prerequisite recorded in the inherited from.place, through 0CSL/0CSD. Read latest sk-thm-sf-ctf-stability-direct-images.proof.md, (3): this is a generic coherent tool in the inherited alteration/cohomology branch, not a replacement of its six-functor route. The ancestor command returns None, retained.",
+  "tool_uses": [
+   {
+    "node": "lem-pc-derived-direct-image-uniform-truncation-bound",
+    "why": "Generic scheme or unbounded-derived-category tool for the explicitly written approximation argument; the unit supplies no alternative coherent-complex statement."
+   },
+   {
+    "node": "lem-pc-proper-support-perfect-direct-image",
+    "why": "Generic scheme or unbounded-derived-category tool for the explicitly written approximation argument; the unit supplies no alternative coherent-complex statement."
+   },
+   {
+    "node": "lem-pc-restrict-derived-direct-image-open",
+    "why": "Generic scheme or unbounded-derived-category tool for the explicitly written approximation argument; the unit supplies no alternative coherent-complex statement."
+   },
+   {
+    "node": "lem-pc-right-derived-functor-triangulated",
+    "why": "Generic scheme or unbounded-derived-category tool for the explicitly written approximation argument; the unit supplies no alternative coherent-complex statement."
+   },
+   {
+    "node": "lem-pc-supported-qcoh-triangulated",
+    "why": "Generic scheme or unbounded-derived-category tool for the explicitly written approximation argument; the unit supplies no alternative coherent-complex statement."
+   },
+   {
+    "node": "lem-sc-pseudo-coherent-qcoh",
+    "why": "Generic scheme or unbounded-derived-category tool for the explicitly written approximation argument; the unit supplies no alternative coherent-complex statement."
+   },
+   {
+    "node": "lem-weil-pbc-closed-subset-proper-over-base-properties",
+    "why": "Generic scheme or unbounded-derived-category tool for the explicitly written approximation argument; the unit supplies no alternative coherent-complex statement."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pc-derived-direct-image-uniform-truncation-bound",
+  "lem-pc-proper-support-perfect-direct-image",
+  "lem-pc-restrict-derived-direct-image-open",
+  "lem-pc-right-derived-functor-triangulated",
+  "lem-pc-supported-qcoh-triangulated",
+  "lem-sc-pseudo-coherent-qcoh",
+  "lem-weil-pbc-closed-subset-proper-over-base-properties"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q42-c31cd2cf8",
+  "group": "Q42",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q42-c31cd2cf8 (reviewer sub-agent of L); spot-checked: I read the whole item and the statement of every cited node, and checked them against Stacks perfect.tex 0CSC, 0CSE and 0CSD (lines 7457-7568). There is no repair note for this item, so the re-split rules do not apply. The delivery has no new nodes. The statement matches the copy in the O1 snapshot where the node was created and is exactly the pseudo-coherence clause of 0CSD, not weakened. The six steps are the proof of 0CSC with G=O_Y[0] (b=0, so the sigma-truncation paragraph is not needed): (1) 08FE restriction to an affine V; f_V is proper and of finite presentation by base change and flat by stalks; Y_V is qcqs. (2) N from 08D5 and a perfect P approximating E at a=m-N-1 (08ES). (3) The long exact sequence gives H^i(C)=0 for i>=a, so C[a-1] has no positive cohomology. (4) 0A1H applies with G=O_Y[0]: finitely presented, flat over S, support Y proper over S, zero terms with empty support; the unitor gives Rf_*P perfect. (5) H^k(Rf_*C)=0 for k>=m-2, so Rf_*u is an isomorphism in degrees >=m. (6) Composing with local strictly perfect models gives m-pseudo-coherence for every m, then the local definition. I checked the arithmetic, the shift sign and the edge cases (zero or empty, identity map, unbounded-below complexes over non-Noetherian rings, non-quasi-compact base). No duplicates: single-open-pseudo-coherent is about one module, and flat-family-perfect-direct-image-pseudocoherent takes a perfect P under different hypotheses. I accept the seven declared tool_uses as generic coherent and derived-category tools; the other off-unit citations are Mathlib leaves. Batch-5 flag on lem-pc-proper-support-perfect-direct-image: its chain ends in the general definition def-trf-schematically-dense-open, and 0A1H is a coherent finiteness fact that is neither the trace formula, Poincare duality nor a step of their proofs, so the flag is generic. No SGA reference. No changes made."
+ }
+}

@@ -1,0 +1,300 @@
+{
+ "id": "lem-pur-etale-affine-integration-coefficient-equation",
+ "kind": "statement",
+ "title": "Coefficient equation for tensor-normalized affine integration",
+ "statement": "Let $k$ be a field of characteristic $p>0$, $\\ell\\ne p$ a prime, $V$ a separated finite-type $k$-scheme, $r\\geq0$, and $\\pi:X=\\mathbf A^r_V\\to V$ the projection [def-weil-pbc-scheme-conventions, def-sbc-affine-space]. Let $E,F$ be finite extensions of $\\mathbf Q_\\ell$ with chosen uniformizers $t,v$, let $m,n\\geq1$, put $A=\\mathcal O_E/t^m$, $B=\\mathcal O_F/v^n$, and fix an arbitrary unital map $A\\to B$ [def-weil-l-adic-coefficient-extension]. Use ordinary small-etale constant-ring module derived categories [def-weil-pbc-derived-categories], derived tensor [def-kun-derived-tensor], and $D^b_{ctf}$ for bounded constructible complexes of finite Tor amplitude [def-weil-pbc-constructible-complexes, def-kun-tor-amplitude]. For $R=A,B$, put $F_R=R\\pi_{!,R}$ for the standard compactification [def-amb-etale-compact-support], $W_R=R_X(r)[2r]$, and $H_RK=\\pi^*K(r)[2r]$, with the ordinary-etale Tate line of [thm-amb-vector-bundle-purity]. Let $t_R:F_RW_R\\to R_V$ be the vector-bundle integration of [def-amb-vector-integration]. Write $T_Z=-\\otimes_A^LB$ for $Z=X,V$, and let $q:T_VF_A\\xrightarrow{\\sim}F_BT_X$ be the proper-counit/open-tensor coefficient comparison of [lem-pur-etale-compact-scalar-coherence]. Let $w:T_XW_A\\xrightarrow{\\sim}W_B$ and $a_K:T_XH_AK\\xrightarrow{\\sim}H_BT_VK$ be the canonical coefficient/pullback, Tate and shift identifications of [lem-sp-affine-counit-scalar]. Write $P_{R;K,M}:K\\otimes_R^LF_RM\\to F_R(\\pi^*K\\otimes_R^LM)$ for the canonical projection map in [thm-amb-vector-bundle-purity], and put\n$$z_{R,K}=(1_K\\otimes t_R)\\circ P_{R;K,W_R}^{-1}:F_RH_RK\\to K,$$\nwith the canonical tensor identifications and unitors understood.\n\nThe rings $A,B$ are finite and are annihilated by $N=\\ell^{\\max(m,n)}$, which is invertible on $V$. The schemes $V$, $X$ and the standard compactification middle schemes are Noetherian. The functors $T_Z$, $F_R$, $H_R$ and the ambient right adjoints $\\pi_R^\\times$ preserve the corresponding $D^b_{ctf}$ subcategories. Site comparison gives equivalences on these subcategories and its canonical tensor comparisons intertwine $T_Z$, inverse image, Tate powers and shifts [lem-sp-etale-ctf-chart-domain]. For every $K\\in D^b_{ctf}(V_{et},A)$ the actual maps satisfy\n$$t_B\\circ F_B(w)\\circ q_{W_A}=T_V(t_A),$$\n$$z_{B,T_VK}\\circ F_B(a_K)\\circ q_{H_AK}=T_V(z_{A,K}).$$\nThese are equalities for the specified compactification coefficient map, with no flatness or finite projective-dimension assumption on $B$ over $A$.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-reduction/sk-lem-sp-reduction-exceptional.proof.md",
+  "place": "Charts: coefficient compatibility of iterated projective-line integration, its tensor-normalized counit, and the finite-stage domains; returned parent proof Steps 1–3."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-scheme-conventions",
+  "def-sbc-affine-space",
+  "def-weil-l-adic-coefficient-extension",
+  "def-weil-pbc-derived-categories",
+  "def-kun-derived-tensor",
+  "def-weil-pbc-constructible-complexes",
+  "def-kun-tor-amplitude",
+  "def-amb-etale-compact-support",
+  "thm-amb-vector-bundle-purity",
+  "def-amb-vector-integration",
+  "lem-pur-etale-compact-scalar-coherence",
+  "lem-sp-affine-counit-scalar",
+  "lem-sp-etale-ctf-chart-domain",
+  "def-pur-integration-scalar-objects"
+ ],
+ "proof": [
+  {
+   "text": "Use sf_bc_adic_ring_domain at m+1 and n+1. Evaluate its annihilation assertion at 1, transport through ULift.down, and multiply each zero power by the complementary power to obtain ell^max(m+1,n+1)=0 in both coefficient rings. Specialize affine_counit_scalar to ordinaryFiniteUnit A S, whose constructible finite-Tor property follows from flatness of the constant coefficient sheaf (checked on stalks), its constructibility, placement in degree zero, and the finite-value/stalk constructibility comparison. This supplies IsNoetherian S, the invertible common modulus and the scalar counit equation. affineTraceNoetherian handles the ordered tower; finite type and quasi-compactness of the proper compactification map give Noetherianity of its middle scheme.",
+   "uses": [
+    "lem-sf-bc-adic-ring-domain",
+    "lem-sp-affine-counit-scalar",
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "def-amb-affine-trace-tower",
+    "lem-weil-pbc-constructible-etale-module-sheaf-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-reduction/sk-lem-sp-reduction-exceptional.proof.md",
+    "place": "Charts: coefficient compatibility of iterated projective-line integration, its tensor-normalized counit, and the finite-stage domains; returned parent proof Steps 1–3."
+   }
+  },
+  {
+   "text": "Explicitly identify etaleProperty with the source constructibleFiniteTor predicate: convert cohomology constructibility by isConstructibleEtaleModuleSheaf_iff_isConstructibleSheaf and interval vanishing by isGE_iff and isLE_iff. Apply the existing ordinary-etale constructibleFiniteTor_rightDerivedLowerShriek, constructibleFiniteTor_rightDerivedUpperShriek, constructibleFiniteTor_leftDerivedUpperStar and constructibleFiniteTor_tensor stability theorems. Transport the compact-support functor through rightDerivedLowerShriekIso; transport its ambient right adjoint by uniqueness of right adjoints. The ordered affine adjunction similarly identifies affineTraceRight with that ambient adjoint, so its value on the unit supplies the orientation coefficient domain. No vector-bundle coordinates or changed definition are used. etaleCtfChartDomain gives the site equivalences at S and the ordered tower; etaleCtfChartScalarDomain gives scalar preservation at both schemes. These are already proved source-library APIs (Stability/UpperShriek.lean:353, Stability/DirectImage.lean:342, Stability/Basic.lean:122, Stability/OpenImmersion.lean:103), used directly, rather than the similarly named pro-etale statements attached to sk-prop-sf-rf-shriek-preservation and thm-sf-ctf-stability. The small-etale finite-Tor and constructibility definitions are those of def-kun-tor-amplitude and def-weil-pbc-constructible-complexes.",
+   "uses": [
+    "lem-sp-etale-ctf-chart-domain",
+    "lem-weil-pbc-constructible-etale-module-sheaf-comparison",
+    "thm-amb-etale-exceptional-adjoint",
+    "lem-sp-affine-counit-scalar",
+    "def-kun-tor-amplitude",
+    "def-weil-pbc-constructible-complexes"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-reduction/sk-lem-sp-reduction-exceptional.proof.md",
+    "place": "Charts: coefficient compatibility of iterated projective-line integration, its tensor-normalized counit, and the finite-stage domains; returned parent proof Steps 1–3."
+   }
+  },
+  {
+   "text": "The proper finite-coefficient projection theorem applied to the proper map of the specified compactification, together with projectionMapOfCompactification_app_app and the two tensor symmetries, makes each compactScalarProjection invertible on every K. compactScalarOpen_normalization identifies the inverse open coefficient comparisons; equality of their isomorphisms then identifies etaleCoefficientMap with compactScalarMap. Prove the trace transport once over arbitrary finite coefficient rings in the private trace_equation lemma, then specialize to the finite Tate stages. Postcompose the unit-specialized affine_counit_scalar equation with unitIso and the derived coefficient-unit identification. Naturality of the actual transported adjunction counit moves unitIso across the B counit. Expanding the definition of unitIso cancels the inverse coefficient-unit isomorphism and gives exactly the displayed trace equation.",
+   "uses": [
+    "lem-etale-proper-projection-formula-finite",
+    "lem-pur-etale-compact-scalar-coherence",
+    "lem-sp-affine-counit-scalar",
+    "lem-sp-et-proet-coefficient-compatibility"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-reduction/sk-lem-sp-reduction-exceptional.proof.md",
+    "place": "Charts: coefficient compatibility of iterated projective-line integration, its tensor-normalized counit, and the finite-stage domains; returned parent proof Steps 1–3."
+   }
+  },
+  {
+   "text": "Apply the first conjunct of integrationTransposeScalarMate with the specified compactification, coefficient objects, coefficientIso, both traces, the established trace equation and the two projection-isomorphism families. etaleCompactScalarCoherence makes compactScalarMap invertible at IntegrationScalar.object. Expand comparisonInverse on this isomorphism domain, precompose the equality with compactScalarMap, and cancel hom followed by inverse. The resulting equality is literally the second clause of Equations, for every derived K and hence every finite-Tor constructible K.",
+   "uses": [
+    "lem-pur-integration-transpose-scalar-mate",
+    "lem-pur-etale-compact-scalar-coherence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-reduction/sk-lem-sp-reduction-exceptional.proof.md",
+    "place": "Charts: coefficient compatibility of iterated projective-line integration, its tensor-normalized counit, and the finite-stage domains; returned parent proof Steps 1–3."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sf-bc-adic-ring-domain",
+  "lem-sp-affine-counit-scalar",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "def-amb-affine-trace-tower",
+  "lem-weil-pbc-constructible-etale-module-sheaf-comparison",
+  "lem-sp-etale-ctf-chart-domain",
+  "thm-amb-etale-exceptional-adjoint",
+  "def-kun-tor-amplitude",
+  "def-weil-pbc-constructible-complexes",
+  "lem-etale-proper-projection-formula-finite",
+  "lem-pur-etale-compact-scalar-coherence",
+  "lem-sp-et-proet-coefficient-compatibility",
+  "lem-pur-integration-transpose-scalar-mate"
+ ],
+ "proof_origin": {
+  "by": "worker W6",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-reduction/sk-lem-sp-reduction-exceptional.proof.md",
+  "place": "Charts paragraph; direct use of the unit-specialized ordered affine scalar counit, existing ordinary-etale finite-Tor stability, and integrationTransposeScalarMate."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For affine space projection over finite coefficient stages the tensor normalized vector integration counit commutes with derived extension of coefficients via the compact support projection formula",
+   "results": "8 hits: Profinite.NobelingProof.GoodProducts.square_commutes, Condensed.profiniteSolidCounit, Profinite.NobelingProof.GoodProducts.smaller_factorization, Profinite.NobelingProof.πs', Profinite.NobelingProof.CC_comp_zero, Pi.counit_comp_dFinsuppCoeFnLinearMap, Pi.counit_comp_finsuppLcoeFun, AlgebraicGeometry.AffineSpace.homOfVector_toSpecMvPoly",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary monoidal adjunctions, algebraic/analytic scalar extension or unrelated counits; none states the affine etale integration coefficient equation or its finite-Tor domains."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction, CategoryTheory.MonoidalCategory",
+   "results": "12 hits: CategoryTheory.Adjunction.leftAdjointOplaxMonoidal, CategoryTheory.Adjunction.rightAdjointLaxMonoidal, CategoryTheory.Adjunction.IsMonoidal, CategoryTheory.Adjunction.laxMonoidalEquivOplaxMonoidal, CategoryTheory.Adjunction.instIsMonoidal, CategoryTheory.Adjunction.instIsMonoidal_1, CategoryTheory.Adjunction.isMonoidal_comp, CategoryTheory.Adjunction.IsMonoidal.leftAdjoint_ε",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary monoidal adjunctions, algebraic/analytic scalar extension or unrelated counits; none states the affine etale integration coefficient equation or its finite-Tor domains."
+  },
+  {
+   "tool": "grep",
+   "query": "integration.*(scalar|coefficient)|coefficient.*integration|compactSupport.*projection",
+   "results": "0 hits: ; subdirectory Mathlib/CategoryTheory",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary monoidal adjunctions, algebraic/analytic scalar extension or unrelated counits; none states the affine etale integration coefficient equation or its finite-Tor domains."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived scalar extension preserves the tensor normalized compact support integration counit of affine space",
+   "results": "8 hits: ModuleCat.RestrictionCoextensionAdj.counit', Bornology.IsVonNBounded.extend_scalars, AlgHom.extendScalars, instSeminormedAddCommGroupRestrictScalars, Algebra.Generators.toExtendScalars, Algebra.Generators.extendScalars_val, LinearMap.extendScalarsOfSurjective, Module.RestrictScalars.normedSpaceOrig",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary monoidal adjunctions, algebraic/analytic scalar extension or unrelated counits; none states the affine etale integration coefficient equation or its finite-Tor domains."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The trace at the coefficient unit and the compact support projection formula imply scalar compatibility of integration tensored with a constructible complex",
+   "results": "8 hits: ContinuousLinearMap.integral_comp_commSL, ContDiffMapSupportedIn.structureMapCLM_eq_of_scalars, ContDiffMapSupportedIn.structureMapLM_eq_of_scalars, curveIntegral_restrictScalars, LinearMap.trace_tensorProduct, CompactlySupportedContinuousMap.integralLinearMap_apply, MeasureTheory.Measure.integral_isAddLeftInvariant_eq_smul_of_hasCompactSupport, MeasureTheory.Measure.integral_isMulLeftInvariant_eq_smul_of_hasCompactSupport",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary monoidal adjunctions, algebraic/analytic scalar extension or unrelated counits; none states the affine etale integration coefficient equation or its finite-Tor domains."
+  },
+  {
+   "tool": "grep",
+   "query": "upperShriek|compactSupport|integration.*counit|Tate.*coefficient",
+   "results": "0 hits: ; subdirectory Mathlib/AlgebraicGeometry",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary monoidal adjunctions, algebraic/analytic scalar extension or unrelated counits; none states the affine etale integration coefficient equation or its finite-Tor domains."
+  },
+  {
+   "tool": "grep",
+   "query": "integration.*(scalar|coefficient)|coefficient.*integration|compactSupport.*projection",
+   "results": "{\"t\": \"2026-10-22T07:27:36Z\", \"tool\": \"grep\", \"query\": \"integration.*(scalar|coefficient)|coefficient.*integration|compactSupport.*projection\", \"sub\": \"CategoryTheory\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: read returned hits; general monoidal adjunctions, tensor polynomial laws, analytic compact support or etale ring algebra do not state the specified geometric integration equations or finite-Tor domains."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The projection formula and scalar compatibility of the unit trace imply coefficient compatibility of tensor normalized integration",
+   "results": "{\"t\": \"2026-10-22T07:27:36Z\", \"tool\": \"leansearch\", \"query\": \"The projection formula and scalar compatibility of the unit trace imply coefficient compatibility of tensor normalized integration\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"PiTensorProduct.mapL_smul\", \"Algebra.normalizedTrace\", \"TensorProduct.CompatibleSMul.unit\", \"TensorProduct.CompatibleSMul.mk\", \"PiTensorProduct.smul_tprodCoeff\", \"TensorProduct.CompatibleSMul.isScalarTower\", \"PiTensorProduct.tprodCoeff_eq_smul_tprod\", \"PiTensorProduct.instIsScalarTower\"], \"digest\": \"391a055f6b214cbc\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: read returned hits; general monoidal adjunctions, tensor polynomial laws, analytic compact support or etale ring algebra do not state the specified geometric integration equations or finite-Tor domains."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction, CategoryTheory.MonoidalCategory",
+   "results": "{\"t\": \"2026-10-22T07:27:36Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.Adjunction, CategoryTheory.MonoidalCategory\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"CategoryTheory.Adjunction.leftAdjointOplaxMonoidal\", \"CategoryTheory.Adjunction.rightAdjointLaxMonoidal\", \"CategoryTheory.Adjunction.IsMonoidal\", \"CategoryTheory.Adjunction.laxMonoidalEquivOplaxMonoidal\", \"CategoryTheory.Adjunction.instIsMonoidal\", \"CategoryTheory.Adjunction.instIsMonoidal_1\", \"CategoryTheory.Adjunction.isMonoidal_comp\", \"CategoryTheory.Adjunction.IsMonoidal.leftAdjoint_ε\"], \"digest\": \"ec73ed347580c9e9\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: read returned hits; general monoidal adjunctions, tensor polynomial laws, analytic compact support or etale ring algebra do not state the specified geometric integration equations or finite-Tor domains."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Affine etale compact support integration tensor normalized counit commutes with arbitrary finite change of coefficients",
+   "results": "{\"t\": \"2026-10-22T07:27:39Z\", \"tool\": \"leanfinder\", \"query\": \"Affine etale compact support integration tensor normalized counit commutes with arbitrary finite change of coefficients\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"KaehlerDifferential.tensorKaehlerEquivOfFormallyEtale_apply\", \"Algebra.exists_etale_isIdempotentElem_forall_liesOver_eq\", \"Coalgebra.sum_counit_tmul_map_eq\", \"Algebra.Presentation.tensorModelOfHasCoeffsInv_aeval_val\", \"AlgebraicGeometry.Scheme.Hom.toNormalization_app_preimage\", \"KaehlerDifferential.tensorKaehlerEquivOfFormallyEtale\", \"KaehlerDifferential.tensorKaehlerEquivOfFormallyEtale_symm_D_algebraMap\", \"Algebra.Etale.exists_subalgebra_fg\"], \"digest\": \"75ebeb0ef9a4b1bf\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: read returned hits; general monoidal adjunctions, tensor polynomial laws, analytic compact support or etale ring algebra do not state the specified geometric integration equations or finite-Tor domains."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Compact support projection formula naturality under extension of coefficients and tensoring the affine space trace",
+   "results": "{\"t\": \"2026-10-22T07:28:30Z\", \"tool\": \"leanfinder\", \"query\": \"Compact support projection formula naturality under extension of coefficients and tensoring the affine space trace\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"PolynomialLaw.toFun'_eq_of_inclusion\", \"Finsupp.linearCombination_one_tmul\", \"TestFunction.coe_ofSupportedInCLM\", \"PolynomialLaw.toFun_eq_rTensor_φ_toFun'\", \"TestFunction.coe_ofSupportedInLM\", \"CompactlySupportedContinuousMap.compLinearMap\", \"Profinite.NobelingProof.πs'\", \"PolynomialLaw.factorsThrough_toFunLifted_π\"], \"digest\": \"ee022b7961fd3e9e\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: read returned hits; general monoidal adjunctions, tensor polynomial laws, analytic compact support or etale ring algebra do not state the specified geometric integration equations or finite-Tor domains."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-pur-etale-affine-projection-coefficient-mate",
+  "date": "2026-10-22",
+  "group": "Q104"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-thm-purity-transport",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "Finite-stage prerequisite of thm-pur-rational-and-qbar-purity, proof Steps 1–2 (launcher-created seed has no created.item blueprint ancestor). Ancestor finite-stage adjoint prerequisite, returned Step 8: identify the ordinary-etale affine projection mate with the current-blueprint counit-normalized smooth mate. Charts: coefficient compatibility of iterated projective-line integration, its tensor-normalized counit, and the finite-stage domains; returned parent proof Steps 1–3.",
+   "via": [
+    "lem-pur-etale-affine-projection-coefficient-mate",
+    "lem-pur-finite-coefficient-adjoint-comparisons",
+    "lem-pur-condensed-exceptional-reconstruction",
+    "nt-target-smooth-purity-qbar"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-pur-etale-affine-integration-coefficient-equation",
+  "worker": "stage1",
+  "summary": "No new nodes: coefficient and Noetherian prerequisites, finite-Tor domains and the ambient right-adjoint domain are checked; the ordered affine counit at the unit gives the first equality, and the actual compact-support projection square gives the second by explicit cancellation and substitution. Statement unchanged.",
+  "blueprint": "main-20261015 sk-lem-sp-reduction-exceptional.proof.md, Charts paragraph: projective-line iteration and its coefficient-compatible counit, followed by the canonical tensor/pullback/Tate/shift comparison. Steps 1–2 verify its finite-stage domains; Step 3 specializes its affine counit at the unit; Steps 4–5 give the tensor-normalized equation. The seed ancestry has from.node=null, as blueprint_refs ancestor reports; inherited via retained.",
+  "tool_uses": [
+   {
+    "node": "lem-sf-bc-adic-ring-domain",
+    "why": "Only the generic finite local-field coefficient-ring prerequisite (finite and killed by ell^n) is used; it supplies no geometric base-change route."
+   },
+   {
+    "node": "lem-sp-etale-ctf-chart-domain",
+    "why": "Generic finite-Tor domains and site tensor intertwinings for the existing affine-chart operations; it is already a statement dependency."
+   },
+   {
+    "node": "thm-amb-vector-bundle-purity",
+    "why": "The specified affine vector-bundle orientation identifies H with the ambient right adjoint and supplies the inverse canonical projection; already a statement dependency."
+   },
+   {
+    "node": "lem-sp-affine-counit-scalar",
+    "why": "The existing ordered affine counit coefficient identity at the unit, on the blueprint Charts route; already a statement dependency."
+   },
+   {
+    "node": "lem-amb-affine-space-top-trace",
+    "why": "Identifies the ordered counit at the coefficient unit with the specified affine trace; no general smooth-purity input."
+   },
+   {
+    "node": "lem-sp-et-proet-coefficient-compatibility",
+    "why": "Only the definition of the actual proper-counit/open-tensor coefficient map is used to identify beta with q."
+   },
+   {
+    "node": "lem-pur-etale-compact-scalar-coherence",
+    "why": "The generic actual projection/coefficient square, with its normalized tensor and unit maps; already a statement dependency."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sf-bc-adic-ring-domain",
+  "lem-sp-etale-ctf-chart-domain",
+  "lem-sp-affine-counit-scalar",
+  "lem-sp-et-proet-coefficient-compatibility",
+  "lem-pur-etale-compact-scalar-coherence"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q152-29998b587",
+  "group": "Q152",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q152-29998b587 (reviewer sub-agent of L); spot-checked: PASS, no changes. I read the item and all nine cited statements in full, plus the main-20261015 sk-lem-sp-reduction-exceptional.proof.md Charts paragraph (l.20-36) and cor-pur-vector-bundle-purity.proof.md l.16-25. The item was statement-only on base, so this is a first split, not a re-split. Statement unchanged, 0 new nodes, no SGA. Step 1: the ring node gives O_E/t^m finite and killed by l^m; l != p makes N invertible; a field is Noetherian, so the finite-type node applies. Step 2: the chart-domain hypotheses hold and give ctf preservation by T, F and H. Preservation by pi^x comes from thm-amb-vector-bundle-purity (A and B are O/varpi^n, V Noetherian), which gives gamma: H = pi^x for all K. Step 3: lem-sp-affine-counit-scalar at K=A_V. epsilon at the unit is t_{p_r} by the top-trace node, which equals t_pi on the one-chart cover by def-amb-vector-integration. beta (proper counit transpose then extension-by-zero balancing, via det-sp-reduction-direct-image) is the same arrow as q (lem-asd-proper-finite-coefficient-extension then open balancing). a_{A_V} composed with the unit is w. Steps 4-5: I recomputed the projection-square, naturality-in-M and cancellation algebra. P is invertible at M=W because the purity theorem uses PF^{-1} there. Edge cases checked: r=0, empty V, K=0, identity A->B, nonflat Z/l^2->Z/l, ramified stages. No cycle. Overlap: existing lem-pur-vector-trace-scalar-descent (Q106) states the global integration equation, which overlaps the item's first equation. It is not a fault of this split; maintainer note. Batch-5 flag: accepted. lem-trf-site-functorial-flat-resolution only gives functorial flat resolutions of module sheaves, a generic construction behind derived tensor, not a step of the trace formula or Poincare duality. The new citation also adds nothing to the closure: lem-sp-et-proet-coefficient-compatibility is already reached through the unchanged base stmt_dep lem-sp-affine-counit-scalar, and the set of trace-formula/Poincare nodes is the same with and without it. The off-unit tool_uses listed in split_report are generic Charts-route inputs, for the maintainer to record."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.EtaleAffineIntegrationCoefficientEquation",
+  "declaration": "AlgebraicGeometry.Etale.AffineIntegrationCoefficient.equation",
+  "declarations": [
+   "AlgebraicGeometry.Etale.AffineIntegrationCoefficient.ordinaryUnitIso",
+   "AlgebraicGeometry.Etale.AffineIntegrationCoefficient.compactification",
+   "AlgebraicGeometry.Etale.AffineIntegrationCoefficient.coefficient",
+   "AlgebraicGeometry.Etale.AffineIntegrationCoefficient.trace",
+   "AlgebraicGeometry.Etale.AffineIntegrationCoefficient.unitIso",
+   "AlgebraicGeometry.Etale.AffineIntegrationCoefficient.coefficientIso",
+   "AlgebraicGeometry.Etale.AffineIntegrationCoefficient.ambient",
+   "AlgebraicGeometry.Etale.AffineIntegrationCoefficient.Domain",
+   "AlgebraicGeometry.Etale.AffineIntegrationCoefficient.Equations",
+   "AlgebraicGeometry.Etale.AffineIntegrationCoefficient.equation"
+  ],
+  "file": "lean/Sheaf/Paper/EtaleAffineIntegrationCoefficientEquation.lean",
+  "statement": "theorem equation (ell p : ℕ) [Fact ell.Prime] (_hp : 0 < p) (_hEll : p ≠ ell) (k : Type u) [Field k] [CharP k p] (E F : Type u) [Field E] [Field F] [Algebra (Padic ell) E] [Algebra (Padic ell) F] [FiniteDimensional (Padic ell) E] [FiniteDimensional (Padic ell) F] (m n : ℕ) (φ : Scheme.finiteTateCoefficient ell E m →+* Scheme.finiteTateCoefficient ell F n) (S : Scheme.{u}) [S.Over (Spec (.of k))] [LocallyOfFiniteType (S ↘ Spec (.of k))] [QuasiCompact (S ↘ Spec (.of k))] [IsSeparated (S ↘ Spec (.of k))] (d : ℕ) : ∃ (hNoeth : IsNoetherian S) (hS : IsUnit ((ell ^ max (m + 1) (n + 1) : ℕ) : Γ(S, ⊤))) (hA : ((ell ^ max (m + 1) (n + 1) : ℕ) : Scheme.finiteTateCoefficient ell E m) = 0) (hB : ((ell ^ max (m + 1) (n + 1) : ℕ) : Scheme.finiteTateCoefficient ell F n) = 0), Finite (Scheme.finiteTateCoefficient ell E m) ∧ Finite (Scheme.finiteTateCoefficient ell F n) ∧ IsNoetherian (affineTraceTower S d) ∧ IsNoetherian (compactification S d).Z ∧ Domain (Scheme.finiteTateCoefficient ell E m) _ hA S d ∧ Domain (Scheme.finiteTateCoefficient ell F n) _ hB S d ∧ (∀ Z : Scheme.{u}, Z = S ∨ Z = affineTraceTower S d → ∀ K, ProEtale.AdjunctionTransfer.etaleProperty (Scheme.finiteTateCoefficient ell E m) Z K → ProEtale.AdjunctionTransfer.etaleProperty (Scheme.finiteTateCoefficient ell F n) Z ((scalarExtension φ Z).obj K)) ∧ @Equations.{u} _ (pow_pos (Fact.out : ell.Prime).pos _) (Scheme.finiteTateCoefficient ell E m) (Scheme.finiteTateCoefficient ell F n) _ _ _ _ φ hA hB S hNoeth hS d",
+  "branch": "newtargets-dag",
+  "by": "Q103",
+  "date": "2026-10-23",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-d82cc09ee",
+  "group": "Q103",
+  "result": "pass",
+  "note": "Re-delivery after the b7f3 RETURN (H2/theorem stmt_dep). Both Lean files are byte-identical to b7f3, so the earlier full clause check still holds: levels m+1,n+1, arbitrary phi, no flatness, Domain/T_Z clauses, both Equations with the actual q, w, a_K and unitor. In stmt_deps, lem-pur-integration-transpose-scalar-mate is replaced by the new def-pur-integration-scalar-objects: existing:true on Sheaf.Paper.IntegrationTransposeScalarMate, owning the plain defs IntegrationScalar.object/integration/comparison (l.37/45/73, no move or copy, no use of the theorem). Its statement field is verbatim; its prose matches G=Lf*K⊗W, z=P^-1;1⊗t;unitor and a=tensorIso;scalarPullbackIso;1⊗l; its source place cor-pur-vector-bundle-purity para 2 supports it; full §5 fields. The §1(B) AffineCounitScalar repair is still needed: N6's landed module is absent from both live clones and has no olean. The dep record changes only by/date/note, with the statement token-identical. It uses projectiveLineTraceDatum instead of N6's ambientAffineTraceDatum; this is canonical, and the counit at the unit is datum-independent via VectorIntegrationNormalization (∀ t,D). Advisories: the new node's Lean uses scalarPullbackIso/compactScalarProjection, owned outside its stmt_deps; keep one version if N6's lost module resurfaces. No compile run, no file changed."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "W6",
+  "result": "pass",
+  "landing": "20261025T002541-L-3133578",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

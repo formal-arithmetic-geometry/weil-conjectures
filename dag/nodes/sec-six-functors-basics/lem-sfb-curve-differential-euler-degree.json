@@ -1,0 +1,240 @@
+{
+ "id": "lem-sfb-curve-differential-euler-degree",
+ "kind": "statement",
+ "title": "Relative canonical differentials and the comparison of Euler and Picard degrees",
+ "statement": "Let $k$ be an algebraically closed field [def-weil-field], [def-weil-algebraic-closure], and let $C$ be a smooth proper connected curve of dimension one over $k$ [def-sc-curves]. Write $g(C)=\\dim_k H^1(C,\\mathcal O_C)$ [def-sc-genus], let $\\Omega_{C/k}$ be the relative differential sheaf of $C\\to\\operatorname{Spec}k$ [def-sc-relative-differential-sheaf], and write $\\omega_C=\\Omega^1_{C/k}$ for the canonical sheaf defined from the conormal sheaf of the diagonal [def-sc-kahler-differentials]. There is a canonical isomorphism $\\Omega_{C/k}\\simeq\\omega_C$, agreeing on every affine open $\\operatorname{Spec}R$ with the sheaf associated to the module $\\Omega_{R/k}$ of Kähler differentials [def-weil-pbc-kahler-differentials], and both sheaves are invertible [def-sc-invertible-module]. For every invertible $\\mathcal O_C$-module $N$, its Euler-characteristic degree [def-pc-degree-line-bundle], [def-pc-euler-characteristic] agrees with its degree in the Picard group [def-sc-pic0]:\n$$\\deg_k N:=\\chi(C,N)-\\chi(C,\\mathcal O_C)=\\deg_{\\mathrm{Pic}}[N].$$\nIn particular\n$$\\deg_k\\Omega_{C/k}=\\deg_k\\omega_C=2g(C)-2.$$",
+ "source": {
+  "document": "literature/stacks-project/curves.tex",
+  "place": "Tag 0C1A (curves-lemma-genus-smooth), canonical differential degree; Tag 0BS6 (curves-lemma-rr), comparison of degree conventions; the relative differential sheaf comparison is morphisms.tex Tag 08S2 (morphisms-lemma-differentials-diagonal)."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-weil-algebraic-closure",
+  "def-sc-curves",
+  "def-sc-genus",
+  "def-sc-relative-differential-sheaf",
+  "def-sc-kahler-differentials",
+  "def-weil-pbc-kahler-differentials",
+  "def-sc-invertible-module",
+  "def-pc-degree-line-bundle",
+  "def-pc-euler-characteristic",
+  "def-sc-pic0"
+ ],
+ "proof": [
+  {
+   "text": "By [lem-sc-diagonal-conormal-derivation-exists], choose the relative derivation into the diagonal conormal with its canonical difference normalization. By [def-sc-relative-differential-sheaf], $\\Omega_{C/k}$ has affine restrictions associated to $\\Omega_{R/k}$ with their universal derivations. Apply [lem-sc-smooth-proper-diagonal-conormal-differentials] to $C\\to\\operatorname{Spec}k$: its relative differential sheaf is precisely this sheaf. The diagonal is closed since $C$ is separated, and its conormal is $\\omega_C$ by [def-sc-kahler-differentials]. Inverting the canonical comparison therefore gives $\\Omega_{C/k}\\simeq\\omega_C$, with the asserted affine description. The compatibility of the universal derivations under restriction is part of the cited relative-differential definition.",
+   "uses": [
+    "def-sc-relative-differential-sheaf",
+    "lem-sc-smooth-proper-diagonal-conormal-differentials",
+    "def-sc-kahler-differentials",
+    "lem-sc-diagonal-conormal-derivation-exists"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 08S2, morphisms-lemma-differentials-diagonal, canonical comparison and its affine description"
+   }
+  },
+  {
+   "text": "The hypotheses of [lem-sc-canonical-sheaf] hold: $C$ is smooth, connected and of dimension one. Hence $\\omega_C$ is locally free of rank one. Restricting the isomorphism of Step 1 to any local trivialization of $\\omega_C$ gives a trivialization of $\\Omega_{C/k}$, so both sheaves are invertible.",
+   "uses": [
+    "lem-sc-canonical-sheaf"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 02G1, morphisms-lemma-smooth-omega-finite-locally-free, specialized to a smooth curve"
+   }
+  },
+  {
+   "text": "For any invertible $N$, apply the line-bundle clause of [lem-sc-riemann-roch]: $\\chi(C,N)=\\deg_{\\mathrm{Pic}}[N]+1-g$ and $\\chi(C,\\mathcal O_C)=1-g$. This clause explicitly uses the Picard/divisor degree of the statement, rather than defining degree by Euler characteristic. Subtraction and [def-pc-degree-line-bundle] give $\\deg_kN=(\\deg_{\\mathrm{Pic}}[N]+1-g)-(1-g)=\\deg_{\\mathrm{Pic}}[N]$. All hypotheses of the Riemann--Roch node are exactly the present algebraically closed field and proper smooth connected curve.",
+   "uses": [
+    "lem-sc-riemann-roch",
+    "def-pc-degree-line-bundle"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/curves.tex",
+    "place": "Tag 0BS6, curves-lemma-rr; preceding equations equation-degree and equation-degree-c1. The Picard-degree version is supplied by the existing lem-sc-riemann-roch statement."
+   }
+  },
+  {
+   "text": "By [lem-sc-canonical-degree] choose a divisor $K_C$ with $\\omega_C\\cong\\mathcal O_C(K_C)$ and $\\deg K_C=2g-2$. By [def-sc-pic0], $\\deg_{\\mathrm{Pic}}[\\omega_C]=\\deg_{\\mathrm{Pic}}[\\mathcal O_C(K_C)]=\\deg K_C$. Step 3 applied to the invertible $\\omega_C$ therefore gives $\\deg_k\\omega_C=2g-2$. Step 1 makes $\\Omega_{C/k}$ and $\\omega_C$ the same Picard class, and Step 3 applied to the invertible $\\Omega_{C/k}$ gives $\\deg_k\\Omega_{C/k}=\\deg_k\\omega_C=2g-2$.",
+   "uses": [
+    "lem-sc-canonical-degree",
+    "def-sc-pic0"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/curves.tex",
+    "place": "Tag 0C1A, curves-lemma-genus-smooth; canonical-divisor formulation supplied by lem-sc-canonical-degree."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sc-relative-differential-sheaf",
+  "lem-sc-smooth-proper-diagonal-conormal-differentials",
+  "def-sc-kahler-differentials",
+  "lem-sc-canonical-sheaf",
+  "lem-sc-riemann-roch",
+  "def-pc-degree-line-bundle",
+  "lem-sc-canonical-degree",
+  "def-sc-pic0",
+  "lem-sc-diagonal-conormal-derivation-exists"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/curves.tex",
+  "place": "Assembly of existing DAG statements for Stacks 08S2, 02G1, 0BS6 and 0C1A; the subtraction of the Picard-degree Riemann--Roch identities explicitly compares the two degree conventions."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For a smooth proper connected curve over an algebraically closed field the relative differential sheaf is the canonical invertible sheaf and its degree defined by Euler characteristic is two times the genus minus two",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"Algebra.IsStandardSmoothOfRelativeDimension.rank_kaehlerDifferential\", \"module\": \"Mathlib/RingTheory/Smooth/StandardSmoothCotangent\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S] [Nontrivial S] (n : ℕ)\\n  [Algebra.IsStandardSmoothOfRelativeDimension n R S], Module.rank S Ω[S⁄R] = ↑n\", \"doc\": \"If $ S $ is a non-trivial commutative ring that is a standard smooth algebra of relative dimension $ n $ over a commutative ring $ R $, then the rank of the module of Kähler differentials $ \\\\Omega_{S/\"}\n  {\"name\": \"Algebra.IsStandardSmoothOfRelativeDimension.iff_of_isStandardSmooth\", \"module\": \"Mathlib/RingTheory/Smooth/StandardSmoothCotangent\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S] [Nontrivial S]\\n  [Algebra.IsStandardSmooth R S] (n : ℕ), Algebra.IsStandardSmoothOfRelativeDimension n R S ↔ Module.rank S Ω[S⁄R] = ↑n\", \"doc\": \"For a non-trivial commutative ring $ S $ that is a standard smooth algebra over a commutative ring $ R $, $ S $ is a standard smooth algebra of relative dimension $ n $ over $ R $ if and only if the r\"}\n  {\"name\": \"Algebra.IsStandardSmoothOfRelationDimension.subsingleton_kaehlerDifferential\", \"module\": \"Mathlib/RingTheory/Smooth/StandardSmoothCotangent\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S]\\n  [Algebra.IsStandardSmoothOfRelativeDimension 0 R S], Subsingleton Ω[S⁄R]\", \"doc\": \"If $ S $ is a standard smooth algebra of relative dimension 0 over $ R $, then the module of Kähler differentials $ \\\\Omega_{S/R} $ is zero.\"}\n  {\"name\": \"Algebra.IsStandardSmooth.iff_exists_basis_kaehlerDifferential\", \"module\": \"Mathlib/RingTheory/Smooth/StandardSmoothOfFree\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S]\\n  [Algebra.FinitePresentation R S],\\n  Algebra.IsStandardSmooth R S ↔\\n    Subsingleton (Algebra.H1Cotangent R S) ∧ ∃ I b, Set.range ⇑b ⊆ Set.range ⇑(KaehlerDifferential.D R S)\", \"doc\": \"An $ R $-algebra $ S $ of finite presentation is standard smooth if and only if the first cohomology group $ H^1 $ of its cotangent complex is trivial (a subsingleton) and there exists a basis for the\"}\n  {\"name\": \"Algebra.IsStandardSmooth.free_kaehlerDifferential\", \"module\": \"Mathlib/RingTheory/Smooth/StandardSmoothCotangent\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S]\\n  [Algebra.IsStandardSmooth R S], Module.Free S Ω[S⁄R]\", \"doc\": \"For a standard smooth algebra $ S $ over a commutative ring $ R $, the module of Kähler differentials $ \\\\Omega_{S/R} $ is a free $ S $-module. This follows from the fact that standard smooth algebras \"}\n  {\"name\": \"Algebra.SubmersivePresentation.rank_kaehlerDifferential\", \"module\": \"Mathlib/RingTheory/Smooth/StandardSmoothCotangent\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} {ι : Type u_3} {σ : Type u_4} [inst : CommRing R] [inst_1 : CommRing S]\\n  [inst_2 : Algebra R S] [inst_3 : Finite σ] [Nontrivial S] [Finite ι] (P : Algebra.SubmersivePresentation R S ι σ),\\n  Module.rank S Ω[S⁄R] = ↑P.dimension\", \"doc\": \"For a submersive presentation $ P $ of an $ R $-algebra $ S $ with finite generating set $ \\\\iota $, the rank of the module of Kähler differentials $ \\\\Omega_{S/R} $ over $ S $ equals the dimension of $\"}\n  {\"name\": \"FunctionField.classNumber\", \"module\": \"Mathlib/NumberTheory/ClassNumber/FunctionField\", \"type\": \"(Fq : Type u_1) →\\n  (F : Type u_2) →\\n    [inst : Field Fq] →\\n      [Fintype Fq] →\\n        [inst_2 : Field F] →\\n          [inst_3 : Algebra (Polynomial Fq) F] →\\n            [inst_4 : Algebra (RatFunc Fq) F] →\\n              [IsScalarTower (Polynomial Fq) (RatFunc Fq) F] →\\n                [FunctionFiel\", \"doc\": \"The class number is defined as the cardinality of the class group of the ring of integers $\\\\mathcal{O}_F$ (the integral closure of $\\\\mathbb{F}_q[X]$) in a function field $F$ over the finite field $\\\\ma\"}\n  {\"name\": \"Algebra.IsStandardSmooth.of_basis_kaehlerDifferential\", \"module\": \"Mathlib/RingTheory/Smooth/StandardSmoothOfFree\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S]\\n  [Algebra.FinitePresentation R S] [Subsingleton (Algebra.H1Cotangent R S)] {I : Type u_3}\\n  (b : Module.Basis I S Ω[S⁄R]), Set.range ⇑b ⊆ Set.range ⇑(KaehlerDifferential.D R S) → Algebra.IsStandardSmoot\", \"doc\": \"If $ S $ is finitely presented over $ R $, the first cohomology group $ H^1 $ of the cotangent complex of $ S $ over $ R $ is trivial, and there exists a basis for the module of Kähler differentials $\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: all returned hits were read; none identifies both degree conventions and the canonical differential bundle"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"genus\", \"degree\"",
+   "results": "[loogle] OK 0 hit(s)",
+   "date": "2026-10-22",
+   "verdict": "no match: all returned hits were read; none identifies both degree conventions and the canonical differential bundle"
+  },
+  {
+   "tool": "grep",
+   "query": "(canonical|differential|omega).*(degree|euler)|(degree|euler).*(canonical|differential|omega)|Riemann.?Roch",
+   "results": "[grep] OK 0 hit(s)",
+   "date": "2026-10-22",
+   "verdict": "no match: all returned hits were read; none identifies both degree conventions and the canonical differential bundle"
+  },
+  {
+   "tool": "leansearch",
+   "query": "On a smooth projective curve the Euler characteristic degree of any invertible sheaf equals its Picard divisor degree and the canonical sheaf has degree 2g-2",
+   "results": "[leansearch] UNAVAILABLE 0 hit(s) | service unavailable: {\"error\":\"Rate limit exceeded: 60 per 1 minute\"}\n  This kind of search is not available now. It is recorded as unavailable; use the other kinds and grep, and do not write a verdict for it.",
+   "date": "2026-10-22",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Comparing divisor degree with chi of a line bundle minus chi of the structure sheaf on a smooth proper curve, and canonical Kahler differential bundle degree 2 genus minus 2",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"FunctionField.classNumber\", \"module\": \"Mathlib/NumberTheory/ClassNumber/FunctionField\", \"type\": \"(Fq : Type u_1) →\\n  (F : Type u_2) →\\n    [inst : Field Fq] →\\n      [Fintype Fq] →\\n        [inst_2 : Field F] →\\n          [inst_3 : Algebra (Polynomial Fq) F] →\\n            [inst_4 : Algebra (RatFunc Fq) F] →\\n              [IsScalarTower (Polynomial Fq) (RatFunc Fq) F] →\\n                [FunctionFiel\", \"doc\": \"The class number is defined as the cardinality of the class group of the ring of integers $\\\\mathcal{O}_F$ (the integral closure of $\\\\mathbb{F}_q[X]$) in a function field $F$ over the finite field $\\\\ma\"}\n  {\"name\": \"WeierstrassCurve.Affine.CoordinateRing.degree_norm_smul_basis\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Affine/Point\", \"type\": \"∀ {R : Type r} [inst : CommRing R] {W' : WeierstrassCurve.Affine R} [IsDomain R] (p q : Polynomial R),\\n  ((Algebra.norm (Polynomial R)) (p • 1 + q • (WeierstrassCurve.Affine.CoordinateRing.mk W') Polynomial.X)).degree =\\n    max (2 • p.degree) (2 • q.degree + 3)\", \"doc\": \"For an integral domain $ R $, and polynomials $ p, q \\\\in R[X] $, the degree of the norm of the element $ p \\\\cdot 1 + q \\\\cdot Y $ in the coordinate ring of an affine Weierstrass curve over $ R $ is equ\"}\n  {\"name\": \"WeierstrassCurve.Affine.CoordinateRing.mk_XYIdeal'_mul_mk_XYIdeal'\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Affine/Point\", \"type\": \"∀ {F : Type u} [inst : Field F] {W : WeierstrassCurve.Affine F} [inst_1 : DecidableEq F] {x₁ x₂ y₁ y₂ : F}\\n  (h₁ : W.Nonsingular x₁ y₁) (h₂ : W.Nonsingular x₂ y₂) (hxy : ¬(x₁ = x₂ ∧ y₁ = W.negY x₂ y₂)),\\n  ClassGroup.mk (WeierstrassCurve.Affine.CoordinateRing.XYIdeal' h₁) *\\n      ClassGroup.mk (Weier\", \"doc\": \"For an affine Weierstrass curve $ W $ over a field $ F $, if $ (x_1, y_1) $ and $ (x_2, y_2) $ are nonsingular points on $ W $ that are not inverses (i.e., $ x_1 \\neq x_2 $ or $ y_1 \\neq -y_2 - a_1 x_2 \"}\n  {\"name\": \"WeierstrassCurve.Affine.CoordinateRing.degree_norm_ne_one\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Affine/Point\", \"type\": \"∀ {R : Type r} [inst : CommRing R] {W' : WeierstrassCurve.Affine R} [IsDomain R] (x : W'.CoordinateRing),\\n  ((Algebra.norm (Polynomial R)) x).degree ≠ 1\", \"doc\": \"For any element $ x $ in the coordinate ring of an affine Weierstrass curve over a domain $ R $, the degree of the norm of $ x $ as an element of $ R[X] $ is not equal to 1. This norm arises from the \"}\n  {\"name\": \"WeierstrassCurve.Affine.CoordinateRing.natDegree_norm_ne_one\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Affine/Point\", \"type\": \"∀ {R : Type r} [inst : CommRing R] {W' : WeierstrassCurve.Affine R} [IsDomain R] (x : W'.CoordinateRing),\\n  ((Algebra.norm (Polynomial R)) x).natDegree ≠ 1\", \"doc\": \"For any element $x$ in the coordinate ring of an affine Weierstrass curve over a domain $R$, the natural degree of the norm of $x$ in the polynomial ring $R[X]$ is not equal to 1.\"}\n  {\"name\": \"WeierstrassCurve.Affine.CoordinateRing.mk_XYIdeal'_neg_mul\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Affine/Point\", \"type\": \"∀ {F : Type u} [inst : Field F] {W : WeierstrassCurve.Affine F} {x y : F} (h : W.Nonsingular x y),\\n  ClassGroup.mk (WeierstrassCurve.Affine.CoordinateRing.XYIdeal' ⋯) *\\n      ClassGroup.mk (WeierstrassCurve.Affine.CoordinateRing.XYIdeal' h) =\\n    1\", \"doc\": \"For a nonsingular point $(x, y)$ on an affine Weierstrass curve $W$ over a field $F$, the product of the class group elements corresponding to the invertible fractional ideals $XYIdeal'$ at $(x, y)$ a\"}\n  {\"name\": \"locallyFinsuppWithin.logCounting_divisor\", \"module\": \"Mathlib/Analysis/Complex/ValueDistribution/LogCounting/Basic\", \"type\": \"∀ {f : ℂ → ℂ},\\n  Function.locallyFinsuppWithin.logCounting (MeromorphicOn.divisor f ⊤) =\\n    ValueDistribution.logCounting f 0 - ValueDistribution.logCounting f ⊤\", \"doc\": \"For a meromorphic function $ f $ on a proper space, the log-counting function of the divisor of $ f $ evaluated at the top element $\\\\top$ is equal to the difference between the log-counting functions \"}\n  {\"name\": \"WeierstrassCurve.natDegree_preΨ'_le\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/DivisionPolynomial/Degree\", \"type\": \"∀ {R : Type u} [inst : CommRing R] (W : WeierstrassCurve R) (n : ℕ),\\n  (W.preΨ' n).natDegree ≤ (n ^ 2 - if Even n then 4 else 1) / 2\", \"doc\": \"For any natural number $ n $, the natural degree of the $ n $-th pre-normalized division polynomial $ \\\\Psi'_n $ associated with a Weierstrass curve satisfies $ \\\\deg(\\\\Psi'_n) \\\\leq \\\\frac{n^2 - 4}{2} $ i\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: all returned hits were read; none identifies both degree conventions and the canonical differential bundle"
+  },
+  {
+   "tool": "grep",
+   "query": "(canonical|differential|omega).*(degree|euler)|(degree|euler).*(canonical|differential|omega)|Riemann.?Roch",
+   "results": "OK 20 hit(s); Mathlib/NumberTheory/NumberField/CanonicalEmbedding/Basic.lean, Mathlib/NumberTheory/NumberField/CanonicalEmbedding/Basic.lean, Mathlib/Algebra/Homology/HomotopyCategory/HomComplex.lean, Mathlib/Algebra/Homology/HomotopyCategory/DegreewiseSplit.lean, Mathlib/Algebra/Homology/HomotopyCategory/DegreewiseSplit.lean, Mathlib/Algebra/Homology/HomotopyCategory/DegreewiseSplit.lean, Mathlib/Algebra/Homology/HomotopyCategory/DegreewiseSplit.lean, Mathlib/Algebra/Homology/Factorizations/CM5b.lean",
+   "date": "2026-10-23",
+   "verdict": "no match: read the returned hits; ring-level differential ranks, local cotangent dimensions, function-field class numbers, elliptic polynomial degrees and unrelated Euler characteristics do not state the scheme-theoretic comparison and degree identities."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"genus\", \"degree\"",
+   "results": "OK 0 hit(s); none",
+   "date": "2026-10-23",
+   "verdict": "no match: read the returned hits; ring-level differential ranks, local cotangent dimensions, function-field class numbers, elliptic polynomial degrees and unrelated Euler characteristics do not state the scheme-theoretic comparison and degree identities."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "On a smooth proper connected curve over an algebraically closed field relative differentials identify with diagonal conormal, form a line bundle, and Euler degree equals divisor degree with canonical degree 2g-2",
+   "results": "OK 8 hit(s); Algebra.IsStandardSmoothOfRelationDimension.subsingleton_kaehlerDifferential, Algebra.IsStandardSmoothOfRelativeDimension.rank_kaehlerDifferential, Algebra.IsStandardSmooth.free_kaehlerDifferential, Algebra.IsStandardSmoothOfRelativeDimension.iff_of_isStandardSmooth, Algebra.IsStandardSmooth.of_basis_kaehlerDifferential, WeierstrassCurve.Affine.CoordinateRing.mk_XYIdeal'_mul_mk_XYIdeal', KaehlerDifferential.finite, WeierstrassCurve.Affine.CoordinateRing.mk_XYIdeal'_neg_mul",
+   "date": "2026-10-23",
+   "verdict": "no match: read the returned hits; ring-level differential ranks, local cotangent dimensions, function-field class numbers, elliptic polynomial degrees and unrelated Euler characteristics do not state the scheme-theoretic comparison and degree identities."
+  },
+  {
+   "tool": "grep",
+   "query": "genus|Riemann.?Roch|eulerChar|canonicalSheaf",
+   "results": "OK 0 hit(s); none; Mathlib subdirectory AlgebraicGeometry",
+   "date": "2026-10-23",
+   "verdict": "no match: read the returned hits; ring-level differential ranks, local cotangent dimensions, function-field class numbers, elliptic polynomial degrees and unrelated Euler characteristics do not state the scheme-theoretic comparison and degree identities."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The degree of the canonical line bundle on a smooth proper curve equals 2g-2 and Euler characteristic degree agrees with Picard divisor degree",
+   "results": "OK 8 hit(s); WeierstrassCurve.Affine.degree_polynomial, WeierstrassCurve.natDegree_ΨSq, IncidenceAlgebra.eulerChar, WeierstrassCurve.natDegree_preΨ', WeierstrassCurve.Affine.natDegree_polynomial, WeierstrassCurve.natDegree_Ψ₃, WeierstrassCurve.natDegree_preΨ'_pos, WeierstrassCurve.j",
+   "date": "2026-10-23",
+   "verdict": "no match: read the returned hits; ring-level differential ranks, local cotangent dimensions, function-field class numbers, elliptic polynomial degrees and unrelated Euler characteristics do not state the scheme-theoretic comparison and degree identities."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Riemann Roch for line bundles on a proper smooth algebraic curve: Euler characteristic is divisor degree plus one minus genus; the cotangent sheaf has degree twice genus minus two",
+   "results": "OK 8 hit(s); WeierstrassCurve.Affine.CoordinateRing.mk_XYIdeal'_mul_mk_XYIdeal', Algebra.IsStandardSmoothOfRelativeDimension.rank_kaehlerDifferential, IsLocalRing.finrank_CotangentSpace_eq_one, FunctionField.classNumber, IsLocalRing.finrank_cotangentSpace_eq_zero, Algebra.IsStandardSmoothOfRelativeDimension.iff_of_isStandardSmooth, Algebra.smoothLocus_eq_compl_support_inter, WeierstrassCurve.Affine.CoordinateRing.mk_XYIdeal'_neg_mul",
+   "date": "2026-10-23",
+   "verdict": "no match: read the returned hits; ring-level differential ranks, local cotangent dimensions, function-field class numbers, elliptic polynomial degrees and unrelated Euler characteristics do not state the scheme-theoretic comparison and degree identities."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-curve-riemann-hurwitz-numerical",
+  "date": "2026-10-22",
+  "group": "Q36"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), auxiliary high-genus-cover argument in the alteration reduction: the finite-curve genus comparison used to exclude rational curves. Riemann--Hurwitz for the separable factor, retaining the full effective different in wild characteristic (Stacks 0C1B). Original item Steps 2 and 4: relative versus diagonal-conormal differentials and the comparison of Euler-characteristic degree with Picard/divisor degree before using canonical degree 2g-2.",
+   "via": [
+    "lem-sfb-curve-riemann-hurwitz-numerical",
+    "lem-sfb-finite-curve-genus-monotonicity",
+    "lem-sfb-high-genus-equivariant-cover",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-curve-differential-euler-degree",
+  "worker": "stage1",
+  "summary": "NU read the local Stacks sources and the cited node statements, checked all curve hypotheses and both degree conventions, and split the item into four short applications and calculations. Reused existing general diagonal comparison, invertibility, Picard-degree Riemann--Roch and canonical-divisor nodes; no new nodes or statement changes. Fresh logged Mathlib searches found no match for the complete item. Repair of return at a2180b59fcb: compared the retained split with the returned head and the current unsplit live item; re-read all cited statements and their hypotheses. Step 1 now explicitly cites the definition fixing the relative differential sheaf and restriction-compatible universal derivations. Delivery is rebuilt on current origin/sheaf-dag; no completion or promotion metadata is changed by NU.",
+  "blueprint": "det-thm-sf-ctf-stability-direct-images, proof (3), auxiliary high-genus-cover argument in the alteration reduction: the finite-curve genus comparison used to exclude rational curves. Riemann--Hurwitz for the separable factor, retaining the full effective different in wild characteristic (Stacks 0C1B). Original item Steps 2 and 4: relative versus diagonal-conormal differentials and the comparison of Euler-characteristic degree with Picard/divisor degree before using canonical degree 2g-2.",
+  "tool_uses": [
+   {
+    "node": "lem-sc-smooth-proper-diagonal-conormal-differentials",
+    "why": "General comparison of relative differentials with diagonal conormal, used as a geometric tool for the high-genus-cover auxiliary curve calculation."
+   },
+   {
+    "node": "lem-sc-canonical-sheaf",
+    "why": "Invertibility of canonical differentials on a smooth curve; the unit does not reprove this local geometric tool."
+   },
+   {
+    "node": "lem-sc-riemann-roch",
+    "why": "The existing Picard-degree line-bundle formula supplies the degree-convention comparison by subtraction; it is a curve-theoretic tool within the prescribed alteration route."
+   },
+   {
+    "node": "lem-sc-canonical-degree",
+    "why": "Existing canonical-divisor degree formula for the same smooth proper connected curve, used as a black box within the auxiliary genus comparison."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sc-smooth-proper-diagonal-conormal-differentials",
+  "lem-sc-canonical-sheaf",
+  "lem-sc-riemann-roch",
+  "lem-sc-canonical-degree"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-NU-0865ae2be",
+  "group": "NU",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NU-0865ae2be (reviewer sub-agent of L); spot-checked: This re-delivers a2180b59, which was reviewed PASS and then refused at landing because the side completion had not been promoted. The only changes are that Step 1 now cites def-sc-relative-differential-sheaf (also added to proof_deps) and a new split_report summary; the statement, stmt_deps and steps 2-4 are byte-identical. Step 1: def-sc-relative-differential-sheaf gives the affine restrictions (Omega_{A/R})~ with compatible universal derivations; lem-sc-smooth-proper-diagonal-conormal-differentials gives C_Delta ≅ Omega^1_{X/S} for any morphism, with S=Spec k so every affine qualifies; def-sc-kahler-differentials gives omega_C = Delta^*(I/I^2), with Delta closed because C is separated. Step 2: lem-sc-canonical-sheaf has its hypotheses (smooth, connected, dimension one). Step 3: lem-sc-riemann-roch clause 1 uses the Picard degree of def-sc-pic0 and gives chi(O)=1-g; subtracting and applying def-pc-degree-line-bundle gives Euler degree = Picard degree. Step 4: lem-sc-canonical-degree gives K_C of degree 2g-2, and def-sc-pic0 gives deg[O(D)] = deg D. Sources checked: Stacks 08S2 (morphisms.tex l.6507), 0BS6 (curves.tex l.1001, Euler-degree convention, correctly not used as the bridge) and 0C1A (curves.tex l.1543). Edge cases checked: P^1, genus 1, N=O_C, negative N. There are no new nodes and no cycle (only the item and its two citers mention its id). The four off-unit tool_uses are accepted. Batch-5 finding: lem-sc-riemann-roch and lem-sc-canonical-degree reach sec-trace-formula only through def-trf-schematically-dense-open, a general definition of a schematically dense open, by way of Nagata, Chow and coherent-finiteness nodes. Coherent Riemann-Roch and the canonical degree are neither given by the trace-formula or Poincare-duality assumptions nor part of their proofs, so the citations stay. No SGA source is used."
+ }
+}

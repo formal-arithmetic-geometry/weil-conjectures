@@ -1,0 +1,252 @@
+{
+ "id": "lem-sfb-additive-jordan-linear-compatibility",
+ "kind": "statement",
+ "title": "Additive linear Jordan parts: intertwiners, tensor sums and scalar extension",
+ "statement": "Let $k$ be a perfect field [def-weil-field], meaning every algebraic extension is separable. Let $V$ be a finite-dimensional $k$-vector space and $A:V\\to V$ a $k$-linear endomorphism. A linear endomorphism is geometrically semisimple if it is diagonalizable after extending scalars to an algebraic closure; it is nilpotent if some positive power is zero. There are unique commuting endomorphisms $A_s,A_n$ with $A=A_s+A_n$, $A_s$ geometrically semisimple and $A_n$ nilpotent. Both belong to $k[A]$, the subalgebra of $\\operatorname{End}_k(V)$ consisting of polynomials in $A$. If $B:W\\to W$ is another such endomorphism and $f:V\\to W$ is $k$-linear with $fA=Bf$, then $fA_s=B_sf$ and $fA_n=B_nf$. On $V\\otimes_k W$, put $C=A\\otimes1+1\\otimes B$; then $C_s=A_s\\otimes1+1\\otimes B_s$ and $C_n=A_n\\otimes1+1\\otimes B_n$. Here the tensor product is universal for bilinear maps, and $(A\\otimes B)(v\\otimes w)=Av\\otimes Bw$. If $K/k$ is any extension with $K$ perfect, the parts of $1\\otimes A$ on $K\\otimes_k V$ are $1\\otimes A_s$ and $1\\otimes A_n$. The zero vector space is allowed.",
+ "source": {
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Preliminaries to Proposition 17.74, printed p.376, additive version of Theorem 9.11 and Propositions 9.13--9.15, pp.168--169. Tensor-sum and scalar-extension formulations are the linear-algebra input to the agent-written solution of the exercise 17.74."
+ },
+ "stmt_deps": [
+  "def-weil-field"
+ ],
+ "proof": [
+  {
+   "text": "We first record explicitly how equality is detected after scalar extension. Choose a finite basis $(e_i)_{i=1}^d$ of a $k$-space $U$, with coefficient maps $e_i^*:U\\to k$. For any extension $L/k$, the maps $\\lambda\\otimes u\\mapsto(\\lambda e_i^*(u))_i$ and $(a_i)_i\\mapsto\\sum_i a_i\\otimes e_i$ are inverse $L$-linear maps between $L\\otimes_k U$ and $L^d$, as checked on pure tensors by bilinearity. Thus $(1\\otimes e_i)$ is a basis, dimension is preserved, and extension of linear maps is injective: their matrices keep their entries under the injective inclusion $k\\hookrightarrow L$. Addition, composition, identity and powers commute with extension, by evaluating on $\\lambda\\otimes u$. For a tensor of two finite-dimensional spaces, finitely many tensors of basis vectors span by expansion, so it too is finite dimensional. If any space in an assertion is zero, its endomorphism is the unique map, its identity equals zero, and nilpotence has exponent one; all subsequent formulas still apply.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Preliminary coordinate verification for the scalar extensions used in Section 9(b), pp.168-169; routine formulas written by the worker."
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-polynomial-jordan-chevalley-decomposition] to $A$, obtaining $N=q(A)$ and $S=p(A)$ with $A=N+S$, $N$ nilpotent and $S$ complement-semisimple. Polynomial expressions in the same endomorphism commute: $A^iA^j=A^{i+j}=A^jA^i$ and expand the two finite polynomial sums. By [lem-sfb-geometric-semisimplicity-field-extension], $S$ is geometrically semisimple. Set $A_s=S$ and $A_n=N$; this proves existence and membership in $k[A]$. Conversely, suppose $A=S'+N'$ with $S'N'=N'S'$, $S'$ geometrically semisimple and $N'$ nilpotent. The same comparison makes $S'$ complement-semisimple. The uniqueness assertion of [lem-sfb-polynomial-jordan-chevalley-decomposition] therefore identifies it with $(S,N)$. This proves uniqueness for all commuting decompositions, without requiring their parts to be polynomial a priori.",
+   "uses": [
+    "lem-sfb-polynomial-jordan-chevalley-decomposition",
+    "lem-sfb-geometric-semisimplicity-field-extension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Preliminaries to Proposition 17.74, p.376; Theorem 9.11, p.168, additive construction, with the two precise Mathlib/comparison inputs cited."
+   }
+  },
+  {
+   "text": "Let $K/k$ be an extension with $K$ perfect. The extended pair $S_K=1\\otimes A_s$, $N_K=1\\otimes A_n$ sums to $1\\otimes A$ and commutes by the pure-tensor formulas in step 1. If $A_n^r=0$, then $N_K^r=1\\otimes A_n^r=0$. By [lem-sfb-geometric-semisimplicity-field-extension], $S_K$ is geometrically semisimple, hence complement-semisimple over the perfect field $K$. The extended space is finite dimensional by step 1. Apply uniqueness in [lem-sfb-polynomial-jordan-chevalley-decomposition] over $K$ to this pair and to the polynomial decomposition of $1\\otimes A$. This gives precisely the two scalar-extension equalities. In particular they hold for an algebraic closure of $k$, which is perfect.",
+   "uses": [
+    "lem-sfb-geometric-semisimplicity-field-extension",
+    "lem-sfb-polynomial-jordan-chevalley-decomposition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Theorem 9.11, pp.168-169, comparison under scalar extension; additive version of p.376. The verification of the candidate pair is explicit."
+   }
+  },
+  {
+   "text": "Here is the action of the semisimple part on primary spaces over an algebraically closed field. Write $A=S+N$ for the pair already constructed, and fix $r\\geq1$ with $N^r=0$. Choose an eigenbasis $(v_i)$ for $S$, with $Sv_i=a_i v_i$. Since $SN=NS$, $N$ preserves each $S$-eigenspace, so $(A-a_i)^r v_i=N^r v_i=0$. Thus each $v_i$ lies in $E_{a_i}(A)$ of [lem-sfb-generalized-eigenspace-direct-sum]. Grouping a basis expansion by the finitely many $a_i$ expresses every vector as a sum of vectors in these primary spaces. Uniqueness of primary expansions in that cited statement shows that every vector of $E_a(A)$ is a combination of the $v_i$ having $a_i=a$. Therefore $S$ acts as $a$ on $E_a(A)$, including primary spaces equal to zero.",
+   "uses": [
+    "lem-sfb-generalized-eigenspace-direct-sum"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Section 9(b), Theorem 9.11, p.168, additive primary-space construction; details explaining its agreement with step 2."
+   }
+  },
+  {
+   "text": "For $fA=Bf$, extend everything to one algebraic closure $\\bar k$ of $k$. Step 3 identifies the extended parts with the parts over $\\bar k$. Induction on $n$ gives $(B-a)^n f=f(A-a)^n$, so $f$ sends $E_a(A)$ into $E_a(B)$ for every $a\\in\\bar k$. Step 4 says that the two semisimple parts act by the same scalar $a$ on these spaces; hence $fA_s=B_sf$ on each $E_a(A)$, and on the whole space by the spanning assertion of [lem-sfb-generalized-eigenspace-direct-sum]. Subtracting from $fA=Bf$ gives $fA_n=B_nf$. The injectivity from step 1 descends both equalities to $k$. No inverse of $f$, and no invertibility of $A$ or $B$, has been used.",
+   "uses": [
+    "lem-sfb-generalized-eigenspace-direct-sum"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 9.13, p.169, primary-space intertwiner argument, applied to additive rather than multiplicative parts."
+   }
+  },
+  {
+   "text": "On $V\\otimes_k W$ set $S=A_s\\otimes1+1\\otimes B_s$ and $N=A_n\\otimes1+1\\otimes B_n$. Evaluation on $v\\otimes w$ gives $S+N=C$ and $SN=NS$: endomorphisms on different factors commute, and on the same factor the given Jordan parts commute. Write $X=A_n\\otimes1$, $Y=1\\otimes B_n$, with $A_n^r=B_n^t=0$ for $r,t\\geq1$. Then $XY=YX$, $X^r=Y^t=0$. Distributively expand $(X+Y)^{r+t}$ into words. Reordering each word gives $X^iY^{r+t-i}$, which vanishes because either $i\\geq r$ or $r+t-i\\geq t$. Thus $N$ is nilpotent, with no division by factorials in any characteristic.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Additive analogue of Proposition 9.15, p.169: commuting tensor operators and nilpotence calculated explicitly."
+   }
+  },
+  {
+   "text": "To check the remaining property of the candidate $S$, extend to $\\bar k$. The coefficient formulas of step 1 identify $\\bar k\\otimes_k(V\\otimes_k W)$ with $(\\bar k\\otimes_k V)\\otimes_{\\bar k}(\\bar k\\otimes_k W)$: send $\\lambda\\otimes(v\\otimes w)$ to $(\\lambda\\otimes v)\\otimes(1\\otimes w)$ and send $(\\lambda\\otimes v)\\otimes(\\mu\\otimes w)$ back to $\\lambda\\mu\\otimes(v\\otimes w)$. Bilinearity checks both inverses. The geometric comparison [lem-sfb-geometric-semisimplicity-field-extension] gives eigenbases $(v_i)$ and $(w_j)$ for the extended $A_s,B_s$, with eigenvalues $a_i,b_j$. By [lem-sc-tensor-product-free-basis], applied over $\\bar k$ to these finite bases, the $v_i\\otimes w_j$ form a basis. On this basis $S(v_i\\otimes w_j)=(a_i+b_j)(v_i\\otimes w_j)$, so $S$ is geometrically semisimple. The candidate pair from step 6 therefore is a commuting semisimple-nilpotent decomposition of $C$. Convert geometric to complement semisimplicity by [lem-sfb-geometric-semisimplicity-field-extension] and apply uniqueness in [lem-sfb-polynomial-jordan-chevalley-decomposition]. It yields $C_s=S$ and $C_n=N$, as required. Repeated eigenvalue sums do not affect diagonalizability.",
+   "uses": [
+    "lem-sfb-geometric-semisimplicity-field-extension",
+    "lem-sc-tensor-product-free-basis",
+    "lem-sfb-polynomial-jordan-chevalley-decomposition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 9.15, p.169, tensor eigenvector calculation, adapted to the additive tensor sum; the universal tensor reassociation and uniqueness application are written out."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-polynomial-jordan-chevalley-decomposition",
+  "lem-sfb-geometric-semisimplicity-field-extension",
+  "lem-sfb-generalized-eigenspace-direct-sum",
+  "lem-sc-tensor-product-free-basis"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Preliminaries to Proposition 17.74, printed p.376, and Section 9(b), pp.166-169. Additive adaptation of the primary-space proofs of Theorem 9.11 and Proposition 9.13, with the tensor-sum calculation and arbitrary perfect scalar-extension verification supplied by NB. Polynomial existence and uniqueness use the pinned Mathlib; geometric comparison is a separate unsplit prerequisite."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Additive Jordan decomposition over a perfect field commutes with intertwiners scalar extension and tensor sums",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"LieModule.weight_vector_multiplication\", \"module\": \"Mathlib/Algebra/Lie/Weights/Basic\", \"type\": \"∀ {R : Type u_2} {L : Type u_3} [inst : CommRing R] [inst_1 : LieRing L] [inst_2 : LieAlgebra R L] (M₁ : Type u_5)\\n  (M₂ : Type u_6) (M₃ : Type u_7) [inst_3 : AddCommGroup M₁] [inst_4 : Module R M₁] [inst_5 : LieRingModule L M₁]\\n  [inst_6 : LieModule R L M₁] [inst_7 : AddCommGroup M₂] [inst_8 : Modu\", \"doc\": \"For a Lie algebra $\\\\mathfrak{g}$ over a commutative ring $R$, if $M_1, M_2, M_3$ are $\\\\mathfrak{g}$-modules with weight spaces $W(M_1, \\\\chi_1, x)$, $W(M_2, \\\\chi_2, x)$, and $W(M_3, \\\\chi_1 + \\\\chi_2, x)\"}\n  {\"name\": \"LinearEquiv.dilatransvection.baseChange\", \"module\": \"Mathlib/LinearAlgebra/Transvection\", \"type\": \"∀ {R : Type u_3} {V : Type u_4} {A : Type u_5} [inst : CommRing R] [inst_1 : AddCommGroup V] [inst_2 : Module R V]\\n  [inst_3 : CommRing A] [inst_4 : Algebra R A],\\n  ∀ e ∈ LinearEquiv.dilatransvections R V,\\n    LinearEquiv.baseChange R A V V e ∈ LinearEquiv.dilatransvections A (TensorProduct R A V)\", \"doc\": \"If $ e $ is a transvection on a module $ V $ over a commutative semiring $ R $, then the base change of $ e $ to an $ R $-algebra $ A $ induces a transvection on the tensor product module $ A \\\\otimes_\"}\n  {\"name\": \"LinearMap.sumOfConjugatesEquivariant\", \"module\": \"Mathlib/RepresentationTheory/Maschke\", \"type\": \"{k : Type u} →\\n  [inst : CommRing k] →\\n    (G : Type u) →\\n      [inst_1 : Group G] →\\n        {V : Type v} →\\n          [inst_2 : AddCommGroup V] →\\n            [inst_3 : Module k V] →\\n              [inst_4 : Module (MonoidAlgebra k G) V] →\\n                [IsScalarTower k (MonoidAlgebra k G) V] →\\n    \", \"doc\": \"The $k[G]$-linear map from $W$ to $V$ constructed by summing the conjugates of a linear map $\\\\pi: W \\\\to V$ over all elements of a finite group $G$, ensuring equivariance under the $G$-action. This map\"}\n  {\"name\": \"Rep.coinvariantsTensorIndInv_mk_tmul_indMk\", \"module\": \"Mathlib/RepresentationTheory/Induced\", \"type\": \"∀ {k G H : Type u} [inst : CommRing k] [inst_1 : Group G] [inst_2 : Group H] (φ : G →* H) {A : Rep k G} {B : Rep k H}\\n  (x : ↑A.V) (y : ↑B.V),\\n  (CategoryTheory.ConcreteCategory.hom (Rep.coinvariantsTensorIndInv φ A B))\\n      ((Representation.Coinvariants.mk (A.ρ.tprod (Rep.ρ ((Action.res (ModuleCat\", \"doc\": \"For modules $A$ and $B$ over a commutative ring $k$ with a monoid $G$-action, and a monoid homomorphism $\\\\phi: G \\\\to H$, the coinvariants of the tensor product $A \\\\otimes B$ under the action of $G$ (v\"}\n  {\"name\": \"Rep.diagonalSuccIsoTensorTrivial_hom_hom_single\", \"module\": \"Mathlib/RepresentationTheory/Rep\", \"type\": \"∀ {k G : Type u} [inst : CommRing k] [inst_1 : Group G] {n : ℕ} (f : Fin (n + 1) → G) (a : k),\\n  (ModuleCat.Hom.hom (Rep.diagonalSuccIsoTensorTrivial k G n).hom.hom) (Finsupp.single f a) =\\n    Finsupp.single (f 0) 1 ⊗ₜ[k] Finsupp.single (fun i => (f i.castSucc)⁻¹ * f i.succ) a\", \"doc\": \"For a group $ G $, commutative ring $ k $, and natural number $ n $, the homomorphism component of the diagonal successor isomorphism maps a finite support function $ f : \\\\mathrm{Fin}(n+1) \\\\to G $ wit\"}\n  {\"name\": \"Representation.repOfTprodIso_apply\", \"module\": \"Mathlib/RepresentationTheory/Rep\", \"type\": \"∀ {k G : Type u} [inst : CommRing k] [inst_1 : Monoid G] {V W : Type u} [inst_2 : AddCommGroup V]\\n  [inst_3 : AddCommGroup W] [inst_4 : Module k V] [inst_5 : Module k W] (ρ : Representation k G V)\\n  (τ : Representation k G W) (x : TensorProduct k V W),\\n  (CategoryTheory.ConcreteCategory.hom (ρ.repOf\", \"doc\": \"For a commutative ring $k$, a monoid $G$, and $k$-modules $V,W$ with representations $\\\\rho$ and $\\\\tau$ of $G$, the representation $\\\\text{Rep}(k,G)$ constructed from the tensor product $\\\\rho \\\\otimes \\\\t\"}\n  {\"name\": \"Rep.coinvariantsTensorIndHom_mk_tmul_indVMk\", \"module\": \"Mathlib/RepresentationTheory/Induced\", \"type\": \"∀ {k G H : Type u} [inst : CommRing k] [inst_1 : Group G] [inst_2 : Group H] (φ : G →* H) {A : Rep k G} {B : Rep k H}\\n  (h : H) (x : ↑A.V) (y : ↑B.V),\\n  (CategoryTheory.ConcreteCategory.hom (Rep.coinvariantsTensorIndHom φ A B))\\n      ((((Rep.ind φ A).coinvariantsTensorMk B) ((Representation.IndV.mk \", \"doc\": \"For a group homomorphism $\\\\phi: G \\\\to H$, commutative ring $k$, $k$-representation $\\\\rho$ of $G$ on an additive commutative group $A$, and $k$-representation $B$ of $H$, the coinvariants tensor induce\"}\n  {\"name\": \"LieModule.toEnd_baseChange\", \"module\": \"Mathlib/Algebra/Lie/BaseChange\", \"type\": \"∀ (R : Type u_1) (A : Type u_2) (L : Type u_3) (M : Type u_4) [inst : CommRing R] [inst_1 : LieRing L]\\n  [inst_2 : LieAlgebra R L] [inst_3 : AddCommGroup M] [inst_4 : Module R M] [inst_5 : LieRingModule L M]\\n  [inst_6 : LieModule R L M] [inst_7 : CommRing A] [inst_8 : Algebra R A] (x : L),\\n  (LieMod\", \"doc\": \"For any element $x$ in a Lie algebra $\\\\mathfrak{g}$ over a commutative ring $R$, and an $R$-module $M$ equipped with a Lie module structure over $\\\\mathfrak{g}$, the endomorphism of $A \\\\otimes_R M$ ind\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: JordanChevalley.lean:76,85 gives existence and uniqueness only; Semisimple.lean gives commuting semisimple sums. No returned theorem supplies the intertwiner, tensor-sum and extension laws together; these need a proof, so the whole statement is not a one-line Mathlib specialization."
+  },
+  {
+   "tool": "loogle",
+   "query": "Module.End.IsSemisimple, IsNilpotent",
+   "results": "[loogle] OK 6 hit(s)\n  {\"name\": \"Module.End.eq_zero_of_isNilpotent_isSemisimple\", \"module\": \"Mathlib.LinearAlgebra.Semisimple\", \"type\": \" {R : Type u_1} {M : Type u_2} [CommRing R] [AddCommGroup M] [Module R M] {f : Module.End R M} (hn : IsNilpotent f) (hs : f.IsSemisimple) : f = 0\", \"doc\": \"\"}\n  {\"name\": \"Module.End.isNilpotent_isSemisimple_unique\", \"module\": \"Mathlib.LinearAlgebra.JordanChevalley\", \"type\": \" {K : Type u_1} {V : Type u_2} [Field K] [AddCommGroup V] [Module K V] [FiniteDimensional K V] [PerfectField K] {n₁ s₁ n₂ s₂ : Module.End K V} (hn₁ : IsNilpotent n₁) (hs₁ : s₁.IsSemisimple) (hn₂ : IsNilpotent n₂) (hs₂ : s₂.IsSemisimple) (hc₁ : Commute n₁ s₁) (hc₂ : Commute n₂ s₂) (h : n₁ + s₁ = n₂ +\", \"doc\": \"**Uniqueness of Jordan-Chevalley-Dunford decomposition**: if `n₁ + s₁ = n₂ + s₂` with `nᵢ`\\nnilpotent, `sᵢ` semisimple, and `nᵢ`, `sᵢ` commuting, then `n₁ = n₂` and `s₁ = s₂`.\"}\n  {\"name\": \"Module.End.exists_isNilpotent_isSemisimple\", \"module\": \"Mathlib.LinearAlgebra.JordanChevalley\", \"type\": \" {K : Type u_1} {V : Type u_2} [Field K] [AddCommGroup V] [Module K V] {f : Module.End K V} [FiniteDimensional K V] [PerfectField K] : ∃ n ∈ K[f], ∃ s ∈ K[f], IsNilpotent n ∧ s.IsSemisimple ∧ f = n + s\", \"doc\": \"**Jordan-Chevalley-Dunford decomposition**: an endomorphism of a finite-dimensional vector space\\nover a perfect field may be written as a sum of nilpotent and semisimple endomorphisms. Moreover\\nthese \"}\n  {\"name\": \"Module.End.exists_isNilpotent_isSemisimple_of_separable_of_dvd_pow\", \"module\": \"Mathlib.LinearAlgebra.JordanChevalley\", \"type\": \" {K : Type u_1} {V : Type u_2} [Field K] [AddCommGroup V] [Module K V] {f : Module.End K V} {P : Polynomial K} {k : ℕ} (sep : P.Separable) (nil : minpoly K f ∣ P ^ k) : ∃ n ∈ K[f], ∃ s ∈ K[f], IsNilpotent n ∧ s.IsSemisimple ∧ f = n + s\", \"doc\": \"\"}\n  {\"name\": \"LieAlgebra.ad_mem_adjoin_of_isNilpotent\", \"module\": \"Mathlib.Algebra.Lie.AdjointAction.JordanChevalley\", \"type\": \" {K : Type u_1} {V : Type u_2} [Field K] [PerfectField K] [AddCommGroup V] [Module K V] [FiniteDimensional K V] {n s : Module.End K V} (hc : Commute n s) (hn : IsNilpotent n) (hs : s.IsSemisimple) : (LieAlgebra.ad K (Module.End K V)) n ∈ K[(LieAlgebra.ad K (Module.End K V)) (n + s)]\", \"doc\": \"The adjoint of the nilpotent part of a JC decomposition lies in the subalgebra generated by\\nthe adjoint of the sum.\"}\n  {\"name\": \"LieAlgebra.ad_mem_adjoin_of_isSemisimple\", \"module\": \"Mathlib.Algebra.Lie.AdjointAction.JordanChevalley\", \"type\": \" {K : Type u_1} {V : Type u_2} [Field K] [PerfectField K] [AddCommGroup V] [Module K V] [FiniteDimensional K V] {n s : Module.End K V} (hc : Commute n s) (hn : IsNilpotent n) (hs : s.IsSemisimple) : (LieAlgebra.ad K (Module.End K V)) s ∈ K[(LieAlgebra.ad K (Module.End K V)) (n + s)]\", \"doc\": \"The adjoint of the semisimple part of a JC decomposition lies in the subalgebra generated by\\nthe adjoint of the sum.\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: JordanChevalley.lean:76,85 gives existence and uniqueness only; Semisimple.lean gives commuting semisimple sums. No returned theorem supplies the intertwiner, tensor-sum and extension laws together; these need a proof, so the whole statement is not a one-line Mathlib specialization."
+  },
+  {
+   "tool": "grep",
+   "query": "isNilpotent_isSemisimple|semisimple.*baseChange|semisimple.*tensor",
+   "results": "[grep] OK 12 hit(s)\n  {\"file\": \"Mathlib/Algebra/Lie/AdjointAction/JordanChevalley.lean\", \"line\": \"40\", \"text\": \"    (ad K _ (n + s)).exists_isNilpotent_isSemisimple\"}\n  {\"file\": \"Mathlib/Algebra/Lie/AdjointAction/JordanChevalley.lean\", \"line\": \"44\", \"text\": \"  obtain ⟨-, hs_eq⟩ := Module.End.isNilpotent_isSemisimple_unique hn'_nil hs'_ss\"}\n  {\"file\": \"Mathlib/Algebra/Lie/CartanCriterion.lean\", \"line\": \"86\", \"text\": \"  obtain ⟨n, hn_adj, s, hns, hn_nil, hs_ss, hX_ns⟩ := (φ x).exists_isNilpotent_isSemisimple\"}\n  {\"file\": \"Mathlib/Algebra/Lie/Weights/Killing.lean\", \"line\": \"328\", \"text\": \"  obtain ⟨N, -, S, hS₀, hN, hS, hSN⟩ := (ad K L x).exists_isNilpotent_isSemisimple\"}\n  {\"file\": \"Mathlib/LinearAlgebra/Semisimple.lean\", \"line\": \"30\", \"text\": \"* `Module.End.eq_zero_of_isNilpotent_isSemisimple`: the zero endomorphism is the only endomorphism\"}\n  {\"file\": \"Mathlib/LinearAlgebra/Semisimple.lean\", \"line\": \"127\", \"text\": \"lemma eq_zero_of_isNilpotent_isSemisimple (hn : IsNilpotent f) (hs : f.IsSemisimple) : f = 0 := by\"}\n  {\"file\": \"Mathlib/LinearAlgebra/Semisimple.lean\", \"line\": \"139\", \"text\": \"    exact eq_zero_of_isNilpotent_isSemisimple hn hs\"}\n  {\"file\": \"Mathlib/LinearAlgebra/JordanChevalley.lean\", \"line\": \"27\", \"text\": \"* `Module.End.exists_isNilpotent_isSemisimple`: an endomorphism of a finite-dimensional vector\"}\n  {\"file\": \"Mathlib/LinearAlgebra/JordanChevalley.lean\", \"line\": \"31\", \"text\": \"* `Module.End.isNilpotent_isSemisimple_unique`: the Jordan-Chevalley-Dunford decomposition is\"}\n  {\"file\": \"Mathlib/LinearAlgebra/JordanChevalley.lean\", \"line\": \"45\", \"text\": \"theorem exists_isNilpotent_isSemisimple_of_separable_of_dvd_pow {P : K[X]} {k : ℕ}\"}\n  {\"file\": \"Mathlib/LinearAlgebra/JordanChevalley.lean\", \"line\": \"76\", \"text\": \"theorem exists_isNilpotent_isSemisimple [PerfectField K] :\"}\n  {\"file\": \"Mathlib/LinearAlgebra/JordanChevalley.lean\", \"line\": \"80\", \"text\": \"  exact exists_isNilpotent_isSemisimple_of_separable_of_dvd_pow sep nil\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: JordanChevalley.lean:76,85 gives existence and uniqueness only; Semisimple.lean gives commuting semisimple sums. No returned theorem supplies the intertwiner, tensor-sum and extension laws together; these need a proof, so the whole statement is not a one-line Mathlib specialization."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Semisimple and nilpotent parts of A tensor identity plus identity tensor B are tensor sums of Jordan parts",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"Module.End.exists_isNilpotent_isSemisimple\", \"module\": \"Mathlib.LinearAlgebra.JordanChevalley\", \"type\": \"[PerfectField K] : ∃ᵉ (n ∈ adjoin K { f }) (s ∈ adjoin K { f }), IsNilpotent n ∧ IsSemisimple s ∧ f = n + s\", \"doc\": \"In a perfect field $ K $, every endomorphism $ f $ can be expressed as the sum of a nilpotent element $ n $ and a semisimple element $ s $, both lying in the subalgebra generated by $ f $ over $ K $, \"}\n  {\"name\": \"Module.End.exists_isNilpotent_isSemisimple_of_separable_of_dvd_pow\", \"module\": \"Mathlib.LinearAlgebra.JordanChevalley\", \"type\": \"{P : K[X]} {k : ℕ} (sep : P.Separable) (nil : minpoly K f ∣ P ^ k) :\\n  ∃ᵉ (n ∈ adjoin K { f }) (s ∈ adjoin K { f }), IsNilpotent n ∧ IsSemisimple s ∧ f = n + s\", \"doc\": \"For an endomorphism $ f $ of a vector space over a field $ K $, if the minimal polynomial of $ f $ divides a power of a separable polynomial $ P $, then there exist a nilpotent endomorphism $ n $ and \"}\n  {\"name\": \"MeasureTheory.JordanDecomposition.ext_iff\", \"module\": \"Mathlib.MeasureTheory.VectorMeasure.Decomposition.Jordan\", \"type\": \"∀ {α : Type u_2} {inst : MeasurableSpace α} {x y : MeasureTheory.JordanDecomposition α},\\n  x = y ↔ x.posPart = y.posPart ∧ x.negPart = y.negPart\", \"doc\": \"For any two Jordan decompositions $x$ and $y$, $x = y$ if and only if $x^+ = y^+$ and $x^- = y^-$. Here, $x^+$ and $y^+$ denote the positive parts, and $x^-$ and $y^-$ denote the negative parts of the\"}\n  {\"name\": \"Algebra.TensorProduct.map_id\", \"module\": \"Mathlib.RingTheory.TensorProduct.Maps\", \"type\": \": map (.id S A) (.id R B) = .id S _\", \"doc\": \"The tensor product of the identity algebra homomorphism on $ A $ and the identity algebra homomorphism on $ B $ is equal to the identity algebra homomorphism on the tensor product $ A \\\\otimes_R B $.\"}\n  {\"name\": \"SemiconjBy.tmul\", \"module\": \"Mathlib.RingTheory.TensorProduct.Basic\", \"type\": \"{a₁ a₂ a₃ : A} {b₁ b₂ b₃ : B} (ha : SemiconjBy a₁ a₂ a₃) (hb : SemiconjBy b₁ b₂ b₃) :\\n  SemiconjBy (a₁ ⊗ₜ[R] b₁) (a₂ ⊗ₜ[R] b₂) (a₃ ⊗ₜ[R] b₃)\", \"doc\": \"If $ a_1 $ semiconjugates $ a_2 $ to $ a_3 $ and $ b_1 $ semiconjugates $ b_2 $ to $ b_3 $, then $ a_1 \\\\otimes b_1 $ semiconjugates $ a_2 \\\\otimes b_2 $ to $ a_3 \\\\otimes b_3 $ in the tensor product $ A\"}\n  {\"name\": \"Module.End.IsSemisimple.add_of_commute\", \"module\": \"Mathlib.LinearAlgebra.Semisimple\", \"type\": \": (f + g).IsSemisimple\", \"doc\": \"If $ f $ and $ g $ are commuting semisimple endomorphisms of an $ R $-module $ M $, then their sum $ f + g $ is also a semisimple endomorphism of $ M $.\"}\n  {\"name\": \"TensorProduct.exists_multiset\", \"module\": \"Mathlib.LinearAlgebra.TensorProduct.Finiteness\", \"type\": \"(x : M ⊗[R] N) : ∃ S : Multiset (M × N), x = (S.map fun i ↦ i.1 ⊗ₜ[R] i.2).sum\", \"doc\": \"Every element $ x $ in the tensor product $ M \\\\otimes_R N $ can be expressed as the sum of a finite multiset of simple tensors $ m \\\\otimes n $, i.e., there exists a multiset $ S $ of pairs $ (m, n) \\\\i\"}\n  {\"name\": \"TensorProduct.instRepr\", \"module\": \"Mathlib.LinearAlgebra.TensorProduct.Basic\", \"type\": \"[Repr M] [Repr N] : Repr (M ⊗[R] N)\", \"doc\": \"The tensor product of modules $ M $ and $ N $ over a semiring $ R $ is equipped with a canonical additive commutative monoid structure, where addition is defined by bilinear relations ensuring compati\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: JordanChevalley.lean:76,85 gives existence and uniqueness only; Semisimple.lean gives commuting semisimple sums. No returned theorem supplies the intertwiner, tensor-sum and extension laws together; these need a proof, so the whole statement is not a one-line Mathlib specialization."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Jordan Chevalley decomposition naturality under linear maps and Kronecker sums",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"Module.End.exists_isNilpotent_isSemisimple\", \"module\": \"Mathlib/LinearAlgebra/JordanChevalley\", \"type\": \"∀ {K : Type u_1} {V : Type u_2} [inst : Field K] [inst_1 : AddCommGroup V] [inst_2 : Module K V] {f : Module.End K V}\\n  [FiniteDimensional K V] [PerfectField K],\\n  ∃ n ∈ Algebra.adjoin K {f}, ∃ s ∈ Algebra.adjoin K {f}, IsNilpotent n ∧ s.IsSemisimple ∧ f = n + s\", \"doc\": \"In a perfect field $ K $, every endomorphism $ f $ can be expressed as the sum of a nilpotent element $ n $ and a semisimple element $ s $, both lying in the subalgebra generated by $ f $ over $ K $, \"}\n  {\"name\": \"Module.End.commute_exp_left_of_commute\", \"module\": \"Mathlib/RingTheory/Nilpotent/Exp\", \"type\": \"∀ {R : Type u_1} {M : Type u_2} {N : Type u_3} [inst : CommRing R] [inst_1 : AddCommGroup M] [inst_2 : Module R M]\\n  [inst_3 : AddCommGroup N] [inst_4 : Module R N] [inst_5 : Module ℚ M] [inst_6 : Module ℚ N] {fM : Module.End R M}\\n  {fN : Module.End R N} {g : M →ₗ[R] N},\\n  IsNilpotent fM → IsNilpote\", \"doc\": \"For modules $ M $ and $ N $ over a semiring $ R $, let $ f_M \\\\in \\\\mathrm{End}_R(M) $ and $ f_N \\\\in \\\\mathrm{End}_R(N) $ be nilpotent endomorphisms, and let $ g: M \\\\to N $ be an $ R $-linear map such th\"}\n  {\"name\": \"Module.End.genEigenspace_inf_le_add\", \"module\": \"Mathlib/LinearAlgebra/Eigenspace/Basic\", \"type\": \"∀ {R : Type v} {M : Type w} [inst : CommRing R] [inst_1 : AddCommGroup M] [inst_2 : Module R M] (f₁ f₂ : Module.End R M)\\n  (μ₁ μ₂ : R) (k₁ k₂ : ℕ∞),\\n  Commute f₁ f₂ → (f₁.genEigenspace μ₁) k₁ ⊓ (f₂.genEigenspace μ₂) k₂ ≤ ((f₁ + f₂).genEigenspace (μ₁ + μ₂)) (k₁ + k₂)\", \"doc\": \"For commuting endomorphisms $ f_1, f_2 $ of an $ R $-module $ M $, eigenvalues $ \\\\mu_1, \\\\mu_2 \\\\in R $, and extended natural number bounds $ k_1, k_2 $, the intersection of the generalized eigenspaces \"}\n  {\"name\": \"LinearMap.diag_toMatrix_directSum_collectedBasis_eq_zero_of_mapsTo_ne\", \"module\": \"Mathlib/Algebra/DirectSum/LinearMap\", \"type\": \"∀ {ι : Type u_1} {R : Type u_2} {M : Type u_3} [inst : CommRing R] [inst_1 : AddCommGroup M] [inst_2 : Module R M]\\n  {N : ι → Submodule R M} [inst_3 : DecidableEq ι] {κ : ι → Type u_4} [inst_4 : (i : ι) → Fintype (κ i)]\\n  [inst_5 : (i : ι) → DecidableEq (κ i)] {s : Finset ι} (h : DirectSum.IsInterna\", \"doc\": \"Let $ M $ be a module over a semiring $ R $, decomposed as an internal direct sum of submodules $ \\\\{N_i\\\\}_{i \\\\in \\\\iota} $. Suppose $ \\\\sigma: \\\\iota \\\\to \\\\iota $ is a permutation with no fixed points ($ \"}\n  {\"name\": \"Module.End.IsSemisimple.add_of_commute\", \"module\": \"Mathlib/LinearAlgebra/Semisimple\", \"type\": \"∀ {M : Type u_2} [inst : AddCommGroup M] {K : Type u_3} [inst_1 : Field K] [inst_2 : Module K M] {f g : Module.End K M}\\n  [FiniteDimensional K M] [PerfectField K], Commute f g → f.IsSemisimple → g.IsSemisimple → (f + g).IsSemisimple\", \"doc\": \"If $ f $ and $ g $ are commuting semisimple endomorphisms of an $ R $-module $ M $, then their sum $ f + g $ is also a semisimple endomorphism of $ M $.\"}\n  {\"name\": \"LinearMap.trace_comp_eq_zero_of_commute_of_trace_restrict_eq_zero\", \"module\": \"Mathlib/Algebra/DirectSum/LinearMap\", \"type\": \"∀ {R : Type u_2} {M : Type u_3} [inst : CommRing R] [inst_1 : AddCommGroup M] [inst_2 : Module R M] [IsDomain R]\\n  [IsPrincipalIdealRing R] [Module.Free R M] [Module.Finite R M] {f g : Module.End R M} (h_comm : Commute f g),\\n  ⨆ μ, f.maxGenEigenspace μ = ⊤ →\\n    (∀ (μ : R), (LinearMap.trace R ↥(f.ma\", \"doc\": \"Let $ R $ be an integral domain that is also a principal ideal ring, and let $ M $ be a finite free $ R $-module. Suppose $ f $ and $ g $ are commuting endomorphisms of $ M $, and the union of the max\"}\n  {\"name\": \"Module.End.apply_eq_of_mem_of_comm_of_isFinitelySemisimple_of_isNil\", \"module\": \"Mathlib/LinearAlgebra/Eigenspace/Semisimple\", \"type\": \"∀ {R : Type u_1} {M : Type u_2} [inst : CommRing R] [inst_1 : AddCommGroup M] [inst_2 : Module R M]\\n  {f g : Module.End R M} {μ : R} {k : ℕ∞} {m : M},\\n  m ∈ (f.genEigenspace μ) k → Commute f g → g.IsFinitelySemisimple → IsNilpotent (f - g) → g m = μ • m\", \"doc\": \"For any scalar $\\\\mu \\\\in R$, extended natural number $k$, and element $m \\\\in M$ in the generalized eigenspace of $f$ associated to $\\\\mu$ and $k$, if $f$ and $g$ commute, $g$ is finitely semisimple, and\"}\n  {\"name\": \"Module.End.map_add_of_iInf_genEigenspace_ne_bot_of_commute\", \"module\": \"Mathlib/LinearAlgebra/Eigenspace/Basic\", \"type\": \"∀ {R : Type v} {M : Type w} [inst : CommRing R] [inst_1 : AddCommGroup M] [inst_2 : Module R M] [IsDomain R]\\n  [Module.IsTorsionFree R M] {L : Type u_1} {F : Type u_2} [inst_5 : Add L] [inst_6 : FunLike F L (Module.End R M)]\\n  [AddHomClass F L (Module.End R M)] (f : F) (μ : L → R) (k : ℕ∞),\\n  ⨅ x, (\", \"doc\": \"For a torsion-free module $ M $ over a domain $ R $, if $ f $ is a family of commuting endomorphisms of $ M $ and the infimum of their generalized eigenspaces (associated to scalars $ \\\\mu(x) $) is non\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: JordanChevalley.lean:76,85 gives existence and uniqueness only; Semisimple.lean gives commuting semisimple sums. No returned theorem supplies the intertwiner, tensor-sum and extension laws together; these need a proof, so the whole statement is not a one-line Mathlib specialization."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Jordan Chevalley additive decomposition exists uniquely with nilpotent and semisimple polynomial parts over a perfect field",
+   "results": "8 hits: Module.End.exists_isNilpotent_isSemisimple, Module.End.exists_isNilpotent_isSemisimple_of_separable_of_dvd_pow, Module.End.IsSemisimple.add_of_commute, Module.End.IsSemisimple.sub_of_commute, Module.End.IsSemisimple.of_mem_adjoin_pair, Module.End.IsSemisimple.mul_of_commute, Module.End.IsSemisimple.aeval, Module.End.isSemisimple_of_squarefree_aeval_eq_zero",
+   "date": "2026-10-24",
+   "verdict": "no match for the whole item: the returned JordanChevalley declarations give only polynomial existence and uniqueness with complement-semisimplicity; they do not state the intertwiner, tensor-sum and scalar-extension package. These laws are proved in the item."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Jordan decomposition is functorial for intertwiners and additive tensor sums after extending scalars",
+   "results": "8 hits: ModuleCat.extendScalars, ModuleCat.ExtendScalars.map', MeasureTheory.JordanDecomposition.rec, MeasureTheory.JordanDecomposition.ext_iff, MeasureTheory.JordanDecomposition.coe_smul, Rep.instAdditiveModuleCatInvariantsFunctor, MeasureTheory.JordanDecomposition.recOn, MeasureTheory.JordanDecomposition.casesOn",
+   "date": "2026-10-24",
+   "verdict": "no match for the whole item: the returned JordanChevalley declarations give only polynomial existence and uniqueness with complement-semisimplicity; they do not state the intertwiner, tensor-sum and scalar-extension package. These laws are proved in the item."
+  },
+  {
+   "tool": "grep",
+   "query": "isNilpotent_isSemisimple|isSemisimple_iff.*(minpoly|squarefree)|minpoly_squarefree",
+   "results": "10 hits: Mathlib/LinearAlgebra/Semisimple.lean, Mathlib/LinearAlgebra/Semisimple.lean, Mathlib/LinearAlgebra/Semisimple.lean, Mathlib/LinearAlgebra/Semisimple.lean, Mathlib/LinearAlgebra/Semisimple.lean, Mathlib/LinearAlgebra/JordanChevalley.lean, Mathlib/LinearAlgebra/JordanChevalley.lean, Mathlib/LinearAlgebra/JordanChevalley.lean; directory LinearAlgebra",
+   "date": "2026-10-24",
+   "verdict": "no match for the whole item: the returned JordanChevalley declarations give only polynomial existence and uniqueness with complement-semisimplicity; they do not state the intertwiner, tensor-sum and scalar-extension package. These laws are proved in the item."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-algebraic-lie-additive-jordan",
+  "date": "2026-10-24",
+  "group": "Q148"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Haboush symmetric-power lifting for a trivial quotient representation. Supporting representation-theoretic input: Steinberg endomorphisms detect a nonzero fixed vector. Supporting Self-duality of rho section modules at characteristic-dependent weights. Supporting input: Positive-characteristic simplicity step, using irreducibility of the Steinberg induced module rather than assuming self-duality. Numerical input to the dimension comparison: Weyl dimension of the induced module. Supporting Integral Euler character of arbitrary flag line bundles. Section 22d, proof of Theorem 22.50, p.480: general fixed-point input, stated here in its integral equivariant form; Example 22.36, pp.473--474, for formal characters. WANTED: Nielsen 1974 general fixed-point theorem and Iversen 1976, 9.4; neither document is present. The integral formulation is an agent-supplied supporting statement. Supporting input: Section 22d, proof of Theorem 22.50, p.480: agent-supplied concentration prerequisite, not the numerical fixed-point formula itself. WANTED: Thomason, Une formule de Lefschetz en K-theorie equivariante algebrique, Duke Math. J. 53 (1986), concentration theorem; not present locally. No proof of concentration is claimed to occur in Milne. Supporting step: The concentration theorem's nonfixed-locus annihilation argument in the proof of the item. Geometric input to nonfixed-locus annihilation: invariant affine strata of the reduction, before the Laurent-coefficient and localization arguments. Supporting normal-case neighbourhood input used after passing to the invariant smooth locus, before removing one affine open in the Noetherian induction. Supporting proof input: Linearize the normal quasi-projective neighborhood by an immersion into projective space of a rational representation. Supporting line-bundle prerequisite: replace an ample invertible module by a positive tensor power carrying an algebraic G-linearization, before choosing invariant sections. Supporting Picard input: a tensor exponent uniform over the generic residue fields of all normal components, before applying the generic-line pullback criterion. Supporting base-change input: Brion Lemma 2.3, pullback Pic(G) to Pic(G_K), specialized using Remark 2.2(v). Supporting substep: Milne, Algebraic Groups, Theorem 18.15, sequence (128), printed p.390, and section 18.f, pp.395-396; the split-group standing assumptions, B/ B_u and characteristic line bundle on p.390. Scalar-extension compatibility of the associated-bundle construction is made explicit. Also Brion Lemma 2.3, equation (2), printed p.118. Supporting prerequisite: Milne Theorem 17.82, printed p.379 (maximal torus if and only if its scalar extension is maximal); the theorem allows all group varieties, and is used here only for smooth connected affine groups. Supporting step in Milne Theorem 17.82: Proposition 17.81 and its proof, printed pp.378–379; Theorem 14.5, printed pp.281–282, for the unitriangular-immersion meaning of unipotence. The finite-field part of the proof invokes Proposition 17.99, printed pp.383–384. Supporting proof input for Proposition 17.81: Propositions 17.76–17.79, printed pp.377–378, and the semisimple-centralizer case of Proposition 17.81, p.379. Use the identity component of the centralizer (Proposition 1.34, pp.16–17); it has the same Lie algebra. Nonunipotence follows from Example 17.75, p.377, and Theorem 14.5, pp.281–282. Supporting prerequisite: Proposition 17.74(a),(b), printed p.377, and the geometric faithful-matrix formulation obtained by applying it over an algebraic closure. Rational representations, not arbitrary abstract Lie representations; Sections 10a–10d give tangent injectivity and matrix differentials. The theorem is the additive counterpart of Chapter 9 and does not assert a Jordan decomposition over an imperfect base field. Supporting proof input: Preliminaries to Proposition 17.74, printed p.376, additive version of Theorem 9.11 and Propositions 9.13--9.15, pp.168--169. Tensor-sum and scalar-extension formulations are the linear-algebra input to the agent-written solution of the exercise 17.74.",
+   "via": [
+    "lem-sfb-algebraic-lie-additive-jordan",
+    "lem-sfb-infinite-field-semisimple-centralizer-reduction",
+    "lem-sfb-torus-free-implies-unipotent-arbitrary-field",
+    "lem-sfb-maximal-torus-field-extension",
+    "lem-sfb-split-reductive-characteristic-sequence",
+    "lem-sfb-affine-group-picard-field-invariance",
+    "lem-sfb-affine-group-picard-stable-exponent",
+    "lem-sfb-normal-line-bundle-power-linearization",
+    "lem-sfb-normal-quasiprojective-equivariant-immersion",
+    "lem-sfb-sumihiro-normal-torus-affine-neighbourhood",
+    "lem-sfb-torus-invariant-affine-filtration",
+    "lem-sfb-torus-nonfixed-complement-annihilation",
+    "lem-sfb-torus-coherent-concentration",
+    "lem-sfb-torus-coherent-fixed-point-formula",
+    "lem-sfb-flag-line-euler-alternant",
+    "lem-sfb-induced-weyl-dimension-formula",
+    "lem-sfb-steinberg-induced-module-irreducible",
+    "lem-sfb-rho-section-self-duality",
+    "lem-sfb-steinberg-endomorphism-detection",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-additive-jordan-linear-compatibility",
+  "worker": "stage1",
+  "summary": "Checked the additive linear input against Milne pp.166-169,376. Reused primary-space and tensor-basis nodes; supplied explicit intertwiner, tensor-sum and scalar-extension arguments. Created a Mathlib leaf for polynomial Jordan decomposition in invariant-complement terminology, and a statement-only node for its geometric comparison and field-extension behavior; did not equate the two notions without a dependency. No statement correction and no Lean writing or build.",
+  "blueprint": "Supports the inherited det-thm-sf-ctf-stability-direct-images proof (3) prerequisite chain, specifically lem-sfb-algebraic-lie-additive-jordan: Milne p.376 additive decomposition and compatibility. The latest blueprint has no separate Jordan node; tools/blueprint_refs.py ancestor returns None for this preexisting chain, retained as inherited, with the exact local source place added in new nodes."
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-NB-2c4d20888",
+  "group": "NB",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NB-2c4d20888 (reviewer sub-agent of L); spot-checked: I read the item, both new nodes, the cited statements, Milne iAG pp.166-169 (Thm 9.11, Props 9.9, 9.13, 9.15) and p.376 (additive Jordan preliminaries to 17.74), and Mathlib JordanChevalley.lean:76/84 and Semisimple.lean:74/218/243. The polynomial leaf matches exists_isNilpotent_isSemisimple and isNilpotent_isSemisimple_unique clause by clause (same hypotheses, adjoin = k[A], complement form via isSemisimple_iff). The comparison node is true: (i)⇔(ii)⇔(iii) over perfect k, and the extension clause holds for any L because m_T is invariant and separability is preserved and reflected. Small cases tested: V=0, a nilpotent block, a scalar operator, and the F_p(t) X^p−t counterexample showing perfectness is needed. Neither new node duplicates an existing node (checked against squarefree-annihilator, eigenspace-span, generalized-eigenspace, multiplicative-jordan, p-power-stable-image and others). Steps 1-7 are correct, all hypotheses present. Step 4's primary-space argument uses the uniqueness and spanning clauses of the cited direct-sum node. Step 5 needs no invertibility. Step 6's nilpotence argument has no factorials, so it holds in char p. Step 7 gives the a_i+b_j eigenbasis. Two FIXes: (C4) step 7 cited the Pi-tensor leaf lem-sfb-finite-tensor-product-basis-coordinates for a binary tensor basis; it now cites the exact Mathlib leaf lem-sc-tensor-product-free-basis (text, uses, proof_deps). (B3) the new node lem-sfb-geometric-semisimplicity-field-extension used 'algebraic closure' uncited; [def-weil-algebraic-closure] is added to its statement and stmt_deps. No tool_uses, no drops.; 2 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.LinearAlgebra.AdditiveJordanCompatibility",
+  "declaration": "Module.End.exists_additiveJordanDecomposition_compatibility",
+  "declarations": [
+   "Module.End.IsAdditiveJordanDecomposition",
+   "Module.End.exists_additiveJordanDecomposition_compatibility"
+  ],
+  "file": "lean/Sheaf/LinearAlgebra/AdditiveJordanCompatibility.lean",
+  "statement": "theorem exists_additiveJordanDecomposition_compatibility {k : Type u} [Field k] [PerfectField k] {V : Type v} [AddCommGroup V] [Module k V] [FiniteDimensional k V] (A : Module.End k V) : ∃ S N : Module.End k V, IsAdditiveJordanDecomposition A S N ∧ S ∈ Algebra.adjoin k {A} ∧ N ∈ Algebra.adjoin k {A} ∧ (∀ S' N' : Module.End k V, IsAdditiveJordanDecomposition A S' N' → S' = S ∧ N' = N) ∧ (∀ (W : Type w) [AddCommGroup W] [Module k W] [FiniteDimensional k W] (B T M : Module.End k W), IsAdditiveJordanDecomposition B T M → (∀ f : V →ₗ[k] W, f.comp A = B.comp f → f.comp S = T.comp f ∧ f.comp N = M.comp f) ∧ IsAdditiveJordanDecomposition (TensorProduct.map A (LinearMap.id : Module.End k W) + TensorProduct.map (LinearMap.id : Module.End k V) B) (TensorProduct.map S (LinearMap.id : Module.End k W) + TensorProduct.map (LinearMap.id : Module.End k V) T) (TensorProduct.map N (LinearMap.id : Module.End k W) + TensorProduct.map (LinearMap.id : Module.End k V) M)) ∧ (∀ (K : Type z) [Field K] [Algebra k K] [PerfectField K], IsAdditiveJordanDecomposition (A.baseChange K) (S.baseChange K) (N.baseChange K))",
+  "branch": "sheaf-dag",
+  "by": "NP",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-4ce4fb685",
+  "group": "NP",
+  "result": "pass",
+  "note": "Checked node vs Lean clause by clause: perfect field, finite-dim V, geometric semisimplicity as spanning eigenspaces over AlgebraicClosure k, IsNilpotent (positive power, zero space ok), existence, adjoin-membership, uniqueness among all commuting decompositions, intertwiner (no invertibility, separate universe w), tensor-sum pair is a Jordan pair (equals node's C_s/C_n by uniqueness), base change to any perfect K (universe z). Statement true (geom. semisimple ⇔ IsSemisimple over perfect k; Mathlib JC existence/uniqueness). Edge cases V=0/W=0, zero f, char p, transcendental K. No duplicate notion in Mathlib/Sheaf/WeilConjectures; helper predicate real and recorded; lean.statement verbatim; docstrings with source, blueprint tag, 7 steps; only sorry. Non-blocking: item stmt_deps omit def-weil-algebraic-closure though statement mentions an algebraic closure (Lean uses its mathlib match AlgebraicClosure); maintainer may add."
+ }
+}

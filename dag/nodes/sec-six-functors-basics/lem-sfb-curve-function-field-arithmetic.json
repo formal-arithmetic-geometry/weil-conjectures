@@ -1,0 +1,259 @@
+{
+ "id": "lem-sfb-curve-function-field-arithmetic",
+ "kind": "statement",
+ "title": "Finite generation, dimension and finite degree of embedded curve fields",
+ "statement": "Let $k$ be a field [def-weil-field], and let $T$ be a nonempty integral scheme of finite type over $k$ [def-pc-integral-scheme], [def-weil-finite-type-morphism]. Write $K(T)=\\mathcal O_{T,\\eta_T}$ for its function field at its generic point [def-sc-function-field], [def-sc-generic-point]. Then $K(T)/k$ is finitely generated as a field (there are finitely many elements $a_1,\\ldots,a_r$ with $K(T)=k(a_1,\\ldots,a_r)$), and\n$$\\operatorname{trdeg}_k K(T)=\\dim T.$$\nHere transcendence degree and dimension are [def-kun-transcendence-degree], [def-kun-topological-krull-dimension]. Moreover, let $K/k$ and $L/k$ be finitely generated field extensions [def-pc-field-extension] of the same finite transcendence degree $d$. For every $k$-embedding $\\varphi:K\\hookrightarrow L$, the extension $L/\\varphi(K)$ is finite [def-pc-field-tower]. No separability assumption is made.",
+ "source": {
+  "document": "literature/stacks-project/curves.tex",
+  "place": "Tag 0BY1 (curves-theorem-curves-rational-maps), first and third proof paragraphs; Varieties Tag 0B1C (varieties-item-dimension-irreducible-trdeg in lemma-dimension-locally-algebraic); Fields Tags 030H (fields-lemma-transcendence-degree-tower) and 09GH (fields-lemma-algebraic-finitely-generated). Extracts old steps 2 and 5."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-pc-integral-scheme",
+  "def-weil-finite-type-morphism",
+  "def-sc-function-field",
+  "def-sc-generic-point",
+  "def-kun-transcendence-degree",
+  "def-kun-topological-krull-dimension",
+  "def-pc-field-extension",
+  "def-pc-field-tower"
+ ],
+ "proof": [
+  {
+   "text": "By [def-weil-finite-type-morphism], choose a nonempty member $U=\\operatorname{Spec}A$ of a finite affine cover of $T$ with $A=k[a_1,\\ldots,a_r]$. Such a member exists since $T$ is nonempty. By [lem-sc-integral-function-field-affine-fraction], $A$ is a domain and its germ map identifies $K(T)$ with $\\operatorname{Frac}(A)$. Every element is $g/h$ with $g,h\\in A$ and $h\\ne0$. Since $g,h$ are polynomials in the $a_i$, their germs lie in $k(a_1,\\ldots,a_r)$ and so does $g/h$. Conversely this subfield lies in $K(T)$. Thus $K(T)=k(a_1,\\ldots,a_r)$.",
+   "uses": [
+    "def-weil-finite-type-morphism",
+    "lem-sc-integral-function-field-affine-fraction"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/curves.tex",
+    "place": "Tag 0BY1, theorem-curves-rational-maps, first proof paragraph; affine calculation using the finite-type definition and Tag 01RV (morphisms-lemma-integral-scheme-rational-functions)."
+   }
+  },
+  {
+   "text": "Apply [lem-sc-closed-irreducible-dimension-trdeg] to $X=T$ and $C=|T|$, a nonempty irreducible closed subset with generic point $\\eta_T$ because $T$ is integral. It gives $\\dim T=\\operatorname{trdeg}_k\\kappa_T(\\eta_T)$. The generic stalk $K(T)$ is a field by [lem-sc-integral-function-field-affine-fraction]; its maximal ideal is zero, since any nonzero element is a unit. By [def-weil-residue-field], $\\kappa_T(\\eta_T)=K(T)/(0)\\cong K(T)$ over $k$. Polynomial relations are preserved and reflected by this isomorphism, so the suprema of the sizes of independent subsets in [def-kun-transcendence-degree] agree. This gives the stated dimension formula.",
+   "uses": [
+    "lem-sc-closed-irreducible-dimension-trdeg",
+    "lem-sc-integral-function-field-affine-fraction",
+    "def-weil-residue-field",
+    "def-kun-transcendence-degree"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 0B1C, item-dimension-irreducible-trdeg in lemma-dimension-locally-algebraic; specialize to the whole integral scheme and identify the generic residue field."
+   }
+  },
+  {
+   "text": "For the field assertion set $E=\\varphi(K)\\subseteq L$. Since $\\varphi$ is a $k$-embedding, $K\\cong E$ over $k$: for any finite tuple, a polynomial over $k$ vanishes on its image exactly when it vanishes on the original tuple, by injectivity. Thus independent subsets correspond bijectively, and [def-kun-transcendence-degree] gives $\\operatorname{trdeg}_k E=d$. Apply [lem-kun-transcendence-degree-tower] to $k\\subseteq E\\subseteq L$: $d=d+\\operatorname{trdeg}_E L$. The remaining cardinal is at most $d$, hence finite; cancellation in the nonnegative integers gives $\\operatorname{trdeg}_E L=0$. The zero-degree criterion of the same node says that $L/E$ is algebraic.",
+   "uses": [
+    "def-kun-transcendence-degree",
+    "lem-kun-transcendence-degree-tower"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/fields.tex",
+    "place": "Tag 030H, lemma-transcendence-degree-tower; its zero-degree consequence and invariance under the given field isomorphism."
+   }
+  },
+  {
+   "text": "Choose field generators $b_1,\\ldots,b_s$ with $L=k(b_1,\\ldots,b_s)$. As $k\\subseteq E\\subseteq L$, the two inclusions $k(b_1,\\ldots,b_s)\\subseteq E(b_1,\\ldots,b_s)\\subseteq L$ show that $L=E(b_1,\\ldots,b_s)$. Each $b_i$ is algebraic over $E$ by step 3. Hence [lem-weil-pbc-algebraic-generators-finite-extension], applied with base field $E$ and ambient field $L$, makes $L/E$ finite. The argument used no separability.",
+   "uses": [
+    "lem-weil-pbc-algebraic-generators-finite-extension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/fields.tex",
+    "place": "Tag 09GH, lemma-algebraic-finitely-generated."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-finite-type-morphism",
+  "lem-sc-integral-function-field-affine-fraction",
+  "lem-sc-closed-irreducible-dimension-trdeg",
+  "def-weil-residue-field",
+  "def-kun-transcendence-degree",
+  "lem-kun-transcendence-degree-tower",
+  "lem-weil-pbc-algebraic-generators-finite-extension"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/curves.tex",
+  "place": "Tag 0BY1, theorem-curves-rational-maps, first and third proof paragraphs, expanded using varieties.tex Tag 0B1C, morphisms.tex Tag 01RV and fields.tex Tags 030H and 09GH."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "functionField.*(trdeg|FG)|trdeg.*functionField",
+   "results": "{\"t\": \"2026-10-23T04:14:43Z\", \"tool\": \"grep\", \"query\": \"functionField.*(trdeg|FG)|trdeg.*functionField\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/OrderOfVanishing.lean\"], \"digest\": \"a960257e8a5f97e9\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: trdeg_lt_aleph0 supplies only finiteness of transcendence degree, not dimension equality or finite field degree; number-theoretic FunctionField assumes finite degree rather than proving this result"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Finitely generated extensions of transcendence degree one have finite degree over the image of any base field embedding",
+   "results": "{\"t\": \"2026-10-23T04:14:43Z\", \"tool\": \"leansearch\", \"query\": \"Finitely generated extensions of transcendence degree one have finite degree over the image of any base field embedding\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Field.infinite_emb_of_transcendental\", \"trdeg_lt_aleph0\", \"IsTranscendenceBasis.lift_cardinalMk_eq_trdeg\", \"IsTranscendenceBasis.isAlgebraic_field\", \"IsTranscendenceBasis.to_subtype_range'\", \"isTranscendenceBasis_image\", \"FiniteField.instFiniteExtension_1\", \"Algebra.IsAlgebraic.isTranscendenceBasis_of_le_trdeg_of_finite\"], \"digest\": \"965018587c421719\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: trdeg_lt_aleph0 supplies only finiteness of transcendence degree, not dimension equality or finite field degree; number-theoretic FunctionField assumes finite degree rather than proving this result"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"functionField\", \"trdeg\"",
+   "results": "{\"t\": \"2026-10-23T04:14:43Z\", \"tool\": \"loogle\", \"query\": \"\\\"functionField\\\", \\\"trdeg\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: trdeg_lt_aleph0 supplies only finiteness of transcendence degree, not dimension equality or finite field degree; number-theoretic FunctionField assumes finite degree rather than proving this result"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An integral finite type curve over a field has finitely generated function field of transcendence degree one and every embedding between two such function fields has finite degree",
+   "results": "{\"t\": \"2026-10-23T04:14:44Z\", \"tool\": \"leanfinder\", \"query\": \"An integral finite type curve over a field has finitely generated function field of transcendence degree one and every embedding between two such function fields has finite degree\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"FunctionField\", \"WeierstrassCurve.IsIntegral\", \"functionField_iff\", \"WeierstrassCurve.IsIntegral.integral\", \"FunctionField.classNumber\", \"WeierstrassCurve.isIntegral_iff\", \"WeierstrassCurve.exists_isIntegral\", \"FunctionField.RingOfIntegers.instFintypeClassGroupSubtypeMemSubalgebraPolynomialRingOfIntegers\"], \"digest\": \"f19ba5f339f2e0cc\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: trdeg_lt_aleph0 supplies only finiteness of transcendence degree, not dimension equality or finite field degree; number-theoretic FunctionField assumes finite degree rather than proving this result"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The fraction field of an integral algebra of finite type over a field has transcendence degree equal to the dimension of its spectrum",
+   "results": "{\"t\": \"2026-10-23T04:16:48Z\", \"tool\": \"leanfinder\", \"query\": \"The fraction field of an integral algebra of finite type over a field has transcendence degree equal to the dimension of its spectrum\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"trdeg_lt_aleph0\", \"Algebra.IsAlgebraic.rank_fractionRing\", \"Algebra.IsAlgebraic.lift_rank_of_isFractionRing\", \"Algebra.IsAlgebraic.rank_fractionRing_mvPolynomial\", \"Algebra.Transcendental.rank_eq_cardinalMk\", \"trdeg_eq_zero\", \"Algebra.IsAlgebraic.rank_fractionRing_polynomial\", \"Algebra.IsAlgebraic.rank_of_isFractionRing\"], \"digest\": \"f448a8bc31c30df2\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: trdeg_lt_aleph0 supplies only finiteness of transcendence degree, not dimension equality or finite field degree; number-theoretic FunctionField assumes finite degree rather than proving this result"
+  },
+  {
+   "tool": "grep",
+   "query": "trdeg.*(finiteDimensional|finite_of|isAlgebraic)|finiteDimensional.*trdeg|finite_of.*trdeg",
+   "results": "{\"t\": \"2026-10-23T04:28:14Z\", \"tool\": \"grep\", \"query\": \"trdeg.*(finiteDimensional|finite_of|isAlgebraic)|finiteDimensional.*trdeg|finite_of.*trdeg\", \"sub\": \"RingTheory\", \"ok\": true, \"n_hits\": 4, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/AlgebraicIndependent/Transcendental.lean\", \"Mathlib/RingTheory/AlgebraicIndependent/Transcendental.lean\", \"Mathlib/RingTheory/AlgebraicIndependent/TranscendenceBasis.lean\", \"Mathlib/RingTheory/AlgebraicIndependent/TranscendenceBasis.lean\"], \"digest\": \"d5afb465c3e15aaf\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: IntermediateField.finite_of_fg_of_isAlgebraic still requires algebraicity; the trdeg tower and finite-generation base change are substantive intervening arguments, and no hit states the dimension/function-field clause"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"trdeg\", \"FiniteDimensional\"",
+   "results": "{\"t\": \"2026-10-23T04:28:14Z\", \"tool\": \"loogle\", \"query\": \"\\\"trdeg\\\", \\\"FiniteDimensional\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: IntermediateField.finite_of_fg_of_isAlgebraic still requires algebraicity; the trdeg tower and finite-generation base change are substantive intervening arguments, and no hit states the dimension/function-field clause"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "If K and L are finitely generated field extensions of k with the same finite transcendence degree, every k embedding K into L makes L finite dimensional over K",
+   "results": "{\"t\": \"2026-10-23T04:28:19Z\", \"tool\": \"leanfinder\", \"query\": \"If K and L are finitely generated field extensions of k with the same finite transcendence degree, every k embedding K into L makes L finite dimensional over K\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Field.Emb.Cardinal.instFiniteDimensionalSubtypeMemIntermediateFieldAdjoinImageToTypeOrdRankCompCoeBasisWellOrderedBasisLeastExtIioSingletonSet\", \"Field.FiniteDimensional.of_finite_intermediateField\", \"IntermediateField.finite_of_fg_of_isAlgebraic\", \"IntermediateField.finiteDimensional_map\", \"functionField_iff\", \"finiteExts\", \"IntermediateField.finiteDimensional_right\", \"IntermediateField.exists_lt_finrank_of_infinite_dimensional\"], \"digest\": \"e58c0905c001cd0a\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: IntermediateField.finite_of_fg_of_isAlgebraic still requires algebraicity; the trdeg tower and finite-generation base change are substantive intervening arguments, and no hit states the dimension/function-field clause"
+  },
+  {
+   "tool": "grep",
+   "query": "functionField.*(trdeg|FG)|trdeg.*functionField",
+   "results": "{\"t\": \"2026-10-23T09:34:19Z\", \"tool\": \"grep\", \"query\": \"functionField.*(trdeg|FG)|trdeg.*functionField\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/OrderOfVanishing.lean\"], \"digest\": \"a960257e8a5f97e9\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: returned results give affine fraction fields, finite transcendence degree, or finiteness after algebraicity is assumed; none states all scheme and embedded-field clauses. Existing DAG nodes supply these ingredients."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Finitely generated field extensions of equal finite transcendence degree have finite degree under an embedding",
+   "results": "{\"t\": \"2026-10-23T09:34:20Z\", \"tool\": \"leansearch\", \"query\": \"Finitely generated field extensions of equal finite transcendence degree have finite degree under an embedding\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Field.infinite_emb_of_transcendental\", \"IntermediateField.finite_of_fg_of_isAlgebraic\", \"FiniteField.algEquivExtension\", \"trdeg_lt_aleph0\", \"Field.Emb.Cardinal.instFiniteDimensionalSubtypeMemIntermediateFieldAdjoinImageToTypeOrdRankCompCoeBasisWellOrderedBasisLeastExtIioSingletonSet\", \"FiniteField.instFiniteExtension_1\", \"Field.embProdEmbOfIsAlgebraic\", \"Field.Emb.Cardinal.deg_lt_aleph0\"], \"digest\": \"48d6a7ef9dbeb2a0\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: returned results give affine fraction fields, finite transcendence degree, or finiteness after algebraicity is assumed; none states all scheme and embedded-field clauses. Existing DAG nodes supply these ingredients."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"functionField\", \"trdeg\"",
+   "results": "{\"t\": \"2026-10-23T09:34:20Z\", \"tool\": \"loogle\", \"query\": \"\\\"functionField\\\", \\\"trdeg\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: returned results give affine fraction fields, finite transcendence degree, or finiteness after algebraicity is assumed; none states all scheme and embedded-field clauses. Existing DAG nodes supply these ingredients."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An integral finite type scheme over a field has finitely generated function field with transcendence degree equal to its dimension; equal finite transcendence degrees imply embedded finitely generated fields have finite degree",
+   "results": "{\"t\": \"2026-10-23T09:34:29Z\", \"tool\": \"leanfinder\", \"query\": \"An integral finite type scheme over a field has finitely generated function field with transcendence degree equal to its dimension; equal finite transcendence degrees imply embedded finitely generated fields have finite degree\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"functionField_iff\", \"trdeg_lt_aleph0\", \"Algebra.finite_of_essFiniteType_of_isAlgebraic\", \"IntermediateField.finite_of_fg_of_isAlgebraic\", \"FunctionField\", \"RatFunc.finrank_ratFunc_ratFunc\", \"IntermediateField.essFiniteType_iff\", \"instFiniteDimensionalFractionRingOfFinite\"], \"digest\": \"474621133ec07f55\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: returned results give affine fraction fields, finite transcendence degree, or finiteness after algebraicity is assumed; none states all scheme and embedded-field clauses. Existing DAG nodes supply these ingredients."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The generic stalk of an integral scheme of finite type is a finitely generated field extension, and a finitely generated algebraic extension is finite",
+   "results": "{\"t\": \"2026-10-23T09:34:30Z\", \"tool\": \"leanfinder\", \"query\": \"The generic stalk of an integral scheme of finite type is a finitely generated field extension, and a finitely generated algebraic extension is finite\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.instIsFractionRingCarrierStalkCommRingCatPresheafFunctionField\", \"Algebra.QuasiFinite.of_isIntegral_of_finiteType\", \"AlgebraicGeometry.instFieldCarrierFunctionField\", \"AlgebraicGeometry.LocallyOfFiniteType.stalkMap\", \"AlgebraicGeometry.instIsDomainCarrierStalkCommRingCatPresheafOfIsIntegral\", \"AlgebraicGeometry.stalkFunctionFieldAlgebra\", \"AlgebraicGeometry.instAlgebraCarrierFunctionFieldSpec\", \"AlgebraicGeometry.Scheme.functionField\"], \"digest\": \"3ff46ccf020e727c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: returned results give affine fraction fields, finite transcendence degree, or finiteness after algebraicity is assumed; none states all scheme and embedded-field clauses. Existing DAG nodes supply these ingredients."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-proper-curve-function-field-morphisms",
+  "date": "2026-10-23",
+  "group": "Q13"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), auxiliary high-genus-cover argument in the alteration reduction: the finite-curve genus comparison used to exclude rational curves. Separation of the inseparable part before applying Riemann--Hurwitz (Stacks 0CD2). Within this auxiliary argument, Stacks 0CD2 proof, second sentence: the intermediate field and its embeddings correspond to curve morphisms. Repair extraction: Tag 0BY1 (curves-theorem-curves-rational-maps), first and third proof paragraphs; Varieties Tag 0B1C (varieties-item-dimension-irreducible-trdeg in lemma-dimension-locally-algebraic); Fields Tags 030H (fields-lemma-transcendence-degree-tower) and 09GH (fields-lemma-algebraic-finitely-generated). Extracts old steps 2 and 5.",
+   "via": [
+    "lem-sfb-proper-curve-function-field-morphisms",
+    "lem-sfb-curve-frobenius-separable-factorization",
+    "lem-sfb-finite-curve-genus-monotonicity",
+    "lem-sfb-high-genus-equivariant-cover",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-curve-function-field-arithmetic",
+  "worker": "stage1",
+  "summary": "Proved the two clauses using existing DAG tools only: finite affine algebra generators give field generators; the closed-irreducible dimension theorem applies to the whole scheme; equal finite transcendence degrees and the tower law give algebraicity, and finite field generators give finite degree. Read all cited statements and Stacks sources; no statement changes and no new nodes. Checked dimension zero, identity embeddings and purely inseparable extensions.",
+  "blueprint": "det-thm-sf-ctf-stability-direct-images, proof (3), auxiliary high-genus-cover argument in the alteration reduction: the finite-curve genus comparison used to exclude rational curves. Separation of the inseparable part before applying Riemann--Hurwitz (Stacks 0CD2). Within this auxiliary argument, Stacks 0CD2 proof, second sentence: the intermediate field and its embeddings correspond to curve morphisms. Repair extraction: Tag 0BY1 (curves-theorem-curves-rational-maps), first and third proof paragraphs; Varieties Tag 0B1C (varieties-item-dimension-irreducible-trdeg in lemma-dimension-locally-algebraic); Fields Tags 030H (fields-lemma-transcendence-degree-tower) and 09GH (fields-lemma-algebraic-finitely-generated). Extracts old steps 2 and 5.",
+  "tool_uses": [
+   {
+    "node": "lem-sc-closed-irreducible-dimension-trdeg",
+    "why": "Generic dimension/transcendence-degree theorem applied to the whole integral scheme; used as an arithmetic tool in the existing high-genus-cover route, not as a replacement for a unit step."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sc-closed-irreducible-dimension-trdeg"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q42-accea2cd3",
+  "group": "Q42",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q42-accea2cd3 (reviewer sub-agent of L); spot-checked: I read the item's four steps in full; the delivery adds no new nodes, and the statement and stmt_deps are identical to the live and side-live copies (both still unsplit with an empty proof). Sources checked at the cited places, with tags matching tags/tags: Tag 0BY1 is curves.tex:158; Tag 0B1C is varieties.tex:3811 and 3905; Tag 030H is fields.tex:3482; Tag 09GH is fields.tex:693. Step 1 takes T's finite affine cover by Spec k[a_1..a_r] from def-weil-finite-type-morphism, and lem-sc-integral-function-field-affine-fraction gives K(T)=Frac(A), so K(T)=k(a_i); the elementary flag is correct. Step 2 applies lem-sc-closed-irreducible-dimension-trdeg with C=|T|; the generic stalk is a field, so m=0 and kappa(eta)=K(T) as k-algebras, and transcendence degrees agree. Step 3: E=phi(K) has trdeg d, the tower law gives d=d+x with x<=d, so x is finite and cancels to 0, and L/E is algebraic by the zero-degree criterion; there is no infinite-cardinal cancellation. Step 4: L=E(b_i) with each b_i algebraic over E, so the 09GH node makes L/E finite; no separability is used. proof_deps equals the union of the step uses. There is no cycle (I traversed the full closure) and no SGA citation. Edge cases: Spec k, Spec k' for finite k'/k, A^n, d=0, the purely inseparable map t->t^p, and the infinite-d shift showing the finiteness hypothesis is necessary. Duplicate search (0BY1, 09GH, function-field trdeg wording) found no node stating the combined item. Accepted tool_use: lem-sc-closed-irreducible-dimension-trdeg (unit sk-prop-sf-cbc, off the route), used as the generic dim=trdeg black box. No changes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.CurveFunctionFieldArithmetic",
+  "declaration": "AlgebraicGeometry.functionField_finitelyGenerated_and_trdeg_eq_dimension",
+  "declarations": [
+   "AlgebraicGeometry.functionField_finitelyGenerated_and_trdeg_eq_dimension",
+   "FieldExtension.finite_image_of_finitelyGenerated_of_trdeg_eq"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/CurveFunctionFieldArithmetic.lean",
+  "statement": "theorem functionField_finitelyGenerated_and_trdeg_eq_dimension (k : Type u) [Field k] (T : Scheme.{u}) [IsIntegral T] (sT : T ⟶ Spec (.of k)) [LocallyOfFiniteType sT] [QuasiCompact sT] : @IntermediateField.FG k _ T.functionField _ (((Scheme.ΓSpecIso (.of k)).inv ≫ sT.appTop ≫ T.presheaf.germ ⊤ (genericPoint T) trivial).hom.toAlgebra) ⊤ ∧ ∃ d : ℕ, topologicalKrullDim T = (d : WithBot ℕ∞) ∧ @Algebra.trdeg k T.functionField _ _ (((Scheme.ΓSpecIso (.of k)).inv ≫ sT.appTop ≫ T.presheaf.germ ⊤ (genericPoint T) trivial).hom.toAlgebra) = (d : Cardinal)",
+  "branch": "newtargets-dag",
+  "by": "NV",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "Two independent clauses of the node are stated as the two listed theorems. The first uses the canonical pullback-of-constants germ algebra on the generic stalk; the second uses the canonical subfield inclusion of the embedding image. Both have sorry proofs."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-23a566060",
+  "group": "NV",
+  "result": "pass",
+  "note": "Read item node, all 9 stmt_dep records (byte-identical to side-live; item differs only by the added lean record), FieldTower and ClosedIrreducibleDimensionTrdeg dep modules, module and report. lean.statement verbatim. Thm 1: Field k, IsIntegral T (includes nonempty), LocallyOfFiniteType+QuasiCompact sT = finite type, T.functionField with canonical ΓSpecIso.inv≫appTop≫germ algebra, IntermediateField.FG ⊤ (field FG), ∃ d:ℕ dim=d ∧ trdeg=d (equivalent, matches landed dep form). Thm 2: independent universes, FG hyps, common finite d, all AlgHom embeddings, Module.Finite φ.fieldRange L per def-pc-field-tower; no separability. Edge cases d=0, Spec k, identity, Frobenius t↦t^p covered. No defs, sorry proofs, source/blueprint docstrings with proof steps, no duplicate found, no pro-etale; report has Worker report and Second reading by NV. No compile run (no change)."
+ }
+}

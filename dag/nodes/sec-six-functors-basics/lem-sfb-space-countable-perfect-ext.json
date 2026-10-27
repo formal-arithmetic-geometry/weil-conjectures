@@ -1,0 +1,228 @@
+{
+ "id": "lem-sfb-space-countable-perfect-ext",
+ "kind": "statement",
+ "title": "Countable Ext from perfect objects on a countable algebraic space",
+ "statement": "Work in the universes of [def-weil-size-convention]. Let $S$ be a scheme [def-pc-scheme] and $X$ a quasi-compact quasi-separated algebraic space over $S$ [def-trf-algebraic-space]: every open cover of $|X|$ has a finite subcover, and the absolute diagonal is quasi-compact. Use its small etale structure sheaf $\\mathcal O_X$, module sheaves [def-weil-sheaf-of-modules-category], and unbounded derived category $D(\\mathcal O_X)$ [def-weil-abstract-derived-category]. Write $C_X=D_{\\mathrm{QCoh}}(\\mathcal O_X)$ for the full subcategory with quasi-coherent cohomology [def-trf-space-quasi-coherent-module]. Perfect means etale locally represented by a bounded complex of direct summands of finite free structure modules [def-weil-pbc-strict-perfect-coefficient-package]. Assume that $\\mathcal O_X(V)$ is countable for every affine scheme $V$ etale over $X$. Let $K\\in C_X$ satisfy countability of $\\mathcal H^j(K)(V)$ for every integer $j$ and every such $V$. For every perfect $E\\in C_X$ and integer $i$, both $\\operatorname{Hom}_{C_X}(E,K[i])$ and $\\operatorname{Hom}_{C_X}(E,E[i])$ are countable sets. The first assertion concerns arbitrary unbounded $K$; the second imposes no extra countability assumption on $E$.",
+ "source": {
+  "document": "literature/stacks-project/spaces-perfect.tex",
+  "place": "Tag 0CRU, lemma-countable-cohomology, Ext assertion; Tag 0CRV, lemma-countable, proof (1) to (2) for countability of perfect cohomology and final sentence of (2) to (1) for the self-Ext application."
+ },
+ "stmt_deps": [
+  "def-weil-size-convention",
+  "def-pc-scheme",
+  "def-trf-algebraic-space",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-abstract-derived-category",
+  "def-trf-space-quasi-coherent-module",
+  "def-weil-pbc-strict-perfect-coefficient-package"
+ ],
+ "proof": [
+  {
+   "text": "Put $E^\\vee=R\\mathcal Hom(E,\\mathcal O_X)$. Perfect duality says that $E^\\vee$ is perfect and $E^\\vee\\otimes^{\\mathbf L}L\\cong R\\mathcal Hom(E,L)$ for every $L\\in D(\\mathcal O_X)$. Derived tensor symmetry and the global internal-Hom sections comparison therefore give, for every integer $i$, $H^iR\\Gamma(X,L\\otimes^{\\mathbf L}E^\\vee)\\cong\\operatorname{Hom}_{D(\\mathcal O_X)}(E,L[i])$. The sections comparison is valid for arbitrary unbounded $L$, so this identification introduces no boundedness condition.",
+   "uses": [
+    "lem-sfb-ringed-site-perfect-duality",
+    "lem-sf-ringed-derived-closed-symmetric-monoidal",
+    "lem-sfb-derived-internal-hom-sections-model"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 08JJ (lemma-dual-perfect-complex), 08JA (lemma-section-RHom-over-U), and 0FPT (lemma-symmetric-monoidal-derived)."
+   }
+  },
+  {
+   "text": "Apply countable hypercohomology with $v=\\operatorname{id}_X$, $P=E^\\vee$, and the given $K$. The identity is quasi-compact, quasi-separated and etale. The hypotheses on $X$ and all affine-etale sections of $\\mathcal H^j(K)$ are precisely those assumed here, and step 1 supplies perfectness of $P$. Thus $H^iR\\Gamma(X,K\\otimes^{\\mathbf L}E^\\vee)$ is countable for every $i$. Step 1 identifies this group with $\\operatorname{Hom}_{D(\\mathcal O_X)}(E,K[i])$; the latter is the required Hom set in $C_X$ because $C_X$ is a full subcategory.",
+   "uses": [
+    "lem-sfb-space-countable-hypercohomology"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-perfect.tex",
+    "place": "Tag 0CRU (lemma-countable-cohomology), reduction of Ext to hypercohomology, specialized to U=X."
+   }
+  },
+  {
+   "text": "Fix an arbitrary affine etale $a:V=\\operatorname{Spec}A\\to X$. Exact etale restriction preserves quasi-coherent cohomology, so $E_V=a^*E\\in D_{\\mathrm{QCoh}}(\\mathcal O_V)$; it is perfect by restriction of its local strict-perfect presentations. For $L=\\mathcal O_V[0]$ the only nonzero cohomology-section module on $V$ is $A=\\mathcal O_X(V)$, countable by hypothesis. The affine countable-perfect-tensor lemma applied to $(L,Q)=(\\mathcal O_V,E_V)$, followed by the tensor unit isomorphism, shows that $H^jR\\Gamma(V,E_V)$ is countable for every $j$. To identify the required sections, use the affine etale derived equivalence: writing $E_V=a_A(M)$ for $M\\in D(A)$, its stated cohomology and section comparisons give $\\mathcal H^j(E_V)(V)\\cong\\Gamma(V,a_A(H^j(M)))\\cong H^j(M)\\cong H^jR\\Gamma(V,E_V)$. Exact restriction identifies the left side with $\\mathcal H^j(E)(V)$. Hence $E$ itself satisfies the countable-cohomology hypothesis on every affine etale chart.",
+   "uses": [
+    "lem-sfb-space-derived-etale-chart-calculus",
+    "def-weil-pbc-strict-perfect-coefficient-package",
+    "lem-sfb-affine-countable-perfect-tensor",
+    "lem-sf-ringed-derived-closed-symmetric-monoidal",
+    "lem-sfb-affine-etale-derived-module-realization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-perfect.tex; literature/stacks-project/perfect.tex",
+    "place": "Tag 0CRV (lemma-countable), proof (1) to (2), with details via Tag 0CRP (lemma-countable-cohomology), affine paragraph, and Tag 071Q (lemma-derived-quasi-coherent-small-etale-site)."
+   }
+  },
+  {
+   "text": "Now repeat step 2 with $K=E$, using the affine-etale countability proved in step 3. This gives countability of $\\operatorname{Hom}_{C_X}(E,E[i])$ for every integer $i$. Both Hom assertions hold for all the objects and integers in the statement.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-perfect.tex",
+    "place": "Tag 0CRV (lemma-countable), last sentence of proof (2) to (1)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-ringed-site-perfect-duality",
+  "lem-sf-ringed-derived-closed-symmetric-monoidal",
+  "lem-sfb-derived-internal-hom-sections-model",
+  "lem-sfb-space-countable-hypercohomology",
+  "lem-sfb-space-derived-etale-chart-calculus",
+  "def-weil-pbc-strict-perfect-coefficient-package",
+  "lem-sfb-affine-countable-perfect-tensor",
+  "lem-sfb-affine-etale-derived-module-realization"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/spaces-perfect.tex",
+  "place": "Tag 0CRU (lemma-countable-cohomology), duality reduction; Tag 0CRV (lemma-countable), countability of perfect cohomology and self-Ext application."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "countable.*(Ext|cohom)|Ext.*countable",
+   "results": "0 hits; Mathlib/AlgebraicGeometry",
+   "date": "2026-10-24",
+   "verdict": "no match: HasExt and smallness of localized Hom types do not assert countability; countable AB4 concerns exact coproducts rather than cardinality."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Over a space with countable affine rings Ext from a perfect complex into countable cohomology is countable",
+   "results": "Hits: CategoryTheory.Abelian.Ext, CategoryTheory.Abelian.Ext.mk₀, CategoryTheory.IsGrothendieckAbelian.hasExt, LightCondensed.instCountableAB4StarLightCondMod, CategoryTheory.CountableAB4Star, CategoryTheory.CountableAB4.mk, CategoryTheory.ProjectiveResolution.extMk.congr_simp, CategoryTheory.instCountableAB4StarOfAB4StarOfSize",
+   "date": "2026-10-24",
+   "verdict": "no match: HasExt and smallness of localized Hom types do not assert countability; countable AB4 concerns exact coproducts rather than cardinality."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Ext\", \"Countable\"",
+   "results": "Hits: MeasureTheory.ext_of_forall_mem_subalgebra_integral_eq_of_pseudoEMetric_complete_countable",
+   "date": "2026-10-24",
+   "verdict": "no match: HasExt and smallness of localized Hom types do not assert countability; countable AB4 concerns exact coproducts rather than cardinality."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Countable Ext groups between perfect complexes and quasi coherent complexes on a quasi compact quasi separated algebraic space",
+   "results": "Hits: CategoryTheory.Abelian.Ext, CategoryTheory.HasExt.standard, CategoryTheory.hasExt_of_hasDerivedCategory, CategoryTheory.HasExt.instHasSmallLocalizedShiftedHomHomologicalComplexIntUpQuasiIsoOfIsGEOfIsLEOfNat, instHasExtModuleCatOfSmall, CategoryTheory.HasExt, CategoryTheory.hasExt_iff, CategoryTheory.instHasSmallLocalizedShiftedHomHomologicalComplexIntUpQuasiIsoObjCochainComplexCompSingleFunctorOfNatOfHasExt",
+   "date": "2026-10-24",
+   "verdict": "no match: HasExt and smallness of localized Hom types do not assert countability; countable AB4 concerns exact coproducts rather than cardinality."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Perfect complexes over countable structure sheaves have countable derived Hom groups",
+   "results": "Hits: CategoryTheory.hasExt_of_hasDerivedCategory, CategoryTheory.instSmallHomDerivedCategoryObjSingleFunctorOfHasExt, CategoryTheory.hasExt_iff, CategoryTheory.HasExt.instHasSmallLocalizedShiftedHomHomologicalComplexIntUpQuasiIsoOfIsGEOfIsLEOfNat, CategoryTheory.HasExt.hasSmallLocalizedShiftedHom_of_isLE_of_isGE, instHasExtModuleCatOfSmall, CategoryTheory.instHasSmallLocalizedShiftedHomHomologicalComplexIntUpQuasiIsoObjCochainComplexCompSingleFunctorOfNatOfHasExt, CategoryTheory.HasExt.standard",
+   "date": "2026-10-24",
+   "verdict": "no match: HasExt and smallness of localized Hom types do not assert countability; countable AB4 concerns exact coproducts rather than cardinality."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Countable Ext groups from perfect complexes into complexes with countable quasi coherent cohomology on algebraic spaces",
+   "results": "Hits: CategoryTheory.Abelian.Ext, CategoryTheory.HasExt.standard, CategoryTheory.hasExt_of_hasDerivedCategory, CategoryTheory.IsGrothendieckAbelian.hasExt, CategoryTheory.HasExt.instHasSmallLocalizedShiftedHomHomologicalComplexIntUpQuasiIsoOfIsGEOfIsLEOfNat, CategoryTheory.HasExt, CategoryTheory.hasExt_iff_small_ext, CategoryTheory.instSmallHomDerivedCategoryObjSingleFunctorOfHasExt",
+   "date": "2026-10-24",
+   "verdict": "no match: smallness/HasExt and countable AB4 axioms do not assert countability of Hom sets; t-structure bounds and measure extensionality are unrelated."
+  },
+  {
+   "tool": "grep",
+   "query": "countable.*(Ext|cohom)|Ext.*countable",
+   "results": "0 hits; Mathlib/AlgebraicGeometry",
+   "date": "2026-10-24",
+   "verdict": "no match: smallness/HasExt and countable AB4 axioms do not assert countability of Hom sets; t-structure bounds and measure extensionality are unrelated."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Perfect complexes over countable algebraic spaces have countable Ext into arbitrary complexes with countable cohomology",
+   "results": "Hits: CategoryTheory.instCountableAB4OfAB4OfSize, CategoryTheory.Abelian.Ext, CategoryTheory.IsGrothendieckAbelian.hasExt, CategoryTheory.Abelian.Ext.mk₀, CategoryTheory.CountableAB4.mk, CategoryTheory.CountableAB4Star, HomologicalComplex.isGrothendieckAbelian, LightCondensed.instCountableAB4StarLightCondMod",
+   "date": "2026-10-24",
+   "verdict": "no match: smallness/HasExt and countable AB4 axioms do not assert countability of Hom sets; t-structure bounds and measure extensionality are unrelated."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Ext\", \"Countable\"",
+   "results": "Hits: MeasureTheory.ext_of_forall_mem_subalgebra_integral_eq_of_pseudoEMetric_complete_countable",
+   "date": "2026-10-24",
+   "verdict": "no match: smallness/HasExt and countable AB4 axioms do not assert countability of Hom sets; t-structure bounds and measure extensionality are unrelated."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Perfect complexes on a ringed etale site over countable rings have countable morphisms in every derived degree",
+   "results": "Hits: DerivedCategory.IsGE, DerivedCategory.IsLE, DerivedCategory.instIsGEObjCochainComplexIntQOfIsGE, DerivedCategory.instIsLEObjCochainComplexIntQOfIsLE, DerivedCategory.instEssSurjCochainComplexIntQ, DerivedCategory.exists_iso_Q_obj_of_isGE_of_isLE, DerivedCategory.isLE_Q_obj_iff, CategoryTheory.hasExt_iff",
+   "date": "2026-10-24",
+   "verdict": "no match: smallness/HasExt and countable AB4 axioms do not assert countability of Hom sets; t-structure bounds and measure extensionality are unrelated."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-space-countable-telescope",
+  "date": "2026-10-24",
+  "group": "Q117"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "Proof (3) of det-thm-sf-ctf-stability-direct-images, inherited coherent-family/Quot effectivity prerequisite: Tag 0CX8 (lemma-compute-over-affine), with its canonical maps from 0CX6 (lemma-compute-against-perfect). Supporting input: Tag 0CRW (lemma-computing-sections-as-colim), part (2) and its proof constructing hocolim E_m = Ru_*O_U; Tag 08IN (lemma-cohomology-base-change) supplies the normalized maps. The coefficient-linear version retains the commuting B-action in the same tensor and section construction. Supporting subargument: 0CRW proof, application of lemma-countable to the descended structure-sheaf image. Supporting argument in spaces-perfect Tag 0CRV, proof (2) to (1): Tag 0CRU, lemma-countable-cohomology, Ext assertion; Tag 0CRV, lemma-countable, proof (1) to (2) for countability of perfect cohomology and final sentence of (2) to (1) for the self-Ext application.",
+   "via": [
+    "lem-sfb-space-countable-telescope",
+    "lem-sfb-space-etale-sections-perfect-telescope",
+    "lem-sfb-space-inverse-module-affine-base-change",
+    "lem-sfb-space-inverse-modules-near-special-fibre",
+    "lem-sfb-space-flat-proper-support-inverse-effectivity",
+    "lem-sfb-space-coherent-stack-general",
+    "lem-sfb-space-quot-representability",
+    "lem-sfb-space-hilbert-representability",
+    "lem-sfb-space-hom-representability",
+    "lem-sfb-curve-descent-isom-spaces",
+    "lem-sfb-nodal-curve-stack-smooth",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-space-countable-perfect-ext",
+  "worker": "stage1",
+  "summary": "Reused the existing countable-hypercohomology, ringed-site duality/global-Hom, and affine-etale realization nodes. Proved the unbounded Ext assertion by duality, verified countability of perfect cohomology on every affine etale chart, then obtained self-Ext. No new nodes, statement changes, Lean writing or compilation.",
+  "blueprint": "Latest blueprint det-thm-sf-ctf-stability-direct-images, proof (3): the inherited coherent-family/Quot effectivity prerequisite; specifically the 0CRW countable telescope construction uses 0CRV, whose proof needs 0CRU Ext and perfect self-Ext countability. The four steps realize that supporting subargument without changing the blueprint route.",
+  "tool_uses": [
+   {
+    "node": "lem-sf-ringed-derived-closed-symmetric-monoidal",
+    "why": "Generic ringed-site tensor symmetry and tensor unit isomorphisms; these are the structural constraints needed for the 08JJ duality calculation, independent of any geometric duality theorem."
+   },
+   {
+    "node": "lem-sfb-derived-internal-hom-sections-model",
+    "why": "Generic unbounded ringed-site equality H^i RΓ(RHom(E,L)) = Hom(E,L[i]); perfect duality in this unit gives the internal Hom object but does not state its global-Hom comparison."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sf-ringed-derived-closed-symmetric-monoidal",
+  "lem-sfb-derived-internal-hom-sections-model"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q68-cf6c36fbe",
+  "group": "Q68",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q68-cf6c36fbe (reviewer sub-agent of L); spot-checked: I read all four steps of lem-sfb-space-countable-perfect-ext and the statement of every cited node. Source: spaces-perfect 0CRU/0CRV, perfect 0CRP (affine paragraph), sites-cohomology 08JJ/08JA. The statement and stmt_deps are unchanged; the item is unsplit on live and side-live, and there are 0 new nodes. Step 1: 08JJ duality (E^∨ perfect, E^∨⊗L≅RHom(E,L)) plus closed symmetric monoidality makes RHom(E,−) a right adjoint of E⊗−, and the sections model then gives H^iRΓ(L⊗E^∨)=Hom(E,L[i]) for unbounded L. Step 2: the hypercohomology node with v=id_X and P=E^∨; every hypothesis matches the item's. Step 3: X_et consists of schemes, so X_et/V is V_et. O_V[0] is quasi-coherent with sections A, countable by hypothesis. The affine tensor node with (O_V,E_V) and the unit isomorphism give H^nRΓ(V,E_V) countable. The affine realization (a_A equivalence, H^j(a_A M)≅a_A(H^j M), Γ(a_A N)≅N) identifies this with H^j(E)(V). This writes out the gap in 0CRV's 'perfect satisfies (2)'. Step 4 is elementary. Edge cases checked: X empty, E=0, affine X with E=A[n]. Unbounded K is kept throughout. There is no cycle, and proof_deps equals the union of the uses. A duplicate search (0CRU/0CRV/0CRP, countable Ext) found nothing that states the item. No SGA. The tool_uses are accepted: symmetric monoidal and internal-Hom sections model are generic ringed-site tools. Batch-5 finding: the hypercohomology, chart-calculus and affine-realization citations reach sec-trace-formula only through def-trf-algebraic-space and generic trf/pod foundations (algebraic spaces and fppf descent in sk-i-curve-zero, K-flat word models, localization, adjoint coherence). None of them is the trace formula, Poincaré duality, an nt-assume leaf, or a step of their proofs, so the finding does not lead to a RETURN."
+ }
+}

@@ -1,0 +1,279 @@
+{
+ "id": "lem-sfb-birational-law-strictification",
+ "kind": "statement",
+ "title": "Strictification of a birational group law over a field or trait",
+ "statement": "Let $B$ be a field or a discrete valuation ring [def-weil-field, def-sc-discrete-valuation-ring], and put $S=\\operatorname{Spec}B$ [def-weil-affine-spectrum]. Products and fibres are scheme-theoretic base changes [def-pc-base-change]. Let $X$ be a smooth separated finite-type $S$-scheme with nonempty fibres [def-sbc-smooth-morphisms, def-weil-finite-type-morphism]. Separated means that the diagonal is a closed immersion [def-weil-closed-immersion]. An open in an $S$-scheme is $S$-dense if its intersection with each fibre is dense. An $S$-rational map is a morphism on an $S$-dense open, up to equality on an $S$-dense common open; an $S$-birational map is represented by an isomorphism between $S$-dense opens. Let $m:X\\times_SX\\dashrightarrow X$ be $S$-rational, associative wherever both composites are defined, such that $\\Phi(x,y)=(x,m(x,y))$ and $\\Psi(x,y)=(m(x,y),y)$ are $S$-birational. The law is called strict if there is an open $D\\subseteq X\\times_SX$ on which $m$ is defined and $\\Phi,\\Psi$ induce isomorphisms $D\\simeq V$, $D\\simeq W$ onto open subschemes, with $D,V,W$ dense in every fibre of each projection $X\\times_SX\\to X$. There is a smooth separated finite-type $S$-dense open subscheme $X^\\circ\\subseteq X$ such that the restriction of $m$ to $X^\\circ$ is strict. If $B$ is a discrete valuation ring with fraction field $F$ and $m$ is defined on all of $X_F\\times_FX_F$ and makes $X_F$ a group scheme [def-sc-group-scheme], $X^\\circ$ can be chosen to contain $X_F$.",
+ "source": {
+  "document": "literature/bosch-lutkebohmert-raynaud-neron-models.pdf",
+  "place": "BLR 5.2 Definition 1 and Proposition 2, printed pp.115-117 (PDF pp.121-123), including the generic-fibre preservation visible in the proof; primary scan https://www.math.stonybrook.edu/~kamenova/homepage_files/Bosch_Raynaud_Neron_Model_tc.pdf; local literature copy WANTED."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-sc-discrete-valuation-ring",
+  "def-weil-affine-spectrum",
+  "def-pc-base-change",
+  "def-sbc-smooth-morphisms",
+  "def-weil-finite-type-morphism",
+  "def-weil-closed-immersion",
+  "def-weil-open-immersion",
+  "def-sc-group-scheme",
+  "def-sfb-relative-birational-group-law",
+  "def-sfb-strict-birational-law"
+ ],
+ "proof": [
+  {
+   "text": "Put $P=X\\times_SX$. It is smooth over $S$ by smooth base change and composition. Choose $S$-dense isomorphism charts for $\\Phi$ and $\\Psi$, and intersect their source opens with a representative domain for $m$. These representatives agree on their overlaps: their equality on an $S$-dense common open extends to the overlap by smooth fibrewise schematic density and uniqueness into a separated target. Restriction of an isomorphism to an open is an isomorphism onto an open, and a dense open in its source has dense image in its open target on each fibre. Thus we obtain one $S$-dense open $U\\subseteq P$ on which $m$ is a morphism, and isomorphisms $\\Phi:U\\simeq V$ and $\\Psi:U\\simeq W$ onto $S$-dense opens of $P$. Set $Z=U\\cap V\\cap W$; a finite intersection of dense opens is dense on each fibre.",
+   "uses": [
+    "lem-pc-proper-base-change",
+    "lem-trf-smooth-composition",
+    "lem-sfb-smooth-fibrewise-dense-open-base-change",
+    "lemma-nagata-ext-scheme-theoretically-dominant-separated"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bosch-lutkebohmert-raynaud-neron-models.pdf",
+    "place": "5.2 Proposition 2, opening: common U, V, W and Z; 2.5 preliminaries"
+   }
+  },
+  {
+   "text": "Apply projection-density shrinking to $Z$. Choose its open $A\\subseteq X$ and write $Q=A\\times_SA$. For every $a\\in A$, the opens $U,V,W$ restrict to dense opens in both $\\{a\\}\\times_SX$ and $X\\times_S\\{a\\}$, with $\\{a\\}=\\operatorname{Spec}\\kappa(a)$. The inverse image of $A$ in each such fibre is also dense, by base change of smooth fibrewise density. Therefore these density statements remain true after imposing that the other coordinate belongs to $A$. All density arguments below can be made over $\\kappa(a)$, making $a$ a rational point; no algebraic closure or geometric irreducibility is needed.",
+   "uses": [
+    "lem-sfb-product-projection-density-shrink",
+    "lem-sfb-smooth-fibrewise-dense-open-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bosch-lutkebohmert-raynaud-neron-models.pdf",
+    "place": "5.2 Proposition 2, construction of X prime and reduction to a rational point a"
+   }
+  },
+  {
+   "text": "Define $U'=U\\cap Q\\cap(m|_U)^{-1}(A)$, $V'=\\Phi(U')$ and $W'=\\Psi(U')$. They are open in $Q$ and the two restricted maps are isomorphisms onto their images. Fix $a\\in A$ and work over $\\kappa(a)$. The slice $\\Phi_a:U\\cap(\\{a\\}\\times_SX)\\simeq V\\cap(\\{a\\}\\times_SX)$ is an isomorphism between dense opens of $X_{\\kappa(a)}$, since $\\Phi$ fixes the first coordinate. Intersect its source with the dense open $A_{\\kappa(a)}$ and with the inverse image of $A_{\\kappa(a)}$ in its target. The resulting dense open is precisely the first-projection fibre $U'_a$. The identical argument with $\\Psi$, fixing the second coordinate, gives density of the second-projection fibres of $U'$. Their images under these slice isomorphisms show that $V'$ is first-projection dense and $W'$ is second-projection dense.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/bosch-lutkebohmert-raynaud-neron-models.pdf",
+    "place": "5.2 Proposition 2, middle paragraph, four of the six density conditions"
+   }
+  },
+  {
+   "text": "For the remaining density of $W'$ over the first projection, fix $a\\in A$, write $U^m_a=(m|_U)^{-1}(a)$, and set $V_a=V\\cap(X\\times_S\\{a\\})$, $W_a=W\\cap(\\{a\\}\\times_SX)$. The two isomorphisms restrict to $U^m_a\\simeq V_a$ via $\\Phi$ and $U^m_a\\simeq W_a$ via $\\Psi$. Both $V_a$ and $W_a$ are dense opens of $X_{\\kappa(a)}$ by step 2. Their intersections with $A_{\\kappa(a)}$ are dense. Pulling back these two dense opens to $U^m_a$ and intersecting gives a dense open; it is exactly $U^m_a\\cap U'$, because its conditions are $x\\in A$, $y\\in A$, $m(x,y)=a\\in A$. Its image under $\\Psi$ is $W'\\cap(\\{a\\}\\times_SX)$, hence is dense in $W_a$ and therefore in $X_{\\kappa(a)}$. Interchanging $\\Phi$ and $\\Psi$ proves that $V'$ is second-projection dense. Restricting to $A_{\\kappa(a)}$ gives the required fibres of $Q$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/bosch-lutkebohmert-raynaud-neron-models.pdf",
+    "place": "5.2 Proposition 2, final paragraph, diagram through U_a and the two cross-density conditions"
+   }
+  },
+  {
+   "text": "Take $X^\\circ=A$ and $D=U'$. Steps 3 and 4 establish all six projection-density conditions for $D,V',W'$. The associative identity is inherited on every domain where the restricted composites are defined, since those are composites of the original $m$. The open $A$ is smooth, separated, finite type and $S$-dense by step 2. Thus the restricted law has exactly the stated strictness properties.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/bosch-lutkebohmert-raynaud-neron-models.pdf",
+    "place": "5.2 Definition 1 and conclusion of Proposition 2"
+   }
+  },
+  {
+   "text": "In the additional trait case, choose the charts of step 1 to contain all of $P_F$. Indeed $m_F$ is a group law, and $\\Phi_F^{-1}(x,z)=(x,x^{-1}z)$, $\\Psi_F^{-1}(z,y)=(zy^{-1},y)$ are morphisms everywhere. Glue these isomorphisms over the open generic fibre to the chosen charts. On overlaps the maps and their inverses agree, by fibrewise schematic density and separated-target uniqueness as in step 1; their compositions are identities on each piece. The resulting isomorphism charts share a source containing $P_F$, so $U_F=V_F=W_F=P_F$ and $Z_F=P_F$. The preservation clause of projection-density shrinking now gives $A\\supseteq X_F$. Repeating steps 3 and 4 with this choice proves the final assertion.",
+   "uses": [
+    "lem-sfb-smooth-fibrewise-dense-open-base-change",
+    "lemma-nagata-ext-scheme-theoretically-dominant-separated",
+    "lem-sfb-product-projection-density-shrink"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bosch-lutkebohmert-raynaud-neron-models.pdf",
+    "place": "5.2 Proposition 2, its choice of U and removal of the bad projection-fibre loci; 5.1 Theorem 5 generic-fibre clause"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-proper-base-change",
+  "lem-trf-smooth-composition",
+  "lem-sfb-smooth-fibrewise-dense-open-base-change",
+  "lemma-nagata-ext-scheme-theoretically-dominant-separated",
+  "lem-sfb-product-projection-density-shrink"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/bosch-lutkebohmert-raynaud-neron-models.pdf",
+  "place": "5.2 Proposition 2 and 2.5 preliminaries; argument checked against the primary scan, local literature copy WANTED"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "An associative rational multiplication with birational universal translations becomes a strict birational group law on a fibrewise dense open subscheme",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.RationalMap\", \"module\": \"Mathlib/AlgebraicGeometry/RationalMap\", \"type\": \"AlgebraicGeometry.Scheme → AlgebraicGeometry.Scheme → Type u\", \"doc\": \"The quotient of partial maps between schemes $X$ and $Y$ by the equivalence relation where two partial maps are considered equivalent if they agree on an open subset of the source scheme $X$.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.instIsOverToRationalMapOfIsOver\", \"module\": \"Mathlib/AlgebraicGeometry/RationalMap\", \"type\": \"∀ {X Y S : AlgebraicGeometry.Scheme} [inst : X.Over S] [inst_1 : Y.Over S] (f : X.PartialMap Y)\\n  [AlgebraicGeometry.Scheme.PartialMap.IsOver S f], AlgebraicGeometry.Scheme.RationalMap.IsOver S f.toRationalMap\", \"doc\": \"If a partial map $ f $ between schemes $ X $ and $ Y $ over a base scheme $ S $ is compatible with the structure maps to $ S $, then the corresponding rational map obtained by equivalence of partial m\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.RationalMap.fromFunctionField\", \"module\": \"Mathlib/AlgebraicGeometry/RationalMap\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} →\\n  [inst : IrreducibleSpace ↥X] → X.RationalMap Y → (AlgebraicGeometry.Spec X.functionField ⟶ Y)\", \"doc\": \"For irreducible schemes $X$ and $Y$, this function constructs a morphism $\\\\operatorname{Spec}(K(X)) \\\\to Y$ from a rational map $X \\\\dashrightarrow Y$, where $K(X)$ is the function field of $X$. It is d\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.RationalMap.fromFunctionField_ofFunctionField\", \"module\": \"Mathlib/AlgebraicGeometry/RationalMap\", \"type\": \"∀ {X Y S : AlgebraicGeometry.Scheme} (sX : X ⟶ S) (sY : Y ⟶ S) [inst : AlgebraicGeometry.IsIntegral X]\\n  [inst_1 : AlgebraicGeometry.LocallyOfFiniteType sY] (f : AlgebraicGeometry.Spec X.functionField ⟶ Y)\\n  (h :\\n    CategoryTheory.CategoryStruct.comp f sY =\\n      CategoryTheory.CategoryStruct.comp \", \"doc\": \"Given an integral scheme $X$ and a scheme $Y$ with a morphism $s_Y: Y \\\\to S$ locally of finite type, if a morphism $f: \\\\operatorname{Spec}(K(X)) \\\\to Y$ satisfies the compatibility condition $f \\\\circ s\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.instIsOverToPartialMapOfIsSeparatedOfIsOver\", \"module\": \"Mathlib/AlgebraicGeometry/RationalMap\", \"type\": \"∀ {X Y S : AlgebraicGeometry.Scheme} [inst : AlgebraicGeometry.IsReduced X] [inst_1 : Y.IsSeparated] [S.IsSeparated]\\n  [inst_3 : X.Over S] [inst_4 : Y.Over S] (f : X.RationalMap Y) [AlgebraicGeometry.Scheme.RationalMap.IsOver S f],\\n  AlgebraicGeometry.Scheme.PartialMap.IsOver S f.toPartialMap\", \"doc\": \"Given a rational map $ f $ from a reduced scheme $ X $ to a separated scheme $ Y $, both over a separated base scheme $ S $, the partial map representative of $ f $ is also over $ S $. This instance e\"}\n  {\"name\": \"WeierstrassCurve.Affine.CoordinateRing.mk_XYIdeal'_mul_mk_XYIdeal'\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Affine/Point\", \"type\": \"∀ {F : Type u} [inst : Field F] {W : WeierstrassCurve.Affine F} [inst_1 : DecidableEq F] {x₁ x₂ y₁ y₂ : F}\\n  (h₁ : W.Nonsingular x₁ y₁) (h₂ : W.Nonsingular x₂ y₂) (hxy : ¬(x₁ = x₂ ∧ y₁ = W.negY x₂ y₂)),\\n  ClassGroup.mk (WeierstrassCurve.Affine.CoordinateRing.XYIdeal' h₁) *\\n      ClassGroup.mk (Weier\", \"doc\": \"For an affine Weierstrass curve $ W $ over a field $ F $, if $ (x_1, y_1) $ and $ (x_2, y_2) $ are nonsingular points on $ W $ that are not inverses (i.e., $ x_1 \\neq x_2 $ or $ y_1 \\neq -y_2 - a_1 x_2 \"}\n  {\"name\": \"AlgebraicGeometry.Scheme.RationalMap.fromFunctionField_toRationalMap\", \"module\": \"Mathlib/AlgebraicGeometry/RationalMap\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} [inst : IrreducibleSpace ↥X] (f : X.PartialMap Y),\\n  f.toRationalMap.fromFunctionField = f.fromFunctionField\", \"doc\": \"For irreducible schemes $X$ and $Y$, the morphism $\\\\operatorname{Spec}(K(X)) \\\\to Y$ constructed from a rational map $X \\\\dashrightarrow Y$ via the function field $K(X)$ is compatible with the conversio\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.PartialMap.exists_restrict_isOver\", \"module\": \"Mathlib/AlgebraicGeometry/RationalMap\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (S : AlgebraicGeometry.Scheme) [inst : X.Over S] [inst_1 : Y.Over S]\\n  (f : X.PartialMap Y) [AlgebraicGeometry.Scheme.RationalMap.IsOver S f.toRationalMap],\\n  ∃ U, ∃ (hU : Dense ↑U) (hU' : U ≤ f.domain), AlgebraicGeometry.Scheme.PartialMap.IsOver S (f.restrict U hU\", \"doc\": \"If a rational map from a scheme $X$ to a scheme $Y$ is compatible with a base scheme $S$, then there exists an open subset $U \\\\subseteq X$ such that the restriction of the corresponding partial map to\"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected returned signatures; rational-map representatives, smoothness and open-immersion definitions, Weierstrass point groups, valuation and scheme constructors do not state this relative birational-law or codimension-one immersion result."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A birational group law on a smooth scheme over a discrete valuation ring is strict after shrinking",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"WeierstrassCurve.IsGoodReduction.congr_simp\", \"module\": \"Mathlib.AlgebraicGeometry.EllipticCurve.Reduction\", \"type\": \"∀ (R : Type u_1) [inst : CommRing R] [inst_1 : IsDomain R] [inst_2 : IsDiscreteValuationRing R] {K : Type u_2}\\n  [inst_3 : Field K] [inst_4 : Algebra R K] [inst_5 : IsFractionRing R K] (W W_1 : WeierstrassCurve K) (e_W : W = W_1)\\n  [inst_6 : WeierstrassCurve.IsMinimal R W],\\n  WeierstrassCurve.IsGood\", \"doc\": \"For a discrete valuation ring $ R $ with fraction field $ K $, if two Weierstrass curves $ W $ and $ W_1 $ over $ K $ are equal, then $ W $ has good reduction if and only if $ W_1 $ has good reduction\"}\n  {\"name\": \"WeierstrassCurve.exists_isMinimal\", \"module\": \"Mathlib.AlgebraicGeometry.EllipticCurve.Reduction\", \"type\": \"(W : WeierstrassCurve K) : ∃ C : VariableChange K, IsMinimal R (C • W)\", \"doc\": \"For any Weierstrass curve $ W $ defined over the fraction field $ K $ of a discrete valuation ring $ R $, there exists a variable change $ C $ such that the transformed curve $ C \\\\cdot W $ is a minima\"}\n  {\"name\": \"WeierstrassCurve.isGoodReduction_iff\", \"module\": \"Mathlib.AlgebraicGeometry.EllipticCurve.Reduction\", \"type\": \"∀ (R : Type u_1) [inst : CommRing R] [inst_1 : IsDomain R] [inst_2 : IsDiscreteValuationRing R] {K : Type u_2}\\n  [inst_3 : Field K] [inst_4 : Algebra R K] [inst_5 : IsFractionRing R K] (W : WeierstrassCurve K)\\n  [inst_6 : WeierstrassCurve.IsMinimal R W],\\n  WeierstrassCurve.IsGoodReduction R W ↔\\n    \", \"doc\": \"For a discrete valuation ring $ R $ with fraction field $ K $, and a minimal Weierstrass curve $ W $ over $ K $, the curve $ W $ has good reduction if and only if the valuation of its discriminant $ \\\\\"}\n  {\"name\": \"Shrink.instCommGroup\", \"module\": \"Mathlib.Algebra.Group.Shrink\", \"type\": \"[CommGroup α] : CommGroup (Shrink.{v} α)\", \"doc\": \"If $\\\\alpha$ is a commutative group, then the type $\\\\mathrm{Shrink}\\\\, \\\\alpha$ inherits a commutative group structure via the canonical bijection between $\\\\alpha$ and $\\\\mathrm{Shrink}\\\\, \\\\alpha$. The gro\"}\n  {\"name\": \"ValuationSubring.unitGroup_strictMono\", \"module\": \"Mathlib.RingTheory.Valuation.ValuationSubring\", \"type\": \": StrictMono (unitGroup : ValuationSubring K → Subgroup _)\", \"doc\": \"The unit group map from valuation subrings of a field $ K $ to subgroups is strictly monotonic with respect to inclusion. That is, for any two valuation subrings $ A $ and $ B $ of $ K $, if $ A $ is \"}\n  {\"name\": \"Shrink.instAddCommGroup\", \"module\": \"Mathlib.Algebra.Group.Shrink\", \"type\": \"{α : Type u_2} → [inst : Small.{v, u_2} α] → [AddCommGroup α] → AddCommGroup (Shrink.{v, u_2} α)\", \"doc\": \"Given a small type $\\\\alpha$ equipped with an additive commutative group structure, this definition transfers the group structure to the type $\\\\text{Shrink}\\\\, \\\\alpha$ via the canonical bijection betwee\"}\n  {\"name\": \"Shrink.instGroup\", \"module\": \"Mathlib.Algebra.Group.Shrink\", \"type\": \"[Group α] : Group (Shrink.{v} α)\", \"doc\": \"If $\\\\alpha$ is a group, then the type $\\\\mathrm{Shrink}\\\\ \\\\alpha$ inherits a group structure via the canonical bijection between $\\\\alpha$ and $\\\\mathrm{Shrink}\\\\ \\\\alpha$. The group operations on $\\\\mathrm{\"}\n  {\"name\": \"WeierstrassCurve.reduction\", \"module\": \"Mathlib.AlgebraicGeometry.EllipticCurve.Reduction\", \"type\": \"(W : WeierstrassCurve K) [IsMinimal R W] : WeierstrassCurve (ResidueField R)\", \"doc\": \"Given a minimal Weierstrass curve $ W $ over the fraction field $ K $ of a discrete valuation ring $ R $, its reduction is the Weierstrass curve obtained by first constructing the integral model of $ \"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected returned signatures; rational-map representatives, smoothness and open-immersion definitions, Weierstrass point groups, valuation and scheme constructors do not state this relative birational-law or codimension-one immersion result."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Scheme\", \"RationalMap\", \"mul\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected returned signatures; rational-map representatives, smoothness and open-immersion definitions, Weierstrass point groups, valuation and scheme constructors do not state this relative birational-law or codimension-one immersion result."
+  },
+  {
+   "tool": "grep",
+   "query": "strict.*birational|birational.*group|group.*birational",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected returned signatures; rational-map representatives, smoothness and open-immersion definitions, Weierstrass point groups, valuation and scheme constructors do not state this relative birational-law or codimension-one immersion result."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Weil birational group law shrinking so translations are defined densely in every projection fibre",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"WeierstrassCurve.Projective.Point.instAddCommGroup\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Projective/Point\", \"type\": \"{F : Type u} → [inst : Field F] → {W : WeierstrassCurve.Projective F} → AddCommGroup W.Point\", \"doc\": \"For any field $ F $ and projective Weierstrass curve $ W $ over $ F $, the set of points $ W(F) $ forms an additive commutative group under the curve's defined addition operation. The group has identi\"}\n  {\"name\": \"WeierstrassCurve.Projective.addMap\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Projective/Point\", \"type\": \"{R : Type r} →\\n  [inst : CommRing R] →\\n    WeierstrassCurve.Projective R →\\n      WeierstrassCurve.Projective.PointClass R →\\n        WeierstrassCurve.Projective.PointClass R → WeierstrassCurve.Projective.PointClass R\", \"doc\": \"The function defining addition of two projective points on a Weierstrass curve, induced by the addition of their representatives and respecting projective equivalence. For any two equivalence classes \"}\n  {\"name\": \"WeierstrassCurve.Jacobian.Point.instAddCommGroup\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Jacobian/Point\", \"type\": \"{F : Type u} → [inst : Field F] → {W : WeierstrassCurve.Jacobian F} → AddCommGroup W.Point\", \"doc\": \"For any field $ F $ and Weierstrass curve $ W $ over $ F $, the set of points on the Jacobian of $ W $ forms an additive commutative group under the defined addition operation. This operation takes tw\"}\n  {\"name\": \"WeierstrassCurve.Projective.nonsingularLift_addMap\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Projective/Point\", \"type\": \"∀ {F : Type u} [inst : Field F] {W : WeierstrassCurve.Projective F} {P Q : WeierstrassCurve.Projective.PointClass F},\\n  W.NonsingularLift P → W.NonsingularLift Q → W.NonsingularLift (W.addMap P Q)\", \"doc\": \"For any two projective points $[P]$ and $[Q]$ on a Weierstrass curve $W$ over a field $F$, if both $[P]$ and $[Q]$ satisfy the nonsingularity condition (i.e., they lie on the curve $Y^2Z = X^3 + aXZ^2\"}\n  {\"name\": \"WeierstrassCurve.VariableChange.instGroup\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/VariableChange\", \"type\": \"{R : Type u} → [inst : CommRing R] → Group (WeierstrassCurve.VariableChange R)\", \"doc\": \"For any commutative ring $ R $, the set of variable changes for a Weierstrass curve over $ R $ is equipped with a canonical group structure. The group operation combines variable changes via multiplic\"}\n  {\"name\": \"WeierstrassCurve.Jacobian.PointClass\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Jacobian/Basic\", \"type\": \"(R : Type r) → [CommRing R] → Type r\", \"doc\": \"The type `PointClass` represents the quotient of the set of functions from the 3-element type $\\\\{0,1,2\\\\}$ to a commutative ring $R$ by the equivalence relation induced by scalar multiplication with un\"}\n  {\"name\": \"WeierstrassCurve.Affine.Point.instAddCommGroup\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Affine/Point\", \"type\": \"{F : Type u} → [inst : Field F] → {W : WeierstrassCurve.Affine F} → [DecidableEq F] → AddCommGroup W.Point\", \"doc\": \"The set of points on an affine Weierstrass curve over a field $ F $ forms an additive commutative group under the Weierstrass group law. This structure includes the zero point as the additive identity\"}\n  {\"name\": \"WeierstrassCurve.Affine.Point.toClass\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Affine/Point\", \"type\": \"{F : Type u} →\\n  [inst : Field F] →\\n    {W : WeierstrassCurve.Affine F} → [inst_1 : DecidableEq F] → W.Point →+ Additive (ClassGroup W.CoordinateRing)\", \"doc\": \"The function maps each point $ P $ on an affine Weierstrass curve $ W $ over a field to an element in the additive class group of $ W $'s coordinate ring. The zero point maps to the additive identity,\"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected returned signatures; rational-map representatives, smoothness and open-immersion definitions, Weierstrass point groups, valuation and scheme constructors do not state this relative birational-law or codimension-one immersion result."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An associative rational multiplication with birational universal translations becomes a strict birational group law on a fibrewise dense open subscheme",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.RationalMap\", \"module\": \"Mathlib/AlgebraicGeometry/RationalMap\", \"type\": \"AlgebraicGeometry.Scheme → AlgebraicGeometry.Scheme → Type u\", \"doc\": \"The quotient of partial maps between schemes $X$ and $Y$ by the equivalence relation where two partial maps are considered equivalent if they agree on an open subset of the source scheme $X$.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.instIsOverToRationalMapOfIsOver\", \"module\": \"Mathlib/AlgebraicGeometry/RationalMap\", \"type\": \"∀ {X Y S : AlgebraicGeometry.Scheme} [inst : X.Over S] [inst_1 : Y.Over S] (f : X.PartialMap Y)\\n  [AlgebraicGeometry.Scheme.PartialMap.IsOver S f], AlgebraicGeometry.Scheme.RationalMap.IsOver S f.toRationalMap\", \"doc\": \"If a partial map $ f $ between schemes $ X $ and $ Y $ over a base scheme $ S $ is compatible with the structure maps to $ S $, then the corresponding rational map obtained by equivalence of partial m\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.RationalMap.fromFunctionField\", \"module\": \"Mathlib/AlgebraicGeometry/RationalMap\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} →\\n  [inst : IrreducibleSpace ↥X] → X.RationalMap Y → (AlgebraicGeometry.Spec X.functionField ⟶ Y)\", \"doc\": \"For irreducible schemes $X$ and $Y$, this function constructs a morphism $\\\\operatorname{Spec}(K(X)) \\\\to Y$ from a rational map $X \\\\dashrightarrow Y$, where $K(X)$ is the function field of $X$. It is d\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.RationalMap.fromFunctionField_ofFunctionField\", \"module\": \"Mathlib/AlgebraicGeometry/RationalMap\", \"type\": \"∀ {X Y S : AlgebraicGeometry.Scheme} (sX : X ⟶ S) (sY : Y ⟶ S) [inst : AlgebraicGeometry.IsIntegral X]\\n  [inst_1 : AlgebraicGeometry.LocallyOfFiniteType sY] (f : AlgebraicGeometry.Spec X.functionField ⟶ Y)\\n  (h :\\n    CategoryTheory.CategoryStruct.comp f sY =\\n      CategoryTheory.CategoryStruct.comp \", \"doc\": \"Given an integral scheme $X$ and a scheme $Y$ with a morphism $s_Y: Y \\\\to S$ locally of finite type, if a morphism $f: \\\\operatorname{Spec}(K(X)) \\\\to Y$ satisfies the compatibility condition $f \\\\circ s\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.instIsOverToPartialMapOfIsSeparatedOfIsOver\", \"module\": \"Mathlib/AlgebraicGeometry/RationalMap\", \"type\": \"∀ {X Y S : AlgebraicGeometry.Scheme} [inst : AlgebraicGeometry.IsReduced X] [inst_1 : Y.IsSeparated] [S.IsSeparated]\\n  [inst_3 : X.Over S] [inst_4 : Y.Over S] (f : X.RationalMap Y) [AlgebraicGeometry.Scheme.RationalMap.IsOver S f],\\n  AlgebraicGeometry.Scheme.PartialMap.IsOver S f.toPartialMap\", \"doc\": \"Given a rational map $ f $ from a reduced scheme $ X $ to a separated scheme $ Y $, both over a separated base scheme $ S $, the partial map representative of $ f $ is also over $ S $. This instance e\"}\n  {\"name\": \"WeierstrassCurve.Affine.CoordinateRing.mk_XYIdeal'_mul_mk_XYIdeal'\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Affine/Point\", \"type\": \"∀ {F : Type u} [inst : Field F] {W : WeierstrassCurve.Affine F} [inst_1 : DecidableEq F] {x₁ x₂ y₁ y₂ : F}\\n  (h₁ : W.Nonsingular x₁ y₁) (h₂ : W.Nonsingular x₂ y₂) (hxy : ¬(x₁ = x₂ ∧ y₁ = W.negY x₂ y₂)),\\n  ClassGroup.mk (WeierstrassCurve.Affine.CoordinateRing.XYIdeal' h₁) *\\n      ClassGroup.mk (Weier\", \"doc\": \"For an affine Weierstrass curve $ W $ over a field $ F $, if $ (x_1, y_1) $ and $ (x_2, y_2) $ are nonsingular points on $ W $ that are not inverses (i.e., $ x_1 \\neq x_2 $ or $ y_1 \\neq -y_2 - a_1 x_2 \"}\n  {\"name\": \"AlgebraicGeometry.Scheme.RationalMap.fromFunctionField_toRationalMap\", \"module\": \"Mathlib/AlgebraicGeometry/RationalMap\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} [inst : IrreducibleSpace ↥X] (f : X.PartialMap Y),\\n  f.toRationalMap.fromFunctionField = f.fromFunctionField\", \"doc\": \"For irreducible schemes $X$ and $Y$, the morphism $\\\\operatorname{Spec}(K(X)) \\\\to Y$ constructed from a rational map $X \\\\dashrightarrow Y$ via the function field $K(X)$ is compatible with the conversio\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.PartialMap.exists_restrict_isOver\", \"module\": \"Mathlib/AlgebraicGeometry/RationalMap\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (S : AlgebraicGeometry.Scheme) [inst : X.Over S] [inst_1 : Y.Over S]\\n  (f : X.PartialMap Y) [AlgebraicGeometry.Scheme.RationalMap.IsOver S f.toRationalMap],\\n  ∃ U, ∃ (hU : Dense ↑U) (hU' : U ≤ f.domain), AlgebraicGeometry.Scheme.PartialMap.IsOver S (f.restrict U hU\", \"doc\": \"If a rational map from a scheme $X$ to a scheme $Y$ is compatible with a base scheme $S$, then there exists an open subset $U \\\\subseteq X$ such that the restriction of the corresponding partial map to\"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: the returned dominance, rational-map, smoothness and open-map declarations do not give the stated relative density or birational-law conclusion; signatures inspected."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Scheme\", \"RationalMap\", \"mul\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-24",
+   "verdict": "no match: the returned dominance, rational-map, smoothness and open-map declarations do not give the stated relative density or birational-law conclusion; signatures inspected."
+  },
+  {
+   "tool": "grep",
+   "query": "strict.*birational|birational.*group|group.*birational",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-24",
+   "verdict": "no match: the returned dominance, rational-map, smoothness and open-map declarations do not give the stated relative density or birational-law conclusion; signatures inspected."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A birational group law on a smooth scheme over a discrete valuation ring is strict after shrinking",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"WeierstrassCurve.IsGoodReduction.congr_simp\", \"module\": \"Mathlib.AlgebraicGeometry.EllipticCurve.Reduction\", \"type\": \"∀ (R : Type u_1) [inst : CommRing R] [inst_1 : IsDomain R] [inst_2 : IsDiscreteValuationRing R] {K : Type u_2}\\n  [inst_3 : Field K] [inst_4 : Algebra R K] [inst_5 : IsFractionRing R K] (W W_1 : WeierstrassCurve K) (e_W : W = W_1)\\n  [inst_6 : WeierstrassCurve.IsMinimal R W],\\n  WeierstrassCurve.IsGood\", \"doc\": \"For a discrete valuation ring $ R $ with fraction field $ K $, if two Weierstrass curves $ W $ and $ W_1 $ over $ K $ are equal, then $ W $ has good reduction if and only if $ W_1 $ has good reduction\"}\n  {\"name\": \"WeierstrassCurve.exists_isMinimal\", \"module\": \"Mathlib.AlgebraicGeometry.EllipticCurve.Reduction\", \"type\": \"(W : WeierstrassCurve K) : ∃ C : VariableChange K, IsMinimal R (C • W)\", \"doc\": \"For any Weierstrass curve $ W $ defined over the fraction field $ K $ of a discrete valuation ring $ R $, there exists a variable change $ C $ such that the transformed curve $ C \\\\cdot W $ is a minima\"}\n  {\"name\": \"WeierstrassCurve.isGoodReduction_iff\", \"module\": \"Mathlib.AlgebraicGeometry.EllipticCurve.Reduction\", \"type\": \"∀ (R : Type u_1) [inst : CommRing R] [inst_1 : IsDomain R] [inst_2 : IsDiscreteValuationRing R] {K : Type u_2}\\n  [inst_3 : Field K] [inst_4 : Algebra R K] [inst_5 : IsFractionRing R K] (W : WeierstrassCurve K)\\n  [inst_6 : WeierstrassCurve.IsMinimal R W],\\n  WeierstrassCurve.IsGoodReduction R W ↔\\n    \", \"doc\": \"For a discrete valuation ring $ R $ with fraction field $ K $, and a minimal Weierstrass curve $ W $ over $ K $, the curve $ W $ has good reduction if and only if the valuation of its discriminant $ \\\\\"}\n  {\"name\": \"Shrink.instCommGroup\", \"module\": \"Mathlib.Algebra.Group.Shrink\", \"type\": \"[CommGroup α] : CommGroup (Shrink.{v} α)\", \"doc\": \"If $\\\\alpha$ is a commutative group, then the type $\\\\mathrm{Shrink}\\\\, \\\\alpha$ inherits a commutative group structure via the canonical bijection between $\\\\alpha$ and $\\\\mathrm{Shrink}\\\\, \\\\alpha$. The gro\"}\n  {\"name\": \"ValuationSubring.unitGroup_strictMono\", \"module\": \"Mathlib.RingTheory.Valuation.ValuationSubring\", \"type\": \": StrictMono (unitGroup : ValuationSubring K → Subgroup _)\", \"doc\": \"The unit group map from valuation subrings of a field $ K $ to subgroups is strictly monotonic with respect to inclusion. That is, for any two valuation subrings $ A $ and $ B $ of $ K $, if $ A $ is \"}\n  {\"name\": \"Shrink.instAddCommGroup\", \"module\": \"Mathlib.Algebra.Group.Shrink\", \"type\": \"{α : Type u_2} → [inst : Small.{v, u_2} α] → [AddCommGroup α] → AddCommGroup (Shrink.{v, u_2} α)\", \"doc\": \"Given a small type $\\\\alpha$ equipped with an additive commutative group structure, this definition transfers the group structure to the type $\\\\text{Shrink}\\\\, \\\\alpha$ via the canonical bijection betwee\"}\n  {\"name\": \"Shrink.instGroup\", \"module\": \"Mathlib.Algebra.Group.Shrink\", \"type\": \"[Group α] : Group (Shrink.{v} α)\", \"doc\": \"If $\\\\alpha$ is a group, then the type $\\\\mathrm{Shrink}\\\\ \\\\alpha$ inherits a group structure via the canonical bijection between $\\\\alpha$ and $\\\\mathrm{Shrink}\\\\ \\\\alpha$. The group operations on $\\\\mathrm{\"}\n  {\"name\": \"WeierstrassCurve.reduction\", \"module\": \"Mathlib.AlgebraicGeometry.EllipticCurve.Reduction\", \"type\": \"(W : WeierstrassCurve K) [IsMinimal R W] : WeierstrassCurve (ResidueField R)\", \"doc\": \"Given a minimal Weierstrass curve $ W $ over the fraction field $ K $ of a discrete valuation ring $ R $, its reduction is the Weierstrass curve obtained by first constructing the integral model of $ \"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: the returned dominance, rational-map, smoothness and open-map declarations do not give the stated relative density or birational-law conclusion; signatures inspected."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Weil birational group law shrinking so translations are defined densely in every projection fibre",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"WeierstrassCurve.Projective.Point.instAddCommGroup\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Projective/Point\", \"type\": \"{F : Type u} → [inst : Field F] → {W : WeierstrassCurve.Projective F} → AddCommGroup W.Point\", \"doc\": \"For any field $ F $ and projective Weierstrass curve $ W $ over $ F $, the set of points $ W(F) $ forms an additive commutative group under the curve's defined addition operation. The group has identi\"}\n  {\"name\": \"WeierstrassCurve.Projective.addMap\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Projective/Point\", \"type\": \"{R : Type r} →\\n  [inst : CommRing R] →\\n    WeierstrassCurve.Projective R →\\n      WeierstrassCurve.Projective.PointClass R →\\n        WeierstrassCurve.Projective.PointClass R → WeierstrassCurve.Projective.PointClass R\", \"doc\": \"The function defining addition of two projective points on a Weierstrass curve, induced by the addition of their representatives and respecting projective equivalence. For any two equivalence classes \"}\n  {\"name\": \"WeierstrassCurve.Jacobian.Point.instAddCommGroup\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Jacobian/Point\", \"type\": \"{F : Type u} → [inst : Field F] → {W : WeierstrassCurve.Jacobian F} → AddCommGroup W.Point\", \"doc\": \"For any field $ F $ and Weierstrass curve $ W $ over $ F $, the set of points on the Jacobian of $ W $ forms an additive commutative group under the defined addition operation. This operation takes tw\"}\n  {\"name\": \"WeierstrassCurve.Projective.nonsingularLift_addMap\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Projective/Point\", \"type\": \"∀ {F : Type u} [inst : Field F] {W : WeierstrassCurve.Projective F} {P Q : WeierstrassCurve.Projective.PointClass F},\\n  W.NonsingularLift P → W.NonsingularLift Q → W.NonsingularLift (W.addMap P Q)\", \"doc\": \"For any two projective points $[P]$ and $[Q]$ on a Weierstrass curve $W$ over a field $F$, if both $[P]$ and $[Q]$ satisfy the nonsingularity condition (i.e., they lie on the curve $Y^2Z = X^3 + aXZ^2\"}\n  {\"name\": \"WeierstrassCurve.VariableChange.instGroup\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/VariableChange\", \"type\": \"{R : Type u} → [inst : CommRing R] → Group (WeierstrassCurve.VariableChange R)\", \"doc\": \"For any commutative ring $ R $, the set of variable changes for a Weierstrass curve over $ R $ is equipped with a canonical group structure. The group operation combines variable changes via multiplic\"}\n  {\"name\": \"WeierstrassCurve.Jacobian.PointClass\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Jacobian/Basic\", \"type\": \"(R : Type r) → [CommRing R] → Type r\", \"doc\": \"The type `PointClass` represents the quotient of the set of functions from the 3-element type $\\\\{0,1,2\\\\}$ to a commutative ring $R$ by the equivalence relation induced by scalar multiplication with un\"}\n  {\"name\": \"WeierstrassCurve.Affine.Point.instAddCommGroup\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Affine/Point\", \"type\": \"{F : Type u} → [inst : Field F] → {W : WeierstrassCurve.Affine F} → [DecidableEq F] → AddCommGroup W.Point\", \"doc\": \"The set of points on an affine Weierstrass curve over a field $ F $ forms an additive commutative group under the Weierstrass group law. This structure includes the zero point as the additive identity\"}\n  {\"name\": \"WeierstrassCurve.Affine.Point.toClass\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Affine/Point\", \"type\": \"{F : Type u} →\\n  [inst : Field F] →\\n    {W : WeierstrassCurve.Affine F} → [inst_1 : DecidableEq F] → W.Point →+ Additive (ClassGroup W.CoordinateRing)\", \"doc\": \"The function maps each point $ P $ on an affine Weierstrass curve $ W $ over a field to an element in the additive class group of $ W $'s coordinate ring. The zero point maps to the additive identity,\"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: the returned dominance, rational-map, smoothness and open-map declarations do not give the stated relative density or birational-law conclusion; signatures inspected."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-trait-birational-group-envelope",
+  "date": "2026-10-24",
+  "group": "N9"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "BLR 1.1 Definition 2 (printed pp.8-9) and 1.3 Theorem 1, if direction (printed p.16, PDF p.22); local-existence input of 1.4 Theorem 3; supporting construction: BLR 4.3 Theorem 6, printed p.108 (PDF p.114), equivalently 5.1 Theorem 5 including the no-shrinking clause, printed p.114 (PDF p.120). Supporting sublemma: BLR 5.2 Definition 1 and Proposition 2, printed pp.115-117 (PDF pp.121-123), including the generic-fibre preservation visible in the proof",
+   "via": [
+    "lem-sfb-trait-birational-group-envelope",
+    "lem-sfb-bounded-group-local-neron-criterion",
+    "lem-sfb-abelian-neron-model",
+    "lem-sfb-semiabelian-neron-lft-existence",
+    "lem-sfb-trait-semiabelian-hom-extension",
+    "lem-sfb-semiabelian-generic-graph-proper",
+    "lem-sfb-normal-semiabelian-hom-extension",
+    "lem-sfb-symmetric-line-power-prolongation",
+    "lem-sfb-normal-symmetric-cubical-extension",
+    "lem-sfb-symmetric-ample-power-extension",
+    "lem-sfb-regular-group-generic-ampleness",
+    "lem-sfb-stable-picard-theta-ampleness",
+    "lem-sfb-stable-relative-picard-kummer",
+    "lem-sfb-stable-level-versal-branch-freeness",
+    "lem-sfb-stable-abelian-level-normalization",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-birational-law-strictification",
+  "worker": "stage1",
+  "summary": "Checked BLR 5.2 Proposition 2 against the full relative statement. Isolated only the law-independent projection-density shrinking and smooth fibrewise density/base-change inputs. Wrote all six density verifications and the generic-fibre-preserving choice of charts. Statement unchanged.",
+  "blueprint": "No imported blueprint ancestor is recorded by blueprint_refs.py (None). The item inherits the supporting BLR route of lem-sfb-trait-birational-group-envelope. This split realizes BLR 5.2 Proposition 2 without invoking its group-envelope conclusion or its descendants.",
+  "tool_uses": [
+   {
+    "node": "lem-pc-proper-base-change",
+    "why": "Only smooth base change is used to form the smooth square; a general scheme tool."
+   },
+   {
+    "node": "lem-trf-smooth-composition",
+    "why": "Only composition of smooth maps is used; a general scheme tool."
+   },
+   {
+    "node": "lemma-nagata-ext-scheme-theoretically-dominant-separated",
+    "why": "Only uniqueness of representatives and glued inverse charts into separated targets; a generic separatedness tool."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pc-proper-base-change",
+  "lem-trf-smooth-composition",
+  "lemma-nagata-ext-scheme-theoretically-dominant-separated"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q15-867ea7e8f",
+  "group": "Q15",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q15-867ea7e8f (reviewer sub-agent of L); spot-checked: I read the item, both new nodes, every cited statement and the parent route in full. Statement unchanged: it matches the citer lem-sfb-trait-birational-group-envelope and the strictness definition in lem-sfb-strict-birational-law-realization. The item does not cite the realization node, so there is no cycle. BLR is not in literature/, so I could not open it; the delivery lists it as WANTED and marks the proof agent-written. Steps 1-6 check: step 1 uses clause (2) of lem-pc-proper-base-change (smooth base change of morphisms), smooth_comp, smooth fibrewise scheme-theoretic density on the open overlaps and separated-target uniqueness from lemma-nagata-ext-scheme-theoretically-dominant-separated. Steps 3-4 are the six projection-density conditions, checked by hand through the slice isomorphisms, using m=p2∘Φ=p1∘Ψ for the two cross conditions. Step 5 assembles them; D is S-dense because Q_s→A_s is open. Step 6 glues Φ_F⁻¹=(x,x⁻¹z) and Ψ_F⁻¹=(zy⁻¹,y) on the open P_F; the charts preserve fibres, so the glued maps are isomorphisms. That gives Z_F=P_F, and the preservation clause of the shrinking node then gives A⊇X_F. New nodes are true. Smooth-fibrewise-dense: density survives field extension because the fibre map is open, and smooth fibres are reduced, so EGA IV 11.10.10 gives universal scheme-theoretic density. Projection-density-shrink: the bad locus E is constructible (EGA IV 9.5) and misses the generic points of the special fibre by flatness. Remove the two fibrewise closures; their dimensions are too small to swallow a component of X_s. If Z_F=P_F then E∩X_F is empty. Tested on empty X, zero-dimensional and disconnected X, and Z=P. Neither node has a duplicate: rg -L over the whole DAG found none, and Mathlib has no scheme-theoretic density notion. Tool uses accepted: lem-pc-proper-base-change clause (2), lem-trf-smooth-composition (Mathlib leaf) and lemma-nagata-ext, all generic. Batch-5 check: lem-trf-smooth-composition is the Mathlib leaf smooth_comp, a general tool with no proof deps, outside the trace-formula and Poincaré-duality assumptions, so the citation stands. No SGA. Maintainer note: blueprint.from.node is null, inherited from the ancestor chain; BLR is still WANTED."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.BirationalLawStrictification",
+  "declaration": "AlgebraicGeometry.exists_strict_birational_law_open",
+  "file": "lean/Sheaf/AlgebraicGeometry/BirationalLawStrictification.lean",
+  "statement": "theorem exists_strict_birational_law_open (B : Type u) [CommRing B] [IsDomain B] (hB : IsField B ∨ IsDiscreteValuationRing B) (X : Over (Spec (CommRingCat.of B))) [Smooth X.hom] [IsSeparated X.hom] [LocallyOfFiniteType X.hom] [QuasiCompact X.hom] (hX : ∀ s : Spec (CommRingCat.of B), Nonempty (X.hom.fiber s)) (m : RelativeGroupLaw.Representative (X ⊗ X) X) (hm : RelativeGroupLaw.IsBirationalGroupLaw m) : ∃ A : X.left.Opens, RelativeGroupLaw.IsFiberwiseDense X (A : Set X.left) ∧ Smooth (A.ι ≫ X.hom) ∧ IsSeparated (A.ι ≫ X.hom) ∧ LocallyOfFiniteType (A.ι ≫ X.hom) ∧ QuasiCompact (A.ι ≫ X.hom) ∧ (∃ n : RelativeBirational.StrictLaw (Over.mk (A.ι ≫ X.hom)), m.AgreesWithStrictRestriction A n) ∧ (IsDiscreteValuationRing B → m.IsGroupBaseChange (Spec.map (CommRingCat.ofHom (algebraMap B (FractionRing B)))) → Set.range (pullback.fst X.hom (Spec.map (CommRingCat.ofHom (algebraMap B (FractionRing B))))) ⊆ (A : Set X.left))",
+  "branch": "newtargets-dag",
+  "by": "NZ",
+  "date": "2026-10-24",
+  "existing": false,
+  "declarations": [
+   "AlgebraicGeometry.RelativeGroupLaw.Representative.AgreesWithStrictRestriction",
+   "AlgebraicGeometry.RelativeGroupLaw.Representative.IsGroupBaseChange",
+   "AlgebraicGeometry.exists_strict_birational_law_open"
+  ],
+  "note": "Repair of 76c1e6d6ffee: reuse the now-landed relative group law and strict law definitions; both old new-node copies and definition modules are removed. Helpers express only restriction agreement and generic group compatibility."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-5bed93c63",
+  "group": "NZ",
+  "result": "pass",
+  "note": "Re-delivery of 76c1e6d6 rebinds to the published owners: Q110 RelativeGroupLaw (Representative, IsBirationalGroupLaw, IsFiberwiseDense) and Q131 RelativeBirational.StrictLaw; both added to stmt_deps as published nodes, NZ copies removed. Every hypothesis matches the node: field or DVR (IsDomain implied), smooth/separated/LOFT+QC, nonempty fibres, birational translations plus associativity. One open A carries S-density, smooth/separated/finite type and a StrictLaw n with AgreesWithStrictRestriction (S-dense common open, k fixed by the projection equations), so n is the restriction of m as a rational map. DVR clause for the same A: IsGroupBaseChange (domain inclusion iso after base change plus a GrpObj on X_F whose mul is the base change of m) implies X_F is contained in A. Representative vs rational map is equivalent via a maximal representative. Edge cases covered (field base, empty fibres, disconnected X, one universe u). Docstrings with source, blueprint and the six proof steps; no hollow defs; proof sorry only; no line over 100; lean.statement verbatim. Advisory: helper uses RelativeBirational.FibrewiseDense (def-sfb-relative-birational-maps, reached through the cited strict-law node, same meaning as RelativeGroupLaw.IsFiberwiseDense). No files changed, so no compile."
+ }
+}

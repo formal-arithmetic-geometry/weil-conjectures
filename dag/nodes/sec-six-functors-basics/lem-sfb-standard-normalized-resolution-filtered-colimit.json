@@ -1,0 +1,298 @@
+{
+ "id": "lem-sfb-standard-normalized-resolution-filtered-colimit",
+ "kind": "statement",
+ "title": "Filtered colimits of standard normalized coefficient dg algebras",
+ "statement": "Fix universes as in [def-weil-size-convention]. Let $D$ and $S$ be commutative rings with a homomorphism $D\\to S$. Let $I$ be a small nonempty directed partially ordered set and $(E_i)_{i\\in I}$ a system of commutative $D$-algebras with compatible $D$-algebra maps $E_i\\to E_j$ for $i\\leq j$. Let $E=\\varinjlim_i E_i$ be its ordinary algebra colimit, meaning the disjoint-union presentation modulo eventual equality, with operations induced at common upper bounds. No transition map is assumed injective or flat. For any commutative $D$-algebra $B$, use the unmodified standard simplicial polynomial resolution $P^{\\mathrm{std}}_\\bullet(B/D)$ and its functorial maps of [lem-trf-cotangent-resolution-coherence]. Thus $P^{\\mathrm{std}}_n(B/D)=(F_DU)^{n+1}B$, where $F_D(T)=D[T]$ and $U$ is the underlying-set functor. Put $R^{\\mathrm{std}}_B=N(P^{\\mathrm{std}}_\\bullet(B/D))$, using the quotient normalization and shuffle multiplication of [lem-sfb-simplicial-algebra-shuffle-normalization], including this unmodified resolution when $B=D$. Set $C^{\\mathrm{std}}_B=S\\otimes_D R^{\\mathrm{std}}_B$, with tensor taken degreewise [def-weil-pbc-module-tensor-product], $S$ in degree zero, and the induced differential and dg multiplication.\n\nThe functorial comparison\n$$\\varinjlim_{i\\in I} C^{\\mathrm{std}}_{E_i}\\longrightarrow C^{\\mathrm{std}}_E$$\nis an isomorphism of dg $S$-algebras, where the colimit is degreewise on the underlying $D$-modules, with multiplication induced at common stages. More explicitly, every finite collection of homogeneous elements of $C^{\\mathrm{std}}_E$ admits homogeneous lifts of the same degrees at one stage. If such elements are already specified at a stage and finitely many equalities between homogeneous expressions obtained by addition, multiplication, differential, signs, and specified scalars from $S$ hold after passage to $C^{\\mathrm{std}}_E$, those equalities hold after passage to some common later stage. Zero rings and zero modules are allowed.",
+ "source": {
+  "document": "literature/stacks-project/cotangent.tex",
+  "place": "Tag 08PM (definition-standard-resolution) and Tag 08S9 (lemma-colimit-cotangent-complex), proof: both free polynomial algebra and underlying-set functors commute with filtered colimits; quotient normalization from simplicial.tex Tag 019A (lemma-decompose-associated-complexes). The dg-algebra and finite differential-equation formulation is an agent refinement, not the cotangent-complex statement of 08S9."
+ },
+ "stmt_deps": [
+  "def-weil-size-convention",
+  "lem-trf-cotangent-resolution-coherence",
+  "lem-sfb-simplicial-algebra-shuffle-normalization",
+  "def-weil-pbc-module-tensor-product"
+ ],
+ "proof": [
+  {
+   "text": "First unpack the polynomial universal property. For any small diagram of sets $T_i$ with colimit $T$, and any commutative $D$-algebra $A$, compatible algebra maps $D[T_i]\\to A$ are exactly compatible functions $T_i\\to U(A)$: restrict to the variables, or evaluate at their images. Such functions give exactly one function $T\\to U(A)$, hence exactly one algebra map $D[T]\\to A$. Thus the canonical cocone $D[T_i]\\to D[T]$ is an algebra colimit. This is a direct application of the cited universal property, with no assumption that any $T_i\\to T_j$ is injective.",
+   "uses": [
+    "def-weil-pbc-mv-polynomial-ring"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/cotangent.tex",
+    "place": "Tag 08S9 (lemma-colimit-cotangent-complex), proof: the free polynomial functor commutes with colimits; universal-property argument expanded"
+   }
+  },
+  {
+   "text": "Put $G=F_DU$. Induct on $k\\geq0$ to show that the underlying sets of $G^kE_i\\to G^kE$ form a directed colimit. For $k=0$ this is precisely the disjoint-union modulo eventual equality presentation of $E$ in the hypothesis. Given the assertion for $k$, Step 1 says that $D[U(G^kE)]$ is the algebra colimit of $D[U(G^kE_i)]$. The cited algebra-to-module colimit theorem and the module elementwise theorem say that this cocone has stage representatives and eventual equality on underlying sets. These two properties identify its underlying set with the disjoint-union colimit: send a representative to its image; surjectivity is the first property and injectivity is the second after moving two stages to a common upper bound. This proves the induction step. For $k=n+1$ we obtain the canonical algebra and underlying $D$-module colimit cocone $P^{\\mathrm{std}}_n(E_i/D)\\to P^{\\mathrm{std}}_n(E/D)$. The standard-resolution node identifies these iterates and supplies their functorial maps, which commute with every face and degeneracy.",
+   "uses": [
+    "lem-trf-cotangent-resolution-coherence",
+    "lem-weil-pbc-filtered-colimit-algebras-underlying-module",
+    "lem-weil-pbc-filtered-colimit-modules-elementwise"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/cotangent.tex",
+    "place": "Tags 08PM (definition-standard-resolution) and 08S9 (lemma-colimit-cotangent-complex), proof: iterate the two colimit-preserving functors"
+   }
+  },
+  {
+   "text": "Write $P_{i,n}=P^{\\mathrm{std}}_n(E_i/D)$, $P_n=P^{\\mathrm{std}}_n(E/D)$, and $J_{i,n}=\\sum_{r<n}\\operatorname{im}s_r$, $J_n=\\sum_{r<n}\\operatorname{im}s_r$. A class in $P_n/J_n$ lifts by choosing a representative in $P_n$ and then a stage representative using Step 2. If $x,y\\in P_{i,n}$ have the same class in $P_n/J_n$, then their image difference is $\\sum_{r<n}s_r(z_r)$ for some $z_r\\in P_{n-1}$: each degeneracy is $D$-linear, so coefficients and repeated terms can be absorbed in $z_r$. Lift the finitely many $z_r$ to one stage $j\\geq i$. The difference $x_j-y_j-\\sum_{r<n}s_r(z_{r,j})$ has zero image in $P_n$, hence vanishes at a later stage $l$ by the module elementwise theorem. Therefore $[x_l]=[y_l]$ in $P_{l,n}/J_{l,n}$. At $n=0$ the sum is empty and this is just eventual equality in $P_0$.",
+   "uses": [
+    "lem-sfb-simplicial-algebra-shuffle-normalization",
+    "lem-weil-pbc-filtered-colimit-modules-elementwise"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/simplicial.tex",
+    "place": "Tag 019A (lemma-decompose-associated-complexes), degeneracy summand and quotient normalization; the directed-colimit argument uses Algebra Tags 00D6 and 00D7"
+   }
+  },
+  {
+   "text": "Step 3 verifies both hypotheses of the module-colimit criterion for the cocone $P_{i,n}/J_{i,n}\\to P_n/J_n$. Consequently $N(P^{\\mathrm{std}}_\\bullet(E/D))$ is the degreewise $D$-module colimit of the stage normalizations. The differential is the quotient of $\\sum_r(-1)^rd_r$; each comparison commutes with each $d_r$ by Step 2, so it commutes with this differential. Positive degrees are zero at every stage and at the limit. All indices remain in the given small nonempty directed poset; no change of index category or universe is involved.",
+   "uses": [
+    "lem-weil-pbc-filtered-colimit-modules-criterion",
+    "lem-sfb-simplicial-algebra-shuffle-normalization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/simplicial.tex",
+    "place": "Tag 019A (lemma-decompose-associated-complexes), quotient complex; Algebra Tags 00D6 and 00D7 give the elementwise colimit criterion"
+   }
+  },
+  {
+   "text": "Apply the tensor-colimit theorem in each degree to the constant ring system $A_i=D$, the constant module system $M_i=S$ with identity transitions, and $N_i=N(P^{\\mathrm{std}}_\\bullet(E_i/D))^m$. The colimits of the constant systems are $D$ and $S$ because the index poset is nonempty and directed. Step 4 identifies the third colimit. Thus the canonical map $\\varinjlim_i(S\\otimes_DN_i)\\to S\\otimes_D\\varinjlim_iN_i$ is a $D$-linear isomorphism, induced by $s\\otimes x\\mapsto s\\otimes\\iota_i(x)$. It is $S$-linear since multiplying a pure tensor by $t\\in S$ replaces $s$ by $ts$ on both sides; pure tensors generate. Naturality with respect to the degree differentials proves that these maps form a chain isomorphism. This uses ordinary tensor products and their colimit property, so it requires no flatness of $S$ or of any transition map.",
+   "uses": [
+    "lem-weil-pbc-filtered-colimit-tensor-varying-rings",
+    "def-weil-pbc-module-tensor-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00DD (lemma-tensor-products-commute-with-limits), fixed-ring specialization; the cited varying-ring node includes naturality"
+   }
+  },
+  {
+   "text": "For homogeneous pure tensors of degrees $-p,-q$, the multiplication is $(s\\otimes[x])(t\\otimes[y])=st\\otimes([x]\\mathbin{\\mathrm{sh}}[y])$. In each summand of the displayed shuffle formula, the stage-to-limit algebra map preserves the degeneracy strings, the product, the sign, and the resulting quotient class; therefore it preserves their finite sum. Hence the maps of Step 5 preserve multiplication on pure tensors, and bilinearity extends this equality to all homogeneous elements. They preserve the unit $1\\otimes[1]$ as well. The stage maps are dg $S$-algebra maps by functorial normalization. Products on their degreewise module colimit are defined by moving two representatives to a common stage; independence follows by moving any two choices and their eventual equalities to a further common stage. Each dg law then follows by representing its finitely many inputs at one stage. Thus the chain isomorphism of Step 5 is exactly the asserted dg $S$-algebra comparison and is an isomorphism as such: applying its bijective components to a product or differential shows that its inverse also preserves them.",
+   "uses": [
+    "lem-sfb-simplicial-algebra-shuffle-normalization",
+    "def-weil-pbc-module-tensor-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/simplicial.tex",
+    "place": "Tag 019A (lemma-decompose-associated-complexes), additive quotient model; multiplication is the explicit shuffle formula of the cited normalization node, checked term by term (agent refinement)"
+   }
+  },
+  {
+   "text": "The module elementwise theorem applied degreewise to Step 5 lifts each prescribed homogeneous element in its own degree. Choose a common upper bound of the finitely many resulting stages; an empty collection can be placed at any stage, since $I$ is nonempty. For the equation assertion, evaluate every specified homogeneous expression at its given stage. Its image is the same expression at the limit: this follows recursively from preservation of addition, multiplication, differential, signs and the $S$-action in Steps 5 and 6. For each of the finitely many equalities, subtract its two sides in their common degree. The resulting element has zero image at the limit, so the module elementwise theorem makes it zero at some later stage. A common upper bound of those finitely many stages makes all the equalities true simultaneously. Positive-degree inputs are zero and lift as zero. Zero rings and zero modules cause no exception; in particular the argument always uses $P^{\\mathrm{std}}_\\bullet(D/D)=G^{\\bullet+1}D$, without replacing it by the constant resolution.",
+   "uses": [
+    "lem-weil-pbc-filtered-colimit-modules-elementwise"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tags 00D6 (lemma-directed-colimit) and 00D7 (lemma-zero-directed-limit); finite differential-expression consequence is an agent refinement"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-mv-polynomial-ring",
+  "lem-trf-cotangent-resolution-coherence",
+  "lem-weil-pbc-filtered-colimit-algebras-underlying-module",
+  "lem-weil-pbc-filtered-colimit-modules-elementwise",
+  "lem-sfb-simplicial-algebra-shuffle-normalization",
+  "lem-weil-pbc-filtered-colimit-modules-criterion",
+  "lem-weil-pbc-filtered-colimit-tensor-varying-rings",
+  "def-weil-pbc-module-tensor-product"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/cotangent.tex",
+  "place": "Tag 08S9 (lemma-colimit-cotangent-complex), proof, with quotient-normalization, shuffle and finite-equation refinements written out by Q27; additive quotient model Tag 019A and tensor-colimit Tag 00DD"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "standardResolution|shuffle.*colimit|normaliz.*filtered",
+   "results": "{\"t\": \"2026-10-24T06:56:30Z\", \"tool\": \"grep\", \"query\": \"standardResolution|shuffle.*colimit|normaliz.*filtered\", \"sub\": \"\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"Mathlib/RepresentationTheory/Homological/Resolution.lean\", \"Mathlib/RepresentationTheory/Homological/Resolution.lean\", \"Mathlib/RepresentationTheory/Homological/Resolution.lean\", \"Mathlib/RepresentationTheory/Homological/Resolution.lean\", \"Mathlib/RepresentationTheory/Homological/Resolution.lean\"], \"digest\": \"c5fc4bb5d21883cd\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits provide ordinary ring colimits, additive Dold--Kan normalization, simplicial colimit existence, or ordinary polynomial presentations; none states compatibility of the standard coefficient resolution and its shuffle dg algebra with filtered colimits"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The normalized dg algebra of a filtered colimit of simplicial polynomial resolutions is the filtered colimit of the normalized dg algebras",
+   "results": "{\"t\": \"2026-10-24T06:56:31Z\", \"tool\": \"leansearch\", \"query\": \"The normalized dg algebra of a filtered colimit of simplicial polynomial resolutions is the filtered colimit of the normalized dg algebras\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CommRingCat.FilteredColimits.colimit\", \"CategoryTheory.Limits.colimitLimitIso\", \"CommSemiRingCat.FilteredColimits.colimit\", \"CategoryTheory.Idempotents.DoldKan.N\", \"RingCat.FilteredColimits.colimit\", \"CommRingCat.FilteredColimits.colimitCommRing\", \"CommGrpCat.FilteredColimits.colimit\", \"MonCat.FilteredColimits.colimit\"], \"digest\": \"e4c267b838c0ad41\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits provide ordinary ring colimits, additive Dold--Kan normalization, simplicial colimit existence, or ordinary polynomial presentations; none states compatibility of the standard coefficient resolution and its shuffle dg algebra with filtered colimits"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"SimplicialObject\", \"colimit\"",
+   "results": "{\"t\": \"2026-10-24T06:56:31Z\", \"tool\": \"loogle\", \"query\": \"\\\"SimplicialObject\\\", \\\"colimit\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.CosimplicialObject.instHasColimits\", \"CategoryTheory.CosimplicialObject.Truncated.instHasColimits\", \"CategoryTheory.SimplicialObject.instHasColimits\", \"CategoryTheory.CosimplicialObject.instHasColimitsOfShape\", \"CategoryTheory.CosimplicialObject.Truncated.instHasColimitsOfShape\", \"CategoryTheory.SimplicialObject.instHasColimitsOfShape\", \"CategoryTheory.SimplicialObject.Splitting.isColimit\", \"CategoryTheory.SimplicialObject.Splitting.isColimit'\"], \"digest\": \"1a817009cb14d8e8\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits provide ordinary ring colimits, additive Dold--Kan normalization, simplicial colimit existence, or ordinary polynomial presentations; none states compatibility of the standard coefficient resolution and its shuffle dg algebra with filtered colimits"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Shuffle normalization of standard polynomial simplicial algebra resolutions commutes with filtered colimits of coefficient algebras",
+   "results": "{\"t\": \"2026-10-24T06:56:32Z\", \"tool\": \"leanfinder\", \"query\": \"Shuffle normalization of standard polynomial simplicial algebra resolutions commutes with filtered colimits of coefficient algebras\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicTopology.DoldKan.factors_normalizedMooreComplex_PInfty\", \"AlgebraicTopology.DoldKan.PInfty_comp_PInftyToNormalizedMooreComplex\", \"AlgebraicTopology.DoldKan.PInfty_on_Γ₀_splitting_summand_eq_self\", \"AlgebraicTopology.DoldKan.Γ₀.Obj.map_on_summand₀'_assoc\", \"AlgebraicTopology.DoldKan.PInfty_comp_PInftyToNormalizedMooreComplex_assoc\", \"AlgebraicTopology.DoldKan.Γ₂N₁.natTrans_app_f_app\", \"AlgebraicTopology.DoldKan.degeneracy_comp_PInfty_assoc\", \"AlgebraicTopology.DoldKan.Γ₀.Obj.map_on_summand'_assoc\"], \"digest\": \"ebad12a572d68e2b\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits provide ordinary ring colimits, additive Dold--Kan normalization, simplicial colimit existence, or ordinary polynomial presentations; none states compatibility of the standard coefficient resolution and its shuffle dg algebra with filtered colimits"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Free polynomial resolutions and their normalized chain algebras preserve directed unions and tensoring with a fixed algebra",
+   "results": "{\"t\": \"2026-10-24T06:56:33Z\", \"tool\": \"leanfinder\", \"query\": \"Free polynomial resolutions and their normalized chain algebras preserve directed unions and tensoring with a fixed algebra\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.Presentation.tensorModelOfHasCoeffsInv\", \"Algebra.Presentation.tensorModelOfHasCoeffsEquiv_tmul\", \"Algebra.Presentation.tensorModelOfHasCoeffsHom\", \"Algebra.Presentation.tensorModelOfHasCoeffsInv_aeval_val\", \"Algebra.Generators.baseChange\", \"Algebra.Presentation.tensorModelOfHasCoeffsHom_tmul\", \"Algebra.Presentation.tensorModelOfHasCoeffsEquiv_symm_tmul\", \"MvPolynomial.universalFactorizationMapPresentation\"], \"digest\": \"ea9dd6f8637bcec4\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits provide ordinary ring colimits, additive Dold--Kan normalization, simplicial colimit existence, or ordinary polynomial presentations; none states compatibility of the standard coefficient resolution and its shuffle dg algebra with filtered colimits"
+  },
+  {
+   "tool": "grep",
+   "query": "standardResolution|shuffle.*colimit|normaliz.*filtered",
+   "results": "{\"t\": \"2026-10-24T07:29:30Z\", \"tool\": \"grep\", \"query\": \"standardResolution|shuffle.*colimit|normaliz.*filtered\", \"sub\": \"\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"Mathlib/RepresentationTheory/Homological/Resolution.lean\", \"Mathlib/RepresentationTheory/Homological/Resolution.lean\", \"Mathlib/RepresentationTheory/Homological/Resolution.lean\", \"Mathlib/RepresentationTheory/Homological/Resolution.lean\", \"Mathlib/RepresentationTheory/Homological/Resolution.lean\"], \"digest\": \"c5fc4bb5d21883cd\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: only the representation-theoretic Rep.standardResolution; not polynomial algebra or shuffle dg normalization"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Filtered colimits commute with quotient normalization and shuffle products of simplicial commutative algebras",
+   "results": "{\"t\": \"2026-10-24T07:29:31Z\", \"tool\": \"leansearch\", \"query\": \"Filtered colimits commute with quotient normalization and shuffle products of simplicial commutative algebras\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Limits.colimitLimitIso\", \"CategoryTheory.Limits.colimitLimitIso.congr_simp\", \"CommMonCat.FilteredColimits.colimitCocone\", \"CommRingCat.FilteredColimits.colimitCoconeIsColimit\", \"CommMonCat.FilteredColimits.colimit\", \"CommRingCat.FilteredColimits.colimit\", \"CommGrpCat.FilteredColimits.colimit\", \"CommGrpCat.FilteredColimits.colimitCoconeIsColimit\"], \"digest\": \"ee87d3c1867bf03f\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: ordinary filtered colimit and finite-limit comparison declarations, not the specified polynomial shuffle dg algebra"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"MvPolynomial\", \"colimit\"",
+   "results": "{\"t\": \"2026-10-24T07:29:31Z\", \"tool\": \"loogle\", \"query\": \"\\\"MvPolynomial\\\", \\\"colimit\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: zero hits"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Normalization with shuffle multiplication of the standard simplicial polynomial resolution commutes with directed algebra colimits and tensor with a fixed algebra",
+   "results": "{\"t\": \"2026-10-24T07:29:32Z\", \"tool\": \"leanfinder\", \"query\": \"Normalization with shuffle multiplication of the standard simplicial polynomial resolution commutes with directed algebra colimits and tensor with a fixed algebra\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicTopology.DoldKan.factors_normalizedMooreComplex_PInfty\", \"AlgebraicTopology.DoldKan.PInfty_comp_PInftyToNormalizedMooreComplex\", \"AlgebraicTopology.DoldKan.PInfty_comp_PInftyToNormalizedMooreComplex_assoc\", \"AlgebraicTopology.DoldKan.Γ₀.Obj.map_on_summand₀'_assoc\", \"AlgebraicTopology.DoldKan.Γ₂N₁.natTrans_app_f_app\", \"AlgebraicTopology.DoldKan.PInftyToNormalizedMooreComplex_f\", \"AlgebraicTopology.DoldKan.Γ₀.Obj.map_on_summand'_assoc\", \"AlgebraicTopology.DoldKan.degeneracy_comp_PInfty_assoc\"], \"digest\": \"e5df554b46a143ac\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: additive Dold--Kan normalized Moore complex and splitting declarations; no coefficient dg algebra colimit statement"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Free polynomial algebra resolution normalized by degeneracies preserves filtered colimits as a differential graded shuffle algebra",
+   "results": "{\"t\": \"2026-10-24T07:30:25Z\", \"tool\": \"leanfinder\", \"query\": \"Free polynomial algebra resolution normalized by degeneracies preserves filtered colimits as a differential graded shuffle algebra\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicTopology.DoldKan.factors_normalizedMooreComplex_PInfty\", \"AlgebraicTopology.normalizedMooreComplex_obj\", \"classifyingSpaceUniversalCover.extraDegeneracyCompForgetAugmentedToModule\", \"AlgebraicTopology.normalizedMooreComplex\", \"AlgebraicTopology.DoldKan.N₁_obj_p\", \"AlgebraicTopology.DoldKan.PInftyToNormalizedMooreComplex_f\", \"AlgebraicTopology.NormalizedMooreComplex.obj\", \"AlgebraicTopology.DoldKan.Γ₀_obj_obj\"], \"digest\": \"fef33203fad4c75b\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: additive Dold--Kan normalized Moore complex and splitting declarations; no coefficient dg algebra colimit statement"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-affine-perfect-dg-finite-stage-descent",
+  "date": "2026-10-24",
+  "group": "Q118"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Knudsen forgetful morphism as the universal stable curve. Section 1, Theorem 1.8, Corollaries 1.9 and 1.11; Section 2, Proposition 2.1 (printed pp.172--175): degree-zero logarithmic components and their section-algebra contraction. Independent prerequisite: Cohomology and log dualizing comparison for a given elementary nodal contraction. Logarithmic comparison before Knudsen Lemma 1.6: generic coherent-duality trace on a perfect marking ideal, replacing the differential-dual presentation by the same adjunction-normalized relative duality. Prerequisite for the perfect-image coherent trace comparison: locality on affine opens for the proper map between the two curve families, without asserting that this map is flat. Independent prerequisite: Pseudo-coherent perfect direct images between flat finitely presented families. Kiehl finiteness input: the unnumbered general relative-pseudo-coherence assertion following Stacks lemma-flat-proper-pseudo-coherent-direct-image-general. Finite-degree Noetherian descente input for the Kiehl finiteness assertion. Independent prerequisite: Relative sheaf descente on a prescribed Noetherian envelope. Two-open gluing prerequisite, conditional on approximation on both opens and their intersection, uniform in a supplied finite coefficient stage. Single-degree induction step: cancel finite polynomial-chart top obstructions globally while retaining the prescribed scalar-action normalization. Mayer--Vietoris subproblem for one degree: given a global coherent witness at cutoff n+1 and witnesses on two opens at cutoff n, obtain a global witness at cutoff n. The supplied global witness is part of the hypothesis. Independent input: finite coherent factorization of a cohomologically surjective perfect dg arrow to an ordinary scheme complex, with cohomologically surjective first factor. Affine case: finite coherent factorization for Y=Spec S; no Zariski assembly is asserted. Descent of the perfect source only, before adjoining an ordinary target or a cohomological cutoff. Finite dg source descent: compatibility of the unmodified standard polynomial resolution, quotient shuffle normalization and fixed-algebra tensor with directed coefficient colimits.",
+   "via": [
+    "lem-sfb-affine-perfect-dg-finite-stage-descent",
+    "lem-sfb-affine-perfect-arrow-coherent-factorization",
+    "lem-sfb-perfect-coefficient-arrow-finite-realization",
+    "lem-sfb-global-witness-one-degree-binary-patching",
+    "lem-sfb-sheaf-single-degree-coefficient-cancellation",
+    "lem-sfb-relative-coefficient-window-two-open-locality",
+    "lem-sfb-prescribed-envelope-relative-sheaf-descente",
+    "lem-sfb-relative-complex-noetherian-cohomology-approximation",
+    "lem-sfb-kiehl-relative-pseudocoherent-direct-image",
+    "lem-sfb-flat-family-perfect-direct-image-pseudocoherent",
+    "lem-sfb-proper-flat-families-coherent-adjoint-locality",
+    "lem-sfb-relative-nodal-perfect-duality-trace",
+    "lem-sfb-elementary-nodal-contraction-direct-image",
+    "lem-sfb-log-canonical-deletion-algebra",
+    "lem-sfb-knudsen-pointed-forgetful-universal-curve",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-standard-normalized-resolution-filtered-colimit",
+  "worker": "stage1",
+  "summary": "Q27: preserved the full statement and unmodified standard resolution, supplied a seven-step proof using existing nodes only. Expanded the polynomial universal property, induction on free/forgetful iterates, quotient representatives and degeneracy witnesses, ordinary tensor colimits, termwise shuffle compatibility and finite eventual differential equations. No flatness or injectivity added; checked degree zero, positive degrees, empty data and zero coefficients.",
+  "blueprint": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Knudsen forgetful morphism as the universal stable curve. Section 1, Theorem 1.8, Corollaries 1.9 and 1.11; Section 2, Proposition 2.1 (printed pp.172--175): degree-zero logarithmic components and their section-algebra contraction. Independent prerequisite: Cohomology and log dualizing comparison for a given elementary nodal contraction. Logarithmic comparison before Knudsen Lemma 1.6: generic coherent-duality trace on a perfect marking ideal, replacing the differential-dual presentation by the same adjunction-normalized relative duality. Prerequisite for the perfect-image coherent trace comparison: locality on affine opens for the proper map between the two curve families, without asserting that this map is flat. Independent prerequisite: Pseudo-coherent perfect direct images between flat finitely presented families. Kiehl finiteness input: the unnumbered general relative-pseudo-coherence assertion following Stacks lemma-flat-proper-pseudo-coherent-direct-image-general. Finite-degree Noetherian descente input for the Kiehl finiteness assertion. Independent prerequisite: Relative sheaf descente on a prescribed Noetherian envelope. Two-open gluing prerequisite, conditional on approximation on both opens and their intersection, uniform in a supplied finite coefficient stage. Single-degree induction step: cancel finite polynomial-chart top obstructions globally while retaining the prescribed scalar-action normalization. Mayer--Vietoris subproblem for one degree: given a global coherent witness at cutoff n+1 and witnesses on two opens at cutoff n, obtain a global witness at cutoff n. The supplied global witness is part of the hypothesis. Independent input: finite coherent factorization of a cohomologically surjective perfect dg arrow to an ordinary scheme complex, with cohomologically surjective first factor. Affine case: finite coherent factorization for Y=Spec S; no Zariski assembly is asserted. Descent of the perfect source only, before adjoining an ordinary target or a cohomological cutoff. Finite dg source descent: compatibility of the unmodified standard polynomial resolution, quotient shuffle normalization and fixed-algebra tensor with directed coefficient colimits. The current blueprint direct-image proof (3) is the ancestor route; this item provides only the finite-dg-source coefficient-colimit prerequisite recorded in the inherited provenance chain. Whole-blueprint standard-resolution/polynomial-colimit/shuffle searches found no equivalent imported node.",
+  "tool_uses": [
+   {
+    "node": "lem-trf-cotangent-resolution-coherence",
+    "why": "Its explicit standard resolution and strict functorial maps identify the iterates and their simplicial maps; the present unit has no alternative construction."
+   },
+   {
+    "node": "lem-weil-pbc-filtered-colimit-algebras-underlying-module",
+    "why": "Generic algebra-colimit to underlying-module-colimit comparison, used only in the free-polynomial induction."
+   },
+   {
+    "node": "lem-weil-pbc-filtered-colimit-tensor-varying-rings",
+    "why": "Generic tensor-colimit isomorphism and naturality, specialized to constant D and S; no geometric route is replaced."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-trf-cotangent-resolution-coherence",
+  "lem-weil-pbc-filtered-colimit-algebras-underlying-module",
+  "lem-weil-pbc-filtered-colimit-tensor-varying-rings"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q27-1c26ca2e1",
+  "group": "Q27",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q27-1c26ca2e1 (reviewer sub-agent of L); spot-checked: First split of an unsplit node with no re-split note; the statement is unchanged against clones/live and no new nodes are created. I read every cited statement in full: mv-polynomial universal property, trf cotangent-resolution coherence (explicit t_n=G^{n+1}(β) when α=id), the pbc algebra→module filtered colimit, module elementwise (1)/(2), the module colimit criterion, quotient shuffle normalization (J_n=Σ im s_i, functorial dg), the varying-rings tensor colimit (ψ on pure tensors plus naturality), and the module tensor product. Steps 1–7 check out. Step 1: free algebras preserve colimits by the universal property. Step 2: induction on k for the underlying sets of G^kE_i; a nonempty directed I is filtered. Step 3: degeneracy witnesses z_r are lifted, then the lifted difference vanishes eventually, with no injectivity needed. Step 4: the criterion's two same-stage hypotheses hold. Step 5: constant D and S systems give ψ, S-linear on generators, a chain isomorphism by naturality, with no flatness. Step 6: termwise shuffle compatibility and a well-defined colimit product; a bijective dg map has a dg inverse. Step 7: degreewise lifts, and each equation is a single difference that vanishes eventually, closed by a common bound. Edge cases tested: singleton I, ℤ[x]→ℤ killing x, S=ℤ/2 over ℤ, zero rings, B=D, n=0, empty families. The source is Stacks 08S9 (cotangent.tex lines 157–168), with tags 08PM/019A/00DD verified, and the refinement is honestly marked as agent-written. No duplicate turned up in an rg -L search of dag/nodes for polynomial/standard-resolution/normalization colimits. No cycle: only the parent affine-perfect-dg-finite-stage-descent cites the item, and it uses exactly the lifting and equation clauses. I accept the three split_report.tool_uses (trf coherence, pbc algebra→module, pbc tensor-colimit) as generic black-box tools; route and realized are unchanged."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.StandardNormalizedResolutionFilteredColimit",
+  "declaration": "Algebra.StandardNormalizedResolution.filtered_colimit",
+  "declarations": [
+   "Algebra.StandardNormalizedResolution.arrow",
+   "Algebra.StandardNormalizedResolution.standardUnder",
+   "Algebra.StandardNormalizedResolution.arrowMap",
+   "Algebra.StandardNormalizedResolution.standardUnderMap",
+   "Algebra.StandardNormalizedResolution.standard",
+   "Algebra.StandardNormalizedResolution.normalized",
+   "Algebra.StandardNormalizedResolution.coefficients",
+   "Algebra.StandardNormalizedResolution.degree",
+   "Algebra.StandardNormalizedResolution.filtered_colimit"
+  ],
+  "file": "lean/Sheaf/RingTheory/StandardNormalizedResolutionFilteredColimit.lean",
+  "statement": "theorem filtered_colimit (S : Type u) [CommRing S] [Algebra D S] {I : Type u} [PartialOrder I] [Nonempty I] [IsDirected I (· ≤ ·)] (F : I ⥤ CommAlgCat.{u} D) (c : Cocone F) (_hc : IsColimit c) : Nonempty (IsColimit ((coefficients D K S).mapCocone c)) ∧ (∀ m : ℤ, Nonempty (IsColimit ((degree D K S m).mapCocone c))) ∧ (∀ (l : Cocone (F ⋙ coefficients D K S)) (hl : IsColimit l), ∃ e : l.pt ≅ (coefficients D K S).obj c.pt, e.hom = hl.desc ((coefficients D K S).mapCocone c)) ∧ (∀ (n : ℕ) (d : Fin n → ℤ) (x : ∀ a : Fin n, (degree D K S (d a)).obj c.pt), ∃ (i : I) (y : ∀ a : Fin n, (degree D K S (d a)).obj (F.obj i)), ∀ a : Fin n, (degree D K S (d a)).map (c.ι.app i) (y a) = x a) ∧ (∀ (i : I) (n : ℕ) (d : Fin n → ℤ) (x y : ∀ a : Fin n, (degree D K S (d a)).obj (F.obj i)), (∀ a : Fin n, (degree D K S (d a)).map (c.ι.app i) (x a) = (degree D K S (d a)).map (c.ι.app i) (y a)) → ∃ (j : I) (h : i ≤ j), ∀ a : Fin n, (degree D K S (d a)).map (F.map (homOfLE h)) (x a) = (degree D K S (d a)).map (F.map (homOfLE h)) (y a))",
+  "branch": "sheaf-dag",
+  "by": "Q108",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "Canonical adapters use the recorded standard-resolution coherence and quotient shuffle-normalization functor; ordinary monoidal extension of scalars defines the coefficient dg algebra. The theorem gives the canonical dg comparison isomorphism, degreewise underlying D-module colimit, simultaneous finite homogeneous lifts and eventual finite equalities. ULift scalars are the normalization interface’s canonical copies."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-0524287d2",
+  "group": "Q108",
+  "result": "pass",
+  "note": "Read the item, the 4 stmt_dep records (byte-identical to side-live; the item differs only in lean), the module, the report and the dependency Lean (CotangentResolutionCoherence: IsStandard/Coherence pin terms, faces, degeneracies and standardSquareMap maps; exists_shuffle_normalization determines N up to unique natural iso; MapHomologicalComplex monoidal μ). The statement is verbatim. Clauses: D, S, I and algebras in one universe u per the size convention; F : I ⥤ CommAlgCat D with IsColimit c, no injectivity or flatness; standard resolution unmodified at B=D for every Coherence K (non-vacuous by exists_coherence); C = extendScalars mapHomologicalComplex mapMon of the quotient shuffle normalization. Conjuncts: Mon colimit, degreewise D-module colimit, comparison e.hom = desc, Fin n homogeneous lifts at one stage, eventual equality of pairs (equivalent to the expression form). Edge cases: singleton or empty families, zero rings, n=0, positive degrees, non-flat or non-injective maps. Docstrings carry sources, blueprint tag and 7 steps; sorry only; no hollow definitions. Parallel Q68 fb818a8e was PASS but retired, not landed, so this is not a rebind. Advisory: conjunct 3 is redundant with conjunct 1. No compile (no changes)."
+ }
+}

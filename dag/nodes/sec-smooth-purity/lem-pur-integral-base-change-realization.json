@@ -1,0 +1,109 @@
+{
+ "id": "lem-pur-integral-base-change-realization",
+ "kind": "statement",
+ "title": "Functorial realization of the whole-tower base-change equations",
+ "statement": "Fix $k=\\overline{\\mathbf F}_q$, a prime $\\ell\\ne\\operatorname{char}k$, a finite $E/\\mathbf Q_\\ell$, and the strict coefficient-tower coordinates of [def-sp-coefficient-tower-shriek-interfaces]. Let $X,Y,X',Y'$ be separated finite-type Noetherian $k$-schemes and let $f:X\\to Y$, $v:Y'\\to Y$, $u:X'\\to X$, $f':X'\\to Y'$ form a Cartesian square. Assume $f$ is smooth of pure relative dimension $d\\ge0$; take the specified compactification, its pulled-back compactification, the counit-mate exchange, normalized purity records and finite geometric coordinates of [def-pur-purity-base-change-sources, def-pur-tower-purity-base-change-words]. Fix a normalized reduction/total-limit equivalence on $X'$ [det-sp-normalized-equivalence], and let $\\mathcal L$ be its total-limit functor after inverse coordinate realization. There are a unit comparison $s:v^*\\mathbf1\\simeq\\mathbf1$ and a Tate-line comparison $t:u^*T_X\\simeq T_{X'}$, with the two prescribed finite WordComparison certificates [def-sp-p1-level-words], for which $\\mathcal L(u^*\\theta\\,U(s))=\\mathcal L(t\\,\\theta')$ and, for every input $K$, $\\mathcal L(u^*\\gamma_K\\,B_K)=\\mathcal L(C_K(1\\otimes t)\\gamma'_{v^*K})$. Here juxtaposition means composition in the displayed left-to-right word order, $\\theta,\\gamma$ are the actual tower orientation and purity, and $U,B,C$ are the unit exchange, exceptional exchange and tensor-source comparison of the cited word definitions. Thus these are equalities of actual realized whole-system maps, without any assertion of faithfulness of separate finite evaluations.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-thm-purity-transport/sk-thm-purity-transport.proof.md",
+  "place": "Steps 1--2, realization preserves the whole-system Cartesian base-change equations"
+ },
+ "stmt_deps": [
+  "def-sp-coefficient-tower-shriek-interfaces",
+  "def-pur-purity-base-change-sources",
+  "def-pur-tower-purity-base-change-words",
+  "def-sp-p1-level-words",
+  "det-sp-normalized-equivalence",
+  "def-sp-integral-reconstruction-comparison-data"
+ ],
+ "proof": [
+  {
+   "text": "Apply det-sp-purity-bc-factors with the specified square, mate exchange, purity data and finite geometric coordinates. Retain its two comparison isomorphisms and their finite WordComparison certificates. Apply the composite of the inverse coordinate realization and normalized total-limit functor to its orientation equation and, for each input, its gamma equation. The generic map_exists_two packages the retained certificates and these images. No equality is inferred from separate finite evaluations.",
+   "uses": [
+    "det-sp-purity-bc-factors"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "det-sp-purity-bc-factors"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-thm-purity-transport/sk-thm-purity-transport.proof.md",
+  "place": "Steps 1--2; G7 formalized functorial mapping of the factor equations, and J3 extracts that proved argument to satisfy the per-file compilation bound"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Apply two functors to whole-tower orientation and purity Cartesian base-change equations",
+   "results": "Generic IsBaseChange, tensor base-change and TwoSquare Kan-extension results; no specified strict-tower purity statement.",
+   "date": "2026-10-27",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.congr_map",
+   "results": "CategoryTheory.Functor.congr_map: a functor preserves equality of morphisms. This is the formal operation used after the sheaf-specific factor theorem.",
+   "date": "2026-10-27",
+   "verdict": "generic proof tool, not the full statement"
+  },
+  {
+   "tool": "grep",
+   "query": "baseChange_realization_core|tower_factors|map_exists_two",
+   "results": "No Mathlib matches. The shared item already proves this clause; this delivery relocates its complete proof without adding a hole.",
+   "date": "2026-10-27",
+   "verdict": "no exact Mathlib match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.TransportIntegralCounitRealization",
+  "date": "2026-10-27",
+  "group": "J3"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-thm-purity-transport",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "sk-thm-purity-transport",
+   "place": "Steps 1--2, realization of the whole-system Cartesian base-change equations",
+   "via": [
+    "lem-pur-transport-integral-counit-realization"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.TransportIntegralBaseChangeRealization",
+  "file": "lean/Sheaf/Paper/TransportIntegralBaseChangeRealization.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.TransportIntegralCounit.Coherence.baseChange_realization",
+  "statement": "theorem baseChange_realization\n    (D : FiniteFieldDatum.{u}) (_hne : ell ≠ D.p)\n    (X Y X' Y' : Over (Spec (.of D.k)))\n    [IsSeparated X.hom] [LocallyOfFiniteType X.hom] [QuasiCompact X.hom]\n    [IsSeparated Y.hom] [LocallyOfFiniteType Y.hom] [QuasiCompact Y.hom]\n    [IsSeparated X'.hom] [LocallyOfFiniteType X'.hom] [QuasiCompact X'.hom]\n    [IsSeparated Y'.hom] [LocallyOfFiniteType Y'.hom] [QuasiCompact Y'.hom]\n    [IsNoetherian X.left] [IsNoetherian Y.left]\n    [IsNoetherian X'.left] [IsNoetherian Y'.left]\n    (f : X ⟶ Y) (v : Y' ⟶ Y) (u' : X' ⟶ X) (f' : X' ⟶ Y')\n    (sq : IsPullback u'.left f'.left f.left v.left)\n    (d : ℕ) [SmoothOfRelativeDimension d f.left]\n    [IsSeparated f.left] [QuasiCompact f.left] [HasCompactification f.left]\n    [QuasiCompact f'.left] [HasCompactification f'.left]\n    (c : Compactification f.left) (a : SpTowerMate.Data ell E b o q sq c)\n    (x : SpTowerShriek.OpenExchange ell E b o)\n    (hb : IsIso (SpTowerMate.beta ell E b o q a x))\n    (w : SpChartAdmissibility.Twists ell E X.left)\n    (w' : SpChartAdmissibility.Twists ell E X'.left)\n    (P : TowerPurityAt ell E b o q c d w a.support_closed a.right\n      a.adjunction a.levels)\n    (P' : TowerPurityAt ell E b o q (c.ofIsPullback sq) d w' a.support_closed'\n      a.right' a.adjunction' a.levels')\n    (gu : ∀ n : ℕ, SpTowerP1.GeometricCoordinates ell E n u'.left)\n    (gv : ∀ n : ℕ, SpTowerP1.GeometricCoordinates ell E n v.left)\n    (RX : SpReductionTower ell E X'.left (q.abelian X'.left))\n    (NX : SpNormalizedEquivalence ell E X'.left (q.abelian X'.left) RX) :\n    ∃ (s : (SpTowerShriek.pull ell E b (o.geometry v.left)).obj\n        (SpTowerGamma.unit ell E Y.left) ≅ SpTowerGamma.unit ell E Y'.left)\n      (t : (SpTowerShriek.pull ell E b (o.geometry u'.left)).obj\n        (SpTowerGamma.orderedLine ell E b X.left w d) ≅\n          SpTowerGamma.orderedLine ell E b X'.left w' d),\n      (∀ n : ℕ, SpTowerP1.WordComparison ell E n\n        (SpTowerP1.pullWord ell E n b (o.geometry v.left) (gv n)\n          (SpTowerP1.unitWord ell E n Y.left (P.coefficientsY n)))\n        (SpTowerP1.unitWord ell E n Y'.left (P'.coefficientsY n)) s.hom\n        (((Etale.ordinaryFinitePullback (SpTowerP1.levelRing ell E n) v.left).mapIso\n          (Etale.singleFunctorObjUnitIso\n            (ModuleCat.{u + 1} (SpTowerP1.levelRing ell E n)) Y.left) ≪≫\n          Etale.leftDerivedUpperStarUnitIso\n            (ModuleCat.{u + 1} (SpTowerP1.levelRing ell E n)) v.left ≪≫\n          (Etale.singleFunctorObjUnitIso\n            (ModuleCat.{u + 1} (SpTowerP1.levelRing ell E n)) Y'.left).symm).hom)) ∧\n      (∀ n : ℕ, SpTowerP1.WordComparison ell E n\n        (SpTowerP1.pullWord ell E n b (o.geometry u'.left) (gu n)\n          (SpTowerGamma.coefficientWord ell E b X.left w P.roots n\n            (P.unitsX n) (P.coefficientsX n) (P.tensors n) d))\n        (SpTowerGamma.coefficientWord ell E b X'.left w' P'.roots n\n          (P'.unitsX n) (P'.coefficientsX n) (P'.tensors n) d) t.hom\n        ((Etale.vectorIntegrationBaseCoefficientPullback (SpTowerP1.levelRing ell E n)\n          (ell ^ (n + 1)) (SpTowerP1.levelAnnihilates ell E n)\n          (PurityFiniteSetting.purityTwistTransport (SpTowerP1.levelRing ell E n)\n            (ell ^ (n + 1)) (pow_pos (Fact.out : ell.Prime).pos _)\n            (SpTowerP1.levelAnnihilates ell E n)) u'.left (P.unitsX n) d).hom)) ∧\n      (SpIntegralAdjunction.limit ell E X'.left (q.abelian X'.left) RX NX).map\n        ((SpTowerCalculus.realization ell E b X'.left (q.abelian X'.left)).inverse.map\n          ((SpTowerShriek.pull ell E b (o.geometry u'.left)).map P.orientation.hom ≫\n          towerUnitExchange ell E b o q a x hb P.unit_mem P'.unit_mem s)) =\n      (SpIntegralAdjunction.limit ell E X'.left (q.abelian X'.left) RX NX).map\n        ((SpTowerCalculus.realization ell E b X'.left (q.abelian X'.left)).inverse.map\n          (t.hom ≫ P'.orientation.hom)) ∧\n      ∀ K : SpTowerCalculus.C ell E b q Y.left,\n        (SpIntegralAdjunction.limit ell E X'.left (q.abelian X'.left) RX NX).map\n          ((SpTowerCalculus.realization ell E b X'.left (q.abelian X'.left)).inverse.map\n            ((SpTowerShriek.pull ell E b (o.geometry u'.left)).map\n            (towerGamma ell E b o q c d w a.support_closed a.right\n              a.adjunction a.levels P K) ≫ towerExchange ell E b o q a x hb K)) =\n        (SpIntegralAdjunction.limit ell E X'.left (q.abelian X'.left) RX NX).map\n          ((SpTowerCalculus.realization ell E b X'.left (q.abelian X'.left)).inverse.map\n            ((towerTensorComparison ell E b o q a K _).hom ≫\n            (SpTowerShriek.tensor ell E b X'.left).map (Prod.mkHom (𝟙 _) t.hom) ≫\n            towerGamma ell E b o q (c.ofIsPullback sq) d w' a.support_closed'\n              a.right' a.adjunction' a.levels' P'\n                ((SpTowerMate.V ell E b o q a).obj K)))",
+  "branch": "sheaf-dag",
+  "by": "J3",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-1ef65",
+  "group": "J3",
+  "result": "fix",
+  "landing": "20261027T034700-L-3673858",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-1ef65",
+  "group": "J3",
+  "result": "fix",
+  "landing": "20261027T034700-L-3673858",
+  "kind": "interface",
+  "note": "independent cc review: delivered item + 9 new modules against clone main (integral_counit_realization statement identical; relocated decls same names/namespaces/variable binders; item public-imports them; 0 importers); new holes against CondensedStage fields, tower_gluing and FiniteNormalization"
+ }
+}

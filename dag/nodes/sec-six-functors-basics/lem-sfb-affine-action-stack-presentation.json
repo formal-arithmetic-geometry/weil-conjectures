@@ -1,0 +1,346 @@
+{
+ "id": "lem-sfb-affine-action-stack-presentation",
+ "kind": "statement",
+ "title": "Presentation and diagonal of an affine action quotient stack",
+ "statement": "Let $k$ be a field [def-weil-field], let $G$ be a smooth affine group scheme of finite type over $k$, and let $G$ act on an affine finite-type $k$-scheme $U=\\operatorname{Spec}E$. Form $\\mathcal X=[U/G]$ and $\\pi:U\\to\\mathcal X$ as in [def-sfb-affine-action-quotient-stack]. Then $\\mathcal X$ is a finite-type algebraic stack with affine diagonal, and $\\pi$ is a smooth surjective atlas. Algebraic stack has the meaning in [def-sfb-algebraic-moduli-stack]; finite type is tested on scheme atlases using [def-weil-finite-type-morphism]. The pullback of its diagonal along $U\\times_kU\\to\\mathcal X\\times_k\\mathcal X$ is $(a,\\operatorname{pr}_2):G\\times_kU\\to U\\times_kU$. If every geometric stabilizer group scheme has dimension zero, this diagonal is quasi-finite and separated; quasi-finite here means finite type with finite geometric fibres, tested on scheme charts. For every algebraic space $T/k$, pullback by $\\pi$ identifies maps $\\mathcal X\\to T$ with invariant maps $U\\to T$, where invariance is equality after $a$ and $\\operatorname{pr}_2$. For every algebraically closed extension $\\Omega/k$, the map $U(\\Omega)\\to\\mathcal X(\\Omega)$ induces a bijection $U(\\Omega)/G(\\Omega)\\simeq\\pi_0(\\mathcal X(\\Omega))$, where $\\pi_0$ denotes isomorphism classes of objects. The invariant ring is the equalizer $E^G=\\{e:\\rho(e)=e\\otimes1\\}$ for the coordinate coaction $\\rho:E\\to E\\otimes_k k[G]$. There is a canonical map $\\phi:\\mathcal X\\to Y=\\operatorname{Spec}(E^G)$ whose composite with $\\pi$ is induced by $E^G\\hookrightarrow E$. These assertions apply to $G=\\operatorname{PGL}_{r,k}$ for every $r\\geq1$: this group scheme is smooth, affine and of finite type over any field. Here the geometric stabilizer at $v\\in U(\\Omega)$ is the closed subgroup scheme $G_v$ of $G_\\Omega$ defined by $g\\cdot v=v$; dimension is topological Krull dimension [def-kun-topological-krull-dimension]. Algebraically closed uses [def-weil-algebraic-closure]. Affineness of the diagonal means its pullback by every affine scheme is an affine scheme; separatedness of the diagonal means its own diagonal is a closed immersion [def-weil-closed-immersion]. The coaction is written in the order $E\\otimes_k k[G]$ by swapping the factors in the pullback of $a$.",
+ "source": {
+  "document": "literature/stacks-project/algebraic.tex",
+  "place": "Tag 04TK (theorem-smooth-groupoid-gives-algebraic-stack), Tags 04WZ (lemma-diagonal-quotient-stack), 04X0 (lemma-smooth-quotient-smooth-presentation); spaces-groupoids.tex Tags 04M9 (lemma-quotient-stack-2-cartesian), 044U (lemma-quotient-stack-2-coequalizer); examples-stacks.tex Tag 04WM. Action-groupoid consequences, including the zero-dimensional transporters. PGL example: Milne Algebraic Groups (2017), Example 5.49, printed p.111, and Alper Section 9 introductory examples, printed p.40."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-sfb-affine-action-quotient-stack",
+  "def-sfb-algebraic-moduli-stack",
+  "def-weil-finite-type-morphism",
+  "def-kun-topological-krull-dimension",
+  "def-weil-algebraic-closure",
+  "def-weil-closed-immersion",
+  "def-sfb-scheme-stack-diagonal-presentation",
+  "def-sfb-projective-linear-quotient"
+ ],
+ "proof": [
+  {
+   "text": "Put $R=G\\times_kU$, with source $s(g,u)=u$, target $t(g,u)=g\\cdot u$, identity $(1,u)$, inverse $(g,u)\\mapsto(g^{-1},g\\cdot u)$ and composition $((h,g\\cdot u),(g,u))\\mapsto(hg,u)$. The action identities give every groupoid identity on test-scheme points. The projection $s$ is a base change of the smooth $G\\to\\operatorname{Spec}k$, hence is smooth by the chartwise calculus. The displayed involution interchanges $s$ and $t$, so $t$ is smooth too. Thus this is a smooth scheme groupoid. All maps are over $k$.",
+   "uses": [
+    "def-sfb-affine-action-quotient-stack",
+    "def-a1-groupoid-scheme",
+    "lem-sfb-stack-chartwise-smooth-etale-calculus"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-groupoids.tex",
+    "place": "definition-quotient-stack (Tag 044Q), action groupoid, with explicit groupoid operations"
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-smooth-groupoid-fppf-quotient] with $S=\\operatorname{Spec}k$, object scheme $U$ and arrow space the scheme $R=G\\times_kU$ and the torsor-comparison theorem to this left action. The latter identifies the resulting stack with precisely the fibred groupoid $\\mathcal X$ of the statement and identifies its object map with $\\pi$. Consequently $\\mathcal X$ is algebraic and $\\pi$ is smooth and surjective. In fact the base change of $\\pi$ by an object $(P,f)$ over $T$ is the scheme $P$: a point $p$ gives $x=f(p)$ and the trivialization $G_T\\to P$, $h\\mapsto hp$, and any such trivialization is determined by the image of $1$. This verifies scheme representability of the atlas in the torsor convention. Since the scheme atlas $U$ is finite type over $k$, $\\mathcal X$ is finite type under the atlas convention stipulated in the item; the required finite-type atlas is $U$ itself.",
+   "uses": [
+    "lem-sfb-smooth-groupoid-fppf-quotient",
+    "lem-sfb-action-groupoid-torsor-comparison",
+    "def-sfb-affine-action-quotient-stack",
+    "def-weil-finite-type-morphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebraic.tex",
+    "place": "Tags 04TK, 04X0; examples-stacks.tex Tag 04WM"
+   }
+  },
+  {
+   "text": "The cited quotient theorem identifies $R$ with $U\\times_{\\mathcal X}U$ by $r\\mapsto(s(r),t(r),i(r))$. Swap the two objects and invert the specified arrow in this 2-fibre product; this is an involutive isomorphism, so the same relation has projection $(t,s)=(a,\\operatorname{pr}_2)$ to $U\\times_kU$. This gives the claimed pullback of the diagonal in the target/source convention. Write $H=k[G]$. Both its source and target are affine, with rings $H\\otimes_kE$ and $E\\otimes_kE$. The source ring is generated over $k$ by finitely many generators of $H$ and of $E$, so these same elements generate it over $E\\otimes_kE$ via the map in question. This proves finite type of $(t,s)$; it is affine. It is separated: the multiplication map $B\\otimes_A B\\to B$ for any ring map $A\\to B$ is surjective, as $b$ is the image of $b\\otimes1$, so the relative diagonal of $\\operatorname{Spec}B\\to\\operatorname{Spec}A$ is a closed immersion. Here apply this to the two displayed rings. The product stack is algebraic: descent is componentwise, for two objects over any test scheme $T$, its isomorphism space is the fibre product over $T$ of their two component isomorphism spaces, an algebraic space by the categorical fibre-product assertion of [lem-trf-space-fibre-products-etale-covers], and the product atlas is smooth surjective. Indeed $\\pi\\times\\pi$ is smooth surjective by factoring it into two base changes of $\\pi$ and composing. The locality theorem therefore descends affineness, finite type and separatedness from $(t,s)$ to $\\Delta_{\\mathcal X/k}$. This proves the affine diagonal assertion and, already without any stabilizer assumption, its separatedness.",
+   "uses": [
+    "lem-sfb-smooth-groupoid-fppf-quotient",
+    "lem-sfb-representable-stack-fppf-locality",
+    "lem-sfb-stack-chartwise-smooth-etale-calculus",
+    "def-weil-affine-spectrum",
+    "def-weil-closed-immersion",
+    "def-weil-finite-type-morphism",
+    "lem-trf-space-fibre-products-etale-covers"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-groupoids.tex",
+    "place": "Tag 04M9; stacks-properties.tex Tag 04XD; affine ring computation of (a,pr_2)"
+   }
+  },
+  {
+   "text": "Fix an algebraically closed extension $\\Omega/k$ and an object $\\xi=(P,f)$ of $\\mathcal X(\\Omega)$. By step 2 its scheme $P$ is the base change of the smooth surjective atlas. The current calculus identifies surjectivity with the chart test and with lifting after field extension. Applied to $\\operatorname{Spec}\\Omega$, it gives a point of $P$ after a field extension, so $P$ is nonempty. Smooth base change makes $P$ smooth over $\\Omega$, hence locally of finite type. Choose a nonempty affine neighbourhood small enough that its coordinate algebra is finitely generated over $\\Omega$. The closed-point lemma supplies a closed point of this affine scheme (affine schemes are qcqs and hence spectral by the two cited theorems; sobriety makes them Kolmogorov, since two points with the same closure would be two generic points of one irreducible closed subset), and clause 1 of the affine Nullstellensatz identifies its residue field with $\\Omega$. It gives $p\\in P(\\Omega)$. The torsor trivialization $h\\mapsto hp$ identifies $\\xi$ with $\\pi(f(p))$. Thus $U(\\Omega)\\to\\pi_0(\\mathcal X(\\Omega))$ is surjective. Notice that no assertion about torsors over fields that are not algebraically closed was used.",
+   "uses": [
+    "lem-sfb-stack-chartwise-smooth-etale-calculus",
+    "lem-sc-quasi-compact-kolmogorov-closed-point",
+    "lem-wf-affine-nullstellensatz-vanishing",
+    "def-sfb-affine-action-quotient-stack",
+    "lem-weil-pbc-affine-scheme-qcqs",
+    "lem-weil-pbc-qcqs-scheme-spectral",
+    "def-weil-spectral-space"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/examples-stacks.tex",
+    "place": "Tag 04WM, torsor description; topology.tex Tag 005E; affine Nullstellensatz as in blueprint lem-wf-affine-nullstellensatz-vanishing, clause 1"
+   }
+  },
+  {
+   "text": "For $x,y\\in U(\\Omega)$ the arrows between their atlas objects are the $g\\in G(\\Omega)$ with $g\\cdot x=y$, by the action groupoid and the presentation/comparison theorems. In the left-torsor convention the corresponding torsor isomorphism is right multiplication by $g^{-1}$, as in the comparison statement. Thus two atlas objects are isomorphic exactly when their points are in the same $G(\\Omega)$-orbit. Combined with step 4 this proves the stated orbit/isomorphism-class bijection.",
+   "uses": [
+    "lem-sfb-smooth-groupoid-fppf-quotient",
+    "lem-sfb-action-groupoid-torsor-comparison"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/examples-stacks.tex",
+    "place": "Tag 04WM, explicit functor on arrows; spaces-groupoids.tex Tag 04M9"
+   }
+  },
+  {
+   "text": "Now assume every geometric stabilizer has dimension zero. For a geometric point $(x,y)\\in(U\\times_kU)(\\Omega)$ the fibre $F$ of $(a,\\operatorname{pr}_2)$ is the transporter $\\{g\\in G_\\Omega:g\\cdot y=x\\}$. It is an affine scheme of finite type over $\\Omega$: its coordinate ring is the base change to $\\Omega$ of the finite-type algebra in step 3. If it is nonempty, the affine qcqs and spectral theorems give quasi-compactness and the Kolmogorov property (by uniqueness of generic points); the closed-point lemma and clause 1 of the affine Nullstellensatz give $g_0\\in F(\\Omega)$. The maps $G_y\\to F$, $h\\mapsto g_0h$, and $F\\to G_y$, $g\\mapsto g_0^{-1}g$, are inverse scheme maps: the equations $hy=y$ and $gy=x$ verify the factorizations on every test scheme, and the inverse identities are the group laws. Thus $F$ has dimension zero. It is Noetherian by finite type over the Noetherian scheme $\\operatorname{Spec}\\Omega$ (a one-point scheme with field local ring). The zero-dimensional Noetherian finiteness theorem now gives finite underlying space. Empty fibres are finite as well. This argument concerns the whole stabilizer scheme, including possible nilpotents, not just its group of geometric points.",
+   "uses": [
+    "lem-sc-quasi-compact-kolmogorov-closed-point",
+    "lem-wf-affine-nullstellensatz-vanishing",
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "lem-sc-zero-dim-noetherian-finite-discrete",
+    "def-weil-affine-spectrum",
+    "def-sfb-affine-action-quotient-stack",
+    "lem-weil-pbc-affine-scheme-qcqs",
+    "lem-weil-pbc-qcqs-scheme-spectral",
+    "def-weil-spectral-space"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/properties.tex",
+    "place": "Tag 0AAX; morphisms.tex Tag 01T6; explicit transporter translation and affine Nullstellensatz"
+   }
+  },
+  {
+   "text": "Step 3 gave finite type and separatedness of the chart map $(a,\\operatorname{pr}_2)$, and step 6 gave finite geometric fibres under the stabilizer assumption. Hence that chart map is quasi-finite in the stated finite-type/finite-geometric-fibre convention. Set $q=\\pi\\times\\pi:U\\times_kU\\to\\mathcal X\\times_k\\mathcal X$. As in step 3, $q$ factors into two base changes of the representable smooth surjective atlas $\\pi$; the chartwise calculus makes $q$ smooth and surjective, hence flat and locally of finite presentation. Its current surjectivity equivalence ensures that after every scheme base change every surjective etale scheme chart maps surjectively to the base, exactly the cover condition used here. Its source is a scheme, in particular an algebraic space, and its target is algebraic by step 3. The diagonal is representable by algebraic spaces by the presentation theorem, and its pullback by $q$ is exactly the chart map computed in step 3. Thus all hypotheses of the fppf locality theorem hold for this diagonal and this cover. Its quasi-finite and separated clauses prove that $\\Delta_{\\mathcal X/k}$ is quasi-finite and separated.",
+   "uses": [
+    "lem-sfb-representable-stack-fppf-locality",
+    "lem-sfb-stack-chartwise-smooth-etale-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/stacks-properties.tex",
+    "place": "Tag 04XD for quasi-finite and separated; spaces-descent.tex Tags 0427 and 0421"
+   }
+  },
+  {
+   "text": "Let $T/k$ be any algebraic space. Restriction of a map $\\mathcal X\\to T$ to $U$ is invariant, since the action groupoid arrows map to identity arrows in the discrete groupoid of $T$. Conversely let $b:U\\to T$ satisfy $ba=b\\operatorname{pr}_2$. On an object $(P,f)$ over a scheme $S$, choose an fppf trivializing cover $S_i\\to S$ and its sections $p_i$. On overlaps $p_j=g_{ij}p_i$ for a unique $g_{ij}\\in G(S_i\\times_SS_j)$, so $bf(p_j)=bf(p_i)$ by invariance and equivariance. Since $T$ is an fppf sheaf by its definition, these maps glue uniquely to a map $S\\to T$. Two choices give the same answer after their common refinement and hence before refinement. For a base map or a torsor isomorphism the maps agree on a trivializing cover, so sheaf uniqueness gives functoriality. This defines a map $\\mathcal X\\to T$. It restricts to $b$ on trivial torsors. Any other extension has these same local values on every object and therefore agrees on every object and arrow. This proves the asserted identification, including uniqueness, with no separatedness assumption on $T$.",
+   "uses": [
+    "def-sfb-affine-action-quotient-stack",
+    "def-trf-algebraic-space"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-groupoids.tex",
+    "place": "Tag 044U, elementary torsor/sheaf expansion of the coequalizer assertion; examples-stacks.tex Tag 04WM"
+   }
+  },
+  {
+   "text": "The pullbacks of functions along $a$ and $\\operatorname{pr}_2$ are $\\rho$ and $e\\mapsto e\\otimes1$ in the chosen tensor-factor order. Their equalizer is a $k$-subalgebra of $E$, because both maps preserve addition, multiplication, scalars and $1$; it is exactly the ring denoted $E^G$ in the statement. By contravariance of affine spectra the inclusion $E^G\\hookrightarrow E$ induces $q:U\\to\\operatorname{Spec}(E^G)$. The equality $\\rho(e)=e\\otimes1$ for $e\\in E^G$ says exactly that $qa=q\\operatorname{pr}_2$. The affine scheme $Y=\\operatorname{Spec}(E^G)$ is an algebraic space over $k$: its functor of points on $k$-schemes is an fppf sheaf, since every fppf covering is an fpqc covering [lem-trf-fppf-covering-is-fpqc] and morphisms into a scheme that agree on overlaps glue uniquely along an fpqc covering [lem-weil-pbc-fpqc-representable-descent], the glued map being over $k$ by uniqueness; its diagonal is representable because the fibre product of two maps $h_T\\to h_Y$ is represented by the scheme fibre product $T\\times_YT'$ [def-pc-fibre-product]; and $\\mathrm{id}_Y$ is a surjective etale atlas. Step 8, with $T=Y$, gives a unique map $\\phi:\\mathcal X\\to T$ with $\\phi\\pi=q$, hence the canonical map claimed. No finite-generation assertion for $E^G$ is needed here.",
+   "uses": [
+    "def-weil-affine-spectrum",
+    "def-sfb-affine-action-quotient-stack",
+    "lem-trf-fppf-covering-is-fpqc",
+    "lem-weil-pbc-fpqc-representable-descent",
+    "def-pc-fibre-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/examples-stacks.tex",
+    "place": "Tag 04WM, affine-action instance; spaces-groupoids.tex Tag 044U with target Spec(E^G)"
+   }
+  },
+  {
+   "text": "For $r\\geq1$, the existing PGL structure theorem states that $\\operatorname{PGL}_{r,k}$ is smooth, affine and of finite type over $k$. These are exactly the group hypotheses used in steps 1--9, so all conclusions apply to any affine finite-type scheme on which it acts. For $r=1$ it is the trivial group scheme, which is explicitly covered by that theorem; no assumption on the characteristic or on the invertibility of $r$ is imposed.",
+   "uses": [
+    "lem-sfb-pgl-reductive-structure"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Example 5.49, printed p.111, and existing lemma lem-sfb-pgl-reductive-structure; primary PDF read at https://www.jmilne.org/math/Books/iAG2017.pdf"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sfb-affine-action-quotient-stack",
+  "def-a1-groupoid-scheme",
+  "lem-sfb-stack-chartwise-smooth-etale-calculus",
+  "lem-sfb-smooth-groupoid-fppf-quotient",
+  "lem-sfb-action-groupoid-torsor-comparison",
+  "def-weil-finite-type-morphism",
+  "lem-sfb-representable-stack-fppf-locality",
+  "def-weil-affine-spectrum",
+  "def-weil-closed-immersion",
+  "lem-trf-space-fibre-products-etale-covers",
+  "lem-sc-quasi-compact-kolmogorov-closed-point",
+  "lem-wf-affine-nullstellensatz-vanishing",
+  "lem-weil-pbc-affine-scheme-qcqs",
+  "lem-weil-pbc-qcqs-scheme-spectral",
+  "def-weil-spectral-space",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-sc-zero-dim-noetherian-finite-discrete",
+  "def-trf-algebraic-space",
+  "lem-sfb-pgl-reductive-structure",
+  "lem-trf-fppf-covering-is-fpqc",
+  "lem-weil-pbc-fpqc-representable-descent",
+  "def-pc-fibre-product"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/algebraic.tex",
+  "place": "Action-groupoid specialization of Tags 04TK, 04WZ, 04X0 and 04M9, torsor comparison 04WM, locality 04XD; explicit transporter, descent and invariant-ring arguments written by NX."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Quotient stack smooth atlas action groupoid quasi finite diagonal finite stabilizers",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"IsQuotientCoveringMap\", \"module\": \"Mathlib/Topology/Covering/Quotient\", \"type\": \"{E : Type u_1} →\\n  {X : Type u_2} →\\n    [TopologicalSpace E] → [TopologicalSpace X] → (E → X) → (G : Type u_3) → [inst : Group G] → [MulAction G E] → Prop\", \"doc\": \"Given topological spaces $E$ and $X$, a continuous map $f : E \\to X$, a group $G$ acting on $E$, this proposition asserts that $f$ is a quotient covering map, meaning it is both a quotient map for the \"}\n  {\"name\": \"isQuotientCoveringMap_iff\", \"module\": \"Mathlib/Topology/Covering/Quotient\", \"type\": \"∀ {E : Type u_1} {X : Type u_2} [inst : TopologicalSpace E] [inst_1 : TopologicalSpace X] (f : E → X) (G : Type u_3)\\n  [inst_2 : Group G] [inst_3 : MulAction G E],\\n  IsQuotientCoveringMap f G ↔\\n    Topology.IsQuotientMap f ∧\\n      ContinuousConstSMul G E ∧\\n        (∀ {e₁ e₂ : E}, f e₁ = f e₂ ↔ e₁ ∈ \", \"doc\": \"Let $E$ and $X$ be topological spaces, $f:E\\\\to X$ a continuous map, and $G$ a topological group acting continuously on $E$. Then $f$ is a quotient covering map for the $G$-action if and only if: (1) $\"}\n  {\"name\": \"CategoryTheory.PreGaloisCategory.has_decomp_quotients\", \"module\": \"Mathlib/CategoryTheory/Galois/EssSurj\", \"type\": \"∀ {G : Type u_1} [inst : Group G] [inst_1 : TopologicalSpace G] [inst_2 : IsTopologicalGroup G]\\n  [inst_3 : CompactSpace G] (X : Action FintypeCat G) [inst_4 : TopologicalSpace X.V.carrier]\\n  [DiscreteTopology X.V.carrier] [ContinuousSMul G X.V.carrier],\\n  ∃ ι,\\n    ∃ (x : Finite ι),\\n      ∃ f,\\n     \", \"doc\": \"For a compact topological group $G$ and an open subgroup $H$, the quotient group $G/H$ is finite.\"}\n  {\"name\": \"isCoveringMapOn_quotientMk_of_properlyDiscontinuousSMul\", \"module\": \"Mathlib/Topology/Covering/Quotient\", \"type\": \"∀ {E : Type u_1} [inst : TopologicalSpace E] {G : Type u_3} [inst_1 : Group G] [inst_2 : MulAction G E]\\n  [ContinuousConstSMul G E] [ProperlyDiscontinuousSMul G E] [LocallyCompactSpace E] [T2Space E],\\n  IsCoveringMapOn (Quotient.mk (MulAction.orbitRel G E))\\n    (Quotient.mk (MulAction.orbitRel G E) \", \"doc\": \"If a discrete group $ G $ acts properly discontinuously and freely (with trivial stabilizers) on a locally compact Hausdorff space $ E $, then the canonical quotient map $ E \\to E/G $ is a covering map\"}\n  {\"name\": \"isQuotientCoveringMap_quotientMk_of_properlyDiscontinuousSMul\", \"module\": \"Mathlib/Topology/Covering/Quotient\", \"type\": \"∀ {E : Type u_1} [inst : TopologicalSpace E] {G : Type u_3} [inst_1 : Group G] [inst_2 : MulAction G E]\\n  [ContinuousConstSMul G E] [ProperlyDiscontinuousSMul G E] [LocallyCompactSpace E] [T2Space E] [IsCancelSMul G E],\\n  IsQuotientCoveringMap (Quotient.mk (MulAction.orbitRel G E)) G\", \"doc\": \"If a discrete group $G$ acts properly discontinuously and with the cancellation property on a Hausdorff, locally compact topological space $E$, then the quotient map $E \\to E/G$ induced by the orbit eq\"}\n  {\"name\": \"isCoveringMapOn_quotientMk_of_properlyDiscontinuousVAdd\", \"module\": \"Mathlib/Topology/Covering/Quotient\", \"type\": \"∀ {E : Type u_1} [inst : TopologicalSpace E] {G : Type u_3} [inst_1 : AddGroup G] [inst_2 : AddAction G E]\\n  [ContinuousConstVAdd G E] [ProperlyDiscontinuousVAdd G E] [LocallyCompactSpace E] [T2Space E],\\n  IsCoveringMapOn (Quotient.mk (AddAction.orbitRel G E))\\n    (Quotient.mk (AddAction.orbitRel G \", \"doc\": \"If $ G $ is an additive group acting continuously and properly discontinuously on a locally compact Hausdorff topological space $ E $, then the quotient map $ E \\to E/G $ is a covering map on the image\"}\n  {\"name\": \"IsQuotientCoveringMap.toIsQuotientMap\", \"module\": \"Mathlib/Topology/Covering/Quotient\", \"type\": \"∀ {E : Type u_1} {X : Type u_2} [inst : TopologicalSpace E] [inst_1 : TopologicalSpace X] {f : E → X} {G : Type u_3}\\n  [inst_2 : Group G] [inst_3 : MulAction G E], IsQuotientCoveringMap f G → Topology.IsQuotientMap f\", \"doc\": \"If $f : E \\to X$ is a quotient covering map for the action of a topological group $G$ on $E$, then $f$ is a quotient map in the topological sense. This means that the topology on $X$ is the quotient to\"}\n  {\"name\": \"isQuotientCoveringMap_iff_isCoveringMap_and\", \"module\": \"Mathlib/Topology/Covering/Quotient\", \"type\": \"∀ {E : Type u_1} {X : Type u_2} [inst : TopologicalSpace E] [inst_1 : TopologicalSpace X] (f : E → X) (G : Type u_3)\\n  [inst_2 : Group G] [inst_3 : MulAction G E],\\n  IsQuotientCoveringMap f G ↔\\n    IsCoveringMap f ∧\\n      Function.Surjective f ∧\\n        ContinuousConstSMul G E ∧ IsCancelSMul G E ∧ ∀\", \"doc\": \"For a continuous map $ f : E \\\\to X $ and a group $ G $ acting on $ E $, the map $ f $ is a quotient covering map for the action of $ G $ if and only if the following conditions hold: (1) $ f $ is a co\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern scheme morphisms, abstract group actions, invariant representations or general categorical descent; none states this algebraic-stack construction or theorem"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Algebraic group action quotient stack maps to algebraic spaces and geometric points are orbits",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"IsQuotientCoveringMap.apply_eq_iff_mem_orbit\", \"module\": \"Mathlib/Topology/Covering/Quotient\", \"type\": \"∀ {E : Type u_1} {X : Type u_2} [inst : TopologicalSpace E] [inst_1 : TopologicalSpace X] {f : E → X} {G : Type u_3}\\n  [inst_2 : Group G] [inst_3 : MulAction G E],\\n  IsQuotientCoveringMap f G → ∀ {e₁ e₂ : E}, f e₁ = f e₂ ↔ e₁ ∈ MulAction.orbit G e₂\", \"doc\": \"For a quotient covering map $ f : E \\\\to X $ associated with a group action of a group $ G $ on a topological space $ E $, two points $ e_1 $ and $ e_2 $ in $ E $ satisfy $ f(e_1) = f(e_2) $ if and onl\"}\n  {\"name\": \"MulAction.ofQuotientStabilizer\", \"module\": \"Mathlib/GroupTheory/GroupAction/Quotient\", \"type\": \"(α : Type u) → {β : Type v} → [inst : Group α] → [inst_1 : MulAction α β] → (x : β) → α ⧸ MulAction.stabilizer α x → β\", \"doc\": \"For a group action of $G$ on a set $\\\\alpha$ and a fixed element $x \\\\in \\\\alpha$, this defines the induced action of the quotient group $G / \\\\text{Stab}(x)$ on $\\\\beta$. Given a coset $g \\\\cdot \\\\text{Stab\"}\n  {\"name\": \"MulAction.orbitRel.Quotient.orbit.coe_smul\", \"module\": \"Mathlib/GroupTheory/GroupAction/Defs\", \"type\": \"∀ {G : Type u_1} {α : Type u_2} [inst : Group G] [inst_1 : MulAction G α] {g : G} {x : MulAction.orbitRel.Quotient G α}\\n  {a : ↑x.orbit}, ↑(g • a) = g • ↑a\", \"doc\": \"For any group element $g$, quotient class $x$ in the orbit space, and element $a$ in the orbit corresponding to $x$, the scalar multiplication of $g$ with $a$ within the orbit, when coerced to the ori\"}\n  {\"name\": \"MulAction.ofQuotientStabilizer_mk\", \"module\": \"Mathlib/GroupTheory/GroupAction/Quotient\", \"type\": \"∀ (α : Type u) {β : Type v} [inst : Group α] [inst_1 : MulAction α β] (x : β) (g : α),\\n  MulAction.ofQuotientStabilizer α x ↑g = g • x\", \"doc\": \"For any element $ g $ in the group $ G $, the induced action of the quotient group $ G / \\\\text{Stab}(x) $ on the set $ \\\\alpha $, when applied to the coset represented by $ g $, results in the same ele\"}\n  {\"name\": \"MulAction.selfEquivSigmaOrbits'\", \"module\": \"Mathlib/GroupTheory/GroupAction/Defs\", \"type\": \"(G : Type u_1) →\\n  (α : Type u_2) → [inst : Group G] → [inst_1 : MulAction G α] → α ≃ (ω : MulAction.orbitRel.Quotient G α) × ↑ω.orbit\", \"doc\": \"The equivalence between the set $\\\\alpha$ and the disjoint union of its orbits under the group action, represented as the sigma type $\\\\Sigma_{\\\\omega \\\\in \\\\Omega} \\\\omega.\\\\text{orbit}$, where $\\\\Omega$ is \"}\n  {\"name\": \"MulAction.orbitEquivQuotientStabilizer_symm_apply\", \"module\": \"Mathlib/GroupTheory/GroupAction/Quotient\", \"type\": \"∀ (α : Type u) {β : Type v} [inst : Group α] [inst_1 : MulAction α β] (b : β) (a : α),\\n  ↑((MulAction.orbitEquivQuotientStabilizer α b).symm ↑a) = a • b\", \"doc\": \"For a group $G$ acting on a set $\\\\beta$ and an element $b \\\\in \\\\beta$, the orbit of $b$ under the group action is in bijection with the quotient group $G / \\\\text{Stab}(b)$, where $\\\\text{Stab}(b)$ denot\"}\n  {\"name\": \"MulAction.ofQuotientStabilizer_smul\", \"module\": \"Mathlib/GroupTheory/GroupAction/Quotient\", \"type\": \"∀ (α : Type u) {β : Type v} [inst : Group α] [inst_1 : MulAction α β] (x : β) (g : α)\\n  (g' : α ⧸ MulAction.stabilizer α x),\\n  MulAction.ofQuotientStabilizer α x (g • g') = g • MulAction.ofQuotientStabilizer α x g'\", \"doc\": \"Given a group $\\\\alpha$, a monoid $\\\\beta$, a monoid action of $\\\\beta$ on $\\\\alpha$, and a subgroup $H \\\\subseteq \\\\alpha$ (specifically the stabilizer subgroup of some element $x$), the monoid $\\\\beta$ act\"}\n  {\"name\": \"AddAction.ofQuotientStabilizer\", \"module\": \"Mathlib/GroupTheory/GroupAction/Quotient\", \"type\": \"(α : Type u) →\\n  {β : Type v} → [inst : AddGroup α] → [inst_1 : AddAction α β] → (x : β) → α ⧸ AddAction.stabilizer α x → β\", \"doc\": \"Given an additive group $\\\\alpha$ acting on a type $\\\\beta$ and an element $x \\\\in \\\\beta$, this function maps each coset in the quotient group $\\\\alpha/\\\\text{Stab}(x)$ (where $\\\\text{Stab}(x)$ is the stabi\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern scheme morphisms, abstract group actions, invariant representations or general categorical descent; none states this algebraic-stack construction or theorem"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"stabilizer\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern scheme morphisms, abstract group actions, invariant representations or general categorical descent; none states this algebraic-stack construction or theorem"
+  },
+  {
+   "tool": "grep",
+   "query": "quotientStack|quotient_stack|PGL|projectiveGeneralLinear",
+   "results": "[grep] OK 25 hit(s)\n  {\"file\": \"Mathlib/NumberTheory/ModularForms/BoundedAtCusp.lean\", \"line\": \"95\", \"text\": \"    IsBoundedAt c f k ↔ ∃ γ : SL(2, ℤ), mapGL ℝ γ • ∞ = c ∧ IsBoundedAtImInfty (f ∣[k] γ) := by\"}\n  {\"file\": \"Mathlib/NumberTheory/ModularForms/BoundedAtCusp.lean\", \"line\": \"103\", \"text\": \"    IsZeroAt c f k ↔ ∃ γ : SL(2, ℤ), mapGL ℝ γ • ∞ = c ∧ IsZeroAtImInfty (f ∣[k] γ) := by\"}\n  {\"file\": \"Mathlib/NumberTheory/ModularForms/BoundedAtCusp.lean\", \"line\": \"111\", \"text\": \"    IsBoundedAt c f k ↔ ∀ γ : SL(2, ℤ), mapGL ℝ γ • ∞ = c → IsBoundedAtImInfty (f ∣[k] γ) := by\"}\n  {\"file\": \"Mathlib/NumberTheory/ModularForms/BoundedAtCusp.lean\", \"line\": \"117\", \"text\": \"    IsZeroAt c f k ↔ ∀ γ : SL(2, ℤ), mapGL ℝ γ • ∞ = c → IsZeroAtImInfty (f ∣[k] γ) := by\"}\n  {\"file\": \"Mathlib/NumberTheory/ModularForms/SlashActions.lean\", \"line\": \"153\", \"text\": \"  monoidHomSlashAction (Matrix.SpecialLinearGroup.mapGL ℝ)\"}\n  {\"file\": \"Mathlib/NumberTheory/ModularForms/Basic.lean\", \"line\": \"717\", \"text\": \"  exact ⟨g, by simp [mapGL]⟩\"}\n  {\"file\": \"Mathlib/NumberTheory/ModularForms/Basic.lean\", \"line\": \"724\", \"text\": \"  exact ⟨g, by simp [mapGL]⟩\"}\n  {\"file\": \"Mathlib/NumberTheory/ModularForms/ArithmeticSubgroups.lean\", \"line\": \"59\", \"text\": \"    HasDetOne (Γ.map <| mapGL S) where\"}\n  {\"file\": \"Mathlib/NumberTheory/ModularForms/ArithmeticSubgroups.lean\", \"line\": \"63\", \"text\": \"    HasDetOne (mapGL (n := n) (R := R) S).range where\"}\n  {\"file\": \"Mathlib/NumberTheory/ModularForms/ArithmeticSubgroups.lean\", \"line\": \"93\", \"text\": \"scoped[MatrixGroups] notation \\\"𝒮ℒ\\\" => MonoidHom.range (mapGL ℝ : SL(2, ℤ) →* GL (Fin 2) ℝ)\"}\n  {\"file\": \"Mathlib/NumberTheory/ModularForms/ArithmeticSubgroups.lean\", \"line\": \"98\", \"text\": \"  coe := map (mapGL ℝ)\"}\n  {\"file\": \"Mathlib/NumberTheory/ModularForms/ArithmeticSubgroups.lean\", \"line\": \"111\", \"text\": \"      comap_map_eq_self_of_injective mapGL_injective] using h\"}\n  {\"file\": \"Mathlib/NumberTheory/ModularForms/CongruenceSubgroups.lean\", \"line\": \"202\", \"text\": \"  ((toConjAct g⁻¹) • (Γ.map <| mapGL ℝ)).comap (mapGL ℝ)\"}\n  {\"file\": \"Mathlib/NumberTheory/ModularForms/CongruenceSubgroups.lean\", \"line\": \"206\", \"text\": \"  simp [conjGL, mapGL, Subgroup.mem_inv_pointwise_smul_iff, toConjAct_smul]\"}\n  {\"file\": \"Mathlib/NumberTheory/ModularForms/CongruenceSubgroups.lean\", \"line\": \"229\", \"text\": \"    ∃ N ≠ 0, ∀ x ∈ Gamma N, g * (mapGL ℚ x) * g⁻¹ ∈ (Gamma M).map (mapGL ℚ) := by\"}\n  {\"file\": \"Mathlib/NumberTheory/ModularForms/CongruenceSubgroups.lean\", \"line\": \"280\", \"text\": \"    ∃ N ≠ 0, (toConjAct <| g.map (Rat.castHom ℝ)) • (Gamma N).map (mapGL ℝ)\"}\n  {\"file\": \"Mathlib/NumberTheory/ModularForms/CongruenceSubgroups.lean\", \"line\": \"281\", \"text\": \"      ≤ (Gamma M).map (mapGL ℝ) := by\"}\n  {\"file\": \"Mathlib/NumberTheory/ModularForms/EisensteinSeries/Defs.lean\", \"line\": \"222\", \"text\": \"    simp [SpecialLinearGroup.mapGL, ← SL_slash, eisensteinSeries_slash_apply, Gamma_mem'.mp hA]\"}\n  {\"file\": \"Mathlib/NumberTheory/ModularForms/Bounds.lean\", \"line\": \"147\", \"text\": \"  exists_bound_of_subgroup_invariant_of_isBigO hf_cont ht hf_infinity (Γ := Γ.comap (mapGL ℝ))\"}\n  {\"file\": \"Mathlib/NumberTheory/ModularForms/Bounds.lean\", \"line\": \"198\", \"text\": \"    simpa [(show Rat.castHom ℝ = algebraMap ℚ ℝ by rfl), map_inv, map_mapGL]\"}\n  {\"file\": \"Mathlib/NumberTheory/ModularForms/Bounds.lean\", \"line\": \"199\", \"text\": \"      using! Subgroup.IsArithmetic.conj Γ (mapGL ℚ g)⁻¹\"}\n  {\"file\": \"Mathlib/NumberTheory/ModularForms/Cusps.lean\", \"line\": \"35\", \"text\": \"    ∃ g : SL(2, A), (mapGL K g) • ∞ = c := by\"}\n  {\"file\": \"Mathlib/NumberTheory/ModularForms/Cusps.lean\", \"line\": \"119\", \"text\": \"    simpa only [hgp.smul_eq_self_iff.mp hgc] using ⟨(mapGL ℚ g).parabolicFixedPoint,\"}\n  {\"file\": \"Mathlib/NumberTheory/ModularForms/Cusps.lean\", \"line\": \"124\", \"text\": \"    · suffices (mapGL ℝ ModularGroup.T).IsParabolic by simpa\"}\n  {\"file\": \"Mathlib/NumberTheory/ModularForms/Cusps.lean\", \"line\": \"133\", \"text\": \"lemma isCusp_SL2Z_iff' {c : OnePoint ℝ} : IsCusp c 𝒮ℒ ↔ ∃ g : SL(2, ℤ), c = mapGL ℝ g • ∞ := by\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern scheme morphisms, abstract group actions, invariant representations or general categorical descent; none states this algebraic-stack construction or theorem"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Affine smooth algebraic group quotient stack has affine diagonal and orbit geometric points",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.HasAffineProperty.diagonal_of_openCover\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Constructors\", \"type\": \"(P) {Q} [HasAffineProperty P Q] {X Y : Scheme.{u}} (f : X ⟶ Y) (𝒰 : Scheme.OpenCover.{v} Y) [∀ i, IsAffine (𝒰.X i)]\\n  (𝒰' : ∀ i, Scheme.OpenCover.{w} (pullback f (𝒰.f i))) [∀ i j, IsAffine ((𝒰' i).X j)]\\n  (h𝒰' : ∀ i j k, Q (pullback.mapDesc ((𝒰' i).f j) ((𝒰' i).f k) (𝒰.pullbackHom f i))) : P.diagona\", \"doc\": \"Let $ f: X \\to Y $ be a morphism of schemes where $ Y $ is affine. Suppose $ \\\\mathcal{U} $ is an open cover of $ Y $ such that each $ \\\\mathcal{U}.X_i $ is affine, and for each $ i $, the pullback of $ \"}\n  {\"name\": \"AlgebraicGeometry.HasAffineProperty.diagonal_of_openCover_diagonal\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Constructors\", \"type\": \"(P) {Q} [HasAffineProperty P Q] {X Y : Scheme.{u}} (f : X ⟶ Y) (𝒰 : Scheme.OpenCover Y) [∀ i, IsAffine (𝒰.X i)]\\n  (h𝒰 : ∀ i, Q.diagonal (𝒰.pullbackHom f i)) : P.diagonal f\", \"doc\": \"Let $ f : X \\to Y $ be a morphism of schemes, and let $ \\\\mathcal{U} $ be an open cover of $ Y $ by affine schemes. If for each $ i $, the pullback of $ f $ to $ \\\\mathcal{U}_i $ satisfies the diagonal p\"}\n  {\"name\": \"AlgebraicGeometry.HasAffineProperty.diagonal_iff\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Constructors\", \"type\": \"(P) {Q} [HasAffineProperty P Q] {X Y : Scheme.{u}} {f : X ⟶ Y} [IsAffine Y] : Q.diagonal f ↔ P.diagonal f\", \"doc\": \"Given properties $P$ and $Q$ satisfying the affine-target relation, for any morphism $f: X \\to Y$ with affine target $Y$, the diagonal property of $Q$ holds for $f$ if and only if the diagonal property\"}\n  {\"name\": \"AlgebraicGeometry.AffineTargetMorphismProperty.diagonal_of_openCover_source\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Constructors\", \"type\": \"{Q : AffineTargetMorphismProperty} [Q.IsLocal] {X Y : Scheme.{u}} (f : X ⟶ Y) (𝒰 : Scheme.OpenCover.{v} X)\\n  [∀ i, IsAffine (𝒰.X i)] [IsAffine Y] (h𝒰 : ∀ i j, Q (pullback.mapDesc (𝒰.f i) (𝒰.f j) f)) : Q.diagonal f\", \"doc\": \"Given a local property $ Q $ of morphisms with affine targets, if $ Y $ is an affine scheme, $ X $ admits an affine open cover $ \\\\mathcal{U} $, and for all indices $ i,j $ the pullbacks of $ \\\\mathcal{\"}\n  {\"name\": \"AlgebraicGeometry.instLocallyOfFinitePresentationOfIsSmooth\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Smooth\", \"type\": \"[hf : IsSmooth f] : LocallyOfFinitePresentation f\", \"doc\": \"Every smooth morphism of schemes is locally of finite presentation.\"}\n  {\"name\": \"AlgebraicGeometry.HasAffineProperty.diagonal_of_diagonal_of_isPullback\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Constructors\", \"type\": \"(P) {Q} [HasAffineProperty P Q] {X Y U V : Scheme.{u}} {f : X ⟶ Y} {g : U ⟶ Y} [IsAffine U] [IsOpenImmersion g]\\n  {iV : V ⟶ X} {f' : V ⟶ U} (h : IsPullback iV f' f g) (H : P.diagonal f) : Q.diagonal f'\", \"doc\": \"Given a pullback square involving morphisms with affine targets, if the diagonal morphism of the original morphism satisfies property $P$, then the diagonal morphism of the pulled-back morphism satisf\"}\n  {\"name\": \"AlgebraicGeometry.quasiCompact_affineProperty_iff_quasiSeparatedSpace\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated\", \"type\": \"[IsAffine Y] (f : X ⟶ Y) :\\n  AffineTargetMorphismProperty.diagonal (fun X _ _ _ ↦ CompactSpace X) f ↔ QuasiSeparatedSpace X\", \"doc\": \"A scheme $X$ is quasi-separated if and only if, for every affine scheme $Y$ and morphism $f: X \\\\to Y$, the diagonal morphism associated to $f$ satisfies the quasi-compactness condition under pullbacks\"}\n  {\"name\": \"AlgebraicGeometry.instHasAffinePropertyDiagonalSchemeDiagonal\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Constructors\", \"type\": \"(P) {Q} [HasAffineProperty P Q] : HasAffineProperty P.diagonal Q.diagonal\", \"doc\": \"If a morphism property $P$ has the affine property with respect to another property $Q$ in the category of schemes, then the diagonal morphism property of $P$ also has the affine property with respect\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern scheme morphisms, abstract group actions, invariant representations or general categorical descent; none states this algebraic-stack construction or theorem"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-affine-pgl-finite-stabilizer-quotient",
+  "date": "2026-10-22",
+  "group": "N8"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Affine PGL quotients with closed orbits and zero-dimensional stabilizers. Supporting affine-quotient step: Presentation and diagonal of an affine action quotient stack.",
+   "via": [
+    "lem-sfb-affine-pgl-finite-stabilizer-quotient",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-affine-action-stack-presentation",
+  "worker": "stage1",
+  "summary": "Built the action groupoid and applied general presentation and torsor comparison. Computed the affine diagonal and transporters, supplied geometric lifting by closed points and Nullstellensatz, proved invariant-map descent directly, and constructed the invariant-spectrum map. Added three statement-only structural inputs and reused PGL/noetherian/zero-dimensional results. Repair of returned head 4b01cbc836a: compared every cited dependency against current server main; all are unchanged. Corrected the product-stack isomorphism-space argument in step 3 to take the fibre product over the common test scheme T, and checked the newly landed formal-moduli quotient definition is not a duplicate of the smooth-groupoid presentation theorem. The delivery overlay rebuilds the split on current main while retaining maintainer metadata, the original route and all logged searches. Repair of returned head 9edc81a83ed: compared all 27 existing dependencies and the returned item with server main d2acc256d2bd319207a021fc4685a02ea93ee038; every existing dependency is unchanged. Expanded step 7 to check each target-cover locality hypothesis explicitly against the current calculus and locality statements, adding its direct calculus citation. Retained all prior arguments, sources, searches and the three structural nodes. Repair of returned head 4ac2ac7e5cb: reread the changed chartwise-calculus statement and use its explicit equivalence of field-extension lifting and scheme-chart surjectivity in steps 4 and 7; replace the now-duplicate smooth-groupoid input by current lem-sfb-smooth-groupoid-fppf-quotient with explicit source/target swap in step 3. Replace the moved algebraic-stack definition by def-sfb-algebraic-moduli-stack throughout the delivery, and refresh every citation quote from current statements. Two new structural inputs remain.",
+  "blueprint": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Affine PGL quotients with closed orbits and zero-dimensional stabilizers. Supporting affine-quotient step: Presentation and diagonal of an affine action quotient stack.",
+  "tool_uses": [
+   {
+    "node": "lem-wf-affine-nullstellensatz-vanishing",
+    "why": "Generic scheme/groupoid or topological tool in the quotient-stack construction; the constructible-stability unit provides no substitute for this independent input."
+   },
+   {
+    "node": "lem-sc-zero-dim-noetherian-finite-discrete",
+    "why": "Generic scheme/groupoid or topological tool in the quotient-stack construction; the constructible-stability unit provides no substitute for this independent input."
+   },
+   {
+    "node": "lem-trf-space-fibre-products-etale-covers",
+    "why": "General fibre products of algebraic spaces used to check algebraicity of the product target of the diagonal; independent of the constructible-stability route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-wf-affine-nullstellensatz-vanishing",
+  "lem-sc-zero-dim-noetherian-finite-discrete",
+  "lem-trf-space-fibre-products-etale-covers"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-NX-fe70cf1aa",
+  "group": "NX",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NX-fe70cf1aa (reviewer sub-agent of L); spot-checked: I read the whole item: the statement, all 10 steps, split_report and tool_uses. I also read both new nodes in full and the statement of every cited node, and diffed this head against the PASSed 4ac2 head. Since 4ac2, the dropped smooth-groupoid node is replaced by the live lem-sfb-smooth-groupoid-fppf-quotient, the stmt_deps now cite def-sfb-algebraic-moduli-stack, and steps 2-4 and 7 were adjusted to the new interfaces. Sources checked in the Stacks .tex files: 04WM (proof: arrows go to right translation by g^-1, matching the node), situation-quotient-stack, 04XD (needs a representable f and a surjective flat lfp W), 0427, and the tag-to-label map for 041Z/041U/0421/03WG/04TK/0245. Steps 1-8 and 10 are correct. (1) I checked the groupoid identities, and s and t are smooth. (2) The quotient theorem applies at S=Spec k with R a scheme; P = T x_X U. (3) The chart map is (t,s) by swap and inverse; H⊗E is finite type over E⊗E, and B⊗_A B -> B is surjective, so it is separated. Product-stack algebraicity is argued inline and is sound; the existing lem-sfb-algebraic-stack-fibre-products could be cited instead (advisory). (4) An Ω-point exists via lifting, smoothness, a qcqs spectral affine open, a closed point, and Nullstellensatz clause 1. (5) The orbit bijection holds. (6) The transporter is isomorphic to G_y as a scheme, nilpotents included; it is Noetherian and zero-dimensional, hence finite. (7) Locality applies with q=π×π. (8) Gluing uses the fppf sheaf axiom. (10) PGL_r is smooth, affine and finite type for every r>=1. Fault C1 in step 9, fixed: it applied step 8 to T=Spec(E^G) without showing this scheme is an algebraic space. My fix adds lem-trf-fppf-covering-is-fpqc and lem-weil-pbc-fpqc-representable-descent for the fppf sheaf property, and def-pc-fibre-product for the representable diagonal; the identity is the étale atlas. The step is now non-elementary and proof_deps equals the union of uses. New nodes: torsor-comparison is true (04WM for B=Spec k; affine G makes torsors schemes; V is arbitrary). fppf-locality is true (04XD plus 041Z/041U/0427/0421, each property separately, representability assumed). Neither restates the item, and neither duplicates action-groupoid-quotient-criterion (finite constant group), stack-representable-unramified-descent, chartwise calculus or space-flat-proper-fp-locality. lem-sfb-flat-affine-action-stack-presentation (Q01, unsplit) overlaps the item for flat H but is not a duplicate of the item or of the new nodes (advisory). Batch-5 citations are all accepted as generic: def-sfb-algebraic-moduli-stack and def-trf-algebraic-space are definitions; the chartwise calculus is generic and reaches trf only through that definition; lem-trf-space-fibre-products-etale-covers is general fibre-product algebraicity; lem-sfb-pgl-reductive-structure reaches only projective-bundle quotient geometry. None is a step of the trace formula or Poincaré duality. Accepted tool_uses: Nullstellensatz, zero-dim-noetherian-finite, trf fibre products. No SGA source is used. Edge cases checked: empty U, trivial G, nonreduced stabilizer, PGL_1.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.AffineActionStackPresentation",
+  "declaration": "AlgebraicGeometry.SchemeAction.affine_action_stack_presentation",
+  "declarations": [
+   "AlgebraicGeometry.SchemeAction.affineRelation",
+   "AlgebraicGeometry.SchemeAction.affineStabilizer",
+   "AlgebraicGeometry.SchemeAction.affineCoordinateCoaction",
+   "AlgebraicGeometry.SchemeAction.affineCoordinateInclusion",
+   "AlgebraicGeometry.SchemeAction.affineInvariants",
+   "AlgebraicGeometry.SchemeAction.affineGroupCoordinates",
+   "AlgebraicGeometry.SchemeAction.affineGroupCoordinates.commRing",
+   "AlgebraicGeometry.SchemeAction.affineGroupCoordinates.algebra",
+   "AlgebraicGeometry.SchemeAction.affineProductCoordinates_existsUnique",
+   "AlgebraicGeometry.SchemeAction.affineProductCoordinates",
+   "AlgebraicGeometry.SchemeAction.affineTensorCoaction",
+   "AlgebraicGeometry.SchemeAction.affineInvariants_mem_iff",
+   "AlgebraicGeometry.SchemeAction.affineInvariants_constants_mem",
+   "AlgebraicGeometry.SchemeAction.affineInvariantConstants",
+   "AlgebraicGeometry.SchemeAction.affineInvariantSpectrum",
+   "AlgebraicGeometry.SchemeAction.affineInvariantProjection_over",
+   "AlgebraicGeometry.SchemeAction.affineInvariantProjection",
+   "AlgebraicGeometry.SchemeAction.affineAtlasPoint",
+   "AlgebraicGeometry.SchemeAction.affineAtlasPoint_orbit",
+   "AlgebraicGeometry.SchemeAction.affineOrbitToClasses",
+   "AlgebraicGeometry.SchemeAction.affine_action_stack_presentation",
+   "AlgebraicGeometry.SchemeAction.affine_action_stack_diagonal_quasiFinite",
+   "AlgebraicGeometry.SchemeAction.affine_action_stack_space_maps",
+   "AlgebraicGeometry.SchemeAction.affine_action_stack_geometric_orbits",
+   "AlgebraicGeometry.SchemeAction.affine_action_stack_invariant_spectrum",
+   "AlgebraicGeometry.affine_action_stack_pgl"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/AffineActionStackPresentation.lean",
+  "statement": "theorem affine_action_stack_presentation : IsAlgebraicModuliStack (affineActionQuotientStack k E G) ∧ IsSmoothModuliAtlas (affineActionQuotientStack k E G) (affineActionScheme k E) (quotientAtlas G (affineActionScheme k E)) ∧ (∃ (W : Over (Spec (.of k))) (a : BasedFunctor (discreteModuli (yoneda.obj W)) (affineActionQuotientStack k E G)), IsSmoothModuliAtlas (affineActionQuotientStack k E G) W a ∧ LocallyOfFiniteType W.hom ∧ QuasiCompact W.hom) ∧ HasSchemeStackDiagonalWith (@IsAffineHom) (affineActionQuotientStack k E G) ∧ IsSchemeStackDiagonalPresentation (quotientAtlas G (affineActionScheme k E)) (quotientAtlas G (affineActionScheme k E)) (ModObj.smul (M := G) (X := affineActionScheme k E)) (snd G _)",
+  "branch": "sheaf-dag",
+  "by": "Q11",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "The six concluding theorems jointly state every clause. Helpers construct the relation, full scheme stabilizers, coaction equalizer, tensor comparison uniquely characterized on its factors, invariant-spectrum arrow, and canonical geometric orbit map. Structural proof obligations of these constructions are named and postponed with the source proof."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-bfd4b2d29",
+  "group": "Q11",
+  "result": "pass",
+  "note": "Read the item, both new definition nodes, all three modules, the dependency Lean (AffineActionQuotientStack, SchemeActionTorsorGroupoids, AlgebraicModuliStack, StablePointedModuliGroupoids) and the Mathlib ModObj action and ProjGenLinGroup. The live statement is unchanged; only lean and the two new stmt_deps were added. Every clause matches: algebraic stack and smooth surjective atlas quotientAtlas; finite type as a finite-type smooth atlas; affine diagonal via HasSchemeStackDiagonalWith IsAffineHom (equivalent to the node's affine-pullback test); (a,pr2) presentation keeping both projections; quasi-finite and separated diagonal under the zero-dimensional full-scheme-stabilizer hypothesis, in the node's finite-type plus finite-geometric-fibre convention with a closed relative diagonal; maps to algebraic spaces as restriction to an invariant map plus extension unique up to vertical iso; bijection from Mathlib orbitRel to the Skeleton of torsorFiber; E^G as the equalizer, with rho(e)=e⊗1 through an ∃!-pinned tensor comparison; phi characterized by its composite with the atlas and unique up to iso; PGL for every r>=1. New nodes are not duplicates: ModuliSchemeTest lacks both projections; ProjectiveMatrixCentralCover.Presentation is lemma-owned and needs r>=2. Neither is hollow. Edge cases: empty U, trivial G, r=1, nonreduced stabilizers, single universe u. All proofs are sorry; docstrings carry source places and steps 1-10; statements are verbatim; plain imports are proof-plan modules. Not recompiled (no file changed). Advisories: the PGL clause is stated as ∃ G; two PGL-node searches were copied from the diagonal node."
+ }
+}

@@ -1,0 +1,282 @@
+{
+ "id": "lem-sfb-space-dimension-flatness-base-change-sheaf",
+ "kind": "statement",
+ "title": "Base change and fpqc descent of dimension-filtered module flatness",
+ "statement": "Work over $\\operatorname{Spec}\\mathbf Z$ with schemes [def-pc-scheme], algebraic spaces [def-trf-algebraic-space], the universes of [def-weil-size-convention], sheaf fibre products [lem-trf-space-fibre-products-etale-covers], quasi-coherent modules [def-trf-space-quasi-coherent-module], and tensor pullback [def-trf-space-etale-module-functors]. Use chartwise local finite type and local finite presentation [def-sfb-space-morphism-properties]. Finite presentation means locally of finite presentation, quasi-compact, with quasi-compact diagonal. A module of finite type is locally finitely generated on etale scheme charts; a finitely presented module has locally an exact presentation $\\mathcal O^r\\to\\mathcal O^s\\to M\\to0$ with $r,s$ finite. Let $f:X\\to Y$ have scheme base $Y$, be locally of finite type, and let $M$ be a finite type quasi-coherent module. For a scheme $B\\to Y$, write $X_B=X\\times_YB$ and $M_B$ for tensor pullback. For an integer $n\\geq0$, let $P_n(X,M;B)$ mean that for every representable etale scheme chart $a:U\\to X_B$ and $u\\in U$ mapping to $v\\in B$ with $\\operatorname{trdeg}_{\\kappa(v)}\\kappa(u)\\geq n$, the stalk $(a^*M_B)_u$ is flat over $\\mathcal O_{B,v}$. Residue fields, transcendence degree and base-flatness are [def-weil-residue-field, def-kun-transcendence-degree, def-pc-scheme-module-flat-over]. The condition $P_n$ is preserved by every scheme base change $B\\prime\\to B$. For every fpqc covering $\\{B_i\\to B\\}$ [def-weil-pbc-fpqc-covering], $P_n(X,M;B)$ holds if and only if $P_n(X,M;B_i)$ holds for all $i$. Moreover $P_n(X,M;B)$ is equivalent to the same stalk criterion on any one representable surjective etale scheme atlas of $X_B$. Thus the assignments $B\\mapsto\\{b:B\\to Y\\mid P_n(X,M;B)\\}$, with restriction by composition, form an fpqc sheaf of sets over $Y$.",
+ "source": {
+  "document": "literature/stacks-project/spaces-flat.tex",
+  "place": "Tags 0CWS (lemma-pre-flat-dimension-n), 0CWT (definition-flat-dimension-n), and 0CWW (lemma-flat-dimension-n), part (1)."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-trf-algebraic-space",
+  "def-weil-size-convention",
+  "lem-trf-space-fibre-products-etale-covers",
+  "def-trf-space-quasi-coherent-module",
+  "def-trf-space-etale-module-functors",
+  "def-sfb-space-morphism-properties",
+  "def-weil-residue-field",
+  "def-kun-transcendence-degree",
+  "def-pc-scheme-module-flat-over",
+  "def-weil-pbc-fpqc-covering",
+  "def-trf-scheme-algebraic-space",
+  "def-sfb-space-sheaf-fibre-product",
+  "def-trf-space-module-scheme-restriction",
+  "def-weil-pbc-module-finite-type-presentation",
+  "def-pc-module-stalk-functor",
+  "def-sfb-space-dimension-flat-condition"
+ ],
+ "proof": [
+  {
+   "text": "Fix a surjective etale scheme atlas $p:U\\to X$. For any $B\\to Y$, its pullback $U_B\\to X_B$ is again such an atlas. Compare a point $w$ of any chart $W\\to X_B$ with a lift $u$ on $U_B$: the scheme $W\\times_{X_B}U_B\\to W$ is surjective etale, so choose $z$ above $w$ and let $u$ be its other image. The two etale projections give finite separable extensions $\\kappa(z)/\\kappa(w)$ and $\\kappa(z)/\\kappa(u)$. The transcendence-degree tower equality therefore gives $\\operatorname{trdeg}_{\\kappa(b)}\\kappa(w)=\\operatorname{trdeg}_{\\kappa(b)}\\kappa(z)=\\operatorname{trdeg}_{\\kappa(b)}\\kappa(u)$, where $b$ is their common image in $B$. Pointwise module flatness is independent of these chart choices by the cited point-chart lemma. Thus the cutoff criterion on $U_B$ implies it on every chart; the reverse implication follows by taking that chart. This proves the asserted one-atlas equivalence, also for any other atlas.",
+   "uses": [
+    "def-trf-algebraic-space",
+    "lem-trf-space-fibre-products-etale-covers",
+    "lem-weil-pbc-etale-fibre-discrete-separable-points",
+    "lem-kun-transcendence-degree-tower",
+    "lem-sfb-space-module-flat-point-chart-independence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-flat.tex",
+    "place": "Tag 0CWS (lemma-pre-flat-dimension-n), equivalence of (1) and (2); chart comparison spelled out using Tag 04NK."
+   }
+  },
+  {
+   "text": "On the fixed atlas, let $F$ be the Zariski quasi-coherent module corresponding to $p^*M$. The Zariski/etale equivalence identifies all its scheme tensor pullbacks with the chart pullbacks of $M$. In particular repeated pullbacks agree: the map $(r\\otimes m)\\otimes s\\mapsto rs\\otimes m$ and its inverse $s\\otimes m\\mapsto(1\\otimes m)\\otimes s$ give the tensor associativity identifications. The map $U\\to Y$ is locally finite type by the chart hypothesis. This remains so on $U_B\\to B$: on affine presentations a finite generating set of an $A$-algebra $C$ also generates $C\\otimes_A A\\prime$ over $A\\prime$. A finite list of module generators likewise pulls back to generators. Consequently the locally finite type hypothesis needed for the residue-transcendence lemma holds at every subsequent scheme base change of this atlas.",
+   "uses": [
+    "lem-trf-scheme-zariski-etale-quasi-coherent-equivalence",
+    "def-weil-finite-type-morphism",
+    "def-sfb-space-morphism-properties"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-flat.tex",
+    "place": "Tags 0CWS and 0CWT; scheme reduction and the base-change construction in situation-flat-dimension-n."
+   }
+  },
+  {
+   "text": "Assume $P_n(X,M;B)$ and take $B\\prime\\to B$. For $u\\prime\\in U_{B\\prime}$ over $b\\prime$ with residue transcendence degree at least $n$, let $u\\in U_B$ and $b\\in B$ be its images. The base-change inequality gives $\\operatorname{trdeg}_{\\kappa(b)}\\kappa(u)\\geq\\operatorname{trdeg}_{\\kappa(b\\prime)}\\kappa(u\\prime)\\geq n$. Hence $(F_B)_u$ is flat over $\\mathcal O_{B,b}$. Clause (1) of pointwise module flatness under base change makes $(F_{B\\prime})_{u\\prime}$ flat over $\\mathcal O_{B\\prime,b\\prime}$. Step 1 now gives $P_n(X,M;B\\prime)$.",
+   "uses": [
+    "lem-sfb-scheme-base-change-residue-transcendence-lifts",
+    "lem-sfb-pointwise-module-flatness-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-flat.tex",
+    "place": "Tag 0CWS, final assertion; scheme pointwise argument using Tag 02FY (2) and Tag 047C (1)."
+   }
+  },
+  {
+   "text": "Let $\\{B_i\\to B\\}$ be fpqc and assume $P_n(X,M;B_i)$ for every $i$. Given $u\\in U_B$ over $b$ of residue transcendence degree at least $n$, choose $i$ and $b_i\\in B_i$ above $b$ using the covering condition. The equality-lift clause gives $u_i\\in U_B\\times_B B_i=U_{B_i}$ over $u,b_i$ with $\\operatorname{trdeg}_{\\kappa(b_i)}\\kappa(u_i)=\\operatorname{trdeg}_{\\kappa(b)}\\kappa(u)\\geq n$. By hypothesis $(F_{B_i})_{u_i}$ is flat over $\\mathcal O_{B_i,b_i}$. The map $B_i\\to B$ is flat, so clause (2) of pointwise module flatness under base change implies that $(F_B)_u$ is flat over $\\mathcal O_{B,b}$. Step 1 gives $P_n(X,M;B)$. The other direction is step 3 applied to each $B_i\\to B$.",
+   "uses": [
+    "lem-sfb-scheme-base-change-residue-transcendence-lifts",
+    "def-weil-pbc-fpqc-covering",
+    "lem-sfb-pointwise-module-flatness-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-flat.tex",
+    "place": "Tag 0CWW (lemma-flat-dimension-n), part (1); direct pointwise form of the proof of scheme Tag 05MV, using Tag 02FY (3)."
+   }
+  },
+  {
+   "text": "Step 3 defines restrictions by composition and the tensor associativity in step 2 gives their identity and composition laws. For compatible local sections $b_i:B_i\\to Y$ over an fpqc covering of a test scheme $B$, representable fpqc descent gives a unique morphism $b:B\\to Y$ restricting to them. Apply step 4 to this morphism and the given covering: since each $b_i$ satisfies the cutoff condition, so does $b$. Uniqueness of $b$ proves uniqueness of the glued section. On the relative site of schemes over $Y$ the values are simply singleton or empty and the same argument proves the sheaf assertion there. For the empty test scheme the criterion is vacuous and the unique empty morphism is the unique section.",
+   "uses": [
+    "lem-weil-pbc-fpqc-representable-descent"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-flat.tex",
+    "place": "Tag 0CWW (lemma-flat-dimension-n), part (1), with the interpretation of F_n as a subfunctor of Y immediately before it."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-trf-algebraic-space",
+  "lem-trf-space-fibre-products-etale-covers",
+  "lem-weil-pbc-etale-fibre-discrete-separable-points",
+  "lem-kun-transcendence-degree-tower",
+  "lem-sfb-space-module-flat-point-chart-independence",
+  "lem-trf-scheme-zariski-etale-quasi-coherent-equivalence",
+  "def-weil-finite-type-morphism",
+  "def-sfb-space-morphism-properties",
+  "lem-sfb-scheme-base-change-residue-transcendence-lifts",
+  "lem-sfb-pointwise-module-flatness-base-change",
+  "def-weil-pbc-fpqc-covering",
+  "lem-weil-pbc-fpqc-representable-descent"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/spaces-flat.tex",
+  "place": "Tags 0CWS and 0CWW (1), expanded by a pointwise proof from morphisms.tex Tag 02FY (2),(3) and more-morphisms.tex Tag 047C, instead of using closed nonflat fibre loci."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Flatness in dimensions at least n of a finite type quasi coherent module on an algebraic space is stable under arbitrary base change and descends for fpqc covers",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.flat_iff\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Flat\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y),\\n  AlgebraicGeometry.Flat f ↔\\n    ∀ {U : Y.Opens},\\n      AlgebraicGeometry.IsAffineOpen U →\\n        ∀ {V : X.Opens},\\n          AlgebraicGeometry.IsAffineOpen V →\\n            ∀ (e : V ≤ (TopologicalSpace.Opens.map f.base).obj U),\\n              (CommRingC\", \"doc\": \"Let $f: X \\\\to Y$ be a morphism of schemes. The morphism $f$ is flat if and only if for every affine open subset $U$ of $Y$ and every affine open subset $V$ of $X$ such that the image of $V$ under the \"}\n  {\"name\": \"AlgebraicGeometry.Flat.instHasRingHomPropertyFlat\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Flat\", \"type\": \"AlgebraicGeometry.HasRingHomProperty @AlgebraicGeometry.Flat fun {R S} [CommRing R] [CommRing S] => RingHom.Flat\", \"doc\": \"The property of being a flat morphism of schemes is characterized by the flatness of the corresponding ring homomorphism. Specifically, a morphism of schemes is flat if and only if the associated ring\"}\n  {\"name\": \"AlgebraicGeometry.Flat.of_stalkMap\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Flat\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y),\\n  (∀ (x : ↥X), (CommRingCat.Hom.hom (AlgebraicGeometry.Scheme.Hom.stalkMap f x)).Flat) → AlgebraicGeometry.Flat f\", \"doc\": \"If for every point $ x \\\\in X $, the induced map on stalks $ \\\\mathcal{O}_{Y, f(x)} \\\\to \\\\mathcal{O}_{X, x} $ is flat, then the morphism $ f : X \\\\to Y $ of schemes is flat.\"}\n  {\"name\": \"AlgebraicGeometry.Flat.iff_flat_stalkMap\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Flat\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y),\\n  AlgebraicGeometry.Flat f ↔ ∀ (x : ↥X), (CommRingCat.Hom.hom (AlgebraicGeometry.Scheme.Hom.stalkMap f x)).Flat\", \"doc\": \"A morphism $ f : X \\\\to Y $ of schemes is flat if and only if for every point $ x \\\\in X $, the induced ring homomorphism on the stalks at $ x $ is flat.\"}\n  {\"name\": \"AlgebraicGeometry.Flat.flat_appLE\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Flat\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [self : AlgebraicGeometry.Flat f] {U : Y.Opens},\\n  AlgebraicGeometry.IsAffineOpen U →\\n    ∀ {V : X.Opens},\\n      AlgebraicGeometry.IsAffineOpen V →\\n        ∀ (e : V ≤ (TopologicalSpace.Opens.map f.base).obj U),\\n          (CommRingCat.Hom.hom (AlgebraicG\", \"doc\": \"If $ f : X \\\\to Y $ is a flat morphism of schemes, then for every affine open subset $ U \\\\subseteq Y $ and every affine open subset $ V \\\\subseteq X $ such that $ V \\\\subseteq f^{-1}(U) $, the induced ri\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.flat_appLE\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Flat\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [self : AlgebraicGeometry.Flat f] {U : Y.Opens},\\n  AlgebraicGeometry.IsAffineOpen U →\\n    ∀ {V : X.Opens},\\n      AlgebraicGeometry.IsAffineOpen V →\\n        ∀ (e : V ≤ (TopologicalSpace.Opens.map f.base).obj U),\\n          (CommRingCat.Hom.hom (AlgebraicG\", \"doc\": \"Let $f: X \\\\to Y$ be a flat morphism of schemes. For any affine open subset $U \\\\subseteq Y$ and any affine open subset $V \\\\subseteq f^{-1}(U)$, the corresponding ring homomorphism $\\\\mathcal{O}_Y(U) \\\\to\"}\n  {\"name\": \"AlgebraicGeometry.Flat.instIsMultiplicativeScheme\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Flat\", \"type\": \"CategoryTheory.MorphismProperty.IsMultiplicative @AlgebraicGeometry.Flat\", \"doc\": \"The property of being a flat morphism of schemes is multiplicative. That is, if $ f : X \\\\to Y $ and $ g : Y \\\\to Z $ are flat morphisms of schemes, then their composition $ g \\\\circ f : X \\\\to Z $ is als\"}\n  {\"name\": \"AlgebraicGeometry.Flat\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Flat\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"The property that a morphism $ f : X \\to Y $ of schemes is flat.\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the returned scheme/ring/module facts do not state this algebraic-space or complete-devissage assertion; no one-line specialization"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The base changes where a module is flat at points of residue transcendence degree at least n form an fpqc sheaf",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"Module.Flat.isBaseChange\", \"module\": \"Mathlib.RingTheory.Flat.Stability\", \"type\": \"[Flat R M] (N : Type t) [AddCommMonoid N] [Module R N] [Module S N] [IsScalarTower R S N] {f : M →ₗ[R] N}\\n  (h : IsBaseChange S f) : Flat S N\", \"doc\": \"If $ M $ is a flat $ R $-module, $ N $ is an $ R $-module and $ S $-module equipped with a scalar tower structure $ R \\to S \\to N $, and there exists an $ R $-linear map $ f : M \\to N $ satisfying the ba\"}\n  {\"name\": \"Module.Flat.of_isLocalizedModule\", \"module\": \"Mathlib.RingTheory.Flat.Stability\", \"type\": \"[Flat R M] (S : Submonoid R) [IsLocalization S Rp] (f : M →ₗ[R] Mp) [h : IsLocalizedModule S f] : Flat Rp Mp\", \"doc\": \"If $ M $ is a flat $ R $-module and $ M' $ is the localization of $ M $ at a submonoid $ S $ of $ R $, then $ M' $ is a flat module over the localized ring $ R' $, where $ R' $ is the localization of \"}\n  {\"name\": \"Algebra.FormallyUnramified.flat_of_restrictScalars\", \"module\": \"Mathlib.RingTheory.Unramified.Finite\", \"type\": \"[Module.Flat R M] : Module.Flat S M\", \"doc\": \"If $ M $ is a flat $ R $-module, then $ M $ remains flat as an $ S $-module when viewed through the scalar restriction induced by an $ S $-algebra structure on $ R $. This holds for any commutative ri\"}\n  {\"name\": \"AlgebraicGeometry.Flat.isStableUnderBaseChange\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Flat\", \"type\": \": MorphismProperty.IsStableUnderBaseChange @Flat\", \"doc\": \"The property of being a flat morphism of schemes is stable under base change, meaning that if a morphism of schemes is flat, then any base change (pullback) of this morphism is also flat.\"}\n  {\"name\": \"Module.flat_iff_of_isLocalization\", \"module\": \"Mathlib.RingTheory.Flat.Localization\", \"type\": \": Flat S M ↔ Flat R M\", \"doc\": \"A module $ M $ is flat over the localization $ S $ of a commutative semiring $ R $ if and only if it is flat over $ R $ itself.\"}\n  {\"name\": \"Module.FaithfullyFlat.instTensorProduct\", \"module\": \"Mathlib.RingTheory.Flat.FaithfullyFlat.Basic\", \"type\": \"(S : Type*) [CommRing S] [Algebra R S] [Module.FaithfullyFlat R M] : Module.FaithfullyFlat S (S ⊗[R] M)\", \"doc\": \"Let $R$ and $S$ be commutative rings, and suppose $S$ is an $R$-algebra. If $M$ is a faithfully flat $R$-module, then the tensor product $S \\\\otimes_R M$ is a faithfully flat $S$-module.\"}\n  {\"name\": \"Module.flat_of_isLocalized_span\", \"module\": \"Mathlib.RingTheory.Flat.Localization\", \"type\": \"(H : ∀ r : s, Module.Flat R (Mₛ r)) : Module.Flat R M\", \"doc\": \"If for every element $ r $ in the set $ s $, the localized module $ M_{\\\\mathfrak{p}_r} $ is flat over $ R $, then the module $ M $ is flat over $ R $.\"}\n  {\"name\": \"Module.flat_of_isLocalized_maximal\", \"module\": \"Mathlib.RingTheory.Flat.Localization\", \"type\": \"(H : ∀ (P : Ideal S) [P.IsMaximal], Flat R (Mₚ P)) : Module.Flat R M\", \"doc\": \"If for every maximal ideal $\\\\mathfrak{p}$ of $S$, the localization $M_\\\\mathfrak{p}$ is a flat $R$-module, then $M$ is flat over $R$.\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the returned scheme/ring/module facts do not state this algebraic-space or complete-devissage assertion; no one-line specialization"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"flat\", \"dimension\"",
+   "results": "[loogle] OK 0 hit(s)",
+   "date": "2026-10-24",
+   "verdict": "no match: the returned scheme/ring/module facts do not state this algebraic-space or complete-devissage assertion; no one-line specialization"
+  },
+  {
+   "tool": "grep",
+   "query": "flat.*dimension|dimension.*flat",
+   "results": "[grep] OK 0 hit(s)",
+   "date": "2026-10-24",
+   "verdict": "no match: the returned scheme/ring/module facts do not state this algebraic-space or complete-devissage assertion; no one-line specialization"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The base changes where a module is flat at points of residue transcendence degree at least n form an fpqc sheaf",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Flat.instHasRingHomPropertyFlat\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Flat\", \"type\": \"AlgebraicGeometry.HasRingHomProperty @AlgebraicGeometry.Flat fun {R S} [CommRing R] [CommRing S] => RingHom.Flat\", \"doc\": \"The property of being a flat morphism of schemes is characterized by the flatness of the corresponding ring homomorphism. Specifically, a morphism of schemes is flat if and only if the associated ring\"}\n  {\"name\": \"AlgebraicGeometry.Flat\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Flat\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"The property that a morphism $ f : X \\to Y $ of schemes is flat.\"}\n  {\"name\": \"Algebra.HasGoingDown.of_flat\", \"module\": \"Mathlib/RingTheory/Ideal/GoingDown\", \"type\": \"∀ {R : Type u_3} {S : Type u_4} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S] [Module.Flat R S],\\n  Algebra.HasGoingDown R S\", \"doc\": \"If $ S $ is a flat $ R $-module, then the algebra $ S $ over the commutative ring $ R $ satisfies the going-down property. This means that for any chain of prime ideals in $ R $ and a corresponding ch\"}\n  {\"name\": \"RingHom.Flat.propertyIsLocal\", \"module\": \"Mathlib/RingTheory/RingHom/Flat\", \"type\": \"RingHom.PropertyIsLocal fun {R S} [CommRing R] [CommRing S] => RingHom.Flat\", \"doc\": \"The property of being flat for a ring homomorphism between commutative rings is local, meaning it can be checked after localization at every prime ideal.\"}\n  {\"name\": \"Algebra.FormallyUnramified.flat_of_restrictScalars\", \"module\": \"Mathlib/RingTheory/Unramified/Finite\", \"type\": \"∀ (R : Type u_1) (S : Type u_2) [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S] (M : Type u_3)\\n  [inst_3 : AddCommGroup M] [inst_4 : Module R M] [inst_5 : Module S M] [IsScalarTower R S M]\\n  [Algebra.FormallyUnramified R S] [Algebra.EssFiniteType R S] [Module.Flat R M], Module.Flat \", \"doc\": \"If $ M $ is a flat $ R $-module, then $ M $ remains flat as an $ S $-module when viewed through the scalar restriction induced by an $ S $-algebra structure on $ R $. This holds for any commutative ri\"}\n  {\"name\": \"AlgebraicGeometry.Flat.of_stalkMap\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Flat\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y),\\n  (∀ (x : ↥X), (CommRingCat.Hom.hom (AlgebraicGeometry.Scheme.Hom.stalkMap f x)).Flat) → AlgebraicGeometry.Flat f\", \"doc\": \"If for every point $ x \\\\in X $, the induced map on stalks $ \\\\mathcal{O}_{Y, f(x)} \\\\to \\\\mathcal{O}_{X, x} $ is flat, then the morphism $ f : X \\\\to Y $ of schemes is flat.\"}\n  {\"name\": \"AlgebraicGeometry.Flat.stalkMap\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Flat\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.Flat f] (x : ↥X),\\n  (CommRingCat.Hom.hom (AlgebraicGeometry.Scheme.Hom.stalkMap f x)).Flat\", \"doc\": \"Let $f: X \\\\to Y$ be a flat morphism of schemes. Then for any point $x \\\\in X$, the induced ring homomorphism on stalks, $f_x^\\\\sharp: \\\\mathcal{O}_{Y, f(x)} \\\\to \\\\mathcal{O}_{X, x}$, is a flat ring homomo\"}\n  {\"name\": \"Module.Flat.of_flat_tensorProduct\", \"module\": \"Mathlib/RingTheory/Flat/FaithfullyFlat/Basic\", \"type\": \"∀ (R : Type u) (M : Type v) [inst : CommRing R] [inst_1 : AddCommGroup M] [inst_2 : Module R M] (S : Type u_1)\\n  [inst_3 : CommRing S] [inst_4 : Algebra R S] [Module.FaithfullyFlat R S] [Module.Flat S (TensorProduct R S M)],\\n  Module.Flat R M\", \"doc\": \"If $ S $ is a faithfully flat $ R $-algebra and the tensor product $ S \\\\otimes_R M $ is a flat $ S $-module, then $ M $ is a flat $ R $-module.\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the returned scheme/ring/module facts do not state this algebraic-space or complete-devissage assertion; no one-line specialization"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Flatness of a finite type quasi coherent module in dimensions at least n is preserved by base change and descends for fpqc coverings",
+   "results": "8 hits; AlgebraicGeometry.Flat.instHasRingHomPropertyFlat, AlgebraicGeometry.flat_iff, Module.Flat.of_flat_tensorProduct, Module.FaithfullyFlat, Module.Flat.tfae_equational_criterion, Module.Flat.iff_flat_tensorProduct, RingHom.Flat.propertyIsLocal, Module.flat_of_isLocalized_span",
+   "date": "2026-10-24",
+   "verdict": "no match: general module and scheme flatness does not state dimension-filtered flatness for algebraic spaces"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"flat\", \"dimension\"",
+   "results": "0 hits; ",
+   "date": "2026-10-24",
+   "verdict": "no match: ring/module flatness, abstract transcendence degree, or scheme residue-field constructions do not state the pointwise scheme base-change inequality and equality-lift assertion"
+  },
+  {
+   "tool": "grep",
+   "query": "flat.*dimension|dimension.*flat",
+   "results": "0 hits; ",
+   "date": "2026-10-24",
+   "verdict": "no match: ring/module flatness, abstract transcendence degree, or scheme residue-field constructions do not state the pointwise scheme base-change inequality and equality-lift assertion"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Flatness in dimensions at least n is an fpqc sheaf",
+   "results": "8 hits; RingHom.Flat, Module.Flat.of_isLocalizedModule, Module.flat_of_isLocalized_span, Module.FaithfullyFlat.toFlat, Module.Flat.of_flat_tensorProduct, AlgebraicGeometry.Flat, RingHom.Flat.propertyIsLocal, SheafOfModules.QuasicoherentData.IsFinitePresentation",
+   "date": "2026-10-24",
+   "verdict": "no match: module and ring flatness and quasi-coherent presentation do not state the fpqc dimension-filtered sheaf assertion"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-space-pure-dimension-flatness-representability",
+  "date": "2026-10-24",
+  "group": "Q52"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "Proof (3), compactification/direct-image preservation, inherited alteration and stable-moduli prerequisite chain; algebraicity of the coherent-family stack used by the proper-support Quot representability input. Supporting input: Tags 0CX4 (situation-existence), 0CXB (theorem-existence). Supporting input in 0CXB: Tags 0CVI (lemma-proper-pure), 0CX2 (lemma-when-universal-flattening), part (1), and 0CWX (situation-flat), defining the flat base-change functor; scheme representability: spaces-morphisms.tex Tag 03XX (proposition-locally-quasi-finite-separated-over-scheme), as invoked in 0CXB (theorem-existence). Subinput: Tag 0CX1 (theorem-flat-dimension-n-representable), specialized to a scheme base and universal purity (which implies the pure hypothesis); chart formulation of flatness in dimensions at least n: Tags 0CWS (lemma-pre-flat-dimension-n) and 0CWT (definition-flat-dimension-n). Subinput of the dimension induction: Tags 0CWS (lemma-pre-flat-dimension-n), 0CWT (definition-flat-dimension-n), and 0CWW (lemma-flat-dimension-n), part (1).",
+   "via": [
+    "lem-sfb-space-pure-dimension-flatness-representability",
+    "lem-sfb-space-proper-support-universal-flattening",
+    "lem-sfb-space-flat-proper-support-inverse-effectivity",
+    "lem-sfb-space-coherent-stack-general",
+    "lem-sfb-space-quot-representability",
+    "lem-sfb-space-hilbert-representability",
+    "lem-sfb-space-hom-representability",
+    "lem-sfb-curve-descent-isom-spaces",
+    "lem-sfb-nodal-curve-stack-smooth",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-space-dimension-flatness-base-change-sheaf",
+  "worker": "stage1",
+  "summary": "Retained the statement. Proved atlas independence by common etale refinement, base-change stability by the residue-transcendence inequality, fpqc descent by an equality lift and pointwise module flatness descent, and the sheaf property by morphism gluing. Added one scheme-geometric input for Tag 02FY (2),(3).",
+  "blueprint": "Inherited compactification/direct-image preservation prerequisite chain, Proof (3); spaces-flat Tags 0CWS and 0CWW (1). The ancestor command returns null because created.item reaches a Lean module name; retained that computed ancestry.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-etale-fibre-discrete-separable-points",
+    "why": "Etale residue extensions on the common refinement are finite separable; this is a generic scheme tool."
+   },
+   {
+    "node": "lem-kun-transcendence-degree-tower",
+    "why": "Algebraic extensions on the common refinement leave residue transcendence degree unchanged."
+   },
+   {
+    "node": "lem-trf-scheme-zariski-etale-quasi-coherent-equivalence",
+    "why": "Identifies the Zariski chart modules and their tensor pullbacks with the small-etale modules."
+   },
+   {
+    "node": "lem-weil-pbc-fpqc-representable-descent",
+    "why": "Glues compatible morphisms of test schemes into the scheme Y for the big-site sheaf assertion."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-etale-fibre-discrete-separable-points",
+  "lem-kun-transcendence-degree-tower",
+  "lem-trf-scheme-zariski-etale-quasi-coherent-equivalence",
+  "lem-weil-pbc-fpqc-representable-descent"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q119-d220f895c",
+  "group": "Q119",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q119-d220f895c (reviewer sub-agent of L); spot-checked: I read the whole delivery against the source; no fixes. Item statement: byte-identical to live and side-live (still unsplit there), and faithful to spaces-flat 0CWS(2)/(3) with base V=B, the base-change clause, and 0CWW(1) (fpqc sheaf F_n). New node lem-sfb-scheme-base-change-residue-transcendence-lifts states exactly the trdeg parts of morphisms 02FY (2) (inequality) and (3) (equality lift), with the same hypotheses: f locally finite type, g arbitrary. It has a statement only, is self-contained, and cites a defining node for every notion. Tested on A^1_k over k(t): the generic point has trdeg 1, x−t has trdeg 0, and the equality lift is the generic point. Not a duplicate: every 02FY citer in the DAG uses part (1) and the 00P4 nodes concern local dimension; the 0CX1 sibling nodes differ; it does not restate any clause of the item. Steps: (1) atlas independence via the étale common refinement (lem-trf-space-fibre-products-etale-covers), finite separable residue extensions, the trdeg tower lemma, and lem-sfb-space-module-flat-point-chart-independence with T=B. (2) Elementary: the Zariski/étale pullback comparison and local finite type of U→Y from the chart test. (3) Base change: the 02FY inequality plus pointwise flatness clause (1). (4) fpqc descent: a point b_i over b, the equality lift, then clause (2) using flatness of B_i→B (the pointwise form of the 05MV proof). (5) Gluing by lem-weil-pbc-fpqc-representable-descent. All hypotheses checked; M finite type is never needed. Batch-5 flags: chart-independence reaches the trace-formula chapter only through def-trf-algebraic-space, a general definition. Its closure contains only generic trace-formula and Poincaré-duality chapter def/lem nodes, and no nt-assume, sk-thm-trace or theorem node. lem-trf-scheme-zariski-etale-quasi-coherent-equivalence is the general Zariski/étale quasi-coherent equivalence, with generic closure. Neither is part of the trace formula or Poincaré duality, so both are accepted. Accepted tool uses: etale-fibre-discrete-separable-points, transcendence-degree-tower, the Zariski/étale equivalence, the space fibre-products lemma, and fpqc representable descent with the fpqc covering definition. No SGA cited."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SpaceDimensionFlatnessBaseChangeSheaf",
+  "declaration": "AlgebraicGeometry.AlgebraicSpace.dimensionFlat_baseChange_fpqc_atlas_sheaf",
+  "declarations": [
+   "AlgebraicGeometry.AlgebraicSpace.dimensionFlatAtlasCondition",
+   "AlgebraicGeometry.AlgebraicSpace.dimensionFlat_baseChange_fpqc_atlas_sheaf"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/SpaceDimensionFlatnessBaseChangeSheaf.lean",
+  "statement": "theorem dimensionFlat_baseChange_fpqc_atlas_sheaf {Y : Over (Spec (.of (ULift.{u} ℤ)))} {X : AlgebraicSpace (Spec (.of (ULift.{u} ℤ)))} (f : X ⟶ schemeSpace Y) (hf : MapIsLocally (@LocallyOfFiniteType) f) (M : X.Modules) (hMqc : M.IsQuasicoherent) (hMft : M.IsFiniteType) (n : ℕ) : (∀ (B B' : Over (Spec (.of (ULift.{u} ℤ)))) (g : B ⟶ Y) (h : B' ⟶ B), dimensionFlatCondition f M n g → dimensionFlatCondition f M n (h ≫ g)) ∧ (∀ (I : Type w) (B : Over (Spec (.of (ULift.{u} ℤ)))) (b : B ⟶ Y) (Bᵢ : I → Over (Spec (.of (ULift.{u} ℤ)))) (g : ∀ i : I, Bᵢ i ⟶ B), Presieve.ofArrows (fun i ↦ (Bᵢ i).left) (fun i ↦ (g i).left) ∈ Scheme.fpqcPrecoverage B.left → (dimensionFlatCondition f M n b ↔ ∀ i : I, dimensionFlatCondition f M n (g i ≫ b))) ∧ (∀ (B : Over (Spec (.of (ULift.{u} ℤ)))) (g : B ⟶ Y) (U : (enlargedFibreProduct f (dimensionFlatBaseMap g)).EtaleSite), IsSurjective U.obj.hom → (dimensionFlatCondition f M n g ↔ dimensionFlatAtlasCondition f M n g U)) ∧ ∃ (F : Sheaf (Scheme.fpqcTopology.over (Spec (.of (ULift.{u} ℤ)))) (Type (u + 1))) (e : ∀ B : Over (Spec (.of (ULift.{u} ℤ))), F.obj.obj (op B) ≃ {b : B ⟶ Y // dimensionFlatCondition f M n b}), ∀ (B B' : Over (Spec (.of (ULift.{u} ℤ)))) (g : B' ⟶ B) (s : F.obj.obj (op B)), (e B' (F.obj.map g.op s)).val = g ≫ (e B s).val",
+  "branch": "sheaf-dag",
+  "by": "NK",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "H4 repair of returned b119d32c4c13: imports the landed SpaceDimensionFlatCondition module and uses dimensionFlatCondition in every clause, with its existing dimensionFlatBaseMap and dimensionFlatChartMap. The duplicate map and all-chart predicate definitions are deleted. Only the distinctly named one-chart helper dimensionFlatAtlasCondition is introduced. Adds the existing definition owner def-sfb-space-dimension-flat-condition to stmt_deps as explicitly requested by the return. All four mathematical clauses and hypotheses are retained; no statement correction."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-6f8d660b5",
+  "group": "NK",
+  "result": "pass",
+  "note": "Re-delivery fixes the H4 return of b119d32c4c13: the duplicate dimensionFlat* definitions and name clashes are removed; the module publicly imports the landed SpaceDimensionFlatCondition and uses dimensionFlatCondition in all four clauses; the only node change besides the lean record is the requested stmt_dep def-sfb-space-dimension-flat-condition. The new helper dimensionFlatAtlasCondition has the landed predicate's body minus the outer ∀ U (line diff), so P_n = ∀ U, helper U by rfl; no other module in live uses the name. Clauses match the node: locally finite type via MapIsLocally; IsQuasicoherent is the same predicate as the QCoh owner, plus IsFiniteType; base-change stability via h ≫ g; fpqc iff for arbitrary I : Type w with fpqcPrecoverage; one surjective étale atlas via EtaleSite with IsSurjective; fpqc sheaf on Over Spec ℤ with value equivalences and restriction by composition. Edge cases (n = 0, empty schemes/atlases/index sets, zero module, cutoff above every trdeg) covered; no extra hypotheses. Docstrings, proof steps and a single sorry present; lean.statement verbatim; proof-dep imports exist in live. Not recompiled (no fix); worker reports a clean compile and a passed preflight."
+ }
+}

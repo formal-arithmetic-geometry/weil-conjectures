@@ -1,0 +1,283 @@
+{
+ "id": "lem-sfb-group-open-arithmetic-model",
+ "kind": "statement",
+ "title": "Arithmetic models of a smooth group with a fibrewise nonempty open",
+ "statement": "Let $S$ be a locally Noetherian scheme [def-pc-scheme, pqf-def-locnoeth], $G\\to S$ a smooth separated group algebraic space of finite presentation with integral geometric fibres, and $V\\subseteq G$ a quasi-compact open subspace meeting every geometric fibre. For algebraic spaces [def-trf-algebraic-space], smoothness and local finite presentation are tested on etale scheme charts [def-sbc-smooth-morphisms, def-sbc-locally-finite-presentation]; finite presentation also requires quasi-compactness and quasi-separatedness, and separatedness means that the diagonal is a closed immersion. A group algebraic space is an algebraic space with multiplication, inverse and identity morphisms over its base satisfying the group identities, without a commutativity assumption. A geometric fibre is the base change to an algebraically closed field at a point of the base; integral means reduced, irreducible and nonempty. For every $s\\in S$ there exist an affine open neighbourhood $U\\subseteq S$ of $s$, an affine scheme $T=\\operatorname{Spec}R$ with $R$ a finitely generated $\\mathbf Z$-algebra [def-weil-affine-spectrum], a morphism $U\\to T$, with $T$ Noetherian of finite Krull dimension, an integer $d\\geq0$, a smooth separated group algebraic space $G_0\\to T$ of finite presentation, and a quasi-compact open $V_0\\subseteq G_0$, such that every geometric fibre of $G_0\\to T$ is integral of dimension $d$ and meets $V_0$. There is an isomorphism of group algebraic spaces $G|_U\\cong G_0\\times_TU$ identifying $V\\times_SU$ with $V_0\\times_TU$. The dimension of each geometric fibre is its topological Krull dimension [def-kun-topological-krull-dimension].",
+ "source": {
+  "document": "literature/deligne-le-lemme-de-gabber_Asterisque-127-1985.pdf",
+  "place": "Lemma 4.6, printed p.144: reduction to a base essentially of finite type over Z, made precise for the group and its open. Supporting descent: Stacks spaces-limits.tex Tags 07SK (lemma-descend-finite-presentation), 0CN2 (lemma-descend-smooth), 0851 (lemma-descend-separated-morphism), 07SN (lemma-descend-surjective). The geometric-integrality and constant-dimension clauses are part of the model assertion, not consequences asserted of 07SK alone. Local Deligne PDF WANTED."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-trf-algebraic-space",
+  "def-sbc-smooth-morphisms",
+  "def-sbc-locally-finite-presentation",
+  "def-a1-space-open-subspace",
+  "pqf-def-locnoeth",
+  "def-weil-affine-spectrum",
+  "def-kun-topological-krull-dimension",
+  "def-sfb-smooth-integral-group-space",
+  "def-a1-space-point-topology"
+ ],
+ "proof": [
+  {
+   "text": "Fix $s\\in S$ and an affine open $U=\\operatorname{Spec}A$ containing it. The inclusion $U\\to S$ is quasi-compact by [lem-sfb-noetherian-open-immersion-qc]. By [lem-sfb-space-quasicompact-fppf-local], its pullback to the quasi-compact space $V$ is quasi-compact, so $V_U$ is quasi-compact. Smoothness persists by [lem-sfb-space-smooth-surjective-fppf-locality]. Finite presentation and separatedness of $G_U\\to U$ persist by [lem-sfb-space-flat-proper-fp-locality, lem-sfb-space-separated-fp-composition]. By [lemma-nagata-noetherian-inverse-system-affine], write $U=\\varprojlim_iT_i$ with $T_i=\\operatorname{Spec}A_i$, the finitely generated integer subalgebras of $A$. These form a small nonempty directed set (finite subsets of the set $A$ suffice). Their spectra are qcqs by [lem-weil-pbc-affine-scheme-qcqs].",
+   "uses": [
+    "lem-sfb-noetherian-open-immersion-qc",
+    "lem-sfb-space-flat-proper-fp-locality",
+    "lem-sfb-space-separated-fp-composition",
+    "lemma-nagata-noetherian-inverse-system-affine",
+    "lem-weil-pbc-affine-scheme-qcqs",
+    "lem-sfb-space-quasicompact-fppf-local",
+    "lem-sfb-space-smooth-surjective-fppf-locality"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-limits.tex",
+    "place": "Tag 07SK, setup for approximation; properties.tex Tag 01OX for the restricted open"
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-fp-space-limit-category] to obtain a finitely presented model $H_i\\to T_i$ of $G_U$. Its square and cube are finitely presented by base change and composition [lem-sfb-space-flat-proper-fp-locality, lem-sfb-space-separated-fp-composition]. Descend $m:G_U^2\\to G_U$, $\\iota:G_U\\to G_U$ and $e:U\\to G_U$ by the morphism clause of the same limit-category node, using the square model for $m$ and the terminal object for $e$. The equations $m(m\\times1)=m(1\\times m)$ on the cube, $m(e,1)=1=m(1,e)$ on $H$, and $m(\\iota,1)\\Delta=e p=m(1,\\iota)\\Delta$ on $H$ hold over $U$. The equality clause makes these finitely many equations hold at a common later stage. Hence $H_i$ is a group and the given identification over $U$ is a group isomorphism.",
+   "uses": [
+    "lem-sfb-fp-space-limit-category",
+    "lem-sfb-space-flat-proper-fp-locality",
+    "lem-sfb-space-separated-fp-composition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-limits.tex",
+    "place": "Tag 07SK, object/morphism/equality clauses applied to the finite group diagram"
+   }
+  },
+  {
+   "text": "By [lem-sfb-space-eventually-smooth, lem-sfb-space-descend-separated], increase $i$ so $H_i\\to T_i$ is smooth and separated. Apply [lem-sfb-space-limit-open-cover-descent] to the two-member cover $(G_U,V_U)$ of $G_U$, viewed as the limit of the qcqs spaces $H_j$: a compatible family over $H_i$ is exactly a map to $H_i$ together with a map to $U=\\varprojlim T_j$, by the fibre-product universal property. It gives a quasi-compact open $W_i\\subset H_i$ whose pullback is $V_U$. Here the transition maps of the $H_j$ are affine, as base changes of the affine maps $T_j\\to T_i$, and [lem-sfb-space-fp-qcqs-source] gives qcqs sources. The map $W_i\\to T_i$ is locally of finite presentation: it is the restriction of the smooth map $H_i\\to T_i$ to an open. Its pullback $V_U\\to U$ is surjective by the fibrewise nonemptiness hypothesis. Thus [lem-sfb-space-eventually-surjective-map] makes $W_i\\to T_i$ surjective after increasing $i$ once more. All preceding properties persist at later stages by the cited statements.",
+   "uses": [
+    "lem-sfb-space-eventually-smooth",
+    "lem-sfb-space-descend-separated",
+    "lem-sfb-space-limit-open-cover-descent",
+    "lem-sfb-space-fp-qcqs-source",
+    "lem-sfb-space-eventually-surjective-map"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-limits.tex",
+    "place": "Tags 0CN2, 0851, 0827 and 07SN; open restriction uses the chart definition of local finite presentation"
+   }
+  },
+  {
+   "text": "The scheme $T_i$ is Noetherian by [lem-weil-pbc-finite-type-over-noetherian]. Apply [lem-sfb-smooth-space-integral-fibre-locus] to $H_i\\to T_i$ and let $E\\subset|T_i|$ be its constructible integral-fibre locus. Its inverse image in $U$ is all of $U$, since $G_U$ has integral geometric fibres and that node gives exact base-change equality. By [lem-weil-pbc-limit-contained-in-constructible], the image of $T_j\\to T_i$ lies in $E$ at all sufficiently late stages. Apply the same base-change equality again to conclude that every geometric fibre of $H_j$ is integral. Replace $i$ by such a $j$; the group operations and $W_i$ are pulled back with it.",
+   "uses": [
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "lem-sfb-smooth-space-integral-fibre-locus",
+    "lem-weil-pbc-limit-contained-in-constructible"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/limits.tex",
+    "place": "Tag 05F4 (lemma-limit-contained-in-constructible), applied to the smooth-space integral-fibre locus; no openness of that locus is claimed"
+   }
+  },
+  {
+   "text": "By [lem-sfb-smooth-group-fibre-dimension], $t\\mapsto\\dim(H_i)_{\\bar t}$ is locally constant. Write $t_i$ for the image of $s$ and $d$ for its value. Choose a principal affine neighbourhood $T=D(a)\\subset T_i$ of $t_i$ contained in the locus with value $d$. The inverse image of $D(a)$ in the affine $U$ is a principal affine open $U'$ containing $s$. Put $G_0=H_i\\times_{T_i}T$ and $V_0=W_i\\times_{T_i}T$. Restriction preserves the group identities, smoothness, separatedness, finite presentation, integral geometric fibres and surjectivity of the open; the group identities are pulled-back equations; smoothness and surjectivity of $V_0\\to T$ persist by [lem-sfb-space-smooth-surjective-fppf-locality], finite presentation by [lem-sfb-space-flat-proper-fp-locality] and separatedness by [lem-sfb-space-separated-fp-composition]; integrality of the geometric fibres follows from Step 4 by the base-change equality of [lem-sfb-smooth-space-integral-fibre-locus], and the dimension assertion from the base-change clause of [lem-sfb-smooth-group-fibre-dimension]. A point of $V_0$ over $t$ gives a nonempty $(V_0)_{\\bar t}$, so $V_0$ meets every geometric fibre. The map $W_i\\to T_i$ is quasi-compact by [lem-sfb-space-qcqs-permanence], and so is its base change by [lem-sfb-space-quasicompact-fppf-local]; since $T$ is affine this proves that $V_0$ is quasi-compact. The pullback isomorphism on $U'$ identifies its open with $V\\times_SU'$.",
+   "uses": [
+    "lem-sfb-smooth-group-fibre-dimension",
+    "lem-sfb-space-qcqs-permanence",
+    "lem-sfb-space-quasicompact-fppf-local",
+    "lem-sfb-space-smooth-surjective-fppf-locality",
+    "lem-sfb-space-flat-proper-fp-locality",
+    "lem-sfb-space-separated-fp-composition",
+    "lem-sfb-smooth-space-integral-fibre-locus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 02G1 and identity/translation dimension consequence; principal-open restriction of the model"
+   }
+  },
+  {
+   "text": "The coordinate ring of $T$ is $(A_i)_a$, still a finitely generated $\\mathbf Z$-algebra: adjoin one variable $z$ and the relation $az=1$. It follows that $T$ is of finite type over $\\operatorname{Spec}\\mathbf Z$. The latter has a finite Noetherian affine cover and dimension one, since its prime ideals are $(0)$ and $(p)$ for prime integers $p$. Apply [lem-cbc-compactification-geometry-fibre-bound] to $T\\to\\operatorname{Spec}\\mathbf Z$ to obtain that $T$ is Noetherian of finite Krull dimension. Rename $U'$ as $U$. The data constructed in Steps 2--5 now satisfy every asserted clause. If $S$ is empty there is no point $s$ to treat.",
+   "uses": [
+    "lem-cbc-compactification-geometry-fibre-bound"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Finite-type arithmetic source dimension via the affine polynomial argument recorded in lem-cbc-compactification-geometry-fibre-bound"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-noetherian-open-immersion-qc",
+  "lem-sfb-space-flat-proper-fp-locality",
+  "lem-sfb-space-separated-fp-composition",
+  "lemma-nagata-noetherian-inverse-system-affine",
+  "lem-weil-pbc-affine-scheme-qcqs",
+  "lem-sfb-space-quasicompact-fppf-local",
+  "lem-sfb-space-smooth-surjective-fppf-locality",
+  "lem-sfb-fp-space-limit-category",
+  "lem-sfb-space-eventually-smooth",
+  "lem-sfb-space-descend-separated",
+  "lem-sfb-space-limit-open-cover-descent",
+  "lem-sfb-space-fp-qcqs-source",
+  "lem-sfb-space-eventually-surjective-map",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-sfb-smooth-space-integral-fibre-locus",
+  "lem-weil-pbc-limit-contained-in-constructible",
+  "lem-sfb-smooth-group-fibre-dimension",
+  "lem-sfb-space-qcqs-permanence",
+  "lem-cbc-compactification-geometry-fibre-bound"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/spaces-limits.tex",
+  "place": "Explicit descent of the group/open datum using Tags 07SK, 0CN2, 0851, 0827, 07SN; constructible-locus refinement by limits.tex Tag 05F4. Completes the arithmetic reduction invoked in Deligne Lemma 4.6; local Deligne PDF WANTED."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A finitely presented smooth separated group algebraic space and quasi compact open descend to a finite type integer algebra preserving geometrically integral fibres",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.IsFinite\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Finite\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"For schemes $X$ and $Y$, a morphism from $X$ to $Y$ is finite.\"}\n  {\"name\": \"AlgebraicGeometry.LocallyOfFinitePresentation\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"A morphism $ f: X \\\\to Y $ of schemes is locally of finite presentation, meaning that for every point in $ X $, there exists an open neighborhood such that the restriction of $ f $ to this neighborhood\"}\n  {\"name\": \"AlgebraicGeometry.AffineSpace.instLocallyOfFinitePresentationOverSchemeInferInstanceOverClassOfFinite\", \"module\": \"Mathlib/AlgebraicGeometry/AffineSpace\", \"type\": \"∀ {n : Type v} (S : AlgebraicGeometry.Scheme) [Finite n],\\n  AlgebraicGeometry.LocallyOfFinitePresentation (AlgebraicGeometry.AffineSpace n S ↘ S)\", \"doc\": \"If $ n $ is a finite type, then the affine space $ \\\\mathbb{A}^n_S $ over a scheme $ S $ is locally of finite presentation as a morphism over $ S $. This means that for every point in $ \\\\mathbb{A}^n_S \"}\n  {\"name\": \"AlgebraicGeometry.finite_appTop_of_universallyClosed\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Proper\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} (K : Type u) [inst : Field K]\\n  (f : X ⟶ AlgebraicGeometry.Spec { carrier := K, commRing := Field.toEuclideanDomain.toCommRing })\\n  [AlgebraicGeometry.IsIntegral X] [AlgebraicGeometry.UniversallyClosed f] [AlgebraicGeometry.LocallyOfFiniteType f],\\n  (CommRingCat.Hom.\", \"doc\": \"Let $K$ be a field, and let $f: X \\\\to \\\\operatorname{Spec}(K)$ be a morphism from an integral scheme $X$. If $f$ is universally closed and locally of finite type, then the ring of global sections of $X\"}\n  {\"name\": \"AlgebraicGeometry.IsIntegral\", \"module\": \"Mathlib/AlgebraicGeometry/Properties\", \"type\": \"AlgebraicGeometry.Scheme → Prop\", \"doc\": \"The predicate for a scheme to be integral\"}\n  {\"name\": \"AlgebraicGeometry.instLocallyOfFinitePresentationOfIsSmooth\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [hf : AlgebraicGeometry.IsSmooth f],\\n  AlgebraicGeometry.LocallyOfFinitePresentation f\", \"doc\": \"Every smooth morphism of schemes is locally of finite presentation.\"}\n  {\"name\": \"AlgebraicGeometry.IsFinite.instIsIntegralHom\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Finite\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.IsFinite f], AlgebraicGeometry.IsIntegralHom f\", \"doc\": \"Every finite morphism of schemes is an integral morphism. In algebraic geometry, this means that if a morphism $ f: X \\to Y $ is finite (i.e., affine and inducing finite ring extensions on stalks), the\"}\n  {\"name\": \"AlgebraicGeometry.IsFinite.instHasAffinePropertyAndIsAffineFiniteCarrierObjOppositeOpensCarrierCarrierCommRingCatPresheafOpOpensTopHomAppTop\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Finite\", \"type\": \"AlgebraicGeometry.HasAffineProperty @AlgebraicGeometry.IsFinite fun X x f x_1 =>\\n  AlgebraicGeometry.IsAffine X ∧ (CommRingCat.Hom.hom (AlgebraicGeometry.Scheme.Hom.appTop f)).Finite\", \"doc\": \"A morphism of schemes with affine target is finite if and only if the source is affine and the induced ring homomorphism on global sections is finite (i.e., the target ring is finitely generated as a \"}\n",
+   "date": "2026-10-23",
+   "verdict": "No match: scheme or ring smoothness and flat descent do not descend this entire group/open datum or preserve its geometric fibres."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Noetherian approximation of smooth algebraic groups and fibrewise nonempty open subspaces",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"Algebra.Smooth.flat_of_isNoetherianRing\", \"module\": \"Mathlib.RingTheory.Smooth.Flat\", \"type\": \"[IsNoetherianRing R] [Smooth R A] : Module.Flat R A\", \"doc\": \"Let $ R $ be a Noetherian ring and $ A $ a smooth $ R $-algebra. Then $ A $ is flat as an $ R $-module.\"}\n  {\"name\": \"AlgebraicGeometry.IsLocallyNoetherian.component_noetherian\", \"module\": \"Mathlib.AlgebraicGeometry.Noetherian\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} [self : AlgebraicGeometry.IsLocallyNoetherian X] (U : ↑X.affineOpens),\\n  IsNoetherianRing ↑(X.presheaf.obj (Opposite.op ↑U))\", \"doc\": \"For a locally Noetherian scheme $ X $, the ring of sections over every affine open subset $ U $ of $ X $ is a Noetherian ring, i.e., $ \\\\mathcal{O}_X(U) $ is Noetherian.\"}\n  {\"name\": \"AlgebraicGeometry.noetherianSpace_of_isAffineOpen\", \"module\": \"Mathlib.AlgebraicGeometry.Noetherian\", \"type\": \"(U : X.Opens) (hU : IsAffineOpen U) [IsNoetherianRing Γ(X, U)] : NoetherianSpace U\", \"doc\": \"If $ U $ is an affine open subset of a scheme $ X $ and the ring of global sections $ \\\\Gamma(U) $ is Noetherian, then the underlying topological space of $ U $ is a Noetherian topological space.\"}\n  {\"name\": \"AlgebraicGeometry.noetherianSpace_of_isAffine\", \"module\": \"Mathlib.AlgebraicGeometry.Noetherian\", \"type\": \"[IsAffine X] [IsNoetherianRing Γ(X, ⊤)] : NoetherianSpace X\", \"doc\": \"If $X$ is an affine scheme and the ring of global sections $\\\\Gamma(X, \\\\mathcal{O}_X)$ is a Noetherian ring, then the underlying topological space of $X$ is a Noetherian topological space (i.e., every \"}\n  {\"name\": \"AlgebraicGeometry.instLocallyOfFinitePresentationOfIsSmooth\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Smooth\", \"type\": \"[hf : IsSmooth f] : LocallyOfFinitePresentation f\", \"doc\": \"Every smooth morphism of schemes is locally of finite presentation.\"}\n  {\"name\": \"TopologicalSpace.noetherianSpace_iff_opens\", \"module\": \"Mathlib.Topology.NoetherianSpace\", \"type\": \": NoetherianSpace α ↔ ∀ s : Opens α, IsCompact (s : Set α)\", \"doc\": \"A topological space is Noetherian if and only if every open subset is compact, i.e., satisfies the finite subcover property for open covers.\"}\n  {\"name\": \"Algebra.isOpen_smoothLocus\", \"module\": \"Mathlib.RingTheory.Smooth.Locus\", \"type\": \"[FinitePresentation R A] : IsOpen (smoothLocus R A)\", \"doc\": \"If $ A $ is a finitely presented algebra over a commutative ring $ R $, then the smooth locus of $ A $ over $ R $ is an open subset of the prime spectrum $ \\\\operatorname{Spec}(A) $ equipped with the Z\"}\n  {\"name\": \"AlgebraicGeometry.IsNoetherian.toCompactSpace\", \"module\": \"Mathlib.AlgebraicGeometry.Noetherian\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} [self : AlgebraicGeometry.IsNoetherian X], CompactSpace ↥X\", \"doc\": \"Every Noetherian scheme is a compact space, meaning its underlying topological space satisfies the finite subcover property for open covers.\"}\n",
+   "date": "2026-10-23",
+   "verdict": "No match: scheme or ring smoothness and flat descent do not descend this entire group/open datum or preserve its geometric fibres."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsSmooth\", \"limit\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-23",
+   "verdict": "No match: scheme or ring smoothness and flat descent do not descend this entire group/open datum or preserve its geometric fibres."
+  },
+  {
+   "tool": "grep",
+   "query": "AlgebraicSpace|descend.*[Ss]mooth|[Ss]mooth.*descend",
+   "results": "[grep] OK 7 hit(s)\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/LocalFlatDescent.lean\", \"line\": \"41\", \"text\": \"instance : DescendsAlong @Smooth (@Surjective ⊓ @Flat ⊓ @QuasiCompact) :=\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/LocalFlatDescent.lean\", \"line\": \"42\", \"text\": \"  HasRingHomProperty.descendsAlong_flat RingHom.Smooth.codescendsAlong_faithfullyFlat\"}\n  {\"file\": \"Mathlib/RingTheory/Etale/Descent.lean\", \"line\": \"15\", \"text\": \"In this file we show that smooth, unramified and étale algebras descend along faithfully flat\"}\n  {\"file\": \"Mathlib/RingTheory/Etale/Descent.lean\", \"line\": \"20\", \"text\": \"- `Algebra.Smooth.of_smooth_tensorProduct_of_faithfullyFlat`: Smooth descends.\"}\n  {\"file\": \"Mathlib/RingTheory/Etale/Descent.lean\", \"line\": \"21\", \"text\": \"- `Algebra.Unramified.of_smooth_tensorProduct_of_faithfullyFlat`: Unramified descends.\"}\n  {\"file\": \"Mathlib/RingTheory/Etale/Descent.lean\", \"line\": \"54\", \"text\": \"/-- Formally smooth algebras descend along faithfully flat base change. See the TODO\"}\n  {\"file\": \"Mathlib/RingTheory/Etale/Descent.lean\", \"line\": \"95\", \"text\": \"lemma Smooth.codescendsAlong_faithfullyFlat : CodescendsAlong Smooth FaithfullyFlat := by\"}\n",
+   "date": "2026-10-23",
+   "verdict": "No match: scheme or ring smoothness and flat descent do not descend this entire group/open datum or preserve its geometric fibres."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A smooth group algebraic space with geometrically integral fibres and a quasi compact open spreads out over a finitely generated integer subalgebra",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"Algebra.Smooth.exists_subalgebra_fg\", \"module\": \"Mathlib/RingTheory/Smooth/NoetherianDescent\", \"type\": \"∀ (R : Type u_1) [inst : CommRing R] (A : Type u) (B : Type u_2) [inst_1 : CommRing A] [inst_2 : Algebra R A]\\n  [inst_3 : CommRing B] [inst_4 : Algebra A B] [Algebra.Smooth A B],\\n  ∃ A₀ B₀ x x_1, A₀.FG ∧ Algebra.Smooth (↥A₀) B₀ ∧ Nonempty (B ≃ₐ[A] TensorProduct (↥A₀) A B₀)\", \"doc\": \"For any commutative ring $ R $ and a commutative $ R $-algebra $ A $ that is smooth over $ B $, there exists a finitely generated $ R $-subalgebra $ A_0 $ of $ A $ such that $ A_0 $ is smooth over $ B\"}\n  {\"name\": \"Algebra.Smooth.exists_subalgebra_finiteType\", \"module\": \"Mathlib/RingTheory/Smooth/NoetherianDescent\", \"type\": \"∀ (R : Type u_1) [inst : CommRing R] (A : Type u) (B : Type u_2) [inst_1 : CommRing A] [inst_2 : Algebra R A]\\n  [inst_3 : CommRing B] [inst_4 : Algebra A B] [Algebra.Smooth A B],\\n  ∃ A₀ B₀ x x_1, Algebra.FiniteType R ↥A₀ ∧ Algebra.Smooth (↥A₀) B₀ ∧ Nonempty (B ≃ₐ[A] TensorProduct (↥A₀) A B₀)\", \"doc\": \"For any smooth algebra $ B $ over a commutative ring $ A $, there exists a finitely generated $ R $-subalgebra $ A_0 \\\\subseteq A $ and a smooth $ A_0 $-algebra $ B_0 $ such that $ B $ is isomorphic to\"}\n  {\"name\": \"Algebra.Smooth.exists_finiteType\", \"module\": \"Mathlib/RingTheory/Smooth/NoetherianDescent\", \"type\": \"∀ (R : Type u_1) [inst : CommRing R] (A : Type u) (B : Type u_2) [inst_1 : CommRing A] [Algebra R A]\\n  [inst_3 : CommRing B] [inst_4 : Algebra A B] [Algebra.Smooth A B],\\n  ∃ A₀ B₀ x x_1 x_2 x_3 x_4,\\n    Function.Injective ⇑(algebraMap A₀ A) ∧\\n      Algebra.FiniteType R A₀ ∧ Algebra.Smooth A₀ B₀ ∧ No\", \"doc\": \"For any smooth algebra $ B $ over a commutative ring $ A $, there exists a finitely generated $ R $-algebra $ A_0 $, an injective $ R $-algebra homomorphism $ A_0 \\\\to A $, and a smooth $ A_0 $-algebra\"}\n  {\"name\": \"AlgebraicGeometry.IsIntegral\", \"module\": \"Mathlib/AlgebraicGeometry/Properties\", \"type\": \"AlgebraicGeometry.Scheme → Prop\", \"doc\": \"The predicate for a scheme to be integral\"}\n  {\"name\": \"AlgebraicGeometry.instLocallyOfFinitePresentationOfIsSmooth\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [hf : AlgebraicGeometry.IsSmooth f],\\n  AlgebraicGeometry.LocallyOfFinitePresentation f\", \"doc\": \"Every smooth morphism of schemes is locally of finite presentation.\"}\n  {\"name\": \"AlgebraicGeometry.IsIntegralHom\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Integral\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"A morphism $ f: X \\to Y $ of schemes is integral.\"}\n  {\"name\": \"AlgebraicGeometry.IsIntegralHom.hasAffineProperty\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Integral\", \"type\": \"AlgebraicGeometry.HasAffineProperty @AlgebraicGeometry.IsIntegralHom fun X x f x_1 =>\\n  AlgebraicGeometry.IsAffine X ∧ (CommRingCat.Hom.hom (AlgebraicGeometry.Scheme.Hom.app f ⊤)).IsIntegral\", \"doc\": \"A morphism $ f: X \\to Y $ of schemes is integral if the target scheme $ Y $ is affine, the source scheme $ X $ is affine, and the induced ring homomorphism between their coordinate rings is integral (i\"}\n  {\"name\": \"AlgebraicGeometry.finite_appTop_of_universallyClosed\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Proper\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} (K : Type u) [inst : Field K]\\n  (f : X ⟶ AlgebraicGeometry.Spec { carrier := K, commRing := Field.toEuclideanDomain.toCommRing })\\n  [AlgebraicGeometry.IsIntegral X] [AlgebraicGeometry.UniversallyClosed f] [AlgebraicGeometry.LocallyOfFiniteType f],\\n  (CommRingCat.Hom.\", \"doc\": \"Let $K$ be a field, and let $f: X \\\\to \\\\operatorname{Spec}(K)$ be a morphism from an integral scheme $X$. If $f$ is universally closed and locally of finite type, then the ring of global sections of $X\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: read the returned hits; smooth ring models, scheme-only geometric integrality and relative-dimension statements do not state this algebraic-space assertion or specialize to it in one line"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Noetherian approximation preserving the group operations and geometrically integral fibres",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.IsNoetherian.noetherianSpace\", \"module\": \"Mathlib.AlgebraicGeometry.Noetherian\", \"type\": \"[IsNoetherian X] : NoetherianSpace X\", \"doc\": \"Every Noetherian scheme has an underlying topological space that satisfies the Noetherian condition, meaning every descending chain of closed subsets stabilizes.\"}\n  {\"name\": \"isNoetherian_adjoin_finset\", \"module\": \"Mathlib.RingTheory.IntegralClosure.IsIntegral.Basic\", \"type\": \"[IsNoetherianRing R] (s : Finset A) (hs : ∀ x ∈ s, IsIntegral R x) : IsNoetherian R (Algebra.adjoin R (s : Set A))\", \"doc\": \"If $ R $ is a Noetherian ring and $ s $ is a finite set of elements in $ A $, each integral over $ R $, then the subalgebra generated by adjoining $ s $ to $ R $ is a Noetherian $ R $-module.\"}\n  {\"name\": \"AlgebraicGeometry.instIsNoetherianSpecOfOfIsNoetherianRing\", \"module\": \"Mathlib.AlgebraicGeometry.Noetherian\", \"type\": \"{R} [CommRing R] [IsNoetherianRing R] : IsNoetherian <| Spec <| .of R\", \"doc\": \"The spectrum of a Noetherian commutative ring is a Noetherian scheme.\"}\n  {\"name\": \"AlgebraicGeometry.instIsLocallyNoetherianToScheme\", \"module\": \"Mathlib.AlgebraicGeometry.Noetherian\", \"type\": \"{U : X.Opens} [IsLocallyNoetherian X] : IsLocallyNoetherian U\", \"doc\": \"If $X$ is a locally Noetherian scheme and $U$ is an open subscheme of $X$, then $U$ is also a locally Noetherian scheme. This follows from the fact that any open subset of a scheme inherits the local \"}\n  {\"name\": \"AlgebraicGeometry.IsNoetherian.recOn\", \"module\": \"Mathlib.AlgebraicGeometry.Noetherian\", \"type\": \"{X : AlgebraicGeometry.Scheme} →\\n  {motive : AlgebraicGeometry.IsNoetherian X → Sort u} →\\n    (t : AlgebraicGeometry.IsNoetherian X) →\\n      ([toIsLocallyNoetherian : AlgebraicGeometry.IsLocallyNoetherian X] →\\n          [toCompactSpace : CompactSpace ↥X] → motive ⋯) →\\n        motive t\", \"doc\": \"Given a Noetherian scheme $X$ (i.e., locally Noetherian with compact underlying topological space), this recursor allows defining functions on $\\\\operatorname{IsNoetherian} X$ by specifying their behav\"}\n  {\"name\": \"AlgebraicGeometry.IsNoetherian.toIsLocallyNoetherian\", \"module\": \"Mathlib.AlgebraicGeometry.Noetherian\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} [self : AlgebraicGeometry.IsNoetherian X], AlgebraicGeometry.IsLocallyNoetherian X\", \"doc\": \"If a scheme $X$ is Noetherian, then it is locally Noetherian, meaning it admits an open cover by Noetherian schemes.\"}\n  {\"name\": \"isIntegral_of_noetherian\", \"module\": \"Mathlib.RingTheory.IntegralClosure.Algebra.Basic\", \"type\": \"(_ : IsNoetherian R B) (x : B) : IsIntegral R x\", \"doc\": \"If $ B $ is a Noetherian $ R $-module, then every element $ x \\\\in B $ is integral over $ R $.\"}\n  {\"name\": \"AlgebraicGeometry.quasiCompact_of_noetherianSpace_source\", \"module\": \"Mathlib.AlgebraicGeometry.Noetherian\", \"type\": \"{X Y : Scheme} [NoetherianSpace X] (f : X ⟶ Y) : QuasiCompact f\", \"doc\": \"Any morphism of schemes with a Noetherian source is quasi-compact.\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: read the returned hits; smooth ring models, scheme-only geometric integrality and relative-dimension statements do not state this algebraic-space assertion or specialize to it in one line"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsSmooth\", \"limit\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-23",
+   "verdict": "no match: read the returned hits; smooth ring models, scheme-only geometric integrality and relative-dimension statements do not state this algebraic-space assertion or specialize to it in one line"
+  },
+  {
+   "tool": "grep",
+   "query": "AlgebraicSpace|descend.*[Ss]mooth|[Ss]mooth.*descend",
+   "results": "[grep] OK 7 hit(s)\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/LocalFlatDescent.lean\", \"line\": \"41\", \"text\": \"instance : DescendsAlong @Smooth (@Surjective ⊓ @Flat ⊓ @QuasiCompact) :=\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/LocalFlatDescent.lean\", \"line\": \"42\", \"text\": \"  HasRingHomProperty.descendsAlong_flat RingHom.Smooth.codescendsAlong_faithfullyFlat\"}\n  {\"file\": \"Mathlib/RingTheory/Etale/Descent.lean\", \"line\": \"15\", \"text\": \"In this file we show that smooth, unramified and étale algebras descend along faithfully flat\"}\n  {\"file\": \"Mathlib/RingTheory/Etale/Descent.lean\", \"line\": \"20\", \"text\": \"- `Algebra.Smooth.of_smooth_tensorProduct_of_faithfullyFlat`: Smooth descends.\"}\n  {\"file\": \"Mathlib/RingTheory/Etale/Descent.lean\", \"line\": \"21\", \"text\": \"- `Algebra.Unramified.of_smooth_tensorProduct_of_faithfullyFlat`: Unramified descends.\"}\n  {\"file\": \"Mathlib/RingTheory/Etale/Descent.lean\", \"line\": \"54\", \"text\": \"/-- Formally smooth algebras descend along faithfully flat base change. See the TODO\"}\n  {\"file\": \"Mathlib/RingTheory/Etale/Descent.lean\", \"line\": \"95\", \"text\": \"lemma Smooth.codescendsAlong_faithfullyFlat : CodescendsAlong Smooth FaithfullyFlat := by\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: read the returned hits; smooth ring models, scheme-only geometric integrality and relative-dimension statements do not state this algebraic-space assertion or specialize to it in one line"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-group-finite-translate-cover",
+  "date": "2026-10-23",
+  "group": "Q99"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Scheme representability of the stable abelian-level normalization. Supporting input: freeness at normalized boundary branches. Comparison of the full cohomology frame in the item with Deligne 3.3--3.5 Picard torsion frames; relative Picard existence for the pulled-back stable family. Supporting input for the present split: A relatively ample line module on the stable-curve multidegree-zero Picard space. Supporting input: Etale-local schematic nodal Picard identity space. Auxiliary input: Finite translates of a fibrewise nonempty open in a smooth group space. In Deligne 4.6: Arithmetic models of a smooth group with a fibrewise nonempty open.",
+   "via": [
+    "lem-sfb-group-finite-translate-cover",
+    "lem-sfb-nodal-picard-etale-schematic",
+    "lem-sfb-stable-picard-theta-ampleness",
+    "lem-sfb-stable-relative-picard-kummer",
+    "lem-sfb-stable-level-versal-branch-freeness",
+    "lem-sfb-stable-abelian-level-normalization",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-group-open-arithmetic-model",
+  "worker": "stage1",
+  "summary": "Q30: descended the finite group-operation diagram using existing limit-category statements; separated smoothness, the open and its surjectivity from the integral-fibre refinement; made the constant-dimension restriction explicit. Three statement-only supporting nodes, all searched. No statement change.",
+  "blueprint": "The inherited det-thm-sf-ctf-stability-direct-images (3) alteration/Picard route, through the finite-translate input of Deligne Lemma 4.6: arithmetic approximation only. Current latest blueprint direct-image paragraph was read; the auxiliary chain predates its shorter wording. The existing ancestor tool reports node null because created.item ends at the upstream declaration Sheaf.SixFunctors.CtfStabilityDirectImages; retain that mechanical ancestry.",
+  "tool_uses": [
+   {
+    "node": "lemma-nagata-noetherian-inverse-system-affine",
+    "why": "Generic approximation, topological limit or finite-type dimension tool used only inside the inherited arithmetic-model subargument; no node of this unit states its full assertion."
+   },
+   {
+    "node": "lem-weil-pbc-limit-contained-in-constructible",
+    "why": "Generic approximation, topological limit or finite-type dimension tool used only inside the inherited arithmetic-model subargument; no node of this unit states its full assertion."
+   },
+   {
+    "node": "lem-cbc-compactification-geometry-fibre-bound",
+    "why": "Generic approximation, topological limit or finite-type dimension tool used only inside the inherited arithmetic-model subargument; no node of this unit states its full assertion."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lemma-nagata-noetherian-inverse-system-affine",
+  "lem-weil-pbc-limit-contained-in-constructible",
+  "lem-cbc-compactification-geometry-fibre-bound"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q30-8d7e82ffa",
+  "group": "Q30",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q30-8d7e82ffa (reviewer sub-agent of L); spot-checked: Read the item, its 6 steps, the 3 new nodes, every cited node's statement and the sources in full. Sources: spaces-limits 0CN2 in Situation 084W (l.1510), 07SK, 07SN; tags 055B and 0E0A read; 05F4, 02G1. First split; no repair note; statement unchanged and still gives the parent finite-translate-cover what its step 1 needs. Steps 1-4 and 6 check: Step 1 qc of V_U, with an elementary bridge to the space-sense definition. Step 2 descends m, ι and e and the 5 group equations by the object/morphism/equality clauses. Step 3: lim H_j = G_U; the cover (G_U,V_U); W_i qcqs and lfp; V_U→U surjective because V meets every geometric fibre. Step 4: constructible E, base-change equality, 05F4, no openness claimed. Step 6: (A_i)_a is a f.g. ℤ-algebra and the dimension bound comes from T→Spec ℤ. The 3 new nodes are true, not duplicates and not restatements of the item. eventually-smooth = 0CN2 for spaces; the DAG only has the scheme version 0C0C. integral-fibre-locus is an agent extension of 055B/0E0A to space sources; integral ⇔ nonempty+irreducible for smooth fibres; tested on empty fibres and a non-Noetherian B'. group-fibre-dimension: rank e^*Ω, translations, 0B8F; tested on the trivial group, a finite disconnected group and varying d. FIX (C1): Step 5 justified base change of smoothness, surjectivity, fp, separatedness and integrality by 'earlier results' only; it now cites lem-sfb-space-smooth-surjective-fppf-locality, lem-sfb-space-flat-proper-fp-locality, lem-sfb-space-separated-fp-composition and lem-sfb-smooth-space-integral-fibre-locus, with uses ⊆ proof_deps. Accepted tool_uses: nagata inverse system, 05F4, lem-cbc-compactification-geometry-fibre-bound (all generic). Batch-5: the closure reaches sec-trace-formula only through def-trf-algebraic-space and lem-trf-space-fibre-products-etale-covers plus their algebraic-space/fppf foundations; no Poincaré, trace-transport or batch-4 node; all generic, accepted. No SGA citation.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.GroupOpenArithmeticModel",
+  "declaration": "AlgebraicGeometry.AlgebraicSpace.exists_group_open_arithmetic_model",
+  "file": "lean/Sheaf/AlgebraicGeometry/GroupOpenArithmeticModel.lean",
+  "statement": "theorem exists_group_open_arithmetic_model {S : Scheme.{u}} [IsLocallyNoetherian S] (G : AlgebraicSpace S) (F : (Over S)ᵒᵖ ⥤ GrpCat.{u}) (e : F ⋙ forget GrpCat ≅ G.obj.obj) (hG : IsSmoothIntegralGroupSpace G) (V : OpenSubspace G) (hVqc : CompactSpace (Point V.val.toFunctor)) (hV : ∀ (K : Type u) [Field K] [IsAlgClosed K] (a : Spec (.of K) ⟶ S), Nonempty (Point (Limits.pullback (V.val.ι ≫ (groupSpaceProjection G).hom.hom) (yoneda.map (Over.homMk (U := Over.mk a) (V := Over.mk (𝟙 S)) a (by simp)))))) (s : S) : ∃ (U : S.Opens), s ∈ U ∧ IsAffineOpen U ∧ ∃ (R : CommRingCat.{u}) (f : U.toScheme ⟶ Spec R), Algebra.FiniteType ℤ R ∧ IsNoetherian (Spec R) ∧ (∃ n : ℕ, topologicalKrullDim (Spec R) ≤ (n : WithBot ℕ∞)) ∧ ∃ (d : ℕ) (G₀ : AlgebraicSpace (Spec R)) (F₀ : (Over (Spec R))ᵒᵖ ⥤ GrpCat.{u}) (e₀ : F₀ ⋙ forget GrpCat ≅ G₀.obj.obj) (V₀ : OpenSubspace G₀), IsSmoothIntegralGroupSpace G₀ ∧ CompactSpace (Point V₀.val.toFunctor) ∧ (∀ (K : Type u) [Field K] [IsAlgClosed K] (a : Spec (.of K) ⟶ Spec R), topologicalKrullDim (Point (Limits.pullback (groupSpaceProjection G₀).hom.hom (yoneda.map (Over.homMk (U := Over.mk a) (V := Over.mk (𝟙 (Spec R))) a (by simp))))) = (d : WithBot ℕ∞) ∧ Nonempty (Point (Limits.pullback (V₀.val.ι ≫ (groupSpaceProjection G₀).hom.hom) (yoneda.map (Over.homMk (U := Over.mk a) (V := Over.mk (𝟙 (Spec R))) a (by simp)))))) ∧ ∃ α : (Over.map U.ι).op ⋙ F ≅ (Over.map f).op ⋙ F₀, ∀ (T : (Over U.toScheme)ᵒᵖ) (x : F.obj ((Over.map U.ι).op.obj T)), e.hom.app ((Over.map U.ι).op.obj T) x ∈ V.val.obj ((Over.map U.ι).op.obj T) ↔ e₀.hom.app ((Over.map f).op.obj T) (α.hom.app T x) ∈ V₀.val.obj ((Over.map f).op.obj T)",
+  "branch": "sheaf-dag",
+  "by": "Q135",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-4663f017c",
+  "group": "Q135",
+  "result": "pass",
+  "note": "Read item node, 10 stmt_deps, module, report, and the side-live sources of RegularGroupSpace (IsSmoothIntegralGroupSpace, GroupSpaceIntegralFibres, groupSpaceProjection), MorphismProperties, PointClasses, OpenSubspace. Every clause matches the Lean with no extra hypotheses: GrpCat-valued group functor (same encoding as landed SeparatedGroupSpaceGeometricScheme, no commutativity), smooth/sep/fp/integral fibres via the landed predicate, qc open via Point topology, geometric-fibre nonemptiness, f.g. Z-algebra R with Noetherian finite-dimensional Spec R, d as topologicalKrullDim of geometric fibres, group iso as a natural iso of GrpCat functors on Over U via Over.map, and the open identification on all test schemes. Quantifier order, edge cases (empty S, trivial group, varying d) and single universe u checked. lean.statement verbatim; imports exist; no defs, sorry only, docstrings with source and blueprint and the 6 proof steps; only lean plus 2 landed-def stmt_deps changed vs live. No compile (no file changed). Advisory: Point's owner node is reached transitively through def-a1-space-point-topology."
+ }
+}

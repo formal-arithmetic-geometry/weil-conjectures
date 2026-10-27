@@ -1,0 +1,121 @@
+{
+ "id": "lem-sfb-completed-affine-fiber-interpolation",
+ "kind": "statement",
+ "title": "Natural scalar interpolation on a finite residue-field fiber",
+ "statement": "Let l be prime, X a scheme with pro-etale site [def-weil-pbc-proetale-site], U a pro-affine etale object [sk-def-pe-morphisms], W an object, and M natural continuous-function coordinates for completed scalar sections [lem-sfb-completed-affine-coefficient-model]. Given a finite family of maps q_i:W to U, a point x of W, and a selected index i, there exists a natural scalar-valued function on maps to U on the slice over W. Evaluated on q_j at x via M, it is 1 when the two maps from Spec(kappa(x)) to U induced by q_j and q_i coincide, and 0 otherwise. Scalar-valued here means values in the unit module of the completed ring [def-pur-twist-coefficient-rings].",
+ "stmt_deps": [
+  "def-weil-pbc-proetale-site",
+  "sk-def-pe-morphisms",
+  "lem-sfb-completed-affine-coefficient-model",
+  "def-pur-twist-coefficient-rings"
+ ],
+ "source": {
+  "document": "lean/Sheaf/Paper/CompletedAffineFreeLocalDual.lean",
+  "place": "docstring of completedAffineFree_localDual_detect: natural scalar interpolation on a finite residue-field fiber"
+ },
+ "proof": [
+  {
+   "text": "Unpack the pro-affine etale presentation of U. For each q_j whose induced residue-field map differs from that of q_i, the limit hom_ext property provides a stage distinguishing them. For equal maps choose any stage of the nonempty cofiltered indexing category.",
+   "uses": [
+    "sk-def-pe-morphisms"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Each stage is affine and etale over X, hence separated. Use the proved FormallyUnramified.eqLocus API to form its open equality locus, and separatedness to prove this locus closed. Membership at x is equivalent to equality after precomposing with Spec(kappa(x)); prove this using the open-immersion lift and the restriction equality. The characteristic function of this clopen locus is continuous with values in the l-adic integers. On V over W compare the variable arrow with the restriction of q_i, then transport the function through M. Equality loci commute with pullback, so these sections are natural. Take the finite product in the commutative ring of continuous functions and transport it back through M. All factors are one in the selected residue-field class; outside that class the factor indexed by j is zero.",
+   "uses": [
+    "lem-sfb-completed-affine-coefficient-model"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "sk-def-pe-morphisms",
+  "lem-sfb-completed-affine-coefficient-model"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "Q4",
+  "document": "lean/Sheaf/Paper/CompletedAffineFiberInterpolation.lean",
+  "place": "completedAffine_fiber_interpolation and its proved private equality-locus and stage-section helpers",
+  "note": "The planned finite-stage interpolation is fully proved using the existing source-library equality-locus API. No new sorry statements or nodes are introduced."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Continuous p-adic functions as inverse limit of finite constant pro-etale coefficient sheaves; finite clopen interpolation and equality-pattern cover for pro-affine etale morphisms",
+   "results": "AffineTransitionLimit existence and finite-type factorization results, plus unrelated perfectoid coefficient definitions; no interpolation, pattern-cover, or completed coefficient sheaf theorem.",
+   "date": "2026-10-27",
+   "verdict": "No exact match."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"toZModPow\"",
+   "results": "Found PadicInt.toZModPow, ext_of_toZModPow, zmod_cast_comp_toZModPow, and compatible finite reduction interfaces. These are used for coefficient coordinates; they do not supply geometric scalar interpolation or pattern covers.",
+   "date": "2026-10-27",
+   "verdict": "Arithmetic interfaces only."
+  },
+  {
+   "tool": "grep",
+   "query": "clopen.*(equal|graph)|pattern.*cover|continuous.*(limit|padic)",
+   "results": "Continuous and profinite limit infrastructure, no finite pro-etale pattern cover or scalar interpolation theorem. Local Sheaf and WeilConjectures search found the existing discrete continuous coefficient comparison.",
+   "date": "2026-10-27",
+   "verdict": "No exact geometric match."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.CompletedAffineFreePresheafLocalDual",
+  "date": "2026-10-27",
+  "group": "D2"
+ },
+ "blueprint": {
+  "from": {
+   "node": "lem-sfb-completed-affine-free-local-dual-local-presheaf",
+   "place": "natural scalar interpolation on a finite residue-field fiber",
+   "via": [
+    "lem-sfb-completed-affine-free-local-dual-local-presheaf"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-prop-diagonal-tower",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.CompletedAffineFiberInterpolation",
+  "file": "lean/Sheaf/Paper/CompletedAffineFiberInterpolation.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.DiagonalCoefficients.completedAffine_fiber_interpolation",
+  "statement": "theorem completedAffine_fiber_interpolation (l : ℕ) [Fact l.Prime]\n    (X : Scheme.{u}) (M : CompletedAffineCoefficientModel l X)\n    (U : X.ProEtᵒᵖ) (hU : proAffineEtale U.unop.hom) (W : X.ProEt)\n    {ι : Type (u + 1)} [Finite ι]\n    (q : ι → (uliftYoneda.{u + 1}.obj U.unop).obj (op W)) (x : W.left) (i : ι) :\n    ∃ β : completedAffineScalarTest l X U W, ∀ j : ι,\n      M.equiv W (β.app (op (Over.mk (𝟙 W))) (q j)) x =\n        if W.left.fromSpecResidueField x ≫ (q j).down.left =\n            W.left.fromSpecResidueField x ≫ (q i).down.left then 1 else 0",
+  "branch": "sheaf-dag",
+  "by": "D2",
+  "date": "2026-10-27",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.DiagonalCoefficients.completedAffineScalarTest",
+   "AlgebraicGeometry.ProEtale.DiagonalCoefficients.completedAffine_fiber_interpolation"
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D2",
+  "result": "pass",
+  "landing": "20261027T064438-L-2178011",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q4",
+  "result": "pass",
+  "landing": "20261027T084440-L-3681503",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

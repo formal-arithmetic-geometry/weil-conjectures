@@ -1,0 +1,237 @@
+{
+ "id": "lem-sf-constructible-exceptional-compositor",
+ "kind": "statement",
+ "title": "Constructible exceptional composition and its counit characterization",
+ "statement": "Fix the finite-field and coefficient datum of [sk-def-sf-setting]: $k=\\overline{\\mathbf F}_q$, $\\ell\\ne\\operatorname{char}k$, a finite extension $E/\\mathbf Q_\\ell$, $R=\\mathcal O_E$, a uniformizer $\\varpi$, and $A_n=R/\\varpi^n$ for $n\\ge1$. Let $X,Y,Z$ be separated finite-type $k$-schemes and let $f:X\\to Y$, $g:Y\\to Z$ be separated finite-type $k$-morphisms; put $x=g\\circ f$. Use the constructible finite-Tor categories $\\mathcal C_{T,\\Lambda}=\\Dctf(T,\\Lambda)$ and the specified operations of [sk-def-sf-operations], with derived-complete integral, raw rationalized and common-finite-stage coefficients. Write $F_{h,\\Lambda}=Rh_{!,\\Lambda}$, $G_{h,\\Lambda}=Rh^!_\\Lambda$ and $\\epsilon_{h,\\Lambda}$ for the counits of their constructible adjunctions $F_{h,\\Lambda}\\dashv G_{h,\\Lambda}$ at every stage [lem-sf-constructible-exceptional-adjunction-coefficients], for $h=f,g,x$. For a finite extension $E\\subset E'$ the same notation at the target coefficient stages uses $E'$ in place of $E$, as in that node.\n\nWrite $\\alpha_\\Lambda:F_{g,\\Lambda}F_{f,\\Lambda}\\xrightarrow{\\sim}F_{x,\\Lambda}$ for the canonical compactification compositor: at finite level the composition isomorphism of [thm-sf-comp-composition], restricted to the finite-Tor constructible categories, and at the integral, rational and common stages its completed integral form and its rationalized/common-stage forms. Let $c_\\Lambda:G_{f,\\Lambda}G_{g,\\Lambda}\\to G_{x,\\Lambda}$ denote the conjugate of $\\alpha_\\Lambda^{-1}$ under the composite adjunction and $F_{x,\\Lambda}\\dashv G_{x,\\Lambda}$, in the sense of [def-weil-pbc-adjunction-conjugate].\n\nFor every $\\Lambda\\in\\{A_n,R,E,\\overline{\\mathbf Q}_\\ell\\}$ this gives a canonical natural isomorphism $c_\\Lambda$ of the actual constructible functors. For $K\\in\\mathcal C_{X,\\Lambda}$ and $L\\in\\mathcal C_{Z,\\Lambda}$ its action on Hom groups is the composite\n$$\\operatorname{Hom}_X(K,G_fG_gL)\\cong\\operatorname{Hom}_Z(F_gF_fK,L)\\xrightarrow{h\\mapsto h\\circ\\alpha_K^{-1}}\\operatorname{Hom}_Z(F_xK,L)\\cong\\operatorname{Hom}_X(K,G_xL).$$\nSuppressing $\\Lambda$, the component $c_L$ is uniquely characterized by\n$$\\epsilon_{x,L}\\circ F_x(c_L)\\circ\\alpha_{G_fG_gL}=\\epsilon_{g,L}\\circ F_g(\\epsilon_{f,G_gL}).$$\nThe comparison is independent of compactification choices under the specified refinement identifications. It is natural in $L$ and respects the canonical integer-shift identifications of these exact adjunctions. These assertions use only the constructible exceptional adjoints, with no unrestricted ambient exceptional-adjoint datum.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-verdier-exchange/sk-thm-sf-verdier-exchange.proof.md",
+  "place": "Proof Step 1: mate of compact-support composition; returned proof step 2, including Hom-chain and pasted counit; agent-expanded obligation, not a verbatim theorem of Stacks"
+ },
+ "stmt_deps": [
+  "sk-def-sf-setting",
+  "sk-def-sf-operations",
+  "def-weil-pbc-adjunction-conjugate",
+  "lem-sf-constructible-exceptional-adjunction-coefficients",
+  "thm-sf-comp-composition"
+ ],
+ "proof": [
+  {
+   "text": "The data module establishes normalized integral realization equality by projection extensionality and the Milnor finite-group argument. Apply [lem-sf-constructible-left-compositor-coherence] for the geometric canonical left compositors, coefficient normalizations, shift compatibility and left refinement squares.",
+   "uses": [
+    "def-sf-constructible-exceptional-compositor-data",
+    "lem-sf-constructible-left-compositor-coherence"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Conjugate inverse alpha through the composite adjunction and the direct adjunction. The Mathlib conjugate counit equation proves the pasted counit. Its Hom bijection and cancellation prove the Hom action and componentwise uniqueness.",
+   "uses": [
+    "def-weil-pbc-composite-adjunction",
+    "def-weil-pbc-adjunction-conjugate",
+    "def-weil-pbc-adjunction-mate"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The counit condition identifies each right refinement with the conjugate of its left comparison. Apply conjugateEquiv composition and whiskering to the left refinement square to obtain the displayed right refinement equation.",
+   "uses": [
+    "def-weil-pbc-adjunction-conjugate",
+    "def-weil-pbc-adjunction-mate"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Install the adjunction shift instances from their unitShift and counitShift fields. The existing source-library conjugate shift instance yields the exceptional mate shift from left-alpha shift.",
+   "uses": [
+    "lem-weil-pbc-adjunction-shift-compatibility-unique",
+    "lem-weil-pbc-commshift-nattrans-comp-whisker"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-sf-constructible-exceptional-compositor-data",
+  "lem-sf-constructible-left-compositor-coherence",
+  "def-weil-pbc-composite-adjunction",
+  "def-weil-pbc-adjunction-conjugate",
+  "def-weil-pbc-adjunction-mate",
+  "lem-weil-pbc-adjunction-shift-compatibility-unique",
+  "lem-weil-pbc-commshift-nattrans-comp-whisker"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "Mathlib Adjuction.Mates; source shift-adjunction instances; blueprint Verdier exchange Step 1",
+  "place": "D8 formal mate calculation, with geometric left coherence and finite-Hom integral normalization separated."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Canonical composition of constructible exceptional inverse images is conjugate to compact support composition at finite integral and rational coefficients",
+   "results": "MeasureTheory.Integrable.exists_hasCompactSupport_lintegral_sub_le; MeasureTheory.Integrable.exists_hasCompactSupport_integral_sub_le; CompactlySupportedContinuousMap.integralLinearMap_apply; PrimeSpectrum.ConstructibleSetData.map_comp; PrimeSpectrum.BasicConstructibleSetData.map_comp; PrimeSpectrum.BasicConstructibleSetData.map_g; AlgebraicGeometry.Scheme.Hom.isConstructible_image; RealRMK.range_cut_partition",
+   "date": "2026-10-22",
+   "verdict": "no match: hits supply generic adjunction or ordinary sheaf/algebra infrastructure, not the specified constructible geometric compositor and coefficient realization"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Composition of right adjoints to compactly supported derived direct images on constructible sheaves over schemes",
+   "results": "CategoryTheory.Functor.isRightAdjoint_comp; CategoryTheory.Functor.sheafPullbackConstruction.instIsRightAdjointSheafSheafPushforwardContinuousOfHasWeakSheafify; CategoryTheory.Sheaf.instIsRightAdjointSheafComposeOfHasWeakSheafify; AlgebraicGeometry.Scheme.Modules.instIsRightAdjointPushforward; SheafOfModules.instIsRightAdjointPushforward; CategoryTheory.Coreflective.comp; SheafOfModules.pushforwardComp; SheafOfModules.instIsRightAdjointPushforwardCompSheafRingCatMapSheafPushforwardContinuous",
+   "date": "2026-10-22",
+   "verdict": "no match: hits supply generic adjunction or ordinary sheaf/algebra infrastructure, not the specified constructible geometric compositor and coefficient realization"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.conjugateIsoEquiv",
+   "results": "CategoryTheory.conjugateIsoEquiv; CategoryTheory.conjugateIsoEquiv_apply_hom; CategoryTheory.conjugateIsoEquiv_apply_inv; CategoryTheory.conjugateIsoEquiv_symm_apply_hom; CategoryTheory.conjugateIsoEquiv_symm_apply_inv",
+   "date": "2026-10-22",
+   "verdict": "no match: hits supply generic adjunction or ordinary sheaf/algebra infrastructure, not the specified constructible geometric compositor and coefficient realization"
+  },
+  {
+   "tool": "grep",
+   "query": "upperShriek.*[Cc]omp|exceptional.*compos|shriek.*compos",
+   "results": "none",
+   "date": "2026-10-22",
+   "verdict": "no match: hits supply generic adjunction or ordinary sheaf/algebra infrastructure, not the specified constructible geometric compositor and coefficient realization"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived exceptional pullback composition preserves the pasted compact support adjunction counit",
+   "results": "PresheafOfModules.pullbackComp; CategoryTheory.ExponentiableMorphism.pushforwardComp_hom_counit; SheafOfModules.pullbackComp; CategoryTheory.ExponentiableMorphism.pushforwardComp_hom_counit_assoc; CategoryTheory.ChosenPullbacksAlong.pullbackComp_hom_counit; CategoryTheory.ChosenPullbacksAlong.pullbackComp_hom_counit_assoc; CategoryTheory.ExponentiableMorphism.unit_pushforwardComp_hom; CategoryTheory.ExponentiableMorphism.unit_pushforwardComp_hom_assoc",
+   "date": "2026-10-22",
+   "verdict": "no match: hits supply generic adjunction or ordinary sheaf/algebra infrastructure, not the specified constructible geometric compositor and coefficient realization"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Composition of constructible exceptional inverse images is the mate of compact support composition over finite integral and rational coefficients",
+   "results": "AlgebraicGeometry.Scheme.Modules.conjugateEquiv_pullbackComp_inv; AlgebraicGeometry.Scheme.Modules.pushforwardComp_inv_app_app; LightCondensed.ihomPoints_symm_comp; PrimeSpectrum.ConstructibleSetData.map_comp; CompHausLike.LocallyConstant.incl_comap; PrimeSpectrum.BasicConstructibleSetData.map_comp; AlgebraicGeometry.Scheme.Hom.isConstructible_image; CategoryTheory.ExponentiableMorphism.comp_pushforward",
+   "date": "2026-10-22",
+   "verdict": "no match: general category-theory or ordinary sheaf infrastructure, not this constructible exceptional all-coefficient theorem"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.conjugateIsoEquiv",
+   "results": "CategoryTheory.conjugateIsoEquiv; CategoryTheory.conjugateIsoEquiv_apply_hom; CategoryTheory.conjugateIsoEquiv_apply_inv; CategoryTheory.conjugateIsoEquiv_symm_apply_hom; CategoryTheory.conjugateIsoEquiv_symm_apply_inv",
+   "date": "2026-10-22",
+   "verdict": "no match: general category-theory or ordinary sheaf infrastructure, not this constructible exceptional all-coefficient theorem"
+  },
+  {
+   "tool": "grep",
+   "query": "upperShriek.*[Cc]omp|exceptional.*compos|shriek.*compos",
+   "results": "none",
+   "date": "2026-10-22",
+   "verdict": "no match: general category-theory or ordinary sheaf infrastructure, not this constructible exceptional all-coefficient theorem"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Constructible exceptional pullback composition isomorphism at integral and rational coefficients",
+   "results": "SheafOfModules.conjugateEquiv_pullbackComp_inv; CategoryTheory.Over.pullbackComp; SheafOfModules.pullbackComp; CategoryTheory.toOverPullbackIsoToOver; CategoryTheory.MorphismProperty.Over.pullbackComp.congr_simp; CategoryTheory.MorphismProperty.Over.pullbackComp_left_fst_fst; CategoryTheory.MorphismProperty.Over.pullbackComp_hom_app_left; CategoryTheory.Functor.IsFibered.pullbackPullbackIso",
+   "date": "2026-10-22",
+   "verdict": "no match: general category-theory or ordinary sheaf infrastructure, not this constructible exceptional all-coefficient theorem"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The conjugate of the inverse compactly supported direct image compositor is an isomorphism between exceptional inverse image functors preserving counits",
+   "results": "CategoryTheory.Functor.sheafPushforwardCocontinuousCompSheafToPresheafIso_inv; CategoryTheory.Functor.sheafPushforwardCocontinuousCompSheafToPresheafIso_hom; CategoryTheory.Functor.sheafPushforwardCocontinuousCompSheafToPresheafIso; CategoryTheory.Functor.sheafPushforwardContinuousComp'_inv_app_val_app; CategoryTheory.Functor.IsDenseSubsite.instIsIsoSheafAppCounitSheafAdjunctionCocontinuous; CategoryTheory.Functor.sheafPushforwardContinuousComp_inv_app_val_app; CategoryTheory.sheafComposeNatIso; CondensedSet.instIsIsoFunctorCompactlyGeneratedCounitCompactlyGeneratedAdjunction",
+   "date": "2026-10-22",
+   "verdict": "no match: general category-theory or ordinary sheaf infrastructure, not this constructible exceptional all-coefficient theorem"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "sk-thm-sf-verdier-exchange",
+  "date": "2026-10-22",
+  "group": "Q65"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-thm-sf-verdier-exchange",
+ "blueprint": {
+  "from": {
+   "node": "sk-thm-sf-verdier-exchange",
+   "place": "Proof Step 1: mate of compact-support composition; returned proof step 2, including Hom-chain and pasted counit",
+   "via": []
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sf-constructible-exceptional-compositor",
+  "worker": "stage1",
+  "summary": "Expanded the constructible mate argument into seven steps, deriving the Hom action and componentwise counit uniqueness explicitly; reused existing all-stage compactification comparisons, exact adjunctions and shift-realization tools. No new nodes and no statement change. Corrected same_as: the finite-stage inverse definition pur9-def-upper-shriek-composition does not state this all-stage theorem.",
+  "blueprint": "sk-thm-sf-verdier-exchange proof Step 1: the mate of compact-support composition is the exceptional compositor; final naturality and shift compatibility sentence.",
+  "tool_uses": [
+   {
+    "node": "lem-sf-constructible-exceptional-adjunction-coefficients",
+    "why": "Statement dependency defining the actual all-stage constructible adjunctions F_h -| G_h, their counits, preservation of finite-Tor categories and refinement compatibility (steps 1, 5, 7); the Verdier-exchange unit does not construct these adjunctions (same declaration as the unit's key node sk-thm-sf-verdier-exchange)."
+   },
+   {
+    "node": "lem-sf-package-compactified-tower-comparisons",
+    "why": "All-stage left compact-support composition and refinement coherence, a prerequisite to conjugation; the Verdier-exchange unit does not construct completed compact-support maps."
+   },
+   {
+    "node": "lem-trf-finite-structural-maps-commshift",
+    "why": "Finite canonical compact-support compositor commutes with its specified shifts; generic structural tool, with no trace-formula argument used."
+   },
+   {
+    "node": "lem-pur-integral-realization-shift-coherence",
+    "why": "Canonical compactification expression realization intertwines integer shifts as actual system maps; the unit does not reprove this normalized integral realization."
+   },
+   {
+    "node": "prop-weil-pbc-rational-transport",
+    "why": "Exact linear localization of supplied functors, transformations and equations; a generic coefficient tool, not a replacement of the unit route."
+   },
+   {
+    "node": "lem-sbc-coherent-pair-functor-descent",
+    "why": "Descent of compatible transformations and equations to common finite-field stages; generic coefficient-category tool."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sf-constructible-exceptional-adjunction-coefficients",
+  "lem-sf-package-compactified-tower-comparisons",
+  "lem-trf-finite-structural-maps-commshift",
+  "lem-pur-integral-realization-shift-coherence",
+  "prop-weil-pbc-rational-transport",
+  "lem-sbc-coherent-pair-functor-descent"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q12-917129239",
+  "group": "Q12",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q12-917129239 (reviewer sub-agent of L); spot-checked: Read the item in full: 7 steps, no new nodes, statement byte-identical to the side-live node, which is still unsplit and unreviewed. The item is not dropped, has no repair note and no SGA citation. Route = main-20261015 verdier-exchange Step 1 (mate of the compact-support composition). Checks: (1) α comes from thm-sf-comp-composition at finite level, restricted to D_ctf through the package node's witness clause and the adjunction node's preservation clause; at the integral and field stages it comes from the package node's composition maps. (2) The composite adjunction with F_f,G_f,F_g,G_g gives counit e=ε_g∘F_gε_fG_g. The conjugate of τ=α⁻¹ with L1=A, R1=B, L2=F_x, R2=G_x is c: B→G_x, an isomorphism, with component G_x(e)∘G_x(τ_B)∘η_x. (3) The transpose clause (Mathlib conjugateEquiv_counit, Mates.lean:285) gives ε_x∘F_x(c)=e∘α⁻¹, hence the displayed equation; uniqueness follows from injectivity of the Hom bijection. (4) Re-derived the Hom chain h↦h∘α_K⁻¹ via naturality of τ. (5) Compactification independence uses counit-compatible refinements. Advisory: the package node's statement only calls the integral α 'canonical' rather than stating that it commutes with ρ_u (its proof step 13 does prove this). (6) Shifts of α: trf clause (3) at finite level, pur realization-shift (compositors, proper/open interchange) integrally with common intervals argued, rational transport at E, coherent-pair descent at Q̄_ℓ. (7) Shifts of c: unique adjoint shift (iii) plus whiskering/composition (i)-(iii). Edge cases: identity f or g, empty X, n=1, structure map to the point (recovers f^!ω_Y≅ω_X). The same_as removal of pur9-def-upper-shriek-composition is correct: that node is a finite-level inverse-direction definition. Batch-5 flags: computed the closure with and without each citation. package-compactified-tower and pur-integral-realization-shift-coherence add 0 trf/pod nodes beyond the rest of the item; their chains end in generic nodes (pod derived-exact-square-composition; the trf adjoint-composition-coherence Mathlib leaf). trf-finite-structural-maps-commshift adds only itself; it is a generic shift coherence of structural maps that neither assumption gives. No nt-assume leaf and no trace-formula or Poincaré theorem is in the closure → all three accepted. FIX: added lem-sf-constructible-exceptional-adjunction-coefficients (unit sk-thm-sf-compatibility, outside the route, used in steps 1/5/7) to split_report.tool_uses, as the key node sk-thm-sf-verdier-exchange already declares. Nothing else changed.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.Paper.ConstructibleExceptionalCompositor",
+  "declaration": "WeilConjectures.ConstructibleExceptionalCompositor.constructibleExceptionalCompositor",
+  "declarations": [
+   "WeilConjectures.ConstructibleExceptionalCompositor.constructibleExceptionalCompositor"
+  ],
+  "file": "lean/Sheaf/Paper/ConstructibleExceptionalCompositor.lean",
+  "statement": "theorem constructibleExceptionalCompositor {D : FiniteFieldDatum.{u}} (B : D.CoefficientDatum) (S : ∀ (E : FieldStage.{u} B.l) (n : ℕ+), SixFunctorOperationDatum D B E.carrier n n.pos) {X Y Z : SixFunctorSpace D} [IsSeparated X.obj.hom] [IsSeparated Y.obj.hom] [IsSeparated Z.obj.hom] (f : X ⟶ Y) (g : Y ⟶ Z) [IsSeparated f.hom.left] [LocallyOfFiniteType f.hom.left] [QuasiCompact f.hom.left] [IsSeparated g.hom.left] [LocallyOfFiniteType g.hom.left] [QuasiCompact g.hom.left] : ∃ (P : System B.l B.Qbar D B.different (f := f.hom.left)) (Q : System B.l B.Qbar D B.different (f := g.hom.left)) (R : System B.l B.Qbar D B.different (f := (f ≫ g).hom.left)) (A : LeftCompositors B f g P Q R S), (∀ (cf : Compactification f.hom.left) (cg : Compactification g.hom.left) (cx : Compactification (f ≫ g).hom.left) (s : Stage.{u} B.l), MateProperties B (P.ring.operation cf s) (Q.ring.operation cg s) (R.ring.operation cx s) (A.alpha cf cg cx s)) ∧ RefinementIndependent B f g P Q R A",
+  "branch": "newtargets-dag",
+  "by": "NC",
+  "date": "2026-10-22",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-e724ee3bf",
+  "group": "NC",
+  "result": "pass",
+  "note": "Re-delivery after H13 RETURN bd9326bea167 carries out the correction: the lem-sf-constructible-exceptional-adjunction-coefficients record is byte-identical to live and side-live (module ConstructibleExceptionalAdjunctionCoefficients, declaration exists_system); the adapter module is removed; constructibleFinitePullIso, constructibleFiniteImageIso and constructibleIntegralSupport_eq are moved unchanged into Sheaf.Paper.ConstructibleExceptionalCompositor, listed in lean.declarations, with item blueprint docstrings and no name collisions in live/side-live. The advisory is addressed: the proof docstring of constructibleIntegralSupport_eq (objects pinned by equality in SixFunctorSupportConstruction, projections pinned to the fixed Roos vertex, Milnor lim^1 of finite constructible Ext groups vanishes by Mittag-Leffler) is sound. Item statement unchanged and re-checked against the node: alpha pinned at finite/integral stages via preimageIso of S.finite/S.higher.integral.composition and at rational/common stages via q-map equations; exceptionalIso = conjugateIsoEquiv (A.adj.comp G.adj) H.adj alpha.symm; Hom chain, pasted counit, componentwise iff uniqueness, CommShift Z, three-refinement independence. lean.statement verbatim; 18 declarations present; only 2 sorrys (main theorem and named helper theorem). Edge cases n=1, identities, empty schemes and single universe u covered. Inherited advisory: free Operation shifts in System make the shift clause existential in P Q R. Not recompiled per instructions; no fixes."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-4a1ee",
+  "group": "D8",
+  "result": "fix",
+  "landing": "20261025T122737-L-1801866",
+  "kind": "interface",
+  "note": "independent cc review: lem-sf-constructible-exceptional-compositor + 5 nodes vs delivered Lean (item, Data, LeftCompositorCoherence, CompactSupportTermHomFinite) and published module; universe params [u] verified; 3 direct importers compiled"
+ }
+}

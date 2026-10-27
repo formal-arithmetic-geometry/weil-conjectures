@@ -118,7 +118,63 @@
   "def-sc-curves"
  ],
  "proof_split_by": "labels",
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "closed",
+   "decls": [
+    {
+     "name": "AlgebraicGeometry.IsConnectedCurve.bijective_fieldExtensionCohomologyMap",
+     "module": "WeilConjectures.AlgebraicGeometry.Curve.ExtensionInvariance",
+     "lines": [
+      43,
+      65
+     ],
+     "kind": "theorem",
+     "sorry": false
+    },
+    {
+     "name": "AlgebraicGeometry.IsConnectedCurve.bijective_fieldExtensionCohomologyMap_of_isAffine",
+     "module": "WeilConjectures.AlgebraicGeometry.Curve.AffineBaseChange",
+     "lines": [
+      202,
+      274
+     ],
+     "kind": "theorem",
+     "sorry": false,
+     "partial": "`thm-sc-constant-invariance`, affine case"
+    },
+    {
+     "name": "AlgebraicGeometry.IsConnectedCurve.natCard_sheafH_one_constantZMod_mul",
+     "module": "WeilConjectures.AlgebraicGeometry.Curve.AffineCount",
+     "lines": [
+      285,
+      373
+     ],
+     "kind": "theorem",
+     "sorry": false,
+     "partial": "`thm-sc-constant-invariance`, affine case"
+    },
+    {
+     "name": "AlgebraicGeometry.IsConnectedCurve.bijective_fieldExtensionCohomologyMap_of_isProper",
+     "module": "WeilConjectures.AlgebraicGeometry.Curve.BaseChange",
+     "lines": [
+      161,
+      216
+     ],
+     "kind": "theorem",
+     "sorry": false,
+     "partial": "`thm-sc-constant-invariance`, proper case"
+    }
+   ],
+   "missing": [],
+   "open": []
+  }
+ },
  "chapter": "sec-curve-estimates",
  "unit": "sk-prop-ext-invariance",
  "split_report": {
@@ -173,5 +229,50 @@
   "landing": "20261012T053923-L-2631271",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ },
+ "blueprint_update": {
+  "snapshot": "main-20261023-1620",
+  "commit": "7284bb09daf97437d544c51882b325f9c52cd345",
+  "changed": [
+   "statement",
+   "proof"
+  ],
+  "statement": "Let $k\\subseteq k'$ be algebraically closed, let $C$ be a\nsmooth separated connected curve over $k$, let\n$\\overline C$ be a compactification of $C$\n([lem-sc-compactification]; thus $\\overline C=C$ when $C$\nis proper), and let\n$g:=g(\\overline C)$ ([def-sc-genus]). Let $n\\geq1$ be\nprime to $\\operatorname{char}k$.\nFor every $q\\geq0$, the pullback map of\n[def-sc-field-extension]\n\n$$\n\\rho^q_{k'/k}(C,\\mathbf F_n):H^q(C_{\\Et},\\mathbf F_n)\n\\longrightarrow H^q((C_{k'})_{\\Et},\\mathbf F_n)\n$$\n\nis an isomorphism. If moreover $C$ is affine and\n$r:=\\#(\\overline C\\setminus C)$ is the number of points at infinity,\nthen $H^1(C_{\\Et},\\mathbf F_n)$ is finite of order $n^{2g+r-1}$.",
+  "proof": [
+   {
+    "text": "By [lem-sc-base-change-curve], $C_{k'}$ is a smooth separated\nconnected curve over $k'$, and by [lem-sc-compactification] and\n[lem-sc-affine-open-proper] the curve $C$ is proper or affine.",
+    "uses": [
+     "lem-sc-base-change-curve",
+     "lem-sc-compactification",
+     "lem-sc-affine-open-proper"
+    ],
+    "elementary": false
+   },
+   {
+    "text": "*Injectivity.* Each $\\rho^q_{k'/k}(C,\\mathbf F_n)$ is injective. Write $k'$\nas the filtered union of its finitely generated $k$-subalgebras $A$. Then\n$C_{k'}$ is the limit of the schemes $C_A=C\\times_k\\operatorname{Spec}A$\nalong affine transition maps, so the étale cohomology of $C_{k'}$ is the\ncolimit of that of the $C_A$. Since $k$ is algebraically closed, each $A$\nhas a $k$-algebra map $A\\to k$ (Nullstellensatz), which gives a section\n$C\\to C_A$ of the projection $C_A\\to C$; hence each map\n$H^q(C,\\mathbf F_n)\\to H^q(C_A,\\mathbf F_n)$ is injective, and so is the\ncolimit map.",
+    "uses": [],
+    "elementary": null
+   },
+   {
+    "text": "*Equal orders.* It remains to see that source and target are finite of the\nsame order. If $C$ is proper, [thm-sc-proper-cohomology] over $k$ and over\n$k'$ gives the groups $\\mathbf Z/n\\mathbf Z$, $(\\mathbf Z/n\\mathbf Z)^{2g}$,\n$\\mathbf Z/n\\mathbf Z$ in degrees $0,1,2$ and $0$ above, and\n$g(C_{k'})=g(C)$ by [lem-sc-genus-invariant]. If $C$ is affine,\n[thm-sc-affine-cohomology] over $k$ and over $k'$ gives $\\mathbf Z/n\\mathbf Z$\nin degree $0$ and $0$ in degrees $q\\geq2$. In degree one,\n$\\overline C_{k'}$ is a smooth proper connected compactification of $C_{k'}$\n([lem-sc-base-change-curve]) of the same genus ([lem-sc-genus-invariant]),\nand its points at infinity are the $r$ points $x\\otimes k'$, since every\npoint at infinity is $k$-rational. By the order formula proved next, both\ngroups have order $n^{2g+r-1}$.",
+    "uses": [
+     "thm-sc-proper-cohomology",
+     "lem-sc-genus-invariant",
+     "thm-sc-affine-cohomology",
+     "lem-sc-base-change-curve"
+    ],
+    "elementary": false
+   },
+   {
+    "text": "*The order of $H^1$ in the affine case.* Let $S=\\overline C\\setminus C$, so\n$r=\\#S\\geq1$, and let $D$, $a$ be the maps of [lem-sc-pic-affine], with\n$\\operatorname{im}D=\\ker a$, $\\ker D$ consisting of $n$-th powers, and\n$\\operatorname{Pic}(C)\\cong\\operatorname{Pic}(\\overline C)/\\Lambda$ for\n$\\Lambda=\\operatorname{im}a$. The group $M=\\operatorname{im}D\\subseteq\\mathbf Z^S$\nis free of some rank $m$, and since $\\ker D$ consists of $n$-th powers,\n\n$$\n\\#\\bigl(\\mathcal O_C(C)^\\times/\\mathcal O_C(C)^{\\times n}\\bigr)=\\#(M/nM)=n^m.\n$$\n\nMultiplication by $n$ on $0\\to\\Lambda\\to\\operatorname{Pic}(\\overline C)\\to\n\\operatorname{Pic}(C)\\to0$ gives, by the snake lemma, the exact sequence\n\n$$\n0\\to\\Lambda[n]\\to\\operatorname{Pic}(\\overline C)[n]\\to\\operatorname{Pic}(C)[n]\n\\to\\Lambda/n\\Lambda\\to\\operatorname{Pic}(\\overline C)/n\\to\\operatorname{Pic}(C)/n\\to0.\n$$\n\nHere $\\operatorname{Pic}(\\overline C)[n]\\cong(\\mathbf Z/n\\mathbf Z)^{2g}$ and\n$\\operatorname{Pic}(\\overline C)/n\\cong\\mathbf Z/n\\mathbf Z$\n([lem-sc-pic-proper-ntorsion]), and $\\operatorname{Pic}(C)/n=0$ as\n$\\operatorname{Pic}(C)$ is $n$-divisible ([lem-sc-pic-affine]). The finitely\ngenerated group $\\Lambda\\cong\\mathbf Z^S/M$ has rank $r-m$, so\n$\\#(\\Lambda/n\\Lambda)=n^{r-m}\\,\\#\\Lambda[n]$. Hence\n$\\#\\operatorname{Pic}(C)[n]=n^{2g}\\cdot n^{r-m}/n=n^{2g+r-m-1}$, and the short\nexact sequence of [thm-sc-affine-cohomology] gives\n\n$$\n\\#H^1(C_{\\Et},\\mathbf F_n)=n^m\\cdot n^{2g+r-m-1}=n^{2g+r-1}.\n$$",
+    "uses": [
+     "lem-sc-pic-affine",
+     "lem-sc-pic-proper-ntorsion",
+     "thm-sc-affine-cohomology"
+    ],
+    "elementary": false
+   }
+  ],
+  "note": "the current blueprint (main-20261023-1620, weil-conjectures-blueprint 7284bb09da) states or proves this differently; the node is proved in Lean: recorded 2026-10-23, not reopened"
  }
 }

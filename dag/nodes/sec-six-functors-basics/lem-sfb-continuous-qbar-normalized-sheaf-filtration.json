@@ -1,0 +1,294 @@
+{
+ "id": "lem-sfb-continuous-qbar-normalized-sheaf-filtration",
+ "kind": "statement",
+ "title": "Normalized lisse quotient filtration for continuous algebraic-closure module sheaves",
+ "statement": "Fix a prime $\\ell$, an algebraic closure $\\Omega$ [def-weil-algebraic-closure] of $\\mathbf Q_\\ell$ [def-weil-l-adic-numbers] with its extended $\\ell$-adic norm topology, and the commutative condensed ring $\\Lambda(P)=C(P,\\Omega)$ of all continuous functions on profinite sets [def-sfb-continuous-map-condensed-ring]. There is no finite-subextension restriction. On each scheme $T$ put $R_T=p_T^*\\Lambda$ [sk-def-sfb-pulled-back-coefficients] on its small pro-etale site [def-weil-pbc-proetale-site], and use internal module objects [sk-def-sfb-module-objects]. Let $X$ be a Noetherian scheme, meaning locally Noetherian [pqf-def-locnoeth] and quasi-compact [def-weil-pbc-quasi-compact-scheme]. An $R_T$-module is lisse if on a pro-etale cover it is a finite direct sum $R_T^r$, with $r=0$ allowed [def-sfb-lisse-coefficient-module]. A finite constant local model means a pro-etale local isomorphism $R_T\\otimes_{\\underline{\\Lambda(*)}}\\underline V$, with $V$ a finitely presented scalar $\\Lambda(*)$-module and underlines denoting discrete constant sheaves. Constructible means having these models on a finite constructible locally closed scheme stratification [sk-def-sfb-constructible, def-constructible-stratification, def-weil-constructible-subset]. Let $M$ be a constructible $R_X$-module. There are $r\\geq0$, open subschemes $\\varnothing=V_0\\subseteq\\cdots\\subseteq V_r=X$ with inclusions $v_k:V_k\\hookrightarrow X$, and reduced closed subschemes [def-pc-reduced-scheme] $t_k:S_k\\hookrightarrow V_k$ with underlying sets $V_k\\setminus V_{k-1}$. Put $L_k=t_k^*(M|_{V_k})$, using exact module inverse image [def-sfb-module-upper-star]. These modules are lisse. There are monomorphisms $M_k=v_{k!}v_k^*M\\hookrightarrow M$ induced by the counits, and $0=M_0\\subseteq\\cdots\\subseteq M_r=M$, with $Q_k=M_k/M_{k-1}$ canonically isomorphic to $v_{k!}(t_k)_*L_k$. Every $a_k=v_k\\circ t_k$ is a quasi-compact constructible locally closed immersion. It admits a factorization $a_k=i_k\\circ j_k$ with $j_k:S_k\\hookrightarrow Z_k$ open and $i_k:Z_k\\hookrightarrow X$ closed [def-weil-open-immersion, def-weil-closed-immersion]. For every such factorization there is a canonical isomorphism $Q_k\\cong(i_k)_*(j_k)_!L_k$, normalized to the identity after restriction to $S_k$, with the inverse-image coefficient rings identified with $R_T$ [def-sfb-module-lower-star, def-sfb-module-open-lower-shriek]. All the open immersions occurring here are quasi-compact. In the ordinary unbounded derived category [sk-def-sfb-derived-categories, def-weil-abstract-derived-category] the short exact sequence $0\\to M_{k-1}\\to M_k\\to Q_k\\to0$ gives a distinguished triangle $M_{k-1}[0]\\to M_k[0]\\to((i_k)_*(j_k)_!L_k)[0]\\to M_{k-1}[1]$. Consequently $M[0]$ admits a construction from zero and these $r$ degree-zero stratum extensions using $r$ distinguished-triangle extensions and isomorphisms, in the inherited triangulated structure [def-weil-triangulated-category]. For $M=0$ the empty construction is allowed, including when $X=\\varnothing$.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-coefficient-heart/sk-lem-coefficient-heart.proof.md",
+  "place": "(3), finite open-support filtration, with normalized immersion comparison and sheaf triangles. Stacks topology.tex Tag 09Y5, lemma-noetherian-partition-refined-by-stratification, and derived.tex Tag 0152, lemma-derived-canonical-delta-functor. Returned continuous-qbar-constructible-generators steps 8-10; all-continuous coefficient adaptation."
+ },
+ "stmt_deps": [
+  "def-weil-algebraic-closure",
+  "def-weil-l-adic-numbers",
+  "def-sfb-continuous-map-condensed-ring",
+  "sk-def-sfb-pulled-back-coefficients",
+  "def-weil-pbc-proetale-site",
+  "sk-def-sfb-module-objects",
+  "pqf-def-locnoeth",
+  "def-weil-pbc-quasi-compact-scheme",
+  "def-sfb-lisse-coefficient-module",
+  "sk-def-sfb-constructible",
+  "def-constructible-stratification",
+  "def-weil-constructible-subset",
+  "def-pc-reduced-scheme",
+  "def-sfb-module-upper-star",
+  "def-weil-open-immersion",
+  "def-weil-closed-immersion",
+  "def-sfb-module-lower-star",
+  "def-sfb-module-open-lower-shriek",
+  "sk-def-sfb-derived-categories",
+  "def-weil-abstract-derived-category",
+  "def-weil-triangulated-category"
+ ],
+ "proof": [
+  {
+   "text": "Use [lem-sfb-alpha-iso] for this particular condensed ring: for every immersion $h$, $h^{-1}R_X\\cong R_T$. It applies to every condensed ring, unlike a coefficient theorem limited to finite-subextension functions. The equivalence [def-weil-pbc-internal-abelian-sheaf-module-equivalence] identifies internal modules with modules over the corresponding section-ring sheaf, preserving underlying sheaves and actions. Thus the ringed-site module theorem [lem-pur-ringed-site-module-category-abelian] makes the ambient module category abelian. We use this identification when applying module-sheaf extension theorems below; their maps are the same maps on underlying sheaves with the transported scalar actions.",
+   "uses": [
+    "lem-sfb-alpha-iso",
+    "def-weil-pbc-internal-abelian-sheaf-module-equivalence",
+    "lem-pur-ringed-site-module-category-abelian"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Tag 00YV, algebraic structures in a ringed topos; canonical inverse-image comparison in lem-sfb-alpha-iso."
+   }
+  },
+  {
+   "text": "[lem-sfb-coefficient-heart-locally-closed-extension] gives that $X$ has Noetherian underlying space and that all its locally closed subschemes are Noetherian. Apply [lem-sfb-finite-model-stratum-filtration] to $\\Lambda$ and $M$. Its constructibility hypothesis is exactly the finite constant local-model condition in the statement, not arbitrary locally finitely presented ring-sheaf modules. It supplies the finite open chain, reduced closed complements $t_k:S_k\\hookrightarrow V_k$, monomorphic counits, compatible inclusions of their images, and the natural quotient maps $Q_k\\cong v_{k!}(t_k)_*L_k$. In particular the counit images equal the objects $v_{k!}v_k^*M$, and the endpoints are zero and $M$. Its conclusion also supplies quasi-compactness of $v_k$ and of the open complements of $t_k$.",
+   "uses": [
+    "lem-sfb-coefficient-heart-locally-closed-extension",
+    "lem-sfb-finite-model-stratum-filtration"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/topology.tex",
+    "place": "Tag 09Y5, lemma-noetherian-partition-refined-by-stratification; module formulation in lem-sfb-finite-model-stratum-filtration, using proetale.tex Tag 09AH."
+   }
+  },
+  {
+   "text": "Evaluation on the singleton identifies $\\Lambda(*)=C(*,\\Omega)$ with $\\Omega$ as a ring. For each local finite constant model of $L_k$, its scalar module $P$ is finitely presented over this field. The field clause of [lem-sfb-scalar-finite-free-resolutions] gives $P\\cong\\Omega^d$ for a finite $d\\geq0$. On that same cover, scalar extension sends this basis isomorphism to $R_{S_k}\\otimes_{\\underline\\Omega}\\underline P\\cong R_{S_k}^d$: the forward map sends $r\\otimes(c_i)$ to $(rc_i)_i$, and its inverse sends $(r_i)_i$ to $\\sum_i r_i\\otimes e_i$. These inverse module maps sheafify, so this is precisely the lisse condition [def-sfb-lisse-coefficient-module], including rank zero.",
+   "uses": [
+    "lem-sfb-scalar-finite-free-resolutions",
+    "def-sfb-lisse-coefficient-module"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-coefficient-heart/_section.md",
+    "place": "Lisse local models; field case of the existing scalar finite-free resolution lemma."
+   }
+  },
+  {
+   "text": "Each $a_k=v_kt_k$ is a locally closed immersion. The geometry clause of [lem-sfb-coefficient-heart-locally-closed-extension] makes it quasi-compact and supplies an open-then-closed factorization through its scheme-theoretic image. Its image is constructible by [def-weil-constructible-subset], being locally closed in the Noetherian space $X$. For any factorization $a_k=i_kj_k$ as in the statement, $Z_k$ is closed in $X$, hence Noetherian by the same clause, so $j_k$ is quasi-compact. Let $w_k:V_{k-1}\\hookrightarrow V_k$, the open complement of $t_k$, quasi-compact by step 2. Apply [lem-sfb-locally-closed-module-extension-coherence] to $R_X$ through step 1: $\\gamma_{v_k,w_k}$ identifies $M_{k-1}=v_{k-1!}v_{k-1}^*M$ with $v_{k!}w_{k!}w_k^*(M|_{V_k})$, compatibly with the counits into $M_k=v_{k!}(M|_{V_k})$. As $v_{k!}$ is exact, $Q_k\\cong v_{k!}\\bigl(M|_{V_k}/w_{k!}w_k^*(M|_{V_k})\\bigr)$, and the localization sequence of [lem-weil-pbc-proetale-ringed-open-closed] on $V_k$ (closed $t_k$, quasi-compact open $w_k$) identifies this quotient with $(t_k)_*L_k$ by its unit. We use this isomorphism $Q_k\\cong v_{k!}(t_k)_*L_k$; step 2 is used only for the filtration. After $a_k^*=t_k^*v_k^*$ it is the identity of $L_k$, by $v_k^*v_{k!}\\cong1$, $t_k^*(t_k)_*\\cong1$ and $t_k^*w_{k!}=0$. The coherence node then gives $v_{k!}(t_k)_*\\cong v_{k!}t_{k!}\\cong a_{k!}\\cong i_{k!}j_{k!}\\cong(i_k)_*(j_k)_!$ through $\\gamma_{v_k,t_k}$, $\\gamma_{i_k,j_k}^{-1}$ and the closed comparisons, each restricting to the identity under the maps $r$. The composite is the required isomorphism $Q_k\\cong(i_k)_*(j_k)_!L_k$, normalized to the identity after restriction to $S_k$.",
+   "uses": [
+    "lem-sfb-coefficient-heart-locally-closed-extension",
+    "def-weil-constructible-subset",
+    "lem-sfb-locally-closed-module-extension-coherence",
+    "lem-weil-pbc-proetale-ringed-open-closed"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tags 09AA, 09BM, 09BN, 09AH and sites-modules.tex Tags 03DI, 03DJ; normalized factorization comparison as stated by lem-sfb-locally-closed-module-extension-coherence."
+   }
+  },
+  {
+   "text": "In the abelian category from step 1, the monomorphism $M_{k-1}\\hookrightarrow M_k$ and its cokernel $Q_k$ give a short exact sequence. Apply [lem-sf-derived-ses-triangle] to obtain $M_{k-1}[0]\\to M_k[0]\\to Q_k[0]\\to M_{k-1}[0][1]$ in the ordinary unbounded derived category. Insert the isomorphism of step 4 into its third vertex and into the adjacent arrows. The resulting triangle is isomorphic to the original one and hence distinguished by TR1 of [def-weil-triangulated-category]. Its last object is $M_{k-1}[1]$, with the usual convention for a sheaf in degree zero.",
+   "uses": [
+    "lem-sf-derived-ses-triangle",
+    "def-weil-triangulated-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 0152, lemma-derived-canonical-delta-functor, applied to complexes concentrated in degree zero."
+   }
+  },
+  {
+   "text": "Induct on $k=0,\\ldots,r$. The starting object is $M_0[0]=0$. Given a construction of $M_{k-1}[0]$ using $k-1$ extensions, the triangle of step 5 builds $M_k[0]$ from that object and the $k$-th stratum extension using one more extension. At $k=r$ the endpoint is $M[0]$, so there are exactly $r$ such steps, with the displayed isomorphisms. If $M=0$, choose the empty construction independently of the chosen stratification; if $X$ is empty one can also take $r=0$ and $V_0=X=\\varnothing$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-coefficient-heart/sk-lem-coefficient-heart.proof.md",
+    "place": "(3), iteration of the finite stratum filtration; elementary induction after the short exact sequence triangles."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-alpha-iso",
+  "def-weil-pbc-internal-abelian-sheaf-module-equivalence",
+  "lem-pur-ringed-site-module-category-abelian",
+  "lem-sfb-coefficient-heart-locally-closed-extension",
+  "lem-sfb-finite-model-stratum-filtration",
+  "lem-sfb-scalar-finite-free-resolutions",
+  "def-sfb-lisse-coefficient-module",
+  "def-weil-constructible-subset",
+  "lem-sfb-locally-closed-module-extension-coherence",
+  "lem-weil-pbc-proetale-ringed-open-closed",
+  "lem-sf-derived-ses-triangle",
+  "def-weil-triangulated-category"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-coefficient-heart/sk-lem-coefficient-heart.proof.md",
+  "place": "(3), finite stratum devissage, adapted to all-continuous coefficients using general condensed-ring filtration and arbitrary ring-sheaf normalized extension tools."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A constructible module over continuous algebraic closure of Q_l coefficients has a finite open support filtration with lisse stratum quotients canonically identified with closed pushforward of open extension by zero and short exact sequence triangles",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"CondensedMod.IsSolid\", \"module\": \"Mathlib/Condensed/Solid\", \"type\": \"(R : Type (u + 1)) → [inst : Ring R] → CondensedMod R → Prop\", \"doc\": \"A property of a condensed module $ M $ over a ring $ R $ indicating that $ M $ is solid, i.e., satisfies the defining conditions of solidity in the context of condensed mathematics.\"}\n  {\"name\": \"localCohomology.diagram\", \"module\": \"Mathlib/Algebra/Homology/LocalCohomology\", \"type\": \"{R : Type u} →\\n  [inst : CommRing R] →\\n    {D : Type v} →\\n      [inst_1 : CategoryTheory.SmallCategory D] →\\n        CategoryTheory.Functor D (Ideal R) →\\n          ℕ → CategoryTheory.Functor Dᵒᵖ (CategoryTheory.Functor (ModuleCat R) (ModuleCat R))\", \"doc\": \"For a commutative ring $ R $, a small category $ \\\\mathcal{D} $, and a functor $ I : \\\\mathcal{D} \\\\to \\\\text{Ideal}(R) $, this constructs a functor from $ \\\\mathcal{D}^{\\\\text{op}} $ to the category of $ R\"}\n  {\"name\": \"LightCondMod.LocallyConstant.instHasSheafifyLightProfiniteCoherentTopologyModuleCat\", \"module\": \"Mathlib/Condensed/Discrete/Module\", \"type\": \"∀ (R : Type u) [inst : Ring R],\\n  CategoryTheory.HasSheafify (CategoryTheory.coherentTopology LightProfinite) (ModuleCat R)\", \"doc\": \"For the coherent Grothendieck topology on the category of totally disconnected, second-countable compact Hausdorff spaces (light profinite spaces), there exists a sheafification functor from the categ\"}\n  {\"name\": \"LightCondensed.instIsGrothendieckAbelianLightCondMod\", \"module\": \"Mathlib/Condensed/Light/AB\", \"type\": \"∀ {R : Type u} [inst : Ring R], CategoryTheory.IsGrothendieckAbelian.{u, u + 1, u + 1} (LightCondMod R)\", \"doc\": \"For any ring $ R $, the category of light condensed $ R $-modules is a Grothendieck abelian category. This follows from the fact that it is constructed as the category of sheaves on the site of light \"}\n  {\"name\": \"Profinite.NobelingProof.succ_exact\", \"module\": \"Mathlib/Topology/Category/Profinite/Nobeling/Successor\", \"type\": \"∀ {I : Type u} (C : Set (I → Bool)) [inst : LinearOrder I] [inst_1 : WellFoundedLT I] {o : Ordinal.{u}},\\n  IsClosed C →\\n    ∀ (hsC : Profinite.NobelingProof.contained C (Order.succ o)) (ho : o < Ordinal.type fun x1 x2 => x1 < x2),\\n      {\\n          X₁ :=\\n            ModuleCat.of ℤ\\n              (Loc\", \"doc\": \"For a well-ordered set $ I $, a set $ C $ of Boolean-valued functions on $ I $, and an ordinal $ o $ less than the order type of $ I $, if $ C $ satisfies the containment condition with respect to $ \\\\\"}\n  {\"name\": \"localCohomology.ofDiagram\", \"module\": \"Mathlib/Algebra/Homology/LocalCohomology\", \"type\": \"{R : Type (max u v)} →\\n  [inst : CommRing R] →\\n    {D : Type v} →\\n      [inst_1 : CategoryTheory.SmallCategory D] →\\n        CategoryTheory.Functor D (Ideal R) → ℕ → CategoryTheory.Functor (ModuleCat R) (ModuleCat R)\", \"doc\": \"Given a commutative ring $ R $, a small category $ \\\\mathcal{D} $, and a functor $ I : \\\\mathcal{D} \\\\to \\\\text{Ideal}(R) $, this constructs an $ R $-linear endofunctor on the category of $ R $-modules by\"}\n  {\"name\": \"CondensedMod.ofSheafProfinite\", \"module\": \"Mathlib/Condensed/Explicit\", \"type\": \"(R : Type (u + 1)) →\\n  [inst : Ring R] →\\n    (F : CategoryTheory.Functor Profiniteᵒᵖ (ModuleCat R)) →\\n      [CategoryTheory.Limits.PreservesFiniteProducts F] →\\n        CategoryTheory.regularTopology.EqualizerCondition F → CondensedMod R\", \"doc\": \"Given a functor $ F: \\text{Profinite}^\\\\text{op} \\\\to \\\\text{ModuleCat}\\\\, R $ that preserves finite products and satisfies the Equalizer Condition for the regular topology, this constructs the correspondi\"}\n  {\"name\": \"CompHausLike.LocallyConstantModule.functor\", \"module\": \"Mathlib/Condensed/Discrete/Module\", \"type\": \"{P : TopCat → Prop} →\\n  (R : Type (max u w)) →\\n    [inst : Ring R] →\\n      [inst_1 : CompHausLike.HasExplicitFiniteCoproducts P] →\\n        [inst_2 : CompHausLike.HasExplicitPullbacks P] →\\n          (hs :\\n              ∀ ⦃X Y : CompHausLike P⦄ (f : X ⟶ Y),\\n                CategoryTheory.EffectiveEpi \", \"doc\": \"A functor from the category of $ R $-modules to the category of sheaves on compact Hausdorff-like spaces equipped with the coherent Grothendieck topology. For each $ R $-module $ X $, it assigns the s\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: returned general ambient category, discrete-module, or topological infrastructure does not state this pro-etale condensed-field claim"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A constructible sheaf has a finite filtration with locally closed extension by zero of lisse subquotients and distinguished triangles of sheaves",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"CategoryTheory.sheafIsAbelian\", \"module\": \"Mathlib.CategoryTheory.Sites.Abelian\", \"type\": \": Abelian (Sheaf J D)\", \"doc\": \"For any category $\\\\mathcal{C}$ equipped with a Grothendieck topology $J$ and an abelian category $\\\\mathcal{D}$, the category of sheaves on $\\\\mathcal{C}$ with values in $\\\\mathcal{D}$ inherits an abelia\"}\n  {\"name\": \"CategoryTheory.SheafOfTypes.finitary_extensive\", \"module\": \"Mathlib.CategoryTheory.Sites.LeftExact\", \"type\": \"[HasSheafify J (Type w)] : FinitaryExtensive (Sheaf J (Type w))\", \"doc\": \"Given a Grothendieck topology $ J $ on $ \\\\mathrm{Type}\\\\, w $ and the existence of a sheafification functor, the category of sheaves on $ \\\\mathrm{Type}\\\\, w $ with respect to $ J $ is finitary extensive\"}\n  {\"name\": \"CategoryTheory.Sheaf.instHasFunctorialFactorizationLocallySurjectiveLocallyInjective\", \"module\": \"Mathlib.CategoryTheory.Sites.EpiMono\", \"type\": \": (locallySurjective J A).HasFunctorialFactorization (locallyInjective J A)\", \"doc\": \"In the category of sheaves on a site with respect to a Grothendieck topology $J$ and values in a concrete category $\\\\mathcal{A}$, every morphism admits a functorial factorization as a locally surjecti\"}\n  {\"name\": \"CategoryTheory.Sheaf.hasFilteredColimitsOfSize\", \"module\": \"Mathlib.CategoryTheory.Abelian.GrothendieckAxioms.Sheaf\", \"type\": \"[HasSheafify J A] [HasFilteredColimitsOfSize.{v₂, u₂} A] : HasFilteredColimitsOfSize.{v₂, u₂} (Sheaf J A)\", \"doc\": \"Given a category $\\\\mathcal{C}$ equipped with a Grothendieck topology $J$ and a category $\\\\mathcal{A}$ that has filtered colimits of size $(v₂, u₂)$ and a sheafification functor, the category of sheave\"}\n  {\"name\": \"CategoryTheory.Sheaf.instHasFiniteColimits\", \"module\": \"Mathlib.CategoryTheory.Sites.Limits\", \"type\": \"[HasFiniteColimits D] : HasFiniteColimits (Sheaf J D)\", \"doc\": \"If $ \\\\mathcal{D} $ is a category with finite colimits, then the category of sheaves on a category equipped with a Grothendieck topology $ J $, taking values in $ \\\\mathcal{D} $, also has finite colimit\"}\n  {\"name\": \"CategoryTheory.Triangulated.TStructure.mk\", \"module\": \"Mathlib.CategoryTheory.Triangulated.TStructure.Basic\", \"type\": \"{C : Type u_1} →\\n  [inst : CategoryTheory.Category.{v_1, u_1} C] →\\n    [inst_1 : CategoryTheory.Preadditive C] →\\n      [inst_2 : CategoryTheory.Limits.HasZeroObject C] →\\n        [inst_3 : CategoryTheory.HasShift C ℤ] →\\n          [inst_4 : ∀ (n : ℤ), (CategoryTheory.shiftFunctor C n).Additive] →\\n    \", \"doc\": \"Given a category $\\\\mathcal{C}$ with preadditive structure, zero object, and integer-indexed shift functors, constructs a triangulated category structure by specifying: \\n1. Two families of object prope\"}\n  {\"name\": \"CategoryTheory.instFinitaryExtensiveSheafOfHasPullbacksOfHasSheafify\", \"module\": \"Mathlib.CategoryTheory.Sites.LeftExact\", \"type\": \"[FinitaryExtensive D] [HasPullbacks D] [HasSheafify J D] : FinitaryExtensive (Sheaf J D)\", \"doc\": \"If a category $\\\\mathcal{D}$ is finitary extensive, has all pullbacks, and admits sheafification with respect to a Grothendieck topology $J$, then the category of sheaves $\\\\mathrm{Sh}(\\\\mathcal{D}, J)$ \"}\n  {\"name\": \"TopCat.Sheaf.forget\", \"module\": \"Mathlib.Topology.Sheaves.Sheaf\", \"type\": \": TopCat.Sheaf C X ⥤ TopCat.Presheaf C X\", \"doc\": \"A sheaf on a topological space $ X $ with values in a category $ \\\\mathcal{C} $ is a presheaf that satisfies the sheaf condition for all open covers of $ X $. This means that for any open cover $ \\\\{U_i\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: returned general ambient category, discrete-module, or topological infrastructure does not state this pro-etale condensed-field claim"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Sheaf\", \"filtration\"",
+   "results": "[loogle] OK 0 hit(s)",
+   "date": "2026-10-22",
+   "verdict": "no match: returned general ambient category, discrete-module, or topological infrastructure does not state this pro-etale condensed-field claim"
+  },
+  {
+   "tool": "grep",
+   "query": "[Cc]onstructible.*filtrat|filtrat.*[Cc]onstructible|locallyClosed.*[Ee]xtension",
+   "results": "[grep] OK 0 hit(s)",
+   "date": "2026-10-22",
+   "verdict": "no match: returned general ambient category, discrete-module, or topological infrastructure does not state this pro-etale condensed-field claim"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finite sheaf devissage by lisse strata in continuous condensed field coefficients normalized between closed open and open closed immersion factorizations",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"Condensed.lanSheafProfinite\", \"module\": \"Mathlib/Condensed/Discrete/Colimit\", \"type\": \"Type (u + 1) → CategoryTheory.Sheaf (CategoryTheory.coherentTopology Profinite) (Type (u + 1))\", \"doc\": \"For a type $X$, this sheaf on the coherent Grothendieck topology of profinite spaces is constructed as the left Kan extension of the presheaf assigning locally constant functions $S \\to X$ to each prof\"}\n  {\"name\": \"CondensedMod.ofSheafCompHaus\", \"module\": \"Mathlib/Condensed/Explicit\", \"type\": \"(R : Type (u + 1)) →\\n  [inst : Ring R] →\\n    (F : CategoryTheory.Functor CompHausᵒᵖ (ModuleCat R)) →\\n      [CategoryTheory.Limits.PreservesFiniteProducts F] →\\n        CategoryTheory.regularTopology.EqualizerCondition F → CondensedMod R\", \"doc\": \"Given a functor $ F: \\\\mathrm{CompHaus}^{\\\\mathrm{op}} \\\\to \\\\mathrm{ModuleCat}\\\\, R $ that preserves finite products and satisfies the equalizer condition for the regular topology, $ F $ defines a sheaf w\"}\n  {\"name\": \"CondensedMod.ofSheafProfinite\", \"module\": \"Mathlib/Condensed/Explicit\", \"type\": \"(R : Type (u + 1)) →\\n  [inst : Ring R] →\\n    (F : CategoryTheory.Functor Profiniteᵒᵖ (ModuleCat R)) →\\n      [CategoryTheory.Limits.PreservesFiniteProducts F] →\\n        CategoryTheory.regularTopology.EqualizerCondition F → CondensedMod R\", \"doc\": \"Given a functor $ F: \\text{Profinite}^\\\\text{op} \\\\to \\\\text{ModuleCat}\\\\, R $ that preserves finite products and satisfies the Equalizer Condition for the regular topology, this constructs the correspondi\"}\n  {\"name\": \"LightCondensed.IsDiscrete\", \"module\": \"Mathlib/Condensed/Discrete/Characterization\", \"type\": \"{C : Type u_1} →\\n  [inst : CategoryTheory.Category.{v_1, u_1} C] →\\n    [CategoryTheory.HasWeakSheafify (CategoryTheory.coherentTopology LightProfinite) C] → LightCondensed C → Prop\", \"doc\": \"A sheaf $ X $ in the category of light condensed sheaves is constant if it is isomorphic to the sheafification of a constant presheaf with respect to the coherent Grothendieck topology on light profin\"}\n  {\"name\": \"CondensedMod.ofSheafStonean\", \"module\": \"Mathlib/Condensed/Explicit\", \"type\": \"(R : Type (u + 1)) →\\n  [inst : Ring R] →\\n    (F : CategoryTheory.Functor Stoneanᵒᵖ (ModuleCat R)) →\\n      [CategoryTheory.Limits.PreservesFiniteProducts F] → CondensedMod R\", \"doc\": \"Given a ring $ R $ and a functor $ F : \\\\text{Stonean}^{\\\\text{op}} \\\\to \\\\text{ModuleCat}\\\\, R $ that preserves finite products, this function constructs the corresponding condensed $ R $-module by applyi\"}\n  {\"name\": \"LightCondMod.ofSheafLightProfinite\", \"module\": \"Mathlib/Condensed/Light/Explicit\", \"type\": \"(R : Type u) →\\n  [inst : Ring R] →\\n    (F : CategoryTheory.Functor LightProfiniteᵒᵖ (ModuleCat R)) →\\n      [CategoryTheory.Limits.PreservesFiniteProducts F] →\\n        CategoryTheory.regularTopology.EqualizerCondition F → LightCondMod R\", \"doc\": \"Given a functor $ F: \\\\mathbf{LightProfinite}^{\\\\text{op}} \\\\to \\\\text{ModuleCat}\\\\, R $ that preserves finite products and satisfies the Equalizer Condition for the regular topology, this constructor form\"}\n  {\"name\": \"CondensedMod.IsSolid\", \"module\": \"Mathlib/Condensed/Solid\", \"type\": \"(R : Type (u + 1)) → [inst : Ring R] → CondensedMod R → Prop\", \"doc\": \"A property of a condensed module $ M $ over a ring $ R $ indicating that $ M $ is solid, i.e., satisfies the defining conditions of solidity in the context of condensed mathematics.\"}\n  {\"name\": \"SheafOfModules.isFinitePresentation\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent\", \"type\": \"{C : Type u'} →\\n  [inst : CategoryTheory.Category.{v', u'} C] →\\n    {J : CategoryTheory.GrothendieckTopology C} →\\n      (R : CategoryTheory.Sheaf J RingCat) →\\n        [∀ (X : C), (J.over X).HasSheafCompose (CategoryTheory.forget₂ RingCat AddCommGrpCat)] →\\n          [∀ (X : C), CategoryTheory.HasWeak\", \"doc\": \"A predicate asserting that a sheaf of modules over a ring sheaf $ R $ is of finite presentation, meaning it can be locally described as the cokernel of a morphism between free modules of finite rank, \"}",
+   "date": "2026-10-22",
+   "verdict": "no match: returned general ambient category, discrete-module, or topological infrastructure does not state this pro-etale condensed-field claim"
+  },
+  {
+   "tool": "grep",
+   "query": "stratum.*filtrat|filtrat.*stratum|lisse.*[Gg]enerat",
+   "results": "[grep] OK 0 hit(s)",
+   "date": "2026-10-22",
+   "verdict": "no match: returned general ambient category, discrete-module, or topological infrastructure does not state this pro-etale condensed-field claim"
+  },
+  {
+   "tool": "grep",
+   "query": "constructible.*filtrat|filtrat.*constructible|lisse.*stratum",
+   "results": "0 hits: ",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits supply ambient infrastructure or short-exact-sequence triangles, not the finite normalized stratum filtration for all-continuous coefficient modules"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Finite filtration of a constructible sheaf with lisse locally closed stratum subquotients and distinguished triangles",
+   "results": "8 hits: DerivedCategory.triangleOfSES, IsFiltration.rec, CategoryTheory.Triangulated.TStructure.triangleLTGE_distinguished, CategoryTheory.Triangulated.Localization.pretriangulated, CategoryTheory.Sheaf.hasFilteredColimitsOfSize, IsFiltration, CategoryTheory.Triangulated.TStructure.mk, IsFiltration.casesOn",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits supply ambient infrastructure or short-exact-sequence triangles, not the finite normalized stratum filtration for all-continuous coefficient modules"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Sheaf\", \"filtration\"",
+   "results": "0 hits: ",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits supply ambient infrastructure or short-exact-sequence triangles, not the finite normalized stratum filtration for all-continuous coefficient modules"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Constructible module sheaves over a condensed field admit a finite open support filtration with lisse strata and normalized extension by zero quotients",
+   "results": "8 hits: CondensedMod.IsSolid, Condensed.finFree, CondensedMod.ofSheafProfinite, LightCondMod.LocallyConstant.instHasSheafifyLightProfiniteCoherentTopologyModuleCat, LightCondMod.ofSheafLightProfinite, CondensedMod.ofSheafStonean, CondensedMod.ofSheafCompHaus, CondensedMod",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits supply ambient infrastructure or short-exact-sequence triangles, not the finite normalized stratum filtration for all-continuous coefficient modules"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Noetherian scheme constructible sheaf devissage by open closed localization with finite locally free strata and distinguished triangles",
+   "results": "8 hits: AlgebraicGeometry.IsLocallyNoetherian, PrimeSpectrum.ConstructibleSetData, AlgebraicGeometry.IsNoetherian.noetherianSpace, AlgebraicGeometry.instIsLocallyNoetherianXScheme, PrimeSpectrum.BasicConstructibleSetData, AlgebraicGeometry.IsLocallyNoetherian.quasiSeparatedSpace, AlgebraicGeometry.exists_of_res_zero_of_qcqs_of_top, AlgebraicGeometry.isNoetherian_iff_of_finite_iSup_eq_top",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits supply ambient infrastructure or short-exact-sequence triangles, not the finite normalized stratum filtration for all-continuous coefficient modules"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-continuous-qbar-constructible-generators",
+  "date": "2026-10-22",
+  "group": "Q159"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": "det-thm-sf-ctf-stability-direct-images",
+   "place": "Proof (1),(2), Integral and rational coefficients: reduction to lisse sheaves on strata; the generator reduction expanded in det-thm-sf-pf-field-tensor proof (1), realized here by finite open-support filtration, normalized immersion extensions and sheaf triangles. The ancestor is taken from the live parent record because its created.item chain ends at a Lean module.",
+   "via": [
+    "lem-sfb-continuous-qbar-constructible-generators",
+    "lem-sfb-admissible-tensor-constructibility"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sfb-continuous-qbar-normalized-sheaf-filtration",
+  "worker": "stage1",
+  "summary": "Q97 reuses the general finite constant-model filtration and scalar finite-free leaf, arbitrary-ring module immersion coherence, and short-exact-sequence triangles. All-continuous Omega coefficients are retained. No new node or statement change is needed. Every cited statement was checked and quoted; all steps are below 2000 characters.",
+  "blueprint": "Proof (1),(2), Integral and rational coefficients: reduction to lisse sheaves on strata; the generator reduction expanded in det-thm-sf-pf-field-tensor proof (1), realized here by finite open-support filtration, normalized immersion extensions and sheaf triangles. The ancestor is taken from the live parent record because its created.item chain ends at a Lean module.",
+  "tool_uses": [
+   {
+    "node": "lem-sfb-alpha-iso",
+    "why": "Cartesian pullback for any condensed ring, with no finite-subextension restriction."
+   },
+   {
+    "node": "lem-sfb-coefficient-heart-locally-closed-extension",
+    "why": "Generic Noetherian immersion geometry and factorization; the assigned unit supplies no alternate geometry theorem."
+   },
+   {
+    "node": "lem-sfb-finite-model-stratum-filtration",
+    "why": "Generic finite constant-model open filtration for any condensed ring; the all-continuous field variant then supplies lisse quotients and normalized derived assembly."
+   },
+   {
+    "node": "lem-sfb-locally-closed-module-extension-coherence",
+    "why": "Arbitrary-ring module extension comparison, with identity normalization for both immersion factorization orders."
+   },
+   {
+    "node": "lem-weil-pbc-proetale-ringed-open-closed",
+    "why": "Arbitrary ring-sheaf localization, its vanishing restrictions and invertible closed counit identify the quotient normalization; this is a generic tool, independent of coefficient finiteness."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sfb-alpha-iso",
+  "lem-sfb-coefficient-heart-locally-closed-extension",
+  "lem-sfb-finite-model-stratum-filtration",
+  "lem-sfb-locally-closed-module-extension-coherence",
+  "lem-weil-pbc-proetale-ringed-open-closed"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q97-ec282c102",
+  "group": "Q97",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q97-ec282c102 (reviewer sub-agent of L); spot-checked: FIX: one fault, C3/E5 in step 4, repaired by rewriting that step; the statement, stmt_deps, uses and proof_deps are unchanged, and no node is dropped. Read in full: the statement is byte-identical to live and side-live, where the item is still unsplit (created 2026-10-22 by Q159); the delivery has no new nodes and no cycle, and the only citer is the parent. The repaired from.node is det-thm-sf-ctf-stability-direct-images, the same one the live parent carries. No SGA. Source: main-20261015 sk-lem-coefficient-heart proof (3), lines 25-31, is this devissage; the item is its all-continuous C(-,Omega) variant with normalization and derived triangles added. det-lem-coefficient-heart-filtration is for E or Qlbar in the blueprint convention, so it is not a duplicate; lem-sfb-finite-model-stratum-filtration is the generic version for any condensed ring and is cited, not restated. Steps: 1 alpha-iso plus the internal-module equivalence and the ringed-site abelian leaf, correct. 2 the stratum filtration node: the Noetherian-space hypothesis comes from the coefficient-heart geometry clause and the constructibility notions match; it gives the chain, the monomorphic counits, an unspecified quotient isomorphism, and qcqs open complements. 3 Omega is a field, so the field clause gives finite free models and def-sfb-lisse (variable ranks, rank 0 allowed) holds. 4 Fault: the old text composed with the step-2 quotient isomorphism, whose normalization the cited node does not state, and the identification of M_{k-1} with v_{k!}w_{k!}w_k^*M needed gamma_{v_k,w_k}, which was left implicit. The rewritten step defines the isomorphism through gamma_{v,w}, exactness of v_!, and the localization unit on V_k (w_k is quasi-compact by step 2); it checks the identity after a_k^* by t^*t_* = 1, t^*w_! = 0 and v^*v_! = 1, then composes the coherence comparisons gamma_{v,t}, gamma_{i,j}^{-1} and the closed comparisons, each of which restricts to the identity under r. The coherence and localization nodes define j_! the same way as def-sfb-module-open-lower-shriek (extension by zero), so step 1 transports the functors legitimately. 5 lem-sf-derived-ses-triangle plus TR1, which includes closure under isomorphism, correct. 6 explicit induction with one triangle per step, correct. Edge cases checked: empty X, M=0, one stratum, open/closed pair, non-reduced X. The off-unit generic nodes in tool_uses are accepted.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.Paper.ContinuousQbarNormalizedSheafFiltration",
+  "declaration": "AlgebraicGeometry.ProEtale.exists_continuousQbar_normalizedLisseSheafFiltration",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.CondensedRing.HasNormalizedLisseSheafFiltration",
+   "AlgebraicGeometry.ProEtale.exists_continuousQbar_normalizedLisseSheafFiltration"
+  ],
+  "file": "lean/Sheaf/Paper/ContinuousQbarNormalizedSheafFiltration.lean",
+  "statement": "theorem exists_continuousQbar_normalizedLisseSheafFiltration (ℓ : ℕ) [Fact ℓ.Prime] (Ω : Type u) [NormedField Ω] [NormedAlgebra ℚ_[ℓ] Ω] [IsAlgClosure ℚ_[ℓ] Ω] (X : Scheme.{u}) [IsNoetherian X] (M : Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) (condensedRingObj (Profinite.continuousCoefficientRingObj Ω) X)) (hM : IsConstantModelConstructible (Profinite.continuousCoefficientRingObj Ω) X M) : CondensedRing.HasNormalizedLisseSheafFiltration (Profinite.continuousCoefficientRingObj Ω) X M ∧ (IsZero M → IsZero ((DerivedCategory.singleFunctor _ 0).obj M))",
+  "branch": "newtargets-dag",
+  "by": "Q94",
+  "date": "2026-10-22",
+  "existing": false,
+  "note": "The owning-node helper predicate spells out the witnesses, canonical cokernel projection, restriction normalization for every open-then-closed factorization, and actual short-exact-sequence triangles. The zero-module empty construction is stated separately as vanishing of its degree-zero derived object, so nonempty X is not required to have an empty geometric stratification."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-f1c965b13",
+  "group": "Q94",
+  "result": "pass",
+  "note": "First delivery; live node differs only in lean; lean.statement verbatim in file. Clause-by-clause: Omega via NormedField+NormedAlgebra Q_l+IsAlgClosure (unique extended norm, no extra hyps); Lambda = continuousCoefficientRingObj (rfl alias of recorded continuousMapRingObjOfUniverse, advisory); actual ProEt Mod category; IsNoetherian; IsConstantModelConstructible. Predicate: Fin(r+1) monotone opens bot..top, reduced closed strata with exact range, IsLisseCoefficientModule of t^*v^*M, mono counits, zero/iso endpoints, d pinned by counit equation (unique), q pinned by pi = v_!(t-unit) (unique), immersion/qc/IsConstructible of a_k plus factorization existence, b pinned by a^*(pi) (unique), for EVERY open-closed factorization qc j and e normalized via upperStarCongr/Comp/closed counit = b then open unit (unique), ShortExact + singleTriangle in distTriang. M=0 conjunct trivially true but faithful to node clause; X=empty allows r=0. Docstrings/source/blueprint/proof plan present, sorry only, no duplicate (rg). Advisories: openFiltration* helpers owned by non-stmt_dep theorem module (transparent composites of stmt_dep functors); Mathlib Dimension/PID plain imports. No compile (no file changed)."
+ }
+}

@@ -1,0 +1,134 @@
+{
+ "id": "lem-sf-native-weil-hom-closed-structure",
+ "kind": "statement",
+ "title": "Closed structure for native derived internal Hom",
+ "statement": "Under the finite-type, quasi-compact, separated hypotheses on X and for NativeClosedHomModels M, there exists a CoefficientClosedStructure on M.weilHom. Its tensor--Hom adjunction is the action-site tensor transported through the native row-sign Hom model.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-package/cor-coef-verdier-weil-equivariance.proof.md",
+  "place": "Internal-Hom comparison and transposition paragraph; native tensor lift steps 1--2."
+ },
+ "stmt_deps": [
+  "def-sf-native-weil-closed-models"
+ ],
+ "proof": [
+  {
+   "text": "Obtain the additive ringed-site presentation of the native abelian Weil category and its natural underived internal-Hom comparison. No data from this existence statement is stored in a definition: eliminate its witnesses inside the proof of Nonempty.",
+   "uses": [
+    "lem-sf-native-weil-ringed-presentation"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Normalize the native row-sign product-Hom projections by (-1)^(np), retaining the native complex bifunctor itself. Apply the projection-based Hom complex comparison to the additive equivalence and the underived Hom isomorphism. The ringed target map equation follows from homComplexFunctor_map_f_π.",
+   "uses": [
+    "def-sf-standard-bifunctor-hom-model",
+    "lem-sf-ringed-hom-complex-comparison"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use the given native K-injective representatives and the canonically normalized ringed representatives. Their naturality identifies both chain bifunctors on K-injective representatives. Descend the chain isomorphism along the two-variable K-injective localization to obtain an isomorphism of derived internal-Hom bifunctors.",
+   "uses": [
+    "def-sf-native-weil-closed-models",
+    "def-sf-ringed-two-injective-models",
+    "lem-sf-kinjective-hom-comparison-descent"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Take the existing ringed derived closed symmetric monoidal structure. Transport its monoidal category through the derived equivalence. Compose full-faithfulness, the derived Hom isomorphism, the ringed tensor-Hom equivalence and the monoidal tensorator to obtain the native currying equivalence. Its inverse is natural in all three variables by the ringed evaluation naturality and tensorator naturality. Build the native adjunctions from these equivalences and deduce source-parameter evaluation naturality by applying the same identity to identities. This constructs all fields of CoefficientClosedStructure M.weilHom.",
+   "uses": [
+    "lem-sf-ringed-derived-closed-symmetric-monoidal"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-sf-native-weil-closed-models",
+  "def-sf-ringed-two-injective-models",
+  "def-sf-standard-bifunctor-hom-model",
+  "lem-sf-kinjective-hom-comparison-descent",
+  "lem-sf-native-weil-ringed-presentation",
+  "lem-sf-ringed-derived-closed-symmetric-monoidal",
+  "lem-sf-ringed-hom-complex-comparison"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-package/cor-coef-verdier-weil-equivariance.proof.md",
+  "place": "A6: underived presentation, signed product comparison, K-injective localization descent, and explicit currying-based transport of the closed structure."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "CoefficientClosedStructure existence from native derived Hom model",
+   "results": "Eight hits concerned model-category cofibrant objects and derivability structures; none stated a closed structure for the native derived Hom model.",
+   "date": "2026-10-27",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CoefficientClosedStructure, IsRightAdjoint",
+   "results": "0 hits; Loogle reported unknown identifier CoefficientClosedStructure because it is project-local.",
+   "date": "2026-10-27",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "CoefficientClosedStructure|NativeClosedHomModels",
+   "results": "0 hits in the Mathlib source; these are project-local interfaces.",
+   "date": "2026-10-27",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.NativeWeilHomRightAdjoint",
+  "date": "2026-10-27",
+  "group": "E5"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sf-native-weil-hom-right-adjoint",
+   "place": "Proof step 1 and step 2: action-site tensor--Hom construction and native model identification.",
+   "via": [
+    "lem-sf-native-weil-hom-right-adjoint"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.NativeWeilHomClosedStructure",
+  "file": "lean/Sheaf/Paper/NativeWeilHomClosedStructure.lean",
+  "declaration": "AlgebraicGeometry.ProEtaleWeilSheaf.native_weil_hom_closed_structure",
+  "statement": "theorem native_weil_hom_closed_structure [LocallyOfFiniteType (X ↘ Spec (CommRingCat.of k₀))] [QuasiCompact (X ↘ Spec (CommRingCat.of k₀))] [IsSeparated (X ↘ Spec (CommRingCat.of k₀))] (M : NativeClosedHomModels k₀ l X) : Nonempty (CoefficientClosedStructure M.weilHom)",
+  "branch": "sheaf-dag",
+  "by": "E5",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E5",
+  "result": "pass",
+  "landing": "20261027T012822-L-2335606",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A6",
+  "result": "pass",
+  "landing": "20261027T021256-L-2751986",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

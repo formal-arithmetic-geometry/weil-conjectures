@@ -1,0 +1,213 @@
+{
+ "id": "lem-sfb-scalar-counit-flat-pullback",
+ "kind": "statement",
+ "title": "Flatness of the scalar counit after pullback from the point",
+ "statement": "Let $\\Gamma$ be a commutative condensed ring [sk-def-sfb-condensed-ring], and let $R=\\Gamma(*)$. Let $\\epsilon:\\underline R\\to\\Gamma$ be the counit of the constant-sheaf/evaluation adjunction on profinite sets [def-weil-pbc-constant-sheaf]. Assume extension of scalars along $\\epsilon$ preserves finite limits on all internal $\\underline R$-modules [def-sfb-modobj-extension]. For every scheme $W$, pull back from the point [sk-def-sfb-pullback-from-point]. Then the regular module of $\\Gamma_W$, restricted along the canonical scalar map $\\underline R_W\\to\\Gamma_W$ [det-def-sfb-constructible-local-model], is flat, meaning that both relative tensor functors preserve finite limits and finite colimits [def-pc-flat-sheaf-modules].",
+ "stmt_deps": [
+  "sk-def-sfb-condensed-ring",
+  "def-weil-pbc-constant-sheaf",
+  "def-sfb-modobj-extension",
+  "sk-def-sfb-pullback-from-point",
+  "det-def-sfb-constructible-local-model",
+  "def-pc-flat-sheaf-modules"
+ ],
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tag 05VD, lemma-pullback-flat; Tag 03ER, definition-flat, applied to the scalar counit"
+ },
+ "proof": [
+  {
+   "text": "Write N = Res_ε Γ. The extension/forgetful tensor comparison identifies extension along ε followed by forgetting with tensoring by N followed by forgetting. The forgetful functor preserves and reflects finite limits, hence tensoring by N preserves finite limits. Tensor is right exact and symmetric, so N is internally flat.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Apply the internal/section-module tensor equivalence to N. Its hypotheses hold for the profinite site with coefficient universe u+1. This yields a flat section module.",
+   "uses": [
+    "lem-c2-internal-section-module-flatness"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Pull back the resulting flat module first from the profinite site to Spec Z and then along W → Spec Z. Use the sheafified left Kan inverse images and their right adjoints in the point-pullback construction. Their algebraic lifts transport the ring and module operations; apply flat ringed-topos pullback with identity change of rings at both stages.",
+   "uses": [
+    "lem-weil-pbc-ringed-topos-flat-module-pullback",
+    "sk-def-sfb-pullback-from-point"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The constant-module inverse-image comparison identifies the pulled-back scalar ring with the scalarConstant ring. The natural mapModComapIso for ε and the regular-module monoidal comparison identify the pulled-back module with Res_(scalarCoefficientHom Γ W) Γ_W. By definition the latter scalar map is the pullback of ε. Transfer flatness back through the internal/section equivalence and along the comparison isomorphisms. Empty schemes and zero rings require no special hypothesis.",
+   "uses": [
+    "lem-c2-internal-section-module-flatness",
+    "lem-sfb-geometric-inverse-image-constant-module"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-c2-internal-section-module-flatness",
+  "lem-weil-pbc-ringed-topos-flat-module-pullback",
+  "sk-def-sfb-pullback-from-point",
+  "lem-sfb-geometric-inverse-image-constant-module"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tag 05VD specialized to the constant-scalar counit; compatibility with the point-pullback construction"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Inverse image of a flat algebra over a constant ring sheaf is flat over the pulled back constant ring; canonical scalar counit map on the proetale site",
+   "results": {
+    "t": "2026-10-25T19:09:39Z",
+    "tool": "leanfinder",
+    "query": "Inverse image of a flat algebra over a constant ring sheaf is flat over the pulled back constant ring; canonical scalar counit map on the proetale site",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "AlgebraicGeometry.Flat.instHasRingHomPropertyFlat",
+     "AlgebraicGeometry.Flat.flat_appLE",
+     "AlgebraicGeometry.Scheme.Hom.flat_appLE",
+     "Algebra.FormallyUnramified.flat_of_restrictScalars",
+     "Algebra.Smooth.flat",
+     "AlgebraicGeometry.Flat.stalkMap",
+     "AlgebraicGeometry.flat_iff",
+     "AlgebraicGeometry.Flat"
+    ],
+    "digest": "da7c4cd2c1b0b1e1"
+   },
+   "date": "2026-10-26",
+   "verdict": "No matching internal scalar-counit pullback theorem. The hits concern scheme-flat morphisms or the definition of module pullback; local library search found the general ringed-topos theorem but its algebraic inverse-image presentation still has to be constructed."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The inverse image of a flat sheaf of modules along a morphism of ringed topoi is flat",
+   "results": {
+    "t": "2026-10-25T19:11:39Z",
+    "tool": "leansearch",
+    "query": "The inverse image of a flat sheaf of modules along a morphism of ringed topoi is flat",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "SheafOfModules.pullback",
+     "SheafOfModules.pullbackObjFreeIso.congr_simp",
+     "AlgebraicGeometry.Scheme.Modules.pullback",
+     "SheafOfModules.pullbackObjFreeIso_hom_naturality",
+     "SheafOfModules.pullbackPushforwardAdjunction",
+     "SheafOfModules.pullbackObjFreeIso_hom_naturality_assoc",
+     "AlgebraicGeometry.Flat.stalkMap",
+     "SheafOfModules.pullbackObjFreeIso"
+    ],
+    "digest": "e9c18a7c62a73f0c"
+   },
+   "date": "2026-10-26",
+   "verdict": "No matching internal scalar-counit pullback theorem. The hits concern scheme-flat morphisms or the definition of module pullback; local library search found the general ringed-topos theorem but its algebraic inverse-image presentation still has to be constructed."
+  },
+  {
+   "tool": "grep",
+   "query": "scalarCoefficientHom.*flat|flat.*scalarCoefficientHom|counit.*flat",
+   "results": {
+    "t": "2026-10-25T19:09:38Z",
+    "tool": "grep",
+    "query": "scalarCoefficientHom.*flat|flat.*scalarCoefficientHom|counit.*flat",
+    "sub": "",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-26",
+   "verdict": "No matching internal scalar-counit pullback theorem. The hits concern scheme-flat morphisms or the definition of module pullback; local library search found the general ringed-topos theorem but its algebraic inverse-image presentation still has to be constructed."
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules.pullback",
+   "results": {
+    "t": "2026-10-25T19:51:56Z",
+    "tool": "loogle",
+    "query": "SheafOfModules.pullback",
+    "sub": "",
+    "ok": true,
+    "n_hits": 12,
+    "note": "",
+    "top": [
+     "SheafOfModules.pullbackId",
+     "SheafOfModules.pullback",
+     "SheafOfModules.instIsLeftAdjointPullback",
+     "SheafOfModules.pullbackPushforwardAdjunction",
+     "SheafOfModules.pullbackComp",
+     "SheafOfModules.pullback_comp_id",
+     "SheafOfModules.pullback_id_comp",
+     "SheafOfModules.pullbackIso"
+    ],
+    "digest": "646c13e3272a1a2c"
+   },
+   "date": "2026-10-26",
+   "verdict": "The pullback definition, its adjunction, identity/composition and sheafification comparisons are present. None states flatness or the canonical internal scalar-counit comparison."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.AdmissibleScalarModelCohomology",
+  "date": "2026-10-26",
+  "group": "K9"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-prop-scalar-six",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-prop-scalar-six-ctf",
+   "place": "Proof paragraph (2), exactness of scalar realization for the integral coefficient: preservation of flatness under pullback from the point",
+   "via": [
+    "lem-sfb-admissible-scalar-model-cohomology"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.ScalarCounitFlatPullback",
+  "file": "lean/Sheaf/Paper/ScalarCounitFlatPullback.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.scalarCounit_flat_pullback",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.pointScalarCounit",
+   "AlgebraicGeometry.ProEtale.pointScalarCounit_isMonHom",
+   "AlgebraicGeometry.ProEtale.pointScalarCounit_source_comm",
+   "AlgebraicGeometry.ProEtale.scalarCounit_flat_pullback"
+  ],
+  "statement": "theorem scalarCounit_flat_pullback\n    (Γ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Γ] [IsCommMonObj Γ]\n    (h : PreservesFiniteLimits (Mod.extendScalars (pointScalarCounit Γ)))\n    (W : Scheme.{u}) :\n    ObjectProperty.flat\n      ((Mod.comap (scalarCoefficientHom Γ W)).obj\n        (Mod.regular (condensedRingObj Γ W)))",
+  "branch": "sheaf-dag",
+  "by": "K9",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K9",
+  "result": "pass",
+  "landing": "20261025T202433-L-2718278",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K9",
+  "result": "pass",
+  "landing": "20261025T202433-L-2718278",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

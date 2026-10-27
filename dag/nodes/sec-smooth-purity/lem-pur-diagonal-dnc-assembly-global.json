@@ -1,0 +1,136 @@
+{
+ "id": "lem-pur-diagonal-dnc-assembly-global",
+ "kind": "statement",
+ "title": "Global assembly of the specified diagonal orientation",
+ "statement": "Fix the finite coefficient datum P of [def-pur-conventions]. For separated finite-type k-schemes X,Y and a smooth separated finite-type f:X->Y of pure dimension d, let theta_f be the specified pro-etale diagonal orientation [thm-pur-diagonal-dualizing-object]. Let alpha_f be the specified diagonal base-change comparison, delta_f the unique family-normalized DNC comparison, and beta_f the normal zero-section restriction of the specified ordinary diagonal orientation with its fixed Tate pullback transport t [def-pur-diagonal-dnc-chart-data, thm-pur-dnc-invariance, lem-pur-diagonal-dnc-chart-normalization]. Then theta_f = beta_f delta_f alpha_f^-1, as actual isomorphisms omega_f~A_X(d)[2d], without affine hypotheses on X or Y. In the published Lean names, diagonalDualizingObject P d f aY = chartDiagonalAssembly P d f aY t. The factors here are the specified ones: the statement quantifies no alternative trace, DNC comparison or adjoint transpose. It includes d=0, disconnected schemes and empty schemes.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-orientation/thm-pur-diagonal-dualizing-object.proof.md",
+  "place": "Steps 1--2 and combining paragraph; affine chart normalization and restriction paragraph"
+ },
+ "stmt_deps": [
+  "def-pur-conventions",
+  "thm-pur-diagonal-dualizing-object",
+  "def-pur-diagonal-dnc-chart-data",
+  "thm-pur-dnc-invariance",
+  "lem-pur-diagonal-dnc-chart-normalization"
+ ],
+ "proof": [
+  {
+   "text": "Choose affine target opens V and affine source opens U lying over them. Diagonal-section pasting identifies the restricted alpha with alpha_h. The family-normalization characterization of DNC and etale localization identify the restricted delta with delta_h. Vector purity, its base-change equation, and the specified finite site comparison identify the restricted beta with beta_h. Consequently each restricted three-factor assembly is the chart assembly.",
+   "uses": [
+    "lem-pur-diagonal-section-pasting",
+    "thm-pur-dnc-invariance",
+    "cor-pur-vector-bundle-purity",
+    "lem-pur-vector-integration-site-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-orientation/thm-pur-diagonal-dualizing-object.proof.md",
+    "place": "Steps 1--2 and combining paragraph; affine chart normalization and restriction paragraph"
+   }
+  },
+  {
+   "text": "Apply diagonal_dnc_chart_normalization on every affine pair U,V. After the common shift by -2d both objects are identified with a degree-zero Tate line. The degree-zero derived-map equality test gives equality globally; shifting back gives the claimed equality of isomorphisms. The rank-zero and empty-cover clauses are retained.",
+   "uses": [
+    "lem-pur-diagonal-dnc-chart-normalization",
+    "lem-pur-degree-zero-derived-map-gluing"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-orientation/thm-pur-diagonal-dualizing-object.proof.md",
+    "place": "Steps 1--2 and combining paragraph; affine chart normalization and restriction paragraph"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-pur-diagonal-section-pasting",
+  "thm-pur-dnc-invariance",
+  "cor-pur-vector-bundle-purity",
+  "lem-pur-vector-integration-site-comparison",
+  "lem-pur-diagonal-dnc-chart-normalization",
+  "lem-pur-degree-zero-derived-map-gluing"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-orientation/thm-pur-diagonal-dualizing-object.proof.md",
+  "place": "Steps 1--2 and combining paragraph; affine chart normalization and restriction paragraph"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A smooth diagonal orientation obtained by gluing affine chart DNC assemblies equals the global three-factor assembly",
+   "results": "Eight hits about smooth manifolds and scheme gluing, including AlgebraicGeometry.IsImmersion.instDiagonalScheme (Mathlib.AlgebraicGeometry.Morphisms.Immersion), CategoryTheory.GlueData.diagram (Mathlib.CategoryTheory.GlueData), and AlgebraicGeometry.Scheme.GlueData.glue_condition (Mathlib.AlgebraicGeometry.Gluing). None identifies a derived etale diagonal orientation with a DNC assembly.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A smooth diagonal orientation obtained by gluing affine chart DNC assemblies equals the global three-factor assembly",
+   "results": "Eight manifold and metric-space gluing hits, including Diffeomorph.sumAssoc and GromovHausdorff.auxGluing; none is a derived etale diagonal assembly theorem.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"sectionInvariant\"",
+   "results": "No hits.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "chartDiagonalAssembly|chartSectionOrientation",
+   "results": "No Mathlib hits. The library chart assembly theorem has IsAffine hypotheses on both schemes, so it cannot be applied directly on this global domain.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.DiagonalOrientationChoiceIndependent",
+  "date": "2026-10-24",
+  "group": "S2"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-thm-smooth-purity",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pur-diagonal-orientation-choice-independent",
+   "place": "Steps 1--2 and combining paragraph; affine chart normalization and restriction paragraph",
+   "via": []
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.DiagonalDncAssemblyGlobal",
+  "file": "lean/Sheaf/Paper/DiagonalDncAssemblyGlobal.lean",
+  "declaration": "WeilConjectures.PurityFiniteSetting.diagonalDncAssemblyGlobal",
+  "statement": "theorem diagonalDncAssemblyGlobal (P : PurityFiniteSetting.{u})\n    {X Y : Scheme.{u}} (d : ℕ) (f : X ⟶ Y)\n    [IsSeparated f] [LocallyOfFiniteType f] [QuasiCompact f]\n    [SmoothOfRelativeDimension d f]\n    (aY : Y ⟶ Spec (.of P.field.k)) [IsSeparated aY]\n    [LocallyOfFiniteType aY] [QuasiCompact aY]\n    (t : Etale.OrdinaryFiniteTwistTransport P.Coefficient P.diagonalExponent\n      P.diagonalExponent_annihilates) :\n    P.diagonalDualizingObject d f aY = P.chartDiagonalAssembly d f aY t",
+  "branch": "sheaf-dag",
+  "by": "S2",
+  "date": "2026-10-24"
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S2",
+  "result": "pass",
+  "landing": "20261024T191000-L-200798",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S2",
+  "result": "pass",
+  "landing": "20261024T191000-L-200798",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

@@ -1,0 +1,131 @@
+{
+ "id": "lem-sf-integral-support-counit-projection",
+ "kind": "lemma",
+ "title": "Finite projection for a counit-normalized primitive open/proper comparison",
+ "statement": "Fix D, l different from its characteristic, E, system operations o and ambient models a. Let f:U→V be a separated finite-type morphism over D.k with a fixed compactification c=(j,p), where j is quasi-compact, and U,V are finite type over D.k. Let M be a good strict system on U, with J_j M and S_p J_j M good on their schemes. Let H be an integral object, b:L(M)≅H and rho:M≅R(H), with R(b) followed by rho inverse equal to the actual counit at M. At each finite coefficient level n+1 the scalar reduction of the primitive comparison pushComparison(J_j M) followed by p_* of (openRealization(M) followed by j_!(b)) has the prescribed projection: compose with finiteReductionIso inverse, the actual coefficient compact-support comparison, finiteImageIso and the input finiteReductionIso, obtaining inverse reductionEvaluation at L(S_p J_j M), evaluation of the actual counit at S_p J_j M, supportEvaluation at M, then finite compact support of (evaluation of rho followed by reductionEvaluation at H). These are the exact arrows and order in the attached Lean statement. There are no expression trees or canonical-pair hypotheses.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-compatibility/fix-prop-coherence.proof.md",
+  "place": "Coefficient comparisons and inherited equations, expanded strict-system realization argument."
+ },
+ "stmt_deps": [
+  "def-sf-integral-realization-assembly-data",
+  "def-pur-integral-compact-support-coefficient-data"
+ ],
+ "proof": [
+  {
+   "text": "Transport Good through rho and through its open and proper images, retaining origins by composition of their evaluation isomorphisms and checking transitionSquare by naturality of the actual transition. The general domain_of_realization lemma gives integral constructibility of H from b and Good(M). Apply integralSupportTowerNormalization, the compactification component of integralBasicRealization, to H on this basicSupportDomain.",
+   "uses": [
+    "lem-sf-short-word-integral-domain",
+    "lem-sf-integral-support-tower-normalization",
+    "lem-weil-proetale-dbc-triangulated"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Precompose the open-comparison identity by the invertible L(J(epsilon_M)) and postcompose by the invertible reconstruction unit at j_! H. openNormalization, naturality of the unit and of openReduction, and epsilon_M rho = R(b) identify openRealization_M j_!(b) with L(J(rho)) L(openReduction_H) inverse(unit). Naturality of the proper comparison then identifies L(SJ(rho)) followed by the direct comparison d_H with the displayed primitive comparison followed by sfQcqsCompactSupportRealization_H.",
+   "uses": [
+    "lem-pod-unrestricted-normalized-reconstruction",
+    "def-sf-integral-realization-assembly-data"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use SfQcqsCompactSupportRealizationSpec to replace exactly the four finiteReductionIso/comparison/finiteImageIso/input finiteReductionIso factors by scalar reduction of the prescribed compact-support realization followed by its finite reduction isomorphism. Substitute the previous comparison identity and the scalar-adjunction projection of d_H. counit_projection and homEquiv_naturality_right evaluate its adjunct as inverse reductionEvaluation followed by evaluation of the actual counit. This composite is a natural transformation. Its naturality at SJ(rho), followed by supportEvaluation naturality at rho, gives the stated equation. This keeps the finite comparison factors and all actual quotient maps.",
+   "uses": [
+    "def-weil-integral-rational-qbar-compact-support",
+    "lem-coef-derived-system-evaluation-calculus",
+    "lem-sf-integral-support-tower-normalization"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sf-short-word-integral-domain",
+  "lem-sf-integral-support-tower-normalization",
+  "lem-weil-proetale-dbc-triangulated",
+  "lem-pod-unrestricted-normalized-reconstruction",
+  "def-sf-integral-realization-assembly-data",
+  "def-weil-integral-rational-qbar-compact-support",
+  "lem-coef-derived-system-evaluation-calculus"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-compatibility/fix-prop-coherence.proof.md",
+  "place": "Repair D1: direct compactification comparison and explicit finiteReductionIso/finiteImageIso transport."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Finite coefficient projection of an integral compact support open proper realization normalized by an adjunction counit",
+   "results": "CategoryTheory.Adjunction.functorialityCounit and module scalar adjunction counits; no integral compact-support projection theorem.",
+   "date": "2026-10-26",
+   "verdict": "No exact match; use project primitives and adjunction naturality."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Adjunction.homEquiv_naturality_right_square_iff\"",
+   "results": "CategoryTheory.Adjunction.homEquiv_naturality_right_square_iff in Mathlib.CategoryTheory.Adjunction.Basic; a general transpose-square equivalence.",
+   "date": "2026-10-26",
+   "verdict": "Provides formal mate calculus, not the normalized geometric generator comparisons."
+  },
+  {
+   "tool": "grep",
+   "query": "realization.*expression|compactSupport.*projection|support.*counit in Mathlib/CategoryTheory/Adjunction and Mathlib/AlgebraicGeometry",
+   "results": "No matches. Basic.lean contains counit naturality and homEquiv_naturality_right_square_iff; no coefficient-system constructions.",
+   "date": "2026-10-26",
+   "verdict": "No exact match."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.SixFunctors.IntegralExpressionCoefficientSquares",
+  "date": "2026-10-26",
+  "group": "T1"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-thm-sf-compatibility",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "fix-prop-coherence",
+   "place": "Coefficient-comparison sentence, single compactification and scalar-adjunction projection, before recursive substitution.",
+   "via": [
+    "lem-sf-integral-expression-coefficient-squares",
+    "lem-sf-integral-compactification-system-realization"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.SixFunctors.IntegralSupportCounitProjection",
+  "file": "lean/Sheaf/SixFunctors/IntegralSupportCounitProjection.lean",
+  "declaration": "WeilConjectures.IntegralSystemRealization.integralSupportCounitProjection",
+  "statement": "theorem integralSupportCounitProjection (D : FiniteFieldDatum.{u}) (hl : l ≠ D.p)\n    (o : Operations l E) (a : AmbientModels l E o)\n    {U V : Over (Spec (CommRingCat.of D.k))}\n    (f : U ⟶ V) (c : Compactification f.left)\n    (hU : LocallyOfFiniteType U.hom ∧ QuasiCompact U.hom)\n    (hV : LocallyOfFiniteType V.hom ∧ QuasiCompact V.hom)\n    (hf : IsSeparated f.left ∧ LocallyOfFiniteType f.left ∧ QuasiCompact f.left)\n    (hq : QuasiCompact c.i)\n    (M : System l E U.left) (hM : Good l E U.left M)\n    (hJ : Good l E c.Z ((Operations.shriek l E o c.i).obj M))\n    (hF : Good l E V.left\n      ((Operations.push l E o c.g).obj ((Operations.shriek l E o c.i).obj M)))\n    (H : Integral l E U.left)\n    (b : (coefficientSequenceLimit l E U.left).obj M ≅ H)\n    (rho : M ≅ (calculus l E U.left).reduction.obj H)\n    (normalization : (calculus l E U.left).reduction.map b.hom ≫ rho.inv =\n      (calculus l E U.left).adjunction.counit.app M) (n : ℕ) :\n    (scalarReductionDerivedExtension l E V.left n).map\n      ((a.realizationModel.push l E c.g).hom.app\n          ((Operations.shriek l E o c.i).obj M) ≫\n        (ringedPush l E c.g).map\n          ((a.openRealization c.i hq M hM hJ).hom ≫\n            (ringedOpen l E c.i).map b.hom)) ≫\n      (PurCompactSupport.finiteReductionIso l E V.left n).inv.app\n        ((PurCompactSupport.image (PurCompactSupport.completed l E) c).obj H) ≫\n      (PurCompactSupport.comparison (PurCompactSupport.reduction l E (n + 1)\n        (Nat.le_add_left 1 n)) c).app H ≫\n      (PurCompactSupport.finiteImageIso l E n c).hom.app\n        ((pbcDerivedExtend (PurCompactSupport.projection l E (n + 1)\n          (Nat.le_add_left 1 n) U.left)).obj H) ≫\n      (sfAmbientCompactSupportCandidate (Padic.coefficientExtensionRing l E (n + 1)) c).map\n        ((PurCompactSupport.finiteReductionIso l E U.left n).hom.app H) =\n    ((calculus l E V.left).reductionEvaluation n).inv.app\n      ((coefficientSequenceLimit l E V.left).obj\n        ((Operations.push l E o c.g).obj ((Operations.shriek l E o c.i).obj M))) ≫\n      (coefficientSequenceDerivedEvaluation l E V.left n).map\n        ((calculus l E V.left).adjunction.counit.app\n          ((Operations.push l E o c.g).obj ((Operations.shriek l E o c.i).obj M))) ≫\n      (supportEvaluation l E o c n).hom.app M ≫\n      (sfAmbientCompactSupportCandidate (Padic.coefficientExtensionRing l E (n + 1)) c).map\n        ((coefficientSequenceDerivedEvaluation l E U.left n).map rho.hom ≫\n          ((calculus l E U.left).reductionEvaluation n).hom.app H)",
+  "branch": "sheaf-dag",
+  "by": "T1",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T1",
+  "result": "pass",
+  "landing": "20261026T201551-L-3394761",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T1",
+  "result": "pass",
+  "landing": "20261026T201551-L-3394761",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

@@ -1,0 +1,365 @@
+{
+ "id": "lem-sfb-trait-normalization-group-structure",
+ "kind": "statement",
+ "title": "Group operations on a finite normalization over a trait",
+ "statement": "Let $V$ be a discrete valuation ring [def-sc-discrete-valuation-ring] with fraction field $L$ and residue field $k$. Let $G\\to\\operatorname{Spec}V$ be flat, separated and of finite type [def-weil-flat-morphism, def-weil-proper-morphism, def-weil-finite-type-morphism], equipped with multiplication $m:G\\times_VG\\to G$, identity $e:\\operatorname{Spec}V\\to G$, and inverse $i:G\\to G$ satisfying the associativity, unit and inverse diagrams. Let $j:H=G_{\\mathrm{red}}\\to G$ be the reduction [def-weil-pbc-scheme-reduction] and let $\\nu:N\\to H$ be the componentwise normalization [def-weil-pbc-reduced-normalization]. Assume that $H$ and $N$ are flat, separated and of finite type over $V$, that $\\nu$ is finite [def-weil-finite-integral-morphism], that $H_L$ is geometrically reduced, and that $N_k$ is geometrically reduced. Geometrically reduced means reduced after every extension of the indicated field, and reduced means having no nonzero nilpotent local sections. The fibres and products are those of [def-pc-base-change]. Then $H$ has a unique $V$-group-scheme structure for which $j$ is a group homomorphism. The map $\\nu_L:N_L\\to H_L$ is an isomorphism, and $N$ has a unique $V$-group-scheme structure for which $\\nu$ is a homomorphism and $\\nu_L$ identifies the generic-fibre group structures. A homomorphism here is a morphism commuting with multiplication, identity and inverse. No affineness or connectedness assumption on $G$, and no henselianity, completeness, excellence or perfect-residue-field assumption on $V$, is imposed.",
+ "source": {
+  "document": "literature/prasad-yu-on-quasi-reductive-group-schemes.pdf",
+  "place": "WANTED locally; read online https://math.stanford.edu/~conrad/papers/qrg.pdf, Appendix Corollary A.4 proof, printed p.29: reduction subgroup, normality of the product, lifting group law and identity. Normalization universal property: Stacks Tag 035Q, morphisms.tex, lemma-normalization-normal; geometric reduced group smoothness: Tags 047N and 047P, groupoids.tex."
+ },
+ "stmt_deps": [
+  "def-sc-discrete-valuation-ring",
+  "def-weil-flat-morphism",
+  "def-weil-proper-morphism",
+  "def-weil-finite-type-morphism",
+  "def-weil-pbc-scheme-reduction",
+  "def-weil-pbc-reduced-normalization",
+  "def-weil-finite-integral-morphism",
+  "def-pc-base-change"
+ ],
+ "proof": [
+  {
+   "text": "Write $S=\\operatorname{Spec}V$ and choose a uniformizer $\\pi$. The DVR $V$ is Noetherian, since every ideal is principal. Finite-type schemes over $S$, in particular $H,N$ and their finite fibre powers, are Noetherian by [lem-weil-pbc-finite-type-over-noetherian, lem-sfb-finite-type-composition-base-change]. Their product structure maps are flat: the projections are flat by [lem-weil-pbc-flat-morphism-base-change], and composition is flat on stalks by [lem-weil-pbc-flat-ring-map-comp]. On an affine open of any such flat scheme $X$, its coordinate algebra $A$ is $V$-flat by [lem-weil-pbc-flat-morphism-affine-criterion]. Tensoring the injection $V\\xrightarrow{\\pi}V$ with $A$ makes multiplication by $\\pi$ injective. The localization zero criterion therefore gives $A\\hookrightarrow A[1/\\pi]$. In particular, if $X_L$ is reduced then $X$ is reduced: a nilpotent section has zero image in this injective localization. Also $X_L$ is schematically dense in $X$, because the kernel of restriction of the structure sheaf to $X_L$ is zero on this affine cover.",
+   "uses": [
+    "def-sc-discrete-valuation-ring",
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "lem-sfb-finite-type-composition-base-change",
+    "lem-weil-pbc-flat-morphism-base-change",
+    "lem-weil-pbc-flat-ring-map-comp",
+    "lem-weil-pbc-flat-morphism-affine-criterion",
+    "def-weil-pbc-flat-ring-map",
+    "def-weil-pbc-module-localization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/prasad-yu-on-quasi-reductive-group-schemes.pdf",
+    "place": "Appendix A.4 proof, first and third sentences: flat reduction and flat product; elementary uniformizer argument supplied explicitly. Stacks Tags 01T6, 01T3, 01T4, 01U5, 00HC, 00HB and 07JZ."
+   }
+  },
+  {
+   "text": "The product $H_L\\times_LH_L$ is reduced by [lem-sfb-flat-geometrically-reduced-pullback], applied over $\\operatorname{Spec}L$ with second factor the geometrically reduced $H_L$ and first factor the reduced Noetherian $H_L$. A module over a field is flat, so the flatness hypothesis holds. Thus step 1 makes $H\\times_SH$ reduced. The source $H$ itself is reduced by its definition, and $S$ is reduced since $V$ is a domain. Apply [lem-weil-pbc-reduced-source-factors-through-closed-subscheme] to the three maps $m\\circ(j\\times j)$, $i\\circ j$, and $e$. They factor through $j:H\\to G$, giving $m_H,i_H,e_H$. A closed immersion is a monomorphism: on affine charts its ring map is surjective, so two maps through it agreeing in $G$ agree in $H$. After composing the associativity, unit and inverse diagrams with $j$ they are the given diagrams for $G$. Monicity proves all diagrams for $H$ and uniqueness of these three operations. Thus $j$ is a homomorphism.",
+   "uses": [
+    "lem-sfb-flat-geometrically-reduced-pullback",
+    "lem-weil-pbc-reduced-source-factors-through-closed-subscheme",
+    "def-weil-pbc-scheme-reduction",
+    "def-weil-closed-immersion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/prasad-yu-on-quasi-reductive-group-schemes.pdf",
+    "place": "Appendix Corollary A.4 proof, first paragraph: the reduced product and reduced subgroup; Stacks Tag 0356, schemes.tex, lemma-map-into-reduction."
+   }
+  },
+  {
+   "text": "The finite-type $L$-group $H_L$ is geometrically reduced by hypothesis, hence smooth by [lem-sfb-geometrically-reduced-group-smooth]. It is normal by [lem-sfb-smooth-normal-ascent], since a field is integrally closed. The inclusion $H_L\\hookrightarrow H$ is the open $D(\\pi)$ and is smooth: apply [lem-pc-open-immersion-smooth-composition] with the smooth identity of $H$. Hence [lem-sfb-componentwise-normalization-smooth-pullback] identifies $N_L\\to H_L$ with the componentwise normalization of $H_L$. For any normal scheme $Y$ with locally finite components its normalization is an isomorphism: [lem-sfb-component-dominant-normalization-lift] applied to $\\operatorname{id}_Y$ gives a section $s$ of $\\nu_Y$. The same lemma applied to $\\nu_Y$ says $s\\nu_Y=\\operatorname{id}$, using normality and the component bijection supplied by [lem-sfb-componentwise-normalization-generic-properties]. Apply this to $Y=H_L$. We obtain the asserted isomorphism $\\nu_L:N_L\\simeq H_L$, and give $N_L$ the transported generic group law.",
+   "uses": [
+    "lem-sfb-geometrically-reduced-group-smooth",
+    "lem-sfb-smooth-normal-ascent",
+    "lem-pc-open-immersion-smooth-composition",
+    "lem-sfb-componentwise-normalization-smooth-pullback",
+    "lem-sfb-component-dominant-normalization-lift",
+    "lem-sfb-componentwise-normalization-generic-properties"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/prasad-yu-on-quasi-reductive-group-schemes.pdf",
+    "place": "Appendix Corollary A.4 proof, smooth generic fibre and normalization; Stacks Tags 047N/047P, 034F, 07TD and 035Q(1),(2),(4)."
+   }
+  },
+  {
+   "text": "Put $P=N\\times_SN$. Its generic fibre is $H_L\\times_LH_L$ by step 3. This is smooth: on affine charts the projection is the base change of a smooth ring map and the structure map is its composite with a smooth ring map, by [lem-weil-pbc-smooth-ring-map-base-change-composition]. Consequently $P_L$ is normal by [lem-sfb-smooth-normal-ascent]. Its special fibre $P_k=N_k\\times_kN_k$ is reduced by [lem-sfb-flat-geometrically-reduced-pullback], since $N_k$ is geometrically reduced and Noetherian. Each affine open $\\operatorname{Spec}A$ of $P$ has $A$ a finitely generated flat $V$-algebra by step 1. Its generic localization is the coordinate ring of an open of $P_L$, hence is normal, and $A/\\pi A$ is reduced. Apply [lem-sfb-dvr-normal-generic-reduced-special] to $A$. Every such $A$ is normal, so $P$ is normal. Also $N$ is normal by [lem-sfb-componentwise-normalization-generic-properties].",
+   "uses": [
+    "lem-weil-pbc-smooth-ring-map-base-change-composition",
+    "lem-sfb-smooth-normal-ascent",
+    "lem-sfb-flat-geometrically-reduced-pullback",
+    "lem-sfb-dvr-normal-generic-reduced-special",
+    "lem-sfb-componentwise-normalization-generic-properties"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/prasad-yu-on-quasi-reductive-group-schemes.pdf",
+    "place": "Appendix A.4 proof, third sentence: normality of the normalization product; Remark A.3, Serre criterion. Stacks Tags 00T4, 00TD, 034F and 035Q(1)."
+   }
+  },
+  {
+   "text": "We check the component hypothesis for normalization lifting. Every component of a Noetherian flat $S$-scheme meets the generic fibre: locally, its generic point corresponds to a minimal prime $\\mathfrak q$; [lem-sc-flat-going-down] applied to $V\\to A$ forces $\\mathfrak q\\cap V=(0)$, since a prime strictly below it cannot exist. The identification of components with minimal primes is [lem-weil-pbc-spec-irreducible-components-minimal-primes]. By [lem-sc-components-open-injection], intersection with the open generic fibre identifies these components with its components, and closing in the total space recovers them. On the generic fibre, $m_{H,L}:H_L\\times_LH_L\\to H_L$ is smooth: $(x,y)\\mapsto(xy,y)$ is an isomorphism with inverse $(z,y)\\mapsto(zy^{-1},y)$, and multiplication is its first projection. The projection is smooth by the base-change clause of [lem-weil-pbc-smooth-ring-map-base-change-composition], hence flat by [lem-pc-smooth-flat]. Going down again makes each component dominate a component. Thus $m_H\\circ(\\nu\\times\\nu):P\\to H$ is component-dominant, since $\\nu_L$ is an isomorphism. The same argument for $i_H\\nu:N\\to H$ is immediate on the generic fibre, where inversion is an isomorphism. Taking closures proves its component dominance as well.",
+   "uses": [
+    "lem-sc-flat-going-down",
+    "lem-weil-pbc-spec-irreducible-components-minimal-primes",
+    "lem-sc-components-open-injection",
+    "lem-weil-pbc-smooth-ring-map-base-change-composition",
+    "lem-pc-smooth-flat"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/prasad-yu-on-quasi-reductive-group-schemes.pdf",
+    "place": "Appendix A.4 proof, universal property of normalization: verification of its component-dominance hypothesis; Stacks Tags 00HS, 00ES, 00T4 and 01V4."
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-component-dominant-normalization-lift] to $P\\to H$ and $N\\to H$ from step 5. Their sources are normal by step 4, and the target is Noetherian by step 1. We obtain unique morphisms $m_N:P\\to N$ and $i_N:N\\to N$ with $\\nu m_N=m_H(\\nu\\times\\nu)$ and $\\nu i_N=i_H\\nu$. Restricting these equations to the generic fibre and composing with $\\nu_L^{-1}$ shows that they are exactly the multiplication and inverse transported in step 3. No lift of the identity is being inferred from component dominance: a section need not dominate a component.",
+   "uses": [
+    "lem-sfb-component-dominant-normalization-lift"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/prasad-yu-on-quasi-reductive-group-schemes.pdf",
+    "place": "Appendix A.4 proof, lifting the generic group law by normalization; Stacks Tag 035Q(4)."
+   }
+  },
+  {
+   "text": "The generic identity $\\operatorname{Spec}L\\to H_L\\simeq N_L$ gives a commutative square with right side $\\nu:N\\to H$ and bottom $e_H:S\\to H$. The morphism $\\nu$ is finite by hypothesis, hence proper by [lem-weil-pbc-finite-proper] and separated. A DVR is a valuation ring, as recorded in [def-sc-discrete-valuation-ring]. Therefore [lemma-nagata-proper-separated-valuation-extension] supplies a unique lift $e_N:S\\to N$ of this square. It restricts to the generic identity and satisfies $\\nu e_N=e_H$. Finiteness is used here, whereas the component-dominant normalization property alone would not apply to $e_H$.",
+   "uses": [
+    "def-sc-discrete-valuation-ring",
+    "lem-weil-pbc-finite-proper",
+    "lemma-nagata-proper-separated-valuation-extension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/prasad-yu-on-quasi-reductive-group-schemes.pdf",
+    "place": "Appendix A.4 proof, identity lifts by finiteness. Stacks: proper valuative criterion and finite morphisms are proper."
+   }
+  },
+  {
+   "text": "The target $N$ is separated over $S$ by hypothesis. Step 1 gives schematic density of the generic fibres in $S,N,N^2,N^3$ (only $N,N^3$ are needed for the group identities). The two associativity maps $N^3\\to N$ agree generically by step 3; the left and right unit maps $N\\to N$ agree with the identity generically by step 7; and the two inverse-product maps $N\\to N$ agree generically with $e_N$ composed with the structure map. Apply [lemma-nagata-ext-scheme-theoretically-dominant-separated] to each pair over $S$. This proves all group diagrams. The equations in steps 6 and 7 make $\\nu$ a homomorphism, and its generic identification is the one in step 3. For uniqueness, any other such group structure has these same generic multiplication, inverse and identity, because $\\nu_L$ is an isomorphism. Apply the same separated-target lemma on $N^2,N,S$ to compare the three operations. They are equal, proving uniqueness.",
+   "uses": [
+    "lemma-nagata-ext-scheme-theoretically-dominant-separated"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/prasad-yu-on-quasi-reductive-group-schemes.pdf",
+    "place": "Appendix A.4 proof, separatedness in extension of the group law; Stacks Tag 01KM closed-equalizer argument. Generic agreement and all diagrams written out."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sc-discrete-valuation-ring",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-sfb-finite-type-composition-base-change",
+  "lem-weil-pbc-flat-morphism-base-change",
+  "lem-weil-pbc-flat-ring-map-comp",
+  "lem-weil-pbc-flat-morphism-affine-criterion",
+  "def-weil-pbc-flat-ring-map",
+  "def-weil-pbc-module-localization",
+  "lem-sfb-flat-geometrically-reduced-pullback",
+  "lem-weil-pbc-reduced-source-factors-through-closed-subscheme",
+  "def-weil-pbc-scheme-reduction",
+  "def-weil-closed-immersion",
+  "lem-sfb-geometrically-reduced-group-smooth",
+  "lem-sfb-smooth-normal-ascent",
+  "lem-pc-open-immersion-smooth-composition",
+  "lem-sfb-componentwise-normalization-smooth-pullback",
+  "lem-sfb-component-dominant-normalization-lift",
+  "lem-sfb-componentwise-normalization-generic-properties",
+  "lem-weil-pbc-smooth-ring-map-base-change-composition",
+  "lem-sfb-dvr-normal-generic-reduced-special",
+  "lem-sc-flat-going-down",
+  "lem-weil-pbc-spec-irreducible-components-minimal-primes",
+  "lem-sc-components-open-injection",
+  "lem-pc-smooth-flat",
+  "lem-weil-pbc-finite-proper",
+  "lemma-nagata-proper-separated-valuation-extension",
+  "lemma-nagata-ext-scheme-theoretically-dominant-separated"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/prasad-yu-on-quasi-reductive-group-schemes.pdf",
+  "place": "Appendix Corollary A.4 proof and Remark A.3, read online https://math.stanford.edu/~conrad/papers/qrg.pdf, printed pp.28-29. PDF is WANTED locally; explicit assembly and hypothesis checks by Q151."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "loogle",
+   "query": "\"normalization\", \"GrpObj\"",
+   "results": "{\"t\": \"2026-10-24T05:08:08Z\", \"tool\": \"loogle\", \"query\": \"\\\"normalization\\\", \\\"GrpObj\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: relative normalizationDesc has a different factorization direction and does not extend group operations from the generic fibre; abstract group-object identities, Hilbert 90 and tilting do not state this geometric lifting lemma. Both phrasings were read."
+  },
+  {
+   "tool": "grep",
+   "query": "normalization|normalisation",
+   "results": "{\"t\": \"2026-10-24T05:08:08Z\", \"tool\": \"grep\", \"query\": \"normalization|normalisation\", \"sub\": \"AlgebraicGeometry/Group\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: relative normalizationDesc has a different factorization direction and does not extend group operations from the generic fibre; abstract group-object identities, Hilbert 90 and tilting do not state this geometric lifting lemma. Both phrasings were read."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Lift multiplication inverse and identity to a finite normalization of a group scheme over a trait",
+   "results": "{\"t\": \"2026-10-24T05:08:09Z\", \"tool\": \"leansearch\", \"query\": \"Lift multiplication inverse and identity to a finite normalization of a group scheme over a trait\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.GrpObj.lift_inv_right_eq\", \"normalizationMonoidOfMonoidHomRightInverse\", \"ULift.group\", \"toUnits\", \"ULift.groupWithZero\", \"Filter.Germ.instInvOneClass\", \"Units.instGroup\", \"GroupWithZero.toInv\"], \"digest\": \"e9f0cbe8cfc10a0d\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: relative normalizationDesc has a different factorization direction and does not extend group operations from the generic fibre; abstract group-object identities, Hilbert 90 and tilting do not state this geometric lifting lemma. Both phrasings were read."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The normalization of a separated flat group scheme over a discrete valuation ring with smooth generic fibre inherits a group law if its fibres are geometrically reduced",
+   "results": "{\"t\": \"2026-10-24T05:08:12Z\", \"tool\": \"leanfinder\", \"query\": \"The normalization of a separated flat group scheme over a discrete valuation ring with smooth generic fibre inherits a group law if its fibres are geometrically reduced\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Hom.normalization\", \"AlgebraicGeometry.Scheme.Hom.instIsReducedNormalization\", \"AlgebraicGeometry.Scheme.Hom.instIsIntegralNormalization\", \"AlgebraicGeometry.Scheme.Hom.toNormalization\", \"AlgebraicGeometry.Scheme.Hom.normalizationDesc\", \"AlgebraicGeometry.Scheme.Hom.normalizationDiagram\", \"AlgebraicGeometry.Scheme.Hom.fromNormalization\", \"AlgebraicGeometry.Scheme.Hom.normalization.hom_ext\"], \"digest\": \"60b2a2d5d8b39b5c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: relative normalizationDesc has a different factorization direction and does not extend group operations from the generic fibre; abstract group-object identities, Hilbert 90 and tilting do not state this geometric lifting lemma. Both phrasings were read."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A finite normalization with normal self product has a unique group structure extending the smooth generic fibre group",
+   "results": "{\"t\": \"2026-10-24T05:08:13Z\", \"tool\": \"leanfinder\", \"query\": \"A finite normalization with normal self product has a unique group structure extending the smooth generic fibre group\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.SubmersivePresentation.subsingleton_h1Cotangent\", \"groupCohomology.exists_mul_galRestrict_of_norm_eq_one\", \"uniqueNormalizationMonoidOfUniqueUnits\", \"groupCohomology.H1ofAutOnUnitsUnique\", \"UniqueProds.toTwoUniqueProds_of_group\", \"AlgebraicGeometry.Scheme.Hom.normalization.hom_ext\", \"Equiv.Perm.VectorsProdEqOne.oneUnique\", \"Algebra.IsStandardSmooth.subsingleton_h1Cotangent\"], \"digest\": \"ace208ce15b611f7\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: relative normalizationDesc has a different factorization direction and does not extend group operations from the generic fibre; abstract group-object identities, Hilbert 90 and tilting do not state this geometric lifting lemma. Both phrasings were read."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Extend group operations to finite normalization of the reduced group scheme over a discrete valuation ring without assuming affineness",
+   "results": "{\"t\": \"2026-10-24T05:14:35Z\", \"tool\": \"leansearch\", \"query\": \"Extend group operations to finite normalization of the reduced group scheme over a discrete valuation ring without assuming affineness\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Hom.instIsAffineHomToNormalization\", \"AlgebraicGeometry.Scheme.Hom.normalizationDesc\", \"AlgebraicGeometry.Scheme.Hom.toNormalization\", \"AlgebraicGeometry.Scheme.Hom.normalization\", \"AlgebraicGeometry.Scheme.Hom.instIsReducedNormalization\", \"AlgebraicGeometry.Scheme.Hom.instIsDominantToNormalization\", \"AlgebraicGeometry.Scheme.Hom.instIsIntegralHomFromNormalization\", \"AlgebraicGeometry.Scheme.Hom.instIsIntegralNormalization\"], \"digest\": \"34fd96b70e7ca97a\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: relative normalizationDesc has a different factorization direction and does not extend group operations from the generic fibre; abstract group-object identities, Hilbert 90 and tilting do not state this geometric lifting lemma. Both phrasings were read."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The reduction of a flat group over a DVR with geometrically reduced generic reduction is a subgroup and its finite flat normalization with geometrically reduced fibres inherits the group law",
+   "results": "{\"t\": \"2026-10-24T05:14:35Z\", \"tool\": \"leanfinder\", \"query\": \"The reduction of a flat group over a DVR with geometrically reduced generic reduction is a subgroup and its finite flat normalization with geometrically reduced fibres inherits the group law\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"WeierstrassCurve.IsGoodReduction\", \"WeierstrassCurve.reduction\", \"WeierstrassCurve.isGoodReduction_iff_isElliptic_reduction\", \"WeierstrassCurve.IsGoodReduction.goodReduction\", \"WeierstrassCurve.isGoodReduction_iff\", \"WeierstrassCurve.minimal\", \"WeierstrassCurve.instIsMinimalMinimal\", \"IsDedekindDomain.selmerGroup\"], \"digest\": \"706422d91cd19975\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: relative normalizationDesc has a different factorization direction and does not extend group operations from the generic fibre; abstract group-object identities, Hilbert 90 and tilting do not state this geometric lifting lemma. Both phrasings were read."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finite normalization of a flat group over a trait with geometrically reduced fibres admits multiplication inverse and unit extending the generic group",
+   "results": "{\"t\": \"2026-10-24T05:14:39Z\", \"tool\": \"leanfinder\", \"query\": \"Finite normalization of a flat group over a trait with geometrically reduced fibres admits multiplication inverse and unit extending the generic group\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Tilt\", \"groupCohomology.exists_mul_galRestrict_of_norm_eq_one\", \"AlgebraicGeometry.Scheme.Hom.instIsIntegralNormalization\", \"Tilt.instField\", \"AlgebraicGeometry.Scheme.Hom.instIsReducedNormalization\", \"AlgebraicGeometry.Scheme.Hom.normalizationDesc\", \"AlgebraicGeometry.Scheme.Hom.normalizationDiagram\", \"AlgebraicGeometry.Scheme.Hom.toNormalization_app_preimage\"], \"digest\": \"e5aa34627a1575cf\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: relative normalizationDesc has a different factorization direction and does not extend group operations from the generic fibre; abstract group-object identities, Hilbert 90 and tilting do not state this geometric lifting lemma. Both phrasings were read."
+  },
+  {
+   "tool": "grep",
+   "query": "normalization|normalisation",
+   "results": "{\"t\": \"2026-10-24T06:58:14Z\", \"tool\": \"grep\", \"query\": \"normalization|normalisation\", \"sub\": \"AlgebraicGeometry/Group\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern relative normalization construction/factorization, abstract normalization monoids, or good reduction of elliptic curves. None states extension of group operations to the componentwise normalization over a trait; normalizationDesc has a different factorization direction. Both semantic phrasings and the relative-normalization source were read."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Extend multiplication identity and inverse from a group scheme to its finite normalization over a trait",
+   "results": "{\"t\": \"2026-10-24T06:58:15Z\", \"tool\": \"leansearch\", \"query\": \"Extend multiplication identity and inverse from a group scheme to its finite normalization over a trait\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"NormalizationMonoid.ofUniqueUnits\", \"toUnits\", \"normalizationMonoidOfMonoidHomRightInverse\", \"UniqueFactorizationMonoid.normalizationMonoid\", \"NormalizationMonoid.mk\", \"AlgebraicGeometry.Scheme.Hom.normalization\", \"AlgebraicGeometry.Scheme.Hom.normalizationDesc\", \"AlgebraicGeometry.Scheme.Hom.toNormalization\"], \"digest\": \"0251b77bc9518f7f\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern relative normalization construction/factorization, abstract normalization monoids, or good reduction of elliptic curves. None states extension of group operations to the componentwise normalization over a trait; normalizationDesc has a different factorization direction. Both semantic phrasings and the relative-normalization source were read."
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Scheme.Hom.normalization, CategoryTheory.GrpObj",
+   "results": "{\"t\": \"2026-10-24T06:58:15Z\", \"tool\": \"loogle\", \"query\": \"AlgebraicGeometry.Scheme.Hom.normalization, CategoryTheory.GrpObj\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern relative normalization construction/factorization, abstract normalization monoids, or good reduction of elliptic curves. None states extension of group operations to the componentwise normalization over a trait; normalizationDesc has a different factorization direction. Both semantic phrasings and the relative-normalization source were read."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A finite normalization of a flat separated group scheme over a discrete valuation ring inherits a group structure when its special fibre is geometrically reduced",
+   "results": "{\"t\": \"2026-10-24T06:58:16Z\", \"tool\": \"leanfinder\", \"query\": \"A finite normalization of a flat separated group scheme over a discrete valuation ring inherits a group structure when its special fibre is geometrically reduced\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"WeierstrassCurve.IsGoodReduction\", \"AlgebraicGeometry.Scheme.Hom.normalization\", \"AlgebraicGeometry.Scheme.Hom.instIsReducedNormalization\", \"AlgebraicGeometry.Scheme.Hom.instIsIntegralNormalization\", \"AlgebraicGeometry.Scheme.Hom.instIsIntegralHomFromNormalization\", \"AlgebraicGeometry.Scheme.Hom.normalizationDiagram\", \"AlgebraicGeometry.Scheme.Hom.toNormalization\", \"AlgebraicGeometry.Scheme.Hom.instIsAffineHomToNormalization\"], \"digest\": \"7c166ced308d5571\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern relative normalization construction/factorization, abstract normalization monoids, or good reduction of elliptic curves. None states extension of group operations to the componentwise normalization over a trait; normalizationDesc has a different factorization direction. Both semantic phrasings and the relative-normalization source were read."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Lift a group law to the normalization of a reduced group scheme over a DVR using a normal fibre product and finite extension of the unit section",
+   "results": "{\"t\": \"2026-10-24T06:58:52Z\", \"tool\": \"leanfinder\", \"query\": \"Lift a group law to the normalization of a reduced group scheme over a DVR using a normal fibre product and finite extension of the unit section\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Hom.normalizationDiagram\", \"AlgebraicGeometry.Scheme.Hom.normalizationDiagramMap\", \"AlgebraicGeometry.Scheme.Hom.instIsReducedNormalization\", \"AlgebraicGeometry.Scheme.Hom.normalization\", \"AlgebraicGeometry.Scheme.Hom.toNormalization\", \"AlgebraicGeometry.Scheme.Hom.normalizationDesc\", \"AlgebraicGeometry.Scheme.Hom.toNormalization_normalizationDesc_assoc\", \"AlgebraicGeometry.Scheme.Hom.normalization.hom_ext\"], \"digest\": \"b99c263f45d64439\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern relative normalization construction/factorization, abstract normalization monoids, or good reduction of elliptic curves. None states extension of group operations to the componentwise normalization over a trait; normalizationDesc has a different factorization direction. Both semantic phrasings and the relative-normalization source were read."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-trait-group-finite-smooth-cover",
+  "date": "2026-10-24",
+  "group": "Q17"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "Generic torus quotient input, closedness of the extended generic torus inclusion: A monic relative torus homomorphism is a closed immersion. No imported blueprint ancestor was found (blueprint_refs.py ancestor returns None). Supporting input: Conrad Theorem 5.3.5, p.166: apply Raynaud affineness to the separated flat finite-type generic-image closure; Prasad–Yu Proposition 3.1 supplies the proof. Supporting input to Raynaud affineness: Proposition 3.1, first paragraph, printed p.5; Appendix Corollary A.4, printed p.29, including stability under further Dedekind extensions; the henselian extension with algebraically closed residue field used after Lemma A.9, printed pp.31-32. Use the finite normalization of the reduced base change, not the potentially non-finite ordinary smoothening of an arbitrary model. Supporting input: Corollary A.4 proof, group-structure construction on the reduction and its finite normalization (not the existence of a base extension and not the smooth-cover conclusion).",
+   "via": [
+    "lem-sfb-trait-group-finite-smooth-cover",
+    "lem-sfb-dvr-generic-affine-group-affine",
+    "lem-sfb-relative-torus-monomorphism-closed",
+    "lem-sfb-torus-hom-generic-closed-rigidity",
+    "lem-sfb-normal-semiabelian-generic-torus-quotient",
+    "lem-sfb-symmetric-line-power-prolongation",
+    "lem-sfb-normal-symmetric-cubical-extension",
+    "lem-sfb-symmetric-ample-power-extension",
+    "lem-sfb-regular-group-generic-ampleness",
+    "lem-sfb-stable-picard-theta-ampleness",
+    "lem-sfb-stable-relative-picard-kummer",
+    "lem-sfb-stable-level-versal-branch-freeness",
+    "lem-sfb-stable-abelian-level-normalization",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-trait-normalization-group-structure",
+  "worker": "stage1",
+  "summary": "Q151: statement unchanged. Followed Conrad Appendix A.4 and reused existing normality, geometric reducedness, smoothness, componentwise normalization, and valuative-criterion nodes. Wrote the reduced subgroup argument, the product-normality checks, component dominance, separate identity lift and schematic-density verification of all group axioms. No new nodes; no Lean writing or compilation.",
+  "blueprint": "Read latest sec-six-functors-basics/sk-thm-sf-ctf-stability/_section.md and direct-images proof. This item supports the inherited admissible-direct-image / trait-group-finite-smooth-cover chain; there is no imported blueprint ancestor (blueprint_refs.py ancestor returns None). Steps realize the exact inherited from.place: Appendix A.4 group-structure construction on reduction and finite normalization; they do not replace the potential-smooth-normalization or finite-smooth-cover results. Whole-blueprint searches found no equivalent blueprint node.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-reduced-source-factors-through-closed-subscheme",
+    "why": "Generic algebraic-geometry input for Appendix A.4: A map from a reduced scheme factors through a closed subscheme exactly set-theoretically. No node of the six-functors unit replaces this input; the unit route is unchanged."
+   },
+   {
+    "node": "lemma-nagata-proper-separated-valuation-extension",
+    "why": "Generic algebraic-geometry input for Appendix A.4: Valuative extension to a proper separated morphism. No node of the six-functors unit replaces this input; the unit route is unchanged."
+   },
+   {
+    "node": "lemma-nagata-ext-scheme-theoretically-dominant-separated",
+    "why": "Generic algebraic-geometry input for Appendix A.4: Morphisms into a separated target agreeing on a scheme-theoretically dominant subscheme. No node of the six-functors unit replaces this input; the unit route is unchanged."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-reduced-source-factors-through-closed-subscheme",
+  "lemma-nagata-proper-separated-valuation-extension",
+  "lemma-nagata-ext-scheme-theoretically-dominant-separated"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q151-7088c5b4e",
+  "group": "Q151",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q151-7088c5b4e (reviewer sub-agent of L); spot-checked: Read the item in full and all 27 cited statements (every id exists and none is merged), together with the parent lem-sfb-trait-group-finite-smooth-cover step 3, the only citer. The delivery adds no new nodes and does not change the statement. The parent's step 3 supplies exactly the item's hypotheses (flat H and N, finite nu, geometrically reduced H_L and N_k). Conrad's Cor. A.4 and Rem. A.3 in the Prasad-Yu appendix are not in the local literature, so the WANTED line and proof_origin.by=agent are correct. Steps checked: (1) the uniformizer is injective on flat coordinate algebras, so A embeds in A[1/pi]; this gives reducedness from a reduced generic fibre and the scheme-theoretic dominance that step 8 needs. (2) flat-geometrically-reduced-pullback over Spec L with T=H_L, then the 0356 factorization of m(jxj), ij and e. Since j is mono, all the group diagrams and uniqueness for H follow (diagram chase written out). (3) H_L is smooth by 047N/P, normal by smooth ascent, and N_L is the normalization of H_L by 07TD. nu_L is an isomorphism because the lift lemma gives a section s, and its uniqueness clause gives s nu=id. (4) P_L is smooth hence normal, and P_k is reduced via the pullback lemma over k. dvr-normal-generic-reduced-special then makes every affine chart of P normal. (5) Every component meets the generic fibre (going down plus minimal primes), m_{H,L} is flat, and going down gives component dominance. (6) The lift lemma's hypotheses hold (Noetherian target, normal sources), and the resulting m_N and i_N are the transported laws. (7) nu is finite, hence proper; a DVR is a valuation ring, so the valuative lift gives e_N. (8) Separated target with dense generic opens gives all the axioms and uniqueness. Three off-unit tools (0356 factorization, valuative lift, separated-extension) are declared in tool_uses and I accept them; the other off-unit citations are mathlib-status or definition nodes. No SGA. The union of step uses equals proof_deps. Edge cases checked: trivial G, disconnected G, imperfect k. Review written to review.md."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.TraitNormalizationGroupStructure",
+  "declaration": "AlgebraicGeometry.TraitNormalization.existsUnique_group_structures",
+  "declarations": [
+   "AlgebraicGeometry.TraitNormalization.reduction",
+   "AlgebraicGeometry.TraitNormalization.reductionι",
+   "AlgebraicGeometry.TraitNormalization.normalization",
+   "AlgebraicGeometry.TraitNormalization.normalizationπ",
+   "AlgebraicGeometry.TraitNormalization.existsUnique_group_structures"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/TraitNormalizationGroupStructure.lean",
+  "statement": "theorem existsUnique_group_structures (V : Type u) [CommRing V] [IsDomain V] [IsDiscreteValuationRing V] (L : Type u) [Field L] [Algebra V L] [IsFractionRing V L] (G : Over (Spec (.of V))) [GrpObj G] [Flat G.hom] [IsSeparated G.hom] [LocallyOfFiniteType G.hom] [QuasiCompact G.hom] [Flat (reduction G).hom] [IsSeparated (reduction G).hom] [LocallyOfFiniteType (reduction G).hom] [QuasiCompact (reduction G).hom] [Flat (normalization G).hom] [IsSeparated (normalization G).hom] [LocallyOfFiniteType (normalization G).hom] [QuasiCompact (normalization G).hom] [IsFinite (normalizationπ G).left] [GeometricallyReduced (pullback.snd (reduction G).hom (Spec.map (CommRingCat.ofHom (algebraMap V L))))] [GeometricallyReduced (pullback.snd (normalization G).hom (Spec.map (CommRingCat.ofHom (IsLocalRing.residue V))))] : IsIso ((Over.pullback (Spec.map (CommRingCat.ofHom (algebraMap V L)))).map (normalizationπ G)) ∧ (∃! hH : GrpObj (reduction G), @IsMonHom _ _ _ _ _ hH.toMonObj inferInstance (reductionι G)) ∧ (∀ hH : GrpObj (reduction G), @IsMonHom _ _ _ _ _ hH.toMonObj inferInstance (reductionι G) → ∃! hN : GrpObj (normalization G), @IsMonHom _ _ _ _ _ hN.toMonObj hH.toMonObj (normalizationπ G))",
+  "branch": "sheaf-dag",
+  "by": "Q105",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-d55901d3c",
+  "group": "Q105",
+  "result": "pass",
+  "note": "Read node, all 8 stmt_dep records/decls (IsDiscreteValuationRing, Flat, IsSeparated, LocallyOfFiniteType+QuasiCompact, nilradical.subscheme/ι, reducedNormalization/fromReducedNormalization, IsFinite, Over.pullback), module, report (Worker report + Second reading by Q105 present). Hypotheses match clause by clause (G GrpObj in Over Spec V; H=G_red via nilradical, N via recorded componentwise normalization; flat/sep/FT on G,H,N; nu finite; GeometricallyReduced H_L and N_k via pullback.snd along fraction/residue maps). Conclusions: IsIso canonical nu_L; ∃! H-structure with j IsMonHom; ∀ such hH, ∃! N-structure with nu IsMonHom. Inverse preservation and generic identification follow from the rest, so the ∃! is equivalent. No extra assumptions; L in universe u harmless. Helpers are real canonical bundles with source/blueprint docstrings; single sorry; proof docstring has 8 steps; lean.statement verbatim; imports exist; no duplicate in side-live/Mathlib; citer has no Lean record. Edge cases: empty G impossible (unit section), trivial/nonreduced/disconnected G, imperfect k ok. No compile (no change)."
+ }
+}

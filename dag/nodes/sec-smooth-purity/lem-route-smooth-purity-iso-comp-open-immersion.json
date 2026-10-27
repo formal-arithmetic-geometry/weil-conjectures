@@ -1,0 +1,361 @@
+{
+ "id": "lem-route-smooth-purity-iso-comp-open-immersion",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-pur-rational-and-qbar-purity",
+   "via": [
+    "def-pur-condensed-smooth-purity-iso",
+    "nt-target-smooth-purity-qbar"
+   ],
+   "place": "sk-prop-sp-composition proof: finite diagonal orientation and tensor-map compatibility, then the tower comparison; open-immersion specialization used in the coefficient-transport construction under thm-pur-rational-and-qbar-purity"
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Blueprint `sk-prop-sp-composition`, case of an open immersion: **compatibility of purity with composition with an open immersion**: for `f` smooth of ",
+ "statement": "Let $\\ell$ be prime and $k$ a field of positive prime characteristic $p\\ne\\ell$. Let $X,Y,Z$ be separated finite-type $k$-schemes, let $f:X\\to Y$ be smooth of pure relative dimension $d\\in\\mathbf N$, and let $j:Y\\hookrightarrow Z$ be an open immersion. Assume also that $h=j\\circ f$ is smooth of pure relative dimension $d$, as in the recorded Lean declaration [def-sbc-smooth-morphisms, def-weil-open-immersion, sk-def-sfb-dc-setting]. Put $\\Omega=\\overline{\\mathbf Q}_\\ell$ with the finite-extension-valued condensed coefficient convention [prop-weil-pbc-qbar-condensed-two-colimit]. Write $\\mathcal C_T$ for the bounded constructible category of modules over $B_T=p_T^*\\underline\\Omega$, $\\mathbf1_T$ for its coefficient unit, and $\\iota_T:\\mathcal C_T\\hookrightarrow D(\\operatorname{Mod}_{B_T})$ for its full inclusion [sk-def-sfb-dc-setting]. Use the chosen compact-support adjunctions $F_v=Rv_!\\dashv G_v=Rv^!$ [sk-def-sfb-dc-lower-shriek, sk-def-sfb-dc-upper-shriek]. Let $\\gamma_v:\\iota_XG_v\\mathbf1_{\\operatorname{target}(v)}\\xrightarrow{\\sim}B_X(d)[2d]$ for $v=f,h$ be the specified normalized smooth purity isomorphisms of [def-pur-condensed-smooth-purity-iso], with the Tate construction of [def-pur-condensed-tate-twists].\n\nLet $c_{j,f}:G_h\\xrightarrow{\\sim}G_fG_j$ be the counit mate of the canonical proper/open compact-support composition $F_h\\xrightarrow{\\sim}F_jF_f$; in the live library it is $\\mathrm{boundedConstructibleUpperShriekComp\\_padicAlgCl}(\\ell,f,j)$. Let $u_j:G_j\\mathbf1_Z\\xrightarrow{\\sim}\\mathbf1_Y$ be the canonical comparison with exact open inverse image followed by its monoidal unit comparison; it is $\\mathrm{boundedConstructibleUpperShriekUnitIso\\_padicAlgCl}(\\ell,j)$, not an arbitrarily chosen purity isomorphism. Then the equality of isomorphisms in the ambient module-derived category is\n$$\\gamma_h=\\gamma_f\\circ\\iota_X\\bigl(G_f(u_j)\\circ c_{j,f,\\mathbf1_Z}\\bigr).$$\nHere the canonical comparisons are normalized by their adjunction counits, not just by their endpoints [sk-def-sfb-dc-upper-shriek, def-sfb-dc-open-lower-shriek-adjunction].",
+ "source": {
+  "document": "literature/upstream-master-20261016/WeilConjectures/SmoothPurity/Defs.lean",
+  "place": "def-pur-condensed-smooth-purity-iso: the Lean of this node (declared in its module WeilConjectures.SmoothPurity.Defs) reaches AlgebraicGeometry.ProEtale.CondensedRing.smoothPurityIso_comp_openImmersion, a sorry on the sorry route of batch3 with no node; Lean: upstream file lean/WeilConjectures/SmoothPurity/Defs.lean, declaration AlgebraicGeometry.ProEtale.CondensedRing.smoothPurityIso_comp_openImmersion (module WeilConjectures.SmoothPurity.Defs, lines 169-183, proof `sorry`)"
+ },
+ "stmt_deps": [
+  "def-sbc-smooth-morphisms",
+  "def-weil-open-immersion",
+  "sk-def-sfb-dc-setting",
+  "prop-weil-pbc-qbar-condensed-two-colimit",
+  "sk-def-sfb-dc-lower-shriek",
+  "sk-def-sfb-dc-upper-shriek",
+  "def-pur-condensed-smooth-purity-iso",
+  "def-pur-condensed-tate-twists",
+  "def-sfb-dc-open-lower-shriek-adjunction"
+ ],
+ "proof": [
+  {
+   "text": "Work first over $A_n=\\mathbf Z/\\ell^n\\mathbf Z$, $n\\ge1$, on ordinary etale modules. The schemes are Noetherian by finite type over the field, and the separated finite-type maps admit compactifications. Thus the arbitrary-ground-field finite purity construction applies to $f,h$ and $j$. Denote its orientation by $a_{v,n}:v_n^\\times A_{n,\\operatorname{target}(v)}\\xrightarrow{\\sim}A_{n,X}(d)[2d]$ for $v=f,h$. The construction specifies the first diagonal base-change arrow, the normalized Rees deformation arrow, and the integration arrow, rather than allowing arbitrary identifications. Write $r_n=h_n^\\times A_{n,Z}\\xrightarrow{c_n}f_n^\\times j_n^\\times A_{n,Z}\\xrightarrow{f_n^\\times(u_{j,n})}f_n^\\times A_{n,Y}$, where the composition map is the counit mate of compact-support composition and $u_{j,n}$ is exact open restriction at the constant sheaf.",
+   "uses": [
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "thm-nagata-compactification",
+    "lem-pur-finite-smooth-adjunction-general-base",
+    "lem-amb-unbounded-compact-support-comparisons",
+    "lem-sp-finite-adjoint-compositor-transposes"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-composition/sk-prop-sp-composition.proof.md",
+    "place": "Finite coefficients: the orientation and the composite adjunction"
+   }
+  },
+  {
+   "text": "Compare the two finite orientations. Since $j$ identifies $Y$ with an open subscheme of $Z$, its diagonal is the identity on that subscheme. Explicitly, two maps to $Y$ with equal composites to $Z$ agree, including their maps of structure sheaves, by restriction to this open. Consequently $X\\times_YX\\to X\\times_ZX$ is the canonical isomorphism preserving both projections and the diagonal. The diagonal ideal, its extended-Rees algebra, the homogeneous cone-to-normal-bundle map, and the vector-bundle projection with zero section are therefore the same for $f$ and $h$. The deformation and Kummer integration factors in the displayed construction of the finite purity node are identical. For the first factor, paste the base-change square for $h$ with the open square for $j$; compact-support exchanges respect this pasting and composition. The mate-pasting identity, followed by the open counit, identifies the diagonal base-change arrow for $h$ with the one for $f$ composed with $r_n$. Thus $a_{h,n}=a_{f,n}r_n$. At the coefficient unit the tensor formula in the finite purity construction is the unit identification: its transpose is the counit itself. Taking inverses gives $r_n\\gamma_{h,n}=\\gamma_{f,n}$. This argument uses the same diagonal pair, not a comparison of unrelated orientations or a finite-field descent.",
+   "uses": [
+    "def-weil-open-immersion",
+    "lem-pur-finite-smooth-adjunction-general-base",
+    "prop-asd-smooth-base-change",
+    "lem-amb-unbounded-compact-support-comparisons",
+    "lem-weil-pbc-mate-pasting"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-composition/sk-prop-sp-composition.proof.md",
+    "place": "Orientation, finite coefficients; tensor maps at the constant object"
+   }
+  },
+  {
+   "text": "Pass to finite pro-etale coefficients using the specified site comparisons. The proper/open composition comparison commutes with ordinary-etale/pro-etale transport by the composition equation of the finite compact-support site-coherence node. Taking counit mates preserves this equation. The finite smooth-purity node defines its pro-etale maps by precisely this transport, including the open and proper counits, so the equation $r_n\\gamma_{h,n}=\\gamma_{f,n}$ holds for these actual pro-etale maps. Its coefficient comparisons obey the quotient cocycle. For $j$ the finite purity node's dimension-zero normalization is the etale adjunction, hence $u_{j,n}$ is the canonical open-unit map in this calculation.",
+   "uses": [
+    "lem-sp-finite-compact-site-coherence",
+    "lem-weil-pbc-mate-pasting",
+    "lem-pur-finite-smooth-adjunction-general-base"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-composition/sk-prop-sp-composition.proof.md",
+    "place": "Finite coefficients and their passage to towers"
+   }
+  },
+  {
+   "text": "For every $n\\ge m\\ge1$ take $A=\\mathbf Z/\\ell^n\\mathbf Z\\to B=\\mathbf Z/\\ell^m\\mathbf Z$ and the smooth maps $f,j$. Every input in $\\Dctf$ has a bounded constructible etale origin with the same Tor interval [lem-weil-pbc-finite-ring-constructible-derived-origin]. The composition equation of [lem-sp-et-proet-coefficient-compatibility], applied to that origin, gives the finite $b$ identity $b_hS\\alpha_A=\\alpha_BF_{j,B}(b_f)b_jF_{f,A}$ for the specified pro-etale proper/open compositors (its refinement equation returns to the fixed compactifications, identified with the compositors of Step 1 by site coherence); [lem-sp-finite-adjoint-compositor-transposes] turns it into the transposed $c$ identity for the exceptional compositors. These are exactly the hypotheses of lem-sp-tower-adjoint-compositor-realization, so that theorem gives the actual counit-preserving tower compositor and its finite evaluations. The Tate-tower theorem supplies the normalized system $M_\\bullet=(A_{n,X}(d)[2d])_n$, integral unit systems $L_{T,\\bullet}=(A_{n,T})_n$, completed reconstructions and common bounds. The local-freeness theorem makes each roots-of-unity line locally free of rank one; its tensor powers shifted by $[2d]$ therefore have the common Tor interval $[-2d,-2d]$. The tower-compositor theorem preserves the required uniform constructible finite-Tor subcategories, including the compact-support intermediates. Finite purity concentrates the exceptional systems in degree $-2d$ for $f,h$ and degree zero for $j$. The good-truncation clause of the reconstructed representing-pair theorem now applies: Step 3 gives the finite identification squares for the tower compositor followed by open restriction, hence gives the equality $r_\\bullet\\theta_h=\\theta_f$ of actual system maps. Here $r_\\bullet$ includes the canonical identification $j_\\bullet^!L_{Z,\\bullet}\\cong L_{Y,\\bullet}$.",
+   "uses": [
+    "lem-weil-pbc-finite-ring-constructible-derived-origin",
+    "lem-sp-et-proet-coefficient-compatibility",
+    "lem-sp-finite-adjoint-compositor-transposes",
+    "lem-sp-tower-adjoint-compositor-realization",
+    "lem-pur-condensed-tate-integral-tower",
+    "lem-pur-integral-reconstructed-representing-pair",
+    "lem-pur-finite-smooth-adjunction-general-base",
+    "lem-pur-twist-sheaf-locally-free"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-composition/sk-prop-sp-composition.proof.md",
+    "place": "Towers: compare single-degree orientation systems before reconstruction"
+   }
+  },
+  {
+   "text": "Put $L_T=R\\varprojlim L_{T,\\bullet}$ and $M=R\\varprojlim M_\\bullet$. Write $P_v$ for integral compact support. For the one map $j$ choose its trivial compactification in Steps 5–6; the reconstructed-pair refinement theorem and the single-morphism realization comparison transport both traces and realization maps from the chosen compactification through a common refinement. The integral representing-pair theorem gives the actual reconstructed traces $t_f:P_fM\\to L_Y$, $t_h:P_hM\\to L_Z$, and $t_j:P_jL_Y\\to L_Z$. For $j$, the degree-zero orientation is the open adjunction. Thus $t_j$ is the integral open counit, including the specified reduction/limit unit comparisons, as stated by the open-counit realization lemma. Transpose Step 4 under the composite tower adjunction: its counit is $\\epsilon_j\\mathcal F_j(\\epsilon_f)$, so the resulting equality is $t_{h,\\bullet}\\alpha_\\bullet=t_{j,\\bullet}\\mathcal F_j(t_{f,\\bullet})$. Apply the reconstruction adjunction calculus. Its composite comparison inserts the actual counit $\\mathcal R_Y\\mathcal L_Y\\to1$, exactly the factor in the definition of $\\alpha_R$ in the compositor-realization node. Naturality of this counit therefore gives the equality of actual integral maps\n$$t_h\\alpha_R=t_jP_j(t_f):P_jP_fM\\longrightarrow L_Z.$$\nThe representing-pair formula identifies the reconstructed traces in this calculation with these $t_v$, rather than with arbitrary lifts of finite-level maps.",
+   "uses": [
+    "lem-pur-integral-reconstructed-representing-pair",
+    "lem-pur-normalized-reconstruction-adjunction-calculus",
+    "lem-pur-condensed-open-counit-realization",
+    "lem-pur-condensed-compositor-realization",
+    "lem-pur-reconstructed-pair-refinement-coherence",
+    "lem-pur-compact-support-condensed-realization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-composition/sk-prop-sp-composition.proof.md",
+    "place": "Reconstruct the composite counit equation before extending coefficients"
+   }
+  },
+  {
+   "text": "The compositor lemma’s compactification-compatibility clause permits the trivial compactification of $j$ from Step 5 and still identifies the result with the live chosen-compactification compositor. Use $U_T$ and $a_v:U P_v\\cong F_vU$ of the compositor-realization lemma, and set $T_v=U(t_v)a_v^{-1}$, with $T_j:F_jU_YL_Y\\to U_ZL_Z$. That lemma supplies the previously missing equality $a_hU(\\alpha_R)=\\alpha_\\Omega F_j(a_f)a_j$, where $\\alpha_\\Omega$ is precisely the inverse of the live Nagata-built LowerShriekComp. Naturality of $a_j$ at $t_f$ changes Step 5 into\n$$T_h\\alpha_\\Omega=T_jF_j(T_f).$$\nLet $\\lambda_T:U_TL_T\\cong\\mathbf1_T$ be the specified degree-zero Tate unit. The open-counit realization lemma applies with the finite-extension-valued $B_T$, on the bounded constructible categories. Its counit equation and final unit-normalization clause give, after the canonical trivial-compactification comparison $F_j\\cong j_!$,\n$$\\lambda_ZT_j=\\epsilon_j^o\\,j_!(\\lambda_Y),$$\nwhere $\\epsilon_j^o:j_!\\mathbf1_Y\\to\\mathbf1_Z$ is the open counit read through the inverse of the monoidal pullback-unit map. In particular both $\\lambda_Y$ and $\\lambda_Z$ are the actual units used in the definition of purity. With $\\tau_v=\\lambda_{\\operatorname{target}(v)}T_v$, the preceding equations yield $\\tau_h\\alpha_\\Omega=\\epsilon_j^oF_j(\\tau_f)$.",
+   "uses": [
+    "lem-pur-condensed-compositor-realization",
+    "lem-pur-condensed-open-counit-realization",
+    "lem-pur-condensed-tate-realization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-composition/sk-prop-sp-composition.proof.md",
+    "place": "Realize the actual left compositor and match the two target-unit maps"
+   }
+  },
+  {
+   "text": "Let $\\widetilde c_v:U_XM\\to G_v(U L_{\\operatorname{target}(v)})$ be the representing transpose from exceptional reconstruction. The comparison used in the definition of purity is $c_v=G_v(\\lambda_{\\operatorname{target}(v)})\\widetilde c_v$, so its transpose is exactly $\\tau_v$. Let $q_j=u_j^{-1}:\\mathbf1_Y\\to G_j\\mathbf1_Z$. Refinement coherence compares the chosen compactification with the trivial one through a common refinement, preserving the representing counit. The restricted open adjunction and counit-preserving uniqueness then show that the transpose of $q_j$ is $\\epsilon_j^o$: the identification $F_j\\cong j_!$ is the chosen-compactification/trivial-compactification comparison, and its conjugate followed by the monoidal unit map is the live UnitIso. This uses only the finite-extension-valued coefficient category. Under the composite adjunction, the transpose of $G_f(q_j)c_f$ is\n$$\\epsilon_jF_j(q_j\\tau_f)=\\epsilon_j^oF_j(\\tau_f),$$\nby naturality and the triangle identity. The transpose of $c_{j,f}c_h$ is $\\tau_h\\alpha_\\Omega$, by the counit-mate definition of the live UpperShriekComp. Step 6 equates these transposes. Injectivity of the adjunction bijection gives $c_{j,f}c_h=G_f(q_j)c_f$, and hence\n$$G_f(u_j)c_{j,f}c_h=c_f.$$\nThis establishes the required equation for the normalized comparisons, including their target-unit factors. The actual mate calculation is now proved in Lean by smoothTrace_conjugate_adjunct and smoothPurityMap_comp_of_trace_transitivity, before the disputed instance. Apply the inverse composite-adjunction Hom bijection, the conjugate-counit identity and naturality of the live left compositor. For any target-unit map q, the given equation LowerShriekComp.inv;trace_h=F_j(trace_f;q);epsilon_j implies alpha_h;UpperShriekComp.hom=alpha_f;G_f(q). The argument uses the live chosen Nagata compositor and retains q explicitly. Establishing the geometric trace transitivity equation remains a separate obligation. The normalization of the open target-unit factor with an arbitrary preceding trace is now proved by smoothTrace_openComposite_counit. Functoriality separates t and the open-unit inverse, the actual open-unit counit equation removes the exceptional factor, and naturality transports the chosen left compactification comparison to the source of t. No smoothness, invertibility or assertion about smoothTrace is used in that counit calculation.",
+   "uses": [
+    "lem-pur-condensed-exceptional-reconstruction",
+    "def-pur-condensed-smooth-purity-iso",
+    "def-sfb-dc-open-lower-shriek-adjunction",
+    "lem-pur-condensed-open-counit-realization",
+    "lem-pur-reconstructed-pair-refinement-coherence",
+    "det-sp-unique-right-adjoint",
+    "lem-weil-pbc-mate-pasting"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-composition/sk-prop-sp-composition.proof.md",
+    "place": "Compare the explicit counit transposes and include G_v of the target units"
+   }
+  },
+  {
+   "text": "Both constructions use the identical Tate tower on $X$. Hence its Tate realization $a:\\iota_XU_XM\\xrightarrow{\\sim}B_X(d)[2d]$ is the same map for $f$ and $h$. By the defining formula for normalized condensed purity, $\\gamma_v=a(\\iota_Xc_v)^{-1}$. The equality $r c_h=c_f$ gives $(\\iota_Xc_h)^{-1}=(\\iota_Xc_f)^{-1}\\iota_Xr$. Composing on the left with $a$ gives $\\gamma_h=\\gamma_f\\iota_Xr$, as claimed. The shift remains $2d$ and the twist remains $d$ because the open map adds dimension zero. The complete algebraic last step is now proved in smoothPurityIso_comp_of_reconstructed_traces: take the same realized Tate object M and the same ambient Tate realization a for both maps; assume the two actual trace formulas and the reconstructed square ch.hom followed by r.hom = cf.hom. The reconstructed-trace inverse formula rewrites both purity isomorphisms. Cancel the epi ch.hom to prove ch.inv = r.hom followed by cf.inv, then apply the inclusion functor and associativity. The helper allows any comparison r, in particular the specified live exceptional compositor followed by open-unit identification. The two normalized trace formulas and the comparison square remain the preceding geometric obligations. The final native inversion, without any auxiliary reconstructed isomorphisms, is now proved by smoothPurityIso_comp_of_trace_transitivity. Supply the two actual IsIso hypotheses explicitly and the trace transitivity equation with q equal to the inverse live open-unit isomorphism. Compose the preceding purity-map equation with G_f of the open-unit hom, cancel the invertible actual alpha_h, and apply the inclusion functor. This gives exactly the original ambient formula. Neither invertibility nor the geometric trace equation is inferred from the disputed universal instance.",
+   "uses": [
+    "def-pur-condensed-smooth-purity-iso",
+    "lem-pur-condensed-tate-realization"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-composition/sk-prop-sp-composition.proof.md",
+    "place": "Invert the normalized purity comparison and include in the ambient category"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "thm-nagata-compactification",
+  "lem-pur-finite-smooth-adjunction-general-base",
+  "lem-amb-unbounded-compact-support-comparisons",
+  "lem-sp-finite-adjoint-compositor-transposes",
+  "def-weil-open-immersion",
+  "prop-asd-smooth-base-change",
+  "lem-weil-pbc-mate-pasting",
+  "lem-sp-finite-compact-site-coherence",
+  "lem-weil-pbc-finite-ring-constructible-derived-origin",
+  "lem-sp-et-proet-coefficient-compatibility",
+  "lem-sp-tower-adjoint-compositor-realization",
+  "lem-pur-condensed-tate-integral-tower",
+  "lem-pur-integral-reconstructed-representing-pair",
+  "lem-pur-twist-sheaf-locally-free",
+  "lem-pur-normalized-reconstruction-adjunction-calculus",
+  "lem-pur-condensed-open-counit-realization",
+  "lem-pur-condensed-compositor-realization",
+  "lem-pur-reconstructed-pair-refinement-coherence",
+  "lem-pur-compact-support-condensed-realization",
+  "lem-pur-condensed-tate-realization",
+  "lem-pur-condensed-exceptional-reconstruction",
+  "def-pur-condensed-smooth-purity-iso",
+  "def-sfb-dc-open-lower-shriek-adjunction",
+  "det-sp-unique-right-adjoint"
+ ],
+ "proof_origin": {
+  "by": "K1",
+  "date": "2026-10-27",
+  "kind": "partial formalization",
+  "source": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-thm-purity-transport/sk-thm-purity-transport.proof.md",
+  "note": "Four proved private helpers formalize the actual finite and reconstructed inverse quotient squares and the ordinary open-counit identity with an arbitrary preceding trace. All four original holes remain; no geometric trace is chosen."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "smooth purity isomorphism compatible with composition with an open immersion",
+   "results": "Hits read: AlgebraicGeometry.instIsSmoothOfIsOpenImmersion, AlgebraicGeometry.instIsSmoothOfRelativeDimensionOfNatNatOfIsOpenImmersion, AlgebraicGeometry.Scheme.Modules.restrictFunctorComp_hom_app_app, AlgebraicGeometry.LocallyRingedSpace.IsOpenImmersion.invApp_app_apply, AlgebraicGeometry.LocallyRingedSpace.IsOpenImmersion.isoRestrict_hom_ofRestrict, AlgebraicGeometry.Scheme.Hom.isoImage_hom_ι, AlgebraicGeometry.IsOpenImmersion.app_eq_appIso_inv_app_of_comp_eq, AlgebraicGeometry.Scheme.Hom.comp_appIso. These concern scheme open restriction and smoothness, not exceptional pullback or smooth purity.",
+   "date": "2026-10-25",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "exceptional pullback smooth purity isomorphism commutes with extending the target by an open immersion",
+   "results": "Hits read: AlgebraicGeometry.morphismRestrictOpensRange, AlgebraicGeometry.pullbackRestrictIsoRestrict_hom_ι_assoc, AlgebraicGeometry.pullbackRestrictIsoRestrict_hom_ι, AlgebraicGeometry.IsOpenImmersion.app_eq_appIso_inv_app_of_comp_eq, AlgebraicGeometry.pullbackRestrictIsoRestrict, AlgebraicGeometry.IsOpenImmersion.isoOfRangeEq_inv_fac_assoc, AlgebraicGeometry.pullbackRestrictIsoRestrict_inv_fst_assoc, AlgebraicGeometry.IsOpenImmersion.isoOfRangeEq_hom_fac_assoc. These concern scheme open restriction and smoothness, not exceptional pullback or smooth purity.",
+   "date": "2026-10-25",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "smoothPurity|smoothTrace|UpperShriek|purityIso",
+   "results": "No hits.",
+   "date": "2026-10-25",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Iso, CategoryTheory.Functor.mapIso",
+   "results": "Hits read: CategoryTheory.Functor.mapIso, CategoryTheory.Functor.mapIso_refl, CategoryTheory.Functor.mapIso_symm, CategoryTheory.Functor.mapIso_hom, CategoryTheory.Functor.mapIso_inv, CategoryTheory.Functor.mapIso_trans, CategoryTheory.Functor.mapIso_injective, CategoryTheory.Functor.preimageIso_mapIso. These are generic functor/isomorphism identities, not normalized smooth purity.",
+   "date": "2026-10-25",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Poincare duality orientation for smooth schemes unchanged after embedding the base as an open subscheme",
+   "results": "Hits read: AlgebraicGeometry.liftCoborder_app, AlgebraicGeometry.IsOpenImmersion.ofRestrict, AlgebraicGeometry.Scheme.Hom.liftCoborder, AlgebraicGeometry.Scheme.ofRestrict_toLRSHom_base, AlgebraicGeometry.Scheme.restrict, AlgebraicGeometry.Scheme.Hom.liftCoborder_preimage, AlgebraicGeometry.Scheme.ofRestrict, AlgebraicGeometry.Scheme.Opens.instIsOpenImmersionι. These concern scheme open restriction and smoothness, not exceptional pullback or smooth purity.",
+   "date": "2026-10-25",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "maintainer",
+  "item": "def-pur-condensed-smooth-purity-iso",
+  "date": "2026-10-25",
+  "tool": "tools/route_nodes.py",
+  "why": "PROVISIONAL: sorried declaration on the sorry route (local/sorry-route.json) with no DAG node, recorded automatically after the route recompute (the human, 2026-10-23: every proof-related upstream sorry gets a node, and a node without a written proof goes to stage 1). The statement is only the Lean signature and docstring: the stage-1 worker writes it in words with [node] citations and stmt_deps, does the Mathlib searches (LeanSearch, Loogle or LeanFinder, local grep), fills blueprint.same_as, and splits it"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-thm-purity-transport",
+ "lean": {
+  "existing": true,
+  "module": "WeilConjectures.SmoothPurity.Defs",
+  "file": "lean/WeilConjectures/SmoothPurity/Defs.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.CondensedRing.smoothPurityIso_comp_openImmersion",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.CondensedRing.smoothPurityIso_comp_openImmersion"
+  ],
+  "statement": "theorem smoothPurityIso_comp_openImmersion {Z : Over (Spec (.of k))} [LocallyOfFiniteType Z.hom]\n    [QuasiCompact Z.hom] [IsSeparated Z.hom] (j : Y ⟶ Z) [IsOpenImmersion j.left]\n    [SmoothOfRelativeDimension d (f ≫ j).left] :\n    smoothPurityIso ℓ (f ≫ j) d =\n      (ObjectProperty.ι _).mapIso\n          ((boundedConstructibleUpperShriekComp_padicAlgCl ℓ f j).app _ ≪≫\n            (boundedConstructibleUpperShriek _ ℓ f).mapIso\n              (boundedConstructibleUpperShriekUnitIso_padicAlgCl ℓ j)) ≪≫\n        smoothPurityIso ℓ f d :=\n  sorry",
+  "by": "maintainer",
+  "date": "2026-10-25",
+  "note": "upstream declaration attached as it stands, proof still `sorry`; recorded by tools/route_nodes.py",
+  "branch": "slopmaster2"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": [
+    "AlgebraicGeometry.ProEtale.CondensedRing.smoothPurityIso_comp_openImmersion"
+   ]
+  },
+  "slopmaster2": {
+   "state": "sorry_here",
+   "decls": [
+    {
+     "name": "AlgebraicGeometry.ProEtale.CondensedRing.smoothPurityIso_comp_openImmersion",
+     "module": "WeilConjectures.SmoothPurity.Defs",
+     "lines": [
+      169,
+      183
+     ],
+     "kind": "theorem",
+     "sorry": true
+    }
+   ],
+   "missing": [],
+   "open": []
+  }
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K1",
+  "result": "pass",
+  "landing": "20261027T112402-L-1577812",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ },
+ "split_report": {
+  "date": "2026-10-25",
+  "item": "lem-route-smooth-purity-iso-comp-open-immersion",
+  "worker": "stage1",
+  "summary": "Repair of all four return points: retains the finite diagonal/DNC comparison; cites clause 2 of det-sp-composition-comparisons before tower realization; separates the previously missing identification of the realized left compositor into one new statement-only lemma; reuses the exact finite-extension-valued condensed open-counit realization and its d=0 Tate-unit square; computes the composite transposes explicitly with both target-unit factors. Removes the continuous-coefficient Brown open-adjoint citation and replaces boilerplate tool reasons.",
+  "blueprint": "Latest sk-prop-sp-composition finite orientation and tensor-at-unit comparison (Steps 1–3), actual tower and coefficient transport (Steps 4–6), and counit-normalized adjoint identification of sk-thm-purity-transport Steps 2–3 (Step 7); Step 8 inverts the resulting normalized comparison. The new lemma isolates the missing left-compositor realization, with no purity assertion.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-finite-type-over-noetherian",
+    "why": "Supplies Noetherian schemes needed by the ordinary etale compact-support and finite-site comparison theorems; the purity unit does not prove this scheme-theoretic finiteness tool."
+   },
+   {
+    "node": "thm-nagata-compactification",
+    "why": "Supplies compactifications of the separated finite-type maps to construct the proper/open functors; this is a geometric input to the purity route."
+   },
+   {
+    "node": "lem-amb-unbounded-compact-support-comparisons",
+    "why": "Fixes the finite etale compositor and exchange pasting used to compare the common diagonal base-change factor in Step 2."
+   },
+   {
+    "node": "lem-sp-finite-adjoint-compositor-transposes",
+    "why": "Supplies the counit normalization of the finite right compositor in Step 1, not purity of any orientation."
+   },
+   {
+    "node": "prop-asd-smooth-base-change",
+    "why": "Identifies the actual first arrow of the finite diagonal orientation after open-target pasting; no reconstruction theorem supplies this finite exceptional base-change map."
+   },
+   {
+    "node": "lem-weil-pbc-mate-pasting",
+    "why": "Supplies the formal pasting and change-of-adjunction equations used for the finite orientation and the final explicit counit-transpose calculation."
+   },
+   {
+    "node": "lem-sp-finite-compact-site-coherence",
+    "why": "Identifies the ordinary-etale and pro-etale proper/open compositors on the finite twists before building their tower."
+   },
+   {
+    "node": "lem-sp-tower-adjoint-compositor-realization",
+    "why": "Gives actual derived-system compositors once both finite coefficient identities are supplied by det-sp-composition-comparisons clause 2."
+   },
+   {
+    "node": "det-sp-composition-comparisons",
+    "why": "Only clause 2 is used: its arbitrary-field finite b/c composition identities discharge the hypotheses of the tower realization theorem."
+   },
+   {
+    "node": "def-sfb-dc-open-lower-shriek-adjunction",
+    "why": "Defines the restricted ordinary open adjunction for an arbitrary condensed ring, used here for padicAlgClRingObj; no Loc(Dctf) Brown adjoint or continuous Qbar ring is substituted."
+   },
+   {
+    "node": "det-sp-unique-right-adjoint",
+    "why": "Identifies the actual conjugate of the trivial-compactification comparison with the chosen constructible right adjoint by its counit."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "thm-nagata-compactification",
+  "lem-amb-unbounded-compact-support-comparisons",
+  "lem-sp-finite-adjoint-compositor-transposes",
+  "prop-asd-smooth-base-change",
+  "lem-weil-pbc-mate-pasting",
+  "lem-sp-finite-compact-site-coherence",
+  "lem-sp-tower-adjoint-compositor-realization",
+  "det-sp-composition-comparisons",
+  "def-sfb-dc-open-lower-shriek-adjunction",
+  "det-sp-unique-right-adjoint"
+ ],
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "NT-cc-NE-866ec3b78",
+  "group": "NE",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NE-866ec3b78 (reviewer sub-agent of L); spot-checked: I read the mathematics in full. Item: the statement matches the Lean declaration smoothPurityIso_comp_openImmersion, γ_h = γ_f ∘ ι(G_f(u_j) ∘ c_{j,f}), checked against SmoothPurity/Defs.lean:186-195, ShriekComposition.lean:526-600 (LowerShriekComp is a Nagata composite, UpperShriekComp is its conjugate) and OpenImmersionUpperShriek.lean:86-130 (UnitIso = conjugate followed by the inverse monoidal ε). The coefficient category is the finite-extension-valued padicAlgClRingObj, the same as in the purity definition and the open-counit node. Nothing is weakened. Steps: (1-3) finite purity over an arbitrary field; X×_YX ≅ X×_ZX because j is mono, so the Rees, normal-cone and Kummer factors coincide and mate pasting gives a_h = a_f r_n; site coherence holds over any Noetherian base. (4) Clause 2 of det-sp-composition-comparisons (any k, any A→B) discharges the hypotheses of the tower compositor node; the k = F̄_q integral clause is not used. Locally free twists give the Tor interval [-2d,-2d], and the single-degree determination is elementary. (5) The reconstruction calculus gives the L H(e) composite comparison, which is exactly the e_Y factor in α_R. (6) I checked the algebra: the new square plus naturality of a_j gives T_hα_Ω = T_jF_j(T_f); the open-counit node and its unit clause give λ_ZT_j = ε^o_j j_!(λ_Y). (7) The transposes τ_hα_Ω and ε^o_jF_j(τ_f) agree, the transpose of u_j^{-1} is ε^o_j by unique-right-adjoint, and the bijection gives G_f(u_j)c_{j,f}c_h = c_f. (8) Inverting c gives the claim. The proof works for an open target. It specializes the latest sk-prop-sp-composition proof (orientation, tensor transpose, towers) through the common diagonal instead of charts. Return points 1-4 are addressed and det-sf-mate-open-restriction is gone. New node lem-pur-condensed-compositor-realization: the U-realization intertwines the reconstructed compositor α_R with LowerShriekComp^{-1}. It contains no purity, is strictly smaller than the item and is not a restatement. Its hypotheses fit the tower compositor and realization nodes, and it is consistent on K=0, identity maps and open g with the trivial compactification. The duplicate search (rg for LowerShriekComp and compositor+condensed; read localizing-lower-shriek-composition, compact-support-limit-equation-realization, integration-transpose-composition, nonrational-composition-seed, plus the worker's list) found no node stating it. Tool uses accepted: the sk-prop-sp-composition compositor nodes (clause 2 only), sk-thm-sf-compatibility site coherence, and the Mathlib leaves. FIX (form, B): the new node lacked merged_into and lean_audit (brief §3); I added them and put blueprint after id in fixes/dag/nodes/sec-smooth-purity/lem-pur-condensed-compositor-realization.json, with no change to content. The item is unchanged.; 1 file(s) fixed by the reviewer"
+ }
+}

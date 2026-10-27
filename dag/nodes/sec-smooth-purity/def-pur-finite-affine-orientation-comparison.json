@@ -16,9 +16,74 @@
   "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-reduction/thm-pur-finite-reduction-of-purity.md",
   "place": "Operation, root-line, twist and shift comparisons; finite-reduction proof"
  },
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "For each of the three affine-space geometric interfaces, expose the structure map as the composite of the relative affine-space projection with the base map. Mathlib gives local finite presentation and affineness of the projection, hence local finite type, quasi-compactness and separatedness. Composition gives the three stated conclusions.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Use the existing smooth relative-dimension instance for the affine line, simplifying Nat.card (ULift (Fin 1)) to one. The canonical closed-immersion lift identifies the zero section with the closed subscheme of its kernel. The section equation identifies the latter subscheme projection with the inverse isomorphism. Its finiteness, flatness and local finite presentation are therefore instances. Apply the finite-locally-free implication of the Cartier criterion to its ideal.",
+   "uses": [
+    "sbc-lem-affine-space-smooth",
+    "lem-pc-cartier-criterion"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply ordinary_supported_kummer_uniqueBoundary to that zero Cartier divisor, the finite coefficient ring and the exponent ell^n. Primality of ell proves positivity; diagonalExponent_annihilates and diagonalExponent_isUnit supply the remaining hypotheses. The conclusion is exactly existsUnique_finiteReductionOrientationClass. The exceptional adjunct is factored through finiteReductionSupportedOrientationAdjunct, the identical comparison and Ext-realization formula for a parameter coefficient ring and closed immersion; specialize to the zero section. This keeps the generic category instances compact during kernel checking.",
+   "uses": [
+    "lem-asd-ordinary-supported-kummer",
+    "def-coefficient-twists-detailed"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Choose a primitive ell^n-th root in the algebraically closed field. Its ell^(n-m)-th power is primitive of order ell^m by IsPrimitiveRoot.pow. The canonical shifted scalar-unit comparison is an isomorphism. The orientation-input root chart specializes the general transported finiteReductionLineChart at the affine line, with the same comparison and shift factors as before. Conjugate the shifted unit comparison by these two root charts to construct e. For any other compatible roots, finiteReductionLineChart_scalars commutes their chart-change factors through the fixed untwisted comparison. Functoriality and inverse cancellation give every normalization equation. Cancel one target chart to prove uniqueness.",
+   "uses": [
+    "def-pur-finite-reduction-comparisons",
+    "lem-pur-finite-reduction-line-chart-scalars"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The shifted root-line input is finite-Tor constructible by lem-pur-finite-reduction-line-input-constructible. Write each positive level as a successor and apply the finite exceptional operations preservation theorem at its predecessor. The specified fixed exceptional realization is canonically isomorphic to the chosen ordinary etale right adjoint by uniqueness of right adjoints; whiskering by the intrinsic equivalences and repleteness transfers finite-Tor constructibility to compositionExceptional. The compact-support scalar mate is invertible on this value. The counit Hom map at the reduced level is bijective on the finite-Tor domain. Transpose inverse compact-support comparison followed by the reduced counit; cancellation gives its normalization and injectivity gives uniqueness.",
+   "uses": [
+    "lem-pur-finite-reduction-line-input-constructible",
+    "lem-coef-finite-exceptional",
+    "lem-weil-finite-ctf-triangulated",
+    "def-pur-finite-reduction-comparisons"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Write the positive source and target levels as n+1 and m+1. The shifted affine root-line input is finite-Tor constructible by finiteReductionLineInput_constructible. Apply finiteReductionExceptionalFiniteModel to the zero section and this input, obtaining the full inclusion of the invertible finite exceptional quotient mate. Its counit equation is finiteReductionExceptionalFiniteModel_counit. The uniqueness clause of existsUnique_finiteReductionOrientationExceptionalComparison identifies its hom with the specified zero-section comparison. Rewrite by this equality and apply Iso.isIso_hom. The zero coefficient-level cases contradict the positivity hypotheses; equal positive levels and empty schemes are included.",
+   "uses": [
+    "lem-pur-finite-reduction-line-input-constructible",
+    "lem-pur-finite-reduction-exceptional-model-counit"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "sbc-lem-affine-space-smooth",
+  "lem-pc-cartier-criterion",
+  "lem-asd-ordinary-supported-kummer",
+  "def-coefficient-twists-detailed",
+  "def-pur-finite-reduction-comparisons",
+  "lem-pur-finite-reduction-line-chart-scalars",
+  "lem-pur-finite-reduction-line-input-constructible",
+  "lem-coef-finite-exceptional",
+  "lem-weil-finite-ctf-triangulated",
+  "lem-pur-finite-reduction-exceptional-model-counit"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-reduction/thm-pur-finite-reduction-of-purity.proof.md",
+  "place": "Steps 2 and 4, exceptional coefficient compatibility and counit reduction; existing affine-orientation constructions retained",
+  "group": "F9",
+  "date": "2026-10-26"
+ },
  "mathlib_match": null,
  "mathlib_searches": [
   {
@@ -86,7 +151,18 @@
   },
   "same_as": []
  },
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
  "chapter": "sec-smooth-purity",
  "unit": "sk-thm-purity-transport",
  "lean": {
@@ -101,6 +177,7 @@
    "WeilConjectures.PurityFiniteSetting.affineSpace_over_isSeparated_inst",
    "WeilConjectures.PurityFiniteSetting.finiteReductionZeroCartier",
    "WeilConjectures.PurityFiniteSetting.existsUnique_finiteReductionOrientationClass",
+   "WeilConjectures.PurityFiniteSetting.finiteReductionSupportedOrientationAdjunct",
    "WeilConjectures.PurityFiniteSetting.finiteReductionEtaleOrientation",
    "WeilConjectures.PurityFiniteSetting.finiteReductionOrientationInput",
    "WeilConjectures.PurityFiniteSetting.finiteReductionOrientation",
@@ -135,5 +212,15 @@
   "group": "ND",
   "result": "pass",
   "note": "Read item, source (master + main-20261015), all 6 delivered modules, the cited declarations (SmoothPurityMap, PurityCompositionCoherence, SmoothTrace, FixedFinitePositiveCoefficientTwist, ordinary_supported_kummer, affineLine_orientation) and both replaced upstream records (map_smoothPurityIso_hom_comp takes the constituent compatibilities as hypotheses; Etale.smoothPullbackExchange takes arbitrary supplied θ/φ on the étale site; neither states its node). Lean matches every clause: main square with node directions; affine orientation; trace for general K and the unit; composition = exact RHS of smoothPurityCompositionCoherence; base change (b_□ and exchange; v arbitrary). No added hypotheses, no e|n or flatness, universes as the deps, autoImplicit off. Every ∃! spec checked true: root-chart source/base-change comparisons (roots exist since k alg closed and ℓ≠p; independent of the root choice), counit-normalised exceptional maps via a genuine adjunction, unique Kummer class. Chart HEq factor types confirmed by test compiles; tests for the two pieces resting on upstream smoothPurityTensorPresentation timed out at 60 s (project's propositional-equality pattern). No hollow defs; theorems sorry. Records verbatim; stmt_deps additions allowed; report sections present; docstrings present. nt_compile of all 6 modules clean (6.5–24.3 s). Notes: finiteReductionPurityIsIso duplicates landed isIso_smoothPurityMap (not citable: dependency stmt_deps fixed in S2); new nodes use plain defs from PurityCompositionCoherence without citing thm-pur-composition-coherence (item already cites it); new orientation should be identified with affineLine_orientation (e|n only) in stage 3; proof-only imports; global Sheaf.monoidalCategory has precedent."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F9",
+  "result": "pass",
+  "landing": "20261025T204556-L-2976881",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

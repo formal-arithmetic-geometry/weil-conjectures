@@ -1,0 +1,187 @@
+{
+ "id": "lem-sf-open-support-normalization",
+ "kind": "statement",
+ "title": "Normalized open support and whole-system adjunction",
+ "statement": "Fix a prime $\\ell$, a finite extension $E/\\mathbf Q_\\ell$, a finite-field datum $D$, and a specified unit $\\ell\\in D.k$. Let $j:U\\hookrightarrow X$ be a quasi-compact open immersion over $D.k$, where $X$ is separated finite type and $U$ is finite type. Use the specified completed coefficient operations of [def-sf-integral-support-normalization-data] and their residue-field inverses. The actual compact-support functor for $(j,\\mathrm{id})$ has the comparison $d_j$ fixed by compact-support realization and section-normalized identity image. It has normalized ordinary pullback, preserves completeness and each reduction interval, has a reduction isomorphism whose composite with $d_j$ is exactly the compact-support finite projection, and admits the ordinary open adjunction restricted by these comparisons. The two whole-system unit/counit identities hold before evaluation, and the specified shift and exactness agree. Precisely these open clauses form $\\mathrm{OpenSupport}$; no closed-support conclusion is asserted.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sf-localization/prop-sf-open-closed-triangle-all-stages.proof.md",
+  "place": "Triangle, Hom vanishing and constructibility paragraphs; the detailed integral normalization argument is the seven-step proof of lem-sf-integral-support-functor-normalization, refined below."
+ },
+ "stmt_deps": [
+  "def-sf-integral-support-normalization-data"
+ ],
+ "proof": [
+  {
+   "text": "Set dj to the inverse of the specified compact-support realization followed by openIdentity. Use the finite-comparison isomorphism on each constructible object and the coefficient finiteImageIso to construct openReduction. Cancelling openIdentity and then the realization shows openProjection by the defining finite-projection specification. All comparison maps are the actual recorded maps.",
+   "uses": [
+    "def-weil-integral-rational-qbar-compact-support",
+    "def-zl-ordinary-open-support-normalization",
+    "lem-qcqs-compact-support-finite-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sf-localization/prop-sf-open-closed-triangle-all-stages.proof.md",
+    "place": "Triangle and constructibility paragraphs: the ordinary open operation and its integral realization."
+   }
+  },
+  {
+   "text": "Open quotient-Koszul completeness applies to every complete ambient object, not only to constructible objects. Transport its conclusion through the existing equivalence of completeness predicates and openDvr_ringed_identification; complete_iso preserves completeness under this natural isomorphism. Global invertibility of ell follows by mapping the specified unit in D.k to global sections.",
+   "uses": [
+    "lem-sf-open-quotient-koszul-completeness",
+    "lem-sf-open-dvr-ringed-identification",
+    "lem-sf-integral-compact-support-constructible",
+    "lem-sf-complete-direct-image-reduction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sf-localization/prop-sf-open-closed-triangle-all-stages.proof.md",
+    "place": "Integral constructibility paragraph: preservation of completeness under open extension."
+   }
+  },
+  {
+   "text": "At each finite level the intrinsic direct image of the identity is naturally the identity, using the intrinsic realization equivalence and ordinary lowerStarId. Thus the finite compact-support functor for (j,id) is exact derived extension by zero. Its homology comparison and preservation of zero objects transfer every cohomological support containment through openReduction, including an empty interval. No separate constructibility statement is required for this interval-only field.",
+   "uses": [
+    "def-sp-finite-intrinsic-direct-adjunction",
+    "lem-weil-extension-by-zero-exact",
+    "lem-sf-exact-functor-derived-triangulated"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sf-localization/prop-sf-open-closed-triangle-all-stages.proof.md",
+    "place": "Constructibility paragraph: exact finite extension by zero preserves cohomological bounds."
+   }
+  },
+  {
+   "text": "Apply lem-sf-open-support-adjunction-transpose for the normalized ordinary pullback presentation and the equality of Hom transposes. Restrict the ordinary open adjunction along the full constructible inclusions. The system counit equation is the transpose equality specialized to its counit. For the unit specialize to the identity on open extension; the whole-system compact comparison is invertible because each of its finite evaluations is, by compactRealization_existsUnique and conservativity on isomorphisms of system evaluation. Apply the elementary adjunction bijection and cancel that invertible map. This gives the whole-system unit equation, without asserting faithfulness of evaluation on morphisms.",
+   "uses": [
+    "lem-sf-open-support-adjunction-transpose",
+    "lem-sp-fully-faithful-adjunction-restriction",
+    "def-weil-system-operation-exchange-realization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sf-localization/prop-sf-open-closed-triangle-all-stages.proof.md",
+    "place": "Triangle and Hom vanishing paragraphs: the derived open adjunction with its actual unit and counit."
+   }
+  },
+  {
+   "text": "Transport the CommShift structure from the ordinary extension along dj and the fully faithful constructible inclusion with CommShift.ofComp. Its compatibility lemma is exactly openShiftNormalization. Both the ordinary exact-derived extension and the constructible inclusions are triangulated, so isTriangulated_iff_comp_right gives openExact for this same shift structure.",
+   "uses": [
+    "lem-sf-exact-functor-derived-triangulated",
+    "lem-weil-integral-constructible-triangulated"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sf-localization/prop-sf-open-closed-triangle-all-stages.proof.md",
+    "place": "Triangle paragraph: exact termwise open functors descend to derived categories."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sp-finite-intrinsic-direct-adjunction",
+  "def-weil-integral-rational-qbar-compact-support",
+  "def-weil-system-operation-exchange-realization",
+  "def-zl-ordinary-open-support-normalization",
+  "lem-qcqs-compact-support-finite-comparison",
+  "lem-sf-complete-direct-image-reduction",
+  "lem-sf-exact-functor-derived-triangulated",
+  "lem-sf-integral-compact-support-constructible",
+  "lem-sf-open-dvr-ringed-identification",
+  "lem-sf-open-quotient-koszul-completeness",
+  "lem-sf-open-support-adjunction-transpose",
+  "lem-sp-fully-faithful-adjunction-restriction",
+  "lem-weil-extension-by-zero-exact",
+  "lem-weil-integral-constructible-triangulated"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sf-localization/prop-sf-open-closed-triangle-all-stages.proof.md",
+  "place": "Triangle, Hom vanishing and constructibility paragraphs. F3: actual finite comparisons, exact extension homology, generic shift transport and a strictly smaller whole-system Hom-transpose obligation."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Derived complete integral constructible sheaves normalized open extension and closed direct image strict reduction adjunction comparison",
+   "results": "OK 8 hits: SheafOfModules.PullbackConstruction.adjunction, pushforwardPushforwardAdj, Scheme.Modules.restrictAdjunction, Functor.sheafPullbackConstruction.sheafAdjunctionContinuous, TopCat.Sheaf.pullbackPushforwardAdjunction, Functor.sheafAdjunctionContinuous, Scheme.Modules.pullbackPushforwardAdjunction, Functor.sheafAdjunctionCocontinuous.",
+   "date": "2026-10-25",
+   "verdict": "Only general ringed-site adjunctions; none supplies normalized integral strict-system support comparisons."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Adjunction\", \"restrict\"",
+   "results": "OK 10 hits, including restrictFullyFaithful, map_restrictFullyFaithful_unit_app and map_restrictFullyFaithful_counit_app.",
+   "date": "2026-10-25",
+   "verdict": "These prove the assembly formulas directly; they do not construct the open or closed strict quotient comparisons."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Extension by zero and closed direct image preserve derived complete constructible integral sheaves with normalized adjunctions",
+   "results": "OK 8 hits: Scheme.Modules.restrictAdjunction, SheafOfModules.pushforwardPushforwardAdj, Functor.pushforwardContinuousSheafificationCompatibility, pushforwardPushforwardAdj_counit_app_val_app, Scheme.Modules.instIsLeftAdjointRestrictFunctor, SheafOfModules.instIsRightAdjointPushforwardCompSheafRingCatMapSheafPushforwardContinuous, pushforwardPushforwardAdj_unit_app_val_app, Functor.sheafPullbackConstruction.sheafAdjunctionContinuous.",
+   "date": "2026-10-25",
+   "verdict": "No specialized completed integral constructible support theorem."
+  },
+  {
+   "tool": "grep",
+   "query": "pushforwardId|restrictFullyFaithful|map_restrictFullyFaithful",
+   "results": "OK 25 hits, including sheaf pushforward identity and Mathlib.CategoryTheory.Adjunction.Restrict at lines 42 and 63. Project rg found the original item and IntegralOpenReductionComparison, CompletedDirectImageLimits, and SfIntegralOrdinaryRecollementRealization. Blueprint search support normalization returned zero nodes.",
+   "date": "2026-10-25",
+   "verdict": "Reuse general restriction formulas and the existing definition bodies. The open/closed comparison glue is not an existing declaration."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.IntegralSupportFunctorNormalization",
+  "date": "2026-10-25",
+  "group": "D6"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-sf-open-closed-triangle-all-stages",
+   "place": "Integral support operations: separate the ordinary open and closed comparison constructions and assemble their restricted adjunctions.",
+   "via": [
+    "lem-sf-integral-support-functor-normalization",
+    "lem-sf-rational-localization-triangle-orthogonality"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sf-open-closed-triangle",
+ "lean": {
+  "module": "Sheaf.Paper.IntegralOpenSupportNormalization",
+  "file": "lean/Sheaf/Paper/IntegralOpenSupportNormalization.lean",
+  "declaration": "WeilConjectures.IntegralSupportNormalization.openSupportNormalization",
+  "statement": "theorem openSupportNormalization (D : FiniteFieldDatum.{u}) (primeUnit : IsUnit (l : D.k)) {U X : Scheme.{u}} [X.Over (Spec (.of D.k))] [U.Over (Spec (.of D.k))] [LocallyOfFiniteType (X ↘ Spec (.of D.k))] [QuasiCompact (X ↘ Spec (.of D.k))] [IsSeparated (X ↘ Spec (.of D.k))] [LocallyOfFiniteType (U ↘ Spec (.of D.k))] [QuasiCompact (U ↘ Spec (.of D.k))] [∀ x : X, Invertible (l : X.residueField x)] [∀ x : U, Invertible (l : U.residueField x)] (j : U ⟶ X) [IsOpenImmersion j] [QuasiCompact j] [j.IsOver (Spec (.of D.k))] : Nonempty (OpenSupport l E D primeUnit j)",
+  "existing": false,
+  "branch": "sheaf-dag",
+  "by": "D6",
+  "date": "2026-10-25",
+  "declarations": [
+   "WeilConjectures.IntegralSupportNormalization.OpenSupport",
+   "WeilConjectures.IntegralSupportNormalization.openSupportNormalization"
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-a5f73",
+  "group": "D6",
+  "result": "fix",
+  "landing": "20261025T122724-L-1799577",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F3",
+  "result": "pass",
+  "landing": "20261027T084359-L-3674026",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

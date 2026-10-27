@@ -1,0 +1,248 @@
+{
+ "id": "lem-dl-a1-equivariant-fibre-product-refinement",
+ "kind": "statement",
+ "title": "Equivariant refinement of a fibre-separating product after principal localization",
+ "statement": "Let $B\\to S$ be a homomorphism of commutative rings such that every element of $S$ satisfies a monic polynomial over $B$. Let a finite group $G$ act on $S$ by $B$-algebra automorphisms, and let $\\mathfrak p\\subset B$ be prime. Suppose there is a finite product decomposition $S\\simeq\\prod_{i=1}^n D_i$ of $B$-algebras, $n\\geq1$, such that every $D_i$ has exactly one prime over $\\mathfrak p$. No compatibility of this decomposition with $G$ is assumed. Then there exists $b\\in B\\setminus\\mathfrak p$ and a finite family $(e_j)_{j\\in J}$ in $S_b$ with $e_j^2=e_j$, $e_je_k=0$ for $j\\ne k$, and $\\sum_j e_j=1$, such that $s\\mapsto(e_js)_j$ is a $B_b$-algebra isomorphism $S_b\\simeq\\prod_{j\\in J}e_jS_b$, whose inverse is summation. The sets $D(e_j)=\\{Q\\in\\operatorname{Spec}S_b:e_j\\notin Q\\}$ refine the original factor partition after localization, each contain exactly one prime over $\\mathfrak pB_b$, and are permuted by $G$. Equivalently $G$ permutes the idempotents and factors. Contraction identifies the fibre primes before and after localization, preserving their residue fields and their $G$-action. In particular $|J|=n$, a chosen fibre prime remains in a chosen relabelled first factor, and purely inseparable residue extensions remain purely inseparable. Here spectra are as in [def-weil-affine-spectrum], $B_b=B[1/b]$, $S_b=S[1/\\varphi(b)]$ for the given map $\\varphi:B\\to S$, and the residue field of a prime $Q$ is $\\operatorname{Frac}(S/Q)$. No Noetherian or module-finiteness hypothesis is imposed.",
+ "source": {
+  "document": "literature/stacks-project/pione.tex",
+  "place": "Tag 0BST, lemma-inertia-invariants-etale, third reduction paragraph: equivariant refinement of clopen pieces and principal localization removing the empty-fibre pieces."
+ },
+ "stmt_deps": [
+  "def-weil-affine-spectrum"
+ ],
+ "proof": [
+  {
+   "text": "Let $c_i\\in S$ be the inverse images of the coordinate units of $\\prod_iD_i$. Thus $c_i^2=c_i$, $c_ic_k=0$ for $i\\ne k$, and $\\sum_i c_i=1$. At any prime $Q$ exactly one $c_i$ is outside $Q$: at least one is outside because their sum is $1$, and at most one because their pairwise products vanish. If this index is $i$, every other factor lies in $Q$, and projection identifies $Q$ with a unique prime of $D_i$, preserving contraction to $B$. Consequently the fibre is exactly $\\{Q_1,\\ldots,Q_n\\}$, with $Q_i$ the unique fibre prime in $D(c_i)$. These are statements about the prime-ideal spectrum of [def-weil-affine-spectrum].",
+   "uses": [
+    "def-weil-affine-spectrum"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/pione.tex",
+    "place": "Tag 0BST, lemma-inertia-invariants-etale, third reduction paragraph (finite equivariant refinement and principal localization)."
+   }
+  },
+  {
+   "text": "For each function $\\alpha:G\\to\\{1,\\ldots,n\\}$ put $f_\\alpha=\\prod_{g\\in G}g(c_{\\alpha(g)})$. The finite family is idempotent and pairwise orthogonal: if $\\alpha(g)\\ne\\beta(g)$, the corresponding two factors have product $g(c_{\\alpha(g)}c_{\\beta(g)})=0$. Distributivity gives $\\sum_\\alpha f_\\alpha=\\prod_g\\sum_i g(c_i)=1$. For $h\\in G$ define $(h\\alpha)(g)=\\alpha(h^{-1}g)$; reindexing the product gives $h(f_\\alpha)=f_{h\\alpha}$. The factor at $g=1$ also gives $c_{\\alpha(1)}f_\\alpha=f_\\alpha$, so $D(f_\\alpha)\\subset D(c_{\\alpha(1)})$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/pione.tex",
+    "place": "Tag 0BST, lemma-inertia-invariants-etale, third reduction paragraph (finite equivariant refinement and principal localization)."
+   }
+  },
+  {
+   "text": "By [lem-weil-pbc-spec-clopen-idempotent], every $D(f_\\alpha)$ is clopen. Orthogonality and the sum-one equation show that these subsets form a disjoint cover, allowing empty members. Every $Q_i$ belongs to exactly one of them, by the same prime-ideal argument as in step 1; each member contains at most one $Q_i$, because it lies in one $D(c_i)$. Let $J$ be the functions whose member meets the fibre. Then $J$ has exactly $n$ elements. The action on primes is $hQ=\\{h(s):s\\in Q\\}$; since $h$ fixes $B$, contraction to $B$ is unchanged. Together with $h(f_\\alpha)=f_{h\\alpha}$, this proves that both $J$ and its complement are invariant under $G$.",
+   "uses": [
+    "lem-weil-pbc-spec-clopen-idempotent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/pione.tex",
+    "place": "Tag 0BST, lemma-inertia-invariants-etale, third reduction paragraph (finite equivariant refinement and principal localization)."
+   }
+  },
+  {
+   "text": "The finite union $Z=\\bigcup_{\\alpha\\notin J}D(f_\\alpha)$ is closed and does not meet the fibre. The hypothesis about monic polynomials is exactly integrality, so [lem-weil-pbc-integral-spec-closed-map] makes its image $C$ in $\\operatorname{Spec}B$ closed, with $\\mathfrak p\\notin C$. Apply the basis clause of [lem-weil-pbc-spec-localization-away-basic-open] to choose $b\\notin\\mathfrak p$ such that $D(b)\\subset\\operatorname{Spec}B\\setminus C$. The localization clause of that node identifies $\\operatorname{Spec}S_b$ with $D(\\varphi(b))\\subset\\operatorname{Spec}S$. This open is disjoint from $Z$: any point in their intersection would contract both into $D(b)$ and into $C$.",
+   "uses": [
+    "lem-weil-pbc-integral-spec-closed-map",
+    "lem-weil-pbc-spec-localization-away-basic-open"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/pione.tex",
+    "place": "Tag 0BST, lemma-inertia-invariants-etale, third reduction paragraph (finite equivariant refinement and principal localization)."
+   }
+  },
+  {
+   "text": "Write $\\bar f_\\alpha$ for the image of $f_\\alpha$ in $S_b$. For $\\alpha\\notin J$ the set $D(\\bar f_\\alpha)$ is empty by step 4. The uniqueness clause of [lem-weil-pbc-spec-clopen-idempotent], applied to this idempotent and $0$, gives $\\bar f_\\alpha=0$. For $j\\in J$ put $e_j=\\bar f_j$. They remain orthogonal idempotents, and deleting the zero terms in the sum gives $\\sum_{j\\in J}e_j=1$. Contraction under localization identifies the fibre primes by [lem-weil-pbc-localization-prime-residue-field-iso], applied to $B\\to B_b$ and $S\\to S_b$: all the $Q_i$ survive because $\\varphi(b)\\notin Q_i$, and the square of localization maps commutes. Thus the contraction of $Q_iS_b$ to $B_b$ contracts to $\\mathfrak p$ in $B$, so equals $\\mathfrak pB_b$ by uniqueness in that prime correspondence. Conversely, a prime over $\\mathfrak pB_b$ contracts in $S$ to one over $\\mathfrak p$, hence to one of the $Q_i$. Thus each $D(e_j)$ still contains its unique fibre prime. It lies inside the localized original factor open since $c_{j(1)}f_j=f_j$.",
+   "uses": [
+    "lem-weil-pbc-spec-clopen-idempotent",
+    "lem-weil-pbc-localization-prime-residue-field-iso"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/pione.tex",
+    "place": "Tag 0BST, lemma-inertia-invariants-etale, third reduction paragraph (finite equivariant refinement and principal localization)."
+   }
+  },
+  {
+   "text": "Give $e_jS_b=\\{e_js:s\\in S_b\\}$ its induced addition and multiplication and unit $e_j$, with $B_b$-structure $a\\mapsto e_j\\varphi_b(a)$. The map $\\Phi(s)=(e_js)_j$ preserves addition, multiplication, units and these scalar maps. For $x_j\\in e_jS_b$, one has $e_jx_j=x_j$ and $e_kx_j=0$ for $k\\ne j$. Hence $e_k\\sum_jx_j=x_k$, whereas $\\sum_je_js=s$. Thus summation is inverse to $\\Phi$ and $\\Phi$ is the required $B_b$-algebra isomorphism. Under this isomorphism the prime belonging to factor $j$ is precisely one with $e_j\\notin Q$, by the coordinate-unit argument of step 1.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/pione.tex",
+    "place": "Tag 0BST, lemma-inertia-invariants-etale, third reduction paragraph (finite equivariant refinement and principal localization)."
+   }
+  },
+  {
+   "text": "Since every $h\\in G$ fixes $\\varphi(b)$, it acts on $S_b$ by $h(s/\\varphi(b)^r)=h(s)/\\varphi(b)^r$. To check well-definedness, an equality of fractions is witnessed by $\\varphi(b)^t(\\varphi(b)^u s-\\varphi(b)^r v)=0$; applying $h$ preserves that equation. The inverse is given by $h^{-1}$, and composition on each fraction gives $h(k(s))/\\varphi(b)^r=(hk)(s)/\\varphi(b)^r$, so these automorphisms form an action. The product calculation in step 2 now gives $h(e_j)=e_{hj}$, with $hj\\in J$. Consequently $h$ sends $e_jS_b$ isomorphically to $e_{hj}S_b$ and sends $D(e_j)$ to $D(e_{hj})$. This is the asserted permutation of factors and opens.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/pione.tex",
+    "place": "Tag 0BST, lemma-inertia-invariants-etale, third reduction paragraph (finite equivariant refinement and principal localization)."
+   }
+  },
+  {
+   "text": "The residue-field clause of [lem-weil-pbc-localization-prime-residue-field-iso] identifies the residue fields at $Q_i$ and $Q_iS_b$, and those at $\\mathfrak p$ and $\\mathfrak pB_b$, compatibly with the base ring maps. The local-ring definition of the residue field in the cited node agrees with $\\operatorname{Frac}(S/Q_i)$: send the residue of $s/t$ to $\\bar s/\\bar t$; its inverse lifts numerator and denominator, with $t\\notin Q_i$, and changing lifts does not change the class. The same formulas apply to $B$ and to the localized rings. Concretely these identifications send the fraction of residue classes $\\bar s/\\bar t$ to the same fraction after localization; denominators remain nonzero. For $h\\in G$, the induced map to the residue field at $hQ_i$ sends this fraction to $\\overline{h(s)}/\\overline{h(t)}$. The identical formula before and after localization proves equivariance. At the unique fibre prime of a factor $e_jS_b$, the quotient identifies with $S_b/Q_iS_b$ by $e_js\\mapsto\\bar s$, since the image of $e_j$ in that domain is the nonzero idempotent $1$; hence its fraction field agrees too. An element is purely inseparable over the base field exactly when a suitable characteristic-prime power lies in that field (in characteristic zero it lies in the field itself), a condition unchanged by these compatible field isomorphisms. Finally $|J|=n$ by step 3, so label the unique $j$ containing any chosen fibre prime as the first factor.",
+   "uses": [
+    "lem-weil-pbc-localization-prime-residue-field-iso"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/pione.tex",
+    "place": "Tag 0BST, lemma-inertia-invariants-etale, third reduction paragraph (finite equivariant refinement and principal localization)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-affine-spectrum",
+  "lem-weil-pbc-spec-clopen-idempotent",
+  "lem-weil-pbc-integral-spec-closed-map",
+  "lem-weil-pbc-spec-localization-away-basic-open",
+  "lem-weil-pbc-localization-prime-residue-field-iso"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/pione.tex",
+  "place": "Tag 0BST, lemma-inertia-invariants-etale, third reduction paragraph (finite equivariant refinement and principal localization)."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For an integral algebra with a finite group action a finite clopen partition separating fibre primes admits an equivariant refinement after localization on the base",
+   "results": "[leanfinder] OK 8 hit(s); Algebra.IsInvariant.exists_smul_of_under_eq_of_profinite, Algebra.IsInvariant.exists_smul_of_under_eq, Algebra.IsInvariant.orbit_eq_primesOver, exists_clopen_partition_of_clopen_cover, IsArithFrobAt.exists_of_isInvariant, arithFrobAt, Ideal.isPretransitive_of_isGalois, IsArithFrobAt.exists_primesOver_isConj. Hits concern prime-orbit transitivity, profinite clopen partitions or localization integrality; none gives an equivariant product refinement over a principal neighbourhood of this fibre.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Refine a finite clopen partition by translates under a finite group and localize the base to remove components not meeting a specified fibre",
+   "results": "[leanfinder] OK 8 hit(s); exists_clopen_partition_of_clopen_cover, Equidecomp.witness, Equidecomp.isDecompOn', Equidecomp.IsDecompOn, Equidecomp.isDecompOn, BoxIntegral.IntegrationParams.MemBaseSet.exists_common_compl, ShrinkingLemma.PartialRefinement.exists_gt, MeasureTheory.addFundamentalInterior_union_addFundamentalFrontier. Hits concern prime-orbit transitivity, profinite clopen partitions or localization integrality; none gives an equivariant product refinement over a principal neighbourhood of this fibre.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "IsClopen, MulAction",
+   "results": "[loogle] OK 0 hit(s); . Hits concern prime-orbit transitivity, profinite clopen partitions or localization integrality; none gives an equivariant product refinement over a principal neighbourhood of this fibre.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "(equivariant|invariant).*(clopen|partition|idempotent)|(clopen|partition|idempotent).*(equivariant|invariant)",
+   "results": "[grep] OK 1 hit(s); Mathlib/Topology/Algebra/Module/ContinuousLinearMap/Idempotent.lean. Hits concern prime-orbit transitivity, profinite clopen partitions or localization integrality; none gives an equivariant product refinement over a principal neighbourhood of this fibre.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "An integral morphism with a finite group action admits a group stable product decomposition with one prime in each factor after principal localization",
+   "results": "[leansearch] OK 8 hit(s); isIntegral_localization', Algebra.IsInvariant.isIntegral, instIsIntegralAtPrimeLocalizationAlgebraMapSubmonoidPrimeCompl, Equidecomp.IsDecompOn, FixedPoints.isIntegral, Algebra.IsInvariant.isIntegral_of_profinite, IsGaloisGroup.iff_isFractionRing, AlgebraicGeometry.IsIntegralHom.instIsStableUnderBaseChangeScheme. Hits concern prime-orbit transitivity, profinite clopen partitions or localization integrality; none gives an equivariant product refinement over a principal neighbourhood of this fibre.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "(equivariant|invariant).*(partition|idempotent)|(partition|idempotent).*(equivariant|invariant)",
+   "results": "Only ContinuousLinearMap/Idempotent.lean:23, about invariant range and kernel of a linear idempotent, not partitions of ring spectra. Returned names: Mathlib/Topology/Algebra/Module/ContinuousLinearMap/Idempotent.lean",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "An integral algebra with finite group action and a partition separating primes over p has an equivariant idempotent partition after principal localization",
+   "results": "Eight hits. Algebra.exists_etale_isIdempotentElem_forall_liesOver_eq requires module finiteness and changes the base etale-locally; invariant-ring integrality, prime orbits and localization results do not assert this equivariant refinement. Returned names: Algebra.exists_etale_isIdempotentElem_forall_liesOver_eq, Algebra.IsInvariant.isIntegral, Algebra.exists_etale_of_isEtaleAt, Ideal.instMulActionElemPrimesOver, IsLocalization.away_of_isIdempotentElem, instIsIntegralAtPrimeLocalizationAlgebraMapSubmonoidPrimeCompl, Ideal.isPretransitive_of_isGaloisGroup, Localization.AtPrime.instAlgebraOfLiesOver.congr_simp",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "IsIdempotentElem, MulSemiringAction",
+   "results": "Zero hits. Returned names: ",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A finite group acting on an integral algebra refines an idempotent partition into a group invariant partition after localizing away from a prime",
+   "results": "Eight hits, inspected: prime-orbit/Frobenius results or profinite-space clopen partitions. The latter require a compact Hausdorff totally disconnected space; an arbitrary ring spectrum is not Hausdorff. None asserts this algebraic principal-localization refinement. Returned names: IsArithFrobAt.arithFrobAt, IsArithFrobAt.exists_of_isInvariant, arithFrobAt, Algebra.IsInvariant.orbit_eq_primesOver, Algebra.IsInvariant.exists_smul_of_under_eq, Ideal.isPretransitive_of_isGalois, Ideal.isPretransitive_of_isGaloisGroup, Algebra.IsInvariant.exists_smul_of_under_eq_of_profinite",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Intersect every translate of a finite clopen partition and remove pieces with empty fibre using an integral closed map",
+   "results": "Eight hits, inspected: prime-orbit/Frobenius results or profinite-space clopen partitions. The latter require a compact Hausdorff totally disconnected space; an arbitrary ring spectrum is not Hausdorff. None asserts this algebraic principal-localization refinement. Returned names: exists_clopen_partition_of_clopen_cover, Profinite.NobelingProof.fin_comap_jointlySurjective, Profinite.Nobeling.ι, DiscreteQuotient.finsetClopens, ContinuousMap.exists_disjoint_nonempty_clopen_cover_of_mem_nhds_diagonal, DiscreteQuotient.comp_finsetClopens, TopologicalSpace.Clopens.exists_finset_eq_sup_prod, IsLocallyConstant.isClopen_fiber",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-dl-a1-finite-group-inertia-invariants-etale",
+  "date": "2026-10-22",
+  "group": "Q107"
+ },
+ "chapter": "sec-deligne-laumon-a1",
+ "unit": "sk-d-dl-a1-setup",
+ "blueprint": {
+  "from": {
+   "node": "rem-dl-a1-conventions",
+   "place": "Second paragraph of rem-dl-a1-conventions, equivalence between lisse extension across infinity and trivial inertia, via lem-dl-a1-lisse-extension-inertia and lem-dl-a1-weil-kernel-inertia; finite-quotient argument of Stacks 0BTD. Specific argument: Tag 0BST, lemma-inertia-invariants-etale, third reduction paragraph: equivariant refinement of clopen pieces and principal localization removing the empty-fibre pieces.",
+   "via": [
+    "lem-dl-a1-finite-group-inertia-invariants-etale",
+    "lem-dl-a1-normal-scheme-galois-inertia-presentation",
+    "lem-dl-a1-weil-kernel-inertia"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-dl-a1-equivariant-fibre-product-refinement",
+  "worker": "stage1",
+  "summary": "Expanded the idempotent construction suggested in Stacks 0BST: products of all translates, closed-image removal of empty-fibre pieces, explicit inverse ring maps and localization equivariance. All non-elementary inputs reuse existing nodes; no new nodes. Statement unchanged. Repair of the returned head 66150d93809: rebased the saved split onto the current live unsplit record, re-read every cited statement and verified all seven quotations remain verbatim. Made the fibre correspondence in step 5, the localized action law in step 7, and the agreement of the two residue-field conventions in step 8 explicit. Retained all searches and the unchanged statement.",
+  "blueprint": "rem-dl-a1-conventions, equivalence of lisse extension at infinity with trivial inertia, through the existing finite-inertia chain; realizes the third reduction paragraph of Stacks 0BST used by lem-dl-a1-finite-group-inertia-invariants-etale.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-localization-prime-residue-field-iso",
+    "why": "Generic localization prime correspondence and canonical residue-field isomorphism; the affine-line setup unit has no replacement for this commutative algebra tool."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-localization-prime-residue-field-iso"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q157-f240c2cae",
+  "group": "Q157",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q157-f240c2cae (reviewer sub-agent of L); spot-checked: Shape: one commit touching only the item and its report. The statement and stmt_deps are identical to the live record, which is still unsplit in both live and side-live. There are no new nodes, the cited nodes match each step's uses and proof_deps, and nothing is cited from SGA. Source: I read Stacks 0BST (pione.tex lemma-inertia-invariants-etale) in full, including the third reduction paragraph. The item states exactly that paragraph's equivariant clopen refinement and principal localization, with the bookkeeping its only citer (lem-dl-a1-finite-group-inertia-invariants-etale) uses. Step checks: (1) at each prime exactly one coordinate idempotent is missing, which gives the fibre {Q_i}. (2) f_alpha = prod_g g(c_alpha(g)) are idempotent, orthogonal and sum to 1, and h f_alpha = f_{h alpha} is a left action. (3) Uses the converse clause of the clopen-idempotent node. Fibre and J are in bijection, so |J| = n, and J is G-invariant because h fixes B. (4) Integral closed map, then the basis clause, then Spec S_b = D(phi b), which misses Z. No finiteness is used. (5) D(bar f_alpha) is empty, so the uniqueness clause gives 0; the fibre correspondence follows from clause (1) of the localization-prime node on both rings, since phi(b) is not in Q_i. (6)-(7) Explicit inverse algebra maps and a well-defined localized action, so h e_j = e_{hj}. (8) Clause (3) gives the residue fields; the Frac(S/Q) convention, equivariance, the factor quotient (bar e_j = 1) and pure inseparability are checked. Edge cases: trivial G, n = 1, empty pieces, nilpotents, non-injective or non-Noetherian B->S. No duplicate found by rg. I accept the tool use lem-weil-pbc-localization-prime-residue-field-iso (sk-thm-p1; generic Stacks 00E3/07BH; the setup unit has no substitute). No changes."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.EquivariantFibreProductRefinement",
+  "declaration": "Algebra.exists_equivariant_fibre_product_refinement",
+  "file": "lean/Sheaf/RingTheory/EquivariantFibreProductRefinement.lean",
+  "statement": "theorem exists_equivariant_fibre_product_refinement (B : Type u) (S : Type v) [CommRing B] [CommRing S] [Algebra B S] (hIntegral : Algebra.IsIntegral B S) (G : Type z) [Group G] [Finite G] (ρ : G →* (S ≃ₐ[B] S)) (p : PrimeSpectrum B) (n : ℕ) (hn : 0 < n) (D : Fin n → Type w) [∀ i, CommRing (D i)] [∀ i, Algebra B (D i)] (d : S ≃ₐ[B] ∀ i, D i) (hD : ∀ i, ∃! Q : PrimeSpectrum (D i), Q.asIdeal.comap (algebraMap B (D i)) = p.asIdeal) : ∃ (b : B), b ∉ p.asIdeal ∧ ∃ (e : Fin n → Localization.Away (algebraMap B S b)) (he : CompleteOrthogonalIdempotents e) (Φ : Localization.Away (algebraMap B S b) ≃+* ∀ j, (he.idem j).Corner), (∀ s j, (Φ s j).val = e j * s) ∧ (∀ x, Φ.symm x = ∑ j, (x j).val) ∧ (∀ a j, (Φ (Localization.awayMap (algebraMap B S) b a) j).val = e j * Localization.awayMap (algebraMap B S) b a) ∧ ∃ (ρb : G →* (Localization.Away (algebraMap B S b) ≃+* Localization.Away (algebraMap B S b))) (π : G →* Equiv.Perm (Fin n)), (∀ g s, ρb g (algebraMap S (Localization.Away (algebraMap B S b)) s) = algebraMap S (Localization.Away (algebraMap B S b)) (ρ g s)) ∧ (∀ g j, ρb g (e j) = e (π g j)) ∧ (∀ j, ∃ i, ∀ Q : PrimeSpectrum (Localization.Away (algebraMap B S b)), e j ∉ Q.asIdeal → algebraMap S (Localization.Away (algebraMap B S b)) (d.symm (Pi.single i 1)) ∉ Q.asIdeal) ∧ ∃ (pb : PrimeSpectrum (Localization.Away b)) (hpb : pb.asIdeal.comap (algebraMap B (Localization.Away b)) = p.asIdeal), (∀ j, ∃! Q : PrimeSpectrum (Localization.Away (algebraMap B S b)), Q.asIdeal.comap (Localization.awayMap (algebraMap B S) b) = pb.asIdeal ∧ e j ∉ Q.asIdeal) ∧ Set.BijOn (PrimeSpectrum.comap (algebraMap S (Localization.Away (algebraMap B S b)))) {Q | Q.asIdeal.comap (Localization.awayMap (algebraMap B S) b) = pb.asIdeal} {Q | Q.asIdeal.comap (algebraMap B S) = p.asIdeal} ∧ (∀ g (Q : PrimeSpectrum (Localization.Away (algebraMap B S b))), Q.asIdeal.comap (Localization.awayMap (algebraMap B S) b) = pb.asIdeal → (Q.asIdeal.comap (ρb g).toRingHom).comap (algebraMap S (Localization.Away (algebraMap B S b))) = (Q.asIdeal.comap (algebraMap S (Localization.Away (algebraMap B S b)))).comap (ρ g).toRingHom) ∧ (∀ Q : PrimeSpectrum (Localization.Away (algebraMap B S b)), Q.asIdeal.comap (Localization.awayMap (algebraMap B S) b) = pb.asIdeal → ∃ σ : Equiv.Perm (Fin n), e (σ ⟨0, hn⟩) ∉ Q.asIdeal) ∧ ∃ σB : p.asIdeal.ResidueField ≃+* pb.asIdeal.ResidueField, σB.toRingHom = Ideal.ResidueField.map p.asIdeal pb.asIdeal (algebraMap B (Localization.Away b)) hpb.symm ∧ (∀ (Q : PrimeSpectrum (Localization.Away (algebraMap B S b))) (hQ : Q.asIdeal.comap (Localization.awayMap (algebraMap B S) b) = pb.asIdeal), ∃ (h : (Q.asIdeal.comap (algebraMap S (Localization.Away (algebraMap B S b)))).comap (algebraMap B S) = p.asIdeal) (σQ : (Q.asIdeal.comap (algebraMap S (Localization.Away (algebraMap B S b)))).ResidueField ≃+* Q.asIdeal.ResidueField), σQ.toRingHom = Ideal.ResidueField.map _ Q.asIdeal (algebraMap S (Localization.Away (algebraMap B S b))) rfl ∧ σQ.toRingHom.comp (Ideal.ResidueField.map p.asIdeal _ (algebraMap B S) h.symm) = (Ideal.ResidueField.map pb.asIdeal Q.asIdeal (Localization.awayMap (algebraMap B S) b) hQ.symm).comp σB.toRingHom ∧ ((Ideal.ResidueField.map p.asIdeal _ (algebraMap B S) h.symm).IsPurelyInseparable ↔ (Ideal.ResidueField.map pb.asIdeal Q.asIdeal (Localization.awayMap (algebraMap B S) b) hQ.symm).IsPurelyInseparable)) ∧ (∀ (g : G) (Q : PrimeSpectrum (Localization.Away (algebraMap B S b))), Q.asIdeal.comap (Localization.awayMap (algebraMap B S) b) = pb.asIdeal → ∃ h : (Q.asIdeal.comap (ρb g).toRingHom).comap (algebraMap S (Localization.Away (algebraMap B S b))) = (Q.asIdeal.comap (algebraMap S (Localization.Away (algebraMap B S b)))).comap (ρ g).toRingHom, (Ideal.ResidueField.map (Q.asIdeal.comap (ρb g).toRingHom) Q.asIdeal (ρb g).toRingHom rfl).comp (Ideal.ResidueField.map _ (Q.asIdeal.comap (ρb g).toRingHom) (algebraMap S (Localization.Away (algebraMap B S b))) rfl) = (Ideal.ResidueField.map _ Q.asIdeal (algebraMap S (Localization.Away (algebraMap B S b))) rfl).comp (Ideal.ResidueField.map _ (Q.asIdeal.comap (algebraMap S (Localization.Away (algebraMap B S b)))) (ρ g).toRingHom h))",
+  "branch": "newtargets-dag",
+  "by": "Q39",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-2311500a6",
+  "group": "Q39",
+  "result": "pass",
+  "note": "Snapshot differs from live only in the lean field (live is split, no lean), so not superseded; no new nodes; statement verbatim; one sorry; docstrings carry source, blueprint and 8 steps; report has both sections. Hypotheses match the node and Stacks 0BST: Algebra.IsIntegral with no finiteness, rho : G →* (S ≃ₐ[B] S), d : S ≃ₐ[B] Π D i over Fin n with 0<n, ∃! fibre prime per factor, no G-compatibility, independent universes u v w z. Conclusion clauses all present: b ∉ p; CompleteOrthogonalIdempotents on Fin n (|J|=n); corner product iso with formula and summation inverse; rho_b extends rho (unique); pi : G →* Perm with rho_b g e_j = e_(pi g j); refinement of localized coordinate idempotents; pb over p (= pB_b); ∃! prime per D(e_j); BijOn of fibres; action compatibility; canonical residue isos pinned to ResidueField.map, base square, purely-inseparable iff, equivariance square. Citer lem-dl-a1-finite-group-inertia-invariants-etale gets everything its step uses. Advisory only: scalar and prime-action clauses are redundant consequences; relabel clause is trivial under Fin n, matching the node's 'in particular'. No file changed, so no compile."
+ }
+}

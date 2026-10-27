@@ -1,0 +1,204 @@
+{
+ "id": "lem-sfb-raynaud-generic-ample-power-model",
+ "kind": "statement",
+ "title": "Auxiliary ample model of a positive power of a generic symmetric line",
+ "statement": "Let $T$ be a normal integral Noetherian affine scheme [def-pc-scheme, def-pc-integral-scheme, pqf-def-locnoeth], where normal means that all local rings are integrally closed domains [def-weil-pbc-normal-ring]. Let $h:H\\to T$ be a smooth separated commutative group scheme of finite presentation [def-sbc-smooth-morphisms, def-sbc-locally-finite-presentation], with identity $e$ and addition and inverse satisfying the commutative group identities; separated means that the diagonal is a closed immersion. Suppose each geometric fibre over an algebraically closed residue-field extension $k$ fits into an exact sequence of fppf sheaves $1\\to(\\mathbf G_{m,k})^r\\to H_k\\to A_k\\to1$, where $r\\geq0$, $\\mathbf G_{m,k}=\\operatorname{Spec}k[t,t^{-1}]$ with multiplication and $A_k$ is a proper smooth geometrically connected $k$-group scheme. Let $\\eta$ be the generic point of $T$, and assume $H_\\eta$ is proper [def-weil-proper-morphism]. Given an ample invertible module $M$ on $H_\\eta$ [def-sc-invertible-module, def-weil-pbc-ample-invertible-module] with $[-1]^*M\\simeq M$ (tensor pullback [def-pc-module-pullback]), there exist an affine open covering $T=\\bigcup_i T_i$, integers $d_i\\geq1$, invertible modules $N_i$ on $H_{T_i}$ and isomorphisms $N_i|_{H_\\eta}\\simeq M^{\\otimes d_i}$, such that $N_i$ is relatively ample over $T_i$: its restriction over every affine open of $T_i$ is ample. Here $H_{T_i}$ is the restriction of $H$ to $T_i$. This is an existence assertion about an auxiliary ordinary line module, with no supplied line on $H$ and no cubical structure in its conclusion.",
+ "source": {
+  "document": "literature/raynaud-faisceaux-amples-sur-les-schemas-en-groupes-LNM119-1970.pdf",
+  "place": "XI 1.13 / XI 1.16: auxiliary ample-extension input used in Moret-Bailly VI 3.1, connected-fibre case, and Lan revised thesis Lemma 4.2.1.6. Original WANTED. This precise generic-power, normal-Noetherian formulation is agent responsibility; no assertion that the original was locally read."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-integral-scheme",
+  "pqf-def-locnoeth",
+  "def-weil-pbc-normal-ring",
+  "def-sbc-smooth-morphisms",
+  "def-sbc-locally-finite-presentation",
+  "def-weil-proper-morphism",
+  "def-weil-pbc-ample-invertible-module",
+  "def-pc-module-pullback",
+  "def-sc-invertible-module",
+  "def-sfb-semiabelian-geometric-fibres"
+ ],
+ "proof": [
+  {
+   "text": "Apply [lem-sfb-raynaud-generic-ample-symmetrization] with $S=T$, $G=H$, $p=h$ and $L=M$. Its hypotheses hold verbatim: $T$ is normal integral locally Noetherian since it is Noetherian; $h$ is smooth separated commutative of finite presentation with the specified semiabelian geometric fibres; and $M$ is ample and invertible on the generic fibre. The cited result needs neither properness of $H_\\eta$ nor symmetry of $M$, so those extra hypotheses cause no restriction on its application. It supplies an affine open covering $T=\\bigcup_iT_i$, positive integers $a_i$, relatively ample invertible modules $Q_i$ on $H_{T_i}$, and isomorphisms $(Q_i)_\\eta\\simeq(M\\otimes[-1]^*M)^{\\otimes a_i}$. In particular its relative ampleness assertion is over every affine open of each $T_i$, exactly the convention in this item.",
+   "uses": [
+    "lem-sfb-raynaud-generic-ample-symmetrization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/raynaud-faisceaux-amples-LNM119-1970.pdf",
+    "place": "XI Theorem 1.13, existing generic symmetrization prerequisite; original WANTED. Agent specialization using the supplied symmetry."
+   }
+  },
+  {
+   "text": "Choose an isomorphism $\\theta:[-1]^*M\\simeq M$ supplied by the symmetry hypothesis. The map $\\mathrm{id}_M\\otimes\\theta$ identifies $M\\otimes[-1]^*M$ with $M\\otimes M$. Taking its $a_i$-fold tensor product and regrouping the $2a_i$ factors gives $(M\\otimes[-1]^*M)^{\\otimes a_i}\\simeq M^{\\otimes 2a_i}$; in local frames this sends the tensor of $a_i$ pairs to the same ordered tensor of $2a_i$ factors, so it glues and is invertible. Put $N_i=Q_i$ and $d_i=2a_i\\geq1$, and compose with the generic isomorphism of step 1. These are the required generic identifications. The same $N_i$ retain the relative ampleness supplied in step 1. This constructs only ordinary line modules, as required.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/raynaud-faisceaux-amples-LNM119-1970.pdf",
+    "place": "XI Theorem 1.13, existing generic symmetrization prerequisite; original WANTED. Agent specialization using the supplied symmetry."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-raynaud-generic-ample-symmetrization"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/raynaud-faisceaux-amples-LNM119-1970.pdf",
+  "place": "Specialization of the existing generic symmetrization node by an explicit tensor isomorphism; original Raynaud XI 1.13 WANTED."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "cubical|cubist|Raynaud|generic.*ample|ample.*generic",
+   "results": "{\"t\": \"2026-10-23T19:10:01Z\", \"tool\": \"grep\", \"query\": \"cubical|cubist|Raynaud|generic.*ample|ample.*generic\", \"sub\": \"\", \"ok\": true, \"n_hits\": 4, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/FiberedCategory/Fibered.lean\", \"Mathlib/CategoryTheory/FiberedCategory/Cartesian.lean\", \"Mathlib/Order/Filter/Interval.lean\", \"Mathlib/RingTheory/Etale/Descent.lean\"], \"digest\": \"e119dd89467f11ee\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: read the returned names and types; the hits concern affine localization, structure-sheaf limit sections, ring Picard groups, or unrelated uses of ample. None states existence of an ample generic-power model on a semiabelian degeneration, or the cubical ampleness criterion. The grep Raynaud hit concerns flat descent; the two category bibliography hits are not mathematical matches."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsAmple\", \"pow\"",
+   "results": "{\"t\": \"2026-10-23T19:10:01Z\", \"tool\": \"loogle\", \"query\": \"\\\"IsAmple\\\", \\\"pow\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: read the returned names and types; the hits concern affine localization, structure-sheaf limit sections, ring Picard groups, or unrelated uses of ample. None states existence of an ample generic-power model on a semiabelian degeneration, or the cubical ampleness criterion. The grep Raynaud hit concerns flat descent; the two category bibliography hits are not mathematical matches."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Raynaud existence of ample extensions of powers of generic line bundles on smooth connected group schemes over normal bases",
+   "results": "{\"t\": \"2026-10-23T19:10:01Z\", \"tool\": \"leansearch\", \"query\": \"Raynaud existence of ample extensions of powers of generic line bundles on smooth connected group schemes over normal bases\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Proj.valuativeCriterion_existence_aux\", \"CommRing.relPic\", \"CommRing.relPic_eq_top\", \"AmpleSet\", \"AmpleSet.vadd_iff\", \"AmpleSet.of_one_lt_codim\", \"CategoryTheory.Abelian.Ext.mk₀_smul\", \"Module.Baer.ExtensionOfMaxAdjoin.extendIdealTo_eq\"], \"digest\": \"3b6f232588197e4a\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: read the returned names and types; the hits concern affine localization, structure-sheaf limit sections, ring Picard groups, or unrelated uses of ample. None states existence of an ample generic-power model on a semiabelian degeneration, or the cubical ampleness criterion. The grep Raynaud hit concerns flat descent; the two category bibliography hits are not mathematical matches."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A line bundle on a smooth connected group scheme over a normal noetherian affine base which is ample on the generic fibre has a positive tensor power extending to a relatively ample line bundle",
+   "results": "{\"t\": \"2026-10-23T19:10:02Z\", \"tool\": \"leanfinder\", \"query\": \"A line bundle on a smooth connected group scheme over a normal noetherian affine base which is ample on the generic fibre has a positive tensor power extending to a relatively ample line bundle\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.exists_eq_pow_mul_of_isAffineOpen\", \"AlgebraicGeometry.exists_appTop_map_eq_zero_of_isAffine_of_isLimit\", \"AlgebraicGeometry.exists_pow_mul_eq_zero_of_res_basicOpen_eq_zero_of_isAffineOpen\", \"AlgebraicGeometry.exists_of_res_zero_of_qcqs_of_top\", \"AlgebraicGeometry.Scheme.Pullback.Triplet.instNontrivialCarrierTensor\", \"AlgebraicGeometry.exists_of_res_eq_of_qcqs_of_top\", \"AlgebraicGeometry.exists_appTop_map_eq_zero_of_isLimit\", \"AlgebraicGeometry.AffineSpace.not_isIntegralHom\"], \"digest\": \"fd1ada08deeb5937\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: read the returned names and types; the hits concern affine localization, structure-sheaf limit sections, ring Picard groups, or unrelated uses of ample. None states existence of an ample generic-power model on a semiabelian degeneration, or the cubical ampleness criterion. The grep Raynaud hit concerns flat descent; the two category bibliography hits are not mathematical matches."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An ample symmetric line bundle on the generic abelian fibre of a smooth connected group over a normal noetherian scheme extends locally after a positive tensor power to an ample invertible sheaf",
+   "results": "{\"t\": \"2026-10-23T19:12:10Z\", \"tool\": \"leanfinder\", \"query\": \"An ample symmetric line bundle on the generic abelian fibre of a smooth connected group over a normal noetherian scheme extends locally after a positive tensor power to an ample invertible sheaf\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.exists_of_res_eq_of_qcqs_of_top\", \"AlgebraicGeometry.exists_eq_pow_mul_of_is_compact_of_quasi_separated_space_aux\", \"AlgebraicGeometry.exists_of_res_eq_of_qcqs\", \"AlgebraicGeometry.exists_of_res_zero_of_qcqs_of_top\", \"AlgebraicGeometry.exists_of_res_zero_of_qcqs\", \"AlgebraicGeometry.exists_eq_pow_mul_of_isAffineOpen\", \"AlgebraicGeometry.exists_appTop_map_eq_zero_of_isAffine_of_isLimit\", \"AlgebraicGeometry.exists_pow_mul_eq_zero_of_res_basicOpen_eq_zero_of_isAffineOpen\"], \"digest\": \"b518e7c5956103cd\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: read the returned names and types; the hits concern affine localization, structure-sheaf limit sections, ring Picard groups, or unrelated uses of ample. None states existence of an ample generic-power model on a semiabelian degeneration, or the cubical ampleness criterion. The grep Raynaud hit concerns flat descent; the two category bibliography hits are not mathematical matches."
+  },
+  {
+   "tool": "grep",
+   "query": "Raynaud|semiabelian|semiAbelian|cubical|cubist|generic.*ample|ample.*generic",
+   "results": "{\"t\": \"2026-10-23T19:46:30Z\", \"tool\": \"grep\", \"query\": \"Raynaud|semiabelian|semiAbelian|cubical|cubist|generic.*ample|ample.*generic\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: no hits for the scheme/group ampleness terminology"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Extend a tensor power of an ample line bundle from the generic fibre of a smooth connected group scheme to a relatively ample line bundle over a normal base",
+   "results": "{\"t\": \"2026-10-23T19:46:31Z\", \"tool\": \"leansearch\", \"query\": \"Extend a tensor power of an ample line bundle from the generic fibre of a smooth connected group scheme to a relatively ample line bundle over a normal base\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"TensorPower.mulEquiv\", \"TensorPower\", \"LinearEquiv.rTensor_pow\", \"TensorPower.gMul_def\", \"LinearEquiv.rTensor_zpow\", \"TensorPower.gMul_eq_coe_linearMap\", \"LinearEquiv.lTensor_pow\", \"LinearMap.lTensor_pow\"], \"digest\": \"044c42578809ad98\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: read returned types; these concern structure-sheaf localization, limits, affine-space or Proj maps, or tensor powers of ordinary modules, and give no ample extension of a generic line on a group scheme"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsAmple\", \"IsInvertible\"",
+   "results": "{\"t\": \"2026-10-23T19:46:31Z\", \"tool\": \"loogle\", \"query\": \"\\\"IsAmple\\\", \\\"IsInvertible\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: no hits for the scheme/group ampleness terminology"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An ample symmetric line bundle on the generic fibre of a semiabelian scheme over a normal noetherian base has a positive tensor power extending locally to a relatively ample invertible sheaf",
+   "results": "{\"t\": \"2026-10-23T19:46:32Z\", \"tool\": \"leanfinder\", \"query\": \"An ample symmetric line bundle on the generic fibre of a semiabelian scheme over a normal noetherian base has a positive tensor power extending locally to a relatively ample invertible sheaf\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.exists_eq_pow_mul_of_is_compact_of_quasi_separated_space_aux\", \"AlgebraicGeometry.exists_eq_pow_mul_of_isAffineOpen\", \"AlgebraicGeometry.exists_appTop_map_eq_zero_of_isAffine_of_isLimit\", \"AlgebraicGeometry.Scheme.Pullback.Triplet.instNontrivialCarrierTensor\", \"AlgebraicGeometry.exists_pow_mul_eq_zero_of_res_basicOpen_eq_zero_of_isAffineOpen\", \"AlgebraicGeometry.exists_appTop_map_eq_zero_of_isLimit\", \"AlgebraicGeometry.exists_app_map_eq_zero_of_isLimit\", \"AlgebraicGeometry.exists_eq_pow_mul_of_isCompact_of_isQuasiSeparated\"], \"digest\": \"a9bb4a4d0910cd19\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: read returned types; these concern structure-sheaf localization, limits, affine-space or Proj maps, or tensor powers of ordinary modules, and give no ample extension of a generic line on a group scheme"
+  },
+  {
+   "tool": "grep",
+   "query": "IsAmple|AmpleInvertible|ample.*invertible",
+   "results": "{\"t\": \"2026-10-23T19:47:09Z\", \"tool\": \"grep\", \"query\": \"IsAmple|AmpleInvertible|ample.*invertible\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: no hits for the scheme/group ampleness terminology"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Raynaud existence of relatively ample extensions of symmetrized generic line bundles on smooth commutative group schemes over normal schemes",
+   "results": "{\"t\": \"2026-10-23T19:47:11Z\", \"tool\": \"leanfinder\", \"query\": \"Raynaud existence of relatively ample extensions of symmetrized generic line bundles on smooth commutative group schemes over normal schemes\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.exists_appTop_map_eq_zero_of_isAffine_of_isLimit\", \"AlgebraicGeometry.exists_appTop_map_eq_zero_of_isLimit\", \"AlgebraicGeometry.AffineSpace.homOfVector\", \"AlgebraicGeometry.exists_app_map_eq_zero_of_isLimit\", \"AlgebraicGeometry.exists_eq_pow_mul_of_isAffineOpen\", \"AlgebraicGeometry.AffineSpace.instIsOverHomOfVectorOverSchemeInferInstanceOverClass\", \"AlgebraicGeometry.Proj.fromOfGlobalSections\", \"AlgebraicGeometry.FormallyUnramified.formallyUnramified_appLE\"], \"digest\": \"99ec95d2baf2052b\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: read returned types; these concern structure-sheaf localization, limits, affine-space or Proj maps, or tensor powers of ordinary modules, and give no ample extension of a generic line on a group scheme"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-normal-cubical-generic-ampleness",
+  "date": "2026-10-24",
+  "group": "NX"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Scheme representability of the stable abelian-level normalization. Supporting input: freeness at normalized boundary branches. Comparison of the full cohomology frame in the item with Deligne 3.3--3.5 Picard torsion frames; relative Picard existence for the pulled-back stable family. Supporting input for the present split: A relatively ample line module on the stable-curve multidegree-zero Picard space. Supporting input: Generic ampleness criterion for smooth connected group schemes. Raynaud input: existence, locally on a normal base, of an ample extension of a positive power of a symmetric line on the dense abelian open; comparison with the supplied line is a separate proof step. Cubical proof input: ampleness of an already supplied cubical extension; no existence assertion; auxiliary Raynaud existence input in step 1: a locally relatively ample ordinary line whose generic restriction is a positive power of the given generic ample line, before any cubical comparison.",
+   "via": [
+    "lem-sfb-normal-cubical-generic-ampleness",
+    "lem-sfb-symmetric-ample-power-extension",
+    "lem-sfb-regular-group-generic-ampleness",
+    "lem-sfb-stable-picard-theta-ampleness",
+    "lem-sfb-stable-relative-picard-kummer",
+    "lem-sfb-stable-level-versal-branch-freeness",
+    "lem-sfb-stable-abelian-level-normalization",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-raynaud-generic-ample-power-model",
+  "worker": "stage1",
+  "summary": "Reused the existing more general Raynaud generic symmetrization node. Its full statement provides relatively ample local models of powers of M tensor inverse-pullback M; the supplied symmetry gives the explicit generic power 2a. Statement unchanged, no new nodes, no Lean edits or compiles. Originals remain WANTED and the assembly is agent-written.",
+  "blueprint": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Scheme representability of the stable abelian-level normalization. Supporting input: freeness at normalized boundary branches. Comparison of the full cohomology frame in the item with Deligne 3.3--3.5 Picard torsion frames; relative Picard existence for the pulled-back stable family. Supporting input for the present split: A relatively ample line module on the stable-curve multidegree-zero Picard space. Supporting input: Generic ampleness criterion for smooth connected group schemes. Raynaud input: existence, locally on a normal base, of an ample extension of a positive power of a symmetric line on the dense abelian open; comparison with the supplied line is a separate proof step. Cubical proof input: ampleness of an already supplied cubical extension; no existence assertion; auxiliary Raynaud existence input in step 1: a locally relatively ample ordinary line whose generic restriction is a positive power of the given generic ample line, before any cubical comparison. This split realizes only the auxiliary ordinary-line existence input, using generic symmetrization and the symmetry tensor calculation; it leaves the unit and chapter route unchanged."
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q30-b6a0a30b0",
+  "group": "Q30",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q30-b6a0a30b0 (reviewer sub-agent of L); spot-checked: Read the item and the cited lem-sfb-raynaud-generic-ample-symmetrization in full; no fixes written. Shape: one commit, only the item JSON and the report (which has a Review by Q30 section); statement, stmt_deps, source and blueprint unchanged against clones/live; the item is still unsplit in live and side-live (not superseded); no repair note; no SGA. Step 1 applies the symmetrization node with S=T, G=H, L=M. Every hypothesis matches: normal integral, Noetherian implies locally Noetherian, smooth/separated/finite-presentation commutative group, the semiabelian fibre sequence verbatim, M ample and invertible. The extra H_eta-proper and symmetry hypotheses go unused, which is legitimate. It gives an affine cover with a_i>=1 and relatively ample Q_i with (Q_i)_eta = (M tensor [-1]^*M)^{a_i}. 'Nonempty W_j' is fine: T is integral, so empty members can be dropped and each nonempty T_i has generic point eta. The ampleness convention (ample above every affine open) matches the item. Same unit, so no tool_uses. Step 2 (elementary, correct): id tensor theta, raised to the a_i-th power and reassociated, gives M^{2a_i}; N_i=Q_i and d_i=2a_i>=1. Edge cases a_i=1, characteristic 2 and a field base cause no problem. No cycle: the cited node is unsplit with no proof_deps; the item's only citer is lem-sfb-normal-cubical-generic-ampleness. No duplicates: symmetric-ample-power-extension, regular-group-generic-ampleness, normal-cubical-generic-ampleness and normal-symmetric-cubical-extension all state different things. Raynaud XI 1.13 and Moret-Bailly are WANTED; neither is local. Advisories: the item's M^{tensor d} does not cite def-pur-sheaf-tensor-product (base-era wording); the Raynaud PDF names in source differ between item and steps."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.RaynaudGenericAmplePowerModel",
+  "declaration": "AlgebraicGeometry.raynaud_generic_ample_power_model",
+  "file": "lean/Sheaf/AlgebraicGeometry/RaynaudGenericAmplePowerModel.lean",
+  "statement": "theorem raynaud_generic_ample_power_model {T : Scheme.{u}} [IsAffine T] [IsIntegral T] [IsLocallyNoetherian T] (hT : ∀ t : T, IsDomain (T.presheaf.stalk t) ∧ IsIntegrallyClosed (T.presheaf.stalk t)) (H : Grp (Over T)) [IsCommMonObj H.X] [Smooth H.X.hom] [IsSeparated H.X.hom] [LocallyOfFinitePresentation H.X.hom] [QuasiCompact H.X.hom] (hH : HasSemiabelianGeometricFibres H) [IsProper ((Over.pullback (T.fromSpecResidueField (genericPoint T))).mapGrp.obj H).X.hom] (M : ((Over.pullback (T.fromSpecResidueField (genericPoint T))).mapGrp.obj H).X.left.Modules) [M.IsInvertible] (hM : Scheme.Modules.IsAmple _ M) (symmetry : (Scheme.Modules.tensorPullback ι[((Over.pullback (T.fromSpecResidueField (genericPoint T))).mapGrp.obj H).X].left).obj M ≅ M) : ∃ (I : Type u) (W : I → T.Opens), (⨆ i, W i) = ⊤ ∧ ∀ i : I, IsAffineOpen (W i) ∧ Nonempty (W i) ∧ ∃ d : ℕ, 1 ≤ d ∧ ∃ N : (pullback H.X.hom (W i).ι).Modules, N.IsInvertible ∧ Nonempty ((Scheme.Modules.tensorPullback (pullback.fst (pullback.fst H.X.hom (W i).ι) (pullback.fst H.X.hom (T.fromSpecResidueField (genericPoint T))))).obj N ≅ (Scheme.Modules.tensorPullback (pullback.snd (pullback.fst H.X.hom (W i).ι) (pullback.fst H.X.hom (T.fromSpecResidueField (genericPoint T))))).obj (M.tensorPow d)) ∧ ∀ V : (W i).toScheme.Opens, IsAffineOpen V → ∃ h : ((Scheme.Modules.tensorPullback (((pullback.snd H.X.hom (W i).ι) ⁻¹ᵁ V).ι)).obj N).IsInvertible, @Scheme.Modules.IsAmple ((pullback.snd H.X.hom (W i).ι) ⁻¹ᵁ V).toScheme ((Scheme.Modules.tensorPullback (((pullback.snd H.X.hom (W i).ι) ⁻¹ᵁ V).ι)).obj N) h",
+  "branch": "sheaf-dag",
+  "by": "Q145",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "Reuses the landed semiabelian geometric-fibre definition. Generic restriction is expressed by tensor pullbacks to the canonical intersection with each nonempty base open; integrality makes its projection to the generic fibre an isomorphism. No statement correction."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-3dc542c97",
+  "group": "Q145",
+  "result": "pass",
+  "note": "Delivery: item JSON differs from side-live only in lean + added landed def stmt_dep def-sfb-semiabelian-geometric-fibres (used); 11 dep records identical; one new module; lean.statement verbatim. Clause check: affine+IsIntegral+IsLocallyNoetherian+stalkwise IsDomain∧IsIntegrallyClosed = normal integral Noetherian affine; Grp(Over T)+IsCommMonObj, Smooth/IsSeparated/LFP+QuasiCompact = finite presentation (qs from separated), not stronger; HasSemiabelianGeometricFibres read (all alg-closed k:Type u, r:ℕ, split-torus kernel IsPullback, fppf local surjectivity, IsAbelianVariety) matches node; IsProper on generic group fibre; M invertible + IsAmple on generic fibre; symmetry iso via the actual inverse ι and recorded tensorPullback. Conclusion: affine cover ⨆=⊤ with nonempty members (harmless, integral T), d≥1, invertible N on pullback H (W i).ι, generic iso on H_{T_i}×_H H_η (second projection is an iso since η∈W i, so exactly N|η ≅ M^{⊗d}), ampleness of restrictions above every affine open V of W i. Edge cases (empty T excluded, r=0, d=1, char 2, field base, qc preimages for IsAmple's CompactSpace) and universes (single u) OK. No duplicate, no defs, proof sorry only, docstrings with source/WANTED/blueprint tag and both proof steps; report has Worker report and Second reading by Q145. Not recompiled (no change). Advisory only: comparison stated on the fibre product rather than via H_η→H_{T_i}, equivalent."
+ }
+}

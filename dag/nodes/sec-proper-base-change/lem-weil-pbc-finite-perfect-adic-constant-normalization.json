@@ -1,0 +1,146 @@
+{
+ "id": "lem-weil-pbc-finite-perfect-adic-constant-normalization",
+ "kind": "statement",
+ "title": "Constant algebraic normalization is sourcewise universal",
+ "statement": "For a scheme Y and any normalized algebraic quotient tower T [def-weil-pbc-finite-perfect-adic-tower-data], each explicitly constructed finitePerfectAdicEtaleConstantTransition Y T n [def-weil-pbc-finite-perfect-adic-constant-normalization] satisfies EtaleUniversalNormalization [def-weil-pbc-etale-universal-normalization] for the lifted consecutive quotient homomorphism. Thus its actual source arrows are universal and satisfy the canonical restriction coherence. This constructs no actual quotient, realization, Isom-presheaf map or covering.",
+ "source": {
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Tag 09C6, finite quotient levels and the normalized algebraic diagram; Tags 06YY and 09BV."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-finite-perfect-adic-constant-normalization",
+  "def-weil-pbc-etale-universal-normalization"
+ ],
+ "proof": [
+  {
+   "text": "T.normalized makes the transpose of the specified algebraic transition invertible, hence the transition is a universal arrow. Lift a small projective or K-flat resolution termwise. The identity on pure tensors commutes with the units and identifies scalar extension of the lifted complex with the lift of scalar extension. This proves universality of the explicit finitePerfectAdicLiftedTransition.",
+   "uses": [
+    "def-weil-pbc-finite-perfect-adic-tower-data",
+    "lem-weil-pbc-derived-scalar-extension-local-systems"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply normalizationConstantArrow_isUniversal to this specified lifted arrow. Pull to each etale source through the scalar-extension/pullback mate. Its unit identity identifies the resulting arrow with etaleIsomorphismNormalizationArrow and preserves universality.",
+   "uses": [
+    "lem-weil-pbc-constant-derived-normalization-universal",
+    "lem-weil-pbc-derived-scalar-extension-local-systems"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Paste the coefficient mates for successive inverse images; exact localization preserves their composition identity. This gives precisely the coherence field. All constructions apply without a point or a nonzero ring.",
+   "uses": [
+    "def-weil-pbc-derived-normalization-arrows"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-finite-perfect-adic-tower-data",
+  "lem-weil-pbc-derived-scalar-extension-local-systems",
+  "lem-weil-pbc-constant-derived-normalization-universal",
+  "def-weil-pbc-derived-normalization-arrows"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Tag 09C6, finite quotient levels and the normalized algebraic diagram; Tags 06YY and 09BV."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "universal arrows restriction of scalars induce a natural map on presheaves of local isomorphisms",
+   "results": "Eight hits: ModuleCat.restrictScalars, PresheafOfModules.restrictScalars, SheafOfModules.restrictScalars and ordinary restriction pseudofunctors; no derived local Isom normalization theorem.",
+   "date": "2026-10-27",
+   "verdict": "Reuse the existing scalar restriction and universal-arrow APIs; no direct match."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Descent of finite perfect complexes from pro-etale to etale with compatible coefficient reduction normalization",
+   "results": "Eight hits about standard etale algebras, smoothness, and ring-theoretic descent; no derived finite quotient normalization presentation.",
+   "date": "2026-10-27",
+   "verdict": "No replacement for the project-specific finite coefficient interfaces."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"StructuredArrow.IsUniversal\", \"IsIso\"",
+   "results": "No hits.",
+   "date": "2026-10-27",
+   "verdict": "Use desc, fac and hom_ext from StructuredArrow.IsUniversal."
+  },
+  {
+   "tool": "grep",
+   "query": "normalization.*[Uu]niversal|finitePerfectAdic.*[Dd]escent; localIsomorphismPresheaf; IsPerfect.finite_homology",
+   "results": "Mathlib has StructuredArrow.IsUniversal and coefficient restriction. The project has NormalizedDerivedIsomorphismTransport universalIso and normalized_square_transport, finite-ring descent, exact constant cohomology comparison, and IsPerfect boundedness and finite_homology. No canonical constant normalization diagram or actual quotient package matching these statements exists. Blueprint search for universal normalization returned zero matches.",
+   "date": "2026-10-27",
+   "verdict": "Use the proved generic tools and state only the remaining finite quotient steps."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.FinitePerfectAdicIsomorphismPresentation",
+  "date": "2026-10-27",
+  "group": "S7"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-finite-extension",
+   "place": "Tag 09C6, finite quotient levels and the normalized algebraic diagram; Tags 06YY and 09BV.",
+   "via": [
+    "lem-weil-pbc-finite-perfect-adic-isomorphism-presentation",
+    "lem-weil-pbc-finite-perfect-adic-isomorphism-sections",
+    "lem-weil-pbc-finite-perfect-adic-tower-extraction",
+    "lem-weil-pbc-finite-perfect-adic-realization",
+    "lem-weil-pbc-residue-lisse-perfect-lift",
+    "lem-weil-pbc-integral-stratified-perfect-characterization",
+    "lem-weil-pbc-condensed-e-realization",
+    "nt-target-proetale-e"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.FinitePerfectAdicConstantNormalization",
+  "file": "lean/Sheaf/Paper/FinitePerfectAdicConstantNormalization.lean",
+  "declaration": "AlgebraicGeometry.Scheme.finitePerfectAdicEtaleConstant_normalization",
+  "statement": "theorem finitePerfectAdicEtaleConstant_normalization (Y : Scheme.{t})\n    {A : Type t} [CommRing A] {d : AdicCoefficientDatum A}\n    (T : FinitePerfectAdicAlgebraTower d) (n : ℕ) :\n    EtaleUniversalNormalization Y\n      (RingHom.ulift (Ideal.Quotient.factorPowSucc d.ideal (n + 1)))\n      (finitePerfectAdicEtaleConstantTransition Y T n)",
+  "branch": "sheaf-dag",
+  "by": "S7",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S7",
+  "result": "pass",
+  "landing": "20261027T112432-L-1583335",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S7",
+  "result": "pass",
+  "landing": "20261027T112432-L-1583335",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

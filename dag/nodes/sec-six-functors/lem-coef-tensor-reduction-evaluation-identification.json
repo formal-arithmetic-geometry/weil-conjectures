@@ -1,0 +1,136 @@
+{
+ "id": "lem-coef-tensor-reduction-evaluation-identification",
+ "kind": "statement",
+ "title": "Canonical sequence evaluation agrees with literal vertical evaluation",
+ "statement": "For the actual coefficient ring sequence of l and E on W, coefficientSequenceEvaluation equals tensorReductionLiteralEvaluation, the explicitly typed abbreviation of systemSequenceEvaluation of coefficientSequenceCommRingSystem from [def-coef-ringed-sequence-site] and [lem-pur-system-ringed-sequence-site]. The literal evaluation preserves zero morphisms. Mapping this equality to cochain complexes gives a single shared evaluation isomorphism, used to transport finite chain components without changing any scalar action.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 0941, the vertical slices of the ringed sequence site; canonical coefficient evaluation and literal system evaluation."
+ },
+ "stmt_deps": [
+  "def-coef-ringed-sequence-site",
+  "lem-pur-system-ringed-sequence-site"
+ ],
+ "proof": [
+  {
+   "text": "Supply exact native-universe smallness, sheafification and locally bijective instances by specializing the existing coefficient-site constructions; this avoids unconstrained maximum universes. First specialize literal evaluation to the native coefficient/module universes using the explicit functor type. Unfold the two pushforward definitions. Both structural ring maps are the identity at every section; the canonical ring equality produces this identity by ObjectProperty.eqToHom_hom and eqToHom_app. Sheaf and natural-transformation extensionality give equality of the maps, hence of the evaluation functors. Literal evaluation preserves zero maps sectionwise. Transport preservation of zero across the equality and apply NatIso.mapHomologicalComplex to obtain the shared complex isomorphism.",
+   "uses": [
+    "def-coef-ringed-sequence-site",
+    "lem-pur-system-ringed-sequence-site",
+    "def-weil-completed-integral-coefficients"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-coef-ringed-sequence-site",
+  "lem-pur-system-ringed-sequence-site",
+  "def-weil-completed-integral-coefficients"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Identity of the actual vertical coefficient maps; the evaluation part of step 1 of lem-coef-tensor-reduction-ordinary-model"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Two vertical evaluations of modules on a ringed sequence site are equal when their structural coefficient maps agree, and their induced functors on cochain complexes are naturally isomorphic",
+   "results": "Eight hits, including SheafOfModules.pushforward.congr_simp and PresheafOfModules.Hom.ext; no theorem identifying these project-specific vertical evaluations.",
+   "verdict": "Generic congruence and extensionality APIs reused; no complete matching canonical evaluation identity.",
+   "date": "2026-10-27"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.NatIso.mapHomologicalComplex",
+   "results": "Seven hits in Mathlib.Algebra.Homology.Additive and HomotopyCategory. NatIso.mapHomologicalComplex maps the base-functor isomorphism to complexes.",
+   "verdict": "Exact match for the lifting substep, not the underlying coefficient evaluation identity.",
+   "date": "2026-10-27"
+  },
+  {
+   "tool": "grep",
+   "query": "NatIso.mapHomologicalComplex and pushforward congruence in Mathlib/Algebra/Homology/Additive.lean and Mathlib/Algebra/Category/ModuleCat/Sheaf",
+   "results": "Read NatIso.mapHomologicalComplex at Additive.lean:198 and the zero-preserving functor interface. The project source provides the two vertical evaluations and their structural maps.",
+   "verdict": "Standard complex lifting reused; comparison of the concrete structural maps is project-specific.",
+   "date": "2026-10-27"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.TensorReductionOrdinaryModel",
+  "date": "2026-10-27",
+  "group": "A2"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-thm-sf-compatibility",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "fix-prop-coherence",
+   "place": "Maps-used sentence: primitive tensor coefficient comparison; Quotient-transition compatibility on pure tensors in step 1 of lem-coef-tensor-reduction-ordinary-model",
+   "via": [
+    "lem-coef-tensor-reduction-ordinary-model",
+    "lem-sf-tensor-quotient-augmentation-on-good",
+    "lem-sf-primitive-quotient-augmentations",
+    "lem-sf-primitive-reduction-transpose",
+    "lem-sf-generator-reduction-coherence",
+    "lem-sf-integral-compactification-system-realization"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.TensorReductionEvaluationIdentification",
+  "file": "lean/Sheaf/Paper/TensorReductionEvaluationIdentification.lean",
+  "declaration": "WeilConjectures.tensorReduction_evaluation_eq",
+  "declarations": [
+   "WeilConjectures.tensorReductionSiteSmall",
+   "WeilConjectures.tensorReductionAbSheafify",
+   "WeilConjectures.tensorReductionAbLocallyBijective",
+   "WeilConjectures.tensorReductionLiteralEvaluation",
+   "WeilConjectures.tensorReduction_evaluation_eq",
+   "WeilConjectures.tensorReductionSystemEvaluation_zero",
+   "WeilConjectures.tensorReductionEvaluationComplexIso"
+  ],
+  "statement": "theorem tensorReduction_evaluation_eq (W : Scheme.{u}) (n : ℕ) :\n    coefficientSequenceEvaluation.{u, u} l E W n =\n      tensorReductionLiteralEvaluation l E W n",
+  "branch": "sheaf-dag",
+  "by": "A2",
+  "date": "2026-10-27"
+ },
+ "split_report": {
+  "date": "2026-10-27",
+  "item": "Sheaf.Paper.TensorReductionOrdinaryModel",
+  "worker": "stage3",
+  "summary": "Proved reconciliation of the two vertical evaluation APIs and their induced complex functors.",
+  "blueprint": "The finite evaluation identifications in step 1 of lem-coef-tensor-reduction-ordinary-model.",
+  "tool_uses": [
+   {
+    "node": "lem-pur-system-ringed-sequence-site",
+    "why": "Uses the generic literal vertical evaluation and its structural identity map, without replacing any six-functor unit step."
+   }
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A2",
+  "result": "pass",
+  "landing": "20261027T131447-L-2938524",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A2",
+  "result": "pass",
+  "landing": "20261027T131447-L-2938524",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

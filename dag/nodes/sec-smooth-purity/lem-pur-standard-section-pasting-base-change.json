@@ -1,0 +1,130 @@
+{
+ "id": "lem-pur-standard-section-pasting-base-change",
+ "kind": "statement",
+ "title": "Ordinary etale base change of the standard zero-section pasting map",
+ "statement": "Fix a finite purity setting $P$, with coefficient ring $\\Lambda$ and field $k$ [def-pur-conventions]. Let $B,B'$ be affine schemes of finite type over $k$ [def-weil-finite-type-morphism], with structure map $a_B$ on $B$, and let $b:B'\\to B$ be etale and finite type [def-weil-etale-morphism]. For $r\\geq0$, let $p_r:\\mathbf A^r_B\\to B$ and $z_r:B\\to\\mathbf A^r_B$ be the standard projection and zero section [def-sbc-affine-space], and put $D_r=Lz_r^*\\omega_{p_r}$ on the ordinary etale site. Write $\\nu_{d,e}:D_d\\otimes^L D_e\\overset\\sim\\longrightarrow D_{d+e}$ for the ordered-block map constructed in [lem-pur-diagonal-section-pasting]. Let $D'_r$ and $\\nu'_{d,e}$ denote the corresponding objects and maps over $B'$. Let $c_r:Lb^*D_r\\overset\\sim\\longrightarrow D'_r$ be exactly the sectionBaseChange isomorphism of [lem-pur-dnc-section-geometry], for the Cartesian affine-space square and its zero sections. For all $d,e\\geq0$, using the canonical derived inverse-image tensor constraint $\\tau_b$ [def-weil-derived-pullback-tensor-hom], the equality $c_{d+e}\\circ Lb^*(\\nu_{d,e})=\\nu'_{d,e}\\circ(c_d\\otimes^L c_e)\\circ\\tau_b$ holds. This is an ordinary-etale equality, with no comparison between sites. It includes empty schemes and zero ranks.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-composition/thm-pur-composition-coherence.proof.md",
+  "place": "Step 1, base-change compatibility of the constituent maps; compatible-DNC-charts proof Step 8, ordinary zero-section calculation"
+ },
+ "stmt_deps": [
+  "def-pur-conventions",
+  "lem-pur-diagonal-section-pasting",
+  "lem-pur-dnc-section-geometry",
+  "def-weil-etale-morphism",
+  "def-sbc-affine-space",
+  "def-weil-derived-pullback-tensor-hom",
+  "def-weil-finite-type-morphism"
+ ],
+ "proof": [
+  {
+   "text": "Use the Cartesian affine-space squares for ranks d, e and d+e. Both block projections and all zero sections commute with the affine-space base-change maps, by their coordinate formulas. The two adjacent tower squares are Cartesian, since adjoining the two independent coordinate blocks is a polynomial base change. Thus the entire ordered affine tower is the base change of the original one, also with empty blocks.",
+   "uses": [
+    "lem-pur-diagonal-section-pasting"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply SigmaBaseChange from [lem-pur-dualizing-sigma-cocycle-locality] to the two adjacent squares and pull its equality back along the new total zero section. The definition of nu in [lem-pur-diagonal-section-pasting] first identifies the d factor by the inverse smooth base-change mate and the e factor by the inverse-image compositor, then applies inverse monoidal pullback and the pulled-back sigma. Naturality and composition of the derived tensor constraint move the pulled-back tensor constraint in the sigma equation before these two comparisons.",
+   "uses": [
+    "lem-pur-dualizing-sigma-cocycle-locality",
+    "lem-pur-diagonal-section-pasting"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Expand sectionBaseChange from [lem-pur-dnc-section-geometry]. Use [lem-weil-pbc-mate-pasting] to paste Cartesian exceptional base-change mates; this identifies the first factor comparison obtained in the previous step with bc_d, and inverse-image composition coherence identifies the second with bc_e. The target comparison is bc_(d+e), since the pasted tower projection is p_(d+e). Substitute these three identifications and cancel the inverse compositors. This gives the stated equality. The mate and compositor identities are independent of nonemptiness or positive rank.",
+   "uses": [
+    "lem-pur-dnc-section-geometry",
+    "lem-pur-dualizing-sigma-cocycle-locality",
+    "lem-weil-pbc-mate-pasting"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-pur-diagonal-section-pasting",
+  "lem-pur-dualizing-sigma-cocycle-locality",
+  "lem-pur-dnc-section-geometry",
+  "lem-weil-pbc-mate-pasting"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-composition/thm-pur-composition-coherence.proof.md",
+  "place": "Step 1, base-change compatibility of the constituent maps; compatible-DNC-charts proof Step 8, ordinary zero-section calculation"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "base change compatibility of zero section pullback of dualizing composition isomorphism and monoidal etale proetale comparison",
+   "results": "8 hits, including KaehlerDifferential.tensorKaehlerEquivOfFormallyEtale_apply and SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom; none concerns dualizing sigma or section invariants.",
+   "date": "2026-10-26",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Base change for zero section pullback of the smooth dualizing composition map on affine spaces",
+   "results": "8 linear-algebra base-change hits, including IsBaseChange.dual and Module.Dual.baseChange; no dualizing-composition result.",
+   "date": "2026-10-26",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "sectionBaseChange|nu_etale|sigma_baseChange",
+   "results": "No Mathlib hits through msearch; project search finds the existing sigma locality and sectionBaseChange constructors, but not the zero-section pasting equality.",
+   "date": "2026-10-26",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.PurityCompositionCompatibleDncCharts",
+  "date": "2026-10-26",
+  "group": "H3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-pur-composition-coherence",
+   "place": "Step 1: base-change compatibility of the specified constituent maps",
+   "via": [
+    "lem-pur-composition-compatible-dnc-charts"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-thm-smooth-purity",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.StandardSectionPastingBaseChange",
+  "file": "lean/Sheaf/Paper/StandardSectionPastingBaseChange.lean",
+  "declaration": "WeilConjectures.PurityFiniteSetting.standardSectionPasting_baseChange",
+  "statement": "theorem standardSectionPasting_baseChange (P : PurityFiniteSetting.{u})\n    {B' B : Scheme.{u}} [IsAffine B'] [IsAffine B]\n    (d e : ℕ) (b : B' ⟶ B) [Etale b]\n    (aB : B ⟶ Spec (.of P.field.k)) [LocallyOfFiniteType aB] [QuasiCompact aB]\n    [LocallyOfFiniteType b] [QuasiCompact b] :\n    letI := P.noetherian aB\n    letI := P.noetherian (b ≫ aB)\n    letI := P.comparedExponent (𝟙 (Spec (.of P.field.k)))\n    let bc := fun r : ℕ ↦\n      letI := Dnc.invertibleExponent P (DiagonalPasting.pr r B ≫ aB)\n      letI := Dnc.compactifiable P (DiagonalPasting.pr r B) aB\n      letI := Dnc.compactifiable P (DiagonalPasting.pr r B') (b ≫ aB)\n      letI := DiagonalPasting.affineDimension r B\n      Dnc.sectionBaseChange P.Coefficient r (DiagonalPasting.pr r B)\n        (AffineSpace.isPullback_map b) (DiagonalPasting.zero r B)\n        (DiagonalPasting.zero r B') (AffineSpace.zeroSection_comp_map b)\n    (Etale.upperStar (ModuleCat.{u + 1} P.Coefficient) b).leftDerivedFunctor.mapIso\n        (DiagonalPasting.nu P.Coefficient P d e B aB) ≪≫ bc (d + e) =\n      Etale.leftDerivedUpperStarTensorIso (ModuleCat.{u + 1} P.Coefficient) b\n        (DiagonalPasting.zeroInvariant P.Coefficient P d B)\n        (DiagonalPasting.zeroInvariant P.Coefficient P e B) ≪≫\n      DiagonalPasting.tensorComparison P.Coefficient P (bc d) (bc e) ≪≫\n        DiagonalPasting.nu P.Coefficient P d e B' (b ≫ aB)",
+  "branch": "sheaf-dag",
+  "by": "H3",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H3",
+  "result": "pass",
+  "landing": "20261026T001730-L-25724",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H3",
+  "result": "pass",
+  "landing": "20261026T001730-L-25724",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

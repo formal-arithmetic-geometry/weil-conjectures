@@ -1,0 +1,243 @@
+{
+ "id": "lem-sfb-integral-localization-fraction-comparison",
+ "kind": "statement",
+ "title": "Integral localization: monic inverse certificates and fraction comparison",
+ "statement": "Let $A,B$ be commutative integral domains, and let $\\varphi:A\\to B$ be an injective unital ring homomorphism. Assume $B$ is integral over $A$, meaning that every $b\\in B$ satisfies a monic equation $b^n+\\sum_{j<n}\\varphi(a_j)b^j=0$ [def-weil-polynomial-ring]. Let $S=\\varphi(A\\setminus\\{0\\})$ and let $\\iota:B\\to C$ be a localization at $S$ [lem-weil-pbc-ring-localization-universal-property]: elements of $C$ are fractions $\\iota(b)\\iota(\\varphi(a))^{-1}$ with $a\\ne0$, and equality of fractions is equality after multiplying cross-products by some element of $S$.\nFor every nonzero $b\\in B$ and every monic equation as above, write $a_n=1$ and let $i$ be the least index in $\\{0,\\ldots,n\\}$ with $a_i\\ne0$. Then $i<n$ and, for $d=\\sum_{j=i+1}^n\\varphi(a_j)b^{j-i-1}$, one has\n$$\\varphi(a_i)+bd=0,\\qquad \\iota(b)\\bigl(-\\iota(d)\\iota(\\varphi(a_i))^{-1}\\bigr)=1.$$\nThus every nonzero element of $B$ has invertible image in $C$.\nLet $L$ be a field [def-weil-field] and $j:B\\to L$ an injective unital ring map making $L$ a field of fractions of $B$, meaning every $\\ell\\in L$ is $j(b)j(b')^{-1}$ with $b'\\ne0$. The unique comparison $q:C\\to L$ extending $j$ is bijective and satisfies\n$$q\\bigl(\\iota(b)\\iota(\\varphi(a))^{-1}\\bigr)=j(b)j(\\varphi(a))^{-1}.$$\nThis holds for arbitrary integral extensions, without module finiteness or Noetherian hypotheses.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tag 00GS, lemma-integral-over-field (2), algebraic background for the localized domain being a field. The explicit monic-equation inverse certificate and comparison with a specified fraction field are the agent expansion of old proof steps 5-6, rather than a formula quoted from this tag."
+ },
+ "stmt_deps": [
+  "def-weil-polynomial-ring",
+  "lem-weil-pbc-ring-localization-universal-property",
+  "def-weil-field"
+ ],
+ "proof": [
+  {
+   "text": "Put $a_n=1$. Since $A$ is a domain, $a_n\\ne0$, so the least nonzero index $i$ exists. If $i=n$, the equation reduces to $b^n=0$, impossible for $b\\ne0$ in the domain $B$ (also when $n=0$, since $b^0=1\\ne0$). Hence $i<n$. All coefficients below $i$ vanish. Distribute the finite sum and use $b^j=b^ib^{j-i}$ for $j\\ge i$ to rewrite the given equation as $0=b^i(\\varphi(a_i)+b\\sum_{j=i+1}^n\\varphi(a_j)b^{j-i-1})=b^i(\\varphi(a_i)+bd)$. Since $b^i\\ne0$, cancellation in the domain gives $\\varphi(a_i)+bd=0$.",
+   "uses": [
+    "def-weil-polynomial-ring"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00GS, lemma-integral-over-field (2), background only; explicit coefficient argument expanded by the agent; Tag 00CP, proposition-universal-property-localization, for the comparison map"
+   }
+  },
+  {
+   "text": "Injectivity of $\\varphi$ gives $\\varphi(a_i)\\ne0$, and $a_i\\ne0$ puts this element in $S$. Its image in $C$ is therefore a unit. Apply $\\iota$ to $bd=-\\varphi(a_i)$ and multiply by $-\\iota(\\varphi(a_i))^{-1}$: $\\iota(b)(-\\iota(d)\\iota(\\varphi(a_i))^{-1})=1$. Commutativity gives the product in the reverse order too. For each nonzero $b$, integrality supplies such an equation, so this constructs an inverse for every $\\iota(b)$.",
+   "uses": [
+    "lem-weil-pbc-ring-localization-universal-property"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00GS, lemma-integral-over-field (2), background only; explicit coefficient argument expanded by the agent; Tag 00CP, proposition-universal-property-localization, for the comparison map"
+   }
+  },
+  {
+   "text": "For $a\\ne0$, injectivity of $\\varphi$ and $j$ gives $j(\\varphi(a))\\ne0$. In the field $L$ it is a unit. Apply the localization universal property to $j:B\\to L$ at $S$. It gives the unique ring map $q:C\\to L$ extending $j$, with $q(\\iota(b)\\iota(\\varphi(a))^{-1})=j(b)j(\\varphi(a))^{-1}$.",
+   "uses": [
+    "def-weil-field",
+    "lem-weil-pbc-ring-localization-universal-property"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00GS, lemma-integral-over-field (2), background only; explicit coefficient argument expanded by the agent; Tag 00CP, proposition-universal-property-localization, for the comparison map"
+   }
+  },
+  {
+   "text": "To prove injectivity, suppose $q(x)=q(y)$ and represent $x=\\iota(u)\\iota(\\varphi(a))^{-1}$ and $y=\\iota(v)\\iota(\\varphi(c))^{-1}$ with $a,c\\ne0$. The formula for $q$ and multiplication by the nonzero denominators in $L$ give $j(u\\varphi(c))=j(v\\varphi(a))$. Injectivity of $j$ gives equality of these cross-products in $B$. The localization fraction equality criterion, taking the multiplier $1\\in S$, now gives $x=y$.",
+   "uses": [
+    "lem-weil-pbc-ring-localization-universal-property"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00GS, lemma-integral-over-field (2), background only; explicit coefficient argument expanded by the agent; Tag 00CP, proposition-universal-property-localization, for the comparison map"
+   }
+  },
+  {
+   "text": "For surjectivity, write any $\\ell\\in L$ as $j(u)j(v)^{-1}$ with $v\\ne0$. Step 2 supplies $w\\in C$ with $\\iota(v)w=1$. Applying $q$ gives $j(v)q(w)=1$; multiplying by $j(v)^{-1}$ gives $q(w)=j(v)^{-1}$. Thus $q(\\iota(u)w)=\\ell$. Together with step 4 this proves bijectivity. The argument used neither module finiteness nor a Noetherian hypothesis.",
+   "uses": [
+    "def-weil-field"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00GS, lemma-integral-over-field (2), background only; explicit coefficient argument expanded by the agent; Tag 00CP, proposition-universal-property-localization, for the comparison map"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-polynomial-ring",
+  "lem-weil-pbc-ring-localization-universal-property",
+  "def-weil-field"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tag 00GS, lemma-integral-over-field (2), background only; explicit coefficient argument expanded by the agent; Tag 00CP, proposition-universal-property-localization, for the comparison map"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "isField.*[Ii]ntegral|[Ii]ntegral.*isField|isFractionRing.*[Ii]ntegral|[Ii]ntegral.*isFractionRing",
+   "results": "Actual msearch response: OK; 25 hits; Mathlib/RingTheory/Polynomial/Eisenstein/IsIntegral.lean, Mathlib/RingTheory/Ideal/GoingUp.lean, Mathlib/RingTheory/IntegralClosure/IntegrallyClosed.lean, Mathlib/RingTheory/IntegralClosure/IntegrallyClosed.lean, Mathlib/RingTheory/IntegralClosure/IntegrallyClosed.lean, Mathlib/RingTheory/IntegralClosure/IntegrallyClosed.lean, Mathlib/RingTheory/IntegralClosure/IntegrallyClosed.lean, Mathlib/RingTheory/IntegralClosure/IsIntegral/AlmostIntegral.lean",
+   "date": "2026-10-22",
+   "verdict": "no match for the complete statement: Algebra.IsAlgebraic localization instance gives the fraction-field localization ingredient and IsIntegral.isUnit gives abstract units over a field; neither states the explicit least-nonzero-coefficient certificate together with the specified comparison. IsIntegralClosure hits impose an integral-closure hypothesis absent here"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsLocalization\", \"IsIntegral\", \"IsField\"",
+   "results": "Actual msearch response: OK; 0 hits; ",
+   "date": "2026-10-22",
+   "verdict": "no match for the complete statement: Algebra.IsAlgebraic localization instance gives the fraction-field localization ingredient and IsIntegral.isUnit gives abstract units over a field; neither states the explicit least-nonzero-coefficient certificate together with the specified comparison. IsIntegralClosure hits impose an integral-closure hypothesis absent here"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An injective integral extension of integral domains becomes a field after localizing at all nonzero elements of the base ring, and this localization is a fraction field of the extension",
+   "results": "Actual msearch response: OK; 8 hits; IsIntegralClosure.isLocalization, IsIntegralClosure.isLocalization_of_isSeparable, instIsFractionRingLocalizationAlgebraMapSubmonoidPrimeComplFractionRing, instIsSeparableFractionRingLocalizationAlgebraMapSubmonoidPrimeCompl, IsIntegralClosure.isFractionRing_of_algebraic, integralClosure.isFractionRing_of_algebraic, IsFractionRing.isFractionRing_of_isDomain_of_isLocalization, instAlgebraAtPrimeFractionRing",
+   "date": "2026-10-22",
+   "verdict": "no match for the complete statement: Algebra.IsAlgebraic localization instance gives the fraction-field localization ingredient and IsIntegral.isUnit gives abstract units over a field; neither states the explicit least-nonzero-coefficient certificate together with the specified comparison. IsIntegralClosure hits impose an integral-closure hypothesis absent here"
+  },
+  {
+   "tool": "grep",
+   "query": "isFractionRing|isLocalization|isUnit",
+   "results": "Actual msearch response: OK; 4 hits; 37, 38, 40, 50",
+   "date": "2026-10-22",
+   "verdict": "no match for the complete statement: Algebra.IsAlgebraic localization instance gives the fraction-field localization ingredient and IsIntegral.isUnit gives abstract units over a field; neither states the explicit least-nonzero-coefficient certificate together with the specified comparison. IsIntegralClosure hits impose an integral-closure hypothesis absent here"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsIntegral\", \"IsLocalization\"",
+   "results": "Actual msearch response: OK; 11 hits; IsLocalization.Away.isIntegral_of_isIntegral_map, IsLocalization.Away.exists_isIntegral_mul_of_isIntegral_algebraMap, IsLocalization.Away.exists_isIntegral_mul_of_isIntegral_mk', IsLocalization.exists_isIntegral_smul_of_isIntegral_map, IsIntegral.exists_multiple_integral_of_isLocalization, isIntegrallyClosed_of_isLocalization, Polynomial.isIntegral_isLocalization_polynomial_quotient, IsIntegrallyClosed.of_isLocalization_maximal",
+   "date": "2026-10-22",
+   "verdict": "no match for the complete statement: Algebra.IsAlgebraic localization instance gives the fraction-field localization ingredient and IsIntegral.isUnit gives abstract units over a field; neither states the explicit least-nonzero-coefficient certificate together with the specified comparison. IsIntegralClosure hits impose an integral-closure hypothesis absent here"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The localization of an integral domain algebra integral over an injective base domain at all nonzero base elements is a fraction field",
+   "results": "Actual msearch response: OK; 8 hits; IsIntegralClosure.isLocalization_of_isSeparable, IsIntegralClosure.isLocalization, IsIntegralClosure.isFractionRing_of_algebraic, Algebra.IsAlgebraic.instIsLocalizationAlgebraMapSubmonoidNonZeroDivisors, instIsScalarTowerAtPrimeFractionRing_1, instIsIntegralAtPrimeLocalizationAlgebraMapSubmonoidPrimeCompl, Localization.subalgebra.isLocalization_subalgebra, IsLocalization.instIsScalarTowerAtPrimeFractionRing",
+   "date": "2026-10-22",
+   "verdict": "no match for the complete statement: Algebra.IsAlgebraic localization instance gives the fraction-field localization ingredient and IsIntegral.isUnit gives abstract units over a field; neither states the explicit least-nonzero-coefficient certificate together with the specified comparison. IsIntegralClosure hits impose an integral-closure hypothesis absent here"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Given injective integral domains A to B integral, localization C of B at images of nonzero A has explicit inverses for nonzero b from the least nonzero coefficient of a monic equation, and any comparison C to a fraction field of B is bijective",
+   "results": "Actual msearch response: OK; 8 hits; isFractionRing_of_exists_eq_algebraMap_or_inv_eq_algebraMap_of_injective, Field.localization_map_bijective, IsIntegralClosure.isLocalization, IsField.localization_map_bijective, Localization.isLocalization_range_mapToFractionRing, IsIntegralClosure.isLocalization_of_isSeparable, IsFractionRing.self_iff_bijective, Localization.isFractionRing_range_mapToFractionRing",
+   "date": "2026-10-22",
+   "verdict": "no match for the complete statement: Algebra.IsAlgebraic localization instance gives the fraction-field localization ingredient and IsIntegral.isUnit gives abstract units over a field; neither states the explicit least-nonzero-coefficient certificate together with the specified comparison. IsIntegralClosure hits impose an integral-closure hypothesis absent here"
+  },
+  {
+   "tool": "grep",
+   "query": "isFractionRing|isUnit",
+   "results": "Actual msearch response: OK; 20 hits; Mathlib/RingTheory/IntegralClosure/IntegralRestrict.lean, Mathlib/RingTheory/IntegralClosure/IntegralRestrict.lean, Mathlib/RingTheory/IntegralClosure/IntegralRestrict.lean, Mathlib/RingTheory/IntegralClosure/IntegralRestrict.lean, Mathlib/RingTheory/IntegralClosure/IntegralRestrict.lean, Mathlib/RingTheory/IntegralClosure/IntegrallyClosed.lean, Mathlib/RingTheory/IntegralClosure/IntegrallyClosed.lean, Mathlib/RingTheory/IntegralClosure/IntegrallyClosed.lean",
+   "date": "2026-10-23",
+   "verdict": "no match: related fraction-field/localization or polynomial root facts do not state the complete least-nonzero-coefficient certificate for arbitrary domains and every monic equation together with the specified comparison"
+  },
+  {
+   "tool": "leansearch",
+   "query": "An injective integral extension of domains localized at the nonzero elements of the base is a fraction field, with explicit inverses from a monic equation",
+   "results": "Actual msearch response: OK; 8 hits; IsIntegralClosure.isFractionRing_of_algebraic, IsFractionRing.toField, NumberField.RingOfIntegers.instIsFractionRing, Ring.instIsFractionRingNormalClosureSubtypeAlgebraicClosureFractionRingMemIntermediateFieldNormalClosure, IsFractionRing.inv_def, instIsFractionRingAtPrimeFractionRing, isIntegral_localization, isFractionRing_of_exists_eq_algebraMap_or_inv_eq_algebraMap_of_injective",
+   "date": "2026-10-23",
+   "verdict": "no match: related fraction-field/localization or polynomial root facts do not state the complete least-nonzero-coefficient certificate for arbitrary domains and every monic equation together with the specified comparison"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsIntegral\", \"IsLocalization\"",
+   "results": "Actual msearch response: OK; 11 hits; IsLocalization.Away.isIntegral_of_isIntegral_map, IsLocalization.Away.exists_isIntegral_mul_of_isIntegral_algebraMap, IsLocalization.Away.exists_isIntegral_mul_of_isIntegral_mk', IsLocalization.exists_isIntegral_smul_of_isIntegral_map, IsIntegral.exists_multiple_integral_of_isLocalization, isIntegrallyClosed_of_isLocalization, Polynomial.isIntegral_isLocalization_polynomial_quotient, IsIntegrallyClosed.of_isLocalization_maximal",
+   "date": "2026-10-23",
+   "verdict": "no match: related fraction-field/localization or polynomial root facts do not state the complete least-nonzero-coefficient certificate for arbitrary domains and every monic equation together with the specified comparison"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Explicit inverse for a nonzero integral element from the least nonzero coefficient of any monic equation, then comparison of localization at nonzero base elements with the fraction field is bijective",
+   "results": "Actual msearch response: OK; 8 hits; Field.localization_map_bijective, IsField.localization_map_bijective, IsIntegralClosure.isLocalization, IsLocalization.bijective, TensorProduct.toIntegralClosure_bijective_of_isLocalization, Localization.isLocalization_range_mapToFractionRing, TensorProduct.toIntegralClosure_bijective_of_isLocalizationAway, IsFractionRing.self_iff_bijective",
+   "date": "2026-10-23",
+   "verdict": "no match: related fraction-field/localization or polynomial root facts do not state the complete least-nonzero-coefficient certificate for arbitrary domains and every monic equation together with the specified comparison"
+  },
+  {
+   "tool": "grep",
+   "query": "trailingCoeff.*(eval|root)|eval.*trailingCoeff|root.*trailingCoeff",
+   "results": "Actual msearch response: OK; 4 hits; Mathlib/Algebra/Polynomial/Div.lean, Mathlib/Algebra/Polynomial/Div.lean, Mathlib/Algebra/Polynomial/Div.lean, Mathlib/Algebra/Polynomial/RingDivision.lean",
+   "date": "2026-10-23",
+   "verdict": "no match: related fraction-field/localization or polynomial root facts do not state the complete least-nonzero-coefficient certificate for arbitrary domains and every monic equation together with the specified comparison"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a nonzero root b of a monic polynomial, remove the power of X given by its least nonzero coefficient to obtain a nonzero constant coefficient a and a plus b times d equals zero",
+   "results": "Actual msearch response: OK; 8 hits; IsAdjoinRootMonic.coeff_root, exists_integer_of_is_root_of_monic, IsAdjoinRootMonic.modByMonicHom_root, IsAdjoinRootMonic.coeff_root_pow, Polynomial.X_sub_C_mul_removeFactor, Polynomial.eval_divByMonic_pow_rootMultiplicity_ne_zero, inv_eq_of_root_of_coeff_zero_ne_zero, IsAdjoinRootMonic.modByMonicHom_root_pow",
+   "date": "2026-10-23",
+   "verdict": "no match: related fraction-field/localization or polynomial root facts do not state the complete least-nonzero-coefficient certificate for arbitrary domains and every monic equation together with the specified comparison"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-finite-dominant-generic-pushforward-stalk",
+  "date": "2026-10-22",
+  "group": "Q84"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": "det-thm-sf-ctf-stability-direct-images",
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), auxiliary high-genus-cover argument in the alteration reduction: the finite-curve genus comparison used to exclude rational curves. Riemann--Hurwitz for the separable factor, retaining the full effective different in wild characteristic (Stacks 0C1B). Supporting lemma: Degree of an invertible sheaf pulled back along a proper curve map. In the supporting pullback-degree argument (Stacks 0AYZ), first sentence of the proof: identify the generic stalk of the finite direct image with the source function field. Old proof steps 5-6: the entire least-nonzero-coefficient inverse argument and bijectivity of the specified localization-to-fraction-field map.",
+   "via": [
+    "lem-sfb-finite-dominant-generic-pushforward-stalk",
+    "lem-sfb-proper-curve-bundle-pullback-degree",
+    "lem-sfb-curve-riemann-hurwitz-numerical",
+    "lem-sfb-finite-curve-genus-monotonicity",
+    "lem-sfb-high-genus-equivariant-cover",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-integral-localization-fraction-comparison",
+  "worker": "stage1",
+  "summary": "Expanded all clauses by finite-sum factorization, domain cancellation, an explicit localization inverse, the existing universal property, and cross-product injectivity plus fraction surjectivity. No new nodes or statement changes. Repaired the null blueprint ancestor using the existing parent chain.",
+  "blueprint": "Current blueprint det-thm-sf-ctf-stability-direct-images proof paragraph (3), supporting algebra under the inherited finite-curve route: the parent lem-sfb-finite-dominant-generic-pushforward-stalk old steps 5-6. The current proof no longer spells out this auxiliary curve argument; its inherited algebraic claim is retained and proved directly."
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-NS-d3f0ed4c2",
+  "group": "NS",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NS-d3f0ed4c2 (reviewer sub-agent of L); spot-checked: I read the whole delivery, which is one commit with the item and its report. There are no new nodes. The statement and stmt_deps are identical to live, where the item is still unsplit; no repair note exists for it, so it is neither superseded nor a re-split. Source read: Stacks algebra.tex 00GS lemma-integral-over-field (lines 7782-7810), used as background only; the agent origin is declared. Also read: 00CP proposition-universal-property-localization (1084-1110), which matches lem-weil-pbc-ring-localization-universal-property (IsLocalization.lift/ringHom_ext); def-weil-field; and def-weil-polynomial-ring. All cited nodes are Mathlib leaves or definitions, so there is no route or tool_uses issue. Step 1: the least-nonzero-index factorisation b^i(φ(a_i)+bd), the i=n and n=0 cases, and cancellation in the domain are all correct. Step 2: the explicit inverse −ι(d)ι(φ(a_i))^{-1} is correct. Step 3: q comes from the universal property once j(φ(a)) is nonzero in L. Step 4: injectivity follows from cross-products, injectivity of j and the fraction criterion with multiplier 1. Step 5: surjectivity uses the step-2 inverse of ι(v). Tested on A=B; on k[t²,t³]⊂k[t] with b=t (equation X²−t²); on X³−t²X with i=1; on X^p−a; with n=0 impossible and b=0 excluded. rg -L found no duplicate of the item; the only node stating it is the parent, which cites it. The parent's step 3 uses exactly the clauses this statement gives: bijectivity and the fraction formula. blueprint.from.node was filled as det-thm-sf-ctf-stability-direct-images, the from.node of lem-sfb-admissible-direct-image at the end of the via chain, which is coherent. Maintainer note: the parent chain still has from.node null. review_split's 'no such node' messages are an artifact of the symlinked snapshot directories. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.IntegralLocalizationFractionComparison",
+  "declaration": "IsLocalization.integral_localization_fraction_comparison",
+  "file": "lean/Sheaf/RingTheory/IntegralLocalizationFractionComparison.lean",
+  "statement": "theorem integral_localization_fraction_comparison (A : Type u) (B : Type v) (C : Type w) [CommRing A] [IsDomain A] [CommRing B] [IsDomain B] [CommRing C] [Algebra A B] [Algebra B C] [IsLocalization (Algebra.algebraMapSubmonoid B (nonZeroDivisors A)) C] (hφ : Function.Injective (algebraMap A B)) (hIntegral : ∀ b : B, IsIntegral A b) : (∀ (b : B), b ≠ 0 → ∀ (p : Polynomial A), p.Monic → p.eval₂ (algebraMap A B) b = 0 → p.natTrailingDegree < p.natDegree ∧ algebraMap A B (p.coeff p.natTrailingDegree) + b * (∑ j ∈ Finset.Ioc p.natTrailingDegree p.natDegree, algebraMap A B (p.coeff j) * b ^ (j - p.natTrailingDegree - 1)) = 0 ∧ algebraMap B C b * (-algebraMap B C (∑ j ∈ Finset.Ioc p.natTrailingDegree p.natDegree, algebraMap A B (p.coeff j) * b ^ (j - p.natTrailingDegree - 1)) * Ring.inverse (algebraMap B C (algebraMap A B (p.coeff p.natTrailingDegree)))) = 1) ∧ (∀ b : B, b ≠ 0 → IsUnit (algebraMap B C b)) ∧ (∀ (L : Type z) [Field L] [Algebra B L], Function.Injective (algebraMap B L) → (∀ ℓ : L, ∃ b b' : B, b' ≠ 0 ∧ ℓ = algebraMap B L b * (algebraMap B L b')⁻¹) → ∃ q : C →+* L, q.comp (algebraMap B C) = algebraMap B L ∧ (∀ q' : C →+* L, q'.comp (algebraMap B C) = algebraMap B L → q' = q) ∧ Function.Bijective q ∧ ∀ (b : B) (a : A), a ≠ 0 → q (algebraMap B C b * Ring.inverse (algebraMap B C (algebraMap A B a))) = algebraMap B L b * (algebraMap B L (algebraMap A B a))⁻¹)",
+  "branch": "newtargets-dag",
+  "by": "N9",
+  "date": "2026-10-23",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-4a1e35d24",
+  "group": "N9",
+  "result": "pass",
+  "note": "Read node, 3 stmt_deps (Polynomial, IsLocalization.lift/ringHom_ext, Field), source 00GS/00CP, module and report. Every hypothesis and clause matches: algebraMap+injectivity for φ; IsIntegral for monic equations; algebraMapSubmonoid(nonZeroDivisors A) = φ(A∖0) in a domain; natTrailingDegree/natDegree/Ioc sum for i, n, d; Ring.inverse is the genuine unit inverse; IsUnit clause; for every field L with injective j and explicit fraction premise, ∃ q extending j, unique among all extending maps, bijective, with the fraction formula. Universes independent, no extra assumptions. Edge cases checked: i=n impossible, n=0 vacuous, positive trailing degree allowed. Statement field verbatim; name unused in Mathlib/live; no hollow defs; only sorry; docstrings with source, blueprint and 5 steps; node equals live apart from lean and live has no lean record (not superseded). No compile run (no file change). No findings."
+ }
+}

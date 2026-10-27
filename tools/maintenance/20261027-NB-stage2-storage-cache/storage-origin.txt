@@ -1,0 +1,14 @@
+commit 8e38f4daaacb8c23829b14224794b3850394fa81
+Author:     Bin Wu <844524296@qq.com>
+AuthorDate: Tue Oct 27 05:52:58 2026 +0800
+Commit:     Bin Wu <844524296@qq.com>
+CommitDate: Tue Oct 27 05:52:58 2026 +0800
+
+    leanindex text cache: keyed SQLite store instead of a whole-file pickle; machine-wide slots for check-one
+    
+    The 1.4 GB pickle was loaded whole by every process (3.5 GB RSS, ~70% of a lander check) and rewritten whole at
+    exit (disk full twice on 2026-10-27). Rows are now read per key and inserted per new key (WAL, concurrent-safe).
+    textcache.use_shared is a no-op: leanindex reads SHEAF_LEANINDEX_CACHE itself. batch_land check-one takes one of
+    SHEAF_CHECK_SLOTS (16) flock slots, so orphaned pools after a lander restart cannot double the checks.
+    
+    Co-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>

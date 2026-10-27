@@ -1,0 +1,352 @@
+{
+ "id": "lem-pur-finite-tate-source-structural-coherence",
+ "kind": "statement",
+ "title": "Coherence of the finite Tate-source structural comparison",
+ "statement": "Fix the finite-field and coefficient conventions of [def-pur-conventions]: $k_0=\\mathbf F_q$, $k=\\overline{k_0}$, $\\ell\\ne\\operatorname{char}k$, a finite extension $E/\\mathbf Q_\\ell$, and $A_{E,n}=\\mathcal O_E/\\varpi_E^n$ for $n\\ge1$. For a separated finite-type $k_0$-scheme $T_0$ put $T=T_0\\times_{k_0}k$ and $G_T=Lg_{T,\\gamma}^*$, with $g_{T,\\gamma}=\\operatorname{id}_{T_0}\\times\\operatorname{Spec}(\\gamma)$ for geometric Frobenius $\\gamma$ [def-pur-scheme-geometric-frobenius]. Work on the small pro-etale derived categories with $A=A_{E,n}$ and the operations of [def-weil-derived-pullback-tensor-hom]. Let $f_0:X_0\\to Y_0$ be separated and finite type between such schemes, with geometric base change $f:X\\to Y$ smooth of pure relative dimension $d\\ge0$. Write $F_f=Lf^*$, $T_{r,X}=A_X(r)$, and $P_fK=(F_fK\\otimes^L T_{d,X})[2d]$. For $K\\in D^b_{ctf}(Y,A)$ write $c_f:G_XF_f\\xrightarrow{\\sim}F_fG_Y$ for the canonical commuting-pullback comparison and\n$$b_{f,K}=(c_{f,K}\\otimes1)[2d]\\,\\mu_{g_X;F_fK,T_{d,X}}[2d]:G_XP_fK\\xrightarrow{\\sim}(F_fG_YK\\otimes^LG_XT_{d,X})[2d],$$\nwhere $\\mu$ is the canonical pullback-tensor comparison [lem-pur-derived-pullback-tensor-iso], as in [def-pur-tate-datum]. Let $Q_X,Q_Y$ be either derived reduction $A_{E,n}\\to A_{E,m}$, $1\\le m\\le n$, on $X,Y$, or $Lu^*,Lv^*$ for the geometric base change of a Cartesian square of separated finite-type $k_0$-schemes with vertical arrows $f_0,f'_0$ [def-weil-pbc-cartesian-square]. Denote the target coefficient/scheme objects by primes; put $K'=Q_YK$, and let $C_T:Q_TG_T\\cong G'_TQ_T$ be the canonical comparison. Let $a_P:Q_XP_fK\\cong P'_{f'}K'$ be the canonical pullback, tensor, twist and shift comparison. Put $H_fK=(F_fG_YK\\otimes^LG_XT_{d,X})[2d]$. Let $a_H:Q_XH_fK\\cong H'_{f'}K'$ be obtained from the same comparisons, using $C_Y$ on the input factor and $G'_X(t)C_X$ on the twist factor, where $t:Q_XT_{d,X}\\cong T'_{d,X'}$. Then\n$$a_H Q_X(b_{f,K})=b'_{f',K'}G'_X(a_P)C_{X,P_fK}.$$\nFor composable smooth geometric base changes $X\\xrightarrow fY\\xrightarrow hZ$, the two canonical expansions of $G_X(P_fP_hK)$ to the shifted tensor of $F_fF_hG_ZK$, $G_XF_fT_{e,Y}$ and $G_XT_{d,X}$ agree: expanding $b_f$ and $F_f(b_h)$ gives the same map as expanding $b_{hf}$ and then the pullback, tensor and twist-additivity identifications, where $e$ is the pure relative dimension of $h$. The comparison is natural in $K$, uses canonical composition maps, and commutes with the termwise shift identifications. Reduction is restricted to the finite-Tor domains of [lem-fix-operation-reduction]. The pullback-composition comparisons are those of [lem-weil-pbc-proetale-derived-pullback-composition].",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-def-sf-weil-complexes/def-pur-tate-datum.md",
+  "place": "Displayed source-of-purity composite; agent-extracted argument from lem-pur-weil-tate-datum-transport, old Step 1; constituent-compatibility assembly of prop-pur-weil-equivariance-compatibilities."
+ },
+ "stmt_deps": [
+  "def-pur-conventions",
+  "def-pur-scheme-geometric-frobenius",
+  "def-weil-derived-pullback-tensor-hom",
+  "lem-pur-derived-pullback-tensor-iso",
+  "def-pur-tate-datum",
+  "def-weil-pbc-cartesian-square",
+  "lem-fix-operation-reduction",
+  "lem-weil-pbc-proetale-derived-pullback-composition",
+  "def-pur-finite-tensor-fixed-comparisons",
+  "def-pur-finite-tensor-reduction-data",
+  "def-pur-finite-signed-reduction-comparisons",
+  "def-pur-finite-positive-root-charts",
+  "def-pur-finite-signed-twist-products"
+ ],
+ "proof": [
+  {
+   "text": "First suppress the shifts. Write $L=T_{d,X}$, $M=F_fK$, and $\\bar b_f=(c_f\\otimes1)\\mu_{g_X;M,L}$. The canonical tensor comparisons and pullback compositors are the normalized ones, not chosen objectwise isomorphisms: on flat-term K-flat models they are ordinary balanced tensor maps. In particular the tensor map splits $s\\otimes(x\\otimes y)$ as $(s\\otimes x)\\otimes(1\\otimes y)$, while collapsing two pullbacks multiplies their scalar factors. The cited ambient coherence statement gives associative compositors and their monoidality at a fixed finite coefficient ring. Thus a comparison between two equal composite scheme maps, obtained by one compositor followed by the inverse of another, is monoidal too. The finite derived normalization supplies the corresponding balanced coefficient-change square, without requiring a quotient coefficient ring to be flat. These facts apply in the ambient unbounded module derived categories, hence to every object in the finite-Tor domains in the question.",
+   "uses": [
+    "lem-pur-finite-derived-comparison-normalization",
+    "lem-sf-ambient-pullback-tensor-coherence",
+    "lem-pur-derived-pullback-tensor-iso"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 07A4 (lemma-pullback-tensor-product), 0D6D (lemma-derived-pullback-composition), 0G7E (lemma-pullback-K-flat); agent assembly for the source composite of def-pur-tate-datum."
+   }
+  },
+  {
+   "text": "Put $q_{U,V}:Q_X(U\\otimes^LV)\\cong Q_XU\\otimes^LQ_XV$. In either case the specified comparison $C_X:Q_XG_X\\cong G'_XQ_X$ is monoidal, in the precise form\n$$(C_{X,U}\\otimes C_{X,V})q_{G_XU,G_XV}Q_X(\\mu_{g_X;U,V})=\\mu_{g'_X;Q_XU,Q_XV}G'_X(q_{U,V})C_{X,U\\otimes^LV}.$$\nFor reduction this is the coefficient square in the finite derived normalization, with $u=g_X$ and $C_X=\\kappa^{-1}$; invert its displayed scalar-association comparison and rearrange. For geometric pullback, substitute $Q_X=Lu^*$ and $u g'_X=g_Xu$; apply the tensor-compositor equation to the two paths $u,g_X$ and $g'_X,u$, and cancel the common tensor comparison of their composite. This gives exactly the displayed equation, since $C_X$ is the comparison of those paths. All rearrangements use invertible maps, and both equations are natural in $U,V$.",
+   "uses": [
+    "lem-pur-finite-derived-comparison-normalization",
+    "lem-sf-ambient-pullback-tensor-coherence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 07A4 (lemma-pullback-tensor-product), 0D6D (lemma-derived-pullback-composition), 0G7E (lemma-pullback-K-flat); agent assembly for the source composite of def-pur-tate-datum."
+   }
+  },
+  {
+   "text": "Let $\\sigma_K:Q_XF_fK\\cong F'_{f'}Q_YK$ be the canonical comparison of the square or of coefficient extension. The commuting input comparisons satisfy\n$$F'_{f'}(C_{Y,K})\\,\\sigma_{G_YK}\\,Q_X(c_{f,K})=c'_{f',Q_YK}\\,G'_X(\\sigma_K)\\,C_{X,F_fK}.$$\nFor geometric pullback, expand each commuting-square comparison as two compositors; apply the cited associativity equality to each triple in the cube $f u=v f'$, $f g_X=g_Y f$, $u g'_X=g_Xu$, $v g'_Y=g_Yv$. Cancel adjacent inverse compositors. Both paths become the comparison from pullback along $f u g'_X=g_Y v f'$ to $F'_{f'}G'_YQ_Y$, so they agree. For reduction use a flat-term K-flat representative of $K$. The specified compositors are its termwise module pullback maps, and $\\sigma,C$ are the balanced scalar-association maps. After collapsing the nested pullbacks, both paths send a generalized pure tensor with scalar factors $a,b$ to the pulled-back section multiplied by $\\bar a\\bar b=\\overline{ab}$. Inserting units gives the same inverse maps. Thus these are equal chain maps, and their classes give the displayed derived equality. This computation uses the representative normalizations in the cited statements, so it proves equality for the actual canonical comparisons and every $K$.",
+   "uses": [
+    "lem-trf-derived-pullback-coherence",
+    "lem-weil-pbc-proetale-derived-pullback-composition",
+    "lem-pc-kflat-resolution",
+    "lem-pur-finite-derived-comparison-normalization",
+    "lem-sf-ambient-pullback-tensor-coherence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 07A4 (lemma-pullback-tensor-product), 0D6D (lemma-derived-pullback-composition), 0G7E (lemma-pullback-K-flat); agent assembly for the source composite of def-pur-tate-datum."
+   }
+  },
+  {
+   "text": "Write $F'=F'_{f'}$, $G'=G'_X$, and $t:Q_XL\\cong L'$. Without shifts the comparisons in the question are\n$$\\bar a_P=(\\sigma_K\\otimes t)q_{M,L},\\qquad \\bar a_H=(F'C_{Y,K}\\,\\sigma_{G_YK}\\otimes G'(t)C_{X,L})q_{F_fG_YK,G_XL}.$$\nExpand $\\bar a_HQ_X(\\bar b_f)$. Naturality of $q$ moves $Q_X(c_f\\otimes1)$ through it, giving the tensor product of $F'C_Y\\,\\sigma_{G_YK}\\,Q_Xc_f$ and $G'(t)C_{X,L}$ after $q_{G_XM,G_XL}Q_X\\mu_{g_X;M,L}$. Substitute Step 3 in the first factor. Substitute Step 2 in the remaining tensor comparison. Finally naturality of $\\mu_{g'_X}$ for the pair $(\\sigma_K,t)$ moves $G'(\\sigma_K)\\otimes G'(t)$ to its input. The resulting expression is\n$$(c'_{f',K'}\\otimes1)\\mu_{g'_X;F'K',L'}G'((\\sigma_K\\otimes t)q_{M,L})C_{X,M\\otimes L}=\\bar b'_{f',K'}G'(\\bar a_P)C_{X,M\\otimes L}.$$\nThis proves the unshifted square. Only bifunctoriality and naturality are used beyond the equations proved in Steps 2 and 3; in particular the argument works for the given twist isomorphism $t$ itself.",
+   "uses": [
+    "lem-pur-derived-pullback-tensor-iso"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 07A4 (lemma-pullback-tensor-product), 0D6D (lemma-derived-pullback-composition), 0G7E (lemma-pullback-K-flat); agent assembly for the source composite of def-pur-tate-datum."
+   }
+  },
+  {
+   "text": "For composition put $U=F_fF_hK$, $V=F_fT_{e,Y}$, $W=T_{d,X}$. The cited twist-pullback identification and the definition by nonnegative tensor powers identify $V\\otimes^LW$ with $T_{d+e,X}$ by reassociating the $e+d$ copies of the degree-zero Tate line (and the unit when $d=0$ or $e=0$). Expand both proposed maps with target $((F_fF_hG_ZK\\otimes G_XV)\\otimes G_XW)[2(d+e)]$. Ignoring shifts for the moment, a common expression is: first split $G_X((U\\otimes V)\\otimes W)$ by two applications of $\\mu_{g_X}$; then apply $(F_f(c_{h,K})c_{f,F_hK})\\otimes1\\otimes1$. To obtain this expression from $b_f$ followed by $F_f(b_h)$, use monoidality of $c_f$ to distribute it across $F_hK\\otimes T_{e,Y}$, use compatibility of $\\mu$ with pullback composition, and use $c_{f,T_{e,Y}}^{-1}$ on the second factor to express it as $G_XV$. To obtain it from $b_{hf}$, use the compositor associativity equality to replace $c_{hf}$ on the first factor by $F_f(c_h)c_f$, and use naturality of $\\mu$ on the twist-additivity isomorphism $V\\otimes W\\cong T_{d+e,X}$. Associativity of $\\mu$ identifies the two ways of splitting the triple tensor. Thus both maps are the displayed common expression. The only facts used here are the stated tensor/compositor laws; twist additivity for $d,e\\ge0$ is the elementary reassociation of their defining powers.",
+   "uses": [
+    "lem-pur-derived-pullback-tensor-iso",
+    "lem-sf-ambient-pullback-tensor-coherence",
+    "lem-trf-derived-pullback-coherence",
+    "def-coefficient-twists-detailed",
+    "det-prop-sfb-cartesian-coefficients-twists"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 07A4 (lemma-pullback-tensor-product), 0D6D (lemma-derived-pullback-composition), 0G7E (lemma-pullback-K-flat); agent assembly for the source composite of def-pur-tate-datum."
+   }
+  },
+  {
+   "text": "Restore shifts using the canonical termwise comparisons. The cited pullback-tensor shift theorem identifies the tensor comparison before and after a shift of either input. The compositor is termwise on the same flat-term K-flat model, so shifting it gives the compositor on the shifted model; the balanced coefficient maps likewise do not change cochain degree. The signed tensor-shift maps have coefficient $(-1)^{bp}$ on the summand of first-factor degree $p$. Consequently the shift extractions used in composition, with $b=2d$ or $2e$, have coefficient $1$; their addition law identifies both targets with shift $[2(d+e)]$. Localizing these termwise identifications gives precisely $a_HQ_X(b_{f,K})=b'_{f',K'}G'_X(a_P)C_{X,P_fK}$ and the claimed composite equality. Naturality in $K$ follows because every comparison used above is natural, including the representative normalizations; the same reasoning commutes with every termwise shift identification. Finally retain exactly the finite-Tor restriction of the cited reduction theorem; the argument uses its pullback and tensor comparisons only and never asserts flatness of $A_{E,m}$ over $A_{E,n}$.",
+   "uses": [
+    "lem-weil-pbc-pullback-tensor-canonical-shift-unit",
+    "lem-pur-total-tensor-signed-coherence",
+    "lem-weil-pbc-proetale-derived-pullback-composition",
+    "lem-pur-finite-derived-comparison-normalization",
+    "lem-fix-operation-reduction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 07A4 (lemma-pullback-tensor-product), 0D6D (lemma-derived-pullback-composition), 0G7E (lemma-pullback-K-flat); agent assembly for the source composite of def-pur-tate-datum."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-coefficient-twists-detailed",
+  "det-prop-sfb-cartesian-coefficients-twists",
+  "lem-fix-operation-reduction",
+  "lem-pc-kflat-resolution",
+  "lem-pur-derived-pullback-tensor-iso",
+  "lem-pur-finite-derived-comparison-normalization",
+  "lem-pur-total-tensor-signed-coherence",
+  "lem-sf-ambient-pullback-tensor-coherence",
+  "lem-trf-derived-pullback-coherence",
+  "lem-weil-pbc-proetale-derived-pullback-composition",
+  "lem-weil-pbc-pullback-tensor-canonical-shift-unit"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-def-sf-weil-complexes/def-pur-tate-datum.md",
+  "place": "Displayed first arrow in the source-of-purity composite; constituent comparison proof written using Stacks 07A4, 0D6D and 0G7E, with the existing normalized coherence nodes."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Canonical Frobenius comparison for derived pullback tensor product commutes with composition of pullbacks and commuting scheme squares",
+   "results": "CategoryTheory.frobeniusMorphism; CategoryTheory.frobeniusMorphism_mate; CategoryTheory.MorphismProperty.Over.pullbackComp.congr_simp; CategoryTheory.Limits.pullbackComparison; SheafOfModules.pullbackComp; CategoryTheory.MorphismProperty.Over.pullbackComp_left_fst_fst; CategoryTheory.MorphismProperty.Over.pullbackComp_hom_app_left; CategoryTheory.Limits.pullbackComparison_comp_fst_assoc",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern underived module pullbacks, generic categorical/shift facts, cyclotomic characters, isocrystals, or unrelated algebra; no pro-etale canonical Tate-source comparison on these coefficient domains"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Associativity of pullback composition and monoidal comparison gives coherence of geometric Galois pullback on a shifted Tate source",
+   "results": "AlgebraicGeometry.Scheme.Modules.pullbackComp; AlgebraicGeometry.Scheme.Modules.pseudofunctor_associativity; AlgebraicGeometry.Scheme.Modules.pseudofunctor_associativity_assoc; AlgebraicGeometry.Scheme.Modules.conjugateEquiv_pullbackComp_inv; AlgebraicGeometry.Scheme.Modules.pseudofunctor_mapComp_hom_τl; AlgebraicGeometry.Scheme.Pullback.Triplet.tensorCongr_trans_hom; AlgebraicGeometry.Scheme.Modules.pseudofunctor_right_unitality_assoc; AlgebraicGeometry.Scheme.Modules.pseudofunctor_left_unitality_assoc",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern underived module pullbacks, generic categorical/shift facts, cyclotomic characters, isocrystals, or unrelated algebra; no pro-etale canonical Tate-source comparison on these coefficient domains"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.MonoidalFunctor, CategoryTheory.NatIso",
+   "results": "loogle: unknown identifier 'CategoryTheory.MonoidalFunctor'",
+   "date": "2026-10-22",
+   "verdict": "no match: loogle: unknown identifier 'CategoryTheory.MonoidalFunctor'"
+  },
+  {
+   "tool": "grep",
+   "query": "TateTwist|geometric.Frobenius|pullback.*tensor.*comp",
+   "results": "0 hits",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern underived module pullbacks, generic categorical/shift facts, cyclotomic characters, isocrystals, or unrelated algebra; no pro-etale canonical Tate-source comparison on these coefficient domains"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"pullbackComp\"",
+   "results": "CategoryTheory.Limits.pullbackComparison; CategoryTheory.Limits.pullbackComparison_comp_fst; CategoryTheory.Limits.pullbackComparison_comp_snd; CategoryTheory.Limits.pullbackComparison_comp_fst_assoc; CategoryTheory.Limits.pullbackComparison_comp_snd_assoc; CategoryTheory.Limits.map_lift_pullbackComparison; CategoryTheory.Limits.map_lift_pullbackComparison_assoc; CategoryTheory.Limits.pullbackComparison_comp",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern underived module pullbacks, generic categorical/shift facts, cyclotomic characters, isocrystals, or unrelated algebra; no pro-etale canonical Tate-source comparison on these coefficient domains"
+  },
+  {
+   "tool": "grep",
+   "query": "TateTwist|geometric.Frobenius|pullback.*tensor.*comp",
+   "results": "0 hits",
+   "date": "2026-10-22",
+   "verdict": "no match: categorical limit pullbacks and underived module-sheaf compositors do not state finite pro-etale Tate-source coherence"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Coherence of derived inverse image tensor comparison with coefficient reduction and commuting pullback squares",
+   "results": "CategoryTheory.Limits.CategoricalPullback.CatCommSqOver.precomposeObjComp_inv_app_snd_app; AlgebraicGeometry.Scheme.Modules.pseudofunctor_mapComp_inv_τl; CategoryTheory.Limits.CategoricalPullback.CatCommSqOver.precomposeObjComp_inv_app_fst_app; AlgebraicGeometry.PresheafedSpace.GlueData.snd_invApp_t_app_assoc; CategoryTheory.Limits.CategoricalPullback.CatCommSqOver.transformObjComp_inv_app_fst_app; AlgebraicGeometry.PresheafedSpace.GlueData.snd_invApp_t_app; AlgebraicGeometry.Scheme.Modules.pseudofunctor_mapComp_inv_τr; CategoryTheory.Limits.CategoricalPullback.CatCommSqOver.transformObjComp",
+   "date": "2026-10-22",
+   "verdict": "no match: categorical limit pullbacks and underived module-sheaf compositors do not state finite pro-etale Tate-source coherence"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"pullbackComp\"",
+   "results": "CategoryTheory.Limits.pullbackComparison; CategoryTheory.Limits.pullbackComparison_comp_fst; CategoryTheory.Limits.pullbackComparison_comp_snd; CategoryTheory.Limits.pullbackComparison_comp_fst_assoc; CategoryTheory.Limits.pullbackComparison_comp_snd_assoc; CategoryTheory.Limits.map_lift_pullbackComparison; CategoryTheory.Limits.map_lift_pullbackComparison_assoc; CategoryTheory.Limits.pullbackComparison_comp",
+   "date": "2026-10-22",
+   "verdict": "no match: categorical limit pullbacks and underived module-sheaf compositors do not state finite pro-etale Tate-source coherence"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Canonical Frobenius pullback comparison on a shifted tensor with a Tate line commutes with change of coefficients and composition of smooth pullbacks",
+   "results": "AlgebraicGeometry.Scheme.Pullback.Triplet.Spec_ofPointTensor_SpecTensorTo; AlgebraicGeometry.Scheme.Pullback.Triplet.tensorCongr_trans; AlgebraicGeometry.Scheme.Pullback.Triplet.tensorCongr_trans_hom_assoc; AlgebraicGeometry.Scheme.Pullback.tensorCongr_SpecTensorTo; AlgebraicGeometry.Scheme.Pullback.Triplet.tensorCongr_trans_hom; AlgebraicGeometry.Scheme.Pullback.ofPointTensor_SpecTensorTo_assoc; AlgebraicGeometry.Scheme.Pullback.Triplet.specTensorTo_snd_assoc; AlgebraicGeometry.Scheme.Pullback.tensorCongr_SpecTensorTo_assoc",
+   "date": "2026-10-22",
+   "verdict": "no match: categorical limit pullbacks and underived module-sheaf compositors do not state finite pro-etale Tate-source coherence"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived pullback is symmetric monoidal and its composition isomorphisms satisfy associativity and commute with extension of scalars on sheaf derived categories",
+   "results": "SheafOfModules.pullbackComp; SheafOfModules.pullback_assoc; SheafOfModules.pullbackIso; SheafOfModules.conjugateEquiv_pullbackComp_inv; SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom_assoc; SheafOfModules.pullback; SheafOfModules.instIsLeftAdjointPullback; SheafOfModules.freeFunctorCompPullbackIso",
+   "date": "2026-10-22",
+   "verdict": "no match: categorical limit pullbacks and underived module-sheaf compositors do not state finite pro-etale Tate-source coherence"
+  },
+  {
+   "tool": "grep",
+   "query": "def pullbackComp|lemma pullback_assoc|pseudofunctor_associativity",
+   "results": "Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean; Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean",
+   "date": "2026-10-22",
+   "verdict": "no match: categorical limit pullbacks and underived module-sheaf compositors do not state finite pro-etale Tate-source coherence"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-pur-weil-tate-datum-transport",
+  "date": "2026-10-22",
+  "group": "Q157"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-thm-sf-package",
+ "blueprint": {
+  "from": {
+   "node": "prop-pur-weil-equivariance-compatibilities",
+   "place": "Constituent-compatibility assembly paragraph of prop-pur-weil-equivariance-compatibilities.proof.md; first comparison arrow of the displayed source datum in def-pur-tate-datum; finite structural part extracted from lem-pur-weil-tate-datum-transport.",
+   "via": [
+    "lem-pur-weil-tate-datum-transport"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-pur-finite-tate-source-structural-coherence",
+  "worker": "stage1",
+  "summary": "Q08 wrote the structural proof using existing normalized tensor, coefficient-change, compositor and shift nodes. The coefficient/base-change square is expanded as two explicit comparison equations, then substituted into b; composition is reduced to one triple-tensor expression. No statement change or new node was needed.",
+  "blueprint": "Realizes the constituent-compatibility assembly paragraph of prop-pur-weil-equivariance-compatibilities.proof.md for the first arrow of the displayed Tate source datum in def-pur-tate-datum. Steps 1-4: finite reduction and Cartesian pullback; Step 5: smooth composition; Step 6: termwise shifts and naturality.",
+  "tool_uses": [
+   {
+    "node": "lem-pur-finite-derived-comparison-normalization",
+    "why": "The unit has no replacement for the normalized balanced coefficient-change/tensor square; used as a ringed-topos tool at finite coefficients."
+   },
+   {
+    "node": "lem-sf-ambient-pullback-tensor-coherence",
+    "why": "Generic associative, monoidal finite-coefficient pullback compositors used to compare equal geometric paths; no exceptional operation or alternate purity route is used."
+   },
+   {
+    "node": "lem-pur-derived-pullback-tensor-iso",
+    "why": "Canonical tensor comparison with its naturality, associativity and composition law, required to expand the source datum."
+   },
+   {
+    "node": "lem-trf-derived-pullback-coherence",
+    "why": "Generic associativity equality for the specified pro-etale pullback compositors, needed for the commuting cube and composite."
+   },
+   {
+    "node": "lem-weil-pbc-proetale-derived-pullback-composition",
+    "why": "Identifies the precise canonical compositor with its flat-term K-flat representative, including shifts."
+   },
+   {
+    "node": "lem-pc-kflat-resolution",
+    "why": "Generic resolving-model existence used solely to check coefficient compatibility of actual comparison maps."
+   },
+   {
+    "node": "det-prop-sfb-cartesian-coefficients-twists",
+    "why": "Supplies the pro-etale pullback of the Tate line; its nonnegative powers are reassociated in the composite source."
+   },
+   {
+    "node": "lem-weil-pbc-pullback-tensor-canonical-shift-unit",
+    "why": "Generic canonical pullback/tensor shift compatibility; the unit itself supplies no chain-level sign normalization."
+   },
+   {
+    "node": "lem-pur-total-tensor-signed-coherence",
+    "why": "Generic tensor-shift normalization and addition law, used to check the even shifts in this source expression."
+   },
+   {
+    "node": "lem-fix-operation-reduction",
+    "why": "The finite-Tor domain and coefficient comparisons already required by the statement; no reduction claim beyond that domain is made."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pur-finite-derived-comparison-normalization",
+  "lem-sf-ambient-pullback-tensor-coherence",
+  "lem-pur-derived-pullback-tensor-iso",
+  "lem-trf-derived-pullback-coherence",
+  "lem-weil-pbc-proetale-derived-pullback-composition",
+  "lem-pc-kflat-resolution",
+  "det-prop-sfb-cartesian-coefficients-twists",
+  "lem-weil-pbc-pullback-tensor-canonical-shift-unit",
+  "lem-pur-total-tensor-signed-coherence",
+  "lem-fix-operation-reduction"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q08-7f7869e26",
+  "group": "Q08",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q08-7f7869e26 (reviewer sub-agent of L); spot-checked: Read in full: the item (statement unchanged against the base copy in clones/live; it now has a proof of 6 steps and no new nodes), every cited statement, the citer lem-pur-weil-tate-datum-transport, the five Q157 siblings, blueprint def-pur-tate-datum.md (the first arrow of the purity-source datum is exactly b_{f,K}) and prop-pur-weil-equivariance-compatibilities. Checks by step. Step 1: the ambient coherence node gives monoidal, associative compositors for arbitrary scheme maps between finite-type k-schemes, so the semilinear g_{T,gamma} are allowed. Step 2: I re-derived the C_X monoidality equation in both cases. For reduction, take kappa^{-1} in the normalization square with u=g_X. For pullback, apply the ambient equation to (g,u) and (u,g') and cancel mu_{gu}. Step 3: the geometric case is pseudofunctor coherence for the cube with common map fug'=g_Yvf'. The reduction case is a balanced chain-map calculation on flat-term K-flat models, using lem-pc-kflat-resolution and the termwise compositor. Step 4: I recomputed the whole chain (naturality of q, then Step 3, then Step 2, then naturality of mu_{g'}) and it gives b'G'(a_P)C. It is genuinely elementary. Step 5: the common triple-tensor expression is right, using monoidality of c_f with c_{f,T_e}^{-1}, compositor associativity and twist reassociation (det-prop-sfb twist pullback). Step 6: the shift signs are (-1)^{bp} with b even, the comparisons are degree-preserving, and the finite-Tor domain is only retained. Edge cases d=0, e=0, m=n, identity square, K=0, empty X and nonflat Z/l^2 to Z/l all behave. No SGA citations. The out-of-unit tools are generic and listed in tool_uses. No new node duplicates the b-square; sibling overlap belongs to Q157. Batch-5 check on lem-trf-derived-pullback-coherence: accepted. It is a generic associativity cocycle for pro-etale pullback compositors, which neither the trace formula nor Poincare duality gives. Its closure reaches only two other generic trf composition-coherence nodes, and the item's own stmt_dep def-pur-scheme-geometric-frobenius already cites it. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.FiniteTateSourceStructuralCoherence",
+  "declaration": "WeilConjectures.PurityFiniteSetting.FiniteTateSource.finiteTateSourceStructuralCoherence",
+  "declarations": [
+   "WeilConjectures.PurityFiniteSetting.FiniteTateSource.D",
+   "WeilConjectures.PurityFiniteSetting.FiniteTateSource.Model",
+   "WeilConjectures.PurityFiniteSetting.FiniteTateSource.Model.X",
+   "WeilConjectures.PurityFiniteSetting.FiniteTateSource.Model.Y",
+   "WeilConjectures.PurityFiniteSetting.FiniteTateSource.Model.F",
+   "WeilConjectures.PurityFiniteSetting.FiniteTateSource.Model.GX",
+   "WeilConjectures.PurityFiniteSetting.FiniteTateSource.Model.GY",
+   "WeilConjectures.PurityFiniteSetting.FiniteTateSource.square",
+   "WeilConjectures.PurityFiniteSetting.FiniteTateSource.Model.c",
+   "WeilConjectures.PurityFiniteSetting.FiniteTateSource.Model.source",
+   "WeilConjectures.PurityFiniteSetting.FiniteTateSource.Model.target",
+   "WeilConjectures.PurityFiniteSetting.FiniteTateSource.pullbackCommShift",
+   "WeilConjectures.PurityFiniteSetting.FiniteTateSource.Model.b",
+   "WeilConjectures.PurityFiniteSetting.FiniteTateSource.Model.reduce",
+   "WeilConjectures.PurityFiniteSetting.FiniteTateSource.Change",
+   "WeilConjectures.PurityFiniteSetting.FiniteTateSource.Change.aP",
+   "WeilConjectures.PurityFiniteSetting.FiniteTateSource.Change.aH",
+   "WeilConjectures.PurityFiniteSetting.FiniteTateSource.Change.Square",
+   "WeilConjectures.PurityFiniteSetting.FiniteTateSource.reductionChange",
+   "WeilConjectures.PurityFiniteSetting.FiniteTateSource.pullbackUnit",
+   "WeilConjectures.PurityFiniteSetting.FiniteTateSource.linePullback",
+   "WeilConjectures.PurityFiniteSetting.FiniteTateSource.modelSquare",
+   "WeilConjectures.PurityFiniteSetting.FiniteTateSource.geometricChange",
+   "WeilConjectures.PurityFiniteSetting.FiniteTateSource.Following",
+   "WeilConjectures.PurityFiniteSetting.FiniteTateSource.Following.model",
+   "WeilConjectures.PurityFiniteSetting.FiniteTateSource.Following.composite",
+   "WeilConjectures.PurityFiniteSetting.FiniteTateSource.Following.compositor",
+   "WeilConjectures.PurityFiniteSetting.FiniteTateSource.expand",
+   "WeilConjectures.PurityFiniteSetting.FiniteTateSource.splitLine",
+   "WeilConjectures.PurityFiniteSetting.FiniteTateSource.compositeSourceExpansion",
+   "WeilConjectures.PurityFiniteSetting.FiniteTateSource.compositionSource",
+   "WeilConjectures.PurityFiniteSetting.FiniteTateSource.iteratedRoute",
+   "WeilConjectures.PurityFiniteSetting.FiniteTateSource.compositeTargetExpansion",
+   "WeilConjectures.PurityFiniteSetting.FiniteTateSource.Model.sourceCommShift",
+   "WeilConjectures.PurityFiniteSetting.FiniteTateSource.Model.targetCommShift",
+   "WeilConjectures.PurityFiniteSetting.FiniteTateSource.finiteTateSourceStructuralCoherence"
+  ],
+  "file": "lean/Sheaf/Paper/FiniteTateSourceStructuralCoherence.lean",
+  "statement": "theorem finiteTateSourceStructuralCoherence (P : PurityFiniteSetting.{u}) : (∀ (d : ℕ) (M : Model P d) (m : ℕ) (hm : 1 ≤ m) (hmn : m ≤ P.level) (K : D P M.Y), finiteTorConstructible P.coefficients.l P.extension P.level P.level_pos M.Y ((sfIntrinsicDerivedEquivalence M.Y P.Ring).functor.obj K) → (reductionChange M m hm hmn).Square K) ∧ (∀ (d : ℕ) (M N : Model P d) (u₀ : N.X₀ ⟶ M.X₀) (v₀ : N.Y₀ ⟶ M.Y₀) (sq : ChosenCartesianSquare u₀.left N.f₀.left M.f₀.left v₀.left) (ζ : P.field.k) (hζ : IsPrimitiveRoot ζ P.diagonalExponent) (K : D P M.Y), finiteTorConstructible P.coefficients.l P.extension P.level P.level_pos M.Y ((sfIntrinsicDerivedEquivalence M.Y P.Ring).functor.obj K) → (geometricChange M N u₀ v₀ sq ζ hζ).Square K) ∧ (∀ (d e : ℕ) (M : Model P d) (N : Following M e) (ζ : P.field.k) (hζ : IsPrimitiveRoot ζ P.diagonalExponent) (K : D P N.model.Y), finiteTorConstructible P.coefficients.l P.extension P.level P.level_pos N.model.Y ((sfIntrinsicDerivedEquivalence N.model.Y P.Ring).functor.obj K) → (iteratedRoute M N K).hom = M.GX.map (compositionSource M N ζ hζ K).hom ≫ (N.composite.b K).hom ≫ (compositeTargetExpansion M N ζ hζ K).hom) ∧ ∀ (d : ℕ) (M : Model P d) (K : D P M.Y), finiteTorConstructible P.coefficients.l P.extension P.level P.level_pos M.Y ((sfIntrinsicDerivedEquivalence M.Y P.Ring).functor.obj K) → (∀ (L : D P M.Y), finiteTorConstructible P.coefficients.l P.extension P.level P.level_pos M.Y ((sfIntrinsicDerivedEquivalence M.Y P.Ring).functor.obj L) → ∀ a : K ⟶ L, M.GX.map (M.source.map a) ≫ (M.b L).hom = (M.b K).hom ≫ M.target.map a) ∧ ∀ s : ℤ, M.GX.map ((M.source.commShiftIso s).hom.app K) ≫ (M.GX.commShiftIso s).hom.app (M.source.obj K) ≫ ((M.b K).hom)⟦s⟧' = (M.b (K⟦s⟧)).hom ≫ (M.target.commShiftIso s).hom.app K",
+  "branch": "newtargets-dag",
+  "by": "NK",
+  "date": "2026-10-26",
+  "existing": false,
+  "note": "The single theorem gives all clauses: finite reduction, Cartesian geometric pullback, smooth composition, naturality and arbitrary termwise shifts. Helpers spell out the canonical maps in the published fixed-scalar realization, with intrinsic finite-Tor membership transported by sfIntrinsicDerivedEquivalence. The geometric positive-line pullback is written in any common primitive-root chart; it is the same root-restriction map in every such chart. All model hypotheses are bundled in Model/Following. No new mathematical notion, dependency repair or statement correction."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-338538f07",
+  "group": "NK",
+  "result": "pass",
+  "note": "Read node, report (Worker report + Second reading by NK present), module, stmt_dep declarations in side-live. Statement unchanged; only lean + 5 landed def-node stmt_deps added. Change.Square = node formula a_H Q_X(b)=b'G'_X(a_P)C_X in diagrammatic order; a_P/a_H built independently from q, sigma, C_Y, C_X, G'_X(t). Reduction: finiteTensorReduction/Core/PullbackComparison/LineComparison/ScalarShift, 1<=m<=n, no flatness. Geometric: ChosenCartesianSquare, compositor comparisons; linePullback chart-based but checked chart-independent along k-morphisms (ζ^c rescales both charts by c^d), so ∀ζ not stronger. b = G_X commShift(2d), finiteTensorPullbackTensor, c_f⊗1; T_d = finiteTensorFixedLine is the line τ (finiteDerivedLineMap) acts on, no existing b/H_f owner. Composition routes traced to common triple tensor; naturality and all-s shift clauses present; ctf premises via sfIntrinsicDerivedEquivalence. Edge cases d=e=0, m=n, m=1, K=0, empty schemes, nonflat quotient OK. Docstrings, one sorry, statement verbatim, declarations list exact. Advisory: pullbackCommShift duplicates geometricPurityPullbackCommShift (theorem module, so local copy acceptable); NK second reading self-written. Not recompiled (no change)."
+ }
+}

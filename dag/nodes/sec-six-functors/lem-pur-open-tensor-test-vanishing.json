@@ -1,0 +1,131 @@
+{
+ "id": "lem-pur-open-tensor-test-vanishing",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-pur-general-admissibility",
+   "place": "Step 4: restriction of one arbitrary module-sheaf tensor test before cover detection",
+   "via": []
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Open restriction of a single intrinsic tensor test",
+ "statement": "Let A be a finite commutative ring, j:U→X an open immersion of schemes and K an arbitrary object of the intrinsic constant-A pro-etale derived category [def-weil-proetale-inverse-image]. Let a,b be integers and assume Lj^*K has intrinsic Tor amplitude [a,b] [def-weil-proetale-tor-amplitude]. For arbitrary complexes L,Q of A_X-module sheaves, an isomorphism Q_D(L)≅K, a quasi-isomorphism f:Q→L, and acyclic-tensor K-flat Q, let M be any A_X-module sheaf. For every integer q<a or b<q, j^* H^q(derivedTensor(L,M[0],Q,f)) is zero [def-weil-derived-cohomology-sheaves, def-weil-derived-tensor]. No origin, boundedness or constructibility is imposed on M or K. No covering family is involved.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-et-proet/thm-pur-general-admissibility.proof.md",
+  "place": "Step 4: restriction of one arbitrary module-sheaf tensor test before cover detection"
+ },
+ "stmt_deps": [
+  "def-weil-proetale-inverse-image",
+  "def-weil-proetale-tor-amplitude",
+  "def-weil-derived-cohomology-sheaves",
+  "def-weil-derived-tensor",
+  "def-weil-pbc-proetale-operations"
+ ],
+ "proof": [
+  {
+   "text": "Use the exact intrinsic coefficient realization equivalence to write K as the realization of K′ and M as the realization of a fixed-scalar sheaf N, with the counit identifications. The unit-normalized openSquarePullbackModel conjugates the specified constant-ring pullback to fixed-scalar inverse image. Apply termwise localization to this natural isomorphism. It identifies the realization of j^*K′ with Lj^*K. Tor amplitude is invariant under isomorphism by composition of the representative isomorphism in its definition.",
+   "uses": [
+    "def-weil-pbc-proetale-modules",
+    "lem-trf-open-square-exchange",
+    "def-weil-proetale-tor-amplitude"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply intrinsic_hasProEtaleTorAmplitude_iff_torAmplitudeIn on U. Test the resulting fixed-scalar Tor bound against j^*N. Its tensor homology in degree q is zero. The exact fixed-scalar inverse image is strong monoidal (monoidal_upperStar), so it has the proved source comparison mapDerivedCategoryTensorComparison; compose its component with mapDerivedCategorySingleFunctor to identify restriction of K′ tensor-derived N[0] with j^*K′ tensor-derived (j^*N)[0]. This is the finite, single-test pullback/tensor computation, with no integral or common-stage coherence needed.",
+   "uses": [
+    "lem-exc-intrinsic-tor-amplitude-transport",
+    "def-sfb-finite-upper-star-monoidal"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply intrinsic_resolution_tensor_homology_iso to the given L,Q,f and M with their isomorphisms. Pull back that isomorphism; compose the realization/pullback comparison and the exact homology comparison with the tensor comparison from the preceding step. The zero tensor homology on U is sent to zero by the additive realization. Transport across the resulting isomorphism to obtain the requested zero sheaf.",
+   "uses": [
+    "lem-exc-intrinsic-resolution-tensor-homology",
+    "lem-weil-pbc-exact-functor-complex-cohomology"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-proetale-modules",
+  "lem-trf-open-square-exchange",
+  "def-weil-proetale-tor-amplitude",
+  "lem-exc-intrinsic-tor-amplitude-transport",
+  "def-sfb-finite-upper-star-monoidal",
+  "lem-exc-intrinsic-resolution-tensor-homology",
+  "lem-weil-pbc-exact-functor-complex-cohomology"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-et-proet/thm-pur-general-admissibility.proof.md",
+  "place": "Step 4: restriction of one arbitrary module-sheaf tensor test before cover detection"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "intrinsic_resolution_tensor_homology_iso|intrinsic_hasProEtaleTorAmplitude_iff_torAmplitudeIn",
+   "results": "0 hits: ",
+   "date": "2026-10-25",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"mapDerivedCategoryTensorComparison\"",
+   "results": "0 hits: ",
+   "date": "2026-10-25",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Cohomology of derived tensor products commutes with exact inverse image along an open immersion",
+   "results": "8 hits: AlgebraicGeometry.LocallyRingedSpace.IsOpenImmersion.invApp_app_assoc, AlgebraicGeometry.SheafedSpace.IsOpenImmersion.invApp_app_assoc, AlgebraicGeometry.Scheme.Hom.app_appIso_inv_assoc, AlgebraicGeometry.Scheme.Modules.restrictFunctorComp, AlgebraicGeometry.Scheme.Modules.restrictFunctorIsoPullback, AlgebraicGeometry.Scheme.Hom.appIso_inv_app_assoc, AlgebraicGeometry.SheafedSpace.IsOpenImmersion.inv_naturality_assoc, AlgebraicGeometry.Scheme.Hom.appIso_inv_appLE_assoc",
+   "date": "2026-10-25",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.PurityGeneralAdmissibility",
+  "date": "2026-10-25",
+  "group": "Q4"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-rf-shriek-preservation",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.PurityOpenTensorTestVanishing",
+  "file": "lean/Sheaf/Paper/PurityOpenTensorTestVanishing.lean",
+  "declaration": "WeilConjectures.purityOpenTensorTestVanishing",
+  "statement": "theorem purityOpenTensorTestVanishing\n    (A : Type u) [CommRing A] [Finite A]\n    {U X : Scheme.{u}} (j : U ⟶ X) [IsOpenImmersion j]\n    (K : proEtaleDerivedCategory X A) (a b : ℤ)\n    (hK : HasProEtaleTorAmplitude U A\n      ((proEtaleConstantRingDerivedPullback A j).obj K) a b)\n    (L Q : CochainComplex (proEtaleRingModules X (proEtaleConstantRing X A)) ℤ)\n    (e : Nonempty (DerivedCategory.Q.obj L ≅ K))\n    (f : Q ⟶ L) (hf : QuasiIso f)\n    (hQ : CochainComplex.IsAcyclicTensorKFlat (R := proEtaleConstantRing X A) Q)\n    (M : proEtaleRingModules X (proEtaleConstantRing X A))\n    (q : ℤ) (hq : q < a ∨ b < q) :\n    IsZero ((proEtaleConstantRingPullback A j).obj\n      ((DerivedCategory.homologyFunctor _ q).obj\n        (derivedTensor X A L\n          ((HomologicalComplex.single _ (ComplexShape.up ℤ) 0).obj M) Q f hf hQ)))",
+  "branch": "sheaf-dag",
+  "by": "Q4",
+  "date": "2026-10-25"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-f8fb8",
+  "group": "Q4",
+  "result": "fix",
+  "landing": "20261025T101313-L-3681333",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-f8fb8",
+  "group": "Q4",
+  "result": "fix",
+  "landing": "20261025T101313-L-3681333",
+  "kind": "interface",
+  "note": "independent cc review: general_admissibility proof + new chart_local_bounds/purityOpenTensorTestVanishing vs node thm-pur-general-admissibility, unit sk-prop-sf-rf-shriek-preservation realized modules, clone signatures; set compile + #print axioms in /tmp/q4rev"
+ }
+}

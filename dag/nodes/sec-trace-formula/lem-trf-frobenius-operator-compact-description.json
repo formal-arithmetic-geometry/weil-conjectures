@@ -24,93 +24,39 @@
  ],
  "proof": [
   {
-   "text": "Work at $A=A_{E,n}$, let $m\\geq1$, and put $H=R\\Gamma_c(X,-)$, $P_r=L(g_\\gamma^r)^*$ and $T=P_1$. Clause 1 of the current [def-trf-frobenius-operators], at $m=1$, defines\n$$F_{c,K}=H(\\varphi)\\circ\\tau_{c,K}.$$\nThe transport here is exactly the composite of [def-weil-frobenius-cohomology-transport]:\n$$H(K)\\xrightarrow{\\ \\iota_{Ra_{X!}K}\\ }\\operatorname{Fib}_s(Lh^*Ra_{X!}K)\\xrightarrow{\\ \\operatorname{Fib}_s(\\operatorname{FrEx}_{X,!}(K))\\ }H(TK),$$\nwhere $h=\\operatorname{Spec}(\\gamma)$ and $\\operatorname{FrEx}_{X,!}$ is part 2 of [def-weil-frobenius-square-exchange] for $f_0=a_{X_0}$. Fix its compactification over $k_0$ throughout. By [def-trf-coefficient-conventions], applying the point fiber to $Ra_{X!}(\\varphi)$ is $H(\\varphi)$. Thus, writing $\\tau^{(1)}_{c,K}=\\tau_{c,K}$ as in the transport-composition lemma below, we have $F_{c,K}=H(\\varphi)\\tau^{(1)}_{c,K}$. This is a direct expansion of the current finite-A definition, with no appeal to a separate pair-action construction.",
+   "text": "Use the single canonical direct power-square transport compactDirectPowerTransport, with finiteGlobalDirectPowerTransport now its abbreviation (definition-merger record B4-frobenius-compact-description-proof-context). It is constructed from the point transport and the retained-compactification exchange, not by iterating degree one. The underlying carrier of a strict Weil complex is bounded constructible, as the first conjunct of its finite-Tor constructible predicate. Expand finiteGlobalFrobenius and apply compact_direct_power_transport_normalization to this carrier. Its equality gives exactly the compact-support formula, and its final clause makes the direct arrow invertible.",
    "uses": [
+    "def-trf-strict-weil-complex",
     "def-trf-frobenius-operators",
-    "def-weil-frobenius-cohomology-transport",
-    "def-weil-frobenius-square-exchange",
-    "def-trf-coefficient-conventions"
+    "lem-trf-compact-direct-power-transport-normalization"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/blueprint/master/blueprint/sec-trace-formula/sk-d-weil/lem-trf-frobenius-operator-compact-description.md",
-    "place": "Proof, first sentence: expand the global action in the finite coefficient category"
-   }
+   "elementary": true
   },
   {
-   "text": "For $r\\geq1$, the direct transport $\\tau^{(r)}_{c,M}$ is defined on $D^b_c(X,A)$: the automorphism $g_\\gamma$ has inverse $(g_\\gamma^{-1})$, so every power is an isomorphism; $\\ell\\ne p$ makes $\\ell$ invertible on $X$, and [lem-weil-isomorphism-derived-pullback] preserves bounded constructibility under $P_r$. [lem-trf-compact-frobenius-transport-composition] gives\n$$\\tau^{(r+1)}_{c,M}=H(b_{r,M})\\circ\\tau^{(1)}_{c,P_rM}\\circ\\tau^{(r)}_{c,M}.$$\nBy clause 3 of [lem-weil-frobenius-cohomology-transport-iso], the degree-one transports are isomorphisms on these objects; induction from $r=1$ makes every $\\tau^{(r)}_{c,M}$ an isomorphism.",
+   "text": "At level n+1 the functor finiteGlobalCompactSections is definitionally the compactPowerCohomology used in compactWeilCocycleEndomorphism. Expand only compactDirectPowerTransport and compactWeilCocycleEndomorphism, then use preservation of composition and associativity to identify finiteGlobalFrobenius at predecessor i with U_(i+1). Apply the successor clause of compact_weil_cocycle_endomorphism_recurrence to obtain F_(i+1)=F_i followed by F_0.",
    "uses": [
-    "lem-trf-compact-frobenius-transport-composition",
-    "def-trf-scheme-frobenius",
-    "lem-weil-isomorphism-derived-pullback",
-    "lem-weil-frobenius-cohomology-transport-iso"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/blueprint/master/blueprint/sec-trace-formula/sk-d-weil/lem-trf-frobenius-operator-compact-description.md",
-    "place": "Proof, second sentence: domain and invertibility of the direct compact-support transports"
-   }
-  },
-  {
-   "text": "Write $d_{r,M}:P_rM\\xrightarrow{\\sim}T^rM$ for the canonical comparison (the $c_r$ of [def-trf-frobenius-operators]) and set\n$$S_{r,M}=H(d_{r,M}^{-1})\\circ\\tau_{c,T^{r-1}M}\\circ\\cdots\\circ\\tau_{c,M}.$$\nHere $P_1=T$ and $d_1=\\mathrm{id}_T$ by the operator definition. The comparison coherence\n$$d_{r+1,M}^{-1}\\circ T(d_{r,M})=b_{r,M}$$\nis [lem-trf-frobenius-pullback-comparison-coherence]. Applying the formal repeated-transport induction [lem-trf-frobenius-transport-induction] to the recurrence in the preceding step and to the naturality of $\\tau_c$ from [def-weil-frobenius-cohomology-transport] gives $S_{r,M}=\\tau^{(r)}_{c,M}$ for every $r$. Thus the repeated arrow in the current operator definition is the direct compact-support transport along $g_\\gamma^r$.",
-   "uses": [
-    "def-trf-frobenius-operators",
-    "def-weil-frobenius-cohomology-transport",
-    "lem-trf-frobenius-pullback-comparison-coherence",
-    "lem-trf-frobenius-transport-induction",
-    "lem-trf-compact-frobenius-transport-composition"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/master/blueprint/sec-trace-formula/sk-d-weil/lem-trf-frobenius-operator-compact-description.md",
-    "place": "Proof, second sentence: compatibility of the repeated operator transport with the direct power transport"
-   }
-  },
-  {
-   "text": "Define $T_r=H(\\varphi^{[r]})\\circ\\tau^{(r)}_{c,K}$ for $r\\geq1$. By [def-trf-iterated-weil-map], $\\varphi^{[1]}=\\varphi$, so step 1 gives $T_1=F_{c,K}$. Write $u=\\varphi^{[r]}:P_rK\\to K$. The cocycle of [lem-trf-iterated-weil-cocycle] with indices $1,r$ reads\n$$\\varphi^{[r+1]}\\circ b_{r,K}=\\varphi\\circ P_1(u).$$\nNaturality of the degree-one transport, stated in [def-weil-frobenius-cohomology-transport], applied to this particular morphism $u$, reads\n$$H(P_1u)\\circ\\tau^{(1)}_{c,P_rK}=\\tau^{(1)}_{c,K}\\circ H(u).$$\nSubstituting these two identities and the composition identity of [lem-trf-compact-frobenius-transport-composition], and using functoriality of $H$, gives the explicit calculation\n$$\\begin{aligned}\nT_{r+1}&=H(\\varphi^{[r+1]})H(b_{r,K})\\tau^{(1)}_{c,P_rK}\\tau^{(r)}_{c,K}\\\\\n&=H(\\varphi)H(P_1u)\\tau^{(1)}_{c,P_rK}\\tau^{(r)}_{c,K}\\\\\n&=H(\\varphi)\\tau^{(1)}_{c,K}H(u)\\tau^{(r)}_{c,K}=T_1\\circ T_r.\n\\end{aligned}$$\nAll products in this display are compositions, with the rightmost map applied first. The canonical pullback comparison is displayed as $b_{r,K}$, so no coherence map is suppressed at the coefficient substitution.",
-   "uses": [
-    "def-trf-iterated-weil-map",
-    "lem-trf-iterated-weil-cocycle",
-    "def-weil-frobenius-cohomology-transport",
-    "lem-trf-compact-frobenius-transport-composition",
-    "def-trf-coefficient-conventions"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/blueprint/master/blueprint/sec-trace-formula/sk-d-weil/lem-trf-frobenius-operator-compact-description.md",
-    "place": "Proof, the m-th-iterate assertion: expand the missing composition and naturality calculation"
-   }
-  },
-  {
-   "text": "Induct on the positive integer $r$. The base $T_1=F_{c,K}$ was proved in step 4. If $T_r=(F_{c,K})^r$, that step gives $T_{r+1}=T_1\\circ T_r=F_{c,K}\\circ(F_{c,K})^r=(F_{c,K})^{r+1}$. Clause 1 of [def-trf-frobenius-operators] defines its notation $F_{c,K}^{\\,m}$ as $H(\\varphi^{[m]})\\circ S_{m,K}$, where $S_{m,K}$ is the repeated-transport composite written in step 3. That step proves $S_{m,K}=\\tau^{(m)}_{c,K}$, the direct transport along $g_\\gamma^m$. Substituting yields\n$$F_{c,K}^{\\,m}=H(\\varphi^{[m]})\\tau^{(m)}_{c,K}=T_m=(F_{c,K})^m.$$\nThus the definition's notation really is the m-th power, and its first arrow is the direct compact-support base-change isomorphism, rather than merely a formally repeated arrow. With the notation of the statement this is\n$$F_{c,K}^{\\,m}=R\\Gamma_c(X,\\varphi^{[m]})\\circ g_{\\gamma,c}^{m,*}.$$\nThis equality holds on the compact-support complex, before taking cohomology.",
-   "uses": [
+    "lem-trf-compact-weil-cocycle-endomorphism-recurrence",
+    "lem-trf-compact-direct-power-transport-normalization",
     "def-trf-frobenius-operators"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/blueprint/master/blueprint/sec-trace-formula/sk-d-weil/lem-trf-frobenius-operator-compact-description.md",
-    "place": "Proof, last sentence: the composite is the displayed one"
-   }
+   "elementary": true
+  },
+  {
+   "text": "Induct on the predecessor r of the positive exponent. At r=0 the assertion is pow_one. At the successor substitute the recurrence of step 3 and the induction hypothesis, then use the opposite-composition multiplication of categorical endomorphisms and pow_succ′. Combine this power equality with the formula and invertibility obtained in step 2. The coefficient level zero case is excluded by the existing positive-level hypothesis.",
+   "uses": [],
+   "elementary": true
   }
  ],
  "proof_deps": [
+  "def-trf-strict-weil-complex",
   "def-trf-frobenius-operators",
-  "def-weil-frobenius-cohomology-transport",
-  "def-weil-frobenius-square-exchange",
-  "def-trf-coefficient-conventions",
-  "lem-trf-compact-frobenius-transport-composition",
-  "def-trf-scheme-frobenius",
-  "lem-weil-isomorphism-derived-pullback",
-  "lem-weil-frobenius-cohomology-transport-iso",
-  "lem-trf-frobenius-pullback-comparison-coherence",
-  "lem-trf-frobenius-transport-induction",
-  "def-trf-iterated-weil-map",
-  "lem-trf-iterated-weil-cocycle"
+  "lem-trf-compact-direct-power-transport-normalization",
+  "lem-trf-compact-weil-cocycle-endomorphism-recurrence"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-d-weil/lem-trf-frobenius-operator-compact-description.md",
-  "place": "Statement (m-th-iterate clause and displayed compact-support formula); expands the older snapshot Proof using the finite-coefficient transport definitions and an explicit positive-integer induction. Deligne, Weil II (1.1.10)-(1.1.14), pp. 151-153, supplies the transport-of-structure convention."
+  "document": "literature/blueprint/latest/blueprint/sec-trace-formula/sk-lem-tf-frobenius-convention/lem-trf-frobenius-operator-compact-description.proof.md",
+  "place": "The direct scheme-variable base-change arrow and coefficient-complex formula, with the reviewed DAG normalization and recurrence results and final positive-power induction."
  },
  "mathlib_searches": [
   {
@@ -176,42 +122,36 @@
   "def-weil-finite-field-fiber"
  ],
  "proof_split_by": "paragraphs",
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
  "chapter": "sec-trace-formula",
  "unit": "sk-d-weil",
  "split_report": {
-  "date": "2026-10-17",
+  "date": "2026-10-22",
   "item": "lem-trf-frobenius-operator-compact-description",
   "worker": "stage1",
-  "summary": "Repair of the human return of 2026-10-17: preserved the statement, Lean record, proof route and other proof steps; replaced the 2458-character step by a short domain/invertibility step and a short application of two statement-only helpers. The helpers isolate coherence of the specified derived pro-etale pullback comparisons and the natural-transformation induction. Checked the generic base case and explicitly required P_1=T and d_1=id. Replaced the interrupted draft's unlogged Mathlib records with the retained actual search log and corrected its literal trailing backslash-n JSON errors. No change to the item statement.",
-  "blueprint": "Current main statement, its m-th-iterate clause and older snapshot Proof: step 1 realizes its first sentence; repaired steps 2-3 factor the long transport compatibility paragraph into domain/isomorphism, comparison coherence, and repeated-transport induction; steps 4-5 realize the omitted composition calculation and final induction.",
-  "tool_uses": [
-   {
-    "node": "lem-weil-frobenius-cohomology-transport-iso",
-    "why": "Clause 3 at finite coefficients supplies invertibility and naturality of the degree-one compact-support transport. This is the six-functors transport interface explicitly used by this unit; the unit has no replacement statement for its invertibility."
-   },
-   {
-    "node": "lem-weil-isomorphism-derived-pullback",
-    "why": "The finite-coefficient clause supplies bounded constructibility of pullback by each power of the geometric automorphism, so degree-one naturality and invertibility apply to P_r K. This is a generic domain lemma absent from sk-d-weil."
-   },
-   {
-    "node": "lem-weil-pbc-proetale-derived-pullback-composition",
-    "why": "Supplies the canonical derived pro-etale pullback composition isomorphism for constant A-coefficients, whose inverse is c_r in the displayed transport and coefficient equations. The unit names these comparisons but has no construction theorem for them."
-   }
-  ]
+  "summary": "Repaired the 2026-10-22 re-split return. The sandbox initially contained only brief markers, so retained the current repository version as the returned head. Kept the statement and maintainer fields. Extracted old steps 2-3 (domain/invertibility and normalization of direct transport) and old step 4 (Weil-cocycle/naturality recurrence) into two comparable, self-contained statement-only unsplit nodes, without moving the final power assertion into either. Kept the full degree-one definition expansion and the final positive-integer induction in the parent. Both new nodes have actual logged searches; LeanSearch was rate-limited and is recorded unavailable. All old arguments are mapped and reproduced in report.md.",
+  "blueprint": "Main-20261015 .proof.md first two sentences: parent step 1 expands the operator and point-fiber exchange; new normalization node carries the scheme-variable direct base-change identification (old steps 2-3); new recurrence node carries coefficient substitution and composition (old step 4); parent steps 3-4 identify the true iterate by induction and assemble the displayed formula.",
+  "tool_uses": []
  },
- "tool_uses": [
-  "lem-weil-frobenius-cohomology-transport-iso",
-  "lem-weil-isomorphism-derived-pullback",
-  "lem-weil-pbc-proetale-derived-pullback-composition"
- ],
+ "tool_uses": [],
  "reviewed": {
-  "date": "2026-10-17",
+  "date": "2026-10-22",
   "by": "L",
-  "reviewer": "NT-cc-N1-187ec5de2",
-  "group": "N1",
+  "reviewer": "NT-cc-NF-45ce08117",
+  "group": "NF",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-N1-187ec5de2 (reviewer sub-agent of L); spot-checked: I read the item, both new nodes and every cited statement in full; review.md has the details. The item statement is unchanged and matches main-20261015 and master sk-d-weil verbatim. Coefficients are A_{E,n} constant pro-etale throughout. The derived pullback of def-weil-derived-pullback-tensor-hom is the same as the module pullback of def-weil-pbc-proetale-operations, and c_{h,k} is the comparison of lem-weil-pbc-proetale-derived-pullback-composition. 'Base change along g^m' is read as the direct transport tau^(m), which is the stronger reading, so the target is not weakened. Step 1 unfolds clause 1 of def-trf-frobenius-operators at m=1 with c_1=id. Step 2: g^r is an isomorphism and ell != p, so lem-weil-isomorphism-derived-pullback keeps P_r M bounded constructible; c_{m,M} of the transport-composition lemma is the inverse of c_{g,g^m}, which is b_m. Step 3 matches every hypothesis of the induction helper: C=D^b_c, eta=tau_c (natural), d_1=id, and the identity d_{r+1}^{-1}T(d_r)=b_r (type-checked). Step 4: the cocycle at (1,r) gives the identification b_r, naturality at u=phi^[r] holds, and the display re-derives with correct types. Step 5 is the induction. proof_deps equals the union of uses. Both new nodes are true: I proved the induction helper (S_{r+1}=H(b_r)eta_{P_r}S_r, S_1=eta_M) and checked coherence at r=1,2. Both are statement-only, self-contained, strictly smaller than the item, and have correct created/blueprint fields with three kinds of search. One duplicate candidate is missing from the report: lem-trf-derived-pullback-coherence, which states the three-morphism associativity at finite A. It is the input for splitting the coherence helper, not a duplicate of it. I keep the short induction helper because the human's return asked for that induction to be extracted. Accepted tool uses: lem-weil-frobenius-cohomology-transport-iso and lem-weil-isomorphism-derived-pullback. The third declared entry, lem-weil-pbc-proetale-derived-pullback-composition, is no longer used in the proof steps. No SGA, no fixes."
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NF-45ce08117 (reviewer sub-agent of L); spot-checked: The re-split follows the 2026-10-22 note (live and side-live item still at its 10-17 split, so not superseded). Statement and stmt_deps are byte-identical to live and to main-20261015. The proof is 4 steps; 2895 characters after the fix. Old steps 2-3 (domain, invertibility, S_r=tau^(r)) became lem-trf-compact-direct-power-transport-normalization. Old step 4 (cocycle at (1,r), naturality of tau_c at u=phi^[r], transport composition) became lem-trf-compact-weil-cocycle-endomorphism-recurrence. Old steps 1 and 5 stay in the parent; no argument was shortened, and the two nodes are of comparable size and do not restate the item. Both nodes are statement-only and self-contained, and both are true; checked by hand at r=1 and r=2 and for M=0. Each has a proof from existing sk-d-weil nodes: lem-weil-isomorphism-derived-pullback, the composition lemma, transport-iso clause 3, the comparison coherence and the transport induction; and iterated-weil-cocycle for the recurrence. Each records LeanFinder, Loogle and grep searches, with LeanSearch marked unavailable. Not duplicates: global-frobenius-iterate-formula is abstract and from another unit; the integral and rational recurrence nodes work at other stages. No SGA. One C1/C3 fault was repaired: parent step 4 equated the c_m of def-trf-frobenius-operators with the d_m that the normalization node uses, and cited nothing for it. The old step 3 had cited lem-trf-frobenius-pullback-comparison-coherence for this. Step 4 now derives c_m=d_m from that lemma's independence-of-splitting clause and cites it and def-trf-frobenius-pullback-power-comparison; proof_deps are recomputed and there is no cycle. Advisory: the new nodes have no lean_audit key.; 1 file(s) fixed by the reviewer"
  },
  "lean": {
   "module": "Sheaf.Paper.FrobeniusOperatorCompactDescription",
@@ -234,5 +174,15 @@
   "group": "N9",
   "result": "fix",
   "note": "R1 repaired: theorem lem-trf-frobenius-pullback-comparison-coherence replaced in stmt_deps by new existing:true def node def-trf-frobenius-pullback-power-comparison (5 plain defs, no choose); its lemma stmt_dep constructs c_{h,k}, so it is genuine. R2 repaired: def-trf-frobenius-operators record is a superset on TraceFormulaLocalFrobeniusOperator (same primary signature, 4+6 decls; live record unchanged since base). Mechanical finding: lem-trf-point-transport-composition is genuine, since pointPowerTransportFinite comes from Classical.choose of pointPowerFiniteSigma_existsUnique, so PASS on it. Item math unchanged from 04e83 and correct; record statement matches the file verbatim. FIX: the delivered dep module text predates live and drops 8 public imports; fixes/TraceFormulaLocalFrobeniusOperator.lean = live text + the 2 imports, 3 set_options and 6 defs. nt_compile --json clean: fix 16.8 s, item 21.5 s, live importer LocalFrobeniusConjugacy 17.1 s."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-3b172",
+  "group": "B4",
+  "result": "pass",
+  "landing": "20261025T201411-L-2482608",
+  "kind": "interface",
+  "note": "independent cc review: finiteGlobalDirectPowerTransport old body (pointPowerPullbackModel(h)≫finiteCompact) vs compactDirectPowerTransport (openSquareDerivedPullbackModel(h).inv≫compactPowerExchange≫models) — same canonical direct base change; proof uses normalization + recurrence lemmas; node proof fields vs Lean; #print axioms (sorryAx only from open imported lemmas)"
  }
 }

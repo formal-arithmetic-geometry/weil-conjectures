@@ -194,7 +194,30 @@
   "def-weil-pbc-scheme-conventions"
  ],
  "proof_split_by": "paragraphs",
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "closed",
+   "decls": [
+    {
+     "name": "AlgebraicGeometry.ProjectiveSpace.surjective_symmetricProduct",
+     "module": "WeilConjectures.AlgebraicGeometry.ProjectiveSpace.SymmetricProduct",
+     "lines": [
+      128,
+      144
+     ],
+     "kind": "theorem",
+     "sorry": false
+    }
+   ],
+   "missing": [],
+   "open": []
+  }
+ },
  "chapter": "sec-proper-base-change",
  "unit": "sk-thm-reduction",
  "split_report": {
@@ -229,5 +252,25 @@
   "group": "V1",
   "result": "pass",
   "note": "AUTO: landed after the second Codex reading and the tool's mechanical checks and compile; not read by a reviewer (tiered review, decision of the human 2026-10-11)"
+ },
+ "blueprint_update": {
+  "snapshot": "main-20261023-1620",
+  "commit": "7284bb09daf97437d544c51882b325f9c52cd345",
+  "changed": [
+   "statement",
+   "proof"
+  ],
+  "statement": "For every scheme $S$ and every $n\\geq0$, the symmetric-product morphism\n$\\sigma_n:(\\mathbf P^1_S)^n\\to\\mathbf P^n_S$ of\n[def-weil-pbc-symmetric-product-morphism] is surjective. Equivalently, over every\nalgebraically closed field every binary form of degree $n$ factors as a product\nof $n$ linear forms, including factors at infinity.",
+  "proof": [
+   {
+    "text": "Induction on $n$; $\\sigma_0$ is an isomorphism. By construction\n$\\sigma_{n+1}=\\mu\\circ\\mathbf P^1_{\\sigma_n}$ with $\\mathbf P^1_{\\sigma_n}$ a base\nchange of the surjective $\\sigma_n$, hence surjective, and $\\mu$ the\nmultiplication morphism of [lem-weil-pbc-symmetric-product-properties]. The\nmorphism $\\mu$ is of finite type, and over an algebraically closed field every\nbinary form of degree $n+1$ is the product of a linear form and a form of degree\n$n$; so every geometric fibre of $\\mu$ is nonempty and $\\mu$ is surjective\n([lem-weil-pbc-surjective-nonempty-fibres]). Composites of surjections are\nsurjective.",
+    "uses": [
+     "lem-weil-pbc-symmetric-product-properties",
+     "lem-weil-pbc-surjective-nonempty-fibres"
+    ],
+    "elementary": false
+   }
+  ],
+  "note": "the current blueprint (main-20261023-1620, weil-conjectures-blueprint 7284bb09da) states or proves this differently; the node is proved in Lean: recorded 2026-10-23, not reopened"
  }
 }

@@ -1,0 +1,265 @@
+{
+ "id": "lem-sfb-space-local-dimension-chart-invariance",
+ "kind": "statement",
+ "title": "Etale scheme charts compute the same local dimension of an algebraic space",
+ "statement": "Let $S$ be a scheme [def-pc-scheme] and $X$ an algebraic space over $S$ [def-trf-algebraic-space], with point set $|X|$ [def-a1-space-point-topology]. An etale scheme chart means a representable etale morphism $a:W\\to X$ from an $S$-scheme [def-weil-etale-morphism]. For each $x\\in|X|$ there exist such a chart and a point $w\\in W$ with $a(w)=x$. If $a_i:W_i\\to X$ are two such charts and $w_i\\in W_i$ satisfy $a_i(w_i)=x$, then $$\\dim\\mathcal O_{W_1,w_1}=\\dim\\mathcal O_{W_2,w_2}.$$ Here $\\mathcal O_{W,w}$ is the stalk of the scheme structure sheaf, and ring dimension is [def-weil-pbc-krull-dimension-ring]. Thus these dimensions define a unique value $\\delta_X(x)\\in\\{0,1,2,\\ldots,\\infty\\}$. When $X$ is represented by a scheme $T$, and $t\\in T$ corresponds to $x$, this value equals $\\dim\\mathcal O_{T,t}$. No quasi-separatedness, Noetherian, or finite-dimensionality hypothesis is assumed.",
+ "source": {
+  "document": "literature/stacks-project/spaces-properties.tex",
+  "place": "Tag 0BAM (lemma-pre-dimension-local-ring), including its last sentence for schemes; Tag 04NA (definition-dimension-local-ring)."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-trf-algebraic-space",
+  "def-a1-space-point-topology",
+  "def-weil-etale-morphism",
+  "def-weil-pbc-krull-dimension-ring"
+ ],
+ "proof": [
+  {
+   "text": "Choose a representable surjective etale atlas $a:W\\to X$ from the definition of algebraic space. Its point map is surjective by the point-surjectivity criterion, so every $x\\in|X|$ has a lift $w\\in W$. This proves the existence clause without any quasi-compactness hypothesis.",
+   "uses": [
+    "def-trf-algebraic-space",
+    "lem-a1-space-point-open-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-properties.tex",
+    "place": "Tag 0BAM (lemma-pre-dimension-local-ring), expanding Tag 04N2 through the common chart; Tag 04NA (definition-dimension-local-ring)."
+   }
+  },
+  {
+   "text": "For the given two charts form the sheaf fibre product $R=W_1\\times_XW_2$. It is a scheme because $a_2$ is representable and $W_1$ is a scheme. The projection $p_1:R\\to W_1$ is etale by the definition of representable etaleness; interchange the indices for $p_2$. Since $w_1,w_2$ have the same image $x$ in $|X|$, the fibre-product point lemma gives a scheme point $r\\in R$ with $p_i(r)=w_i$. Neither chart is required to be surjective.",
+   "uses": [
+    "def-trf-algebraic-space",
+    "lem-trf-space-fibre-products-etale-covers",
+    "lem-a1-space-fibre-product-point"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-properties.tex",
+    "place": "Tag 0BAM (lemma-pre-dimension-local-ring), expanding Tag 04N2 through the common chart; Tag 03H4 (lemma-points-cartesian) for the common point; Tag 04NA (definition-dimension-local-ring)."
+   }
+  },
+  {
+   "text": "For each $i$ choose affine opens $V_i=\\operatorname{Spec}A_i\\subset W_i$ and $U_i=\\operatorname{Spec}B_i\\subset R$, containing $w_i$ and $r$, with $p_i(U_i)\\subset V_i$ and $A_i\\to B_i$ etale. Such pairs cover an etale morphism by its affine-local definition. Write $\\mathfrak q_i$ for the prime of $r$ in $B_i$ and $\\mathfrak p_i$ for that of $w_i$ in $A_i$; the scheme morphism gives $\\mathfrak p_i=(A_i\\to B_i)^{-1}(\\mathfrak q_i)$. Affine stalk localization identifies $\\mathcal O_{W_i,w_i}\\cong(A_i)_{\\mathfrak p_i}$ and $\\mathcal O_{R,r}\\cong(B_i)_{\\mathfrak q_i}$. Apply the etale ring-dimension lemma to obtain $\\dim\\mathcal O_{W_i,w_i}=\\dim\\mathcal O_{R,r}$. Ring isomorphisms preserve dimension because inverse image bijects prime chains, preserving strict inclusions.",
+   "uses": [
+    "def-weil-etale-morphism",
+    "lem-weil-pbc-affine-open-stalk-localization",
+    "lem-sc-etale-local-dimension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/descent.tex",
+    "place": "Tag 04N8 (lemma-dimension-local-ring-local), using more-algebra.tex Tag 07QP (lemma-dimension-etale-extension) and schemes.tex Tag 01HV (lemma-spec-sheaves)."
+   }
+  },
+  {
+   "text": "The two equalities from step 3 give $\\dim\\mathcal O_{W_1,w_1}=\\dim\\mathcal O_{R,r}=\\dim\\mathcal O_{W_2,w_2}$. Choose one lifted chart from step 1 and define $\\delta_X(x)$ to be its stalk dimension. This is nonnegative or infinite: a stalk at a scheme point is a nonzero local ring and its maximal ideal is prime, giving a chain of length zero. Step 3 shows independence of the choice; any value satisfying the chart equalities must equal this chosen one. This proves existence and uniqueness of the value, including infinite dimension.",
+   "uses": [
+    "def-weil-pbc-krull-dimension-ring"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-properties.tex",
+    "place": "Tag 0BAM (lemma-pre-dimension-local-ring), expanding Tag 04N2 through the common chart; Tag 04NA (definition-dimension-local-ring)."
+   }
+  },
+  {
+   "text": "If $X$ is represented by a scheme $T$, the identity $T\\to T$ is an etale chart, and the point corresponding to $x$ is $t$. Comparing any chart to this identity chart by steps 2--4 gives $\\delta_X(x)=\\dim\\mathcal O_{T,t}$. The identity is etale directly from the affine definition: its ring maps are identities.",
+   "uses": [
+    "def-weil-etale-morphism"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-properties.tex",
+    "place": "Tag 0BAM (lemma-pre-dimension-local-ring), expanding Tag 04N2 through the common chart; Tag 04NA (definition-dimension-local-ring)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-trf-algebraic-space",
+  "def-weil-etale-morphism",
+  "def-weil-pbc-krull-dimension-ring",
+  "lem-a1-space-fibre-product-point",
+  "lem-a1-space-point-open-calculus",
+  "lem-sc-etale-local-dimension",
+  "lem-trf-space-fibre-products-etale-covers",
+  "lem-weil-pbc-affine-open-stalk-localization"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/spaces-properties.tex",
+  "place": "Tag 0BAM (lemma-pre-dimension-local-ring), expanding Tag 04N2 through the common chart; Tag 04NA (definition-dimension-local-ring)."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "AlgebraicSpace|ringKrullDim.*[Ee]tale|[Ee]tale.*ringKrullDim|dimension.*chart",
+   "results": "2 hits: Mathlib/Geometry/Manifold/Instances/Sphere.lean, Mathlib/Geometry/Manifold/Instances/Sphere.lean",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme/ring definitions and localization results do not state chart-independence for algebraic spaces"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Independence of local ring dimension of an algebraic space from the choice of etale scheme chart",
+   "results": "8 hits: AlgebraicGeometry.LocallyRingedSpace, AlgebraicGeometry.Scheme.mk.noConfusion, Algebra.Etale.of_isLocalizationAway, AlgebraicGeometry.Scheme.Etale, AlgebraicGeometry.Scheme.toLocallyRingedSpace, RingHom.Etale.propertyIsLocal, IsLocalRing.maximalIdeal_primeHeight_eq_ringKrullDim, Algebra.Etale.formallyEtale",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme/ring definitions and localization results do not state chart-independence for algebraic spaces"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"ringKrullDim\", \"Etale\"",
+   "results": "0 hits: ",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme/ring definitions and localization results do not state chart-independence for algebraic spaces"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For an algebraic space the Krull dimensions of the local rings of any two etale scheme charts at points over the same point are equal, and for schemes this equals the ordinary stalk dimension",
+   "results": "8 hits: AlgebraicGeometry.Scheme.Etale, IsLocalization.AtPrime.ringKrullDim_eq_height, Ring.krullDimLE_of_isLocalization_maximal, Algebra.instEtaleOfIsStandardSmoothOfRelativeDimensionOfNatNat, PrimeSpectrum.topologicalKrullDim_eq_ringKrullDim, RingHom.Etale.propertyIsLocal, Algebra.Etale.iff_isStandardSmoothOfRelativeDimension_zero, Algebra.IsEtaleAt",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme/ring definitions and localization results do not state chart-independence for algebraic spaces"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Two etale scheme neighborhoods of a point of an algebraic space have local rings of equal Krull dimension, with infinite dimension allowed",
+   "results": "8 hits: AlgebraicGeometry.Scheme.Etale, RingHom.Etale.propertyIsLocal, AlgebraicGeometry.IsEtale.instFormallyUnramified, Algebra.IsEtaleAt, Algebra.mem_etaleLocus_iff, Algebra.etaleLocus, AlgebraicGeometry.IsEtale.instIsSmooth, Algebra.exists_etale_of_isEtaleAt",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme/ring definitions and localization results do not state chart-independence for algebraic spaces"
+  },
+  {
+   "tool": "grep",
+   "query": "AlgebraicSpace|ringKrullDim.*[Ee]tale|[Ee]tale.*ringKrullDim",
+   "results": "{\"t\": \"2026-10-23T12:03:02Z\", \"tool\": \"grep\", \"query\": \"AlgebraicSpace|ringKrullDim.*[Ee]tale|[Ee]tale.*ringKrullDim\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: results concern scheme etaleness or etale loci, not algebraic-space chart independence"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Etale scheme charts of an algebraic space compute the same local ring dimension at a point",
+   "results": "{\"t\": \"2026-10-23T12:03:02Z\", \"tool\": \"leansearch\", \"query\": \"Etale scheme charts of an algebraic space compute the same local ring dimension at a point\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.mk.noConfusion\", \"RingHom.Etale.propertyIsLocal\", \"AlgebraicGeometry.IsEtale\", \"AlgebraicGeometry.Scheme.instFieldCarrierResidueField\", \"AlgebraicGeometry.Scheme.local_affine\", \"AlgebraicGeometry.Scheme.Etale\", \"Algebra.Etale.of_isLocalizationAway\", \"AlgebraicGeometry.Scheme.mk.inj\"], \"digest\": \"e5ebd013d3811233\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: results concern scheme etaleness or etale loci, not algebraic-space chart independence"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"ringKrullDim\", \"Etale\"",
+   "results": "{\"t\": \"2026-10-23T12:03:03Z\", \"tool\": \"loogle\", \"query\": \"\\\"ringKrullDim\\\", \\\"Etale\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: results concern scheme etaleness or etale loci, not algebraic-space chart independence"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The local rings of two etale scheme charts above the same point of an algebraic space have equal Krull dimensions",
+   "results": "{\"t\": \"2026-10-23T12:03:07Z\", \"tool\": \"leanfinder\", \"query\": \"The local rings of two etale scheme charts above the same point of an algebraic space have equal Krull dimensions\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"RingHom.Etale.propertyIsLocal\", \"RingHom.Etale.ofLocalizationSpan\", \"RingHom.Etale.ofLocalizationSpanTarget\", \"Algebra.Etale.iff_isStandardSmoothOfRelativeDimension_zero\", \"Algebra.IsEtaleAt\", \"Algebra.mem_etaleLocus_iff\", \"Algebra.instEtaleOfIsStandardSmoothOfRelativeDimensionOfNatNat\", \"Algebra.etaleLocus\"], \"digest\": \"f5affc6a8342912e\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: results concern scheme etaleness or etale loci, not algebraic-space chart independence"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An etale morphism preserves the dimension of the local ring at every point without Noetherian hypotheses",
+   "results": "{\"t\": \"2026-10-23T12:03:08Z\", \"tool\": \"leanfinder\", \"query\": \"An etale morphism preserves the dimension of the local ring at every point without Noetherian hypotheses\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"RingHom.Etale.propertyIsLocal\", \"Algebra.IsEtaleAt\", \"RingHom.Etale.ofLocalizationSpanTarget\", \"RingHom.Etale.ofLocalizationSpan\", \"Algebra.etaleLocus\", \"Algebra.Etale.iff_isStandardSmoothOfRelativeDimension_zero\", \"Algebra.mem_etaleLocus_iff\", \"Algebra.instEtaleOfIsStandardSmoothOfRelativeDimensionOfNatNat\"], \"digest\": \"dae3ff40d701c736\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: results concern scheme etaleness or etale loci, not algebraic-space chart independence"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-space-local-ring-dimension-quasifinite",
+  "date": "2026-10-23",
+  "group": "Q118"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Algebraicity and smoothness of the stack of all nodal curves. Supporting input: Tag 0ADD (lemma-codim-1-point-in-schematic-locus), applied at every point; a locally finite-type space over a field is locally Noetherian and dimension at most one bounds all local dimensions. Supporting input: the local-dimension bound on the points over x in the first paragraph of the proof of Tag 0ADD. Pointwise inequality underlying the source-dimension bound in the proof of Tag 0ADD, first paragraph; the local-ring estimate is Tag 0ABW. Supporting input: independence of the local-ring dimension from its etale scheme chart, and agreement for schemes, used when choosing the atlas in the proof of Tag 0ABW.",
+   "via": [
+    "lem-sfb-space-local-ring-dimension-quasifinite",
+    "lem-sfb-space-quasifinite-source-dimension-bound",
+    "lem-sfb-separated-space-dimension-one-scheme",
+    "lem-sfb-nodal-curve-stack-smooth",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-space-local-dimension-chart-invariance",
+  "worker": "stage1",
+  "summary": "Expanded Stacks 0BAM using a common scheme fibre product and its two etale projections, affine stalk localization, and the existing etale ring-dimension lemma. All clauses and arbitrary-space hypotheses retained. No new nodes; all non-elementary inputs reused.",
+  "blueprint": "Realizes the existing from.place chain into det-thm-sf-ctf-stability-direct-images proof (3): the local chart comparison needed by 0ABW in the dimension-one schematic-locus input. Read the current latest blueprint direct-image proof (3); the deeper supporting chain is supplied by the existing DAG. The ancestor command returns None for this imported supporting chain, retained as computed.",
+  "tool_uses": [
+   {
+    "node": "def-trf-algebraic-space",
+    "why": "Definition supplies an etale atlas and the scheme-test meaning of representable etaleness; no route replacement."
+   },
+   {
+    "node": "lem-a1-space-point-open-calculus",
+    "why": "Generic point-surjectivity and fibre-product point lifting; no local-dimension assertion is taken from it."
+   },
+   {
+    "node": "lem-trf-space-fibre-products-etale-covers",
+    "why": "Generic sheaf fibre products of algebraic spaces; used only to form the common refinement."
+   },
+   {
+    "node": "lem-sc-etale-local-dimension",
+    "why": "Generic commutative-algebra equality for prime localizations of an etale ring map; exactly the algebraic input in Stacks 04N8."
+   },
+   {
+    "node": "lem-a1-space-fibre-product-point",
+    "why": "Reviewer repair: Stacks 03H4 pointwise fibre-product criterion for scheme charts over an algebraic space, giving a scheme point of R over (w_1,w_2); generic, no local-dimension assertion."
+   }
+  ]
+ },
+ "tool_uses": [
+  "def-trf-algebraic-space",
+  "lem-a1-space-point-open-calculus",
+  "lem-trf-space-fibre-products-etale-covers",
+  "lem-sc-etale-local-dimension",
+  "lem-a1-space-fibre-product-point"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q32-ba29fd17d",
+  "group": "Q32",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q32-ba29fd17d (reviewer sub-agent of L); spot-checked: I read the whole item. Its statement matches Stacks 0BAM/04NA (spaces-properties.tex l.1260), including the scheme clause, with no added hypotheses and no weakening. The delivery has no new nodes; the item went from statement-only to five steps. Step 1: the atlas plus the point-surjectivity criterion of lem-a1-space-point-open-calculus gives existence; correct. Step 3: the affine-local étale form from def-weil-etale-morphism (02GI), stalk localization (lem-weil-pbc-affine-open-stalk-localization c) and lem-sc-etale-local-dimension (07QP, no Noetherian hypothesis) are correct. The existing lem-sfb-etale-stalk-invariants already states this scheme-stalk equality; the step re-derives it but is valid, so I left it. Steps 4 and 5 are elementary and correct. One fault, repaired: step 2 took the common scheme point r of R = W1 ×_X W2 from the algebraic-space point-class surjection of lem-a1-space-point-open-calculus. That needs |h_R| to be identified with the points of R, which no cited node states. The fix cites the existing lem-a1-space-fibre-product-point (Stacks 03H4), which gives exactly a scheme point of C ×_E U over two scheme points with equal image, rewords one sentence, adds 03H4 to the source place, and recomputes proof_deps as the union of the uses. Small cases checked: empty X, Spec k, the DVR identity chart, non-surjective charts and non-quasi-separated X. Batch-5 check: lem-a1-space-point-open-calculus and lem-a1-space-fibre-product-point reach sec-trace-formula only through the general definition def-trf-algebraic-space. lem-trf-space-fibre-products-etale-covers is foundational (02X2/041F fibre products of algebraic spaces), not a step of the trace-formula or Poincaré-duality proofs. All three are accepted as generic tool_uses, along with def-trf-algebraic-space and lem-sc-etale-local-dimension. No SGA is cited. Grepping the DAG for 0BAM, 04NA and 04N2 found no duplicate.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.AlgebraicSpaceLocalDimensionChartInvariance",
+  "declaration": "AlgebraicGeometry.AlgebraicSpace.etaleChart_localDimension",
+  "file": "lean/Sheaf/AlgebraicGeometry/AlgebraicSpaceLocalDimensionChartInvariance.lean",
+  "statement": "theorem etaleChart_localDimension {S : Scheme.{u}} (X : AlgebraicSpace S) (x : Point X.obj.obj) : (∃ (W : Over S) (a : yoneda.obj W ⟶ X.obj.obj), IsEtale a ∧ ∃ w : W.left, schemePointMap a w = x) ∧ (∀ (W₁ W₂ : Over S) (a₁ : yoneda.obj W₁ ⟶ X.obj.obj) (a₂ : yoneda.obj W₂ ⟶ X.obj.obj), IsEtale a₁ → IsEtale a₂ → ∀ (w₁ : W₁.left) (w₂ : W₂.left), schemePointMap a₁ w₁ = x → schemePointMap a₂ w₂ = x → ringKrullDim (W₁.left.presheaf.stalk w₁) = ringKrullDim (W₂.left.presheaf.stalk w₂)) ∧ ∃! d : ℕ∞, (∀ (W : Over S) (a : yoneda.obj W ⟶ X.obj.obj), IsEtale a → ∀ w : W.left, schemePointMap a w = x → ringKrullDim (W.left.presheaf.stalk w) = (d : WithBot ℕ∞)) ∧ (∀ (T : Over S) (e : yoneda.obj T ≅ X.obj.obj) (t : T.left), schemePointMap e.hom t = x → (d : WithBot ℕ∞) = ringKrullDim (T.left.presheaf.stalk t))",
+  "branch": "newtargets-dag",
+  "by": "Q64",
+  "date": "2026-10-23",
+  "existing": false,
+  "note": "All clauses of Stacks 0BAM/04NA: chart existence, pairwise equality, unique ENat value, and agreement through every scheme representation. Uses the recorded algebraic-space, point-class and ring-dimension notions; no additional hypotheses."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-0a43c33df",
+  "group": "Q64",
+  "result": "pass",
+  "note": "Statement matches Stacks 0BAM/04NA and the node clause by clause: chart existence; any two étale charts with lifts of x give equal ringKrullDim of the stalks; ∃! d : ℕ∞ equal to every chart's stalk dimension and to the stalk dimension under any scheme representation. The ∃! over a conjunction loses nothing (the representation condition follows from the chart condition; uniqueness also follows from the first conjunct). Checked the recorded declarations of AlgebraicSpace, IsEtale (representable étale), Point/schemePointMap, ringKrullDim and Mathlib Etale. No extra hypotheses, universes bound. Edge cases (empty X, field, DVR, infinite dimension, zero ring) OK. No duplicate declaration found. Only the node lean record and the new module differ from live. Proof is sorry; docstrings give source place, blueprint id and the five steps; proof-dep imports are the recorded modules. Not compiled (no change). Advisory: the Second reading by Q64 section is a self-check, not an independent reading."
+ }
+}

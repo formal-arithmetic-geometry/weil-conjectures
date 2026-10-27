@@ -1,0 +1,354 @@
+{
+ "id": "lem-pur-vector-trace-geometric-descent",
+ "kind": "statement",
+ "title": "Geometric descent and ordered multiplication of vector integration traces",
+ "statement": "Let $N\\geq1$, let $A$ be a finite commutative ring killed by $N$, and let $B$ be a Noetherian scheme on which $N$ is invertible. Noetherian means admitting a finite affine cover by spectra of Noetherian rings. For a vector bundle $\\pi:E\\to B$ of constant rank $r\\geq0$ [def-asd-vector-bundle-zero-section], work in the ordinary small-etale derived categories [def-weil-pbc-derived-categories]. Set $W_\\pi=A_E(r)[2r]$ using ordinary Tate lines [lem-asd-etale-finite-twist-pullback], and use the actual integration $t_\\pi:R\\pi_!W_\\pi\\to A_B[0]$ of [def-amb-vector-integration]. All compact-support exchanges and compositors below are the proper/open normalized maps of [lem-amb-unbounded-compact-support-comparisons].\n\nFor every $g:B'\\to B$ with Noetherian $B'$, form the pullback bundle $\\pi':E'=E\\times_BB'\\to B'$ and its projection $g':E'\\to E$. Let $C_W:g^*R\\pi_!W_\\pi\\xrightarrow{\\sim}R\\pi'_!g'^*W_\\pi$ be exchange and $l:g'^*W_\\pi\\xrightarrow{\\sim}W_{\\pi'}$ the ordinary Tate pullback comparison. Then\n$$t_{\\pi'}\\circ R\\pi'_!(l)\\circ C_W=g^*(t_\\pi).$$\n\nFor locally free modules $F,G$ on $B$ of ranks $r,s\\geq0$, let $p:E(G)\\to B$, $q:E(F\\oplus G)\\to E(G)$ and $h=pq$. The symmetric-algebra total space $E(F\\oplus G)$ is canonically $E(F)\\times_BE(G)$, with $q$ the pulled-back rank-$r$ bundle. Identify $W_h\\cong q^*W_p\\otimes_A^LW_q$ by the ordered Tate/shift associator. With $\\alpha:Rp_!Rq_!\\xrightarrow{\\sim}Rh_!$ and the canonical compact-support projection map $P_q$ (proper projection map and open-extension tensor comparison on a compactification [lem-amb-proper-coproducts-projection, lem-pur-etale-open-derived-tensor]), the actual traces satisfy\n$$t_h\\circ\\alpha_{W_h}=t_p\\circ Rp_!\\bigl((1_{W_p}\\otimes t_q)\\circ P_{q;W_p,W_q}^{-1}\\bigr).$$\nThese equations hold for every compactification triangle used to define $\\alpha$, and are unchanged by exchanging the two ordered blocks with the canonical coordinate permutation. Each trace source has cohomology only in degree zero and its trace is an isomorphism. Rank zero gives the identity adjunction trace under $E(0)=B$; the empty base gives the unique maps. No affinity of intersections of trivializing opens is assumed.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-an/cor-pur-vector-bundle-purity.proof.md",
+  "place": "paragraph 2, trivializing opens, direct sums, degree-zero descent and frame invariance; old Steps 3,5,12"
+ },
+ "stmt_deps": [
+  "def-asd-vector-bundle-zero-section",
+  "def-weil-pbc-derived-categories",
+  "lem-asd-etale-finite-twist-pullback",
+  "def-amb-vector-integration",
+  "lem-amb-unbounded-compact-support-comparisons",
+  "lem-amb-proper-coproducts-projection",
+  "lem-pur-etale-open-derived-tensor",
+  "def-pur-vector-trace-geometry"
+ ],
+ "proof": [
+  {
+   "text": "Reuse vectorIntegration_cohomology_zero for concentration. Choose a locally free frame cover and normalized affine trace data. The defining normalization of the actual glued integration identifies its restriction on each frame with exchange, coefficient isomorphisms, and the affine trace counit. Each factor is invertible, so every restriction of the actual integration is invertible. Apply DerivedCategory.isIso_iff, exact inverse-image compatibility with cohomology, and jointly surjective sheaf inverse-image conservativity to deduce global invertibility. No inverse sheaf maps need to be glued again.",
+   "uses": [
+    "def-asd-vector-bundle-zero-section",
+    "def-amb-vector-integration",
+    "lem-weil-pbc-noetherian-open-subscheme-noetherian",
+    "lem-amb-affine-space-top-trace",
+    "lem-amb-vector-integration-cohomology-zero",
+    "lem-etale-sheaf-jointly-surjective-conservative"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-an/cor-pur-vector-bundle-purity.proof.md",
+    "place": "paragraph 2: specified affine-space counits, simultaneous trivializations, degree-zero sheaf descent"
+   }
+  },
+  {
+   "text": "The equality-on-a-cover helper is proved directly for a source isomorphic to a single degree-zero sheaf. Fullness of singleFunctor expresses both derived maps as sheaf maps, and etaleDegreeZeroHomEquiv_map identifies their inverse-image restrictions with those of the sheaf maps. Jointly faithful inverse images (from jointly surjective isomorphism conservativity) identify these sheaf maps. For uniqueness of normalized integration, similarly express any normalized arrow using the fixed heart identification, then apply the defining existence-and-uniqueness of vectorIntegrationGluing to its sheaf component. Frame independence itself is already part of the existing glued integration and is not reproved.",
+   "uses": [
+    "def-amb-vector-integration",
+    "lem-amb-etale-degree-zero-hom",
+    "lem-weil-pbc-derived-single-fully-faithful",
+    "lem-etale-sheaf-jointly-surjective-conservative"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-an/cor-pur-vector-bundle-purity.proof.md",
+    "place": "paragraph 2: specified affine-space counits, simultaneous trivializations, degree-zero sheaf descent"
+   }
+  },
+  {
+   "text": "Form b from the actual base-change exchange and the coefficient comparison. Choose independent frame covers V_i of F on S and U_j of f*F on T. Their intersections f inverse(V_i) intersect U_j cover T, as proved pointwise. On each such open W, use its inclusions into U_j and f inverse(V_i), followed by the restricted f, to supply the two factorizations into S. Choose normalized affine trace data, identify its Tate transport with the supplied transport by ordinaryFiniteTwistTransport_unique, and apply the local two-frame base-change calculation with the defining normalization equations of the existing glued integrations. For global equality, b followed by the fixed degree-zero identification of C_f*F identifies the common source with a single sheaf. Express each of the two arrows as an image under singleFunctor, transport their equal restrictions to localized sheaf morphisms by etaleDegreeZeroHomEquiv_map, and use jointly faithful sheaf inverse images (deduced from their isomorphism conservativity) to identify the two sheaf maps. Reassociate b.hom to recover exactly the stated equation. No affinity of intersections or extra condition on f is used.",
+   "uses": [
+    "def-amb-vector-integration",
+    "def-asd-vector-bundle-zero-section",
+    "def-pur-vector-trace-geometry",
+    "lem-pur-vector-integration-base-change-local",
+    "lem-amb-etale-degree-zero-hom",
+    "lem-etale-sheaf-jointly-surjective-conservative",
+    "lem-weil-pbc-noetherian-open-subscheme-noetherian",
+    "lem-weil-pbc-derived-single-fully-faithful",
+    "lem-amb-ordinary-finite-twist-transport-uniqueness",
+    "lem-amb-affine-space-top-trace"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-an/cor-pur-vector-bundle-purity.proof.md",
+    "place": "paragraph 2: specified affine counits, base change and frame independence; geometric-descent Step 3"
+   }
+  },
+  {
+   "text": "Choose independent frame covers V_i of F and U_j of G and define O_(i,j)=V_i∩U_j. Prove pointwise that these opens cover S. Form the isomorphism from Rp_!Rq_!W_h to the single degree-zero sheaf of F⊕G: compose the actual compact-support compositor, Rh_! of the inverse coefficient transport, the inverse product exchange, the inverse-image identity comparison, and the defining normalized heart identification vectorIntegrationGluing. Apply the already proved derived_eq_of_cover helper with this isomorphism and the simultaneous frame cover. The remaining goal on each O_(i,j) is exactly the local ordered multiplication calculation, unfolded only at the product-presentation constructions. This is a genuine local-to-global reduction, with no assumption that intersections are affine. The coefficient transport, exchange and decomposition parameters of the local lemma are supplied by the original definitions; their canonical-map constraints are discharged separately by unfolding each definition and reflexivity. Prove the defining equation for vectorTraceSumIntegration separately and transport it by congrArg through restriction and the compositor, then compose with the local equality; no broad normalization of the outer functors is used.",
+   "uses": [
+    "def-amb-vector-integration",
+    "def-asd-vector-bundle-zero-section",
+    "def-pur-vector-trace-geometry",
+    "lem-amb-unbounded-compact-support-comparisons",
+    "lem-amb-etale-degree-zero-hom",
+    "lem-etale-sheaf-jointly-surjective-conservative",
+    "lem-weil-pbc-derived-single-fully-faithful",
+    "lem-pur-vector-integration-direct-sum-local"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-an/cor-pur-vector-bundle-purity.proof.md",
+    "place": "paragraph 2: direct sums, simultaneous trivializations, equality of ordered affine counits and degree-zero descent"
+   }
+  },
+  {
+   "text": "For invertibility of the specified coefficient-first projection, reuse the source theorem isIso_projectionMap_of_finite: it assembles the proper projection and open tensor isomorphisms. Expand only the four outer factors of compactSupportProjectionMap; the two signed symmetries and the exact-derived pullback comparison are isomorphisms, and direct image preserves them.",
+   "uses": [
+    "lem-etale-proper-projection-formula-finite"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-an/cor-pur-vector-bundle-purity.proof.md",
+    "place": "paragraph 2: specified affine-space counits, simultaneous trivializations, degree-zero sheaf descent"
+   }
+  },
+  {
+   "text": "For the every-compactification-triangle equality, rewrite unboundedEtaleLowerShriekCompIso by its tower equation. Expanding purityCompactComposition and the whiskering components gives the identical composite by associativity. This clause needs no direct-sum integration equation and is independent of the compactification choices.",
+   "uses": [
+    "lem-amb-unbounded-compact-support-comparisons"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-an/cor-pur-vector-bundle-purity.proof.md",
+    "place": "paragraph 2: specified affine-space counits, simultaneous trivializations, degree-zero sheaf descent"
+   }
+  },
+  {
+   "text": "For block swap, form b from the actual swap exchange and coefficient comparison. Transport the existing G-plus-F trace back through b. Restrict biproduct braiding to any supplied frame of F-plus-G and transport the rank equality to produce a G-plus-F frame. Its defining normalization equation and the local swap theorem normalize the transported map; the proved uniqueness helper identifies it with the original F-plus-G trace. Cancel b with its inverse. For rank zero, form b from the actual zero-square exchange and transport the displayed identity trace back through b. The local rank-zero theorem normalizes this map, uniqueness identifies it with the actual integration, and cancellation gives the equation. On an empty base, apply derived inverse-image conservativity to the empty family and the map from the coefficient unit to zero. This proves that the target is a zero object, so all arrows into it agree.",
+   "uses": [
+    "def-pur-vector-trace-geometry",
+    "def-amb-vector-integration",
+    "lem-amb-unbounded-compact-support-comparisons",
+    "lem-pur-vector-integration-rank-zero-local",
+    "lem-pur-vector-integration-swap-local",
+    "lem-weil-pbc-derived-single-fully-faithful",
+    "lem-etale-sheaf-jointly-surjective-conservative"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-an/cor-pur-vector-bundle-purity.proof.md",
+    "place": "paragraph 2: specified affine-space counits, simultaneous trivializations, degree-zero sheaf descent"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-amb-vector-integration",
+  "def-asd-vector-bundle-zero-section",
+  "def-pur-vector-trace-geometry",
+  "lem-amb-affine-space-top-trace",
+  "lem-amb-etale-degree-zero-hom",
+  "lem-amb-ordinary-finite-twist-transport-uniqueness",
+  "lem-amb-unbounded-compact-support-comparisons",
+  "lem-amb-vector-integration-cohomology-zero",
+  "lem-etale-proper-projection-formula-finite",
+  "lem-etale-sheaf-jointly-surjective-conservative",
+  "lem-pur-vector-integration-base-change-local",
+  "lem-pur-vector-integration-direct-sum-local",
+  "lem-pur-vector-integration-rank-zero-local",
+  "lem-pur-vector-integration-swap-local",
+  "lem-weil-pbc-derived-single-fully-faithful",
+  "lem-weil-pbc-noetherian-open-subscheme-noetherian"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-an/cor-pur-vector-bundle-purity.proof.md",
+  "place": "paragraph 2: direct sums, simultaneous trivializations, equality of ordered affine counits and degree-zero descent. F2 proves the simultaneous frame cover, explicit degree-zero source comparison and equality descent in Lean; only the one-open ordered affine/exchange calculation is split off. All previously proved clauses and existing public signatures and definitions are preserved."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Integration trace of an algebraic vector bundle commutes with arbitrary base change and ordered direct sums",
+   "results": "LinearMap.trace_baseChange; Trivialization.coordChangeL_apply'; Trivialization.coordChangeL_apply; Trivialization.apply_symm_apply_eq_coordChangeL; Trivialization.symm_coordChangeL; Trivialization.mk_coordChangeL; Trivialization.coe_coordChangeL'; hom_trivializationAt_apply",
+   "date": "2026-10-22",
+   "verdict": "no match: hits do not give the stated ordinary-etale integration, derived scalar normalization, and specified projection/mate equations; abstract adjunction or module trace results give only constituent operations"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Sheaf, CategoryTheory.Adjunction",
+   "results": "CategoryTheory.plusPlusAdjunction; CategoryTheory.sheafificationAdjunction; CategoryTheory.HasSheafify.mk'; CategoryTheory.GrothendieckTopology.W_eq_inverseImage_isomorphisms_of_adjunction; CategoryTheory.GrothendieckTopology.W_iff_isIso_map_of_adjunction; CategoryTheory.GrothendieckTopology.W_adj_unit_app; CategoryTheory.sheafComposeNatIso; CategoryTheory.instIsIsoFunctorOppositeSheafSheafComposeNatTrans",
+   "date": "2026-10-22",
+   "verdict": "no match: hits do not give the stated ordinary-etale integration, derived scalar normalization, and specified projection/mate equations; abstract adjunction or module trace results give only constituent operations"
+  },
+  {
+   "tool": "grep",
+   "query": "vectorBundle.*trace|trace.*vectorBundle|compactSupport.*baseChange",
+   "results": "none",
+   "date": "2026-10-22",
+   "verdict": "no match: hits do not give the stated ordinary-etale integration, derived scalar normalization, and specified projection/mate equations; abstract adjunction or module trace results give only constituent operations"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Etale compactly supported affine space trace glues in degree zero and is multiplicative for a product of vector bundles",
+   "results": "LinearMap.trace_prodMap; Algebra.trace_prod; Trivialization.prod_apply'; AlgebraicGeometry.Scheme.GlueData.sheafValGluedMk_val; LinearMap.trace_tensorProduct; LinearMap.trace_comp_cycle'; Algebra.trace_prod_apply; LinearMap.trace_comp_cycle",
+   "date": "2026-10-22",
+   "verdict": "no match: hits do not give the stated ordinary-etale integration, derived scalar normalization, and specified projection/mate equations; abstract adjunction or module trace results give only constituent operations"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Etale vector bundle integration trace base change direct sum",
+   "results": "IsBaseChange.directSum; LinearMap.trace_eq_sum_trace_restrict'; IsBaseChange.directSumPow; LinearMap.trace_eq_sum_trace_restrict; LinearMap.trace_eq_sum_trace_restrict_of_eq_biSup; Algebra.intTrace_eq_trace; AlgebraicGeometry.IsEtale.instIsStableUnderBaseChangeScheme; Algebra.Etale.baseChange",
+   "date": "2026-10-22",
+   "verdict": "no match: hits do not give the stated ordinary-etale integration, derived scalar normalization, and specified projection/mate equations; abstract adjunction or module trace results give only constituent operations"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Etale integration trace of an algebraic vector bundle commutes with base change and direct sum",
+   "results": "Algebra.intTraceAux; LinearMap.trace_baseChange; Algebra.traceMatrix_localizationLocalization; Algebra.trace_comp_trace; Algebra.trace_localization; Algebra.trace_trace; Algebra.intTrace_eq_trace; trace_quotient_eq_trace_localization_quotient",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits give algebraic traces, ordinary sheaf adjunctions, coalgebras, or ring-theoretic etale maps, not the normalized ordinary-etale affine compact-support counit and its projection equation"
+  },
+  {
+   "tool": "grep",
+   "query": "vectorBundle.*trace|trace.*vectorBundle|compactSupport.*baseChange",
+   "results": "none",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits give algebraic traces, ordinary sheaf adjunctions, coalgebras, or ring-theoretic etale maps, not the normalized ordinary-etale affine compact-support counit and its projection equation"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Etale compact support integration on a vector bundle and multiplication of affine space counits",
+   "results": "HasCompactSupport.mul_left; Bialgebra.mul_compr₂_counit; MeasureTheory.LocallyIntegrable.integrable_smul_left_of_hasCompactSupport; MDifferentiableOn.smul_section_of_tsupport; HasCompactMulSupport; CompactlySupportedContinuousMap.instMulOfContinuousMul.congr_simp; CompactlySupportedContinuousMap.instMulOfContinuousMul; CompactlySupportedContinuousMap.instSMulOfContinuousConstSMul",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits give algebraic traces, ordinary sheaf adjunctions, coalgebras, or ring-theoretic etale maps, not the normalized ordinary-etale affine compact-support counit and its projection equation"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction, CategoryTheory.Sheaf",
+   "results": "CategoryTheory.plusPlusAdjunction; CategoryTheory.sheafificationAdjunction; CategoryTheory.HasSheafify.mk'; CategoryTheory.GrothendieckTopology.W_eq_inverseImage_isomorphisms_of_adjunction; CategoryTheory.GrothendieckTopology.W_iff_isIso_map_of_adjunction; CategoryTheory.GrothendieckTopology.W_adj_unit_app; CategoryTheory.sheafComposeNatIso; CategoryTheory.instIsIsoFunctorOppositeSheafSheafComposeNatTrans",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits give algebraic traces, ordinary sheaf adjunctions, coalgebras, or ring-theoretic etale maps, not the normalized ordinary-etale affine compact-support counit and its projection equation"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An ordered composite adjunction on affine space has counit equal to tensoring its integration at the unit followed by the compact support projection formula",
+   "results": "AlgebraicGeometry.ΓSpec.adjunction_counit_app'; CompHausLike.LocallyConstant.adjunction_counit; CategoryTheory.ExponentiableMorphism.ev_def; CompHausLike.LocallyConstant.adjunction_left_triangle; CategoryTheory.ExponentiableMorphism.coev_ev; CategoryTheory.ExponentiableMorphism.coev_def; SheafOfModules.pushforwardPushforwardAdj_counit_app_val_app; CategoryTheory.ExponentiableMorphism.ev",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits give algebraic traces, ordinary sheaf adjunctions, coalgebras, or ring-theoretic etale maps, not the normalized ordinary-etale affine compact-support counit and its projection equation"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "cor-pur-vector-bundle-purity",
+  "date": "2026-10-22",
+  "group": "Q106"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-an",
+ "blueprint": {
+  "from": {
+   "node": "cor-pur-vector-bundle-purity",
+   "place": "proof paragraph 2: simultaneous trivializations, ordered affine-space counits, overlap invariance and descent as degree-zero sheaf maps",
+   "via": []
+  },
+  "same_as": [],
+  "is": null
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-pur-vector-trace-geometric-descent",
+  "worker": "stage1",
+  "summary": "Wrote seven explicit steps for geometric trace descent, arbitrary Noetherian base change, regrouping the actual coordinate counits, ordered multiplication, refinement independence, block exchange and degenerate cases. Reused the existing gluing and exchange/projection statements. One strictly smaller coefficient-counit normalization lemma is left statement-only after four kinds of logged searches and a second semantic phrasing. The item statement is unchanged.",
+  "blueprint": "cor-pur-vector-bundle-purity proof paragraph 2 and sk-prop-an Steps 6--7: specified ordered affine-space counits, simultaneous frames, linear invariance, and degree-zero sheaf descent.",
+  "tool_uses": [
+   {
+    "node": "lem-pur-degree-zero-derived-map-gluing",
+    "why": "Generic heart-valued morphism gluing is used to check trace equalities on frame covers; no smooth purity theorem is used."
+   },
+   {
+    "node": "lem-asd-etale-finite-twist-pullback",
+    "why": "Ordinary etale Tate pullback/tensor composition supplies source comparisons for arbitrary finite A."
+   },
+   {
+    "node": "lem-asd-compact-projection-exchange",
+    "why": "Generic compatibility of the actual projection with base change identifies the direct-sum formula on opens."
+   },
+   {
+    "node": "lem-amb-proper-coproducts-projection",
+    "why": "Ordinary etale proper projection gives invertibility and the signed tensor normalization of P."
+   },
+   {
+    "node": "lem-pur-etale-open-derived-tensor",
+    "why": "Generic ordinary etale open tensor comparison supplies the open factor of P."
+   },
+   {
+    "node": "lem-weil-pbc-quasi-coherent-symmetric-algebra-core",
+    "why": "Generic symmetric-algebra universal property identifies the direct sum algebra as a coproduct by checking generators."
+   },
+   {
+    "node": "lem-weil-pbc-affine-morphism-relative-spec",
+    "why": "Generic relative-Spec anti-equivalence turns the symmetric-algebra coproduct into the stated total-space product."
+   },
+   {
+    "node": "lem-weil-pbc-relative-spec-base-change",
+    "why": "Generic relative-Spec base change identifies the fibre product E x_B B' (and E(F) x_B E(G) -> E(G)) with the vector bundle of the pulled-back module, so its integration and pulled-back frames are defined."
+   }
+  ]
+ },
+ "tool_uses": [],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q96-c95db36d6",
+  "group": "Q96",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q96-c95db36d6 (reviewer sub-agent of L); spot-checked: Read in full: the item, its 7 steps, the new node, every cited statement, the source cor-pur-vector-bundle-purity.proof.md paragraph 2, def-amb-vector-integration, unit sk-prop-an (Steps 5-7: composition law, permutations with all signs +1) and the parent's use in assembly steps 3/4/6. The route matches and no SGA source is used. Steps 1/2 recover the definition's frame gluing and B_j=rho_g B_i. Step 3 pastes exchanges down to the top-trace base-change equation (exact pullback keeps the source degree-zero, then degree-zero gluing). Step 4 checks the Sym coproduct and that the s base coordinates come first in the ordered tower; the composite counit gives t_h alpha = t_p Rp_!(eps^(r)_{W_p}) and the types check. Step 5 applies the new node at K=W_p. Step 6 restricts through projection-exchange, exchange-alpha and Step 3, then glues. Step 7: linear invariance, sign (-1)^{4rs}=1, rank-one tensor permutation trivial; rank 0 and the empty base are fine. New node lem-pur-ordinary-affine-counit-tensor-normalization (eps^(d)_K = rho(1 (x) t_d)P^{-1} for arbitrary finite A, Noetherian S, unbounded K) is true: d=1 is the P1 counit (1 (x) t_q)pi^{-1} of lem-asd-ordinary-finite-p1-adjunction plus open compatibility, and the induction uses lem-amb-shriek-tensor-composition; d=0, K=0, the zero ring and empty S hold. It is not a duplicate: lem-pur-composite-integration-counit (F_qbar, O_E/varpi^n, conditional), lem-pur-affine-coefficient-counit-normalization (pro-etale, ctf), lem-sp-affine-counit-scalar, the line-counit-iso and tower base-change nodes, and the vector-integration mate/tensor-counit nodes all differ. It is not a restated clause of the parent. FIX (C-class missing citation): Steps 3/4 treated E x_B B' and E(F) x_B E(G) -> E(G) as def-asd vector bundles with pulled-back frames without identifying them as Spec Sym(g^*E). I added g^*Sym = Sym g^* (universal property) and relative-Spec base change, citing lem-weil-pbc-relative-spec-base-change, and updated uses, proof_deps and tool_uses. The statement and the new node are unchanged. Declared tool uses are accepted. Local review_split.py only reports the 'no such node' symlink artifact.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.VectorTraceGeometricDescent",
+  "declaration": "AlgebraicGeometry.Etale.vectorBundleIntegration_baseChange",
+  "declarations": [
+   "AlgebraicGeometry.Etale.vectorTraceCoefficientBaseChange",
+   "AlgebraicGeometry.Etale.vectorBundleIntegration_baseChange",
+   "AlgebraicGeometry.Etale.vectorTraceFibreModule",
+   "AlgebraicGeometry.Etale.vectorTraceQ",
+   "AlgebraicGeometry.Etale.vectorTraceH",
+   "AlgebraicGeometry.Etale.vectorTraceSumCoefficient",
+   "AlgebraicGeometry.Etale.vectorTraceExchangeIso",
+   "AlgebraicGeometry.Etale.vectorTraceSumTransport",
+   "AlgebraicGeometry.Etale.vectorTraceSumIntegration",
+   "AlgebraicGeometry.Etale.vectorTraceSumDecomposition",
+   "AlgebraicGeometry.Etale.vectorTrace_projection_isIso",
+   "AlgebraicGeometry.Etale.vectorBundleIntegration_directSum",
+   "AlgebraicGeometry.Etale.vectorBundleIntegration_compactificationTriangle",
+   "AlgebraicGeometry.Etale.vectorTraceSwapCoefficient",
+   "AlgebraicGeometry.Etale.vectorBundleIntegration_swap",
+   "AlgebraicGeometry.Etale.vectorBundleIntegration_concentration_and_isIso",
+   "AlgebraicGeometry.Etale.vectorBundleIntegration_zero",
+   "AlgebraicGeometry.Etale.vectorBundleIntegration_empty"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/VectorTraceGeometricDescent.lean",
+  "statement": "theorem vectorBundleIntegration_baseChange (N : ℕ) (hN : 0 < N) (A : Type (u + 1)) [CommRing A] [Finite A] (hA : (N : A) = 0) (t : OrdinaryFiniteTwistTransport A N hA) {S T : Scheme.{u}} [IsNoetherian S] [IsNoetherian T] (f : T ⟶ S) (hS : IsUnit (N : Γ(S, ⊤))) (r : ℕ) (F : S.Modules) [F.IsFiniteLocallyFreeOfRank r] : (rightDerivedLowerShriekBaseChangeMap A (VectorTraceGeometry.baseChange_isPullback f r F)).app (vectorIntegrationCoefficient A N hA S r F) ≫ (rightDerivedLowerShriek (ModuleCat.{u + 1} A) (VectorBundleZeroSection.π T r ((Scheme.Modules.tensorPullback f).obj F))).map (vectorTraceCoefficientBaseChange A N hA t f hS r F).hom ≫ vectorBundleIntegration N hN A hA T (affineTracePullbackInvertible N f hS) r ((Scheme.Modules.tensorPullback f).obj F) = (ordinaryFinitePullback A f).map (vectorBundleIntegration N hN A hA S hS r F) ≫ (ordinaryFiniteUnitPullback A f).hom",
+  "branch": "newtargets-dag",
+  "by": "Q118",
+  "date": "2026-10-23",
+  "existing": false,
+  "note": "The listed declarations state base change, ordered multiplication, every-triangle independence, block exchange, concentration and trace invertibility, rank zero and the empty base. The sum uses the canonical product presentation of E(F ⊕ G), transported by its generator-characterized isomorphism. All traces are the existing vectorBundleIntegration; no trace is defined from the multiplication equation."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-78ad4eaff",
+  "group": "Q118",
+  "result": "pass",
+  "note": "Read item, new node def-pur-vector-trace-geometry, both modules, report and every stmt_dep's live decls. Base diff: only lean record + new def-node stmt_dep. Statement verbatim; all decls recorded. Clauses: N>=1, finite A killed by N (zero ring ok), Noetherian S/T, hS (invertibility on T/total spaces derived), arbitrary f; base change uses rightDerivedLowerShriekBaseChangeMap (underlying map of normalized unboundedEtaleCompactSupportBaseChange) + Rπ'_!(l) with normalized Tate pullback, = f^*(t) then unit iso; direct sum: q = bundle of p^*F, t_h = actual F⊕G integration transported by the unique product iso sumIso, W_h ≅ q^*W_p⊗W_q base block first per node Step 4, P = coefficient-first compactSupportProjectionMap, α = unboundedEtaleLowerShriekCompIso; every triangle via purityCompactComposition (not trivially true); swap, degree-zero concentration + IsIso, rank zero, empty base present; no affine-intersection hypothesis. New def node: real data, ∃!-pinned map/sumIso, unit-pinned base change, no duplicate found. No compile (no change); report shows clean scompile + dry-run OK. Advisories: same-worker second reading (dispatcher policy); decls owned by non-stmt_dep nodes (compactSupportProjectionMap, purityPowerAdd/CompactComposition, rightDerivedLowerShriekBaseChangeMap); Classical.choose tensor-pullback adjunction instead of tensorPullbackSectionAdjunction (same unit); citers transport through sumIso."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F2",
+  "result": "pass",
+  "landing": "20261026T001420-L-4191180",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

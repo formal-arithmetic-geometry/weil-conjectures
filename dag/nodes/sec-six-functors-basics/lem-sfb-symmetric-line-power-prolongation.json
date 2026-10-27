@@ -1,0 +1,268 @@
+{
+ "id": "lem-sfb-symmetric-line-power-prolongation",
+ "kind": "statement",
+ "title": "Local prolongation of a tensor power of a symmetric line",
+ "statement": "Let $S$ be a normal integral locally Noetherian scheme [def-pc-scheme, def-pc-integral-scheme, pqf-def-locnoeth], where normal means that every local ring is an integrally closed domain [def-weil-pbc-normal-ring]. Let $p:G\\to S$ be a smooth separated commutative group scheme of finite presentation [def-sbc-smooth-morphisms, def-sbc-locally-finite-presentation], with identity $e$. The addition, inverse and identity are $S$-morphisms satisfying the commutative group identities; separated means that the diagonal is a closed immersion. Assume every geometric fibre is semiabelian: after an algebraically closed residue-field extension $k$, it fits into an exact sequence of fppf sheaves $1\\to\\mathbf G_{m,k}^r\\to G_k\\to A_k\\to1$, where $r\\geq0$, $\\mathbf G_{m,k}=\\operatorname{Spec}k[t,t^{-1}]$, and $A_k$ is a proper smooth geometrically connected $k$-group scheme. Let $U\\subseteq S$ be a dense open subscheme [def-weil-open-immersion], and put $G_U=G\\times_SU$. A line means an invertible module [def-sc-invertible-module]; all module pullbacks are tensor inverse images [def-pc-module-pullback]. Let $N$ be a line on $G_U$ with a rigidification $e_U^*N\\simeq\\mathcal O_U$ and an isomorphism $[-1]^*N\\simeq N$ of underlying modules. There is an affine open covering $S=\\bigcup_iW_i$ such that for each nonempty $W_i$ there are an integer $d_i\\geq1$, a line $P_i$ on $G_{W_i}$, and an isomorphism $P_i|_{G_{U\\cap W_i}}\\simeq N^{\\otimes d_i}|_{G_{U\\cap W_i}}$. No rigidification or cubical structure on $P_i$ is asserted. No ampleness hypothesis on $N$ and no ampleness conclusion on $P_i$ is imposed.",
+ "source": {
+  "document": "literature/moret-bailly-pinceaux-varietes-abeliennes-Asterisque129-1985.pdf",
+  "place": "II 3.3.3, opening power-prolongation input (Raynaud, Faisceaux amples, XI 1.13). Agent-formulated local non-positive version. Local originals WANTED; this is only the tensor-power input, not II 3.3 symmetric essential surjectivity."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-integral-scheme",
+  "pqf-def-locnoeth",
+  "def-weil-pbc-normal-ring",
+  "def-sbc-smooth-morphisms",
+  "def-sbc-locally-finite-presentation",
+  "def-weil-open-immersion",
+  "def-sc-invertible-module",
+  "def-pc-module-pullback",
+  "def-sfb-semiabelian-geometric-fibres"
+ ],
+ "proof": [
+  {
+   "text": "Apply the generic torus-quotient node to $G\\to S$ to obtain a torus $T\\subseteq G$ and a homomorphism $q:G\\to H$ which is a $T$-torsor, where $H$ is a smooth separated commutative group scheme of finite presentation with semiabelian (hence connected) geometric fibres and $H_\\eta$ is an abelian variety. The affine covering of $S$ is chosen in step 3; everything in steps 1--2 takes place over $S$ or on generic fibres. The generic fibre $q_\\eta:G_\\eta\\to H_\\eta$ is a $T_\\eta$-torsor, and $H_\\eta$ is smooth, separated, of finite type and geometrically integral. Apply rational Picard descent to $N_\\eta$ to obtain $c\\geq1$ and $M_0$ on $H_\\eta$ with $q^*M_0\\simeq N_\\eta^{\\otimes c}$. Put $M=M_0\\otimes[-1]^*M_0$. Since $q$ is a homomorphism, $q\\circ[-1]=[-1]\\circ q$, so $q^*M\\simeq N_\\eta^{\\otimes c}\\otimes[-1]^*N_\\eta^{\\otimes c}\\simeq N_\\eta^{\\otimes 2c}$ by the symmetry of $N$; and $M$ is symmetric.",
+   "uses": [
+    "lem-sfb-normal-semiabelian-generic-torus-quotient",
+    "lem-sfb-torus-torsor-picard-rational-surjectivity",
+    "lem-weil-pbc-invertible-pullback-tensor"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/lan-structures-semi-abelian-schemes.pdf",
+    "place": "Proposition 3.3.1.7; Sansuc Proposition 6.10; tensor rearrangement from the cited invertible-pullback lemma."
+   }
+  },
+  {
+   "text": "Write $M=A\\otimes B^{-1}$ with $A,B$ ample on $H_\\eta$ by the ample-difference node ($H_\\eta$ is a separated finite-type group over $\\kappa(\\eta)$). The pullback of an ample line along the automorphism $[-1]$ is ample, so $\\Sigma A=A\\otimes[-1]^*A$ and $\\Sigma B=B\\otimes[-1]^*B$ are symmetric ample by the existing ample-tensor node, and $\\Sigma M=\\Sigma A\\otimes(\\Sigma B)^{-1}$ by functoriality and reordering of tensor factors. Since $M$ is symmetric, $\\Sigma M\\simeq M^{\\otimes2}$, hence $q^*\\Sigma M\\simeq N_\\eta^{\\otimes4c}$.",
+   "uses": [
+    "lem-sfb-algebraic-group-ample-difference",
+    "lem-weil-pbc-invertible-pullback-tensor",
+    "lem-sc-ample-tensor"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/divisors.tex",
+    "place": "Lemmas 0BF7 and 0FVC as recorded by the cited DAG nodes; tensor rearrangement is elementary."
+   }
+  },
+  {
+   "text": "$H$ has connected fibres by step 1, so the local-ample node gives an affine open covering $S=\\bigcup_iW_i$ and ample lines $R=R_i$ on $H_W$, $W=W_i$ nonempty. Ampleness pulls back along the affine morphism $H_\\eta\\to H_W$, so $R_\\eta$ is ample, and $L=R_\\eta\\otimes[-1]^*R_\\eta$ is symmetric ample. The endomorphism-span node, applied on the abelian variety $H_\\eta$, gives $a,b\\geq1$ and endomorphisms $u_i,v_j$ of $H_\\eta$ with $(\\Sigma A)^{\\otimes a}\\simeq\\bigotimes u_i^*L$ and $(\\Sigma B)^{\\otimes b}\\simeq\\bigotimes v_j^*L$. Since $H$ has semiabelian geometric fibres, generic homomorphism extension (with $P=Q=H$) extends all $u_i,v_j$ to endomorphisms of $H$, restricted to $H_W$. Set $\\Sigma R=R\\otimes[-1]^*R$, $E_A=\\bigotimes u_i^*\\Sigma R$, $E_B=\\bigotimes v_j^*\\Sigma R$, and $P=q^*(E_A^{\\otimes b}\\otimes E_B^{-\\otimes a})$ on $G_W$. Then $(E_A)_\\eta\\simeq(\\Sigma A)^{\\otimes a}$, $(E_B)_\\eta\\simeq(\\Sigma B)^{\\otimes b}$, so $P_\\eta\\simeq q^*(\\Sigma A\\otimes(\\Sigma B)^{-1})^{\\otimes ab}=q^*(\\Sigma M)^{\\otimes ab}\\simeq N_\\eta^{\\otimes 4abc}$.",
+   "uses": [
+    "lem-sfb-normal-smooth-group-local-ample-line",
+    "lem-sfb-abelian-symmetric-ample-endomorphism-span",
+    "lem-sfb-normal-semiabelian-hom-extension",
+    "lem-weil-pbc-invertible-pullback-tensor"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/raynaud-faisceaux-amples-schemas-groupes.pdf",
+    "place": "VI 2.4 and XI 1.14; Lan Proposition 3.3.1.5; tensor calculation from the displayed isomorphisms."
+   }
+  },
+  {
+   "text": "Replace $P$ by $P\\otimes p^*(e^*P)^\\vee$ and normalize the generic comparison at the identity. This rigidifies $P$ without changing the generic comparison, because $e^*N\\simeq\\mathcal O$ and $p\\circ e=\\mathrm{id}$.",
+   "uses": [
+    "lem-weil-pbc-invertible-pullback-tensor"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/moret-bailly-pinceaux-varietes-abeliennes-Asterisque129-1985.pdf",
+    "place": "II 3.3.3 rigidification normalization."
+   }
+  },
+  {
+   "text": "On an affine noetherian member $W$ of the base cover, clear denominators in finitely many affine trivializations of $P$, $N$, and the generic comparison and its inverse. After shrinking to a dense open $V\\subset U\\cap W$, this gives an isomorphism $P|_{G_V}\\simeq N^{\\otimes d}|_{G_V}$ with $d=4abc$.",
+   "uses": [
+    "lem-weil-pbc-finite-type-over-noetherian"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/divisors.tex",
+    "place": "Lemma 0C4S and the affine denominator argument; finite type over noetherian makes the total space noetherian."
+   }
+  },
+  {
+   "text": "Every geometric fibre of $G$ is connected: it is a torus torsor over a connected abelian variety, the quotient map is open and surjective with connected fibres, so a clopen decomposition of the source would give one of the target. Hence the vertical Cartier-descent node applies to $G_{U\\cap W}\\to U\\cap W$ with dense open $V$; it gives that $G_{U\\cap W}$ is normal integral. Let $s$ be the rational section of $P\\otimes(N^{\\otimes d})^\\vee$ on $G_{U\\cap W}$ defined by the comparison. It is an invertible regular section on $G_V$, so its divisor $D$ is supported outside $G_V$. The node gives $D=p^*e^*D$. By step 4 and step 5 the section $e^*s$ is $1$ on $V$ (both are regular sections on the integral scheme $V$ with the same generic value), hence $e^*s$ is the constant rational section $1$ and $e^*D=0$. Therefore $D=0$, and the node says $s$ is everywhere invertible on $G_{U\\cap W}$, which supplies the required isomorphism. The affine $W_i$ cover $S$, with $P_i=P$ and $d_i=4abc\\geq1$ on each.",
+   "uses": [
+    "lem-sfb-normal-group-vertical-cartier-descent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/moret-bailly-pinceaux-varietes-abeliennes-Asterisque129-1985.pdf",
+    "place": "II 3.3.3 comparison by a vertical divisor; the cited node is the precise divisor statement."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sc-ample-tensor",
+  "lem-sfb-abelian-symmetric-ample-endomorphism-span",
+  "lem-sfb-algebraic-group-ample-difference",
+  "lem-sfb-normal-group-vertical-cartier-descent",
+  "lem-sfb-normal-semiabelian-generic-torus-quotient",
+  "lem-sfb-normal-semiabelian-hom-extension",
+  "lem-sfb-normal-smooth-group-local-ample-line",
+  "lem-sfb-torus-torsor-picard-rational-surjectivity",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-weil-pbc-invertible-pullback-tensor"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+  "place": "Independent replacement assembly for the imported power-prolongation input, checked against Moret–Bailly II 3.3.3 and Raynaud XI 1.14."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Locally on a normal Noetherian base a positive tensor power of a symmetric line bundle on a semiabelian group over a dense open extends as an invertible sheaf",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"CommRing.Pic.mk_tensor\", \"module\": \"Mathlib/RingTheory/PicardGroup\", \"type\": \"∀ {R : Type u} [inst : CommSemiring R] {M : Type u_5} {N : Type u_6} [inst_1 : AddCommMonoid M] [inst_2 : Module R M]\\n  [inst_3 : AddCommMonoid N] [inst_4 : Module R N] [inst_5 : Module.Invertible R M] [inst_6 : Module.Invertible R N],\\n  CommRing.Pic.mk R (TensorProduct R M N) = CommRing.Pic.mk R M \", \"doc\": \"For any invertible $ R $-semimodules $ M $ and $ N $, the class of their tensor product $ M \\\\otimes_R N $ in the Picard group $ \\\\mathrm{Pic}(R) $ is equal to the product of their individual classes, i\"}\n  {\"name\": \"CommRing.Pic.mul_eq_tensor\", \"module\": \"Mathlib/RingTheory/PicardGroup\", \"type\": \"∀ {R : Type u} [inst : CommSemiring R] (M N : CommRing.Pic R),\\n  M * N = CommRing.Pic.mk R (TensorProduct R M.AsModule N.AsModule)\", \"doc\": \"For any commutative semiring $ R $ and elements $ M, N $ in the Picard group $ \\\\mathrm{Pic}(R) $, the group multiplication satisfies $ M \\\\cdot N = [M \\\\otimes_R N] $, where $ [M \\\\otimes_R N] $ denotes \"}\n  {\"name\": \"CommRing.Pic.mapAlgebra_apply\", \"module\": \"Mathlib/RingTheory/PicardGroup\", \"type\": \"∀ (R : Type u) [inst : CommSemiring R] (A : Type u_7) [inst_1 : CommSemiring A] [inst_2 : Algebra R A]\\n  (M : CommRing.Pic R), (CommRing.Pic.mapAlgebra R A) M = CommRing.Pic.mk A (TensorProduct R A M.AsModule)\", \"doc\": \"For a commutative semiring $ R $, an $ R $-algebra $ A $, and an element $ [M] $ in the Picard group $ \\\\mathrm{Pic}(R) $, the group homomorphism $ \\\\mathrm{Pic}(R) \\\\to \\\\mathrm{Pic}(A) $ sends $ [M] $ t\"}\n  {\"name\": \"CommRing.Pic.mapAlgebra\", \"module\": \"Mathlib/RingTheory/PicardGroup\", \"type\": \"(R : Type u) →\\n  [inst : CommSemiring R] →\\n    (A : Type u_7) → [inst_1 : CommSemiring A] → [Algebra R A] → CommRing.Pic R →* CommRing.Pic A\", \"doc\": \"For a commutative semiring $ R $ and an $ R $-algebra $ A $, this defines a group homomorphism from the Picard group $ \\\\mathrm{Pic}(R) $ to $ \\\\mathrm{Pic}(A) $. It maps each isomorphism class of inver\"}\n  {\"name\": \"CategoryTheory.Sheaf.symmetricCategory\", \"module\": \"Mathlib/CategoryTheory/Sites/Monoidal\", \"type\": \"{C : Type u₁} →\\n  [inst : CategoryTheory.Category.{v₁, u₁} C] →\\n    (J : CategoryTheory.GrothendieckTopology C) →\\n      (A : Type u₃) →\\n        [inst_1 : CategoryTheory.Category.{v₃, u₃} A] →\\n          [inst_2 : CategoryTheory.MonoidalCategory A] →\\n            [inst_3 : J.W.IsMonoidal] →\\n           \", \"doc\": \"The category of sheaves on a site (a category equipped with a Grothendieck topology $J$) with values in a symmetric monoidal category $\\\\mathcal{A}$ inherits a canonical symmetric monoidal structure. T\"}\n  {\"name\": \"AlgebraicGeometry.exists_eq_pow_mul_of_isAffineOpen\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiSeparated\", \"type\": \"∀ (X : AlgebraicGeometry.Scheme) (U : X.Opens),\\n  AlgebraicGeometry.IsAffineOpen U →\\n    ∀ (f : ↑(X.presheaf.obj (Opposite.op U))) (x : ↑(X.presheaf.obj (Opposite.op (X.basicOpen f)))),\\n      ∃ n y, TopCat.Presheaf.restrictOpen y (X.basicOpen f) ⋯ = TopCat.Presheaf.restrictOpen f (X.basicOpen f) ⋯ ^\", \"doc\": \"For any affine open subset $ U $ of a scheme $ X $, a section $ f $ over $ U $, and a section $ x $ over the basic open set $ D(f) $ defined by $ f $, there exists a natural number $ n $ and a section\"}\n  {\"name\": \"LightCondensed.instMonoidalLightCondSetLightCondModFree\", \"module\": \"Mathlib/Condensed/Light/Monoidal\", \"type\": \"(R : Type u) → [inst : CommRing R] → (LightCondensed.free R).Monoidal\", \"doc\": \"For any commutative ring $ R $, the free module functor from the category of light condensed sets to the category of light condensed $ R $-modules is a monoidal functor. This means it preserves the te\"}\n  {\"name\": \"LightCondensed.instSymmetricCategoryLightCondMod\", \"module\": \"Mathlib/Condensed/Light/Monoidal\", \"type\": \"(R : Type u) → [inst : CommRing R] → CategoryTheory.SymmetricCategory (LightCondMod R)\", \"doc\": \"For any commutative ring $ R $, the category of light condensed $ R $-modules is a symmetric monoidal category. This structure is obtained by equipping the category of sheaves on light profinite space\"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: read the returned declarations and types. The hits concern ordinary sections/localization, ring Picard groups, tensor powers of modules, abstract group objects, generic smooth/flat morphisms, or quadratic forms; none states this relative group-scheme line/divisor or multiplication theorem. A second semantic phrasing also gave no match."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Raynaud extension of a tensor power of a symmetric invertible sheaf on a semiabelian scheme over a normal base",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"LinearEquiv.rTensor_pow\", \"module\": \"Mathlib.LinearAlgebra.TensorProduct.Basic\", \"type\": \"(f : M ≃ₗ[R] M) (n : ℕ) : f.rTensor N ^ n = (f ^ n).rTensor N\", \"doc\": \"For any linear equivalence $ f : M \\\\simeq_R M $ over a commutative semiring $ R $ and natural number $ n $, the $ n $-th power of the tensor product $ f \\\\otimes_R N $ equals the tensor product of the \"}\n  {\"name\": \"TensorPower.mulEquiv\", \"module\": \"Mathlib.LinearAlgebra.TensorPower.Basic\", \"type\": \"{n m : ℕ} : ⨂[R]^n M ⊗[R] (⨂[R]^m) M ≃ₗ[R] (⨂[R]^(n + m)) M\", \"doc\": \"The tensor product of the $ n $-th and $ m $-th tensor powers of a module $ M $ over a commutative semiring $ R $ is linearly equivalent to the $ (n + m) $-th tensor power of $ M $.\"}\n  {\"name\": \"Module.Ray.map_symm\", \"module\": \"Mathlib.LinearAlgebra.Ray\", \"type\": \"(e : M ≃ₗ[R] N) : (Module.Ray.map e).symm = Module.Ray.map e.symm\", \"doc\": \"Given modules $M$ and $N$ over a commutative semiring $R$ with a strict ordered ring structure, and a linear equivalence $e : M ≃ₗ[R] N$, the inverse of the induced ray equivalence $\\\\mathrm{Ray}(R, M)\"}\n  {\"name\": \"Module.Invertible.instTensorProduct_2\", \"module\": \"Mathlib.RingTheory.PicardGroup\", \"type\": \"(L) [AddCommMonoid L] [Module R L] [Module A L] [IsScalarTower R A L] [Module.Invertible A L] :\\n  Module.Invertible A (L ⊗[R] M)\", \"doc\": \"Let $R$ be a commutative semiring and $A$ be a semiring that is also an $R$-module. Let $M$ be an $R$-module, and let $L$ be a module over both $A$ and $R$. If the actions of $R$ and $A$ on $L$ are co\"}\n  {\"name\": \"CommRing.relPic\", \"module\": \"Mathlib.RingTheory.PicardGroup\", \"type\": \": Subgroup (Pic R)\", \"doc\": \"The subgroup of $ \\\\mathrm{Pic}(R) $ consisting of isomorphism classes of invertible $ R $-semimodules that become trivial when extended to the $ R $-algebra $ A $ via the tensor product. This is defin\"}\n  {\"name\": \"TensorPower\", \"module\": \"Mathlib.LinearAlgebra.TensorPower.Basic\", \"type\": \"(R : Type*) (n : ℕ) (M : Type*) [CommSemiring R] [AddCommMonoid M] [Module R M] : Type _\", \"doc\": \"For a commutative semiring $ R $, an additive commutative monoid $ M $ equipped with an $ R $-module structure, and a natural number $ n $, $ \\\\mathrm{TensorPower} \\\\, R \\\\, n \\\\, M $ denotes the $ n $-th\"}\n  {\"name\": \"Submodule.tensorInvEquiv\", \"module\": \"Mathlib.RingTheory.PicardGroup\", \"type\": \": I ⊗[R] ↑I⁻¹ ≃ₗ[R] R\", \"doc\": \"Let $R$ be a commutative ring and $A$ be a faithful $R$-algebra. For any invertible $R$-submodule $I$ of $A$, the tensor product $I \\\\otimes_R I^{-1}$ is linearly equivalent to $R$ as an $R$-module.\"}\n  {\"name\": \"SymmetricPower\", \"module\": \"Mathlib.LinearAlgebra.TensorPower.Symmetric\", \"type\": \"(R : Type u) →\\n  Type u → [inst : CommSemiring R] → (M : Type v) → [inst_1 : AddCommMonoid M] → [Module R M] → Type (max u v)\", \"doc\": \"The symmetric power of an $ R $-module $ M $, constructed as the quotient of the tensor product $ \\\\bigotimes_R M $ by the equivalence relation identifying tensors that differ by permutation of factors\"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: read the returned declarations and types. The hits concern ordinary sections/localization, ring Picard groups, tensor powers of modules, abstract group objects, generic smooth/flat morphisms, or quadratic forms; none states this relative group-scheme line/divisor or multiplication theorem. A second semantic phrasing also gave no match."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Invertible\", \"tensorPow\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-24",
+   "verdict": "no match: read the returned declarations and types. The hits concern ordinary sections/localization, ring Picard groups, tensor powers of modules, abstract group objects, generic smooth/flat morphisms, or quadratic forms; none states this relative group-scheme line/divisor or multiplication theorem. A second semantic phrasing also gave no match."
+  },
+  {
+   "tool": "grep",
+   "query": "[Rr]aynaud|[Ss]ymmetric.*[Ii]nvertible|[Tt]ensor[Pp]ow.*[Ee]xten",
+   "results": "[grep] OK 8 hit(s)\n  {\"file\": \"Mathlib/CategoryTheory/FiberedCategory/Fibered.lean\", \"line\": \"38\", \"text\": \"* [A. Grothendieck, M. Raynaud, *SGA 1*](https://arxiv.org/abs/math/0206203)\"}\n  {\"file\": \"Mathlib/CategoryTheory/FiberedCategory/Cartesian.lean\", \"line\": \"37\", \"text\": \"* [A. Grothendieck, M. Raynaud, *SGA 1*](https://arxiv.org/abs/math/0206203)\"}\n  {\"file\": \"Mathlib/LinearAlgebra/SymplecticGroup.lean\", \"line\": \"255\", \"text\": \"private lemma exists_symmetric_X_invertible_add_mul_of_ker_inter_eq_bot {R : Type*} [Field R]\"}\n  {\"file\": \"Mathlib/LinearAlgebra/SymplecticGroup.lean\", \"line\": \"319\", \"text\": \"a symmetric `X` s.t. `A + X * C` is invertible.\"}\n  {\"file\": \"Mathlib/LinearAlgebra/SymplecticGroup.lean\", \"line\": \"339\", \"text\": \"  -- Now we have a symmetric matrix `Y` over the residue field s.t. `A' + Y * C'` is invertible\"}\n  {\"file\": \"Mathlib/LinearAlgebra/SymplecticGroup.lean\", \"line\": \"342\", \"text\": \"    exists_symmetric_X_invertible_add_mul_of_ker_inter_eq_bot hker <| by\"}\n  {\"file\": \"Mathlib/LinearAlgebra/SymplecticGroup.lean\", \"line\": \"371\", \"text\": \"  -- And we know that a symmetric matrix with invertible upper-left block has determinant 1.\"}\n  {\"file\": \"Mathlib/RingTheory/Etale/Descent.lean\", \"line\": \"32\", \"text\": \"  along faithfully flat base change, which is due to Raynaud and Gruson\"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: read the returned declarations and types. The hits concern ordinary sections/localization, ring Picard groups, tensor powers of modules, abstract group objects, generic smooth/flat morphisms, or quadratic forms; none states this relative group-scheme line/divisor or multiplication theorem. A second semantic phrasing also gave no match."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The obstruction to extending a symmetric line bundle across a normal base is torsion locally on the base",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"SheafOfModules.LocalGeneratorsData.I\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Generators\", \"type\": \"{C : Type u'} →\\n  [inst : CategoryTheory.Category.{v', u'} C] →\\n    {J : CategoryTheory.GrothendieckTopology C} →\\n      {R : CategoryTheory.Sheaf J RingCat} →\\n        {M : SheafOfModules R} →\\n          [inst_1 : ∀ (X : C), CategoryTheory.HasWeakSheafify (J.over X) AddCommGrpCat] →\\n            [inst_\", \"doc\": \"Given a category $\\\\mathcal{C}$ with a Grothendieck topology $J$, a sheaf $\\\\mathcal{R}$ of rings on $\\\\mathcal{C}$, and a sheaf $\\\\mathcal{F}$ of $\\\\mathcal{R}$-modules, this type represents data providin\"}\n  {\"name\": \"AlgebraicGeometry.exists_pow_mul_eq_zero_of_res_basicOpen_eq_zero_of_isAffineOpen\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiCompact\", \"type\": \"∀ (X : AlgebraicGeometry.Scheme) {U : X.Opens},\\n  AlgebraicGeometry.IsAffineOpen U →\\n    ∀ (x f : ↑(X.presheaf.obj (Opposite.op U))),\\n      TopCat.Presheaf.restrictOpen x (X.basicOpen f) ⋯ = 0 → ∃ n, f ^ n * x = 0\", \"doc\": \"For an affine open subset $ U $ of a scheme $ X $, if a section $ x $ of the structure sheaf $ \\\\mathcal{O}_X $ over $ U $ vanishes on the basic open set $ D(f) $ defined by a section $ f \\\\in \\\\Gamma(U,\"}\n  {\"name\": \"SheafOfModules.LocalGeneratorsData.X\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Generators\", \"type\": \"{C : Type u'} →\\n  [inst : CategoryTheory.Category.{v', u'} C] →\\n    {J : CategoryTheory.GrothendieckTopology C} →\\n      {R : CategoryTheory.Sheaf J RingCat} →\\n        {M : SheafOfModules R} →\\n          [inst_1 : ∀ (X : C), CategoryTheory.HasWeakSheafify (J.over X) AddCommGrpCat] →\\n            [inst_\", \"doc\": \"Given a category $\\\\mathcal{C}$ with a Grothendieck topology $J$, a sheaf $\\\\mathcal{R}$ of rings on $\\\\mathcal{C}$, and a sheaf $\\\\mathcal{F}$ of $\\\\mathcal{R}$-modules, this component $X$ of the local ge\"}\n  {\"name\": \"ModuleCat.Tilde.exists_const\", \"module\": \"Mathlib/AlgebraicGeometry/Modules/Tilde\", \"type\": \"∀ {R : Type u} [inst : CommRing R] (M : ModuleCat R)\\n  (U : TopologicalSpace.Opens ↑(AlgebraicGeometry.PrimeSpectrum.Top R)) (s : ↑(M.tildeInModuleCat.obj (Opposite.op U))),\\n  ∀ x ∈ U,\\n    ∃ V,\\n      ∃ (_ : x ∈ V),\\n        ∃ i f g,\\n          ∃ (hg : ∀ x ∈ V, g ∈ x.asIdeal.primeCompl),\\n            Mo\", \"doc\": \"For any section $ s $ of the sheaf $ \\\\widetilde{M} $ over an open subset $ U \\\\subseteq \\\\operatorname{Spec}(R) $, and for any point $ x \\\\in U $, there exists an open neighborhood $ V \\\\subseteq U $ of $\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.zero_of_zero_cover\", \"module\": \"Mathlib/AlgebraicGeometry/Cover/Open\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} {U : X.Opens} (s : ↑(X.presheaf.obj (Opposite.op U))) (𝒰 : X.OpenCover),\\n  (∀ (i : 𝒰.I₀), (CategoryTheory.ConcreteCategory.hom (AlgebraicGeometry.Scheme.Hom.app (𝒰.f i) U)) s = 0) → s = 0\", \"doc\": \"Let $ X $ be a scheme, $ U $ an open subset of $ X $, and $ s $ a section of the structure sheaf $ \\\\mathcal{O}_X $ over $ U $. If $ \\\\mathcal{U} $ is an open cover of $ X $ consisting of open immersion\"}\n  {\"name\": \"SheafOfModules.LocalGeneratorsData.generators\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Generators\", \"type\": \"{C : Type u'} →\\n  [inst : CategoryTheory.Category.{v', u'} C] →\\n    {J : CategoryTheory.GrothendieckTopology C} →\\n      {R : CategoryTheory.Sheaf J RingCat} →\\n        {M : SheafOfModules R} →\\n          [inst_1 : ∀ (X : C), CategoryTheory.HasWeakSheafify (J.over X) AddCommGrpCat] →\\n            [inst_\", \"doc\": \"Given a category $\\\\mathcal{C}$ with a Grothendieck topology $J$, a sheaf $\\\\mathcal{R}$ of rings on $\\\\mathcal{C}$, and a sheaf $\\\\mathcal{F}$ of $\\\\mathcal{R}$-modules, this function assigns to each inde\"}\n  {\"name\": \"ModuleCat.Tilde.isLocallyFraction_pred\", \"module\": \"Mathlib/AlgebraicGeometry/Modules/Tilde\", \"type\": \"∀ {R : Type u} [inst : CommRing R] (M : ModuleCat R)\\n  {U : TopologicalSpace.Opens ↑(AlgebraicGeometry.PrimeSpectrum.Top R)}\\n  (f : (x : ↥U) → ModuleCat.Tilde.Localizations M ↑x),\\n  (ModuleCat.Tilde.isLocallyFraction M).pred f =\\n    ∀ (y : ↥U),\\n      ∃ V,\\n        ∃ (_ : ↑y ∈ V),\\n          ∃ i m s,\\n \", \"doc\": \"For any open subset $ U $ of the prime spectrum $ \\\\operatorname{Spec}(R) $ of a commutative ring $ R $, a section $ f $ of the sheaf associated to an $ R $-module $ M $ over $ U $ satisfies the predic\"}\n  {\"name\": \"ModuleCat.Tilde.isUnit_toStalk\", \"module\": \"Mathlib/AlgebraicGeometry/Modules/Tilde\", \"type\": \"∀ {R : Type u} [inst : CommRing R] (M : ModuleCat R) (x : ↑(AlgebraicGeometry.PrimeSpectrum.Top R))\\n  (r : ↥x.asIdeal.primeCompl), IsUnit ((algebraMap R (Module.End R ↑(M.tildeInModuleCat.stalk x))) ↑r)\", \"doc\": \"For any prime ideal $\\\\mathfrak{p}$ in the prime spectrum of a commutative semiring $R$ and any element $r$ in the complement of $\\\\mathfrak{p}$, the image of $r$ under the canonical algebra map from $R\"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: read the returned declarations and types. The hits concern ordinary sections/localization, ring Picard groups, tensor powers of modules, abstract group objects, generic smooth/flat morphisms, or quadratic forms; none states this relative group-scheme line/divisor or multiplication theorem. A second semantic phrasing also gave no match."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Locally a tensor power of a symmetric line bundle on a semiabelian scheme over a normal base extends from a dense open",
+   "results": "[leanfinder] OK 8 hit(s). Returned names/files: AlgebraicGeometry.exists_eq_pow_mul_of_is_compact_of_quasi_separated_space_aux, AlgebraicGeometry.exists_eq_pow_mul_of_isAffineOpen, AlgebraicGeometry.StructureSheaf.normalize_finite_fraction_representation, AlgebraicGeometry.exists_eq_pow_mul_of_isCompact_of_isQuasiSeparated, AlgebraicGeometry.exists_of_res_eq_of_qcqs_of_top, AlgebraicGeometry.exists_eq_pow_mul_of_is_compact_of_quasi_separated_space_aux_aux, AlgebraicGeometry.exists_of_res_eq_of_qcqs, ModuleCat.Tilde.exists_const",
+   "date": "2026-10-24",
+   "verdict": "no match: read returned types; localization of structure-sheaf sections, Picard groups of rings, affine space, normalization, quasi-affine schemes and root-system polarizations do not state the claimed relative line-bundle theorem."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Extend a symmetric invertible sheaf from a dense open of a semiabelian group scheme over a normal scheme",
+   "results": "[leansearch] OK 8 hit(s). Returned names/files: AlgebraicGeometry.Scheme.Modules.inv_app, AlgebraicGeometry.Scheme.Modules.hom_ext, AlgebraicGeometry.Scheme.Modules.hom_ext_iff, AlgebraicGeometry.Scheme.IdealSheafData.ext, AlgebraicGeometry.Scheme.IdealSheafData.ext_iff, AlgebraicGeometry.Proj.ext_iff, AlgebraicGeometry.Scheme.AffineZariskiSite.instIsDenseSubsiteOpensCarrierCarrierCommRingCatGrothendieckTopologyGrothendieckTopologyToOpensFunctor, AlgebraicGeometry.Scheme.OpenCover.ext_elem",
+   "date": "2026-10-24",
+   "verdict": "no match: read returned types; localization of structure-sheaf sections, Picard groups of rings, affine space, normalization, quasi-affine schemes and root-system polarizations do not state the claimed relative line-bundle theorem."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsAmple\", \"IsInvertible\"",
+   "results": "[loogle] OK 0 hit(s). Returned names/files: ",
+   "date": "2026-10-24",
+   "verdict": "no match: read returned types; localization of structure-sheaf sections, Picard groups of rings, affine space, normalization, quasi-affine schemes and root-system polarizations do not state the claimed relative line-bundle theorem."
+  },
+  {
+   "tool": "grep",
+   "query": "semiabelian|cubical|Raynaud|symmetric.*line.bundle",
+   "results": "[grep] OK 3 hit(s). Returned names/files: Mathlib/RingTheory/Etale/Descent.lean, Mathlib/CategoryTheory/FiberedCategory/Fibered.lean, Mathlib/CategoryTheory/FiberedCategory/Cartesian.lean",
+   "date": "2026-10-24",
+   "verdict": "no match: read returned types; localization of structure-sheaf sections, Picard groups of rings, affine space, normalization, quasi-affine schemes and root-system polarizations do not state the claimed relative line-bundle theorem."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A symmetric invertible sheaf on the generic fibre of a smooth connected group scheme over a normal scheme has a tensor power extending locally to the whole group",
+   "results": "Generic localization and Picard/tensor declarations only; no relative semiabelian extension theorem.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-normal-symmetric-cubical-extension",
+  "date": "2026-10-24",
+  "group": "Q14"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3): independent power-prolongation input after the generic line is expressed as an ample difference; then spread the comparison and descend it by a vertical Cartier divisor.",
+   "via": [
+    "lem-sfb-normal-symmetric-cubical-extension",
+    "lem-sfb-symmetric-ample-power-extension",
+    "lem-sfb-regular-group-generic-ampleness",
+    "lem-sfb-stable-picard-theta-ampleness",
+    "lem-sfb-stable-relative-picard-kummer",
+    "lem-sfb-stable-level-versal-branch-freeness",
+    "lem-sfb-stable-abelian-level-normalization",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-symmetric-line-power-prolongation",
+  "worker": "stage1",
+  "summary": "Replaced the circular generic ample-symmetrization input by five independent statement-only supporting nodes: the normal semiabelian torus quotient, rational Picard descent along a torus torsor, extension of generic homomorphisms, local relative ampleness, and Raynaud’s abelian endomorphism span. The item proof forms a generic tensor power, spreads its comparison, and kills the vertical divisor by rigidification. The item statement and statement dependencies are unchanged.",
+  "blueprint": "The imported constructibility-unit route calls for a power-prolongation input after the generic line is expressed as an ample difference; this split realizes that input with the independent quotient/Picard/endomorphism route and the existing tensor and vertical-Cartier nodes.",
+  "tool_uses": [
+   {
+    "node": "lem-sc-ample-tensor",
+    "why": "The proof uses the existing fact that tensor products of ample lines are ample and its symmetric abelian specialization; no node in this unit replaces that generic ampleness tool."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-invertible-pullback-tensor",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-sc-ample-tensor"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q79-5f599c1ab",
+  "group": "Q79",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q79-5f599c1ab (reviewer sub-agent of L); spot-checked: I read the item, all five new nodes and every cited statement in full. The item statement and stmt_deps are unchanged from the base, so the target is not weakened. Cycle check: the base route went through lem-sfb-raynaud-generic-ample-symmetrization, whose closure contains normal-symmetric-cubical-extension and then the item; this confirms the repair note's cycle. The new item closure has neither the item nor any cubical/biextension node. The only cycles left are the pre-existing lem-sp-grothendieck ones, which are unrelated. raynaud-generic-ample-power-model (NX) is correctly not used, because it depends on the cyclic symmetrization node. Steps checked: Sansuc 6.10 descent, with q a homomorphism, gives q^*ΣM_0 ≅ N^{2c}. Ample difference plus ample-tensor gives ΣM = ΣA⊗ΣB^{-1} ≅ M^2. Endomorphism span plus hom extension gives P_η ≅ N^{4abc}. Then rigidification, Noetherian spreading over D(f), and vertical Cartier (D = p^*e^*D, e^*s = 1) give D = 0. New nodes, all true and none a duplicate or a restatement: generic torus closure/quotient (FC I 2.9 / Lan 3.3.1.7; generic torus rank only rises under specialization, Raynaud-extension argument over a DVR); torus-torsor rational Picard (Pic T finite; split-torus-torsor-line-pullback is only the split special case); FC I 2.7 hom extension; Raynaud/BLR local quasi-projectivity; Raynaud XI 1.14 endomorphism span (NS/Rosati check, End = Z and E1×E2 cases). Edge cases checked: r = 0, U = S, H_η = 0, characteristic 2, non-factorial normal base. No SGA source. Fixes: (1) the quotient node did not assert that H has semiabelian, hence connected, geometric fibres, which steps 3 and 6 need for hom extension and local ampleness; I added this true clause (the quotient of a semiabelian group by a subtorus is semiabelian), fixed the garbled H/q wording and defined a torus over S. (2) Step 6 never verified the vertical-Cartier node's connected-geometric-fibre hypothesis, which the base proof had checked; I restored that argument, together with e^*s = 1 on V giving the constant rational section, and added ΣM ≅ M^2 in step 2 and the H-hypothesis checks in steps 1 and 3. (3) Citation gaps: I added the ample definition to local-ample and endomorphism-span and defined 'symmetric'; in torus-torsor-picard, def-sfb-tori-multiplicative-type was cited inline but missing from stmt_deps, so I added the torsor definition and aligned stmt_deps. proof_deps are unchanged. Accepted tool_uses: lem-sc-ample-tensor, invertible-pullback-tensor, finite-type-over-noetherian. Sources for the new nodes are absent locally and WANTED.; 5 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SymmetricLinePowerProlongation",
+  "declaration": "AlgebraicGeometry.symmetricLinePowerProlongation",
+  "file": "lean/Sheaf/AlgebraicGeometry/SymmetricLinePowerProlongation.lean",
+  "statement": "theorem symmetricLinePowerProlongation {S : Scheme.{u}} [IsIntegral S] [IsLocallyNoetherian S] (hS : ∀ s : S, IsDomain (S.presheaf.stalk s) ∧ IsIntegrallyClosed (S.presheaf.stalk s)) (G : Grp (Over S)) [IsCommMonObj G.X] [Smooth G.X.hom] [IsSeparated G.X.hom] [LocallyOfFinitePresentation G.X.hom] [QuasiCompact G.X.hom] (hG : HasSemiabelianGeometricFibres G) (U : S.Opens) (hU : Dense (U : Set S)) (N : ((Over.pullback U.ι).mapGrp.obj G).X.left.Modules) [N.IsInvertible] (rigidification : (Scheme.Modules.tensorPullback η[((Over.pullback U.ι).mapGrp.obj G).X].left).obj N ≅ 𝟙_ U.toScheme.Modules) (symmetry : (Scheme.Modules.tensorPullback ι[((Over.pullback U.ι).mapGrp.obj G).X].left).obj N ≅ N) : ∃ (I : Type u) (W : I → S.Opens), (⨆ i, W i) = ⊤ ∧ (∀ i, IsAffineOpen (W i)) ∧ ∀ i, Nonempty (W i) → ∃ (d : ℕ), 1 ≤ d ∧ ∃ (P : (pullback G.X.hom (W i).ι).Modules), P.IsInvertible ∧ Nonempty ((Scheme.Modules.tensorPullback (pullback.fst (pullback.fst G.X.hom (W i).ι) (pullback.fst G.X.hom U.ι))).obj P ≅ (Scheme.Modules.tensorPullback (pullback.snd (pullback.fst G.X.hom (W i).ι) (pullback.fst G.X.hom U.ι))).obj (N.tensorPow d))",
+  "branch": "sheaf-dag",
+  "by": "N8",
+  "date": "2026-10-23",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-ab859ff15",
+  "group": "N8",
+  "result": "pass",
+  "note": "Item JSON = live except lean + added new def stmt_dep (H2 ok); both lean.statement verbatim; all stmt_deps are def nodes. Clause check: normal integral locally Noetherian base; Grp (Over S) + IsCommMonObj; Smooth/IsSeparated/LFP+QuasiCompact (exact finite presentation); actual η/ι of the pulled-back group for rigidification/symmetry; affine cover with ⨆=⊤, d≥1, invertible P, iso of pullbacks to the fibre product = G_{U∩W_i}; no extra structure. HasSemiabelianGeometricFibres: Prop over all alg-closed k:Type u and geometric points (not stronger than the node), Grp homs, IsPullback kernel square, fppf IsLocallySurjective of yoneda.map q (exact fppf sequence), IsAbelianVariety, r=0 allowed; not hollow, no duplicate in DAG, Lean or runs. Docstrings carry the source, blueprint tag and 5 proof steps; proof is only sorry. Edge cases (empty base, U=S, rank 0, d=1, characteristic, universes) ok. Advisory: IsDomain in hS redundant. No fixes, nothing compiled."
+ }
+}

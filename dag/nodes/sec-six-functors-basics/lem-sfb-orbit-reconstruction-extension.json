@@ -1,0 +1,242 @@
+{
+ "id": "lem-sfb-orbit-reconstruction-extension",
+ "kind": "statement",
+ "title": "Extend orbit reconstruction to all discrete continuous actions",
+ "statement": "Let $G$ be a topological group, and let $\\mathcal O_G$, $i_G$, $\\omega_G$ and $F_G$ be its open-orbit category, inclusion and underlying-set functors [def-sfb-open-orbit-functor], in compatible universes. Give both natural automorphism groups the pointwise topology [def-sfb-set-functor-aut-pointwise-topology]. Assume that the translation homomorphism $\\Phi:G\\to\\operatorname{Aut}(\\omega_G)$, $\\Phi(g)_U(x)=gx$, is bijective. Restriction $r:\\operatorname{Aut}(F_G)\\to\\operatorname{Aut}(\\omega_G)$ along $i_G$ is an isomorphism of topological groups. Its inverse sends $\\Phi(g)$ to the translation family $s\\mapsto gs$ on every discrete continuous left $G$-set $S$. More precisely, for every $s\\in S$, its stabilizer $U_s=\\{h\\in G:hs=s\\}$ is open, the map $q_s:G/U_s\\to S$, $hU_s\\mapsto hs$, is equivariant, and $(r^{-1}\\alpha)_S(s)=q_s(\\alpha_{U_s}(U_s))$. Thus each extension-coordinate evaluation is this composite of an orbit-coordinate evaluation and a map between discrete sets.",
+ "source": {
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Proposition 7.1.5, printed p. 64, paragraph beginning “Next, we show that ψ is injective”, especially determination on disjoint unions of G/U; returned item proof steps 10–11, conditional on orbit reconstruction."
+ },
+ "stmt_deps": [
+  "def-sfb-open-orbit-functor",
+  "def-sfb-set-functor-aut-pointwise-topology"
+ ],
+ "proof": [
+  {
+   "text": "Restriction is defined componentwise: $(r\\beta)_U=\\beta_{G/U}$. Naturality on the orbit category follows because its arrows are equivariant maps in the full action category [def-sfb-open-orbit-functor]. Restriction preserves identity, composition and inverses componentwise, so it is a group homomorphism.",
+   "uses": [
+    "def-sfb-open-orbit-functor"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Proposition 7.1.5, printed p. 64, paragraph beginning “Next, we show that ψ is injective”, especially determination on disjoint unions of G/U; returned item proof steps 10–11, conditional on orbit reconstruction."
+   }
+  },
+  {
+   "text": "For $s\\in S$, the stabilizer $U_s$ is a subgroup: $1s=s$, and if $hs=ks=s$ then $(hk^{-1})s=s$. The map $h\\mapsto hs$ is continuous by continuity of the action, and $\\{s\\}$ is open because $S$ is discrete; hence $U_s$ is open. If $hU_s=kU_s$ then $k^{-1}h\\in U_s$, so $hs=ks$. Thus $q_s(hU_s)=hs$ is well-defined, with $q_s(U_s)=s$ and $q_s(ahU_s)=a q_s(hU_s)$. Both sets are discrete, so this equivariant map is an arrow in the action category [def-sfb-open-orbit-functor].",
+   "uses": [
+    "def-sfb-open-orbit-functor"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Proposition 7.1.5, printed p. 64, paragraph beginning “Next, we show that ψ is injective”, especially determination on disjoint unions of G/U; returned item proof steps 10–11, conditional on orbit reconstruction."
+   }
+  },
+  {
+   "text": "For $g\\in G$, define $(T_g)_S(s)=gs$ on every action. Each component is a bijection with inverse $(T_{g^{-1}})_S$. For an equivariant map $f:S\\to S^{\\prime}$, $f(gs)=g f(s)$, which is precisely naturality for the underlying-set functor [def-sfb-open-orbit-functor]. Therefore $T_g\\in\\operatorname{Aut}(F_G)$. The action identities give $T_1=1$ and $T_gT_h=T_{gh}$, and restriction gives $rT_g=\\Phi(g)$.",
+   "uses": [
+    "def-sfb-open-orbit-functor"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Proposition 7.1.5, printed p. 64, paragraph beginning “Next, we show that ψ is injective”, especially determination on disjoint unions of G/U; returned item proof steps 10–11, conditional on orbit reconstruction."
+   }
+  },
+  {
+   "text": "By the assumed bijectivity of $\\Phi$, each $\\alpha\\in\\operatorname{Aut}(\\omega_G)$ has a unique $g$ with $\\Phi(g)=\\alpha$. Put $E(\\alpha)=T_g$. Step 3 gives $rE(\\alpha)=\\alpha$. Moreover $E(\\Phi(g)\\Phi(h))=E(\\Phi(gh))=T_{gh}=T_gT_h$, so $E$ is multiplicative.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Proposition 7.1.5, printed p. 64, paragraph beginning “Next, we show that ψ is injective”, especially determination on disjoint unions of G/U; returned item proof steps 10–11, conditional on orbit reconstruction."
+   }
+  },
+  {
+   "text": "For $\\beta\\in\\operatorname{Aut}(F_G)$, naturality for the actual arrow $q_s$ of step 2 [def-sfb-open-orbit-functor] gives $\\beta_S(s)=\\beta_S(q_s(U_s))=q_s(\\beta_{G/U_s}(U_s))=q_s((r\\beta)_{U_s}(U_s))$. Thus equal restrictions imply equal values at every $(S,s)$ and hence equal natural automorphisms. Applying this to $E(r\\beta)$ and $\\beta$ proves $Er=1$. Taking $\\beta=E\\alpha$ gives the claimed coordinate formula, and step 4 gives $E(\\Phi(g))_S(s)=gs$.",
+   "uses": [
+    "def-sfb-open-orbit-functor"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Proposition 7.1.5, printed p. 64, paragraph beginning “Next, we show that ψ is injective”, especially determination on disjoint unions of G/U; returned item proof steps 10–11, conditional on orbit reconstruction."
+   }
+  },
+  {
+   "text": "The topology [def-sfb-set-functor-aut-pointwise-topology] makes each of these automorphism groups a topological group directly. At a pair $(a,b)$, to hold $(a^{\\prime}b^{\\prime})_X(x)=a_X(b_X(x))$ it suffices to prescribe $b^{\\prime}_X(x)=b_X(x)$ and $a^{\\prime}_X(b_X(x))=a_X(b_X(x))$. These are two coordinate neighbourhood conditions. To hold $(a^{\\prime})^{-1}_X(x)=a^{-1}_X(x)=y$, prescribe $a^{\\prime}_X(y)=x$. Taking finite intersections handles every basic neighbourhood and proves continuity of multiplication and inversion.",
+   "uses": [
+    "def-sfb-set-functor-aut-pointwise-topology"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Proposition 7.1.5, printed p. 64, paragraph beginning “Next, we show that ψ is injective”, especially determination on disjoint unions of G/U; returned item proof steps 10–11, conditional on orbit reconstruction."
+   }
+  },
+  {
+   "text": "For a basic neighbourhood in $\\operatorname{Aut}(\\omega_G)$ prescribing finitely many values $\\alpha_{U_j}(x_j)=y_j$, its inverse image under $r$ prescribes exactly the finitely many values $\\beta_{G/U_j}(x_j)=y_j$. It is open by the coordinate-neighbourhood description [def-sfb-set-functor-aut-pointwise-topology]. Hence $r$ is continuous.",
+   "uses": [
+    "def-sfb-set-functor-aut-pointwise-topology"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Proposition 7.1.5, printed p. 64, paragraph beginning “Next, we show that ψ is injective”, especially determination on disjoint unions of G/U; returned item proof steps 10–11, conditional on orbit reconstruction."
+   }
+  },
+  {
+   "text": "For a single coordinate condition $(E\\alpha)_S(s)=t$, step 5 identifies its inverse image with $\\{\\alpha:q_s(\\alpha_{U_s}(U_s))=t\\}$. This is the union, over $z\\in G/U_s$ with $q_s(z)=t$, of the open coordinate sets $\\{\\alpha:\\alpha_{U_s}(U_s)=z\\}$. Thus every extension-coordinate is continuous. A basic neighbourhood prescribes finitely many such coordinates [def-sfb-set-functor-aut-pointwise-topology], so its inverse image is a finite intersection of these open sets. Hence $E$ is continuous and is the continuous inverse group homomorphism required.",
+   "uses": [
+    "def-sfb-set-functor-aut-pointwise-topology"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Proposition 7.1.5, printed p. 64, paragraph beginning “Next, we show that ψ is injective”, especially determination on disjoint unions of G/U; returned item proof steps 10–11, conditional on orbit reconstruction."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sfb-open-orbit-functor",
+  "def-sfb-set-functor-aut-pointwise-topology"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Proposition 7.1.5, printed p. 64, injectivity paragraph; explicit conditional extension and coordinate-topology argument by Q53."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "If every natural automorphism on open subgroup orbits is uniquely a group translation then restriction from all discrete continuous actions is a homeomorphism",
+   "results": "8 hits: Topology.IsQuotientMap.isCoveringMapOn_of_vadd_disjoint, ProperlyDiscontinuousSMul, Topology.IsQuotientMap.isCoveringMapOn_of_smul_disjoint, Topology.IsQuotientMap.trivializationOfVAddDisjoint, MulAction.IsPretransitive.discreteTopology_iff, Topology.IsQuotientMap.isCoveringMapOn_of_properlyDiscontinuousVAdd, isCoveringMapOn_quotientMk_of_properlyDiscontinuousVAdd, Topology.IsQuotientMap.trivializationOfSMulDisjoint",
+   "date": "2026-10-22",
+   "verdict": "no match: finite-fibre Galois results assume FintypeCat (and reconstruction compactness); the listed action/quotient/topology lemmas do not state this arbitrary discrete-orbit assertion."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Aut\", \"whiskeringLeft\"",
+   "results": "0 hits: ",
+   "date": "2026-10-22",
+   "verdict": "no match: finite-fibre Galois results assume FintypeCat (and reconstruction compactness); the listed action/quotient/topology lemmas do not state this arbitrary discrete-orbit assertion."
+  },
+  {
+   "tool": "grep",
+   "query": "[Aa]ut.*[Rr]estrict|[Rr]estrict.*[Aa]ut|[Aa]ut.*[Ff]orget|[Ff]orget.*[Aa]ut",
+   "results": "25 hits: Mathlib/Logic/Equiv/PartialEquiv.lean, Mathlib/Algebra/Algebra/RestrictScalars.lean, Mathlib/Combinatorics/Matroid/Minor/Restrict.lean, Mathlib/CategoryTheory/Limits/Over.lean, Mathlib/CategoryTheory/Limits/Over.lean, Mathlib/FieldTheory/PolynomialGaloisGroup.lean, Mathlib/RepresentationTheory/Tannaka.lean, Mathlib/RepresentationTheory/Tannaka.lean",
+   "date": "2026-10-22",
+   "verdict": "no match: finite-fibre Galois results assume FintypeCat (and reconstruction compactness); the listed action/quotient/topology lemmas do not state this arbitrary discrete-orbit assertion."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Restriction of natural automorphisms from all discrete continuous group actions to transitive open subgroup orbits is a topological group isomorphism",
+   "results": "8 hits: Homeomorph.smul, CategoryTheory.PreGaloisCategory.autEquivAutWhiskerRight, ContAction.resCongr, Homeomorph.vadd, Subgroup.instIsTopologicalGroupSubtypeMem, topologicalGroup_of_discreteTopology, ContinuousLinearEquiv.automorphismGroup, stabilizer_isOpen",
+   "date": "2026-10-22",
+   "verdict": "no match: finite-fibre Galois results assume FintypeCat (and reconstruction compactness); the listed action/quotient/topology lemmas do not state this arbitrary discrete-orbit assertion."
+  },
+  {
+   "tool": "grep",
+   "query": "autEquivAutWhiskerRight|[Rr]estrict.*[Aa]ut|[Aa]ut.*[Rr]estrict",
+   "results": "2 hits: Mathlib/CategoryTheory/Galois/Topology.lean, Mathlib/CategoryTheory/Galois/Equivalence.lean. Read Mathlib/CategoryTheory/Galois/Topology.lean lines 35-65 and 140-161: FintypeCat fibres and whiskering on the right; IsFundamentalgroup.lean lines 242-282 requires compact G.",
+   "date": "2026-10-22",
+   "verdict": "no match: candidates concern finite-fibre Galois reconstruction or unrelated action/covering functors; none states this conditional restriction theorem for arbitrary discrete continuous actions."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Natural automorphisms of a forgetful functor on group actions are determined by their values on transitive coset actions",
+   "results": "8 hits: Action.forget, CategoryTheory.PreGaloisCategory.toAut_surjective_isGalois, CategoryTheory.Core.forgetFunctorToCore_map_app, CategoryTheory.PreGaloisCategory.mulAction_naturality, Action.Hom.noConfusion, CategoryTheory.PreGaloisCategory.toAut, Action.ρAut_apply_hom, CategoryTheory.FintypeCat.instPreservesFiniteLimitsActionFintypeCatForget",
+   "date": "2026-10-22",
+   "verdict": "no match: candidates concern finite-fibre Galois reconstruction or unrelated action/covering functors; none states this conditional restriction theorem for arbitrary discrete continuous actions."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Aut\", \"whiskeringLeft\"",
+   "results": "0 hits: ",
+   "date": "2026-10-22",
+   "verdict": "no match: zero hits."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Restriction of natural automorphisms of the forgetful functor on discrete continuous group actions to open subgroup coset orbits is a homeomorphism if every orbit automorphism is translation",
+   "results": "8 hits: CategoryTheory.PreGaloisCategory.toAutMulEquiv_isHomeomorph, CategoryTheory.PreGaloisCategory.toAut_isHomeomorph, CategoryTheory.PreGaloisCategory.toAutHomeo, CategoryTheory.PreGaloisCategory.toAutHomeo_apply, Topology.IsQuotientMap.trivializationOfSMulDisjoint, Topology.IsQuotientMap.trivializationOfVAddDisjoint, IsQuotientCoveringMap, Topology.IsQuotientMap.trivializationOfSMulDisjoint_source",
+   "date": "2026-10-22",
+   "verdict": "no match: candidates concern finite-fibre Galois reconstruction or unrelated action/covering functors; none states this conditional restriction theorem for arbitrary discrete continuous actions."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A natural automorphism of the underlying set functor on continuous discrete G sets extends uniquely from its full subcategory of transitive G sets, and restriction and extension are continuous for pointwise convergence",
+   "results": "8 hits: CategoryTheory.PreGaloisCategory.toAut_continuous, CategoryTheory.Functor.mapContActionCongr, CategoryTheory.PreGaloisCategory.toAutHomeo, CategoryTheory.Equivalence.mapContAction, CategoryTheory.PreGaloisCategory.continuousSMul_aut_fiber, CategoryTheory.PreGaloisCategory.functorToContAction, CategoryTheory.PreGaloisCategory.exists_lift_of_continuous, CategoryTheory.PreGaloisCategory.continuous_mapAut_whiskeringRight",
+   "date": "2026-10-22",
+   "verdict": "no match: candidates concern finite-fibre Galois reconstruction or unrelated action/covering functors; none states this conditional restriction theorem for arbitrary discrete continuous actions."
+  },
+  {
+   "tool": "grep",
+   "query": "toAutMulEquiv_isHomeomorph|toAut_isHomeomorph|toAut_continuous|variable.*Compact",
+   "results": "5 hits: 42, 122, 242, 260, 270. Read Mathlib/CategoryTheory/Galois/Topology.lean lines 35-65 and 140-161: FintypeCat fibres and whiskering on the right; IsFundamentalgroup.lean lines 242-282 requires compact G.",
+   "date": "2026-10-22",
+   "verdict": "no match: candidates concern finite-fibre Galois reconstruction or unrelated action/covering functors; none states this conditional restriction theorem for arbitrary discrete continuous actions."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-complete-group-forgetful-automorphisms",
+  "date": "2026-10-22",
+  "group": "Q38"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images proof paragraph (3), the all-continuous compatibility obligation: finite coefficient models on source strata before open-image finiteness; monodromy on the reduced normal refinements, before the compact-matrix finite-field argument; Complete topological group torsors on a normal scheme; Proposition 7.1.5, pp. 63–64, with Example 7.1.6 for the compact case; orbit-category formulation from the proof (the objects G/U determine a natural automorphism on all disjoint unions). Proposition 7.1.5, printed p. 64, paragraph beginning “Next, we show that ψ is injective”, especially determination on disjoint unions of G/U; returned item proof steps 10–11, conditional on orbit reconstruction.",
+   "via": [
+    "lem-sfb-complete-group-forgetful-automorphisms",
+    "lem-sfb-complete-group-torsor-monodromy",
+    "lem-sfb-normal-continuous-algcl-monodromy",
+    "lem-sfb-continuous-algcl-stratified-finite-models",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sfb-orbit-reconstruction-extension",
+  "worker": "stage1",
+  "summary": "Proved the conditional extension explicitly using stabilizer orbit maps, translation naturality, and finite coordinate neighbourhoods; no additional hypotheses or helper nodes. Retained statement and inherited searches, added freshly logged searches and an eight-step elementary proof.",
+  "blueprint": "Realizes the orbit-extension obligation in steps 10–11 of lem-sfb-complete-group-forgetful-automorphisms, under the supplied orbit-reconstruction hypothesis. The inherited chain serves det-thm-sf-ctf-stability-direct-images proof paragraph (3). blueprint_refs ancestor returns None; preserved the inherited from.node=null and via chain."
+ },
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q53-02c60f0a8",
+  "group": "Q53",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q53-02c60f0a8 (reviewer sub-agent of L); spot-checked: I read the item in full: statement and 8 steps. I also read the statements of both cited definitions, def-sfb-open-orbit-functor and def-sfb-set-functor-aut-pointwise-topology, both in the same unit and both reviewed. The statement and stmt_deps are unchanged from the base, and there are no new nodes, no tool_uses and no SGA citations. Source: Bhatt–Scholze, Prop. 7.1.5, printed p. 64, paragraph 'Next, we show that ψ is injective … S = ⊔ G/U_i'. The item replaces that disjoint-union decomposition with naturality at the single arrow q_s: G/U_s → S. Every argument of the parent's pre-re-split steps 10–11 (NP version) is carried here in more detail, and nothing was dropped. Step checks: (1) restriction is natural because i_G keeps all arrows. (2) U_s is open because it is the preimage of the open point {s} under h ↦ hs; q_s is well-defined, using left cosets only; q_s is an arrow between discrete continuous G-sets. (3) The translation families T_g are natural, and rT = Φ. (4) E = T∘Φ⁻¹ is multiplicative. (5) Naturality at q_s gives β_S(s) = q_s((rβ)_{U_s}(U_s)), so r is injective and E = r⁻¹ with the stated coordinate formula. (6) The pointwise topology is a group topology: two coordinate conditions for multiplication, one for inversion. (7) r is continuous. (8) E is continuous, since each coordinate preimage is a union over the fibre of q_s and basic neighbourhoods are finite intersections. Every step is honestly elementary from the two definitions and the hypothesis. Only bijectivity of Φ is used, and it is exactly what the citer's live step 4 supplies. Edge cases: trivial G, empty S, discrete ℤ, and S_3 with a non-normal stabilizer. No Hausdorff, compactness or subgroup-basis assumption is used. Duplicate search with rg -L: the open-stabilizer nodes in sec-curve-estimates are two-line facts that may be inlined (C1), and the finite-fibre Galois-category nodes do not state this result. Advisory: the group-topology clause of step 6 overlaps lem-galois-aut-profinite, but it is two lines here. The Mathlib searches cover three kinds, and the 'no match' verdicts are correct. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.GroupTheory.OrbitReconstructionExtension",
+  "declaration": "TopologicalGroup.orbitReconstruction_extension",
+  "file": "lean/Sheaf/GroupTheory/OrbitReconstructionExtension.lean",
+  "statement": "theorem orbitReconstruction_extension (G : Type u) [Group G] [TopologicalSpace G] [IsTopologicalGroup G] (Φ : G →* Aut (openOrbitForget G)) (hΦ : ∀ (g : G) (U : OpenOrbitCategory G) (x : G ⧸ U.toSubgroup), ((Φ g).hom.app U) x = g • x) (hbij : Function.Bijective Φ) : IsTopologicalGroup (Aut (discreteActionForget G)) ∧ IsTopologicalGroup (Aut (openOrbitForget G)) ∧ ∃ r : Aut (discreteActionForget G) ≃ₜ* Aut (openOrbitForget G), (∀ β : Aut (discreteActionForget G), r β = (((Functor.whiskeringLeft (OpenOrbitCategory G) (DiscreteContAction TopCat.{u} G) (Type u)).obj (openOrbitInclusion G)).mapAut (discreteActionForget G) β)) ∧ (∀ (g : G) (S : DiscreteContAction TopCat.{u} G) (s : (discreteActionForget G).obj S), ((r.symm (Φ g)).hom.app S) s = (S.obj.obj.ρ g).hom s) ∧ (∀ (S : DiscreteContAction TopCat.{u} G) (s : (discreteActionForget G).obj S), ∃ U : OpenSubgroup G, ∃ q : openOrbitAction G U ⟶ S, (∀ h : G, h ∈ U ↔ (S.obj.obj.ρ h).hom s = s) ∧ (∀ h : G, (discreteActionForget G).map q (QuotientGroup.mk h) = (S.obj.obj.ρ h).hom s) ∧ (∀ α : Aut (openOrbitForget G), ((r.symm α).hom.app S) s = (discreteActionForget G).map q (α.hom.app U (QuotientGroup.mk 1))) ∧ @Continuous (Aut (openOrbitForget G)) S.obj.obj.V (SetFunctorAut.functorTopology (openOrbitForget G)) S.obj.obj.V.str (fun α ↦ (discreteActionForget G).map q (α.hom.app U (QuotientGroup.mk 1))))",
+  "branch": "newtargets-dag",
+  "by": "Q62",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-d5f398c43",
+  "group": "Q62",
+  "result": "pass",
+  "note": "Node differs from live only by the lean record; statement verbatim in file. Clause check against def-sfb-open-orbit-functor (OpenOrbitCategory/openOrbitInclusion/discreteActionForget/openOrbitForget) and def-sfb-set-functor-aut-pointwise-topology (functorTopologyInstance): Φ fixed by its translation formula hΦ and consistent with Aut_mul_def (not vacuous); hbij bijective; r ≃ₜ* pinned to whiskeringLeft.mapAut restriction; inverse of r sends Φ g to translation on every DiscreteContAction S; U = exact stabilizer (OpenSubgroup, so open); q an action arrow with q(hU)=hs; coordinate formula for every α; extra IsTopologicalGroup and continuity conjuncts are the implicit 'topological group iso' and 'composite' claims, true by steps 6 and 8. No extra hypotheses, single universe u as in the dependency; edge cases empty S, trivial or discrete G, non-normal stabilizers, infinite orbits ok. No duplicate (completeGroup_forgetful_automorphisms assumes more and states less; Mathlib PreGaloisCategory needs finite fibres or compact G). No definitions, only proof is sorry, docstrings carry source place, blueprint tag and all 8 steps, report has both sections. No file changed, so no compile run; worker reports clean compiles."
+ }
+}

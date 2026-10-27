@@ -1,0 +1,123 @@
+{
+ "id": "def-sfb-canonical-scheme-derived-adjunction-composition",
+ "kind": "definition",
+ "title": "Canonical scheme derived adjunction and pullback composition",
+ "status": "split",
+ "statement": "For schemes, use the unbounded derived pullbacks $Lf^*$ [def-pc-derived-pullback], derived direct images $Rf_*$ [def-pc-derived-direct-image], and ordinary tensor-formula pullbacks $f^*$ with their adjunctions $f^*\\dashv f_*$ [def-pc-module-pullback]. Fix a common localization universe and the derived-category localizations for all schemes. Define the canonical choices as follows. Choose once the simultaneous left-derived counits $\\epsilon_f:Lf^*Q_Y\\to Q_X f^*$ and their composition comparisons supplied by the left-derived universal property, where $Q_X$ denotes localization of the unbounded homotopy category of $\\mathcal O_X$-modules. For $f:X\\to Y$, define $a_f:Lf^*\\dashv Rf_*$ to be the adjunction chosen from the derived adjunction construction with that same counit $\\epsilon_f$, the recorded right-derived unit, and the ordinary tensor-pullback adjunction. In particular for homotopy complexes $M$ on $Y$ and $N$ on $X$, its Hom correspondence sends $Q_X(t)\\circ\\epsilon_f(M)$ to $\\eta_f(N)\\circ Q_Y(\\operatorname{adj}_f(t))$ for $t:f^*M\\to N$, where $\\operatorname{adj}_f$ is the Hom correspondence of that ordinary adjunction and $\\eta_f:Q_Y f_*\\to Rf_*Q_X$ is the recorded right-derived unit. For composable $f:X\\to Y$ and $g:Y\\to Z$, define $c_{f,g}:Lf^*\\circ Lg^*\\xrightarrow{\\sim}L(g\\circ f)^*$ to be the composition isomorphism in that same chosen simultaneous family. It is the unique comparison compatible with the counits and the ordinary tensor-pullback compositor, the adjoint mate of the pushforward compositor. These are the fixed choices used for canonical scheme-derived mates; the mate evaluation identity is a separate theorem.",
+ "stmt_deps": [
+  "def-pc-derived-pullback",
+  "def-pc-derived-direct-image",
+  "def-pc-module-pullback"
+ ],
+ "source": {
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Tag 0D5S, lemma-derived-pullback-composition, and Tag 08HY, remark-base-change: the canonical composition and adjunction used to define the derived mate. Existing definitions: WeilConjectures.AlgebraicGeometry.SchemeDerivedMateEvaluation, lines 41–63."
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Canonical adjunction between derived pullback and derived pushforward of scheme modules and canonical composition isomorphism of derived pullback",
+   "results": "{\"t\": \"2026-10-24T02:24:34Z\", \"tool\": \"leansearch\", \"query\": \"Canonical adjunction between derived pullback and derived pushforward of scheme modules and canonical composition isomorphism of derived pullback\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Modules.pullbackPushforwardAdjunction\", \"TopCat.Presheaf.pushforwardPullbackAdjunction\", \"SheafOfModules.PullbackConstruction.adjunction\", \"AlgebraicGeometry.Scheme.Modules.restrictAdjunction\", \"SheafOfModules.pushforwardPushforwardAdj\", \"SheafOfModules.pullbackPushforwardAdjunction\", \"AlgebraicGeometry.Scheme.Modules.pullbackComp\", \"CategoryTheory.Functor.sheafPullbackConstruction.sheafAdjunctionContinuous\"], \"digest\": \"e6acb31e305d9caa\"}",
+   "date": "2026-10-24",
+   "verdict": "Only ordinary pullback adjunctions and composition found; no normalized derived scheme construction."
+  },
+  {
+   "tool": "loogle",
+   "query": "canonicalSchemeDerivedAdjunction, canonicalDerivedPullbackComposition",
+   "results": "{\"t\": \"2026-10-24T02:24:34Z\", \"tool\": \"loogle\", \"query\": \"canonicalSchemeDerivedAdjunction, canonicalDerivedPullbackComposition\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"loogle: unknown identifier 'canonicalSchemeDerivedAdjunction'\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "The service reports unknown identifier canonicalSchemeDerivedAdjunction; no indexed match. The exact declarations were found directly in the upstream source."
+  },
+  {
+   "tool": "grep",
+   "query": "canonicalSchemeDerivedAdjunction|canonicalDerivedPullbackComposition",
+   "results": "{\"t\": \"2026-10-24T02:24:34Z\", \"tool\": \"grep\", \"query\": \"canonicalSchemeDerivedAdjunction|canonicalDerivedPullbackComposition\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "No Mathlib AlgebraicGeometry match; the exact definitions exist upstream and are recorded existing:true."
+  },
+  {
+   "tool": "rg / blueprint_refs.py",
+   "query": "canonicalSchemeDerivedAdjunction|canonicalDerivedPullbackComposition in dag/nodes, dag/lean_names_upstream.json, lean/WeilConjectures, lean/Sheaf; blueprint_refs.py search derived pullback; blueprint_refs.py search derived adjunction",
+   "results": "Upstream SchemeDerivedMateEvaluation.lean:46 and :58 define the exact two constructions. No existing node lean.declaration or lean.declarations owns either name. Other node text only uses these constructions or states the mate evaluation theorem. Sheaf modules consume, rather than define, these names. Blueprint searches returned 78 and 28 hits respectively: ordinary/derived pullbacks and adjunctions on other sites or coefficients, and the general derived pullback node, but no node introducing these two fixed scheme-module choices. blueprint_refs.py ancestor reports None for the item.",
+   "date": "2026-10-24",
+   "verdict": "Reuse both existing upstream definitions in a new definition ownership node, as the maintainer return explicitly requests; create no Lean declaration."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-derived-etale-zariski-equivalence",
+  "date": "2026-10-24",
+  "group": "Q65"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Stable genus and smooth-family open loci in curve families. Supporting input: 0E76 proof, reduction to prestable curves, and 0E78 proof, decomposition by genus before imposing stability. Supporting input: 0E1J proof, perfectness and arbitrary derived base change before extracting the positive-degree perfect summand. Supporting input to this derived direct-image specialization: Tags 08H8 (lemma-epsilon-flat), 071Q (lemma-derived-quasi-coherent-small-etale-site), including its quasi-inverse and counit proof, and 08GH (remark-match-total-direct-images); tensor normalization from descent.tex Tag 03FH (remark-change-topologies-ringed-sites). Definition ownership for the canonical scheme-derived adjunction and pullback compositor used in the Zariski normalization and composition compatibility clauses.",
+   "via": [
+    "lem-sfb-derived-etale-zariski-equivalence",
+    "lem-sfb-proper-flat-space-derived-base-change",
+    "lem-sfb-curve-h0-genus-strata",
+    "lem-sfb-stable-and-smooth-family-open-loci",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "lean": {
+  "module": "WeilConjectures.AlgebraicGeometry.SchemeDerivedMateEvaluation",
+  "declaration": "AlgebraicGeometry.canonicalSchemeDerivedAdjunction",
+  "declarations": [
+   "AlgebraicGeometry.canonicalSchemeDerivedAdjunction",
+   "AlgebraicGeometry.canonicalDerivedPullbackComposition"
+  ],
+  "statement": "def canonicalSchemeDerivedAdjunction {P Q : Scheme.{u}} (k : P ⟶ Q) :\n    derivedPullback k ⊣ schemeDerivedDirectImage k",
+  "branch": "slopmaster2",
+  "by": "Q65",
+  "date": "2026-10-24",
+  "existing": true,
+  "note": "Definition ownership requested in H2 of returned head 736671499d51. Both existing plain definitions are reused without a module or theorem duplication. The ambient explicit universes are u w and the family of HasDerivedCategory.{w} instances on SheafOfModules.{u} (moduleRings Y.toRingedSpace). canonicalDerivedPullbackComposition has the verbatim signature: noncomputable def canonicalDerivedPullbackComposition {P Q Z : Scheme.{u}}\n    (k : P ⟶ Q) (l : Q ⟶ Z) :\n    derivedPullback l ⋙ derivedPullback k ≅ derivedPullback (k ≫ l). The construction chooses the same counits and comparisons as schemeDerivedBaseChangeMap; no schemeDerivedMate_evaluation theorem is assumed in the consumer statement."
+ },
+ "import_flags": [],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-d8f42aa5c",
+  "group": "Q65",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-d8f42aa5c",
+  "group": "Q65",
+  "result": "pass",
+  "note": "Re-delivery after the H2 RETURN of 736671499d51. The Lean is byte-identical (sha cebc1464); I re-read it independently: all clauses are pinned, assumptions are qcqs-only, the one sorry is the main theorem, and there are no hollow defs. Item vs side-live differs only in stmt_deps and lean. H2 is repaired: lem-weil-pbc-module-pullback-structure-sheaf is replaced by the live def-sfb-tensor-pullback-structure-sheaf-map (owns tensorPullbackObjUnitToUnit), and lem-pc-scheme-derived-mate-evaluation by the new existing:true def-sfb-canonical-scheme-derived-adjunction-composition (owns canonicalSchemeDerivedAdjunction and canonicalDerivedPullbackComposition, SchemeDerivedMateEvaluation.lean:46,58). Its signature is verbatim, its text matches exists_derivedPullbackComposition and exists_schemeDerivedAdjunction, it has no other owner in side-live, and its stmt_deps def-pc-derived-pullback, def-pc-derived-direct-image and def-pc-module-pullback create no cycle. Dep record unchanged. Advisories: the Second reading section is still a placeholder; the upstream docstrings name the old blueprint id; some decls come from owners outside stmt_deps (base-era practice)."
+ }
+}

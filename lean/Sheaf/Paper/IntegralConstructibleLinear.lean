@@ -9,14 +9,11 @@ public import Sheaf.Paper.IntegralConstructibleTriangulated
 public import Sheaf.NumberTheory.Padics.CoefficientExtensionFinite
 public import Mathlib.CategoryTheory.Sites.ConstantSheaf
 public import Mathlib.Algebra.Homology.DerivedCategory.Linear
-import Sheaf.NumberTheory.Padics.AdicLimitFiniteModules
 
 public import Sheaf.Paper.IntegralScalarExtensionWellDefined
 import Sheaf.Paper.CompletedIntegralCoefficients
-import Mathlib.CategoryTheory.Limits.HasLimits
-import Sheaf.CategoryTheory.RingedSiteModules
-import Mathlib.Algebra.Homology.DerivedCategory.Basic
-import Sheaf.Paper.DerivedCompleteIntegralDetailed
+import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.HomModule
+import Mathlib.CategoryTheory.Limits.ConcreteCategory.Basic
 
 /-!
 # Integral constructible categories are linear over the valuation ring
@@ -36,6 +33,7 @@ The constructible subcategory carries precisely the inherited linear structure.
 set_option autoImplicit false
 
 set_option backward.isDefEq.respectTransparency false
+set_option backward.isDefEq.respectTransparency.types false
 
 universe d u
 
@@ -53,6 +51,209 @@ noncomputable instance integralConstructibleTriangulatedStructure
     [FiniteDimensional (Padic l) E] (Y : AlgebraicGeometry.Scheme.{u}) :
     (boundedConstructibleDerivedCompleteIntegral.{d, u} D l hl E Y).IsTriangulated :=
   (boundedConstructibleDerivedCompleteIntegral_isTriangulated D l hl E Y).2
+
+section CoefficientProof
+
+variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
+  [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]
+  (Y : AlgebraicGeometry.Scheme.{u})
+
+private theorem coefficient_scalar_ext (U : Y.ProEtᵒᵖ)
+    {x y : (completedIntegralCoefficientSheafUnrestricted l E Y).obj.obj U}
+    (h : ∀ n : ℕ,
+      ((CategoryTheory.Limits.limit.π (integralCoefficientSheafSystem l E Y)
+        (op n)).hom.app U) x =
+      ((CategoryTheory.Limits.limit.π (integralCoefficientSheafSystem l E Y)
+        (op n)).hom.app U) y) : x = y := by
+  let h₁ := CategoryTheory.Limits.isLimitOfPreserves
+    (sheafToPresheaf (AlgebraicGeometry.Scheme.ProEt.topology Y) RingCat)
+    (CategoryTheory.Limits.limit.isLimit (integralCoefficientSheafSystem l E Y))
+  let h₂ := CategoryTheory.Limits.isLimitOfPreserves ((evaluation _ _).obj U) h₁
+  apply Concrete.isLimit_ext _ h₂
+  intro n
+  exact h n.unop
+
+private theorem coefficient_scalar_naturality {U V : Y.ProEtᵒᵖ} (f : U ⟶ V)
+    (a : Padic.coefficientExtensionIntegers l E) :
+    (completedIntegralCoefficientSheafUnrestricted l E Y).obj.map f
+      (integralScalarConstant l E Y U a) = integralScalarConstant l E Y V a := by
+  apply coefficient_scalar_ext l E Y V
+  intro n
+  have hn := congrArg (fun k ↦ k.hom (integralScalarConstant l E Y U a))
+    ((CategoryTheory.Limits.limit.π (integralCoefficientSheafSystem l E Y)
+      (op n)).hom.naturality f)
+  change ((CategoryTheory.Limits.limit.π (integralCoefficientSheafSystem l E Y)
+      (op n)).hom.app V)
+      ((completedIntegralCoefficientSheafUnrestricted l E Y).obj.map f
+        (integralScalarConstant l E Y U a)) =
+      (integralCoefficientSheaf l E Y n).obj.map f
+        (((CategoryTheory.Limits.limit.π (integralCoefficientSheafSystem l E Y)
+          (op n)).hom.app U) (integralScalarConstant l E Y U a)) at hn
+  rw [hn]
+  erw [(integralScalarConstant_existsUnique l E Y U a).exists.choose_spec n,
+    (integralScalarConstant_existsUnique l E Y V a).exists.choose_spec n]
+  exact (congrArg
+    (fun k ↦ k.hom
+      (ULift.up ((Ideal.Quotient.mk (Padic.coefficientExtensionIdeal l E (n + 1))) a)))
+    ((toSheafify (AlgebraicGeometry.Scheme.ProEt.topology Y)
+      ((Functor.const Y.ProEtᵒᵖ).obj
+        (CommRingCat.of
+          (ULift.{u + 1} (Padic.coefficientExtensionRing l E (n + 1)))))).naturality f)).symm
+
+private noncomputable abbrev coefficient_finiteConstantMap (n : ℕ) (U : Y.ProEtᵒᵖ) :=
+  ((toSheafify (AlgebraicGeometry.Scheme.ProEt.topology Y)
+    ((Functor.const Y.ProEtᵒᵖ).obj
+      (CommRingCat.of (ULift.{u + 1} (Padic.coefficientExtensionRing l E (n + 1)))))).app U).hom
+
+private noncomputable def coefficient_scalarSections : Padic.coefficientExtensionIntegers l E →+*
+    RingCat.sectionsSubring
+      ((completedIntegralCommRingSheafUnrestricted l E Y).obj ⋙
+        forget₂ CommRingCat.{max u (u + 1)} RingCat.{max u (u + 1)}) where
+  toFun a := ⟨fun U ↦ integralScalarConstant l E Y U a,
+    fun f ↦ coefficient_scalar_naturality l E Y f a⟩
+  map_one' := by
+    apply Subtype.ext
+    funext U
+    apply coefficient_scalar_ext l E Y U
+    intro n
+    erw [(integralScalarConstant_existsUnique l E Y U 1).exists.choose_spec n]
+    simp only [integralScalarFiniteConstant, Functor.comp_obj,
+      CommRingCat.forgetToRingCat_obj, OneMemClass.coe_one, Pi.one_apply, map_one]
+    exact map_one (coefficient_finiteConstantMap l E Y n U)
+  map_mul' a b := by
+    apply Subtype.ext
+    funext U
+    apply coefficient_scalar_ext l E Y U
+    intro n
+    change _ = (CategoryTheory.Limits.limit.π
+      (integralCoefficientSheafSystem l E Y) (op n)).hom.app U
+        (integralScalarConstant l E Y U a * integralScalarConstant l E Y U b)
+    rw [map_mul]
+    erw [(integralScalarConstant_existsUnique l E Y U (a * b)).exists.choose_spec n,
+      (integralScalarConstant_existsUnique l E Y U a).exists.choose_spec n,
+      (integralScalarConstant_existsUnique l E Y U b).exists.choose_spec n]
+    simp only [integralScalarFiniteConstant, map_mul]
+    exact map_mul (coefficient_finiteConstantMap l E Y n U) _ _
+  map_zero' := by
+    apply Subtype.ext
+    funext U
+    apply coefficient_scalar_ext l E Y U
+    intro n
+    erw [(integralScalarConstant_existsUnique l E Y U 0).exists.choose_spec n]
+    simp only [integralScalarFiniteConstant, Functor.comp_obj,
+      CommRingCat.forgetToRingCat_obj, ZeroMemClass.coe_zero, Pi.zero_apply, map_zero]
+    exact map_zero (coefficient_finiteConstantMap l E Y n U)
+  map_add' a b := by
+    apply Subtype.ext
+    funext U
+    apply coefficient_scalar_ext l E Y U
+    intro n
+    change _ = (CategoryTheory.Limits.limit.π
+      (integralCoefficientSheafSystem l E Y) (op n)).hom.app U
+        (integralScalarConstant l E Y U a + integralScalarConstant l E Y U b)
+    rw [map_add]
+    erw [(integralScalarConstant_existsUnique l E Y U (a + b)).exists.choose_spec n,
+      (integralScalarConstant_existsUnique l E Y U a).exists.choose_spec n,
+      (integralScalarConstant_existsUnique l E Y U b).exists.choose_spec n]
+    simp only [integralScalarFiniteConstant, map_add]
+    exact map_add (coefficient_finiteConstantMap l E Y n U) _ _
+
+@[instance_reducible]
+private noncomputable def coefficientModuleLinear :
+    Linear (Padic.coefficientExtensionIntegers l E) (integralTowerModules l E Y) := by
+  letI : Linear
+      (RingCat.sectionsSubring ((completedIntegralCommRingSheafUnrestricted l E Y).obj ⋙
+        forget₂ CommRingCat RingCat)) (integralTowerModules l E Y) :=
+    SheafOfModules.homLinear (completedIntegralCommRingSheafUnrestricted l E Y).obj
+      (completedIntegralCoefficientSheafUnrestricted l E Y).property
+  exact
+    { homModule := fun M N ↦ Module.compHom (M ⟶ N) (coefficient_scalarSections l E Y)
+      smul_comp := fun M N P a f g ↦
+        Linear.smul_comp M N P (coefficient_scalarSections l E Y a) f g
+      comp_smul := fun M N P f a g ↦
+        Linear.comp_smul M N P f (coefficient_scalarSections l E Y a) g }
+
+attribute [local instance] coefficientModuleLinear
+
+private theorem coefficientChain_eq (a : Padic.coefficientExtensionIntegers l E) :
+    integralScalarChainAction l E Y a =
+      Linear.toCatCenter (Padic.coefficientExtensionIntegers l E)
+        (CochainComplex (integralTowerModules l E Y) ℤ) a := by
+  apply NatTrans.ext
+  funext P
+  apply HomologicalComplex.hom_ext
+  intro i
+  apply SheafOfModules.hom_ext
+  apply PresheafOfModules.hom_ext
+  intro U
+  apply ModuleCat.hom_ext
+  apply LinearMap.ext
+  intro x
+  exact (integralScalarChainAction_existsUnique l E Y a).exists.choose_spec P i U x
+
+private theorem coefficientDerived_eq (a : Padic.coefficientExtensionIntegers l E) :
+    integralScalarDerivedAction l E Y a =
+      CatCenter.localization
+        (Linear.toCatCenter (Padic.coefficientExtensionIntegers l E)
+          (CochainComplex (integralTowerModules l E Y) ℤ) a)
+        DerivedCategory.Q (HomologicalComplex.quasiIso (integralTowerModules l E Y) (.up ℤ)) := by
+  unfold integralScalarDerivedAction
+  rw [(existsUnique_eq (a' := _)).exists.choose_spec]
+  apply CatCenter.ext_of_localization DerivedCategory.Q
+    (HomologicalComplex.quasiIso (integralTowerModules l E Y) (.up ℤ))
+  intro P
+  have h := NatTrans.congr_app
+    ((Localization.fullyFaithfulWhiskeringLeft
+      (DerivedCategory.Q : CochainComplex (integralTowerModules l E Y) ℤ ⥤ _)
+      (HomologicalComplex.quasiIso (integralTowerModules l E Y) (.up ℤ))
+      (DerivedCategory (integralTowerModules l E Y))).map_preimage
+        (X := 𝟭 _) (Y := 𝟭 _)
+        (Functor.whiskerRight (integralScalarChainAction l E Y a) DerivedCategory.Q)) P
+  change ((Localization.fullyFaithfulWhiskeringLeft
+      (DerivedCategory.Q : CochainComplex (integralTowerModules l E Y) ℤ ⥤ _)
+      (HomologicalComplex.quasiIso (integralTowerModules l E Y) (.up ℤ))
+      (DerivedCategory (integralTowerModules l E Y))).preimage (X := 𝟭 _) (Y := 𝟭 _)
+        (Functor.whiskerRight (integralScalarChainAction l E Y a) DerivedCategory.Q)).app
+      (DerivedCategory.Q.obj P) =
+    DerivedCategory.Q.map ((integralScalarChainAction l E Y a).app P) at h
+  rw [CatCenter.localization_app]
+  exact h.trans (congrArg (fun k ↦ DerivedCategory.Q.map (k.app P))
+    (coefficientChain_eq l E Y a))
+
+private theorem coefficientLinear_ext
+    {R : Type*} [Ring R] {C : Type*} [Category* C] [Preadditive C]
+    (s t : Linear R C)
+    (h : ∀ (A B : C) (a : R) (f : A ⟶ B),
+      (letI := s; a • f) = (letI := t; a • f)) : s = t := by
+  cases s with
+  | mk s sm sc =>
+    cases t with
+    | mk t tm tc =>
+      have heq : s = t := by
+        funext A B
+        exact Module.ext' _ _ (fun a f ↦ h A B a f)
+      cases heq
+      rfl
+
+@[instance_reducible]
+private noncomputable def coefficientDerivedLinear :=
+  Localization.linear (Padic.coefficientExtensionIntegers l E)
+    (DerivedCategory.Q : CochainComplex (integralTowerModules l E Y) ℤ ⥤ _)
+    (HomologicalComplex.quasiIso (integralTowerModules l E Y) (.up ℤ))
+
+private theorem coefficientDerivedShift_linear (n : ℤ) :
+    letI := coefficientDerivedLinear l E Y
+    (shiftFunctor (DerivedCategory (integralTowerModules l E Y)) n).Linear
+      (Padic.coefficientExtensionIntegers l E) := by
+  let := coefficientDerivedLinear l E Y
+  let := Localization.functor_linear (Padic.coefficientExtensionIntegers l E)
+    (DerivedCategory.Q : CochainComplex (integralTowerModules l E Y) ℤ ⥤ _)
+    (HomologicalComplex.quasiIso (integralTowerModules l E Y) (.up ℤ))
+  exact Shift.linear_of_localization (Padic.coefficientExtensionIntegers l E)
+    (DerivedCategory.Q : CochainComplex (integralTowerModules l E Y) ℤ ⥤ _)
+    (HomologicalComplex.quasiIso (integralTowerModules l E Y) (.up ℤ)) n
+
+end CoefficientProof
 
 /-- The canonical constant-section action makes the ambient and integral constructible
 derived categories linear, with linear integer shifts. Composition bilinearity is part
@@ -143,7 +344,48 @@ theorem integralConstructible_linear
             (boundedConstructibleDerivedCompleteIntegral D l hl E Y).ι ∧
           (∀ m : ℤ, Functor.Linear (Padic.coefficientExtensionIntegers l E)
             (shiftFunctor (boundedConstructibleDerivedCompleteIntegralCategory D l hl E Y) m)) := by
-  sorry
+  let : Linear (Padic.coefficientExtensionIntegers l E) (integralTowerModules l E Y) :=
+    coefficientModuleLinear l E Y
+  let : Linear (Padic.coefficientExtensionIntegers l E)
+      (completedIntegralModuleSheaves l E Y D hl) := coefficientModuleLinear l E Y
+  let : Linear (Padic.coefficientExtensionIntegers l E)
+      (completedIntegralDerivedCategory l E Y D hl) := coefficientDerivedLinear l E Y
+  let c : ∀ U : Y.ProEtᵒᵖ,
+      Padic.coefficientExtensionIntegers l E →+*
+        (completedIntegralCoefficientSheaf l E Y D hl).obj.obj U := fun U ↦
+    { toFun := integralScalarConstant l E Y U
+      map_one' := congrArg (fun s ↦ s.val U) (map_one (coefficient_scalarSections l E Y))
+      map_mul' := fun a b ↦
+        congrArg (fun s ↦ s.val U) (map_mul (coefficient_scalarSections l E Y) a b)
+      map_zero' := congrArg (fun s ↦ s.val U) (map_zero (coefficient_scalarSections l E Y))
+      map_add' := fun a b ↦
+        congrArg (fun s ↦ s.val U) (map_add (coefficient_scalarSections l E Y) a b) }
+  refine ⟨c, ?_, ?_, coefficientModuleLinear l E Y, ?_,
+    coefficientDerivedLinear l E Y, ?_, ?_, ?_, ?_⟩
+  · intro U V f a
+    exact coefficient_scalar_naturality l E Y f a
+  · intro U n a
+    exact (integralScalarConstant_existsUnique l E Y U a).exists.choose_spec n
+  · intro M N f a U x
+    rfl
+  · exact Localization.functor_linear (Padic.coefficientExtensionIntegers l E)
+      (DerivedCategory.Q : CochainComplex (integralTowerModules l E Y) ℤ ⥤ _)
+      (HomologicalComplex.quasiIso (integralTowerModules l E Y) (.up ℤ))
+  · intro n
+    exact coefficientDerivedShift_linear l E Y n
+  · infer_instance
+  · intro n
+    let P := boundedConstructibleDerivedCompleteIntegral D l hl E Y
+    let R := Padic.coefficientExtensionIntegers l E
+    let : (shiftFunctor (completedIntegralDerivedCategory l E Y D hl) n).Linear R :=
+      coefficientDerivedShift_linear l E Y n
+    let : (shiftFunctor P.FullSubcategory n ⋙ P.ι).Linear R :=
+      Functor.linear_of_iso R (P.ι.commShiftIso n).symm
+    constructor
+    intro X Z f a
+    apply P.ι.map_injective
+    rw [P.ι.map_smul]
+    exact (shiftFunctor P.FullSubcategory n ⋙ P.ι).map_smul a f
 
 end WeilConjectures
 
@@ -153,6 +395,7 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]
   (Y : AlgebraicGeometry.Scheme.{u})
 
+set_option linter.unusedVariables false in
 /-- The coefficient action is the unique linear structure whose scalar maps are
 multiplication by the actual constant sections of the completed coefficient sheaf.
 Source: blueprint order 1460 (blueprint: lem-weil-integral-constructible-linear).
@@ -216,7 +459,18 @@ theorem integralCoefficientLinear_existsUnique :
         ∀ (a : Padic.coefficientExtensionIntegers l E)
           (K K' : DerivedCategory (integralTowerModules l E Y)) (f : K ⟶ K'),
           a • f = (integralScalarDerivedAction l E Y a).app K ≫ f) (linearInst := s) := by
-  sorry
+  let s := coefficientDerivedLinear l E Y
+  have hs : (fun [_linearInst : Linear (Padic.coefficientExtensionIntegers l E)
+      (DerivedCategory (integralTowerModules l E Y))] ↦
+      ∀ (a : Padic.coefficientExtensionIntegers l E)
+        (K K' : DerivedCategory (integralTowerModules l E Y)) (f : K ⟶ K'),
+        a • f = (integralScalarDerivedAction l E Y a).app K ≫ f) (_linearInst := s) := by
+    intro a K K' f
+    rw [coefficientDerived_eq]
+    rfl
+  refine ⟨s, hs, ?_⟩
+  intro t ht
+  exact coefficientLinear_ext t s (fun K K' a f ↦ (ht a K K' f).trans (hs a K K' f).symm)
 
 /-- The canonical constant-section linear structure, fixed by its scalar formula.
 Source: blueprint order 1460 (blueprint: lem-weil-integral-constructible-linear). -/
@@ -233,7 +487,14 @@ lem-weil-linear-abelian-derived-category. -/
 theorem integralCoefficientShift_linear (n : ℤ) :
     (shiftFunctor (DerivedCategory (integralTowerModules l E Y)) n).Linear
       (Padic.coefficientExtensionIntegers l E) := by
-  sorry
+  have hs : integralCoefficientLinear l E Y = coefficientDerivedLinear l E Y := by
+    apply coefficientLinear_ext
+    intro K K' a f
+    rw [(integralCoefficientLinear_existsUnique l E Y).exists.choose_spec]
+    rw [coefficientDerived_eq]
+    rfl
+  rw [hs]
+  exact coefficientDerivedShift_linear l E Y n
 
 /-- Linearity of the integral constructible full subcategory is inherited by fullness.
 Source: blueprint order 1460 (blueprint: lem-weil-integral-constructible-linear). -/
@@ -264,6 +525,18 @@ exactly the ambient constant-section action. -/
 theorem integralConstructibleShift_linear (D : FiniteFieldDatum.{d}) (hl : l ≠ D.p) (n : ℤ) :
     (shiftFunctor (boundedConstructibleDerivedCompleteIntegralCategory D l hl E Y) n).Linear
       (Padic.coefficientExtensionIntegers l E) := by
-  sorry
+  let : Linear (Padic.coefficientExtensionIntegers l E)
+      (completedIntegralDerivedCategory l E Y D hl) := integralCoefficientLinear l E Y
+  let P := boundedConstructibleDerivedCompleteIntegral D l hl E Y
+  let R := Padic.coefficientExtensionIntegers l E
+  let : (shiftFunctor (completedIntegralDerivedCategory l E Y D hl) n).Linear R :=
+    integralCoefficientShift_linear l E Y n
+  let : (shiftFunctor P.FullSubcategory n ⋙ P.ι).Linear R :=
+    Functor.linear_of_iso R (P.ι.commShiftIso n).symm
+  constructor
+  intro X Z f a
+  apply P.ι.map_injective
+  rw [P.ι.map_smul]
+  exact (shiftFunctor P.FullSubcategory n ⋙ P.ι).map_smul a f
 
 end WeilConjectures

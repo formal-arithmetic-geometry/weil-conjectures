@@ -219,7 +219,73 @@
    "where": "sketch statement"
   }
  ],
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": [
+    "AlgebraicGeometry.Scheme.IsConstructibleSheaf.cokernel",
+    "AlgebraicGeometry.Scheme.IsConstructibleSheaf.kernel"
+   ]
+  },
+  "slopmaster2": {
+   "state": "closed",
+   "decls": [
+    {
+     "name": "AlgebraicGeometry.Scheme.IsConstructibleSheaf.cokernel",
+     "module": "WeilConjectures.ConstructibleSheaf.KernelCokernel",
+     "lines": [
+      729,
+      751
+     ],
+     "kind": "theorem",
+     "sorry": false
+    },
+    {
+     "name": "AlgebraicGeometry.Scheme.IsConstructibleSheaf.kernel",
+     "module": "WeilConjectures.ConstructibleSheaf.KernelCokernel",
+     "lines": [
+      703,
+      727
+     ],
+     "kind": "theorem",
+     "sorry": false
+    },
+    {
+     "name": "AlgebraicGeometry.Scheme.IsConstructibleSheaf.biprod",
+     "module": "WeilConjectures.ConstructibleSheaf.KernelCokernel",
+     "lines": [
+      771,
+      797
+     ],
+     "kind": "theorem",
+     "sorry": false
+    },
+    {
+     "name": "AlgebraicGeometry.Etale.DerivedCategory.constructibleHomology_isTriangulated",
+     "module": "WeilConjectures.CategoryTheory.DerivedCategory.Constructible",
+     "lines": [
+      283,
+      290
+     ],
+     "kind": "theorem",
+     "sorry": false
+    },
+    {
+     "name": "AlgebraicGeometry.Scheme.IsConstructibleSheaf.of_shortExact",
+     "module": "WeilConjectures.ConstructibleSheaf.KernelCokernel",
+     "lines": [
+      799,
+      828
+     ],
+     "kind": "theorem",
+     "sorry": false
+    }
+   ],
+   "missing": [],
+   "open": []
+  }
+ },
  "chapter": "sec-proper-base-change",
  "unit": "sk-thm-properbasechange",
  "split_report": {
@@ -250,11 +316,16 @@
   "sorry_after": []
  },
  "blueprint_update": {
-  "snapshot": "main-20261015",
-  "statement": "Let $\\mathcal A=\\mathrm{Mod}_\\Lambda$ with $\\Lambda$ a ring. The kernel and\nthe cokernel of a morphism between constructible sheaves on $\\et X$, and\nfinite direct sums of constructible sheaves, are constructible. If\n$\\Lambda$ is finite, the middle term of a short exact sequence whose outer\nterms are constructible is constructible as well; consequently, for a\nfinite ring $\\Lambda$, the constructible sheaves form a weak Serre\nsubcategory of $\\shv{\\et X}$.",
+  "snapshot": "main-20261023-1620",
+  "commit": "7284bb09daf97437d544c51882b325f9c52cd345",
+  "changed": [
+   "statement",
+   "proof"
+  ],
+  "statement": "Let $\\mathcal A=\\mathrm{Mod}_\\Lambda$ with $\\Lambda$ a ring. The cokernel\nof a morphism between constructible sheaves on $\\et X$, and finite direct\nsums of constructible sheaves, are constructible; if $\\Lambda$ is\nNoetherian, so is the kernel of such a morphism. If $\\Lambda$ is finite\n(hence Noetherian), the middle term of a short exact sequence whose outer\nterms are constructible is constructible as well; consequently, for a\nfinite ring $\\Lambda$, the constructible sheaves form a weak Serre\nsubcategory of $\\shv{\\et X}$.",
   "proof": [
    {
-    "text": "Let $\\varphi\\colon\\mathcal F\\to\\mathcal F'$ be a morphism of constructible\nsheaves. By [lemma-constructible-common-refinement] and\n[lemma-constructible-of-refines] there is one stratification\n$(\\iota_k\\colon Z_k\\to X)_k$ such that all $\\iota_k^*\\mathcal F$ and\n$\\iota_k^*\\mathcal F'$ are finite locally constant. Since $\\iota_k^*$ is\nexact, $\\iota_k^*\\ker\\varphi=\\ker(\\iota_k^*\\varphi)$ and\n$\\iota_k^*\\operatorname{coker}\\varphi=\\operatorname{coker}(\\iota_k^*\\varphi)$\nare finite locally constant by [lemma-constructible-flc-serre], so\n$\\ker\\varphi$ and $\\operatorname{coker}\\varphi$ are constructible with\nrespect to the same stratification. The same argument, using exactness of\n$\\iota_k^*$ and the extension part of [lemma-constructible-flc-serre],\nhandles extensions, and [lemma-constructible-flc-biproduct] handles\nfinite direct sums. A full subcategory of an abelian category closed under\nkernels, cokernels and extensions is a weak Serre subcategory.",
+    "text": "Let $\\varphi\\colon\\mathcal F\\to\\mathcal F'$ be a morphism of constructible\nsheaves. By [lemma-constructible-common-refinement] and\n[lemma-constructible-of-refines] there is one stratification\n$(\\iota_k\\colon Z_k\\to X)_k$ such that all $\\iota_k^*\\mathcal F$ and\n$\\iota_k^*\\mathcal F'$ are finite locally constant. Since $\\iota_k^*$ is\nexact, $\\iota_k^*\\ker\\varphi=\\ker(\\iota_k^*\\varphi)$ and\n$\\iota_k^*\\operatorname{coker}\\varphi=\\operatorname{coker}(\\iota_k^*\\varphi)$\nare finite locally constant by [lemma-constructible-flc-serre] (for the\nkernel, $\\Lambda$ Noetherian), so\n$\\ker\\varphi$ and $\\operatorname{coker}\\varphi$ are constructible with\nrespect to the same stratification. The same argument, using exactness of\n$\\iota_k^*$ and the extension part of [lemma-constructible-flc-serre],\nhandles extensions, and [lemma-constructible-flc-biproduct] handles\nfinite direct sums. A full subcategory of an abelian category closed under\nkernels, cokernels and extensions is a weak Serre subcategory.",
     "uses": [
      "lemma-constructible-common-refinement",
      "lemma-constructible-of-refines",
@@ -262,23 +333,8 @@
      "lemma-constructible-flc-biproduct"
     ],
     "elementary": false
-   },
-   {
-    "text": "Work on an affine open of $T$, and refine the finitely many partitions of\nthe given constructible sheaves to one common partition, as in the\ndefinition of a constructible complex. Inverse image to a part is exact, by\nthe stalkwise exactness of geometric stalks. It suffices to prove the\nassertions for finite locally constant sheaves on each part, locally for the\ntopology of the small etale site.",
-    "uses": [],
-    "elementary": null
-   },
-   {
-    "text": "For a map between two such sheaves, trivialize both near a geometric point.\nThe images of the finitely many elements of the first constant module are\nsections of the second. After an etale refinement each is a specified\nconstant section. The map is then induced by a map of finite modules, whose\nkernel and cokernel give the constant kernel and cokernel sheaves. These\ndescriptions prove the first two assertions.",
-    "uses": [],
-    "elementary": null
-   },
-   {
-    "text": "Consider an extension $0\\to F'\\to F\\to F''\\to0$ with $F'$ and $F''$ finite\nlocally constant. Fix a geometric point $\\bar t$ and trivialize both outer\nsheaves on an etale neighbourhood. By the exactness of geometric stalks, the\nmiddle stalk $B=F_{\\bar t}$ is an extension of two finite modules and is\nfinite. Represent each of its finitely many elements by a section of $F$ on\na common pointed etale neighbourhood. All addition, zero and\nscalar-multiplication relations of $B$ hold after a further common\nrefinement: there are only finitely many relations since $B$ and $\\Lambda$\nare finite, and equality in a stalk means equality on such a neighbourhood.\nAlso impose the finitely many equalities identifying the chosen sections of\nthe submodule with the constant sections of $F'$, and their images with the\nconstant sections of $F''$. We obtain a map from the constant exact sequence\nof stalk modules to the given exact sequence, which is the identity on the\nouter terms. The kernel--cokernel argument for a map of short exact\nsequences makes the middle map an isomorphism; equivalently, apply the same\nargument on every stalk and conservativity of geometric stalks. Thus $F$ is\nfinite locally constant near every point. Applying this on the common\npartition proves extension closure and completes the proof.",
-    "uses": [],
-    "elementary": null
    }
   ],
-  "note": "the current blueprint (aligned 2026-10-15 with the six-functors notes) states or proves this differently; a worker who touches the node follows it"
+  "note": "the current blueprint (main-20261023-1620, weil-conjectures-blueprint 7284bb09da) states or proves this differently; the node is proved in Lean: recorded 2026-10-23, not reopened"
  }
 }

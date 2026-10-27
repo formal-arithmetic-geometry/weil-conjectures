@@ -1,0 +1,223 @@
+{
+ "id": "lem-per-integral-affine-cover-criterion",
+ "kind": "statement",
+ "title": "Integrality from a pairwise intersecting affine domain cover",
+ "statement": "Let $Y$ be a scheme [def-pc-scheme], let $I$ be a nonempty set, and let $(V_i)_{i\\in I}$ be an affine open covering of $Y$, with specified isomorphisms $V_i\\cong\\operatorname{Spec}A_i$ for commutative rings $A_i$ [def-weil-affine-spectrum]. Suppose that every $A_i$ is an integral domain (a nonzero ring in which $xy=0$ implies $x=0$ or $y=0$), and that $V_i\\cap V_j\\ne\\varnothing$ for all $i,j\\in I$. Then $Y$ is integral [def-pc-integral-scheme]. No separatedness or finiteness hypothesis is imposed.",
+ "source": {
+  "document": "literature/stacks-project/properties.tex",
+  "place": "Tags 01OL (lemma-characterize-reduced), 01OM (lemma-characterize-irreducible), and 01ON (lemma-characterize-integral): combined affine-cover criterion, using their displayed statements and proofs, lines 197–276."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-affine-spectrum",
+  "def-pc-integral-scheme"
+ ],
+ "proof": [
+  {
+   "text": "For each $i$, the domain hypothesis and [lem-weil-pbc-spec-domain-stalks-function-field](2) make $\\operatorname{Spec}A_i$ integral. The specified scheme isomorphism identifies this scheme with $V_i$, so $V_i$ is integral. By the explicit equivalence in [def-pc-integral-scheme], every $V_i$ is nonempty, reduced and irreducible.",
+   "uses": [
+    "lem-weil-pbc-spec-domain-stalks-function-field",
+    "def-pc-integral-scheme"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/properties.tex",
+    "place": "Tag 01ON, lemma-characterize-integral; domain spectra"
+   }
+  },
+  {
+   "text": "Apply [lem-trf-reduced-scheme-open-cover] to the given open cover and the reducedness of its members from Step 1. Thus $Y$ is reduced. Choose $i_0\\in I$; the nonempty subset $V_{i_0}\\subseteq Y$ also shows that $Y$ is nonempty.",
+   "uses": [
+    "lem-trf-reduced-scheme-open-cover"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/properties.tex",
+    "place": "Tag 01OL, lemma-characterize-reduced, implication (2) to (1)"
+   }
+  },
+  {
+   "text": "We verify irreducibility using [def-weil-irreducible-components], following Tag 01OM. Suppose $Y=Z_1\\cup Z_2$ with $Z_1,Z_2$ closed. Irreducibility of $V_{i_0}$ implies that $V_{i_0}\\subseteq Z_1$ or $V_{i_0}\\subseteq Z_2$; interchange the labels so the former holds. For each $j$, $O=V_{i_0}\\cap V_j$ is a nonempty open subset of $V_j$ contained in $Z_1$. If $V_j\\not\\subseteq Z_1$, then $P=V_j\\setminus Z_1$ is another nonempty open subset of $V_j$, disjoint from $O$. Their closed complements $V_j\\setminus O$ and $V_j\\setminus P$ would cover $V_j$, with neither equal to $V_j$, contradicting its irreducibility. Hence every $V_j\\subseteq Z_1$. Since these opens cover $Y$, $Y=Z_1$. Together with nonemptiness, this proves irreducibility. Intersections here are only open subsets; they are never assumed affine.",
+   "uses": [
+    "def-weil-irreducible-components"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/properties.tex",
+    "place": "Tag 01OM, lemma-characterize-irreducible, proof of (2) implies (1)"
+   }
+  },
+  {
+   "text": "Steps 2 and 3 give nonemptiness, reducedness and irreducibility. The equivalence stated in [def-pc-integral-scheme] (Tag 01ON) therefore implies that $Y$ is integral.",
+   "uses": [
+    "def-pc-integral-scheme"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/properties.tex",
+    "place": "Tag 01ON, lemma-characterize-integral"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-spec-domain-stalks-function-field",
+  "def-pc-integral-scheme",
+  "lem-trf-reduced-scheme-open-cover",
+  "def-weil-irreducible-components"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/properties.tex",
+  "place": "Tags 01OL, 01OM (proof of (2) implies (1)), and 01ON, labels lemma-characterize-reduced, lemma-characterize-irreducible, lemma-characterize-integral."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "lem-per-integral-affine-cover-criterion: A scheme covered by a nonempty family of integral affine open subschemes with pairwise nonempty intersections is integral",
+   "results": "OK: 8 hits; AlgebraicGeometry.IsIntegral.mk, AlgebraicGeometry.Scheme.affineOpenCover, AlgebraicGeometry.isIntegral_of_isOpenImmersion, AlgebraicGeometry.instIsIntegralToSchemeOfNonemptyCarrierCarrierCommRingCat, AlgebraicGeometry.isIntegral_of_isAffine_of_isDomain, AlgebraicGeometry.Scheme.quasiSeparatedSpace_of_isOpenCover, AlgebraicGeometry.Scheme.openCover_affineOpenCover, AlgebraicGeometry.IsIntegral; ",
+   "date": "2026-10-24",
+   "verdict": "no match: Properties.lean gives integral iff irreducible and reduced, and reducedness on an open cover; none supplies the pairwise-intersection irreducibility argument. This needs several results and an argument, not one-line specialization."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "lem-per-integral-affine-cover-criterion: gluing integral affine open schemes with pairwise intersecting nonempty opens proves the whole scheme is integral",
+   "results": "OK: 8 hits; AlgebraicGeometry.IsIntegral, AlgebraicGeometry.isIntegral_of_isAffine_of_isDomain, AlgebraicGeometry.instIsIntegralToSchemeOfNonemptyCarrierCarrierCommRingCat, AlgebraicGeometry.isIntegralHom_iff, AlgebraicGeometry.Scheme.AffineCover, AlgebraicGeometry.iSup_affineOpens_eq_top, AlgebraicGeometry.Scheme.isAffine_affineCover, AlgebraicGeometry.instIsAffineXSchemeAffineCover; ",
+   "date": "2026-10-24",
+   "verdict": "no match: Properties.lean gives integral iff irreducible and reduced, and reducedness on an open cover; none supplies the pairwise-intersection irreducibility argument. This needs several results and an argument, not one-line specialization."
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.IsIntegral",
+   "results": "OK: 12 hits; AlgebraicGeometry.IsIntegral, AlgebraicGeometry.isReduced_of_isIntegral, AlgebraicGeometry.IsIntegral.nonempty, AlgebraicGeometry.instIsIntegralSpecOfIsDomainCarrier, AlgebraicGeometry.affine_isIntegral_iff, AlgebraicGeometry.irreducibleSpace_of_isIntegral, AlgebraicGeometry.IsIntegral.of_isIso, AlgebraicGeometry.isIntegral_of_irreducibleSpace_of_isReduced; ",
+   "date": "2026-10-24",
+   "verdict": "no match: Properties.lean gives integral iff irreducible and reduced, and reducedness on an open cover; none supplies the pairwise-intersection irreducibility argument. This needs several results and an argument, not one-line specialization."
+  },
+  {
+   "tool": "grep",
+   "query": "isIntegral_iff|isIntegral_of|irreducibleSpace_of|IsIntegral.*[Cc]over|[Cc]over.*IsIntegral",
+   "results": "OK: 25 hits; Mathlib/AlgebraicGeometry/EllipticCurve/Reduction.lean, Mathlib/AlgebraicGeometry/EllipticCurve/Reduction.lean, Mathlib/AlgebraicGeometry/EllipticCurve/Reduction.lean, Mathlib/AlgebraicGeometry/Normalization.lean, Mathlib/AlgebraicGeometry/Normalization.lean, Mathlib/AlgebraicGeometry/Normalization.lean, Mathlib/AlgebraicGeometry/Artinian.lean, Mathlib/AlgebraicGeometry/Artinian.lean; ",
+   "date": "2026-10-24",
+   "verdict": "no match: Properties.lean gives integral iff irreducible and reduced, and reducedness on an open cover; none supplies the pairwise-intersection irreducibility argument. This needs several results and an argument, not one-line specialization."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "lem-per-integral-affine-cover-criterion: A nonempty open cover with coordinate domains and nonempty pairwise intersections gives an irreducible reduced scheme",
+   "results": "OK: 8 hits; AlgebraicGeometry.isIntegral_iff_irreducibleSpace_and_isReduced, AlgebraicGeometry.isIntegral_of_irreducibleSpace_of_isReduced, AlgebraicGeometry.IsReduced.of_openCover, AlgebraicGeometry.irreducibleSpace_of_isIntegral, AlgebraicGeometry.Scheme.instInhabitedOpenCover, AlgebraicGeometry.IsIntegral, AlgebraicGeometry.instIsAffineXSchemeAffineCover, AlgebraicGeometry.Scheme.AffineCover; ",
+   "date": "2026-10-24",
+   "verdict": "no match: Properties.lean gives integral iff irreducible and reduced, and reducedness on an open cover; none supplies the pairwise-intersection irreducibility argument. This needs several results and an argument, not one-line specialization."
+  },
+  {
+   "tool": "grep",
+   "query": "IsReduced.of_openCover|affine_isIntegral_iff|isIntegral_iff_irreducibleSpace_and_isReduced|isIntegral_of_irreducibleSpace_of_isReduced",
+   "results": "OK: 15 hits; Mathlib/AlgebraicGeometry/Properties.lean, Mathlib/AlgebraicGeometry/Properties.lean, Mathlib/AlgebraicGeometry/Properties.lean, Mathlib/AlgebraicGeometry/Properties.lean, Mathlib/AlgebraicGeometry/Properties.lean, Mathlib/AlgebraicGeometry/Geometrically/Integral.lean, Mathlib/AlgebraicGeometry/Geometrically/Integral.lean, Mathlib/AlgebraicGeometry/Geometrically/Integral.lean; ",
+   "date": "2026-10-24",
+   "verdict": "no match: Properties.lean gives integral iff irreducible and reduced, and reducedness on an open cover; none supplies the pairwise-intersection irreducibility argument. This needs several results and an argument, not one-line specialization."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "lem-per-integral-affine-cover-criterion: a scheme covered by nonempty integral affine opens with pairwise nonempty intersections is integral",
+   "results": "{\"t\": \"2026-10-24T07:30:40Z\", \"tool\": \"leanfinder\", \"query\": \"lem-per-integral-affine-cover-criterion: a scheme covered by nonempty integral affine opens with pairwise nonempty intersections is integral\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsIntegral\", \"AlgebraicGeometry.isIntegral_of_isAffine_of_isDomain\", \"AlgebraicGeometry.instIsIntegralToSchemeOfNonemptyCarrierCarrierCommRingCat\", \"AlgebraicGeometry.irreducibleSpace_of_isIntegral\", \"AlgebraicGeometry.affine_isIntegral_iff\", \"AlgebraicGeometry.instIsAffineXSchemeAffineCover\", \"AlgebraicGeometry.Scheme.AffineCover\", \"AlgebraicGeometry.Scheme.isAffine_affineCover\"], \"digest\": \"4e17002847b50fe3\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: read hits; these are affine integrality, open-subscheme integrality, reducedness and irreducibility characterizations, not the pairwise-intersection cover criterion."
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.IsIntegral",
+   "results": "{\"t\": \"2026-10-24T07:31:24Z\", \"tool\": \"loogle\", \"query\": \"AlgebraicGeometry.IsIntegral\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsIntegral\", \"AlgebraicGeometry.isReduced_of_isIntegral\", \"AlgebraicGeometry.IsIntegral.nonempty\", \"AlgebraicGeometry.instIsIntegralSpecOfIsDomainCarrier\", \"AlgebraicGeometry.affine_isIntegral_iff\", \"AlgebraicGeometry.irreducibleSpace_of_isIntegral\", \"AlgebraicGeometry.IsIntegral.of_isIso\", \"AlgebraicGeometry.isIntegral_of_irreducibleSpace_of_isReduced\"], \"digest\": \"7a7a17f6134d8f44\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: read hits; these are affine integrality, open-subscheme integrality, reducedness and irreducibility characterizations, not the pairwise-intersection cover criterion."
+  },
+  {
+   "tool": "grep",
+   "query": "isIntegral_iff|isIntegral_of|IsIntegral.*[Cc]over|[Cc]over.*IsIntegral",
+   "results": "{\"t\": \"2026-10-24T07:31:24Z\", \"tool\": \"grep\", \"query\": \"isIntegral_iff|isIntegral_of|IsIntegral.*[Cc]over|[Cc]over.*IsIntegral\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/Geometrically/Integral.lean\", \"Mathlib/AlgebraicGeometry/Geometrically/Integral.lean\", \"Mathlib/AlgebraicGeometry/Geometrically/Integral.lean\", \"Mathlib/AlgebraicGeometry/Geometrically/Integral.lean\", \"Mathlib/AlgebraicGeometry/Geometrically/Integral.lean\", \"Mathlib/AlgebraicGeometry/Properties.lean\", \"Mathlib/AlgebraicGeometry/Properties.lean\", \"Mathlib/AlgebraicGeometry/Properties.lean\"], \"digest\": \"483340b65f6342b4\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: read hits; these are affine integrality, open-subscheme integrality, reducedness and irreducibility characterizations, not the pairwise-intersection cover criterion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "lem-per-integral-affine-cover-criterion: irreducible reduced scheme from an open cover of domains whose members meet pairwise",
+   "results": "{\"t\": \"2026-10-24T07:33:01Z\", \"tool\": \"leanfinder\", \"query\": \"lem-per-integral-affine-cover-criterion: irreducible reduced scheme from an open cover of domains whose members meet pairwise\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.isIntegral_of_irreducibleSpace_of_isReduced\", \"AlgebraicGeometry.isIntegral_iff_irreducibleSpace_and_isReduced\", \"AlgebraicGeometry.IsReduced.of_openCover\", \"AlgebraicGeometry.IsIntegral\", \"AlgebraicGeometry.irreducibleSpace_of_isIntegral\", \"AlgebraicGeometry.isReduced_of_isIntegral\", \"AlgebraicGeometry.instIsAffineXSchemeAffineCover\", \"AlgebraicGeometry.instQuasiSoberCarrierCarrierCommRingCat\"], \"digest\": \"9a721fd0fb70d5f0\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: read hits; these are affine integrality, open-subscheme integrality, reducedness and irreducibility characterizations, not the pairwise-intersection cover criterion."
+  },
+  {
+   "tool": "leansearch",
+   "query": "lem-per-integral-affine-cover-criterion: integral scheme from pairwise intersecting affine domain open cover",
+   "results": "{\"t\": \"2026-10-24T07:33:02Z\", \"tool\": \"leansearch\", \"query\": \"lem-per-integral-affine-cover-criterion: integral scheme from pairwise intersecting affine domain open cover\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.affineOpenCover\", \"AlgebraicGeometry.Scheme.affineCover\", \"AlgebraicGeometry.Scheme.affineBasisCoverOfAffine\", \"AlgebraicGeometry.Scheme.directedAffineCover\", \"AlgebraicGeometry.Scheme.isBasis_affineOpens\", \"AlgebraicGeometry.Scheme.affineBasisCover\", \"AlgebraicGeometry.Scheme.quasiSeparatedSpace_of_isOpenCover\", \"AlgebraicGeometry.Scheme.AffineCover.mk\"], \"digest\": \"62a3a5b6dc38b157\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: read hits; these are affine integrality, open-subscheme integrality, reducedness and irreducibility characterizations, not the pairwise-intersection cover criterion."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-per-integrality-prime-neighbourhood",
+  "date": "2026-10-24",
+  "group": "Q109"
+ },
+ "chapter": "sec-deligne-laumon-a1",
+ "unit": "sk-p-dl-a1-perverse",
+ "blueprint": {
+  "from": {
+   "node": "lem-per-artin-gabber-affine-curve",
+   "place": "Ancestor proof Step 3, regular local model and purity, through the small-singular-locus completion in Temkin Theorem 3.4.1: quasi-excellence of completed rational affine charts is supplied by Theorem 2.1.6. Auxiliary completion proof: Lemma 4.4 and Definition 3.2, printed pp.3,5–6; specialization with excellent B_q and quasi-excellent B/J. This auxiliary lemma supplies Spreading a local alteration diagram with its proper covering witness. Finite-presentation spreading paragraph: integrality of the finitely many descended scheme models after further principal shrinking. Affine-cover integrality criterion used after killing localization kernels; supplies the gluing step in the integrality detail.",
+   "via": [
+    "lem-per-integrality-prime-neighbourhood",
+    "lem-per-local-alteration-diagram-spreading",
+    "lem-per-qe-alteration-regular-neighbourhood",
+    "lem-per-qe-complete-pair-lifting",
+    "lem-per-small-divisor-formal-completion",
+    "lem-per-small-singular-locus-resolution",
+    "lem-per-qe-ordinary-regular-resolution",
+    "lem-per-characteristic-zero-log-resolution-independence",
+    "lem-per-complete-local-rigidification-comparison",
+    "lem-per-gabber-absolute-equivariant-modification",
+    "lem-per-gabber-log-smooth-equivariant-modification",
+    "lem-per-trait-prime-to-ell-log-alteration",
+    "lem-per-gabber-regular-pair-purity",
+    "lem-per-absolute-gysin-purity",
+    "lem-per-potential-dualizing-regular-unit",
+    "lem-per-finite-regular-reduction-dualizing",
+    "lem-per-qbar-generic-duality-model",
+    "lem-per-qbar-middle-tstructure"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-per-integral-affine-cover-criterion",
+  "worker": "stage1",
+  "summary": "Q23: checked Tags 01OL, 01OM and 01ON against the source, and used existing Mathlib leaves for domain spectra and locality of reducedness. Wrote the closed-cover propagation argument explicitly, without assuming overlaps affine, and retained the statement and all prior search records. No new nodes.",
+  "blueprint": "Auxiliary integrality gluing step in the existing ancestry from lem-per-artin-gabber-affine-curve Step 3 through lem-per-integrality-prime-neighbourhood; the current latest blueprint unit and ancestor were read. This is a generic scheme-theoretic tool below the unit route, not a replacement of its steps."
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q23-e96957427",
+  "group": "Q23",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q23-e96957427 (reviewer sub-agent of L); spot-checked: I read the item in full, the statements of all four cited nodes, and Stacks properties.tex lines 190-276 (Tags 01OL, 01OM, 01ON). The statement matches 01OM(2)=>(1) combined with 01OL and 01ON and is not weakened. I tested it on a singleton cover, two disjoint copies of Spec k (excluded by the overlap hypothesis, correctly), the line with doubled origin (no separatedness needed) and Spec k[x]/(x^2) (excluded, not a domain). Step 1: lem-weil-pbc-spec-domain-stalks-function-field(2) says Spec of a domain is integral; the scheme isomorphism carries this to V_i; def-pc-integral-scheme's stated equivalence gives nonempty, reduced and irreducible. Step 2: lem-trf-reduced-scheme-open-cover holds for any open cover, so Y is reduced; Y is nonempty because I is nonempty. Step 3 writes out the 01OM density argument correctly: O=V_i0∩V_j and P=V_j minus Z_1 are disjoint nonempty opens of V_j, so their proper closed complements cover V_j, contradicting irreducibility; overlaps are never assumed affine; correctly marked elementary. Step 4 applies the equivalence. There are no new nodes, and a search of the DAG found no node already stating this criterion. Batch-5 flag on lem-trf-reduced-scheme-open-cover: it is a Mathlib leaf for locality of reducedness (Stacks 01J0/01J1, Mathlib IsReduced.iff_of_openCover) whose only stmt_deps are def-pc-scheme and def-pc-reduced-scheme. It is not part of the trace formula or Poincare duality or their proofs, so I accept the citation. No tool_uses entry is needed, and no SGA source is used."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.IntegralAffineCoverCriterion",
+  "declaration": "AlgebraicGeometry.isIntegral_of_pairwise_intersecting_affine_cover",
+  "file": "lean/Sheaf/AlgebraicGeometry/IntegralAffineCoverCriterion.lean",
+  "statement": "theorem isIntegral_of_pairwise_intersecting_affine_cover (Y : Scheme.{u}) (I : Type v) [Nonempty I] (V : I → Y.Opens) (A : I → CommRingCat.{u}) (e : ∀ i : I, (V i).toScheme ≅ Spec (A i)) (hcover : iSup V = ⊤) (hDomain : ∀ i : I, IsDomain (A i)) (hinter : ∀ i j : I, ((V i : Set Y) ∩ (V j : Set Y)).Nonempty) : IsIntegral Y",
+  "branch": "sheaf-dag",
+  "by": "Q121",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-9bdecf9af",
+  "group": "Q121",
+  "result": "pass",
+  "note": "Clause-by-clause match: Y:Scheme.{u}, I:Type v [Nonempty I], V:I→Y.Opens with iSup V=⊤, e:(V i).toScheme≅Spec(A i), IsDomain (A i), pairwise ((V i)∩(V j)).Nonempty ⊢ IsIntegral Y; this is Stacks 01OL/01OM/01ON, no extra hypotheses. The three stmt_dep records are unchanged existing Mathlib records; lean.statement is verbatim. No duplicate in Mathlib or the project. sorry only, no defs, the docstrings carry the source and the 4 proof steps. Not recompiled (no change). H11 advisory: the second-reading section is a non-reading under the dispatcher policy, and the worker report matches the node."
+ }
+}

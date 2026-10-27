@@ -1,0 +1,319 @@
+{
+ "id": "lem-sfb-closed-pushforward-pseudocoherence",
+ "kind": "statement",
+ "title": "Closed pushforward detects absolute finite-stage pseudo-coherence",
+ "statement": "Let $i:Z\\hookrightarrow P$ be a closed immersion of schemes [def-pc-scheme, def-weil-closed-immersion]. Suppose that the degree-zero complex $(i_*\\mathcal O_Z)[0]$ is pseudo-coherent on $P$ [def-pur-pseudo-coherent-complex]. For every integer $m$ and every $K\\in D(\\mathcal O_Z)$ [def-pc-derived-category], $K$ is $m$-pseudo-coherent on $Z$ if and only if $Ri_*K$ is $m$-pseudo-coherent on $P$ [def-sfb-m-pseudo-coherent-complex, def-pc-derived-direct-image]. Here $i_*\\mathcal O_Z$ is the ordinary direct-image structure module. No quasi-coherence, boundedness or Noetherian hypothesis on $K$, $Z$ or $P$ is assumed.",
+ "source": {
+  "document": "literature/stacks-project/perfect.tex",
+  "place": "Tag 09VA, lemma-closed-push-pseudo-coherent, restricted from ringed spaces to schemes."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-closed-immersion",
+  "def-pur-pseudo-coherent-complex",
+  "def-pc-derived-category",
+  "def-sfb-m-pseudo-coherent-complex",
+  "def-pc-derived-direct-image"
+ ],
+ "proof": [
+  {
+   "text": "Write $B=i_*\\mathcal O_Z$. The underlying abelian-sheaf functor $i_*$ is exact by [lem-sc-closed-immersion-pushforward-exact]. Kernels of module maps are sectionwise kernels and cokernels are sheafified sectionwise cokernels [def-weil-sheaf-of-modules-category]; these are the same underlying abelian sheaves with the induced scalar action. Thus exactness also holds for $i_*:\\operatorname{Mod}(\\mathcal O_Z)\\to\\operatorname{Mod}(\\mathcal O_P)$. Applying it to kernels, images and their quotients gives $H^q(i_*E^\\bullet)=i_*H^q(E^\\bullet)$, naturally. The closed-pushforward stalk formula [lem-sc-closed-pushforward-abelian-stalks] shows that $i_*F=0$ implies $F=0$, and that the pushforward vanishes on $P\\setminus i(Z)$. Indeed, if all germs of a section are zero, it vanishes on a neighbourhood of every point and hence vanishes by the sheaf axiom.",
+   "uses": [
+    "lem-sc-closed-immersion-pushforward-exact",
+    "def-weil-sheaf-of-modules-category",
+    "lem-sc-closed-pushforward-abelian-stalks"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/perfect.tex",
+    "place": "Tag 09VA, lemma-closed-push-pseudo-coherent, opening paragraph: exactness and closed-support stalks"
+   }
+  },
+  {
+   "text": "Let $\\mathcal E^\\bullet$ be any complex representing $E\\in D(\\mathcal O_Z)$. By [def-pc-derived-direct-image] and [def-pc-ringed-spaces-derived-direct-image], $Ri_*E$ is represented by $i_*\\mathcal I^\\bullet$ for any K-injective resolution $\\mathcal E^\\bullet\\to\\mathcal I^\\bullet$, where the module direct image is $W\\mapsto\\mathcal F(i^{-1}W)$ with $\\mathcal O_P$ acting through $i^\\sharp$. This module functor is exact by Step 1, so by [lem-weil-pbc-exact-functor-derived-factorization] termwise $i_*$ carries quasi-isomorphisms to quasi-isomorphisms. Hence $i_*\\mathcal E^\\bullet\\to i_*\\mathcal I^\\bullet$ is a quasi-isomorphism and $Ri_*E\\cong Q(i_*\\mathcal E^\\bullet)\\cong F_D(E)$, naturally, with $F_D$ the triangulated functor of that node. Thus $Ri_*E$ is represented by termwise $i_*\\mathcal E^\\bullet$ for any representative, without boundedness; it commutes with shifts, and a distinguished triangle $A\\to E\\to C\\to A[1]$ goes to the distinguished triangle $F_D(A)\\to F_D(E)\\to F_D(C)\\to F_D(A)[1]$, whose terms are the termwise pushforwards. For an open $U\\subset P$, with $V=i^{-1}U$ and $i_U:V\\hookrightarrow U$, the equality $(i_*F)|_U=(i_U)_*(F|_V)$ follows on an open $W\\subset U$ from both sides being $F(i^{-1}W)$. It holds termwise for complexes as well. We can therefore shrink the ambient open throughout the proof.",
+   "uses": [
+    "def-pc-derived-direct-image",
+    "def-pc-ringed-spaces-derived-direct-image",
+    "lem-weil-pbc-exact-functor-derived-factorization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/perfect.tex",
+    "place": "Tag 09VA, lemma-closed-push-pseudo-coherent, opening paragraph and the repeated shrinking of X"
+   }
+  },
+  {
+   "text": "We use [def-sfb-m-pseudo-coherent-complex] on schemes and the identical approximation condition on the site of open subsets of a scheme. Slice restriction there is ordinary restriction to the corresponding open, so the cited ringed-site lemmas apply to this condition. It is local by combining open covers. An $m$-approximation is also a $p$-approximation for $p\\ge m$: at $p>m$ its cohomology map is already invertible. Such an approximation gives a local upper cohomology bound, namely the maximum of $m$ and the largest nonzero degree of its bounded strictly perfect source. If $H^q(E)=0$ for all $q\\ge m$, the zero complex and its map to $E$ already give an $m$-approximation.",
+   "uses": [
+    "def-sfb-m-pseudo-coherent-complex"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/perfect.tex",
+    "place": "Tag 09VA, lemma-closed-push-pseudo-coherent, both induction paragraphs: locality, boundedness and the case p<m"
+   }
+  },
+  {
+   "text": "For every integer $p$ and finite $r\\ge0$, put $A=\\mathcal O_Z^{\\oplus r}[-p]$. It is $a$-pseudo-coherent for every $a$, using its identity as a strictly perfect approximation [def-pc-perfect-complex, def-sfb-m-pseudo-coherent-complex]. Its termwise pushforward is $B^{\\oplus r}[-p]$. By the hypothesis and [def-pur-pseudo-coherent-complex], locally choose a bounded-above finite-free model $F^\\bullet$ of $B[0]$. Then $(F^\\bullet)^{\\oplus r}[-p]$ models $B^{\\oplus r}[-p]$. Its brutal truncation in degrees $\\ge a$ maps to the model, is bounded finite free, and induces isomorphisms above $a$ and a surjection at $a$. Thus $i_*A$ is $a$-pseudo-coherent for every $a$ as well, including $a=m$ and $m+1$.",
+   "uses": [
+    "def-pc-perfect-complex",
+    "def-sfb-m-pseudo-coherent-complex",
+    "def-pur-pseudo-coherent-complex"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/perfect.tex",
+    "place": "Tag 09VA, lemma-closed-push-pseudo-coherent, both displayed triangles: pseudo-coherence of the shifted finite sums of the structure module"
+   }
+  },
+  {
+   "text": "Fix $m$. For each integer $p\\ge m-1$ prove, by induction on the nonnegative integer $p-m+1$, both implications for every complex $E$ with $H^q(E)=0$ for $q>p$, locally at every point and for every ambient open restriction of $i$. For $p=m-1$ both $E$ and $i_*E$ have no cohomology in degrees $\\ge m$ by Step 1, so Step 3 proves both assertions. For the induction step $p\\ge m$, assume both implications at $p-1$ for every such local restriction. It suffices to work at $z\\in Z$; points of $P\\setminus i(Z)$ have zero pushforward. The next steps construct, after shrinking around $z$, a cone with upper bound $p-1$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/perfect.tex",
+    "place": "Tag 09VA, lemma-closed-push-pseudo-coherent, both paragraphs: explicit induction on an upper bound, rather than assuming a largest nonzero degree exists"
+   }
+  },
+  {
+   "text": "Suppose first that $E$ is $m$-pseudo-coherent. By Step 3 it is $p$-pseudo-coherent. Apply [lem-sfb-ringed-site-pseudocoherent-top-finite-type] on the open-subset site of $Z$, with its integer parameter equal to $p$, to obtain that $H^p(E)$ is locally of finite type. Suppose instead that $i_*E$ is $m$-pseudo-coherent. The same argument on $P$ gives finite type of $H^p(i_*E)=i_*H^p(E)$. By [def-weil-pbc-module-finite-type-presentation], choose finitely many generating sections on an ambient neighbourhood $U$ of $i(z)$. They are sections of $H^p(E)$ on $V=i^{-1}U$. At every $w\\in V$ their germs generate $H^p(E)_w$ already with scalars from $\\mathcal O_{P,i(w)}$, by [lem-sc-closed-pushforward-abelian-stalks]. Consequently they also generate with scalars from $\\mathcal O_{Z,w}$. Thus in either case, locally around $z$, we have finitely many sections generating $H^p(E)$. To check local generation from these germs, express the germ of any section as a finite linear combination, represent its coefficients near the point and shrink once more to make the equality hold. This gives local surjectivity and hence an epimorphism by [lem-weil-pbc-site-abelian-sheaf-epi-locally-surjective] on the open-subset site.",
+   "uses": [
+    "lem-sfb-ringed-site-pseudocoherent-top-finite-type",
+    "def-weil-pbc-module-finite-type-presentation",
+    "lem-sc-closed-pushforward-abelian-stalks",
+    "lem-weil-pbc-site-abelian-sheaf-epi-locally-surjective"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/perfect.tex",
+    "place": "Tag 09VA, lemma-closed-push-pseudo-coherent, forward finite-cohomology sentence and reverse finite-cohomology/adjunction paragraph"
+   }
+  },
+  {
+   "text": "Choose any complex $E^\\bullet$ representing $E$. The quotient map $\\ker(d^p:E^p\\to E^{p+1})\\to H^p(E^\\bullet)$ is an epimorphism of underlying abelian sheaves: its cokernel is zero by the cokernel description in [def-weil-sheaf-of-modules-category]. Apply [lem-weil-pbc-site-abelian-sheaf-epi-locally-surjective] on the open-subset site to each of the finitely many generating sections from Step 6. Choose a common neighbourhood of $z$ on which all lift, by intersecting the finitely many neighbourhoods containing $z$. Their lifts $t_1,\\ldots,t_r\\in\\ker d^p$ define the chain map $\\alpha:\\mathcal O_Z^{\\oplus r}[-p]\\to E^\\bullet$, $e_j\\mapsto t_j$; it is a chain map precisely because $d^pt_j=0$. Its map on $H^p$ is surjective. Each open neighbourhood of $z$ in $Z$ is $i^{-1}U'$ for an ambient open $U'$, so this shrinking is allowed in the induction. Rank zero needs no lifts.",
+   "uses": [
+    "def-weil-sheaf-of-modules-category",
+    "lem-weil-pbc-site-abelian-sheaf-epi-locally-surjective"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/perfect.tex",
+    "place": "Tag 09VA, lemma-closed-push-pseudo-coherent, the two constructions of a map from a finite free module in degree p"
+   }
+  },
+  {
+   "text": "Complete $\\alpha:A\\to E$ to a distinguished triangle $A\\to E\\to C\\to A[1]$ using (TR1) of [def-weil-triangulated-category]. By [lem-sf-derived-homology-long-exact], $H^q(C)=0$ for $q>p$ since $H^q(E)=0$ there and $H^{q+1}(A)=0$; also $H^p(C)=0$ since $H^p(A)\\to H^p(E)$ is surjective and $H^{p+1}(A)=0$. Thus $C$ has upper bound $p-1$. Step 2 sends this to the distinguished triangle $i_*A\\to i_*E\\to i_*C\\to(i_*A)[1]$. The objects $A$ and $i_*A$ are both $(m+1)$-pseudo-coherent and $m$-pseudo-coherent by Step 4.",
+   "uses": [
+    "def-weil-triangulated-category",
+    "lem-sf-derived-homology-long-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/perfect.tex",
+    "place": "Tag 09VA, lemma-closed-push-pseudo-coherent, the two pairs of displayed triangles and the cohomology bound of their cone"
+   }
+  },
+  {
+   "text": "For the forward implication, apply clause (1) of [lem-sfb-ringed-site-m-pseudocoherent-triangle] to $A\\to E\\to C$: $A$ is $(m+1)$-pseudo-coherent and $E$ is $m$-pseudo-coherent, hence $C$ is $m$-pseudo-coherent. The induction hypothesis at $p-1$ gives $i_*C$ $m$-pseudo-coherent after further shrinking. Clause (2) of that same node applied to $i_*A\\to i_*E\\to i_*C$, with both outer objects $m$-pseudo-coherent, gives that $i_*E$ is $m$-pseudo-coherent.",
+   "uses": [
+    "lem-sfb-ringed-site-m-pseudocoherent-triangle"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/perfect.tex",
+    "place": "Tag 09VA, lemma-closed-push-pseudo-coherent, end of the forward induction"
+   }
+  },
+  {
+   "text": "For the reverse implication, start with $i_*E$ $m$-pseudo-coherent. Clause (1) of [lem-sfb-ringed-site-m-pseudocoherent-triangle], applied to the pushed-forward triangle and the $(m+1)$-pseudo-coherent object $i_*A$, gives $i_*C$ $m$-pseudo-coherent. The reverse induction hypothesis at $p-1$ gives $C$ $m$-pseudo-coherent. Clause (2) applied to $A\\to E\\to C$ then gives $E$ $m$-pseudo-coherent. This completes the simultaneous induction. Finally, when either side of the original equivalence is $m$-pseudo-coherent, Step 3 supplies a local upper bound on that side and Step 1 transfers it to the other. Apply the induction locally and combine the neighbourhoods by locality. Thus no global upper bound, quasi-coherence or Noetherian hypothesis was introduced.",
+   "uses": [
+    "lem-sfb-ringed-site-m-pseudocoherent-triangle"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/perfect.tex",
+    "place": "Tag 09VA, lemma-closed-push-pseudo-coherent, end of the reverse induction and globalization"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sc-closed-immersion-pushforward-exact",
+  "def-weil-sheaf-of-modules-category",
+  "lem-sc-closed-pushforward-abelian-stalks",
+  "def-pc-derived-direct-image",
+  "def-pc-ringed-spaces-derived-direct-image",
+  "lem-weil-pbc-exact-functor-derived-factorization",
+  "def-sfb-m-pseudo-coherent-complex",
+  "def-pc-perfect-complex",
+  "def-pur-pseudo-coherent-complex",
+  "lem-sfb-ringed-site-pseudocoherent-top-finite-type",
+  "def-weil-pbc-module-finite-type-presentation",
+  "lem-weil-pbc-site-abelian-sheaf-epi-locally-surjective",
+  "def-weil-triangulated-category",
+  "lem-sf-derived-homology-long-exact",
+  "lem-sfb-ringed-site-m-pseudocoherent-triangle"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/perfect.tex",
+  "place": "Tag 09VA, lemma-closed-push-pseudo-coherent, both induction paragraphs; local cycle lifts and base case expanded."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "pseudo.?coher.*(push|closed)|(push|closed).*pseudo.?coher",
+   "results": "{\"t\": \"2026-10-23T18:01:32Z\", \"tool\": \"grep\", \"query\": \"pseudo.?coher.*(push|closed)|(push|closed).*pseudo.?coher\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern ordinary sheaf pushforward, morphism flatness, pseudofunctors, finite presentation or affine transition limits; none states the required derived pseudo-coherence assertion."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Pseudo coherence of a complex on a closed subscheme is equivalent to pseudo coherence of its pushforward if the structure sheaf pushforward is pseudo coherent",
+   "results": "{\"t\": \"2026-10-23T18:01:33Z\", \"tool\": \"leansearch\", \"query\": \"Pseudo coherence of a complex on a closed subscheme is equivalent to pseudo coherence of its pushforward if the structure sheaf pushforward is pseudo coherent\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SheafOfModules.pushforward\", \"AlgebraicGeometry.Scheme.Modules.pushforward\", \"TopCat.Sheaf.pushforward_sheaf_of_sheaf\", \"SheafOfModules.pushforwardSections\", \"SheafOfModules.instIsRightAdjointPushforward\", \"AlgebraicGeometry.Scheme.Modules.pullbackPushforwardAdjunction\", \"SheafOfModules.pushforward_obj_val\", \"AlgebraicGeometry.Scheme.Modules.instAdditivePushforward\"], \"digest\": \"71f34b5b86b1d0e2\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern ordinary sheaf pushforward, morphism flatness, pseudofunctors, finite presentation or affine transition limits; none states the required derived pseudo-coherence assertion."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"PseudoCoherent\", \"pushforward\"",
+   "results": "{\"t\": \"2026-10-23T18:01:33Z\", \"tool\": \"loogle\", \"query\": \"\\\"PseudoCoherent\\\", \\\"pushforward\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern ordinary sheaf pushforward, morphism flatness, pseudofunctors, finite presentation or affine transition limits; none states the required derived pseudo-coherence assertion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a closed immersion with pseudo coherent pushed forward structure sheaf derived direct image preserves and reflects m pseudo coherence",
+   "results": "{\"t\": \"2026-10-23T18:01:37Z\", \"tool\": \"leanfinder\", \"query\": \"For a closed immersion with pseudo coherent pushed forward structure sheaf derived direct image preserves and reflects m pseudo coherence\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Modules.instFaithfulPushforward\", \"AlgebraicGeometry.IsClosedImmersion\", \"AlgebraicGeometry.Scheme.Modules.instFullPushforward\", \"AlgebraicGeometry.Scheme.Modules.pushforward\", \"AlgebraicGeometry.Scheme.Modules.instIsRightAdjointPushforward\", \"AlgebraicGeometry.Scheme.Modules.pseudofunctor_map_r\", \"AlgebraicGeometry.Scheme.Modules.pseudofunctor_mapComp_hom_τr\", \"AlgebraicGeometry.Scheme.Modules.pseudofunctor\"], \"digest\": \"211a89fd04c2272e\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern ordinary sheaf pushforward, morphism flatness, pseudofunctors, finite presentation or affine transition limits; none states the required derived pseudo-coherence assertion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Restriction of scalars along a pseudo coherent quotient ring preserves and reflects finite stage pseudo coherence of arbitrary sheaf complexes",
+   "results": "{\"t\": \"2026-10-23T18:01:38Z\", \"tool\": \"leanfinder\", \"query\": \"Restriction of scalars along a pseudo coherent quotient ring preserves and reflects finite stage pseudo coherence of arbitrary sheaf complexes\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SheafOfModules.isFinitePresentation\", \"SheafOfModules.Finite.forgetPreservesFiniteLimits\", \"SheafOfModules.IsFinitePresentation\", \"PresheafOfModules.instReflectsFiniteLimitsSheafOfModulesSheafAddCommGrpCatToSheaf\", \"SheafOfModules.QuasicoherentData.IsFinitePresentation.isFinite_presentation\", \"SheafOfModules.quasicoherentDataOfIsFinitePresentation\", \"SheafOfModules.IsFiniteType\", \"PresheafOfModules.instPreservesFiniteLimitsSheafOfModulesSheafification\"], \"digest\": \"126cc5e46a6b454c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern ordinary sheaf pushforward, morphism flatness, pseudofunctors, finite presentation or affine transition limits; none states the required derived pseudo-coherence assertion."
+  },
+  {
+   "tool": "grep",
+   "query": "pseudo.?coher|[Ii]sMPseudo",
+   "results": "{\"t\": \"2026-10-23T18:28:42Z\", \"tool\": \"grep\", \"query\": \"pseudo.?coher|[Ii]sMPseudo\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: read the returned declarations; cohomological bounds, ordinary pushforward, finite presentation, quasicoherence and pseudofunctors do not state this finite-stage pseudo-coherence equivalence."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A complex of sheaves on a closed subscheme is m pseudo coherent exactly when its direct image is m pseudo coherent provided the structure sheaf direct image is pseudo coherent",
+   "results": "{\"t\": \"2026-10-23T18:28:43Z\", \"tool\": \"leansearch\", \"query\": \"A complex of sheaves on a closed subscheme is m pseudo coherent exactly when its direct image is m pseudo coherent provided the structure sheaf direct image is pseudo coherent\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Modules.instFaithfulPushforward\", \"AlgebraicGeometry.Scheme.Modules.instFullPushforward\", \"SheafOfModules.IsQuasicoherent.casesOn\", \"AlgebraicGeometry.Scheme.Modules.pushforwardComp\", \"SheafOfModules.instIsQuasicoherentOfIsFinitePresentation\", \"SheafOfModules.QuasicoherentData.IsFinitePresentation\", \"SheafOfModules.IsQuasicoherent.recOn\", \"SheafOfModules.IsQuasicoherent.rec\"], \"digest\": \"aa4ca941fbde82a4\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: read the returned declarations; cohomological bounds, ordinary pushforward, finite presentation, quasicoherence and pseudofunctors do not state this finite-stage pseudo-coherence equivalence."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"PseudoCoherent\", \"pushforward\"",
+   "results": "{\"t\": \"2026-10-23T18:28:43Z\", \"tool\": \"loogle\", \"query\": \"\\\"PseudoCoherent\\\", \\\"pushforward\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: read the returned declarations; cohomological bounds, ordinary pushforward, finite presentation, quasicoherence and pseudofunctors do not state this finite-stage pseudo-coherence equivalence."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a closed immersion with pseudo coherent structure sheaf direct image, an arbitrary complex is m pseudo coherent if and only if its derived direct image is m pseudo coherent",
+   "results": "{\"t\": \"2026-10-23T18:28:44Z\", \"tool\": \"leanfinder\", \"query\": \"For a closed immersion with pseudo coherent structure sheaf direct image, an arbitrary complex is m pseudo coherent if and only if its derived direct image is m pseudo coherent\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"DerivedCategory.isGE_Q_obj_iff\", \"DerivedCategory.isLE_Q_obj_iff\", \"AlgebraicGeometry.Scheme.Modules.instFaithfulPushforward\", \"AlgebraicGeometry.Scheme.Modules.pseudofunctor_map_r\", \"AlgebraicGeometry.Scheme.Modules.pseudofunctor\", \"AlgebraicGeometry.Scheme.Modules.pseudofunctor_mapComp_hom_τr\", \"AlgebraicGeometry.Scheme.Modules.pseudofunctor_mapComp_inv_τr\", \"SheafOfModules.pushforward_assoc\"], \"digest\": \"85569eb04e8484eb\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: read the returned declarations; cohomological bounds, ordinary pushforward, finite presentation, quasicoherence and pseudofunctors do not state this finite-stage pseudo-coherence equivalence."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Restriction of scalars along a pseudo coherent quotient ring reflects and preserves finite stage pseudo coherence of sheaf complexes",
+   "results": "{\"t\": \"2026-10-23T18:29:49Z\", \"tool\": \"leanfinder\", \"query\": \"Restriction of scalars along a pseudo coherent quotient ring reflects and preserves finite stage pseudo coherence of sheaf complexes\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SheafOfModules.isFinitePresentation\", \"SheafOfModules.Finite.forgetPreservesFiniteLimits\", \"SheafOfModules.IsFinitePresentation\", \"PresheafOfModules.instReflectsFiniteLimitsSheafOfModulesSheafAddCommGrpCatToSheaf\", \"SheafOfModules.QuasicoherentData.IsFinitePresentation.isFinite_presentation\", \"SheafOfModules.quasicoherentDataOfIsFinitePresentation\", \"SheafOfModules.instIsQuasicoherentOfIsFinitePresentation\", \"PresheafOfModules.instPreservesFiniteLimitsSheafOfModulesSheafification\"], \"digest\": \"e6eaf522c957a7bb\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: read the returned declarations; cohomological bounds, ordinary pushforward, finite presentation, quasicoherence and pseudofunctors do not state this finite-stage pseudo-coherence equivalence."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-relative-pseudocoherence-composition",
+  "date": "2026-10-24",
+  "group": "NY"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Knudsen forgetful morphism as the universal stable curve. Section 2, Lemma 2.5 (printed pp.178--179), using Section 1, Corollary 1.5 and Lemma 1.6: multiplication and the pushforward exact sequences, retaining the twist by minus the old-marking divisor. Lemma 2.5, first paragraph and final evaluation: Corollary 1.5 supplies vanishing, base-flat direct images, arbitrary base change and generation for the five divisor modules. Corollary 1.5, printed p.167: the general cohomology-and-base-change tool whose conditions (1) and (2) the exceptional-fibre calculation must verify. General tool for Corollary 1.5: finite presentation of the acyclic image: detect pseudo-coherence by perfect tensor tests on V, using proper-support perfect direct image for U -> S. Supporting tool: 09UU (lemma-check-relative-pseudo-coherence-on-charts, equivalence (1) and (3) for every integer m). Supporting prerequisite of 09UU proof, equivalence (2) and (3): apply composition-relative-pseudo-coherent to id:P -> P after establishing relative pseudo-coherence of the structure sheaf. Prerequisite for Tag 09UT, final sentence: compare the two affine-chart direct images across j.",
+   "via": [
+    "lem-sfb-relative-pseudocoherence-composition",
+    "lem-sfb-flat-ambient-relative-pseudocoherence",
+    "lem-sfb-perfect-tests-detect-pseudocoherence",
+    "lem-sfb-relative-acyclic-direct-image",
+    "lem-sfb-rational-contraction-line-cohomology",
+    "lem-sfb-elementary-contraction-evaluation",
+    "lem-sfb-knudsen-pointed-forgetful-universal-curve",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-closed-pushforward-pseudocoherence",
+  "worker": "stage1",
+  "group": "O2",
+  "summary": "Statement unchanged. Expanded the two inductions of Stacks 09VA using existing closed-pushforward exactness and stalk nodes, exact-functor derived infrastructure, ringed-site finite-top-cohomology and triangle lemmas, local lifting through an abelian-sheaf epimorphism and the long exact cohomology sequence. Explicit upper-bound induction covers acyclic complexes and complexes unbounded below. No new nodes or Mathlib leaves.",
+  "blueprint": "The inherited det-thm-sf-ctf-stability-direct-images proof (3) prerequisite chain through 09UT is retained. Read the latest sk-thm-sf-ctf-stability-direct-images.proof.md, paragraph (3), and the current chapter and unit. This is the closed-immersion comparison used below relative pseudo-coherence composition, not a new route for constructible direct image. blueprint_refs.py ancestor returns None for this inherited chain; preserved its null ancestor and via list. Searches for 09VA, closed pseudo, pseudo-coherent and pseudo found no matching blueprint assertion.",
+  "tool_uses": [
+   {
+    "node": "lem-sc-closed-immersion-pushforward-exact",
+    "why": "Exactness of closed topological pushforward is generic infrastructure needed to compute unbounded Ri_* termwise; the unit has no substitute."
+   },
+   {
+    "node": "lem-sc-closed-pushforward-abelian-stalks",
+    "why": "Closed-subspace stalk description supplies reflection of zero and local generators; generic infrastructure, not a replacement of the unit route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sc-closed-immersion-pushforward-exact",
+  "lem-sc-closed-pushforward-abelian-stalks"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-O2-45f6311d3",
+  "group": "O2",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-O2-45f6311d3 (reviewer sub-agent of L); spot-checked: I read Stacks perfect.tex 09VA (lemma-closed-push-pseudo-coherent) in full, both inductions. The item statement matches it, specialized to scheme closed immersions, and is unchanged against base and live. The item is unsplit in live and side-live, has no repair note, cites no SGA and closes no cycle. I read all 15 cited statements. Steps 1 and 3-10 are correct. Step 1 gives module exactness, H^q(i_*E)=i_*H^q(E) and reflection of zero. Step 4: the brutal truncation of a local finite free model of B gives a-pseudo-coherence of B^r[-p] for every a. Step 5 is an explicit upper-bound induction with base case p=m-1, which also covers acyclic complexes. Steps 6-7 use 08FX(1) on Z or on P, generation over O_Z through i^sharp, and local lifts of the generators to cycles. Step 8 kills H^p(C) through the long exact sequence. Steps 9-10 apply 08FV clauses (1) and (2) in the correct order, and globalization uses the local bound. Edge cases checked: empty Z, Z=P, r=0, p=m, E unbounded below. Fault C4 in step 2: it cited exact-functor-derived-functor, whose RF is the Kan-extension derived functor, for the item's Ri_*, which def-pc-ringed-spaces-derived-direct-image defines through K-injective resolutions. FIX: step 2 now cites def-pc-derived-direct-image and def-pc-ringed-spaces-derived-direct-image. Because termwise i_* preserves quasi-isomorphisms (factorization node, i_* exact by Step 1), i_*E -> i_*I is a quasi-isomorphism, so Ri_*E ≅ Q(i_*E) ≅ F_D(E), and triangles and shifts come from F_D. I dropped the unused node from uses, proof_deps and tool_uses. Accepted tool_uses: closed-pushforward exactness and the closed-pushforward stalk formula, both generic sheaf infrastructure.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.ClosedPushforwardPseudoCoherence",
+  "declaration": "AlgebraicGeometry.Scheme.isMPseudoCoherent_closed_pushforward_iff",
+  "file": "lean/Sheaf/AlgebraicGeometry/ClosedPushforwardPseudoCoherence.lean",
+  "statement": "theorem isMPseudoCoherent_closed_pushforward_iff {Z P : Scheme.{u}} (i : Z ⟶ P) [IsClosedImmersion i] [HasDerivedCategory.{wZ} (SheafOfModules.{u} (moduleRings Z.toRingedSpace))] [HasDerivedCategory.{wP} (SheafOfModules.{u} (moduleRings P.toRingedSpace))] [∀ U : Z.Opens, HasDerivedCategory.{wZ} (SheafOfModules.{u} (moduleRings U.toScheme.toRingedSpace))] [∀ U : P.Opens, HasDerivedCategory.{wP} (SheafOfModules.{u} (moduleRings U.toScheme.toRingedSpace))] [∀ U : P.Opens, HasDerivedCategory.{wP} (SheafOfModules.{u} ((moduleRings P.toRingedSpace).over U))] (h : IsPseudoCoherent P ((DerivedCategory.singleFunctor (SheafOfModules.{u} (moduleRings P.toRingedSpace)) 0).obj ((RingedSpace.moduleDirectImage i.toLRSHom.toShHom).obj (SheafOfModules.unit (moduleRings Z.toRingedSpace))))) (m : ℤ) (K : schemeDerivedCategory Z) : IsMPseudoCoherent Z m K ↔ IsMPseudoCoherent P m ((schemeDerivedDirectImage i).obj K)",
+  "branch": "sheaf-dag",
+  "by": "NK",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-c35797bda",
+  "group": "NK",
+  "result": "pass",
+  "note": "Statement matches node and Stacks 09VA (perfect.tex 2925-2932) restricted to schemes: closed immersion i, h = IsPseudoCoherent P of singleFunctor 0 applied to ordinary moduleDirectImage(unit) (not Ri_*), ∀ m:ℤ, ∀ K unbounded, IsMPseudoCoherent Z m K ↔ IsMPseudoCoherent P m (schemeDerivedDirectImage i K). HasDerivedCategory binders (wZ, wP independent; open-subscheme and over-site families) are exactly those required by the IsMPseudoCoherent/IsPseudoCoherent signatures read in live source; no extra qcoh/bounded/Noetherian assumptions; edge cases (empty schemes, identity, K=0, any m) covered. Node differs from live only in lean; statement verbatim in file; no defs, sorry only, docstrings carry source place, blueprint tag and 10 proof steps; no scheme-level duplicate (only ring-level IsMPseudoCoherent); all imports exist; report has Worker report and Second reading by NK. Not recompiled (worker clean compile)."
+ }
+}

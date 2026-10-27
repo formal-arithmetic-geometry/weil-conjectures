@@ -1,0 +1,349 @@
+{
+ "id": "lem-sfb-flat-affine-action-stack-presentation",
+ "kind": "statement",
+ "title": "Fppf presentation of an affine action quotient without smoothness",
+ "statement": "Let $k$ be a field [def-weil-field], $H$ an affine group scheme of finite type over $k$ [def-sc-group-scheme, def-weil-finite-type-morphism], and $E$ a finitely generated commutative $k$-algebra with a rational $H$-action. Here rational means a $k$-algebra coaction $\\rho_E:E\\to E\\otimes_k k[H]$ satisfying the counit and coassociativity identities, and $E^H=\\{e:\\rho_E(e)=e\\otimes1\\}$. For definiteness, use left actions: if $b:U\\times_kH\\to U$ is dual to $\\rho_E$, put $h\\cdot u=b(u,h^{-1})$; use left translation for torsors. Put $U=\\operatorname{Spec}E$ and $Y=\\operatorname{Spec}(E^H)$ [def-weil-affine-spectrum]. Define $\\mathcal X=[U/H]$ as the stack on the big fppf site [def-pc-fppf-site] whose objects over $T$ are pairs $(P,f)$, with $P\\to T$ an $H_T$-torsor and $f:P\\to U$ equivariant; arrows are equivariant isomorphisms commuting with $f$. A torsor means a scheme with an $H_T$-action that becomes the translation action on $H_T$ after an fppf covering of $T$. Then $\\mathcal X$ is a quasi-compact, quasi-separated algebraic stack with affine diagonal, with quasi-compactness and quasi-separatedness as in [def-sfb-stack-qcqs-morphism] (algebraic stack has the meaning in [def-sfb-algebraic-moduli-stack]). The trivial torsor defines $\\pi:U\\to\\mathcal X$, which is representable, faithfully flat and locally of finite presentation, using [def-weil-flat-morphism, def-sbc-locally-finite-presentation] after scheme charts. For every algebraic-stack base change of $\\pi$, the induced map of underlying spaces is open and surjective. The invariant map $U\\to Y$ descends to a quasi-compact, quasi-separated morphism $\\phi:\\mathcal X\\to Y$ with $\\phi\\pi$ induced by $E^H\\hookrightarrow E$. The underlying space of an algebraic stack consists of field-valued objects up to isomorphism after common field extension, with the quotient topology from a smooth surjective scheme atlas. No smoothness of $H$ or finite generation of $E^H$ is required.",
+ "source": {
+  "document": "literature/stacks-project/criteria.tex",
+  "place": "Tags 06FI (theorem-flat-groupoid-gives-algebraic-stack), 06FH (lemma-flat-quotient-flat-presentation); spaces-groupoids.tex Tag 04M9 (lemma-quotient-stack-2-cartesian); stacks-morphisms.tex Tag 06R7 (lemma-fppf-open). Apply to the affine action groupoid."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-sc-group-scheme",
+  "def-weil-affine-spectrum",
+  "def-pc-fppf-site",
+  "def-sfb-algebraic-moduli-stack",
+  "def-weil-flat-morphism",
+  "def-sbc-locally-finite-presentation",
+  "def-weil-finite-type-morphism",
+  "def-sfb-stack-qcqs-morphism",
+  "def-sfb-affine-action-quotient-stack",
+  "def-sfb-scheme-action-torsor-groupoids",
+  "def-sfb-relative-moduli-inertia",
+  "def-sfb-dm-stack-morphism-properties",
+  "def-sfb-moduli-chart-normalization",
+  "def-sfb-stack-point-topological-space",
+  "def-sfb-surjective-moduli-map",
+  "def-sfb-affine-action-invariant-spectrum"
+ ],
+ "proof": [
+  {
+   "text": "Put $C=k[H]$. Its underlying $k$-module is flat by the field-module lemma; the affine flatness criterion makes $H\\to\\operatorname{Spec}k$ flat. Every ideal in a field is either zero or the whole field, so $k$ is Noetherian; since $C$ is a finite-type $k$-algebra it is finitely presented. The affine definition of local finite presentation therefore applies to $H\\to\\operatorname{Spec}k$. Write $b:U\\times_kH\\to U$ for the right action dual to $\\rho_E$, and use the left action $a(h,u)=b(u,h^{-1})$. Equivalently $a^*=(S\\otimes1)\\tau\\rho_E$, with $S$ pullback by group inversion and $\\tau$ the tensor-factor swap. Then the tensor-product description of affine fibre products and the bijection between maps into an affine scheme and ring maps turn its two identities into the right-action identities; inversion converts them into the left-action identities. Form $R=H\\times_kU$ with $s(h,u)=u$, $t(h,u)=hu$, identity $(1,u)$, inverse $(h,u)\\mapsto(h^{-1},hu)$ and composition $(h,gu)\\circ(g,u)=(hg,u)$. The group and action identities give the groupoid identities on every test scheme. The map $s$ is a base change of $H\\to\\operatorname{Spec}k$; $t=s\\circ i$ with $i$ the displayed involution. Thus both maps are flat and locally of finite presentation by base-change and composition calculus.",
+   "uses": [
+    "lem-weil-pbc-module-over-field-flat",
+    "lem-weil-pbc-flat-morphism-affine-criterion",
+    "lem-weil-pbc-finite-type-noetherian-finite-presentation",
+    "def-sbc-locally-finite-presentation",
+    "lem-weil-pbc-fibre-product-affine-spectra",
+    "lem-weil-pbc-morphism-into-affine-scheme",
+    "def-a1-groupoid-scheme",
+    "lem-sfb-stack-chartwise-smooth-etale-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/criteria.tex",
+    "place": "Tags 06FI, 06FH, hypotheses; algebra.tex Tag 00FP; affine action-groupoid specialization"
+   }
+  },
+  {
+   "text": "Apply the flat-groupoid theorem to $(U,R,s,t)$ to obtain an algebraic stack $\\mathcal Q$, a representable flat locally finitely presented surjection $p:U\\to\\mathcal Q$, and $R\\simeq U\\times_{\\mathcal Q}U$. The affine-group torsor comparison, which imposes no smoothness assumption, identifies $\\mathcal Q$ with the $\\mathcal X$ in the statement and $p$ with its trivial-torsor map $\\pi$. In particular the diagonal of $\\mathcal X$ is representable by algebraic spaces. Surjectivity together with flatness is the stated faithful flatness. For the chart calculus used here and below, schemes are algebraic stacks with identity atlas: their fppf sheaf axiom follows from fpqc descent of morphisms and the fact that an fppf cover is fpqc; their diagonal is represented by ordinary scheme fibre products. No smoothness of $\\pi$ is asserted.",
+   "uses": [
+    "lem-sfb-flat-groupoid-algebraic-quotient",
+    "lem-sfb-affine-group-torsor-stackification",
+    "lem-weil-pbc-fpqc-representable-descent",
+    "lem-trf-fppf-covering-is-fpqc",
+    "def-pc-fibre-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/criteria.tex",
+    "place": "Tags 06FI, 06FH, 04WZ; examples-stacks.tex Tag 04WM"
+   }
+  },
+  {
+   "text": "Consider $\\Delta_{\\mathcal X/k}$ after the cover $q:U\\times_kU\\to\\mathcal X\\times_k\\mathcal X$. Products here are algebraic stacks by the fibre-product lemma. Factor $q$ as two base changes of $\\pi$; the chart calculus shows that $q$ is representable, flat, locally finitely presented and surjective. By $U\\times_{\\mathcal X}U\\simeq R$, the pullback of the diagonal is $(t,s):R\\to U\\times_kU$ (up to the harmless interchange of the two factors). Both schemes are affine by the tensor-product description. A morphism between affine schemes is affine: it is the map of spectra induced by its coordinate-ring map. The fppf-locality theorem for representable stack morphisms, with property affine, now gives an affine diagonal of $\\mathcal X/k$. This also gives an affine absolute diagonal: for any two maps to $\\mathcal X$ over a test scheme, the structural maps to $k$ must agree to have an isomorphism; their equalizer is a closed subscheme because the multiplication map $k\\otimes_{\\mathbf Z}k\\to k$ is surjective. On this affine closed equalizer the relative Isom-space is affine. On every affine test scheme an affine diagonal is quasi-compact and separated, hence quasi-separated, by affine-morphism permanence. Thus $\\mathcal X$ is quasi-separated in the stated stack convention.",
+   "uses": [
+    "lem-sfb-algebraic-stack-fibre-products",
+    "lem-sfb-flat-groupoid-algebraic-quotient",
+    "lem-sfb-stack-chartwise-smooth-etale-calculus",
+    "lem-weil-pbc-fibre-product-affine-spectra",
+    "lem-weil-pbc-morphism-into-affine-scheme",
+    "lem-sfb-representable-stack-fppf-locality",
+    "lem-weil-pbc-affine-morphism-permanence",
+    "def-weil-closed-immersion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-groupoids.tex",
+    "place": "Tag 04M9; stacks-properties.tex Tag 04XD; affine diagonal calculation"
+   }
+  },
+  {
+   "text": "Let $\\mathcal Z\\to\\mathcal X$ be any algebraic-stack base change and put $\\mathcal W=U\\times_{\\mathcal X}\\mathcal Z$. The fibre-product lemma makes $\\mathcal W$ algebraic. Base-change calculus makes $\\mathcal W\\to\\mathcal Z$ flat, locally finitely presented and surjective. Choose a smooth surjective scheme atlas $V\\to\\mathcal Z$. The base change $W=U\\times_{\\mathcal X}V\\to V$ is a map of algebraic spaces flat and locally of finite presentation, so its map on point spaces is open by the space openness lemma. For any open subset $O\\subseteq|\\mathcal W|$, its inverse image in $|W|$ is open: $W\\to\\mathcal W$ is a smooth surjection, and the atlas quotient topology (or an etale scheme atlas of $W$) gives continuity. The image of that inverse image in $|V|$ is exactly the preimage of the image of $O$ in $|\\mathcal Z|$. This equality follows by forming the fibre product of field-valued objects after a common field extension, including its required isomorphism. It is open by openness of $W\\to V$. The quotient topology of the smooth atlas $V\\to\\mathcal Z$ shows that the image of $O$ is open. Surjectivity is already preserved by base change, proving the assertion for every $\\mathcal Z$.",
+   "uses": [
+    "lem-sfb-algebraic-stack-fibre-products",
+    "lem-sfb-stack-chartwise-smooth-etale-calculus",
+    "lem-sfb-flat-lfp-space-universally-open",
+    "lem-sfb-stack-point-topology"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/stacks-morphisms.tex",
+    "place": "Tag 06R7 (lemma-fppf-open), its atlas proof, after arbitrary base change"
+   }
+  },
+  {
+   "text": "The affine scheme $U$ is quasi-compact. Apply the quasi-compact-surjection criterion to the surjection $\\pi:U\\to\\mathcal X$ from step 2. It follows that $\\mathcal X$ is quasi-compact; combined with step 3 this proves all asserted finiteness properties of $\\mathcal X$. This use requires only surjectivity of $\\pi$, not that $\\pi$ be a smooth atlas.",
+   "uses": [
+    "lem-weil-pbc-affine-scheme-qcqs",
+    "lem-sfb-algebraic-stack-quasicompact-surjection"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/stacks-properties.tex",
+    "place": "Tag 04YC (lemma-quasi-compact-stack), (5) implies (3)"
+   }
+  },
+  {
+   "text": "Let $r:U\\to Y$ correspond to $E^H\\hookrightarrow E$. For $e\\in E^H$, the two maps from $E^H$ to $E\\otimes_k C$ induced by $r\\circ a$ and $r\\circ\\operatorname{pr}_U$ send $e$ to the same invariant tensor (in $C\\otimes_kE$, it is $1\\otimes e$, since applying the antipode to $1$ preserves $1$). The affine Hom bijection gives equality of these two morphisms. For an object $(P,f)$ over $T$, choose an fppf trivialization of $P$ with corresponding local maps $x_i:T_i\\to U$. The transition arrows act by elements of $H$, so the maps $r x_i$ agree on overlaps. Fppf covers are fpqc, and fpqc descent of morphisms to the scheme $Y$ gives a unique $T\\to Y$. Uniqueness shows compatibility with pullback and with equivariant isomorphisms, so these maps define $\\phi:\\mathcal X\\to Y$. On a trivial torsor this gives $r$ itself, proving $\\phi\\pi=r$. This explicit construction uses no finite generation of $E^H$.",
+   "uses": [
+    "lem-weil-pbc-morphism-into-affine-scheme",
+    "lem-sfb-affine-group-torsor-stackification",
+    "lem-trf-fppf-covering-is-fpqc",
+    "lem-weil-pbc-fpqc-representable-descent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/examples-stacks.tex",
+    "place": "Tag 04WM, explicit torsor description; descent.tex Tag 023Q; invariant equalizer calculation"
+   }
+  },
+  {
+   "text": "The scheme $Y=\\operatorname{Spec}(E^H)$ is affine, even when $E^H$ is not finitely generated. It is quasi-separated by affine-scheme qcqs. This agrees with the stack convention: a scheme diagonal is a monomorphism, hence its own relative diagonal is an isomorphism, so the additional quasi-separatedness condition on that representable diagonal is automatic. By steps 3 and 5, $\\mathcal X$ is quasi-compact and quasi-separated. Apply algebraic-stack qcqs permanence to $\\phi:\\mathcal X\\to Y$. Its hypotheses concern precisely these source and target properties and impose no representability or Noetherian condition. The resulting quasi-compactness and quasi-separatedness of $\\phi$ complete the proof.",
+   "uses": [
+    "lem-weil-pbc-affine-scheme-qcqs",
+    "lem-sfb-algebraic-stack-qcqs-permanence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/stacks-morphisms.tex",
+    "place": "Tag 075S (lemma-quasi-compact-quasi-separated-permanence), (2)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-module-over-field-flat",
+  "lem-weil-pbc-flat-morphism-affine-criterion",
+  "lem-weil-pbc-finite-type-noetherian-finite-presentation",
+  "def-sbc-locally-finite-presentation",
+  "lem-weil-pbc-fibre-product-affine-spectra",
+  "lem-weil-pbc-morphism-into-affine-scheme",
+  "def-a1-groupoid-scheme",
+  "lem-sfb-stack-chartwise-smooth-etale-calculus",
+  "lem-sfb-flat-groupoid-algebraic-quotient",
+  "lem-sfb-affine-group-torsor-stackification",
+  "lem-weil-pbc-fpqc-representable-descent",
+  "lem-trf-fppf-covering-is-fpqc",
+  "def-pc-fibre-product",
+  "lem-sfb-algebraic-stack-fibre-products",
+  "lem-sfb-representable-stack-fppf-locality",
+  "lem-weil-pbc-affine-morphism-permanence",
+  "def-weil-closed-immersion",
+  "lem-sfb-flat-lfp-space-universally-open",
+  "lem-sfb-stack-point-topology",
+  "lem-weil-pbc-affine-scheme-qcqs",
+  "lem-sfb-algebraic-stack-quasicompact-surjection",
+  "lem-sfb-algebraic-stack-qcqs-permanence"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/criteria.tex",
+  "place": "Action-groupoid specialization of Tags 06FI, 06FH, 04M9 and 04WM, with explicit affine diagonal, atlas openness and invariant descent arguments; finiteness from Tags 04YC and 075S."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The fppf quotient of an affine scheme by an affine finite type group scheme is algebraic and its presentation is universally open and surjective",
+   "results": "Actual search returned 8 hits: AlgebraicGeometry.AffineSpace.instLocallyOfFinitePresentationOverSchemeInferInstanceOverClassOfFinite, AlgebraicGeometry.IsFinite.instHasAffinePropertyAndIsAffineFiniteCarrierObjOppositeOpensCarrierCarrierCommRingCatPresheafOpOpensTopHomAppTop, AlgebraicGeometry.ExistsHomHomCompEqCompAux.h𝒰S, AlgebraicGeometry.AffineSpace.instSurjectiveOverSchemeInferInstanceOverClass, AlgebraicGeometry.LocallyOfFinitePresentation, AlgebraicGeometry.AffineSpace.instIsAffineHomOverSchemeInferInstanceOverClass, AlgebraicGeometry.locallyOfFinitePresentation_iff, AlgebraicGeometry.AffineSpace.instIsAffine",
+   "date": "2026-10-22",
+   "verdict": "no match: fppf topologies, openness and quotient maps for scheme morphisms do not construct an algebraic action quotient stack"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An affine action groupoid has an algebraic quotient stack with affine diagonal even for a nonsmooth group",
+   "results": "Actual search returned 8 hits: AlgebraicGeometry.AffineSpace.instIsAffineHomOverSchemeInferInstanceOverClass, AlgebraicGeometry.ExistsHomHomCompEqCompAux.h𝒰S, AlgebraicGeometry.AffineSpace.instIsAffine, AlgebraicGeometry.isAffine_affineScheme, AlgebraicGeometry.AffineSpace.functor, AlgebraicGeometry.AffineSpace.instLocallyOfFinitePresentationOverSchemeInferInstanceOverClassOfFinite, CategoryTheory.ActionCategory.instGroupoid, AlgebraicGeometry.AffineSpace.over",
+   "date": "2026-10-22",
+   "verdict": "no match: fppf topologies, openness and quotient maps for scheme morphisms do not construct an algebraic action quotient stack"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"fppf\"",
+   "results": "Actual search returned 10 hits: AlgebraicGeometry.Scheme.fppfPrecoverage, AlgebraicGeometry.Scheme.fppfTopology, AlgebraicGeometry.Scheme.instIsStableUnderBaseChangeFppfPrecoverage, AlgebraicGeometry.Scheme.instIsStableUnderCompositionFppfPrecoverage, AlgebraicGeometry.Scheme.instSubcanonicalFppfTopology, AlgebraicGeometry.Scheme.fppfTopology_le_fpqcTopology, AlgebraicGeometry.Scheme.fppfPrecoverage_eq_inf, AlgebraicGeometry.Scheme.fppfPrecoverage_le_fpqcPrecoverage",
+   "date": "2026-10-22",
+   "verdict": "no match: fppf topologies, openness and quotient maps for scheme morphisms do not construct an algebraic action quotient stack"
+  },
+  {
+   "tool": "grep",
+   "query": "quotientStack|flatGroupoid|actionStack",
+   "results": "Actual search returned 0 hits: ",
+   "date": "2026-10-22",
+   "verdict": "no match: fppf topologies, openness and quotient maps for scheme morphisms do not construct an algebraic action quotient stack"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Algebraicity of a quotient stack by a flat finitely presented group scheme",
+   "results": "Actual search returned 8 hits: AlgebraicGeometry.Flat.isQuotientMap_of_surjective, AlgebraicGeometry.Flat.isIso_of_surjective_of_mono, AlgebraicGeometry.instLocallyOfFinitePresentationOfIsSmooth, AlgebraicGeometry.instDescendsAlongSchemeMinMorphismPropertySurjectiveFlatLocallyOfFinitePresentationOfQuasiCompactOfIsZariskiLocalAtTarget, AlgebraicGeometry.UniversallyOpen.of_flat, AlgebraicGeometry.Flat.flat_appLE, AlgebraicGeometry.Flat.stalkMap, Algebra.Presentation.instFinitePresentationQuotientOfFinite",
+   "date": "2026-10-22",
+   "verdict": "no match: fppf topologies, openness and quotient maps for scheme morphisms do not construct an algebraic action quotient stack"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The affine quotient stack of a finite type flat group scheme has a universally open surjective presentation without a smoothness assumption",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.UniversallyOpen.of_flat\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/UniversallyOpen\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.Flat f]\\n  [AlgebraicGeometry.LocallyOfFinitePresentation f], AlgebraicGeometry.UniversallyOpen f\", \"doc\": \"A morphism of schemes that is flat and locally of finite presentation is universally open. This means that for any base change $ Y' \\to Y $, the induced morphism $ X \\times_Y Y' \\to Y' $ is an open map o\"}\n  {\"name\": \"AlgebraicGeometry.AffineSpace.instLocallyOfFinitePresentationOverSchemeInferInstanceOverClassOfFinite\", \"module\": \"Mathlib/AlgebraicGeometry/AffineSpace\", \"type\": \"∀ {n : Type v} (S : AlgebraicGeometry.Scheme) [Finite n],\\n  AlgebraicGeometry.LocallyOfFinitePresentation (AlgebraicGeometry.AffineSpace n S ↘ S)\", \"doc\": \"If $ n $ is a finite type, then the affine space $ \\\\mathbb{A}^n_S $ over a scheme $ S $ is locally of finite presentation as a morphism over $ S $. This means that for every point in $ \\\\mathbb{A}^n_S \"}\n  {\"name\": \"AlgebraicGeometry.AffineSpace.instSurjectiveOverSchemeInferInstanceOverClass\", \"module\": \"Mathlib/AlgebraicGeometry/AffineSpace\", \"type\": \"∀ {n : Type v} (S : AlgebraicGeometry.Scheme), AlgebraicGeometry.Surjective (AlgebraicGeometry.AffineSpace n S ↘ S)\", \"doc\": \"The canonical morphism from the affine space $\\\\mathbb{A}^n_S$ to the base scheme $S$ is surjective, meaning its underlying continuous map on topological spaces is surjective.\"}\n  {\"name\": \"AlgebraicGeometry.descendsAlong_isOpenImmersion_surjective_inf_flat_inf_quasicompact'\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FlatDescent\", \"type\": \"AlgebraicGeometry.IsOpenImmersion.DescendsAlong\\n  (@AlgebraicGeometry.Surjective ⊓ @AlgebraicGeometry.Flat ⊓ @AlgebraicGeometry.QuasiCompact)\", \"doc\": \"In the category of schemes, the property of being an open immersion descends along morphisms that are simultaneously surjective, flat, and quasi-compact. This means that if a morphism becomes an open \"}\n  {\"name\": \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.h𝒰S\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"∀ {I : Type u} [inst : CategoryTheory.Category.{u, u} I] {S X : AlgebraicGeometry.Scheme}\\n  {D : CategoryTheory.Functor I AlgebraicGeometry.Scheme} {t : D ⟶ (CategoryTheory.Functor.const I).obj S} {f : X ⟶ S}\\n  (self : AlgebraicGeometry.ExistsHomHomCompEqCompAux D t f) (i : self.𝒰S.I₀), AlgebraicGeo\", \"doc\": \"Given a category $\\\\mathcal{I}$, a diagram $D:\\\\mathcal{I}\\\\to\\\\text{Sch}$ of schemes, a natural transformation from $D$ to the constant diagram at $S$, and a morphism $X\\\\to S$, every element of the zerot\"}\n  {\"name\": \"AlgebraicGeometry.instLocallyOfFinitePresentationOfIsSmooth\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [hf : AlgebraicGeometry.IsSmooth f],\\n  AlgebraicGeometry.LocallyOfFinitePresentation f\", \"doc\": \"Every smooth morphism of schemes is locally of finite presentation.\"}\n  {\"name\": \"AlgebraicGeometry.Flat.isQuotientMap_of_surjective\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Flat\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.Flat f] [AlgebraicGeometry.QuasiCompact f]\\n  [AlgebraicGeometry.Surjective f], Topology.IsQuotientMap ⇑(CategoryTheory.ConcreteCategory.hom f.base)\", \"doc\": \"Let $ f : X \\\\to Y $ be a morphism of schemes. If $ f $ is flat, quasi-compact, and surjective, then the underlying continuous map of topological spaces is a quotient map, meaning the topology on $ Y $\"}\n  {\"name\": \"AlgebraicGeometry.LocallyOfFinitePresentation\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"A morphism $ f: X \\\\to Y $ of schemes is locally of finite presentation, meaning that for every point in $ X $, there exists an open neighborhood such that the restriction of $ f $ to this neighborhood\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme openness, fppf sites and abstract group-action quotients do not give the algebraic-stack statement"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"fppf\"",
+   "results": "[loogle] OK 10 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.fppfPrecoverage\", \"module\": \"Mathlib.AlgebraicGeometry.Sites.Fpqc\", \"type\": \" : CategoryTheory.Precoverage AlgebraicGeometry.Scheme\", \"doc\": \"The fppf precoverage on the category of schemes. The covering families are jointly-surjective\\nfamilies of flat morphisms, locally of finite presentation.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.fppfTopology\", \"module\": \"Mathlib.AlgebraicGeometry.Sites.Fpqc\", \"type\": \" : CategoryTheory.GrothendieckTopology AlgebraicGeometry.Scheme\", \"doc\": \"The fppf topology on the category of schemes is topology generated by the fppf precoverage.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.instIsStableUnderBaseChangeFppfPrecoverage\", \"module\": \"Mathlib.AlgebraicGeometry.Sites.Fpqc\", \"type\": \" : AlgebraicGeometry.Scheme.fppfPrecoverage.IsStableUnderBaseChange\", \"doc\": \"\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.instIsStableUnderCompositionFppfPrecoverage\", \"module\": \"Mathlib.AlgebraicGeometry.Sites.Fpqc\", \"type\": \" : AlgebraicGeometry.Scheme.fppfPrecoverage.IsStableUnderComposition\", \"doc\": \"\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.instSubcanonicalFppfTopology\", \"module\": \"Mathlib.AlgebraicGeometry.Sites.Fpqc\", \"type\": \" : AlgebraicGeometry.Scheme.fppfTopology.Subcanonical\", \"doc\": \"\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.fppfTopology_le_fpqcTopology\", \"module\": \"Mathlib.AlgebraicGeometry.Sites.Fpqc\", \"type\": \" : AlgebraicGeometry.Scheme.fppfTopology ≤ AlgebraicGeometry.Scheme.fpqcTopology\", \"doc\": \"\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.fppfPrecoverage_eq_inf\", \"module\": \"Mathlib.AlgebraicGeometry.Sites.Fpqc\", \"type\": \" : AlgebraicGeometry.Scheme.fppfPrecoverage = AlgebraicGeometry.Scheme.precoverage @AlgebraicGeometry.Flat ⊓ AlgebraicGeometry.Scheme.precoverage @AlgebraicGeometry.LocallyOfFinitePresentation\", \"doc\": \"\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.fppfPrecoverage_le_fpqcPrecoverage\", \"module\": \"Mathlib.AlgebraicGeometry.Sites.Fpqc\", \"type\": \" : AlgebraicGeometry.Scheme.fppfPrecoverage ≤ AlgebraicGeometry.Scheme.fpqcPrecoverage\", \"doc\": \"\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.zariskiPrecoverage_le_fppfPrecoverage\", \"module\": \"Mathlib.AlgebraicGeometry.Sites.Fpqc\", \"type\": \" : AlgebraicGeometry.Scheme.zariskiPrecoverage ≤ AlgebraicGeometry.Scheme.fppfPrecoverage\", \"doc\": \"\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.singleton_mem_fppfPrecoverage\", \"module\": \"Mathlib.AlgebraicGeometry.Sites.Fpqc\", \"type\": \" {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.Flat f] [AlgebraicGeometry.Surjective f] [AlgebraicGeometry.LocallyOfFinitePresentation f] : CategoryTheory.Presieve.singleton f ∈ AlgebraicGeometry.Scheme.fppfPrecoverage.coverings Y\", \"doc\": \"\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme openness, fppf sites and abstract group-action quotients do not give the algebraic-stack statement"
+  },
+  {
+   "tool": "grep",
+   "query": "quotientStack|flatGroupoid|actionStack",
+   "results": "[grep] OK 0 hit(s)",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme openness, fppf sites and abstract group-action quotients do not give the algebraic-stack statement"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Algebraicity of an affine action quotient stack with affine diagonal for a nonsmooth group",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"MulAction.left_quotientAction\", \"module\": \"Mathlib.GroupTheory.GroupAction.Quotient\", \"type\": \": QuotientAction α H\", \"doc\": \"Given a group $\\\\alpha$, a monoid $\\\\beta$, a monoid action of $\\\\beta$ on $\\\\alpha$, and a subgroup $H \\\\subseteq \\\\alpha$, the monoid $\\\\beta$ acts on the quotient of $\\\\alpha$ by $H$.\"}\n  {\"name\": \"AddAction.injective_ofQuotientStabilizer\", \"module\": \"Mathlib.GroupTheory.GroupAction.Quotient\", \"type\": \"∀ (α : Type u) {β : Type v} [inst : AddGroup α] [inst_1 : AddAction α β] (x : β),\\n  Function.Injective (AddAction.ofQuotientStabilizer α x)\", \"doc\": \"The function induced by the quotient group $\\\\alpha / \\\\text{Stab}(x)$ acting on $x$ is injective, i.e., the induced action $\\\\alpha / \\\\text{Stab}(x) \\\\to \\\\beta$ is injective.\"}\n  {\"name\": \"AlgebraicGeometry.instHasAffinePropertyDiagonalSchemeDiagonal\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Constructors\", \"type\": \"(P) {Q} [HasAffineProperty P Q] : HasAffineProperty P.diagonal Q.diagonal\", \"doc\": \"If a morphism property $P$ has the affine property with respect to another property $Q$ in the category of schemes, then the diagonal morphism property of $P$ also has the affine property with respect\"}\n  {\"name\": \"AlgebraicGeometry.HasAffineProperty.diagonal_iff\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Constructors\", \"type\": \"(P) {Q} [HasAffineProperty P Q] {X Y : Scheme.{u}} {f : X ⟶ Y} [IsAffine Y] : Q.diagonal f ↔ P.diagonal f\", \"doc\": \"Given properties $P$ and $Q$ satisfying the affine-target relation, for any morphism $f: X \\to Y$ with affine target $Y$, the diagonal property of $Q$ holds for $f$ if and only if the diagonal property\"}\n  {\"name\": \"t2Space_quotient_mulAction_of_properSMul\", \"module\": \"Mathlib.Topology.Algebra.ProperAction.Basic\", \"type\": \"[ProperSMul G X] : T2Space (Quotient (MulAction.orbitRel G X))\", \"doc\": \"If a topological group $G$ acts properly on a topological space $X$, then the quotient space $X/G$ (the space of orbits under the action) is a Hausdorff space.\"}\n  {\"name\": \"MulAction.QuotientAction\", \"module\": \"Mathlib.GroupTheory.GroupAction.Quotient\", \"type\": \"{α : Type u} → (β : Type v) → [inst : Group α] → [inst_1 : Monoid β] → [MulAction β α] → Subgroup α → Prop\", \"doc\": \"Given a group $\\\\alpha$, a monoid $\\\\beta$, a monoid action of $\\\\beta$ on $\\\\alpha$, and a subgroup $H \\\\subseteq \\\\alpha$, the monoid $\\\\beta$ acts on the quotient of $\\\\alpha$ by $H$.\"}\n  {\"name\": \"AddAction.orbitRel.Quotient\", \"module\": \"Mathlib.GroupTheory.GroupAction.Defs\", \"type\": \"(G : Type u_1) → (α : Type u_2) → [inst : AddGroup G] → [AddAction G α] → Type u_2\", \"doc\": \"The quotient type of $\\\\alpha$ by the equivalence relation where two elements are equivalent if they lie in the same orbit under the action of the additive group $G$. This partitions $\\\\alpha$ into disj\"}\n  {\"name\": \"AddAction.ofQuotientStabilizer_mk\", \"module\": \"Mathlib.GroupTheory.GroupAction.Quotient\", \"type\": \"∀ (α : Type u) {β : Type v} [inst : AddGroup α] [inst_1 : AddAction α β] (x : β) (g : α),\\n  AddAction.ofQuotientStabilizer α x ↑g = g +ᵥ x\", \"doc\": \"Given an additive group $\\\\alpha$ acting on a type $\\\\beta$ and an element $x \\\\in \\\\beta$, the mapping from the quotient group $\\\\alpha/\\\\text{Stab}(x)$ to $\\\\beta$ defined by sending each coset $g + \\\\text{\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme openness, fppf sites and abstract group-action quotients do not give the algebraic-stack statement"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-power-lifting-quotient-submersive",
+  "date": "2026-10-22",
+  "group": "Q01"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Power lifting implies universal submersiveness of an affine invariant quotient. Fppf presentation used after the affine invariant quotient construction.",
+   "via": [
+    "lem-sfb-power-lifting-quotient-submersive",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-flat-affine-action-stack-presentation",
+  "worker": "stage1",
+  "summary": "Split the nonsmooth affine action quotient via a flat action groupoid. Added the general flat-groupoid theorem, nonsmooth torsor comparison, general algebraic-stack quasi-compact-surjection criterion and qcqs permanence as statement-only inputs; reused affine locality, chart calculus, space openness and fpqc morphism descent. Corrected the algebraic-stack definition citation to the dedicated live definition, and made qcqs conventions explicit. No hypotheses or conclusions changed. Made the right-coaction/left-action convention explicit using inversion, without changing the invariant subring or quotient.",
+  "blueprint": "Inherited provenance under det-thm-sf-ctf-stability-direct-images proof (3), supplying the fppf presentation in the power-lifting invariant-quotient input. Read latest sk-thm-sf-ctf-stability-direct-images.proof.md: its current (3) states the proper/open compactification assembly; this supporting alteration/moduli route is inherited from the live DAG. No chapter or unit route changed.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-module-over-field-flat",
+    "why": "Generic Every module over a field is flat needed for scheme charts, affine coordinates or morphism descent; this unit has no separate instance of this input."
+   },
+   {
+    "node": "lem-weil-pbc-flat-morphism-affine-criterion",
+    "why": "Generic Flatness of a scheme morphism on affine charts needed for scheme charts, affine coordinates or morphism descent; this unit has no separate instance of this input."
+   },
+   {
+    "node": "lem-weil-pbc-finite-type-noetherian-finite-presentation",
+    "why": "Generic Finite type over a Noetherian ring is finite presentation needed for scheme charts, affine coordinates or morphism descent; this unit has no separate instance of this input."
+   },
+   {
+    "node": "lem-weil-pbc-fibre-product-affine-spectra",
+    "why": "Generic The fibre product of affine schemes is the spectrum of the tensor product needed for scheme charts, affine coordinates or morphism descent; this unit has no separate instance of this input."
+   },
+   {
+    "node": "lem-weil-pbc-morphism-into-affine-scheme",
+    "why": "Generic Morphisms into an affine scheme are ring maps on global sections needed for scheme charts, affine coordinates or morphism descent; this unit has no separate instance of this input."
+   },
+   {
+    "node": "lem-weil-pbc-fpqc-representable-descent",
+    "why": "Generic Representable presheaves satisfy fpqc descent needed for scheme charts, affine coordinates or morphism descent; this unit has no separate instance of this input."
+   },
+   {
+    "node": "lem-trf-fppf-covering-is-fpqc",
+    "why": "Generic Fppf covering families are fpqc covering families needed for scheme charts, affine coordinates or morphism descent; this unit has no separate instance of this input."
+   },
+   {
+    "node": "lem-weil-pbc-affine-morphism-permanence",
+    "why": "Generic Base change, affineness of the source, and quasi-compactness and separatedness of affine morphisms needed for scheme charts, affine coordinates or morphism descent; this unit has no separate instance of this input."
+   },
+   {
+    "node": "lem-weil-pbc-affine-scheme-qcqs",
+    "why": "Generic Affine schemes are quasi-compact and quasi-separated needed for scheme charts, affine coordinates or morphism descent; this unit has no separate instance of this input."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-module-over-field-flat",
+  "lem-weil-pbc-flat-morphism-affine-criterion",
+  "lem-weil-pbc-finite-type-noetherian-finite-presentation",
+  "lem-weil-pbc-fibre-product-affine-spectra",
+  "lem-weil-pbc-morphism-into-affine-scheme",
+  "lem-weil-pbc-fpqc-representable-descent",
+  "lem-trf-fppf-covering-is-fpqc",
+  "lem-weil-pbc-affine-morphism-permanence",
+  "lem-weil-pbc-affine-scheme-qcqs"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q94-327d9b4be",
+  "group": "Q94",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q94-327d9b4be (reviewer sub-agent of L); spot-checked: Read the item, all 4 new nodes, every cited statement and the Stacks sources: criteria.tex 06FI/06FH; examples-stacks situation-quotient-stack and 04WM (G is an arbitrary group space; t(g,x)=a(g,x)); spaces-descent 041Z; stacks-properties 04YC (1)-(5); stacks-morphisms 04YW(4), definition-absolute-separated(8), 075S(2) and 06R7. The item is still unsplit on live and side-live, with no repair note. The statement is not weakened: it changes only the algebraic-stack and qcqs citations and states the left-action convention h·u=b(u,h^-1), which matches the reviewed lem-sfb-affine-action-quasicoherent-descent. New nodes: (1) flat-groupoid algebraicity = 06FI+06FH+04M9; it strictly generalizes the smooth-groupoid node (04TK), which does not apply to Bα_p. (2) Torsor stackification without smoothness = 04WM; torsors are schemes by 041Z, and I checked the arrow map h↦hg^-1 directly. (3) Quasi-compact detected by a surjection = 04YC(5); the existing criterion is DM-only. (4) qcqs permanence = 075S(2), with the absolute convention over Spec Z. None restates a clause of the item, and the DAG search over tags 06FI/06FH/06R7/04YC/075S/04WM found no duplicate. Steps: step 1 checks a*=(S⊗1)τρ, the groupoid identities, and t=s∘i, so s and t are flat lfp. Step 2 identifies the stackification with 𝒳 via the torsor node. Step 3 gets an affine diagonal by pulling back to R→U×U and applying the fppf-locality node; the absolute diagonal goes through the closed immersion from k⊗_Z k→k. Step 4 is the 06R7 atlas argument for any algebraic-stack base. Step 5 uses 04YC(5) with U affine. Step 6 checks e∈E^H↦1⊗e and fpqc descent of morphisms to Y. Step 7 applies 075S(2). Edge cases checked: E=0, trivial H, Bα_p/Bμ_p (flat, not smooth), non-finitely-generated E^H. stmt_deps, proof_deps and uses are consistent; no SGA. tool_uses (pbc scheme generics, lem-trf-fppf-covering-is-fpqc, def-a1-groupoid-scheme) accepted as generic. Batch-5: the listed citations reach only general definitions (def-trf-algebraic-space, def-trf-projective-bundle-morphism via def-sfb-stable-pointed-moduli-groupoids) or the generic fppf⊆fpqc fact; none is part of the LTF or PD proof, so OK. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.FlatAffineActionStackPresentation",
+  "declaration": "AlgebraicGeometry.SchemeAction.flat_affine_action_stack_presentation",
+  "declarations": [
+   "AlgebraicGeometry.SchemeAction.flat_affine_action_stack_presentation"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/FlatAffineActionStackPresentation.lean",
+  "statement": "theorem flat_affine_action_stack_presentation [Algebra.FiniteType k E] [IsAffineHom H.hom] [LocallyOfFiniteType H.hom] [QuasiCompact H.hom] : IsAlgebraicModuliStack (torsorGroupoid H (affineActionScheme k E)) ∧ IsQuasiCompactModuli (torsorGroupoid H (affineActionScheme k E)) ∧ IsQuasiSeparatedAlgebraicModuliMap (moduliBaseStructure (torsorGroupoid H (affineActionScheme k E))) ∧ ModuliSchemeTest @IsAffineHom (moduliRelativeDiagonal (moduliBaseStructure (torsorGroupoid H (affineActionScheme k E)))) ∧ IsRepresentableByAlgebraicSpaces (quotientAtlas H (affineActionScheme k E)) ∧ ModuliSpaceTest @Flat (quotientAtlas H (affineActionScheme k E)) ∧ ModuliSpaceTest @LocallyOfFinitePresentation (quotientAtlas H (affineActionScheme k E)) ∧ IsSurjectiveModuliMap (quotientAtlas H (affineActionScheme k E)) ∧ (∀ (Z : BasedCategory.{v, w} (Over (Spec (CommRingCat.of k)))) (g : BasedFunctor Z (torsorGroupoid H (affineActionScheme k E))), IsAlgebraicModuliStack Z → IsOpenMap (moduliPointMap (moduliTwoFiberFst g (quotientAtlas H (affineActionScheme k E)))) ∧ Function.Surjective (moduliPointMap (moduliTwoFiberFst g (quotientAtlas H (affineActionScheme k E))))) ∧ ∃ φ : BasedFunctor (torsorGroupoid H (affineActionScheme k E)) (discreteModuli (yoneda.obj (affineInvariantSpectrum k E H))), Nonempty (ModuliTwoIso ((quotientAtlas H (affineActionScheme k E)).comp φ) (discreteModuliMap (yoneda.map (affineInvariantProjection k E H)))) ∧ IsQuasiCompactAlgebraicModuliMap.{u, u, u + 1, u, u + 1, v₁, w₁} φ ∧ IsQuasiSeparatedAlgebraicModuliMap φ",
+  "branch": "sheaf-dag",
+  "by": "Q87",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "Reuses the invariant equalizer, restricted constants, spectrum and canonical projection from Sheaf.AlgebraicGeometry.AffineActionStackPresentation. Those constructions have no smoothness or finite-type binders. Only the nonsmooth fppf-presentation theorem is declared here. The scheme-action convention, all clauses and all universes are unchanged."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-cd05d9af8",
+  "group": "Q87",
+  "result": "pass",
+  "note": "Re-delivery after the landing refusal of 3e9143 (duplicate affineInvariantConstants/affineInvariantSpectrum vs the Q11-landed AffineActionStackPresentation). The local invariant helpers are removed; the module publicly imports AffineActionStackPresentation and uses affineInvariantSpectrum/affineInvariantProjection (Over.homMk Spec.map subtype = Spec(E^H↪E)). All other clauses are byte-identical and lean.statement is verbatim. The reused defs (eqLocus of (a∘swap)^* vs pr_U^*, codRestrict constants, Spec) carry only Field/CommRing/Algebra/GrpObj/ModObj binders, no smooth/finite-type ones; this equalizer equals the node's E^H via inversion. New def node def-sfb-affine-action-invariant-spectrum: existing:true on the unchanged live module; statement matches the 6 declarations; record statement verbatim; def-only stmt_deps; no other def owner; no DAG/import cycle. Live item still split and unlanded; 9 base stmt_deps kept. Substance re-checked: no smoothness, no f.g. of E^H; algebraic/qc/qs/affine diagonal over k; π representable, flat, lfp, surjective; open and surjective after any base change; φ pinned by 2-iso, qcqs; edge cases E=0, trivial H, α_p/μ_p covered; sorry only; Worker report and Second reading present. No file changed, no compile."
+ }
+}

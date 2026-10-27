@@ -1,0 +1,85 @@
+{
+ "id": "lem-trf-irreducible-root-degree-bound",
+ "kind": "statement",
+ "title": "Degree bound for an irreducible polynomial with a root in a finite extension",
+ "statement": "Let $K\\subseteq E$ be fields [def-pc-field-extension], with $E$ finite-dimensional as a $K$-vector space, and write $d=\\dim_K E$ [def-weil-vector-space-dimension]. Let $p\\in K[X]$ [def-weil-polynomial-ring] be monic and irreducible (a nonzero nonunit whose every factorization has a unit factor). If $\\alpha\\in E$ satisfies $p(\\alpha)=0$, then $p$ is the minimal polynomial of $\\alpha$ over $K$, namely the monic polynomial of least degree vanishing at $\\alpha$, and $\\deg p\\leq d$.",
+ "source": {
+  "document": "literature/stacks-project/fields.tex",
+  "place": "Tags 09G7 (example-degree-simple-algebraic-extension), 09GN (lemma-degree-minimal-polynomial), and 09G9 (lemma-multiplicativity-degrees). Exact Mathlib clauses: minpoly.eq_of_irreducible_of_monic, FieldTheory/Minpoly/Field.lean:136--137; minpoly.natDegree_le, FieldTheory/Minpoly/Finite.lean:37."
+ },
+ "stmt_deps": [
+  "def-pc-field-extension",
+  "def-weil-vector-space-dimension",
+  "def-weil-polynomial-ring"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "An irreducible monic polynomial with a root in a finite dimensional field extension has degree at most the dimension of the extension",
+   "results": "8 hits: minpoly.natDegree_le, minpoly.degree_le, PowerBasis.dim_le_degree_of_root, PowerBasis.dim_le_natDegree_of_root, minpoly.degree_dvd, irreducible_X_pow_sub_C_of_root_adjoin_eq_top, minpoly.min, IsAdjoinRootMonic.finrank.  Read minpoly.eq_of_irreducible_of_monic at FieldTheory/Minpoly/Field.lean:136--137 and minpoly.natDegree_le at FieldTheory/Minpoly/Finite.lean:37. The first gives exactly p=minpoly K alpha; rewriting the second gives the degree bound. Field vector spaces are free, supplying its Module.Free hypothesis.",
+   "date": "2026-10-23",
+   "verdict": "match"
+  },
+  {
+   "tool": "loogle",
+   "query": "minpoly.eq_of_irreducible_of_monic",
+   "results": "1 hits: minpoly.eq_of_irreducible_of_monic.  Read minpoly.eq_of_irreducible_of_monic at FieldTheory/Minpoly/Field.lean:136--137 and minpoly.natDegree_le at FieldTheory/Minpoly/Finite.lean:37. The first gives exactly p=minpoly K alpha; rewriting the second gives the degree bound. Field vector spaces are free, supplying its Module.Free hypothesis.",
+   "date": "2026-10-23",
+   "verdict": "match"
+  },
+  {
+   "tool": "grep",
+   "query": "eq_of_irreducible_of_monic|theorem natDegree_le ",
+   "results": "15 hits: Mathlib/FieldTheory/IntermediateField/Adjoin/Basic.lean, Mathlib/FieldTheory/IntermediateField/Adjoin/Basic.lean, Mathlib/FieldTheory/Minpoly/Field.lean, Mathlib/FieldTheory/Minpoly/Field.lean, Mathlib/FieldTheory/Minpoly/Field.lean, Mathlib/FieldTheory/Minpoly/Field.lean, Mathlib/FieldTheory/Minpoly/IsIntegrallyClosed.lean, Mathlib/FieldTheory/Minpoly/IsConjRoot.lean.  Read minpoly.eq_of_irreducible_of_monic at FieldTheory/Minpoly/Field.lean:136--137 and minpoly.natDegree_le at FieldTheory/Minpoly/Finite.lean:37. The first gives exactly p=minpoly K alpha; rewriting the second gives the degree bound. Field vector spaces are free, supplying its Module.Free hypothesis.",
+   "date": "2026-10-23",
+   "verdict": "match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "If an irreducible monic polynomial vanishes at x it equals the minimal polynomial of x",
+   "results": "8 hits: minpoly.unique', IsIntegrallyClosed.minpoly.unique, minpoly.unique_of_degree_le_degree_minpoly, minpoly.unique, minpoly, minpoly.min, Polynomial.annIdealGenerator_eq_minpoly, minpoly.IsIntegrallyClosed.unique_of_degree_le_degree_minpoly.  Read minpoly.eq_of_irreducible_of_monic at FieldTheory/Minpoly/Field.lean:136--137 and minpoly.natDegree_le at FieldTheory/Minpoly/Finite.lean:37. The first gives exactly p=minpoly K alpha; rewriting the second gives the degree bound. Field vector spaces are free, supplying its Module.Free hypothesis.",
+   "date": "2026-10-23",
+   "verdict": "match"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "minpoly.eq_of_irreducible_of_monic, minpoly.natDegree_le",
+  "file": "Mathlib/FieldTheory/Minpoly/Field.lean",
+  "line": 136,
+  "how": "One declaration per clause: minpoly.eq_of_irreducible_of_monic (Field.lean:136--137) identifies p with minpoly K alpha from irreducibility, the root equality and monicity; rewrite minpoly.natDegree_le (Mathlib/FieldTheory/Minpoly/Finite.lean:37) by that equality for the bound. The field E is nontrivial and a free K-module; Module.Finite is precisely the assumed finite dimension. Both signatures and surrounding hypotheses read."
+ },
+ "status": "mathlib",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-algclosed-fg-field-finite",
+  "date": "2026-10-23",
+  "group": "Q93"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Proof (1)--(2), semistable-alteration input in the nearby-cycle branch: ILO Exposé X, Theorem 3.4, Step 3, invoking Temkin 2010, Theorems 1.5 and 1.1 for a semistable multipointed modification. Temkin proof component: Arbitrary base change of semistable marked curves and fibrewise stability. Supplies the hypothesis transfer used by its Steps 4, 6 and 11: nodal geometric fibres over the chosen algebraic closure give nodal fibres over every algebraically closed field. Re-split of lem-trf-node-algebraically-closed-extension: old Step 1, residue-field and closed-point argument. Field-theoretic subargument: finite field generation plus abstract algebraic closedness rules out positive transcendence degree. Supporting field-theoretic input: Degree bound for an irreducible polynomial with a root in a finite extension.",
+   "via": [
+    "lem-trf-algclosed-fg-field-finite",
+    "lem-trf-nodal-completion-rational-point",
+    "lem-trf-node-algebraically-closed-extension",
+    "lem-trf-semistable-marked-base-change",
+    "lem-trf-temkin-stable-modification",
+    "lem-trf-stable-modification-flat-curve-pair",
+    "lem-trf-dejong-relative-marked-semistable",
+    "lem-trf-relative-marked-nodal-reduction",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ }
+}

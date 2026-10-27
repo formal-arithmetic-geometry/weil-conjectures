@@ -1,0 +1,242 @@
+{
+ "id": "lem-sfb-space-fpqc-qc-separated-descent",
+ "kind": "statement",
+ "title": "Quasi-compactness and separatedness of spaces descend under fpqc scheme covers",
+ "statement": "Let $S,T$ be schemes [def-pc-scheme], let $X$ be an algebraic space over $S$ [def-trf-algebraic-space], and let $f:X\\to T$ be an $S$-morphism. Let $\\{g_i:T_i\\to T\\}_{i\\in I}$ be an fpqc covering by schemes [def-weil-pbc-fpqc-covering], and put $f_i:X_i=X\\times_TT_i\\to T_i$. Quasi-compactness and separatedness of morphisms of algebraic spaces have the scheme-test meanings in [lem-trf-space-qc-separated-etale-local]: quasi-compact means that every affine scheme base change has a quasi-compact source space (one admitting a surjective etale map from a quasi-compact scheme), and separated means that the representable diagonal is a closed immersion on every scheme test. For each property $P$ in the list quasi-compact, separated, separately, if every $f_i$ has $P$, then $f$ has $P$. No representability, finite-type, properness, or Noetherian assumption on $f$ is imposed.",
+ "source": {
+  "document": "literature/stacks-project/spaces-descent.tex",
+  "place": "Tags 041L (lemma-descending-property-quasi-compact) and 0421 (lemma-descending-property-separated), descent implication, restricted to scheme base and scheme covering members."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-trf-algebraic-space",
+  "def-weil-pbc-fpqc-covering",
+  "lem-trf-space-qc-separated-etale-local"
+ ],
+ "proof": [
+  {
+   "text": "Fix an arbitrary affine test Z → T. Apply [lem-sfb-space-fpqc-finite-affine-test-cover], obtaining A = X ×_T Z, finitely many affine W_j → T_i(j), cartesian scheme tests B_j of the local maps f_i(j), and maps B_j → A jointly surjective on points. This construction has no quasi-compactness hypothesis. Apply the local quasi-compactness hypothesis to each W_j. The definition [lem-trf-space-qc-separated-etale-local] supplies a quasi-compact scheme atlas of its chosen presheaf pullback. The unique isomorphism from B_j to this pullback transports the atlas; representable etaleness and surjectivity transport by cartesian-square invariance under an isomorphism. Thus [lem-a1-space-etale-open-image], points_compactSpace_iff, makes each |B_j| compact.",
+   "uses": [
+    "lem-sfb-space-fpqc-finite-affine-test-cover",
+    "lem-trf-space-qc-separated-etale-local",
+    "lem-a1-space-etale-open-image"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Each |B_j| → |A| is continuous by [lem-a1-space-point-open-calculus]. Its image is compact, and the finite union of these images is all of |A|, including when the finite index set is empty. Therefore |A| is compact. Apply points_compactSpace_iff in [lem-a1-space-etale-open-image] to get a quasi-compact scheme atlas. Project its map to X and Z, use Yoneda fullness to obtain the scheme projection, and transport the atlas along the unique comparison to the chosen presheaf pullback. This proves the defining affine-test condition for f.",
+   "uses": [
+    "lem-a1-space-point-open-calculus",
+    "lem-a1-space-etale-open-image"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For separatedness represent an arbitrary scheme test R → X ×_T X of the relative diagonal by D → R. Its representing square is obtained from the absolute representable diagonal [def-trf-algebraic-space] by pulling back along X ×_T X → X ×_S X. The relative-diagonal square under an arbitrary base change is cartesian, as proved explicitly by compatible-pair lifts. Set R_i = R ×_T T_i. Test the closed diagonal of f_i on R_i. Paste its representing square with the relative-diagonal base-change square, then cancel the original D square. Yoneda reflects the resulting cartesian square, so the scheme map D ×_R R_i → R_i is a closed immersion, invariant under the unique pullback isomorphism.",
+   "uses": [
+    "def-trf-algebraic-space"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The R_i → R form an fpqc family by [lem-weil-pbc-fpqc-covering-axioms], using pullbacks in Over S and the forgetful functor to schemes. Apply [lem-pc-fpqc-descend-closed-immersion] to D → R and the closed-immersion hypotheses from the preceding step. Each relative diagonal scheme test is a closed immersion; this proves separatedness independently of quasi-compactness.",
+   "uses": [
+    "lem-weil-pbc-fpqc-covering-axioms",
+    "lem-pc-fpqc-descend-closed-immersion"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-trf-algebraic-space",
+  "lem-a1-space-etale-open-image",
+  "lem-a1-space-point-open-calculus",
+  "lem-pc-fpqc-descend-closed-immersion",
+  "lem-sfb-space-fpqc-finite-affine-test-cover",
+  "lem-trf-space-qc-separated-etale-local",
+  "lem-weil-pbc-fpqc-covering-axioms"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/spaces-descent.tex",
+  "place": "Tags 041L and 0421; finite affine test refinement followed by finite compact-image union and the atlas criterion, and an explicit cartesian-square proof of relative diagonal descent."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For a morphism from an algebraic space to a scheme quasi compactness and separatedness descend along an fpqc covering of the base",
+   "results": "8 hits: AlgebraicGeometry.instHasOfPostcompPropertySchemeQuasiCompactQuasiSeparated, AlgebraicGeometry.IsLocalAtTarget.descendsAlong_inf_quasiCompact, AlgebraicGeometry.QuasiCompact.of_comp, AlgebraicGeometry.QuasiCompactCover.homCover, AlgebraicGeometry.QuasiCompactCover.of_hom, AlgebraicGeometry.instHasOfPostcompPropertySchemeQuasiSeparatedTopMorphismProperty, AlgebraicGeometry.quasiCompact_isStableUnderBaseChange, AlgebraicGeometry.instIsMultiplicativeSchemeQuasiCompact",
+   "date": "2026-10-23",
+   "verdict": "no match: the candidates concern schemes or generic pullback functors, not the asserted algebraic-space theorem"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Faithfully flat descent of quasi compact separated morphisms of algebraic spaces over an arbitrary scheme",
+   "results": "8 hits: AlgebraicGeometry.Flat.surjective_descendsAlong_surjective_inf_flat_inf_quasicompact, AlgebraicGeometry.descendsAlong_isomorphisms_surjective_inf_flat_inf_quasicompact, AlgebraicGeometry.descendsAlong_universallyInjective_surjective_inf_flat_inf_quasicompact, AlgebraicGeometry.descendsAlong_universallyOpen_surjective_inf_flat_inf_quasicompact, AlgebraicGeometry.descendsAlong_universallyClosed_surjective_inf_flat_inf_quasicompact, AlgebraicGeometry.instHasOfPostcompPropertySchemeQuasiCompactQuasiSeparated, AlgebraicGeometry.descendsAlong_isOpenImmersion_surjective_inf_flat_inf_quasicompact', AlgebraicGeometry.instDescendsAlongSchemeMinMorphismPropertySurjectiveFlatLocallyOfFinitePresentationOfQuasiCompactOfIsZariskiLocalAtTarget",
+   "date": "2026-10-23",
+   "verdict": "no match: the candidates concern schemes or generic pullback functors, not the asserted algebraic-space theorem"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Quasi compactness and separatedness of a morphism of algebraic spaces descend along fpqc coverings",
+   "results": "8 hits: AlgebraicGeometry.IsZariskiLocalAtTarget.descendsAlong_inf_quasiCompact, AlgebraicGeometry.HasRingHomProperty.descendsAlong, AlgebraicGeometry.QuasiCompact, AlgebraicGeometry.IsLocalAtTarget.descendsAlong_inf_quasiCompact, AlgebraicGeometry.QuasiSeparated, AlgebraicGeometry.IsSeparated.instQuasiSeparated, AlgebraicGeometry.quasiSeparated_iff_quasiSeparatedSpace, AlgebraicGeometry.HasAffineProperty.descendsAlong_of_affineAnd",
+   "date": "2026-10-23",
+   "verdict": "no match: the candidates concern schemes or generic pullback functors, not the asserted algebraic-space theorem"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"DescendsAlong\"",
+   "results": "12 hits: AlgebraicGeometry.IsZariskiLocalAtTarget.descendsAlong, AlgebraicGeometry.of_pullback_fst_Spec_of_codescendsAlong, AlgebraicGeometry.IsZariskiLocalAtTarget.descendsAlong_inf_quasiCompact, AlgebraicGeometry.HasRingHomProperty.descendsAlong, AlgebraicGeometry.HasAffineProperty.descendsAlong_of_affineAnd, AlgebraicGeometry.descendsAlong_isOpenImmersion_surjective_inf_flat_inf_quasicompact', AlgebraicGeometry.descendsAlong_universallyClosed_surjective_inf_flat_inf_quasicompact, AlgebraicGeometry.descendsAlong_universallyInjective_surjective_inf_flat_inf_quasicompact",
+   "date": "2026-10-23",
+   "verdict": "no match: the candidates concern schemes or generic pullback functors, not the asserted algebraic-space theorem"
+  },
+  {
+   "tool": "grep",
+   "query": "(fpqc|descen).*(quasiCompact|separated)|quasiCompact.*descen",
+   "results": "15 hits: Mathlib/AlgebraicGeometry/Morphisms/Descent.lean, Mathlib/AlgebraicGeometry/Morphisms/Descent.lean, Mathlib/AlgebraicGeometry/Morphisms/Descent.lean, Mathlib/AlgebraicGeometry/Morphisms/Descent.lean, Mathlib/AlgebraicGeometry/Morphisms/Descent.lean, Mathlib/AlgebraicGeometry/Morphisms/FlatDescent.lean, Mathlib/AlgebraicGeometry/Morphisms/FlatDescent.lean, Mathlib/AlgebraicGeometry/Morphisms/FlatDescent.lean ; searched Mathlib/AlgebraicGeometry",
+   "date": "2026-10-23",
+   "verdict": "no match: the candidates concern schemes or generic pullback functors, not the asserted algebraic-space theorem"
+  },
+  {
+   "tool": "grep",
+   "query": "AlgebraicSpace|algebraic.space",
+   "results": "0 hits: ; searched Mathlib/AlgebraicGeometry",
+   "date": "2026-10-23",
+   "verdict": "no match: inspected scheme-only quasi-compactness and descent signatures; none covers algebraic spaces"
+  },
+  {
+   "tool": "leansearch",
+   "query": "An algebraic space over a scheme is quasi compact or separated when it is so after an fpqc covering",
+   "results": "8 hits: AlgebraicGeometry.Scheme.quasiSeparatedSpace_of_isOpenCover, AlgebraicGeometry.Scheme.instQuasiSeparatedSpaceCarrierCarrierCommRingCatOfIsSeparated, AlgebraicGeometry.QuasiCompact, AlgebraicGeometry.quasiCompact_affineProperty_iff_quasiSeparatedSpace, AlgebraicGeometry.quasiCompact_over_affine_iff, AlgebraicGeometry.IsSeparated.instQuasiSeparated, AlgebraicGeometry.Scheme.quasiCompactCover, AlgebraicGeometry.QuasiSeparated",
+   "date": "2026-10-23",
+   "verdict": "no match: inspected scheme-only quasi-compactness and descent signatures; none covers algebraic spaces"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"DescendsAlong\"",
+   "results": "12 hits: AlgebraicGeometry.IsZariskiLocalAtTarget.descendsAlong, AlgebraicGeometry.of_pullback_fst_Spec_of_codescendsAlong, AlgebraicGeometry.IsZariskiLocalAtTarget.descendsAlong_inf_quasiCompact, AlgebraicGeometry.HasRingHomProperty.descendsAlong, AlgebraicGeometry.HasAffineProperty.descendsAlong_of_affineAnd, AlgebraicGeometry.descendsAlong_isOpenImmersion_surjective_inf_flat_inf_quasicompact', AlgebraicGeometry.descendsAlong_universallyClosed_surjective_inf_flat_inf_quasicompact, AlgebraicGeometry.descendsAlong_universallyInjective_surjective_inf_flat_inf_quasicompact",
+   "date": "2026-10-23",
+   "verdict": "no match: inspected scheme-only quasi-compactness and descent signatures; none covers algebraic spaces"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Quasi compactness and separatedness of algebraic space morphisms descend along fpqc coverings by schemes",
+   "results": "8 hits: AlgebraicGeometry.instHasOfPostcompPropertySchemeQuasiCompactQuasiSeparated, AlgebraicGeometry.IsLocalAtTarget.descendsAlong_inf_quasiCompact, AlgebraicGeometry.QuasiCompact.of_comp, AlgebraicGeometry.QuasiCompactCover.of_hom, AlgebraicGeometry.instHasOfPostcompPropertySchemeQuasiSeparatedTopMorphismProperty, AlgebraicGeometry.IsZariskiLocalAtTarget.descendsAlong_inf_quasiCompact, AlgebraicGeometry.QuasiCompactCover.homCover, AlgebraicGeometry.instIsMultiplicativeSchemeQuasiCompact",
+   "date": "2026-10-23",
+   "verdict": "no match: inspected scheme-only quasi-compactness and descent signatures; none covers algebraic spaces"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Faithfully flat descent of quasi compact separated algebraic spaces without finite type hypotheses",
+   "results": "8 hits: AlgebraicGeometry.Flat.surjective_descendsAlong_surjective_inf_flat_inf_quasicompact, AlgebraicGeometry.descendsAlong_universallyInjective_surjective_inf_flat_inf_quasicompact, AlgebraicGeometry.descendsAlong_isOpenImmersion_surjective_inf_flat_inf_quasicompact', AlgebraicGeometry.descendsAlong_isomorphisms_surjective_inf_flat_inf_quasicompact, AlgebraicGeometry.descendsAlong_universallyOpen_surjective_inf_flat_inf_quasicompact, AlgebraicGeometry.descendsAlong_universallyClosed_surjective_inf_flat_inf_quasicompact, AlgebraicGeometry.instDescendsAlongSchemeMinMorphismPropertySurjectiveFlatLocallyOfFinitePresentationOfQuasiCompactOfIsZariskiLocalAtTarget, AlgebraicGeometry.Flat",
+   "date": "2026-10-23",
+   "verdict": "no match: inspected scheme-only quasi-compactness and descent signatures; none covers algebraic spaces"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-space-relative-ampleness-fpqc-descent",
+  "date": "2026-10-23",
+  "group": "Q117"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Stable genus and smooth-family open loci in curve families. Supporting input: 0E76 proof, openness and base-change compatibility of canonical ampleness, including representability by a scheme over that open. Supporting input: 0D3C: descend geometric-fibre ampleness to the residue field, and glue the relatively ample open pieces including schematicity. The existing etale-only node does not cover inseparable field extensions. Supporting input in the proof of 0D3C: quasi-compact and separated preparation before forming the section algebra; the two properties are asserted separately.",
+   "via": [
+    "lem-sfb-space-relative-ampleness-fpqc-descent",
+    "lem-sfb-space-relative-ample-locus",
+    "lem-sfb-stable-and-smooth-family-open-loci",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-space-fpqc-qc-separated-descent",
+  "worker": "stage1",
+  "summary": "Kept the statement unchanged. Proved quasi-compactness on arbitrary affine tests by a finite affine fpqc refinement and the point-topology atlas criterion. Proved separatedness independently by applying scheme fpqc closed-immersion descent to every represented diagonal test. All inputs already exist; no new nodes.",
+  "blueprint": "The inherited ancestry serves the relative-ampleness input to the geometric supporting chain of det-thm-sf-ctf-stability-direct-images, proof (3). The latest proof (3) is compactification/proper/open preservation; this split resolves only the existing Stacks 0D3C geometric prerequisite and does not change that route. blueprint_refs.py ancestor prints None for this inherited ancestry; retain its existing from.node=null and precise from.place. No same-statement blueprint node found by fpqc/quasi-compactness searches.",
+  "tool_uses": [
+   {
+    "node": "lem-trf-space-fibre-products-etale-covers",
+    "why": "Existence and scheme representation of sheaf fibre products; generic algebraic-space infrastructure."
+   },
+   {
+    "node": "lem-weil-pbc-fpqc-covering-axioms",
+    "why": "Base change of the scheme fpqc family to the affine test and to a diagonal scheme test."
+   },
+   {
+    "node": "lem-a1-space-point-open-calculus",
+    "why": "Point-surjectivity of a fibre-product map and continuity, used only as generic geometric tools."
+   },
+   {
+    "node": "lem-a1-space-etale-open-image",
+    "why": "Only the final equivalence between quasi-compact point space and a quasi-compact scheme atlas; no open-image theorem is used."
+   },
+   {
+    "node": "lem-pc-fpqc-descend-closed-immersion",
+    "why": "Generic scheme closed-immersion descent applied to the represented diagonal test; no statement within this unit supplies that descent theorem."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-fpqc-covering-axioms",
+  "lem-a1-space-point-open-calculus",
+  "lem-a1-space-etale-open-image",
+  "lem-pc-fpqc-descend-closed-immersion"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-NJ-609bbb1a1",
+  "group": "NJ",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NJ-609bbb1a1 (reviewer sub-agent of L); spot-checked: Single-commit S1 split with no new nodes; the statement and stmt_deps are unchanged. There are 4 steps; proof_deps equal the union of the uses and there is no cycle. Source matches Stacks spaces-descent.tex 041L (l.1163, affine-test cube argument plus 040W) and 0421 (diagonal argument plus 02L6). The 041L reduction to an affine singleton cover is replaced by the finite affine refinement in the fpqc definition, which is valid. Step 1: the base change identity A×_Z W_j = X_{i(j)}×_{T_{i(j)}} W_j holds, so the affine-test qc hypothesis on f_{i(j)} applies exactly. Step 2: fibre-product point surjectivity, continuity and the final 'qc point space iff qc atlas' clause of lem-a1-space-etale-open-image are all in the cited statements. The finite-union argument and the empty case are written out, and the step does not claim that the composite atlas is étale. Step 3: the relative diagonal X→X×_T X is correctly reduced to the representable diagonal over S via the equalizer, and D×_R R_i is the Δ_{f_i} test (checked). Step 4: fpqc axiom (3) plus scheme closed-immersion descent with no finiteness hypotheses. Edge cases checked: singleton or identity cover, empty Z, infinite index set, inseparable field cover. Duplicate search: lem-a1-space-fpqc-separated-valuative-descent needs the valuative hypothesis too, lem-sfb-space-quasicompact-fppf-local needs fppf covers, and proper-fpqc concerns properness, so none subsumes the item. Batch-5: the two lem-a1 citations reach sec-trace-formula only through the general definition def-trf-algebraic-space. lem-trf-space-fibre-products-etale-covers is generic fibre-product existence for algebraic spaces. None is a step of the trace formula or Poincaré duality, so the citations are acceptable. The five tool_uses are generic infrastructure and are accepted. No changes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.AlgebraicSpaceFpqcQCSeparatedDescent",
+  "declaration": "AlgebraicGeometry.AlgebraicSpace.quasiCompact_separated_of_fpqc_scheme_cover",
+  "file": "lean/Sheaf/AlgebraicGeometry/AlgebraicSpaceFpqcQCSeparatedDescent.lean",
+  "statement": "theorem quasiCompact_separated_of_fpqc_scheme_cover {S : Scheme.{u}} (X : AlgebraicSpace S) (T : Over S) (f : X.obj.obj ⟶ yoneda.obj T) {I : Type v} (Tᵢ : I → Over S) (g : ∀ i, Tᵢ i ⟶ T) (hg : Presieve.ofArrows (fun i ↦ (Tᵢ i).left) (fun i ↦ (g i).left) ∈ Scheme.fpqcPrecoverage T.left) : ((∀ i, IsQuasiCompactPresheafMap (pullback.snd f (yoneda.map (g i)))) → IsQuasiCompactPresheafMap f) ∧ ((∀ i, IsSeparatedPresheafMap (pullback.snd f (yoneda.map (g i)))) → IsSeparatedPresheafMap f)",
+  "branch": "newtargets-dag",
+  "by": "NF",
+  "date": "2026-10-23",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-e8255cdf6",
+  "group": "NF",
+  "result": "pass",
+  "note": "The node record differs from live only in lean; lean.statement matches the file verbatim, and the file has one theorem with proof sorry and no definitions. Clauses: S : Scheme.{u}; X : AlgebraicSpace S; T : Over S; f : X.obj.obj ⟶ yoneda.obj T; I : Type v with g : Tᵢ i ⟶ T in Over S; hg is membership of ofArrows in Scheme.fpqcPrecoverage T.left (the recorded Mathlib leaf); f_i = pullback.snd f (yoneda.map (g i)), codomain T_i. IsQuasiCompactPresheafMap and IsSeparatedPresheafMap are reused from the live dependency lem-trf-space-qc-separated-etale-local and are the node's scheme-test meanings. Two independent descent implications; no extra hypotheses or universe restriction. Source: Stacks 041L l.1162 and 0421 l.1630, restricted to a scheme base. Edge cases checked: empty I, singleton cover, infinite I, non-étale fpqc covers. No duplicate: AlgebraicSpaceFpqcValuativeDescent also needs valuative lifting and uses the absolute diagonal; the étale-local theorem covers étale families only. Plain imports are the recorded modules of proof_deps (fibre-products, etale-open-image, fpqc closed-immersion descent). Docstrings carry the source tags, the blueprint tag and the 4 proof steps. No recompile, per instruction; the worker reports a clean scompile."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K1",
+  "result": "pass",
+  "landing": "20261026T082328-L-2162332",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

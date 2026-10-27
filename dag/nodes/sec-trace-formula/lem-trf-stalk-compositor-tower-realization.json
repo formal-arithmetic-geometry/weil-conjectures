@@ -1,0 +1,221 @@
+{
+ "id": "lem-trf-stalk-compositor-tower-realization",
+ "kind": "statement",
+ "title": "Specified stalk compositors on simultaneous quotient diagrams",
+ "statement": "Fix the finite-field coefficient datum [def-trf-coefficient-conventions]: $k=\\overline{\\mathbf F}_q$, $s=\\operatorname{Spec}k$, a prime $\\ell\\ne\\operatorname{char}k$, a finite extension $E/\\mathbf Q_\\ell$, its valuation ring $R$, a uniformizer $\\varpi$, and $A_n=R/\\varpi^n$ for $n\\ge1$. All schemes below have $\\ell$ invertible and use compatible small pro-etale sites [def-weil-pbc-proetale-site]. Put $\\widehat R_T=\\lim_n(A_n)_T$. Use $D^b_c(T,R)$ of [def-weil-derived-complete-integral-detailed], completed pullback of [def-pur-integral-derived-operations], and point sections $\\operatorname{Fib}_s$ of [def-weil-finite-coefficient-point]. For a geometric point $v:s\\to T$ and $M\\in D^b_c(T,R)$ put $J_v(M)=\\operatorname{Fib}_s(Lv^*M)$. Stalks and their representatives $[U,u,a]$ mean [def-weil-proetale-geometric-stalk]. For a strict tower $T_\\bullet$ of complexes with transitions $t_n$, write $H(T_\\bullet)=\\operatorname{Cone}(1-s_T:\\prod_nT_n\\to\\prod_nT_n)[-1]$, $s_T((x_n))=(t_nx_{n+1})$, with degree-$i$ coordinates $(b,a)\\in\\prod_nT_n^{i-1}\\oplus\\prod_nT_n^i$ and differential $d(b,a)=(-db-(1-s_T)a,da)$.\n\nLet $Z\\xrightarrow hY\\xrightarrow fX$, $w:s\\to Z$, $v:s\\to Y$ and $M\\in D^b_c(X,R)$ be given. Choose one flat-term K-flat $P\\to M$ and its simultaneous quotient tower $P_n$. Use the bounded zigzags and maps $e_{u,P}$ of [lem-trf-bounded-quotient-stalk-realization]. Write $c^{\\rm fin}_{f,v,P_n}:(f^*P_n)_v\\to(P_n)_{fv}$ for the finite germ comparison [lem-trf-proetale-pullback-stalk-coherence], and $\\chi_{v,f}:L(fv)^*\\to Lv^*Lf^*$ for the compositor specified by [lem-trf-integral-pullback-comparison-realization].\n\nThe map $\\Gamma(s,\\chi_{v,f,M}^{-1}):J_v(Lf^*M)\\to J_{fv}(M)$ is represented, under that node's entire-tower counit comparison $\\eta_{v,f,M}$ and the $e$ comparisons, by the realization of the strict tower map $c^{\\rm fin}_{f,v,P_\\bullet}$. More precisely the finite section coordinates satisfy\n$$e_{fv,n}=c^{\\rm fin}_{f,v,P_n}\\,e_{v,f^*P_n}\\,\\Gamma(s,\\chi^{\\rm fin}_{v,f,P_n}),$$\nso the section-coordinate map is $e_{fv,n}^{-1}c^{\\rm fin}_{f,v,P_n}e_{v,f^*P_n}$. These coordinate identifications are comparisons of entire simultaneous quotient diagrams and are independent of representatives and natural for arbitrary integral derived morphisms.\n\nFor the iterated pullbacks, the three finite comparison maps and the finite compositor on this same tower obey\n$$c^{\\rm fin}_{fh,w,P_\\bullet}=c^{\\rm fin}_{f,hw,P_\\bullet}\\,c^{\\rm fin}_{h,w,f^*P_\\bullet}\\,(\\chi^{\\rm fin}_{h,f,P_\\bullet})_w.$$\nThe integral counit identifications carry the last factor to $J_w(\\chi_{h,f,M})$ and identify all nested pullbacks with these towers. The identity comparison is the identity tower map, and its integral unit identification at $s$ is $J_{\\mathrm{id}}(N)=\\operatorname{Fib}_sN$.\n\nFor any $\\alpha\\in\\operatorname{Aut}(k)$ and $\\delta=\\operatorname{Spec}(\\alpha)$, put $R_{u,\\alpha,n}[U,u',x]=[U,u'\\delta,x]$. The square between $c^{\\rm fin}_{f,v,P_\\bullet}$ and $R_{v,\\alpha,\\bullet},R_{fv,\\alpha,\\bullet}$ commutes as a strict tower square, and the specified integral comparisons carry this square to its realized square. On a pullback germ $(U,u',V,\\theta,x)$ both routes give $[V,\\operatorname{pr}_V\\theta u'\\delta,x]$. All assertions concern the whole diagram before realization, with the same quotient transitions; agreement of separate reductions is not substituted for them.",
+ "source": {
+  "document": "literature/stacks-project/sites.tex",
+  "place": "Tag 0F4F (lemma-point-functor): the combined-colimit identification behind the finite composition germ formula; agent extension to the entire-tower counit realization, original Steps 3, 6, 7; blueprint thm-trf-l-function-euler-product.proof.md, Step 1, Local powers, input (b)."
+ },
+ "stmt_deps": [
+  "def-trf-coefficient-conventions",
+  "def-weil-pbc-proetale-site",
+  "def-weil-derived-complete-integral-detailed",
+  "def-pur-integral-derived-operations",
+  "def-weil-finite-coefficient-point",
+  "def-weil-proetale-geometric-stalk",
+  "def-weil-geometric-point",
+  "def-weil-completed-integral-coefficients",
+  "lem-trf-bounded-quotient-stalk-realization",
+  "lem-trf-proetale-pullback-stalk-coherence",
+  "lem-trf-integral-pullback-comparison-realization"
+ ],
+ "proof": [
+  {
+   "text": "Obtain I from integralPullbackComparisonRealization. Construct strict finite data T using [lem-trf-strict-stalk-towers]; descend this fixed T using [lem-trf-stalk-tower-descent]. Transport its strict equations along toStrict equality.",
+   "uses": [
+    "lem-trf-integral-pullback-comparison-realization",
+    "lem-trf-strict-stalk-towers",
+    "lem-trf-stalk-tower-descent"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Expand the integral compositor. Its inverse cancels the pullback realization in integralNormalized, leaving the section image of eta and the inverse finite compositor. sectionsComposition is exactly the required remaining equality.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "For integralIteration first cancel eta in the defining compositor to get its realization square. Counit naturality transports that square through reduction. Naturality of the pullback realization and sections transports the resulting counit square to the nested point-fibre equation. All finite maps are the given entire-system maps.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Expand the integral unit. Cancel the completeness unit with its inverse and the finite system unit with its inverse; what remains is integralNormalized at the identity point. Package these three proved equations with the strict equations, descent laws and quotient compatibility.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-trf-integral-pullback-comparison-realization",
+  "lem-trf-strict-stalk-towers",
+  "lem-trf-stalk-tower-descent"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites.tex",
+  "place": "Strict finite diagrams and normalized Roos descent separated; integral compositor, iteration and unit proved explicitly by categorical cancellation and counit naturality in Lean."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Completed pullback composition evaluated at a geometric point agrees with the realized finite stalk comparison on the whole quotient tower and respects associativity and reparametrization",
+   "results": "8 hits: AlgebraicGeometry.Scheme.Pullback.t'_fst_fst_fst, AlgebraicGeometry.Scheme.Pullback.t'_snd_snd, AlgebraicGeometry.Scheme.Pullback.t'_fst_fst_snd, AlgebraicGeometry.Scheme.Pullback.t'_snd_fst_fst, AlgebraicGeometry.Scheme.Pullback.t'_fst_snd, AlgebraicGeometry.Scheme.Pullback.t'_snd_fst_snd, AlgebraicGeometry.Scheme.Pullback.lift_comp_ι, AlgebraicGeometry.Scheme.Pullback.t_fst_fst",
+   "date": "2026-10-22",
+   "verdict": "no match: hits supply general truncation, localization, topological stalk or cone tools; none states this specified completed quotient-stalk comparison or specializes to it in one line"
+  },
+  {
+   "tool": "grep",
+   "query": "proetale|proEtale|stalk.*[Cc]omp|[Cc]omp.*stalk",
+   "results": "25 hits: Mathlib/AlgebraicGeometry/Restrict.lean, Mathlib/AlgebraicGeometry/Restrict.lean, Mathlib/AlgebraicGeometry/Restrict.lean, Mathlib/AlgebraicGeometry/Restrict.lean, Mathlib/AlgebraicGeometry/OpenImmersion.lean, Mathlib/AlgebraicGeometry/OpenImmersion.lean, Mathlib/AlgebraicGeometry/OpenImmersion.lean, Mathlib/AlgebraicGeometry/OpenImmersion.lean",
+   "date": "2026-10-22",
+   "verdict": "no match: hits supply general truncation, localization, topological stalk or cone tools; none states this specified completed quotient-stalk comparison or specializes to it in one line"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.NatIso",
+   "results": "loogle: unknown identifier 'CategoryTheory.NatIso'; 0 hits: ",
+   "date": "2026-10-22",
+   "verdict": "invalid query: loogle: unknown identifier 'CategoryTheory.NatIso'"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Coherence of the counit normalized completed pullback compositor with finite stalk germ comparisons before inverse limit realization",
+   "results": "8 hits: TopCat.Presheaf.germ_stalkPullbackHom, CompHausLike.LocallyConstant.counit, StalkSkyscraperPresheafAdjunctionAuxs.counit, TopCat.Presheaf.germ_stalkPullbackHom_assoc, CategoryTheory.ChosenPullbacksAlong.unit_pullbackComp_hom, TopCat.Presheaf.germToPullbackStalk, TopCat.Presheaf.germ_stalkPullbackInv, CategoryTheory.ChosenPullbacksAlong.pullbackComp_hom_counit",
+   "date": "2026-10-22",
+   "verdict": "no match: hits supply general truncation, localization, topological stalk or cone tools; none states this specified completed quotient-stalk comparison or specializes to it in one line"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"pullbackComp\"",
+   "results": "12 hits: CategoryTheory.Limits.pullbackComparison, CategoryTheory.Limits.pullbackComparison_comp_fst, CategoryTheory.Limits.pullbackComparison_comp_snd, CategoryTheory.Limits.pullbackComparison_comp_fst_assoc, CategoryTheory.Limits.pullbackComparison_comp_snd_assoc, CategoryTheory.Limits.map_lift_pullbackComparison, CategoryTheory.Limits.map_lift_pullbackComparison_assoc, CategoryTheory.Limits.pullbackComparison_comp",
+   "date": "2026-10-22",
+   "verdict": "no match: hits supply general truncation, localization, topological stalk or cone tools; none states this specified completed quotient-stalk comparison or specializes to it in one line"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Coherence of the counit normalized completed pullback compositor with finite stalk germ comparisons before inverse limit realization",
+   "results": "8 hits: TopCat.Presheaf.germToPullbackStalk_stalkPullbackHom, TopCat.Presheaf.germ_stalkPullbackInv, TopCat.Presheaf.germToPullbackStalk_stalkPullbackHom_assoc, TopCat.Presheaf.germ_stalkPullbackHom, TopCat.Presheaf.germ_stalkPullbackInv_assoc, TopCat.Presheaf.germ_stalkPullbackHom_assoc, TopCat.Presheaf.pushforwardPullbackAdjunction_unit_pullback_map_germToPullbackStalk, TopCat.Presheaf.stalkPullbackInv",
+   "date": "2026-10-22",
+   "verdict": "no match: hits supply general truncation, localization, topological stalk or cone tools; none states this specified completed quotient-stalk comparison or specializes to it in one line"
+  },
+  {
+   "tool": "grep",
+   "query": "sheafFiberComapIso|stalkPullbackIso|[Cc]ompleted.*[Ss]talk|[Ss]talk.*[Cc]ompositor",
+   "results": "2 hits: Mathlib/Topology/Sheaves/Stalks.lean, Mathlib/CategoryTheory/Sites/Point/Comap.lean. Read the site point comparison at Mathlib/CategoryTheory/Sites/Point/Comap.lean:69 and the topological stalk comparison at Mathlib/Topology/Sheaves/Stalks.lean:335.",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary sheaf fibers, topological stalks, finite-set Galois fibers or scheme pullbacks; none states the specified completed integral whole-quotient-tower compositor and reparametrization realization."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"stalkPullback\"",
+   "results": "9 hits: TopCat.Presheaf.stalkPullbackIso, TopCat.Presheaf.stalkPullbackHom, TopCat.Presheaf.stalkPullbackInv, TopCat.Presheaf.germToPullbackStalk_stalkPullbackHom, TopCat.Presheaf.germ_stalkPullbackInv, TopCat.Presheaf.germToPullbackStalk_stalkPullbackHom_assoc, TopCat.Presheaf.germ_stalkPullbackInv_assoc, TopCat.Presheaf.germ_stalkPullbackHom. Read the site point comparison at Mathlib/CategoryTheory/Sites/Point/Comap.lean:69 and the topological stalk comparison at Mathlib/Topology/Sheaves/Stalks.lean:335.",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary sheaf fibers, topological stalks, finite-set Galois fibers or scheme pullbacks; none states the specified completed integral whole-quotient-tower compositor and reparametrization realization."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Coherence of the counit normalized completed pullback compositor with finite stalk germ comparisons before inverse limit realization",
+   "results": "8 hits: TopCat.Presheaf.germ_stalkPullbackHom, CompHausLike.LocallyConstant.counit, StalkSkyscraperPresheafAdjunctionAuxs.counit, TopCat.Presheaf.germ_stalkPullbackHom_assoc, CategoryTheory.ChosenPullbacksAlong.unit_pullbackComp_hom, TopCat.Presheaf.germToPullbackStalk, TopCat.Presheaf.germ_stalkPullbackInv, CategoryTheory.ChosenPullbacksAlong.pullbackComp_hom_counit. Read the site point comparison at Mathlib/CategoryTheory/Sites/Point/Comap.lean:69 and the topological stalk comparison at Mathlib/Topology/Sheaves/Stalks.lean:335.",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary sheaf fibers, topological stalks, finite-set Galois fibers or scheme pullbacks; none states the specified completed integral whole-quotient-tower compositor and reparametrization realization."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Completed pullback composition evaluated at a geometric point agrees with the realized finite stalk comparison on the whole quotient tower and respects associativity and reparametrization",
+   "results": "8 hits: AlgebraicGeometry.Scheme.Pullback.t'_snd_snd, AlgebraicGeometry.Scheme.Pullback.t'_fst_fst_fst, AlgebraicGeometry.Scheme.Pullback.t'_fst_fst_snd, AlgebraicGeometry.Scheme.Pullback.t'_snd_fst_fst, AlgebraicGeometry.Scheme.Pullback.t', AlgebraicGeometry.Scheme.Pullback.t'_snd_fst_snd, AlgebraicGeometry.Scheme.Pullback.lift_comp_ι, AlgebraicGeometry.Scheme.Pullback.t_fst_fst. Read the site point comparison at Mathlib/CategoryTheory/Sites/Point/Comap.lean:69 and the topological stalk comparison at Mathlib/Topology/Sheaves/Stalks.lean:335.",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary sheaf fibers, topological stalks, finite-set Galois fibers or scheme pullbacks; none states the specified completed integral whole-quotient-tower compositor and reparametrization realization."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Natural isomorphism of composite inverse image point fiber functors with automorphism reindexing of pointed neighborhoods and derived inverse limit realization",
+   "results": "8 hits: CategoryTheory.PreGaloisCategory.autIsoFibers, CategoryTheory.PreGaloisCategory.autIsoFibers_inv_app, Profinite.NobelingProof.spanFunctorIsoIndexFunctor, Profinite.NobelingProof.spanFunctorIsoIndexFunctor_inv_app, lightProfiniteToLightCondSetIsoTopCatToLightCondSet, Profinite.NobelingProof.spanFunctorIsoIndexFunctor_hom_app_hom_hom_apply_coe, CompHausLike.LocallyConstant.sigmaComparison_comp_sigmaIso, TopologicalSpace.OpenNhds.inclusionMapIso. Read the site point comparison at Mathlib/CategoryTheory/Sites/Point/Comap.lean:69 and the topological stalk comparison at Mathlib/Topology/Sheaves/Stalks.lean:335.",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary sheaf fibers, topological stalks, finite-set Galois fibers or scheme pullbacks; none states the specified completed integral whole-quotient-tower compositor and reparametrization realization."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-completed-stalk-reparametrization-coherence",
+  "date": "2026-10-22",
+  "group": "Q127"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-thm-trace-transport",
+ "blueprint": {
+  "from": {
+   "node": "thm-trf-l-function-euler-product",
+   "place": "Step 1, Local powers, input (b): canonical integral stalk and fixed-point identifications; extracted original completed-stalk proof Steps 3,6,7",
+   "via": [
+    "lem-trf-completed-stalk-reparametrization-coherence",
+    "lem-trf-rational-local-frobenius-powers"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-trf-stalk-compositor-tower-realization",
+  "worker": "stage1",
+  "summary": "Written a ten-step proof with no new nodes: strict germ/transition calculations, the identity-point specialization giving the finite section-coordinate equation, the explicit two-coordinate cone map, realization through the specified counit, iterated and unit comparisons, reparametrization and localization for arbitrary derived naturality. Statement and stmt_deps unchanged. Existing finite and integral comparison nodes provide all non-elementary inputs.",
+  "blueprint": "thm-trf-l-function-euler-product.proof.md Step 1, Local powers, input (b): the canonical stalk identifications are natural and compatible with composition. This is the integral whole-quotient-diagram calculation underlying that input.",
+  "tool_uses": [
+   {
+    "node": "lem-pur-integral-operations-well-defined",
+    "why": "Generic resolution-invariance and quasi-isomorphism inversion for the completed-pullback cone, needed to descend chain-natural diagrams; the trace-transport unit does not supply this localization tool."
+   },
+   {
+    "node": "lem-weil-pbc-localization-universal-property",
+    "why": "Generic descent of natural transformations and their equalities through localization; used to obtain naturality for arbitrary integral derived morphisms from the strict representative calculations."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pur-integral-operations-well-defined",
+  "lem-weil-pbc-localization-universal-property"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q07-e6576f84d",
+  "group": "Q07",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q07-e6576f84d (reviewer sub-agent of L); spot-checked: I read the whole delivery: a ten-step split with no new nodes; the statement and stmt_deps are unchanged. It carries the old parent Steps 3, 6 and 7 of lem-trf-completed-stalk-reparametrization-coherence, which I read verbatim in the Q127 report. Sources checked: Stacks sites.tex:8514 lemma-point-functor (0F4F), whose combined-colimit proof gives the germ formula, and sites.tex:8558 (05V1); blueprint main-20261015 thm-trf-l-function-euler-product proof, Local powers input (b). No SGA is used. Every citation lies in the transitive uses closure of sk-thm-trace-transport (sk-c-proper-global, sk-def-sf-operations, sk-def-sf-admissible, sk-thm-properbasechange), so the two declared tool_uses are harmless and accepted. Step checks: (3) the finite composition law at Z=s, h=v, point id_s, conjugated by Gamma≅H_id, gives e_fv = c^fin e_{v,f*P} Gamma(chi^fin); the domains are right. (4) I recomputed the cone chain-map identity, including the -db sign; there is no cross term. (5) Expanding H(c^fin) E Gamma(chi) gives e_fv; cancelling yields the item's formula in the item's direction. (6) Both routes on the double pullback germ give [V, pr_V theta2 pr_W theta1 u', x], and the result is strict under rho_n. (7) The last factor is identified using the integral node's associativity, finite-iteration and whole-diagram statement clauses. (9) The relation h u' = u'' is preserved by composing with delta, matching the finite r-square with c_{f,v delta}. (10) The localization UP (2)/(3) plus well-definedness give naturality for roofs. Edge cases n=1, identity maps, alpha=1, M=0 and unbounded K-flat representatives all behave. I found no duplicate (rg -L over dag/nodes) and no cycle. One fault, C1/C4: J_v, Fib_s and the integral comparison node are defined only on D^b_c, so applying them to Lf^*M, Lv^*Lf^*M, L(fv)^*M, Lh^*Lf^*M and their w-pullbacks needs lem-pur-integral-operations-preserve-constructible (1). The old Step 3 cited it and the delivery dropped it. Repaired by citing it in Steps 5 and 7 and adding it to proof_deps; no other field changed. File: fixes/dag/nodes/sec-trace-formula/lem-trf-stalk-compositor-tower-realization.json.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.Paper.TraceStalkCompositorTowerRealization",
+  "declaration": "WeilConjectures.trfStalkCompositorTowerRealization",
+  "declarations": [
+   "WeilConjectures.trfStalkCompositorTowerRealization"
+  ],
+  "file": "lean/Sheaf/Paper/TraceStalkCompositorTowerRealization.lean",
+  "statement": "theorem trfStalkCompositorTowerRealization (D : FiniteFieldDatum.{u}) (hl : l ≠ D.p) : ∃ (I : IntegralComparisonSystem.{u} l) (S : TrfStalkCompositorTowerData l E D I), IntegralComparisonRealizationCoherence l E E (AlgHom.id ℚ_[l] E) I ∧ TrfStalkCompositorTowerCoherent l E D I S ∧ TrfStalkCompositorQuotientCompatible l E D I S",
+  "branch": "sheaf-dag",
+  "by": "Q52",
+  "date": "2026-10-22",
+  "existing": false,
+  "note": "The original data definitions and signatures are reexported unchanged from TraceStalkCompositorTowerData. The original theorem signature is unchanged. Its proof combines two strictly smaller construction results and proves all three integral coherence equations explicitly."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-e7b788222",
+  "group": "Q52",
+  "result": "pass",
+  "note": "Read node, 11 stmt_deps, Stacks 0F4F and the delivered module. The node record differs from live only in its lean field; the statement is verbatim and all 13 declarations exist with no name collision; sole sorry; source and blueprint docstrings throughout; ten steps in the docstring; real ProEt site; report has Worker report and Second reading. Every field of the data structure is pinned: c by HEq to proEtalePullbackStalkComparison (∃!), r to proEtaleStalkReparam (∃!), gamma by pointGerm, e by sectionGerm, finitePullback by finiteUnit, comparison, derivedR and sections by the factor clauses on every Q.obj C, integral by integralNormalized. The realization functor is free only up to a common automorphism that cancels; the absolute composite is pinned by the quotient-compatibility clause to trfQuotientStalkRealizationArrow for every presentation and every germ-normalized eP. integralCompositor reduces, after unfolding integralComparisonComposition, to the derived form of finiteSections; finiteSections is consistent with finiteComposition (h=v, w=𝟙), sectionGerm and gamma naturality; integralIteration is a genuine associativity pasting; the reparametrization and identity clauses match the node's order. HEq carriers are the ModuleColimit of the same underlying Ab presheaves (coefficientSequenceRestriction_evaluation), so provable. Edge cases n+1=1, M=0, empty schemes, identity maps, arbitrary α and unbounded K-flat terms are covered; no extra assumptions and no universe restriction. Advisories: ∃ I follows the dependency's and the parent's ∃-system convention; integralPointUnit is implied by integralNormalized plus the unit definition, with the identity content carried by finiteIdentity, realizedIdentity, sectionGerm and pointGerm. No compile needed because no file was changed."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-6c681",
+  "group": "K9",
+  "result": "pass",
+  "landing": "20261025T095605-L-3451337",
+  "kind": "interface",
+  "note": "independent cc review: item proof and two new sorry statements (trfStrictStalkTowers, trfStalkTowerDescent) checked against lem-trf-stalk-compositor-tower-realization and the published IntegralComparisonPullbackModel normalization; moved data module diffed against the clone (only docstring tags differ); reader gate: SourceSectionStalkConeComparison compiled against the delivered modules"
+ }
+}

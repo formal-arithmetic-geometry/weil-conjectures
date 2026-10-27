@@ -1,0 +1,280 @@
+{
+ "id": "lem-sp-scalar-compositor-replacement-pasting",
+ "kind": "statement",
+ "title": "Coefficient compositor pasting through replacement and model isomorphisms",
+ "statement": "Let $\\mathcal C_{i,R}$, for $i=0,1,2$ and $R=A,B$, be categories [def-nagata-category]. A functor preserves identities and composition; a natural transformation $u:F\\to G$ has components with $G(a)u_x=u_yF(a)$, and a natural isomorphism has invertible components. Composition below is right to left. Specify functors $T_i:\\mathcal C_{i,A}\\to\\mathcal C_{i,B}$ and, for each $R$, functors $F_R,E_R:\\mathcal C_{0,R}\\to\\mathcal C_{1,R}$, $P_R:\\mathcal C_{1,R}\\to\\mathcal C_{2,R}$, $Q_R:\\mathcal C_{0,R}\\to\\mathcal C_{2,R}$, natural isomorphisms $c_R:F_R\\simeq E_R$, $\\alpha_R:P_RF_R\\simeq Q_R$, and natural transformations\n$$\\beta_F:T_1F_A\\to F_BT_0,\\quad\\beta_P:T_2P_A\\to P_BT_1,\\quad\\beta_Q:T_2Q_A\\to Q_BT_0,\\quad\\sigma:T_1E_A\\to E_BT_0.$$\nAssume the following equalities of natural transformations:\n$$c_BT_0\\circ\\beta_F=\\sigma\\circ T_1c_A,\\qquad \\beta_Q\\circ T_2\\alpha_A=\\alpha_BT_0\\circ P_B\\beta_F\\circ\\beta_PF_A.$$\nFor $\\lambda_R=\\alpha_R\\circ P_R(c_R^{-1})$, one has\n$$\\beta_F\\circ T_1(c_A^{-1})=c_B^{-1}T_0\\circ\\sigma,\\qquad \\beta_Q\\circ T_2\\lambda_A=\\lambda_BT_0\\circ P_B\\sigma\\circ\\beta_PE_A.$$\nThe equalities are natural in the input; invertibility of the $\\beta$ transformations is not assumed.\nFor a second such system on the same categories and with the same $T_i,E_R,\\sigma$, let $\\rho_{F,R}:F_R\\simeq F'_R$, $\\rho_{P,R}:P_R\\simeq P'_R$, $\\rho_{Q,R}:Q_R\\simeq Q'_R$ satisfy\n$$c'_R\\rho_{F,R}=c_R,\\qquad \\alpha'_R\\circ P'_R(\\rho_{F,R})\\circ(\\rho_{P,R}F_R)=\\rho_{Q,R}\\circ\\alpha_R,$$\nand, for $X=F,P,Q$ with source/target indices $(i,j)=(0,1),(1,2),(0,2)$ respectively,\n$$\\beta'_X\\circ T_j\\rho_{X,A}=\\rho_{X,B}T_i\\circ\\beta_X.$$\nThen\n$$\\lambda'_R\\circ(\\rho_{P,R}E_R)=\\rho_{Q,R}\\circ\\lambda_R.$$\nUnder these source and target identifications the displayed $\\lambda$ coefficient equation for the primed system is the one for the unprimed system. In particular changing only $F_R$ cancels its comparison completely. These conclusions respect identities and composites of model isomorphisms. No additive, exactness, tensor-flatness or nonemptiness hypothesis is required.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-reduction/sk-lem-sp-reduction-exceptional.proof.md",
+  "place": "Charts, coefficient compatibility for the specified left identification; old scalar-normalization Steps 3 and 4 and the coefficient/refinement calculations of Step 5"
+ },
+ "stmt_deps": [
+  "def-nagata-category"
+ ],
+ "proof": [
+  {
+   "text": "Work componentwise and retain right-to-left composition. The category laws of [def-nagata-category] allow reassociation and deletion of identity factors. In particular, cancellation of an invertible factor means composing with its specified inverse, not cancelling any coefficient map. A functor $H$ carries an inverse pair $ab=1$, $ba=1$ to the inverse pair $H(a)H(b)=1$, $H(b)H(a)=1$. These observations apply to every occurrence of $c_R$, $\\rho_{X,R}$ and their functor images below.",
+   "uses": [
+    "def-nagata-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-reduction/sk-lem-sp-reduction-exceptional.proof.md",
+    "place": "Charts, coefficient compatibility for the specified left identification; old scalar-normalization Steps 3 and 4 and the coefficient/refinement calculations of Step 5"
+   }
+  },
+  {
+   "text": "Postcompose $c_BT_0\\circ\\beta_F=\\sigma\\circ T_1c_A$ with $c_B^{-1}T_0$ and precompose with $T_1(c_A^{-1})$. The left side becomes $\\beta_F\\circ T_1(c_A^{-1})$, while the right side becomes $(c_B^{-1}T_0)\\circ\\sigma\\circ T_1(c_A)\\circ T_1(c_A^{-1})=(c_B^{-1}T_0)\\circ\\sigma$. This proves the first required equation using only the assumed square and inverse identities.",
+   "uses": [
+    "def-nagata-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-reduction/sk-lem-sp-reduction-exceptional.proof.md",
+    "place": "Charts, coefficient compatibility for the specified left identification; old scalar-normalization Steps 3 and 4 and the coefficient/refinement calculations of Step 5"
+   }
+  },
+  {
+   "text": "At $x\\in\\mathcal C_{0,A}$ apply the defining naturality of $\\beta_P$ to $c_{A,x}^{-1}:E_Ax\\to F_Ax$:\n$$\\beta_{P,F_Ax}\\,T_2P_A(c_{A,x}^{-1})=P_BT_1(c_{A,x}^{-1})\\,\\beta_{P,E_Ax}.$$\nSuppress $x$ in the remaining factors. Substituting the assumed compositor square, this identity, and Step 2 gives\n$$\\begin{aligned}\n\\beta_QT_2\\lambda_A\n&=\\alpha_BT_0\\,P_B\\beta_F\\,\\beta_PF_A\\,T_2P_A(c_A^{-1})\\\\\n&=\\alpha_BT_0\\,P_B(\\beta_F\\,T_1(c_A^{-1}))\\,\\beta_PE_A\\\\\n&=\\alpha_BT_0\\,P_B(c_B^{-1}T_0)\\,P_B\\sigma\\,\\beta_PE_A\\\\\n&=\\lambda_BT_0\\,P_B\\sigma\\,\\beta_PE_A.\n\\end{aligned}$$\nEach rewriting is functoriality or one of the displayed equations; no inverse of $\\beta_P$ or $\\beta_F$ occurs.",
+   "uses": [
+    "def-nagata-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-reduction/sk-lem-sp-reduction-exceptional.proof.md",
+    "place": "Charts, coefficient compatibility for the specified left identification; old scalar-normalization Steps 3 and 4 and the coefficient/refinement calculations of Step 5"
+   }
+  },
+  {
+   "text": "For one ring $R$, suppress $R$ and put $r=\\rho_F$, $s=\\rho_P$, $t=\\rho_Q$. The hypothesis $c'r=c$ implies $c'^{-1}=rc^{-1}$ by multiplication with inverses. Naturality of $s:P\\to P'$ at $c_x^{-1}$ says $P'(c_x^{-1})s_{E x}=s_{F x}P(c_x^{-1})$. Consequently\n$$\\begin{aligned}\n\\lambda'\\,(sE)&=\\alpha' P'(c'^{-1})(sE)\\\\\n&=\\alpha' P'r\\,P'(c^{-1})(sE)\\\\\n&=\\alpha' P'r\\,(sF)P(c^{-1})\\\\\n&=t\\alpha P(c^{-1})=t\\lambda.\n\\end{aligned}$$\nThe penultimate equality is exactly the assumed $\\alpha$ model square. This proves the model formula for both $A$ and $B$. If only $F$ changes then $s$ and $t$ are identities, and the formula reads $\\lambda'=\\lambda$.",
+   "uses": [
+    "def-nagata-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-reduction/sk-lem-sp-reduction-exceptional.proof.md",
+    "place": "Charts, coefficient compatibility for the specified left identification; old scalar-normalization Steps 3 and 4 and the coefficient/refinement calculations of Step 5"
+   }
+  },
+  {
+   "text": "Write $s_R=\\rho_{P,R}$ and $t_R=\\rho_{Q,R}$. Let $L=\\beta_Q T_2\\lambda_A$ and $L'=\\beta'_Q T_2\\lambda'_A$ be the two left sides of the coefficient equation. Precompose $L'$ with the source identification $T_2(s_AE_A)$. By Step 4 and the assumed $Q$ coefficient model square,\n$$L'\\,T_2(s_AE_A)=\\beta'_Q T_2(t_A\\lambda_A)=(t_BT_0)\\,\\beta_Q T_2\\lambda_A=(t_BT_0)L.$$\nThus the left sides agree after exactly the specified endpoint identifications.",
+   "uses": [
+    "def-nagata-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-reduction/sk-lem-sp-reduction-exceptional.proof.md",
+    "place": "Charts, coefficient compatibility for the specified left identification; old scalar-normalization Steps 3 and 4 and the coefficient/refinement calculations of Step 5"
+   }
+  },
+  {
+   "text": "Put $H=\\lambda_BT_0\\,P_B\\sigma\\,\\beta_PE_A$ and $H'=\\lambda'_BT_0\\,P'_B\\sigma\\,\\beta'_PE_A$. At $x$, the $P$ coefficient model square gives $\\beta'_{P,E_Ax}T_2(s_{A,E_Ax})=s_{B,T_1E_Ax}\\beta_{P,E_Ax}$. Naturality of $s_B$ at $\\sigma_x:T_1E_Ax\\to E_BT_0x$ then gives $P'_B(\\sigma_x)s_{B,T_1E_Ax}=s_{B,E_BT_0x}P_B(\\sigma_x)$. With Step 4 these yield\n$$\\begin{aligned}\nH' T_2(s_AE_A)&=\\lambda'_BT_0\\,P'_B\\sigma\\,(s_BT_1E_A)\\,\\beta_PE_A\\\\\n&=\\lambda'_BT_0\\,(s_BE_BT_0)\\,P_B\\sigma\\,\\beta_PE_A\\\\\n&=(t_BT_0)H.\n\\end{aligned}$$\nTogether with Step 5 this identifies the two equations: $L'=H'$ if and only if $L=H$, because $T_2(s_AE_A)$ and $t_BT_0$ have inverses by Step 1. In particular Step 3 proves the primed equation under these identifications.",
+   "uses": [
+    "def-nagata-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-reduction/sk-lem-sp-reduction-exceptional.proof.md",
+    "place": "Charts, coefficient compatibility for the specified left identification; old scalar-normalization Steps 3 and 4 and the coefficient/refinement calculations of Step 5"
+   }
+  },
+  {
+   "text": "Check identities and composites explicitly. For two successive model changes write $(r,s,t)$ and $(r',s',t')$, suppressing $R$. Identity changes delete identity factors in Steps 4--6. For composites, $c''r'r=c'r=c$ and, by naturality of $s'$ at $r$,\n$$\\begin{aligned}\n\\alpha''P''(r'r)((s's)F)\n&=\\alpha''P''r'\\,P''r\\,(s'F)(sF)\\\\\n&=\\alpha''P''r'\\,(s'F')P'r\\,(sF)\\\\\n&=t'\\alpha'P'r\\,(sF)=t't\\alpha.\n\\end{aligned}$$\nFor each $X$, its successive coefficient squares give\n$$\\beta''_X T_j(\\rho'_{X,A}\\rho_{X,A})=(\\rho'_{X,B}T_i)\\beta'_X T_j\\rho_{X,A}=((\\rho'_{X,B}\\rho_{X,B})T_i)\\beta_X.$$\nThe composite is therefore another allowed model change. Moreover $\\lambda''(s's)E=t'\\lambda'(sE)=t't\\lambda$. The endpoint identifications in Steps 5--6 compose to $T_2((s'_As_A)E_A)$ and $(t'_Bt_B)T_0$, since functors preserve composition. This proves the claimed coherence without making any choice of comparisons.",
+   "uses": [
+    "def-nagata-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-reduction/sk-lem-sp-reduction-exceptional.proof.md",
+    "place": "Charts, coefficient compatibility for the specified left identification; old scalar-normalization Steps 3 and 4 and the coefficient/refinement calculations of Step 5"
+   }
+  },
+  {
+   "text": "Finally all formulas are natural in the input. This is checked from the definition in the statement: for $u:F\\to G$, $v:G\\to H$ and $a:x\\to y$,\n$$H(a)v_xu_x=v_yG(a)u_x=v_yu_yF(a).$$\nPostwhiskering this equality by a functor preserves it by functoriality; prewhiskering replaces $a$ by its functor image. Naturality of an inverse follows by multiplying $E(a)c_x=c_yF(a)$ with $c_y^{-1}$ and $c_x^{-1}$, giving $F(a)c_x^{-1}=c_y^{-1}E(a)$. Thus every composite and whiskering used above, including $\\lambda$, is a natural transformation, and the component equalities are equalities of natural transformations. If an input category is empty the same statements are vacuous component equalities. Only the category laws, the inline definitions, and the stated hypotheses were used, so no extra additive, exactness, flatness, or nonemptiness assumption enters.",
+   "uses": [
+    "def-nagata-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-reduction/sk-lem-sp-reduction-exceptional.proof.md",
+    "place": "Charts, coefficient compatibility for the specified left identification; old scalar-normalization Steps 3 and 4 and the coefficient/refinement calculations of Step 5"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-nagata-category"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-reduction/sk-lem-sp-reduction-exceptional.proof.md",
+  "place": "Charts, coefficient compatibility for the specified left identification; old scalar-normalization Steps 3 and 4 and the coefficient/refinement calculations of Step 5; explicit component calculations using Stacks Tags 0014, 001B and 001I (categories-definition-category, categories-definition-functor, categories-definition-transformation-functors)"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "naturality_.*(inv|comp)|exchange|hcomp|whisker.*comm",
+   "results": "{\"t\": \"2026-10-22T06:53:46Z\", \"tool\": \"grep\", \"query\": \"naturality_.*(inv|comp)|exchange|hcomp|whisker.*comm\", \"sub\": \"CategoryTheory/NatTrans.lean\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: naturality and TwoSquare provide ingredients, but no returned declaration gives the replacement-compositor identity together with three independent model-change cancellations for possibly noninvertible coefficient maps."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Pasting a natural transformation square for composite functors with conjugation by invertible natural transformations preserves coefficient comparison and refinement squares",
+   "results": "{\"t\": \"2026-10-22T06:53:46Z\", \"tool\": \"leansearch\", \"query\": \"Pasting a natural transformation square for composite functors with conjugation by invertible natural transformations preserves coefficient comparison and refinement squares\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.TwoSquare.natTrans\", \"CategoryTheory.NatTrans.mapSquare\", \"CategoryTheory.TwoSquare\", \"CategoryTheory.TwoSquare.mk\", \"CategoryTheory.TwoSquare.vComp\", \"CategoryTheory.CatCommSq\", \"CategoryTheory.Square.mapFunctor\", \"CategoryTheory.MorphismProperty.naturalityProperty\"], \"digest\": \"6959654423e8403c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: naturality and TwoSquare provide ingredients, but no returned declaration gives the replacement-compositor identity together with three independent model-change cancellations for possibly noninvertible coefficient maps."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.NatTrans.naturality",
+   "results": "{\"t\": \"2026-10-22T06:53:46Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.NatTrans.naturality\", \"sub\": \"\", \"ok\": true, \"n_hits\": 9, \"note\": \"\", \"top\": [\"CategoryTheory.NatTrans.naturality\", \"CategoryTheory.Limits.PullbackCone.isoMk\", \"CategoryTheory.Limits.PushoutCocone.isoMk\", \"CategoryTheory.Limits.PullbackCone.isoMk_hom_hom\", \"CategoryTheory.Limits.PullbackCone.isoMk_inv_hom\", \"CategoryTheory.Limits.PushoutCocone.isoMk_hom_hom\", \"CategoryTheory.Limits.PushoutCocone.isoMk_inv_hom\", \"CategoryTheory.Grothendieck.map_map\"], \"digest\": \"4b8320ba791eeca4\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: naturality and TwoSquare provide ingredients, but no returned declaration gives the replacement-compositor identity together with three independent model-change cancellations for possibly noninvertible coefficient maps."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Naturality and cancellation imply that conjugating a functor compositor by an isomorphism preserves a commuting coefficient square and isomorphism of functor models",
+   "results": "{\"t\": \"2026-10-22T06:53:56Z\", \"tool\": \"leanfinder\", \"query\": \"Naturality and cancellation imply that conjugating a functor compositor by an isomorphism preserves a commuting coefficient square and isomorphism of functor models\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.CatCommSq.iso\", \"CategoryTheory.CatCommSq.vInv\", \"CategoryTheory.CatCommSq.iso_hom_naturality\", \"CategoryTheory.CatCommSq.hComp_iso_hom_app\", \"CategoryTheory.CatCommSq.hInvEquiv\", \"CategoryTheory.CatCommSq.vComp_iso_hom_app\", \"CategoryTheory.CatCommSq.vInvEquiv\", \"CategoryTheory.CatCommSq.hInv\"], \"digest\": \"d3f193ec71b8d224\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: naturality and TwoSquare provide ingredients, but no returned declaration gives the replacement-compositor identity together with three independent model-change cancellations for possibly noninvertible coefficient maps."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Given natural coefficient transformations for two composable functors and their composite, replace the first functor by a naturally isomorphic functor and paste the coefficient square compatibly with model isomorphisms",
+   "results": "{\"t\": \"2026-10-22T06:53:57Z\", \"tool\": \"leanfinder\", \"query\": \"Given natural coefficient transformations for two composable functors and their composite, replace the first functor by a naturally isomorphic functor and paste the coefficient square compatibly with model isomorphisms\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.CatCommSq.iso\", \"CategoryTheory.CatCommSq.iso_hom_naturality\", \"CategoryTheory.CatCommSq.iso_hom_naturality_assoc\", \"CategoryTheory.SmallObject.SuccStruct.Iteration.subsingleton.mapEq_trans\", \"CategoryTheory.HasLiftingProperty.transfiniteComposition.SqStruct.map_f'\", \"CategoryTheory.TwoSquare.EquivalenceJ.functor_map\", \"CategoryTheory.ComposableArrows.map'_inv_eq_inv_map'\", \"AlgebraicTopology.DoldKan.Compatibility.τ₁\"], \"digest\": \"ec213ac0dc21109f\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: naturality and TwoSquare provide ingredients, but no returned declaration gives the replacement-compositor identity together with three independent model-change cancellations for possibly noninvertible coefficient maps."
+  },
+  {
+   "tool": "grep",
+   "query": "TwoSquare|naturality",
+   "results": "{\"t\": \"2026-10-22T06:55:18Z\", \"tool\": \"grep\", \"query\": \"TwoSquare|naturality\", \"sub\": \"CategoryTheory/Functor/TwoSquare.lean\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"15\", \"50\", \"52\", \"54\", \"55\"], \"digest\": \"ff69be7d0bb3341c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: naturality and TwoSquare provide ingredients, but no returned declaration gives the replacement-compositor identity together with three independent model-change cancellations for possibly noninvertible coefficient maps."
+  },
+  {
+   "tool": "grep",
+   "query": "naturality|vComp|hComp",
+   "results": "{\"t\": \"2026-10-22T09:12:32Z\", \"tool\": \"grep\", \"query\": \"naturality|vComp|hComp\", \"sub\": \"CategoryTheory/Functor/TwoSquare.lean\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"130\", \"136\", \"140\", \"146\", \"155\"], \"digest\": \"f6f71686278f07c4\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: returned naturality, square composition, adjunction mates, or specialized Dold-Kan comparisons supply ingredients only; none states the full replacement and three-model compatibility assertion with arbitrary coefficient transformations."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.NatTrans.naturality",
+   "results": "{\"t\": \"2026-10-22T09:12:32Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.NatTrans.naturality\", \"sub\": \"\", \"ok\": true, \"n_hits\": 9, \"note\": \"\", \"top\": [\"CategoryTheory.NatTrans.naturality\", \"CategoryTheory.Limits.PullbackCone.isoMk\", \"CategoryTheory.Limits.PushoutCocone.isoMk\", \"CategoryTheory.Limits.PullbackCone.isoMk_hom_hom\", \"CategoryTheory.Limits.PullbackCone.isoMk_inv_hom\", \"CategoryTheory.Limits.PushoutCocone.isoMk_hom_hom\", \"CategoryTheory.Limits.PushoutCocone.isoMk_inv_hom\", \"CategoryTheory.Grothendieck.map_map\"], \"digest\": \"4b8320ba791eeca4\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: returned naturality, square composition, adjunction mates, or specialized Dold-Kan comparisons supply ingredients only; none states the full replacement and three-model compatibility assertion with arbitrary coefficient transformations."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Replacing a functor by a naturally isomorphic functor in a compositor preserves commuting natural transformation coefficient squares and is compatible with changes of all functor models",
+   "results": "{\"t\": \"2026-10-22T09:12:35Z\", \"tool\": \"leanfinder\", \"query\": \"Replacing a functor by a naturally isomorphic functor in a compositor preserves commuting natural transformation coefficient squares and is compatible with changes of all functor models\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.CatCommSq.iso\", \"CategoryTheory.CatCommSq.hComp_iso_hom_app\", \"CategoryTheory.CatCommSq.vComp_iso_hom_app\", \"CategoryTheory.Limits.CategoricalPullback.CatCommSqOver.transformObjComp\", \"CategoryTheory.CatCommSq.iso_hom_naturality\", \"CategoryTheory.CatCommSq.vInv\", \"CategoryTheory.CatCommSq.iso_hom_naturality_assoc\", \"CategoryTheory.Functor.map_comp_heq'\"], \"digest\": \"05f0cdff3f563ab7\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: returned naturality, square composition, adjunction mates, or specialized Dold-Kan comparisons supply ingredients only; none states the full replacement and three-model compatibility assertion with arbitrary coefficient transformations."
+  },
+  {
+   "tool": "grep",
+   "query": "naturality|exchange|whiskerLeft_comp|whiskerRight_comp",
+   "results": "{\"t\": \"2026-10-22T09:13:00Z\", \"tool\": \"grep\", \"query\": \"naturality|exchange|whiskerLeft_comp|whiskerRight_comp\", \"sub\": \"CategoryTheory/NatTrans.lean\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"16\", \"19\", \"50\", \"56\", \"57\"], \"digest\": \"8fa647e236a90fcd\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: returned naturality, square composition, adjunction mates, or specialized Dold-Kan comparisons supply ingredients only; none states the full replacement and three-model compatibility assertion with arbitrary coefficient transformations."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Conjugating functor composition isomorphisms preserves coefficient natural transformations and compatibility with model isomorphisms",
+   "results": "{\"t\": \"2026-10-22T09:13:01Z\", \"tool\": \"leansearch\", \"query\": \"Conjugating functor composition isomorphisms preserves coefficient natural transformations and compatibility with model isomorphisms\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.conjugateEquiv_comp\", \"CategoryTheory.Endofunctor.Coalgebra.functorOfNatTransComp\", \"CategoryTheory.Endofunctor.Algebra.functorOfNatTransComp\", \"CategoryTheory.Pseudofunctor.Grothendieck.mapCompIso\", \"CategoryTheory.conjugateEquiv_iso\", \"CategoryTheory.Functor.mapContActionComp\", \"CategoryTheory.Functor.functorialityCompPostcompose\", \"CategoryTheory.Functor.mapCoconePrecompose\"], \"digest\": \"3ba24197843a1305\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: returned naturality, square composition, adjunction mates, or specialized Dold-Kan comparisons supply ingredients only; none states the full replacement and three-model compatibility assertion with arbitrary coefficient transformations."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Conjugate a composition comparison by a natural isomorphism and cancel the intermediate functor comparison to obtain a model invariant natural transformation square",
+   "results": "{\"t\": \"2026-10-22T09:13:02Z\", \"tool\": \"leanfinder\", \"query\": \"Conjugate a composition comparison by a natural isomorphism and cancel the intermediate functor comparison to obtain a model invariant natural transformation square\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicTopology.DoldKan.Compatibility.υ\", \"AlgebraicTopology.DoldKan.Compatibility.τ₁_hom_app\", \"CategoryTheory.CatCommSq.vInv\", \"CategoryTheory.CatCommSq.iso\", \"AlgebraicTopology.DoldKan.Compatibility.υ_hom_app\", \"AlgebraicTopology.DoldKan.Compatibility.τ₁\", \"CategoryTheory.CatCommSq.hInv\", \"CategoryTheory.CatCommSq.vComp_iso_hom_app\"], \"digest\": \"b223c1b6a5e71fdb\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: returned naturality, square composition, adjunction mates, or specialized Dold-Kan comparisons supply ingredients only; none states the full replacement and three-model compatibility assertion with arbitrary coefficient transformations."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sp-chart-left-scalar-normalization",
+  "date": "2026-10-22",
+  "group": "Q10"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-lem-sp-reduction",
+ "blueprint": {
+  "from": {
+   "node": "det-sp-reduction-exceptional",
+   "place": "Charts, coefficient compatibility for the specified left identification; old scalar-normalization Steps 3 and 4 and the coefficient/refinement calculations of Step 5",
+   "via": [
+    "lem-sp-chart-left-scalar-normalization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sp-scalar-compositor-replacement-pasting",
+  "worker": "stage1",
+  "summary": "Expanded inverse-square cancellation, the coefficient compositor calculation, cancellation of the F model, both endpoint transport equations, identity/composition coherence, and input naturality in eight elementary component calculations. Statement unchanged; no new nodes: all arguments use only category laws, inline definitions and the assumed squares. Exact project attachment and whole-blueprint searches found none.",
+  "blueprint": "det-sp-reduction-exceptional, Charts: coefficient compatibility of the specified left identification, realized by the scalar-normalization parent; Steps 2--3 give replacement pasting, Steps 4--7 its functor-model identifications, Step 8 naturality."
+ },
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q11-fc4b2ee6a",
+  "group": "Q11",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q11-fc4b2ee6a (reviewer sub-agent of L); spot-checked: Q11 fc4b2ee6 is a one-level split of the Q10-created unsplit node lem-sp-scalar-compositor-replacement-pasting. It has eight elementary steps and no new nodes. Compared with the Q10 run snapshot, the statement, stmt_deps, source and blueprint are byte-identical; all 6 old Mathlib searches are kept and 6 new ones added. There is no repair note, so the re-split rule does not apply. No SGA anywhere; the only cited node is the definition def-nagata-category (Stacks 0014), so no tool_uses. I checked the types of every hypothesis and conclusion. The item's hypotheses match the parent lem-sp-chart-left-scalar-normalization: its step 3 application (F,E,P,Q)=(F_e,E,F_d,F_g), and the α model square that its FIXed step 4 derives. I redid every calculation. Step 2 multiplies the first hypothesis by inverses. Step 3 applies β_P naturality at c^{-1}, then the second hypothesis and step 2. Step 4 uses c'^{-1}=r c^{-1} and s naturality to get λ'(sE)=tλ, so λ'=λ when only F changes. Steps 5-6 match both sides of the coefficient equation under T_2(s_A E_A) and t_B T_0, using s_B naturality at the arbitrary arrow σ. Step 7 handles composites via naturality of s' at r. Step 8 is naturality. Edge cases: a one-object category from the monoid (ℤ,·) with β=σ=0 satisfies the hypotheses, so no β is inverted; identity models reduce to themselves; the primed c-square is implied. Duplicate search with rg -L over about 26 abstract pasting/whisker nodes, including lem-amb-natural-transformation-whisker-exchange, lem-sp-exact-derived-transformation-pasting and the lem-trf exchange/refinement nodes: no duplicate. Every step is elementary as marked. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.ScalarCompositorReplacementPasting",
+  "declaration": "CategoryTheory.ScalarCompositorReplacement.pasting",
+  "declarations": [
+   "CategoryTheory.ScalarCompositorReplacement.System",
+   "CategoryTheory.ScalarCompositorReplacement.System.lambdaA",
+   "CategoryTheory.ScalarCompositorReplacement.System.lambdaB",
+   "CategoryTheory.ScalarCompositorReplacement.System.coefficientLeft",
+   "CategoryTheory.ScalarCompositorReplacement.System.coefficientRight",
+   "CategoryTheory.ScalarCompositorReplacement.ModelMaps",
+   "CategoryTheory.ScalarCompositorReplacement.ModelMaps.Compatible",
+   "CategoryTheory.ScalarCompositorReplacement.ModelMaps.refl",
+   "CategoryTheory.ScalarCompositorReplacement.ModelMaps.trans",
+   "CategoryTheory.ScalarCompositorReplacement.ModelMaps.sourceIso",
+   "CategoryTheory.ScalarCompositorReplacement.ModelMaps.targetIso",
+   "CategoryTheory.ScalarCompositorReplacement.pasting"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/ScalarCompositorReplacementPasting.lean",
+  "statement": "theorem pasting (S : System T0 T1 T2 EA EB σ) : (whiskerRight S.cA.inv T1 ≫ S.βF = σ ≫ whiskerLeft T0 S.cB.inv) ∧ (S.coefficientLeft = S.coefficientRight) ∧ (ModelMaps.refl S).Compatible ∧ ((ModelMaps.refl S).sourceIso = Iso.refl ((EA ⋙ S.PA) ⋙ T2)) ∧ ((ModelMaps.refl S).targetIso = Iso.refl (T0 ⋙ S.QB)) ∧ (∀ (S' : System T0 T1 T2 EA EB σ) (r : ModelMaps S S'), r.Compatible → (whiskerLeft EA r.pA.hom ≫ S'.lambdaA.hom = S.lambdaA.hom ≫ r.qA.hom) ∧ (whiskerLeft EB r.pB.hom ≫ S'.lambdaB.hom = S.lambdaB.hom ≫ r.qB.hom) ∧ (r.sourceIso.hom ≫ S'.coefficientLeft = S.coefficientLeft ≫ r.targetIso.hom) ∧ (r.sourceIso.hom ≫ S'.coefficientRight = S.coefficientRight ≫ r.targetIso.hom) ∧ ((S'.coefficientLeft = S'.coefficientRight) ↔ S.coefficientLeft = S.coefficientRight) ∧ (∀ (S'' : System T0 T1 T2 EA EB σ) (r' : ModelMaps S' S''), r'.Compatible → (r.trans r').Compatible ∧ (whiskerLeft EA (r.trans r').pA.hom ≫ S''.lambdaA.hom = S.lambdaA.hom ≫ (r.trans r').qA.hom) ∧ (whiskerLeft EB (r.trans r').pB.hom ≫ S''.lambdaB.hom = S.lambdaB.hom ≫ (r.trans r').qB.hom) ∧ ((r.trans r').sourceIso = r.sourceIso ≪≫ r'.sourceIso) ∧ ((r.trans r').targetIso = r.targetIso ≪≫ r'.targetIso))) ∧ (∀ (FA' : C0A ⥤ C1A) (FB' : C0B ⥤ C1B) (cA' : FA' ≅ EA) (cB' : FB' ≅ EB) (αA' : FA' ⋙ S.PA ≅ S.QA) (αB' : FB' ⋙ S.PB ≅ S.QB) (rA : S.FA ≅ FA') (rB : S.FB ≅ FB'), (rA.hom ≫ cA'.hom = S.cA.hom) → (rB.hom ≫ cB'.hom = S.cB.hom) → (whiskerRight rA.hom S.PA ≫ αA'.hom = S.αA.hom) → (whiskerRight rB.hom S.PB ≫ αB'.hom = S.αB.hom) → ((isoWhiskerRight cA'.symm S.PA ≪≫ αA').hom = S.lambdaA.hom) ∧ ((isoWhiskerRight cB'.symm S.PB ≪≫ αB').hom = S.lambdaB.hom))",
+  "branch": "newtargets-dag",
+  "by": "N5",
+  "date": "2026-10-22",
+  "existing": false,
+  "note": "System and ModelMaps bundle exactly the functors, comparisons and equations already introduced inline by this node. The other definitions construct its specified lambda and endpoint maps using Mathlib whiskering and natural isomorphism composition. No independent notion or dependency repair is introduced."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-6753fbbe1",
+  "group": "N5",
+  "result": "pass",
+  "note": "All node clauses match the Lean (Mathlib composition order and whiskering checked). Two hypothesis squares; λ_R = α_R∘P_R(c_R⁻¹) built by an explicit construction; the inverse replacement square; the coefficient equation (coefficientLeft = coefficientRight). ModelMaps.Compatible is exactly the seven node squares (c'ρ=c and α model square at A and B; β_F/β_P/β_Q squares with index pairs (0,1),(1,2),(0,2)). The λ model formula, both endpoint conjugation equations (source T2(ρ_P,A E_A), target ρ_Q,B T0) plus the iff, the F-only cancellation, and the identity/composite clauses were all checked by hand, componentwise, and are true. Twelve independent universes; no IsIso on β/σ; no Nonempty; empty categories allowed. System/ModelMaps only bundle the node's own data; conclusions are not fields. Item node unchanged except the lean record; statement verbatim in the file; stmt_deps = def-nagata-category (Mathlib, imported); source/blueprint docstrings and the 8 proof steps present; single sorry; no line over 100 characters. Fits the parent lem-sp-chart-left-scalar-normalization Steps 3-4. Not recompiled (no change); the worker reports a clean scompile and deliver2 dry run OK. Advisory: the composite λ conjuncts are redundant."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "AUTO",
+  "group": "H4",
+  "result": "pass",
+  "landing": "20261023T090709-L-696304",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)",
+  "sorry_before": [
+   "CategoryTheory.ScalarCompositorReplacement.pasting"
+  ],
+  "sorry_after": []
+ }
+}

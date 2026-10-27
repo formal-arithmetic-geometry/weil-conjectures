@@ -1,0 +1,235 @@
+{
+ "id": "lem-sfb-space-generator-dg-equivalence",
+ "kind": "statement",
+ "title": "DG endomorphism model of a perfect generator on a qcqs algebraic space",
+ "statement": "Work in the universes of [def-weil-size-convention]. Let $S$ be a scheme [def-pc-scheme] and $X$ a quasi-compact quasi-separated algebraic space over $S$ [def-trf-algebraic-space]: every open cover of $|X|$ has a finite subcover, and the absolute diagonal is quasi-compact. Use its small etale structure sheaf $\\mathcal O_X$, module sheaves [def-weil-sheaf-of-modules-category], and unbounded derived category $D(\\mathcal O_X)$ [def-weil-abstract-derived-category]. Write $C_X=D_{\\mathrm{QCoh}}(\\mathcal O_X)$ for the full subcategory with quasi-coherent cohomology [def-trf-space-quasi-coherent-module]. Perfect means etale locally represented by a bounded complex of direct summands of finite free structure modules [def-weil-pbc-strict-perfect-coefficient-package]. A differential graded algebra over $\\mathbf Z$ means an associative unital graded ring $A=\\bigoplus_{i\\in\\mathbf Z}A^i$ with additive differential $d:A^i\\to A^{i+1}$ satisfying $d^2=0$ and $d(ab)=d(a)b+(-1)^ia\\,d(b)$ for $a\\in A^i$. A right differential graded $A$-module is a graded right module $M$ with $d^2=0$ and $d(ma)=d(m)a+(-1)^jm\\,d(a)$ for $m\\in M^j$. Write $D(A,d)$ for the homotopy category of these modules localized at the maps inducing isomorphisms on all cohomology groups; triangles are the distinguished mapping-cone triangles. Let $G\\in C_X$ be perfect and compact [def-pc-compact-object], and suppose that $L\\simeq0$ whenever $L\\in C_X$ and $\\operatorname{Hom}_{C_X}(G[n],L)=0$ for every $n\\in\\mathbf Z$. There exist such a differential graded algebra $(A,d)$ and an exact equivalence of triangulated categories $F:C_X\\xrightarrow{\\sim}D(A,d)$, with exact quasi-inverse $T$, for which $F(G)\\simeq A$ and, for every $L\\in C_X$, there are natural isomorphisms of abelian groups $H^i(F(L))\\cong\\operatorname{Hom}_{C_X}(G,L[i])$ for all $i\\in\\mathbf Z$. In particular $H^i(A)\\cong\\operatorname{Hom}_{C_X}(G,G[i])$. Here exact means additive, commuting with integer shifts by specified natural isomorphisms and carrying distinguished triangles to distinguished triangles [def-weil-triangulated-category].",
+ "source": {
+  "document": "literature/stacks-project/spaces-perfect.tex",
+  "place": "Tag 09MC, theorem-DQCoh-is-Ddga and its proof, with an arbitrary chosen perfect generator and its K-injective representative; the displayed derived tensor/Hom adjunction and equation-E-is-OK."
+ },
+ "stmt_deps": [
+  "def-weil-size-convention",
+  "def-pc-scheme",
+  "def-trf-algebraic-space",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-abstract-derived-category",
+  "def-trf-space-quasi-coherent-module",
+  "def-weil-pbc-strict-perfect-coefficient-package",
+  "def-pc-compact-object",
+  "def-weil-triangulated-category"
+ ],
+ "proof": [
+  {
+   "text": "Use [def-weil-size-convention] to work on a small representative of the etale site. Choose a cochain representative of $G$. By [prop-pur-kinjective-resolutions-exist] it has a quasi-isomorphism to a K-injective complex $K$. Thus $K\\simeq G$ in $D(\\mathcal O_X)$ and has the same quasi-coherent cohomology. Apply [lem-sfb-ringed-site-dg-tensor-hom]: $A=\\operatorname{Hom}^{\\bullet}(K,K)$ is the required unital dg algebra, and there is a specified exact adjunction $T=-\\otimes_A^{\\mathbf L}K\\dashv R=R\\operatorname{Hom}(K,-)$ with $T(A)\\simeq G$ and invertible unit $\\eta_A$.",
+   "uses": [
+    "def-weil-size-convention",
+    "prop-pur-kinjective-resolutions-exist",
+    "lem-sfb-ringed-site-dg-tensor-hom"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-perfect.tex",
+    "place": "Tag 09MC, first paragraph and equation-E-is-OK (09MD); dga.tex Tags 09LX and 09LY."
+   }
+  },
+  {
+   "text": "By [lem-sfb-space-dg-tensor-quasicoherent], $T$ lands in $C_X$. By [lem-sfb-space-perfect-localizing-generation], $C_X$ is a full triangulated subcategory and its coproducts are computed in $D(\\mathcal O_X)$. Restrict $R$ to $F:C_X\\to D(A,d)$. Fullness restricts the same adjunction bijections to $T\\dashv F$, with the same unit. Exactness restricts because the triangles are inherited; preservation of coproducts by $T$ is inherited from [lem-sfb-ringed-site-dg-tensor-hom].",
+   "uses": [
+    "lem-sfb-space-dg-tensor-quasicoherent",
+    "lem-sfb-space-perfect-localizing-generation",
+    "lem-sfb-ringed-site-dg-tensor-hom"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-perfect.tex",
+    "place": "Tag 09MC, paragraph restricting tensor to D_QCoh, using Tag 09MA; closure under sums is Tag 08F3."
+   }
+  },
+  {
+   "text": "The hypothesis makes $G$ compact in $C_X$, and $T(A)\\simeq G$ is compact by transport of the defining Hom bijections across this isomorphism. Therefore [lem-sfb-dg-adjunction-compact-unit] applies to the restricted adjunction from Step 2: $T$ is fully faithful and $\\eta:\\mathrm{id}\\to FT$ is invertible. This uses compactness only in $C_X$, with no inference of ambient compactness.",
+   "uses": [
+    "lem-sfb-dg-adjunction-compact-unit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/dga.tex",
+    "place": "Tag 09LZ, lemma-fully-faithful-in-compact-case, proof applied in the actual target C_X."
+   }
+  },
+  {
+   "text": "For $L\\in C_X$, [lem-sfb-ringed-site-dg-tensor-hom] gives natural isomorphisms $H^i(F(L))\\cong\\operatorname{Hom}_{D(\\mathcal O_X)}(K,L[i])\\cong\\operatorname{Hom}_{C_X}(G,L[i])$, the last using $K\\simeq G$ and fullness. If $F(L)\\simeq0$, these groups vanish for every $i$. Shifting identifies $\\operatorname{Hom}(G[n],L)$ with $\\operatorname{Hom}(G,L[-n])$; the assumed detection property gives $L\\simeq0$. Thus $F$ has zero kernel.",
+   "uses": [
+    "lem-sfb-ringed-site-dg-tensor-hom"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-perfect.tex",
+    "place": "Tag 09MC, last paragraph: the kernel of the restricted adjoint is zero; equation-E-is-OK and the derived Hom computation."
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-exact-adjoint-zero-kernel-equivalence] to $T\\dashv F$, using exactness from Step 2, full faithfulness from Step 3 and the zero kernel from Step 4. It gives the desired exact equivalence $F:C_X\\simeq D(A,d)$ with exact quasi-inverse $T$. The isomorphism $\\eta_A:A\\simeq FT(A)$ and $T(A)\\simeq G$ give $F(G)\\simeq A$. Step 4 supplies the stated natural cohomology identifications; at $L=G$ and after $F(G)\\simeq A$ they give $H^i(A)\\cong\\operatorname{Hom}_{C_X}(G,G[i])$.",
+   "uses": [
+    "lem-sfb-exact-adjoint-zero-kernel-equivalence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 09J1, lemma-fully-faithful-adjoint-kernel-zero, as cited at the end of spaces-perfect.tex Tag 09MC."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-size-convention",
+  "prop-pur-kinjective-resolutions-exist",
+  "lem-sfb-ringed-site-dg-tensor-hom",
+  "lem-sfb-space-dg-tensor-quasicoherent",
+  "lem-sfb-space-perfect-localizing-generation",
+  "lem-sfb-dg-adjunction-compact-unit",
+  "lem-sfb-exact-adjoint-zero-kernel-equivalence"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/spaces-perfect.tex",
+  "place": "Tag 09MC, theorem-DQCoh-is-Ddga, proof with its chosen K-injective perfect generator; compactness is applied in C_X via the relative form of dga.tex Tag 09LZ."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "Morita|DQCoh|DGModule|DifferentialGraded",
+   "results": "Hits: Mathlib/Algebra/Azumaya/Defs.lean, Mathlib/Algebra/Azumaya/Defs.lean, Mathlib/Algebra/BrauerGroup/Defs.lean, Mathlib/RingTheory/Morita/Basic.lean, Mathlib/RingTheory/Morita/Basic.lean, Mathlib/RingTheory/Morita/Basic.lean, Mathlib/RingTheory/Morita/Basic.lean, Mathlib/RingTheory/Morita/Basic.lean",
+   "date": "2026-10-24",
+   "verdict": "no match: ordinary derived localization and ordinary ungraded ring Morita equivalence do not give the dg model of quasi-coherent complexes on algebraic spaces."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The derived category of quasi coherent sheaves is equivalent to modules over a differential graded algebra",
+   "results": "Hits: HasDerivedCategory.standard, HasDerivedCategory, SheafOfModules.isQuasicoherent, SheafOfModules.QuasicoherentData.I, SheafOfModules.IsQuasicoherent.mk, DerivedCategory.instCategory, SheafOfModules.QuasicoherentData.presentation, HomologicalComplexUpToQuasiIso.isIso_Q_map_iff_mem_quasiIso",
+   "date": "2026-10-24",
+   "verdict": "no match: ordinary derived localization and ordinary ungraded ring Morita equivalence do not give the dg model of quasi-coherent complexes on algebraic spaces."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"DerivedCategory\", \"equivalence\"",
+   "results": "0 hits",
+   "date": "2026-10-24",
+   "verdict": "no match: ordinary derived localization and ordinary ungraded ring Morita equivalence do not give the dg model of quasi-coherent complexes on algebraic spaces."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The differential graded endomorphism algebra of a compact generator represents the quasi coherent derived category by derived Hom",
+   "results": "Hits: DerivedCategory.instLinearHomotopyCategoryIntUpQh, HasDerivedCategory.standard, DerivedCategory.Q, HasDerivedCategory, DerivedCategory.instLinearCochainComplexIntQ, CategoryTheory.Functor.instLinearDerivedCategoryMapDerivedCategory, DerivedCategory, DerivedCategory.Qh_obj_singleFunctors_obj",
+   "date": "2026-10-24",
+   "verdict": "no match: ordinary derived localization and ordinary ungraded ring Morita equivalence do not give the dg model of quasi-coherent complexes on algebraic spaces."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived Morita equivalence for a quasi compact quasi separated algebraic space and the differential graded endomorphism algebra of a perfect generator",
+   "results": "Hits: CategoryTheory.Functor.instLinearDerivedCategoryMapDerivedCategory, CategoryTheory.Functor.instLiftingCochainComplexIntDerivedCategoryQQuasiIsoUpCompHomologicalComplexMapHomologicalComplexMapDerivedCategory, HasDerivedCategory.standard, HasDerivedCategory, DerivedCategory.exists_iso_Q_obj_of_isGE, DerivedCategory.instIsLocalizationCochainComplexIntQQuasiIsoUp, DerivedCategory.instLinearHomotopyCategoryIntUpQh, DerivedCategory.instLinearCochainComplexIntQ",
+   "date": "2026-10-24",
+   "verdict": "no match: ordinary derived localization and ordinary ungraded ring Morita equivalence do not give the dg model of quasi-coherent complexes on algebraic spaces."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A perfect compact generator of the quasi coherent derived category of an algebraic space gives an equivalence with modules over its differential graded endomorphism algebra",
+   "results": "[leanfinder] OK 8 hit(s); DerivedCategory.Qh_obj_singleFunctors_obj (Mathlib/Algebra/Homology/DerivedCategory/Basic); DerivedCategory.Qh (Mathlib/Algebra/Homology/DerivedCategory/Basic); CochainComplex.IsKProjective.Qh_map_bijective (Mathlib/Algebra/Homology/DerivedCategory/KProjective); DerivedCategory.instLinearCochainComplexIntQ (Mathlib/Algebra/Homology/DerivedCategory/Linear); DerivedCategory.exists_iso_Q_obj_of_isGE (Mathlib/Algebra/Homology/DerivedCategory/TStructure); HasDerivedCategory.standard (Mathlib/Algebra/Homology/DerivedCategory/Basic); DerivedCategory.Q (Mathlib/Algebra/Homology/DerivedCategory/Basic); HasDerivedCategory (Mathlib/Algebra/Homology/DerivedCategory/Basic)",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern ordinary derived categories, K-projective localization and quasicoherent module definitions; none constructs the dg Morita equivalence."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived Morita theorem via derived Hom from a compact generator and derived tensor over a dg algebra",
+   "results": "[leanfinder] OK 8 hit(s); CategoryTheory.Functor.instLinearDerivedCategoryMapDerivedCategory (Mathlib/Algebra/Homology/DerivedCategory/ExactFunctor); CategoryTheory.hasExt_of_hasDerivedCategory (Mathlib/Algebra/Homology/DerivedCategory/Ext/Basic); HasDerivedCategory.standard (Mathlib/Algebra/Homology/DerivedCategory/Basic); DerivedCategory.instEssSurjCochainComplexIntQ (Mathlib/Algebra/Homology/DerivedCategory/Basic); instHasExtModuleCatOfSmall (Mathlib/Algebra/Category/ModuleCat/Ext/HasExt); CategoryTheory.hasExt_iff (Mathlib/Algebra/Homology/DerivedCategory/Ext/Basic); CochainComplex.IsKProjective.Qh_map_bijective (Mathlib/Algebra/Homology/DerivedCategory/KProjective); DerivedCategory.instLinearCochainComplexIntQ (Mathlib/Algebra/Homology/DerivedCategory/Linear)",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern ordinary derived categories, K-projective localization and quasicoherent module definitions; none constructs the dg Morita equivalence."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"DerivedCategory\", \"equivalence\"",
+   "results": "[loogle] OK 0 hit(s); none",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern ordinary derived categories, K-projective localization and quasicoherent module definitions; none constructs the dg Morita equivalence."
+  },
+  {
+   "tool": "grep",
+   "query": "DGAlgebra|DgAlgebra|DGModule|DifferentialGraded|derived.Morita",
+   "results": "[grep] OK 0 hit(s); none",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern ordinary derived categories, K-projective localization and quasicoherent module definitions; none constructs the dg Morita equivalence."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The quasi coherent derived category of an algebraic space is equivalent to differential graded modules over the endomorphism algebra of a compact generator",
+   "results": "[leansearch] OK 8 hit(s); HasDerivedCategory.standard (Mathlib.Algebra.Homology.DerivedCategory.Basic); HasDerivedCategory (Mathlib.Algebra.Homology.DerivedCategory.Basic); SheafOfModules.QuasicoherentData.I (Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent); DerivedCategory.instCategory (Mathlib.Algebra.Homology.DerivedCategory.Basic); SheafOfModules.QuasicoherentData.presentation (Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent); DerivedCategory.isIso_Q_map_iff_quasiIso (Mathlib.Algebra.Homology.DerivedCategory.Basic); SheafOfModules.IsQuasicoherent.recOn (Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent); HomologicalComplexUpToQuasiIso.isIso_Q_map_iff_mem_quasiIso (Mathlib.Algebra.Homology.Localization)",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern ordinary derived categories, K-projective localization and quasicoherent module definitions; none constructs the dg Morita equivalence."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-space-countable-telescope",
+  "date": "2026-10-24",
+  "group": "Q117"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "Proof (3) of det-thm-sf-ctf-stability-direct-images, inherited coherent-family/Quot effectivity prerequisite: Tag 0CX8 (lemma-compute-over-affine), with its canonical maps from 0CX6 (lemma-compute-against-perfect). Supporting input: Tag 0CRW (lemma-computing-sections-as-colim), part (2) and its proof constructing hocolim E_m = Ru_*O_U; Tag 08IN (lemma-cohomology-base-change) supplies the normalized maps. The coefficient-linear version retains the commuting B-action in the same tensor and section construction. Supporting subargument: 0CRW proof, application of lemma-countable to the descended structure-sheaf image. Supporting argument in spaces-perfect Tag 0CRV, proof (2) to (1): Tag 09MC, theorem-DQCoh-is-Ddga and its proof, with an arbitrary chosen perfect generator and its K-injective representative; the displayed derived tensor/Hom adjunction and equation-E-is-OK.",
+   "via": [
+    "lem-sfb-space-countable-telescope",
+    "lem-sfb-space-etale-sections-perfect-telescope",
+    "lem-sfb-space-inverse-module-affine-base-change",
+    "lem-sfb-space-inverse-modules-near-special-fibre",
+    "lem-sfb-space-flat-proper-support-inverse-effectivity",
+    "lem-sfb-space-coherent-stack-general",
+    "lem-sfb-space-quot-representability",
+    "lem-sfb-space-hilbert-representability",
+    "lem-sfb-space-hom-representability",
+    "lem-sfb-curve-descent-isom-spaces",
+    "lem-sfb-nodal-curve-stack-smooth",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-space-generator-dg-equivalence",
+  "worker": "stage1",
+  "summary": "Q37 follows Tag 09MC for the prescribed generator, extracting the general ringed-site dg tensor-Hom construction, the compact-image unit criterion, and the quasi-coherent image lemma. Reuses small-site K-injective existence, localizing closure and the exact adjoint zero-kernel criterion. Preserves the item statement; avoids the unsupported ambient-compactness inference in the source proof. No finished project attachment or Mathlib match was found.",
+  "blueprint": "Realizes the inherited proof-(3) direct-image effectivity route through 0CRV/0CRW: 09MC supplies the dg model used by the countable telescope. The current latest blueprint direct-image proof and unit were read; the item is a created auxiliary with blueprint ancestor null as printed by blueprint_refs.py ancestor.",
+  "tool_uses": [
+   {
+    "node": "prop-pur-kinjective-resolutions-exist",
+    "why": "Generic small ringed-site K-injective resolutions for the chosen generator; no replacement of a unit-level geometric step."
+   }
+  ]
+ },
+ "tool_uses": [
+  "prop-pur-kinjective-resolutions-exist"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q37-eab57bfb7",
+  "group": "Q37",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q37-eab57bfb7 (reviewer sub-agent of L); spot-checked: I read Stacks 09MC/09MD, 09MA, 09M8 and dga 09LX/09LY/09LZ, and checked the tags against tags/tags. The item statement is the same as on the base and is faithful to 09MC for a given compact detecting generator. No SGA source and no repair note. Step 1: K-injective resolution (generic tool prop-pur-kinjective-resolutions-exist, accepted) and the tensor-hom node give A=End^•(K), the exact adjunction, T(A)≅K and η_A invertible. Step 2: 09MA node plus localizing-generation give that C_X is triangulated with ambient coproducts, so the adjunction restricts. Step 3: relative 09LZ criterion with compactness in C_X; this correctly avoids 09MC's unsupported inference of ambient compactness from 09M8. Step 4 (elementary): H^i formula plus shift plus detection give zero kernel. Step 5: zero-kernel criterion 09J1. New nodes: the tensor-hom node's signs, right action, unit and H^i formula check out, and K=0 and point cases hold. The compact-unit criterion is true: RT preserves coproducts, the unit's iso-locus is localizing, and property-(P) resolutions generate. The QCoh-image node is true for any space. None is a duplicate (bundle/tilting/trf bimodule/cbc/coef Yoneda nodes compared) and none restates the item. No cycle. Batch-5: def-trf-algebraic-space and def-trf-space-quasi-coherent-module are general definitions already in the item's stmt_deps. lem-sfb-space-perfect-localizing-generation is Bondal–van den Bergh, not a trace-formula or Poincaré step, and the parent already cites it. Accepted."
+ }
+}

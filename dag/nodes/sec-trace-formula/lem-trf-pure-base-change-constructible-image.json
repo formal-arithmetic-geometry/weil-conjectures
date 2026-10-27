@@ -1,0 +1,278 @@
+{
+ "id": "lem-trf-pure-base-change-constructible-image",
+ "kind": "statement",
+ "title": "Constructible high fibre-dimension locus contains a pure base change",
+ "statement": "Let $f:X\\to T$ be a finite type morphism of schemes [def-pc-scheme, def-weil-finite-type-morphism] which is locally of finite presentation [def-sbc-locally-finite-presentation], and let $d\\in\\mathbf Z_{\\ge0}$. Using scheme-theoretic fibres [def-pc-scheme-fibre] and topological dimension at a point [def-kun-topological-dimension-at-point], put\n$$U=\\{x\\in X\\mid\\dim_x(X_{f(x)})\\le d-1\\},\\qquad E=|X|\\setminus U,$$\nwhere $d-1$ is subtraction in $\\mathbf Z$. Then $U$ is open and retrocompact and $E$ is constructible [def-weil-constructible-subset]; when $d=0$, $U=\\varnothing$ and $E=|X|$. For any morphism $g:T'\\to T$, let $X'=X\\times_T T'$ [def-pc-fibre-product], with projections $p:X'\\to X$ and $f':X'\\to T'$. If every nonempty fibre of $f'$ is pure of dimension $d$ [def-weil-pure-dimension], then for every $x'\\in X'$,\n$$\\dim_{x'}(X'_{f'(x')})=\\dim_{p(x')}(X_{f(p(x'))})=d.$$\nConsequently $p(|X'|)\\subseteq E$, and every fibre of $f'$ has topological Krull dimension at most $d$ [def-kun-topological-krull-dimension], including empty fibres. No flatness, separatedness, properness or finite type hypothesis on $g$ is required.",
+ "source": {
+  "document": "literature/stacks-project/limits.tex",
+  "place": "Tag 0EY2, lemma-descend-dimension-d, proof: middle sentences defining the retrocompact open and its constructible complement and proving image containment; the pure-base-change local and global dimension comparisons are made explicit."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-finite-type-morphism",
+  "def-pc-scheme-fibre",
+  "def-pc-fibre-product",
+  "def-weil-pure-dimension",
+  "def-kun-topological-dimension-at-point",
+  "def-kun-topological-krull-dimension",
+  "def-sbc-locally-finite-presentation",
+  "def-weil-constructible-subset"
+ ],
+ "proof": [
+  {
+   "text": "If $d=0$, every point of a fibre has nonnegative topological dimension at that point, since every neighbourhood of it is nonempty. Thus no point satisfies the bound $-1$, and $U=\\varnothing$, which is open and retrocompact. If $d\\ge1$, put $n=d-1\\ge0$ and apply [lem-trf-retrocompact-bounded-fibre-dimension] to the locally finitely presented $f$. Its locus $U_n$ is precisely $U$, so $U$ is again open and retrocompact.",
+   "uses": [
+    "def-kun-topological-dimension-at-point",
+    "lem-trf-retrocompact-bounded-fibre-dimension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 02G0, lemma-openness-bounded-dimension-fibres-finite-presentation; the d=0 endpoint follows from topology.tex, Tag 0055 (definition-Krull)."
+   }
+  },
+  {
+   "text": "By the constructible-subset definition, $E=|X|\\setminus U$ is the single piece $|X|\\cap(|X|\\setminus U)$: both $|X|$ and $U$ are retrocompact opens. For $|X|$, intersection with a quasi-compact open $W$ is just $W$. Hence $E$ is constructible. When $d=0$, Step 1 gives $E=|X|$.",
+   "uses": [
+    "def-weil-constructible-subset"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/limits.tex",
+    "place": "Tag 0EY2, lemma-descend-dimension-d, sentence defining E; topology.tex, Tag 005G (definition-constructible)."
+   }
+  },
+  {
+   "text": "Finite type implies locally finite type by definition. Apply [lem-weil-pbc-lft-base-change] first along $g:T\\prime\\to T$ to obtain that $f\\prime:X\\prime\\to T\\prime$ is locally of finite type, then along $\\operatorname{Spec}\\kappa(t\\prime)\\to T\\prime$. By the scheme-theoretic fibre definition, the latter base change is the structure morphism $Y=X\\prime_{t\\prime}\\to\\operatorname{Spec}\\kappa(t\\prime)$. Thus every such fibre is locally of finite type over its residue field.",
+   "uses": [
+    "def-weil-finite-type-morphism",
+    "lem-weil-pbc-lft-base-change",
+    "def-pc-scheme-fibre"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 01T4, lemma-base-change-finite-type; fibres are defined in schemes.tex, Tag 01K0 (definition-fibre)."
+   }
+  },
+  {
+   "text": "Fix $x\\prime\\in X\\prime$ and $t\\prime=f\\prime(x\\prime)$. The fibre $Y=X\\prime_{t\\prime}$ is nonempty because it contains the corresponding fibre point. The hypothesis and [def-weil-pure-dimension] say every irreducible component of $Y$ has dimension $d$. Apply [lem-sbc-equidimensional-open-local-dimension] with the field $\\kappa(t\\prime)$, the locally finite type scheme $Y$ from Step 3, and the open $O=Y$. It gives $\\dim_{x\\prime}Y=d$.",
+   "uses": [
+    "def-weil-pure-dimension",
+    "lem-sbc-equidimensional-open-local-dimension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 0A21, lemma-dimension-locally-algebraic, parts (3) and (5), applied to the pure fibre."
+   }
+  },
+  {
+   "text": "Apply [lem-sc-fibre-dimension-after-base-change] to the given cartesian square: with $x=p(x\\prime)$ it gives $\\dim_x(X_{f(x)})=\\dim_{x\\prime}(X\\prime_{f\\prime(x\\prime)})=d$ by Step 4. Thus $x\\notin U$, since the integer inequality $d\\le d-1$ is false, and $x\\in E$. As $x\\prime$ was arbitrary, this proves both displayed equalities and $p(|X\\prime|)\\subseteq E$.",
+   "uses": [
+    "lem-sc-fibre-dimension-after-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 02FY, lemma-dimension-fibre-after-base-change, part (1); used in limits.tex, Tag 0EY2 (lemma-descend-dimension-d)."
+   }
+  },
+  {
+   "text": "For any $t\\prime\\in T\\prime$, apply [lem-weil-pbc-dimension-supremum-local-dimensions] to $Y=X\\prime_{t\\prime}$. Every term $\\dim_yY$ in its supremum equals $d$ by Step 4; therefore $\\dim Y\\le d$. If $Y$ is empty the same theorem identifies its dimension with the empty supremum $-\\infty$, still at most $d$.",
+   "uses": [
+    "lem-weil-pbc-dimension-supremum-local-dimensions"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/topology.tex",
+    "place": "Tag 0B7I, lemma-dimension-supremum-local-dimensions, including the empty supremum convention."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-kun-topological-dimension-at-point",
+  "def-pc-scheme-fibre",
+  "def-weil-constructible-subset",
+  "def-weil-finite-type-morphism",
+  "def-weil-pure-dimension",
+  "lem-sbc-equidimensional-open-local-dimension",
+  "lem-sc-fibre-dimension-after-base-change",
+  "lem-trf-retrocompact-bounded-fibre-dimension",
+  "lem-weil-pbc-dimension-supremum-local-dimensions",
+  "lem-weil-pbc-lft-base-change"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/limits.tex",
+  "place": "Tag 0EY2, lemma-descend-dimension-d, middle sentences; expanded with morphisms.tex Tags 02G0 and 02FY, varieties.tex Tag 0A21, and topology.tex Tag 0B7I."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For a locally finitely presented morphism of schemes the complement of the locus of local fibre dimension at most d minus one is constructible and contains the image of any base change with pure d dimensional fibres",
+   "results": "hits=8; top=['AlgebraicGeometry.Scheme.Hom.isLocallyConstructible_image', 'AlgebraicGeometry.Scheme.Hom.isConstructible_image', 'PrimeSpectrum.isConstructible_range_comap', 'PrimeSpectrum.isConstructible_comap_image', 'AlgebraicGeometry.Scheme.Hom.isConstructible_preimage', 'PrimeSpectrum.exists_range_eq_of_isConstructible', 'chevalley_mvPolynomial_mvPolynomial', 'PrimeSpectrum.isConstructible_comap_C']; note=; digest=9895b4b7f013394c. Chevalley image/preimage and finite-presentation or quasi-finite permanence do not assert a local fibre-dimension locus or the pure-base-change image comparison.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "fibre.*dimension|fiber.*[Dd]im|[Dd]im.*fiber|[Cc]onstructible",
+   "results": "hits=7; top=['Mathlib/AlgebraicGeometry/EllipticCurve/Weierstrass.lean', 'Mathlib/AlgebraicGeometry/Morphisms/QuasiFinite.lean', 'Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation.lean', 'Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation.lean', 'Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation.lean', 'Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation.lean', 'Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation.lean']; note=; digest=11465ab0e4918d50. Chevalley image/preimage and finite-presentation or quasi-finite permanence do not assert a local fibre-dimension locus or the pure-base-change image comparison.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A locally finitely presented morphism has a constructible high local fibre dimension locus containing the image of every base change with equidimensional fibres",
+   "results": "hits=8; top=['AlgebraicGeometry.instLocallyOfFinitePresentationOfIsSmooth', 'AlgebraicGeometry.LocallyOfFinitePresentation', 'AlgebraicGeometry.LocallyOfFinitePresentation.recOn', 'AlgebraicGeometry.Scheme.Hom.isLocallyConstructible_image', 'AlgebraicGeometry.instLocallyOfFiniteTypeOfLocallyOfFinitePresentation', 'AlgebraicGeometry.Scheme.Hom.finitePresentation_appLE', 'AlgebraicGeometry.locallyOfFiniteType_isStableUnderBaseChange', 'AlgebraicGeometry.LocallyOfFinitePresentation.finitePresentation_appLE']; note=; digest=3d74a1c96aec807b. Chevalley image/preimage and finite-presentation or quasi-finite permanence do not assert a local fibre-dimension locus or the pure-base-change image comparison.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.LocallyOfFinitePresentation, IsConstructible",
+   "results": "hits=0; top=[]; note=loogle: unknown identifier 'IsConstructible'; digest=4f53cda18c2baa0c. Chevalley image/preimage and finite-presentation or quasi-finite permanence do not assert a local fibre-dimension locus or the pure-base-change image comparison.",
+   "date": "2026-10-22",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.LocallyOfFinitePresentation, Topology.IsConstructible",
+   "results": "hits=1; top=['AlgebraicGeometry.Scheme.Hom.isConstructible_image']; note=; digest=1c52da958befa5f2. Chevalley image/preimage and finite-presentation or quasi-finite permanence do not assert a local fibre-dimension locus or the pure-base-change image comparison.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The locus where a finitely presented scheme morphism has fibre dimension less than a fixed integer is a retrocompact open and a pure dimensional base change avoids that locus",
+   "results": "hits=8; top=['AlgebraicGeometry.LocallyQuasiFinite', 'AlgebraicGeometry.instIsStableUnderBaseChangeSchemeLocallyQuasiFinite', 'AlgebraicGeometry.LocallyOfFinitePresentation', 'AlgebraicGeometry.isOpenMap_of_generalizingMap', 'AlgebraicGeometry.Scheme.Hom.isConstructible_image', 'AlgebraicGeometry.Scheme.Hom.isLocallyConstructible_image', 'AlgebraicGeometry.locallyOfFinitePresentation_isStableUnderBaseChange', 'AlgebraicGeometry.quasiCompact_isStableUnderBaseChange']; note=; digest=71517f3396a81c57. Chevalley image/preimage and finite-presentation or quasi-finite permanence do not assert a local fibre-dimension locus or the pure-base-change image comparison.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "retrocompact|[Bb]ounded.*[Ff]ibre|[Bb]ounded.*[Ff]iber",
+   "results": "hits=5; top=['Mathlib/AlgebraicGeometry/QuasiAffine.lean', 'Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation.lean', 'Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation.lean', 'Mathlib/AlgebraicGeometry/Morphisms/Affine.lean', 'Mathlib/AlgebraicGeometry/Morphisms/Affine.lean']; note=; digest=4ca995453f327b37. Chevalley image/preimage and finite-presentation or quasi-finite permanence do not assert a local fibre-dimension locus or the pure-base-change image comparison.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.LocallyOfFinitePresentation, Topology.IsConstructible",
+   "results": "hits=1; top=['AlgebraicGeometry.Scheme.Hom.isConstructible_image']; note=; digest=1c52da958befa5f2. Read returned types: constructible images/preimages, finite-presentation and quasi-finite permanence do not assert the fibre-dimension locus or the pure-base-change equalities.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "retrocompact|[Bb]ounded.*[Ff]ibre|[Bb]ounded.*[Ff]iber",
+   "results": "hits=20; top=['Mathlib/Topology/Constructible.lean', 'Mathlib/Topology/Constructible.lean', 'Mathlib/Topology/Constructible.lean', 'Mathlib/Topology/Constructible.lean', 'Mathlib/Topology/Constructible.lean', 'Mathlib/Topology/Connected/CardComponents.lean', 'Mathlib/Topology/Connected/CardComponents.lean', 'Mathlib/AlgebraicGeometry/QuasiAffine.lean']; note=; digest=100b7c970122dc96. Read returned types: constructible images/preimages, finite-presentation and quasi-finite permanence do not assert the fibre-dimension locus or the pure-base-change equalities.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A locally finitely presented morphism has a constructible high local fibre dimension locus containing the image of every base change with equidimensional fibres",
+   "results": "hits=8; top=['AlgebraicGeometry.instLocallyOfFinitePresentationOfIsSmooth', 'AlgebraicGeometry.LocallyOfFinitePresentation', 'AlgebraicGeometry.LocallyOfFinitePresentation.recOn', 'AlgebraicGeometry.Scheme.Hom.isLocallyConstructible_image', 'AlgebraicGeometry.instLocallyOfFiniteTypeOfLocallyOfFinitePresentation', 'AlgebraicGeometry.Scheme.Hom.finitePresentation_appLE', 'AlgebraicGeometry.locallyOfFiniteType_isStableUnderBaseChange', 'AlgebraicGeometry.LocallyOfFinitePresentation.finitePresentation_appLE']; note=; digest=3d74a1c96aec807b. Read returned types: constructible images/preimages, finite-presentation and quasi-finite permanence do not assert the fibre-dimension locus or the pure-base-change equalities.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a locally finitely presented morphism of schemes the complement of the locus of local fibre dimension at most d minus one is constructible and contains the image of any base change with pure d dimensional fibres",
+   "results": "hits=8; top=['AlgebraicGeometry.Scheme.Hom.isLocallyConstructible_image', 'AlgebraicGeometry.Scheme.Hom.isConstructible_image', 'PrimeSpectrum.isConstructible_range_comap', 'PrimeSpectrum.isConstructible_comap_image', 'AlgebraicGeometry.Scheme.Hom.isConstructible_preimage', 'PrimeSpectrum.exists_range_eq_of_isConstructible', 'chevalley_mvPolynomial_mvPolynomial', 'PrimeSpectrum.isConstructible_comap_C']; note=; digest=9895b4b7f013394c. Read returned types: constructible images/preimages, finite-presentation and quasi-finite permanence do not assert the fibre-dimension locus or the pure-base-change equalities.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The locus where a finitely presented scheme morphism has fibre dimension less than a fixed integer is a retrocompact open and a pure dimensional base change avoids that locus",
+   "results": "hits=8; top=['AlgebraicGeometry.LocallyQuasiFinite', 'AlgebraicGeometry.instIsStableUnderBaseChangeSchemeLocallyQuasiFinite', 'AlgebraicGeometry.LocallyOfFinitePresentation', 'AlgebraicGeometry.isOpenMap_of_generalizingMap', 'AlgebraicGeometry.Scheme.Hom.isConstructible_image', 'AlgebraicGeometry.Scheme.Hom.isLocallyConstructible_image', 'AlgebraicGeometry.locallyOfFinitePresentation_isStableUnderBaseChange', 'AlgebraicGeometry.quasiCompact_isStableUnderBaseChange']; note=; digest=71517f3396a81c57. Read returned types: constructible images/preimages, finite-presentation and quasi-finite permanence do not assert the fibre-dimension locus or the pure-base-change equalities.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-pure-relative-dimension-finite-stage",
+  "date": "2026-10-22",
+  "group": "Q101"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Proof (1)--(2), semistable-alteration input in the nearby-cycle branch: finite-stage descent of the pure relative-dimension condition used in constructing finite-type models. Subsidiary finite-stage descent, middle sentences defining the retrocompact open and its constructible complement and proving image containment; the pure-base-change local and global dimension comparisons are made explicit.",
+   "via": [
+    "lem-trf-pure-relative-dimension-finite-stage",
+    "lem-trf-marked-curve-finite-type-model",
+    "lem-trf-temkin-stable-modification",
+    "lem-trf-stable-modification-flat-curve-pair",
+    "lem-trf-dejong-relative-marked-semistable",
+    "lem-trf-relative-marked-nodal-reduction",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-trf-pure-base-change-constructible-image",
+  "worker": "stage1",
+  "summary": "NS read Tag 0EY2 and each cited statement, reused the existing retrocompact-locus, field-fibre, pure-local-dimension and dimension-supremum inputs, and supplied the assembly with d=0 and empty fibres explicit. No statement change or new nodes. The source route does not impose any hypothesis on g. Mathlib searches found only constructibility/permanence results, not the entire item.",
+  "blueprint": "Inherited subsidiary finite-stage input for lem-trf-local-term-locality (1)--(2), through lem-trf-pure-relative-dimension-finite-stage: realizes the middle sentences of Tag 0EY2 defining U and E and proving image containment. Read the ancestor and unit at literature/blueprint/latest; the latest ancestor has no duplicate of this auxiliary scheme lemma.",
+  "tool_uses": [
+   {
+    "node": "lem-sbc-equidimensional-open-local-dimension",
+    "why": "Generic dimension theorem over a field converts pure fibre dimension into local topological dimension. No node of this trace-formula unit supplies that conversion; this keeps the Tag 0EY2/02FY route."
+   },
+   {
+    "node": "lem-sc-fibre-dimension-after-base-change",
+    "why": "Generic Tag 02FY(1), explicitly invoked by Tag 0EY2, compares local fibre dimensions in the cartesian square. No theorem of this trace-formula unit replaces it."
+   },
+   {
+    "node": "lem-weil-pbc-dimension-supremum-local-dimensions",
+    "why": "Generic topological Tag 0B7I gives the final global fibre-dimension bound, including empty fibres. This is a consequence of the established local equalities, not a replacement of the unit route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sbc-equidimensional-open-local-dimension",
+  "lem-sc-fibre-dimension-after-base-change",
+  "lem-weil-pbc-dimension-supremum-local-dimensions"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-NS-d180a7689",
+  "group": "NS",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NS-d180a7689 (reviewer sub-agent of L); spot-checked: The statement is unchanged and there are no new nodes; I read the item in full. Source checked: the Stacks limits.tex Tag 0EY2 (lemma-descend-dimension-d) proof forms U_0 = {fibre dimension at x ≤ d−1}, which is open and retrocompact by 02G0, takes the constructible complement E, and gets the image containment from 02FY; the item is exactly this. Step 1: lem-trf-retrocompact-bounded-fibre-dimension (same unit, lfp, any n≥0) with n=d−1; at d=0 the locus U is empty because local dimension at a point is ≥0 by the def-kun-topological-dimension-at-point statement. Step 2: elementary by def-weil-constructible-subset, taking the piece |X|∩(|X|∖U). Step 3: finite type ⇒ lft, and lem-weil-pbc-lft-base-change (a Mathlib leaf) applied along g and along Spec κ(t'). Step 4: lem-sbc-equidimensional-open-local-dimension with k=κ(t') and O=Y; I checked it is true at non-closed points too (0A21). Step 5: lem-sc-fibre-dimension-after-base-change (02FY(1), f lft, any g). Step 6: the 0B7I supremum gives dim ≤ d, including −∞ for an empty fibre. Edge cases checked: d=0, empty X, empty fibres, A^d over a field. The parent lem-trf-pure-relative-dimension-finite-stage uses exactly the global bound (its step 2) and U/E with the containment (its step 3). The sibling lem-trf-fibre-purity-from-high-dimension-image is the converse direction, not a duplicate, and no other node states this item. No SGA is cited. I accept the three declared tool_uses: 0A21, 02FY and 0B7I are generic dimension black boxes on the source route. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.PureBaseChangeConstructibleImage",
+  "declaration": "AlgebraicGeometry.pure_base_change_constructible_image",
+  "file": "lean/Sheaf/AlgebraicGeometry/PureBaseChangeConstructibleImage.lean",
+  "statement": "theorem pure_base_change_constructible_image {X T : Scheme.{u}} (f : X ⟶ T) [LocallyOfFiniteType f] [QuasiCompact f] [LocallyOfFinitePresentation f] (d : ℕ) : IsOpen {x : X | topologicalKrullDimAt (f.asFiber x) < (d : WithBot ℕ∞)} ∧ IsRetrocompact {x : X | topologicalKrullDimAt (f.asFiber x) < (d : WithBot ℕ∞)} ∧ Topology.IsConstructible ({x : X | topologicalKrullDimAt (f.asFiber x) < (d : WithBot ℕ∞)}ᶜ) ∧ (d = 0 → {x : X | topologicalKrullDimAt (f.asFiber x) < (d : WithBot ℕ∞)} = ∅ ∧ {x : X | topologicalKrullDimAt (f.asFiber x) < (d : WithBot ℕ∞)}ᶜ = Set.univ) ∧ (∀ (T' : Scheme.{u}) (g : T' ⟶ T), (∀ t' : T', Nonempty ((pullback.snd f g).fiber t') → ((pullback.snd f g).fiber t').IsPureDimension d) → (∀ x' : ↥(pullback f g), topologicalKrullDimAt ((pullback.snd f g).asFiber x') = topologicalKrullDimAt (f.asFiber (pullback.fst f g x')) ∧ topologicalKrullDimAt (f.asFiber (pullback.fst f g x')) = (d : WithBot ℕ∞)) ∧ Set.range (pullback.fst f g) ⊆ {x : X | topologicalKrullDimAt (f.asFiber x) < (d : WithBot ℕ∞)}ᶜ ∧ ∀ t' : T', topologicalKrullDim ((pullback.snd f g).fiber t') ≤ (d : WithBot ℕ∞))",
+  "branch": "newtargets-dag",
+  "by": "Q39",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-5079b90b3",
+  "group": "Q39",
+  "result": "pass",
+  "note": "Read node, Stacks 0EY2 proof, all 9 stmt_dep records and declarations (asFiber, IsPureDimension, topologicalKrullDimAt, Mathlib IsRetrocompact/IsConstructible), the module and the report. Clauses match: finite type = LocallyOfFiniteType+QuasiCompact plus lfp; U as `< d`, equivalent to integer `≤ d-1` because local dims are ≥0 (d=0 gives empty U, ∞ excluded); open, retrocompact, constructible complement, d=0 endpoint; arbitrary g with canonical pullback maps; nonempty-fibre purity hypothesis; pointwise equal-to-d equalities; range ⊆ Uᶜ; dim ≤ d for every fibre including empty. Node diff is lean only and the statement is verbatim; one sorried theorem; docstrings carry source and blueprint; proof-dep modules exist with a matching formulation. No findings; no file changed, so not recompiled."
+ }
+}

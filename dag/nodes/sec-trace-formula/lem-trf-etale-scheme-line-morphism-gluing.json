@@ -1,0 +1,254 @@
+{
+ "id": "lem-trf-etale-scheme-line-morphism-gluing",
+ "kind": "statement",
+ "title": "Etale gluing of morphisms of schemes with line modules",
+ "statement": "Let $S,X,Y$ be schemes [def-pc-scheme] with morphisms $X\\to S$ and $Y\\to S$, and let $L,M$ be invertible modules on $X,Y$, respectively [def-sc-invertible-module]. Let $\\{U_i\\to S\\}_{i\\in I}$ be a jointly surjective etale covering [def-weil-pbc-etale-site]. Write $X_i=X\\times_SU_i$, $Y_i=Y\\times_SU_i$ [def-pc-fibre-product] and $L_i,M_i$ for the pullbacks of $L,M$ to these schemes [def-pc-module-pullback]. For each $i$, let $b_i:X_i\\to Y_i$ be a morphism over $U_i$ and let $\\mu_i:b_i^*M_i\\to L_i$ be a module homomorphism. Assume that on $U_i\\times_SU_j$ the base changes of $b_i,b_j$ agree and the base changes of $\\mu_i,\\mu_j$ agree under the canonical pullback identifications. Use the identity and composition comparisons of [lem-pc-module-pullback-adjunction] and [def-pc-tensor-pullback-composition-iso] for these identifications. Then there is a unique pair consisting of an $S$-morphism $b:X\\to Y$ and a module homomorphism $\\mu:b^*M\\to L$ whose base changes are the prescribed $b_i,\\mu_i$. If every $b_i$ and $\\mu_i$ is an isomorphism, then $b$ and $\\mu$ are isomorphisms.",
+ "source": {
+  "document": "literature/stacks-project/descent.tex",
+  "place": "Tag 023Q (descent lemma-fpqc-universal-effective-epimorphisms), etale case for underlying morphisms; spaces-descent.tex Tag 04W8 (proposition-fpqc-descent-quasi-coherent), full faithfulness for the module maps."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-sc-invertible-module",
+  "def-weil-pbc-etale-site",
+  "def-pc-fibre-product",
+  "def-pc-module-pullback",
+  "lem-pc-module-pullback-adjunction",
+  "def-pc-tensor-pullback-composition-iso"
+ ],
+ "proof": [
+  {
+   "text": "Write $a:X\\to S$, $d:Y\\to S$, $p_i:X_i\\to X$ and $q_i:Y_i\\to Y$ for the structure maps and projections. By [lem-weil-pbc-fpqc-finer-than-etale], the given covering is fpqc. By [lem-galois-fpqc-covering-base-change], both $\\{p_i\\}$ and $\\{q_i\\}$ are fpqc coverings. The universal property in [def-pc-fibre-product] identifies $X_i\\times_X X_j$ with $X\\times_S(U_i\\times_SU_j)$, preserving both projections; the analogous identification holds for $Y$. Thus the overlap equalities in the hypothesis are exactly the equalities on the overlaps of these two coverings.",
+   "uses": [
+    "lem-weil-pbc-fpqc-finer-than-etale",
+    "lem-galois-fpqc-covering-base-change",
+    "def-pc-fibre-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/descent.tex",
+    "place": "Tags 023Q and 023T: apply the descent statements to the base-changed covering; supporting Topologies Tags 022C (lemma-zariski-etale-smooth-syntomic-fppf-fpqc) and 022D (lemma-fpqc), part (3)."
+   }
+  },
+  {
+   "text": "Set $f_i=q_i\\circ b_i:X_i\\to Y$. Their composites with the two projections from $X_i\\times_X X_j$ agree by the assumed equality of the base-changed $b_i$. Apply [lem-weil-pbc-fpqc-representable-descent] to obtain a unique $b:X\\to Y$ with $b\\circ p_i=f_i$. The maps $d\\circ b$ and $a$ to $S$ agree after each $p_i$, since $b_i$ is over $U_i$; the uniqueness clause of the same node gives $d\\circ b=a$. The base change of $b$ to $U_i$ equals $b_i$: both have $Y$-component $f_i$ and the prescribed $U_i$-component, so [def-pc-fibre-product] gives equality. The same descent uniqueness proves uniqueness of $b$ as an $S$-morphism.",
+   "uses": [
+    "lem-weil-pbc-fpqc-representable-descent",
+    "def-pc-fibre-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/descent.tex",
+    "place": "Tag 023Q, lemma-fpqc-universal-effective-epimorphisms: gluing compatible maps, then testing the equation over S by uniqueness."
+   }
+  },
+  {
+   "text": "Put $A=b^*M$. It is invertible by [lem-weil-pbc-invertible-pullback-invertible], hence quasi-coherent, as is $L$, by [def-sc-invertible-module]. Let $\\chi_i:p_i^*A\\xrightarrow{\\sim}b_i^*M_i$ be the comparison obtained from $b\\circ p_i=q_i\\circ b_i$ and [def-pc-tensor-pullback-composition-iso]. Set $v_i=\\mu_i\\circ\\chi_i:p_i^*A\\to p_i^*L$. On $X_{ij}=X_i\\times_X X_j$ with projections $r_1,r_2$, the canonical descent isomorphisms of $A$ and $L$ are the composition comparisons $r_1^*p_i^*\\cong(p_ir_1)^*=(p_jr_2)^*\\cong r_2^*p_j^*$, and the base change of $\\mu_i$ to the overlap is $r_1^*\\mu_i$ transported by the comparisons for the commutative square formed by $b_i$, its base change $b_{ij}:X_{ij}\\to Y_i\\times_Y Y_j$ and the first projections. By [lem-pc-tensor-pullback-composition-associativity], applied to the composable triples $(r_1,p_i,b)$ and $(r_1,b_i,q_i)$ and their $j$-analogues, together with naturality of the comparisons in the module, $r_1^*\\chi_i$ followed by these identifications equals the descent isomorphism of $A$ followed by $r_2^*\\chi_j$ and the same identifications on the $j$ side. Hence the hypothesis that the two $\\mu_i$ agree under the stipulated canonical pullback identifications is equivalent to the two $v_i$ commuting with the canonical descent isomorphisms of $A$ and $L$. Fullness of the equivalence in [lem-pc-fpqc-descent], clause (1), therefore gives $\\mu:A\\to L$ with $p_i^*\\mu=v_i$. Faithfulness of that equivalence makes $\\mu$ unique. After the comparison $\\chi_i$, its base change is the specified $\\mu_i$. Together with step 2, this proves uniqueness of the pair.",
+   "uses": [
+    "lem-weil-pbc-invertible-pullback-invertible",
+    "def-sc-invertible-module",
+    "def-pc-tensor-pullback-composition-iso",
+    "lem-pc-tensor-pullback-composition-associativity",
+    "lem-pc-fpqc-descent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/descent.tex",
+    "place": "Tag 023T, proposition-fpqc-descent-quasi-coherent, full faithfulness (also Spaces Descent Tag 04W8, same proposition label); pullback invertibility: Modules Tag 01C8 (lemma-pullback-locally-free), rank one."
+   }
+  },
+  {
+   "text": "Suppose all $b_i$ are isomorphisms. Their inverses $c_i:Y_i\\to X_i$ agree after base change, because a functor preserves inverse equations and the inverse of a fixed isomorphism is unique. Apply the construction of step 2 with $X,Y$ exchanged, using [lem-weil-pbc-fpqc-representable-descent] and [def-pc-fibre-product], to obtain an $S$-morphism $c:Y\\to X$ with base changes $c_i$. On each $X_i$, $c\\circ b$ becomes $c_i\\circ b_i=\\mathrm{id}$, so uniqueness in representable descent gives $c\\circ b=\\mathrm{id}_X$. The same argument on the covering $\\{Y_i\\to Y\\}$ gives $b\\circ c=\\mathrm{id}_Y$. Thus $b$ is an isomorphism.",
+   "uses": [
+    "lem-weil-pbc-fpqc-representable-descent",
+    "def-pc-fibre-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/descent.tex",
+    "place": "Tag 023Q, lemma-fpqc-universal-effective-epimorphisms: glue inverse maps and use uniqueness twice."
+   }
+  },
+  {
+   "text": "Suppose also all $\\mu_i$ are isomorphisms. Then every $v_i$ of step 3 is an isomorphism. On a double overlap, invert its compatibility equation to see that the maps $v_i^{-1}:p_i^*L\\to p_i^*A$ commute with the canonical descent isomorphisms in the opposite direction. Fullness in [lem-pc-fpqc-descent], clause (1), gives $\\nu:L\\to A$ pulling back to all $v_i^{-1}$. Both composites $\\mu\\circ\\nu$ and $\\nu\\circ\\mu$ pull back to identities; faithfulness of the same equivalence gives $\\mu\\circ\\nu=\\mathrm{id}_L$ and $\\nu\\circ\\mu=\\mathrm{id}_A$. Hence $\\mu$ is an isomorphism. This proves the final clause without assuming invertibility of any local map in the existence argument.",
+   "uses": [
+    "lem-pc-fpqc-descent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/descent.tex",
+    "place": "Tag 023T, proposition-fpqc-descent-quasi-coherent: fullness for inverse maps and faithfulness for their inverse equations."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-fpqc-finer-than-etale",
+  "lem-galois-fpqc-covering-base-change",
+  "def-pc-fibre-product",
+  "lem-weil-pbc-fpqc-representable-descent",
+  "lem-weil-pbc-invertible-pullback-invertible",
+  "def-sc-invertible-module",
+  "def-pc-tensor-pullback-composition-iso",
+  "lem-pc-tensor-pullback-composition-associativity",
+  "lem-pc-fpqc-descent"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/descent.tex",
+  "place": "Tags 023Q (lemma-fpqc-universal-effective-epimorphisms) and 023T (proposition-fpqc-descent-quasi-coherent), applied successively to scheme morphisms and module maps; inverse equations by their uniqueness clauses."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Morphisms of schemes equipped with invertible sheaves glue uniquely along an etale covering of the base",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.Cover.hom_ext\", \"module\": \"Mathlib/AlgebraicGeometry/Gluing\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} (𝒰 : X.OpenCover) {Y : AlgebraicGeometry.Scheme} (f₁ f₂ : X ⟶ Y),\\n  (∀ (x : 𝒰.I₀), CategoryTheory.CategoryStruct.comp (𝒰.f x) f₁ = CategoryTheory.CategoryStruct.comp (𝒰.f x) f₂) →\\n    f₁ = f₂\", \"doc\": \"Given an open cover $\\\\mathcal{U}$ of a scheme $X$ and two morphisms $f_1, f_2: X \\\\to Y$ between schemes, if the compositions $\\\\mathcal{U}.f(x) \\\\circ f_1$ and $\\\\mathcal{U}.f(x) \\\\circ f_2$ are equal for\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.LocalRepresentability.comp_toGlued_eq\", \"module\": \"Mathlib/AlgebraicGeometry/Sites/Representability\", \"type\": \"∀ {F : CategoryTheory.Sheaf AlgebraicGeometry.Scheme.zariskiTopology (Type u)} {ι : Type u}\\n  {X : ι → AlgebraicGeometry.Scheme} {f : (i : ι) → CategoryTheory.yoneda.obj (X i) ⟶ F.val}\\n  (hf : ∀ (i : ι), AlgebraicGeometry.IsOpenImmersion.presheaf (f i)) {U : AlgebraicGeometry.Scheme} {i j : ι}\\n  (a \", \"doc\": \"For schemes $X_i,X_j$ in a gluing data and a scheme $U$, if morphisms $a:U\\\\to X_i$ and $b:U\\\\to X_j$ satisfy $\\\\text{Yoneda}(a)\\\\circ f_i = \\\\text{Yoneda}(b)\\\\circ f_j$ in the presheaf category, then their\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Cover.gluedCover_t'\", \"module\": \"Mathlib/AlgebraicGeometry/Gluing\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} (𝒰 : X.OpenCover) (x y z : 𝒰.I₀),\\n  (AlgebraicGeometry.Scheme.Cover.gluedCover 𝒰).t' x y z = AlgebraicGeometry.Scheme.Cover.gluedCoverT' 𝒰 x y z\", \"doc\": \"For any open cover $\\\\mathcal{U}$ of a scheme $X$ and indices $x, y, z \\\\in I_0(\\\\mathcal{U})$, the coherence morphism $t'$ in the glued cover data constructed from $\\\\mathcal{U}$ coincides with the morph\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.LocalRepresentability.glueData_t\", \"module\": \"Mathlib/AlgebraicGeometry/Sites/Representability\", \"type\": \"∀ {F : CategoryTheory.Sheaf AlgebraicGeometry.Scheme.zariskiTopology (Type u)} {ι : Type u}\\n  {X : ι → AlgebraicGeometry.Scheme} {f : (i : ι) → CategoryTheory.yoneda.obj (X i) ⟶ F.val}\\n  (hf : ∀ (i : ι), AlgebraicGeometry.IsOpenImmersion.presheaf (f i)) (i j : ι),\\n  (AlgebraicGeometry.Scheme.LocalRe\", \"doc\": \"Given a sheaf $ F $ on the category of schemes with the Zariski topology, and a family of open immersions $ f_i : \\text{Hom}(-, X_i) \\to F $ in the presheaf category, the transpose morphism $ t_{i,j} : \"}\n  {\"name\": \"AlgebraicGeometry.Scheme.LocalRepresentability.glueData_f\", \"module\": \"Mathlib/AlgebraicGeometry/Sites/Representability\", \"type\": \"∀ {F : CategoryTheory.Sheaf AlgebraicGeometry.Scheme.zariskiTopology (Type u)} {ι : Type u}\\n  {X : ι → AlgebraicGeometry.Scheme} {f : (i : ι) → CategoryTheory.yoneda.obj (X i) ⟶ F.val}\\n  (hf : ∀ (i : ι), AlgebraicGeometry.IsOpenImmersion.presheaf (f i)) (i j : ι),\\n  (AlgebraicGeometry.Scheme.LocalRe\", \"doc\": \"For a sheaf $ F $ on the category of schemes with the Zariski topology, if each morphism $ f_i : \\\\text{Hom}(-, X_i) \\\\to F $ in a family is an open immersion in the presheaf category, then each $ f_i $\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Cover.RelativeGluingData.mk.inj\", \"module\": \"Mathlib/AlgebraicGeometry/RelativeGluing\", \"type\": \"∀ {S : AlgebraicGeometry.Scheme} {𝒰 : S.OpenCover} {inst : CategoryTheory.Category.{u_2, u_1} 𝒰.I₀}\\n  {inst_1 : AlgebraicGeometry.Scheme.Cover.LocallyDirected 𝒰}\\n  {functor : CategoryTheory.Functor 𝒰.I₀ AlgebraicGeometry.Scheme}\\n  {natTrans : functor ⟶ AlgebraicGeometry.Scheme.Cover.functorOfLocally\", \"doc\": \"Given a scheme $S$, an open cover $\\\\mathcal{U}$ of $S$, a category structure on $\\\\mathcal{U}_0$, a locally directed cover structure on $\\\\mathcal{U}$, and equifibered natural transformations between fu\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.LocalRepresentability.glueData\", \"module\": \"Mathlib/AlgebraicGeometry/Sites/Representability\", \"type\": \"{F : CategoryTheory.Sheaf AlgebraicGeometry.Scheme.zariskiTopology (Type u)} →\\n  {ι : Type u} →\\n    {X : ι → AlgebraicGeometry.Scheme} →\\n      {f : (i : ι) → CategoryTheory.yoneda.obj (X i) ⟶ F.val} →\\n        (∀ (i : ι), AlgebraicGeometry.IsOpenImmersion.presheaf (f i)) → AlgebraicGeometry.Scheme.Gl\", \"doc\": \"The structure defines gluing data for schemes using open immersions in the Zariski topology. It consists of an index type $\\\\iota$, a family of schemes $X_i$, and for each pair of indices $i,j$, a sche\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.LocalRepresentability.glueData_t'\", \"module\": \"Mathlib/AlgebraicGeometry/Sites/Representability\", \"type\": \"∀ {F : CategoryTheory.Sheaf AlgebraicGeometry.Scheme.zariskiTopology (Type u)} {ι : Type u}\\n  {X : ι → AlgebraicGeometry.Scheme} {f : (i : ι) → CategoryTheory.yoneda.obj (X i) ⟶ F.val}\\n  (hf : ∀ (i : ι), AlgebraicGeometry.IsOpenImmersion.presheaf (f i)) (i j k : ι),\\n  (AlgebraicGeometry.Scheme.Local\", \"doc\": \"For a sheaf $ F $ on the category of schemes with the Zariski topology and a family of open immersions $ f_i : \\text{Hom}(-, X_i) \\to F $, the $ t' $ morphism in the gluing data for indices $ i,j,k $ is\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Full faithfulness of etale descent for pairs consisting of a scheme and a line bundle",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.instFullEtaleOverForget\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"∀ (X : AlgebraicGeometry.Scheme), (AlgebraicGeometry.Scheme.Etale.forget X).Full\", \"doc\": \"The forgetful functor from the category of étale schemes over a scheme $X$ to the over category over $X$ is full. This means that for any two étale morphisms $f : Y \\to X$ and $g : Z \\to X$, every morph\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Etale.forgetFullyFaithful\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"(X : AlgebraicGeometry.Scheme) → (AlgebraicGeometry.Scheme.Etale.forget X).FullyFaithful\", \"doc\": \"The forgetful functor from the category of étale schemes over $X$ to the over category over $X$ is fully faithful, meaning it induces a bijection on hom-sets between any pair of objects.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Etale.forget\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"(X : AlgebraicGeometry.Scheme) → CategoryTheory.Functor X.Etale (CategoryTheory.Over X)\", \"doc\": \"The forgetful functor from the category of étale schemes over $X$ to the over category over $X$, which sends each étale morphism to its underlying morphism into $X$ and each commutative triangle of ét\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.instFaithfulEtaleOverForget\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"∀ (X : AlgebraicGeometry.Scheme), (AlgebraicGeometry.Scheme.Etale.forget X).Faithful\", \"doc\": \"The forgetful functor from the category of étale schemes over a scheme $X$ to the over category over $X$ is faithful. This means that for any two étale morphisms $f, g : Y \\to X$ and any morphism $h : \"}\n  {\"name\": \"AlgebraicGeometry.Scheme.instCategoryEtale\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"(X : AlgebraicGeometry.Scheme) → CategoryTheory.Category.{u, u + 1} X.Etale\", \"doc\": \"For any scheme $X$, the collection of étale morphisms to $X$ forms a category, where objects are schemes equipped with an étale morphism to $X$ and morphisms are commutative triangles between such obj\"}\n  {\"name\": \"AlgebraicGeometry.IsEtale.of_comp\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) {Z : AlgebraicGeometry.Scheme} (g : Y ⟶ Z)\\n  [AlgebraicGeometry.IsEtale (CategoryTheory.CategoryStruct.comp f g)] [AlgebraicGeometry.LocallyOfFiniteType g]\\n  [AlgebraicGeometry.FormallyUnramified g], AlgebraicGeometry.IsEtale f\", \"doc\": \"If the composition of a morphism $ f: X \\to Y $ with a morphism $ g: Y \\to Z $ is étale, and $ g $ is locally of finite type and formally unramified, then $ f $ is an étale morphism.\"}\n  {\"name\": \"AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"CategoryTheory.MorphismProperty.HasOfPostcompProperty (@AlgebraicGeometry.IsEtale)\\n  (@AlgebraicGeometry.LocallyOfFiniteType ⊓ @AlgebraicGeometry.FormallyUnramified)\", \"doc\": \"For any category of schemes, the composition of a morphism that is locally of finite type and a morphism that is formally unramified results in an étale morphism. This instance asserts that the proper\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.fullyFaithfulForgetToLocallyRingedSpace\", \"module\": \"Mathlib/AlgebraicGeometry/Scheme\", \"type\": \"AlgebraicGeometry.Scheme.forgetToLocallyRingedSpace.FullyFaithful\", \"doc\": \"The forgetful functor from the category of schemes to the category of locally ringed spaces is fully faithful, meaning it induces a bijection between hom-sets of schemes and hom-sets of their underlyi\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Scheme, \"descent\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "(descent|glue).*(morphism|Hom|[Ii]nvertible)|([Ii]nvertible|[Ll]ineBundle).*descent",
+   "results": "[grep] OK 25 hit(s)\n  {\"file\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Basic.lean\", \"line\": \"444\", \"text\": \"  refine (openCoverOfMapIrrelevantEqTop 𝒜 f hf).glueMorphisms\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Basic.lean\", \"line\": \"466\", \"text\": \"      ← Scheme.Hom.comp_apply, fromOfGlobalSections, Scheme.Cover.ι_glueMorphisms] at hx\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Basic.lean\", \"line\": \"503\", \"text\": \"  exact (openCoverOfMapIrrelevantEqTop 𝒜 f hf).ι_glueMorphisms _ _ ⟨_, _, hn, hr⟩\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Basic.lean\", \"line\": \"521\", \"text\": \"    Category.assoc, Scheme.Cover.ι_glueMorphisms_assoc, basicOpenIsoSpec_inv_ι_assoc,\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/EffectiveEpi.lean\", \"line\": \"127\", \"text\": \"  refine ⟨𝒰.glueMorphisms u ?_, ?_⟩\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/RelativeGluing.lean\", \"line\": \"16\", \"text\": \"the `Xᵢ` glue to a morphism `f : X ⟶ S` such that `Xᵢ ≅ f⁻¹ Uᵢ`.\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Cover/Directed.lean\", \"line\": \"211\", \"text\": \"If `𝒰` is a directed open cover of `X`, to glue morphisms `{gᵢ : 𝒰ᵢ ⟶ Y}` it suffices\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Cover/Directed.lean\", \"line\": \"216\", \"text\": \"def glueMorphismsOfLocallyDirected (𝒰 : X.OpenCover) [Category* 𝒰.I₀] [𝒰.LocallyDirected]\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Cover/Directed.lean\", \"line\": \"220\", \"text\": \"  𝒰.glueMorphisms g <| fun i j ↦ by\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Cover/Directed.lean\", \"line\": \"226\", \"text\": \"lemma map_glueMorphismsOfLocallyDirected {Y : Scheme.{u}} (g : ∀ i, 𝒰.X i ⟶ Y)\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Cover/Directed.lean\", \"line\": \"228\", \"text\": \"    𝒰.f i ≫ 𝒰.glueMorphismsOfLocallyDirected g h = g i := by\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Gluing.lean\", \"line\": \"27\", \"text\": \"* `AlgebraicGeometry.Scheme.GlueData.isoCarrier`: The isomorphism between the underlying space\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Gluing.lean\", \"line\": \"30\", \"text\": \"* `AlgebraicGeometry.Scheme.OpenCover.fromGlued`: The canonical morphism\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Gluing.lean\", \"line\": \"32\", \"text\": \"* `AlgebraicGeometry.Scheme.OpenCover.glueMorphisms`: We may glue a family of compatible\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Gluing.lean\", \"line\": \"409\", \"text\": \"    simp only [← ι_fromGlued, gluedCover_U, Hom.comp_base, TopCat.hom_comp, ContinuousMap.coe_comp,\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Gluing.lean\", \"line\": \"435\", \"text\": \"    change IsIso 𝒰.fromGlued.toPshHom\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/IdealSheaf/Subscheme.lean\", \"line\": \"69\", \"text\": \"    RingHom.ker (I.glueDataObjι U).appTop.hom = (I.ideal U).comap U.1.topIso.hom.hom := by\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/IdealSheaf/Subscheme.lean\", \"line\": \"88\", \"text\": \"  simp only [glueDataObjι, Scheme.Hom.comp_base, TopCat.coe_comp, Set.range_comp]\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/IdealSheaf/Subscheme.lean\", \"line\": \"105\", \"text\": \"  TopCat.isoOfHomeo ((I.glueDataObjι U ≫ U.1.ι).isEmbedding.toHomeomorph.trans\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/IdealSheaf/Subscheme.lean\", \"line\": \"148\", \"text\": \"    I.glueDataObjMap h ≫ I.glueDataObjι V = I.glueDataObjι U ≫ X.homOfLE h := by\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/IdealSheaf/Subscheme.lean\", \"line\": \"149\", \"text\": \"  rw [glueDataObjMap, glueDataObjι, ← Spec.map_comp_assoc, ← CommRingCat.ofHom_comp,\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Sites/BigZariski.lean\", \"line\": \"64\", \"text\": \"  let e : Y ⟶ X := 𝓤.glueMorphisms (fun j => x (𝓤.f _) (.mk _)) <| by\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Sites/BigZariski.lean\", \"line\": \"71\", \"text\": \"    rw [𝓤.ι_glueMorphisms]\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Sites/BigZariski.lean\", \"line\": \"75\", \"text\": \"    rw [𝓤.ι_glueMorphisms]\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Normalization.lean\", \"line\": \"138\", \"text\": \"  Scheme.OpenCover.glueMorphismsOfLocallyDirected\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Compatible local maps of schemes and their line bundles descend uniquely along an etale cover",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.IsLocalAtTarget.descendsAlong\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Descent\", \"type\": \"∀ (P P' : CategoryTheory.MorphismProperty AlgebraicGeometry.Scheme) [AlgebraicGeometry.IsZariskiLocalAtTarget P]\\n  [P'.IsStableUnderBaseChange],\\n  (∀ {R : CommRingCat} {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ AlgebraicGeometry.Spec R)\\n      (g : Y ⟶ AlgebraicGeometry.Spec R), P' f → P (CategoryTheo\", \"doc\": \"Let $\\\\mathcal{P}$ and $\\\\mathcal{P}'$ be morphism properties in the category of schemes. If $\\\\mathcal{P}$ is Zariski local at the target and $\\\\mathcal{P}'$ is stable under base change, then for any com\"}\n  {\"name\": \"AlgebraicGeometry.IsZariskiLocalAtTarget.descendsAlong_inf_quasiCompact\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Descent\", \"type\": \"[IsZariskiLocalAtTarget P]\\n  (H :\\n    ∀ {R S : CommRingCat.{u}} {Y : Scheme.{u}} (φ : R ⟶ S) (g : Y ⟶ Spec R),\\n      P' (Spec.map φ) → P (pullback.fst (Spec.map φ) g) → P g) :\\n  P.DescendsAlong (P' ⊓ @QuasiCompact)\", \"doc\": \"If $ P $ is a morphism property that is Zariski local at the target, and for any ring homomorphism $ \\\\phi : R \\\\to S $ and morphism $ g : Y \\\\to \\\\operatorname{Spec}(R) $, the conditions $ P'(\\\\operatorna\"}\n  {\"name\": \"AlgebraicGeometry.IsZariskiLocalAtTarget.descendsAlong\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Descent\", \"type\": \"[IsZariskiLocalAtTarget P] [P'.IsStableUnderBaseChange]\\n  (H :\\n    ∀ {R : CommRingCat.{u}} {X Y : Scheme.{u}} (f : X ⟶ Spec R) (g : Y ⟶ Spec R), P' f → P (pullback.fst f g) → P g) :\\n  P.DescendsAlong P'\", \"doc\": \"Let $\\\\mathcal{P}$ and $\\\\mathcal{P}'$ be morphism properties on schemes. If $\\\\mathcal{P}'$ is stable under base change, and for every commutative ring $R$ and morphisms $f : X \\\\to \\\\operatorname{Spec}(R\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Etale\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Etale\", \"type\": \"(X : Scheme.{u}) : Type _\", \"doc\": \"The property of being an étale morphism to a fixed scheme $X$, defined as morphisms that are smooth of relative dimension 0, constructed via the morphism property lifting over $X$.\"}\n  {\"name\": \"AlgebraicGeometry.instDescendsAlongSchemeMinMorphismPropertySurjectiveFlatLocallyOfFinitePresentationOfQuasiCompactOfIsZariskiLocalAtTarget\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.FlatDescent\", \"type\": \"(P : MorphismProperty Scheme) [P.DescendsAlong (@Surjective ⊓ @Flat ⊓ @QuasiCompact)] [IsZariskiLocalAtTarget P] :\\n  P.DescendsAlong (@Surjective ⊓ @Flat ⊓ @LocallyOfFinitePresentation)\", \"doc\": \"If a morphism property $ P $ is Zariski local at the target and descends along morphisms that are surjective, flat, and quasi-compact, then $ P $ also descends along morphisms that are surjective, fla\"}\n  {\"name\": \"AlgebraicGeometry.IsEtale.instIsSmooth\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Etale\", \"type\": \"[IsEtale f] : IsSmooth f\", \"doc\": \"Every étale morphism of schemes is a smooth morphism. Specifically, if a morphism $ f: X \\to Y $ of schemes is étale (i.e., smooth of relative dimension 0), then it satisfies the conditions of being a \"}\n  {\"name\": \"AlgebraicGeometry.Scheme.smallEtaleTopology\", \"module\": \"Mathlib.AlgebraicGeometry.Sites.Etale\", \"type\": \"(X : Scheme.{u}) : GrothendieckTopology X.Etale\", \"doc\": \"For a scheme $X$, the Grothendieck topology on the category of étale morphisms to $X$, constructed by inducing the standard Grothendieck topology on the over category via the forgetful functor. Coveri\"}\n  {\"name\": \"Algebra.Etale.exists_subalgebra_fg\", \"module\": \"Mathlib.RingTheory.Smooth.NoetherianDescent\", \"type\": \"[Etale A B] :\\n  ∃ (A₀ : Subalgebra R A) (B₀ : Type u) (_ : CommRing B₀) (_ : Algebra A₀ B₀),\\n    A₀.FG ∧ Etale A₀ B₀ ∧ Nonempty (B ≃ₐ[A] A ⊗[A₀] B₀)\", \"doc\": \"For any étale algebra $ B $ over a commutative ring $ A $, there exists a finitely generated $ R $-subalgebra $ A_0 \\\\subseteq A $, an étale $ A_0 $-algebra $ B_0 $, and an isomorphism of $ A $-algebra\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "(etale|fpqc).*(glue|descend|[Ii]nvertible)|[Ii]nvertible.*descent",
+   "results": "[grep] OK 1 hit(s); returned hits: Mathlib/AlgebraicGeometry/Morphisms/LocalFlatDescent.lean",
+   "date": "2026-10-23",
+   "verdict": "no match: hits do not state combined scheme-and-module morphism descent; general prestack full faithfulness requires a geometric prestack instance"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Descent of a scheme morphism and a homomorphism between line bundles along an etale cover",
+   "results": "[leansearch] OK 8 hit(s); returned hits: AlgebraicGeometry.IsLocalAtTarget.descendsAlong, AlgebraicGeometry.Scheme.Etale, RingHom.Etale, AlgebraicGeometry.IsEtale, AlgebraicGeometry.IsZariskiLocalAtTarget.descendsAlong, CategoryTheory.RegularEpi.desc', AlgebraicGeometry.HasRingHomProperty.descendsAlong, RingHom.FormallyEtale",
+   "date": "2026-10-23",
+   "verdict": "no match: hits do not state combined scheme-and-module morphism descent; general prestack full faithfulness requires a geometric prestack instance"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Scheme, \"descent\"",
+   "results": "[loogle] OK 0 hit(s); returned hits: ",
+   "date": "2026-10-23",
+   "verdict": "no match: hits do not state combined scheme-and-module morphism descent; general prestack full faithfulness requires a geometric prestack instance"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Morphisms of schemes with invertible modules glue uniquely along an etale covering of the base",
+   "results": "[leanfinder] OK 8 hit(s); returned hits: AlgebraicGeometry.Scheme.Cover.hom_ext, AlgebraicGeometry.Scheme.LocalRepresentability.comp_toGlued_eq, AlgebraicGeometry.Scheme.LocalRepresentability.glueData_t, AlgebraicGeometry.Scheme.instCategoryEtale, AlgebraicGeometry.Scheme.LocalRepresentability.glueData_f, AlgebraicGeometry.Scheme.Cover.gluedCover_t', AlgebraicGeometry.Scheme.LocalRepresentability.glueData, AlgebraicGeometry.IsEtale",
+   "date": "2026-10-23",
+   "verdict": "no match: hits do not state combined scheme-and-module morphism descent; general prestack full faithfulness requires a geometric prestack instance"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Full faithfulness of descent for schemes equipped with a line bundle along faithfully flat covers",
+   "results": "[leanfinder] OK 8 hit(s); returned hits: AlgebraicGeometry.Scheme.Modules.fullyFaithfulToPresheafOfModules, AlgebraicGeometry.Scheme.fullyFaithfulForgetToLocallyRingedSpace, AlgebraicGeometry.Scheme.Modules.instFullPresheafOfModulesToPresheafOfModules, AlgebraicGeometry.Scheme.Etale.forgetFullyFaithful, AlgebraicGeometry.Scheme.instFullOppositeIdealSheafDataOverSubschemeFunctor, AlgebraicGeometry.Scheme.instFullEtaleOverForget, AlgebraicGeometry.Scheme.instFullLocallyRingedSpaceForgetToLocallyRingedSpace, CategoryTheory.Pseudofunctor.fullyFaithfulToDescentData",
+   "date": "2026-10-23",
+   "verdict": "no match: hits do not state combined scheme-and-module morphism descent; general prestack full faithfulness requires a geometric prestack instance"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-polarized-scheme-etale-descent",
+  "date": "2026-10-22",
+  "group": "Q98"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Additional input to the descent sentence: Stacks Spaces Descent Tag 0D3C, together with Tags 02WW and 04W8, for effective descent of a scheme with a relatively ample invertible module. Extracted argument: parent proof step 6 (gluing of morphisms of schemes with line modules).",
+   "via": [
+    "lem-trf-polarized-scheme-etale-descent",
+    "lem-trf-polarized-fine-log-etale-descent",
+    "lem-trf-coherent-log-ideal-chart-construction",
+    "lem-trf-log-blowup-normalization",
+    "lem-trf-log-regular-desingularization",
+    "lem-trf-nodal-pair-projective-resolution",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-trf-etale-scheme-line-morphism-gluing",
+  "worker": "stage1",
+  "summary": "Kept the statement and its comparison conventions. Split its proof into fpqc base change of the covering, gluing the underlying S-morphism, full-faithful descent of the module map, and explicit gluing of both inverses. Reused existing DAG nodes; no new nodes. Checked the sources and every cited statement, including quasi-coherence and arbitrary covering families. Reviewer (Q53 maintainer reader, 2026-10-23): step 3 now cites lem-pc-tensor-pullback-composition-associativity for the coherence identifying the overlap hypothesis with descent compatibility.",
+  "blueprint": "Historical additional descent input below lem-trf-local-term-locality, through lem-trf-polarized-scheme-etale-descent, proof step 6: gluing morphisms of polarized schemes. The latest blueprint no longer contains that historical alteration argument; this split only discharges the existing auxiliary node and does not alter the current unit route.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-fpqc-finer-than-etale",
+    "why": "Convert the specified etale cover to an fpqc cover so the existing morphism and module descent tools apply; no statement of this unit supplies this generic topology comparison."
+   },
+   {
+    "node": "lem-pc-tensor-pullback-composition-associativity",
+    "why": "Step 3 needs associativity of the tensor-pullback composition comparisons to identify the stipulated overlap compatibility of the mu_i with compatibility of the v_i with the canonical descent isomorphisms; a generic coherence lemma of the comparison the statement itself uses, no node of this unit gives it."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-fpqc-finer-than-etale",
+  "lem-pc-tensor-pullback-composition-associativity"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q53-32948590b",
+  "group": "Q53",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q53-32948590b (reviewer sub-agent of L); spot-checked: I read the whole delivery against the cited statements and Stacks 023Q (descent.tex lemma-fpqc-universal-effective-epimorphisms) and 023T/04W8 (proposition-fpqc-descent-quasi-coherent). The statement is unchanged from side-live, which still has the item unsplit. The delivery creates no new nodes. Step 1: étale cover → fpqc via lem-weil-pbc-fpqc-finer-than-etale (declared tool use, accepted); its base changes {p_i} and {q_i} are fpqc via lem-galois-fpqc-covering-base-change; the overlaps are the right ones, X_i×_X X_j ≅ X×_S(U_i×_S U_j). Step 2: fpqc-representable-descent gives b; uniqueness with target S gives d∘b=a; Y_i-component check shows b base-changes to b_i. Step 4 (glued inverses, uniqueness twice) and step 5 (fullness for v_i^{-1}, faithfulness for the inverse equations) are correct. Edge cases checked: empty I, identity cover, infinite I, zero maps μ_i. One fault, C1/E5 in step 3: \"the hypothesis says exactly that the v_i commute with the descent isomorphisms\" hides associativity of the tensor-pullback composition comparisons. The existing node lem-pc-tensor-pullback-composition-associativity states exactly this and was not cited. FIX: step 3 now writes out the descent isomorphisms r_1^*p_i^* ≅ (p_ir_1)^* = (p_jr_2)^* ≅ r_2^*p_j^*, cites the associativity node for the triples (r_1,p_i,b) and (r_1,b_i,q_i) plus naturality, and adds the node to uses, proof_deps and split_report.tool_uses. No cycle results. Fix file: fixes/dag/nodes/sec-trace-formula/lem-trf-etale-scheme-line-morphism-gluing.json.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.EtaleSchemeLineMorphismGluing",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.existsUnique_etaleSchemeLineMorphism",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.Modules.lineHomPullToTest",
+   "AlgebraicGeometry.Scheme.Modules.IsLineHomBaseChange",
+   "AlgebraicGeometry.Scheme.Modules.existsUnique_etaleSchemeLineMorphism"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/EtaleSchemeLineMorphismGluing.lean",
+  "statement": "theorem existsUnique_etaleSchemeLineMorphism {S X Y : Scheme.{u}} (a : X ⟶ S) (d : Y ⟶ S) (L : X.Modules) (M : Y.Modules) [IsInvertible L] [IsInvertible M] {I : Type v} (U : I → S.Etale) (hcover : ∀ x : S, ∃ (i : I) (z : (U i).left), (U i).hom z = x) (b : ∀ i : I, Limits.pullback a (U i).hom ⟶ Limits.pullback d (U i).hom) (hover : ∀ i : I, b i ≫ pullback.snd d (U i).hom = pullback.snd a (U i).hom) (μ : ∀ i : I, (tensorPullback (b i)).obj ((tensorPullback (pullback.fst d (U i).hom)).obj M) ⟶ (tensorPullback (pullback.fst a (U i).hom)).obj L) (hcompat : ∀ (i j : I) (T : Scheme.{u}) (r : T ⟶ Limits.pullback a (U i).hom) (s : T ⟶ Limits.pullback a (U j).hom) (hp : r ≫ pullback.fst a (U i).hom = s ≫ pullback.fst a (U j).hom), ∃ hb : r ≫ (b i ≫ pullback.fst d (U i).hom) = s ≫ (b j ≫ pullback.fst d (U j).hom), lineHomPullToTest r (b i ≫ pullback.fst d (U i).hom) (pullback.fst a (U i).hom) M L ((tensorPullbackCompositionIso (b i) (pullback.fst d (U i).hom) (b i ≫ pullback.fst d (U i).hom) rfl).hom.app M ≫ μ i) ≫ eqToHom (congrArg (fun f ↦ (tensorPullback f).obj L) hp) = eqToHom (congrArg (fun f ↦ (tensorPullback f).obj M) hb) ≫ lineHomPullToTest s (b j ≫ pullback.fst d (U j).hom) (pullback.fst a (U j).hom) M L ((tensorPullbackCompositionIso (b j) (pullback.fst d (U j).hom) (b j ≫ pullback.fst d (U j).hom) rfl).hom.app M ≫ μ j)) : ∃ B : (Σ f : {f : X ⟶ Y // f ≫ d = a}, (tensorPullback f.val).obj M ⟶ L), (∀ i : I, IsLineHomBaseChange (pullback.fst a (U i).hom) (pullback.fst d (U i).hom) B.1.val (b i) M L B.2 (μ i)) ∧ (∀ B' : (Σ f : {f : X ⟶ Y // f ≫ d = a}, (tensorPullback f.val).obj M ⟶ L), (∀ i : I, IsLineHomBaseChange (pullback.fst a (U i).hom) (pullback.fst d (U i).hom) B'.1.val (b i) M L B'.2 (μ i)) → B' = B) ∧ ((∀ i : I, IsIso (b i) ∧ IsIso (μ i)) → IsIso B.1.val ∧ IsIso B.2)",
+  "branch": "newtargets-dag",
+  "by": "Q31",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-6578b5f77",
+  "group": "Q31",
+  "result": "pass",
+  "note": "Item node unchanged except lean (side-live has no lean record or module for it); lean.statement verbatim in file; all binders and universes bound. Objects match the stmt_dep owners (Scheme, IsInvertible, S.Etale + pointwise surjectivity = smallEtaleTopology cover via ofArrows_mem_smallEtaleTopology_iff, Limits.pullback, tensorPullback, tensorPullbackCompositionIso). hcompat over all universe-u test pairs is equivalent to the overlap condition (factorization through X_i x_X X_j, naturality/associativity of the recorded comparisons; hover fixes the U_i-component). Conclusion: sigma S-morphism plus module map, IsLineHomBaseChange = base-change equality, uniqueness of the whole pair, conditional iso clause, as in the node. Edge cases: empty I, zero mu_i, infinite covers; no extra hypotheses. Helpers have explicit data and docstrings; body only sorry; 5-step proof docstring; no pro-etale substitute; no new nodes or dep-record changes. No files changed, so no compile."
+ }
+}

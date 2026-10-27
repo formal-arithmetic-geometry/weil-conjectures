@@ -1,0 +1,41 @@
+## Worker report
+
+Files written:
+- dag/nodes/sec-trace-formula/lem-trf-etale-reduced-regular-center.json: statement item, split into five steps; no Mathlib match for the whole statement.
+- citations.json: verbatim statement quotations for every step/node citation.
+
+New nodes: 0. Mathlib leaves created: 0. Attachments: none. WANTED: none. Nothing unfinished.
+
+The item had no proof. I retained its statement, source, blueprint ancestry and inherited searches, added an ideal-sheaf statement dependency, and supplied the assembly argument. I searched the read-only WeilConjectures library for the blueprint tag and for reduced closed schemes, regular centers and descent; the existing ReducedInducedClosedSubscheme theorem supplies only part of the item, not an attachment. No Lean was written or compiled.
+
+The searches made through msearch.py are in searches.jsonl and appended to the node with exactly their queries. Both semantic phrasings returned etale-locus, normalization, open-immersion reducedness or local ring infrastructure, not the complete theorem. Loogle returned no hits. The three grep hits concern smooth algebraic groups, the vanishingIdeal construction, and reduced irreducible components; vanishingIdeal is an ingredient and has no regular-center assertion. LeanSearch returned reducedness and locally-Noetherian infrastructure only. All five calls succeeded.
+
+I reused the existing same-unit lem-trf-etale-reduced-cartier-descent for its first assertion alone, rather than creating a new etale reduced-pullback lemma. I reused lem-weil-pbc-flat-under-regular (00OF) instead of introducing an identical descent theorem. The item is not just an application of either lemma: its steps check Noetherian stalk hypotheses, identify the supplied model C and its actual ideal, and assemble regularity and finite generation.
+
+## Route and tool uses
+
+I read the chapter and sk-i-curve-zero records and the current latest blueprint lem-trf-local-term-locality statement and proof. This auxiliary center result carries the regular-center component of ILO VIII 4.1.8 used in the ancestor's alteration branch, as its existing blueprint.from records. No chapter or unit route changed and this is not a unit key node. Blueprint searches for the reduced-induced structure, regular centers, 034E and 00OF produced no blueprint node stating this item. Existing general-purpose nodes are cited instead of new versions.
+
+Three off-unit statements are declared in split_report.tool_uses: the flat-local regularity descent (00OF), the ideal-image formula (01JU), and the affine stalk/localization identification (01HV). These are generic algebra/scheme tools, not replacements for the unit's geometric route. The other off-unit statements used are Mathlib leaves or the closed reduced-induced theorem.
+
+## Not duplicates
+
+No new nodes were created. The existing Cartier-descent node is used for its reduced-pullback clause; its Cartier-divisor equivalence is unused. The existing regular-intersection-descent node imposes a family of closed immersions and codimension hypotheses absent here and was not substituted. I searched the entire DAG by the source tags and concepts and opened the relevant statements before choosing citations.
+
+## Review by Q138
+
+I read the sources with the files open: schemes.tex Tag 01J3 (lemma-reduced-closed-subscheme), including its radical affine ideal construction and uniqueness argument; descent.tex Tag 034E (lemma-reduced-local-smooth), including ascent of reducedness under smooth morphisms; schemes.tex Tag 01JU (lemma-fibre-product-immersion), including its image-of-pullback-ideal formula; morphisms.tex Tag 02GO (lemma-base-change-etale); algebra.tex Tag 00OF (lemma-flat-under-regular), with both local Noetherian hypotheses; and Tag 00FN (lemma-Noetherian-permanence), covering both finite-type algebras and localization. I also read ILO VIII 4.1.6--4.1.8, printed p. 118 (PDF page 124): the closed maximal-multiplicity stratum is the permissible center. The present proof_origin is agent because I assembled these separate source facts; it does not pretend that ILO spells out this entire auxiliary statement.
+
+For step 1 I opened all six cited statements. The reduced-induced theorem gives the quasi-coherent radical ideal and the actual affine quotient model. pqf-lem-affine-open-locnoeth gives Noetherian rings on the ambient affine opens; the Noetherian-ring definition gives finite generation of each ideal, including the unit ideal. The finite-type algebra theorem applies to R/I with zero algebra generators; the stalk/localization theorem supplies exactly the localizations to which the localization-Noetherian theorem applies. Thus local Noetherianity is established before regularity descent, rather than assumed for M.
+
+For step 2 I opened the first clause of lem-trf-etale-reduced-cartier-descent: it says the pullback is the reduced induced closed subscheme on the inverse image, for a locally Noetherian ambient scheme and every etale morphism, with no Cartier hypothesis. These are precisely the current hypotheses. The reduced-induced uniqueness statement on W gives equality of the two ideal sheaves and unique isomorphisms over W. Taking germs of mutually inverse structure sheaf maps gives the claimed canonical isomorphism of the local rings of P and C. I did not identify the local ring on M with the local ring on C.
+
+For step 3 I opened lem-pc-closed-subscheme-base-change-ideal-image: it gives the ideal of the actual scheme fibre product as the image of e^*I -> O_W. The closed-immersion ideal-sheaf definition identifies the ideal of a specified affine quotient with the actual ideal, not its radical. Step 2 supplies equality with C; therefore the displayed generators require no additional reduction. Here 'pulled-back ideal' is the extended defining ideal in O_W, exactly as in the statement's coordinate assertion.
+
+For step 4 I checked the etale-scheme-base-change statement applies to the projection to M. The etale definition includes flatness, and the flat-morphism definition explicitly says the induced local ring homomorphism is flat. Regularity of C gives a Noetherian regular local target; step 1 gives a Noetherian source. Hence every hypothesis of the flat-under-regular statement holds at the chosen point. The point exists because w belongs to the given subset |C|=e^{-1}(T), and C is isomorphic over W to P. The result applies at every supplied chart point, not just one chosen chart.
+
+Step 5 uses the explicit local-ring characterization in the regular-scheme definition, after local Noetherianity was proved, and the reduced-induced theorem's exact support assertion. For the empty subset there are no local rings to test, while finite generation is still the unit ideal on X. I corrected the initial draft's wording here: local finite generation is not vacuous merely because the center is empty.
+
+I checked delivery-errors B--E against these files: there are no statement-only new nodes hiding proofs, no new duplicate or restated clause, no tag-only non-elementary citation, and no use of a cited node's proof as though it were its statement. citations.json quotes the statements themselves, in full, so every claimed use can be read directly. Proof dependencies are the union of the uses lists. All steps are shorter than 2000 characters, and the only elementary step is the final assembly from already established assertions and the stated definition.
+
+Small-case checks: T empty gives the unit defining ideal and empty charts; T=X forces the reduced model X_red and tests descent independently of regularity of X itself. The c=0 coordinate case has zero ideal and C=W, with no regular-sequence assumption added. Nonreduced ambient examples such as Spec(k[epsilon]/epsilon^2), T=|X|, with identity chart and C=Spec(k), are allowed and give M=C. A nontrivial separable residue-field extension in an etale chart changes the local ring on M to a possibly different local ring on C: the proof asserts only a flat local map between those, and an isomorphism between C and the pullback P. No finiteness, global quasi-compactness, connectedness, surjectivity of a single chart, or codimension hypothesis was added.

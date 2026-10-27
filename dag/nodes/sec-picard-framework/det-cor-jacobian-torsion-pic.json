@@ -21,7 +21,7 @@
  ],
  "proof": [
   {
-   "text": "Put $J=J(C)$ and write the Picard group additively. By [sk-thm-picard-main], $J$ is an abelian variety and the identification $J(k)=\\operatorname{Pic}^0(C)$ is an identification of groups. By [lem-sc-pic-proper-decomposition], the degree is a surjective group homomorphism and its kernel is exactly $\\operatorname{Pic}^0(C)$. Thus, identifying $J(k)$ with its image, we have the short exact sequence $0\\to J(k)\\to\\operatorname{Pic}(C)\\xrightarrow{\\deg}\\mathbf Z\\to0$. The hypotheses of both statements are precisely that $k$ is algebraically closed and $C$ is a smooth proper connected curve.",
+   "text": "Smoothness and connectedness over the algebraically closed field make the curve geometrically integral and smooth of relative dimension one. The rational-point comparison exists_picardZero_equiv_picardFunctorDegree_zero, together with exists_mulEquiv_of_isPicardZeroMul, identifies Pic^0(C) with the points of the given group-compatible representation of J, as in [sk-thm-picard-main]. Compose the inverse equivalence with the subgroup inclusion to define i. This proves injectivity, its range equality and its displayed characterization by sheafification. By [lem-sc-pic-proper-decomposition], Pic(C) splits as the product of the multiplicatively written integers and a subgroup P0 whose underlying set is Pic^0(C), with first coordinate the degree.",
    "uses": [
     "sk-thm-picard-main",
     "lem-sc-pic-proper-decomposition"
@@ -56,7 +56,7 @@
    }
   },
   {
-   "text": "Degree induces a homomorphism $\\overline{\\deg}:\\operatorname{Pic}(C)/n\\operatorname{Pic}(C)\\to\\mathbf Z/n\\mathbf Z$: replacing $L$ by $L+nM$ changes its degree by $n\\deg M$. It is surjective because the degree homomorphism is surjective by [lem-sc-pic-proper-decomposition]: for an integer representative $d$ choose $L$ of degree $d$, whose class maps to $d\\bmod n$.",
+   "text": "Choose the degree-compatible product equivalence of [lem-sc-pic-proper-decomposition]. Compose its first coordinate with integer reduction modulo n, obtaining a homomorphism phi: Pic(C) -> Z/nZ. It is surjective: lift a residue to an integer z and apply the inverse product equivalence to (z,1). Every nth power maps to zero modulo n, since reduction kills n times any residue.",
    "uses": [
     "lem-sc-pic-proper-decomposition"
    ],
@@ -67,7 +67,7 @@
    }
   },
   {
-   "text": "For injectivity let $L$ represent a class in the kernel of $\\overline{\\deg}$. Then $\\deg L=nm$ for some $m\\in\\mathbf Z$. By [lem-sc-pic-proper-decomposition] choose $M\\in\\operatorname{Pic}(C)$ with $\\deg M=m$. The element $L-nM$ has degree zero, hence belongs to $J(k)$ by step 1. By step 2 choose $B\\in J(k)$ with $nB=L-nM$. Inside the Picard group this gives $L=n(M+B)$, so the original quotient class is zero. Thus $\\overline{\\deg}$ is injective as well as surjective. Its inverse is additive: the preimages of a sum and the sum of the preimages have the same image and hence coincide by injectivity. This is the claimed isomorphism induced by degree.",
+   "text": "For the reverse kernel inclusion, write the product coordinates of L as (d,y). If phi(L)=0 then d=n*z for some integer z. The subgroup P0 is n-divisible, by transporting the surjectivity from step 2 through the inclusion i and its range equality. Choose M in P0 with M^n=y. Then the inverse product image of (z,M) has nth power L, by injectivity of the product equivalence and its compatibility with powers. Thus the range of the nth-power homomorphism is exactly ker(phi). The first isomorphism theorem gives Pic(C)/nPic(C) isomorphic to Z/nZ. The quotient equivalence sends every class represented by L to phi(L); the first-coordinate formula identifies this value with deg(L) modulo n. The resulting map is degree itself, independent of the auxiliary splitting used to prove its bijectivity.",
    "uses": [
     "lem-sc-pic-proper-decomposition"
    ],
@@ -86,8 +86,9 @@
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/main-20261015/blueprint/sec-picard-framework/sk-cor-jacobian-torsion/det-cor-jacobian-torsion-pic.proof.md",
-  "place": "Opening paragraph, (1) and (2); elementary kernel/cokernel diagram chase expanded"
+  "document": "literature/blueprint/latest/blueprint/sec-picard-framework/sk-cor-jacobian-torsion/det-cor-jacobian-torsion-pic.proof.md",
+  "place": "Opening paragraph, (1) and (2); kernel/cokernel chase implemented with the degree-compatible product equivalence of lem-sc-pic-proper-decomposition",
+  "note": "N2, 2026-10-23: complete Lean proof from the four existing proof dependencies; no new nodes or holes."
  },
  "mathlib_searches": [
   {
@@ -159,7 +160,18 @@
  "blueprint_snapshot": "main-20261015",
  "chapter": "sec-picard-framework",
  "unit": "sk-cor-jacobian-torsion",
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
  "split_report": {
   "date": "2026-10-19",
   "item": "det-cor-jacobian-torsion-pic",
@@ -183,5 +195,34 @@
   "group": "Q87",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q87-ae494ee78 (reviewer sub-agent of L); spot-checked: I read the item and every cited statement in full. The statement is verbatim the main-20261015 det-cor-jacobian-torsion-pic, and it is true for all n>0, including char p | n. I checked n=1, g=0 and n=p in characteristic p. Step 1: sk-thm-picard-main gives J abelian with J(k)=Pic^0(C) as groups, and lem-sc-pic-proper-decomposition gives the exact degree sequence with deg surjective under the same hypotheses. Step 2: lem-sc-isogeny-surjective holds for every n>=1 with no condition on the characteristic. It is the node of unit sk-prop-av-divisible, which is on the unit route. Its def-sc-abelian-variety is word for word sk-def-av. Steps 3-5 are elementary kernel and cokernel chases, correctly written, matching the blueprint snake-lemma proof. No new nodes. No duplicate: lem-sc-pic-proper-ntorsion needs n prime to p and gives only abstract isomorphisms; the structure and kernel nodes cover the other clauses of the unit. No cycle. The only citer (lem-per-sepclosed-regular-proper-curve-trace) uses the unchanged Pic/N clause. Tool use of lem-sc-pic-proper-decomposition accepted: unit sk-cor-picard-degree has no node, so nothing in the item's own route supplies the sequence. The worker wrote tool_uses themselves instead of leaving it to the maintainer (C8); I endorse the entry. Batch-5 check: sk-def-curve and sk-def-av-jacobian are notion definitions. Their closure and that of lem-sc-isogeny-surjective reach only general results: def-pod-ring-scalar-extension, the base-change lemma lem-pod-separated-finite-type-base-change, and lem-trf-proper-finite-fibre-finite-near. None of these is a step of the trace formula or Poincare duality proofs, so no citation must be replaced by an assumption leaf. No SGA cited. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.Curve.JacobianTorsionPic",
+  "declaration": "AlgebraicGeometry.Scheme.Hom.jacobian_torsion_pic",
+  "file": "lean/Sheaf/AlgebraicGeometry/Curve/JacobianTorsionPic.lean",
+  "statement": "theorem Scheme.Hom.jacobian_torsion_pic {k : Type u} [Field k] [IsAlgClosed k] {C : Scheme.{u}} (f : C ⟶ Spec (.of k)) [IsConnectedCurve f] [Smooth f] [IsProper f] : ∃ (_ : GeometricallyIntegral f), ∀ (J : Over (Spec (.of k))) [GrpObj J] [IsJacobian f J] (r : (picardFunctorDegree f 0).obj.RepresentableBy J) (_hr : IsPicardZeroMul f r), ∃ i : (𝟙_ (Over (Spec (.of k))) ⟶ J) →* C.Pic, Function.Injective i ∧ Set.range i = f.picZero ∧ (∀ a : 𝟙_ (Over (Spec (.of k))) ⟶ J, ∃ h, r.homEquiv.symm ((toSheafify (Scheme.fppfTopology.over (Spec (.of k))) (picardSubfunctorDegree f 0).toFunctor).app (.op (𝟙_ (Over (Spec (.of k))))) ⟨Scheme.Pic.map (pullback.fst f (𝟙_ (Over (Spec (.of k)))).hom) (i a), h⟩) = a) ∧ (∀ (n : ℕ), 0 < n → Function.Surjective fun a : 𝟙_ (Over (Spec (.of k))) ⟶ J ↦ a ^ n) ∧ ∀ (n : ℕ), 0 < n → (Set.range (fun a : 𝟙_ (Over (Spec (.of k))) ⟶ torsionSubgroupScheme J n ↦ i (a ≫ torsionSubgroupScheme.ι J n)) = i '' {a : 𝟙_ (Over (Spec (.of k))) ⟶ J | a ^ n = 1}) ∧ (i '' {a : 𝟙_ (Over (Spec (.of k))) ⟶ J | a ^ n = 1} = {L : C.Pic | L ^ n = 1}) ∧ ∃ e : C.Pic ⧸ (powMonoidHom n : C.Pic →* C.Pic).range ≃* Multiplicative (ZMod n), ∀ L : C.Pic, e (QuotientGroup.mk L) = Multiplicative.ofAdd ((f.picDegree L : ℤ) : ZMod n)",
+  "branch": "newtargets-dag",
+  "by": "Q110",
+  "date": "2026-10-22",
+  "existing": false,
+  "note": "The geometric-integrality proof required by IsJacobian is supplied existentially in the conclusion, with no added assumption on the curve. For every group-compatible Jacobian representation the inclusion is characterized by sheafification and the representation. The two torsion equalities are equalities of its images as subsets of Pic; the quotient equivalence is characterized by degree on every representative. All positive integers are included, with no characteristic restriction."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-5c06951f9",
+  "group": "Q110",
+  "result": "pass",
+  "note": "Statement verbatim vs main-20261015 det-cor-jacobian-torsion-pic; node changes only lean; lean.statement verbatim in file, lines<=100, single sorry, no new defs. Hypotheses exactly IsConnectedCurve+Smooth+IsProper over IsAlgClosed k; GeometricallyIntegral concluded (true), not assumed. Universal over J with IsJacobian and every IsPicardZeroMul representation r (= IsJacobian.represents data; Jacobians exist, so not vacuous). Inclusion i: injective hom, range = picZero, uniquely pinned by r via the sheafified degree-0 section of the pulled-back class. (1) a^n surjective for all n>0 (char|n included). (2) range of i∘(torsion ι) = i''{a^n=1} = {L^n=1}; Pic/nPic ≃* Multiplicative(ZMod n) with value ofAdd(deg L) on every L. Edge cases n=1, n=0 excluded, p|n, g=0/1, empty curve, universes OK. No existing match (PicProperNTorsion* need (n:k)≠0). Advisory only: three plain proof-plan imports unused until stage 3. No recompile (no file changed)."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "N2",
+  "result": "pass",
+  "landing": "20261023T103128-L-3057658",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

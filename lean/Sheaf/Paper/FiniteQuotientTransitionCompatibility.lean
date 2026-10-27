@@ -5,7 +5,8 @@ Authors: SHEAF group J4
 -/
 module
 
-public import Sheaf.Paper.CompletedPullbackReduction
+public import Sheaf.Paper.CompletedPullbackReductionData
+
 import Sheaf.Paper.FiniteQuotientOrdinaryComparison
 import Sheaf.Algebra.Homology.KFlatResolutionIndependentCoefficients
 import WeilConjectures.CategoryTheory.DerivedCategory.MapDerivedCategoryMate
@@ -36,6 +37,39 @@ attribute [local irreducible] HasDerivedCategory.standard SheafOfModules.monoida
   Functor.leftAdjoint
 variable {X Y : Scheme.{u}} (g : X ⟶ Y) {A : Type (u + 1)} [CommRing A]
   (d : AdicCoefficientDatum A)
+
+private theorem completedReductionCompositeCounitNat_app
+    {B C D E B' C' D' E' : Type*}
+    [Category* B] [Category* C] [Category* D] [Category* E]
+    [Category* B'] [Category* C'] [Category* D'] [Category* E']
+    (QB : B ⥤ B') (QC : C ⥤ C') (QD : D ⥤ D') (QE : E ⥤ E')
+    (F : B ⥤ C) (G : C ⥤ D) (H : D ⥤ E)
+    (LF : B' ⥤ C') (LG : C' ⥤ D') (LH : D' ⥤ E')
+    (α : QB ⋙ LF ⟶ F ⋙ QC) (β : QC ⋙ LG ⟶ G ⋙ QD)
+    (γ : QD ⋙ LH ≅ H ⋙ QE)
+    (P : B) :
+    (completedReductionCompositeCounitNat QB QC QD QE F G H LF LG LH α β γ).app P =
+      LH.map (LG.map (α.app P) ≫ β.app (F.obj P)) ≫ γ.hom.app ((F ⋙ G).obj P) := by
+  unfold completedReductionCompositeCounitNat
+  rfl
+
+private theorem completedReductionFiniteModelNat_app (n : ℕ)
+    (P : CochainComplex (pbcModules Y (pbcAdicCompletion Y d)) ℤ) :
+    (completedReductionFiniteModelNat g d n).app P =
+      completedReductionFiniteModelMap g d n P := by
+  dsimp only [completedReductionFiniteModelNat, NatTrans.comp_app,
+    Functor.whiskerRight_app, Functor.whiskerLeft_app,
+    completedReductionComplexCounitNat]
+  unfold completedReductionFiniteModelMap pbcComplexCounit
+    Functor.leftDerivedCounitOnComplex
+  rfl
+
+private theorem completedReductionPulledModelNat_app (n : ℕ)
+    (P : CochainComplex (pbcModules Y (pbcAdicCompletion Y d)) ℤ) :
+    (completedReductionPulledModelNat g d n).app P =
+      completedReductionPulledModelMap g d n P := by
+  unfold completedReductionPulledModelNat completedReductionPulledModelMap
+  rfl
 
 private def restrictedTransition
     {C D E F : Type*} [Category* C] [Category* D] [Category* E] [Category* F]
@@ -189,10 +223,9 @@ private theorem pulledModel_transition
         ((completedTowerPullback g d).obj ((completedReductionTower Y d).obj
           (DerivedCategory.Q.obj P))) ≫ completedReductionPulledModelMap g d a P := by
   let κ := (completedTowerPullback g d).map
-    (Functor.leftDerivedCounitOnComplex (completedReductionModuleTowerFunctor Y d)
-      (completedReductionTower Y d) (completedReductionTowerCounit d Y) P) ≫
+    (completedReductionTowerComplexCounit Y d P) ≫
     completedTowerPullbackComplexCounit g d
-      (((completedReductionModuleTowerFunctor Y d).mapHomologicalComplex (.up ℤ)).obj P)
+      ((completedReductionComplexTowerFunctor Y d).obj P)
   have hh := model_naturality (pbcTowerTransition X (pbcAdicCompletion X d) b a h) κ
     (((CategoryTheory.evaluation ℕᵒᵖ (pbcModules X (pbcAdicCompletion X d))).obj
       (op b)).mapDerivedCategoryFactors.hom.app
@@ -202,7 +235,10 @@ private theorem pulledModel_transition
       (((completedTowerModulePullback g d).mapHomologicalComplex (.up ℤ)).obj
         (((completedReductionModuleTowerFunctor Y d).mapHomologicalComplex (.up ℤ)).obj P))
       a b h)
-  exact hh
+  simpa only [κ, pbcTowerEvaluation, completedReductionComplexTowerFunctor,
+    Functor.comp_obj, completedReductionPulledModelMap,
+    completedReductionCompositeCounitNat_app, completedReductionTowerComplexNat,
+    completedReductionPullbackComplexNat] using hh
 
 private theorem paste_squares
     {C : Type*} [Category* C] {A B D E F G H : C}
@@ -384,8 +420,10 @@ theorem finite_quotient_transition_compatibility
     (completedReductionFiniteEvaluation g d b) at hb
   change HasCompletedReductionFiniteEvaluationNormalization g d a
     (completedReductionFiniteEvaluation g d a) at hc
-  unfold HasCompletedReductionTargetTransitionNormalization at ha
-  unfold HasCompletedReductionFiniteEvaluationNormalization at hb hc
+  unfold HasCompletedReductionTargetTransitionNormalization
+    completedReductionTransitionNormalized at ha
+  unfold HasCompletedReductionFiniteEvaluationNormalization
+    completedReductionComparisonNormalized at hb hc
   have hs := normalized_evaluation_square
     DerivedCategory.Q Fa Fb Fc Fd DerivedCategory.Q DerivedCategory.Q DerivedCategory.Q
     (completedReductionFiniteTarget g d a) (completedReductionFiniteTarget g d b) Hc Hd
@@ -395,10 +433,10 @@ theorem finite_quotient_transition_compatibility
     (pbcDerivedRestrict q) (pbcDerivedRestrict πb) (pbcDerivedRestrict πa)
     (completedReductionRestrictionFactors X q) (completedReductionRestrictionFactors X πb)
     (completedReductionRestrictionFactors X πa) e
-    (fun P ↦ completedReductionFiniteModelMap g d a P)
-    (fun P ↦ completedReductionFiniteModelMap g d b P)
-    (fun P ↦ completedReductionPulledModelMap g d b P)
-    (fun P ↦ completedReductionPulledModelMap g d a P)
+    (fun P ↦ (completedReductionFiniteModelNat g d a).app P)
+    (fun P ↦ (completedReductionFiniteModelNat g d b).app P)
+    (fun P ↦ (completedReductionPulledModelNat g d b).app P)
+    (fun P ↦ (completedReductionPulledModelNat g d a).app P)
     (completedReductionTargetTransition g d a b h)
     (completedReductionFiniteEvaluation g d b).hom
     (completedReductionFiniteEvaluation g d a).hom
@@ -428,10 +466,13 @@ theorem finite_quotient_transition_compatibility
         (homOfLE h).op)
       (pbcRestrictComp πb q πa (completedReductionProjection_comp X d b a h))
       (fun M ↦ ordinary_finite_quotient_comparison g d M a b h) DerivedCategory.Q P)
-    (fun P ↦ pulledModel_transition g d P a b h)
+    (fun P ↦ by
+      simpa only [completedReductionPulledModelNat_app] using
+        (pulledModel_transition g d P a b h))
     (fun P ↦ derivedRestrictionComp_factors πb q πa
       (completedReductionProjection_comp X d b a h) (Fa.obj P))
     (fun P hP ↦ by
+      rw [completedReductionFiniteModelNat_app]
       have := finiteModel_isIso g d a P hP
       infer_instance)
   suffices α = β by

@@ -1,0 +1,115 @@
+{
+ "id": "lem-trf-graded-line-fraction-test-local",
+ "kind": "statement",
+ "title": "Local comparison for prescribed graded line fractions",
+ "statement": "Let S,T,h,A,L,ψ,P,c,ρ,F,j,V,e,α be data as in [def-trf-graded-line-fraction-chart] and [def-trf-relative-graded-line-map], satisfying the displayed frame, recursion, coefficient, fraction, chart, trivialization, and unit-ideal hypotheses. For every point x of the trivialized test scheme W, there is an open U containing x such that the restrictions of j followed by F and of the Proj.fromOfGlobalSections map followed by the relative-Proj chart embedding to U are equal.",
+ "source": {
+  "document": "literature/stacks-project/constructions.tex",
+  "place": "Tag 01NK, lemma-invertible-map-into-proj, local basic-open comparison; Tag 01O9, lemma-invertible-map-into-relative-proj, characterization (3) and affine gluing."
+ },
+ "stmt_deps": [
+  "def-trf-graded-line-fraction-chart",
+  "def-trf-relative-graded-line-map"
+ ],
+ "proof": [
+  {
+   "text": "Use the unit-ideal hypothesis to choose a positive-degree homogeneous generator whose image is nonvanishing at x. Refine its basic open by an affine open on which the pulled-back trivialization has a free frame. The coefficient equation hα and the defining equation hc identify the supplied fraction map with the standard Proj chart map on this open; hF then identifies the restriction of F. The localization fraction formula and the affine adjunction give equality of the two restrictions.",
+   "uses": [
+    "def-trf-graded-line-fraction-chart",
+    "def-trf-relative-graded-line-map",
+    "def-sc-local-free-generator",
+    "def-nagata-homogeneous-localization-degree-zero",
+    "def-sc-tensor-pullback-power-comparison",
+    "def-pc-proj",
+    "lem-weil-pbc-scheme-morphism-gluing"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-trf-graded-line-fraction-chart",
+  "def-trf-relative-graded-line-map",
+  "def-sc-local-free-generator",
+  "def-nagata-homogeneous-localization-degree-zero",
+  "def-sc-tensor-pullback-power-comparison",
+  "def-pc-proj",
+  "lem-weil-pbc-scheme-morphism-gluing"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/constructions.tex",
+  "place": "Tag 01NK, lemma-invertible-map-into-proj, local comparison on basic opens; Tag 01O9, characterization (3)."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Local equality of scheme morphisms from a homogeneous localization chart and a Proj.fromOfGlobalSections map",
+   "results": "No exact match; only generic Proj localization declarations.",
+   "date": "2026-10-27",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For each point, an open neighbourhood where prescribed homogeneous fraction and Proj maps agree",
+   "results": "No exact match; generic Proj restriction and chart maps only.",
+   "date": "2026-10-27",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "hom_ext_of_forall|fromOfGlobalSections_morphismRestrict|FractionFormula",
+   "results": "Mathlib provides hom_ext_of_forall and Proj restriction formulas, but no theorem combining the graded-line data.",
+   "date": "2026-10-27",
+   "verdict": "partial generic matches only"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.TraceFormula.GradedLineFractionTest",
+  "date": "2026-10-27",
+  "group": "V3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-trf-graded-line-fraction-test",
+   "place": "Local basic-open comparison step in the proof of the trivialized-test comparison.",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.TraceFormula.GradedLineFractionTestLocal",
+  "file": "lean/Sheaf/TraceFormula/GradedLineFractionTestLocal.lean",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.gradedLineFraction_test_local",
+  "statement": "theorem gradedLineFraction_test_local\n    {S T : Scheme.{u}} {h : T ⟶ S} {A : S.GradedAlgebraData} {L : T.Modules}\n    (ψ : RelativeGradedLineMap h A L)\n    (P : ∀ {W : T.Opens}, Γ(L, W) → (n : ℕ) → Γ(L.tensorPow n, W))\n    (hP0 : ∀ (W : T.Opens) (l : Γ(L, W)), P l 0 = unitSectionsEquiv W 1)\n    (hPs : ∀ (W : T.Opens) (l : Γ(L, W)) (n : ℕ),\n      P l (n + 1) = tmulSection l (P l n))\n    (c : GradedLineFractionCoefficients h A L)\n    (hc : ∀ (U : S.affineOpens) (W : T.affineOpens) (hWU : W.1 ≤ h ⁻¹ᵁ U.1)\n      (l : Γ(L, W.1)), IsFreeGenerator l → ∀ (n : ℕ) (a : A.grading U n),\n      c U W hWU l n a • P l n =\n        (L.tensorPow n).val.map (homOfLE hWU).op (ψ.component U n a))\n    (ρ : ∀ i : GradedLineFractionChart h A L,\n      HomogeneousLocalization.Away (A.grading i.U) i.e.val →+*\n        Localization.Away (i.coefficient c))\n    (hρ : GradedLineFractionChart.FractionFormula c ρ)\n    (F : T ⟶ A.relProj)\n    (hF : ∀ i : GradedLineFractionChart h A L, i.source c ≫ F = i.target c ρ)\n    (W : Scheme.{u}) (j : W ⟶ T) (hj : IsOpenImmersion j)\n    (V : S.affineOpens) (q : (⊤ : W.Opens) ≤ j ⁻¹ᵁ (h ⁻¹ᵁ V.1))\n    (e : (tensorPullback j).obj L ≅ SheafOfModules.unit W.ringCatSheaf)\n    (α : A.obj V →+* Γ(W, ⊤))\n    (hα : ∀ (n : ℕ) (a : A.grading V n), α a =\n      (unitSectionsEquiv ⊤).symm\n        ((AlgebraicSpace.trivializedPower e n).hom.app ⊤ (ψ.evaluate j V q n a)))\n    (hαgen : Ideal.map α (HomogeneousIdeal.irrelevant (A.grading V)).toIdeal = ⊤) :\n    ∀ x : W, ∃ U : W.Opens, x ∈ U ∧\n      U.ι ≫ j ≫ F =\n        U.ι ≫ (Proj.fromOfGlobalSections (A.grading V) α hαgen ≫ A.relProjι V)",
+  "branch": "sheaf-dag",
+  "by": "V3",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V3",
+  "result": "pass",
+  "landing": "20261027T123548-L-2320348",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V3",
+  "result": "pass",
+  "landing": "20261027T123548-L-2320348",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

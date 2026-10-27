@@ -6,10 +6,8 @@ module
 
 public import Sheaf.AlgebraicGeometry.ProjectiveBundleMorphism
 public import Mathlib.AlgebraicGeometry.Morphisms.Proper
-import Sheaf.AlgebraicGeometry.CanonicalSymmetricGradedAlgebra
-import Sheaf.AlgebraicGeometry.QuasiCoherentSymmetricAlgebra
+import Mathlib.AlgebraicGeometry.ProjectiveSpectrum.Proper
 import WeilConjectures.AlgebraicGeometry.RelativeProj.Basic
-import WeilConjectures.LinearAlgebra.SymmetricAlgebra.Graded
 
 /-!
 # Separatedness of a projective bundle
@@ -38,6 +36,15 @@ the diagonal, and the diagonal criterion for separated morphisms gives the resul
 theorem isSeparated_projectiveBundle {S : Scheme.{u}} (E : S.Modules)
     [E.IsQuasicoherent] :
     IsSeparated (@SymmetricAlgebraSheaf.gradedAlgebraData S E inferInstance).relProjHom := by
-  sorry
+  let A := @SymmetricAlgebraSheaf.gradedAlgebraData S E inferInstance
+  change IsSeparated A.relProjHom
+  apply IsZariskiLocalAtTarget.of_openCover (P := @IsSeparated) S.directedAffineCover
+  intro U
+  rw [← MorphismProperty.cancel_left_of_respectsIso @IsSeparated
+    (A.isPullback_relProjι U).flip.isoPullback.hom]
+  change IsSeparated ((A.isPullback_relProjι U).flip.isoPullback.hom ≫
+    CategoryTheory.Limits.pullback.snd A.relProjHom U.1.ι)
+  rw [(A.isPullback_relProjι U).flip.isoPullback_hom_snd]
+  infer_instance
 
 end AlgebraicGeometry

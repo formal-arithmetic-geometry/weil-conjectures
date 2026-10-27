@@ -1,0 +1,369 @@
+{
+ "id": "lem-trf-tate-fraction-orthogonal-spectral-norm",
+ "kind": "statement",
+ "title": "Orthogonal spectral norm on the fraction field of a finite affinoid domain",
+ "statement": "Let $K$ be an algebraically closed field [def-weil-field], complete for a nontrivial real-valued nonarchimedean absolute value. Let $T=K\\langle U_1,\\ldots,U_e\\rangle$, $e\\ge0$, be the restricted-series Tate algebra [def-trf-restricted-series-presentation] with Gauss norm $G$. Put $F=\\operatorname{Frac}(T)$ with absolute value $|a/b|_F=G(a)/G(b)$. Let $C\\ne0$ be an affinoid integral domain over $K$, that is, an integral domain which is a quotient of a finite-variable restricted-series algebra $K\\langle X_1,\\ldots,X_m\\rangle$ [def-trf-restricted-series-presentation], and let $j:T\\hookrightarrow C$ an injective $K$-algebra homomorphism making $C$ a finitely generated $T$-module [def-weil-finitely-generated-module]. Put $L=\\operatorname{Frac}(C)$, viewed as an extension of $F$. Then $[L:F]=n<\\infty$. There is a nonarchimedean $F$-vector-space norm $N$ on $L$, satisfying $N(fz)=|f|_F N(z)$, whose restriction to $C$ is $\\sup_{\\mathfrak m\\in\\operatorname{Max}C}|c\\bmod\\mathfrak m|$ [lem-trf-affinoid-supremum-seminorm-calculus]. There is an $F$-basis $v_1,\\ldots,v_n$ of $L$ such that $N(\\sum_{k=1}^n f_kv_k)=\\max_{1\\le k\\le n}|f_k|_F N(v_k)$ for every $f_k\\in F$. Moreover, one such $N$, for which all of the preceding properties hold simultaneously, is given explicitly: for $z\\in L$ with monic minimal polynomial $Z^r+\\sum_{i=1}^r a_iZ^{r-i}\\in F[Z]$, $N(z)=\\max_{1\\le i\\le r}|a_i|_F^{1/i}$. The extension $L/F$ need not be separable, and $N$ is not asserted to be multiplicative.",
+ "source": {
+  "document": "literature/bosch-guentzer-remmert-nonarchimedean-analysis.pdf",
+  "place": "Section 5.3.2, Stability Theorem 1, with Section 3.8.1, Proposition 7, as applied in the domain case of the proof of Theorem 6.4.1/3, printed pp.251–252. Algebraically closed K is stable. This is the cartesian fraction-field input, before the Tate-module finiteness argument. Primary BGR scan read online 2026-10-24; local archival copy WANTED.",
+  "url": "https://math.arizona.edu/~cais/scans/BGR-Non_Archimedean_Analysis.pdf"
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-trf-restricted-series-presentation",
+  "def-weil-finitely-generated-module",
+  "lem-trf-affinoid-supremum-seminorm-calculus"
+ ],
+ "proof": [
+  {
+   "text": "By [lem-weil-pbc-finite-algebra-is-integral], every $b\\in C$ is integral over $T$. For $b\\ne0$ choose a monic relation of least degree $b^r+t_1b^{r-1}+\\cdots+t_r=0$. Its constant term is nonzero: otherwise division by $b$ in the domain gives a shorter relation. Thus $b^{-1}=-(b^{r-1}+t_1b^{r-2}+\\cdots+t_{r-1})/t_r$. Every fraction in $L$ consequently has denominator in $T\\setminus\\{0\\}$. A finite $T$-generating list of $C$ therefore spans $L$ over $F$, so $n=[L:F]<\\infty$ (and $n\\ge1$).",
+   "uses": [
+    "lem-weil-pbc-finite-algebra-is-integral"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/bosch-guentzer-remmert-nonarchimedean-analysis.pdf",
+    "place": "BGR 6.4.1/3, domain case, printed pp.251-252 (scan PDF pp.257-258); 3.6.1/1 and 5.3.2/1. Primary scan read 2026-10-24."
+   }
+  },
+  {
+   "text": "$K$ is stable by [def-trf-stable-nonarchimedean-field]: every finite extension is $K$ itself since $K$ is algebraically closed, and the basis $(1)$ has the stated equality, its minimal polynomials being $Z-a$. Apply [lem-trf-tate-gauss-fraction-stability] to obtain the asserted Gauss absolute value on $F$ and stability of $F$.",
+   "uses": [
+    "def-trf-stable-nonarchimedean-field",
+    "lem-trf-tate-gauss-fraction-stability"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bosch-guentzer-remmert-nonarchimedean-analysis.pdf",
+    "place": "BGR 6.4.1/3, domain case, printed pp.251-252 (scan PDF pp.257-258); 3.6.1/1 and 5.3.2/1. Primary scan read 2026-10-24."
+   }
+  },
+  {
+   "text": "Define $N=s_{L/F}$ by the displayed minimal-polynomial formula. Step 1 makes $L/F$ algebraic, so [lem-trf-incomplete-spectral-algebra-norm] gives definiteness, the strong triangle inequality and $N(fz)=|f|_FN(z)$. Stability of $F$, unfolded using [def-trf-stable-nonarchimedean-field], supplies an $F$-basis $v_1,\\ldots,v_n$ with $N(\\sum f_kv_k)=\\max_k|f_k|_FN(v_k)$.",
+   "uses": [
+    "lem-trf-incomplete-spectral-algebra-norm",
+    "def-trf-stable-nonarchimedean-field"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bosch-guentzer-remmert-nonarchimedean-analysis.pdf",
+    "place": "BGR 6.4.1/3, domain case, printed pp.251-252 (scan PDF pp.257-258); 3.6.1/1 and 5.3.2/1. Primary scan read 2026-10-24."
+   }
+  },
+  {
+   "text": "Fix $c\\in C$. It is $T$-torsion-free because $j$ is injective and $C$ is a domain. By [lem-trf-tate-torsionfree-fibre-polynomial], the evaluation kernel in $T[Z]$ is generated by a monic $p_c=Z^r+\\sum t_iZ^{r-i}$. This is also the minimal polynomial over $F$: if $h\\in F[Z]$ vanishes at $c$, clear its finitely many denominators to get $dh\\in T[Z]$; then $dh=p_cq$, hence $h=p_c(q/d)$ in $F[Z]$. Thus $N(c)=\\max_iG(t_i)^{1/i}$.",
+   "uses": [
+    "lem-trf-tate-torsionfree-fibre-polynomial"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://www.uni-muenster.de/IVV5WS/WebHop/user/weckerm/heft378.pdf",
+    "place": "Bosch, Lectures on Formal and Rigid Geometry, Section 1.4, Lemma 12(i)-(iii), printed pp.25-27; primary text read 2026-10-24."
+   }
+  },
+  {
+   "text": "For each $\\mathfrak m\\in\\operatorname{Max}T$, the same fibre-polynomial lemma gives a nonempty fibre and $\\max_{\\mathfrak n\\mid\\mathfrak m}|c\\bmod\\mathfrak n|=\\max_i|t_i\\bmod\\mathfrak m|^{1/i}$. Every maximal ideal $\\mathfrak n$ of $C$ lies over a maximal ideal of $T$: its residue field is finite over $K$ by [lem-trf-affinoid-supremum-seminorm-calculus], so the image of $T$ there is a finite-dimensional $K$-domain, hence a field. Taking suprema over these fibres and commuting a finite maximum and the increasing continuous positive roots gives $\\rho_C(c)=\\max_i\\rho_T(t_i)^{1/i}=\\max_iG(t_i)^{1/i}=N(c)$. Here $\\rho_T=G$ is exactly the Tate clause of that calculus node. This proves the restriction for the same $N$ as in step 3, including $c=0$.",
+   "uses": [
+    "lem-trf-tate-torsionfree-fibre-polynomial",
+    "lem-trf-affinoid-supremum-seminorm-calculus"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://www.uni-muenster.de/IVV5WS/WebHop/user/weckerm/heft378.pdf",
+    "place": "Bosch, Lectures on Formal and Rigid Geometry, Section 1.4, Lemma 12(i)-(iii), printed pp.25-27; primary text read 2026-10-24."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-finite-algebra-is-integral",
+  "def-trf-stable-nonarchimedean-field",
+  "lem-trf-tate-gauss-fraction-stability",
+  "lem-trf-incomplete-spectral-algebra-norm",
+  "lem-trf-tate-torsionfree-fibre-polynomial",
+  "lem-trf-affinoid-supremum-seminorm-calculus"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/bosch-guentzer-remmert-nonarchimedean-analysis.pdf",
+  "place": "BGR proof of Theorem 6.4.1/3, domain case, printed pp.251-252; norm comparison expanded through Bosch Section 1.4, Lemma 12."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "Gauss.*fraction|fraction.*Gauss|[Cc]artesian.*norm|orthogonal.*basis",
+   "results": {
+    "t": "2026-10-24T09:47:11Z",
+    "tool": "grep",
+    "query": "Gauss.*fraction|fraction.*Gauss|[Cc]artesian.*norm|orthogonal.*basis",
+    "sub": "Analysis/Normed",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: spectralAlgNorm gives general spectral-norm inequalities, and spectralNorm.normedField requires a complete base field. Here Frac(T) is generally incomplete; the stability theorem, exact orthogonal basis, and restriction to the affinoid supremum norm are not supplied by these hits."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The fraction field of a Tate algebra over a stable valued field is stable and the spectral norm on a finite extension admits an orthogonal basis and restricts to the supremum norm on a finite affinoid domain",
+   "results": {
+    "t": "2026-10-24T09:47:11Z",
+    "tool": "leansearch",
+    "query": "The fraction field of a Tate algebra over a stable valued field is stable and the spectral norm on a finite extension admits an orthogonal basis and restricts to the supremum norm on a finite affinoid domain",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "spectralNorm",
+     "spectralAlgNorm",
+     "spectralNorm_unique",
+     "spectralNorm.normedField",
+     "isNonarchimedean_spectralNorm_of_finiteDimensional_normal",
+     "spectralNorm.normedSpace",
+     "isNonarchimedean_spectralNorm",
+     "spectralNorm.seminormedAddCommGroup"
+    ],
+    "digest": "8d61bf98c4afc35b"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: spectralAlgNorm gives general spectral-norm inequalities, and spectralNorm.normedField requires a complete base field. Here Frac(T) is generally incomplete; the stability theorem, exact orthogonal basis, and restriction to the affinoid supremum norm are not supplied by these hits."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"spectralNorm\", \"norm\"",
+   "results": {
+    "t": "2026-10-24T09:47:11Z",
+    "tool": "loogle",
+    "query": "\"spectralNorm\", \"norm\"",
+    "sub": "",
+    "ok": true,
+    "n_hits": 12,
+    "note": "",
+    "top": [
+     "spectralNorm",
+     "spectralNorm_nonneg",
+     "spectralNorm_one",
+     "spectralNorm_zero",
+     "isNonarchimedean_spectralNorm",
+     "isPowMul_spectralNorm",
+     "eq_zero_of_map_spectralNorm_eq_zero",
+     "spectralNorm.metricSpace"
+    ],
+    "digest": "8f972011a141306e"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: spectralAlgNorm gives general spectral-norm inequalities, and spectralNorm.normedField requires a complete base field. Here Frac(T) is generally incomplete; the stability theorem, exact orthogonal basis, and restriction to the affinoid supremum norm are not supplied by these hits."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a finite affinoid domain over a Tate algebra over an algebraically closed field the supremum norm extends to an orthogonal norm on its fraction field over the Gauss fraction field",
+   "results": {
+    "t": "2026-10-24T09:47:21Z",
+    "tool": "leanfinder",
+    "query": "For a finite affinoid domain over a Tate algebra over an algebraically closed field the supremum norm extends to an orthogonal norm on its fraction field over the Gauss fraction field",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "spectralNorm.normedField",
+     "spectralNorm.normedSpace",
+     "spectralNorm.nontriviallyNormedField",
+     "spectralMulAlgNorm",
+     "spectralNorm.normedAddCommGroup",
+     "spectralAlgNorm",
+     "spectralNorm.seminormedAddCommGroup",
+     "spectralNorm.metricSpace"
+    ],
+    "digest": "e49ab5ac8fc32c96"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: spectralAlgNorm gives general spectral-norm inequalities, and spectralNorm.normedField requires a complete base field. Here Frac(T) is generally incomplete; the stability theorem, exact orthogonal basis, and restriction to the affinoid supremum norm are not supplied by these hits."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Stability of the Gauss valued rational fraction field of a Tate algebra implies that a finite affinoid integral domain has a spectral fraction field norm with a finite orthogonal basis",
+   "results": {
+    "t": "2026-10-24T09:47:47Z",
+    "tool": "leanfinder",
+    "query": "Stability of the Gauss valued rational fraction field of a Tate algebra implies that a finite affinoid integral domain has a spectral fraction field norm with a finite orthogonal basis",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "isNonarchimedean_spectralNorm_of_finiteDimensional_normal",
+     "isNonarchimedean_spectralNorm",
+     "spectralNorm.nontriviallyNormedField",
+     "spectralNorm.normedField",
+     "spectralAlgNorm_def",
+     "spectralMulAlgNorm",
+     "spectralNorm.normedSpace",
+     "spectralMulAlgNorm_def"
+    ],
+    "digest": "3715ed7a44b585d4"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: spectralAlgNorm gives general spectral-norm inequalities, and spectralNorm.normedField requires a complete base field. Here Frac(T) is generally incomplete; the stability theorem, exact orthogonal basis, and restriction to the affinoid supremum norm are not supplied by these hits."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A stable nonarchimedean valued field has stable Gauss fraction fields of Tate algebras, where finite extensions are cartesian with orthogonal bases for the spectral norm",
+   "results": {
+    "t": "2026-10-24T13:53:54Z",
+    "tool": "leanfinder",
+    "query": "A stable nonarchimedean valued field has stable Gauss fraction fields of Tate algebras, where finite extensions are cartesian with orthogonal bases for the spectral norm",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "spectralNorm.nontriviallyNormedField",
+     "Tilt",
+     "spectralNorm.normedField",
+     "IsNonarchimedeanLocalField.instCompleteSpace",
+     "LaurentSeries.RatFuncAdicCompl",
+     "Tilt.instField",
+     "IsNonarchimedeanLocalField.instCompleteSpaceSubtypeMemSubringIntegerValueGroupWithZeroValuation",
+     "LaurentSeries.instAlgebraRatFuncAdicCompl"
+    ],
+    "digest": "ed63adbdf65579d7"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match for the whole item: general spectral norms do not give stability, an orthogonal basis, or the affinoid restriction. See the separate Mathlib leaf for their useful general inequalities."
+  },
+  {
+   "tool": "grep",
+   "query": "stable.*field|cartesian.*norm|orthogonal.*basis|spectralAlgNorm",
+   "results": {
+    "t": "2026-10-24T13:54:09Z",
+    "tool": "grep",
+    "query": "stable.*field|cartesian.*norm|orthogonal.*basis|spectralAlgNorm",
+    "sub": "Analysis/Normed",
+    "ok": true,
+    "n_hits": 5,
+    "note": "",
+    "top": [
+     "Mathlib/Analysis/Normed/Unbundled/SpectralNorm.lean",
+     "Mathlib/Analysis/Normed/Unbundled/SpectralNorm.lean",
+     "Mathlib/Analysis/Normed/Unbundled/SpectralNorm.lean",
+     "Mathlib/Analysis/Normed/Unbundled/SpectralNorm.lean",
+     "Mathlib/Analysis/Normed/Unbundled/SpectralNorm.lean"
+    ],
+    "digest": "5bf4c598772ee42b"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match for the whole item: general spectral norms do not give stability, an orthogonal basis, or the affinoid restriction. See the separate Mathlib leaf for their useful general inequalities."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"spectralNorm\", \"norm\"",
+   "results": {
+    "t": "2026-10-24T13:54:10Z",
+    "tool": "loogle",
+    "query": "\"spectralNorm\", \"norm\"",
+    "sub": "",
+    "ok": true,
+    "n_hits": 12,
+    "note": "",
+    "top": [
+     "spectralNorm",
+     "spectralNorm_nonneg",
+     "spectralNorm_one",
+     "spectralNorm_zero",
+     "isNonarchimedean_spectralNorm",
+     "isPowMul_spectralNorm",
+     "eq_zero_of_map_spectralNorm_eq_zero",
+     "spectralNorm.metricSpace"
+    ],
+    "digest": "8f972011a141306e"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match for the whole item: general spectral norms do not give stability, an orthogonal basis, or the affinoid restriction. See the separate Mathlib leaf for their useful general inequalities."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The spectral norm of a finite extension of an incomplete stable valued field has an orthogonal basis and equals the supremum norm on a finite affinoid domain",
+   "results": {
+    "t": "2026-10-24T13:54:54Z",
+    "tool": "leansearch",
+    "query": "The spectral norm of a finite extension of an incomplete stable valued field has an orthogonal basis and equals the supremum norm on a finite affinoid domain",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "spectralNorm",
+     "spectralNorm_extends",
+     "spectralNorm.normedSpace",
+     "spectralNorm.normedField",
+     "spectralNorm.seminormedAddCommGroup",
+     "spectralNorm_unique",
+     "spectralNorm_eq_iSup_of_finiteDimensional_normal",
+     "spectralNorm.spectralNorm_eq_norm_coeff_zero_rpow"
+    ],
+    "digest": "bbd964f41cd56da3"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match for the whole item: general spectral norms do not give stability, an orthogonal basis, or the affinoid restriction. See the separate Mathlib leaf for their useful general inequalities."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-finite-affinoid-unit-ball-finiteness",
+  "date": "2026-10-24",
+  "group": "N6"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Historical analytic input supporting the normalization chain from lem-trf-local-term-locality, through Temkin Theorem 3.5.5 Step 2: Distinguished presentations of reduced affinoids over an algebraically closed field. This is below the node level, not a replacement of the current contracting-correspondence unit proof. Supporting analytic lemma in the presentation construction: Norm-preserving lifts for a Tate epimorphism surjective on canonical reductions. Independent analytic input: Finite affinoid maps are finite on spectral unit balls over an algebraically closed field. Proof input: Orthogonal spectral norm on the fraction field of a finite affinoid domain.",
+   "via": [
+    "lem-trf-finite-affinoid-unit-ball-finiteness",
+    "lem-trf-tate-reduction-norm-lifting",
+    "lem-trf-affinoid-distinguished-presentation",
+    "lem-trf-valuation-grauert-remmert-powerbounded",
+    "lem-trf-valuation-reduced-fibre-normalization",
+    "lem-trf-reduced-fibre-modification",
+    "lem-trf-valuation-curve-finite-normalization",
+    "lem-trf-modification-fibre-centre-finite",
+    "lem-trf-finite-fibre-valuation-domination",
+    "lem-trf-valuation-strict-semistable-cofinality",
+    "lem-trf-valuation-stable-reduction",
+    "lem-trf-temkin-stable-modification",
+    "lem-trf-stable-modification-flat-curve-pair",
+    "lem-trf-dejong-relative-marked-semistable",
+    "lem-trf-relative-marked-nodal-reduction",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-trf-tate-fraction-orthogonal-spectral-norm",
+  "worker": "stage1",
+  "summary": "Read BGR scan 3.6.1/1, 5.1.2/1, 5.3.2/1 and proof 6.4.1/3, together with Bosch Lemma 12. Kept the statement unchanged. Added the stability definition, the independent Tate fraction-field stability theorem, and the general incomplete-base spectral-algebra-norm Mathlib leaf; reused the existing fibre-polynomial theorem to prove the restriction. Finiteness and denominator clearing are explicit elementary assembly steps.",
+  "blueprint": "Historical analytic input supporting the normalization chain from lem-trf-local-term-locality, through Temkin Theorem 3.5.5 Step 2: Distinguished presentations of reduced affinoids over an algebraically closed field. This is below the node level, not a replacement of the current contracting-correspondence unit proof. Supporting analytic lemma in the presentation construction: Norm-preserving lifts for a Tate epimorphism surjective on canonical reductions. Independent analytic input: Finite affinoid maps are finite on spectral unit balls over an algebraically closed field. Proof input: Orthogonal spectral norm on the fraction field of a finite affinoid domain. The latest ancestor now uses contracting correspondences; this split serves the historical analytic supporting branch only and changes no current unit step.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q12-31cf4f8f2",
+  "group": "Q12",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q12-31cf4f8f2 (reviewer sub-agent of L); spot-checked: Read the item, all three new nodes and every cited statement in full: finite-algebra-is-integral, tate-torsionfree-fibre-polynomial, affinoid-supremum-seminorm-calculus, restricted-series-presentation, weil-field, finitely-generated-module, polynomial-ring. Also read parent unit-ball-finiteness steps 4-5, which use exactly the stated N, its orthogonal basis and the explicit formula. Mathlib SpectralNorm.lean checked: spectralNorm l.381, spectralValue l.101/115, spectralNorm_one l.577, spectralNorm_smul l.597, isNonarchimedean l.645, spectralAlgNorm l.663-671. These need only NormedField, IsUltrametricDist and IsAlgebraic; CompleteSpace first appears at l.699, so the incomplete-base leaf is exact. BGR is absent from literature/ and network access is blocked, so I checked BGR 3.6.1/1, 5.1.2/1, 5.3.2/1 and 6.4.1/3 against my own knowledge and the worker's page cites, not a local copy; the WANTED line stands. Steps: (1) the minimal monic relation has nonzero constant term, so b^{-1} lies in C/t_r, L=F*C and [L:F]<inf. (2) K algebraically closed is stable with basis (1); the stability theorem's hypotheses (complete, nontrivial, stable) hold, and it gives |.|_F and F stable. (3) L/F is algebraic, the leaf gives an ultrametric F-norm, and stability gives the orthogonal basis of length n. (4) Torsion-free C, kernel generator p_c, and the denominator-clearing argument is written out, so p_c is the minimal polynomial over F. (5) Maximal ideals of C contract to maximal ideals of T (finite residue field); the fibre equality, then sup and roots, plus rho_T=G, give rho_C=N; c=0 is fine. Route stays in sk-i-curve-zero plus leaves and definitions; tool_uses=[]. New nodes: the definition is self-contained and not a duplicate (almost-orthogonal and Q_l nodes differ); the stability theorem is statement-only, not a restatement of the item, and e=0 is trivial (its domain clause overlaps the unsplit tate-integrally-closed, noted); the leaf is distinct from complete-base spectral-norm-algebraic-extension. Small cases checked: e=0, C=T, and U->X^p inseparable. Minor: the item statement's F[Z] has no def-weil-polynomial-ring citation; I left the seeded statement unchanged. No fixes."
+ }
+}

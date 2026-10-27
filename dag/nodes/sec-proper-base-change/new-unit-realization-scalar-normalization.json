@@ -1,0 +1,134 @@
+{
+ "kind": "statement",
+ "source": {
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tags 03P2 and 03Q8, coherent comparison and higher direct images; sheaves.tex Tags 0096 and 0097, structural pullback and coefficient naturality"
+ },
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tag 03Q8, lemma-higher-direct-images, coefficient naturality; explicit normalized unit coefficient transport using Tags 0096, 0097 and 03DR"
+ },
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.SmoothCurveEtaleStructureDirectImages",
+  "date": "2026-10-24",
+  "group": "U1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-smooth-curve-etale-structure-direct-images",
+   "place": "Unit coefficient transport and scalar normalization, separately",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "id": "new-unit-realization-scalar-normalization",
+ "title": "Structural scalar normalization from a given coherent realization",
+ "statement": "Let f:X→S be quasi-compact and separated, E quasi-coherent [def-pc-scheme,def-sc-etale-qcoherent-module]. Suppose the higher image for the associated coherent unit coefficient has a module action and an isomorphism Φ to E_et [def-weil-pbc-coherent-higher-image-classes,def-pbc-canonical-coherent-etale-comparison]. Assume this action on every canonical coherent cohomology class is induced by multiplication by the pulled-back base scalar, and Φ is linear for these actions. Then the higher image for actual additive structural functions admits an isomorphism to E_et with the prescribed scalar formula on canonical raw classes [def-sbc-raw-restricted-cohomology-comparison-map,lem-sbc-abelian-higher-direct-image-class-compatibility]. No affine comparison family or existence of a coherent realization is asserted here.",
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-sc-etale-qcoherent-module",
+  "def-weil-pbc-coherent-higher-image-classes",
+  "def-pbc-canonical-coherent-etale-comparison",
+  "def-sbc-raw-restricted-cohomology-comparison-map",
+  "lem-sbc-abelian-higher-direct-image-class-compatibility"
+ ],
+ "proof": [
+  {
+   "text": "Map the inverse explicit unitStructureCoefficientIso through the fixed degree-one higher-image functor and compose with the supplied coherent realization Φ. This constructs Ψ with no choice of an arbitrary coefficient identification.",
+   "uses": [
+    "new-unit-structure-coefficient-iso"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "For z and zprime, unitCoherentRawClass_class identifies their transported higher-image classes with affineRealizationClass of their coherent raw evaluations. unitCoherentRawClass_scalar turns the assumed raw scalar relation into coherent multiplication on these evaluations. Substitute this equality, apply ha in reverse and then hl. The resulting section multiplication is definitionally unitRealizationSectionSmul.",
+   "uses": [
+    "new-unit-scalar-raw-evaluation"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "new-unit-structure-coefficient-iso",
+  "new-unit-scalar-raw-evaluation"
+ ],
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Pullback symmetry transports natural affine unit cohomology comparisons; coherent scalar higher-image classes normalize to actual structural functions",
+   "results": "8 hits: nonabelian one-cocycle relations and pullback projection/cocycle identities; none supplies the normalized cohomology or scalar-class interface.",
+   "date": "2026-10-24",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"cohomology\", \"unit\", \"pullback\"",
+   "results": "0 hits",
+   "date": "2026-10-24",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "unit.*(comparison|scalar).*normalization|pullback.*symmetry.*cohomology",
+   "results": "0 hits",
+   "date": "2026-10-24",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Natural affine cohomology comparisons for a split structural direct image; pullback symmetry and structural scalar normalization of etale higher images",
+   "results": "8 hits: affine-cover pullback identities, affine pullback instances, presheaf pullback adjunction, affine-space pullback identities and additive module pullback. No cohomology comparison or normalized scalar-class realization theorem.",
+   "date": "2026-10-24",
+   "verdict": "No exact matching statement; the recorded structural and cohomological interfaces are supplied by project declarations."
+  }
+ ],
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.UnitRealizationScalarNormalization",
+  "file": "lean/Sheaf/AlgebraicGeometry/UnitRealizationScalarNormalization.lean",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.exists_unitRealizationScalar_of_coherentAction",
+  "statement": "theorem exists_unitRealizationScalar_of_coherentAction {X S : Scheme.{u}} (f : X ⟶ S)\n    [QuasiCompact f] [IsSeparated f] (E : S.Modules) [E.IsQuasicoherent]\n    (action : ∀ V : S.Etale,\n      Module (ULift.{u + 1} Γ(V.left, ⊤))\n        ((affineRealizationHigherImage f (SheafOfModules.unit X.ringCatSheaf) 1).obj.obj\n          (op V)))\n    (Φ : affineRealizationHigherImage f (SheafOfModules.unit X.ringCatSheaf) 1 ≅\n      liftedCoherentEtaleSheaf E)\n    (ha : ∀ (V : S.Etale) (a : Γ(V.left, ⊤))\n      (x : Sheaf.H (liftedCoherentEtaleSheaf\n        (affineRealizationCoefficient f (SheafOfModules.unit X.ringCatSheaf) V)) 1),\n      affineRealizationSmul (action V) (ULift.up a)\n        (affineRealizationClass f (SheafOfModules.unit X.ringCatSheaf) 1 V x) =\n      affineRealizationClass f (SheafOfModules.unit X.ringCatSheaf) 1 V\n        (Sheaf.H.map (coherentEtaleMap _ _\n          ((affineRealizationCoefficient f (SheafOfModules.unit X.ringCatSheaf) V).smulHom\n            ((pullback.fst V.hom f).appTop a))) 1 x))\n    (hl : ∀ (V : S.Etale) (a : ULift.{u + 1} Γ(V.left, ⊤))\n      (x : (affineRealizationHigherImage f\n        (SheafOfModules.unit X.ringCatSheaf) 1).obj.obj (op V)),\n      Φ.hom.hom.app (op V) (affineRealizationSmul (action V) a x) =\n        ULift.up (a.down • (@id Γ((tensorPullback V.hom).obj E, ⊤)\n          (Φ.hom.hom.app (op V) x).down))) :\n    ∃ Ψ : unitRealizationImage f ≅ liftedCoherentEtaleSheaf E,\n      UnitRealizationScalar f E Ψ",
+  "branch": "sheaf-dag",
+  "by": "U1",
+  "date": "2026-10-24",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.Modules.exists_unitRealizationScalar_of_coherentAction",
+   "AlgebraicGeometry.Scheme.Modules.unitRealizationCohomologyMap",
+   "AlgebraicGeometry.Scheme.Modules.unitRealizationImageFunctor",
+   "AlgebraicGeometry.Scheme.Modules.unitRealizationImage",
+   "AlgebraicGeometry.Scheme.Modules.unitRealizationRawGroup",
+   "AlgebraicGeometry.Scheme.Modules.unitRealizationValue",
+   "AlgebraicGeometry.Scheme.Modules.unitRealizationSectionSmul",
+   "AlgebraicGeometry.Scheme.Modules.unitRealizationSectionSmul_eq",
+   "AlgebraicGeometry.Scheme.Modules.UnitRealizationLocalScalar",
+   "AlgebraicGeometry.Scheme.Modules.UnitRealizationScalar"
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U1",
+  "result": "pass",
+  "landing": "20261024T020641-L-2636577",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U2",
+  "result": "pass",
+  "landing": "20261025T123943-L-1920510",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

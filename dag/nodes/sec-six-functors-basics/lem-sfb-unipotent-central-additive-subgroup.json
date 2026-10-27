@@ -1,0 +1,248 @@
+{
+ "id": "lem-sfb-unipotent-central-additive-subgroup",
+ "kind": "statement",
+ "title": "A nontrivial smooth connected unipotent group over a perfect field contains a central additive subgroup",
+ "statement": "Let $k$ be a field [def-weil-field] which is perfect: either $\\operatorname{char}k=0$, or $\\operatorname{char}k=p>0$ and every element of $k$ is a $p$-th power. Let $V$ be a smooth connected affine $k$-group scheme of finite type [def-sc-group-scheme, def-sbc-smooth-morphisms, def-weil-connected-scheme, def-weil-finite-type-morphism]. Assume that $V$ is unipotent, meaning that in a faithful finite-dimensional linear representation every geometric point is a unipotent matrix, that is, its difference from the identity matrix is nilpotent. Assume $V$ is nontrivial, meaning it is not isomorphic to the trivial $k$-group scheme $\\operatorname{Spec}k$. Then there exist a smooth connected closed subgroup scheme $N\\subseteq V$ [def-sc-group-scheme-subgroup] and an isomorphism of $k$-group schemes $a:\\mathbf G_a\\xrightarrow{\\sim}N$ [def-sc-gm-ga]. Moreover $N$ is central: for every commutative $k$-algebra $R$, every $n\\in N(R)$ and $v\\in V(R)$ satisfy $nv=vn$ in $V(R)$. No dimension bound on $V$ is imposed.",
+ "source": {
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Corollary 14.55 and its proof, printed p.297, in positive characteristic; Proposition 14.32 proof, printed p.289, first paragraph (a central normal series with additive quotients contains a central copy of Ga in positive dimension), in characteristic zero. A group variety here is smooth; a nontrivial smooth connected group over a perfect field has positive dimension."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-sc-group-scheme",
+  "def-sbc-smooth-morphisms",
+  "def-weil-connected-scheme",
+  "def-weil-finite-type-morphism",
+  "def-sc-group-scheme-subgroup",
+  "def-sc-gm-ga",
+  "def-sfb-solvable-group-structure"
+ ],
+ "proof": [
+  {
+   "text": "Embed $V$ as a closed subgroup of $U_n$ by [lem-sfb-geometric-unipotence-unitriangular-embedding]. Pull back the filtration of [lem-sfb-unitriangular-coordinate-filtration] to $H_j=V\\cap U^{(j)}$. These are closed subgroups, defined by the indicated matrix-coordinate equations. For $h\\in H_j(R)$ and $v\\in V(R)$, triviality of unitriangular conjugation on $p_{j+1}$ gives $p_{j+1}(vhv^{-1}h^{-1})=0$, hence $[v,h]\\in H_{j+1}(R)$ by its stated kernel. Thus this is a central series ending at $1$.",
+   "uses": [
+    "lem-sfb-geometric-unipotence-unitriangular-embedding",
+    "lem-sfb-unitriangular-coordinate-filtration"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "14.21 proof and 6.49, printed pp.284--285 and pp.136--137"
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-nilpotent-connected-central-series] to this series. As $V\\ne1$, its resulting smooth connected series has a last nontrivial term $C$. The commutator condition with the next term $1$ says $vc=cv$ over every $k$-algebra. In particular $C$ is commutative. Restricting the closed embedding from step 1 embeds $C$ into $U_n$.",
+   "uses": [
+    "lem-sfb-nilpotent-connected-central-series"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "6.39--6.40, printed p.134; 14.55 proof, printed p.297"
+   }
+  },
+  {
+   "text": "If $\\operatorname{char}k=0$, apply [lem-sfb-char-zero-commutative-unipotent-vector-group] to $C$. We obtain an isomorphism $b:\\mathbf G_a^d\\simeq C$; $d\\geq1$ since otherwise $C=1$.",
+   "uses": [
+    "lem-sfb-char-zero-commutative-unipotent-vector-group"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "14.32--14.33, printed p.289"
+   }
+  },
+  {
+   "text": "If $\\operatorname{char}k=p>0$, choose $e\\geq1$ with $p^e\\geq n$. Every matrix of $C(R)$ is $I+T$ with $T^n=0$. In characteristic $p$, $(I+T)^{p^e}=I+T^{p^e}=I$ by the binomial formula, over every commutative $k$-algebra $R$. Thus $[p^e]_C=0$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "14.55 proof, printed p.297; bounded exponent made explicit using the unitriangular embedding"
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-bounded-exponent-reduced-p-kernel] to $C$, obtaining a nontrivial smooth connected commutative closed subgroup $K\\subseteq C$ killed by $p$. Apply [lem-sfb-perfect-exponent-p-vector-group] to obtain $b:\\mathbf G_a^d\\simeq K$, where $d\\geq1$ because $K\\ne1$.",
+   "uses": [
+    "lem-sfb-bounded-exponent-reduced-p-kernel",
+    "lem-sfb-perfect-exponent-p-vector-group"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "14.55 proof and 14.54, printed p.297"
+   }
+  },
+  {
+   "text": "In either case, take the image $N$ of the first coordinate factor under $b$ and then its inclusion into $V$. Its coordinate ideal is given, under $b$, by $x_2=\\cdots=x_d=0$, so it is a closed subgroup and $a:t\\mapsto b(t,0,\\ldots,0)$ is an isomorphism $\\mathbf G_a\\simeq N$. The affine line is smooth (a polynomial algebra has freely liftable coordinate) and connected (its coordinate ring is a domain), so $N$ is smooth and connected. Since $N\\subseteq C$, step 2 gives the required equality $nv=vn$ over every $R$.",
+   "uses": [
+    "def-sc-gm-ga"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "14.55 proof, printed p.297; selecting a coordinate factor of the vector group"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-geometric-unipotence-unitriangular-embedding",
+  "lem-sfb-unitriangular-coordinate-filtration",
+  "lem-sfb-nilpotent-connected-central-series",
+  "lem-sfb-char-zero-commutative-unipotent-vector-group",
+  "lem-sfb-bounded-exponent-reduced-p-kernel",
+  "lem-sfb-perfect-exponent-p-vector-group",
+  "def-sc-gm-ga"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Corollary 14.55 proof, printed p.297, with 6.39--6.40 and 14.21; characteristic-zero vector-group consequence 14.32--14.33, printed p.289."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "unipotent|Unipotent|AdditiveGroup",
+   "date": "2026-10-24",
+   "results": "0 hits; none",
+   "verdict": "no match: the hits concern abstract groups, Lie algebras, analytic Lie groups or smooth algebras, not the asserted algebraic-group-scheme theorem."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Unipotent\", \"Subgroup\"",
+   "date": "2026-10-24",
+   "results": "0 hits; none",
+   "verdict": "no match: the hits concern abstract groups, Lie algebras, analytic Lie groups or smooth algebras, not the asserted algebraic-group-scheme theorem."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Every nontrivial smooth connected unipotent algebraic group over a perfect field contains a central closed subgroup isomorphic to the additive group Ga",
+   "date": "2026-10-24",
+   "results": "8 hits; LieAlgebra.exists_isCartanSubalgebra_engel, SpecialLinearGroup.center_eq_bot_of_finrank_le_one, LieAlgebra.exists_isCartanSubalgebra_engel_of_finrank_le_card, LieAlgebra.hasCentralRadical_and_of_isIrreducible_of_isFaithful, SpecialLinearGroup.centerEquivRootsOfUnity_apply_of_finrank_le_one, Field.absoluteGaloisGroup.commutator_closure_isNormal, RootPairing.GeckConstruction.instHasTrivialRadical, Group.IsNilpotent.nilpotent",
+   "verdict": "no match: the hits concern abstract groups, Lie algebras, analytic Lie groups or smooth algebras, not the asserted algebraic-group-scheme theorem."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A positive dimensional unipotent group variety over a perfect field has a central one parameter additive subgroup",
+   "date": "2026-10-24",
+   "results": "8 hits; SpecialLinearGroup.center_eq_bot_of_finrank_le_one, SpecialLinearGroup.centerEquivRootsOfUnity_apply_of_finrank_le_one, LieAlgebra.exists_isCartanSubalgebra_engel, upperCentralSeriesAux, LieAlgebra.hasCentralRadical_and_of_isIrreducible_of_isFaithful, SpecialLinearGroup.mem_center_iff, upperCentralSeries, upperCentralSeries_one",
+   "verdict": "no match: the hits concern abstract groups, Lie algebras, analytic Lie groups or smooth algebras, not the asserted algebraic-group-scheme theorem."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Every nontrivial smooth connected unipotent group over a perfect field contains Ga in its centre",
+   "date": "2026-10-24",
+   "results": "8 hits; Subgroup.center, upperCentralSeries_one, IsPGroup.bot_lt_center, IsPGroup.center_nontrivial, Subgroup.center.isMulCommutative, AddSubgroup.instNormalCenter, ConjAct.fixedPoints_eq_center, AddSubgroup.center",
+   "verdict": "no match: the hits concern abstract groups, Lie algebras, analytic Lie groups or smooth algebras, not the asserted algebraic-group-scheme theorem."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Every nontrivial smooth connected unipotent algebraic group over a perfect field contains a central closed subgroup isomorphic to the additive group Ga",
+   "date": "2026-10-24",
+   "results": "[leanfinder] OK 8 hit(s); LieAlgebra.exists_isCartanSubalgebra_engel, SpecialLinearGroup.center_eq_bot_of_finrank_le_one, LieAlgebra.exists_isCartanSubalgebra_engel_of_finrank_le_card, LieAlgebra.hasCentralRadical_and_of_isIrreducible_of_isFaithful, SpecialLinearGroup.centerEquivRootsOfUnity_apply_of_finrank_le_one, Field.absoluteGaloisGroup.commutator_closure_isNormal, RootPairing.GeckConstruction.instHasTrivialRadical, Group.IsNilpotent.nilpotent",
+   "verdict": "no match: returned results concern abstract groups, Lie algebras, rings, analytic groups or number fields; none states this theorem about affine group schemes."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Unipotent\", \"Subgroup\"",
+   "date": "2026-10-24",
+   "results": "[loogle] OK 0 hit(s); none",
+   "verdict": "no match: returned results concern abstract groups, Lie algebras, rings, analytic groups or number fields; none states this theorem about affine group schemes."
+  },
+  {
+   "tool": "grep",
+   "query": "unipotent|Unipotent|AdditiveGroup",
+   "date": "2026-10-24",
+   "results": "[grep] OK 0 hit(s); none",
+   "verdict": "no match: returned results concern abstract groups, Lie algebras, rings, analytic groups or number fields; none states this theorem about affine group schemes."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Every nontrivial smooth connected unipotent group over a perfect field contains Ga in its centre",
+   "date": "2026-10-24",
+   "results": "[leansearch] OK 8 hit(s); Subgroup.center, upperCentralSeries_one, IsPGroup.bot_lt_center, IsPGroup.center_nontrivial, Subgroup.center.isMulCommutative, AddSubgroup.instNormalCenter, ConjAct.fixedPoints_eq_center, AddSubgroup.center",
+   "verdict": "no match: returned results concern abstract groups, Lie algebras, rings, analytic groups or number fields; none states this theorem about affine group schemes."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A positive dimensional unipotent group variety over a perfect field has a central one parameter additive subgroup",
+   "date": "2026-10-24",
+   "results": "[leanfinder] OK 8 hit(s); SpecialLinearGroup.center_eq_bot_of_finrank_le_one, SpecialLinearGroup.centerEquivRootsOfUnity_apply_of_finrank_le_one, LieAlgebra.exists_isCartanSubalgebra_engel, upperCentralSeriesAux, LieAlgebra.hasCentralRadical_and_of_isIrreducible_of_isFaithful, SpecialLinearGroup.mem_center_iff, upperCentralSeries, upperCentralSeries_one",
+   "verdict": "no match: returned results concern abstract groups, Lie algebras, rings, analytic groups or number fields; none states this theorem about affine group schemes."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-one-dimensional-unipotent-additive",
+  "date": "2026-10-24",
+  "group": "Q11"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Haboush symmetric-power lifting for a trivial quotient representation. Supporting representation-theoretic input: Central covering of a reductive group by a torus and a simply connected semisimple group. Milne central-cover construction: Multiplication by a central torus with semisimple quotient and the derived group. Supporting input: Semisimple algebraic groups are perfect. Root-subgroup structure and the torus conjugation formula used to realize the rank-one commutator calculation in Milne Corollary 21.50. Supporting lemma: A one-dimensional smooth connected unipotent group is additive. Supporting structural ingredient for the one-dimensional classification: Milne Corollary 14.55 (positive characteristic) and the central-series argument preceding the induction in Proposition 14.32 (characteristic zero).",
+   "via": [
+    "lem-sfb-one-dimensional-unipotent-additive",
+    "lem-sfb-reductive-root-subgroup-parametrizations",
+    "lem-sfb-semisimple-group-perfect",
+    "lem-sfb-central-torus-semisimple-derived-product",
+    "lem-sfb-reductive-torus-simply-connected-cover",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-unipotent-central-additive-subgroup",
+  "worker": "stage1",
+  "summary": "Q47 follows Milne 14.55 with nilpotence obtained from the existing matrix filtration. Four strictly smaller statement-only inputs isolate connected central series, the reduced p-kernel, and the characteristic-specific vector-group classifications. The stronger additive-series theorem is not used, avoiding its reliance on this item.",
+  "blueprint": "The inherited latest-blueprint direct-image preservation support chain is retained; this item supplies the central additive subgroup used in the one-dimensional classification. Steps 1--2 realize Milne nilpotence and central variety; steps 3--6 realize the characteristic-zero and positive-characteristic additive subgroup constructions."
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q47-958a1f42a",
+  "group": "Q47",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q47-958a1f42a (reviewer sub-agent of L); spot-checked: Read the item, all 4 new nodes and the cited statements (geometric-unipotence-unitriangular-embedding, unitriangular-coordinate-filtration, def-sc-gm-ga, def-pc-reduced-scheme) in full, against Milne iAG 6.35-6.40, 14.32-14.33 and 14.49-14.55. The route is exactly Cor 14.55: 14.21 nilpotence, 6.40 central connected subgroup, 14.54 applied to (ker p)°_red; char 0 uses 14.33. Step 1: the commutator lies in U^(j+1) because U^(j) is normal in B_n and p_{j+1} is a homomorphism invariant under U_n-conjugation. Step 2: the last nontrivial term of the connected central series is central over every R. Step 4: (I+T)^{p^e}=I for p^e>=n, a genuinely elementary bounded exponent. Steps 5-6 meet every hypothesis of the cited nodes, and d>=1 follows from nontriviality. New nodes, each true, statement-only and self-contained: nilpotent-connected-central-series (Milne 6.38-6.39; perfectness superfluous but harmless); bounded-exponent-reduced-p-kernel (nontriviality via the dimension argument; checked on G_a, W_2 and G_m); perfect-exponent-p-vector-group (verbatim 14.54, proved before 14.55, so no cycle); char-zero-commutative-unipotent-vector-group (14.33; 14.32's proof uses 14.21/14.24, not 14.55). None restates a clause of the item. rg search found no duplicates; perfect-unipotent-additive-series would be circular (16.24 depends on 16.22, which depends on this item). All nodes are in unit sk-thm-sf-ctf-stability and no SGA is cited. No repair note exists for this item, so the re-split rule does not apply. Batch-5 check: geometric-unipotence-unitriangular-embedding reaches sec-trace-formula only through the Mathlib leaf lem-trf-flat-tensor-preserves-injection (generic flatness of tensor products), which is neither part of the trace formula or Poincare duality statements nor a step of their proofs, so it is accepted. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.UnipotentCentralAdditiveSubgroup",
+  "declaration": "AlgebraicGeometry.exists_central_additive_subgroup_of_unipotent",
+  "file": "lean/Sheaf/AlgebraicGeometry/UnipotentCentralAdditiveSubgroup.lean",
+  "statement": "theorem exists_central_additive_subgroup_of_unipotent {k : Type u} [Field k] [PerfectField k] (V : Grp (Over (Spec (.of k)))) [IsAffine V.X.left] [LocallyOfFiniteType V.X.hom] [QuasiCompact V.X.hom] [Smooth V.X.hom] [ConnectedSpace V.X.left] (hunipotent : SolvableGroupStructure.IsUnipotent V) (hnontrivial : ¬ Nonempty (V ≅ Grp.trivial _)) : ∃ (N : Grp (Over (Spec (.of k)))) (i : N ⟶ V), IsClosedSubgroupScheme i.hom.hom ∧ Smooth N.X.hom ∧ ConnectedSpace N.X.left ∧ Nonempty (Grp.mk (StandardGroupSchemes.additive k) ≅ N) ∧ ∀ (R : Type u) [CommRing R] [Algebra k R] (n : (Spec (.of R)).asOver (Spec (.of k)) ⟶ N.X) (v : (Spec (.of R)).asOver (Spec (.of k)) ⟶ V.X), (n ≫ i.hom.hom) * v = v * (n ≫ i.hom.hom)",
+  "branch": "newtargets-dag",
+  "by": "NC",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "Reuses the landed SolvableGroupStructure.IsUnipotent; its existing node is added to stmt_deps. The conclusion is an isomorphism of bundled group schemes, with centrality tested on all commutative algebra points."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-985000cd1",
+  "group": "NC",
+  "result": "pass",
+  "note": "Item lem-sfb-unipotent-central-additive-subgroup checked clause by clause against the node and Milne Cor 14.55 / Prop 14.32. Hypotheses: PerfectField k; V : Grp (Over (Spec k)), affine, finite type (LocallyOfFiniteType + QuasiCompact), smooth, connected; landed SolvableGroupStructure.IsUnipotent (closed faithful GL_n embedding, (r(x)-1)^N=0 at geometric points); not isomorphic to Grp.trivial. Conclusion: closed subgroup scheme i : N ⟶ V (IsClosedSubgroupScheme), smooth, connected, Grp.mk StandardGroupSchemes.additive ≅ N, centrality over all commutative k-algebras R in universe u. No extra hypotheses. Node changes vs live are only the lean record and the added stmt_dep def-sfb-solvable-group-structure (landed, owns IsUnipotent). Statement verbatim; sorry only; no new defs; docstrings give source and blueprint id plus all six proof steps; report has both required sections; no duplicate found. No file changed, so no recompile; worker reports a clean per-file compile and a passing dry run."
+ }
+}

@@ -1,0 +1,339 @@
+{
+ "id": "lem-sfb-nodal-branch-double-cover",
+ "kind": "statement",
+ "title": "The two branches of a nodal family form an etale double cover of its singular subscheme",
+ "statement": "Let $f:X\\to T$ be a flat locally finitely presented morphism of schemes such that every nonempty geometric fibre is equidimensional of dimension one and its nonsmooth points have completed local rings $\\Omega[[u,v]]/(uv)$ over their algebraically closed residue fields. Put $D=\\operatorname{Sing}(f)$, the closed subscheme defined by the first Fitting ideal of $\\Omega^1_{X/T}$ [def-trf-first-fitting-singular-subscheme]. There is a canonical finite etale morphism $p:B_f\\to D$ of degree two (that is, $p_*\\mathcal O_{B_f}$ is locally free of rank two). For each $t\\in T$, let $X_t^\\nu\\to X_t$ denote the normalization of the reduced fibre. There is a canonical isomorphism of $D_t$-schemes\n$$ (B_f)_t\\ \\cong\\ X_t^\\nu\\times_{X_t}D_t. $$\nThe scheme $D_t$ is reduced and its points are exactly the nonsmooth points of $X_t$. The two geometric points of $B_f$ over a geometric point of $D$ are its two geometric normalization branches. The construction is functorial under isomorphisms of families and under every base change $a:T'\\to T$: writing $f':X\\times_TT'\\to T'$ one has canonical identifications $D_{f'}=D\\times_TT'$ and $B_{f'}=B_f\\times_TT'$ compatible with $p$ and with composition of base changes. If $f$ is finitely presented, both $D_t$ and $(B_f)_t$ are finite etale over $\\kappa(t)$. If, in addition, $f$ is proper, then $D\\to T$ and $B_f\\to T$ are finite.\n\nFlatness, local finite presentation, geometric fibres, smoothness, dimension, completion, power series, normalization, fibre products, finite morphisms, etaleness and properness are [def-weil-flat-morphism], [def-sbc-locally-finite-presentation], [def-weil-geometric-fibre], [def-sbc-smooth-morphisms], [def-kun-topological-krull-dimension], [def-weil-pbc-adic-completion], [def-weil-pbc-multivariate-power-series], [def-weil-pbc-reduced-normalization], [def-pc-fibre-product], [def-weil-finite-integral-morphism], [def-weil-etale-morphism] and [def-weil-proper-morphism]. Residue fields are [def-weil-residue-field].",
+ "source": {
+  "document": "literature/stacks-project/curves.tex",
+  "place": "Agent extraction of the functor of the two tangent directions from Tag 0CBY (lemma-etale-local-structure-nodal-family), with its fibre identification in Tag 0CBT (remark-quadratic-extension) and Tag 0CBW (lemma-split-node). This is a relative branch-cover assertion, not an assertion that normalization of total spaces commutes with base change."
+ },
+ "stmt_deps": [
+  "def-trf-first-fitting-singular-subscheme",
+  "def-weil-flat-morphism",
+  "def-sbc-locally-finite-presentation",
+  "def-weil-geometric-fibre",
+  "def-sbc-smooth-morphisms",
+  "def-kun-topological-krull-dimension",
+  "def-weil-pbc-adic-completion",
+  "def-weil-pbc-multivariate-power-series",
+  "def-weil-pbc-reduced-normalization",
+  "def-pc-fibre-product",
+  "def-weil-finite-integral-morphism",
+  "def-weil-etale-morphism",
+  "def-weil-proper-morphism",
+  "def-weil-residue-field",
+  "def-sfb-nodal-branch-scheme",
+  "def-weil-pure-dimension",
+  "def-trf-projective-nodal-tower",
+  "def-pc-finite-locally-free"
+ ],
+ "proof": [
+  {
+   "text": "By [lem-trf-nodal-family-fitting-singular], $D$ is the nonsmooth locus, is unramified over $T$, and commutes with arbitrary base change. Apply [lem-trf-unramified-field-fibre-decomposition] to each fibre: $D_t=\\coprod_x\\operatorname{Spec}\\kappa(x)$ with $\\kappa(x)/\\kappa(t)$ finite separable. Thus $D_t$ is reduced with exactly the required points.",
+   "uses": [
+    "lem-trf-nodal-family-fitting-singular",
+    "lem-trf-unramified-field-fibre-decomposition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/curves.tex",
+    "place": "Tags 0C59 (lemma-nodal-family), 0C5B (lemma-base-change-nodal-family); Morphisms 02G7 (lemma-unramified-over-field)."
+   }
+  },
+  {
+   "text": "Use [lem-sfb-graph-cone-gluing] for $i:D\\hookrightarrow X$: it constructs $\\mathcal G_f$ and identifies $B_f=\\operatorname{Proj}_D\\mathcal G_f$ with the fixed graph exceptional fibre, canonically under family isomorphisms.",
+   "uses": [
+    "lem-sfb-graph-cone-gluing"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/divisors.tex",
+    "place": "Tags 0630 (definition-conormal-sheaf), 0633 (lemma-affine-conormal-sheaf), and Sites 04TR (lemma-glue-sheaves)."
+   }
+  },
+  {
+   "text": "By [lem-sfb-nodal-graph-cone-chart], an etale cover $D_U\\to D$ identifies the pulled-back graded algebra with $\\mathcal O_{D_U}[u,v]/(uv)$. Flat Proj base change [prop-nagata-relative-proj-functoriality] computes the cover of $B_f$. On $D_+(u)$, $v=0$ and the degree-zero ring is $A$; on $D_+(v)$ it is $A$; their intersection is empty since $uv=0$ [def-nagata-affine-proj]. Hence it is $D_U\\amalg D_U$. Descend degree two by [lem-weil-pbc-finite-locally-free-degree-etale-descent] and etaleness by [lem-weil-pbc-fpqc-finer-than-etale], [lem-galois-fpqc-descend-etale]. The rank assertion is [lem-pc-flf-properties].",
+   "uses": [
+    "lem-sfb-nodal-graph-cone-chart",
+    "prop-nagata-relative-proj-functoriality",
+    "def-nagata-affine-proj",
+    "lem-weil-pbc-finite-locally-free-degree-etale-descent",
+    "lem-weil-pbc-fpqc-finer-than-etale",
+    "lem-galois-fpqc-descend-etale",
+    "lem-pc-flf-properties"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/descent.tex",
+    "place": "Tags 02VO (lemma-descending-property-finite-locally-free), 02VN (lemma-descending-property-etale); Topologies 022C; Proj standard affine charts."
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-nodal-graph-cone-base-change]: its graded comparisons and induced Proj isomorphisms give $B_{f'}\\cong B_f\\times_TT'$, including compatibility with $p$, identities, compositions and family isomorphisms.",
+   "uses": [
+    "lem-sfb-nodal-graph-cone-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/divisors.tex",
+    "place": "Tag 0635 canonical conormal comparison; Constructions relative Proj base change; Descent 02L4 (lemma-descending-property-isomorphism)."
+   }
+  },
+  {
+   "text": "For $T'=\\operatorname{Spec}\\kappa(t)$, apply [lem-sfb-nodal-graph-cone-fibre] to the fibre family and use Step 4. Its graph-cone identification gives $(B_f)_t\\cong X_t^\\nu\\times_{X_t}D_t$ and identifies the two geometric points with the two normalization branches.",
+   "uses": [
+    "lem-sfb-nodal-graph-cone-fibre"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/curves.tex",
+    "place": "Tags 0CBT (remark-quadratic-extension), 0CBU and 0CBW; Algebra formally etale localization and separable field maps."
+   }
+  },
+  {
+   "text": "If $f$ is finitely presented it is quasi-compact [def-sbc-locally-finite-presentation]; $D_t$ is closed, hence quasi-compact [lem-weil-pbc-closed-in-quasi-compact]. Its disjoint open points therefore form a finite set. Their finite separable fields make $D_t$ finite etale [lem-exc-etale-coproduct-etale]. Apply [lem-trf-unramified-field-fibre-decomposition] to the finite etale cover over each such field. Separability is transitive [lem-zl-separable-permanence], so $(B_f)_t$ is also a finite coproduct of separable field spectra; finiteness uses [lem-weil-pbc-finite-composition].",
+   "uses": [
+    "def-sbc-locally-finite-presentation",
+    "lem-weil-pbc-closed-in-quasi-compact",
+    "lem-exc-etale-coproduct-etale",
+    "lem-trf-unramified-field-fibre-decomposition",
+    "lem-zl-separable-permanence",
+    "lem-weil-pbc-finite-composition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/curves.tex",
+    "place": "Tags 0C59 and 0CBT; Morphisms 02G7 (lemma-unramified-over-field), quasi-compact discrete decomposition."
+   }
+  },
+  {
+   "text": "If $f$ is proper, $D\\to T$ is proper [lem-weil-pbc-closed-immersion-proper] and has discrete finite fibres by Steps 1 and 6. It is quasi-finite [pqf-def-quasifinite], hence finite [cor-pqf-proper-quasifinite-finite]. Composing with finite $p$ gives finite $B_f\\to T$ [lem-weil-pbc-finite-composition].",
+   "uses": [
+    "lem-weil-pbc-closed-immersion-proper",
+    "pqf-def-quasifinite",
+    "cor-pqf-proper-quasifinite-finite",
+    "lem-weil-pbc-finite-composition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/curves.tex",
+    "place": "Finiteness consequence of the nodal-family singular-scheme geometry; More on Morphisms proper quasi-finite finiteness and finite composition."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-trf-nodal-family-fitting-singular",
+  "lem-trf-unramified-field-fibre-decomposition",
+  "lem-sfb-graph-cone-gluing",
+  "lem-sfb-nodal-graph-cone-chart",
+  "prop-nagata-relative-proj-functoriality",
+  "def-nagata-affine-proj",
+  "lem-weil-pbc-finite-locally-free-degree-etale-descent",
+  "lem-weil-pbc-fpqc-finer-than-etale",
+  "lem-galois-fpqc-descend-etale",
+  "lem-pc-flf-properties",
+  "lem-sfb-nodal-graph-cone-base-change",
+  "lem-sfb-nodal-graph-cone-fibre",
+  "def-sbc-locally-finite-presentation",
+  "lem-weil-pbc-closed-in-quasi-compact",
+  "lem-exc-etale-coproduct-etale",
+  "lem-zl-separable-permanence",
+  "lem-weil-pbc-finite-composition",
+  "lem-weil-pbc-closed-immersion-proper",
+  "pqf-def-quasifinite",
+  "cor-pqf-proper-quasifinite-finite"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/curves.tex",
+  "place": "Agent construction using the projectivized relative graph cone, expanding construction (3) of Tag 0CBT in the etale charts of Tag 0CBY; no assertion on base change of normalization of total spaces."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "nodal|splitNode|branchCover",
+   "results": "{\"t\": \"2026-10-22T03:43:44Z\", \"tool\": \"grep\", \"query\": \"nodal|splitNode|branchCover\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: normalization universal maps, standard-etale presentations and etale field-algebra decompositions do not construct the relative two-branch scheme"
+  },
+  {
+   "tool": "leansearch",
+   "query": "For a nodal curve the points of the normalization above its nodes form a finite etale branch scheme functorial under field extension",
+   "results": "{\"t\": \"2026-10-22T03:43:44Z\", \"tool\": \"leansearch\", \"query\": \"For a nodal curve the points of the normalization above its nodes form a finite etale branch scheme functorial under field extension\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Hom.normalizationDesc\", \"AlgebraicGeometry.Scheme.Hom.normalization\", \"AlgebraicGeometry.Scheme.Hom.instIsIsoToNormalizationOfIsIntegralHom\", \"AlgebraicGeometry.Scheme.Hom.normalizationDiagram\", \"AlgebraicGeometry.Scheme.Hom.fromNormalization\", \"AlgebraicGeometry.Scheme.Hom.ker_toNormalization\", \"AlgebraicGeometry.Scheme.Hom.ι_toNormalization_assoc\", \"AlgebraicGeometry.Scheme.Hom.toNormalization\"], \"digest\": \"32d08011097f0dcb\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: normalization universal maps, standard-etale presentations and etale field-algebra decompositions do not construct the relative two-branch scheme"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"nodal\"",
+   "results": "{\"t\": \"2026-10-22T03:43:44Z\", \"tool\": \"loogle\", \"query\": \"\\\"AlgebraicGeometry\\\", \\\"nodal\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: normalization universal maps, standard-etale presentations and etale field-algebra decompositions do not construct the relative two-branch scheme"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A nodal family has a canonical finite etale double cover of its singular subscheme parametrizing the two normalization branches, compatible with base change",
+   "results": "{\"t\": \"2026-10-22T03:43:49Z\", \"tool\": \"leanfinder\", \"query\": \"A nodal family has a canonical finite etale double cover of its singular subscheme parametrizing the two normalization branches, compatible with base change\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"StandardEtalePair.hasMap_X\", \"AlgebraicGeometry.Scheme.Hom.normalizationDiagramMap\", \"StandardEtalePair\", \"AlgebraicGeometry.Scheme.Hom.toNormalization\", \"AlgebraicGeometry.Scheme.Hom.normalizationDesc\", \"StandardEtalePresentation\", \"Algebra.IsStandardSmoothOfRelativeDimension.exists_etale_mvPolynomial\", \"StandardEtalePresentation.hasMap\"], \"digest\": \"f2083d303af91c12\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: normalization universal maps, standard-etale presentations and etale field-algebra decompositions do not construct the relative two-branch scheme"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The two tangent directions of an ordinary double point form a separable quadratic algebra, in families a finite etale degree two scheme",
+   "results": "{\"t\": \"2026-10-22T03:43:50Z\", \"tool\": \"leanfinder\", \"query\": \"The two tangent directions of an ordinary double point form a separable quadratic algebra, in families a finite etale degree two scheme\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.FormallyEtale.iff_exists_algEquiv_prod\", \"Algebra.FormallyEtale.of_isSeparable_aux\", \"Algebra.Etale\", \"Algebra.Etale.iff_exists_algEquiv_prod\", \"StandardEtalePair.instFormallyEtaleRing\", \"Algebra.IsStandardEtale\", \"StandardEtalePair.instEtaleRing\", \"Algebra.FormallyEtale.of_isSeparable\"], \"digest\": \"ccc3d00c435363fd\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: normalization universal maps, standard-etale presentations and etale field-algebra decompositions do not construct the relative two-branch scheme"
+  },
+  {
+   "tool": "grep",
+   "query": "nodal|branchCover|tangentCone",
+   "results": "{\"t\": \"2026-10-22T04:02:31Z\", \"tool\": \"grep\", \"query\": \"nodal|branchCover|tangentCone\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: standard etale presentations and relative normalization maps do not state the relative two-branch cover theorem"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Projectivizing the tangent cone of a node gives the two points of its normalization",
+   "results": "{\"t\": \"2026-10-22T04:02:31Z\", \"tool\": \"leansearch\", \"query\": \"Projectivizing the tangent cone of a node gives the two points of its normalization\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Hom.normalizationDesc\", \"AlgebraicGeometry.Scheme.Hom.instIsAffineHomToNormalization\", \"AlgebraicGeometry.Scheme.Hom.instIsDominantToNormalization\", \"tangentConeAt_eq_univ\", \"AlgebraicGeometry.Scheme.Hom.toNormalization\", \"AlgebraicGeometry.Scheme.Hom.fromNormalization\", \"AlgebraicGeometry.Scheme.Hom.instIsIntegralNormalization\", \"AlgebraicGeometry.Scheme.Hom.instIsReducedNormalization\"], \"digest\": \"e20e509f0c5658e6\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: standard etale presentations and relative normalization maps do not state the relative two-branch cover theorem"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"nodal\"",
+   "results": "{\"t\": \"2026-10-22T04:02:31Z\", \"tool\": \"loogle\", \"query\": \"\\\"AlgebraicGeometry\\\", \\\"nodal\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: standard etale presentations and relative normalization maps do not state the relative two-branch cover theorem"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The two branches of a nodal family form a canonical finite etale double cover of its singular subscheme compatible with arbitrary base change",
+   "results": "{\"t\": \"2026-10-22T04:02:32Z\", \"tool\": \"leanfinder\", \"query\": \"The two branches of a nodal family form a canonical finite etale double cover of its singular subscheme compatible with arbitrary base change\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"StandardEtalePair.hasMap_X\", \"StandardEtalePair\", \"StandardEtalePresentation\", \"AlgebraicGeometry.Scheme.Etale\", \"Algebra.IsStandardSmoothOfRelativeDimension.exists_etale_mvPolynomial\", \"Algebra.exists_etale_bijective_residueFieldMap_and_map_eq_mul_and_isCoprime\", \"Algebra.exists_etale_isIdempotentElem_forall_liesOver_eq\", \"StandardEtalePair.instEtaleRing\"], \"digest\": \"f33aaaf3c601fa7e\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: standard etale presentations and relative normalization maps do not state the relative two-branch cover theorem"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-nodal-finite-quasi-splitting",
+  "date": "2026-10-22",
+  "group": "NL"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images proof (3), ILO X Lemma 2.2 alteration reduction; de Jong Lemma 5.7 proof, first paragraph: the inverse image of the singular points under fibrewise normalization; also the quasi-splitting preservation used on printed p.617.",
+   "via": [
+    "lem-sfb-nodal-finite-quasi-splitting",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sfb-nodal-branch-double-cover",
+  "worker": "stage1",
+  "summary": "Repair of the human re-split return: four comparable statement-only obligations replace old Steps 2-5 and 7-9. The original argument is retained verbatim with its allocation in the report. The unchanged statement is assembled in seven steps totalling 2551 characters. Existing singular-locus, descent and finiteness lemmas are reused.",
+  "blueprint": "det-thm-sf-ctf-stability-direct-images proof (3), ILO X Lemma 2.2 alteration reduction; de Jong Lemma 5.7 proof, first paragraph: the inverse image of the singular points under fibrewise normalization; also the quasi-splitting preservation used on printed p.617. The same alteration/quasi-splitting route is retained; only the internal graph-cone arguments are distributed.",
+  "tool_uses": [
+   {
+    "node": "lem-trf-nodal-family-fitting-singular",
+    "why": "Generic geometric/algebraic tool used only as stated in the corresponding proof step; no replacement of the direct-image alteration route of sk-thm-sf-ctf-stability."
+   },
+   {
+    "node": "lem-trf-unramified-field-fibre-decomposition",
+    "why": "Generic geometric/algebraic tool used only as stated in the corresponding proof step; no replacement of the direct-image alteration route of sk-thm-sf-ctf-stability."
+   },
+   {
+    "node": "lem-weil-pbc-fpqc-finer-than-etale",
+    "why": "Generic geometric/algebraic tool used only as stated in the corresponding proof step; no replacement of the direct-image alteration route of sk-thm-sf-ctf-stability."
+   },
+   {
+    "node": "lem-galois-fpqc-descend-etale",
+    "why": "Generic geometric/algebraic tool used only as stated in the corresponding proof step; no replacement of the direct-image alteration route of sk-thm-sf-ctf-stability."
+   },
+   {
+    "node": "lem-exc-etale-coproduct-etale",
+    "why": "Generic geometric/algebraic tool used only as stated in the corresponding proof step; no replacement of the direct-image alteration route of sk-thm-sf-ctf-stability."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-trf-nodal-family-fitting-singular",
+  "lem-trf-unramified-field-fibre-decomposition",
+  "lem-pur-conormal-graded-algebra",
+  "lem-weil-pbc-site-module-sheaf-gluing",
+  "lem-trf-nodal-family-etale-local-model",
+  "lem-trf-fitting-ideal-independence-base-change",
+  "lem-pur-conormal-algebra-flat-base-change",
+  "lem-weil-pbc-fpqc-finer-than-etale",
+  "lem-galois-fpqc-descend-etale",
+  "lem-exc-etale-coproduct-etale"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q38-167bec1c0",
+  "group": "Q38",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q38-167bec1c0 (reviewer sub-agent of L); spot-checked: Re-split answering the human note (released 2026-10-22); the delivery satisfies it. The item statement and stmt_deps are byte-identical to the live NX-reviewed node. The report reproduces all 11 old steps verbatim and says where each went. Four statement-only unsplit nodes of comparable size (1449 to 2524 characters) carry the non-assembly arguments: lem-sfb-graph-cone-gluing takes old Steps 2-3, lem-sfb-nodal-graph-cone-chart Steps 4-5, lem-sfb-nodal-graph-cone-base-change Steps 7-8, and lem-sfb-nodal-graph-cone-fibre Step 9. The parent proof is a 7-step assembly of 2551 characters. Old Steps 1, 6, 10 and 11 stay in the parent: they are applications of existing lemmas with the same citations, and the D+(u)/D+(v) calculation is still written out, so nothing was blurred. Checks of each new node: (1) the chart presentation O->O^2 via (v,u) gives Fit_1=(u,v). Étale pullback identifies Omega_{U/V}=Omega_{U/T}=Omega_{X/T}|U, so D_U=U x_W V(h), and h=0 on D_U gives gr=A[u,v]/(uv) with basis u^n,v^n. (2) The graph square for base change is cartesian. The surjection c_a of the conormal flat-base-change lemma is bijective on the chart monomials and is therefore an isomorphism étale-locally, with coherence from [b]⊗r->[b⊗r]. (3) In the fibre node, H is a localization of A⊗κ and formally étale, H/J=κ and J pulls back to m. The augmented-étale lemma gives gr_m A≅gr_J H, and the tangent-normalization hypotheses (dimension one, closed point, separable residue field, geometric node) hold. (4) The gluing node is a true construction for any closed immersion and agrees with the coborder blow-up exceptional fibre of def-sfb-nodal-branch-scheme. Edge cases tested: empty singular locus, a smoothing uv=h, nilpotent bases, specialization of h to 0, a real node, characteristic 2, and infinitely many nodes. Duplicate search: none of the four duplicates a statement node. I checked pur9-def-normal-cone, the conormal flat-base-change lemma, lem-per-conormal-presentation-proj-base-change, the dvr nodal chart, the trf étale local model and the tangent-normalization node. Sources read: Stacks curves.tex 0CBT (3), 0CBU, 0CBY. No SGA. Batch-5: def-trf-first-fitting-singular-subscheme and def-sfb-nodal-branch-scheme are general definitions. lem-trf-nodal-family-fitting-singular is the generic Stacks 0C59/0C5B fact already cited on base. None is part of the trace-formula or Poincaré-duality proofs, so all are accepted. Accepted tool_uses: the same generic Stacks lemmas as on base. Some older tool_uses entries are stale and harmless. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.NodalBranchDoubleCover",
+  "declaration": "AlgebraicGeometry.nodal_branch_double_cover",
+  "declarations": [
+   "AlgebraicGeometry.NodalBranchFamily",
+   "AlgebraicGeometry.NodalBranchFamily.singular",
+   "AlgebraicGeometry.NodalBranchFamily.inclusion",
+   "AlgebraicGeometry.NodalBranchFamily.singularBase",
+   "AlgebraicGeometry.NodalBranchFamily.branches",
+   "AlgebraicGeometry.NodalBranchFamily.projection",
+   "AlgebraicGeometry.NodalBranchFamily.singularFiberInclusion",
+   "AlgebraicGeometry.NodalBranchFamily.baseChange_geometric",
+   "AlgebraicGeometry.NodalBranchFamily.baseChange",
+   "AlgebraicGeometry.NodalBranchDoubleCoverSystem",
+   "AlgebraicGeometry.nodal_branch_double_cover"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/NodalBranchDoubleCover.lean",
+  "statement": "theorem nodal_branch_double_cover : Nonempty NodalBranchDoubleCoverSystem.{u}",
+  "branch": "newtargets-dag",
+  "by": "O2",
+  "date": "2026-10-22",
+  "existing": false,
+  "note": "The branch scheme is the actual graph exceptional fibre of def-sfb-nodal-branch-scheme. The conclusion is bundled, simultaneously for all families, so its cartesian comparison maps satisfy identity and composition laws; no branch scheme is chosen from a mere existence theorem."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-1c1ccdb01",
+  "group": "O2",
+  "result": "pass",
+  "note": "All hypothesis and conclusion clauses match the node and its source place (flat + lfp; pure dimension 1 on nonempty geometric fibres; geometric ordinary double points off the smooth locus; first-Fitting D; finite étale degree-2 cover; isomorphism over D_t with the normalization; D_t reduced with the nonsmooth points; two geometric points; cartesian base-change maps with identity and composition laws over all cartesian squares; qc+qs fibre finiteness; proper finiteness). New def node def-sfb-nodal-branch-scheme: the blow-up of the graph in its coborder neighbourhood, restricted over D, equals Proj of the conormal algebra (Steps 2-3); real data, no duplicate. Only lean and stmt_deps change on the node; all added stmt_deps are def nodes with used declarations; statements verbatim. Advisory: the branch-scheme comparison is fixed up to an automorphism over D (gauge), and the normalization iso is free; acceptable because the only citer (nodal-finite-quasi-splitting) uses only isomorphism-invariant properties. nodalBranchGraph_isImmersion is provable via IsImmersion.of_comp but left as sorry, which stage 2 permits. No recompile, per instruction."
+ }
+}

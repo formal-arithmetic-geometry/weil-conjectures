@@ -1,0 +1,145 @@
+{
+ "id": "lem-sfb-full-open-substack-algebraicity",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: The Deligne--Mumford locus in the stack of proper curves. Supporting input: Full open restriction of an unramified moduli diagonal. Full open algebraicity specialization of Tag 05UN.",
+   "via": [
+    "lem-sfb-curve-stack-infinitesimal-dm-locus",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "kind": "statement",
+ "title": "Full open substacks inherit algebraicity",
+ "statement": "Let S be a scheme [def-pc-scheme], F an algebraic moduli stack over S [def-sfb-algebraic-moduli-stack], and U a full open substack of F [def-sfb-open-moduli-substack]. Then the full category selected by U, with its original projection to S-schemes, is an algebraic moduli stack. The atlas convention is a smooth surjective scheme atlas; the empty open is allowed.",
+ "source": {
+  "document": "literature/stacks-project/algebraic.tex",
+  "place": "Tag 05UN, lemma-open-fibred-category-is-algebraic, specialization to a full pullback-stable subcategory"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-sfb-algebraic-moduli-stack",
+  "def-sfb-open-moduli-substack"
+ ],
+ "proof": [
+  {
+   "text": "The full-subcategory projection preserves and reflects hom lifts: eliminate the witness of IsHomLift; both projections map the same arrow to the same base arrow. Lift the strongly cartesian universal property through fullness, using injectivity of the full inclusion to prove factorization and uniqueness. Ambient cartesian lifts stay in the subcategory because its predicate is closed under arrows. Thus the full subcategory is fibred in groupoids.",
+   "uses": [
+    "def-sfb-open-moduli-substack"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebraic.tex",
+    "place": "Tag 05UN, lemma-open-fibred-category-is-algebraic, specialization to a full pullback-stable subcategory"
+   }
+  },
+  {
+   "text": "Apply openStackAlgebraicLfp to the full inclusion. The fibredness hypothesis is the preceding construction, the target is algebraic by assumption, and the required scheme-valued open fibre equivalences are precisely U.open_pullback. Take the algebraicity conjunct of the resulting theorem. This includes the empty open without any nonemptiness hypothesis.",
+   "uses": [
+    "lem-sfb-open-stack-algebraic-lfp"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebraic.tex",
+    "place": "Tag 05UN, lemma-open-fibred-category-is-algebraic, specialization to a full pullback-stable subcategory"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sfb-open-moduli-substack",
+  "lem-sfb-open-stack-algebraic-lfp"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/algebraic.tex",
+  "place": "Tag 05UN, lemma-open-fibred-category-is-algebraic, specialization to a full pullback-stable subcategory"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A full open substack of an algebraic moduli stack is algebraic",
+   "results": "AlgebraicGeometry.ExistsHomHomCompEqCompAux.h𝒰S; AlgebraicGeometry.AffineScheme.forgetToScheme_full; AlgebraicGeometry.Scheme.instFullEtaleOverForget; AlgebraicGeometry.IsAffineOpen; AlgebraicGeometry.isAffine_affineScheme; AlgebraicGeometry.Scheme.Opens; AlgebraicGeometry.Scheme; AlgebraicGeometry.Scheme.instFullLocallyRingedSpaceForgetToLocallyRingedSpace",
+   "date": "2026-10-23",
+   "verdict": "No exact match for this project-specific full-open specialization. Use the generic library algebraicity theorem; hom-lift map constructors supply the elementary full-inclusion glue."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsHomLift\"",
+   "results": "CategoryTheory.Functor.IsHomLift; CategoryTheory.IsHomLift.id; CategoryTheory.IsHomLift.isoOfIsoLift; CategoryTheory.IsHomLift.eqToHom_codomain_lift_id; CategoryTheory.IsHomLift.eqToHom_domain_lift_id; CategoryTheory.IsHomLift.id_lift_eqToHom_codomain; CategoryTheory.IsHomLift.id_lift_eqToHom_domain; CategoryTheory.IsHomLift.instIsHomLiftIdObj",
+   "date": "2026-10-23",
+   "verdict": "No exact match for this project-specific full-open specialization. Use the generic library algebraicity theorem; hom-lift map constructors supply the elementary full-inclusion glue."
+  },
+  {
+   "tool": "grep",
+   "query": "fullModuli_isHomLift|OpenModuliSubstack.isAlgebraic",
+   "results": "No hits. Direct rg of the project finds openStackAlgebraicLfp, the generic result used by the proof.",
+   "date": "2026-10-23",
+   "verdict": "No exact match for this project-specific full-open specialization. Use the generic library algebraicity theorem; hom-lift map constructors supply the elementary full-inclusion glue."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A full open substack of an algebraic stack is algebraic",
+   "results": "AlgebraicGeometry.IsAffineOpen; AlgebraicGeometry.Scheme.germ_stalkClosedPointTo_assoc; AlgebraicGeometry.isLocallyNoetherian_of_isOpenImmersion; TopCat.Presheaf.SheafCondition.OpensLeCover; AlgebraicGeometry.Scheme.Opens.toScheme; AlgebraicGeometry.Scheme.PartialMap.instIsReducedToScheme; AlgebraicGeometry.IsProper.instMorphismRestrict; AlgebraicGeometry.Scheme.Opens",
+   "date": "2026-10-23",
+   "verdict": "No match: scheme open subsets and preservation of scheme properties do not state algebraicity of this full moduli substack."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.CurveStackInfinitesimalDmLocus",
+  "date": "2026-10-24",
+  "group": "S5"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.OpenModuliSubstackAlgebraicity",
+  "file": "lean/Sheaf/AlgebraicGeometry/OpenModuliSubstackAlgebraicity.lean",
+  "declaration": "CategoryTheory.OpenModuliSubstack.isAlgebraic",
+  "declarations": [
+   "CategoryTheory.OpenModuliSubstack.isAlgebraic",
+   "CategoryTheory.fullModuli_isHomLift"
+  ],
+  "statement": "theorem OpenModuliSubstack.isAlgebraic {S : Scheme.{u}}\n    {F : BasedCategory.{v, w} (Over S)} (U : OpenModuliSubstack F)\n    (hF : IsAlgebraicModuliStack F) : IsAlgebraicModuliStack U.category",
+  "branch": "sheaf-dag",
+  "by": "S5",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S5",
+  "result": "pass",
+  "landing": "20261024T020437-L-2604731",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S5",
+  "result": "pass",
+  "landing": "20261024T020437-L-2604731",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

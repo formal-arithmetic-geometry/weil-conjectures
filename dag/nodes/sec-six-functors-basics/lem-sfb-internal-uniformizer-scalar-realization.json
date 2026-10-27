@@ -1,0 +1,187 @@
+{
+ "id": "lem-sfb-internal-uniformizer-scalar-realization",
+ "kind": "statement",
+ "title": "The constant regular uniformizer and its prescribed transported scalar",
+ "statement": "For a prime l, finite extension E of Q_l and any scheme X, use the ring O, residue q and prescribed module transport F of [def-sfb-internal-completion-section-transport] and [def-sfb-internal-quotient-tower-model]. There exists one global section t of O such that kernelIdeal(q)(U)=span(t(U)) on every object U and multiplication by t(U) on O(U) is injective. For every endomorphism d of the point regular integer module acting on continuous sections as multiplication by the chosen uniformizer, every integral complex P and n>=0, with N=complex(P), U:Tot(N tensor O[0])=N the right unitor, one has F(scalar(d,n,P)) followed by U.inv = U.inv followed by ringedSingletonKoszulPower(O,t,N,n). The scalar and tensor expressions are those of [lem-pe-principal-reduction-cone-calculus] and [lem-sfb-ringed-singleton-koszul-cone]. There is no arbitrary generating section or unspecified change of basis in this assertion.",
+ "source": {
+  "document": "literature/stacks-project/algebraization.tex",
+  "place": "Lemma derived-completion-koszul (0A0E), rank-one scalar comparison; literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sf-pf-adic/sk-thm-sf-pf-adic-open.proof.md, reduction paragraph."
+ },
+ "stmt_deps": [
+  "def-sfb-internal-completion-section-transport",
+  "def-sfb-internal-quotient-tower-model",
+  "def-weil-pbc-ringed-site-ideal",
+  "lem-pe-principal-reduction-cone-calculus",
+  "lem-sfb-ringed-singleton-koszul-cone"
+ ],
+ "proof": [
+  {
+   "text": "Apply the ordinary single-uniformizer scalar comparison to obtain compatible integer and first-residue ring isomorphisms e and f, and the action equation on ordinary modules. Let t be the image under e of the constant chosen uniformizer.",
+   "uses": [
+    "lem-sfb-ordinary-uniformizer-scalar-comparison"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "On every object V, the quotient square identifies the residue kernel with the image under the ring isomorphism e(V) of the constant quotient kernel. The proved finite_kernel formula identifies that kernel with the span of the constant uniformizer; Ideal.map_span and Set.image_singleton give exactly span(t(V)). This is the private uniformizerSection_kernel proof.",
+   "uses": [
+    "det-prop-integral-criterion-constant-coefficients"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The DVR theorem identifies the span of the chosen uniformizer with the nonzero maximal ideal, hence the uniformizer is nonzero. Multiplication by it is injective on the lifted coefficient DVR. Apply the proved constantScalar_ring_injective lemma, then transport sectionwise injectivity along e(V), using that e(V) preserves multiplication. This is the private uniformizerSection_regular proof; it requires no nontriviality of the section rings.",
+   "uses": [
+    "lem-weil-l-adic-extension-integers-dvr",
+    "lem-sfb-flat-constant-module-scalar-mono"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The scalarOnModules expression is conjugation of the pulled-back regular-module endomorphism followed by tensoringLeft. Functoriality and cancellation of the two isomorphisms prove that it preserves natural-number powers. Evaluation on a module and the prescribed transport preserve these powers too. Induct on k to deduce a^k followed by v equals v followed by b^k from the one-scalar intertwining equation. Apply this with k=n+1 and the right unitor; tensoring by the rank-one scalar preserves powers.",
+   "uses": [
+    "det-pe-derived-nakayama-resolution"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Check the resulting complex equation degreewise. Mathlib rightUnitor'_inv writes the inverse unitor in degree q as the ordinary inverse unitor, tensoring with singleObjXSelf.inv, and the (q,0) coproduct inclusion. The ι_mapBifunctorMap and single_map_f_self formulas move the single scalar across that inclusion. The ordinary powered equation and cancellation of singleObjXSelf.inv followed by its hom prove the equality. This requires neither boundedness nor flatness and proves the actual prescribed total-tensor equality.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-ordinary-uniformizer-scalar-comparison",
+  "det-prop-integral-criterion-constant-coefficients",
+  "lem-weil-l-adic-extension-integers-dvr",
+  "lem-sfb-flat-constant-module-scalar-mono",
+  "det-pe-derived-nakayama-resolution"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/algebraization.tex",
+  "place": "Lemma derived-completion-koszul (0A0E), rank-one reduction; the implementation proves the sectionwise ideal and regularity assertions and the passage from ordinary one-scalar comparison to powers and total complexes."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Two generators of the same principal ideal with a regular generator differ by a unit in a sheaf of commutative rings",
+   "results": "8 hits: Submodule.IsPrincipal.associated_generator_span_self, Ideal.isoBaseOfIsPrincipal_apply, ModuleCat.Tilde.isUnit_toStalk, Ideal.subtype_isoBaseOfIsPrincipal_eq_mul, FractionalIdeal.spanSingleton_eq_spanSingleton, Ideal.span_singleton_eq_span_singleton, toPrincipalIdeal_eq_iff, Ideal.isoBaseOfIsPrincipal. ",
+   "date": "2026-10-26",
+   "verdict": "Infrastructure only; no exact match for the stated sheaf assertion."
+  },
+  {
+   "tool": "loogle",
+   "query": "Associated",
+   "results": "12 hits: Associated, Associated.instIsEquiv, Associated.refl, Associated.rfl, Associated.of_subsingleton, Associated.of_eq, Associated.symm, associated_eq_eq. ",
+   "date": "2026-10-26",
+   "verdict": "Infrastructure only; no exact match for the stated sheaf assertion."
+  },
+  {
+   "tool": "grep",
+   "query": "span_singleton_eq_span_singleton|isUnit.*mul|mul.*isUnit",
+   "results": "25 hits: Mathlib/NumberTheory/JacobiSum/Basic.lean, Mathlib/NumberTheory/JacobiSum/Basic.lean, Mathlib/NumberTheory/LucasLehmer.lean, Mathlib/NumberTheory/GaussSum.lean, Mathlib/NumberTheory/GaussSum.lean, Mathlib/NumberTheory/GaussSum.lean, Mathlib/LinearAlgebra/AnnihilatingPolynomial.lean, Mathlib/NumberTheory/DirichletCharacter/Orthogonality.lean. ",
+   "date": "2026-10-26",
+   "verdict": "Infrastructure only; no exact match for the stated sheaf assertion."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Endomorphism of tensor unit commutes with every endomorphism of tensor unit",
+   "results": "8 hits: Module.End.commute_id_left, CategoryTheory.tensorUnit_def, Module.End.lTensorAlgHom_apply_apply, Module.End.rTensorAlgHom, Module.End.commute_id_right, CategoryTheory.MonoidalCategoryStruct.tensorUnit, Module.End.lTensorAlgHom, Monoid.End. ",
+   "date": "2026-10-26",
+   "verdict": "Infrastructure only; no exact match for the stated sheaf assertion."
+  },
+  {
+   "tool": "grep",
+   "query": "constant.*scalar|scalar.*constant|unitHomEquiv",
+   "results": "16 hits: Mathlib/Algebra/Category/ModuleCat/Sheaf/Free.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/Free.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/Free.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/Free.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/Free.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackFree.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackFree.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackFree.lean. ",
+   "date": "2026-10-26",
+   "verdict": "Infrastructure only; no exact match for the stated sheaf assertion."
+  },
+  {
+   "tool": "loogle",
+   "query": "Functor.mapEnd",
+   "results": "0 hits: . loogle: unknown identifier 'Functor.mapEnd'",
+   "date": "2026-10-26",
+   "verdict": "Infrastructure only; no exact match for the stated sheaf assertion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A constant regular scalar generates the kernel of the constant quotient sheaf and scalar multiplication is preserved by change of rings",
+   "results": "8 hits: PresheafOfModules.Sheafify.one_smul, ModuleCat.Tilde.smul_section_apply, PresheafOfModules.Sheafify.SMulCandidate.x, PresheafOfModules.Sheafify.SMulCandidate.h, PresheafOfModules.Sheafify.zero_smul, PresheafOfModules.Sheafify.smul_zero, PresheafOfModules.Sheafify.instSubsingletonSMulCandidate, PresheafOfModules.Sheafify.instNonemptySMulCandidate. ",
+   "date": "2026-10-26",
+   "verdict": "Infrastructure only; no exact match for the stated sheaf assertion."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Multiplication by a global regular section identifies a principal ideal sheaf with the free rank one module, and any other single generator differs by a unit",
+   "results": "8 hits: Ideal.span_singleton_mul_left_unit, Ideal.subtype_isoBaseOfIsPrincipal_eq_mul, ModuleCat.Tilde.smul_section_apply, PresheafOfModules.Sheafify.instNonemptySMulCandidate, SheafOfModules.ιFree, Ideal.isoBaseOfIsPrincipal_apply, SheafOfModules.freeSection, AlgebraicGeometry.StructureSheaf.const_self. ",
+   "date": "2026-10-26",
+   "verdict": "Infrastructure only; no exact match for the stated sheaf assertion."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Constant sheafification preserves exact multiplication by a regular element and the kernel of reduction modulo a principal ideal",
+   "results": "8 hits: PresheafOfModules.Sheafify.map_smul, PresheafOfModules.Sheafify.map_smul_eq, PresheafOfModules.sheafifyMap, PresheafOfModules.sheafification, CategoryTheory.constantSheaf, PresheafOfModules.toSheafify, PresheafOfModules.sheafifyMap_val, CategoryTheory.Sheaf.isConstant_of_iso. ",
+   "date": "2026-10-26",
+   "verdict": "Infrastructure only; no exact match for the stated sheaf assertion."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.SixFunctors.ProEtale.InternalUniformizerKoszulScalarSquare",
+  "date": "2026-10-26",
+  "group": "N4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-thm-sf-pf-adic-open",
+   "place": "Regular-generator and constant-scalar parts of the reduction paragraph.",
+   "via": [
+    "lem-sfb-internal-uniformizer-koszul-scalar-square",
+    "lem-sfb-internal-koszul-cone-coordinates",
+    "lem-sfb-internal-koszul-finite-acyclicity",
+    "lem-sfb-internal-koszul-quotient-resolution",
+    "lem-sfb-internal-quotient-koszul-unit-comparison",
+    "lem-sfb-internal-completion-stacks-comparison",
+    "lem-sfb-internal-integral-residue-criterion"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-pf-adic",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.SixFunctors.ProEtale.InternalUniformizerScalarRealization",
+  "file": "lean/Sheaf/SixFunctors/ProEtale/InternalUniformizerScalarRealization.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.InternalCompletionTransport.uniformizer_scalar_realization",
+  "statement": "theorem uniformizer_scalar_realization :\n    ∃ t : ((ring l E X).obj ⋙ forget CommRingCat).sections,\n      (∀ U : Scheme.coefficientProEtaleSiteModel.{u, u} X,\n        (ConstantCompletion.kernelIdeal (residue l E X)).sections U =\n          Ideal.span {t.val (op U)}) ∧\n      (∀ U : Scheme.coefficientProEtaleSiteModel.{u, u} X,\n        Function.Injective (fun x : (ring l E X).obj.obj (op U) ↦ t.val (op U) * x)) ∧\n      ∀ (d : End (Mod.regular (DerivedNakayama.integerRing l E))),\n        (∀ (S : Profinite.{u}ᵒᵖ) (b : (DerivedNakayama.integerRing l E).obj.obj S)\n          (s : S.unop), ((d.hom.hom.app S) b).down s =\n            Padic.coefficientExtensionUniformizer l E * b.down s) →\n        ∀ (P : CochainComplex (AdicCompletion.Modules l E X) ℤ) (n : ℕ),\n          ((modules l E X).mapHomologicalComplex (.up ℤ)).map\n              (PrincipalReduction.scalar l E X d n P) ≫\n              (ringedKoszulRightUnitIso (ring l E X) (complex l E X P)).inv =\n            (ringedKoszulRightUnitIso (ring l E X) (complex l E X P)).inv ≫\n              ringedSingletonKoszulPower (ring l E X) t (complex l E X P) n",
+  "branch": "sheaf-dag",
+  "by": "N4",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "N4",
+  "result": "pass",
+  "landing": "20261026T100331-L-4186727",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D4",
+  "result": "pass",
+  "landing": "20261026T130315-L-3448248",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

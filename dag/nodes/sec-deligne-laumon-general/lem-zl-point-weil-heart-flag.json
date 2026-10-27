@@ -14,137 +14,58 @@
   "lem-weil-point-fibre-equivalence",
   "def-weil-constructible-heart",
   "def-weil-algebraically-closed-coefficients",
-  "def-wf-positive-real-logarithm"
+  "def-wf-positive-real-logarithm",
+  "def-zl-point-weil-flag-data"
  ],
  "proof": [
   {
-   "text": "First choose an actual finite heart stage for the given sheaf. Write its underlying common-stage object as $(E_0,K)$. The constructible truncation theorem identifies $\\mathcal H^0(E_0,K)$ with $(E_0,\\mathcal H^0K)$, and the canonical truncation isomorphism identifies this with $\\mathcal F$, since $\\mathcal F$ is in the heart. Use this identification to replace the representative by the heart object $\\mathcal H^0K$. Represent the Weil map, its inverse, the identification with the original object and its inverse at common finite stages. There are finitely many inverse and intertwining equations. By the equality rule in the Hom colimits, each holds at a further finite stage; a common upper bound makes all hold simultaneously. Thus, after one enlargement, there is a genuine heart object $M$ over $E_0$ with an isomorphism $\\theta:Lg_s^*M\\to M$ whose image is the prescribed Weil sheaf. No continuity of the powers of $\\theta$ is required by the Weil-pair definition.",
+   "text": "Obtain the algebraic flag H, its finite model T, successive monos, and isomorphisms from their Weil-heart cokernels to H.Q using [lem-zl-point-weil-algebraic-flag].",
    "uses": [
-    "def-weil-algebraically-closed-coefficients",
-    "prop-constructible-truncations",
-    "def-weil-constructible-heart",
-    "def-weil-weil-sheaf-complex"
+    "lem-zl-point-weil-algebraic-flag"
    ],
    "elementary": false,
    "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-general/sk-i-dl-general-real/thm-zl-real-mixed-by-curves.proof.md",
-    "place": "Paragraph 7, dimension-zero Jordan filtration; explicit point-heart and finite-stage argument by Q111."
+    "document": "literature/blueprint/latest/blueprint/sec-deligne-laumon-general/sk-i-dl-general-real/thm-zl-real-mixed-by-curves.proof.md",
+    "place": "Paragraph 7, dimension-zero Jordan filtration."
    }
   },
   {
-   "text": "Use the stated point-fibre equivalence at finite coefficient fields together with the point-realization cohomology theorem. Its restriction to hearts is a fully faithful equivalence with finite-dimensional vector spaces: a heart object has fibre concentrated in degree zero; conversely, if a preimage $C$ of $W[0]$ is chosen under the equivalence, then $\\mathcal H^0 C$ is a heart preimage, because $\\operatorname{Fib}_s(\\mathcal H^0 C)\\cong H^0(\\operatorname{Fib}_s C)[0]=W[0]$. Full faithfulness is inherited from the full derived subcategories. This equivalence preserves and reflects kernels and cokernels: their universal factorization properties transfer bijectively across the Hom bijections. It therefore preserves and reflects short exact sequences. These fibre identifications commute with enlarging the finite coefficient field by the scalar/cohomology compatibility in the point-realization theorem. In particular the fibre $V_0$ of $M$ is finite dimensional and $V=V_0\\otimes_{E_0}\\Qlb$.",
+   "text": "Use [lem-zl-point-scalar-punctual-spectrum] on each scalar quotient. Its eigenvalues are alpha_j and the residue cardinality is q. Since q>1 and alpha_j is a unit, its norm r_j is positive; the real-power formula gives q^((2 log r_j/log q)/2)=r_j. This proves the purity clause of the full flag.",
    "uses": [
-    "lem-weil-point-fibre-equivalence",
-    "lem-a1-point-realization-standard-cohomology",
-    "def-weil-constructible-heart"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-general/sk-i-dl-general-real/thm-zl-real-mixed-by-curves.proof.md",
-    "place": "Paragraph 7, dimension-zero Jordan filtration; explicit point-heart and finite-stage argument by Q111."
-   }
-  },
-  {
-   "text": "Apply the invariant-flag theorem over the algebraically closed coefficient field $\\Qlb$, rather than over the geometric base field $k$, to $F:V\\to V$. It gives $0=W_0\\subset W_1\\subset\\cdots\\subset W_d=V$ with $\\dim W_j=j$ and $F(W_j)\\subset W_j$. Each restriction is injective because $F$ is, and sends a basis of $W_j$ to $j$ independent vectors in the $j$-dimensional space $W_j$; these form a basis. Hence $F(W_j)=W_j$ and also $F^{-1}(W_j)=W_j$. Thus $F$ and $F^{-1}$ induce mutually inverse operators on every $W_j/W_{j-1}$. Choose $b_j\\in W_j\\setminus W_{j-1}$ successively. Their images generate the one-dimensional successive quotients, so $b_1,\\ldots,b_j$ is a basis of $W_j$. On the $j$th quotient the induced operator is multiplication by a scalar $\\alpha_j$, nonzero because it is invertible. This argument allows repeated eigenvalues and nonzero off-diagonal entries.",
-   "uses": [
-    "p-linear-triangular"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-general/sk-i-dl-general-real/thm-zl-real-mixed-by-curves.proof.md",
-    "place": "Paragraph 7, dimension-zero Jordan filtration; explicit point-heart and finite-stage argument by Q111."
-   }
-  },
-  {
-   "text": "Choose an $E_0$-basis of $V_0$. Let $B$ be the change-of-basis matrix whose columns are the adapted vectors $b_j$ in this basis after extension to $\\Qlb$. Enlarge $E_0$ to a finite field $E\\subset\\Qlb$ containing all entries of $B$, $B^{-1}$ and the matrices of $F$ and $F^{-1}$ in the adapted basis. Such an extension is finite: every one of these finitely many entries is algebraic over $\\mathbf Q_\\ell$, and adjoining them successively multiplies finitely many finite degrees. Put $W_{j,E}=\\operatorname{span}_E(b_1,\\ldots,b_j)$ inside $V_0\\otimes_{E_0}E$. The triangular matrix equations for $F$ and $F^{-1}$ hold over $E$ because they hold in its containing field $\\Qlb$. They preserve every $W_{j,E}$; the scalar on $W_{j,E}/W_{j-1,E}$ is $\\alpha_j\\in E^\\times$. The coordinate inclusion and quotient maps, and the bases exhibiting their exact sequences, are now all over this same $E$.",
-   "uses": [
-    "def-weil-algebraically-closed-coefficients"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-general/sk-i-dl-general-real/thm-zl-real-mixed-by-curves.proof.md",
-    "place": "Paragraph 7, dimension-zero Jordan filtration; explicit point-heart and finite-stage argument by Q111."
-   }
-  },
-  {
-   "text": "At this finite stage use the heart equivalence in step 2 to choose heart objects $M_j$ with specified fibres $W_{j,E}$, taking $M_d=M\\otimes_{E_0}E$. Write $A_j=F|_{W_{j,E}}$ under these identifications. Let $\\iota_{M_j}:\\operatorname{Fib}_s(M_j)\\to\\operatorname{Fib}_s(Lg_s^*M_j)$ be the specified point transport. It is an isomorphism. Full faithfulness of the point-fibre equivalence lifts the map $A_j\\circ\\iota_{M_j}^{-1}$ uniquely to a map $\\theta_j:Lg_s^*M_j\\to M_j$; it lifts its inverse as well, so faithfulness gives the two inverse identities. Pullback along the scheme automorphism $g_s$ commutes with constructible truncations, hence both source and target are in the heart. Thus $(M_j,\\theta_j)$ is an actual constructible $E$-Weil sheaf. For $j=d$, the equation $F=\\operatorname{Fib}_s(\\theta)\\circ\\iota_M$ in the definition of local Frobenius shows that this is exactly the original Weil structure after scalar extension, not a separately chosen automorphism.",
-   "uses": [
-    "lem-weil-point-fibre-equivalence",
-    "lem-a1-point-realization-standard-cohomology",
-    "lem-weil-frobenius-cohomology-transport-iso",
-    "def-weil-frobenius-point-transport",
-    "prop-constructible-truncations",
-    "def-weil-local-frobenius-trace",
-    "def-weil-weil-sheaf-complex"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-general/sk-i-dl-general-real/thm-zl-real-mixed-by-curves.proof.md",
-    "place": "Paragraph 7, dimension-zero Jordan filtration; explicit point-heart and finite-stage argument by Q111."
-   }
-  },
-  {
-   "text": "Lift each vector inclusion $u:W_{j-1,E}\\to W_{j,E}$ by full faithfulness. It is a monomorphism and its cokernel has the prescribed quotient fibre by the exact heart equivalence of step 2. Naturality of point transport says $\\operatorname{Fib}_s(Lg_s^*u)\\iota_{M_{j-1}}=\\iota_{M_j}\\operatorname{Fib}_s(u)$. Combining this with $A_ju=uA_{j-1}$ and the formula in step 5 gives $\\operatorname{Fib}_s(u\\theta_{j-1})=\\operatorname{Fib}_s(\\theta_j Lg_s^*u)$; faithfulness proves Weil equivariance. For the cokernel $Q_j$, define its Weil isomorphism by lifting the induced quotient automorphism composed with $\\iota_{Q_j}^{-1}$, just as in step 5. The same equation with the quotient projection makes that projection Weil equivariant. Therefore the lifted sequence is short exact in the underlying constructible heart, with the required Weil structures. Composition of the lifted inclusions makes $M_j$ a Weil subobject of $M_d$; pass to $\\Qlb$ and identify the endpoint with $\\mathcal F$. All these constructions and inverse maps were made at the single field $E$. After extension to $\\Qlb$ the adapted coordinate bases still exhibit exact vector-space sequences; the same point equivalence and cohomology comparison at the common stage reflect their exactness in the common-stage heart.",
-   "uses": [
-    "lem-weil-point-fibre-equivalence",
-    "lem-a1-point-realization-standard-cohomology",
-    "lem-weil-frobenius-point-transport-natural",
-    "lem-weil-frobenius-cohomology-transport-iso",
-    "def-weil-weil-sheaf-complex"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-general/sk-i-dl-general-real/thm-zl-real-mixed-by-curves.proof.md",
-    "place": "Paragraph 7, dimension-zero Jordan filtration; explicit point-heart and finite-stage argument by Q111."
-   }
-  },
-  {
-   "text": "The unique closed point of $\\operatorname{Spec}k_0$ has residue cardinality $q$. The specified fibre and point-transport identifications give local Frobenius $\\alpha_j$ on the quotient, by the defining composite of local Frobenius and step 5. Since $\\iota$ is a field isomorphism and $\\alpha_j\\ne0$, the number $r_j=|\\iota(\\alpha_j)|$ is positive. Put $w_j=2\\log(r_j)/\\log(q)$. Since $q>1$, $\\log(q)>0$, and the positive real power convention gives $q^{w_j/2}=\\exp((\\log(r_j)/\\log(q))\\log(q))=r_j$. The purity definition therefore makes the quotient punctually $\\iota$-pure of weight $w_j$. The finite Weil filtration constructed above is exactly the mixedness filtration of that definition (and, when a bound is wanted, take the maximum of its finitely many weights).",
-   "uses": [
-    "def-weil-local-frobenius-trace",
-    "def-weil-punctual-weights",
+    "lem-zl-point-scalar-punctual-spectrum",
     "def-weil-real-power",
-    "def-wf-positive-real-logarithm"
+    "def-wf-positive-real-logarithm",
+    "def-weil-punctual-weights"
    ],
-   "elementary": true,
+   "elementary": false,
    "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-general/sk-i-dl-general-real/thm-zl-real-mixed-by-curves.proof.md",
-    "place": "Paragraph 7, dimension-zero Jordan filtration; explicit point-heart and finite-stage argument by Q111."
+    "document": "literature/blueprint/latest/blueprint/sec-deligne-laumon-general/sk-i-dl-general-real/thm-zl-real-mixed-by-curves.proof.md",
+    "place": "Paragraph 7, dimension-zero Jordan filtration."
    }
   },
   {
-   "text": "If $d=0$, the faithful heart equivalence identifies $\\mathcal F$ with zero; take the empty filtration with its sole endpoint $0=\\mathcal F$. There are no quotient or weight conditions to check. For a finite extension of $k_0$, carry out the same construction with that finite field as the base datum and its cardinality $q'$ in the logarithmic calculation. The point equivalence, the natural invertible point transports, and the truncation assertions are stated for every finite-field datum, so the proof has the same hypotheses. No step imposed reality, diagonalizability, or semisimplicity.",
+   "text": "The finite set of real weights has an upper bound w, including when there are no quotients. Use H.G and H.step as the filtration, its initial zero and terminal isomorphism, and its Weil monos. Transport purity across each cokernel isomorphism using the finite-presentation definition of punctual spectrum. This supplies every witness in SfIsMixedOfWeightsAtMost and combines with T.",
    "uses": [
-    "lem-weil-point-fibre-equivalence",
     "def-weil-punctual-weights"
    ],
    "elementary": true,
    "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-general/sk-i-dl-general-real/thm-zl-real-mixed-by-curves.proof.md",
-    "place": "Paragraph 7, dimension-zero Jordan filtration; explicit point-heart and finite-stage argument by Q111."
+    "document": "literature/blueprint/latest/blueprint/sec-deligne-laumon-general/sk-i-dl-general-real/thm-zl-real-mixed-by-curves.proof.md",
+    "place": "Paragraph 7, dimension-zero Jordan filtration."
    }
   }
  ],
  "proof_deps": [
-  "def-weil-algebraically-closed-coefficients",
-  "prop-constructible-truncations",
-  "def-weil-constructible-heart",
-  "def-weil-weil-sheaf-complex",
-  "lem-weil-point-fibre-equivalence",
-  "lem-a1-point-realization-standard-cohomology",
-  "p-linear-triangular",
-  "lem-weil-frobenius-cohomology-transport-iso",
-  "def-weil-frobenius-point-transport",
-  "def-weil-local-frobenius-trace",
-  "lem-weil-frobenius-point-transport-natural",
-  "def-weil-punctual-weights",
+  "lem-zl-point-weil-algebraic-flag",
+  "lem-zl-point-scalar-punctual-spectrum",
   "def-weil-real-power",
-  "def-wf-positive-real-logarithm"
+  "def-wf-positive-real-logarithm",
+  "def-weil-punctual-weights"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-general/sk-i-dl-general-real/thm-zl-real-mixed-by-curves.proof.md",
-  "place": "Paragraph 7; explicit realization, inverse-transport and coefficient-matrix argument by Q111, using the existing point and triangularization nodes."
+  "document": "literature/blueprint/latest/blueprint/sec-deligne-laumon-general/sk-i-dl-general-real/thm-zl-real-mixed-by-curves.proof.md",
+  "place": "Paragraph 7; Lean assembly of algebraic construction and scalar-spectrum comparison, J4."
  },
  "mathlib_searches": [
   {
@@ -252,35 +173,19 @@
   "is": null
  },
  "split_report": {
-  "date": "2026-10-21",
+  "date": "2026-10-22",
   "item": "lem-zl-point-weil-heart-flag",
   "worker": "stage1",
-  "summary": "Realized the dimension-zero full flag in the raw Weil heart by the existing t-exact point equivalence. Wrote out descent of the given Weil pair, finite adapted-basis descent, lifting by inverse point transport, equivariance of inclusions and quotients, and the purity calculation. Reused all existing lemmas; no new node or statement correction.",
-  "blueprint": "thm-zl-real-mixed-by-curves.proof.md, paragraph 7: the dimension-zero Jordan filtration with weights 2 log_{q_x}|iota(alpha)|; also unit sk-i-dl-general-real, step 1, dimension zero.",
+  "summary": "Statement unchanged. Extracted finite-stage heart descent/exact point realization, finite-coefficient automorphism flags, and inverse-transport lifting of equivariant diagrams as three comparable statement-only nodes. Retained the weight and empty-case assembly; preserved the original full argument and its allocation in report.md.",
+  "blueprint": "thm-zl-real-mixed-by-curves.proof.md paragraph 7, dimension-zero Jordan filtration; unit sk-i-dl-general-real step 1, dimension zero.",
   "tool_uses": [
    {
-    "node": "p-linear-triangular",
-    "why": "Generic single-operator linear algebra flag theorem; the unit supplies no separate linear algebra lemma. The scalar field is the algebraically closed coefficient field, as allowed by its unit statement."
-   },
-   {
-    "node": "lem-weil-point-fibre-equivalence",
-    "why": "Generic raw point realization equivalence, used at finite stages to lift linear maps; no step of the real-sheaf reduction is replaced."
-   },
-   {
-    "node": "lem-a1-point-realization-standard-cohomology",
-    "why": "Generic t-exactness and normalized scalar/cohomology comparison for the same point realization; needed to work in the heart, not just the derived category."
-   },
-   {
-    "node": "prop-constructible-truncations",
-    "why": "Generic constructible truncation and automorphism compatibility tool; needed to descend a heart representative and keep Frobenius pullback in the heart."
-   },
-   {
     "node": "lem-weil-frobenius-cohomology-transport-iso",
-    "why": "Generic invertibility of specified point transport (clause 1 only), needed to lift a fibre automorphism to a Weil isomorphism."
+    "why": "step 1 takes only part 1 (the point transport is an isomorphism) to make F_0 invertible; no node of sk-i-dl-general-real states it; already an accepted tool use of this node."
    },
    {
     "node": "lem-weil-frobenius-point-transport-natural",
-    "why": "Generic naturality and coefficient extension of point transport (clause 2), needed for the explicit Weil-equivariance equation."
+    "why": "steps 1 and 3 take part 2 (naturality of the point transport and its compatibility with finite scalar extension) to identify F with F_0 tensor 1 and to verify the prescribed endpoint; no node of this unit states it; already an accepted tool use of this node."
    }
   ]
  },
@@ -293,34 +198,17 @@
   "lem-weil-frobenius-point-transport-natural"
  ],
  "reviewed": {
-  "date": "2026-10-21",
+  "date": "2026-10-22",
   "by": "L",
-  "reviewer": "NT-cc-Q111-517916739",
-  "group": "Q111",
+  "reviewer": "NT-cc-Q36-38c6002c8",
+  "group": "Q36",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q111-517916739 (reviewer sub-agent of L); spot-checked: PASS: I read the item's statement and all 8 steps in full. No new nodes; the statement is unchanged from the Q124 creation; the 3 stmt_deps it adds (constructible heart, common-stage coefficients, positive log) are all used in the statement; proof_deps equal the union of the step uses; no cycle. Source: main-20261015 thm-zl-real-mixed-by-curves.proof.md, the 'in dimension zero a Jordan filtration …' sentence, and unit step 1 of sk-i-dl-general-real. Step checks: (1) the Hom-colimit equality rule and the truncations of prop-constructible-truncations give a finite-stage heart Weil pair. (2) Point equivalence plus the t-exact δ of lem-a1-point-realization-standard-cohomology give an exact heart equivalence, with H^0 used for the preimage. (3) p-linear-triangular applies over Qlb (its unit assumes an algebraically closed field); the invariance and alpha_j≠0 arguments are correct. (4) Finitely many algebraic matrix entries give a finite E, needed for example for [[0,c],[1,0]]. (5) θ_j lifts A_j∘ι^{-1}, using clause 1 of transport-iso; g_s is a scheme automorphism, so Lg_s^* keeps the heart; θ_d=θ⊗E by faithfulness. (6) I recomputed the equivariance equation from naturality clause 2. (7) The weight calculation is correct; real weights are allowed, and the bound is the maximum. (8) V=0 and finite extensions are covered. Small cases tested: d=0, d=1, a Jordan block, an irreducible 2×2 case, a non-integral weight. Duplicate search found nothing: invariant-flag-categorical-filtration and classical-weil-filtration-heart-transport are different statements. All 6 tool_uses accepted as generic. Batch-5: p-linear-triangular is linear algebra that neither assumption gives, with no deps of its own, and it is already in the batch-5 closure (via lem-rp-upper-bound and others); the closure added by the item's deps over the base is empty. Accepted. Maintainer note: the p-linear-triangular statement omits 'algebraically closed', which only its unit states."
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q36-38c6002c8 (reviewer sub-agent of L); spot-checked: I read the re-split in full against the base 8-step proof (7362 characters), the 2026-10-22 repair note and the main-20261015 proof of thm-zl-real-mixed-by-curves, lines 83-87 (dimension-zero Jordan filtration). The live node still has the Q111 proof, so nothing supersedes this delivery. Every old step appears verbatim in the report's allocation section, and each argument is now a self-contained statement clause. Old steps 1-2 go to lem-zl-point-heart-finite-stage: exact heart equivalence at a point with scalar compatibility, and finite-stage descent of the Weil pair through H^0 and the Hom-colimit equalities. Old steps 3-4 go to lem-zl-automorphism-flag-finite-coefficients: an invariant flag over Omega plus one finite E for the bases, inverses and triangular matrices. Old steps 5-6 go to lem-zl-point-equivariant-diagram-lift: theta_i lifted from A_i iota^{-1}, inverse lifted, equivariance from naturality, exact cokernels, prescribed endpoint. Old steps 7-8 stay as elementary steps 4-5. The three nodes are of comparable size, none restates the item, and the assembly is 2036 characters (2824 after the fix). I tested the new statements on d=0, rank 1, a Jordan block, [[0,c],[1,0]] with c not a square (needs E0(sqrt c)), a singular F (excluded), and zero or prescribed-endpoint diagrams. I type-checked the characterizing formula of the lift node and recomputed the equivariance from transport-natural (2). Duplicate search found nothing equivalent: rg over the DAG for heart, flag and point-transport terms; read lem-wf-rational-stalk-exact, lem-dl-a1-constructible-fibres-exact, lem-zl-punctual-spectrum-exact-fibre, lem-per-adic-normalized-fibre-comparisons, p-linear-triangular, lem-zl-alg-closed-endomorphism-eigenvalue, invariant-flag-categorical-filtration, classical-weil-filtration-heart-transport and point-transformation-coefficient-descent. FIX, C1: step 1 used that iota_M is invertible (lem-weil-frobenius-cohomology-transport-iso part 1) and that F equals F0 tensor 1 (lem-weil-frobenius-point-transport-natural part 2) without citing either. Step 3's prescribed-endpoint identity needs iota^E_{M tensor E} to match iota^{E0}_M tensor 1, which is transport-natural (2), also uncited. I added both citations with their sentences, updated proof_deps, and declared both in split_report.tool_uses; both are already accepted tool_uses of this node and were in the base proof_deps. FIX, B3: H^0 in the heart-finite-stage and diagram-lift nodes now cites def-weil-coefficient-cohomology-modules. Batch 5: def-weil-local-frobenius-trace, newly cited by the diagram-lift node, is a general definition, not a step of the trace-formula or Poincaré-duality proofs, and was already in the base item's stmt_deps, so the closure does not grow; accepted. No SGA citation.; 3 file(s) fixed by the reviewer"
  },
  "lean": {
   "module": "Sheaf.Paper.PointWeilHeartFlag",
   "declaration": "WeilConjectures.zl_point_weil_heart_flag",
   "declarations": [
-   "WeilConjectures.zlPointBase",
-   "WeilConjectures.zlPointBaseLocallyOfFiniteType",
-   "WeilConjectures.zlPointBaseQuasiCompact",
-   "WeilConjectures.zlPointWeilHeartCategory",
-   "WeilConjectures.zlPointFiniteWeilHeartCategory",
-   "WeilConjectures.zlPointRawHeartCategory",
-   "WeilConjectures.zlPointFiniteRawHeartCategory",
-   "WeilConjectures.zlPointWeilFiber",
-   "WeilConjectures.zlPointWeilFrobenius",
-   "WeilConjectures.zlPointFiniteHeart",
-   "WeilConjectures.zlPointCommonHeart",
-   "WeilConjectures.zlPointFiniteFiber",
-   "WeilConjectures.zlPointFiniteFrobenius",
-   "WeilConjectures.ZlPointWeilFlagDiagram",
-   "WeilConjectures.ZlPointWeilHeartFlag",
-   "WeilConjectures.ZlPointWeilFlagFiniteDiagram",
-   "WeilConjectures.ZlPointWeilHeartFlagModel",
    "WeilConjectures.zl_point_weil_heart_flag"
   ],
   "file": "lean/Sheaf/Paper/PointWeilHeartFlag.lean",
@@ -329,7 +217,7 @@
   "by": "Q20",
   "date": "2026-10-21",
   "existing": false,
-  "note": "The theorem packages the complete raw-heart filtration and a simultaneous finite coefficient-heart model, with underlying-heart short exact sequences and explicit descent equations for inclusions, projections and the original sheaf. Every Frobenius is the recorded local operator, including point transport. Data diagrams and their property predicates are owning-node statement helpers, not alternative notions of Weil sheaf, heart, fibre or purity."
+  "note": "J4: unchanged theorem signature; original data declarations moved verbatim to PointWeilHeartFlagData and publicly reexported. Proof combines algebraic finite-stage flag, scalar-spectrum comparison, logarithmic purity and the defining mixed filtration."
  },
  "reviewed_lean": {
   "date": "2026-10-21",
@@ -338,5 +226,27 @@
   "group": "Q20",
   "result": "pass",
   "note": "Item node changed only in lean; statement verbatim; 18 declarations recorded. Every node clause matches a Lean clause on the recorded declarations: arbitrary FiniteFieldDatum, F in sfCommonStageWeilSheaf on Over.mk (𝟙 Spec k0), fibre/Frobenius = recorded localQbarStalk/localQbarClosedFrobeniusStalk with y ι hι universally quantified, flag G/step/into with heart mono, IsZero G 0, IsIso into last, ranks j, ShortExact in sfCommonStageHeart, rank-1 quotients with Ωˣ scalar, SfIsPunctuallyPureOfWeight at 2 log‖ια‖/log q, invariant flag with bijective Frobenius, ∃ w SfIsMixedOfWeightsAtMost. Finite model: one E with Weil-equivariant comparison isos to sfWeilStageObject, descent squares through inclusion, finite-stage ranks/scalars pinned by α_descends. Edge cases checked: d=0, rank 1, Jordan block, splitting after enlarging E, non-integral weight. Ω : Type u is inherited from LocalFrobeniusTrace. No hollow defs (irreducible, not opaque); single sorry; docstrings with source and blueprint id and all 8 steps; no line over 100 chars; proof imports plain; absent PointRealizationStandardCohomology module correctly not imported. Not recompiled per instructions; worker compiles clean (43.8/36.9 s). Advisories only: some declarations come from nodes outside stmt_deps via the local-Frobenius composite; lem-weil-point-fibre-equivalence is a stmt_dep not used by the Lean statement; second-reading section is thin."
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-cffe2",
+  "group": "J4",
+  "result": "fix",
+  "landing": "20261025T123139-L-1837581",
+  "kind": "interface",
+  "note": "independent cc review: delivered PointWeilHeartFlag(+Data, AlgebraicFlag, ScalarPunctualSpectrum) and 4 nodes against clone's PointWeilHeartFlag.lean, AdicPunctualWeights SfPunctualEigenvalue/SfIsMixedOfWeightsAtMost, LocalFrobeniusTrace Qbar vs finite closed Frobenius, item node and change record"
  }
 }

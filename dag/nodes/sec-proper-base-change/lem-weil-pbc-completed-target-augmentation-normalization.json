@@ -1,0 +1,254 @@
+{
+ "id": "lem-weil-pbc-completed-target-augmentation-normalization",
+ "kind": "statement",
+ "title": "Target projection and derived-limit comparison preserve the actual pullback completion unit",
+ "statement": "Let $A$ be commutative Noetherian, $I$ finitely generated, $A/I$ additive torsion, and $P_n=A/I^n$ finite and perfect over $A$ for every $n\\geq1$. For each scheme $T$ use the small pro-etale site, $A_T=\\varprojlim_n(P_n)_T$, the ordinary unbounded module derived category, and strict towers [def-weil-pbc-adic-coefficient-datum]. Let $h:U\\to V$ and $p:U\\to W$ be any scheme morphisms, and $L\\in D(A_V)$ derived $I$-complete. Put $E_0=Lh_A^*L$, $N=Rp_{*,A}E_0$, and $Z=Lh^*_{\\mathrm{comp}}L$, with the specified completion unit $\\gamma_h:E_0\\to Z$ [def-weil-pbc-completed-pullback]. Write $\\mathcal R_T(C)=\\Delta_TC\\otimes^L_{\\Delta_TA_T}((P_n)_T)_n$ and $i_C:\\Delta_TC\\to\\mathcal R_T(C)$ for the quotient augmentation. Let $F_T=R\\lim_T$, $\\lambda_C:C\\to F_T\\Delta_TC$ be its constant-tower map, and $u_C=F_T(i_C)\\lambda_C$ [prop-weil-pbc-rlim-functoriality].\nPut $Q_\\bullet=Lh^*_{\\mathrm{Tow}}\\mathcal R_V(L)$, and let $t:Q_\\bullet\\simeq\\mathcal R_U(E_0)$ be the representative-normalized reduction/pullback isomorphism [lem-weil-pbc-reduction-pullback-derived-tower]. Let $h_{E_0}:\\mathcal R_W(N)\\to Rp_*^{\\mathrm{Tow}}\\mathcal R_U(E_0)$ be the counit-tensor projection mate on the ringed diagram sites, with the normalized constant-tower comparison $\\chi_{E_0}:\\Delta_WN\\simeq Rp_*^{\\mathrm{Tow}}\\Delta_UE_0$ [lem-weil-pbc-augmented-diagram-projection-mate, lem-weil-pbc-constant-tower-pushforward-normalization]. Set $D_\\bullet=Rp_*^{\\mathrm{Tow}}Q_\\bullet$ and $H'=Rp_*^{\\mathrm{Tow}}(t^{-1})h_{E_0}$. For a strict tower $B$ on $U$, write $c_B:Rp_*F_UB\\simeq F_WRp_*^{\\mathrm{Tow}}B$ for exactly the canonical underived-composite-normalized comparison [prop-weil-pbc-direct-image-limits]. Then the following identities hold with these actual maps:\n$$F_U(t)\\gamma_h=u_{E_0},\\qquad F_W(h_{E_0})u_N=c_{\\mathcal R_U(E_0)}Rp_*u_{E_0},$$\n$$F_W(H')u_N=c_QRp_*(\\gamma_h):N\\longrightarrow F_WD_\\bullet.$$\nThe statement requires no properness, constructibility, completeness of $E_0$ or $N$, or invertibility of $h_{E_0}$ or $\\gamma_h$. In a cartesian square $\\square=(f,f',g,g')$ with proper $f$ and a complete input $K$ with retained etale-origin witnesses [def-weil-pbc-cartesian-square, def-weil-pbc-etale-origin-witness], taking $(p,h,L)=(f',g',K)$ identifies $H'$ and $c_Q$ with precisely the target projection comparison and target direct-image/limit comparison in [lem-weil-pbc-strict-tower-exchange-mate-normalization, def-weil-pbc-completed-base-change-map].",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 0A07, lemma-Rf-commutes-with-Rlim, and Equation 0B56, equation-projection-formula-map; agent strict-augmentation refinement, returned steps 3–6"
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "stmt_deps": [
+  "def-weil-pbc-adic-coefficient-datum",
+  "def-weil-pbc-completed-pullback",
+  "prop-weil-pbc-rlim-functoriality",
+  "lem-weil-pbc-reduction-pullback-derived-tower",
+  "lem-weil-pbc-augmented-diagram-projection-mate",
+  "lem-weil-pbc-constant-tower-pushforward-normalization",
+  "prop-weil-pbc-direct-image-limits",
+  "def-weil-pbc-cartesian-square",
+  "def-weil-pbc-etale-origin-witness",
+  "lem-weil-pbc-strict-tower-exchange-mate-normalization",
+  "def-weil-pbc-completed-base-change-map"
+ ],
+ "proof": [
+  {
+   "text": "Identify reductionTowerPullbackIso with stratumReductionIso by the uniqueness theorem completedReductionPullbackIso_existsUnique: their representative-normalization predicates are definitionally identical. The published stratumReduction_augmentation then identifies the pulled quotient augmentation followed by t with the constant/pullback comparison followed by the target quotient augmentation. Expand ordinaryToCompleted and completionUnit, combine the two Rlim maps by functoriality, and cancel the inverse constant/pullback comparison. This proves gamma followed by F(t) = u.",
+   "uses": [
+    "prop-weil-pbc-direct-image-limits",
+    "lem-weil-pbc-stratum-completion-unit-restriction",
+    "def-weil-pbc-completed-pullback",
+    "def-weil-pbc-exact-pullback-interface"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0A07, lemma-Rf-commutes-with-Rlim, and Equation 0B56, equation-projection-formula-map; agent strict-augmentation refinement, returned steps 3–6"
+   }
+  },
+  {
+   "text": "Use the last conjunct of the already published towerProjection_properties at p and E0. It is exactly the second completion-unit identity, for the specified towerProjection and directImageRlimIso; there is no need to reconstruct the general diagram-site mate or constant-tower normalization here.",
+   "uses": [
+    "prop-weil-pbc-direct-image-limits"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0A07, lemma-Rf-commutes-with-Rlim, and Equation 0B56, equation-projection-formula-map; agent strict-augmentation refinement, returned steps 3–6"
+   }
+  },
+  {
+   "text": "Postcompose the first identity by F(t inverse). Functoriality and t followed by its inverse give u followed by F(t inverse) = gamma. Expand F(H prime) as F(h) followed by F(G_Tow(t inverse)), substitute the second identity, and apply naturality of the actual directImageRlimIso at t inverse. Functoriality of ordinary direct image and the preceding equation give the third identity. Only t is inverted. Retain the unit-route ringed tower-limit comparison import and dependency; its normalized natural comparison is used here through the specified scheme specialization.",
+   "uses": [
+    "prop-weil-pbc-direct-image-limits",
+    "lem-weil-ringed-tower-pushforward-limit-comparison"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0A07, lemma-Rf-commutes-with-Rlim, and Equation 0B56, equation-projection-formula-map; agent strict-augmentation refinement, returned steps 3–6"
+   }
+  },
+  {
+   "text": "For the square, unfold exchangeRealizationHPrime: its hom is definitionally towerProjection followed by towerPush of the inverse reduction/pullback comparison. Unfold completedBaseChangeMap and completedExchange: their ordered composite is definitionally the asserted Rlim(H), Rlim(V prime), inverse directImageRlimIso expression at the pulled reduction tower. Both square conjuncts are reflexivity.",
+   "uses": [
+    "lem-weil-pbc-strict-tower-exchange-mate-normalization",
+    "def-weil-pbc-completed-base-change-map"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0A07, lemma-Rf-commutes-with-Rlim, and Equation 0B56, equation-projection-formula-map; agent strict-augmentation refinement, returned steps 3–6"
+   }
+  }
+ ],
+ "proof_deps": [
+  "prop-weil-pbc-direct-image-limits",
+  "lem-weil-pbc-stratum-completion-unit-restriction",
+  "def-weil-pbc-completed-pullback",
+  "def-weil-pbc-exact-pullback-interface",
+  "lem-weil-pbc-strict-tower-exchange-mate-normalization",
+  "def-weil-pbc-completed-base-change-map",
+  "lem-weil-ringed-tower-pushforward-limit-comparison"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 0A07 and Equation 0B56; existing normalized scheme API (towerProjection_properties and reduction-comparison uniqueness), followed by functoriality and naturality. U7, 2026-10-23."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "projectionFormula|projection_formula|[Rr]lim|derivedLimit",
+   "results": "{\"top\": [\"Mathlib/CategoryTheory/ObjectProperty/Local.lean\", \"Mathlib/CategoryTheory/ObjectProperty/ColimitsOfShape.lean\", \"Mathlib/CategoryTheory/ObjectProperty/ColimitsOfShape.lean\", \"Mathlib/CategoryTheory/ObjectProperty/ColimitsOfShape.lean\", \"Mathlib/CategoryTheory/ObjectProperty/ColimitsOfShape.lean\", \"Mathlib/CategoryTheory/ObjectProperty/ColimitsOfShape.lean\", \"Mathlib/CategoryTheory/ObjectProperty/LimitsOfShape.lean\", \"Mathlib/CategoryTheory/ObjectProperty/LimitsOfShape.lean\"], \"n_hits\": 25, \"note\": \"\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the returned general adjunction, ordinary module pullback, limit, ring base-change and adic-completion declarations do not state this normalized completed-coefficient strict-tower assertion"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Limits.limit, CategoryTheory.NatTrans",
+   "results": "{\"top\": [], \"n_hits\": 0, \"note\": \"\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the returned general adjunction, ordinary module pullback, limit, ring base-change and adic-completion declarations do not state this normalized completed-coefficient strict-tower assertion"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived direct image commutes with completion augmentations through the projection formula for a strict inverse tower of quotient rings",
+   "results": "{\"top\": [\"AdicCompletion.instCommRing\", \"AdicCompletion.evalOneₐ\", \"AdicCompletion\", \"AdicCompletion.liftRingHom.congr_simp\", \"AdicCompletion.evalₐ\", \"AdicCompletion.eval\", \"AdicCompletion.kerProj\", \"AdicCompletion.subring\"], \"n_hits\": 8, \"note\": \"\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the returned general adjunction, ordinary module pullback, limit, ring base-change and adic-completion declarations do not state this normalized completed-coefficient strict-tower assertion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For sheaves of modules the derived direct image inverse limit comparison and projection formula map send a quotient tower completion unit to the direct image of the completed pullback unit",
+   "results": "{\"top\": [\"SheafOfModules.Presentation.map_π_eq\", \"SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom\", \"SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom_assoc\", \"SheafOfModules.instIsIsoPullbackObjUnitToUnitOfFinal\", \"CategoryTheory.Sheaf.ΓNatIsoLim\", \"SheafOfModules.pullbackPushforwardAdjunction_homEquiv_symm_unitToPushforwardObjUnit\", \"SheafOfModules.pullbackObjFreeIso_hom_naturality_assoc\", \"PresheafOfModules.comp_toPresheaf_map_sheafifyHomEquiv'_symm_hom\"], \"n_hits\": 8, \"note\": \"\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the returned general adjunction, ordinary module pullback, limit, ring base-change and adic-completion declarations do not state this normalized completed-coefficient strict-tower assertion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The counit tensor projection mate on diagram sites after derived inverse limit agrees with pushforward of a quotient completion augmentation",
+   "results": "{\"top\": [\"SheafOfModules.pushforwardPushforwardAdj_counit_app_val_app\", \"Condensed.profiniteSolidCounit\", \"SheafOfModules.pullbackPushforwardAdjunction_homEquiv_symm_unitToPushforwardObjUnit\", \"SheafOfModules.pushforwardPushforwardAdj_unit_app_val_app\", \"SheafOfModules.pullbackPushforwardAdjunction_homEquiv_pullbackObjUnitToUnit\", \"CategoryTheory.ExponentiableMorphism.pushforwardComp_hom_counit\", \"LightCondensed.ihomPoints_symm_comp\", \"AlgebraicGeometry.Scheme.Modules.restrictFunctorAdjCounitIso\"], \"n_hits\": 8, \"note\": \"\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the returned general adjunction, ordinary module pullback, limit, ring base-change and adic-completion declarations do not state this normalized completed-coefficient strict-tower assertion"
+  },
+  {
+   "tool": "grep",
+   "query": "projectionFormula|projection_formula|homotopyLimit|derivedLimit",
+   "results": "{\"top\": [], \"n_hits\": 0, \"note\": \"\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the returned general adjunction, ordinary module pullback, limit, ring base-change and adic-completion declarations do not state this normalized completed-coefficient strict-tower assertion"
+  },
+  {
+   "tool": "grep",
+   "query": "projectionFormula|projection_formula|derivedLimit|Rlim",
+   "results": "{\"top\": [\"Mathlib/CategoryTheory/Preadditive/Injective/InjectiveObject.lean\", \"Mathlib/CategoryTheory/ObjectProperty/Local.lean\", \"Mathlib/CategoryTheory/ObjectProperty/LimitsOfShape.lean\", \"Mathlib/CategoryTheory/ObjectProperty/LimitsOfShape.lean\", \"Mathlib/CategoryTheory/ObjectProperty/LimitsOfShape.lean\", \"Mathlib/CategoryTheory/ObjectProperty/LimitsOfShape.lean\", \"Mathlib/CategoryTheory/ObjectProperty/LimitsOfShape.lean\", \"Mathlib/CategoryTheory/Subobject/MonoOver.lean\"], \"n_hits\": 25, \"note\": \"\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: general derived-comparison factorization, ordinary limits, ordinary completion and underived sheaf pushforward do not supply the specified quotient-tower augmentation and its completion-unit identities"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.unit, CategoryTheory.NatTrans",
+   "results": "{\"top\": [\"TopCat.adj₂_unit\"], \"n_hits\": 1, \"note\": \"\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: general derived-comparison factorization, ordinary limits, ordinary completion and underived sheaf pushforward do not supply the specified quotient-tower augmentation and its completion-unit identities"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The derived direct image inverse limit comparison intertwines completion units on strict towers of module sheaves",
+   "results": "{\"top\": [\"ModuleCat.directLimitIsColimit\", \"IsAdicComplete.StrictMono.of_comp_lift\", \"AdicCompletion\", \"Module.DirectLimit.congr_symm_apply_of\", \"AdicCompletion.of\", \"AdicCompletion.instModuleOfIsScalarTower\", \"SheafOfModules.hasLimit\", \"AdicCompletion.instModuleOfIsScalarTower.congr_simp\"], \"n_hits\": 8, \"note\": \"\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: general derived-comparison factorization, ordinary limits, ordinary completion and underived sheaf pushforward do not supply the specified quotient-tower augmentation and its completion-unit identities"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived pushforward preserves the reduction tower augmentation and derived completion unit under the canonical inverse limit comparison",
+   "results": "{\"top\": [\"CategoryTheory.LocalizerMorphism.rightDerivedFunctorComparison\", \"CategoryTheory.LocalizerMorphism.rightDerivedFunctorComparison_fac\", \"CategoryTheory.Adjunction.derived'_unit\", \"CategoryTheory.LocalizerMorphism.rightDerivedFunctorComparison_fac_app\", \"CategoryTheory.LocalizerMorphism.rightDerivedFunctorComparison_fac_app_assoc\", \"CategoryTheory.LocalizerMorphism.rightDerivedFunctorComparison_fac_assoc\", \"CategoryTheory.Functor.mapDerivedCategoryFactorsh_hom_app\", \"CategoryTheory.Functor.rightDerivedZeroIsoSelf_inv_hom_id_assoc\"], \"n_hits\": 8, \"note\": \"\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: general derived-comparison factorization, ordinary limits, ordinary completion and underived sheaf pushforward do not supply the specified quotient-tower augmentation and its completion-unit identities"
+  },
+  {
+   "tool": "grep",
+   "query": "completion.*[Uu]nit|[Aa]ugment.*[Pp]rojection|[Pp]rojection.*[Aa]ugment",
+   "results": "{\"top\": [\"Mathlib/Topology/Algebra/Valued/ValuedField.lean\", \"Mathlib/RingTheory/AdicCompletion/AsTensorProduct.lean\", \"Mathlib/RingTheory/AdicCompletion/AsTensorProduct.lean\", \"Mathlib/RingTheory/AdicCompletion/AsTensorProduct.lean\", \"Mathlib/RingTheory/AdicCompletion/AsTensorProduct.lean\", \"Mathlib/RingTheory/DedekindDomain/FiniteAdeleRing.lean\", \"Mathlib/RingTheory/DedekindDomain/FiniteAdeleRing.lean\", \"Mathlib/RingTheory/DedekindDomain/AdicValuation.lean\"], \"n_hits\": 10, \"note\": \"\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: general derived-comparison factorization, ordinary limits, ordinary completion and underived sheaf pushforward do not supply the specified quotient-tower augmentation and its completion-unit identities"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Naturality of the derived inverse limit comparison for pushforward and the constant diagram unit, compatible with the tensor quotient augmentation",
+   "results": "{\"top\": [\"LightCondensed.ihomPoints_symm_comp\", \"PresheafOfModules.pushforwardComp\", \"AdicCompletion.ofTensorProduct_naturality\", \"SheafOfModules.pushforwardComp_inv_app_val_app\", \"localCohomology.diagramComp\", \"PresheafOfModules.pushforwardCompToPresheaf\", \"PresheafOfModules.pushforward₀CompToPresheaf\", \"CategoryTheory.Limits.lim_μ_π\"], \"n_hits\": 8, \"note\": \"\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: general derived-comparison factorization, ordinary limits, ordinary completion and underived sheaf pushforward do not supply the specified quotient-tower augmentation and its completion-unit identities"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-realization-completed-mate",
+  "date": "2026-10-22",
+  "group": "Q109"
+ },
+ "blueprint": {
+  "from": {
+   "node": "thm-weil-pbc-finite-extension",
+   "place": "Proof integral-lattice paragraph: completed integral exchange coherence; target augmentation, constant-tower normalization and direct-image/limit naturality, returned steps 3–6",
+   "via": [
+    "lem-weil-pbc-realization-completed-mate",
+    "lem-weil-pbc-condensed-e-realization",
+    "nt-target-proetale-e"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-weil-pbc-completed-target-augmentation-normalization",
+  "worker": "stage1",
+  "summary": "Retained the statement and reused all existing normalization results. Verified exact pullback for completed coefficients using the profinite-coefficient inverse-image theorem. Proved the three actual-map equalities by the strict augmentation equation, constant-tower unit normalization and twice applying naturality of the canonical direct-image/limit comparison. No new nodes.",
+  "blueprint": "thm-weil-pbc-finite-extension.proof.md, integral-lattice paragraph: coherence inherited from the integral level; target augmentation in the strict projection-formula realization.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-ringed-tower-pushforward-limit-comparison",
+    "why": "Generic natural comparison of derived composite direct images, used for its strict-tower naturality; the item keeps its prescribed canonical comparison and its augmentation route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-ringed-tower-pushforward-limit-comparison"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-O2-98ae5bcca",
+  "group": "O2",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-O2-98ae5bcca (reviewer sub-agent of L); spot-checked: PASS, no fixes. This is not a re-split (no repair note). Statement and stmt_deps are byte-identical to the Q109 creation snapshot and the base proof was empty, so nothing is weakened. No new nodes. Step 1: profinite-coefficient-inverse-image with Q_n=P_n gives c_u and c_{u,n}, which preserve projections and transitions, so h^*(P_n)_V ≅ (P_n)_U as A_U-algebras. proetale-operations gives exact termwise pullback, which meets the identified-ring hypotheses of the three normalization nodes. Step 2: def-completed-pullback gives γ_h = F_U(Lh^*_Tow i_L)λ, and reduction-pullback-derived-tower states τF^Tow(i)=i, so equation (1) follows. Step 3: constant-tower-pushforward-normalization (Rlim(χ)^{-1}a_Δ ≅ 1 under the canonical maps λ^{-1}) gives F(χ)λ_N = a_Δ G(λ), with the right orientation. a is the same underived-composite comparison as c in prop-direct-image-limits. Step 4: apply F_W to the strict identity h i = G^Tow(i)χ of augmented-diagram-projection-mate, then naturality of a (ringed-tower-pushforward-limit-comparison, recorded as a tool_use and accepted) gives equation (2). Step 5: naturality at t^{-1} plus equation (1) gives equation (3); only t is inverted. Step 6: H' and D_• match strict-tower-exchange-mate-normalization (projection map for ΔE followed by τ^{-1}), and c_Q matches c_{f',M} with M=Lg'^*_Tow K_• in def-completed-base-change-map, same orientation. Sources checked: Stacks 0A07 (l.5150, R lim is not a limit; never used as one), eq. 0B56 (l.13666, counit-tensor adjunct), blueprint main-20261015 thm-weil-pbc-finite-extension integral-lattice paragraph. No SGA. Edge cases I=A, I=0 with finite A, h=id and p=id all reduce correctly. Advisory: steps 3-4 are the same computation as the generic lem-sf-cbc-normalized-augmentation-transport (unit sk-prop-sf-cbc); citing it is optional. No duplicate found among the pbc/sf augmentation nodes."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.CompletedTargetAugmentationNormalization",
+  "declaration": "AlgebraicGeometry.Scheme.completedTargetAugmentationNormalization",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.completedTargetAugmentationNormalization",
+   "AlgebraicGeometry.Scheme.completedTargetAugmentationNormalization_square"
+  ],
+  "file": "lean/Sheaf/Paper/CompletedTargetAugmentationNormalization.lean",
+  "statement": "theorem completedTargetAugmentationNormalization (d : AdicCoefficientDatum A) {U V W : Scheme.{t}} (h : U ⟶ V) (p : U ⟶ W) (L : d.derived V) (_hL : d.TowerComplete V L) : (d.ordinaryToCompleted h L ≫ (completedRlim U (d.completedRing U)).map ((d.reductionTowerPullbackIso h).hom.app L) = d.completionUnit U ((d.pull h).obj L)) ∧ (d.completionUnit W ((d.push p).obj ((d.pull h).obj L)) ≫ (completedRlim W (d.completedRing W)).map (d.towerProjection p ((d.pull h).obj L)) = (d.push p).map (d.completionUnit U ((d.pull h).obj L)) ≫ (d.directImageRlimIso p).hom.app ((completedReductionTower U d).obj ((d.pull h).obj L))) ∧ (d.completionUnit W ((d.push p).obj ((d.pull h).obj L)) ≫ (completedRlim W (d.completedRing W)).map (d.towerProjection p ((d.pull h).obj L) ≫ (d.towerPush p).map ((d.reductionTowerPullbackIso h).inv.app L)) = (d.push p).map (d.ordinaryToCompleted h L) ≫ (d.directImageRlimIso p).hom.app ((d.towerPull h).obj ((completedReductionTower V d).obj L)))",
+  "branch": "newtargets-dag",
+  "by": "Q36",
+  "date": "2026-10-22",
+  "existing": false,
+  "note": "The three identities use the published datum-indexed maps directly. The square specialization records the exact target H prime and the final direct-image/Rlim comparison in completedBaseChangeMap. No dependency interface or mathematical statement is changed."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-ad46a1138",
+  "group": "Q36",
+  "result": "pass",
+  "note": "Node changed only in lean; lean.statement verbatim. Read the item module, all 11 stmt_dep records and the side-live declarations ordinaryToCompleted, completionUnit, TowerComplete (+towerComplete_iff_intrinsic), constantRlimAdjunction, reductionTowerPullbackIso (normalized), towerProjection (counit-tensor adjunct), directImageRlimIso (conjugate of identity const/pull square), exchangeRealizationHPrime, completedExchange/completedBaseChangeMap. All three identities use the actual canonical maps with correct orientation; conjunct 3 follows from conjuncts 1+2 by naturality of c at t^-1. The square theorem identifies H' and c_Q^-1 in completedBaseChangeMap exactly. No extra hypotheses (h, p arbitrary; completeness only of L; universes as published). Edge cases I=A, I=0, identities, empty schemes OK. Sorry-only, docstrings with source and blueprint tags, no global build or live write, real ProEt. Advisories: conjunct 2 = towerProjection_properties clause 3 (node demands it); proof-only plain imports; second reading is a self-check (H11 advisory); _hL unused. No compile (no change)."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U7",
+  "result": "pass",
+  "landing": "20261023T135705-L-2959055",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

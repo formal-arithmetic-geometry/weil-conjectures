@@ -1,0 +1,268 @@
+{
+ "id": "lem-sfb-scheme-quasifinite-at-base-change",
+ "kind": "statement",
+ "title": "Pointwise quasi-finiteness of schemes is invariant under arbitrary base change",
+ "statement": "Let $f:X\\to T$ be a morphism of schemes [def-pc-scheme] locally of finite type [def-weil-finite-type-morphism], and let $b:T^{\\prime}\\to T$ be any morphism of schemes. Form $X^{\\prime}=X\\times_TT^{\\prime}$ [def-pc-fibre-product], with projections $a:X^{\\prime}\\to X$ and $f^{\\prime}:X^{\\prime}\\to T^{\\prime}$. For every $x^{\\prime}\\in X^{\\prime}$, the morphism $f^{\\prime}$ is quasi-finite at $x^{\\prime}$ if and only if $f$ is quasi-finite at $a(x^{\\prime})$, using the pointwise scheme notion [pqf-def-quasifinite]. No flatness, surjectivity, finite-type, separatedness, or Noetherian hypothesis on $b$ is imposed.",
+ "source": {
+  "document": "literature/stacks-project/morphisms.tex",
+  "place": "Tag 01TM (lemma-base-change-quasi-finite), clause (1)."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-finite-type-morphism",
+  "def-pc-fibre-product",
+  "pqf-def-quasifinite"
+ ],
+ "proof": [
+  {
+   "text": "By [lem-weil-pbc-lft-base-change], $f^{\\prime}$ is locally of finite type. For either $(h:Z\\to B,z)=(f,a(x^{\\prime}))$ or $(f^{\\prime},x^{\\prime})$, choose an affine open $V\\subset B$ about $h(z)$ and then an affine open $U\\subset h^{-1}(V)$ about $z$, by [lem-weil-pbc-affine-opens-basis]. Write $R=\\mathcal O_B(V)$, $A=\\mathcal O_Z(U)$, and let $\\mathfrak q\\subset A$ correspond to $z$. The induced map $R\\to A$ is of finite type by [lem-weil-pbc-lft-affine-pairs].",
+   "uses": [
+    "lem-weil-pbc-lft-base-change",
+    "lem-weil-pbc-affine-opens-basis",
+    "lem-weil-pbc-lft-affine-pairs"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 01TM (lemma-base-change-quasi-finite), proof of (1); Tag 01TH (lemma-quasi-finite-at-point-characterize), (1) and (4)."
+   }
+  },
+  {
+   "text": "For each of these chosen pairs, $h$ is quasi-finite at $z$ if and only if $R\\to A$ is quasi-finite at $\\mathfrak q$. Indeed, the forward direction first gives isolation of the point of $Z_{h(z)}$ by [lem-weil-pbc-quasi-finite-at-point-isolated]; [lem-weil-pbc-isolated-fibre-point-quasi-finite-affine-pairs] then gives quasi-finiteness for the chosen affine pair. Conversely, this finite-type affine pair is exactly a witness in [pqf-def-quasifinite].",
+   "uses": [
+    "lem-weil-pbc-quasi-finite-at-point-isolated",
+    "lem-weil-pbc-isolated-fibre-point-quasi-finite-affine-pairs",
+    "pqf-def-quasifinite"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 01TM (lemma-base-change-quasi-finite), proof of (1); Tag 01TH (lemma-quasi-finite-at-point-characterize), (1) and (4)."
+   }
+  },
+  {
+   "text": "Put $\\mathfrak p=(R\\to A)^{-1}(\\mathfrak q)$. By [lem-weil-pbc-ring-quasifinite-zero-fibre-dimension], quasi-finiteness of $R\\to A$ at $\\mathfrak q$ is equivalent to dimension zero at the corresponding point of $\\operatorname{Spec}(A\\otimes_R\\kappa(\\mathfrak p))$. By [lem-sbc-affine-coordinate-fibre-dimension], this is dimension zero in the fibre of $U\\to V$ at $z$ (the tensor factors may be interchanged by $a\\otimes c\\mapsto c\\otimes a$). By [lem-weil-pbc-open-fibre-product], that fibre is an open neighbourhood of the distinguished point in $Z_{h(z)}$, compatibly with its projection. Dimension at a point agrees on an open neighbourhood by [def-kun-topological-dimension-at-point]: intersect any ambient neighbourhood with this open, and conversely regard its open neighbourhoods as ambient opens. Thus the criterion in step 2 is equivalent to $\\dim_z Z_{h(z)}=0$.",
+   "uses": [
+    "lem-weil-pbc-ring-quasifinite-zero-fibre-dimension",
+    "lem-sbc-affine-coordinate-fibre-dimension",
+    "lem-weil-pbc-open-fibre-product",
+    "def-kun-topological-dimension-at-point"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 01TM (1), reduction to affine opens; Tag 0397 (lemma-locally-quasi-finite-rel-dimension-0), second proof; Algebra Tag 00PJ (lemma-isolated-point), (1) iff (4)."
+   }
+  },
+  {
+   "text": "For $x=a(x^{\\prime})$, $t^{\\prime}=f^{\\prime}(x^{\\prime})$ and $t=b(t^{\\prime})=f(x)$, [lem-sc-fibre-dimension-after-base-change] gives $\\dim_{x^{\\prime}} X^{\\prime}_{t^{\\prime}}=\\dim_x X_t$. Therefore the dimension-zero conditions obtained in steps 2--3 for $f^{\\prime}$ and $f$ are equivalent. This is the required equivalence at $x^{\\prime}$. The dimension comparison allows arbitrary $b$; none of the preceding steps added a hypothesis on $b$.",
+   "uses": [
+    "lem-sc-fibre-dimension-after-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 02FY (lemma-dimension-fibre-after-base-change), (1); Tag 01TM (1)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-lft-base-change",
+  "lem-weil-pbc-affine-opens-basis",
+  "lem-weil-pbc-lft-affine-pairs",
+  "lem-weil-pbc-quasi-finite-at-point-isolated",
+  "lem-weil-pbc-isolated-fibre-point-quasi-finite-affine-pairs",
+  "pqf-def-quasifinite",
+  "lem-weil-pbc-ring-quasifinite-zero-fibre-dimension",
+  "lem-sbc-affine-coordinate-fibre-dimension",
+  "lem-weil-pbc-open-fibre-product",
+  "def-kun-topological-dimension-at-point",
+  "lem-sc-fibre-dimension-after-base-change"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/morphisms.tex",
+  "place": "Tag 01TM (1): affine reduction through 01TH and Algebra 00PP; dimension comparison packaged as Tag 02FY (1), and the dimension-zero criterion as Algebra 00PJ (1) iff (4)."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "quasiFiniteAt.*(pullback|baseChange)|quasiFiniteAt_.*iff|QuasiFiniteAt",
+   "results": "{\"t\": \"2026-10-23T10:06:37Z\", \"tool\": \"grep\", \"query\": \"quasiFiniteAt.*(pullback|baseChange)|quasiFiniteAt_.*iff|QuasiFiniteAt\", \"sub\": \"AlgebraicGeometry/Morphisms/QuasiFinite.lean\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"339\", \"343\", \"344\", \"346\", \"358\"], \"digest\": \"392aec4ffdcd6774\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: read Mathlib/AlgebraicGeometry/Morphisms/QuasiFinite.lean:339-444 and RingTheory/QuasiFinite/Basic.lean. The hits give the stalk predicate, isolated-point criterion, global stability or forward pointwise ascent; none gives this bidirectional arbitrary scheme-base-change statement in the Stacks finite-type notion. This requires a comparison and scheme fibre argument, not a one-line specialization."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A locally finite type scheme morphism is quasi finite at x if and only if its base change is quasi finite at any x prime lying above x",
+   "results": "{\"t\": \"2026-10-23T10:06:37Z\", \"tool\": \"leansearch\", \"query\": \"A locally finite type scheme morphism is quasi finite at x if and only if its base change is quasi finite at any x prime lying above x\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.QuasiFinite.baseChange\", \"Algebra.QuasiFiniteAt.baseChange\", \"AlgebraicGeometry.LocallyQuasiFinite.recOn\", \"AlgebraicGeometry.instLocallyQuasiFiniteOfIsFinite\", \"RingHom.QuasiFinite.isStableUnderBaseChange\", \"AlgebraicGeometry.instHasRingHomPropertyLocallyQuasiFiniteQuasiFinite\", \"AlgebraicGeometry.LocallyQuasiFinite\", \"AlgebraicGeometry.LocallyQuasiFinite.mk\"], \"digest\": \"5651fc280103f342\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: read Mathlib/AlgebraicGeometry/Morphisms/QuasiFinite.lean:339-444 and RingTheory/QuasiFinite/Basic.lean. The hits give the stalk predicate, isolated-point criterion, global stability or forward pointwise ascent; none gives this bidirectional arbitrary scheme-base-change statement in the Stacks finite-type notion. This requires a comparison and scheme fibre argument, not a one-line specialization."
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Scheme.Hom.QuasiFiniteAt",
+   "results": "{\"t\": \"2026-10-23T10:06:37Z\", \"tool\": \"loogle\", \"query\": \"AlgebraicGeometry.Scheme.Hom.QuasiFiniteAt\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Hom.QuasiFiniteAt\", \"AlgebraicGeometry.Scheme.Hom.quasiFiniteAt\", \"AlgebraicGeometry.Scheme.Hom.quasiFiniteAt_comp_iff\", \"AlgebraicGeometry.Scheme.Hom.quasiFiniteAt_iff\", \"AlgebraicGeometry.Scheme.Hom.quasiFiniteAt_comp_iff_of_isOpenImmersion\", \"AlgebraicGeometry.Scheme.Hom.QuasiFiniteAt.isClopen_singleton_asFiber\", \"AlgebraicGeometry.Scheme.Hom.quasiFiniteAt_iff_isOpen_singleton_asFiber\", \"AlgebraicGeometry.Scheme.Hom.QuasiFiniteAt.quasiFiniteAt\"], \"digest\": \"d03761b9a2e45fff\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: read Mathlib/AlgebraicGeometry/Morphisms/QuasiFinite.lean:339-444 and RingTheory/QuasiFinite/Basic.lean. The hits give the stalk predicate, isolated-point criterion, global stability or forward pointwise ascent; none gives this bidirectional arbitrary scheme-base-change statement in the Stacks finite-type notion. This requires a comparison and scheme fibre argument, not a one-line specialization."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Quasi finiteness at a scheme point is unchanged at every point above it under arbitrary base change of a locally finite type morphism",
+   "results": "{\"t\": \"2026-10-23T10:06:40Z\", \"tool\": \"leanfinder\", \"query\": \"Quasi finiteness at a scheme point is unchanged at every point above it under arbitrary base change of a locally finite type morphism\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.instIsStableUnderBaseChangeSchemeLocallyQuasiFinite\", \"AlgebraicGeometry.LocallyQuasiFinite.quasiFinite_appLE\", \"AlgebraicGeometry.instIsMultiplicativeSchemeLocallyQuasiFinite\", \"AlgebraicGeometry.locallyOfFiniteType_isStableUnderBaseChange\", \"AlgebraicGeometry.IsFinite.instIsStableUnderBaseChangeScheme\", \"AlgebraicGeometry.instHasRingHomPropertyLocallyQuasiFiniteQuasiFinite\", \"AlgebraicGeometry.instIsStableUnderCompositionSchemeLocallyQuasiFinite\", \"AlgebraicGeometry.quasiCompact_isStableUnderBaseChange\"], \"digest\": \"dad7cb05c5110fc9\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: read Mathlib/AlgebraicGeometry/Morphisms/QuasiFinite.lean:339-444 and RingTheory/QuasiFinite/Basic.lean. The hits give the stalk predicate, isolated-point criterion, global stability or forward pointwise ascent; none gives this bidirectional arbitrary scheme-base-change statement in the Stacks finite-type notion. This requires a comparison and scheme fibre argument, not a one-line specialization."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For schemes locally of finite type, quasi finiteness at a point is equivalent to quasi finiteness at a point above it after any base change",
+   "results": "{\"t\": \"2026-10-23T10:06:41Z\", \"tool\": \"leanfinder\", \"query\": \"For schemes locally of finite type, quasi finiteness at a point is equivalent to quasi finiteness at a point above it after any base change\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.instIsStableUnderBaseChangeSchemeLocallyQuasiFinite\", \"Algebra.QuasiFiniteAt.baseChange\", \"AlgebraicGeometry.locallyOfFiniteType_isStableUnderBaseChange\", \"AlgebraicGeometry.LocallyQuasiFinite.quasiFinite_appLE\", \"AlgebraicGeometry.instHasRingHomPropertyLocallyQuasiFiniteQuasiFinite\", \"AlgebraicGeometry.locallyQuasiFinite_iff\", \"AlgebraicGeometry.IsFinite.instIsStableUnderBaseChangeScheme\", \"AlgebraicGeometry.instIsMultiplicativeSchemeLocallyQuasiFinite\"], \"digest\": \"2c392ceecb3bbe5c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: read Mathlib/AlgebraicGeometry/Morphisms/QuasiFinite.lean:339-444 and RingTheory/QuasiFinite/Basic.lean. The hits give the stalk predicate, isolated-point criterion, global stability or forward pointwise ascent; none gives this bidirectional arbitrary scheme-base-change statement in the Stacks finite-type notion. This requires a comparison and scheme fibre argument, not a one-line specialization."
+  },
+  {
+   "tool": "grep",
+   "query": "quasiFiniteAt.*(baseChange|pullback)|QuasiFiniteAt.*(baseChange|pullback)|baseChange.*QuasiFiniteAt|quasiFiniteAt_comp_iff",
+   "results": "{\"t\": \"2026-10-23T10:09:06Z\", \"tool\": \"grep\", \"query\": \"quasiFiniteAt.*(baseChange|pullback)|QuasiFiniteAt.*(baseChange|pullback)|baseChange.*QuasiFiniteAt|quasiFiniteAt_comp_iff\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/Morphisms/QuasiFinite.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/QuasiFinite.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/QuasiFinite.lean\", \"Mathlib/AlgebraicGeometry/ZariskisMainTheorem.lean\", \"Mathlib/AlgebraicGeometry/ZariskisMainTheorem.lean\", \"Mathlib/AlgebraicGeometry/ZariskisMainTheorem.lean\", \"Mathlib/AlgebraicGeometry/ZariskisMainTheorem.lean\", \"Mathlib/AlgebraicGeometry/ZariskisMainTheorem.lean\"], \"digest\": \"3d14ac4e5880e159\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: read Mathlib/AlgebraicGeometry/Morphisms/QuasiFinite.lean:339-444 and RingTheory/QuasiFinite/Basic.lean. The hits give the stalk predicate, isolated-point criterion, global stability or forward pointwise ascent; none gives this bidirectional arbitrary scheme-base-change statement in the Stacks finite-type notion. This requires a comparison and scheme fibre argument, not a one-line specialization."
+  },
+  {
+   "tool": "grep",
+   "query": "quasiFiniteAt.*(baseChange|pullback)|QuasiFiniteAt.*(baseChange|pullback)|quasiFiniteAt_iff",
+   "results": "{\"t\": \"2026-10-23T12:01:45Z\", \"tool\": \"grep\", \"query\": \"quasiFiniteAt.*(baseChange|pullback)|QuasiFiniteAt.*(baseChange|pullback)|quasiFiniteAt_iff\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/ZariskisMainTheorem.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/QuasiFinite.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/QuasiFinite.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/QuasiFinite.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/QuasiFinite.lean\"], \"digest\": \"1a116e299abae0d2\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: inspected Mathlib/AlgebraicGeometry/Morphisms/QuasiFinite.lean:339-444 and RingTheory/QuasiFinite/Basic.lean:355-380. Scheme hits give the isolated-point criterion and global stability; the ring theorem gives ascent only. Neither directly states bidirectional scheme pointwise invariance in the finite-type affine-pair notion."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Pointwise quasi finiteness of a locally finite type scheme morphism is invariant under arbitrary base change",
+   "results": "{\"t\": \"2026-10-23T12:01:46Z\", \"tool\": \"leansearch\", \"query\": \"Pointwise quasi finiteness of a locally finite type scheme morphism is invariant under arbitrary base change\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.QuasiFinite.baseChange\", \"RingHom.QuasiFinite.isStableUnderBaseChange\", \"Algebra.QuasiFiniteAt.baseChange\", \"AlgebraicGeometry.HasAffineProperty.affineAnd_isStableUnderBaseChange\", \"AlgebraicGeometry.IsFinite.instIsStableUnderBaseChangeScheme\", \"AlgebraicGeometry.locallyOfFiniteType_isStableUnderBaseChange\", \"AlgebraicGeometry.locallyOfFinitePresentation_isStableUnderBaseChange\", \"AlgebraicGeometry.quasiCompact_isStableUnderBaseChange\"], \"digest\": \"d703dc143e8769ba\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: inspected Mathlib/AlgebraicGeometry/Morphisms/QuasiFinite.lean:339-444 and RingTheory/QuasiFinite/Basic.lean:355-380. Scheme hits give the isolated-point criterion and global stability; the ring theorem gives ascent only. Neither directly states bidirectional scheme pointwise invariance in the finite-type affine-pair notion."
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Scheme.Hom.QuasiFiniteAt",
+   "results": "{\"t\": \"2026-10-23T12:01:46Z\", \"tool\": \"loogle\", \"query\": \"AlgebraicGeometry.Scheme.Hom.QuasiFiniteAt\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Hom.QuasiFiniteAt\", \"AlgebraicGeometry.Scheme.Hom.quasiFiniteAt\", \"AlgebraicGeometry.Scheme.Hom.quasiFiniteAt_comp_iff\", \"AlgebraicGeometry.Scheme.Hom.quasiFiniteAt_iff\", \"AlgebraicGeometry.Scheme.Hom.quasiFiniteAt_comp_iff_of_isOpenImmersion\", \"AlgebraicGeometry.Scheme.Hom.QuasiFiniteAt.isClopen_singleton_asFiber\", \"AlgebraicGeometry.Scheme.Hom.quasiFiniteAt_iff_isOpen_singleton_asFiber\", \"AlgebraicGeometry.Scheme.Hom.QuasiFiniteAt.quasiFiniteAt\"], \"digest\": \"d03761b9a2e45fff\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: inspected Mathlib/AlgebraicGeometry/Morphisms/QuasiFinite.lean:339-444 and RingTheory/QuasiFinite/Basic.lean:355-380. Scheme hits give the isolated-point criterion and global stability; the ring theorem gives ascent only. Neither directly states bidirectional scheme pointwise invariance in the finite-type affine-pair notion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A locally finite type scheme morphism is quasi finite at a point if and only if its arbitrary base change is quasi finite at a point above it",
+   "results": "{\"t\": \"2026-10-23T12:01:52Z\", \"tool\": \"leanfinder\", \"query\": \"A locally finite type scheme morphism is quasi finite at a point if and only if its arbitrary base change is quasi finite at a point above it\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.instIsStableUnderBaseChangeSchemeLocallyQuasiFinite\", \"AlgebraicGeometry.locallyQuasiFinite_iff\", \"AlgebraicGeometry.locallyOfFiniteType_isStableUnderBaseChange\", \"AlgebraicGeometry.instHasRingHomPropertyLocallyQuasiFiniteQuasiFinite\", \"AlgebraicGeometry.instIsMultiplicativeSchemeLocallyQuasiFinite\", \"AlgebraicGeometry.LocallyQuasiFinite\", \"AlgebraicGeometry.IsFinite.instIsStableUnderBaseChangeScheme\", \"AlgebraicGeometry.LocallyQuasiFinite.quasiFinite_appLE\"], \"digest\": \"f25a91c98373c0dc\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: inspected Mathlib/AlgebraicGeometry/Morphisms/QuasiFinite.lean:339-444 and RingTheory/QuasiFinite/Basic.lean:355-380. Scheme hits give the isolated-point criterion and global stability; the ring theorem gives ascent only. Neither directly states bidirectional scheme pointwise invariance in the finite-type affine-pair notion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Quasi finite locus of a locally finite type morphism is the inverse image of the quasi finite locus after arbitrary base change",
+   "results": "{\"t\": \"2026-10-23T12:03:39Z\", \"tool\": \"leanfinder\", \"query\": \"Quasi finite locus of a locally finite type morphism is the inverse image of the quasi finite locus after arbitrary base change\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.instIsStableUnderBaseChangeSchemeLocallyQuasiFinite\", \"AlgebraicGeometry.locallyOfFiniteType_isStableUnderBaseChange\", \"AlgebraicGeometry.LocallyQuasiFinite.quasiFinite_appLE\", \"RingHom.QuasiFinite.isStableUnderBaseChange\", \"AlgebraicGeometry.instHasRingHomPropertyLocallyQuasiFiniteQuasiFinite\", \"AlgebraicGeometry.LocallyQuasiFinite\", \"AlgebraicGeometry.IsFinite.instIsStableUnderBaseChangeScheme\", \"AlgebraicGeometry.instLocallyQuasiFiniteSndScheme\"], \"digest\": \"4e7482f70e1695f1\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: inspected Mathlib/AlgebraicGeometry/Morphisms/QuasiFinite.lean:339-444 and RingTheory/QuasiFinite/Basic.lean:355-380. Scheme hits give the isolated-point criterion and global stability; the ring theorem gives ascent only. Neither directly states bidirectional scheme pointwise invariance in the finite-type affine-pair notion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Quasi finite locus of a locally finite type morphism is the inverse image of the quasi finite locus after arbitrary base change",
+   "results": "{\"t\": \"2026-10-23T12:03:39Z\", \"tool\": \"leanfinder\", \"query\": \"Quasi finite locus of a locally finite type morphism is the inverse image of the quasi finite locus after arbitrary base change\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.instIsStableUnderBaseChangeSchemeLocallyQuasiFinite\", \"AlgebraicGeometry.locallyOfFiniteType_isStableUnderBaseChange\", \"AlgebraicGeometry.LocallyQuasiFinite.quasiFinite_appLE\", \"RingHom.QuasiFinite.isStableUnderBaseChange\", \"AlgebraicGeometry.instHasRingHomPropertyLocallyQuasiFiniteQuasiFinite\", \"AlgebraicGeometry.LocallyQuasiFinite\", \"AlgebraicGeometry.IsFinite.instIsStableUnderBaseChangeScheme\", \"AlgebraicGeometry.instLocallyQuasiFiniteSndScheme\"], \"digest\": \"4e7482f70e1695f1\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: second phrasing returns scheme-level global base-change stability and ring-level ascent, not the bidirectional pointwise assertion. Sources read in QuasiFinite.lean:339-444 and Basic.lean:355-380."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-space-quasifinite-locus-open",
+  "date": "2026-10-23",
+  "group": "Q151"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": "det-thm-sf-ctf-stability-direct-images",
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Algebraicity and smoothness of the stack of all nodal curves. Supporting input: Tag 0DZX (lemma-big-smooth-part-curves), clauses (1) and (3), with the open substack lci+ in the statement. This is the full isolated-lci locus, not the nodal locus. Supporting input for the intersection construction and smoothness argument of Tag 0DZX: Finite-fibre base open for a closed subset in a proper algebraic space. Supporting input: The quasi-finite locus of a locally finite type algebraic space map. Scheme input: Stacks 01TM(1), used on the base-changed etale atlas.",
+   "via": [
+    "lem-sfb-space-quasifinite-locus-open",
+    "lem-sfb-space-closed-subset-finite-fibre-open",
+    "lem-sfb-isolated-lci-curve-smooth-open",
+    "lem-sfb-nodal-curve-stack-smooth",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-scheme-quasifinite-at-base-change",
+  "worker": "stage1",
+  "summary": "Verified arbitrary pointwise base-change invariance against Stacks 01TM(1). Reused affine-pair quasi-finiteness, the ring zero-fibre-dimension criterion, the affine coordinate/fibre comparison and fibre-dimension invariance. No new nodes; no exact project attachment or Mathlib match. Repaired the null blueprint ancestor by reading the recorded ancestor chain.",
+  "blueprint": "Supports det-thm-sf-ctf-stability-direct-images, proof (3), via the recorded admissible-direct-image/alteration/moduli chain and the quasi-finite locus of a locally finite type algebraic-space map; realizes the 01TM(1) scheme base-change input named in from.place.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-affine-opens-basis",
+    "why": "Generic affine basis used to choose the two charts; this unit supplies no replacement."
+   },
+   {
+    "node": "lem-weil-pbc-lft-affine-pairs",
+    "why": "Generic local finite-type affine criterion, required for the ring criterion."
+   },
+   {
+    "node": "lem-weil-pbc-quasi-finite-at-point-isolated",
+    "why": "Generic 01TH forward pointwise criterion, needed to work with the chosen chart."
+   },
+   {
+    "node": "lem-weil-pbc-isolated-fibre-point-quasi-finite-affine-pairs",
+    "why": "Generic 01TH affine-pair consequence; no scheme quasi-finite base-change claim is taken from it."
+   },
+   {
+    "node": "lem-weil-pbc-ring-quasifinite-zero-fibre-dimension",
+    "why": "Generic finite-type ring criterion supplying the dimension-zero condition."
+   },
+   {
+    "node": "lem-sbc-affine-coordinate-fibre-dimension",
+    "why": "Generic affine scheme/ring fibre-dimension identification with no extra finiteness hypotheses."
+   },
+   {
+    "node": "lem-weil-pbc-open-fibre-product",
+    "why": "Generic open-chart fibre-product identification compatible with projections."
+   },
+   {
+    "node": "lem-sc-fibre-dimension-after-base-change",
+    "why": "Generic 02FY(1) equality of fibre dimensions under arbitrary base change, not global quasi-finiteness descent."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-affine-opens-basis",
+  "lem-weil-pbc-lft-affine-pairs",
+  "lem-weil-pbc-quasi-finite-at-point-isolated",
+  "lem-weil-pbc-isolated-fibre-point-quasi-finite-affine-pairs",
+  "lem-weil-pbc-ring-quasifinite-zero-fibre-dimension",
+  "lem-sbc-affine-coordinate-fibre-dimension",
+  "lem-weil-pbc-open-fibre-product",
+  "lem-sc-fibre-dimension-after-base-change"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-NV-924e49451",
+  "group": "NV",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NV-924e49451 (reviewer sub-agent of L); spot-checked: Stage-1 split with 0 new nodes. The item statement is unchanged; live and side-live still show the item unsplit with the same statement, so no other group has superseded it. The statement matches Stacks morphisms.tex Tag 01TM (lemma-base-change-quasi-finite) clause (1): f locally of finite type, b arbitrary, equivalence pointwise. Step 1: 01T4 makes f' locally of finite type, 01IT gives the affine charts V and then U, and 01T2 makes R→A of finite type. Step 2: 01TH (1)⇒(2) plus the isolated-point affine-pair node give the forward direction for any chosen pair; the pair is itself a witness for pqf-def-quasifinite, which gives the converse. Step 3: the 0397 ring criterion turns this into dimension zero at the point of Spec(A⊗κ(p)); lem-sbc-affine-coordinate-fibre-dimension identifies that with the local dimension of the scheme fibre of U→V; 01JR (S=B, W=Spec κ, which factors through V) makes that fibre an open of Z_v compatibly with the projections; and local dimension at a point does not change on an open, which is elementary from def-kun-topological-dimension-at-point. Step 4: 02FY(1), checked in the source, needs only f locally of finite type and arbitrary g. No cycle (transitive closure of 196 nodes). The 01TM-tagged DAG nodes are ascent-only or global, so none duplicates the item. The declared tool_uses are all generic AG or algebra lemmas and I accept them. Filling blueprint.from.node with det-thm-sf-ctf-stability-direct-images is consistent with the via chain. No SGA. Edge cases checked: empty source, identity b, field extension, k[x]/x², and the generic point of A¹ (dim 1, correctly not quasi-finite). No fixes."
+ }
+}

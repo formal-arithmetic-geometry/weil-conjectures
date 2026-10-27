@@ -166,7 +166,8 @@ private theorem supportSheafIso
       infer_instance
     have ha : IsIso (H.map (DerivedCategory.Qh.map
         ((a.mapHomotopyCategory (.up ℤ)).app P))) := by
-      simpa only [compactSupportComparisonOnHomotopy, H.map_comp,
+      simpa only [compactSupportComparisonOnHomotopy, normalizationHomotopyComponent,
+        H.map_comp,
         isIso_comp_left_iff, isIso_comp_right_iff] using hall
     have hh : IsIso ((HomotopyCategory.homologyFunctor _ (.up ℤ) 0).map
         ((a.mapHomotopyCategory (.up ℤ)).app P)) :=

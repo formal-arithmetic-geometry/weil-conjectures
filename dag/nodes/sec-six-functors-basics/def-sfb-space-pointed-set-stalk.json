@@ -1,0 +1,128 @@
+{
+ "id": "def-sfb-space-pointed-set-stalk",
+ "kind": "definition",
+ "title": "Set-valued pointed étale stalks and their germs on algebraic spaces",
+ "status": "split",
+ "import_flags": [],
+ "statement": "Work in [def-weil-size-convention]. Let $S$ be a scheme [def-pc-scheme] and $X$ an algebraic space over $S$ [def-trf-algebraic-space]. Let $P$ be an $S$-scheme and $x:h_P\\to X$. Use the category $N_X(x)$ of pointed etale scheme neighbourhoods and its chart projection from [def-sfb-space-pointed-etale-abelian-stalk]. For a sheaf of sets $F$ on $X_{\\mathrm{et}}$ [def-weil-pbc-sites-and-cohomology], define the pointed set stalk $F_x=\\operatorname{colim}_{N_X(x)^{op}}F(U)$ [def-weil-pbc-category-colimit] in the containing universe. On a sheaf morphism take the induced map of colimits, giving a functor from sheaves of sets to sets. For each pointed chart $(U,p)$ the germ $F(U)\\to F_x$ is its colimit cocone map. When $P=\\operatorname{Spec}\\Omega$ with $\\Omega$ an algebraically closed field, these are the geometric set stalk and its germ maps.",
+ "stmt_deps": [
+  "def-weil-size-convention",
+  "def-pc-scheme",
+  "def-trf-algebraic-space",
+  "def-sfb-space-pointed-etale-abelian-stalk",
+  "def-weil-pbc-sites-and-cohomology",
+  "def-weil-pbc-category-colimit"
+ ],
+ "source": {
+  "document": "literature/stacks-project/spaces-properties.tex",
+  "place": "Tag 04JY (definition-stalk), section-points; Tag 04K0 (lemma-stalk-gives-point), identification with the point stalk."
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Set valued geometric stalk and germ on small etale site of an algebraic space as pointed neighbourhood colimit",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"TopCat.Presheaf.stalk\", \"module\": \"Mathlib.Topology.Sheaves.Stalks\", \"type\": \"(ℱ : X.Presheaf C) (x : X) : C\", \"doc\": \"The stalk of a presheaf $\\\\mathcal{F}$ on a topological space $X$ at a point $x$ is the object in the category $\\\\mathcal{C}$ obtained by applying the stalk functor at $x$ to $\\\\mathcal{F}$.\"}\n  {\"name\": \"TopCat.Presheaf.germ\", \"module\": \"Mathlib.Topology.Sheaves.Stalks\", \"type\": \"(F : X.Presheaf C) (U : Opens X) (x : X) (hx : x ∈ U) : F.obj (op U) ⟶ stalk F x\", \"doc\": \"For a presheaf $\\\\mathcal{F}$ on a topological space $X$ with values in a category $\\\\mathcal{C}$, an open set $U \\\\subseteq X$ containing a point $x$, the morphism $\\\\mathcal{F}(U) \\\\to \\\\mathcal{F}_x$ sen\"}\n  {\"name\": \"TopCat.Presheaf.stalkFunctor\", \"module\": \"Mathlib.Topology.Sheaves.Stalks\", \"type\": \"(x : X) : X.Presheaf C ⥤ C\", \"doc\": \"Given a topological space `X` and a category `C` with all colimits, this defines the stalk functor at a point `x \\\\in X`. It is a functor from the category of presheaves on `X` with values in `C` to th\"}\n  {\"name\": \"TopCat.Presheaf.Γgerm\", \"module\": \"Mathlib.Topology.Sheaves.Stalks\", \"type\": \"(F : X.Presheaf C) (x : X) : F.obj (op ⊤) ⟶ stalk F x\", \"doc\": \"The morphism sending a global section of a presheaf $\\\\mathcal{F}$ on a topological space $X$ to its germ at a point $x \\\\in X$, constructed as the canonical inclusion into the colimit over all open nei\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.smallEtaleTopology\", \"module\": \"Mathlib.AlgebraicGeometry.Sites.Etale\", \"type\": \"(X : Scheme.{u}) : GrothendieckTopology X.Etale\", \"doc\": \"For a scheme $X$, the Grothendieck topology on the category of étale morphisms to $X$, constructed by inducing the standard Grothendieck topology on the over category via the forgetful functor. Coveri\"}\n  {\"name\": \"TopCat.Presheaf.stalkFunctor_map_germ_apply'\", \"module\": \"Mathlib.Topology.Sheaves.Stalks\", \"type\": \"[ConcreteCategory C FC] {F G : X.Presheaf C} (U : Opens X) (x : X) (hx : x ∈ U) (f : F ⟶ G) (s) :\\n  DFunLike.coe (F := ToHom (F.stalk x) (G.stalk x)) (ConcreteCategory.hom ((stalkFunctor C x).map f))\\n      (F.germ U x hx s) =\\n    G.germ U x hx (f.app (op U) s)\", \"doc\": \"For a concrete category $\\\\mathcal{C}$, presheaves $F, G$ on a topological space $X$, an open set $U \\\\subseteq X$ containing a point $x$, and a natural transformation $f : F \\\\to G$, the stalk map induc\"}\n  {\"name\": \"TopCat.Presheaf.stalkFunctor_map_germ_apply\", \"module\": \"Mathlib.Topology.Sheaves.Stalks\", \"type\": \"[ConcreteCategory C FC] {F G : X.Presheaf C} (U : Opens X) (x : X) (hx : x ∈ U) (f : F ⟶ G) (s) :\\n  (stalkFunctor C x).map f (F.germ U x hx s) = G.germ U x hx (f.app (op U) s)\", \"doc\": \"For presheaves $\\\\mathcal{F}$ and $\\\\mathcal{G}$ on a topological space $X$ with values in a concrete category $\\\\mathcal{C}$, a natural transformation $\\\\phi : \\\\mathcal{F} \\\\to \\\\mathcal{G}$, and a point $\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Opens.germ_stalkIso_hom_assoc\", \"module\": \"Mathlib.AlgebraicGeometry.Restrict\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} (U : X.Opens) {V : (↑U).Opens} (x : ↥U) (hx : x ∈ V) {Z : CommRingCat}\\n  (h : X.presheaf.stalk ↑x ⟶ Z),\\n  CategoryTheory.CategoryStruct.comp ((↑U).presheaf.germ V x hx)\\n      (CategoryTheory.CategoryStruct.comp (U.stalkIso x).hom h) =\\n    CategoryTheory.CategoryStruc\", \"doc\": \"Let $X$ be a scheme and $U$ be an open subset of $X$. Let $X|_U$ denote the induced open subscheme on $U$. For any point $x \\\\in U$, there is a canonical isomorphism $\\\\phi_x: \\\\mathcal{O}_{X,x} \\\\stackre\"}\n",
+   "date": "2026-10-24",
+   "verdict": "No Mathlib algebraic-space set-stalk construction. Project search finds exactly the two definitions in SpaceGeometricPointsConservative; this delivery extracts them unchanged, rather than creating a duplicate. The existing abelian-stalk node supplies the shared neighbourhood category but not a set-valued stalk."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Set valued stalk on an algebraic space as colimit of sections over pointed etale scheme neighbourhoods",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.LocallyRingedSpace.toStalk_stalkMap_toΓSpec\", \"module\": \"Mathlib/AlgebraicGeometry/GammaSpecAdjunction\", \"type\": \"∀ (X : AlgebraicGeometry.LocallyRingedSpace) (x : ↑X.toTopCat),\\n  CategoryTheory.CategoryStruct.comp\\n      (AlgebraicGeometry.StructureSheaf.toStalk\\n        (↑(Opposite.unop (Opposite.op (AlgebraicGeometry.LocallyRingedSpace.Γ.obj (Opposite.op X)))))\\n        ((CategoryTheory.ConcreteCategory.hom X.t\", \"doc\": \"For any point $x$ in a locally ringed space $X$, the composition of the stalk map induced by the Γ-Spec morphism $X \\\\to \\\\operatorname{Spec}(\\\\Gamma(X))$ with the canonical stalk-to-ring homomorphism eq\"}\n  {\"name\": \"AlgebraicGeometry.LocallyRingedSpace.instIsLocalRingCarrierStalkCommRingCatPresheaf\", \"module\": \"Mathlib/Geometry/RingedSpace/LocallyRingedSpace\", \"type\": \"∀ (X : AlgebraicGeometry.LocallyRingedSpace) (x : ↑X.toTopCat), IsLocalRing ↑(X.presheaf.stalk x)\", \"doc\": \"For any locally ringed space $X$ and any point $x$ in $X$, the stalk of the structure sheaf (a presheaf of commutative rings) at $x$ is a local ring. This asserts the defining property of a locally ri\"}\n  {\"name\": \"AlgebraicGeometry.instCanonicallyOverSpecStalkCommRingCatPresheaf\", \"module\": \"Mathlib/AlgebraicGeometry/Stalk\", \"type\": \"(X : AlgebraicGeometry.Scheme) → (x : ↥X) → (AlgebraicGeometry.Spec (X.presheaf.stalk x)).CanonicallyOver X\", \"doc\": \"For any scheme $ X $ and point $ x $ in $ X $, the affine scheme $ \\\\operatorname{Spec}(\\\\mathcal{O}_{X,x}) $, where $ \\\\mathcal{O}_{X,x} $ is the stalk of the structure sheaf at $ x $, is canonically ov\"}\n  {\"name\": \"AlgebraicGeometry.instOverSpecStalkCommRingCatPresheaf\", \"module\": \"Mathlib/AlgebraicGeometry/Stalk\", \"type\": \"(X : AlgebraicGeometry.Scheme) → (x : ↥X) → (AlgebraicGeometry.Spec (X.presheaf.stalk x)).Over X\", \"doc\": \"For any scheme $X$ and a point $x$ in its underlying topological space, there is a canonical morphism of schemes from the spectrum of the stalk at $x$ to $X$. This morphism is denoted as $\\\\operatornam\"}\n  {\"name\": \"AlgebraicGeometry.LocallyRingedSpace.isLocalRing\", \"module\": \"Mathlib/Geometry/RingedSpace/LocallyRingedSpace\", \"type\": \"∀ (self : AlgebraicGeometry.LocallyRingedSpace) (x : ↑↑self.toPresheafedSpace), IsLocalRing ↑(self.presheaf.stalk x)\", \"doc\": \"For any locally ringed space $X$, the stalk of its structure sheaf $\\\\mathcal{O}_X$ at every point $x \\\\in X$ is a local ring, i.e., a commutative ring with a unique maximal ideal.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.stalkClosedPointTo\", \"module\": \"Mathlib/AlgebraicGeometry/Stalk\", \"type\": \"{X : AlgebraicGeometry.Scheme} →\\n  {R : CommRingCat} →\\n    [inst : IsLocalRing ↑R] →\\n      (f : AlgebraicGeometry.Spec R ⟶ X) →\\n        X.presheaf.stalk ((CategoryTheory.ConcreteCategory.hom f.base) (IsLocalRing.closedPoint ↑R)) ⟶ R\", \"doc\": \"The morphism from the stalk of the structure sheaf at the closed point of $\\\\operatorname{Spec}(R)$ to $R$, constructed by composing the stalk map induced by a scheme morphism $f$ with the canonical is\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.fromSpecStalk_app\", \"module\": \"Mathlib/AlgebraicGeometry/Stalk\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} {U : X.Opens} {x : ↥X} (hxU : x ∈ U),\\n  AlgebraicGeometry.Scheme.Hom.app (X.fromSpecStalk x) U =\\n    CategoryTheory.CategoryStruct.comp (X.presheaf.germ U x hxU)\\n      (CategoryTheory.CategoryStruct.comp (AlgebraicGeometry.Scheme.ΓSpecIso (X.presheaf.stalk x)).inv\\n  \", \"doc\": \"For a scheme $X$ and a point $x \\\\in X$, the application of the morphism $\\\\operatorname{Spec}(\\\\mathcal{O}_{X,x}) \\\\to X$ at an open subset $U \\\\subseteq X$ containing $x$ is given by the composition of t\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.stalkMap\", \"module\": \"Mathlib/AlgebraicGeometry/Scheme\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} →\\n  (f : X ⟶ Y) → (x : ↥X) → Y.presheaf.stalk ((CategoryTheory.ConcreteCategory.hom f.base) x) ⟶ X.presheaf.stalk x\", \"doc\": \"For a morphism $ f : X \\\\to Y $ of schemes and a point $ x \\\\in X $, this is the induced morphism between the stalk of $ Y $'s structure sheaf at $ f(x) $ and the stalk of $ X $'s structure sheaf at $ x\"}\n",
+   "date": "2026-10-24",
+   "verdict": "No Mathlib algebraic-space set-stalk construction. Project search finds exactly the two definitions in SpaceGeometricPointsConservative; this delivery extracts them unchanged, rather than creating a duplicate. The existing abelian-stalk node supplies the shared neighbourhood category but not a set-valued stalk."
+  },
+  {
+   "tool": "grep",
+   "query": "pointedSetStalk|pointedSetGerm|PointedEtale",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-24",
+   "verdict": "No Mathlib algebraic-space set-stalk construction. Project search finds exactly the two definitions in SpaceGeometricPointsConservative; this delivery extracts them unchanged, rather than creating a duplicate. The existing abelian-stalk node supplies the shared neighbourhood category but not a set-valued stalk."
+  },
+  {
+   "tool": "grep",
+   "query": "rg -l pointedSetStalk|pointedSetGerm in lean/Sheaf and lean/WeilConjectures; rg on dag/nodes; blueprint_refs.py search pointed set stalk",
+   "results": "Project Lean: only lean/Sheaf/AlgebraicGeometry/SpaceGeometricPointsConservative.lean. DAG: lem-sfb-space-geometric-points-conservative owns these helper definitions; def-sfb-space-pointed-etale-abelian-stalk supplies only the neighbourhood and abelian stalk. No independent definition node for set stalks. Blueprint search: 0 blueprint nodes match pointed set stalk.",
+   "date": "2026-10-24",
+   "verdict": "Extracting the existing helpers into their own definition node is the maintainer-required H2 repair; no second construction is added."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-space-etale-conservative-geometric-points",
+  "date": "2026-10-24",
+  "group": "NV"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Algebraicity and smoothness of the stack of all nodal curves. Supporting input: Tag 0D57 (lemma-curves-tangent-space), both clauses (finite type fields over Z and arbitrary fields). Tangent-finiteness proof: Tag 0D17 (lemma-deform-spaces), split thickening Y=Spec K in Y_M; trivial origin and linear operations as in quot.tex Tag 0D1K (lemma-spaces-tangent-space), and artin.tex sections tangent-spaces and inf. Supporting step of Tag 0D17: Tags 05ZS (lemma-thickening-equivalence), 05ZT (lemma-first-order-thickening), and 05ZN (lemma-first-order-thickening-maps). Maps clause: Tag 05ZN, first proof paragraph, reconstruction by Properties of Spaces Theorem 04KL and locality of the original morphism (04KJ). Supporting input: Tags 04KH and 04KJ, stalk detection of local ring and local-morphism conditions before reconstruction.; separate real set-stalk construction used by the conservative geometric-points statement (04JY/04K0).",
+   "via": [
+    "lem-sfb-space-etale-conservative-geometric-points",
+    "lem-sfb-space-locally-ringed-etale-topos-reconstruction",
+    "lem-sfb-space-square-zero-ringed-realization",
+    "lem-sfb-flat-space-split-deformation-ext",
+    "lem-sfb-curve-tangent-finiteness",
+    "lem-sfb-nodal-curve-stack-smooth",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.AlgebraicSpaceSetStalk",
+  "declaration": "AlgebraicGeometry.AlgebraicSpace.pointedSetStalk",
+  "declarations": [
+   "AlgebraicGeometry.AlgebraicSpace.pointedSetStalk",
+   "AlgebraicGeometry.AlgebraicSpace.pointedSetGerm"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/AlgebraicSpaceSetStalk.lean",
+  "statement": "def pointedSetStalk (X : AlgebraicSpace S) {P : Over S}\n    (x : yoneda.obj P ⟶ X.obj.obj) :\n    Sheaf X.etaleTopology (Type (max (u + 1) w)) ⥤ Type (max (u + 1) w)",
+  "branch": "newtargets-dag",
+  "by": "NV",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "Maintenance extraction for NV H2 return aea8c34a8f27: pointedSetStalk and pointedSetGerm have identical names, signatures and bodies to the former Q93 consumer definitions; only blueprint ownership changes. No theorem dependencies."
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "maintenance-NV-pointed-set-stalk-extraction",
+  "result": "pass",
+  "note": "Definition-only extraction required by H2; source is the existing accepted Q93 construction, unchanged. The independent definition node uses only the existing pointed neighbourhood and colimit interfaces."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "maintenance-NV-pointed-set-stalk-extraction",
+  "group": "NV",
+  "result": "pass",
+  "note": "Both definition blocks compared verbatim to current Q93 source after blueprint id substitution; no new data, hypotheses, proof or theorem introduced. Single-file compile recorded in maintenance change record."
+ }
+}

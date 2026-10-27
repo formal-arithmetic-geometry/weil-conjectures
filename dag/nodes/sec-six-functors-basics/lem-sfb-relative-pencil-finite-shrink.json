@@ -1,0 +1,331 @@
+{
+ "id": "lem-sfb-relative-pencil-finite-shrink",
+ "kind": "statement",
+ "title": "Shrinking a section pencil to a finite surjective morphism",
+ "statement": "Let $A$ be a Noetherian integral domain with fraction field $K$, put $U=\\operatorname{Spec}A$, and fix $s\\in U$. Let $p:Y\\to U$ be proper. Let $B$ be an invertible $\\mathcal O_Y$-module and $\\alpha,\\beta\\in\\Gamma(Y,B)$ ordinary global sections. Assume their restrictions generate $B_s$ on $Y_s$ and define a finite morphism $\\psi_s:Y_s\\to\\mathbf P^1_{\\kappa(s)}$. Assume their restrictions also generate $B_K$ and define a finite surjective morphism $\\psi_K:Y_K\\to\\mathbf P^1_K$. Then there is an affine open neighbourhood $U'\\subseteq U$ of $s$ such that $\\alpha,\\beta$ generate $B$ on $Y_{U'}$ and define a finite surjective morphism $\\psi:Y_{U'}\\to\\mathbf P^1_{U'}$ whose restrictions to $s$ and $K$ are the specified morphisms. If a group acts on $Y$ over $U$ and the section morphism is invariant on the open locus where $\\alpha,\\beta$ generate, its restriction $\\psi$ is invariant as well. If the specified $\\psi_K$ is etale on a nonempty open, this same generic-fibre assertion holds for $\\psi$.\n\nProper morphisms, invertible modules, scheme fibres, base change, generating sections, their projective-coordinate morphisms, finite and surjective morphisms and etale morphisms are [def-weil-proper-morphism], [def-sc-invertible-module], [def-pc-scheme-fibre], [def-pc-base-change], [def-weil-pbc-generating-sections], [def-weil-pbc-morphism-to-projective-space-by-sections], [def-weil-finite-integral-morphism], [def-weil-surjective-morphism], [def-weil-etale-morphism]. A Noetherian ring means one in which every ideal is finitely generated; an integral domain has $1\\ne0$ and no zero divisors.",
+ "source": {
+  "document": "literature/de-jong-families-curves-alterations-1997.pdf",
+  "place": "de Jong §3.4, printed p.606; agent-written quotient-free norm-section replacement, extracted from returned proof steps 8--10. The last extraction supplies the finite-separable parameter descent needed in §3.3. Local PDF WANTED; publisher PDF read at https://www.numdam.org/item/10.5802/aif.1575.pdf."
+ },
+ "stmt_deps": [
+  "def-weil-proper-morphism",
+  "def-sc-invertible-module",
+  "def-pc-scheme-fibre",
+  "def-pc-base-change",
+  "def-weil-pbc-generating-sections",
+  "def-weil-pbc-morphism-to-projective-space-by-sections",
+  "def-weil-finite-integral-morphism",
+  "def-weil-surjective-morphism",
+  "def-weil-etale-morphism"
+ ],
+ "proof": [
+  {
+   "text": "Let $W=Y_\\alpha\\cup Y_\\beta$, where $Y_\\alpha$ and $Y_\\beta$ are the nonvanishing opens of the sections. The nonvanishing lemma makes $W$ open, and the fibre criterion says that the sections generate $B|_W$. Every point $y$ over $s$ belongs to $W$: the value of a pulled-back section in $B_s\\otimes\\kappa(y)$ is its original value in $B\\otimes\\kappa(y)$, by associativity of tensor products, and the sections generate on $Y_s$. The same holds over the generic point by the generic generation assumption. Thus $Z=Y\\setminus W$ is closed and disjoint from both fibres. Properness of $p$ means in particular that it is a closed map, so $p(Z)$ is closed and misses $s$. Choose a principal open $V=D(a)\\subseteq U\\setminus p(Z)$ containing $s$. Such a principal open exists by the basis of the topology of $\\operatorname{Spec}A$; $a\\notin\\mathfrak p_s$ implies $a\\ne0$, so $V$ also contains the generic point. We have $Y_V\\subseteq W$ and the two sections generate there.",
+   "uses": [
+    "lem-weil-pbc-nonvanishing-section-trivializes",
+    "lem-weil-pbc-invertible-generating-sections-fibre",
+    "def-pc-scheme-fibre",
+    "def-pc-base-change",
+    "def-weil-proper-morphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/modules.tex",
+    "place": "Tag 01CY, lemma-s-open; Tag 01AM, generation; morphisms.tex Tag 01W1, definition-proper. Agent closed-base-locus argument for de Jong §3.4, p.606."
+   }
+  },
+  {
+   "text": "The generating pair on $Y_V$ defines a $V$-morphism $h:Y_V\\to P=\\mathbf P^1_V$ by the projective-coordinate construction. Its restrictions to $s$ and $K$ are exactly $\\psi_s$ and $\\psi_K$: the projective-space functor-of-points statement is compatible with pullback, and the relative morphism is the unique map with this absolute projective-coordinate map and the prescribed base projection. This also identifies every subsequent base restriction with the morphism defined by the restricted sections.",
+   "uses": [
+    "def-weil-pbc-morphism-to-projective-space-by-sections",
+    "lem-weil-pbc-projective-space-functor-of-points",
+    "def-pc-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/constructions.tex",
+    "place": "Tag 01NE, lemma-projective-space, and the relative morphism paragraph following definition-projective-space (01NF)."
+   }
+  },
+  {
+   "text": "The morphism $p_V:Y_V\\to V$ is proper by base change. The projective-space structural map $q:P\\to V$ is proper, hence separated. Apply the proper-over-separated lemma to $p_V=q\\circ h$ to conclude that $h$ is proper. In particular its finite-fibre neighbourhood theorem applies, without any flatness hypothesis on $Y/V$.",
+   "uses": [
+    "lem-weil-pbc-proper-fp-permanence",
+    "lemma-nagata-projective-space-base-change-proper",
+    "def-weil-proper-morphism",
+    "lem-weil-pbc-proper-over-separated"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tags 01W4, lemma-base-change-proper, and 01W6, lemma-image-proper-scheme-closed (2); constructions.tex Tag 01NH and projective-space properness."
+   }
+  },
+  {
+   "text": "For each point $t\\in P_s$, write $\\bar t$ for its image in $P$. The fibre projection identifies $P_s$ with the subspace $q^{-1}(s)$ and identifies $\\kappa(t)$ with $\\kappa(\\bar t)$: base change along $\\operatorname{Spec}\\kappa(s)$ does not change the residue field of a point lying over $s$. The two fibre products $Y_s\\times_{P_s}\\operatorname{Spec}\\kappa(t)$ and $Y_V\\times_P\\operatorname{Spec}\\kappa(\\bar t)$ are therefore canonically isomorphic by the universal property. Thus $h^{-1}(\\{\\bar t\\})$ is finite since $\\psi_s$ is finite. The proper finite-fibre neighbourhood lemma gives an open $O_t\\subseteq P$ containing $\\bar t$ on which $h$ is finite. Put $O=\\bigcup_{t\\in P_s}O_t$. Then $O$ contains $q^{-1}(s)$, and finiteness local on the target shows that $h^{-1}(O)\\to O$ is finite, including when some of the fibres are empty.",
+   "uses": [
+    "def-pc-scheme-fibre",
+    "def-pc-base-change",
+    "lem-weil-pbc-finite-closed-map-finite-fibres",
+    "lem-trf-proper-finite-fibre-finite-near",
+    "lem-weil-pbc-finite-local-on-target"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 02UP, lemma-proper-finite-fibre-finite-in-neighbourhood; morphisms.tex Tags 01WI, lemma-finite-local, and 02NH, finite fibres."
+   }
+  },
+  {
+   "text": "The complement $P\\setminus O$ is closed. Since $q$ is proper, $q(P\\setminus O)$ is closed in $V$ and misses $s$. Choose $b\\in A$ with $s\\in U'=D(b)\\subseteq V\\setminus q(P\\setminus O)$, using the principal-open basis of $U$. Then $b\\ne0$, this open is affine, and its generic point still has residue field $K$. The open immersion $\\mathbf P^1_{U'}=q^{-1}(U')\\to P$ has image in $O$, so it factors uniquely through the open subscheme $O$ by restriction of the structure sheaf. Base-changing the finite map $h^{-1}(O)\\to O$ along this factorization gives the finite map $\\psi:Y_{U'}\\to\\mathbf P^1_{U'}$, by the fibre-product universal property. Generation and both specified fibre identifications persist from steps 1 and 2.",
+   "uses": [
+    "lemma-nagata-projective-space-base-change-proper",
+    "def-weil-proper-morphism",
+    "lem-weil-pbc-finite-morphism-permanence",
+    "def-pc-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tags 01W1, definition-proper, and 01WL, lemma-base-change-finite; agent base shrinking of the target neighbourhoods from 02UP."
+   }
+  },
+  {
+   "text": "The generic fibre $\\mathbf P^1_K$ is dense in $\\mathbf P^1_{U'}$. Indeed the standard-chart statement covers the latter by two copies of $\\operatorname{Spec}(A_b[T])$, with their indicated base projections. Each chart ring is an integral domain: the highest nonzero coefficients of two nonzero polynomials have nonzero product, and localization at $b\\ne0$ preserves a domain. Its zero ideal is prime, belongs to every nonempty basic open $D(f)$, and contracts to the zero ideal in $A_b$. Thus it is a point of the generic fibre and every nonempty open of either chart meets that fibre. Since the two charts cover, the generic fibre is dense in the whole projective line.",
+   "uses": [
+    "lem-weil-pbc-projective-space-standard-charts",
+    "def-pc-scheme-fibre"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/constructions.tex",
+    "place": "Tag 01NG, lemma-standard-covering-projective-space; elementary polynomial-domain and basic-open argument."
+   }
+  },
+  {
+   "text": "The image of $\\psi$ is closed because $\\psi$ is finite. It contains the image of the generic pencil, which is all of $\\mathbf P^1_K$ by hypothesis and step 2. By the density in step 6, the image is all of $\\mathbf P^1_{U'}$. This proves surjectivity in the sense of the surjective-morphism definition.",
+   "uses": [
+    "lem-weil-pbc-finite-closed-map-finite-fibres",
+    "def-weil-surjective-morphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 01WN, lemma-finite-proper; closed image containing a dense subset."
+   }
+  },
+  {
+   "text": "If the additional group hypothesis holds, the invariant section morphism $h_W:W\\to\\mathbf P^1_U$ on the generation locus $W$ restricts to $\\psi$ on $Y_{U'}\\subseteq W$: the projective-coordinate morphism is compatible with pullback along the open immersion $Y_{U'}\\to W$, so $h_W|_{Y_{U'}}$ has the base projection of $Y_{U'}$ and the projective-coordinate map of the restricted pair $\\alpha,\\beta$, hence equals $\\psi$ by the uniqueness in the relative construction. Every group element acts over $U$, so preserves $Y_{U'}$; restricting the assumed equality $h_W\\circ g=h_W$ gives $\\psi\\circ g|_{Y_{U'}}=\\psi$. Finally $\\psi_K$ is the original generic-fibre morphism by step 2. Any nonempty open of $Y_K$ on which that original morphism is etale is therefore the very same open with the very same morphism for the final pencil, proving the last assertion.",
+   "uses": [
+    "def-pc-base-change",
+    "lem-weil-pbc-projective-space-functor-of-points",
+    "def-weil-pbc-morphism-to-projective-space-by-sections"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/constructions.tex",
+    "place": "Tag 01NE, pullback compatibility; elementary restriction of the assumed invariance and generic-fibre equality in de Jong §3.4."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-nonvanishing-section-trivializes",
+  "lem-weil-pbc-invertible-generating-sections-fibre",
+  "def-pc-scheme-fibre",
+  "def-pc-base-change",
+  "def-weil-proper-morphism",
+  "def-weil-pbc-morphism-to-projective-space-by-sections",
+  "lem-weil-pbc-projective-space-functor-of-points",
+  "lem-weil-pbc-proper-fp-permanence",
+  "lemma-nagata-projective-space-base-change-proper",
+  "lem-weil-pbc-proper-over-separated",
+  "lem-weil-pbc-finite-closed-map-finite-fibres",
+  "lem-trf-proper-finite-fibre-finite-near",
+  "lem-weil-pbc-finite-local-on-target",
+  "lem-weil-pbc-finite-morphism-permanence",
+  "lem-weil-pbc-projective-space-standard-charts",
+  "def-weil-surjective-morphism"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/more-morphisms.tex",
+  "place": "Agent assembly of Tag 02UP with 01CY, 01NE, 01W4, 01W6, 01WI, 01WL and projective-space charts, making explicit the shrinking assertion in de Jong §3.4, printed p.606. The requested local de Jong PDF is absent; its publisher PDF was read online."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A pair of line bundle sections on a proper scheme over a noetherian integral base defining a finite pencil on one special fibre and a finite surjective generic pencil defines a finite surjective relative pencil after shrinking around that special point.",
+   "results": "; AlgebraicGeometry.instFiniteCarrierCarrierCommRingCatFiberOfIsFinite, AlgebraicGeometry.pointsPi_surjective, AlgebraicGeometry.finite_appTop_of_universallyClosed, AlgebraicGeometry.AffineSpace.instSurjectiveOverSchemeInferInstanceOverClass, AlgebraicGeometry.pointsPi_surjective_of_isAffine, AlgebraicGeometry.Surjective.instFstScheme, AlgebraicGeometry.Surjective.instSndScheme, AlgebraicGeometry.Scheme.IsJointlySurjectivePreserving.exists_preimage_snd_triplet_of_prop",
+   "date": "2026-10-22",
+   "verdict": "no match: hits do not state the effective-action/norm, interpolation, relative section-pencil, integral coordinate-avoidance, or finite-separable specialization assertion"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.IsProper, AlgebraicGeometry.IsFinite",
+   "results": "; AlgebraicGeometry.instIsProperOfIsFinite, AlgebraicGeometry.IsProper.instOfIsFinite, AlgebraicGeometry.IsFinite.iff_isProper_and_isAffineHom, AlgebraicGeometry.IsFinite.eq_isProper_inf_isAffineHom, AlgebraicGeometry.IsFinite.of_isProper_of_locallyQuasiFinite, AlgebraicGeometry.IsFinite.iff_isProper_and_locallyQuasiFinite, AlgebraicGeometry.IsFinite.eq_proper_inf_locallyQuasiFinite, AlgebraicGeometry.exists_isFinite_morphismRestrict_of_finite_preimage_singleton",
+   "date": "2026-10-22",
+   "verdict": "no match: hits do not state the effective-action/norm, interpolation, relative section-pencil, integral coordinate-avoidance, or finite-separable specialization assertion"
+  },
+  {
+   "tool": "grep",
+   "query": "finite.*(near|fiber|fibre)|IsFinite.*IsProper",
+   "results": "; Mathlib/AlgebraicGeometry/Fiber.lean, Mathlib/AlgebraicGeometry/Fiber.lean, Mathlib/AlgebraicGeometry/Fiber.lean, Mathlib/AlgebraicGeometry/Fiber.lean, Mathlib/AlgebraicGeometry/Fiber.lean, Mathlib/AlgebraicGeometry/ZariskisMainTheorem.lean, Mathlib/AlgebraicGeometry/ZariskisMainTheorem.lean, Mathlib/AlgebraicGeometry/ZariskisMainTheorem.lean (Mathlib/AlgebraicGeometry)",
+   "date": "2026-10-22",
+   "verdict": "no match: hits do not state the effective-action/norm, interpolation, relative section-pencil, integral coordinate-avoidance, or finite-separable specialization assertion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Spread a finite morphism from a closed fibre of a proper family to a neighbourhood of the base point by removing the image of the base locus and the non quasi finite locus.",
+   "results": "; AlgebraicGeometry.LocallyQuasiFinite, AlgebraicGeometry.LocallyOfFiniteType, AlgebraicGeometry.instFiniteCarrierCarrierCommRingCatFiberOfIsFinite, AlgebraicGeometry.IsFinite.finite_preimage_singleton, AlgebraicGeometry.finite_appTop_of_universallyClosed, AlgebraicGeometry.instLocallyQuasiFiniteFstScheme, AlgebraicGeometry.instLocallyQuasiFiniteSndScheme, AlgebraicGeometry.Scheme.Hom.finite_preimage",
+   "date": "2026-10-22",
+   "verdict": "no match: hits do not state the effective-action/norm, interpolation, relative section-pencil, integral coordinate-avoidance, or finite-separable specialization assertion"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A special fibre finite projective pencil extends as a finite surjective relative pencil on a neighbourhood of the base point.",
+   "results": "; AlgebraicGeometry.instFiniteCarrierCarrierCommRingCatFiberOfIsFinite, AlgebraicGeometry.IsFinite.finite_preimage_singleton, AlgebraicGeometry.Scheme.Hom.fiber, AlgebraicGeometry.Scheme.Hom.discrete_fiber, AlgebraicGeometry.IsFinite.instMorphismRestrict, AlgebraicGeometry.instIsPreimmersionFiberι, AlgebraicGeometry.instCanonicallyOverFiber, AlgebraicGeometry.IsFinite.instFstScheme",
+   "date": "2026-10-22",
+   "verdict": "no match: different objects or only component facts"
+  },
+  {
+   "tool": "grep",
+   "query": "pencil|exists_isFinite_morphismRestrict|homOfGeneratingSections",
+   "results": "{\"t\": \"2026-10-23T04:27:08Z\", \"tool\": \"grep\", \"query\": \"pencil|exists_isFinite_morphismRestrict|homOfGeneratingSections\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 2, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/ZariskisMainTheorem.lean\", \"Mathlib/AlgebraicGeometry/ZariskisMainTheorem.lean\"], \"digest\": \"5b288a8453e2fd35\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: reviewed hits give component constructions or proper/finite neighbourhood results, not the full section-pencil statement with base shrinking, generic surjectivity and compatibility clauses"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.IsProper, AlgebraicGeometry.IsFinite",
+   "results": "{\"t\": \"2026-10-23T04:27:08Z\", \"tool\": \"loogle\", \"query\": \"AlgebraicGeometry.IsProper, AlgebraicGeometry.IsFinite\", \"sub\": \"\", \"ok\": true, \"n_hits\": 9, \"note\": \"\", \"top\": [\"AlgebraicGeometry.instIsProperOfIsFinite\", \"AlgebraicGeometry.IsProper.instOfIsFinite\", \"AlgebraicGeometry.IsFinite.iff_isProper_and_isAffineHom\", \"AlgebraicGeometry.IsFinite.eq_isProper_inf_isAffineHom\", \"AlgebraicGeometry.IsFinite.of_isProper_of_locallyQuasiFinite\", \"AlgebraicGeometry.IsFinite.iff_isProper_and_locallyQuasiFinite\", \"AlgebraicGeometry.IsFinite.eq_proper_inf_locallyQuasiFinite\", \"AlgebraicGeometry.exists_isFinite_morphismRestrict_of_finite_preimage_singleton\"], \"digest\": \"05fe518aea5dd700\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: reviewed hits give component constructions or proper/finite neighbourhood results, not the full section-pencil statement with base shrinking, generic surjectivity and compatibility clauses"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A finite pencil on a fibre of a proper morphism extends to a finite surjective morphism to the relative projective line on a neighbourhood in the base.",
+   "results": "{\"t\": \"2026-10-23T04:27:09Z\", \"tool\": \"leansearch\", \"query\": \"A finite pencil on a fibre of a proper morphism extends to a finite surjective morphism to the relative projective line on a neighbourhood in the base.\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsProper.instOfIsFinite\", \"AlgebraicGeometry.instLocallyQuasiFiniteOfIsFinite\", \"AlgebraicGeometry.IsFinite.recOn\", \"AlgebraicGeometry.instIsProperOfIsFinite\", \"AlgebraicGeometry.instFiniteCarrierCarrierCommRingCatFiberOfIsFinite\", \"AlgebraicGeometry.IsProper.toLocallyOfFiniteType\", \"AlgebraicGeometry.IsFinite.instMorphismRestrict\", \"AlgebraicGeometry.IsFinite.iff_isProper_and_isAffineHom\"], \"digest\": \"83b33254011fbe2a\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: reviewed hits give component constructions or proper/finite neighbourhood results, not the full section-pencil statement with base shrinking, generic surjectivity and compatibility clauses"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Two sections of an invertible sheaf on a proper scheme over an integral affine base define a finite surjective projective line morphism after shrinking around a fibre where the pencil is finite, provided the generic pencil is surjective.",
+   "results": "{\"t\": \"2026-10-23T04:27:19Z\", \"tool\": \"leanfinder\", \"query\": \"Two sections of an invertible sheaf on a proper scheme over an integral affine base define a finite surjective projective line morphism after shrinking around a fibre where the pencil is finite, provided the generic pencil is surjective.\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Proj.instIsProperToSpecZeroOfFiniteTypeSubtypeMemOfNatNat\", \"AlgebraicGeometry.Proj.fromOfGlobalSections\", \"AlgebraicGeometry.Proj.instUniversallyClosedToSpecZeroOfFiniteTypeSubtypeMemOfNatNat\", \"AlgebraicGeometry.AffineSpace.instSurjectiveOverSchemeInferInstanceOverClass\", \"AlgebraicGeometry.pointsPi_surjective\", \"AlgebraicGeometry.pointsPi_surjective_of_isAffine\", \"AlgebraicGeometry.ProjIsoSpecTopComponent.toSpec_surjective\", \"AlgebraicGeometry.Proj.instLocallyOfFiniteTypeToSpecZeroOfFiniteTypeSubtypeMemOfNatNat\"], \"digest\": \"770a539cb01b353a\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: reviewed hits give component constructions or proper/finite neighbourhood results, not the full section-pencil statement with base shrinking, generic surjectivity and compatibility clauses"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Spread a section generated projective pencil from a finite special fibre and a surjective generic fibre on a proper scheme by deleting closed images of the base locus and non quasi finite locus.",
+   "results": "{\"t\": \"2026-10-23T04:28:45Z\", \"tool\": \"leanfinder\", \"query\": \"Spread a section generated projective pencil from a finite special fibre and a surjective generic fibre on a proper scheme by deleting closed images of the base locus and non quasi finite locus.\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Proj.fromOfGlobalSections\", \"AlgebraicGeometry.Proj.openCoverOfMapIrreleventEqTop\", \"AlgebraicGeometry.Proj.openCoverOfMapIrrelevantEqTop\", \"AlgebraicGeometry.Proj.valuativeCriterion_existence\", \"AlgebraicGeometry.Proj.openCoverOfISupEqTop\", \"AlgebraicGeometry.Proj\", \"AlgebraicGeometry.Proj.affineOpenCoverOfIrrelevantLESpan\", \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.range_g_subset\"], \"digest\": \"82030ecdba561c42\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: reviewed hits give component constructions or proper/finite neighbourhood results, not the full section-pencil statement with base shrinking, generic surjectivity and compatibility clauses"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-invariant-local-curve-pencils",
+  "date": "2026-10-22",
+  "group": "O2"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong §§3.2--3.6, printed pp.605--608: finite separable constant extension, invariant Kummer cover and normalization, then rationalization of the generic marking. For a zero-dimensional base use §3.3 and a smooth covering of genus at least two. The kernel fixed-field statements are the fibre-product group construction in §3.5, rather than just the full-group invariant statement.; auxiliary de Jong §§3.3--3.4, pp.605--606: local quotient pencils and avoidance of 0,1,infinity. The zero-dimensional clause spells out the suitable-cover/pencil choice left implicit in §3.3; after a finite separable constant extension one chooses the finite separating pencil on the quotient curve. Local PDF WANTED; online publisher PDF read.; extraction of returned local-pencil proof, steps 8--10",
+   "via": [
+    "lem-sfb-invariant-local-curve-pencils",
+    "lem-sfb-high-genus-equivariant-cover",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-relative-pencil-finite-shrink",
+  "worker": "stage1",
+  "summary": "Q86: preserved statement and statement dependencies; supplied eight proof steps for generation, properness, finite target neighbourhoods, base shrinking, density, surjectivity, invariance and unchanged generic etaleness. Reused existing nodes throughout; no new nodes. Read every cited statement and exact source tags, checked the nonclosed-point, field-base, empty-fibre and nonflat cases, and recorded actual Mathlib searches. Repair of returned head 2984fb5d80c: compared the retained delivery with the current unsplit DAG item, re-read all sixteen current proof dependencies and verified all twenty-six citation quotes. Made the nonclosed-point fibre comparison and the open-subscheme factorization explicit in steps 4 and 5; retained the approved route, statement, searches and citations. Delivery tooling rebuilds on the fetched current sheaf-dag base.",
+  "blueprint": "Realizes the inherited from.place, extraction of local-pencil steps 8--10 in lem-sfb-invariant-local-curve-pencils, supporting det-thm-sf-ctf-stability-direct-images proof (3), de Jong §3.4, printed p.606. blueprint_refs ancestor returns None for the inherited created-item chain; preserve from.node=null and its existing via list. Whole-blueprint searches pencil, finite fibre and projective space found no equivalent full relative-pencil statement.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-nonvanishing-section-trivializes",
+    "why": "Generic line-bundle nonvanishing-open theorem; the alteration unit does not supply a replacement."
+   },
+   {
+    "node": "lem-weil-pbc-invertible-generating-sections-fibre",
+    "why": "Generic stalk-value criterion for a generating pair; independent of the alteration route."
+   },
+   {
+    "node": "lem-weil-pbc-projective-space-functor-of-points",
+    "why": "Generic pullback-compatible projective-coordinate classification; needed to identify the specified fibres."
+   },
+   {
+    "node": "lemma-nagata-projective-space-base-change-proper",
+    "why": "Properness of the ambient projective line makes the closed-image shrinkings available; this is a generic geometry tool."
+   },
+   {
+    "node": "lem-trf-proper-finite-fibre-finite-near",
+    "why": "Stacks 02UP for an arbitrary proper morphism at a finite fibre; no trace-formula argument is used."
+   },
+   {
+    "node": "lem-weil-pbc-projective-space-standard-charts",
+    "why": "Generic polynomial standard charts; used only for the elementary density argument."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-nonvanishing-section-trivializes",
+  "lem-weil-pbc-invertible-generating-sections-fibre",
+  "lem-weil-pbc-projective-space-functor-of-points",
+  "lemma-nagata-projective-space-base-change-proper",
+  "lem-trf-proper-finite-fibre-finite-near",
+  "lem-weil-pbc-projective-space-standard-charts"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q86-f6c3a325c",
+  "group": "Q86",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q86-f6c3a325c (reviewer sub-agent of L); spot-checked: Re-delivery of 2984fb5d80c3. Landing refused that head on a side-completion and queue issue, not on its mathematics; the earlier reader had FIXed it. The item is still unsplit in live and side-live, has no repair note and adds no new nodes. Compared with the 2984 snapshot, only the step 4 and step 5 texts and the split_report summary changed. Statement, stmt_deps, proof_deps and every uses list are identical, so the target is not weakened. Step 4 is now correct: kappa(t)=kappa(t-bar), and Y_s x_{P_s} Spec kappa(t) = Y_V x_P Spec kappa(t-bar) because h is a V-map, so the set-fibre is finite. I checked the 02UP node against Stacks more-morphisms.tex l.12595-12600: it needs only properness and a finite set-fibre, with no Noetherian or closed-point hypothesis, and allows empty fibres. finite-local-on-target(3) then makes h^{-1}(O)->O finite. Step 5 is now correct: the open immersion factors through O, and base change by finite-morphism-permanence(a) gives Y_{U'}. I re-checked steps 1-3 and 6-7 against every cited statement: closedness of p from universal closedness, D(a) containing eta, the proper-over-separated hypotheses, chart domains with the zero prime over eta, and closed image plus density giving surjectivity. Small cases checked: A a field, s generic, Y empty, empty fibres, nonclosed s. Batch 5: lem-trf-proper-finite-fibre-finite-near is generic Stacks 02UP for any proper morphism. Neither the trace-formula nor the Poincare-duality assumption gives it, and it is not a step of either proof, so it is accepted as a declared tool use. FIX (C1/C3), re-applied because the re-push lost the earlier repair: step 8 identified h_W restricted to Y_{U'} with psi, which needs pullback compatibility and uniqueness of the relative construction, while citing only def-pc-base-change and being marked elementary. The identification is now spelled out, functor-of-points and morphism-by-sections are added to the step's uses (both already in proof_deps), elementary is false and the source is Stacks 01NE. The whole corrected item is in fixes/dag/nodes/sec-six-functors-basics/.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.RelativePencilFiniteShrink",
+  "declaration": "AlgebraicGeometry.exists_relative_pencil_finite_shrink",
+  "declarations": [
+   "AlgebraicGeometry.relativePencilSections",
+   "AlgebraicGeometry.relativePencilHom",
+   "AlgebraicGeometry.exists_relative_pencil_finite_shrink"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/RelativePencilFiniteShrink.lean",
+  "statement": "theorem exists_relative_pencil_finite_shrink (A K : Type u) [CommRing A] [IsNoetherianRing A] [IsDomain A] [Field K] [Algebra A K] [IsFractionRing A K] (s : Spec (.of A)) {Y : Scheme.{u}} (p : Y ⟶ Spec (.of A)) [IsProper p] (B : Y.Modules) [B.IsInvertible] (a : ULift.{u} (Fin 2) → B.sections) (hs : Epi (((Scheme.Modules.pullback (p.fiberι s)).obj B).freeHomEquiv.symm (relativePencilSections (p.fiberι s) B a))) (hK : Epi (((Scheme.Modules.pullback (pullback.fst p (Spec.map (CommRingCat.ofHom (algebraMap A K))))).obj B).freeHomEquiv.symm (relativePencilSections (pullback.fst p (Spec.map (CommRingCat.ofHom (algebraMap A K)))) B a))) (hfiniteS : IsFinite (relativePencilHom (p.fiberι s) (p.fiberToSpecResidueField s) B a hs)) (hfiniteK : IsFinite (relativePencilHom (pullback.fst p (Spec.map (CommRingCat.ofHom (algebraMap A K)))) (pullback.snd p (Spec.map (CommRingCat.ofHom (algebraMap A K)))) B a hK)) (hsurjK : Surjective (relativePencilHom (pullback.fst p (Spec.map (CommRingCat.ofHom (algebraMap A K)))) (pullback.snd p (Spec.map (CommRingCat.ofHom (algebraMap A K)))) B a hK)) : ∃ (U : (Spec (.of A)).Opens), s ∈ U ∧ IsAffineOpen U ∧ ∃ (is : Spec ((Spec (.of A)).residueField s) ⟶ U.toScheme) (iK : Spec (.of K) ⟶ U.toScheme) (his : is ≫ U.ι = (Spec (.of A)).fromSpecResidueField s) (hiK : iK ≫ U.ι = Spec.map (CommRingCat.ofHom (algebraMap A K))) (hU : Epi (((Scheme.Modules.pullback (pullback.fst p U.ι)).obj B).freeHomEquiv.symm (relativePencilSections (pullback.fst p U.ι) B a))) (ψ : pullback p U.ι ⟶ ℙ(ULift.{u} (Fin 2); U.toScheme)) (ψK : pullback p (Spec.map (CommRingCat.ofHom (algebraMap A K))) ⟶ ℙ(ULift.{u} (Fin 2); Spec (.of K))), ψ = relativePencilHom (pullback.fst p U.ι) (pullback.snd p U.ι) B a hU ∧ IsFinite ψ ∧ Surjective ψ ∧ baseChangeMap p (Over.homMk is his : Over.mk ((Spec (.of A)).fromSpecResidueField s) ⟶ Over.mk U.ι) ≫ ψ = relativePencilHom (p.fiberι s) (p.fiberToSpecResidueField s) B a hs ≫ ProjectiveSpace.map (ULift.{u} (Fin 2)) is ∧ baseChangeMap p (Over.homMk iK hiK : Over.mk (Spec.map (CommRingCat.ofHom (algebraMap A K))) ⟶ Over.mk U.ι) ≫ ψ = ψK ≫ ProjectiveSpace.map (ULift.{u} (Fin 2)) iK ∧ ψK = relativePencilHom (pullback.fst p (Spec.map (CommRingCat.ofHom (algebraMap A K)))) (pullback.snd p (Spec.map (CommRingCat.ofHom (algebraMap A K)))) B a hK ∧ (∀ (G : Type v) [Group G] (ρ : G →* Aut (Over.mk p)) (W : Y.Opens) (hW : Epi (((Scheme.Modules.pullback W.ι).obj B).freeHomEquiv.symm (relativePencilSections W.ι B a))), (∀ W' : Y.Opens, Epi (((Scheme.Modules.pullback W'.ι).obj B).freeHomEquiv.symm (relativePencilSections W'.ι B a)) → W' ≤ W) → ∀ (ρW : G →* Aut W.toScheme), (∀ g : G, (ρW g).hom ≫ W.ι = W.ι ≫ ((ρ g).hom).left) → (∀ g : G, (ρW g).hom ≫ relativePencilHom W.ι (W.ι ≫ p) B a hW = relativePencilHom W.ι (W.ι ≫ p) B a hW) → ∀ g : G, ((Over.pullback U.ι).map (ρ g).hom).left ≫ ψ = ψ) ∧ (∀ V : (pullback p (Spec.map (CommRingCat.ofHom (algebraMap A K)))).Opens, Nonempty V → Etale (V.ι ≫ relativePencilHom (pullback.fst p (Spec.map (CommRingCat.ofHom (algebraMap A K)))) (pullback.snd p (Spec.map (CommRingCat.ofHom (algebraMap A K)))) B a hK) → Etale (V.ι ≫ ψK))",
+  "branch": "sheaf-dag",
+  "by": "NZ",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "Two real-data helpers compose the existing pullbackTopSection and projective-coordinate construction. The theorem retains every clause, including arbitrary-point special fibre, specified generic fibre, arbitrary group invariance on the generation locus, and preservation of each nonempty generic etale open. Reviewer FIX (stage 2): the generation locus W of the invariance clause is now characterized through the recorded generating-sections notion (the pair generates on W, and every open on which it generates lies in W) instead of the union of nonvanishingLocus sets, which belongs to def-weil-pbc-ample-invertible-module, not a statement dependency; the unused Ample import is dropped.",
+  "fixed_by": "NT-stage2-cc-a1d3d8253"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-a1d3d8253",
+  "group": "NZ",
+  "result": "fix",
+  "note": "Clause-by-clause check against node and all 9 stmt_dep records; helpers relativePencilSections/relativePencilHom are genuine pullbackTopSection + homOfGeneratingSections (no hollow/arbitrary data); base-change squares with ProjectiveSpace.map pin psi_s/psi_K; edge cases (generic/nonclosed s, field A, empty Y/fibres, any G universe/characteristic) fine; docstrings/source/blueprint/8 steps present, single sorry. Finding H3/H4: invariance clause characterized W via nonvanishingLocus (def-weil-pbc-ample-invertible-module, not a stmt_dep; equals the generation locus only by a theorem). FIX: W characterized by generating-sections notion (pair generates on W and every W' where it generates satisfies W' ≤ W), unused Ample import dropped. fixes/RelativePencilFiniteShrink.lean + lean-record.json (verbatim statement); nt_compile --json clean 4.8 s; refit_record/check_lean_text OK."
+ }
+}

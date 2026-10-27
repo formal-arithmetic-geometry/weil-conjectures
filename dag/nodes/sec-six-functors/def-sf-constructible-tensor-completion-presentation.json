@@ -1,0 +1,102 @@
+{
+ "id": "def-sf-constructible-tensor-completion-presentation",
+ "kind": "definition",
+ "title": "Normalized constructible tensor-completion presentation",
+ "status": "split",
+ "statement": "Fix a prime $\\ell$, a finite extension $E/\\mathbf Q_\\ell$ [def-weil-l-adic-coefficient-extension] and a scheme $X$. Use modules over the completed integral coefficient sheaf [def-weil-completed-integral-coefficients] and their unbounded derived category [def-weil-abstract-derived-category], with the completed tensor and its good K-flat model [def-weil-derived-pullback-tensor-hom]. A tensor-completion presentation consists of an ordinary derived tensor bifunctor, its good-complex localization model, a natural cochain map from the ordinary total tensor to the completed tensor complex, and its descended derived comparison. Require all four equations: each quotient projection sends a homogeneous pure tensor to the tensor of the two quotient sections; every shifted mapping-cocone coordinate is zero; the cochain and derived maps agree through the two model isomorphisms; and on every pair of integral constructible inputs the ordinary tensor is derived complete and the comparison is invertible. This defines data and equations, without asserting existence.",
+ "stmt_deps": [
+  "def-weil-l-adic-coefficient-extension",
+  "def-weil-completed-integral-coefficients",
+  "def-weil-abstract-derived-category",
+  "def-weil-derived-pullback-tensor-hom"
+ ],
+ "source": {
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Lemma 6.5.5 and Definition 3.4.10; the four normalization clauses of the ordinary-to-completed tensor comparison."
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Data for normalized native adic realization coefficient presentations tensor completion and sectionwise module inverse image",
+   "results": "8 hits: AdicCompletion.module, tensor_map_id_left_eq_map, coe_ofTensorProductEquivOfFiniteNoetherian, ofTensorProductEquivOfFiniteNoetherian_apply, ofTensorProductEquivOfFiniteNoetherian.congr_simp, ofTensorProductEquivOfFiniteNoetherian, AdicCompletion, congr_symm_apply. None supplies these sheaf-level data.",
+   "date": "2026-10-23",
+   "verdict": "reuse existing project definitions"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Normalized continuous adic coefficient realization and module inverse image from scheme isomorphisms",
+   "results": "8 hits: Scheme.Hom.toNormalization_app_preimage, normalizationDiagram, normalizationDiagramMap, ι_toNormalization, ι_fromNormalization, ι_fromNormalization_assoc, fromNormalization_toNormalization, toNormalization. None supplies these data.",
+   "date": "2026-10-23",
+   "verdict": "reuse existing project definitions"
+  },
+  {
+   "tool": "grep",
+   "query": "LocallyFiniteAdicRealization|ConstructibleTensorCompletionPresentation|podCompletedModuleInverseImage|isoSectionwiseModuleInverseImage",
+   "results": "Mathlib: 0 hits. rg in lean/WeilConjectures: no hits. rg in lean/Sheaf: the existing definitions are in LocallyFiniteAdicConstructibleRealization, RationalRealizationTensorComparison, DerivedAutomorphismHomEvaluation, and ProEtale/IsoSectionwiseInverseImage. DAG declaration-name search finds only their theorem owners; def-trf-point-restriction-coordinates merely consumes sectionwise inverse image. blueprint_refs searches native realization, tensor completion presentation, sectionwise inverse image: 0 matches each.",
+   "date": "2026-10-23",
+   "verdict": "existing definitions without definition-node owners; record without redefinition"
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-sf-adic-qbar-constructible-realization",
+  "date": "2026-10-23",
+  "group": "NL"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "Explicit canonical comparison data in the native realization obligation. The parent is a maintainer-created native obligation with no blueprint ancestor.",
+   "via": [
+    "lem-sf-adic-qbar-constructible-realization",
+    "lem-sf-weil-verdier-biduality"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "lean": {
+  "module": "Sheaf.Paper.RationalRealizationTensorComparison",
+  "declaration": "WeilConjectures.ConstructibleTensorCompletionPresentation",
+  "declarations": [
+   "WeilConjectures.ConstructibleTensorCompletionNormalized",
+   "WeilConjectures.ConstructibleTensorCompletionPresentation"
+  ],
+  "statement": "structure ConstructibleTensorCompletionPresentation",
+  "branch": "newtargets-dag",
+  "by": "NL",
+  "date": "2026-10-23",
+  "existing": true,
+  "note": "Definition ownership requested by maintainer H2 at immutable head 07059192980c. Reuses the unchanged published declarations; no existence theorem is asserted or used as an additional hypothesis, no module is duplicated."
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-25a6777c9",
+  "group": "NL",
+  "result": "fix",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-25a6777c9",
+  "group": "NL",
+  "result": "fix",
+  "note": "Re-delivery of RETURNed 0705. H3 repaired: Family.sourceId_unit (pullbackTensorCommonComposition 𝟙 𝟙 M ≫ sourceId at F M = 𝟙, HEq along id_comp) is the pseudofunctor left-unit law; it fixes sourceId through essential surjectivity and naturality, so identity is no longer vacuous. H2 repaired: theorem stmt_deps replaced by def-zl-ringed-...-data plus four existing:true owners; each statement is verbatim in its unchanged module and all declarations exist; the other five Lean files are byte-identical to 0705. FIX: def-sf-adic-closed-reindexing-maps re-owned PodPartialClosed, .evaluation and podPairPullback, already owned by the on-base def-pod-partial-closed-interfaces (Q69, landed 15:55Z 10-22); fixes/def-sf-adic-closed-reindexing-maps.json removes them, cites the owner and rewrites the TeX. Advisory: def-sf-proetale-sectionwise-module-inverse-image duplicates Q15 def-weil-proetale-iso-sectionwise-inverse-image, landed 05:13Z after base 04:33Z; it cannot be cited by a FIX, so the maintainer should merge the nodes. No Lean changed and no compile was run."
+ }
+}

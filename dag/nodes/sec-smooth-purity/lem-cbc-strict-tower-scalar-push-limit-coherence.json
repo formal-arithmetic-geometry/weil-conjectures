@@ -1,0 +1,124 @@
+{
+ "id": "lem-cbc-strict-tower-scalar-push-limit-coherence",
+ "kind": "statement",
+ "title": "Scalar compatibility of normalized strict direct-image/limit maps",
+ "statement": "Let $(A,I)$ be an adic datum $d$ [def-weil-pbc-adic-coefficient-datum], let $f:U\\to T$ be any scheme map, and let $M$ be any object of the derived category of strict towers of completed-ring modules. Write $L_V$ and $L'_V$ for derived inverse limits over completed and constant coefficient sheaves. Write $r_V$ and $r_V^{\\mathrm{Tow}}$ for exact scalar restriction and its tower version, with the specified comparison $\\lambda_V:r_V L_V\\to L'_V r_V^{\\mathrm{Tow}}$ [def-cbc-completed-open-scalar-quotient-interface], [def-cbc-strict-tower-realization-comparisons], [lem-cbc-exact-product-functor-strict-limit]. Let $P,P^{\\mathrm{Tow}}$ be the completed direct images, and $P',P'^{\\mathrm{Tow}}$ the constant ones. Let $c:P L_U\\to L_T P^{\\mathrm{Tow}}$ be the specified direct-image/limit comparison [prop-weil-pbc-direct-image-limits], and let $c':P'L'_U\\to L'_T P'^{\\mathrm{Tow}}$ be its constant version, defined by conjugating the constant/pullback comparison. Let $d_f:r_T P\\to P'r_U$ and $d_f^{\\mathrm{Tow}}:r_T^{\\mathrm{Tow}}P^{\\mathrm{Tow}}\\to P'^{\\mathrm{Tow}}r_U^{\\mathrm{Tow}}$ be the normalized scalar/direct-image isomorphisms [lem-weil-pbc-strict-tower-exchange-mate-normalization]. Then\n$$L'_T(d_f^{\\mathrm{Tow}}(M))\\,\\lambda_{T,P^{\\mathrm{Tow}}M}\\,r_T(c_M)\n=c'_{r_U^{\\mathrm{Tow}}M}\\,P'(\\lambda_{U,M})\\,d_{f,L_UM}.$$\nAll comparisons are the published unit-normalized ones. No properness, completeness, finite-origin, or degree-bound hypothesis is imposed on $M$.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 0A07, lemma-Rf-commutes-with-Rlim, first proof; scalar refinement in the existing flat-scalar direct-image/limit coherence node; parent strict-realization proof Step 8."
+ },
+ "stmt_deps": [
+  "def-cbc-completed-open-scalar-quotient-interface",
+  "def-weil-pbc-adic-coefficient-datum",
+  "lem-weil-pbc-strict-tower-exchange-mate-normalization",
+  "prop-weil-pbc-direct-image-limits",
+  "lem-cbc-exact-product-functor-strict-limit",
+  "def-cbc-strict-tower-realization-comparisons"
+ ],
+ "proof": [
+  {
+   "text": "Apply the existing flat scalar direct-image/limit coherence theorem to the pro-etale ringed morphism with constant and completed coefficients. Constant/completed equivalence gives flat scalar maps. Restriction leaves the underlying additive sheaf unchanged, so ordinary scalar/limit comparisons are fixed by the limit projections. Its exact flat left adjoint makes scalar restriction preserve K-injective towers.",
+   "uses": [
+    "lem-cbc-flat-scalar-direct-image-limit-coherence",
+    "lem-weil-pbc-constant-completion-equivalence"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Identify the chosen derived comparisons by their universal-unit normalizations: the tower and individual scalar/direct-image maps are exchangeResPush and cbcRealizationResPush; the scalar/limit map is the constant-diagram mate identified with the normalized ordinary-limit comparison; and both direct-image/limit maps are the specified adjunction conjugates. The first conclusion of the flat-scalar theorem gives the displayed equality on any derived strict tower. In particular the same proof works for zero, empty, and identity cases.",
+   "uses": [
+    "lem-cbc-flat-scalar-direct-image-limit-coherence",
+    "lem-cbc-exact-product-functor-strict-limit",
+    "lem-weil-pbc-strict-tower-exchange-mate-normalization",
+    "prop-weil-pbc-direct-image-limits"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-cbc-flat-scalar-direct-image-limit-coherence",
+  "lem-weil-pbc-constant-completion-equivalence",
+  "lem-cbc-exact-product-functor-strict-limit",
+  "lem-weil-pbc-strict-tower-exchange-mate-normalization",
+  "prop-weil-pbc-direct-image-limits"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 0A07, first proof, specialized using the existing flat-scalar coherence theorem; parent Step 8."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Restriction of scalars commutes with canonical derived direct image / derived inverse limit comparison",
+   "results": "AlgHom.restrictScalars and RestrictScalars hits only.",
+   "date": "2026-10-26",
+   "verdict": "No Mathlib specialization; the project generic flat-scalar coherence theorem supplies the mathematical step, with its pro-etale comparison normalizations still to be instantiated."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.mateEquiv",
+   "results": "mateEquiv and generic unit/counit laws; no normalized pro-etale scalar/limit theorem.",
+   "date": "2026-10-26",
+   "verdict": "No Mathlib specialization; the project generic flat-scalar coherence theorem supplies the mathematical step, with its pro-etale comparison normalizations still to be instantiated."
+  },
+  {
+   "tool": "grep",
+   "query": "cbcRealizationPushLimit|cbcRealizationResPush|flatScalarDirectImageLimitCoherence",
+   "results": "Definitions in CompleteProetaleStrictTowerRealization and generic FlatScalarDirectImageLimitCoherence; no matching specialization in WeilConjectures or Mathlib. Blueprint search scalar direct image limit: zero matches. Nearby CompletedCoefficientPushforwardComparison is restricted to DVR coefficients and does not give this normalized square on arbitrary towers.",
+   "date": "2026-10-26",
+   "verdict": "No Mathlib specialization; the project generic flat-scalar coherence theorem supplies the mathematical step, with its pro-etale comparison normalizations still to be instantiated."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.CompleteProetaleStrictTowerRealization",
+  "date": "2026-10-26",
+  "group": "N2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-cbc-complete-proetale",
+   "place": "Proof, the composite of proper and open factors: scalar compatibility of the direct-image/limit map, parent strict-realization Step 8.",
+   "via": [
+    "lem-cbc-complete-proetale-strict-tower-realization"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sf-cbc",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.StrictTowerScalarPushLimitCoherence",
+  "file": "lean/Sheaf/Paper/StrictTowerScalarPushLimitCoherence.lean",
+  "declaration": "AlgebraicGeometry.Scheme.strictTowerScalarPushLimitCoherence",
+  "statement": "theorem strictTowerScalarPushLimitCoherence {U T : Scheme.{t}} (f : U ⟶ T)\n    (M : DerivedCategory (exchangeTowers U (d.completedRing U))) :\n    (cbcRealizationRes d T).mapDerivedCategory.map\n        ((d.directImageRlimIso f).hom.app M) ≫\n      (cbcRealizationResLimit d T).hom.app ((d.towerPush f).obj M) ≫\n      (completedRlim T (exchangeConstantRing T A)).map\n        ((exchangeResPush d f).hom.app M) =\n    (cbcRealizationResPush d f).hom.app ((completedRlim U (d.completedRing U)).obj M) ≫\n      (ProEtale.StrictTower.moduleDirectImage A f).rightDerivedFunctor.map\n        ((cbcRealizationResLimit d U).hom.app M) ≫\n      (cbcRealizationPushLimit (A := A) f).hom.app ((exchangeTowerRes d U).obj M)",
+  "branch": "sheaf-dag",
+  "by": "N2",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-42fc8",
+  "group": "N2",
+  "result": "pass",
+  "landing": "20261026T070353-L-3563540",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-42fc8",
+  "group": "N2",
+  "result": "pass",
+  "landing": "20261026T070353-L-3563540",
+  "kind": "interface",
+  "note": "independent cc review: item proofs of completeProetaleStrictTowerRealization(_open) and the moved StrictTowerRealizationComparisons module vs the published item (declaration sets, signatures, def bodies identical); new sorry strictTowerScalarPushLimitCoherence vs its node and the canonical mate definitions; 8 delivered modules + 9 direct importers compiled in a sandbox"
+ }
+}

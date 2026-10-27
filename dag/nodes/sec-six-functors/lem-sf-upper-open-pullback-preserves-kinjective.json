@@ -1,0 +1,126 @@
+{
+ "id": "lem-sf-upper-open-pullback-preserves-kinjective",
+ "kind": "lemma",
+ "title": "Upper pullback in an open Cartesian square preserves K-injectives",
+ "statement": "Let $X',X,Y',Y$ be schemes [def-pc-scheme], and let $g':X'\\to X$, $f':X'\\to Y'$, $f:X\\to Y$, $g:Y'\\to Y$ form a chosen Cartesian square [def-pc-fibre-product; def-weil-pbc-cartesian-square]. Let $r$ be a strict tower ringed-square presentation, so that its upper pullback is native inverse image along $g'$ with its specified coefficient isomorphism [def-weil-pbc-strict-tower-operations; def-weil-pbc-proetale-operations]. If $g$ is an open immersion [def-weil-open-immersion], then this upper pullback preserves K-injective complexes [def-pur-kinjective-complex]: the termwise image of every K-injective complex on $X$ is K-injective on $X'$.",
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-fibre-product",
+  "def-weil-pbc-cartesian-square",
+  "def-weil-pbc-strict-tower-operations",
+  "def-weil-pbc-proetale-operations",
+  "def-weil-open-immersion",
+  "def-pur-kinjective-complex"
+ ],
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 08FI, lemma-restrict-K-injective-to-open; proetale.tex Tag 09A5, section-morphism; sites.tex Tag 00XZ, section-localize."
+ },
+ "proof": [
+  {
+   "text": "The chosen square identifies g prime with the first projection of the pullback of g along f, preceded by the chosen Cartesian isomorphism. Open immersions are stable under base change and composition with isomorphisms, so g prime is open.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Apply native open pullback preservation to g prime, the coefficient ring r.RX, the ring r.RX prime and the specified coefficient isomorphism r.cg prime. This functor is exactly upperPull r.",
+   "uses": [
+    "lem-sf-proetale-open-pullback-preserves-kinjective"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sf-proetale-open-pullback-preserves-kinjective"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 08FI; factorization of the complete K-injective preservation proof from step 6 of lem-sf-ringed-restriction-exchange-open-descent"
+ },
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Open inverse image of module sheaves preserves K-injective complexes by exact extension by zero",
+   "results": "8 hits, including Scheme.Modules.restrictFunctor, CochainComplex.isKInjective_of_iso, SheafOfModules.fullyFaithfulForget_preimage_val, and open-immersion section formulas.",
+   "date": "2026-10-27",
+   "verdict": "No native pro-etale functor-level preservation theorem; use the existing slice restriction and equivalence APIs."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An additive open restriction functor of sheaves of modules preserves K-injective complexes",
+   "results": "8 hits, including InjectiveResolution.instIsKInjectiveCochainComplex, CochainComplex.isKInjective_of_injective, SheafOfModules.instAbelian, and Sheaf.instIsGrothendieckAbelian.",
+   "date": "2026-10-27",
+   "verdict": "No native pro-etale preservation instance. The upper-square case follows from the same preservation theorem by open base change."
+  },
+  {
+   "tool": "grep",
+   "query": "PreservesKInjectiveComplexes|isKInjective_restrict|open_inverseImage_isKInjective in Mathlib, lean/WeilConjectures and lean/Sheaf",
+   "results": "Mathlib has generic K-injective APIs; WeilConjectures RightDerivedFunctor.Comp has the preservation class, composition and complex-map instances; Sheaf has localized restriction preservation and the item has a complex-level open theorem. No native open or upper-square functor-level preservation instance.",
+   "date": "2026-10-27",
+   "verdict": "Factor the existing complete proof through functor-level instances, retaining the existing complex-level theorem signatures."
+  }
+ ],
+ "status": "split",
+ "import_flags": [],
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.RingedRestrictionExchangeOpenDescent",
+  "date": "2026-10-27",
+  "group": "C5"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "Continuous-module proper exchange realization for prop-functor-package clause 2: returned proof steps 4, 5, 9 and 10 of lem-sf-continuous-adic-proper-base-change-restriction; independent normalized ringed restriction exchange and open descent argument. Functor-level formulation of the K-injective preservation part of step 6.",
+   "via": [
+    "lem-sf-ringed-restriction-exchange-open-descent",
+    "lem-sf-continuous-adic-proper-base-change-restriction",
+    "lem-sf-weil-open-immersion-compact-image-extension-by-zero"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-thm-sf-package",
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.RingedUpperOpenPullbackKInjective",
+  "file": "lean/Sheaf/AlgebraicGeometry/RingedUpperOpenPullbackKInjective.lean",
+  "declaration": "AlgebraicGeometry.Scheme.RingedRestrictionExchange.upper_pull_preservesKInjectiveComplexes",
+  "statement": "theorem upper_pull_preservesKInjectiveComplexes\n    (r : StrictTowerRingedSquare sq) [IsOpenImmersion g] :\n    (upperPull r).PreservesKInjectiveComplexes",
+  "branch": "sheaf-dag",
+  "by": "C5",
+  "date": "2026-10-27",
+  "existing": false
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-285a2",
+  "group": "C5",
+  "result": "fix",
+  "landing": "20261026T222602-L-670542",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-285a2",
+  "group": "C5",
+  "result": "fix",
+  "landing": "20261026T222602-L-670542",
+  "kind": "interface",
+  "note": "independent cc review: delivered item + 4 new modules + 5 node files + 2 change records against clone master 20c80eb and the item node plan; set-compiled with the one direct importer NativeProperNaturalBaseChange (OK, sorry stub)"
+ }
+}

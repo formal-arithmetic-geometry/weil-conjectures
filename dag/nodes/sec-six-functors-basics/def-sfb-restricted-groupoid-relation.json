@@ -1,0 +1,195 @@
+{
+ "id": "def-sfb-restricted-groupoid-relation",
+ "kind": "definition",
+ "title": "Restricted scheme relation and its two endpoint maps",
+ "status": "split",
+ "statement": "Let $S$ be a scheme [def-pc-scheme], with the universes of [def-weil-size-convention], let $R,U,U'$ be schemes over $S$, and let $s,t:R\\to U$ and $q:U'\\to U$ be morphisms over $S$. Define the restricted relation to be the iterated fibre product [def-pc-fibre-product] $R'=U'\\times_{q,U,s}R\\times_{t,U,q}U'$. Its source $s':R'\\to U'$ is the first endpoint projection and its target $t':R'\\to U'$ is the last endpoint projection. Thus over a test $S$-scheme $T$ its triples $(x,r,y)$ satisfy $qx=sr$ and $tr=qy$, and the two endpoint maps send such a triple to $x$ and $y$, respectively. This construction is defined for arbitrary $s,t,q$; it requires no groupoid structure, monicity, etaleness or covering hypothesis.",
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-size-convention",
+  "def-pc-fibre-product"
+ ],
+ "source": {
+  "document": "literature/stacks-project/groupoids.tex",
+  "place": "Tag 02VB (lemma-restrict-groupoid), the iterated fibre product and its two endpoint maps. The underlying construction needs no groupoid or covering hypothesis."
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "restrictedEtaleRelation|restrictedGroupoid|restrict.*[Gg]roupoid",
+   "results": {
+    "t": "2026-10-23T14:46:51Z",
+    "tool": "grep",
+    "query": "restrictedEtaleRelation|restrictedGroupoid|restrict.*[Gg]roupoid",
+    "sub": "AlgebraicGeometry",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-23",
+   "verdict": "No matching Mathlib notion; reuse the three existing plain definitions in Sheaf.AlgebraicGeometry.EtaleRelationRestrictionQuotient, with a definition node owning the construction."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The restriction of a scheme relation along a morphism is the iterated pullback with its two endpoint projections",
+   "results": {
+    "t": "2026-10-23T14:46:51Z",
+    "tool": "leansearch",
+    "query": "The restriction of a scheme relation along a morphism is the iterated pullback with its two endpoint projections",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "AlgebraicGeometry.morphismRestrict",
+     "AlgebraicGeometry.pullbackRestrictIsoRestrict_hom_morphismRestrict_assoc",
+     "AlgebraicGeometry.Scheme.Modules.restrictFunctorIsoPullback",
+     "AlgebraicGeometry.Scheme.Hom.resLE",
+     "AlgebraicGeometry.Scheme.Hom.resLE_comp_resLE",
+     "AlgebraicGeometry.morphismRestrict_appLE",
+     "AlgebraicGeometry.pullbackRestrictIsoRestrict",
+     "AlgebraicGeometry.pullbackRestrictIsoRestrict_inv_fst_assoc"
+    ],
+    "digest": "e2c816c37390a0ad"
+   },
+   "date": "2026-10-23",
+   "verdict": "No matching Mathlib notion; reuse the three existing plain definitions in Sheaf.AlgebraicGeometry.EtaleRelationRestrictionQuotient, with a definition node owning the construction."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Restrict a scheme groupoid relation by pulling back both endpoints along a morphism",
+   "results": {
+    "t": "2026-10-23T14:46:52Z",
+    "tool": "leanfinder",
+    "query": "Restrict a scheme groupoid relation by pulling back both endpoints along a morphism",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "AlgebraicGeometry.Scheme.GlueData.Rel",
+     "AlgebraicGeometry.morphismRestrict",
+     "AlgebraicGeometry.isPullback_morphismRestrict",
+     "AlgebraicGeometry.pullbackRestrictIsoRestrict_hom_morphismRestrict_assoc",
+     "AlgebraicGeometry.morphismRestrictRestrict",
+     "AlgebraicGeometry.Scheme.PartialMap.isOver_iff_eq_restrict",
+     "AlgebraicGeometry.pullbackRestrictIsoRestrict_hom_morphismRestrict",
+     "AlgebraicGeometry.Scheme.OpenCover.restrict"
+    ],
+    "digest": "f84993e624b790e4"
+   },
+   "date": "2026-10-23",
+   "verdict": "No matching Mathlib notion; reuse the three existing plain definitions in Sheaf.AlgebraicGeometry.EtaleRelationRestrictionQuotient, with a definition node owning the construction."
+  },
+  {
+   "tool": "grep",
+   "query": "rg -n restrictedEtaleRelation|restrictedGroupoid lean/WeilConjectures lean/Sheaf",
+   "results": "No upstream WeilConjectures match. Sheaf.AlgebraicGeometry.EtaleRelationRestrictionQuotient defines restrictedEtaleRelation, restrictedEtaleRelationSource and restrictedEtaleRelationTarget, with no etale, cover, groupoid or monicity assumptions. Other hits are consumers.",
+   "date": "2026-10-23",
+   "verdict": "Exact existing definitions, reused without copying."
+  },
+  {
+   "tool": "grep",
+   "query": "rg -l 'restrictedEtaleRelation|restricted-groupoid-relation|02VB' dag/nodes; python3 tools/blueprint_refs.py search 'restricted groupoid relation'",
+   "results": "No definition node owns this construction. Existing hits are theorem nodes: lem-a1-clopen-relation-base-change-identification, lem-a1-groupoid-invariant-open-restriction-degree, lem-a1-affine-groupoid-invariant-rank-strata, lem-trf-etale-quotient-affine-open-cover, lem-trf-etale-relation-restriction-quotient, and this item. Blueprint search: 0 matches.",
+   "date": "2026-10-23",
+   "verdict": "Add definition ownership, as requested by immutable-head H2 review."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-fppf-groupoid-restriction-quotient",
+  "date": "2026-10-23",
+  "group": "Q59"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Algebraicity and smoothness of the stack of all nodal curves. Supporting input: Tags 0D52 (lemma-curves-stack) and 0D53 (lemma-curves-diagonal), with situation-curves. Supporting input: Effectivity step in quot-lemma-curves-stack via quot-lemma-spaces-stack; finite-type part (2) of bootstrap-lemma-descend-algebraic-space. Supporting input: theorem-final-bootstrap (3), applied after constructing a representable fppf cover of the descended sheaf. Subdivision of the final bootstrap: affine locally quasi-finite relation; finite etale quasi-splitting charts and quotient by the open finite locally free subrelation (Tags 04S0, 04S4). Supporting input: Fppf restriction preserves a groupoid quotient and reflects relation monicity. Underlying restricted relation and endpoint maps in the first construction step (Stacks 02VB).",
+   "via": [
+    "lem-sfb-fppf-groupoid-restriction-quotient",
+    "lem-sfb-fppf-relation-etale-replacement",
+    "lem-sfb-fppf-space-atlas-bootstrap",
+    "lem-sfb-space-finite-type-fppf-effectivity",
+    "lem-sfb-curve-descent-isom-spaces",
+    "lem-sfb-nodal-curve-stack-smooth",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.EtaleRelationRestrictionQuotient",
+  "declaration": "AlgebraicGeometry.AlgebraicSpace.restrictedEtaleRelation",
+  "declarations": [
+   "AlgebraicGeometry.AlgebraicSpace.restrictedEtaleRelation",
+   "AlgebraicGeometry.AlgebraicSpace.restrictedEtaleRelationSource",
+   "AlgebraicGeometry.AlgebraicSpace.restrictedEtaleRelationTarget"
+  ],
+  "statement": "def restrictedEtaleRelation {S : Scheme.{u}} {R U U' : Over S}\n    (s t : R ⟶ U) (g : U' ⟶ U) : Over S",
+  "branch": "sheaf-dag",
+  "by": "Q59",
+  "date": "2026-10-23",
+  "existing": true,
+  "note": "Definition ownership requested by immutable-head H2 review of 48ef2a5c1878. These three existing definitions are plain iterated pullbacks in Over S, with no theorem choice and no extra hypotheses. Reused unchanged from the published module; their complete signatures and clause correspondence are recorded in the report."
+ },
+ "import_flags": [],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-3d7acb891",
+  "group": "Q59",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-3d7acb891",
+  "group": "Q59",
+  "result": "pass",
+  "note": "Re-delivery after the H2 RETURN on 48ef2a5c1878. Item Lean is byte-identical (sha256 107ee5d5…). The only item-node change is in stmt_deps: lem-trf-etale-relation-restriction-quotient is replaced by the new def-sfb-restricted-groupoid-relation, which owns restrictedEtaleRelation/Source/Target with existing:true on the unchanged Sheaf.AlgebraicGeometry.EtaleRelationRestrictionQuotient (side-live lines 34-48 are plain pullbacks with no hypotheses, matching Stacks 02VB). Its statement is verbatim from def, import_flags is [], and no concurrent owner exists live. Re-checked H3 clauses (fppf instances, canonical restricted operations via middle equations, composition orientation, conditional monicity plus Equivalence, coequalizer orbit presheaves, desc map [x]->[qx], IsIso of the sheafified map outside the implication, u+1/u universes), edge cases and gates. No compile, since no file was changed. No findings."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Y2",
+  "result": "pass",
+  "landing": "20261026T083522-L-2376245",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)",
+  "sorry_before": [
+   "AlgebraicGeometry.AlgebraicSpace.etale_relation_restriction_quotient"
+  ],
+  "sorry_after": []
+ }
+}

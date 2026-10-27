@@ -8,6 +8,10 @@ module
 public import Mathlib.RingTheory.TensorProduct.Basic
 public import Mathlib.LinearAlgebra.Dimension.Finite
 import Sheaf.TraceFormula.RationalConeDualFinite
+import Mathlib.LinearAlgebra.Dual.Lemmas
+import Mathlib.RingTheory.TensorProduct.Finite
+import Mathlib.RingTheory.Localization.FractionRing
+import Mathlib.RingTheory.Localization.Integer
 
 /-!
 # Integral dual forms for pointed rational cones
@@ -23,6 +27,24 @@ expanded from the rational polyhedral cone description (Kato 1994, *Toric singul
 universe u
 
 open scoped TensorProduct
+
+/-- Clear denominators on a finite integral basis, then extend the resulting values linearly. -/
+private theorem integral_multiple
+    (L : Type u) [AddCommGroup L] [Module.Free ℤ L] [Module.Finite ℤ L]
+    (f : L →ₗ[ℤ] ℚ) :
+    ∃ (d : ℤ), 0 < d ∧ ∃ φ : L →+ ℤ, ∀ x, (d : ℚ) * f x = (φ x : ℚ) := by
+  classical
+  let b := Module.Free.chooseBasis ℤ L
+  obtain ⟨d, hd⟩ := IsLocalization.exist_integer_multiples_of_finite
+    (Submonoid.pos ℤ) (fun j ↦ f (b j))
+  choose a ha using hd
+  let p : L →ₗ[ℤ] ℤ := b.constr ℤ a
+  have hp : (Int.castAddHom ℚ).toIntLinearMap.comp p = (d : ℤ) • f := by
+    apply b.ext
+    intro j
+    simpa [p] using ha j
+  refine ⟨d, d.property, p.toAddMonoidHom, fun x ↦ ?_⟩
+  simpa [zsmul_eq_mul] using (LinearMap.congr_fun hp x).symm
 
 /--
 (blueprint: lem-trf-rational-cone-dual-integral-forms)
@@ -67,6 +89,81 @@ theorem rationalConeDualIntegralForms
             Φ i (TensorProduct.tmul ℤ (1 : ℚ) ℓ) = (φ i ℓ : ℚ)) →
           Submodule.span ℚ (Set.range Φ) = ⊤ →
           C = {x | ∀ i, 0 ≤ Φ i x} → 0 < r) := by
-  sorry
+  classical
+  dsimp only
+  let V := ℚ ⊗[ℤ] L
+  let C : Set V := {x | ∃ q : Fin m → ℚ≥0,
+    x = ∑ j, (q j : ℚ) • TensorProduct.tmul ℤ (1 : ℚ) (v j)}
+  intro hpoint _hgen
+  have hC0 : (0 : V) ∈ C := by
+    exact ⟨fun _ ↦ 0, by simp⟩
+  have hnonempty : (∃ x : V, x ≠ 0) →
+      ∀ (r : ℕ) (φ : Fin r → L →+ ℤ) (Φ : Fin r → V →ₗ[ℚ] ℚ),
+        (∀ (i : Fin r) (ℓ : L),
+          Φ i (TensorProduct.tmul ℤ (1 : ℚ) ℓ) = (φ i ℓ : ℚ)) →
+        Submodule.span ℚ (Set.range Φ) = ⊤ →
+        C = {x | ∀ i, 0 ≤ Φ i x} → 0 < r := by
+    rintro ⟨x, hx⟩ r φ Φ _ _ hC
+    by_contra hr
+    have hr0 : r = 0 := Nat.eq_zero_of_not_pos hr
+    subst r
+    have hmem (y : V) : y ∈ C := by
+      rw [hC]
+      exact fun i ↦ Fin.elim0 i
+    have : x ∈ C ∩ (-C) := ⟨hmem x, by simpa using hmem (-x)⟩
+    rw [hpoint] at this
+    exact hx (Set.mem_singleton_iff.mp this)
+  refine ⟨?_, hnonempty⟩
+  by_cases hzero : ∀ x : V, x = 0
+  · have : Subsingleton V := ⟨fun x y ↦ (hzero x).trans (hzero y).symm⟩
+    refine ⟨0, Fin.elim0, Fin.elim0, ?_, ?_, ?_, fun _ ↦ rfl⟩
+    · exact fun i ↦ Fin.elim0 i
+    · exact Subsingleton.elim _ _
+    · ext x
+      simp only [Set.mem_ofPred_eq, Fin.forall_fin_zero, iff_true]
+      change x ∈ C
+      rw [hzero x]
+      exact hC0
+  · obtain ⟨r, forms, hforms⟩ := Weil.rationalConeDualFinite m
+      (fun j ↦ TensorProduct.tmul ℤ (1 : ℚ) (v j))
+    have hdesc : ∀ x : V, x ∈ C ↔ ∀ i, 0 ≤ forms i x := by
+      intro x
+      rw [← hforms x]
+      constructor
+      · rintro ⟨q, hq⟩
+        exact ⟨fun j ↦ (q j : ℚ), fun j ↦ (q j).property, hq.symm⟩
+      · rintro ⟨q, hq, hx⟩
+        exact ⟨fun j ↦ ⟨q j, hq j⟩, hx.symm⟩
+    have hclear (i : Fin r) : ∃ (d : ℤ), 0 < d ∧ ∃ φ : L →+ ℤ,
+        ∀ ℓ, (d : ℚ) * forms i (TensorProduct.tmul ℤ (1 : ℚ) ℓ) = (φ ℓ : ℚ) := by
+      exact integral_multiple L
+        (((forms i).restrictScalars ℤ).comp (TensorProduct.mk ℤ ℚ L (1 : ℚ)))
+    choose d hd φ hφ using hclear
+    let Φ : Fin r → V →ₗ[ℚ] ℚ := fun i ↦ (d i : ℚ) • forms i
+    have hΦ : C = {x | ∀ i, 0 ≤ Φ i x} := by
+      ext x
+      rw [hdesc]
+      simp only [Set.mem_ofPred_eq, Φ, LinearMap.smul_apply, smul_eq_mul]
+      exact forall_congr' fun i ↦ (mul_nonneg_iff_of_pos_left (by exact_mod_cast hd i)).symm
+    have hker : (Submodule.span ℚ (Set.range Φ)).dualCoannihilator = ⊥ := by
+      apply bot_unique
+      intro x hx
+      rw [Submodule.mem_bot]
+      have hx0 (i : Fin r) : Φ i x = 0 :=
+        (Submodule.mem_dualCoannihilator x).mp hx _ (Submodule.subset_span ⟨i, rfl⟩)
+      have hmem : x ∈ C ∩ (-C) := by
+        constructor
+        · rw [hΦ]
+          exact fun i ↦ (hx0 i).ge
+        · have hn : -x ∈ C := by
+            rw [hΦ]
+            intro i
+            simp [hx0 i]
+          simpa using hn
+      rw [hpoint] at hmem
+      exact Set.mem_singleton_iff.mp hmem
+    refine ⟨r, φ, Φ, fun i ℓ ↦ hφ i ℓ, ?_, hΦ, fun hz ↦ (hzero hz).elim⟩
+    rw [← Subspace.dualCoannihilator_dualAnnihilator_eq
+      (W := Submodule.span ℚ (Set.range Φ)), hker, Submodule.dualAnnihilator_bot]
 
 end

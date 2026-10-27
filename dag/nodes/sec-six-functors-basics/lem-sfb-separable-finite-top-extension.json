@@ -1,0 +1,275 @@
+{
+ "id": "lem-sfb-separable-finite-top-extension",
+ "kind": "statement",
+ "title": "Finite separable top extensions preserve nonalgebraic separability",
+ "statement": "Let $k\\subseteq L\\subseteq M$ be a tower of fields [def-pc-field-extension]. Suppose that $L/k$ is separable in the possibly transcendental sense [def-weil-pbc-separable-field-extension]: every intermediate field $k\\subseteq L_0\\subseteq L$ finitely generated as a field over $k$ is separably generated over $k$. Suppose that $M/L$ is finite separable algebraic [def-weil-pbc-separable-algebraic-extension]. Then $M/k$ is separable in the same possibly transcendental sense. Finite means finite-dimensional; no algebraicity or finite generation of $L/k$ is assumed.",
+ "source": {
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tag 0BRM, lemma-abhyankar, final paragraph: the finite separable extension of kappa_B is separable over kappa_A; the nonalgebraic notion is Algebra Tag 030O (definition-separable-field-extension), with Tag 030X (lemma-separably-generated-separable)."
+ },
+ "stmt_deps": [
+  "def-pc-field-extension",
+  "def-weil-pbc-separable-field-extension",
+  "def-weil-pbc-separable-algebraic-extension"
+ ],
+ "proof": [
+  {
+   "text": "If $\\operatorname{char}(k)=0$, apply [lem-weil-pbc-char-zero-field-extension-separable] to $M/k$ and finish. Otherwise $\\operatorname{char}(k)=p$ for a prime $p$. Fix any field extension $E/k$. Give all tensor products below their commutative algebra structures using [lem-weil-pbc-algebra-tensor-pushout-universal-property]. Put $S=L\\otimes_k E$, with $L$-algebra map $\\ell\\mapsto\\ell\\otimes1$. We will show $M\\otimes_kE$ is reduced for every such $E$.",
+   "uses": [
+    "lem-weil-pbc-char-zero-field-extension-separable",
+    "lem-weil-pbc-algebra-tensor-pushout-universal-property"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 030W (lemma-characterize-separable-field-extensions), characteristic hypothesis; Tag 030U (lemma-separable-extension-preserves-reducedness)"
+   }
+  },
+  {
+   "text": "First $S$ is reduced. For a nilpotent $z\\in S$, write $z=\\sum_{i=1}^r\\ell_i\\otimes e_i$, possible because pure tensors generate [def-weil-pbc-module-tensor-product]. Set $F=k(\\ell_1,\\ldots,\\ell_r)\\subseteq L$. This is a finitely generated intermediate field, so the hypothesis on $L/k$ and [def-weil-pbc-separable-field-extension] make $F/k$ separably generated. Since $E$ is a field, it is reduced; hence [lem-weil-pbc-separably-generated-tensor-reduced] makes $F\\otimes_k E$ reduced. The inclusion $F\\hookrightarrow L$ remains injective after tensoring with $E$: use [lem-weil-pbc-module-over-field-flat] and [lem-trf-flat-tensor-preserves-injection], with the elementary interchange $x\\otimes y\\leftrightarrow y\\otimes x$ if necessary. Its tensor map $j:F\\otimes_kE\\to S$ is also a ring map, as multiplication on pure tensors shows. For $y=\\sum_i\\ell_i\\otimes e_i$ in its source, $j(y)=z$. If $z^n=0$ with $n>0$, then $j(y^n)=0$, injectivity gives $y^n=0$, reducedness gives $y=0$, and thus $z=0$.",
+   "uses": [
+    "def-weil-pbc-module-tensor-product",
+    "def-weil-pbc-separable-field-extension",
+    "lem-weil-pbc-separably-generated-tensor-reduced",
+    "lem-weil-pbc-module-over-field-flat",
+    "lem-trf-flat-tensor-preserves-injection"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 030U (lemma-separable-extension-preserves-reducedness), finite-subextension reduction; the finite-coefficient and injectivity argument is written explicitly"
+   }
+  },
+  {
+   "text": "The empty family is a transcendence basis of $M/L$: it is algebraically independent because the associated polynomial evaluation is the injective field map $L\\hookrightarrow M$, and $M/L$ is algebraic by hypothesis. Its generated subfield is $L$. By [def-weil-pbc-transcendence-basis], [def-weil-pbc-separable-algebraic-extension], and clause (1) of [def-weil-pbc-separable-field-extension], the given separability of $M/L$ therefore makes $M/L$ separably generated. This uses no finite generation of $L/k$.",
+   "uses": [
+    "def-weil-pbc-transcendence-basis",
+    "def-weil-pbc-separable-algebraic-extension",
+    "def-weil-pbc-separable-field-extension"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 030O (definition-separable-field-extension), clause (1), empty transcendence basis"
+   }
+  },
+  {
+   "text": "Apply [lem-weil-pbc-separably-generated-tensor-reduced] over the field $L$ to the separably generated extension $M/L$ and the reduced $L$-algebra $S$ from step 2. It gives reducedness of $M\\otimes_L(L\\otimes_k E)$. The elementary ring isomorphism to $M\\otimes_k E$ sends $m\\otimes(\\ell\\otimes e)$ to $m\\ell\\otimes e$, with inverse $m\\otimes e\\mapsto m\\otimes(1\\otimes e)$. These maps are additive and multiplicative by the pure-tensor formulas. Balancing over $L$ identifies $m\\ell\\otimes(1\\otimes e)$ with $m\\otimes(\\ell\\otimes e)$; balancing over $k$ identifies $ma\\otimes(1\\otimes e)$ with $m\\otimes(1\\otimes ae)$ for $a\\in k$. Thus both formulas descend, and their composites are the identity on pure tensors, hence everywhere by [def-weil-pbc-module-tensor-product]. A nilpotent maps under the inverse to a nilpotent in the reduced source and is zero. Consequently $M\\otimes_k E$ is reduced.",
+   "uses": [
+    "lem-weil-pbc-separably-generated-tensor-reduced",
+    "def-weil-pbc-module-tensor-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 030U (lemma-separable-extension-preserves-reducedness); explicit tensor reassociation for the tower"
+   }
+  },
+  {
+   "text": "The extension $E/k$ was arbitrary. In characteristic $p>0$, [lem-weil-pbc-geometrically-reduced-extension-separable] applied to $M/k$ and the reducedness proved in step 4 says that every finitely generated intermediate field of $M/k$ is separably generated. This is exactly the required separability. Together with step 1 this covers every characteristic.",
+   "uses": [
+    "lem-weil-pbc-geometrically-reduced-extension-separable"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 030W (lemma-characterize-separable-field-extensions), implication (4) => (1)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-char-zero-field-extension-separable",
+  "lem-weil-pbc-algebra-tensor-pushout-universal-property",
+  "def-weil-pbc-module-tensor-product",
+  "def-weil-pbc-separable-field-extension",
+  "lem-weil-pbc-separably-generated-tensor-reduced",
+  "lem-weil-pbc-module-over-field-flat",
+  "lem-trf-flat-tensor-preserves-injection",
+  "def-weil-pbc-transcendence-basis",
+  "def-weil-pbc-separable-algebraic-extension",
+  "lem-weil-pbc-geometrically-reduced-extension-separable"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tags 030O, 030U, 030W: explicit tensor proof of the transitivity assertion used in more-algebra.tex Tag 0BRM (lemma-abhyankar), final paragraph."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "IsSeparableExtension|IsSeparablyGenerated|isSeparable_tower",
+   "results": "{\"t\": \"2026-10-24T06:01:01Z\", \"tool\": \"grep\", \"query\": \"IsSeparableExtension|IsSeparablyGenerated|isSeparable_tower\", \"sub\": \"FieldTheory\", \"ok\": true, \"n_hits\": 13, \"note\": \"\", \"top\": [\"Mathlib/FieldTheory/Separable.lean\", \"Mathlib/FieldTheory/Separable.lean\", \"Mathlib/FieldTheory/Separable.lean\", \"Mathlib/FieldTheory/Separable.lean\", \"Mathlib/FieldTheory/Separable.lean\", \"Mathlib/FieldTheory/CardinalEmb.lean\", \"Mathlib/FieldTheory/PurelyInseparable/PerfectClosure.lean\", \"Mathlib/FieldTheory/PurelyInseparable/PerfectClosure.lean\"], \"digest\": \"2b0936e016c06c3e\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: Algebra.IsSeparable.trans is the algebraic separability theorem; neither it nor the transcendence-basis predicates states permanence for an arbitrary extension separable in the finitely generated subextension sense."
+  },
+  {
+   "tool": "leansearch",
+   "query": "If L over k is separable but not necessarily algebraic and M over L is finite separable then M over k is separable",
+   "results": "{\"t\": \"2026-10-24T06:01:02Z\", \"tool\": \"leansearch\", \"query\": \"If L over k is separable but not necessarily algebraic and M over L is finite separable then M over k is separable\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.isSeparable_tower_bot_of_isSeparable\", \"Algebra.isSeparable_tower_top_of_isSeparable\", \"IsSeparable.tower_bot\", \"Algebra.IsSeparable.trans\", \"IsSeparable.tower_top\", \"IntermediateField.isSeparable_tower_top\", \"IsSeparable.of_algebra_isSeparable_of_isSeparable\", \"IntermediateField.isSeparable_tower_bot\"], \"digest\": \"f28b6583dfdd3ef3\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: Algebra.IsSeparable.trans is the algebraic separability theorem; neither it nor the transcendence-basis predicates states permanence for an arbitrary extension separable in the finitely generated subextension sense."
+  },
+  {
+   "tool": "loogle",
+   "query": "Algebra.IsSeparable, Algebra.IsSeparablyGenerated",
+   "results": "{\"t\": \"2026-10-24T06:01:02Z\", \"tool\": \"loogle\", \"query\": \"Algebra.IsSeparable, Algebra.IsSeparablyGenerated\", \"sub\": \"\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"instIsSeparablyGeneratedOfIsSeparable\", \"Algebra.isSeparable_iff_isSeparablyGenerated_and_isAlgebraic\", \"Algebra.IsSeparablyGenerated.isSeparable\", \"Algebra.IsSeparablyGenerated.mk\", \"Algebra.isSeparablyGenerated_iff\"], \"digest\": \"7c2caeb29092a267\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: Algebra.IsSeparable.trans is the algebraic separability theorem; neither it nor the transcendence-basis predicates states permanence for an arbitrary extension separable in the finitely generated subextension sense."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finite separable top extension of a possibly transcendental separable field extension is separable in the separably generated sense",
+   "results": "{\"t\": \"2026-10-24T06:01:03Z\", \"tool\": \"leanfinder\", \"query\": \"Finite separable top extension of a possibly transcendental separable field extension is separable in the separably generated sense\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"IsSeparable.tower_top\", \"Algebra.isSeparable_tower_top_of_isSeparable\", \"IsSepClosure.isSeparable\", \"IntermediateField.isSeparable_tower_top\", \"IsSepClosure.separable\", \"separableClosure.isSeparable\", \"IsSeparable.of_algebra_isSeparable_of_isSeparable\", \"IntermediateField.isSeparable_of_mem_isSeparable\"], \"digest\": \"6c90c96811896b1f\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: Algebra.IsSeparable.trans is the algebraic separability theorem; neither it nor the transcendence-basis predicates states permanence for an arbitrary extension separable in the finitely generated subextension sense."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Separable extension in the geometrically reduced sense composed with a finite separable algebraic extension is separable",
+   "results": "{\"t\": \"2026-10-24T06:01:40Z\", \"tool\": \"leanfinder\", \"query\": \"Separable extension in the geometrically reduced sense composed with a finite separable algebraic extension is separable\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.IsSeparable.trans\", \"IsSeparable.tower_top\", \"Algebra.isSeparable_tower_top_of_isSeparable\", \"IsSeparable.of_algebra_isSeparable_of_isSeparable\", \"IsSeparable.tower_bot\", \"Algebra.IsSeparable.of_algHom\", \"Algebra.isSeparable_tower_bot_of_isSeparable\", \"IntermediateField.isSeparable_tower_top\"], \"digest\": \"c7f58ca5e16a7cea\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: Algebra.IsSeparable.trans is the algebraic separability theorem; neither it nor the transcendence-basis predicates states permanence for an arbitrary extension separable in the finitely generated subextension sense."
+  },
+  {
+   "tool": "grep",
+   "query": "IsSeparableExtension|IsSeparablyGenerated|IsSeparable.trans",
+   "results": "{\"t\": \"2026-10-24T07:18:17Z\", \"tool\": \"grep\", \"query\": \"IsSeparableExtension|IsSeparablyGenerated|IsSeparable.trans\", \"sub\": \"FieldTheory\", \"ok\": true, \"n_hits\": 4, \"note\": \"\", \"top\": [\"Mathlib/FieldTheory/SeparableDegree.lean\", \"Mathlib/FieldTheory/SeparableDegree.lean\", \"Mathlib/FieldTheory/SeparableDegree.lean\", \"Mathlib/FieldTheory/PurelyInseparable/Basic.lean\"], \"digest\": \"7835971fbef9e101\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: Algebra.IsSeparable.trans (Mathlib/FieldTheory/SeparableDegree.lean:835) assumes algebraic separability of the lower extension. Algebra.IsSeparable at Separable.lean:549 implies algebraicity (line 570). The present lower extension may be transcendental. Loogle reports the unknown Mathlib identifier Algebra.IsSeparableExtension; this predicate exists in the project, not the pinned Mathlib."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Transitivity of separable field extensions without assuming the lower extension is algebraic",
+   "results": "{\"t\": \"2026-10-24T07:18:17Z\", \"tool\": \"leansearch\", \"query\": \"Transitivity of separable field extensions without assuming the lower extension is algebraic\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.IsSeparable.trans\", \"Algebra.isSeparable_tower_bot_of_isSeparable\", \"Algebra.isSeparable_tower_top_of_isSeparable\", \"IsSeparable.of_algebra_isSeparable_of_isSeparable\", \"IsSeparable.tower_top\", \"IsSeparable.tower_bot\", \"IntermediateField.isSeparable_tower_top\", \"IsPurelyInseparable.trans\"], \"digest\": \"a83e162464d19a00\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: Algebra.IsSeparable.trans (Mathlib/FieldTheory/SeparableDegree.lean:835) assumes algebraic separability of the lower extension. Algebra.IsSeparable at Separable.lean:549 implies algebraicity (line 570). The present lower extension may be transcendental. Loogle reports the unknown Mathlib identifier Algebra.IsSeparableExtension; this predicate exists in the project, not the pinned Mathlib."
+  },
+  {
+   "tool": "loogle",
+   "query": "Algebra.IsSeparable, Algebra.IsSeparableExtension",
+   "results": "{\"t\": \"2026-10-24T07:18:17Z\", \"tool\": \"loogle\", \"query\": \"Algebra.IsSeparable, Algebra.IsSeparableExtension\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"loogle: unknown identifier 'Algebra.IsSeparableExtension'\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: Algebra.IsSeparable.trans (Mathlib/FieldTheory/SeparableDegree.lean:835) assumes algebraic separability of the lower extension. Algebra.IsSeparable at Separable.lean:549 implies algebraicity (line 570). The present lower extension may be transcendental. Loogle reports the unknown Mathlib identifier Algebra.IsSeparableExtension; this predicate exists in the project, not the pinned Mathlib."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A possibly transcendental separable field extension followed by a finite separable algebraic extension is separable",
+   "results": "{\"t\": \"2026-10-24T07:18:19Z\", \"tool\": \"leanfinder\", \"query\": \"A possibly transcendental separable field extension followed by a finite separable algebraic extension is separable\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.IsSeparable.trans\", \"Algebra.isSeparable_tower_top_of_isSeparable\", \"IsSeparable.tower_top\", \"IntermediateField.isSeparable_tower_top\", \"Algebra.isSeparable_tower_bot_of_isSeparable\", \"IsSeparable.of_algebra_isSeparable_of_isSeparable\", \"IsSeparable.tower_bot\", \"IntermediateField.isSeparable_adjoin_pair_of_isSeparable\"], \"digest\": \"af73f72a2786ff7c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: Algebra.IsSeparable.trans (Mathlib/FieldTheory/SeparableDegree.lean:835) assumes algebraic separability of the lower extension. Algebra.IsSeparable at Separable.lean:549 implies algebraicity (line 570). The present lower extension may be transcendental. Loogle reports the unknown Mathlib identifier Algebra.IsSeparableExtension; this predicate exists in the project, not the pinned Mathlib."
+  },
+  {
+   "tool": "grep",
+   "query": "class IsSeparable|theorem isAlgebraic|theorem Algebra.IsSeparable.trans",
+   "results": "{\"t\": \"2026-10-24T07:19:30Z\", \"tool\": \"grep\", \"query\": \"class IsSeparable|theorem isAlgebraic|theorem Algebra.IsSeparable.trans\", \"sub\": \"FieldTheory\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"Mathlib/FieldTheory/IntermediateField/Adjoin/Basic.lean\", \"Mathlib/FieldTheory/IntermediateField/Adjoin/Basic.lean\", \"Mathlib/FieldTheory/IntermediateField/Adjoin/Basic.lean\", \"Mathlib/FieldTheory/IntermediateField/Adjoin/Basic.lean\", \"Mathlib/FieldTheory/IntermediateField/Algebraic.lean\", \"Mathlib/FieldTheory/AbelRuffini.lean\", \"Mathlib/FieldTheory/SeparablyGenerated.lean\", \"Mathlib/FieldTheory/SeparableDegree.lean\"], \"digest\": \"b46986f3ef8862d8\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: Algebra.IsSeparable.trans (Mathlib/FieldTheory/SeparableDegree.lean:835) assumes algebraic separability of the lower extension. Algebra.IsSeparable at Separable.lean:549 implies algebraicity (line 570). The present lower extension may be transcendental. Loogle reports the unknown Mathlib identifier Algebra.IsSeparableExtension; this predicate exists in the project, not the pinned Mathlib."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Composition of geometrically reduced field extensions preserves separability for transcendental extensions",
+   "results": "{\"t\": \"2026-10-24T07:19:32Z\", \"tool\": \"leanfinder\", \"query\": \"Composition of geometrically reduced field extensions preserves separability for transcendental extensions\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.IsSeparable.trans\", \"IsSeparable.tower_top\", \"IsSeparable.of_algebra_isSeparable_of_isSeparable\", \"Algebra.isSeparable_tower_top_of_isSeparable\", \"IsSeparable.tower_bot\", \"Algebra.isSeparable_tower_bot_of_isSeparable\", \"IntermediateField.isSeparable_tower_top\", \"Algebra.IsSeparable.of_algHom\"], \"digest\": \"66fc33e5f101f1ca\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: Algebra.IsSeparable.trans (Mathlib/FieldTheory/SeparableDegree.lean:835) assumes algebraic separability of the lower extension. Algebra.IsSeparable at Separable.lean:549 implies algebraicity (line 570). The present lower extension may be transcendental. Loogle reports the unknown Mathlib identifier Algebra.IsSeparableExtension; this predicate exists in the project, not the pinned Mathlib."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-abhyankar-arbitrary-dvr-branches",
+  "date": "2026-10-24",
+  "group": "Q23"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "Historical supporting input to det-thm-sf-ctf-stability-direct-images, proof (3), through the creation chain of lem-sfb-epp-essentially-finite-type-traits. Current latest direct-image proof (3) does not state this auxiliary algebra result. Weak Epp at each normalized branch over the perfect-residue algebraic preparation. Supporting Abhyankar cancellation for arbitrary local DVR extensions. Residue-field tower in the uniformizer-root calculation of the supporting Abhyankar cancellation lemma; last paragraph of Stacks 0BRM.",
+   "via": [
+    "lem-sfb-abhyankar-arbitrary-dvr-branches",
+    "lem-sfb-epp-weak-perfect-residue",
+    "lem-sfb-epp-essentially-finite-type-traits",
+    "lem-sfb-raynaud-faltings-normalized-reduction",
+    "lem-sfb-group-model-potential-smooth-normalization",
+    "lem-sfb-quasi-reductive-special-connectedness",
+    "lem-sfb-integral-chevalley-weyl-atlas",
+    "lem-sfb-chevalley-integral-root-model",
+    "lem-sfb-borel-kostant-distribution-comparison",
+    "lem-sfb-borel-simple-root-distribution-calculus",
+    "lem-sfb-restricted-induced-infinitesimal-invariants",
+    "lem-sfb-flag-frobenius-rho-pushforward",
+    "lem-sfb-dominant-flag-line-kempf-vanishing",
+    "lem-sfb-induced-weyl-dimension-formula",
+    "lem-sfb-steinberg-induced-module-irreducible",
+    "lem-sfb-rho-section-self-duality",
+    "lem-sfb-steinberg-endomorphism-detection",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-separable-finite-top-extension",
+  "worker": "stage1",
+  "summary": "Statement unchanged. Proved the finite separable top-extension assertion by finite-coefficient reduction to the existing separably-generated tensor-reducedness theorem, the empty separating transcendence basis for M/L, explicit tensor reassociation, and the positive-characteristic geometric-reducedness criterion with a separate characteristic-zero case. Reused all auxiliary nodes; no new nodes. Checked project declarations, current blueprint and logged Mathlib searches.",
+  "blueprint": "Historical auxiliary field algebra for the creation chain and direct-image proof (3) recorded in blueprint.from.place. The latest sk-thm-sf-ctf-stability-direct-images.proof.md does not itself state this auxiliary result. Retained the historical null ancestor and complete via chain; no change to the unit or chapter route.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-separably-generated-tensor-reduced",
+    "why": "Generic field-algebra reducedness lemma (030U), used both on a finitely generated subextension and on M/L; the six-functor unit has no replacement field-algebra statement."
+   },
+   {
+    "node": "lem-weil-pbc-geometrically-reduced-extension-separable",
+    "why": "Generic positive-characteristic criterion (030W), applied only after reducedness for every extension field is established; no six-functor unit step is replaced."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-separably-generated-tensor-reduced",
+  "lem-weil-pbc-geometrically-reduced-extension-separable"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q51-553b1a17a",
+  "group": "Q51",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q51-553b1a17a (reviewer sub-agent of L); spot-checked: I read the whole split: 5 steps, no new nodes, statement unchanged. Source check: Stacks more-algebra 0BRM (lemma-abhyankar) final paragraph uses exactly this transitivity, with no algebraicity of κ_B/κ_A; I also read 030U (algebra.tex 10152) and 030W (10360). Step 1: the char-0 node covers arbitrary K/k. Step 2: finite coefficients give F=k(ℓ_i), separably generated by 030O(2); 030U-node makes F⊗E reduced; F⊗E→L⊗E is injective by flatness of E (pbc module-over-field-flat plus the trf flat leaf, with an elementary swap); nilpotent lifted via injectivity. Step 3: the empty family is a transcendence basis of M/L, so M/L is separably generated (elementary unpacking of definitions). Step 4: 030U-node over L with the reduced L-algebra S=L⊗_kE, and the reassociation M⊗_L(L⊗_kE)≅M⊗_kE is checked explicitly. Step 5: 030W (4)⇒(1) node in char p with E arbitrary. Edge cases checked: M=L, L=k, L=k(t), z=0, E=k; an inseparable top extension is excluded by the hypothesis. Duplicate search: lem-zl-separable-permanence is the algebraic case only; no existing node states the item. Batch-5: lem-trf-flat-tensor-preserves-injection is the generic Mathlib leaf Module.Flat.lTensor_preserves_injective_linearMap (Flat/Basic.lean:131, no deps), not part of the trace formula or Poincaré duality or their proofs; accepted. tool_uses accepted: 030U and 030W generic field-algebra nodes of sk-thm-p1, declared in split_report. Minor: the report mentions a citations.json that was not committed; harmless."
+ },
+ "lean": {
+  "module": "Sheaf.FieldTheory.SeparableFiniteTopExtension",
+  "declaration": "Algebra.isSeparableExtension_of_finite_separable_top",
+  "file": "lean/Sheaf/FieldTheory/SeparableFiniteTopExtension.lean",
+  "statement": "theorem isSeparableExtension_of_finite_separable_top (k : Type u) (L : Type v) (M : Type w) [Field k] [Field L] [Field M] [Algebra k L] [Algebra k M] [Algebra L M] [IsScalarTower k L M] [FiniteDimensional L M] [Algebra.IsSeparable L M] (hL : IsSeparableExtension k L) : IsSeparableExtension k M",
+  "branch": "newtargets-dag",
+  "by": "Q26",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-9893068fd",
+  "group": "Q26",
+  "result": "pass",
+  "note": "Statement matches the node clause by clause: fields k,L,M in independent universes, Algebra k L/k M/L M with IsScalarTower k L M, hL : IsSeparableExtension k L (project def, 030O: FG intermediate fields separably generated), [FiniteDimensional L M] [Algebra.IsSeparable L M], conclusion IsSeparableExtension k M. Agrees with Stacks 0BRM lemma-abhyankar final paragraph (non-algebraic kappa_B/kappa_A allowed). Edge cases M=L, L=k, transcendental L/k, char 0 and imperfect char p covered; inseparable top excluded as required. No Mathlib/project duplicate (IsSeparable.trans needs algebraic L/k). Records: stmt_deps public-imported; lean.statement verbatim; existing:false; docstrings carry source and blueprint tag plus the 5 proof steps; sorry only, no definitions. Report has Worker report and Second reading by Q26. Parallel Q139 delivery 21b86bb58 (same statement up to binder order) was retired at landing (batch heads changed); the live node has no lean record, so this one can land and the second lander must rebind. No compile: no file changed."
+ }
+}

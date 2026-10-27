@@ -1,0 +1,252 @@
+{
+ "id": "lem-weil-proper-finite-normalization",
+ "kind": "statement",
+ "title": "Finite proper normalization with refinement and quotient compatibility",
+ "statement": "Fix the finite-field datum $(p,a,q,k_0,k)$ of [def-weil-finite-field-fiber], a prime $\\ell\\ne p$, and an algebraic closure $\\Omega=\\overline{\\mathbf Q}_\\ell$. Let $E\\subset\\Omega$ be a finite extension of $\\mathbf Q_\\ell$, with valuation ring $R=\\mathcal O_E$, uniformizer $t=\\varpi_E$, and $A_n=R/t^n$ for $n\\ge1$ [def-weil-l-adic-coefficient-extension]. Let $X,Y$ be separated finite-type $k$-schemes and $f:X\\to Y$ a proper $k$-morphism [def-weil-scheme-morphism-properties, def-weil-proper-morphism]. Use the small pro-etale sites, finite constructible categories, derived direct images and compact-support candidates of [def-compact-support-direct-image-detailed, def-weil-derived-direct-image]. Write $c_0=(\\operatorname{id}_X,f)$ for the identity compactification [def-weil-compactifications-refinements].\n\nLet $a_n:(\\operatorname{id}_X)_!\\xrightarrow{\\sim}\\operatorname{id}$ denote the sectionwise identity identification for extension by zero [def-weil-extension-by-zero]. Put $\\alpha_n^0=Rf_{*,n}(a_n):Rf_{!,n}^{c_0}\\xrightarrow{\\sim}Rf_{*,n}$. For any compactification $c$ of $f$, compose the canonical common-refinement comparison $C_{c,c_0,n}$ with $\\alpha_n^0$ and denote the resulting comparison by $\\alpha_n^c$. On $D^b_c(X,A_n)$ this is a natural isomorphism, independent of the common refinement, and\n$$\\alpha_n^{c'}\\circ C_{c,c',n}=\\alpha_n^c.$$\nBounded constructible inputs lie in the etale-origin domain required for these comparisons [lem-sf-proetale-constructible-origin, prop-compactification-coherence-detailed]. At $c_0$, for every quotient $\\varphi:A_{n+1}\\twoheadrightarrow A_n$, the square\n$$\\rho_{*,\\varphi}\\circ(\\alpha_{n+1}^0\\operatorname{Res}_{\\varphi})=(\\operatorname{Res}_{\\varphi}\\alpha_n^0)\\circ\\rho_{!,\\varphi}$$\ncommutes on $D(X_{\\mathrm{proet}},A_n)$, where $\\rho_!$ is exactly the open-extension/ordinary-direct-image restriction comparison of [lem-sf-compact-support-restriction-of-scalars] and $\\rho_*$ its ordinary direct-image factor. These identities are natural in the input and compatible with successive quotient homomorphisms.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-zeta-weil/sk-input-weights/prop-weil-proper-compact-coincidence.proof.md",
+  "place": "first paragraph: identity compactification, finite-level identification and its comparison maps"
+ },
+ "stmt_deps": [
+  "def-weil-finite-field-fiber",
+  "def-weil-l-adic-coefficient-extension",
+  "def-weil-scheme-morphism-properties",
+  "def-weil-proper-morphism",
+  "def-compact-support-direct-image-detailed",
+  "def-weil-derived-direct-image",
+  "def-weil-compactifications-refinements",
+  "def-weil-extension-by-zero",
+  "lem-sf-proetale-constructible-origin",
+  "prop-compactification-coherence-detailed",
+  "lem-sf-compact-support-restriction-of-scalars",
+  "def-pur-conventions",
+  "lem-pur-clopen-common-compact-support",
+  "def-sp-finite-intrinsic-open-square"
+ ],
+ "proof": [
+  {
+   "text": "The identity normalization is the published derived identity-open isomorphism whiskered by ordinary direct image, then the left unitor. It is defined on all unbounded inputs.",
+   "uses": [
+    "def-sp-finite-intrinsic-open-square",
+    "def-compact-support-direct-image-detailed"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "For a bounded constructible K choose bounds a,b from its bounded cohomological support and use [min a b,max a b] as a vanishing interval. The finite-ring constructible derived origin theorem gives a bounded constructible etale L and a realization isomorphism. Its lower bound makes L an object of the plus category. The exact functor compositor gives the specified realization coordinates.",
+   "uses": [
+    "lem-weil-pbc-finite-ring-constructible-derived-origin"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Unfold properFiniteComparison as C(c,c0) followed by the identity normalization. Associativity and the published cocycle C(c,c′)C(c′,c0)=C(c,c0) prove the asserted refinement equation.",
+   "uses": [
+    "lem-pur-clopen-common-compact-support"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "The identity-open scalar restriction lemma identifies a_A Res with b followed by Res a_B. Whisker this equality by ordinary direct image. Naturality of sfDerivedImageRestriction at a_B identifies the composite with sfCompactSupportRestriction followed by the restricted normalization, proving the quotient square for any finite-ring map.",
+   "uses": [
+    "lem-weil-identity-open-scalar-restriction",
+    "lem-sf-compact-support-restriction-of-scalars"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Use sfCompactSupportRestriction_comp for the compact-support successive quotient equation, with prime invertibility furnished by the finite coefficient setting. Naturality of the normalization at the source coefficient associator and of the target coefficient associator at the normalization allows the three quotient squares to be pasted. Substitute the compact-support cocycle and cancel the invertible source normalization, obtaining the ordinary direct-image cocycle. The generic quotient square supplies the composite square.",
+   "uses": [
+    "lem-sf-compact-support-restriction-of-scalars",
+    "def-pur-conventions"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-sp-finite-intrinsic-open-square",
+  "def-compact-support-direct-image-detailed",
+  "lem-weil-pbc-finite-ring-constructible-derived-origin",
+  "lem-pur-clopen-common-compact-support",
+  "lem-weil-identity-open-scalar-restriction",
+  "lem-sf-compact-support-restriction-of-scalars",
+  "def-pur-conventions"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-zeta-weil/sk-input-weights/prop-weil-proper-compact-coincidence.proof.md",
+  "place": "first paragraph; existing finite-ring origin and common-comparison cocycle; coefficient naturality and cancellation calculations, with identity-open scalar compatibility split off"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "lowerShriek|compactSupport|compactlySupported",
+   "results": "25 hits: Mathlib/Dynamics/FixedPoints/Support.lean, Mathlib/MeasureTheory/Measure/Haar/Unique.lean, Mathlib/MeasureTheory/Measure/Haar/Unique.lean, Mathlib/MeasureTheory/Measure/Haar/Unique.lean, Mathlib/MeasureTheory/Measure/Haar/Unique.lean, Mathlib/MeasureTheory/Measure/Haar/Unique.lean, Mathlib/MeasureTheory/Measure/Haar/Extension.lean, Mathlib/MeasureTheory/Measure/Haar/Extension.lean. Read the returned signatures: general pushforward/isomorphism facts or unrelated results; none states the specified pro-etale compact-support comparison and its coefficient compatibility.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Sheaf, AlgebraicGeometry.IsProper",
+   "results": "0 hits: . Read the returned signatures: general pushforward/isomorphism facts or unrelated results; none states the specified pro-etale compact-support comparison and its coefficient compatibility.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a proper scheme with identity compactification, extension by zero is the identity and finite coefficient compact support direct image agrees naturally with derived pushforward",
+   "results": "8 hits: AlgebraicGeometry.Scheme.Modules.pushforwardId, AlgebraicGeometry.Scheme.Modules.pushforwardId_hom_app_app, AlgebraicGeometry.Scheme.Modules.pushforwardId_inv_app_app, AlgebraicGeometry.Scheme.Modules.pushforwardComp_hom_app_app, AlgebraicGeometry.Scheme.Modules.pushforwardComp_inv_app_app, AlgebraicGeometry.exists_of_res_zero_of_qcqs_of_top, AlgebraicGeometry.Scheme.Modules.restrictFunctorAdjCounitIso, AlgebraicGeometry.exists_of_res_zero_of_qcqs. Read the returned signatures: general pushforward/isomorphism facts or unrelated results; none states the specified pro-etale compact-support comparison and its coefficient compatibility.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "lowerShriek|compactlySupported|extensionByZero",
+   "results": "0 hits: . Read the returned signatures: general pushforward/isomorphism facts or unrelated results; none states the specified pro-etale compact-support comparison and its coefficient compatibility.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Extension by zero along an identity open immersion gives the identity natural isomorphism on the derived category of pro etale finite module sheaves, compatible with compactification refinements",
+   "results": "8 hits: AlgebraicGeometry.Scheme.Modules.restrictFunctorId_hom_app_app, AlgebraicGeometry.Scheme.Modules.restrictFunctorId, PresheafOfModules.pushforwardId, PresheafOfModules.pullbackId, SheafOfModules.pushforwardId, SheafOfModules.pullbackId, CategoryTheory.Functor.leftDerivedZeroIsoSelf_hom_inv_id_app, CategoryTheory.Functor.leftDerivedZeroIsoSelf_hom_inv_id_app_assoc. Read the returned signatures: general pushforward/isomorphism facts or unrelated results; none states the specified pro-etale compact-support comparison and its coefficient compatibility.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a proper morphism, the compactification with identity open immersion identifies compact support derived direct image with ordinary derived direct image compatibly with restriction of coefficient scalars",
+   "results": "8 hits: AlgebraicGeometry.Scheme.Modules.restrictAdjunction, AlgebraicGeometry.Scheme.Modules.restrictFunctorAdjCounitIso, AlgebraicGeometry.Scheme.Modules.instIsRightAdjointPushforward, AlgebraicGeometry.Scheme.Modules.restrictFunctorComp, AlgebraicGeometry.Scheme.Modules.restrictFunctor, AlgebraicGeometry.Scheme.Modules.pushforwardComp, AlgebraicGeometry.Scheme.Modules.pushforwardComp_hom_app_app, AlgebraicGeometry.Scheme.Modules.restrictAdjunction_counit_app_app. Read the returned signatures: scheme structure-module pushforwards, ordinary module scalar extension, and complex-shape extension do not state the pro-etale finite-coefficient derived normalization with the prescribed quotient/refinement maps.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "extensionByZero|lowerShriek|compactSupport",
+   "results": "0 hits: . Read the returned signatures: scheme structure-module pushforwards, ordinary module scalar extension, and complex-shape extension do not state the pro-etale finite-coefficient derived normalization with the prescribed quotient/refinement maps.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived compact support pushforward along a proper morphism of schemes equals ordinary pushforward and is compatible with quotient coefficient ring restriction",
+   "results": "8 hits: AlgebraicGeometry.Scheme.Modules.pushforward, AlgebraicGeometry.Scheme.Modules.pushforward_map_app, AlgebraicGeometry.Scheme.Modules.restrictFunctorAdjCounitIso, AlgebraicGeometry.Scheme.Modules.pushforwardComp_hom_app_app, AlgebraicGeometry.Scheme.Modules.instIsRightAdjointPushforward, AlgebraicGeometry.Scheme.Modules.pushforwardComp, AlgebraicGeometry.Scheme.Modules.instAdditivePushforward, AlgebraicGeometry.Scheme.Hom.support_ker. Read the returned signatures: scheme structure-module pushforwards, ordinary module scalar extension, and complex-shape extension do not state the pro-etale finite-coefficient derived normalization with the prescribed quotient/refinement maps.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Sheaf, AlgebraicGeometry.IsProper",
+   "results": "0 hits: . Read the returned signatures: scheme structure-module pushforwards, ordinary module scalar extension, and complex-shape extension do not state the pro-etale finite-coefficient derived normalization with the prescribed quotient/refinement maps.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Extension by zero along the identity open immersion is naturally the identity on complexes of module sheaves and its canonical identification commutes with change of coefficient ring by restriction of scalars",
+   "results": "8 hits: ModuleCat.extendScalars_comp_id, AlgebraicGeometry.Scheme.Modules.restrictFunctorId, CommRingCat.moduleCatExtendScalarsPseudofunctor_mapId, ModuleCat.extendScalars_id_comp, AlgebraicGeometry.Scheme.Modules.pushforwardId_hom_app_app, ModuleCat.extendScalarsId, HomologicalComplex.extendMap_id, ModuleCat.extendScalars_id_comp_assoc. Read the returned signatures: scheme structure-module pushforwards, ordinary module scalar extension, and complex-shape extension do not state the pro-etale finite-coefficient derived normalization with the prescribed quotient/refinement maps.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "prop-weil-proper-compact-coincidence",
+  "date": "2026-10-22",
+  "group": "Q111"
+ },
+ "chapter": "sec-zeta-weil",
+ "unit": "sk-input-weights",
+ "blueprint": {
+  "from": {
+   "node": "prop-weil-proper-compact-coincidence",
+   "place": "first paragraph: identity compactification, finite-level identification and its comparison maps",
+   "via": []
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-weil-proper-finite-normalization",
+  "worker": "stage1",
+  "summary": "Expanded the identity compactification into the canonical sheafification-unit identification, retained the bounded etale-origin domain for general compactifications, and proved the prescribed quotient square by an explicit formula and naturality. All non-elementary inputs already have DAG nodes; no new nodes and no statement change.",
+  "blueprint": "prop-weil-proper-compact-coincidence, proof first paragraph: identity compactification and finite-level identification, including the comparisons needed to pass to coefficient towers.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-extension-by-zero-exact",
+    "why": "Exactness lets extension by zero act termwise; a generic open-immersion tool, not a replacement of the proper identity-compactification route."
+   },
+   {
+    "node": "lem-weil-pbc-exact-functor-derived-factorization",
+    "why": "Generic exact-functor localization realizes the identity-extension maps on complexes; the item unit has no separate localization result."
+   },
+   {
+    "node": "lem-sf-proetale-constructible-origin",
+    "why": "Its bounded-complex equivalence supplies precisely the witness needed for coherence; no such site-comparison theorem is in this unit."
+   },
+   {
+    "node": "prop-compactification-coherence-detailed",
+    "why": "Provides common-refinement independence and the cocycle law used to transport the identity compactification normalization."
+   },
+   {
+    "node": "lem-sf-compact-support-restriction-of-scalars",
+    "why": "Specifies the exact open-extension/direct-image composite and its composition law for quotient scalars; the proof computes its identity-compactification square."
+   },
+   {
+    "node": "lem-weil-proetale-direct-image-restriction-of-scalars",
+    "why": "Provides the natural unbounded ordinary-direct-image factor; its naturality is the square calculation, not a replacement of the unit route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sf-compact-support-restriction-of-scalars"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q74-46ca495a8",
+  "group": "Q74",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q74-46ca495a8 (reviewer sub-agent of L); spot-checked: Read the whole delivery, item plus the 12 cited node statements, against the blueprint main-20261015 prop-weil-proper-compact-coincidence proof, first paragraph. It has 0 new nodes. Statement, stmt_deps and source are unchanged compared with live and side-live, where the item is still unsplit. No cycle, no SGA. Hypotheses: k finite of characteristic p with l != p, so l is invertible; X and Y are separated of finite type and f is proper, so c0=(id,f) is a compactification; A_n is a finite ring. Step 1: for j=id, P_M=M by the case formula of def-weil-extension-by-zero; a_M is the factorisation of 1_M, and eta*a=1 and naturality follow by the uniqueness in def-weil-presheaf-modules-sheafification. Correct. Step 2: the c0 candidate is Rf_*(id)_!; id_! is exact and lem-weil-pbc-exact-functor-derived-factorization gives the termwise realisation, so alpha^0 is an isomorphism on unbounded D. Correct. Step 3: clause (ii) of lem-sf-proetale-constructible-origin supplies etale-origin witnesses for D^b_c; prop-compactification-coherence-detailed gives naturality, independence and the cocycle; alpha^{c'}C_{c,c'}=alpha^0 C_{c',c0}C_{c,c'}=alpha^c. Correct, and nothing is claimed for unbounded inputs. Step 4: b*eta_A=S*eta_B because the restriction lemma's identification is computed on underlying abelian sheaves, so a_A S=(S a_B)b by the universal property. With rho_!=(rho_* U_B)F_A(b), naturality of rho_* at a_B gives rho_*(alpha^0_{n+1}S)=(S alpha^0_n)rho_!. Checked composition by composition: the orientation matches the item and no flatness is used. FIX (E5) in step 5: it called the pasted square 'the square for the composite quotient' by the composition clause of lem-sf-compact-support-restriction-of-scalars, but that clause covers only rho_!, and no cited node says the rho_* maps compose. Rewrote step 5: step 4 holds for any homomorphism of finite rings, so apply it to A->C, compare with the pasted square, and cancel the isomorphism alpha^0 S1S2 to get (S1 rho_{*,2})(rho_{*,1}S2)=rho_{*,A->C}. Same uses, still elementary. Accepted the cross-unit tool_uses (extension-by-zero exactness, exact-functor factorisation, constructible-origin, coherence, the two restriction-of-scalars comparisons) as generic tools. Edge cases checked: zero input, X empty, f=id, n=1, c=c0 and the composite quotient. The fixed node file is under fixes/dag/nodes/sec-zeta-weil/.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.Paper.ProperFiniteNormalization",
+  "declaration": "WeilConjectures.PurityFiniteSetting.properFiniteNormalization",
+  "declarations": [
+   "WeilConjectures.PurityFiniteSetting.properFiniteIdentityNormalization",
+   "WeilConjectures.PurityFiniteSetting.properFiniteComparison",
+   "WeilConjectures.PurityFiniteSetting.properNextLevel",
+   "WeilConjectures.PurityFiniteSetting.properFiniteNormalization",
+   "WeilConjectures.PurityFiniteSetting.properFiniteNormalization_quotient",
+   "WeilConjectures.PurityFiniteSetting.properFiniteNormalization_successive"
+  ],
+  "file": "lean/Sheaf/Paper/ProperFiniteNormalization.lean",
+  "statement": "theorem properFiniteNormalization (aX : X ⟶ Spec (.of P.field.k)) (aY : Y ⟶ Spec (.of P.field.k)) [IsSeparated aX] [LocallyOfFiniteType aX] [QuasiCompact aX] [IsSeparated aY] [LocallyOfFiniteType aY] [QuasiCompact aY] (_hf : f ≫ aY = aX) : (∀ K : (intrinsicFiniteTorsionConstructible P.coefficients.l P.extension P.level P.level_pos X).FullSubcategory, ∃ L : DerivedCategory.Plus (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} P.Coefficient)), Etale.DerivedCategory.isBoundedConstructible P.Coefficient X L.obj ∧ Nonempty ((sfIntrinsicDerivedEquivalence X P.Ring).functor.obj ((ProEtale.comparisonUpperStar (ModuleCat.{u + 1} P.Coefficient) X).mapDerivedCategory.obj L.obj) ≅ K.obj)) ∧ (∀ c c' : Compactification f, P.clopenSupportCanonicalComparison c c' ≪≫ P.properFiniteComparison f c' = P.properFiniteComparison f c)",
+  "branch": "sheaf-dag",
+  "by": "Q60",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "Repair H2 of returned head 3e4aba0cfcb7, option (b): properFiniteIdentityNormalization is the explicit whiskering of sfIntrinsicDerivedOpenId with ordinary direct image and the left unitor. The defining node def-sp-finite-intrinsic-open-square replaces the unused theorem prerequisite prop-exc-base-change-proper. properFiniteComparison composes the existing uniquely etale-normalized common-refinement comparison with this concrete recipe. The three theorems retain the origin/refinement law, unbounded quotient square and successive composition laws with the composite square. No dependency interfaces or mathematical statement are changed."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-0461cefe6",
+  "group": "Q60",
+  "result": "pass",
+  "note": "Re-delivery after RETURN H2 of 3e4aba0c. Diff against that head: option (b) applied exactly. New in-module def properFiniteIdentityNormalization = isoWhiskerRight (sfIntrinsicDerivedOpenId A X) _ ≪≫ leftUnitor _, word for word the old sfProperSupportNormalization body, with real data and source/blueprint docstrings. stmt_dep prop-exc-base-change-proper replaced by def-sp-finite-intrinsic-open-square (definition node owning ProEtaleOpenSquareExchange, existing:true, on the delivery base); the import was swapped; all 4 uses replaced. No other change to the statement, proof, proof_deps, hypotheses or map order. Mechanical finding: lem-pur-clopen-common-compact-support is a genuine dependency, since clopenSupportCanonicalComparison is .exists.choose of the theorem's ∃! (ClopenCommonCompactSupport l.122-123), so PASS on that point. Mathematics as already accepted: data P/properNextLevel, separated finite-type X and Y, proper f, origin witness as a conclusion, C(c,c')≫α(c')=α(c), unbounded quotient square with ρ_!=sfCompactSupportRestriction and ρ_*=sfDerivedImageRestriction, successive laws plus composite square. Edge cases n=1, X empty, c=c0, arbitrary surjective φ covered. No compile run (no file changed); worker reports a clean scompile and deliver2 dry run OK a63726e18af."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-e7004",
+  "group": "U2",
+  "result": "pass",
+  "landing": "20261025T203326-L-2805184",
+  "kind": "interface",
+  "note": "independent cc review: new sfIdentityOpenRestriction vs sfIntrinsicOpenId/sfOpenRestriction normalizations (true, canonical); item proofs vs #print axioms (only sorryAx via new lemma); item node proof_deps/tool_uses vs Lean and brief-stage3 §109; unit sk-input-weights realized empty; importers of item: none"
+ }
+}

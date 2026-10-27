@@ -1,0 +1,119 @@
+{
+ "id": "lem-sf-twisted-action-inclusion-cocontinuous",
+ "kind": "statement",
+ "title": "Degree-zero inclusion of the twisted action site is cocontinuous",
+ "statement": "Let (C,J) be a small site with pullbacks, s a site autoequivalence continuous in both directions, R a sheaf of commutative rings and a its specified inverse-translation ring isomorphism. For any Site S [def-sf-twisted-action-presentation-data], the degree-zero inclusion S.inclusion is cocontinuous from J to S.topology: for every object X of C and every S.topology-covering sieve V on S.inclusion.obj X, its functor pullback along S.inclusion is J-covering on X. This is only a covering-sieve property; it asserts no module or tensor comparison.",
+ "source": {
+  "document": "literature/stacks-project/sites.tex",
+  "place": "proposition-sheaves-on-group (00W0), motivation for the twisted generated-topology argument; cover-lifting substep in step 1 of lem-sf-twisted-action-tensor-comparisons and step 2 of lem-sf-twisted-action-site-core. Agent-formulated twisted variant, not a claim that 00W0 states the twisted result."
+ },
+ "stmt_deps": [
+  "def-sf-twisted-action-presentation-data"
+ ],
+ "proof": [
+  {
+   "text": "A generating sieve is the image of an old covering sieve along the degree-zero inclusion. Pullbacks along degree-zero arrows have old covering refinements by the base topology pullback axiom. For an integer-labelled arrow, translate by its integer degree and use the arrow-composition formula to reduce to the degree-zero case. Continuity of both directions of the equivalence implies cover preservation by all its integer powers. Thus each such pullback has a covering degree-zero refinement.",
+   "uses": [
+    "def-sf-twisted-action-presentation-data"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The sieves whose pullbacks along all arrows into their target have covering degree-zero restrictions form a Grothendieck topology: top is immediate, pullback stability reindexes the arrows, and transitivity is the base topology transitivity applied to the covering degree-zero refinement. The first step places all generating sieves in that topology, so S.topology_eq places the generated topology below it. Apply this comparison to a covering sieve and the identity arrow. Empty sites give a vacuous assertion.",
+   "uses": [
+    "def-sf-twisted-action-presentation-data"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-sf-twisted-action-presentation-data"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites.tex",
+  "place": "proposition-sheaves-on-group (00W0), motivation for the twisted generated-topology argument; cover-lifting substep in step 1 of lem-sf-twisted-action-tensor-comparisons and step 2 of lem-sf-twisted-action-site-core. Agent-formulated twisted variant, not a claim that 00W0 states the twisted result."
+ },
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Restriction of sheaves of modules along an action site preserves tensor products with diagonal action and pure tensors",
+   "results": "Generic presheaf tensor and scalar restriction constructions; no action-site cover-lifting theorem.",
+   "date": "2026-10-27",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.IsCocontinuous",
+   "results": "IsCocontinuous, cover_lift, cocontinuity of identities and composites, and Adjunction.isCocontinuous_iff_coverPreserving. These prove the inverse-equivalence case but not the integer action inclusion.",
+   "date": "2026-10-27",
+   "verdict": "generic API found; no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "IsCocontinuous|isCocontinuous in the Sites APIs and TwistedAction modules",
+   "results": "RestrictionPresentation supplies continuity of the inclusion, not cocontinuity. The generated topology and integer-arrow presentation provide the argument but no existing declaration closes this cover-lifting step. Read TwistedActionSiteCore.siteCore: it asserts existence of one cocontinuous Site, which does not supply cocontinuity for an arbitrary Site S in the assigned theorem.",
+   "date": "2026-10-27",
+   "verdict": "no exact action-site match"
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.CategoryTheory.TwistedActionTensorComparisons",
+  "date": "2026-10-27",
+  "group": "E1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "The parent obligation has no created.item blueprint ancestor. Its recorded provenance is lem-a1-local-boundary-duality and the evaluation/biduality sentence of thm-coef-qbar-verdier. This site realization supplies the abelian-category foundation for the internal-Hom and evaluation argument of cor-coef-verdier-weil-equivariance, without replacing the native derived category by fixed pairs in a derived category. Original twisted-site proof steps 9--13; sheafification and localized-site Hom calculation. Substep: Original closed-comparisons proof steps 1--2 and tensor portion of step 5 (original action-site steps 9--10 and 13); sites-modules.tex, section-tensor-product and lemma-sheafification-tensor. Substep: degree-zero cover lifting for the sheafification comparison in tensor-comparisons step 1.",
+   "via": [
+    "lem-sf-twisted-action-tensor-comparisons",
+    "lem-sf-twisted-action-closed-comparisons",
+    "lem-sf-twisted-action-ringed-site",
+    "lem-sf-weil-native-closed-forgetful",
+    "lem-sf-weil-verdier-biduality"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.TwistedActionInclusionCocontinuous",
+  "file": "lean/Sheaf/CategoryTheory/TwistedActionInclusionCocontinuous.lean",
+  "declaration": "CategoryTheory.TwistedActionRingedSite.inclusion_cocontinuous",
+  "statement": "theorem inclusion_cocontinuous\n    {C : Type u} [SmallCategory C] [HasPullbacks C]\n    (J : GrothendieckTopology C) (s : C ≌ C)\n    [s.functor.IsContinuous J J] [s.inverse.IsContinuous J J]\n    (R : Sheaf J CommRingCat.{u})\n    (a : (s.inverse.sheafPushforwardContinuous CommRingCat.{u} J J).obj R ≅ R)\n    (S : Site J s R a) :\n    letI := S.category\n    S.inclusion.IsCocontinuous J S.topology",
+  "branch": "sheaf-dag",
+  "by": "E1",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E1",
+  "result": "pass",
+  "landing": "20261027T094344-L-217471",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G4",
+  "result": "pass",
+  "landing": "20261027T103424-L-1072217",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)",
+  "sorry_before": [
+   "CategoryTheory.TwistedActionRingedSite.inclusion_cocontinuous"
+  ],
+  "sorry_after": []
+ }
+}

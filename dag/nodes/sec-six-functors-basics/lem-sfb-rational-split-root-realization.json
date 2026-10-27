@@ -1,0 +1,352 @@
+{
+ "id": "lem-sfb-rational-split-root-realization",
+ "kind": "statement",
+ "title": "Rational split realization of a finite reduced root datum",
+ "statement": "Let $\\mathcal R=(M,\\Phi,M^\\vee,\\Phi^\\vee)$ be a finite reduced root datum with the lattice, reflection and reducedness axioms of [def-sfb-pinned-split-root-realization], with no base specified. There exists a split realization $(G_{\\mathbf Q},T_{\\mathbf Q}=D_{\\mathbf Q}(M))$ over the field $\\mathbf Q$ of rational numbers, in the sense of that definition with the base and pinning forgotten. In particular $G_{\\mathbf Q}$ is smooth affine of finite presentation with connected reductive geometric fibres, $T_{\\mathbf Q}$ is a closed fibrewise maximal torus, and its torus coaction has exactly the root support $\\Phi$, coroots $\\Phi^\\vee$, free rank-one root lines and zero tangent summand $\\operatorname{Lie}(T_{\\mathbf Q})$, all with the specified character-lattice identification. Roots need not span $M$; empty roots and rank zero are allowed. This asserts realization over $\\mathbf Q$ itself, not just over an algebraic closure or a number-field extension.",
+ "source": {
+  "document": "https://math.stanford.edu/~conrad/papers/luminysga3smf.pdf",
+  "place": "Proposition 6.2.12, printed pp.211--212: complex realization, spreading to a number field, and pinned Galois descent to Q. Read online; local PDF WANTED. No Stacks tag states rational reductive-group realization."
+ },
+ "stmt_deps": [
+  "def-sfb-pinned-split-root-realization"
+ ],
+ "proof": [
+  {
+   "text": "First pass from the simultaneous-reflection convention of the hypothesis to the finite-Weyl-group convention: [lem-sfb-finite-root-datum-weyl-group] applies to the given lattice and the finite corresponding root and coroot sets. Fix an algebraic closure $\\mathbf Q\\to\\overline{\\mathbf Q}$, which exists by [def-weil-algebraic-closure], and identify $\\mathbf Q$ with its image. Now [lem-sfb-root-datum-realization], with $F=\\overline{\\mathbf Q}$, produces a connected reductive group $G$ over $\\overline{\\mathbf Q}$ with a split maximal torus $S$ and the specified character-lattice, root and coroot identification. This plays the role of the complex realization at the start of Conrad's proof: any algebraically closed field of characteristic zero serves, and $\\overline{\\mathbf Q}$ needs no separate fact about $\\mathbf C$. It is not yet a rational realization.",
+   "uses": [
+    "lem-sfb-finite-root-datum-weyl-group",
+    "def-weil-algebraic-closure",
+    "lem-sfb-root-datum-realization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://math.stanford.edu/~conrad/papers/luminysga3smf.pdf",
+    "place": "Proposition 6.2.12, proof, printed pp.211--212"
+   }
+  },
+  {
+   "text": "Use character antiduality to identify $S$ with $T=D_{\\overline{\\mathbf Q}}(M)$; a basis of $M$ turns $T\\subseteq G$ into a closed subgroup immersion $j:\\mathbf G_m^r\\hookrightarrow G$, $r=\\operatorname{rank}M$. The group $G$ is smooth, connected and affine of finite type; [pqf-lem-lft-fp-locnoeth] over the Noetherian field and the quasi-compactness and quasi-separatedness of affine morphisms in [lem-weil-pbc-affine-morphism-permanence] make it of finite presentation. Apply [lem-sfb-reductive-torus-fibre-openness] to $\\operatorname{Spec}\\overline{\\mathbf Q}$ and its only point $s$: the geometric fibre over the algebraic closure $\\overline{\\mathbf Q}$ of $\\kappa(s)$ is $G$ itself, which is reductive with maximal torus $j$. Hence for every algebraically closed $\\Omega$ with a homomorphism $\\overline{\\mathbf Q}\\to\\Omega$, $G_\\Omega^0$ is reductive and $j_\\Omega$ is a maximal torus of $G_\\Omega^0$. As $G$ is connected with the rational identity point, [lem-sbc-connected-rational-point-geometrically-connected] makes $G_\\Omega$ connected, so $G_\\Omega=G_\\Omega^0$. Thus $G$ is reductive over $\\overline{\\mathbf Q}$ in the sense of [def-sfb-pinned-split-root-realization], with all its geometric fibres, and every geometric fibre of $T$ is a maximal torus.",
+   "uses": [
+    "lem-sfb-multiplicative-character-antiduality",
+    "pqf-lem-lft-fp-locnoeth",
+    "lem-weil-pbc-affine-morphism-permanence",
+    "lem-sfb-reductive-torus-fibre-openness",
+    "lem-sbc-connected-rational-point-geometrically-connected",
+    "def-sfb-pinned-split-root-realization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://math.stanford.edu/~conrad/papers/luminysga3smf.pdf",
+    "place": "Proposition 6.2.12, proof, printed pp.211--212"
+   }
+  },
+  {
+   "text": "The Borel-pair theorem supplies a pair $(B\\prime,T\\prime)$ in $G$. By [lem-sfb-borel-maximal-torus-conjugacy] choose $g$ with $gT\\prime g^{-1}=T$ and put $B=gB\\prime g^{-1}$; conjugation preserves smoothness, connectedness, solvability and its maximality, so $B$ is a Borel containing the specified $T$. The Borel-pair theorem now supplies its positive roots and simple base $\\Delta$. By the preceding step the arbitrary-base root-line theorem applies to $(G,T)$: it identifies the zero weight with $\\operatorname{Lie}(T)$, and its base-change comparison $\\Omega\\otimes\\mathfrak g_m\\simeq(\\mathfrak g_\\Omega)_m$ shows that the roots of every geometric fibre are those of $(G,T)$ itself, namely $\\Phi$, with one-dimensional root spaces; the torus-weight decomposition has no other weights. Its relative coroot $\\alpha^\\vee:\\mathbf G_m\\to T$ is a constant monomial map whose fibre over $\\overline{\\mathbf Q}$ is the canonical coroot, the prescribed one by step 1, and whose base change to each $\\Omega$ is the canonical coroot there, so every geometric fibre has the prescribed coroots. Choose a nonzero $X_\\alpha$ in each simple-root line. Over the field these are free generators, giving a pinned split realization $P_{\\overline{\\mathbf Q}}$ in the stated definition without a root-spanning hypothesis.",
+   "uses": [
+    "lem-sfb-reductive-borel-pair-structure",
+    "lem-sfb-borel-maximal-torus-conjugacy",
+    "lem-sfb-arbitrary-base-root-lines-coroots",
+    "lem-sfb-relative-torus-bundle-weights",
+    "def-sfb-pinned-split-root-realization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://math.stanford.edu/~conrad/papers/luminysga3smf.pdf",
+    "place": "Proposition 6.2.12, proof, printed pp.211--212"
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-split-reductive-finite-type-spreading] to $\\mathbf Q\\subset\\overline{\\mathbf Q}$ and $P_{\\overline{\\mathbf Q}}$. Obtain a nonzero finite-type $\\mathbf Q$-subalgebra $A\\subset\\overline{\\mathbf Q}$ carrying $P_A$. Choose a maximal ideal of $A$. By [lem-kun-closed-point-field] its residue field $F_0$ is finite over $\\mathbf Q$. It is separable: an irreducible polynomial in characteristic zero has nonzero derivative of smaller degree and hence no common factor with its derivative. Apply [lem-weil-pbc-finite-galois-receiving-separable-extensions] to the one extension $F_0/\\mathbf Q$, obtaining a finite Galois $F/\\mathbf Q$ receiving $F_0$. Pull back $P_A$ through $A\\to F_0\\to F$ using [lem-sfb-pinned-split-root-base-change]. This gives a pinned split $P$ over $F$ of the original based datum, even though the first map is nonflat.",
+   "uses": [
+    "lem-sfb-split-reductive-finite-type-spreading",
+    "lem-kun-closed-point-field",
+    "lem-weil-pbc-finite-galois-receiving-separable-extensions",
+    "lem-sfb-pinned-split-root-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://math.stanford.edu/~conrad/papers/luminysga3smf.pdf",
+    "place": "Proposition 6.2.12, proof, printed pp.211--212"
+   }
+  },
+  {
+   "text": "Put $\\Gamma=\\operatorname{Gal}(F/\\mathbf Q)$. For each $\\gamma\\in\\Gamma$, pullback along the automorphism $\\gamma:F\\to F$ gives a pinned split group ${}^\\gamma P$. By base-change compatibility it has the same root labels, coroots and lattice $M$, and simple-root vectors ${}^\\gamma X_\\alpha$. In coordinates the canonical identification of its torus with $D_F(M)$ fixes each monomial $e_m$ and applies $\\gamma$ only to coefficients. Thus the identification of the two based data is the identity on $M$, including its central directions.",
+   "uses": [
+    "lem-sfb-pinned-split-root-base-change",
+    "def-sfb-pinned-split-root-realization"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://math.stanford.edu/~conrad/papers/luminysga3smf.pdf",
+    "place": "Proposition 6.2.12, proof, printed pp.211--212"
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-split-central-isogeny-lifting] with lattice map $1_M$ to ${}^\\gamma P$ and $P$, forgetting pinnings. Obtain an isomorphism $f_\\gamma:{}^\\gamma G\\to G$ equal to the identity monomial map on tori. Its differential sends ${}^\\gamma X_\\alpha$ to $c_\\alpha X_\\alpha$ for some $c_\\alpha\\in F^\\times$. The simple roots are a $\\mathbf Z$-basis of $Q=\\mathbf Z\\Phi$: independence is part of the base axiom, and every root is an integral combination of simple roots. Consequently there is a unique homomorphism $Q\\to F^\\times$ sending each $\\alpha\\in\\Delta$ to $c_\\alpha^{-1}$. By [lem-sfb-adjoint-torus-root-coordinates] its element $t_\\gamma\\in D_F(Q)(F)$ acts by these scalars. Then $a_\\gamma=c_{t_\\gamma}\\circ f_\\gamma$ matches all simple-root vectors. It is unique: any second such isomorphism differs by a unique element of $D_F(Q)(F)$; matching the vectors makes its values on the basis $\\Delta$ all $1$, so that element is the identity.",
+   "uses": [
+    "lem-sfb-split-central-isogeny-lifting",
+    "lem-sfb-adjoint-torus-root-coordinates",
+    "def-sfb-pinned-split-root-realization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://math.stanford.edu/~conrad/papers/luminysga3smf.pdf",
+    "place": "Proposition 6.2.12, proof, printed pp.211--212"
+   }
+  },
+  {
+   "text": "Both $a_{\\gamma\\delta}$ and $a_\\gamma\\circ{}^\\gamma a_\\delta$ map ${}^{\\gamma\\delta}P$ to $P$, induce $1_M$, and carry every ${}^{\\gamma\\delta}X_\\alpha$ to $X_\\alpha$. The uniqueness just proved gives $a_{\\gamma\\delta}=a_\\gamma\\circ{}^\\gamma a_\\delta$, with the canonical identification of iterated scalar twists. Likewise $a_1=1$. Hence these maps are a Galois descent datum on the group and its specified torus. This proves the cocycle rather than assuming chosen isomorphisms automatically satisfy it.",
+   "uses": [
+    "lem-sfb-pinned-split-root-base-change"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://math.stanford.edu/~conrad/papers/luminysga3smf.pdf",
+    "place": "Proposition 6.2.12, proof, printed pp.211--212"
+   }
+  },
+  {
+   "text": "Write $B=F[G]$ and translate group maps to Hopf maps using [lem-sfb-affine-group-coordinate-hopf]. The preceding cocycle gives a semilinear $\\Gamma$-action preserving the Hopf operations. By [lem-sfb-galois-hopf-algebra-descent], $B_0=B^\\Gamma$ is a finitely generated commutative Hopf $\\mathbf Q$-algebra and $F\\otimes_{\\mathbf Q}B_0\\simeq B$. Set $G_{\\mathbf Q}=\\operatorname{Spec}B_0$ with the descended group law. The torus restriction $B\\to F[M]$ is equivariant, where the latter has coefficient action only. Its invariant algebra is $\\mathbf Q[M]$: comparing coefficients in its monomial basis says exactly that every coefficient is fixed by $\\Gamma$. The same descent equivalence on morphisms therefore produces $T_{\\mathbf Q}=D_{\\mathbf Q}(M)\\to G_{\\mathbf Q}$, whose extension to $F$ is the specified torus inclusion.",
+   "uses": [
+    "lem-sfb-affine-group-coordinate-hopf",
+    "lem-sfb-galois-hopf-algebra-descent",
+    "def-sfb-ring-diagonalizable-group"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://math.stanford.edu/~conrad/papers/luminysga3smf.pdf",
+    "place": "Proposition 6.2.12, proof, printed pp.211--212"
+   }
+  },
+  {
+   "text": "The single map $\\operatorname{Spec}F\\to\\operatorname{Spec}\\mathbf Q$ is an fpqc cover: field extension is faithfully flat, its spectra each have one point, and this is a map of affines. Smoothness descends by [lem-trf-smooth-fpqc-base-descent], and the torus inclusion is closed by [lem-pc-fpqc-descend-closed-immersion]. The group is affine and finite type by construction; [pqf-lem-lft-fp-locnoeth] gives local finite presentation over the Noetherian field, and an affine morphism is quasi-compact and quasi-separated, so this is finite presentation. For any algebraically closed extension $\\Omega/\\mathbf Q$, choose a $\\mathbf Q$-embedding $F\\to\\Omega$ by successively choosing roots of the minimal polynomials of finitely many field generators. Then $(G_{\\mathbf Q},T_{\\mathbf Q})_\\Omega$ is the base change of $P$ with its pinning forgotten. By [lem-sfb-pinned-split-root-base-change] its group is connected reductive and its torus is maximal with precisely the prescribed roots and coroots.",
+   "uses": [
+    "lem-weil-pbc-field-extension-base-change-faithfully-flat",
+    "def-weil-pbc-fpqc-covering",
+    "lem-trf-smooth-fpqc-base-descent",
+    "lem-pc-fpqc-descend-closed-immersion",
+    "pqf-lem-lft-fp-locnoeth",
+    "lem-weil-pbc-affine-morphism-permanence",
+    "lem-sfb-pinned-split-root-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://math.stanford.edu/~conrad/papers/luminysga3smf.pdf",
+    "place": "Proposition 6.2.12, proof, printed pp.211--212"
+   }
+  },
+  {
+   "text": "Finally apply [lem-sfb-arbitrary-base-root-lines-coroots] over $\\mathbf Q$ to this reductive group and closed fibrewise maximal split torus. Its tangent comparison identifies the weight spaces after extension to $\\Omega$ with those just obtained from $P$; hence the nonzero root lines over $\\mathbf Q$ have dimension one, and every other nonzero weight is zero. By [lem-sfb-relative-torus-bundle-weights] the full torus coaction is their direct sum with the zero weight, identified with $\\operatorname{Lie}(T_{\\mathbf Q})$. A one-dimensional vector space over $\\mathbf Q$ is a free rank-one module. Together these are exactly the conditions for a split realization in [def-sfb-pinned-split-root-realization]. When $\\Phi=\\varnothing$ the base and all pinning choices are empty, $Q=0$ and the correction automorphism is the identity; rank-zero and toral data pass through the same argument.",
+   "uses": [
+    "lem-sfb-arbitrary-base-root-lines-coroots",
+    "lem-sfb-relative-torus-bundle-weights",
+    "def-sfb-pinned-split-root-realization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://math.stanford.edu/~conrad/papers/luminysga3smf.pdf",
+    "place": "Proposition 6.2.12, proof, printed pp.211--212"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-finite-root-datum-weyl-group",
+  "def-weil-algebraic-closure",
+  "lem-sfb-root-datum-realization",
+  "lem-sfb-multiplicative-character-antiduality",
+  "pqf-lem-lft-fp-locnoeth",
+  "lem-weil-pbc-affine-morphism-permanence",
+  "lem-sfb-reductive-torus-fibre-openness",
+  "lem-sbc-connected-rational-point-geometrically-connected",
+  "def-sfb-pinned-split-root-realization",
+  "lem-sfb-reductive-borel-pair-structure",
+  "lem-sfb-borel-maximal-torus-conjugacy",
+  "lem-sfb-arbitrary-base-root-lines-coroots",
+  "lem-sfb-relative-torus-bundle-weights",
+  "lem-sfb-split-reductive-finite-type-spreading",
+  "lem-kun-closed-point-field",
+  "lem-weil-pbc-finite-galois-receiving-separable-extensions",
+  "lem-sfb-pinned-split-root-base-change",
+  "lem-sfb-split-central-isogeny-lifting",
+  "lem-sfb-adjoint-torus-root-coordinates",
+  "lem-sfb-affine-group-coordinate-hopf",
+  "lem-sfb-galois-hopf-algebra-descent",
+  "def-sfb-ring-diagonalizable-group",
+  "lem-weil-pbc-field-extension-base-change-faithfully-flat",
+  "def-weil-pbc-fpqc-covering",
+  "lem-trf-smooth-fpqc-base-descent",
+  "lem-pc-fpqc-descend-closed-immersion"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://math.stanford.edu/~conrad/papers/luminysga3smf.pdf",
+  "place": "Detailed assembly following Proposition 6.2.12, printed pp.211--212; local source WANTED. Existing Milne nodes supply complex existence and affine Galois descent; central-isogeny and adjoint-torus nodes give the pinned uniqueness used there."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Every reduced root datum is realized by a split connected reductive algebraic group over the rational numbers",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"RootPairing.nonempty_base\", \"module\": \"Mathlib/LinearAlgebra/RootSystem/BaseExists\", \"type\": \"∀ {ι : Type u_1} {R : Type u_2} {M : Type u_3} {N : Type u_4} [Finite ι] [inst : AddCommGroup M]\\n  [inst_1 : AddCommGroup N] [inst_2 : Field R] [CharZero R] [inst_4 : Module R M] [inst_5 : Module R N]\\n  (P : RootPairing ι R M N) [P.IsRootSystem] [P.IsCrystallographic] [P.IsReduced], Nonempty P.Base\", \"doc\": \"The base of the root pairing $ P $ is non-empty, i.e., there exists at least one element in $ P.\\\\text{Base} $.\"}\n  {\"name\": \"RootPairing.EmbeddedG2.toIsReduced\", \"module\": \"Mathlib/LinearAlgebra/RootSystem/Finite/G2\", \"type\": \"∀ {ι : Type u_1} {R : Type u_2} {M : Type u_3} {N : Type u_4} {inst : CommRing R} {inst_1 : AddCommGroup M}\\n  {inst_2 : Module R M} {inst_3 : AddCommGroup N} {inst_4 : Module R N} {P : RootPairing ι R M N} [self : P.EmbeddedG2],\\n  P.IsReduced\", \"doc\": \"An embedded G2 root system in a root pairing implies that the root pairing satisfies the reducedness condition.\"}\n  {\"name\": \"RootPairing.IsReduced\", \"module\": \"Mathlib/LinearAlgebra/RootSystem/Reduced\", \"type\": \"{ι : Type u_1} →\\n  {R : Type u_2} →\\n    {M : Type u_3} →\\n      {N : Type u_4} →\\n        [inst : CommRing R] →\\n          [inst_1 : AddCommGroup M] →\\n            [inst_2 : Module R M] → [inst_3 : AddCommGroup N] → [inst_4 : Module R N] → RootPairing ι R M N → Prop\", \"doc\": \"Given a commutative ring $ R $, additive commutative $ R $-modules $ M $ and $ N $, and a root pairing between them, this is the proposition that the root pairing satisfies the reducedness condition.\"}\n  {\"name\": \"RootDatum\", \"module\": \"Mathlib/LinearAlgebra/RootSystem/Defs\", \"type\": \"Type u_1 →\\n  (X₁ : Type u_5) → (X₂ : Type u_6) → [AddCommGroup X₁] → [AddCommGroup X₂] → Type (max (max (max u_1 0) u_5) u_6)\", \"doc\": \"A root datum is a root pairing between two additive commutative groups $X_1$ and $X_2$ over the integers $\\\\mathbb{Z}$, where each group is equipped with its canonical $\\\\mathbb{Z}$-module structure. Th\"}\n  {\"name\": \"RootPairing.EmbeddedG2.instIsG2OfIsIrreducible\", \"module\": \"Mathlib/LinearAlgebra/RootSystem/Finite/G2\", \"type\": \"∀ {ι : Type u_1} {R : Type u_2} {M : Type u_3} {N : Type u_4} [inst : CommRing R] [inst_1 : AddCommGroup M]\\n  [inst_2 : Module R M] [inst_3 : AddCommGroup N] [inst_4 : Module R N] (P : RootPairing ι R M N) [P.EmbeddedG2]\\n  [P.IsIrreducible], P.IsG2\", \"doc\": \"Every irreducible root pairing satisfies the axioms defining a G2 root system.\"}\n  {\"name\": \"LieAlgebra.IsKilling.instIsReducedSubtypeWeightMemLieSubalgebraFinsetRootDualRootSystem\", \"module\": \"Mathlib/Algebra/Lie/Weights/RootSystem\", \"type\": \"∀ {K : Type u_1} {L : Type u_2} [inst : Field K] [inst_1 : CharZero K] [inst_2 : LieRing L] [inst_3 : LieAlgebra K L]\\n  [inst_4 : LieAlgebra.IsKilling K L] [inst_5 : FiniteDimensional K L] (H : LieSubalgebra K L)\\n  [inst_6 : H.IsCartanSubalgebra] [inst_7 : LieModule.IsTriangularizable K (↥H) L],\\n  (\", \"doc\": \"The root system associated with a Lie algebra over a field via its non-degenerate Killing form is reduced. Specifically, for a Lie algebra $\\\\mathfrak{g}$ over a field $K$ with a Cartan subalgebra $\\\\ma\"}\n  {\"name\": \"RootPairing.isRootSystem_mk''\", \"module\": \"Mathlib/LinearAlgebra/RootSystem/Basic\", \"type\": \"∀ {ι : Type u_1} {M : Type u_3} {N : Type u_4} [inst : AddCommGroup M] [inst_1 : AddCommGroup N] [inst_2 : Finite ι]\\n  {k : Type u_5} [inst_3 : Field k] [inst_4 : CharZero k] [inst_5 : Module k M] [inst_6 : Module k N]\\n  {p : M →ₗ[k] N →ₗ[k] k} [inst_7 : p.IsPerfPair] {root : ι ↪ M} {coroot : ι ↪ N}\", \"doc\": \"Given a perfect pairing $ p $ between $ k $-modules $ M $ and $ N $, injective maps $ \\\\text{root}: \\\\iota \\\\to M $ and $ \\\\text{coroot}: \\\\iota \\\\to N $ satisfying $ p(\\\\text{root}\\\\, i, \\\\text{coroot}\\\\, i) =\"}\n  {\"name\": \"RootPairing.restrictScalarsRat\", \"module\": \"Mathlib/LinearAlgebra/RootSystem/BaseChange\", \"type\": \"{ι : Type u_1} →\\n  {L : Type u_2} →\\n    {M : Type u_3} →\\n      {N : Type u_4} →\\n        [inst : Field L] →\\n          [inst_1 : AddCommGroup M] →\\n            [inst_2 : AddCommGroup N] →\\n              [inst_3 : Module L M] →\\n                [inst_4 : Module L N] →\\n                  (P : RootPairing ι \", \"doc\": \"Given a crystallographic root pairing $ P $ over a field $ L $ of characteristic zero, this constructs a new root pairing over $ \\\\mathbb{Q} $ by restricting scalars via the canonical embedding $ \\\\math\"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: returned abstract root-pairing, Lie, group-extension or unrelated integral-model results do not realize or prolong reductive group schemes"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Existence of split reductive Q groups with prescribed character lattice roots and coroots by Galois descent",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"RootSystem.mk'\", \"module\": \"Mathlib/LinearAlgebra/RootSystem/Basic\", \"type\": \"{ι : Type u_1} →\\n  {M : Type u_3} →\\n    {N : Type u_4} →\\n      [inst : AddCommGroup M] →\\n        [inst_1 : AddCommGroup N] →\\n          [Finite ι] →\\n            {k : Type u_5} →\\n              [inst_3 : Field k] →\\n                [CharZero k] →\\n                  [inst_5 : Module k M] →\\n               \", \"doc\": \"Constructs a root system over a field $ k $ of characteristic zero, given a perfect pairing between $ k $-modules $ M $ and $ N $, injective maps $ \\\\text{root}: \\\\iota \\\\to M $ and $ \\\\text{coroot}: \\\\iot\"}\n  {\"name\": \"RootPairing.baseOf_root_eq_baseOf_coroot\", \"module\": \"Mathlib/LinearAlgebra/RootSystem/BaseExists\", \"type\": \"∀ {ι : Type u_1} {R : Type u_2} {M : Type u_3} {N : Type u_4} [Finite ι] [inst : AddCommGroup M]\\n  [inst_1 : AddCommGroup N] [inst_2 : Field R] [CharZero R] [inst_4 : Module R M] [inst_5 : Module R N]\\n  (P : RootPairing ι R M N) [P.IsRootSystem] [P.IsCrystallographic] [P.IsReduced] (f : M →+ ℚ),\\n  (\", \"doc\": \"Given a root pairing $ P $ between $ R $-modules $ M $ and $ N $, additive monoid homomorphisms $ f : M → ℚ $ and $ g : N → ℚ $ that are non-vanishing on all roots $ P.\\text{root}(i) $ and coroots $ P.\"}\n  {\"name\": \"RootPairing.mk''\", \"module\": \"Mathlib/LinearAlgebra/RootSystem/Basic\", \"type\": \"{ι : Type u_1} →\\n  {M : Type u_3} →\\n    {N : Type u_4} →\\n      [inst : AddCommGroup M] →\\n        [inst_1 : AddCommGroup N] →\\n          [Finite ι] →\\n            {k : Type u_5} →\\n              [inst_3 : Field k] →\\n                [CharZero k] →\\n                  [inst_5 : Module k M] →\\n               \", \"doc\": \"Given a perfect pairing between $ k $-modules $ M $ and $ N $, injective functions $ \\\\text{root}: \\\\iota \\\\to M $ and $ \\\\text{coroot}: \\\\iota \\\\to N $ satisfying $ p(\\\\text{root}\\\\, i, \\\\text{coroot}\\\\, i) = \"}\n  {\"name\": \"RootPairing.isRootSystem_mk''\", \"module\": \"Mathlib/LinearAlgebra/RootSystem/Basic\", \"type\": \"∀ {ι : Type u_1} {M : Type u_3} {N : Type u_4} [inst : AddCommGroup M] [inst_1 : AddCommGroup N] [inst_2 : Finite ι]\\n  {k : Type u_5} [inst_3 : Field k] [inst_4 : CharZero k] [inst_5 : Module k M] [inst_6 : Module k N]\\n  {p : M →ₗ[k] N →ₗ[k] k} [inst_7 : p.IsPerfPair] {root : ι ↪ M} {coroot : ι ↪ N}\", \"doc\": \"Given a perfect pairing $ p $ between $ k $-modules $ M $ and $ N $, injective maps $ \\\\text{root}: \\\\iota \\\\to M $ and $ \\\\text{coroot}: \\\\iota \\\\to N $ satisfying $ p(\\\\text{root}\\\\, i, \\\\text{coroot}\\\\, i) =\"}\n  {\"name\": \"RootPairing.nonempty_base\", \"module\": \"Mathlib/LinearAlgebra/RootSystem/BaseExists\", \"type\": \"∀ {ι : Type u_1} {R : Type u_2} {M : Type u_3} {N : Type u_4} [Finite ι] [inst : AddCommGroup M]\\n  [inst_1 : AddCommGroup N] [inst_2 : Field R] [CharZero R] [inst_4 : Module R M] [inst_5 : Module R N]\\n  (P : RootPairing ι R M N) [P.IsRootSystem] [P.IsCrystallographic] [P.IsReduced], Nonempty P.Base\", \"doc\": \"The base of the root pairing $ P $ is non-empty, i.e., there exists at least one element in $ P.\\\\text{Base} $.\"}\n  {\"name\": \"RootPairing.restrictScalarsRat\", \"module\": \"Mathlib/LinearAlgebra/RootSystem/BaseChange\", \"type\": \"{ι : Type u_1} →\\n  {L : Type u_2} →\\n    {M : Type u_3} →\\n      {N : Type u_4} →\\n        [inst : Field L] →\\n          [inst_1 : AddCommGroup M] →\\n            [inst_2 : AddCommGroup N] →\\n              [inst_3 : Module L M] →\\n                [inst_4 : Module L N] →\\n                  (P : RootPairing ι \", \"doc\": \"Given a crystallographic root pairing $ P $ over a field $ L $ of characteristic zero, this constructs a new root pairing over $ \\\\mathbb{Q} $ by restricting scalars via the canonical embedding $ \\\\math\"}\n  {\"name\": \"RootPairing.EmbeddedG2\", \"module\": \"Mathlib/LinearAlgebra/RootSystem/Finite/G2\", \"type\": \"{ι : Type u_1} →\\n  {R : Type u_2} →\\n    {M : Type u_3} →\\n      {N : Type u_4} →\\n        [inst : CommRing R] →\\n          [inst_1 : AddCommGroup M] →\\n            [inst_2 : Module R M] → [inst_3 : AddCommGroup N] → [inst_4 : Module R N] → RootPairing ι R M N → Type u_1\", \"doc\": \"Given a commutative ring $ R $, $ R $-modules $ M $ and $ N $, and a root pairing between them, this constructs the type of embedded $ G_2 $ root systems parameterized by a type $ \\\\iota $, defined ind\"}\n  {\"name\": \"RootPairing.IsG2.toEmbeddedG2\", \"module\": \"Mathlib/LinearAlgebra/RootSystem/Finite/G2\", \"type\": \"{ι : Type u_1} →\\n  {R : Type u_2} →\\n    {M : Type u_3} →\\n      {N : Type u_4} →\\n        [inst : CommRing R] →\\n          [inst_1 : AddCommGroup M] →\\n            [inst_2 : Module R M] →\\n              [inst_3 : AddCommGroup N] → [inst_4 : Module R N] → (P : RootPairing ι R M N) → [P.IsG2] → P.EmbeddedG\", \"doc\": \"Given a root pairing $ P $ satisfying the G2 root system axioms, this constructs the corresponding embedded $ G_2 $ root system by selecting two roots $ \\\\text{long} $ and $ \\\\text{short} $ such that th\"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: returned abstract root-pairing, Lie, group-extension or unrelated integral-model results do not realize or prolong reductive group schemes"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"RootDatum\", \"Rat\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-24",
+   "verdict": "no match: returned abstract root-pairing, Lie, group-extension or unrelated integral-model results do not realize or prolong reductive group schemes"
+  },
+  {
+   "tool": "grep",
+   "query": "root.datum.*reali|reductive.*rational|split.*reductive",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-24",
+   "verdict": "no match: returned abstract root-pairing, Lie, group-extension or unrelated integral-model results do not realize or prolong reductive group schemes"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Reduced root data admit split reductive group realizations over Q",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"RootDatum\", \"module\": \"Mathlib.LinearAlgebra.RootSystem.Defs\", \"type\": \"(X₁ X₂ : Type*) [AddCommGroup X₁] [AddCommGroup X₂]\", \"doc\": \"A root datum is a root pairing between two additive commutative groups $X_1$ and $X_2$ over the integers $\\\\mathbb{Z}$, where each group is equipped with its canonical $\\\\mathbb{Z}$-module structure. Th\"}\n  {\"name\": \"RootPairing.IsReduced.mk\", \"module\": \"Mathlib.LinearAlgebra.RootSystem.Reduced\", \"type\": \"∀ {ι : Type u_1} {R : Type u_2} {M : Type u_3} {N : Type u_4} [inst : CommRing R] [inst_1 : AddCommGroup M]\\n  [inst_2 : Module R M] [inst_3 : AddCommGroup N] [inst_4 : Module R N] {P : RootPairing ι R M N},\\n  (∀ (i j : ι), ¬LinearIndependent R ![P.root i, P.root j] → P.root i = P.root j ∨ P.root i =\", \"doc\": \"For any two indices $ i, j $, if the vectors $ P.root(i) $ and $ P.root(j) $ are not linearly independent over $ R $, then $ P.root(i) = P.root(j) $ or $ P.root(i) = -P.root(j) $.\"}\n  {\"name\": \"RootPairing.IsReduced.recOn\", \"module\": \"Mathlib.LinearAlgebra.RootSystem.Reduced\", \"type\": \"{ι : Type u_1} →\\n  {R : Type u_2} →\\n    {M : Type u_3} →\\n      {N : Type u_4} →\\n        [inst : CommRing R] →\\n          [inst_1 : AddCommGroup M] →\\n            [inst_2 : Module R M] →\\n              [inst_3 : AddCommGroup N] →\\n                [inst_4 : Module R N] →\\n                  {P : RootPairing\", \"doc\": \"A recursor for the reduced root pairing condition, which allows defining functions or proving properties by recursion on the structure of the condition: for any two indices $i,j$, if $P.root(i)$ and $\"}\n  {\"name\": \"RootPairing.IsReduced\", \"module\": \"Mathlib.LinearAlgebra.RootSystem.Reduced\", \"type\": \"{ι : Type u_1} →\\n  {R : Type u_2} →\\n    {M : Type u_3} →\\n      {N : Type u_4} →\\n        [inst : CommRing R] →\\n          [inst_1 : AddCommGroup M] →\\n            [inst_2 : Module R M] → [inst_3 : AddCommGroup N] → [inst_4 : Module R N] → RootPairing ι R M N → Prop\", \"doc\": \"Given a commutative ring $ R $, additive commutative $ R $-modules $ M $ and $ N $, and a root pairing between them, this is the proposition that the root pairing satisfies the reducedness condition.\"}\n  {\"name\": \"RootPairing.isReduced_iff\", \"module\": \"Mathlib.LinearAlgebra.RootSystem.Reduced\", \"type\": \"∀ {ι : Type u_1} {R : Type u_2} {M : Type u_3} {N : Type u_4} [inst : CommRing R] [inst_1 : AddCommGroup M]\\n  [inst_2 : Module R M] [inst_3 : AddCommGroup N] [inst_4 : Module R N] (P : RootPairing ι R M N),\\n  P.IsReduced ↔ ∀ (i j : ι), ¬LinearIndependent R ![P.root i, P.root j] → P.root i = P.root j\", \"doc\": \"A root pairing $ P $ is reduced if and only if for any indices $ i, j $, whenever the vectors $ P.\\text{root}(i) $ and $ P.\\text{root}(j) $ are linearly dependent over $ R $, it follows that $ P.\\text{ro\"}\n  {\"name\": \"RootPairing.IsReduced.casesOn\", \"module\": \"Mathlib.LinearAlgebra.RootSystem.Reduced\", \"type\": \"{ι : Type u_1} →\\n  {R : Type u_2} →\\n    {M : Type u_3} →\\n      {N : Type u_4} →\\n        [inst : CommRing R] →\\n          [inst_1 : AddCommGroup M] →\\n            [inst_2 : Module R M] →\\n              [inst_3 : AddCommGroup N] →\\n                [inst_4 : Module R N] →\\n                  {P : RootPairing\", \"doc\": \"A case analysis tool for the reduced root pairing condition, which allows defining functions or proving properties by recursion on the structure: for any indices $i,j$, if the roots $P.root(i)$ and $P\"}\n  {\"name\": \"RootPairing.IsReduced.rec\", \"module\": \"Mathlib.LinearAlgebra.RootSystem.Reduced\", \"type\": \"{ι : Type u_1} →\\n  {R : Type u_2} →\\n    {M : Type u_3} →\\n      {N : Type u_4} →\\n        [inst : CommRing R] →\\n          [inst_1 : AddCommGroup M] →\\n            [inst_2 : Module R M] →\\n              [inst_3 : AddCommGroup N] →\\n                [inst_4 : Module R N] →\\n                  {P : RootPairing\", \"doc\": \"A recursor for the reduced root pairing condition, which allows defining functions or proving properties by recursion on the structure of the condition: for any two indices $i,j$, if $P.root(i)$ and $\"}\n  {\"name\": \"RootSystem.mk'\", \"module\": \"Mathlib.LinearAlgebra.RootSystem.Basic\", \"type\": \"{ι : Type u_1} →\\n  {M : Type u_3} →\\n    {N : Type u_4} →\\n      [inst : AddCommGroup M] →\\n        [inst_1 : AddCommGroup N] →\\n          [Finite ι] →\\n            {k : Type u_5} →\\n              [inst_3 : Field k] →\\n                [CharZero k] →\\n                  [inst_5 : Module k M] →\\n               \", \"doc\": \"Constructs a root system over a field $ k $ of characteristic zero, given a perfect pairing between $ k $-modules $ M $ and $ N $, injective maps $ \\\\text{root}: \\\\iota \\\\to M $ and $ \\\\text{coroot}: \\\\iot\"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: returned abstract root-pairing, Lie, group-extension or unrelated integral-model results do not realize or prolong reductive group schemes"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Every finite reduced root datum is realized by a split reductive group scheme over the rational numbers",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"RootPairing.nonempty_base\", \"module\": \"Mathlib/LinearAlgebra/RootSystem/BaseExists\", \"type\": \"∀ {ι : Type u_1} {R : Type u_2} {M : Type u_3} {N : Type u_4} [Finite ι] [inst : AddCommGroup M]\\n  [inst_1 : AddCommGroup N] [inst_2 : Field R] [CharZero R] [inst_4 : Module R M] [inst_5 : Module R N]\\n  (P : RootPairing ι R M N) [P.IsRootSystem] [P.IsCrystallographic] [P.IsReduced], Nonempty P.Base\", \"doc\": \"The base of the root pairing $ P $ is non-empty, i.e., there exists at least one element in $ P.\\\\text{Base} $.\"}\n  {\"name\": \"RootDatum\", \"module\": \"Mathlib/LinearAlgebra/RootSystem/Defs\", \"type\": \"Type u_1 →\\n  (X₁ : Type u_5) → (X₂ : Type u_6) → [AddCommGroup X₁] → [AddCommGroup X₂] → Type (max (max (max u_1 0) u_5) u_6)\", \"doc\": \"A root datum is a root pairing between two additive commutative groups $X_1$ and $X_2$ over the integers $\\\\mathbb{Z}$, where each group is equipped with its canonical $\\\\mathbb{Z}$-module structure. Th\"}\n  {\"name\": \"RootSystem.mk'\", \"module\": \"Mathlib/LinearAlgebra/RootSystem/Basic\", \"type\": \"{ι : Type u_1} →\\n  {M : Type u_3} →\\n    {N : Type u_4} →\\n      [inst : AddCommGroup M] →\\n        [inst_1 : AddCommGroup N] →\\n          [Finite ι] →\\n            {k : Type u_5} →\\n              [inst_3 : Field k] →\\n                [CharZero k] →\\n                  [inst_5 : Module k M] →\\n               \", \"doc\": \"Constructs a root system over a field $ k $ of characteristic zero, given a perfect pairing between $ k $-modules $ M $ and $ N $, injective maps $ \\\\text{root}: \\\\iota \\\\to M $ and $ \\\\text{coroot}: \\\\iot\"}\n  {\"name\": \"RootPairing.EmbeddedG2.toIsReduced\", \"module\": \"Mathlib/LinearAlgebra/RootSystem/Finite/G2\", \"type\": \"∀ {ι : Type u_1} {R : Type u_2} {M : Type u_3} {N : Type u_4} {inst : CommRing R} {inst_1 : AddCommGroup M}\\n  {inst_2 : Module R M} {inst_3 : AddCommGroup N} {inst_4 : Module R N} {P : RootPairing ι R M N} [self : P.EmbeddedG2],\\n  P.IsReduced\", \"doc\": \"An embedded G2 root system in a root pairing implies that the root pairing satisfies the reducedness condition.\"}\n  {\"name\": \"RootPairing.isRootSystem_mk''\", \"module\": \"Mathlib/LinearAlgebra/RootSystem/Basic\", \"type\": \"∀ {ι : Type u_1} {M : Type u_3} {N : Type u_4} [inst : AddCommGroup M] [inst_1 : AddCommGroup N] [inst_2 : Finite ι]\\n  {k : Type u_5} [inst_3 : Field k] [inst_4 : CharZero k] [inst_5 : Module k M] [inst_6 : Module k N]\\n  {p : M →ₗ[k] N →ₗ[k] k} [inst_7 : p.IsPerfPair] {root : ι ↪ M} {coroot : ι ↪ N}\", \"doc\": \"Given a perfect pairing $ p $ between $ k $-modules $ M $ and $ N $, injective maps $ \\\\text{root}: \\\\iota \\\\to M $ and $ \\\\text{coroot}: \\\\iota \\\\to N $ satisfying $ p(\\\\text{root}\\\\, i, \\\\text{coroot}\\\\, i) =\"}\n  {\"name\": \"RootPairing.EmbeddedG2.instIsG2OfIsIrreducible\", \"module\": \"Mathlib/LinearAlgebra/RootSystem/Finite/G2\", \"type\": \"∀ {ι : Type u_1} {R : Type u_2} {M : Type u_3} {N : Type u_4} [inst : CommRing R] [inst_1 : AddCommGroup M]\\n  [inst_2 : Module R M] [inst_3 : AddCommGroup N] [inst_4 : Module R N] (P : RootPairing ι R M N) [P.EmbeddedG2]\\n  [P.IsIrreducible], P.IsG2\", \"doc\": \"Every irreducible root pairing satisfies the axioms defining a G2 root system.\"}\n  {\"name\": \"RootPairing.restrictScalarsRat\", \"module\": \"Mathlib/LinearAlgebra/RootSystem/BaseChange\", \"type\": \"{ι : Type u_1} →\\n  {L : Type u_2} →\\n    {M : Type u_3} →\\n      {N : Type u_4} →\\n        [inst : Field L] →\\n          [inst_1 : AddCommGroup M] →\\n            [inst_2 : AddCommGroup N] →\\n              [inst_3 : Module L M] →\\n                [inst_4 : Module L N] →\\n                  (P : RootPairing ι \", \"doc\": \"Given a crystallographic root pairing $ P $ over a field $ L $ of characteristic zero, this constructs a new root pairing over $ \\\\mathbb{Q} $ by restricting scalars via the canonical embedding $ \\\\math\"}\n  {\"name\": \"RootPairing.instIsValuedInRatOfIsCrystallographic\", \"module\": \"Mathlib/LinearAlgebra/RootSystem/IsValuedIn\", \"type\": \"∀ {ι : Type u_1} {R : Type u_2} {M : Type u_4} {N : Type u_5} [inst : CommRing R] [inst_1 : AddCommGroup M]\\n  [inst_2 : Module R M] [inst_3 : AddCommGroup N] [inst_4 : Module R N] (P : RootPairing ι R M N) [P.IsCrystallographic]\\n  [inst_6 : Algebra ℚ R], P.IsValuedIn ℚ\", \"doc\": \"If a root pairing $ P $ between $ R $-modules is crystallographic and $ R $ has a $ \\\\mathbb{Q} $-algebra structure, then $ P $ takes values in the rational numbers $ \\\\mathbb{Q} $.\"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: abstract root data and Lie-algebra constructions do not realize reductive Q-group schemes"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Existence of rational forms of connected reductive algebraic groups realizing root data",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"RootPairing.nonempty_base\", \"module\": \"Mathlib/LinearAlgebra/RootSystem/BaseExists\", \"type\": \"∀ {ι : Type u_1} {R : Type u_2} {M : Type u_3} {N : Type u_4} [Finite ι] [inst : AddCommGroup M]\\n  [inst_1 : AddCommGroup N] [inst_2 : Field R] [CharZero R] [inst_4 : Module R M] [inst_5 : Module R N]\\n  (P : RootPairing ι R M N) [P.IsRootSystem] [P.IsCrystallographic] [P.IsReduced], Nonempty P.Base\", \"doc\": \"The base of the root pairing $ P $ is non-empty, i.e., there exists at least one element in $ P.\\\\text{Base} $.\"}\n  {\"name\": \"RootPairing.EmbeddedG2\", \"module\": \"Mathlib/LinearAlgebra/RootSystem/Finite/G2\", \"type\": \"{ι : Type u_1} →\\n  {R : Type u_2} →\\n    {M : Type u_3} →\\n      {N : Type u_4} →\\n        [inst : CommRing R] →\\n          [inst_1 : AddCommGroup M] →\\n            [inst_2 : Module R M] → [inst_3 : AddCommGroup N] → [inst_4 : Module R N] → RootPairing ι R M N → Type u_1\", \"doc\": \"Given a commutative ring $ R $, $ R $-modules $ M $ and $ N $, and a root pairing between them, this constructs the type of embedded $ G_2 $ root systems parameterized by a type $ \\\\iota $, defined ind\"}\n  {\"name\": \"RootPairing.EmbeddedG2.instIsG2OfIsIrreducible\", \"module\": \"Mathlib/LinearAlgebra/RootSystem/Finite/G2\", \"type\": \"∀ {ι : Type u_1} {R : Type u_2} {M : Type u_3} {N : Type u_4} [inst : CommRing R] [inst_1 : AddCommGroup M]\\n  [inst_2 : Module R M] [inst_3 : AddCommGroup N] [inst_4 : Module R N] (P : RootPairing ι R M N) [P.EmbeddedG2]\\n  [P.IsIrreducible], P.IsG2\", \"doc\": \"Every irreducible root pairing satisfies the axioms defining a G2 root system.\"}\n  {\"name\": \"RootPairing.Base.apply_mem_range_root_of_cartanMatrixEq\", \"module\": \"Mathlib/LinearAlgebra/RootSystem/CartanMatrix\", \"type\": \"∀ {ι : Type u_1} {R : Type u_2} {M : Type u_3} {N : Type u_4} [inst : CommRing R] [inst_1 : AddCommGroup M]\\n  [inst_2 : Module R M] [inst_3 : AddCommGroup N] [inst_4 : Module R N] [CharZero R] [IsDomain R] [Finite ι]\\n  {ι₂ : Type u_6} {M₂ : Type u_7} {N₂ : Type u_8} [inst_8 : AddCommGroup M₂] [inst_\", \"doc\": \"Given a linear isomorphism $ f : M \\to M_2 $ between $ R $-modules preserving roots up to a permutation $ e $ of indices, and assuming the Cartan matrices satisfy $ C_{e(i),e(j)} = C_{i,j} $ for all $ \"}\n  {\"name\": \"RootPairing.IsG2.toEmbeddedG2\", \"module\": \"Mathlib/LinearAlgebra/RootSystem/Finite/G2\", \"type\": \"{ι : Type u_1} →\\n  {R : Type u_2} →\\n    {M : Type u_3} →\\n      {N : Type u_4} →\\n        [inst : CommRing R] →\\n          [inst_1 : AddCommGroup M] →\\n            [inst_2 : Module R M] →\\n              [inst_3 : AddCommGroup N] → [inst_4 : Module R N] → (P : RootPairing ι R M N) → [P.IsG2] → P.EmbeddedG\", \"doc\": \"Given a root pairing $ P $ satisfying the G2 root system axioms, this constructs the corresponding embedded $ G_2 $ root system by selecting two roots $ \\\\text{long} $ and $ \\\\text{short} $ such that th\"}\n  {\"name\": \"RootPairing.GeckConstruction.instHasTrivialRadical\", \"module\": \"Mathlib/LinearAlgebra/RootSystem/GeckConstruction/Semisimple\", \"type\": \"∀ {ι : Type u_1} {K : Type u_2} {M : Type u_3} {N : Type u_4} [inst : Field K] [inst_1 : CharZero K]\\n  [inst_2 : DecidableEq ι] [inst_3 : Fintype ι] [inst_4 : AddCommGroup M] [inst_5 : Module K M]\\n  [inst_6 : AddCommGroup N] [inst_7 : Module K N] {P : RootPairing ι K M N} [P.IsRootSystem]\\n  [inst_9 \", \"doc\": \"The Lie algebra constructed via the Geck construction from a root pairing over an algebraically closed field has a trivial radical, hence is semisimple. Specifically, the Lie subalgebra of the matrix \"}\n  {\"name\": \"RootPairing.IsG2\", \"module\": \"Mathlib/LinearAlgebra/RootSystem/Finite/G2\", \"type\": \"{ι : Type u_1} →\\n  {R : Type u_2} →\\n    {M : Type u_3} →\\n      {N : Type u_4} →\\n        [inst : CommRing R] →\\n          [inst_1 : AddCommGroup M] →\\n            [inst_2 : Module R M] → [inst_3 : AddCommGroup N] → [inst_4 : Module R N] → RootPairing ι R M N → Prop\", \"doc\": \"Given a commutative ring $ R $, $ R $-modules $ M $ and $ N $, and a root pairing between them, this proposition asserts that the pairing satisfies the axioms defining a G2 root system.\"}\n  {\"name\": \"RootPairing.EmbeddedG2.toIsReduced\", \"module\": \"Mathlib/LinearAlgebra/RootSystem/Finite/G2\", \"type\": \"∀ {ι : Type u_1} {R : Type u_2} {M : Type u_3} {N : Type u_4} {inst : CommRing R} {inst_1 : AddCommGroup M}\\n  {inst_2 : Module R M} {inst_3 : AddCommGroup N} {inst_4 : Module R N} {P : RootPairing ι R M N} [self : P.EmbeddedG2],\\n  P.IsReduced\", \"doc\": \"An embedded G2 root system in a root pairing implies that the root pairing satisfies the reducedness condition.\"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: abstract root data and Lie-algebra constructions do not realize reductive Q-group schemes"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"RootDatum\", \"Rat\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-24",
+   "verdict": "no match: abstract root data and Lie-algebra constructions do not realize reductive Q-group schemes"
+  },
+  {
+   "tool": "grep",
+   "query": "root.datum.*reali|reductive.*rational|split.*reductive",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-24",
+   "verdict": "no match: abstract root data and Lie-algebra constructions do not realize reductive Q-group schemes"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Every reduced root datum has a split connected reductive realization over Q",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"RootDatum\", \"module\": \"Mathlib.LinearAlgebra.RootSystem.Defs\", \"type\": \"(X₁ X₂ : Type*) [AddCommGroup X₁] [AddCommGroup X₂]\", \"doc\": \"A root datum is a root pairing between two additive commutative groups $X_1$ and $X_2$ over the integers $\\\\mathbb{Z}$, where each group is equipped with its canonical $\\\\mathbb{Z}$-module structure. Th\"}\n  {\"name\": \"RootPairing.IsReduced.mk\", \"module\": \"Mathlib.LinearAlgebra.RootSystem.Reduced\", \"type\": \"∀ {ι : Type u_1} {R : Type u_2} {M : Type u_3} {N : Type u_4} [inst : CommRing R] [inst_1 : AddCommGroup M]\\n  [inst_2 : Module R M] [inst_3 : AddCommGroup N] [inst_4 : Module R N] {P : RootPairing ι R M N},\\n  (∀ (i j : ι), ¬LinearIndependent R ![P.root i, P.root j] → P.root i = P.root j ∨ P.root i =\", \"doc\": \"For any two indices $ i, j $, if the vectors $ P.root(i) $ and $ P.root(j) $ are not linearly independent over $ R $, then $ P.root(i) = P.root(j) $ or $ P.root(i) = -P.root(j) $.\"}\n  {\"name\": \"RootPairing.isReduced_iff'\", \"module\": \"Mathlib.LinearAlgebra.RootSystem.Reduced\", \"type\": \": P.IsReduced ↔ ∀ i j : ι, i ≠ j → ¬LinearIndependent R ![P.root i, P.root j] → P.root i = -P.root j\", \"doc\": \"A root pairing $ P $ is reduced if and only if for all distinct indices $ i $ and $ j $, whenever the roots $ P.root(i) $ and $ P.root(j) $ are linearly dependent over the commutative ring $ R $, it f\"}\n  {\"name\": \"RootPairing.IsReduced.casesOn\", \"module\": \"Mathlib.LinearAlgebra.RootSystem.Reduced\", \"type\": \"{ι : Type u_1} →\\n  {R : Type u_2} →\\n    {M : Type u_3} →\\n      {N : Type u_4} →\\n        [inst : CommRing R] →\\n          [inst_1 : AddCommGroup M] →\\n            [inst_2 : Module R M] →\\n              [inst_3 : AddCommGroup N] →\\n                [inst_4 : Module R N] →\\n                  {P : RootPairing\", \"doc\": \"A case analysis tool for the reduced root pairing condition, which allows defining functions or proving properties by recursion on the structure: for any indices $i,j$, if the roots $P.root(i)$ and $P\"}\n  {\"name\": \"RootPairing.IsNotG2.toIsReduced\", \"module\": \"Mathlib.LinearAlgebra.RootSystem.Finite.G2\", \"type\": \"∀ {ι : Type u_1} {R : Type u_2} {M : Type u_3} {N : Type u_4} {inst : CommRing R} {inst_1 : AddCommGroup M}\\n  {inst_2 : Module R M} {inst_3 : AddCommGroup N} {inst_4 : Module R N} {P : RootPairing ι R M N} [self : P.IsNotG2],\\n  P.IsReduced\", \"doc\": \"For any commutative ring $ R $, additive commutative $ R $-modules $ M $ and $ N $, and a root pairing $ P $ between them, if $ P $ does not satisfy the $ G_2 $ root system conditions, then $ P $ sati\"}\n  {\"name\": \"RootPairing.EmbeddedG2.toIsReduced\", \"module\": \"Mathlib.LinearAlgebra.RootSystem.Finite.G2\", \"type\": \"∀ {ι : Type u_1} {R : Type u_2} {M : Type u_3} {N : Type u_4} {inst : CommRing R} {inst_1 : AddCommGroup M}\\n  {inst_2 : Module R M} {inst_3 : AddCommGroup N} {inst_4 : Module R N} {P : RootPairing ι R M N} [self : P.EmbeddedG2],\\n  P.IsReduced\", \"doc\": \"An embedded G2 root system in a root pairing implies that the root pairing satisfies the reducedness condition.\"}\n  {\"name\": \"RootPairing.IsG2.toIsReduced\", \"module\": \"Mathlib.LinearAlgebra.RootSystem.Finite.G2\", \"type\": \"∀ {ι : Type u_1} {R : Type u_2} {M : Type u_3} {N : Type u_4} {inst : CommRing R} {inst_1 : AddCommGroup M}\\n  {inst_2 : Module R M} {inst_3 : AddCommGroup N} {inst_4 : Module R N} {P : RootPairing ι R M N} [self : P.IsG2],\\n  P.IsReduced\", \"doc\": \"Any root pairing satisfying the G2 root system axioms automatically satisfies the reducedness condition.\"}\n  {\"name\": \"RootPairing.isReduced_iff\", \"module\": \"Mathlib.LinearAlgebra.RootSystem.Reduced\", \"type\": \"∀ {ι : Type u_1} {R : Type u_2} {M : Type u_3} {N : Type u_4} [inst : CommRing R] [inst_1 : AddCommGroup M]\\n  [inst_2 : Module R M] [inst_3 : AddCommGroup N] [inst_4 : Module R N] (P : RootPairing ι R M N),\\n  P.IsReduced ↔ ∀ (i j : ι), ¬LinearIndependent R ![P.root i, P.root j] → P.root i = P.root j\", \"doc\": \"A root pairing $ P $ is reduced if and only if for any indices $ i, j $, whenever the vectors $ P.\\text{root}(i) $ and $ P.\\text{root}(j) $ are linearly dependent over $ R $, it follows that $ P.\\text{ro\"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: abstract root data and Lie-algebra constructions do not realize reductive Q-group schemes"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-pinned-split-root-classification",
+  "date": "2026-10-24",
+  "group": "Q156"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Haboush symmetric-power lifting for a trivial quotient representation. Supporting representation-theoretic input: Steinberg endomorphisms detect a nonzero fixed vector. Supporting Self-duality of rho section modules at characteristic-dependent weights. Supporting input: Positive-characteristic simplicity step, using irreducibility of the Steinberg induced module rather than assuming self-duality. Numerical input to the dimension comparison: Weyl dimension of the induced module. Supporting Kempf vanishing for dominant flag line bundles. Positive-characteristic Andersen–Haboush argument: trivial pushforward of M_((p^r-1)rho), before the Serre twisting calculation. Supporting input: Lemma 2.3, second assertion, and Lemma 2.1, printed pp.153--155: H^0(u,V(lambda))=K v_lambda for p-restricted dominant lambda. With roots positive in Lie(B), V(lambda)=Gamma(M_{-w0 lambda}). Supporting input: Simple-root distributions and infinitesimal subalgebra calculus. Supporting input: pinning-compatible integral-to-geometric distribution comparison, with all positive root divided powers, before simple-root generation. Integral-root-model prerequisite before the comparison: integral Chevalley construction and a positive-root coordinate chart; integral matrix-closure construction: the big cell and its Weyl translates, before identifying the special fibre. Supporting input: Integral closure atlas, exhaustion of each special fibre: exclude extra components using the generic and special identity-component big-cell dimensions. Supporting input: Lemma 3.7 (first assertion, the Iwahori--Matsumoto maximal-boundedness statement) and its application in Proposition 4.3, second paragraph, printed pp.7-8; Cartan double-coset input used to prove the maximal-boundedness prerequisite, before the torus-powers argument. Supporting input: Theorem 1.3, implication (1) to (3), printed pp.1, 6; Definition 3.4 and Lemma 3.6, printed pp.5-6. The complete-DVR cocharacter form, before the non-complete descent of Theorem 4.1. Supporting input: Section 2, Claim 2, printed p.2; Section 3, proof of Theorem 1.3, (1) implies (2), printed p.6, removes the residue-field and splitness restrictions. Supporting input: Claim 2: choose a linear embedding and use reductivity to make the homogeneous quotient affine. Supporting input: Alper, Adequate moduli spaces and geometrically reductive group schemes, Theorem 9.7.5, Proposition 9.3.1(i), Lemma 9.2.5(2),(3), printed pp.522,524,527--528. WANTED local copy; read https://content.algebraicgeometry.nl/2014-4/2014-4-022.pdf. Supporting input: Theorem 9.7.5, reductive-to-geometrically-reductive direction, reductions preceding the final determinant argument, printed p.527; use Lemma 9.2.5(2),(5), Proposition 9.3.1 (base change and descent), Proposition 9.5.1 (quotients and extensions). The result is the conditional reduction, not the geometric reductivity theorem itself; no SGA source is invoked. Supporting input: Theorem 9.7.5 reduction paragraph: etale splitting followed by descent from split groups over the integers. Supporting input: Theorem 6.1.16(2), printed p.196, and Theorem 6.1.17 (Isomorphism Theorem), p.197; pinnings as in Definition 6.1.1, p.186; supporting input for existence in Theorem 6.1.17: Rational split realization of a finite reduced root datum",
+   "via": [
+    "lem-sfb-pinned-split-root-classification",
+    "lem-sfb-reductive-etale-integral-models",
+    "lem-sfb-reductive-symmetric-power-dvr-reduction",
+    "lem-sfb-reductive-ring-invariant-power-lifting",
+    "lem-sfb-dvr-reductive-linear-affine-quotient",
+    "lem-sfb-reductive-nodal-equivariant-torsor-extension",
+    "lem-sfb-complete-dvr-cocharacter-cartan",
+    "lem-sfb-split-reductive-dvr-cartan-decomposition",
+    "lem-sfb-split-reductive-integral-maximal-bounded",
+    "lem-sfb-quasi-reductive-special-connectedness",
+    "lem-sfb-integral-chevalley-weyl-atlas",
+    "lem-sfb-chevalley-integral-root-model",
+    "lem-sfb-borel-kostant-distribution-comparison",
+    "lem-sfb-borel-simple-root-distribution-calculus",
+    "lem-sfb-restricted-induced-infinitesimal-invariants",
+    "lem-sfb-flag-frobenius-rho-pushforward",
+    "lem-sfb-dominant-flag-line-kempf-vanishing",
+    "lem-sfb-induced-weyl-dimension-formula",
+    "lem-sfb-steinberg-induced-module-irreducible",
+    "lem-sfb-rho-section-self-duality",
+    "lem-sfb-steinberg-endomorphism-detection",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-rational-split-root-realization",
+  "worker": "stage1",
+  "summary": "Preserved statement. Followed the algebraically-closed realization (over an algebraic closure of Q in place of C, with all geometric fibres checked by fibre openness), finite-type spreading, number-field specialization and pinned Galois descent of Conrad Proposition 6.2.12. Reused the existing existence, root-space, base-change, isogeny, adjoint-torus and Hopf-descent nodes; isolated only abstract Weyl finiteness and spreading as new statement-only lemmas. Explicitly checked the cocycle, central lattice directions, empty roots and rank zero.",
+  "blueprint": "The inherited blueprint chain serves det-thm-sf-ctf-stability-direct-images, proof (3), through the recorded alteration and reductivity prerequisites. This split realizes the rational-existence input of lem-sfb-pinned-split-root-classification by the exact intermediate route of Conrad Proposition 6.2.12. The ancestor tool returns null for the inherited broken chain, retained as supplied.",
+  "tool_uses": [
+   {
+    "node": "lem-kun-closed-point-field",
+    "why": "Generic existing tool for Residue fields of closed points used as stated in the rational-existence argument; the unit itself has no substitute for this input."
+   },
+   {
+    "node": "lem-weil-pbc-finite-galois-receiving-separable-extensions",
+    "why": "Generic existing tool for Finitely many finite separable extensions embed into one finite Galois extension used as stated in the rational-existence argument; the unit itself has no substitute for this input."
+   },
+   {
+    "node": "lem-pc-fpqc-descend-closed-immersion",
+    "why": "Generic existing tool for Closed immersions descend along an fpqc covering of the target used as stated in the rational-existence argument; the unit itself has no substitute for this input."
+   },
+   {
+    "node": "lem-sbc-connected-rational-point-geometrically-connected",
+    "why": "Generic existing tool (another unit): a connected scheme over a field with a rational point stays connected after field extension; needed to make every geometric fibre of the realization over the algebraic closure connected, as the definition requires. No node of the unit states it. Added by the maintainer reader (Q132 review 518858c9)."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-kun-closed-point-field",
+  "lem-weil-pbc-finite-galois-receiving-separable-extensions",
+  "lem-pc-fpqc-descend-closed-immersion",
+  "lem-sbc-connected-rational-point-geometrically-connected"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q132-518858c9e",
+  "group": "Q132",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q132-518858c9e (reviewer sub-agent of L); spot-checked: Read the item, both new nodes, every cited statement, Milne C.41-C.46 (local PDF; C.46 says W acts faithfully on R, so W is finite, under the C.37 axioms) and the Mathlib RootSystem/WeylGroup.lean TODO. Conrad Prop. 6.2.12 has no local copy and is still WANTED. The route is: realization over an algebraically closed field, finite-type spreading, closed-point specialization to a finite Galois field F, uniqueness of the pinned comparison via central-isogeny-lifting (h=1, b=id) plus adjoint-torus-root-coordinates, cocycle, Hopf descent, and fpqc descent of smoothness and closed immersion. I checked each step against its cited statements. The sign check c_alpha^{-1} is right. Delta is a Z-basis of ZPhi. Tested on Phi empty, M=0, A1 adjoint/simply connected and A1 x central Z. Both new nodes are true, statement-only, not duplicates (the Weyl lemma is Milne C.46; root-datum-lattice-embedding assumes W finite) and strictly smaller than the item. No cycle: the existence-over-Z nodes pass through the classification node and are correctly avoided. Repaired 2 faults in fixes/.../lem-sfb-rational-split-root-realization.json. (1) C1: step 1 used F=C with no node saying C is algebraically closed; it now uses an algebraic closure Qbar (def-weil-algebraic-closure). (2) E1/C1: P_C/P_Qbar must be reductive with maximal T on EVERY geometric fibre Omega and of finite presentation, as the def requires; this is a hypothesis of the root-line node and of the spreading node, and the delivery assumed it. A new step 2 proves it with lem-sfb-reductive-torus-fibre-openness at the single point of Spec Qbar, lem-sbc-connected-rational-point-geometrically-connected, pqf-lem-lft-fp-locnoeth and affine permanence. Step 3 now also carries the coroots to every Omega through the relative coroot. Added tool_use: lem-sbc-connected-rational-point-geometrically-connected. Batch-5: every listed trf node reached (smooth-fpqc-base-descent, fg-torsionfree-group-free, fppf-covering-base-change, projective-exterior-scalar-comparisons) is a generic algebra or descent lemma, most of them Mathlib leaves. The item's closure already contained them through its stmt_dep def-sfb-pinned-split-root-realization, and none is the trace formula, Poincare duality or a step of their proofs, so all are outside the assumptions. The same holds for the citations the fix adds. Blueprint from.node is null, inherited from the base chain: maintainer note.; 1 file(s) fixed by the reviewer"
+ }
+}

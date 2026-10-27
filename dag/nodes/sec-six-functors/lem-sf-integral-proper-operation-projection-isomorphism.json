@@ -1,0 +1,143 @@
+{
+ "id": "lem-sf-integral-proper-operation-projection-isomorphism",
+ "kind": "statement",
+ "title": "Invertibility of the normalized integral proper counit projection",
+ "statement": "Let $D,C,E$ and the higher operations $H$ be as in [def-sf-operation-stages]. For every compactified square $Q$ of finite-type schemes over the specified algebraic closure, its proper morphism $Q.p:Q.Z\\to Q.Y$ has the integral pull/direct adjunction and tensor-pullback comparison recorded in $H.integralExchange(Q)$ [def-exchange-projection]. For any integral bounded constructible $M$ on $Q.Z$ and $N$ on $Q.Y$, the proper right-adjoint projection component $R p_*M\\widehat\\otimes N\\to R p_*(M\\widehat\\otimes p^*N)$ formed from that adjunction and comparison is invertible. This is only the proper counit factor; there is no assertion about a compact-support projection or a change of presentation. No separatedness of the structure morphisms and no additional Tor restriction is assumed.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-rem-sf-pf-done/fix-prop-projection-formula.proof.md",
+  "place": "Integral reconstruction, proper counit factor of def-exchange-projection"
+ },
+ "stmt_deps": [
+  "def-sf-operation-stages",
+  "def-exchange-projection"
+ ],
+ "proof": [
+  {
+   "text": "Apply the ordinary tensor/pullback normalization to obtain ordinary tensor models and a compatible comparison square on the fully faithful constructible inclusions. This step concerns only left-operation functors.",
+   "uses": [
+    "lem-sf-integral-ordinary-tensor-pullback-normalization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-rem-sf-pf-done/fix-prop-projection-formula.proof.md",
+    "place": "Integral reconstruction, proper counit factor of def-exchange-projection"
+   }
+  },
+  {
+   "text": "For ordinary tensors, apply finite-reduction invertibility of the canonical compact-support projection and conservativity of all positive integral reductions. The constructible endpoint conditions are provided by the tensor and ordinary pullback domain lemmas in the pro-etale projection module, together with compact-support preservation. Specialize to the identity-open compactification of the proper morphism. Its open extension is an equivalence, as follows from the module-sheaf equivalence for the identity scheme isomorphism and passage to derived categories. Evaluate at the ordinary identity pullback of M, cancel the pushed open-projection isomorphism, and transport along the isomorphism J(F M) ≅ M obtained from uniqueness of the right adjoint and the equivalence counit to get invertibility of the ordinary proper counit projection at M.",
+   "uses": [
+    "lem-sf-ordinary-projection-finite-reductions",
+    "lem-sf-intrinsic-reduction-conservative",
+    "sk-thm-sf-pf-proetale",
+    "def-pur-compact-support-completed-projection-data"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-rem-sf-pf-done/fix-prop-projection-formula.proof.md",
+    "place": "Integral reconstruction, proper counit factor of def-exchange-projection"
+   }
+  },
+  {
+   "text": "Identify the separately derived completed direct image with the ordinary ringed direct image: its coefficient map is recovered by the inverse-image adjunction Hom equivalence. Compose this isomorphism with the higher operation direct-image normalization. Restrict the ordinary adjunction along the fully faithful inclusions. The counit formula for restriction shows that the mate of the left comparison is invertible for this restricted adjunction, and uniqueness of adjoints transfers this to the supplied adjunction. The projection mate comparison equation conjugates the included supplied projection to the ordinary proper projection through isomorphisms. Cancel them and reflect invertibility along the fully faithful inclusion. No statement or hypothesis changes.",
+   "uses": [
+    "def-sf-operation-stages",
+    "def-exchange-projection"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-rem-sf-pf-done/fix-prop-projection-formula.proof.md",
+    "place": "Integral reconstruction, proper counit factor of def-exchange-projection"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sf-integral-ordinary-tensor-pullback-normalization",
+  "lem-sf-ordinary-projection-finite-reductions",
+  "lem-sf-intrinsic-reduction-conservative",
+  "sk-thm-sf-pf-proetale",
+  "def-pur-compact-support-completed-projection-data",
+  "def-sf-operation-stages",
+  "def-exchange-projection"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-rem-sf-pf-done/fix-prop-projection-formula.proof.md",
+  "place": "Integral reconstruction, with explicit ordinary proper specialization and fully faithful adjunction transport (V6)"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The proper right adjoint projection formula for completed integral constructible sheaves is invariant under change of adjunction and normalized tensor models",
+   "results": "Eight sheaf adjunction, condensed projectivity and counit results; none treats completed integral constructible proper projection.",
+   "date": "2026-10-27",
+   "verdict": "No direct result."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.rightAdjointProjectionMap, CategoryTheory.IsIso",
+   "results": "No hits; the project-specific projection identifier is absent from Loogle.",
+   "date": "2026-10-27",
+   "verdict": "No Mathlib specialization."
+  },
+  {
+   "tool": "grep",
+   "query": "rightAdjointProjectionMap.*[Ii]sIso|isIso_rightAdjointProjectionMap",
+   "results": "Mathlib/project adjunction transport and finite-coefficient tensor-pullback equivalence results. The latter require a compatible comparison to be constructed. The concrete integral_isIso proof applies to the completed ordinary map; the normalization with the supplied adjunction remains.",
+   "date": "2026-10-27",
+   "verdict": "Use existing concrete invertibility and adjoint uniqueness; no existing supplied-operation proper result."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.IntegralProjectionOperationPresentation",
+  "date": "2026-10-27",
+  "group": "C6"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "fix-prop-projection-formula",
+   "place": "Integral reconstruction: proper counit factor before open projection",
+   "via": [
+    "lem-sf-integral-projection-operation-presentation",
+    "lem-sf-integral-stage-projection-reduction",
+    "lem-sf-projection-integral-stage-laws"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-rem-sf-pf-done",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.IntegralProperOperationProjection",
+  "file": "lean/Sheaf/Paper/IntegralProperOperationProjection.lean",
+  "declaration": "WeilConjectures.integralProperOperationProjection_isIso",
+  "statement": "theorem integralProperOperationProjection_isIso\n    {D : FiniteFieldDatum.{u}} {C : D.CoefficientDatum}\n    {E : Type u} [Field E] [Algebra (Padic C.l) E]\n    [FiniteDimensional (Padic C.l) E]\n    (H : SixFunctorHigherOperations D C E)\n    (Q : SixFunctorCompactifiedSquare D)\n    (M : sfIntegralConstructibleCategory C.l E Q.Z.obj.left)\n    (N : sfIntegralConstructibleCategory C.l E Q.Y.obj.left) :\n    IsIso ((((H.integralExchange Q).stage.properAdjunction.rightAdjointProjectionMap\n      (H.integralExchange Q).stage.tensorPullback.hom).app M).app N)",
+  "branch": "sheaf-dag",
+  "by": "C6",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C6",
+  "result": "pass",
+  "landing": "20261026T222603-L-670879",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V6",
+  "result": "pass",
+  "landing": "20261027T012957-L-2354882",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

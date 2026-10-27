@@ -1,0 +1,135 @@
+{
+ "id": "lem-sf-normalized-common-stage-recollement-weil-squares",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-sf-open-closed-triangle-all-stages",
+   "place": "Weil structures: the exchange isomorphisms give outer Weil structures and the counit and unit are equivariant; common-stage passage",
+   "via": []
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "The first two Frobenius squares for normalized common-stage recollement",
+ "statement": "Fix a finite-field datum D and a prime l different from its characteristic. Let X0 be separated of finite type over the base finite field, Z0 finite type, and i0:Z0→X0 a closed immersion. Let i be its geometric base change. Let Ω be an algebraic closure of Q_l and, for every finite coefficient subfield L of Ω, let P_L and Q_L be integral and rational recollement presentations normalized to the completed closed unit and its open kernel [def-sf-recollement-presentation-data]. Let R be a common-stage presentation normalized to the Q_L, with the specified counit and unit comparisons [def-weil-algebraically-closed-coefficients]. For every Weil pair (K,theta:G K≅K) for the actual common-stage geometric Frobenius G [def-weil-weil-sheaf-complex], there exist isomorphisms a:G(R.openTerm K)≅R.openTerm K and c:G(R.closedTerm K)≅R.closedTerm K such that G(counit_K) ≫ theta = a ≫ counit_K and G(unit_K) ≫ c = theta ≫ unit_K. No assertion about a connecting map, distinguished triangles, Hom vanishing, or uniqueness is made.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sf-localization/prop-sf-open-closed-triangle-all-stages.proof.md",
+  "place": "Weil structures paragraph; common-stage coefficient passage"
+ },
+ "stmt_deps": [
+  "def-sf-recollement-presentation-data",
+  "def-weil-algebraically-closed-coefficients",
+  "def-weil-weil-sheaf-complex"
+ ],
+ "proof": [
+  {
+   "text": "Apply commonStageWeilFiniteRealization to the one-vertex quiver with no arrows and no path equations. It supplies one finite coefficient field L, a rational Weil pair N, and an isomorphism from its included Weil pair to the given K. This uses only finite representation of the structure and inverse and eventual equality of the inverse equations.",
+   "uses": [
+    "lem-wf-common-stage-weil-iterate"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sf-localization/prop-sf-open-closed-triangle-all-stages.proof.md",
+    "place": "Weil structures paragraph; common-stage coefficient passage"
+   }
+  },
+  {
+   "text": "Apply normalized rational recollement Weil squares to N and the given normalized P_L,Q_L. This gives the two outer isomorphisms with their counit and unit squares.",
+   "uses": [
+    "lem-sf-normalized-rational-recollement-weil-squares"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sf-localization/prop-sf-open-closed-triangle-all-stages.proof.md",
+    "place": "Weil structures paragraph; common-stage coefficient passage"
+   }
+  },
+  {
+   "text": "Use the natural stage/Frobenius comparison d, proved natural directly from the defining common-stage pullback arrow formula and the normalization comparisons a,c of R. Transport each rational outer isomorphism x by G(a), then d, then the included x, then inverse a (and likewise c). The normalization equations, naturality of d, and functoriality give the two squares. Finally conjugate both outer isomorphisms by the open and closed images of the underlying middle isomorphism to K. Naturality of the unit and counit and its Weil square give the requested squares at K. These are the two completely proved private transport lemmas.",
+   "uses": [
+    "def-weil-derived-pullback-tensor-hom",
+    "def-sf-recollement-presentation-data"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sf-localization/prop-sf-open-closed-triangle-all-stages.proof.md",
+    "place": "Weil structures paragraph; common-stage coefficient passage"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-wf-common-stage-weil-iterate",
+  "lem-sf-normalized-rational-recollement-weil-squares",
+  "def-weil-derived-pullback-tensor-hom",
+  "def-sf-recollement-presentation-data"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sf-localization/prop-sf-open-closed-triangle-all-stages.proof.md",
+  "place": "Weil structures paragraph; common-stage coefficient passage"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Frobenius equivariance of an open closed localization triangle after descent over finite coefficient fields",
+   "results": "WittVector.IsocrystalEquiv.frob_equivariant and field/ring Frobenius declarations; no common-stage recollement squares",
+   "date": "2026-10-25",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"map_distinguished\"",
+   "results": "Functor.map_distinguished and generic triangulated functor lemmas; no prescribed common-stage counit/unit squares",
+   "date": "2026-10-25",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "recollement.*weil|weil.*squares|commonStage.*orthogonality",
+   "results": "msearch Mathlib grep: zero hits; local project search found rational squares and stage Frobenius naturality, used below",
+   "date": "2026-10-25",
+   "verdict": "no Mathlib match; project dependencies reused"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.SfOpenClosedTriangleAllStages",
+  "date": "2026-10-25",
+  "group": "R2"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sf-open-closed-triangle",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.SfNormalizedCommonStageWeilSquares",
+  "file": "lean/Sheaf/Paper/SfNormalizedCommonStageWeilSquares.lean",
+  "declaration": "WeilConjectures.sfNormalizedCommonStageRecollement_weil_squares",
+  "statement": "theorem sfNormalizedCommonStageRecollement_weil_squares\n    (D : FiniteFieldDatum.{u}) (hl : l ≠ D.p)\n    (X₀ Z₀ : Over (Spec (.of D.k₀)))\n    [LocallyOfFiniteType X₀.hom] [QuasiCompact X₀.hom] [IsSeparated X₀.hom]\n    [LocallyOfFiniteType Z₀.hom] [QuasiCompact Z₀.hom]\n    (i₀ : Z₀ ⟶ X₀) [IsClosedImmersion i₀.left]\n    (i : (D.geometricFiber Z₀).left ⟶ (D.geometricFiber X₀).left)\n    [IsClosedImmersion i]\n    (_hi : i = ((Over.pullback\n      (Spec.map (CommRingCat.ofHom (algebraMap D.k₀ D.k)))).map i₀).left)\n    (P : ∀ L : AlgebraicallyClosedCoefficients.Index l Ω,\n      SfRecollementPresentation (sfIntegralConstructibleCategory l\n        (AlgebraicallyClosedCoefficients.Coefficient.{u} l Ω L) (D.geometricFiber X₀).left))\n    (Q : ∀ L : AlgebraicallyClosedCoefficients.Index l Ω,\n      SfRecollementPresentation\n        (GeneralAlgebraicallyClosedCoefficients.Stage l Ω (D.geometricFiber X₀).left L))\n    (_hPQ : ∀ L, SfIntegralRecollementNormalization l\n        (AlgebraicallyClosedCoefficients.Coefficient.{u} l Ω L) i\n        (sfRecollementGeometricNoetherian D X₀) (P L) ∧\n      SfRationalRecollementNormalization l\n        (AlgebraicallyClosedCoefficients.Coefficient.{u} l Ω L)\n        (D.geometricFiber X₀).left (P L) (Q L))\n    (R : SfRecollementPresentation\n      (generalAlgebraicallyClosedConstructibleCategory l Ω (D.geometricFiber X₀).left))\n    (_hR : SfCommonStageRecollementNormalization l Ω (D.geometricFiber X₀).left Q R) :\n    ∀ K : CategoryTheory.Endofunctor.IsoAlgebra\n        (sfCommonStageWeilFrobeniusPullback D l hl X₀ Ω),\n      ∃ ac : ((sfCommonStageWeilFrobeniusPullback D l hl X₀ Ω).obj\n          (R.openTerm.obj K.carrier) ≅ R.openTerm.obj K.carrier) ×\n        ((sfCommonStageWeilFrobeniusPullback D l hl X₀ Ω).obj\n          (R.closedTerm.obj K.carrier) ≅ R.closedTerm.obj K.carrier),\n        (sfCommonStageWeilFrobeniusPullback D l hl X₀ Ω).map\n            (R.counit.app K.carrier) ≫ K.str.hom = ac.1.hom ≫ R.counit.app K.carrier ∧\n        (sfCommonStageWeilFrobeniusPullback D l hl X₀ Ω).map\n            (R.unit.app K.carrier) ≫ ac.2.hom = K.str.hom ≫ R.unit.app K.carrier",
+  "branch": "sheaf-dag",
+  "by": "R2",
+  "date": "2026-10-25"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R2",
+  "result": "pass",
+  "landing": "20261025T181010-L-4062049",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R2",
+  "result": "pass",
+  "landing": "20261025T181010-L-4062049",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

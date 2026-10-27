@@ -1,0 +1,96 @@
+{
+ "id": "lem-trf-immediate-minpoly-coefficient-preparation",
+ "kind": "statement",
+ "title": "Coefficient preparation at the approximation radius of an immediate prime extension",
+ "statement": "Let $K\\subseteq L$ be complete fields [def-weil-field] with compatible nontrivial nonarchimedean real absolute values. Set $F^\\circ=\\{x\\in F:|x|\\le1\\}$ [def-trf-valuation-ring], $\\widetilde F=F^\\circ/\\{x:|x|<1\\}$ and $\\Gamma_F=|F^\\times|$ for $F=K,L$. Suppose $p=\\operatorname{char}\\widetilde K>0$, $[L:K]=p$, $\\widetilde L=\\widetilde K$ and $\\Gamma_L=\\Gamma_K$. Here degree means vector-space dimension. There exist $\\theta\\in L\\setminus K$, numbers $0<r<R=|\\theta|$, and coefficients $b,a_1,\\ldots,a_{p-1}\\in K$ such that $L=K(\\theta)$ and its monic minimal polynomial (the monic polynomial of least degree vanishing at $\\theta$) in $K[T]$ [def-weil-polynomial-ring] is\n$$f(T)=T^p+\\sum_{i=1}^{p-1}a_iT^i+b.$$\nThey satisfy\n$$r=\\inf_{c\\in K}|\\theta-c|<|\\theta-c|\\quad(c\\in K),\\qquad |f(c)|=|\\theta-c|^p\\quad(c\\in K),$$\n$$|b|=R^p,\\qquad |p|R^p<r^p,\\qquad |a_i|R^i<r^p\\quad(2\\le i<p),\\qquad |a_1|\\le r^{p-1}.$$\nIf $|a_1|<r^{p-1}$, the choices also satisfy $|a_1|R<r^p$. The integer $p$ in an absolute value denotes its image in the field; in characteristic $p$ it is zero. The sum over $2\\le i<p$ is empty when $p=2$.",
+ "source": {
+  "document": "literature/temkin-stable-modification-arXiv-0707.3953v3.pdf",
+  "place": "Proposition 6.1.4, proof of (i) for immediate extensions, printed pp. 39--40: translation and shrinking before discarding the higher coefficients; the inseparable case is the preceding paragraph. The evaluation identity follows from uniqueness of the extending absolute value applied to the conjugates of the minimal polynomial."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-trf-valuation-ring",
+  "def-weil-polynomial-ring"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "An immediate extension of prime degree over a complete nonarchimedean field admits a minimal polynomial with small higher coefficients and linear coefficient bounded by the distance to the base field",
+   "results": "8 hits; spectralNorm.spectralNorm_eq_norm_coeff_zero_rpow, Valuation.coeff_zero_minpoly, NumberField.Embeddings.coeff_bdd_of_norm_le, Valuation.pow_coeff_zero_ne_zero_of_unit, spectralNorm.spectralNorm_pow_natDegree_eq_prod_roots, IntermediateField.adjoin_minpoly_coeff_of_exists_primitive_element, IsPurelyInseparable.minpoly_eq', IsPurelyInseparable.minpoly_eq_X_sub_C_pow",
+   "date": "2026-10-24",
+   "verdict": "no match: spectralNorm_eq_norm_coeff_zero_rpow gives only a constant-coefficient identity, and IsPurelyInseparable.minpoly_eq gives only the inseparable case. Neither provides the translated higher-coefficient and linear-coefficient bounds at the nonattained approximation radius."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Translate a generator of an immediate degree p valued field extension so the terms of its minimal polynomial of degrees 2 through p minus 1 are smaller than its approximation radius to the power p",
+   "results": "8 hits; IsPurelyInseparable.elemReduct, NumberField.mixedEmbedding.exists_primitive_element_lt_of_isReal, NumberField.mixedEmbedding.exists_primitive_element_lt_of_isComplex, ClassGroup.exists_mem_finset_approx', IsLiouville, hensels_lemma, ClassGroup.exists_mem_finsetApprox, Field.primitive_element_inf_aux_exists_c",
+   "date": "2026-10-24",
+   "verdict": "no match: spectralNorm_eq_norm_coeff_zero_rpow gives only a constant-coefficient identity, and IsPurelyInseparable.minpoly_eq gives only the inseparable case. Neither provides the translated higher-coefficient and linear-coefficient bounds at the nonattained approximation radius."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Immediate prime degree nonarchimedean field extension minimal polynomial higher coefficients small after translating a generator",
+   "results": "8 hits; minpoly, PowerBasis.minpolyGen, IntermediateField.minpoly_gen, minpoly.degree_dvd, minpoly.prime, IntermediateField.adjoin.finrank, PowerBasis.minpolyGen_monic, PowerBasis.minpolyGen_eq",
+   "date": "2026-10-24",
+   "verdict": "no match: spectralNorm_eq_norm_coeff_zero_rpow gives only a constant-coefficient identity, and IsPurelyInseparable.minpoly_eq gives only the inseparable case. Neither provides the translated higher-coefficient and linear-coefficient bounds at the nonattained approximation radius."
+  },
+  {
+   "tool": "loogle",
+   "query": "NormedField, Polynomial.IsRoot",
+   "results": "2 hits; Polynomial.eventually_atBot_not_isRoot, Polynomial.eventually_atTop_not_isRoot",
+   "date": "2026-10-24",
+   "verdict": "no match: spectralNorm_eq_norm_coeff_zero_rpow gives only a constant-coefficient identity, and IsPurelyInseparable.minpoly_eq gives only the inseparable case. Neither provides the translated higher-coefficient and linear-coefficient bounds at the nonattained approximation radius."
+  },
+  {
+   "tool": "grep",
+   "query": "immediate|higher.*coeff|coeff.*higher",
+   "results": "0 hits; ",
+   "date": "2026-10-24",
+   "verdict": "no match: spectralNorm_eq_norm_coeff_zero_rpow gives only a constant-coefficient identity, and IsPurelyInseparable.minpoly_eq gives only the inseparable case. Neither provides the translated higher-coefficient and linear-coefficient bounds at the nonattained approximation radius."
+  },
+  {
+   "tool": "grep",
+   "query": "minpoly.*coeff|coeff.*minpoly|immediate",
+   "results": "7 hits; Mathlib/Analysis/Normed/Module/PiTensorProduct/InjectiveSeminorm.lean, Mathlib/Analysis/Normed/MulAction.lean, Mathlib/Analysis/Normed/Unbundled/SpectralNorm.lean, Mathlib/Analysis/Normed/Unbundled/SpectralNorm.lean, Mathlib/Analysis/Normed/Unbundled/SpectralNorm.lean, Mathlib/Analysis/Normed/Unbundled/SpectralNorm.lean, Mathlib/Analysis/Normed/Unbundled/SpectralNorm.lean",
+   "date": "2026-10-24",
+   "verdict": "no match: spectralNorm_eq_norm_coeff_zero_rpow gives only a constant-coefficient identity, and IsPurelyInseparable.minpoly_eq gives only the inseparable case. Neither provides the translated higher-coefficient and linear-coefficient bounds at the nonattained approximation radius."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-analytic-prime-coset-model",
+  "date": "2026-10-24",
+  "group": "Q74"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Proposition 6.1.4, proof of (i) for immediate extensions, printed pp. 39--40: translation and shrinking before discarding the higher coefficients; the inseparable case is the preceding paragraph. The evaluation identity follows from uniqueness of the extending absolute value applied to the conjugates of the minimal polynomial.",
+   "via": [
+    "lem-trf-analytic-prime-coset-model",
+    "lem-trf-analytic-immediate-rationality",
+    "lem-trf-analytic-uniformization",
+    "lem-trf-valued-curve-etale-parameter",
+    "lem-trf-valuation-strict-semistable-local-uniformization",
+    "lem-trf-valuation-stable-reduction",
+    "lem-trf-temkin-stable-modification",
+    "lem-trf-stable-modification-flat-curve-pair",
+    "lem-trf-dejong-relative-marked-semistable",
+    "lem-trf-relative-marked-nodal-reduction",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ }
+}

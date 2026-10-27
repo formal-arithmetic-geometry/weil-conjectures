@@ -5,6 +5,7 @@ Released under Apache 2.0 license as described in the file LICENSE.
 module
 
 public import Sheaf.Paper.CompletedIntegralCoefficients
+public import Sheaf.Paper.DerivedScalarExtensionRestrictionAdjunction
 public import Sheaf.Paper.RestrictionOfScalarsExact
 public import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
 public import Mathlib.CategoryTheory.Limits.FunctorCategory.Basic
@@ -76,18 +77,27 @@ noncomputable def normalizedDVRQuotient {m n : ℕ} (h : n ≤ m) :
 /-- The finite-level module category, with the recorded coefficient sheaf and size.
 Source: blueprint order 2131 (blueprint: def-coef-normalized-dvr-tower). -/
 abbrev normalizedDVRModules (n : ℕ) :=
-  CategoryTheory.ringedSiteModules.{max u (t + 1)} (integralCoefficientSheaf l E X n)
+  scalarReductionTarget l E X n
 
 /-- The standard localization of finite-level module complexes.
 Source: blueprint order 2131 (blueprint: def-coef-normalized-dvr-tower). -/
-noncomputable abbrev normalizedDVRDerived (n : ℕ) :=
+@[reducible]
+noncomputable def normalizedDVRDerived (n : ℕ) :=
   @DerivedCategory (normalizedDVRModules l E X n) _ _ (HasDerivedCategory.standard _)
 
 /-- Restriction along the actual quotient, on module sheaves.
 Source: blueprint order 2131 (blueprint: def-coef-normalized-dvr-tower). -/
-noncomputable abbrev normalizedDVRModuleRes {m n : ℕ} (h : n ≤ m) :
-    normalizedDVRModules l E X n ⥤ normalizedDVRModules l E X m :=
+@[reducible]
+noncomputable def normalizedDVRModuleRes {m n : ℕ} (h : n ≤ m) :
+    scalarReductionTarget l E X n ⥤ scalarReductionTarget l E X m :=
   SheafOfModules.restrictScalars (normalizedDVRQuotient l E X h)
+
+/-- Additivity of scalar restriction along a finite quotient.
+Source: blueprint order 2131 (blueprint: def-coef-normalized-dvr-tower). -/
+instance normalizedDVRModuleRes_additive {m n : ℕ} (h : n ≤ m) :
+    (normalizedDVRModuleRes l E X h).Additive := by
+  unfold normalizedDVRModuleRes
+  infer_instance
 
 /-- Exactness of finite-level restriction, asserted in the definition's second paragraph.
 Source: blueprint order 2131; Stacks Tag 03DA
@@ -117,7 +127,8 @@ noncomputable instance normalizedDVRModuleRes_colimits {m n : ℕ} (h : n ≤ m)
 
 /-- Termwise restriction descended through the actual derived localization.
 Source: blueprint order 2131 (blueprint: def-coef-normalized-dvr-tower). -/
-noncomputable abbrev normalizedDVRRes {m n : ℕ} (h : n ≤ m) :
+@[reducible]
+noncomputable def normalizedDVRRes {m n : ℕ} (h : n ≤ m) :
     normalizedDVRDerived l E X n ⥤ normalizedDVRDerived l E X m :=
   letI := HasDerivedCategory.standard (normalizedDVRModules l E X n)
   letI := HasDerivedCategory.standard (normalizedDVRModules l E X m)
@@ -163,13 +174,15 @@ variable (D : FiniteFieldDatum.{d}) (hl : l ≠ D.p)
 
 /-- The coherent tower category is derived before evaluation, over the completed sheaf.
 Source: blueprint order 2131 (blueprint: def-coef-normalized-dvr-tower). -/
-noncomputable abbrev normalizedDVRDerivedTowers :=
+@[reducible]
+noncomputable def normalizedDVRDerivedTowers :=
   @DerivedCategory (ℕᵒᵖ ⥤ completedIntegralModuleSheaves l E X D hl) _ _
     (HasDerivedCategory.standard _)
 
 /-- Restriction along the completion projection, descended termwise to derived categories.
 Source: blueprint order 2131 (blueprint: def-coef-normalized-dvr-tower). -/
-noncomputable abbrev normalizedDVRResCompleted (n : ℕ) :
+@[reducible]
+noncomputable def normalizedDVRResCompleted (n : ℕ) :
     normalizedDVRDerived l E X n ⥤ completedIntegralDerivedCategory l E X D hl :=
   letI := HasDerivedCategory.standard (normalizedDVRModules l E X n)
   letI := HasDerivedCategory.standard (completedIntegralModuleSheaves l E X D hl)
@@ -221,7 +234,8 @@ noncomputable def normalizedDVRResCompletedComp {m n : ℕ} (h : n ≤ m) :
 
 /-- The actual derived evaluation functor, without equating site and coefficient universes.
 Source: blueprint order 2131 (blueprint: def-coef-normalized-dvr-tower). -/
-noncomputable abbrev normalizedDVRTowerEvaluation (n : ℕ) :
+@[reducible]
+noncomputable def normalizedDVRTowerEvaluation (n : ℕ) :
     normalizedDVRDerivedTowers l E X D hl ⥤ completedIntegralDerivedCategory l E X D hl :=
   letI := HasDerivedCategory.standard (ℕᵒᵖ ⥤ completedIntegralModuleSheaves l E X D hl)
   letI := HasDerivedCategory.standard (completedIntegralModuleSheaves l E X D hl)

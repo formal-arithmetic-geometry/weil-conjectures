@@ -1,0 +1,122 @@
+{
+ "id": "def-trf-local-quotient-hilbert-function",
+ "kind": "definition",
+ "title": "Hilbert function of a quotient with the induced ideal filtration",
+ "status": "split",
+ "statement": "Let $W$ be a commutative ring and $\\mathfrak l,\\mathfrak c\\subseteq W$ ideals. Write $q:W\\to W/\\mathfrak c$ for the quotient map [def-weil-pbc-algebra-hom-quotient]. Define the natural-number-valued quotient Hilbert function by $$h_{\\mathfrak l,\\mathfrak c}(n)=\\operatorname{toNat}\\bigl(\\operatorname{length}_{W/\\mathfrak c}((W/\\mathfrak c)/(\\mathfrak l(W/\\mathfrak c))^{n+1})\\bigr),\\quad n\\in\\mathbf N,$$ using module length in $\\mathbf N\\cup\\{\\infty\\}$ [def-weil-pbc-module-length], where $\\operatorname{toNat}(\\infty)=0$. When $W$ is Noetherian local, $\\mathfrak l$ is its maximal ideal, and $\\mathfrak c\\subseteq\\mathfrak l$, this is the usual Hilbert--Samuel function of $W/\\mathfrak c$, since its truncation lengths are finite. This node defines the displayed function for arbitrary $W,\\mathfrak l,\\mathfrak c$ and asserts no finiteness theorem.",
+ "stmt_deps": [
+  "def-weil-pbc-algebra-hom-quotient",
+  "def-weil-pbc-module-length"
+ ],
+ "source": {
+  "document": "literature/hironaka-certain-numerical-characters-of-singularities-1970.pdf",
+  "place": "Hironaka (1970), §3, p.155 (Samuel functions), and Lemma 8, pp.160--162; existing quotientHilbertFunction in Sheaf.RingTheory.ProjectiveConeHilbertStandardDegrees. Online: https://scispace.com/pdf/certain-numerical-characters-of-singularities-18d51ii5bz.pdf."
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Local quotient Hilbert Samuel sequence length of quotient by powers of image of maximal ideal",
+   "results": "{\"t\": \"2026-10-23T22:00:00Z\", \"tool\": \"leansearch\", \"query\": \"Local quotient Hilbert Samuel sequence length of quotient by powers of image of maximal ideal\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Ideal.Quotient.factorPowSucc\", \"ringKrullDim_quotient_span_singleton_succ_eq_ringKrullDim\", \"IsLocalRing.exists_maximalIdeal_pow_le_of_finite_quotient\", \"Module.length_quotient\", \"ringKrullDim_quotSMulTop_succ_eq_ringKrullDim\", \"Ideal.Factors.finiteDimensional_quotient_pow\", \"IsLocalRing.quotient_artinian_of_mem_minimalPrimes_of_isLocalRing\", \"Ideal.Quotient.factorPow\"], \"digest\": \"ab5a8b73f5e4a201\"}",
+   "date": "2026-10-23",
+   "verdict": "No exact Mathlib function. Reuse Hironaka.quotientHilbertFunction, already defined with real data in Sheaf.RingTheory.ProjectiveConeHilbertStandardDegrees; add definition-only ownership, not a duplicate."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Hilbert Samuel sequence of local ring quotient by ideal using module length of truncations",
+   "results": "{\"t\": \"2026-10-23T22:00:01Z\", \"tool\": \"leanfinder\", \"query\": \"Hilbert Samuel sequence of local ring quotient by ideal using module length of truncations\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AdicCompletion.AdicCauchySequence\", \"Submodule.factorPowSucc\", \"localCohomology\", \"Ideal.powQuotSuccInclusion\", \"AdicCompletion.submodule\", \"IsNoetherianRing.exists_relSeries_isQuotientEquivQuotientPrime\", \"Hausdorffification\", \"Ideal.adic_basis\"], \"digest\": \"4bf7d84f0ac3ed9d\"}",
+   "date": "2026-10-23",
+   "verdict": "No exact Mathlib function. Reuse Hironaka.quotientHilbertFunction, already defined with real data in Sheaf.RingTheory.ProjectiveConeHilbertStandardDegrees; add definition-only ownership, not a duplicate."
+  },
+  {
+   "tool": "grep",
+   "query": "quotientHilbertFunction|hilbertSamuel",
+   "results": "{\"t\": \"2026-10-23T22:00:01Z\", \"tool\": \"grep\", \"query\": \"quotientHilbertFunction|hilbertSamuel\", \"sub\": \"RingTheory\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "No exact Mathlib function. Reuse Hironaka.quotientHilbertFunction, already defined with real data in Sheaf.RingTheory.ProjectiveConeHilbertStandardDegrees; add definition-only ownership, not a duplicate."
+  },
+  {
+   "tool": "grep",
+   "query": "rg -n quotientHilbertFunction dag/nodes lean/WeilConjectures lean/Sheaf; python3 tools/blueprint_refs.py search \"quotient Hilbert\"",
+   "results": "DAG: only the declaration list and statement of lem-trf-projective-cone-hilbert-standard-degrees own/use quotientHilbertFunction; no definition node. Sheaf: definition at ProjectiveConeHilbertStandardDegrees.lean:122. WeilConjectures: no matching declaration. Blueprint search: 0 blueprint nodes match quotient Hilbert.",
+   "date": "2026-10-23",
+   "verdict": "Attach the unchanged real-data definition with existing:true; do not cite the downstream theorem as a statement dependency."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-simple-residue-extension-hilbert-comparison",
+  "date": "2026-10-23",
+  "group": "Q110"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Historical nearby-duality/alteration branch of lem-trf-local-term-locality, proof (1)--(2), through lem-trf-log-regular-desingularization: monoidal resolution used for the regular modification of nodal pairs; ILO VIII 3.3.15, pp.109--110. Expose VIII, Theorems 3.1.27 and 3.2.20, and Remark 3.2.21, pp.102,106; construction in 3.2.19 over k=Q. Supporting source: Expose VIII, Theorem 2.3.10, normalized restriction in 2.3.9 and Remark 2.3.12(i), equivariance in Corollary 2.3.17, printed pp.93--95; application in 3.2.19, p.106. Refinement in this split: Expose VIII, Theorem 2.3.10 restricted to finite-type Q-schemes, with tower conventions 2.1.4, 2.3.1, 2.3.4 and Remark 2.3.5(i), printed pp.87,91--93. This is ordinary resolution, not the normalized toric conclusion; no Stacks tag states this characteristic-zero resolution theorem. Lower input: embedded characteristic-zero resolution and invariant synchronization discussed in ILO VIII 2.3.11 and 2.3.13; the intrinsic gluing argument is supplied in this item. Lower input: Expose VIII 2.3.11 and 2.3.13, pp.93--94: local invariant input underlying the cited strong embedded algorithm; BMT sections 6.1--6.3, especially local embedding independence and the correction of synchronization for arbitrary smooth morphisms. Lower input: Smooth-stable Hilbert--Samuel head and component-dimension correction. Refinement here: Component-dimension rigidity at a Hilbert--Samuel near point of a blowup. Supporting refinement: Normal-flat normal cone and linear vertex at a Hilbert--Samuel near point. Lower input here: Theorem 2.10(2), printed pp.32--33, and the characteristic-independent additive-subgroup argument in the proof of Theorem 2.14, printed p.36, before its linearity argument: Hironaka [H4], Certain numerical characters of singularities, Theorem IV, and [H5], Additive groups associated with points of a projective space, Theorem 2. The normal-cone quotient used there is Theorem 2.2(2)(ii), printed p.28. Refinement in Q87: Numerical near-point input: normal-cone equations have generators in the projective-point order algebra. Q103 refinement: Theorem III, p.156, with the definition of the degree sequence and standard bases on p.155; proof summarized on p.187; local chart form of the regular ambient embedding; Q76 refinement: Lemma 8, pp.160--162; (9.1)--(9.6), pp.162--164; Propositions 10--11 and Lemma 12, pp.164--167; second part of Remark (12.2), pp.167--168; Q36 refinement: Hironaka (9.1)--(9.6), three simple residue-extension cases, Propositions 10--11, Lemma 12 and Remark (12.2), pp.162--168. Definition-only ownership of the existing quotient Hilbert function.",
+   "via": [
+    "lem-trf-simple-residue-extension-hilbert-comparison",
+    "lem-trf-projective-cone-hilbert-standard-degrees",
+    "lem-trf-permissible-blowup-standard-degrees",
+    "lem-trf-near-blowup-order-generators",
+    "lem-trf-near-point-additive-symmetry",
+    "lem-trf-hilbert-samuel-near-normal-cone",
+    "lem-trf-hilbert-samuel-equality-component-rigidity",
+    "lem-trf-hilbert-samuel-smooth-dimension-profile",
+    "lem-trf-hilbert-samuel-resolution-invariant-calculus",
+    "lem-trf-embedded-resolution-ambient-comparison",
+    "lem-trf-smooth-functorial-ordinary-resolution",
+    "lem-trf-toric-normalized-desingularization",
+    "lem-trf-functorial-fan-desingularization",
+    "lem-trf-monoidal-resolution-tower",
+    "lem-trf-log-regular-desingularization",
+    "lem-trf-nodal-pair-projective-resolution",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "lean": {
+  "module": "Sheaf.RingTheory.ProjectiveConeHilbertStandardDegrees",
+  "declaration": "Hironaka.quotientHilbertFunction",
+  "statement": "def quotientHilbertFunction {W : Type u} [CommRing W]\n    (l c : Ideal W) (n : ℕ) : ℕ",
+  "branch": "newtargets-dag",
+  "by": "Q110",
+  "date": "2026-10-23",
+  "existing": true,
+  "note": "Definition-only ownership of the unchanged real-data construction preceding the downstream projective-cone theorem. No module or copied definition is supplied."
+ },
+ "import_flags": [],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-70ef926c2",
+  "group": "Q110",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-70ef926c2",
+  "group": "Q110",
+  "result": "pass",
+  "note": "Clause-by-clause match. Objects are canonical: k(α)=IntermediateField.adjoin k {α}, ε=productMap(val, toAlgHom), R'=Localization.AtPrime(ker ε) via ker_isPrime, I'=I.map of the canonical R→R'. R',A' Noetherian and local; residue field L pinned by ρ with ρ∘loc=ε and ker ρ = m, and σ induced from ρ. Inequality Λ^e h_A ≤ h_{A'} for all n, with e = if IsAlgebraic then 0 else 1 and no separability assumption. Equality case: IsRegularLocalRing R and h_{A'}=Λ^e h_A give IsRegularLocalRing R' and nuStar I = nuStar I'. Bodies of quotientHilbertFunction, nuStar, adicInitialIdeal and summation read against the node; they match. Edge cases n=0, I=0, α∈k, transcendental, inseparable, independent universes u,v: OK. lean.statement verbatim. New node def-trf-local-quotient-hilbert-function is an existing:true ownership record of the unchanged real-data def (same pattern as landed def-trf-adic-initial-ideal-generator-degrees), text matches the body, no parallel owner. The other two added stmt_deps are landed def nodes; statement text unchanged vs live. Docstrings and 9-step proof present; sorry only; report has both sections. Advisory: 3 private imports look unused. No compile: no file changed."
+ }
+}

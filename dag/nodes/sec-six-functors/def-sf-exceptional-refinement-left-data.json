@@ -1,0 +1,107 @@
+{
+ "chapter": "sec-six-functors",
+ "unit": "sk-thm-sf-compatibility",
+ "source": {
+  "document": "literature/zheng-six-operations-lefschetz-verdier-DM-stacks_arXiv-1006.3810.pdf",
+  "place": "Section 5, Lemmas 5.13 and 5.22, Constructions 5.15 and 5.20, Proposition 5.24; original refinement proof steps 1--8."
+ },
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/zheng-six-operations-lefschetz-verdier-DM-stacks_arXiv-1006.3810.pdf",
+  "place": "Section 5, Lemmas 5.13 and 5.22, Constructions 5.15 and 5.20, Proposition 5.24; original refinement proof steps 1--8."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Normalized left compactification refinement comparisons commute with coefficient localization common finite field inclusions and shifts",
+   "results": "OK 8 hits, including CategoryTheory.NatTrans.commShift_iso_hom_of_localization; remaining hits concern algebraic normalization.",
+   "date": "2026-10-27",
+   "verdict": "No normalized geometric left refinement or strict-system realization statement."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "natural isomorphism of left adjoints induces conjugate natural isomorphism of right adjoints commuting with unit counit and shifts",
+   "results": "OK 8 hits including CategoryTheory.Adjunction.RightAdjointCommShift.iso and LeftAdjointCommShift.iso; adjunction shift component formulas.",
+   "date": "2026-10-27",
+   "verdict": "Generic mate and shift tools apply to the proved assembly, but do not construct the geometric comparisons."
+  },
+  {
+   "tool": "grep",
+   "query": "compactification.*refinement|refinement.*compactification",
+   "results": "OK 0 hits.",
+   "date": "2026-10-27",
+   "verdict": "No Mathlib geometric refinement construction."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.ExceptionalRefinementMates",
+  "date": "2026-10-27",
+  "group": "Z6"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "Normalized exceptional refinement construction, retained steps 20--21; original refinement proof steps 1--8.",
+   "via": [
+    "lem-sf-exceptional-refinement-mates",
+    "lem-sf-constructible-exceptional-coefficient-construction"
+   ]
+  },
+  "same_as": []
+ },
+ "id": "def-sf-exceptional-refinement-left-data",
+ "kind": "definition",
+ "title": "Left refinement comparisons and their complete adjunction mate records",
+ "statement": "For the given prime l, independent-universe closure Omega, finite-field datum D, finite-type geometric map f, compactifications c,d and refinement r, and prescribed Transport records A,B of def-sf-exceptional-refinement-transport-data, LeftMates contains only the left natural isomorphism at each coefficient stage, its integer-shift compatibility, the open-unit ring normalization and the left rational/common-field conjugation formulas. Mates contains the complete refinement comparison with its unit/counit equations, left/right shifts, the two explicit transpose formulas and both left and right rational/common-field conjugation formulas. The ring predicate and conjugate refinement construction are exactly the published ones. Neither record constructs or chooses an existence witness.",
+ "stmt_deps": [
+  "def-sf-exceptional-refinement-transport-data",
+  "def-sf-constructible-exceptional-refinement-mate",
+  "def-weil-exceptional-inverse-image"
+ ],
+ "proof": [
+  {
+   "text": "Package the displayed maps and equations in records. The left-only record refers to the existing proved conjugate-completion helper solely to state the same left ring normalization. No right comparison or system realization is supplied by LeftMates.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [],
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.ExceptionalRefinementMatesData",
+  "file": "lean/Sheaf/Paper/ExceptionalRefinementMatesData.lean",
+  "declaration": "WeilConjectures.ExceptionalRefinement.LeftMates",
+  "declarations": [
+   "WeilConjectures.ExceptionalRefinement.Mates",
+   "WeilConjectures.ExceptionalRefinement.LeftMates"
+  ],
+  "statement": "structure LeftMates (A : Transport.{u, v} l Ω D hl c) (B : Transport.{u, v} l Ω D hl d) (r : c.Refinement d)",
+  "branch": "sheaf-dag",
+  "by": "Z6",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-d2c5d",
+  "group": "Z6",
+  "result": "fix",
+  "landing": "20261027T013016-L-2358323",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-d2c5d",
+  "group": "Z6",
+  "result": "fix",
+  "landing": "20261027T013016-L-2358323",
+  "kind": "interface",
+  "note": "independent cc review: item exceptional_refinement_mates assembly vs node lem-sf-exceptional-refinement-mates; new sorry statements and Transport repair vs change record, the λ(field)-conjugation counterexample and the existing commonTransitionNatural practice; new node stmt_deps vs owners of the definitions used"
+ }
+}

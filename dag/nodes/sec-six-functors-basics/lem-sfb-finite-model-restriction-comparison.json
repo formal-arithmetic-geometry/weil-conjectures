@@ -1,0 +1,288 @@
+{
+ "id": "lem-sfb-finite-model-restriction-comparison",
+ "kind": "statement",
+ "title": "Exact restriction comparison detected by finite cochain models",
+ "statement": "Let $\\mathcal A,\\mathcal A',\\mathcal B,\\mathcal B'$ be abelian categories [def-sp-abelian], with enough injectives in $\\mathcal A,\\mathcal A'$ [def-sp-injective-resolutions]. Let $G:\\mathcal A\\to\\mathcal B$ and $G':\\mathcal A'\\to\\mathcal B'$ be additive left exact functors with ordinary total right derived functors [def-sfb-right-derived-functor] computed on nonnegative injective resolutions. Let $F:\\mathcal A\\to\\operatorname{Ch}^{[0,r]}(\\mathcal B)$ and $F':\\mathcal A'\\to\\operatorname{Ch}^{[0,r]}(\\mathcal B')$ have exact degree functors, for a fixed $r\\geq0$, and natural augmentations $e:G(-)[0]\\to F$ and $e':G'(-)[0]\\to F'$ that are quasi-isomorphisms on injective objects. Use the normalized natural derived isomorphisms $\\lambda:QF\\xrightarrow{\\sim}RG(-[0])$ and $\\lambda':QF'\\xrightarrow{\\sim}RG'(-[0])$ specified in [lem-sfb-finite-exact-complex-derived-model]. Let $U:\\mathcal A'\\to\\mathcal A$, $V:\\mathcal B'\\to\\mathcal B$ be exact additive functors and suppose natural isomorphisms $\\gamma:GU\\xrightarrow{\\sim}VG'$ and $\\theta:FU\\xrightarrow{\\sim}VF'$ are given, with $\\theta\\circ e_U=(Ve')\\circ\\gamma[0]$. Write $D(V)$ for the induced functor on ordinary derived categories [def-weil-abstract-derived-category].\n\nFor $X'\\in\\mathcal A'$, choose nonnegative injective resolutions $t:X'[0]\\to J^\\bullet$ and $s:UX'[0]\\to I^\\bullet$. There is a chain map $\\beta:UJ^\\bullet\\to I^\\bullet$ with $\\beta\\circ Ut=s$. Every such $\\beta$ has $G(\\beta)$ a quasi-isomorphism; any two are homotopic and define the same derived morphism after applying $G$. With normalized comparisons $\\rho_s:RG(UX'[0])\\cong QG(I^\\bullet)$ and $\\rho'_t:RG'(X'[0])\\cong QG'(J^\\bullet)$, set\n$$\\alpha_{X'}=D(V)(\\rho'_t)^{-1}\\circ Q(\\gamma_{J^\\bullet})\\circ QG(\\beta)^{-1}\\circ\\rho_s:RG(UX'[0])\\xrightarrow{\\sim}D(V)RG'(X'[0]).$$\nThis is independent of resolutions and extensions, is natural in $X'$, and satisfies\n$$\\alpha_{X'}\\circ\\lambda_{UX'}=D(V)(\\lambda'_{X'})\\circ Q(\\theta_{X'}).$$\nIts inverse is the comparison obtained by applying the unit of $RG$ to $UJ^\\bullet$ and using the augmentation $Ut$ and $\\gamma$; in particular it is normalized by that unit. The conclusion imposes no preservation of injectives by $U$.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+  "place": "Paragraph (3), algebraic discrete-lattice input to the tame-boundary calculation; returned lattice proof steps 8-9, normalized coefficient comparison without preservation of injectives; derived.tex Tags 013P (lemma-morphisms-lift), 0156 (section-right-derived-functor), and homology.tex Tag 0133 (lemma-double-complex-gives-resolution)."
+ },
+ "stmt_deps": [
+  "def-sp-abelian",
+  "def-sp-injective-resolutions",
+  "def-sfb-right-derived-functor",
+  "lem-sfb-finite-exact-complex-derived-model",
+  "def-weil-abstract-derived-category"
+ ],
+ "proof": [
+  {
+   "text": "Exactness of $U$ and the natural cohomology identification in [lem-weil-pbc-exact-functor-complex-cohomology] make $Ut:UX'[0]\\to UJ^\\bullet$ a quasi-isomorphism. It is degreewise monic: $t^0$ identifies $X'$ with $\\ker(d_J^0)$ because $J$ is nonnegative; all other source terms are zero, and exact $U$ preserves kernels. Apply [lem-weil-pbc-lift-along-injective-quasi-iso] to $Ut$ and $s$, with target the nonnegative complex of injectives $I$, to obtain $\\beta$ with $\\beta Ut=s$. For two extensions apply [lem-weil-pbc-lift-to-injective-unique-up-to-homotopy] to $Ut$, since their restrictions are equal. If $h$ is the resulting homotopy, additivity gives $G(\\beta_1)-G(\\beta_2)=d_{GI}G(h)+G(h)d_{GUJ}$. Thus $G(h)$ is a homotopy, and the two maps have equal images under the localization of the homotopy category [def-weil-abstract-derived-category].",
+   "uses": [
+    "lem-weil-pbc-exact-functor-complex-cohomology",
+    "lem-weil-pbc-lift-along-injective-quasi-iso",
+    "lem-weil-pbc-lift-to-injective-unique-up-to-homotopy",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tags 013P (lemma-morphisms-lift), part (2), and 013S (lemma-morphisms-equal-up-to-homotopy); exact-functor cohomology applied to U"
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-finite-exact-complex-derived-model] separately to $(G,F,e,s)$ and $(G',F',e',t)$. Write $T_s=\\operatorname{Tot}(F^a(I^b))$ and $T'_t=\\operatorname{Tot}(F'^a(J^b))$, using [def-sp-double-complex-total] with differential $d_F+(-1)^a d_I$. The maps $c_s:F(UX')\\to T_s$, $b_s:G(I)\\to T_s$, $c'_t:F'(X')\\to T'_t$ and $b'_t:G'(J)\\to T'_t$ are quasi-isomorphisms. Moreover $\\lambda_{UX'}=\\rho_s^{-1}Q(b_s)^{-1}Q(c_s)$ and $\\lambda'_{X'}=(\\rho'_t)^{-1}Q(b'_t)^{-1}Q(c'_t)$. All hypotheses hold separately in the two abelian categories: the degree functors are exact, both resolutions consist of injectives, and the respective augmentations are quasi-isomorphisms on these terms.",
+   "uses": [
+    "lem-sfb-finite-exact-complex-derived-model",
+    "def-sp-double-complex-total"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/homology.tex",
+    "place": "Tag 0133 (lemma-double-complex-gives-resolution), as packaged in the normalized finite-exact-complex model"
+   }
+  },
+  {
+   "text": "Form $B^{a,b}=F^a(UJ^b)$ and $T_U=\\operatorname{Tot}B$ with the same signs. Its degree-$n$ sum has only $0\\leq a\\leq\\min(r,n)$, so it exists using finite biproducts. The component maps $\\theta_{J^b}^a$ induce a chain isomorphism $\\Theta:T_U\\xrightarrow{\\sim}V(T'_t)$: use the canonical finite-biproduct comparison for additive $V$. Explicitly this comparison and its inverse are determined by the biproduct inclusions and projections; their composites are identities by the biproduct equations. Naturality of $\\theta$ in $d_J$ and its chain-map property in $a$ show that both total differential blocks commute, including $(-1)^a$. Define $c:F(UX')\\to T_U$ from $F(Ut)$ along $b=0$, and $b:G(UJ)\\to T_U$ from $e_{UJ^b}$ along $a=0$. The chain-map property of $Ut$ and naturality of $e$ make these chain maps. On the axes the assumed augmentation compatibility and naturality of $\\theta$ give respectively\n$$\\Theta b=V(b'_t)\\gamma_J,\\qquad \\Theta c=V(c'_t)\\theta_{X'}.$$\nThese equalities hold on each diagonal summand; the axis signs are $1$.",
+   "uses": [
+    "def-sp-double-complex-total"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/homology.tex",
+    "place": "Tag 0133 (lemma-double-complex-gives-resolution), explicit augmentation maps and second-variable variant; componentwise finite-biproduct calculation"
+   }
+  },
+  {
+   "text": "For each $b\\geq0$, the equality $\\theta_{J^b}e_{UJ^b}=V(e'_{J^b})\\gamma_{J^b}[0]$ shows that $e_{UJ^b}$ is a quasi-isomorphism. Indeed $J^b$ is injective, so $e'_{J^b}$ is one by hypothesis, and exact $V$ preserves quasi-isomorphisms by [lem-weil-pbc-exact-functor-complex-cohomology]. For $b<0$ all terms are zero. Apply [lem-sc-finite-strip-row-augmentation] to $B$, with its strip parameter $r+1$ and with the row maps $e_{UJ^b}$ and total augmentation $b$. Its support requirement is exactly $0\\leq a<r+1$; all totals exist by the finite diagonal sums above. Hence $b$ is a quasi-isomorphism even though the $UJ^b$ need not be injective. Also $V(c'_t)$ is a quasi-isomorphism by exactness of $V$, since [lem-sfb-finite-exact-complex-derived-model] supplies that property for $c'_t$. The equation $\\Theta c=V(c'_t)\\theta_{X'}$ now proves that $c$ is a quasi-isomorphism.",
+   "uses": [
+    "lem-weil-pbc-exact-functor-complex-cohomology",
+    "lem-sc-finite-strip-row-augmentation",
+    "lem-sfb-finite-exact-complex-derived-model"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/homology.tex",
+    "place": "Tags 0133 (lemma-double-complex-gives-resolution), second-variable finite-strip augmentation, and 010N (lemma-exact-functor)"
+   }
+  },
+  {
+   "text": "Let $k=\\operatorname{Tot}(F(\\beta)):T_U\\to T_s$, with component $F^a(\\beta^b)$ on each summand. Naturality of $e$ gives $kb=b_sG(\\beta)$, and $\\beta Ut=s$ gives $kc=c_s$, both as literal chain-map equalities on their supporting axes. Since $c,c_s$ are quasi-isomorphisms, applying each $H^n$ to the latter equality shows that $H^n(k)$ is invertible. Since $k,b,b_s$ are quasi-isomorphisms, applying each $H^n$ to the former equality shows that $H^n(G(\\beta))$ is invertible. This proves the assertion for every extension $\\beta$. Consequently all inverses in the stated formula for $\\alpha_{X'}$ exist after $Q$ [def-weil-abstract-derived-category], and that formula defines an isomorphism.",
+   "uses": [
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/homology.tex",
+    "place": "Tag 0133 (lemma-double-complex-gives-resolution), augmentation naturality and two-of-three on cohomology"
+   }
+  },
+  {
+   "text": "In this step suppress $Q$ on chain maps, write $V$ for $D(V)$, and use right-to-left composition. From $kb=b_sG\\beta$ and $kc=c_s$ we have $(G\\beta)^{-1}b_s^{-1}c_s=b^{-1}c$. From $\\Theta b=V(b'_t)\\gamma_J$ and $\\Theta c=V(c'_t)\\theta_{X'}$ we have $\\gamma_Jb^{-1}c=V(b'_t)^{-1}V(c'_t)\\theta_{X'}$. Substitute these two equalities and the two formulas for $\\lambda$ from [lem-sfb-finite-exact-complex-derived-model] into the definition of $\\alpha$:\n$$\\alpha_{X'}\\lambda_{UX'}=V(\\rho'_t)^{-1}\\gamma_J(G\\beta)^{-1}b_s^{-1}c_s\n=V(\\rho'_t)^{-1}V(b'_t)^{-1}V(c'_t)\\theta_{X'}\n=V(\\lambda'_{X'})\\theta_{X'}.$$\nThus the required equation holds for the specific resolution-and-extension formula in the statement.",
+   "uses": [
+    "lem-sfb-finite-exact-complex-derived-model"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), coefficient comparison: explicit cancellation of the finite-model augmentation squares"
+   }
+  },
+  {
+   "text": "Since $\\lambda_{UX'}$ is invertible, the equation just proved determines\n$$\\alpha_{X'}=D(V)(\\lambda'_{X'})\\,Q(\\theta_{X'})\\,\\lambda_{UX'}^{-1}.$$\nThe two $\\lambda$'s are independent of resolutions and natural by [lem-sfb-finite-exact-complex-derived-model], and $\\theta$ is a given natural isomorphism. This expression therefore proves independence from both resolutions and from $\\beta$. For $f:X'\\to Y'$, substitute the naturality equations for $\\lambda$, $\\lambda'$ and $\\theta$ into this expression to obtain $D(V)RG'(f[0])\\alpha_{X'}=\\alpha_{Y'}RG(Uf[0])$, proving naturality in $X'$.",
+   "uses": [
+    "lem-sfb-finite-exact-complex-derived-model"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), coefficient comparison: independence and naturality from the normalized model formula"
+   }
+  },
+  {
+   "text": "Finally retain $Q$ explicitly and let $\\eta$ be the unit of $RG$ [def-sfb-right-derived-functor]. The stipulated unit normalization is $\\rho_s=\\eta_I^{-1}RG(Qs)$. Naturality of $\\eta$ on $\\beta$ gives $\\eta_IQG(\\beta)=RG(Q\\beta)\\eta_{UJ}$. Since $s=\\beta Ut$ and $Q(Ut),Q\\beta$ are invertible (the latter because both $Ut$ and $s$ are quasi-isomorphisms), cancellation yields\n$$\\rho_s^{-1}QG(\\beta)=RG(Q(Ut))^{-1}\\eta_{UJ}.$$\nTaking the inverse of the displayed definition of $\\alpha$ consequently gives\n$$\\alpha_{X'}^{-1}=RG(Q(Ut))^{-1}\\eta_{UJ}\\,Q(\\gamma_J)^{-1}D(V)(\\rho'_t).$$\nThis is exactly the comparison that first represents $RG'(X'[0])$ by $QG'(J)$, identifies $VG'(J)$ with $G(UJ)$ by $\\gamma^{-1}$, applies the unit at $UJ$, and inverts the augmentation $Ut$ under $RG$. It proves the claimed unit normalization without using injectivity of any $UJ^b$.",
+   "uses": [
+    "def-sfb-right-derived-functor",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 0156 (section-right-derived-functor): unit-normalized resolution comparison and its naturality"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-exact-functor-complex-cohomology",
+  "lem-weil-pbc-lift-along-injective-quasi-iso",
+  "lem-weil-pbc-lift-to-injective-unique-up-to-homotopy",
+  "def-weil-abstract-derived-category",
+  "lem-sfb-finite-exact-complex-derived-model",
+  "def-sp-double-complex-total",
+  "lem-sc-finite-strip-row-augmentation",
+  "def-sfb-right-derived-functor"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+  "place": "Paragraph (3), algebraic coefficient comparison; assembled from Stacks homology.tex Tags 0133 and 010N, derived.tex Tags 013P, 013S, 0156, and the existing normalized finite-model node. The displayed augmentation-square calculation is supplied by Q03."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "An exact restriction functor commuting with finite exact complex models of derived functors sends injective resolutions to acyclic resolutions and induces a normalized derived coefficient comparison",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"CategoryTheory.InjectiveResolution.toRightDerivedZero'\", \"module\": \"Mathlib/CategoryTheory/Abelian/RightDerived\", \"type\": \"{C : Type u} →\\n  [inst : CategoryTheory.Category.{v, u} C] →\\n    {D : Type u_1} →\\n      [inst_1 : CategoryTheory.Category.{v_1, u_1} D] →\\n        [inst_2 : CategoryTheory.Abelian C] →\\n          [inst_3 : CategoryTheory.Abelian D] →\\n            {X : C} →\\n              (P : CategoryTheory.InjectiveRes\", \"doc\": \"Given an object $ X $ in an abelian category $ \\\\mathcal{C} $, its injective resolution $ P $, and an additive functor $ F: \\\\mathcal{C} \\\\to \\\\mathcal{D} $, this constructs a canonical morphism from $ F(\"}\n  {\"name\": \"CategoryTheory.InjectiveResolution.toRightDerivedZero_eq\", \"module\": \"Mathlib/CategoryTheory/Abelian/RightDerived\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] {D : Type u_1} [inst_1 : CategoryTheory.Category.{v_1, u_1} D]\\n  [inst_2 : CategoryTheory.Abelian C] [inst_3 : CategoryTheory.HasInjectiveResolutions C]\\n  [inst_4 : CategoryTheory.Abelian D] {X : C} (I : CategoryTheory.InjectiveResolution X)\\n \", \"doc\": \"For an object $ X $ in an abelian category $ \\\\mathcal{C} $, its injective resolution $ I $, and an additive functor $ F : \\\\mathcal{C} \\\\to \\\\mathcal{D} $, the natural transformation from $ F $ to its 0t\"}\n  {\"name\": \"CategoryTheory.InjectiveResolution.toRightDerivedZero'_comp_iCycles_assoc\", \"module\": \"Mathlib/CategoryTheory/Abelian/RightDerived\", \"type\": \"∀ {D : Type u_1} [inst : CategoryTheory.Category.{v_1, u_1} D] [inst_1 : CategoryTheory.Abelian D] {C : Type u_2}\\n  [inst_2 : CategoryTheory.Category.{v_2, u_2} C] [inst_3 : CategoryTheory.Abelian C] {X : C}\\n  (P : CategoryTheory.InjectiveResolution X) (F : CategoryTheory.Functor C D) [inst_4 : F.Ad\", \"doc\": \"For abelian categories $\\\\mathcal{C}$ and $\\\\mathcal{D}$, an object $X$ in $\\\\mathcal{C}$, its injective resolution $P$, and an additive functor $F: \\\\mathcal{C} \\\\to \\\\mathcal{D}$, the composition of the c\"}\n  {\"name\": \"CategoryTheory.Functor.isZero_rightDerived_obj_injective_succ\", \"module\": \"Mathlib/CategoryTheory/Abelian/RightDerived\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] {D : Type u_1} [inst_1 : CategoryTheory.Category.{v_1, u_1} D]\\n  [inst_2 : CategoryTheory.Abelian C] [inst_3 : CategoryTheory.HasInjectiveResolutions C]\\n  [inst_4 : CategoryTheory.Abelian D] (F : CategoryTheory.Functor C D) [inst_5 : F.Additiv\", \"doc\": \"For any additive functor $ F : C \\\\to D $ between abelian categories, natural number $ n $, and injective object $ X $ in $ C $, the $(n+1)$-th right-derived functor of $ F $ evaluated at $ X $ yields \"}\n  {\"name\": \"CategoryTheory.Functor.toRightDerivedZero\", \"module\": \"Mathlib/CategoryTheory/Abelian/RightDerived\", \"type\": \"{C : Type u} →\\n  [inst : CategoryTheory.Category.{v, u} C] →\\n    {D : Type u_1} →\\n      [inst_1 : CategoryTheory.Category.{v_1, u_1} D] →\\n        [inst_2 : CategoryTheory.Abelian C] →\\n          [inst_3 : CategoryTheory.HasInjectiveResolutions C] →\\n            [inst_4 : CategoryTheory.Abelian D] →\\n  \", \"doc\": \"For an additive functor $ F : \\\\mathcal{C} \\\\to \\\\mathcal{D} $ between abelian categories with enough injectives, this constructs a natural transformation from $ F $ to its 0th right-derived functor $ R^\"}\n  {\"name\": \"CategoryTheory.Functor.rightDerived_map_eq\", \"module\": \"Mathlib/CategoryTheory/Abelian/RightDerived\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] {D : Type u_1} [inst_1 : CategoryTheory.Category.{v_1, u_1} D]\\n  [inst_2 : CategoryTheory.Abelian C] [inst_3 : CategoryTheory.HasInjectiveResolutions C]\\n  [inst_4 : CategoryTheory.Abelian D] (F : CategoryTheory.Functor C D) [inst_5 : F.Additiv\", \"doc\": \"For an additive functor $ F : C \\to D $ between abelian categories, natural number $ n $, and morphism $ f : X \\to Y $, the map induced by $ f $ on the $ n $-th right-derived functor $ F^R $ is equal to\"}\n  {\"name\": \"CategoryTheory.InjectiveResolution.isoRightDerivedObj_hom_naturality_assoc\", \"module\": \"Mathlib/CategoryTheory/Abelian/RightDerived\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] {D : Type u_1} [inst_1 : CategoryTheory.Category.{v_1, u_1} D]\\n  [inst_2 : CategoryTheory.Abelian C] [inst_3 : CategoryTheory.HasInjectiveResolutions C]\\n  [inst_4 : CategoryTheory.Abelian D] {X Y : C} (f : X ⟶ Y) (I : CategoryTheory.InjectiveR\", \"doc\": \"Given an object $X$ in an abelian category $\\\\mathcal{C}$ with injective resolution $I$, and an additive functor $F : \\\\mathcal{C} \\\\to \\\\mathcal{D}$, there exists an isomorphism in $\\\\mathcal{D}$ between \"}\n  {\"name\": \"CategoryTheory.InjectiveResolution.isoRightDerivedObj\", \"module\": \"Mathlib/CategoryTheory/Abelian/RightDerived\", \"type\": \"{C : Type u} →\\n  [inst : CategoryTheory.Category.{v, u} C] →\\n    {D : Type u_1} →\\n      [inst_1 : CategoryTheory.Category.{v_1, u_1} D] →\\n        [inst_2 : CategoryTheory.Abelian C] →\\n          [inst_3 : CategoryTheory.HasInjectiveResolutions C] →\\n            [inst_4 : CategoryTheory.Abelian D] →\\n  \", \"doc\": \"Given an object $X$ in an abelian category $\\\\mathcal{C}$ with injective resolution $I$, and an additive functor $F : \\\\mathcal{C} \\\\to \\\\mathcal{D}$, this constructs an isomorphism in $\\\\mathcal{D}$ betwe\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: abstract localizer comparisons require a right derivability structure; injective resolution degree-zero formulas do not prove that an exact U with a finite cochain model has acyclic restricted resolutions"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"rightDerived\", \"comp\"",
+   "results": "[loogle] OK 12 hit(s)\n  {\"name\": \"CategoryTheory.Functor.instIsRightDerivedFunctorCompCompWhiskerRightHomAssociatorOfIsLeftAdjoint\", \"module\": \"Mathlib.CategoryTheory.Functor.Derived.RightDerived\", \"type\": \" {C : Type u_3} {D : Type u_4} {H : Type u_1} {H' : Type u_2} [CategoryTheory.Category.{v_1, u_3} C] [CategoryTheory.Category.{v_2, u_4} D] [CategoryTheory.Category.{v_3, u_1} H] [CategoryTheory.Category.{v_4, u_2} H'] (RF : CategoryTheory.Functor D H) {F : CategoryTheory.Functor C H} {L : CategoryT\", \"doc\": \"\"}\n  {\"name\": \"CategoryTheory.Functor.rightDerivedNatTrans_comp\", \"module\": \"Mathlib.CategoryTheory.Functor.Derived.RightDerived\", \"type\": \" {C : Type u_1} {D : Type u_3} {H : Type u_2} [CategoryTheory.Category.{v_1, u_1} C] [CategoryTheory.Category.{v_2, u_3} D] [CategoryTheory.Category.{v_3, u_2} H] (RF RF' RF'' : CategoryTheory.Functor D H) {F F' F'' : CategoryTheory.Functor C H} {L : CategoryTheory.Functor C D} (α : F ⟶ L.comp RF) (\", \"doc\": \"\"}\n  {\"name\": \"CategoryTheory.Functor.rightDerivedNatTrans_comp_assoc\", \"module\": \"Mathlib.CategoryTheory.Functor.Derived.RightDerived\", \"type\": \" {C : Type u_1} {D : Type u_3} {H : Type u_2} [CategoryTheory.Category.{v_1, u_1} C] [CategoryTheory.Category.{v_2, u_3} D] [CategoryTheory.Category.{v_3, u_2} H] (RF RF' RF'' : CategoryTheory.Functor D H) {F F' F'' : CategoryTheory.Functor C H} {L : CategoryTheory.Functor C D} (α : F ⟶ L.comp RF) (\", \"doc\": \"\"}\n  {\"name\": \"CategoryTheory.LocalizerMorphism.isRightDerivedFunctor_iff_precomp\", \"module\": \"Mathlib.CategoryTheory.Functor.Derived.RightDerived\", \"type\": \" {C₁ : Type u_1} {C₂ : Type u_2} {H₁ : Type u_3} {H₂ : Type u_4} {D : Type u_5} [CategoryTheory.Category.{v_1, u_1} C₁] [CategoryTheory.Category.{v_2, u_2} C₂] [CategoryTheory.Category.{v_3, u_5} D] [CategoryTheory.Category.{v_4, u_3} H₁] [CategoryTheory.Category.{v_5, u_4} H₂] {W₁ : CategoryTheory.\", \"doc\": \"\"}\n  {\"name\": \"CategoryTheory.LocalizerMorphism.rightDerivedFunctorComparison\", \"module\": \"Mathlib.CategoryTheory.Localization.DerivabilityStructure.PointwiseRightDerived\", \"type\": \" {C₁ : Type u₁} {C₂ : Type u₂} {H : Type u₃} [CategoryTheory.Category.{v₁, u₁} C₁] [CategoryTheory.Category.{v₂, u₂} C₂] [CategoryTheory.Category.{v₃, u₃} H] {D₁ : Type u₄} {D₂ : Type u₅} [CategoryTheory.Category.{v₄, u₄} D₁] [CategoryTheory.Category.{v₅, u₅} D₂] {W₁ : CategoryTheory.MorphismPropert\", \"doc\": \"If `Φ` is a localizer morphism from `W₁ : MorphismProperty C₁` to\\n`W₂ : MorphismProperty C₂`, if `L₁ : C₁ ⥤ D₁` and `L₂ : C₂ ⥤ D₂` are\\nlocalization functors for `W₁` and `W₂`, if `F : C₂ ⥤ H` is a fun\"}\n  {\"name\": \"CategoryTheory.LocalizerMorphism.instIsIsoFunctorRightDerivedFunctorComparison\", \"module\": \"Mathlib.CategoryTheory.Localization.DerivabilityStructure.PointwiseRightDerived\", \"type\": \" {C₁ : Type u₁} {C₂ : Type u₂} {H : Type u₃} [CategoryTheory.Category.{v₁, u₁} C₁] [CategoryTheory.Category.{v₂, u₂} C₂] [CategoryTheory.Category.{v₃, u₃} H] {D₁ : Type u₄} {D₂ : Type u₅} [CategoryTheory.Category.{v₄, u₄} D₁] [CategoryTheory.Category.{v₅, u₅} D₂] {W₁ : CategoryTheory.MorphismPropert\", \"doc\": \"\"}\n  {\"name\": \"CategoryTheory.LocalizerMorphism.rightDerivedFunctorComparison_fac_app\", \"module\": \"Mathlib.CategoryTheory.Localization.DerivabilityStructure.PointwiseRightDerived\", \"type\": \" {C₁ : Type u₁} {C₂ : Type u₂} {H : Type u₃} [CategoryTheory.Category.{v₁, u₁} C₁] [CategoryTheory.Category.{v₂, u₂} C₂] [CategoryTheory.Category.{v₃, u₃} H] {D₁ : Type u₄} {D₂ : Type u₅} [CategoryTheory.Category.{v₄, u₄} D₁] [CategoryTheory.Category.{v₅, u₅} D₂] {W₁ : CategoryTheory.MorphismPropert\", \"doc\": \"\"}\n  {\"name\": \"CategoryTheory.LocalizerMorphism.rightDerivedFunctorComparison_fac_app_assoc\", \"module\": \"Mathlib.CategoryTheory.Localization.DerivabilityStructure.PointwiseRightDerived\", \"type\": \" {C₁ : Type u₁} {C₂ : Type u₂} {H : Type u₃} [CategoryTheory.Category.{v₁, u₁} C₁] [CategoryTheory.Category.{v₂, u₂} C₂] [CategoryTheory.Category.{v₃, u₃} H] {D₁ : Type u₄} {D₂ : Type u₅} [CategoryTheory.Category.{v₄, u₄} D₁] [CategoryTheory.Category.{v₅, u₅} D₂] {W₁ : CategoryTheory.MorphismPropert\", \"doc\": \"\"}\n  {\"name\": \"CategoryTheory.LocalizerMorphism.rightDerivedFunctorComparison_fac\", \"module\": \"Mathlib.CategoryTheory.Localization.DerivabilityStructure.PointwiseRightDerived\", \"type\": \" {C₁ : Type u₁} {C₂ : Type u₂} {H : Type u₃} [CategoryTheory.Category.{v₁, u₁} C₁] [CategoryTheory.Category.{v₂, u₂} C₂] [CategoryTheory.Category.{v₃, u₃} H] {D₁ : Type u₄} {D₂ : Type u₅} [CategoryTheory.Category.{v₄, u₄} D₁] [CategoryTheory.Category.{v₅, u₅} D₂] {W₁ : CategoryTheory.MorphismPropert\", \"doc\": \"\"}\n  {\"name\": \"CategoryTheory.LocalizerMorphism.rightDerivedFunctorComparison_fac_assoc\", \"module\": \"Mathlib.CategoryTheory.Localization.DerivabilityStructure.PointwiseRightDerived\", \"type\": \" {C₁ : Type u₁} {C₂ : Type u₂} {H : Type u₃} [CategoryTheory.Category.{v₁, u₁} C₁] [CategoryTheory.Category.{v₂, u₂} C₂] [CategoryTheory.Category.{v₃, u₃} H] {D₁ : Type u₄} {D₂ : Type u₅} [CategoryTheory.Category.{v₄, u₄} D₁] [CategoryTheory.Category.{v₅, u₅} D₂] {W₁ : CategoryTheory.MorphismPropert\", \"doc\": \"\"}\n  {\"name\": \"CategoryTheory.Functor.IsRightDerivedFunctor.postcomposeShiftNatTrans\", \"module\": \"Mathlib.CategoryTheory.Functor.Derived.RightDerivedCommShift\", \"type\": \" {C : Type u_1} {D : Type u_2} {H : Type u_3} [CategoryTheory.Category.{v_1, u_1} C] [CategoryTheory.Category.{v_2, u_2} D] [CategoryTheory.Category.{v_3, u_3} H] (RF : CategoryTheory.Functor H D) {F : CategoryTheory.Functor C D} {L : CategoryTheory.Functor C H} (α : F ⟶ L.comp RF) {A : Type u_4} [A\", \"doc\": \"The natural transformation `F ⋙ shiftFunctor D a ⟶ L ⋙ RF ⋙ shiftFunctor D a`\\ndeduced from `α : F ⟶ L ⋙ RF` when `L` commutes with the shift.\"}\n  {\"name\": \"CategoryTheory.Functor.IsRightDerivedFunctor.instCompShiftFunctorPostcomposeShiftNatTrans\", \"module\": \"Mathlib.CategoryTheory.Functor.Derived.RightDerivedCommShift\", \"type\": \" {C : Type u_1} {D : Type u_2} {H : Type u_3} [CategoryTheory.Category.{v_1, u_1} C] [CategoryTheory.Category.{v_2, u_2} D] [CategoryTheory.Category.{v_3, u_3} H] (RF : CategoryTheory.Functor H D) {F : CategoryTheory.Functor C D} {L : CategoryTheory.Functor C H} (α : F ⟶ L.comp RF) (W : CategoryTheo\", \"doc\": \"\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: abstract localizer comparisons require a right derivability structure; injective resolution degree-zero formulas do not prove that an exact U with a finite cochain model has acyclic restricted resolutions"
+  },
+  {
+   "tool": "grep",
+   "query": "(restriction|restrictScalars).*(acyclic|rightDerived)|(acyclic|rightDerived).*(restriction|restrictScalars)",
+   "results": "[grep] OK 0 hit(s)",
+   "date": "2026-10-22",
+   "verdict": "no match: abstract localizer comparisons require a right derivability structure; injective resolution degree-zero formulas do not prove that an exact U with a finite cochain model has acyclic restricted resolutions"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Finite exact cochain models imply an exact change of coefficient functor commutes with derived functors without preserving injective objects",
+   "results": "[leansearch] UNAVAILABLE 0 hit(s) | service unavailable: {\"error\":\"Rate limit exceeded: 60 per 1 minute\"}\n  This kind of search is not available now. It is recorded as unavailable; use the other kinds and grep, and do not write a verdict for it.",
+   "date": "2026-10-22",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Compare scalar restricted injective resolution to an injective resolution by a lift and invert the induced quasi isomorphism after taking invariants using a finite Koszul model",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"CategoryTheory.InjectiveResolution.instIsIsoToRightDerivedZero'Self\", \"module\": \"Mathlib/CategoryTheory/Abelian/RightDerived\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] {D : Type u_1} [inst_1 : CategoryTheory.Category.{v_1, u_1} D]\\n  [inst_2 : CategoryTheory.Abelian C] [inst_3 : CategoryTheory.Abelian D] (F : CategoryTheory.Functor C D)\\n  [inst_4 : F.Additive] (X : C) [inst_5 : CategoryTheory.Injective X],\\n  \", \"doc\": \"For an additive functor $ F: \\\\mathcal{C} \\\\to \\\\mathcal{D} $ and an injective object $ X $ in an abelian category $ \\\\mathcal{C} $, the canonical morphism from $ F(X) $ to the 0th cycles of the cochain c\"}\n  {\"name\": \"groupCohomology.linearYonedaObjResProjectiveResolutionIso\", \"module\": \"Mathlib/RepresentationTheory/Homological/GroupCohomology/Shapiro\", \"type\": \"{k G : Type u} →\\n  [inst : CommRing k] →\\n    [inst_1 : Group G] →\\n      {S : Subgroup G} →\\n        (P : CategoryTheory.ProjectiveResolution (Rep.trivial k G k)) →\\n          (A : Rep k ↥S) →\\n            ((Action.res (ModuleCat k) S.subtype).mapProjectiveResolution P).complex.linearYonedaObj k A ≅\\n   \", \"doc\": \"For a commutative ring $ k $, group $ G $, subgroup $ S $, and a projective resolution $ P $ of the trivial $ kG $-module, this establishes an isomorphism between the linear Yoneda complex of the rest\"}\n  {\"name\": \"CategoryTheory.InjectiveResolution.of_def\", \"module\": \"Mathlib/CategoryTheory/Abelian/Injective/Resolution\", \"type\": \"∀ {C : Type u_1} [inst : CategoryTheory.Category.{u_2, u_1} C] [inst_1 : CategoryTheory.Abelian C]\\n  [inst_2 : CategoryTheory.EnoughInjectives C] (Z : C),\\n  CategoryTheory.InjectiveResolution.of Z =\\n    { cocomplex := CategoryTheory.InjectiveResolution.ofCocomplex Z, injective := ⋯, hasHomology := ⋯\", \"doc\": \"Given an object $ Z $ in an abelian category $ \\\\mathcal{C} $ that has enough injectives, this function constructs an injective resolution of $ Z $, which is a cochain complex where each term is an inj\"}\n  {\"name\": \"CategoryTheory.InjectiveResolution.instInjectiveXNatOfCocomplex\", \"module\": \"Mathlib/CategoryTheory/Abelian/Injective/Resolution\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Abelian C]\\n  [inst_2 : CategoryTheory.EnoughInjectives C] (Z : C) (n : ℕ),\\n  CategoryTheory.Injective ((CategoryTheory.InjectiveResolution.ofCocomplex Z).X n)\", \"doc\": \"For any natural number $n$, the object at position $n$ in the cochain complex constructed by the injective resolution $\\\\text{ofCocomplex } Z$ is an injective object in the abelian category.\"}\n  {\"name\": \"CategoryTheory.InjectiveResolution.instQuasiIsoIntι'\", \"module\": \"Mathlib/CategoryTheory/Abelian/Injective/Extend\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Abelian C] {X : C}\\n  (R : CategoryTheory.InjectiveResolution X), QuasiIso R.ι'\", \"doc\": \"The morphism $\\\\iota'$ constructed from an injective resolution $R$ is a quasi-isomorphism between the extended single-term cochain complex (concentrated at degree 0 with object $X$) and the cochain co\"}\n  {\"name\": \"CategoryTheory.InjectiveResolution.instInjectiveXIntCochainComplex\", \"module\": \"Mathlib/CategoryTheory/Abelian/Injective/Extend\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Limits.HasZeroObject C]\\n  [inst_2 : CategoryTheory.Preadditive C] {X : C} (R : CategoryTheory.InjectiveResolution X) (n : ℤ),\\n  CategoryTheory.Injective (R.cochainComplex.X n)\", \"doc\": \"For each integer $ n $, the object $ X_n $ in the cochain complex associated with an injective resolution is injective. This includes assigning zero objects to negative indices, which are trivially in\"}\n  {\"name\": \"Rep.standardComplex.quasiIso_forget₂_εToSingle₀\", \"module\": \"Mathlib/RepresentationTheory/Homological/Resolution\", \"type\": \"∀ (k G : Type u) [inst : CommRing k] [inst_1 : Monoid G],\\n  QuasiIso\\n    (((CategoryTheory.forget₂ (Rep k G) (ModuleCat k)).mapHomologicalComplex (ComplexShape.down ℕ)).map\\n      (Rep.standardComplex.εToSingle₀ k G))\", \"doc\": \"The morphism from the standard chain complex in the category of representations of a monoid $ G $ over a commutative ring $ k $ to the single-term chain complex at degree 0 with the trivial representa\"}\n  {\"name\": \"CategoryTheory.InjectiveResolution.toRightDerivedZero'\", \"module\": \"Mathlib/CategoryTheory/Abelian/RightDerived\", \"type\": \"{C : Type u} →\\n  [inst : CategoryTheory.Category.{v, u} C] →\\n    {D : Type u_1} →\\n      [inst_1 : CategoryTheory.Category.{v_1, u_1} D] →\\n        [inst_2 : CategoryTheory.Abelian C] →\\n          [inst_3 : CategoryTheory.Abelian D] →\\n            {X : C} →\\n              (P : CategoryTheory.InjectiveRes\", \"doc\": \"Given an object $ X $ in an abelian category $ \\\\mathcal{C} $, its injective resolution $ P $, and an additive functor $ F: \\\\mathcal{C} \\\\to \\\\mathcal{D} $, this constructs a canonical morphism from $ F(\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: abstract localizer comparisons require a right derivability structure; injective resolution degree-zero formulas do not prove that an exact U with a finite cochain model has acyclic restricted resolutions"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"rightDerived\", \"comp\"",
+   "results": "Hits: CategoryTheory.Functor.instIsRightDerivedFunctorCompCompWhiskerRightHomAssociatorOfIsLeftAdjoint; CategoryTheory.Functor.rightDerivedNatTrans_comp; CategoryTheory.Functor.rightDerivedNatTrans_comp_assoc; CategoryTheory.LocalizerMorphism.isRightDerivedFunctor_iff_precomp; CategoryTheory.LocalizerMorphism.rightDerivedFunctorComparison; CategoryTheory.LocalizerMorphism.instIsIsoFunctorRightDerivedFunctorComparison; CategoryTheory.LocalizerMorphism.rightDerivedFunctorComparison_fac_app; CategoryTheory.LocalizerMorphism.rightDerivedFunctorComparison_fac_app_assoc",
+   "date": "2026-10-23",
+   "verdict": "no match: exact-functor localization and resolution-map formulas do not give this finite-model comparison; abstract comparison invertibility assumes a right derivability structure not supplied by the hypotheses."
+  },
+  {
+   "tool": "grep",
+   "query": "(restriction|restrictScalars).*(acyclic|rightDerived)|(acyclic|rightDerived).*(restriction|restrictScalars)",
+   "results": "[grep] OK 0 hit(s)",
+   "date": "2026-10-23",
+   "verdict": "no match: exact-functor localization and resolution-map formulas do not give this finite-model comparison; abstract comparison invertibility assumes a right derivability structure not supplied by the hypotheses."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Compare right derived functors using finite complexes of exact functors and exact restriction without preservation of injective objects",
+   "results": "Hits: CategoryTheory.Functor.rightDerived; CategoryTheory.Functor.totalRightDerived; CategoryTheory.Functor.rightDerived_map_eq; CategoryTheory.Functor.HasRightDerivedFunctor.mk; CategoryTheory.Functor.rightDerivedToHomotopyCategory; CategoryTheory.NatTrans.rightDerivedToHomotopyCategory_id; CategoryTheory.LocalizerMorphism.rightDerivedFunctorComparison_fac; CategoryTheory.LocalizerMorphism.rightDerivedFunctorComparison_fac_app_assoc",
+   "date": "2026-10-23",
+   "verdict": "no match: exact-functor localization and resolution-map formulas do not give this finite-model comparison; abstract comparison invertibility assumes a right derivability structure not supplied by the hypotheses."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Exact change of categories commuting with finite exact cochain models gives a unit normalized isomorphism of right derived functors without preserving injectives",
+   "results": "Hits: CategoryTheory.Functor.mapDerivedCategoryFactorsh; CategoryTheory.Functor.mapDerivedCategoryFactors; CategoryTheory.Abelian.Ext.mapExactFunctor_hom; CategoryTheory.Functor.mapDerivedCategorySingleFunctor; CategoryTheory.Functor.instLiftingCochainComplexIntDerivedCategoryQQuasiIsoUpCompHomologicalComplexMapHomologicalComplexMapDerivedCategory; CategoryTheory.Functor.rightDerivedZeroIsoSelf_inv_hom_id_assoc; CategoryTheory.Functor.mapDerivedCategoryFactorsh_hom_app; CategoryTheory.Functor.mapDerivedCategory",
+   "date": "2026-10-23",
+   "verdict": "no match: exact-functor localization and resolution-map formulas do not give this finite-model comparison; abstract comparison invertibility assumes a right derivability structure not supplied by the hypotheses."
+  },
+  {
+   "tool": "grep",
+   "query": "rightDerivedFunctorComparison|finite.*(cochain|complex).*model|model.*(rightDerived|derivedFunctor)",
+   "results": "Hits: Mathlib/CategoryTheory/Localization/DerivabilityStructure/PointwiseRightDerived.lean; Mathlib/CategoryTheory/Localization/DerivabilityStructure/PointwiseRightDerived.lean; Mathlib/CategoryTheory/Localization/DerivabilityStructure/PointwiseRightDerived.lean; Mathlib/CategoryTheory/Localization/DerivabilityStructure/PointwiseRightDerived.lean; Mathlib/CategoryTheory/Localization/DerivabilityStructure/PointwiseRightDerived.lean; source read at lines 49-125, comparison definition at line 64 and IsRightDerivabilityStructure requirement at line 88.",
+   "date": "2026-10-23",
+   "verdict": "no match: exact-functor localization and resolution-map formulas do not give this finite-model comparison; abstract comparison invertibility assumes a right derivability structure not supplied by the hypotheses."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A bounded cochain model with exact terms for a derived functor commutes with an exact functor, and computes the canonical unit comparison on restricted injective resolutions",
+   "results": "Hits: CategoryTheory.Functor.rightDerived_map_eq; CategoryTheory.InjectiveResolution.toRightDerivedZero_eq; CategoryTheory.Functor.mapDerivedCategoryFactorsh; CategoryTheory.InjectiveResolution.rightDerived_app_eq; CategoryTheory.InjectiveResolution.isoRightDerivedToHomotopyCategoryObj; CategoryTheory.Functor.mapDerivedCategoryFactors; CategoryTheory.Functor.toRightDerivedZero; CategoryTheory.InjectiveResolution.toRightDerivedZero'",
+   "date": "2026-10-23",
+   "verdict": "no match: exact-functor localization and resolution-map formulas do not give this finite-model comparison; abstract comparison invertibility assumes a right derivability structure not supplied by the hypotheses."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-discrete-lattice-koszul-resolution",
+  "date": "2026-10-22",
+  "group": "Q73"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "Paragraph (3), algebraic discrete-lattice input to the tame-boundary calculation; returned lattice proof steps 8-9, normalized coefficient comparison without preservation of injectives; derived.tex Tags 013P (lemma-morphisms-lift), 0156 (section-right-derived-functor), and homology.tex Tag 0133 (lemma-double-complex-gives-resolution).",
+   "via": [
+    "lem-sfb-discrete-lattice-koszul-resolution",
+    "lem-sfb-tame-inertia-continuous-koszul",
+    "lem-sfb-continuous-algcl-tame-boundary-comparison",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-finite-model-restriction-comparison",
+  "worker": "stage1",
+  "summary": "Proved exact-restriction comparison using existing normalized finite models, finite-strip row augmentation and comparison into a bounded-below injective target. All augmentation squares and the inverse unit formula are explicit; no new nodes, no statement change, and no preservation of injectives assumed.",
+  "blueprint": "Paragraph (3) of the current direct-images proof, discrete-lattice input via the existing created.item chain: normalized coefficient comparison needed in the tame-boundary calculation, returned lattice proof steps 8-9. Blueprint ancestor search reports None; the existing ancestry metadata is retained.",
+  "tool_uses": [
+   {
+    "node": "lem-sc-finite-strip-row-augmentation",
+    "why": "Generic finite-horizontal-strip total augmentation criterion; used on F(UJ), whose rows have the required quasi-isomorphisms although UJ is not injective. The unit has no alternative abstract augmentation theorem."
+   },
+   {
+    "node": "lem-weil-pbc-lift-to-injective-unique-up-to-homotopy",
+    "why": "Generic uniqueness of lifts up to homotopy into a bounded-below complex of injectives; applies to Ut without any injectivity of its target."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sc-finite-strip-row-augmentation",
+  "lem-weil-pbc-lift-to-injective-unique-up-to-homotopy"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q03-fe52ab248",
+  "group": "Q03",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q03-fe52ab248 (reviewer sub-agent of L); spot-checked: PASS, no fixes. I read the item, all 8 cited statements, the only citer (lem-sfb-discrete-lattice-koszul-resolution step 3), unit sk-thm-sf-ctf-stability with blueprint paragraph (3), and Stacks 0133 and 013P. This is a first split: no new nodes, and the statement, stmt_deps and blueprint fields are unchanged. Step 1: Ut is degreewise monic (X' is ker d^0_J and U is exact) and a quasi-isomorphism, so 013P(2) gives beta with beta Ut = s, needing injectives only in the target I; 013S gives the homotopy and G(h) is a homotopy. Step 2: the model lemma is applied only to the genuine injective resolutions s and t. Step 3: I re-derived Theta b = V(b'_t)gamma_J and Theta c = V(c'_t)theta_X' from the hypothesis theta e_U = Ve' gamma[0] and naturality of theta; the biproducts are finite. Step 4: e_{UJ^b} is a quasi-isomorphism through theta and gamma even though UJ^b need not be injective. I matched the finite-strip lemma's Lean signature with parameter r+1 (columns zero outside 0..r, rows F(UJ^n), a_n = e^0); it needs no injectivity and its sign convention matches the total complex used here. So b is a quasi-isomorphism, and c is one by the Theta equation. Step 5: kb = b_s G(beta) and kc = c_s, so two-of-three makes G(beta) a quasi-isomorphism for every beta. Steps 6-8: I recomputed alpha lambda = V(lambda') theta, the independence and naturality from alpha = V(lambda') theta lambda^{-1}, and alpha^{-1} = RG(Q Ut)^{-1} eta_UJ Q(gamma)^{-1} D(V)(rho'_t) from rho_s = eta_I^{-1} RG(Qs) and naturality of eta. Edge cases checked: r=0 with F=G[0] (the exact-degree hypothesis forces G exact), X'=0, and the forgetful functor from F_2-vector spaces to abelian groups, which does not preserve injectives. No SGA is used and the item carries all three kinds of Mathlib search. I accept both tool_uses (lem-sc-finite-strip-row-augmentation and lem-weil-pbc-lift-to-injective-unique-up-to-homotopy) as generic black boxes that do not displace the unit's route."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.FiniteModelRestrictionComparison",
+  "declaration": "CategoryTheory.FiniteExactComplex.finite_model_restriction_comparison",
+  "declarations": [
+   "CategoryTheory.FiniteExactComplex.normalizedModelComparison",
+   "CategoryTheory.FiniteExactComplex.restrictedAugmentation",
+   "CategoryTheory.FiniteExactComplex.restrictionComplexComparison",
+   "CategoryTheory.FiniteExactComplex.finite_model_restriction_comparison"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/FiniteModelRestrictionComparison.lean",
+  "statement": "theorem finite_model_restriction_comparison [EnoughInjectives A] [EnoughInjectives A'] (G : A ⥤ B) [G.Additive] [PreservesFiniteLimits G] (G' : A' ⥤ B') [G'.Additive] [PreservesFiniteLimits G'] (RG : DerivedCategory A ⥤ DerivedCategory B) (RG' : DerivedCategory A' ⥤ DerivedCategory B') (η : G.mapHomologicalComplex (.up ℤ) ⋙ DerivedCategory.Q ⟶ DerivedCategory.Q ⋙ RG) (η' : G'.mapHomologicalComplex (.up ℤ) ⋙ DerivedCategory.Q ⟶ DerivedCategory.Q ⋙ RG') [RG.IsRightDerivedFunctor η (HomologicalComplex.quasiIso A (.up ℤ))] [RG'.IsRightDerivedFunctor η' (HomologicalComplex.quasiIso A' (.up ℤ))] (hη : ∀ (I : CochainComplex A ℤ), (∃ a : ℤ, ∀ b : ℤ, b < a → IsZero (I.X b)) → (∀ b : ℤ, Injective (I.X b)) → IsIso (η.app I)) (hη' : ∀ (J : CochainComplex A' ℤ), (∃ a : ℤ, ∀ b : ℤ, b < a → IsZero (J.X b)) → (∀ b : ℤ, Injective (J.X b)) → IsIso (η'.app J)) (r : ℕ) (F : A ⥤ CochainComplex B ℤ) [F.Additive] (F' : A' ⥤ CochainComplex B' ℤ) [F'.Additive] (hF : ∀ (X : A) (a : ℤ), a < 0 ∨ (r : ℤ) < a → IsZero ((F.obj X).X a)) (hF' : ∀ (X : A') (a : ℤ), a < 0 ∨ (r : ℤ) < a → IsZero ((F'.obj X).X a)) (hExact : ∀ a : ℤ, PreservesFiniteLimits (F ⋙ HomologicalComplex.eval B (.up ℤ) a) ∧ PreservesFiniteColimits (F ⋙ HomologicalComplex.eval B (.up ℤ) a)) (hExact' : ∀ a : ℤ, PreservesFiniteLimits (F' ⋙ HomologicalComplex.eval B' (.up ℤ) a) ∧ PreservesFiniteColimits (F' ⋙ HomologicalComplex.eval B' (.up ℤ) a)) (e : G ⋙ HomologicalComplex.single B (.up ℤ) 0 ⟶ F) (e' : G' ⋙ HomologicalComplex.single B' (.up ℤ) 0 ⟶ F') (he : ∀ (X : A) [Injective X], QuasiIso (e.app X)) (he' : ∀ (X : A') [Injective X], QuasiIso (e'.app X)) (U : A' ⥤ A) [U.Additive] [PreservesFiniteLimits U] [PreservesFiniteColimits U] (V : B' ⥤ B) [V.Additive] [PreservesFiniteLimits V] [PreservesFiniteColimits V] (γ : U ⋙ G ≅ G' ⋙ V) (θ : U ⋙ F ≅ F' ⋙ V.mapHomologicalComplex (.up ℤ)) (hcompat : ∀ X : A', e.app (U.obj X) ≫ θ.hom.app X = (HomologicalComplex.single B (.up ℤ) 0).map (γ.hom.app X) ≫ (HomologicalComplex.singleMapHomologicalComplex V (.up ℤ) 0).inv.app (G'.obj X) ≫ (V.mapHomologicalComplex (.up ℤ)).map (e'.app X)) : ∃! α : U ⋙ DerivedCategory.singleFunctor A 0 ⋙ RG ≅ DerivedCategory.singleFunctor A' 0 ⋙ RG' ⋙ V.mapDerivedCategory, (∀ X : A', (normalizedModelComparison G RG η hη r F hF hExact e he).hom.app (U.obj X) ≫ α.hom.app X = DerivedCategory.Q.map (θ.hom.app X) ≫ V.mapDerivedCategoryFactors.inv.app (F'.obj X) ≫ V.mapDerivedCategory.map ((normalizedModelComparison G' RG' η' hη' r F' hF' hExact' e' he').hom.app X)) ∧ (∀ (X : A') (J : CochainComplex A' ℤ) (hJ : ∀ b : ℤ, b < 0 → IsZero (J.X b)) (hJinj : ∀ b : ℤ, Injective (J.X b)) (t : (HomologicalComplex.single A' (.up ℤ) 0).obj X ⟶ J) [QuasiIso t] (I : CochainComplex A ℤ) (hI : ∀ b : ℤ, b < 0 → IsZero (I.X b)) (hIinj : ∀ b : ℤ, Injective (I.X b)) (s : (HomologicalComplex.single A (.up ℤ) 0).obj (U.obj X) ⟶ I) [QuasiIso s], (∃ β : (U.mapHomologicalComplex (.up ℤ)).obj J ⟶ I, restrictedAugmentation U t ≫ β = s) ∧ (∀ β₁ β₂ : (U.mapHomologicalComplex (.up ℤ)).obj J ⟶ I, restrictedAugmentation U t ≫ β₁ = s → restrictedAugmentation U t ≫ β₂ = s → Nonempty (Homotopy β₁ β₂) ∧ DerivedCategory.Q.map ((G.mapHomologicalComplex (.up ℤ)).map β₁) = DerivedCategory.Q.map ((G.mapHomologicalComplex (.up ℤ)).map β₂)) ∧ (∀ β : (U.mapHomologicalComplex (.up ℤ)).obj J ⟶ I, restrictedAugmentation U t ≫ β = s → QuasiIso ((G.mapHomologicalComplex (.up ℤ)).map β) ∧ (resolutionComparison G RG η s (hη I ⟨0, hI⟩ hIinj)).hom = α.hom.app X ≫ V.mapDerivedCategory.map (resolutionComparison G' RG' η' t (hη' J ⟨0, hJ⟩ hJinj)).hom ≫ V.mapDerivedCategoryFactors.hom.app ((G'.mapHomologicalComplex (.up ℤ)).obj J) ≫ DerivedCategory.Q.map (restrictionComplexComparison G G' U V γ J).inv ≫ DerivedCategory.Q.map ((G.mapHomologicalComplex (.up ℤ)).map β)) ∧ (α.inv.app X ≫ RG.map (DerivedCategory.Q.map (restrictedAugmentation U t)) = V.mapDerivedCategory.map (resolutionComparison G' RG' η' t (hη' J ⟨0, hJ⟩ hJinj)).hom ≫ V.mapDerivedCategoryFactors.hom.app ((G'.mapHomologicalComplex (.up ℤ)).obj J) ≫ DerivedCategory.Q.map (restrictionComplexComparison G G' U V γ J).inv ≫ η.app ((U.mapHomologicalComplex (.up ℤ)).obj J)))",
+  "branch": "newtargets-dag",
+  "by": "NN",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "The normalized lambdas are extracted from the recorded finite-model theorem. Both displayed formulas are written after multiplication by their invertible factors, with the canonical single-complex and localization transports explicit. A single natural isomorphism satisfies the equations for every resolution and every extension, expressing independence. No injective-preservation hypothesis on U is imposed."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-731b15a4e",
+  "group": "NN",
+  "result": "pass",
+  "note": "The node record changes only in lean, and the statement is verbatim in FiniteModelRestrictionComparison.lean; no new nodes, deps or statement changes. Clause check: four abelian categories with independent universes; EnoughInjectives on A and A'; G,G' additive and left exact; RG,RG' arbitrary IsRightDerivedFunctor pairs with the dependency's bounded-below injective unit hypothesis; F,F' with [0,r] support via IsZero and exact degree functors; e,e' quasi-isomorphisms on injectives; U,V exact; hcompat = θ∘e_U = Ve'∘γ[0] with the single transport. λ = Classical.choose of finite_exact_complex_derived_model, uniquely pinned since c,b are fixed degreewise and ρ_s, Qb are iso. Ut = restrictedAugmentation; β existence, pairwise homotopy plus equal QG image, and QuasiIso G(β) all present. Resolution formula ρ_s = α≫D(V)ρ'_t≫P≫Q(γ_J)^{-1}≫QG(β) is the node formula multiplied out; mapDerivedCategoryFactors and singleMapHomologicalComplex directions checked in Mathlib; restrictionComplexComparison is the canonical degreewise γ. Finite-model equation λ_U≫α = Qθ≫factors.inv≫D(V)λ' forces α, so ∃! is not stronger than the node. Inverse-unit clause uses η at UJ; U need not preserve injectives. Edge cases r=0, zero objects, identity functors. No duplicate helpers; no hollow defs; only proof is sorry; docstrings and 8 proof steps present; not compiled (no FIX)."
+ }
+}

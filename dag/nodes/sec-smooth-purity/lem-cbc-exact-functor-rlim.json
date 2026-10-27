@@ -214,7 +214,18 @@
   "prop-weil-pbc-roos-triangle"
  ],
  "proof_split_by": "paragraphs",
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
  "chapter": "sec-smooth-purity",
  "unit": "sk-prop-sf-cbc",
  "split_report": {
@@ -262,5 +273,31 @@
   "group": "Q04",
   "result": "pass",
   "note": "Wrote review.md. Checked the immutable modules, all statement dependencies, source passages, hypotheses, conclusions, universes, edge cases, docstrings, and dependency repair. Both files compile cleanly through scompile.py; no fixes required."
+ },
+ "blueprint_update": {
+  "snapshot": "main-20261023",
+  "commit": "c9b5f3ad18a6654dbbee6f7d7b4b4af85e01463f",
+  "changed": [
+   "statement",
+   "proof"
+  ],
+  "statement": "Let $F:\\mathcal D\\to\\mathcal D'$ be a triangulated functor between\ntriangulated categories with countable products (for instance derived\ncategories of module sheaves on a pro-étale site), and assume that $F$\ncommutes with countable products, i.e. the canonical maps\n$F(\\prod_nM_n)\\to\\prod_nF(M_n)$ are isomorphisms for every family $(M_n)_n$\n(a triangulated functor preserves finite products, but not countable ones in\ngeneral). Then for every inverse system $(M_n,f_n)_n$ in $\\mathcal D$ with\nderived limit $R\\varprojlim_nM_n$ in the sense of [def-weil-derived-limit],\n$F(R\\varprojlim_nM_n)$ is a derived limit of $(F(M_n),F(f_n))_n$:\n\n$$\nF\\bigl(R\\varprojlim_nM_n\\bigr)\\xrightarrow{\\ \\sim\\ }R\\varprojlim_nF(M_n).\n$$",
+  "proof": [
+   {
+    "text": "By [def-weil-derived-limit], $R\\varprojlim_nM_n$ is the first term of the Roos\ntriangle\n\n$$\nR\\varprojlim_nM_n\\to\\prod_nM_n\\xrightarrow{1-s}\\prod_nM_n\n\\to\\bigl(R\\varprojlim_nM_n\\bigr)[1].\n$$",
+    "uses": [
+     "def-weil-derived-limit"
+    ],
+    "elementary": false
+   },
+   {
+    "text": "The functor $F$ is triangulated, so applying $F$ produces a distinguished\ntriangle with first term $F(R\\varprojlim_nM_n)$. Under the isomorphisms\n$F(\\prod_nM_n)\\cong\\prod_nF(M_n)$ the image of $1-s$ is the transition\nendomorphism $1-F(s)$ of the system $(F(M_n),F(f_n))_n$, since both are\ndetermined by their components $M_m\\to M_n$. Hence $F(R\\varprojlim_nM_n)$ is\nthe first term of a Roos triangle for $(F(M_n))_n$, that is, a derived limit\nof this system in the sense of [def-weil-derived-limit]. Any two such objects\nare isomorphic, by an isomorphism compatible with the maps to\n$\\prod_nF(M_n)$ (non-uniquely in general, as for cones).",
+    "uses": [
+     "def-weil-derived-limit"
+    ],
+    "elementary": false
+   }
+  ],
+  "note": "the current blueprint (main-20261023, weil-conjectures-blueprint c9b5f3ad18) states or proves this differently; a worker who touches the node follows it"
  }
 }

@@ -1,0 +1,106 @@
+{
+ "id": "def-sf-constant-tower-square",
+ "kind": "definition",
+ "title": "Canonical ordinary constant-tower direct-image square",
+ "status": "split",
+ "statement": "For an abelian category $\\mathcal A$ with a monoidal structure and a category $\\mathcal B$, a functor $F:\\mathcal A\\to\\mathcal B$, and the ordinary strict sequence and termwise postcomposition constructions [def-sf-strict-tensor-reduction-termwise], define the constant-tower square $\\Delta_{\\mathcal A}\\,F^{\\mathbf N^{op}}\\cong F\\,\\Delta_{\\mathcal B}$ by its component at $M$: both diagrams have value $F(M)$ and identity transition maps, and every component of the comparison is $1_{F(M)}$. This is the ordinary natural isomorphism, before localization; no derived existence or comparison theorem is asserted.",
+ "stmt_deps": [
+  "def-sf-strict-tensor-reduction-termwise"
+ ],
+ "source": {
+  "document": "literature/stacks-project/categories.tex",
+  "place": "Ordinary functor categories: constant diagrams commute with postcomposition; applied in the strict localization obligation."
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.constComp",
+   "results": "7 hits: CategoryTheory.Functor.constComp, CategoryTheory.Functor.constComp_inv_app, CategoryTheory.Functor.constComp_hom_app, CategoryTheory.Limits.ColimitPresentation.map_ι, CategoryTheory.Limits.LimitPresentation.map_π, CategoryTheory.constantCommuteCompose_hom_app_hom, CategoryTheory.TransfiniteCompositionOfShape.map_incl",
+   "date": "2026-10-24",
+   "verdict": "Exact ordinary comparison exists as Functor.compConstIso in the opposite direction. Reuse the existing StrictReduction.constantSquare wrapper with the stated direction; its components are Functor.constComp."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The natural isomorphism that constant diagrams commute with postcomposition by a functor",
+   "results": "8 hits: CategoryTheory.Functor.constComp, CategoryTheory.Functor.compConstIso, CategoryTheory.Functor.compConstIso_hom_app_app, CategoryTheory.Functor.constComp_hom_app, CategoryTheory.Functor.functorialityCompPostcompose, CategoryTheory.constantCommuteCompose, CategoryTheory.Functor.constCompWhiskeringLeftIso_hom_app_app, CategoryTheory.Under.postCongr",
+   "date": "2026-10-24",
+   "verdict": "Exact ordinary comparison exists as Functor.compConstIso in the opposite direction. Reuse the existing StrictReduction.constantSquare wrapper with the stated direction; its components are Functor.constComp."
+  },
+  {
+   "tool": "grep",
+   "query": "IntegralStrictReductionModel|coefficientOrdinaryQuotient|coefficientFiniteReductionModel|coefficientMap",
+   "results": "0 hits: ",
+   "date": "2026-10-24",
+   "verdict": "No exact Mathlib match. Reuse the existing project declarations when present; the universal cochain model has no matching existing interface."
+  },
+  {
+   "tool": "grep",
+   "query": "rg IntegralStrictReductionModel|IntegralAmbient.push|coefficientOrdinaryQuotient|coefficientFiniteReductionModel|StrictReduction.constantSquare lean/WeilConjectures lean/Sheaf; scan lean records of dag/nodes; blueprint_refs.py search",
+   "results": "Mathlib no specialized match; source library has generic exact/localization infrastructure. Project has IntegralAmbient.push, coefficientOrdinaryQuotient and coefficientFiniteReductionModel in theorem modules and StrictReduction.constantSquare; no definition node owns those three interfaces. Existing def-sf-strict-tensor-reduction-termwise owns termwise and its exactness instances. CoefficientDerivedSystemReductionModel has finite representative computation but no universal ordinary cochain counit.",
+   "date": "2026-10-24",
+   "verdict": "Reuse existing definitions and add ownership records. The universal counit is a new model interface of the same simultaneous reduction."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-sf-closed-direct-image-strict-reduction",
+  "date": "2026-10-24",
+  "group": "Q66"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-sf-localization-all-stages",
+   "place": "Integral closed-counit simultaneous quotient comparison, retaining strict systems and their augmentation before localization.",
+   "via": [
+    "lem-sf-closed-direct-image-strict-reduction",
+    "lem-sf-finite-exceptional-site-normalization"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sf-localization",
+ "lean": {
+  "module": "Sheaf.Paper.ReductionPullbackDerivedTower",
+  "declaration": "CategoryTheory.StrictReduction.constantSquare",
+  "declarations": [
+   "CategoryTheory.StrictReduction.constantSquare"
+  ],
+  "statement": "def constantSquare (F : A ⥤ B) :\n    Functor.const ℕᵒᵖ ⋙ termwise F ≅ F ⋙ Functor.const ℕᵒᵖ",
+  "branch": "sheaf-dag",
+  "by": "Q66",
+  "date": "2026-10-24",
+  "existing": true,
+  "note": "Definition ownership requested by F2 of returned 34201977b17b; exact existing declarations are reused, with no source changes and no reliance on the host module main theorem."
+ },
+ "import_flags": [],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-20eb13f10",
+  "group": "Q66",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-20eb13f10",
+  "group": "Q66",
+  "result": "pass",
+  "note": "Re-delivery after RETURN 3420 (H13/H4 tower rebind + cycle; H2 theorem stmt_deps). F1 fixed: def-weil-integral-reduction-tower restored byte-identical; IntegralStrictReductionModel owned by new §1(A) def-sf-integral-strict-reduction-model whose statement lists every field; DAG walk over the item's stmt_deps reaches neither the item nor its citer (no cycle). F2 fixed: theorem stmt_deps removed; plain defs owned by new existing:true def nodes def-sf-projection-coefficient-direct-image (IntegralAmbient.push/coefficientMap), def-sf-finite-reduction-computation (coefficientOrdinaryQuotient/coefficientFiniteReductionModel; theorem cite justified by asIso), def-sf-constant-tower-square (constantSquare); remaining added deps are landed def nodes (brief l.177); previously theorem-only owners, recorded signatures match the source, H12 fields ok. Item Lean byte-identical to 3420; clause-by-clause re-read ok (IsProjectionNormalized pins r, augmentation equation in D(towers), ExactImages concluded, no extra hypotheses, edge cases and independent universes ok); statement verbatim, one sorry, docstrings with 8 steps. Advisory: no node asserts existence of a model; two redundant transitive imports; scalarReductionExtension owned only by a theorem node outside stmt_deps. No compile (no file changed)."
+ }
+}

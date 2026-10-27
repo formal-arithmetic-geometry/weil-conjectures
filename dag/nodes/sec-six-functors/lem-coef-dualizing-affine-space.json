@@ -1,0 +1,303 @@
+{
+ "id": "lem-coef-dualizing-affine-space",
+ "kind": "statement",
+ "title": "Invertibility of the counit-defined affine-space coefficient mate",
+ "statement": "Fix $k=\\overline{\\mathbf F}_q$ of characteristic $p$, a prime $\\ell\\ne p$, a finite extension $E/\\mathbf Q_\\ell$ with valuation ring $\\mathcal O_E$ and uniformizer $\\varpi$, and $1\\le m\\le n$. Set $A=\\mathcal O_E/(\\varpi^n)$, $B=\\mathcal O_E/(\\varpi^m)$ [def-weil-finite-field-fiber]. For a separated finite-type $k$-scheme $Y$ [def-weil-proper-morphism, def-weil-finite-type-morphism], write $a_Y:Y\\to s=\\operatorname{Spec}k$, $F_{Y,R}=Ra_{Y,R!}\\dashv G_{Y,R}=a_{Y,R}^{\\times}$, $\\omega_{Y,R}=G_{Y,R}R_s$, and $\\varepsilon_{Y,R}:F_{Y,R}\\omega_{Y,R}\\to R_s$, for $R=A,B$, on ordinary small etale module derived categories [def-weil-pbc-derived-categories, def-amb-etale-compact-support, thm-amb-etale-exceptional-adjoint]. Let $T_Y=-\\otimes_A^LB$ [def-kun-derived-tensor], and denote the canonical compact-support coefficient comparison by $c_{Y,K}:T_sF_{Y,A}K\\to F_{Y,B}T_YK$ [lem-fix-compact-support-coefficient-change]. Here bounded constructible finite-Tor means constructible cohomology, zero outside a finite interval, and integers $a\\le b$ such that tensoring with every degree-zero module sheaf has cohomology only in $[a,b]$ [def-weil-pbc-constructible-complexes, def-kun-tor-amplitude]. Assume the named dualizing objects are bounded constructible of finite Tor amplitude. Define $u_Y:T_Y\\omega_{Y,A}\\to\\omega_{Y,B}$ to be the unique map with $\\varepsilon_{Y,B}F_{Y,B}(u_Y)=(T_s\\varepsilon_{Y,A})c_{Y,\\omega_{Y,A}}^{-1}$, using $T_sA_s\\cong B_s$. Let $r\\ge0$ and $P=\\mathbf A^r_k$. Give $R_P(r)$ the ordinary etale Tate twist: choose a power $N$ of $\\ell$ annihilating $A$, set $R_P(1)=\\mu_{N,P}\\otimes_{\\mathbf Z/N}R_P$, and take its $r$th tensor power [lem-asd-etale-finite-twist-pullback]. With the counit-compatible identifications $\\omega_{P,R}\\cong R_P(r)[2r]$ from the affine-space adjunction [cor-amb-affine-space-adjunction], the map $u_P$ is an isomorphism. In particular its source is identified with $B_P(r)[2r]$ by the rank-one tensor comparison $T_P(A_P(r)[2r])\\cong B_P(r)[2r]$, and $\\varepsilon_{P,R}$ is an isomorphism for the chosen adjoint, with the explicit coordinate-tower counit normalization [lem-amb-affine-space-top-trace]. For $r=0$ the counit-defined comparison is $1_{B_s}$ under the identity-adjunction identifications.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-tower/lem-coef-finite-dualizing.proof.md",
+  "place": "Proof paragraph 3, first sentence: Tate rank-one reduction and shifts; paragraph 2: affine-space adjunction, with the counit normalization needed for the specified map; extraction of the expanded retained stage-1 proof, steps 4,5,6"
+ },
+ "stmt_deps": [
+  "cor-amb-affine-space-adjunction",
+  "def-amb-etale-compact-support",
+  "def-kun-derived-tensor",
+  "def-kun-tor-amplitude",
+  "def-weil-finite-field-fiber",
+  "def-weil-finite-type-morphism",
+  "def-weil-pbc-constructible-complexes",
+  "def-weil-pbc-derived-categories",
+  "def-weil-proper-morphism",
+  "lem-amb-affine-space-top-trace",
+  "lem-asd-etale-finite-twist-pullback",
+  "lem-fix-compact-support-coefficient-change",
+  "thm-amb-etale-exceptional-adjoint",
+  "def-pur-exceptional-coefficient-tensor-maps",
+  "def-pur-vector-purity-scalar-single",
+  "def-weil-l-adic-coefficient-extension"
+ ],
+ "proof": [
+  {
+   "text": "The two finite coefficient rings are annihilated by the common positive power l^n, which is a unit on Spec k because l differs from the characteristic. Take the existing normalized coordinate-trace data. Transport their counits along the ordered left-functor comparison by uniqueness of right adjoints; counit naturality through the single/unit isomorphism proves precisely AffineDualizingTraceNormalization. The existing canonical CoordinateCounitArrows.towerTateIso directly identifies each tower object with its shifted ordinary Tate power.",
+   "uses": [
+    "lem-sf-bc-adic-ring-domain",
+    "lem-amb-affine-space-top-trace",
+    "lem-amb-unbounded-compact-support-comparisons",
+    "det-sp-unique-right-adjoint",
+    "def-trf-coordinate-counit-arrows"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The degree-zero constant unit, hence the derived tensor unit, is constructible of finite Tor amplitude. Apply the general finite-ring ordinaryAffineProjectionAssertion proved in the module of lem-pur-etale-affine-projection-coefficient-mate, with base Spec k and input the tensor unit. Its actual mate is invertible; composing with the exceptional right adjoint applied to the coefficient-unit isomorphism proves invertibility of the specified dualizing scalar map. The existing exceptional tensor-unit counit evaluation, cancellation of the compact-support isomorphism and the adjunction Hom equivalence give the displayed counit equation and its uniqueness. Ordinary-etale compact-support coefficient coherence gives the compact-support clause.",
+   "uses": [
+    "lem-pur-etale-affine-integration-coefficient-equation",
+    "lem-pur-etale-affine-projection-coefficient-mate",
+    "lem-fix-compact-support-coefficient-change"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use finite_tate_scalar_source_normalization at the affine tower. Its generator balancing in powers zero and one is exactly the two required adjoint generator equations (put b=1). Its ordinary tensor-power recursion is the remaining normalization equation. The normalized shifted line map is definitionally the specified affineDualizingShiftedSingleMap, so its IsIso clause supplies the shifted single comparison.",
+   "uses": [
+    "lem-pur-finite-tate-scalar-source-normalization"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "In dimension zero, the ordered trace adjunction is literally the identity. The identity-tail coherence for the unbounded compact-support comparison, together with naturality of the derived direct-image identity isomorphism, shows that reductionEtaleAffineLeftIso is the inverse of unboundedEtaleLowerShriekId. Uniqueness of right adjoints identifies affineProjectionPurityIso with the inverse of the zero-coordinate isomorphism. The normalized projection mate equation in dimension zero now reads Q(e_A.inv) followed by the mate equals e_B.inv. Naturality with the coefficient-unit isomorphism and inverse cancellation yield the literal identity required in the final clause.",
+   "uses": [
+    "lem-pur-etale-affine-projection-coefficient-mate",
+    "lem-amb-unbounded-compact-support-comparisons",
+    "det-sp-unique-right-adjoint"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "det-sp-unique-right-adjoint",
+  "lem-amb-affine-space-top-trace",
+  "lem-amb-unbounded-compact-support-comparisons",
+  "lem-fix-compact-support-coefficient-change",
+  "lem-pur-etale-affine-integration-coefficient-equation",
+  "lem-pur-etale-affine-projection-coefficient-mate",
+  "lem-pur-finite-tate-scalar-source-normalization",
+  "lem-sf-bc-adic-ring-domain",
+  "def-trf-coordinate-counit-arrows"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-tower/lem-coef-finite-dualizing.proof.md",
+  "place": "Paragraphs 2-3; reuse the existing normalized affine-projection mate proof, followed by counit transport and identity normalization (C3)."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The canonical coefficient change mate for the etale dualizing object on affine space is invertible by the top trace and scalar endomorphisms of a Tate line",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"StandardEtalePair.homEquiv_symm_apply\", \"module\": \"Mathlib/RingTheory/Etale/StandardEtale\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S]\\n  (P : StandardEtalePair R) (x : { x // P.HasMap x }), P.homEquiv.symm x = P.lift ↑x ⋯\", \"doc\": \"For a commutative ring $ R $, a standard étale pair $ P $ over $ R $, and an $ R $-algebra $ S $, the inverse of the equivalence $ \\\\text{homEquiv} $ maps an element $ x \\\\in S $ satisfying $ P.\\\\text{Ha\"}\n  {\"name\": \"StandardEtalePair.homEquiv\", \"module\": \"Mathlib/RingTheory/Etale/StandardEtale\", \"type\": \"{R : Type u_1} →\\n  {S : Type u_2} →\\n    [inst : CommRing R] →\\n      [inst_1 : CommRing S] →\\n        [inst_2 : Algebra R S] → (P : StandardEtalePair R) → (P.Ring →ₐ[R] S) ≃ { x // P.HasMap x }\", \"doc\": \"For a commutative ring $R$, a standard étale pair $P=(f,g)$ over $R$, and a commutative $R$-algebra $S$, there is a natural equivalence:\\\\n$$ \\\\operatorname{Hom}_{R\\\\text{-alg}}(P.\\\\text{Ring}, S) \\\\cong \\\\\"}\n  {\"name\": \"StandardEtalePair.homEquiv_apply_coe\", \"module\": \"Mathlib/RingTheory/Etale/StandardEtale\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S]\\n  (P : StandardEtalePair R) (f : P.Ring →ₐ[R] S), ↑(P.homEquiv f) = f P.X\", \"doc\": \"For a standard étale pair $ P $ over a commutative ring $ R $, and an $ R $-algebra homomorphism $ f: P.\\\\text{Ring} \\\\to S $, the equivalence $ P.\\\\text{homEquiv} $ sends $ f $ to the element $ f(X) \\\\in\"}\n  {\"name\": \"StandardEtalePresentation.lift_bijective\", \"module\": \"Mathlib/RingTheory/Etale/StandardEtale\", \"type\": \"∀ {R : Type u_4} {S : Type u_5} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S]\\n  (self : StandardEtalePresentation R S), Function.Bijective ⇑(self.lift self.x ⋯)\", \"doc\": \"Given a standard étale presentation of an $ R $-algebra $ S $ over a commutative ring $ R $, the canonical algebra homomorphism from the standard étale ring extension to $ S $ is bijective.\"}\n  {\"name\": \"KaehlerDifferential.tensorKaehlerEquivOfFormallyEtale\", \"module\": \"Mathlib/RingTheory/Etale/Kaehler\", \"type\": \"(R : Type u_1) →\\n  (S : Type u_2) →\\n    (T : Type u_3) →\\n      [inst : CommRing R] →\\n        [inst_1 : CommRing S] →\\n          [inst_2 : CommRing T] →\\n            [inst_3 : Algebra R S] →\\n              [inst_4 : Algebra R T] →\\n                [inst_5 : Algebra S T] →\\n                  [IsScalarTower\", \"doc\": \"Given commutative rings $R$, $S$, and $T$ with $S$ an $R$-algebra, $T$ an $S$-algebra, and $T$ an $R$-algebra via the scalar tower $R \\\\to S \\\\to T$, if the algebra $S \\\\to T$ is formally étale, then the\"}\n  {\"name\": \"Algebra.PreSubmersivePresentation.isUnit_jacobian_of_cotangentRestrict_bijective\", \"module\": \"Mathlib/RingTheory/Extension/Cotangent/Free\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S] {ι : Type u_3}\\n  {σ : Type u_4} (P : Algebra.PreSubmersivePresentation R S ι σ) [inst_3 : Finite σ]\\n  (b : Module.Basis σ S P.toExtension.Cotangent),\\n  (∀ (r : σ), b r = Algebra.Extension.Cotangent.mk ⟨P\", \"doc\": \"Given a pre-submersive presentation $ P $ of an $ R $-algebra $ S $, if the cotangent restriction map $ P.\\text{cotangentRestrict} $ is bijective and the basis $ b $ of the cotangent module satisfies $\"}\n  {\"name\": \"KaehlerDifferential.tensorKaehlerEquivOfFormallyEtale_symm_D_algebraMap\", \"module\": \"Mathlib/RingTheory/Etale/Kaehler\", \"type\": \"∀ (R : Type u_1) (S : Type u_2) (T : Type u_3) [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : CommRing T]\\n  [inst_3 : Algebra R S] [inst_4 : Algebra R T] [inst_5 : Algebra S T] [inst_6 : IsScalarTower R S T]\\n  [inst_7 : Algebra.FormallyEtale S T] (s : S),\\n  (KaehlerDifferential.tensorKaehlerEqu\", \"doc\": \"For a formally étale algebra extension $ S \\to T $ over $ R $, the inverse of the base change isomorphism $ \\\\Omega_{S/R} \\\\otimes_S T \\\\cong \\\\Omega_{T/R} $ maps the Kähler differential $ d_T(\\\\mathrm{alge\"}\n  {\"name\": \"Algebra.instIsStandardEtale\", \"module\": \"Mathlib/RingTheory/Etale/StandardEtale\", \"type\": \"∀ {R : Type u_1} [inst : CommRing R], Algebra.IsStandardEtale R R\", \"doc\": \"The identity algebra structure on a commutative ring $ R $ is standard étale. This means $ R $, viewed as an $ R $-algebra via the identity map, satisfies the condition of being isomorphic to a locali\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: The hits concern standard etale ring presentations, algebraic trace, and generic isomorphism/adjunction facts; none proves invertibility of the specified etale affine-space counit mate."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Affine space compact support shifted Tate trace detects invertibility of coefficient reduction",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"Algebra.intTrace.congr_simp\", \"module\": \"Mathlib.RingTheory.Trace.Quotient\", \"type\": \"∀ (A : Type u_1) (B : Type u_6) [inst : CommRing A] [inst_1 : CommRing B] [inst_2 : Algebra A B] [inst_3 : IsDomain A]\\n  [inst_4 : IsIntegrallyClosed A] [inst_5 : IsDomain B] [inst_6 : IsIntegrallyClosed B] [inst_7 : Module.Finite A B]\\n  [inst_8 : Module.IsTorsionFree A B], Algebra.intTrace A B = Al\", \"doc\": \"Under the conditions that $ A $ and $ B $ are commutative rings, integral domains, integrally closed in their fraction fields, with $ B $ finitely generated and torsion-free as an $ A $-module, the in\"}\n  {\"name\": \"Algebra.intTrace_eq_trace\", \"module\": \"Mathlib.RingTheory.IntegralClosure.IntegralRestrict\", \"type\": \"[Module.Free A B] : Algebra.intTrace A B = Algebra.trace A B\", \"doc\": \"If $ B $ is a free $ A $-module, then the integral trace map from $ B $ to $ A $ coincides with the standard trace map.\"}\n  {\"name\": \"Algebra.intTrace\", \"module\": \"Mathlib.RingTheory.IntegralClosure.IntegralRestrict\", \"type\": \": B →ₗ[A] A\", \"doc\": \"The linear map from $ B $ to $ A $ over $ A $, constructed using the trace function on the field extension $ L/K $, scalar restriction to $ A $, and the integral closure properties. This map sends eac\"}\n  {\"name\": \"finsuppAffineCoords\", \"module\": \"Mathlib.LinearAlgebra.AffineSpace.Basis\", \"type\": \": AffineSubspace k (ι →₀ k)\", \"doc\": \"The affine subspace consisting of all finite support functions $\\\\iota \\\\to_0 k$ whose coefficients sum to 1, defined as the preimage of the affine span of $\\\\{1\\\\} \\\\subseteq k$ under the linear combinati\"}\n  {\"name\": \"AffineBasis.isUnit_toMatrix_iff\", \"module\": \"Mathlib.LinearAlgebra.AffineSpace.Matrix\", \"type\": \"[Nontrivial k] (p : ι → P) : IsUnit (b.toMatrix p) ↔ AffineIndependent k p ∧ affineSpan k (range p) = ⊤\", \"doc\": \"A matrix constructed from the barycentric coordinates of points with respect to an affine basis is invertible if and only if the points are affinely independent and their affine span equals the entire\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.compactSpace_of_isAffine\", \"module\": \"Mathlib.AlgebraicGeometry.AffineScheme\", \"type\": \"(X : Scheme) [IsAffine X] : CompactSpace X\", \"doc\": \"Every affine scheme is a compact space, meaning its underlying topological space satisfies the finite open cover condition for compactness.\"}\n  {\"name\": \"mem_finsuppAffineCoords_iff_linearCombination\", \"module\": \"Mathlib.LinearAlgebra.AffineSpace.Basis\", \"type\": \"{w : ι →₀ k} : w ∈ finsuppAffineCoords ι k ↔ Finsupp.linearCombination k (1 : ι → k) w = 1\", \"doc\": \"For any index type $\\\\iota$ and ring $k$, a finite support function $w : \\\\iota \\\\to_0 k$ belongs to the affine subspace of functions with coefficients summing to 1 if and only if the sum of all coeffici\"}\n  {\"name\": \"Algebra.intTraceAux\", \"module\": \"Mathlib.RingTheory.IntegralClosure.IntegralRestrict\", \"type\": \"[IsIntegrallyClosed A] : B →ₗ[A] A\", \"doc\": \"The linear map from $ B $ to $ A $ constructed by composing the trace function on the field extension $ L/K $ with scalar restriction to $ A $, codomain restriction to the integral closure of $ A $ in\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: The hits concern standard etale ring presentations, algebraic trace, and generic isomorphism/adjunction facts; none proves invertibility of the specified etale affine-space counit mate."
+  },
+  {
+   "tool": "loogle",
+   "query": "DerivedCategory, IsIso",
+   "results": "[loogle] OK 0 hit(s) | loogle: unknown identifier 'IsIso'",
+   "date": "2026-10-22",
+   "verdict": "no match: The hits concern standard etale ring presentations, algebraic trace, and generic isomorphism/adjunction facts; none proves invertibility of the specified etale affine-space counit mate."
+  },
+  {
+   "tool": "grep",
+   "query": "Tate|affineSpace|topTrace",
+   "results": "[grep] OK 25 hit(s)\n  {\"file\": \"Mathlib/NumberTheory/Modular.lean\", \"line\": \"328\", \"text\": \"-- If instead we had `g` and `T` of type `PSL(2, ℤ)`, then we could simply state `g = T^n`.\"}\n  {\"file\": \"Mathlib/NumberTheory/Modular.lean\", \"line\": \"836\", \"text\": \"This is not immediate (unlike the analogous statement for `𝒟ᵒ`),\"}\n  {\"file\": \"Mathlib/NumberTheory/Multiplicity.lean\", \"line\": \"18\", \"text\": \"## Main statements\"}\n  {\"file\": \"Mathlib/NumberTheory/JacobiSum/Basic.lean\", \"line\": \"288\", \"text\": \"Note that we do not state this as a divisibility in `R`, as this would give a weaker statement. -/\"}\n  {\"file\": \"Mathlib/NumberTheory/JacobiSum/Basic.lean\", \"line\": \"338\", \"text\": \"      rw [ih, Finset.prod_Ico_succ_top hn, mul_rotate, mul_assoc]\"}\n  {\"file\": \"Mathlib/Computability/AkraBazzi/SumTransform.lean\", \"line\": \"32\", \"text\": \"  namely `n^p (1 + ∑ g(u) / u^(p+1))`, together with positivity statements along the branches\"}\n  {\"file\": \"Mathlib/Computability/AkraBazzi/SumTransform.lean\", \"line\": \"52\", \"text\": \"This section defines the predicate `AkraBazziRecurrence T g a b r` which states that `T`\"}\n  {\"file\": \"Mathlib/NumberTheory/Zsqrtd/QuadraticReciprocity.lean\", \"line\": \"14\", \"text\": \"## Main statements\"}\n  {\"file\": \"Mathlib/NumberTheory/MaricaSchoenheim.lean\", \"line\": \"14\", \"text\": \"Graham's conjecture states that if $0 < a_1 < \\\\dots a_n$ are integers, then\"}\n  {\"file\": \"Mathlib/NumberTheory/MaricaSchoenheim.lean\", \"line\": \"30\", \"text\": \"/-- Statement of Graham's conjecture (which is now a theorem in the literature).\"}\n  {\"file\": \"Mathlib/NumberTheory/MaricaSchoenheim.lean\", \"line\": \"32\", \"text\": \"Graham's conjecture states that if $0 < a_1 < \\\\dots a_n$ are integers, then\"}\n  {\"file\": \"Mathlib/Computability/AkraBazzi/GrowsPolynomially.lean\", \"line\": \"17\", \"text\": \"statement of the Akra-Bazzi theorem: for the theorem to hold, the function `g` must\"}\n  {\"file\": \"Mathlib/Computability/AkraBazzi/GrowsPolynomially.lean\", \"line\": \"38\", \"text\": \"It roughly states that `c₁ g(n) ≤ g(u) ≤ c₂ g(n)`, for `u` between `b * n` and `n`, for any\"}\n  {\"file\": \"Mathlib/NumberTheory/GaussSum.lean\", \"line\": \"225\", \"text\": \"  rw [pow_two, ← gaussSum_mul_gaussSum_eq_card hχ₁ hψ, hχ₂.inv, mul_rotate']\"}\n  {\"file\": \"Mathlib/NumberTheory/EulerProduct/DirichletLSeries.lean\", \"line\": \"24\", \"text\": \"which is the analogous statement for Dirichlet L-series.\"}\n  {\"file\": \"Mathlib/NumberTheory/EulerProduct/DirichletLSeries.lean\", \"line\": \"88\", \"text\": \"This version is stated in terms of `HasProd`. -/\"}\n  {\"file\": \"Mathlib/NumberTheory/EulerProduct/DirichletLSeries.lean\", \"line\": \"95\", \"text\": \"This version is stated in terms of `tprod`. -/\"}\n  {\"file\": \"Mathlib/NumberTheory/EulerProduct/DirichletLSeries.lean\", \"line\": \"101\", \"text\": \"This version is stated in the form of convergence of finite partial products. -/\"}\n  {\"file\": \"Mathlib/NumberTheory/EulerProduct/DirichletLSeries.lean\", \"line\": \"111\", \"text\": \"This version is stated in terms of `HasProd`. -/\"}\n  {\"file\": \"Mathlib/NumberTheory/PellMatiyasevic.lean\", \"line\": \"29\", \"text\": \"## Main statements\"}\n  {\"file\": \"Mathlib/Computability/AkraBazzi/AkraBazzi.lean\", \"line\": \"29\", \"text\": \"The Akra-Bazzi theorem gives the asymptotic order of such a recurrence: it states that\"}\n  {\"file\": \"Mathlib/NumberTheory/Bernoulli.lean\", \"line\": \"408\", \"text\": \"Here we formalize Rado's proof of von Staudt-Clausen's theorem, which states that for any $k \\\\ge 0$,\"}\n  {\"file\": \"Mathlib/NumberTheory/EulerProduct/Basic.lean\", \"line\": \"27\", \"text\": \"which states that `∏' p : Primes, (1 - f p)⁻¹` converges to `∑' n, f n`\"}\n  {\"file\": \"Mathlib/NumberTheory/EulerProduct/Basic.lean\", \"line\": \"122\", \"text\": \"/-- The following statement says that summing over `s`-factored numbers such that\"}\n  {\"file\": \"Mathlib/NumberTheory/EulerProduct/Basic.lean\", \"line\": \"157\", \"text\": \"/-- The following statement says that summing over `N`-smooth numbers\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: The hits concern standard etale ring presentations, algebraic trace, and generic isomorphism/adjunction facts; none proves invertibility of the specified etale affine-space counit mate."
+  },
+  {
+   "tool": "grep",
+   "query": "Tate|trace|dualizing",
+   "results": "[grep] OK 0 hit(s)",
+   "date": "2026-10-22",
+   "verdict": "no match: The hits concern standard etale ring presentations, algebraic trace, and generic isomorphism/adjunction facts; none proves invertibility of the specified etale affine-space counit mate."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Affine space compact support shifted Tate trace detects invertibility of coefficient reduction in ordinary etale derived categories",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"Algebra.etaleLocus_eq_compl_support\", \"module\": \"Mathlib/RingTheory/Etale/Locus\", \"type\": \"∀ {R : Type u_1} {A : Type u_2} [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A],\\n  Algebra.etaleLocus R A = (Module.support A Ω[A⁄R])ᶜ ∩ (Module.support A (Algebra.H1Cotangent R A))ᶜ\", \"doc\": \"The étale locus of an $ R $-algebra $ A $ is equal to the intersection of the complements of the supports of the module of Kähler differentials $ \\\\Omega_{A/R} $ and the first cotangent cohomology modu\"}\n  {\"name\": \"Algebra.basicOpen_subset_etaleLocus_iff\", \"module\": \"Mathlib/RingTheory/Etale/Locus\", \"type\": \"∀ {R : Type u_1} {A : Type u_2} [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A] {f : A},\\n  ↑(PrimeSpectrum.basicOpen f) ⊆ Algebra.etaleLocus R A ↔ Algebra.FormallyEtale R (Localization.Away f)\", \"doc\": \"For a commutative ring $ R $ and an $ R $-algebra $ A $, the basic open set $ D(f) $ in the Zariski topology on $ \\\\operatorname{Spec}(A) $ is contained in the étale locus of $ A $ over $ R $ if and on\"}\n  {\"name\": \"StandardEtalePair.instFormallyEtaleRing\", \"module\": \"Mathlib/RingTheory/Etale/StandardEtale\", \"type\": \"∀ {R : Type u_1} [inst : CommRing R] (P : StandardEtalePair R), Algebra.FormallyEtale R P.Ring\", \"doc\": \"For any commutative ring $ R $ and standard étale pair $ P $ over $ R $, the ring $ P.\\\\text{Ring} $ is a formally étale $ R $-algebra. This instance asserts that the standard étale ring extension, con\"}\n  {\"name\": \"Algebra.smoothLocus_eq_compl_support_inter\", \"module\": \"Mathlib/RingTheory/Smooth/Locus\", \"type\": \"∀ {R : Type u_1} {A : Type u_2} [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A]\\n  [Algebra.EssFiniteType R A],\\n  Algebra.smoothLocus R A = (Module.support A (Algebra.H1Cotangent R A))ᶜ ∩ Module.freeLocus A Ω[A⁄R]\", \"doc\": \"For a commutative $ R $-algebra $ A $ of essential finite type, the smooth locus $ \\\\operatorname{smoothLocus}_R(A) $ coincides with the intersection of the complement of the support of the first cotan\"}\n  {\"name\": \"Algebra.basicOpen_subset_etaleLocus_iff_etale\", \"module\": \"Mathlib/RingTheory/Etale/Locus\", \"type\": \"∀ {R : Type u_1} {A : Type u_2} [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A]\\n  [Algebra.FinitePresentation R A] {f : A},\\n  ↑(PrimeSpectrum.basicOpen f) ⊆ Algebra.etaleLocus R A ↔ Algebra.Etale R (Localization.Away f)\", \"doc\": \"For a commutative ring $ R $ and an $ R $-algebra $ A $, the basic open set $ D(f) $ in $ \\\\operatorname{Spec}(A) $ is contained in the étale locus of $ A $ over $ R $ if and only if the localization $\"}\n  {\"name\": \"BDeRham\", \"module\": \"Mathlib/RingTheory/Perfectoid/BDeRham\", \"type\": \"(R : Type u) →\\n  [inst : CommRing R] →\\n    (p : ℕ) → [Fact (Nat.Prime p)] → [Fact ¬IsUnit ↑p] → [IsAdicComplete (Ideal.span {↑p}) R] → Type u\", \"doc\": \"The ring $\\\\mathbb{B}_{\\\\mathrm{dR}}^+$ is constructed as the localization of the adic completion of the kernel of the Fontaine theta homomorphism $\\\\Theta: \\\\mathbb{W}(R^\\\\flat) \\\\to R$ (which inverts the \"}\n  {\"name\": \"Algebra.exists_etale_of_isEtaleAt\", \"module\": \"Mathlib/RingTheory/Etale/Locus\", \"type\": \"∀ {R : Type u_1} {A : Type u_2} [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A]\\n  [Algebra.FinitePresentation R A] (P : Ideal A) [inst_4 : P.IsPrime] [Algebra.IsEtaleAt R P],\\n  ∃ f ∉ P, Algebra.Etale R (Localization.Away f)\", \"doc\": \"If an $ R $-algebra $ A $ is étale at a prime ideal $ \\\\mathfrak{p} $, then there exists an element $ f \\\\notin \\\\mathfrak{p} $ such that the localization of $ A $ away from $ f $ is an étale $ R $-algeb\"}\n  {\"name\": \"StandardEtalePair.hasMap_X\", \"module\": \"Mathlib/RingTheory/Etale/StandardEtale\", \"type\": \"∀ {R : Type u_1} [inst : CommRing R] {P : StandardEtalePair R}, P.HasMap P.X\", \"doc\": \"In the standard étale ring extension $ R[X,Y]/(f, Yg - 1) $, the image of the indeterminate $ X $ satisfies $ f(X) = 0 $ and $ g(X) $ is invertible (a unit) in the ring.\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: The hits concern standard etale ring presentations, algebraic trace, and generic isomorphism/adjunction facts; none proves invertibility of the specified etale affine-space counit mate."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.IsIso, CategoryTheory.Adjunction",
+   "results": "[loogle] OK 12 hit(s)\n  {\"name\": \"CategoryTheory.Adjunction.toEquivalence\", \"module\": \"Mathlib.CategoryTheory.Adjunction.Basic\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [CategoryTheory.Category.{v₂, u₂} D] {F : CategoryTheory.Functor C D} {G : CategoryTheory.Functor D C} (adj : F ⊣ G) [∀ (X : C), CategoryTheory.IsIso (adj.unit.app X)] [∀ (Y : D), CategoryTheory.IsIso (adj.counit.app Y)] : C ≌ D\", \"doc\": \"If the unit and counit of a given adjunction are (pointwise) isomorphisms, then we can upgrade the\\nadjunction to an equivalence.\"}\n  {\"name\": \"CategoryTheory.Adjunction.toEquivalence_functor\", \"module\": \"Mathlib.CategoryTheory.Adjunction.Basic\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [CategoryTheory.Category.{v₂, u₂} D] {F : CategoryTheory.Functor C D} {G : CategoryTheory.Functor D C} (adj : F ⊣ G) [∀ (X : C), CategoryTheory.IsIso (adj.unit.app X)] [∀ (Y : D), CategoryTheory.IsIso (adj.counit.app Y)] : adj.toEquiv\", \"doc\": \"\"}\n  {\"name\": \"CategoryTheory.Adjunction.toEquivalence_inverse\", \"module\": \"Mathlib.CategoryTheory.Adjunction.Basic\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [CategoryTheory.Category.{v₂, u₂} D] {F : CategoryTheory.Functor C D} {G : CategoryTheory.Functor D C} (adj : F ⊣ G) [∀ (X : C), CategoryTheory.IsIso (adj.unit.app X)] [∀ (Y : D), CategoryTheory.IsIso (adj.counit.app Y)] : adj.toEquiv\", \"doc\": \"\"}\n  {\"name\": \"CategoryTheory.Adjunction.toEquivalence_counitIso_hom_app\", \"module\": \"Mathlib.CategoryTheory.Adjunction.Basic\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [CategoryTheory.Category.{v₂, u₂} D] {F : CategoryTheory.Functor C D} {G : CategoryTheory.Functor D C} (adj : F ⊣ G) [∀ (X : C), CategoryTheory.IsIso (adj.unit.app X)] [∀ (Y : D), CategoryTheory.IsIso (adj.counit.app Y)] (X : D) : adj\", \"doc\": \"\"}\n  {\"name\": \"CategoryTheory.Adjunction.toEquivalence_unitIso_hom_app\", \"module\": \"Mathlib.CategoryTheory.Adjunction.Basic\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [CategoryTheory.Category.{v₂, u₂} D] {F : CategoryTheory.Functor C D} {G : CategoryTheory.Functor D C} (adj : F ⊣ G) [∀ (X : C), CategoryTheory.IsIso (adj.unit.app X)] [∀ (Y : D), CategoryTheory.IsIso (adj.counit.app Y)] (X : C) : adj\", \"doc\": \"\"}\n  {\"name\": \"CategoryTheory.Adjunction.toEquivalence_counitIso_inv_app\", \"module\": \"Mathlib.CategoryTheory.Adjunction.Basic\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [CategoryTheory.Category.{v₂, u₂} D] {F : CategoryTheory.Functor C D} {G : CategoryTheory.Functor D C} (adj : F ⊣ G) [∀ (X : C), CategoryTheory.IsIso (adj.unit.app X)] [∀ (Y : D), CategoryTheory.IsIso (adj.counit.app Y)] (X : D) : adj\", \"doc\": \"\"}\n  {\"name\": \"CategoryTheory.Adjunction.toEquivalence_unitIso_inv_app\", \"module\": \"Mathlib.CategoryTheory.Adjunction.Basic\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [CategoryTheory.Category.{v₂, u₂} D] {F : CategoryTheory.Functor C D} {G : CategoryTheory.Functor D C} (adj : F ⊣ G) [∀ (X : C), CategoryTheory.IsIso (adj.unit.app X)] [∀ (Y : D), CategoryTheory.IsIso (adj.counit.app Y)] (X : C) : adj\", \"doc\": \"\"}\n  {\"name\": \"CategoryTheory.Adjunction.fullyFaithfulLOfIsIsoUnit\", \"module\": \"Mathlib.CategoryTheory.Adjunction.FullyFaithful\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [CategoryTheory.Category.{v₂, u₂} D] {L : CategoryTheory.Functor C D} {R : CategoryTheory.Functor D C} (h : L ⊣ R) [CategoryTheory.IsIso h.unit] : L.FullyFaithful\", \"doc\": \"If the unit is an isomorphism, then the left adjoint is fully faithful.\"}\n  {\"name\": \"CategoryTheory.Adjunction.fullyFaithfulROfIsIsoCounit\", \"module\": \"Mathlib.CategoryTheory.Adjunction.FullyFaithful\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [CategoryTheory.Category.{v₂, u₂} D] {L : CategoryTheory.Functor C D} {R : CategoryTheory.Functor D C} (h : L ⊣ R) [CategoryTheory.IsIso h.counit] : R.FullyFaithful\", \"doc\": \"If the counit is an isomorphism, then the right adjoint is fully faithful.\"}\n  {\"name\": \"CategoryTheory.Adjunction.instIsIsoFunctorCounitOfIsEquivalence\", \"module\": \"Mathlib.CategoryTheory.Adjunction.FullyFaithful\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [CategoryTheory.Category.{v₂, u₂} D] {L : CategoryTheory.Functor C D} {R : CategoryTheory.Functor D C} (h : L ⊣ R) [L.IsEquivalence] : CategoryTheory.IsIso h.counit\", \"doc\": \"\"}\n  {\"name\": \"CategoryTheory.Adjunction.instIsIsoFunctorCounitOfIsEquivalence_1\", \"module\": \"Mathlib.CategoryTheory.Adjunction.FullyFaithful\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [CategoryTheory.Category.{v₂, u₂} D] {L : CategoryTheory.Functor C D} {R : CategoryTheory.Functor D C} (h : L ⊣ R) [R.IsEquivalence] : CategoryTheory.IsIso h.counit\", \"doc\": \"\"}\n  {\"name\": \"CategoryTheory.Adjunction.instIsIsoFunctorUnitOfIsEquivalence\", \"module\": \"Mathlib.CategoryTheory.Adjunction.FullyFaithful\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [CategoryTheory.Category.{v₂, u₂} D] {L : CategoryTheory.Functor C D} {R : CategoryTheory.Functor D C} (h : L ⊣ R) [R.IsEquivalence] : CategoryTheory.IsIso h.unit\", \"doc\": \"\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: The hits concern standard etale ring presentations, algebraic trace, and generic isomorphism/adjunction facts; none proves invertibility of the specified etale affine-space counit mate."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction, CategoryTheory.IsIso",
+   "results": "12 hits; top: CategoryTheory.Adjunction.toEquivalence, CategoryTheory.Adjunction.toEquivalence_functor, CategoryTheory.Adjunction.toEquivalence_inverse, CategoryTheory.Adjunction.toEquivalence_counitIso_hom_app, CategoryTheory.Adjunction.toEquivalence_unitIso_hom_app, CategoryTheory.Adjunction.toEquivalence_counitIso_inv_app, CategoryTheory.Adjunction.toEquivalence_unitIso_inv_app, CategoryTheory.Adjunction.fullyFaithfulLOfIsIsoUnit; subdirectory: all Mathlib; digest d8bcc4f09265b2a4",
+   "date": "2026-10-22",
+   "verdict": "no match: the returned affine-space coordinate formulas, algebraic trace identities, generic adjunction equivalences and shift comparisons do not state the ordinary etale counit-defined coefficient mate theorem."
+  },
+  {
+   "tool": "grep",
+   "query": "dualizing|Tate|compactSupport",
+   "results": "25 hits; top: Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Scheme.lean, Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Scheme.lean, Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Proper.lean, Mathlib/AlgebraicGeometry/EllipticCurve/DivisionPolynomial/Degree.lean, Mathlib/AlgebraicGeometry/Group/Affine.lean, Mathlib/AlgebraicGeometry/EllipticCurve/Weierstrass.lean, Mathlib/AlgebraicGeometry/EllipticCurve/Weierstrass.lean, Mathlib/AlgebraicGeometry/EllipticCurve/Reduction.lean; subdirectory: AlgebraicGeometry; digest 28000618731ecb5a",
+   "date": "2026-10-22",
+   "verdict": "no match: the returned affine-space coordinate formulas, algebraic trace identities, generic adjunction equivalences and shift comparisons do not state the ordinary etale counit-defined coefficient mate theorem."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Coefficient extension of the shifted rank one Tate dualizing complex on affine space and its trace counit",
+   "results": "8 hits; top: ModuleCat.RestrictionCoextensionAdj.counit', Submodule.traceDual, Submodule.mem_traceDual, Module.Basis.traceDual_repr_apply, map_equiv_traceDual, trace_eq_finrank_mul_minpoly_nextCoeff, Submodule.traceDual_le_span_map_traceDual, Module.Basis.trace_mul_traceDual; subdirectory: all Mathlib; digest fd2b3bb500ba2317",
+   "date": "2026-10-22",
+   "verdict": "no match: the returned affine-space coordinate formulas, algebraic trace identities, generic adjunction equivalences and shift comparisons do not state the ordinary etale counit-defined coefficient mate theorem."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The counit-defined coefficient change map of etale dualizing complexes on affine space is an isomorphism",
+   "results": "8 hits; top: AlgebraicGeometry.AffineSpace.isoOfIsAffine_hom_appTop, AlgebraicGeometry.AffineSpace.isoOfIsAffine_inv_over, AlgebraicGeometry.AffineSpace.SpecIso_hom_appTop, AlgebraicGeometry.AffineSpace.isoOfIsAffine_hom, AlgebraicGeometry.AffineSpace.isoOfIsAffine_inv, AlgebraicGeometry.AffineSpace.isoOfIsAffine_inv_appTop_coord, AlgebraicGeometry.AffineSpace.mapSpecMap, AlgebraicGeometry.AffineSpace.SpecIso_inv_over; subdirectory: all Mathlib; digest 2668ee84886b5889",
+   "date": "2026-10-22",
+   "verdict": "no match: the returned affine-space coordinate formulas, algebraic trace identities, generic adjunction equivalences and shift comparisons do not state the ordinary etale counit-defined coefficient mate theorem."
+  },
+  {
+   "tool": "grep",
+   "query": "\\bdualizing\\b|\\bTate\\b|coefficient.*counit",
+   "results": "1 hits; top: Mathlib/AlgebraicGeometry/EllipticCurve/Weierstrass.lean; subdirectory: AlgebraicGeometry; digest 25913077d36b99b6",
+   "date": "2026-10-22",
+   "verdict": "no match: the returned affine-space coordinate formulas, algebraic trace identities, generic adjunction equivalences and shift comparisons do not state the ordinary etale counit-defined coefficient mate theorem."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Compactly supported direct image reflects isomorphisms between shifted Tate line complexes on connected affine space via scalar endomorphisms",
+   "results": "8 hits; top: CochainComplex.shiftEval, CategoryTheory.Functor.instCommShiftHomologicalComplexIntUpFunctorQuasiIsoMapHomologicalComplexUpToQuasiIsoLocalizerMorphism, CochainComplex.instIsCompatibleWithShiftHomologicalComplexIntUpQuasiIso, DerivedCategory.exists_iso_singleFunctor_obj_of_isGE_of_isLE, HomologicalComplex.isSupported_iff_of_quasiIso, DerivedCategory.exists_iso_Q_obj_of_isGE_of_isLE, CochainComplex.ShiftSequence.shiftIso, CochainComplex.shiftShortComplexFunctorIso; subdirectory: all Mathlib; digest 6829a7709f924a69",
+   "date": "2026-10-22",
+   "verdict": "no match: the returned affine-space coordinate formulas, algebraic trace identities, generic adjunction equivalences and shift comparisons do not state the ordinary etale counit-defined coefficient mate theorem."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-coef-finite-dualizing",
+  "date": "2026-10-22",
+  "group": "O4"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "blueprint": {
+  "from": {
+   "node": "lem-coef-finite-dualizing",
+   "place": "Proof paragraph 3, first sentence: Tate rank-one reduction and shifts; paragraph 2: affine-space adjunction, with the counit normalization needed for the specified map",
+   "via": []
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-coef-dualizing-affine-space",
+  "worker": "stage1",
+  "summary": "Proved the specified counit mate invertible by the existing connected Tate-line scalar detector. Wrote the rank-one coefficient tensor maps and the identity-adjunction case explicitly, checked linearity and connectedness, and reused only existing DAG nodes. No statement change and no new nodes.",
+  "blueprint": "Realizes paragraphs 2-3 of lem-coef-finite-dualizing: the affine-space adjunction and rank-one Tate reduction, with the missing argument for invertibility of the actual counit mate supplied by scalar detection.",
+  "tool_uses": [
+   {
+    "node": "cor-amb-affine-space-adjunction",
+    "why": "The ordinary etale affine-space adjunction identifies the chosen right adjoint; no other node of this unit provides it."
+   },
+   {
+    "node": "lem-amb-unbounded-compact-support-comparisons",
+    "why": "Its unbounded composition isomorphisms identify the coordinate-tower functor with the compact support of the affine space on every complex, so the explicit tower counit normalizes the chosen adjoint; no node of this unit provides it."
+   },
+   {
+    "node": "det-sp-unique-right-adjoint",
+    "why": "Generic uniqueness with counits transports the explicit affine-space adjunction to the chosen adjoint."
+   },
+   {
+    "node": "lem-amb-affine-space-top-trace",
+    "why": "The coordinate-tower counit is an isomorphism, needed to detect the specific mate."
+   },
+   {
+    "node": "lem-asd-finite-etale-twist-line",
+    "why": "Flat rank-one ordinary etale Tate powers compute coefficient tensor without assuming the quotient ring flat."
+   },
+   {
+    "node": "lem-pur-derived-change-of-rings",
+    "why": "K-flat computation of ordinary ringed-site coefficient extension."
+   },
+   {
+    "node": "lem-weil-pbc-etale-site-localization-open",
+    "why": "Identifies the open etale site with the localized site for the extension-by-zero linearity tool."
+   },
+   {
+    "node": "lem-cbc-localized-extension-zero-linear-derived",
+    "why": "Generic scalar linearity of the derived open-extension factor."
+   },
+   {
+    "node": "lem-pur-ringed-derived-pushforward-linear",
+    "why": "Generic scalar linearity of the proper derived-image factor."
+   },
+   {
+    "node": "lem-pur-a1-components",
+    "why": "Connected-component calculation iterated along the affine coordinate tower."
+   },
+   {
+    "node": "lem-fix-compact-support-coefficient-change",
+    "why": "The parent construction uses precisely this finite-Tor compact-support coefficient comparison."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-amb-unbounded-compact-support-comparisons",
+  "det-sp-unique-right-adjoint",
+  "lem-amb-affine-space-top-trace",
+  "lem-fix-compact-support-coefficient-change"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q118-99b908436",
+  "group": "Q118",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q118-99b908436 (reviewer sub-agent of L); spot-checked: Read the item in full: 7 steps, no new nodes, statement unchanged. Also read the statement of every cited node, the parent lem-coef-finite-dualizing (live node and the main-20261015 proof, paragraphs 2-3), and the duplicate candidates lem-pur-exceptional-coefficient-comparison (Z/l^r only, does not assert c is invertible), lem-pur-affine-coefficient-counit-normalization and def-sf-orientation; none duplicates the item. Steps 2-7 are correct. Step 2: the Tate powers are flat and rank one, so they are K-flat; the local generator maps agree on overlaps (factor e^r on both sides); B need not be flat over A. Step 3: B-linearity of Rq_* Dj_! via the localized-site equivalence, the extension-by-zero linearity node and the pushforward linearity node, whose constant-section hypothesis holds; linearity survives the natural identification. Step 4: induction with lem-pur-a1-components clause 1 on base A^i_k. Step 5: c is invertible on omega_{P,A} by the finite-Tor hypothesis; checked the directions of F(u)=eps_B^{-1}(T eps_A)c^{-1}. Step 6: the hypotheses of the connected Tate-line detector (k algebraically closed, Y connected and nonempty, d=2r, G B-linear, G(L) iso B_s) are all supplied. Step 7: r=0 is the identity adjunction, so u=1. Edge cases r=0, m=n and n>m pass. One fault repaired (E5/C4, Step 1): the adjunction of cor-amb-affine-space-adjunction has an unspecified counit, and lem-amb-affine-space-top-trace identifies the tower functor F_d with Rp_! only on bounded-below inputs. So eps=t F(h) did not follow, since det-sp-unique-right-adjoint needs the same left adjoint on the whole category. The FIX cites lem-amb-unbounded-compact-support-comparisons: its unbounded composition isos alpha identify F_d with Ra_{P!} and restrict to top-trace's bounded-below comparisons. Transporting the tower adjunction and applying uniqueness gives h_R with eps=t_R F(h_R), and t_R is invertible. Added the node to proof_deps and to tool_uses (unit sk-prop-an); checked that it adds no cycle. The other 10 tool uses are accepted as generic tools on the parent's route. No SGA source is used.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.SixFunctors.AffineDualizingCoefficient",
+  "declaration": "AlgebraicGeometry.Etale.affine_dualizing_coefficient",
+  "declarations": [
+   "AlgebraicGeometry.Etale.affineDualizingTowerComparison",
+   "AlgebraicGeometry.Etale.affineDualizingUnitIso",
+   "AlgebraicGeometry.Etale.affineDualizingTowerIso",
+   "AlgebraicGeometry.Etale.affineDualizingZeroIso",
+   "AlgebraicGeometry.Etale.affineDualizingShiftedSingleMap",
+   "AlgebraicGeometry.Etale.AffineDualizingTateNormalization",
+   "AlgebraicGeometry.Etale.AffineDualizingMateEquation",
+   "AlgebraicGeometry.Etale.AffineDualizingTraceNormalization",
+   "AlgebraicGeometry.Etale.AffineDualizingCoefficientConclusions",
+   "AlgebraicGeometry.Etale.AffineDualizingCoefficientAssertion",
+   "AlgebraicGeometry.Etale.affine_dualizing_coefficient"
+  ],
+  "file": "lean/Sheaf/SixFunctors/AffineDualizingCoefficient.lean",
+  "statement": "theorem affine_dualizing_coefficient (D : WeilConjectures.FiniteFieldDatum.{u}) (l : ℕ) [Fact l.Prime] (_hl : l ≠ D.p) (E : Type u) [Field E] [Algebra (Padic l) E] [FiniteDimensional (Padic l) E] (m n : ℕ+) (hmn : m ≤ n) (r : ℕ) : letI : Finite (ULift.{u + 1} (Padic.coefficientExtensionRing l E n)) := Equiv.ulift.finite_iff.mpr (Padic.finite_coefficientExtensionRing l E n n.property) letI : Finite (ULift.{u + 1} (Padic.coefficientExtensionRing l E m)) := Equiv.ulift.finite_iff.mpr (Padic.finite_coefficientExtensionRing l E m m.property) AffineDualizingCoefficientAssertion l (RingHom.ulift.{u + 1, u + 1} (Ideal.Quotient.factor (S := Padic.coefficientExtensionIdeal l E n) (T := Padic.coefficientExtensionIdeal l E m) (Ideal.pow_le_pow_right hmn))) (Spec (.of D.k)) r",
+  "branch": "newtargets-dag",
+  "by": "Q85",
+  "date": "2026-10-22",
+  "existing": false,
+  "note": "Repair of b0e977539402: uses the definition-owned purityScalarSingleMap followed by the derived single functor on the ordinary arrow; inlines the canonical lifted quotient of coefficientExtensionIdeal powers and obtains finite instances directly from finite_coefficientExtensionRing. Drops both theorem dependencies used only for plain definitions and removes the quarantined P1SplittingScalar import. All mathematical clauses and the original statement/proof are unchanged. C3 stage 3: proved the theorem; the eight conclusion clauses are stored verbatim as fields of AffineDualizingCoefficientConclusions for kernel performance. Assertion signature and all four premises unchanged. Unit and shift definitions reuse definitionally identical existing named comparisons. See coord/changes/C3-affine-dualizing-comparison-cache.md."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-2f031358f",
+  "group": "Q85",
+  "result": "pass",
+  "note": "Re-delivery after the b0e977539402 RETURN: H2/H4 fixed. The theorem stmt_deps lem-sp-p1-splitting-scalar and lem-sf-compact-coefficient-composition are dropped. def-pur-vector-purity-scalar-single and def-weil-l-adic-coefficient-extension (both landed definition nodes, no cycle) are cited instead. purityScalarSingleMap φ T F ≫ single.map c equals the old p1ScalarSingleMap (homEquiv_symm_comp plus single-comparison naturality). The inline RingHom.ulift(Ideal.Quotient.factor) on coefficientExtensionIdeal is exactly the old finiteCompositionReduction body. The Finite letI instances come from finite_coefficientExtensionRing. The quarantined P1SplittingScalar import is removed; all 19 imports are live and none quarantined. lean.statement matches verbatim and all 10 declarations are present. The 15 dep records are identical to live; only stmt_deps, lean.statement and lean.note changed. The clause-by-clause reading still holds (r=0, m=n, m=1, non-flat n>m; universes u/u+1), with only the main theorem sorried. No compile run because no file was changed; the worker reports clean compiles at 32.9 s and 54.8 s. Advisory: unboundedEtaleLowerShriekId is a plain def from the module of proof_dep theorem lem-amb-unbounded-compact-support-comparisons and is not a stmt_dep."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C3",
+  "result": "pass",
+  "landing": "20261025T142927-L-853118",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

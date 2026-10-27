@@ -1,0 +1,105 @@
+{
+ "id": "lem-trf-coordinate-coefficient-unit-base-change",
+ "kind": "statement",
+ "title": "Compatibility of ordinary finite coefficient pullback with derived units",
+ "statement": "Let A be any finite commutative ring and let v:T->S be any morphism of schemes. Use the recorded ordinary finite constant coefficient and inverse image of [def-asd-ordinary-finite-p1-arrows] in the unbounded derived categories of [def-weil-pbc-derived-categories]. Write u_S and u_T for singleFunctorObjUnitIso and write r for leftDerivedUpperStarUnitIso at v. Then ordinaryFiniteUnitPullback(A,v).hom followed by u_T.hom equals ordinaryFinitePullback(A,v).map(u_S.hom) followed by r.hom. No Noetherian, flatness, nonempty, or invertibility hypothesis is required.",
+ "stmt_deps": [
+  "def-asd-ordinary-finite-p1-arrows",
+  "def-weil-pbc-derived-categories"
+ ],
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-thm-dnc/sk-thm-dnc.proof.md",
+  "place": "Local construction, canonical constant-coefficient identifications in the base-change transpose (parent proof Step 2)."
+ },
+ "proof": [
+  {
+   "text": "Apply [lem-trf-coordinate-single-constant-pullback-comparison] to identify ordinaryFiniteUnitPullback with the actual canonical derived single-constant comparison. The published leftDerivedUpperStar_map_singleFunctorObjUnitIso_inv_comp says P.map(u_S.inv) followed by this comparison equals the derived-unit pullback followed by u_T.inv. The generic private unit_cancel lemma precomposes the desired identity by P.map(u_S.inv), applies that equation, and cancels the unit isomorphisms using functoriality. This proves the equality for every v, including empty schemes and the zero coefficient ring.",
+   "uses": [
+    "lem-trf-coordinate-single-constant-pullback-comparison",
+    "prop-weil-pbc-inverse-image-modules-exact"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-trf-coordinate-single-constant-pullback-comparison",
+  "prop-weil-pbc-inverse-image-modules-exact"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-thm-dnc/sk-thm-dnc.proof.md",
+  "place": "Local construction, canonical constant-coefficient identifications in the base-change transpose (parent proof Step 2)."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Derived inverse image preserves the unit comparison for the single constant sheaf",
+   "results": "8 hits: CategoryTheory.constantSheafAdj_counit_w, CategoryTheory.Functor.sheafAdjunctionCocontinuous_unit_app_val, CategoryTheory.Equivalence.sheafCongr.unitIso_inv_app_val_app, CategoryTheory.Equivalence.sheafCongr.unitIso, SheafOfModules.pullbackPushforwardAdjunction_homEquiv_symm_unitToPushforwardObjUnit, SheafOfModules.unitToPushforwardObjUnit_val_app_apply, CategoryTheory.constantCommuteCompose, CategoryTheory.Equivalence.sheafCongrPrecoherent_unitIso_inv_app_val_app",
+   "date": "2026-10-26",
+   "verdict": "Generic category/sheaf infrastructure only; no complete match for this recorded constant-coefficient comparison. Use Functor.map_comp and the source-library derived-unit comparison equation as described in the proof."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.map_comp",
+   "results": "6 hits: CategoryTheory.Functor.map_comp, PresheafOfModules.map_comp, PresheafOfModules.map_comp_assoc, PresheafOfModules.mk, PresheafOfModulesOfCommRing.mk, AlgebraicGeometry.PresheafedSpace.map_comp_c_app",
+   "date": "2026-10-26",
+   "verdict": "Generic category/sheaf infrastructure only; no complete match for this recorded constant-coefficient comparison. Use Functor.map_comp and the source-library derived-unit comparison equation as described in the proof."
+  },
+  {
+   "tool": "grep",
+   "query": "leftDerivedUpperStar_map_singleFunctorObjUnitIso_inv_comp",
+   "results": "0 hits: ",
+   "date": "2026-10-26",
+   "verdict": "Generic category/sheaf infrastructure only; no complete match for this recorded constant-coefficient comparison. Use Functor.map_comp and the source-library derived-unit comparison equation as described in the proof."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.SectionCoordinateCounitNormalization",
+  "date": "2026-10-27",
+  "group": "E8"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-trf-section-coordinate-counit-normalization",
+   "place": "Local construction, canonical constant-coefficient identifications in the base-change transpose (parent proof Step 2).",
+   "via": []
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.CoordinateCoefficientUnitBaseChange",
+  "file": "lean/Sheaf/Paper/CoordinateCoefficientUnitBaseChange.lean",
+  "declaration": "AlgebraicGeometry.Etale.coordinateCoefficientUnit_baseChange",
+  "statement": "theorem coordinateCoefficientUnit_baseChange (A : Type (u + 1)) [CommRing A] [Finite A] {S T : Scheme.{u}} (v : T ⟶ S) : (ordinaryFiniteUnitPullback A v).hom ≫ (singleFunctorObjUnitIso (ModuleCat.{u + 1} A) T).hom = (ordinaryFinitePullback A v).map (singleFunctorObjUnitIso (ModuleCat.{u + 1} A) S).hom ≫ (leftDerivedUpperStarUnitIso (ModuleCat.{u + 1} A) v).hom",
+  "branch": "sheaf-dag",
+  "by": "E8",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E8",
+  "result": "pass",
+  "landing": "20261026T222634-L-676271",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E8",
+  "result": "pass",
+  "landing": "20261026T222634-L-676271",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

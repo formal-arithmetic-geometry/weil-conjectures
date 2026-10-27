@@ -1,0 +1,153 @@
+{
+ "id": "lem-sf-sbc-datum-exchange-comparison",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-functor-package",
+   "place": "Clause (4), identification of the completed exchange before rationalization; Stacks Tags 099N and 0D6D.",
+   "via": [
+    "lem-sf-bc-field-mate-domain",
+    "lem-sf-package-base-change-domain-realization"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Complete-subcategory mate agrees with the ordered strict-tower exchange",
+ "statement": "Fix a prime l, a finite extension E of Q_l, and a chosen Cartesian square with arrows g-prime:X-prime to X, f-prime:X-prime to Y-prime, f:X to Y and g:Y-prime to Y [def-weil-pbc-cartesian-square]. Use the canonical coefficient datum d=pbcIntegralDatum l E [def-weil-pbc-adic-coefficient-datum] and complete-subcategory operations and mate [lem-sbc-completed-operations-linear-natural-exchange]. For every intrinsically complete input K on X there exist isomorphisms s:(sbcPull g)(sbcPush f)K ≅ d.completedPull g (d.push f K) and t:(sbcPush f-prime)(sbcPull g-prime)K ≅ d.push f-prime (d.completedPull g-prime K) such that sbcExchangeApp(exchangeTransposeSquare square,K).hom ≫ t.hom = s.hom ≫ d.completedExchange(square,K). The datum exchange is the ordered map of [def-weil-pbc-completed-base-change-map]. No properness, smoothness, dimension, boundedness or constructibility assumption is imposed.",
+ "chapter": "sec-six-functors",
+ "unit": "sk-thm-sf-package",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-package/prop-functor-package.proof.md",
+  "place": "Clause (4), identification of the completed exchange before rationalization; Stacks Tags 099N and 0D6D."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-cartesian-square",
+  "def-weil-pbc-adic-coefficient-datum",
+  "lem-sbc-completed-operations-linear-natural-exchange",
+  "def-weil-pbc-completed-base-change-map"
+ ],
+ "proof": [
+  {
+   "text": "Use lem-sbc-completed-operations-linear-natural-exchange for the normalized ordinary pullback and its right-adjoint mate comparison. Compare strict tower pullback with the datum presentation using lem-cbc-completed-extension-zero-comparison, then apply derived inverse limit. Evaluate at the direct image of the complete input for the source; apply direct image to the pullback comparison for the target.",
+   "uses": [
+    "lem-sbc-completed-operations-linear-natural-exchange",
+    "lem-cbc-completed-extension-zero-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-package/prop-functor-package.proof.md",
+    "place": "Clause (4), identification of the completed exchange before rationalization; Stacks Tags 099N and 0D6D."
+   }
+  },
+  {
+   "text": "The specified complete-subcategory mate satisfies the ordinary-to-completed unit equation by lem-sbc-completed-operations-linear-natural-exchange. The datum exchange satisfies that same equation by lem-weil-pbc-completed-exchange-unit. Ordinary module tensor maps agree and resolving counits identify their ordinary derived mates. The compositor normalization is lem-sbc-reflected-compositor-unit-normalization; the reflector mate factorization is lem-sbc-reflector-square-mate-factorization. Both transported arrows consequently agree after the source unit.",
+   "uses": [
+    "lem-sbc-completed-operations-linear-natural-exchange",
+    "lem-weil-pbc-completed-exchange-unit",
+    "lem-sbc-reflected-compositor-unit-normalization",
+    "lem-sbc-reflector-square-mate-factorization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-package/prop-functor-package.proof.md",
+    "place": "Clause (4), identification of the completed exchange before rationalization; Stacks Tags 099N and 0D6D."
+   }
+  },
+  {
+   "text": "The target is intrinsically complete by preservation under pullback and direct image. The Hom bijection of the completion reflection cancels the source completion unit, proving the displayed exchange equality. This applies without constructible or geometric restrictions, including zero input and empty schemes.",
+   "uses": [
+    "lem-sbc-completed-operations-linear-natural-exchange",
+    "lem-weil-pbc-completed-pullback-reflection"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-package/prop-functor-package.proof.md",
+    "place": "Clause (4), identification of the completed exchange before rationalization; Stacks Tags 099N and 0D6D."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sbc-completed-operations-linear-natural-exchange",
+  "lem-cbc-completed-extension-zero-comparison",
+  "lem-weil-pbc-completed-exchange-unit",
+  "lem-sbc-reflected-compositor-unit-normalization",
+  "lem-sbc-reflector-square-mate-factorization",
+  "lem-weil-pbc-completed-pullback-reflection"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-package/prop-functor-package.proof.md",
+  "place": "Clause (4), identification of the completed exchange before rationalization; Stacks Tags 099N and 0D6D."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Comparison of completed adjunction mate and derived inverse limit exchange under canonical completion unit comparisons",
+   "results": "CategoryTheory.Adjunction.derived_unit; CategoryTheory.unit_mateEquiv; CategoryTheory.Limits.constLimAdj; generic derived adjunction lemmas.",
+   "date": "2026-10-25",
+   "verdict": "No theorem comparing these two concrete coefficient-completion presentations."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.mateEquiv",
+   "results": "mateEquiv; mateEquiv_counit; mateEquiv_hcomp; mateEquiv_vcomp; conjugateEquiv_mateEquiv_vcomp.",
+   "date": "2026-10-25",
+   "verdict": "Generic mate calculus; no comparison of the sbc complete-subcategory and datum strict-tower exchanges."
+  },
+  {
+   "tool": "grep",
+   "query": "sbcDatumExchangeComparison|sbcExchange.*completedExchange",
+   "results": "No Mathlib hits. Local repository has pbcActualCompletedExchange_transport for the actual ambient reflector mate, not the sbc complete-subcategory mate; sbcCompletedExchange_strictLimit compares a different strict realization.",
+   "date": "2026-10-25",
+   "verdict": "No existing declaration has the required concrete exchange comparison."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.SfFieldMateDomain",
+  "date": "2026-10-25",
+  "group": "W4"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.SbcDatumExchangeComparison",
+  "file": "lean/Sheaf/Paper/SbcDatumExchangeComparison.lean",
+  "declaration": "WeilConjectures.sbcDatumExchangeComparison",
+  "statement": "theorem sbcDatumExchangeComparison\n    (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]\n    [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]\n    {X' X Y' Y : Scheme.{u}}\n    {g' : X' ⟶ X} {f' : X' ⟶ Y'} {f : X ⟶ Y} {g : Y' ⟶ Y}\n    (sq : ChosenCartesianSquare g' f' f g) (K : PbcComplete l E X) :\n    ∃ (source : ((sbcPull l E g).obj ((sbcPush l E f).obj K)).obj ≅\n        ((pbcIntegralDatum l E).completedPull g).obj\n          (((pbcIntegralDatum l E).push f).obj K.obj))\n      (target : ((sbcPush l E f').obj ((sbcPull l E g').obj K)).obj ≅\n        ((pbcIntegralDatum l E).push f').obj\n          (((pbcIntegralDatum l E).completedPull g').obj K.obj)),\n      (sbcExchangeApp l E (exchangeTransposeSquare sq) K).hom ≫ target.hom =\n        source.hom ≫ (pbcIntegralDatum l E).completedExchange sq K.obj",
+  "branch": "sheaf-dag",
+  "by": "W4",
+  "date": "2026-10-25"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "W4",
+  "result": "pass",
+  "landing": "20261025T124248-L-1961731",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "W4",
+  "result": "pass",
+  "landing": "20261025T124248-L-1961731",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

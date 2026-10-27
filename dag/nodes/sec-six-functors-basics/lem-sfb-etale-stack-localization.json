@@ -1,0 +1,285 @@
+{
+ "id": "lem-sfb-etale-stack-localization",
+ "kind": "statement",
+ "title": "Etale stacks on schemes over a localized base",
+ "statement": "Let $g:S\\to S'$ be a morphism of schemes [def-pc-scheme], in the universes of [def-weil-size-convention]. On $\\mathit{Sch}/S$ and $\\mathit{Sch}/S'$ use categories fibred in groupoids, functors over the base, natural isomorphisms over the base, and etale stacks in the sense of [def-sfb-stable-pointed-moduli-groupoids]. In particular, a stack has sheaves of isomorphisms and effective descent for objects for jointly surjective etale covering families. Write $j:\\mathit{Sch}/S\\to\\mathit{Sch}/S'$ for composition with $g$. The category $\\mathit{Sch}/S$, regarded over $\\mathit{Sch}/S'$ by $j$, is the discrete-fibre stack represented by $S$, denoted $h_S$. If $p:\\mathcal F\\to\\mathit{Sch}/S$ is an etale stack, the same total category with projection $j p$ is an etale stack $j_!\\mathcal F$ over $\\mathit{Sch}/S'$, with its morphism $p:j_!\\mathcal F\\to h_S$. Conversely, if $\\mathcal G$ is an etale stack over $\\mathit{Sch}/S'$ and $q:\\mathcal G\\to h_S$ is a morphism of stacks, then the same total category with projection $q$ is an etale stack over $\\mathit{Sch}/S$. These constructions are mutually inverse equivalences of $2$-categories. On the right a $1$-morphism of pairs is a stack morphism commuting with the maps to $h_S$, and a $2$-morphism is a natural isomorphism compatible with these maps. No algebraicity, finiteness or separation assumption is imposed.",
+ "source": {
+  "document": "literature/stacks-project/stacks.tex",
+  "place": "Tag 04WV (lemma-localize-stacks), Constructions A and B in Tag 04WT (section-localize), applied to the big etale site of S' and the object S/S'. The statement is site-independent; here the covering families are etale as required by the project's stack convention."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-size-convention",
+  "def-sfb-stable-pointed-moduli-groupoids"
+ ],
+ "proof": [
+  {
+   "text": "Identify $(\\mathit{Sch}/S')/S$ with $\\mathit{Sch}/S$: an object is $T\\xrightarrow{a}S\\xrightarrow{g}S'$, and arrows commute with $a$. A covering on either side is exactly a jointly surjective etale family of underlying schemes. The fibre of $j$ over $T/S'$ is the discrete groupoid of $S'$-maps $T\\to S$; lifting $u:V\\to T$ sends $a$ to $au$, and the required factorization is unique because arrows in the slice are underlying scheme arrows satisfying one equation. For any $T/S'$, apply [lem-weil-pbc-small-etale-representable-presheaf-sheaf] on $T_{\\mathrm{et}}$ to the $T$-scheme $T\\times_{S'}S$ [def-pc-fibre-product]. Its sections over $V/T$ are precisely the maps $a:V\\to S$ with $ga$ the specified map to $S'$. Thus compatible local such maps glue uniquely. This proves effective descent for the objects of $h_S$. Its isomorphism presheaf between $a,b$ has a singleton value exactly where $a=b$, and is empty otherwise; the same uniqueness proves its sheaf condition. Hence $j$ is the represented etale stack $h_S$ in the convention of [def-sfb-stable-pointed-moduli-groupoids].",
+   "uses": [
+    "def-sfb-stable-pointed-moduli-groupoids",
+    "lem-weil-pbc-small-etale-representable-presheaf-sheaf",
+    "def-pc-fibre-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/stacks.tex",
+    "place": "Tag 04WT (section-localize), first lemma and the hypothesis before Construction A; Tag 03O3 (lemma-representable-sheaf-fpqc), specialized by the cited small-etale representable lemma"
+   }
+  },
+  {
+   "text": "Check the fibred-in-groupoids condition for $jp$ directly from [def-sfb-stable-pointed-moduli-groupoids]. If $p(x)=(T,a)$ and $u:V\\to T$ is over $S'$, lift the slice arrow $(V,au)\\to(T,a)$ by $p$; it is a lift over $u$ for $jp$. For arrows $\\alpha:y\\to x$, $\\beta:z\\to x$ and an underlying base arrow $v$ with $jp(\\alpha)v=jp(\\beta)$, write the structure maps of $p(x),p(y),p(z)$ as $a_x,a_y,a_z$. Since $a_y=a_xp(\\alpha)$ and $a_z=a_xp(\\beta)$, the displayed equality gives $a_yv=a_z$. Thus $v$ is an arrow of the slice, and the unique factorization required for $p$ is exactly the unique factorization required for $jp$. The same argument with uniqueness and the identity arrow shows that every functor over either base preserves these cartesian lifts. In particular $p:j_!\\mathcal F\\to h_S$ is a morphism of fibred groupoids.",
+   "uses": [
+    "def-sfb-stable-pointed-moduli-groupoids"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/stacks.tex",
+    "place": "Tag 04WT (section-localize), Construction A: verification of the fibred category axioms"
+   }
+  },
+  {
+   "text": "For the isomorphism sheaf of $j_!\\mathcal F$, take objects $x,y$ over $T/S'$ with structure maps $a,b:T\\to S$. An isomorphism over $V/T$ can exist only if $a|_V=b|_V$, since its image under $p$ is an arrow over $\\mathrm{id}_V$ in the slice. Given compatible local isomorphisms on an etale cover of $V$, the representable-sheaf conclusion of step 1, using [lem-weil-pbc-small-etale-representable-presheaf-sheaf] for $V\\times_{S'}S$ [def-pc-fibre-product], gives $a|_V=b|_V$. All the local isomorphisms now belong to the isomorphism presheaf in $\\mathcal F$ over the single $S$-scheme $(V,a|_V)$. Its sheaf condition, part of the stack hypothesis as defined in [def-sfb-stable-pointed-moduli-groupoids], gives one unique isomorphism over $V$. Uniqueness in $\\mathcal F$ also gives uniqueness in the unchanged total category. This proves the required sheaf condition, including covers on which there are no sections.",
+   "uses": [
+    "def-sfb-stable-pointed-moduli-groupoids",
+    "lem-weil-pbc-small-etale-representable-presheaf-sheaf",
+    "def-pc-fibre-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/stacks.tex",
+    "place": "Tag 04WT (section-localize), Construction A, omitted verification: isomorphism sheaves"
+   }
+  },
+  {
+   "text": "Let $\\{T_i\\to T\\}$ be an etale cover over $S'$ with a descent datum $x_i,\\phi_{ij}$ in $j_!\\mathcal F$. Write $p(x_i)=(T_i,a_i)$. Applying $p$ to $\\phi_{ij}$ gives $a_i\\operatorname{pr}_1=a_j\\operatorname{pr}_2$ on $T_i\\times_TT_j$. By [lem-weil-pbc-small-etale-representable-presheaf-sheaf] for $T\\times_{S'}S$ [def-pc-fibre-product], there is a unique $S'$-map $a:T\\to S$ with these restrictions. The same $x_i,\\phi_{ij}$ are therefore an etale descent datum for $\\mathcal F$ over $(T,a)$; no change is made to their overlap maps or cocycle equation. Its effectivity, as in [def-sfb-stable-pointed-moduli-groupoids], supplies $x$ over $(T,a)$ and the specified compatible local identifications. The object $x$ is also over $T/S'$ under $jp$, and these identifications realize the original datum. Together with steps 2 and 3 this proves that $j_!\\mathcal F$ is an etale stack.",
+   "uses": [
+    "def-sfb-stable-pointed-moduli-groupoids",
+    "lem-weil-pbc-small-etale-representable-presheaf-sheaf",
+    "def-pc-fibre-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/stacks.tex",
+    "place": "Tag 04WT (section-localize), Construction A, hint: use that h_U is a sheaf to glue morphisms to U"
+   }
+  },
+  {
+   "text": "Conversely let $r:\\mathcal G\\to\\mathit{Sch}/S'$ and $q:\\mathcal G\\to h_S$ be as in the statement, so $jq=r$. For $q(x)=(T,a)$ and a slice arrow $u:(V,b)\\to(T,a)$, lift the underlying arrow by $r$ to $y\\to x$. Since $q$ is over $\\mathit{Sch}/S'$, the image of this lift has underlying arrow $u$, so $q(y)=(V,au)=(V,b)$. This is a lift for $q$. If $\\alpha:y\\to x$, $\\beta:z\\to x$ and $v:q(z)\\to q(y)$ obey $q(\\alpha)v=q(\\beta)$, the unique-factorization condition for $r$ supplies a unique $c:z\\to y$ over the underlying arrow of $v$. The arrows $q(c)$ and $v$ in the slice have the same source, target and underlying arrow, hence are equal. This is precisely the unique-factorization condition for $q$ from [def-sfb-stable-pointed-moduli-groupoids]. Thus $q$ is fibred in groupoids over $\\mathit{Sch}/S$.",
+   "uses": [
+    "def-sfb-stable-pointed-moduli-groupoids"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/stacks.tex",
+    "place": "Tag 04WT (section-localize), Construction B: verification of the fibred category axioms"
+   }
+  },
+  {
+   "text": "For $x,y$ over $(T,a)$, their isomorphisms over $(V,a|_V)$ in the $q$-fibre are exactly their isomorphisms over $V$ in the $r$-fibre: the only slice arrow above $\\mathrm{id}_V$ with these endpoints is the identity. Hence the isomorphism sheaf condition for $\\mathcal G$ proves it for $q$. For an etale descent datum over a cover $\\{T_i\\to T\\}$ of $(T,a)$, effectivity for $r$ gives $x$ over $T$ and local isomorphisms to the specified $x_i$. Write $q(x)=(T,b)$. Applying $q$ to these local isomorphisms gives $b|_{T_i}=a|_{T_i}$. The uniqueness in [lem-weil-pbc-small-etale-representable-presheaf-sheaf], applied to $T\\times_{S'}S$ [def-pc-fibre-product], gives $b=a$. Thus the descended object and its local isomorphisms are over the required $S$-scheme. This verifies both stack axioms of [def-sfb-stable-pointed-moduli-groupoids] for $q$.",
+   "uses": [
+    "def-sfb-stable-pointed-moduli-groupoids",
+    "lem-weil-pbc-small-etale-representable-presheaf-sheaf",
+    "def-pc-fibre-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/stacks.tex",
+    "place": "Tag 04WT (section-localize), Construction B: descent for morphisms and objects"
+   }
+  },
+  {
+   "text": "On 1-morphisms use the unchanged total functor, and on 2-morphisms use the unchanged natural isomorphism [def-sfb-stable-pointed-moduli-groupoids]. A functor $H:\\mathcal F\\to\\mathcal F'$ over $\\mathit{Sch}/S$ satisfies $p'H=p$ and hence $jp'H=jp$; this is exactly a functor of the resulting pairs over $\\mathit{Sch}/S'$ commuting with their maps to $h_S$. Conversely that commuting equation says it is over $\\mathit{Sch}/S$. A natural isomorphism is over the slice precisely when its components project to the slice identities, which is exactly the compatibility with the maps to $h_S$ required on the right. Identity, vertical composition, and horizontal composition are unchanged because they are the same functors and component maps in the same total categories. Starting with $p$ gives first $(\\mathcal F,jp,p)$ and then $p$ again; starting with $(\\mathcal G,r,q)$ gives $q$ and then $(\\mathcal G,jq,q)=(\\mathcal G,r,q)$. The composites are identities on objects, 1-morphisms and 2-morphisms, proving the claimed mutually inverse equivalences.",
+   "uses": [
+    "def-sfb-stable-pointed-moduli-groupoids"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/stacks.tex",
+    "place": "Tag 04WV (lemma-localize-stacks), proof: Constructions A and B are mutually inverse"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sfb-stable-pointed-moduli-groupoids",
+  "lem-weil-pbc-small-etale-representable-presheaf-sheaf",
+  "def-pc-fibre-product"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/stacks.tex",
+  "place": "Tag 04WT (section-localize), filling in both omitted stack checks in Constructions A and B; Tag 04WV (lemma-localize-stacks), spelling out the inverse 2-functors"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "locali[sz].*[Ss]tack|[Ss]tack.*locali[sz]|[Ss]tack.*[Oo]ver",
+   "results": "{\"t\": \"2026-10-23T13:07:54Z\", \"tool\": \"grep\", \"query\": \"locali[sz].*[Ss]tack|[Ss]tack.*locali[sz]|[Ss]tack.*[Oo]ver\", \"sub\": \"CategoryTheory/Sites\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Sites/Descent/DescentData.lean\", \"Mathlib/CategoryTheory/Sites/Descent/DescentData.lean\", \"Mathlib/CategoryTheory/Sites/Descent/DescentData.lean\", \"Mathlib/CategoryTheory/Sites/Descent/Precoverage.lean\", \"Mathlib/CategoryTheory/Sites/Descent/Precoverage.lean\", \"Mathlib/CategoryTheory/Sites/Descent/Precoverage.lean\", \"Mathlib/CategoryTheory/Sites/Descent/Precoverage.lean\", \"Mathlib/CategoryTheory/Sites/Descent/Precoverage.lean\"], \"digest\": \"e5e64d2b5af718be\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: IsStack and descent-data equivalences concern effectiveness of descent for a fixed pseudofunctor, not the change-of-base equivalence of 2-categories of stacks. overEquivPresheafCostructuredArrow concerns set-valued presheaves, not groupoid-valued stacks. Scheme.Etale.forget concerns schemes etale over a fixed scheme."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Stacks on a slice site C over U are equivalent to stacks on C equipped with a map to the representable sheaf of U",
+   "results": "{\"t\": \"2026-10-23T13:07:56Z\", \"tool\": \"leanfinder\", \"query\": \"Stacks on a slice site C over U are equivalent to stacks on C equipped with a map to the representable sheaf of U\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Pseudofunctor.isStackFor'\", \"CategoryTheory.Pseudofunctor.IsStackFor.isEquivalence\", \"CategoryTheory.overEquivPresheafCostructuredArrow\", \"CategoryTheory.Pseudofunctor.IsPrestackFor.isSheafFor'\", \"CategoryTheory.Pseudofunctor.isStackFor_ofArrows_iff\", \"CategoryTheory.Pseudofunctor.isPrestackFor_iff_isSheafFor'\", \"CategoryTheory.Pseudofunctor.isStackFor_iff\", \"CategoryTheory.Pseudofunctor.isStackFor\"], \"digest\": \"03e7d55859aacc6d\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: IsStack and descent-data equivalences concern effectiveness of descent for a fixed pseudofunctor, not the change-of-base equivalence of 2-categories of stacks. overEquivPresheafCostructuredArrow concerns set-valued presheaves, not groupoid-valued stacks. Scheme.Etale.forget concerns schemes etale over a fixed scheme."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Etale stacks fibred in groupoids over S schemes correspond to etale stacks over S prime schemes with a morphism to the representable stack S",
+   "results": "{\"t\": \"2026-10-23T13:08:44Z\", \"tool\": \"leanfinder\", \"query\": \"Etale stacks fibred in groupoids over S schemes correspond to etale stacks over S prime schemes with a morphism to the representable stack S\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Etale.forget\", \"AlgebraicGeometry.Scheme.Etale\", \"AlgebraicGeometry.Scheme.Etale.forgetFullyFaithful\", \"AlgebraicGeometry.Scheme.instFullEtaleOverForget\", \"AlgebraicGeometry.Scheme.instCategoryEtale\", \"AlgebraicGeometry.Scheme.instFaithfulEtaleOverForget\", \"AlgebraicGeometry.IsEtale.instHasOfPostcompPropertyScheme\", \"AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified\"], \"digest\": \"77306b1a156fe618\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: IsStack and descent-data equivalences concern effectiveness of descent for a fixed pseudofunctor, not the change-of-base equivalence of 2-categories of stacks. overEquivPresheafCostructuredArrow concerns set-valued presheaves, not groupoid-valued stacks. Scheme.Etale.forget concerns schemes etale over a fixed scheme."
+  },
+  {
+   "tool": "loogle",
+   "query": "IsStack, Over",
+   "results": "{\"t\": \"2026-10-23T13:08:45Z\", \"tool\": \"loogle\", \"query\": \"IsStack, Over\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"loogle: unknown identifier 'IsStack'\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: IsStack and descent-data equivalences concern effectiveness of descent for a fixed pseudofunctor, not the change-of-base equivalence of 2-categories of stacks. overEquivPresheafCostructuredArrow concerns set-valued presheaves, not groupoid-valued stacks. Scheme.Etale.forget concerns schemes etale over a fixed scheme."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Stacks on a localized site are equivalent to stacks with a morphism to a representable sheaf",
+   "results": "{\"t\": \"2026-10-23T13:08:45Z\", \"tool\": \"leansearch\", \"query\": \"Stacks on a localized site are equivalent to stacks with a morphism to a representable sheaf\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.GrothendieckTopology.yonedaEquiv\", \"CategoryTheory.Pseudofunctor.IsStack.of_isStackFor\", \"CategoryTheory.Pseudofunctor.IsStack.toIsPrestack\", \"CategoryTheory.Pseudofunctor.IsStackFor.mk\", \"CategoryTheory.Pseudofunctor.isStackFor_iff\", \"CategoryTheory.Pseudofunctor.IsStackFor.isEquivalence\", \"CategoryTheory.Pseudofunctor.isPrestackFor_iff_isSheafFor'\", \"CategoryTheory.Pseudofunctor.IsStack\"], \"digest\": \"f48ba321d0dcd192\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: IsStack and descent-data equivalences concern effectiveness of descent for a fixed pseudofunctor, not the change-of-base equivalence of 2-categories of stacks. overEquivPresheafCostructuredArrow concerns set-valued presheaves, not groupoid-valued stacks. Scheme.Etale.forget concerns schemes etale over a fixed scheme."
+  },
+  {
+   "tool": "grep",
+   "query": "IsStack.*(Over|over)|[Ll]ocali[sz].*[Ss]tack|[Ss]tack.*[Ll]ocali[sz]",
+   "results": "{\"t\": \"2026-10-23T13:08:46Z\", \"tool\": \"grep\", \"query\": \"IsStack.*(Over|over)|[Ll]ocali[sz].*[Ss]tack|[Ss]tack.*[Ll]ocali[sz]\", \"sub\": \"\", \"ok\": true, \"n_hits\": 2, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/Nakayama.lean\", \"Mathlib/CategoryTheory/Sites/Descent/Precoverage.lean\"], \"digest\": \"a786b6bec0420723\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: IsStack and descent-data equivalences concern effectiveness of descent for a fixed pseudofunctor, not the change-of-base equivalence of 2-categories of stacks. overEquivPresheafCostructuredArrow concerns set-valued presheaves, not groupoid-valued stacks. Scheme.Etale.forget concerns schemes etale over a fixed scheme."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Pseudofunctor.IsStack",
+   "results": "{\"t\": \"2026-10-23T13:10:49Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.Pseudofunctor.IsStack\", \"sub\": \"\", \"ok\": true, \"n_hits\": 9, \"note\": \"\", \"top\": [\"CategoryTheory.Pseudofunctor.IsStack\", \"CategoryTheory.Pseudofunctor.IsStack.toIsPrestack\", \"CategoryTheory.Pseudofunctor.isStackFor\", \"CategoryTheory.Pseudofunctor.isStackFor'\", \"CategoryTheory.Pseudofunctor.IsStack.of_isStackFor\", \"CategoryTheory.Pseudofunctor.isEquivalence_toDescentData\", \"CategoryTheory.Pseudofunctor.IsStack.essSurj_of_sieve\", \"CategoryTheory.Pseudofunctor.IsStack.mk\"], \"digest\": \"37922bb6d2945163\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: IsStack and descent-data equivalences concern effectiveness of descent for a fixed pseudofunctor, not the change-of-base equivalence of 2-categories of stacks. overEquivPresheafCostructuredArrow concerns set-valued presheaves, not groupoid-valued stacks. Scheme.Etale.forget concerns schemes etale over a fixed scheme."
+  },
+  {
+   "tool": "grep",
+   "query": "IsStack|overEquivPresheafCostructuredArrow",
+   "results": "{\"t\": \"2026-10-23T13:14:14Z\", \"tool\": \"grep\", \"query\": \"IsStack|overEquivPresheafCostructuredArrow\", \"sub\": \"CategoryTheory/Comma/Presheaf\", \"ok\": true, \"n_hits\": 7, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Comma/Presheaf/Colimit.lean\", \"Mathlib/CategoryTheory/Comma/Presheaf/Colimit.lean\", \"Mathlib/CategoryTheory/Comma/Presheaf/Basic.lean\", \"Mathlib/CategoryTheory/Comma/Presheaf/Basic.lean\", \"Mathlib/CategoryTheory/Comma/Presheaf/Basic.lean\", \"Mathlib/CategoryTheory/Comma/Presheaf/Basic.lean\", \"Mathlib/CategoryTheory/Comma/Presheaf/Basic.lean\"], \"digest\": \"5eeebb053e149ba0\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: IsStack and descent-data equivalences concern effectiveness of descent for a fixed pseudofunctor, not the change-of-base equivalence of 2-categories of stacks. overEquivPresheafCostructuredArrow concerns set-valued presheaves, not groupoid-valued stacks. Scheme.Etale.forget concerns schemes etale over a fixed scheme."
+  },
+  {
+   "tool": "grep",
+   "query": "locali[sz].*[Ss]tack|[Ss]tack.*locali[sz]|overEquivPresheafCostructuredArrow",
+   "results": "{\"t\": \"2026-10-23T14:54:33Z\", \"tool\": \"grep\", \"query\": \"locali[sz].*[Ss]tack|[Ss]tack.*locali[sz]|overEquivPresheafCostructuredArrow\", \"sub\": \"CategoryTheory\", \"ok\": true, \"n_hits\": 10, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Comma/Presheaf/Colimit.lean\", \"Mathlib/CategoryTheory/Comma/Presheaf/Colimit.lean\", \"Mathlib/CategoryTheory/Comma/Presheaf/Basic.lean\", \"Mathlib/CategoryTheory/Comma/Presheaf/Basic.lean\", \"Mathlib/CategoryTheory/Comma/Presheaf/Basic.lean\", \"Mathlib/CategoryTheory/Comma/Presheaf/Basic.lean\", \"Mathlib/CategoryTheory/Comma/Presheaf/Basic.lean\", \"Mathlib/CategoryTheory/Limits/Presheaf.lean\"], \"digest\": \"113017b2608d081a\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: stack/descent constructors treat one fixed pseudofunctor; Grothendieck fibre equivalences do not prove the localization of 2-categories of etale stacks. overEquivPresheafCostructuredArrow is set-valued and does not supply the groupoid-valued assertion."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Change of base for etale stacks fibred in groupoids along a morphism of schemes",
+   "results": "{\"t\": \"2026-10-23T14:54:33Z\", \"tool\": \"leansearch\", \"query\": \"Change of base for etale stacks fibred in groupoids along a morphism of schemes\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsEtale.instIsStableUnderBaseChangeScheme\", \"AlgebraicGeometry.Scheme.smallEtaleTopology\", \"CategoryTheory.GrothendieckTopology.instIsStableUnderBaseChangeToPrecoverage\", \"Algebra.Etale.baseChange\", \"AlgebraicGeometry.isSmooth_isStableUnderBaseChange\", \"CategoryTheory.Functor.relativelyRepresentable.isStableUnderBaseChange\", \"RingHom.Etale.isStableUnderBaseChange\", \"AlgebraicGeometry.Scheme.etaleTopology\"], \"digest\": \"04a3cdd3ed5517d6\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: stack/descent constructors treat one fixed pseudofunctor; Grothendieck fibre equivalences do not prove the localization of 2-categories of etale stacks. overEquivPresheafCostructuredArrow is set-valued and does not supply the groupoid-valued assertion."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Pseudofunctor.IsStack, CategoryTheory.Over",
+   "results": "{\"t\": \"2026-10-23T14:54:33Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.Pseudofunctor.IsStack, CategoryTheory.Over\", \"sub\": \"\", \"ok\": true, \"n_hits\": 2, \"note\": \"\", \"top\": [\"CategoryTheory.Pseudofunctor.IsStack.essSurj_of_sieve\", \"CategoryTheory.Pseudofunctor.IsStack.mk\"], \"digest\": \"eceda6d7b0650375\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: stack/descent constructors treat one fixed pseudofunctor; Grothendieck fibre equivalences do not prove the localization of 2-categories of etale stacks. overEquivPresheafCostructuredArrow is set-valued and does not supply the groupoid-valued assertion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Stacks on a slice site over U correspond to stacks on the original site with a map to the representable stack U",
+   "results": "{\"t\": \"2026-10-23T14:54:39Z\", \"tool\": \"leanfinder\", \"query\": \"Stacks on a slice site over U correspond to stacks on the original site with a map to the representable stack U\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Pseudofunctor.isStackFor'\", \"CategoryTheory.Pseudofunctor.isStackFor\", \"CategoryTheory.Pseudofunctor.IsStack\", \"CategoryTheory.Pseudofunctor.IsStack.of_isStackFor\", \"CategoryTheory.Pseudofunctor.IsStack.toIsPrestack\", \"CategoryTheory.Pseudofunctor.IsPrestack.isSheaf\", \"CategoryTheory.Pseudofunctor.IsPrestackFor.isSheafFor'\", \"CategoryTheory.Pseudofunctor.sheafHom\"], \"digest\": \"f226fb8b2cd5cfb3\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: stack/descent constructors treat one fixed pseudofunctor; Grothendieck fibre equivalences do not prove the localization of 2-categories of etale stacks. overEquivPresheafCostructuredArrow is set-valued and does not supply the groupoid-valued assertion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Equivalence of categories fibred in groupoids on a localized site with fibred groupoids over the site mapped to its representable object",
+   "results": "{\"t\": \"2026-10-23T14:56:12Z\", \"tool\": \"leanfinder\", \"query\": \"Equivalence of categories fibred in groupoids on a localized site with fibred groupoids over the site mapped to its representable object\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Pseudofunctor.CoGrothendieck.instIsEquivalenceαCategoryObjLocallyDiscreteOppositeCatMkOpFiberForgetInducedFunctor\", \"HasFibers.instIsEquivalenceFibFiberInducedFunctor\", \"CategoryTheory.GrothendieckTopology.Point.W_isInvertedBy_presheafFiber\", \"CategoryTheory.Grothendieck.compAsSmallFunctorEquivalenceInverse_obj_fiber\", \"CategoryTheory.Grothendieck.grothendieckTypeToCat\", \"CategoryTheory.Localization.Construction.whiskeringLeftEquivalence\", \"CategoryTheory.Localization.functorEquivalence\", \"CategoryTheory.Pseudofunctor.CoGrothendieck.instIsFiberedForget\"], \"digest\": \"5b174d52470414ba\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: stack/descent constructors treat one fixed pseudofunctor; Grothendieck fibre equivalences do not prove the localization of 2-categories of etale stacks. overEquivPresheafCostructuredArrow is set-valued and does not supply the groupoid-valued assertion."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-algebraic-stack-change-base-to-integers",
+  "date": "2026-10-23",
+  "group": "Q62"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": "det-thm-sf-ctf-stability-direct-images",
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Power lifting implies universal submersiveness of an affine invariant quotient. Fppf presentation used after the affine invariant quotient construction. Supporting input: Deduce qcqs of the descended invariant morphism from qcqs of its source and the affine target without a finite-generation hypothesis on invariants. Supporting input: Algebraic stacks over a scheme viewed over the integers. This supports paragraph (3), the open-direct-image alteration input in the current blueprint proof. Underlying etale-stack localization, before checking representable diagonals and atlases.",
+   "via": [
+    "lem-sfb-algebraic-stack-change-base-to-integers",
+    "lem-sfb-algebraic-stack-qcqs-permanence",
+    "lem-sfb-flat-affine-action-stack-presentation",
+    "lem-sfb-power-lifting-quotient-submersive",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-etale-stack-localization",
+  "worker": "stage1",
+  "summary": "Expanded Stacks 04WT Constructions A and B and 04WV into seven steps, proving the fibred axioms, both isomorphism-sheaf checks, object descent, and inverse action on 1- and 2-morphisms. Reused small-etale representable descent on T times_{S′} S; no new nodes and no statement change. Repaired the inherited null blueprint ancestor using the explicit named ancestor in its place; project source has no exact closed attachment.",
+  "blueprint": "Current latest blueprint det-thm-sf-ctf-stability-direct-images.proof paragraph (3), open-direct-image input below sk-cor-sf-direct-image-ctf/sk-prop-open-coefficients, via the inherited alteration, stable-moduli and algebraic-stack base-change chain. The localization equivalence is the underlying stack input before diagonal and atlas checks.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-small-etale-representable-presheaf-sheaf",
+    "why": "Generic representable-sheaf descent on the small etale site of an arbitrary scheme T, applied to T times_{S′} S; no node of this unit states descent of maps into arbitrary schemes."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-small-etale-representable-presheaf-sheaf"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q49-c6c014aab",
+  "group": "Q49",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q49-c6c014aab (reviewer sub-agent of L); spot-checked: I read the item in full against Stacks stacks.tex section-localize (04WT, Constructions A and B) and lemma-localize-stacks (04WV). The statement is unchanged from live (diff checked). It matches 04WV for the big etale site Sch/S' and U=S/S'; strict commuting of 1-cells is no weaker because h_S has discrete fibres. There are no new nodes and no repair note, so it is not a re-split. The cited statements say what the steps take from them. def-sfb-stable-pointed-moduli-groupoids gives the fibred-groupoid and stack axioms. lem-weil-pbc-small-etale-representable-presheaf-sheaf puts no hypothesis on the T-scheme, so it applies to T x_{S'} S for any g, with def-pc-fibre-product for the universal property. Steps 1-7 are correct. Step 1: h_S is a stack (the h_U-sheaf hypothesis of 04WT). Steps 2/5: unique factorization holds via a_y v = a_z, and a slice arrow is fixed by its underlying arrow and endpoints. Steps 3/6: the Isom sheaves are right, with ah=bh forced and glued by the lemma. Steps 4/6: object descent glues the structure map, and b=a follows from the lemma's uniqueness. Step 7: 1- and 2-cells and compositions agree literally, so the constructions are strictly inverse. Edge cases checked: g=id, S empty, S open in S', a != b, empty covers. Accepted tool use: the generic small-etale representable-sheaf lemma (unit sk-thm-p1), declared in split_report. The blueprint from.node repair to det-thm-sf-ctf-stability-direct-images matches the last via node lem-sfb-admissible-direct-image. Mathlib searches cover all three kinds and find no match. No duplicates found by rg -L for 04WT/04WV; no SGA. Minor: the report names a citations.json that is not on the branch, which does not affect the DAG."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.EtaleStackLocalization",
+  "declaration": "CategoryTheory.etaleStack_localization",
+  "file": "lean/Sheaf/AlgebraicGeometry/EtaleStackLocalization.lean",
+  "statement": "theorem etaleStack_localization {S S' : AlgebraicGeometry.Scheme.{u}} (g : S ⟶ S') : IsModuliStack (BasedCategory.ofFunctor (Over.map g)) ∧ IsRepresentedByScheme (BasedCategory.ofFunctor (Over.map g)) (Over.mk g) ∧ (∀ F : BasedCategory.{v₁, w₁} (Over S), IsModuliStack F ↔ IsModuliStack (BasedCategory.ofFunctor (F.p ⋙ Over.map g))) ∧ (∀ (G : BasedCategory.{v₁, w₁} (Over S')) (q : BasedFunctor G (BasedCategory.ofFunctor (Over.map g))), IsModuliStack G ↔ IsModuliStack (BasedCategory.ofFunctor q.toFunctor)) ∧ (∀ (F : BasedCategory.{v₁, w₁} (Over S)) (F' : BasedCategory.{v₂, w₂} (Over S)), IsModuliStack F → IsModuliStack F' → ∃ E : BasedFunctor F F' ≌ ObjectProperty.FullSubcategory (fun h : BasedFunctor (BasedCategory.ofFunctor (F.p ⋙ Over.map g)) (BasedCategory.ofFunctor (F'.p ⋙ Over.map g)) ↦ h.toFunctor ⋙ F'.p = F.p), (∀ f : BasedFunctor F F', (E.functor.obj f).obj.toFunctor = f.toFunctor) ∧ (∀ f, (E.inverse.obj f).toFunctor = f.obj.toFunctor) ∧ (∀ (f h : BasedFunctor F F') (α : f ⟶ h), HEq ((E.functor.map α).hom).toNatTrans α.toNatTrans) ∧ (∀ (f h) (α : f ⟶ h), HEq (E.inverse.map α).toNatTrans α.hom.toNatTrans))",
+  "branch": "newtargets-dag",
+  "by": "Q109",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-c2bb4bf8e",
+  "group": "Q109",
+  "result": "pass",
+  "note": "First stage-2 delivery; only the item lean field and the new module EtaleStackLocalization.lean changed. Statement checked clause by clause against the node and Stacks 04WT/04WV. h_S = ofFunctor (Over.map g) is stated as IsModuliStack and IsRepresentedByScheme (Over.mk g). Constructions A and B are iffs on the same total category; each reverse direction is the opposite construction (q := ⟨F.p, rfl⟩, resp. q.w), so they are true. The hom-category equivalence BasedFunctor F F' ≌ {h | h ⋙ F'.p = F.p} is pinned by four normalizations to the identity on functors and NatTrans, so it is not arbitrary. BasedNatTrans between CFGs are isos, and h_S-compatibility is automatic by faithfulness of Over.map. Strict commuting = up to 2-iso since h_S is discrete. Edge cases g=id, S empty, a≠b and universes (shared u, free total universes) are OK; no extra hypotheses. Sorry only, no definitions; docstrings carry source, blueprint and the 7 steps; lean.statement is verbatim; stmt_deps are correct; the proof-only import has a published olean. No duplicate in Mathlib or the project; the report sections are present. No compile (no change)."
+ }
+}

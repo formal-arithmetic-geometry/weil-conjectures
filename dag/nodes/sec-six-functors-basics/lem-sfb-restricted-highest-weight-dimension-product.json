@@ -1,0 +1,289 @@
+{
+ "id": "lem-sfb-restricted-highest-weight-dimension-product",
+ "kind": "statement",
+ "title": "Dimension multiplication at a restricted highest weight",
+ "statement": "Let $F$ be an algebraically closed field [def-weil-field, def-weil-algebraic-closure]. Let $S$ be a semisimple simply connected $F$-group scheme [def-sc-group-scheme]: it is smooth, connected, affine and of finite type, has no nontrivial smooth connected solvable normal subgroup, and every surjective homomorphism from a semisimple group with finite central kernel is an isomorphism. Solvable means that successive commutator subgroup schemes become trivial; finite central means finite-dimensional coordinate algebra and commuting after every scalar extension. Fix a split maximal torus $T\\subseteq S$ and a Borel subgroup $B\\supseteq T$ with unipotent radical $U$, with these notions as in [lem-sfb-rho-section-modules]. Use the character lattice $X=X^*(T)$, roots $\\Phi$, positive roots $\\Phi^+$ in $\\operatorname{Lie}(B)$, simple roots $\\Delta$, coroots and integer pairing of [lem-sfb-reductive-borel-pair-structure]. Put $\\rho=\\tfrac12\\sum_{\\alpha\\in\\Phi^+}\\alpha\\in X$ as in [lem-sfb-rho-section-modules]. A rational $S$-module is an $F$-vector space $V$ with coaction $c_V:V\\to V\\otimes_F F[S]$ satisfying coassociativity and the counit identity. A submodule is a linear subspace stable under this coaction, and simple means nonzero with only zero and itself as submodules. Write $V^U$ for the vectors whose restricted coaction is $v\\mapsto v\\otimes1$. A finite-dimensional simple module has highest weight $\\eta\\in X$ if $V^U$ is one-dimensional and $t v=\\eta(t)v$ on this line after every commutative $F$-algebra extension. Write $\\dim_F$ for ordinary vector-space dimension, an integer rather than its image in $F$. Assume $\\operatorname{char}F=p>0$. Let $\\lambda,\\mu\\in X$ be dominant, meaning nonnegative pairing with each simple coroot, and suppose $\\lambda$ is $p$-restricted:\n$$0\\le\\langle\\lambda,\\alpha^\\vee\\rangle<p\\quad(\\alpha\\in\\Delta).$$\nFor any finite-dimensional simple rational $S$-modules $V_\\lambda,V_\\mu,V_{\\lambda+p\\mu}$ with respective highest weights $\\lambda,\\mu,\\lambda+p\\mu$, one has the integer identity\n$$\\dim_F V_{\\lambda+p\\mu}=(\\dim_F V_\\lambda)(\\dim_F V_\\mu).$$\nThis assertion does not require any chosen Frobenius endomorphism or any identification with regular-function induced modules. It includes zero weights and the trivial group.",
+ "source": {
+  "document": "literature/jantzen-representations-of-algebraic-groups-2003.pdf",
+  "place": "Part II, 3.16--3.17: Steinberg tensor product theorem, numerical consequence; WANTED: this book is not local. Online corroboration read: Williamson, Algebraic representations and constructible sheaves, arXiv:1610.06261v1, section 1.4, Theorem 1.3 and equation (1.7), pp.6--7, https://arxiv.org/pdf/1610.06261. Frobenius twist preserves vector-space dimension."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-weil-algebraic-closure",
+  "def-sc-group-scheme",
+  "lem-sfb-rho-section-modules",
+  "lem-sfb-reductive-borel-pair-structure",
+  "def-sfb-semisimple-group-scheme",
+  "def-sfb-rational-highest-weight-data"
+ ],
+ "proof": [
+  {
+   "text": "By [lem-sfb-reductive-borel-pair-structure], $S$ is reductive and $X$ is the finite-rank free character lattice of its reduced root datum. The map $a:X\\to X$, $x\\mapsto px$, is injective with finite cokernel $X/pX$. Take the identity root correspondence and $q_\\alpha=p$; its dual is also multiplication by $p$, so both required root and coroot equalities hold. Apply [lem-sfb-root-datum-isogeny-realization] with source and target $(S,T)$ to obtain a surjective homomorphism $f:S\\to S$ with finite kernel and $(f|_T)^*=p\\,\\mathrm{id}_X$. This auxiliary choice adds no hypothesis to the assertion.",
+   "uses": [
+    "lem-sfb-reductive-borel-pair-structure",
+    "lem-sfb-root-datum-isogeny-realization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Example 23.3, printed p.484, and Theorem 23.9, printed p.487."
+   }
+  },
+  {
+   "text": "The smooth $F$-scheme $S$ is reduced by [sbc-lem-smooth-geometrically-reduced], applied to its structure morphism. Apply [lem-sfb-algebraic-group-homomorphism-factorization] to $f$, factoring it as a faithfully flat map onto a closed subgroup $I$ followed by $I\\hookrightarrow S$. Surjectivity of $f$ says that this closed immersion has full support. Its defining ideal is contained in every prime of the reduced ring $F[S]$, hence is zero. Thus $I=S$ and $f$ is faithfully flat, as required for the root-power law.",
+   "uses": [
+    "sbc-lem-smooth-geometrically-reduced",
+    "lem-sfb-algebraic-group-homomorphism-factorization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Theorem 5.39, printed p.108; reducedness: Stacks Tag 056T, varieties.tex, lemma-smooth-geometrically-normal."
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-isogeny-root-power-laws] to $f$. For corresponding roots $\\alpha,\\beta$ it gives $p\\beta=e_\\alpha\\alpha$ with $e_\\alpha>0$. Reducedness of the root system forces $\\beta=\\alpha$ and then $e_\\alpha=p$. Thus $f$ maps each root subgroup into itself, as a scheme morphism over every test algebra. By the ordered multiplication isomorphism of [lem-sfb-borel-root-product-coordinates], every element of $U(A)$ is a product of positive root subgroup elements, for every $F$-algebra $A$. Applying $f$ to that product shows $f(U)\\subseteq U$ scheme-theoretically, including the empty-root case.",
+   "uses": [
+    "lem-sfb-isogeny-root-power-laws",
+    "lem-sfb-borel-root-product-coordinates"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 23.5 and formula (146), printed pp.485--486; Theorem 21.68(a), printed p.445."
+   }
+  },
+  {
+   "text": "Define $W=f^*V_\\mu$ by the coaction $(1\\otimes f^\\#)c_{V_\\mu}$ on the unchanged vector space $V_\\mu$. Since $f$ is a group homomorphism, its pullback respects comultiplication and counit, so the coaction identities follow from those of $c_{V_\\mu}$. Set $Q=V_\\lambda\\otimes_F W$ with diagonal coaction: $s(v\\otimes w)=sv\\otimes f(s)w$. The two group action identities follow by substitution, so this is a finite-dimensional rational module. Apply [lem-sfb-restricted-frobenius-tensor-simplicity]: the given weights are dominant, the first is $p$-restricted, both factors before pullback are simple, and steps 1--3 give all hypotheses on $f$. Hence $Q$ is simple.",
+   "uses": [
+    "lem-sfb-restricted-frobenius-tensor-simplicity"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/jantzen-representations-of-algebraic-groups-2003.pdf",
+    "place": "Part II, 3.16--3.17; WANTED. Online corroboration read: Williamson arXiv:1610.06261v1, section 1.4, Theorem 1.3, p.6."
+   }
+  },
+  {
+   "text": "Choose $0\\ne v\\in V_\\lambda^U$ and $0\\ne w\\in V_\\mu^U$. Their tensor is nonzero: choose linear functionals taking value $1$ on $v,w$, whose tensor takes value $1$ on $v\\otimes w$. For every $F$-algebra $A$, $u\\in U(A)$ fixes $v\\otimes w$, because $u$ fixes $v$ and $f(u)\\in U(A)$ fixes $w$. For $t\\in T(A)$ its action on this tensor is $\\lambda(t)\\mu(f(t))=\\lambda(t)\\mu(t)^p=(\\lambda+p\\mu)(t)$. By [lem-sfb-simple-module-dual-highest-weight], simplicity of $Q$ implies that $Q^U$ is one-dimensional. Its nonzero vector $v\\otimes w$ therefore spans it, proving that $Q$ has highest weight $\\lambda+p\\mu$. The uniqueness clause of the same cited node now gives an equivariant $F$-linear isomorphism $Q\\simeq V_{\\lambda+p\\mu}$.",
+   "uses": [
+    "lem-sfb-simple-module-dual-highest-weight"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Theorems 22.18 and 22.19, printed pp.467--468; explicit tensor calculation written by Q54."
+   }
+  },
+  {
+   "text": "If $(e_i)_{i=1}^a$ and $(h_j)_{j=1}^b$ are bases of $V_\\lambda$ and $V_\\mu$, then $(e_i\\otimes h_j)_{i,j}$ spans $Q$ by bilinearity and is independent by applying each pair of dual coordinate functionals. Thus $\\dim_F Q=ab$. The pullback has not changed the underlying vector space, and the isomorphism of step 5 preserves dimension, so $\\dim_F V_{\\lambda+p\\mu}=(\\dim_F V_\\lambda)(\\dim_F V_\\mu)$ as integers. No scalar reduction modulo $p$ occurred. The argument also covers zero weights; for the trivial group each simple module is one-dimensional and the identity reads $1=1\\cdot1$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Elementary basis count after the highest-weight isomorphism; agent-written numerical consequence of Steinberg tensor product."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-reductive-borel-pair-structure",
+  "lem-sfb-root-datum-isogeny-realization",
+  "sbc-lem-smooth-geometrically-reduced",
+  "lem-sfb-algebraic-group-homomorphism-factorization",
+  "lem-sfb-isogeny-root-power-laws",
+  "lem-sfb-borel-root-product-coordinates",
+  "lem-sfb-restricted-frobenius-tensor-simplicity",
+  "lem-sfb-simple-module-dual-highest-weight"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Milne 23.3, 23.9, 23.5, 21.68(a), 5.39 and 22.18--22.19, assembled with the separately stated Steinberg simplicity input; explicit highest-line calculation and basis count by Q54."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Steinberg tensor product theorem for simple rational algebraic group representations with p restricted highest weights",
+   "results": "8 hits: Representation.repOfTprodIso, LieModule.weight_vector_multiplication, Representation.tprod, Representation.repOfTprodIso_apply, FDRep.char_tensor, Representation.ofCoinvariantsTprodLeftRegular_mk_tmul_single, Rep.diagonalSuccIsoTensorTrivial_hom_hom_single, LieAlgebra.coe_rootSpaceWeightSpaceProduct_tmul. ",
+   "date": "2026-10-23",
+   "verdict": "no match: inspected hits concern abstract-group representations or Lie-algebra weight spaces, not dimensions of rational algebraic-group highest-weight modules"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Steinberg tensor product decomposition multiplies dimensions for simple modules at p restricted highest weights",
+   "results": "8 hits: LieModule.weight_vector_multiplication, rank_tensorProduct', Module.Basis.tensorProduct_repr_tmul_apply, Representation.tprod, TensorProduct.exists_multiset, TensorProduct.finsuppLeft, Basis.piTensorProduct_repr_tprod_apply, Submodule.tensorEquivMul. ",
+   "date": "2026-10-23",
+   "verdict": "no match: inspected hits concern abstract-group representations or Lie-algebra weight spaces, not dimensions of rational algebraic-group highest-weight modules"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Dimension of irreducible representations at highest weights lambda plus p mu equals the product of dimensions when lambda is restricted",
+   "results": "8 hits: LieModule.chainTopCoeff, LieModule.genWeightSpace_chainTopCoeff_add_one_nsmul_add, LieModule.genWeightSpace_chainTopCoeff_add_one_zsmul_add, LieModule.zero_lt_finrank_genWeightSpace, LieModule.genWeightSpace_nsmul_add_ne_bot_of_le, LieModule.chainTopCoeff_add_one, LieAlgebra.IsKilling.chainTopCoeff_le_chainLength, LieModule.genWeightSpace_chainBotCoeff_sub_one_zsmul_sub. ",
+   "date": "2026-10-23",
+   "verdict": "no match: inspected hits concern abstract-group representations or Lie-algebra weight spaces, not dimensions of rational algebraic-group highest-weight modules"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Frobenius\", \"Representation\"",
+   "results": "0 hits: . ",
+   "date": "2026-10-23",
+   "verdict": "no match: inspected hits concern abstract-group representations or Lie-algebra weight spaces, not dimensions of rational algebraic-group highest-weight modules"
+  },
+  {
+   "tool": "grep",
+   "query": "Weyl|weyl|[Ff]robenius|[Ss]teinberg",
+   "results": "0 hits: . Search subdirectory: Mathlib/RepresentationTheory. ",
+   "date": "2026-10-23",
+   "verdict": "no match: inspected hits concern abstract-group representations or Lie-algebra weight spaces, not dimensions of rational algebraic-group highest-weight modules"
+  },
+  {
+   "tool": "grep",
+   "query": "isSimpleModule_weylGroupRootRep|simple_iff_end_is_rank_one|def IndV|def IsIrreducible",
+   "results": "9 hits: Mathlib/LinearAlgebra/RootSystem/Irreducible.lean, Mathlib/LinearAlgebra/RootSystem/Irreducible.lean, Mathlib/LinearAlgebra/RootSystem/Irreducible.lean, Mathlib/LinearAlgebra/RootSystem/Irreducible.lean, Mathlib/RepresentationTheory/FinGroupCharZero.lean, Mathlib/RepresentationTheory/FinGroupCharZero.lean, Mathlib/RepresentationTheory/FinGroupCharZero.lean, Mathlib/Topology/Sober.lean. ",
+   "date": "2026-10-23",
+   "verdict": "no match: inspected hits concern abstract-group representations or Lie-algebra weight spaces, not dimensions of rational algebraic-group highest-weight modules"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"highestWeight\", \"finrank\"",
+   "results": "0 hits: . ",
+   "date": "2026-10-23",
+   "verdict": "no match: inspected hits concern abstract-group representations or Lie-algebra weight spaces, not dimensions of rational algebraic-group highest-weight modules"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The dimension of a simple rational representation with highest weight lambda plus p times mu is the product of the dimensions at lambda and mu if lambda is p restricted",
+   "results": "8 hits: LieAlgebra.IsKilling.chainLength, LieModule.chainTopCoeff, LieModule.genWeightSpace_chainTopCoeff_add_one_zsmul_add, LieModule.rank, LieModule.zero_lt_finrank_genWeightSpace, LieModule.genWeightSpace_chainTopCoeff_add_one_nsmul_add, FDRep.finrank_hom_simple_simple, LieAlgebra.IsKilling.chainLength_of_eq_zsmul_add. ",
+   "date": "2026-10-23",
+   "verdict": "no match: inspected hits concern abstract-group representations or Lie-algebra weight spaces, not dimensions of rational algebraic-group highest-weight modules"
+  },
+  {
+   "tool": "grep",
+   "query": "Steinberg|Frobenius|highestWeight|highest.weight",
+   "results": "0 hits: . Search directory: Mathlib/RepresentationTheory",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern Lie-algebra weights, abstract monoid/finite-group representations or Young tableaux; none gives Steinberg tensor-product simplicity for rational algebraic-group modules"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Frobenius\", \"Representation\"",
+   "results": "0 hits: ",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern Lie-algebra weights, abstract monoid/finite-group representations or Young tableaux; none gives Steinberg tensor-product simplicity for rational algebraic-group modules"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Steinberg tensor product simplicity for restricted highest weight rational representations of a semisimple simply connected algebraic group",
+   "results": "8 hits: RootPairing.GeckConstruction.instIsIrreducible, RootPairing.isSimpleModule_weylGroupRootRep, FDRep.simple_iff_end_is_rank_one, FDRep.finrank_hom_simple_simple, FDRep.simple_iff_char_is_norm_one, Representation.irreducible_iff_isSimpleModule_asModule, RootPairing.isSimpleModule_weylGroupRootRep_iff, LieModule.IsIrreducible",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern Lie-algebra weights, abstract monoid/finite-group representations or Young tableaux; none gives Steinberg tensor-product simplicity for rational algebraic-group modules"
+  },
+  {
+   "tool": "grep",
+   "query": "Steinberg|frobeniusTwist|highestWeight",
+   "results": "5 hits: Mathlib/Combinatorics/Young/SemistandardTableau.lean, Mathlib/Combinatorics/Young/SemistandardTableau.lean, Mathlib/Combinatorics/Young/SemistandardTableau.lean, Mathlib/Combinatorics/Young/SemistandardTableau.lean, Mathlib/Combinatorics/Young/SemistandardTableau.lean. Search directory: Mathlib/",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern Lie-algebra weights, abstract monoid/finite-group representations or Young tableaux; none gives Steinberg tensor-product simplicity for rational algebraic-group modules"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Steinberg theorem tensor product simple module Frobenius twist restricted highest weight",
+   "results": "8 hits: LieAlgebra.coe_rootSpaceWeightSpaceProduct_tmul, LieModule.weight_vector_multiplication, LieModule.weightSpace.congr_simp, TensorProduct.directSumRight'_restrict, LieAlgebra.rootSpaceProduct.congr_simp, LieAlgebra.rootSpaceProduct, LieModule.coe_genWeightSpace_of_top, LieAlgebra.rootSpaceProduct_def",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern Lie-algebra weights, abstract monoid/finite-group representations or Young tableaux; none gives Steinberg tensor-product simplicity for rational algebraic-group modules"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A tensor product of a p restricted simple rational algebraic group module and the Frobenius pullback of a simple module is simple",
+   "results": "8 hits: FDRep.finrank_hom_simple_simple, RootPairing.isSimpleModule_weylGroupRootRep, IsIsotypic.isotypicComponent, IsIsotypicOfType.isotypicComponent, simple_of_finrank_eq_one, IsIsotypicOfType.of_isSimpleModule, FDRep.simple_iff_end_is_rank_one, Representation.irreducible_iff_isSimpleModule_asModule",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern Lie-algebra weights, abstract monoid/finite-group representations or Young tableaux; none gives Steinberg tensor-product simplicity for rational algebraic-group modules"
+  },
+  {
+   "tool": "loogle",
+   "query": "Representation.IsIrreducible, Representation.tprod",
+   "results": "0 hits: ",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern Lie-algebra weights, abstract monoid/finite-group representations or Young tableaux; none gives Steinberg tensor-product simplicity for rational algebraic-group modules"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Dimension of the simple rational representation with highest weight lambda plus p mu is dim L lambda times dim L mu when lambda is p restricted",
+   "results": "8 hits: LieAlgebra.IsKilling.chainLength, LieModule.rank, LieModule.chainTopCoeff, LieModule.zero_lt_finrank_genWeightSpace, LieModule.genWeightSpace_chainTopCoeff_add_one_nsmul_add, LieModule.rank_eq_natTrailingDegree, LieAlgebra.IsKilling.chainTopCoeff_le_chainLength, LieAlgebra.IsKilling.chainBotCoeff_add_chainTopCoeff",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern Lie-algebra weights, abstract monoid/finite-group representations or Young tableaux; none gives Steinberg tensor-product simplicity for rational algebraic-group modules"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-steinberg-induced-module-irreducible",
+  "date": "2026-10-23",
+  "group": "Q86"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Haboush symmetric-power lifting for a trivial quotient representation. Supporting representation-theoretic input: Steinberg endomorphisms detect a nonzero fixed vector. Supporting Self-duality of rho section modules at characteristic-dependent weights. Supporting input: Positive-characteristic simplicity step, using irreducibility of the Steinberg induced module rather than assuming self-duality. Numerical input to the dimension comparison: Multiplication of simple-module dimensions along the p-adic weight expansion.",
+   "via": [
+    "lem-sfb-steinberg-induced-module-irreducible",
+    "lem-sfb-rho-section-self-duality",
+    "lem-sfb-steinberg-endomorphism-detection",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-restricted-highest-weight-dimension-product",
+  "worker": "stage1",
+  "summary": "Kept the statement unchanged. Constructed an auxiliary Frobenius-type isogeny using existing root-datum realization, established faithful flatness and preservation of U from cited statements, separated Steinberg tensor simplicity into one new statement-only node, and wrote the highest-line identification and integer dimension count explicitly. Searched the project, entire DAG and blueprint; no attachment or duplicate found.",
+  "blueprint": "Retains the inherited blueprint.from.place chain for the numerical input to Steinberg induced-module irreducibility, ultimately det-thm-sf-ctf-stability-direct-images proof (3). The current latest blueprint direct-images proof was read; it has no separate highest-weight node. blueprint_refs.py ancestor returns null, inherited from the existing chain; no chapter or unit route changed."
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q54-c826e1ec9",
+  "group": "Q54",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q54-c826e1ec9 (reviewer sub-agent of L); spot-checked: Read the item's six steps, the new node and every cited statement in full. Step 1: realization node with u=p·id, b=id, q_α=p meets both root and coroot equations and gives f with f(T)=T, f*=p; checked against Milne 23.3, 23.9, 23.25. Step 2: f=i∘q with i a surjective closed immersion into the reduced affine S, so f is faithfully flat. Step 3: the root-power law gives pβ=e_α α; reducedness forces β=α and e_α=p, so f(U_α)=U_α and, by the ordered product, f(U)⊆U. Step 4: all hypotheses of the new node are supplied. Step 5: v⊗w is U-fixed with weight λ+pμ; the dual-highest-weight node's line and uniqueness clauses are used as stated. Step 6: the basis count is elementary and gives an integer identity. New node (Steinberg simplicity of L(λ)⊗f*L(μ)) is true; generality in f follows from Milne Prop 23.7 and Theorem 23.25 (f differs from Frobenius by inn(t), t∈T(k)). Edge cases p=2, λ=0 and S=1 checked. It is not a restatement of the item (no dimension, no identification) and has no duplicate in the DAG (rg over Steinberg, Frobenius twist, tensor + highest weight). Batch-5: all three flagged citations reach sec-trace-formula only through lem-trf-fppf-covering-base-change, a generic Stacks 021O(3) mathlib leaf outside both assumptions, so it is acceptable. Tool use: sbc-lem-smooth-geometrically-reduced (generic). No SGA, no B/C/D/E faults, no changes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.GroupScheme.RestrictedHighestWeightDimensionProduct",
+  "declaration": "AlgebraicGeometry.RationalHighestWeight.restricted_highest_weight_dimension_product",
+  "file": "lean/Sheaf/AlgebraicGeometry/GroupScheme/RestrictedHighestWeightDimensionProduct.lean",
+  "statement": "theorem restricted_highest_weight_dimension_product {F : Type u} [Field F] [IsAlgClosed F] (p : ℕ) [CharP F p] (hp : 0 < p) (S T B U : Grp (Over (Spec (.of F)))) [IsAffine S.X.left] [IsAffine T.X.left] [IsAffine U.X.left] (hS : IsSemisimpleGroupScheme S.X) (hsc : ∀ (S' : Over (Spec (.of F))) [GrpObj S'], IsSemisimpleGroupScheme S' → ∀ (f : S' ⟶ S.X) [IsMonHom f], Surjective f.left → IsFinite (GrpObj.ker f).hom → (∀ (A : Type u) [CommRing A] [Algebra F A] (x : StandardGroupSchemes.affine F A ⟶ GrpObj.ker f) (s : StandardGroupSchemes.affine F A ⟶ S'), (x ≫ GrpObj.kerι f) * s = s * (x ≫ GrpObj.kerι f)) → IsIso f) (iT : T ⟶ S) (iB : B ⟶ S) (j : T ⟶ B) (iU : U ⟶ B) (hTB : IsRhoBorelPair iT iB j) (hUclosed : IsClosedSubgroupScheme iU.hom.hom) (hUnormal : IsNormalSubgroupScheme iU.hom.hom) (hUsmooth : Smooth U.X.hom) (hUconnected : ConnectedSpace U.X.left) (hUunipotent : SolvableGroupStructure.IsUnipotent U) (hUmax : ∀ (N : Grp (Over (Spec (.of F)))) (iN : N ⟶ B), IsClosedSubgroupScheme iN.hom.hom → IsNormalSubgroupScheme iN.hom.hom → Smooth N.X.hom → ConnectedSpace N.X.left → SolvableGroupStructure.IsUnipotent N → ∃ f : N ⟶ U, f ≫ iU = iN) [IsCommMonObj T.X] [IsCommMonObj (StandardGroupSchemes.multiplicative F)] (aS : ModObj T.X S.X) (aB : ModObj T.X B.X) (haS : aS.smul = (iT.hom.hom ⊗ₘ 𝟙 S.X) ≫ GrpObj.conj S.X) (haB : aB.smul = (j.hom.hom ⊗ₘ 𝟙 B.X) ≫ GrpObj.conj B.X) (Φ : Finset (Additive (T ⟶ Grp.mk (StandardGroupSchemes.multiplicative F)))) (P : RootDatum Φ (Additive (T ⟶ Grp.mk (StandardGroupSchemes.multiplicative F))) (Additive (Grp.mk (StandardGroupSchemes.multiplicative F) ⟶ T))) (b : P.Base) (hroot : ∀ α : Φ, P.root α = α.val) (hpair : ∀ (χ : Additive (T ⟶ Grp.mk (StandardGroupSchemes.multiplicative F))) (ν : Additive (Grp.mk (StandardGroupSchemes.multiplicative F) ⟶ T)), ν.toMul.hom.hom ≫ χ.toMul.hom.hom = (𝟙 (StandardGroupSchemes.multiplicative F)) ^ (P.toLinearMap χ ν)) (hΦ : ∀ χ : Additive (T ⟶ Grp.mk (StandardGroupSchemes.multiplicative F)), χ ∈ Φ ↔ χ ≠ 0 ∧ @TorusCharacterTangent.weightSpace F _ T S aS χ.toMul ≠ ⊥) (hpos : ∀ α : Φ, b.IsPos α ↔ @TorusCharacterTangent.weightSpace F _ T B aB α.val.toMul ≠ ⊥) (lam mu : Additive (T ⟶ Grp.mk (StandardGroupSchemes.multiplicative F))) (hlam : ∀ α ∈ b.support, 0 ≤ P.toLinearMap lam (P.coroot α)) (hmu : ∀ α ∈ b.support, 0 ≤ P.toLinearMap mu (P.coroot α)) (hrestricted : ∀ α ∈ b.support, P.toLinearMap lam (P.coroot α) < (p : ℤ)) {Vlam : Type v} [AddCommGroup Vlam] [Module F Vlam] [FiniteDimensional F Vlam] {Vmu : Type w} [AddCommGroup Vmu] [Module F Vmu] [FiniteDimensional F Vmu] {Vsum : Type z} [AddCommGroup Vsum] [Module F Vsum] [FiniteDimensional F Vsum] (clam : Vlam →ₗ[F] Vlam ⊗[F] coordinateAlgebra S) (cmu : Vmu →ₗ[F] Vmu ⊗[F] coordinateAlgebra S) (csum : Vsum →ₗ[F] Vsum ⊗[F] coordinateAlgebra S) (hlamcoassoc : HopfAction.Coassociative F (coordinateAlgebra S) Vlam clam) (hlamcounit : HopfAction.Counital F (coordinateAlgebra S) Vlam clam) (hmucoassoc : HopfAction.Coassociative F (coordinateAlgebra S) Vmu cmu) (hmucounit : HopfAction.Counital F (coordinateAlgebra S) Vmu cmu) (hsumcoassoc : HopfAction.Coassociative F (coordinateAlgebra S) Vsum csum) (hsumcounit : HopfAction.Counital F (coordinateAlgebra S) Vsum csum) (hlamsimple : IsSimple clam) (hmusimple : IsSimple cmu) (hsumsimple : IsSimple csum) (hlamweight : HasHighestWeight clam iT (iU ≫ iB) lam.toMul) (hmuweight : HasHighestWeight cmu iT (iU ≫ iB) mu.toMul) (hsumweight : HasHighestWeight csum iT (iU ≫ iB) (lam + p • mu).toMul) : Module.finrank F Vsum = Module.finrank F Vlam * Module.finrank F Vmu",
+  "branch": "newtargets-dag",
+  "by": "NM",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "Uses the published coaction highest-weight data and actual character/cocharacter root datum. Module.finrank gives ordinary natural-number dimensions; no Frobenius endomorphism or induced-module realization is supplied. The only stmt_deps additions are the two existing landed terminology nodes used directly."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-84ebf3505",
+  "group": "NM",
+  "result": "pass",
+  "note": "Clause-by-clause match with node: alg. closed F, CharP p>0; IsSemisimpleGroupScheme; hsc verbatim from landed exists_rho_section_modules; IsRhoBorelPair; U radical spec = reductive_borel_pair_structure; root datum pinned by hroot/hpair/hΦ/hpos (omitting IsReduced only generalizes; coroots unique since roots span X⊗Q for semisimple S, base fixed by Lie(B) positivity); dominance/restrictedness in ℤ over b.support; IsSimple + both coaction identities; HasHighestWeight (finrank V^U=1, character coaction) with (lam + p•mu).toMul; conclusion ℕ finrank product, no Frobenius/induced-module hypothesis. Affine/IsCommMonObj instances implied. Edge cases trivial group, zero weights, p=2, universes v/w/z ok. Item differs from live only in lean + 2 landed used def stmt_deps; statement verbatim; lines ≤88; imports per brief l.114; sorry-only; docstrings with source/blueprint/proof plan; no duplicate found. Notes: IsRhoBorelPair theorem-owned via base stmt_dep (advisory); transitive owners of IsUnipotent/weightSpace/subgroup predicates not in stmt_deps, as in landed rho record. No compile (no change)."
+ }
+}

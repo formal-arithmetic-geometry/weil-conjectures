@@ -1,0 +1,137 @@
+{
+ "id": "lem-normalized-projective-line-adjunction",
+ "kind": "statement",
+ "title": "Projective-line adjunction for a normalized Tate datum",
+ "statement": "Let $\\Lambda$ be a finite commutative ring with a normalized Tate datum as specified below. Let $S$ be any scheme [def-pc-scheme] admitting a positive integer $n$ with $n\\Lambda=0$ and $n$ invertible on $S$. For the projection $q:\\mathbf P^1_S\\to S$ [def-nagata-projective-space-base-change], on the ordinary unbounded etale derived categories of module sheaves [def-weil-pbc-derived-categories] there exists an adjunction $Rq_*\\dashv Lq^*\\mathbin{;}\\operatorname{twistShift}_{\\mathbf P^1_S}(1)$. The homogeneous coordinates are $\\operatorname{Option}(\\operatorname{ULift}(\\operatorname{Fin}(1)))$. No Noetherian, boundedness or constructibility assumption is imposed on the base or the variable complexes. Here a normalized Tate datum means the adopted-source HasTateTwist and HasTateTwist.IsNormalized parameters: for every scheme $X$ and integer $m$, a tensor-invertible bounded constructible finite-Tor object $\\Lambda_X(m)$, represented by a locally constant rank-one module sheaf in degree zero; zero, addition and derived-pullback isomorphisms, with the unit, associativity, pullback-composition and pullback-product laws. It underlies natural multiplicative Kummer classes $\\kappa(u):\\Lambda_X\\to\\Lambda_X(1)[1]$ whose coordinate boundary for $\\mathbf A^1_B$, after adjunction to its zero section $s$, is an isomorphism $\\Lambda_B\\to Rs^!(\\Lambda(1)[2])$ for every $B$ separated and locally of finite type over a field. The functor $\\operatorname{twistShift}_X(m)$ is $K\\mapsto(K\\otimes^L\\Lambda_X(m))[2m]$.",
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-nagata-projective-space-base-change",
+  "def-weil-pbc-derived-categories",
+  "def-kun-derived-tensor"
+ ],
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-geo-p1-adjunction/thm-amb-p1-adjunction.proof.md",
+  "place": "Diagonal-kernel unit, projection-formula counit, and both triangle identities, transported to the normalized source-library twist datum."
+ },
+ "proof": [
+  {
+   "text": "Choose N>0 annihilating Lambda and invertible on S from HasInvertibleExponent. For P in the specified coordinates, invertibility pulls back along q:P->S. Apply [lem-sp-normalized-tate-line-comparison] to P, obtaining e from the given tateObject to the single complex of the concrete finite-root line.",
+   "uses": [
+    "lem-sp-normalized-tate-line-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-geo-p1-adjunction/thm-amb-p1-adjunction.proof.md",
+    "place": "Coefficient identification before diagonal-kernel construction."
+   }
+  },
+  {
+   "text": "Obtain t,d,hbc,hi from the existing arbitrary-base finite splitting and integral theorem [lem-sp-tower-p1-arbitrary-base-integrals]. Apply [lem-sp-finite-p1-adjunction-of-integrals] to this data at S to obtain the concrete finite-line adjunction.",
+   "uses": [
+    "lem-sp-tower-p1-arbitrary-base-integrals",
+    "lem-sp-finite-p1-adjunction-of-integrals"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-geo-p1-adjunction/thm-amb-p1-adjunction.proof.md",
+    "place": "Displayed unit and both triangles."
+   }
+  },
+  {
+   "text": "The bifunctor derivedTensor.flip sends e inverse to a natural isomorphism from tensoring on the right with the concrete line to tensoring on the right with the given Tate object. Whisker it with shiftFunctor(2), then with Lq^*. Transport the concrete adjunction by Adjunction.ofNatIsoRight. Unfolding tateTwist and twistShift identifies its right adjoint with the unchanged requested functor.",
+   "uses": [
+    "def-kun-derived-tensor"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-geo-p1-adjunction/thm-amb-p1-adjunction.proof.md",
+    "place": "Final adjunction; coefficient transport."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-kun-derived-tensor",
+  "lem-sp-finite-p1-adjunction-of-integrals",
+  "lem-sp-normalized-tate-line-comparison",
+  "lem-sp-tower-p1-arbitrary-base-integrals"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-geo-p1-adjunction/thm-amb-p1-adjunction.proof.md",
+  "place": "Factor the normalized-datum comparison from the concrete diagonal-kernel assembly, then explicitly whisker the coefficient isomorphism and transport the adjunction."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Projective line etale derived direct image is left adjoint to pullback twisted by a normalized Kummer Tate datum shifted by two",
+   "results": "Eight ordinary sheaf/structure-module pullback adjunction hits, including Scheme.Modules.pullbackPushforwardAdjunction and SheafOfModules.PullbackConstruction.adjunction; none supplies projective-line etale twisted duality.",
+   "date": "2026-10-25",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Scheme, CategoryTheory.Adjunction",
+   "results": "Six hits: opensFunctorAdjunction, GammaSpec, kerAdjunction, algGammaAlgSpecAdjunction, Scheme.Modules.pullbackPushforwardAdjunction, Scheme.Modules.restrictAdjunction. None is a twisted etale derived projective-line adjunction.",
+   "date": "2026-10-25",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "projective.*[Aa]djunction|[Aa]djunction.*projective|[Tt]ate[Tt]wist",
+   "results": "Mathlib hits concern preservation of projective objects, not projective-space duality. Existing ProjectiveLineFullAdjunction and SfAffineBaseP1TraceAdjunction use explicit finite Tate coefficients, the former also a Noetherian base; neither accepts an arbitrary normalized HasTateTwist datum. Source AffineSpaceAdjunction is the parent, not an input.",
+   "date": "2026-10-25",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "WeilConjectures.EtaleCohomology.Purity.Smooth.AffineSpaceAdjunction",
+  "date": "2026-10-25",
+  "group": "Z8"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "cor-amb-affine-space-adjunction",
+   "place": "Proof, first paragraph: invoke the projective-line adjunction before composing with the open-chart adjunction.",
+   "via": []
+  },
+  "same_as": [
+   "thm-amb-p1-adjunction"
+  ]
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sf-cbc",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.SmoothPurity.NormalizedProjectiveLineAdjunction",
+  "file": "lean/Sheaf/SmoothPurity/NormalizedProjectiveLineAdjunction.lean",
+  "declaration": "AlgebraicGeometry.Etale.nonempty_normalizedProjectiveLineAdjunction",
+  "statement": "theorem nonempty_normalizedProjectiveLineAdjunction\n    (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ] [HasTateTwist Λ]\n    [HasTateTwist.IsNormalized Λ] (S : Scheme.{u}) [HasInvertibleExponent Λ S] :\n    Nonempty (R((ℙ(Option (ULift.{u} (Fin 1)); S) ↘ S)_*[ModuleCat.{u + 1} Λ]) ⊣\n      L((ℙ(Option (ULift.{u} (Fin 1)); S) ↘ S)^*[ModuleCat.{u + 1} Λ]) ⋙\n        twistShift Λ ℙ(Option (ULift.{u} (Fin 1)); S) 1)",
+  "branch": "sheaf-dag",
+  "by": "Z8",
+  "date": "2026-10-25"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Z8",
+  "result": "pass",
+  "landing": "20261025T165014-L-1157137",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R8",
+  "result": "pass",
+  "landing": "20261025T181038-L-4067995",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

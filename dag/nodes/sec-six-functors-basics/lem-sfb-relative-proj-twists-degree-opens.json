@@ -1,0 +1,490 @@
+{
+ "id": "lem-sfb-relative-proj-twists-degree-opens",
+ "kind": "statement",
+ "title": "Twisting modules and degree-generated opens on glued relative Proj",
+ "statement": "Let $Z$ be a scheme [def-pc-scheme] and $\\mathcal B=\\bigoplus_{j\\geq0}\\mathcal B_j$ a commutative unital graded $\\mathcal O_Z$-algebra [def-weil-pbc-graded-sheaf-structures] with each degree quasi-coherent [pqf-def-coherent]. Let $\\pi:Y=\\operatorname{Proj}_Z(\\mathcal B)\\to Z$ be the glued relative Proj [def-nagata-relative-proj]. There are quasi-coherent modules $E_j$ on $Y$ for $j\\in\\mathbf Z$, with $E_0=\\mathcal O_Y$, a commutative unital graded multiplication $E_i\\otimes E_j\\to E_{i+j}$, and a canonical graded map $\\eta:\\pi^*\\mathcal B\\to\\bigoplus_{j\\geq0}E_j$ [def-pc-module-pullback, def-pur-sheaf-tensor-product]. On every affine $V\\subseteq Z$, with $A=\\Gamma(V,\\mathcal B)$, these data identify with the twisting modules $\\mathcal O_{\\operatorname{Proj}(A)}(j)$, their multiplication and their canonical homogeneous-section map [def-weil-pbc-proj-twisting-sheaf]. The identifications commute with all further affine base restrictions and their cocycles, and determine the data up to unique isomorphism respecting these identifications. For every $d\\geq1$ the open subsets $\\bigcup_{a\\in A_d}D_+(a)$ in these affine-base models agree on overlaps and define an open $Y_d\\subseteq Y$. On $Y_d$ the module $E_d$ is invertible [def-sc-invertible-module], multiplication gives $E_d^{\\otimes k}|_{Y_d}\\simeq E_{kd}|_{Y_d}$ for all $k\\geq0$, and $\\eta_d:\\pi^*\\mathcal B_d|_{Y_d}\\to E_d|_{Y_d}$ is surjective. We have $Y=\\bigcup_{d\\geq1}Y_d$ and $Y_d\\subseteq Y_{ad}$ for every $a\\geq1$. On $Y_d$, the universal degree-$ad$ data are the $a$th tensor power and Veronese restriction of the universal degree-$d$ data, under the multiplication isomorphisms. No equality $\\mathcal B_0=\\mathcal O_Z$ or finite generation hypothesis is imposed.",
+ "source": {
+  "document": "literature/stacks-project/constructions.tex",
+  "place": "Tag 01NR (lemma-glue-relative-proj-twists), Tag 01MS (lemma-when-invertible), equation-Ud before Tag 01N8, and the open-immersion comparison in Tag 01NY (lemma-relative-proj)."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-pbc-graded-sheaf-structures",
+  "pqf-def-coherent",
+  "def-nagata-relative-proj",
+  "def-pc-module-pullback",
+  "def-pur-sheaf-tensor-product",
+  "def-weil-pbc-proj-twisting-sheaf",
+  "def-sc-invertible-module"
+ ],
+ "proof": [
+  {
+   "text": "For affine $W\\subseteq V\\subseteq Z$, put $R=\\mathcal O_Z(V)$, $S=\\mathcal O_Z(W)$ and $A=\\bigoplus_j\\mathcal B_j(V)$. Apply [lem-weil-pbc-quasi-coherent-affine-section-base-change] to each $\\mathcal B_j$: the maps $S\\otimes_R A_j\\to\\mathcal B_j(W)$, $s\\otimes a\\mapsto s(a|_W)$, are isomorphisms. Their direct sum $\\beta:S\\otimes_RA\\to\\mathcal B(W)$ is a graded $S$-algebra isomorphism, since restriction respects unit and products, and $\\psi(a)=\\beta(1\\otimes a)=a|_W$ is the graded restriction map. Thus [lem-sfb-proj-scalar-extension-twist-comparison], applied to $R\\to S$, $A$, $B=\\mathcal B(W)$ and $\\beta$, gives isomorphisms from the restricted twist over $V$ to the twist over $W$, preserving homogeneous sections and multiplication. Their underlying scheme maps are those of [lem-nagata-proj-affine-restriction]. For affine $W'\\subseteq W\\subseteq V$ the isomorphism for $W'\\subseteq V$ is the composite of those for $W\\subseteq V$ and $W'\\subseteq W$, since restriction maps compose. The identity and composition assertions of the twist comparison give the identity and cocycle equations for a chain of affine inclusions.",
+   "uses": [
+    "lem-weil-pbc-quasi-coherent-affine-section-base-change",
+    "lem-sfb-proj-scalar-extension-twist-comparison",
+    "lem-nagata-proj-affine-restriction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/constructions.tex",
+    "place": "Tags 01NO (lemma-proj-inclusion), 01NP (lemma-transitive-proj), with 01N2 and 01MZ"
+   }
+  },
+  {
+   "text": "For two affine base opens $V,V'$, cover $V\\cap V'$ by affine opens $W$. On $\\pi^{-1}W$ compare the two twists via the twist over $W$ from step 1. On intersections of two such $W$, refine again by affine opens: transitivity in step 1 says that both comparisons are the same. By the morphism-gluing clause (1) of [lem-weil-pbc-glue-sheaves-of-modules], the comparisons glue on $\\pi^{-1}(V\\cap V')$. The same calculation on affine refinements gives their triple-overlap cocycle. Its clause (2) now glues the twists degree by degree to modules $E_j$ on $Y$. Each affine-model twist is quasi-coherent by clause (c) of [lem-weil-pbc-proj-graded-module-sheaf-exists], applied to $M=A(j)$. Every point of $Y$ has an affine neighborhood inside one such model with the required module presentation; hence each $E_j$ is quasi-coherent by [pqf-def-coherent]. No base intersection was assumed affine.",
+   "uses": [
+    "lem-weil-pbc-glue-sheaves-of-modules",
+    "lem-weil-pbc-proj-graded-module-sheaf-exists",
+    "pqf-def-coherent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/constructions.tex",
+    "place": "Tag 01NR (lemma-glue-relative-proj-twists), first paragraph of proof; relative-glueing-sheaves, affine refinement of overlaps"
+   }
+  },
+  {
+   "text": "On $D_+(f)\\subseteq\\operatorname{Proj}(A)$ use multiplication of localized fractions $(a/f^m,b/f^n)\\mapsto ab/f^{m+n}$. It is bilinear and commutes with restriction, because the restriction maps in [def-weil-pbc-proj-twisting-sheaf] are localization homomorphisms. It therefore defines a bilinear sheaf map. The universal property [lem-pc-sites-sheaf-tensor-bilinear-universal] produces the multiplication morphisms between twists. Step 1 makes these compatible on affine base restrictions, and [lem-weil-pbc-glue-sheaves-of-modules] (1) glues them to $E_i\\otimes E_j\\to E_{i+j}$. The unit and associative and commutative identities hold on fractions, hence on the standard-open cover and then on $Y$. Since $(A_f)_0$ is the structure ring on each standard open, the same gluing identifies $E_0$ with $\\mathcal O_Y$.",
+   "uses": [
+    "def-weil-pbc-proj-twisting-sheaf",
+    "lem-pc-sites-sheaf-tensor-bilinear-universal",
+    "lem-weil-pbc-glue-sheaves-of-modules"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/constructions.tex",
+    "place": "Tag 01MK (lemma-widetilde-tensor), its bilinear construction; equations 01MO and 01MP; Tag 01NR"
+   }
+  },
+  {
+   "text": "For $j\\geq0$, send $a\\in\\mathcal B_j(V)$ to the section $a/1$ of the affine-model twist, using [def-weil-pbc-proj-twisting-sheaf] (3). Step 1 identifies its restriction with $(a|_W)/1$. These maps on the affine basis define a sheaf morphism $\\mathcal B_j\\to\\pi_*E_j$; on arbitrary opens it sends a section to the unique glued image of its affine restrictions. Transpose by the pullback adjunction in [def-pc-module-pullback] to obtain $\\eta_j:\\pi^*\\mathcal B_j\\to E_j$. The fraction identities $(ab)/1=(a/1)(b/1)$ and $1/1=1$ show that the maps assemble to a unital graded algebra map $\\eta$. For two glued systems with the prescribed affine identifications, compose one affine identification with the inverse of the other. These isomorphisms agree on overlaps by step 1, so [lem-weil-pbc-glue-sheaves-of-modules] (1) glues them and their inverses uniquely. They respect $\\eta$ and multiplication locally and hence globally. This proves the asserted normalized uniqueness.",
+   "uses": [
+    "def-weil-pbc-proj-twisting-sheaf",
+    "def-pc-module-pullback",
+    "lem-weil-pbc-glue-sheaves-of-modules"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/constructions.tex",
+    "place": "Tag 01NR (lemma-glue-relative-proj-twists), homogeneous-section map, functorial gluing, and uniqueness"
+   }
+  },
+  {
+   "text": "Fix $d\\geq1$. In the notation of step 1, $\\mathcal B_d(W)=S\\otimes_R A_d$. The inverse image of $D_+(a)$ under the restriction map is $D_+(\\bar a)$ by [lem-nagata-affine-proj-scalar-extension]. Every element $b$ of $\\mathcal B_d(W)$ is a finite sum $\\sum_i s_i\\bar a_i$, $a_i\\in A_d$. If $b$ is outside a homogeneous prime $\\mathfrak q$, then some $\\bar a_i$ is outside $\\mathfrak q$, since $\\mathfrak q$ is an ideal. Conversely each $\\bar a_i$ is a degree-$d$ element. Thus $\\bigcup_{b\\in\\mathcal B_d(W)}D_+(b)$ equals the inverse image of $\\bigcup_{a\\in A_d}D_+(a)$. On overlaps refine by affine opens as in step 2; these equalities glue the prescribed opens to $Y_d\\subseteq Y$.",
+   "uses": [
+    "lem-weil-pbc-quasi-coherent-affine-section-base-change",
+    "lem-nagata-affine-proj-scalar-extension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/constructions.tex",
+    "place": "Equation 01N5 (equation-Ud); Tag 01NY (lemma-relative-proj), affine restriction of degree opens"
+   }
+  },
+  {
+   "text": "On a chart $D_+(f)$ with $f\\in A_d$, multiplication by $f$ identifies $(A_f)_0$ with $(A_f)_d$; its inverse is multiplication by $f^{-1}$. These formulas also commute with localization to smaller opens, so they trivialize $E_d$ there by [def-weil-pbc-proj-twisting-sheaf]. Thus $E_d|_{Y_d}$ is invertible by [def-sc-invertible-module]. For $k\\geq0$, the iterated multiplication map sends the tensor of $k$ copies of the frame $f$ to $f^k$, a frame for $(A_f)_{kd}$, so it is an isomorphism on this cover. For $k=0$ this is $E_0=\\mathcal O_Y$. Finally $\\eta_d$ sends the pulled section $f$ to that frame; every germ of the target is a scalar multiple of it, which proves surjectivity. These local inverses agree wherever both are defined, since they invert the same multiplication map, and therefore give the stated global isomorphisms.",
+   "uses": [
+    "def-weil-pbc-proj-twisting-sheaf",
+    "def-sc-invertible-module",
+    "def-pur-sheaf-tensor-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/constructions.tex",
+    "place": "Tag 01MS (lemma-when-invertible), explicit inverse after inverting f; equation 01N5 and the paragraph following 01N6"
+   }
+  },
+  {
+   "text": "Every point of $\\operatorname{Proj}(A)$ is a homogeneous prime not containing $A_+$, so some homogeneous $f$ of positive degree is outside it. Hence the $Y_d$ cover $Y$. If $f\\in A_d$ and $a\\geq1$, primality gives $f\\notin\\mathfrak p$ if and only if $f^a\\notin\\mathfrak p$; consequently $D_+(f)=D_+(f^a)\\subseteq Y_{ad}$ and $Y_d\\subseteq Y_{ad}$. On $D_+(f)$ the isomorphism $E_d^{\\otimes a}\\simeq E_{ad}$ is $f^{\\otimes a}\\mapsto f^a$. In Veronese degree $n$, both the degree-$ad$ section map and the restriction of the degree-$d$ map send $b\\in A_{adn}$ to the same fraction $b/1$. Their coefficient in the frame $f^{an}$ is $b/f^{an}$. Thus the universal data on $Y_d$ agree in every degree, including degree zero, with the $a$th tensor power and Veronese restriction. These equalities persist under base restriction by step 1. The whole construction used arbitrary quasi-coherent degrees; neither finite generation nor $\\mathcal B_0=\\mathcal O_Z$ entered.",
+   "uses": [
+    "def-nagata-affine-proj",
+    "def-weil-pbc-proj-twisting-sheaf",
+    "def-pur-sheaf-tensor-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/constructions.tex",
+    "place": "Equations 01N5 and 01N6; Tag 01NY (lemma-relative-proj), the degree-divisibility comparison and universal data"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-quasi-coherent-affine-section-base-change",
+  "lem-sfb-proj-scalar-extension-twist-comparison",
+  "lem-nagata-proj-affine-restriction",
+  "lem-weil-pbc-glue-sheaves-of-modules",
+  "lem-weil-pbc-proj-graded-module-sheaf-exists",
+  "pqf-def-coherent",
+  "def-weil-pbc-proj-twisting-sheaf",
+  "lem-pc-sites-sheaf-tensor-bilinear-universal",
+  "def-pc-module-pullback",
+  "lem-nagata-affine-proj-scalar-extension",
+  "def-sc-invertible-module",
+  "def-pur-sheaf-tensor-product",
+  "def-nagata-affine-proj"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/constructions.tex",
+  "place": "Tags 01NR, 01NO, 01NP, 01MS, equations 01N5 and 01N6, and the degree-divisibility comparison of 01NY; affine-refinement and fraction calculations written out."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "relative.?proj|twist|veronese",
+   "results": {
+    "hits": [],
+    "n_hits": 0,
+    "note": "",
+    "subdirectory": "AlgebraicGeometry/ProjectiveSpectrum",
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: basic Proj schemes, standard-open covers, structure sheaves and maps from ring-valued global sections do not classify arbitrary line-valued Veronese quotients or glue relative twisting modules."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Relative Proj of a quasi coherent graded algebra has canonical twisting sheaves and compatible graded maps on every affine base open",
+   "results": {
+    "hits": [
+     "AlgebraicGeometry.ProjectiveSpectrum.Proj.toSpec",
+     "AlgebraicGeometry.Proj",
+     "AlgebraicGeometry.Proj.fromOfGlobalSections_resLE",
+     "AlgebraicGeometry.ProjectiveSpectrum.Proj.structureSheaf",
+     "AlgebraicGeometry.ProjectiveSpectrum.StructureSheaf.structurePresheafInCommRing",
+     "AlgebraicGeometry.Proj.affineOpenCover",
+     "AlgebraicGeometry.Proj.toSheafedSpace",
+     "AlgebraicGeometry.Proj.basicOpenToSpec"
+    ],
+    "n_hits": 8,
+    "note": "",
+    "subdirectory": "",
+    "digest": "43a26468d1dbf094"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: basic Proj schemes, standard-open covers, structure sheaves and maps from ring-valued global sections do not classify arbitrary line-valued Veronese quotients or glue relative twisting modules."
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Proj, \"twist\"",
+   "results": {
+    "hits": [],
+    "n_hits": 0,
+    "note": "",
+    "subdirectory": "",
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: basic Proj schemes, standard-open covers, structure sheaves and maps from ring-valued global sections do not classify arbitrary line-valued Veronese quotients or glue relative twisting modules."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Glue the twisting sheaves O(n) and homogeneous section maps on projective spectra over affine base opens to the relative projective spectrum",
+   "results": {
+    "hits": [
+     "AlgebraicGeometry.ProjectiveSpectrum.Proj.toOpen_toSpec_val_c_app",
+     "AlgebraicGeometry.ProjectiveSpectrum.Proj.toSpec",
+     "AlgebraicGeometry.ProjectiveSpectrum.Proj.toOpen_toSpec_val_c_app_assoc",
+     "AlgebraicGeometry.ProjectiveSpectrum.Proj.awayToΓ",
+     "AlgebraicGeometry.ProjectiveSpectrum.Proj.awayToSection",
+     "AlgebraicGeometry.Proj.fromOfGlobalSections",
+     "AlgebraicGeometry.Proj.fromOfGlobalSections_morphismRestrict",
+     "AlgebraicGeometry.Proj.awayToSection"
+    ],
+    "n_hits": 8,
+    "note": "",
+    "subdirectory": "",
+    "digest": "c006814304a2f7b2"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: basic Proj schemes, standard-open covers, structure sheaves and maps from ring-valued global sections do not classify arbitrary line-valued Veronese quotients or glue relative twisting modules."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Relative projective spectrum of a graded sheaf algebra admits twists O(n), glued compatibly with restriction, which are line bundles and multiplicative on opens generated by homogeneous elements of a fixed positive degree",
+   "results": {
+    "hits": [
+     "AlgebraicGeometry.ProjectiveSpectrum.Proj.structureSheaf",
+     "AlgebraicGeometry.Proj.toSheafedSpace",
+     "AlgebraicGeometry.ProjectiveSpectrum.StructureSheaf.structureSheafInType",
+     "AlgebraicGeometry.ProjectiveSpectrum.Proj.awayToΓ",
+     "AlgebraicGeometry.ProjectiveSpectrum.StructureSheaf.structurePresheafInCommRing",
+     "AlgebraicGeometry.Proj.fromOfGlobalSections_morphismRestrict",
+     "AlgebraicGeometry.Proj.mul_apply",
+     "AlgebraicGeometry.ProjectiveSpectrum.Proj.awayToSection"
+    ],
+    "n_hits": 8,
+    "note": "",
+    "subdirectory": "",
+    "digest": "f6764f7092aba054"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: basic Proj schemes, standard-open covers, structure sheaves and maps from ring-valued global sections do not classify arbitrary line-valued Veronese quotients or glue relative twisting modules."
+  },
+  {
+   "tool": "grep",
+   "query": "twist|Twist|GradedBaseChange",
+   "results": {
+    "hits": [],
+    "n_hits": 0,
+    "note": "",
+    "subdirectory": "AlgebraicGeometry/ProjectiveSpectrum",
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern the structure sheaf, intersections of standard opens, ring-valued Proj maps, ordinary linear-map base change, or differentials; none constructs or compares arbitrary Proj twists under scalar extension."
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Proj, \"twist\"",
+   "results": {
+    "hits": [],
+    "n_hits": 0,
+    "note": "",
+    "subdirectory": "",
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern the structure sheaf, intersections of standard opens, ring-valued Proj maps, ordinary linear-map base change, or differentials; none constructs or compares arbitrary Proj twists under scalar extension."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Twisting sheaves on relative Proj glue over affine base opens, and O(d) is invertible and generated by degree d sections on the union of their standard opens",
+   "results": {
+    "hits": [
+     "AlgebraicGeometry.Proj.affineOpenCover",
+     "AlgebraicGeometry.Proj.openCoverOfISupEqTop",
+     "AlgebraicGeometry.Proj.toSheafedSpace",
+     "AlgebraicGeometry.ProjectiveSpectrum.StructureSheaf.structurePresheafInCommRing",
+     "AlgebraicGeometry.ProjectiveSpectrum.Proj.structureSheaf",
+     "AlgebraicGeometry.Proj.affineOpenCoverOfIrrelevantLESpan",
+     "AlgebraicGeometry.ProjectiveSpectrum.StructureSheaf.structureSheafInType",
+     "AlgebraicGeometry.Proj.openCoverOfMapIrrelevantEqTop"
+    ],
+    "n_hits": 8,
+    "note": "",
+    "subdirectory": "",
+    "digest": "617d1782bf817e9a"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern the structure sheaf, intersections of standard opens, ring-valued Proj maps, ordinary linear-map base change, or differentials; none constructs or compares arbitrary Proj twists under scalar extension."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For any scalar extension of graded rings the pullback of every Proj twisting module is canonically the corresponding twist, preserving multiplication and homogeneous sections",
+   "results": {
+    "hits": [
+     "AlgebraicGeometry.Proj.pullbackAwayιIso",
+     "AlgebraicGeometry.Proj.pullbackAwayιIso_hom_awayι",
+     "AlgebraicGeometry.Proj.pullbackAwayιIso_inv_snd_assoc",
+     "AlgebraicGeometry.Proj.pullbackAwayιIso_inv_fst_assoc",
+     "AlgebraicGeometry.Proj.pullbackAwayιIso_inv_fst",
+     "AlgebraicGeometry.Proj.pullbackAwayιIso_inv_snd",
+     "AlgebraicGeometry.Proj.pullbackAwayιIso_hom_awayι_assoc",
+     "AlgebraicGeometry.Proj.pullbackAwayιIso_hom_SpecMap_awayMap_left"
+    ],
+    "n_hits": 8,
+    "note": "",
+    "subdirectory": "",
+    "digest": "782b1717b5827a95"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern the structure sheaf, intersections of standard opens, ring-valued Proj maps, ordinary linear-map base change, or differentials; none constructs or compares arbitrary Proj twists under scalar extension."
+  },
+  {
+   "tool": "grep",
+   "query": "twist|Twist|graded.*base.?change",
+   "results": {
+    "hits": [],
+    "n_hits": 0,
+    "note": "",
+    "subdirectory": "AlgebraicGeometry",
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern the structure sheaf, intersections of standard opens, ring-valued Proj maps, ordinary linear-map base change, or differentials; none constructs or compares arbitrary Proj twists under scalar extension."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Base change of the twisting sheaf O(n) on Proj of a graded algebra under an arbitrary coefficient ring homomorphism",
+   "results": {
+    "hits": [
+     "AlgebraicGeometry.ProjectiveSpectrum.Proj.structureSheaf",
+     "AlgebraicGeometry.AffineSpace.map_Spec_map",
+     "KaehlerDifferential.tensorKaehlerEquivBase",
+     "AlgebraicGeometry.ProjectiveSpectrum.StructureSheaf.structurePresheafInCommRing",
+     "LinearMap.baseChangeHom_apply",
+     "WeierstrassCurve.Projective.baseChange_polynomial",
+     "AlgebraicGeometry.Proj.awayMap_awayToSection",
+     "WeierstrassCurve.baseChange_φ"
+    ],
+    "n_hits": 8,
+    "note": "",
+    "subdirectory": "",
+    "digest": "61762ccbc52c7fd1"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern the structure sheaf, intersections of standard opens, ring-valued Proj maps, ordinary linear-map base change, or differentials; none constructs or compares arbitrary Proj twists under scalar extension."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Extension of scalars commutes with the sheaf associated to a shifted graded module on projective spectrum, naturally for successive ring maps",
+   "results": {
+    "hits": [
+     "AlgebraicGeometry.ProjectiveSpectrum.Proj.toOpen_toSpec_val_c_app_assoc",
+     "AlgebraicGeometry.ProjectiveSpectrum.Proj.toOpen_toSpec_val_c_app",
+     "AlgebraicGeometry.Proj.awayMap_awayToSection_assoc",
+     "AlgebraicGeometry.ProjectiveSpectrum.StructureSheaf.structurePresheafCompForget",
+     "AlgebraicGeometry.Proj.awayMap_awayToSection",
+     "AlgebraicGeometry.ProjectiveSpectrum.Proj.structureSheaf",
+     "AlgebraicGeometry.Proj.SpecMap_awayMap_awayι_assoc",
+     "AlgebraicGeometry.Proj.fromOfGlobalSections_morphismRestrict"
+    ],
+    "n_hits": 8,
+    "note": "",
+    "subdirectory": "",
+    "digest": "a8d045c3197b0ca5"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern the structure sheaf, intersections of standard opens, ring-valued Proj maps, ordinary linear-map base change, or differentials; none constructs or compares arbitrary Proj twists under scalar extension."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Glue O(n) on projective spectra of sections of a quasi coherent graded algebra over affine base opens, with canonical section quotient on the degree d standard open union",
+   "results": {
+    "hits": [
+     "AlgebraicGeometry.Proj",
+     "AlgebraicGeometry.Proj.toSheafedSpace",
+     "AlgebraicGeometry.Proj.fromOfGlobalSections",
+     "AlgebraicGeometry.ProjectiveSpectrum.Proj.structureSheaf",
+     "AlgebraicGeometry.ProjectiveSpectrum.Proj.awayToΓ",
+     "AlgebraicGeometry.Proj.toBasicOpenOfGlobalSections",
+     "AlgebraicGeometry.ProjectiveSpectrum.Proj.toSpec",
+     "AlgebraicGeometry.Proj.awayι"
+    ],
+    "n_hits": 8,
+    "note": "",
+    "subdirectory": "",
+    "digest": "ed2109902efe1f12"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern the structure sheaf, intersections of standard opens, ring-valued Proj maps, ordinary linear-map base change, or differentials; none constructs or compares arbitrary Proj twists under scalar extension."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-scheme-proj-veronese-quotient-functor",
+  "date": "2026-10-24",
+  "group": "Q125"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "Supporting subargument for proper-support Grothendieck existence in Stacks Tag 08BE, serving the inherited compactification/direct-image prerequisite chain of sk-thm-sf-ctf-stability; the Chow modification in the third paragraph. Construction input: Tag 088S proof, apply 088R to the chosen open immersion into projective space; affine-base projectivity is handled separately. Supporting Tags 084B (lemma-relative-proj), 085Q (definition-blow-up), 085R (lemma-blowing-up-affine), 085S (lemma-flat-base-change-blowing-up), 085T (lemma-blowing-up-gives-effective-Cartier-divisor), 085Z (lemma-blowing-up-projective), and 083S (lemma-complement-effective-Cartier-divisor). Scheme coefficient comparison: descent.tex Tags 03DX (proposition-equivalence-quasi-coherent) and 05VG (lemma-equivalence-quasi-coherent-properties).. General graded-algebra construction underlying the blowup: representability and arbitrary-base-change comparison of relative Proj (084B and 085C). Scheme prerequisite for the compactification/direct-image paragraph of sk-thm-sf-ctf-stability.proof.md: constructions.tex 01NW, 01NY and 01NZ, the scheme functor used in the proof of spaces-divisors.tex 084B. Technical input: Tag 01NR (lemma-glue-relative-proj-twists), Tag 01MS (lemma-when-invertible), equation-Ud before Tag 01N8, and the open-immersion comparison in Tag 01NY (lemma-relative-proj).",
+   "via": [
+    "lem-sfb-scheme-proj-veronese-quotient-functor",
+    "lem-sfb-space-relative-proj-scheme-tests",
+    "lem-sfb-space-blowup-chart-properties",
+    "lem-sfb-space-blowup-embedding-extension",
+    "lem-sfb-space-chow-dense-modification",
+    "lem-sfb-space-supported-adic-existence",
+    "lem-sfb-space-coherent-formal-effectivity",
+    "lem-sfb-space-coherent-stack-general",
+    "lem-sfb-space-quot-representability",
+    "lem-sfb-space-hilbert-representability",
+    "lem-sfb-space-hom-representability",
+    "lem-sfb-curve-descent-isom-spaces",
+    "lem-sfb-nodal-curve-stack-smooth",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-relative-proj-twists-degree-opens",
+  "worker": "stage1",
+  "summary": "Glued all integer twists using degreewise affine scalar extension and a new normalized scalar-extension twist comparison. Reused module gluing and graded-module sheaf existence. Wrote the overlap refinement, degree-open descent, local frame inverses, degree-surjectivity, covering and Veronese tensor compatibility explicitly. Statement unchanged.",
+  "blueprint": "Inherited prerequisite for the compactification/direct-image paragraph of latest sk-thm-sf-ctf-stability.proof.md, through the existing Chow modification/relative Proj branch. The seven steps realize 01NR and its affine twist transitions, then 01N5/01MS and the 01NY degree-divisibility comparison; no chapter or unit route is replaced.",
+  "tool_uses": [
+   {
+    "node": "lem-nagata-proj-affine-restriction",
+    "why": "Identifies the already constructed affine restriction maps on the underlying glued Proj; our unit has no substitute for this scheme-level tool."
+   },
+   {
+    "node": "lem-weil-pbc-glue-sheaves-of-modules",
+    "why": "Effective gluing and uniqueness of module sheaves and their morphisms on open covers; a generic sheaf tool, not a replacement of the compactification route."
+   },
+   {
+    "node": "lem-weil-pbc-proj-graded-module-sheaf-exists",
+    "why": "Its quasi-coherence clause applies to each shifted module A(j); a generic absolute-Proj construction used inside the fixed relative-Proj route."
+   },
+   {
+    "node": "lem-nagata-affine-proj-scalar-extension",
+    "why": "Its explicit inverse-image formula for standard opens identifies degree-generated loci after affine base restriction; it makes no twist assertion."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-nagata-proj-affine-restriction",
+  "lem-weil-pbc-glue-sheaves-of-modules",
+  "lem-weil-pbc-proj-graded-module-sheaf-exists",
+  "lem-nagata-affine-proj-scalar-extension"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q03-665b4022c",
+  "group": "Q03",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q03-665b4022c (reviewer sub-agent of L); spot-checked: Read the item, the new node and every cited statement in full, against Stacks constructions.tex: 01NO/01NP (l.3380), 01NR (l.3465), 01MY (l.2054), 01MZ, 01N2(3) (l.2245), 01MS (l.1769) and equation-Ud (l.2390). The statement is unchanged (identical to the live/side-live unsplit node). This is a first split, with no repair note and no SGA. Steps: step 1 applies 01LN section base change degree by degree, then the new node and the proj-affine-restriction scheme maps. Step 2 glues on nonaffine overlaps by affine refinement using module-gluing (1)+(2); quasi-coherence comes from clause (c). Step 3 builds multiplication on fractions via the bilinear universal property; E_0=O_Y from θ_0. Step 4 builds η via the pullback adjunction and gets normalised uniqueness from gluing (1). Step 5 shows equality, not just inclusion, of the degree-open unions, via r^{-1}D_+(a)=D_+(ψa) and b=Σs_iψ(a_i). Step 6 is the 01MS frame calculation, including k=0 and surjectivity of η_d. Step 7 covers the cover, Y_d⊂Y_ad and the Veronese equality b/f^{an}. Checked small cases: k[t] with deg 2 (Y_1 empty), S=R/I, S=0, nilpotent f, nonseparated base. New node lem-sfb-proj-scalar-extension-twist-comparison (01N2(3)+01MY+01MZ for any R→S) is correct: (A_f)_j⊗(S⊗(A_f)_0)=S⊗(A_f)_j. It is not a duplicate of lem-nagata-affine-proj-scalar-extension, lem-nagata-proj-affine-restriction, lem-trf-local-proj-isomorphism-compatibility, lem-sfb-graded-proj-quotient-twist-comparison or the other 01MY/01N2/01NR citers, all read. Accepted the 4 declared tool_uses as generic tools. FIX: the new node fixed B=S⊗_R A literally, but step 1 applies it to B(W), which is only isomorphic to it. I generalised the node to a graded S-algebra isomorphism β:S⊗_R A≅B with ψ(a)=β(1⊗a), matching its stmt_dep. I stated the composition clause precisely (γ∘(id⊗β), r_{χψ}=r_ψ∘r_χ, θ^{χψ}=θ^χ∘r_χ^*θ^ψ) and added the default lean_audit. I adjusted step 1 text to name β, ψ=restriction and transitivity of the base-change isomorphisms; uses and proof_deps are unchanged.; 2 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.RelativeProjTwistsDegreeOpens",
+  "declaration": "AlgebraicGeometry.RelativeProjAlgebra.exists_twists_degreeOpens",
+  "declarations": [
+   "AlgebraicGeometry.RelativeProjAlgebra.degreeOpen",
+   "AlgebraicGeometry.RelativeProjAlgebra.sectionElement",
+   "AlgebraicGeometry.RelativeProjAlgebra.TwistSystem",
+   "AlgebraicGeometry.RelativeProjAlgebra.TwistSystem.chartSection",
+   "AlgebraicGeometry.RelativeProjAlgebra.TwistSystem.multiply",
+   "AlgebraicGeometry.RelativeProjAlgebra.TwistSystem.homogeneousSection",
+   "AlgebraicGeometry.RelativeProjAlgebra.TwistSystem.power",
+   "AlgebraicGeometry.RelativeProjAlgebra.TwistSystem.groupedPower",
+   "AlgebraicGeometry.RelativeProjAlgebra.TwistSystem.Normalized",
+   "AlgebraicGeometry.RelativeProjAlgebra.TwistSystem.Respects",
+   "AlgebraicGeometry.RelativeProjAlgebra.exists_twists_degreeOpens"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/RelativeProjTwistsDegreeOpens.lean",
+  "statement": "theorem exists_twists_degreeOpens (A : RelativeProjAlgebra X) : ∃ D : A.TwistSystem, D.Normalized ∧ (∀ D' : A.TwistSystem, D'.Normalized → ∃! e : ∀ j : ℤ, D.E j ≅ D'.E j, D.Respects D' e) ∧ (∀ (V : X.affineOpens) (d : ℕ), 0 < d → A.affineData.relProjι V ⁻¹ᵁ A.degreeOpen d = ⨆ a : A.affineData.grading V d, Proj.basicOpen (A.affineData.grading V) a.val) ∧ (⨆ d : {d : ℕ // 0 < d}, A.degreeOpen d.val) = ⊤ ∧ (∀ (d a : ℕ), 0 < d → 0 < a → A.degreeOpen d ≤ A.degreeOpen (a * d)) ∧ (∀ d : ℕ, 0 < d → ((D.E d).restrict (A.degreeOpen d).ι).IsInvertible ∧ (∀ k : ℕ, IsIso ((restrictFunctor (A.degreeOpen d).ι).map (D.power d k))) ∧ Epi ((restrictFunctor (A.degreeOpen d).ι).map (D.η d))) ∧ (∀ (d a n : ℕ), 0 < d → 0 < a → (restrictFunctor (A.degreeOpen d).ι).map (((D.E d).tensorPowMulIso a n).hom ≫ D.groupedPower d a n ≫ D.power (a * d) n) = (restrictFunctor (A.degreeOpen d).ι).map (D.power d (a * n) ≫ eqToHom (congrArg D.E (by push_cast; ring))))",
+  "branch": "newtargets-dag",
+  "by": "N9",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-fe2bff0e6",
+  "group": "N9",
+  "result": "pass",
+  "note": "Statement verbatim, decls match file; only lean field changed vs live node, no parallel supersession. Clause-by-clause vs node/01NR/01MS/01N5/01NY: E_j qc (ℤ), unit pinned to unitToTwistZero, mul+assoc/comm/unit laws, η via tensorPullback with graded unit/mul, charts pinned (pointwise products, η=b/1 via unitToTwist, restriction=localRingHom of actual graded restriction ⇒ cocycles), ∃! normalized iso (Respects charts/unit/mul/η; normalization forces chart automorphisms = id since D_+(f), deg f>0, cover). degreeOpen explicit sup of images, chart-preimage equality for all affine V, d>0; cover, Y_d≤Y_ad; IsInvertible, IsIso power d k (k=0 incl.), Epi η_d; Veronese block-multiplication equality all n. RelativeProjAlgebra total-qc ≡ degreewise qc; no finite generation/B_0=O_Z; one universe. Edge cases: empty, even-degree algebra, k=n=0, negative twists, nilpotent f, nonseparated base. No hollow defs, only sorry, docstrings with source/blueprint/7 steps. Advisory: X.Modules tensor instance (same localization tensor as cochainModulesMonoidal), tmulSection/unitToTwistZero not listed in dep records; second reading by the author group. No compile (no file changed)."
+ }
+}

@@ -1,0 +1,157 @@
+{
+ "id": "lem-weil-pbc-lisse-tower-algebraic-derived-presentation",
+ "kind": "statement",
+ "title": "LisseTowerAlgebraicDerivedPresentation",
+ "statement": "Let X be a Noetherian scheme, g:Y→X an immersion, d an adic coefficient datum on A, and M a normalized adic tower [def-weil-pbc-adic-coefficient-datum, def-weil-pbc-bounded-constructible-tower]. Let a≤b be integers. Assume every level has zero cohomology outside [a,b], and its restriction to Y has relatively finite-lisse cohomology over each constant quotient. There is a covering sieve V on the final pro-etale object of Y such that for every member U there is a pseudo-coherent E in D(AdicCompletion I A) [def-pc-ring-pseudo-coherent-complex] with zero cohomology outside [a,b]. For every pair of scalar maps φ,β satisfying the evaluation/projection equations of [def-weil-pbc-completed-constant-realization-data], let c be their actual relative completed constant realization. Whenever c is additive and exact, the reductions of c_D(E) have relatively finite-lisse cohomology, and there are quotient-linear isomorphisms e_n from those reductions to the restricted M_n. For every m≥n, e_m followed by the restricted transition equals the canonical reduction transition of c_D(E) followed by restriction of e_n. This constructs an algebraic derived object and its derived finite reductions; it constructs no bounded termwise sheaf model.",
+ "source": {
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Tags 09BV and 09AV; derived local-effectivity steps through algebraic reconstruction and projection-compatible finite reductions"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-adic-coefficient-datum",
+  "def-weil-pbc-proetale-modules",
+  "def-weil-pbc-bounded-constructible-tower",
+  "def-weil-proetale-constructible-sheaf",
+  "def-weil-derived-cohomology-sheaves",
+  "def-weil-abstract-derived-category",
+  "def-pc-ring-pseudo-coherent-complex",
+  "def-weil-pbc-completed-constant-realization-data"
+ ],
+ "proof": [
+  {
+   "text": "Apply the local algebraic reduction-diagram theorem using separate bounds (a,b) at every level. It gives a covering sieve and a normalized algebra tower K over the power quotients of C=AdicCompletion I A on every member, finite cohomology, a vanishing-transfer clause, and the geometric realization comparison for specified compatible algebraic reductions.",
+   "uses": [
+    "lem-weil-pbc-lisse-tower-local-algebraic-reduction-diagram"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The completion is Noetherian and complete for J=IC. Prove the kernel formula for completion evaluation and use its surjectivity to obtain C/J^(n+1)≃A/I^(n+1), so these quotient rings are finite. Form the C-linear scalar restriction maps s from t via the canonical derived composition comparisons. Transfer the given interval vanishing to K.",
+   "uses": [
+    "lem-weil-pbc-completion-noetherian-quotient-noetherian",
+    "lem-weil-pbc-adic-completion-mod-ideal"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use countable products and complete one minus the transition shift to a distinguished triangle E→prod Res K_n→prod Res K_n→E[1]. Normalized algebraic effectivity proves E pseudo-coherent and identifies its actual projections with compatible derived reductions. Homology commutes with the products. Finite-ring finite-type homology is a finite set, so finite-group Mittag--Leffler makes the preceding homology Roos operator epi. The long exact sequence makes H^q(E) a subobject of the zero product for q outside [a,b], proving both endpoint bounds. No bounded finite term representative is chosen.",
+   "uses": [
+    "lem-weil-pbc-pseudocoherent-normalized-algebra-tower",
+    "lem-weil-derived-limit-products-core",
+    "lem-weil-pbc-mittag-leffler",
+    "lem-pc-derived-limit-roos-abelian-groups"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For each C→C/J^(n+1), choose the left adjoint supplied by derived module scalar adjunction. Apply the reconstruction result to these actual adjunctions and obtain its specified e_n and unit-compatibility equations. Feed E, these adjunctions, e_n and the equations to the finite-diagram realization comparison on the selected member of the covering sieve. Pair its conclusion with the pseudo-coherence and interval vanishing already proved.",
+   "uses": [
+    "lem-weil-pbc-derived-module-scalar-adjunction",
+    "lem-weil-pbc-lisse-tower-local-algebraic-reduction-diagram"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-lisse-tower-local-algebraic-reduction-diagram",
+  "lem-weil-pbc-completion-noetherian-quotient-noetherian",
+  "lem-weil-pbc-adic-completion-mod-ideal",
+  "lem-weil-pbc-pseudocoherent-normalized-algebra-tower",
+  "lem-weil-derived-limit-products-core",
+  "lem-weil-pbc-mittag-leffler",
+  "lem-pc-derived-limit-roos-abelian-groups",
+  "lem-weil-pbc-derived-module-scalar-adjunction"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tag 09AV algebraic reconstruction from a local finite diagram; finite-group Mittag--Leffler interval argument, Y3 2026-10-27"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A normalized finite lisse derived tower is locally represented by a pseudo-coherent algebraic complex over the completed coefficient ring",
+   "results": "8 unrelated hits including DoldKan and DerivedCategory.Q; no match.",
+   "date": "2026-10-27",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AdicCompletion\", \"DerivedCategory\"",
+   "results": "0 hits.",
+   "date": "2026-10-27",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "lisse.*[Tt]ower|normalized.*[Tt]ower",
+   "results": "3 hits in FieldTheory.NormalizedTrace; no matching sheaf tower theorem.",
+   "date": "2026-10-27",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.LisseNormalizedTowerLocalModels",
+  "date": "2026-10-27",
+  "group": "S8"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-amplification-proper",
+   "place": "proof (c): Tags 09BV and 09AV; derived local-effectivity steps through algebraic reconstruction and projection-compatible finite reductions",
+   "via": [
+    "lem-weil-pbc-lisse-normalized-tower-local-models",
+    "lem-weil-pbc-normalized-constructible-local-effectivity"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.LisseTowerAlgebraicDerivedPresentation",
+  "file": "lean/Sheaf/Paper/LisseTowerAlgebraicDerivedPresentation.lean",
+  "declaration": "AlgebraicGeometry.Scheme.lisse_tower_algebraic_derived_presentation",
+  "statement": "theorem lisse_tower_algebraic_derived_presentation\n    (X Y : Scheme.{u}) [IsNoetherian X] (g : Y ⟶ X) [IsImmersion g]\n    {A : Type (u + 1)} [CommRing A] (d : AdicCoefficientDatum A) (M : AdicTower X d)\n    (a b : ℤ) (hab : a ≤ b)\n    (hbounded : ∀ (n : ℕ) (q : ℤ), (q < a ∨ b < q) →\n      IsZero ((DerivedCategory.homologyFunctor _ q).obj (M.level n)))\n    (hlisse : ∀ (n : ℕ) (q : ℤ),\n      IsRelativelyFiniteLisseModule g (A ⧸ d.ideal ^ (n + 1))\n        ((pbcRestrict ((adicTowerInverseImage g).map\n          (pbcLevelConstantComparison X d n).hom)).obj\n            ((DerivedCategory.homologyFunctor _ q).obj\n              ((adicTowerPullback g ((pbcAdicRings X d).obj (op n))).obj (M.level n))))) :\n    ∃ V : Sieve (⊤_ Y.ProEt), V ∈ ProEt.topology Y (⊤_ Y.ProEt) ∧\n      ∀ (U : Y.ProEt) (f : U ⟶ ⊤_ Y.ProEt), V f →\n        ∃ E : DerivedCategory (ModuleCat.{u + 1} (AdicCompletion d.ideal A)),\n          DerivedCategory.IsPseudoCoherent E ∧\n          (∀ q : ℤ, (q < a ∨ b < q) →\n            IsZero ((DerivedCategory.homologyFunctor _ q).obj E)) ∧\n          ∀ (φ : adicLisseConstantRing U.left (AdicCompletion d.ideal A) ⟶\n      adicLisseCompletedRing U.left d.ideal)\n            (_hφ : ∀ n : ℕ, φ ≫ limit.π (adicLisseRingSystem U.left d.ideal) (op n) =\n      (constantSheaf (ProEt.topology U.left) CommRingCat.{u + 1}).map\n        (CommRingCat.ofHom (AdicCompletion.evalₐ d.ideal (n + 1)).toRingHom))\n            (β : (adicTowerInverseImage (U.hom ≫ g)).obj (adicLisseCompletedRing X d.ideal) ⟶\n      adicLisseCompletedRing U.left d.ideal)\n            (_hβ : ∀ n : ℕ, β ≫ limit.π (adicLisseRingSystem U.left d.ideal) (op n) =\n      (adicTowerInverseImage (U.hom ≫ g)).map (limit.π (adicLisseRingSystem X d.ideal) (op n)) ≫\n        proEtaleConstantInverseImageMap (U.hom ≫ g) CommRingCat.{u + 1}\n          (CommRingCat.of (A ⧸ d.ideal ^ (n + 1)))),\n            let c := completedConstantRealization U.left d.ideal φ ⋙ pbcRestrict β ⋙\n      pbcRestrict ((adicTowerInverseImage (U.hom ≫ g)).map (pbcCompletedComparison X d).inv)\n            ∀ (hc : c.Additive) (hlim : PreservesFiniteLimits c)\n              (hcolim : PreservesFiniteColimits c),\n              letI := hc\n              letI := hlim\n              letI := hcolim\n              (∀ (n : ℕ) (q : ℤ),\n                IsRelativelyFiniteLisseModule (U.hom ≫ g) (A ⧸ d.ideal ^ (n + 1))\n                  ((pbcRestrict ((adicTowerInverseImage (U.hom ≫ g)).map\n                    (pbcLevelConstantComparison X d n).hom)).obj\n                      ((DerivedCategory.homologyFunctor _ q).obj\n                        ((pbcDerivedExtend ((adicTowerInverseImage (U.hom ≫ g)).map\n                  (pbcAdicProjection X d n))).obj (c.mapDerivedCategory.obj E))))) ∧\n              ∃ e : ∀ n : ℕ, (pbcDerivedExtend ((adicTowerInverseImage (U.hom ≫ g)).map\n                  (pbcAdicProjection X d n))).obj (c.mapDerivedCategory.obj E) ≅\n                  (adicTowerPullback (U.hom ≫ g) ((pbcAdicRings X d).obj (op n))).obj\n                    (M.level n),\n                ∀ (m n : ℕ) (hnm : n ≤ m),\n                  (e m).hom ≫ adicTowerRestrictedTransition d (U.hom ≫ g) M m n hnm =\n                    pbcReductionTransition\n                ((adicTowerInverseImage (U.hom ≫ g)).map (pbcAdicProjection X d m))\n                ((adicTowerInverseImage (U.hom ≫ g)).map (pbcAdicQuotient X d m n hnm))\n                ((adicTowerInverseImage (U.hom ≫ g)).map (pbcAdicProjection X d n))\n                (((adicTowerInverseImage (U.hom ≫ g)).map_comp _ _).symm.trans\n                  (congrArg (adicTowerInverseImage (U.hom ≫ g)).map\n                    (pbcAdicProjection_comp X d m n hnm)))\n                (c.mapDerivedCategory.obj E) ≫\n                      (pbcDerivedRestrict ((adicTowerInverseImage (U.hom ≫ g)).map\n                        (pbcAdicQuotient X d m n hnm))).map (e n).hom",
+  "branch": "sheaf-dag",
+  "by": "S8",
+  "date": "2026-10-27"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-9c288",
+  "group": "S8",
+  "result": "fix",
+  "landing": "20261026T201428-L-3380950",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-7398a",
+  "group": "Y3",
+  "result": "pass",
+  "landing": "20261026T235957-L-1476210",
+  "kind": "interface",
+  "note": "independent cc review: item Lean proof vs new lemma lisse_tower_local_algebraic_reduction_diagram and private helpers; both node lean.statements vs Lean (exact); item node proof_deps vs proof; new statement vs Stacks 09BV/09AV and CompletedConstantRealizationData definition; importer LisseNormalizedTowerLocalModels positional use vs _hφ/_hβ binder rename"
+ }
+}

@@ -1,0 +1,271 @@
+{
+ "id": "lem-trf-basis-cone-polynomial-normal",
+ "kind": "statement",
+ "title": "The algebra of a basis cone is a normal polynomial algebra",
+ "statement": "Let $k$ be a field [def-weil-field], $G$ an abelian group written additively, and $u_1,\\ldots,u_r$ a finite integral basis: every $g\\in G$ has a unique expression $g=\\sum_{i=1}^r n_i u_i$ with $n_i\\in\\mathbf Z$. Put $H=\\{\\sum_i a_i u_i:a_i\\in\\mathbf N\\}\\subseteq G$. For $T=H$ or $G$, define $k[T]=\\bigoplus_{t\\in T}ke^t$ with $e^te^{t'}=e^{t+t'}$, and regard $C=k[H]$ as the subalgebra of $k[G]$ supported on $H$. Define $B_0=k$ and $B_i=B_{i-1}[X_i]$ [def-weil-polynomial-ring]. The evaluation homomorphism $\\phi:B_r\\to C$ that fixes $k$ and sends $X_i$ to $e^{u_i}$ is an isomorphism of $k$-algebras. Its inverse sends $e^{\\sum_i a_i u_i}$ to $\\prod_iX_i^{a_i}$ and extends $k$-linearly. Both $B_r$ and $C$ are normal domains [def-weil-pbc-normal-ring]. The case $r=0$, where $G=H=\\{0\\}$ and $B_0=C=k$, is included.",
+ "source": {
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "Expose VIII, Lemma 3.2.12 proof, printed p.104: k[P^gp] identified with k[Z^n]; agent-written positive-basis polynomial identification and finite iteration of Stacks Tag 030A, algebra.tex, lemma-polynomial-domain-normal (lines 8130--8150)."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-weil-polynomial-ring",
+  "def-weil-pbc-normal-ring",
+  "def-trf-basis-cone-algebra"
+ ],
+ "proof": [
+  {
+   "text": "For $a\\in\\mathbf N^r$ put $h(a)=\\sum_i a_i u_i$ and $X^a=\\prod_iX_i^{a_i}$. The map $h:\\mathbf N^r\\to H$ is onto by the definition of $H$, and injective because equality of its values is equality of two integral-coordinate expressions in the given basis. Also $h(0)=0$ and $h(a+b)=h(a)+h(b)$. In particular every $h\\in H$ has exactly one nonnegative coordinate tuple. Since $0\\in H$ and $h(a)+h(b)=h(a+b)\\in H$, extension of a coefficient list by zero outside $H$ respects the unit, sums and convolution products. It injects $k[H]$ into $k[G]$: equality there is coefficientwise equality, hence equality on $H$. Its image is exactly the lists supported on $H$, which is the specified subalgebra $C$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose VIII, Lemma 3.2.12 proof, printed pp.104--105: group coordinates and free monoid identification; explicit elementary coefficient calculation by Q94."
+   }
+  },
+  {
+   "text": "By [def-weil-polynomial-ring], a polynomial in $B_i=B_{i-1}[X_i]$ has a unique finite coefficient list in $B_{i-1}$. Induction on $i$, starting with $B_0=k$, therefore expands every element of $B_r$ uniquely as a finite sum $\\sum_{a\\in\\mathbf N^r}c_aX^a$: at the induction step expand each coefficient and append its $X_i$ exponent. Coefficientwise addition adds the $c_a$, and the defining convolution product gives $X^aX^b=X^{a+b}$ by multiplying the powers in each variable.",
+   "uses": [
+    "def-weil-polynomial-ring"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose VIII, Lemma 3.2.12 proof, printed pp.104--105: group coordinates and free monoid identification; explicit elementary coefficient calculation by Q94."
+   }
+  },
+  {
+   "text": "Define $\\phi(\\sum_a c_aX^a)=\\sum_a c_ae^{h(a)}$ and $\\psi(\\sum_{h\\in H}d_he^h)=\\sum_a d_{h(a)}X^a$. These sums are finite, since $h$ is a bijection and both input supports are finite. They preserve sums and scalars; on products each sends the pair of basis terms indexed by $a,b$ to the term indexed by $a+b$, with coefficient $c_ad_b$. Distributing the finite sums proves multiplicativity and preservation of $1$. Reindexing shows both composites are identities. For each $i$, the coordinate vector with entry $1$ at $i$ and $0$ elsewhere maps to $u_i$, so $\\phi(X_i)=e^{u_i}$; the zero vector shows that $\\phi$ fixes $k$. Any $k$-algebra homomorphism with these variable images sends $X^a$ to $e^{h(a)}$ and hence has the displayed formula on every finite coefficient expansion. Thus $\\phi$ is exactly the stated evaluation homomorphism, and $\\psi(e^{\\sum_i a_iu_i})=X^a$ is its stated inverse.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose VIII, Lemma 3.2.12 proof, printed pp.104--105: group coordinates and free monoid identification; explicit elementary coefficient calculation by Q94."
+   }
+  },
+  {
+   "text": "A field [def-weil-field] is a domain, since $ab=0$ and $a\\ne0$ imply $b=a^{-1}ab=0$. Every fraction $a/b$ with $b\\ne0$ already equals $ab^{-1}\\in k$, so $B_0=k$ is a normal domain [def-weil-pbc-normal-ring]. Inductively, if $B_{i-1}$ is a normal domain, [lem-weil-pbc-polynomial-ring-normal-domain] applies and makes $B_i=B_{i-1}[X_i]$ a normal domain. Finite induction gives the assertion for $B_r$.",
+   "uses": [
+    "def-weil-field",
+    "def-weil-pbc-normal-ring",
+    "lem-weil-pbc-polynomial-ring-normal-domain"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 030A, lemma-polynomial-domain-normal, lines 8130--8150; finite induction from the field base case."
+   }
+  },
+  {
+   "text": "The isomorphism makes $C$ a domain: $1_C\\ne0$ because $\\psi(1_C)=1_{B_r}\\ne0$, and $xy=0$ gives $\\psi(x)\\psi(y)=0$, hence $x=0$ or $y=0$. Define $\\widetilde\\psi:\\operatorname{Frac}(C)\\to\\operatorname{Frac}(B_r)$ by $x/y\\mapsto\\psi(x)/\\psi(y)$. Denominators stay nonzero by injectivity of $\\psi$. Cross-multiplication proves well-definedness, and the fraction formulas for sums and products show this is a ring homomorphism with inverse $a/b\\mapsto\\phi(a)/\\phi(b)$. If $z\\in\\operatorname{Frac}(C)$ satisfies $z^n+\\sum_{j<n}c_jz^j=0$ with $c_j\\in C$, applying $\\widetilde\\psi$ gives $\\widetilde\\psi(z)^n+\\sum_{j<n}\\psi(c_j)\\widetilde\\psi(z)^j=0$. Normality of $B_r$ gives $\\widetilde\\psi(z)=b\\in B_r$, so the inverse fraction map yields $z=\\phi(b)\\in C$. This is exactly [def-weil-pbc-normal-ring]. For $r=0$ the exponent tuple is empty, $G=H=\\{0\\}$, and both maps are the identity of $k$ under $e^0=1$.",
+   "uses": [
+    "def-weil-pbc-normal-ring"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose VIII, Lemma 3.2.12 proof, printed pp.104--105: group coordinates and free monoid identification; explicit elementary coefficient calculation by Q94."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-polynomial-ring",
+  "def-weil-field",
+  "def-weil-pbc-normal-ring",
+  "lem-weil-pbc-polynomial-ring-normal-domain"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "Expose VIII, Lemma 3.2.12 proof, printed pp.104--105: group coordinates and free monoid identification; explicit elementary coefficient calculation by Q94. Normality is finite iteration of Stacks Tag 030A, algebra.tex, lemma-polynomial-domain-normal."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "(MonoidAlgebra|AddMonoidAlgebra).*(equivMvPolynomial|IsIntegrallyClosed)|MvPolynomial.*(equiv|IsIntegrallyClosed)",
+   "results": "25 hits; actual returned names/files: Mathlib/FieldTheory/IsAlgClosed/Classification.lean, Mathlib/LinearAlgebra/Matrix/Charpoly/Univ.lean, Mathlib/FieldTheory/AxGrothendieck.lean, Mathlib/Combinatorics/Nullstellensatz.lean, Mathlib/LinearAlgebra/SymmetricAlgebra/Basis.lean, Mathlib/LinearAlgebra/SymmetricAlgebra/Basis.lean, Mathlib/LinearAlgebra/SymmetricAlgebra/Basis.lean, Mathlib/LinearAlgebra/SymmetricAlgebra/Basis.lean",
+   "date": "2026-10-22",
+   "verdict": "no match: the returned polynomial normality instance and AddMonoidAlgebra.domCongr are ingredients; neither constructs the coordinate equivalence for the concrete submonoid H and identifies the stated evaluation/inverse while also giving normality"
+  },
+  {
+   "tool": "loogle",
+   "query": "AddMonoidAlgebra, MvPolynomial",
+   "results": "12 hits; actual returned names/files: MvPolynomial.support_smul, MvPolynomial.support_smul_eq, MvPolynomial.coeff_smul, MvPolynomial.constantCoeff_smul, MvPolynomial.smul_monomial, MvPolynomial.totalDegree_smul_le, MvPolynomial.isEmptyAlgEquiv_apply, MvPolynomial.isEmptyRingEquiv_apply",
+   "date": "2026-10-22",
+   "verdict": "no match: the returned polynomial normality instance and AddMonoidAlgebra.domCongr are ingredients; neither constructs the coordinate equivalence for the concrete submonoid H and identifies the stated evaluation/inverse while also giving normality"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a finite basis u_i of a torsion-free abelian group, the algebra over a field on the monoid of nonnegative basis combinations is isomorphic to a polynomial ring and is integrally closed.",
+   "results": "8 hits; actual returned names/files: NumberField.mem_span_integralBasis, NumberField.integralBasis, NumberField.integralBasis_apply, NumberField.RingOfIntegers.instFreeInt, FiniteDimensional.exists_is_basis_integral, NumberField.integralBasis_repr_apply, NumberField.RingOfIntegers.basis, integralClosure_le_span_dualBasis",
+   "date": "2026-10-22",
+   "verdict": "no match: the returned polynomial normality instance and AddMonoidAlgebra.domCongr are ingredients; neither constructs the coordinate equivalence for the concrete submonoid H and identifies the stated evaluation/inverse while also giving normality"
+  },
+  {
+   "tool": "grep",
+   "query": "IsIntegrallyClosed|domCongr|equivMvPolynomial|finSuccEquiv",
+   "results": "5 hits; actual returned names/files: Mathlib/RingTheory/MvPolynomial/Homogeneous.lean, Mathlib/RingTheory/MvPolynomial/Homogeneous.lean, Mathlib/RingTheory/MvPolynomial/Homogeneous.lean, Mathlib/RingTheory/MvPolynomial/Homogeneous.lean, Mathlib/RingTheory/MvPolynomial/Homogeneous.lean; directory Mathlib/RingTheory/MvPolynomial",
+   "date": "2026-10-22",
+   "verdict": "no match: the returned polynomial normality instance and AddMonoidAlgebra.domCongr are ingredients; neither constructs the coordinate equivalence for the concrete submonoid H and identifies the stated evaluation/inverse while also giving normality"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The algebra of nonnegative linear combinations of a finite integral basis is a polynomial algebra and is a normal integral domain.",
+   "results": "UNAVAILABLE: service unavailable: {\"error\":\"Rate limit exceeded: 60 per 1 minute\"}",
+   "date": "2026-10-22",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Given a Z basis of a finite rank free abelian group G, the monoid ring of its positive orthant over a field is a normal domain; evaluation Xi to the corresponding group basis monomial is a polynomial algebra isomorphism.",
+   "results": "8 hits; actual returned names/files: NumberField.integralBasis_apply, NumberField.integralBasis_repr_apply, NumberField.canonicalEmbedding.latticeBasis_apply, NumberField.canonicalEmbedding.integralBasis_repr_apply, NumberField.mixedEmbedding.fundamentalCone.integerSetEquiv_apply_fst, NumberField.Units.basisOfIsMaxRank_fundSystem, NumberField.mixedEmbedding.latticeBasis_repr_apply, NumberField.RingOfIntegers.basis",
+   "date": "2026-10-22",
+   "verdict": "no match: the returned polynomial normality instance and AddMonoidAlgebra.domCongr are ingredients; neither constructs the coordinate equivalence for the concrete submonoid H and identifies the stated evaluation/inverse while also giving normality"
+  },
+  {
+   "tool": "grep",
+   "query": "IsIntegrallyClosed|isIntegrallyClosed|domCongr|finSuccEquiv",
+   "results": "14 hits; actual returned names/files: Mathlib/Algebra/MvPolynomial/SchwartzZippel.lean, Mathlib/Algebra/MvPolynomial/SchwartzZippel.lean, Mathlib/Algebra/MvPolynomial/SchwartzZippel.lean, Mathlib/Algebra/MvPolynomial/SchwartzZippel.lean, Mathlib/Algebra/MvPolynomial/Funext.lean, Mathlib/Algebra/MvPolynomial/Funext.lean, Mathlib/Algebra/MvPolynomial/Equiv.lean, Mathlib/Algebra/MvPolynomial/Equiv.lean; directory Mathlib/Algebra/MvPolynomial",
+   "date": "2026-10-22",
+   "verdict": "no match: the returned polynomial normality instance and AddMonoidAlgebra.domCongr are ingredients; neither constructs the coordinate equivalence for the concrete submonoid H and identifies the stated evaluation/inverse while also giving normality"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The submonoid generated by a chosen basis of Z^r has monoid algebra isomorphic to the polynomial ring k[X1,...,Xr], via the monomial evaluation map. This algebra is integrally closed.",
+   "results": "8 hits; actual returned names/files: instIsIntegrallyClosedPolynomialOfIsDomain, FunctionField.ringOfIntegers.instIsIntegralClosureSubtypeMemSubalgebraPolynomial, NumberField.integralBasis_apply, NumberField.integralBasis_repr_apply, NumberField.mem_span_integralBasis, NumberField.integralBasis, PowerBasis.ofAdjoinEqTop', Algebra.adjoin.powerBasis'_gen",
+   "date": "2026-10-22",
+   "verdict": "no match: the returned polynomial normality instance and AddMonoidAlgebra.domCongr are ingredients; neither constructs the coordinate equivalence for the concrete submonoid H and identifies the stated evaluation/inverse while also giving normality"
+  },
+  {
+   "tool": "grep",
+   "query": "IsIntegrallyClosed.*Polynomial|IsIntegrallyClosed.*MvPolynomial|instIsIntegrallyClosedPolynomialOfIsDomain|isIntegrallyClosed.*Polynomial",
+   "results": "1 hits; actual returned names/files: Mathlib/RingTheory/Polynomial/Eisenstein/IsIntegral.lean; directory Mathlib/RingTheory",
+   "date": "2026-10-22",
+   "verdict": "no match: the returned polynomial normality instance and AddMonoidAlgebra.domCongr are ingredients; neither constructs the coordinate equivalence for the concrete submonoid H and identifies the stated evaluation/inverse while also giving normality"
+  },
+  {
+   "tool": "grep",
+   "query": "domCongr|finSuccEquiv|IsIntegrallyClosedPolynomial|equivMvPolynomial",
+   "results": "25 hits; returned names/files: Mathlib/NumberTheory/NumberField/Units/Regulator.lean, Mathlib/NumberTheory/NumberField/Units/Regulator.lean, Mathlib/NumberTheory/NumberField/Units/Regulator.lean, Mathlib/Logic/Equiv/Fin/Basic.lean, Mathlib/Logic/Equiv/Fin/Basic.lean, Mathlib/Logic/Equiv/Fin/Basic.lean, Mathlib/Logic/Equiv/Fin/Basic.lean, Mathlib/Logic/Equiv/Fin/Basic.lean",
+   "date": "2026-10-22",
+   "verdict": "no exact match: the concrete coordinate bijection, its evaluation/inverse formulas and normality together require the explicit argument; domCongr, toFinsuppIsoAlg and finSuccEquiv supply general ingredients only"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A monoid algebra on the positive orthant of a lattice basis is a polynomial ring and a normal domain.",
+   "results": "8 hits; returned names/files: MonoidAlgebra, MonoidAlgebra.instFree, MvPolynomial, MonoidAlgebra.ring, MonoidAlgebra.instIsDomainOfIsCancelAddOfUniqueProds, Polynomial.instNormalizationMonoid, MonoidAlgebra.nonUnitalCommRing, MonoidAlgebra.algebra",
+   "date": "2026-10-22",
+   "verdict": "no exact match: the concrete coordinate bijection, its evaluation/inverse formulas and normality together require the explicit argument; domCongr, toFinsuppIsoAlg and finSuccEquiv supply general ingredients only"
+  },
+  {
+   "tool": "loogle",
+   "query": "AddMonoidAlgebra, MvPolynomial",
+   "results": "12 hits; returned names/files: MvPolynomial.support_smul, MvPolynomial.support_smul_eq, MvPolynomial.coeff_smul, MvPolynomial.constantCoeff_smul, MvPolynomial.smul_monomial, MvPolynomial.totalDegree_smul_le, MvPolynomial.isEmptyAlgEquiv_apply, MvPolynomial.isEmptyRingEquiv_apply",
+   "date": "2026-10-22",
+   "verdict": "no exact match: the concrete coordinate bijection, its evaluation/inverse formulas and normality together require the explicit argument; domCongr, toFinsuppIsoAlg and finSuccEquiv supply general ingredients only"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The monoid algebra of the nonnegative cone on an integral basis of a free abelian group is isomorphic to an iterated polynomial algebra over a field and is integrally closed.",
+   "results": "8 hits; returned names/files: NumberField.integralBasis_apply, NumberField.integralBasis_repr_apply, NumberField.mem_span_integralBasis, integralClosure_le_span_dualBasis, NumberField.RingOfIntegers.instFreeInt, NumberField.integralBasis, NumberField.RingOfIntegers.algEquiv, NumberField.RingOfIntegers.basis",
+   "date": "2026-10-22",
+   "verdict": "no exact match: the concrete coordinate bijection, its evaluation/inverse formulas and normality together require the explicit argument; domCongr, toFinsuppIsoAlg and finSuccEquiv supply general ingredients only"
+  },
+  {
+   "tool": "grep",
+   "query": "stacks 030A|IsIntegrallyClosed R\\[X\\]",
+   "results": "3 hits; returned names/files: Mathlib/RingTheory/Polynomial/IsIntegral.lean, Mathlib/RingTheory/Polynomial/IsIntegral.lean, Mathlib/RingTheory/Polynomial/IsIntegral.lean; directory Mathlib/RingTheory/Polynomial",
+   "date": "2026-10-22",
+   "verdict": "ingredient match: Stacks 030A instance at Polynomial/IsIntegral.lean:179--181, already represented by lem-weil-pbc-polynomial-ring-normal-domain"
+  },
+  {
+   "tool": "grep",
+   "query": "def domCongr|def finSuccEquiv|def curryAlgEquiv|def isEmptyAlgEquiv",
+   "results": "8 hits; returned names/files: Mathlib/Algebra/MonoidAlgebra/Basic.lean, Mathlib/Algebra/MonoidAlgebra/Basic.lean, Mathlib/Algebra/MonoidAlgebra/Basic.lean, Mathlib/Algebra/MonoidAlgebra/Basic.lean, Mathlib/Algebra/SkewMonoidAlgebra/Lift.lean, Mathlib/Algebra/SkewMonoidAlgebra/Lift.lean, Mathlib/Algebra/MvPolynomial/Equiv.lean, Mathlib/Algebra/MvPolynomial/Equiv.lean; directory Mathlib/Algebra",
+   "date": "2026-10-22",
+   "verdict": "no exact match: the concrete coordinate bijection, its evaluation/inverse formulas and normality together require the explicit argument; domCongr, toFinsuppIsoAlg and finSuccEquiv supply general ingredients only"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Reindex a monoid algebra by an additive monoid isomorphism from a monoid generated freely by finitely many elements to natural exponent vectors, and identify it with repeated one variable polynomial rings.",
+   "results": "8 hits; returned names/files: Polynomial.toFinsuppIsoAlg, Polynomial.toFinsuppIsoAlg_symm_apply_toFinsupp, Polynomial.toFinsuppIso, Polynomial.toFinsuppIso_symm_apply, Polynomial.toFinsuppIsoLinear, MvPolynomial.finSuccEquiv, Polynomial.toFinsuppIsoLinear_symm_apply_toFinsupp, Polynomial.toFinsuppIsoAlg_apply",
+   "date": "2026-10-22",
+   "verdict": "no exact match: the concrete coordinate bijection, its evaluation/inverse formulas and normality together require the explicit argument; domCongr, toFinsuppIsoAlg and finSuccEquiv supply general ingredients only"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-affine-monoid-algebra-normalization",
+  "date": "2026-10-22",
+  "group": "NS"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Historical affine toric-normalization input, ILO VIII Lemma 3.2.9 and Lemma 3.2.12, p.104; returned affine-normalization proof Steps 4--5: choose a finite integral basis, identify its nonnegative monoid algebra with an iterated polynomial ring, and identify the full group algebra by inverting basis monomials.",
+   "via": [
+    "lem-trf-affine-monoid-algebra-normalization",
+    "lem-trf-toric-monoid-comparison",
+    "lem-trf-functorial-fan-desingularization",
+    "lem-trf-monoidal-resolution-tower",
+    "lem-trf-log-regular-desingularization",
+    "lem-trf-nodal-pair-projective-resolution",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-trf-basis-cone-polynomial-normal",
+  "worker": "stage1",
+  "summary": "Repair of returned head 1f2e19464ff: rebuilt from the current unsplit DAG item, retaining all current metadata, the five-step proof, citations and actual search records. Re-read all four dependency statements and verified all five quotation matches. Expanded Step 1 to check closure of H and the injective extension-by-zero algebra map into k[G], identifying its image with the specified C. Retained the precise evaluation and inverse formulas and explicit normality argument. No statement change, new nodes or new Mathlib leaves; rank zero and positive characteristic are included.",
+  "blueprint": "Historical toric-normalization branch recorded in blueprint.from.place: ILO VIII Lemma 3.2.12 proof, pp.104--105, and the polynomial-normality part of lem-trf-affine-monoid-algebra-normalization Step 4. The current locality statement no longer mentions this historical branch; its route and text are not changed.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q94-005b56b57",
+  "group": "Q94",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q94-005b56b57 (reviewer sub-agent of L); spot-checked: PASS, no fixes. Q94 005b56b5 is the fourth delivery; the earlier heads 6cb1dd81, d13df0b4 and 1f2e1946 each passed review and were refused at landing because the side completion had not been promoted to live. I compared this item with the 1f2e snapshot field by field: only Step 1 and the split_report changed. Statement, stmt_deps, source, proof_deps and Steps 2-5 are byte-identical. The item is still unsplit in clones/live and side-live, only the split fields differ from live, and there is no repair note for it. The four cited statements (def-weil-field, def-weil-polynomial-ring, def-weil-pbc-normal-ring, lem-weil-pbc-polynomial-ring-normal-domain) match live exactly. New Step 1 text: extending a coefficient list by zero outside H embeds k[H] in k[G]. I checked it: 0 is in H and h(a)+h(b)=h(a+b) is in H, so for H-supported lists the k[G] convolution only sums pairs from H and agrees with the k[H] product. The map is injective coefficientwise and its image is exactly C, so the step is correct and elementary. Re-read Steps 2-5: (2) multi-index expansion by induction from the finite-support and convolution clauses of def-weil-polynomial-ring; (3) phi and psi are mutually inverse, phi sends X_i to e^{u_i}, and any map with these images is unique; (4) field base case written out, then induction through the Stacks 030A Mathlib leaf, marked non-elementary; (5) the fraction-field transport and the transported monic equation are written out. Small cases checked: r=0, r=1, and Z^2 with basis (1,1),(0,1), where h(a,b)=(a,a+b). Source: ILO VIII 3.2.12, printed pp.104-105, with the proof honestly marked agent-written. No SGA, no new nodes, no tool_uses. Maintainer note: this item needs promotion, not another review."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.BasisConePolynomialNormal",
+  "declaration": "AddMonoidAlgebra.basisCone_polynomial_normal",
+  "declarations": [
+   "AddMonoidAlgebra.basisConePolynomialRing",
+   "AddMonoidAlgebra.basisConePolynomialVariable",
+   "AddMonoidAlgebra.basisConePolynomialEval",
+   "AddMonoidAlgebra.basisConeSupportedAlgebra",
+   "AddMonoidAlgebra.basisConeExponent",
+   "AddMonoidAlgebra.basisConeSupportedMonomial",
+   "AddMonoidAlgebra.basisConePolynomialEvaluation",
+   "AddMonoidAlgebra.basisCone_polynomial_normal"
+  ],
+  "file": "lean/Sheaf/RingTheory/BasisConePolynomialNormal.lean",
+  "statement": "theorem basisCone_polynomial_normal (b : Module.Basis (Fin r) ℤ G) : (∀ f : AddMonoidAlgebra k G, f ∈ basisConeSupportedAlgebra (k := k) b ↔ ∀ g : G, g ∉ basisCone b → f.coeff g = 0) ∧ ∃ φ : basisConePolynomialRing k r ≃ₐ[k] basisConeSupportedAlgebra (k := k) b, φ.toAlgHom = basisConePolynomialEvaluation (k := k) b ∧ (∀ i : Fin r, φ (basisConePolynomialVariable k r i) = (basisConeInclusion (k := k) b).rangeRestrict (basisConeVariable (k := k) b i)) ∧ (∀ (a : Fin r → ℕ) (c : k), φ.symm (basisConeSupportedMonomial b (basisConeExponent b a) c) = c • ∏ i, basisConePolynomialVariable k r i ^ a i) ∧ IsDomain (basisConePolynomialRing k r) ∧ IsIntegrallyClosed (basisConePolynomialRing k r) ∧ IsDomain (basisConeSupportedAlgebra (k := k) b) ∧ IsIntegrallyClosed (basisConeSupportedAlgebra (k := k) b)",
+  "branch": "sheaf-dag",
+  "by": "Q17",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "H2 repair: the shared basisCone, basisConeVariable and basisConeInclusion are owned by def-trf-basis-cone-algebra in Sheaf.RingTheory.BasisConeAlgebra. The statement imports that definition module directly. The literal recursive polynomial tower and all theorem clauses are unchanged."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-01847539d",
+  "group": "Q17",
+  "result": "pass",
+  "note": "Item node differs from side-live only in its new lean record and stmt_deps (+def-trf-basis-cone-algebra, the definition-node owner of basisCone/basisConeVariable/basisConeInclusion, already on base and identical to side-live): correct H2 repair. lean.statement is verbatim in the file. H3: field k, AddCommGroup G with independent universes, Module.Basis (Fin r) ℤ G, H = closure of the basis, C = range of the extension-by-zero inclusion with an exact support clause, literal tower B0=k and Bi=Bi-1[X], φ pinned by φ.toAlgHom = evaluation (lastCases/castSucc indexing consistent), variable images e^{u_i}, inverse c·∏X_i^{a_i} for all a and c, IsDomain ∧ IsIntegrallyClosed on both rings. No extra hypotheses. r=0 and positive characteristic covered. All 7 helpers have real data; the theorem is sorry; docstrings carry source, blueprint tag and the 5 proof steps; no line over 100 chars; no name clashes. Not recompiled (no file changed); worker reports compile and deliver2 --no-push passed. Advisory only: proof-only import Mathlib.RingTheory.Polynomial.IsIntegral."
+ }
+}

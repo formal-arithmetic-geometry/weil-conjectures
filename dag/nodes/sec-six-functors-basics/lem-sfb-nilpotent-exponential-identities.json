@@ -1,0 +1,94 @@
+{
+ "id": "lem-sfb-nilpotent-exponential-identities",
+ "kind": "statement",
+ "title": "Finite nilpotent exponential: bounds, inverse, maps and commuting sums",
+ "statement": "Let $A$ and $B$ be unital associative rings equipped with central unital maps $\\mathbf Q\\to A$ and $\\mathbf Q\\to B$. An element $a\\in A$ is nilpotent if $a^N=0$ for some integer $N\\geq1$. For nilpotent $a$, the element\n$$E_A(a)=\\sum_{j=0}^{N-1}\\frac{a^j}{j!}$$\nis independent of the chosen bound $N$ with $a^N=0$. It satisfies\n$$E_A(a)E_A(-a)=1=E_A(-a)E_A(a).$$\nFor every unital ring homomorphism $\\phi:A\\to B$ and nilpotent $a\\in A$, one has\n$$\\phi(E_A(a))=E_B(\\phi(a)).$$\nFor nilpotent $a,b,a+b\\in A$ with $ab=ba$, one has\n$$E_A(a+b)=E_A(a)E_A(b).$$\nThe statement includes matrix rings [def-weil-matrix] and rings of endomorphisms of finite free modules over any commutative $\\mathbf Q$-algebra, including the zero ring.",
+ "source": {
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "14.28, printed p.287, finite nilpotent exponential; the commuting-sum identity used in 14.31, formula (93), printed p.288. Exact algebraic identities: Mathlib/RingTheory/Nilpotent/Exp.lean:55--59,81--82,177--195."
+ },
+ "stmt_deps": [
+  "def-weil-matrix"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "loogle",
+   "query": "\"IsNilpotent\", \"exp\"",
+   "results": "11 hits; IsNilpotent.exp, IsNilpotent.exp_zero, IsNilpotent.isUnit_exp, IsNilpotent.isNilpotent_exp_sub_one, IsNilpotent.exp_mul_exp_neg_self, IsNilpotent.exp_neg_mul_exp_self, IsNilpotent.map_exp, IsNilpotent.exp_add_of_commute",
+   "date": "2026-10-23",
+   "verdict": "match: IsNilpotent.exp_eq_sum (58) gives the finite sum for every nilpotence bound; exp_mul_exp_neg_self (177) and exp_neg_mul_exp_self (181) give the inverse identities; map_exp (190) gives compatibility with ring homomorphisms; exp_add_of_commute (81) gives the commuting-sum identity. All in Mathlib/RingTheory/Nilpotent/Exp.lean; no topology or completeness hypotheses."
+  },
+  {
+   "tool": "leansearch",
+   "query": "For commuting nilpotent elements of a rational algebra the finite exponential of their sum is the product, and applying a ring homomorphism commutes with finite exponentials",
+   "results": "8 hits; IsNilpotent.exp_add_of_commute, IsNilpotent.exp, IsNilpotent.map_exp, Matrix.exp_sum_of_commute, Module.End.commute_exp_left_of_commute, NormedSpace.exp_add_of_commute_of_mem_ball, NormedSpace.exp_sum_of_commute, NormedSpace.exp_sum",
+   "date": "2026-10-23",
+   "verdict": "match: IsNilpotent.exp_eq_sum (58) gives the finite sum for every nilpotence bound; exp_mul_exp_neg_self (177) and exp_neg_mul_exp_self (181) give the inverse identities; map_exp (190) gives compatibility with ring homomorphisms; exp_add_of_commute (81) gives the commuting-sum identity. All in Mathlib/RingTheory/Nilpotent/Exp.lean; no topology or completeness hypotheses."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "In a rational algebra nilpotent elements have a finite polynomial exponential which is invertible, is preserved by ring homomorphisms, and turns sums of commuting nilpotents into products",
+   "results": "8 hits; IsNilpotent.exp_add_of_commute, IsNilpotent.exp, IsNilpotent.isUnit_exp, IsNilpotent.map_exp, IsNilpotent.exp_mul_exp_neg_self, IsNilpotent.exp_neg_mul_exp_self, IsNilpotent.isNilpotent_exp_sub_one, IsNilpotent.exp_eq_sum",
+   "date": "2026-10-23",
+   "verdict": "match: IsNilpotent.exp_eq_sum (58) gives the finite sum for every nilpotence bound; exp_mul_exp_neg_self (177) and exp_neg_mul_exp_self (181) give the inverse identities; map_exp (190) gives compatibility with ring homomorphisms; exp_add_of_commute (81) gives the commuting-sum identity. All in Mathlib/RingTheory/Nilpotent/Exp.lean; no topology or completeness hypotheses."
+  },
+  {
+   "tool": "grep",
+   "query": "^theorem (exp_eq_sum|exp_add_of_commute|exp_mul_exp_neg_self|exp_neg_mul_exp_self|map_exp)",
+   "results": "5 hits; Mathlib/RingTheory/Nilpotent/Exp.lean, Mathlib/RingTheory/Nilpotent/Exp.lean, Mathlib/RingTheory/Nilpotent/Exp.lean, Mathlib/RingTheory/Nilpotent/Exp.lean, Mathlib/RingTheory/Nilpotent/Exp.lean",
+   "date": "2026-10-23",
+   "verdict": "match: IsNilpotent.exp_eq_sum (58) gives the finite sum for every nilpotence bound; exp_mul_exp_neg_self (177) and exp_neg_mul_exp_self (181) give the inverse identities; map_exp (190) gives compatibility with ring homomorphisms; exp_add_of_commute (81) gives the commuting-sum identity. All in Mathlib/RingTheory/Nilpotent/Exp.lean; no topology or completeness hypotheses."
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "IsNilpotent.exp_eq_sum, IsNilpotent.exp_mul_exp_neg_self, IsNilpotent.exp_neg_mul_exp_self, IsNilpotent.map_exp, IsNilpotent.exp_add_of_commute",
+  "file": "Mathlib/RingTheory/Nilpotent/Exp.lean",
+  "line": 58,
+  "how": "Specializes in one line per clause: exp_eq_sum at 58--59 identifies E_A(a) with IsNilpotent.exp a for every bound, hence gives independence; exp_mul_exp_neg_self at 177--179 and exp_neg_mul_exp_self at 181--183 give the two inverse equations; map_exp at 190--195 gives the homomorphism equation; exp_add_of_commute at 81--82 gives the commuting-sum equation. Unital rational algebras provide Ring and Module ℚ; no finite-dimensionality or nontriviality assumptions. Matrices and finite-free endomorphisms are instances of these rings."
+ },
+ "status": "mathlib",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-unipotent-exponential-construction",
+  "date": "2026-10-24",
+  "group": "Q21"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Haboush symmetric-power lifting for a trivial quotient representation. Supporting representation-theoretic input: Central covering of a reductive group by a torus and a simply connected semisimple group. Milne central-cover construction: Multiplication by a central torus with semisimple quotient and the derived group. Supporting input: Semisimple algebraic groups are perfect. Root-subgroup structure and the torus conjugation formula used to realize the rank-one commutator calculation in Milne Corollary 21.50. Supporting lemma: A one-dimensional smooth connected unipotent group is additive. Supporting structural ingredient for the one-dimensional classification: Milne Corollary 14.55 (positive characteristic) and the central-series argument preceding the induction in Proposition 14.32 (characteristic zero). Supporting lemma: Commutative unipotent groups in characteristic zero are vector groups. Exponential input: Milne 14.31, construction before Proposition 14.32; existence and functoriality only. Supporting input: Milne 14.31: exponentiating the differential in every representation, tensor compatibility (a), coefficient naturality, and formula (93) for commuting tangent vectors.",
+   "via": [
+    "lem-sfb-unipotent-exponential-construction",
+    "lem-sfb-char-zero-commutative-unipotent-vector-group",
+    "lem-sfb-unipotent-central-additive-subgroup",
+    "lem-sfb-one-dimensional-unipotent-additive",
+    "lem-sfb-reductive-root-subgroup-parametrizations",
+    "lem-sfb-semisimple-group-perfect",
+    "lem-sfb-central-torus-semisimple-derived-product",
+    "lem-sfb-reductive-torus-simply-connected-cover",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ }
+}

@@ -1,0 +1,135 @@
+{
+ "id": "lem-sf-constant-inverse-image-scalar-normalization",
+ "kind": "lemma",
+ "title": "Constant scalar normalization of algebraic inverse image",
+ "status": "split",
+ "import_flags": [],
+ "statement": "Let C and D be small sites in a universe u, with topologies J and K, and let G:C -> D be continuous. Let L:Sh(J,Type u) -> Sh(K,Type u) be left exact and left adjoint to continuous direct image along G. Let F be coherent algebraic inverse-image data for L, including its ring-natural underlying-set comparisons and its natural constant-ring isomorphism [lem-weil-pbc-constant-completion-equivalence] [def-weil-pbc-algebraic-inverse-image]. For any commutative ring A in this universe, the composite of the underlying-ring comparison L(underlying(constant_J A)) -> underlying(F.rings(constant_J A)) with the underlying map of F.constants(A) equals the adjoint transpose of the underlying canonical constant-ring map constant_J A -> G_*(constant_K A). The canonical map here is the unique ring-sheaf map whose precomposition with the constant-presheaf sheafification unit is the whiskered target unit [def-weil-pbc-constant-sheaf]. This is an equality only of set-sheaf morphisms; no module, open immersion, slice, or model-coordinate comparison occurs.",
+ "stmt_deps": [
+  "lem-weil-pbc-constant-completion-equivalence",
+  "def-weil-pbc-algebraic-inverse-image",
+  "def-weil-pbc-constant-sheaf"
+ ],
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tags 00YV and 03D2, algebraic inverse image and constant coefficients; the ring-only constant-section calculation of Step 2 of lem-sf-constant-open-restriction-model-comparison."
+ },
+ "proof": [
+  {
+   "text": "For each source object U, precompose the set-sheaf adjunct of the transported scalar map with the constant-ring sheafification unit. This is a ring homomorphism A to the sections of the target constant ring over G(U). To prove each operation law, use the endomorphism of the source underlying constant ring sheaf that is constant at a. Naturality of the adjunction unit evaluates its L-image at the common basepoint eta(0). Apply ringZero, ringOne, ringAdd and ringMul of F.algebra at that basepoint and then the ring homomorphism constantMap.",
+   "uses": [
+    "def-weil-pbc-algebraic-inverse-image",
+    "lem-weil-pbc-constant-completion-equivalence",
+    "def-weil-pbc-constant-sheaf"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "The resulting ring homomorphisms are natural in A: combine F.ring_naturality, naturality of F.constants, naturality of the geometric hom equivalence, and naturality of the sheafification unit. Apply constantRingSectionRigidity over K at G(U). Hence this precomposed adjunct is the specified target constant-section map.",
+   "uses": [
+    "lem-sf-constant-ring-section-rigidity"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Precompose the claimed adjoint equality with the constant-presheaf sheafification unit after forgetting rings. The rigidity equality identifies the left side and the ring-sheafification adjunction identifies the right side with the same target unit. Cancel the forgetful/sheafification comparison isomorphism, use sheafify_hom_ext, then injectivity of the geometric hom equivalence.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-algebraic-inverse-image",
+  "lem-weil-pbc-constant-completion-equivalence",
+  "def-weil-pbc-constant-sheaf",
+  "lem-sf-constant-ring-section-rigidity"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "literature/stacks-project/sites.tex",
+  "place": "Proposition functoriality-algebraic-structures-topoi (Tag 00YV), and the universal-polynomial argument in the former Step 2 of this node.",
+  "note": "Q4 proves the adjunct ring laws directly from constant endomorphisms and the given graph equations, avoiding construction of a canonical comparison or a full ring adjunction."
+ },
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "LeanSearch",
+   "query": "A natural algebraic inverse image of constant commutative rings agrees with the canonical map on constant sections",
+   "results": "Eight hits concerning polynomial algebra maps and affine-scheme structure sheaves; none concerns the coherent algebraic inverse-image lift.",
+   "date": "2026-10-26",
+   "verdict": "No direct match."
+  },
+  {
+   "tool": "LeanFinder",
+   "query": "natural isomorphism constant sheaf commutative rings geometric inverse image canonical",
+   "results": "Eight hits concerning structure-presheaf forgetful comparisons, affine Gamma-Spec, and restriction of scheme structure sheaves.",
+   "date": "2026-10-26",
+   "verdict": "No normalization of arbitrary coherent constant-ring lifts."
+  },
+  {
+   "tool": "grep",
+   "query": "constant.*[Nn]aturality|constant.*[Ss]calar|[Nn]atural.*[Cc]onstant",
+   "results": "25 Mathlib hits, including the constantSheafGammaAdj naturality formulas. Project rg finds InverseImageData and the prescribed constantMap, but no theorem identifying their underlying map with the canonical transpose.",
+   "date": "2026-10-26",
+   "verdict": "The adjunction APIs are available; the scalar identification remains to be proved."
+  },
+  {
+   "tool": "blueprint_refs.py",
+   "query": "search constant inverse normalization",
+   "results": "21 blueprint matches, all concerning other coefficient, purity, or exceptional inverse-image normalizations; none states the ring-only equality for arbitrary coherent algebraic lifts.",
+   "date": "2026-10-26",
+   "verdict": "No blueprint duplicate."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.SixFunctors.ConstantOpenRestrictionModelComparison",
+  "date": "2026-10-26",
+  "group": "H4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "sk-thm-sf-identification",
+   "place": "Constant-coefficient normalization used in the normalized trace sentence: the scalar map of geometric inverse image preserves the specified constant sections, before open adjunctions or derived comparisons.",
+   "via": [
+    "lem-sf-constant-open-restriction-model-comparison",
+    "lem-sf-constant-semilinear-generator-comparison",
+    "lem-sf-integral-compactification-comparison-bridge",
+    "lem-sf-identification-coefficient-transport"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-thm-sf-identification",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.ConstantInverseImageScalarNormalization",
+  "file": "lean/Sheaf/CategoryTheory/ConstantInverseImageScalarNormalization.lean",
+  "declaration": "CategoryTheory.ConstantCompletion.constantInverseImageScalarNormalization",
+  "statement": "theorem constantInverseImageScalarNormalization\n    {C D : Type u} [SmallCategory C] [SmallCategory D]\n    (J : GrothendieckTopology C) (K : GrothendieckTopology D)\n    (G : C ⥤ D) [G.IsContinuous J K]\n    (L : Sheaf J (Type u) ⥤ Sheaf K (Type u))\n    (adj : L ⊣ G.sheafPushforwardContinuous (Type u) J K)\n    [PreservesFiniteLimits L] (F : InverseImageData L) (A : Type u) [CommRing A] :\n    (F.algebra (constant J A)).ringUnderlying.hom ≫\n        (sheafCompose K (forget CommRingCat.{u})).map (constantMap F A) =\n      (adj.homEquiv _ _).symm\n        ((sheafCompose J (forget CommRingCat.{u})).map\n          (((sheafificationAdjunction J CommRingCat.{u}).homEquiv\n            ((Functor.const Cᵒᵖ).obj (CommRingCat.of A))\n            ((G.sheafPushforwardContinuous CommRingCat.{u} J K).obj\n              (constant K A))).symm\n            (Functor.whiskerLeft G.op\n              (toSheafify K ((Functor.const Dᵒᵖ).obj (CommRingCat.of A))))))",
+  "branch": "sheaf-dag",
+  "by": "H4",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H4",
+  "result": "pass",
+  "landing": "20261026T001741-L-27349",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q4",
+  "result": "pass",
+  "landing": "20261026T092325-L-3423296",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

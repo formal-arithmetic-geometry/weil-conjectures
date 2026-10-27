@@ -1,0 +1,334 @@
+{
+ "id": "lem-sfb-regular-trait-modification-graph-tower",
+ "kind": "statement",
+ "title": "Point-blowup domination of an H-projective modification over a regular trait surface",
+ "statement": "Let $A$ be a discrete valuation ring with fraction field $F$, residue field $k$, and $T=\\operatorname{Spec}A$ [def-sc-discrete-valuation-ring, def-weil-affine-spectrum]. Let $C\\to T$ be an integral H-projective scheme with nonempty integral generic fibre [def-pc-integral-scheme, def-kun-projective, def-pc-scheme-fibre]. Let $r:Z\\to C$ be H-projective and an isomorphism over $\\operatorname{Spec}F$. Assume $Z$ is integral, regular and Noetherian (locally Noetherian and quasi-compact), all its local rings have dimension at most two, and every closed point of $Z_k$ has local dimension two [def-weil-regular-scheme, pqf-def-locnoeth, def-weil-pbc-krull-dimension-ring]. Let $\\Gamma$ be integral and $p:\\Gamma\\to C$ H-projective, also an isomorphism over $\\operatorname{Spec}F$. Then there are $m\\geq0$, a tower $Y=Z_m\\xrightarrow{b_m}\\cdots\\xrightarrow{b_1}Z_0=Z$, in which each $b_{i+1}$ is the blowup of a reduced closed point $z_i$ of the special fibre $(Z_i)_k$ [def-nagata-global-blowup], and a morphism $a:Y\\to\\Gamma$ with $pa=h$, where $h=r b_1\\cdots b_m:Y\\to C$. Every $Z_i$ is integral, regular, Noetherian and H-projective over $T$, and every $\\mathcal O_{Z_i,z_i}$ is a regular local ring of dimension two. The morphism $h$ is H-projective and an isomorphism over $\\operatorname{Spec}F$. Length zero is allowed.",
+ "source": {
+  "document": "literature/stacks-project/resolve.tex",
+  "place": "Tag 0C5H (lemma-extend-rational-map-blowing-up), applied to the rational map Z_F = C_F = Gamma_F from Z to Gamma over C, i.e. the existing node lem-sfb-surface-rational-map-point-resolution with S=C, X=Z, Y=Gamma, U=Z_F; with Tag 0AGR (lemma-blowup-regular) for the local dimension of later centres and H-projectivity of point blowups over the affine trait. Agent-formulated trait application carrying returned Steps 4--6 (graph, 0BFP, 0AHI are inside 0C5H). Supporting de Jong Lemma 3.13 proof, printed p.609 (primary PDF read online; archival PDF WANTED)."
+ },
+ "stmt_deps": [
+  "def-sc-discrete-valuation-ring",
+  "def-weil-affine-spectrum",
+  "def-pc-integral-scheme",
+  "def-kun-projective",
+  "def-pc-scheme-fibre",
+  "def-weil-regular-scheme",
+  "pqf-def-locnoeth",
+  "def-weil-pbc-krull-dimension-ring",
+  "def-nagata-global-blowup"
+ ],
+ "proof": [
+  {
+   "text": "Choose a uniformizer $\\pi$ of $A$. Its maximal ideal is nonzero and principal by [def-sc-discrete-valuation-ring], and $A$ is Noetherian since every ideal is principal [def-weil-pbc-noetherian-ring]. By [lem-weil-pbc-dvr-unit-times-uniformizer-power], every nonzero denominator is a unit times a power of $\\pi$, so $A[1/\\pi]=F$. The same formula shows that every nonzero prime contains $\\pi$ and hence is the maximal ideal. Thus $T$ has precisely the generic point and the closed point. By [lem-weil-pbc-principal-localization-open-immersion], $\\operatorname{Spec}F=D(\\pi)$ is open in $T$. Its inverse image $U=Z_F$ is the corresponding open subscheme, by [def-pc-base-change]; it is nonempty since $Z_F\\cong C_F$. Since $Z$ is integral, its nonempty open $U$ is dense [def-pc-integral-scheme].",
+   "uses": [
+    "def-sc-discrete-valuation-ring",
+    "def-weil-pbc-noetherian-ring",
+    "lem-weil-pbc-dvr-unit-times-uniformizer-power",
+    "lem-weil-pbc-principal-localization-open-immersion",
+    "def-pc-base-change",
+    "def-pc-integral-scheme"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00PD (lemma-characterize-dvr), final assertion; schemes.tex Tag 01I3 (lemma-standard-open-affine)."
+   }
+  },
+  {
+   "text": "By [lem-trf-h-projective-composition], $Z\\to C\\to T$ is H-projective, hence proper by [lem-kun-projective-implies-proper]. Its image is closed by [def-weil-proper-morphism] and contains the generic point, so it is all of $T$. In particular $Z_k$ is nonempty; by [def-pc-scheme-fibre] it is the closed subspace of $Z$ over the closed point. Choose a minimal nonempty closed subset $D$ of $Z$ contained in $Z_k$, using [lem-weil-pbc-noetherian-scheme-closed-subsets-minimal]. For each $d\\in D$, minimality gives $\\overline{\\{d\\}}=D$. This makes $D$ irreducible, and uniqueness in [lem-sc-scheme-sober] implies $D$ is a singleton. Its point is closed in $Z_k$ and $Z$, so its local ring has dimension two by hypothesis.",
+   "uses": [
+    "lem-trf-h-projective-composition",
+    "lem-kun-projective-implies-proper",
+    "def-weil-proper-morphism",
+    "def-pc-scheme-fibre",
+    "lem-weil-pbc-noetherian-scheme-closed-subsets-minimal",
+    "lem-sc-scheme-sober"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tags 01WE (lemma-H-projective-composition), 01WC (lemma-locally-projective-proper); properties.tex Tag 01OZ and schemes.tex Tag 01IS for the closed-point argument."
+   }
+  },
+  {
+   "text": "The chain formula [lem-sc-scheme-stalk-dimension-generalization-chains] and [lem-sc-scheme-sober] identify chains of generalizations starting at a point with chains of irreducible closed subsets starting at its closure. Taking the supremum over all starting points therefore gives $\\dim Z=\\sup_{z\\in Z}\\dim\\mathcal O_{Z,z}$, with topological dimension defined in [def-kun-topological-krull-dimension]. The assumed upper bound on every local dimension and the dimension-two point found in step 2 give $\\dim Z=2$.",
+   "uses": [
+    "lem-sc-scheme-stalk-dimension-generalization-chains",
+    "lem-sc-scheme-sober",
+    "def-kun-topological-krull-dimension"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/properties.tex",
+    "place": "Tag 02IZ (lemma-codimension-local-ring); the preceding dimension lemma proof identifies dimension with the supremum of local-ring dimensions."
+   }
+  },
+  {
+   "text": "Apply [lem-kun-projective-implies-proper] to $p:\\Gamma\\to C$. On $U=Z_F$, define $f$ as $Z_F\\xrightarrow{r_F}C_F\\xrightarrow{p_F^{-1}}\\Gamma_F\\to\\Gamma$. Its composite with $p$ is $r|_U$, by the inverse identity for $p_F$ and the base-change triangles [def-pc-base-change]. Apply [lem-sfb-surface-rational-map-point-resolution] with $S=C$, $X=Z$, $Y=\\Gamma$, the structure maps $r,p$, and this dense open $U$. Its hypotheses hold by steps 1--3 and the assumed integrality, regularity and Noetherianity of $Z$. It gives a tower $Z_m\\to\\cdots\\to Z_0=Z$ and a $C$-morphism $a:Z_m\\to\\Gamma$. Every level is integral, regular and Noetherian; each centre is a reduced closed point outside the inverse image of $U$; the tower composite $b:Z_m\\to Z$ is an isomorphism over $U$.",
+   "uses": [
+    "lem-kun-projective-implies-proper",
+    "def-pc-base-change",
+    "lem-sfb-surface-rational-map-point-resolution"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/resolve.tex",
+    "place": "Tag 0C5H (lemma-extend-rational-map-blowing-up), applied over C, not merely over the trait."
+   }
+  },
+  {
+   "text": "Let $q_i:Z_i\\to T$ be the structure morphism obtained by composing the tower with $Z\\to T$. By [def-pc-base-change], the inverse image of $U=Z_F$ in $Z_i$ is $(Z_i)_F$. Its complement is $(Z_i)_k$ on underlying spaces, because $T$ has just the two points of step 1 [def-pc-scheme-fibre]. Hence every centre furnished in step 4 belongs to the special fibre.",
+   "uses": [
+    "def-pc-base-change",
+    "def-pc-scheme-fibre"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/resolve.tex",
+    "place": "Tag 0C5H, centres outside the original rational-map domain; scheme-theoretic fibre convention, schemes.tex Tags 01K0 and 01K1."
+   }
+  },
+  {
+   "text": "Induct on $i$ to prove that every closed point of $(Z_i)_k$ has local dimension two. This is assumed for $i=0$. Regularity of each level was obtained in step 4, so the next centre has a regular local ring of dimension two [def-weil-regular-scheme]. Apply [lem-sfb-regular-point-blowup-geometry] to this centre. For a closed point $x\\in(Z_{i+1})_k$, its singleton is closed in $Z_{i+1}$ since the special fibre is closed. Properness of $b_{i+1}$ makes its image a closed point of $(Z_i)_k$ [def-weil-proper-morphism]. If the image is the centre, the geometry lemma gives local dimension two. Otherwise its off-centre isomorphism identifies the local ring at $x$ with the dimension-two local ring given by induction. This proves the invariant and the required dimension of every centre. For $m=0$ there are no centres to check.",
+   "uses": [
+    "def-weil-regular-scheme",
+    "lem-sfb-regular-point-blowup-geometry",
+    "def-weil-proper-morphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/resolve.tex",
+    "place": "Tags 0AGR (lemma-blowup-regular) and 0AGQ (lemma-blowup), global form in the cited geometry node."
+   }
+  },
+  {
+   "text": "For each centre the defining ideal sheaf is quasi-coherent by [def-sbc-closed-immersion-ideal-sheaf]. On an affine chart of the Noetherian level $Z_i$, its ideal is finitely generated: the chart ring is Noetherian by [pqf-lem-affine-open-locnoeth], and this is exactly [def-weil-pbc-noetherian-ring]. Thus the ideal sheaf is of finite type. Starting with the H-projective map $Z\\to T$ of step 2, apply [lem-sfb-projective-affine-base-blowup] at each stage, over the affine Noetherian base $T$. It gives both H-projectivity of $b_{i+1}$ and H-projectivity of $Z_{i+1}\\to T$. This induction proves the asserted H-projectivity at every level.",
+   "uses": [
+    "def-sbc-closed-immersion-ideal-sheaf",
+    "pqf-lem-affine-open-locnoeth",
+    "def-weil-pbc-noetherian-ring",
+    "lem-sfb-projective-affine-base-blowup"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/divisors.tex",
+    "place": "Tag 02NS (lemma-blowing-up-projective); morphisms.tex Tags 087S and 01WE as packaged by the existing affine-base blowup node."
+   }
+  },
+  {
+   "text": "Put $Y=Z_m$ and $h=r\\circ b$. The fact that $a$ is a $C$-morphism means exactly $p\\circ a=h$ [def-weil-scheme-over-base]. Every $b_i$ and $r$ is H-projective, so [lem-trf-h-projective-composition] shows $h$ is H-projective. Its generic restriction is the composite of the isomorphism $b_F$ from step 4 and the assumed isomorphism $r_F$, so it is an isomorphism. The intermediate scheme properties were supplied by step 4, their H-projectivity by step 7, and the centre properties by steps 5--6. All these constructions allow $m=0$, in which case $b$ is the identity and $h=r$.",
+   "uses": [
+    "def-weil-scheme-over-base",
+    "lem-trf-h-projective-composition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 01WE (lemma-H-projective-composition); resolve.tex Tag 0C5H, final composition."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sc-discrete-valuation-ring",
+  "def-weil-pbc-noetherian-ring",
+  "lem-weil-pbc-dvr-unit-times-uniformizer-power",
+  "lem-weil-pbc-principal-localization-open-immersion",
+  "def-pc-base-change",
+  "def-pc-integral-scheme",
+  "lem-trf-h-projective-composition",
+  "lem-kun-projective-implies-proper",
+  "def-weil-proper-morphism",
+  "def-pc-scheme-fibre",
+  "lem-weil-pbc-noetherian-scheme-closed-subsets-minimal",
+  "lem-sc-scheme-sober",
+  "lem-sc-scheme-stalk-dimension-generalization-chains",
+  "def-kun-topological-krull-dimension",
+  "lem-sfb-surface-rational-map-point-resolution",
+  "def-weil-regular-scheme",
+  "lem-sfb-regular-point-blowup-geometry",
+  "def-sbc-closed-immersion-ideal-sheaf",
+  "pqf-lem-affine-open-locnoeth",
+  "lem-sfb-projective-affine-base-blowup",
+  "def-weil-scheme-over-base"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/resolve.tex",
+  "place": "Trait application of Tag 0C5H, with Tags 0AGR, 02IZ, 02NS, 087S and 01WE; written-out dimension and projectivity bookkeeping."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "blow.?up|birational|modification",
+   "results": "{\"t\": \"2026-10-22T06:07:46Z\", \"tool\": \"grep\", \"query\": \"blow.?up|birational|modification\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 10, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/EllipticCurve/ModelsWithJ.lean\", \"Mathlib/AlgebraicGeometry/EllipticCurve/ModelsWithJ.lean\", \"Mathlib/AlgebraicGeometry/Birational/Dominant.lean\", \"Mathlib/AlgebraicGeometry/Birational/Birational.lean\", \"Mathlib/AlgebraicGeometry/Birational/Birational.lean\", \"Mathlib/AlgebraicGeometry/Birational/Birational.lean\", \"Mathlib/AlgebraicGeometry/Birational/Birational.lean\", \"Mathlib/AlgebraicGeometry/Birational/Birational.lean\"], \"digest\": \"ac53a829f2e4a5d0\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: Mathlib rational-map definitions and properness of Proj do not construct this graph, identify its finite bad locus, or provide point-blowup domination."
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.IsHProjective, AlgebraicGeometry.IsProper",
+   "results": "{\"t\": \"2026-10-22T06:07:46Z\", \"tool\": \"loogle\", \"query\": \"AlgebraicGeometry.IsHProjective, AlgebraicGeometry.IsProper\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"loogle: unknown identifier 'AlgebraicGeometry.IsHProjective'\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: Mathlib rational-map definitions and properness of Proj do not construct this graph, identify its finite bad locus, or provide point-blowup domination."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A projective modification over an integral regular surface over a discrete valuation ring has a reduced graph with finite exceptional locus and is dominated by blowups of closed special fibre points",
+   "results": "{\"t\": \"2026-10-22T06:07:53Z\", \"tool\": \"leanfinder\", \"query\": \"A projective modification over an integral regular surface over a discrete valuation ring has a reduced graph with finite exceptional locus and is dominated by blowups of closed special fibre points\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Proj.valuativeCriterion_existence_aux\", \"WeierstrassCurve.IsGoodReduction\", \"AlgebraicGeometry.Proj.valuativeCriterion_existence\", \"WeierstrassCurve.exists_isMinimal\", \"WeierstrassCurve.IsMinimal\", \"WeierstrassCurve.instIsMinimalMinimal\", \"WeierstrassCurve.minimal\", \"AlgebraicGeometry.ValuativeCriterion.existence\"], \"digest\": \"b260dc7f790881a8\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: Mathlib rational-map definitions and properness of Proj do not construct this graph, identify its finite bad locus, or provide point-blowup domination."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Resolution of indeterminacy on a regular arithmetic surface by blowing up a finite set of points, after taking the reduced graph of a projective birational morphism",
+   "results": "{\"t\": \"2026-10-22T06:08:10Z\", \"tool\": \"leansearch\", \"query\": \"Resolution of indeterminacy on a regular arithmetic surface by blowing up a finite set of points, after taking the reduced graph of a projective birational morphism\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsReduced.mk\", \"AlgebraicGeometry.isReduced_of_isIntegral\", \"AlgebraicGeometry.IsReduced\", \"AlgebraicGeometry.Scheme.Hom.instIsReducedNormalization\", \"AlgebraicGeometry.IsSmooth.recOn\", \"AlgebraicGeometry.Scheme.RationalMap.ofFunctionField\", \"AlgebraicGeometry.Scheme.RationalMap.toPartialMap\", \"AlgebraicGeometry.IsProper\"], \"digest\": \"856dfe0cb7faa7dc\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: Mathlib rational-map definitions and properness of Proj do not construct this graph, identify its finite bad locus, or provide point-blowup domination."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Birational\"",
+   "results": "{\"t\": \"2026-10-22T06:08:10Z\", \"tool\": \"loogle\", \"query\": \"\\\"Birational\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"ENNReal.orderIsoIicOneBirational\", \"ENNReal.orderIsoUnitIntervalBirational\", \"ENNReal.orderIsoUnitIntervalBirational_apply_coe\", \"ENNReal.orderIsoIicOneBirational_symm_apply\", \"ENNReal.orderIsoIicOneBirational_apply_coe\", \"AlgebraicGeometry.Scheme.Birational\", \"AlgebraicGeometry.Scheme.Birational.refl\", \"AlgebraicGeometry.Scheme.Birational.partialIso\"], \"digest\": \"f1974281247db1ea\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: Mathlib rational-map definitions and properness of Proj do not construct this graph, identify its finite bad locus, or provide point-blowup domination."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Proper birational maps to regular two dimensional schemes are isomorphisms outside finitely many points and admit projective point blowup domination",
+   "results": "{\"t\": \"2026-10-22T06:08:21Z\", \"tool\": \"leanfinder\", \"query\": \"Proper birational maps to regular two dimensional schemes are isomorphisms outside finitely many points and admit projective point blowup domination\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Proj.instIsProperToSpecZeroOfFiniteTypeSubtypeMemOfNatNat\", \"AlgebraicGeometry.Proj.instUniversallyClosedToSpecZeroOfFiniteTypeSubtypeMemOfNatNat\", \"AlgebraicGeometry.Scheme.RationalMap.ofFunctionField\", \"AlgebraicGeometry.Proj.valuativeCriterion_existence\", \"AlgebraicGeometry.Scheme.RationalMap.exists_rep\", \"AlgebraicGeometry.Scheme.Hom.instIsIsoToNormalizationOfIsIntegralHom\", \"AlgebraicGeometry.Scheme.RationalMap.fromFunctionField\", \"AlgebraicGeometry.Scheme.Hom.instIsDominantToNormalization\"], \"digest\": \"bbab542296094911\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: Mathlib rational-map definitions and properness of Proj do not construct this graph, identify its finite bad locus, or provide point-blowup domination."
+  },
+  {
+   "tool": "grep",
+   "query": "blow.?up|resolv.*rational|rational.*resol",
+   "results": "{\"t\": \"2026-10-23T04:24:48Z\", \"tool\": \"grep\", \"query\": \"blow.?up|resolv.*rational|rational.*resol\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: rational-map representatives and properness of Proj do not assert finite point-blowup resolution or its trait tower conclusions."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Elimination of indeterminacies of a rational map from a regular surface by point blowups",
+   "results": "{\"t\": \"2026-10-23T04:24:48Z\", \"tool\": \"leansearch\", \"query\": \"Elimination of indeterminacies of a rational map from a regular surface by point blowups\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.RationalMap.IsOver\", \"AlgebraicGeometry.Scheme.instIsOverCompHomOfIsOver\", \"AlgebraicGeometry.Scheme.RationalMap\", \"AlgebraicGeometry.Scheme.RationalMap.IsOver.mk\", \"AlgebraicGeometry.Scheme.PartialMap.noConfusionType\", \"AlgebraicGeometry.Scheme.RationalMap.ofFunctionField\", \"AlgebraicGeometry.Scheme.RationalMap.exists_rep\", \"WeierstrassCurve.Affine.Point.some.elim\"], \"digest\": \"00fdcf8b73b932c2\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: rational-map representatives and properness of Proj do not assert finite point-blowup resolution or its trait tower conclusions."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"RationalMap\", \"AlgebraicGeometry\"",
+   "results": "{\"t\": \"2026-10-23T04:24:49Z\", \"tool\": \"loogle\", \"query\": \"\\\"RationalMap\\\", \\\"AlgebraicGeometry\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.RationalMap\", \"AlgebraicGeometry.Scheme.RationalMap.id\", \"AlgebraicGeometry.Scheme.RationalMap.domain\", \"AlgebraicGeometry.Scheme.Hom.toRationalMap\", \"AlgebraicGeometry.Scheme.PartialMap.toRationalMap\", \"AlgebraicGeometry.Scheme.RationalMap.representative\", \"AlgebraicGeometry.Scheme.PartialMap.toRationalMap_surjective\", \"AlgebraicGeometry.Scheme.RationalMap.openCoverDomain\"], \"digest\": \"17fc852bc34c880c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: rational-map representatives and properness of Proj do not assert finite point-blowup resolution or its trait tower conclusions."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A projective modification of a regular arithmetic surface is dominated by a finite sequence of blowups at closed points in the special fibre",
+   "results": "{\"t\": \"2026-10-23T04:24:59Z\", \"tool\": \"leanfinder\", \"query\": \"A projective modification of a regular arithmetic surface is dominated by a finite sequence of blowups at closed points in the special fibre\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Proj.valuativeCriterion_existence\", \"AlgebraicGeometry.Proj.instUniversallyClosedToSpecZeroOfFiniteTypeSubtypeMemOfNatNat\", \"AlgebraicGeometry.Proj.instIsProperToSpecZeroOfFiniteTypeSubtypeMemOfNatNat\", \"AlgebraicGeometry.Proj.instLocallyOfFiniteTypeToSpecZeroOfFiniteTypeSubtypeMemOfNatNat\", \"AlgebraicGeometry.Proj.fromOfGlobalSections\", \"AlgebraicGeometry.Proj.valuativeCriterion_existence_aux\", \"AlgebraicGeometry.Proj\", \"AlgebraicGeometry.Proj.isSeparated\"], \"digest\": \"c90cabdc28c56bed\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: rational-map representatives and properness of Proj do not assert finite point-blowup resolution or its trait tower conclusions."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A rational map to a proper scheme extends after blowing up finitely many points of a regular Noetherian surface",
+   "results": "{\"t\": \"2026-10-23T04:25:27Z\", \"tool\": \"leanfinder\", \"query\": \"A rational map to a proper scheme extends after blowing up finitely many points of a regular Noetherian surface\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.RationalMap.exists_partialMap_over\", \"AlgebraicGeometry.Scheme.RationalMap.exists_rep\", \"AlgebraicGeometry.Scheme.RationalMap.IsOver.exists_partialMap_over\", \"AlgebraicGeometry.Scheme.RationalMap.toPartialMap\", \"AlgebraicGeometry.Scheme.RationalMap\", \"AlgebraicGeometry.Scheme.RationalMap.IsOver\", \"AlgebraicGeometry.Scheme.PartialMap.exists_restrict_isOver\", \"AlgebraicGeometry.Scheme.PartialMap.toRationalMap\"], \"digest\": \"37b4228a2dd18543\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: rational-map representatives and properness of Proj do not assert finite point-blowup resolution or its trait tower conclusions."
+  },
+  {
+   "tool": "grep",
+   "query": "structure PartialMap|def RationalMap|def representative|def toPartialMap|def ofFunctionField",
+   "results": "{\"t\": \"2026-10-23T04:27:44Z\", \"tool\": \"grep\", \"query\": \"structure PartialMap|def RationalMap|def representative|def toPartialMap|def ofFunctionField\", \"sub\": \"AlgebraicGeometry/Birational\", \"ok\": true, \"n_hits\": 6, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/Birational/Birational.lean\", \"Mathlib/AlgebraicGeometry/Birational/RationalMap.lean\", \"Mathlib/AlgebraicGeometry/Birational/RationalMap.lean\", \"Mathlib/AlgebraicGeometry/Birational/RationalMap.lean\", \"Mathlib/AlgebraicGeometry/Birational/RationalMap.lean\", \"Mathlib/AlgebraicGeometry/Birational/RationalMap.lean\"], \"digest\": \"51b78b7237f0a0c7\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: rational-map representatives and properness of Proj do not assert finite point-blowup resolution or its trait tower conclusions."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-nodal-trait-rational-domination",
+  "date": "2026-10-22",
+  "group": "Q48"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong §§3.9--3.12, Claim 3.10 and Lemma 3.13, printed p.609. Agent-formulated version: the proof of Lemma 3.13 uses only that rational exceptional curves have constant image in each target fibre; this property replaces its genus-at-least-two and pure-curve target hypotheses. This statement does not assert existence of a semistable source.; de Jong Lemma 3.13, rational exceptional-curve geometry before contraction; returned nodal-trait-rational-domination proof Steps 4,5,6; geometric argument before contraction",
+   "via": [
+    "lem-sfb-nodal-trait-rational-domination",
+    "lem-sfb-high-genus-hom-closure",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-regular-trait-modification-graph-tower",
+  "worker": "stage1",
+  "summary": "Applied the existing 0C5H resolution node over C after proving dimension two from the local hypotheses. Reused regular point-blowup geometry and affine-base H-projectivity. No new nodes. Corrected the fibre definition citation to ordinary scheme-theoretic fibres; no mathematical statement change.",
+  "blueprint": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong §§3.9--3.12, Claim 3.10 and Lemma 3.13, printed p.609. Agent-formulated version: the proof of Lemma 3.13 uses only that rational exceptional curves have constant image in each target fibre; this property replaces its genus-at-least-two and pure-curve target hypotheses. This statement does not assert existence of a semistable source.; de Jong Lemma 3.13, rational exceptional-curve geometry before contraction; returned nodal-trait-rational-domination proof Steps 4,5,6; geometric argument before contraction; realizes the modification graph tower prerequisite by the existing 0C5H theorem, then local-dimension and H-projectivity induction. The ancestor command returns null; retained inherited null root and via chain.",
+  "tool_uses": [
+   {
+    "node": "lem-trf-h-projective-composition",
+    "why": "Generic H-projective composition (01WE), preserving the finite-projective-space convention; no same-unit general composition node states this."
+   },
+   {
+    "node": "lem-kun-projective-implies-proper",
+    "why": "Generic projective-implies-proper theorem (01WC), needed to use the proper-target resolution theorem and closed image."
+   },
+   {
+    "node": "lem-sc-scheme-stalk-dimension-generalization-chains",
+    "why": "Generic scheme dimension/chain formula (02IZ), converting the local dimension hypotheses into scheme dimension two."
+   },
+   {
+    "node": "pqf-lem-affine-open-locnoeth",
+    "why": "Generic Noetherian affine-chart theorem, used to show a point ideal sheaf is of finite type."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-trf-h-projective-composition",
+  "lem-kun-projective-implies-proper",
+  "lem-sc-scheme-stalk-dimension-generalization-chains",
+  "pqf-lem-affine-open-locnoeth"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q141-19f076a95",
+  "group": "Q141",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q141-19f076a95 (reviewer sub-agent of L); spot-checked: First split of an unsplit node (base dagsnap 73383d93); no new nodes, no Lean, no fixes. The statement text is identical to base. The only change is the stmt_dep def-weil-geometric-fibre -> def-pc-scheme-fibre, which is correct: Z_k and the centres in (Z_i)_k are scheme-theoretic fibre points of Z_i. The item is not made easier, and its only citer (nodal-trait-rational-domination, step 2) still applies it. I read Stacks resolve.tex 0C5H, 0C5G, 0AGQ, 0AGR and morphisms 01WE. Step checks: (1) the DVR gives A[1/pi]=F and a two-point T, so U=Z_F is a nonempty dense open; (2) by 01WE and 01WC, Z->T is proper and surjective, so Z_k is nonempty; a minimal closed subset plus sobriety gives a closed point of Z_k of local dimension 2; (3) dim Z = sup of local dimensions, via the 02IZ chain node and sobriety, so dim Z = 2; (4) the resolution node is applied with S=C, f = p_F^{-1} r_F, p proper; hypotheses checked; the C-morphism a gives pa = rb; (5) the centres lie outside Z_F, hence in (Z_i)_k; (6) the induction on the closed points of (Z_i)_k is correctly set up: closed map plus off-centre isomorphism, and the exceptional clause of the point-blowup geometry node; (7) the affine-base blowup node over Noetherian T gives H-projectivity, with point ideals of finite type on Noetherian charts; (8) h = r b is H-projective and an isomorphism over F, and m=0 is fine. Accepted tool_uses: lem-trf-h-projective-composition (01WE) and lem-kun-projective-implies-proper (01WC), generic; the other two are Mathlib leaves. proof_deps equals the union of uses; four kinds of search are recorded; no SGA source."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.RegularTraitModificationGraphTower",
+  "declaration": "AlgebraicGeometry.exists_regular_trait_modification_graph_tower",
+  "file": "lean/Sheaf/AlgebraicGeometry/RegularTraitModificationGraphTower.lean",
+  "statement": "theorem exists_regular_trait_modification_graph_tower (A F : Type u) [CommRing A] [IsDomain A] [IsDiscreteValuationRing A] [Field F] [Algebra A F] [IsFractionRing A F] (C Z Γ : Scheme.{u}) [IsIntegral C] [IsIntegral Z] [IsIntegral Γ] (c : C ⟶ Spec (.of A)) [IsHProjective c] (r : Z ⟶ C) [IsHProjective r] [IsNoetherian Z] (hZ : IsRegularScheme Z) (hgeneric : IsIntegral (pullback c (Spec.map (CommRingCat.ofHom (algebraMap A F))))) (hr : IsIso (((Over.pullback (Spec.map (CommRingCat.ofHom (algebraMap A F)))).map (Over.homMk r rfl : Over.mk (r ≫ c) ⟶ Over.mk c)).left)) (hdim : ∀ z : Z, ringKrullDim (Z.presheaf.stalk z) ≤ 2) (hspecial : ∀ z : (r ≫ c).fiber (IsLocalRing.closedPoint A), IsClosed ({z} : Set ((r ≫ c).fiber (IsLocalRing.closedPoint A))) → ringKrullDim (Z.presheaf.stalk ((r ≫ c).fiberι (IsLocalRing.closedPoint A) z)) = 2) (p : Γ ⟶ C) [IsHProjective p] (hp : IsIso (((Over.pullback (Spec.map (CommRingCat.ofHom (algebraMap A F)))).map (Over.homMk p rfl : Over.mk (p ≫ c) ⟶ Over.mk c)).left)) : ∃ (B : OrdinaryBlowupTower Z) (a : B.level (Fin.last B.length) ⟶ Γ), (∀ i : Fin B.length, ∃ (z : B.level i.castSucc) (hz : IsClosed ({z} : Set (B.level i.castSucc))), B.center i = Scheme.IdealSheafData.vanishingIdeal ⟨{z}, hz⟩ ∧ (B.toBase i.castSucc ≫ r ≫ c) z = IsLocalRing.closedPoint A ∧ IsRegularLocalRing ((B.level i.castSucc).presheaf.stalk z) ∧ ringKrullDim ((B.level i.castSucc).presheaf.stalk z) = 2) ∧ (∀ i : Fin (B.length + 1), IsIntegral (B.level i) ∧ IsRegularScheme (B.level i) ∧ IsNoetherian (B.level i) ∧ IsHProjective (B.toBase i ≫ r ≫ c)) ∧ a ≫ p = B.toBase (Fin.last B.length) ≫ r ∧ IsHProjective (B.toBase (Fin.last B.length) ≫ r) ∧ IsIso (((Over.pullback (Spec.map (CommRingCat.ofHom (algebraMap A F)))).map (Over.homMk (B.toBase (Fin.last B.length) ≫ r) rfl : Over.mk ((B.toBase (Fin.last B.length) ≫ r) ≫ c) ⟶ Over.mk c)).left)",
+  "branch": "newtargets-dag",
+  "by": "Q20",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-c7e9c61d1",
+  "group": "Q20",
+  "result": "pass",
+  "note": "Read the node, all 9 stmt_dep records (byte-identical to live), Stacks 0C5H, the delivered module and the lean record (statement verbatim; only the item's lean changed). Clause-by-clause match: DVR/fraction field/trait; H-projective integral C with integral generic fibre via pullback along Spec F; r and p are isos over F via the canonical Over.pullback map; Z integral, IsRegularScheme, IsNoetherian; local dim ≤2; closed points of the scheme-theoretic special fibre have ambient local dim 2. Conclusion: OrdinaryBlowupTower; centres are vanishingIdeal of closed points over the closed point, regular local of dim 2; all levels integral/regular/Noetherian/H-projective over T; a≫p = toBase≫r; h H-projective and an iso over F; m=0 allowed. No extra assumptions, single universe u, no unbound vars, docstrings carry the source and all 8 steps, proof is sorry. No compile: no file changed. Advisory: OrdinaryBlowupTower's owner def-trf-ordinary-resolution-rule is not in stmt_deps (S2 cannot add it; maintainer may add it later)."
+ }
+}

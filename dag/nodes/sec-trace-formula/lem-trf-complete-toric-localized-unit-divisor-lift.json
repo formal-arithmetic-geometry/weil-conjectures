@@ -1,0 +1,224 @@
+{
+ "id": "lem-trf-complete-toric-localized-unit-divisor-lift",
+ "kind": "statement",
+ "title": "Lifting the divisor of a monomial-localization unit to a toric exponent",
+ "statement": "Let $P$ be a finitely generated integral saturated commutative monoid [def-trf-fs-log-blowup], written additively, and suppose it is sharp, meaning that $0$ is its only invertible element. Let $n\\geq0$ be an integer. For a coefficient ring $L$, write $L[P][t_1,\\ldots,t_n]$ for the ring of finite sums of symbols $c z^q t^e$, with $q\\in P$, $e\\in\\mathbf N^n$, $c\\in L$, and multiplication $z^qz^{q'}=z^{q+q'}$. If $L$ is local with maximal ideal $\\mathfrak m_L$, let $B_L(P,n)$ be its completion [def-weil-pbc-adic-completion] at $(\\mathfrak m_L,z^q\\ (q\\neq0),t_1,\\ldots,t_n)$. Let $R$ be one of the following rings: (i) $B_k(P,n)$ for a field $k$; (ii) $B_C(P,n)/(\\theta)$ for a Cohen ring $C$ of residue characteristic $p$ [def-weil-pbc-cohen-ring] and $\\theta-p\\in(z^q\\ (q\\neq0),t_1,\\ldots,t_n)B_C(P,n)$. In case (ii), $p$ is prime and the residue field of $C$ is arbitrary of characteristic $p$. Write $z^q\\in R$ for the chart monomials. Assume $R$ is a Noetherian normal domain [def-weil-pbc-noetherian-ring, def-weil-pbc-normal-ring] and all $z^q$ are nonzero. Identify $R$ with its image in $K=\\operatorname{Frac}(R)$. Let $S=\\{z^a:a\\in P\\}$ and let $\\ell:R\\to S^{-1}R$ be the localization homomorphism: fractions satisfy $f/s=g/t$ if $h(tf-sg)=0$ for some $h\\in S$. For a height-one prime $\\mathfrak q$ (a nonzero prime having no prime strictly between $(0)$ and itself), let $v_{\\mathfrak q}:K^\\times\\to\\mathbf Z$ be the normalized additive valuation of the discrete valuation ring $R_{\\mathfrak q}$ [def-weil-pbc-localization-at-prime, def-sc-discrete-valuation-ring], with a uniformizer assigned value one. Use the affine principal divisor $\\operatorname{div}_R(x)=\\sum_{\\operatorname{ht}\\mathfrak q=1}v_{\\mathfrak q}(x)[\\mathfrak q]$ in $\\operatorname{Div}(R)$ [def-trf-affine-weil-divisor-class-group]. Then every $f\\in R$ for which $\\ell(f)$ is a unit is nonzero and admits an exponent $a_0\\in P$ such that\n$$v_{\\mathfrak q}(f)=v_{\\mathfrak q}(z^{a_0})\\qquad\\text{for every height-one prime }\\mathfrak q\\subset R,$$\nor equivalently $\\operatorname{div}_R(f)=\\operatorname{div}_R(z^{a_0})$. The case $P=\\{0\\}$ is included, with $a_0=0$, as is $n=0$.",
+ "source": {
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "Agent-formulated intermediate divisor-lifting statement for the two complete models of ILO VI 1.6(i)--(ii), printed p. 70; extracted from the retained direct recognition proof, steps 1 and 4--7. ILO VI 1.4 motivates recognition but is not applied as a converse theorem. The facet and boundary-class inputs remain the existing cited nodes; Kato 1994 Theorem 11.6 and Niziol 2006 Proposition 2.6 remain WANTED, not read locally."
+ },
+ "stmt_deps": [
+  "def-trf-fs-log-blowup",
+  "def-weil-pbc-adic-completion",
+  "def-weil-pbc-cohen-ring",
+  "def-weil-pbc-noetherian-ring",
+  "def-weil-pbc-normal-ring",
+  "def-weil-pbc-localization-at-prime",
+  "def-sc-discrete-valuation-ring",
+  "def-trf-affine-weil-divisor-class-group",
+  "def-trf-complete-toric-model"
+ ],
+ "proof": [
+  {
+   "text": "Choose an inverse of $\\ell(f)$, represented by $b/z^a$ with $b\\in R$ and $a\\in P$. The equality $fb/z^a=1/1$ means that $h(fb-z^a)=0$ for some $h\\in S$. Every element of $S$ is nonzero, so cancellation in the domain gives $fb=z^a\\ne0$. In particular $f\\ne0$. This uses only the fraction equivalence relation in the statement.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "ILO Exposé VI 1.4 and 1.6(i)--(ii), printed pp. 69--70: model and recognition motivation only; agent-written divisor assembly from the cited node statements."
+   }
+  },
+  {
+   "text": "Apply [lem-trf-complete-toric-facet-valuations] to the given model: its normal-domain hypothesis holds, and it gives the finite facet set $\\mathcal F$, distinct boundary primes $\\mathfrak p_F$, all height-one primes meeting $S$, the primitive forms $\\nu_F$, and $v_{\\mathfrak p_F}(z^q)=\\nu_F(q)$. By [lem-trf-normal-domain-principal-divisor-kernel], the given Noetherian normal domain has the stated finite principal divisors, and an element in each height-one local ring has nonnegative valuation. If a height-one prime $\\mathfrak q$ is not a boundary prime, then $z^a\\notin\\mathfrak q$. The equality in step 1 gives the explicit inverse $b/z^a$ of $f$ in $R_{\\mathfrak q}$. Thus $v_{\\mathfrak q}(f)=0$ by the same kernel node. Put $m_F=v_{\\mathfrak p_F}(f)\\ge0$; then $\\operatorname{div}_R(f)=\\sum_Fm_F[\\mathfrak p_F]$.",
+   "uses": [
+    "lem-trf-complete-toric-facet-valuations",
+    "lem-trf-normal-domain-principal-divisor-kernel"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "ILO Exposé VI 1.4 and 1.6(i)--(ii), printed pp. 69--70: model and recognition motivation only; agent-written divisor assembly from the cited node statements."
+   }
+  },
+  {
+   "text": "Apply [lem-trf-complete-toric-boundary-class-injectivity]. The coefficient models and sharp fs monoid are identical to ours; Noetherianity, normality and nonzero monomials are assumed here, and step 2 supplies its hypotheses on the distinct primes, primitive forms, monomial valuations and all primes meeting $S$. For $G=P^{\\rm gp}$ and $\\nu(g)=(\\nu_F(g))_F$, its injective homomorphism $\\beta:\\mathbf Z^{\\mathcal F}/\\nu(G)\\to\\operatorname{Cl}(R)$ sends $[m]$ to $[\\operatorname{div}_R(f)]=0$, since the class group quotients by principal divisors. Injectivity gives $[m]=0$, or $m\\in\\nu(G)$. Choose $g\\in G$ with $\\nu_F(g)=m_F$ for every $F$. This is an equality in the integer lattice, with no passage to rational multiples.",
+   "uses": [
+    "lem-trf-complete-toric-boundary-class-injectivity"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "ILO Exposé VI 1.4 and 1.6(i)--(ii), printed pp. 69--70: model and recognition motivation only; agent-written divisor assembly from the cited node statements."
+   }
+  },
+  {
+   "text": "By [lem-trf-sharp-cone-lattice-intersection], identify $G$ with a lattice in $V=G\\otimes_{\\mathbf Z}\\mathbf Q$ and $P=\\sigma\\cap G$, where $\\sigma$ is its rational cone. All hypotheses are precisely the finite-generation, integrality, saturation and sharpness assumed for $P$. The half-space description in [lem-trf-complete-toric-facet-valuations] and the inequalities $\\nu_F(g)=m_F\\ge0$ give $g\\in\\sigma$. Hence $g$ is the image of an element $a_0\\in P$, and $\\nu_F(a_0)=m_F$ for all $F$.",
+   "uses": [
+    "lem-trf-sharp-cone-lattice-intersection",
+    "lem-trf-complete-toric-facet-valuations"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "ILO Exposé VI 1.4 and 1.6(i)--(ii), printed pp. 69--70: model and recognition motivation only; agent-written divisor assembly from the cited node statements."
+   }
+  },
+  {
+   "text": "For $\\mathfrak q=\\mathfrak p_F$, the monomial valuation formula of [lem-trf-complete-toric-facet-valuations] gives $v_{\\mathfrak q}(z^{a_0})=\\nu_F(a_0)=m_F=v_{\\mathfrak q}(f)$. At any other height-one prime, that node says $z^{a_0}\\notin\\mathfrak q$; its inverse $1/z^{a_0}$ belongs to $R_{\\mathfrak q}$, so [lem-trf-normal-domain-principal-divisor-kernel] gives $v_{\\mathfrak q}(z^{a_0})=0=v_{\\mathfrak q}(f)$ by step 2. The pointwise equalities give equality of the finitely supported divisors. If $P=\\{0\\}$, its group completion is zero, the facet set is empty, step 1 reads $fb=1$, and we take $a_0=0$; the same valuation argument applies. For $n=0$ no step requires a parameter variable.",
+   "uses": [
+    "lem-trf-complete-toric-facet-valuations",
+    "lem-trf-normal-domain-principal-divisor-kernel"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "ILO Exposé VI 1.4 and 1.6(i)--(ii), printed pp. 69--70: model and recognition motivation only; agent-written divisor assembly from the cited node statements."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-trf-complete-toric-facet-valuations",
+  "lem-trf-normal-domain-principal-divisor-kernel",
+  "lem-trf-complete-toric-boundary-class-injectivity",
+  "lem-trf-sharp-cone-lattice-intersection"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "ILO Exposé VI 1.4 and 1.6(i)--(ii), printed pp. 69--70: model and recognition motivation only; agent-written divisor assembly from the cited node statements."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For a saturated sharp complete monoid local ring, a function invertible after monomial localization has the same height one valuation vector as some monomial",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"IsDiscreteValuationRing.exists_lift_of_le_one\", \"module\": \"Mathlib/RingTheory/Valuation/Discrete/Basic\", \"type\": \"∀ {A : Type u_1} {K : Type u_2} [inst : CommRing A] [inst_1 : IsDomain A] [inst_2 : IsDiscreteValuationRing A]\\n  [inst_3 : Field K] [inst_4 : Algebra A K] [inst_5 : IsFractionRing A K] {x : K},\\n  (IsDedekindDomain.HeightOneSpectrum.valuation K (IsDiscreteValuationRing.maximalIdeal A)) x ≤ 1 →\\n    ∃ \", \"doc\": \"For any element $ x $ in the fraction field $ K $ of a discrete valuation ring $ A $, if the valuation of $ x $ with respect to the maximal ideal of $ A $ is at most $ 1 $, then $ x $ belongs to $ A $\"}\n  {\"name\": \"Set.unit_valuation_eq_one\", \"module\": \"Mathlib/RingTheory/DedekindDomain/SInteger\", \"type\": \"∀ {R : Type u} [inst : CommRing R] [inst_1 : IsDedekindDomain R] (S : Set (IsDedekindDomain.HeightOneSpectrum R))\\n  (K : Type v) [inst_2 : Field K] [inst_3 : Algebra R K] [inst_4 : IsFractionRing R K] (x : ↥(S.unit K))\\n  {v : IsDedekindDomain.HeightOneSpectrum R}, v ∉ S → (IsDedekindDomain.HeightOne\", \"doc\": \"For a Dedekind domain $ R $ with fraction field $ K $, and a set $ S $ of height one prime ideals, every element $ x $ in the $ S $-unit group $ S.\\text{unit}(K) $ satisfies $ v(x) = 1 $ for all height\"}\n  {\"name\": \"ValuationSubring.ofPrime_valuation_eq_one_iff_mem_primeCompl\", \"module\": \"Mathlib/RingTheory/Valuation/ValuationSubring\", \"type\": \"∀ {K : Type u} [inst : Field K] (A : ValuationSubring K) (P : Ideal ↥A) [inst_1 : P.IsPrime] (x : ↥A),\\n  (A.ofPrime P).valuation ↑x = 1 ↔ x ∈ P.primeCompl\", \"doc\": \"For any element $x$ in a valuation subring $A$ of a field $K$, and for any prime ideal $P$ of $A$, the valuation of $x$ in the localized valuation subring obtained by inverting the complement of $P$ e\"}\n  {\"name\": \"Valuation.extendToLocalization_mk'\", \"module\": \"Mathlib/RingTheory/Valuation/ExtendToLocalization\", \"type\": \"∀ {A : Type u_1} [inst : CommRing A] {Γ : Type u_2} [inst_1 : LinearOrderedCommGroupWithZero Γ] (v : Valuation A Γ)\\n  {S : Submonoid A} (hS : S ≤ v.supp.primeCompl) (B : Type u_3) [inst_2 : CommRing B] [inst_3 : Algebra A B]\\n  [inst_4 : IsLocalization S B] (x : A) (y : ↥S),\\n  (v.extendToLocalization\", \"doc\": \"For any elements $x \\\\in A$ and $y \\\\in S$, the extended valuation $\\\\tilde{v}$ applied to the localized element $x/y$ is equal to $v(x) \\\\cdot v(y)^{-1}$.\"}\n  {\"name\": \"Set.coe_unit\", \"module\": \"Mathlib/RingTheory/DedekindDomain/SInteger\", \"type\": \"∀ {R : Type u} [inst : CommRing R] [inst_1 : IsDedekindDomain R] (S : Set (IsDedekindDomain.HeightOneSpectrum R))\\n  (K : Type v) [inst_2 : Field K] [inst_3 : Algebra R K] [inst_4 : IsFractionRing R K],\\n  ↑(S.unit K) = {x | ∀ v ∉ S, (IsDedekindDomain.HeightOneSpectrum.valuation K v) ↑x = 1}\", \"doc\": \"Let $R$ be a Dedekind domain with field of fractions $K$, and let $S$ be a set of height one prime ideals of $R$. The group of $S$-units of $K$, denoted `S.unit K`, is a subgroup of the multiplicative\"}\n  {\"name\": \"IsDedekindDomain.HeightOneSpectrum.valuationOfNeZeroToFun\", \"module\": \"Mathlib/RingTheory/DedekindDomain/SelmerGroup\", \"type\": \"{R : Type u} →\\n  [inst : CommRing R] →\\n    [IsDedekindDomain R] →\\n      {K : Type v} →\\n        [inst_2 : Field K] →\\n          [inst_3 : Algebra R K] → [IsFractionRing R K] → IsDedekindDomain.HeightOneSpectrum R → Kˣ → Multiplicative ℤ\", \"doc\": \"For a nonzero element $x$ in the fraction field $K$ of a Dedekind domain $A$, this function computes the valuation associated to a height one prime ideal $\\\\mathfrak{p}$ by taking the representative $(\"}\n  {\"name\": \"ValuationRing.isInteger_or_isInteger\", \"module\": \"Mathlib/RingTheory/Valuation/ValuationRing\", \"type\": \"∀ (R : Type u_1) [inst : CommRing R] [inst_1 : IsDomain R] {K : Type u_2} [inst_2 : Field K] [inst_3 : Algebra R K]\\n  [IsFractionRing R K] [h : ValuationRing R] (x : K), IsLocalization.IsInteger R x ∨ IsLocalization.IsInteger R x⁻¹\", \"doc\": \"For any element $ x $ in the field of fractions $ K $ of a valuation ring $ R $, either $ x $ belongs to $ R $ or its inverse $ x^{-1} $ belongs to $ R $.\"}\n  {\"name\": \"IsDedekindDomain.HeightOneSpectrum.mem_integers_of_valuation_le_one\", \"module\": \"Mathlib/RingTheory/DedekindDomain/AdicValuation\", \"type\": \"∀ {R : Type u_1} [inst : CommRing R] [inst_1 : IsDedekindDomain R] (K : Type u_2) [inst_2 : Field K]\\n  [inst_3 : Algebra R K] [inst_4 : IsFractionRing R K] (x : K),\\n  (∀ (v : IsDedekindDomain.HeightOneSpectrum R), (IsDedekindDomain.HeightOneSpectrum.valuation K v) x ≤ 1) →\\n    x ∈ (algebraMap R K).r\", \"doc\": \"Let $R$ be a Dedekind domain and $K$ be its field of fractions. An element $x \\\\in K$ belongs to $R$ if for every height-one prime ideal $\\\\mathfrak{p}$ of $R$, its $\\\\mathfrak{p}$-adic valuation satisfi\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits give ordinary localization/DVR/S-unit formulas (Dedekind hypotheses), meromorphic divisors or polynomial monomial division. None lifts a boundary valuation vector through the integer cokernel class map for completed saturated monoid rings or Cohen parameter quotients."
+  },
+  {
+   "tool": "leansearch",
+   "query": "An effective principal divisor supported on toric boundary primes is the divisor of a monomial for a completed saturated monoid algebra or Cohen parameter quotient",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"MeromorphicOn.divisor\", \"module\": \"Mathlib.Analysis.Meromorphic.Divisor\", \"type\": \"(f : 𝕜 → E) (U : Set 𝕜) : Function.locallyFinsuppWithin U ℤ\", \"doc\": \"For a meromorphic function $ f $ on a set $ U $ in a nontrivially normed field $ \\\\mathbb{K} $, taking values in a normed vector space $ E $, this constructs the divisor of $ f $ as a locally finite fo\"}\n  {\"name\": \"MeromorphicOn.divisor_def\", \"module\": \"Mathlib.Analysis.Meromorphic.Divisor\", \"type\": \"(f : 𝕜 → E) (U : Set 𝕜) : divisor f U z = if MeromorphicOn f U ∧ z ∈ U then (meromorphicOrderAt f z).untop₀ else 0\", \"doc\": \"For a meromorphic function $ f : \\\\mathbb{K} \\\\to E $ on a set $ U \\\\subseteq \\\\mathbb{K} $ (where $ \\\\mathbb{K} $ is a nontrivially normed field and $ E $ is a normed vector space over $ \\\\mathbb{K} $), th\"}\n  {\"name\": \"PowerSeries.IsWeierstrassDivisorAt\", \"module\": \"Mathlib.RingTheory.PowerSeries.WeierstrassPreparation\", \"type\": \": Prop\", \"doc\": \"A power series $ g $ satisfies the Weierstrass divisor condition at an ideal $ I $ if the coefficient of $ X^{\\text{ord}(g)} $ in the image of $ g $ under the quotient map $ R \\to R/I $ is a unit in the\"}\n  {\"name\": \"MvPolynomial.support_divMonomial\", \"module\": \"Mathlib.Algebra.MvPolynomial.Division\", \"type\": \"(s : σ →₀ ℕ) (x : MvPolynomial σ R) : (x /ᵐᵒⁿᵒᵐⁱᵃˡ s).support = x.support.preimage _ (add_right_injective s).injOn\", \"doc\": \"For any monomial $ s $ and multivariate polynomial $ x $, the support of $ x $ divided by $ s $ is equal to the preimage of the support of $ x $ under the injective addition map $ t \\\\mapsto t + s $. T\"}\n  {\"name\": \"MeromorphicOn.divisor_zpow\", \"module\": \"Mathlib.Analysis.Meromorphic.Divisor\", \"type\": \"{f : 𝕜 → 𝕜} (hf : MeromorphicOn f U) (n : ℤ) : divisor (f ^ n) U = n • divisor f U\", \"doc\": \"For a meromorphic function $ f $ on a set $ U $ in a nontrivially normed field $ \\\\mathbb{K} $, and for any integer $ n $, the divisor of $ f^n $ is equal to $ n $ times the divisor of $ f $. The suppo\"}\n  {\"name\": \"MvPolynomial.divMonomial\", \"module\": \"Mathlib.Algebra.MvPolynomial.Division\", \"type\": \"(p : MvPolynomial σ R) (s : σ →₀ ℕ) : MvPolynomial σ R\", \"doc\": \"Given a multivariate polynomial $ p $ and a monomial $ s $ (represented as a finite support function $ \\\\sigma \\\\to_0 \\\\mathbb{N} $), this operation returns the polynomial obtained by subtracting the exp\"}\n  {\"name\": \"Function.FactorizedRational.divisor\", \"module\": \"Mathlib.Analysis.Meromorphic.FactorizedRational\", \"type\": \"{U : Set 𝕜} {D : locallyFinsuppWithin U ℤ} (hD : D.support.Finite) : MeromorphicOn.divisor (∏ᶠ u, (· - u) ^ D u) U = D\", \"doc\": \"For a divisor $ D $ with finite support on a set $ U $ in a nontrivially normed field $ \\\\mathbb{K} $, taking values in a normed vector space $ E $, the divisor of the meromorphic function defined as t\"}\n  {\"name\": \"MvPolynomial.mem_ideal_span_monomial_image_iff_dvd\", \"module\": \"Mathlib.RingTheory.MvPolynomial.Ideal\", \"type\": \"{x : MvPolynomial σ R} {s : Set (σ →₀ ℕ)} :\\n  x ∈ Ideal.span ((fun s => monomial s (1 : R)) '' s) ↔\\n    ∀ xi ∈ x.support, ∃ si ∈ s, monomial si 1 ∣ monomial xi (x.coeff xi)\", \"doc\": \"A multivariate polynomial $ x $ belongs to the ideal generated by monomials corresponding to a set $ s $ if and only if every monomial in the support of $ x $ is divisible by some monomial in $ s $. F\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits give ordinary localization/DVR/S-unit formulas (Dedekind hypotheses), meromorphic divisors or polynomial monomial division. None lifts a boundary valuation vector through the integer cokernel class map for completed saturated monoid rings or Cohen parameter quotients."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"MonoidAlgebra\", \"valuation\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits give ordinary localization/DVR/S-unit formulas (Dedekind hypotheses), meromorphic divisors or polynomial monomial division. None lifts a boundary valuation vector through the integer cokernel class map for completed saturated monoid rings or Cohen parameter quotients."
+  },
+  {
+   "tool": "grep",
+   "query": "toric|facet|boundary.*divisor|divisor.*boundary",
+   "results": "[grep] OK 11 hit(s)\n  {\"file\": \"Mathlib/RingTheory/Polynomial/ShiftedLegendre.lean\", \"line\": \"39\", \"text\": \"These polynomials appear in combinatorics and the theory of orthogonal polynomials. -/\"}\n  {\"file\": \"Mathlib/RingTheory/MvPolynomial/Symmetric/Defs.lean\", \"line\": \"10\", \"text\": \"public import Mathlib.Combinatorics.Enumerative.Partition.Basic\"}\n  {\"file\": \"Mathlib/RingTheory/Ideal/Basic.lean\", \"line\": \"112\", \"text\": \"-- A separate namespace definition is needed because the variables were historically in a different\"}\n  {\"file\": \"Mathlib/RingTheory/AlgebraicIndependent/TranscendenceBasis.lean\", \"line\": \"8\", \"text\": \"public import Mathlib.Combinatorics.Matroid.IndepAxioms\"}\n  {\"file\": \"Mathlib/RingTheory/AlgebraicIndependent/TranscendenceBasis.lean\", \"line\": \"9\", \"text\": \"public import Mathlib.Combinatorics.Matroid.Rank.Cardinal\"}\n  {\"file\": \"Mathlib/RingTheory/Ideal/Maximal.lean\", \"line\": \"142\", \"text\": \"-- A separate namespace definition is needed because the variables were historically in a different\"}\n  {\"file\": \"Mathlib/RingTheory/Ideal/Defs.lean\", \"line\": \"106\", \"text\": \"-- A separate namespace definition is needed because the variables were historically in a different\"}\n  {\"file\": \"Mathlib/RingTheory/PowerSeries/Catalan.lean\", \"line\": \"9\", \"text\": \"public import Mathlib.Combinatorics.Enumerative.Catalan.Basic\"}\n  {\"file\": \"Mathlib/RingTheory/PowerSeries/Schroder.lean\", \"line\": \"8\", \"text\": \"public import Mathlib.Combinatorics.Enumerative.Schroder\"}\n  {\"file\": \"Mathlib/RingTheory/Valuation/RankOne.lean\", \"line\": \"13\", \"text\": \"public import Mathlib.Combinatorics.Matroid.Init\"}\n  {\"file\": \"Mathlib/RingTheory/DividedPowers/Basic.lean\", \"line\": \"9\", \"text\": \"public import Mathlib.Combinatorics.Enumerative.Bell\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits give ordinary localization/DVR/S-unit formulas (Dedekind hypotheses), meromorphic divisors or polynomial monomial division. None lifts a boundary valuation vector through the integer cokernel class map for completed saturated monoid rings or Cohen parameter quotients."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Lifting the nonnegative facet valuations of a localization unit to an element of a saturated affine monoid by injectivity of the boundary divisor class group map",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"HomogeneousLocalization.val_awayMap_mk\", \"module\": \"Mathlib/RingTheory/GradedAlgebra/HomogeneousLocalization\", \"type\": \"∀ {ι : Type u_1} {A : Type u_2} {σ : Type u_3} [inst : CommRing A] [inst_1 : SetLike σ A]\\n  [inst_2 : AddSubgroupClass σ A] [inst_3 : AddCommMonoid ι] [inst_4 : DecidableEq ι] (𝒜 : ι → σ)\\n  [inst_5 : GradedRing 𝒜] {e : ι} {f g : A} (hg : g ∈ 𝒜 e) {x : A} (hx : x = f * g) (n : ι) (a : ↥(𝒜 n)) (i : ℕ)\", \"doc\": \"For a graded algebra $\\\\mathcal{A}$ with submonoid $x$, if $f$ divides $x$ and $g = x/f$, then applying the valuation map to the image of a homogeneous localization element $\\\\frac{a}{f^i}$ under the aw\"}\n  {\"name\": \"AlgebraicGeometry.Proj.valuativeCriterion_existence_aux\", \"module\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Proper\", \"type\": \"∀ {σ : Type u_1} {A : Type u_2} [inst : CommRing A] [inst_1 : SetLike σ A] [inst_2 : AddSubgroupClass σ A] (𝒜 : ℕ → σ)\\n  [inst_3 : GradedRing 𝒜] {O : Type u_3} [inst_4 : CommRing O] [inst_5 : IsDomain O] [ValuationRing O] {K : Type u_4}\\n  [inst_7 : Field K] [inst_8 : Algebra O K] [IsFractionRing O K\", \"doc\": \"Let $ O $ be a commutative valuation ring with fraction field $ K $, and let $ \\\\mathcal{A} $ be a graded $ O $-algebra. Given a finite set $ \\\\{x_i\\\\}_{i \\\\in I} $ of homogeneous elements in $ \\\\mathcal{A\"}\n  {\"name\": \"HomogeneousLocalization.val_awayMap_eq_aux\", \"module\": \"Mathlib/RingTheory/GradedAlgebra/HomogeneousLocalization\", \"type\": \"∀ {ι : Type u_1} {A : Type u_2} {σ : Type u_3} [inst : CommRing A] [inst_1 : SetLike σ A]\\n  [inst_2 : AddSubgroupClass σ A] [inst_3 : AddCommMonoid ι] [inst_4 : DecidableEq ι] (𝒜 : ι → σ)\\n  [inst_5 : GradedRing 𝒜] {e : ι} {f g : A} (hg : g ∈ 𝒜 e) {x : A} (hx : x = f * g)\\n  (a : HomogeneousLocalizati\", \"doc\": \"For a graded algebra $\\\\mathcal{A}$ over a commutative ring and elements $f,x$ where $f$ divides $x$, the valuation of the ring homomorphism from the homogeneous localization at $f$ to that at $x$ appl\"}\n  {\"name\": \"HomogeneousLocalization.val_awayMap\", \"module\": \"Mathlib/RingTheory/GradedAlgebra/HomogeneousLocalization\", \"type\": \"∀ {ι : Type u_1} {A : Type u_2} {σ : Type u_3} [inst : CommRing A] [inst_1 : SetLike σ A]\\n  [inst_2 : AddSubgroupClass σ A] [inst_3 : AddCommMonoid ι] [inst_4 : DecidableEq ι] (𝒜 : ι → σ)\\n  [inst_5 : GradedRing 𝒜] {e : ι} {f g : A} (hg : g ∈ 𝒜 e) {x : A} (hx : x = f * g)\\n  (a : HomogeneousLocalizati\", \"doc\": \"For a graded algebra $\\\\mathcal{A}$, when $f$ divides $x$, the valuation map applied to the homogeneous localization away map satisfies $\\\\text{val}(\\\\text{awayMap}(a)) = \\\\text{Localization.awayLift}(\\\\te\"}\n  {\"name\": \"HomogeneousLocalization.Away.val_mk\", \"module\": \"Mathlib/RingTheory/GradedAlgebra/HomogeneousLocalization\", \"type\": \"∀ {ι : Type u_1} {A : Type u_2} {σ : Type u_3} [inst : CommRing A] [inst_1 : SetLike σ A]\\n  [inst_2 : AddSubgroupClass σ A] [inst_3 : AddCommMonoid ι] [inst_4 : DecidableEq ι] (𝒜 : ι → σ)\\n  [inst_5 : GradedRing 𝒜] {f : A} {d : ι} (n : ℕ) (hf : f ∈ 𝒜 d) (x : A) (hx : x ∈ 𝒜 (n • d)),\\n  HomogeneousLoca\", \"doc\": \"For any graded algebra $\\\\mathcal{A}$ over an additive monoid $\\\\iota$, element $f \\\\in \\\\mathcal{A}_d$, natural number $n$, and $x \\\\in \\\\mathcal{A}_{n \\\\cdot d}$, the valuation map applied to the homogeneo\"}\n  {\"name\": \"ValuativeRel.ValueGroupWithZero.embed_mk\", \"module\": \"Mathlib/RingTheory/Valuation/ValuativeRel/Basic\", \"type\": \"∀ {R : Type u_1} {Γ : Type u_2} [inst : CommRing R] [inst_1 : ValuativeRel R]\\n  [inst_2 : LinearOrderedCommGroupWithZero Γ] (v : Valuation R Γ) [inst_3 : v.Compatible] (x : R)\\n  (s : ↥(ValuativeRel.posSubmonoid R)),\\n  (ValuativeRel.ValueGroupWithZero.embed v) (ValuativeRel.ValueGroupWithZero.mk x s)\", \"doc\": \"For any element $x$ in the commutative ring $R$ and any element $s$ in the positive submonoid under the valuative relation $<_u$, the image of the equivalence class $[x, s]$ under the embedding homomo\"}\n  {\"name\": \"ValuativeRel.ValueGroupWithZero.lift_valuation\", \"module\": \"Mathlib/RingTheory/Valuation/ValuativeRel/Basic\", \"type\": \"∀ {R : Type u_1} [inst : CommRing R] [inst_1 : ValuativeRel R] {α : Sort u_2}\\n  (f : R → ↥(ValuativeRel.posSubmonoid R) → α)\\n  (hf : ∀ (x y : R) (t s : ↥(ValuativeRel.posSubmonoid R)), x * ↑t ≤ᵥ y * ↑s → y * ↑s ≤ᵥ x * ↑t → f x s = f y t)\\n  (x : R), ValuativeRel.ValueGroupWithZero.lift f hf ((Valuati\", \"doc\": \"For any element $x$ in the commutative ring $R$, applying the lifted function (constructed from $f$ and the compatibility condition $hf$) to the valuation $\\\\nu(x)$ yields the same result as directly a\"}\n  {\"name\": \"ValuativeRel.ValueGroupWithZero.lift_mk\", \"module\": \"Mathlib/RingTheory/Valuation/ValuativeRel/Basic\", \"type\": \"∀ {R : Type u_1} [inst : CommRing R] [inst_1 : ValuativeRel R] {α : Sort u_2}\\n  (f : R → ↥(ValuativeRel.posSubmonoid R) → α)\\n  (hf : ∀ (x y : R) (t s : ↥(ValuativeRel.posSubmonoid R)), x * ↑t ≤ᵥ y * ↑s → y * ↑s ≤ᵥ x * ↑t → f x s = f y t) (x : R)\\n  (y : ↥(ValuativeRel.posSubmonoid R)),\\n  ValuativeRel\", \"doc\": \"For any function $ f : R \\\\times S \\\\to \\\\alpha $ (where $ S $ is the positive submonoid under the valuative relation) that respects the valuative equivalence relation, lifting $ f $ to the value group w\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits give ordinary localization/DVR/S-unit formulas (Dedekind hypotheses), meromorphic divisors or polynomial monomial division. None lifts a boundary valuation vector through the integer cokernel class map for completed saturated monoid rings or Cohen parameter quotients."
+  },
+  {
+   "tool": "grep",
+   "query": "toric|facet|divisor.*monomial|monomial.*divisor",
+   "results": "19 hits: Mathlib/RingTheory/MvPowerSeries/NoZeroDivisors.lean, Mathlib/RingTheory/MvPowerSeries/NoZeroDivisors.lean, Mathlib/RingTheory/MvPowerSeries/NoZeroDivisors.lean, Mathlib/RingTheory/MvPowerSeries/NoZeroDivisors.lean, Mathlib/RingTheory/MvPowerSeries/NoZeroDivisors.lean, Mathlib/RingTheory/Polynomial/ShiftedLegendre.lean, Mathlib/RingTheory/MvPolynomial/MonomialOrder.lean, Mathlib/RingTheory/MvPolynomial/MonomialOrder.lean",
+   "date": "2026-10-23",
+   "verdict": "no match: polynomial factorization and power-series non-zero-divisor results do not cover completed saturated monoid rings or Cohen parameter quotients; Dedekind and analytic divisor results have different objects and hypotheses."
+  },
+  {
+   "tool": "leansearch",
+   "query": "An effective principal divisor supported on the toric boundary of a complete local monoid ring is the divisor of a monomial",
+   "results": "8 hits: MeromorphicOn.divisor, MvPolynomial.dvd_monomial_mul_iff_exists, MvPowerSeries.monomial_mem_nonzeroDivisors, MeromorphicOn.divisor_def, MvPowerSeries.monomial_mem_nonzeroDivisorsRight, MvPolynomial.dvd_monomial_iff_exists, Function.FactorizedRational.divisor, MvPolynomial.mem_ideal_span_monomial_image_iff_dvd",
+   "date": "2026-10-23",
+   "verdict": "no match: polynomial factorization and power-series non-zero-divisor results do not cover completed saturated monoid rings or Cohen parameter quotients; Dedekind and analytic divisor results have different objects and hypotheses."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"MonoidAlgebra\", \"IsUnit\"",
+   "results": "0 hits: ",
+   "date": "2026-10-23",
+   "verdict": "no match: polynomial factorization and power-series non-zero-divisor results do not cover completed saturated monoid rings or Cohen parameter quotients; Dedekind and analytic divisor results have different objects and hypotheses."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "In a completed saturated sharp monoid ring a regular function invertible after inverting monomials has the same divisor as a monomial",
+   "results": "8 hits: MvPolynomial.dvd_monomial_one_iff_exists, MvPolynomial.dvd_monomial_mul_iff_exists, MvPolynomial.dvd_X_iff_exists, AddMonoidAlgebra.of'_divOf, denomsClearable_C_mul_X_pow, AddMonoidAlgebra.mul_of'_divOf, PowerSeries.Unit_of_divided_by_X_pow_order_nonzero, PowerSeries.IsWeierstrassDivisorAt.isUnit_shift",
+   "date": "2026-10-23",
+   "verdict": "no match: polynomial factorization and power-series non-zero-divisor results do not cover completed saturated monoid rings or Cohen parameter quotients; Dedekind and analytic divisor results have different objects and hypotheses."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A principal effective Weil divisor supported on the boundary primes has facet valuation vector in the image of the exponent lattice using injectivity into the divisor class group",
+   "results": "8 hits: ClassGroup.mkMMem, Set.coe_integer, NumberField.mixedEmbedding.mem_span_fractionalIdealLatticeBasis, NumberField.mixedEmbedding.fundamentalCone.mem_idealSet, IsDedekindDomain.HeightOneSpectrum.valuationOfNeZeroToFun, Set.integer_valuation_le_one, NumberField.mixedEmbedding.fundamentalCone.preimageOfMemIntegerSet, IsDedekindDomain.HeightOneSpectrum.mem_integers_of_valuation_le_one",
+   "date": "2026-10-23",
+   "verdict": "no match: polynomial factorization and power-series non-zero-divisor results do not cover completed saturated monoid rings or Cohen parameter quotients; Dedekind and analytic divisor results have different objects and hypotheses."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-complete-toric-kato-recognition",
+  "date": "2026-10-22",
+  "group": "Q68"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Proof (1)--(2) nearby-duality alteration ancestry, via lem-trf-log-regular-divisorial-structure: the complete-local divisorial recognition input for the log-regular local charts in ILO VI 1.4 and 1.6. This is a supporting literature interface in the retained ancestry, not an additional explicit assertion in the blueprint proof. Extraction for recognition proof steps 1 and 4--7: facets, support on the boundary, integer class-kernel lift, saturated cone membership, and comparison at all height-one primes.",
+   "via": [
+    "lem-trf-complete-toric-kato-recognition",
+    "lem-trf-log-regular-divisorial-structure",
+    "lem-trf-log-blowup-normalization",
+    "lem-trf-log-regular-desingularization",
+    "lem-trf-nodal-pair-projective-resolution",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-trf-complete-toric-localized-unit-divisor-lift",
+  "worker": "stage1",
+  "summary": "Kept the statement and its hypotheses unchanged. Wrote the denominator-cancellation, boundary-support, integer class-kernel lift, saturated cone membership and all-prime comparison argument, reusing four existing statements and adding no nodes. Checked the sources and small cases; no project Lean attachment or Mathlib match was found.",
+  "blueprint": "Supporting complete-local recognition input under lem-trf-local-term-locality proof (1)--(2), through the inherited nearby-duality/alteration ancestry. Realizes the retained recognition proof steps 1 and 4--7, without applying ILO VI 1.6 as a converse."
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q08-441dbc947",
+  "group": "Q08",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q08-441dbc947 (reviewer sub-agent of L); spot-checked: I read the item and all four cited statements in full, plus the parent kato-recognition step 2 and ILO VI 1.6 (pp. 75-76) for the two models. The delivery has no new nodes. The statement and stmt_deps are unchanged against the earlier Q68 snapshots, and the item is still unsplit on live and side-live, so nothing supersedes it. Step 1 is genuinely elementary: h(fb-z^a)=0 with h a nonzero monomial gives fb=z^a, nonzero. Step 2: facet-valuations says the boundary primes are exactly the height-one primes containing a monomial. So at any other height-one prime b/z^a is an inverse of f in R_q, and the kernel node's unit criterion gives v=0; m_F>=0 because f lies in R. Step 3: every hypothesis of class-injectivity is either assumed by the item or supplied by facet-valuations. beta([m]) = [div f] = 0, so injectivity puts m in nu(G); this is integral. Step 4: P = C ∩ G from cone-lattice(c), with the half-spaces from facet-valuations, gives a_0 in P. Step 5: the valuations agree at every height-one prime. I checked edge cases: P={0}, n=0, N^2, and the singular cone 0<=b<=2a, where the parity constraint is respected. proof_deps equals the union of uses. All citations stay in unit sk-i-curve-zero, there is no cycle (checked over the 266-node closure), there is no SGA citation, and the Mathlib searches cover all three kinds. The only near-duplicate, faithfully-flat-monomial-unit-descent, is a different statement. No changes."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.CompleteToricLocalizedUnitDivisorLift",
+  "declaration": "ToricMonoid.complete_toric_localized_unit_divisor_lift",
+  "file": "lean/Sheaf/RingTheory/CompleteToricLocalizedUnitDivisorLift.lean",
+  "statement": "theorem complete_toric_localized_unit_divisor_lift (P : Type u) [AddCommMonoid P] (hfs : AlgebraicGeometry.IsFineSaturatedMonoid (Multiplicative P)) (hsharp : ∀ q : P, IsUnit (Multiplicative.ofAdd q) → q = 0) (n : ℕ) (R : Type w) [CommRing R] [IsDomain R] [IsNoetherianRing R] [IsIntegrallyClosed R] (z : P → R) (hmodel : IsCompleteModel.{u, v, w} P n R z) (hmonomial : ∀ q : P, z q ≠ 0) (f : R) (hf : IsUnit (algebraMap R (Localization (Submonoid.closure (Set.range z))) f)) : f ≠ 0 ∧ ∃ a₀ : P, ∀ q : Ring.WeilHeightOnePrime R, Ring.weilOrder q f = Ring.weilOrder q (z a₀)",
+  "branch": "newtargets-dag",
+  "by": "Q24",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-6e0184aad",
+  "group": "Q24",
+  "result": "pass",
+  "note": "Clause-by-clause match: IsFineSaturatedMonoid+hsharp (same as facet-valuations sibling), IsCompleteModel.{u,v,w} gives both models (IsCohenRing, θ-p in completedChartIdeal, iso carrying monomials to z), IsDomain/IsNoetherianRing/IsIntegrallyClosed, hmonomial, Localization at closure(range z) = S, IsUnit hypothesis; conclusion f≠0 ∧ ∃ a₀ ∀ height-one q, weilOrder equality (length = normalized DVR valuation for nonzero elements). Universes u/v/w independent and bound. Edge cases P={0}, n=0, both, imperfect Cohen residue field covered. stmt_deps gains only the landed def-trf-complete-toric-model (allowed); statement verbatim; no new defs, sorry only, docstrings with source/blueprint/proof steps; proof-dep imports acyclic. No compile needed (no change). No findings."
+ }
+}

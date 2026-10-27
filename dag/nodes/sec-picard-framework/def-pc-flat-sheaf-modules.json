@@ -49,7 +49,18 @@
   "item": "def-pc-kflat-complex",
   "date": "2026-10-09"
  },
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
  "import_flags": [],
  "chapter": "sec-picard-framework",
  "unit": "sk-thm-picard-semicon",
@@ -73,21 +84,23 @@
   "declaration": "SheafOfModules.IsFlatOnSite",
   "declarations": [
    "SheafOfModules.IsFlatOnSite",
-   "CategoryTheory.exactFunctor"
+   "CategoryTheory.exactFunctor",
+   "CategoryTheory.ObjectProperty.flat"
   ],
-  "statement": "def IsFlatOnSite\n    (F : SheafOfModules.{m} ((sheafCompose J (forget₂ CommRingCat.{r} RingCat.{r})).obj R)) :\n    Prop",
+  "statement": "def IsFlatOnSite (F : SheafOfModules.{m} ((sheafCompose J (forget₂ CommRingCat.{r} RingCat.{r})).obj R)) : Prop",
   "branch": "newtargets-dag",
-  "by": "Q48",
-  "date": "2026-10-18",
-  "existing": true,
-  "note": "Section 1(B), existing-interface repair without a new definition: retain the independent-universe IsFlatOnSite declaration for general ring sheaves and additionally expose its existing underlying CategoryTheory.exactFunctor predicate through this public-import module. IsFlatOnSite takes SheafOfModules and cannot take the Sheaf (ModuleCat Λ) encoding required by the recorded etale derived and constructible categories. In that encoding flatness is exactly exactFunctor applied to the canonical sheaf tensorRight L, the same defining condition as IsFlatOnSite; the new consumer uses that existing predicate directly. Neither flatness nor either sheaf tensor is redefined, no equivalence or comparison is assumed, and existing consumers of IsFlatOnSite are preserved."
+  "by": "Q32",
+  "date": "2026-10-23",
+  "existing": false,
+  "note": "§1(B), mixed existing interfaces: retain IsFlatOnSite and exactFunctor and additionally expose the existing ObjectProperty.flat from WeilConjectures.FromJoel.CategoryTheory.Abelian.Flat.Basic for fixed-ring module sheaves. IsFlatOnSite takes intrinsic SheafOfModules and cannot take Sheaf J (ModuleCat A). ObjectProperty.flat says precisely that tensorLeft and tensorRight are exact; in this symmetric closed sheaf category these are equivalent and give the recorded flatness, without a new flatness predicate. The owning module only gains a public import of the existing upstream flatness API, so the added declaration is actually exported; both original public declarations and all their data remain unchanged.",
+  "file": "lean/Sheaf/Algebra/Category/ModuleCat/Sheaf/FlatOnSite.lean"
  },
  "reviewed_lean": {
-  "date": "2026-10-18",
+  "date": "2026-10-23",
   "by": "L",
-  "reviewer": "NT-stage2-Codex-e56736d77",
-  "group": "Q48",
-  "result": "fix",
-  "note": "Lean statement and mathematics accepted; scompile.py passed both checks without diagnostics. Wrote review.md and a complete replacement report in fixes/lem-fd-flat-constructible-tensor.report.md, replacing the H11 placeholder second reading and recording compiler evidence. No Lean or node changes needed."
+  "reviewer": "NT-stage2-cc-6273acbd7",
+  "group": "Q32",
+  "result": "pass",
+  "note": "Re-delivery after the H13 RETURN of 28f8868c. NY record: only a declarations superset and an appended note; existing:false, file and primary kept; the module gains one public import of ConstructibleIntrinsic; no name clash in the Sheaf tree. Q18 record: only mapDerivedCategory added to declarations and the note extended; existing:false and file kept; module not delivered. Q52 record identical to live; the canonical comparison alias moved into the item module with the same body. def-pc-flat: ObjectProperty.flat added; the record becomes existing:false owning FlatOnSite.lean (previously existing:true, no file; lean.by Q48 to Q32), its only change is a public import of FromJoel Flat.Basic, and every original declaration stays. def-pur-sheaf-hom superset accepted as before. Item node unchanged except lean; statement verbatim; single sorry; pro-etale D^b_ctf via boundedConstructibleIntrinsic matches the recorded finiteTorConstructible. All clauses (constructibility, flatness, pro-etale local triviality, both evaluations with the reverse arrow taking no sign, comparison square, singleton intervals [-m,-m] and [m,m], translated intervals for every K on both sites) and the edge cases checked. No compile run (no file changed); the worker reports clean per-file compiles and an OK dry run."
  }
 }

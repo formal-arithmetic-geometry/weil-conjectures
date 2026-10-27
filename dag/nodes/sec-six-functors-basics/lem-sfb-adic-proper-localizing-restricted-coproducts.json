@@ -1,0 +1,75 @@
+{
+ "id": "lem-sfb-adic-proper-localizing-restricted-coproducts",
+ "kind": "statement",
+ "title": "The restricted proper adic pushforward preserves coproducts",
+ "statement": "Fix a universe u, a prime $\\ell$, and a field $k$ in universe u of positive characteristic different from $\\ell$. Let $Z,Y$ be separated finite-type $k$-schemes and let $g:Z\\to Y$ be a proper $k$-morphism [sk-def-sfb-dc-setting]. Let $\\Lambda$ be a commutative condensed ring with its specified multiplication and a certificate of one of the three adic coefficient families [def-sfb-adic-coefficient-certificate]. For $T=Z,Y$, put $\\Lambda_T=p_T^*\\Lambda$, let $D_T=D(\\operatorname{Mod}_{\\Lambda_T})$ be the ordinary unbounded module-object derived category [sk-def-sfb-module-derived-pushpull], let $\\mathcal B_T$ be its bounded constructible full subcategory [sk-def-sfb-bounded-constructible], and let $\\mathcal L_T=\\operatorname{Loc}(\\mathcal B_T)$ be the full localizing hull, using ambient coproducts indexed in universe u+1 [def-sfb-bounded-constructible-localizing-closure]. Let $F_g:\\mathcal L_Z\\to\\mathcal L_Y$ be the functor obtained by restricting the ambient $Rg_*$ along the full inclusions, using [lem-sfb-adic-proper-localizing-membership] for its object map. For every type $I$ in universe $u+1$, the functor $F_g$ preserves $I$-indexed coproducts, including the empty coproduct.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-cor-existence-ii/sk-cor-existence-ii-restriction.proof.md",
+  "place": "Part (1), identity compactification and restriction to localizing hulls; agent-written categorical expansion of the returned proof. Full construction material is retained in source.note.",
+  "lean_reference": {
+   "module": "Sheaf.AlgebraicGeometry.EllAdicProperLocalizingPushforward",
+   "declaration": "AlgebraicGeometry.ProEtale.CondensedRing.ellAdicLocalizingLowerStar_preservesCoproducts",
+   "place": "Read-clone declaration at lean/Sheaf/AlgebraicGeometry/EllAdicProperLocalizingPushforward.lean:84; signature checked on 2026-10-27; no compilation or closed-axiom claim."
+  },
+  "note": "Construction material for the worker who claims this unsplit node. This is retained argument, not a completed proof. The original parent proof and the previous NH worker's expanded construction are preserved verbatim below.\n\nOriginal parent step 3 (verbatim):\nDefine the restricted functor using ObjectProperty.lift and the proved membership theorem. Its shift structure and exactness are inherited by the full triangulated subcategory. Reflect preservation of coproducts along the fully faithful target inclusion, whose composite with F_g is the source inclusion followed by Rg_*.\nCited nodes: [def-sfb-bounded-constructible-localizing-closure], [lem-sfb-adic-proper-localizing-coproducts].\n\nPrevious NH construction paragraph 1 (verbatim):\nThe membership theorem defines $F_g$ by sending $(K,h_K)$ to $(Rg_*K,h_{Rg_*K})$ and each morphism $a$ to $Rg_*(a)$; functor laws are the ambient laws. In particular $i_Y F_g=(Rg_*)i_Z$. Each ambient shift isomorphism has source and target in the full hulls, so it and its inverse define the shift isomorphism for $F_g$ with the same naturality and coherence equations. A distinguished triangle in a hull is one whose ambient image is distinguished; ambient triangulatedness therefore gives triangulatedness of this restriction.\nCited nodes: [lem-sfb-adic-proper-localizing-membership], [def-sfb-bounded-constructible-localizing-closure], [lem-pc-right-derived-functor-triangulated].\n\nPrevious NH construction paragraph 2 (verbatim):\nFix $I$ in universe $u+1$. The theorem [lem-sfb-adic-proper-localizing-coproducts] says precisely that $i_Y F_g=(Rg_*)i_Z$ preserves $I$-indexed coproducts. The full target inclusion reflects a colimit cocone: for any target object of the hull, take the unique ambient mediating map into its image, lift it by fullness, and use faithfulness for its cocone equations and uniqueness. Apply this to the image of each colimit cocone under $F_g$. It is a colimit after $i_Y$, by the cited theorem, hence before $i_Y$ as required. The hulls inherit their coproducts since their defining object properties contain ambient coproducts; the same fullness/uniqueness argument proves their universal property. For $I=\\varnothing$ this is exactly the unique-map argument for the zero object.\nCited nodes: [lem-sfb-adic-proper-localizing-coproducts], [def-sfb-bounded-constructible-localizing-closure].\n\nDeclaration identified by the human return and checked against the current read clone: AlgebraicGeometry.ProEtale.CondensedRing.ellAdicLocalizingLowerStar_preservesCoproducts in Sheaf.AlgebraicGeometry.EllAdicProperLocalizingPushforward, line 84. Retained signature:\ntheorem ellAdicLocalizingLowerStar_preservesCoproducts (I : Type (u + 1)) : PreservesColimitsOfShape (Discrete I) (ellAdicLocalizingLowerStar Λ ℓ g hΛ)\nThe prior attempt proposed a separate module Sheaf.AlgebraicGeometry.EllAdicProperRestrictedCoproducts; this was a planning suggestion, not a stage-1 binding. Stage 2 and the maintainer own the Lean allocation."
+ },
+ "stmt_deps": [
+  "sk-def-sfb-dc-setting",
+  "def-sfb-adic-coefficient-certificate",
+  "sk-def-sfb-module-derived-pushpull",
+  "sk-def-sfb-bounded-constructible",
+  "def-sfb-bounded-constructible-localizing-closure",
+  "lem-sfb-adic-proper-localizing-membership"
+ ],
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "preservesColimitsOfShape_of_reflects_of_preserves|fullyFaithful_reflectsColimits",
+   "results": "6 hits: Mathlib/CategoryTheory/Presentable/Basic.lean, Mathlib/CategoryTheory/Limits/Preserves/Basic.lean, Mathlib/CategoryTheory/Limits/Preserves/Basic.lean, Mathlib/CategoryTheory/Limits/Preserves/Basic.lean, Mathlib/CategoryTheory/Limits/Preserves/Finite.lean, Mathlib/CategoryTheory/Limits/Preserves/Finite.lean",
+   "date": "2026-10-27",
+   "verdict": "component results only; no theorem about the actual proper adic pushforward and its two hulls"
+  },
+  {
+   "tool": "leansearch",
+   "query": "restricted exact functor preserves arbitrary coproducts by fully faithful inclusion reflecting colimits",
+   "results": "8 hits: CategoryTheory.Limits.fullyFaithful_reflectsColimits, CategoryTheory.createsColimitOfFullyFaithfulOfLift', CategoryTheory.Limits.FormalCoproduct.fullyFaithfulIncl, CategoryTheory.instPreservesFiniteColimitsObjFunctorExactFunctor, CategoryTheory.Limits.createsColimitFullSubcategoryInclusion, CategoryTheory.Limits.fullyFaithful_reflectsLimits, CategoryTheory.exactFunctor, CategoryTheory.Limits.FormalCoproduct.instFullIncl",
+   "date": "2026-10-27",
+   "verdict": "component results only; no theorem about the actual proper adic pushforward and its two hulls"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Limits.PreservesColimitsOfShape, CategoryTheory.Functor.Full",
+   "results": "2 hits: CategoryTheory.Limits.instIsClosedUnderColimitsOfShapeEssImageOfHasColimitsOfShapeOfPreservesColimitsOfShapeOfFullOfFaithful, CategoryTheory.Adjunction.preservesColimitsOfShape_iff",
+   "date": "2026-10-27",
+   "verdict": "component results only; no theorem about the actual proper adic pushforward and its two hulls"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The restriction of a proper derived pushforward to bounded constructible localizing hulls preserves discrete coproducts",
+   "results": "8 hits: Condensed.instAB5CondensedMod, Condensed.hasExactColimitsOfShape, instHasFiniteColimitsCondensedOfHasWeakSheafifyCompHausCoherentTopology, CondensedSet.mem_locallyConstant_essImage_of_isColimit_mapCocone, CategoryTheory.Functor.sheafPushforwardCocontinuous, LightCondensed.lanLightCondSet, Condensed.lanSheafProfinite, SheafOfModules.instIsRightAdjointPushforwardCompSheafRingCatMapSheafPushforwardContinuous",
+   "date": "2026-10-27",
+   "verdict": "component results only; no theorem about the actual proper adic pushforward and its two hulls"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-adic-proper-localizing-pushforward",
+  "date": "2026-10-27",
+  "group": "NH"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-cor-existence-ii",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "Nearest computable blueprint ancestor is null because the parent created.item is a historical Lean module identifier; original recorded provenance was lem-sfb-dc-proper-pushforward-left-adjoint-e. Current source: det-cor-existence-ii-restriction proof (1), actual proper pushforward on the two hulls.",
+   "via": [
+    "lem-sfb-adic-proper-localizing-pushforward"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ }
+}

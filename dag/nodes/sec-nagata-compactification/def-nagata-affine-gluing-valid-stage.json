@@ -98,7 +98,18 @@
    "where": "statement"
   }
  ],
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
  "chapter": "sec-nagata-compactification",
  "unit": "sk-prop-nagata-sketch-approximation",
  "split_report": {
@@ -122,9 +133,34 @@
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NE-aabee448a (reviewer sub-agent of L); spot-checked: Read the item, both new nodes, every cited dependency statement, sources and route in full. Verified refinement maps, localized certificates, cofinality hypotheses, persistence, edge cases and duplicate candidates. No repairs needed; concrete checks are recorded in review.md."
  },
  "blueprint_update": {
-  "snapshot": "main-20261015",
-  "statement": "For every identity, inverse, open-preservation, and triple-cocycle equation\nin $\\mathsf G_S$, select a finite stage at which that equation holds on the\nchosen generators after localization. Define\n$\\lambda_{\\mathrm{glue}}(S)$ to be the selected upper bound of\n$\\lambda_{\\mathrm{coeff}}(S)$ and these finitely many witness stages. Let\n$\\mathsf G_{S,\\lambda_{\\mathrm{glue}}}$ be the pullback of the raw datum to\nthis stage.",
-  "proof": [],
-  "note": "the current blueprint (aligned 2026-10-15 with the six-functors notes) states or proves this differently; a worker who touches the node follows it"
+  "snapshot": "main-20261023",
+  "commit": "c9b5f3ad18a6654dbbee6f7d7b4b4af85e01463f",
+  "changed": [
+   "statement",
+   "proof"
+  ],
+  "statement": "A *valid stage* (valid finite coefficient refinement) of $\\mathsf G_S$ is\na family $\\lambda=(A_{\\lambda,a})_a$ of finitely generated subrings\n$A_{\\lambda,a}\\subseteq\\Gamma(S,U_a)$ containing all basic-open elements\nof the chart $a$, such that the finitely many gluing equations hold:\n\n1. the $f_{aar}$ generate the unit ideal of $A_{\\lambda,a}$ (identity);\n1. $A_{\\lambda,a}[1/f_{abr}]=A_{\\lambda,b}[1/g_{abr}]$ inside\n$\\Gamma(S,D(f_{abr}))$ (the overlap maps are defined and mutually inverse);\n1. the restrictions of the $f_{baq}$ generate the unit ideal of\n$A_{\\lambda,b}[1/g_{abr}]$ (the overlap maps preserve the overlaps);\n1. the restrictions of the $f_{bcq}$ generate the unit ideal of\n$A_{\\lambda,a}[1/(f_{abr}f_{acs})]$ (triple overlaps are preserved).\n\nValid stages are ordered by chartwise inclusion. They are cofinal: any\nfinitely many sections of the charts lie in the coefficient subrings of one\nvalid stage. Define $\\lambda_{\\mathrm{glue}}(S)$ to be a\nselected valid stage with\n$A^{\\mathrm{coeff}}_a\\subseteq A_{\\lambda_{\\mathrm{glue}},a}$ for all $a$.",
+  "proof": [
+   {
+    "text": "Cofinality. Let $T_a\\subseteq\\Gamma(S,U_a)$ be finite sets. The scheme $S$\nis quasi-compact and quasi-separated, since it is covered by finitely many\naffine charts whose overlaps are quasi-compact\n([lemma-nagata-finite-affine-gluing-presentation]). By\n[prop-nagata-noetherian-inverse-system] choose a Noetherian approximation\n$S=\\varprojlim_k S_k$. By [pqf-lem-limit-qc-open-descends] each chart\n$U_a$ is the preimage of a quasi-compact open of some stage, which becomes\naffine after passing to a later stage (Stacks, Tag 01Z6); as there are\nfinitely many charts, there are one stage $k_0$ and affine opens\n$V_a\\subseteq S_{k_0}$ with preimage $U_a$. Since $U_a$ is the limit of\nthe affine preimages of $V_a$ in the later stages, $\\Gamma(S,U_a)$ is the\nfiltered colimit of their section rings; hence the finitely many elements\nof $T_a$ and the witnesses of the chart $a$ (among them the $f_{abr}$ and\n$g_{bar}$) are images of sections over the preimage of $V_a$ at a single\nstage $k_1$. The basic opens of the chosen lifts $f'_{abr}$ and $g'_{abr}$\nhave the same preimage $D(f_{abr})=D(g_{abr})$ in $S$, so by\n[pqf-lem-limit-qc-open-descends] they agree at a later stage $k_2$.",
+    "uses": [
+     "lemma-nagata-finite-affine-gluing-presentation",
+     "prop-nagata-noetherian-inverse-system",
+     "pqf-lem-limit-qc-open-descends"
+    ],
+    "elementary": false
+   },
+   {
+    "text": "Let $A_a\\subseteq\\Gamma(S,U_a)$ be the image of the sections over the\npreimage of $V_a$ at $k_2$. This is a quotient of a finitely generated\n$\\mathbf Z$-algebra, because $S_{k_2}$ is of finite type over $\\mathbf Z$,\nso $A_a$ is finitely generated; it contains $T_a$ and the witnesses, so\nthe three unit conditions hold. The localization subring\n$A_a[1/f_{abr}]$ is the image of the sections over the basic open of\n$f'_{abr}$ at $k_2$, and $A_b[1/g_{abr}]$ is the image of the sections\nover the basic open of $g'_{abr}$, which is the same open of $S_{k_2}$;\nso the two localization subrings agree. Hence $(A_a)_a$ is a valid stage\ncontaining every $T_a$.",
+    "uses": [],
+    "elementary": null
+   },
+   {
+    "text": "The selected stage $\\lambda_{\\mathrm{glue}}(S)$ exists by cofinality\napplied to the finite generating sets of the $A^{\\mathrm{coeff}}_a$.",
+    "uses": [],
+    "elementary": null
+   }
+  ],
+  "note": "the current blueprint (main-20261023, weil-conjectures-blueprint c9b5f3ad18) states or proves this differently; a worker who touches the node follows it"
  }
 }

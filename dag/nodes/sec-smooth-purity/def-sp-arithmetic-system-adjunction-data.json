@@ -1,0 +1,105 @@
+{
+ "id": "def-sp-arithmetic-system-adjunction-data",
+ "kind": "definition",
+ "title": "Data for ordinary and derived arithmetic floor extension",
+ "statement": "For a site C with sheafification of abelian sheaves and the sheaf-module conventions of [def-pur-system-level-left-extension-basic], retain unchanged the three records originally declared in [lem-sp-arithmetic-system-right-adjoint]: ArithmeticSystemScalarForgetting, ArithmeticSystemFloorData and ArithmeticSystemLimitData. They describe actual componentwise scalar restriction, the floor-extension Hom formulas and exact-derived localization normalization, and the total-limit comparison normalized by the ordinary limit restriction of [def-sp-strict-tower-arithmetic-restriction-data]. The localization is the specified [def-weil-exact-derived-adjunction]. Add ArithmeticSystemOrdinaryFloorData, with exactly the ordinary fields of ArithmeticSystemFloorData (adjunction, level, prefix_zero, selected, transition, map, counit, hom_selection, hom_extension, hom_prefix, unit_selected), excluding its four quasi-isomorphism and derived-unit/counit fields. This is only data packaging, with no existence or correctness assumption and no chosen functor.\n\nThe exact fields of all four records, in the standard site-variable context, are:\n```lean\nstructure ArithmeticSystemScalarForgetting\n    (B : ℕᵒᵖ ⥤ Sheaf J CommRingCat.{w}) (A : Sheaf J CommRingCat.{w})\n    (α : (Functor.const ℕᵒᵖ).obj A ⟶ B) where\n  functor : StrictRingSystem B ⥤ ℕᵒᵖ ⥤\n    SheafOfModules.{w} (derivedChangeRingIndependentCoefficients J A)\n  level : ∀ (M : StrictRingSystem B) (n : ℕ),\n    (functor.obj M).obj (op n) =\n      (restrictScalars ((sheafCompose J (forget₂ CommRingCat.{w} RingCat.{w})).map\n        (α.app (op n)))).obj (M.level n)\n  map : ∀ {M N : StrictRingSystem B} (f : M ⟶ N) (n : ℕ),\n    eqToHom (level M n).symm ≫ (functor.map f).app (op n) ≫ eqToHom (level N n) =\n      (restrictScalars ((sheafCompose J (forget₂ CommRingCat.{w} RingCat.{w})).map\n        (α.app (op n)))).map (f.app n)\n  transition : ∀ (M : StrictRingSystem B) {m n : ℕ} (h : m ≤ n)\n    (V : Cᵒᵖ) (x : (M.level n).val.obj V),\n    (eqToHom (level M m)).val.app V\n      (((functor.obj M).map (homOfLE h).op).val.app V\n        ((eqToHom (level M n).symm).val.app V x)) =\n      (M.transition h).val.app V x\n  additive : functor.Additive\n  limits : PreservesFiniteLimits functor\n  colimits : PreservesFiniteColimits functor\n\nattribute [instance] ArithmeticSystemScalarForgetting.additive\n  ArithmeticSystemScalarForgetting.limits ArithmeticSystemScalarForgetting.colimits\n\n/-- The floor extension and its specified adjunction, including all component formulas.\nEquality of presentations at selected levels expresses `UJ = id`; the counit is the\nidentity under that equality. The localized adjunction below is the specified exact\nadjunction, not a separately chosen derived adjunction.\nSource: arithmetic restriction in the normalization paragraph; Bhatt--Scholze,\nLemma 3.5.7 (blueprint: lem-sp-arithmetic-system-right-adjoint). -/\nstructure ArithmeticSystemFloorData (B : ℕᵒᵖ ⥤ Sheaf J CommRingCat.{w})\n    (e : ℕ) (r : ℕ ↪o ℕ)\n    (hf : ∀ k : ℕ, e ≤ k + 1 → r ((k + 1) / e - 1) ≤ k)\n    (R : StrictRingSystem (selectedSystemRings B r) ⥤ StrictRingSystem B)\n    [R.Additive] [PreservesFiniteLimits R] [PreservesFiniteColimits R] where\n  adjunction : systemSubsequence B r ⊣ R\n  level : ∀ (N : StrictRingSystem (selectedSystemRings B r)) (k : ℕ) (h : e ≤ k + 1),\n    (R.obj N).level k = (systemRestriction B (hf k h)).obj (N.level ((k + 1) / e - 1))\n  prefix_zero : ∀ (N : StrictRingSystem (selectedSystemRings B r)) (k : ℕ),\n    k + 1 < e → IsZero ((R.obj N).level k)\n  selected : ∀ (N : StrictRingSystem (selectedSystemRings B r)) (n : ℕ),\n    (R.obj N).level (r n) = N.level n\n  transition : ∀ (N : StrictRingSystem (selectedSystemRings B r))\n    {m n : ℕ} (h : m ≤ n) (hm : e ≤ m + 1) (hn : e ≤ n + 1)\n    (V : Cᵒᵖ) (x : ((R.obj N).level n).val.obj V),\n    (eqToHom (level N m hm)).val.app V (((R.obj N).transition h).val.app V x) =\n      (N.transition (Nat.sub_le_sub_right\n        (Nat.div_le_div_right (Nat.add_le_add_right h 1)) 1)).val.app V\n          ((eqToHom (level N n hn)).val.app V x)\n  map : ∀ {N P : StrictRingSystem (selectedSystemRings B r)} (f : N ⟶ P)\n    (k : ℕ) (h : e ≤ k + 1),\n    (R.map f).app k ≫ eqToHom (level P k h) = eqToHom (level N k h) ≫\n      (systemRestriction B (hf k h)).map (f.app ((k + 1) / e - 1))\n  counit : ∀ (N : StrictRingSystem (selectedSystemRings B r)) (n : ℕ),\n    (adjunction.counit.app N).app n = eqToHom (selected N n)\n  hom_selection : ∀ (D : StrictRingSystem B)\n    (N : StrictRingSystem (selectedSystemRings B r)) (f : D ⟶ R.obj N) (n : ℕ),\n    ((adjunction.homEquiv D N).symm f).app n = f.app (r n) ≫ eqToHom (selected N n)\n  hom_extension : ∀ (D : StrictRingSystem B)\n    (N : StrictRingSystem (selectedSystemRings B r))\n    (g : (systemSubsequence B r).obj D ⟶ N) (k : ℕ) (h : e ≤ k + 1),\n    (adjunction.homEquiv D N g).app k ≫ eqToHom (level N k h) =\n      D.transition (hf k h) ≫ (systemRestriction B (hf k h)).map\n        (g.app ((k + 1) / e - 1))\n  hom_prefix : ∀ (D : StrictRingSystem B)\n    (N : StrictRingSystem (selectedSystemRings B r))\n    (g : (systemSubsequence B r).obj D ⟶ N) (k : ℕ),\n    k + 1 < e → (adjunction.homEquiv D N g).app k = 0\n  unit_selected : ∀ (D : StrictRingSystem B) (n : ℕ),\n    (adjunction.unit.app D).app (r n) ≫\n      eqToHom (selected ((systemSubsequence B r).obj D) n) = 𝟙 (D.level (r n))\n  quasiIso_restriction : ∀ {K L : CochainComplex (StrictRingSystem B) ℤ} (f : K ⟶ L),\n    QuasiIso f → QuasiIso (((systemSubsequence B r).mapHomologicalComplex (.up ℤ)).map f)\n  quasiIso_extension : ∀ {K L :\n    CochainComplex (StrictRingSystem (selectedSystemRings B r)) ℤ} (f : K ⟶ L),\n    QuasiIso f → QuasiIso ((R.mapHomologicalComplex (.up ℤ)).map f)\n  derived_unit : ∀ (K : CochainComplex (StrictRingSystem B) ℤ),\n    adjunction.mapExactDerivedCategory.unit.app (DerivedCategory.Q.obj K) ≫\n      R.mapDerivedCategory.map ((systemSubsequence B r).mapDerivedCategoryFactors.hom.app K) ≫\n      R.mapDerivedCategoryFactors.hom.app\n        (((systemSubsequence B r).mapHomologicalComplex (.up ℤ)).obj K) =\n      DerivedCategory.Q.map ((adjunction.mapHomologicalComplex (.up ℤ)).unit.app K)\n  derived_counit : ∀ (K :\n    CochainComplex (StrictRingSystem (selectedSystemRings B r)) ℤ),\n    (systemSubsequence B r).mapDerivedCategory.map (R.mapDerivedCategoryFactors.hom.app K) ≫\n      (systemSubsequence B r).mapDerivedCategoryFactors.hom.app\n        ((R.mapHomologicalComplex (.up ℤ)).obj K) ≫\n      DerivedCategory.Q.map ((adjunction.mapHomologicalComplex (.up ℤ)).counit.app K) =\n      adjunction.mapExactDerivedCategory.counit.app (DerivedCategory.Q.obj K)\n\n/-- The common-coefficient limit comparison, normalized by ordinary limit restriction.\nThe normalization is an equality of maps from the localized ordinary limit, so it\nspecifies all selected projections on K-injective representatives and hence the\ncanonical derived projections. No exactness of countable products is required.\nSource: Stacks Tags 0940, 0941 and 0H9K; arithmetic restriction in the integral\nadjunction (blueprint: lem-sp-arithmetic-system-right-adjoint). -/\nstructure ArithmeticSystemLimitData\n    (B : ℕᵒᵖ ⥤ Sheaf J CommRingCat.{w}) (e : ℕ) (r : ℕ ↪o ℕ)\n    (R : StrictRingSystem (selectedSystemRings B r) ⥤ StrictRingSystem B)\n    [R.Additive] [PreservesFiniteLimits R] [PreservesFiniteColimits R]\n    (A : Sheaf J CommRingCat.{w})\n    (α : (Functor.const ℕᵒᵖ).obj A ⟶ B)\n    (β : (Functor.const ℕᵒᵖ).obj A ⟶ selectedSystemRings B r)\n    (F : ArithmeticSystemScalarForgetting B A α)\n    (G : ArithmeticSystemScalarForgetting (selectedSystemRings B r) A β)\n    [HasDerivedCategory.{z} (SheafOfModules.{w}\n      (derivedChangeRingIndependentCoefficients J A))]\n    [HasDerivedCategory.{z} (ℕᵒᵖ ⥤ SheafOfModules.{w}\n      (derivedChangeRingIndependentCoefficients J A))]\n    (RF : DerivedCategory.{z} (ℕᵒᵖ ⥤ SheafOfModules.{w}\n      (derivedChangeRingIndependentCoefficients J A)) ⥤\n      DerivedCategory.{z} (SheafOfModules.{w}\n        (derivedChangeRingIndependentCoefficients J A)))\n    (η : (CategoryTheory.StrictTowerArithmetic.limitComplex _ ⋙ DerivedCategory.Q) ⟶\n      DerivedCategory.Q ⋙ RF) where\n  selection : R ⋙ F.functor ⋙ CategoryTheory.StrictTowerArithmetic.restriction _ e ≅ G.functor\n  selection_sections : ∀ (N : StrictRingSystem (selectedSystemRings B r)) (n : ℕ)\n    (V : Cᵒᵖ) (x : ((R.obj N).level (e * (n + 1) - 1)).val.obj V),\n    HEq ((eqToHom (G.level N n)).val.app V\n      (((selection.hom.app N).app (op n)).val.app V\n        ((eqToHom (F.level (R.obj N) (e * (n + 1) - 1)).symm).val.app V x))) x\n  comparison : (R ⋙ F.functor).mapDerivedCategory ⋙ RF ≅ G.functor.mapDerivedCategory ⋙ RF\n  normalization : ∀ (K :\n      CochainComplex (StrictRingSystem (selectedSystemRings B r)) ℤ),\n    η.app (((R ⋙ F.functor).mapHomologicalComplex (.up ℤ)).obj K) ≫\n      RF.map ((R ⋙ F.functor).mapDerivedCategoryFactors.inv.app K) ≫\n      comparison.hom.app (DerivedCategory.Q.obj K) ≫\n      RF.map (G.functor.mapDerivedCategoryFactors.hom.app K) =\n    DerivedCategory.Q.map\n      (CategoryTheory.StrictTowerArithmetic.limitMap e\n          (((R ⋙ F.functor).mapHomologicalComplex (.up ℤ)).obj K) ≫\n        (CategoryTheory.StrictTowerArithmetic.limitComplex _).map\n          ((NatTrans.mapHomologicalComplex selection.hom (.up ℤ)).app K)) ≫\n      η.app ((G.functor.mapHomologicalComplex (.up ℤ)).obj K)\n\n/-- The ordinary part of the arithmetic floor-extension construction. It records the\nspecified Hom bijection, selected-level identities, and all strict component formulas.\nThe four localization conclusions of `ArithmeticSystemFloorData` are deliberately absent:\nthey follow from exact-functor localization, without any further construction.\nSource: arithmetic restriction in the normalization paragraph of the integral adjunction;\nBhatt--Scholze, Lemma 3.5.7 (blueprint: def-sp-arithmetic-system-adjunction-data). -/\nstructure ArithmeticSystemOrdinaryFloorData (B : ℕᵒᵖ ⥤ Sheaf J CommRingCat.{w})\n    (e : ℕ) (r : ℕ ↪o ℕ)\n    (hf : ∀ k : ℕ, e ≤ k + 1 → r ((k + 1) / e - 1) ≤ k)\n    (R : StrictRingSystem (selectedSystemRings B r) ⥤ StrictRingSystem B)\n    [R.Additive] [PreservesFiniteLimits R] [PreservesFiniteColimits R] where\n  adjunction : systemSubsequence B r ⊣ R\n  level : ∀ (N : StrictRingSystem (selectedSystemRings B r)) (k : ℕ) (h : e ≤ k + 1),\n    (R.obj N).level k = (systemRestriction B (hf k h)).obj (N.level ((k + 1) / e - 1))\n  prefix_zero : ∀ (N : StrictRingSystem (selectedSystemRings B r)) (k : ℕ),\n    k + 1 < e → IsZero ((R.obj N).level k)\n  selected : ∀ (N : StrictRingSystem (selectedSystemRings B r)) (n : ℕ),\n    (R.obj N).level (r n) = N.level n\n  transition : ∀ (N : StrictRingSystem (selectedSystemRings B r))\n    {m n : ℕ} (h : m ≤ n) (hm : e ≤ m + 1) (hn : e ≤ n + 1)\n    (V : Cᵒᵖ) (x : ((R.obj N).level n).val.obj V),\n    (eqToHom (level N m hm)).val.app V (((R.obj N).transition h).val.app V x) =\n      (N.transition (Nat.sub_le_sub_right\n        (Nat.div_le_div_right (Nat.add_le_add_right h 1)) 1)).val.app V\n          ((eqToHom (level N n hn)).val.app V x)\n  map : ∀ {N P : StrictRingSystem (selectedSystemRings B r)} (f : N ⟶ P)\n    (k : ℕ) (h : e ≤ k + 1),\n    (R.map f).app k ≫ eqToHom (level P k h) = eqToHom (level N k h) ≫\n      (systemRestriction B (hf k h)).map (f.app ((k + 1) / e - 1))\n  counit : ∀ (N : StrictRingSystem (selectedSystemRings B r)) (n : ℕ),\n    (adjunction.counit.app N).app n = eqToHom (selected N n)\n  hom_selection : ∀ (D : StrictRingSystem B)\n    (N : StrictRingSystem (selectedSystemRings B r)) (f : D ⟶ R.obj N) (n : ℕ),\n    ((adjunction.homEquiv D N).symm f).app n = f.app (r n) ≫ eqToHom (selected N n)\n  hom_extension : ∀ (D : StrictRingSystem B)\n    (N : StrictRingSystem (selectedSystemRings B r))\n    (g : (systemSubsequence B r).obj D ⟶ N) (k : ℕ) (h : e ≤ k + 1),\n    (adjunction.homEquiv D N g).app k ≫ eqToHom (level N k h) =\n      D.transition (hf k h) ≫ (systemRestriction B (hf k h)).map\n        (g.app ((k + 1) / e - 1))\n  hom_prefix : ∀ (D : StrictRingSystem B)\n    (N : StrictRingSystem (selectedSystemRings B r))\n    (g : (systemSubsequence B r).obj D ⟶ N) (k : ℕ),\n    k + 1 < e → (adjunction.homEquiv D N g).app k = 0\n  unit_selected : ∀ (D : StrictRingSystem B) (n : ℕ),\n    (adjunction.unit.app D).app (r n) ≫\n      eqToHom (selected ((systemSubsequence B r).obj D) n) = 𝟙 (D.level (r n))\n```",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-tower/sk-lem-sp-tower-equivalence.proof.md",
+  "place": "Adjunction paragraph; arithmetic-restriction expansion in lem-sp-arithmetic-system-right-adjoint, steps 1–6"
+ },
+ "stmt_deps": [
+  "def-pur-system-level-left-extension-basic",
+  "def-weil-exact-derived-adjunction",
+  "def-sp-strict-tower-arithmetic-restriction-data",
+  "def-sfb-derived-change-of-rings-cochain-model"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-tower/sk-lem-sp-tower-equivalence.proof.md",
+  "place": "Adjunction paragraph; arithmetic-restriction expansion in lem-sp-arithmetic-system-right-adjoint, steps 1–6"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Exact right adjoint floor extension of strict inverse systems of modules over varying sheaves of rings",
+   "results": "SheafOfModules.hasLimit (Mathlib.Algebra.Category.ModuleCat.Sheaf.Limits), pullbackPushforwardAdjunction (Mathlib.Algebra.Category.ModuleCat.Sheaf.PullbackContinuous), FloorRing.ofFloor (Mathlib.Algebra.Order.Floor.Defs). Read the change-of-rings definitions and the generic adjunction interfaces: none constructs the normalized varying-ring floor extension or the scalar-forgetting limit comparison.",
+   "date": "2026-10-25",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Exact right adjoint to arithmetic subsequence restriction of varying-ring module sheaf systems",
+   "results": "LightCondMod.LocallyConstant.adjunction, CondensedMod.LocallyConstant.adjunction, localCohomology.diagram, Profinite.NobelingProof.succ_exact. These concern constant-ring or unrelated categories, not StrictRingSystem or its normalized floor construction.",
+   "date": "2026-10-25",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "floor.*extension|ArithmeticSystem|arithmetic.*restriction (Mathlib via msearch.py grep); StrictRingSystem and floor extension in lean/Sheaf, lean/WeilConjectures and dag/nodes",
+   "results": "No Mathlib hits. Project search finds only the parent ArithmeticSystemRightAdjoint definitions and theorem; the ordinary construction and common-coefficient comparison have no separate declaration. Existing arithmetic comparison concerns constant coefficients, with a larger coefficient universe.",
+   "date": "2026-10-25",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.CategoryTheory.ArithmeticSystemRightAdjoint",
+  "date": "2026-10-25",
+  "group": "B6"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sp-integral-adjunction",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-sp-integral-adjunction-bijection",
+   "place": "Adjunction: arithmetic restriction and its right adjoint, as expanded in the parent node",
+   "via": [
+    "lem-sp-arithmetic-system-right-adjoint",
+    "det-sp-normalized-equivalence"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.ArithmeticSystemRightAdjointData",
+  "file": "lean/Sheaf/CategoryTheory/ArithmeticSystemRightAdjointData.lean",
+  "declaration": "SheafOfModules.ArithmeticSystemScalarForgetting",
+  "declarations": [
+   "SheafOfModules.ArithmeticSystemScalarForgetting",
+   "SheafOfModules.ArithmeticSystemFloorData",
+   "SheafOfModules.ArithmeticSystemLimitData",
+   "SheafOfModules.ArithmeticSystemOrdinaryFloorData"
+  ],
+  "statement": "structure ArithmeticSystemScalarForgetting (B : ℕᵒᵖ ⥤ Sheaf J CommRingCat.{w}) (A : Sheaf J CommRingCat.{w}) (α : (Functor.const ℕᵒᵖ).obj A ⟶ B)",
+  "branch": "sheaf-dag",
+  "by": "B6",
+  "date": "2026-10-25"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-e5624",
+  "group": "B6",
+  "result": "fix",
+  "landing": "20261025T094857-L-3269256",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-e5624",
+  "group": "B6",
+  "result": "fix",
+  "landing": "20261025T094857-L-3269256",
+  "kind": "interface",
+  "note": "independent cc review: item statement vs clone (byte-identical); moved records vs old item lines 47-188 (verbatim); two new sorry statements vs the item and plan steps 1-4/6 (true, strictly smaller); sandbox compile + #print axioms (sorryAx only from the two split statements); node stmt_deps vs the declarations used in their statements"
+ }
+}

@@ -1,0 +1,276 @@
+{
+ "id": "lem-sfb-trait-etale-branch-pinching",
+ "kind": "statement",
+ "title": "Projective nodal pinching along finite etale double branches",
+ "statement": "Let $R$ be a discrete valuation ring with fraction field $K$, residue field $k$, and $S=\\operatorname{Spec}R$ [def-sc-discrete-valuation-ring, def-weil-affine-spectrum]. Let $C\\to S$ be projective, flat and finitely presented with nonempty nodal geometric fibres [def-kun-projective, def-weil-flat-morphism, def-sbc-locally-finite-presentation]. Let $B\\hookrightarrow C$ be a closed immersion into the relative smooth locus [def-weil-closed-immersion, def-sbc-smooth-morphisms], and let $B\\to N$ be a finite etale morphism of constant degree two between finite etale $S$-schemes [def-weil-finite-integral-morphism, def-weil-etale-morphism]. The empty case is allowed. The scheme pushout $Y=C\\amalg_BN$ exists [def-weil-pbc-category-colimit], is projective, flat and finitely presented over $S$, and has nodal geometric fibres. The map $C\\to Y$ is finite and surjective, $N\\to Y$ is a closed immersion, the square is also cartesian, and $C\\setminus B\\to Y\\setminus N$ is an isomorphism. Formation of the square commutes with base change to the generic fibre and to geometric fibres. Compatible maps from $C$ and $N$ to any scheme induce a unique map from $Y$. For every open subscheme $V\\subseteq Y$ [def-weil-open-immersion], the square of the inverse images of $V$ in $B$, $C$, $N$ and $V$ itself is again a pushout of schemes. A nodal geometric fibre here is reduced of pure dimension one, and each nonsmooth closed point has completed local ring $\\Omega[[x,y]]/(xy)$ [def-weil-geometric-fibre, def-weil-pbc-adic-completion, def-weil-pbc-multivariate-power-series]. The intermediate geometric fibres need not be connected.",
+ "source": {
+  "document": "literature/stacks-project/more-morphisms.tex",
+  "place": "Agent trait form of Tag 0E25 (proposition-pushout-along-closed-immersion-and-integral) and Tag 0E26 (lemma-pushout-separated). The split branch ring is the fibre product of two smooth branch rings over R. Projectivity uses descent of an ample line bundle after trivializing on the finite semilocal branch schemes. This is not the field-only pinching assertion."
+ },
+ "stmt_deps": [
+  "def-sc-discrete-valuation-ring",
+  "def-weil-affine-spectrum",
+  "def-kun-projective",
+  "def-weil-flat-morphism",
+  "def-sbc-locally-finite-presentation",
+  "def-sbc-smooth-morphisms",
+  "def-weil-geometric-fibre",
+  "def-weil-pbc-adic-completion",
+  "def-weil-pbc-multivariate-power-series",
+  "def-weil-closed-immersion",
+  "def-weil-finite-integral-morphism",
+  "def-weil-etale-morphism",
+  "def-weil-pbc-category-colimit",
+  "def-weil-open-immersion",
+  "def-weil-pure-dimension",
+  "def-trf-projective-nodal-tower",
+  "def-pc-finite-locally-free"
+ ],
+ "proof": [
+  {
+   "text": "The finite degree-two map $B\\to N$ is surjective: each fibre algebra has dimension two, hence is nonzero and its spectrum is nonempty [def-pc-finite-locally-free]. Every ideal of a DVR is principal, hence finitely generated, so $R$ is Noetherian [def-sc-discrete-valuation-ring, def-weil-pbc-noetherian-ring]; this is the base hypothesis of the two new nodes cited in steps 1 and 4. Its spectrum has only its generic and closed points, so the finite fibres of $B/S$ make $|B|$ finite [def-sc-discrete-valuation-ring, lem-weil-pbc-finite-closed-map-finite-fibres]. Apply [lem-sfb-finite-centre-proper-pinching] to $(X,Z,T)=(C,B,N)$. It supplies $Y,a,b$, an ample invertible $L$ on $C$, an affine $U\\supset B$, properness of both $C/S$ and $Y/S$, finite presentation of $Y/S$, finiteness and surjectivity of $a$, the cartesian square, complement isomorphism, and its Ferrand affine charts.",
+   "uses": [
+    "def-pc-finite-locally-free",
+    "def-sc-discrete-valuation-ring",
+    "def-weil-pbc-noetherian-ring",
+    "lem-weil-pbc-finite-closed-map-finite-fibres",
+    "lem-sfb-finite-centre-proper-pinching"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 0E25 (proposition-pushout-along-closed-immersion-and-integral), Tags 0E26 (lemma-pushout-separated) and 0E27 (lemma-pushout-finite-type); Properties Tag 01ZY (lemma-ample-finite-set-in-affine)"
+   }
+  },
+  {
+   "text": "The schemes $B,N$ are flat over $S$ because they are etale [def-weil-etale-morphism], and $C/S$ is flat by hypothesis. Apply [lem-sfb-flat-trait-pinching-base-change] with $(X,Z,T,P)=(C,B,N,Y)$ and the affine $U$ from step 1. Its pushout hypothesis is supplied by that step, so this is the same $Y$ throughout. Thus $Y/S$ is flat and the square is a pushout after every affine scalar extension, in particular to $K$ and to every algebraically closed geometric-point field. Its tensor comparison uses flatness of the common quotient algebra of $B$, so includes the nonflat special-fibre extension.",
+   "uses": [
+    "def-weil-etale-morphism",
+    "lem-sfb-flat-trait-pinching-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 0ET0 (lemma-basic-example-pushout) on affine charts of Tag 0E25; More on Algebra Tag 0AUW (lemma-dedekind-torsion-free-flat); Algebra Tag 00HL (lemma-flat-tor-zero)"
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-geometric-nodal-pinching-criterion] to this $C,B,N,Y$: both $C/S$ and $Y/S$ are proper by step 1; $C/S$ is flat and finitely presented by hypothesis, $Y/S$ is finitely presented by step 1, and step 2 supplies the geometric-fibre pushouts. All hypotheses concerning $C$ and its smooth branches are the hypotheses of the item. It follows that the geometric fibres of $Y$ are nonempty, reduced of pure dimension one with precisely the stated nodal completions. This requires no connectedness or splitting over $R$.",
+   "uses": [
+    "lem-sfb-geometric-nodal-pinching-criterion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/curves.tex",
+    "place": "Tag 0E36 (lemma-complete-local-ring-pushout) and Tag 0C1J (example-glue-points)"
+   }
+  },
+  {
+   "text": "The cartesian square identifies $B=a^{-1}N$, and the complement map is an isomorphism. Both schemes are proper over the Noetherian ring $R$ by step 1, which also gives the finite surjective $a$ and closed immersion $N\\hookrightarrow Y$. With its $L,U$ and finite $|B|$, apply [lem-sfb-finite-branch-ample-descent] to $(X,Y,Z,T)=(C,Y,B,N)$. This gives an ample invertible $M$ on $Y$ with $a^*M\\simeq L$ and a closed immersion of $Y$ into a finite projective space over $S$. Hence $Y/S$ is projective in exactly the convention of the item.",
+   "uses": [
+    "lem-sfb-finite-branch-ample-descent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/coherent.tex",
+    "place": "Tag 0B5V (lemma-surjective-finite-morphism-ample); Properties Tag 0F20 (lemma-quasi-affine-invertible-nonvanishing-section)"
+   }
+  },
+  {
+   "text": "Finally [lem-sfb-finite-centre-proper-pinching] gives the pushout in all schemes and every open-restriction pushout. The former is exactly the unique factorization of compatible maps to an arbitrary scheme. If $B=N=\\varnothing$, its affine formula reads $A\\times_0 0=A$, so $Y=C$; all four applications include this case.",
+   "uses": [
+    "lem-sfb-finite-centre-proper-pinching"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 0E25 (proposition-pushout-along-closed-immersion-and-integral), proof: compatibility with restriction to open subschemes; Tag 0ET0 for the empty affine case"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-finite-locally-free",
+  "def-sc-discrete-valuation-ring",
+  "def-weil-pbc-noetherian-ring",
+  "lem-weil-pbc-finite-closed-map-finite-fibres",
+  "lem-sfb-finite-centre-proper-pinching",
+  "def-weil-etale-morphism",
+  "lem-sfb-flat-trait-pinching-base-change",
+  "lem-sfb-geometric-nodal-pinching-criterion",
+  "lem-sfb-finite-branch-ample-descent"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/more-morphisms.tex",
+  "place": "Assembly of four extracted arguments, preserving the reviewed nine-step trait proof in report.md"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Pinch pairs of finite etale smooth branches on a projective nodal curve over a discrete valuation ring to form a projective nodal family",
+   "results": "{\"t\": \"2026-10-22T04:21:07Z\", \"tool\": \"leanfinder\", \"query\": \"Pinch pairs of finite etale smooth branches on a projective nodal curve over a discrete valuation ring to form a projective nodal family\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"WeierstrassCurve.minimal\", \"WeierstrassCurve.IsMinimal\", \"WeierstrassCurve.Projective.NonsingularLift\", \"WeierstrassCurve.IsGoodReduction\", \"WeierstrassCurve.reduction\", \"WeierstrassCurve.exists_isMinimal\", \"WeierstrassCurve.Projective.nonsingularLift_zero\", \"WeierstrassCurve.instIsMinimalMinimal\"], \"digest\": \"4e31f24d5348f6ef\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: open-immersion gluing, ring pushouts and scheme pullbacks do not construct closed-branch pinching."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A scheme pushout gluing two smooth sections creates a persistent node with ring R power series x y modulo xy",
+   "results": "{\"t\": \"2026-10-22T04:21:04Z\", \"tool\": \"leansearch\", \"query\": \"A scheme pushout gluing two smooth sections creates a persistent node with ring R power series x y modulo xy\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.IsAlgebraic.instIsPushout_1\", \"AlgebraicGeometry.Scheme.GlueData\", \"AlgebraicGeometry.Scheme.Pullback.Triplet.tensor\", \"AlgebraicGeometry.Scheme.GlueData.glued\", \"instIsPushoutPolynomial_1\", \"AlgebraicGeometry.Scheme.GlueData.isoCarrier\", \"CommRingCat.closure_range_union_range_eq_top_of_isPushout\", \"AlgebraicGeometry.Scheme.GlueData.gluedScheme\"], \"digest\": \"f3bce9284469da11\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: open-immersion gluing, ring pushouts and scheme pullbacks do not construct closed-branch pinching."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"pushout\"",
+   "results": "{\"t\": \"2026-10-22T04:21:05Z\", \"tool\": \"loogle\", \"query\": \"\\\"AlgebraicGeometry\\\", \\\"pushout\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.IsLocallyDirected.instIsLocallyDirectedWidePushoutShapeCompForgetOfIsOpenImmersionMap\", \"AlgebraicGeometry.isPullback_SpecMap_of_isPushout\", \"AlgebraicGeometry.isPullback_SpecMap_pushout\", \"AlgebraicGeometry.isPushout_appTop_of_isPullback\", \"AlgebraicGeometry.pushoutSection\", \"AlgebraicGeometry.isIso_pushoutSection_of_isAffineOpen\", \"AlgebraicGeometry.mono_pushoutSection_of_isCompact_of_flat_left\", \"AlgebraicGeometry.mono_pushoutSection_of_isCompact_of_flat_right\"], \"digest\": \"30f267eaf9553171\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: open-immersion gluing, ring pushouts and scheme pullbacks do not construct closed-branch pinching."
+  },
+  {
+   "tool": "grep",
+   "query": "pinching|conductor|nodal|pushout",
+   "results": "{\"t\": \"2026-10-22T04:21:05Z\", \"tool\": \"grep\", \"query\": \"pinching|conductor|nodal|pushout\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/PullbackCarrier.lean\", \"Mathlib/AlgebraicGeometry/PullbackCarrier.lean\", \"Mathlib/AlgebraicGeometry/PullbackCarrier.lean\", \"Mathlib/AlgebraicGeometry/PullbackCarrier.lean\", \"Mathlib/AlgebraicGeometry/PullbackCarrier.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/Integral.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/Integral.lean\", \"Mathlib/AlgebraicGeometry/QuasiAffine.lean\"], \"digest\": \"30a3ba12ba568a6b\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: open-immersion gluing, ring pushouts and scheme pullbacks do not construct closed-branch pinching."
+  },
+  {
+   "tool": "grep",
+   "query": "pinching|ferrand|pushout|fibre.product",
+   "results": "{\"t\": \"2026-10-22T04:46:05Z\", \"tool\": \"grep\", \"query\": \"pinching|ferrand|pushout|fibre.product\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/EffectiveEpi.lean\", \"Mathlib/AlgebraicGeometry/Limits.lean\", \"Mathlib/AlgebraicGeometry/Limits.lean\", \"Mathlib/AlgebraicGeometry/Limits.lean\", \"Mathlib/AlgebraicGeometry/Gluing.lean\", \"Mathlib/AlgebraicGeometry/LimitsOver.lean\", \"Mathlib/AlgebraicGeometry/LimitsOver.lean\", \"Mathlib/AlgebraicGeometry/QuasiAffine.lean\"], \"digest\": \"51688b7f3d76d8fb\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern scheme pullbacks (ring tensor pushouts), open-immersion gluing, or elliptic curves, not Ferrand closed pinching."
+  },
+  {
+   "tool": "grep",
+   "query": "IsPushout|pushoutSection",
+   "results": "{\"t\": \"2026-10-22T04:46:05Z\", \"tool\": \"grep\", \"query\": \"IsPushout|pushoutSection\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/QuasiAffine.lean\", \"Mathlib/AlgebraicGeometry/QuasiAffine.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/Integral.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/Integral.lean\", \"Mathlib/AlgebraicGeometry/PullbackCarrier.lean\", \"Mathlib/AlgebraicGeometry/PullbackCarrier.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/SchemeTheoreticallyDominant.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/Affine.lean\"], \"digest\": \"a6e50d18b69796b1\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern scheme pullbacks (ring tensor pushouts), open-immersion gluing, or elliptic curves, not Ferrand closed pinching."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Pushouts of schemes along closed immersions and integral morphisms exist under the affine neighbourhood condition",
+   "results": "{\"t\": \"2026-10-22T04:46:05Z\", \"tool\": \"leansearch\", \"query\": \"Pushouts of schemes along closed immersions and integral morphisms exist under the affine neighbourhood condition\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsIntegralHom.instUniversallyClosed\", \"AlgebraicGeometry.Scheme.instHasPullbacksIsOpenImmersion\", \"AlgebraicGeometry.reduce_to_affine_nbhd\", \"AlgebraicGeometry.IsIntegralHom.instOfIsClosedImmersion\", \"AlgebraicGeometry.Scheme.pullback_map_isOpenImmersion\", \"AlgebraicGeometry.IsIntegralHom.mk\", \"AlgebraicGeometry.IsImmersion.instSndScheme\", \"AlgebraicGeometry.IsClosedImmersion\"], \"digest\": \"22682d0caabd7cb4\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern scheme pullbacks (ring tensor pushouts), open-immersion gluing, or elliptic curves, not Ferrand closed pinching."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"pushout\"",
+   "results": "{\"t\": \"2026-10-22T04:46:05Z\", \"tool\": \"loogle\", \"query\": \"\\\"AlgebraicGeometry\\\", \\\"pushout\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.IsLocallyDirected.instIsLocallyDirectedWidePushoutShapeCompForgetOfIsOpenImmersionMap\", \"AlgebraicGeometry.isPullback_SpecMap_of_isPushout\", \"AlgebraicGeometry.isPullback_SpecMap_pushout\", \"AlgebraicGeometry.isPushout_appTop_of_isPullback\", \"AlgebraicGeometry.pushoutSection\", \"AlgebraicGeometry.isIso_pushoutSection_of_isAffineOpen\", \"AlgebraicGeometry.mono_pushoutSection_of_isCompact_of_flat_left\", \"AlgebraicGeometry.mono_pushoutSection_of_isCompact_of_flat_right\"], \"digest\": \"30f267eaf9553171\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern scheme pullbacks (ring tensor pushouts), open-immersion gluing, or elliptic curves, not Ferrand closed pinching."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A closed immersion Z into X and a finite morphism Z to N with affine neighborhoods admit a scheme pushout with fibre product coordinate rings",
+   "results": "{\"t\": \"2026-10-22T04:46:08Z\", \"tool\": \"leanfinder\", \"query\": \"A closed immersion Z into X and a finite morphism Z to N with affine neighborhoods admit a scheme pushout with fibre product coordinate rings\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.isPullback_Spec_map_pushout\", \"AlgebraicGeometry.Scheme.Pullback.base_affine_hasPullback\", \"AlgebraicGeometry.isPullback_SpecMap_pushout\", \"AlgebraicGeometry.Scheme.Pullback.affine_affine_hasPullback\", \"AlgebraicGeometry.Scheme.Pullback.affine_hasPullback\", \"AlgebraicGeometry.instIsClosedImmersionFstScheme\", \"AlgebraicGeometry.IsFinite.instFstScheme\", \"AlgebraicGeometry.Scheme.Pullback.instHasPullback\"], \"digest\": \"abaa37cd47da6967\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern scheme pullbacks (ring tensor pushouts), open-immersion gluing, or elliptic curves, not Ferrand closed pinching."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The spectrum of the fibre product of rings along a surjection glues schemes along a closed subscheme",
+   "results": "{\"t\": \"2026-10-22T04:46:09Z\", \"tool\": \"leanfinder\", \"query\": \"The spectrum of the fibre product of rings along a surjection glues schemes along a closed subscheme\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.isPullback_SpecMap_pushout\", \"AlgebraicGeometry.Surjective.instFstScheme\", \"AlgebraicGeometry.isPullback_Spec_map_pushout\", \"AlgebraicGeometry.Scheme.Pullback.Triplet.Spec_map_tensor_isPullback\", \"AlgebraicGeometry.isPullback_Spec_map_isPushout\", \"AlgebraicGeometry.Scheme.Pullback.gluing\", \"AlgebraicGeometry.Scheme.Pullback.Triplet.isPullback_SpecMap_tensor\", \"AlgebraicGeometry.pullbackSpecIso\"], \"digest\": \"aecfdb82acd3b223\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern scheme pullbacks (ring tensor pushouts), open-immersion gluing, or elliptic curves, not Ferrand closed pinching."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A projective flat nodal curve over a discrete valuation ring remains projective flat nodal after pinching a finite etale double cover of smooth branches",
+   "results": "{\"t\": \"2026-10-22T04:46:30Z\", \"tool\": \"leanfinder\", \"query\": \"A projective flat nodal curve over a discrete valuation ring remains projective flat nodal after pinching a finite etale double cover of smooth branches\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"WeierstrassCurve.IsGoodReduction\", \"WeierstrassCurve.IsMinimal\", \"WeierstrassCurve.exists_isMinimal\", \"WeierstrassCurve.minimal\", \"WeierstrassCurve.Projective.NonsingularLift\", \"WeierstrassCurve.Projective.baseChange_nonsingular\", \"WeierstrassCurve.reduction\", \"WeierstrassCurve.instIsMinimalMinimal\"], \"digest\": \"f14bbc43ffe8e51f\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern scheme pullbacks (ring tensor pushouts), open-immersion gluing, or elliptic curves, not Ferrand closed pinching."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-common-nodal-model",
+  "date": "2026-10-22",
+  "group": "NH"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong §3.8, last paragraph, printed pp.608--609: finite unramified Isom for unordered stable marked curves, and extension over a normal base. This is rigidity of stable pointed curves themselves, independent of any modification map.; rigidity input: Invariance of logarithmic pluricanonical lattices of semistable models; Common domination of marked nodal models over a discrete valuation ring; Projective nodal pinching along finite etale double branches",
+   "via": [
+    "lem-sfb-common-nodal-model",
+    "lem-sfb-semistable-log-pluricanonical-lattices",
+    "lem-sfb-stable-pointed-isom-finite",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-trait-etale-branch-pinching",
+  "worker": "stage1",
+  "summary": "Rebased the returned Q130 four-way re-split on the current live DAG, retaining every live field except proof, proof_deps, proof_origin and split_report. The live nine-step proof still agrees verbatim with original-proof.json and is preserved in the report. Re-read all current citations, including the finite-set section theorem and its children; the parent citation quotes are unchanged verbatim. Made the flat-base-change application explicitly use the already constructed pushout Y and the flat common quotient, and enumerated the finite-surjective and closed-centre hypotheses of ample descent. Four unchanged statement-only new nodes distribute construction/properness, flat base change, geometric nodality and ample descent; the assembly remains below 3000 characters. No statement, source, search record, Lean metadata or accepted tool authorization changed.",
+  "blueprint": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong §3.8, last paragraph, printed pp.608--609: finite unramified Isom for unordered stable marked curves, and extension over a normal base. This is rigidity of stable pointed curves themselves, independent of any modification map.; rigidity input: Invariance of logarithmic pluricanonical lattices of semistable models; Common domination of marked nodal models over a discrete valuation ring; Projective nodal pinching along finite etale double branches; four-way extraction of old proof steps 1--3, 4, 5, 6--8, with step 9 assembled.",
+  "tool_uses": []
+ },
+ "tool_uses": [
+  "lem-sbc-smooth-relative-dimension-permanence",
+  "lem-sc-ample-finite-set-affine",
+  "lem-trf-finite-surjective-ample-reflection",
+  "lem-trf-relative-nodal-point-pinching",
+  "lem-weil-pbc-glue-sheaves-of-modules",
+  "lem-weil-pbc-reduced-curve-normalization",
+  "lem-nagata-affine-proj-scalar-extension",
+  "lem-weil-pbc-projective-ample-invertible",
+  "lem-weil-pbc-ample-very-ample-immersion-affine-base",
+  "lem-weil-pbc-etale-fibre-discrete-separable-points"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q130-99b722d28",
+  "group": "Q130",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q130-99b722d28 (reviewer sub-agent of L); spot-checked: Fifth push of the human's 2026-10-21 re-split; heads 4a842a8e, f2f690ff, 82d5111e and 8b3921f1 were each given a FIX, then refused at landing on side-completion promotion. The four new nodes are byte-identical (sha256) to the 8b3921f1 head. The item statement, stmt_deps and all other fields are unchanged; only proof and split_report differ. Those changes are wording only: step 2 now names (X,Z,T,P)=(C,B,N,Y) with the same Y, and step 4 names the finite surjective a, the closed immersion N to Y and (X,Y,Z,T)=(C,Y,B,N). The earlier FIX was lost again. Re-split check: the old nine-step proof is preserved verbatim and allocated as follows. Old steps 1-3 go to finite-centre-proper-pinching, step 4 to flat-trait-pinching-base-change, step 5 to geometric-nodal-pinching-criterion, steps 6-8 to finite-branch-ample-descent, and step 9 to assembly step 5. The four workloads are comparable, none restates the item, and the assembly is 2705 characters (2867 after the fix). I checked every hypothesis of the four citations against the item and the earlier steps; every clause of the item is covered. I re-checked the sources and found all four statements true. Finite-centre: 01ZY (properties l.5244, case 3); 0E25 (l.19708); 0E26 (l.19847); 0E27 (l.19862). P is quasi-compact because a is surjective, universally closed because a_{S'} is surjective and X_{S'} is proper, and a is finite by the 00IT generators. Flat base change: Q is torsion-free, hence flat by 0AUW (l.4954); D is flat, so Tor_1(D,R')=0 by 00HL (l.9037), for every R' including 0, k and Omega; the charts are compared via 0ET0 (l.4101) and the open-restriction clause. Geometric criterion: the degree-2 etale fibre over Omega has two points; generic points are smooth via the dense open of reduced-curve-normalization; the trf field pinching lemma applies; 0E36 (curves l.2916) gives the node. Ample descent: a section from 0F20 (l.5327) on U; W = Y minus a(X minus U_s) contains T because the preimage of T is Z; two-open gluing gives a*M = L; 0B5V (coherent l.4548); a proper immersion is closed, giving the def-kun-projective convention. Edge cases tested: empty X, Z and T, nonclosed branch points, self-nodes, characteristic 2, nonflat R', the zero ring and nonsurjective j. Duplicate scan of the snapshot found none: Ferrand, compatible-affines, ring-fibre-product-spectrum, affine-closed-pinching, the trf pinching and closed-union pushout, and the new Q02 conductor-modification and proper-chain nodes (which assume these pushouts) are inputs or different statements; finite-surjective-ample-reflection and finite-normal-ample-descent are also different. No SGA source is used. FIX in fixes/dag/nodes/sec-six-functors-basics/lem-sfb-trait-etale-branch-pinching.json, keeping the new step 2/4 wording: (1) C1/B3: step 1 cites def-sc-discrete-valuation-ring and def-weil-pbc-noetherian-ring for 'R Noetherian'; uses and proof_deps updated, and proof_deps equals the union of uses. (2) B5: the five source places 'old proof step k' are replaced by Stacks tags and labels (0E25/0E26/0E27/01ZY; 0ET0/0AUW/00HL; 0E36/0C1J; 0B5V/0F20; 0E25 proof/0ET0), each label checked in the .tex files and tags/tags. No nodes dropped; no tool_uses added. Maintainer note: this is a promotion loop and the same FIX has now been lost four times; if the landing is refused again, re-apply this fix file.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.TraitEtaleBranchPinching",
+  "declaration": "AlgebraicGeometry.exists_trait_etale_branch_pinching",
+  "file": "lean/Sheaf/AlgebraicGeometry/TraitEtaleBranchPinching.lean",
+  "statement": "theorem exists_trait_etale_branch_pinching (R : Type u) [CommRing R] [IsDomain R] [IsDiscreteValuationRing R] (C B N : Over (Spec (.of R))) [IsHProjective C.hom] [Flat C.hom] [LocallyOfFinitePresentation C.hom] [IsFinite B.hom] [Etale B.hom] [IsFinite N.hom] [Etale N.hom] (i : B ⟶ C) (j : B ⟶ N) [IsClosedImmersion i.left] [Etale j.left] [j.left.IsFiniteLocallyFreeOfDegree 2] (hi : ∀ z : B.left, i.left z ∈ C.hom.smoothLocus) (hC : ∀ (Ω : Type u) [Field Ω] [IsAlgClosed Ω] (g : Spec (.of Ω) ⟶ Spec (.of R)), Nonempty ↥(pullback (C := Scheme.{u}) C.hom g) ∧ IsReduced (pullback (C := Scheme.{u}) C.hom g) ∧ (pullback (C := Scheme.{u}) C.hom g).IsPureDimension 1 ∧ ∀ x : ↥(pullback (C := Scheme.{u}) C.hom g), IsClosed ({x} : Set ↥(pullback (C := Scheme.{u}) C.hom g)) → x ∉ (pullback.snd C.hom g).smoothLocus → IsGeometricOrdinaryDoublePoint Ω (pullback (C := Scheme.{u}) C.hom g) x) : ∃ (Y : Over (Spec (.of R))) (a : C ⟶ Y) (b : N ⟶ Y), IsHProjective Y.hom ∧ Flat Y.hom ∧ ∃ hfp : LocallyOfFinitePresentation Y.hom, letI := hfp (∀ (Ω : Type u) [Field Ω] [IsAlgClosed Ω] (g : Spec (.of Ω) ⟶ Spec (.of R)), Nonempty ↥(pullback (C := Scheme.{u}) Y.hom g) ∧ IsReduced (pullback (C := Scheme.{u}) Y.hom g) ∧ (pullback (C := Scheme.{u}) Y.hom g).IsPureDimension 1 ∧ ∀ x : ↥(pullback (C := Scheme.{u}) Y.hom g), IsClosed ({x} : Set ↥(pullback (C := Scheme.{u}) Y.hom g)) → x ∉ (pullback.snd Y.hom g).smoothLocus → IsGeometricOrdinaryDoublePoint Ω (pullback (C := Scheme.{u}) Y.hom g) x) ∧ IsFinite a.left ∧ Surjective a.left ∧ IsClosedImmersion b.left ∧ IsPullback i.left j.left a.left b.left ∧ (∃ (U : C.left.Opens) (V : Y.left.Opens) (e : U.toScheme ≅ V.toScheme), (U : Set C.left) = (Set.range i.left)ᶜ ∧ (V : Set Y.left) = (Set.range b.left)ᶜ ∧ e.hom ≫ V.ι = U.ι ≫ a.left) ∧ (let F := Over.pullback (Spec.map (CommRingCat.ofHom (algebraMap R (FractionRing R)))) IsPushout (F.map i).left (F.map j).left (F.map a).left (F.map b).left) ∧ (∀ (Ω : Type u) [Field Ω] [IsAlgClosed Ω] (g : Spec (.of Ω) ⟶ Spec (.of R)), let F := Over.pullback g IsPushout (F.map i).left (F.map j).left (F.map a).left (F.map b).left) ∧ ∃ hs : IsPushout i.left j.left a.left b.left, let iY : Over.mk (i.left ≫ a.left) ⟶ Over.mk a.left := Over.homMk i.left rfl let jY : Over.mk (i.left ≫ a.left) ⟶ Over.mk b.left := Over.homMk j.left hs.w.symm ∀ V : Y.left.Opens, let F := Over.pullback V.ι IsPushout (F.map iY).left (F.map jY).left (pullback.snd a.left V.ι) (pullback.snd b.left V.ι)",
+  "branch": "newtargets-dag",
+  "by": "Q25",
+  "date": "2026-10-22",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-3e2e73edd",
+  "group": "Q25",
+  "result": "pass",
+  "note": "Read item node, all 17 stmt_deps records, exact decls (IsGeometricOrdinaryDoublePoint, Scheme.IsPureDimension, IsFiniteLocallyFreeOfDegree, smoothLocus), module and report (Worker report + Second reading by Q25 present). Every hypothesis and conclusion clause matches: DVR, IsHProjective/Flat/lfp (=fp via properness), geometric-fibre nodality for all alg-closed Ω:Type u with no connectedness, closed immersion into C.hom.smoothLocus, finite étale B,N with j étale + finite locally free of degree 2 (vacuous over empty N), IsPushout in Scheme as the universal property, finite surjective a, closed immersion b, IsPullback, complement iso commuting with a, generic (FractionRing) and geometric base-change pushouts, open-restriction pushouts via Over.pullback V.ι. Only lean and stmt_deps differ from live; the 3 added stmt_deps are the existing defs used; lean.statement verbatim; imports resolve; no competing binding. Gates OK: no defs, sorry only, docstrings with source, blueprint id and 9 proof steps, no stronger assumptions, not pro-étale, universes uniform. Advisories: extra Nonempty in Y fibre conclusion (true, derived in proof Step 5); redundant Etale j. No compile (no file changed)."
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ }
+}

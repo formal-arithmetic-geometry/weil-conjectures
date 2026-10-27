@@ -1,0 +1,111 @@
+{
+ "id": "lem-sf-p1-constant-unit-normalization",
+ "kind": "statement",
+ "title": "Normalization of the constructed constant derived unit",
+ "statement": "For a finite commutative ring A and an arbitrary scheme S, the constructed isomorphism constantUnit A S equals the canonical singleFunctorObjUnitIso for module sheaves. In particular its additional constant-sheaf monoidal-unit factor is the identity.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-geo-p1-adjunction/thm-amb-p1-adjunction.proof.md",
+  "place": "The constant-unit comparison in the coordinate trace; canonical constant-sheaf and derived monoidal-unit maps."
+ },
+ "stmt_deps": [
+  "def-sf-p1-integral-transport-data"
+ ],
+ "proof": [
+  {
+   "text": "The unit map of the constant-sheaf functor is the sheafification of the identity of the constant coefficient unit, hence is the identity. Its inverse is the identity by cancellation. The degree-zero functor preserves this identity, so the remaining factor in constantUnit is singleFunctorObjUnitIso.",
+   "uses": [
+    "def-sf-p1-integral-transport-data"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-sf-p1-integral-transport-data"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-geo-p1-adjunction/thm-amb-p1-adjunction.proof.md",
+  "place": "Fixed true component of the ordinary-to-compact-support exchange transport calculation."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The composition isomorphism of derived inverse images preserves the constant tensor unit",
+   "results": "Returned eight generic derived-zero and unit-of-tensor results; no equation for the cached finite-coefficient constant object. Local source reading found the canonical single-unit pullback equation in ProjectionFormula.Unit.",
+   "date": "2026-10-26",
+   "verdict": "Use the existing canonical source comparison and functorial identities."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Functor.map_comp\"",
+   "results": "Twelve generic functor-composition hits, including CategoryTheory.Functor.map_comp and map_comp_assoc.",
+   "date": "2026-10-26",
+   "verdict": "Functoriality ingredients only."
+  },
+  {
+   "tool": "grep",
+   "query": "leftDerivedUpperStar.*[Uu]nit",
+   "results": "No remote Mathlib hits. Local rg found leftDerivedUpperStar_map_singleFunctorObjUnitIso_inv_comp, singleFunctorObjUnitIso_inv and the unit-composition API in the source library.",
+   "date": "2026-10-26",
+   "verdict": "The source library supplies the monoidal equation; the cached wrapper normalization is a defining calculation."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Naturality of isomorphisms between functors, functor composition and preservation of tensor units by monoidal functors",
+   "results": "Eight hits, including Functor.CoreMonoidal.muIso_hom_natural_left, Functor.Monoidal.muNatIso, and unitOfTensorIsoUnit_hom_app. These provide general monoidal naturality, but not the constructed cached constant-object normalization or the specific pasted trace equation.",
+   "date": "2026-10-26",
+   "verdict": "No exact match; retain the proved concrete normalization and categorical pasting calculation."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.SfP1ProjectionTraceTransportTrue",
+  "date": "2026-10-26",
+  "group": "E1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-amb-p1-adjunction",
+   "place": "Normalization of the constructed constant derived unit",
+   "via": [
+    "lem-sf-p1-projection-trace-transport-true"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-prop-sf-rf-shriek-preservation",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.SfP1ConstantUnitNormalization",
+  "file": "lean/Sheaf/AlgebraicGeometry/SfP1ConstantUnitNormalization.lean",
+  "declaration": "AlgebraicGeometry.Etale.SfP1Transport.constantUnit_eq_single",
+  "statement": "theorem constantUnit_eq_single (A : Type (u + 1)) [CommRing A] [Finite A]\n    (S : Scheme.{u}) :\n    constantUnit A S = singleFunctorObjUnitIso (ModuleCat.{u + 1} A) S",
+  "branch": "sheaf-dag",
+  "by": "E1",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-b59d1",
+  "group": "E1",
+  "result": "pass",
+  "landing": "20261027T054555-L-964137",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-b59d1",
+  "group": "E1",
+  "result": "pass",
+  "landing": "20261027T054555-L-964137",
+  "kind": "interface",
+  "note": "independent cc review: item proof + presentationExchange sorry vs nodes lem-sf-p1-projection-trace-transport-true / lem-sf-p1-presentation-exchange; trace refactor vs change record sf-p1-trace-factorization and clone; forced adaptation ProjectiveLineTraceNormalization vs clone diff; all 11 direct importers compiled OK against the delivered set"
+ }
+}

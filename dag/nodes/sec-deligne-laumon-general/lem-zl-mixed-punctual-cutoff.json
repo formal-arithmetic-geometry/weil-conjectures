@@ -171,7 +171,34 @@
   "def-weil-pbc-scheme-conventions"
  ],
  "proof_split_by": "paragraphs",
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": [
+    "AlgebraicGeometry.WeilSheaf.IsMixedOfWeightsAtMost.of_hasWeightsAtMost"
+   ]
+  },
+  "slopmaster2": {
+   "state": "closed_part",
+   "decls": [
+    {
+     "name": "AlgebraicGeometry.WeilSheaf.IsMixedOfWeightsAtMost.of_hasWeightsAtMost",
+     "module": "WeilConjectures.DeligneLaumon.Reduction.Weights",
+     "lines": [
+      267,
+      288
+     ],
+     "kind": "theorem",
+     "sorry": false
+    }
+   ],
+   "missing": [
+    "AlgebraicGeometry.LAdicWeilSheaf.IsMixedOfWeightsAtMost.of_hasWeightsAtMost"
+   ],
+   "open": []
+  }
+ },
  "chapter": "sec-deligne-laumon-general",
  "unit": "sk-p-dl-general-relative-line",
  "lean": {
@@ -228,5 +255,43 @@
   "group": "NX",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NX-71e3f95bf (reviewer sub-agent of L); spot-checked: Read the item, the new node, the main-20261015 blueprint statement and proof (statement verbatim, unchanged), every cited statement, and Mathlib Triangularizable.lean:63-66. Batch 5: with the item made a leaf, the target closure loses only the new Mathlib leaf. lem-per-adic-heart-pullback-fibres (reaching def-pod-lisse-l-adic-sheaves, a definition) and lem-wf-rational-stalk-exact (reaching def-weil-local-frobenius-trace, a definition already in the base closure via def-weil-punctual-weights) are generic fibre tools: neither assumption gives them and neither is a step of the trace formula or of Poincare duality. Accepted. Fault C4/E6 in steps 2-3: lem-per-adic-heart-pullback-fibres is stated for the PBC categories (def-weil-pbc-rational-category / def-weil-pbc-qbar-category) and their adic fibres. The item's sheaf is in def-weil-constructible-heart, whose Frobenius fibres are Fib_s L y^* (def-weil-local-frobenius-trace). The step cites no comparison (lem-weil-pbc-integral-stratified-perfect-characterization or the J of lem-fd-rational-coefficient-category-comparison), and step 3 equates the two fibres without a cited statement. FIX rewrites steps 2-3. Step 2 now uses lem-dl-a1-constructible-fibres-exact: same heart, Fib_s fibres, joint conservativity, Weil sheaves after forgetting; lem-wf already relies on it. Step 3: the point z under the geometric point x is closed with kappa(z)=k by lem-kun-closed-point-field(a), its image y is closed, and the canonical k-point z is the geometric point associated with a k_0-embedding of kappa(y). Since x = z o Spec(tau) with tau an automorphism of Fbar_p, lem-pod-integral-pullback-composition (rationalized) and lem-weil-point-fibre-equivalence carry the nonzero fibre to z. proof_deps and the split_report tools are updated. Steps 1 and 4-6 are checked correct: the p-linear-filtration blueprint_update det product, the eigenvalue from the new leaf, purity equality against the bound at the same y and iota, log q_y>0, and zero quotients reweighted to v. Edge cases checked: empty Y_0, G=0, a Jordan block, rank one, v<u. New node lem-zl-alg-closed-endomorphism-eigenvalue is an exact Mathlib leaf (Module.End.exists_eigenvalue, line 63); B1-B9 are met, no duplicate was found by rg over dag/nodes, and V=0 is correctly excluded. No SGA source; no cycle. Maintainer note: sibling lem-zl-extension-by-zero-punctual conflates the same two fibre notions.; 1 file(s) fixed by the reviewer"
+ },
+ "blueprint_update": {
+  "snapshot": "main-20261023",
+  "commit": "c9b5f3ad18a6654dbbee6f7d7b4b4af85e01463f",
+  "changed": [
+   "statement",
+   "proof"
+  ],
+  "statement": "Fix the finite field, coefficient field and embedding $\\iota$ of\n[def-weil-punctual-weights].\nLet $\\mathcal G$ be a\nconstructible\n$\\Qlb$-Weil sheaf ([sk-lem-coefficient-heart], [def-weil-punctual-weights]) on a\nseparated finite-type\n$k_0$-scheme $Y_0$. Assume that for some $u\\in\\mathbf R$\nit is $\\iota$-mixed of weights\nat most $u$. Let $v\\in\\mathbf R$, and suppose that at every\nclosed point $y$ every eigenvalue $\\alpha$ of local Frobenius\non $\\mathcal G_{\\bar y}$ satisfies\n$|\\iota(\\alpha)|\\leq q_y^{v/2}$.\nThen $\\mathcal G$ is $\\iota$-mixed of weights at most $v$.",
+  "proof": [
+   {
+    "text": "Take a finite filtration by constructible Weil subsheaves supplied\nby the mixedness hypothesis in [def-weil-punctual-weights].\nWrite $\\mathcal Q_r$ for its punctually pure quotients and $u_r$\nfor their weights. Remove zero quotients.",
+    "uses": [
+     "def-weil-punctual-weights"
+    ],
+    "elementary": false
+   },
+   {
+    "text": "A nonzero $\\mathcal Q_r$ has a nonzero stalk on some lisse stratum\nof a constructible stratification\n([sk-lem-coefficient-heart] (3)). The locus where the\nlisse rank is nonzero contains a nonempty locally closed piece.\nIt contains a closed geometric point of $Y=Y_0\\times_{k_0}k$:\non a nonempty affine open of that piece, take a maximal ideal;\nthe weak Nullstellensatz gives residue field $k$.\nIts coordinates lie in a finite extension of the finite field\n$k_0$, so its image $y$ in $Y_0$ is a closed point.\nThus $(\\mathcal Q_r)_{\\bar y}\\neq0$ for some such $y$.",
+    "uses": [
+     "sk-lem-coefficient-heart"
+    ],
+    "elementary": false
+   },
+   {
+    "text": "Taking stalks of the filtration is exact and respects local\nFrobenius. Choose a basis adapted to it. The Frobenius matrix is\nblock triangular, so its characteristic polynomial is the product ([p-linear-filtration])\nof those on the successive quotients. Each eigenvalue on\n$(\\mathcal Q_r)_{\\bar y}$ is therefore an eigenvalue on\n$\\mathcal G_{\\bar y}$. Choose one; it is nonzero since Frobenius\nacts invertibly. Purity and the assumed bound give\n\n$$\nq_y^{u_r/2}=|\\iota(\\alpha)|\\leq q_y^{v/2}.\n$$",
+    "uses": [
+     "p-linear-filtration"
+    ],
+    "elementary": false
+   },
+   {
+    "text": "Since $q_y>1$, this implies $u_r\\leq v$.\nThe original finite filtration now has all nonzero quotient weights\nat most $v$, which is precisely the required mixedness bound.",
+    "uses": [],
+    "elementary": null
+   }
+  ],
+  "note": "the current blueprint (main-20261023, weil-conjectures-blueprint c9b5f3ad18) states or proves this differently; the node is proved in Lean: recorded 2026-10-23, not reopened"
  }
 }

@@ -1,0 +1,127 @@
+{
+ "id": "lem-sfb-finite-coefficient-proper-formulas",
+ "kind": "lemma",
+ "title": "Unbundled finite-coefficient proper exchange and projection formulas",
+ "statement": "Let l be prime and k a field of positive characteristic different from l. Let A be a finite commutative discrete topological ring killed by a power of l, R a commutative condensed ring, and e a specified isomorphism from R to the continuous condensed coefficient ring of A [lem-sf-finite-discrete-normalized-encoding]. Let p:X→Y be a proper k-morphism of separated finite-type k-schemes. For every cartesian square over p [def-weil-pbc-cartesian-square] and every internal module complex K on X that is bounded constructible of finite Tor amplitude [sk-def-sfb-constructible, det-def-sfb-constructible-tor-amplitude], the canonical condensedAmbientExchange [def-weil-pbc-ambient-ringed-exchange] is invertible at K. For such K and every bounded constructible finite-Tor complex M on Y, the canonical ordinary uncompleted moduleObjectProjectionMap [def-sfb-module-object-projection-map] is invertible at K,M. The base-changed schemes are arbitrary.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sfb-proper-base-change/sk-thm-sfb-proper-base-change-integral.proof.md",
+  "place": "Paragraph (3), application of finite proper base change to the residue inputs; the unbundled interface to the finite theorem."
+ },
+ "stmt_deps": [
+  "lem-sf-finite-discrete-normalized-encoding",
+  "def-weil-pbc-cartesian-square",
+  "sk-def-sfb-constructible",
+  "det-def-sfb-constructible-tor-amplitude",
+  "def-weil-pbc-ambient-ringed-exchange",
+  "def-sfb-module-object-projection-map",
+  "def-sfb-internal-derived-scalar-comparisons"
+ ],
+ "proof": [
+  {
+   "text": "Bundle X and Y over Spec k and p as their morphism in the over-category. Obtain the normalized finite encoding for every scheme from its proved existence theorem. Apply the finite proper coefficient-isomorphism helper with the specified ring-sheaf isomorphism e. Bundling a Dctf input uses its given object and exactly its two stated properties.",
+   "uses": [
+    "det-thm-sfb-proper-base-change-finite",
+    "lem-sf-finite-discrete-normalized-encoding"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The finite pullback square and the condensed ambient square are the same canonical composition comparison: their central transport is eqToIso of the same equality of scheme composites. Apply congruence to the mate operation and evaluate at the input object. Transport IsIso along this map equality to obtain the exchange clause for arbitrary base-changed schemes.",
+   "uses": [
+    "def-weil-pbc-cartesian-square",
+    "def-weil-pbc-ambient-ringed-exchange"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The private finite helper already has the projection clause expressed through moduleObjectProjectionMap. Its object is unchanged by bundling. Equality transport identifies the canonical instance presentations, retaining the actual projection morphism. The same equality transport compares the private proof caches with the canonical structures of this public statement.",
+   "uses": [
+    "def-sfb-module-object-projection-map"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "det-thm-sfb-proper-base-change-finite",
+  "lem-sf-finite-discrete-normalized-encoding",
+  "def-weil-pbc-cartesian-square",
+  "def-weil-pbc-ambient-ringed-exchange",
+  "def-sfb-module-object-projection-map"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sfb-proper-base-change/sk-thm-sfb-proper-base-change-integral.proof.md",
+  "place": "Paragraph (3); repackaging the proved finite proper theorem while retaining its actual maps."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Finite proper base change and projection formula for unbounded internal module complexes with bounded constructible finite Tor amplitude",
+   "date": "2026-10-27",
+   "results": "8 hits, including LightCondensed.free_internallyProjective_iff_tensor_condition and DerivedCategory.from_singleFunctor_obj_eq_zero_of_projective; none is a proper formula.",
+   "verdict": "Reuse the project finite proper theorem; only an interface adapter is needed."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.IsIso",
+   "date": "2026-10-27",
+   "results": "12 hits, including IsIso, IsIso.id, Iso.isIso_hom, Iso.isIso_inv, asIso and asIso'.",
+   "verdict": "The generic isomorphism API supplies congruence and cancellation, not the finite geometric theorem."
+  },
+  {
+   "tool": "grep",
+   "query": "finiteProperBaseChange|finiteCoefficientProperFormulas",
+   "date": "2026-10-27",
+   "results": "0 Mathlib hits. Local project search found the existing finiteProperBaseChange_of_coefficientIso helper.",
+   "verdict": "Apply that existing helper and compare the canonical maps; do not duplicate its proof."
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.IntegralResidueProperFormulas",
+  "date": "2026-10-27",
+  "group": "G3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sfb-integral-residue-proper-formulas",
+   "place": "The finite proper formulas used on the first residue inputs.",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sfb-proper-base-change",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.FiniteCoefficientProperFormulaTools",
+  "file": "lean/Sheaf/Paper/FiniteCoefficientProperFormulaTools.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.CondensedRing.finiteCoefficientProperFormulas",
+  "statement": "theorem finiteCoefficientProperFormulas\n    (R : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})\n    [MonObj R] [IsCommMonObj R]\n    (A : Type u) [CommRing A] [Finite A] [TopologicalSpace A]\n    [DiscreteTopology A] [IsTopologicalRing A]\n    (e : Mon.mk R ≅ Mon.mk (FiniteDiscreteOrdinary.coefficient A))\n    (l : ℕ) [Fact l.Prime] (hA : ∃ r : ℕ, (l ^ r : ℕ) • (1 : A) = 0)\n    (k : Type u) [Field k] [Fact (ringChar k).Prime] [Fact (ringChar k ≠ l)]\n    {X Y : Scheme.{u}}\n    [X.Over (Spec (.of k))] [Y.Over (Spec (.of k))]\n    [LocallyOfFiniteType (X ↘ Spec (.of k))] [QuasiCompact (X ↘ Spec (.of k))]\n    [IsSeparated (X ↘ Spec (.of k))]\n    [LocallyOfFiniteType (Y ↘ Spec (.of k))] [QuasiCompact (Y ↘ Spec (.of k))]\n    [IsSeparated (Y ↘ Spec (.of k))]\n    (p : X ⟶ Y) [p.IsOver (Spec (.of k))] [IsProper p] :\n    (∀ {X' Y' : Scheme.{u}} (g : Y' ⟶ Y) (p' : X' ⟶ Y') (g' : X' ⟶ X)\n      (sq : ChosenCartesianSquare g' p' p g) (K : DerivedCategory (Modules R X)),\n      (constantModelBoundedConstructible R X ⊓ DerivedCategory.finiteTorAmplitude _) K →\n      IsIso ((condensedAmbientExchange R sq).app K)) ∧\n    (∀ (K : DerivedCategory (Modules R X)) (M : DerivedCategory (Modules R Y)),\n      (constantModelBoundedConstructible R X ⊓ DerivedCategory.finiteTorAmplitude _) K →\n      (constantModelBoundedConstructible R Y ⊓ DerivedCategory.finiteTorAmplitude _) M →\n      IsIso (moduleObjectProjectionMap R p K M))",
+  "branch": "sheaf-dag",
+  "by": "G3",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-28a7e",
+  "group": "G3",
+  "result": "pass",
+  "landing": "20261026T222655-L-680687",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-28a7e",
+  "group": "G3",
+  "result": "pass",
+  "landing": "20261026T222655-L-680687",
+  "kind": "interface",
+  "note": "independent cc review: item IntegralResidueProperFormulas + new FiniteCoefficientProperFormulaTools + private-helper restatement in unclaimed FiniteProperBaseChange vs clone 3d5c9bc0 and the node plan; sandbox /tmp/g3irpf_28a7 run_set of the 3 delivered modules + 4 direct importers all rc 0; axioms: adapter and finiteProperBaseChange clean, item sorryAx traced to upstream integral_quotient_direct_image/projection_comparison"
+ }
+}

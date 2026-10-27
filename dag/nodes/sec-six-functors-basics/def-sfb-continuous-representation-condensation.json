@@ -15,9 +15,58 @@
   "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
   "place": "Paragraph (3), continuous-representation coefficients in the tame-boundary local calculation."
  },
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Identify the reconstructed section ring with ULift C(S,F) by the identity on additive sections: Sheaf.μ_comp_map_mul identifies the transported multiplication with pointwise multiplication. Form the presheaf of modules ULift C(S,V), with precomposition as restriction. Continuous maps turn finite coproducts into products and descend uniquely along profinite surjections, which are quotient maps; hence its underlying additive presheaf is a sheaf.",
+   "uses": [
+    "def-sfb-norm-continuous-monodromy-data",
+    "def-weil-pbc-internal-abelian-sheaf-module-equivalence"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply liftedSheafModule and its sectionModuleFunctor counit to the continuous-section module sheaf. On each test object joint continuity gives the pointwise action v(s) ↦ ρ(g(s))v(s), linear over C(S,F). Transport these actions along the linear counit equivalences. The representation laws and precomposition identities give the action monoid homomorphisms and their restriction naturality.",
+   "uses": [
+    "def-weil-pbc-internal-abelian-sheaf-module-equivalence",
+    "def-sfb-condensed-action-module"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Postcomposition by a continuous equivariant linear map is sectionwise linear and commutes with restrictions. Transport it through the two section equivalences and lift it using full faithfulness of sectionModuleFunctor. Pointwise equivariance gives an action morphism, and evaluation of every section proves uniqueness.",
+   "uses": [
+    "def-weil-pbc-internal-abelian-sheaf-module-equivalence",
+    "def-sfb-condensed-action-module"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For a semilinear map, use restriction of scalars on the target internal module. Naturality of the lax monoidal tensor comparison identifies its section scalar action with postcomposition by the coefficient ring map. The scalar equation makes sectionwise postcomposition linear. Full faithfulness lifts it; the normalized ScalarAction underlying isomorphism transports it to the prescribed action restriction. ScalarAction.action and pointwise equivariance prove equivariance. Injectivity of the underlying isomorphism and the section formulas prove uniqueness.",
+   "uses": [
+    "def-sfb-continuous-map-condensed-ring-map",
+    "def-sfb-condensed-equivariant-bar-data",
+    "def-weil-pbc-internal-abelian-sheaf-module-equivalence"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The factors (b,1) and (1,l) commute, so the L-action preserves B-fixed vectors. For the fixed inclusion use (b,l)=(1,l)(b,1) and fixedness, first on pure tensors and then by tensor induction. Equivariance sends fixed vectors to fixed vectors. The scalar insertion identities hold on pure tensors by definition and extend by tensor induction or bilinear extensionality.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-sfb-norm-continuous-monodromy-data",
+  "def-weil-pbc-internal-abelian-sheaf-module-equivalence",
+  "def-sfb-condensed-action-module",
+  "def-sfb-continuous-map-condensed-ring-map",
+  "def-sfb-condensed-equivariant-bar-data"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+  "place": "Paragraph (3); U5 implements the existing Lean docstring arguments using continuous-map sheaf descent, the internal/section-module equivalence, and elementary tensor identities (2026-10-25)."
+ },
  "mathlib_match": null,
  "mathlib_searches": [
   {
@@ -73,10 +122,14 @@
  },
  "lean_audit": {
   "master": {
-   "state": "none"
+   "state": "none",
+   "decls": [],
+   "missing": []
   },
   "slopmaster2": {
-   "state": "none"
+   "state": "none",
+   "decls": [],
+   "missing": []
   }
  },
  "chapter": "sec-six-functors-basics",
@@ -138,5 +191,15 @@
   "group": "Q02",
   "result": "pass",
   "note": "Re-delivery fixes the 5d0a RETURN. H2: lem-sfb-condensed-derived-invariant-bar is removed from the item's and the arrow node's stmt_deps and TeX. H3: reductionMap_h0 (unit square, H0 isos, inclusion formula), reduction_inclusion_natural plus reductionMap_natural (realizationMap of f, conclusions not assumptions), reductionMap_coefficients (realizationCoefficientMap, for every resolution and lift; F=Omega via coefficientContinuity) and reductionMap_trivial_identity ([Subsingleton B], identifications built independently of reductionMap) are all stated for reductionMap itself. Main theorem unchanged and matches the node: no completeness of Omega; presentations exist by reduction_realizations_exist. Theorem stmt_dep lem-sfb-condensed-product-bar-comparison is genuine: its Abelian/Grothendieck instances come from the conclusion of product_action_inflation, so PASS on that point. Arrow module byte-identical to 5d0a; realization module only gains @[instance_reducible]. Statement field verbatim; no hollow defs; all bodies sorry; docstrings OK; edge cases V=0, V^B=0, B=1, L=1, l=2, empty S covered. Advisory: overlap with the Koszul-specific Realization; V : Type (u+1) docstring note. No compile (no file changed)."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U5",
+  "result": "pass",
+  "landing": "20261025T061031-L-2394395",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

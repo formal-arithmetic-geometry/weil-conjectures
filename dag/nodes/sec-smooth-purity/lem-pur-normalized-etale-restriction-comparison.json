@@ -1,0 +1,127 @@
+{
+ "id": "lem-pur-normalized-etale-restriction-comparison",
+ "kind": "statement",
+ "title": "Agreement of normalized exceptional locality presentations",
+ "statement": "Fix the finite purity setting P [def-pur-conventions]. Let v:W→X be separated quasi-compact etale, let h:X→B and q:W→B be separated finite-type compactifiable maps, and let aB:B→Spec(k) be finite type, with q=v h. Then normalizedE(P,v,h,q), defined by exceptional composition followed by rho and the structure-map congruence [lem-pur-difference-first-input-restriction], equals dualizingCongr(q=v h) followed by the uniquely counit-normalized ambient etaleRestriction [lem-pur-diagonal-section-pasting]. Both are isomorphisms from ω_q to Lv*ω_h in the ordinary-etale derived category on W. The equality includes the specified exact-to-derived inverse-image constraint; no section, coordinate, orientation or smoothness is assumed.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-composition/thm-pur-composition-coherence.proof.md",
+  "place": "Step 1, specified compatible-chart source comparisons; diagonal-section-pasting proof Steps 10--12"
+ },
+ "stmt_deps": [
+  "def-pur-conventions",
+  "lem-pur-difference-first-input-restriction",
+  "lem-pur-diagonal-section-pasting"
+ ],
+ "proof": [
+  {
+   "text": "Eliminate q=v h. Reflexive structure-map congruences are identity. Expand sourceEtale as the exceptional compositor at the coefficient unit followed by rho. The finite etale normalization identifies rho with the unique right mate of the graph-normalized support comparison.",
+   "uses": [
+    "lem-pur-finite-etale-dualizing-normalization",
+    "lem-pur-difference-first-input-restriction"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The ambient locality is the right mate of the proper/open compositor followed by the same support/sum comparison. Conjugacy reverses composition, so its inverse has exactly the exceptional-compositor/rho expression. Alternatively compare the two maps after applying the left adjoint and composing with the counit; their transposes coincide, and the adjunction hom equivalence is injective. Evaluate at the coefficient unit, insert the identical exact-to-derived pullback constraint, and restore the structure-map congruence.",
+   "uses": [
+    "lem-amb-etale-adjoint-locality",
+    "def-weil-pbc-adjunction-conjugate"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-pur-finite-etale-dualizing-normalization",
+  "lem-pur-difference-first-input-restriction",
+  "lem-amb-etale-adjoint-locality",
+  "def-weil-pbc-adjunction-conjugate"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-composition/thm-pur-composition-coherence.proof.md",
+  "place": "Step 1, specified compatible-chart source comparisons; diagonal-section-pasting proof Steps 10--12"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "normalized etale exceptional inverse image locality composes and is independent of open neighborhood containing a section",
+   "results": "Eight results about ordinary scheme normalization and etale loci, no exceptional locality comparison.",
+   "date": "2026-10-26",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.conjugateEquiv_comp",
+   "results": "CategoryTheory.conjugateEquiv_comp in Mathlib.CategoryTheory.Adjunction.Mates: abstract reversal of composition under adjunction conjugacy, not agreement of the project-specific geometric comparisons.",
+   "date": "2026-10-26",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "sectionInvariant|etaleRestriction|normalizedE in Mathlib/AlgebraicGeometry and Mathlib/CategoryTheory/Adjunction; matching comparison names in Sheaf and WeilConjectures",
+   "results": "No Mathlib declarations for sectionInvariant, etaleRestriction, normalizedE. Abstract rightAdjointUniq_hom_app_counit and conjugateEquiv_comp exist. Project has the constructions and normalizedE_comp_congr, but neither the open cancellation identity for chartSectionEtaleRestriction nor agreement of normalizedE with DiagonalPasting.etaleRestriction.",
+   "date": "2026-10-26",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.CentredDiagonalSourcePasting",
+  "date": "2026-10-26",
+  "group": "D3"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-thm-smooth-purity",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-pur-composition-coherence",
+   "place": "Step 1, specified compatible-chart source comparisons; diagonal-section-pasting proof Steps 10--12",
+   "via": [
+    "lem-pur-centred-diagonal-source-pasting",
+    "lem-pur-composition-compatible-dnc-charts"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.NormalizedEtaleRestrictionComparison",
+  "file": "lean/Sheaf/Paper/NormalizedEtaleRestrictionComparison.lean",
+  "declaration": "WeilConjectures.PurityFiniteSetting.normalizedE_eq_etaleRestriction",
+  "statement": "theorem normalizedE_eq_etaleRestriction (P : PurityFiniteSetting.{u})\n    {W X B : Scheme.{u}} (v : W ⟶ X) (h : X ⟶ B) (q : W ⟶ B)\n    [Etale v] [IsSeparated v] [QuasiCompact v]\n    [IsSeparated h] [LocallyOfFiniteType h] [QuasiCompact h]\n    [IsSeparated q] [LocallyOfFiniteType q] [QuasiCompact q]\n    [HasCompactification h] [HasCompactification q]\n    (hv : q = v ≫ h) (aB : B ⟶ Spec (.of P.field.k))\n    [LocallyOfFiniteType aB] [QuasiCompact aB] :\n    letI := P.noetherian aB\n    letI := P.noetherian (h ≫ aB)\n    letI := P.noetherian (q ≫ aB)\n    letI := P.comparedExponent (𝟙 (Spec (.of P.field.k)))\n    letI : HasCompactification (v ≫ h) := HasCompactification.of_eq hv\n    ProEtale.DifferenceCoordinateSection.normalizedE P v h q hv aB =\n      DiagonalPasting.dualizingCongr P.Coefficient P hv ≪≫\n        DiagonalPasting.etaleRestriction P.Coefficient P v h",
+  "branch": "sheaf-dag",
+  "by": "D3",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D3",
+  "result": "pass",
+  "landing": "20261026T001202-L-4173771",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D3",
+  "result": "pass",
+  "landing": "20261026T001202-L-4173771",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

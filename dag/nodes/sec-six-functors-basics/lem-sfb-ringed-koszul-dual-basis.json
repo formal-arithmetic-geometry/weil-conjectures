@@ -1,0 +1,123 @@
+{
+ "id": "lem-sfb-ringed-koszul-dual-basis",
+ "kind": "statement",
+ "title": "Normalized ordered-subset matrices of the actual ringed Koszul dual tower",
+ "statement": "Let O be a commutative ring sheaf on a small site, A a commutative ring, rho:A→End(O) a ring homomorphism, a:Fin r→A, and s:Fin r→sections(O) with rho(a_i) the scalar endomorphism of s_i. In each degree q the actual dual tower Hom(P_n,O[0]) has a coproduct basis indexed by subsets I with q=-card(I). In this basis its differential is rho of the actual exterior contraction matrix coefficient, computed by the explicit ordered-wedge inclusion and dual-basis projection of lem-sfb-exterior-koszul-basis-differential, its actual n<=m transition is diagonal with rho(product over i in I of a_i^(m-n)), and the empty-subset basis in degree zero is exactly the prescribed dual unit. This statement has no additive realization functor or comparison with exterior complexes.",
+ "stmt_deps": [
+  "def-weil-pbc-ringed-koszul-system",
+  "lem-sfb-exterior-koszul-basis-differential"
+ ],
+ "source": {
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tags 0622 and 0664, ordered Koszul generators and the graded Leibniz rule; algebraization.tex, Tag 0A0E, lemma-derived-completion-koszul, finite free duality."
+ },
+ "proof": [
+  {
+   "text": "Use the existing supported-subset coproduct theorem directly for positive-length negative tensors. For length zero prove the single empty-subset presentation in degree zero and the empty coproduct presentation of zero in all other degrees. Use the fixed-boundary exterior-coefficient equality for the canonical negative basis.",
+   "uses": [
+    "lem-cbc-signed-koszul-basis-coproduct",
+    "lem-sfb-negative-koszul-exterior-differential"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Compute the actual one-factor transition on its displayed basis: it is the section scalar in degree -1 and identity in degree zero. Induct on the ordered tensor length, applying naturality of the total inclusions and unitors. The inverse unit unitor followed by a tensor of two scalar endomorphisms equals their product followed by that unitor. Split the subset product into its possible first factor and the product over successor indices; this proves the actual one-step basis equation.",
+   "uses": [
+    "def-weil-pbc-ringed-negative-koszul-transitions"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Use the proved negative-to-dual isomorphisms, with the separate empty-list case. Compose the canonical basis with their components and transport its coproduct universal property along these isomorphisms. Their chain equations transport the differential equality, and their naturality transports the actual one-step transition equation. Induction on n<=m, using functoriality of the actual dual tower and the identity for products of powers, gives every diagonal transition including m=n. The given empty-basis equation of duality is exactly the required normalized dual unit.",
+   "uses": [
+    "lem-weil-pbc-ringed-negative-koszul-duality",
+    "def-weil-pbc-ringed-negative-koszul-transitions"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-cbc-signed-koszul-basis-coproduct",
+  "lem-sfb-negative-koszul-exterior-differential",
+  "def-weil-pbc-ringed-negative-koszul-transitions",
+  "lem-weil-pbc-ringed-negative-koszul-duality"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "V1",
+  "date": "2026-10-27",
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tags 0622 and 0664, ordered Koszul generators and the graded Leibniz rule; algebraization.tex, Tag 0A0E, lemma-derived-completion-koszul, finite free duality."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "An additive functor sends a finite free Koszul complex to the tensor product of two term complexes via scalar compatibility",
+   "results": "Eight hits on total tensor constructions, including HomologicalComplex.ιTensorObj and HasTensor; none gives either ordered exterior contraction coordinates or the dual tower matrices.",
+   "verdict": "Use the existing tensor infrastructure; the two explicit matrix calculations are separate finite statements.",
+   "date": "2026-10-26"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"exteriorPower\", \"map\"",
+   "results": "Twelve hits including exteriorPower.map_apply_ιMulti_family and its basis/naturality API.",
+   "verdict": "The diagonal exterior-map calculation is proved in the item using this API. No matching contraction or ringed dual-tower matrix theorem.",
+   "date": "2026-10-26"
+  },
+  {
+   "tool": "grep",
+   "query": "Koszul|koszul",
+   "results": "Three unrelated Mathlib hits. Repository reads found SignedKoszulFiniteCoordinates and the proved RingedNegativeKoszulDuality; the exterior-to-tensor comparison uses a successor universe.",
+   "verdict": "Reuse finite tensor coordinates and duality; isolate the algebraic contraction matrix and normalized dual-tower matrix calculations.",
+   "date": "2026-10-26"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.CategoryTheory.ExteriorKoszulScalarRealization",
+  "date": "2026-10-26",
+  "group": "F3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sfb-exterior-koszul-scalar-realization",
+   "place": "Proof steps 1 and 2: explicit finite subset matrices, independent of the additive realization."
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-lem-integral-models",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.RingedKoszulDualBasis",
+  "file": "lean/Sheaf/CategoryTheory/RingedKoszulDualBasis.lean",
+  "declaration": "CategoryTheory.exists_ringedKoszulDualBasis",
+  "statement": "theorem exists_ringedKoszulDualBasis\n    {C : Type w} [SmallCategory C] {T : GrothendieckTopology C}\n    (O : Sheaf T CommRingCat.{w}) {A : Type w} [CommRing A]\n    (ρ : A →+* End (SheafOfModules.unit\n      ((sheafCompose T (forget₂ CommRingCat RingCat)).obj O)))\n    (r : ℕ) (a : Fin r → A)\n    (s : Fin r → (O.obj ⋙ forget CommRingCat).sections)\n    (hρ : ∀ i, ρ (a i) = ringedKoszulScalar O (s i)) :\n    let D := ringedKoszulDualTower O r s\n    ∃ b : ∀ (n : ℕ) (q : ℤ), exteriorKoszulIndex r q →\n        (SheafOfModules.unit ((sheafCompose T (forget₂ CommRingCat RingCat)).obj O) ⟶\n          (D.obj (op n)).X q),\n      (∀ n q, Nonempty (IsColimit (Cofan.mk ((D.obj (op n)).X q) (b n q)))) ∧\n      (∀ n q I, b n q I ≫ (D.obj (op n)).d q (q + 1) =\n        ∑ L : exteriorKoszulIndex r (q + 1),\n          ρ (exteriorKoszulCoefficient r (fun i ↦ a i ^ (n + 1)) q I L) ≫\n            b n (q + 1) L) ∧\n      (∀ n m (h : n ≤ m) q I, b m q I ≫ (D.map (homOfLE h).op).f q =\n        ρ (∏ i ∈ I.1, a i ^ (m - n)) ≫ b n q I) ∧\n      ∀ n, b n 0 ⟨∅, rfl⟩ =\n        (HomologicalComplex.singleObjXSelf (.up ℤ) 0 _).inv ≫\n          (ringedKoszulDualUnit O r s n).f 0",
+  "branch": "sheaf-dag",
+  "by": "F3",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F3",
+  "result": "pass",
+  "landing": "20261026T152525-L-1134807",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V1",
+  "result": "pass",
+  "landing": "20261026T202447-L-3459649",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

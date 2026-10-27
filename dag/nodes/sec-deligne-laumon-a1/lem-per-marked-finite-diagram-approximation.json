@@ -360,5 +360,40 @@
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-N3-7ee2f1130 (reviewer sub-agent of L); spot-checked: I read ILO III 4.1-4.5, 5.1 with its proof, 5.4 with its proof, and 6.1-6.2 to the final paragraph (pp.39-45). Statement correction: the base reading (|Z x X| contained in |D| implies |D_u| contained in |Z x V|) is false. Counterexample: A=k, X=A^1, Z empty, D=origin. ILO 6.1(iii) and the end of 6.2 use equality, the delivery writes equality in both hypothesis and conclusion, and the parent lem-per-uniformization-complete-local-descent Step 1 supplies equality. The change is recorded in the report (E7). New node gabber-graded-model matches Th 5.1 and Def 4.2 exactly (N=n+1, a=N-c, T^[a]=V(I^a), G_a=gr_a, uniqueness over the given phi). New node associated-graded-local-dimension is true (dim gr_I R = dim R for proper I, Matsumura 15.7, the fact ILO cites as 15.9); I tested I=0, I=n and (x) in k[[x,y]], and found no duplicate in the DAG or Mathlib. Neither new node restates the item. All 11 steps check against their cited statements: G_a/(t)=gr_1 is verified; the cotangent step uses I^2 in n^2; 05F4 gives eventual support equality; 00NR plus the dimension count gives K_j=(t_j); the cotangent count gives independence and an rsop; the UFD lemma gives intersection = product and radicality, and the parameter criterion gives SNC; dominant components handled through rem-pc-regular-normal; the codimension formula with p=id. Batch-5 flags: regular-lci-geometric-calculus (only trf node is lem-trf-regular-sequence-dimension-formula), snc-boundary-parameter-criterion (def-trf-SNC plus the UFD/K0/Pic chain) and lem-trf-regular-local-ufd-boundary-factorization are all generic commutative algebra, outside both assumptions and not steps of the trace formula or Poincare duality proofs. Accepted. No sk-/nt-/PD nodes are in the closure. No SGA. tool_uses accepted. No fixes."
  },
- "lean_audit": {}
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.MarkedFiniteDiagramApproximation",
+  "declaration": "AlgebraicGeometry.exists_marked_finite_diagram_approximation",
+  "declarations": [
+   "AlgebraicGeometry.markedApproximationPullback",
+   "AlgebraicGeometry.markedApproximationProjection",
+   "AlgebraicGeometry.MarkedApproximationNeighborhood",
+   "AlgebraicGeometry.exists_marked_finite_diagram_approximation"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/MarkedFiniteDiagramApproximation.lean",
+  "statement": "theorem exists_marked_finite_diagram_approximation (A : Type u) [CommRing A] [IsDomain A] [IsNoetherianRing A] [HenselianLocalRing A] (hA : IsExcellent A) (Z : Closeds (Spec (.of A))) (J : Type u) [SmallCategory J] [FinCategory J] (F : J ⥤ Over (Spec (.of (AdicCompletion (IsLocalRing.maximalIdeal A) A)))) (hF : ∀ j, LocallyOfFiniteType (F.obj j).hom ∧ QuasiCompact (F.obj j).hom) (n : ℕ) (x : Fin n → J) (hX : ∀ i, IsNoetherian (F.obj (x i)).left ∧ IsRegularScheme (F.obj (x i)).left) (H : ∀ i : Fin n, (F.obj (x i)).left.IdealSheafData) (hH : ∀ i, IsStrictNormalCrossingsBoundary (H i)) (hZ : ∀ i, (H i).support = Z.preimage ((F.obj (x i)).hom ≫ Spec.map (CommRingCat.ofHom (algebraMap A (AdicCompletion (IsLocalRing.maximalIdeal A) A)))).continuous) (r : Fin n → ℕ) (C : ∀ i : Fin n, Fin (r i) → (F.obj (x i)).left.IdealSheafData) (hCred : ∀ i j, (C i j).radical = C i j) (hCdistinct : ∀ i, Function.Injective (fun j ↦ (C i j).support)) (hC : ∀ i, Set.range (fun j ↦ ((C i j).support : Set (F.obj (x i)).left)) = {c | ∃ d ∈ irreducibleComponents (H i).subscheme, c = (H i).subschemeι '' d}) : ∃ (B₀ : Subalgebra A (AdicCompletion (IsLocalRing.maximalIdeal A) A)), B₀.FG ∧ ∃ (F₀ : J ⥤ Over (Spec (.of B₀))) (e : F₀ ⋙ Over.pullback (Spec.map (CommRingCat.ofHom B₀.val.toRingHom)) ≅ F) (C₀ : ∀ i : Fin n, Fin (r i) → (F₀.obj (x i)).left.IdealSheafData), (∀ j, LocallyOfFiniteType (F₀.obj j).hom ∧ QuasiCompact (F₀.obj j).hom) ∧ (∀ i j, (C₀ i j).comap ((e.app (x i)).inv.left ≫ markedApproximationProjection B₀.val.toRingHom (F₀.obj (x i))) = C i j) ∧ (∀ (i : Fin n) (s : Finset (Fin (r i))) (j : J) (a : j ⟶ x i), IsClosedImmersion (F.map a).left → (F.map a).left.ker = ⨆ k ∈ s, C i k → IsClosedImmersion (F₀.map a).left ∧ (F₀.map a).left.ker = ⨆ k ∈ s, C₀ i k) ∧ ∃ N₀ : ℕ, 1 ≤ N₀ ∧ ∀ (B : Subalgebra A (AdicCompletion (IsLocalRing.maximalIdeal A) A)), B.FG → ∀ hB : B₀ ≤ B, ∀ N : ℕ, N₀ ≤ N → ∀ v : B →ₐ[A] A, (∀ b : B, algebraMap A (AdicCompletion (IsLocalRing.maximalIdeal A) A) (v b) - (b : AdicCompletion (IsLocalRing.maximalIdeal A) A) ∈ (IsLocalRing.maximalIdeal A ^ N).map (algebraMap A (AdicCompletion (IsLocalRing.maximalIdeal A) A))) → ∀ i : Fin n, MarkedApproximationNeighborhood A Z (markedApproximationPullback (v.comp (Subalgebra.inclusion hB)).toRingHom (F₀.obj (x i))) (r i) (fun j ↦ (C₀ i j).comap (markedApproximationProjection (v.comp (Subalgebra.inclusion hB)).toRingHom (F₀.obj (x i))))",
+  "branch": "newtargets-dag",
+  "by": "ND",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-23283b63a",
+  "group": "ND",
+  "result": "pass",
+  "note": "Read the node, all 10 stmt_dep records, the ILO III 6.2 final paragraph (pp.44-45) and the module. Clause by clause: excellent henselian Noetherian local domain; AdicCompletion; FG subalgebras as indices; finite diagram F (FinCategory) of finite type objects with e : F0 ⋙ Over.pullback ≅ F; components as radical, distinct ideal sheaves whose supports are exactly the images of the components of H i; C0 comap (= base-changed closed subscheme, comap_sup gives the intersections) equals C; arrow clause for intersections given as separate objects; ∃ N0 ≥ 1 ∀ B ≥ B0 FG ∀ N ≥ N0 ∀ v ≡ incl mod m^N Â; V contains the whole closed fibre and is regular; ⨅ markings is SNC with support Z ×_S V; reduced global dominant union is open and closed (IsOpenImmersion of subschemeι); every marking intersection is regular with the expected codimension s.card. Matches the node and the source. Edge cases n=0, r=0, s=∅, empty fibre, no dominant components and A a field are covered; one universe; no extra assumptions. Gates: abbrevs are literal Mathlib constructions, the Prop predicate is transparent packaging, docstrings carry source and blueprint and all 11 proof steps, proof is sorry only, statement is verbatim in the file, all imports exist on side-live, report sections present. No findings; no compile (no file changed)."
+ }
 }

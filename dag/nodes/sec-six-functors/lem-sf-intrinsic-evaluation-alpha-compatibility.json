@@ -1,0 +1,140 @@
+{
+ "id": "lem-sf-intrinsic-evaluation-alpha-compatibility",
+ "kind": "statement",
+ "title": "Evaluation compatibility of the specified intrinsic inverse-image clopen word",
+ "statement": "For any inverse ring system C with transitions τ and n∈ℕ, let E_n be evaluation followed by the constant diagram and exact localization, with the comparisons evalP and evalJ of [def-sf-semilinear-evaluation-normalization-data]. For any commutative proper/open square k:V→W, r:V→S, p:W→T, i:S→T with k,i quasi-compact open and r,p proper, and every M in D(S), the exact inverse-image word alpha satisfies E_{n,W}(alpha_Q(M)); evalJ_k(P_r M); J_k^{C_n}(evalP_r(M)) = evalP_p(J_i M); G_p^{C_n}(evalJ_i(M)); alpha_Q^{C_n}(E_{n,S} M). Semicolons mean composition in written order. This concerns the specified exact inverse-image/open-extension maps and the clopen word, before any proper-adjunction mate; no faithfulness of evaluation on derived morphisms is assumed.",
+ "source": {
+  "document": "literature/stacks-project/more-etale.tex",
+  "place": "Tag 0F7B, open case, and sites-modules.tex Tags 03D7 and 03DI. Agent-formulated exact coefficient comparison for the intrinsic clopen word, the inverse-image step of the item proof, not a verbatim assertion of these tags."
+ },
+ "stmt_deps": [
+  "def-sf-semilinear-evaluation-normalization-data",
+  "def-coef-semilinear-proper-open-mate",
+  "def-cbc-strict-tower-proper-open-arrows"
+ ],
+ "proof": [
+  {
+   "text": "Use [lem-sp-varying-ring-clopen-arrow-evaluation] for the canonical single-level alpha word. At the ordinary level, the support module identifies the chosen evalPullInv with the constant-diagram lift of the section-normalized moduleEvalG. This follows by comparing the chosen direct-image comparison on every section, and transposing its unit square. The same normalization fixes the inverse-image and open compositors.",
+   "uses": [
+    "lem-sp-varying-ring-clopen-arrow-evaluation",
+    "def-sf-semilinear-evaluation-normalization-data"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Evaluation of ordinary beta has the same open-unit transpose as single-level beta. Evaluation of the clopen projector is the identity on the selected factor and zero on its complement; the constant diagonal preserves both maps. Thus the full ordinary beta/projector/compositor word is the constant lift of the same single-level word. This is also valid for empty components and for noncartesian proper/open squares, because only the chosen square lift is clopen.",
+   "uses": [
+    "lem-sp-varying-ring-clopen-arrow-evaluation",
+    "lem-sf-open-tensor-normalization"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Localize the equality of ordinary constant-diagram words, using exact-derived transformation pasting and the intrinsic/varying-ring pre-mate alpha normalization. Exact localization of the normalized inverse-image square is evalP by definition. The inverse open-mate localization theorem identifies the localized open comparison with the specified evalJ. Insert these identifications; naturality and cancellation of the exact-composition isomorphisms give the displayed equation on whole derived systems. This constructs the equality before evaluation of derived morphisms.",
+   "uses": [
+    "lem-sp-exact-derived-transformation-pasting",
+    "lem-sf-intrinsic-varying-ring-mate-normalization",
+    "lem-sf-exact-localization-inverse-mate",
+    "def-sf-semilinear-evaluation-normalization-data"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-sf-semilinear-evaluation-normalization-data",
+  "lem-sf-exact-localization-inverse-mate",
+  "lem-sf-intrinsic-varying-ring-mate-normalization",
+  "lem-sf-open-tensor-normalization",
+  "lem-sp-exact-derived-transformation-pasting",
+  "lem-sp-varying-ring-clopen-arrow-evaluation"
+ ],
+ "proof_origin": {
+  "by": "N2 stage 3",
+  "date": "2026-10-27",
+  "document": "literature/stacks-project/more-etale.tex",
+  "place": "Tag 0F7B, open case, and sites-modules.tex Tags 03D7 and 03DI. Agent-formulated exact coefficient comparison for the intrinsic clopen word, the inverse-image step of the item proof, not a verbatim assertion of these tags."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Evaluation and restriction of scalars preserve extension by zero and the clopen projection in a proper open square",
+   "results": "8 hits, including LinearMap.restrictScalars_zero and IsProper.instMorphismRestrict. None concerns the specified derived semilinear alpha word.",
+   "date": "2026-10-27",
+   "verdict": "no direct match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.mateEquiv",
+   "results": "mateEquiv, unit_mateEquiv, mateEquiv_counit, mateEquiv_vcomp and mateEquiv_hcomp are available. These give the categorical final assembly, not normalization of the specified geometric coefficient maps.",
+   "date": "2026-10-27",
+   "verdict": "use the mate infrastructure; no geometric comparison match"
+  },
+  {
+   "tool": "grep",
+   "query": "mateEquiv.*(vcomp|hcomp)|mapDerivedCategorySquareIso; rhoP.*scalarB|rhoJ.*scalarA|evalP.*evalG|clopenArrowEvaluation in Mathlib, lean/Sheaf and lean/WeilConjectures",
+   "results": "Mathlib provides mate composition. Sheaf has derivedScalarComparison for the separately packaged scalar functor, clopenArrowEvaluation for single-level comparisons, and proved intrinsic normalization. None directly identifies the alpha word through the actual chosen rho/E and their rhoP/evalP and rhoJ/evalJ comparisons.",
+   "date": "2026-10-27",
+   "verdict": "reuse the existing statements as described in the proof; remaining canonical normalization is this node"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.SixFunctors.SemilinearProperOpenMatePasting",
+  "date": "2026-10-27",
+  "group": "N2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "fix-prop-coherence",
+   "place": "The evaluation inverse-image alpha compatibility in the coefficient-comparison step of the intrinsic proper/open mate proof.",
+   "via": [
+    "lem-sf-semilinear-proper-open-mate-pasting",
+    "lem-sf-integral-compactification-system-realization"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-thm-sf-compatibility",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.SixFunctors.IntrinsicEvaluationAlphaCompatibility",
+  "file": "lean/Sheaf/SixFunctors/IntrinsicEvaluationAlphaCompatibility.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.SemilinearProperOpen.intrinsicEvaluationAlphaCompatibility",
+  "statement": "theorem intrinsicEvaluationAlphaCompatibility\n    {V W S T : Scheme.{u}} (k : V ⟶ W) (r : V ⟶ S) (p : W ⟶ T) (i : S ⟶ T)\n    [IsOpenImmersion k] [IsOpenImmersion i] [QuasiCompact k] [QuasiCompact i]\n    [IsProper r] [IsProper p] (h : k ≫ p = r ≫ i) (M : Derived C τ S) :\n    (E C τ n W).map ((alpha C τ k r p i h).app M) ≫\n        (evalJ C τ n k).hom.app ((P C τ r).obj M) ≫\n        (StrictTower.J (C n) k).map ((evalP C τ n r).hom.app M) =\n      (evalP C τ n p).hom.app ((J C τ i).obj M) ≫\n        (StrictTower.G (C n) p).map ((evalJ C τ n i).hom.app M) ≫\n        (StrictTower.alpha (C n) k r p i h).app ((E C τ n S).obj M)",
+  "branch": "sheaf-dag",
+  "by": "N2",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "N2",
+  "result": "pass",
+  "landing": "20261027T094452-L-231147",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "N2",
+  "result": "pass",
+  "landing": "20261027T094452-L-231147",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

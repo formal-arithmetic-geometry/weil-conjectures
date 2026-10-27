@@ -13,6 +13,9 @@ public import Mathlib.Algebra.Homology.DerivedCategory.Basic
 import Sheaf.Paper.IndConstructibleExtensions
 import Sheaf.Paper.IndHeartKernelsCokernels
 import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.HomologyProperty
+import Mathlib.AlgebraicGeometry.QuasiAffine
+import Mathlib.RingTheory.DedekindDomain.Basic
+import Mathlib.RingTheory.DedekindDomain.Dvr
 
 /-!
 # The ind-constructible ambient derived category is triangulated

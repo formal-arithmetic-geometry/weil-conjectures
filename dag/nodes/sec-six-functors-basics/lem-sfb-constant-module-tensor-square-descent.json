@@ -1,0 +1,168 @@
+{
+ "id": "lem-sfb-constant-module-tensor-square-descent",
+ "kind": "statement",
+ "title": "Descent of the normalized constant-module tensor square",
+ "statement": "Let d, x, o and t be respectively GeometricData, ExactData d, OrdinaryIdentification d and FixedTensorData d [def-sfb-constant-module-geometric-comparison-data]. Choose scalar derived tensor comparisons cJ and cK [lem-sfb-constant-scalar-restriction-tensor]. For any natural isomorphism i between the localized pullbacks satisfying LeftLocalizationSquare d x o i [def-sfb-constant-module-derived-comparison-data], there is a DerivedTensorIdentification d x t for which TensorSquare holds with i and cJ.val,cK.val [def-sfb-derived-projection-comparison-squares]. In particular the ordinary ringed tensorator is exactly d.ringTensor.mu, the two derived tensorators have the specified K-flat representative equations, and the comparison square holds for all unbounded inputs.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Stacks Project, sites-cohomology.tex Tag 07A4 (lemma-pullback-tensor-product), derived.tex Tags 0FPQ and 0FPT, resolving localization of the signed tensor total; parent proof steps 4 and 5."
+ },
+ "stmt_deps": [
+  "def-sfb-constant-module-geometric-comparison-data",
+  "def-sfb-constant-module-derived-comparison-data",
+  "def-sfb-derived-projection-comparison-squares",
+  "lem-sfb-constant-scalar-restriction-tensor",
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+  "lem-pur-cochain-pullback-tensor-coherence",
+  "lem-weil-pbc-site-derived-tensor-descent",
+  "lem-sfb-ringed-equivalence-resolving-tensor-descent",
+  "lem-pc-kflat-resolution",
+  "def-weil-pbc-ringed-tensor-section-calculus"
+ ],
+ "proof": [
+  {
+   "text": "Use the proved ordinary-realization helper ringMonoidal_exists to obtain mR whose tensorator is d.ringTensor.mu. The separate ordinary tensor-square theorem gives compatibility with the supplied fixed tensor data and the prescribed mate.",
+   "uses": [
+    "lem-sfb-constant-module-ordinary-realization",
+    "lem-sfb-constant-module-ordinary-tensor-square"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Stacks Project, sites-cohomology.tex Tag 07A4 (lemma-pullback-tensor-product), derived.tex Tags 0FPQ and 0FPT, resolving localization of the signed tensor total; parent proof steps 4 and 5."
+   }
+  },
+  {
+   "text": "Ringed pullback preserves flat modules by isFlat_ringedToposPullback. Convert site flatness to native monoidal flatness using siteSheafTensorRightIso. Transport this preservation to fixed modules through the scalar-restriction equivalences and o.left.",
+   "uses": [
+    "lem-weil-pbc-ringed-topos-flat-module-pullback",
+    "lem-sfb-constant-scalar-restriction-tensor",
+    "lem-weil-pbc-ringed-pullback-preserves-kflat"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Stacks Project, sites-cohomology.tex Tag 07A4 (lemma-pullback-tensor-product), derived.tex Tags 0FPQ and 0FPT, resolving localization of the signed tensor total; parent proof steps 4 and 5."
+   }
+  },
+  {
+   "text": "Apply exact_monoidal_normalization to the two ordinary strong monoidal pullback structures. Its proved localization construction supplies both derived structures with their required representative equations, using the chosen localization instances.",
+   "uses": [
+    "lem-sfb-exact-derived-monoidal-construction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Stacks Project, sites-cohomology.tex Tag 07A4 (lemma-pullback-tensor-product), derived.tex Tags 0FPQ and 0FPT, resolving localization of the signed tensor total; parent proof steps 4 and 5."
+   }
+  },
+  {
+   "text": "Package these structures and their normalizations as DerivedTensorIdentification. Convert cJ and cK normalizations from independent-coefficient K-flatness to native K-flatness by kflat_iff. Apply normalized_exact_tensor_square to the ordinary square, the four representative normalizations and hi.",
+   "uses": [
+    "lem-sfb-normalized-exact-tensor-square",
+    "lem-sfb-constant-scalar-restriction-tensor"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Stacks Project, sites-cohomology.tex Tag 07A4 (lemma-pullback-tensor-product), derived.tex Tags 0FPQ and 0FPT, resolving localization of the signed tensor total; parent proof steps 4 and 5."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-constant-module-ordinary-realization",
+  "lem-sfb-constant-module-ordinary-tensor-square",
+  "lem-weil-pbc-ringed-topos-flat-module-pullback",
+  "lem-sfb-constant-scalar-restriction-tensor",
+  "lem-weil-pbc-ringed-pullback-preserves-kflat",
+  "lem-sfb-exact-derived-monoidal-construction",
+  "lem-sfb-normalized-exact-tensor-square"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Stacks Project, sites-cohomology.tex Tag 07A4 (lemma-pullback-tensor-product), derived.tex Tags 0FPQ and 0FPT, resolving localization of the signed tensor total; parent proof steps 4 and 5. Y3: explicit two-variable localization construction and flatness transport; ordinary mate compatibility and generic square compatibility split separately."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "constant.*(tensor|[Ee]xact)|geometric.*[Mm]onoidal",
+   "results": "{\"t\": \"2026-10-23T15:33:50Z\", \"tool\": \"grep\", \"query\": \"constant.*(tensor|[Ee]xact)|geometric.*[Mm]onoidal\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"Mathlib/LinearAlgebra/PiTensorProduct/Dual.lean\"], \"digest\": \"a4e005d2351ec2ea\"}",
+   "date": "2026-10-23",
+   "verdict": "No matching constant-module realization or normalized derived tensor square; the hits are generic scalar restriction, module tensor, or monoidal-functor constructions."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A geometric inverse image of constant ring module sheaves is exact and strong monoidal, compatible with scalar restriction",
+   "results": "{\"t\": \"2026-10-23T15:33:52Z\", \"tool\": \"leanfinder\", \"query\": \"A geometric inverse image of constant ring module sheaves is exact and strong monoidal, compatible with scalar restriction\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"LightCondensed.instMonoidalFunctorOppositeLightProfiniteModuleCatSheafCoherentTopologyPresheafToSheaf\", \"LightCondensed.instMonoidalCategorySheafLightProfiniteCoherentTopologyModuleCat\", \"AlgebraicGeometry.Scheme.Modules.pullback\", \"LightCondensed.instMonoidalLightCondSetLightCondModFree\", \"LightCondensed.instMonoidalCategoryLightCondMod\", \"LightCondensed.instMonoidalClosedSheafLightProfiniteCoherentTopologyModuleCat\", \"SheafOfModules.pullback\", \"AlgebraicGeometry.Scheme.Modules.pseudofunctor\"], \"digest\": \"0bda05a03443dcd5\"}",
+   "date": "2026-10-23",
+   "verdict": "No matching constant-module realization or normalized derived tensor square; the hits are generic scalar restriction, module tensor, or monoidal-functor constructions."
+  },
+  {
+   "tool": "leansearch",
+   "query": "An exact strong monoidal functor on module sheaves induces a normalized derived monoidal functor compatible with scalar restriction on K-flat tensor representatives",
+   "results": "{\"t\": \"2026-10-23T16:06:05Z\", \"tool\": \"leansearch\", \"query\": \"An exact strong monoidal functor on module sheaves induces a normalized derived monoidal functor compatible with scalar restriction on K-flat tensor representatives\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.Monoidal.ofBifunctor\", \"PresheafOfModules.monoidalCategory\", \"PresheafOfModules.monoidalCategoryStruct\", \"CategoryTheory.FreeMonoidalCategory.normalizeObj'\", \"CategoryTheory.Mod_.scalarRestriction\", \"ModuleCat.restrictScalars\", \"CategoryTheory.FreeMonoidalCategory.normalize\", \"CategoryTheory.Functor.Monoidal.mk\"], \"digest\": \"6b6e84880cbeecec\"}",
+   "date": "2026-10-23",
+   "verdict": "No matching constant-module realization or normalized derived tensor square; the hits are generic scalar restriction, module tensor, or monoidal-functor constructions."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A geometric inverse image of module sheaves over a constant ring is naturally strong monoidal and agrees with scalar restriction",
+   "results": "{\"t\": \"2026-10-23T16:06:05Z\", \"tool\": \"leansearch\", \"query\": \"A geometric inverse image of module sheaves over a constant ring is naturally strong monoidal and agrees with scalar restriction\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Mod_.scalarRestriction\", \"PresheafOfModules.restrictScalarsObj\", \"PresheafOfModules.monoidalCategory\", \"PresheafOfModules.monoidalCategoryStruct\", \"CategoryTheory.Mod_.comap\", \"SheafOfModules.restrictScalars\", \"PresheafOfModules.restrictScalars\", \"ModuleCat.tildeInModuleCat\"], \"digest\": \"b17a092c43b13f6b\"}",
+   "date": "2026-10-23",
+   "verdict": "No matching constant-module realization or normalized derived tensor square; the hits are generic scalar restriction, module tensor, or monoidal-functor constructions."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.CategoryTheory.ConstantModuleDerivedProjectionIdentification",
+  "date": "2026-10-23",
+  "group": "A6"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sfb-proper-base-change",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-thm-sfb-proper-base-change-finite",
+   "place": "Proof paragraph (3), canonical projection map: transport the etale projection formula through the constant-module realization, retaining its ordinary inverse-image tensor map and derived counit transpose.",
+   "via": [
+    "lem-sfb-constant-module-derived-projection-identification",
+    "lem-sfb-projection-comparison-etale-proetale"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.ConstantModuleTensorSquareDescent",
+  "file": "lean/Sheaf/CategoryTheory/ConstantModuleTensorSquareDescent.lean",
+  "declaration": "CategoryTheory.ConstantModuleDerivedProjection.constant_module_tensor_square_descent",
+  "statement": "theorem constant_module_tensor_square_descent (d : GeometricData J K A) (x : ExactData d)\n    (o : OrdinaryIdentification d) (t : FixedTensorData d)\n    (cJ : DerivedComparison.{u, v, w, w} J A)\n    (cK : DerivedComparison.{u, v, w, w} K A)\n    (i : d.pullR.mapDerivedCategory ⋙ onDerived K A ≅\n      onDerived J A ⋙ d.pullA.mapDerivedCategory)\n    (hi : LeftLocalizationSquare d x o i) :\n    ∃ tensor : DerivedTensorIdentification d x t,\n      TensorSquare d.pullR.mapDerivedCategory d.pullA.mapDerivedCategory\n        (onDerived J A) (onDerived K A) tensor.val.1 tensor.val.2.2 cJ.val cK.val i",
+  "branch": "sheaf-dag",
+  "by": "A6",
+  "date": "2026-10-23"
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A6",
+  "result": "pass",
+  "landing": "20261023T230345-L-3418115",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Y3",
+  "result": "pass",
+  "landing": "20261026T222811-L-698133",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

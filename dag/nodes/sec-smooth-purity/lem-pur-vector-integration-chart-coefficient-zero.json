@@ -1,0 +1,113 @@
+{
+ "id": "lem-pur-vector-integration-chart-coefficient-zero",
+ "kind": "statement",
+ "title": "Rank-zero chart coefficient normalization",
+ "statement": "For the rank-zero chart a over an open V with a≫π=V.ι, the pullback compositor for a and π, evaluated at the constant unit, followed by vectorIntegrationChartCoefficient, equals ordinaryFiniteUnitPullback along V.ι. All maps are the specified comparisons of [def-amb-vector-integration-charts] and [def-amb-affine-linear-trace-action]; no normalized projective-line data is needed.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-an/cor-pur-vector-bundle-purity.proof.md",
+  "place": "paragraph 2: ordered affine-space counits and their local compatibility; rank-zero identity tower in geometric-descent Step 7"
+ },
+ "stmt_deps": [
+  "def-amb-vector-integration-charts",
+  "def-amb-affine-linear-trace-action"
+ ],
+ "proof": [
+  {
+   "text": "Expand the zero recursive coefficient comparisons. Combine the inverse chart/projection compositor, equality transport for the chart square, and identity/open compositor into the two compositors with common composite V.ι. Cancel the leading inverse compositor. Naturality of the pullback identity comparison moves the unit pullback map through it; the canonical left pullback unit law cancels the remaining compositor. See the complete proof in words in the Lean docstring.",
+   "uses": [
+    "def-amb-vector-integration-charts",
+    "def-amb-affine-linear-trace-action",
+    "def-amb-affine-trace-tower"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-an/cor-pur-vector-bundle-purity.proof.md",
+    "place": "paragraph 2: ordered affine-space counits and their local compatibility; rank-zero identity tower in geometric-descent Step 7"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-amb-vector-integration-charts",
+  "def-amb-affine-linear-trace-action",
+  "def-amb-affine-trace-tower"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-an/cor-pur-vector-bundle-purity.proof.md",
+  "place": "paragraph 2; coefficient normalization step of rank-zero local identity"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "The rank zero affine-space counit is identity and compact support exchange preserves this local normalization",
+   "results": "AffineSpace.instIsIsoSchemeOverInferInstanceOverClassOfIsEmpty; Module.rankAtStalk_eq_zero_iff_notMem_support; unrelated HasCompactSupport results",
+   "date": "2026-10-25",
+   "verdict": "No match: none identifies the specified derived compact-support exchange and local affine counit."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.id",
+   "results": "CategoryTheory.Adjunction.id; id_counit; conjugateEquiv_adjunction_id; conjugateEquiv_leftUnitor_hom",
+   "date": "2026-10-25",
+   "verdict": "Identity adjunction constituent only; no normalized geometric exchange equation."
+  },
+  {
+   "tool": "grep",
+   "query": "affineTraceCounit.*zero|vectorBundleIntegration_zero|id_counit",
+   "results": "Remote Mathlib grep: 0 hits. Additional local project search finds the unproved global zero-rank clause but no local normalization equation; reading Mathlib Adjunction/Basic.lean verifies the identity counit constituent.",
+   "date": "2026-10-25",
+   "verdict": "No matching local comparison; new statement is the local calculation without the global glued integration."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.VectorIntegrationRankZeroLocal",
+  "date": "2026-10-26",
+  "group": "E4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "cor-pur-vector-bundle-purity",
+   "place": "paragraph 2, prescribed local affine counit, zero-rank coefficient identification",
+   "via": [
+    "lem-pur-vector-integration-rank-zero-local"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-an",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.VectorIntegrationChartCoefficientZero",
+  "file": "lean/Sheaf/AlgebraicGeometry/VectorIntegrationChartCoefficientZero.lean",
+  "declaration": "AlgebraicGeometry.Etale.vectorIntegration_chartCoefficient_zero",
+  "statement": "theorem vectorIntegration_chartCoefficient_zero\n    (A : Type (u + 1)) [CommRing A] (N : ℕ) (hA : (N : A) = 0)\n    (t : OrdinaryFiniteTwistTransport A N hA)\n    (S : Scheme.{u}) [IsNoetherian S] (hS : IsUnit (N : Γ(S, ⊤)))\n    (F : S.Modules) [F.IsFiniteLocallyFreeOfRank 0]\n    (V : S.Opens) (e : VectorBundleZeroSection.Trivialization S 0 F V)\n    (hc : vectorIntegrationChart S 0 F V e ≫ VectorBundleZeroSection.π S 0 F = V.ι) :\n    (leftDerivedUpperStarComp (ModuleCat.{u + 1} A)\n        (vectorIntegrationChart S 0 F V e) (VectorBundleZeroSection.π S 0 F)\n        V.ι hc.symm).hom.app (ordinaryFiniteUnit A S) ≫\n      (vectorIntegrationChartCoefficient A N hA t S hS 0 F V e).hom =\n        (ordinaryFiniteUnitPullback A V.ι).hom",
+  "branch": "sheaf-dag",
+  "by": "E4",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E4",
+  "result": "pass",
+  "landing": "20261025T201739-L-2613102",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E4",
+  "result": "pass",
+  "landing": "20261025T201739-L-2613102",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

@@ -1,0 +1,165 @@
+{
+ "id": "lem-coef-closed-dualizing-etale-finiteness",
+ "kind": "statement",
+ "title": "Ordinary finiteness of four closed dualizing inputs",
+ "statement": "Fix the finite-field datum $D$, a prime $\\ell\\ne p$, a finite extension $E/\\mathbf Q_\\ell$, and $1\\le m\\le n$. Write $A=\\mathcal O_E/(\\varpi^n)$, $B=\\mathcal O_E/(\\varpi^m)$ with the fixed universe lifts and quotient homomorphism [def-weil-finite-field-fiber, def-weil-pbc-witness-compatibility]. For a closed immersion $i:Y\\hookrightarrow P=\\mathbf A_k^r$ with affine $Y$, let $I_R$ be the right adjoint of the actual identity-open compact support at $i$ [def-amb-etale-compact-support, lem-exc-closed-ambient]. Put $M=\\omega_{P,A}$, $N=I_AM$, and $M_B=T_PM$. Then $M,N,M_B,I_BM_B$ are all bounded constructible with an ordered finite Tor interval, tested against every degree-zero sheaf [def-weil-pbc-constructible-complexes, def-kun-tor-amplitude].",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-tower/lem-coef-finite-dualizing.proof.md",
+  "place": "Paragraph 3: ordinary dualizing objects for a closed affine embedding and site realization"
+ },
+ "stmt_deps": [
+  "def-weil-finite-field-fiber",
+  "def-weil-pbc-witness-compatibility",
+  "def-amb-etale-compact-support",
+  "lem-exc-closed-ambient",
+  "def-weil-pbc-constructible-complexes",
+  "def-kun-tor-amplitude"
+ ],
+ "proof": [
+  {
+   "text": "Construct omega_P,R and omega_Y,R at both positive levels by coefDualizingConstruction; their ordinary finiteness is part of its conclusion. The closed immersion is proper, so identity-open compact support is closed direct image. Its right adjoint preserves bounded-below objects on the quasi-compact target.",
+   "uses": [
+    "lem-coef-dualizing-construction",
+    "lem-weil-pbc-closed-immersion-proper",
+    "lem-exc-closed-ambient",
+    "lem-etale-upper-shriek-quasicompact-bounded-below"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Compact-support composition and the two ordinary adjunctions give the same represented Hom functor for I_R omega_P,R and omega_Y,R on D+. The representing-object normalization identifies them by a counit-compatible isomorphism. Transfer bounded constructibility and finite Tor amplitude, proving the clause for N.",
+   "uses": [
+    "lem-amb-etale-compact-comparisons",
+    "lem-coef-dualizing-construction"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Affine dualizing coefficient reduction identifies T_P omega_P,A with omega_P,B. The fixed scalar extension is canonically identified with the ordinary scalar extension by uniqueness of its left adjoint. Apply I_B, then the preceding composition identification, and transport finiteness. This also works for empty Y, and m=n, without finite Tor dimension of B over A.",
+   "uses": [
+    "lem-coef-dualizing-affine-space"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-amb-etale-compact-comparisons",
+  "lem-coef-dualizing-affine-space",
+  "lem-coef-dualizing-construction",
+  "lem-etale-upper-shriek-quasicompact-bounded-below",
+  "lem-exc-closed-ambient",
+  "lem-weil-pbc-closed-immersion-proper"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-tower/lem-coef-finite-dualizing.proof.md",
+  "place": "Paragraph 3: ordinary dualizing objects for a closed affine embedding and site realization"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "closed immersion exceptional inverse image of dualizing complex and etale proetale comparison bounded finite Tor amplitude",
+   "results": "Hits: AlgebraicGeometry.instIsClosedImmersionLiftCoborder, AlgebraicGeometry.IsEtale.instHasOfPostcompPropertyScheme, AlgebraicGeometry.IsEtale, AlgebraicGeometry.Scheme.Etale, AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified, AlgebraicGeometry.IsClosedImmersion.overEquivIdealSheafData, AlgebraicGeometry.IsImmersion.isPullback_toImage_liftCoborder, AlgebraicGeometry.IsEtale.instFormallyUnramified",
+   "date": "2026-10-25",
+   "verdict": "Generic adjunction tools exist; no theorem states this site-specific assertion."
+  },
+  {
+   "tool": "loogle",
+   "query": "Functor.IsLeftAdjoint, Adjunction.rightAdjointUniq",
+   "results": "Loogle reported unknown identifier 'Functor.IsLeftAdjoint'; no hits.",
+   "date": "2026-10-25",
+   "verdict": "unavailable: initial query used an unknown identifier; corrected HomEquiv query is recorded below."
+  },
+  {
+   "tool": "grep",
+   "query": "dualizingComplex.*[Cc]omp|[Tt]orAmplitude.*[Cc]omparison",
+   "results": "No matching declaration found.",
+   "date": "2026-10-25",
+   "verdict": "Generic adjunction tools exist; no theorem states this site-specific assertion."
+  },
+  {
+   "tool": "leansearch",
+   "query": "composition of adjunction hom equivalences transports counit and comparison unit",
+   "results": "Hits: CategoryTheory.Adjunction.comp_homEquiv, CategoryTheory.Adjunction.unit_comp_map_eq_iff, CategoryTheory.Adjunction.comp, CategoryTheory.Adjunction.mkOfHomEquiv_counit_app, CategoryTheory.Adjunction.homEquiv_apply, CategoryTheory.Adjunction.CoreHomEquivUnitCounit.homEquiv_counit, CategoryTheory.Adjunction.mkOfHomEquiv_unit_app, CategoryTheory.Equivalence.trans_toAdjunction",
+   "date": "2026-10-25",
+   "verdict": "Generic adjunction tools exist; no theorem states this site-specific assertion."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.homEquiv, CategoryTheory.Adjunction.counit",
+   "results": "Hits: CategoryTheory.Adjunction.homEquiv_counit, CategoryTheory.Adjunction.homEquiv_symm_apply, CategoryTheory.Adjunction.homEquiv_symm_id, CategoryTheory.Adjunction.rightAdjointLaxMonoidal_μ, CategoryTheory.Adjunction.homEquiv_symm_rightAdjointUniq_hom_app, CategoryTheory.MonoidalClosed.ofEquiv_curry_def, CategoryTheory.MonoidalClosed.ofEquiv_uncurry_def, CategoryTheory.Comonad.ComonadicityInternal.comparisonAdjunction_counit_f_aux",
+   "date": "2026-10-25",
+   "verdict": "Generic adjunction tools exist; no theorem states this site-specific assertion."
+  },
+  {
+   "tool": "grep",
+   "query": "mapDerivedCategoryPlusNatIso.*Compatibility|mapDerivedCategoryPlusCompIso.*Compatibility",
+   "results": "0 hits; digest 4f53cda18c2baa0c",
+   "date": "2026-10-25",
+   "verdict": "No match. Local source inspection found separate inclusion compatibility component lemmas and naturality, used in the normalization proof."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.DualizingClosedSite",
+  "date": "2026-10-25",
+  "group": "P3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-coef-finite-dualizing",
+   "place": "Paragraph 3: ordinary dualizing objects for a closed affine embedding and site realization",
+   "via": [
+    "lem-coef-dualizing-closed-site"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.ClosedDualizingEtaleFiniteness",
+  "file": "lean/Sheaf/Paper/ClosedDualizingEtaleFiniteness.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.closedDualizingEtaleFiniteness",
+  "statement": "theorem closedDualizingEtaleFiniteness\n    (D : WeilConjectures.FiniteFieldDatum.{u}) (l : ℕ) [Fact l.Prime]\n    (_hl : l ≠ D.p)\n    (E : Type u) [Field E] [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]\n    (m n : ℕ) (hm : 1 ≤ m) (hmn : m ≤ n) (r : ℕ)\n    (Y : Scheme.{u}) [IsAffine Y]\n    (i : Y ⟶ AffineSpace (ULift.{u} (Fin r)) (Spec (.of D.k))) [IsClosedImmersion i] :\n    closedDualizingEtaleFinitenessProperty D l E m n hm hmn r Y i",
+  "branch": "sheaf-dag",
+  "by": "P3",
+  "date": "2026-10-25",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.closedDualizingEtaleFinitenessProperty",
+   "AlgebraicGeometry.ProEtale.closedDualizingEtaleFiniteness"
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P3",
+  "result": "pass",
+  "landing": "20261025T123442-L-1872199",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P3",
+  "result": "pass",
+  "landing": "20261025T123442-L-1872199",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

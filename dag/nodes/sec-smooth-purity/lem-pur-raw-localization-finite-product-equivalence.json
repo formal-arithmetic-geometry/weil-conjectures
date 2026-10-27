@@ -1,0 +1,249 @@
+{
+ "id": "lem-pur-raw-localization-finite-product-equivalence",
+ "kind": "statement",
+ "title": "Raw scalar localization of a finite product equivalence",
+ "statement": "Let $R$ be a commutative ring, $t\\in R$, and $S=R[1/t]$. Let $\\mathcal A$ and $\\mathcal B_i$, for a finite set $I$ (possibly empty), be $R$-linear categories [def-weil-linear-category], small in one sufficiently large universe. Let $r_i:\\mathcal A\\to\\mathcal B_i$ be $R$-linear functors [def-weil-linear-functor] such that $r=(r_i)_i:\\mathcal A\\to\\prod_i\\mathcal B_i$ is an equivalence. Use the raw scalar localizations of [def-weil-linear-scalar-localization], with unchanged objects, Hom modules tensored with $S$, composition $(g\\otimes b)\\circ(f\\otimes a)=(g\\circ f)\\otimes ba$, and identities $\\mathrm{id}\\otimes1$.\n\nThe object map $K\\mapsto(r_iK)_i$ and arrow formula $f\\otimes a\\mapsto(r_i(f)\\otimes a)_i$, extended additively, define an $S$-linear equivalence\n$$\\overline r:\\mathcal A[1/t]\\xrightarrow{\\sim}\\prod_i\\mathcal B_i[1/t].$$\nFor $K,M\\in\\mathcal A$ and $H_i=\\operatorname{Hom}_{\\mathcal B_i}(r_iK,r_iM)$, its Hom map is the composite of the integral linear Hom isomorphism tensored with $S$ and the canonical isomorphism\n$$\\left(\\prod_iH_i\\right)\\otimes_RS\\xrightarrow{\\sim}\\prod_i(H_i\\otimes_RS),\\qquad (h_i)_i\\otimes a\\longmapsto(h_i\\otimes a)_i.$$\nEvery tuple of localized objects is the image, up to isomorphism, of an integral object of $\\mathcal A$; the isomorphisms can be chosen as the integral component isomorphisms tensored with $1$. When $I$ is empty, $\\mathcal A$ has an object, all its Hom modules are zero, and all localized Hom sets are singletons. No idempotent completion is taken.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-def-purity-conv/def-pur-section-invariant.md",
+  "place": "Final invertibility assertion, finite-clopen transport: original item steps 1-3 and rational empty-product part of step 11; raw scalar Hom comparison. Agent subargument; coefficient models in the current DAG definitions (the blueprint itself only asserts invertibility)."
+ },
+ "stmt_deps": [
+  "def-weil-linear-category",
+  "def-weil-linear-scalar-localization",
+  "def-weil-linear-functor"
+ ],
+ "proof": [
+  {
+   "text": "Choose a quasi-inverse to $r$. By [lem-sf-quasi-inverse-hom-bijection], its Hom map $u_{K,M}:\\operatorname{Hom}_{\\mathcal A}(K,M)\\to\\prod_iH_i$ is bijective. It is $R$-linear by [def-weil-linear-functor] and componentwise module operations. Its inverse is linear: applying the injective $u_{K,M}$ to the desired addition and scalar identities reduces them to the corresponding identities in $\\prod_iH_i$. Thus $u_{K,M}$ is an integral linear isomorphism.",
+   "uses": [
+    "lem-sf-quasi-inverse-hom-bijection",
+    "def-weil-linear-functor"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Tag 02C3, lemma-equivalence-categories, equivalence implies full faithfulness; linearity from dga.tex, Tag 09MK."
+   }
+  },
+  {
+   "text": "For each $i$ extend the linear Hom map of $r_i$ by [def-weil-module-base-change], and take the tuple of these maps. This defines an $S$-linear Hom map with the required formula. It preserves identities since $r_i(\\mathrm{id})\\otimes1=\\mathrm{id}\\otimes1$. On two pure tensors its composition formula is $r_i(g\\circ f)\\otimes ba=(r_i(g)\\circ r_i(f))\\otimes ba$. Every tensor is a finite sum of pure tensors; bilinearity extends this identity to arbitrary pairs. With the stated object map this is a functor $\\overline r$ by [def-weil-linear-scalar-localization].",
+   "uses": [
+    "def-weil-module-base-change",
+    "def-weil-linear-scalar-localization"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00CV, section-tensor-product (pure tensors generate), and Tag 05G3, section-base-change; raw composition as in the cited definition."
+   }
+  },
+  {
+   "text": "Reindex the finite set $I$ by $\\{1,\\ldots,|I|\\}$, including $|I|=0$. Apply [lem-weil-pbc-tensor-finite-product] with $P_i=H_i$ and $N=S$ to obtain $\\theta:(\\prod_iH_i)\\otimes_RS\\simeq\\prod_i(H_i\\otimes_RS)$ with the stated pure-tensor formula. It is also $S$-linear: $\\theta(h\\otimes ca)=(h_i\\otimes ca)_i=c\\theta(h\\otimes a)$, extended over finite sums. Base change preserves inverse identities by [def-weil-module-base-change], so $u_{K,M}\\otimes_RS$ is invertible. The composite $\\theta\\circ(u_{K,M}\\otimes_RS)$ agrees with the constructed Hom map on every pure tensor, hence everywhere. All Hom maps are therefore bijective.",
+   "uses": [
+    "lem-weil-pbc-tensor-finite-product",
+    "def-weil-module-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00CV, section-tensor-product; finite-product module comparison as in TensorProduct.piLeft, Mathlib/LinearAlgebra/TensorProduct/Pi.lean:115."
+   }
+  },
+  {
+   "text": "A tuple $L=(L_i)_i$ of localized objects is already a tuple of integral objects, since raw localization leaves objects unchanged. A quasi-inverse to $r$ and its counit give $K\\in\\mathcal A$ and isomorphisms $\\alpha_i:r_iK\\xrightarrow{\\sim}L_i$. In raw localization, $(\\alpha_i\\otimes1)(\\alpha_i^{-1}\\otimes1)=\\mathrm{id}\\otimes1$ and the reverse composite is the other identity. Thus these morphisms give an isomorphism $\\overline rK\\simeq L$, proving the specified essential surjectivity.",
+   "uses": [
+    "def-weil-linear-scalar-localization"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Definition-equivalence-categories and Tag 02C3, lemma-equivalence-categories; localization identity calculation from the cited definition."
+   }
+  },
+  {
+   "text": "Apply [lem-trf-fully-faithful-ess-surj-equivalence] to the functor just constructed, using the Hom bijections and object isomorphisms above. It is an $S$-linear equivalence, including an $S$-linear quasi-inverse: on arrows the latter is the inverse Hom map of $\\overline r$ applied to $\\alpha_{L\\prime}^{-1}\\circ h\\circ\\alpha_L$. Conjugation is $S$-linear by [def-weil-linear-category], and the inverse of a bijective $S$-linear map is $S$-linear by applying the map to addition and scalar identities. No object or retract has been adjoined.",
+   "uses": [
+    "lem-trf-fully-faithful-ess-surj-equivalence",
+    "def-weil-linear-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Tag 02C3, lemma-equivalence-categories, and lemma-construct-quasi-inverse; linearity from dga.tex, Tag 09MJ."
+   }
+  },
+  {
+   "text": "If $I=\\varnothing$, its product category has the unique empty tuple. The integral quasi-inverse supplies an object of $\\mathcal A$. Step 1 identifies each integral Hom module with the empty product module, the zero module. A tensor of its only element is $0\\otimes a=0$; pure tensors generate, so every localized Hom module is also zero and its underlying set is a singleton. This proves all empty-product assertions and also confirms the preceding argument in that case.",
+   "uses": [
+    "def-weil-module-base-change"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00CV, section-tensor-product, defining tensor relations; empty product by definition."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sf-quasi-inverse-hom-bijection",
+  "def-weil-linear-functor",
+  "def-weil-module-base-change",
+  "def-weil-linear-scalar-localization",
+  "lem-weil-pbc-tensor-finite-product",
+  "lem-trf-fully-faithful-ess-surj-equivalence",
+  "def-weil-linear-category"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-def-purity-conv/def-pur-section-invariant.md",
+  "place": "Finite-clopen transport subargument of the final invertibility assertion. The blueprint asserts invertibility only; the raw scalar comparison is proved here from the existing tensor-product and equivalence nodes, with Stacks Tags 00CV, 05G3, 02C3, 09MJ and 09MK."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "loogle",
+   "query": "TensorProduct.piLeft",
+   "results": "{\"t\": \"2026-10-22T06:44:08Z\", \"tool\": \"loogle\", \"query\": \"TensorProduct.piLeft\", \"sub\": \"\", \"ok\": true, \"n_hits\": 2, \"note\": \"\", \"top\": [\"TensorProduct.piLeft\", \"Ideal.pi_mkQ_rTensor\"], \"digest\": \"2b10e3df3c896462\"}",
+   "date": "2026-10-22",
+   "verdict": "No match: localization linearity and inverseLinear do not construct the raw finite-product Hom comparison and equivalence; TensorProduct.piLeft proves only the module ingredient, already an existing DAG leaf."
+  },
+  {
+   "tool": "grep",
+   "query": "ScalarLocalization|scalarLocalization|scalar_localization",
+   "results": "{\"t\": \"2026-10-22T06:44:49Z\", \"tool\": \"grep\", \"query\": \"ScalarLocalization|scalarLocalization|scalar_localization\", \"sub\": \"CategoryTheory\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "No match: localization linearity and inverseLinear do not construct the raw finite-product Hom comparison and equivalence; TensorProduct.piLeft proves only the module ingredient, already an existing DAG leaf."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Linear equivalences and finite products of raw scalar localization categories",
+   "results": "{\"t\": \"2026-10-22T06:44:49Z\", \"tool\": \"leansearch\", \"query\": \"Linear equivalences and finite products of raw scalar localization categories\", \"sub\": \"\", \"ok\": false, \"n_hits\": 0, \"note\": \"service unavailable: {\\\"error\\\":\\\"Rate limit exceeded: 60 per 1 minute\\\"}\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Linear, CategoryTheory.Equivalence",
+   "results": "{\"t\": \"2026-10-22T06:44:49Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.Linear, CategoryTheory.Equivalence\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"CategoryTheory.Equivalence.inverseLinear\"], \"digest\": \"8b21c43477485f05\"}",
+   "date": "2026-10-22",
+   "verdict": "No match: localization linearity and inverseLinear do not construct the raw finite-product Hom comparison and equivalence; TensorProduct.piLeft proves only the module ingredient, already an existing DAG leaf."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Raw scalar localization of a linear category commutes with finite product equivalences with Hom tensor product formula",
+   "results": "{\"t\": \"2026-10-22T06:45:04Z\", \"tool\": \"leanfinder\", \"query\": \"Raw scalar localization of a linear category commutes with finite product equivalences with Hom tensor product formula\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Localization.linear\", \"CategoryTheory.Localization.instLinearLocalization'\", \"CategoryTheory.Localization.instLinearLocalization\", \"CategoryTheory.Localization.instLinearLocalization'Q'\", \"CategoryTheory.Localization.instLinearLocalizationQ\", \"CategoryTheory.Localization.functor_linear_iff\", \"CategoryTheory.Localization.functor_linear\", \"CategoryTheory.Shift.instLinearLocalizationShiftFunctorOfCommShiftOfQ\"], \"digest\": \"ff75f87381408178\"}",
+   "date": "2026-10-22",
+   "verdict": "No match: localization linearity and inverseLinear do not construct the raw finite-product Hom comparison and equivalence; TensorProduct.piLeft proves only the module ingredient, already an existing DAG leaf."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An R linear fully faithful essentially surjective functor remains an equivalence after tensoring Hom modules with R inverse t",
+   "results": "{\"t\": \"2026-10-22T06:45:04Z\", \"tool\": \"leanfinder\", \"query\": \"An R linear fully faithful essentially surjective functor remains an equivalence after tensoring Hom modules with R inverse t\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"MoritaEquivalence.linear\", \"ModuleCat.instMonoidalLinear\", \"ModuleCat.monoidalClosedHomEquiv\", \"ModuleCat.monoidalCategory\", \"CategoryTheory.monoidalLinearOfFaithful\", \"CategoryTheory.tensoringLeft_linear\", \"CategoryTheory.tensoringRight_linear\", \"ModuleCat.extendRestrictScalarsAdj_homEquiv_apply\"], \"digest\": \"7a0a9eedc6e2a797\"}",
+   "date": "2026-10-22",
+   "verdict": "No match: localization linearity and inverseLinear do not construct the raw finite-product Hom comparison and equivalence; TensorProduct.piLeft proves only the module ingredient, already an existing DAG leaf."
+  },
+  {
+   "tool": "grep",
+   "query": "ScalarLocalization|scalarLocalization|scalar_localization",
+   "results": "{\"t\": \"2026-10-22T07:50:32Z\", \"tool\": \"grep\", \"query\": \"ScalarLocalization|scalarLocalization|scalar_localization\", \"sub\": \"CategoryTheory\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "No match: no raw scalar localization construction in Mathlib/CategoryTheory."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Linear, CategoryTheory.Equivalence",
+   "results": "{\"t\": \"2026-10-22T07:50:32Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.Linear, CategoryTheory.Equivalence\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"CategoryTheory.Equivalence.inverseLinear\"], \"digest\": \"8b21c43477485f05\"}",
+   "date": "2026-10-22",
+   "verdict": "No match: Equivalence.inverseLinear supplies inverse linearity, not the tensor-Hom category or product comparison."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Raw scalar localization of an R linear category preserves finite product equivalences",
+   "results": "{\"t\": \"2026-10-22T07:50:32Z\", \"tool\": \"leansearch\", \"query\": \"Raw scalar localization of an R linear category preserves finite product equivalences\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"IsLocalizedModule.prodMap\", \"IsLocalizedModule.pi\", \"LinearMap.extendScalarsOfIsLocalizationEquiv\", \"CategoryTheory.Localization.preservesFiniteProducts\", \"CategoryTheory.Localization.linear\", \"CategoryTheory.Functor.IsLocalization.pi\", \"CategoryTheory.Functor.IsLocalization.prod\", \"CategoryTheory.Localization.instPreservesFiniteProductsLocalization'Q'\"], \"digest\": \"b5618ecf2b6c85d4\"}",
+   "date": "2026-10-22",
+   "verdict": "No match: IsLocalizedModule.pi is a module localization ingredient; IsLocalization.pi concerns localization at morphism classes. Neither identifies raw tensor Hom modules or gives this equivalence in one line."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Scalar extension of an R linear equivalence between a category and a finite product by tensoring all morphism modules",
+   "results": "{\"t\": \"2026-10-22T07:50:35Z\", \"tool\": \"leanfinder\", \"query\": \"Scalar extension of an R linear equivalence between a category and a finite product by tensoring all morphism modules\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"fromModuleCatToModuleCatLinearEquivtoModuleCatObj\", \"ModuleCat.extendRestrictScalarsAdj_homEquiv_apply\", \"ModuleCat.ExtendRestrictScalarsAdj.HomEquiv.fromExtendScalars_hom_apply\", \"ModuleCat.ExtendRestrictScalarsAdj.HomEquiv.toRestrictScalars_hom_apply\", \"ModuleCat.extendScalarsId_inv_app_apply\", \"MoritaEquivalence.linear\", \"ModuleCat.homEquiv_extendScalarsId\", \"ModuleCat.instMonoidalLinear\"], \"digest\": \"7b9ed2292ad2d887\"}",
+   "date": "2026-10-22",
+   "verdict": "No match: hits concern scalar extension of module categories, Morita equivalences, or linearity of existing functors; none constructs this raw tensor-Hom product equivalence."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Tensoring morphism spaces with a commutative algebra preserves a fully faithful essentially surjective linear functor",
+   "results": "{\"t\": \"2026-10-22T07:50:37Z\", \"tool\": \"leanfinder\", \"query\": \"Tensoring morphism spaces with a commutative algebra preserves a fully faithful essentially surjective linear functor\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.monoidalLinearOfFaithful\", \"CategoryTheory.MonoidalLinear.ofFaithful\", \"CategoryTheory.Functor.linear_comp_iff_of_full_of_essSurj\", \"CategoryTheory.tensoringLeft_linear\", \"CategoryTheory.tensorLeft_linear\", \"CategoryTheory.tensoringRight_linear\", \"CategoryTheory.tensorRight_linear\", \"ModuleCat.hom_whiskerLeft\"], \"digest\": \"961bdc19140326c4\"}",
+   "date": "2026-10-22",
+   "verdict": "No match: hits concern scalar extension of module categories, Morita equivalences, or linearity of existing functors; none constructs this raw tensor-Hom product equivalence."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-pur-finite-product-field-coefficient-descent",
+  "date": "2026-10-22",
+  "group": "Q126"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-def-purity-conv",
+ "blueprint": {
+  "from": {
+   "node": "def-pur-section-invariant",
+   "place": "Final invertibility assertion, finite-clopen transport: original item steps 1-3 and rational empty-product part of step 11; raw scalar Hom comparison.",
+   "via": [
+    "lem-pur-finite-product-field-coefficient-descent",
+    "lem-pur-finite-clopen-derived-decomposition"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-pur-raw-localization-finite-product-equivalence",
+  "worker": "stage1",
+  "summary": "Statement unchanged. Constructed the functor on tensor generators, proved the Hom comparison using the existing finite-product tensor Mathlib leaf, lifted integral object isomorphisms, and applied the existing equivalence criterion. Checked S-linearity of the tensor comparison and quasi-inverse and the empty index case. No new nodes or exact project attachment.",
+  "blueprint": "Realizes the finite-clopen coefficient-transport subargument of def-pur-section-invariant, final assertion of invertibility, via lem-pur-finite-clopen-derived-decomposition and lem-pur-finite-product-field-coefficient-descent; the blueprint has no proof of this raw comparison."
+ },
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q56-9cfc7eaad",
+  "group": "Q56",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q56-9cfc7eaad (reviewer sub-agent of L); spot-checked: Read the whole item, all 7 cited node statements, the main-20261015 def-pur-section-invariant.md source and the only citer, lem-pur-finite-product-field-coefficient-descent. The source asserts only invertibility, so the proof correctly carries proof_origin agent. The statement is unchanged and no repair note applies. Steps: (1) lem-sf-quasi-inverse-hom-bijection gives bijective Hom maps, and the step proves the inverse is linear. (2) The base-changed functor is checked on pure tensors. (3) lem-weil-pbc-tensor-finite-product, with t=|I| allowed to be 0; S-linearity is checked explicitly. (4) Counit isomorphisms tensored with 1. (5) Stacks 02C3, with a correct conjugation formula for the S-linear quasi-inverse. (6) The empty product case. Small cases I=∅, t a unit, t=0 or R=0, and |I|=1 all hold. Batch-5 finding: lem-trf-fully-faithful-ess-surj-equivalence is a status-mathlib general category-theory leaf (02C3, stmt_dep only def-nagata-category). It is not part of the trace-formula or Poincaré-duality statements or proofs, so the citation is accepted. lem-sfb-product-localization (universal localization at morphism classes) is a different notion, and I found no duplicate. No new nodes and no changes."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.RawLocalizationFiniteProductEquivalence",
+  "declaration": "CategoryTheory.rawLocalization_finiteProduct_equivalence",
+  "file": "lean/Sheaf/CategoryTheory/RawLocalizationFiniteProductEquivalence.lean",
+  "statement": "theorem rawLocalization_finiteProduct_equivalence (R : Type r) [CommRing R] (t : R) (A : Type u) [Category.{v} A] [Preadditive A] [Linear R A] (I : Type w) [Fintype I] (B : I → Type u) [∀ i : I, Category.{v} (B i)] [∀ i : I, Preadditive (B i)] [∀ i : I, Linear R (B i)] (F : ∀ i : I, A ⥤ B i) [∀ i : I, (F i).Additive] [∀ i : I, (F i).Linear R] [(Functor.pi' F).IsEquivalence] : ∃ E : ScalarLocalization R A t ≌ (∀ i : I, ScalarLocalization R (B i) t), (∀ i : I, (E.functor ⋙ Pi.eval (fun j ↦ ScalarLocalization R (B j) t) i).Additive ∧ (E.functor ⋙ Pi.eval (fun j ↦ ScalarLocalization R (B j) t) i).Linear (Localization.Away t)) ∧ (∀ (L M : ∀ i : I, ScalarLocalization R (B i) t) (f g : ∀ i : I, L i ⟶ M i) (a : Localization.Away t), E.inverse.map (f + g) = E.inverse.map f + E.inverse.map g ∧ E.inverse.map (a • f) = a • E.inverse.map f) ∧ (∀ (K : A) (i : I), E.functor.obj ⟨K⟩ i = ScalarLocalization.mk ((F i).obj K)) ∧ (∀ (K M : A) (f : K ⟶ M) (a : Localization.Away t), HEq (E.functor.map (a ⊗ₜ[R] f : ScalarLocalization.mk (R := R) (p := t) K ⟶ ScalarLocalization.mk M)) (fun i : I ↦ a ⊗ₜ[R] (F i).map f)) ∧ (∀ K M : A, ∃ h : (K ⟶ M) ≃ₗ[R] (∀ i : I, (F i).obj K ⟶ (F i).obj M), (∀ f : K ⟶ M, h f = fun i : I ↦ (F i).map f) ∧ (∀ z : Localization.Away t ⊗[R] (K ⟶ M), HEq (E.functor.map (z : ScalarLocalization.mk (R := R) (p := t) K ⟶ ScalarLocalization.mk M)) ((TensorProduct.piRight R (Localization.Away t) (Localization.Away t) (fun i : I ↦ (F i).obj K ⟶ (F i).obj M)) (h.toLinearMap.baseChange (Localization.Away t) z)))) ∧ (∀ L : ∀ i : I, ScalarLocalization R (B i) t, ∃ (K : A) (α : ∀ i : I, (F i).obj K ≅ (L i).obj) (β : ∀ i : I, E.functor.obj ⟨K⟩ i ≅ L i), ∀ i : I, HEq (β i).hom ((1 : Localization.Away t) ⊗ₜ[R] (α i).hom) ∧ HEq (β i).inv ((1 : Localization.Away t) ⊗ₜ[R] (α i).inv)) ∧ (IsEmpty I → Nonempty A ∧ (∀ K M : A, Subsingleton (K ⟶ M)) ∧ ∀ K M : ScalarLocalization R A t, Subsingleton (K ⟶ M))",
+  "branch": "newtargets-dag",
+  "by": "Q114",
+  "date": "2026-10-22",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-9198903d2",
+  "group": "Q114",
+  "result": "pass",
+  "note": "Every hypothesis and conclusion of the item matches the node. Linear R categories (Category.{v}+Preadditive+Linear R) and additive, R-linear F i; Functor.pi' F IsEquivalence; Fintype I with no Nonempty assumption and classical decidability scoped to the theorem; common object and Hom universes u/v as the node's 'one universe' allows, with r and w independent. The equivalence goes into the product of the raw ScalarLocalization categories, not the localization of the product. Forward functor S-linear on each component, inverse with explicit additive and scalar equations. Object formula, and pure-tensor arrow formula as HEq over the asserted object equality, so E is pinned. Hom map = piRight ∘ baseChange of a linear equivalence h with h f = (F i).map f, the node's canonical map in the dependency's scalar-first order. Integral representatives with β hom/inv HEq to 1⊗α. Empty-I clause gives Nonempty A plus Subsingleton Homs on both sides. Recorded statement equals the file text; one sorry; docstrings carry the source and all 6 steps; the report has Worker report and Second reading by Q114. No duplicate: the only other ScalarLocalization+Pi module is the parent node's, which applies the result to specific coefficient categories. Edge cases I empty, t=0/R=0, t a unit, |I|=1 all hold. No fixes and no compile needed."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "AUTO",
+  "group": "U5",
+  "result": "pass",
+  "landing": "20261023T103404-L-3117737",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)",
+  "sorry_before": [
+   "CategoryTheory.rawLocalization_finiteProduct_equivalence"
+  ],
+  "sorry_after": []
+ }
+}

@@ -1,0 +1,171 @@
+{
+ "id": "lem-route-coefficient-inclusion-laws",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "def-weil-algebraically-closed-coefficients",
+   "via": [],
+   "place": "def-weil-algebraically-closed-coefficients, coefficient-index and transition-functor clauses: inclusions E contained in L and E contained in L contained in M, realized by canonical small coefficient models in coefficientInclusion; identity and composition coherence before scalar extension."
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "The size transports preserve identity and composition of field inclusions.",
+ "statement": "Let $\\ell$ be a prime, put $K=\\mathbf Q_\\ell$ [def-weil-l-adic-numbers], and let $\\Omega$ be a fixed algebraic closure of $K$ [def-weil-algebraic-closure], with its specified $K$-algebra structure. Let $I$ be the set of finite-dimensional intermediate fields $K\\subseteq E\\subseteq\\Omega$, ordered by inclusion [def-weil-finite-subextension-directed-set]. Fix a universe $u$. For each $E\\in I$, write $C_E=\\operatorname{Shrink}^{u}(E)$ for its canonical small copy with the field and $K$-algebra structures transported from $E$, and write $s_E:C_E\\xrightarrow{\\sim}_K E$ for the canonical algebra equivalence (Mathlib's $\\operatorname{Shrink.algEquiv}$). Here the smallness witness is the one furnished by the finite-basis coordinate bijection $E\\simeq K^{[E:K]}$, as in the coefficientSmall construction; no equality between the universes of $\\Omega$ and $C_E$ is required. For $h:E\\subseteq L$ let $\\iota_h:E\\to L$ be the inclusion, $x\\mapsto x$ with its membership proof in $L$, and define the transported algebra homomorphism\n$$j_h=s_L^{-1}\\circ\\iota_h\\circ s_E:C_E\\longrightarrow C_L.$$\nThen both laws hold:\n$$\\forall E\\in I,\\quad j_{E\\subseteq E}=\\operatorname{id}_{C_E},$$\n$$\\forall E,L,M\\in I,\\ \\forall h:E\\subseteq L,\\ \\forall k:L\\subseteq M,\\quad j_k\\circ j_h=j_{h\\,\\mathrm{trans}\\,k}.$$\nThese are equalities of $K$-algebra homomorphisms for the actual canonical size transports.",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-def-sf-operations/def-weil-algebraically-closed-coefficients.md",
+  "place": "def-weil-algebraically-closed-coefficients: the Lean of this node (its declaration uses) reaches WeilConjectures.AlgebraicallyClosedCoefficients.coefficientInclusion_laws, a sorry on the sorry route of batch3, batch4 with no node; Lean: SHEAF file lean/Sheaf/Paper/AlgebraicallyClosedCoefficients.lean, declaration WeilConjectures.AlgebraicallyClosedCoefficients.coefficientInclusion_laws (module Sheaf.Paper.AlgebraicallyClosedCoefficients, lines 70-80, proof `sorry`)"
+ },
+ "stmt_deps": [
+  "def-weil-l-adic-numbers",
+  "def-weil-algebraic-closure",
+  "def-weil-finite-subextension-directed-set"
+ ],
+ "proof": [
+  {
+   "text": "Fix $E\\in I$ and $x\\in C_E$. The self-inclusion sends the element $s_E(x)$ to itself, so $j_{E\\subseteq E}(x)=s_E^{-1}(s_E(x))=x$ by the inverse identity for the algebra equivalence $s_E$. Equality on every element gives equality of the algebra homomorphisms (their remaining fields are proofs). This proves the first universal clause.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "lean/Sheaf/Paper/AlgebraicallyClosedCoefficients.lean",
+    "place": "coefficientInclusion definition, lines 242-246; coefficientInclusion_laws docstring and theorem, lines 248-264"
+   }
+  },
+  {
+   "text": "Fix $E\\subseteq L\\subseteq M$, witnesses $h,k$, and $x\\in C_E$. Expanding the definition gives $(j_k\\circ j_h)(x)=s_M^{-1}(\\iota_k(s_L(s_L^{-1}(\\iota_h(s_E(x))))))=s_M^{-1}(\\iota_k(\\iota_h(s_E(x))))$. The middle cancellation is the inverse identity for $s_L$. Each inclusion keeps the same underlying element of $\\Omega$; hence $\\iota_k(\\iota_h(s_E(x)))=\\iota_{h\\,\\mathrm{trans}\\,k}(s_E(x))$ as elements of $M$: the underlying values agree and membership proofs are irrelevant. The last expression is $j_{h\\,\\mathrm{trans}\\,k}(x)$. Equality on every $x$ gives the second equality of algebra homomorphisms. The choices of $E,L,M,h,k$ were arbitrary, and conjunction introduction joins the two clauses.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "lean/Sheaf/Paper/AlgebraicallyClosedCoefficients.lean",
+    "place": "coefficientInclusion definition, lines 242-246; coefficientInclusion_laws docstring and theorem, lines 248-264"
+   }
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "agent",
+  "document": "lean/Sheaf/Paper/AlgebraicallyClosedCoefficients.lean",
+  "place": "coefficientInclusion definition, lines 242-246; coefficientInclusion_laws docstring and theorem, lines 248-264",
+  "note": "Explicit elementwise expansion of the existing docstring proof; no non-elementary input is needed."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "grep -rlw 'coefficientInclusion_laws' lean/.lake/packages/mathlib/Mathlib/",
+   "results": "none",
+   "date": "2026-10-26",
+   "verdict": "no match",
+   "note": "name grep by tools/route_nodes.py only; the stage-1 worker adds LeanSearch / Loogle / LeanFinder searches"
+  },
+  {
+   "tool": "grep",
+   "query": "inclusion_self|inclusion_comp|symm_apply_apply|apply_symm_apply",
+   "results": "IntermediateField.inclusion_self (FieldTheory/IntermediateField/Basic.lean:603); read inclusion at :595 and inclusion_inclusion at :607. These give the underlying inclusions, without size transports.",
+   "date": "2026-10-27",
+   "verdict": "no exact match; elementary specialization after unfolding"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Conjugating algebra homomorphisms by algebra equivalences preserves identity and composition",
+   "results": "AlgEquiv.arrowCongr, arrowCongr_comp and arrowCongr_apply. Source read at Algebra/Algebra/Equiv.lean:405-424. General conjugation composition is available, but the concrete inclusion laws also require expanding coefficientInclusion and subtype inclusions.",
+   "date": "2026-10-27",
+   "verdict": "no exact match; elementary specialization after unfolding"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgEquiv, AlgHom.comp",
+   "results": "AlgEquiv.comp_symm, symm_comp (Equiv.lean:327,332), arrowCongr_comp (:419), ofAlgHom. These supply inverse cancellation/general conjugation, not this project-defined coefficientInclusion statement.",
+   "date": "2026-10-27",
+   "verdict": "no exact match; elementary specialization after unfolding"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Conjugating inclusions of finite intermediate fields by algebra equivalences preserves identity and composition",
+   "results": "IntermediateField.liftAlgEquiv, restrict_algEquiv, equivMap and Galois restriction maps; none states the two canonical Shrink coefficient-inclusion laws.",
+   "date": "2026-10-27",
+   "verdict": "no exact match; elementary specialization after unfolding"
+  },
+  {
+   "tool": "grep",
+   "query": "arrowCongr_comp|symm_comp|theorem ext|inclusion_inclusion|inclusion_self",
+   "results": "AlgEquiv.symm_comp (Algebra/Algebra/Equiv.lean:332), arrowCongr_comp (:419); AlgHom.ext (Algebra/Algebra/Hom.lean:193). Subalgebra inclusion laws also found; direct elementwise cancellation is elementary.",
+   "date": "2026-10-27",
+   "verdict": "no exact match; elementary specialization after unfolding"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Algebra homomorphism obtained by transport along isomorphisms is functorial",
+   "results": "AlgEquiv.toAlgebraIso, algEquivIsoAlgebraIso, CommAlgCat.algEquivOfIso_apply and unrelated monad maps. No match for the project-specific transported intermediate-field maps.",
+   "date": "2026-10-27",
+   "verdict": "no exact match; elementary specialization after unfolding"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "maintainer",
+  "item": "def-weil-algebraically-closed-coefficients",
+  "date": "2026-10-26",
+  "tool": "tools/route_nodes.py",
+  "why": "PROVISIONAL: sorried declaration on the sorry route (local/sorry-route.json) with no DAG node, recorded automatically after the route recompute (the human, 2026-10-23: every proof-related upstream sorry gets a node, and a node without a written proof goes to stage 1). The statement is only the Lean signature and docstring: the stage-1 worker writes it in words with [node] citations and stmt_deps, does the Mathlib searches (LeanSearch, Loogle or LeanFinder, local grep), fills blueprint.same_as, and splits it"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-def-sf-operations",
+ "lean": {
+  "existing": true,
+  "module": "Sheaf.Paper.AlgebraicallyClosedCoefficients",
+  "file": "lean/Sheaf/Paper/AlgebraicallyClosedCoefficients.lean",
+  "declaration": "WeilConjectures.AlgebraicallyClosedCoefficients.coefficientInclusion_laws",
+  "declarations": [
+   "WeilConjectures.AlgebraicallyClosedCoefficients.coefficientInclusion_laws"
+  ],
+  "statement": "theorem coefficientInclusion_laws :\n    (∀ E : Index l Ω, coefficientInclusion.{u} l Ω E E le_rfl =\n      AlgHom.id (Padic l) (Coefficient.{u} l Ω E)) ∧\n    (∀ (E L M : Index l Ω) (h : E ≤ L) (k : L ≤ M),\n      (coefficientInclusion.{u} l Ω L M k).comp (coefficientInclusion.{u} l Ω E L h) =\n        coefficientInclusion.{u} l Ω E M (h.trans k)) := by\n  sorry",
+  "by": "maintainer",
+  "date": "2026-10-26",
+  "note": "SHEAF declaration attached as it stands, proof still `sorry`; recorded by tools/route_nodes.py"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-3d36b",
+  "group": "T3",
+  "result": "pass",
+  "landing": "20261026T002808-L-116338",
+  "kind": "interface",
+  "note": "independent cc review: 15 closed theorems' signatures vs clone (unchanged); changed def bodies vs change record (associator_formula/correctedTensorAssociator_formula, StageSystem.tr = old transport formula, concrete hasShift satisfies shift_exists); new node lem-weil-scalar-associator-shifts vs rationalConstructibleScalarComp_commShift; 5 direct importers + General compiled exit 0",
+  "sorry_before": [
+   "WeilConjectures.AlgebraicallyClosedCoefficients.associator_cocycle",
+   "WeilConjectures.AlgebraicallyClosedCoefficients.coefficientInclusion_laws",
+   "WeilConjectures.AlgebraicallyClosedCoefficients.commonStage_cone",
+   "WeilConjectures.AlgebraicallyClosedCoefficients.composition_bilinear",
+   "WeilConjectures.AlgebraicallyClosedCoefficients.distinguished_iff",
+   "WeilConjectures.AlgebraicallyClosedCoefficients.homCoordinates_existsUnique",
+   "WeilConjectures.AlgebraicallyClosedCoefficients.inclusion_additive",
+   "WeilConjectures.AlgebraicallyClosedCoefficients.representatives",
+   "WeilConjectures.AlgebraicallyClosedCoefficients.shift_exists",
+   "WeilConjectures.AlgebraicallyClosedCoefficients.stageSystem_existsUnique",
+   "WeilConjectures.AlgebraicallyClosedCoefficients.stageTransition_additive",
+   "WeilConjectures.AlgebraicallyClosedCoefficients.stageTransition_exact",
+   "WeilConjectures.AlgebraicallyClosedCoefficients.transitionIso_commShift",
+   "WeilConjectures.AlgebraicallyClosedCoefficients.transport_additive",
+   "WeilConjectures.AlgebraicallyClosedCoefficients.zero_exists"
+  ],
+  "sorry_after": []
+ },
+ "split_report": {
+  "date": "2026-10-27",
+  "item": "lem-route-coefficient-inclusion-laws",
+  "worker": "stage1",
+  "summary": "Expanded the provisional Lean signature into a self-contained statement with the exact canonical small coefficient models. Both laws are proved elementwise by inverse cancellation and equality of subtype inclusions; no new nodes are justified. Inspected live source and recorded all actual searches.",
+  "blueprint": "The imported ancestor coefficient-index and transition clauses use field inclusions and their composites. Steps 1 and 2 supply identity and composition of their canonical universe transports before the scalar-extension functors. The latest blueprint no longer contains the imported detailed ancestor file; the actual legacy declaration fixes this route item precisely."
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "NT-cc-NW-45260a3ab",
+  "group": "NW",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NW-45260a3ab (reviewer sub-agent of L); spot-checked: I read the item in full. The statement matches the legacy Lean declaration coefficientInclusion_laws (Sheaf/Paper/AlgebraicallyClosedCoefficients.lean:252-257): Index is the type of finite-dimensional IntermediateFields (FiniteCoefficientFields.lean:37), Coefficient E = Shrink.{u} E (:232), and coefficientInclusion = (Shrink.algEquiv L).symm ∘ IntermediateField.inclusion h ∘ Shrink.algEquiv E (:242-246). Mathlib's Shrink.algEquiv goes Shrink α ≃ₐ α (Algebra/Algebra/Shrink.lean:29), so s_E has the direction the item states. The order j_k∘j_h and h.trans k match the Lean exactly. The finite-field datum and Y are section variables that this theorem does not use, so leaving them out is correct. The three stmt_deps (l-adic numbers, algebraic closure, finite-subextension directed set) each define what the statement takes from them. Step 1 (s_E^{-1}s_E = id, then extensionality) and step 2 (cancel s_L, then the two subtype inclusions compose to ι_{h.trans k} because their values agree in Ω) are both correct one-line elementary steps. I tested them on E=L=M, on E=Q_ℓ and on x=0 and x=1. The now sorry-free Lean proof (ext; simp) is the same calculation. There are no new nodes and no D1/D2 relabelling. No repair note or re-split order exists for this item. rg -L over dag/nodes found no duplicate: def-pod-isomorphism-coefficient-inclusions only re-exports these laws downstream, and lem-pur-general-legacy-stage-coherence cites this item. The six recorded searches are plausible and their verdicts are right. proof_origin cites the Lean docstring as its document; I accepted that as accurate for a route node whose only source is that docstring. No tool_uses and no changes. Ancestor blueprint place (master def-weil-algebraically-closed-coefficients.md l.8-25) checked."
+ }
+}

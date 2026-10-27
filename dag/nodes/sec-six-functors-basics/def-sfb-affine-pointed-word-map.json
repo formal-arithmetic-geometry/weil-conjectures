@@ -1,0 +1,146 @@
+{
+ "id": "def-sfb-affine-pointed-word-map",
+ "kind": "definition",
+ "title": "Positive ordered word map of a morphism to a group scheme",
+ "status": "split",
+ "import_flags": [],
+ "statement": "Let $k$ be a field [def-weil-field], let $X$ be a scheme [def-pc-scheme] over $k$ [def-weil-scheme-over-base], let $G$ be a $k$-group scheme [def-sc-group-scheme], and let $\\varphi:X\\to G$ be a $k$-morphism. For each integer $n\\geq0$, the positive ordered word map is the $k$-morphism $w_{n+1}:X^{n+1}\\to G$ given by $w_{n+1}(x_0,\\ldots,x_n)=\\varphi(x_0)\\cdots\\varphi(x_n)$, where the factors are multiplied in increasing index order and the power is formed over $k$ [def-pc-fibre-product]. Equivalently it is the ordered product of the morphisms $\\varphi\\circ\\operatorname{pr}_i$, $0\\leq i\\leq n$. No assumption that $\\varphi$ is a homomorphism or preserves a chosen point is needed to define this map.",
+ "stmt_deps": [
+  "def-weil-field",
+  "def-pc-scheme",
+  "def-weil-scheme-over-base",
+  "def-sc-group-scheme",
+  "def-pc-fibre-product"
+ ],
+ "source": {
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Section 2h, affine-case word map preceding Proposition 2.46, printed pp.54-55; the ordered-word construction itself does not require the affine or pointed hypotheses used for generated-subgroup properties."
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Ordered product word morphism from a finite power of a scheme to a group scheme",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"CoxeterSystem.wordProd\", \"module\": \"Mathlib.GroupTheory.Coxeter.Basic\", \"type\": \"(ω : List B) : W\", \"doc\": \"Given a list $\\\\omega$ of elements from the generating set $B$ of a Coxeter system $(W, B)$, this function computes the product in $W$ of the simple reflections corresponding to each element of $\\\\omega\"}\n  {\"name\": \"Monoid.CoprodI.Word.prod\", \"module\": \"Mathlib.GroupTheory.CoprodI\", \"type\": \"(w : Word M) : CoprodI M\", \"doc\": \"The function maps a word $w$ in the indexed coproduct of monoids to its product in the coproduct monoid $\\\\coprod_{i \\\\in \\\\iota} M_i$. This is achieved by converting the word to a list of pairs $(i, m_i\"}\n  {\"name\": \"LinearOrderedCommGroupWithZero.fst\", \"module\": \"Mathlib.Algebra.Order.GroupWithZero.Lex\", \"type\": \": WithZero (αˣ ×ₗ βˣ) →*₀o α\", \"doc\": \"The first projection map from the product of two linearly ordered commutative groups with zero (equipped with the lexicographic order) to one of the original groups, which preserves the monoid with ze\"}\n  {\"name\": \"Monoid.CoprodI.NeWord.prod\", \"module\": \"Mathlib.GroupTheory.CoprodI\", \"type\": \"{i j} (w : NeWord M i j)\", \"doc\": \"The function maps a non-empty word $w$ in the indexed coproduct of monoids to its product in the coproduct monoid $\\\\coprod_{i \\\\in \\\\iota} M_i$, achieved by converting the non-empty word to a standard w\"}\n  {\"name\": \"OrderHom.prodMap\", \"module\": \"Mathlib.Order.Hom.Basic\", \"type\": \"(f : α →o β) (g : γ →o δ) : α × γ →o β × δ\", \"doc\": \"Given two order-preserving functions $ f : \\\\alpha \\\\to \\\\beta $ and $ g : \\\\gamma \\\\to \\\\delta $ between preordered sets, the product map sends each pair $ (a, c) \\\\in \\\\alpha \\\\times \\\\gamma $ to $ (f(a), g(c\"}\n  {\"name\": \"LocallyFiniteOrder.orderMonoidWithZeroHom\", \"module\": \"Mathlib.Algebra.Order.Monoid.LocallyFiniteOrder\", \"type\": \"(G : Type*) [LinearOrderedCommGroupWithZero G] [LocallyFiniteOrder Gˣ] : G →*₀o ℤᵐ⁰\", \"doc\": \"A zero-preserving multiplicative monoid homomorphism from a linearly ordered commutative group with zero $ G $ (equipped with a locally finite order on its units $ G^\\times $) to the multiplicative int\"}\n  {\"name\": \"OrderHom.prod\", \"module\": \"Mathlib.Order.Hom.Basic\", \"type\": \"(f : α →o β) (g : α →o γ) : α →o β × γ\", \"doc\": \"Given preordered sets $\\\\alpha$, $\\\\beta$, and $\\\\gamma$, and order-preserving functions $f : \\\\alpha \\\\to \\\\beta$ and $g : \\\\alpha \\\\to \\\\gamma$, the product function $(f, g) : \\\\alpha \\\\to \\\\beta \\\\times \\\\gamma$\"}\n  {\"name\": \"OrderHom.prodIso\", \"module\": \"Mathlib.Order.Hom.Basic\", \"type\": \": (α →o β × γ) ≃o (α →o β) × (α →o γ)\", \"doc\": \"The order-preserving maps from a preordered set $\\\\alpha$ to the product preorder $\\\\beta \\\\times \\\\gamma$ are in order isomorphism with the product of the order-preserving maps from $\\\\alpha$ to $\\\\beta$ a\"}\n",
+   "date": "2026-10-24",
+   "verdict": "No specialized scheme word-map declaration. Reuse the existing project definition AlgebraicGeometry.affinePointedWordMap; no definition is reimplemented."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Word morphism of schemes obtained by multiplying the images of the projections in an internal group",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"CategoryTheory.Grp.hom_mul\", \"module\": \"Mathlib/CategoryTheory/Monoidal/Cartesian/Grp_\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.CartesianMonoidalCategory C]\\n  [inst_2 : CategoryTheory.BraidedCategory C] (H : CategoryTheory.Grp C) [inst_3 : CategoryTheory.IsCommMonObj H.X],\\n  CategoryTheory.MonObj.mul.hom.hom = CategoryTheory.MonObj.mul\", \"doc\": \"For a group object $ H $ in a Cartesian monoidal category $ \\\\mathcal{C} $, if $ H.X $ is a commutative monoid object, then the multiplication morphism $ \\\\mu_H $ of $ H $ as a group coincides with the \"}\n  {\"name\": \"AlgebraicGeometry.pointsPi\", \"module\": \"Mathlib/AlgebraicGeometry/PointsPi\", \"type\": \"{ι : Type u} →\\n  (R : ι → CommRingCat) →\\n    (X : AlgebraicGeometry.Scheme) →\\n      (AlgebraicGeometry.Spec { carrier := (i : ι) → ↑(R i), commRing := Pi.commRing } ⟶ X) →\\n        (i : ι) → AlgebraicGeometry.Spec (R i) ⟶ X\", \"doc\": \"Given a morphism from the spectrum of the product ring $\\\\prod_i R_i$ to a scheme $X$, this function constructs the corresponding family of morphisms from each spectrum $\\\\operatorname{Spec}(R_i)$ to $X\"}\n  {\"name\": \"CategoryTheory.Grp.Hom.hom_mul\", \"module\": \"Mathlib/CategoryTheory/Monoidal/Cartesian/Grp_\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.CartesianMonoidalCategory C]\\n  [inst_2 : CategoryTheory.BraidedCategory C] {G H : CategoryTheory.Grp C} [inst_3 : CategoryTheory.IsCommMonObj H.X]\\n  (f g : G ⟶ H), (f * g).hom = f.hom * g.hom\", \"doc\": \"In a Cartesian monoidal category, for any group objects $G$ and $H$, the multiplication operation on the hom-set $\\\\text{Hom}(G, H)$ (endowed with its canonical monoid structure) satisfies $(f \\\\cdot g)\"}\n  {\"name\": \"CategoryTheory.Grp.homMk''_hom_hom\", \"module\": \"Mathlib/CategoryTheory/Monoidal/Grp_\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} C] [inst_1 : CategoryTheory.CartesianMonoidalCategory C]\\n  {A B : CategoryTheory.Grp C} (f : A.X ⟶ B.X)\\n  (one_f :\\n    autoParam (CategoryTheory.CategoryStruct.comp CategoryTheory.MonObj.one f = CategoryTheory.MonObj.one)\\n      CategoryTheory.\", \"doc\": \"Given a Cartesian monoidal category $\\\\mathcal{C}$, group objects $A$ and $B$ in $\\\\mathcal{C}$, and a morphism $f: A \\\\to B$ between their underlying objects that preserves the unit ($f \\\\circ \\\\eta_A = \\\\\"}\n  {\"name\": \"CategoryTheory.Grp.lift_hom\", \"module\": \"Mathlib/CategoryTheory/Monoidal/Grp_\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} C] [inst_1 : CategoryTheory.CartesianMonoidalCategory C]\\n  [inst_2 : CategoryTheory.BraidedCategory C] {G H₁ H₂ : CategoryTheory.Grp C} (f : G ⟶ H₁) (g : G ⟶ H₂),\\n  (CategoryTheory.CartesianMonoidalCategory.lift f g).hom = CategoryTheory.Carte\", \"doc\": \"In the category of group objects within a Cartesian monoidal category $\\\\mathcal{C}$, given group homomorphisms $f: G \\\\to H_1$ and $g: G \\\\to H_2$, the homomorphism component of the uniquely determined \"}\n  {\"name\": \"CategoryTheory.Grp.tensorObj_mul\", \"module\": \"Mathlib/CategoryTheory/Monoidal/Grp_\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} C] [inst_1 : CategoryTheory.CartesianMonoidalCategory C]\\n  [inst_2 : CategoryTheory.BraidedCategory C] (G H : CategoryTheory.Grp C),\\n  CategoryTheory.MonObj.mul = CategoryTheory.MonObj.mul\", \"doc\": \"In a Cartesian monoidal category $\\\\mathcal{C}$, for any two group objects $G$ and $H$, the multiplication morphism on their direct product $G \\\\times H$ is equal to the product of their individual mult\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.monObjAsOverPullback_mul\", \"module\": \"Mathlib/AlgebraicGeometry/Pullbacks\", \"type\": \"∀ {M S T : AlgebraicGeometry.Scheme} [inst : M.Over S] {f : T ⟶ S} [inst_1 : CategoryTheory.MonObj (M.asOver S)],\\n  CategoryTheory.MonObj.mul =\\n    CategoryTheory.CategoryStruct.comp\\n      (CategoryTheory.Functor.LaxMonoidal.μ (CategoryTheory.Over.pullback f) (CategoryTheory.Over.mk (M ↘ S))\\n       \", \"doc\": \"In the Cartesian monoidal category of schemes over a base scheme $ S $, the multiplication morphism of a monoidal object $ M $ is given by the composition of the lax monoidal structure map $ \\\\mu $ of \"}\n  {\"name\": \"CategoryTheory.Hom.mul_def\", \"module\": \"Mathlib/CategoryTheory/Monoidal/Cartesian/Mon_\", \"type\": \"∀ {C : Type u_1} [inst : CategoryTheory.Category.{v, u_1} C] [inst_1 : CategoryTheory.CartesianMonoidalCategory C]\\n  {M X : C} [inst_2 : CategoryTheory.MonObj M] (f₁ f₂ : X ⟶ M),\\n  f₁ * f₂ =\\n    CategoryTheory.CategoryStruct.comp (CategoryTheory.CartesianMonoidalCategory.lift f₁ f₂) CategoryTheory.M\", \"doc\": \"In a Cartesian monoidal category $\\\\mathcal{C}$, for any monoidal object $M$ and object $X$, the multiplication of morphisms $f_1, f_2: X \\\\to M$ in the monoid structure on $\\\\text{Hom}(X, M)$ is defined\"}\n",
+   "date": "2026-10-24",
+   "verdict": "No specialized scheme word-map declaration. Reuse the existing project definition AlgebraicGeometry.affinePointedWordMap; no definition is reimplemented."
+  },
+  {
+   "tool": "grep",
+   "query": "wordMap|WordMap|pointedWord|word.*morphism",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-24",
+   "verdict": "No specialized scheme word-map declaration. Reuse the existing project definition AlgebraicGeometry.affinePointedWordMap; no definition is reimplemented."
+  },
+  {
+   "tool": "grep project",
+   "query": "affinePointedWordMap|pointedWordMap|wordMap in lean/WeilConjectures, lean/Sheaf/AlgebraicGeometry/GroupScheme",
+   "results": "lean/Sheaf/AlgebraicGeometry/GroupScheme/AffinePointedMapGeneratedSubgroup.lean:40:noncomputable def affinePointedWordMap {k : Type u} [Field k]\nlean/Sheaf/AlgebraicGeometry/GroupScheme/AffinePointedMapGeneratedSubgroup.lean:50:  ⨅ n : ℕ, RingHom.ker (affinePointedWordMap φ n).left.appTop.hom\n",
+   "date": "2026-10-24",
+   "verdict": "The sole specialized definition is affinePointedWordMap in the generated-subgroup module; the theorem node records it as a helper, but no definition node carries the word-map notion independently."
+  },
+  {
+   "tool": "grep DAG",
+   "query": "affinePointedWordMap|def-sfb-affine-pointed-word-map in dag/nodes",
+   "results": "dag/nodes/sec-six-functors-basics/lem-sfb-affine-pointed-map-generated-subgroup.json:273:   \"AlgebraicGeometry.affinePointedWordMap\",\n",
+   "date": "2026-10-24",
+   "verdict": "The sole specialized definition is affinePointedWordMap in the generated-subgroup module; the theorem node records it as a helper, but no definition node carries the word-map notion independently."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-derived-commutator-word-arbitrary-field",
+  "date": "2026-10-24",
+  "group": "N7"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "Positive finite commutator word in lem-sfb-derived-commutator-word-arbitrary-field; Milne Proposition 2.46 word-map construction, pp.54-55. det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Haboush symmetric-power lifting for a trivial quotient representation. Supporting representation-theoretic input: Steinberg endomorphisms detect a nonzero fixed vector. Supporting Self-duality of rho section modules at characteristic-dependent weights. Supporting input: Positive-characteristic simplicity step, using irreducibility of the Steinberg induced module rather than assuming self-duality. Numerical input to the dimension comparison: Weyl dimension of the induced module. Supporting Integral Euler character of arbitrary flag line bundles. Section 22d, proof of Theorem 22.50, p.480: general fixed-point input, stated here in its integral equivariant form; Example 22.36, pp.473--474, for formal characters. WANTED: Nielsen 1974 general fixed-point theorem and Iversen 1976, 9.4; neither document is present. The integral formulation is an agent-supplied supporting statement. Supporting input: Section 22d, proof of Theorem 22.50, p.480: agent-supplied concentration prerequisite, not the numerical fixed-point formula itself. WANTED: Thomason, Une formule de Lefschetz en K-theorie equivariante algebrique, Duke Math. J. 53 (1986), concentration theorem; not present locally. No proof of concentration is claimed to occur in Milne. Supporting step: The concentration theorem's nonfixed-locus annihilation argument in the proof of the item. Geometric input to nonfixed-locus annihilation: invariant affine strata of the reduction, before the Laurent-coefficient and localization arguments. Supporting normal-case neighbourhood input used after passing to the invariant smooth locus, before removing one affine open in the Noetherian induction. Supporting proof input: Linearize the normal quasi-projective neighborhood by an immersion into projective space of a rational representation. Supporting line-bundle prerequisite: replace an ample invertible module by a positive tensor power carrying an algebraic G-linearization, before choosing invariant sections. Supporting Picard input: a tensor exponent uniform over the generic residue fields of all normal components, before applying the generic-line pullback criterion. Supporting base-change input: Brion Lemma 2.3, pullback Pic(G) to Pic(G_K), specialized using Remark 2.2(v). Supporting substep: Milne, Algebraic Groups, Theorem 18.15, sequence (128), printed p.390, and section 18.f, pp.395-396; the split-group standing assumptions, B/ B_u and characteristic line bundle on p.390. Scalar-extension compatibility of the associated-bundle construction is made explicit. Also Brion Lemma 2.3, equation (2), printed p.118. Supporting prerequisite: Milne Theorem 13.33(a)-(e), printed pp.265-266; Proposition 17.60, p.372 (split unipotent kernel); Theorem 25.1, p.544 (parabolic quotient), with Theorems 5.28 and 8.43-8.44, pp.105,161 (represented, quasi-projective quotient, hence projective when proper). Regular centralizer: proof of Proposition 21.29, pp.433-434. Smooth integral geometry: Corollary 5.26, Proposition 7.15 and Propositions 1.34-1.35. The field-extension clauses use the defining functors and quotient sheaf. Supporting proof input: Proposition 16.63, printed p.347; Proposition 16.62 and Theorem 16.58, printed pp.345,347; split-series convention in Section 16g. This general automorphism-action criterion is the input used in the proof of Proposition 17.60, printed p.372. Supporting input: Theorem 16.58 (Rosenlicht), printed p.345; split solvable convention in Section 16g, p.343; splitness of the unipotent subgroup in Proposition 16.54 and its proof, p.344. Present split of Rosenlicht 16.58: Corollary 6.19(b),(d),(e), Propositions 6.20(a) and 6.21, printed pp.129-130; Theorem 16.58, general-case derived-group reduction, p.345.",
+   "via": [
+    "lem-sfb-derived-commutator-word-arbitrary-field",
+    "lem-sfb-rosenlicht-split-solvable-criterion",
+    "lem-sfb-split-torus-no-invariants-unipotence",
+    "lem-sfb-reductive-cocharacter-parabolic-geometry",
+    "lem-sfb-split-reductive-characteristic-sequence",
+    "lem-sfb-affine-group-picard-field-invariance",
+    "lem-sfb-affine-group-picard-stable-exponent",
+    "lem-sfb-normal-line-bundle-power-linearization",
+    "lem-sfb-normal-quasiprojective-equivariant-immersion",
+    "lem-sfb-sumihiro-normal-torus-affine-neighbourhood",
+    "lem-sfb-torus-invariant-affine-filtration",
+    "lem-sfb-torus-nonfixed-complement-annihilation",
+    "lem-sfb-torus-coherent-concentration",
+    "lem-sfb-torus-coherent-fixed-point-formula",
+    "lem-sfb-flag-line-euler-alternant",
+    "lem-sfb-induced-weyl-dimension-formula",
+    "lem-sfb-steinberg-induced-module-irreducible",
+    "lem-sfb-rho-section-self-duality",
+    "lem-sfb-steinberg-endomorphism-detection",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.GroupScheme.AffinePointedMapGeneratedSubgroup",
+  "declaration": "AlgebraicGeometry.affinePointedWordMap",
+  "statement": "noncomputable def affinePointedWordMap {k : Type u} [Field k]\n    {X G : Over (Spec (.of k))} [GrpObj G] (φ : X ⟶ G) (n : ℕ) :\n    (∏ᶜ fun _ : Fin (n + 1) ↦ X) ⟶ G",
+  "branch": "newtargets-dag",
+  "by": "N7",
+  "date": "2026-10-24",
+  "existing": true,
+  "note": "Exact existing plain definition, not chosen from the generated-subgroup theorem. n indexes positive length n + 1. Its List.ofFn projection-composite list is multiplied in index order. This definition node exposes that notion without adding its owning theorem to a consumer statement dependency."
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-a626b659c",
+  "group": "N7",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-a626b659c",
+  "group": "N7",
+  "result": "pass",
+  "note": "Re-delivery after H2 RETURN of b7faaa (Q120 85e6 also RETURNed; neither landed, item lean null live). Lean file byte-identical to b7faaa; item diff vs live only lean + stmt_deps (adds def-sfb-semisimple-group-scheme and new def-sfb-affine-pointed-word-map; theorem lem-sfb-affine-pointed-map-generated-subgroup now proof_deps only). New def node: existing:true binding to AlgebraicGeometry.affinePointedWordMap, signature verbatim side-live AffinePointedMapGeneratedSubgroup.lean:40-43 (plain List.ofFn prod, not .choose); statement matches body and Milne 2h p.54; its 5 stmt_deps exist. All clauses checked (IsDerivedGroupScheme minimality over all closed subgroups, normal/smooth/geom. connected D, r=n+1 dense word on all points, pulled-back inclusion derived for every K:Type u, triviality to commutative affine f.t. C, commutative fppf quotient via IsFppfGroupQuotient from base stmt_dep, commutative G => D≅Spec k); edge cases G=1, G_a/tori, imperfect/finite k, transcendental K. Gates OK; no file changed, nothing compiled."
+ }
+}

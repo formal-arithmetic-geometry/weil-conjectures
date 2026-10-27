@@ -1,0 +1,117 @@
+{
+ "id": "lem-trf-completed-restriction-transition",
+ "kind": "statement",
+ "title": "Completed restriction evaluation preserves the actual coefficient-system transition",
+ "statement": "Fix a prime $\\ell$, a finite extension $E/\\mathbf Q_\\ell$, and a scheme $W$. Use the coefficient sequence category, its derived category, evaluation $e_n$, quotient restriction $r_{m,n}$ and actual transition $\\tau_{m,n}$ of [def-coef-ringed-sequence-site]. Let $U$ be the exact termwise restriction to completed-coefficient towers, $R_n$ the completed restriction at level $n$, $a_n:\\operatorname{ev}_nU\\cong R_ne_n$ the specified coefficientRestrictedEvaluationIso, and $c_{m,n}:R_mr_{m,n}\\cong R_n$ the comparison compactSupportSystemRestrictionComp of [def-trf-compact-support-system-evaluation-diagram]. For every $n\\leq m$ and every derived system $N$, the actual constant-tower transition $s_{m,n}$ satisfies $s_{m,n,UN}\\,;\\,a_{n,N}=a_{m,N}\\,;\\,R_m(\\tau_{m,n,N})\\,;\\,c_{m,n,e_nN}$. No injectivity or cartesianness of $N$ is assumed.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 0940/0941; coherence proof step 5, termwise restriction before the inverse limit"
+ },
+ "stmt_deps": [
+  "def-trf-compact-support-system-evaluation-diagram",
+  "def-coef-ringed-sequence-site"
+ ],
+ "proof": [
+  {
+   "text": "Use the characterizations coefficientSequenceRestriction_exists and coefficientSequenceTransition_exists on every section. Transport through coefficientSequenceRestriction_evaluation. The limit-cone equation and coefficientRestrictionComp identify the successive scalar restrictions, whose underlying section map is unchanged. Module-sheaf extensionality gives the ordinary transition square. This is the restrictedTransition argument already proved privately in CoefficientSequenceRoosModel, specialized directly to the unrestricted completion projections.",
+   "uses": [
+    "def-coef-ringed-sequence-site",
+    "lem-coef-derived-system-evaluation-calculus"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Prove a private localization square lemma for exact functors. By Localization.natTrans_ext it suffices to check the equality on Q K. Cancel the target factorization isomorphisms, use the factorization formulas of the localized transition, evaluation isomorphisms and mapDerivedCategoryCompNatIso, and naturality to reduce to the ordinary square degreewise. Specialize to the sequence restriction, both tower evaluations and the finite scalar restriction. The resulting composite comparison is definitionally compactSupportSystemRestrictionComp. No normalization or injectivity is used.",
+   "uses": [
+    "lem-weil-pbc-exact-functor-derived-factorization"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-coef-ringed-sequence-site",
+  "lem-coef-derived-system-evaluation-calculus",
+  "lem-weil-pbc-exact-functor-derived-factorization"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Derived and homotopy limits (Tags 0940/0941), exact termwise restriction; localization proof adapted from the proved private derivedSquare and derivedRestrictedTransition in Sheaf.Paper.CoefficientSequenceRoosModel, group D8, 2026-10-27."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Restriction of scalars from a coefficient system to its inverse limit commutes with evaluation and transition maps in the derived category",
+   "results": "Eight hits for ordinary RestrictScalars and its module-sheaf variants; none gives this derived transition square.",
+   "date": "2026-10-27",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Scalar restriction of a coefficient system to its completed coefficient ring preserves the derived evaluation transition square",
+   "results": "Eight hits, including AdicCompletion.transitionMap_comp_eval and ModuleCat.restrictScalarsComp'App_hom_naturality; these do not compare the stated derived system functors.",
+   "date": "2026-10-27",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "mapDerivedCategory.*(NatTrans|naturality)|mapDerivedCategoryCompIso",
+   "results": "Four hits, including Functor.mapDerivedCategoryFactors_hom_naturality; relevant localization naturality, no full system-transition statement.",
+   "date": "2026-10-27",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.TraceFormula.CompactSupportSystemEvaluationCoherence",
+  "date": "2026-10-27",
+  "group": "T4"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-thm-trace-transport",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-trf-l-function-euler-product",
+   "place": "Proof Step 1 (Global powers), compatibility with composition before rationalization; the comparison prerequisite of prop-trf-rational-frobenius-integral-model.proof.md (2)-(3). Coherence proof step 5.",
+   "via": [
+    "lem-trf-compact-support-system-evaluation-coherence",
+    "lem-trf-compact-support-system-realization-normalization",
+    "lem-trf-integral-compact-transport-recurrence"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.TraceFormula.CompactSupportCompletedRestrictionTransition",
+  "file": "lean/Sheaf/TraceFormula/CompactSupportCompletedRestrictionTransition.lean",
+  "declaration": "WeilConjectures.compactSupportCompletedRestrictionTransition",
+  "statement": "theorem compactSupportCompletedRestrictionTransition\n    (W : Scheme.{t}) {m n : ℕ} (h : n ≤ m)\n    (N : coefficientSequenceDerived l E W) :\n    (compactSupportConstantTowerTransition l E W h).app\n        ((coefficientSequenceDerivedRestriction l E W).obj N) ≫\n      (coefficientRestrictedEvaluationIso l E W n).hom.app N =\n    (coefficientRestrictedEvaluationIso l E W m).hom.app N ≫\n      (coefficientFiniteDerivedRestriction l E W m).map\n        ((coefficientSequenceDerivedTransition l E W h).app N) ≫\n      (compactSupportSystemRestrictionComp l E W h).hom.app\n        ((coefficientSequenceDerivedEvaluation l E W n).obj N)",
+  "branch": "sheaf-dag",
+  "by": "T4",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T4",
+  "result": "pass",
+  "landing": "20261026T235940-L-1472900",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D8",
+  "result": "pass",
+  "landing": "20261027T021312-L-2754887",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

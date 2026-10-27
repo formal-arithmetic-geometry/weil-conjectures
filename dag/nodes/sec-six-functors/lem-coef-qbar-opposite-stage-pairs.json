@@ -1,0 +1,120 @@
+{
+ "id": "lem-coef-qbar-opposite-stage-pairs",
+ "kind": "lemma",
+ "title": "Opposite finite stages present the opposite pair category",
+ "statement": "Let I be a directed preorder, C_i categories and S a stage system with coherent transition associators. Form the stage system of opposite categories with transition (S.T h).op and inverse opposite associator. Its pair category is canonically equivalent to the opposite of S.PairCategory. The equivalence sends (i,op x) to op(i,x), and reverses the arrow of every common-stage representative, retaining its field and interchanging its two lower-bound witnesses.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-sf-biduality-general/sk-prop-sf-biduality-general.proof.md",
+  "place": "Final coefficient-transport paragraph (thm-coef-qbar-verdier); formal expansion of retained proof steps 1--2, opposite categories and common-stage representatives; detailed retained argument: dag/nodes/sec-six-functors/thm-coef-qbar-verdier.json, original proof steps"
+ },
+ "stmt_deps": [
+  "def-weil-algebraically-closed-coefficients"
+ ],
+ "proof": [
+  {
+   "text": "The inverse associator cocycle, after taking opposites, is exactly the required cocycle. Define the opposite stage system by this formula.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Reverse a representative by interchanging the two lower-bound witnesses and taking the opposite arrow. Expand transport: reversing swaps the two associators and inverts their roles, so eventual equality is preserved. Perform the same construction in the other direction.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Represent a composable pair at a common stage. Taking opposites reverses its composite, proving both functor laws. Reversing twice fixes every object and every representative, giving the identity-component unit and counit and hence the equivalence.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-sf-biduality-general/sk-prop-sf-biduality-general.proof.md",
+  "place": "Formal categorical expansion of the retained common-stage argument, retained proof steps 1--2, opposite categories and common-stage representatives"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "The opposite of a filtered stage-system pair category is equivalent to the pair category of opposite stages",
+   "results": "{\"n_hits\": 8, \"top\": [\"CategoryTheory.Equivalence.leftOp\", \"AddOpposite\", \"CategoryTheory.prodOpEquiv\", \"MulOpposite.opEquiv\", \"CategoryTheory.Equivalence.rightOp\", \"CategoryTheory.isCofilteredOrEmpty_op_of_isFilteredOrEmpty\", \"CategoryTheory.Limits.has_cofiltered_limits_op_of_has_filtered_colimits\", \"MulOpposite\"], \"note\": \"\", \"digest\": \"dea21189ba9328f6\"}",
+   "date": "2026-10-24",
+   "verdict": "no exact match; reuse existing generic categorical APIs in the proof"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.StageSystem.Morphism.adjunction",
+   "results": "{\"n_hits\": 0, \"top\": [], \"note\": \"loogle: unknown identifier 'CategoryTheory.StageSystem.Morphism.adjunction'\", \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no exact match; reuse existing generic categorical APIs in the proof"
+  },
+  {
+   "tool": "grep",
+   "query": "duality.*descent|desc.*[Dd]ual|op.*StageSystem",
+   "results": "{\"n_hits\": 5, \"top\": [\"Mathlib/FieldTheory/Minpoly/MinpolyDiv.lean\", \"Mathlib/LinearAlgebra/TensorProduct/Associator.lean\", \"Mathlib/Tactic/Translate/ToDual.lean\", \"Mathlib/Tactic/Translate/ToDual.lean\", \"Mathlib/Tactic/Translate/ToDual.lean\"], \"note\": \"\", \"digest\": \"8721958d2dda0307\"}",
+   "date": "2026-10-24",
+   "verdict": "no exact match; reuse existing generic categorical APIs in the proof"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.SixFunctors.CoefQbarVerdier",
+  "date": "2026-10-25",
+  "group": "V1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-coef-qbar-verdier",
+   "place": "retained proof steps 1--2, opposite categories and common-stage representatives",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.StageSystemOpposite",
+  "file": "lean/Sheaf/CategoryTheory/StageSystemOpposite.lean",
+  "declaration": "CategoryTheory.StageSystem.pairOppositeEquivalence",
+  "statement": "def pairOppositeEquivalence : S.opposite.PairCategory ≌ S.PairCategoryᵒᵖ",
+  "branch": "sheaf-dag",
+  "by": "V1",
+  "date": "2026-10-25",
+  "declarations": [
+   "CategoryTheory.StageSystem.opposite",
+   "CategoryTheory.StageSystem.opposite_transport",
+   "CategoryTheory.StageSystem.unopPair",
+   "CategoryTheory.StageSystem.opPair",
+   "CategoryTheory.StageSystem.pairOppositeFunctor",
+   "CategoryTheory.StageSystem.opPairHom",
+   "CategoryTheory.StageSystem.pairUnopFunctor",
+   "CategoryTheory.StageSystem.pairOppositeUnit",
+   "CategoryTheory.StageSystem.pairOppositeCounit",
+   "CategoryTheory.StageSystem.pairOppositeEquivalence"
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-07b3e",
+  "group": "V1",
+  "result": "fix",
+  "landing": "20261025T203436-L-2817454",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-07b3e",
+  "group": "V1",
+  "result": "fix",
+  "landing": "20261025T203436-L-2817454",
+  "kind": "interface",
+  "note": "independent cc review: delivered CoefQbarVerdier/Data/Core/InternalHom/Exceptional/Dualizing + StageSystemOpposite/Adjunction and 8 node files against the published CoefQbarVerdier.lean (diff: data block verbatim except subtype wrappers and 4 dropped private imports), the RationalOperations identification theorems, and the six direct importers compiled against the delivered oleans"
+ }
+}

@@ -1,0 +1,149 @@
+{
+ "id": "lem-sfb-diagonal-trace-presentation-existence",
+ "kind": "statement",
+ "title": "Normalized projective-line trace presentation before choosing its trace",
+ "statement": "Let l be prime, X,S Noetherian schemes with the recorded derived localizations, f:X→S and e:X≅P1(S) with e.hom≫q=f, and suppose l is a unit on S. There is a Presentation p over ULift(Q_l) with precisely model e. Its actual unit/Chern map model.bq is invertible, its twisted-unit/trace and Chern/trace composites have finite evaluations zero and identity respectively, and completed scalar restriction is bijective on Hom(Rc(completedLine(X)[2]),completedUnit(S)). This asserts the normalized comparisons and completeness needed for lifting, but chooses no completed trace and asserts no diagonal integral.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-diagonal-tower/sk-prop-diagonal-tower-trace.proof.md",
+  "place": "paragraph (1), construction, splitting, coefficient comparisons and completeness before the completed trace"
+ },
+ "stmt_deps": [
+  "def-sfb-diagonal-trace-presentation",
+  "def-sfb-diagonal-trace-models",
+  "def-sfb-diagonal-trace-coefficients"
+ ],
+ "proof": [
+  {
+   "text": "Construct normalized comparison data p with the prescribed projective-line model, without choosing a completed trace.",
+   "uses": [
+    "lem-sfb-diagonal-trace-comparison-presentation"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The finite evaluations of bq are invertible. Apply the joint conservativity already included in p.base.calculus to obtain IsIso bq. Identify the twisted unit and Chern adjunct with the two twisted splitting inclusions.",
+   "uses": [
+    "lem-sfb-diagonal-trace-twisted-splitting-components",
+    "lem-coef-semilinear-derived-sections"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Expand Model.trace. Cancel the projection comparison with its inverse and combine the functor maps of bq and its inverse. The biproduct identities inl≫snd=0 and inr≫snd=1 give the system trace composites zero and identity. The second identity also cancels b.inv≫b.hom. Apply each exact evaluation functor to these global equations.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "The complete-object restriction theorem supplies bijectivity on the specified completed Hom set. Combine it with p, its model equality, invertible splitting and evaluated zero/identity equations.",
+   "uses": [
+    "lem-sfb-diagonal-trace-completed-hom-bijection"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-diagonal-trace-comparison-presentation",
+  "lem-sfb-diagonal-trace-twisted-splitting-components",
+  "lem-coef-semilinear-derived-sections",
+  "lem-sfb-diagonal-trace-completed-hom-bijection"
+ ],
+ "proof_origin": {
+  "kind": "adapted",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-diagonal-tower/sk-prop-diagonal-tower-trace.proof.md",
+  "place": "paragraph (1): separate construction, pre-inverse splitting components, and completed full faithfulness; prove inverse-splitting normalization categorically",
+  "by": "N1"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "projective line completed trace and integral of the diagonal is identity",
+   "results": "8 hits: normalized algebra traces and linear-map traces, with no sheaf-theoretic projective-line trace.",
+   "date": "2026-10-23",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "DerivedCategory.singleFunctor",
+   "results": "12 hits including the full and faithful singleFunctor instances and the exact single-object comparison.",
+   "date": "2026-10-23",
+   "verdict": "Use the Mathlib full and faithful instances to prove degree-zero detection."
+  },
+  {
+   "tool": "grep",
+   "query": "mapDerivedCategorySingleFunctor|mapBiprod_inv_map_desc",
+   "results": "12 hits, including the exact single-object comparison in ExactFunctor.lean and the biproduct comparison lemma in Limits/Preserves/Shapes/Biproducts.lean.",
+   "date": "2026-10-23",
+   "verdict": "These prove categorical assembly but do not construct the geometric presentation."
+  },
+  {
+   "tool": "rg",
+   "query": "TowerClasses|DiagonalTrace.(Result|Presentation)|SupportedSource|IsIntegration in lean/Sheaf and lean/WeilConjectures",
+   "results": "TowerClasses and the trace presentation are records; no theorem supplies their inhabitants. Existing trace matches are definitions and consumers.",
+   "date": "2026-10-23",
+   "verdict": "The geometric existence step is separate from categorical assembly."
+  },
+  {
+   "tool": "blueprint_refs.py",
+   "query": "normalized trace presentation; completed trace; degree-zero system endomorphism",
+   "results": "0 blueprint nodes for all three searches.",
+   "date": "2026-10-23",
+   "verdict": "No exact smaller blueprint statement; retain the parent trace route."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Exact evaluation of inverse systems detects equality of morphisms between single objects in derived category",
+   "results": "8 hits including HasDerivedCategory.standard and DerivedCategory.singleFunctorsPostcompQIso_inv_hom; no exact tower detection theorem. See the recorded searches.jsonl entry at 2026-10-23T13:37:07Z.",
+   "date": "2026-10-23",
+   "verdict": "Use Mathlib full and faithful singleFunctor and prove the tower detection argument."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.DiagonalTowerTrace",
+  "date": "2026-10-23",
+  "group": "E7"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-prop-diagonal-tower-trace",
+   "place": "paragraph (1), construction, splitting, coefficient comparisons and completeness before the completed trace",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-prop-diagonal-tower",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.DiagonalTracePresentationExistence",
+  "file": "lean/Sheaf/Paper/DiagonalTracePresentationExistence.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.DiagonalTrace.exists_diagonalTracePresentation",
+  "statement": "theorem exists_diagonalTracePresentation (l : ℕ) [Fact l.Prime]\n    {X S : Scheme.{u}} (f : X ⟶ S) [IsNoetherian S] [IsNoetherian X]\n    [DiagonalTraceLocalizations l X] [DiagonalTraceLocalizations l S]\n    (m : X ≅ ProjectiveLine S) (hm : m.hom ≫ (ProjectiveLine S ↘ S) = f)\n    (hS : IsUnit (l : Γ(S, ⊤))) :\n    ∃ p : Presentation l (ULift.{u} (Padic l)) f,\n      p.model.model = m ∧\n      ∃ hs : IsIso (p.model.bq l (ULift.{u} (Padic l))),\n        letI := hs\n        (∀ n : ℕ,\n          (SpTowerShriek.Ev l (ULift.{u} (Padic l)) S n).map\n            (p.model.twistedUnit l (ULift.{u} (Padic l)) ≫\n              p.model.trace l (ULift.{u} (Padic l))) = 0) ∧\n        (∀ n : ℕ,\n          (SpTowerShriek.Ev l (ULift.{u} (Padic l)) S n).map\n            (p.model.chernAdjoint l (ULift.{u} (Padic l)) ≫\n              p.model.trace l (ULift.{u} (Padic l))) =\n                𝟙 ((SpTowerShriek.Ev l (ULift.{u} (Padic l)) S n).obj\n                  (SpTowerClasses.unit S (SpTowerClasses.Arings l (ULift.{u} (Padic l)) S)))) ∧\n        Function.Bijective (fun t : p.Rc.R.obj ((completedLine l X)⟦(2 : ℤ)⟧) ⟶\n            completedUnit l S ↦ (diagonalCompletedUnderlying l S).map t)",
+  "branch": "sheaf-dag",
+  "by": "E7",
+  "date": "2026-10-23"
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "C-beeda",
+  "group": "E7",
+  "result": "fix",
+  "landing": "20261023T231004-L-3527995",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "N1",
+  "result": "pass",
+  "landing": "20261026T183548-L-3751290",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

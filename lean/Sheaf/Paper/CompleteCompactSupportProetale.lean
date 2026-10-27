@@ -23,12 +23,19 @@ public import WeilConjectures.Compactification.Refinement
 public import WeilConjectures.Compactification.RefinementCategory
 public import Mathlib.CategoryTheory.Adjunction.Mates
 
+import WeilConjectures.Compactification.Cofiltered
+import Sheaf.Paper.OrdinaryOpenExchangeIdentity
+import Sheaf.Paper.CompletedPullbackReflection
+
 import all Sheaf.Paper.OpenImmersionTensorPiece
 import all Sheaf.AlgebraicGeometry.ProEtaleWeaklyEtaleLocalization
+import Sheaf.AlgebraicGeometry.ClopenScalarRestrictionReverseAdjunction
+import Sheaf.CategoryTheory.ExactDerivedAdjunction
 import Sheaf.Paper.StrictTowerExchangeMateNormalization
 import Sheaf.Paper.RingedOpenStrictReduction
 import Sheaf.Paper.CompletedOpenFiniteEtaleOrigins
 import Sheaf.Paper.CompletedKoszulQuotientComparison
+import all Sheaf.Paper.CompletedFiniteExchangeCoordinates
 
 /-!
 # Complete pro-etale compact-support base change
@@ -57,6 +64,210 @@ def cbcOpenProjection {U T : Scheme.{t}} (j : U ⟶ T) [IsOpenImmersion j]
     (cbcOpenSiteFunctor j inferInstance).obj ((proEtaleBaseChange j).obj V) ⟶ V :=
   MorphismProperty.Over.homMk (pullback.fst V.hom j) pullback.condition
 
+/-- The coefficient counit equation follows from the constant-sheafification unit. -/
+private theorem cbcFiniteCoefficientCounit {U T : Scheme.{t}} (j : U ⟶ T)
+    [IsOpenImmersion j] (n : ℕ) :
+    let F := proEtaleBaseChange j
+    let a := MorphismProperty.Over.mapPullbackAdj @WeaklyEtale ⊤ j
+      (inferInstance : WeaklyEtale j) trivial
+    let R := ProEtale.StrictTower.coefficients (cbcFiniteRing d n) T
+    let S := ProEtale.StrictTower.coefficients (cbcFiniteRing d n) U
+    let ψ := proEtaleRingDirectImageMap j R S
+      (ProEtale.StrictTower.constantRingIso (cbcFiniteRing d n) j)
+    Functor.whiskerRight (NatTrans.op a.counit) R.obj =
+      ψ.hom ≫ F.op.whiskerLeft (finiteOpenRing d j inferInstance n).hom.hom := by
+  dsimp only
+  let F := proEtaleBaseChange j
+  let G := cbcOpenSiteFunctor j inferInstance
+  let a := MorphismProperty.Over.mapPullbackAdj @WeaklyEtale ⊤ j
+    (inferInstance : WeaklyEtale j) trivial
+  let R := ProEtale.StrictTower.coefficients (cbcFiniteRing d n) T
+  let S := ProEtale.StrictTower.coefficients (cbcFiniteRing d n) U
+  let ψ := proEtaleRingDirectImageMap j R S
+    (ProEtale.StrictTower.constantRingIso (cbcFiniteRing d n) j)
+  have hψ : ψ = proEtaleConstantDirectImageMap j CommRingCat.{t + 1}
+      (cbcFiniteRing d n) := by
+    change (proEtaleSheafAdjunction j CommRingCat.{t + 1}).homEquiv _ _
+      (((proEtaleSheafAdjunction j CommRingCat.{t + 1}).homEquiv _ _).symm _) = _
+    exact Equiv.apply_symm_apply _ _
+  change Functor.whiskerRight (NatTrans.op a.counit) R.obj =
+    ψ.hom ≫ F.op.whiskerLeft (finiteOpenRing d j inferInstance n).hom.hom
+  apply sheafify_hom_ext (ProEt.topology T) _ _
+    (((proEtaleSheafDirectImage j CommRingCat.{t + 1}).obj
+      ((G.sheafPushforwardContinuous CommRingCat.{t + 1}
+        (ProEt.topology U) (ProEt.topology T)).obj R)).property)
+  rw [hψ]
+  have hunit : toSheafify (ProEt.topology T)
+      ((Functor.const T.ProEtᵒᵖ).obj (cbcFiniteRing d n)) ≫
+      (proEtaleConstantDirectImageMap j CommRingCat.{t + 1}
+        (cbcFiniteRing d n)).hom =
+      F.op.whiskerLeft (toSheafify (ProEt.topology U)
+        ((Functor.const U.ProEtᵒᵖ).obj (cbcFiniteRing d n))) := by
+    exact (sheafificationAdjunction (ProEt.topology T) CommRingCat.{t + 1}).homEquiv
+      _ _ |>.apply_symm_apply _
+  rw [← Category.assoc]
+  erw [hunit]
+  ext V b
+  have hc := ConcreteCategory.congr_hom
+    (congr_app (finiteOpenRing_unit d j inferInstance n) (F.op.obj V)) b
+  have hn := ConcreteCategory.congr_hom
+    ((toSheafify (ProEt.topology T)
+      ((Functor.const T.ProEtᵒᵖ).obj (cbcFiniteRing d n))).naturality
+        (a.counit.app V.unop).op) b
+  exact hn.symm.trans hc.symm
+
+/-- Completed scalar compatibility is detected by the finite limit projections. -/
+private theorem cbcCompletedCoefficientCounit {U T : Scheme.{t}} (j : U ⟶ T)
+    [IsOpenImmersion j] :
+    let F := proEtaleBaseChange j
+    let a := MorphismProperty.Over.mapPullbackAdj @WeaklyEtale ⊤ j
+      (inferInstance : WeaklyEtale j) trivial
+    let ψ := proEtaleRingDirectImageMap j (d.completedRing T) (d.completedRing U)
+      (d.integralRingIso j)
+    Functor.whiskerRight (NatTrans.op a.counit) (d.completedRing T).obj =
+      ψ.hom ≫ F.op.whiskerLeft (cbcCompletedRestrictionMap d j inferInstance).hom := by
+  let F := proEtaleBaseChange j
+  let G := cbcOpenSiteFunctor j inferInstance
+  let E := sheafToPresheaf (ProEt.topology T) CommRingCat.{t + 1} ⋙
+    (Functor.whiskeringLeft T.ProEtᵒᵖ T.ProEtᵒᵖ CommRingCat.{t + 1}).obj (F ⋙ G).op
+  apply (isLimitOfPreserves E (limit.isLimit (reductionCoefficientSystem T d))).hom_ext
+  intro n
+  dsimp only [Functor.mapCone_π_app, Functor.comp_map]
+  apply (cancel_mono (E.map (pbcLevelConstantComparison T d n.unop).inv)).1
+  let a := MorphismProperty.Over.mapPullbackAdj @WeaklyEtale ⊤ j
+    (inferInstance : WeaklyEtale j) trivial
+  let π := cbcFiniteProjection d T n.unop
+  let π' := cbcFiniteProjection d U n.unop
+  let ψ := cbcCompletedCoefficientDirectMap d j
+  let ψ' := proEtaleRingDirectImageMap j
+    (ProEtale.StrictTower.coefficients (cbcFiniteRing d n.unop) T)
+    (ProEtale.StrictTower.coefficients (cbcFiniteRing d n.unop) U)
+    (ProEtale.StrictTower.constantRingIso (cbcFiniteRing d n.unop) j)
+  have hψ : proEtaleRingDirectImageMap j (d.completedRing T) (d.completedRing U)
+      (d.integralRingIso j) = ψ := by
+    dsimp [ψ, cbcCompletedCoefficientDirectMap, proEtaleRingDirectImageMap]
+    rw [cbcDatumCoefficient_eq d j]
+    rfl
+  have hπ : ψ.hom ≫ F.op.whiskerLeft π'.hom = π.hom ≫ ψ'.hom := by
+    exact congrArg (fun z ↦ z.hom) (finiteProjection_direct d j n.unop).symm
+  have hres : (cbcCompletedRestrictionMap d j inferInstance).hom ≫
+      G.op.whiskerLeft π.hom = π'.hom ≫ (finiteOpenRing d j inferInstance n.unop).hom.hom := by
+    exact congrArg (fun z ↦ z.hom) (finiteOpenRing_projection d j inferInstance n.unop).symm
+  change Functor.whiskerRight (NatTrans.op a.counit) (d.completedRing T).obj ≫
+      (F ⋙ G).op.whiskerLeft π.hom =
+    (proEtaleRingDirectImageMap j (d.completedRing T) (d.completedRing U)
+      (d.integralRingIso j)).hom ≫
+      F.op.whiskerLeft (cbcCompletedRestrictionMap d j inferInstance).hom ≫
+        (F ⋙ G).op.whiskerLeft π.hom
+  rw [hψ]
+  have hn : Functor.whiskerRight (NatTrans.op a.counit) (d.completedRing T).obj ≫
+      (F ⋙ G).op.whiskerLeft π.hom =
+    π.hom ≫ Functor.whiskerRight (NatTrans.op a.counit)
+      (ProEtale.StrictTower.coefficients (cbcFiniteRing d n.unop) T).obj := by
+    apply NatTrans.ext
+    funext V
+    exact π.hom.naturality (a.counit.app V.unop).op
+  rw [hn, cbcFiniteCoefficientCounit d j n.unop]
+  calc
+    _ = (π.hom ≫ ψ'.hom) ≫
+        F.op.whiskerLeft (finiteOpenRing d j inferInstance n.unop).hom.hom := by
+      rfl
+    _ = (ψ.hom ≫ F.op.whiskerLeft π'.hom) ≫
+        F.op.whiskerLeft (finiteOpenRing d j inferInstance n.unop).hom.hom := by rw [hπ]
+    _ = ψ.hom ≫ F.op.whiskerLeft
+        (π'.hom ≫ (finiteOpenRing d j inferInstance n.unop).hom.hom) := by
+      rfl
+    _ = _ := by rw [← hres]; rfl
+
+/-- Lift the open-site adjunction using the normalized coefficient counit equation. -/
+private def cbcRestrictionAdjunction {U T : Scheme.{t}} (j : U ⟶ T)
+    [IsOpenImmersion j] :
+    cbcOpenRestriction d j inferInstance ⊣
+      proEtaleRingModuleDirectImage j (d.completedRing T) (d.completedRing U)
+        (d.integralRingIso j) := by
+  let F := proEtaleBaseChange j
+  let G := cbcOpenSiteFunctor j inferInstance
+  let a := MorphismProperty.Over.mapPullbackAdj @WeaklyEtale ⊤ j
+    (inferInstance : WeaklyEtale j) trivial
+  let R := d.completedRing T
+  let S := d.completedRing U
+  let c := cbcCompletedRestrictionMap d j inferInstance
+  let ψ := proEtaleRingDirectImageMap j R S (d.integralRingIso j)
+  have H₁ : Functor.whiskerRight (NatTrans.op a.counit) R.obj =
+      ψ.hom ≫ F.op.whiskerLeft c.hom := cbcCompletedCoefficientCounit d j
+  let b := a.sheafPushforwardContinuous (E := CommRingCat.{t + 1})
+    (ProEt.topology U) (ProEt.topology T)
+  let e := ((proEtaleSheafAdjunction j CommRingCat.{t + 1}).leftAdjointUniq b).app R
+  have hc : (d.integralRingIso j).hom ≫ c = e.hom := by
+    apply ((proEtaleSheafAdjunction j CommRingCat.{t + 1}).homEquiv _ _).injective
+    change ((proEtaleSheafAdjunction j CommRingCat.{t + 1}).homEquiv R
+      ((G.sheafPushforwardContinuous CommRingCat.{t + 1}
+        (ProEt.topology U) (ProEt.topology T)).obj R)) ((d.integralRingIso j).hom ≫ c) =
+      ((proEtaleSheafAdjunction j CommRingCat.{t + 1}).homEquiv R
+        ((G.sheafPushforwardContinuous CommRingCat.{t + 1}
+        (ProEt.topology U) (ProEt.topology T)).obj R))
+        (((proEtaleSheafAdjunction j CommRingCat.{t + 1}).leftAdjointUniq b).hom.app R)
+    rw [Adjunction.homEquiv_leftAdjointUniq_hom_app]
+    apply Sheaf.hom_ext
+    change ψ.hom ≫ F.op.whiskerLeft c.hom =
+      Functor.whiskerRight (NatTrans.op a.counit) R.obj
+    exact H₁.symm
+  have heq : c = ((d.integralRingIso j).symm ≪≫ e).hom := by
+    apply (cancel_epi (d.integralRingIso j).hom).1
+    simpa only [Iso.trans_hom, Iso.symm_hom, Iso.hom_inv_id_assoc] using hc
+  have : IsIso c := by rw [heq]; infer_instance
+  have H₂ : c.hom ≫ G.op.whiskerLeft ψ.hom ≫
+      Functor.whiskerRight (NatTrans.op a.unit) S.obj = 𝟙 S.obj := by
+    apply NatTrans.ext
+    funext V
+    apply (cancel_mono (c.hom.app V)).1
+    dsimp
+    rw [Category.id_comp]
+    have hn := c.hom.naturality (a.unit.app V.unop).op
+    dsimp at hn
+    rw [Category.assoc, Category.assoc, hn]
+    have hh := congrArg (fun z ↦ z.app (G.op.obj V)) H₁
+    dsimp at hh
+    erw [← Category.assoc (ψ.hom.app (G.op.obj V))
+      (c.hom.app (F.op.obj (G.op.obj V)))
+      (R.obj.map (G.map (a.unit.app V.unop)).op), ← hh]
+    rw [← Functor.map_comp, ← op_comp]
+    erw [a.left_triangle_components]
+    change c.hom.app V ≫ R.obj.map (𝟙 (G.op.obj V)) = c.hom.app V
+    rw [R.obj.map_id]
+    exact Category.comp_id _
+  let Rr := (sheafCompose (ProEt.topology T)
+    (forget₂ CommRingCat.{t + 1} RingCat.{t + 1})).obj R
+  let Sr := (sheafCompose (ProEt.topology U)
+    (forget₂ CommRingCat.{t + 1} RingCat.{t + 1})).obj S
+  let φr : Sr ⟶ (G.sheafPushforwardContinuous RingCat.{t + 1}
+      (ProEt.topology U) (ProEt.topology T)).obj Rr :=
+    (sheafCompose (ProEt.topology U) (forget₂ CommRingCat.{t + 1} RingCat.{t + 1})).map c
+  let ψr : Rr ⟶ (F.sheafPushforwardContinuous RingCat.{t + 1}
+      (ProEt.topology T) (ProEt.topology U)).obj Sr :=
+    ⟨Functor.whiskerRight ψ.hom (forget₂ CommRingCat.{t + 1} RingCat.{t + 1})⟩
+  have H₁r : Functor.whiskerRight (NatTrans.op a.counit) Rr.obj =
+      ψr.hom ≫ F.op.whiskerLeft φr.hom := by
+    apply NatTrans.ext
+    funext V
+    exact congrArg (fun z ↦ (forget₂ CommRingCat.{t + 1} RingCat.{t + 1}).map
+      (z.app V)) H₁
+  have H₂r : φr.hom ≫ G.op.whiskerLeft ψr.hom ≫
+      Functor.whiskerRight (NatTrans.op a.unit) Sr.obj = 𝟙 Sr.obj := by
+    apply NatTrans.ext
+    funext V
+    exact congrArg (fun z ↦ (forget₂ CommRingCat.{t + 1} RingCat.{t + 1}).map
+      (z.app V)) H₂
+  exact SheafOfModules.pushforwardPushforwardAdj a φr ψr H₁r H₂r
+
+private theorem cbcRestrictionAdjunction_unit {U T : Scheme.{t}} (j : U ⟶ T)
+    [IsOpenImmersion j] (M : proEtaleRingModules T (d.completedRing T)) (V : T.ProEt)
+    (x : M.val.obj (op V)) :
+    ((cbcRestrictionAdjunction d j).unit.app M).val.app (op V) x =
+      M.val.map (cbcOpenProjection j V).op x := by
+  unfold cbcRestrictionAdjunction
+  rfl
+
 /-- Restriction of sections is the unit from a module to direct image of open restriction.
 Its section formula fixes the comparison, including its completed scalar action.
 Source: Stacks 03DI and 09AE (blueprint: thm-cbc-complete-proetale).
@@ -73,7 +284,11 @@ theorem cbcRestrictionUnit_existsUnique {U T : Scheme.{t}} (j : U ⟶ T)
       ∀ (M : proEtaleRingModules T (d.completedRing T)) (V : T.ProEt)
         (x : M.val.obj (op V)),
         (η.app M).val.app (op V) x = M.val.map (cbcOpenProjection j V).op x := by
-  sorry
+  refine ⟨(cbcRestrictionAdjunction d j).unit,
+    cbcRestrictionAdjunction_unit d j, ?_⟩
+  intro θ hθ
+  ext M V x
+  exact (hθ M V.unop x).trans (cbcRestrictionAdjunction_unit d j M V.unop x).symm
 
 /-- The section-normalized restriction unit.
 Source: Stacks 03DI (blueprint: thm-cbc-complete-proetale). -/
@@ -95,13 +310,29 @@ def cbcPullToRestriction {U T : Scheme.{t}} (j : U ⟶ T) [IsOpenImmersion j] :
 
 /-- The specified restriction comparison is invertible.
 Source: Stacks 03DI and 09AE (blueprint: thm-cbc-complete-proetale).
-Proof: localization identifies pro-etale objects over U with objects over the open object
-of T. Inverse image on this slice is evaluation on those same objects. The tensor-unit
-adjunction sends its comparison to precisely the section restriction unit above. Thus
-that transpose is the localization equivalence's restriction identification, hence invertible. -/
+Proof: the open-site adjunction, with its finite-projection-normalized coefficient maps,
+lifts to an adjunction between restriction and direct image. Its unit has exactly the
+specified section formula. Uniqueness of that unit identifies the displayed transpose
+with the comparison between the two left adjoints to the same direct image. Uniqueness
+of left adjoints makes this comparison invertible. -/
 theorem cbcPullToRestriction_isIso {U T : Scheme.{t}} (j : U ⟶ T)
     [IsOpenImmersion j] : IsIso (cbcPullToRestriction d j) := by
-  sorry
+  let a := proEtaleRingModuleAdjunction j (d.completedRing T) (d.completedRing U)
+    (d.integralRingIso j)
+  let b := cbcRestrictionAdjunction d j
+  have hu : cbcRestrictionUnit d j = b.unit := by
+    apply (cbcRestrictionUnit_existsUnique d j).unique
+    · exact (cbcRestrictionUnit_existsUnique d j).choose_spec.1
+    · exact cbcRestrictionAdjunction_unit d j
+  have he : cbcPullToRestriction d j = (a.leftAdjointUniq b).hom := by
+    apply (a.whiskerRight (proEtaleRingModules T (d.completedRing T))).homEquiv
+      (𝟭 _) (cbcOpenRestriction d j inferInstance) |>.injective
+    rw [cbcPullToRestriction, Equiv.apply_symm_apply, hu]
+    apply NatTrans.ext
+    funext M
+    exact (Adjunction.homEquiv_leftAdjointUniq_hom_app a b M).symm
+  rw [he]
+  infer_instance
 
 /-- The exact, section-normalized open adjunction on completed coefficients.
 Source: Stacks 03DI and 03DJ (blueprint: thm-cbc-complete-proetale). -/
@@ -148,39 +379,6 @@ def cbcSquarePull {V W S T : Scheme.{t}} (k : V ⟶ W) (r : V ⟶ S)
     d.pull i ⋙ d.pull r ≅ d.pull p ⋙ d.pull k :=
   (d.pullComp r i).symm ≪≫ eqToIso (congrArg (fun f ↦ d.pull f) h.symm) ≪≫
     d.pullComp k p
-
-/-- The inverse open comparison is the transpose of the open-extension unit.
-Source: Stacks 09AE and 07A7 (blueprint: thm-cbc-complete-proetale). -/
-def cbcBetaInv {U' U T' T : Scheme.{t}}
-    (a : U' ⟶ U) (j' : U' ⟶ T') (j : U ⟶ T) (g : T' ⟶ T)
-    [IsOpenImmersion j] [IsOpenImmersion j'] (h : a ≫ j = j' ≫ g) :
-    d.pull a ⋙ cbcJ d j' ⟶ cbcJ d j ⋙ d.pull g :=
-  (((cbcDerivedOpenAdjunction d j').whiskerRight _).homEquiv _ _).symm
-    ((Functor.leftUnitor (d.pull a)).inv ≫
-      Functor.whiskerRight (cbcDerivedOpenAdjunction d j).unit (d.pull a) ≫
-      (Functor.associator (cbcJ d j) (d.pull j) (d.pull a)).hom ≫
-      Functor.whiskerLeft (cbcJ d j) (cbcSquarePull d a j' j g h).inv ≫
-      (Functor.associator (cbcJ d j) (d.pull g) (d.pull j')).inv)
-
-/-- The unit-normalized open comparison is invertible for a Cartesian open square.
-Source: Stacks 09AE (blueprint: thm-cbc-complete-proetale).
-Proof: localization identifies the right adjoints around this Cartesian square by
-restriction on the same pulled-back objects. Their adjunction conjugate is invertible.
-Its inverse has exactly the open-unit transpose defining cbcBetaInv, proving the claim. -/
-theorem cbcBetaInv_isIso {U' U T' T : Scheme.{t}}
-    (a : U' ⟶ U) (j' : U' ⟶ T') (j : U ⟶ T) (g : T' ⟶ T)
-    [IsOpenImmersion j] [IsOpenImmersion j'] (h : a ≫ j = j' ≫ g)
-    (_sq : IsPullback a j' j g) : IsIso (cbcBetaInv d a j' j g h) := by
-  sorry
-
-/-- Cartesian open comparison, in the forward direction fixed by the inverse unit-mate.
-Source: Stacks 09AE (blueprint: thm-cbc-complete-proetale). -/
-def cbcBeta {U' U T' T : Scheme.{t}}
-    (a : U' ⟶ U) (j' : U' ⟶ T') (j : U ⟶ T) (g : T' ⟶ T)
-    [IsOpenImmersion j] [IsOpenImmersion j'] (h : a ≫ j = j' ≫ g)
-    (sq : IsPullback a j' j g) : cbcJ d j ⋙ d.pull g ≅ d.pull a ⋙ cbcJ d j' :=
-  (@asIso _ _ _ _ (cbcBetaInv d a j' j g h)
-    (cbcBetaInv_isIso d a j' j g h sq)).symm
 
 /-- The open unit is invertible, including on the empty open subscheme.
 Source: Stacks 03DI (blueprint: thm-cbc-complete-proetale).
@@ -244,6 +442,62 @@ theorem cbcOpenUnit_isIso {U T : Scheme.{t}} (j : U ⟶ T) [IsOpenImmersion j] :
   have : (cbcJ d j).Faithful := Functor.Faithful.of_iso eD.symm
   infer_instance
 
+/-- The inverse open comparison is the transpose of the open-extension unit.
+Source: Stacks 09AE and 07A7 (blueprint: thm-cbc-complete-proetale). -/
+def cbcBetaInv {U' U T' T : Scheme.{t}}
+    (a : U' ⟶ U) (j' : U' ⟶ T') (j : U ⟶ T) (g : T' ⟶ T)
+    [IsOpenImmersion j] [IsOpenImmersion j'] (h : a ≫ j = j' ≫ g) :
+    d.pull a ⋙ cbcJ d j' ⟶ cbcJ d j ⋙ d.pull g :=
+  (((cbcDerivedOpenAdjunction d j').whiskerRight _).homEquiv _ _).symm
+    ((Functor.leftUnitor (d.pull a)).inv ≫
+      Functor.whiskerRight (cbcDerivedOpenAdjunction d j).unit (d.pull a) ≫
+      (Functor.associator (cbcJ d j) (d.pull j) (d.pull a)).hom ≫
+      Functor.whiskerLeft (cbcJ d j) (cbcSquarePull d a j' j g h).inv ≫
+      (Functor.associator (cbcJ d j) (d.pull g) (d.pull j')).inv)
+
+/-- The unit-normalized open comparison is invertible for a Cartesian open square.
+Source: Stacks 09AE (blueprint: thm-cbc-complete-proetale).
+Proof: ordinary open base change identifies the target with an object in the essential
+image of the fully faithful open extension. The open counit at that target is therefore
+invertible. The transpose in the definition is the pulled-back open unit followed by
+the square compositor, both invertible. Its inverse transpose is extension applied to
+that isomorphism followed by the invertible counit. -/
+theorem cbcBetaInv_isIso {U' U T' T : Scheme.{t}}
+    (a : U' ⟶ U) (j' : U' ⟶ T') (j : U ⟶ T) (g : T' ⟶ T)
+    [IsOpenImmersion j] [IsOpenImmersion j'] (h : a ≫ j = j' ≫ g)
+    (_sq : IsPullback a j' j g) : IsIso (cbcBetaInv d a j' j g h) := by
+  let sq : OpenImmersionSquare a j' j g :=
+    { w := h
+      isoPullback := _sq.isoPullback
+      hom_fst := _sq.isoPullback_hom_fst
+      hom_snd := _sq.isoPullback_hom_snd
+      isOpenImmersion := inferInstance
+      isOpenImmersion' := inferInstance }
+  have := cbcOpenUnit_isIso d j
+  have := cbcOpenUnit_isIso d j'
+  let ff := (cbcDerivedOpenAdjunction d j').fullyFaithfulLOfIsIsoUnit
+  have := ff.full
+  have := ff.faithful
+  have he : IsIso (cbcDatumOrdinaryExchange d sq) := by
+    unfold cbcDatumOrdinaryExchange cbcOrdinaryExchange
+    infer_instance
+  let adj := (cbcDerivedOpenAdjunction d j').whiskerRight (d.derived U)
+  have : IsIso (adj.counit.app (cbcJ d j ⋙ d.pull g)) :=
+    adj.isIso_counit_app_of_iso (asIso (cbcDatumOrdinaryExchange d sq))
+  unfold cbcBetaInv
+  rw [Adjunction.homEquiv_counit]
+  infer_instance
+
+
+/-- Cartesian open comparison, in the forward direction fixed by the inverse unit-mate.
+Source: Stacks 09AE (blueprint: thm-cbc-complete-proetale). -/
+def cbcBeta {U' U T' T : Scheme.{t}}
+    (a : U' ⟶ U) (j' : U' ⟶ T') (j : U ⟶ T) (g : T' ⟶ T)
+    [IsOpenImmersion j] [IsOpenImmersion j'] (h : a ≫ j = j' ≫ g)
+    (sq : IsPullback a j' j g) : cbcJ d j ⋙ d.pull g ≅ d.pull a ⋙ cbcJ d j' :=
+  (@asIso _ _ _ _ (cbcBetaInv d a j' j g h)
+    (cbcBetaInv_isIso d a j' j g h sq)).symm
+
 /-- Open extension to direct image, fixed by the ordinary units of both adjunctions.
 Source: Stacks 09AE (blueprint: thm-cbc-complete-proetale). -/
 def cbcOpenToPush {U T : Scheme.{t}} (j : U ⟶ T) [IsOpenImmersion j] :
@@ -253,6 +507,57 @@ def cbcOpenToPush {U T : Scheme.{t}} (j : U ⟶ T) [IsOpenImmersion j] :
     Functor.whiskerRight (@inv _ _ _ _ (cbcDerivedOpenAdjunction d j).unit
       (cbcOpenUnit_isIso d j)) (d.push j) ≫ (Functor.leftUnitor _).hom
 
+private theorem cbcRestrictionScalar_isIso {U T : Scheme.{t}} (j : U ⟶ T)
+    [IsOpenImmersion j] : IsIso (cbcCompletedRestrictionMap d j inferInstance) := by
+  let G := cbcOpenSiteFunctor j inferInstance
+  let R := d.completedRing T
+  let c := cbcCompletedRestrictionMap d j inferInstance
+  let a := MorphismProperty.Over.mapPullbackAdj @WeaklyEtale ⊤ j
+    (inferInstance : WeaklyEtale j) trivial
+  let b := a.sheafPushforwardContinuous (E := CommRingCat.{t + 1})
+    (ProEt.topology U) (ProEt.topology T)
+  let e := ((proEtaleSheafAdjunction j CommRingCat.{t + 1}).leftAdjointUniq b).app R
+  have hc : (d.integralRingIso j).hom ≫ c = e.hom := by
+    apply ((proEtaleSheafAdjunction j CommRingCat.{t + 1}).homEquiv _ _).injective
+    change ((proEtaleSheafAdjunction j CommRingCat.{t + 1}).homEquiv R
+      ((G.sheafPushforwardContinuous CommRingCat.{t + 1}
+        (ProEt.topology U) (ProEt.topology T)).obj R)) ((d.integralRingIso j).hom ≫ c) =
+      ((proEtaleSheafAdjunction j CommRingCat.{t + 1}).homEquiv R
+        ((G.sheafPushforwardContinuous CommRingCat.{t + 1}
+          (ProEt.topology U) (ProEt.topology T)).obj R))
+        (((proEtaleSheafAdjunction j CommRingCat.{t + 1}).leftAdjointUniq b).hom.app R)
+    rw [Adjunction.homEquiv_leftAdjointUniq_hom_app]
+    apply Sheaf.hom_ext
+    exact (cbcCompletedCoefficientCounit d j).symm
+  have heq : c = ((d.integralRingIso j).symm ≪≫ e).hom := by
+    apply (cancel_epi (d.integralRingIso j).hom).1
+    simpa only [Iso.trans_hom, Iso.symm_hom, Iso.hom_inv_id_assoc] using hc
+  change IsIso c
+  rw [heq]
+  infer_instance
+
+private theorem cbcClopenReverseAdjunction {U T : Scheme.{t}} (j : U ⟶ T)
+    [IsOpenImmersion j] [IsClosedImmersion j] : Nonempty (d.pull j ⊣ cbcJ d j) := by
+  let R := d.completedRing T
+  let S := d.completedRing U
+  let c := cbcCompletedRestrictionMap d j inferInstance
+  have : IsIso c := cbcRestrictionScalar_isIso d j
+  let : (proEtaleOpenComposition j).IsContinuous (ProEt.topology U)
+      (ProEt.topology T) := cbcOpenSiteFunctor_continuous j inferInstance
+  obtain ⟨b⟩ := clopenScalarRestrictionReverseAdjunction j R S (asIso c)
+    (cbcOpenShriek d j inferInstance) (cbcOpenAdjunction d j inferInstance)
+  let pb := proEtaleRingModulePullback j R S (d.integralRingIso j)
+  let r : pb ≅ cbcOpenRestriction d j inferInstance :=
+    @asIso _ _ _ _ (cbcPullToRestriction d j) (cbcPullToRestriction_isIso d j)
+  let br := b.ofNatIsoLeft r.symm
+  let : (cbcOpenShriek d j inferInstance).Additive :=
+    cbcOpenShriek_additive d j inferInstance
+  let : PreservesFiniteLimits (cbcOpenShriek d j inferInstance) :=
+    cbcOpenShriek_finiteLimits d j inferInstance
+  let : PreservesFiniteColimits (cbcOpenShriek d j inferInstance) :=
+    cbcOpenShriek_finiteColimits d j inferInstance
+  exact ⟨br.mapExactDerivedCategory⟩
+
 /-- The specified open-to-direct-image map is invertible on a clopen immersion.
 Source: Stacks 09AE (blueprint: thm-cbc-complete-proetale).
 Proof: split every test object into its two clopen parts. Both extension and direct
@@ -261,7 +566,26 @@ the definition identify the comparison with identity on that first factor. The s
 formula holds on complexes and descends through the exact localizations. -/
 theorem cbcOpenToPush_isIso {U T : Scheme.{t}} (j : U ⟶ T)
     [IsOpenImmersion j] [IsClosedImmersion j] : IsIso (cbcOpenToPush d j) := by
-  sorry
+  obtain ⟨ar⟩ := cbcClopenReverseAdjunction d j
+  let e := ar.rightAdjointUniq (cbcPullPushAdjunction d j)
+  have := cbcOpenUnit_isIso d j
+  let ff := (cbcDerivedOpenAdjunction d j).fullyFaithfulLOfIsIsoUnit
+  have := ff.full
+  have := ff.faithful
+  have : (d.push j).Full := Functor.Full.of_iso e
+  have : (d.push j).Faithful := Functor.Faithful.of_iso e
+  have hi (M : d.derived U) : IsIso ((cbcOpenToPush d j).app M) := by
+    have hu : IsIso ((cbcPullPushAdjunction d j).unit.app ((cbcJ d j).obj M)) :=
+      (cbcPullPushAdjunction d j).isIso_unit_app_of_iso (e.app M)
+    dsimp only [cbcOpenToPush, NatTrans.comp_app, Functor.whiskerLeft_app,
+      Functor.whiskerRight_app, Functor.rightUnitor_inv_app, Functor.associator_inv_app,
+      Functor.leftUnitor_hom_app]
+    simp only [Category.id_comp]
+    have hv : IsIso ((inv (cbcDerivedOpenAdjunction d j).unit).app M) := inferInstance
+    have hw : IsIso ((d.push j).map ((inv (cbcDerivedOpenAdjunction d j).unit).app M)) :=
+      inferInstance
+    exact IsIso.comp_isIso' hu (IsIso.comp_isIso' hw (IsIso.id _))
+  exact NatIso.isIso_of_isIso_app _
 
 /-- Canonical clopen projection; identity on the image and zero on the complement.
 Source: Stacks 09AE (blueprint: thm-cbc-complete-proetale). -/
@@ -336,20 +660,44 @@ Source: blueprint displayed definition of Rf_!^c (blueprint: thm-cbc-complete-pr
 abbrev cbcSupport {X Y : Scheme.{t}} {f : X ⟶ Y} (c : Compactification f) :=
   cbcJ d c.i ⋙ d.push c.g
 
+section
+
+attribute [local irreducible] cbcDerivedOpenShriek cbcProperOpenGamma
+  AdicCoefficientDatum.pushComp AdicCoefficientDatum.pushId HasDerivedCategory.standard
+
+/-- The canonical proper/open refinement comparison as a natural transformation.
+Its components are the proper pushforward of gamma, preceded by the inverse proper
+identity comparison and followed by the proper composition comparison. Explicit
+unitors and associators have identity components, so this construction gives the
+same component formula as the canonical refinement map.
+Source: blueprint proof step 8, C_u; Stacks 0F7B and 0F7C
+(blueprint: def-cbc-completed-refinement-transformation). -/
+@[irreducible]
+def cbcRefinementTransformation
+    {X Y : Scheme.{t}} {f : X ⟶ Y} [QuasiCompact f]
+    {c₁ c₂ : Compactification f} (u : c₁.Refinement c₂) :
+    cbcSupport d c₂ ⟶ cbcSupport d c₁ := by
+  let : QuasiCompact c₁.i := c₁.quasiCompact_openImmersion inferInstance
+  let : QuasiCompact c₂.i := c₂.quasiCompact_openImmersion inferInstance
+  let e₁ := Functor.whiskerRight (d.pushId X).inv (cbcJ d c₂.i)
+  let e₂ := cbcProperOpenGamma d c₁.i (𝟙 X) u.hom c₂.i
+    (u.i_hom.trans (Category.id_comp _).symm)
+  exact Functor.whiskerRight (Functor.leftUnitor (cbcJ d c₂.i)).inv (d.push c₂.g) ≫
+    Functor.whiskerRight (e₁ ≫ e₂) (d.push c₂.g) ≫
+    (Functor.associator (cbcJ d c₁.i) (d.push u.hom) (d.push c₂.g)).hom ≫
+    Functor.whiskerLeft (cbcJ d c₁.i) (d.pushComp u.hom c₂.g).hom ≫
+    Functor.whiskerLeft (cbcJ d c₁.i)
+      (eqToIso (congrArg (fun f ↦ d.push f) u.hom_g)).hom
+
+end
+
 /-- The canonical refinement map, directed from the coarser to the finer compactification.
 It is proper pushforward of gamma, with the proper identity and composition comparisons.
 Source: blueprint proof step 8, C_u (blueprint: thm-cbc-complete-proetale). -/
 def cbcRefinementMap {X Y : Scheme.{t}} {f : X ⟶ Y} [qf : QuasiCompact f]
     {c₁ c₂ : Compactification f} (u : c₁.Refinement c₂) (K : d.derived X) :
     (cbcSupport d c₂).obj K ⟶ (cbcSupport d c₁).obj K :=
-  letI : QuasiCompact c₁.i := c₁.quasiCompact_openImmersion qf
-  letI : QuasiCompact c₂.i := c₂.quasiCompact_openImmersion qf
-  (d.push c₂.g).map
-    ((cbcJ d c₂.i).map ((d.pushId X).inv.app K) ≫
-      (cbcProperOpenGamma d c₁.i (𝟙 X) u.hom c₂.i
-        (u.i_hom.trans (Category.id_comp _).symm)).app K) ≫
-    (d.pushComp u.hom c₂.g).hom.app ((cbcJ d c₁.i).obj K) ≫
-      (eqToIso (congrArg (fun f ↦ d.push f) u.hom_g)).hom.app ((cbcJ d c₁.i).obj K)
+  (cbcRefinementTransformation d u).app K
 
 /-- The compatible-tower compact-support composition map. Its middle factor is the
 specified proper/open gamma, so this is not an arbitrary isomorphism of the endpoints.
@@ -516,6 +864,27 @@ theorem completeCompactSupportProetale_isIso
     simp only [Functor.map_comp]
 
 
+private theorem cbcCompletedOpenIdentity {U T : Scheme.{t}} (j : U ⟶ T)
+    [IsOpenImmersion j] [QuasiCompact j]
+    (sq : OpenImmersionSquare (𝟙 U) j j (𝟙 T))
+    (r : ℕ) (a : Fin r → A) (ha : Ideal.span (Set.range a) = d.ideal)
+    (K : (cbcCompleteProperty d U r a ha).FullSubcategory)
+    (hK : d.TowerComplete U K.obj)
+    (hJ : d.TowerComplete T ((cbcJ d j).obj K.obj)) :
+    (cbcDatumCompletedExchange d sq r a ha).app K ≫
+        (cbcJ d j).map (d.completedPullId U K.obj hK).hom =
+      (d.completedPullId T ((cbcJ d j).obj K.obj) hJ).hom := by
+  apply ((d.completedPull_reflection (𝟙 T)).2 ((cbcJ d j).obj K.obj) _ hJ).1
+  dsimp only
+  rw [← Category.assoc, cbcDatumCompletedExchange_unit]
+  rw [Category.assoc, ← Functor.map_comp]
+  have hU := (d.completedPullId_existsUnique U K.obj hK).choose_spec.1
+  change d.ordinaryToCompleted (𝟙 U) K.obj ≫
+    (d.completedPullId U K.obj hK).hom = (d.pullId U).hom.app K.obj at hU
+  rw [hU]
+  exact (cbcDatumOrdinaryExchange_identity d j sq K.obj).trans
+    ((d.completedPullId_existsUnique T ((cbcJ d j).obj K.obj) hJ).choose_spec.1).symm
+
 /-- Identity base change is the identity after the canonical completed identity maps.
 The existential proofs only supply the complete-object inputs of those fixed maps.
 Source: blueprint statement and proof step 7; Stacks 07A7, 099N
@@ -538,7 +907,26 @@ theorem completeCompactSupportProetale_identity
       cbcExchange d c c (𝟙 c.Z) sp sj r a ha K ≫
           (cbcSupport d c).map (d.completedPullId X K.obj hK).hom =
         (d.completedPullId Y ((cbcSupport d c).obj K.obj) hF).hom := by
-  sorry
+  let : QuasiCompact c.i := c.quasiCompact_openImmersion inferInstance
+  have hK := cbcTowerComplete_of_property d X r a ha K.obj K.property
+  have hJp := (completedOpenExchangeComparison d sj r a ha).2 K |>.1
+  have hJ := cbcTowerComplete_of_property d c.Z r a ha _ hJp
+  have hF := d.push_complete c.g ((cbcJ d c.i).obj K.obj) hJ
+  obtain ⟨W⟩ := ringedOrigins X d K.obj _origins
+  obtain ⟨WJ⟩ := cbcCompletedOpenFiniteEtaleOrigins d c.i K.obj W
+  have hp := d.completedExchange_identity_horizontal c.g sp
+    ((cbcJ d c.i).obj K.obj) hJ WJ
+  change d.completedExchange sp ((cbcJ d c.i).obj K.obj) = _ at hp
+  have ho := cbcCompletedOpenIdentity d c.i sj r a ha K hK hJ
+  refine ⟨hK, hF, ?_⟩
+  change (d.completedExchange sp ((cbcJ d c.i).obj K.obj) ≫
+      (d.push c.g).map ((cbcDatumCompletedExchange d sj r a ha).app K)) ≫
+    (d.push c.g).map ((cbcJ d c.i).map (d.completedPullId X K.obj hK).hom) = _
+  rw [hp]
+  simp only [Category.assoc, ← Functor.map_comp]
+  rw [ho]
+  simp
+
 
 /-- Successive arbitrary base changes agree with the composite base change.
 The intermediate completed pullback is complete; its proof is supplied in the conclusion
@@ -612,6 +1000,123 @@ def cbcCompactificationComparison
     (@asIso _ _ _ _ (cbcRefinementMap d u₂ K.obj)
       (cbcRefinementMap_isIso d u₂ r a ha K origins)).symm
 
+private theorem cbcRefinementMap_naturality
+    {X Y : Scheme.{t}} {f : X ⟶ Y} [QuasiCompact f]
+    {c₁ c₂ : Compactification f} (u : c₁.Refinement c₂)
+    {K H : d.derived X} (k : K ⟶ H) :
+    (cbcSupport d c₂).map k ≫ cbcRefinementMap d u H =
+      cbcRefinementMap d u K ≫ (cbcSupport d c₁).map k := by
+  exact (cbcRefinementTransformation d u).naturality k
+
+/-- Identity law for the section-normalized refinement component.
+Source: Stacks 0F7C and blueprint step 8 (blueprint: lem-cbc-completed-refinement-map-identity).
+Proof: expand the normalized proper/open mate for the identity refinement. The identity
+mate and the proper identity compositor cancel the inserted direct-image unit, leaving
+`𝟙`; this is an equality of the concrete component on every derived input.
+-/
+theorem cbcRefinementMap_identity_component
+    {X Y : Scheme.{t}} {f : X ⟶ Y}
+    [IsSeparated f] [LocallyOfFiniteType f] [QuasiCompact f] (K : d.derived X)
+    (c : Compactification f) :
+    cbcRefinementMap d (Compactification.Refinement.id c) K = 𝟙 _ := by
+  sorry
+
+/-- Composition law for two section-normalized refinement components.
+Source: Stacks 0F7D and blueprint step 8 (blueprint: lem-cbc-completed-refinement-map-composition).
+Proof: paste the proper/open mates for two refinements, then use naturality of the
+proper direct-image compositor. The intermediate direct-image identity comparison
+cancels with its inverse and associativity leaves the displayed ordered composite.
+-/
+theorem cbcRefinementMap_composition_component
+    {X Y : Scheme.{t}} {f : X ⟶ Y}
+    [IsSeparated f] [LocallyOfFiniteType f] [QuasiCompact f] (K : d.derived X)
+    (c₁ c₂ c₃ : Compactification f) (u : c₁.Refinement c₂) (v : c₂.Refinement c₃) :
+    cbcRefinementMap d (u.comp v) K =
+      cbcRefinementMap d v K ≫ cbcRefinementMap d u K := by
+  sorry
+
+/-- The canonical refinement maps preserve units and composition on every ambient input.
+Source: Stacks 0F7C and 0F7D, proper/open mate-pasting and its identity normalization;
+blueprint compactification-independence step
+(blueprint: lem-cbc-completed-refinement-map-functoriality).
+Proof: write each refinement map as proper pushforward of the proper/open mate for
+its square with left vertical identity, preceded by the inverse direct-image unit.
+For two successive refinements, apply vertical proper/open mate-pasting to these
+squares. The normalized clopen projector for the outer square is their pasted
+projector: on the source open it is identity, and on the complementary components
+it is zero. The open-unit characterization identifies the Cartesian comparison
+in that projector with the specified beta. The mate equation, followed by the
+canonical proper direct-image compositor, gives the map for the composite
+refinement. Naturality moves the intermediate proper compositor past the mate;
+its associativity cancels the inserted inverse units and yields exactly the
+ordered product below. With an identity refinement, both projector and square
+comparison are the identity; the two adjunction triangle equations and the
+proper identity comparison leave the identity on Rp_*j_!K. To justify the alpha
+equation for the actual completed coefficient sheaves, first
+make this restriction calculation on module sheaves: the open/closed sequence
+detects equality of maps into open extension, since the complementary restriction
+vanishes. Apply the canonical module transformations on complexes and derive the
+proper direct images using comparison resolutions. The defining mate equation and
+the canonical derived compositors preserve this equation; this is the same
+resolution comparison used in Stacks 0F7C. Thus detection is used only on sheaves,
+never on derived maps or on evaluations of a derived tower. The open coefficient
+identifications are the section-normalized ones in cbcDerivedOpenAdjunction.
+No finite-origin or completeness hypothesis is used for these identities of maps,
+as opposed to their invertibility.
+The zero object, empty open, and identity refinement use the same formulas. -/
+theorem cbcRefinementMap_functoriality
+    {X Y : Scheme.{t}} {f : X ⟶ Y}
+    [IsSeparated f] [LocallyOfFiniteType f] [QuasiCompact f] (K : d.derived X) :
+    (∀ c : Compactification f,
+      cbcRefinementMap d (Compactification.Refinement.id c) K = 𝟙 _) ∧
+    (∀ (c₁ c₂ c₃ : Compactification f) (u : c₁.Refinement c₂) (v : c₂.Refinement c₃),
+      cbcRefinementMap d (u.comp v) K =
+        cbcRefinementMap d v K ≫ cbcRefinementMap d u K) := by
+  constructor
+  · exact cbcRefinementMap_identity_component d K
+  · exact cbcRefinementMap_composition_component d K
+
+private theorem cbcCommonComparison_precomp
+    {C D : Type*} [Category C] [Category D]
+    (R : C → D) (m : ∀ {i j : C}, (i ⟶ j) → (R j ⟶ R i))
+    (hm : ∀ {i j k : C} (f : i ⟶ j) (g : j ⟶ k), m (f ≫ g) = m g ≫ m f)
+    (hi : ∀ {i j : C} (f : i ⟶ j), IsIso (m f))
+    {c₀ c₁ c₂ c : C} (u₁ : c₀ ⟶ c₁) (u₂ : c₀ ⟶ c₂) (v : c ⟶ c₀) :
+    @asIso _ _ _ _ (m (v ≫ u₁)) (hi _) ≪≫
+        (@asIso _ _ _ _ (m (v ≫ u₂)) (hi _)).symm =
+      @asIso _ _ _ _ (m u₁) (hi _) ≪≫ (@asIso _ _ _ _ (m u₂) (hi _)).symm := by
+  let := hi u₁
+  let := hi u₂
+  let := hi v
+  apply Iso.ext
+  dsimp only [Iso.trans_hom, Iso.symm_hom, asIso_hom, asIso_inv]
+  simp only [hm, IsIso.inv_comp, Category.assoc, IsIso.hom_inv_id_assoc]
+
+private theorem cbcCommonComparison_independent
+    {C D : Type*} [Category C] [Category D] [IsCofilteredOrEmpty C]
+    (R : C → D) (m : ∀ {i j : C}, (i ⟶ j) → (R j ⟶ R i))
+    (hm : ∀ {i j k : C} (f : i ⟶ j) (g : j ⟶ k), m (f ≫ g) = m g ≫ m f)
+    (hi : ∀ {i j : C} (f : i ⟶ j), IsIso (m f))
+    {c₀ c₀' c₁ c₂ : C} (u₁ : c₀ ⟶ c₁) (u₂ : c₀ ⟶ c₂)
+    (v₁ : c₀' ⟶ c₁) (v₂ : c₀' ⟶ c₂) :
+    @asIso _ _ _ _ (m u₁) (hi _) ≪≫ (@asIso _ _ _ _ (m u₂) (hi _)).symm =
+      @asIso _ _ _ _ (m v₁) (hi _) ≪≫ (@asIso _ _ _ _ (m v₂) (hi _)).symm := by
+  obtain ⟨c, p, q, h₁⟩ := IsCofiltered.cospan u₁ v₁
+  obtain ⟨c', w, h₂⟩ := IsCofilteredOrEmpty.cone_maps (p ≫ u₂) (q ≫ v₂)
+  have he₁ : (w ≫ p) ≫ u₁ = (w ≫ q) ≫ v₁ := by
+    simpa only [Category.assoc] using congrArg (fun k ↦ w ≫ k) h₁
+  have he₂ : (w ≫ p) ≫ u₂ = (w ≫ q) ≫ v₂ := by
+    simpa only [Category.assoc] using h₂
+  rw [← cbcCommonComparison_precomp R m hm hi u₁ u₂ (w ≫ p), he₁, he₂,
+    cbcCommonComparison_precomp R m hm hi v₁ v₂ (w ≫ q)]
+
+private theorem cbcIsoComparison_cocycle
+    {C : Type*} [Category C] {W X Y Z : C}
+    (u : X ≅ W) (v : Y ≅ W) (w : Z ≅ W) :
+    (u ≪≫ v.symm) ≪≫ (v ≪≫ w.symm) = u ≪≫ w.symm := by
+  apply Iso.ext
+  simp only [Iso.trans_hom, Iso.symm_hom, Category.assoc, Iso.inv_hom_id_assoc]
+
 /-- Refinement maps are natural, unital and transitive. Compactification comparisons
 are independent of the common refinement and its arrows, and satisfy the cocycle law.
 Source: blueprint statement and proof step 8; Stacks 0F7C, 0F7D
@@ -648,7 +1153,24 @@ theorem completeCompactSupportProetale_compactifications
       cbcCompactificationComparison d u₁ u₂ r a ha K origins ≪≫
           cbcCompactificationComparison d u₂ u₃ r a ha K origins =
         cbcCompactificationComparison d u₁ u₃ r a ha K origins) := by
-  sorry
+  have hl := cbcRefinementMap_functoriality d (f := f) K.obj
+  refine ⟨?_, hl.1, hl.2, ?_, ?_⟩
+  · intro c₁ c₂ u H k
+    exact cbcRefinementMap_naturality d u k
+  · intro c₀ c₀' c₁ c₂ u₁ u₂ v₁ v₂
+    exact cbcCommonComparison_independent
+      (fun c : Compactification f ↦ (cbcSupport d c).obj K.obj)
+      (fun {c₁ c₂} u ↦ cbcRefinementMap d u K.obj)
+      (fun {c₁ c₂ c₃} u v ↦ hl.2 c₁ c₂ c₃ u v)
+      (fun {c₁ c₂} u ↦ cbcRefinementMap_isIso d u r a ha K origins) u₁ u₂ v₁ v₂
+  · intro c₀ c₁ c₂ c₃ u₁ u₂ u₃
+    exact cbcIsoComparison_cocycle
+      (@asIso _ _ _ _ (cbcRefinementMap d u₁ K.obj)
+        (cbcRefinementMap_isIso d u₁ r a ha K origins))
+      (@asIso _ _ _ _ (cbcRefinementMap d u₂ K.obj)
+        (cbcRefinementMap_isIso d u₂ r a ha K origins))
+      (@asIso _ _ _ _ (cbcRefinementMap d u₃ K.obj)
+        (cbcRefinementMap_isIso d u₃ r a ha K origins))
 
 /-- The completed exchange commutes with the specified refinement maps.
 Thus its compactification comparisons are comparisons of the actual exchange, not

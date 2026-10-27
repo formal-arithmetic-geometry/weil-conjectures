@@ -43,6 +43,16 @@ theorem proper_dim_zero_finite_over_field {k : Type u} [Field k] {Y : Scheme.{u}
     (f : Y ⟶ Spec (.of k)) [IsProper f] (hY : Y.dim ≤ 0) :
     IsFinite f ∧ IsAffine Y ∧
       (letI := f.ΓAlgebra; Module.Finite k Γ(Y, ⊤)) := by
-  sorry
+  let : Y.Over (Spec (.of k)) := ⟨f⟩
+  have : LocallyOfFiniteType (Y ↘ Spec (.of k)) := (proper_basic f).2.2.1
+  have : QuasiCompact (Y ↘ Spec (.of k)) := (proper_basic f).2.2.2.1
+  obtain ⟨hAffine, hFinite⟩ := isAffine_and_isFinite_of_dim_le_zero (k := k) Y hY
+  have : IsFinite f := hFinite
+  refine ⟨hFinite, hAffine, ?_⟩
+  let := f.ΓAlgebra
+  apply RingHom.finite_algebraMap.mp
+  change (((Scheme.ΓSpecIso (.of k)).inv ≫ f.appTop).hom).Finite
+  rw [CommRingCat.hom_comp, RingHom.finite_respectsIso.cancel_left_isIso]
+  exact f.finite_appTop
 
 end AlgebraicGeometry

@@ -1,0 +1,136 @@
+{
+ "id": "def-sf-native-open-tensor-presentation-data",
+ "kind": "definition",
+ "title": "Native open tensor presentation data and normalization predicates",
+ "status": "split",
+ "import_flags": [],
+ "statement": "Fix a finite field $k_0$, a prime $\\ell\\ne\\operatorname{char}(k_0)$ and $\\Omega=\\overline{\\mathbf Q}_\\ell$. Use the native coefficient sheaves $B_V$, actual abelian pro-etale Weil-sheaf categories $\\mathcal W_V$ and their exact open extension and module pullback functors of [def-sf-native-weil-derived-framework], the ordinary derived categories and localization $Q$ of [def-weil-abstract-derived-category], and exactly the sheaf tensor, signed direct-sum total tensor, categorical two-sided K-flatness, derived tensor and chosen K-flat tensor models of [def-sf-derived-weil-category-and-operations]. Let $j:U_0\\hookrightarrow Z_0$ be a $k_0$-open immersion between separated finite-type $k_0$-schemes. The following are data types and compatibility predicates; no existence assertion is part of this definition.\n\nWrite $E=j_!$, $R=j^*$, $D(E),D(R)$ for their exact derived functors. A native sheaf open tensor datum $s$ consists of an adjunction $E\\dashv R$ whose unit and counit forget to the actual ordinary open unit and counit, invertibility of its unit, a restriction/tensor isomorphism $R(M\\otimes N)\\cong RM\\otimes RN$ whose underlying map is the canonical balanced module comparison, and isomorphisms $EM\\otimes N\\cong E(M\\otimes RN)$ whose inverses have adjoint transpose $(\\eta_M\\otimes1)$ followed by the inverse restriction comparison. It also records that both $E$ and $R$ preserve categorical two-sided K-flatness.\n\nA native derived open tensor datum $d$ relative to $s$ consists of natural isomorphisms $\\gamma:D(E)M\\otimes^LN\\cong D(E)(M\\otimes^LD(R)N)$ and $\\rho:D(R)(M\\otimes^LN)\\cong D(R)M\\otimes^LD(R)N$. The inverse of $\\gamma$ satisfies the same unit-transpose equation for the specified exact-derived adjunction of [def-weil-exact-derived-adjunction]. It includes the existence of an ordinary restriction comparison and ordinary open tensor isomorphism with this unit normalization, agreeing with $\\rho,\\gamma$ after forgetting Frobenius under the recorded tensor comparisons and the actual exact-functor factorization isomorphisms for $E,R$.\n\nFor abelian categories $A,B$ with chosen derived categories, an open tensor presentation $c$ records exact additive functors $E:A\\to B$, $R:B\\to A$, sheaf, total and derived tensor functors, K-flat predicates, preservation by $E,R$, tensor-model isomorphisms on every pair of K-flat complexes, and the total-complex summand insertion maps. It records sheaf, chain and derived open tensor comparisons and restriction/tensor comparisons. Each chain map agrees on every $(p,q)$ summand with its sheaf map; each derived map agrees on every pair of K-flat inputs with localization of its chain map under the specified models and exact-functor factors. The predicates for the unit-transpose equation, the open and restriction localization squares, the summand equations and the forgetting square are the corresponding componentwise equalities.\n\nDefine native presentation compatibility for $s,d,c$ to mean that every functor, K-flat predicate, model and insertion in $c$ equals the actual native construction, and that its sheaf and derived comparisons equal those in $s,d$. Equality of dependent presentations is heterogeneous equality. The auxiliary operations are the existing localized pullback and extension, the left-first sheaf tensor, the actual total summand insertion, the chosen K-flat tensor model, and the canonical forgetting factorization isomorphisms. For any composable $k_0$-maps $j:V\\to W$, $p:W\\to Y$, the auxiliary pullback compositor $D(j^*)D(p^*)\\cong D((pj)^*)$ is localization of the existing balanced module compositor $b\\otimes(c\\otimes t)\\mapsto b\\,j^*(c)\\otimes t$, with inverse inserting $1$. Derived comparisons have arbitrary ambient derived inputs, with no boundedness, lisse or degree-zero restriction.",
+ "stmt_deps": [
+  "def-sf-native-weil-derived-framework",
+  "def-weil-abstract-derived-category",
+  "def-sf-derived-weil-category-and-operations",
+  "def-weil-exact-derived-adjunction"
+ ],
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-package/fix-lem-tensor-adjunction.proof.md",
+  "place": "Step 1, second Hom bijection: normalized open factor and balanced pullback compositor in the compactification projection formula; Stacks Tags 0E8I, 0GL1, 03D8."
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "NativeOpenTensorData|OpenTensorPresentation|NativeOpenPresentationCompatibility",
+   "results": "OK 0 hits; ; subdirectory=",
+   "date": "2026-10-24",
+   "verdict": "No Mathlib match: these hits do not define normalized native equivariant open tensor presentation data."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Normalized presentation data for open extension by zero tensor on native derived Weil sheaves with K-flat models and unit transpose",
+   "results": "OK 8 hits; CategoryTheory.MonoidalPreadditive.zero_tensor; Module.FaithfullyFlat.one_tmul_eq_zero_iff; Module.FaithfullyFlat.zero_iff_lTensor_zero; PiTensorProduct.lifts_zero; TensorProduct.zero; TensorProduct.addZeroClass; Module.FaithfullyFlat.zero_iff_rTensor_zero; CategoryTheory.instZeroHomSheaf; subdirectory=",
+   "date": "2026-10-24",
+   "verdict": "No Mathlib match: these hits do not define normalized native equivariant open tensor presentation data."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Open extension by zero tensor comparison presentation data with K-flat models on Frobenius equivariant sheaves",
+   "results": "OK 8 hits; instFinitePresentationTensorProduct; LightCondensed.internallyProjective_iff_tensor_condition'; LightCondensed.internallyProjective_iff_tensor_condition; LightCondensed.free_internallyProjective_iff_tensor_condition; LightCondensed.free_internallyProjective_iff_tensor_condition'; PresheafOfModules.Monoidal.tensorObj; LinearMap.tensorKerEquiv_apply; LightCondensed.instMonoidalLightCondSetLightCondModFree; subdirectory=",
+   "date": "2026-10-24",
+   "verdict": "No Mathlib match: these hits do not define normalized native equivariant open tensor presentation data."
+  },
+  {
+   "tool": "grep",
+   "query": "rg -n \"OpenTensorPresentation|NativeOpenTensorData\" lean/WeilConjectures",
+   "results": "No hits.",
+   "date": "2026-10-24",
+   "verdict": "No upstream definition of this native presentation."
+  },
+  {
+   "tool": "grep",
+   "query": "rg -n \"NativeOpenTensorData|NativeOpenDerivedTensorData|NativeOpenPresentationCompatibility|nativeOpenPullComp\" lean/Sheaf",
+   "results": "Only Sheaf/Paper/NativeOpenDerivedTensor.lean: definitions at lines 333, 442, 481, 512, plus docstrings and theorem use.",
+   "date": "2026-10-24",
+   "verdict": "Exact existing definitions found; attach them with existing:true instead of copying them."
+  },
+  {
+   "tool": "grep",
+   "query": "rg -l \"NativeOpenTensorData|NativeOpenDerivedTensorData|NativeOpenPresentationCompatibility\" dag/nodes; tools/blueprint_refs.py search open tensor",
+   "results": "Only lem-sf-native-open-derived-tensor records these declarations; blueprint search has 99 related nodes, including ordinary open formulas but no native presentation definition node.",
+   "date": "2026-10-24",
+   "verdict": "The existing node asserts existence of the data. No definition node records the data type alone; the new node attaches its existing definitions."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-sf-derived-weil-compact-projection-formula",
+  "date": "2026-10-24",
+  "group": "Q25"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "fix-lem-tensor-adjunction.proof.md Step 1, second Hom bijection: data specifying the open tensor comparison and balanced pullback compositor used in the compactification projection formula. blueprint_refs.py ancestor reports None for the maintainer-seeded root.",
+   "via": [
+    "lem-sf-derived-weil-compact-projection-formula",
+    "lem-sf-weil-verdier-exchange"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "lean": {
+  "module": "Sheaf.Paper.NativeOpenTensorComparisonData",
+  "declaration": "AlgebraicGeometry.ProEtaleWeilSheaf.NativeOpenPresentationCompatibility",
+  "declarations": [
+   "AlgebraicGeometry.ProEtaleWeilSheaf.NativeOpenTensorData",
+   "AlgebraicGeometry.ProEtaleWeilSheaf.NativeOpenDerivedTensorData",
+   "AlgebraicGeometry.ProEtaleWeilSheaf.NativeOpenPresentationCompatibility"
+  ],
+  "statement": "def NativeOpenPresentationCompatibility (s : NativeOpenTensorData k₀ l j)\n    (d : NativeOpenDerivedTensorData k₀ l j s)\n    (c : OpenTensorPresentation (ProEtaleWeilSheaf k₀ l U) (ProEtaleWeilSheaf k₀ l Z)) :\n    Prop",
+  "branch": "sheaf-dag",
+  "by": "Q25",
+  "date": "2026-10-24",
+  "existing": true,
+  "note": "H2 repair of returned delivery 558d9a399801: definition-only attachment to the already landed plain definitions and structures in NativeOpenDerivedTensor. No theorem declaration is included. The native_open_derived_tensor existence theorem remains solely a proof dependency of the compact projection formula. Existing:true follows brief-stage2 sections 1(A) and 5: reuse the existing source declarations rather than duplicate or replace them. The data and compatibility types contain no existence theorem conclusion. G7: the three native data definitions are extracted verbatim to NativeOpenTensorComparisonData, publicly reexported by NativeOpenDerivedTensor. Generic records and concrete operations retain their existing separate owners.",
+  "file": "lean/Sheaf/Paper/NativeOpenTensorComparisonData.lean"
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-63985d370",
+  "group": "Q25",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-63985d370",
+  "group": "Q25",
+  "result": "pass",
+  "note": "Re-delivery after RETURN H2 (558d). Lean module byte-identical to 558d, whose mathematics was found correct (pinned proper counit mate, then Rp*(gamma), then Rp*j!(1 tensor compositor); C, s, d, c existential and fully pinned; NatIso on WC^der; no extra hypotheses). The item differs from side-live only in lean plus the stmt_deps addition of the new def node; the theorem lem-sf-native-open-derived-tensor stays in proof_deps only. New def-sf-native-open-tensor-presentation-data: existing:true over the landed Sheaf.Paper.NativeOpenDerivedTensor (live = side-live); 22 declarations = all non-theorem decls; statement verbatim to lines 512-515; prose matches the Lean clause by clause; stmt_deps are four existing def nodes; unique owner; same route as def-sfb-space-affine-higher-image-sections-data. No compile needed (no file changed). Advisory only: the module docstrings cite the theorem node."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-90a6f",
+  "group": "G7",
+  "result": "pass",
+  "landing": "20261027T131454-L-2940282",
+  "kind": "interface",
+  "note": "independent cc review: native_open_derived_tensor assembled from 3 new holes (sheaf existence / localization ∀s / normalization ∀ pinned ρ,γ,c) against lem-sf-native-open-derived-tensor; 3 data decls verbatim-diffed into NativeOpenTensorComparisonData with public re-export; data node lean trimmed to 3 (19 others owned by generic-presentation/operations nodes); direct importer NativeCompactProjectionFormula compiled 14.5 s vs published 14.2 s; axioms propext/sorryAx/choice/Quot.sound"
+ }
+}

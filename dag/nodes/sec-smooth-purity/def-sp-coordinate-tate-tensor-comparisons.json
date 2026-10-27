@@ -1,0 +1,103 @@
+{
+ "id": "def-sp-coordinate-tate-tensor-comparisons",
+ "kind": "definition",
+ "title": "Normalized coordinate Tate tensor comparisons",
+ "status": "split",
+ "import_flags": [],
+ "statement": "Fix the prime, coefficient extension, coefficient-tower base and operations, and Tate-tower family of [def-sp-coordinate-adjunction-categories]. Using the ordinary tower coordinate categories and right functors of [def-sp-coordinate-adjunction-categories], define Products to consist of finite signed-line products normalized on pure tensors, strict ordinary Tate-tower multiplication normalized after every evaluation, K-flat single-complex representatives, a chain map normalized on its degree-zero summand, and its specified derived image. Define the total tensor shift isomorphisms by the signed total-complex maps, and TensorShifts to consist of the two derived tensor shift isomorphisms whose maps on every K-flat pair agree with these total-complex shifts through the recorded tensor-model comparison. This defines data and equations without asserting their existence.",
+ "stmt_deps": [
+  "def-sp-coordinate-adjunction-categories"
+ ],
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-tower-geometric/sk-prop-sp-tower-geometric-gluing.proof.md",
+  "place": "Local pairs and Levels: pulled-back Tate factors, tensor reassociation and addition of shifts"
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Normalized coordinate-chart adjunction data on ordinary strict coefficient towers with Tate tensor comparison",
+   "results": "{\"n_hits\": 8, \"top\": [\"TangentBundle.symmL_trivializationAt_eq_core\", \"TangentBundle.coe_chartAt_fst\", \"inTangentCoordinates_eq\", \"tangentCoordChange.congr_simp\", \"tangentCoordChange_comp\", \"TangentBundle.chartAt_toPartialEquiv\", \"coe_achart\", \"tangentMap_chart\"], \"note\": \"\", \"digest\": \"ebec5fe0456fae14\"}",
+   "date": "2026-10-24",
+   "verdict": "No exact coordinate tower comparison interface; generic adjunction API reused."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction",
+   "results": "{\"n_hits\": 12, \"top\": [\"CategoryTheory.Adjunction.id\", \"CategoryTheory.Adjunction.instInhabitedId\", \"CategoryTheory.Adjunction\", \"CategoryTheory.Equivalence.toAdjunction\", \"CategoryTheory.Equivalence.toAdjunction'\", \"CategoryTheory.Adjunction.isLeftAdjoint\", \"CategoryTheory.Adjunction.isRightAdjoint\", \"CategoryTheory.Adjunction.mk'\"], \"note\": \"\", \"digest\": \"b2038ff05fe43306\"}",
+   "date": "2026-10-24",
+   "verdict": "No exact coordinate tower comparison interface; generic adjunction API reused."
+  },
+  {
+   "tool": "grep",
+   "query": "coordinate.*[Aa]djunction|[Tt]ate.*[Tt]ensor",
+   "results": "{\"n_hits\": 3, \"top\": [\"Mathlib/LinearAlgebra/TensorAlgebra/Basic.lean\", \"Mathlib/CategoryTheory/Monoidal/Comon_.lean\", \"Mathlib/CategoryTheory/Monoidal/Rigid/Basic.lean\"], \"note\": \"\", \"digest\": \"8e4fb381532eafb8\"}",
+   "date": "2026-10-24",
+   "verdict": "No exact coordinate tower comparison interface; generic adjunction API reused."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-sp-tower-coordinate-adjunction",
+  "date": "2026-10-24",
+  "group": "Q31"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-sp-tower-gluing",
+   "place": "Local pairs and Levels: coordinate comparison data",
+   "via": [
+    "lem-sp-tower-coordinate-adjunction"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sp-tower-geometric",
+ "lean": {
+  "module": "Sheaf.Paper.SmoothPurityCoordinateTensorComparisons",
+  "declaration": "AlgebraicGeometry.ProEtale.SpCoordinateAdjunction.Products",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.SpCoordinateAdjunction.line",
+   "AlgebraicGeometry.ProEtale.SpCoordinateAdjunction.lineComplex",
+   "AlgebraicGeometry.ProEtale.SpCoordinateAdjunction.Products",
+   "AlgebraicGeometry.ProEtale.SpCoordinateAdjunction.totalShiftFirst",
+   "AlgebraicGeometry.ProEtale.SpCoordinateAdjunction.totalShiftSecond",
+   "AlgebraicGeometry.ProEtale.SpCoordinateAdjunction.TensorShifts"
+  ],
+  "file": "lean/Sheaf/Paper/SmoothPurityCoordinateTensorComparisons.lean",
+  "statement": "structure Products (b : SpTowerShriek.Base l E) {T : Scheme.{u}} (w : SpChartAdmissibility.Twists l E T)",
+  "branch": "sheaf-dag",
+  "by": "Q31",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-7ab12251e",
+  "group": "Q31",
+  "result": "fix",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-7ab12251e",
+  "group": "Q31",
+  "result": "fix",
+  "note": "Lean statement exact against node and gluing.proof.md Local pairs/Levels: Construction ∃-chain fully pinned (P1 Hom via AdjunctionData + open adjunction + pinned AffineRestriction; CompositeEquation with cal.composition; chart counit alpha^-1, then F(etale_shriek then fibre-sum counit), then eps_{p_d}; RootLines/pulled/Products/TensorShifts/step/iteration normalized; LevelCompatibility with supportEvaluation and projection/rightEvaluation; d=0 identity). Edge cases d=0/1, e=id, empty, n=0, ramified checked; no hollow defs, only sorry is the theorem; docstrings/line lengths ok; stmt_deps only gain landed def nodes plus 3 new def nodes. Sole fault H11: the Second reading section was a dispatcher-wording self-audit. FIX = fixes/lem-sp-tower-coordinate-adjunction.report.md (worker report verbatim plus independent second reading). Advisories: inherited Preservation/arbitrary calculus inputs; new nodes do not cite owners (SpEllTwistProducts theorem-owned, spEllTwist*, tateFiniteTensor, purTwist*, SignedLineProductNormalized); proof-only private imports in def modules; existential finite adjunction per P1 convention. No compile run (no Lean changed)."
+ }
+}

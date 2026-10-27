@@ -1,0 +1,255 @@
+{
+ "id": "lem-trf-relative-tensor-test-model-restriction",
+ "kind": "statement",
+ "title": "Algebra-linear test-resolution models restrict naturally to the base derived tensor",
+ "statement": "Let $\\varphi:R\\to A$ be a homomorphism of commutative rings, $K^\\bullet$ any unbounded complex of $A$-modules, $N$ an $R$-module, and $\\epsilon:P^\\bullet\\to N[0]$ a K-flat resolution over $R$ [def-pc-module-kflat-complex]. Use the unbounded derived categories and their localization functors $Q_R,Q_A$ [def-weil-abstract-derived-category]. Give $C(K,P)=\\operatorname{Tot}(K^\\bullet\\otimes_R P^\\bullet)$ the $A$-action on the $K$ factor and the signed direct-sum total differential [def-pc-tensor-complex-sheaves]. This is an $A$-complex, and there is an isomorphism in $D(R)$\n$$\\eta_{K,\\epsilon}:Q_R(\\operatorname{Res}_R C(K,P))\\xrightarrow{\\sim}Q_R(\\operatorname{Res}_R K)\\otimes_R^{\\mathbf L}Q_R(N[0]).$$\nThese isomorphisms can be chosen simultaneously with the following compatibility: for every $A$-linear chain map $f:K\\to K'$, $R$-linear module map $g:N\\to N'$, and $R$-linear chain map $h:P\\to P'$ between K-flat resolutions satisfying $\\epsilon'h=g[0]\\epsilon$, the square with top and bottom $\\eta_{K,\\epsilon},\\eta_{K',\\epsilon'}$, left arrow $Q_R(\\operatorname{Res}_R\\operatorname{Tot}(f\\otimes h))$ and right arrow $Q_R(\\operatorname{Res}_R f)\\otimes_R^{\\mathbf L}Q_R(g[0])$ commutes. In particular, multiplication by any $a\\in A$ on the explicit complex represents the derived endomorphism induced by multiplication by $a$ on $K$; its cohomology is an actual $A$-module with this action. No flatness of $A/R$ or boundedness of $K,P$ is assumed.",
+ "source": {
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tag 0B67, lemma-tor-amplitude-localization, assertion that derived tensor cohomology is an algebra-module; expanded using section-derived-tensor-product, definition-derived-tor and lemma-flip-douoble-tensor-product."
+ },
+ "stmt_deps": [
+  "def-weil-abstract-derived-category",
+  "def-pc-module-kflat-complex",
+  "def-pc-tensor-complex-sheaves",
+  "def-pc-mixed-total-tensor",
+  "lem-sfb-derived-monoidal"
+ ],
+ "proof": [
+  {
+   "text": "Apply [def-pc-mixed-total-tensor] to $R\\to A$, $M=K$ and $E=P$. Thus $C^n=\\bigoplus_{p+q=n}K^p\\otimes_RP^q$ with $a(x\\otimes y)=(ax)\\otimes y$ and $d(x\\otimes y)=d_Kx\\otimes y+(-1)^p x\\otimes d_Py$. This action respects the balanced relations because multiplication by $a$ on $K^p$ is $R$-linear. The differential is $A$-linear since $d_K$ is $A$-linear. Restriction to $R$ leaves precisely the same abelian groups, balanced relations, direct sums and differentials, giving a chain isomorphism $j_{K,P}:\\operatorname{Res}_RC(K,P)\\cong\\operatorname{Tot}(\\operatorname{Res}_RK\\otimes_RP)$, identity on every symbol $x\\otimes y$. For $f,h$ both induced total maps send that symbol to $f(x)\\otimes h(y)$, so $j$ is natural in these chain maps.",
+   "uses": [
+    "def-pc-mixed-total-tensor"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 06Y5, section-derived-base-change, the mixed total tensor construction preceding Tag 06Y6 (lemma-derived-base-change)."
+   }
+  },
+  {
+   "text": "Work on the one-object site with only the identity covering and coefficient ring $R$. Sheaves of $R$-modules are literally $R$-modules: the sheaf condition imposes no relation, so sheafification is the identity and satisfies the additive sheafification hypotheses. The K-flatness test is exactly [def-pc-module-kflat-complex]. Apply [lem-sf-ringed-derived-native-tensor] with first input $L=\\operatorname{Res}_RK$ and second input $P$. Its inverse lax tensorator gives a simultaneous natural comparison $\\theta_{L,P}:Q_R\\operatorname{Tot}(L\\otimes_RP)\\xrightarrow{\\sim}Q_RL\\otimes_R^{\\mathbf L}Q_RP$ whenever $P$ is K-flat. By [def-weil-abstract-derived-category], $Q_R\\epsilon$ is invertible. Define, using ordinary right-to-left composition, $$\\eta_{K,\\epsilon}=(1_{Q_RL}\\otimes_R^{\\mathbf L}Q_R\\epsilon)\\circ\\theta_{L,P}\\circ Q_R(j_{K,P}).$$ All three factors are isomorphisms. This uses K-flatness only for the given $R$-complex $P$, not for $K$ or for its restriction.",
+   "uses": [
+    "def-pc-module-kflat-complex",
+    "lem-sf-ringed-derived-native-tensor",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 06YU, definition-derived-tor and preceding K-flat construction; Tag 0FPT, lemma-symmetric-monoidal-derived; specialized to the one-object identity-cover site. Compare More on Algebra Tag 064M, definition-derived-tor."
+   }
+  },
+  {
+   "text": "Put $L=\\operatorname{Res}_RK$, $L\\prime=\\operatorname{Res}_RK\\prime$, and $\\bar f=\\operatorname{Res}_Rf$. Naturality of the comparison in [lem-sf-ringed-derived-native-tensor] says $$\\theta_{L\\prime,P\\prime}\\circ Q_R\\operatorname{Tot}(\\bar f\\otimes h)=(Q_R\\bar f\\otimes_R^{\\mathbf L}Q_Rh)\\circ\\theta_{L,P}.$$ Functoriality of localization gives $Q_R\\epsilon\\prime\\circ Q_Rh=Q_R(g[0])\\circ Q_R\\epsilon$. Compose the displayed identity on the left with $1\\otimes_R^{\\mathbf L}Q_R\\epsilon\\prime$ and use bifunctoriality of derived tensor; then use the symbolwise naturality of $j$ proved in step 1. The result is exactly $$\\eta_{K\\prime,\\epsilon\\prime}\\circ Q_R\\operatorname{Res}_R\\operatorname{Tot}(f\\otimes h)=(Q_R\\bar f\\otimes_R^{\\mathbf L}Q_R(g[0]))\\circ\\eta_{K,\\epsilon}.$$ This proves the required square for every supplied $f,g,h$; $h$ need not be a quasi-isomorphism.",
+   "uses": [
+    "lem-sf-ringed-derived-native-tensor",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 06YU, definition-derived-tor and preceding K-flat construction; Tag 0FPT, lemma-symmetric-monoidal-derived; specialized to the one-object identity-cover site. Compare More on Algebra Tag 064M, definition-derived-tor."
+   }
+  },
+  {
+   "text": "For $a\\in A$, multiplication $\\mu_a:K\\to K$ is an $A$-linear chain map since $A$ is commutative. In step 3 take $f=\\mu_a$, $h=1_P$, $g=1_N$ and the same augmentation. By the action formula of [def-pc-mixed-total-tensor], $\\operatorname{Tot}(\\mu_a\\otimes1)$ is multiplication by $a$ on $C$. Hence $\\eta$ identifies that endomorphism with $Q_R(\\operatorname{Res}_R\\mu_a)\\otimes_R^{\\mathbf L}1$. Finally $d_C$ being $A$-linear makes both $\\ker d_C^n$ and $\\operatorname{im}d_C^{n-1}$ stable under $A$. Their quotient $H^n(C)$ is therefore an actual $A$-module with $a[z]=[az]$. The cohomology factorization in [def-weil-abstract-derived-category] identifies its underlying $R$-module and these endomorphisms with the derived tensor cohomology through $\\eta$. No step used flatness of $A/R$ or boundedness.",
+   "uses": [
+    "def-pc-mixed-total-tensor",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 06Y5, section-derived-base-change, the mixed total tensor construction preceding Tag 06Y6 (lemma-derived-base-change)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-mixed-total-tensor",
+  "def-pc-module-kflat-complex",
+  "lem-sf-ringed-derived-native-tensor",
+  "def-weil-abstract-derived-category"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tags 0B67 (lemma-tor-amplitude-localization, algebra-module assertion), 06Y5 (section-derived-base-change), 064M (definition-derived-tor); explicit assembly using the existing one-K-flat native localization comparison (sites-cohomology.tex Tags 06YU and 0FPT)."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "KFlat.*tensor|tensor.*KFlat|localiz.*homology",
+   "results": "{\"t\": \"2026-10-22T06:49:38Z\", \"tool\": \"grep\", \"query\": \"KFlat.*tensor|tensor.*KFlat|localiz.*homology\", \"sub\": \"Algebra/Homology\", \"ok\": true, \"n_hits\": 2, \"note\": \"\", \"top\": [\"Mathlib/Algebra/Homology/Localization.lean\", \"Mathlib/Algebra/Homology/Localization.lean\"], \"digest\": \"e53d0dcdb4d02013\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: inspected returned declarations; ordinary module localization, flat modules, categorical localization and projective Tor do not state the unbounded derived comparison with its specified algebra action, resolutions and chain formulas."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Resolving the second tensor factor computes the unbounded derived tensor of an algebra module complex and localization commutes with its cohomology",
+   "results": "{\"t\": \"2026-10-22T06:49:38Z\", \"tool\": \"leansearch\", \"query\": \"Resolving the second tensor factor computes the unbounded derived tensor of an algebra module complex and localization commutes with its cohomology\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"IsLocalization.instIsLocalizedModuleTensorProductMap\", \"Algebra.tensorH1CotangentOfIsLocalization\", \"IsLocalizedModule.rTensor\", \"IsLocalization.tensorProduct_isLocalizedModule\", \"IsLocalization.tensorProduct_tensorProduct\", \"IsLocalization.tensor\", \"IsLocalization.tensorRight\", \"IsLocalizedModule.map_lTensor\"], \"digest\": \"54596b7d7ffefdf7\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: inspected returned declarations; ordinary module localization, flat modules, categorical localization and projective Tor do not state the unbounded derived comparison with its specified algebra action, resolutions and chain formulas."
+  },
+  {
+   "tool": "loogle",
+   "query": "CochainComplex, IsKFlat",
+   "results": "{\"t\": \"2026-10-22T06:49:38Z\", \"tool\": \"loogle\", \"query\": \"CochainComplex, IsKFlat\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"loogle: unknown identifier 'IsKFlat'\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: inspected returned declarations; ordinary module localization, flat modules, categorical localization and projective Tor do not state the unbounded derived comparison with its specified algebra action, resolutions and chain formulas."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A complex of modules over an R algebra A tensor a K-flat resolution of an R module represents its derived tensor over R with its A action and cohomology commutes with source prime localization",
+   "results": "{\"t\": \"2026-10-22T06:49:49Z\", \"tool\": \"leanfinder\", \"query\": \"A complex of modules over an R algebra A tensor a K-flat resolution of an R module represents its derived tensor over R with its A action and cohomology commutes with source prime localization\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Module.Flat.rTensor_shortComplex_exact\", \"Algebra.tensorH1CotangentOfIsLocalization_toLinearMap\", \"Module.Flat.iff_rTensor_preserves_shortComplex_exact\", \"Module.Flat.lTensor_shortComplex_exact\", \"Module.Flat.iff_lTensor_preserves_shortComplex_exact\", \"Algebra.tensorH1CotangentOfIsLocalization\", \"Algebra.Extension.tensorH1Cotangent\", \"Module.Flat.iff_lTensor_exact'\"], \"digest\": \"f232c91c6ea4e3bf\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: inspected returned declarations; ordinary module localization, flat modules, categorical localization and projective Tor do not state the unbounded derived comparison with its specified algebra action, resolutions and chain formulas."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Unbounded relative derived tensor has an algebra module model by resolving only its module input, and exact localization computes the model cohomology",
+   "results": "{\"t\": \"2026-10-22T06:50:10Z\", \"tool\": \"leanfinder\", \"query\": \"Unbounded relative derived tensor has an algebra module model by resolving only its module input, and exact localization computes the model cohomology\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Tor_obj\", \"CategoryTheory.Tor'_obj_obj\", \"CategoryTheory.Tor\", \"CategoryTheory.Tor'\", \"CategoryTheory.isZero_Tor'_succ_of_projective\", \"CategoryTheory.isZero_Tor_succ_of_projective\", \"Rep.isZero_Tor_succ_of_projective\", \"Rep.Tor\"], \"digest\": \"d3ebe900c1293a12\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: inspected returned declarations; ordinary module localization, flat modules, categorical localization and projective Tor do not state the unbounded derived comparison with its specified algebra action, resolutions and chain formulas."
+  },
+  {
+   "tool": "grep",
+   "query": "restrictScalars.*[Tt]ensor|[Tt]ensor.*restrictScalars|KFlat|kFlat",
+   "results": "{\"t\": \"2026-10-22T06:51:51Z\", \"tool\": \"grep\", \"query\": \"restrictScalars.*[Tt]ensor|[Tt]ensor.*restrictScalars|KFlat|kFlat\", \"sub\": \"Algebra/Homology/DerivedCategory\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: inspected returned declarations; ordinary module localization, flat modules, categorical localization and projective Tor do not state the unbounded derived comparison with its specified algebra action, resolutions and chain formulas."
+  },
+  {
+   "tool": "loogle",
+   "query": "DerivedCategory, ModuleCat.restrictScalars",
+   "results": "{\"t\": \"2026-10-22T06:51:51Z\", \"tool\": \"loogle\", \"query\": \"DerivedCategory, ModuleCat.restrictScalars\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: inspected returned declarations; ordinary module localization, flat modules, categorical localization and projective Tor do not state the unbounded derived comparison with its specified algebra action, resolutions and chain formulas."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For R to A and an A-module complex K, a K-flat resolution P of an R-module N gives an A-complex K tensor P whose restriction to D(R) is canonically the monoidal derived tensor of restricted K with N",
+   "results": "{\"t\": \"2026-10-22T06:52:02Z\", \"tool\": \"leanfinder\", \"query\": \"For R to A and an A-module complex K, a K-flat resolution P of an R-module N gives an A-complex K tensor P whose restriction to D(R) is canonically the monoidal derived tensor of restricted K with N\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Tor'_obj_obj\", \"CategoryTheory.Tor_obj\", \"CategoryTheory.Tor'\", \"CategoryTheory.Tor\", \"ModuleCat.preservesFiniteLimits_tensorLeft_of_ringHomFlat\", \"Module.Flat.rTensor_shortComplex_exact\", \"Module.Flat.iff_rTensor_preserves_shortComplex_exact\", \"Module.Flat.iff_lTensor_preserves_shortComplex_exact\"], \"digest\": \"28c4a4f3debbd74a\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: inspected returned declarations; ordinary module localization, flat modules, categorical localization and projective Tor do not state the unbounded derived comparison with its specified algebra action, resolutions and chain formulas."
+  },
+  {
+   "tool": "grep",
+   "query": "KFlat|kFlat|tensorRightCounit|restrictScalars.*tensor",
+   "results": "{\"t\": \"2026-10-23T14:45:56Z\", \"tool\": \"grep\", \"query\": \"KFlat|kFlat|tensorRightCounit|restrictScalars.*tensor\", \"sub\": \"Algebra/Homology/DerivedCategory\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: returned ordinary flat-module tensor exactness, ordinary tensor maps, graded tensor constructions, classical Tor of objects, or the bare derived-category localization; none states the unbounded algebra-linear model with the simultaneous augmentation square. Source declarations in FlatModel cover only the comparison and first-input naturality, not the full item."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The tensor product of an arbitrary algebra module complex with a K-flat resolution represents the derived tensor naturally in both inputs",
+   "results": "{\"t\": \"2026-10-23T14:45:57Z\", \"tool\": \"leansearch\", \"query\": \"The tensor product of an arbitrary algebra module complex with a K-flat resolution represents the derived tensor naturally in both inputs\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Module.Flat.rTensor_shortComplex_exact\", \"HomologicalComplex.tensorObj\", \"Module.Flat.instTensorProduct\", \"Module.Flat.lTensor_shortComplex_exact\", \"Module.Flat.tensorSubmoduleAlgebraEquivMul\", \"ModuleCat.preservesFiniteLimits_tensorLeft_of_ringHomFlat\", \"Module.Flat.iff_flat_tensorProduct\", \"Module.Flat.ker_lTensor_eq\"], \"digest\": \"fe14da929e53fc48\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: returned ordinary flat-module tensor exactness, ordinary tensor maps, graded tensor constructions, classical Tor of objects, or the bare derived-category localization; none states the unbounded algebra-linear model with the simultaneous augmentation square. Source declarations in FlatModel cover only the comparison and first-input naturality, not the full item."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A K-flat resolution of one factor computes the unbounded derived tensor product naturally in chain maps of both factors and in augmentations",
+   "results": "{\"t\": \"2026-10-23T14:45:58Z\", \"tool\": \"leanfinder\", \"query\": \"A K-flat resolution of one factor computes the unbounded derived tensor product naturally in chain maps of both factors and in augmentations\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HomologicalComplex.HasGoodTensor₁₂\", \"HomologicalComplex.instHasGoodTensor₁₂OfHasGoodTensor₁₂TensorX\", \"HomologicalComplex.HasGoodTensor₂₃\", \"CategoryTheory.Tor'_obj_obj\", \"HomologicalComplex.instHasGoodTensor₂₃OfHasGoodTensorTensor₂₃X\", \"HomologicalComplex.ιTensorObj\", \"CategoryTheory.Tor'_map_app\", \"HomologicalComplex.HasTensor\"], \"digest\": \"761ab913708f508a\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: returned ordinary flat-module tensor exactness, ordinary tensor maps, graded tensor constructions, classical Tor of objects, or the bare derived-category localization; none states the unbounded algebra-linear model with the simultaneous augmentation square. Source declarations in FlatModel cover only the comparison and first-input naturality, not the full item."
+  },
+  {
+   "tool": "loogle",
+   "query": "DerivedCategory, CochainComplex",
+   "results": "{\"t\": \"2026-10-23T14:45:58Z\", \"tool\": \"loogle\", \"query\": \"DerivedCategory, CochainComplex\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"DerivedCategory.Q\", \"DerivedCategory.instEssSurjCochainComplexIntQ\", \"DerivedCategory.instCommShiftCochainComplexIntQ\", \"DerivedCategory.instAdditiveCochainComplexIntQ\", \"DerivedCategory.singleFunctorIsoCompQ\", \"DerivedCategory.instIsLocalizationCochainComplexIntQQuasiIsoUp\", \"DerivedCategory.singleFunctorsPostcompQIso\", \"DerivedCategory.Q_obj_single_obj\"], \"digest\": \"279cd3356f4a36e4\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: returned ordinary flat-module tensor exactness, ordinary tensor maps, graded tensor constructions, classical Tor of objects, or the bare derived-category localization; none states the unbounded algebra-linear model with the simultaneous augmentation square. Source declarations in FlatModel cover only the comparison and first-input naturality, not the full item."
+  },
+  {
+   "tool": "grep",
+   "query": "derivedTensor|derived.*[Tt]ensor|[Tt]ensor.*derived",
+   "results": "{\"t\": \"2026-10-23T14:47:29Z\", \"tool\": \"grep\", \"query\": \"derivedTensor|derived.*[Tt]ensor|[Tt]ensor.*derived\", \"sub\": \"Algebra/Homology\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: returned ordinary flat-module tensor exactness, ordinary tensor maps, graded tensor constructions, classical Tor of objects, or the bare derived-category localization; none states the unbounded algebra-linear model with the simultaneous augmentation square. Source declarations in FlatModel cover only the comparison and first-input naturality, not the full item."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Restriction of scalars of the total tensor complex of an algebra module with a K-flat complex is naturally the derived tensor over the base ring",
+   "results": "{\"t\": \"2026-10-23T14:47:32Z\", \"tool\": \"leanfinder\", \"query\": \"Restriction of scalars of the total tensor complex of an algebra module with a K-flat complex is naturally the derived tensor over the base ring\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"TensorProduct.AlgebraTensorModule.restrictScalars_rTensor\", \"ModuleCat.preservesFiniteLimits_tensorLeft_of_ringHomFlat\", \"Module.Flat.baseChange\", \"Module.Flat.instTensorProduct\", \"Module.Flat.of_flat_tensorProduct\", \"Module.Flat.rTensor_shortComplex_exact\", \"Module.Flat.lTensor_shortComplex_exact\", \"Module.FaithfullyFlat.instTensorProduct\"], \"digest\": \"5c0f2eac1fc474be\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: returned ordinary flat-module tensor exactness, ordinary tensor maps, graded tensor constructions, classical Tor of objects, or the bare derived-category localization; none states the unbounded algebra-linear model with the simultaneous augmentation square. Source declarations in FlatModel cover only the comparison and first-input naturality, not the full item."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-relative-tor-amplitude-localization",
+  "date": "2026-10-22",
+  "group": "Q137"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Proof (1)--(2), semistable-alteration input in the nearby-cycle branch: ILO Exposé X, Theorem 3.4, Step 3, invoking Temkin 2010, Theorems 1.5 and 1.1 for a semistable multipointed modification. Temkin proof component: Marked dualizing line bundle and contracted-component degrees. Auxiliary input: Local complete-intersection determinant adjunction underlying the marked dualizing construction, before the marking is inserted. More precisely: coherent relative-duality polynomial-chart input; Rigidity of already given coherent relative dualizing pairs. Affine reduction and rigidity: Affine comparison for a given coherent relative dualizing pair. Relative Tor amplitude in the affine reduction, using the generic affine relative-Tor criterion. Algebraic localization step in the affine relative-Tor comparison (Stacks 0DHY invoking 0B67). Old localization proof step 1: the algebra action and the comparison from a test-module K-flat resolution to the tensor in D(R).",
+   "via": [
+    "lem-trf-relative-tor-amplitude-localization",
+    "lem-trf-affine-relative-tor-amplitude-criterion",
+    "lem-trf-affine-relative-dualizing-comparison",
+    "lem-trf-relative-dualizing-pair-rigidity",
+    "lem-trf-relative-duality-polynomial-chart",
+    "lem-trf-flat-lci-canonical-adjunction",
+    "lem-trf-marked-nodal-dualizing-degrees",
+    "lem-trf-temkin-stable-modification",
+    "lem-trf-stable-modification-flat-curve-pair",
+    "lem-trf-dejong-relative-marked-semistable",
+    "lem-trf-relative-marked-nodal-reduction",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-trf-relative-tensor-test-model-restriction",
+  "worker": "stage1",
+  "summary": "Constructed the algebra-linear total complex, applied the existing natural one-K-flat localization comparison on the one-point ringed site, composed with the augmentation, and checked the full square and scalar action explicitly. Statement unchanged; no new nodes, no Lean attachment.",
+  "blueprint": "The inherited ancestor lem-trf-local-term-locality, proof (1)--(2), through the recorded relative-duality and affine relative-Tor chain: the precise place is old relative-Tor localization proof step 1, the algebra action and comparison from a test-module K-flat resolution to the tensor in D(R). Steps 1 and 4 give the algebra action, steps 2 and 3 give the derived comparison and its naturality. The latest ancestor and unit text were read; this auxiliary algebra split makes no alteration to their geometric route.",
+  "tool_uses": [
+   {
+    "node": "lem-sf-ringed-derived-native-tensor",
+    "why": "Generic native one-K-flat tensor comparison and its naturality on the one-object identity-cover site; no node of sk-i-curve-zero states this categorical input. It serves the existing relative-Tor comparison without replacing any geometric unit step."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sf-ringed-derived-native-tensor"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q19-37237e782",
+  "group": "Q19",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q19-37237e782 (reviewer sub-agent of L); spot-checked: I read the whole item. The statement is byte-identical to the live and side-live statement, which is still unsplit there. The delivery has no new nodes. Sources checked: Tag 0B67 proof (more-algebra l.17184), whose sentence that H^i is a B-module is what this item makes precise; Tag 06Y5 mixed tensor (l.14637); and sites-cohomology 06YU (l.3300) and 0FPT (l.13136). There is no SGA. Step 1 applies def-pc-mixed-total-tensor, and restricting to R is the identity on each symbol x⊗y, which is elementary. Step 2 works on the one-object site, where sheaves are modules and sheafification is the identity. It inverts the lax tensorator of lem-sf-ringed-derived-native-tensor, which is invertible when either input is K-flat, so only P needs to be K-flat and nothing is assumed about Res K. It then composes with Qε, which is invertible by def-weil-abstract-derived-category. Step 3: I recomputed the square from the naturality of θ, Qε'Qh=Q(g[0])Qε, and the naturality of j; it holds for any h. Step 4: with f=μ_a, H^n(C) is an A-module and the H^r∘Q factorization carries the action over. proof_deps equals the union of the uses, and the dependency search shows no cycle. Small cases checked: Z→Z/2 with P=(Z→2Z), where Tor_1=Tor_0=Z/2 with the right action; g=h=0; and K=0. Duplicate search found nothing that states the item: lem-pc-balanced-derived-tensor-model resolves both factors and works in D(A), and the pc base-derived-tensor family and lem-pe-restricted-kflat-tensor-identification are different statements. I accept the tool use of lem-sf-ringed-derived-native-tensor as a generic monoidal-localization input that no node of the unit supplies. Advisory, not changed: the statement's ⊗^L has no defining stmt_dep; this is inherited from the base, and the proof reads it as the native tensor (06YU)."
+ },
+ "lean": {
+  "module": "Sheaf.Algebra.Homology.RelativeTensorTestModelRestriction",
+  "declaration": "ModuleCat.exists_relativeTensorTestModelRestriction",
+  "file": "lean/Sheaf/Algebra/Homology/RelativeTensorTestModelRestriction.lean",
+  "statement": "theorem exists_relativeTensorTestModelRestriction {R A : Type u} [CommRing R] [CommRing A] (φ : R →+* A) [HasDerivedCategory.{w} (ModuleCat.{u} R)] : ∃ η : ∀ (K : CochainComplex (ModuleCat.{u} A) ℤ) (N : ModuleCat.{u} R) (P : CochainComplex (ModuleCat.{u} R) ℤ), (HomologicalComplex.quasiIso (ModuleCat.{u} R) (.up ℤ)).kFlat P → ∀ ε : P ⟶ (CochainComplex.singleFunctor (ModuleCat.{u} R) 0).obj N, QuasiIso ε → (DerivedCategory.Q.obj (((restrictScalars φ).mapHomologicalComplex (.up ℤ)).obj (((mixedTotalTensor φ).obj K).obj P)) ≅ (DerivedCategory.Q.obj (((restrictScalars φ).mapHomologicalComplex (.up ℤ)).obj K) ⊗ DerivedCategory.Q.obj ((CochainComplex.singleFunctor (ModuleCat.{u} R) 0).obj N))), (∀ (K K' : CochainComplex (ModuleCat.{u} A) ℤ) (N N' : ModuleCat.{u} R) (P P' : CochainComplex (ModuleCat.{u} R) ℤ) (hP : (HomologicalComplex.quasiIso (ModuleCat.{u} R) (.up ℤ)).kFlat P) (hP' : (HomologicalComplex.quasiIso (ModuleCat.{u} R) (.up ℤ)).kFlat P') (ε : P ⟶ (CochainComplex.singleFunctor (ModuleCat.{u} R) 0).obj N) (ε' : P' ⟶ (CochainComplex.singleFunctor (ModuleCat.{u} R) 0).obj N') (hε : QuasiIso ε) (hε' : QuasiIso ε') (f : K ⟶ K') (g : N ⟶ N') (h : P ⟶ P'), h ≫ ε' = ε ≫ (CochainComplex.singleFunctor (ModuleCat.{u} R) 0).map g → DerivedCategory.Q.map (((restrictScalars φ).mapHomologicalComplex (.up ℤ)).map ((((mixedTotalTensor φ).map f).app P ≫ ((mixedTotalTensor φ).obj K').map h))) ≫ (η K' N' P' hP' ε' hε').hom = (η K N P hP ε hε).hom ≫ (DerivedCategory.Q.map (((restrictScalars φ).mapHomologicalComplex (.up ℤ)).map f) ⊗ₘ DerivedCategory.Q.map ((CochainComplex.singleFunctor (ModuleCat.{u} R) 0).map g))) ∧ (∀ (K : CochainComplex (ModuleCat.{u} A) ℤ) (N : ModuleCat.{u} R) (P : CochainComplex (ModuleCat.{u} R) ℤ) (hP : (HomologicalComplex.quasiIso (ModuleCat.{u} R) (.up ℤ)).kFlat P) (ε : P ⟶ (CochainComplex.singleFunctor (ModuleCat.{u} R) 0).obj N) (hε : QuasiIso ε) (a : A), DerivedCategory.Q.map (((restrictScalars φ).mapHomologicalComplex (.up ℤ)).map (a • 𝟙 (((mixedTotalTensor φ).obj K).obj P))) ≫ (η K N P hP ε hε).hom = (η K N P hP ε hε).hom ≫ (DerivedCategory.Q.map (((restrictScalars φ).mapHomologicalComplex (.up ℤ)).map (a • 𝟙 K)) ⊗ₘ 𝟙 (DerivedCategory.Q.obj ((CochainComplex.singleFunctor (ModuleCat.{u} R) 0).obj N)))) ∧ (∀ (K : CochainComplex (ModuleCat.{u} A) ℤ) (N : ModuleCat.{u} R) (P : CochainComplex (ModuleCat.{u} R) ℤ) (hP : (HomologicalComplex.quasiIso (ModuleCat.{u} R) (.up ℤ)).kFlat P) (ε : P ⟶ (CochainComplex.singleFunctor (ModuleCat.{u} R) 0).obj N) (hε : QuasiIso ε) (n : ℤ), ∃ e : (restrictScalars φ).obj ((((mixedTotalTensor φ).obj K).obj P).homology n) ≅ (DerivedCategory.homologyFunctor (ModuleCat.{u} R) n).obj (DerivedCategory.Q.obj (((restrictScalars φ).mapHomologicalComplex (.up ℤ)).obj K) ⊗ DerivedCategory.Q.obj ((CochainComplex.singleFunctor (ModuleCat.{u} R) 0).obj N)), e = (((((mixedTotalTensor φ).obj K).obj P).sc n).mapHomologyIso (restrictScalars φ)).symm ≪≫ ((DerivedCategory.homologyFunctorFactors (ModuleCat.{u} R) n).app (((restrictScalars φ).mapHomologicalComplex (.up ℤ)).obj (((mixedTotalTensor φ).obj K).obj P))).symm ≪≫ (DerivedCategory.homologyFunctor (ModuleCat.{u} R) n).mapIso (η K N P hP ε hε) ∧ ∀ a : A, (restrictScalars φ).map (a • 𝟙 ((((mixedTotalTensor φ).obj K).obj P).homology n)) ≫ e.hom = e.hom ≫ (DerivedCategory.homologyFunctor (ModuleCat.{u} R) n).map (DerivedCategory.Q.map (((restrictScalars φ).mapHomologicalComplex (.up ℤ)).map (a • 𝟙 K)) ⊗ₘ 𝟙 (DerivedCategory.Q.obj ((CochainComplex.singleFunctor (ModuleCat.{u} R) 0).obj N))))",
+  "branch": "newtargets-dag",
+  "by": "Q72",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-00cd85530",
+  "group": "Q72",
+  "result": "pass",
+  "note": "Diffed vs side-live/live: only the lean record, +2 stmt_deps (def-pc-mixed-total-tensor, lem-sfb-derived-monoidal) and one new sorry-only theorem module; lean.statement matches the file verbatim. Clause check: one simultaneous η family over K (no K-flat/bounded hypothesis), N, K-flat P, quasi-iso ε : P→N[0]; explicit complex = existing mixedTotalTensor; square for any f,g,h with h≫ε'=ε≫g[0], h not assumed quasi-iso; scalar square a•𝟙; cohomology as an actual A-module with e pinned canonically (mapHomologyIso.symm ≪≫ homologyFunctorFactors.symm ≪≫ H^n η). Consistency checked by hand (Qh=1 when hε=ε). Edge cases: zero ring/complexes, a=0,1, zero maps, Z→Z/2 non-flat, negative degrees. Mechanical theorem-stmt_dep finding: genuine. ⊗ on DerivedCategory (ModuleCat R) comes from the FromJoel DerivedMonoidal instance, which needs Qh.HasDerivedMonoidalCategory, supplied only by lem-sfb-derived-monoidal's hasDerivedMonoidalCategory; no ring-module derived-tensor def node exists; PASS on that point. No new defs or duplicates; docstrings carry source place, blueprint id and proof plan. Note: the 'Second reading by Q72' is the author's disclosed self-recheck. No compile: no file changed."
+ }
+}

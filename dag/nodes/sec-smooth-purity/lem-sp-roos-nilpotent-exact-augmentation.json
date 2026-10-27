@@ -1,0 +1,186 @@
+{
+ "id": "lem-sp-roos-nilpotent-exact-augmentation",
+ "kind": "statement",
+ "title": "Roos augmentation of an extension by a nilpotent tower",
+ "statement": "Let $\\mathcal A$ be a Grothendieck abelian category [def-sp-grothendieck-abelian] with countable products, inverse-sequence limits, and exact countable products, and choose unbounded derived categories of $\\mathcal A$ and $\\operatorname{Fun}(\\mathbf N^{op},\\mathcal A)$ [def-weil-abstract-derived-category]. Let $P$ be a cochain complex, let $V,Z$ be cochain complexes of strict towers, and suppose $0\\to\\operatorname{const}(P)\\xrightarrow{i}V\\xrightarrow{p}Z\\to0$ is short exact. In every degree k let $s_{Z,k}$ be the endomorphism of $\\prod_n Z_n^k$ whose nth component is the projection to n+1 followed by the tower transition. Suppose one integer $a\\geq1$ satisfies $s_{Z,k}^a=0$ for every k. Then the specific zero-homotopy augmentation $P\\to\\mathsf R(V)$ [def-weil-strict-roos-model], with product component $(i_n)_n$ and zero shifted component, is a quasi-isomorphism. For every total right derived inverse-limit functor $RF$ and its unit $\\eta$, $RF(QZ)$ is zero. There is no cohomological bound on any of the complexes.",
+ "source": {
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Lemma 3.4.12, proof of (1) iff (2), with Stacks 0941 sites-cohomology.tex lemma-derived-limit-is-ok. Completeness sentence of sk-lem-sp-tower; steps 3--6 of lem-sp-nilpotent-action-koszul-unit, abstracted from scalar action."
+ },
+ "stmt_deps": [
+  "def-sp-grothendieck-abelian",
+  "def-weil-abstract-derived-category",
+  "def-weil-strict-roos-model"
+ ],
+ "proof": [
+  {
+   "text": "Apply the explicit Roos construction. Products are exact by hypothesis. Applying products degreewise to the given short exact sequence, and using the two Roos coordinates, therefore gives a short exact sequence of complexes 0 → Roos(const P) → Roos(V) → Roos(Z) → 0. Strict compatibility with transitions proves that the product maps commute with 1-s and hence define the required chain maps. No compatible choice of degreewise sections is needed.",
+   "uses": [
+    "def-weil-strict-roos-model"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Lemma 3.4.12, proof of (1) iff (2), principal cone tower; explicit chain-coordinate refinement using Stacks 012Z (homology-definition-associated-simple-complex) and 0941 (sites-cohomology-lemma-derived-limit-is-ok)."
+   }
+  },
+  {
+   "text": "For the constant tower put $P=\\prod_{j\\ge1}Q$, $f(v)_j=v_j-v_{j+1}$, and let $\\Delta:Q\\to P$ be the diagonal. Define a chain map $B:P\\to P$ by $(Bu)_1=0$ and $(Bu)_j=-\\sum_{a=1}^{j-1}u_a$ for $j>1$. Each coordinate is a finite sum, so this is a categorical morphism and commutes with $d$ even for unbounded $Q$. Telescoping gives $fB=1$ and $Bf=1-\\Delta\\mathrm{pr}_1$. The chain maps $\\delta:Q\\to\\mathsf R(\\operatorname{const}Q)$, $x\\mapsto(\\Delta x,0)$, and $e:(v,u)\\mapsto v_1$ satisfy $e\\delta=1$. With $H^k(v,u)=(-Bu,0)$, the Roos differential gives $dH+Hd=(Bfv,fBu)=(v-\\Delta v_1,u)=1-\\delta e$. On cycles this identity differs from $1-\\delta e$ by a boundary, so $\\delta$ and $e$ induce inverse cohomology maps. In particular this specific diagonal augmentation $\\delta$ is a quasi-isomorphism.",
+   "uses": [
+    "def-weil-strict-roos-model",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Lemma 3.4.12, proof of (1) iff (2), principal cone tower; explicit chain-coordinate refinement using Stacks 012Z (homology-definition-associated-simple-complex) and 0941 (sites-cohomology-lemma-derived-limit-is-ok)."
+   }
+  },
+  {
+   "text": "For the quotient product shift s_Z in each degree, assume s_Z^a=0 with a>=1. The finite geometric sum inverts 1-s_Z. These degreewise inverses commute with the differential, so the chain endomorphism 1-s_Z is invertible and its shifted cone is contractible. The short exact sequence of Roos complexes has acyclic quotient; its cohomology long exact sequence makes Roos(i) a quasi-isomorphism. Compose with the constant diagonal homotopy equivalence to obtain exactly the zero-homotopy augmentation specified by i.",
+   "uses": [
+    "def-weil-strict-roos-model",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "A Grothendieck abelian category admits K-injective resolutions of tower complexes with injective terms. On such a resolution, the kernel of 1-s is the ordinary limit, and 1-s is degreewise split epic. The kernel-to-shifted-cone comparison is a quasi-isomorphism. Exact products make Roos preserve quasi-isomorphisms, so its localization computes total right derived limit. The contracted quotient has zero image. Uniqueness of total right derived functors transports this to every RF with its specified derived unit. This is the categorical proof of the strict Roos comparison, and uses no scalar or tensor construction.",
+   "uses": [
+    "def-sp-grothendieck-abelian",
+    "def-weil-strict-roos-model",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-strict-roos-model",
+  "def-weil-abstract-derived-category",
+  "def-sp-grothendieck-abelian"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Lemma 3.4.12, proof of (1) iff (2), with Stacks 0941 sites-cohomology.tex lemma-derived-limit-is-ok. Completeness sentence of sk-lem-sp-tower; steps 3--6 of lem-sp-nilpotent-action-koszul-unit, abstracted from scalar action."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The Roos augmentation from a constant complex into a short exact sequence of towers is a quasi isomorphism when the quotient Roos complex is acyclic",
+   "results": {
+    "count": 8,
+    "hits": [
+     "HomologicalComplex.HomologySequence.quasiIso_τ₃",
+     "CochainComplex.cm5b.instQuasiIsoIntP",
+     "CochainComplex.mappingCone.quasiIso_descShortComplex",
+     "HomotopyCategory.quasiIso_eq_subcategoryAcyclic_W",
+     "HomotopyCategory.quotient_obj_mem_subcategoryAcyclic_iff_exactAt",
+     "CochainComplex.quasiIsoAt₀_iff",
+     "ChainComplex.quasiIsoAt₀_iff",
+     "quasiIsoAt_iff'"
+    ],
+    "note": ""
+   },
+   "date": "2026-10-25",
+   "verdict": "No exact match: generic cone and homology lemmas do not state the prescribed Roos augmentation with nilpotent quotient and every right derived limit."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"quasiIso_comp\"",
+   "results": {
+    "count": 2,
+    "hits": [
+     "CategoryTheory.ShortComplex.quasiIso_comp",
+     "quasiIso_comp"
+    ],
+    "note": ""
+   },
+   "date": "2026-10-25",
+   "verdict": "No exact match: generic cone and homology lemmas do not state the prescribed Roos augmentation with nilpotent quotient and every right derived limit."
+  },
+  {
+   "tool": "grep",
+   "query": "roos.*(shortExact|ShortExact)|shortExact.*[Rr]oos",
+   "results": {
+    "count": 0,
+    "hits": [],
+    "note": ""
+   },
+   "date": "2026-10-25",
+   "verdict": "No exact match: generic cone and homology lemmas do not state the prescribed Roos augmentation with nilpotent quotient and every right derived limit."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The Roos augmentation of an extension of a constant tower by a nilpotent tower is a quasi-isomorphism",
+   "results": {
+    "count": 8,
+    "hits": [
+     "CategoryTheory.SimplicialObject.augment",
+     "CategoryTheory.CosimplicialObject.augment",
+     "CochainComplex.augmentTruncate",
+     "CategoryTheory.CosimplicialObject.augment_hom_app",
+     "HomologicalComplex.instQuasiIsoExtendMap",
+     "CategoryTheory.CosimplicialObject.Augmented",
+     "ChainComplex.augment",
+     "CategoryTheory.ProjectiveResolution.instQuasiIsoIntπ'"
+    ],
+    "note": ""
+   },
+   "date": "2026-10-25",
+   "verdict": "No exact match: generic cone and homology lemmas do not state the prescribed Roos augmentation with nilpotent quotient and every right derived limit."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Algebra.Homology.NilpotentActionKoszulUnit",
+  "date": "2026-10-25",
+  "group": "D4"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-lem-sp-tower",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "sk-lem-sp-tower",
+   "place": "Lemma 3.4.12, proof of (1) iff (2), with Stacks 0941 sites-cohomology.tex lemma-derived-limit-is-ok. Completeness sentence of sk-lem-sp-tower; steps 3--6 of lem-sp-nilpotent-action-koszul-unit, abstracted from scalar action.",
+   "via": [
+    "lem-sp-nilpotent-action-koszul-unit",
+    "lem-sp-power-torsion-sheaf-limit-complete"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.RoosExactAugmentation",
+  "file": "lean/Sheaf/CategoryTheory/RoosExactAugmentation.lean",
+  "declaration": "CategoryTheory.roosNilpotentExactAugmentation",
+  "statement": "theorem roosNilpotentExactAugmentation\n    {A : Type u} [Category.{v} A] [Abelian A] [HasCountableProducts A]\n    [HasLimitsOfShape ℕᵒᵖ A]\n    [IsGrothendieckAbelian.{g} A]\n    [HasExactLimitsOfShape (Discrete ℕ) A]\n    [HasDerivedCategory.{w} A] [HasDerivedCategory.{w} (ℕᵒᵖ ⥤ A)]\n    (P : CochainComplex A ℤ) (V Z : CochainComplex (ℕᵒᵖ ⥤ A) ℤ)\n    (i : ((Functor.const ℕᵒᵖ : A ⥤ (ℕᵒᵖ ⥤ A)).mapHomologicalComplex\n      (ComplexShape.up ℤ)).obj P ⟶ V) (p : V ⟶ Z) (hi : i ≫ p = 0)\n    (hS : (ShortComplex.mk i p hi).ShortExact) (a : ℕ) (ha : 1 ≤ a)\n    (hnil : ∀ k : ℤ,\n      (End.of (towerProductShift (K := fun n : ℕ ↦ (Z.X k).obj (op n))\n        (fun n : ℕ ↦\n        (Z.X k).map (homOfLE n.le_succ).op))) ^ a = 0) :\n    QuasiIso (constantTowerRoosAugmentation i) ∧\n      ∀ (RF : DerivedCategory.{w} (ℕᵒᵖ ⥤ A) ⥤ DerivedCategory.{w} A)\n        (η : (lim : (ℕᵒᵖ ⥤ A) ⥤ A).mapHomologicalComplex (ComplexShape.up ℤ) ⋙\n          DerivedCategory.Q.{w} ⟶ DerivedCategory.Q.{w} ⋙ RF),\n        RF.IsRightDerivedFunctor η\n          (HomologicalComplex.quasiIso (ℕᵒᵖ ⥤ A) (ComplexShape.up ℤ)) →\n        IsZero (RF.obj (DerivedCategory.Q.{w}.obj Z))",
+  "branch": "sheaf-dag",
+  "by": "D4",
+  "date": "2026-10-25"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-5c920",
+  "group": "D4",
+  "result": "pass",
+  "landing": "20261025T163612-L-717281",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-5c920",
+  "group": "D4",
+  "result": "pass",
+  "landing": "20261025T163612-L-717281",
+  "kind": "interface",
+  "note": "independent cc review: item proof of nilpotentActionKoszulUnit vs node lem-sp-nilpotent-action-koszul-unit; moved defs diffed verbatim vs clone; new sorried statements nilpotentKoszulCoordinates / roosNilpotentExactAugmentation checked true against Mathlib sign conventions, principalKoszulTransition, and their node lean.statement records"
+ }
+}

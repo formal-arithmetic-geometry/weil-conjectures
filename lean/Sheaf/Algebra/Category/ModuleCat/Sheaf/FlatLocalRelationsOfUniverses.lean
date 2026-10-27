@@ -260,10 +260,8 @@ private noncomputable def tensorAssociatedMap
     siteTensorRight M.val ⋙ associated A ⟶ associated A ⋙ siteSheafTensorRight M where
   app P := (associated A).map (siteTensorHom (associatedUnit A P) M.val)
   naturality {P Q} f := by
-    change (associated A).map (siteTensorHom f M.val) ≫
-      (associated A).map (siteTensorHom (associatedUnit A Q) M.val) =
-      (associated A).map (siteTensorHom (associatedUnit A P) M.val) ≫
-      (associated A).map (siteTensorHom ((associated A).map f).val M.val)
+    dsimp only [Functor.comp_map, siteTensorRight, siteSheafTensorRight,
+      SheafOfModules.forget]
     rw [← Functor.map_comp, ← Functor.map_comp,
       ← siteTensorHom_comp, ← siteTensorHom_comp]
     congr 2
@@ -305,7 +303,8 @@ private theorem tensor_mono_locallyInjective
     exact mono_of_mono _ ((tensorAssociatedMap A M).app Q)
   have : Mono ((presheafToSheaf J AddCommGrpCat).map
       ((PresheafOfModules.toPresheaf _).map (siteTensorHom f M.val))) :=
-    (toSheaf _).map_mono ((associated A).map (siteTensorHom f M.val))
+    preserves_mono_of_preservesLimit (toSheaf _)
+      ((associated A).map (siteTensorHom f M.val))
   apply (Presheaf.isLocallyInjective_presheafToSheaf_map_iff J _).mp
   apply Presheaf.isLocallyInjective_of_injective
   intro U

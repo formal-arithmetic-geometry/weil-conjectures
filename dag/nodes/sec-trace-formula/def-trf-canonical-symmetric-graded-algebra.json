@@ -15,9 +15,53 @@
   "document": "literature/stacks-project/constructions.tex",
   "place": "Tag 01OB, definition-projective-bundle; affine symmetric algebra from Modules Tags 01CG and 01CL, with affine restriction base change of Constructions Tag 01LN"
  },
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Use the internal symmetric-degree decomposition of [lem-weil-pbc-symmetric-algebra-graded]. Rewriting the images of tensor grades as powers of the range of the symmetric inclusion gives sectionGradedAlgebra.",
+   "uses": [
+    "lem-weil-pbc-symmetric-algebra-graded"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "The scalar and degree-one equations for the canonical restriction of [lem-weil-pbc-symmetric-algebra-sheaf-construction] prove degree preservation by Submodule.pow_induction_on_left': scalars have degree zero, addition preserves the asserted degree, and multiplying a degree-i element by an inclusion generator gives degree i+1. This constructs gradedRestriction.",
+   "uses": [
+    "lem-weil-pbc-symmetric-algebra-sheaf-construction"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Use the existing exists_sectionTensorEquiv of [lem-weil-pbc-symmetric-algebra-affine-section-comparison], now public in its original module. It identifies O(U) tensor Sym(E(V)) with Sym(E(U)), sending r tensor a to r times restriction(a). This reuses its affine-section and symmetric-algebra base-change proof rather than repeating it.",
+   "uses": [
+    "lem-weil-pbc-symmetric-algebra-affine-section-comparison"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Bundle restriction as a graded algebra homomorphism and apply Mathlib GradedAlgHom.liftEquiv. The resulting graded homomorphism from the tensor-product graded algebra is the bijection of the previous step, by tensor induction. A bijective graded ring homomorphism is bijective on every homogeneous component: injectivity follows from the underlying injection, and for a homogeneous target choose a preimage and take its component of the same degree, using DirectSum.decompose_map. Compose this component equivalence with DirectSum.toBaseChange_bijective to identify O(U) tensor A(V)_n with A(U)_n. The pure tensor equation at 1 gives IsBaseChange.of_equiv, hence IsGradedBaseChangeAlong. No flatness or finite-generation hypothesis is required.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Assemble the fixed section rings, grades and restrictions into GradedAlgebraData of [def-nagata-relative-proj]. Identity and composition are those of the presheaf of [lem-weil-pbc-symmetric-algebra-sheaf-construction], and the preceding degreewise base-change theorem supplies the last field.",
+   "uses": [
+    "def-nagata-relative-proj",
+    "lem-weil-pbc-symmetric-algebra-sheaf-construction"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-symmetric-algebra-graded",
+  "lem-weil-pbc-symmetric-algebra-sheaf-construction",
+  "lem-weil-pbc-symmetric-algebra-affine-section-comparison",
+  "def-nagata-relative-proj"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/constructions.tex; literature/stacks-project/modules.tex; literature/stacks-project/algebra.tex",
+  "place": "Constructions Tags 01OB and 01LN; Modules Tags 01CG and 01CL. Agent-written Lean assembly using the existing affine-section symmetric-algebra tensor equivalence and Mathlib homogeneous decomposition; P5 repair exposes and reuses the existing theorem in place."
+ },
  "mathlib_match": null,
  "mathlib_searches": [
   {
@@ -85,7 +129,18 @@
   },
   "same_as": []
  },
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
  "chapter": "sec-trace-formula",
  "unit": "sk-i-curve-zero",
  "lean": {
@@ -120,5 +175,15 @@
   "group": "NW",
   "result": "pass",
   "note": "IsProjectiveBundle matches Stacks 01W8(1)/01OB (morphisms.tex l.10488-10501, constructions.tex l.4671-4690): exists E quasi-coherent (hE) and finite type, a closed immersion i into the canonical relProj with i ≫ relProjHom = f; no extra hypotheses, single universe u, lean.statement verbatim. The new §1(A) node def-trf-canonical-symmetric-graded-algebra has real data (sections = SymmetricAlgebra Γ(U) E(U), grade (range ι)^n, restrictions = SymmetricAlgebraSheaf.restriction, res_id/res_res proved). Its only sorrys are two named, true well-definedness theorems (degree preservation; base change under quasi-coherence), with proofs in docstrings. Not a duplicate: SymmetricGradedAlgebraData is only a presentation structure. Edge cases E=0, O_S, O^{n+1}, non-locally-free E and empty S checked. Both modules compile clean via nt_compile.py --json (8.1 s and 5.4 s, rc=0). Report has Worker report and Second reading sections. Minor, no action: one unused import."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P5",
+  "result": "pass",
+  "landing": "20261023T131711-L-2140364",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

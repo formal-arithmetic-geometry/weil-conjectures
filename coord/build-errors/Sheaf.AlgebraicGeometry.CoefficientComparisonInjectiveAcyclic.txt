@@ -1,0 +1,52 @@
+# global build 2026-10-26T01:12:35Z of 99e0ea98b9: Sheaf.AlgebraicGeometry.CoefficientComparisonInjectiveAcyclic failed
+error: Sheaf/AlgebraicGeometry/CoefficientComparisonInjectiveAcyclic.lean:107:8: failed to synthesize
+  (SheafOfModules.pushforward (constructibleComparisonRingMap X A)).IsRightAdjoint
+(deterministic) timeout at `typeclass`, maximum number of heartbeats (20000) has been reached
+
+Note: Use `set_option synthInstance.maxHeartbeats <num>` to set the limit.
+
+Hint: Additional diagnostic information may be available using the `set_option diagnostics true` command.
+
+Hint: Additional diagnostic information may be available using the `set_option diagnostics true` command.
+error: Sheaf/AlgebraicGeometry/CoefficientComparisonInjectiveAcyclic.lean:82:59: unsolved goals
+X : Scheme
+A : Type (max v (u + 1))
+inst✝² : CommRing A
+inst✝¹ : HasSheafify X.smallModelComparisonEtaleTopology AddCommGrpCat
+inst✝ : HasSheafify X.coefficientProEtaleModelTopology AddCommGrpCat
+F : X.smallModelComparisonEtaleSite ⥤ X.coefficientProEtaleSiteModel := X.smallModelComparisonInclusion
+J : GrothendieckTopology (AsSmall X.Etale) := X.smallModelComparisonEtaleTopology
+K : GrothendieckTopology (AsSmall X.ProEt) := X.coefficientProEtaleModelTopology
+this✝³ : AsSmall.down.IsEquivalence
+this✝² : AsSmall.up.IsEquivalence
+this✝¹ : PreservesFiniteLimits F
+W : X.smallModelComparisonEtaleSite := ⊤_ X.smallModelComparisonEtaleSite
+hW : IsTerminal W
+hFW : IsTerminal (F.obj W)
+this✝ : RepresentablyFlat F
+pr :
+  SheafPullbackUnitPresentation
+    ((sheafCompose J (CategoryTheory.forget CommRingCat)).obj ((constantSheaf J CommRingCat).obj (CommRingCat.of A)))
+    ((sheafCompose K (CategoryTheory.forget CommRingCat)).obj ((constantSheaf K CommRingCat).obj (CommRingCat.of A)))
+hpr : pr.unit = (sheafCompose J (CategoryTheory.forget CommRingCat)).map (canonicalRingMap F J K A)
+e :
+  SheafOfModules.pullback (constructibleComparisonRingMap X A) ⋙
+      SheafOfModules.toSheaf (siteModuleRings (ConstantCompletion.constant X.coefficientProEtaleModelTopology A)) ≅
+    SheafOfModules.toSheaf (siteModuleRings (ConstantCompletion.constant X.smallModelComparisonEtaleTopology A)) ⋙
+      sheafPullback F AddCommGrpCat X.smallModelComparisonEtaleTopology X.coefficientProEtaleModelTopology
+he :
+  ∀ (M : SheafOfModules (siteModuleRings (ConstantCompletion.constant X.smallModelComparisonEtaleTopology A))),
+    (SheafOfModules.toSheaf (siteModuleRings (ConstantCompletion.constant X.smallModelComparisonEtaleTopology A))).map
+          ((SheafOfModules.pullbackPushforwardAdjunction (constructibleComparisonRingMap X A)).unit.app M) ≫
+        (F.sheafPushforwardContinuous AddCommGrpCat X.smallModelComparisonEtaleTopology
+              X.coefficientProEtaleModelTopology).map
+          (e.hom.app M) =
+      (sheafAdjunctionContinuous F AddCommGrpCat X.smallModelComparisonEtaleTopology
+              X.coefficientProEtaleModelTopology).unit.app
+        ((SheafOfModules.toSheaf
+              (siteModuleRings (ConstantCompletion.constant X.smallModelComparisonEtaleTopology A))).obj
+          M)
+this : IsIso (sheafAdjunctionContinuous F AddCommGrpCat J K).unit
+M : SheafOfModules (siteModuleRings (ConstantCompletion.constant X.smallModelComparisonEtaleTopology A))
+⊢ IsIso ((SheafOfModules.pullbackPushforwardAdjunction (constructibleComparisonRingMap X A)).unit.app M)
+error: Lean exited with code 1

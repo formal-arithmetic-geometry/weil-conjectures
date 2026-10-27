@@ -15,53 +15,23 @@
  ],
  "proof": [
   {
-   "text": "Transpose the desired equality under fΣ!⊣f* (using the localization-restriction identification). The right side transposes to lowerStarUnit, whose section formula is graph extension by zero. Injectivity of the adjunction bijection reduces the equality to that formula.",
+   "text": "Apply the injective homEquiv of the etale lower-shriek restriction adjunction. The transpose normalization theorem identifies the left side with lowerStarUnit; the definition of etaleLowerShriekToLowerStar identifies the right side with the inverse image of that same unit under homEquiv.",
    "uses": [
-    "lem-weil-pbc-etale-restriction-injectives",
-    "def-weil-pbc-adjunction-conjugate"
+    "lem-asd-compact-support-graph-sheaf-normalization-transpose",
+    "def-weil-pbc-etale-shriek-to-star-map"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Tags 03S3 (definition-extension-zero), 03S5 (proposition-describe-jshriek), 03S6 (lemma-shriek-base-change), 0F4L (lemma-shriek-into-star-separated-etale); more-etale.tex Tags 0F50, 0F51 and 0F7B-0F7F; graph-adjunction normalization on unbounded complexes supplied by the agent"
-   }
-  },
-  {
-   "text": "Use the definition of β as inverse conjugate of direct-image exchange. Its counit law and the counit law for the adjunction-preserving comparison s!vΣ!≅j! identify the transposed left side on each etale test object with restriction to the compactification graph followed by the clopen projection P.",
-   "uses": [
-    "def-weil-pbc-etale-shriek-base-change-map",
-    "lem-weil-pbc-mate-pasting"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Tags 03S3 (definition-extension-zero), 03S5 (proposition-describe-jshriek), 03S6 (lemma-shriek-base-change), 0F4L (lemma-shriek-into-star-separated-etale); more-etale.tex Tags 0F50, 0F51 and 0F7B-0F7F; graph-adjunction normalization on unbounded complexes supplied by the agent"
-   }
-  },
-  {
-   "text": "On the clopen graph this projection, followed by j!→j_*, is identity; on its open complement it is zero. These two restrictions determine a sheaf section by the disjoint-cover sheaf axiom. Thus it is graph extension by zero, including when the graph is empty. The graph formula for lowerStarUnit identifies both transposes; injectivity finishes.",
-   "uses": [
-    "lem-weil-pbc-etale-sheaf-clopen-product"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Tags 03S3 (definition-extension-zero), 03S5 (proposition-describe-jshriek), 03S6 (lemma-shriek-base-change), 0F4L (lemma-shriek-into-star-separated-etale); more-etale.tex Tags 0F50, 0F51 and 0F7B-0F7F; graph-adjunction normalization on unbounded complexes supplied by the agent"
-   }
+   "elementary": false
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-etale-restriction-injectives",
-  "def-weil-pbc-adjunction-conjugate",
-  "def-weil-pbc-etale-shriek-base-change-map",
-  "lem-weil-pbc-mate-pasting",
-  "lem-weil-pbc-etale-sheaf-clopen-product"
+  "lem-asd-compact-support-graph-sheaf-normalization-transpose",
+  "def-weil-pbc-etale-shriek-to-star-map"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/etale-cohomology.tex",
-  "place": "Tags 03S6 and 0F4L; more-etale.tex Tags 0F7B-0F7F; current blueprint prop-asd-smooth-base-change, coherence (iii)",
-  "note": "Explicit graph construction and termwise descent of the parent normalization argument; the unit route is unchanged."
+  "place": "Tags 03S6 and 0F4L; SGA 4 XVII 6.2.11",
+  "note": "G5: explicit adjunction and pullback calculation, followed by the graph/complement sheaf extension characterization. Existing public statements and unit route are unchanged. Repair of return 322e42761b2: use Mathlib pullback projection equations directly, and calculate the transfer from the Mathlib left-adjoint-uniqueness unit law inside its consuming proof, without duplicate helper declarations."
  },
  "mathlib_searches": [
   {
@@ -127,7 +97,18 @@
   "by": "J4",
   "date": "2026-10-18"
  },
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
  "reviewed": {
   "date": "2026-10-18",
   "by": "L",
@@ -139,19 +120,13 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-19",
+  "date": "2026-10-24",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "F4",
+  "group": "G5",
   "result": "pass",
-  "landing": "20261019T192721-L-1859010",
-  "kind": "proof",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)",
-  "sorry_before": [
-   "AlgebraicGeometry.Etale.compactSupportGraphSheafComparison_normalization"
-  ],
-  "sorry_after": [
-   "AlgebraicGeometry.Etale.compactSupportGraphSheafComparison_normalization_transpose"
-  ]
+  "landing": "20261024T014842-L-2286031",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

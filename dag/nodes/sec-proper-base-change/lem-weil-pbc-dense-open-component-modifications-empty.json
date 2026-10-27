@@ -94,5 +94,47 @@
   "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  },
- "lean_audit": {}
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": [
+    "AlgebraicGeometry.exists_dense_open_isIso_component_modifications_of_zero"
+   ]
+  },
+  "slopmaster2": {
+   "state": "closed",
+   "decls": [
+    {
+     "name": "AlgebraicGeometry.exists_dense_open_isIso_component_modifications_of_zero",
+     "module": "WeilConjectures.AlgebraicGeometry.DenseOpenComponentModificationsEmpty",
+     "lines": [
+      18,
+      43
+     ],
+     "kind": "theorem",
+     "sorry": false
+    }
+   ],
+   "missing": [],
+   "open": []
+  }
+ },
+ "blueprint_update": {
+  "snapshot": "main-20261023-1620",
+  "commit": "7284bb09daf97437d544c51882b325f9c52cd345",
+  "changed": [
+   "statement",
+   "proof"
+  ],
+  "statement": "Let $X$ be a reduced scheme. Consider the empty family (indexed by the empty set) of schemes $C_i$ with morphisms $\\iota_i:C_i\\to X$ satisfying the component-cover hypotheses: each $C_i$ is integral, each $\\iota_i$ is a closed immersion whose image is an irreducible component of $X$, distinct indices have distinct images, and every irreducible component of $X$ is the image of some $\\iota_i$; and the empty family of morphisms $\\nu_i:Y_i\\to C_i$, each restricting to an isomorphism over a dense open subset of $C_i$. Then there is a dense open subset $U\\subseteq X$ over which the morphism $\\coprod_iY_i\\to X$ induced by the composites $\\iota_i\\circ\\nu_i$ (a morphism out of the empty scheme) restricts to an isomorphism.",
+  "proof": [
+   {
+    "text": "Let $x\\in X$. The closure of the irreducible set $\\{x\\}$ is contained in an irreducible component $Z$ of $X$. By the cover hypothesis $Z$ is the image of some $\\iota_i$, but the index set is empty, a contradiction. Hence $X$ has no points. Take $U=\\varnothing$: it is dense in the empty space $X$, and the restriction of $\\coprod_iY_i\\to X$ over $U$ is a morphism between empty schemes, hence an isomorphism. No gluing of the components is needed.",
+    "uses": [],
+    "elementary": null
+   }
+  ],
+  "note": "the current blueprint (main-20261023-1620, weil-conjectures-blueprint 7284bb09da) states or proves this differently; the node is proved in Lean: recorded 2026-10-23, not reopened"
+ }
 }

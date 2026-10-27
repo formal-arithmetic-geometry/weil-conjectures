@@ -1,0 +1,260 @@
+{
+ "id": "lem-pur-integral-orientation-reduction-injectivity",
+ "kind": "statement",
+ "title": "Finite reductions detect integral maps from the smooth orientation line",
+ "statement": "Fix $k=\\overline{\\mathbf F}_q$ of characteristic $p$, a prime $\\ell\\ne p$, and a finite extension $E/\\mathbf Q_\\ell$ in the fixed algebraic closure [def-pur-conventions]. Let $X,Y$ be separated finite-type $k$-schemes and $f:X\\to Y$ smooth separated of pure relative dimension $d\\geq0$ [def-weil-scheme-morphism-properties, def-sbc-smooth-morphisms]. On the small pro-etale sites put $R_W=\\widehat{\\mathcal O}_{E,W}=\\lim_n(\\mathcal O_E/\\ell^n)_W$, $\\mathbf1_W=R_W$, and $A_{n,W}=(\\mathcal O_E/\\ell^n)_W$ for $W=X,Y$ [def-weil-completed-integral-coefficients, sk-def-sp-coefficient-towers]. Use $D^b_{ctf}(W,\\mathcal O_E)$, the derived-complete constructible category with one common finite Tor interval for all reductions [def-weil-derived-complete-integral-detailed, def-weil-finite-tor-amplitude], its completed pullback and tensor [def-pur-integral-derived-operations], and its twists [def-coefficient-twists-detailed]. Write $r_W=\\operatorname{red}_W$ for simultaneous derived reduction to actual coefficient towers. Fix a compactification [def-weil-compactifications-refinements], put $P=Rf_{!,\\mathcal O_E}$ [def-weil-integral-rational-qbar-compact-support], and let $G=Rf^!_{\\mathcal O_E}$ have its specified adjunction $P\\dashv G$ and counit $\\epsilon$ [def-weil-exceptional-inverse-image]. Let $H=R\\lim f^!_\\bullet r_Y$ have the realized tower adjunction and reduction comparisons of [det-sp-integral-adjunction-bijection], and let $\\delta:H\\xrightarrow{\\sim}G$ be the unique counit-preserving comparison [det-sp-unique-right-adjoint]. Set $T=\\mathbf1_X(d)[2d]$.\n\nLet $a_\\bullet:(A_{n,X}(d)[2d])_n\\xrightarrow{\\sim}f^!_\\bullet r_Y\\mathbf1_Y$ be the diagonal tower orientation of [det-sp-tower-gamma]. Let\n$$\\beta_M:\\operatorname{Hom}(M,H\\mathbf1_Y)\\xrightarrow{\\sim}\\operatorname{Hom}_{D(\\operatorname{Tow}(X,\\mathcal O_E))}(r_XM,f^!_\\bullet r_Y\\mathbf1_Y)$$\nbe the natural Hom bijection of [det-sp-integral-adjunction-bijection], oriented as displayed, and $\\lambda=\\beta_{H\\mathbf1_Y}(1)$ its canonical reduction comparison. For $h:T\\to G\\mathbf1_Y$ define $\\rho_n(h)$ to be the ordinary derived reduction of $h$, identifying its target with $f^!_{A_n}A_{n,Y}$ via the reduction comparison for $H$ and $\\delta^{-1}$. Then\n$$\\beta_T(\\delta^{-1}h)=\\lambda\\circ r_X(\\delta^{-1}h),\\qquad e_n\\bigl(\\beta_T(\\delta^{-1}h)\\bigr)=\\rho_n(h),$$\nwhere $e_n$ is exact level evaluation [det-sp-coefficient-towers-abelian]. The function\n$$\\operatorname{Hom}(T,G\\mathbf1_Y)\\longrightarrow\\prod_{n\\geq1}\\operatorname{Hom}_{D(X_{\\mathrm{proet}},A_n)}(A_{n,X}(d)[2d],f^!_{A_n}A_{n,Y}),\\quad h\\longmapsto(\\rho_n(h))_n$$\nis injective. No isomorphism hypothesis is imposed on $h$.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sp-tower-geometric/sk-prop-sp-tower-geometric-gamma.proof.md",
+  "place": "Clause (1), rank-one tower uniqueness, specialized through the integral Hom bijection to maps from the shifted Tate line"
+ },
+ "stmt_deps": [
+  "def-pur-conventions",
+  "def-weil-scheme-morphism-properties",
+  "def-sbc-smooth-morphisms",
+  "def-weil-completed-integral-coefficients",
+  "sk-def-sp-coefficient-towers",
+  "def-weil-derived-complete-integral-detailed",
+  "def-weil-finite-tor-amplitude",
+  "def-pur-integral-derived-operations",
+  "def-coefficient-twists-detailed",
+  "def-weil-compactifications-refinements",
+  "def-weil-integral-rational-qbar-compact-support",
+  "def-weil-exceptional-inverse-image",
+  "det-sp-integral-adjunction-bijection",
+  "det-sp-unique-right-adjoint",
+  "det-sp-tower-gamma",
+  "det-sp-coefficient-towers-abelian"
+ ],
+ "proof": [
+  {
+   "text": "Use [lem-pur-integral-orientation-shifted-sheaf-models] for shifted degree-zero presentations r_X(T) ≅ L[2d] and G(r_Y(U)) ≅ W[2d]. Only existence of these models is used; no orientation for a tested map is assumed.",
+   "uses": [
+    "lem-pur-integral-orientation-shifted-sheaf-models"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Unfold beta, the fully faithful Hom equivalence and Iso.homCongr. Its value on v is r_X(v) followed by R.rightComparison. Its value on the identity is R.rightComparison, proving naturality and the formula involving targetComparison. Evaluation preserves composition, proving the rho identity.",
+   "uses": [
+    "det-sp-integral-adjunction-bijection",
+    "det-sp-coefficient-towers-abelian"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "For shifted single sheaf towers, the composite of the single embedding and common shift is fully faithful. Lift two maps uniquely to sheaf maps x,y. The natural single and shift comparison for each exact evaluation transports equality of their evaluated derived maps to equality of the shifted single maps of e_n(x) and e_n(y). Faithfulness gives e_n(x)=e_n(y). The strict-system equivalence is faithful and a strict morphism is determined by its components; hence x=y and the two derived maps coincide. This is the private Lean helper shifted_single_hom_ext.",
+   "uses": [
+    "det-sp-coefficient-towers-abelian",
+    "lem-weil-pbc-derived-single-fully-faithful",
+    "def-weil-triangulated-category",
+    "sk-def-sp-coefficient-towers"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Given equal rho families, cancel the finite target comparison isomorphisms using the evaluation identity. Conjugate beta(h delta-inverse) and beta(h-prime delta-inverse) by the shifted sheaf presentations. Their evaluations agree by functoriality, so the preceding helper proves their equality. Cancel the presentations, apply injectivity of beta, and cancel delta inverse to conclude h=h-prime. Neither input map is inverted.",
+   "uses": [
+    "det-sp-integral-adjunction-bijection"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-pur-integral-orientation-shifted-sheaf-models",
+  "det-sp-integral-adjunction-bijection",
+  "det-sp-coefficient-towers-abelian",
+  "lem-weil-pbc-derived-single-fully-faithful",
+  "def-weil-triangulated-category",
+  "sk-def-sp-coefficient-towers"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-tower-geometric/sk-prop-sp-tower-geometric-gamma.proof.md",
+  "place": "Clause (1); shifted sheaf presentations isolated, full single/shift/evaluation argument and beta/delta cancellations implemented in Lean by U6"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "tower.*purity|purity.*tower|rankOne.*reduction|orientation.*reduction",
+   "results": "none",
+   "date": "2026-10-22",
+   "verdict": "no match: generic algebra, derived-category or adjunction results do not identify integral smooth dualizing objects or their actual coefficient-tower maps"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Maps from a shifted integral Tate line to a smooth dualizing complex are equal if their finite coefficient reductions agree",
+   "results": "CochainComplex.HomComplex.Cochain.leftUnshift.congr_simp; CochainComplex.HomComplex.Cochain.leftShift.congr_simp; IsBaseChange.toDual.congr_simp; CochainComplex.shiftEval.congr_simp; CochainComplex.HomComplex.Cochain.rightUnshift.congr_simp; CochainComplex.instIsCompatibleWithShiftHomologicalComplexIntUpQuasiIso; CochainComplex.HomComplex.Cochain.rightShift.congr_simp; CochainComplex.quasiIso_shift_iff",
+   "date": "2026-10-22",
+   "verdict": "no match: generic algebra, derived-category or adjunction results do not identify integral smooth dualizing objects or their actual coefficient-tower maps"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.DerivedCategory.singleFunctor, CategoryTheory.Functor.Faithful",
+   "results": "none; loogle: unknown identifier 'CategoryTheory.DerivedCategory.singleFunctor'",
+   "date": "2026-10-22",
+   "verdict": "no match: invalid identifier in first pattern; corrected to DerivedCategory.singleFunctor in the second search"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For integral smooth exceptional inverse image, finite reductions jointly detect maps from the shifted Tate coefficient line to the dualizing object using the tower adjunction",
+   "results": "BDeRham; BDeRhamPlus; AlgebraicGeometry.exists_appTop_map_eq_zero_of_isLimit; AlgebraicGeometry.Scheme.exists_hom_comp_eq_comp_of_locallyOfFiniteType; AlgebraicGeometry.Scheme.exists_hom_hom_comp_eq_comp_of_locallyOfFiniteType; AlgebraicGeometry.exists_appTop_map_eq_zero_of_isAffine_of_isLimit; AlgebraicGeometry.AffineSpace.homOfVector_toSpecMvPoly; Algebra.smoothLocus_eq_compl_support_inter",
+   "date": "2026-10-22",
+   "verdict": "no match: generic algebra, derived-category or adjunction results do not identify integral smooth dualizing objects or their actual coefficient-tower maps"
+  },
+  {
+   "tool": "grep",
+   "query": "singleFunctor.*[Ff]aithful|[Ff]aithful.*singleFunctor",
+   "results": "Mathlib/Algebra/Homology/HomotopyCategory/SingleFunctors.lean; Mathlib/Algebra/Homology/DerivedCategory/FullyFaithful.lean; Mathlib/Algebra/Homology/DerivedCategory/FullyFaithful.lean; Mathlib/Algebra/Homology/DerivedCategory/Ext/Basic.lean",
+   "date": "2026-10-22",
+   "verdict": "no match for this geometric injectivity statement: full faithfulness of the single functor is already the existing leaf lem-weil-pbc-derived-single-fully-faithful; it does not supply the integral/tower comparison",
+   "subdirectory": "Algebra/Homology"
+  },
+  {
+   "tool": "loogle",
+   "query": "DerivedCategory.singleFunctor",
+   "results": "DerivedCategory.singleFunctor; DerivedCategory.instAdditiveSingleFunctor; DerivedCategory.singleFunctorIsoCompQ; DerivedCategory.singleFunctorIsoCompQh; DerivedCategory.Q_obj_single_obj; DerivedCategory.singleFunctorIsoCompQ_hom_app; DerivedCategory.singleFunctorIsoCompQ_inv_app; DerivedCategory.Q_map_single_map",
+   "date": "2026-10-22",
+   "verdict": "no match for this geometric injectivity statement: full faithfulness of the single functor is already the existing leaf lem-weil-pbc-derived-single-fully-faithful; it does not supply the integral/tower comparison"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Two maps from an integral coefficient line shifted by twice the smooth relative dimension to the exceptional inverse image of the unit are determined by their reductions modulo powers of ell",
+   "results": "PreTilt.untiltAux_smodEq_untiltFun; PreTilt.exists_smodEq_untiltAux; StandardEtalePair.existsUnique_hasMap_of_hasMap_quotient_of_sq_eq_bot; PreTilt.untiltFun; PreTilt.mk_comp_untilt_eq_coeff_zero; AlgebraicGeometry.isSmoothOfRelativeDimension_iff; PowerSeries.IsWeierstrassDivisorAt.mk_mod'_eq_self; PowerSeries.IsWeierstrassDivisorAt.mod'_mk_eq_mod",
+   "date": "2026-10-22",
+   "verdict": "no match: generic algebra, derived-category or adjunction results do not identify integral smooth dualizing objects or their actual coefficient-tower maps"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Maps from a shifted integral Tate line to a smooth dualizing complex are equal if their finite coefficient reductions agree",
+   "results": "HomologicalComplex.to_single_hom_ext_iff; HomologicalComplex.to_single_hom_ext; CochainComplex.HomComplex.Cochain.EqUpTo; CochainComplex.mappingCone.ext_cochain_from_iff; CochainComplex.mappingCone.ext_to_iff; CochainComplex.HomComplex.Triplet.mk.inj; CochainComplex.mappingCone.ext_cochain_to_iff; CochainComplex.mappingCone.ext_to",
+   "date": "2026-10-22",
+   "verdict": "no match: degree-zero derived full faithfulness is the existing Mathlib leaf lem-weil-pbc-derived-single-fully-faithful; none of these hits supplies the stated geometric integral/tower comparison"
+  },
+  {
+   "tool": "grep",
+   "query": "tower.*purity|purity.*tower|orientation.*reduction|reduction.*orientation",
+   "results": "none",
+   "date": "2026-10-22",
+   "verdict": "no match: degree-zero derived full faithfulness is the existing Mathlib leaf lem-weil-pbc-derived-single-fully-faithful; none of these hits supplies the stated geometric integral/tower comparison"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Integral smooth orientation maps are detected by all finite coefficient reductions",
+   "results": "ae_eq_zero_of_integral_smooth_smul_eq_zero; Orientation.map_neg; Orientation.map_eq_iff_det_pos; Orientation.map_apply; Module.Basis.orientation_map; Orientation.map_symm; Module.Basis.map_orientation_eq_det_inv_smul; Orientation.map",
+   "date": "2026-10-22",
+   "verdict": "no match: degree-zero derived full faithfulness is the existing Mathlib leaf lem-weil-pbc-derived-single-fully-faithful; none of these hits supplies the stated geometric integral/tower comparison"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Morphisms between degree zero objects in a derived category are morphisms in the abelian category and component evaluations detect equality of tower morphisms",
+   "results": "CategoryTheory.Abelian.Ext.ext_iff; CategoryTheory.Abelian.Ext.mk₀_hom; CategoryTheory.Abelian.Ext.hom; CategoryTheory.Abelian.Ext.hom'; CategoryTheory.Abelian.Ext.zero_hom; CategoryTheory.Abelian.Ext.ext; CategoryTheory.Abelian.Ext.homEquiv₀; CategoryTheory.Abelian.Ext.homEquiv",
+   "date": "2026-10-22",
+   "verdict": "no match: degree-zero derived full faithfulness is the existing Mathlib leaf lem-weil-pbc-derived-single-fully-faithful; none of these hits supplies the stated geometric integral/tower comparison"
+  },
+  {
+   "tool": "loogle",
+   "query": "DerivedCategory.singleFunctor",
+   "results": "DerivedCategory.singleFunctor; DerivedCategory.instAdditiveSingleFunctor; DerivedCategory.singleFunctorIsoCompQ; DerivedCategory.singleFunctorIsoCompQh; DerivedCategory.Q_obj_single_obj; DerivedCategory.singleFunctorIsoCompQ_hom_app; DerivedCategory.singleFunctorIsoCompQ_inv_app; DerivedCategory.Q_map_single_map",
+   "date": "2026-10-22",
+   "verdict": "no match: degree-zero derived full faithfulness is the existing Mathlib leaf lem-weil-pbc-derived-single-fully-faithful; none of these hits supplies the stated geometric integral/tower comparison"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-pur-tower-trace-purity-comparison",
+  "date": "2026-10-22",
+  "group": "Q144"
+ },
+ "chapter": "sec-poincare-duality",
+ "unit": "sk-lem-finite",
+ "blueprint": {
+  "from": {
+   "node": "prop-weil-operations",
+   "place": "Proof sentence 3, geometric orientation and trace are equivariant: comparison of the tower construction with the existing rational purity family, before rational Weil equivariance is deduced; Clause (1), rank-one tower uniqueness, specialized through the integral Hom bijection to maps from the shifted Tate line",
+   "via": [
+    "lem-pur-tower-trace-purity-comparison",
+    "lem-pur-rational-weil-naturality-mate"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-pur-integral-orientation-reduction-injectivity",
+  "worker": "stage1",
+  "summary": "Q33: retained the complete statement; proved the naturality and evaluation identities and injectivity by conjugation with the entire-tower source comparison and diagonal orientation, inverse shift, full faithfulness of degree-zero complexes in the tower and each level category, and componentwise equality of strict tower maps. All supporting nodes already exist; no new node is needed.",
+  "blueprint": "Realizes prop-weil-operations proof sentence 3 via its integral tower comparison descendants; the local argument is the degree-zero rank-one tower uniqueness in det-sp-tower-gamma proof (1).",
+  "tool_uses": [
+   {
+    "node": "lem-sp-twisted-pullback-reduction-tower",
+    "why": "Generic integral pullback/twist reduction comparison, used on the unit to identify the entire source tower; no node in the finiteness unit supplies this comparison."
+   },
+   {
+    "node": "det-sp-tower-gamma",
+    "why": "The diagonal actual-tower orientation already fixed in the statement, used to conjugate maps to endomorphisms of the shifted Tate tower."
+   },
+   {
+    "node": "det-sp-integral-adjunction-bijection",
+    "why": "The natural integral-to-tower Hom bijection already assumed in the statement; only its naturality and injectivity are used."
+   },
+   {
+    "node": "det-sp-coefficient-towers-abelian",
+    "why": "Generic exact level evaluation and abelian tower category structure already assumed in the statement."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sp-twisted-pullback-reduction-tower",
+  "det-sp-tower-gamma",
+  "det-sp-integral-adjunction-bijection",
+  "det-sp-coefficient-towers-abelian"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q33-71c6a1b5d",
+  "group": "Q33",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q33-71c6a1b5d (reviewer sub-agent of L); spot-checked: The statement, stmt_deps, source and blueprint are byte-identical to the base (Q144 cf4233e6 copy); only the proof fields and split_report changed. There are no new nodes and no repair note applies. Source main-20261015 sk-prop-sp-tower-geometric-gamma.proof (1) says 'a map of rank-one tower sheaves is determined by its levels', and the split realizes that sentence. The statement is true, since Hom(T,G1) is End_Tow(L) inside the product of the level End(A_n(d)), and the cases X empty, d=0, h=0 or non-invertible, and X disconnected all hold. Step 1: lem-sp-twisted-pullback-reduction-tower with K=1, m=d, s=2d gives the entire-tower q in D(Tow), and det-sp-tower-gamma (1) gives a_• with the finite levels. Step 2: contravariant naturality of beta in M gives beta_T(u)=lambda∘r_X u, with the direction checked, and lambda is named in the statement as the reduction comparison. Step 3: the types of v=a^{-1}∘b∘q^{-1} are correct and the shift is an automorphism. Step 4: Tow is abelian (coefficient-towers-abelian (1)), the single functor is fully faithful in Tow and in Mod(A_n), and e_n∘S=S∘(-)_n, so tower morphisms are equal when their components are (sk-def-sp-coefficient-towers). Step 5: cancelling the isomorphisms and injectivity of beta give h=h'. No inverse of h is used. The proof_deps equal the union of step uses, and there is no cycle. No SGA source. The four declared tool_uses are generic integral-adjunction and tower inputs, three of them already stmt_deps; I accept them. No changes."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.IntegralOrientationReductionInjectivity",
+  "declaration": "AlgebraicGeometry.ProEtale.SpIntegralOrientation.reduction_injectivity",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.SpIntegralOrientation.realizedRight",
+   "AlgebraicGeometry.ProEtale.SpIntegralOrientation.beta",
+   "AlgebraicGeometry.ProEtale.SpIntegralOrientation.delta",
+   "AlgebraicGeometry.ProEtale.SpIntegralOrientation.targetComparison",
+   "AlgebraicGeometry.ProEtale.SpIntegralOrientation.rho",
+   "AlgebraicGeometry.ProEtale.SpIntegralOrientation.reduction_injectivity"
+  ],
+  "file": "lean/Sheaf/Paper/IntegralOrientationReductionInjectivity.lean",
+  "statement": "theorem reduction_injectivity (D : FiniteFieldDatum.{u}) (_hl : l ≠ D.p) (Ω : Type u) [Field Ω] [Algebra (Padic l) Ω] [IsAlgClosure (Padic l) Ω] (_iE : E →ₐ[Padic l] Ω) [X.Over (Spec (.of D.k))] [Y.Over (Spec (.of D.k))] [IsSeparated (X ↘ Spec (.of D.k))] [IsSeparated (Y ↘ Spec (.of D.k))] [LocallyOfFiniteType (X ↘ Spec (.of D.k))] [QuasiCompact (X ↘ Spec (.of D.k))] [LocallyOfFiniteType (Y ↘ Spec (.of D.k))] [QuasiCompact (Y ↘ Spec (.of D.k))] [(j ≫ p).IsOver (Spec (.of D.k))] [SmoothOfRelativeDimension d (j ≫ p)] (J : sfIntegralConstructibleCategory l E Y ⥤ sfIntegralConstructibleCategory l E X) (adjJ : SpIntegralAdjunction.support l E (SpTowerGamma.factorization j p) R.support_closed ⊣ J) (T : sfIntegralConstructibleCategory l E X) (U : sfIntegralConstructibleCategory l E Y) (_hT : T.obj ≅ ((DerivedCategory.singleFunctor _ 0).obj (integralTwistLine l E X (d : ℤ)))⟦2 * (d : ℤ)⟧) (_hU : U.obj ≅ (DerivedCategory.singleFunctor _ 0).obj (SheafOfModules.unit (completedIntegralCoefficientSheafUnrestricted l E Y))) : (∀ h : T ⟶ J.obj U, beta l E b o q j p d w RX NX RY NY hF G a lv R T U (h ≫ (delta l E b o q j p d w RX NX RY NY hF G a lv R J adjJ).inv.app U) = (SpIntegralAdjunction.reduce l E X (q.abelian X) RX R.reductionX).map (h ≫ (delta l E b o q j p d w RX NX RY NY hF G a lv R J adjJ).inv.app U) ≫ targetComparison l E b o q j p d w RX NX RY NY hF G a lv R U) ∧ (∀ (h : T ⟶ J.obj U) (n : ℕ), (spDerivedCoefficientEvaluation l E X (q.abelian X) n).map (beta l E b o q j p d w RX NX RY NY hF G a lv R T U (h ≫ (delta l E b o q j p d w RX NX RY NY hF G a lv R J adjJ).inv.app U)).hom ≫ ((lv.comparison n).hom.app ((SpIntegralAdjunction.reduce l E Y (q.abelian Y) RY R.reductionY).obj U)).hom = rho l E b o q j p d w RX NX RY NY hF G a lv R J adjJ T U h n) ∧ Function.Injective (fun h : T ⟶ J.obj U ↦ fun n : ℕ ↦ rho l E b o q j p d w RX NX RY NY hF G a lv R J adjJ T U h n)",
+  "branch": "newtargets-dag",
+  "by": "NN",
+  "date": "2026-10-25",
+  "existing": false,
+  "note": "The published realized adjunction supplies H, its fully faithful simultaneous reduction and the normalized whole-tower comparison. beta is its Hom equivalence; delta is Mathlib rightAdjointUniq; rho is ordinary exact level evaluation with the prescribed target comparisons. T and U are full-subcategory representatives explicitly identified with the shifted completed Tate line and the completed coefficient unit. The theorem states both displayed identities and injectivity, without an IsIso condition on h."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-6c075ea23",
+  "group": "NN",
+  "result": "fix",
+  "note": "Lean statement and record correct. Setting matches the landed integral_adjunction_bijection; the extra QuasiCompact/HasCompactification instances are implied Props. beta = inverse of the homChain tail in the displayed direction; delta = rightAdjointUniq (counit-preserving); rho = reduction of h≫δ⁻¹ with the pinned rightComparison and lv.comparison; universal over all J ⊣ support covers G. T/U carry explicit isos to single(twistLine d)[2d] and the completed unit. All three conjuncts present, no IsIso on h; true incl. empty X/Y, d=0, h=0, level n = ℓ^(n+1). No hollow defs, docstrings and 5 proof steps present, lean.statement verbatim, one sorry, only the lean record changed. Only fault H11: the second reading was a self-check → fixes/lem-pur-integral-orientation-reduction-injectivity.report.md = worker report verbatim + clause-by-clause second reading. Advisory: reduce/right/support owner def-sp-integral-reconstruction-comparison-data reached via cited det-sp-integral-adjunction-bijection; some dependency-anchor imports unused. No Lean changed, nothing compiled."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-e25d3",
+  "group": "U6",
+  "result": "pass",
+  "landing": "20261025T203347-L-2808092",
+  "kind": "interface",
+  "note": "independent cc review: item proof + new shifted_sheaf_models lemma/node against tower_gamma Purity.orientation (in R), SpReductionTower derived reduction, unit sk-lem-finite (realized empty), clone node diff (proof/proof_deps/proof_origin only), scratch #print axioms"
+ }
+}

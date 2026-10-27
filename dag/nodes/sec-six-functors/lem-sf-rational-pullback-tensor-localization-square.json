@@ -1,0 +1,132 @@
+{
+ "id": "lem-sf-rational-pullback-tensor-localization-square",
+ "kind": "statement",
+ "title": "Canonical rational tensor comparison commutes with normalized pullback",
+ "statement": "theorem rationalProjectionPullTensorSquare\n    {D : FiniteFieldDatum.{u}} {C : D.CoefficientDatum}\n    {E : Type u} [Field E] [Algebra (Padic C.l) E]\n    [FiniteDimensional (Padic C.l) E] (H : SixFunctorHigherOperations D C E)\n    {X Y : SixFunctorSpace D} (f : X ⟶ Y)\n    [∀ x : X.obj.left, Invertible (C.l : X.obj.left.residueField x)]\n    [∀ y : Y.obj.left, Invertible (C.l : Y.obj.left.residueField y)]\n    (mu : (Functor.postcompose₂.obj (H.integral.pull f)).obj (H.integralTensor Y) ≅\n      (((Functor.whiskeringLeft₂ _).obj (H.integral.pull f)).obj\n        (H.integral.pull f)).obj (H.integralTensor X))\n    (mu' : (Functor.postcompose₂.obj (H.rational.pull f)).obj (H.rationalTensor Y) ≅\n      (((Functor.whiskeringLeft₂ _).obj (H.rational.pull f)).obj\n        (H.rational.pull f)).obj (H.rationalTensor X))\n    (M N : sfIntegralConstructibleCategory C.l E Y.obj.left)\n    (hi : HEq ((mu.hom.app M).app N)\n      (canonicalIntegralPullbackTensor C.l E f.hom.left M N).hom)\n    (hr : HEq ((mu'.hom.app\n        ((sfRationalConstructibleLocalization C.l E Y.obj.left).obj M)).app\n          ((sfRationalConstructibleLocalization C.l E Y.obj.left).obj N))\n      (canonicalRationalPullbackTensor C.l E f.hom.left\n        ((sfRationalConstructibleLocalization C.l E Y.obj.left).obj M)\n        ((sfRationalConstructibleLocalization C.l E Y.obj.left).obj N)).hom) :\n    (sfRationalConstructibleLocalization C.l E X.obj.left).map\n        ((mu.hom.app M).app N) ≫\n      (rationalProjectionTensorComparison H X).hom.app\n        ((H.integral.pull f).obj M, (H.integral.pull f).obj N) ≫\n      (Functor.uncurry.obj (H.rationalTensor X)).map\n        (Prod.mkHom ((H.rationalization.directAdjunction f).left.hom.app M)\n          ((H.rationalization.directAdjunction f).left.hom.app N)) =\n    (H.rationalization.directAdjunction f).left.hom.app\n        (((H.integralTensor Y).obj M).obj N) ≫\n      (H.rational.pull f).map ((rationalProjectionTensorComparison H Y).hom.app (M, N)) ≫\n      ((mu'.hom.app\n        ((sfRationalConstructibleLocalization C.l E Y.obj.left).obj M)).app\n          ((sfRationalConstructibleLocalization C.l E Y.obj.left).obj N))",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sf-pf-field/thm-sf-pf-field.proof.md",
+  "place": "Compatibility: tensor and pullback under rationalization, before taking projection mates"
+ },
+ "stmt_deps": [
+  "def-weil-derived-pullback-tensor-hom",
+  "def-weil-rationalization-karoubi",
+  "def-sf-operation-stages",
+  "def-pur-completed-pullback-tensor-comparison"
+ ],
+ "proof": [
+  {
+   "text": "On every six-functor space the coefficient prime is a unit in every residue field: the residue map receives the base field of characteristic p, and l differs from p. The object formula and pure-tensor morphism formula for rationalDerivedTensor_existsUnique then give equality of integral tensor followed by localization and the two localizations followed by rational tensor, by functor extensionality. The shared tensor comparison is eqToIso of this equality.",
+   "uses": [
+    "def-weil-derived-pullback-tensor-hom",
+    "def-weil-rationalization-karoubi",
+    "def-sf-operation-stages"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The integral-model object and morphism formulas for rationalDerivedPullback_existsUnique similarly give the equality of pullback followed by localization and localization followed by rational pullback. RationalModelNormalization identifies the prescribed pullback comparison with eqToIso of this equality.",
+   "uses": [
+    "def-weil-derived-pullback-tensor-hom",
+    "def-sf-operation-stages"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Map the given integral tensor-pullback normalization through localization. The defining formula for canonicalRationalPullbackTensor on localized inputs identifies this mapped hom with the rational canonical hom, and the given rational normalization identifies the supplied rational hom with it. Transport this heterogeneous equality through the proved pullback and tensor functor equalities. The resulting ordinary equality is precisely the tensor/pullback square. No faithfulness, nonzero objects, nonempty spaces or properness is required.",
+   "uses": [
+    "def-pur-completed-pullback-tensor-comparison",
+    "def-sf-operation-stages"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-derived-pullback-tensor-hom",
+  "def-weil-rationalization-karoubi",
+  "def-sf-operation-stages",
+  "def-pur-completed-pullback-tensor-comparison"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sf-pf-field/thm-sf-pf-field.proof.md",
+  "place": "Compatibility: tensor and pullback under rationalization, before taking projection mates"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Scalar localization tensor comparison commutes with pullback",
+   "results": "Generic tensor and monoidal unit calculations only.",
+   "date": "2026-10-27",
+   "verdict": "Use the existing prescribed integral-model formulas."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.homEquiv_unit",
+   "results": "Generic adjunction transpose formula, no prescribed rational tensor comparison.",
+   "date": "2026-10-27",
+   "verdict": "No theorem for these prescribed coefficient models."
+  },
+  {
+   "tool": "grep",
+   "query": "rationalProjectionTensorComparison|canonicalRationalPullbackTensor_existsUnique",
+   "results": "The item already proved the proper case by this normalization; no general shared proper/open square.",
+   "date": "2026-10-27",
+   "verdict": "Factor the proved normalization calculation, without adding any hole."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.RationalProjectionTensorCompatibility",
+  "date": "2026-10-27",
+  "group": "E2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "fix-prop-projection-formula",
+   "place": "Compatibility: tensor and pullback under rationalization, before taking projection mates",
+   "via": [
+    "lem-sf-rational-projection-tensor-compatibility"
+   ]
+  }
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-rem-sf-pf-done",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.RationalProjectionTensorModels",
+  "file": "lean/Sheaf/Paper/RationalProjectionTensorModels.lean",
+  "declaration": "WeilConjectures.rationalProjectionPullTensorSquare",
+  "declarations": [
+   "WeilConjectures.rationalProjectionTensorFunctorEq",
+   "WeilConjectures.rationalProjectionTensorComparison",
+   "WeilConjectures.rationalProjectionPullTensorSquare"
+  ],
+  "statement": "theorem rationalProjectionPullTensorSquare\n    {D : FiniteFieldDatum.{u}} {C : D.CoefficientDatum}\n    {E : Type u} [Field E] [Algebra (Padic C.l) E]\n    [FiniteDimensional (Padic C.l) E] (H : SixFunctorHigherOperations D C E)\n    {X Y : SixFunctorSpace D} (f : X ⟶ Y)\n    [∀ x : X.obj.left, Invertible (C.l : X.obj.left.residueField x)]\n    [∀ y : Y.obj.left, Invertible (C.l : Y.obj.left.residueField y)]\n    (mu : (Functor.postcompose₂.obj (H.integral.pull f)).obj (H.integralTensor Y) ≅\n      (((Functor.whiskeringLeft₂ _).obj (H.integral.pull f)).obj\n        (H.integral.pull f)).obj (H.integralTensor X))\n    (mu' : (Functor.postcompose₂.obj (H.rational.pull f)).obj (H.rationalTensor Y) ≅\n      (((Functor.whiskeringLeft₂ _).obj (H.rational.pull f)).obj\n        (H.rational.pull f)).obj (H.rationalTensor X))\n    (M N : sfIntegralConstructibleCategory C.l E Y.obj.left)\n    (hi : HEq ((mu.hom.app M).app N)\n      (canonicalIntegralPullbackTensor C.l E f.hom.left M N).hom)\n    (hr : HEq ((mu'.hom.app\n        ((sfRationalConstructibleLocalization C.l E Y.obj.left).obj M)).app\n          ((sfRationalConstructibleLocalization C.l E Y.obj.left).obj N))\n      (canonicalRationalPullbackTensor C.l E f.hom.left\n        ((sfRationalConstructibleLocalization C.l E Y.obj.left).obj M)\n        ((sfRationalConstructibleLocalization C.l E Y.obj.left).obj N)).hom) :\n    (sfRationalConstructibleLocalization C.l E X.obj.left).map\n        ((mu.hom.app M).app N) ≫\n      (rationalProjectionTensorComparison H X).hom.app\n        ((H.integral.pull f).obj M, (H.integral.pull f).obj N) ≫\n      (Functor.uncurry.obj (H.rationalTensor X)).map\n        (Prod.mkHom ((H.rationalization.directAdjunction f).left.hom.app M)\n          ((H.rationalization.directAdjunction f).left.hom.app N)) =\n    (H.rationalization.directAdjunction f).left.hom.app\n        (((H.integralTensor Y).obj M).obj N) ≫\n      (H.rational.pull f).map ((rationalProjectionTensorComparison H Y).hom.app (M, N)) ≫\n      ((mu'.hom.app\n        ((sfRationalConstructibleLocalization C.l E Y.obj.left).obj M)).app\n          ((sfRationalConstructibleLocalization C.l E Y.obj.left).obj N))",
+  "branch": "sheaf-dag",
+  "by": "E2",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-41636",
+  "group": "E2",
+  "result": "pass",
+  "landing": "20261027T050552-L-238639",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-41636",
+  "group": "E2",
+  "result": "pass",
+  "landing": "20261027T050552-L-238639",
+  "kind": "interface",
+  "note": "independent cc review: delivered item + new RationalProjectionTensorModels vs clone (public signatures identical, moved decls verbatim) and nodes vs Lean; 2 delivered modules + 6 direct importers compiled together via lcompile --all, exit 0"
+ }
+}

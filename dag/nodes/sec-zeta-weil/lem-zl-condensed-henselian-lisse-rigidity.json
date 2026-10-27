@@ -25,9 +25,9 @@
  ],
  "proof": [
   {
-   "text": "Apply the henselian-pair definition [def-weil-pbc-henselian-terminology] to the finite $A$-algebra $A$ itself. It gives a bijection $\\operatorname{Idem}(A)\\to\\operatorname{Idem}(A/I)$. Under [lem-weil-pbc-spec-clopen-idempotent], the clopen corresponding to $e$ is $D(e)$, and $i^{-1}D(e)=D(\\overline e)$. Thus inverse image is a bijection between the clopens of $T$ and those of $Z$.",
+   "text": "Apply Algebra.existsUnique_isIdempotentElem_of_henselianRing from [lem-weil-pbc-henselian-pair-integral-idempotent-lifting] to the integral A-algebra A. Rewrite I.map (algebraMap A A) = I. The equivalences PrimeSpectrum.isIdempotentElemEquivClopens from [lem-weil-pbc-spec-clopen-idempotent] identify inverse image of D(e) with D(q(e)). Unique lifting gives injectivity and existence gives surjectivity of clopen inverse image.",
    "uses": [
-    "def-weil-pbc-henselian-terminology",
+    "lem-weil-pbc-henselian-pair-integral-idempotent-lifting",
     "lem-weil-pbc-spec-clopen-idempotent"
    ],
    "elementary": true,
@@ -37,11 +37,10 @@
    }
   },
   {
-   "text": "Put $P=\\pi_0(T)$, $Q=\\pi_0(Z)$ and $h=\\pi_0(i):Q\\to P$. By [sk-def-pe-wlocal] the underlying spaces of these affine schemes are spectral; [lem-pe-spectral-components-profinite] makes $P,Q$ compact Hausdorff. Every clopen of a space is a union of components, and hence descends to a clopen of its component quotient. Therefore Step 1 says that $h^{-1}$ is a bijection on clopens. The formula of [lem-weil-pbc-quasicompact-components-clopen-intersection], applied to $T$ and $Z$, separates distinct components by clopens. If $q_1\\ne q_2$ in $Q$, choose a separating clopen in $Q$ and lift it along $h^{-1}$; this separates $h(q_1),h(q_2)$, proving injectivity. The image $K=h(Q)$ is compact, hence closed in $P$. If $p\\notin K$, for each $k\\in K$ choose a clopen containing $p$ and excluding $k$. Compactness of $K$ gives finitely many whose intersection $V$ misses $K$. Then $h^{-1}V=\\varnothing=h^{-1}\\varnothing$, contradicting injectivity on clopens since $p\\in V$. So $h$ is surjective. A continuous bijection from compact to Hausdorff is a homeomorphism: it sends closed sets to compact, thus closed, sets.",
+   "text": "The affine schemes $T,Z$ have spectral underlying spaces by [sk-def-pe-wlocal]. Step 1 and [lem-sfb-spectral-clopen-component-homeomorphism], applied to $i$, give the homeomorphism $h=\\pi_0(i):Q=\\pi_0(Z)\\xrightarrow{\\sim}P=\\pi_0(T)$.",
    "uses": [
     "sk-def-pe-wlocal",
-    "lem-pe-spectral-components-profinite",
-    "lem-weil-pbc-quasicompact-components-clopen-intersection"
+    "lem-sfb-spectral-clopen-component-homeomorphism"
    ],
    "elementary": false,
    "source": {
@@ -62,9 +61,10 @@
    }
   },
   {
-   "text": "Assume these equivalent conditions. Apply [lem-zl-condensed-wcontractible-lisse-evaluation] to the two w-contractible affine schemes $T$ and $Z$. The coefficient-compatible component maps give equivalences $\\pi_T^*:D_{\\mathrm{lis}}(P,\\Lambda)\\simeq D_{\\mathrm{lis}}(T,\\Lambda)$ and $\\pi_Z^*:D_{\\mathrm{lis}}(Q,\\Lambda)\\simeq D_{\\mathrm{lis}}(Z,\\Lambda)$. Also [lem-zl-condensed-lisse-proetale-locality], for the scheme morphism $i$, gives the exact symmetric monoidal functor $i^*$, its restriction to dualizable objects, and its canonical coefficient identification.",
+   "text": "Assume w-contractibility of A and A/I. Transport it to the global section rings of their spectra along Scheme.ΓSpecIso. Take the coherent component System from [lem-zl-component-derived-pullback-square]. Apply [lem-zl-condensed-component-pullback-compatibility] with each Corner's own continuity, braided and exact instances, obtaining a component lisse equivalence with coefficient isomorphism alpha. Compare alpha with that Corner's coefficient isomorphism c: restriction of scalars along the ring automorphism c^{-1} followed by alpha is an exact monoidal equivalence. Mod.comapCongr and Mod.comapComp identify the Corner module functor with componentModules(alpha) followed by that scalar equivalence. Termwise derived comparison and restriction to the full subcategories of dualizable objects therefore give lisse equivalences for the two actual Corners. The generic monoidal-equivalence restriction is proved by transporting duals in both directions. [lem-zl-condensed-lisse-proetale-locality] supplies the prescribed exact symmetric monoidal scheme pullback.",
    "uses": [
-    "lem-zl-condensed-wcontractible-lisse-evaluation",
+    "lem-zl-component-derived-pullback-square",
+    "lem-zl-condensed-component-pullback-compatibility",
     "lem-zl-condensed-lisse-proetale-locality"
    ],
    "elementary": false,
@@ -74,20 +74,20 @@
    }
   },
   {
-   "text": "The square of component maps commutes with $i$ and $h$. Here this includes the maps of sites, not only the point maps: the component-site construction in [lem-zl-condensed-wcontractible-lisse-evaluation] starts with finite clopen subdivisions. A clopen $U\\subseteq P$ gives the open-and-closed part $T_U\\subseteq T$; pulling back gives $Z\\times_TT_U=Z_{h^{-1}U}$. Thus the two composite constructions agree on every finite subdivision and on their inverse-limit construction of a profinite set over $P$. Functoriality of inverse image gives $i^*\\pi_T^*\\cong\\pi_Z^*h^*$, compatibly with coefficients, since each coefficient ring is pulled back from the same condensed ring $\\Lambda$.",
+   "text": "Use Square.theta from [lem-zl-component-derived-pullback-square]: the actual Corner derived pullback followed by the scheme pullback is naturally isomorphic to the actual slice derived pullback followed by the other Corner. Lift this natural isomorphism through the fully faithful inclusions of dualizable objects, using the preservation statements in the System. No new comparison map is chosen.",
    "uses": [
-    "lem-zl-condensed-wcontractible-lisse-evaluation"
+    "lem-zl-component-derived-pullback-square"
    ],
-   "elementary": true,
+   "elementary": false,
    "source": {
     "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
     "place": "Corollary 4.4(2), final sentence, with the construction (4.1) preceding Proposition 4.3"
    }
   },
   {
-   "text": "Since $h$ is a homeomorphism, relabelling profinite sets over $P$ by $h$ gives an inverse to $h^*$, also on the dualizable subcategories. By Steps 4 and 5, $i^*$ is conjugate by $\\pi_T^*,\\pi_Z^*$ to this equivalence. Hence $i^*$ is an equivalence and in particular gives bijections on all morphism sets between dualizable objects. Finally [lem-zl-condensed-lisse-proetale-locality] identifies $i^*(\\Lambda_T\\otimes^L_{\\underline R}\\underline C)$ with $\\Lambda_Z\\otimes^L_{\\underline R}\\underline C$ for every constant discrete scalar complex $C\\in D(R)$, $R=\\Gamma(*,\\Lambda)$; this is the required canonical scalar-extension compatibility.",
+   "text": "The homeomorphism on components makes affineComponentMap(i) an isomorphism in Profinite. Over.pullback along it and its inverse compose to identity by Over.pullbackComp and Over.pullbackId. Applying continuous sheaf pushforward gives an equivalence of slice direct images; the slice adjunction gives an equivalence of inverse images. The induced functor on internal modules is an equivalence: its adjunction unit and counit are isomorphisms on underlying sheaves, and the forgetful functor reflects isomorphisms. Coefficient restriction and termwise derivation preserve this equivalence. The System's monoidal structure restricts it to dualizable objects. In the restricted square, both Corner functors and the slice functor are equivalences; transport across theta and cancel the source Corner to prove the actual restricted scheme pullback is an equivalence. Its inclusion comparison is reflexive, since the restricted functor is constructed by ObjectProperty.lift. The already constructed discreteScalarExtensionPullbackIso records the canonical scalar compatibility.",
    "uses": [
-    "lem-zl-condensed-lisse-proetale-locality"
+    "lem-zl-component-derived-pullback-square"
    ],
    "elementary": true,
    "source": {
@@ -97,19 +97,19 @@
   }
  ],
  "proof_deps": [
-  "def-weil-pbc-henselian-terminology",
+  "lem-weil-pbc-henselian-pair-integral-idempotent-lifting",
   "lem-weil-pbc-spec-clopen-idempotent",
   "sk-def-pe-wlocal",
-  "lem-pe-spectral-components-profinite",
-  "lem-weil-pbc-quasicompact-components-clopen-intersection",
+  "lem-sfb-spectral-clopen-component-homeomorphism",
   "lem-zl-henselian-wstrict-local-invariance",
-  "lem-zl-condensed-wcontractible-lisse-evaluation",
+  "lem-zl-component-derived-pullback-square",
+  "lem-zl-condensed-component-pullback-compatibility",
   "lem-zl-condensed-lisse-proetale-locality"
  ],
  "proof_origin": {
-  "by": "document",
+  "by": "agent",
   "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
-  "place": "Corollary 4.4(1)-(2), proof on pp. 9-10"
+  "place": "HRS Corollary 4.4(1)-(2); stage-3 Lean assembly from the stated component comparison and compatibility, with explicit coefficient-automorphism reconciliation and slice equivalence."
  },
  "mathlib_searches": [
   {
@@ -170,11 +170,11 @@
   "is": null
  },
  "split_report": {
-  "date": "2026-10-18",
+  "date": "2026-10-22",
   "item": "lem-zl-condensed-henselian-lisse-rigidity",
   "worker": "stage1",
-  "summary": "Followed HRS Corollary 4.4: henselian idempotents give the component homeomorphism, BS w-strict locality invariance gives w-contractibility, and the existing component-site equivalence identifies restriction on lisse objects. Expanded the component separation and the natural inverse-image square, and reused the existing pullback theorem for coefficients and scalar complexes. One statement-only new lemma, no Mathlib leaf; statement unchanged.",
-  "blueprint": "Serves prop-zl-smooth-proper-relative-purity, current proof Step 3 (perfect form of relative duality), through the local-perfect-model and dualizable-truncation chain recorded in blueprint.from. This is the HRS Corollary 4.4 input in the local-perfect-model proof; no unit step is replaced.",
+  "summary": "Repaired the released 2026-10-22 re-split: reuse the existing spectral clopen component criterion for old Step 2, and separate old Step 5 into two statement-only work items, affine component-lift base change and its ordinary-derived condensed coefficient comparison. Retain the henselian idempotent, w-strict locality, component evaluation and scalar-extension assembly. Statement and statement dependencies unchanged; complete old arguments and their disposition preserved in report.md.",
+  "blueprint": "Serves prop-zl-smooth-proper-relative-purity, current proof Step 3 (perfect form of relative duality), through the local-perfect-model and dualizable-truncation chain recorded in blueprint.from. This is the HRS Corollary 4.4 input in the local-perfect-model proof; no unit step is replaced. Re-split preserves old Steps 1-6; new nodes serve the component square in old Step 5, the HRS Corollary 4.4(2) input.",
   "tool_uses": [
    {
     "node": "lem-weil-pbc-spec-clopen-idempotent",
@@ -187,21 +187,25 @@
    {
     "node": "lem-weil-pbc-quasicompact-components-clopen-intersection",
     "why": "General component separation theorem supplies clopens separating distinct components of affine spectra, as required by HRS finite-subdivision argument."
+   },
+   {
+    "node": "lem-sfb-spectral-clopen-component-homeomorphism",
+    "why": "Generic topology criterion replacing the identical compactness-and-clopen argument of old Step 2; it does not replace the unit route."
    }
   ]
  },
  "tool_uses": [
   "lem-weil-pbc-spec-clopen-idempotent",
   "lem-pe-spectral-components-profinite",
-  "lem-weil-pbc-quasicompact-components-clopen-intersection"
+  "lem-sfb-spectral-clopen-component-homeomorphism"
  ],
  "reviewed": {
-  "date": "2026-10-18",
+  "date": "2026-10-22",
   "by": "L",
-  "reviewer": "NT-cc-Q35-8116ed520",
-  "group": "Q35",
+  "reviewer": "NT-cc-NC-414c39a60",
+  "group": "NC",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q35-8116ed520 (reviewer sub-agent of L); spot-checked: I read the item, the new node and every cited statement in full. Sources checked at the cited places: HRS 2305.18131 pp.8-10 (Lemma 4.1, construction (4.1), Prop 4.3(1)-(3) with proof, Cor 4.4 with proof); BS 1309.1198 Def 2.2.1 and Lemmas 2.2.9, 2.2.12, 2.2.13, 2.2.15; Stacks 09XI clause (3). Statement: byte-identical to the base and matches HRS Cor 4.4(1)-(2) hypothesis by hypothesis. It keeps an arbitrary henselian pair and the same ordinary-derived dualizable coefficient category as the two cited unit nodes. The extra clauses (full faithfulness, canonical coefficient identification, scalar extension) follow from the equivalence and the locality node. Steps: Step 1 gets the idempotent bijection from the henselian definition with B=A plus the D(e) leaf. Step 2 proves the pi_0 homeomorphism: clopen bijection, component separation from lem-weil-pbc-quasicompact-components-clopen-intersection, then injectivity, surjectivity and compact-to-Hausdorff, all checked. Step 3 combines the new node with homeomorphism invariance of extremal disconnectedness and the definition in sk-def-pe-wlocal. Steps 4-6 use only the statements of lem-zl-condensed-wcontractible-lisse-evaluation (pi_T induced by S' to T x_S S') and lem-zl-condensed-lisse-proetale-locality. Step 5 is a formal fiber-product and pseudo-functoriality identity, borderline but acceptable as elementary. Route: the three declared tool_uses are accepted as generic topology tools; one of them, spec-clopen-idempotent, is a Mathlib leaf. No SGA is cited. blueprint.from and its places were verified in prop-zl-smooth-proper-relative-purity. New node lem-zl-henselian-wstrict-local-invariance: exactly BS 2.2.13, with w-strict locality written in the 2.2.9 form that equals the project definition. It is true, statement-only and three kinds of search are recorded. It does not restate a clause of the item. Tested on I=0, A=0, I=A (forces A=0), (k[[t]],(t)) with k separably closed, and (Z_p,(p)). Duplicate search found no duplicate: rg over the snapshot DAG for 2.2.13 and henselian with w-strict/w-local terms, eight candidate nodes read. No fixes written."
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NC-414c39a60 (reviewer sub-agent of L); spot-checked: I read the item, both new nodes and every cited statement in full, and HRS 2305.18131 pp.8-10 (construction (4.1), Prop 4.3 with proof, Cor 4.4 with proof). No SGA. The item's statement and stmt_deps are byte-identical to the base and match Cor 4.4(1)-(2); the proof went from 3772 to 2481 chars. Re-split step by step: old Steps 1, 3, 4 and 6 are short citation-assembly steps kept verbatim. Old Step 2 (1110 chars) now cites the existing exact node lem-sfb-spectral-clopen-component-homeomorphism (spectral spaces, f^{-1} bijective on clopens, so pi0(f) is a homeomorphism; its proof carries the old separation, surjectivity and compact-to-Hausdorff argument); its hypotheses come from sk-def-pe-wlocal and Step 1. Old Step 5 is spread over two new statement-only nodes. lem-zl-component-lift-base-change (Y x_X X_E = Y_{Q x_P E}) is true: clopen stages pull back to the stages over h^{-1}U, and fibre products commute with affine cofiltered limits. lem-zl-component-derived-pullback-square (f* pi_X* = pi_Y* h* on D(P,Lambda)) is true: Lambda_X = pi_X^{-1} Lambda_P by p_X = q_P pi_X, so the inverse images are exact and computed termwise, hence monoidal. Tested both on f=id, empty Y or E, Spec(k x k) -> Spec k, non-surjective h, and Lambda=0. Neither node restates a clause of the item. Duplicate search: the closest candidate, clause 1 of lem-sfb-component-lift-lisse-section-comparison (unit sk-thm-sf-ctf-stability, 2026-10-22), is a special case of the derived node (w-contractible, induces id_S), not the same statement. I accept the own-unit node under C7. Maintainer note: that clause could later cite this node. lem-sfb-relative-component-lift-pullback-space (new in side-live) states T x_P E = T_E, not base change. Batch-5 finding: both new nodes reach def-trf-geometric-morphism through lem-zl-component-relative-profinite-site. It is a general definition of a geometric morphism, not part of the trace formula or Poincare duality, and it is already in the closure through the base-cited evaluation node, so I accept both citations. No cycles, item not in the dropped routes, B1-B9 fine with 5 searches recorded per new node. Maintainer should record the cross-unit tool lem-sfb-spectral-clopen-component-homeomorphism. Advisory: split_report.tool_uses still lists lem-weil-pbc-quasicompact-components-clopen-intersection, which is no longer cited."
  },
  "lean": {
   "module": "Sheaf.AlgebraicGeometry.CondensedHenselianLisseRigidity",
@@ -233,5 +237,26 @@
   "result": "fix",
   "note": "The mathematics is correct and matches HRS Cor 4.4(1)-(2) clause by clause: arbitrary commutative condensed Λ and HenselianRing A I; unconditional π0 homeomorphism (correct direction) and IsWContractibleRing iff; under w-contractibility, IsTriangulated, symmetric monoidal, and an IsDualizable equivalence naturally iso to i^*; canonical coefficient/scalar comparisons; only universe u; one sorry; docstrings and report sections present. Edge cases I=0, A=0, I=A, Λ=0, (Z_p,(p)), k[[t]] are fine. This head's delivery files equal 86ed03, which was reviewed PASS but returned twice at landing for the 60 s file compile timeout. Profiling: the hand-written braiding square over the local condensedDerivedBraiding (DerivedMonoidal.braiding at the concrete Mod category) took 38 s elaboration and 58 s kernel; the whole file 73-91 s at load 140. Fix: the monoidal clause is restated as Nonempty (@Functor.Braided _ _ _ (DerivedCategory.braidedCategory _) _ _ _ (DerivedCategory.braidedCategory _) F), passed explicitly because local instances are forbidden, and condensedDerivedBraiding is removed; everything else is unchanged. Equivalence proved in Lean: braiding = β_ by rfl, braided_iff for every f, and the full old statement iff the new one. The fixed file compiles with the official nt_compile in 21.0 s, rc 0, no messages. Fixes: module, lean-record.json (verbatim statement and note; refit_record offline drops the removed declaration with no refusals), report.md."
  },
- "lean_audit": {}
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "N2",
+  "result": "pass",
+  "landing": "20261025T060926-L-2386695",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
 }

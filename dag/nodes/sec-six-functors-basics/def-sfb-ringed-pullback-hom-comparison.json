@@ -1,0 +1,176 @@
+{
+ "id": "def-sfb-ringed-pullback-hom-comparison",
+ "kind": "definition",
+ "title": "Evaluation-transpose comparison for derived ringed-topos pullback",
+ "status": "split",
+ "statement": "Let $X,Y$ be small ringed-site presentations with commutative structure sheaves, ordinary unbounded module derived categories, and their fixed closed derived tensor structures and signed K-flat representative models [def-sfb-ringed-derived-comparison-data]. Let $f:X\\to Y$ be a ringed-topos morphism and let $l$ be normalized adjoint-lift data for $f$ [def-sf-ringed-derived-adjoint-lift-data]. Write $L=l_L:D(Y)\\to D(X)$ and $H_Z(P,Q)=R\\mathcal Hom_Z(P,Q)$ for the existing derived internal Hom [def-pur-derived-internal-hom]. Restrict the fixed tensor representative comparison of each site to flat-term K-flat representatives; this is the tensor model used below. Write $t_{A,B}:L(A\\otimes_Y^{\\mathbf L} B)\\xrightarrow{\\sim}LA\\otimes_X^{\\mathbf L}LB$ for the canonical tensor comparison determined by these models, and $\\mu_{A,B}=t_{A,B}^{-1}$. For arbitrary $P,Q\\in D(Y)$ define the canonical pullback Hom comparison by the right-tensor adjunction transpose, $$\\beta^f_{P,Q}=\\operatorname{transpose}_X\\!\\left(L(\\operatorname{ev}^Y_{P,Q})\\circ\\mu_{H_Y(P,Q),P}\\right):LH_Y(P,Q)\\longrightarrow H_X(LP,LQ).$$ Here $\\operatorname{ev}^Y_{P,Q}:H_Y(P,Q)\\otimes_Y^{\\mathbf L}P\\to Q$ is the counit of the fixed closed structure. This defines the map and its tensorator and model, without asserting naturality or invertibility of $\\beta$.",
+ "stmt_deps": [
+  "def-sfb-ringed-derived-comparison-data",
+  "def-sf-ringed-derived-adjoint-lift-data",
+  "def-pur-derived-internal-hom"
+ ],
+ "source": {
+  "document": "literature/stacks-project/cohomology.tex; literature/stacks-project/sites-cohomology.tex",
+  "place": "Remark remark-prepare-fancy-base-change and Tag 0GM7, lemma-pullback-internal-hom; ringed-site evaluation and tensor conventions of Tags 07A4 and 08J9. Existing evaluation-transpose definitions in Sheaf.Paper.RingedPullbackHomEvaluationComparison, lines 53-96."
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "pullbackHomFunctor|ringedPullbackHomComparison|pullbackHomTensorator|pullbackHomTensorModel",
+   "results": {
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-23",
+   "verdict": "No exact Mathlib match; reuse the four existing project definitions without copying."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Canonical derived internal Hom pullback comparison defined as transpose of pulled back evaluation",
+   "results": {
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "CategoryTheory.Limits.pullbackComparison",
+     "CategoryTheory.Limits.FormalCoproduct.homPullbackEquiv_apply_coe",
+     "CategoryTheory.Limits.instIsIsoPullbackComparison",
+     "CategoryTheory.ihom.ev",
+     "CategoryTheory.ExponentiableMorphism.pushforwardCurry",
+     "CategoryTheory.ExponentiableMorphism.homEquiv_apply_eq",
+     "CategoryTheory.Limits.FormalCoproduct.homPullbackEquiv",
+     "CategoryTheory.ExponentiableMorphism.coev_def"
+    ],
+    "digest": "7cb65076eb50292c"
+   },
+   "date": "2026-10-23",
+   "verdict": "No exact Mathlib match; reuse the four existing project definitions without copying."
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules.pullback, SheafOfModules.homObj",
+   "results": {
+    "ok": true,
+    "n_hits": 0,
+    "note": "loogle: unknown identifier 'SheafOfModules.homObj'",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-23",
+   "verdict": "No exact Mathlib match; reuse the four existing project definitions without copying."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived ringed topos pullback internal Hom comparison is transpose of evaluation after inverse tensor comparison",
+   "results": {
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "SheafOfModules.conjugateEquiv_pullbackComp_inv",
+     "SheafOfModules.pullbackObjUnitToUnit",
+     "SheafOfModules.pullbackPushforwardAdjunction_homEquiv_pullbackObjUnitToUnit",
+     "SheafOfModules.pullbackComp",
+     "SheafOfModules.pullbackPushforwardAdjunction_homEquiv_symm_unitToPushforwardObjUnit",
+     "PresheafOfModules.pullbackComp",
+     "SheafOfModules.pullbackIso",
+     "CategoryTheory.ExponentiableMorphism.ev_coev"
+    ],
+    "digest": "ee9d64e727ba8f40"
+   },
+   "date": "2026-10-23",
+   "verdict": "No exact Mathlib match; reuse the four existing project definitions without copying."
+  },
+  {
+   "tool": "grep",
+   "query": "rg pullbackHomFunctor|ringedPullbackHomComparison|pullbackHomTensorator|pullbackHomTensorModel in dag/nodes, lean/WeilConjectures, lean/Sheaf; blueprint_refs.py search pullback Hom",
+   "results": "The four definitions occur in Sheaf.Paper.RingedPullbackHomEvaluationComparison, lines 53-96, and the theorem node lists them as auxiliary declarations. No definition node owns this comparison; no upstream hit; blueprint search gives 0 nodes. The maintainer explicitly requests a separate existing:true definition attachment.",
+   "date": "2026-10-23",
+   "verdict": "Existing project definitions; add only their definition node, no Lean module or duplicate data."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-ringed-perfect-internal-hom-pullback",
+  "date": "2026-10-23",
+  "group": "Q14"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "Canonical evaluation-transpose map in the perfect-source internal Hom pullback comparison, before the internal-Hom comparison used in Stacks 0E4S(1).",
+   "via": [
+    "lem-sfb-ringed-perfect-internal-hom-pullback",
+    "lem-sfb-space-affine-perfect-hom-base-change",
+    "lem-sfb-affine-flat-proper-adjoint-base-change",
+    "lem-sfb-proper-flat-space-derived-duality",
+    "lem-sfb-nodal-relative-dualizing-line",
+    "lem-sfb-stable-and-smooth-family-open-loci",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "lean": {
+  "module": "Sheaf.Paper.RingedPullbackHomEvaluationComparison",
+  "declaration": "CategoryTheory.RingedDerivedComparisons.ringedPullbackHomComparison",
+  "declarations": [
+   "CategoryTheory.RingedDerivedComparisons.pullbackHomFunctor",
+   "CategoryTheory.RingedDerivedComparisons.pullbackHomTensorModel",
+   "CategoryTheory.RingedDerivedComparisons.pullbackHomTensorator",
+   "CategoryTheory.RingedDerivedComparisons.ringedPullbackHomComparison"
+  ],
+  "statement": "def ringedPullbackHomComparison {X Y : Site.{u, w}} {f : Morphism X Y}\n    (l : AdjointLift f) (P Q : Y.D) :\n    l.edge.left.obj ((pullbackHomFunctor Y).obj (op P, Q)) ⟶\n      (pullbackHomFunctor X).obj (op (l.edge.left.obj P), l.edge.left.obj Q)",
+  "branch": "sheaf-dag",
+  "by": "Q14",
+  "date": "2026-10-23",
+  "existing": true,
+  "note": "Definition-node attachment requested by the independent return: all four declarations are existing data definitions, not choices from ringedPullbackHomEvaluationComparison. No existing module is changed; no copy is introduced. beta is exactly transpose of L(ev) after inverse canonical tensor comparison."
+ },
+ "import_flags": [],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-2bec8595e",
+  "group": "Q14",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-2bec8595e",
+  "group": "Q14",
+  "result": "pass",
+  "note": "Re-delivery after review_split's mechanical return of 12f557 (proof_deps had lem-coef-ringed-pullback-hom-evaluation-comparison and lem-sfb-ringed-derived-adjoint-lift outside the union of uses). This head removes exactly those two; proof_deps now equals the union of uses and the live list. Snapshot diff vs 12f557: only the item's proof_deps and lean.note changed. Item .lean is byte-identical (sha ebbaec11) and lean.statement is verbatim. The new existing:true def node def-sfb-ringed-pullback-hom-comparison is unchanged; it owns the four plain defs at live lines 53-96, with beta = transpose(L(ev) o t^-1). The 9 base stmt_dep records equal side-live, and the item and new node are not yet landed live. Public imports are the stmt_dep modules; plain imports are the proof_dep modules. Mathematics as reviewed before: IsIso for locally perfect P and arbitrary Q, naturality in both variables, no flatness or bound on Q. No file changed, so no compile."
+ }
+}

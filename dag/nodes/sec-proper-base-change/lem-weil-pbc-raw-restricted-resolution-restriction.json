@@ -12,28 +12,39 @@
  ],
  "proof": [
   {
-   "text": "Put W = V times_S X, W' = V' times_S X, a = t_X, g = W.hom,\nand h = W'.hom. Write sigma_g for the exact inverse-image single comparison,\nbeta_g for the homology/localization comparison on Gamma(W,g^*I), and C_g for\nthe sections comparison formed using the inverse of Q(F[0]) -> Q(I).\nExpanding the K-injective-resolution comparison gives its inverse as\nbeta_g.inv followed by C_g followed by H^q(RGamma(W).map sigma_g).\nTo verify this formula, naturality of the exact-localization comparison gives\nDg(Q(augmentation)) followed by the localization comparison on I equal to\nsigma_g followed by Q of the restricted augmentation. Cancel the two augmentation\nisomorphisms. The inverse right-derived comparison on g^*I is exactly the\nsections unit because g^*I is K-injective.\n\nApply sectionsComparison_triangle_naturality to I and the isomorphism\nQ(F[0]) -> Q(I). It gives C_g followed by derived chart restriction equal to\nQ of termwise chart restriction followed by C_h. The single-complex comparison\ncommutes with inverse-image composition: naturality of the derived composition\nisomorphism, followed by its single comparison and the coefficient composition\nisomorphism, gives sigma_g followed by cohomology pullback equal to derived\nchart restriction followed by sigma_h. Combine these squares and naturality of\nbeta. The result is inverse resolution comparison at W followed by cohomology\npullback equal to section-complex homology restriction followed by inverse\nresolution comparison at W'.\n\nIt remains to identify section-complex restriction. Evaluate the inverse-image\nadjunction unit at the terminal etale object of W' and use the localization\nrestriction isomorphism. The pullback diagonal identifies the unit at W with the\nidentity restriction of F. The composition unit equation identifies the unit at\nW' with that unit followed by a^*. Naturality of the a-unit moves the diagonal\nthrough a^*. The first unit followed by diagonal restriction is invertible,\nsince its localization image is the identity restriction of F(W). Cancel this\ncomposite and the localization isomorphisms. The resulting map on sections is\nprecisely F.map(t_X.op). Apply this equality in each degree\nof I. Naturality of homology under the resulting chain isomorphisms and\nNatTrans.app_homology for evaluation identify the remaining two factors of\nnormalizationRestrictedIso with the presheaf's restriction. Compose with the\nresolution square above and cancel the resolution isomorphisms. This proves the\ndisplayed formula. The same equations cover degree zero and empty charts.",
+   "text": "For any prescribed resolution I, form the restriction comparison degreewise from inverse-image composition. Naturality of the single-complex comparison, its composition law, and naturality of the augmentation give the augmentation square. Apply the existing etale K-injective pullback abutment theorem to the two restricted resolutions. The native Mathlib resolution comparison is definitionally the inverse of resolutionEtaleCohomologyIso, so this identifies chart cohomology pullback with homology of the section-chain comparison.",
    "uses": [
-    "lem-weil-pbc-sections-comparison-triangle-naturality",
-    "lem-weil-pbc-etale-inverse-image-restriction",
-    "lem-sbc-etale-abelian-restriction-injectives",
     "lem-weil-pbc-inverse-image-composition",
-    "lem-weil-pbc-etale-restriction-pullback-unit-eq"
+    "lem-weil-pbc-kinjective-pullback-abutment"
    ],
    "elementary": false
+  },
+  {
+   "text": "The section-chain map has components sectionsPullbackNat followed by global sections of the inverse-image composition comparison. The sections-unit identity and objectSections_naturality identify these components, under normalizationSectionsIso, with restriction of the original sheaf. Applying homology gives the square on section homology. NatTrans.app_homology for the natural transformation between evaluation functors gives naturality of the final homology-evaluation factors.",
+   "uses": [
+    "lem-weil-pbc-object-sections-naturality",
+    "lem-weil-pbc-kinjective-unit-leray",
+    "lem-weil-pbc-injective-sections-pullback-comparison"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Compose the two squares, cancel the intermediate resolution isomorphisms, and specialize I to injectiveResolution F. All equations apply in degree zero, for zero coefficients, and on empty charts.",
+   "uses": [],
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-sections-comparison-triangle-naturality",
-  "lem-weil-pbc-etale-inverse-image-restriction",
-  "lem-sbc-etale-abelian-restriction-injectives",
   "lem-weil-pbc-inverse-image-composition",
-  "lem-weil-pbc-etale-restriction-pullback-unit-eq"
+  "lem-weil-pbc-kinjective-pullback-abutment",
+  "lem-weil-pbc-object-sections-naturality",
+  "lem-weil-pbc-kinjective-unit-leray",
+  "lem-weil-pbc-injective-sections-pullback-comparison"
  ],
  "proof_origin": {
-  "by": "F2",
-  "document": "Stacks Project",
-  "place": "Fixed-resolution part of parent normalization proof, steps 1 and 4"
+  "by": "K4",
+  "document": "Stacks Project Tags 03Q8, 03Q9 and 072W; existing proved library comparisons",
+  "place": "Restriction of injective resolutions; etaleKInjective_pullback_abutment, objectSections_naturality and naturality of homology under evaluation."
  },
  "mathlib_searches": [
   {
@@ -107,13 +118,25 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-22",
+  "date": "2026-10-26",
   "by": "L",
-  "reviewer": "C-11761",
-  "group": "F2",
-  "result": "pass",
-  "landing": "20261022T011833-L-3222256",
+  "reviewer": "C-4afa3",
+  "group": "K4",
+  "result": "fix",
+  "landing": "20261026T091912-L-3385309",
   "kind": "interface",
-  "note": "independent cc review: item statement vs clone (byte-identical); data module vs old item module construction block (same bodies; def/abbrev swaps and transport builder declared in change record); three sorry lemmas vs item clauses 1, 2, 5 (equivalent up to cancelling isomorphisms); node proof/proof_deps vs Lean proof"
+  "note": "independent cc review: item statement vs clone (byte-identical); data-module diff vs clone and change record (signatures kept, bodies rfl-equal sharing); importer compiles in §3b vs my concurrent published-baseline compiles of the two SLOW importers (72.8 s / 61.0 s, pre-existing); node proof_deps vs declarations used in the proof"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
  }
 }

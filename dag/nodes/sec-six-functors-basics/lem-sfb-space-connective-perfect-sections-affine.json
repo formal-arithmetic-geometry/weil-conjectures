@@ -1,0 +1,292 @@
+{
+ "id": "lem-sfb-space-connective-perfect-sections-affine",
+ "kind": "statement",
+ "title": "Sections of a universally nonnegative perfect complex form an affine space of finite presentation",
+ "statement": "Work in the universes of [def-weil-size-convention]. Let $S$ be a scheme [def-pc-scheme], and use algebraic spaces over $S$ with their small etale structure sheaves [def-trf-algebraic-space], module sheaves [def-weil-sheaf-of-modules-category], and unbounded module derived categories [def-weil-abstract-derived-category]. Quasi-coherent modules are as in [def-trf-space-quasi-coherent-module], and ordinary tensor pullback and direct image are [def-trf-space-etale-module-functors]. Derived pullback uses K-flat resolutions with flat terms and derived direct image uses K-injective resolutions. A perfect object is etale locally isomorphic to a bounded complex of direct summands of finite free structure modules [def-weil-pbc-strict-perfect-coefficient-package]. Let $B$ be an algebraic space over $S$, and let $K\\in D(\\mathcal O_B)$ be perfect. For each scheme morphism $g:T\\to B$, assume $\\mathcal H^i(Lg^*K)=0$ for every $i<0$, where cohomology sheaves are kernels modulo images of a representing complex. Define $H^0(T,Lg^*K)=H^0(R\\Gamma(T,Lg^*K))$ [def-pur-ringed-site-zeroth-hypercohomology]. The functor on schemes over $B$ given by $g\\mapsto H^0(T,Lg^*K)$, with transitions induced by derived pullback and its composition isomorphisms, is represented by an algebraic space $V\\to B$, naturally in every scheme test. Moreover $V\\to B$ is affine and of finite presentation: its base change to every affine scheme over $B$ is an affine scheme, and it is quasi-compact, quasi-separated and locally of finite presentation on etale scheme charts [def-sfb-space-morphism-properties]. No Noetherian hypothesis on $B$ or its test schemes is imposed.",
+ "source": {
+  "document": "literature/stacks-project/quot.tex",
+  "place": "Tag 08JX (lemma-cohomology-perfect-complex), clause (2), specialized to perfect K (hence pseudo-coherent)."
+ },
+ "stmt_deps": [
+  "def-weil-size-convention",
+  "def-pc-scheme",
+  "def-trf-algebraic-space",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-abstract-derived-category",
+  "def-trf-space-quasi-coherent-module",
+  "def-trf-space-etale-module-functors",
+  "def-weil-pbc-strict-perfect-coefficient-package",
+  "def-pur-ringed-site-zeroth-hypercohomology",
+  "def-sfb-space-morphism-properties",
+  "def-trf-scheme-algebraic-space",
+  "def-sfb-space-small-ringed-model",
+  "def-sfb-space-derived-module-calculus",
+  "def-sfb-space-derived-pullback",
+  "def-sfb-relative-dualizing-trace-pair",
+  "def-sfb-space-affine-quasifinite-properties"
+ ],
+ "proof": [
+  {
+   "text": "Put $F(T,g)=H^0(T,Lg^*K)$. This is an etale sheaf on scheme tests over $B$: fix $g:T\\to B$. The connective-sections lemma identifies its values after any etale $h:T'\\to T$ with sections of $\\mathcal H^0(Lg^*K)|_{T'}$. Indeed etale tensor pullback is localized restriction; restriction is exact, so it computes derived pullback and commutes with kernels, images and cohomology. The lemma identifies the transition maps with those restrictions. Matching sections therefore glue uniquely by the module-sheaf axiom. This applies to every test $T$, including nonaffine and empty tests.",
+   "uses": [
+    "lem-sfb-ringed-site-connective-hypercohomology",
+    "lem-trf-space-etale-module-pushforward-restriction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/quot.tex",
+    "place": "Tag 08JX, lemma-cohomology-perfect-complex, proof: first sentence and sheaf argument"
+   }
+  },
+  {
+   "text": "Apply the local-model lemma to obtain an affine etale cover $u_\\alpha:U_\\alpha\\to B$ and bounded finite free complexes $P_\\alpha^\\bullet$ in nonnegative degrees. Each is K-flat by the bounded-above-flat theorem. Consequently, for every scheme map $h:T\\to U_\\alpha$, the pullback complex $h^*P_\\alpha^\\bullet$ represents $L(u_\\alpha h)^*K$, with the canonical derived-pullback composition isomorphism. It is still zero below degree zero. The connective-sections lemma now gives, naturally in $h$,\n$$F(T,u_\\alpha h)=\\ker\\bigl(\\Gamma(T,h^*P_\\alpha^0)\\to\\Gamma(T,h^*P_\\alpha^1)\\bigr).$$",
+   "uses": [
+    "lem-sfb-space-connective-nonnegative-free-model",
+    "lem-pc-bounded-above-flat-kflat-site",
+    "lem-sfb-ringed-site-connective-hypercohomology"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/quot.tex",
+    "place": "Tag 08JX, lemma-cohomology-perfect-complex, proof: finite locally free truncation and K-flat pullback"
+   }
+  },
+  {
+   "text": "Fix a chart $U_\\alpha=\\operatorname{Spec}A$, write $P^0=\\mathcal O^n$, $P^1=\\mathcal O^m$ (rank zero if absent), and let $d^0$ have matrix $(a_{ji})_{1\\leq j\\leq m,1\\leq i\\leq n}$. Define\n$$C_\\alpha=A[x_1,\\ldots,x_n]/(\\sum_{i=1}^n a_{ji}x_i\\mid1\\leq j\\leq m),\\qquad V_\\alpha=\\operatorname{Spec}C_\\alpha.$$\nFor arbitrary $h:T\\to U_\\alpha$, the affine-target morphism bijection identifies maps $T\\to V_\\alpha$ over $U_\\alpha$ with $A$-algebra maps $C_\\alpha\\to\\Gamma(T,\\mathcal O_T)$. Sending $x_i$ to $f_i$ is exactly a tuple satisfying $\\sum_i h^\\sharp(a_{ji})f_i=0$ for every $j$, which is the preceding kernel. The inverse sends such a tuple to polynomial evaluation and factors through the quotient since each displayed relation evaluates to zero. Thus $h_{V_\\alpha/U_\\alpha}\\simeq F|_{U_\\alpha}$, naturally on all tests. Pullback sends each $f_i$ to its pulled-back section, which verifies naturality explicitly. The displayed finite algebra presentation gives local finite presentation of $V_\\alpha\\to U_\\alpha$.",
+   "uses": [
+    "lem-weil-pbc-morphism-into-affine-scheme",
+    "def-weil-pbc-finitely-presented-algebra",
+    "def-sbc-locally-finite-presentation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/quot.tex",
+    "place": "Tag 08JX, lemma-cohomology-perfect-complex, proof: matrix and polynomial quotient construction"
+   }
+  },
+  {
+   "text": "On $U_{\\alpha\\beta}=U_\\alpha\\times_B U_\\beta$, the two pullbacks of $V_\\alpha,V_\\beta$ represent the same restricted functor $F$, hence Yoneda supplies the unique isomorphism identifying their section bijections. On triple overlaps their two composites induce the same transformation of $F$, so faithfulness gives the cocycle, and likewise the identity on diagonal overlaps. Under the relative-Spec anti-equivalence these become isomorphisms of the quasi-coherent coordinate algebras, compatible with arbitrary base change. The jointly surjective etale family $\\{U_\\alpha\\to B\\}$ is an fppf covering by the covering calculus, so quasi-coherent descent applies to their underlying modules. The descended sheaf has a commutative algebra structure: for sections on any small etale test, restrict to the covering tests, multiply (or take the unit) there, and glue by the sheaf axiom. The overlap algebra maps preserve these operations, so the products match; uniqueness of gluing proves all ring identities and scalar compatibility. Thus a quasi-coherent algebra $\\mathcal A$ on $B$ is obtained whose pullbacks are the coordinate algebras of the $V_\\alpha$.",
+   "uses": [
+    "lem-galois-yoneda-fully-faithful",
+    "lem-sfb-space-relative-spec-correspondence",
+    "lem-sfb-space-fppf-qcoh-descent",
+    "lem-sfb-space-fppf-covering-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/quot.tex",
+    "place": "Tag 08JX, lemma-cohomology-perfect-complex, proof: etale descent, implemented on coordinate algebras"
+   }
+  },
+  {
+   "text": "Set $V=\\operatorname{Spec}_B(\\mathcal A)$ by the relative-Spec correspondence. It is an algebraic space affine over $B$, and $V\\times_B U_\\alpha\\simeq V_\\alpha$. For each scheme test $T\\to B$, the schemes $T\\times_B U_\\alpha$ etale-cover $T$. On them the local bijections of step 3 agree on overlaps by their construction in step 4. Both $\\operatorname{Mor}_B(-,V)$ and $F$ are etale sheaves, so these bijections glue: a matching tuple of local sections on either side gives a unique global section on that side. The two glued maps are inverse because their restrictions are inverse. For a map of arbitrary tests, restrict this assertion to the induced etale covers; local naturality from step 3 and uniqueness of gluing give global naturality.",
+   "uses": [
+    "lem-sfb-space-relative-spec-correspondence",
+    "def-trf-algebraic-space"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/quot.tex",
+    "place": "Tag 08JX, lemma-cohomology-perfect-complex, proof: descent of local section representations"
+   }
+  },
+  {
+   "text": "The chart morphisms $V_\\alpha\\to U_\\alpha$ are locally of finite presentation by step 3, so the chart criterion makes $V\\to B$ locally of finite presentation. The affine-locality theorem makes it quasi-compact and separated. For any scheme test $T\\to B$, it also says $V_T$ is a scheme and $V_T\\to T$ is affine, hence separated; the scheme separated-implies-quasi-separated lemma makes its relative diagonal quasi-compact. Thus the diagonal of $V\\to B$ is quasi-compact on scheme tests. Together these say that $V\\to B$ is quasi-compact, quasi-separated and locally of finite presentation, hence of finite presentation. Affineness also gives affine scheme source after every affine scheme base change. No Noetherian assumption or global degree bound was used.",
+   "uses": [
+    "lem-sfb-space-local-properties-chart-test",
+    "lem-sfb-space-affine-locality",
+    "def-sfb-space-morphism-properties",
+    "lem-pc-separated-quasi-separated"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/quot.tex",
+    "place": "Tag 08JX, lemma-cohomology-perfect-complex, proof: local checks of affineness and finite presentation"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-ringed-site-connective-hypercohomology",
+  "lem-trf-space-etale-module-pushforward-restriction",
+  "lem-sfb-space-connective-nonnegative-free-model",
+  "lem-pc-bounded-above-flat-kflat-site",
+  "lem-weil-pbc-morphism-into-affine-scheme",
+  "def-weil-pbc-finitely-presented-algebra",
+  "def-sbc-locally-finite-presentation",
+  "lem-galois-yoneda-fully-faithful",
+  "lem-sfb-space-relative-spec-correspondence",
+  "lem-sfb-space-fppf-qcoh-descent",
+  "lem-sfb-space-fppf-covering-calculus",
+  "def-trf-algebraic-space",
+  "lem-sfb-space-local-properties-chart-test",
+  "lem-sfb-space-affine-locality",
+  "def-sfb-space-morphism-properties",
+  "lem-pc-separated-quasi-separated"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/quot.tex",
+  "place": "Tag 08JX, lemma-cohomology-perfect-complex, clause (2); etale gluing implemented by the equivalent coordinate-algebra descent of spaces-morphisms.tex Tag 081V."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For a perfect complex K on an algebraic space B whose every derived pullback has no negative cohomology the functor T maps to H zero T derived pullback K is represented by an affine algebraic space of finite presentation",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.h𝒰S\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"∀ {I : Type u} [inst : CategoryTheory.Category.{u, u} I] {S X : AlgebraicGeometry.Scheme}\\n  {D : CategoryTheory.Functor I AlgebraicGeometry.Scheme} {t : D ⟶ (CategoryTheory.Functor.const I).obj S} {f : X ⟶ S}\\n  (self : AlgebraicGeometry.ExistsHomHomCompEqCompAux D t f) (i : self.𝒰S.I₀), AlgebraicGeo\", \"doc\": \"Given a category $\\\\mathcal{I}$, a diagram $D:\\\\mathcal{I}\\\\to\\\\text{Sch}$ of schemes, a natural transformation from $D$ to the constant diagram at $S$, and a morphism $X\\\\to S$, every element of the zerot\"}\n  {\"name\": \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.h𝒰X\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"∀ {I : Type u} [inst : CategoryTheory.Category.{u, u} I] {S X : AlgebraicGeometry.Scheme}\\n  {D : CategoryTheory.Functor I AlgebraicGeometry.Scheme} {t : D ⟶ (CategoryTheory.Functor.const I).obj S} {f : X ⟶ S}\\n  (self : AlgebraicGeometry.ExistsHomHomCompEqCompAux D t f)\\n  (i : (CategoryTheory.Precove\", \"doc\": \"Given a diagram of schemes $D: \\\\mathcal{I} \\\\to \\\\text{Sch}$, a natural transformation from $D$ to the constant diagram at $S$, and a morphism $X \\\\to S$, the open covers $\\\\mathcal{U}_X(i)$ constructed f\"}\n  {\"name\": \"AlgebraicGeometry.AffineSpace\", \"module\": \"Mathlib/AlgebraicGeometry/AffineSpace\", \"type\": \"Type v → AlgebraicGeometry.Scheme → AlgebraicGeometry.Scheme\", \"doc\": \"For a scheme $ S $ and a type $ n $, the affine space $ \\\\mathbb{A}^n_S $ is constructed as the fiber product (pullback) of $ S $ and the affine $ n $-space over the integers $ \\\\operatorname{Spec}(\\\\mat\"}\n  {\"name\": \"AlgebraicGeometry.AffineSpace.functor_obj_obj\", \"module\": \"Mathlib/AlgebraicGeometry/AffineSpace\", \"type\": \"∀ (n : Type vᵒᵖ) (S : AlgebraicGeometry.Scheme),\\n  (AlgebraicGeometry.AffineSpace.functor.obj n).obj S = AlgebraicGeometry.AffineSpace (Opposite.unop n) S\", \"doc\": \"For any type $ n $ in the opposite category of types and any scheme $ S $, the affine space $ \\\\mathbb{A}^n_S $ obtained by applying the affine space functor's object mapping to $ n $ and $ S $ is equa\"}\n  {\"name\": \"AlgebraicGeometry.AffineSpace.instLocallyOfFinitePresentationOverSchemeInferInstanceOverClassOfFinite\", \"module\": \"Mathlib/AlgebraicGeometry/AffineSpace\", \"type\": \"∀ {n : Type v} (S : AlgebraicGeometry.Scheme) [Finite n],\\n  AlgebraicGeometry.LocallyOfFinitePresentation (AlgebraicGeometry.AffineSpace n S ↘ S)\", \"doc\": \"If $ n $ is a finite type, then the affine space $ \\\\mathbb{A}^n_S $ over a scheme $ S $ is locally of finite presentation as a morphism over $ S $. This means that for every point in $ \\\\mathbb{A}^n_S \"}\n  {\"name\": \"AlgebraicGeometry.exists_appTop_map_eq_zero_of_isAffine_of_isLimit\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"∀ {I : Type u} [inst : CategoryTheory.Category.{u, u} I] (D : CategoryTheory.Functor I AlgebraicGeometry.Scheme)\\n  (c : CategoryTheory.Limits.Cone D) (hc : CategoryTheory.Limits.IsLimit c) [CategoryTheory.IsCofiltered I]\\n  [∀ (i : I), AlgebraicGeometry.IsAffine (D.obj i)] (i : I) (s : ↑((D.obj i).pr\", \"doc\": \"Given a cofiltered diagram of affine schemes with a limit cone, if a global section of the structure sheaf of some object in the diagram maps to zero under the projection to the limit, then there exis\"}\n  {\"name\": \"AlgebraicGeometry.exists_appTop_map_eq_zero_of_isLimit\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"∀ {I : Type u} [inst : CategoryTheory.Category.{u, u} I] (D : CategoryTheory.Functor I AlgebraicGeometry.Scheme)\\n  (c : CategoryTheory.Limits.Cone D) (hc : CategoryTheory.Limits.IsLimit c) [CategoryTheory.IsCofiltered I]\\n  [∀ {i j : I} (f : i ⟶ j), AlgebraicGeometry.IsAffineHom (D.map f)] {i : I} [C\", \"doc\": \"Given a cofiltered diagram of schemes with affine transition morphisms and compact topological spaces, if a global section becomes zero under the limit cone's projection map, then there exists a morph\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.finitePresentation_appLE\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [self : AlgebraicGeometry.LocallyOfFinitePresentation f] {U : Y.Opens},\\n  AlgebraicGeometry.IsAffineOpen U →\\n    ∀ {V : X.Opens},\\n      AlgebraicGeometry.IsAffineOpen V →\\n        ∀ (e : V ≤ (TopologicalSpace.Opens.map f.base).obj U),\\n          (CommRing\", \"doc\": \"Let $f: X \\\\to Y$ be a morphism of schemes that is locally of finite presentation. Let $U$ be an affine open subset of $Y$ and $V$ be an affine open subset of $X$ such that $V$ is contained in the prei\"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: affine spaces and ordinary module presentations do not represent the derived sections functor"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsPerfect\", \"Representable\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-24",
+   "verdict": "no match: affine spaces and ordinary module presentations do not represent the derived sections functor"
+  },
+  {
+   "tool": "grep",
+   "query": "cohomology.*representab|representab.*cohomology|perfect.*[Aa]ffine",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-24",
+   "verdict": "no match: affine spaces and ordinary module presentations do not represent the derived sections functor"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Zeroth cohomology functor of universally connective perfect complex is affine finitely presented",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"CochainComplex.single₀_obj_zero\", \"module\": \"Mathlib.Algebra.Homology.Single\", \"type\": \"(A : V) : ((single₀ V).obj A).X 0 = A\", \"doc\": \"For any object $A$ in a category $V$ with zero morphisms, the 0th object of the cochain complex constructed by the single-term cochain complex functor applied to $A$ is equal to $A$ itself, while all \"}\n  {\"name\": \"groupCohomology.H0\", \"module\": \"Mathlib.RepresentationTheory.Homological.GroupCohomology.LowDegree\", \"type\": \"{k G : Type u} → [inst : CommRing k] → [inst_1 : Group G] → Rep k G → ModuleCat k\", \"doc\": \"For a group $ G $, a commutative ring $ k $, and a $ G $-representation $ A $ over $ k $, this defines the zeroth group cohomology module $ H^0(G, A) $ as the submodule of $ A $ consisting of elements\"}\n  {\"name\": \"CochainComplex.single₀.congr_simp\", \"module\": \"Mathlib.Algebra.Homology.Single\", \"type\": \"∀ (V : Type u) [inst : CategoryTheory.Category.{v, u} V] [inst_1 : CategoryTheory.Limits.HasZeroMorphisms V]\\n  [inst_2 : CategoryTheory.Limits.HasZeroObject V], CochainComplex.single₀ V = CochainComplex.single₀ V\", \"doc\": \"For any category $ V $ equipped with zero morphisms and a zero object, the single-term cochain complex functor at index 0 applied to $ V $ is equal to itself.\"}\n  {\"name\": \"CochainComplex.mkHom_f_0\", \"module\": \"Mathlib.Algebra.Homology.HomologicalComplex\", \"type\": \": (mkHom P Q zero one one_zero_comm succ).f 0 = zero\", \"doc\": \"The component of the cochain map at index $0$ constructed using `mkHom` is equal to the zero morphism in the category $V$.\"}\n  {\"name\": \"CochainComplex.HomComplex.Cochain.map_zero\", \"module\": \"Mathlib.Algebra.Homology.HomotopyCategory.HomComplex\", \"type\": \": (0 : Cochain K L n).map Φ = 0\", \"doc\": \"For any preadditive categories $\\\\mathcal{C}, \\\\mathcal{D}$, additive functor $\\\\Phi: \\\\mathcal{C} \\\\to \\\\mathcal{D}$, and cochain complexes $K,L$ in $\\\\mathcal{C}$, the image of the zero cochain $0 \\\\in \\\\tex\"}\n  {\"name\": \"groupCohomology.H0Iso\", \"module\": \"Mathlib.RepresentationTheory.Homological.GroupCohomology.LowDegree\", \"type\": \": H0 A ≅ ModuleCat.of k A.ρ.invariants\", \"doc\": \"For a commutative ring $ k $, group $ G $, and $ k $-representation $ A $, the zeroth group cohomology module $ H^0(G, A) $ is isomorphic to the submodule $ A^G $ of $ G $-invariant elements in $ A $.\"}\n  {\"name\": \"CochainComplex.mk'_X_0\", \"module\": \"Mathlib.Algebra.Homology.HomologicalComplex\", \"type\": \": (mk' X₀ X₁ d₀ succ').X 0 = X₀\", \"doc\": \"The zeroth object in the cochain complex constructed using the `mk'` function is equal to the initial object $ X_0 $.\"}\n  {\"name\": \"CochainComplex.HomComplex.CohomologyClass.mk_zero\", \"module\": \"Mathlib.Algebra.Homology.HomotopyCategory.HomComplexCohomology\", \"type\": \": mk (0 : Cocycle K L n) = 0\", \"doc\": \"The cohomology class in degree $n$ of the homomorphism complex $\\\\text{Hom}(K, L)$ corresponding to the zero cocycle is the zero element in the $n$-th cohomology group. Specifically, the canonical map \"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: affine spaces and ordinary module presentations do not represent the derived sections functor"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Kernel of a map of finite vector bundles represents sections of a perfect complex with nonnegative Tor amplitude",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.kerFunctor\", \"module\": \"Mathlib/AlgebraicGeometry/IdealSheaf/Basic\", \"type\": \"(Y : AlgebraicGeometry.Scheme) → CategoryTheory.Functor (CategoryTheory.Over Y)ᵒᵖ Y.IdealSheafData\", \"doc\": \"The functor assigns to each object in the opposite category of the over category over a scheme $ Y $ the kernel of its structure morphism as an ideal sheaf on $ Y $. For morphisms, it maps a morphism \"}\n  {\"name\": \"SheafOfModules.relationsOfIsCokernelFree\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent\", \"type\": \"{C : Type u'} →\\n  [inst : CategoryTheory.Category.{v', u'} C] →\\n    {J : CategoryTheory.GrothendieckTopology C} →\\n      {R : CategoryTheory.Sheaf J RingCat} →\\n        [inst_1 : CategoryTheory.HasSheafify J AddCommGrpCat] →\\n          [inst_2 : J.WEqualsLocallyBijective AddCommGrpCat] →\\n            [i\", \"doc\": \"Let $R$ be a sheaf of rings on a site. Given a presentation of a sheaf of $R$-modules $M$ by free sheaves, that is, an exact sequence $F_\\\\iota \\\\xrightarrow{f} F_\\\\sigma \\\\xrightarrow{g} M \\\\to 0$ where $\"}\n  {\"name\": \"SheafOfModules.relationsOfIsCokernelFree_I\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent\", \"type\": \"∀ {C : Type u'} [inst : CategoryTheory.Category.{v', u'} C] {J : CategoryTheory.GrothendieckTopology C}\\n  {R : CategoryTheory.Sheaf J RingCat} [inst_1 : CategoryTheory.HasSheafify J AddCommGrpCat]\\n  [inst_2 : J.WEqualsLocallyBijective AddCommGrpCat]\\n  [inst_3 : J.HasSheafCompose (CategoryTheory.forg\", \"doc\": \"Given a category $\\\\mathcal{C}$ with a Grothendieck topology $J$, a sheaf $R$ of rings on $\\\\mathcal{C}$, and morphisms $f: R^{(\\\\iota)} \\\\to R^{(\\\\sigma)}$ and $g: R^{(\\\\sigma)} \\\\to M$ between free sheaves\"}\n  {\"name\": \"SheafOfModules.Presentation.relations\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent\", \"type\": \"{C : Type u'} →\\n  [inst : CategoryTheory.Category.{v', u'} C] →\\n    {J : CategoryTheory.GrothendieckTopology C} →\\n      {R : CategoryTheory.Sheaf J RingCat} →\\n        [inst_1 : CategoryTheory.HasWeakSheafify J AddCommGrpCat] →\\n          [inst_2 : J.WEqualsLocallyBijective AddCommGrpCat] →\\n          \", \"doc\": \"Given a category $\\\\mathcal{C}$ with a Grothendieck topology $J$, a sheaf $R$ of rings on $\\\\mathcal{C}$, and conditions ensuring sheafification and local bijectivity, this function maps a presentation \"}\n  {\"name\": \"SheafOfModules.relationsOfIsCokernelFree_s\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent\", \"type\": \"∀ {C : Type u'} [inst : CategoryTheory.Category.{v', u'} C] {J : CategoryTheory.GrothendieckTopology C}\\n  {R : CategoryTheory.Sheaf J RingCat} [inst_1 : CategoryTheory.HasSheafify J AddCommGrpCat]\\n  [inst_2 : J.WEqualsLocallyBijective AddCommGrpCat]\\n  [inst_3 : J.HasSheafCompose (CategoryTheory.forg\", \"doc\": \"Given a sheaf $\\\\mathcal{R}$ of rings on a category $\\\\mathcal{C}$ with Grothendieck topology $J$, and morphisms $f: \\\\mathcal{F}_\\\\iota \\\\to \\\\mathcal{F}_\\\\sigma$ and $g: \\\\mathcal{F}_\\\\sigma \\\\to \\\\mathcal{M}$\"}\n  {\"name\": \"SheafOfModules.generatorsOfIsCokernelFree_I\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent\", \"type\": \"∀ {C : Type u'} [inst : CategoryTheory.Category.{v', u'} C] {J : CategoryTheory.GrothendieckTopology C}\\n  {R : CategoryTheory.Sheaf J RingCat} [inst_1 : CategoryTheory.HasSheafify J AddCommGrpCat]\\n  [inst_2 : J.WEqualsLocallyBijective AddCommGrpCat]\\n  [inst_3 : J.HasSheafCompose (CategoryTheory.forg\", \"doc\": \"Given a sheaf of modules $ M $ over a sheaf of rings $ R $ on a category $ \\\\mathcal{C} $ with Grothendieck topology $ J $, if there exists a morphism $ g: F_\\\\sigma \\\\to M $ from a free sheaf $ F_\\\\sigma\"}\n  {\"name\": \"SheafOfModules.generatorsOfIsCokernelFree_s\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent\", \"type\": \"∀ {C : Type u'} [inst : CategoryTheory.Category.{v', u'} C] {J : CategoryTheory.GrothendieckTopology C}\\n  {R : CategoryTheory.Sheaf J RingCat} [inst_1 : CategoryTheory.HasSheafify J AddCommGrpCat]\\n  [inst_2 : J.WEqualsLocallyBijective AddCommGrpCat]\\n  [inst_3 : J.HasSheafCompose (CategoryTheory.forg\", \"doc\": \"Given a sheaf of modules $ M $ over a sheaf of rings $ R $ on a category $ \\\\mathcal{C} $ with Grothendieck topology $ J $, if there exists a morphism $ g: F_\\\\sigma \\\\to M $ from a free sheaf $ F_\\\\sigma\"}\n  {\"name\": \"SheafOfModules.generatorsOfIsCokernelFree_π\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent\", \"type\": \"∀ {C : Type u'} [inst : CategoryTheory.Category.{v', u'} C] {J : CategoryTheory.GrothendieckTopology C}\\n  {R : CategoryTheory.Sheaf J RingCat} [inst_1 : CategoryTheory.HasSheafify J AddCommGrpCat]\\n  [inst_2 : J.WEqualsLocallyBijective AddCommGrpCat]\\n  [inst_3 : J.HasSheafCompose (CategoryTheory.forg\", \"doc\": \"Given a sheaf of modules $ M $ over a ring sheaf $ R $ on a category $ \\\\mathcal{C} $ with Grothendieck topology $ J $, if there exists a morphism $ g: F_\\\\sigma \\\\to M $ from a free sheaf $ F_\\\\sigma $ s\"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: affine spaces and ordinary module presentations do not represent the derived sections functor"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsPerfect\", \"Representable\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-24",
+   "verdict": "no match: no derived-section representability theorem; affine-space declarations do not identify this functor"
+  },
+  {
+   "tool": "grep",
+   "query": "cohomology.*representab|representab.*cohomology|perfect.*[Aa]ffine",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-24",
+   "verdict": "no match: no derived-section representability theorem; affine-space declarations do not identify this functor"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Zeroth cohomology functor of universally connective perfect complex is affine finitely presented",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"CochainComplex.single₀_obj_zero\", \"module\": \"Mathlib.Algebra.Homology.Single\", \"type\": \"(A : V) : ((single₀ V).obj A).X 0 = A\", \"doc\": \"For any object $A$ in a category $V$ with zero morphisms, the 0th object of the cochain complex constructed by the single-term cochain complex functor applied to $A$ is equal to $A$ itself, while all \"}\n  {\"name\": \"groupCohomology.H0\", \"module\": \"Mathlib.RepresentationTheory.Homological.GroupCohomology.LowDegree\", \"type\": \"{k G : Type u} → [inst : CommRing k] → [inst_1 : Group G] → Rep k G → ModuleCat k\", \"doc\": \"For a group $ G $, a commutative ring $ k $, and a $ G $-representation $ A $ over $ k $, this defines the zeroth group cohomology module $ H^0(G, A) $ as the submodule of $ A $ consisting of elements\"}\n  {\"name\": \"CochainComplex.single₀.congr_simp\", \"module\": \"Mathlib.Algebra.Homology.Single\", \"type\": \"∀ (V : Type u) [inst : CategoryTheory.Category.{v, u} V] [inst_1 : CategoryTheory.Limits.HasZeroMorphisms V]\\n  [inst_2 : CategoryTheory.Limits.HasZeroObject V], CochainComplex.single₀ V = CochainComplex.single₀ V\", \"doc\": \"For any category $ V $ equipped with zero morphisms and a zero object, the single-term cochain complex functor at index 0 applied to $ V $ is equal to itself.\"}\n  {\"name\": \"CochainComplex.mkHom_f_0\", \"module\": \"Mathlib.Algebra.Homology.HomologicalComplex\", \"type\": \": (mkHom P Q zero one one_zero_comm succ).f 0 = zero\", \"doc\": \"The component of the cochain map at index $0$ constructed using `mkHom` is equal to the zero morphism in the category $V$.\"}\n  {\"name\": \"CochainComplex.HomComplex.Cochain.map_zero\", \"module\": \"Mathlib.Algebra.Homology.HomotopyCategory.HomComplex\", \"type\": \": (0 : Cochain K L n).map Φ = 0\", \"doc\": \"For any preadditive categories $\\\\mathcal{C}, \\\\mathcal{D}$, additive functor $\\\\Phi: \\\\mathcal{C} \\\\to \\\\mathcal{D}$, and cochain complexes $K,L$ in $\\\\mathcal{C}$, the image of the zero cochain $0 \\\\in \\\\tex\"}\n  {\"name\": \"groupCohomology.H0Iso\", \"module\": \"Mathlib.RepresentationTheory.Homological.GroupCohomology.LowDegree\", \"type\": \": H0 A ≅ ModuleCat.of k A.ρ.invariants\", \"doc\": \"For a commutative ring $ k $, group $ G $, and $ k $-representation $ A $, the zeroth group cohomology module $ H^0(G, A) $ is isomorphic to the submodule $ A^G $ of $ G $-invariant elements in $ A $.\"}\n  {\"name\": \"CochainComplex.mk'_X_0\", \"module\": \"Mathlib.Algebra.Homology.HomologicalComplex\", \"type\": \": (mk' X₀ X₁ d₀ succ').X 0 = X₀\", \"doc\": \"The zeroth object in the cochain complex constructed using the `mk'` function is equal to the initial object $ X_0 $.\"}\n  {\"name\": \"CochainComplex.HomComplex.CohomologyClass.mk_zero\", \"module\": \"Mathlib.Algebra.Homology.HomotopyCategory.HomComplexCohomology\", \"type\": \": mk (0 : Cocycle K L n) = 0\", \"doc\": \"The cohomology class in degree $n$ of the homomorphism complex $\\\\text{Hom}(K, L)$ corresponding to the zero cocycle is the zero element in the $n$-th cohomology group. Specifically, the canonical map \"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: no derived-section representability theorem; affine-space declarations do not identify this functor"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-noetherian-module-hom",
+  "date": "2026-10-24",
+  "group": "NM"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Algebraicity and smoothness of the stack of all nodal curves. Supporting input: Tags 0D52 (lemma-curves-stack) and 0D53 (lemma-curves-diagonal), with situation-curves. Supporting input: The four Mor functors in the fibre-product argument of quot-lemma-spaces-diagonal, used by quot-lemma-curves-diagonal. Supporting input: Tag 0D01, quot-proposition-hilb, the Hilbert-space input in the proof of Tag 0D1C. Supporting input: Tag 09TU, quot-proposition-quot. Supporting input: Tag 08K6, proposition-hom, with situation-hom. Supporting input: Tag 08JY (quot-lemma-noetherian-hom), the Noetherian finite-type-module case used in the last paragraph of Tag 08K6. In the proof of Tag 08JY: application of Tag 08JX after proving universal absence of negative cohomology.",
+   "via": [
+    "lem-sfb-noetherian-module-hom",
+    "lem-sfb-space-module-hom-affine",
+    "lem-sfb-space-quot-representability",
+    "lem-sfb-space-hilbert-representability",
+    "lem-sfb-space-hom-representability",
+    "lem-sfb-curve-descent-isom-spaces",
+    "lem-sfb-nodal-curve-stack-smooth",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-space-connective-perfect-sections-affine",
+  "worker": "stage1",
+  "summary": "Checked Tag 08JX(2), searched attachments and Mathlib, and split into connective site hypercohomology, an etale local nonnegative finite free model, explicit polynomial kernel representation, and existing coordinate-algebra descent/relative Spec. Two statement-only nodes, no Mathlib leaves; normalized doubled TeX backslashes without changing the statement.",
+  "blueprint": "The inherited ancestor tool returns null; preserved its via chain. Implements the cited supporting Tag 08JX in the Tag 08JY module-Hom input downstream of det-thm-sf-ctf-stability-direct-images, (3). The latest blueprint was read; no upper-level route or statement changed.",
+  "tool_uses": [
+   {
+    "node": "lem-trf-space-etale-module-pushforward-restriction",
+    "why": "Generic ringed-site or algebraic-space tool used in the Stacks 08JX route; this unit has no replacement for this general tool."
+   },
+   {
+    "node": "lem-pc-bounded-above-flat-kflat-site",
+    "why": "Generic K-flat computation of derived tensor pullback used in the Stacks 08JX route; this unit has no replacement for this general tool."
+   },
+   {
+    "node": "def-trf-algebraic-space",
+    "why": "Generic etale sheaf axiom for represented algebraic spaces used in the Stacks 08JX route; this unit has no replacement for this general tool."
+   },
+   {
+    "node": "lem-pc-separated-quasi-separated",
+    "why": "Scheme separated implies quasi-separated, applied after affine scheme base change; generic scheme tool for the finite-presentation check, with no replacement in this unit."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-trf-space-etale-module-pushforward-restriction",
+  "lem-pc-bounded-above-flat-kflat-site",
+  "def-trf-algebraic-space",
+  "lem-pc-separated-quasi-separated"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q24-e9b9daea1",
+  "group": "Q24",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q24-e9b9daea1 (reviewer sub-agent of L); spot-checked: Read in full: the item and both new nodes, Stacks quot.tex 08JX(2) with its whole proof, and every cited statement. The route is 08JX with the bootstrap step replaced by explicit étale descent of the coordinate algebras (081V relative Spec plus 04W8 descent), which is a valid equivalent route; the item statement is unchanged from live apart from TeX unescaping, and nothing is weakened. Steps 1-6 check out. (1) The étale sheaf property follows from the new site lemma together with the étale-pullback-is-restriction clause of lem-trf-space-etale-module-pushforward-restriction. (2) Finite free terms give a K-flat model, and the new lemma's clauses for E=Q(P) and for pullback give the kernel formula. (3) The polynomial algebra C_α represents that kernel through lem-weil-pbc-morphism-into-affine-scheme for an arbitrary source scheme; I checked the matrix orientation and the cases m=0, n=0 and [A -a-> A]. (4) Yoneda gives the overlap isomorphisms and the cocycle, relative Spec turns them into algebra isomorphisms, and the descended module gets its algebra structure by gluing sections. (5) The bijections glue over arbitrary scheme tests. (6) lfp by the chart test; quasi-compact and separated from affine-locality; quasi-separated after scheme base change. FIX (C1): step 4 applied fppf qcoh descent to an étale family without justifying that it is an fppf covering; it now cites lem-sfb-space-fppf-covering-calculus clause (1), also added to proof_deps. That node is in the same unit and creates no cycle. New nodes: lem-sfb-ringed-site-connective-hypercohomology is true (connective implies a K-injective model in degrees >=0, then left exactness) and is not a duplicate: lem-trf-connective-hypercohomology-sheaf covers only the site of opens of a ringed space, and lem-weil-pbc-derived-functor-negative-vanishing and lem-sfb-ringed-site-nonpositive-derived-hom state different things. lem-sfb-space-connective-nonnegative-free-model is true via 0653 and 00NX, using the identity test for H^{<0}=0, and is not a duplicate of the Zariski or pointwise cut nodes. Both are statement-only, self-contained, smaller than the item and not restatements of it. Batch-5 check: def-trf-algebraic-space and def-trf-space-etale-module-functors are general definitions, and lem-trf-space-etale-module-pushforward-restriction is generic étale restriction and base change of modules (03LX). None of them is a trace-formula or Poincaré-duality statement or proof step; the four sfb closure hits reach sec-trace-formula only through the definition def-trf-algebraic-space. Accepted. The declared tool_uses are accepted as generic. No SGA citations.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SpaceConnectivePerfectSectionsAffine",
+  "declaration": "AlgebraicGeometry.AlgebraicSpace.space_connective_perfect_sections_affine",
+  "declarations": [
+   "AlgebraicGeometry.AlgebraicSpace.connectiveSectionsH0",
+   "AlgebraicGeometry.AlgebraicSpace.connectiveSectionsOne",
+   "AlgebraicGeometry.AlgebraicSpace.connectiveSectionsClass",
+   "AlgebraicGeometry.AlgebraicSpace.space_connective_perfect_sections_affine"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/SpaceConnectivePerfectSectionsAffine.lean",
+  "statement": "theorem space_connective_perfect_sections_affine [∀ X : AlgebraicSpace S, HasDerivedCategory.{w} X.SmallModules] (B : AlgebraicSpace S) (K : B.DerivedModules) (hperfect : SheafOfModules.IsPerfectOnRingedSiteOfUniverses.{u, u, u, w} B.smallStructureSheaf K) (hconnective : ∀ (T : Over S) (g : schemeSpace T ⟶ B) (i : ℤ), i < 0 → IsZero ((DerivedCategory.homologyFunctor (schemeSpace T).SmallModules i).obj ((spaceDerivedPullback g).obj K))) : ∃ (V : AlgebraicSpace S) (p : V ⟶ B), MapIsAffine p ∧ MapIsQuasiCompact p.hom.hom ∧ MapIsQuasiCompact (pullback.diagonal p.hom.hom) ∧ MapIsLocallyOfFinitePresentation p ∧ ∃ e : ∀ (T : Over S) (g : schemeSpace T ⟶ B), { k : schemeSpace T ⟶ V // k ≫ p = g } ≃ (connectiveSectionsH0 (schemeSpace T)).obj ((spaceDerivedPullback g).obj K), ∀ (T U : Over S) (g : schemeSpace T ⟶ B) (h : U ⟶ T) (kT : { k : schemeSpace T ⟶ V // k ≫ p = g }) (kU : { k : schemeSpace U ⟶ V // k ≫ p = traceSchemeMap h ≫ g }), kU.val = traceSchemeMap h ≫ kT.val → ∃ (sT : (schemeSpace T).derivedStructure ⟶ (spaceDerivedPullback g).obj K) (sU : (schemeSpace U).derivedStructure ⟶ (spaceDerivedPullback (traceSchemeMap h ≫ g)).obj K), connectiveSectionsClass (schemeSpace T) sT = e T g kT ∧ connectiveSectionsClass (schemeSpace U) sU = e U (traceSchemeMap h ≫ g) kU ∧ traceDerivedStructureMap (traceSchemeMap h) ≫ sU ≫ (spaceDerivedPullbackComp g (traceSchemeMap h)).hom.app K = (spaceDerivedPullback (traceSchemeMap h)).map sT",
+  "branch": "sheaf-dag",
+  "by": "NQ",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "All scheme-test section bijections use the recorded H0 RΓ functor. Naturality is expressed by representatives O[0] → Lg*K and their commuting pullback square, with the canonical structure pullback and composition iso. The auxiliary definitions construct the hypercohomology class of a derived section from the universal right-derived unit applied to the identity of O. Added statement dependencies own the already landed schemeSpace, equivalent small model, derived module calculus, canonical pullback comparisons, canonical derived structure map, and affine predicate; no duplicate notion or extra hypothesis is introduced."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-4d20c8b93",
+  "group": "NQ",
+  "result": "pass",
+  "note": "Checked the statement clause by clause against the node and quot.tex 08JX(2) specialised to perfect K: local strict-perfect hperfect, cohomology-sheaf vanishing in degrees i<0 for all scheme tests, the recorded H0 RΓ, bijections from maps into V over B, and naturality via derived sections O[0]→Lg*K with the canonical structure map Lh*O→O (traceDerivedStructureMap) and the composition iso spaceDerivedPullbackComp; class of s = H0 RΓ(s)(1) is the standard bijection, so the clause is exact naturality. connectiveSectionsOne is the canonical comparison map built from rightDerivedFunctorUnit (not hollow). MapIsAffine and the qc + qs (diagonal qc) + lfp conjuncts match the node. Only lean/stmt_deps changed; the 6 added stmt_deps are landed definition nodes owning the declarations used; the other 16 snapshot nodes are identical to live; statement verbatim; docstrings carry source and 6 steps; proof is sorry only. Minor: qs is written inline (definitionally MapIsQuasiSeparated, not cited, no new definition). No compile run, no changes."
+ }
+}

@@ -1,0 +1,132 @@
+{
+ "id": "lem-asd-compact-internal-exchange",
+ "kind": "statement",
+ "title": "Cartesian exchange of internal compact adjunction",
+ "statement": "For any Cartesian square of schemes with compactifiable vertical maps f and f-prime and quasi-compact f-prime, and any finite commutative coefficient ring Lambda, the canonical internal compact-adjunction isomorphism Rf_*RHom(N,f!Q) = RHom(Rf!N,Q) commutes with base change: pullback of this isomorphism followed by internal-Hom pullback comparison and precomposition with inverse compact exchange equals ordinary exchange followed by internal-Hom pullback comparison, exceptional exchange, and internal compact adjunction on the base change. N and Q are arbitrary derived complexes. The notation is that of [prop-asd-internal-adjunction] [sbc-def-base-change-map].",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-lem-geo-smooth-generic/lem-asd-smooth-generic-direct-image.proof.md",
+  "place": "Final paragraph: compatibility of compact projection, compact exchange, and the ordinary/exceptional adjunction pairings."
+ },
+ "stmt_deps": [
+  "prop-asd-internal-adjunction",
+  "sbc-def-base-change-map"
+ ],
+ "proof": [
+  {
+   "text": "Use the adopted source theorem projectionMap_rightDerivedLowerShriekBaseChangeMap for the canonical right-coefficient compact projection/exchange equality. The coefficient-first symmetry conversion in lem-asd-compact-projection-exchange is not needed.",
+   "uses": [
+    "def-amb-etale-compact-support"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-lem-geo-smooth-generic/lem-asd-smooth-generic-direct-image.proof.md",
+    "place": "Final paragraph: compatibility of compact projection, compact exchange, and the ordinary/exceptional adjunction pairings."
+   }
+  },
+  {
+   "text": "Cancel invertible compact exchange, tensor comparisons and the inverse pullback-square comparison. The monoidal delta/mu identities and inverse identities turn this equality into compatibility of the left-adjoint projection squares.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Apply compactInternalAdjunctionExchangeOfMateCompatibility. Its proved mate calculation identifies ordinary base change, internal-Hom pullback comparisons, precomposition with inverse compact exchange, and the exceptional mate. The latter is the defining rightDerivedUpperShriekBaseChangeMap. This gives the stated square for arbitrary N and Q.",
+   "uses": [
+    "lem-asd-compact-hom-mate-identification"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-amb-etale-compact-support",
+  "lem-asd-compact-hom-mate-identification"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-lem-geo-smooth-generic/lem-asd-smooth-generic-direct-image.proof.md",
+  "place": "Final paragraph; complete canonical projection/mate proof by T4, 2026-10-26. The general mate calculation and its canonical specialization are proved in separate support modules to meet the per-file compile limit."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Internal Hom against an invertible coefficient and Cartesian compatibility of compact adjunction",
+   "results": "Leanfinder returned eight general sheaf internal-Hom/monoidal results (mostly condensed mathematics); none gives this etale coefficient or Cartesian compact-adjunction statement. Local source search identifies the ingredients cited in proof_deps.",
+   "date": "2026-10-26",
+   "verdict": "no combined match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.mateEquiv, CategoryTheory.conjugateEquiv",
+   "results": "4 general mate/conjugate composition results; none specializes to the displayed etale six-functor square.",
+   "date": "2026-10-26",
+   "verdict": "ingredients"
+  },
+  {
+   "tool": "grep",
+   "query": "mateEquiv.*conjugate|isIso_toIhomIhom|isDualizable_ihom",
+   "results": "12 general categorical mate-composition hits in Mathlib; the invertible duality API is in the adopted source tree.",
+   "date": "2026-10-26",
+   "verdict": "ingredients"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Internal compact adjunction commutes with Cartesian base change and exceptional exchange",
+   "results": "Eight general compact-space, exponentiable-morphism and base-change results; no derived compact-adjunction exchange identity.",
+   "date": "2026-10-26",
+   "verdict": "no exact Mathlib match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.SmoothCompactDualModel",
+  "date": "2026-10-26",
+  "group": "B3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-asd-smooth-compact-dual-model",
+   "place": "Pairing compatibility before inserting coefficient unit",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sf-cbc",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.CompactInternalAdjunctionExchange",
+  "file": "lean/Sheaf/AlgebraicGeometry/CompactInternalAdjunctionExchange.lean",
+  "declaration": "AlgebraicGeometry.Etale.compactInternalAdjunctionExchange",
+  "statement": "theorem compactInternalAdjunctionExchange\n    (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ]\n    {X S X' S' : Scheme.{u}} {f : X ⟶ S} {f' : X' ⟶ S'}\n    {g : S' ⟶ S} {g' : X' ⟶ X}\n    [HasCompactification f] [HasCompactification f'] [QuasiCompact f']\n    (sq : IsPullback g' f' f g) (N : DerivedCategoryModule Λ X)\n    (Q : DerivedCategoryModule Λ S) :\n    compactInternalAdjunctionExchangeSquare (ModuleCat Λ) sq.toCommSq\n      (rightDerivedLowerShriekBaseChangeMap Λ sq) N Q\n      (rightDerivedUpperShriekBaseChangeMap Λ sq)",
+  "branch": "sheaf-dag",
+  "by": "B3",
+  "date": "2026-10-26",
+  "declarations": [
+   "AlgebraicGeometry.Etale.compactInternalAdjunctionExchangeSquare",
+   "AlgebraicGeometry.Etale.compactInternalAdjunctionExchangeSquare_iff",
+   "AlgebraicGeometry.Etale.compactInternalAdjunctionExchange"
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-e3e16",
+  "group": "B3",
+  "result": "fix",
+  "landing": "20261026T065155-L-2731829",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T4",
+  "result": "pass",
+  "landing": "20261026T111931-L-1780973",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

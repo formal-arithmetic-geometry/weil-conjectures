@@ -1,0 +1,130 @@
+{
+ "id": "lem-pur-ordinary-scalar-balancing-level",
+ "kind": "statement",
+ "title": "Pure-tensor normalized ordinary scalar balancing at one quotient level",
+ "statement": "Fix a prime ell, finite Q_ell extensions E and F, a Q_ell algebra map i:E→F, a scheme W, and e≥1 satisfying the ramification ideal equality of [def-pur-finite-compact-support-scalar-data]. Use constant scalar tensor from [def-pur-constant-scalar-tensor-data] and the ordinary quotient/limit adjunction of [def-pur-native-reduction-counit-data]. For every completed E-module sheaf M and positive level n+1, there exists an isomorphism from B tensor_A the nth ordinary E-reduction of M to the ordinary F-reduction at e(n+1) of completed scalar extension of M. Its value on every local section b tensor eta_E(x) is eta_F(c_F(b) tensor x), where eta is the adjunction unit followed by its limit projection and c_F is the fixed constant-to-completion map. There is no assertion about naturality in M or horizontal indices, nor uniqueness of the isomorphism.",
+ "stmt_deps": [
+  "def-pur-constant-scalar-tensor-data",
+  "def-pur-native-reduction-counit-data",
+  "def-pur-finite-compact-support-scalar-data"
+ ],
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "lemma-adjointness-tensor-restrict (Tag 03EK), section-tensor-product; sites-cohomology.tex section-derived-limits (Tag 0940). Single-level quotient algebra and local generation in the original ordinaryBalancing_existsUnique docstring."
+ },
+ "proof": [
+  {
+   "text": "Evaluation of the ordinary quotient-system left adjoint is ordinary sheafified quotient extension at the given level. Its unit is induced by the quotient projection: construct the quotient tower on each module and use the tensor/restriction adjunction and diagonal/limit adjunction to compare with the specified left adjoint, preserving units.",
+   "uses": [
+    "def-pur-constant-scalar-tensor-data",
+    "def-pur-native-reduction-counit-data"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Ramification implies that the extension of (t^(n+1)) is (v^(e(n+1))). The finite-free identification of completed coefficient extension gives B tensor_A Ahat = Bhat. Tensor reassociation and the tensor/quotient equivalence produce the displayed single-level isomorphism. Its forward map takes b tensor (1 tensor x) to 1 tensor (c_F(b) tensor x); reverse reassociation is its inverse. Verify the two composites on tensor generators.",
+   "uses": [
+    "def-pur-finite-compact-support-scalar-data",
+    "def-pur-constant-scalar-tensor-data",
+    "lem-weil-completed-integral-finite-free"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The balanced maps commute with site restrictions and descend through module sheafification. The preceding unit-preserving comparison makes the formula exactly the specified adjunction-unit formula. Positivity identifies e(n+1)-1+1 with e(n+1). This construction does not assume naturality of the selected witnesses in M or n.",
+   "uses": [
+    "def-pur-constant-scalar-tensor-data",
+    "def-pur-native-reduction-counit-data"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pur-constant-scalar-tensor-data",
+  "def-pur-native-reduction-counit-data",
+  "def-pur-finite-compact-support-scalar-data",
+  "lem-weil-completed-integral-finite-free"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Expansion of the ordinary balancing docstring using the tensor/restriction adjunction and quotient algebra; scalar-source local generation is separate from the ramified single-level comparison."
+ },
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Tensor extension along quotient of modules is generated locally by the original module via the adjunction unit",
+   "results": "TensorProduct tensor/quotient equivalences, quotientTensorQuotientEquiv and tensorQuotMapSMulEquivTensorQuot. No theorem about evaluation of the specified quotient-system adjunction.",
+   "date": "2026-10-26",
+   "verdict": "Component algebra only; concrete single-level statement and generator criterion not found."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Extension of scalars along a quotient commutes with finite scalar extension; tensor quotient associativity and uniqueness on pure tensors",
+   "results": "8 hits, including QuotSMulTop.algebraMapTensorEquivTensorQuotSMulTop and TensorProduct.tensorQuotMapSMulEquivTensorQuot. Individual module equivalences do not identify this adjunction unit.",
+   "date": "2026-10-26",
+   "verdict": "No exact project-specific statement."
+  },
+  {
+   "tool": "grep",
+   "query": "ordinaryBalancing|tensorQuotMapSMulEquivTensorQuot|unit.*[Ee]pi; rg ordinary quotient balancing and reduction-unit generators in lean/WeilConjectures, lean/Sheaf and dag/nodes; blueprint_refs.py search reduction balancing, quotient tensor, ordinary reduction",
+   "results": "Generic tensor/quotient equivalences and scalar adjunction APIs found. Only ScalarReductionTowerBalancing contains the normalized whole-tower theorem. No independent level statement or reduction-unit generator criterion. Blueprint searches found a supported cup-product quotient-tensor node, which is unrelated, and a direct-image limits node mentioning reduction units, which is unrelated. No matching statement.",
+   "date": "2026-10-26",
+   "verdict": "New lemmas are proper parts of the ordinary balancing argument, not duplicates."
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.ScalarReductionTowerBalancing",
+  "date": "2026-10-26",
+  "group": "V5"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-pur-rational-and-qbar-purity",
+   "place": "Ordinary ramified scalar balancing: Pure-tensor normalized ordinary scalar balancing at one quotient level",
+   "via": [
+    "def-pur-strict-scalar-reduction-balancing",
+    "lem-pur-compact-support-strict-scalar-mate",
+    "lem-pur-compact-support-integral-coefficient-comparison",
+    "lem-pur-adic-purity-scalar-naturality"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-thm-sf-compatibility",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.OrdinaryScalarBalancingLevel",
+  "file": "lean/Sheaf/Paper/OrdinaryScalarBalancingLevel.lean",
+  "declaration": "WeilConjectures.PurStrictScalar.ordinaryScalarBalancingLevel_exists",
+  "statement": "theorem ordinaryScalarBalancingLevel_exists (W : Scheme.{u}) (e : ℕ)\n    (he : PurCompactSupport.Ramification l E F i e) (hepos : 1 ≤ e) :\n    let ηE (M : scalarReductionSource l E W) (n : ℕ) (U : W.ProEtᵒᵖ)\n        (x : M.val.obj U) :=\n      (((ordinaryReductionAdj l E W).unit.app M ≫\n        limit.π ((coefficientSequenceRestriction.{u, u} l E W).obj\n          ((ordinaryReduction l E W).obj M)) (op n)).val.app U) x\n    let ηF (M : scalarReductionSource l F W) (n : ℕ) (U : W.ProEtᵒᵖ)\n        (x : M.val.obj U) :=\n      (((ordinaryReductionAdj l F W).unit.app M ≫\n        limit.π ((coefficientSequenceRestriction.{u, u} l F W).obj\n          ((ordinaryReduction l F W).obj M)) (op n)).val.app U) x\n    ∀ (M : scalarReductionSource l E W) (n : ℕ),\n    ∃ β : (pbcExtend (constantMap l E F i W)).obj\n        (((ordinaryReduction l E W ⋙ systemRestriction l E W).obj M).obj (op n)) ≅\n      (((ordinaryReduction l F W ⋙ systemRestriction l F W).obj\n        ((pbcExtend (completedCoefficientMap l E F i W)).obj M)).obj\n          (op (e * (n + 1) - 1))),\n      ∀ (U : W.ProEtᵒᵖ)\n        (b : ((constants l F).ring W).obj.obj U) (x : M.val.obj U),\n        (β.hom.val.app U)\n            (pbcTensorSection (constantMap l E F i W)\n              ((((ordinaryReduction l E W ⋙ systemRestriction l E W)).obj M).obj (op n)) U b\n              (ηE M n U x)) =\n          ηF\n            ((pbcExtend (completedCoefficientMap l E F i W)).obj M)\n            (e * (n + 1) - 1) U\n            (pbcTensorSection (completedCoefficientMap l E F i W) M U\n              (((integralConstantToCompletionOfUniverses l F W).hom.app U) b) x)",
+  "branch": "sheaf-dag",
+  "by": "V5",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V5",
+  "result": "pass",
+  "landing": "20261025T203516-L-2823819",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V5",
+  "result": "pass",
+  "landing": "20261025T203516-L-2823819",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

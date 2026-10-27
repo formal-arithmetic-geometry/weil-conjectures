@@ -1,0 +1,360 @@
+{
+ "id": "lem-sfb-supported-perfect-approximation-open-step",
+ "kind": "statement",
+ "title": "Supported perfect approximation extends across an affine open",
+ "statement": "Let $Y$ be a scheme [def-pc-scheme] with an open covering $Y=U\\cup V$. Assume that $U$ is quasi-compact, $V$ is affine, and $U\\cap V$ is quasi-compact. If $\\mathsf A(U)$ holds, then $\\mathsf A(Y)$ holds, where $U$ and $V$ carry their open subscheme structures and $\\mathsf A$ is the uniform supported perfect approximation property [def-sfb-supported-perfect-approximation-property].",
+ "source": {
+  "document": "literature/stacks-project/perfect.tex",
+  "place": "Tag 08ER, lemma-induction-step."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-sfb-supported-perfect-approximation-property"
+ ],
+ "proof": [
+  {
+   "text": "Fix a closed $T\\subseteq Y$ with retrocompact complement. The complement of $T\\cap U$ in $U$ is retrocompact: every affine open of $U$ is also an affine open of $Y$. Choose a witness $r_U$ for $\\mathsf A(U)$ at $T\\cap U$, and enlarge it to be nonnegative. Enlarging a witness preserves its property: $a$-pseudo-coherence implies $b$-pseudo-coherence for $b\\ge a$ by the same local approximation, and the support condition becomes stronger when its lower endpoint decreases. Put $T'=T\\setminus U$, closed in $Y$ and contained in $V$. The correct complement formula is $V\\setminus T'=(V\\setminus T)\\cup(U\\cap V)$. Both opens on the right are quasi-compact, the first by retrocompactness and the second by hypothesis; their union is quasi-compact. Choose a finite affine cover of this complement with $s\\ge0$ members. Set $r=r_U+s$, a number depending only on $Y,T$ and the fixed cover.",
+   "uses": [
+    "def-sfb-supported-perfect-approximation-property",
+    "def-sfb-m-pseudo-coherent-complex",
+    "lem-pqf-finite-affine-cover-qc-open"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/perfect.tex",
+    "place": "Tag 08ER, lemma-induction-step, proof (with the bound and endpoints corrected as reported)."
+   }
+  },
+  {
+   "text": "Fix $m$ and an admissible $E$: it is $(m-r)$-pseudo-coherent, lies in $D_{\\mathrm{QCoh}}(\\mathcal O_Y)$, and is supported on $T$ in degrees $\\ge m-r$. On each open in its pseudo-coherence cover, cohomology vanishes above the maximum of $m-r$ and the upper bound of the strictly perfect approximation. Quasi-compactness of $U$ gives a finite subcover of $U$ and hence an integer $h$ with $H^i(E)|_U=0$ for $i>h$. Prove the approximation conclusion, simultaneously for all such $E$, by induction on $\\max(0,h-(m-s)+1)$. This uses an upper bound, not a largest nonzero degree, so also covers $E|_U=0$. Exact restriction commutes with cohomology and preserves the local defining approximations.",
+   "uses": [
+    "def-sfb-m-pseudo-coherent-complex",
+    "def-pc-perfect-complex",
+    "def-pc-derived-open-restriction-maps"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/perfect.tex",
+    "place": "Tag 08ER, lemma-induction-step, proof (with the bound and endpoints corrected as reported)."
+   }
+  },
+  {
+   "text": "In the base case $h<m-s$, $H^i(E)|_U=0$ for $i\\ge m-s$. Since $r\\ge s$, the support condition outside $T$ also holds in these degrees. Thus $H^i(E)$ is supported on $T'$ for $i\\ge m-s$. The restriction $E|_V$ is $m$-pseudo-coherent by monotonicity, because $r\\ge0$. Apply the affine approximation theorem to $V,T',m,s$: its required support range $i\\ge m-s+1$ follows from the stronger bound just obtained. This gives a perfect $B$ supported on $T'$ and $b:B\\to E|_V$ inducing isomorphisms above $m$ and a surjection at $m$.",
+   "uses": [
+    "lem-sfb-affine-supported-perfect-approximation",
+    "def-sfb-m-pseudo-coherent-complex"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/perfect.tex",
+    "place": "Tag 08ER, lemma-induction-step, proof (with the bound and endpoints corrected as reported)."
+   }
+  },
+  {
+   "text": "Let $j:V\\hookrightarrow Y$. The supported-open pushforward theorem says that $Rj_*B$ is perfect and $j_!B\\cong Rj_*B$. Let $P=j_!B$ and let $v:P\\to E$ correspond to $b$ under the derived extension-by-zero adjunction. Exactness of extension by zero gives $H^i(P)=j_!H^i(B)$. Its stalks are those of $H^i(B)$ on $V$ and zero outside $V$, so $P$ is supported on $T'\\subseteq T$. On $V$, the map $v$ is $b$ under the adjunction unit; this unit is an isomorphism, as follows from the inside-stalk unit formula (the restriction back to $V$ is the identity). Outside $V$, both $H^i(P)$ and $H^i(E)$ vanish for $i\\ge m$, because $T'\\subset V$ and $m\\ge m-s$. Consequently $v$ has the required cohomology isomorphisms and surjection everywhere. The stalk criterion detects the isomorphisms; exact stalks identify the cokernel of the degree-$m$ map as zero, hence that map is surjective.",
+   "uses": [
+    "lem-pc-supported-open-pushforward",
+    "lem-sc-derived-open-shriek-derived-adjunction",
+    "lem-sc-derived-open-restriction-adjunction-exact",
+    "lem-sc-module-extension-by-zero-stalk-maps",
+    "lem-weil-pbc-module-stalk-exact",
+    "lem-weil-pbc-module-iso-on-stalks"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/perfect.tex",
+    "place": "Tag 08ER, lemma-induction-step, proof (with the bound and endpoints corrected as reported)."
+   }
+  },
+  {
+   "text": "Suppose $h\\ge m-s$. Then $h-r_U\\ge m-r$, so $E|_U$ is $(h-r_U)$-pseudo-coherent and supported on $T\\cap U$ in degrees $\\ge h-r_U$. Apply $\\mathsf A(U)$ at approximation degree $h$, obtaining $p:A\\to E|_U$ with $A$ perfect supported on $T\\cap U$, an isomorphism in degrees $>h$, and a surjection in degree $h$. In particular $H^i(A)=0$ for $i>h$. Put $W=U\\cap V$. The affine supported extension theorem on $V$, with closed support $T\\cap V$, supplies a perfect supported $Q$ and an isomorphism $c:Q|_W\\cong(A\\oplus A[1])|_W$. Its hypotheses hold because $W$ is quasi-compact and $V\\setminus T$ is quasi-compact. Apply the affine perfect-map lifting theorem to the composite $Q|_W\\xrightarrow{c}(A\\oplus A[1])|_W\\xrightarrow{\\mathrm{pr}_1}A|_W\\xrightarrow{p}E|_W$. Replace $Q$ by the supplied perfect $Q_1$, still supported on $T\\cap V$, and replace $c$ by $c\\circ\\beta|_W$. The resulting map $b:Q_1\\to E|_V$ satisfies $b|_W=p|_W\\circ\\mathrm{pr}_1\\circ c$.",
+   "uses": [
+    "def-sfb-supported-perfect-approximation-property",
+    "def-sfb-m-pseudo-coherent-complex",
+    "lem-sc-affine-perfect-support-extension",
+    "lem-sc-affine-perfect-map-lift"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/perfect.tex",
+    "place": "Tag 08ER, lemma-induction-step, proof (with the bound and endpoints corrected as reported)."
+   }
+  },
+  {
+   "text": "Glue $A\\oplus A[1]$ on $U$ and $Q_1$ on $V$ using $c^{-1}$ and the compatible maps $p\\circ\\mathrm{pr}_1,b$. The derived open gluing theorem gives $a:R\\to E$ whose restriction to $U$ is $p\\circ\\mathrm{pr}_1$ and whose restriction to $V$ is $b$. Finite sums and shifts preserve perfectness, so the two restrictions are perfect. Their strictly perfect local covers together cover $Y$, proving $R$ perfect by definition. Their vanishing stalks prove support on $T$. On $U$, $H^i(R)=H^i(A)\\oplus H^{i+1}(A)$, which vanishes for $i>h$, and $H^h(a)$ is surjective. Perfect objects are pseudo-coherent by the perfect-to-pseudo-coherent theorem, and pseudo-coherent scheme objects have quasi-coherent cohomology. In particular $R\\in D_{\\mathrm{QCoh}}(\\mathcal O_Y)$.",
+   "uses": [
+    "lem-sc-derived-open-gluing",
+    "lem-pc-perfect-thick-closure",
+    "def-pc-perfect-complex",
+    "lem-pc-perfect-pseudo-coherent-locally-finite-tor",
+    "lem-sc-pseudo-coherent-qcoh"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/perfect.tex",
+    "place": "Tag 08ER, lemma-induction-step, proof (with the bound and endpoints corrected as reported)."
+   }
+  },
+  {
+   "text": "Complete $a$ to a distinguished triangle $R\\to E\\to E_1\\to R[1]$. A perfect object is locally strictly perfect, so its local identity approximation makes $R$ $(m-r+1)$-pseudo-coherent. Apply part (1) of the ringed-site pseudo-coherence triangle theorem on the small Zariski ringed site, whose local strictly perfect definition is exactly the scheme definition: $E_1$ is $(m-r)$-pseudo-coherent. The quasi-coherent derived property is closed under shifts and triangle middle terms; apply it with support equal to $Y$ to the rotated triangle $E\\to E_1\\to R[1]$. Hence $E_1\\in D_{\\mathrm{QCoh}}$. The cohomology long exact sequence on $U$ gives $H^i(E_1)|_U=0$ for $i\\ge h$, using the surjection at $h$ and the vanishing above $h$ of $R|_U,E|_U$. At a stalk outside $T$, all cohomology stalks of $R$ vanish, so the same sequence identifies $H^i(E_1)_y$ with $H^i(E)_y$. Thus $E_1$ satisfies the same support bound. The induction hypothesis at upper bound $h-1$ now gives an approximation $v_1:P_1\\to E_1$ at degree $m$, with $P_1$ perfect supported on $T$.",
+   "uses": [
+    "def-weil-triangulated-category",
+    "def-pc-perfect-complex",
+    "lem-sfb-ringed-site-m-pseudocoherent-triangle",
+    "lem-pc-supported-qcoh-triangulated",
+    "lem-sf-derived-homology-long-exact",
+    "lem-weil-pbc-module-stalk-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/perfect.tex",
+    "place": "Tag 08ER, lemma-induction-step, proof (with the bound and endpoints corrected as reported)."
+   }
+  },
+  {
+   "text": "Let $d:E_1\\to R[1]$ be the connecting morphism. Complete $d\\circ v_1$ and rotate to obtain a distinguished triangle $R\\to P\\to P_1\\xrightarrow{d\\circ v_1}R[1]$. Apply TR3 to the rotated triangles starting with $P_1\\to R[1]$ and $E_1\\to R[1]$, using $v_1$ and the identity of $R[1]$, and shift the third map back. This yields $v:P\\to E$ and a morphism from the upper triangle to $R\\to E\\to E_1\\to R[1]$ whose outer components are $1_R,v_1$. Two-out-of-three gives that $P$ is perfect. At a point outside $T$, the upper triangle's exact cohomology sequence has zero outer stalks in every degree, proving all stalks of $H^i(P)$ there are zero.",
+   "uses": [
+    "def-weil-triangulated-category",
+    "lem-pc-perfect-thick-closure",
+    "lem-sf-derived-homology-long-exact",
+    "lem-weil-pbc-module-stalk-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/perfect.tex",
+    "place": "Tag 08ER, lemma-induction-step, proof (with the bound and endpoints corrected as reported)."
+   }
+  },
+  {
+   "text": "Check the comparison on stalks at any fixed point, using the long exact sequences of this triangle morphism. For $i\\ge m$, map $z\\in H^i(E)$ to $z_1\\in H^i(E_1)$ and lift $z_1$ to $x_1\\in H^i(P_1)$ through $H^i(v_1)$. Its boundary in $H^{i+1}(R)$ is zero by commutativity, so lift $x_1$ to $x\\in H^i(P)$. The difference $z-H^i(v)x$ comes from $H^i(R)$; adjust $x$ by that class. This proves surjectivity. If $i>m$ and $H^i(v)x=0$, injectivity of $H^i(v_1)$ says $x$ comes from $a\\in H^i(R)$. Since $a$ maps to zero in $H^i(E)$, it is the boundary of some $b\\in H^{i-1}(E_1)$. Surjectivity of $H^{i-1}(v_1)$, valid since $i-1\\ge m$, lifts $b$ to $H^{i-1}(P_1)$. The upper exact sequence makes the image of $a$ in $H^i(P)$ zero, so $x=0$. Thus the stalk maps are bijective above $m$ and surjective at $m$. Stalk detection gives the sheaf isomorphisms; exact stalks show the degree-$m$ cokernel has all stalks zero, hence is zero. This proves that $v$ is an approximation and completes the induction. Since the fixed $r=r_U+s$ works for every $m,E$, $\\mathsf A(Y)$ holds.",
+   "uses": [
+    "lem-sf-derived-homology-long-exact",
+    "lem-weil-pbc-module-stalk-exact",
+    "lem-weil-pbc-module-iso-on-stalks",
+    "def-sfb-supported-perfect-approximation-property"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/perfect.tex",
+    "place": "Tag 08ER, lemma-induction-step, proof (with the bound and endpoints corrected as reported)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sfb-supported-perfect-approximation-property",
+  "def-sfb-m-pseudo-coherent-complex",
+  "lem-pqf-finite-affine-cover-qc-open",
+  "def-pc-perfect-complex",
+  "def-pc-derived-open-restriction-maps",
+  "lem-sfb-affine-supported-perfect-approximation",
+  "lem-pc-supported-open-pushforward",
+  "lem-sc-derived-open-shriek-derived-adjunction",
+  "lem-sc-derived-open-restriction-adjunction-exact",
+  "lem-sc-module-extension-by-zero-stalk-maps",
+  "lem-weil-pbc-module-stalk-exact",
+  "lem-weil-pbc-module-iso-on-stalks",
+  "lem-sc-affine-perfect-support-extension",
+  "lem-sc-affine-perfect-map-lift",
+  "lem-sc-derived-open-gluing",
+  "lem-pc-perfect-thick-closure",
+  "lem-pc-perfect-pseudo-coherent-locally-finite-tor",
+  "lem-sc-pseudo-coherent-qcoh",
+  "def-weil-triangulated-category",
+  "lem-sfb-ringed-site-m-pseudocoherent-triangle",
+  "lem-pc-supported-qcoh-triangulated",
+  "lem-sf-derived-homology-long-exact"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/perfect.tex",
+  "place": "Tag 08ER, lemma-induction-step: source construction with corrected complement, additive uniform bound, top-degree approximation, and strict base-case endpoint."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "pseudo.?coher|supported.*perfect.*approx|approx.*perfect",
+   "results": "{\"t\": \"2026-10-23T16:18:56Z\", \"tool\": \"grep\", \"query\": \"pseudo.?coher|supported.*perfect.*approx|approx.*perfect\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern scheme open covers, sections, or arbitrary bounded derived representatives; none states supported perfect approximation across an affine open."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Uniform supported approximation of pseudo coherent complexes by perfect complexes glues across an affine open",
+   "results": "{\"t\": \"2026-10-23T16:18:56Z\", \"tool\": \"leansearch\", \"query\": \"Uniform supported approximation of pseudo coherent complexes by perfect complexes glues across an affine open\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Cover.instIsIsoFromGlued\", \"AlgebraicGeometry.Scheme.IdealSheafData.range_glueDataObjι_ι_eq_support_inter\", \"AlgebraicGeometry.HasAffineProperty.of_iSup_eq_top\", \"AlgebraicGeometry.Scheme.Cover.ι_glueMorphisms\", \"AlgebraicGeometry.HasAffineProperty.iff_of_iSup_eq_top\", \"TopCat.Presheaf.IsGluing\", \"AlgebraicGeometry.Scheme.Cover.RelativeGluingData.toBase\", \"AlgebraicGeometry.Scheme.IdealSheafData.ker_glueDataObjι_appTop\"], \"digest\": \"8491304483617b50\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern scheme open covers, sections, or arbitrary bounded derived representatives; none states supported perfect approximation across an affine open."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Perfect\", \"IsAffineOpen\"",
+   "results": "{\"t\": \"2026-10-23T16:18:56Z\", \"tool\": \"loogle\", \"query\": \"\\\"Perfect\\\", \\\"IsAffineOpen\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern scheme open covers, sections, or arbitrary bounded derived representatives; none states supported perfect approximation across an affine open."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "If supported perfect approximation holds on a quasi compact open U then it holds on U union an affine open V with quasi compact overlap",
+   "results": "{\"t\": \"2026-10-23T16:18:57Z\", \"tool\": \"leanfinder\", \"query\": \"If supported perfect approximation holds on a quasi compact open U then it holds on U union an affine open V with quasi compact overlap\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.compact_open_induction_on\", \"AlgebraicGeometry.reduce_to_affine_global\", \"AlgebraicGeometry.QuasiCompactCover.isCompactOpenCovered_of_isAffineOpen\", \"AlgebraicGeometry.of_affine_open_cover\", \"AlgebraicGeometry.Scheme.exists_isOpenCover_and_isAffine\", \"AlgebraicGeometry.Scheme.quasiSeparatedSpace_of_isOpenCover\", \"AlgebraicGeometry.exists_eq_pow_mul_of_isCompact_of_isQuasiSeparated\", \"AlgebraicGeometry.IsAffineOpen.isCompactOpenCovered\"], \"digest\": \"7069152d7c87b8a8\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern scheme open covers, sections, or arbitrary bounded derived representatives; none states supported perfect approximation across an affine open."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Approximation by perfect complexes supported on a closed subset for pseudo coherent derived sheaves on a scheme",
+   "results": "{\"t\": \"2026-10-23T16:19:53Z\", \"tool\": \"leanfinder\", \"query\": \"Approximation by perfect complexes supported on a closed subset for pseudo coherent derived sheaves on a scheme\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.exists_of_res_zero_of_qcqs_of_top\", \"AlgebraicGeometry.exists_appTop_map_eq_zero_of_isLimit\", \"AlgebraicGeometry.Scheme.IdealSheafData.mkOfMemSupportIff_ideal\", \"AlgebraicGeometry.exists_of_res_zero_of_qcqs\", \"AlgebraicGeometry.exists_app_map_eq_zero_of_isLimit\", \"AlgebraicGeometry.exists_appTop_map_eq_zero_of_isAffine_of_isLimit\", \"DerivedCategory.exists_iso_Q_obj_of_isGE\", \"AlgebraicGeometry.exists_of_res_eq_of_qcqs_of_top\"], \"digest\": \"be99f252345b8863\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern scheme open covers, sections, or arbitrary bounded derived representatives; none states supported perfect approximation across an affine open."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-pseudocoherent-perfect-approximation",
+  "date": "2026-10-23",
+  "group": "Q141"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Knudsen forgetful morphism as the universal stable curve. Section 2, Lemma 2.5 (printed pp.178--179), using Section 1, Corollary 1.5 and Lemma 1.6: multiplication and the pushforward exact sequences, retaining the twist by minus the old-marking divisor. Lemma 2.5, first paragraph and final evaluation: Corollary 1.5 supplies vanishing, base-flat direct images, arbitrary base change and generation for the five divisor modules. Corollary 1.5, printed p.167: the general cohomology-and-base-change tool whose conditions (1) and (2) the exceptional-fibre calculation must verify. General tool for Corollary 1.5: finite presentation of the acyclic image: detect pseudo-coherence by perfect tensor tests on V, using proper-support perfect direct image for U -> S. Supporting tool: 0CSH (lemma-perfect-enough). In Stacks 0CSH proof, choose a perfect approximation P to E at degree m-N-1-b; this is the 08ES approximation theorem with support T=X. The open-union induction step of Tag 08ES.",
+   "via": [
+    "lem-sfb-pseudocoherent-perfect-approximation",
+    "lem-sfb-perfect-to-pseudocoherent-tensor-tests",
+    "lem-sfb-perfect-tests-detect-pseudocoherence",
+    "lem-sfb-relative-acyclic-direct-image",
+    "lem-sfb-rational-contraction-line-cohomology",
+    "lem-sfb-elementary-contraction-evaluation",
+    "lem-sfb-knudsen-pointed-forgetful-universal-curve",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-supported-perfect-approximation-open-step",
+  "worker": "stage1",
+  "group": "Q117",
+  "summary": "Split the supported open-union induction using existing affine approximation, affine stabilization, map lifting, open gluing and triangle tools. Corrected errors in the source proof without changing the theorem: union formula for the complement, r=r_U+s, approximation at upper bound h, and base case h<m-s. All cited statements were read; no new nodes.",
+  "blueprint": "Current latest det-thm-sf-ctf-stability-direct-images proof (3); inherited auxiliary route through 0CSH and 08ES, here its 08ER open-union induction. Latest unit and direct-images proof read. The ancestor command returns None for the inherited chain: retain blueprint.from.node=null and via, with same_as=[] after whole-blueprint searches for approximation and Tags 08ER/08EK/08EH/08DG/08EP. This is a generic prerequisite, not a replacement of a unit step.",
+  "tool_uses": [
+   {
+    "node": "lem-pqf-finite-affine-cover-qc-open",
+    "why": "Finite affine cover of the complement in the affine chart gives the uniform integer s."
+   },
+   {
+    "node": "lem-pc-supported-open-pushforward",
+    "why": "Perfectness of the extension by zero of a perfect object with support closed in Y."
+   },
+   {
+    "node": "lem-sc-derived-open-shriek-derived-adjunction",
+    "why": "Turns the affine supported approximation map into a global map in the base case."
+   },
+   {
+    "node": "lem-sc-derived-open-restriction-adjunction-exact",
+    "why": "Exactness permits cohomology of extension by zero to be computed termwise."
+   },
+   {
+    "node": "lem-sc-module-extension-by-zero-stalk-maps",
+    "why": "Inside and outside stalks and the counit identity verify the global base-case approximation."
+   },
+   {
+    "node": "lem-weil-pbc-module-stalk-exact",
+    "why": "Exact stalks justify support and the written endpoint diagram chase."
+   },
+   {
+    "node": "lem-weil-pbc-module-iso-on-stalks",
+    "why": "Stalk detection yields sheaf isomorphisms and vanishing of the degree-m cokernel."
+   },
+   {
+    "node": "lem-sc-affine-perfect-support-extension",
+    "why": "Supported stabilization of a perfect overlap object, exactly the 08EK input of 08ER."
+   },
+   {
+    "node": "lem-sc-affine-perfect-map-lift",
+    "why": "Perfect replacement lifts an overlap map to the affine chart while preserving support, the 08EH input of 08ER."
+   },
+   {
+    "node": "lem-sc-derived-open-gluing",
+    "why": "Gluing of two derived objects together with compatible maps, the 08DG input of 08ER."
+   },
+   {
+    "node": "lem-pc-perfect-thick-closure",
+    "why": "Generic shifts, finite sums and triangle closure of perfect objects."
+   },
+   {
+    "node": "lem-pc-perfect-pseudo-coherent-locally-finite-tor",
+    "why": "Perfect implies pseudo-coherent, to obtain quasi-coherent cohomology."
+   },
+   {
+    "node": "lem-sc-pseudo-coherent-qcoh",
+    "why": "Pseudo-coherent scheme objects have quasi-coherent cohomology."
+   },
+   {
+    "node": "lem-pc-supported-qcoh-triangulated",
+    "why": "Triangle closure with support all of Y keeps the induction cone in D_QCoh."
+   },
+   {
+    "node": "lem-sf-derived-homology-long-exact",
+    "why": "Cohomology exact sequences of the induction and assembly triangles."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pqf-finite-affine-cover-qc-open",
+  "lem-pc-supported-open-pushforward",
+  "lem-sc-derived-open-shriek-derived-adjunction",
+  "lem-sc-derived-open-restriction-adjunction-exact",
+  "lem-sc-module-extension-by-zero-stalk-maps",
+  "lem-weil-pbc-module-stalk-exact",
+  "lem-weil-pbc-module-iso-on-stalks",
+  "lem-sc-affine-perfect-support-extension",
+  "lem-sc-affine-perfect-map-lift",
+  "lem-sc-derived-open-gluing",
+  "lem-pc-perfect-thick-closure",
+  "lem-pc-perfect-pseudo-coherent-locally-finite-tor",
+  "lem-sc-pseudo-coherent-qcoh",
+  "lem-pc-supported-qcoh-triangulated",
+  "lem-sf-derived-homology-long-exact"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q117-7e5878d9b",
+  "group": "Q117",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q117-7e5878d9b (reviewer sub-agent of L); spot-checked: I read Stacks perfect.tex 08ER, 08EM/08EN, 08EQ and lemma-open in full. The item states 08ER exactly, and its statement, stmt_deps and blueprint are unchanged from live and side-live (item there is unsplit with no proof; no repair or re-split note; no other group has split it). The delivery has 0 new nodes. All 22 cited nodes exist unmerged with the same statement in live and side-live, proof_deps equals the union of the step uses, and no SGA source is cited. I confirmed the worker's four source corrections: (1) V\\T' is the union (V\\T) ∪ (U∩V), not the printed intersection; T=Y=U=V=Spec k is a counterexample to the printed formula. (2) The base case t<=m-r' fails at the endpoint, so the strict base case h<m-s is right. (3) Approximating on U at degree m says nothing about the top degree t when m-r'<t<m; approximating at the induction bound h fixes this. (4) The fix in (3) needs r=r_U+s rather than max(r_U,r'); the target is unchanged. Step checks: step 1, retrocompactness restricts to U and enlarging the witness r_U is valid. Step 2, the bound h follows from a finite subcover of U, and the induction measure decreases. Step 3, the support off T' holds for i>=m-s and the hypotheses of 08EQ on (V,T',m,s) hold. Step 4, j_!B ≅ Rj_*B is perfect, and the adjunction and extension-by-zero stalk facts give the required isomorphisms and surjection, with H^i(E)_y=0 outside V for i>=m. Step 5, the inequality h-r_U>=m-r lets A(U) apply at degree h; 08EK applies on affine V with quasi-compact V\\T and W=U∩V; 08EH keeps the support and gives b|_W=p∘pr1∘c after replacing c by c∘β. Step 6, 08DG gluing with transition c^{-1} is compatible; R is perfect, supported on T and in D_QCoh, with H^h of the glued map surjective on U. Step 7, 08FV(1) in site form makes the cone E1 (m-r)-pseudo-coherent; E1 is in D_QCoh, H^i(E1)|_U=0 for i>=h, and its support off T is unchanged. Step 8, TR3 on the rotated triangles gives a triangle morphism with components 1_R, v, v1; I checked the signs. Step 9, I re-did both halves of the stalk diagram chase. Edge cases checked: Y, U, V or T empty, T=Y, s=0, E|_U=0. I found no duplicate of 08ER in the DAG. The quasi-separated node lem-sc-supported-map-affine-union-gluing is correctly avoided. The off-unit generic tools declared in tool_uses are accepted. No changes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SupportedPerfectApproximationOpenStep",
+  "declaration": "AlgebraicGeometry.Scheme.hasSupportedPerfectApproximation_of_open_cover",
+  "file": "lean/Sheaf/AlgebraicGeometry/SupportedPerfectApproximationOpenStep.lean",
+  "statement": "theorem hasSupportedPerfectApproximation_of_open_cover (Y : Scheme.{u}) [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))] [∀ W : Y.Opens, HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings W.toScheme.toRingedSpace))] [∀ W : Y.Opens, HasDerivedCategory.{w} (SheafOfModules.{u} ((moduleRings Y.toRingedSpace).over W))] (U V : Y.Opens) [∀ W : U.toScheme.Opens, HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings W.toScheme.toRingedSpace))] [∀ W : U.toScheme.Opens, HasDerivedCategory.{w} (SheafOfModules.{u} ((moduleRings U.toScheme.toRingedSpace).over W))] (hcover : U ⊔ V = ⊤) (hU : IsCompact (U : Set Y)) (hV : IsAffineOpen V) (hUV : IsCompact ((U ⊓ V : Y.Opens) : Set Y)) (hA : HasSupportedPerfectApproximation.{u, w} U.toScheme) : HasSupportedPerfectApproximation.{u, w} Y",
+  "branch": "sheaf-dag",
+  "by": "Q114",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-85e99c79f",
+  "group": "Q114",
+  "result": "pass",
+  "note": "Statement matches Stacks 08ER (perfect.tex lemma-induction-step) clause by clause: Y : Scheme.{u}, U V : Y.Opens with U ⊔ V = ⊤, IsCompact U, IsAffineOpen V, IsCompact (U ⊓ V), hA : HasSupportedPerfectApproximation.{u,w} U.toScheme ⊢ HasSupportedPerfectApproximation.{u,w} Y. The extra binders are exactly the HasDerivedCategory model binders the dependency definition needs at Y and U.toScheme; no qs/Noetherian/universe restriction. Edge cases (Y, U, V or U∩V empty; U=Y) covered. Node diff vs side-live = lean field only; lean.statement verbatim in file; no name collision; only proof is sorry; source and blueprint docstrings with all 9 proof steps; all 22 imports resolve; Worker report and Second reading sections present (second reading is a brief self-check). No recompile as instructed; worker reports compile OK and deliver2 dry run OK."
+ }
+}

@@ -1,0 +1,288 @@
+{
+ "id": "lem-per-reflexive-height-one-intersection-criterion",
+ "kind": "statement",
+ "title": "Reflexivity and intersection of height-one localizations over a normal domain",
+ "statement": "Let $A$ be a commutative Noetherian normal domain [def-weil-pbc-noetherian-ring, def-weil-pbc-normal-ring] with fraction field $K$, and let $M$ be a finitely generated $A$-module [def-weil-finitely-generated-module]. Write $M_K=K\\otimes_A M$. A module is torsion free if $am=0$ with $0\\ne a\\in A$ implies $m=0$. It is reflexive if the evaluation map $M\\to\\operatorname{Hom}_A(\\operatorname{Hom}_A(M,A),A)$, sending $m$ to $(\\varphi\\mapsto\\varphi(m))$, is an isomorphism. Let $H(A)$ be the set of nonzero prime ideals $\\mathfrak p$ having no prime strictly between $(0)$ and $\\mathfrak p$. For $\\mathfrak p\\in H(A)$, write $M_{\\mathfrak p}=(A\\setminus\\mathfrak p)^{-1}M$ [def-weil-pbc-module-localization]. Then $M$ is reflexive if and only if it is torsion free and, identifying $M$ and every $M_{\\mathfrak p}$ with their images in $M_K$, one has $M=\\bigcap_{\\mathfrak p\\in H(A)}M_{\\mathfrak p}$. An intersection over an empty set means all of $M_K$.",
+ "source": {
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tag 0AVB, more-algebra-lemma-reflexive-over-normal, equivalence of conditions (1) and (3), statement and proof at lines 5578-5630."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-noetherian-ring",
+  "def-weil-pbc-normal-ring",
+  "def-weil-finitely-generated-module",
+  "def-weil-pbc-module-localization"
+ ],
+ "proof": [
+  {
+   "text": "First establish the scalar test needed below. If $x=a/b\\in K$, $b\\ne0$, lies in every $A_{\\mathfrak p}$ with $\\mathfrak p\\in H(A)$, every associated prime of $A/bA$ has height one by [lem-weil-pbc-normal-domain-principal-quotient-associated-height]. At each such prime write $x=c/s$ with $s\\notin\\mathfrak p$. The equality $sa=bc$ in the domain gives $s\\bar a=0$ in $A/bA$. The equivalent annihilator formulation of [lem-weil-pbc-module-injects-localizations-associated-primes] gives $\\bar a=0$. Thus $a\\in bA$ and $x\\in A$; the reverse inclusion is immediate. This proves $A=\\bigcap_{H(A)}A_{\\mathfrak p}$, also when there are no height-one primes, since the associated-prime test permits an empty set.",
+   "uses": [
+    "lem-weil-pbc-normal-domain-principal-quotient-associated-height",
+    "lem-weil-pbc-module-injects-localizations-associated-primes"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 031T, lemma-normal-domain-intersection-localizations-height-1, proof of (2), using Tag 0311, lemma-zero-at-ass-zero."
+   }
+  },
+  {
+   "text": "Put $M^*=\\operatorname{Hom}_A(M,A)$ and $\\eta_M(m)(\\varphi)=\\varphi(m)$. For generators $m_1,\\ldots,m_t$ of $M$, the map $M^*\\to A^t$, $\\varphi\\mapsto(\\varphi(m_i))_i$, is injective: its kernel consists of functionals vanishing on every generator. Hence [lem-weil-pbc-noetherian-submodule-finite] makes $M^*$ finite. The module $M^{**}$ is torsion free: $az=0$, $a\\ne0$, implies $az(\\varphi)=0$ in the domain $A$ for every $\\varphi$, so $z=0$. By [lem-per-torsion-free-bidual-injective], $\\eta_M$ is injective exactly when $M$ is torsion free. In particular reflexivity implies torsion freeness. By the zero criterion for fractions [def-weil-pbc-module-localization], a torsion-free module injects into its localization at $A\\setminus\\{0\\}$; its prime localizations likewise embed there by $m/s\\mapsto m/s$.",
+   "uses": [
+    "lem-weil-pbc-noetherian-submodule-finite",
+    "lem-per-torsion-free-bidual-injective",
+    "def-weil-pbc-module-localization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0AV0, lemma-reflexive-torsion-free, (1) and (3); finite dual by Algebra Tag 00IK, lemma-Noetherian-basic."
+   }
+  },
+  {
+   "text": "For $B=K$ or $A_{\\mathfrak p}$, [lem-weil-pbc-localization-tensor-over-base], with both base rings equal to $A$ and its module $M$ there equal to $A$, identifies $B\\otimes_A T$ with $S^{-1}T$ for any $A$-module $T$: $(a/s)\\otimes t\\mapsto at/s$, with inverse $t/s\\mapsto(1/s)\\otimes t$. Here $S=A\\setminus\\{0\\}$ or $A\\setminus\\mathfrak p$. By [lem-weil-pbc-localization-flat], $A\\to B$ is flat. Apply [lem-weil-pbc-flat-base-change-hom-finitely-presented] first to $(M,A)$, then to $(M^*,A)$; its Noetherian finite-module clause applies by Step 2. This gives $(M^*)_B\\simeq(M_B)^*$ and $(M^{**})_B\\simeq(M_B)^{**}$. Explicitly $\\varphi/s$ acts on $m/t$ by $\\varphi(m)/(st)$, and $z/s$ acts on $\\varphi/t$ by $z(\\varphi)/(st)$. Thus these identifications send $\\eta_M(m)/s$ to $\\eta_{M_B}(m/s)$, and further passage from $A_{\\mathfrak p}$ to $K$ has the same formulas.",
+   "uses": [
+    "lem-weil-pbc-localization-tensor-over-base",
+    "lem-weil-pbc-localization-flat",
+    "lem-weil-pbc-flat-base-change-hom-finitely-presented"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 087R, lemma-pseudo-coherence-and-base-change-ext, (1) and final sentence; Algebra Tags 00HT and 00DL for flat localization and tensor localization."
+   }
+  },
+  {
+   "text": "For later use, evaluation is an isomorphism on every finite free module $F$ over a commutative ring $B$. If $e_1,\\ldots,e_r$ is a basis with coordinate functionals $\\epsilon_i$, its inverse sends $z\\in F^{**}$ to $\\sum_i z(\\epsilon_i)e_i$: for $\\lambda\\in F^*$ the identity $\\lambda=\\sum_i\\lambda(e_i)\\epsilon_i$ gives both inverse identities. This includes $r=0$. The images of the finite generators of $M$ generate $V=M_K$ over $K$, so [lem-per-division-ring-finite-basis], applied to the field $K$, gives a finite basis of $V$. Consequently $\\eta_V$ is an isomorphism by the displayed formula. Since $M^{**}$ is torsion free, it injects into $(M^{**})_K$ by Step 2. Combining Step 3 with $\\eta_V^{-1}$ therefore embeds $M^{**}$ into $V$, and sends $\\eta_M(m)$ to $m/1$. If $M$ is torsion free this identifies $M\\subseteq M^{**}\\subseteq V$.",
+   "uses": [
+    "lem-per-division-ring-finite-basis"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0AV0, lemma-reflexive-torsion-free, proof: generic finite-dimensional evaluation; the finite-free evaluation formula is written out here."
+   }
+  },
+  {
+   "text": "Suppose $M$ is reflexive, hence torsion free by [lem-per-torsion-free-bidual-injective]. If $v\\in V$ lies in every $M_{\\mathfrak p}$, every $\\varphi\\in M^*$ satisfies $\\varphi_K(v)\\in A_{\\mathfrak p}$ for every $\\mathfrak p\\in H(A)$, by the fractions formula in Step 3. Step 1 gives $\\varphi_K(v)\\in A$. Thus $z(\\varphi)=\\varphi_K(v)$ defines an $A$-linear element $z\\in M^{**}$. Its image in $V$ under Step 4 is $v$: on a general rational functional $\\varphi/s\\in(M^*)_K=V^*$ both evaluate as $\\varphi_K(v)/s$. Reflexivity supplies $m\\in M$ with $\\eta_M(m)=z$, whence $v=m/1$. The inclusion $M\\subseteq M_{\\mathfrak p}$ for every prime is given by $m\\mapsto m/1$. This proves the required intersection equality.",
+   "uses": [
+    "lem-per-torsion-free-bidual-injective"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0AVB, lemma-reflexive-over-normal, (1) implies (3); agent dual-evaluation expansion using Algebra Tag 031T(2) instead of the intermediate S2-module criterion."
+   }
+  },
+  {
+   "text": "Now assume $M$ is torsion free and has the asserted intersection equality. For $\\mathfrak p\\in H(A)$ put $B=A_{\\mathfrak p}$. It is Noetherian by [lem-weil-pbc-localization-noetherian], a normal domain with fraction field $K$ by [lem-weil-pbc-localization-normal-domain], and local by [def-weil-pbc-localization-at-prime]. Its Krull dimension is one by [lem-weil-pbc-localization-dimension-chains-below-prime]: a prime $\\mathfrak q\\subsetneq\\mathfrak p$ satisfies $(0)\\subseteq\\mathfrak q\\subsetneq\\mathfrak p$, hence $\\mathfrak q=(0)$ by the definition of $H(A)$, so the longest chain ending inside $\\mathfrak p$ is $(0)\\subsetneq\\mathfrak p$. Hence [lem-sc-normal-dim1-dvr] makes $B$ a discrete valuation ring [def-sc-discrete-valuation-ring]. The module $M_{\\mathfrak p}$ is finite, generated by $m_i/1$. It is torsion free over $A_{\\mathfrak p}$: if $(a/t)(m/s)=0$ and $a/t\\ne0$, then $a\\ne0$ and some $u\\notin\\mathfrak p$ has $uam=0$; since $ua\\ne0$, torsion freeness of $M$ gives $m=0$. Therefore [lem-sc-dvr-fg-torsionfree-free] makes $M_{\\mathfrak p}$ finite free. Its evaluation map is an isomorphism by the coordinate formula of Step 4.",
+   "uses": [
+    "lem-weil-pbc-localization-noetherian",
+    "lem-weil-pbc-localization-normal-domain",
+    "def-weil-pbc-localization-at-prime",
+    "lem-weil-pbc-localization-dimension-chains-below-prime",
+    "lem-sc-normal-dim1-dvr",
+    "def-sc-discrete-valuation-ring",
+    "lem-sc-dvr-fg-torsionfree-free"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0AVB, lemma-reflexive-over-normal, proof of (3) implies (1), using Tag 0AUW, lemma-dedekind-torsion-free-flat, (3), Algebra Tag 031T proof of (3) ($R_1$ for a Noetherian normal domain, Tag 031S lemma-criterion-normal) and Algebra Tag 00PD."
+   }
+  },
+  {
+   "text": "For $z\\in M^{**}$ let $v\\in V$ be its image from Step 4. For every height-one prime the isomorphism of [lem-weil-pbc-flat-base-change-hom-finitely-presented] applied twice, as in Step 3, carries $z/1$ into $(M_{\\mathfrak p})^{**}$. By Step 6 it equals $\\eta_{M_{\\mathfrak p}}(m_{\\mathfrak p})$ for some $m_{\\mathfrak p}\\in M_{\\mathfrak p}$. The explicit evaluation formulas of Step 3 show that its image in $V$ is the image of $m_{\\mathfrak p}$, so $v\\in M_{\\mathfrak p}$ for every such prime. The assumed intersection equality gives $v=m/1$ for some $m\\in M$. The embedding $M^{**}\\hookrightarrow V$ then gives $z=\\eta_M(m)$. Thus $\\eta_M$ is surjective; it is injective by [lem-per-torsion-free-bidual-injective], hence is an isomorphism. If $H(A)$ is empty the same reasoning uses the assumed equality $M=V$ and has no local conditions to check.",
+   "uses": [
+    "lem-weil-pbc-flat-base-change-hom-finitely-presented",
+    "lem-per-torsion-free-bidual-injective"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0AVB, lemma-reflexive-over-normal, final paragraph: expand the implication from local biduality and the intersection condition to global biduality."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-normal-domain-principal-quotient-associated-height",
+  "lem-weil-pbc-module-injects-localizations-associated-primes",
+  "lem-weil-pbc-noetherian-submodule-finite",
+  "lem-per-torsion-free-bidual-injective",
+  "def-weil-pbc-module-localization",
+  "lem-weil-pbc-localization-tensor-over-base",
+  "lem-weil-pbc-localization-flat",
+  "lem-weil-pbc-flat-base-change-hom-finitely-presented",
+  "lem-per-division-ring-finite-basis",
+  "lem-weil-pbc-localization-noetherian",
+  "lem-weil-pbc-localization-normal-domain",
+  "def-weil-pbc-localization-at-prime",
+  "lem-weil-pbc-localization-dimension-chains-below-prime",
+  "lem-sc-normal-dim1-dvr",
+  "def-sc-discrete-valuation-ring",
+  "lem-sc-dvr-fg-torsionfree-free"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tag 0AVB, lemma-reflexive-over-normal, equivalence (1) and (3); agent dual-evaluation variant of the forward implication using Algebra Tag 031T(2); reverse implication follows the source with canonical localization maps expanded."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "loogle",
+   "query": "Module.IsReflexive, IsIntegrallyClosed",
+   "results": "{\"t\": \"2026-10-24T01:58:30Z\", \"tool\": \"loogle\", \"query\": \"Module.IsReflexive, IsIntegrallyClosed\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}; Definition/free or projective reflexivity and Dedekind-domain localization results do not give the arbitrary-rank normal Noetherian domain criterion. Read Dual/Defs.lean 205-250, Dual/Lemmas.lean 251-270, and DedekindDomain/Ideal/Lemmas.lean 564-577.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finite torsion free modules over a normal Noetherian domain are reflexive if and only if they equal the intersection of their height one localizations",
+   "results": "{\"t\": \"2026-10-24T01:58:33Z\", \"tool\": \"leanfinder\", \"query\": \"Finite torsion free modules over a normal Noetherian domain are reflexive if and only if they equal the intersection of their height one localizations\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"tfae_of_isNoetherianRing_of_isLocalRing_of_isDomain\", \"Module.Flat.instOfIsDedekindDomainOfIsTorsionFree\", \"Module.Finite.of_isLocalized_maximal\", \"IsDedekindDomain.flat_iff_torsion_eq_bot\", \"Submodule.fg_of_isLocalized_maximal\", \"instFreeSubtypeMemIdealOfFiniteOfIsTorsionFree\", \"Submodule.exists_isInternal_prime_power_torsion\", \"IsDedekindDomain.HeightOneSpectrum.iInf_localization_eq_bot\"], \"digest\": \"d02a5d812bf651d8\"}; Definition/free or projective reflexivity and Dedekind-domain localization results do not give the arbitrary-rank normal Noetherian domain criterion. Read Dual/Defs.lean 205-250, Dual/Lemmas.lean 251-270, and DedekindDomain/Ideal/Lemmas.lean 564-577.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A finite module over a normal Noetherian domain is reflexive exactly when it is torsion free and equals its height one localizations intersection",
+   "results": "{\"t\": \"2026-10-24T01:58:46Z\", \"tool\": \"leansearch\", \"query\": \"A finite module over a normal Noetherian domain is reflexive exactly when it is torsion free and equals its height one localizations intersection\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Module.IsReflexive\", \"Module.IsReflexive.to_isTorsionFree\", \"Module.Dual.instIsReflecive\", \"Module.IsReflexive.of_finite_of_free\", \"LinearEquiv.isReflexive_of_equiv_dual_of_isReflexive\", \"Module.instIsReflexiveOfFiniteOfProjective\", \"Module.IsReflexive.mk\", \"Module.free_iff_isTorsionFree\"], \"digest\": \"0f966b66931b3de3\"}; Definition/free or projective reflexivity and Dedekind-domain localization results do not give the arbitrary-rank normal Noetherian domain criterion. Read Dual/Defs.lean 205-250, Dual/Lemmas.lean 251-270, and DedekindDomain/Ideal/Lemmas.lean 564-577.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "IsReflexive|reflexive|heightOneSpectrum|HeightOneSpectrum",
+   "results": "{\"t\": \"2026-10-24T01:58:46Z\", \"tool\": \"grep\", \"query\": \"IsReflexive|reflexive|heightOneSpectrum|HeightOneSpectrum\", \"sub\": \"RingTheory\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/Valuation/Discrete/IsDiscreteValuationRing.lean\", \"Mathlib/RingTheory/Valuation/Discrete/IsDiscreteValuationRing.lean\", \"Mathlib/RingTheory/Valuation/Discrete/IsDiscreteValuationRing.lean\", \"Mathlib/RingTheory/LaurentSeries.lean\", \"Mathlib/RingTheory/LaurentSeries.lean\", \"Mathlib/RingTheory/LaurentSeries.lean\", \"Mathlib/RingTheory/LaurentSeries.lean\", \"Mathlib/RingTheory/LaurentSeries.lean\"], \"digest\": \"a84d5c82fc6f17ce\"}; Definition/free or projective reflexivity and Dedekind-domain localization results do not give the arbitrary-rank normal Noetherian domain criterion. Read Dual/Defs.lean 205-250, Dual/Lemmas.lean 251-270, and DedekindDomain/Ideal/Lemmas.lean 564-577.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Reflexive hull of a finite torsion free module over an integrally closed Noetherian domain is the intersection at codimension one primes",
+   "results": "{\"t\": \"2026-10-24T01:58:51Z\", \"tool\": \"leanfinder\", \"query\": \"Reflexive hull of a finite torsion free module over an integrally closed Noetherian domain is the intersection at codimension one primes\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Ring.instFiniteNormalClosure_1\", \"Ring.instFiniteNormalClosure\", \"coeSubmodule_differentIdeal\", \"differentIdeal\", \"coeSubmodule_differentIdeal_fractionRing\", \"IsDedekindDomain.HeightOneSpectrum.iInf_localization_eq_bot\", \"IsDedekindDomainInv.integrallyClosed\", \"isDedekindDomain_iff\"], \"digest\": \"c68fc0e1ba49b335\"}; Definition/free or projective reflexivity and Dedekind-domain localization results do not give the arbitrary-rank normal Noetherian domain criterion. Read Dual/Defs.lean 205-250, Dual/Lemmas.lean 251-270, and DedekindDomain/Ideal/Lemmas.lean 564-577.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "IsReflexive|reflexive|localization",
+   "results": "{\"t\": \"2026-10-24T02:01:13Z\", \"tool\": \"grep\", \"query\": \"IsReflexive|reflexive|localization\", \"sub\": \"LinearAlgebra/Dual\", \"ok\": true, \"n_hits\": 10, \"note\": \"\", \"top\": [\"Mathlib/LinearAlgebra/Dual/Defs.lean\", \"Mathlib/LinearAlgebra/Dual/Defs.lean\", \"Mathlib/LinearAlgebra/Dual/Defs.lean\", \"Mathlib/LinearAlgebra/Dual/Defs.lean\", \"Mathlib/LinearAlgebra/Dual/Defs.lean\", \"Mathlib/LinearAlgebra/Dual/Lemmas.lean\", \"Mathlib/LinearAlgebra/Dual/Lemmas.lean\", \"Mathlib/LinearAlgebra/Dual/Lemmas.lean\"], \"digest\": \"92eebbbdbc8e2f8f\"}; Definition/free or projective reflexivity and Dedekind-domain localization results do not give the arbitrary-rank normal Noetherian domain criterion. Read Dual/Defs.lean 205-250, Dual/Lemmas.lean 251-270, and DedekindDomain/Ideal/Lemmas.lean 564-577.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A finite module over a Noetherian normal domain is reflexive if and only if it is torsion free and is the intersection of localizations at height one primes",
+   "results": "{\"t\": \"2026-10-24T02:45:57Z\", \"tool\": \"leanfinder\", \"query\": \"A finite module over a Noetherian normal domain is reflexive if and only if it is torsion free and is the intersection of localizations at height one primes\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"IsDedekindDomainInv.isDedekindDomain\", \"IsDedekindRing\", \"Module.Flat.instOfIsDedekindDomainOfIsTorsionFree\", \"IsDedekindDomain\", \"tfae_of_isNoetherianRing_of_isLocalRing_of_isDomain\", \"IsDedekindDomain.flat_iff_torsion_eq_bot\", \"Module.Finite.of_isLocalized_maximal\", \"isDedekindDomain_iff_isDedekindDomainInv\"], \"digest\": \"cdd7b34026ac3bf6\"}; Read Dual/Defs.lean:205-265, Dual/Lemmas.lean:251-275, DedekindDomain/Ideal/Lemmas.lean:564-577, and Different.lean:260,383-402. Reflexivity of free/projective modules and trace duality of Dedekind fractional ideals do not state the criterion for arbitrary finite modules over normal Noetherian domains.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "IsReflexive|reflexive|localization",
+   "results": "{\"t\": \"2026-10-24T02:47:02Z\", \"tool\": \"grep\", \"query\": \"IsReflexive|reflexive|localization\", \"sub\": \"LinearAlgebra/Dual\", \"ok\": true, \"n_hits\": 10, \"note\": \"\", \"top\": [\"Mathlib/LinearAlgebra/Dual/Lemmas.lean\", \"Mathlib/LinearAlgebra/Dual/Lemmas.lean\", \"Mathlib/LinearAlgebra/Dual/Lemmas.lean\", \"Mathlib/LinearAlgebra/Dual/Lemmas.lean\", \"Mathlib/LinearAlgebra/Dual/Lemmas.lean\", \"Mathlib/LinearAlgebra/Dual/Defs.lean\", \"Mathlib/LinearAlgebra/Dual/Defs.lean\", \"Mathlib/LinearAlgebra/Dual/Defs.lean\"], \"digest\": \"c98b727e4fdd64bf\"}; Read Dual/Defs.lean:205-265, Dual/Lemmas.lean:251-275, DedekindDomain/Ideal/Lemmas.lean:564-577, and Different.lean:260,383-402. Reflexivity of free/projective modules and trace duality of Dedekind fractional ideals do not state the criterion for arbitrary finite modules over normal Noetherian domains.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The reflexive hull of a finitely generated torsion free module is its intersection at codimension one primes of a normal Noetherian domain",
+   "results": "{\"t\": \"2026-10-24T02:47:02Z\", \"tool\": \"leansearch\", \"query\": \"The reflexive hull of a finitely generated torsion free module is its intersection at codimension one primes of a normal Noetherian domain\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Module.free_of_finite_type_torsion_free\", \"Module.free_iff_isTorsionFree\", \"Module.free_of_finite_type_torsion_free'\", \"Module.instIsReflexiveOfFiniteOfProjective\", \"Ideal.iInf_pow_smul_eq_bot_of_noZeroSMulDivisors\", \"instFreeSubtypeMemIdealOfFiniteOfIsTorsionFree\", \"Ideal.iInf_pow_smul_eq_bot_of_isTorsionFree\", \"IsHausdorff.of_isTorsionFree\"], \"digest\": \"5b471fb39e0e333e\"}; Read Dual/Defs.lean:205-265, Dual/Lemmas.lean:251-275, DedekindDomain/Ideal/Lemmas.lean:564-577, and Different.lean:260,383-402. Reflexivity of free/projective modules and trace duality of Dedekind fractional ideals do not state the criterion for arbitrary finite modules over normal Noetherian domains.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "Module.IsReflexive, IsIntegrallyClosed",
+   "results": "{\"t\": \"2026-10-24T02:47:02Z\", \"tool\": \"loogle\", \"query\": \"Module.IsReflexive, IsIntegrallyClosed\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}; Read Dual/Defs.lean:205-265, Dual/Lemmas.lean:251-275, DedekindDomain/Ideal/Lemmas.lean:564-577, and Different.lean:260,383-402. Reflexivity of free/projective modules and trace duality of Dedekind fractional ideals do not state the criterion for arbitrary finite modules over normal Noetherian domains.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The double dual of a finite torsion free module over an integrally closed Noetherian domain is recovered from its local lattices at primes of height one",
+   "results": "{\"t\": \"2026-10-24T02:48:04Z\", \"tool\": \"leanfinder\", \"query\": \"The double dual of a finite torsion free module over an integrally closed Noetherian domain is recovered from its local lattices at primes of height one\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"FractionalIdeal.dual_dual\", \"FractionalIdeal.dual_involutive\", \"FractionalIdeal.coe_dual\", \"FractionalIdeal.dual_eq_dual_mul_dual\", \"FractionalIdeal.dual_inv\", \"FractionalIdeal.coe_dual_one\", \"FractionalIdeal.dual_injective\", \"FractionalIdeal.dual_eq_mul_inv\"], \"digest\": \"bc25586d4375d848\"}; Read Dual/Defs.lean:205-265, Dual/Lemmas.lean:251-275, DedekindDomain/Ideal/Lemmas.lean:564-577, and Different.lean:260,383-402. Reflexivity of free/projective modules and trace duality of Dedekind fractional ideals do not state the criterion for arbitrary finite modules over normal Noetherian domains.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-per-divisorial-fractional-module-lattices",
+  "date": "2026-10-24",
+  "group": "Q39"
+ },
+ "chapter": "sec-deligne-laumon-a1",
+ "unit": "sk-p-dl-a1-perverse",
+ "blueprint": {
+  "from": {
+   "node": "lem-per-artin-gabber-affine-curve",
+   "place": "Historical regular-pair refinement under the ancestor's duality direction; latest blueprint lem-per-artin-gabber-affine-curve.proof.md, Step 3, 'the duality symmetry of the middle perverse t-structure'. Immediate use: lem-per-divisorial-fractional-module-lattices, recovery of a finite fractional module from its height-one lattices by Tag 0AVB. The historical ILO regular-pair expansion is not a separate assertion in the latest blueprint.",
+   "via": [
+    "lem-per-divisorial-fractional-module-lattices",
+    "lem-per-weil-divisor-strict-local-cartier-test",
+    "lem-per-very-tame-boundary-quotient-cartier",
+    "lem-per-gabber-absolute-equivariant-modification",
+    "lem-per-gabber-log-smooth-equivariant-modification",
+    "lem-per-trait-prime-to-ell-log-alteration",
+    "lem-per-gabber-regular-pair-purity",
+    "lem-per-absolute-gysin-purity",
+    "lem-per-potential-dualizing-regular-unit",
+    "lem-per-finite-regular-reduction-dualizing",
+    "lem-per-qbar-generic-duality-model",
+    "lem-per-qbar-middle-tstructure"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-per-reflexive-height-one-intersection-criterion",
+  "worker": "stage1",
+  "summary": "Checked Tag 0AVB, all existing cited statements and the current blueprint. Retained the statement and its definitions; gave a seven-step dual-evaluation proof, including scalar membership, finite duals, localization and evaluation compatibility, both implications and empty intersections. Reused all inputs; no new nodes. Mathlib searches found only stricter PID/Dedekind or free/projective special cases. Maintainer-reader FIX: Step 6 obtains the DVR property of A_p from the localization leaves and the Lean-closed lem-sc-normal-dim1-dvr instead of the sec-trace-formula node lem-trf-normal-domain-principal-divisor-kernel (batch-5 closure).",
+  "blueprint": "Realizes the existing fractional-lattice refinement of the ancestor's Step 3 duality direction; current blueprint does not separately state this commutative algebra tool.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-normal-domain-principal-quotient-associated-height",
+    "why": "The associated primes of A/bA have height one; a generic commutative algebra tool absent from this unit."
+   },
+   {
+    "node": "lem-weil-pbc-module-injects-localizations-associated-primes",
+    "why": "Detects a class in A/bA using its associated-prime localizations; a generic algebra tool, not a replacement of a perverse-sheaf unit step."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-normal-domain-principal-quotient-associated-height",
+  "lem-weil-pbc-module-injects-localizations-associated-primes"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-O1-4eb16fd6b",
+  "group": "O1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-O1-4eb16fd6b (reviewer sub-agent of L); spot-checked: I read the whole item and its sources. Stacks 0AVB (1)<=>(3) at more-algebra l.5578-5634, 0AV0, 087R(1), 0AUW(3), and Algebra 031T(2) with 0311. The statement and stmt_deps are unchanged from live, where the item is unsplit with no repair note. They agree with 0AVB hypothesis by hypothesis, including the convention that an empty intersection is M_K. Small cases checked: (x,y) in k[x,y] is not reflexive and its height-one intersection is A; Z/2; free modules; M=0; A a field. Steps 1-7 are correct against the cited statements. Step 1 is the 031T(2) scalar test through the associated-height and associated-prime injection nodes, and it covers the empty-Ass case. Step 2 proves M* finite and M** torsion free, and uses the bidual-injective node. Step 3 applies the Hom flat base change twice; I verified the fraction formulas. Step 4 gives finite-free biduality and the embedding M**->V. Step 5 is the agent's dual-evaluation proof of (1)=>(3). Steps 6-7 expand 0AVB (3)=>(1). No new nodes. No duplicate in the DAG; the parent lattice node depends on this item. Mathlib has only Module.IsReflexive. Accepted tool uses: lem-weil-pbc-normal-domain-principal-quotient-associated-height and lem-weil-pbc-module-injects-localizations-associated-primes, both generic commutative algebra. Batch-5 finding: Step 6 cited lem-trf-normal-domain-principal-divisor-kernel, a sec-trace-formula node on the local-term-locality branch of the trace-formula proof, for its DVR clause only. FIX: Step 6 now derives that A_p is a DVR from lem-weil-pbc-localization-noetherian, lem-weil-pbc-localization-normal-domain, def-weil-pbc-localization-at-prime, lem-weil-pbc-localization-dimension-chains-below-prime (dimension 1, since any prime inside p is (0)), the Lean-closed lem-sc-normal-dim1-dvr and def-sc-discrete-valuation-ring. The trf citation and its tool_uses entry are removed and proof_deps is recomputed, so the item cites nothing from sec-trace-formula. The rewritten blueprint.from.place names the existing Step 3 of the ancestor proof and is accepted. coord/dag-sync.md is missing from the snapshot.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.ReflexiveHeightOneIntersection",
+  "declaration": "Module.isReflexive_iff_isTorsionFree_and_heightOne_intersection",
+  "file": "lean/Sheaf/RingTheory/ReflexiveHeightOneIntersection.lean",
+  "statement": "theorem isReflexive_iff_isTorsionFree_and_heightOne_intersection (A : Type u) [CommRing A] [IsDomain A] [IsNoetherianRing A] [IsIntegrallyClosed A] (M : Type v) [AddCommGroup M] [Module A M] [Module.Finite A M] : Module.IsReflexive A M ↔ Module.IsTorsionFree A M ∧ LinearMap.range (LinearMap.comp ((LocalizedModule.equivTensorProduct (nonZeroDivisors A) M).toLinearMap.restrictScalars A) (LocalizedModule.mkLinearMap (nonZeroDivisors A) M)) = ⨅ (p : PrimeSpectrum A) (_ : p.asIdeal.height = 1), LinearMap.range (LinearMap.comp (LinearMap.restrictScalars A (LocalizedModule.equivTensorProduct (nonZeroDivisors A) M).toLinearMap) (LocalizedModule.liftOfLE p.asIdeal.primeCompl (nonZeroDivisors A) p.asIdeal.primeCompl_le_nonZeroDivisors))",
+  "branch": "sheaf-dag",
+  "by": "NW",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-2ffe4fc63",
+  "group": "NW",
+  "result": "pass",
+  "note": "Only the item's lean field changed; the statement is verbatim in the file. Clause-by-clause match with Stacks 0AVB (1)<=>(3): IsDomain+IsNoetherianRing+IsIntegrallyClosed, Module.Finite, Module.IsReflexive (bijective Dual.eval), Module.IsTorsionFree (domain: r≠0 regular), H(A) as height=1 (equivalent in a domain), M and M_p images in FractionRing A ⊗ M through the canonical equivTensorProduct, mkLinearMap and liftOfLE (m/s↦m/s), empty ⨅=⊤. Independent universes u,v. Edge cases (field, M=0, Z/2, (x,y), free rank 0) agree. No duplicate in Mathlib or the project; live Ring.WeilHeightOnePrime (trf) not cited, advisory only. Imports are proof_dep modules, all present live. Docstrings carry the source, blueprint tag and 7 steps; sorry only; report sections present. No recompile (no file changed)."
+ }
+}

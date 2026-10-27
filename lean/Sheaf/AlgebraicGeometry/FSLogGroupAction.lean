@@ -5,6 +5,7 @@ Released under Apache 2.0 license as described in the file LICENSE.
 module
 
 public import Sheaf.AlgebraicGeometry.FineSaturatedLogBlowup
+public import Sheaf.AlgebraicGeometry.LogIdealChartPresentation
 public import Mathlib.CategoryTheory.Endomorphism
 
 /-!
@@ -169,5 +170,40 @@ structure FSLogGroupAction.InvariantDirectImage {X : FineSaturatedLogScheme.{u}}
   compatibility : ∀ (E : Y.Etale) (s : N.monoidSheaf.obj.obj (op E)),
     X.logStructure.alpha.app (op (logInvariantTest f E)) (pullbackMap E s) =
       (pullback.fst E.hom f).appTop (N.alpha.app (op E) s)
+
+/-- The same log action data on an arbitrary log scheme, before fs or Noetherianity
+has been established. Source: ILO VI 1.1 and 3.1
+(blueprint: def-per-fs-log-group-action). -/
+structure EtaleLogGroupAction (H : Type v) [Group H] {X : Scheme.{u}}
+    (M : EtaleLogStructure X) where
+  baseAction : H →* Aut X
+  logMap : H → EtaleLogMap M M
+  base_eq : ∀ g : H, (logMap g).base = (baseAction g).hom
+  one : ∀ (U V : X.Etale) (j : V ⟶ U)
+    (hj : j.left ≫ U.hom = V.hom ≫ (logMap 1).base),
+    (logMap 1).sectionMap U V j.left hj = (M.monoidSheaf.obj.map j.op).hom
+  mul : ∀ g h : H, (logMap h).CompEq (logMap g) (logMap (g * h))
+
+/-- Forget only the fs and Noetherian certificates of an fs log action, retaining
+all its section maps and laws. Source: ILO VI 1.1 and 3.1
+(blueprint: def-per-fs-log-group-action). -/
+def FSLogGroupAction.toEtaleLogGroupAction {H : Type v} [Group H]
+    {X : FineSaturatedLogScheme.{u}} (a : FSLogGroupAction H X) :
+    EtaleLogGroupAction H X.logStructure where
+  baseAction := a.baseAction
+  logMap := fun g ↦ (a.logMap g).toLogMap
+  base_eq := a.base_eq
+  one := a.one
+  mul := a.mul
+
+/-- Equivariance includes both the underlying maps and the log section maps,
+without assuming fs on either endpoint. Source: ILO VI 1.1 and 3.1
+(blueprint: def-per-fs-log-group-action). -/
+def EtaleLogGroupAction.IsEquivariant {H : Type v} [Group H]
+    {X Y : Scheme.{u}} {M : EtaleLogStructure X} {N : EtaleLogStructure Y}
+    (a : EtaleLogGroupAction H M) (b : EtaleLogGroupAction H N)
+    (f : EtaleLogMap M N) : Prop :=
+  ∀ g : H, ∃ c : EtaleLogMap M N,
+    (a.logMap g).CompEq f c ∧ f.CompEq (b.logMap g) c
 
 end AlgebraicGeometry

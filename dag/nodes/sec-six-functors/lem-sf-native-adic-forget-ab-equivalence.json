@@ -1,0 +1,106 @@
+{
+ "id": "lem-sf-native-adic-forget-ab-equivalence",
+ "kind": "statement",
+ "title": "Recovering the constant vector-space action",
+ "statement": "Fix a prime l and any scheme T. The functor ProEtale.AdicSheaf.forgetAb(l,T), which applies the lax monoidal forgetful functor from sheaves of vector spaces over ULift(PadicAlgCl l) to abelian sheaves to an internal module over the native locally finite function ring, is an equivalence of categories. Its codomain consists of internal modules over the underlying abelian-sheaf ring; no geometric finiteness hypothesis on T is required. The native module and coefficient ring are those of [def-sf-locally-finite-adic-realization-data].",
+ "source": {
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Bhatt--Scholze Section 6.8; second step of lem-sf-native-compact-support-geometry, recovering the forgotten constant vector-space action before applying the section-module equivalence"
+ },
+ "stmt_deps": [
+  "def-sf-locally-finite-adic-realization-data"
+ ],
+ "proof": [
+  {
+   "text": "Apply AlgebraicGeometry.ProEtale.nativeScalarForgetting_isEquivalence to the same prime l and scheme T. Its conclusion is definitionally the specified AdicSheaf.forgetAb equivalence, in exactly the same universes and with no additional assumptions. The existing theorem proves scalar recovery, bilinearity, full faithfulness and essential surjectivity, including zero modules and the empty scheme.",
+   "uses": [
+    "lem-sf-native-scalar-forgetting-equivalence"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sf-native-scalar-forgetting-equivalence"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tags 03CW, 03CY and 03EK; reuse the complete native scalar-recovery proof in Sheaf.Paper.NativeScalarForgetting (Q1, 2026-10-27)."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Forgetting the scalar vector space structure of modules over a sheaf of algebras is an equivalence with modules over its underlying sheaf of rings",
+   "results": "8 hits: Condensed.forget, SheafOfModules.forget_obj, SheafOfModules.forget, AlgebraicGeometry.Scheme.Modules.toPresheafOfModules, SheafOfModules.forgetToSheafModuleCat_obj_val, AlgebraicGeometry.Scheme.Modules, SheafOfModules.forgetToSheafModuleCat, PresheafOfModules.toPresheaf_map_sheafificationHomEquiv",
+   "date": "2026-10-27",
+   "verdict": "No direct native-adic comparison; use the source construction."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Forgetting the scalar vector space structure of modules over a sheaf of algebras is an equivalence with modules over its underlying sheaf of rings",
+   "results": "8 hits: SheafOfModules.forget_obj, SheafOfModules.forgetToSheafModuleCat, SheafOfModules.forgetToSheafModuleCat_obj_val, SheafOfModules.forget, SheafOfModules.fullyFaithfulForget, SheafOfModules.toSheafCompSheafToPresheafIso, SheafOfModules.forgetToSheafModuleCat_map_val, SheafOfModules.restrictScalars",
+   "date": "2026-10-27",
+   "verdict": "No direct native-adic comparison; use the source construction."
+  },
+  {
+   "tool": "grep",
+   "query": "IsEquivalence.*mapMod|mapMod.*IsEquivalence",
+   "results": "0 hits: ",
+   "date": "2026-10-27",
+   "verdict": "No direct native-adic comparison; use the source construction."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.NativeCompactSupportGeometry",
+  "date": "2026-10-27",
+  "group": "Q3"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "Bhatt--Scholze Section 6.8; second step of lem-sf-native-compact-support-geometry, recovering the forgotten constant vector-space action before applying the section-module equivalence",
+   "via": [
+    "lem-sf-native-compact-support-geometry",
+    "lem-sf-locally-finite-adic-compact-support-realization",
+    "thm-sf-weil-compact-direct-image-right-adjoint"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.NativeAdicForgetAbEquivalence",
+  "file": "lean/Sheaf/Paper/NativeAdicForgetAbEquivalence.lean",
+  "declaration": "WeilConjectures.LocallyFiniteAdicCompactSupport.native_adic_forgetAb_isEquivalence",
+  "statement": "theorem native_adic_forgetAb_isEquivalence (T : Scheme.{u}) :\n    (ProEtale.AdicSheaf.forgetAb l T).IsEquivalence",
+  "branch": "sheaf-dag",
+  "by": "Q3",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q3",
+  "result": "pass",
+  "landing": "20261027T034727-L-3679526",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q1",
+  "result": "pass",
+  "landing": "20261027T050636-L-248333",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

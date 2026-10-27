@@ -1,0 +1,142 @@
+{
+ "id": "lem-weil-pbc-finite-quotient-model-residue-comparison",
+ "kind": "statement",
+ "title": "The coefficient-change square for an algebraic residue model",
+ "statement": "Let X be a scheme, (A,I) an adic coefficient datum, phi a compatible system of finite constant-coefficient isomorphisms, and M a completed-coefficient derived object, using [def-weil-pbc-finite-perfect-quotient-model-data]. Let n be natural, W an etale chart (possibly empty), B=A/I^(n+1), J the image of I in B, and P any B-complex whose changed constant realization is isomorphic to the actual nth reduction of M after restriction to W. Let L:D(B)->D(B/J) with counit epsilon be any total left derived extension along B->B/J, in [def-weil-abstract-derived-category, def-weil-module-base-change]. Let rho:B/J≃A/I^1 commute with the quotient maps from B. Choose the canonical localization representative K of L(Q(P)), and let C be K with scalars transported along rho inverse. Then the actual zeroth reduction of M, restricted to W, is isomorphic to the changed constant realization of C, restricted to W. There is no projective residue-model hypothesis, no nonemptiness hypothesis, and no boundedness or Tor-amplitude conclusion.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Lemmas derived-base-change and pullback-tensor-product (Tags 06YY, 07A6); lemma-bounded (Tag 094I), part (2), displayed iterated scalar-extension equality"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-finite-perfect-quotient-model-data",
+  "def-weil-abstract-derived-category",
+  "def-weil-module-base-change"
+ ],
+ "proof": [
+  {
+   "text": "The exact derived restrictions agree with the representative-based restrictions in the statement by mapDerivedCategoryFactors and the canonical representative isomorphism. The new slice scalar comparison supplies the actual functor on the restricted coefficient categories to which the input local isomorphism can be applied.",
+   "uses": [
+    "def-weil-pbc-ringed-derived-restriction",
+    "lem-weil-pbc-completed-adic-slice-scalar-comparison"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "For any two coefficient maps, obtain derived scalar adjunctions from the existing universal derived-change data and the derived coefficient-adjunction theorem. Ordinary restriction of scalars composes by the sectionwise identity, and exact derived functor composition preserves that isomorphism. The two composite left adjoints therefore have canonically isomorphic functors by uniqueness of left adjoints. Apply this to the completed projection and the finite residue map; the actual limit-cone projection composition identifies the composite reduction with level zero.",
+   "uses": [
+    "lem-pur-sheaf-ring-derived-coefficient-adjunction",
+    "def-weil-pbc-adic-coefficient-datum"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Prove the coefficient square using scalar compatibility. The constant sheaf of the quotient A -> A/I^(n+1) is an epimorphism: its universe-lifted ring map is surjective, and the constant sheaf functor is left adjoint to evaluation at the terminal object. After precomposing both sides with this epimorphism, quotient-map composition turns the left side into the scalar compatibility equation at zero; scalar compatibility at n and the existing limit-projection composition equation turn the right side into the same map. Cancel the epimorphism. This includes n = 0, and uses neither consecutive compatibility nor invertibility of phi.",
+   "uses": [
+    "def-weil-pbc-finite-perfect-quotient-model-data",
+    "def-weil-pbc-complete-coefficient-datum",
+    "def-weil-pbc-adic-coefficient-datum"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Use the derived-composition isomorphisms and that coefficient square to rewrite residue extension after change by phi(n) as constant coefficient extension followed by change by phi(0). Apply the new algebraic-model comparison to the quotient map B -> B/J and rho, then rewrite its composite ring map using h-rho.",
+   "uses": [
+    "lem-weil-pbc-finite-model-derived-scalar-comparison"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Compose: the inverse level-zero representative restriction comparison; inverse completed reduction composition; inverse slice scalar comparison; the slice scalar functor applied to the input isomorphism; forward slice scalar comparison; the coefficient-square composition; realization of the algebraic-model comparison; and the final representative restriction comparison. Each factor is an isomorphism, proving the original statement unchanged.",
+   "uses": [
+    "lem-weil-pbc-completed-adic-slice-scalar-comparison",
+    "lem-weil-pbc-finite-model-derived-scalar-comparison"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-ringed-derived-restriction",
+  "lem-weil-pbc-completed-adic-slice-scalar-comparison",
+  "lem-pur-sheaf-ring-derived-coefficient-adjunction",
+  "def-weil-pbc-adic-coefficient-datum",
+  "def-weil-pbc-finite-perfect-quotient-model-data",
+  "def-weil-pbc-complete-coefficient-datum",
+  "lem-weil-pbc-finite-model-derived-scalar-comparison"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 06YY and 0D6D; Lean reduction by K6: derived scalar composition from uniqueness of adjoints, induction on quotient compatibility, and functorial application to the local isomorphism. Only slice scalar commutation and the small-universe constant-model scalar comparison remain as strictly simpler named obligations.; the final coefficient-square proof cancels the constant quotient epimorphism using scalar compatibility and the existing limit-projection equation instead of expanding the inverse sequence"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "derived change of rings commutes with constant sheaf realization and restriction to a slice",
+   "results": "8 hits: LightCondensed.forget_obj_val_map, SheafOfModules.restrictScalars, CategoryTheory.constantCommuteCompose, SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom, SheafOfModules.pushforwardCongr, PresheafOfModules.restrictScalarsCompToPresheaf, SheafOfModules.restrictScalars_obj_val, SheafOfModules.unitToPushforwardObjUnit_val_app_apply",
+   "date": "2026-10-27",
+   "verdict": "No matching theorem. The repository interfaces cited in the proof are the components to combine."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsLeftDerivedFunctor\", \"mapDerivedCategory\"",
+   "results": "0 hits: ",
+   "date": "2026-10-27",
+   "verdict": "No matching theorem. The repository interfaces cited in the proof are the components to combine."
+  },
+  {
+   "tool": "grep",
+   "query": "constantRealizationDerivedScalarExtension|completedAdicNormalizationOnModel",
+   "results": "0 hits: ",
+   "date": "2026-10-27",
+   "verdict": "No matching theorem. The repository interfaces cited in the proof are the components to combine."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.FiniteQuotientModelResidueProjective",
+  "date": "2026-10-27",
+  "group": "D2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-finite-quotient-model-residue-projective",
+   "place": "A strict subargument of the residue-model proof"
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.FiniteQuotientModelResidueComparison",
+  "file": "lean/Sheaf/Paper/FiniteQuotientModelResidueComparison.lean",
+  "declaration": "AlgebraicGeometry.Scheme.finiteQuotient_model_residueComparison",
+  "statement": "theorem finiteQuotient_model_residueComparison\n    (X : Scheme.{t}) {A : Type t} [CommRing A] (d : AdicCoefficientDatum A)\n    [∀ n : ℕ, (koszulConstantFunctor X (A ⧸ d.ideal ^ (n + 1))).PreservesZeroMorphisms]\n    (φ : ∀ n : ℕ, adicConstantRing X (A ⧸ d.ideal ^ (n + 1)) ⟶\n      completedAdicFiniteCommRing X d n)\n    (hφ : ∀ n : ℕ, IsIso (φ n)) (hcompat : FinitePerfectModelsCompatible X d φ)\n    (M : DerivedCategory (CompletedAdicModules X d)) (n : ℕ) (W : X.Etale)\n    (P : CochainComplex (ModuleCat.{t} (A ⧸ d.ideal ^ (n + 1))) ℤ)\n    (e : Nonempty\n      (ringedSiteDerivedRestrictionOfUniverses (completedAdicFiniteRing X d n)\n          ((toProEt X).obj W) ((completedAdicQuotientReduction X d n).obj M) ≅\n        ringedSiteDerivedRestrictionOfUniverses (completedAdicFiniteRing X d n)\n          ((toProEt X).obj W) ((completedAdicDerivedChange X (φ n)).obj\n            (DerivedCategory.Q.obj (finiteModelConstantComplex X _ P)))))\n    (L : DerivedCategory (ModuleCat.{t} (A ⧸ d.ideal ^ (n + 1))) ⥤\n      DerivedCategory (ModuleCat.{t}\n        ((A ⧸ d.ideal ^ (n + 1)) ⧸ d.ideal.map\n          (Ideal.Quotient.mk (d.ideal ^ (n + 1))))))\n    (ε : DerivedCategory.Qh ⋙ L ⟶\n      @Functor.mapHomotopyCategory _ _ _ _ _ _ _\n        (ModuleCat.extendScalars\n          (Ideal.Quotient.mk (d.ideal.map (Ideal.Quotient.mk (d.ideal ^ (n + 1))))))\n        (ModuleCat.extendRestrictScalarsAdj _).left_adjoint_additive\n        (.up ℤ) ⋙ DerivedCategory.Qh)\n    (hL : L.IsLeftDerivedFunctor ε (HomotopyCategory.quasiIso _ (.up ℤ)))\n    (ρ : ((A ⧸ d.ideal ^ (n + 1)) ⧸ d.ideal.map\n      (Ideal.Quotient.mk (d.ideal ^ (n + 1)))) ≃+* (A ⧸ d.ideal ^ (0 + 1)))\n    (hρ : ρ.toRingHom.comp\n        (Ideal.Quotient.mk (d.ideal.map (Ideal.Quotient.mk (d.ideal ^ (n + 1))))) =\n      adicQuotientMap d.ideal (n + 1) (0 + 1) (Nat.succ_le_succ (Nat.zero_le n))) :\n    let C := ((ModuleCat.restrictScalars.{t} ρ.symm.toRingHom).mapHomologicalComplex\n      (.up ℤ)).obj (DerivedCategory.Q.objPreimage (L.obj (DerivedCategory.Q.obj P)))\n    Nonempty\n      (ringedSiteDerivedRestrictionOfUniverses (completedAdicFiniteRing X d 0)\n          ((toProEt X).obj W) ((completedAdicQuotientReduction X d 0).obj M) ≅\n        ringedSiteDerivedRestrictionOfUniverses (completedAdicFiniteRing X d 0)\n          ((toProEt X).obj W) ((completedAdicDerivedChange X (φ 0)).obj\n            (DerivedCategory.Q.obj (finiteModelConstantComplex X _ C))))",
+  "branch": "sheaf-dag",
+  "by": "D2",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D2",
+  "result": "pass",
+  "landing": "20261027T084345-L-3672213",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K6",
+  "result": "pass",
+  "landing": "20261027T112406-L-1578342",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

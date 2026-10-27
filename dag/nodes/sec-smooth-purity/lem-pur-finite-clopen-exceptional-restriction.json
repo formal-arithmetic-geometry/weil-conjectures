@@ -23,153 +23,52 @@
  ],
  "proof": [
   {
-   "text": "Choose a compactification $c=(a,p)$ of $g$, with $a:X\\hookrightarrow\\overline X$ open and $p:\\overline X\\to Y$ proper. This is legitimate by [thm-nagata-compactification]: a finite-type scheme over a field is Noetherian by [lem-weil-pbc-finite-type-over-noetherian] (a field has only two ideals), hence quasi-compact and quasi-separated by [lem-weil-pbc-locally-noetherian-quasi-separated]. Put $a_i=a\\circ j_i$. Composition of open immersions is open: compose their isomorphisms with open subschemes, whose images remain open. Hence $(a_i,p)$ is a compactification of $g_i$ by [def-weil-compactifications-refinements]. The schemes $X_i$ are Noetherian opens by [lem-weil-pbc-noetherian-open-subscheme-noetherian]; $j_i$ is quasi-compact, since the inverse image of an affine is closed in that affine and is therefore quasi-compact. Thus [lem-weil-pbc-qc-open-immersion-finite-type] makes $j_i$ finite type. Its diagonal is an isomorphism, so it is separated. Composing the closed diagonals and concatenating finite lists of algebra generators shows that $g_i$ is separated finite type. The chosen proper part $p$ is the SAME for every $i$. The scheme $\\overline X$ is finite type over $k$, since $p$ and $Y\\to\\operatorname{Spec}k$ are finite type; [lem-kun-dimension-finite-type] gives a finite bound $d\\geq0$ for its dimension when nonempty, as required by the finite adjunction theorem. If it is empty take $d=0$.",
+   "text": "Apply [lem-pur-clopen-common-compact-support] to $g$ and its cover. It supplies $c=(a,p)$ and $c_i=(a\\circ j_i,p)$ with finite-dimensional common proper part, and gives $Rg_!K\\cong\\bigoplus_iR(g_i)_!Lj_i^*K$ on bounded constructible inputs, through the canonical compactification comparisons.",
    "uses": [
-    "thm-nagata-compactification",
-    "lem-weil-pbc-finite-type-over-noetherian",
-    "lem-weil-pbc-locally-noetherian-quasi-separated",
-    "def-weil-compactifications-refinements",
-    "lem-weil-pbc-noetherian-open-subscheme-noetherian",
-    "lem-weil-pbc-qc-open-immersion-finite-type",
-    "lem-kun-dimension-finite-type"
+    "lem-pur-clopen-common-compact-support"
    ],
    "elementary": false,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-def-purity-conv/def-pur-section-invariant.md",
-    "place": "Final invertibility sentence: finite-clopen compactification argument, geometry of the component compactifications"
+    "place": "Final invertibility sentence: assembly of the five extracted finite-clopen arguments; Earlier returned proof steps 1-3: common proper compactification, zero insertion and compact support"
    }
   },
   {
-   "text": "Let $E_i$ be the inverse of the product equivalence [lem-pur-finite-clopen-derived-decomposition] applied to the tuple having $M$ in position $i$ and zero elsewhere. In a finite product of additive categories,\n$$\\operatorname{Hom}_X(E_iM,H)=\\operatorname{Hom}_{X_i}(M,j_i^*H),\\qquad \\operatorname{Hom}_X(H,E_iM)=\\operatorname{Hom}_{X_i}(j_i^*H,M),$$\nsince all other factors are singleton Hom sets involving zero. Thus $E_i$ is both adjoints of restriction, is exact, and $K\\cong\\bigoplus_iE_iK_i$. On module sheaves $E_i$ is precisely $j_{i,!}$: [lem-weil-extension-by-zero-adjunction] makes that functor another left adjoint of the same restriction. The isomorphism is the one whose restriction to $X_i$ is the identity. Exact termwise descent identifies the same functors on complexes and derived categories, as already specified in the clopen equivalence.",
+   "text": "The strict-system product equivalence and $b_{i,A}:F_{g,A}E_{i,A}\\cong F_{g_i,A}$ are [lem-pur-clopen-strict-system-support]. Apply [lem-pur-clopen-counit-adjoint-comparison] to these and the finite comparison from Step 1. This gives the finite component right-adjoint isomorphisms and actual derived strict-system isomorphisms $r_{i,A}G_{g,A}\\cong G_{g_i,A}$, with the prescribed counit equation and finite evaluations.",
    "uses": [
-    "lem-pur-finite-clopen-derived-decomposition",
-    "lem-weil-extension-by-zero-adjunction"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/sites.tex",
-    "place": "Tag 04TS, lemma-mapping-property-glue; elementary finite-product Hom calculation using the cited derived equivalence"
-   }
-  },
-  {
-   "text": "For the chosen compactifications, $a_!E_i\\cong(a_i)_!$. Indeed, on sheaves the two functors are left adjoint to $j_i^*a^*=(a_i)^*$, using [lem-weil-extension-by-zero-adjunction] and the composite adjunction [def-weil-pbc-composite-adjunction]. Apply [def-weil-pbc-adjunction-conjugate] to the identity of these right adjoints, with opposite categories, to obtain the unique unit-compatible isomorphism. Both extension functors are exact by [lem-weil-extension-by-zero-exact], so termwise application and [lem-weil-pbc-localization-universal-property] descend that comparison and its inverse. Consequently [def-compact-support-direct-image-detailed] gives $Rg_!E_i\\cong Rp_*(a_i)_!=R(g_i)_!$. The functor $Rp_*$ is a right adjoint by [def-weil-pbc-proetale-operations]; it preserves a finite product since maps into that product are tuples of maps under its adjunction bijection. Finite products are biproducts here, so it also preserves finite direct sums. Apply $Rp_*a_!$ to the decomposition in Step 2 to obtain\n$$Rg_!K\\cong\\bigoplus_iR(g_i)_!K_i.$$\nAll maps are natural in $K$. On bounded constructible inputs the comparison with any originally chosen compactifications is [prop-compactification-coherence-detailed]; these inputs have etale origin by [lem-sf-proetale-constructible-origin], so this use stays in its asserted domain.",
-   "uses": [
-    "lem-weil-extension-by-zero-adjunction",
-    "def-weil-pbc-composite-adjunction",
-    "def-weil-pbc-adjunction-conjugate",
-    "lem-weil-extension-by-zero-exact",
-    "lem-weil-pbc-localization-universal-property",
-    "def-compact-support-direct-image-detailed",
-    "def-weil-pbc-proetale-operations",
-    "prop-compactification-coherence-detailed",
-    "lem-sf-proetale-constructible-origin"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-modules.tex",
-    "place": "Tags 03DI and 03DJ, lemma-extension-by-zero and lemma-extension-by-zero-exact; finite compact-support formula and elementary biproduct calculation"
-   }
-  },
-  {
-   "text": "For $M\\in D^b_c(X_i,A)$ and $L\\in D^b_c(Y,A)$, use Step 2, Step 3 and [thm-sf-ambient-adjoint-class] to obtain natural bijections\n$$\\operatorname{Hom}_{X_i}(M,j_i^*Rg^!L)\\cong\\operatorname{Hom}_X(E_iM,Rg^!L)\\cong\\operatorname{Hom}_Y(Rg_!E_iM,L)\\cong\\operatorname{Hom}_Y(R(g_i)_!M,L).$$\nHere $E_iM$ is bounded constructible by the clopen equivalence, hence of etale origin. The functors $Rg^!$ and $R(g_i)^!$ have bounded constructible values by the specified constructible restriction in [def-weil-exceptional-inverse-image]. For each $L$, both objects therefore represent the same functor of $M$ on the full category $D^b_c(X_i,A)$. The uniqueness argument of [det-sp-unique-right-adjoint] applies: transpose the counit in each direction and evaluate the Hom identities at the two representing objects; the two composites are identities. Naturality of the Hom bijections gives naturality in $L$. This produces a natural isomorphism $\\rho_i$, uniquely specified by\n$$\\varepsilon_{g_i,L}\\circ R(g_i)_!(\\rho_{i,L})=\\varepsilon_{g,L}\\circ Rg_!(c_{i,Rg^!L})\\circ b_{i,j_i^*Rg^!L}^{-1},$$\nwhere $c_i:E_ij_i^*\\to\\mathrm{id}$ is the product adjunction counit and $b_i:Rg_!E_i\\xrightarrow{\\sim}R(g_i)_!$ is Step 3. This equation identifies the comparison as the component right-adjoint comparison of the direct-sum formula, rather than an arbitrary isomorphism.",
-   "uses": [
-    "thm-sf-ambient-adjoint-class",
-    "def-weil-exceptional-inverse-image",
-    "det-sp-unique-right-adjoint"
+    "lem-pur-clopen-strict-system-support",
+    "lem-pur-clopen-counit-adjoint-comparison"
    ],
    "elementary": false,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-def-purity-conv/def-pur-section-invariant.md",
-    "place": "Final invertibility sentence: component identification of the dualizing object, by the finite compact-support adjunction"
+    "place": "Final invertibility sentence: assembly of the five extracted finite-clopen arguments; Earlier returned proof steps 5-6: strict-system decomposition and extension composition"
    }
   },
   {
-   "text": "Now work with strict etale systems $\\mathsf S_A$ of [lem-pur-coefficient-system-derived-comparison]. The cover identifies $X$ with $\\coprod_iX_i$: maps on the disjoint open components glue uniquely, and gluing the component inclusions gives inverse scheme maps. The etale clopen decomposition [lem-weil-pbc-etale-sheaf-clopen-product] extends to constant-$A_n$ modules: transport each scalar action and each linearity equation componentwise through its fully faithful equivalence. Apply this at every $n$; a transition is a family of component maps and its semilinearity equation is checked on each component. This gives an exact product equivalence for STRICT systems with inverse given by zero insertion and finite products, and with evaluation $e_n$ commuting with restriction and insertion. Exactness and inverse identities are levelwise. The exact functors induce derived functors by [lem-sf-exact-functor-derived-triangulated]. Their unit and inverse identities descend by [lem-weil-pbc-localization-universal-property]. Thus on derived systems, insertion $E_{i,A}$ and restriction $r_{i,A}$ are adjoint in both orders, with the same zero-component Hom calculation as Step 2; the termwise units and counits descend and retain their triangle identities. In particular this is an equivalence of actual derived system categories, not a product decomposition of the evaluations of an unspecified diagram.",
+   "text": "By [lem-pur-clopen-system-integral-realization], the system isomorphisms in Step 2 commute with etale/pro-etale comparison and give, after reduction, scalar restriction and the actual total derived inverse limit, $Lj_i^*Rg_{\\mathcal O_E}^!L\\cong R(g_i)_{\\mathcal O_E}^!L$. Its finite evaluations are the Step 2 comparisons; integral completed pullback is identified with component restriction there.",
    "uses": [
-    "lem-pur-coefficient-system-derived-comparison",
-    "lem-weil-pbc-etale-sheaf-clopen-product",
-    "lem-sf-exact-functor-derived-triangulated",
-    "lem-weil-pbc-localization-universal-property"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Tag 0A5B, lemma-constant-smooth-statements, finite disjoint-union paragraph; coefficient-system extension using levelwise actions and transitions"
-   }
-  },
-  {
-   "text": "Write $F_{g,A}=Rp_{A,*}a_{!,A}$ and $F_{g_i,A}=Rp_{A,*}(a_i)_{!,A}$ as in [lem-pur-etale-coefficient-system-adjoint], for the common proper part of Step 1. There is an isomorphism\n$$b_{i,A}:F_{g,A}E_{i,A}\\xrightarrow{\\sim}F_{g_i,A}.$$\nTo construct it, apply [lem-cbc-extension-zero-composition] at every coefficient level to $a\\circ j_i$. The isomorphism commutes with transitions: on the extension-by-zero presheaves both orders send a section on the component to that same section on its image, with its coefficient action restricted along $A_{n+1}\\to A_n$, and send the other summands to zero. Sheafification preserves these equalities by its universal property. These are therefore inverse maps of strict systems, natural in the system, not independently chosen derived level maps. Exactness of open extension holds levelwise by [lem-pur-site-restriction-module-adjunction-exact]; descend its comparison by [lem-weil-pbc-localization-universal-property] and apply the actual functor $Rp_{A,*}$. No interchange of evaluation with a chosen resolution is needed here. Evaluating $b_{i,A}$ gives the corresponding ordinary etale finite-level comparison by [lem-pur-coefficient-system-derived-comparison].",
-   "uses": [
-    "lem-pur-etale-coefficient-system-adjoint",
-    "lem-cbc-extension-zero-composition",
-    "lem-pur-site-restriction-module-adjunction-exact",
-    "lem-weil-pbc-localization-universal-property",
-    "lem-pur-coefficient-system-derived-comparison"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/zheng-six-operations-lefschetz-verdier-DM-stacks_arXiv-1006.3810.pdf",
-    "place": "Constructions 5.14–5.15 and Lemma 5.16, printed p. 35; clopen case with the same proper part, using Stacks 03DH/03DJ"
-   }
-  },
-  {
-   "text": "Let $G_{g,A},G_{g_i,A}$ be the actual right adjoints supplied by [lem-pur-etale-coefficient-system-adjoint]. Step 5 and Step 6 give\n$$\\operatorname{Hom}(M,r_{i,A}G_{g,A}N)\\cong\\operatorname{Hom}(E_{i,A}M,G_{g,A}N)\\cong\\operatorname{Hom}(F_{g,A}E_{i,A}M,N)\\cong\\operatorname{Hom}(F_{g_i,A}M,N).$$\nBy [det-sp-unique-right-adjoint] this constructs a natural isomorphism $\\rho_{i,A}:r_{i,A}G_{g,A}\\cong G_{g_i,A}$ IN the derived category of strict systems. Its defining counit equation is exactly Step 4's equation with system subscripts. Evaluation respects $b_{i,A}$, the product adjunction, and the units/counits of $F\\dashv G$ by [lem-pur-etale-coefficient-system-adjoint]. Thus evaluation of that equation is the finite etale equation; uniqueness of its transpose identifies $e_n\\rho_{i,A}$ with the finite-level right-adjoint comparison. This also proves the transition compatibility with the prescribed adjunction mates. It does not infer equality of system maps merely from equality at all evaluations.",
-   "uses": [
-    "lem-pur-etale-coefficient-system-adjoint",
-    "det-sp-unique-right-adjoint"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/zheng-six-operations-lefschetz-verdier-DM-stacks_arXiv-1006.3810.pdf",
-    "place": "Right adjoint after Lemma 5.16 and Lemma 5.22, printed pp. 35–36; component comparison by the explicit Hom bijections"
-   }
-  },
-  {
-   "text": "The etale/pro-etale comparison respects this construction on actual systems. The square $j_i^*\\nu_X^*\\cong\\nu_{X_i}^*j_i^*$ is [lem-weil-pbc-comparison-pullback]. It extends to systems termwise: all maps are natural in coefficient-module morphisms, so they commute with the strict transitions; exactness permits derived descent by [lem-weil-pbc-localization-universal-property]. The system comparison and evaluation of $R\\nu_{Y,A,*}$ are those of [lem-pur-coefficient-system-derived-comparison]. Whisker Step 7 by $R\\nu_{Y,A,*}$ and $\\nu_{X_i,A}^*$, using the preceding square. This gives\n$$r_{i,A}\\nu_{X,A}^*G_{g,A}R\\nu_{Y,A,*}\\cong\\nu_{X_i,A}^*G_{g_i,A}R\\nu_{Y,A,*}.$$\nEvaluation gives $Lj_i^*Rg_n^!\\cong R(g_i)_n^!$. The comparison is the one of Step 4: [lem-cbc-proetale-extension-zero-comparison] identifies the extension terms, and [thm-sf-ambient-adjoint-class] states that the transported Hom bijections respect compactification comparisons. Therefore transporting the counit equation of Step 7 gives exactly Step 4's equation. Uniqueness in [det-sp-unique-right-adjoint] identifies the two maps. This proves the asserted site and evaluation compatibility, within bounded-below etale-origin domains when using the finite pro-etale adjunction.",
-   "uses": [
-    "lem-weil-pbc-comparison-pullback",
-    "lem-weil-pbc-localization-universal-property",
-    "lem-pur-coefficient-system-derived-comparison",
-    "lem-cbc-proetale-extension-zero-comparison",
-    "thm-sf-ambient-adjoint-class",
-    "det-sp-unique-right-adjoint"
+    "lem-pur-clopen-system-integral-realization"
    ],
    "elementary": false,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-def-purity-conv/def-pur-section-invariant.md",
-    "place": "Finite-clopen component comparison together with the actual system construction specified in def-weil-exceptional-inverse-image"
+    "place": "Final invertibility sentence: assembly of the five extracted finite-clopen arguments; Earlier returned proof steps 4 and 7: Hom bijections and counit-normalized exceptional comparisons"
    }
   },
   {
-   "text": "For an integral $L$, compose the system isomorphism of Step 8 with the reduction functor $\\mathcal R_Y$ of [def-weil-exceptional-inverse-image]. This is an isomorphism $r_{i,A}\\mathcal T_gL\\cong\\mathcal T_{g_i}L$ of actual derived strict systems. Restriction of scalars $DU_X$ commutes with $r_{i,A}$: both underlying systems have the restricted component sheaves and the same transitions and completed-ring actions. The clopen equivalence [lem-pur-finite-clopen-derived-decomposition] says that restriction also commutes with derived inverse limits and finite reduction. Apply the functor $R\\lim\\circ DU$ to this system map, with the total-limit functor of [lem-weil-pbc-ringed-strict-tower-homotopy-limit]. The formula $Rg^!_{\\mathcal O_E}=R\\lim\\,DU_X\\mathcal T_g$ in [def-weil-exceptional-inverse-image] now yields\n$$Lj_i^*Rg^!_{\\mathcal O_E}L\\cong R(g_i)^!_{\\mathcal O_E}L.$$\nHere $\\mathcal T_g$ and $\\mathcal T_{g_i}$ are formed, as the definition permits, with the compactifications $c=(a,p)$ and $c_i=(a_i,p)$ of Step 1. The integral $Lj_i^*$ agrees with component restriction: by [def-weil-derived-pullback-tensor-hom], $Lj_i^*K=R\\lim_n\\operatorname{Res}_nj_i^{-1}(K\\otimes^L_{\\mathcal O_E}A_{E,n})$, since finite-level pullback along $j_i$ is termwise restriction. The clopen equivalence commutes restriction with reduction, $\\operatorname{Res}_n$ and $R\\lim$, so this is $j_i^{-1}R\\lim_nK_n$; for $K=Rg^!_{\\mathcal O_E}L$, derived complete by its $D^b_c$ typing, $K\\cong R\\lim_nK_n$ [def-weil-derived-complete]. Invertibility follows because a functor sends an isomorphism and its inverse to mutually inverse maps. No reconstruction of a morphism from unrelated maps in ordinary derived categories has occurred.",
+   "text": "Apply [lem-pur-clopen-exceptional-scalar-descent] to Step 3. Its finite-free scalar squares give the rationalized $E$-comparison and its common-stage $\\overline{\\mathbf Q}_\\ell$ descent, with compatibility on morphisms and cofinal coefficient indices.",
    "uses": [
-    "def-weil-exceptional-inverse-image",
-    "lem-pur-finite-clopen-derived-decomposition",
-    "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
-    "def-weil-derived-pullback-tensor-hom",
-    "def-weil-derived-complete"
+    "lem-pur-clopen-exceptional-scalar-descent"
    ],
    "elementary": false,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-def-purity-conv/def-pur-section-invariant.md",
-    "place": "Integral coefficient-system clause: apply the actual derived inverse-limit functor to the system comparison"
+    "place": "Final invertibility sentence: assembly of the five extracted finite-clopen arguments; Earlier returned proof steps 8-9: site compatibility and actual integral inverse limit"
    }
   },
   {
-   "text": "These isomorphisms are $\\mathcal O_E$-linear, since the system adjoints and all restriction/extension maps are linear. Rationalization therefore sends the comparison and its inverse to mutually inverse $E$-linear transformations, using exactly [def-weil-exceptional-inverse-image]'s rationalized functors. For a finite extension $E\\subset E'$, the scalar comparison for $G$ is an isomorphism of systems, including the cofinal indexing comparison, by [lem-pur-etale-coefficient-system-adjoint]. It commutes with the component comparison: coefficient extension commutes with restriction and zero insertion, and the two composites of open extension send every local section to the same extended section. Transposing these squares gives the same right-adjoint square by the pasting identities [lem-weil-pbc-mate-pasting]; hence the two orders of scalar comparison and $\\rho_i$ coincide, including their system morphisms. The coherent scalar comparisons pass through $DU$ and $R\\lim$ by the construction in [def-weil-exceptional-inverse-image]. Thus the $E$-comparisons agree after every common finite extension and define the asserted natural isomorphism in the common-stage $\\overline{\\mathbf Q}_\\ell$ category. This uses the actual systems' scalar comparisons, not just an equality of their evaluated objects.",
-   "uses": [
-    "def-weil-exceptional-inverse-image",
-    "lem-pur-etale-coefficient-system-adjoint",
-    "lem-weil-pbc-mate-pasting"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/zheng-six-operations-lefschetz-verdier-DM-stacks_arXiv-1006.3810.pdf",
-    "place": "Construction 5.15 and Lemmas 5.16/5.22, plus the finite-free scalar construction recorded in lem-pur-etale-coefficient-system-adjoint; rationalized/common-stage descent is as in def-weil-exceptional-inverse-image"
-   }
-  },
-  {
-   "text": "Take $L=\\Lambda_Y$. By definition [def-weil-exceptional-inverse-image], $Rg^!\\Lambda_Y=\\omega_g$ and $R(g_i)^!\\Lambda_Y=\\omega_{g_i}$, giving $Lj_i^*\\omega_g\\cong\\omega_{g_i}$ at all four stages. If $X_i$ is empty its module category and system category have only the zero object, so $E_i=0$ and every displayed component isomorphism is the unique zero-to-zero map. If $I$ is empty, the cover condition makes $X$ empty; the product decomposition of [lem-pur-finite-clopen-derived-decomposition] makes $K=0$ and Step 3 gives $Rg_!K=0$, the empty direct sum. There are then no restriction comparisons to assert. The argument nowhere uses smoothness, an orientation, a section, or tensor invertibility.",
+   "text": "At every coefficient stage set $L=\\Lambda_Y$; the definition $\\omega_g=Rg^!\\Lambda_Y$ [def-weil-exceptional-inverse-image] gives $Lj_i^*\\omega_g\\cong\\omega_{g_i}$. If $X_i=\\varnothing$, restriction and exceptional image there are zero. If $I=\\varnothing$, the cover gives $X=\\varnothing$; [lem-pur-finite-clopen-derived-decomposition] gives $K=0$, and Step 1 identifies its image with the empty sum. No step requires smoothness, an orientation, a section or invertibility.",
    "uses": [
     "def-weil-exceptional-inverse-image",
     "lem-pur-finite-clopen-derived-decomposition"
@@ -177,48 +76,23 @@
    "elementary": true,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-def-purity-conv/def-pur-section-invariant.md",
-    "place": "Coefficient unit specialization and empty-cover/component cases"
+    "place": "Final invertibility sentence: assembly of the five extracted finite-clopen arguments; Earlier returned proof steps 10-11: finite-free scalar squares, field descent and unit/empty cases"
    }
   }
  ],
  "proof_deps": [
-  "thm-nagata-compactification",
-  "lem-weil-pbc-finite-type-over-noetherian",
-  "lem-weil-pbc-locally-noetherian-quasi-separated",
-  "def-weil-compactifications-refinements",
-  "lem-weil-pbc-noetherian-open-subscheme-noetherian",
-  "lem-weil-pbc-qc-open-immersion-finite-type",
-  "lem-kun-dimension-finite-type",
-  "lem-pur-finite-clopen-derived-decomposition",
-  "lem-weil-extension-by-zero-adjunction",
-  "def-weil-pbc-composite-adjunction",
-  "def-weil-pbc-adjunction-conjugate",
-  "lem-weil-extension-by-zero-exact",
-  "lem-weil-pbc-localization-universal-property",
-  "def-compact-support-direct-image-detailed",
-  "def-weil-pbc-proetale-operations",
-  "prop-compactification-coherence-detailed",
-  "lem-sf-proetale-constructible-origin",
-  "thm-sf-ambient-adjoint-class",
+  "lem-pur-clopen-common-compact-support",
+  "lem-pur-clopen-strict-system-support",
+  "lem-pur-clopen-counit-adjoint-comparison",
+  "lem-pur-clopen-system-integral-realization",
+  "lem-pur-clopen-exceptional-scalar-descent",
   "def-weil-exceptional-inverse-image",
-  "det-sp-unique-right-adjoint",
-  "lem-pur-coefficient-system-derived-comparison",
-  "lem-weil-pbc-etale-sheaf-clopen-product",
-  "lem-sf-exact-functor-derived-triangulated",
-  "lem-pur-etale-coefficient-system-adjoint",
-  "lem-cbc-extension-zero-composition",
-  "lem-pur-site-restriction-module-adjunction-exact",
-  "lem-weil-pbc-comparison-pullback",
-  "lem-cbc-proetale-extension-zero-comparison",
-  "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
-  "lem-weil-pbc-mate-pasting",
-  "def-weil-derived-pullback-tensor-hom",
-  "def-weil-derived-complete"
+  "lem-pur-finite-clopen-derived-decomposition"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-def-purity-conv/def-pur-section-invariant.md",
-  "place": "Final invertibility sentence: finite-clopen component comparison; proof written from the shared compactification formula, exact clopen decomposition and right-adjoint uniqueness, retaining the strict coefficient-system construction"
+  "place": "Final invertibility sentence: short assembly of five separately stated arguments extracted from the returned proof"
  },
  "mathlib_searches": [
   {
@@ -333,97 +207,12 @@
   "is": null
  },
  "split_report": {
-  "date": "2026-10-17",
+  "date": "2026-10-22",
   "item": "lem-pur-finite-clopen-exceptional-restriction",
   "worker": "stage1",
-  "summary": "Split by a common compactification, finite-product zero insertion, and explicit counit-normalized right-adjoint comparisons. Constructed the comparison again on actual derived strict etale systems, checked evaluation/site/scalar compatibility, and only then applied scalar restriction and derived inverse limit. Reused existing nodes; no new nodes and no statement change. Checked empty components, the empty scheme, and a nonseparated target.",
-  "blueprint": "def-pur-section-invariant, final invertibility sentence: identifies omega_g on each clopen relative-dimension component with omega_(g_i); realizes the finite-clopen compactification and adjunction argument extracted by Q40. The sk-def-purity-conv unit has no proof steps, and its six-operation route is retained.",
-  "tool_uses": [
-   {
-    "node": "thm-nagata-compactification",
-    "why": "Existence of a compactification for the separated finite-type map; the purity-conventions unit supplies no compactification theorem."
-   },
-   {
-    "node": "lem-weil-pbc-finite-type-over-noetherian",
-    "why": "Noetherian hypothesis for the field-base schemes used by the existing compactification/system statements."
-   },
-   {
-    "node": "lem-weil-pbc-locally-noetherian-quasi-separated",
-    "why": "Quasi-separatedness of the Noetherian target, to apply Nagata without assuming target separatedness."
-   },
-   {
-    "node": "lem-weil-pbc-noetherian-open-subscheme-noetherian",
-    "why": "Noetherian property of the component schemes."
-   },
-   {
-    "node": "lem-weil-pbc-qc-open-immersion-finite-type",
-    "why": "Finite type of the clopen component inclusions."
-   },
-   {
-    "node": "lem-kun-dimension-finite-type",
-    "why": "Finite dimension of the common compactification, to verify the finite adjunction theorem hypothesis."
-   },
-   {
-    "node": "lem-weil-extension-by-zero-adjunction",
-    "why": "Generic pro-etale open-extension adjunction identifies zero insertion and the composite open extension."
-   },
-   {
-    "node": "lem-weil-extension-by-zero-exact",
-    "why": "Generic exactness of open extension allows termwise descent."
-   },
-   {
-    "node": "lem-weil-pbc-localization-universal-property",
-    "why": "Generic descent of exact termwise comparisons and adjunction identities to derived categories."
-   },
-   {
-    "node": "prop-compactification-coherence-detailed",
-    "why": "Choice independence of finite compact support on the bounded etale-origin class."
-   },
-   {
-    "node": "lem-sf-proetale-constructible-origin",
-    "why": "Verifies the bounded constructible domain of compactification coherence."
-   },
-   {
-    "node": "thm-sf-ambient-adjoint-class",
-    "why": "Provides the actual finite pro-etale adjunction on bounded etale-origin inputs, without a false ambient adjunction."
-   },
-   {
-    "node": "lem-pur-coefficient-system-derived-comparison",
-    "why": "Actual strict-system evaluation and site comparison used before taking inverse limit."
-   },
-   {
-    "node": "lem-weil-pbc-etale-sheaf-clopen-product",
-    "why": "Generic etale sheaf decomposition underlying component restriction on strict systems."
-   },
-   {
-    "node": "lem-sf-exact-functor-derived-triangulated",
-    "why": "Generic exact descent of the strict-system component equivalence."
-   },
-   {
-    "node": "lem-pur-etale-coefficient-system-adjoint",
-    "why": "Actual etale system adjoints with evaluated counits and finite-free scalar comparisons."
-   },
-   {
-    "node": "lem-cbc-extension-zero-composition",
-    "why": "Composition of two open extensions with identity over the component; used before any right adjoint or inverse limit."
-   },
-   {
-    "node": "lem-pur-site-restriction-module-adjunction-exact",
-    "why": "Levelwise exactness of open extension for the strict coefficient systems."
-   },
-   {
-    "node": "lem-weil-pbc-comparison-pullback",
-    "why": "Commuting square of component restriction and etale/pro-etale comparison."
-   },
-   {
-    "node": "lem-cbc-proetale-extension-zero-comparison",
-    "why": "Identifies etale and pro-etale extension terms in the finite counit-normalization equation."
-   },
-   {
-    "node": "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
-    "why": "The actual derived inverse-limit functor on strict towers, to carry the system isomorphism to integral coefficients."
-   }
-  ]
+  "summary": "Repair of the 2026-10-22 spread-work return: unchanged statement, five new statement-only unsplit nodes, and a short assembly. Every argument of the eleven returned steps is retained verbatim and mapped to its new owner in report.md. Searches were run with msearch.py and read; no Lean written or compiled.",
+  "blueprint": "def-pur-section-invariant, final invertibility sentence: component identification of the dualizing object, keeping the finite-clopen compactification/strict-system route. The ancestor unit has no proof steps.",
+  "tool_uses": []
  },
  "tool_uses": [
   "thm-nagata-compactification",
@@ -449,12 +238,12 @@
   "lem-weil-pbc-ringed-strict-tower-homotopy-limit"
  ],
  "reviewed": {
-  "date": "2026-10-17",
+  "date": "2026-10-22",
   "by": "L",
-  "reviewer": "NT-cc-Q110-ecda0e5d7",
-  "group": "Q110",
+  "reviewer": "NT-cc-Q121-04339dcf2",
+  "group": "Q121",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q110-ecda0e5d7 (reviewer sub-agent of L); spot-checked: I read the item (statement unchanged, 11 steps, no new nodes), the parent def-pur-section-invariant (only step 2 cites the item) against the main-20261015 blueprint, the unit sk-def-purity-conv (conventions only, no steps), all 30 cited node statements, the Stacks tags and Zheng pp. 34-37. The statement matches the parent's use at all four coefficient stages, including the empty cases, and nothing is weakened. Small cases checked: fold map Y⊔Y→Y, I empty, an empty component, nonseparated Y. Steps 1-8, 10 and 11 check against the statements they cite. Step 4's Yoneda argument stays inside D^b_c(X_i) and uses thm-sf-ambient-adjoint-class only on etale-origin inputs. Step 7 is uniqueness of right adjoints on actual system categories. Three repairs in fixes/dag/nodes/sec-smooth-purity/lem-pur-finite-clopen-exceptional-restriction.json: (1) Step 3's source said Tag 03DH, but lemma-extension-by-zero is Tag 03DI (03DH is the section); corrected. (2) E5/C4: Step 9 asserted without citation that the integral Lj_i^* agrees with restriction. It now argues this explicitly: the formula R lim Res_n j_i^{-1}(K⊗A_n) from def-weil-derived-pullback-tensor-hom, the clopen commutations, and derived completeness K≅R lim K_n from def-weil-derived-complete. Both nodes are added to the step's uses and to proof_deps. (3) Step 9 now says that T_g and T_{g_i} are formed with the compactifications (a,p) and (a_i,p) of Step 1. Duplicate check: det-sf-mate-open-restriction is a different framework; lem-sf-kv-affine-locality covers only the finite clause, which Step 4 proves directly. Neither is a merge target. Accepted all 21 declared tool_uses as generic tools; none replaces a step of the unit's route. For the maintainer: def-weil-exceptional-inverse-image does not state that its system-level functor G_{f,A} is independent of the chosen compactification; that belongs to that definition, not to this item.; 1 file(s) fixed by the reviewer"
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q121-04339dcf2 (reviewer sub-agent of L); spot-checked: Faithful re-split under the human's 2026-10-21 note (repair-notes released 2026-10-22; live item is still the 11-step Q110 PASS, so the delivery is not superseded). Statement unchanged byte for byte. Assembly is 1834 characters in 5 steps. All 11 base steps reappear verbatim in the report, each owned by one of 5 statement-only unsplit nodes of comparable size (old steps 1-3 common-compact-support; 4,7 counit-adjoint-comparison; 5-6 strict-system-support; 8-9 system-integral-realization; 10-11 exceptional-scalar-descent). Each node states the conclusions of the steps it owns, none restates the item, and there is no cycle. Checked against def-weil-exceptional-inverse-image (T_g = nu^* G R nu_* R_Y, Rg^!_O = R lim DU T_g, finite-free scalar and common-stage field stages), lem-pur-etale-coefficient-system-adjoint (F = Rp_* j_!, G, e_n G = f^x, scalar comparisons, cofinal ramified index), lem-pur-coefficient-system-derived-comparison, lem-pur-finite-clopen-derived-decomposition, def-weil-compactifications-refinements (no density, so (a∘j_i,p) is a compactification), Zheng 5.14-5.16 and 5.22 (pp. 34-36), and Stacks 03DI/03DJ/04TS. The counit equation is correctly typed. Small cases: the fold map Y⊔Y→Y gives rho = id; empty component; empty cover; identity and ramified scalar extensions. Batch-5 finding accepted: the base item already cites lem-pur-finite-clopen-derived-decomposition, so the closure does not grow, and the node it reaches, lem-trf-fully-faithful-ess-surj-equivalence, is a generic Mathlib category-theory leaf outside both assumptions. No SGA. No duplicates: def-pur-clopen-strict-system-comparison is data only (advisory: stage 2 can phrase the counit and integral nodes over it). FIX in fixes/dag/nodes/sec-smooth-purity: (1) B5: the 5 new nodes' source.place said 'Earlier returned proof steps', which is not a place in any document; replaced by real places in def-pur-section-invariant's final sentence and Zheng, each with a pointer to the steps retained in the report. (2) B3: added the missing notion stmt_deps (def-weil-pbc-proetale-site, def-weil-finite-torsion-constructibility, def-compact-support-direct-image-detailed to counit-adjoint-comparison; def-weil-pbc-site-comparison-morphism, def-weil-derived-complete-integral-detailed to system-integral-realization), all already in the closure.; 5 file(s) fixed by the reviewer"
  },
  "reviewed_lean": {
   "date": "2026-10-18",
@@ -491,5 +280,16 @@
   "date": "2026-10-17",
   "existing": false
  },
- "lean_audit": {}
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ }
 }

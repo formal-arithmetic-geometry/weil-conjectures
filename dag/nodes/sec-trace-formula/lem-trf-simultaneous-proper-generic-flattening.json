@@ -1,0 +1,307 @@
+{
+ "id": "lem-trf-simultaneous-proper-generic-flattening",
+ "kind": "statement",
+ "title": "Simultaneous generic flattening of two proper families",
+ "statement": "Let $S$ be an integral scheme [def-pc-integral-scheme] which is Noetherian, meaning locally Noetherian [pqf-def-locnoeth] and quasi-compact [def-weil-pbc-quasi-compact-scheme], and let $f_i:X_i\\to S$ for $i\\in\\{1,2\\}$ be proper morphisms [def-weil-proper-morphism]; either $X_i$ may be empty. There exist a nonempty quasi-compact open $U\\subset S$ and a quasi-coherent ideal $I\\subset\\mathcal O_S$ of finite type with $I|_U=\\mathcal O_U$. For the $U$-admissible blowup $v:T=\\operatorname{Bl}_I S\\to S$ [def-nagata-admissible-blowup], put $V=S\\setminus V(I)$. For each $i$ the strict transform $X_i'\\subset X_i\\times_S T$ [def-nagata-strict-transform] is flat [def-weil-flat-morphism] and finitely presented over $T$ (locally of finite presentation [def-sbc-locally-finite-presentation], quasi-compact and quasi-separated). It agrees with $X_i$ over $V$ and is the schematic closure of $(X_i)_V$ in $X_i\\times_S T$ [def-nagata-scheme-theoretic-image]. The strict transform of $X_1\\amalg X_2$ is the disjoint union $X_1'\\amalg X_2'$.",
+ "source": {
+  "document": "literature/stacks-project/flat.tex",
+  "place": "Tag 081R, lemma-flat-after-blowing-up, applied to a finite disjoint union after Morphisms Tag 052A, proposition-generic-flatness; Divisors Tag 080D, definition-strict-transform. ILO Expose X, Theorem 3.4 proof Step 2, printed p.160."
+ },
+ "stmt_deps": [
+  "def-nagata-admissible-blowup",
+  "def-nagata-scheme-theoretic-image",
+  "def-nagata-strict-transform",
+  "def-pc-integral-scheme",
+  "def-sbc-locally-finite-presentation",
+  "def-weil-flat-morphism",
+  "def-weil-pbc-quasi-compact-scheme",
+  "def-weil-proper-morphism",
+  "lem-weil-pbc-scheme-coproduct-family",
+  "pqf-def-locnoeth"
+ ],
+ "proof": [
+  {
+   "text": "Form $W=X_1\\amalg X_2$ and $g:W\\to S$ using [lem-weil-pbc-scheme-coproduct-family]. Properness of $f_i$ includes finite type by [def-weil-proper-morphism]. For an affine open $A\\subset S$, combine the two finite affine covers of $f_i^{-1}(A)$: they are affine opens of $g^{-1}(A)$ with the same finitely generated coordinate algebras. Thus $g$ is of finite type by [def-weil-finite-type-morphism]. This also works when either cover is empty.",
+   "uses": [
+    "lem-weil-pbc-scheme-coproduct-family",
+    "def-weil-proper-morphism",
+    "def-weil-finite-type-morphism"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Tags 01JB and 01JC, lemma-glue and lemma-glue-schemes, empty-overlap gluing; Morphisms Tag 01T0, finite type definition."
+   }
+  },
+  {
+   "text": "By [lem-weil-pbc-finite-type-over-noetherian], $W$ is Noetherian. Both $S$ and $W$ are locally Noetherian, hence quasi-separated by [lem-weil-pbc-locally-noetherian-quasi-separated]. The Noetherian hypothesis includes quasi-compactness of $S$. Since $W$ is quasi-separated, [lem-weil-pbc-qcqs-morphism-permanence](1) makes $g$ quasi-separated. These are precisely the base and morphism hypotheses needed for flattening.",
+   "uses": [
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "lem-weil-pbc-locally-noetherian-quasi-separated",
+    "lem-weil-pbc-qcqs-morphism-permanence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/properties.tex",
+    "place": "Tag 01OV, definition-noetherian; Tag 01OY, lemma-locally-Noetherian-quasi-separated; Morphisms Tag 01T6, lemma-finite-type-noetherian."
+   }
+  },
+  {
+   "text": "Apply [lem-sbc-generic-flat-finite-presentation] to $g$, whose finite type was proved in Step 1, over the integral $S$. Obtain a nonempty open $U$ on which $g$ is flat and locally of finite presentation. By [lem-weil-pbc-noetherian-scheme-closed-subsets-minimal], a descending chain of closed subsets has a minimal member among its terms and stabilizes there; hence the underlying space of $S$ is Noetherian. Then [lem-sfb-noetherian-space-compact-subsets] makes every subset quasi-compact, in particular $U$ and, later, the centre complement $V$. Thus the required $U$ is quasi-compact.",
+   "uses": [
+    "lem-sbc-generic-flat-finite-presentation",
+    "lem-weil-pbc-noetherian-scheme-closed-subsets-minimal",
+    "lem-sfb-noetherian-space-compact-subsets"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 052A, proposition-generic-flatness, structure-sheaf case; Properties Tag 01OZ, lemma-Noetherian-topology; Topology Tag 04ZA, lemma-Noetherian-quasi-compact."
+   }
+  },
+  {
+   "text": "Apply [lem-trf-flattening-by-admissible-blowup] to $(S,U,g)$. Steps 1--3 supply finite type and quasi-separatedness of $g$, a quasi-compact quasi-separated base, and a quasi-compact open with flat locally finitely presented restriction. It gives a finite-type quasi-coherent ideal $I$, unit on $U$, and the $U$-admissible blowup $v:T\\to S$, such that the strict transform $W'\\subset W\\times_ST$ is flat and of finite presentation over $T$. Write $V=S\\setminus V(I)$; in particular $U\\subset V$. The cited theorem identifies $W'$ with the schematic closure of $W_V$ in this fibre product.",
+   "uses": [
+    "lem-trf-flattening-by-admissible-blowup"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/flat.tex",
+    "place": "Tag 081R, lemma-flat-after-blowing-up."
+   }
+  },
+  {
+   "text": "The inverse images of the summands of $W=X_1\\amalg X_2$ are disjoint clopen subschemes covering $W\\times_ST$, so [lem-weil-pbc-scheme-coproduct-family] identifies this fibre product with $(X_1\\times_ST)\\amalg(X_2\\times_ST)$. Every $V\\cap A$ for affine open $A\\subset S$ is quasi-compact by Step 3; thus $V\\to S$ is quasi-compact by [def-weil-finite-type-morphism]. Its base change $j:(W\\times_ST)_V\\to W\\times_ST$ is quasi-compact by [lem-weil-pbc-qcqs-morphism-permanence](3). Therefore [def-nagata-scheme-theoretic-image] identifies its closure ideal with the kernel of $\\mathcal O\\to j_*\\mathcal O$. Restricting this map to each clopen summand gives exactly $\\mathcal O_{X_i\\times_ST}\\to(j_i)_*\\mathcal O_{(X_i)_V}$, and kernels restrict componentwise. The closure is consequently $X_1'\\amalg X_2'$, with each $X_i'$ the schematic closure of $(X_i)_V$, hence its strict transform by [def-nagata-strict-transform]. This is equality of ideal sheaves, including nilpotents.",
+   "uses": [
+    "lem-weil-pbc-scheme-coproduct-family",
+    "def-nagata-scheme-theoretic-image",
+    "def-nagata-strict-transform",
+    "def-weil-finite-type-morphism",
+    "lem-weil-pbc-qcqs-morphism-permanence"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/divisors.tex",
+    "place": "Tag 080D, definition-strict-transform, applied on the two disjoint open-and-closed pieces; scheme-theoretic closure kernel definition."
+   }
+  },
+  {
+   "text": "Each $X_i'$ is clopen in $W'$. Its local rings and affine open neighbourhoods are the same as in $W'$, so flatness and local finite presentation restrict by [def-weil-flat-morphism] and [def-sbc-locally-finite-presentation]. For each affine $A\\subset T$, the inverse image in $X_i'$ is closed in the quasi-compact inverse image in $W'$, hence quasi-compact. Moreover $\\Delta_{X_i'/T}$ is the base change of $\\Delta_{W'/T}$ along $X_i'\\times_T X_i'\\to W'\\times_T W'$; thus it is quasi-compact by [lem-weil-pbc-qcqs-morphism-permanence](3). By [def-weil-quasi-separated-morphism], $X_i'\\to T$ is quasi-separated. It is consequently of finite presentation.",
+   "uses": [
+    "def-weil-flat-morphism",
+    "def-sbc-locally-finite-presentation",
+    "lem-weil-pbc-qcqs-morphism-permanence",
+    "def-weil-quasi-separated-morphism"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/flat.tex",
+    "place": "Tag 081R, lemma-flat-after-blowing-up, finite-presentation conclusion; Morphisms Tag 01TP, definition-finite-presentation; Schemes, quasi-compact diagonal definition."
+   }
+  },
+  {
+   "text": "The same ideal is unit on $V$, which is quasi-compact by Step 3. Applying [lemma-nagata-admissible-blowup-over-open] to $V$ gives $T\\times_SV\\cong V$. On this open, the kernel defining each closure in Step 5 is the kernel of an identity restriction, hence zero by [def-nagata-scheme-theoretic-image]. Thus $X_i'$ agrees with $X_i$ over $V$. The closure identity and coproduct identity are those already proved in Step 5, so every conclusion follows. Empty summands remain empty throughout the kernel construction.",
+   "uses": [
+    "lemma-nagata-admissible-blowup-over-open",
+    "def-nagata-scheme-theoretic-image"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/divisors.tex",
+    "place": "Blowup over its centre complement; Tag 080D, definition-strict-transform."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-nagata-scheme-theoretic-image",
+  "def-nagata-strict-transform",
+  "def-sbc-locally-finite-presentation",
+  "def-weil-finite-type-morphism",
+  "def-weil-flat-morphism",
+  "def-weil-proper-morphism",
+  "def-weil-quasi-separated-morphism",
+  "lem-sbc-generic-flat-finite-presentation",
+  "lem-sfb-noetherian-space-compact-subsets",
+  "lem-trf-flattening-by-admissible-blowup",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-weil-pbc-locally-noetherian-quasi-separated",
+  "lem-weil-pbc-noetherian-scheme-closed-subsets-minimal",
+  "lem-weil-pbc-qcqs-morphism-permanence",
+  "lem-weil-pbc-scheme-coproduct-family",
+  "lemma-nagata-admissible-blowup-over-open"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/flat.tex",
+  "place": "Tag 081R, lemma-flat-after-blowing-up, applied to X_1 disjoint union X_2 after Morphisms Tag 052A; the coproduct and kernel restrictions are written out explicitly."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For a finite family of proper schemes over an integral Noetherian base a single admissible blowup makes all strict transforms flat and finitely presented",
+   "results": "8 hits; top=['AlgebraicGeometry.UniversallyOpen.of_flat', 'AlgebraicGeometry.Flat', 'AlgebraicGeometry.Flat.instHasRingHomPropertyFlat', 'AlgebraicGeometry.flat_iff', 'AlgebraicGeometry.Flat.instIsMultiplicativeScheme', 'AlgebraicGeometry.instDescendsAlongSchemeMinMorphismPropertySurjectiveFlatLocallyOfFinitePresentationOfQuasiCompactOfIsZariskiLocalAtTarget', 'AlgebraicGeometry.flat_and_surjective_SpecMap_iff', 'AlgebraicGeometry.Flat.instIsStableUnderCompositionScheme']; ; digest=2aad732c309db93b. Types read: Flatness and base-change permanence do not construct simultaneous strict transforms.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Simultaneous generic flattening of two proper morphisms by blowing up their common integral base",
+   "results": "8 hits; top=['RingHom.Flat.isStableUnderBaseChange', 'AlgebraicGeometry.Flat.mk', 'AlgebraicGeometry.Flat.flat_appLE', 'AlgebraicGeometry.IsProper', 'AlgebraicGeometry.IsProper.isStableUnderBaseChange', 'AlgebraicGeometry.Flat.comp', 'AlgebraicGeometry.flat_iff', 'AlgebraicGeometry.Flat.isStableUnderBaseChange']; ; digest=50db397799cd90ee. Types read: Flatness and base-change permanence do not construct simultaneous strict transforms.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"strictTransform\"",
+   "results": "0 hits; top=[]; ; digest=4f53cda18c2baa0c. Types read: Flatness and base-change permanence do not construct simultaneous strict transforms.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "strictTransform|strict_transform|flattening|flatification",
+   "results": "7 hits; top=['Mathlib/Data/Matrix/Block.lean', 'Mathlib/Geometry/Convex/ConvexSpace/Defs.lean', 'Mathlib/Geometry/Convex/ConvexSpace/Defs.lean', 'Mathlib/Geometry/Convex/ConvexSpace/Defs.lean', 'Mathlib/Geometry/Convex/ConvexSpace/Defs.lean', 'Mathlib/Geometry/Convex/ConvexSpace/Defs.lean', 'Mathlib/Combinatorics/Enumerative/Composition.lean']; ; digest=7d8f41936f9723df. Types read: Flatness and base-change permanence do not construct simultaneous strict transforms.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "strictTransform|strict_transform|flatification|flattening",
+   "results": "0 hits; top=[]; digest=4f53cda18c2baa0c. Search in Mathlib/AlgebraicGeometry; no strict-transform or flattening result.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Raynaud Gruson flattening by blowing up a scheme so that the strict transform is flat",
+   "results": "8 hits; top=['AlgebraicGeometry.Flat', 'RingHom.Flat', 'AlgebraicGeometry.Flat.comp', 'AlgebraicGeometry.Flat.mk', 'AlgebraicGeometry.Scheme.Hom.flat_appLE', 'AlgebraicGeometry.Flat.flat_appLE', 'AlgebraicGeometry.Flat.iff_flat_stalkMap', 'AlgebraicGeometry.Flat.isIso_of_surjective_of_mono']; digest=546e4267bafd41a5. Returned types read: flatness definitions and permanence, not existence of a flattening blowup.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"strictTransform\"",
+   "results": "0 hits; top=[]; digest=4f53cda18c2baa0c. Returned types read: flatness definitions and permanence, not existence of a flattening blowup.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For two proper schemes over an integral Noetherian base, one admissible blowup makes both strict transforms flat and finitely presented",
+   "results": "8 hits; top=['AlgebraicGeometry.Flat', 'AlgebraicGeometry.Flat.instIsMultiplicativeScheme', 'AlgebraicGeometry.Flat.instIsStableUnderCompositionScheme', 'AlgebraicGeometry.Flat.isStableUnderBaseChange', 'AlgebraicGeometry.UniversallyOpen.of_flat', 'AlgebraicGeometry.instDescendsAlongSchemeMinMorphismPropertySurjectiveFlatLocallyOfFinitePresentationOfQuasiCompactOfIsZariskiLocalAtTarget', 'AlgebraicGeometry.Flat.instHasRingHomPropertyFlat', 'AlgebraicGeometry.IsSmoothOfRelativeDimension']; digest=f2675ecf78c7cf08. Returned types read: flatness definitions and permanence, not existence of a flattening blowup.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Raynaud Gruson platification: a finite type quasi separated morphism flat over a dense open becomes flat after taking the strict transform under a blowup",
+   "results": "8 hits; top=['AlgebraicGeometry.Flat', 'AlgebraicGeometry.Flat.instIsStableUnderCompositionScheme', 'AlgebraicGeometry.Flat.generalizingMap', 'AlgebraicGeometry.Flat.flat_appLE', 'AlgebraicGeometry.Scheme.Hom.flat_appLE', 'AlgebraicGeometry.Flat.instOfIsOpenImmersion', 'AlgebraicGeometry.Flat.instHasRingHomPropertyFlat', 'AlgebraicGeometry.Flat.instIsMultiplicativeScheme']; digest=f3a42edda3cb2eab. Returned types read: flatness definitions and permanence, not existence of a flattening blowup.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-flatification-horizontal-curve-pair",
+  "date": "2026-10-22",
+  "group": "N5"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Proof (1)--(2), semistable-alteration input in the nearby-cycle branch: ILO X Theorem 3.4 Step 2, flatification of the curve and horizontal boundary before the stable modification theorem. Parent retained proof Steps 1--2: Simultaneous generic flattening of two proper families.",
+   "via": [
+    "lem-trf-flatification-horizontal-curve-pair",
+    "lem-trf-dejong-relative-marked-semistable",
+    "lem-trf-relative-marked-nodal-reduction",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-trf-simultaneous-proper-generic-flattening",
+  "worker": "stage1",
+  "summary": "Seven-step split using existing generic-flatness and scheme-flattening nodes, with explicit clopen coproduct and closure-kernel arguments. No new nodes. Corrected the Noetherian-scheme definition citation without changing any hypothesis or conclusion. Checked the empty cases and every cited statement. Repair of the side-completion landing return: rebased against the current DAG and re-read all cited statements. Expanded the minimal-closed-set to descending-chain implication, and justified quasi-compactness of the closure immersion by base change before using the literal quasi-coherent kernel. Retained the prior proof route, statement clarification, provenance and logged searches.",
+  "blueprint": "Retains the recorded ancestor lem-trf-local-term-locality Proof (1)--(2) semistable-alteration preparation through the recorded via chain: ILO X Theorem 3.4 Step 2, simultaneous flatification before stable modification. This item realizes the parent lem-trf-flatification-horizontal-curve-pair Step 1.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-scheme-coproduct-family",
+    "why": "Constructs the two clopen summands used for simultaneous flattening; a generic scheme gluing tool. It is a general tool for this geometric preparation, not a replacement of the unit route."
+   },
+   {
+    "node": "lem-weil-pbc-finite-type-over-noetherian",
+    "why": "Supplies Noetherianity of the finite type disjoint union. It is a general tool for this geometric preparation, not a replacement of the unit route."
+   },
+   {
+    "node": "lem-weil-pbc-locally-noetherian-quasi-separated",
+    "why": "Supplies quasi-separatedness of the base and source required by the flattening theorem. It is a general tool for this geometric preparation, not a replacement of the unit route."
+   },
+   {
+    "node": "lem-weil-pbc-qcqs-morphism-permanence",
+    "why": "Converts source quasi-separatedness into relative quasi-separatedness and preserves quasi-compact diagonals under base change. It is a general tool for this geometric preparation, not a replacement of the unit route."
+   },
+   {
+    "node": "lem-sbc-generic-flat-finite-presentation",
+    "why": "Supplies the common generic open before the prescribed flattening step. It is a general tool for this geometric preparation, not a replacement of the unit route."
+   },
+   {
+    "node": "lem-weil-pbc-noetherian-scheme-closed-subsets-minimal",
+    "why": "Identifies the Noetherian Zariski topology so its subsets are quasi-compact. It is a general tool for this geometric preparation, not a replacement of the unit route."
+   },
+   {
+    "node": "lem-sfb-noetherian-space-compact-subsets",
+    "why": "Supplies quasi-compactness of the generic open and the centre complement. It is a general tool for this geometric preparation, not a replacement of the unit route."
+   },
+   {
+    "node": "lemma-nagata-admissible-blowup-over-open",
+    "why": "Identifies the blowup over the centre complement with that complement. It is a general tool for this geometric preparation, not a replacement of the unit route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-scheme-coproduct-family",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-weil-pbc-locally-noetherian-quasi-separated",
+  "lem-weil-pbc-qcqs-morphism-permanence",
+  "lem-sbc-generic-flat-finite-presentation",
+  "lem-weil-pbc-noetherian-scheme-closed-subsets-minimal",
+  "lem-sfb-noetherian-space-compact-subsets",
+  "lemma-nagata-admissible-blowup-over-open"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q104-62d6745ff",
+  "group": "Q104",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q104-62d6745ff (reviewer sub-agent of L); spot-checked: Re-delivery after the landing of 7fe71b567 was refused with 'completed in this project's DAG but not in live'. That head had a PASS; the refusal was a promotion issue, not a fault in the mathematics. There are no new nodes and no repair note, so the 2026-10-21 re-split rules do not apply. The statement is byte-identical to the previous head. Noetherian is written as locally Noetherian plus quasi-compact (01OV), so the meaning is unchanged and every conclusion is retained. I read Stacks 081R (flat.tex l.9123), 052A (morphisms.tex l.5172) and the definitions of 080D, strict transform and scheme-theoretic image. Only two steps changed. Step 3 now spells out the descending-chain argument (minimal member T_n, then T_m ⊆ T_n forces equality); it is correct. Step 5 now proves j quasi-compact before using the literal kernel: every subset of |S| is quasi-compact, so V→S is quasi-compact by def-weil-finite-type-morphism, and the base change is quasi-compact by qcqs-permanence(3). This is correct and closes the point the previous review found implicit at Step 7. I checked every step again. Step 1: the coproduct has finite type, including the empty case. Step 2: S is qcqs and g is quasi-separated by qcqs-permanence(1). Step 3: generic flatness gives a nonempty U, and U and V are quasi-compact. Step 4: every hypothesis of the same-unit flattening node holds, and its conclusion includes the closure. Step 5: kernels restrict to the clopen summands, so the equality holds for ideal sheaves, nilpotents included; the strict-transform formula matches with C=V(I), which is of finite presentation. Step 6: each X_i′ is clopen; lfp via A_e; quasi-compact as a closed part of a quasi-compact set; the diagonal is a cartesian base change because X_i′→W′ is a monomorphism. Step 7: the blowup is V-admissible, so T_V≅V and the kernel is 0 over V. Each step's uses match its citations, and their union equals proof_deps. A duplicate search found only the flattening node, which the item uses. Small cases checked: X_i empty, S a field, a vertical family, nonreduced X_i. I accept all 8 tool_uses as generic scheme facts. No SGA is used."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SimultaneousProperGenericFlattening",
+  "declaration": "AlgebraicGeometry.exists_simultaneous_flat_finitePresentation_strictTransform_admissibleBlowup",
+  "file": "lean/Sheaf/AlgebraicGeometry/SimultaneousProperGenericFlattening.lean",
+  "statement": "theorem exists_simultaneous_flat_finitePresentation_strictTransform_admissibleBlowup {S : Scheme.{u}} [IsIntegral S] [IsLocallyNoetherian S] [CompactSpace S] (X : Fin 2 → Scheme.{u}) (f : ∀ i : Fin 2, X i ⟶ S) [∀ i : Fin 2, IsProper (f i)] : ∃ U : S.Opens, (U : Set S).Nonempty ∧ IsCompact (U : Set S) ∧ ∃ B : IsAdmissible S U, (∀ i : Fin 2, Flat (strictTransformMap (f i) B.I.blowupMap B.I.support.compl) ∧ LocallyOfFinitePresentation (strictTransformMap (f i) B.I.blowupMap B.I.support.compl) ∧ QuasiCompact (strictTransformMap (f i) B.I.blowupMap B.I.support.compl) ∧ QuasiSeparated (strictTransformMap (f i) B.I.blowupMap B.I.support.compl) ∧ IsIso ((strictTransformToSource (f i) B.I.blowupMap B.I.support.compl) ∣_ (f i ⁻¹ᵁ B.I.support.compl))) ∧ ∃ e : (∐ fun i : Fin 2 ↦ strictTransform (f i) B.I.blowupMap B.I.support.compl) ≅ strictTransform (Sigma.desc f) B.I.blowupMap B.I.support.compl, ∀ i : Fin 2, Sigma.ι (fun j : Fin 2 ↦ strictTransform (f j) B.I.blowupMap B.I.support.compl) i ≫ e.hom ≫ strictTransformToSource (Sigma.desc f) B.I.blowupMap B.I.support.compl = strictTransformToSource (f i) B.I.blowupMap B.I.support.compl ≫ Sigma.ι X i ∧ Sigma.ι (fun j : Fin 2 ↦ strictTransform (f j) B.I.blowupMap B.I.support.compl) i ≫ e.hom ≫ strictTransformMap (Sigma.desc f) B.I.blowupMap B.I.support.compl = strictTransformMap (f i) B.I.blowupMap B.I.support.compl",
+  "branch": "newtargets-dag",
+  "by": "Q18",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-95def88d4",
+  "group": "Q18",
+  "result": "pass",
+  "note": "Delivery 95def88d touches only the item node (lean field added, rest identical to side-live), the new module SimultaneousProperGenericFlattening.lean and the report; lean.statement matches the signature verbatim. Hypotheses IsIntegral + IsLocallyNoetherian + CompactSpace S and Fin 2 proper families, no extra assumptions, empty sources allowed, single universe u. Conclusion: nonempty compact U; B : IsAdmissible S U (finite-type ideal, disjoint support); V = B.I.support.compl; strictTransformMap Flat/LFP/QC/QS as in the cited flattening-by-admissible-blowup theorem; agreement over V as IsIso of strictTransformToSource restricted to f_i⁻¹V; schematic closure holds by the definition of strictTransform (Hom.image of the open part over V); coproduct iso compatible with both projections, so it identifies the closed subschemes. True by Stacks 081R on the disjoint union after 052A. No duplicate (only the curve-pair consumer is nearby), no hollow definition, docstrings carry the source places, blueprint tag and 7 proof steps, report sections present. No findings; nothing compiled since no file was changed."
+ }
+}

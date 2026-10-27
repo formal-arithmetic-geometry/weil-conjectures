@@ -1,0 +1,343 @@
+{
+ "id": "lem-sf-exceptional-field-descent",
+ "kind": "statement",
+ "title": "Exceptional coefficient construction: field descent",
+ "chapter": "sec-six-functors",
+ "unit": "sk-thm-sf-compatibility",
+ "statement": "Fix a finite-field datum $D=(p,a,q,k_0,k)$ with $k=\\overline{k_0}$, a prime $\\ell\\ne p$, and finite extensions $E/\\mathbf Q_\\ell$ with valuation rings $R_E$, uniformizers $\\varpi_E$, and $A_{E,n}=R_E/\\varpi_E^n$ for $n\\ge1$ [def-weil-finite-field-fiber, def-weil-l-adic-coefficient-extension]. Let $X,Y$ be finite-type $k$-schemes and $f:X\\to Y$ a separated finite-type $k$-morphism; neither $X$ nor $Y$ is assumed separated over $k$ [def-weil-scheme-morphism-properties]. Fix a compactification $c=(X\\xrightarrow j\\overline X\\xrightarrow{p_c}Y)$ [def-weil-compactifications-refinements]. Fix an algebraic closure $\\Omega/\\mathbf Q_\\ell$ [def-weil-l-adic-coefficient-extension]. For each $E$ use the integral finite-Tor category, the exact $R_E$-linear adjunction $F_R\\dashv G_R$ obtained by reduction/limit transport of the etale system adjunction, its prescribed compact-support identification, and its canonical proper/open scalar comparisons. Assume their left maps satisfy balanced scalar identity and composition, and their right maps are the invertible counit transposes. Use raw scalar localization $\\mathcal C_{T,E}=\\mathcal C_{T,R_E}[1/\\varpi_E]$ (same objects and localized Hom modules), and the common finite-subfield category $\\mathcal C_{T,\\Omega}$ whose objects are pairs $(E,K)$ and whose maps are directed colimits over common finite subfields [def-weil-rationalization-karoubi, def-weil-algebraically-closed-coefficients]. Then the localized $F_E\\dashv G_E$ are additive exact adjunctions on exactly the published rational constructible categories: every integral constructible representative has finite Tor amplitude. Their left functor is the published rational compact support, with its identity rational-left realization [def-weil-integral-rational-qbar-compact-support]. The unit, counit, inverse Hom maps and triangles are the images of the integral ones, with their induced shifts.\n\nThere are invertible shift-compatible integral-to-rational and rational scalar comparisons satisfying $\\epsilon_tF_t(b)q=T_Y\\epsilon_s$. Composing the integral-to-rational $q$ with the rational-left realization gives exactly the localization of the integral-left realization. On every integral representative the rational scalar $q$ is the raw localization of the integral scalar $q$, also on morphisms $h/\\varpi_E^r$.\n\nThe formulas $(E,K)\\mapsto(E,F_EK)$ and $(E,K)\\mapsto(E,G_EK)$ define additive exact functors on $\\mathcal C_{-,\\Omega}$, acting on represented morphisms by their scalar comparisons. Both this action and the natural adjunction Hom bijections are independent of enlargement to a common field and preserve identities and composition. They give an adjunction at $\\Omega$ with represented triangles and shifts. At each finite-field inclusion the left comparison is the identity on $(E,F_EK)$ and its counit transpose is the identity on the represented right object; these comparisons satisfy the same counit and shift equations. No Karoubi completion or unrestricted ambient $\\Omega$ adjunction is asserted.",
+ "source": {
+  "document": "literature/zheng-six-operations-lefschetz-verdier-DM-stacks_arXiv-1006.3810.pdf",
+  "place": "Propositions 2.23, 2.29, 3.16; Section 5, especially Lemma 5.22 and Proposition 5.24; blueprint exceptional inverse-image construction. Specific obligation: returned construction steps 17–19, preserved verbatim in the delivery report."
+ },
+ "stmt_deps": [
+  "def-weil-finite-field-fiber",
+  "def-weil-l-adic-coefficient-extension",
+  "def-weil-scheme-morphism-properties",
+  "def-weil-compactifications-refinements",
+  "def-weil-rationalization-karoubi",
+  "def-weil-algebraically-closed-coefficients",
+  "def-weil-integral-rational-qbar-compact-support",
+  "def-sf-constructible-exceptional-coefficient-construction-data",
+  "def-weil-compact-support-coefficient-action",
+  "def-weil-compact-support-finite-action"
+ ],
+ "proof": [
+  {
+   "text": "For either $T=X,Y$, every object $K$ of the published integral constructible category has bounded residue reduction $K_1$. Choose its cohomological interval $[a,b]$. The residue Tor theorem gives Tor amplitude $[a,b]$ for every $K_n$, hence $D^b_c(T,R_E)=D^b_{ctf}(T,R_E)$. Its statement allows arbitrary schemes with $\\ell$ invertible, so no absolute separatedness is used. Thus the given integral operations are defined on every object whose raw localization defines the published rational category.",
+   "uses": [
+    "lem-coef-integral-residue-tor",
+    "def-weil-rationalization-karoubi"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-a1-kummer/def-weil-exceptional-inverse-image.md",
+    "place": "Integral representatives in the rationalization paragraph; retained returned step 17."
+   }
+  },
+  {
+   "text": "Write $Q_{T,E}$ for raw localization. Apply semilinear localization with $R=S=R_E$, $t=u=\\varpi_E$ and the identity ring map to $F_R,G_R$. It gives additive exact functors $F_E,G_E$, with their localized shift maps, acting by $F_E(h/\\varpi_E^r)=F_R(h)/\\varpi_E^r$ and similarly for $G$. Localize the integral unit and counit as natural transformations. The equations $G_R\\epsilon_R\\circ\\eta_RG_R=1$ and $\\epsilon_RF_R\\circ F_R\\eta_R=1$ remain equations because localization preserves composition and whiskering. Explicit inverse Hom maps are $v/\\varpi_E^r\\mapsto (G_R(v)\\eta_R)/\\varpi_E^r$ and $w/\\varpi_E^r\\mapsto(\\epsilon_RF_R(w))/\\varpi_E^r$; they are well-defined by linearity and inverse by these equations. The natural-bijection theorem gives the desired adjunction, with precisely $Q\\eta_R,Q\\epsilon_R$. Its units, counits and both triangle identities commute with the localized shifts, since their integral shift equations also localize.",
+   "uses": [
+    "lem-pur-semilinear-scalar-localization",
+    "lem-weil-pbc-adjunction-of-natural-bijection"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-a1-kummer/def-weil-exceptional-inverse-image.md",
+    "place": "Rationalization of the integral adjunction; retained step 17."
+   }
+  },
+  {
+   "text": "Use the supplied normalized integral left realization $u_R:F_R\\cong P_R$, where $P_R$ is the prescribed reduction-tower compact support. Choose its literal normalized presentation $F_R=P_R$ before localization; if the transported presentation is retained, identify it through $Q u_R$ throughout. By the definition of rational compact support its rational left realization is then the identity $F_E=Q P_R$. The integral-to-rational comparison $q_0:Q_YF_R\\cong F_EQ_X$ is the identity in the normalized presentation (in the transported presentation it is $Q u_R$ followed by the inverse rational-left realization). Thus composing $q_0$ with the rational-left realization is exactly $Q u_R$. The right comparison $b_0$ is identity on $Q_XG_R$. Its counit equation is the localized counit identity; if left presentations are changed, the counit is changed by precomposition with $(Q u_R)^{-1}$, so the same equation still holds. This also fixes the shifts of these identifications.",
+   "uses": [
+    "def-weil-integral-rational-qbar-compact-support",
+    "def-weil-rationalization-karoubi"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-a1-kummer/def-weil-exceptional-inverse-image.md",
+    "place": "Integral-left and rational-left normalization, retained step 18."
+   }
+  },
+  {
+   "text": "For $E\\subset L$ apply semilinear localization to the supplied integral scalar functor $T_{L/E}$ and its $q,b$. The image of $\\varpi_E$ is invertible in $L$: it is a unit times $\\varpi_L^e$. On a fraction the scalar functor sends $h/\\varpi_E^r$ to $Q_L(T_{L/E}h)\\,\\varpi_E^{-r}$. This is exactly the rational scalar functor in the published definition. Define $q_{L/E},b_{L/E}$ by the localized integral components, with the same left realizations as in step 3. Naturality holds on fractions by the semilinear localization theorem, not just on integral arrows. It preserves invertibility, shifts and the equation $\\epsilon_L F_L(b)q=T_Y\\epsilon_E$. In particular the rational $q$ on integral representatives and all fractions is exactly the raw image of the prescribed integral $q$, and identity and balanced composition equations for $q$ remain true.",
+   "uses": [
+    "lem-pur-semilinear-scalar-localization",
+    "def-weil-rationalization-karoubi"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-a1-kummer/def-weil-exceptional-inverse-image.md",
+    "place": "Rational coefficient comparisons on actual integral representatives; retained step 18."
+   }
+  },
+  {
+   "text": "The supplied right integral comparison is the mate of $q^{-1}$. The same is true after localization by its counit equation. Apply mate pasting (1) to $q_{L/E}^{-1},q_{M/L}^{-1}$, with the balanced scalar associators, and mate identity (4) at $E=E$. The left identity and composition laws therefore give the right identity and composition laws for $b$. The mate unit equation gives $b_{F_EK}T_X\\eta_{E,K}=G_L(q_K^{-1})\\eta_{L,T_XK}$. Together with the counit equation this says that both adjunction maps preserve scalar transport. All these are identities for the same specified comparisons, rather than arbitrary choices of right-adjoint isomorphisms.",
+   "uses": [
+    "lem-weil-pbc-mate-pasting",
+    "lem-pur-mate-unit-compatibility"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-a1-kummer/def-weil-exceptional-inverse-image.md",
+    "place": "Coherence and unit normalization of common-field transitions; retained step 19."
+   }
+  },
+  {
+   "text": "Apply coherent pair-functor descent to the finite-field families $F_E$ with comparison $q$, and $G_E$ with comparison $b$. The diagram hypotheses on the coefficient categories (literal identity transitions $T_{E/E}=1$, associators that are identities at a repeated field, pentagon) are the unit and pentagon equations of the specified scalar-extension data, which are the transitions of the common-field category. The comparison hypotheses $q_{E/E}=1$, $b_{E/E}=1$ and the tower equations are the balanced identity and composition laws of steps 4–5. It produces additive functors $F_\\Omega(E,K)=(E,F_EK)$ and $G_\\Omega(E,M)=(E,G_EM)$. For a represented arrow $[L,h]:(E,K)\\to(E',K')$ their actions are respectively $[L,q_{L/E',K'}^{-1}F_L(h)q_{L/E,K}]$ and $[L,b_{L/E',K'}^{-1}G_L(h)b_{L/E,K}]$. The cited descent theorem proves independence of representatives and enlargement, and preservation of identities, addition and composition for precisely these formulas. Only its assertion about the pair categories is used.",
+   "uses": [
+    "lem-sbc-coherent-pair-functor-descent",
+    "prop-weil-pbc-scalar-extension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-a1-kummer/def-weil-exceptional-inverse-image.md",
+    "place": "Represented action on common finite fields; retained step 19."
+   }
+  },
+  {
+   "text": "For $K=(E,K_E)$ and $M=(E',M_{E'})$, pass to a common finite $L$ and put $K_L=T_{L/E}K_E$, $M_L=T_{L/E'}M_{E'}$. Identify an arrow $a:F_\\Omega K\\to M$ with $a_L:F_LK_L\\to M_L$ by $q$, and send it to the class represented by $\\Psi_L(a_L)=G_L(a_L)\\eta_{L,K_L}:K_L\\to G_LM_L$, identified by $b$ with $K\\to G_\\Omega M$. The inverse sends $w_L$ to $\\epsilon_{L,M_L}F_L(w_L)$. These recipes respect enlargement: for $T=T_{N/L}$ the transported left arrow is $T(a_L)q_{N/L,K_L}^{-1}$, and its transpose is $b_{N/L,M_L}T(\\Psi_L(a_L))$ by naturality of $b$ and the unit equation in step 5. The inverse respects enlargement by the counit equation. Equality of representatives is equality at a later common field, so both recipes are well-defined on the Hom colimits. Their composites are identity already at $L$; naturality for arbitrary represented arrows follows by moving those arrows to the same field and applying naturality of $\\Psi_L$. The natural-bijection theorem now gives $F_\\Omega\\dashv G_\\Omega$, with unit $[E,\\eta_E]$, counit $[E,\\epsilon_E]$, and represented triangle identities.",
+   "uses": [
+    "def-weil-algebraically-closed-coefficients",
+    "lem-weil-pbc-adjunction-of-natural-bijection"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-a1-kummer/def-weil-exceptional-inverse-image.md",
+    "place": "Common-stage Hom bijections and triangles; retained step 19."
+   }
+  },
+  {
+   "text": "Descend the finite-field shift comparisons using the transformation part of coherent pair descent: their scalar compatibility was retained in step 4. The unit and counit commute with them since that equation holds for their representatives over each $E$. Each distinguished triangle of the published common-field category is isomorphic to the image of one over some finite $L$. Apply $F_L$ or $G_L$ there; exactness from step 2 makes its image distinguished. The action in step 6 and the descended shifts identify this image with the triangle obtained by $F_\\Omega$ or $G_\\Omega$. Hence both common-field functors are exact with these shifts.",
+   "uses": [
+    "lem-sbc-coherent-pair-functor-descent",
+    "def-weil-algebraically-closed-coefficients"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-a1-kummer/def-weil-exceptional-inverse-image.md",
+    "place": "Common-stage exactness and shifts; retained step 19."
+   }
+  },
+  {
+   "text": "For the inclusion $J_{T,E}:\\mathcal C_{T,E}\\to\\mathcal C_{T,\\Omega}$, the objects $J_{Y,E}F_EK$ and $F_\\Omega J_{X,E}K$ are literally the same pair $(E,F_EK)$. On an $E$-arrow both functors have the same action by the identity scalar comparison in step 5. Take their comparison to be identity. Likewise $J_{X,E}G_EM=G_\\Omega J_{Y,E}M=(E,G_EM)$. The common-field counit at this object is represented by $\\epsilon_{E,M}$, so the identity right comparison satisfies the counit equation and is the unique transpose of the identity left comparison. Shift compatibility holds because both shift comparisons are represented by the same finite-field comparison. Finally the published closed compact-support object is $(E,P_EK)$ by definition, which is the left object just constructed. These choices establish the asserted normalization without adding any objects to either coefficient category.",
+   "uses": [
+    "def-weil-algebraically-closed-coefficients",
+    "def-weil-integral-rational-qbar-compact-support"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-a1-kummer/def-weil-exceptional-inverse-image.md",
+    "place": "Normalized finite-field inclusions and counit transposes; retained step 19."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-coef-integral-residue-tor",
+  "def-weil-rationalization-karoubi",
+  "lem-pur-semilinear-scalar-localization",
+  "lem-weil-pbc-adjunction-of-natural-bijection",
+  "def-weil-integral-rational-qbar-compact-support",
+  "lem-weil-pbc-mate-pasting",
+  "lem-pur-mate-unit-compatibility",
+  "lem-sbc-coherent-pair-functor-descent",
+  "def-weil-algebraically-closed-coefficients",
+  "prop-weil-pbc-scalar-extension"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-a1-kummer/def-weil-exceptional-inverse-image.md",
+  "place": "Rationalization and common-stage paragraphs, expanded from retained returned steps 17–19; generic tools supply localization, residue Tor and pair descent."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "rational.*exceptional|commonField.*adjunction|rationalization_normalized",
+   "results": "[grep] OK 0 hit(s)",
+   "date": "2026-10-22",
+   "verdict": "no match: generic categorical, algebraic or module tools do not state these geometric coefficient constructions"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Raw scalar localization and filtered common field category descent of exact compact support exceptional adjunctions with normalized comparisons",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"CategoryTheory.Functor.isHomological_of_localization\", \"module\": \"Mathlib/CategoryTheory/Triangulated/HomologicalFunctor\", \"type\": \"∀ {C : Type u_1} {D : Type u_2} {A : Type u_3} [inst : CategoryTheory.Category.{v_1, u_1} C]\\n  [inst_1 : CategoryTheory.HasShift C ℤ] [inst_2 : CategoryTheory.Category.{v_2, u_2} D]\\n  [inst_3 : CategoryTheory.Limits.HasZeroObject D] [inst_4 : CategoryTheory.HasShift D ℤ]\\n  [inst_5 : CategoryTheory.P\", \"doc\": \"Let $\\\\mathcal{C}, \\\\mathcal{D}$ be pretriangulated categories and $\\\\mathcal{A}$ an abelian category. If $L : \\\\mathcal{C} \\\\to \\\\mathcal{D}$ is a triangulated functor commuting with $\\\\mathbb{Z}$-indexed s\"}\n  {\"name\": \"Condensed.hasExactColimitsOfShape\", \"module\": \"Mathlib/Condensed/AB\", \"type\": \"∀ (A : Type u_1) (J : Type u_2) [inst : CategoryTheory.Category.{v_1, u_1} A]\\n  [inst_1 : CategoryTheory.Category.{v_2, u_2} J] [CategoryTheory.Preadditive A]\\n  [∀ (X : CompHausᵒᵖ),\\n      CategoryTheory.Limits.HasLimitsOfShape (CategoryTheory.StructuredArrow X Stonean.toCompHaus.op) A]\\n  [inst_4 : C\", \"doc\": \"If a category $\\\\mathcal{A}$ admits colimits of shape $J$ and has exact colimits of shape $J$, and $\\\\mathcal{A}$ has finite limits, then the category of condensed objects $\\\\text{Condensed } \\\\mathcal{A}\"}\n  {\"name\": \"CategoryTheory.LocalizerMorphism.guitartExact_of_isLeftDerivabilityStructure\", \"module\": \"Mathlib/CategoryTheory/Localization/DerivabilityStructure/Basic\", \"type\": \"∀ {C₁ : Type u₁} {C₂ : Type u₂} [inst : CategoryTheory.Category.{v₁, u₁} C₁]\\n  [inst_1 : CategoryTheory.Category.{v₂, u₂} C₂] {W₁ : CategoryTheory.MorphismProperty C₁}\\n  {W₂ : CategoryTheory.MorphismProperty C₂} (Φ : CategoryTheory.LocalizerMorphism W₁ W₂) {D₁ : Type u_1} {D₂ : Type u_2}\\n  [inst_2 :\", \"doc\": \"If a morphism of localizers $\\\\Phi : C_1 \\\\to C_2$ satisfies the left derivability structure condition, then the associated two-square diagram formed by $\\\\Phi$ and the localization functors $L_1 : C_1 \\\\\"}\n  {\"name\": \"CategoryTheory.LocalizerMorphism.guitartExact_of_isRightDerivabilityStructure\", \"module\": \"Mathlib/CategoryTheory/Localization/DerivabilityStructure/Basic\", \"type\": \"∀ {C₁ : Type u₁} {C₂ : Type u₂} [inst : CategoryTheory.Category.{v₁, u₁} C₁]\\n  [inst_1 : CategoryTheory.Category.{v₂, u₂} C₂] {W₁ : CategoryTheory.MorphismProperty C₁}\\n  {W₂ : CategoryTheory.MorphismProperty C₂} (Φ : CategoryTheory.LocalizerMorphism W₁ W₂) {D₁ : Type u_1} {D₂ : Type u_2}\\n  [inst_2 :\", \"doc\": \"If a localizer morphism $\\\\Phi$ satisfies the right derivability structure condition, then the two-square diagram formed by the localization functors $L_1$, $L_2$, the morphism $\\\\Phi$, and its localize\"}\n  {\"name\": \"Condensed.instAB5CondensedMod\", \"module\": \"Mathlib/Condensed/AB\", \"type\": \"∀ (R : Type (u + 1)) [inst : Ring R], CategoryTheory.AB5 (CondensedMod R)\", \"doc\": \"For any ring $ R $, the category of condensed modules over $ R $ satisfies the AB5 axiom, meaning it has all filtered colimits and these colimits are exact (preserve finite limits).\"}\n  {\"name\": \"CategoryTheory.LocalizerMorphism.guitartExact_of_isLeftDerivabilityStructure'\", \"module\": \"Mathlib/CategoryTheory/Localization/DerivabilityStructure/Basic\", \"type\": \"∀ {C₁ : Type u₁} {C₂ : Type u₂} [inst : CategoryTheory.Category.{v₁, u₁} C₁]\\n  [inst_1 : CategoryTheory.Category.{v₂, u₂} C₂] {W₁ : CategoryTheory.MorphismProperty C₁}\\n  {W₂ : CategoryTheory.MorphismProperty C₂} (Φ : CategoryTheory.LocalizerMorphism W₁ W₂) {D₁ : Type u_1} {D₂ : Type u_2}\\n  [inst_2 :\", \"doc\": \"For a localizer morphism $\\\\Phi$ equipped with a left derivability structure and an isomorphism $e : \\\\Phi.functor \\\\circ L_2 \\\\cong L_1 \\\\circ F$, the inverse of $e$ satisfies the Guitart exactness condit\"}\n  {\"name\": \"CategoryTheory.LocalizerMorphism.guitartExact_of_isRightDerivabilityStructure'\", \"module\": \"Mathlib/CategoryTheory/Localization/DerivabilityStructure/Basic\", \"type\": \"∀ {C₁ : Type u₁} {C₂ : Type u₂} [inst : CategoryTheory.Category.{v₁, u₁} C₁]\\n  [inst_1 : CategoryTheory.Category.{v₂, u₂} C₂] {W₁ : CategoryTheory.MorphismProperty C₁}\\n  {W₂ : CategoryTheory.MorphismProperty C₂} (Φ : CategoryTheory.LocalizerMorphism W₁ W₂) {D₁ : Type u_1} {D₂ : Type u_2}\\n  [inst_2 :\", \"doc\": \"For a morphism between localizers (functors preserving specified morphism properties), if it satisfies the conditions of a right derivability structure (compatibility with localization or derived func\"}\n  {\"name\": \"CategoryTheory.Abelian.isLocalization_isoModSerre_kernel_of_leftAdjoint\", \"module\": \"Mathlib/CategoryTheory/Abelian/SerreClass/Bousfield\", \"type\": \"∀ {C : Type u_1} {D : Type u_2} [inst : CategoryTheory.Category.{v_1, u_1} C]\\n  [inst_1 : CategoryTheory.Category.{v_2, u_2} D] [inst_2 : CategoryTheory.Abelian C]\\n  [inst_3 : CategoryTheory.Abelian D] {G : CategoryTheory.Functor D C}\\n  [inst_4 : CategoryTheory.Limits.PreservesFiniteLimits G] [inst_\", \"doc\": \"If $ F : C \\to D $ is a fully faithful functor with a left adjoint $ G $, then $ G $ is a localization with respect to the morphisms whose kernels and cokernels lie in the Serre class defined by the ke\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: generic categorical, algebraic or module tools do not state these geometric coefficient constructions"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Localizing integral constructible exceptional adjunction and common finite field descent gives rational and algebraically closed coefficient adjunctions",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"Algebra.EssFiniteType.cond\", \"module\": \"Mathlib/RingTheory/EssentialFiniteness\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} {inst : CommRing R} {inst_1 : CommRing S} {inst_2 : Algebra R S}\\n  [self : Algebra.EssFiniteType R S],\\n  ∃ s, IsLocalization (Submonoid.comap (algebraMap (↥(Algebra.adjoin R ↑s)) S) (IsUnit.submonoid S)) S\", \"doc\": \"For commutative rings $ R $ and $ S $ with an $ R $-algebra structure on $ S $, if $ S $ is of essential finite type over $ R $, then there exists a finite set $ s $ such that $ S $ is the localizatio\"}\n  {\"name\": \"Polynomial.isIntegral_isLocalization_polynomial_quotient\", \"module\": \"Mathlib/RingTheory/Jacobson/Ring\", \"type\": \"∀ {R : Type u_1} [inst : CommRing R] {Rₘ : Type u_3} {Sₘ : Type u_4} [inst_1 : CommRing Rₘ] [inst_2 : CommRing Sₘ]\\n  (P : Ideal (Polynomial R)),\\n  ∀ pX ∈ P,\\n    ∀ [inst_3 : Algebra (R ⧸ Ideal.comap Polynomial.C P) Rₘ]\\n      [inst_4 :\\n        IsLocalization.Away (Polynomial.map (Ideal.Quotient.mk (Id\", \"doc\": \"Let $R$ be a commutative ring and $P$ be an ideal of the polynomial ring $R[X]$. Let $p(X)$ be a polynomial in $R[X]$. Let $I = P \\\\cap R$. Let $a \\\\in R/I$ be the leading coefficient of the image of $p\"}\n  {\"name\": \"Algebra.essFiniteType_cond_iff\", \"module\": \"Mathlib/RingTheory/EssentialFiniteness\", \"type\": \"∀ (R : Type u_1) (S : Type u_2) [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S] (σ : Finset S),\\n  IsLocalization (Submonoid.comap (algebraMap (↥(Algebra.adjoin R ↑σ)) S) (IsUnit.submonoid S)) S ↔\\n    ∀ (s : S), ∃ t ∈ Algebra.adjoin R ↑σ, IsUnit t ∧ s * t ∈ Algebra.adjoin R ↑σ\", \"doc\": \"For a finite subset $\\\\sigma$ of $S$, the localization of $S$ at the preimage of the units in the subalgebra generated by $\\\\sigma$ is equivalent to the condition that for every $s \\\\in S$, there exists \"}\n  {\"name\": \"IsIntegralClosure.isLocalization\", \"module\": \"Mathlib/RingTheory/DedekindDomain/IntegralClosure\", \"type\": \"∀ (A : Type u_1) (K : Type u_2) [inst : CommRing A] [inst_1 : Field K] [inst_2 : Algebra A K] [IsFractionRing A K]\\n  (L : Type u_3) [inst_4 : Field L] (C : Type u_4) [inst_5 : CommRing C] [inst_6 : Algebra K L] [inst_7 : Algebra A L]\\n  [IsScalarTower A K L] [inst_9 : Algebra C L] [IsIntegralClosure \", \"doc\": \"If $ A $ is a domain and $ K $ is algebraic over $ L $, then $ L $ is the localization of $ A $ at the multiplicative submonoid of non-zero divisors of $ A $.\"}\n  {\"name\": \"exists_integral_inj_algHom_of_fg\", \"module\": \"Mathlib/RingTheory/NoetherNormalization\", \"type\": \"∀ (k : Type u_2) (R : Type u_3) [inst : Field k] [inst_1 : CommRing R] [Nontrivial R] [a : Algebra k R]\\n  [fin : Algebra.FiniteType k R], ∃ s g, Function.Injective ⇑g ∧ g.IsIntegral\", \"doc\": \"For any finitely generated algebra $ R $ over a field $ k $, there exists a natural number $ s $ and an injective algebra homomorphism from the polynomial ring $ k[x_1, \\\\dots, x_s] $ to $ R $ such tha\"}\n  {\"name\": \"IsLocalization.lift_mem_adjoin_finsetIntegerMultiple\", \"module\": \"Mathlib/RingTheory/RingHom/FiniteType\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S] (M : Submonoid R)\\n  {S' : Type u_4} [inst_3 : CommRing S'] [inst_4 : Algebra S S'] [inst_5 : Algebra R S'] [IsScalarTower R S S']\\n  [inst_7 : IsLocalization (Submonoid.map (algebraMap R S) M) S'] (x : S)\", \"doc\": \"Let $R, S, S'$ be commutative rings, with $S$ and $S'$ being $R$-algebras forming a tower $R \\\\to S \\\\to S'$. Let $M$ be a submonoid of $R$, and let $M_S$ be the image of $M$ in $S$. Suppose $S'$ is the\"}\n  {\"name\": \"Algebra.ZariskisMainProperty\", \"module\": \"Mathlib/RingTheory/ZariskisMainTheorem\", \"type\": \"(R : Type u_1) → {S : Type u_2} → [inst : CommRing R] → [inst_1 : CommRing S] → [Algebra R S] → Ideal S → Prop\", \"doc\": \"An ideal $\\\\mathfrak{p} \\\\subseteq S$ satisfies Zariski's Main Theorem property if there exists an element $r$ in the integral closure of $R$ in $S$ such that $r \\\\notin \\\\mathfrak{p}$ and the induced rin\"}\n  {\"name\": \"IsIntegralClosure.isLocalization_of_isSeparable\", \"module\": \"Mathlib/RingTheory/DedekindDomain/IntegralClosure\", \"type\": \"∀ (A : Type u_1) (K : Type u_2) [inst : CommRing A] [inst_1 : Field K] [inst_2 : Algebra A K] [IsFractionRing A K]\\n  (L : Type u_3) [inst_4 : Field L] (C : Type u_4) [inst_5 : CommRing C] [inst_6 : Algebra K L] [inst_7 : Algebra A L]\\n  [IsScalarTower A K L] [inst_9 : Algebra C L] [IsIntegralClosure \", \"doc\": \"If $ A $ is a domain and $ K $ is a separable algebra over $ L $, then $ L $ is the fraction field of $ A $, i.e., the localization of $ A $ at its non-zero divisors.\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: generic categorical, algebraic or module tools do not state these geometric coefficient constructions"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Localizing integral constructible exceptional adjunction and common finite field descent gives rational and algebraically closed coefficient adjunctions",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"IsIntegralClosure.isLocalization\", \"module\": \"Mathlib.RingTheory.DedekindDomain.IntegralClosure\", \"type\": \"[IsDomain A] [Algebra.IsAlgebraic K L] : IsLocalization (Algebra.algebraMapSubmonoid C A⁰) L\", \"doc\": \"If $ A $ is a domain and $ K $ is algebraic over $ L $, then $ L $ is the localization of $ A $ at the multiplicative submonoid of non-zero divisors of $ A $.\"}\n  {\"name\": \"IsLocalization.Away.integralClosure\", \"module\": \"Mathlib.RingTheory.Localization.Integral\", \"type\": \"(f : R) [IsLocalization.Away f Rf] [IsLocalization.Away (algebraMap R S f) Sf]\\n  [Algebra (integralClosure R S) (integralClosure Rf Sf)]\\n  [IsScalarTower (integralClosure R S) (integralClosure Rf Sf) Sf]\\n  [IsScalarTower R (integralClosure R S) (integralClosure Rf Sf)] :\\n  IsLocalization.Away (algeb\", \"doc\": \"If $ R_f $ and $ S_f $ are localizations of $ R $ and $ S $ at $ f $ and $ \\\\text{algebraMap}(R,S)(f) $ respectively, then the integral closure of $ R_f $ in $ S_f $ is the localization of the integral\"}\n  {\"name\": \"IntermediateField.finiteDimensional_adjoin\", \"module\": \"Mathlib.FieldTheory.IntermediateField.Adjoin.Basic\", \"type\": \"{S : Set L} [Finite S] (hS : ∀ x ∈ S, IsIntegral K x) : FiniteDimensional K (adjoin K S)\", \"doc\": \"If $ S $ is a finite subset of $ L $ and every element of $ S $ is integral over $ K $, then the field extension $ K(S) $ obtained by adjoining $ S $ to $ K $ is finite-dimensional over $ K $.\"}\n  {\"name\": \"IntermediateField.AdjoinDouble.normal_algebraicClosure\", \"module\": \"Mathlib.FieldTheory.IsAlgClosed.AlgebraicClosure\", \"type\": \"{x y : L} (hx : IsIntegral K x) (hy : IsIntegral K y) : Normal K (AlgebraicClosure K⟮x, y⟯)\", \"doc\": \"For any elements $x$ and $y$ in a field $L$ that are integral over a field $K$, the algebraic closure of the field extension $K(x, y)$ is a normal extension of $K$.\"}\n  {\"name\": \"IntermediateField.isAlgebraic_adjoin\", \"module\": \"Mathlib.FieldTheory.IntermediateField.Adjoin.Basic\", \"type\": \"{S : Set L} (hS : ∀ x ∈ S, IsIntegral K x) : Algebra.IsAlgebraic K (adjoin K S)\", \"doc\": \"If every element of a subset $ S $ of $ L $ is integral over $ K $, then the intermediate field $ K(S) $ generated by adjoining $ S $ to $ K $ is algebraic over $ K $. This means every element of $ K(\"}\n  {\"name\": \"IntermediateField.adjoin_simple_toSubalgebra_of_integral\", \"module\": \"Mathlib.FieldTheory.IntermediateField.Adjoin.Algebra\", \"type\": \"(hα : IsIntegral F α) : F⟮α⟯.toSubalgebra = Algebra.adjoin F { α }\", \"doc\": \"If $\\\\alpha$ is integral over a field $F$, then the subalgebra of the field extension generated by adjoining $\\\\alpha$ to $F$ is equal to the subalgebra obtained by taking the algebraic closure of $F$ u\"}\n  {\"name\": \"algebraicClosure.isIntegralClosure\", \"module\": \"Mathlib.FieldTheory.AlgebraicClosure\", \"type\": \": IsIntegralClosure (algebraicClosure F E) F E\", \"doc\": \"The algebraic closure of $ F $ in $ E $ is the integral closure of $ F $ in $ E $, meaning every element of the algebraic closure is integral over $ F $ and $ F $ is integrally closed within it.\"}\n  {\"name\": \"mem_algebraicClosure_iff'\", \"module\": \"Mathlib.FieldTheory.AlgebraicClosure\", \"type\": \"{x : E} : x ∈ algebraicClosure F E ↔ IsIntegral F x\", \"doc\": \"An element $ x $ of $ E $ is in the algebraic closure of $ F $ in $ E $ if and only if $ x $ is integral over $ F $.\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: generic categorical, algebraic or module tools do not state these geometric coefficient constructions"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction, CategoryTheory.Localization",
+   "results": "[loogle] OK 0 hit(s) | loogle: unknown identifier 'CategoryTheory.Localization'",
+   "date": "2026-10-22",
+   "verdict": "no match: generic categorical, algebraic or module tools do not state these geometric coefficient constructions"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Scalar localization of a linear adjunction with unit counit and descent of coherent adjunctions to common finite coefficient fields",
+   "date": "2026-10-22",
+   "results": "8 hits; CategoryTheory.Adjunction.localization, LinearEquiv.extendScalarsOfIsLocalization, LinearMap.extendScalarsOfIsLocalizationEquiv, CategoryTheory.Adjunction.Localization.ε_app, CategoryTheory.Adjunction.Localization.ε, Module.FinitePresentation.linearEquivMapExtendScalars, ModuleCat.restrictCoextendScalarsAdj, ModuleCat.instIsLeftAdjointExtendScalars",
+   "verdict": "no exact match: localization and generic adjunction tools do not state the geometric domain and normalized common-field construction; existing DAG tools reused"
+  },
+  {
+   "tool": "grep",
+   "query": "mapAdjunction|commonField.*[Aa]djunction|[Aa]djunction.*[Rr]ational",
+   "date": "2026-10-22",
+   "results": "5 hits; Mathlib/CategoryTheory/Bicategory/Adjunction/Basic.lean, Mathlib/CategoryTheory/Bicategory/Adjunction/Basic.lean, Mathlib/CategoryTheory/Bicategory/Adjunction/Basic.lean, Mathlib/CategoryTheory/Bicategory/Adjunction/Basic.lean, Mathlib/CategoryTheory/Bicategory/Adjunction/Basic.lean",
+   "verdict": "no exact match: localization and generic adjunction tools do not state the geometric domain and normalized common-field construction; existing DAG tools reused"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction, CategoryTheory.Linear",
+   "date": "2026-10-22",
+   "results": "1 hits; CategoryTheory.Adjunction.extLinearEquiv",
+   "verdict": "no exact match: localization and generic adjunction tools do not state the geometric domain and normalized common-field construction; existing DAG tools reused"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Localize a linear adjunction by tensoring its Hom equivalences and descend coherent functors to a filtered common field category",
+   "date": "2026-10-22",
+   "results": "8 hits; CategoryTheory.Adjunction.localization, CategoryTheory.Adjunction.derived', CategoryTheory.Adjunction.derived, CategoryTheory.Adjunction.derived'_counit, CategoryTheory.Adjunction.Localization.η, CategoryTheory.FunctorToTypes.adj, CategoryTheory.ihom.adjunction, ModuleCat.monoidalClosedHomEquiv",
+   "verdict": "no exact match: localization and generic adjunction tools do not state the geometric domain and normalized common-field construction; existing DAG tools reused"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Exact functors and adjunction units counits on a filtered colimit of linear categories with coherent scalar extension",
+   "date": "2026-10-22",
+   "results": "8 hits; CategoryTheory.Adjunction.hasExactColimitsOfShape, CategoryTheory.IsGrothendieckAbelian.instIsLeftAdjointModuleCatMulOppositeEndTensorObj, ModuleCat.ExtendRestrictScalarsAdj.unit, ModuleCat.RestrictionCoextensionAdj.unit', ModuleCat.ExtendRestrictScalarsAdj.counit, ModuleCat.instIsRightAdjointCoextendScalars, CategoryTheory.Adjunction.hasExactLimitsOfShape, CategoryTheory.IsGrothendieckAbelian.tensorObjPreadditiveCoyonedaObjAdjunction",
+   "verdict": "no exact match: localization and generic adjunction tools do not state the geometric domain and normalized common-field construction; existing DAG tools reused"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sf-constructible-exceptional-coefficient-construction",
+  "date": "2026-10-22",
+  "group": "Q154"
+ },
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "sk-thm-sf-tensor-hom, third Hom bijection and coefficient compatibility; exceptional inverse-image paragraph; returned construction steps 17–19.",
+   "via": [
+    "lem-sf-constructible-exceptional-coefficient-construction"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sf-exceptional-field-descent",
+  "worker": "Q89 stage1",
+  "summary": "Expanded retained returned steps 17–19 into nine proof steps using existing generic DAG tools. Proved raw rational domain equality, localized inverse Hom maps, actual scalar fraction formulas, right mate coherence, common-field functor and adjunction descent, represented exactness and normalized inclusion comparisons. No new nodes and no statement changes. Absolute separatedness is never added.",
+  "blueprint": "Exceptional inverse-image coefficient paragraph and sk-thm-sf-tensor-hom third Hom bijection and scalar/shift compatibility. The ancestor command reports None because the maintenance created.item chain is broken; existing blueprint.from metadata is preserved.",
+  "tool_uses": [
+   {
+    "node": "lem-coef-integral-residue-tor",
+    "why": "Residue Tor test identifies every published integral representative with the finite-Tor domain, without absolute separatedness."
+   },
+   {
+    "node": "def-weil-rationalization-karoubi",
+    "why": "Uses exactly the published raw Hom localization and rational scalar functors."
+   },
+   {
+    "node": "lem-pur-semilinear-scalar-localization",
+    "why": "Generic localization of supplied linear/semilinear functors, transformations, exact shifts and equations; needed also for ramified coefficients."
+   },
+   {
+    "node": "lem-weil-pbc-adjunction-of-natural-bijection",
+    "why": "Generic conversion of the explicit inverse natural Hom maps into adjunction data."
+   },
+   {
+    "node": "def-weil-integral-rational-qbar-compact-support",
+    "why": "Identifies the constructed left operations with the prescribed compact-support objects and realizations."
+   },
+   {
+    "node": "lem-weil-pbc-mate-pasting",
+    "why": "Generic pasting and identity theorem proves right scalar coherence from the given left coherence."
+   },
+   {
+    "node": "lem-pur-mate-unit-compatibility",
+    "why": "Generic mate unit identity supplies the scalar compatibility needed for Hom descent."
+   },
+   {
+    "node": "lem-sbc-coherent-pair-functor-descent",
+    "why": "Generic additive pair-category descent supplies representative independence for the specified functor and transformation formulas."
+   },
+   {
+    "node": "def-weil-algebraically-closed-coefficients",
+    "why": "Uses the actual common-finite-field Hom equivalence relation and represented distinguished triangles."
+   },
+   {
+    "node": "prop-weil-pbc-scalar-extension",
+    "why": "Supplies the literal identity transition and the unit/pentagon equations of the scalar-extension associators used as transitions of the common-field pair category; hypotheses of pair descent (reviewer FIX)."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-coef-integral-residue-tor",
+  "def-weil-rationalization-karoubi",
+  "lem-pur-semilinear-scalar-localization",
+  "lem-weil-pbc-adjunction-of-natural-bijection",
+  "def-weil-integral-rational-qbar-compact-support",
+  "lem-weil-pbc-mate-pasting",
+  "lem-pur-mate-unit-compatibility",
+  "lem-sbc-coherent-pair-functor-descent",
+  "def-weil-algebraically-closed-coefficients",
+  "prop-weil-pbc-scalar-extension"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q89-ea63ee0ae",
+  "group": "Q89",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q89-ea63ee0ae (reviewer sub-agent of L); spot-checked: Read all nine steps and every cited statement. Source: blueprint main-20261015 def-weil-exceptional-inverse-image l.38-50 (derived limits, then rationalization, then common-stage construction, characterized by adjunction); no SGA citation. Step checks: (1) lem-coef-integral-residue-tor holds on any scheme with l invertible and states D^b_c=D^b_ctf, so no absolute separatedness is needed. (2) Semilinear localization with R=S=R_E gives the adjunction; the localized triangle identities and the natural-bijection node give the localized unit and counit Q eta, Q eps. (3) F_E = Q P_R with identity realization and q_0 = Q u_R; this matches the parent's step-3 choice. (4) Along R_E->R_L, pi_E is a unit times pi_L^e, so the fraction formula matches the published rational scalar functor; checked a ramified case. (5) Mate direction checked: alpha = q^-1 and its mate satisfies exactly eps F(b) q = T eps; pasting (1)/(4) and the mate-unit formula hold. (6) Pair descent gives the formula [M, b^-1 Phi(u) b]. (7) Enlargement checked: Psi_N(T a q^-1) = b T(Psi_L a) by the unit equation and naturality of b. (8) Shifts and exactness hold through represented triangles. (9) Elementary. FIX (C4): step 6 claimed all pair-descent hypotheses came from steps 4-5, but the diagram hypotheses (literal T_{E/E}=1, unit associators, pentagon) are stated only in prop-weil-pbc-scalar-extension, which supplies the transitions of the common-stage pair category; its hypotheses hold (X,Y noetherian, finite-dimensional, l invertible). The fix adds that node to step 6 (text and uses), to proof_deps and to tool_uses; no cycle. No new nodes. Full-DAG duplicate sweep: lem-sf-package-qbar-adjunction-map-descent requires absolutely separated X,Y, so it cannot be cited here; lem-sf-exceptional-common-stage-descent is about a closed immersion, so it is not a duplicate. Base-level note: the common-stage definition names both the rationalization-karoubi and the pbc rational categories.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.Paper.ExceptionalFieldDescent",
+  "declaration": "WeilConjectures.ExceptionalFieldDescent.exists_field_descent",
+  "declarations": [
+   "WeilConjectures.ExceptionalFieldDescent.integralScalar",
+   "WeilConjectures.ExceptionalFieldDescent.rationalScalar",
+   "WeilConjectures.ExceptionalFieldDescent.integralScalarCommShift",
+   "WeilConjectures.ExceptionalFieldDescent.coefficientField",
+   "WeilConjectures.ExceptionalFieldDescent.integralLeft",
+   "WeilConjectures.ExceptionalFieldDescent.rationalLeft",
+   "WeilConjectures.ExceptionalFieldDescent.IntegralInput",
+   "WeilConjectures.ExceptionalFieldDescent.RationalOutput",
+   "WeilConjectures.ExceptionalFieldDescent.CommonStageData",
+   "WeilConjectures.ExceptionalFieldDescent.CommonOutput",
+   "WeilConjectures.ExceptionalFieldDescent.exists_field_descent"
+  ],
+  "file": "lean/Sheaf/Paper/ExceptionalFieldDescent.lean",
+  "statement": "theorem exists_field_descent (Ω : Type v) [Field Ω] [Algebra (Padic l) Ω] [IsAlgClosure (Padic l) Ω] [I : IntegralInput l D hl c] : (∀ (E : FieldStage.{u} l) (T : Scheme.{u}) (_hT : T = X ∨ T = Y), sfIntegralConstructible l E.carrier T = finiteTorConstructibleIntegral l E.carrier T) ∧ Nonempty (Σ R : RationalOutput l D hl c, Σ S : CommonStageData l D hl c Ω (R := R), CommonOutput l D hl c Ω S)",
+  "branch": "newtargets-dag",
+  "by": "Q46",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "The integral input is normalized through its prescribed left realization, as permitted explicitly by proof step 3. Rational and common-field adjunctions are outputs. Helper records only package the clauses of this node; coefficient categories, scalar functors and compact-support constructions are the published ones."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-afbc9f65a",
+  "group": "Q46",
+  "result": "pass",
+  "note": "Read item, all 10 stmt_deps, report and module; checked live dep sources (CompactSupportFiniteAction, CompactSupportCoefficientAction, GeneralAlgebraicallyClosedCoefficients stage/transition/associator/shift specs, StageSystem.Morphism/functor, FiniteTorAmplitude, IntegralResidueTor). Hypotheses match (ℓ≠p, finite type X,Y with no absolute separatedness, separated f, compactification c, Ω:Type v). The integral input normalized to sfCompactSupportFiniteIntegralFunctor is allowed by node step 3; q pinned by SfCompactSupportIntegralBetaSpec; balanced identity/composition assumed; b invertible counit transpose. Conjunct 1 gives sfIntegralConstructible = finiteTorConstructibleIntegral. RationalOutput pins G on objects and pure tensors, unit/counit/both Hom maps, shifts (identity localization comparisons; scalar shift HEq at 1), q/b raw localizations, counit square, left and right identity/composition. Common-stage Morphisms are pinned by HEq to the rational data; directions and coh agree with associator = sfRationalScalarComp. Adjunction unit/counit pinned on all pairs, identity inclusion comparisons with counit/shift equations. One sorry, docstrings present, record verbatim, dep node files unchanged, no cycles from the 3 added stmt_deps. Advisory: FieldStage owner is def-weil-exceptional-inverse-image, not the added (unused) def-sf-constructible-exceptional-coefficient-construction-data; several statement decls have owners outside stmt_deps; scalarShiftX/Y re-specify the published purity scalarShift; citer must transport its finite-Tor adjunction and left realization."
+ }
+}

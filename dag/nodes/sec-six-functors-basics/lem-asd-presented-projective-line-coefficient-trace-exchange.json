@@ -1,0 +1,135 @@
+{
+ "id": "lem-asd-presented-projective-line-coefficient-trace-exchange",
+ "kind": "statement",
+ "title": "Base change of the presented coefficient trace",
+ "statement": "Let A be a finite commutative ring killed by N, let t be the normalized finite-line comparisons, and let d be arbitrary-base projective-line splittings satisfying [lem-sp-tower-p1-arbitrary-base-integrals]. For a cartesian square of proper compactifiable maps q:X->Y and qprime:Xprime->Yprime, qprime quasi-compact, choose projective-line presentations e and eprime compatible with gprime and the standard projective-space map. Suppose N is invertible on both bases. Write L=A_X(1)[2], Lprime=A_Xprime(1)[2], l:gprime*L≅Lprime for the normalized line comparison, and tau_q,tau_qprime for [def-asd-presented-projective-line-trace-model]. Then g*(coincidence_q inverse); Ex_! at L; Rqprime_!(l); coincidence_qprime; tau_qprime equals g*(tau_q); unitPullback_g. This is only the coefficient trace equation: no base complex K, ordered projection or counit occurs.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-sf-cbc/prop-asd-smooth-base-change.proof.md",
+  "place": "Second paragraph, projective-line computation: trace and projection squares give the counit square."
+ },
+ "stmt_deps": [
+  "def-asd-presented-projective-line-trace-model",
+  "lem-sp-tower-p1-arbitrary-base-integrals",
+  "def-pc-fibre-product"
+ ],
+ "proof": [
+  {
+   "text": "Identify ordinaryFiniteP1Exchange with derivedBaseChangeMap by transporting the mate through the exact/left-derived inverse-image comparison. The second clause of ArbitraryBaseFiniteP1BaseChange supplies the standard coefficient trace equation.",
+   "uses": [
+    "lem-sp-tower-p1-arbitrary-base-integrals",
+    "lem-weil-pbc-mate-pasting"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For arbitrary coefficient objects and compatible presentation isomorphisms, form the coefficient comparison as the presentation adjunction unit followed by the coefficient isomorphism. The mate-unit identity and derived direct-image composition pasting (map_rightDerivedLowerStarCompHom_derivedBaseChangeMap) give its exchange square. Naturality and cancellation of the presentation isomorphisms transport this square in the inverse direction used by the trace definition.",
+   "uses": [
+    "def-asd-presented-projective-line-trace-model",
+    "def-pc-fibre-product",
+    "lem-weil-pbc-mate-pasting"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply the normalized shifted-line square to the commutative square formed by the two presentation maps and the two horizontal maps. This supplies the coefficient compatibility required by the preceding general transport calculation. Compose with the standard trace equation and expand presentedFiniteP1Trace.",
+   "uses": [
+    "lem-asd-finite-shifted-line-square",
+    "def-asd-presented-projective-line-trace-model"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Compare compact-support exchange with ordinary exchange directly on the unbounded derived categories. For the chosen compactification c and its base change, use rightDerivedLowerShriekOfCompactificationBaseChangeMap'_app_comp_toLowerStar. Compose with the comparison to the chosen compactification of qprime and use rightDerivedLowerShriekOfCompactificationIso_hom_app_comp_toLowerStar. The explicit hom formulas for proper coincidence and rightDerivedLowerShriekBaseChangeMap_eq identify the resulting sides. Naturality with the coefficient isomorphism and cancellation of the initial proper coincidence finish the displayed equation. These are already proved source-library identities; no bounded-below comparison theorem is needed.",
+   "uses": [
+    "def-asd-presented-projective-line-trace-model",
+    "lem-weil-pbc-mate-pasting"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sp-tower-p1-arbitrary-base-integrals",
+  "lem-weil-pbc-mate-pasting",
+  "def-asd-presented-projective-line-trace-model",
+  "def-pc-fibre-product",
+  "lem-asd-finite-shifted-line-square"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-sf-cbc/prop-asd-smooth-base-change.proof.md",
+  "place": "Second paragraph, trace square. Implemented by presentation mate-unit and composition pasting, normalized coefficient coherence, and the source library's unbounded forget-supports identities."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Compatibility of the projection formula and trace counit with proper base change",
+   "results": "Scheme pullback comparison identities and LinearMap.trace_baseChange; no etale derived trace or projection counit identity.",
+   "date": "2026-10-26",
+   "verdict": "No specialized Mathlib match; search local source APIs."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Iso.inv_hom_id_assoc",
+   "results": "CategoryTheory.Iso.inv_hom_id_assoc in Mathlib.CategoryTheory.Iso.",
+   "date": "2026-10-26",
+   "verdict": "Generic cancellation used, no geometric comparison supplied."
+  },
+  {
+   "tool": "grep",
+   "query": "projectionMap.*BaseChange|trace.*baseChange",
+   "results": "Mathlib has linear-algebra trace base change only. Local rg finds compactProjectionMapCoeffFirst_baseChangeMap (proved), ordinary finite splitting trace compatibility, and proper coincidence projection compatibility.",
+   "date": "2026-10-26",
+   "verdict": "Reuse local forward projection API; presentation trace transport is missing."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.SixFunctors.ProjectiveLineTraceCounitBaseChange",
+  "group": "B9",
+  "date": "2026-10-26"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-asd-presented-projective-line-trace-counit-base-change",
+   "place": "Base change of the presented coefficient trace",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-lem-geo-affine-local",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.SixFunctors.ProjectiveLinePresentedTraceExchange",
+  "file": "lean/Sheaf/SixFunctors/ProjectiveLinePresentedTraceExchange.lean",
+  "declaration": "AlgebraicGeometry.Etale.presentedFiniteP1Trace_exchange",
+  "statement": "theorem presentedFiniteP1Trace_exchange\n    (A : Type (u + 1)) [CommRing A] [Finite A] (N : ℕ) (hA : (N : A) = 0)\n    (t : OrdinaryFiniteTwistTransport A N hA)\n    (d : ∀ (T : Scheme.{u}) (hT : IsUnit (N : Γ(T, ⊤))),\n      ArbitraryBaseFiniteP1Splitting A N hA t T hT)\n    (hbc : ArbitraryBaseFiniteP1BaseChange A N hA t d)\n    {X X' Y Y' : Scheme.{u}} {q : X ⟶ Y} {q' : X' ⟶ Y'}\n    {g : Y' ⟶ Y} {g' : X' ⟶ X} (sq : IsPullback g' q' q g)\n    [IsProper q] [IsProper q'] [HasCompactification q] [HasCompactification q']\n    [QuasiCompact q']\n    (e : X ≅ ProjectiveLine Y) (w : e.hom ≫ (ProjectiveLine Y ↘ Y) = q)\n    (e' : X' ≅ ProjectiveLine Y') (w' : e'.hom ≫ (ProjectiveLine Y' ↘ Y') = q')\n    (we : e'.hom ≫ ProjectiveSpace.map (ULift.{u} (Fin 2)) g = g' ≫ e.hom)\n    (hY : IsUnit (N : Γ(Y, ⊤))) (hY' : IsUnit (N : Γ(Y', ⊤))) :\n    let L := (ordinaryFiniteLine A N hA X)⟦(2 : ℤ)⟧\n    let L' := (ordinaryFiniteLine A N hA X')⟦(2 : ℤ)⟧\n    let l := ordinaryFiniteShiftedLinePullback A N hA t g'\n      (finiteP1_unitOnPullback N q hY)\n    (ordinaryFinitePullback A g).map\n        ((rightDerivedLowerShriekIsoRightDerivedLowerStar\n          (ModuleCat.{u + 1} A) q).inv.app L) ≫\n      (rightDerivedLowerShriekBaseChangeMap A sq).app L ≫\n      (R(q')_![ModuleCat.{u + 1} A]).map l.hom ≫\n      (rightDerivedLowerShriekIsoRightDerivedLowerStar\n        (ModuleCat.{u + 1} A) q').hom.app L' ≫\n      presentedFiniteP1Trace A N hA t q' e' w' hY' (d Y' hY') =\n    (ordinaryFinitePullback A g).map\n        (presentedFiniteP1Trace A N hA t q e w hY (d Y hY)) ≫\n      (ordinaryFiniteUnitPullback A g).hom",
+  "branch": "sheaf-dag",
+  "by": "B9",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B9",
+  "result": "pass",
+  "landing": "20261026T100226-L-4153250",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C3",
+  "result": "pass",
+  "landing": "20261026T181111-L-3434594",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

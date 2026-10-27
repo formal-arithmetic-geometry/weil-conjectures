@@ -1,0 +1,181 @@
+{
+ "id": "lem-pur-condensed-tate-scalar-power-isomorphism",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "sk-thm-purity-transport",
+   "place": "Step 4, integral-to-rational and closure coefficient compatibility for the Tate line",
+   "via": [
+    "lem-pur-condensed-tate-realization"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "The derived adjoint of the balanced Tate-power map is invertible",
+ "statement": "Let $k$ be a field of positive prime characteristic different from the prime $\\ell$ and $X$ a separated finite-type $k$-scheme [def-weil-pbc-scheme-conventions]. Choose normalized realization data $r$ [def-weil-pbc-condensed-e-realization-records]. Put $R_X=p_X^*C(-,\\mathbf Z_\\ell)$ and $B_X=p_X^*\\underline\\Omega$, the finite-extension-valued condensed algebraic closure, and let $Z_X$ be the integral Tate limit line [def-pur-condensed-tate-twists]. Encode $P_d=Z_X^{\\otimes_{R_X}d}$, $P_0=R_X$, over the completed ring [lem-pur-condensed-tate-integral-comparison]. Let $F\\dashv G$ be the actual derived extension through the lifted rational coefficient ring to $B_X$ and its restriction, including section-module encoding [lem-weil-pbc-condensed-e-realization, def-weil-pbc-continuous-coefficient-module-encoding]. Let $b_d:P_d[0]\\to G(\\mathrm{tateTwistDerived}(X,\\ell,d))$ be the derived image of the balanced tensor map fixed by the integral-to-closure inclusion at $d=0$ and by tensoring with the scalar-adjunction unit at each successor. Then $\\operatorname{HomEquiv}_{F\\dashv G}^{-1}(b_d)$ is an isomorphism. This concerns the degree-zero tensor power before derived-limit reconstruction or cohomological shift.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-thm-purity-transport/sk-thm-purity-transport.proof.md",
+  "place": "Step 4, integral-to-rational and closure coefficient compatibility for the Tate line"
+ },
+ "stmt_deps": [
+  "def-pur-condensed-tate-twists",
+  "def-weil-pbc-condensed-e-realization-records",
+  "def-weil-pbc-internal-abelian-sheaf-module-equivalence",
+  "def-weil-pbc-adic-coefficient-datum",
+  "lem-pur-condensed-tate-integral-comparison",
+  "def-pur-condensed-tate-realization-constructions",
+  "lem-weil-pbc-condensed-e-realization",
+  "def-weil-pbc-scheme-conventions"
+ ],
+ "proof": [
+  {
+   "text": "Each $P_d$ is locally isomorphic to $R$ by Step 4. Consequently tensoring an exact sequence with $P_d$ restricts on that cover to the original exact sequence; exactness of sheaves is local, so $P_d$ is flat in the sense of [def-pc-flat-sheaf-modules]. By [lem-pc-kflat-closure], $P_d$ placed in degree zero, or shifted by $[2d]$, is K-flat. This proves directly that its derived tensor products with coefficient sheaves can be computed using $P_d$ itself.",
+   "uses": [
+    "def-pc-flat-sheaf-modules",
+    "lem-pc-kflat-closure"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Bounded-above flat complexes are K-flat (lemma-bounded-flat-K-flat, Tag 06YQ); also the K-flat resolving class of Tag 06YS"
+   }
+  },
+  {
+   "text": "The integralComparison square and integralToQbar_factor identify the composite scalar map with the integral-to-closure inclusion.",
+   "uses": [
+    "lem-pur-condensed-tate-integral-comparison",
+    "def-weil-pbc-continuous-coefficient-module-encoding"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-thm-purity-transport/sk-thm-purity-transport.proof.md",
+    "place": "Steps 2 and 4, integral reconstruction and coefficient transport"
+   }
+  },
+  {
+   "text": "By [lem-weil-pbc-condensed-e-realization], $J_X$ is induced by derived extension from the completed integral coefficient ring. Hence on the given integral constructible object, now represented by $P_d[2d]$, its value after rationalization is $(E_X^c\\otimes_RP_d)[2d]$. This computation uses the K-flat formula of [lem-pur-derived-change-of-rings]; [lem-pur-kflat-change-of-rings] ensures that $E_X^c\\otimes_RP_d$ is still K-flat over $E_X^c$. Applying the defining scalar extension for $U_X$ therefore gives $\\iota_XU_X(M_d)\\cong(B_X\\otimes_{E_X^c}(E_X^c\\otimes_RP_d))[2d]\\cong(B_X\\otimes_RP_d)[2d]$. The last map is $b\\otimes(e\\otimes z)\\mapsto be\\otimes z$, with inverse $b\\otimes z\\mapsto b\\otimes(1\\otimes z)$; balancing proves both composite identities. The coefficient homomorphism $R\\to B_X$ is exactly the bottom-field inclusion through $E_X^c$, as in [def-pur-condensed-tate-twists]. No flatness of $B_X$ over $R$ is required, since we use the K-flat line. For the auxiliary exactness assertion used in the realization, factor the lifted rational-to-closure coefficient map through the bottom finite intermediate field. The lift-down and bottom-field maps have their explicit continuous inverse maps, so are isomorphisms. Their composite scalar extension is an equivalence; the remaining scalar extension preserves finite limits by [lem-sfb-qlbar-flat]. The standard scalar-extension composition isomorphism therefore proves exactness of the composite.",
+   "uses": [
+    "lem-weil-pbc-condensed-e-realization",
+    "lem-pur-derived-change-of-rings",
+    "lem-pur-kflat-change-of-rings",
+    "def-pur-sheaf-tensor-product",
+    "def-pur-condensed-tate-twists",
+    "lem-sfb-qlbar-flat"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 06YU and 0G7E: K-flat scalar extension; the balancing formula is Tag 03EK in sites-modules.tex; coefficient realization as specified by the cited J_X comparison"
+   }
+  },
+  {
+   "text": "For the identity morphism of the underlying topos with ring map $R\\to B_X$, apply [lem-weil-pbc-ringed-topoi-derived-tensor-pullback] repeatedly to $P_{j+1}=P_j\\otimes_R Z_X$, starting at $P_0=R$. Step 5 and [lem-pur-kflat-change-of-rings] allow all these derived tensors to be read as ordinary tensor products. The resulting comparison is $B_X\\otimes_RP_d\\cong(B_X\\otimes_R Z_X)^{\\otimes_{B_X}d}$. For $d\\geq1$ it sends $b\\otimes(z_1\\otimes\\cdots\\otimes z_d)$ to $(b\\otimes z_1)\\otimes(1\\otimes z_2)\\otimes\\cdots\\otimes(1\\otimes z_d)$; its inverse sends $(b_1\\otimes z_1)\\otimes\\cdots\\otimes(b_d\\otimes z_d)$ to $(\\prod_i b_i)\\otimes(z_1\\otimes\\cdots\\otimes z_d)$. Both maps are balanced, commute with restriction, and are inverse on pure tensors. Step 3 identifies $B_X\\otimes_RZ_X$ with the module $L_X$ of [def-pur-condensed-tate-twists]. Its $d$-th power is the module defining $\\mathrm{tateTwistDerived}\\,X\\,\\ell\\,d$. Placing it in degree zero and shifting $[2d]$ proves the claimed isomorphism by Step 7. The underlying restricted balanced-power maps are constructed before asserting invertibility: start with the coefficient homomorphism on the regular module in degree zero. At a successor tensor the previous map with the scalar-extension adjunction unit, then descend the target tensor projection through the source balanced coequalizer. Naturality of the braiding and the target balancing relation prove descent, and the action equation proves linearity. The coequalizer projection is epic, so induction on degree proves uniqueness from the same generator equations, including the unit equation. To encode the balanced map over the completed coefficient ring, first factor the specified integral-to-closure map through the lifted rational coefficient ring: the coefficient lift and down maps cancel, and functoriality of point inverse image preserves this equality. Restriction along this composite is identified with the two successive restrictions by Mod.comapCongr and Mod.comapComp. Apply the section-module restriction comparison of [def-weil-pbc-continuous-coefficient-module-encoding]. The defining square for integralComparison becomes, after precomposing with its inverse and postcomposing with sectionIso.inv, the equality of the two scalar actions on every section. Thus the original balanced map is linear for the completed-ring action. PresheafOfModules.homMk constructs it with the identical underlying maps. Extensionality of sheaf-module morphisms proves uniqueness from these section values.",
+   "uses": [
+    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+    "lem-pur-kflat-change-of-rings",
+    "def-pur-condensed-tate-twists",
+    "def-weil-pbc-continuous-coefficient-module-encoding"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 07A4, lemma-pullback-tensor-product, applied to change of coefficient ring on a fixed topos"
+   }
+  },
+  {
+   "text": "The ordinary balanced map is fixed by its unit and successor generator equations. Under the scalar adjunction the balancing isomorphism transposes to that map. Sectionwise encoding retains these equations; uniqueness and the single-functor comparisons identify the displayed derived transpose with that isomorphism. At d=0 it is multiplication $B_X\\otimes_{R_X}R_X\\cong B_X$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-thm-purity-transport/sk-thm-purity-transport.proof.md",
+    "place": "Steps 2 and 4, integral reconstruction and coefficient transport"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-flat-sheaf-modules",
+  "lem-pc-kflat-closure",
+  "lem-pur-condensed-tate-integral-comparison",
+  "def-weil-pbc-continuous-coefficient-module-encoding",
+  "lem-weil-pbc-condensed-e-realization",
+  "lem-pur-derived-change-of-rings",
+  "lem-pur-kflat-change-of-rings",
+  "def-pur-sheaf-tensor-product",
+  "def-pur-condensed-tate-twists",
+  "lem-sfb-qlbar-flat",
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-thm-purity-transport/thm-pur-rational-and-qbar-purity.proof.md",
+  "place": "The indicated portion of the existing nine-step realization proof, isolated without changing its argument; current unit Steps 2 and 4."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "The adjoint of the balanced tensor power comparison under derived scalar extension is an isomorphism",
+   "results": "{\"t\": \"2026-10-26T15:44:45Z\", \"tool\": \"leansearch\", \"query\": \"The adjoint of the balanced tensor power comparison under derived scalar extension is an isomorphism\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"TensorProduct.adjoint_map\", \"TensorProduct.AlgebraTensorModule.distribBaseChange\", \"ModuleCat.ExtendRestrictScalarsAdj.HomEquiv.fromExtendScalars_hom_apply\", \"Algebra.IsPushout.cancelBaseChangeAux\", \"LinearMap.adjoint_lTensor\", \"ModuleCat.ExtendRestrictScalarsAdj.HomEquiv.toRestrictScalars\", \"ModuleCat.restrictCoextendScalarsAdj\", \"ModuleCat.ExtendRestrictScalarsAdj.homEquiv_symm_apply\"], \"digest\": \"874a92cb2884ca30\"}",
+   "date": "2026-10-26",
+   "verdict": "no match: the returned declarations do not state this normalized pro-etale Tate comparison; only general algebra or categorical tools occur."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived extension of scalars of a locally free Tate line tensor power is the tensor power of the extended Tate line",
+   "results": "{\"t\": \"2026-10-26T15:44:47Z\", \"tool\": \"leanfinder\", \"query\": \"Derived extension of scalars of a locally free Tate line tensor power is the tensor power of the extended Tate line\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.Extension.tensorCotangent\", \"Algebra.Extension.tensorCotangentSpace\", \"Algebra.Extension.tensorCotangentInvFun\", \"KaehlerDifferential.tensorKaehlerEquivBase\", \"Algebra.Extension.lTensor_cotangentComplex_eq_cotangentComplexBaseChange\", \"Algebra.Extension.cotangentComplexBaseChange_eq_lTensor_cotangentComplex\", \"Algebra.Extension.tensorCotangentInvFun_smul_mk\", \"KaehlerDifferential.cotangentComplexBaseChange_tmul\"], \"digest\": \"067b1a085a163896\"}",
+   "date": "2026-10-26",
+   "verdict": "no match: the returned declarations do not state this normalized pro-etale Tate comparison; only general algebra or categorical tools occur."
+  },
+  {
+   "tool": "grep",
+   "query": "tateModuleSystem|tateTwistDerived|derivedAugmentation",
+   "results": "{\"t\": \"2026-10-26T15:44:45Z\", \"tool\": \"grep\", \"query\": \"tateModuleSystem|tateTwistDerived|derivedAugmentation\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-26",
+   "verdict": "no match: the returned declarations do not state this normalized pro-etale Tate comparison; only general algebra or categorical tools occur."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.CondensedTateRealization",
+  "date": "2026-10-26",
+  "group": "J3"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-thm-purity-transport",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.CondensedTateScalarPower",
+  "file": "lean/Sheaf/Paper/CondensedTateScalarPower.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.CondensedTateRealization.scalarBalancedPower_isIso",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.CondensedTateRealization.scalarBalancedPower_isIso"
+  ],
+  "statement": "theorem scalarBalancedPower_isIso (k : Type u) [Field k] [Fact (ringChar k).Prime] [Fact (ringChar k ≠ l)] (T : Base k) (r : At l (LiftedQ.{u} l) T.scheme) (d : ℕ) : IsIso (((scalarAdjunction T.scheme l r).homEquiv ((DerivedCategory.singleFunctor _ 0).obj ((integralEncoding T.scheme l r).functor.obj (integralPower T.scheme l d))) (tateTwistDerived T.scheme l (d : ℤ))).symm (derivedBalancedPower T.scheme l r d))",
+  "branch": "sheaf-dag",
+  "by": "J3",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-15d74",
+  "group": "J3",
+  "result": "fix",
+  "landing": "20261026T195529-L-3035476",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-15d74",
+  "group": "J3",
+  "result": "fix",
+  "landing": "20261026T195529-L-3035476",
+  "kind": "interface",
+  "note": "independent cc review: item statement byte-identical to clone; Data modules = verbatim relocation of the old item module (diff); 2 new sorry statements read against WeilConjectures.TateTwist.ProEtale defs and their nodes (both true); new private helper axioms clean via scratch lcompile; item has no importers in clone"
+ }
+}

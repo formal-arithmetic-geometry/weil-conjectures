@@ -1,0 +1,164 @@
+{
+ "id": "lem-zl-smooth-affine-connected-constants",
+ "kind": "statement",
+ "title": "Constant field of a connected smooth affine scheme over a finite field",
+ "statement": "Let k be a finite field and X a nonempty connected affine scheme smooth over k [def-sbc-smooth-morphisms]. There is a finite field L equipped with a k-algebra structure [def-pc-field-extension] and a morphism g:X to Spec L factoring the given structure map through Spec L to Spec k. The morphism g is smooth and geometrically connected [def-pc-geometrically-irreducible]. The underlying scheme X is unchanged.",
+ "source": {
+  "document": "literature/stacks-project/varieties.tex",
+  "place": "Proof of lemma-image-connected-component: factor through the constant field; specialized to a connected smooth affine scheme over a finite field. The normal-domain realization is the constant-field argument of the parent node."
+ },
+ "stmt_deps": [
+  "def-sbc-smooth-morphisms",
+  "def-pc-field-extension",
+  "def-pc-geometrically-irreducible"
+ ],
+ "proof": [
+  {
+   "text": "Smoothness makes X regular and connected regular X is integral. Write A for its global sections and let L be the actual integral closure of k in A. This is a field because A is a domain and k is a field. A finite point exists on the nonempty finite-type affine scheme; evaluation injects L into its finite residue field. Hence L is finite.",
+   "uses": [
+    "lem-weil-pbc-smooth-scheme-over-field-regular",
+    "lem-sc-regular-connected-integral"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Proof of lemma-image-connected-component: factor through the constant field; specialized to a connected smooth affine scheme over a finite field. The normal-domain realization is the constant-field argument of the parent node."
+   }
+  },
+  {
+   "text": "The inclusion L into A defines g by the affine spectrum equivalence and factors the original structure morphism. Since the finite extension L/k is separable, it is etale. Formal smoothness of A over k lifts across the formally etale extension L/k; finite type over the Noetherian field L gives finite presentation. Thus g is smooth.",
+   "uses": [
+    "lem-weil-pbc-finite-separable-extension-etale"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Proof of lemma-image-connected-component: factor through the constant field; specialized to a connected smooth affine scheme over a finite field. The normal-domain realization is the constant-field argument of the parent node."
+   }
+  },
+  {
+   "text": "The global sections of regular X are integrally closed. If an element of the function field is algebraic over L, transitivity makes it integral over k, hence over A. Integral closedness puts it in A and then in its integral closure L. Thus L is relatively algebraically closed in the function field. The field-extension criterion makes the generic-point scheme geometrically irreducible, hence geometrically connected. Its canonical map into connected X is over L, so the connected-image criterion proves that g is geometrically connected.",
+   "uses": [
+    "lem-zl-field-extension-algebraically-closed-geometric",
+    "lem-trf-geometrically-connected-image-criterion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Proof of lemma-image-connected-component: factor through the constant field; specialized to a connected smooth affine scheme over a finite field. The normal-domain realization is the constant-field argument of the parent node."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-smooth-scheme-over-field-regular",
+  "lem-sc-regular-connected-integral",
+  "lem-weil-pbc-finite-separable-extension-etale",
+  "lem-zl-field-extension-algebraically-closed-geometric",
+  "lem-trf-geometrically-connected-image-criterion"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/varieties.tex",
+  "place": "Proof of lemma-image-connected-component: factor through the constant field; specialized to a connected smooth affine scheme over a finite field. The normal-domain realization is the constant-field argument of the parent node.",
+  "note": "Y2: proved directly from the source library and the dependencies listed here."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A smooth connected affine scheme over a finite field factors through a finite field extension with geometrically connected fibers",
+   "results": "No exact match. Existing source-library APIs were read and used to prove the lemma.",
+   "date": "2026-10-26",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A connected smooth affine scheme over a finite field is geometrically connected over its field of constants",
+   "results": "Eight affine/proper hits, no constant-field factorization theorem.",
+   "date": "2026-10-26",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.GeometricallyConnected",
+   "results": "Twelve class/API hits; no support or constant-field factorization theorem.",
+   "date": "2026-10-26",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "geometricallyConnected.*constant|constant.*geometricallyConnected|integralClosure.*Geometrically",
+   "results": "Zero Mathlib hits. The source-library regularity, function-field and field-extension APIs were read separately and are used.",
+   "date": "2026-10-27",
+   "verdict": "no exact Mathlib match; source APIs used"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.DeligneLaumon.GeometricallyConnectedClopenSupport",
+  "date": "2026-10-27",
+  "group": "Y2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-zl-real-mixed-by-curves",
+   "place": "Paragraphs 1--3 and 7: connected-component support and constant-field reduction used before the two-point curve restriction; Constant field of a connected smooth affine scheme over a finite field",
+   "via": [
+    "lem-zl-geometrically-connected-clopen-support",
+    "lem-zl-simple-lisse-support-model",
+    "lem-zl-geometric-constituent-orbit",
+    "lem-zl-pair-eigenvalue-geometric-constituent",
+    "lem-zl-pair-eigenvalue-curve-test",
+    "lem-zl-smooth-affine-constituent-purity"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-deligne-laumon-general",
+ "unit": "sk-i-dl-general-real",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.DeligneLaumon.SmoothAffineConnectedConstants",
+  "file": "lean/Sheaf/DeligneLaumon/SmoothAffineConnectedConstants.lean",
+  "declaration": "AlgebraicGeometry.exists_smooth_geometricallyConnected_constant_field",
+  "statement": "theorem exists_smooth_geometricallyConnected_constant_field\n    {k : Type u} [Field k] [Finite k] {X : Scheme.{u}}\n    [IsAffine X] [ConnectedSpace X] (f : X ⟶ Spec (CommRingCat.of k)) [Smooth f] :\n    ∃ (L : Type u) (_ : Field L) (_ : Finite L) (_ : Algebra k L)\n      (g : X ⟶ Spec (CommRingCat.of L)),\n      f = g ≫ Spec.map (CommRingCat.ofHom (algebraMap k L)) ∧\n        Smooth g ∧ GeometricallyConnected g",
+  "branch": "sheaf-dag",
+  "by": "Y2",
+  "date": "2026-10-27"
+ },
+ "split_report": {
+  "date": "2026-10-27",
+  "item": "lem-zl-smooth-affine-connected-constants",
+  "worker": "stage3",
+  "summary": "Proved direct constant-field construction; no new holes.",
+  "blueprint": "Connected-component and constant-field reduction before the two-point curve argument in thm-zl-real-mixed-by-curves, paragraphs 1--3 and 7.",
+  "tool_uses": [
+   {
+    "node": "lem-trf-geometrically-connected-image-criterion",
+    "why": "Generic connected-scheme criterion over a field, used only with the canonical generic-point morphism. This supplies geometric connectedness of the constant-field structure and does not replace any unit step."
+   }
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Y2",
+  "result": "pass",
+  "landing": "20261026T203305-L-3516854",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Y2",
+  "result": "pass",
+  "landing": "20261026T203305-L-3516854",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

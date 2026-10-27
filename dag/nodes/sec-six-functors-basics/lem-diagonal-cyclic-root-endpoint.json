@@ -1,0 +1,146 @@
+{
+ "kind": "statement",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-diagonal-tower/sk-prop-diagonal-tower-coefficients.proof.md",
+  "place": "paragraph (1), expected finite Tate-line reductions; sk-prop-diagonal-tower.proof.md, paragraph beginning Here the Tate twist"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The quotient of the inverse limit of roots of unity modulo a power of a prime is the finite Tate line",
+   "date": "2026-10-27",
+   "results": "Eight Mathlib hits, chiefly cyclotomicCharacter and its toZModPow formula; no sheaf Tate-line scalar comparison.",
+   "verdict": "Use project root models and finite realization APIs; the normalized cyclic comparison is not in Mathlib."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Abelian.Ext.homEquiv",
+   "date": "2026-10-27",
+   "results": "Ext.homEquiv and Ext.homEquiv_chgUniv.",
+   "verdict": "Use the existing Ext-to-derived-Hom equivalence; it does not identify the coefficient realizations."
+  },
+  {
+   "tool": "grep",
+   "query": "rootTower_finite_tensor|diagonal_flat_scalar_endpoint_iso|cyclicLine",
+   "date": "2026-10-27",
+   "results": "Search index: zero hits. Local rg found RootTowerFiniteTensor, PurTwistRootLocalModels, DiagonalFlatScalarEndpoint, DiagonalSupportedScalarSource, and the cyclic frame definition.",
+   "verdict": "These give local root and flat scalar calculations. No theorem compares a cyclic frame with a completed finite evaluation."
+  },
+  {
+   "tool": "grep",
+   "query": "DiagonalQuotientRootEndpoint and DiagonalQuotientRootProjectionIso",
+   "date": "2026-10-27",
+   "results": "The shared library now proves endpointFromFree, extendFreeProjection, freeProjection_epi and the epic local rank-one quotient argument.",
+   "verdict": "Reuse the generic helpers by private proof imports. Adapt the bottom coefficient factorization and local basis calculation to the actual cyclic ring, without choosing a uniformizer."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.DiagonalCyclicCartierProjection",
+  "date": "2026-10-27",
+  "group": "R4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-prop-diagonal-tower-coefficients",
+   "place": "paragraph (1), finite cyclic reduction followed by finite coefficient extension",
+   "via": [
+    "lem-diagonal-cyclic-cartier-projection",
+    "lem-diagonal-uniformizer-cartier-reduction",
+    "lem-diagonal-uniformizer-finite-normalization",
+    "lem-diagonal-coefficient-uniformizer-reduction"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-prop-diagonal-tower",
+ "id": "lem-diagonal-cyclic-root-endpoint",
+ "title": "Projection-normalized cyclic quotient of the integral Tate line",
+ "statement": "Let l be prime, X a Noetherian scheme with l invertible, and n natural. Let e be any unit-normalized finite realization of the condensed ring ZMod(l^(n+1)) as ordinary modules over ULift(ZMod(l^(n+1))) [def-sfb-diagonal-coefficient-finite-realization]. Supply an IntegralRoots for the bottom field and a kernel-normalized FiniteRoots at exponent l^(n+1) [def-sfb-diagonal-coefficient-diagrams]. The ordinary tensor quotient cyclicLine has an e.LineEndpoint with the ordinary cyclic Cartier line [def-diagonal-cyclic-cartier-frame]. Its underlying root map is integralRoots.hom followed by cyclicLineMap; its finite root map is the n-th root-limit projection followed by finiteRoots.toLine. There is no diagonal class, completed arrow, trace or uniformizer in this statement.",
+ "stmt_deps": [
+  "def-diagonal-cyclic-cartier-frame",
+  "def-sfb-diagonal-coefficient-finite-realization",
+  "def-sfb-diagonal-coefficient-diagrams"
+ ],
+ "proof": [
+  {
+   "text": "Use the proved bottom integer-ring identification and the PadicInt.toZModPow annihilation equation to factor the actual condensed cyclic map through the bottom ell-power quotient. Restrict the integral projection and apply the generic scalar-extension/free-projection helper. Its scalar unit equation is exactly the actual root-projection normalization.",
+   "uses": [
+    "lem-sfb-base-coefficient-condensed-identification",
+    "lem-diagonal-quotient-root-endpoint"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The root tower projection is locally surjective, hence the free root projection q is epic. On the common compatible-root cover, the integral basis restricts to Z_l along the bottom coefficient isomorphism and extends to the cyclic ring. The finite root basis gives a rank-one target because the cyclic coefficient is annihilated by l^(n+1). The generic local rank-one theorem gives invertibility on this cover; reflect and descend to obtain IsIso q.",
+   "uses": [
+    "lem-amb-root-tower-finite-tensor",
+    "lem-diagonal-quotient-root-projection-iso",
+    "lem-diagonal-finite-integral-endpoint",
+    "lem-sp-integral-rational-root-basis",
+    "lem-sp-slice-scalar-extension-basis",
+    "lem-diagonal-finite-root-basis",
+    "lem-diagonal-local-rank-one-iso"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply the generic endpointFromFree theorem with q, the given finite realization and finite roots. Its unit normalization composed with q is the required root normalization. No completed diagonal arrow is used.",
+   "uses": [
+    "lem-diagonal-quotient-root-endpoint"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-base-coefficient-condensed-identification",
+  "lem-diagonal-quotient-root-endpoint",
+  "lem-amb-root-tower-finite-tensor",
+  "lem-diagonal-quotient-root-projection-iso",
+  "lem-diagonal-finite-integral-endpoint",
+  "lem-sp-integral-rational-root-basis",
+  "lem-sp-slice-scalar-extension-basis",
+  "lem-diagonal-finite-root-basis",
+  "lem-diagonal-local-rank-one-iso"
+ ],
+ "proof_origin": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-diagonal-tower/sk-prop-diagonal-tower-coefficients.proof.md",
+  "place": "paragraph (1), expected finite Tate-line reductions; sk-prop-diagonal-tower.proof.md, paragraph beginning Here the Tate twist",
+  "by": "R4",
+  "note": "Completed cyclic proof using the now-proved generic free-projection endpoint and epic local rank-one helpers; all new local helpers are private and proved."
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.DiagonalCyclicRootEndpoint",
+  "file": "lean/Sheaf/Paper/DiagonalCyclicRootEndpoint.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.DiagonalCoefficients.diagonalCyclicRootEndpoint",
+  "statement": "theorem diagonalCyclicRootEndpoint\n    (l : ℕ) [Fact l.Prime] (X : Scheme.{u}) [IsNoetherian X]\n    (hX : IsUnit (l : Γ(X, ⊤))) (n : ℕ)\n    (e : FiniteRealization\n      (Profinite.continuousMapRingObj.{u} (ZMod (l ^ (n + 1))))\n      (diagonalResidue.{u} l n) X)\n    (integralRoots : IntegralRoots l (bottomField l) X)\n    (finiteRoots : FiniteRoots X (l ^ (n + 1))) :\n    Nonempty (e.LineEndpoint (cyclicLine l n X)\n      (geoCartierLine (diagonalResidue.{u} l n) (l ^ (n + 1))\n        (cartierResidue_cast l (n + 1)) X)\n      (integralRoots.hom ≫ cyclicLineMap l n X)\n      (limit.π (Scheme.proEtaleRootsOfUnityTower X l (Fact.out : l.Prime)) (op n) ≫\n        finiteRoots.toLine (diagonalResidue.{u} l n) (cartierResidue_cast l (n + 1))))",
+  "branch": "sheaf-dag",
+  "by": "R4",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R4",
+  "result": "pass",
+  "landing": "20261027T050641-L-249228",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R4",
+  "result": "pass",
+  "landing": "20261027T050641-L-249228",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

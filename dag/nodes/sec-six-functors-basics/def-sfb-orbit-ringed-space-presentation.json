@@ -1,0 +1,103 @@
+{
+ "id": "def-sfb-orbit-ringed-space-presentation",
+ "kind": "definition",
+ "title": "Presentation of an invariant-section orbit ringed space",
+ "statement": "Let $X$ be a locally ringed space and let $G$ be a group acting by locally ringed space automorphisms $\\rho:G\\to\\operatorname{Aut}(X)$ [def-weil-locally-ringed-space-morphism]. An invariant-section orbit ringed space presentation consists of a ringed space $Y$, a ringed-space morphism $q:X\\to Y$, and a homeomorphism $e:|Y|\\simeq |X|/G$, where the orbit set has the quotient topology, such that $e(q(x))=[x]$ for every $x$, $q\\circ\\rho(g)=q$ for every $g$, and, for every open $T\\subseteq Y$, the section map $q_T^\\sharp:\\mathcal O_Y(T)\\to\\mathcal O_X(q^{-1}T)$ is injective with image exactly the sections fixed by pullback under every $g\\in G$. The restrictions are those of $\\mathcal O_X$ under these injections. This defines the data and their compatibility conditions; it does not choose a presentation from an existence assertion.",
+ "stmt_deps": [
+  "def-weil-locally-ringed-space-morphism"
+ ],
+ "source": {
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "IX 1.4, printed pp.132--133, categorical quotient context; explicit invariant-section construction in Steps 1--3 of lem-sfb-orbit-invariant-ringed-space-factorization, using Stacks Tags 0091 (definition-ringed-space), 0093 (definition-composition-maps-ringed-spaces), and 08ZK (lemma-quotient)."
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "An orbit quotient ringed space presentation with quotient topology and the invariant sections as its sheaf of rings",
+   "results": "OK 8 hits: topologicalRingQuotientTopology, Algebra.Presentation.Quotient, AlgebraicGeometry.LocallyRingedSpace.𝒪, instTopologicalSpaceQuotient, QuotientModule.Quotient.topologicalSpace, instTopologicalSpaceQuot, MulAction.orbitRel.Quotient, topologicalRing_quotient",
+   "date": "2026-10-24",
+   "verdict": "no match: existing quotient topology and locally ringed space definitions are used; no presentation identifying both the orbit topology and the invariant-section sheaf."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"SheafedSpace\", \"quotient\"",
+   "results": "OK 0 hits: ",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "quotient|invariant|coequalizer",
+   "results": "OK 8 hits: Mathlib/Geometry/RingedSpace/PresheafedSpace/Gluing.lean, Mathlib/Geometry/RingedSpace/PresheafedSpace/Gluing.lean, Mathlib/Geometry/RingedSpace/LocallyRingedSpace/HasColimits.lean, Mathlib/Geometry/RingedSpace/LocallyRingedSpace/HasColimits.lean, Mathlib/Geometry/RingedSpace/LocallyRingedSpace/HasColimits.lean, Mathlib/Geometry/RingedSpace/LocallyRingedSpace/HasColimits.lean, Mathlib/Geometry/RingedSpace/LocallyRingedSpace/HasColimits.lean, Mathlib/Geometry/RingedSpace/LocallyRingedSpace/ResidueField.lean; subdirectory Geometry/RingedSpace",
+   "date": "2026-10-24",
+   "verdict": "no match: colimits are related constructions, not a presentation of the actual group orbit topology and fixed-section subsheaf. Project and upstream searches also found no presentation; see worker report."
+  }
+ ],
+ "status": "split",
+ "import_flags": [],
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-orbit-invariant-ringed-space-factorization",
+  "date": "2026-10-24",
+  "group": "Q38"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), admissible quotients in ILO IX 1.4: the explicit orbit topology and invariant-section sheaf in Steps 1--3 of lem-sfb-orbit-invariant-ringed-space-factorization.",
+   "via": [
+    "lem-sfb-orbit-invariant-ringed-space-factorization",
+    "lem-sfb-admissible-finite-type-field-quotient",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.OrbitRingedSpacePresentation",
+  "declaration": "AlgebraicGeometry.OrbitRingedSpacePresentation",
+  "file": "lean/Sheaf/AlgebraicGeometry/OrbitRingedSpacePresentation.lean",
+  "statement": "structure OrbitRingedSpacePresentation (G : Type v) [Group G] (X : LocallyRingedSpace.{u}) (action : G →* Aut X)",
+  "branch": "newtargets-dag",
+  "by": "Q38",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-01594cca4",
+  "group": "Q38",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-01594cca4",
+  "group": "Q38",
+  "result": "pass",
+  "note": "Clause-by-clause match: arbitrary G : Type v, orbit Quot with coinduced topology via orbitHomeomorph+projection_eq, invariant sections via injective c.app with image = fixed sections (HEq over opens equal by `invariant`), presentation unique up to unique iso so Nonempty+∀D is not an arbitrary-choice substitute; isOpenMap; ∃! ringed factor to arbitrary RingedSpace; local factor with both stalk hypotheses (∃! over conjunction, complemented by existsUnique_factor); invariant_open pins actionW and comparison by squares with ofRestrict and passes locality; scheme clause needs no locality hypothesis (Step 9) and asserts no representability. New def node genuinely new (only finite-scheme admissible quotient / finiteQuotientInvariantSections nearby). Item diff vs live = lean + new stmt_dep only. Statements verbatim, sorry only in theorems, docstrings with source/blueprint, report sections present. Not recompiled (no change)."
+ }
+}

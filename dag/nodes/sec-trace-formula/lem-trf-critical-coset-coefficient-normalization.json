@@ -1,0 +1,196 @@
+{
+ "id": "lem-trf-critical-coset-coefficient-normalization",
+ "kind": "statement",
+ "title": "Prime-to-p normalization and descent of critical cosets",
+ "statement": "Let $k\\subseteq F$ be complete fields [def-weil-field] with compatible nontrivial nonarchimedean real absolute values, with $k$ algebraically closed. For a valued field $H$ put $H^\\circ=\\{x:|x|\\le1\\}$ [def-trf-valuation-ring], $\\widetilde H=H^\\circ/\\{x:|x|<1\\}$ and $\\Gamma_H=|H^\\times|$. Let $p=\\operatorname{char}\\widetilde k>0$. For $a,b\\in F$, $s>0$ put $S_{a,s}(F)=\\{c^p-ac+e:c,e\\in F,\\ |pc^p|<s,\\ |e|<s\\}$. Use the same formula for $S_{A,t}(H)$ in any valued extension $H$ and any coefficient $A$ and threshold $t>0$. Suppose $C=b+S_{a,s}(F)$ is critical, meaning $0\\notin C$ and $\\inf_{v\\in C}|v|=s$. If $a=0$ put $E=F$, $\\alpha=1$ and $A=0$. If $a\\ne0$, choose $\\alpha^{p-1}=a$ in an algebraic closure, put $E=F(\\alpha)$ with the extending absolute value, and put $A=1$. Then $E$ is complete and $E/F$ is finite tame: with $e=[\\Gamma_E:\\Gamma_F]$, $f=[\\widetilde E:\\widetilde F]$, one has $[E:F]=ef$, $\\widetilde E/\\widetilde F$ is separable and $p\\nmid e$; in fact $[E:F]$ divides $p-1$. Set $B=b/\\alpha^p$ and $t=s/|\\alpha|^p$. The coset $C^\\prime=B+S_{A,t}(E)$ is critical. If $C^\\prime$ has an element of absolute value $t$, then $C$ has an element of absolute value $s$.",
+ "source": {
+  "document": "literature/temkin-stable-modification-arXiv-0707.3953v3.pdf",
+  "place": "Agent-supplied coefficient normalization and normalized-trace descent supplement to the first paragraph of the proof of Proposition 6.2.4, printed p. 47; scaling as in Proposition 6.1.4(ii), printed p. 38. The trace-descent assertion is supplied by Q23, not asserted to be a quoted theorem of Temkin.",
+  "url": "https://math.huji.ac.il/~temkin/papers/Stable_Modification.pdf"
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-trf-valuation-ring"
+ ],
+ "proof": [
+  {
+   "text": "Compatibility of the absolute values gives $k^\\circ=F^\\circ\\cap k$ and $\\{x\\in k:|x|<1\\}=\\{x\\in F:|x|<1\\}\\cap k$. Therefore the induced map $\\widetilde k\\to\\widetilde F$ is injective, so $\\operatorname{char}\\widetilde F=p$. For $a\\ne0$ put $m=p-1$. The residue of $m$ is $-1$, so $|m|=1$ and $m$ is invertible in $F$. Since $k$ is algebraically closed, $X^m-1$ splits over $k$ and hence over $F$. Apply the multiradical degree lemma with one radical, exponent $m$, and radicand $a$: $E/F$ is finite Galois and $[E:F]\\mid p-1$. For $a=0$, $E=F$ has degree one, also dividing $p-1$. Thus in both cases $n=[E:F]$ is prime to $p$.",
+   "uses": [
+    "lem-sfb-multiradical-galois-degree"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/temkin-stable-modification-arXiv-0707.3953v3.pdf",
+    "place": "Agent supplement to Proposition 6.1.4(ii), normalization by a (p-1)-st root"
+   }
+  },
+  {
+   "text": "The finite ramification calculus gives completeness of $E$ for the extending absolute value. For $a\\ne0$, apply the root-envelope characterization with $K=F$, $L=E$, $U=F$ and the single radical $\\alpha^{p-1}=a$. All $(p-1)$-st roots of unity lie in $k\\subseteq F$ as above. The identity $F^\\circ\\to F^\\circ$ is finite etale: it is free of rank one and every lifting problem for the identity has exactly one lift. Therefore condition (b) of that characterization holds, so condition (a) gives $[E:F]=ef$, separability of the residue extension and $p\\nmid e$. For $a=0$ these conclusions hold with $e=f=1$.",
+   "uses": [
+    "lem-trf-valued-finite-ramification-calculus",
+    "lem-trf-tame-root-envelope"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/temkin-stable-modification-arXiv-0707.3953v3.pdf",
+    "place": "Section 2.1, Lemma 2.1.5(iii); radical formulation of the tame extension used in Proposition 6.1.4(ii)"
+   }
+  },
+  {
+   "text": "Put $D=b+S_{a,s}(E)$. The map $w\\mapsto w/\\alpha^p$ gives a bijection $D\\to C^\\prime$: write $d=\\alpha c$ and $e=\\alpha^p e^\\prime$, and compute $$\\alpha^{-p}(d^p-ad+e)=c^p-Ac+e^\\prime,\\quad |pd^p|<s\\ \\Longleftrightarrow\\ |pc^p|<t,\\quad |e|<s\\ \\Longleftrightarrow\\ |e^\\prime|<t.$$ Indeed $a\\alpha/\\alpha^p=A$, including $a=0$, $\\alpha=1$. Absolute values under this bijection are divided by $|\\alpha|^p$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/temkin-stable-modification-arXiv-0707.3953v3.pdf",
+    "place": "Agent scaling supplement to Proposition 6.1.4(ii)"
+   }
+  },
+  {
+   "text": "Use the degree-normalized trace $T:E\\to F$ of the trace-bound lemma; step 1 supplies its Galois, residue-characteristic and prime-to-$p$ hypotheses, and step 2 supplies completeness. For $w=b+d^p-ad+e\\in D$ with $|pd^p|<s$ and $|e|<s$, set $c=T(d)$ and $$\\epsilon=T(e)+T(d^p)-T(d)^p.$$ Then $T(w)=b+c^p-ac+\\epsilon$. The two trace estimates give $|pc^p|\\le|p|\\,|d|^p<s$ and $$|\\epsilon|\\le\\max(|e|,|p|\\,|d|^p)<s.$$ Hence $T(w)\\in C$ and $|T(w)|\\le|w|$. This calculation also applies in equal characteristic, where the Frobenius error is zero.",
+   "uses": [
+    "lem-trf-prime-to-p-trace-frobenius-bound"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/temkin-stable-modification-arXiv-0707.3953v3.pdf",
+    "place": "Agent normalized-trace descent supplement to Proposition 6.2.4, proof, printed p. 47"
+   }
+  },
+  {
+   "text": "Since $\\inf_{v\\in C}|v|=s$, every $T(w)\\in C$ satisfies $|T(w)|\\ge s$. Step 4 therefore gives $|w|\\ge s$ for every $w\\in D$. Conversely $C\\subseteq D$, so $\\inf_{w\\in D}|w|\\le s$. Thus $\\inf_{w\\in D}|w|=s$ and $0\\notin D$ because $s>0$. The scaling bijection in step 3 proves that $C^\\prime$ is critical. Finally, if $v^\\prime\\in C^\\prime$ has $|v^\\prime|=t$, put $w=\\alpha^p v^\\prime\\in D$. Then $|w|=s$ and $T(w)\\in C$ has $s\\le|T(w)|\\le s$, proving the required descent of a minimum.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/temkin-stable-modification-arXiv-0707.3953v3.pdf",
+    "place": "Agent infimum and minimum descent supplement to Proposition 6.2.4, proof, printed p. 47"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-multiradical-galois-degree",
+  "lem-trf-valued-finite-ramification-calculus",
+  "lem-trf-tame-root-envelope",
+  "lem-trf-prime-to-p-trace-frobenius-bound"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/temkin-stable-modification-arXiv-0707.3953v3.pdf",
+  "place": "Coefficient-normalization and normalized-trace supplement supplied by the DAG authors; Temkin Proposition 6.1.4(ii) and Proposition 6.2.4 proof give the context, not a quoted trace-descent theorem. Online primary source read; local archival copy WANTED."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Prime to residue characteristic radical extension normalizes linear coefficient of additive polynomial and normalized trace descends critical cosets",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"Algebra.normalizedTrace\", \"module\": \"Mathlib/FieldTheory/NormalizedTrace\", \"type\": \"(F : Type u_1) →\\n  (K : Type u_2) →\\n    [inst : Field F] → [inst_1 : Field K] → [inst_2 : Algebra F K] → [CharZero F] → [Algebra.IsIntegral F K] → K →ₗ[F] F\", \"doc\": \"The normalized trace is an $ F $-linear map $ \\\\operatorname{Tr}_{\\\\text{norm}} : K \\\\to F $ defined by $ \\\\operatorname{Tr}_{\\\\text{norm}}(a) = \\\\frac{1}{[F(a):F]} \\\\cdot \\\\operatorname{Tr}_{F(a)/F}(a) $, wh\"}\n  {\"name\": \"Algebra.normalizedTrace_algebraMap_of_lifts\", \"module\": \"Mathlib/FieldTheory/NormalizedTrace\", \"type\": \"∀ (F : Type u_3) (E : Type u_4) (K : Type u_5) [inst : Field F] [inst_1 : Field E] [inst_2 : Field K]\\n  [inst_3 : Algebra F E] [inst_4 : Algebra E K] [inst_5 : Algebra F K] [IsScalarTower F E K]\\n  [inst_7 : Algebra.IsIntegral F K] [inst_8 : CharZero F] [inst_9 : CharZero E] [inst_10 : Algebra.IsInte\", \"doc\": \"Let $ F \\\\subseteq E \\\\subseteq K $ be field extensions where $ E $ has characteristic zero and every element of $ K $ is integral over $ E $. For any $ a \\\\in K $, if the minimal polynomial of $ a $ ove\"}\n  {\"name\": \"Algebra.normalizedTrace_minpoly\", \"module\": \"Mathlib/FieldTheory/NormalizedTrace\", \"type\": \"∀ (F : Type u_1) {K : Type u_2} [inst : Field F] [inst_1 : Field K] [inst_2 : Algebra F K] [inst_3 : CharZero F]\\n  [inst_4 : Algebra.IsIntegral F K] (a : K),\\n  (Algebra.normalizedTrace F K) a = (↑(minpoly F a).natDegree)⁻¹ • -(minpoly F a).nextCoeff\", \"doc\": \"For any element $ a $ in the field extension $ K/F $, the normalized trace $ \\\\operatorname{Tr}_{\\\\text{norm}}(a) $ is equal to $ \\\\frac{1}{\\\\deg(\\\\minpoly_F(a))} \\\\cdot \\\\left(-\\\\text{coeff}_{\\\\deg(\\\\minpoly_F\"}\n  {\"name\": \"Algebra.normalizedTrace_algebraMap\", \"module\": \"Mathlib/FieldTheory/NormalizedTrace\", \"type\": \"∀ (F : Type u_3) (E : Type u_4) (K : Type u_5) [inst : Field F] [inst_1 : Field E] [inst_2 : Field K]\\n  [inst_3 : Algebra F E] [inst_4 : Algebra E K] [inst_5 : Algebra F K] [inst_6 : IsScalarTower F E K]\\n  [inst_7 : Algebra.IsIntegral F E] [inst_8 : Algebra.IsIntegral F K] [inst_9 : CharZero F],\\n  A\", \"doc\": \"For field extensions $F \\\\subseteq E \\\\subseteq K$, the composition of the normalized trace map $\\\\operatorname{Tr}_{\\\\text{norm}}: K \\\\to F$ with the canonical $F$-linear inclusion map $E \\\\to K$ equals th\"}\n  {\"name\": \"Algebra.normalizedTrace_map\", \"module\": \"Mathlib/FieldTheory/NormalizedTrace\", \"type\": \"∀ (F : Type u_1) (K : Type u_2) [inst : Field F] [inst_1 : Field K] [inst_2 : Algebra F K] [inst_3 : CharZero F]\\n  [inst_4 : Algebra.IsIntegral F K] {E : Type u_3} [inst_5 : Field E] [inst_6 : Algebra F E]\\n  [inst_7 : Algebra.IsIntegral F E] (f : E →ₐ[F] K) (a : E),\\n  (Algebra.normalizedTrace F K) (\", \"doc\": \"For any $ F $-algebra homomorphism $ f : E \\\\to K $ and element $ a \\\\in E $, the normalized trace of $ f(a) $ from $ K $ to $ F $ equals the normalized trace of $ a $ from $ E $ to $ F $, i.e., $ \\\\oper\"}\n  {\"name\": \"Algebra.normalizedTrace_def\", \"module\": \"Mathlib/FieldTheory/NormalizedTrace\", \"type\": \"∀ (F : Type u_1) (K : Type u_2) [inst : Field F] [inst_1 : Field K] [inst_2 : Algebra F K] [inst_3 : CharZero F]\\n  [inst_4 : Algebra.IsIntegral F K] (a : K),\\n  (Algebra.normalizedTrace F K) a =\\n    (↑(Module.finrank F ↥F⟮a⟯))⁻¹ • (Algebra.trace F ↥F⟮a⟯) (IntermediateField.AdjoinSimple.gen F a)\", \"doc\": \"The normalized trace map $\\\\operatorname{Tr}_{\\\\text{norm}} : K \\\\to F$ is defined for each element $a \\\\in K$ as $\\\\operatorname{Tr}_{\\\\text{norm}}(a) = \\\\frac{1}{[F(a):F]} \\\\cdot \\\\operatorname{Tr}_{F(a)/F}(\"}\n  {\"name\": \"Algebra.normalizedTrace_trans_apply\", \"module\": \"Mathlib/FieldTheory/NormalizedTrace\", \"type\": \"∀ (F : Type u_3) (E : Type u_4) (K : Type u_5) [inst : Field F] [inst_1 : Field E] [inst_2 : Field K]\\n  [inst_3 : Algebra F E] [inst_4 : Algebra E K] [inst_5 : Algebra F K] [IsScalarTower F E K]\\n  [inst_7 : Algebra.IsIntegral F E] [inst_8 : Algebra.IsIntegral F K] [inst_9 : CharZero F]\\n  [inst_10 : \", \"doc\": \"For any element $a$ in a field $K$ that is integral over $E$, and $E$ integral over $F$ with $\\\\operatorname{Char}(E) = 0$, the composition of normalized traces $\\\\operatorname{Tr}_{F/E}(\\\\operatorname{T\"}\n  {\"name\": \"KummerDedekind.normalizedFactorsMapEquivNormalizedFactorsMinPolyMk\", \"module\": \"Mathlib/NumberTheory/KummerDedekind\", \"type\": \"{R : Type u_1} →\\n  {S : Type u_2} →\\n    [inst : CommRing R] →\\n      [inst_1 : CommRing S] →\\n        [inst_2 : Algebra R S] →\\n          {x : S} →\\n            {I : Ideal R} →\\n              [IsDomain R] →\\n                [IsIntegrallyClosed R] →\\n                  [inst_5 : IsDedekindDomain S] →\\n       \", \"doc\": \"Given a maximal ideal $ I $ in a commutative ring $ R $, a non-zero ideal $ I $, and an integral element $ x $ over $ R $ satisfying a conductor condition, there is a canonical bijection between the s\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: normalized trace identities lack the valued error estimate, tame radical and critical-coset descent"
+  },
+  {
+   "tool": "leansearch",
+   "query": "For a finite extension of degree prime to p normalized field trace preserves a critical additive polynomial coset modulo a small error",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"Algebra.normalizedTrace\", \"module\": \"Mathlib.FieldTheory.NormalizedTrace\", \"type\": \": K →ₗ[F] F\", \"doc\": \"The normalized trace is an $ F $-linear map $ \\\\operatorname{Tr}_{\\\\text{norm}} : K \\\\to F $ defined by $ \\\\operatorname{Tr}_{\\\\text{norm}}(a) = \\\\frac{1}{[F(a):F]} \\\\cdot \\\\operatorname{Tr}_{F(a)/F}(a) $, wh\"}\n  {\"name\": \"Algebra.normalizedTrace_eq_of_fininteDimensional_apply\", \"module\": \"Mathlib.FieldTheory.NormalizedTrace\", \"type\": \"∀ (F : Type u_1) {K : Type u_2} [inst : Field F] [inst_1 : Field K] [inst_2 : Algebra F K] [inst_3 : CharZero F]\\n  [inst_4 : Algebra.IsIntegral F K] [FiniteDimensional F K] (a : K),\\n  (Algebra.normalizedTrace F K) a = (↑(Module.finrank F K))⁻¹ • (Algebra.trace F K) a\", \"doc\": \"For a finite-dimensional field extension $ K/F $ with characteristic zero, the normalized trace map $ \\\\operatorname{Tr}_{\\\\text{norm}} : K \\\\to F $ satisfies $ \\\\operatorname{Tr}_{\\\\text{norm}}(a) = \\\\frac\"}\n  {\"name\": \"Algebra.normalizedTrace_def\", \"module\": \"Mathlib.FieldTheory.NormalizedTrace\", \"type\": \"(a : K) : normalizedTrace F K a = (Module.finrank F F⟮a⟯ : F)⁻¹ • trace F F⟮a⟯ (AdjoinSimple.gen F a)\", \"doc\": \"The normalized trace map $\\\\operatorname{Tr}_{\\\\text{norm}} : K \\\\to F$ is defined for each element $a \\\\in K$ as $\\\\operatorname{Tr}_{\\\\text{norm}}(a) = \\\\frac{1}{[F(a):F]} \\\\cdot \\\\operatorname{Tr}_{F(a)/F}(\"}\n  {\"name\": \"Algebra.normalizedTrace_eq_of_finiteDimensional_apply\", \"module\": \"Mathlib.FieldTheory.NormalizedTrace\", \"type\": \"[FiniteDimensional F K] (a : K) : normalizedTrace F K a = (Module.finrank F K : F)⁻¹ • trace F K a\", \"doc\": \"For any finite-dimensional field extension $ K $ over $ F $ and any element $ a \\\\in K $, the normalized trace of $ a $ is equal to the trace of $ a $ divided by the dimension of $ K $ over $ F $. Form\"}\n  {\"name\": \"Algebra.normalizedTrace_eq_of_finiteDimensional\", \"module\": \"Mathlib.FieldTheory.NormalizedTrace\", \"type\": \"[FiniteDimensional F K] : normalizedTrace F K = (Module.finrank F K : F)⁻¹ • trace F K\", \"doc\": \"If $ K $ is a finite-dimensional field extension of $ F $, then the normalized trace map $ \\\\operatorname{Tr}_{\\\\text{norm}} : K \\\\to F $ satisfies $ \\\\operatorname{Tr}_{\\\\text{norm}} = \\\\frac{1}{[K : F]} \\\\\"}\n  {\"name\": \"Algebra.normalizedTrace_eq_of_fininteDimensional\", \"module\": \"Mathlib.FieldTheory.NormalizedTrace\", \"type\": \"∀ (F : Type u_1) (K : Type u_2) [inst : Field F] [inst_1 : Field K] [inst_2 : Algebra F K] [inst_3 : CharZero F]\\n  [inst_4 : Algebra.IsIntegral F K] [FiniteDimensional F K],\\n  Algebra.normalizedTrace F K = (↑(Module.finrank F K))⁻¹ • Algebra.trace F K\", \"doc\": \"For a field extension $ K/F $ of finite dimension $ [K:F] $ with $ F $ of characteristic zero, the normalized trace map $ \\\\operatorname{Tr}_{\\\\text{norm}} : K \\\\to F $ satisfies $ \\\\operatorname{Tr}_{\\\\te\"}\n  {\"name\": \"Algebra.normalizedTrace_minpoly\", \"module\": \"Mathlib.FieldTheory.NormalizedTrace\", \"type\": \"(a : K) : normalizedTrace F K a = ((minpoly F a).natDegree : F)⁻¹ • -(minpoly F a).nextCoeff\", \"doc\": \"For any element $ a $ in the field extension $ K/F $, the normalized trace $ \\\\operatorname{Tr}_{\\\\text{norm}}(a) $ is equal to $ \\\\frac{1}{\\\\deg(\\\\minpoly_F(a))} \\\\cdot \\\\left(-\\\\text{coeff}_{\\\\deg(\\\\minpoly_F\"}\n  {\"name\": \"Algebra.normalizedTrace_ne_zero\", \"module\": \"Mathlib.FieldTheory.NormalizedTrace\", \"type\": \": normalizedTrace F K ≠ 0\", \"doc\": \"For a field extension $ K $ over $ F $, the normalized trace map $ \\\\operatorname{Tr}_{\\\\text{norm}} : K \\\\to F $ is not the zero map.\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: normalized trace identities lack the valued error estimate, tame radical and critical-coset descent"
+  },
+  {
+   "tool": "grep",
+   "query": "trace.*pow|pow.*trace|ramificationIdx.*[Cc]oprime|[Cc]oprime.*ramificationIdx",
+   "results": "[grep] OK 21 hit(s)\n  {\"file\": \"Mathlib/NumberTheory/LucasLehmer.lean\", \"line\": \"454\", \"text\": \"lemma ω_pow_trace [Fact q.Prime] (odd : Odd q)\"}\n  {\"file\": \"Mathlib/NumberTheory/LucasLehmer.lean\", \"line\": \"603\", \"text\": \"  have := X.ω_pow_trace (q := mersenne (p' + 2)) (by simp)\"}\n  {\"file\": \"Mathlib/NumberTheory/Cyclotomic/Discriminant.lean\", \"line\": \"145\", \"text\": \"    simp only [map_one, one_pow, Matrix.det_unique, traceForm_apply, mul_one]\"}\n  {\"file\": \"Mathlib/NumberTheory/Cyclotomic/Discriminant.lean\", \"line\": \"176\", \"text\": \"          _root_.pow_zero, traceForm_apply, mul_one]\"}\n  {\"file\": \"Mathlib/FieldTheory/Minpoly/MinpolyDiv.lean\", \"line\": \"18\", \"text\": \"We used the contents of this file to describe the dual basis of a power basis under the trace form.\"}\n  {\"file\": \"Mathlib/FieldTheory/Minpoly/MinpolyDiv.lean\", \"line\": \"19\", \"text\": \"See `traceForm_dualBasis_powerBasis_eq`.\"}\n  {\"file\": \"Mathlib/LinearAlgebra/Matrix/Charpoly/FiniteField.lean\", \"line\": \"53\", \"text\": \"theorem FiniteField.trace_pow_card {K : Type*} [Field K] [Fintype K] (M : Matrix n n K) :\"}\n  {\"file\": \"Mathlib/LinearAlgebra/Matrix/Charpoly/FiniteField.lean\", \"line\": \"60\", \"text\": \"theorem ZMod.trace_pow_card {p : ℕ} [Fact p.Prime] (M : Matrix n n (ZMod p)) :\"}\n  {\"file\": \"Mathlib/LinearAlgebra/Matrix/Charpoly/FiniteField.lean\", \"line\": \"61\", \"text\": \"    trace (M ^ p) = trace M ^ p := by have h := FiniteField.trace_pow_card M; rwa [ZMod.card] at h\"}\n  {\"file\": \"Mathlib/FieldTheory/Finite/Trace.lean\", \"line\": \"20\", \"text\": \"- `algebraMap_trace_eq_sum_pow`: an explicit formula for the trace map:\"}\n  {\"file\": \"Mathlib/FieldTheory/Finite/Trace.lean\", \"line\": \"49\", \"text\": \"theorem algebraMap_trace_eq_sum_pow :\"}\n  {\"file\": \"Mathlib/LinearAlgebra/Matrix/Charpoly/Coeff.lean\", \"line\": \"201\", \"text\": \"  rw [Algebra.smul_def (trace M), ← C_eq_algebraMap, pow_two, ← mul_assoc, add_assoc,\"}\n  {\"file\": \"Mathlib/RingTheory/Trace/Basic.lean\", \"line\": \"40\", \"text\": \"* `Module.Basis.traceDual_powerBasis_eq`: The dual basis of a power basis `{1, x, x²...}` under the\"}\n  {\"file\": \"Mathlib/RingTheory/Trace/Basic.lean\", \"line\": \"67\", \"text\": \"theorem Algebra.traceForm_toMatrix_powerBasis (h : PowerBasis R S) :\"}\n  {\"file\": \"Mathlib/RingTheory/Trace/Basic.lean\", \"line\": \"69\", \"text\": \"  ext; rw [traceForm_toMatrix, of_apply, pow_add, h.basis_eq_pow, h.basis_eq_pow]\"}\n  {\"file\": \"Mathlib/RingTheory/Trace/Basic.lean\", \"line\": \"78\", \"text\": \"/-- Given `pb : PowerBasis K S`, the trace of `pb.gen` is `-(minpoly K pb.gen).nextCoeff`. -/\"}\n  {\"file\": \"Mathlib/RingTheory/Trace/Basic.lean\", \"line\": \"79\", \"text\": \"theorem PowerBasis.trace_gen_eq_nextCoeff_minpoly [Nontrivial S] (pb : PowerBasis K S) :\"}\n  {\"file\": \"Mathlib/RingTheory/Discriminant.lean\", \"line\": \"148\", \"text\": \"    traceMatrix_eq_embeddingsMatrixReindex_mul_trans, det_mul, det_transpose, pow_two]\"}\n  {\"file\": \"Mathlib/RingTheory/Discriminant.lean\", \"line\": \"286\", \"text\": \"    exact mem_bot.2 (IsIntegrallyClosed.isIntegral_iff.1 <| isIntegral_trace (hz.mul <| hint.pow _))\"}\n  {\"file\": \"Mathlib/RingTheory/Discriminant.lean\", \"line\": \"289\", \"text\": \"      (IsIntegrallyClosed.isIntegral_iff.1 <| isIntegral_trace <| (hint.pow _).mul (hint.pow _))\"}\n  {\"file\": \"Mathlib/RingTheory/DedekindDomain/Different.lean\", \"line\": \"601\", \"text\": \"    _root_.funext (Basis.traceDual_powerBasis_eq pb)\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: normalized trace identities lack the valued error estimate, tame radical and critical-coset descent"
+  },
+  {
+   "tool": "loogle",
+   "query": "Algebra.trace",
+   "results": "Algebra.trace, Algebra.trace_self, Algebra.trace_algebraMap and trace tower identities in Mathlib.RingTheory.Trace.Defs.",
+   "date": "2026-10-24",
+   "verdict": "no match: trace identities do not assert the valued critical-coset descent"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "In a complete nonarchimedean valued field residue characteristic p, normalized trace in a prime-to-p Galois extension satisfies norm bound and commutes with pth powers modulo p",
+   "results": "{\"t\": \"2026-10-24T09:48:03Z\", \"tool\": \"leanfinder\", \"query\": \"In a complete nonarchimedean valued field residue characteristic p, normalized trace in a prime-to-p Galois extension satisfies norm bound and commutes with pth powers modulo p\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"prod_galRestrict_eq_norm\", \"Algebra.normalizedTrace\", \"Algebra.normalizedTrace_map\", \"Algebra.normalizedTrace_algebraMap_apply\", \"Algebra.normalizedTrace_algebraMap_apply_eq_self\", \"Algebra.normalizedTrace_algebraMap\", \"Algebra.normalizedTrace_intermediateField\", \"Algebra.normalizedTrace_algebraMap_of_lifts\"], \"digest\": \"2e360ca7325e5248\"}\nRead hits: Algebra.normalizedTrace and its map, algebraMap, intermediateField identities (Mathlib/FieldTheory/NormalizedTrace); prod_galRestrict_eq_norm (Mathlib/RingTheory/IntegralClosure/IntegralRestrict).",
+   "date": "2026-10-24",
+   "verdict": "no match: the trace and finite-field identities and invariant norms do not give the valued pth-power error estimate; Algebra.normalizedTrace requires characteristic zero. The present degree-normalized finite trace also covers equal characteristic p."
+  },
+  {
+   "tool": "leansearch",
+   "query": "For a finite Galois extension of complete nonarchimedean valued fields of degree n prime to residue characteristic p, averaging conjugates is norm nonincreasing and its pth power error is bounded by norm p times norm x to p",
+   "results": "{\"t\": \"2026-10-24T09:53:56Z\", \"tool\": \"leansearch\", \"query\": \"For a finite Galois extension of complete nonarchimedean valued fields of degree n prime to residue characteristic p, averaging conjugates is norm nonincreasing and its pth power error is bounded by norm p times norm x to p\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.norm_eq_prod_automorphisms\", \"prod_galRestrict_eq_norm\", \"IsUltrametricDist.invariantExtension\", \"IsUltrametricDist.isNonarchimedean_algNormOfAlgEquiv\", \"spectralNorm_eq_iSup_of_finiteDimensional_normal\", \"Algebra.algebraMap_intNorm_of_isGalois\", \"IsUltrametricDist.isPowMul_algNormOfAlgEquiv\", \"IsUltrametricDist.isNonarchimedean_invariantExtension\"], \"digest\": \"0440452e23322dde\"}\nRead hits: Algebra.norm_eq_prod_automorphisms; prod_galRestrict_eq_norm; IsUltrametricDist.invariantExtension, isNonarchimedean_algNormOfAlgEquiv, isPowMul_algNormOfAlgEquiv, isNonarchimedean_invariantExtension; spectralNorm_eq_iSup_of_finiteDimensional_normal; Algebra.algebraMap_intNorm_of_isGalois.",
+   "date": "2026-10-24",
+   "verdict": "no match: the trace and finite-field identities and invariant norms do not give the valued pth-power error estimate; Algebra.normalizedTrace requires characteristic zero. The present degree-normalized finite trace also covers equal characteristic p."
+  },
+  {
+   "tool": "loogle",
+   "query": "Algebra.trace",
+   "results": "{\"t\": \"2026-10-24T09:51:30Z\", \"tool\": \"loogle\", \"query\": \"Algebra.trace\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"Algebra.trace\", \"Algebra.trace_self\", \"Algebra.trace_self_apply\", \"Algebra.trace_algebraMap_of_basis\", \"Algebra.trace_algebraMap\", \"Algebra.trace_eq_matrix_trace\", \"Algebra.trace_eq_zero_of_not_exists_basis\", \"Algebra.trace_prod\"], \"digest\": \"823bbab16b0f24fe\"}\nRead hits: Algebra.trace, trace_self, trace_self_apply, trace_algebraMap_of_basis, trace_algebraMap, trace_eq_matrix_trace, trace_eq_zero_of_not_exists_basis, trace_prod, trace_trace_of_basis, trace_trace, traceForm_apply, trace_comp_trace_of_basis, all in Mathlib.RingTheory.Trace.Defs.",
+   "date": "2026-10-24",
+   "verdict": "no match: the trace and finite-field identities and invariant norms do not give the valued pth-power error estimate; Algebra.normalizedTrace requires characteristic zero. The present degree-normalized finite trace also covers equal characteristic p."
+  },
+  {
+   "tool": "grep",
+   "query": "trace.*pow|pow.*trace|normalizedTrace",
+   "results": "{\"t\": \"2026-10-24T09:53:56Z\", \"tool\": \"grep\", \"query\": \"trace.*pow|pow.*trace|normalizedTrace\", \"sub\": \"\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/NumberTheory/LucasLehmer.lean\", \"Mathlib/NumberTheory/LucasLehmer.lean\", \"Mathlib/NumberTheory/Cyclotomic/Discriminant.lean\", \"Mathlib/NumberTheory/Cyclotomic/Discriminant.lean\", \"Mathlib/FieldTheory/Minpoly/MinpolyDiv.lean\", \"Mathlib/FieldTheory/Minpoly/MinpolyDiv.lean\", \"Mathlib/FieldTheory/Finite/Trace.lean\", \"Mathlib/FieldTheory/Finite/Trace.lean\"], \"digest\": \"1cab003bda1d1df0\"}\nRead hits: Mathlib/FieldTheory/NormalizedTrace.lean:22,27,28,29,32; Mathlib/LinearAlgebra/Matrix/Charpoly/FiniteField.lean:53 (FiniteField.trace_pow_card), 60 (ZMod.trace_pow_card); Mathlib/FieldTheory/Finite/Trace.lean:49 (algebraMap_trace_eq_sum_pow); Mathlib/RingTheory/Trace/Basic.lean:79 (PowerBasis.trace_gen_eq_nextCoeff_minpoly); other hits concern Lucas-Lehmer, cyclotomic discriminants, power bases, and trace forms.",
+   "date": "2026-10-24",
+   "verdict": "no match: the trace and finite-field identities and invariant norms do not give the valued pth-power error estimate; Algebra.normalizedTrace requires characteristic zero. The present degree-normalized finite trace also covers equal characteristic p."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-analytic-critical-polynomial-minimum",
+  "date": "2026-10-24",
+  "group": "Q23"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Proof (1)--(2), semistable-alteration input in the nearby-cycle branch: ILO Exposé X, Theorem 3.4, Step 3, invoking Temkin 2010, Theorems 1.5 and 1.1 for a semistable multipointed modification. Temkin proof component: Stable reduction over finite-height separably closed valuation fields. Input: Proposition 4.3.3, pp. 29--30; applied componentwise when the smooth generic fibre is disconnected Supporting input: Theorem 2.1.8 and Lemmas 2.1.1, 2.1.2, 2.1.6, pp. 7--10; smooth-centre formulation used in the first substantive paragraph of the proof of Proposition 4.3.3, pp. 29--30. Supporting lemma: Theorem 2.1.10(i)--(iii), printed p. 10; etale form of unramifiedness by Lemma 2.1.6, same page. Supporting input: Theorem 6.3.1(iii), printed pp. 48–49; Cartesian means the degree formula of §6.1, p. 36 and §2.1, p. 9. Supporting input: Lemma 6.1.2(i), pp. 37–38, and type 2/3 clause of Proposition 6.2.4, p. 42, proved pp. 47–48. The former identifies the unrestricted polynomial infimum with the critical coset infimum. Supporting input for critical-polynomial minimization: Agent-supplied coefficient normalization and normalized-trace descent supplement to the first paragraph of the proof of Proposition 6.2.4, printed p. 47; scaling as in Proposition 6.1.4(ii), printed p. 38. The trace-descent assertion is supplied by Q23, not asserted to be a quoted theorem of Temkin.",
+   "via": [
+    "lem-trf-analytic-critical-polynomial-minimum",
+    "lem-trf-analytic-type23-stability",
+    "lem-trf-analytic-uniformization",
+    "lem-trf-valued-curve-etale-parameter",
+    "lem-trf-valuation-strict-semistable-local-uniformization",
+    "lem-trf-valuation-stable-reduction",
+    "lem-trf-temkin-stable-modification",
+    "lem-trf-stable-modification-flat-curve-pair",
+    "lem-trf-dejong-relative-marked-semistable",
+    "lem-trf-relative-marked-nodal-reduction",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-trf-critical-coset-coefficient-normalization",
+  "worker": "stage1",
+  "summary": "Proved normalization, tame finite extension, criticality after scalar extension, and descent of an attained minimum. Reused the existing multiradical Galois-degree, finite ramification and tame-root-envelope statements. One statement-only supporting node isolates the prime-to-p trace Frobenius estimate. The statement is unchanged; the proof is an agent supplement, not attributed to Temkin. Repair of returned head 7d46285bdae: rebased split-owned fields on the current DAG item, re-read all three existing cited statements (unchanged), and made the residue-field injection and the trace lemma hypotheses explicit. The supporting node and its logged searches are retained.",
+  "blueprint": "The recorded auxiliary Temkin branch of lem-trf-local-term-locality, proof (1)--(2), as specified by blueprint.from.place; this item supplies coefficient normalization for analytic-critical-polynomial-minimum. The latest blueprint instead states the contracting-correspondence theorem directly; no unit or chapter route is changed here.",
+  "tool_uses": [
+   {
+    "node": "lem-sfb-multiradical-galois-degree",
+    "why": "Generic field-theoretic tool: one radical gives a Galois extension of degree dividing p-1 without assuming the binomial irreducible. This unit has no separate statement for that field-theoretic fact."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sfb-multiradical-galois-degree"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q103-07be6a9d5",
+  "group": "Q103",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q103-07be6a9d5 (reviewer sub-agent of L); spot-checked: Replayed the recorded independent PASS from local/verdicts/1/07be6a9d58551201b767305ce653edd4f7faa951.json after maintenance restored this assigned item's reach in coord/preopen.txt. Original independent review: PASS, no fixes. Mathematical content: the item and the new node lem-trf-prime-to-p-trace-frobenius-bound are, after JSON normalisation, the same as at the previously approved head da754dbda3f7. That head was refused at landing (svc.log 18:30 NOT MERGED, 'completed in this project's DAG but not ...'), so it is not A7. The only new content is a report section on the landing gate. I re-read the mathematics myself. Step 1: compatibility of the absolute values makes the residue map k̃→F̃ injective, so char F̃=p. lem-sfb-multiradical-galois-degree applies with n=p-1, which is invertible because its residue is -1; X^{p-1}-1 splits over the algebraically closed k, and no irreducibility is assumed. So E/F is Galois with [E:F] dividing p-1, and a=0 gives degree 1. Step 2: the finite ramification calculus gives completeness. Tame-root-envelope (b) holds with U=F (the identity on F° is finite étale and μ_{p-1}⊂k), so (a) gives tameness. Step 3: with d=αc and e=α^p e', a/α^{p-1}=A, including the case a=0. I checked both directions. Step 4: T(w)=b+c^p-ac+ε with |pc^p|≤|p||d|^p<s and |ε|≤max(|e|,|p||d|^p)<s, both strict, so T(w)∈C. Every hypothesis of the trace lemma is supplied by steps 1 and 2. Step 5: the infimum over D is s, so C' is critical, and an attained minimum descends because s≤|T(w)|≤s. New node: the statement is true. The conjugates are isometric and |n|=1. Then n^p(T(x^p)-T(x)^p)=n^{p-1}Σx_σ^p-(Σx_σ)^p is p times an integer polynomial that is homogeneous of degree p: the mixed multinomial coefficients are divisible by p, and the pure coefficient is n^{p-1}-1, divisible by p by Fermat. Tested n=1, x=0, equal and mixed characteristic, and p=2. The node is general and self-contained, not a restatement of the item. An rg of the DAG found no duplicate (only unrelated curve-trace nodes), and Mathlib's normalizedTrace requires CharZero. The Temkin PDF is absent locally (WANTED); the trace descent is labelled as an agent supplement. Accepted tool use: lem-sfb-multiradical-galois-degree. Maintainer: the repeated refusal is a queue/landing gate (the item is missing from the stage1() set), not a mathematical fault."
+ }
+}

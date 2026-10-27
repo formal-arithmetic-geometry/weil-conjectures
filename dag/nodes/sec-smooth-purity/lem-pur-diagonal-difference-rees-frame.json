@@ -1,0 +1,234 @@
+{
+ "id": "lem-pur-diagonal-difference-rees-frame",
+ "kind": "statement",
+ "title": "Coordinate differences and the homogeneous normal frame of an etale diagonal",
+ "statement": "Let $k$ be a field and let $U,V$ be affine finite-type $k$-schemes [def-pc-scheme]. Let $h:U\\to V$ be smooth separated of pure relative dimension $d\\geq0$ [def-sbc-smooth-morphisms] [def-weil-scheme-morphism-properties], and let $u:U\\to\\mathbf A^d_V$ be an etale $V$-map [def-weil-etale-morphism] [def-sbc-affine-space]. Put $W=U\\times_VU$, $p=p_1$, and $\\Delta=\\Delta_h$ [def-pc-fibre-product]. Write $x_i,y_i$ for the two pullbacks of the ordered affine coordinates. There is an open neighbourhood $O\\subseteq W$ of $\\Delta(U)$ and a section $s:U\\to O$ with $\\iota s=\\Delta$ such that the difference map $e:O\\to\\mathbf A^d_U$, with coordinates $y_i-x_i$, is etale over $U$. The square with top map $s$, bottom map the zero section $0:U\\to\\mathbf A^d_U$, left map $1_U$ and right map $e$ is Cartesian. In particular its zero fibre is exactly $s(U)$ scheme-theoretically; injectivity of $u$ is not assumed.\n\nLet $\\mathcal I$ be the ideal of $\\Delta$ [def-sbc-closed-immersion-ideal-sheaf], let $\\mathcal E=\\mathcal I/\\mathcal I^2$, and use the canonical graded multiplication map $\\psi:\\operatorname{Sym}(\\mathcal E)\\to\\bigoplus_m\\mathcal I^m/\\mathcal I^{m+1}$ of [lem-pur-conormal-graded-algebra]. Then $\\psi$ is an isomorphism, and there is the normalized conormal isomorphism\n$$\\mathcal E\\xrightarrow{\\sim}\\Omega_{U/V},\\qquad[y(a)-x(a)]\\longmapsto da,$$\nwhere the relative differential sheaf is [def-sc-relative-differential-sheaf]. The classes $[y_i-x_i]$ correspond to the ordered basis $u^*dt_i$. Relative spectrum of $\\psi$ and this basis fixes a specific isomorphism $\\phi_N:N_{\\Delta/W}\\xrightarrow{\\sim}\\mathbf A^d_U$ over $U$, preserving augmentation zero sections [def-pur-normal-bundle] [def-asd-vector-bundle-zero-section].\n\nFor the extended-Rees deformation [def-pur-dnc-section-family], use any comparison satisfying [def-pur-rees-cone-normalization], whose existence is [lem-pur-rees-cone-normalized-existence]. Its zero-fibre coordinates, followed by $\\phi_N$, are precisely $(y_i-x_i)/t$ modulo $t$; the degree-one formula fixes the same map for every normalized comparison. The map of deformations induced by $e$ has coordinates $t\\mapsto t$, $v_i\\mapsto(y_i-x_i)/t$, is etale, and has endpoint maps $e$ at $1$ and $\\phi_N$ at $0$. These maps agree on smaller centred neighbourhoods and on open restriction. Under change of etale chart their normal maps change by the induced differential frame map. For $d=0$, one can take $O\\cong U$, $\\mathcal E=0$, and $\\operatorname{Sym}(0)=\\mathcal O_U$; the displayed maps are the identity data. Empty $U$ is allowed.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sp-orientation/sk-prop-sp-orientation-charts.proof.md",
+  "place": "Composition-coherence Step 1, compatible etale normal forms and identity on standard pairs; chart proof Steps 1–2 and deformation map in Step 3; returned Steps 2 and 5, geometric part"
+ },
+ "stmt_deps": [
+  "def-asd-vector-bundle-zero-section",
+  "def-pc-fibre-product",
+  "def-pc-scheme",
+  "def-pur-dnc-section-family",
+  "def-pur-normal-bundle",
+  "def-pur-rees-cone-normalization",
+  "def-sbc-affine-space",
+  "def-sbc-closed-immersion-ideal-sheaf",
+  "def-sbc-smooth-morphisms",
+  "def-sc-relative-differential-sheaf",
+  "def-weil-etale-morphism",
+  "def-weil-scheme-morphism-properties",
+  "lem-pur-conormal-graded-algebra",
+  "lem-pur-rees-cone-normalized-existence"
+ ],
+ "proof": [
+  {
+   "text": "Construct the signed homogeneous normal frame, and construct its centred etale Rees chart, with all endpoints and affine formulas.",
+   "uses": [
+    "lem-pur-diagonal-difference-normal-frame",
+    "lem-pur-diagonal-difference-centred-chart"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-orientation/sk-prop-sp-orientation-charts.proof.md",
+    "place": "Steps 1–3, composed from the proved intermediate constructions and uniqueness results"
+   }
+  },
+  {
+   "text": "Apply uniqueness on common open restrictions and the matrix change-of-frame theorem to obtain the remaining two clauses of the existential conclusion.",
+   "uses": [
+    "lem-pur-diagonal-difference-chart-restriction",
+    "lem-pur-diagonal-difference-frame-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-orientation/sk-prop-sp-orientation-charts.proof.md",
+    "place": "Steps 1–3, composed from the proved intermediate constructions and uniqueness results"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-pur-diagonal-difference-centred-chart",
+  "lem-pur-diagonal-difference-chart-restriction",
+  "lem-pur-diagonal-difference-frame-change",
+  "lem-pur-diagonal-difference-normal-frame"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-orientation/sk-prop-sp-orientation-charts.proof.md",
+  "place": "Steps 1–3, composed from the proved intermediate constructions and uniqueness results"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Etale coordinate differences on a smooth diagonal give a centred Cartesian zero fibre and a normal cone frame normalized by homogeneous Rees classes",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"StandardEtalePresentation.P\", \"module\": \"Mathlib/RingTheory/Etale/StandardEtale\", \"type\": \"{R : Type u_4} →\\n  {S : Type u_5} →\\n    [inst : CommRing R] →\\n      [inst_1 : CommRing S] → [inst_2 : Algebra R S] → StandardEtalePresentation R S → StandardEtalePair R\", \"doc\": \"Given a standard étale presentation of an algebra $ S $ over a commutative ring $ R $, this function constructs the corresponding standard étale pair, which encodes the polynomial ring over $ R $, a l\"}\n  {\"name\": \"Algebra.IsStandardSmoothOfRelativeDimension.exists_etale_mvPolynomial\", \"module\": \"Mathlib/RingTheory/RingHom/StandardSmooth\", \"type\": \"∀ (n : ℕ) (R : Type u) (S : Type v) [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S]\\n  [Algebra.IsStandardSmoothOfRelativeDimension n R S], ∃ g, g.Etale\", \"doc\": \"If $ S $ is a standard smooth algebra of relative dimension $ n $ over a commutative ring $ R $, then there exists an étale algebra homomorphism $ g : R[x_1, \\\\dots, x_n] \\\\to S $ from the polynomial ri\"}\n  {\"name\": \"StandardEtalePresentation\", \"module\": \"Mathlib/RingTheory/Etale/StandardEtale\", \"type\": \"(R : Type u_4) → (S : Type u_5) → [inst : CommRing R] → [inst_1 : CommRing S] → [Algebra R S] → Type (max u_4 u_5)\", \"doc\": \"A standard étale presentation of an algebra $ S $ over a commutative ring $ R $, providing a way to express $ S $ as a localization of a polynomial ring over $ R $ modulo an ideal, satisfying the nece\"}\n  {\"name\": \"StandardEtalePair\", \"module\": \"Mathlib/RingTheory/Etale/StandardEtale\", \"type\": \"(R : Type u_1) → [CommRing R] → Type u_1\", \"doc\": \"A structure for a commutative ring $ R $ equipped with data defining a standard étale pair, used in the context of étale morphisms in algebraic geometry.\"}\n  {\"name\": \"StandardEtalePresentation.toSubmersivePresentation\", \"module\": \"Mathlib/RingTheory/Etale/StandardEtale\", \"type\": \"{R : Type u_1} →\\n  {S : Type u_2} →\\n    [inst : CommRing R] →\\n      [inst_1 : CommRing S] →\\n        [inst_2 : Algebra R S] → StandardEtalePresentation R S → Algebra.SubmersivePresentation R S (Fin 2) (Fin 2)\", \"doc\": \"Constructs a submersive presentation of an algebra $ S $ over a commutative ring $ R $ using the standard étale presentation with two generators and two relations. This presentation employs the identi\"}\n  {\"name\": \"StandardEtalePair.hasMap_X\", \"module\": \"Mathlib/RingTheory/Etale/StandardEtale\", \"type\": \"∀ {R : Type u_1} [inst : CommRing R] {P : StandardEtalePair R}, P.HasMap P.X\", \"doc\": \"In the standard étale ring extension $ R[X,Y]/(f, Yg - 1) $, the image of the indeterminate $ X $ satisfies $ f(X) = 0 $ and $ g(X) $ is invertible (a unit) in the ring.\"}\n  {\"name\": \"StandardEtalePresentation.toPresentation_σ'\", \"module\": \"Mathlib/RingTheory/Etale/StandardEtale\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S]\\n  (P : StandardEtalePresentation R S) (x : S), P.toPresentation.σ' x = ⋯.choose\", \"doc\": \"For any commutative rings $ R $ and $ S $ with an $ R $-algebra structure on $ S $, and a standard étale presentation $ P $ of $ S $ over $ R $, the function $ \\\\sigma' $ associated to the presentation\"}\n  {\"name\": \"StandardEtalePresentation.hasMap\", \"module\": \"Mathlib/RingTheory/Etale/StandardEtale\", \"type\": \"∀ {R : Type u_4} {S : Type u_5} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S]\\n  (self : StandardEtalePresentation R S), self.HasMap self.x\", \"doc\": \"For any commutative rings $ R $ and $ S $ with an $ R $-algebra structure on $ S $, and a standard étale presentation of $ S $ over $ R $, the element $ x $ in $ S $ corresponding to the polynomial va\"} The differential base-change equivalence is relevant but does not identify the actual diagonal normal cone, the centred zero square, or its homogeneous Rees representatives.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "KaehlerDifferential, Algebra.FormallyEtale",
+   "results": "[loogle] OK 7 hit(s)\n  {\"name\": \"Algebra.FormallyEtale.subsingleton_kaehlerDifferential\", \"module\": \"Mathlib.RingTheory.Etale.Basic\", \"type\": \" {R : Type u} {A : Type v} {inst✝ : CommRing R} {inst✝¹ : CommRing A} {inst✝² : Algebra R A} [self : Algebra.FormallyEtale R A] : Subsingleton Ω[A⁄R]\", \"doc\": \"\"}\n  {\"name\": \"Algebra.FormallyEtale.mk\", \"module\": \"Mathlib.RingTheory.Etale.Basic\", \"type\": \" {R : Type u} {A : Type v} [CommRing R] [CommRing A] [Algebra R A] (subsingleton_kaehlerDifferential : Subsingleton Ω[A⁄R]) (subsingleton_h1Cotangent : Subsingleton (Algebra.H1Cotangent R A)) : Algebra.FormallyEtale R A\", \"doc\": \"\"}\n  {\"name\": \"Algebra.formallyEtale_iff\", \"module\": \"Mathlib.RingTheory.Etale.Basic\", \"type\": \" (R : Type u) (A : Type v) [CommRing R] [CommRing A] [Algebra R A] : Algebra.FormallyEtale R A ↔ Subsingleton Ω[A⁄R] ∧ Subsingleton (Algebra.H1Cotangent R A)\", \"doc\": \"\"}\n  {\"name\": \"KaehlerDifferential.tensorKaehlerEquivOfFormallyEtale\", \"module\": \"Mathlib.RingTheory.Etale.Kaehler\", \"type\": \" (R : Type u_1) (S : Type u_2) (T : Type u_3) [CommRing R] [CommRing S] [CommRing T] [Algebra R S] [Algebra R T] [Algebra S T] [IsScalarTower R S T] [Algebra.FormallyEtale S T] : TensorProduct S T Ω[S⁄R] ≃ₗ[T] Ω[T⁄R]\", \"doc\": \"The canonical isomorphism `T ⊗[S] Ω[S⁄R] ≃ₗ[T] Ω[T⁄R]` for `T` a formally étale `S`-algebra.\\nAlso see `S ⊗[R] Ω[A⁄R] ≃ₗ[S] Ω[S ⊗[R] A⁄S]` at `KaehlerDifferential.tensorKaehlerEquiv`.\"}\n  {\"name\": \"KaehlerDifferential.isBaseChange_of_formallyEtale\", \"module\": \"Mathlib.RingTheory.Etale.Kaehler\", \"type\": \" (R : Type u_1) (S : Type u_2) (T : Type u_3) [CommRing R] [CommRing S] [CommRing T] [Algebra R S] [Algebra R T] [Algebra S T] [IsScalarTower R S T] [Algebra.FormallyEtale S T] : IsBaseChange T (KaehlerDifferential.map R R S T)\", \"doc\": \"\"}\n  {\"name\": \"KaehlerDifferential.tensorKaehlerEquivOfFormallyEtale_apply\", \"module\": \"Mathlib.RingTheory.Etale.Kaehler\", \"type\": \" (R : Type u_1) (S : Type u_2) (T : Type u_3) [CommRing R] [CommRing S] [CommRing T] [Algebra R S] [Algebra R T] [Algebra S T] [IsScalarTower R S T] [Algebra.FormallyEtale S T] (x : TensorProduct S T Ω[S⁄R]) : (KaehlerDifferential.tensorKaehlerEquivOfFormallyEtale R S T) x = (KaehlerDifferential.map\", \"doc\": \"\"}\n  {\"name\": \"KaehlerDifferential.tensorKaehlerEquivOfFormallyEtale_symm_D_algebraMap\", \"module\": \"Mathlib.RingTheory.Etale.Kaehler\", \"type\": \" (R : Type u_1) (S : Type u_2) (T : Type u_3) [CommRing R] [CommRing S] [CommRing T] [Algebra R S] [Algebra R T] [Algebra S T] [IsScalarTower R S T] [Algebra.FormallyEtale S T] (s : S) : (KaehlerDifferential.tensorKaehlerEquivOfFormallyEtale R S T).symm ((KaehlerDifferential.D R T) ((algebraMap S T)\", \"doc\": \"\"} The differential base-change equivalence is relevant but does not identify the actual diagonal normal cone, the centred zero square, or its homogeneous Rees representatives.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "normalCone|ReesConeNormalized|conormal.*frame",
+   "results": "[grep] OK 0 hit(s) The differential base-change equivalence is relevant but does not identify the actual diagonal normal cone, the centred zero square, or its homogeneous Rees representatives.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Normal bundle of smooth diagonal in prescribed etale coordinates with Rees zero fibre degree one normalization",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.normalizationDesc\", \"module\": \"Mathlib.AlgebraicGeometry.Normalization\", \"type\": \"(H : f = f₁ ≫ f₂) : f.normalization ⟶ T\", \"doc\": \"A morphism from the normalization of a scheme morphism $ f: X \\to Y $ to another scheme $ T $, constructed as the colimit in the category of schemes of a diagram involving the affine Zariski site of $ \"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.instIsIsoToNormalizationOfIsIntegralHom\", \"module\": \"Mathlib.AlgebraicGeometry.Normalization\", \"type\": \"[IsIntegralHom f] : IsIso f.toNormalization\", \"doc\": \"For any integral morphism $ f: X \\to Y $ of schemes, the normalization morphism from $ X $ to the normalization of $ f $ is an isomorphism.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.normalization\", \"module\": \"Mathlib.AlgebraicGeometry.Normalization\", \"type\": \": Scheme\", \"doc\": \"The normalization of a scheme morphism $ f: X \\to Y $ is defined as the colimit in the category of schemes of a diagram constructed by composing the opposite of the affine Zariski site inclusion functo\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.fromNormalization\", \"module\": \"Mathlib.AlgebraicGeometry.Normalization\", \"type\": \": f.normalization ⟶ Y\", \"doc\": \"The canonical morphism from the normalization of a scheme morphism $ f: X \\to Y $ to the target scheme $ Y $, constructed as the universal morphism induced by the colimit definition of normalization in\"}\n  {\"name\": \"Algebra.instEtaleOfIsStandardSmoothOfRelativeDimensionOfNatNat\", \"module\": \"Mathlib.RingTheory.Smooth.StandardSmoothCotangent\", \"type\": \"[IsStandardSmoothOfRelativeDimension 0 R S] : Etale R S\", \"doc\": \"If $ S $ is a standard smooth algebra of relative dimension 0 over a commutative ring $ R $, then $ S $ is an étale algebra over $ R $.\"}\n  {\"name\": \"Algebra.Etale.iff_isStandardSmoothOfRelativeDimension_zero\", \"module\": \"Mathlib.RingTheory.Smooth.StandardSmoothOfFree\", \"type\": \": Etale R S ↔ IsStandardSmoothOfRelativeDimension 0 R S\", \"doc\": \"An $ R $-algebra $ S $ is étale if and only if it is a standard smooth algebra of relative dimension $ 0 $ over $ R $.\"}\n  {\"name\": \"AlgebraicGeometry.IsEtale.instIsSmooth\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Etale\", \"type\": \"[IsEtale f] : IsSmooth f\", \"doc\": \"Every étale morphism of schemes is a smooth morphism. Specifically, if a morphism $ f: X \\to Y $ of schemes is étale (i.e., smooth of relative dimension 0), then it satisfies the conditions of being a \"}\n  {\"name\": \"AlgebraicGeometry.IsEtale\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Etale\", \"type\": \"{X Y : Scheme.{u}} (f : X ⟶ Y)\", \"doc\": \"A morphism $ f: X \\\\to Y $ of schemes is étale if it is smooth of relative dimension 0.\"} The differential base-change equivalence is relevant but does not identify the actual diagonal normal cone, the centred zero square, or its homogeneous Rees representatives.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The associated graded of the diagonal ideal is the symmetric algebra of differentials and coordinate differences divided by deformation parameter give normal coordinates",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"Algebra.Presentation.differentialsRelations_G\", \"module\": \"Mathlib/Algebra/Module/Presentation/Differentials\", \"type\": \"∀ {R : Type u} {S : Type v} {ι : Type w} {σ : Type t} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S]\\n  (pres : Algebra.Presentation R S ι σ), pres.differentialsRelations.G = ι\", \"doc\": \"For a commutative ring $ R $ and a polynomial ring $ R[\\\\sigma] $, the module of Kähler differentials $ \\\\Omega_{R[\\\\sigma]/R} $ has a presentation where the generators $ G $ of the relations are given b\"}\n  {\"name\": \"Algebra.Presentation.differentialsSolution\", \"module\": \"Mathlib/Algebra/Module/Presentation/Differentials\", \"type\": \"{R : Type u} →\\n  {S : Type v} →\\n    {ι : Type w} →\\n      {σ : Type t} →\\n        [inst : CommRing R] →\\n          [inst_1 : CommRing S] →\\n            [inst_2 : Algebra R S] → (pres : Algebra.Presentation R S ι σ) → pres.differentialsRelations.Solution Ω[S⁄R]\", \"doc\": \"A solution to the differential relations module $\\\\Omega_{S/R}$ for an $R$-algebra presentation $\\\\text{pres}$, assigning each generator $g$ to its Kähler differential $d(\\\\text{pres.val } g)$ and verify\"}\n  {\"name\": \"Algebra.Presentation.differentials.comm₂₃\", \"module\": \"Mathlib/Algebra/Module/Presentation/Differentials\", \"type\": \"∀ {R : Type u} {S : Type v} {ι : Type w} {σ : Type t} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S]\\n  (pres : Algebra.Presentation R S ι σ),\\n  pres.toExtension.toKaehler ∘ₗ ↑pres.cotangentSpaceBasis.repr.symm = pres.differentialsSolution.π\", \"doc\": \"For an $R$-algebra presentation $\\\\text{pres}$, the composition of the Kähler differential map $\\\\text{pres.toExtension.toKaehler}$ with the inverse of the cotangent space basis representation $\\\\text{pr\"}\n  {\"name\": \"Algebra.Generators.cotangentCompAwaySec\", \"module\": \"Mathlib/RingTheory/Extension/Cotangent/LocalizationAway\", \"type\": \"{R : Type u_1} →\\n  {S : Type u_2} →\\n    {T : Type u_3} →\\n      {ι : Type u_4} →\\n        [inst : CommRing R] →\\n          [inst_1 : CommRing S] →\\n            [inst_2 : Algebra R S] →\\n              [inst_3 : CommRing T] →\\n                [inst_4 : Algebra R T] →\\n                  [inst_5 : Algebra S T]\", \"doc\": \"A linear map on the cotangent module of a localized algebra extension, constructed using the basis generated by the Jacobian equivalence for the localization at an element $ r $. This map sends each b\"}\n  {\"name\": \"Algebra.Presentation.differentialsSolution_isPresentation\", \"module\": \"Mathlib/Algebra/Module/Presentation/Differentials\", \"type\": \"∀ {R : Type u} {S : Type v} {ι : Type w} {σ : Type t} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S]\\n  (pres : Algebra.Presentation R S ι σ), pres.differentialsSolution.IsPresentation\", \"doc\": \"The solution to the Kähler differentials relations for an $ R $-algebra presentation $ \\\\text{pres} $ is a valid presentation, meaning the assigned generators satisfy the relations and define the modul\"}\n  {\"name\": \"Algebra.PreSubmersivePresentation.cotangentComplexAux\", \"module\": \"Mathlib/RingTheory/Smooth/StandardSmoothCotangent\", \"type\": \"{R : Type u_1} →\\n  {S : Type u_2} →\\n    {ι : Type u_3} →\\n      {σ : Type u_4} →\\n        [inst : CommRing R] →\\n          [inst_1 : CommRing S] →\\n            [inst_2 : Algebra R S] →\\n              [Finite σ] → (P : Algebra.PreSubmersivePresentation R S ι σ) → P.toExtension.Cotangent →ₗ[S] σ → S\", \"doc\": \"The linear map from the cotangent module of the algebra extension to the space of functions $\\\\sigma \\\\to S$, constructed as the composition of the cotangent complex map, the basis representation, a lin\"}\n  {\"name\": \"Algebra.Generators.cotangentSpaceBasis_apply\", \"module\": \"Mathlib/RingTheory/Extension/Cotangent/Basic\", \"type\": \"∀ {R : Type u} {S : Type v} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S] {ι : Type w}\\n  (P : Algebra.Generators R S ι) (i : ι),\\n  P.cotangentSpaceBasis i = 1 ⊗ₜ[P.Ring] (KaehlerDifferential.D R P.Ring) (MvPolynomial.X i)\", \"doc\": \"For a commutative ring $ R $ and a set of generators $ \\\\iota $, the basis element $ dX_i $ of the cotangent space of the algebra extension $ R[\\\\iota] $ is given by the tensor product $ 1 \\\\otimes dX_i \"}\n  {\"name\": \"Algebra.Generators.repr_CotangentSpaceMap\", \"module\": \"Mathlib/RingTheory/Extension/Cotangent/Basic\", \"type\": \"∀ {R : Type u} {S : Type v} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S] {ι : Type w}\\n  {P : Algebra.Generators R S ι} {R' : Type u'} {S' : Type v'} {ι' : Type w'} [inst_3 : CommRing R']\\n  [inst_4 : CommRing S'] [inst_5 : Algebra R' S'] {P' : Algebra.Generators R' S' ι'} [inst_6 \", \"doc\": \"For algebra homomorphisms $ f: P \\to P' $ between algebras with generators, the representation of the cotangent space basis element $ j $ in $ P' $, obtained by applying the cotangent map induced by $ \"} The differential base-change equivalence is relevant but does not identify the actual diagonal normal cone, the centred zero square, or its homogeneous Rees representatives.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "normalCone|ReesConeNormalized|conormal.*frame",
+   "results": "Search succeeded: 0 hits; .  Hits do not state the full centred-diagonal/conormal/Rees-normalization theorem.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Etale coordinates identify the normal bundle of a smooth diagonal and its deformation to the normal cone by coordinate differences divided by the parameter",
+   "results": "Search succeeded: 8 hits; Algebra.instEtaleOfIsStandardSmoothOfRelativeDimensionOfNatNat, AlgebraicGeometry.IsEtale, AlgebraicGeometry.IsEtale.instIsSmooth, AlgebraicGeometry.Scheme.Etale, Algebra.FormallyEtale.mk, AlgebraicGeometry.IsEtale.instFormallyUnramified, Algebra.FormallyEtale.instFormallySmooth, Algebra.FormallyEtale.iff_unramified_and_smooth.  Hits do not state the full centred-diagonal/conormal/Rees-normalization theorem.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "KaehlerDifferential, Algebra.FormallyEtale",
+   "results": "Search succeeded: 7 hits; Algebra.FormallyEtale.subsingleton_kaehlerDifferential, Algebra.FormallyEtale.mk, Algebra.formallyEtale_iff, KaehlerDifferential.tensorKaehlerEquivOfFormallyEtale, KaehlerDifferential.isBaseChange_of_formallyEtale, KaehlerDifferential.tensorKaehlerEquivOfFormallyEtale_apply, KaehlerDifferential.tensorKaehlerEquivOfFormallyEtale_symm_D_algebraMap.  Hits do not state the full centred-diagonal/conormal/Rees-normalization theorem.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An etale chart on a smooth separated scheme identifies the diagonal normal cone via coordinate differences and induces an etale morphism of extended Rees deformations",
+   "results": "Search succeeded: 8 hits; AlgebraicGeometry.Scheme.Etale, Algebra.IsStandardSmoothOfRelativeDimension.exists_etale_mvPolynomial, AlgebraicGeometry.IsEtale, AlgebraicGeometry.IsEtale.instIsSmooth, AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified, AlgebraicGeometry.IsEtale.instFormallyUnramified, StandardEtalePair.instEtaleRing, AlgebraicGeometry.IsEtale.of_comp.  Hits do not state the full centred-diagonal/conormal/Rees-normalization theorem.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The normal cone of the diagonal of a smooth morphism is the tangent bundle and an etale coordinate frame induces the homogeneous coordinate formula in deformation to the normal cone",
+   "results": "Search succeeded: 8 hits; Algebra.IsStandardSmoothOfRelativeDimension.exists_etale_mvPolynomial, StandardEtalePresentation.toPresentation_σ', Algebra.instEtaleOfIsStandardSmoothOfRelativeDimensionOfNatNat, StandardEtalePresentation.P, StandardEtalePresentation, StandardEtalePair.hasMap_X, RingHom.IsStandardSmoothOfRelativeDimension.exists_etale_mvPolynomial, StandardEtalePresentation.toSubmersivePresentation.  Hits do not state the full centred-diagonal/conormal/Rees-normalization theorem.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "tensorKaehlerEquivOfFormallyEtale|exists_etale_mvPolynomial",
+   "results": "Search succeeded: 12 hits; Mathlib/RingTheory/RingHom/StandardSmooth.lean, Mathlib/RingTheory/RingHom/StandardSmooth.lean, Mathlib/RingTheory/RingHom/StandardSmooth.lean, Mathlib/RingTheory/RingHom/StandardSmooth.lean, Mathlib/RingTheory/RingHom/StandardSmooth.lean, Mathlib/RingTheory/Smooth/Fiber.lean, Mathlib/RingTheory/Etale/Kaehler.lean, Mathlib/RingTheory/Etale/Kaehler.lean.  Read Mathlib/RingTheory/Etale/Kaehler.lean:38-50 and RingTheory/RingHom/StandardSmooth.lean:200-210. These cover only differential base change and existence of etale charts, not the centred square or Rees-normalized map.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-pur-diagonal-dnc-chart-normalization",
+  "date": "2026-10-22",
+  "group": "Q94"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-thm-smooth-purity",
+ "blueprint": {
+  "from": {
+   "node": "thm-pur-composition-coherence",
+   "place": "Composition-coherence Step 1, compatible etale normal forms and identity on standard pairs; chart proof Steps 1–2 and deformation map in Step 3; returned Steps 2 and 5, geometric part",
+   "via": [
+    "lem-pur-diagonal-dnc-chart-normalization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-pur-diagonal-difference-rees-frame",
+  "worker": "stage1",
+  "summary": "Proved the centred Cartesian zero-fibre square by removing the clopen extra fibre; computed the canonical conormal algebra by flat base change and monomials; fixed the positive differential sign with the normalized derivation; constructed the etale Rees map and checked both endpoints, comparison independence, restriction, coordinate changes, rank zero and empty schemes. Reused existing nodes throughout; no new nodes or statement changes.",
+  "blueprint": "thm-pur-composition-coherence proof Step 1, compatible etale normal forms and identity on standard pairs, via lem-pur-diagonal-dnc-chart-normalization; source orientation-charts proof Steps 1-3.",
+  "tool_uses": [
+   {
+    "node": "lem-pur-conormal-algebra-flat-base-change",
+    "why": "Generic geometric/algebraic tool used with its stated hypotheses in steps 3; supplies the explicit Flat base change of the conormal algebra of a closed immersion interface, which the unit does not replace."
+   },
+   {
+    "node": "lem-pur-conormal-cone-hom-ext",
+    "why": "Generic geometric/algebraic tool used with its stated hypotheses in steps 6; supplies the explicit Degree-one uniqueness for maps to conormal spectra interface, which the unit does not replace."
+   },
+   {
+    "node": "lem-pur-rees-associated-graded-chart",
+    "why": "Generic geometric/algebraic tool used with its stated hypotheses in steps 7; supplies the explicit Homogeneous chart for the extended Rees zero fibre interface, which the unit does not replace."
+   },
+   {
+    "node": "lem-pur-rees-cone-normalized-existence",
+    "why": "Generic geometric/algebraic tool used with its stated hypotheses in steps 6; supplies the explicit Homogeneous-normalized Rees cone comparison exists interface, which the unit does not replace."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pur-conormal-algebra-flat-base-change",
+  "lem-pur-conormal-cone-hom-ext",
+  "lem-pur-rees-associated-graded-chart",
+  "lem-pur-rees-cone-normalized-existence"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q141-52507fd3e",
+  "group": "Q141",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q141-52507fd3e (reviewer sub-agent of L); spot-checked: I read all 8 steps and every cited statement, and checked them against the main-20261015 source sk-prop-sp-orientation-charts.proof.md Steps 1-3. The source's e×e centre square is the item's coordinate-difference zero fibre F=U×_{A^d}U. No new nodes; the statement is unchanged; no SGA. Step 2 (the étale section of affine separated r is clopen, O=W∖C) gives the Cartesian square scheme-theoretically; checked at d=0 and on a disconnected double cover. Step 3: the flat conormal-algebra base change applies (e is étale so flat, centre map 1_U), and the monomial gr computation holds over any ring. Step 4 identifies the canonical ψ through the degree-one formula and the symmetric-algebra universal property. Step 5: the sign D(a)=[p2*a−p1*a] matches [y(a)−x(a)], and the affine comparison applies with U,V affine. Step 6: independence of q comes from cone-hom-ext, not from uniqueness in the existence node. Step 7: the t=1 quotient is R and the t=0 endpoint is φ_N by the degree-one gr chart. Step 8: the localization equality, the frame change via M, and the d=0 and empty cases all hold. The four off-route tools (conormal flat base change, cone-hom-ext, Rees gr chart, normalized existence) are generic interfaces already listed in tool_uses; I accept them. No duplicate found (lem-pur-chart-normal-differential is a different pre-existing unsplit e×e node). FIX (C1/C4): Step 7 applied lem-pur-dnc-etale-rees-chart, which needs an étale ring map A[z]→R, from an étale scheme morphism Spec R→O→Spec A[z] without citing the affine criterion. I added lem-weil-pbc-etale-ring-map-iff-etale-affine (Mathlib leaf, on route) and lem-weil-pbc-etale-composition-cancellation to Step 7's uses (the first also to proof_deps) and wrote the étale composite out in the step text. Fixed file: fixes/dag/nodes/sec-smooth-purity/lem-pur-diagonal-difference-rees-frame.json.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.DiagonalDifferenceReesFrame",
+  "declaration": "AlgebraicGeometry.DiagonalDifferenceReesFrame.diagonal_difference_rees_frame",
+  "declarations": [
+   "AlgebraicGeometry.DiagonalDifferenceReesFrame.diagonal_difference_rees_frame"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/DiagonalDifferenceReesFrame.lean",
+  "statement": "theorem diagonal_difference_rees_frame (k : Type u) [Field k]\n    {U V : Scheme.{u}} [IsAffine U] [IsAffine V]\n    (aU : U ⟶ Spec (.of k)) (aV : V ⟶ Spec (.of k))\n    [LocallyOfFiniteType aU] [LocallyOfFiniteType aV]\n    (d : ℕ) (h : U ⟶ V) [IsSeparated h] [SmoothOfRelativeDimension d h]\n    (hk : h ≫ aV = aU)\n    (c : U ⟶ AffineSpace (ULift.{u} (Fin d)) V) [Etale c]\n    (hc : c ≫ (AffineSpace (ULift.{u} (Fin d)) V ↘ V) = h) :\n    ∃ N : NormalFrame d h (fun i ↦ c.appTop (AffineSpace.coord V i)),\n      Nonempty (CentredChart d h (fun i ↦ c.appTop (AffineSpace.coord V i)) N) ∧\n      (∀ (C C' : CentredChart d h (fun i ↦ c.appTop (AffineSpace.coord V i)) N)\n        (T : (pullback h h).Opens) (ht : T ≤ C.O) (ht' : T ≤ C'.O),\n        ((pullback.diagonal h).ker.deformationSpace).homOfLE\n            ((pullback.diagonal h).ker.deformationSpaceProj.preimage_mono ht) ≫\n              C.deformation =\n          ((pullback.diagonal h).ker.deformationSpace).homOfLE\n            ((pullback.diagonal h).ker.deformationSpaceProj.preimage_mono ht') ≫\n              C'.deformation) ∧\n      (∀ (c' : U ⟶ AffineSpace (ULift.{u} (Fin d)) V) [Etale c']\n        (_hc' : c' ≫ (AffineSpace (ULift.{u} (Fin d)) V ↘ V) = h)\n        (N' : NormalFrame d h (fun i ↦ c'.appTop (AffineSpace.coord V i))),\n        ∃ M H : Matrix (Fin d) (Fin d) Γ(U, ⊤),\n          M * H = 1 ∧ H * M = 1 ∧\n          (∀ j : Fin d,\n            h.relativeDifferentialsDerivation.d (X := op ⊤)\n                (c'.appTop (AffineSpace.coord V (ULift.up j))) =\n              ∑ i : Fin d, M j i • h.relativeDifferentialsDerivation.d (X := op ⊤)\n                (c.appTop (AffineSpace.coord V (ULift.up i)))) ∧\n          (∀ j : Fin d,\n            N'.normal.hom.appTop (AffineSpace.coord U (ULift.up j)) =\n              ∑ i : Fin d,\n                (PurityNormalBundle.projection (pullback.diagonal h)).appTop (M j i) *\n                  N.normal.hom.appTop (AffineSpace.coord U (ULift.up i))))",
+  "branch": "sheaf-dag",
+  "by": "Q79",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "NormalFrame, CentredChart and CentredChart.map moved verbatim to the publicly imported DiagonalDifferenceFrameData; their Lean attachment is def-pur-diagonal-difference-frame-data. The theorem signature is unchanged."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-e4cb5d9d3",
+  "group": "Q79",
+  "result": "pass",
+  "note": "Read item node, source Steps 1-3, all 14 stmt_dep records and the exact live declarations (ConormalGradedAlgebra.symmetricComparison/piece/power/representative, coneAlgebraIso, ReesConeNormalized, PurityNormalBundle.normalCone/projection/zeroSection, Ideal.deformationSpace/reesPresheaf/normalConeToDeformationSpace, Scheme.Hom.deformationSpaceProj/OneFibre, AffineSpace.homOfVector/zeroSection/oneSection). Every hypothesis matches the node with no extras. The conclusion covers the centred Cartesian zero square (IsPullback s 𝟙 e 0), étaleness, ψ an isomorphism, the normalized conormal iso with sign y−x, the u*dt_i frame, φ_N pinned by coordinates/over/zero-section, independence from the normalized comparison, the Rees chart formulas t↦t and v_i↦f_i·T⁻¹, the restriction model to D_s O (pinned because t is a non-zero-divisor), both endpoints, agreement on neighbourhoods, the chart-change matrix (no transpose) and the d=0 clauses. Empty U is covered. No hollow data: all structure fields are pinned and CentredChart.map is a real composite. Statement field verbatim; docstrings carry source places and all 8 steps; sorry only; required plain proof-dep imports. No duplicate: the downstream parent's chartCoordinateDifferences is the same expression written inline, and the item cannot import its own citer. Both report sections present. No file changed, so no compile."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-0b30f",
+  "group": "U1",
+  "result": "pass",
+  "landing": "20261025T164427-L-1012932",
+  "kind": "interface",
+  "note": "independent cc review: item theorem signature vs live clone (identical); moved NormalFrame/CentredChart/CentredChart.map vs live text (byte-identical, public imports kept in FrameData); new nodes' proof_deps vs module imports; 0 importers in live"
+ }
+}

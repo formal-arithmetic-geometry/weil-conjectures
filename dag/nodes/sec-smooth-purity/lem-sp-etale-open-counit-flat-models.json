@@ -1,0 +1,417 @@
+{
+ "id": "lem-sp-etale-open-counit-flat-models",
+ "kind": "statement",
+ "title": "Flat input models and the specified etale open coefficient-counit equation",
+ "statement": "Fix a field $k$ of characteristic $p>0$ and a prime $\\ell\\ne p$. Let $j:U\\hookrightarrow X$ be a quasi-compact open immersion of separated finite-type $k$-schemes [sk-def-sfb-dc-setting, def-weil-open-immersion]. Let $\\varphi:A\\to B$ be a unital map of finite commutative rings annihilated by powers of $\\ell$. Write $\\mathcal C^t_{T,R}=D^b_{ctf}(T_t,R)$ for the full subcategory of the ordinary constant-$R$ module derived category with bounded constructible cohomology and finite Tor amplitude, where $t=e,p$ denotes the small etale or pro-etale site: tensor with every degree-zero module sheaf has cohomology in a fixed finite interval [def-weil-pbc-derived-categories, def-weil-pbc-proetale-modules, def-weil-pbc-etale-constructible-sheaf, def-weil-proetale-constructible-sheaf, def-weil-proetale-tor-amplitude]. Write $C_T^R=\\nu_T^*$ for exact site comparison, $T_T^t=-\\otimes^L_{A_T}B_T$, $J_R^t=Dj_{!,R}^t$, and $U_R^t=j_R^{t,*}$ for exact restriction [def-weil-pbc-site-comparison-morphism, det-sp-scalar-extension-functor, lem-pur-derived-change-of-rings, def-weil-pbc-extension-by-zero, def-weil-extension-by-zero, def-weil-proetale-inverse-image].\nThe functors $J_R^t,U_R^t$ and $T_T^t$ preserve these finite-Tor constructible subcategories for $R=A,B$, and $C_T^R$ gives equivalences between them. Every $M\\in\\mathcal C^p_{X,A}$ is isomorphic to $C_X^AK$ with $K\\in\\mathcal C^e_{X,A}$. If $K$ has Tor amplitude in $[a,b]$, it has a representative $P$, zero outside $[a,b]$, whose terms are flat constructible sheaves. The restricted complex $U_A^eP$, the extended complex $J_A^eU_A^eP$, their site pullbacks, and their ordinary scalar extensions to $B$ are bounded K-flat complexes with flat terms, computing the corresponding derived operations [def-pc-flat-sheaf-modules, def-pc-kflat-complex].\nLet $v_R^e:J_R^eU_R^e\\to1$ be the actual degreewise evaluation counit, given by $s\\mapsto s$ on each extension summand and zero on an empty summand [lem-weil-pbc-extension-by-zero-adjunction]. Let $\\beta_j:T_X^eJ_A^e\\xrightarrow{\\sim}J_B^eT_U^e$ be the specified compact-support coefficient map for the identity-proper-factor compactification of $j$ [lem-sp-et-proet-coefficient-compatibility], and $a_j^e:T_U^eU_A^e\\xrightarrow{\\sim}U_B^eT_X^e$ the inverse of the canonical K-flat scalar/pullback comparison [def-pur-etale-scalar-pullback-iso]. The specified $\\beta_j$ on $P$ is the summandwise tensor comparison. On every $K\\in\\mathcal C^e_{X,A}$,\n$$v_{B,T_X^eK}^e\\circ J_B^e(a_{j,K}^e)\\circ\\beta_j(U_A^eK)=T_X^e(v_{A,K}^e).$$\nAll these assertions hold without flatness or finite projective dimension of $B$ over $A$.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-reduction/sk-lem-sp-reduction-exceptional.proof.md",
+  "place": "Locality: extension by zero commutes with extension of scalars; finite-Tor domain and etale summand calculation (returned counit split Steps 1 and 4); Stacks Tag 0GL6, more-etale.tex, remark-Rf-lower-shriek-change-of-rings; bounded-flat normalization is an agent refinement"
+ },
+ "stmt_deps": [
+  "sk-def-sfb-dc-setting",
+  "def-weil-open-immersion",
+  "def-weil-pbc-derived-categories",
+  "def-weil-pbc-proetale-modules",
+  "def-weil-pbc-etale-constructible-sheaf",
+  "def-weil-proetale-constructible-sheaf",
+  "def-weil-proetale-tor-amplitude",
+  "def-weil-pbc-site-comparison-morphism",
+  "det-sp-scalar-extension-functor",
+  "lem-pur-derived-change-of-rings",
+  "def-weil-pbc-extension-by-zero",
+  "def-weil-extension-by-zero",
+  "def-weil-proetale-inverse-image",
+  "def-pc-flat-sheaf-modules",
+  "def-pc-kflat-complex",
+  "lem-weil-pbc-extension-by-zero-adjunction",
+  "lem-sp-et-proet-coefficient-compatibility",
+  "def-pur-etale-scalar-pullback-iso",
+  "def-sp-constructible-finite-tor-domains",
+  "def-sp-bounded-flat-model-properties",
+  "def-sp-etale-scalar-pure-tensor",
+  "def-pur-open-coefficient-normalizations"
+ ],
+ "proof": [
+  {
+   "text": "Finite type over the field makes U and X Noetherian. Finite coefficient rings are Noetherian. These hypotheses permit the existing bounded flat constructible models and the intrinsic pro-etale constructible comparison.",
+   "uses": [
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "lem-weil-pbc-open-immersion-etale"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-reduction/sk-lem-sp-reduction-exceptional.proof.md",
+    "place": "Locality; bounded flat representatives, change of coefficients and evaluation counit"
+   }
+  },
+  {
+   "text": "Reuse the existing exceptional transport private finite-Tor object comparison, which combines the intrinsic bounded constructible object comparison with the source fixed-coefficient Tor comparison. Full faithfulness on bounded-below objects and essential surjectivity give the restricted forward equivalence. Exact restriction and extension-by-zero commute with comparison, so their etale stability transports to the intrinsic pro-etale domains.",
+   "uses": [
+    "lem-sf-etale-proetale-exceptional-transport",
+    "lem-exc-comparison-tor-interval",
+    "sk-lem-sf-open-ctf",
+    "lem-weil-pbc-comparison-pullback",
+    "lem-cbc-proetale-extension-zero-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-reduction/sk-lem-sp-reduction-exceptional.proof.md",
+    "place": "Locality; bounded flat representatives, change of coefficients and evaluation counit"
+   }
+  },
+  {
+   "text": "Apply finiteCoefficientInputModels to every etale finite-Tor input. Its constructible and Tor conclusions give scalar preservation on the etale side and on comparison images. Essential surjectivity and invariance under isomorphism give preservation for all intrinsic pro-etale inputs.",
+   "uses": [
+    "lem-sp-finite-coefficient-input-models"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-reduction/sk-lem-sp-reduction-exceptional.proof.md",
+    "place": "Locality; bounded flat representatives, change of coefficients and evaluation counit"
+   }
+  },
+  {
+   "text": "For a nonempty Tor interval choose a bounded flat constructible representative by the existing flat-model theorem. For an empty interval testing Tor amplitude against the unit makes the object zero; choose the zero complex. Exact restriction preserves flat terms and constructibility, and quasi-compact open extension preserves them too. The bounded-flat coefficient/site-square theorem, applied on the enlarged interval [min(a,b),b], gives K-flatness and the actual scalar representatives; termwise preservation of zero restores the exact requested support in [a,b]. Apply this to P, j*P and j!j*P.",
+   "uses": [
+    "lem-sf-etale-flat-constructible",
+    "lem-sp-bounded-flat-coefficient-site-square",
+    "sk-lem-sf-open-ctf"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-reduction/sk-lem-sp-reduction-exceptional.proof.md",
+    "place": "Locality; bounded flat representatives, change of coefficients and evaluation counit"
+   }
+  },
+  {
+   "text": "Exact-localization factor isomorphisms identify the restricted and extended complexes with their derived operations. Apply the canonical comparison/pullback and comparison/open-extension isomorphisms to identify both pro-etale operation models. Thus all four operationModels isomorphisms are actual derived isomorphisms.",
+   "uses": [
+    "lem-weil-pbc-comparison-pullback",
+    "lem-cbc-proetale-extension-zero-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-reduction/sk-lem-sp-reduction-exceptional.proof.md",
+    "place": "Locality; bounded flat representatives, change of coefficients and evaluation counit"
+   }
+  },
+  {
+   "text": "The proper factor is the identity. Compatibility of right-derived natural isomorphisms with the exact-derived identifications equates the two canonical identity direct-image boundaries. The scalarMate identity law then cancels these boundaries. The properOpenCoefficientOpenInverse is characterized by its adjunction transpose; scalarOpen_unit identifies this transpose with the inverse of openScalarExtension. Hence coefficientMap equals the hom of that specified isomorphism, on every input.",
+   "uses": [
+    "lem-pur-etale-direct-image-scalar-composition",
+    "lem-pur-etale-open-scalar-exchange",
+    "lem-sp-et-proet-coefficient-compatibility"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-reduction/sk-lem-sp-reduction-exceptional.proof.md",
+    "place": "Locality; bounded flat representatives, change of coefficients and evaluation counit"
+   }
+  },
+  {
+   "text": "For a bounded flat complex the independent-coefficient K-flat criterion applies after the canonical constant-module realization. The ordinary open restriction/scalar isomorphism is the inverse of the recorded upperStarRestrictScalarsIsoSheaf; therefore the ordinary open scalar isomorphism equals sheafCoefficientIso. The open tensor normalization gives coefficientModelEquation after cancelling the exact-localization factor. The etale sum sheet computation gives sheetEquation, since open and etale sum extension and their adjunctions agree definitionally.",
+   "uses": [
+    "lem-weil-pbc-independent-bounded-flat-kflat",
+    "lem-pur-etale-constant-module-flat",
+    "lem-coef-etale-open-tensor",
+    "lem-sp-etale-sum-coefficient-computation",
+    "lem-cbc-open-extension-zero-etale-adjunction-agreement",
+    "lem-pur-etale-sum-tensor-test"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-reduction/sk-lem-sp-reduction-exceptional.proof.md",
+    "place": "Locality; bounded flat representatives, change of coefficients and evaluation counit"
+   }
+  },
+  {
+   "text": "The exact-derived adjunction counit on a localized cochain complex is obtained from the homotopy-category counit and the two exact factor maps. The homotopy counit is the quotient of the degreewise ordinary counit. This is exactly evaluationComplexMap, giving evaluationModelEquation over A and B. Finally the open tensor counit law, with the canonical restriction comparison identified with properOpenCoefficientPullbackIso inverse, yields the required actual coefficient/counit identity for every K.",
+   "uses": [
+    "lem-coef-etale-open-tensor",
+    "lem-pur-etale-open-scalar-exchange",
+    "lem-weil-pbc-extension-by-zero-adjunction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-reduction/sk-lem-sp-reduction-exceptional.proof.md",
+    "place": "Locality; bounded flat representatives, change of coefficients and evaluation counit"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-weil-pbc-open-immersion-etale",
+  "lem-sf-etale-proetale-exceptional-transport",
+  "lem-exc-comparison-tor-interval",
+  "sk-lem-sf-open-ctf",
+  "lem-weil-pbc-comparison-pullback",
+  "lem-cbc-proetale-extension-zero-comparison",
+  "lem-sp-finite-coefficient-input-models",
+  "lem-sf-etale-flat-constructible",
+  "lem-sp-bounded-flat-coefficient-site-square",
+  "lem-pur-etale-direct-image-scalar-composition",
+  "lem-pur-etale-open-scalar-exchange",
+  "lem-sp-et-proet-coefficient-compatibility",
+  "lem-weil-pbc-independent-bounded-flat-kflat",
+  "lem-pur-etale-constant-module-flat",
+  "lem-coef-etale-open-tensor",
+  "lem-sp-etale-sum-coefficient-computation",
+  "lem-cbc-open-extension-zero-etale-adjunction-agreement",
+  "lem-weil-pbc-extension-by-zero-adjunction",
+  "lem-pur-etale-sum-tensor-test"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-reduction/sk-lem-sp-reduction-exceptional.proof.md",
+  "place": "Locality; H1 exact-derived normalization, bounded-flat models and existing open tensor counit law. Model maps have explicit complex source and target types; the identity complex boundaries are simplified with generic equality proofs in the module and change records."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "[Kk][Ff]lat|[Ff]lat.*[Cc]onstructible|[Cc]onstructible.*[Ff]lat",
+   "results": "{\"t\": \"2026-10-22T05:55:22Z\", \"tool\": \"grep\", \"query\": \"[Kk][Ff]lat|[Ff]lat.*[Cc]onstructible|[Cc]onstructible.*[Ff]lat\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits give generic adjunctions, structure-sheaf modules, or algebraic flatness, not these specified etale/pro-etale open maps and derived domains"
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules.pullback, CategoryTheory.Adjunction.counit",
+   "results": "{\"t\": \"2026-10-22T05:55:22Z\", \"tool\": \"loogle\", \"query\": \"SheafOfModules.pullback, CategoryTheory.Adjunction.counit\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits give generic adjunctions, structure-sheaf modules, or algebraic flatness, not these specified etale/pro-etale open maps and derived domains"
+  },
+  {
+   "tool": "leansearch",
+   "query": "On bounded flat etale sheaf models extension by zero evaluation counit commutes with derived tensor change of finite coefficients without flatness",
+   "results": "{\"t\": \"2026-10-22T05:55:22Z\", \"tool\": \"leansearch\", \"query\": \"On bounded flat etale sheaf models extension by zero evaluation counit commutes with derived tensor change of finite coefficients without flatness\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SheafOfModules.pushforwardPushforwardAdj_counit_app_val_app\", \"CategoryTheory.constantSheafAdj_counit_app\", \"ModuleCat.RestrictionCoextensionAdj.counit'\", \"CompHausLike.LocallyConstant.counit\", \"ModuleCat.RestrictionCoextensionAdj.counit'_app\", \"SheafOfModules.evaluation\", \"CommRingCat.Under.instPreservesFiniteLimitsUnderTensorProdOfFlatCarrier\", \"Module.Flat.rTensor_exact\"], \"digest\": \"7ab7eee5e4cbced3\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits give generic adjunctions, structure-sheaf modules, or algebraic flatness, not these specified etale/pro-etale open maps and derived domains"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a quasi compact open immersion of finite type schemes and a nonflat map of finite coefficient rings choose bounded flat constructible representatives on which the etale extension by zero counit commutes with derived scalar extension",
+   "results": "{\"t\": \"2026-10-22T05:55:33Z\", \"tool\": \"leanfinder\", \"query\": \"For a quasi compact open immersion of finite type schemes and a nonflat map of finite coefficient rings choose bounded flat constructible representatives on which the etale extension by zero counit commutes with derived scalar extension\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Flat.instHasRingHomPropertyFlat\", \"AlgebraicGeometry.Scheme.Hom.flat_appLE\", \"Algebra.FormallyUnramified.isOpenImmersion_SpecMap_lmul\", \"AlgebraicGeometry.Flat.flat_appLE\", \"AlgebraicGeometry.flat_iff\", \"AlgebraicGeometry.Flat\", \"AlgebraicGeometry.Flat.instOfIsOpenImmersion\", \"AlgebraicGeometry.flat_and_surjective_SpecMap_iff\"], \"digest\": \"519fc2a770344f47\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits give generic adjunctions, structure-sheaf modules, or algebraic flatness, not these specified etale/pro-etale open maps and derived domains"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Bounded flat models for finite Tor constructible etale complexes compute the open extension evaluation counit after arbitrary derived coefficient change and etale proetale pullback",
+   "results": "{\"t\": \"2026-10-22T05:55:34Z\", \"tool\": \"leanfinder\", \"query\": \"Bounded flat models for finite Tor constructible etale complexes compute the open extension evaluation counit after arbitrary derived coefficient change and etale proetale pullback\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Condensed.profiniteSolidCounit\", \"Algebra.FormallyEtale.comp\", \"KaehlerDifferential.tensorKaehlerEquivOfFormallyEtale\", \"Condensed.profiniteSolidification\", \"RingHom.IsStandardSmoothOfRelativeDimension.exists_etale_mvPolynomial\", \"AlgebraicGeometry.IsEtale.of_comp\", \"Algebra.FormallyEtale.of_restrictScalars\", \"RingHom.IsStandardSmooth.exists_etale_mvPolynomial\"], \"digest\": \"b3d6136c33f39fcd\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits give generic adjunctions, structure-sheaf modules, or algebraic flatness, not these specified etale/pro-etale open maps and derived domains"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A bounded finite Tor constructible etale complex admits a bounded flat constructible model and extension by zero evaluation counit commutes with arbitrary derived coefficient extension",
+   "results": "{\"t\": \"2026-10-22T06:50:21Z\", \"tool\": \"leanfinder\", \"query\": \"A bounded finite Tor constructible etale complex admits a bounded flat constructible model and extension by zero evaluation counit commutes with arbitrary derived coefficient extension\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Condensed.profiniteSolidCounit\", \"DerivedCategory.right_fac_of_isStrictlyLE_of_isStrictlyGE\", \"localCohomology.diagram\", \"Condensed.profiniteSolidification\", \"DerivedCategory.left_fac_of_isStrictlyLE_of_isStrictlyGE\", \"DerivedCategory.left_fac_of_isStrictlyGE\", \"DerivedCategory.right_fac_of_isStrictlyLE\", \"Condensed.instIsRightKanExtensionFintypeCatCondensedModProfiniteProfiniteSolidProfiniteSolidCounit\"], \"digest\": \"c21d12005b28b567\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: returned declarations concern generic sheaf adjunctions, condensed modules, derived fractions or affine bialgebras; none states the item or its specified etale coefficient maps"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.counit, Sheaf",
+   "results": "{\"t\": \"2026-10-22T06:50:22Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.Adjunction.counit, Sheaf\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"loogle: unknown identifier 'Sheaf'\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "invalid query: loogle: unknown identifier 'Sheaf'"
+  },
+  {
+   "tool": "grep",
+   "query": "counit.*[Tt]ensor|[Tt]ensor.*counit|[Ff]lat.*[Cc]onstructible",
+   "results": "{\"t\": \"2026-10-22T06:50:22Z\", \"tool\": \"grep\", \"query\": \"counit.*[Tt]ensor|[Tt]ensor.*counit|[Ff]lat.*[Cc]onstructible\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/Group/Affine.lean\"], \"digest\": \"357f84c1e51167cd\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: returned declarations concern generic sheaf adjunctions, condensed modules, derived fractions or affine bialgebras; none states the item or its specified etale coefficient maps"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Open immersion extension by zero counit commutes with derived extension of scalars on bounded flat constructible etale sheaf complexes",
+   "results": "{\"t\": \"2026-10-22T06:50:22Z\", \"tool\": \"leansearch\", \"query\": \"Open immersion extension by zero counit commutes with derived extension of scalars on bounded flat constructible etale sheaf complexes\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Modules.restrictAdjunction_counit_app_app\", \"AlgebraicGeometry.Scheme.Modules.instIsIsoFunctorCounitRestrictAdjunction\", \"ModuleCat.RestrictionCoextensionAdj.counit'\", \"AlgebraicGeometry.Scheme.Modules.restrictFunctorAdjCounitIso\", \"AlgebraicGeometry.Scheme.Modules.restrictStalkNatIso\", \"AlgebraicGeometry.Scheme.Modules.instIsLeftAdjointRestrictFunctor\", \"AlgebraicGeometry.PresheafedSpace.IsOpenImmersion.ofRestrict\", \"AlgebraicGeometry.Scheme.Modules.restrictFunctorComp\"], \"digest\": \"8ca02e533eaa25c1\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: returned declarations concern generic sheaf adjunctions, condensed modules, derived fractions or affine bialgebras; none states the item or its specified etale coefficient maps"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Constant ring module sheaves on etale and proetale sites bounded constructible finite Tor equivalence and restriction extension by zero scalar tensor counit compatibility",
+   "results": "{\"t\": \"2026-10-22T06:51:09Z\", \"tool\": \"leanfinder\", \"query\": \"Constant ring module sheaves on etale and proetale sites bounded constructible finite Tor equivalence and restriction extension by zero scalar tensor counit compatibility\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Condensed.profiniteSolidCounit\", \"LightCondMod.LocallyConstant.instHasSheafifyLightProfiniteCoherentTopologyModuleCat\", \"LightCondensed.instMonoidalClosedSheafLightProfiniteCoherentTopologyModuleCat\", \"Condensed.profiniteSolid\", \"LightCondensed.instMonoidalCategorySheafLightProfiniteCoherentTopologyModuleCat\", \"CondensedMod.LocallyConstant.instIsIsoCondensedSetMapForgetAppCondensedModuleCatCounitDiscreteUnderlyingAdjObjFunctor\", \"LightCondensed.instMonoidalFunctorOppositeLightProfiniteModuleCatSheafCoherentTopologyPresheafToSheaf\", \"LightCondMod.ofSheafLightProfinite\"], \"digest\": \"69a7fef86317b110\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: returned declarations concern generic sheaf adjunctions, condensed modules, derived fractions or affine bialgebras; none states the item or its specified etale coefficient maps"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.counit, CategoryTheory.Sheaf",
+   "results": "{\"t\": \"2026-10-22T06:51:10Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.Adjunction.counit, CategoryTheory.Sheaf\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"CategoryTheory.sheafification_reflective\", \"CategoryTheory.isIso_sheafificationAdjunction_counit\", \"CategoryTheory.instIsIsoFunctorOppositeHomFullSubcategoryIsSheafAppSheafCounitSheafificationAdjunction\", \"CategoryTheory.sheafificationAdjunction_counit_app_val\", \"PresheafOfModules.instIsIsoFunctorSheafOfModulesCounitSheafificationAdjunction\", \"PresheafOfModules.toSheaf_map_sheafificationAdjunction_counit_app\", \"CategoryTheory.Adjunction.sheafPushforwardContinuous_counit_app_hom_app\", \"CategoryTheory.Adjunction.sheafPushforwardContinuous_unit_app_hom_app\"], \"digest\": \"a643850f5a0c44af\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: returned declarations concern generic sheaf adjunctions, condensed modules, derived fractions or affine bialgebras; none states the item or its specified etale coefficient maps"
+  },
+  {
+   "tool": "grep",
+   "query": "extensionByZero|extension_by_zero|[Ff]lat.*[Cc]onstructible|[Cc]onstructible.*[Ff]lat",
+   "results": "{\"t\": \"2026-10-22T06:51:10Z\", \"tool\": \"grep\", \"query\": \"extensionByZero|extension_by_zero|[Ff]lat.*[Cc]onstructible|[Cc]onstructible.*[Ff]lat\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: returned declarations concern generic sheaf adjunctions, condensed modules, derived fractions or affine bialgebras; none states the item or its specified etale coefficient maps"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sp-open-proetale-counit-scalar",
+  "date": "2026-10-22",
+  "group": "Q05"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-lem-sp-reduction",
+ "blueprint": {
+  "from": {
+   "node": "det-sp-reduction-exceptional",
+   "place": "Locality: extension by zero commutes with extension of scalars; finite-Tor domain and etale summand calculation (returned counit split Steps 1 and 4); Stacks Tag 0GL6, more-etale.tex, remark-Rf-lower-shriek-change-of-rings; bounded-flat normalization is an agent refinement",
+   "via": [
+    "lem-sp-open-proetale-counit-scalar"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sp-etale-open-counit-flat-models",
+  "worker": "stage1",
+  "summary": "Reused existing model, Tor comparison and specified coefficient-map nodes; checked intrinsic Tor tests on both sites and computed the actual etale open counit equation on extension/tensor generators. No new nodes or statement changes.",
+  "blueprint": "det-sp-reduction-exceptional.proof.md, Locality: extension by zero commutes with extension of scalars; unit sk-lem-sp-reduction step 1 bounded flat input and step 2 coefficient counit locality.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-finite-type-over-noetherian",
+    "why": "Noetherianity of the two finite-type schemes; generic scheme tool."
+   },
+   {
+    "node": "sk-thm-pe-constructible-comparison",
+    "why": "Equivalence of bounded constructible ordinary module derived categories for finite rings; generic coefficient comparison tool."
+   },
+   {
+    "node": "lem-sf-comparison-pullback-exact",
+    "why": "Exactness and constant-ring normalization of site comparison; generic site tool."
+   },
+   {
+    "node": "lem-exc-comparison-tor-interval",
+    "why": "Preservation and reflection of the same Tor interval against all module sheaves; generic site tool."
+   },
+   {
+    "node": "lem-sf-etale-flat-constructible",
+    "why": "Bounded flat constructible representative in a specified interval; the unit explicitly invokes this model route."
+   },
+   {
+    "node": "lem-sp-bounded-flat-coefficient-site-square",
+    "why": "Generic coefficient/site or open-extension tool, used on the unit's required bounded-flat route."
+   },
+   {
+    "node": "lem-sp-constructible-coefficient-site-square",
+    "why": "Generic coefficient/site or open-extension tool, used on the unit's required bounded-flat route."
+   },
+   {
+    "node": "lem-weil-pbc-comparison-pullback",
+    "why": "Canonical comparison for geometric inverse images; generic pullback tool."
+   },
+   {
+    "node": "lem-cbc-proetale-extension-zero-comparison",
+    "why": "Generic coefficient/site or open-extension tool, used on the unit's required bounded-flat route."
+   },
+   {
+    "node": "lem-pur-site-restriction-module-adjunction-exact",
+    "why": "Exact open restriction and extension by zero on either localized site; generic module-sheaf tool."
+   },
+   {
+    "node": "lem-sp-etale-sum-coefficient-computation",
+    "why": "Generic coefficient/site or open-extension tool, used on the unit's required bounded-flat route."
+   },
+   {
+    "node": "lem-sp-et-proet-coefficient-compatibility",
+    "why": "Generic coefficient/site or open-extension tool, used on the unit's required bounded-flat route."
+   },
+   {
+    "node": "lem-weil-pbc-extension-by-zero-adjunction",
+    "why": "Explicit evaluation counit on extension generators; generic open-adjunction tool."
+   },
+   {
+    "node": "lem-pur-derived-change-of-rings",
+    "why": "Functorial computation of scalar extension on K-flat representatives; generic derived change-of-rings tool."
+   },
+   {
+    "node": "lem-weil-pbc-open-immersion-etale",
+    "why": "Open immersion is etale, so the sheetwise theorem applies; generic scheme tool."
+   },
+   {
+    "node": "lem-cbc-open-extension-zero-etale-adjunction-agreement",
+    "why": "The open extension equals the unique-summand etale extension with its actual counit; generic open-adjunction tool."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "sk-thm-pe-constructible-comparison",
+  "lem-sf-comparison-pullback-exact",
+  "lem-exc-comparison-tor-interval",
+  "lem-sf-etale-flat-constructible",
+  "lem-sp-bounded-flat-coefficient-site-square",
+  "lem-sp-constructible-coefficient-site-square",
+  "lem-weil-pbc-comparison-pullback",
+  "lem-cbc-proetale-extension-zero-comparison",
+  "lem-pur-site-restriction-module-adjunction-exact",
+  "lem-sp-etale-sum-coefficient-computation",
+  "lem-sp-et-proet-coefficient-compatibility",
+  "lem-weil-pbc-extension-by-zero-adjunction",
+  "lem-pur-derived-change-of-rings",
+  "lem-weil-pbc-open-immersion-etale",
+  "lem-cbc-open-extension-zero-etale-adjunction-agreement"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q07-00296a6a5",
+  "group": "Q07",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q07-00296a6a5 (reviewer sub-agent of L); spot-checked: Shape: one commit with the item and its report, no new nodes, statement unchanged, no repair note, no SGA. Source: the blueprint sk-lem-sp-reduction-exceptional Locality paragraph (u_! compatible with scalar extension) plus Stacks 0GL6; the explicit counit equation is declared as an agent refinement. I checked all 8 steps against the cited statements. S1: Noetherian/qcqs, j etale. S2: the constructible comparison (qcqs, Noetherian Λ) is restricted by the Tor-interval node (D^+, all test sheaves, both sites) to an equivalence of the ctf categories, including essential surjectivity. S3: the flat-model node (finite Λ, Noetherian, a≤b) and the bounded-flat/constructible squares, whose global-stratification hypothesis matches def-weil-pbc-etale-constructible-sheaf; the a>b case is handled by testing against the unit. S4: line-flat-model with f=j, E=A_U, r=0, and the compact-support Tor window with r=id. S5: the site comparisons for j^*, j_! and exactness on the localized site. S6: sum-coefficient-computation at e=j with compactification (j,id) gives the actual β_j of coefficient-compatibility; κ from adjunction-agreement identifies the single-summand extension with j_!; on K-flat P the inverse of scalarPullbackIso is s⊗b↦s⊗b. S7: generator check of both routes, with empty summands zero. S8: K-flat change of rings and naturality cancellation. Edge cases U=∅, j=id, K=0, empty interval and the non-flat Z/ℓ²→Z/ℓ all work. Batch-5 flag on lem-sp-etale-sum-coefficient-computation: accepted. The chain ends in lem-pod-lisse-module-sheaves-as-module-objects, a generic statement about lisse module objects that is not a step of the trace formula or Poincaré duality. The item already reached it on the base through its stmt_dep lem-sp-et-proet-coefficient-compatibility, and the delivery adds 2 closure nodes, neither in a trace-formula or Poincaré-duality chapter. Advisory: the item's counit clause overlaps the existing lem-sp-etale-sum-counit-scalar at e=j. That node predates the item's creation by Q05, so this is not a fault of this delivery. All 16 split_report tool_uses accepted; no cycles."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.EtaleOpenCounitFlatModels",
+  "declaration": "AlgebraicGeometry.Etale.OpenCounitFlatModels.etaleOpenCounitFlatModels",
+  "declarations": [
+   "AlgebraicGeometry.Etale.OpenCounitFlatModels.coefficientMap",
+   "AlgebraicGeometry.Etale.OpenCounitFlatModels.sheafCoefficientIso",
+   "AlgebraicGeometry.Etale.OpenCounitFlatModels.coefficientComplexMap",
+   "AlgebraicGeometry.Etale.OpenCounitFlatModels.sheetMap",
+   "AlgebraicGeometry.Etale.OpenCounitFlatModels.sheetEquation",
+   "AlgebraicGeometry.Etale.OpenCounitFlatModels.evaluationComplexMap",
+   "AlgebraicGeometry.Etale.OpenCounitFlatModels.scalarSiteModels",
+   "AlgebraicGeometry.Etale.OpenCounitFlatModels.openDomains",
+   "AlgebraicGeometry.Etale.OpenCounitFlatModels.coefficientModelEquation",
+   "AlgebraicGeometry.Etale.OpenCounitFlatModels.evaluationModelEquation",
+   "AlgebraicGeometry.Etale.OpenCounitFlatModels.operationModels",
+   "AlgebraicGeometry.Etale.OpenCounitFlatModels.etaleOpenCounitFlatModels"
+  ],
+  "file": "lean/Sheaf/Paper/EtaleOpenCounitFlatModels.lean",
+  "statement": "theorem etaleOpenCounitFlatModels (ell p : ℕ) [Fact ell.Prime] (_hp : 0 < p) (_hpell : p ≠ ell) (k : Type u) [Field k] [CharP k p] {U X : Scheme.{u}} [U.Over (Spec (.of k))] [X.Over (Spec (.of k))] [IsSeparated (U ↘ Spec (.of k))] [IsSeparated (X ↘ Spec (.of k))] [LocallyOfFiniteType (U ↘ Spec (.of k))] [QuasiCompact (U ↘ Spec (.of k))] [LocallyOfFiniteType (X ↘ Spec (.of k))] [QuasiCompact (X ↘ Spec (.of k))] (j : U ⟶ X) [j.IsOver (Spec (.of k))] [IsOpenImmersion j] [QuasiCompact j] {A B : Type (u + 1)} [CommRing A] [CommRing B] [Finite A] [Finite B] (_hA : ∃ n : ℕ, ∀ x : A, (ell ^ n) • x = 0) (_hB : ∃ n : ℕ, ∀ x : B, (ell ^ n) • x = 0) (φ : A →+* B) : openDomains A j ∧ openDomains B j ∧ (∀ L : DerivedCategoryModule A U, ProEtale.exceptionalTransportEtaleObjects A U L → IsIso (coefficientMap φ j L)) ∧ (∀ T : Scheme.{u}, T ∈ [U, X] → (∀ K, ProEtale.exceptionalTransportEtaleObjects A T K → ProEtale.exceptionalTransportEtaleObjects B T ((scalarExtension φ T).obj K)) ∧ (∀ M, ProEtale.exceptionalTransportProEtaleObjects A T M → ProEtale.exceptionalTransportProEtaleObjects B T ((ProEtale.SupportedEtaleTensorOrigin.proFixedScalar φ T).obj M))) ∧ ∀ K : DerivedCategoryModule A X, ProEtale.exceptionalTransportEtaleObjects A X K → (∀ a b : ℤ, DerivedCategory.hasTorAmplitudeIn A X a b K → ∃ P : CochainComplex (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} A)) ℤ, Nonempty (_root_.DerivedCategory.Q.obj P ≅ K) ∧ operationModels A j P K ∧ scalarSiteModels φ X a b P ∧ scalarSiteModels φ U a b (((upperStar (ModuleCat.{u + 1} A) j).mapHomologicalComplex (.up ℤ)).obj P) ∧ scalarSiteModels φ X a b (((openImmersionLowerShriek (ModuleCat.{u + 1} A) j).mapHomologicalComplex (.up ℤ)).obj (((upperStar (ModuleCat.{u + 1} A) j).mapHomologicalComplex (.up ℤ)).obj P)) ∧ coefficientModelEquation φ j (((upperStar (ModuleCat.{u + 1} A) j).mapHomologicalComplex (.up ℤ)).obj P) ∧ sheetEquation φ j (((upperStar (ModuleCat.{u + 1} A) j).mapHomologicalComplex (.up ℤ)).obj P) ∧ evaluationModelEquation A j P ∧ evaluationModelEquation B j (coefficientExtendedComplex φ X P)) ∧ IsIso (coefficientMap φ j ((upperStar (ModuleCat.{u + 1} A) j).mapDerivedCategory.obj K)) ∧ coefficientMap φ j ((upperStar (ModuleCat.{u + 1} A) j).mapDerivedCategory.obj K) ≫ (openImmersionLowerShriek (ModuleCat.{u + 1} B) j).mapDerivedCategory.map ((properOpenCoefficientPullbackIso φ j).inv.app K) ≫ (derivedOpenImmersionLowerShriekUpperStarAdjunction (ModuleCat.{u + 1} B) j).counit.app ((scalarExtension φ X).obj K) = (scalarExtension φ X).map ((derivedOpenImmersionLowerShriekUpperStarAdjunction (ModuleCat.{u + 1} A) j).counit.app K)",
+  "branch": "newtargets-dag",
+  "by": "Q131",
+  "date": "2026-10-23",
+  "existing": false,
+  "note": "Uses the existing intrinsic bounded-constructible finite-Tor domains of lem-sf-etale-proetale-exceptional-transport and the existing modelProperties predicate. The identity-proper-factor coefficient map retains the canonical right-derived identity boundaries; all model maps and the final counits are the specified maps. Additional landed statement dependencies own the shared domains, model predicate, pure-tensor section map, and exact-pullback transport. No mathematical statement correction."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-c99b93dd0",
+  "group": "Q131",
+  "result": "pass",
+  "note": "Re-delivery after a742849d H2 RETURN. Lean byte-identical (sha256 0435c7bb); item node differs from live only in stmt_deps+lean: 18 original deps kept, 4 theorem stmt_deps replaced by landed def-pur-open-coefficient-normalizations (properOpenCoefficientPullbackIso) and 3 new existing:true def nodes def-sp-constructible-finite-tor-domains, def-sp-bounded-flat-model-properties, def-sp-etale-scalar-pure-tensor. Their lean.statement is verbatim in the live files and their TeX matches the defs (isBoundedConstructible ⊓ ∃a≤b Tor; bounded+intrinsic constructible+∃a≤b Tor; flat terms/IsZero outside [a,b]/kFlat; b•unit x); their stmt_deps are all definition nodes, no cycles, no existing owner. Other dep nodes identical to live. Math re-checked: hypotheses (no B/A flatness, no universe equality), openDomains pinned to ν*, beta = etaleCoefficientMap at ofIsOpenImmersion with rightDerivedLowerStarIdIso, a_j direction, equation order, edge cases U=∅, K=0, a>b, non-flat φ. O1's quarantine of the imports was lifted 2026-10-22. Advisories: uncited def-node owners (coefficientExtendedComplex, scalarExtensionRepresentative, proFixedScalar, derived/plain open adjunction decls, comparisonUpperStar); overlap with lem-sp-etale-sum-counit-scalar; self second reading. No compile (no change)."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-1e4bb",
+  "group": "H1",
+  "result": "pass",
+  "landing": "20261025T050812-L-3844656",
+  "kind": "interface",
+  "note": "independent cc review: Delivered EtaleOpenCounitFlatModels.lean against the clone version (diff), the node lem-sp-etale-open-counit-flat-models (only proof/proof_deps/proof_origin changed; lean record identical), and the two change records against the old and new def bodies; #print axioms on a scratch copy (sorryAx only via sorried upstream statements such as boundedFlatCoefficientSiteSquare)"
+ }
+}

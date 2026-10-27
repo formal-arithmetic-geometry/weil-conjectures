@@ -10,12 +10,8 @@ public import Sheaf.Paper.CompletedIntegralConstantMapOfUniverses
 public import Sheaf.Algebra.Homology.DerivedChangeOfRingsCochainModel
 public import Sheaf.Paper.RingedTopoiCanonicalTensorPullbackOfUniverses
 public import Sheaf.AlgebraicGeometry.ProEtaleInverseImage
-import Sheaf.Algebra.Homology.ChangeOfRingsKFlat
-import Sheaf.Algebra.Homology.KFlatTotalTensorModel
-import Sheaf.Algebra.Homology.SheafRingDerivedCoefficientAdjunction
-import Sheaf.Paper.KFlatScalarComparisonNormalization
-import Sheaf.AlgebraicGeometry.ProEtaleConstantExact
-import Sheaf.AlgebraicGeometry.ProEtaleConstantRingMap
+import Sheaf.Paper.QuotientExpressionKFlatModels
+import Sheaf.Paper.QuotientExpressionKFlatOperations
 
 /-! # Simultaneous K-flat normalization of strict quotient expressions
 
@@ -150,6 +146,13 @@ theorem quotientExpressionKFlatNormalization
             (SV : CoefficientDerivedSystemTensors l E V)
             (DV : CoefficientFiniteQuotientCalculus l E V SV) {m n : ℕ} (hmn : n ≤ m),
             PullbackAdjointEquation l E g K SW DW SV DV hmn)) := by
-  sorry
+  obtain ⟨N, κ, hκ, he, hgood⟩ :=
+    quotientExpressionKFlatModels l E h f _hlZ _hlX _hlY r P hP _hflat
+  obtain ⟨hnorm, htensor, hpull⟩ :=
+    quotientExpressionKFlatOperations l E h f r N P κ hκ
+      (fun W K hK ↦ hgood W K hK)
+  refine ⟨N, κ, hκ, he, ?_, htensor, hpull⟩
+  intro W K hK
+  exact ⟨hgood W K hK, (hnorm W K hK).1, (hnorm W K hK).2⟩
 
 end WeilConjectures.StrictQuotient

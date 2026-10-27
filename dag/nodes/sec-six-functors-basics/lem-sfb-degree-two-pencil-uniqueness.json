@@ -1,0 +1,396 @@
+{
+ "id": "lem-sfb-degree-two-pencil-uniqueness",
+ "kind": "statement",
+ "title": "Uniqueness and basepoint freeness of a degree-two pencil",
+ "statement": "Let $k$ be an algebraically closed field [def-weil-field, def-weil-algebraic-closure], and let $C/k$ be a smooth projective connected curve [def-sc-curves, def-kun-projective] of genus $g\\geq2$ [def-sc-genus]. For an effective divisor $D$ on $C$ [def-sc-divisor], let $|D|$ be the set of effective divisors linearly equivalent to $D$, where linear equivalence means that the difference is a principal divisor. The scheme of members of $|D|$ is the projective space of one-dimensional subspaces of $H^0(C,\\mathcal O_C(D))$ (nonzero sections modulo scalars). If $\\deg D=2$ and $|D|$ has two distinct members, then $\\dim_kH^0(C,\\mathcal O_C(D))=2$, and $|D|$ is basepoint free: no point belongs to every member. There is at most one such complete degree-two linear system on $C$. In that system, for every $Q\\in C(k)$ there is exactly one member containing $Q$. Equivalently, any nonconstant degree-two map $C\\to\\mathbf P^1_k$ has these members as its fibre divisors, and any two such maps differ by an automorphism of $\\mathbf P^1_k$.",
+ "source": {
+  "document": "literature/milne-abelian-varieties_AV.pdf",
+  "place": "Chapter III proof of Theorem 12.1(b), printed p.120, first paragraph recalling the unique degree-two dimension-one linear system (citing Hartshorne IV §5), and the two-divisor argument in the following paragraphs. Applies in arbitrary characteristic."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-weil-algebraic-closure",
+  "def-sc-curves",
+  "def-kun-projective",
+  "def-sc-genus",
+  "def-sc-divisor",
+  "def-sfb-complete-divisor-linear-system"
+ ],
+ "proof": [
+  {
+   "text": "The projective curve $C$ is proper by [lem-kun-projective-implies-proper]. By [lem-sc-smooth-connected-curve-local-rings], $C$ is Noetherian and integral. Put $L=\\mathcal O_C(D)$. The divisor-class isomorphism [lem-sc-divisor-class-curve] makes this an invertible sheaf and identifies linear equivalence with equality of its Picard class. Its degree in [def-sc-pic0] is $2$. This agrees with the Euler-characteristic degree used by [lem-sfb-linear-series-degree-dimension-bound]: [lem-sc-riemann-roch] gives $\\chi(N)-\\chi(\\mathcal O_C)=\\deg N$ for every invertible $N$. We use this agreement for all line bundles below. Their spaces of sections are finite-dimensional by [lem-pc-coherent-hi] (proper curve over the Noetherian field, invertible sheaf coherent).",
+   "uses": [
+    "lem-sc-divisor-class-curve",
+    "def-sc-pic0",
+    "lem-sc-riemann-roch",
+    "lem-pc-coherent-hi",
+    "lem-sc-smooth-connected-curve-local-rings",
+    "lem-kun-projective-implies-proper"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/curves.tex",
+    "place": "Tag 0CCT, remark-classical-linear-series; Tag 0BS6, lemma-rr"
+   }
+  },
+  {
+   "text": "The section/divisor dictionary here is explicit: a nonzero $f\\in H^0(C,\\mathcal O_C(D))\\subset k(C)$ gives the effective divisor $D+\\operatorname{div}(f)$, by the valuation inequalities of [def-sc-divisor]. Every effective divisor equivalent to $D$ has this form. Two such sections give the same divisor exactly when their ratio has divisor zero; it and its inverse are then global functions by those same inequalities. They are nonzero scalars by [lem-sc-global-functions]. Thus the two distinct members give two independent sections of $L$. This also gives the nonzero-sections-modulo-scalars parametrization used to define the scheme of members in the statement.",
+   "uses": [
+    "def-sc-divisor",
+    "lem-sc-global-functions"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/curves.tex",
+    "place": "Tag 0CCT, remark-classical-linear-series, complete-system convention"
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-linear-series-degree-dimension-bound] with $U=H^0(C,L)$ and $q=\\dim U\\ge2$. Its generated line has degree $0\\le a\\le2$, and $q\\le\\max\\{a+1-g,a/2+1\\}\\le2$. Hence $q=2$. Every closed point is $k$-rational by [lem-weil-pbc-closed-point-residue-field-base]. If a closed point $Q$ belonged to every member, the valuation formula would give $U\\subset H^0(C,\\mathcal O_C(D-Q))$. Apply the same bound to this two-dimensional subspace of a degree-one line bundle: $a\\le1$ would give $2\\le\\max\\{a+1-g,a/2+1\\}\\le3/2$, impossible. Thus there is no base point. In local generators of $L$ [lem-sc-divisor-module-local], this says some section is a unit at each closed point; the nonzero sections also generate at the generic point. Therefore evaluation generates $L$ everywhere.",
+   "uses": [
+    "lem-sfb-linear-series-degree-dimension-bound",
+    "def-sc-divisor",
+    "lem-sc-divisor-module-local",
+    "lem-weil-pbc-closed-point-residue-field-base"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-abelian-varieties_AV.pdf",
+    "place": "III proof of Theorem 12.1(b), p.120, expanded using the RR/Clifford bound"
+   }
+  },
+  {
+   "text": "Fix $Q\\in C(k)$. Evaluation $H^0(C,L)\\to L\\otimes k(Q)$ is a nonzero linear map from a two-dimensional space to a one-dimensional space, by basepoint freeness. Its kernel is exactly one line. Its nonzero sections, modulo scalars, give exactly the members containing $Q$ by the local valuation formula of [def-sc-divisor]. Thus there is exactly one such member, including when that member is $2Q$.",
+   "uses": [
+    "def-sc-divisor"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-abelian-varieties_AV.pdf",
+    "place": "III proof of Theorem 12.1(b), p.120, fibres as members"
+   }
+  },
+  {
+   "text": "Suppose $|E|$ is another moving complete system of degree two and set $M=\\mathcal O_C(E)$. The preceding arguments give bases $s_0,s_1$ of $H^0(C,L)$ and $t_0,t_1$ of $H^0(C,M)$, both generating their line bundles. Degrees add under tensor product by [def-sc-pic0], so $\\deg(L\\otimes M)=4$. If the four products $s_it_j$ were independent, their span $U$ would have dimension four. Applied to $U\\subset H^0(C,L\\otimes M)$, [lem-sfb-linear-series-degree-dimension-bound] gives $a\\le4$ and $4\\le\\max\\{a+1-g,a/2+1\\}\\le3$, a contradiction. Thus there is a nonzero relation $s_0a+s_1b=0$ with $a,b\\in H^0(C,M)$, obtained by grouping the coefficients of the four products by $s_i$. Since $t_0,t_1$ are a basis and the coefficient vector is nonzero, $(a,b)\\ne(0,0)$.",
+   "uses": [
+    "def-sc-pic0",
+    "lem-sfb-linear-series-degree-dimension-bound"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-abelian-varieties_AV.pdf",
+    "place": "III proof of Theorem 12.1(b), p.120, uniqueness recalled there; agent pencil-trick expansion"
+   }
+  },
+  {
+   "text": "On the open where $s_1$ generates $L$, put $z=a/s_1\\in\\Gamma(M\\otimes L^{-1})$; on the open where $s_0$ generates, put $z=-b/s_0$. The relation makes these equal on the overlap, so they glue. These two opens cover $C$, and the same relation gives $a=s_1z$ and $b=-s_0z$ on both opens. Consequently $z\\ne0$, since $(a,b)\\ne(0,0)$. By [def-sc-pic0], $\\deg(M\\otimes L^{-1})=0$. By [lem-trf-curve-section-degree-positivity], $z$ cannot vanish anywhere: a zero would force strictly positive degree. A nowhere vanishing section trivializes an invertible sheaf (locally its coefficient is a unit), so $M\\simeq L$. The divisor-class isomorphism [lem-sc-divisor-class-curve] now gives $E\\sim D$, hence $|E|=|D|$.",
+   "uses": [
+    "def-sc-pic0",
+    "lem-trf-curve-section-degree-positivity",
+    "lem-sc-divisor-class-curve"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 0B40, lemma-check-invertible-sheaf-trivial (2); explicit local pencil-trick calculation supplied by agent"
+   }
+  },
+  {
+   "text": "A basis $s_0,s_1$ of $H^0(C,L)$ defines $f=[s_0:s_1]:C\\to\\mathbf P^1_k$ with $f^*\\mathcal O(1)\\simeq L$ by [lem-weil-pbc-projective-space-functor-of-points] and its construction over $k$ [def-weil-pbc-morphism-to-projective-space-by-sections]. It is nonconstant: if the ratio were constant, the two sections would be dependent. The projective line is a smooth proper connected curve by [lem-asd-projective-line-genus-zero]. The function-field correspondence [lem-sfb-proper-curve-function-field-morphisms] gives dominance and a finite function-field extension. A coordinate section of $\\mathcal O(1)$ has a single simple zero on the standard affine charts, so its divisor degree is one; [lem-sc-line-bundle-rational-section], [def-sc-pic0] and [lem-sc-riemann-roch], now applied to the projective line, give the same Euler-characteristic degree one. Hence [lem-sfb-proper-curve-bundle-pullback-degree] gives $[k(C):k(\\mathbf P^1)]=\\deg L=2$. Locally the fibre above $[u:v]$ is the zero divisor of $v s_0-u s_1$; these sections run through every nonzero section modulo scalar, exactly giving $|D|$ with multiplicities.",
+   "uses": [
+    "lem-weil-pbc-projective-space-functor-of-points",
+    "lem-asd-projective-line-genus-zero",
+    "lem-sfb-proper-curve-function-field-morphisms",
+    "lem-sfb-proper-curve-bundle-pullback-degree",
+    "def-weil-pbc-morphism-to-projective-space-by-sections",
+    "lem-sc-riemann-roch",
+    "def-sc-pic0",
+    "lem-sc-line-bundle-rational-section"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/curves.tex",
+    "place": "Tags 0CCP (lemma-linear-series), 0CCR (lemma-g1d); varieties.tex Tag 0AYZ (lemma-degree-pullback-map-proper-curves)"
+   }
+  },
+  {
+   "text": "The map $f$ is proper by [lem-weil-pbc-proper-to-separated], applied to $C\\to\\operatorname{Spec}k$ and the separated target $\\mathbf P^1$. Its fibre over a closed target point is supported on the zeros of the corresponding nonzero section, hence on a finite divisor. Apply [thm-sc-proper-finite-fibre-finite-neighbourhood] at every closed target point (the target is Noetherian by [lem-sc-smooth-connected-curve-local-rings]). These neighbourhoods cover all closed points and also the generic point, which belongs to every nonempty open. Those are all points of this curve by [lem-sc-smooth-connected-curve-local-rings]. Thus they cover the target and $f$ is finite. This verifies the finite-map formulation recalled by Milne without any separability hypothesis.",
+   "uses": [
+    "lem-weil-pbc-proper-to-separated",
+    "lem-sc-smooth-connected-curve-local-rings",
+    "thm-sc-proper-finite-fibre-finite-neighbourhood"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/curves.tex",
+    "place": "Tag 0CCL, lemma-finite, proof by proper finite-fibre neighbourhoods"
+   }
+  },
+  {
+   "text": "Conversely let $h:C\\to\\mathbf P^1_k$ be nonconstant of degree two. Its induced function-field extension is finite by [lem-sfb-proper-curve-function-field-morphisms]. Set $N=h^*\\mathcal O(1)$. The pullback degree formula [lem-sfb-proper-curve-bundle-pullback-degree] gives $\\deg N=2$. The coordinate sections pull back to two independent generating sections: generation follows from the projective-space dictionary [lem-weil-pbc-projective-space-functor-of-points], and a linear relation would force $h$ to be constant. For a nonzero pulled-back section $s$, its rational-section divisor [def-sc-rational-section-divisor] is effective, and [lem-sc-line-bundle-rational-section] identifies $N$ with $\\mathcal O_C(\\operatorname{div}s)$. Thus its zero divisor has degree two and the different sections give linearly equivalent divisors; the section bound and uniqueness already proved show that they form the unique complete system. Finally two such maps are defined by two bases of its same two-dimensional section space, after identifying their line bundles. The change of basis is an invertible $2\\times2$ matrix. Its linear action on homogeneous coordinates defines an automorphism of $\\mathbf P^1$, with inverse given by the inverse matrix, and sends the first map to the second.",
+   "uses": [
+    "lem-sfb-proper-curve-function-field-morphisms",
+    "lem-sfb-proper-curve-bundle-pullback-degree",
+    "lem-weil-pbc-projective-space-functor-of-points",
+    "def-sc-rational-section-divisor",
+    "lem-sc-line-bundle-rational-section"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-abelian-varieties_AV.pdf",
+    "place": "III proof of Theorem 12.1(b), p.120; curves.tex Tags 0CCP, 0CCR, 0CCT; explicit basis-change argument"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sc-divisor",
+  "def-sc-pic0",
+  "def-sc-rational-section-divisor",
+  "def-weil-pbc-morphism-to-projective-space-by-sections",
+  "lem-asd-projective-line-genus-zero",
+  "lem-kun-projective-implies-proper",
+  "lem-pc-coherent-hi",
+  "lem-sc-divisor-class-curve",
+  "lem-sc-divisor-module-local",
+  "lem-sc-global-functions",
+  "lem-sc-line-bundle-rational-section",
+  "lem-sc-riemann-roch",
+  "lem-sc-smooth-connected-curve-local-rings",
+  "lem-sfb-linear-series-degree-dimension-bound",
+  "lem-sfb-proper-curve-bundle-pullback-degree",
+  "lem-sfb-proper-curve-function-field-morphisms",
+  "lem-trf-curve-section-degree-positivity",
+  "lem-weil-pbc-closed-point-residue-field-base",
+  "lem-weil-pbc-projective-space-functor-of-points",
+  "lem-weil-pbc-proper-to-separated",
+  "thm-sc-proper-finite-fibre-finite-neighbourhood"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/milne-abelian-varieties_AV.pdf",
+  "place": "III proof of Theorem 12.1(b), p.120, recalled hyperelliptic linear-system fact expanded using the existing RR/Clifford bound, explicit pencil trick and Stacks Tags 0CCP, 0CCR, 0CCT, 0B40, 0AYZ, 0CCL."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "On a smooth projective curve of genus at least two a positive dimensional complete linear system of degree two is a unique base point free pencil",
+   "results": "8 hits; actual top results: WeierstrassCurve.Projective, WeierstrassCurve, WeierstrassCurve.Projective.NonsingularLift, WeierstrassCurve.Projective.nonsingularLift_zero, WeierstrassCurve.Projective.Point.nonsingular, WeierstrassCurve.Projective.Nonsingular, WeierstrassCurve.Projective.nonsingular_zero, WeierstrassCurve.Projective.nonsingularLift_addMap",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern elementary or tensor symmetric powers, Weierstrass coordinates, root-system polarization, affine-space pullbacks, or abstract split monomorphisms; none supplies this theorem for abelian varieties or arbitrary-genus curves"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A hyperelliptic curve has a unique g one two and exactly one divisor of this pencil contains any specified point",
+   "results": "8 hits; actual top results: WeierstrassCurve.IsCharTwoNF, WeierstrassCurve.IsCharTwoJNeZeroNF.rec, WeierstrassCurve.Projective.Point.rec, WeierstrassCurve.Projective.Point.noConfusion, WeierstrassCurve.Projective.Point.noConfusionType, WeierstrassCurve.IsCharTwoJNeZeroNF, WeierstrassCurve.Jacobian.Point, WeierstrassCurve.Projective.Point.mk.noConfusion",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern elementary or tensor symmetric powers, Weierstrass coordinates, root-system polarization, affine-space pullbacks, or abstract split monomorphisms; none supplies this theorem for abelian varieties or arbitrary-genus curves"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"LinearSystem\"",
+   "results": "0 hits; actual top results: ",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern elementary or tensor symmetric powers, Weierstrass coordinates, root-system polarization, affine-space pullbacks, or abstract split monomorphisms; none supplies this theorem for abelian varieties or arbitrary-genus curves"
+  },
+  {
+   "tool": "grep",
+   "query": "hyperelliptic|linear.system|base.point.free|degree.two.*pencil",
+   "results": "0 hits; actual top results: ",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern elementary or tensor symmetric powers, Weierstrass coordinates, root-system polarization, affine-space pullbacks, or abstract split monomorphisms; none supplies this theorem for abelian varieties or arbitrary-genus curves"
+  },
+  {
+   "tool": "grep",
+   "query": "clifford|hyperelliptic|pencil.?trick|linear.?series",
+   "results": "{\"t\": \"2026-10-22T07:24:27Z\", \"tool\": \"grep\", \"query\": \"clifford|hyperelliptic|pencil.?trick|linear.?series\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the reported division-polynomial, Weierstrass-coordinate, ideal-sheaf and generating-section declarations do not state the arbitrary-genus degree-two-pencil theorem or the pencil-trick comparison."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Clifford\", \"degree\"",
+   "results": "{\"t\": \"2026-10-22T07:24:28Z\", \"tool\": \"loogle\", \"query\": \"\\\"Clifford\\\", \\\"degree\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the reported division-polynomial, Weierstrass-coordinate, ideal-sheaf and generating-section declarations do not state the arbitrary-genus degree-two-pencil theorem or the pencil-trick comparison."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Clifford inequality for a special line bundle on a smooth projective curve: twice dimension of global sections at most degree plus two",
+   "results": "{\"t\": \"2026-10-22T07:24:29Z\", \"tool\": \"leanfinder\", \"query\": \"Clifford inequality for a special line bundle on a smooth projective curve: twice dimension of global sections at most degree plus two\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"WeierstrassCurve.natDegree_preΨ_le\", \"WeierstrassCurve.natDegree_ΨSq_le\", \"WeierstrassCurve.natDegree_preΨ'_le\", \"WeierstrassCurve.natDegree_Ψ₂Sq_le\", \"WeierstrassCurve.natDegree_Φ_le\", \"WeierstrassCurve.natDegree_preΨ₄_le\", \"ChevalleyThm.degBound\", \"WeierstrassCurve.natDegree_preΨ'_pos\"], \"digest\": \"474f34379dc70896\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the reported division-polynomial, Weierstrass-coordinate, ideal-sheaf and generating-section declarations do not state the arbitrary-genus degree-two-pencil theorem or the pencil-trick comparison."
+  },
+  {
+   "tool": "grep",
+   "query": "pencil|base.?point.?free|generat.*sections.*kernel|kernel.*sections",
+   "results": "{\"t\": \"2026-10-22T07:27:40Z\", \"tool\": \"grep\", \"query\": \"pencil|base.?point.?free|generat.*sections.*kernel|kernel.*sections\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the reported division-polynomial, Weierstrass-coordinate, ideal-sheaf and generating-section declarations do not state the arbitrary-genus degree-two-pencil theorem or the pencil-trick comparison."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Invertible\", \"exact\"",
+   "results": "{\"t\": \"2026-10-22T07:27:40Z\", \"tool\": \"loogle\", \"query\": \"\\\"Invertible\\\", \\\"exact\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the reported division-polynomial, Weierstrass-coordinate, ideal-sheaf and generating-section declarations do not state the arbitrary-genus degree-two-pencil theorem or the pencil-trick comparison."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The base point free pencil trick identifies relations between two generating sections of an invertible sheaf with sections of its inverse tensor another sheaf",
+   "results": "{\"t\": \"2026-10-22T07:27:40Z\", \"tool\": \"leansearch\", \"query\": \"The base point free pencil trick identifies relations between two generating sections of an invertible sheaf with sections of its inverse tensor another sheaf\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SheafOfModules.GeneratingSections.ctorIdx\", \"SheafOfModules.GeneratingSections.s\", \"SheafOfModules.Presentation.mk.inj\", \"SheafOfModules.GeneratingSections.ofEpi_s\", \"SheafOfModules.GeneratingSections.π\", \"SheafOfModules.GeneratingSections.mk\", \"SheafOfModules.GeneratingSections.ofEpi\", \"AlgebraicGeometry.exists_of_res_eq_of_qcqs\"], \"digest\": \"0349d5ba58e56824\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the reported division-polynomial, Weierstrass-coordinate, ideal-sheaf and generating-section declarations do not state the arbitrary-genus degree-two-pencil theorem or the pencil-trick comparison."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For two global sections s t generating a line bundle L the kernel of multiplication H0(M) squared to H0(M tensor L) is H0(M tensor inverse L), base point free pencil trick",
+   "results": "{\"t\": \"2026-10-22T07:27:51Z\", \"tool\": \"leanfinder\", \"query\": \"For two global sections s t generating a line bundle L the kernel of multiplication H0(M) squared to H0(M tensor L) is H0(M tensor inverse L), base point free pencil trick\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Submodule.ker_unitsToPic\", \"AlgebraicGeometry.Scheme.Hom.ker\", \"AlgebraicGeometry.Scheme.ideal_ker_le_ker_ΓSpecIso_inv_comp\", \"AlgebraicGeometry.Scheme.IdealSheafData.ker_glueDataObjι_appTop\", \"AlgebraicGeometry.Scheme.IdealSheafData.ideal_le_ker_glueDataObjι\", \"KaehlerDifferential.ker_map\", \"AlgebraicGeometry.Scheme.ker_ideal_of_isPullback_of_isOpenImmersion\", \"AlgebraicGeometry.Scheme.kerFunctor_map\"], \"digest\": \"5ef64ad39a510b83\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the reported division-polynomial, Weierstrass-coordinate, ideal-sheaf and generating-section declarations do not state the arbitrary-genus degree-two-pencil theorem or the pencil-trick comparison."
+  },
+  {
+   "tool": "grep",
+   "query": "hyperelliptic|linear.?system|degree.?two.*pencil",
+   "results": "{\"t\": \"2026-10-22T07:34:41Z\", \"tool\": \"grep\", \"query\": \"hyperelliptic|linear.?system|degree.?two.*pencil\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the reported division-polynomial, Weierstrass-coordinate, ideal-sheaf and generating-section declarations do not state the arbitrary-genus degree-two-pencil theorem or the pencil-trick comparison."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Uniqueness of the hyperelliptic map of a curve to the projective line up to projective linear automorphism",
+   "results": "{\"t\": \"2026-10-22T07:34:42Z\", \"tool\": \"leansearch\", \"query\": \"Uniqueness of the hyperelliptic map of a curve to the projective line up to projective linear automorphism\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"WeierstrassCurve.Projective.Equation.map\", \"WeierstrassCurve.Projective.comp_equiv_comp\", \"WeierstrassCurve.Projective.toAffine\", \"WeierstrassCurve.map_injective\", \"WeierstrassCurve.Projective.Point.fromAffine\", \"Representation.Coinvariants.hom_ext\", \"WeierstrassCurve.toProjective\", \"WeierstrassCurve.map_Δ'\"], \"digest\": \"df8a9bd7eb121ea4\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the reported division-polynomial, Weierstrass-coordinate, ideal-sheaf and generating-section declarations do not state the arbitrary-genus degree-two-pencil theorem or the pencil-trick comparison."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"LinearSystem\"",
+   "results": "{\"t\": \"2026-10-22T07:34:42Z\", \"tool\": \"loogle\", \"query\": \"\\\"LinearSystem\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the reported division-polynomial, Weierstrass-coordinate, ideal-sheaf and generating-section declarations do not state the arbitrary-genus degree-two-pencil theorem or the pencil-trick comparison."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A smooth projective curve of genus at least two has at most one degree two complete linear system and it is a base point free pencil",
+   "results": "{\"t\": \"2026-10-22T07:34:45Z\", \"tool\": \"leanfinder\", \"query\": \"A smooth projective curve of genus at least two has at most one degree two complete linear system and it is a base point free pencil\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"WeierstrassCurve.Projective\", \"WeierstrassCurve\", \"WeierstrassCurve.Projective.Nonsingular\", \"WeierstrassCurve.Projective.nonsingularLift_zero\", \"WeierstrassCurve.IsElliptic\", \"WeierstrassCurve.Projective.nonsingular_zero\", \"WeierstrassCurve.Projective.Point.nonsingular\", \"WeierstrassCurve.Projective.NonsingularLift\"], \"digest\": \"e90051090e8442d2\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the reported division-polynomial, Weierstrass-coordinate, ideal-sheaf and generating-section declarations do not state the arbitrary-genus degree-two-pencil theorem or the pencil-trick comparison."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-curve-polarized-jacobian-faithfulness",
+  "date": "2026-10-22",
+  "group": "Q59"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Smooth-curve abelian level rigidification. Geometric stabilizer input for the smooth full-level cover; restrict to geometric curves before passing to families. Auxiliary input: Curve pullback is faithful on the canonically polarized Jacobian. Supporting input: Uniqueness and basepoint freeness of a degree-two pencil.",
+   "via": [
+    "lem-sfb-curve-polarized-jacobian-faithfulness",
+    "lem-sfb-geometric-curve-level-faithfulness",
+    "lem-sfb-smooth-curve-abelian-level-rigidification",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-degree-two-pencil-uniqueness",
+  "worker": "stage1",
+  "summary": "Reused the existing generated-series RR/Clifford bound; proved dimension two and basepoint freeness, uniqueness through a point, and uniqueness of the system by an explicit local relation among four products. Expanded the map/fibre and basis-change equivalences, including multiplicities and characteristic two. No new nodes. Repair of return at a2a55dfcab1: rebased against the current DAG; reread all cited statements (none changed), retained the nine-step argument, and added the explicit projective-implies-proper citation for the proper-curve hypotheses. Resumed repair check on 2026-10-23: all retained dependency statements and 34 citation quotes still agree with the live DAG; made the nonzero coefficient-pair justification explicit in step 5.",
+  "blueprint": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Smooth-curve abelian level rigidification. Geometric stabilizer input for the smooth full-level cover; restrict to geometric curves before passing to families. Auxiliary input: Curve pullback is faithful on the canonically polarized Jacobian. Supporting input: Uniqueness and basepoint freeness of a degree-two pencil. Steps 1–9 supply this supporting input, with the pencil-trick uniqueness argument below the fixed unit route.",
+  "tool_uses": [
+   {
+    "node": "lem-asd-projective-line-genus-zero",
+    "why": "Generic divisor, curve or projective-space tool used only in the degree-two-pencil prerequisite to the polarized-Jacobian stabilizer; no node of this six-functor unit supplies this statement, and no unit step is replaced."
+   },
+   {
+    "node": "lem-sc-divisor-class-curve",
+    "why": "Generic divisor, curve or projective-space tool used only in the degree-two-pencil prerequisite to the polarized-Jacobian stabilizer; no node of this six-functor unit supplies this statement, and no unit step is replaced."
+   },
+   {
+    "node": "lem-sc-divisor-module-local",
+    "why": "Generic divisor, curve or projective-space tool used only in the degree-two-pencil prerequisite to the polarized-Jacobian stabilizer; no node of this six-functor unit supplies this statement, and no unit step is replaced."
+   },
+   {
+    "node": "lem-sc-smooth-connected-curve-local-rings",
+    "why": "Generic divisor, curve or projective-space tool used only in the degree-two-pencil prerequisite to the polarized-Jacobian stabilizer; no node of this six-functor unit supplies this statement, and no unit step is replaced."
+   },
+   {
+    "node": "lem-trf-curve-section-degree-positivity",
+    "why": "Generic divisor, curve or projective-space tool used only in the degree-two-pencil prerequisite to the polarized-Jacobian stabilizer; no node of this six-functor unit supplies this statement, and no unit step is replaced."
+   },
+   {
+    "node": "lem-weil-pbc-projective-space-functor-of-points",
+    "why": "Generic divisor, curve or projective-space tool used only in the degree-two-pencil prerequisite to the polarized-Jacobian stabilizer; no node of this six-functor unit supplies this statement, and no unit step is replaced."
+   },
+   {
+    "node": "thm-sc-proper-finite-fibre-finite-neighbourhood",
+    "why": "Generic divisor, curve or projective-space tool used only in the degree-two-pencil prerequisite to the polarized-Jacobian stabilizer; no node of this six-functor unit supplies this statement, and no unit step is replaced."
+   },
+   {
+    "node": "lem-kun-projective-implies-proper",
+    "why": "Properness of the given projective curve, needed for coherent cohomology, Riemann–Roch, global functions, and positivity; a generic scheme-theoretic tool, with no replacement of the unit route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-asd-projective-line-genus-zero",
+  "lem-sc-divisor-class-curve",
+  "lem-sc-divisor-module-local",
+  "lem-sc-smooth-connected-curve-local-rings",
+  "lem-trf-curve-section-degree-positivity",
+  "lem-weil-pbc-projective-space-functor-of-points",
+  "thm-sc-proper-finite-fibre-finite-neighbourhood",
+  "lem-kun-projective-implies-proper"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q67-3fd7203cf",
+  "group": "Q67",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q67-3fd7203cf (reviewer sub-agent of L); spot-checked: This is the 3rd delivery; a2a55 and d7ac9 both passed and were not landed. The item is still unsplit in live and side-live, and there is no repair note, so the re-split rule does not apply. It has 0 new nodes. Compared with d7ac9, step 5 adds the sentence '(a,b)≠(0,0) since t0,t1 is a basis'. Compared with a2a55, step 1 also cites lem-kun-projective-implies-proper; I accept this as a generic tool use. The statement and source are unchanged, and all 21 proof_deps statements are identical to live. Source: Milne AV III 12.1(b), printed p.120 (pdf p.126). I re-read it: it recalls the unique degree-2, dimension-1 system and its finite degree-2 map, and the item matches. I re-checked the mathematics. Step 3: the bound gives q ≤ max{3−g, 2} = 2, and a base point would need 2 ≤ 3/2. Step 4: the evaluation kernel is a line, which covers 2Q. Step 5: four independent products would give 4 ≤ max{5−g, 3} = 3, false also at g=2. Step 6: z = a/s1 = −b/s0 glues because s0a = −s1b; it is nonzero of degree 0, so 0B40 makes it a trivialization and M ≅ L. Steps 7–9: the 0AYZ pullback degree, finiteness via 02OH and the GL2 basis change are correct; characteristic 2 is fine. Batch-5 flags: I computed the closure of each cited node. None reaches the trace-formula or Poincaré-duality statements or an nt-assume leaf. lem-pc-coherent-hi (02O5), lem-sc-global-functions, lem-sc-riemann-roch (0BS6) and the RR/Clifford bound reach only def-trf-schematically-dense-open, trf limit-descent, pod base change, lem-trf-localization-essentially-surjective, def-pod-ring-scalar-extension and the coherent finite-duality trace. lem-sfb-proper-curve-bundle-pullback-degree reaches trf curve Euler-degree lemmas. lem-trf-curve-section-degree-positivity is Stacks 0B40. thm-sc-proper-finite-fibre reaches lem-trf-proper-finite-fibre-finite-near (02OH). All are generic coherent-cohomology and curve facts, not steps of either assumption, so they are accepted. No SGA is cited."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.Curve.DegreeTwoPencilUniqueness",
+  "declaration": "AlgebraicGeometry.Scheme.degree_two_pencil_uniqueness",
+  "file": "lean/Sheaf/AlgebraicGeometry/Curve/DegreeTwoPencilUniqueness.lean",
+  "statement": "theorem degree_two_pencil_uniqueness (k : Type u) [Field k] [IsAlgClosed k] (C : Scheme.{u}) (f : C ⟶ Spec (.of k)) [IsConnectedCurve f] [Smooth f] [IsHProjective f] (hg : 2 ≤ f.genus) : (∀ D : C.Divisor, (∀ P, 0 ≤ D P) → ∃ e : Projectivization k (Divisor.linearSystemSections k C f D) ≃ ↥(Divisor.completeLinearSystem k C f D), ∀ (s : Divisor.linearSystemSections k C f D) (hs : s ≠ 0), Divisor.sectionRepresentsDivisor k C f D s (e (Projectivization.mk k s hs)).val) ∧ (∀ D : C.Divisor, (∀ P, 0 ≤ D P) → Divisor.degree C D = 2 → (∃ E₁ ∈ Divisor.completeLinearSystem k C f D, ∃ E₂ ∈ Divisor.completeLinearSystem k C f D, E₁ ≠ E₂) → Module.finrank k (Divisor.linearSystemSections k C f D) = 2 ∧ Nonempty (Divisor.linearSystemScheme k C f D ≅ ProjectiveLine (Spec (.of k))) ∧ (∀ Q : closedPoints C, ∃ E ∈ Divisor.completeLinearSystem k C f D, E Q = 0) ∧ (∀ E : C.Divisor, (∀ P, 0 ≤ E P) → Divisor.degree C E = 2 → (∃ E₁ ∈ Divisor.completeLinearSystem k C f E, ∃ E₂ ∈ Divisor.completeLinearSystem k C f E, E₁ ≠ E₂) → Divisor.completeLinearSystem k C f E = Divisor.completeLinearSystem k C f D) ∧ (∀ Q : closedPoints C, ∃! E : C.Divisor, E ∈ Divisor.completeLinearSystem k C f D ∧ 0 < E Q) ∧ (∃ (π : C ⟶ ProjectiveLine (Spec (.of k))) (hπ : IsFinite π), π ≫ ProjectiveLine (Spec (.of k)) ↘ Spec (.of k) = f ∧ Hom.IsDegreeTwoCurveMap k C f π ∧ Set.range (Hom.degreeTwoFiberDivisor k C f π hπ) = Divisor.completeLinearSystem k C f D)) ∧ (∀ π : C ⟶ ProjectiveLine (Spec (.of k)), π ≫ ProjectiveLine (Spec (.of k)) ↘ Spec (.of k) = f → Hom.IsDegreeTwoCurveMap k C f π → ∃ (hπ : IsFinite π) (D : C.Divisor), (∀ P, 0 ≤ D P) ∧ Divisor.degree C D = 2 ∧ (∃ E₁ ∈ Divisor.completeLinearSystem k C f D, ∃ E₂ ∈ Divisor.completeLinearSystem k C f D, E₁ ≠ E₂) ∧ Set.range (Hom.degreeTwoFiberDivisor k C f π hπ) = Divisor.completeLinearSystem k C f D) ∧ (∀ π₁ π₂ : C ⟶ ProjectiveLine (Spec (.of k)), π₁ ≫ ProjectiveLine (Spec (.of k)) ↘ Spec (.of k) = f → π₂ ≫ ProjectiveLine (Spec (.of k)) ↘ Spec (.of k) = f → Hom.IsDegreeTwoCurveMap k C f π₁ → Hom.IsDegreeTwoCurveMap k C f π₂ → ∃ a : Aut (ProjectiveLine (Spec (.of k))), a.hom ≫ ProjectiveLine (Spec (.of k)) ↘ Spec (.of k) = ProjectiveLine (Spec (.of k)) ↘ Spec (.of k) ∧ π₁ ≫ a.hom = π₂)",
+  "branch": "sheaf-dag",
+  "by": "NQ",
+  "date": "2026-10-24",
+  "existing": false,
+  "declarations": [
+   "AlgebraicGeometry.Scheme.degree_two_pencil_uniqueness",
+   "AlgebraicGeometry.Scheme.Hom.IsDegreeTwoCurveMap",
+   "AlgebraicGeometry.Scheme.Hom.degreeTwoFiberDivisor"
+  ]
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-6ef306773",
+  "group": "NQ",
+  "result": "pass",
+  "note": "Read the item node, the 7 statement dependencies (6 unchanged vs side-live), the new node def-sfb-complete-divisor-linear-system (fields, 3 search kinds, Stacks 0CCT/Milne p.120 source, no existing notion: Bertini linearSystemMemberIdeal is a member subscheme) and both modules against the live declarations (DivisorModule sectionCondition, Divisor/div/principalDivisors/degree, DivisorPullback functionFieldMap/pullback with ramificationIndex, IsConnectedCurve, ProjectiveLine IsIntegral). The item changes only in lean and stmt_deps (+ the new node); both statements are verbatim. Clauses match: the projectivization ≃ |D| dictionary is pinned by E_P = D_P + ord_P s; finrank = 2; linearSystemScheme ≅ P¹; basepoint free; uniqueness of the moving degree-2 system; ∃! member through each closed point; a finite degree-2 k-map whose pullback-fibre range = |D|; the converse for every nonconstant total-degree-2 k-map; Aut P¹ over k relating any two. Edge cases: char 2/inseparable, 2Q multiplicity, g = 2, D = 0, universes uniform. No hollow definitions (.choose only of a Prop IsIntegral), sorry only, docstrings with source/blueprint/9 steps, no pro-étale substitute. Minor: an unused IsHProjective argument on linearSystemScheme; upstream ProjectiveLine/pullback are used without stmt_deps, which stage 2 cannot add. No file changed, so no compile."
+ }
+}

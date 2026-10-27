@@ -1,0 +1,123 @@
+{
+ "id": "lem-sfb-closed-intersection-affine-vertex",
+ "kind": "statement",
+ "title": "Affine closed base-change data and the signed vertex insertion homotopy",
+ "statement": "Let X be affine, i:Z→X closed, and W_a→X a finite family of closed immersions factoring through Z, with quasi-compact complementary opens for i and each W_a. Let A be any ring sheaf and D any Row i W A of [def-sfb-closed-intersection-augmented-row]. For each vertex a there exists VertexContraction D a, with all its specified BaseChange, restriction, unionIntersection, augmentation, back inverse, signed component, and every-degree homotopy fields. No covering hypothesis is imposed. This asserts only the affine vertex contraction, not row existence, exactness, open comparison, or affine-cover detection.",
+ "source": {
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Tags 09AA, 09BM, 09AH; agent deduction in lem-sfb-closed-intersection-vertex-contraction, proof steps 5-7 (affine base change and signed vertex insertion)"
+ },
+ "stmt_deps": [
+  "def-sfb-closed-intersection-augmented-row",
+  "def-weil-closed-immersion",
+  "def-weil-finite-type-morphism"
+ ],
+ "proof": [
+  {
+   "text": "Each intersection is closed and has quasi-compact complementary open, whose finiteness follows by taking a finite union of the original complementary opens. Over the affine base all closed members are affine, so both bases of the closed base-change square are qcqs. Apply the arbitrary-ring closed base-change mate to each intersection, including Z at the empty index. Transport its module objects to the actual inverse-image coefficient modules, retaining the specified unit sections. Its inverse-image square is delta, its section formula gives normalized, and the mate equation gives beta and mate. The fibre product with vertex a is the intersection indexed by insert a s. This follows from the product universal property for nonempty s; at the empty index it follows because the vertex factors through the monomorphism Z into X. These are unionIntersection. Transport the actual restrictions through these comparisons to obtain intersectionRestriction. Naturality of the counit and the composite-unit equation show that the transported faces are the same actual unit faces. They prove restriction_units and faces. For the empty summand the closed counit gives augmentation; its composite with the pulled-back unit is the identity by the triangle equation. Adjoining a vertex already in the intersection is the identity closed subscheme, so the restriction for adjoining a is invertible. Choose its inverse as back. Both inverse equations follow. Define h by its product projections. Its component at s is zero if a belongs to s, and otherwise is (-1)^(number of b in s with b<a) times the projection at insert a s followed by back s. Preservation of finite products by closed inverse image makes this a natural module map. This gives component_zero and component_insert, including the empty output and absent degrees. Check the homotopy identity on each projection indexed by J. If a belongs to J, only the term deleting a in dh survives and its two equal signs multiply to one; the inverse equation makes it the identity. If a is absent, deletion of a in hd gives the identity. For b in J, the other hd term and the corresponding dh term have equal maps by the commuting restriction square. If k is the position of b, their exponents are s_a(J)+k+[a<b] and k+s_a(J)-[b<a], which differ by one, so they cancel over every coefficient ring. At degree -1 this is the inverse equation for the augmentation; at the top degree every index contains a. Outside the finite range both objects are zero. Product projections jointly detect equality, so this proves contraction in every integer degree. Every construction uses natural linear maps, and hence gives all the stated naturality.",
+   "uses": [
+    "lem-sfb-closed-intersection-geometry",
+    "lem-sf-ring-sheaf-base-change-mates",
+    "lem-weil-pbc-proetale-ringed-open-closed",
+    "def-weil-pbc-composite-adjunction",
+    "def-sfb-proetale-ordinary-pullback-comparison",
+    "def-sfb-proetale-unit-normalized-adjunction"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-closed-intersection-geometry",
+  "lem-sf-ring-sheaf-base-change-mates",
+  "lem-weil-pbc-proetale-ringed-open-closed",
+  "def-weil-pbc-composite-adjunction",
+  "def-sfb-proetale-ordinary-pullback-comparison",
+  "def-sfb-proetale-unit-normalized-adjunction"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Tags 09AA, 09BM, 09AH; proof steps 5-7 (affine base change and signed vertex insertion) of lem-sfb-closed-intersection-vertex-contraction"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Augmented alternating finite intersection complex contracting homotopy by insertion of a vertex",
+   "results": "8 hits: AlgebraicTopology.DoldKan.Hσ, AlgebraicTopology.AlternatingFaceMapComplex.ε, AlgebraicTopology.DoldKan.homotopyPInftyToId, AlgebraicTopology.DoldKan.hσ', AlgebraicTopology.DoldKan.homotopyPToId, AlgebraicTopology.DoldKan.homotopyQToZero, AlgebraicTopology.DoldKan.hσ, AlgebraicTopology.DoldKan.homotopyPToId_eventually_constant; ",
+   "date": "2026-10-26",
+   "verdict": "No exact match: the hits do not provide this finite augmented closed-intersection statement with its specified maps."
+  },
+  {
+   "tool": "grep",
+   "query": "(vertex.*contract|insert.*homotop|contract.*[Cc]ech)",
+   "results": "0 hits: ; ",
+   "date": "2026-10-26",
+   "verdict": "No exact match: the hits do not provide this finite augmented closed-intersection statement with its specified maps."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Finite signed intersection complex contracts after restriction to one closed vertex by inserting that vertex",
+   "results": "8 hits: SSet.stdSimplex.face_inter_face, FiniteInter.finiteInterClosure_insert, Geometry.SimplicialComplex.vertices, HomologicalComplex.restriction, Geometry.SimplicialComplex.vertices_eq, Geometry.SimplicialComplex.mem_vertices, Affine.Simplex.restrict, SSet.stdSimplex.instFiniteToSSetOfSimplex; ",
+   "date": "2026-10-26",
+   "verdict": "No exact match: the hits do not provide this finite augmented closed-intersection statement with its specified maps."
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.ClosedIntersectionVertexContraction",
+  "date": "2026-10-26",
+  "group": "C3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "Paragraph (3), open direct-image finiteness, of det-thm-sf-ctf-stability-direct-images; technical support-resolution subargument: Tags 09AA (lemma-closed-immersion), 09BM (lemma-closed-immersion-complement-retrocompact-exact), 09AH (lemma-ses-associated-to-open); agent affine closed-base-change and insertion-contraction consequence extracted from old steps 1, 4 and 5 of lem-sfb-finite-closed-cover-resolution, using the existing arbitrary-ring base-change node.; proof steps 5-7 (affine base change and signed vertex insertion)",
+   "via": [
+    "lem-sfb-closed-intersection-vertex-contraction",
+    "lem-sfb-finite-closed-cover-resolution",
+    "lem-sfb-root-tower-inner-support",
+    "lem-sfb-partial-kummer-boundary-unit-model",
+    "lem-sfb-transverse-tame-open-shriek-exchange",
+    "lem-sfb-continuous-algcl-tame-boundary-comparison",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.ClosedIntersectionAffineVertex",
+  "file": "lean/Sheaf/AlgebraicGeometry/ClosedIntersectionAffineVertex.lean",
+  "declaration": "AlgebraicGeometry.ClosedIntersection.closed_intersection_affine_vertex",
+  "statement": "theorem closed_intersection_affine_vertex {X Z : Scheme.{u}} (i : Z ⟶ X)\n    [IsClosedImmersion i] {m : ℕ} (W : Fin m → Over X)\n    (hclosed : ∀ a, IsClosedImmersion (W a).hom)\n    (hfactor : ∀ a, Nonempty (W a ⟶ Over.mk i))\n    (hqc : ∃ U : X.Opens, Set.range U.ι = (Set.range i)ᶜ ∧ QuasiCompact U.ι)\n    (hqcW : ∀ a, ∃ U : X.Opens,\n      Set.range U.ι = (Set.range (W a).hom)ᶜ ∧ QuasiCompact U.ι)\n    (A : Rings X) (D : Row i W A)\n    [IsAffine X] (a : Fin m) : Nonempty (VertexContraction D a)",
+  "branch": "sheaf-dag",
+  "by": "C3",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C3",
+  "result": "pass",
+  "landing": "20261026T081212-L-1867064",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C3",
+  "result": "pass",
+  "landing": "20261026T081212-L-1867064",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

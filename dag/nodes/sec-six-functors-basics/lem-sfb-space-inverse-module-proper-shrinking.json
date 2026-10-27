@@ -1,0 +1,275 @@
+{
+ "id": "lem-sfb-space-inverse-module-proper-shrinking",
+ "kind": "statement",
+ "title": "Proper-support shrinking for an inverse-ring local model",
+ "statement": "Work over $\\operatorname{Spec}\\mathbf Z$ with schemes [def-pc-scheme, def-weil-affine-spectrum], algebraic spaces [def-trf-algebraic-space], and the universes of [def-weil-size-convention]. Fibre products are sheaf fibre products [lem-trf-space-fibre-products-etale-covers]. Separated, finite type and proper morphisms use [def-sfb-space-morphism-properties]. Finite presentation means quasi-compact, quasi-separated and locally finitely presented on etale scheme charts. Use quasi-coherent modules on the small etale ringed sites [def-trf-space-quasi-coherent-module] and tensor pullback and direct image [def-trf-space-etale-module-functors]. A module is finitely presented if etale locally it has a presentation $\\mathcal O^r\\to\\mathcal O^s\\to F\\to0$ with $r,s$ finite. Base-flatness means flatness of stalks on etale scheme charts over the corresponding local rings of the base [def-pc-scheme-module-flat-over]. Proper support means there exist a closed immersion $i:Z\\hookrightarrow X$ with $Z$ proper over the base and a finite type quasi-coherent module $G$ on $Z$ such that $i_*G\\simeq F$ [def-sfb-space-proper-quot-functor]. Let $(A_n)_{n\\geq1}$ be an inverse sequence of commutative rings with surjective transition maps whose kernels are locally nilpotent, meaning every element of each kernel is nilpotent, and set $A=\\varprojlim_n A_n$. Let $X\\to\\operatorname{Spec}A$ be separated and finitely presented, put $X_n=X\\times_A\\operatorname{Spec}A_n$, and put $X_0=|X_1|\\subseteq|X|$, the common underlying closed subset of all the $X_n$. Let $W\\subseteq X$ be an open subspace containing $X_0$, and let $F$ be a finitely presented quasi-coherent $\\mathcal O_W$-module. Assume that its pullback $F\\otimes_A A_1$ to $X_1$ has support proper over $A_1$. There exists an open subspace $W'\\subseteq W$ containing $X_0$ such that $F|_{W'}$ has support proper over $A$.",
+ "source": {
+  "document": "literature/stacks-project/spaces-flat.tex",
+  "place": "Tag 0CXA (lemma-proper-support), proof, which uses only a finitely presented local module and its proper special-fibre support; underlying-set interpretation of support, not equality of annihilator subschemes. Inputs in that proof: more-algebra.tex Tag 0CT7 (lemma-limit-henselian) and spaces-more-morphisms.tex Tag 0CWI (lemma-split-off-proper-part-henselian)."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-size-convention",
+  "def-trf-algebraic-space",
+  "lem-trf-space-fibre-products-etale-covers",
+  "def-trf-space-quasi-coherent-module",
+  "def-trf-space-etale-module-functors",
+  "def-pc-scheme-module-flat-over",
+  "def-sfb-space-proper-quot-functor",
+  "def-sfb-space-morphism-properties",
+  "def-weil-affine-spectrum"
+ ],
+ "proof": [
+  {
+   "text": "Put $I=\\ker(A\\to A_1)$. Apply [lem-sfb-nil-ring-tower-limit-henselian] to obtain $A/I\\simeq A_1$ and the henselian pair $(A,I)$. Thus the special base for the proper-part lifting theorem is exactly $\\operatorname{Spec}A_1$.",
+   "uses": [
+    "lem-sfb-nil-ring-tower-limit-henselian"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0CT7 (lemma-limit-henselian)."
+   }
+  },
+  {
+   "text": "First replace $W$ by a quasi-compact open $W_0$ with $X_0\\subseteq W_0\\subseteq W$. Indeed $X\\to\\operatorname{Spec}A$ is quasi-compact, and [lem-sfb-space-quasicompact-affine-tests] shows that $X_1$ is quasi-compact. Apply [lem-a1-space-etale-open-image] to the identity of $X_1$ to identify this with topological quasi-compactness. Take an etale scheme atlas of $W$ and cover it by affine opens. By the same open-image lemma their images are quasi-compact open subspaces covering $W$. Their intersections with $X_0$ cover the quasi-compact point space of $X_1$; choose finitely many and let $W_0$ be their union. The empty union is allowed. Restriction to an open preserves local finite type, since on affine chart neighborhoods it is localization of a finitely generated algebra; hence $W_0\\to\\operatorname{Spec}A$ is of finite type. Its relative diagonal is the restriction of that of $X$, so it is separated.",
+   "uses": [
+    "lem-sfb-space-quasicompact-affine-tests",
+    "lem-a1-space-etale-open-image"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-properties.tex",
+    "place": "Tags 03IR (lemma-etale-open) and 03E4 (lemma-quasi-compact-space); finite-subcover argument."
+   }
+  },
+  {
+   "text": "Write $M=F|_{W_0}$. It is finite type because its finite presentation supplies finitely many generators. By [lem-sfb-space-module-proper-carrier-support] its quasi-coherent annihilator defines a closed subspace $Z\\hookrightarrow W_0$. Its point set is $\\operatorname{Supp}(M)$: on any affine etale chart a finite set of module generators vanishes at a prime precisely when their annihilator contains an element outside that prime (multiply the finitely many denominators killing the generators). This is also the geometric-stalk support by [lem-sfb-space-etale-chart-support]. The closed immersion is proper by [lem-sfb-space-closed-subspace-proper], so is finite type; [lem-sfb-space-finite-type-composition] makes $Z\\to\\operatorname{Spec}A$ finite type. It is separated: after every scheme test the diagonal of $Z/A$ is the restriction of the closed diagonal of $W_0/A$.",
+   "uses": [
+    "lem-sfb-space-module-proper-carrier-support",
+    "lem-sfb-space-etale-chart-support",
+    "lem-sfb-space-closed-subspace-proper",
+    "lem-sfb-space-finite-type-composition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-morphisms.tex",
+    "place": "Tags 07U0 (lemma-scheme-theoretic-support), 04XZ (lemma-closed-immersion-proper), 03XG (lemma-composition-finite-type)."
+   }
+  },
+  {
+   "text": "Put $Z_0=Z\\times_A\\operatorname{Spec}A_1$. Its point set inside $X_1$ is $\\operatorname{Supp}(F\\otimes_A A_1)$: the fibre-product point-image formula in [lem-a1-space-point-open-calculus] identifies it with the inverse image of $|Z|$, and [lem-sfb-space-finite-type-support-pullback] identifies that inverse image with the support of the tensor pullback. Here $W_0\\times_X X_1=X_1$, since its image lies in $W_0$. By the hypothesis and [lem-sfb-space-module-proper-carrier-support], the annihilator support of $F\\otimes_A A_1$ is proper over $A_1$. Apply [lem-sfb-space-proper-support-closed-operations] on $X_1\\to\\operatorname{Spec}A_1$: any closed subspace with that same point set is proper, so $Z_0$ is proper. The local-finite-type hypothesis holds on charts by tensoring finite algebra generators with $A_1$. This uses equality of point sets, not equality of annihilator subschemes.",
+   "uses": [
+    "lem-a1-space-point-open-calculus",
+    "lem-sfb-space-finite-type-support-pullback",
+    "lem-sfb-space-module-proper-carrier-support",
+    "lem-sfb-space-proper-support-closed-operations"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-perfect.tex",
+    "place": "Tags 0CZI (lemma-module-support-proper-over-base), 0CZC (lemma-closed-proper-over-base); spaces-morphisms.tex Tag 07TZ (lemma-support-finite-type)."
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-space-henselian-proper-clopen-lift] to the separated finite-type space $Z/A$, the pair $(A,I)$, and the whole special fibre $Z_0$ (open and closed in itself). It gives an open and closed subspace $Z_1\\subseteq Z$ proper over $A$ whose special fibre is all of $Z_0$. Write $Z_2=Z\\setminus Z_1$. It is closed in $Z$, hence closed in $W_0$, and its point set is disjoint from $X_0$, because its special fibre is empty.",
+   "uses": [
+    "lem-sfb-space-henselian-proper-clopen-lift"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-more-morphisms.tex",
+    "place": "Tag 0CWI (lemma-split-off-proper-part-henselian), with Y equal to the entire special fibre."
+   }
+  },
+  {
+   "text": "Take $W^{\\prime}=W_0\\setminus|Z_2|$. It is open, contains $X_0$, and is contained in the original $W$. The support of $F|_{W^{\\prime}}$ is $|Z_1|$ by [lem-sfb-space-finite-type-support-pullback] for the open inclusion. More precisely its annihilator support is $Z\\times_{W_0}W^{\\prime}=Z_1$: annihilating local sections commutes with restriction to an open. Since $Z_1$ is proper over $A$, [lem-sfb-space-module-proper-carrier-support] gives proper support in exactly the closed-carrier sense of the statement.",
+   "uses": [
+    "lem-sfb-space-finite-type-support-pullback",
+    "lem-sfb-space-module-proper-carrier-support"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-flat.tex",
+    "place": "Tag 0CXA (lemma-proper-support), final shrinking step; proper support in spaces-perfect.tex Tag 0CZI."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-nil-ring-tower-limit-henselian",
+  "lem-sfb-space-quasicompact-affine-tests",
+  "lem-a1-space-etale-open-image",
+  "lem-sfb-space-module-proper-carrier-support",
+  "lem-sfb-space-etale-chart-support",
+  "lem-sfb-space-closed-subspace-proper",
+  "lem-sfb-space-finite-type-composition",
+  "lem-a1-space-point-open-calculus",
+  "lem-sfb-space-finite-type-support-pullback",
+  "lem-sfb-space-proper-support-closed-operations",
+  "lem-sfb-space-henselian-proper-clopen-lift"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/spaces-flat.tex",
+  "place": "Tag 0CXA (lemma-proper-support), proof, with the finite-type neighborhood and point-set support comparisons made explicit."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Over an inverse limit of surjective ring maps with nil kernels a finitely presented sheaf whose special fibre has proper support has proper support after shrinking around the special fibre",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"SheafOfModules.QuasicoherentData.IsFinitePresentation.isFinite_presentation\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent\", \"type\": \"∀ {C : Type u'} {inst : CategoryTheory.Category.{v', u'} C} {J : CategoryTheory.GrothendieckTopology C}\\n  {R : CategoryTheory.Sheaf J RingCat}\\n  {inst_1 : ∀ (X : C), (J.over X).HasSheafCompose (CategoryTheory.forget₂ RingCat AddCommGrpCat)}\\n  {inst_2 : ∀ (X : C), CategoryTheory.HasWeakSheafify (J.ov\", \"doc\": \"For a quasicoherent sheaf $\\\\mathcal{M}$ over a ring sheaf $\\\\mathcal{O}$ on a site $(\\\\mathcal{C}, J)$, under conditions ensuring sheaf composition, weak sheafification, and local bijectivity for additi\"}\n  {\"name\": \"AlgebraicGeometry.IsProper.instIsZariskiLocalAtTarget\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Proper\", \"type\": \"AlgebraicGeometry.IsZariskiLocalAtTarget @AlgebraicGeometry.IsProper\", \"doc\": \"The property of a morphism of schemes being proper is Zariski local at the target. This means that if a morphism $ f: X \\to Y $ is proper, then for any Zariski covering sieve $ S $ on $ Y $, there exis\"}\n  {\"name\": \"Module.stableUnderSpecialization_support\", \"module\": \"Mathlib/RingTheory/Spectrum/Prime/Module\", \"type\": \"∀ {R : Type u_1} {M : Type u_3} [inst : CommRing R] [inst_1 : AddCommGroup M] [inst_2 : Module R M],\\n  StableUnderSpecialization (Module.support R M)\", \"doc\": \"For a module $ M $ over a commutative semiring $ R $, the support of $ M $ in the prime spectrum $ \\\\operatorname{Spec}(R) $ is stable under specialization. This means that if a prime ideal $ \\\\mathfrak\"}\n  {\"name\": \"AlgebraicGeometry.LocallyOfFinitePresentation\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"A morphism $ f: X \\\\to Y $ of schemes is locally of finite presentation, meaning that for every point in $ X $, there exists an open neighborhood such that the restriction of $ f $ to this neighborhood\"}\n  {\"name\": \"AlgebraicGeometry.exists_appTop_map_eq_zero_of_isLimit\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"∀ {I : Type u} [inst : CategoryTheory.Category.{u, u} I] (D : CategoryTheory.Functor I AlgebraicGeometry.Scheme)\\n  (c : CategoryTheory.Limits.Cone D) (hc : CategoryTheory.Limits.IsLimit c) [CategoryTheory.IsCofiltered I]\\n  [∀ {i j : I} (f : i ⟶ j), AlgebraicGeometry.IsAffineHom (D.map f)] {i : I} [C\", \"doc\": \"Given a cofiltered diagram of schemes with affine transition morphisms and compact topological spaces, if a global section becomes zero under the limit cone's projection map, then there exists a morph\"}\n  {\"name\": \"AlgebraicGeometry.Proj.instIsProperToSpecZeroOfFiniteTypeSubtypeMemOfNatNat\", \"module\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Proper\", \"type\": \"∀ {σ : Type u_1} {A : Type u_2} [inst : CommRing A] [inst_1 : SetLike σ A] [inst_2 : AddSubgroupClass σ A] (𝒜 : ℕ → σ)\\n  [inst_3 : GradedRing 𝒜] [Algebra.FiniteType (↥(𝒜 0)) A],\\n  AlgebraicGeometry.IsProper (AlgebraicGeometry.Proj.toSpecZero 𝒜)\", \"doc\": \"If the zero-graded component $ \\\\mathcal{A}_0 $ of a graded ring $ \\\\mathcal{A} $ is a finitely generated $ A $-algebra, then the canonical morphism from the projective spectrum $ \\\\operatorname{Proj}(\\\\m\"}\n  {\"name\": \"AlgebraicGeometry.instHasRingHomPropertyLocallyOfFinitePresentationFinitePresentation\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation\", \"type\": \"AlgebraicGeometry.HasRingHomProperty @AlgebraicGeometry.LocallyOfFinitePresentation\\n  fun {R S} [CommRing R] [CommRing S] => RingHom.FinitePresentation\", \"doc\": \"A morphism of schemes is locally of finite presentation if and only if the corresponding ring homomorphism is finitely presented. This instance establishes that the scheme-theoretic property of being \"}\n  {\"name\": \"AlgebraicGeometry.exists_app_map_eq_zero_of_isLimit\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"∀ {I : Type u} [inst : CategoryTheory.Category.{u, u} I] (D : CategoryTheory.Functor I AlgebraicGeometry.Scheme)\\n  (c : CategoryTheory.Limits.Cone D) (hc : CategoryTheory.Limits.IsLimit c) [CategoryTheory.IsCofiltered I]\\n  [∀ {i j : I} (f : i ⟶ j), AlgebraicGeometry.IsAffineHom (D.map f)] {i : I} {U\", \"doc\": \"Given a cofiltered diagram of schemes where all transition morphisms are affine, for any compact open subset $ U $ of a scheme in the diagram and a section $ s $ of the structure sheaf over $ U $ that\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern scheme properness, module support or finite presentations, not shrinking proper support over a nilpotent inverse-ring limit"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Shrink a neighborhood of a special fibre so that a finitely presented module has proper support over a henselian ring",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"Module.mem_support_mono\", \"module\": \"Mathlib.RingTheory.Support\", \"type\": \"{p q : PrimeSpectrum R} (H : p ≤ q) (hp : p ∈ Module.support R M) : q ∈ Module.support R M\", \"doc\": \"For any commutative semiring $ R $ and module $ M $ over $ R $, if a prime ideal $ \\\\mathfrak{p} $ is in the support of $ M $ and $ \\\\mathfrak{p} \\\\subseteq \\\\mathfrak{q} $, then $ \\\\mathfrak{q} $ is also \"}\n  {\"name\": \"Module.support\", \"module\": \"Mathlib.RingTheory.Support\", \"type\": \": Set (PrimeSpectrum R)\", \"doc\": \"The support of a module $ M $ over a commutative semiring $ R $ is the subset of the prime spectrum of $ R $ consisting of all prime ideals $ \\\\mathfrak{p} $ such that the localization of $ M $ at the \"}\n  {\"name\": \"HenselianLocalRing.toIsLocalRing\", \"module\": \"Mathlib.RingTheory.Henselian\", \"type\": \"∀ {R : Type u_1} {inst : CommRing R} [self : HenselianLocalRing R], IsLocalRing R\", \"doc\": \"Every Henselian local ring is a local ring.\"}\n  {\"name\": \"Module.Flat.of_shrink\", \"module\": \"Mathlib.RingTheory.Flat.Basic\", \"type\": \"[Small.{v'} M] [Flat R (Shrink.{v'} M)] : Flat R M\", \"doc\": \"Given a commutative semiring $ R $ and a small $ R $-module $ M $, if the shrink of $ M $ (a type in bijection with $ M $) is flat over $ R $, then $ M $ itself is flat over $ R $. This follows from t\"}\n  {\"name\": \"Module.stableUnderSpecialization_support\", \"module\": \"Mathlib.RingTheory.Spectrum.Prime.Module\", \"type\": \": StableUnderSpecialization (Module.support R M)\", \"doc\": \"For a module $ M $ over a commutative semiring $ R $, the support of $ M $ in the prime spectrum $ \\\\operatorname{Spec}(R) $ is stable under specialization. This means that if a prime ideal $ \\\\mathfrak\"}\n  {\"name\": \"instHenselianRingMaximalIdeal\", \"module\": \"Mathlib.RingTheory.Henselian\", \"type\": \"(R : Type*) [CommRing R] [hR : HenselianLocalRing R] : HenselianRing R (maximalIdeal R)\", \"doc\": \"Every Henselian local ring $ R $ is Henselian with respect to its maximal ideal, which is the unique maximal ideal consisting of all non-units in $ R $.\"}\n  {\"name\": \"Module.isClosed_support\", \"module\": \"Mathlib.RingTheory.Spectrum.Prime.Module\", \"type\": \"[Module.Finite R M] : IsClosed (Module.support R M)\", \"doc\": \"For a finitely generated module $ M $ over a commutative semiring $ R $, the support of $ M $ in the prime spectrum $ \\\\operatorname{Spec}(R) $ is a closed set in the Zariski topology. This means the s\"}\n  {\"name\": \"Module.mem_support_iff_nontrivial_residueField_tensorProduct\", \"module\": \"Mathlib.RingTheory.LocalRing.Module\", \"type\": \"[Module.Finite R M] (p : PrimeSpectrum R) : p ∈ Module.support R M ↔ Nontrivial (p.asIdeal.ResidueField ⊗[R] M)\", \"doc\": \"For a finite module $ M $ over a commutative ring $ R $ and a prime ideal $ \\\\mathfrak{p} $ in the prime spectrum of $ R $, the prime $ \\\\mathfrak{p} $ belongs to the support of $ M $ if and only if the\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern scheme properness, module support or finite presentations, not shrinking proper support over a nilpotent inverse-ring limit"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Henselian\", \"Proper\"",
+   "results": "[loogle] OK 0 hit(s)",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern scheme properness, module support or finite presentations, not shrinking proper support over a nilpotent inverse-ring limit"
+  },
+  {
+   "tool": "grep",
+   "query": "henselian.*proper|proper.*support.*(open|shrink)|split.*proper",
+   "results": "[grep] OK 7 hit(s)\n  {\"file\": \"Mathlib/Algebra/Ring/Ext.lean\", \"line\": \"50\", \"text\": \"  -- Split into `add` and `mul` functions and properties.\"}\n  {\"file\": \"Mathlib/Algebra/Ring/Ext.lean\", \"line\": \"65\", \"text\": \"  -- Split into `AddMonoid` instance, `mul` function and properties.\"}\n  {\"file\": \"Mathlib/Algebra/Ring/Ext.lean\", \"line\": \"170\", \"text\": \"  -- Split into `AddCommGroup` instance, `mul` function and properties.\"}\n  {\"file\": \"Mathlib/RingTheory/Henselian.lean\", \"line\": \"36\", \"text\": \"* `Henselian.TFAE`: equivalent ways of expressing the Henselian property for local rings\"}\n  {\"file\": \"Mathlib/Analysis/CStarAlgebra/Unitization.lean\", \"line\": \"136\", \"text\": \"    -- Show that `(Unitization.splitMul 𝕜 E x).snd` satisfies the C⋆-property, in two stages:\"}\n  {\"file\": \"Mathlib/Analysis/CStarAlgebra/Unitization.lean\", \"line\": \"165\", \"text\": \"    -- Show that `(Unitization.splitMul 𝕜 E x).fst` satisfies the C⋆-property\"}\n  {\"file\": \"Mathlib/RingTheory/Valuation/ValuativeRel/Basic.lean\", \"line\": \"60\", \"text\": \"Split this file. For instance, the universal properties of `ValueGroupWithZero` and definition of\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern scheme properness, module support or finite presentations, not shrinking proper support over a nilpotent inverse-ring limit"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Splitting off the proper part of the support of a finite presentation module over a henselian pair",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"Module.FinitePresentation.out\", \"module\": \"Mathlib/Algebra/Module/FinitePresentation\", \"type\": \"∀ {R : Type u_1} {M : Type u_2} {inst : Semiring R} {inst_1 : AddCommMonoid M} {inst_2 : Module R M}\\n  [self : Module.FinitePresentation R M],\\n  ∃ s, Submodule.span R ↑s = ⊤ ∧ (Finsupp.linearCombination R Subtype.val).ker.FG\", \"doc\": \"A module $ M $ over a semiring $ R $ is finitely presented if and only if there exists a finite set $ S $ such that the span of $ S $ equals $ M $, and the kernel of the linear map induced by the incl\"}\n  {\"name\": \"Module.FinitePresentation.exists_fin\", \"module\": \"Mathlib/Algebra/Module/FinitePresentation\", \"type\": \"∀ (R : Type u) (M : Type u_1) [inst : Ring R] [inst_1 : AddCommGroup M] [inst_2 : Module R M]\\n  [fp : Module.FinitePresentation R M], ∃ n K x, K.FG\", \"doc\": \"For a finitely presented module $ M $ over a semiring $ R $, there exists a natural number $ n $, a finitely generated submodule $ K $ of the free module $ R^n $, and an isomorphism between $ M $ and \"}\n  {\"name\": \"Module.FinitePresentation.exists_notMem_bijective\", \"module\": \"Mathlib/Algebra/Module/FinitePresentation\", \"type\": \"∀ {R : Type u_5} {M : Type u_6} {N : Type u_7} [inst : CommRing R] [inst_1 : AddCommGroup M] [inst_2 : Module R M]\\n  [inst_3 : AddCommGroup N] [inst_4 : Module R N] [Module.Finite R M] [Module.FinitePresentation R N] (f : M →ₗ[R] N)\\n  (p : Ideal R) [inst_7 : p.IsPrime] {Mₚ : Type u_3} {Nₚ : Type u_4\", \"doc\": \"Let $ R $ be a commutative semiring, $ M $ a finitely generated $ R $-module, and $ N $ a finitely presented $ R $-module. Given a linear map $ f : M → N $, a prime ideal $ \\\\mathfrak{p} ⊂ R $, and loc\"}\n  {\"name\": \"Module.finitePresentation_of_split_exact\", \"module\": \"Mathlib/Algebra/Module/FinitePresentation\", \"type\": \"∀ {R : Type u_2} {M : Type u_4} {N : Type u_3} [inst : Ring R] [inst_1 : AddCommGroup M] [inst_2 : Module R M]\\n  [inst_3 : AddCommGroup N] [inst_4 : Module R N] {P : Type u_1} [inst_5 : AddCommGroup P] [inst_6 : Module R P]\\n  [Module.FinitePresentation R N] (f : M →ₗ[R] N) (g : N →ₗ[R] P) (l : P →ₗ[\", \"doc\": \"Given a split exact sequence of modules $0 \\\\to M \\\\xrightarrow{f} N \\\\xrightarrow{g} P \\\\to 0$ where $N$ is finitely presented, $f$ is injective, and there exists a section $l: P \\\\to N$ satisfying $g \\\\ci\"}\n  {\"name\": \"Module.exists_basis_of_span_of_maximalIdeal_rTensor_injective\", \"module\": \"Mathlib/RingTheory/LocalRing/Module\", \"type\": \"∀ {R : Type u_1} {M : Type u_2} [inst : CommRing R] [inst_1 : AddCommGroup M] [inst_2 : Module R M]\\n  [inst_3 : IsLocalRing R] [Module.FinitePresentation R M],\\n  Function.Injective ⇑(LinearMap.rTensor M (Submodule.subtype (IsLocalRing.maximalIdeal R))) →\\n    ∀ {ι : Type u} (v : ι → M), Submodule.spa\", \"doc\": \"Let $ R $ be a local semiring with maximal ideal $ \\\\mathfrak{m} $, and let $ M $ be a finitely presented $ R $-module. If the canonical linear map $ \\\\mathfrak{m} \\\\otimes_R M \\\\to M $ induced by the inc\"}\n  {\"name\": \"Module.FinitePresentation\", \"module\": \"Mathlib/Algebra/Module/FinitePresentation\", \"type\": \"(R : Type u_1) → (M : Type u_2) → [inst : Semiring R] → [inst_1 : AddCommMonoid M] → [Module R M] → Prop\", \"doc\": \"A module $ M $ over a semiring $ R $ is finitely presented if there exists a finite set of generators and a finite set of relations such that $ M $ is isomorphic to the quotient of the free module gen\"}\n  {\"name\": \"Module.FinitePresentation.exists_basis_localizedModule_powers\", \"module\": \"Mathlib/RingTheory/Localization/Free\", \"type\": \"∀ {R : Type u_4} {M : Type u_5} [inst : CommRing R] [inst_1 : AddCommGroup M] [inst_2 : Module R M] (S : Submonoid R)\\n  {M' : Type u_1} [inst_3 : AddCommGroup M'] [inst_4 : Module R M'] (f : M →ₗ[R] M') [inst_5 : IsLocalizedModule S f]\\n  (Rₛ : Type u_3) [inst_6 : CommRing Rₛ] [inst_7 : Algebra R Rₛ]\", \"doc\": \"Let $R$ be a commutative ring and $M$ be a finitely presented $R$-module. Let $S$ be a submonoid of $R$. Suppose that the localization $S^{-1}M$ is a free $S^{-1}R$-module with a finite basis $b$ inde\"}\n  {\"name\": \"instFinitePresentationFinsupp\", \"module\": \"Mathlib/Algebra/Module/FinitePresentation\", \"type\": \"∀ {R : Type u_1} [inst : Ring R] {ι : Type u_2} [Finite ι], Module.FinitePresentation R (ι →₀ R)\", \"doc\": \"For any semiring $ R $ and finite index type $ \\\\iota $, the module of finite support functions $ \\\\iota \\\\to_0 R $ is finitely presented over $ R $.\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern scheme properness, module support or finite presentations, not shrinking proper support over a nilpotent inverse-ring limit"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Shrink an open neighborhood so a module has proper support over a henselian pair",
+   "results": "8 hits: Module.support, Module.mem_support_mono, HenselianLocalRing.toIsLocalRing, instHenselianRingMaximalIdeal, IsHausdorff.of_isLocalRing, AlgebraicGeometry.Scheme.IdealSheafData.Simps.coe_support, HahnModule.support_smul_subset_vadd_support', Module.Flat.of_shrink",
+   "date": "2026-10-24",
+   "verdict": "no match: none of the hits gives proper-support shrinking for algebraic spaces or a henselian proper-part decomposition."
+  },
+  {
+   "tool": "grep",
+   "query": "proper.*support.*(open|shrink)|henselian.*proper|split.*proper",
+   "results": "7 hits: Mathlib/Algebra/Ring/Ext.lean, Mathlib/Algebra/Ring/Ext.lean, Mathlib/Algebra/Ring/Ext.lean, Mathlib/RingTheory/Henselian.lean, Mathlib/RingTheory/Valuation/ValuativeRel/Basic.lean, Mathlib/Analysis/CStarAlgebra/Unitization.lean, Mathlib/Analysis/CStarAlgebra/Unitization.lean",
+   "date": "2026-10-24",
+   "verdict": "no match: none of the hits gives proper-support shrinking for algebraic spaces or a henselian proper-part decomposition."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Proper\", \"support\"",
+   "results": "1 hits: Lean.Lsp.ResolveSupport.properties",
+   "date": "2026-10-24",
+   "verdict": "no match: none of the hits gives proper-support shrinking for algebraic spaces or a henselian proper-part decomposition."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A finitely presented quasi-coherent module with proper special fibre support has proper support after shrinking over an inverse limit of nil thickenings",
+   "results": "8 hits: SheafOfModules.QuasicoherentData.IsFinitePresentation.isFinite_presentation, SheafOfModules.IsFinitePresentation.exists_quasicoherentData, SheafOfModules.QuasicoherentData.IsFinitePresentation, Module.stableUnderSpecialization_support, Module.isClosed_support, AlgebraicGeometry.instIsProperOfIsFinite, AlgebraicGeometry.IsProper.toLocallyOfFiniteType, AlgebraicGeometry.exists_appTop_map_eq_zero_of_isLimit",
+   "date": "2026-10-24",
+   "verdict": "no match: none of the hits gives proper-support shrinking for algebraic spaces or a henselian proper-part decomposition."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Splitting the support of a sheaf into a proper part and a part missing the special fibre",
+   "results": "8 hits: AlgebraicGeometry.StructureSheaf.normalize_finite_fraction_representation, ModuleCat.Tilde.sectionsSubmodule, AlgebraicGeometry.RingedSpace.zeroLocus, AlgebraicGeometry.exists_eq_pow_mul_of_is_compact_of_quasi_separated_space_aux, AlgebraicGeometry.Scheme.IdealSheafData.mkOfMemSupportIff_ideal, AlgebraicGeometry.Scheme.IdealSheafData.range_glueDataObjι_ι_eq_support_inter, AlgebraicGeometry.exists_of_res_zero_of_qcqs_of_top, ModuleCat.Tilde.exists_const",
+   "date": "2026-10-24",
+   "verdict": "no match: none of the hits gives proper-support shrinking for algebraic spaces or a henselian proper-part decomposition."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-space-flat-proper-support-inverse-effectivity",
+  "date": "2026-10-24",
+  "group": "Q79"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "Proof (3), compactification/direct-image preservation, inherited alteration and stable-moduli prerequisite chain; algebraicity of the coherent-family stack used by the proper-support Quot representability input. Supporting input: Tags 0CX4 (situation-existence), 0CXB (theorem-existence). Supporting input in 0CXB: Tag 0CXA (lemma-proper-support), proof, which uses only a finitely presented local module and its proper special-fibre support; underlying-set interpretation of support, not equality of annihilator subschemes. Inputs in that proof: more-algebra.tex Tag 0CT7 (lemma-limit-henselian) and spaces-more-morphisms.tex Tag 0CWI (lemma-split-off-proper-part-henselian).",
+   "via": [
+    "lem-sfb-space-flat-proper-support-inverse-effectivity",
+    "lem-sfb-space-coherent-stack-general",
+    "lem-sfb-space-quot-representability",
+    "lem-sfb-space-hilbert-representability",
+    "lem-sfb-space-hom-representability",
+    "lem-sfb-curve-descent-isom-spaces",
+    "lem-sfb-nodal-curve-stack-smooth",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-space-inverse-module-proper-shrinking",
+  "worker": "stage1",
+  "summary": "Followed 0CXA using the existing space proper-clopen lift and support nodes, with only the ring-tower henselianity input newly stated. Explicitly chose a quasi-compact neighborhood before applying 0CWI and used equality of support point sets, never arbitrary base change of annihilator ideals. Item statement unchanged.",
+  "blueprint": "The inherited compactification/direct-image prerequisite chain is retained (from.node null as reported by blueprint_refs ancestor); the current unit proof paragraph on compactification is realized through the existing coherent-stack/effectivity chain. Locally this item realizes the henselian-pair and support-shrinking argument of 0CXA.",
+  "tool_uses": [
+   {
+    "node": "lem-a1-space-etale-open-image",
+    "why": "Generic topology of algebraic spaces needed for the finite-cover neighborhood or fibre-product point-set comparison; the six-functor unit has no substitute for this foundational statement."
+   },
+   {
+    "node": "lem-a1-space-point-open-calculus",
+    "why": "Generic topology of algebraic spaces needed for the finite-cover neighborhood or fibre-product point-set comparison; the six-functor unit has no substitute for this foundational statement."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-a1-space-etale-open-image",
+  "lem-a1-space-point-open-calculus"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q31-846c3f2ae",
+  "group": "Q31",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q31-846c3f2ae (reviewer sub-agent of L); spot-checked: Read the item, the new node lem-sfb-nil-ring-tower-limit-henselian, all 11 cited statements, and the sources Stacks 0CXA, 0CT7 and 0CWI in full. Live still has the item unsplit with the same statement. There is no repair note, so this is not a re-split, and no live or side-live node states 0CT7. The item abstracts exactly what the 0CXA proof uses. Proper support is handled through equal point sets plus 0CZC: any closed subspace with the same point set is proper. This avoids the source's claim that annihilators commute with non-flat base change, which is false (k[x,y] example: (t^2) vs (t)). The new node is 0CT7 for an N-indexed tower, statement only, with 6 Mathlib searches recorded. IsAdicComplete.henselianRing needs adic completeness, so it is not a match. The node is true on Z/p^n, a constant tower and k[t]/t^n, and is not a duplicate. Step checks: (1) henselian pair (A,I) with A/I = A_1. (2) The finite subcover gives a quasi-compact open W_0 inside W even when W is not quasi-compact; W_0 -> Spec A is quasi-compact by two elementary lines through the affine atlas pieces. (3) Annihilator closed subspace Z with |Z| = Supp; Z is finite type (04XZ, 03XG) and separated. (4) Z_0 has point set Supp(F tensor A_1) (03H4, 07TZ(3)) and is proper by the carrier-support lemma and 0CZC. (5) 0CWI hypotheses all hold; Z_2 misses X_0. (6) W' = W_0 minus Z_2 gives annihilator support Z_1, which is proper. Batch-5: all 10 flags reach sec-trace-formula only through the general definition def-trf-algebraic-space; the cited nodes are foundational facts about algebraic spaces, not steps of the trace formula or of Poincare duality, so the flags are generic and accepted. Tool uses lem-a1-space-etale-open-image and lem-a1-space-point-open-calculus are generic point/topology facts and are accepted. No SGA source is used. No changes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SpaceInverseModuleProperShrinking",
+  "declaration": "AlgebraicGeometry.AlgebraicSpace.inverseModuleProperShrinking",
+  "file": "lean/Sheaf/AlgebraicGeometry/SpaceInverseModuleProperShrinking.lean",
+  "statement": "theorem inverseModuleProperShrinking (A : ℕ → CommRingCat.{u}) (r : ∀ n : ℕ, A (n + 1) ⟶ A n) (hsurj : ∀ n : ℕ, Function.Surjective (r n)) (hnil : ∀ (n : ℕ) (a : A (n + 1)), (r n) a = 0 → IsNilpotent a) (c : Cone (Functor.ofOpSequence r)) (hc : IsLimit c) (X : AlgebraicSpace (Spec (.of (ULift.{u} ℤ)))) (f : X ⟶ schemeSpace (Over.mk (specULiftZIsTerminal.from (Spec c.pt)))) (hsep : MapIsSeparated f) (hfp : ProperQuotFinitePresentation f) (W : AlgebraicSpace (Spec (.of (ULift.{u} ℤ)))) (j : W ⟶ X) (hopen : IsRepresentableWith (fun _ _ p ↦ IsOpenImmersion p.left) j.hom.hom) (hcontains : pointImage (properQuotFst f (CostructuredArrow.mk (yoneda.map (Over.homMk (Spec.map (c.π.app (op 0))) (specULiftZIsTerminal.hom_ext _ _) : Over.mk (specULiftZIsTerminal.from (Spec (A 0))) ⟶ Over.mk (specULiftZIsTerminal.from (Spec c.pt)))))).hom.hom ⊆ pointImage j.hom.hom) (F : W.Modules) (hqc : F.IsQuasicoherent) (hfin : F.IsFinitePresentation) (hsupp : ∃ (Z : AlgebraicSpace (Spec (.of (ULift.{u} ℤ)))) (i : Z ⟶ properQuotFibre (j ≫ f) (CostructuredArrow.mk (yoneda.map (Over.homMk (Spec.map (c.π.app (op 0))) (specULiftZIsTerminal.hom_ext _ _) : Over.mk (specULiftZIsTerminal.from (Spec (A 0))) ⟶ Over.mk (specULiftZIsTerminal.from (Spec c.pt)))))), IsRepresentableWith (fun _ _ p ↦ IsClosedImmersion p.left) i.hom.hom ∧ MapIsProper (i ≫ properQuotSnd (j ≫ f) (CostructuredArrow.mk (yoneda.map (Over.homMk (Spec.map (c.π.app (op 0))) (specULiftZIsTerminal.hom_ext _ _) : Over.mk (specULiftZIsTerminal.from (Spec (A 0))) ⟶ Over.mk (specULiftZIsTerminal.from (Spec c.pt)))))) ∧ ∃ G : Z.Modules, G.IsQuasicoherent ∧ G.IsFiniteType ∧ Nonempty ((moduleDirectImage i).obj G ≅ (moduleTensorPullback (properQuotFst (j ≫ f) (CostructuredArrow.mk (yoneda.map (Over.homMk (Spec.map (c.π.app (op 0))) (specULiftZIsTerminal.hom_ext _ _) : Over.mk (specULiftZIsTerminal.from (Spec (A 0))) ⟶ Over.mk (specULiftZIsTerminal.from (Spec c.pt))))))).obj F)) : ∃ (W' : AlgebraicSpace (Spec (.of (ULift.{u} ℤ)))) (k : W' ⟶ W), IsRepresentableWith (fun _ _ p ↦ IsOpenImmersion p.left) k.hom.hom ∧ pointImage (properQuotFst f (CostructuredArrow.mk (yoneda.map (Over.homMk (Spec.map (c.π.app (op 0))) (specULiftZIsTerminal.hom_ext _ _) : Over.mk (specULiftZIsTerminal.from (Spec (A 0))) ⟶ Over.mk (specULiftZIsTerminal.from (Spec c.pt)))))).hom.hom ⊆ pointImage (k ≫ j).hom.hom ∧ ∃ (Z : AlgebraicSpace (Spec (.of (ULift.{u} ℤ)))) (i : Z ⟶ W'), IsRepresentableWith (fun _ _ p ↦ IsClosedImmersion p.left) i.hom.hom ∧ MapIsProper (i ≫ k ≫ j ≫ f) ∧ ∃ G : Z.Modules, G.IsQuasicoherent ∧ G.IsFiniteType ∧ Nonempty ((moduleDirectImage i).obj G ≅ (moduleTensorPullback k).obj F)",
+  "branch": "sheaf-dag",
+  "by": "Q70",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "H2 repair: the spectrum over Spec Z and the special-fibre test scheme are inlined using Over.mk, specULiftZIsTerminal, Spec.map and CostructuredArrow.mk. No derived-limit theorem dependency is added. Index zero is paper level one; both proper-support clauses retain the closed-carrier criterion."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-d014de103",
+  "group": "Q70",
+  "result": "pass",
+  "note": "H2 re-delivery: theorem stmt_dep lem-sfb-space-inverse-module-derived-limit dropped; inverseModuleSpec/inverseModuleTest inlined verbatim from SpaceInverseModuleDerivedLimit.lean:50-66 (diffed vs 2773624 snapshot). Item node differs from live only in lean; stmt_deps = original 10; lean.statement verbatim; lines <=100. Clause-by-clause: nil-kernel tower (elementwise), A=c.pt limit, X sep+fp, X_0=pointImage of X_1, W open containing X_0, F qcoh fp (no flatness), proper-support hyp on W x_A A_1 (=X_1), conclusion open W' containing X_0 with closed-carrier proper support over A; single universe u. Edge cases ok. Advisory: pointImage/schemeSpace def owners not in stage-1 stmt_deps (not addable at S2)."
+ }
+}

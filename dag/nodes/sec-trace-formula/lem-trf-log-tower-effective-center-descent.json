@@ -1,0 +1,253 @@
+{
+ "id": "lem-trf-log-tower-effective-center-descent",
+ "kind": "statement",
+ "title": "Effective descent of an ordered log tower through its centers",
+ "statement": "Let $u:(U,N)\\to(X,M)$ be a surjective strict etale morphism of locally Noetherian fs log schemes [def-trf-fs-log-blowup, lem-trf-log-fan-chart-blowup, def-weil-etale-morphism]. Let $S=(U_n\\to\\cdots\\to U_0=U)$ be a finite saturated log blowup tower with nonempty coherent centers $J_i\\subset N_i$, together with an ordered isomorphism $\\theta:p_1^*S\\simeq p_2^*S$ of its uncontracted recursive pullbacks on $R=U\\times_XU$ [def-pc-fibre-product, def-trf-strict-etale-log-blowup-procedure]. Assume $\\theta$ preserves the actual centers, is the identity on the diagonal, and satisfies $\\theta_{23}\\theta_{12}=\\theta_{13}$ on the triple fiber product. Use the small-site universe convention [def-weil-size-convention].\n\nThere exists a finite saturated log blowup tower $B=(X_n\\to\\cdots\\to X_0=X)$ of length $n$, with nonempty coherent centers $I_i\\subset M_i$ and an isomorphism $u^*B\\simeq S$ inducing $\\theta$, without deleting any stage. Each $X_i$ is locally Noetherian and fs. The isomorphisms identify $U_i$ with the scheme-theoretic pullbacks $U\\times_XX_i$ and the level-$i$ overlap with $U_i\\times_{X_i}U_i$. Under these identifications the ideal is characterized, for every etale $V\\to X_i$, by\n$$I_i(V)=\\{m\\in M_i(V):m|_{V\\times_{X_i}U_i}\\in J_i(V\\times_{X_i}U_i)\\}.$$\nThis is an ideal subsheaf of $M_i$ [def-weil-pbc-etale-sheaf-of-sets], whose restriction is $J_i$; it is the unique such subideal. Nonempty finite local generators for $J_i$ are also local generators for the restriction of $I_i$. Each $X_{i+1}$ is the universal saturated blowup of $I_i$, and its strict etale restriction is the given blowup of $J_i$, compatibly with $\\theta$. Each $U_i\\to X_i$ is surjective strict etale. If every $J_i$ is proper, then every $I_i$ is proper, so $B$ is contracted. Length zero and the empty base are allowed.",
+ "source": {
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "VIII 3.3.7--3.3.10, pp.107--108 and the initial descent assertion of proof of 3.3.15, p.109: effectivity expanded by descending each actual ideal and constructing its universal blowup."
+ },
+ "stmt_deps": [
+  "def-trf-fs-log-blowup",
+  "lem-trf-log-fan-chart-blowup",
+  "def-weil-etale-morphism",
+  "def-trf-strict-etale-log-blowup-procedure",
+  "def-pc-fibre-product",
+  "def-weil-size-convention",
+  "def-weil-pbc-etale-sheaf-of-sets",
+  "def-trf-log-tower-center-descent-datum"
+ ],
+ "proof": [
+  {
+   "text": "Induct on the number $i$ of reconstructed arrows. The invariant is a tower over $X$ through $X_i$, with locally Noetherian fs levels, a center-preserving identification of its full pullback through level $i$ with the given tower, and agreement with $\\theta$ through that level. For $i=0$ take $X_0=X$, $U_0=U$ and the given strict cover; the ordered datum is the identity at its initial level. By the first assertion of [lem-trf-log-tower-cover-synchronization], full pullbacks of any reconstructed prefix are scheme-theoretic pullbacks and give surjective strict etale maps $u_i:U_i\\to X_i$. The fibre-product universal property identifies its level-$i$ overlap with $U_i\\times_{X_i}U_i$: both represent $R\\times_X X_i$. Thus preservation of the next actual center by $\\theta_i$ means equality of the two restrictions of $J_i$ inside the common log sheaf on this overlap. Work on the small sites in the stipulated universes.",
+   "uses": [
+    "def-trf-strict-etale-log-blowup-procedure",
+    "lem-trf-log-tower-cover-synchronization",
+    "def-pc-fibre-product",
+    "def-weil-size-convention"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "VIII proof of 3.3.15, p.109, initial descent assertion, expanded as ordered induction; 3.3.10, p.108."
+   }
+  },
+  {
+   "text": "For $i<n$, define $I_i(V)$ by the formula in the statement. Restrictions preserve membership since $J_i$ is a subsheaf. If sections of $I_i$ on an etale covering $\\{V_a\\to V\\}$ agree, first glue them in $M_i(V)$. Their restrictions to $V\\times_{X_i}U_i$ belong locally to $J_i$, on the covering $\\{V_a\\times_{X_i}U_i\\}$; the sheaf equalizer for $J_i$ puts the glued restriction in $J_i$. This proves the sheaf axiom for $I_i$, including uniqueness, since $I_i\\subset M_i$. If $m\\in I_i(V)$ and $a\\in M_i(V)$, then $(ma)|_{V\\times_{X_i}U_i}$ belongs to $J_i$ because $J_i$ is an ideal. Hence $I_i$ is an ideal subsheaf, not merely an abstract descended sheaf.",
+   "uses": [
+    "def-weil-pbc-etale-sheaf-of-sets",
+    "def-weil-pbc-etale-site",
+    "def-trf-fs-log-blowup"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Definition 00VM (definition-sheaf-sets), equalizer condition; applied to the log-ideal subsheaf of ILO VIII 3.3.7."
+   }
+  },
+  {
+   "text": "We check $I_i|_{U_i}=J_i$ on every etale $W\\to U_i$. Strictness identifies $M_i(W)$ with $N_i(W)$. For $m\\in J_i(W)$ pull back along $W\\times_{X_i}U_i\\to W$. The two maps to $U_i$ (the specified map from $W$, and the second projection) induce a map to $U_i\\times_{X_i}U_i$. The center equality from Step 1 says that this pulled-back section lies in $J_i$ viewed through the second map. This is exactly the condition $m\\in I_i(W)$. Conversely, if $m\\in I_i(W)$, restrict that condition along the section $W\\to W\\times_{X_i}U_i$ supplied by $W\\to U_i$ to obtain $m\\in J_i(W)$. For any other ideal subsheaf $K\\subset M_i$ restricting to $J_i$, the sheaf equalizer on the cover $V\\times_{X_i}U_i\\to V$ gives $m\\in K(V)$ exactly when its restriction belongs to $J_i$. Thus $K=I_i$.",
+   "uses": [
+    "def-pc-fibre-product",
+    "def-weil-pbc-etale-sheaf-of-sets",
+    "def-weil-pbc-etale-site"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "VIII 3.3.7 and proof of 3.3.15, p.109, actual-ideal descent expanded sectionwise; sheaf equalizer as Stacks 00VM."
+   }
+  },
+  {
+   "text": "Choose a strict etale chart cover of $U_i$ on which the coherent ideal $J_i$ has a finite nonempty set of chart generators. By Step 3 the restriction of $I_i$ on each of these same charts is exactly $J_i$. The composite charts over $X_i$ are strict etale and cover $X_i$, since $u_i$ is a surjective strict etale cover. These are therefore coherent charts for $I_i$ in the definition of a nonempty coherent log ideal. This also proves the assertion about the very same local generators, without asserting that a generator descends to a global section of $M_i$.",
+   "uses": [
+    "def-trf-fs-log-blowup",
+    "def-weil-pbc-etale-site"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "VIII 3.3.7, p.107: etale-local coherent charts for log ideals."
+   }
+  },
+  {
+   "text": "Apply [lem-trf-coherent-log-ideal-chart-construction] to $(X_i,M_i),I_i$ and take its fs universal principalization as $X_{i+1}\\to X_i$. Its strict etale restriction is the universal saturated blowup of $J_i$ by Step 3 and the strict-restriction clause of that lemma. Both it and the specified $U_{i+1}$ have this universal property, so the unique factor maps in the two directions are inverse (each composite is the unique endomorphism over the base). Extend the prefix identification by this isomorphism. The first assertion of [lem-trf-log-tower-cover-synchronization], applied to the enlarged full tower, identifies $U_{i+1}$ with $U\\times_X X_{i+1}$ and makes its map to $X_{i+1}$ surjective strict etale. Since $U_{i+1}$ is locally Noetherian, [lem-trf-etale-local-noetherian-descent] makes $X_{i+1}$ locally Noetherian. The chart construction already makes it fs.",
+   "uses": [
+    "lem-trf-coherent-log-ideal-chart-construction",
+    "def-trf-fs-log-blowup",
+    "lem-trf-log-tower-cover-synchronization",
+    "lem-trf-etale-local-noetherian-descent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "VIII 3.3.8--3.3.10, pp.107--108, and proof of 3.3.15, p.109; local Noetherianity via Stacks 034C (lemma-Noetherian-local-fppf)."
+   }
+  },
+  {
+   "text": "The new isomorphism realizes the specified datum as well. On $R$, the two restrictions of $X_{i+1}$ are saturated blowups of the same actual ideal after the already verified identification at level $i$. The map induced by the reconstructed tower and the given $\\theta_{i+1}$ are both morphisms between these universal objects over that identified base. Uniqueness in the saturated blowup universal property makes the two morphisms equal. The center-preservation hypothesis for $\\theta$ now supplies the equality of the next two centers needed in Step 1. Hence the invariant extends from $i$ to $i+1$. Repeating Steps 2--6 exactly $n$ times constructs $B$ of length $n$ and its ordered pullback isomorphism inducing all of $\\theta$. The fibre-product identification in Step 1 applies at every completed level; no stage has been removed.",
+   "uses": [
+    "def-trf-fs-log-blowup",
+    "def-trf-strict-etale-log-blowup-procedure",
+    "def-pc-fibre-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "VIII 3.3.8--3.3.10, pp.107--108: uniqueness of universal blowup maps and recursive tower pullback; descent assertion in proof of 3.3.15."
+   }
+  },
+  {
+   "text": "If $I_i=M_i$, restriction and Step 3 give $J_i=N_i$. Thus every proper $J_i$ forces $I_i$ proper, so the output is contracted under that additional hypothesis. This uses properness of the ideal, not whether its blowup morphism is an isomorphism: a proper principal ideal is retained. When $n=0$ the base case itself is the required tower. When $X$ is empty all $U_i$ and reconstructed levels are empty, the same sheaf formulas and universal constructions apply, and they still retain the specified length. There is only the whole ideal on an empty level, so if all centers are additionally required proper, the empty-base case necessarily has $n=0$.",
+   "uses": [
+    "def-trf-strict-etale-log-blowup-procedure",
+    "def-weil-pbc-etale-sheaf-of-sets",
+    "def-trf-fs-log-blowup"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "VIII 3.3.8--3.3.10, p.108: contraction removes precisely whole-monoid centers; zero length and empty-base cases of the definitions."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-trf-strict-etale-log-blowup-procedure",
+  "lem-trf-log-tower-cover-synchronization",
+  "def-pc-fibre-product",
+  "def-weil-size-convention",
+  "def-weil-pbc-etale-sheaf-of-sets",
+  "def-weil-pbc-etale-site",
+  "def-trf-fs-log-blowup",
+  "lem-trf-coherent-log-ideal-chart-construction",
+  "lem-trf-etale-local-noetherian-descent"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "VIII 3.3.7--3.3.10, pp.107--108; proof of 3.3.15, p.109. Explicit sectionwise ideal descent and ordered reconstruction supplied by Q15."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A finite ordered saturated log blowup tower with center preserving Cech descent datum on a strict etale cover descends effectively by descending each coherent log ideal.",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.descendsAlong_isOpenImmersion_surjective_inf_flat_inf_quasicompact'\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FlatDescent\", \"type\": \"AlgebraicGeometry.IsOpenImmersion.DescendsAlong\\n  (@AlgebraicGeometry.Surjective ⊓ @AlgebraicGeometry.Flat ⊓ @AlgebraicGeometry.QuasiCompact)\", \"doc\": \"In the category of schemes, the property of being an open immersion descends along morphisms that are simultaneously surjective, flat, and quasi-compact. This means that if a morphism becomes an open \"}\n  {\"name\": \"AlgebraicGeometry.HasRingHomProperty.descendsAlong\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Descent\", \"type\": \"∀ (P P' : CategoryTheory.MorphismProperty AlgebraicGeometry.Scheme)\\n  (Q Q' : {R S : Type u} → [inst : CommRing R] → [inst_1 : CommRing S] → (R →+* S) → Prop) [P'.IsStableUnderBaseChange]\\n  [P'.IsStableUnderComposition] [P.IsStableUnderBaseChange],\\n  @AlgebraicGeometry.IsLocalIso ⊓ @AlgebraicGeometr\", \"doc\": \"If a ring homomorphism property $ Q $ codescends along another property $ Q' $, then any property $ P $ descends along the intersection of $ P' $ and quasi-compact morphisms.\"}\n  {\"name\": \"AlgebraicGeometry.descendsAlong_universallyOpen_surjective_inf_flat_inf_quasicompact\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FlatDescent\", \"type\": \"CategoryTheory.MorphismProperty.DescendsAlong (@AlgebraicGeometry.UniversallyOpen)\\n  (@AlgebraicGeometry.Surjective ⊓ @AlgebraicGeometry.Flat ⊓ @AlgebraicGeometry.QuasiCompact)\", \"doc\": \"The property of being universally open descends along morphisms that are simultaneously surjective, flat, and quasi-compact. This means that if a morphism becomes universally open after base change al\"}\n  {\"name\": \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.𝒰D₀\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"{I : Type u} →\\n  [inst : CategoryTheory.Category.{u, u} I] →\\n    {S X : AlgebraicGeometry.Scheme} →\\n      {D : CategoryTheory.Functor I AlgebraicGeometry.Scheme} →\\n        {t : D ⟶ (CategoryTheory.Functor.const I).obj S} →\\n          {f : X ⟶ S} →\\n            [inst_1 : ∀ (i : I), CompactSpace ↥(D.obj\", \"doc\": \"For a diagram $D: \\\\mathcal{I} \\\\to \\\\text{Sch}$ of schemes, a natural transformation from $D$ to the constant diagram at $S$, and a morphism $X \\\\to S$, this constructs an open cover of the object $D(i')\"}\n  {\"name\": \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.𝒰D\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"{I : Type u} →\\n  [inst : CategoryTheory.Category.{u, u} I] →\\n    {S X : AlgebraicGeometry.Scheme} →\\n      {D : CategoryTheory.Functor I AlgebraicGeometry.Scheme} →\\n        {t : D ⟶ (CategoryTheory.Functor.const I).obj S} →\\n          {f : X ⟶ S} →\\n            [inst_1 : ∀ (i : I), CompactSpace ↥(D.obj\", \"doc\": \"The open cover of the diagram object $ D(i') $ formed by refining the open cover $ \\\\mathcal{U}_{D₀} $ with affine open immersions, ensuring each point lies in an affine open subscheme and compatibilit\"}\n  {\"name\": \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.hii'\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"{I : Type u} →\\n  [inst : CategoryTheory.Category.{u, u} I] →\\n    {S X : AlgebraicGeometry.Scheme} →\\n      {D : CategoryTheory.Functor I AlgebraicGeometry.Scheme} →\\n        {t : D ⟶ (CategoryTheory.Functor.const I).obj S} →\\n          {f : X ⟶ S} →\\n            [inst_1 : ∀ (i : I), CompactSpace ↥(D.obj\", \"doc\": \"A morphism $ i' \\to i $ in the index category $\\\\mathcal{I}$, chosen to ensure compatibility of the induced morphism $X \\to \\\\varprojlim D$ with the diagonal cover's open subsets. This morphism satisfies \"}\n  {\"name\": \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.exists_eq\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"∀ {I : Type u} [inst : CategoryTheory.Category.{u, u} I] {S X : AlgebraicGeometry.Scheme}\\n  {D : CategoryTheory.Functor I AlgebraicGeometry.Scheme} {t : D ⟶ (CategoryTheory.Functor.const I).obj S} {f : X ⟶ S}\\n  [inst_1 : ∀ (i : I), CompactSpace ↥(D.obj i)] [AlgebraicGeometry.LocallyOfFiniteType f]\\n \", \"doc\": \"Given a diagram $ D: \\\\mathcal{I} \\\\to \\\\text{Sch} $ of schemes, a natural transformation from $ D $ to the constant diagram at $ S $, and a morphism $ X \\\\to S $, there exists an index $ j $ in the refin\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.exists_hom_hom_comp_eq_comp_of_locallyOfFiniteType\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"∀ {I : Type u} [inst : CategoryTheory.Category.{u, u} I] {S X : AlgebraicGeometry.Scheme}\\n  (D : CategoryTheory.Functor I AlgebraicGeometry.Scheme) (t : D ⟶ (CategoryTheory.Functor.const I).obj S) (f : X ⟶ S)\\n  (c : CategoryTheory.Limits.Cone D) (hc : CategoryTheory.Limits.IsLimit c) [∀ (i : I), Com\", \"doc\": \"Given a diagram of schemes locally of finite type, if two morphisms from objects in the diagram to a scheme $X$ satisfy compatibility conditions with respect to a cone, then there exists an index $k$ \"}\nAssessment: returned ordinary scheme, ring, or abstract descent results do not state this logarithmic tower/fan/monoid-ideal assertion; no one-line specialization.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Effective etale descent of a logarithmic blowup sequence with actual coherent monoid ideal centers, preserving all ordered stages.",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"Algebra.Etale.exists_subalgebra_fg\", \"module\": \"Mathlib.RingTheory.Smooth.NoetherianDescent\", \"type\": \"[Etale A B] :\\n  ∃ (A₀ : Subalgebra R A) (B₀ : Type u) (_ : CommRing B₀) (_ : Algebra A₀ B₀),\\n    A₀.FG ∧ Etale A₀ B₀ ∧ Nonempty (B ≃ₐ[A] A ⊗[A₀] B₀)\", \"doc\": \"For any étale algebra $ B $ over a commutative ring $ A $, there exists a finitely generated $ R $-subalgebra $ A_0 \\\\subseteq A $, an étale $ A_0 $-algebra $ B_0 $, and an isomorphism of $ A $-algebra\"}\n  {\"name\": \"CategoryTheory.EffectiveEpiFamily.desc\", \"module\": \"Mathlib.CategoryTheory.EffectiveEpi.Basic\", \"type\": \"{B W : C} {α : Type*} (X : α → C) (π : (a : α) → (X a ⟶ B)) [EffectiveEpiFamily X π] (e : (a : α) → (X a ⟶ W))\\n  (h : ∀ {Z : C} (a₁ a₂ : α) (g₁ : Z ⟶ X a₁) (g₂ : Z ⟶ X a₂), g₁ ≫ π _ = g₂ ≫ π _ → g₁ ≫ e _ = g₂ ≫ e _) : B ⟶ W\", \"doc\": \"Given an effective epimorphic family $\\\\{X_\\\\alpha \\\\to B\\\\}$ in a category $\\\\mathcal{C}$ and a compatible family of morphisms $e_\\\\alpha: X_\\\\alpha \\\\to W$ satisfying the condition that any two morphisms $g\"}\n  {\"name\": \"Algebra.Etale.formallyEtale\", \"module\": \"Mathlib.RingTheory.Etale.Basic\", \"type\": \"∀ {R : Type u} {A : Type v} {inst : CommRing R} {inst_1 : CommRing A} {inst_2 : Algebra R A} [self : Algebra.Etale R A],\\n  Algebra.FormallyEtale R A\", \"doc\": \"If $ A $ is an étale algebra over a commutative ring $ R $, then $ A $ is formally étale over $ R $. This establishes that the property of being étale implies formal étaleness in the context of commut\"}\n  {\"name\": \"CategoryTheory.EffectiveEpiFamilyStruct.fac\", \"module\": \"Mathlib.CategoryTheory.EffectiveEpi.Basic\", \"type\": \"∀ {C : Type u_1} [inst : CategoryTheory.Category.{v_1, u_1} C] {B : C} {α : Type u_2} {X : α → C}\\n  {π : (a : α) → X a ⟶ B} (self : CategoryTheory.EffectiveEpiFamilyStruct X π) {W : C} (e : (a : α) → X a ⟶ W)\\n  (h :\\n    ∀ {Z : C} (a₁ a₂ : α) (g₁ : Z ⟶ X a₁) (g₂ : Z ⟶ X a₂),\\n      CategoryTheory.Cate\", \"doc\": \"Given an effective epimorphic family $\\\\{X_\\\\alpha \\\\to B\\\\}$ in a category $\\\\mathcal{C}$ and a compatible family of morphisms $e_\\\\alpha: X_\\\\alpha \\\\to W$, the composition of each $\\\\pi_\\\\alpha: X_\\\\alpha \\\\to\"}\n  {\"name\": \"CategoryTheory.EffectiveEpiFamilyStruct.desc\", \"module\": \"Mathlib.CategoryTheory.EffectiveEpi.Basic\", \"type\": \"{C : Type u_1} →\\n  [inst : CategoryTheory.Category.{v_1, u_1} C] →\\n    {B : C} →\\n      {α : Type u_2} →\\n        {X : α → C} →\\n          {π : (a : α) → X a ⟶ B} →\\n            CategoryTheory.EffectiveEpiFamilyStruct X π →\\n              {W : C} →\\n                (e : (a : α) → X a ⟶ W) →\\n              \", \"doc\": \"Given an effective epimorphic family $\\\\{X_\\\\alpha \\\\to B\\\\}$ in a category $\\\\mathcal{C}$ and a compatible family of morphisms $e_\\\\alpha: X_\\\\alpha \\\\to W$ satisfying the condition that any two morphisms $g\"}\n  {\"name\": \"Algebra.FormallyEtale.iff_comp_bijective\", \"module\": \"Mathlib.RingTheory.Etale.Basic\", \"type\": \":\\n  FormallyEtale R A ↔\\n    ∀ ⦃B : Type max u v⦄ [CommRing B] [Algebra R B] (I : Ideal B),\\n      I ^ 2 = ⊥ → Function.Bijective ((Ideal.Quotient.mkₐ R I).comp : (A →ₐ[R] B) → A →ₐ[R] B ⧸ I)\", \"doc\": \"An $ R $-algebra $ A $ is formally étale if and only if for every $ R $-algebra $ B $ and every ideal $ I \\\\subseteq B $ with $ I^2 = 0 $, the natural map $ \\\\text{Hom}_R(A, B) \\\\to \\\\text{Hom}_R(A, B/I) \"}\n  {\"name\": \"CategoryTheory.EffectiveEpiFamily.fac\", \"module\": \"Mathlib.CategoryTheory.EffectiveEpi.Basic\", \"type\": \"{B W : C} {α : Type*} (X : α → C) (π : (a : α) → (X a ⟶ B)) [EffectiveEpiFamily X π] (e : (a : α) → (X a ⟶ W))\\n  (h : ∀ {Z : C} (a₁ a₂ : α) (g₁ : Z ⟶ X a₁) (g₂ : Z ⟶ X a₂), g₁ ≫ π _ = g₂ ≫ π _ → g₁ ≫ e _ = g₂ ≫ e _) (a : α) :\\n  π a ≫ EffectiveEpiFamily.desc X π e h = e a\", \"doc\": \"Given an effective epimorphic family $\\\\{X_\\\\alpha \\\\to B\\\\}$ in a category $\\\\mathcal{C}$ and a compatible family of morphisms $e_\\\\alpha: X_\\\\alpha \\\\to W$, the composition of the morphism $\\\\pi_\\\\alpha: X_\\\\a\"}\n  {\"name\": \"Algebra.FormallyEtale.instTensorProduct\", \"module\": \"Mathlib.RingTheory.Etale.Basic\", \"type\": \"[FormallyEtale R A] : FormallyEtale B (B ⊗[R] A)\", \"doc\": \"If $ A $ is a formally étale $ R $-algebra, then the tensor product $ B \\\\otimes_R A $ is a formally étale $ B $-algebra.\"}\nAssessment: returned ordinary scheme, ring, or abstract descent results do not state this logarithmic tower/fan/monoid-ideal assertion; no one-line specialization.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Sheaf\", \"descent\"",
+   "results": "[loogle] OK 1 hit(s)\n  {\"name\": \"CategoryTheory.Pseudofunctor.DescentData.subtypeCompatibleHomEquiv_toCompatible_presheafHomObjHomEquiv\", \"module\": \"Mathlib.CategoryTheory.Sites.Descent.DescentData\", \"type\": \" {C : Type u} [CategoryTheory.Category.{v, u} C] (F : CategoryTheory.Pseudofunctor (CategoryTheory.LocallyDiscrete Cᵒᵖ) CategoryTheory.Cat) {ι : Type t} {S : C} {X : ι → C} (f : (i : ι) → X i ⟶ S) {M N : ↑(F.obj { as := Opposite.op S })} (φ : M ⟶ N) : (CategoryTheory.Pseudofunctor.DescentData.subtyp\", \"doc\": \"\"}\nAssessment: returned ordinary scheme, ring, or abstract descent results do not state this logarithmic tower/fan/monoid-ideal assertion; no one-line specialization.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "log.?ideal|coherent.*monoid|log.?blow.?up",
+   "results": "[grep] OK 2 hit(s)\n  {\"file\": \"Mathlib/Condensed/Light/Monoidal.lean\", \"line\": \"40\", \"text\": \"instance : (coherentTopology LightProfinite.{u}).W (A := ModuleCat.{u} R) |>.IsMonoidal :=\"}\n  {\"file\": \"Mathlib/Condensed/Light/Monoidal.lean\", \"line\": \"64\", \"text\": \"instance : (presheafToSheaf (coherentTopology LightProfinite.{u}) (ModuleCat.{u} R)).Monoidal :=\"}\nAssessment: returned ordinary scheme, ring, or abstract descent results do not state this logarithmic tower/fan/monoid-ideal assertion; no one-line specialization.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "LogScheme|LogStructure|log.?blow.?up",
+   "results": "{\"t\": \"2026-10-23T09:27:14Z\", \"tool\": \"grep\", \"query\": \"LogScheme|LogStructure|log.?blow.?up\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}; Read the returned hits: ordinary etale algebra, sheaf section gluing and scheme open gluing do not state an ordered saturated log blowup tower descent theorem. Loogle and source grep have no LogScheme match.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Gluing a sequence of universal principalizations of coherent ideals in sheaves of monoids along an etale cover",
+   "results": "{\"t\": \"2026-10-23T09:27:14Z\", \"tool\": \"leansearch\", \"query\": \"Gluing a sequence of universal principalizations of coherent ideals in sheaves of monoids along an etale cover\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"TopCat.Sheaf.existsUnique_gluing\", \"TopCat.Presheaf.IsSheaf.isSheafUniqueGluing_types\", \"TopCat.Presheaf.IsSheafUniqueGluing\", \"AlgebraicGeometry.LocallyRingedSpace.GlueData\", \"AlgebraicGeometry.Scheme.Cover.instIsIsoFromGlued\", \"TopCat.Sheaf.interUnionPullbackConeLift\", \"AlgebraicGeometry.Scheme.IdealSheafData.glueDataObjHom_comp\", \"AlgebraicGeometry.Scheme.Cover.gluedCover\"], \"digest\": \"81ebee77518c4bcd\"}; Read the returned hits: ordinary etale algebra, sheaf section gluing and scheme open gluing do not state an ordered saturated log blowup tower descent theorem. Loogle and source grep have no LogScheme match.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"LogScheme\"",
+   "results": "{\"t\": \"2026-10-23T09:27:14Z\", \"tool\": \"loogle\", \"query\": \"\\\"LogScheme\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}; Read the returned hits: ordinary etale algebra, sheaf section gluing and scheme open gluing do not state an ordered saturated log blowup tower descent theorem. Loogle and source grep have no LogScheme match.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Effective descent of a finite ordered logarithmic blowup tower by descending invariant coherent monoid ideals along a strict etale cover",
+   "results": "{\"t\": \"2026-10-23T09:27:25Z\", \"tool\": \"leanfinder\", \"query\": \"Effective descent of a finite ordered logarithmic blowup tower by descending invariant coherent monoid ideals along a strict etale cover\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.exists_etale_isIdempotentElem_forall_liesOver_eq\", \"Algebra.Etale.exists_subalgebra_fg\", \"Algebra.IsEtaleAt.comp\", \"StandardEtalePair.existsUnique_hasMap_of_hasMap_quotient_of_sq_eq_bot\", \"AlgebraicGeometry.IsEtale.of_comp\", \"Algebra.Etale.comp\", \"RingHom.IsStandardSmoothOfRelativeDimension.exists_etale_mvPolynomial\", \"Algebra.FormallyEtale.instForallOfFinite\"], \"digest\": \"8b7405c567595c92\"}; Read the returned hits: ordinary etale algebra, sheaf section gluing and scheme open gluing do not state an ordered saturated log blowup tower descent theorem. Loogle and source grep have no LogScheme match.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-functorial-log-blowup-etale-descent",
+  "date": "2026-10-22",
+  "group": "Q107"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Historical nearby-duality/alteration branch of lem-trf-local-term-locality, proof (1)--(2), through lem-trf-log-regular-desingularization: monoidal resolution used for the regular modification of nodal pairs; ILO VIII 3.3.15, pp.109--110. Expose VIII, proof of Theorem 3.3.15, pp.109--110, initial descent reduction and final finite-disjoint-union argument; effective gluing input implicit there, using 3.3.8--3.3.10 for log blowups. Re-split of lem-trf-functorial-log-blowup-etale-descent, old proof steps 6,7: VIII 3.3.7--3.3.10, pp.107--108 and the initial descent assertion of proof of 3.3.15, p.109: effectivity expanded by descending each actual ideal and constructing its universal blowup.",
+   "via": [
+    "lem-trf-functorial-log-blowup-etale-descent",
+    "lem-trf-monoidal-resolution-tower",
+    "lem-trf-log-regular-desingularization",
+    "lem-trf-nodal-pair-projective-resolution",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-trf-log-tower-effective-center-descent",
+  "worker": "stage1",
+  "summary": "Reconstructed the ordered tower by induction: invariant ideal subsheaves are descended explicitly with their exact sections and local chart generators; existing universal chart construction and strict-cover synchronization supply each next level. Checked prescribed Cech maps by universal uniqueness, local Noetherianity by existing etale descent, proper principal centers and empty cases. No new nodes and no statement change.",
+  "blueprint": "Realizes the actual-center effectivity input left implicit in ILO VIII proof of 3.3.15 initial descent assertion, within the historical log-resolution branch of lem-trf-local-term-locality recorded in blueprint.from; the latest blueprint local-term proof was read and its contracting-correspondence route is unchanged."
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q15-ac03fcab2",
+  "group": "Q15",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q15-ac03fcab2 (reviewer sub-agent of L); spot-checked: Read the item in full (7 steps; no new nodes). The statement and stmt_deps match live exactly, where the item is still unsplit; there is no repair note and no earlier run. Source read: ILO VIII 3.3.7–3.3.10 (pp.107–108) and the 'By descent' sentence in the proof of 3.3.15 (pp.109–110); proof_origin by agent is correct. Cited statements checked: def-trf-fs-log-blowup (coherent ideal, universal saturated blowup); synchronization, first paragraph only (scheme-theoretic pullback, surjective strict etale, whole iff whole), with no admissibility hypotheses, so it applies to the reconstructed prefix; coherent-log-ideal-chart-construction (any nonempty coherent ideal on a locally Noetherian fs scheme gives an fs universal principalization that commutes with strict etale restriction; no Zariski/fan hypothesis); etale-local-noetherian-descent; ordered isomorphism from def-...-procedure (identity at level 0, preserves arrows and centers). Steps: the step-1 overlap identification (R×_X X_i is U_i×_{X_i}U_i) checks out. Steps 2–3: the sectionwise subideal is a sheaf; both inclusions verified via the overlap map and the graph section; uniqueness holds because u_i is surjective; the cocycle condition is rightly not needed. Step 4: composite strict etale charts with the same generators. Step 5: the two universal objects are inverse; synchronization applied to the enlarged tower. Step 6: θ_{i+1} is fixed by blowup uniqueness. Step 7: proper centers stay proper; n=0 and the empty base work. Small cases tested: identity cover, X⊔X, the N log point with a proper principal center, whole centers. No cycle: BFS over 873 nodes. Citer step 2 of functorial-log-blowup-etale-descent gets length n, pullback S, θ realized, and contracted when centers are proper. Duplicate search over the DAG (algebraization-descent, strict-log-blowup-cartesian, cover-rigidity, polarized-fine-log-etale-descent): none states this. No SGA. Advisories only: the report names citations.json and searches.jsonl but neither is in the commit; step 3 could cite the first paragraph of cover-rigidity; in step 5 the Noetherian-descent citation is redundant, since fs log schemes in this DAG are already locally Noetherian."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.LogTowerEffectiveCenterDescent",
+  "declaration": "AlgebraicGeometry.log_tower_effective_center_descent",
+  "declarations": [
+   "AlgebraicGeometry.LogTowerCenterDescentRealization",
+   "AlgebraicGeometry.log_tower_effective_center_descent"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/LogTowerEffectiveCenterDescent.lean",
+  "statement": "theorem log_tower_effective_center_descent {X U : FineSaturatedLogScheme.{u}} (uMap : EtaleLogHom U X) (hstrict : uMap.IsStrict) (hetale : Etale uMap.base) (hsurjective : Surjective uMap.base) (S : LogBlowupTowerOver U) (D : LogTowerCenterDescentDatum uMap S) : ∃ B : LogBlowupTowerOver X, Nonempty (LogTowerCenterDescentRealization uMap S D B)",
+  "branch": "sheaf-dag",
+  "by": "Q52",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-0e2f96704",
+  "group": "Q52",
+  "result": "pass",
+  "note": "Read item, new node def-trf-log-tower-center-descent-datum, all stmt_deps and both modules against the side-live framework (FineSaturatedLogScheme, EtaleLogHom, CompEq/comp genuine composite with assoc, IsFSPullback/Square order, pullbackIdeal, IsIdeal, LogBlowupTowerOver.toBase). Hypotheses exactly strict+étale+surjective on lN fs log schemes; the points-based datum (natural bijections of LogTowerPoint fibres, arrows, centers via pullbackIdeal, diagonal, cocycle) is equivalent to θ on the uncontracted pullbacks over R, with no effectivity or representability assumed. Realization has every node clause (length, blowups, fs/scheme Cartesian, recursive squares, strict/étale/surjective, overlap, sections formula, centers, uniqueIdeal, induces, proper), none stronger. Edge cases n=0, empty base, whole/proper principal centers ok; single universe u. Item diff only lean+stmt_deps(+new node); statements verbatim; docstrings/proof steps/imports/lines ok; only sorry is the theorem. No duplicate in side-live. Advisories: toBase/comp nodes reached via the new node's stmt_deps; overlap redundant with schemeCartesian."
+ }
+}

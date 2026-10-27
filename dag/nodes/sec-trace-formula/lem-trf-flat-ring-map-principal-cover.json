@@ -1,0 +1,84 @@
+{
+ "id": "lem-trf-flat-ring-map-principal-cover",
+ "kind": "statement",
+ "title": "Flatness of a ring map glues on target principal opens",
+ "statement": "Let $R\\to S$ be a homomorphism of commutative rings. Let $s\\subseteq S$ generate the unit ideal: every element of $S$ is a finite sum of multiples of elements of $s$. For $g\\in s$ write $S_g=S[1/g]$ [def-weil-ring-localization-away], regarded as an $R$-algebra through $R\\to S\\to S_g$. If every composite $R\\to S_g$ is flat [def-weil-pbc-flat-ring-map], then $R\\to S$ is flat. The set $s$ may be infinite or empty; in the latter case its unit-ideal hypothesis forces $S=0$.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tag 00HT (lemma-flat-localization), part (5), specialized to the S-module S; arbitrary sets are also covered by the Mathlib declaration."
+ },
+ "stmt_deps": [
+  "def-weil-ring-localization-away",
+  "def-weil-pbc-flat-ring-map"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Flatness of a ring homomorphism can be checked on principal open localizations of the target whose elements span the unit ideal",
+   "results": "{\"t\": \"2026-10-23T09:48:29Z\", \"tool\": \"leanfinder\", \"query\": \"Flatness of a ring homomorphism can be checked on principal open localizations of the target whose elements span the unit ideal\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"RingHom.Flat.ofLocalizationSpanTarget\", \"RingHom.Flat.ofLocalizationPrime\", \"RingHom.Flat.holdsForLocalizationAway\", \"RingHom.Flat.propertyIsLocal\", \"Module.flat_of_localized_span\", \"RingHom.Flat.localRingHom\", \"Module.flat_of_localized_maximal\", \"instFlatAtPrime\"], \"digest\": \"8d1c934c6ba603a6\"}",
+   "date": "2026-10-23",
+   "verdict": "match: RingHom.Flat.ofLocalizationSpanTarget; verified source lines 75-82."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A ring homomorphism is flat if its localizations at target elements generating the unit ideal are flat",
+   "results": "{\"t\": \"2026-10-23T09:54:41Z\", \"tool\": \"leansearch\", \"query\": \"A ring homomorphism is flat if its localizations at target elements generating the unit ideal are flat\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"RingHom.Flat.ofLocalizationSpanTarget\", \"RingHom.Flat\", \"RingHom.Locally\", \"RingHom.Flat.holdsForLocalizationAway\", \"RingHom.FaithfullyFlat.flat\", \"RingHom.Flat.propertyIsLocal\", \"RingHom.flat_algebraMap_iff\", \"RingHom.FaithfullyFlat\"], \"digest\": \"2f2cb11d8ac48872\"}",
+   "date": "2026-10-23",
+   "verdict": "match: RingHom.Flat.ofLocalizationSpanTarget; verified the definition OfLocalizationSpanTarget at Basic.lean:171-174."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"ofLocalizationSpanTarget\"",
+   "results": "{\"t\": \"2026-10-23T09:48:20Z\", \"tool\": \"loogle\", \"query\": \"\\\"ofLocalizationSpanTarget\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"RingHom.OfLocalizationSpanTarget\", \"RingHom.PropertyIsLocal.ofLocalizationSpanTarget\", \"RingHom.ofLocalizationSpanTarget_iff_finite\", \"RingHom.OfLocalizationSpanTarget.ofLocalizationSpan\", \"RingHom.OfLocalizationSpanTarget.and\", \"RingHom.OfLocalizationSpanTarget.ofIsLocalization\", \"RingHom.Flat.ofLocalizationSpanTarget\", \"RingHom.locally_ofLocalizationSpanTarget\"], \"digest\": \"3b26d4a9bcdc6290\"}",
+   "date": "2026-10-23",
+   "verdict": "match: RingHom.Flat.ofLocalizationSpanTarget and RingHom.finitePresentation_ofLocalizationSpanTarget; the source types, not the generated search glosses, were read."
+  },
+  {
+   "tool": "grep",
+   "query": "ofLocalizationSpanTarget|of_span_eq_top_target",
+   "results": "{\"t\": \"2026-10-23T10:01:02Z\", \"tool\": \"grep\", \"query\": \"ofLocalizationSpanTarget|of_span_eq_top_target\", \"sub\": \"RingTheory/RingHom\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/RingHom/QuasiFinite.lean\", \"Mathlib/RingTheory/RingHom/QuasiFinite.lean\", \"Mathlib/RingTheory/RingHom/QuasiFinite.lean\", \"Mathlib/RingTheory/RingHom/QuasiFinite.lean\", \"Mathlib/RingTheory/RingHom/Etale.lean\", \"Mathlib/RingTheory/RingHom/Etale.lean\", \"Mathlib/RingTheory/RingHom/FiniteType.lean\", \"Mathlib/RingTheory/RingHom/FiniteType.lean\"], \"digest\": \"2b11e3d6c5d493c9\"}",
+   "date": "2026-10-23",
+   "verdict": "match: Mathlib/RingTheory/RingHom/Flat.lean:75 and FinitePresentation.lean:58; read both declarations and LocalProperties/Basic.lean:171-174."
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "RingHom.Flat.ofLocalizationSpanTarget",
+  "file": "Mathlib/RingTheory/RingHom/Flat.lean",
+  "line": 75,
+  "how": "exact: RingHom.Flat.ofLocalizationSpanTarget at lines 75-82 unfolds RingHom.OfLocalizationSpanTarget (Mathlib/RingTheory/LocalProperties/Basic.lean:171-174) to precisely this implication for s. The localized map is (algebraMap S (Localization.Away g)).comp f. Flat and FinitePresentation are the induced module-flatness and algebra-finite-presentation predicates, respectively. No nontriviality or finiteness of s is assumed."
+ },
+ "status": "mathlib",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-relative-ci-principal-cover-syntomic-gluing",
+  "date": "2026-10-23",
+  "group": "Q109"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Historical nodal/alteration auxiliary descent input: Stacks 0C33 last proof sentence, gluing principal complete-intersection charts by 00SO and 00SY; previously item steps 9-10. This node supplies flatness locality used in that gluing.",
+   "via": [
+    "lem-trf-relative-ci-principal-cover-syntomic-gluing",
+    "lem-trf-syntomic-ring-filtered-colimit-descent",
+    "lem-trf-complete-intersection-fibres-limit-descent",
+    "lem-trf-nodal-family-noetherian-approximation",
+    "lem-trf-nodal-family-etale-local-model",
+    "lem-trf-nodal-etale-chart",
+    "lem-trf-nodal-log-regularity",
+    "lem-trf-nodal-pair-projective-resolution",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ }
+}

@@ -1,0 +1,116 @@
+{
+ "id": "lem-sfb-algebraic-inverse-image-kflat",
+ "kind": "statement",
+ "title": "Algebraic inverse image preserves K-flat complexes with enough target points",
+ "statement": "Let J and K be Grothendieck topologies on categories C and D which have pullbacks and are essentially small in the coefficient universe w. Let f:Sh(K,Set_w) to Sh(J,Set_w) be a geometric morphism [def-trf-geometric-morphism], R and S commutative ring sheaves, and I an AlgebraicInverseImageOfUniverses [def-weil-pbc-algebraic-inverse-image] of R with value S, with both coefficient universes w. Suppose its module functor is additive. Given any set-indexed conservative family p_i of points of Sh(K), with presentations s_i of the S-stalks [def-sfb-ringed-site-point], termwise I.modules carries every K-flat R-module complex to a K-flat S-module complex [def-pc-kflat-complex]. No termwise flatness or boundedness is assumed.",
+ "stmt_deps": [
+  "def-trf-geometric-morphism",
+  "def-weil-pbc-algebraic-inverse-image",
+  "def-sfb-ringed-site-point",
+  "def-pc-kflat-complex"
+ ],
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 0DEN and 0DEP, lemma-check-K-flat-stalks and lemma-pullback-K-flat-points; identity coefficient comparison case"
+ },
+ "proof": [
+  {
+   "text": "Remove the equal-universe ULift from the algebraic presentation using the canonical natural ULift-trivial isomorphism. Its operation graph fields follow by composing every generalized section with that isomorphism; the module functor is unchanged. For a target point p_i with stalk presentation s_i, construct the presentation at the composite point p_i.comp f: its ring is s_i.ring, its ring identification is p_i.inverse.mapIso(I.ringUnderlying) followed by s_i.ringUnderlying, and its module functor is I.modules followed by s_i.modules. Compose the module underlying identifications with the functor associators. Each operation graph equation is the source algebraic graph equation followed by the corresponding point graph equation. Additivity follows by composition.",
+   "uses": [
+    "def-weil-pbc-algebraic-inverse-image",
+    "def-sfb-ringed-site-point",
+    "def-trf-geometric-morphism"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "View each Grothendieck topology as its precoverage; pullbacks provide the covering-pullback axiom and the Grothendieck transitivity axiom gives the covering composition axiom. The generated topology equals the original topology. Apply the forward clause of lem-sfb-ringed-site-kflat-stalk-criterion to the constructed composite point. The resulting stalk complex is definitionally the target stalk of the termwise inverse image. Apply the reverse clause to the given conservative target family. This also handles an empty conservative family.",
+   "uses": [
+    "lem-sfb-ringed-site-kflat-stalk-criterion"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-algebraic-inverse-image",
+  "def-sfb-ringed-site-point",
+  "def-trf-geometric-morphism",
+  "lem-sfb-ringed-site-kflat-stalk-criterion"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 0DEP, specializing the stalk coefficient map to an isomorphism; complete Lean composition of the existing 0DEN criterion"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Inverse image of module sheaves preserves K-flat cochain complexes",
+   "date": "2026-10-25",
+   "results": "8 hits: generic flat modules, inverse-image finite limits; none prove K-flat preservation.",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.mapHomologicalComplex",
+   "date": "2026-10-25",
+   "results": "Generic complex mapping and natural isomorphism declarations, no algebraic inverse-image K-flat theorem.",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "RingedSitePoint.*comp|isKFlat_of_points",
+   "date": "2026-10-25",
+   "results": "msearch: 0 hits; local searches find the stalk criterion and only flat-term ringed-topos pullback theorems.",
+   "verdict": "no existing composition or preservation theorem"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.UpperLowerStar",
+  "date": "2026-10-25",
+  "group": "Z5"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sfb-module-mapmod-pullback-kflat",
+   "place": "stalk argument, steps 3 and 4"
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-prop-sfb-module-derived-factorization",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Algebra.Homology.AlgebraicInverseImageKFlat",
+  "file": "lean/Sheaf/Algebra/Homology/AlgebraicInverseImageKFlat.lean",
+  "declaration": "SheafOfModules.AlgebraicInverseImageOfUniverses.isKFlat_of_points",
+  "statement": "theorem AlgebraicInverseImageOfUniverses.isKFlat_of_points\n    (JC : GrothendieckTopology C) (JD : GrothendieckTopology D)\n    [HasPullbacks C] [HasPullbacks D] :\n    ∀ (f : GeometricMorphism (Sheaf JD (Type w)) (Sheaf JC (Type w)))\n    {R : Sheaf JC CommRingCat.{w}} {S : Sheaf JD CommRingCat.{w}}\n    (I : AlgebraicInverseImageOfUniverses.{uC, vC, uD, vD, w, w} f.inverse R S)\n    [I.modules.Additive]\n    (ι : Type t) (p : ι → GeometricMorphism (Type w) (Sheaf JD (Type w)))\n    (_s : ∀ i, RingedSitePoint S (p i))\n    (_hp : JointlyReflectIsomorphisms (fun i ↦ (p i).inverse))\n    (P : CochainComplex (SheafOfModules.{w}\n      ((sheafCompose JC (forget₂ CommRingCat.{w} RingCat.{w})).obj R)) ℤ),\n    CochainComplex.IsKFlatIndependentCoefficients (R := R) P →\n    CochainComplex.IsKFlatIndependentCoefficients (R := S)\n      ((I.modules.mapHomologicalComplex (.up ℤ)).obj P)",
+  "branch": "sheaf-dag",
+  "by": "Z5",
+  "date": "2026-10-25"
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Z5",
+  "result": "pass",
+  "landing": "20261024T234311-L-2552236",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Z5",
+  "result": "pass",
+  "landing": "20261024T234311-L-2552236",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

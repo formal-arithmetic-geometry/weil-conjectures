@@ -1,0 +1,132 @@
+{
+ "id": "lem-sfb-adic-etale-stalk-levels",
+ "kind": "statement",
+ "title": "Algebraic stalk levels of a finite etale quotient system",
+ "statement": "Let X be Noetherian, A a commutative Noetherian ring, J an ideal. Let C_n be bounded constructible coefficient-sized etale complexes over A/J^(n+1), all with Tor amplitude [a,b], with lisse finite-type cohomology at n=0 and specified consecutive derived reduction isomorphisms. Then X has a coefficient-small covering of its final proetale object by affine objects weakly contractible on the actual slices. On each member there are ordinary derived A/J^(n+1)-complexes E_n, with E_0 perfect, consecutive scalar-extension isomorphisms for the canonical module-derived scalar extension, and individual constant-realization isomorphisms to the restriction of the comparison of C_n. There is no completed complex among the hypotheses and no reconstruction among the conclusions. All comparisons and universes are those of [def-sfb-adic-residue-lift-comparisons] and [def-sfb-module-derived-scalar-comparisons].",
+ "stmt_deps": [
+  "def-sfb-adic-residue-lift-comparisons",
+  "def-sfb-adic-residue-algebra-tower",
+  "lem-sfb-adic-constructible-finite-reductions",
+  "def-sfb-module-derived-scalar-comparisons"
+ ],
+ "source": {
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Tag 09C6, first paragraph; Tags 094I and 09BI"
+ },
+ "proof": [
+  {
+   "text": "Induct through the consecutive quotient maps. Each is surjective with square-zero kernel: its kernel is the image of J^(n+1) in A/J^(n+2), whose square vanishes. The given quotient isomorphism and bounded-above part of hC allow nilpotent-coefficient lissity reflection; start at the given residue lissity.",
+   "uses": [
+    "lem-sfb-nilpotent-coefficient-lissity"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply the proved coefficient-sized connected-component contractible-cover construction. For each member choose its recorded point z and define E_n by the explicit exact derived stalk of C_n at the algebraic closure of the residue field of z. These are actual constructed stalks, not arbitrary witnesses.",
+   "uses": [
+    "lem-sfb-coefficient-connected-contractible-cover",
+    "def-sfb-coefficient-etale-derived-stalk"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply single-complex connected-stalk constancy at every level to obtain the required constant realization isomorphisms and perfect E_0. Compose the scalar-extension/stalk comparison with the stalk of beta n to obtain each algebraic consecutive quotient isomorphism.",
+   "uses": [
+    "lem-sfb-coefficient-connected-stalk-constant",
+    "lem-sfb-coefficient-etale-stalk-scalar-extension"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-nilpotent-coefficient-lissity",
+  "lem-sfb-coefficient-connected-contractible-cover",
+  "def-sfb-coefficient-etale-derived-stalk",
+  "lem-sfb-coefficient-connected-stalk-constant",
+  "lem-sfb-coefficient-etale-stalk-scalar-extension"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Tag 09C6, first paragraph; square-zero induction using Tag 094I and single-complex constancy using Tag 09BI"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A compatible tower of constructible etale complexes with lisse residue and bounded Tor amplitude has algebraic stalk models on an affine weakly contractible proetale cover",
+   "results": "8 hits: Algebra.Etale.comp, Algebra.Etale.formallyEtale, AlgebraicGeometry.Scheme.smallEtaleTopology, AlgebraicGeometry.Scheme.etaleTopology, AlgebraicGeometry.Scheme.Etale, AlgebraicGeometry.Scheme.smallEtalePretopology, Algebra.FormallyEtale.comp, Algebra.Etale.exists_subalgebra_fg",
+   "date": "2026-10-26",
+   "verdict": "No matching theorem; use the project declarations and explicit comparisons."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Compatible finite etale quotient complexes with lisse residue have perfect algebraic stalks and become constant on weakly contractible covers",
+   "results": "8 hits: AlgebraicGeometry.Scheme.etaleTopology, StandardEtalePair.instFormallyEtaleRing, AlgebraicGeometry.IsEtale.of_comp, Algebra.Etale.formallyEtale, Algebra.etaleLocus_eq_univ_iff, Algebra.FormallyEtale.of_unramified_and_smooth, AlgebraicGeometry.IsEtale.instFormallyUnramified, AlgebraicGeometry.Scheme.smallEtaleTopology",
+   "date": "2026-10-26",
+   "verdict": "No matching theorem; use the project declarations and explicit comparisons."
+  },
+  {
+   "tool": "grep",
+   "query": "stalk.*[Tt]ower|connected.*perfect.*constant",
+   "results": "3 hits: Mathlib/RingTheory/Spectrum/Prime/FreeLocus.lean, Mathlib/RingTheory/Spectrum/Prime/FreeLocus.lean, Mathlib/RingTheory/QuasiFinite/Basic.lean",
+   "date": "2026-10-26",
+   "verdict": "No matching theorem; use the project declarations and explicit comparisons."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.AdicResidueStalkTowerFamily",
+  "date": "2026-10-26",
+  "group": "B4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-lem-integral-models-stacks",
+   "place": "Tag 09C6, first paragraph; Tags 094I and 09BI",
+   "via": [
+    "lem-sfb-adic-residue-stalk-tower-family",
+    "lem-sfb-adic-finite-reduction-model-family",
+    "lem-sfb-adic-residue-finite-local-models",
+    "lem-sfb-adic-residue-lisse-perfect-lift",
+    "lem-sfb-adic-stratified-perfect",
+    "lem-sfb-integral-cohomological-adic-criterion"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-lem-integral-models",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.AdicEtaleStalkLevels",
+  "file": "lean/Sheaf/Paper/AdicEtaleStalkLevels.lean",
+  "declaration": "AlgebraicGeometry.Scheme.adicEtale_stalk_levels",
+  "statement": "theorem adicEtale_stalk_levels\n    (X : Scheme.{u}) [IsNoetherian X]\n    {A : Type (max v (u + 1))} [CommRing A] [IsNoetherianRing A] (J : Ideal A)\n    (C : ∀ n : ℕ, adicFiniteEtale.{u, v} X J n)\n    (hC : ∀ n : ℕ, IsCoefficientBoundedConstructibleEtale.{u, v}\n      X (adicFiniteCoeff J n) (C n))\n    (a b : ℤ)\n    (hTor : ∀ n : ℕ, HasCoefficientModelTorAmplitude\n      (CategoryTheory.ConstantCompletion.finite\n        (smallModelComparisonEtaleTopology.{u, v} X) A J n) (C n) a b)\n    (hlisse : ∀ q : ℤ, SheafOfModules.IsLocallyConstantFiniteTypeModules\n      (smallModelComparisonEtaleTopology.{u, v} X) (adicFiniteCoeff J 0)\n      ((adicResidueCohomology\n        (CategoryTheory.ConstantCompletion.finite\n          (smallModelComparisonEtaleTopology.{u, v} X) A J 0) q).obj (C 0)))\n    (beta : ∀ n : ℕ,\n      (adicFiniteExtension (smallModelComparisonEtaleTopology.{u, v} X)\n        (adicFiniteFactor J (Nat.le_succ n))).obj (C (n + 1)) ≅ C n) :\n    ∃ (I : Type (max v (u + 1)))\n      (V : I → coefficientProEtaleSiteModel.{u, v} X)\n      (f : ∀ i : I, V i ⟶\n        (AsSmall.up : X.ProEt ⥤ coefficientProEtaleSiteModel.{u, v} X).obj (⊤_ X.ProEt)),\n      Sieve.ofArrows V f ∈ coefficientProEtaleModelTopology.{u, v} X _ ∧\n      ∀ i : I,\n        IsAffine ((AsSmall.down : coefficientProEtaleSiteModel.{u, v} X ⥤ X.ProEt).obj\n          (V i)).left ∧\n        AdicResidueSliceWeaklyContractible.{u, v} X (V i) ∧\n        ∃ E : ∀ n : ℕ, DerivedCategory (ModuleCat.{max v (u + 1)} (adicFiniteCoeff J n)),\n          DerivedCategory.IsPerfect (E 0) ∧\n          (∀ n : ℕ, Nonempty\n            ((ConstantScalarRealization.moduleDerivedExtension\n              (Ideal.Quotient.factorPowSucc J (n + 1))).obj (E (n + 1)) ≅ E n)) ∧\n          ∀ n : ℕ, Nonempty\n            ((adicResidueFiniteConstant.{u, v} X J (V i) n).obj (E n) ≅\n              (adicResidueRestriction\n                (CategoryTheory.ConstantCompletion.finite\n                  (coefficientProEtaleModelTopology.{u, v} X) A J n) (V i)).obj\n                  ((adicFinitePullback.{u, v} X (adicFiniteCoeff J n)).obj (C n)))",
+  "branch": "sheaf-dag",
+  "by": "B4",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B4",
+  "result": "pass",
+  "landing": "20261026T022819-L-460477",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "X8",
+  "result": "pass",
+  "landing": "20261026T071501-L-3939999",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

@@ -1,0 +1,264 @@
+{
+ "id": "lem-trf-diagonal-class-basis-descent",
+ "kind": "statement",
+ "title": "Descent of uniquely normalized diagonal-class isomorphisms on an open basis",
+ "statement": "Let $f:X\\to S$ be a separated morphism of schemes [def-pc-scheme], [def-weil-proper-morphism]. Put $Y=X\\times_SX$ [def-pc-fibre-product], with first projection $p_1$ and closed diagonal $\\Delta$, and put $D=\\Delta_*\\mathcal O_X[0]$. Let $K,L\\in D(\\mathcal O_X)$ [def-pc-derived-category] and let $\\xi:D\\to Lp_1^*K$ and $\\eta:D\\to Lp_1^*L$ be morphisms [def-pc-derived-pullback]. Suppose multiplication by $\\eta$ is an isomorphism $D\\to R\\mathcal Hom_Y(D,Lp_1^*L)$ [def-pur-derived-internal-hom]; multiplication means the transpose of the derived multiplication $D\\otimes^{\\mathbf L}D\\to D$ followed by $\\eta$, as in [def-trf-coherent-relative-dualizing-pair]. Let $\\mathcal B$ be a set of opens forming a basis for $X$, meaning every open of $X$ is a union of members of $\\mathcal B$. For each $U\\in\\mathcal B$ assume $\\operatorname{Hom}_{D(\\mathcal O_U)}(K|_U,K|_U[i])=0$ for every $i<0$ and assume there is exactly one isomorphism $\\alpha_U:K|_U\\to L|_U$ for which $(Lp_{1,U}^*\\alpha_U)\\xi_U=\\eta_U$ on $U\\times_SU$. Here $p_{1,U}$ and $\\Delta_U$ are the projection and diagonal for $U/S$, and $\\xi_U,\\eta_U$ are the restrictions under the canonical identifications of diagonal direct image and derived pullback with open restriction. Then the $\\alpha_U$ are compatible with inclusions of basis opens, and there is exactly one isomorphism $\\alpha:K\\to L$ restricting to all the $\\alpha_U$. There is a canonical $\\Gamma(X,\\mathcal O_X)$-linear identification $\\operatorname{Hom}_{D(\\mathcal O_Y)}(D,Lp_1^*L)\\cong\\Gamma(X,\\mathcal O_X)$ sending $\\eta$ to $1$, compatible with restriction to every basis open. The resulting global isomorphism satisfies $(Lp_1^*\\alpha)\\xi=\\eta$, and it is the unique isomorphism with this equality. No quasi-compactness, finite-cover or affine-intersection hypothesis is assumed.",
+ "source": {
+  "document": "literature/stacks-project/duality.tex",
+  "place": "Tag 0E2W (lemma-uniqueness-relative-dualizing), normalization and final gluing paragraph; cohomology.tex, Tag 0D6C (theorem-glueing-bbd-general), uniqueness of a solution; sites-cohomology.tex, lemma-section-RHom-over-U."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-proper-morphism",
+  "def-pc-fibre-product",
+  "def-pc-derived-category",
+  "def-pc-derived-pullback",
+  "def-pur-derived-internal-hom",
+  "def-trf-coherent-relative-dualizing-pair",
+  "def-trf-diagonal-class-open-restriction"
+ ],
+ "proof": [
+  {
+   "text": "If $V\\subset U$ are basis opens, restrict $(Lp_{1,U}^*\\alpha_U)\\xi_U=\\eta_U$ to $V\\times_S V$. The canonical restriction identifications in the hypotheses give $(Lp_{1,V}^*(\\alpha_U|_V))\\xi_V=\\eta_V$. Restriction preserves an inverse, so $\\alpha_U|_V$ is an isomorphism. The assumed uniqueness on $V$ gives $\\alpha_U|_V=\\alpha_V$. In particular the inverse family is inclusion-compatible too. The basis covers $X$, and its members contained in $U\\cap V$ cover $U\\cap V$, by the definition of a basis.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/duality.tex",
+    "place": "Tag 0E2W (lemma-uniqueness-relative-dualizing), final gluing paragraph: compatibility of the unique normalized local maps"
+   }
+  },
+  {
+   "text": "On a basis open $U$, the given $\\alpha_U$ identifies $L|_U$ with $K|_U$. Composing with this isomorphism and its shifts identifies every negative cross Hom for $(K,L)$ or $(L,K)$, and every negative self Hom for $L$, with the assumed zero group for $K$. Apply [lem-trf-derived-basis-local-hom-glue] with $O=X$ to the compatible families $\\alpha_U$ and $\\alpha_U^{-1}$ to obtain $a:K\\to L$ and $b:L\\to K$. Apply its injectivity clause to $(K,K)$ and $(L,L)$: the restrictions of $ba$ and $ab$ are the respective identities, hence $ba=1_K$ and $ab=1_L$. Thus $a$ is an isomorphism. The same Hom bijection for $(K,L)$ says that it is the unique morphism restricting to all $\\alpha_U$.",
+   "uses": [
+    "lem-trf-derived-basis-local-hom-glue"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/cohomology.tex",
+    "place": "Tags 0D66(2) (lemma-vanishing-and-glueing), 0D68 (lemma-uniqueness); compare duality.tex Tag 0E2W"
+   }
+  },
+  {
+   "text": "Write $A=\\Delta_*\\mathcal O_X$, $D=A[0]$, $M=Lp_1^*L$, $\\mu=\\mu_Y(A,A);Qt:D\\otimes^{\\mathbf L}D\\to D$ for the derived multiplication and $e=e_{-,D,M}$ for the canonical tensor--Hom bijection of [def-pc-canonical-derived-tensor-hom-bijection], so that $m_\\eta=e^{-1}(\\mu;\\eta)$ is the assumed isomorphism, as in [def-trf-coherent-relative-dualizing-pair]. For $s\\in\\Gamma(X,\\mathcal O_X)=\\Gamma(Y,A)$ let $\\sigma_s:\\mathcal O_Y\\to A$ be the module map $a\\mapsto as$ and $m_s:A\\to A$ multiplication by $s$. A module map $\\phi:\\mathcal O_Y\\to A$ equals $\\sigma_{\\phi(1)}$, since $\\phi(a)=a\\phi(1)$ on every open; so $s\\mapsto\\sigma_s$ is a bijection onto $\\operatorname{Hom}_{\\mathcal O_Y}(\\mathcal O_Y,A)$, and by [lem-weil-pbc-derived-single-fully-faithful] for $\\operatorname{Mod}(\\mathcal O_Y)$, $s\\mapsto Q\\sigma_s$ is a bijection $\\Gamma(X,\\mathcal O_X)\\to\\operatorname{Hom}_{D(\\mathcal O_Y)}(\\mathcal O_Y[0],D)$. Composing with the isomorphism $m_\\eta$, then $e_{\\mathcal O_Y[0],D,M}$ and the left unitor $\\lambda_D$ of [def-pc-scheme-derived-tensor-structure], gives a bijection $\\Psi:\\Gamma(X,\\mathcal O_X)\\to\\operatorname{Hom}_{D(\\mathcal O_Y)}(D,M)$, $\\Psi(s)=\\lambda_D^{-1};e(Q\\sigma_s;m_\\eta)$. Naturality of $e$ in the first variable gives $e(Q\\sigma_s;m_\\eta)=(Q\\sigma_s\\otimes1);\\mu;\\eta$. Naturality of $\\mu_Y$ and the fact that the unitor descends from the module unitor give $\\lambda_D^{-1};(Q\\sigma_s\\otimes1);\\mu_Y(A,A);Qt=Q(d\\mapsto1\\otimes d\\mapsto s\\otimes d\\mapsto sd)=Qm_s$. Hence $\\Psi(s)=\\eta\\circ m_s$. Put $\\Phi=\\Psi^{-1}$. Then $\\Phi(\\eta)=1$, since $m_1$ is the identity. Give the Hom group its $\\Gamma(X,\\mathcal O_X)$ action by precomposition with $m_s$. The equations $m_{s+t}=m_s+m_t$ and $m_sm_t=m_{st}$ show that $\\Phi$ is linear.",
+   "uses": [
+    "lem-weil-pbc-derived-single-fully-faithful",
+    "def-pc-canonical-derived-tensor-hom-bijection",
+    "def-pc-scheme-derived-tensor-structure",
+    "def-trf-coherent-relative-dualizing-pair"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/duality.tex",
+    "place": "Tag 0E2W (lemma-uniqueness-relative-dualizing), scalar description of diagonal classes; sites-cohomology.tex Tag 08JA (lemma-section-RHom-over-U)"
+   }
+  },
+  {
+   "text": "For $U\\in\\mathcal B$ put $Y_U=U\\times_S U$. On an open $W\\subset Y_U$, the equality $(\\Delta_*\\mathcal O_X)(W)=\\mathcal O_X(\\Delta^{-1}W)=\\mathcal O_U(\\Delta_U^{-1}W)$ identifies $D|_{Y_U}$ with $D_U=\\Delta_{U,*}\\mathcal O_U[0]$, preserving products and the unit. Use the pullback restriction identification stipulated in the statement for $M|_{Y_U}$. The internal-Hom comparison [lem-weil-pbc-ringed-internal-hom-exact-restriction] and the transposition equation [lem-weil-pbc-ringed-slice-evaluation-transpose] identify $m_\\eta|_{Y_U}$ with multiplication by $\\eta_U$: both transpose the restricted multiplication followed by the restricted class. Writing $\\theta:rR\\mathcal Hom_Y(D,M)\\xrightarrow{\\sim}R\\mathcal Hom_{Y_U}(rD,rM)$ for that comparison, the cited equation gives $m_{\\eta_U}=\\theta\\circ r(m_\\eta)$ after the stipulated identifications. Both factors are isomorphisms, hence so is $m_{\\eta_U}$. Apply the construction of Step 3 on the scheme $Y_U$, using [lem-weil-pbc-derived-single-fully-faithful], [def-pc-canonical-derived-tensor-hom-bijection] and [def-pc-scheme-derived-tensor-structure], to get $\\Phi_U$. Its inverse formula is $s_U\\mapsto\\eta_U\\circ m_{s_U}$. Restricting $\\Phi^{-1}(s)=\\eta\\circ m_s$ gives exactly $\\eta_U\\circ m_{s|_U}$. Consequently $\\Phi_U(h|_{Y_U})=\\Phi(h)|_U$ for every global class $h$.",
+   "uses": [
+    "lem-weil-pbc-ringed-internal-hom-exact-restriction",
+    "lem-weil-pbc-ringed-slice-evaluation-transpose",
+    "lem-weil-pbc-derived-single-fully-faithful",
+    "def-pc-canonical-derived-tensor-hom-bijection",
+    "def-pc-scheme-derived-tensor-structure"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 08JB (lemma-restriction-RHom-to-U), 08J9 (lemma-internal-hom), 08JA (lemma-section-RHom-over-U), and 07A4 (lemma-pullback-tensor-product); duality.tex Tag 0E2W"
+   }
+  },
+  {
+   "text": "Let $h=(Lp_1^*a)\\xi$ and $s=\\Phi(h)$. Since $a|_U=\\alpha_U$, the stipulated pullback identifications and local normalization give $h|_{Y_U}=\\eta_U$. Step 4 therefore gives $s|_U=\\Phi_U(\\eta_U)=1$ for every $U\\in\\mathcal B$. These opens cover $X$, so the separatedness axiom of the structure sheaf gives $s=1$. Step 3 now gives $h=\\Phi^{-1}(1)=\\eta$. This argument uses a cover of $X$; it requires no assertion that the opens $Y_U$ cover $Y$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/duality.tex",
+    "place": "Tag 0E2W (lemma-uniqueness-relative-dualizing), final sentence, with scalar detection made explicit"
+   }
+  },
+  {
+   "text": "If $c:K\\to L$ is any isomorphism satisfying $(Lp_1^*c)\\xi=\\eta$, restrict this equation to $Y_U$. Then $c|_U$ is a normalized isomorphism, so the uniqueness hypothesis gives $c|_U=\\alpha_U$. The uniqueness already proved in Step 2 gives $c=a$. All the constructions include the empty scheme and an empty basis there: its module category has one object and morphism, and its section ring is the zero ring, where $1=0$. No step uses a finite subcover, quasi-compactness or affine intersections.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/duality.tex",
+    "place": "Tag 0E2W, uniqueness and gluing"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-trf-derived-basis-local-hom-glue",
+  "def-trf-coherent-relative-dualizing-pair",
+  "lem-weil-pbc-ringed-internal-hom-exact-restriction",
+  "lem-weil-pbc-ringed-slice-evaluation-transpose",
+  "lem-weil-pbc-derived-single-fully-faithful",
+  "def-pc-canonical-derived-tensor-hom-bijection",
+  "def-pc-scheme-derived-tensor-structure"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/duality.tex",
+  "place": "Tag 0E2W final gluing paragraph, expanded using Tags 0D66, 0D68, 08JA and 08JB; generic basis and scalar-section formulation by Q144"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Glue unique normalized local derived isomorphisms on an arbitrary open basis under negative self extension vanishing and preserve a diagonal class globally by its scalar section",
+   "results": "8 hits; top=[\"TopCat.Sheaf.existsUnique_gluing'\", 'TopCat.Sheaf.existsUnique_gluing', 'AlgebraicGeometry.Scheme.OpenCover.ext_elem', 'AlgebraicGeometry.Scheme.GlueData.sheafValGluedMk_val', 'AlgebraicGeometry.Scheme.LocalRepresentability.instIsIsoSheafZariskiTopologyTypeYonedaGluedToSheaf', 'AlgebraicGeometry.Scheme.GlueData.sheafValGluedMk', 'AlgebraicGeometry.Scheme.zero_of_zero_cover', 'TopCat.Presheaf.IsSheaf.isSheafUniqueGluing_types']; note=; digest=b8f56ff7bbdf856d",
+   "date": "2026-10-22",
+   "verdict": "no match: the results concern ordinary modules, flatness, ordinary sheaf gluing, or basic derived-category isomorphisms; none states this coherent diagonal-class comparison"
+  },
+  {
+   "tool": "leansearch",
+   "query": "BBD descent unique isomorphism of complexes on a basis with negative Ext vanishing and diagonal class normalization",
+   "results": "8 hits; top=['CategoryTheory.ProjectiveResolution.cochainComplexXIso', 'HomologicalComplex.Hom.noConfusion', 'CategoryTheory.Pseudofunctor.DescentData.hom_ext', 'HomologicalComplex.Hom.noConfusionType', 'HomologicalComplex.xPrevIsoSelf', 'CategoryTheory.Pseudofunctor.DescentData.isoMk', 'CochainComplex.ConnectData.homologyIsoNeg', 'Rep.barComplex.isoStandardComplex']; note=; digest=8433e1ab5dc0c8ea",
+   "date": "2026-10-22",
+   "verdict": "no match: the results concern ordinary modules, flatness, ordinary sheaf gluing, or basic derived-category isomorphisms; none states this coherent diagonal-class comparison"
+  },
+  {
+   "tool": "loogle",
+   "query": "DerivedCategory, CategoryTheory.IsIso",
+   "results": "12 hits; top=['DerivedCategory.instIsIsoMapCochainComplexIntQOfQuasiIso', 'DerivedCategory.isIso_Q_map_iff_quasiIso', 'DerivedCategory.isIso_iff', 'DerivedCategory.isIso_Qh_map_iff', 'DerivedCategory.left_fac', 'DerivedCategory.right_fac', 'DerivedCategory.left_fac_of_isStrictlyGE', 'DerivedCategory.right_fac_of_isStrictlyLE']; note=; digest=35d603cf1e26df37",
+   "date": "2026-10-22",
+   "verdict": "no match: the results concern ordinary modules, flatness, ordinary sheaf gluing, or basic derived-category isomorphisms; none states this coherent diagonal-class comparison"
+  },
+  {
+   "tool": "grep",
+   "query": "glueing.bbd|gluing.bbd|negative.{0,30}(ext|self)|diagonal.{0,30}class",
+   "results": "0 hits; top=[]; note=; digest=4f53cda18c2baa0c; directory=Mathlib/AlgebraicGeometry",
+   "date": "2026-10-22",
+   "verdict": "no match: the results concern ordinary modules, flatness, ordinary sheaf gluing, or basic derived-category isomorphisms; none states this coherent diagonal-class comparison"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Descent of local isomorphisms between complexes with no negative Ext using uniqueness on open subsets; equality of diagonal classes detected as global functions",
+   "results": "8 hits; top=['CategoryTheory.Sheaf.H', 'CategoryTheory.Abelian.Ext.ext', 'CategoryTheory.Abelian.Ext.ext_iff', 'DerivedCategory.subsingleton_hom_of_isStrictlyLE_of_isStrictlyGE', 'CategoryTheory.InjectiveResolution.extEquivCohomologyClass_extMk', 'CategoryTheory.ProjectiveResolution.extEquivCohomologyClass_extMk', 'CategoryTheory.GrothendieckTopology.MayerVietorisSquare.SheafCondition.ext', 'CategoryTheory.InjectiveResolution.extEquivCohomologyClass_symm_mk_hom']; note=; digest=234cfa092ea57130",
+   "date": "2026-10-22",
+   "verdict": "no match: the results concern ordinary modules, flatness, ordinary sheaf gluing, or basic derived-category isomorphisms; none states this coherent diagonal-class comparison"
+  },
+  {
+   "tool": "loogle",
+   "query": "DerivedCategory, CategoryTheory.IsIso",
+   "results": "{\"t\": \"2026-10-23T04:04:04Z\", \"tool\": \"loogle\", \"query\": \"DerivedCategory, CategoryTheory.IsIso\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"DerivedCategory.instIsIsoMapCochainComplexIntQOfQuasiIso\", \"DerivedCategory.isIso_Q_map_iff_quasiIso\", \"DerivedCategory.isIso_iff\", \"DerivedCategory.isIso_Qh_map_iff\", \"DerivedCategory.left_fac\", \"DerivedCategory.right_fac\", \"DerivedCategory.left_fac_of_isStrictlyGE\", \"DerivedCategory.right_fac_of_isStrictlyLE\"], \"digest\": \"35d603cf1e26df37\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: ordinary sheaf gluing, general derived-category isomorphism tests and Ext representatives do not state normalized diagonal-class descent or its scalar-section detection"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Glue unique normalized local derived isomorphisms on an arbitrary open basis with vanishing negative self extensions and detect diagonal classes by global sections",
+   "results": "{\"t\": \"2026-10-23T04:04:06Z\", \"tool\": \"leanfinder\", \"query\": \"Glue unique normalized local derived isomorphisms on an arbitrary open basis with vanishing negative self extensions and detect diagonal classes by global sections\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"TopCat.Sheaf.existsUnique_gluing'\", \"TopCat.Sheaf.existsUnique_gluing\", \"AlgebraicGeometry.Scheme.Cover.instIsIsoFromGlued\", \"AlgebraicGeometry.LocallyRingedSpace.GlueData.isoSheafedSpace\", \"TopCat.Presheaf.IsSheafUniqueGluing\", \"AlgebraicGeometry.PresheafedSpace.GlueData.componentwise_diagram_π_isIso\", \"TopCat.Presheaf.IsSheaf.isSheafUniqueGluing\", \"AlgebraicGeometry.Scheme.Cover.RelativeGluingData.mk.inj\"], \"digest\": \"448b3813c330d71c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: ordinary sheaf gluing, general derived-category isomorphism tests and Ext representatives do not state normalized diagonal-class descent or its scalar-section detection"
+  },
+  {
+   "tool": "grep",
+   "query": "glueing.bbd|gluing.bbd|diagonal.{0,30}class",
+   "results": "{\"t\": \"2026-10-23T04:04:35Z\", \"tool\": \"grep\", \"query\": \"glueing.bbd|gluing.bbd|diagonal.{0,30}class\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: ordinary sheaf gluing, general derived-category isomorphism tests and Ext representatives do not state normalized diagonal-class descent or its scalar-section detection"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Unique gluing of isomorphisms of derived sheaves with negative Ext vanishing on a topological basis",
+   "results": "{\"t\": \"2026-10-23T04:04:36Z\", \"tool\": \"leansearch\", \"query\": \"Unique gluing of isomorphisms of derived sheaves with negative Ext vanishing on a topological basis\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"TopCat.Sheaf.existsUnique_gluing'\", \"TopCat.Sheaf.existsUnique_gluing\", \"TopCat.Presheaf.IsSheaf.isSheafUniqueGluing_types\", \"TopCat.Presheaf.IsGluing\", \"TopCat.Sheaf.interUnionPullbackConeLift\", \"TopCat.Presheaf.isSheaf_iff_isSheafUniqueGluing_types\", \"TopCat.Presheaf.IsSheafUniqueGluing\", \"TopCat.Presheaf.IsSheaf.isSheafUniqueGluing\"], \"digest\": \"781f9eae413003e8\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: ordinary sheaf gluing, general derived-category isomorphism tests and Ext representatives do not state normalized diagonal-class descent or its scalar-section detection"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Morphisms of complexes of sheaves glue uniquely when local negative Ext vanishes and a normalized diagonal generator is a scalar section",
+   "results": "{\"t\": \"2026-10-23T04:04:37Z\", \"tool\": \"leanfinder\", \"query\": \"Morphisms of complexes of sheaves glue uniquely when local negative Ext vanishes and a normalized diagonal generator is a scalar section\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"TopCat.Sheaf.existsUnique_gluing'\", \"TopCat.Sheaf.existsUnique_gluing\", \"CategoryTheory.Sheaf.H\", \"CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex_g\", \"CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex_f\", \"CategoryTheory.InjectiveResolution.extMk_hom\", \"CategoryTheory.ProjectiveResolution.extMk_hom\", \"CategoryTheory.GrothendieckTopology.MayerVietorisSquare.SheafCondition.ext\"], \"digest\": \"958dc18f26f8c0f0\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: ordinary sheaf gluing, general derived-category isomorphism tests and Ext representatives do not state normalized diagonal-class descent or its scalar-section detection"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-relative-dualizing-pair-rigidity",
+  "date": "2026-10-22",
+  "group": "NV"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Proof (1)--(2), semistable-alteration input in the nearby-cycle branch: ILO Exposé X, Theorem 3.4, Step 3, invoking Temkin 2010, Theorems 1.5 and 1.1 for a semistable multipointed modification. Temkin proof component: Marked dualizing line bundle and contracted-component degrees. Auxiliary input: Local complete-intersection determinant adjunction underlying the marked dualizing construction, before the marking is inserted. More precisely: coherent relative-duality polynomial-chart input; Rigidity of already given coherent relative dualizing pairs. Re-split of supplied-pair rigidity: All of old steps 5 and 6: compatibility, BBD uniqueness, and global class detection by its scalar section.",
+   "via": [
+    "lem-trf-relative-dualizing-pair-rigidity",
+    "lem-trf-relative-duality-polynomial-chart",
+    "lem-trf-flat-lci-canonical-adjunction",
+    "lem-trf-marked-nodal-dualizing-degrees",
+    "lem-trf-temkin-stable-modification",
+    "lem-trf-stable-modification-flat-curve-pair",
+    "lem-trf-dejong-relative-marked-semistable",
+    "lem-trf-relative-marked-nodal-reduction",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-trf-diagonal-class-basis-descent",
+  "worker": "stage1",
+  "summary": "Read the Stacks gluing and diagonal-class normalization sources. Retained the statement, proved compatibility from local uniqueness, glued both maps using the existing basis Hom theorem, and detected the global class equality through an explicit scalar-section isomorphism compatible with restriction. Reused all necessary nodes; no new node or Mathlib leaf was needed. Checked the empty scheme, arbitrary bases and non-covering double opens. Repair of returned head a37c68732e9: compared the retained split with the current live unsplit node, reread all six current proof-dependency statements and all statement dependencies, made the restriction/transposition equation explicit in Step 4, and corrected the zeroth-derived-sections source reference to Tag 05TD(3). The delivery tool rebuilds on current origin/sheaf-dag for promotion by L. Maintainer reader Q144 (2026-10-23, re-applied on 0a4a3d50 after the a37c6873 FIX was lost at landing): Step 3 rebuilt so that the formula Phi^{-1}(s)=eta m_s follows from cited statements (single-functor full faithfulness, naturality of the canonical tensor-Hom bijection, unitor), replacing the zeroth-hypercohomology chain whose canonical isomorphism is not stated to be compatible with the transpose; Step 4 keeps the delivered theta equation.",
+  "blueprint": "Proof (1)--(2), semistable-alteration input in the nearby-cycle branch: ILO Exposé X, Theorem 3.4, Step 3, invoking Temkin 2010, Theorems 1.5 and 1.1 for a semistable multipointed modification. Temkin proof component: Marked dualizing line bundle and contracted-component degrees. Auxiliary input: Local complete-intersection determinant adjunction underlying the marked dualizing construction, before the marking is inserted. More precisely: coherent relative-duality polynomial-chart input; Rigidity of already given coherent relative dualizing pairs. Re-split of supplied-pair rigidity: All of old steps 5 and 6: compatibility, BBD uniqueness, and global class detection by its scalar section.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-ringed-internal-hom-exact-restriction",
+    "why": "The generic restriction comparison for unbounded ringed-site internal Hom is used only for the open Y_U in Y."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-slice-evaluation-transpose",
+    "why": "The generic evaluation/transposition compatibility identifies restriction of the specified multiplication map with multiplication by the restricted class; no unit node supplies this map-level comparison."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-ringed-internal-hom-exact-restriction",
+  "lem-weil-pbc-ringed-slice-evaluation-transpose"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q144-0a4a3d502",
+  "group": "Q144",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q144-0a4a3d502 (reviewer sub-agent of L); spot-checked: Landing-return re-push of a37c6873, which was judged FIX before the landing failed on side promotion. The worker continued from their own sandbox, so that FIX is missing from this head. Compared with a37c: Step 4 adds the explicit m_{η_U}=θ∘r(m_η), the Step 3 place is now 05TD(3), and the summary is longer. Statement, stmt_deps and Steps 1-3 and 5-6 are unchanged. 0 new nodes. Stacks duality 0E2W (lines 7117-7160) read: the item makes precise its 'α sends ξ to η as this is true locally'. Its remark that the opens U×_SU need not cover Y is correct (two-point X). Step 1 is right: uniqueness is used only on basis members. Step 2 is right: lem-trf-derived-basis-local-hom-glue's negative-Hom hypothesis for (K,L),(L,K),(L,L) follows via α_U, and gluing α_U^{±1} plus injectivity gives the inverses and uniqueness. Fault C3/C4 in Step 3 remains: lem-pur-rhom-global-sections states only some canonical iso H^0 RHom≅Hom, never shown compatible with the transpose defining m_η. Yet Φ^{-1}(s)=η∘m_s was taken from it, and that formula carries Φ(η)=1, linearity and Step 4. FIX re-applied on this head: Ψ(s)=λ_D^{-1};e(Qσ_s;m_η), using lem-weil-pbc-derived-single-fully-faithful, def-pc-canonical-derived-tensor-hom-bijection naturality and the unitor of def-pc-scheme-derived-tensor-structure; this gives Ψ(s)=η∘m_s. In Step 4 the delivered θ sentence is kept (second display of the slice-evaluation-transpose node) and the H^0 citations are swapped for the Step 3 nodes. proof_deps is recomputed, the two H^0 tool_uses and the 05TD place are dropped, and the two ringed-site restriction tool_uses are accepted. Steps 5-6 are correct: separatedness on X, no cover of Y needed. Edge cases checked: empty X, a point, zero local K, infinite basis. No SGA, no duplicates, no cycle; the statement is untouched.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.DiagonalClassBasisDescent",
+  "declaration": "AlgebraicGeometry.diagonalClass_basis_descent",
+  "declarations": [
+   "AlgebraicGeometry.diagonalBasisRestriction",
+   "AlgebraicGeometry.DiagonalClassHom",
+   "AlgebraicGeometry.diagonalClassSectionAction",
+   "AlgebraicGeometry.diagonalBasisClass",
+   "AlgebraicGeometry.IsDiagonalBasisNormalized",
+   "AlgebraicGeometry.diagonalBasisRestrictionIso",
+   "AlgebraicGeometry.diagonalBasisHomRestriction",
+   "AlgebraicGeometry.diagonalClass_basis_descent"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/DiagonalClassBasisDescent.lean",
+  "statement": "theorem diagonalClass_basis_descent {X S : Scheme.{u}} (f : X ⟶ S) [IsSeparated f] (K L : schemeDerivedCategory X) (ξ : DiagonalClassHom f K) (η : DiagonalClassHom f L) (hη : IsIso (relativeDualizingClassMap f L η)) (B : Set X.Opens) (hB : ∀ O : X.Opens, sSup {U : X.Opens | U ∈ B ∧ U ≤ O} = O) (hnegative : ∀ U ∈ B, ∀ i : ℤ, i < 0 → Subsingleton ((diagonalBasisRestriction X U).obj K ⟶ ((diagonalBasisRestriction X U).obj K)⟦i⟧)) (hlocal : ∀ U ∈ B, ∃! a : (diagonalBasisRestriction X U).obj K ≅ (diagonalBasisRestriction X U).obj L, IsDiagonalBasisNormalized f U K L ξ η a.hom) : (∀ (a : ∀ U : {U : X.Opens // U ∈ B}, (diagonalBasisRestriction X U.val).obj K ≅ (diagonalBasisRestriction X U.val).obj L), (∀ U : {U : X.Opens // U ∈ B}, IsDiagonalBasisNormalized f U.val K L ξ η (a U).hom) → (∀ (U V : {U : X.Opens // U ∈ B}) (h : V.val ≤ U.val), diagonalBasisHomRestriction h (a U).hom = (a V).hom) ∧ (∃! α : K ≅ L, ∀ U : {U : X.Opens // U ∈ B}, (diagonalBasisRestriction X U.val).map α.hom = (a U).hom)) ∧ (∃ Φ : (DiagonalClassHom f L) ≃+ Γ(X, ⊤), (∀ s : Γ(X, ⊤), Φ.symm s = diagonalClassSectionAction f s ≫ η) ∧ Φ η = 1 ∧ (∀ (s : Γ(X, ⊤)) (h : DiagonalClassHom f L), Φ (diagonalClassSectionAction f s ≫ h) = s * Φ h) ∧ ∀ U ∈ B, ∃ ΦU : (DiagonalClassHom (U.ι ≫ f) ((diagonalBasisRestriction X U).obj L)) ≃+ Γ(U.toScheme, ⊤), (∀ s : Γ(U.toScheme, ⊤), ΦU.symm s = diagonalClassSectionAction (U.ι ≫ f) s ≫ diagonalBasisClass f U L η) ∧ ∀ h : DiagonalClassHom f L, ΦU (diagonalBasisClass f U L h) = U.ι.appTop (Φ h)) ∧ (∃! α : K ≅ L, ξ ≫ (derivedPullback (pullback.fst f f)).map α.hom = η) ∧ (∀ (α : K ≅ L), (∀ U ∈ B, IsDiagonalBasisNormalized f U K L ξ η ((diagonalBasisRestriction X U).map α.hom)) → ξ ≫ (derivedPullback (pullback.fst f f)).map α.hom = η)",
+  "branch": "newtargets-dag",
+  "by": "NI",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-1600dc451",
+  "group": "NI",
+  "result": "fix",
+  "note": "Lean statement exact against node/0E2W: separated f, IsIso relativeDualizingClassMap, sSup basis condition, Subsingleton negative self-Hom, ∃! normalized local isos via relativeDualizingOpenClass (j=U.ι, b=𝟙 S); conclusions compat+unique gluing for normalized families, Φ ≃+ Γ(X,⊤) pinned by Φ.symm s = m_s≫η with Φη=1, linearity, ΦU restriction compat, ∃! global normalized iso + basis⇒global normalization. Edge cases (empty X/B, infinite basis, non-qc, U×U not covering Y) and universes OK; no hollow defs. FIX 1 (H12): new existing:true node def-trf-diagonal-class-open-restriction lacked stmt_deps for owners of moduleBaseChangeMap/tensorPullbackObjUnitToUnit/relativeMVAdj+Comp → fixes/def-trf-diagonal-class-open-restriction.json adds def-sfb-module-base-change-map, def-sfb-tensor-pullback-structure-sheaf-map, def-pc-relative-mv-maps with TeX cites (check_new_node clean). FIX 2 (H11): self-check second reading replaced via fixes/<item>.report.md. Maintainer note: item imports RelativeDualizingPairOpenRigidity whose owner lem-sfb-relative-dualizing-pair-open-rigidity cites the item in proof_deps → move helpers + relativeDualizingOpenDiagonalMap_isIso to own module. No Lean changed, no compile."
+ }
+}

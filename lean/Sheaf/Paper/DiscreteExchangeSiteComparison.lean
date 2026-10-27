@@ -21,12 +21,11 @@ public import Sheaf.Paper.CondensedAmbientExchange
 public import Sheaf.SixFunctors.ClassicalDefinition
 public import Sheaf.AlgebraicGeometry.ClassicalDerivedDefinitions
 public import WeilConjectures.SixFunctors.ProEtale.BaseChange.SmoothBaseChange
-import Sheaf.AlgebraicGeometry.ProEtaleInverseImageComparisonCoherence
-import Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
-import Mathlib.CategoryTheory.Localization.Predicate
-import Sheaf.AlgebraicGeometry.ProEtaleDirectImageMateCompatibility
+import Sheaf.AlgebraicGeometry.ClassicalDerivedImage
+import Sheaf.AlgebraicGeometry.BoundedBelowProEtaleComparison
+import Sheaf.AlgebraicGeometry.ProEtaleConstantDerivedEncoding
+import WeilConjectures.SixFunctors.BaseChange.DerivedComparison
 import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
-import Sheaf.AlgebraicGeometry.ProEtaleClassicalSheaves
 
 /-!
 # Discrete-coefficient exchange under the etale/pro-etale comparison
@@ -59,29 +58,18 @@ pro-etale endpoints are bounded below and classical, for any discrete commutativ
 Source: blueprint main-20261015, sk-thm-properbasechange.proof.md, pro-etale site paragraph;
 Stacks Project, Tag 07A7 (blueprint: lem-weil-pbc-discrete-exchange-site-comparison).
 
-Proof (the seven steps of the node):
-1. Apply sk-thm-pe-direct-image-comparison to all four inverse images and to the qcqs
-   vertical direct images. By lem-pe-direct-image-mate-compatibility and the bijection
-   def-weil-pbc-adjunction-mate, its beta is precisely the counit-normalized b. The
-   existing source and target comparison isomorphisms are the prescribed S and T.
-2. Apply lem-pe-inverse-image-comparison-coherence to the two paths around the square.
-   Cancel the common composite comparison: theta_p followed by p_f'(a_g) and a_f'
-   equals p_g'(a_f) followed by a_g' and A_X'(theta_e). Exact termwise descent and
-   lem-weil-pbc-localization-universal-property preserve this specified equation.
-3. The counit identity of lem-pe-direct-image-mate-compatibility says that
-   p_u(b_u) followed by epsilon_p equals c_u followed by A_U(epsilon_e), c_u = a_u.inv.
-4. Transpose A_Y'(e) followed by T under p_f' adjoint to s_f'. Naturality and Step 3
-   for f' reduce it to c_f', then A_X'(theta_e), then A_X'(l_g'(epsilon_e)), then a_g'.
-5. Transpose S followed by the ambient exchange of def-weil-pbc-ambient-ringed-exchange.
-   Its definition is the unit--square--counit mate. Naturality of theta_p, Step 3 for f,
-   Step 2, and naturality of a_g' reduce this transpose to exactly the same four factors.
-6. Injectivity of the adjunction correspondence gives the displayed exchange equality.
-   Whiskering the canonical natural comparisons gives naturality of S and T.
-7. Exact comparison commutes with cohomology and preserves lower bounds by
-   lem-weil-pbc-exact-functor-bounded-below. The module essential image of
-   sk-thm-pe-classical-sheaves makes every cohomology sheaf classical. Apply this to
-   l_g r_f L and r_f' l_g' L, and transport across S and T. Their invertibility, rather
-   than invertibility of either exchange, gives the two endpoint assertions. -/
+Proof:
+1. The chosen Cartesian identification gives an `IsPullback`. Apply the existing
+   `comparison_derivedBaseChangeMap`, which allows arbitrary commutative rings, and
+   use `Etale.baseChange_eq_derivedBaseChangeMapPlus` to identify the etale exchange.
+2. Both etale endpoints are objects of D+. Exact comparison preserves their lower
+   cohomological bounds. `classicalDerivedImage`, with the comparison unit supplied
+   by `boundedBelowComparison`, makes their images classical. The canonical
+   Plus-to-unbounded compatibility identifies these with the displayed images.
+3. Transport each lower bound along the corresponding component of the specified
+   source or target comparison isomorphism, using cohomology and invariance of zero
+   objects under isomorphism. Transport classicality using
+   `Scheme.proEtaleFixedClassical_iso_iff`. No exchange is inverted. -/
 theorem discrete_exchange_site_comparison
     (Λ : Type (u + 1)) [CommRing Λ]
     {X' X Y' Y : Scheme.{u}} {g' : X' ⟶ X} {f' : X' ⟶ Y'}
@@ -117,6 +105,47 @@ theorem discrete_exchange_site_comparison
         ((ProEtale.upperStar (ModuleCat.{u + 1} Λ) g').leftDerivedFunctor.obj
           ((comparisonUpperStar (ModuleCat.{u + 1} Λ) X).mapDerivedCategory.obj
             (DerivedCategory.Plus.ι.obj L)))) := by
-  sorry
+  have hp : IsPullback g' f' f g :=
+    IsPullback.of_iso_pullback sq.toCommSq sq.isoPullback sq.hom_fst sq.hom_snd
+  refine ⟨?_, ?_⟩
+  · simpa only [Etale.baseChange_eq_derivedBaseChangeMapPlus] using
+      comparison_derivedBaseChangeMap Λ hp L
+  · let A := ModuleCat.{u + 1} Λ
+    let S := ((Etale.lowerStar A f).rightDerivedFunctorPlus ⋙
+      (Etale.upperStar A g).mapDerivedCategoryPlus).obj L
+    let T := ((Etale.upperStar A g').mapDerivedCategoryPlus ⋙
+      (Etale.lowerStar A f').rightDerivedFunctorPlus).obj L
+    have hcomparison (M : DerivedCategory.Plus (Sheaf Y'.smallEtaleTopology A)) :
+        (∃ n : ℤ, DerivedCategory.IsGE
+          ((comparisonUpperStar A Y').mapDerivedCategory.obj M.obj) n) ∧
+        IsClassicalComplexFor Y' Λ
+          ((comparisonUpperStar A Y').mapDerivedCategory.obj M.obj) := by
+      constructor
+      · obtain ⟨n, hn⟩ := M.property
+        let := hn
+        exact ⟨n, (comparisonUpperStar A Y').isGE_mapDerivedCategory_obj M.obj n⟩
+      · let : TopologicalSpace Λ := ⊥
+        let : DiscreteTopology Λ := ⟨rfl⟩
+        have hu := (boundedBelowComparison Y' Λ).1
+        have hc := classicalDerivedImage Y' Λ (fun N ↦ by
+          let := hu
+          infer_instance) M
+        exact (Scheme.proEtaleFixedClassical_iso_iff Y' Λ
+          ((comparisonUpperStar A Y').mapDerivedCategoryPlusCompatibility.app M)).mp hc
+    have htransport {M N : DerivedCategory
+        (Sheaf (Scheme.ProEt.topology Y') A)} (e : M ≅ N)
+        (hb : ∃ n : ℤ, DerivedCategory.IsGE M n)
+        (hc : IsClassicalComplexFor Y' Λ M) :
+        (∃ n : ℤ, DerivedCategory.IsGE N n) ∧ IsClassicalComplexFor Y' Λ N := by
+      refine ⟨?_, (Scheme.proEtaleFixedClassical_iso_iff Y' Λ e).mp hc⟩
+      obtain ⟨n, hn⟩ := hb
+      refine ⟨n, (DerivedCategory.isGE_iff N n).mpr (fun q hq ↦ ?_)⟩
+      exact ((DerivedCategory.isGE_iff M n).mp hn q hq).of_iso
+        ((DerivedCategory.homologyFunctor _ q).mapIso e.symm)
+    obtain ⟨hbS, hcS⟩ := hcomparison S
+    obtain ⟨hbT, hcT⟩ := hcomparison T
+    obtain ⟨hbS', hcS'⟩ := htransport ((baseChangeSourceComparisonIso f g Λ).app L) hbS hcS
+    obtain ⟨hbT', hcT'⟩ := htransport ((baseChangeTargetComparisonIso g' f' Λ).app L) hbT hcT
+    exact ⟨hbS', hcS', hbT', hcT'⟩
 
 end AlgebraicGeometry.ProEtale

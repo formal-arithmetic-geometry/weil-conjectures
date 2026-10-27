@@ -1,0 +1,143 @@
+{
+ "id": "lem-pur-ordinary-line-scalar-line-data",
+ "kind": "statement",
+ "title": "Exact signed-line tensor and evaluation data",
+ "statement": "Let X be a scheme with an essentially small small pro-etale site, and suppose all its coefficient module categories have the specified unbounded derived categories. Let R be a coefficient ring sheaf and L an R-module sheaf locally free of rank one. Then LineData(L), as defined in [def-pur-ordinary-line-scalar-data], is nonempty: every recorded signed power is locally free of rank one, tensor by it is exact, its degree-zero single complex is flat-term K-flat, and its fixed unbounded derived tensor has the normalized termwise comparison. Opposite signed powers admit the actual evaluation taking each local opposite signed basis pair to one, with the induced derived cancellation and its computation equation. Tensor by each signed power preserves flat-term K-flat complexes. All powers, duals, tensor functors and evaluation normalizations are the recorded ones, including zero and negative exponents.",
+ "stmt_deps": [
+  "def-pur-ordinary-line-scalar-data"
+ ],
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 0B8N, 06YN and 06YU; latest blueprint Tate-twist local freeness proof (3), exact signed-line tensor and actual evaluation; original parent exists_lineData clause."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Derived scalar extension of sheaves commutes with tensoring by a locally free rank one sheaf",
+   "results": "8 hits including SheafOfModules.map_ιFree_mapFree_hom, SheafOfModules.freeFunctorCompPullbackIso",
+   "date": "2026-10-27",
+   "verdict": "No exact match: the hits concern free sheaves and ordinary pullback, without the representative-normalized unbounded comparison."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.leftDerivedNatIso",
+   "results": "CategoryTheory.Functor.leftDerivedNatIso, leftDerivedNatIso_hom, leftDerivedNatIso_inv",
+   "date": "2026-10-27",
+   "verdict": "Useful universal uniqueness API; it does not provide the ordinary balanced formula or the normalized evaluation square."
+  },
+  {
+   "tool": "grep",
+   "query": "scalarTensorBinaryIso|tensorComparison|scalarTensorComparison_natural",
+   "results": "0 hits in the Mathlib search service; local rg finds the project scalar tensor core and ordinary tensor comparison.",
+   "date": "2026-10-27",
+   "verdict": "Use the existing project tensor comparison; no matching Mathlib statement."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Algebra.Homology.OrdinaryLineDerivedScalarComparison",
+  "date": "2026-10-27",
+  "group": "M1"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-an",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-def-sp-tate-twist-locally-free",
+   "place": "Proof (3), exact signed-line twists and actual evaluation; ordinary coefficient comparison.",
+   "via": [
+    "lem-pur-ordinary-line-derived-scalar-comparison"
+   ]
+  },
+  "same_as": []
+ },
+ "proof": [
+  {
+   "text": "On a slice trivializing $L_i$, choose a basis $e_i$. Restriction commutes with sheaf tensor by [lem-sfb-localized-site-tensor-restriction], so induction on $n\\geq0$ gives the basis $e_i^n$ of $L_i^{[n]}$, starting with $e_i^0=1$. By the definition [def-pur-sheaf-hom], the map $\\varphi\\mapsto\\varphi(e_i^n)$ identifies its sheaf dual with $R_i$ on this slice, with basis $(e_i^n)^\\vee$. Thus every signed power is a line. The contractions $\\mu_i^{m,-m}$ of [lem-pur-signed-line-scalar-tensor-tower] send $e_i^m\\otimes e_i^{-m}$ to $1$, and so are actual evaluation, after symmetry for $m<0$. The pairing identifies $M_{i,-m}$ with the sheaf dual of $M_{i,m}$: locally its adjoint sends the basis $e_i^{-m}$ to the functional taking $e_i^m$ to $1$. This also treats $m=0$. V7 implementation: signed_power_rank uses the existing proved signedBasis_on_chart and basisChart helpers to turn the original rank-one trivializing cover into a trivializing cover for every signed power, then applies isInvertible_of_forall_over_unit and the rank-one equivalence.",
+   "uses": [
+    "lem-sfb-localized-site-tensor-restriction",
+    "def-pur-sheaf-hom",
+    "lem-pur-signed-line-scalar-tensor-tower"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-an/sk-def-sp-tate-twist-locally-free.proof.md",
+    "place": "Proof (3), tensor powers and duals are invertible; evaluation is a local isomorphism."
+   }
+  },
+  {
+   "text": "Apply [lem-pur-line-unbounded-derived-tensor] with $P=M_{i,m}$, whose dual is $M_{i,-m}$ by Step 1. It gives flatness, K-flatness in degree zero, and the natural identification of $T_{i,m}$ with exact additive termwise tensor on every unbounded complex. Its normalized evaluation has formula $((p\\otimes ae_i^m)\\otimes be_i^{-m})\\mapsto abp$, so is precisely the requested $\\epsilon_{i,m}$. The opposite evaluation gives $T_{i,m}T_{i,-m}\\cong1$ as well; hence $T_{i,-m}$ is an inverse, with the prescribed evaluation rather than an arbitrary equivalence counit. V7 implementation: exists_lineData extracts the exact termwise comparisons and their representative normalizations from line_unbounded_derived_tensor for each signed power. Evaluation is the unique normalized signed product at (m,-m), transported from explicit site tensor to monoidal tensor by the existing proved scalar ordinary tensor comparison helper, followed by the exponent-zero equality. Its basis formula follows from the product normalization and the zero basis equation. Localize the actual cochain cancellation using localizedCancellation; localizedCancellation_app supplies epsilon_computed.",
+   "uses": [
+    "lem-pur-line-unbounded-derived-tensor",
+    "lem-sfb-scalar-ordinary-tensor-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-an/sk-def-sp-tate-twist-locally-free.proof.md",
+    "place": "Proof (3), final two sentences, applied to every signed power."
+   }
+  },
+  {
+   "text": "Let $P$ be K-flat with flat terms. For every acyclic $A$, [def-pc-kflat-complex] says $\\operatorname{Tot}(A\\otimes P)$ is acyclic. Reassociation identifies $\\operatorname{Tot}(A\\otimes(P\\otimes M_{i,m}))$ with $\\operatorname{Tot}(A\\otimes P)\\otimes M_{i,m}$: tensor by $M_{i,m}$ commutes with the direct sums in totalization since it is a left adjoint by [lem-pc-sheaf-modules-tensor-closed]. The latter is acyclic by the exact termwise functor of [lem-pur-line-unbounded-derived-tensor]. This proves K-flatness of $P\\otimes M_{i,m}$. For each degree $q$, tensor by $P^q\\otimes M_{i,m}$ is the composite of the two exact tensor functors, so is exact; [def-pc-flat-sheaf-modules] gives flat terms. The degree-zero line introduces no additional Koszul sign in these reassociations. V7 implementation: tensor_flat_model maps the acyclicity provided by K-flatness through exact line tensor, and transports it through the degree-zero collapse and HomologicalComplex.associator. For each term, tensorRightTensor identifies tensor by the tensor product with the composite exact tensor functor; siteSheafTensorRightIso transports exactness to the recorded flatness predicate.",
+   "uses": [
+    "def-pc-kflat-complex",
+    "lem-pc-sheaf-modules-tensor-closed",
+    "lem-pur-line-unbounded-derived-tensor",
+    "def-pc-flat-sheaf-modules"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 06YN, definition-K-flat; elementary degree-zero tensor calculation using the exact line functor."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-localized-site-tensor-restriction",
+  "def-pur-sheaf-hom",
+  "lem-pur-signed-line-scalar-tensor-tower",
+  "lem-pur-line-unbounded-derived-tensor",
+  "lem-sfb-scalar-ordinary-tensor-comparison",
+  "def-pc-kflat-complex",
+  "lem-pc-sheaf-modules-tensor-closed",
+  "def-pc-flat-sheaf-modules"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Existing proved parent prerequisite, extracted unchanged by M1 after profiling; exists_lineData"
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Algebra.Homology.OrdinaryLineScalarLineData",
+  "file": "lean/Sheaf/Algebra/Homology/OrdinaryLineScalarLineData.lean",
+  "declaration": "SheafOfModules.OrdinaryLineScalar.exists_lineData",
+  "statement": "theorem exists_lineData\n    {R : Sheaf (Scheme.ProEt.topology X) CommRingCat.{max a (t + 1)}}\n    (L : Modules.{t, a} X R) [L.IsFiniteLocallyFreeOfRank 1] : Nonempty (LineData L)",
+  "branch": "sheaf-dag",
+  "by": "M1",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-2e1d4",
+  "group": "M1",
+  "result": "pass",
+  "landing": "20261027T131500-L-2942396",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-2e1d4",
+  "group": "M1",
+  "result": "pass",
+  "landing": "20261027T131500-L-2942396",
+  "kind": "interface",
+  "note": "independent cc review: the deleted blocks of the original module against the new Data/Presentations/LineData modules (verbatim apart from blueprint tags), the item signature against the clone, the four direct importers and #print axioms compiled in sandbox /tmp/m1sb, the timing of the published original (106.6 s) against the delivered item (34 s), and the evaluation hole against its node and the Comparison.evaluation field"
+ }
+}

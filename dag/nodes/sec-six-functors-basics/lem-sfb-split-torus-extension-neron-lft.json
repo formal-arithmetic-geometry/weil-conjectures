@@ -1,0 +1,249 @@
+{
+ "id": "lem-sfb-split-torus-extension-neron-lft",
+ "kind": "statement",
+ "title": "Néron lft-model existence for split-torus extensions",
+ "statement": "Let $D$ be a Dedekind domain, $E=\\operatorname{Frac}(D)$ and $S=\\operatorname{Spec}D$ [def-weil-affine-spectrum]. Let $G,H$ be smooth separated commutative finite-type $E$-group schemes [def-pc-scheme, def-sc-group-scheme, def-sbc-smooth-morphisms, def-weil-finite-type-morphism]. Assume $G$ is geometrically connected (connected after every field extension [def-weil-connected-scheme]). Suppose $1\\to(\\mathbf G_{m,E})^r\\xrightarrow{i}G\\xrightarrow{q}H\\to1$ is exact as fppf sheaves [def-pc-fppf-site], with $r\\geq0$ and $\\mathbf G_m=\\operatorname{Spec}E[t,t^{-1}]$ [def-sc-gm-ga]; exact means $i$ identifies the scheme-theoretic kernel of $q$ and $q$ is fppf-locally surjective. Suppose every $E$-group homomorphism $H\\to\\mathbf G_m$ is zero. If $H$ has a Néron lft-model over $S$, then $G$ has a smooth separated commutative Néron lft-model over $S$. A Dedekind domain here means a Noetherian integrally closed domain of Krull dimension one. A commutative group scheme has multiplication, inverse and identity morphisms satisfying the commutative group diagrams. Separated means that the diagonal is a closed immersion [def-weil-closed-immersion]. For a domain $D$ with fraction field $E$ and $S=\\operatorname{Spec}D$, a Néron lft-model of a smooth $E$-group $V$ means a smooth separated $S$-group $\\mathcal V$, with an $E$-group isomorphism $\\mathcal V_E\\simeq V$ [def-pc-base-change], for which restriction is a bijection $\\operatorname{Hom}_S(X,\\mathcal V)\\simeq\\operatorname{Hom}_E(X_E,V)$ for every smooth $S$-scheme $X$ [def-sbc-smooth-morphisms]. Locally of finite type means that each affine source chart over an affine base chart has a finitely generated coordinate algebra [def-weil-finite-type-morphism]; finite type additionally requires quasi-compactness.",
+ "source": {
+  "document": "literature/bosch-lutkebohmert-raynaud-neron-models.pdf",
+  "place": "BLR 10.1 Proposition 7, printed pp.292–293 (PDF pages 298–299), construction by primitive line bundles and translated charts Local PDF WANTED; primary-source scan read at https://www.math.stonybrook.edu/~kamenova/homepage_files/Bosch_Raynaud_Neron_Model_tc.pdf."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-affine-spectrum",
+  "def-pc-base-change",
+  "def-sbc-smooth-morphisms",
+  "def-weil-closed-immersion",
+  "def-weil-finite-type-morphism",
+  "def-sc-group-scheme",
+  "def-pc-fppf-site",
+  "def-sc-gm-ga",
+  "def-weil-connected-scheme",
+  "def-sfb-neron-lft-model",
+  "def-sfb-tori-multiplicative-type"
+ ],
+ "proof": [
+  {
+   "text": "Let $\\mathcal H$ be the given Néron lft-model of $H$. The fppf-local lifting in the exact sequence makes $q$ surjective after every field extension: a lift over a nonempty covering scheme supplies a point above each point of $H$. Hence $H$ is geometrically connected, as the continuous image of the geometrically connected $G$. The group $\\mathcal H$ is commutative: $\\mathcal H\\times_S\\mathcal H$ is a smooth $S$-scheme (base change and composite of smooth maps), and the two morphisms $m$ and $m\\circ\\mathrm{swap}$ from it to $\\mathcal H$ have equal generic restrictions because $H$ is commutative, so they agree by injectivity of the Néron restriction bijection; hence its open subgroups and their localizations are commutative too. Apply [lem-sfb-neron-neutral-local-properties] to obtain the smooth separated finite-type open subgroup $Q=\\mathcal H^0$, with geometrically connected fibres and $Q_E=H$; its formation and the Néron mapping property commute with the localizations used below.",
+   "uses": [
+    "lem-sfb-neron-neutral-local-properties"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bosch-lutkebohmert-raynaud-neron-models.pdf",
+    "place": "BLR 10.1, paragraph following Definition 1 and opening of Proposition 7 proof"
+   }
+  },
+  {
+   "text": "For each coordinate character $\\chi_j:(\\mathbf G_m)^r\\to\\mathbf G_m$, apply [lem-sfb-split-torus-character-pushout]. It gives a commutative extension $E_j\\to H$ and an equivariant frame presentation $E_j=L_j^\\times$. The identity gives a frame $u_j$ at $e$. In local frames of $L_j$ over both factors and over their product, multiplication in $E_j$ is $(v,w)\\mapsto c(x,y)vw$, with $c$ a regular unit: equivariance under the two scalar actions forces this expression. Thus the local formulas glue to $\\mu_j:p_1^*L_j\\otimes p_2^*L_j\\simeq m_H^*L_j$. Associativity, commutativity and the unit law are precisely the corresponding identities for multiplication in $E_j$, checked in these frames. The homomorphisms $g\\mapsto[g,1]$ give $G\\to\\prod_HE_j$. This is an isomorphism of fppf sheaves: after locally choosing a lift $g$ of a section of $H$, it is the coordinate isomorphism $(\\mathbf G_m)^r\\to\\prod_j\\mathbf G_m$, since $[g\\,i(t),1]=[g,\\chi_j(t)]$. The inverse is independent of the chosen lift and glues by the sheaf condition. Representability identifies it with a group-scheme isomorphism. For $r=0$, the same argument gives $G=H$.",
+   "uses": [
+    "lem-sfb-split-torus-character-pushout"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bosch-lutkebohmert-raynaud-neron-models.pdf",
+    "place": "BLR 10.1 Proposition 7 proof, printed p.292: primitive-line description; explicit coordinate-pushout realization"
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-multiplicative-line-dedekind-extension] to $Q$ and the data $(L_j,u_j,\\mu_j)$ from step 2. Its hypotheses hold by step 1. Obtain the extended lines and their frame product $B$, a smooth separated commutative finite-type $S$-group with geometrically connected fibres and exact sequence $1\\to\\mathbf G_{m,S}^r\\to B\\to Q\\to1$. The specified generic extensions of the line data and the isomorphism of step 2 identify $B_E$ with the original $G$ as an extension of $H$.",
+   "uses": [
+    "lem-sfb-multiplicative-line-dedekind-extension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bosch-lutkebohmert-raynaud-neron-models.pdf",
+    "place": "BLR 10.1 Proposition 7 proof, printed p.292: extend the primitive lines and form the integral connected group"
+   }
+  },
+  {
+   "text": "Fix a maximal ideal $\\mathfrak m$ of $D$. By [lem-sc-dedekind-localization-dvr], $R=D_{\\mathfrak m}$ is a DVR. By [lem-sfb-neron-neutral-local-properties], $\\mathcal H_R$ is the Néron lft-model of $H$ over $R$ and $Q_R=(\\mathcal H_R)^0$. It is commutative by step 1. The localization of the extension constructed in step 3 supplies the integral extension required by [lem-sfb-split-torus-translate-hull]; the hypothesis on characters is exactly the given $\\operatorname{Hom}_{E\\text{-grp}}(H,\\mathbf G_m)=0$. Its translated-chart construction gives a smooth separated commutative lft $R$-group $N_{\\mathfrak m}$ with generic fibre $G$, open identity subgroup $B_R$, and surjectivity of integral-to-generic points for every essentially smooth local DVR extension. Separation and descent are conclusions of that cited construction, not inferences merely from gluing along generic fibres.",
+   "uses": [
+    "lem-sc-dedekind-localization-dvr",
+    "lem-sfb-neron-neutral-local-properties",
+    "lem-sfb-split-torus-translate-hull"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bosch-lutkebohmert-raynaud-neron-models.pdf",
+    "place": "BLR 10.1 Proposition 7 proof, printed pp.292–293: local translated charts and descent"
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-neron-dvr-point-criterion] to each $N_{\\mathfrak m}$. Step 4 supplies smoothness, separation and every DVR-point surjectivity demanded by criterion (ii). Therefore restriction from every smooth $R$-scheme is bijective: $N_{\\mathfrak m}$ is a Néron lft-model of $G$. This uses all essentially smooth DVR extensions, rather than only étale integral points.",
+   "uses": [
+    "lem-sfb-neron-dvr-point-criterion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bosch-lutkebohmert-raynaud-neron-models.pdf",
+    "place": "BLR 10.1 Proposition 2, invoked in Proposition 7 proof, printed p.293"
+   }
+  },
+  {
+   "text": "The models $N_{\\mathfrak m}$ now exist for every maximal ideal and their identity components are $B_{D_{\\mathfrak m}}$ through the generic identification of step 3. Apply [lem-sfb-neron-connected-model-globalization] with this common connected finite-type model $B$. It gives a smooth separated commutative Néron lft-model $N$ over $S$ of the original $G$, with the full mapping property for all smooth $S$-schemes. No quasi-compactness assertion about $N$, or finiteness of its component groups, is needed.",
+   "uses": [
+    "lem-sfb-neron-connected-model-globalization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bosch-lutkebohmert-raynaud-neron-models.pdf",
+    "place": "BLR 10.1 Proposition 7 proof, final paragraph, printed p.293; Proposition 9 (b) to (a), printed pp.294–295"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-neron-neutral-local-properties",
+  "lem-sfb-split-torus-character-pushout",
+  "lem-sfb-multiplicative-line-dedekind-extension",
+  "lem-sc-dedekind-localization-dvr",
+  "lem-sfb-split-torus-translate-hull",
+  "lem-sfb-neron-dvr-point-criterion",
+  "lem-sfb-neron-connected-model-globalization"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/bosch-lutkebohmert-raynaud-neron-models.pdf",
+  "place": "BLR 10.1 Proposition 7 proof, printed pp.292–293, primary scan https://www.math.stonybrook.edu/~kamenova/homepage_files/Bosch_Raynaud_Neron_Model_tc.pdf; local original WANTED; explicit coherent-line and coordinate-pushout formulation by Q122"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "Neron|Néron|primitive.*line.*bundle",
+   "results": "{\"t\": \"2026-10-24T04:23:26Z\", \"tool\": \"grep\", \"query\": \"Neron|Néron|primitive.*line.*bundle\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: no source hits."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Existence of Neron models is stable under extensions by split tori with character free quotient",
+   "results": "{\"t\": \"2026-10-24T04:23:26Z\", \"tool\": \"leansearch\", \"query\": \"Existence of Neron models is stable under extensions by split tori with character free quotient\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AddGroupExtension.Splitting.noConfusion\", \"AddGroupExtension.Splitting.mk.noConfusion\", \"AddGroupExtension.Splitting.instAddMonoidHomClass\", \"AddGroupExtension.Splitting.rightHom_comp_splitting\", \"AddGroupExtension.Splitting.noConfusionType\", \"GroupExtension.IsConj\", \"AddGroupExtension.Splitting.casesOn\", \"AddGroupExtension.IsConj.refl\"], \"digest\": \"45377fefde668959\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: Read the returned signatures: elliptic-curve reduction, abstract extensions, general smoothness, finite-type properties or Dedekind-ring structure do not construct or assert the Néron mapping property."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Neron\", \"Group\"",
+   "results": "{\"t\": \"2026-10-24T04:23:26Z\", \"tool\": \"loogle\", \"query\": \"\\\"Neron\\\", \\\"Group\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: no source hits."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An extension of a smooth connected algebraic group by a split torus has a Neron lft model if the quotient has a Neron lft model and no characters",
+   "results": "{\"t\": \"2026-10-24T04:23:28Z\", \"tool\": \"leanfinder\", \"query\": \"An extension of a smooth connected algebraic group by a split torus has a Neron lft model if the quotient has a Neron lft model and no characters\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"WeierstrassCurve.IsGoodReduction\", \"WeierstrassCurve.exists_isMinimal\", \"WeierstrassCurve.isGoodReduction_iff_isElliptic_reduction\", \"WeierstrassCurve.minimal\", \"WeierstrassCurve.instIsMinimalMinimal\", \"WeierstrassCurve.IsMinimal\", \"TrivSqZeroExt.isUnit_or_isNilpotent_of_isMaximal_isNilpotent\", \"Algebra.Extension.formallySmooth_iff_split_injection\"], \"digest\": \"c2d2f8a345d16099\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: Read the returned signatures: elliptic-curve reduction, abstract extensions, general smoothness, finite-type properties or Dedekind-ring structure do not construct or assert the Néron mapping property."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Constructing a Neron lft model of a split torus extension by gluing translations of the identity component of a Neron model",
+   "results": "{\"t\": \"2026-10-24T04:24:11Z\", \"tool\": \"leanfinder\", \"query\": \"Constructing a Neron lft model of a split torus extension by gluing translations of the identity component of a Neron model\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.AffineSpace\", \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.hii'\", \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.c'\", \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.𝒰D₀\", \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.𝒰D\", \"WeierstrassCurve.minimal\", \"AlgebraicGeometry.Scheme.Hom.toNormalization\", \"AlgebraicGeometry.Scheme.Hom.normalization\"], \"digest\": \"0aa40612b6384ede\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: Read the returned signatures: elliptic-curve reduction, abstract extensions, general smoothness, finite-type properties or Dedekind-ring structure do not construct or assert the Néron mapping property."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An extension by a split torus of a character free smooth connected group with a Neron lft model has a Neron lft model",
+   "results": "{\"t\": \"2026-10-24T04:57:09Z\", \"tool\": \"leanfinder\", \"query\": \"An extension by a split torus of a character free smooth connected group with a Neron lft model has a Neron lft model\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"GroupExtension.Splitting\", \"UnitAddTorus\", \"instLieAddGroupOfNatWithTopENat\", \"instLieAddGroupOfSomeENatTopOfLEInfty\", \"instLieAddGroupOfTopWithTopENat\", \"instLieGroupOfNatWithTopENat\", \"NumberField.Units.dirichletUnitTheorem.map_logEmbedding_sup_torsion\", \"instLieAddGroupOfNatWithTopENatOfIsTopologicalAddGroup\"], \"digest\": \"274f69dd61394f8d\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern abstract group splittings, manifolds or general smoothness; no Néron-model assertion."
+  },
+  {
+   "tool": "grep",
+   "query": "Neron|Néron|primitive.*line.*bundle|torus.*extension",
+   "results": "{\"t\": \"2026-10-24T04:58:21Z\", \"tool\": \"grep\", \"query\": \"Neron|Néron|primitive.*line.*bundle|torus.*extension\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern abstract group splittings, manifolds or general smoothness; no Néron-model assertion."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Existence of a Neron locally finite type model for an extension of an algebraic group by a split torus",
+   "results": "{\"t\": \"2026-10-24T04:58:22Z\", \"tool\": \"leansearch\", \"query\": \"Existence of a Neron locally finite type model for an extension of an algebraic group by a split torus\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"GroupExtension.Splitting.instMonoidHomClass\", \"GroupExtension.Splitting\", \"GroupExtension.Splitting.instFunLike\", \"GroupExtension.Splitting.mk\", \"AddGroupExtension.Splitting.instAddMonoidHomClass\", \"AddGroupExtension.Splitting.casesOn\", \"AddGroupExtension.Splitting.recOn\", \"GroupExtension.Splitting.noConfusion\"], \"digest\": \"fffd9e9118eba5ce\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern abstract group splittings, manifolds or general smoothness; no Néron-model assertion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A Neron model is a smooth separated model satisfying the universal mapping property on all smooth schemes over a Dedekind domain",
+   "results": "{\"t\": \"2026-10-24T05:00:16Z\", \"tool\": \"leanfinder\", \"query\": \"A Neron model is a smooth separated model satisfying the universal mapping property on all smooth schemes over a Dedekind domain\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsSmooth\", \"AlgebraicGeometry.IsSmoothOfRelativeDimension\", \"AlgebraicGeometry.Scheme.Etale\", \"AlgebraicGeometry.isSmooth_iff\", \"AlgebraicGeometry.instHasRingHomPropertyIsSmoothLocallyIsStandardSmooth\", \"AlgebraicGeometry.IsSmoothOfRelativeDimension.exists_isStandardSmoothOfRelativeDimension\", \"AlgebraicGeometry.IsSmoothOfRelativeDimension.isSmooth\", \"AlgebraicGeometry.isSmoothOfRelativeDimension_iff\"], \"digest\": \"e4d40788084fda47\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern abstract group splittings, manifolds or general smoothness; no Néron-model assertion."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-semiabelian-neron-lft-existence",
+  "date": "2026-10-24",
+  "group": "O4"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), recorded trait-extension prerequisite: ambient Néron model before graph properness; BLR 10.1 Proposition 7, primitive lines, local translated charts and global component gluing.",
+   "via": [
+    "lem-sfb-semiabelian-neron-lft-existence",
+    "lem-sfb-trait-semiabelian-hom-extension",
+    "lem-sfb-semiabelian-generic-graph-proper",
+    "lem-sfb-normal-semiabelian-hom-extension",
+    "lem-sfb-symmetric-line-power-prolongation",
+    "lem-sfb-normal-symmetric-cubical-extension",
+    "lem-sfb-symmetric-ample-power-extension",
+    "lem-sfb-regular-group-generic-ampleness",
+    "lem-sfb-stable-picard-theta-ampleness",
+    "lem-sfb-stable-relative-picard-kummer",
+    "lem-sfb-stable-level-versal-branch-freeness",
+    "lem-sfb-stable-abelian-level-normalization",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-split-torus-extension-neron-lft",
+  "worker": "stage1",
+  "summary": "Statement unchanged. Reuse existing character pushouts to produce coherent multiplicative generic lines; isolate extension of those lines, neutral-component/localization properties, the local translated-chart hull with descent and point extension, the essentially smooth DVR criterion, and globalization with a common connected model. Five statement-only new nodes; no Mathlib match; no Lean attachment. Primary BLR scan read, local original WANTED.",
+  "blueprint": "No imported ancestor is returned by blueprint_refs.py ancestor (None), so preserve blueprint.from.node=null and extend its existing via chain. Context: latest det-thm-sf-ctf-stability-direct-images proof (3), alteration-route trait-extension prerequisite. Steps 1–3 realize the primitive-line construction of BLR 10.1 Proposition 7; steps 4–5 realize local translated charts, descent and the mapping criterion; step 6 realizes its global gluing paragraph."
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q122-323a94c37",
+  "group": "Q122",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q122-323a94c37 (reviewer sub-agent of L); spot-checked: Read the item and all five new nodes in full, plus the cited nodes (lem-sfb-split-torus-character-pushout, lem-sc-dedekind-localization-dvr) and the existing Néron nodes. BLR §10.1 is not in literature/ (recorded as WANTED, proof marked by: agent), so I checked each statement mathematically against my knowledge of BLR §10.1. (1) The line extension holds: Q is regular and integral, so L extends; a twist by e^*𝓛 fixes the frame; the divisor of μ is vertical and the unit law forces it to vanish; the identities hold by density. (2) The neutral component is open and of finite type (U·U argument), and localization keeps the Néron property. (3) The translated-chart hull is separated for every DVR A, since G(K^sh)∩B(A)=B(R^sh) using Q-specialisation and torus-torsor triviality. DVR-point surjectivity holds for essentially smooth A (ramification 1, Hilbert 90, π^n absorbed). (4) The DVR criterion (i)⇒(ii) holds by removing the closure of the indeterminacy locus. (5) Globalization is BLR 10.1/9. No duplicate, restatement or relabelling; all citations are in the unit (the Dedekind-localization leaf is a Mathlib tool). Not a re-split order. Batch 5: the pushout node reaches lem-trf-fppf-covering-is-fpqc, which is the generic fact that fppf coverings are fpqc. It is not part of the trace formula or Poincaré duality, so it is accepted. Two faults fixed: (a) commutativity of the Néron lft-model 𝓗, needed by the line node in step 3 and the hull node in step 4, was never established; added to step 1 via the Néron bijection on 𝓗×_S𝓗 (m vs m∘swap), referenced in step 4. (b) B3: 'geometrically connected (fibres)' had no definition in four new nodes and no citation in the item; added an inline definition citing def-weil-connected-scheme, with stmt_deps updated. Fixed files are under fixes/dag/nodes/sec-six-functors-basics/.; 5 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SplitTorusExtensionNeronLft",
+  "declaration": "AlgebraicGeometry.neron_lft_of_splitTorus_extension",
+  "file": "lean/Sheaf/AlgebraicGeometry/SplitTorusExtensionNeronLft.lean",
+  "statement": "theorem neron_lft_of_splitTorus_extension (D E : Type u) [CommRing D] [IsDedekindDomain D] (_hdim : ringKrullDim D = 1) [Field E] [Algebra D E] [IsFractionRing D E] (r : ℕ) (G H : Grp (Over (Spec (.of E)))) [IsCommMonObj G.X] [IsCommMonObj H.X] [Smooth G.X.hom] [Smooth H.X.hom] [IsClosedImmersion (pullback.diagonal G.X.hom)] [IsClosedImmersion (pullback.diagonal H.X.hom)] [LocallyOfFiniteType G.X.hom] [QuasiCompact G.X.hom] [LocallyOfFiniteType H.X.hom] [QuasiCompact H.X.hom] [GeometricallyConnected G.X.hom] (i : MultiplicativeType.splitTorus E r ⟶ G) (q : G ⟶ H) (_hkernel : IsPullback i.hom.hom (toUnit (MultiplicativeType.splitTorus E r).X) q.hom.hom η[H.X]) (_hlocallySurjective : Presheaf.IsLocallySurjective (Scheme.fppfTopology.over (Spec (.of E))) (yoneda.map q.hom.hom)) (_hcharacters : ∀ f : H.X ⟶ StandardGroupSchemes.multiplicative E, IsMonHom f → f = 1) (_hmodel : ∃ N : Grp (Over (Spec (.of D))), ∃ e : (Over.pullback (Spec.map (CommRingCat.ofHom (algebraMap D E)))).mapGrp.obj N ≅ H, IsNeronLftModel N H e) : ∃ N : Grp (Over (Spec (.of D))), IsCommMonObj N.X ∧ ∃ e : (Over.pullback (Spec.map (CommRingCat.ofHom (algebraMap D E)))).mapGrp.obj N ≅ G, IsNeronLftModel N G e",
+  "branch": "newtargets-dag",
+  "by": "Q98",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-97e884993",
+  "group": "Q98",
+  "result": "pass",
+  "note": "Q98 re-delivery 97e88499 after the 4a758fb9 RETURN: the duplicate Néron def node and module were dropped and the landed IsNeronLftModel is used in premise and conclusion. Item node differs from side-live only in lean and stmt_deps (statement verbatim). Added stmt_deps def-sfb-neron-lft-model and def-sfb-tori-multiplicative-type are on base. Lean matches the node clause by clause: Dedekind with ringKrullDim=1; IsFractionRing E; G,H Grp over Spec E, commutative, smooth, closed diagonal, LocallyOfFiniteType+QuasiCompact; GeometricallyConnected G; splitTorus E r kernel as IsPullback(i,toUnit,q,η); fppf IsLocallySurjective of yoneda.map q; characters IsMonHom f → f=1; premise ∃ N e, IsNeronLftModel N H e; conclusion ∃ N, IsCommMonObj N.X ∧ ∃ e, IsNeronLftModel N G e, with no quasi-compactness added. lean.statement verbatim; only sorry; docstrings give source and blueprint; no hollow defs; no name or path clash on side-live; report sections present. Edge cases r=0, non-quasi-compact model, any characteristic, universes OK. Unused non-public import of SplitTorusCharacterPushout is harmless. No compile, as instructed; no files changed."
+ }
+}

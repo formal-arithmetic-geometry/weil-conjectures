@@ -1,0 +1,233 @@
+{
+ "id": "lem-trf-polynomial-nonzero-ideal-quotient-dimension-bound",
+ "kind": "statement",
+ "title": "Nonzero polynomial ideal quotient has a strict dimension bound",
+ "statement": "Let $k$ be a field, let $n\\ge1$ be an integer, and put $P=k[t_1,\\ldots,t_n]$ [def-weil-pbc-mv-polynomial-ring]. Let $I$ be an ideal of $P$ containing a nonzero element and let $R=P/I$ be the quotient ring [def-weil-pbc-algebra-hom-quotient]. Then $\\dim R\\le n-1$, where dimension is ring Krull dimension [def-weil-pbc-krull-dimension-ring]. The ideal $I=P$ is allowed, with $\\dim(0)=-\\infty$.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tag 00QK (lemma-finite-type-domain-over-valuation-ring-dim-fibres), proof, final nonzero residue-polynomial kernel inference: polynomial-source dimension and the strict dimension drop for its nonzero ideal quotient; old item steps 2 and 4."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-mv-polynomial-ring",
+  "def-weil-pbc-algebra-hom-quotient",
+  "def-weil-pbc-krull-dimension-ring"
+ ],
+ "proof": [
+  {
+   "text": "Every nonzero ideal of the field $k$ contains $1$: if $a\\ne0$ belongs to it, multiply by $a^{-1}$. Hence its only ideals are $(0)$ and $(1)$, both finitely generated, so $k$ is Noetherian [def-weil-pbc-noetherian-ring]. Its only prime ideal is $(0)$, and therefore $\\dim k=0$ by [def-weil-pbc-krull-dimension-ring].",
+   "uses": [
+    "def-weil-pbc-noetherian-ring",
+    "def-weil-pbc-krull-dimension-ring"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Sections 00AR (section-rings-basic) and 00FM (section-Noetherian), Definition 00KE (definition-Krull): direct field specializations."
+   }
+  },
+  {
+   "text": "Apply [lem-sf-noetherian-polynomial-dimension] with coefficient ring $k$ and the finite variable set $\\{1,\\ldots,n\\}$. Step 1 verifies its Noetherian hypothesis and gives $\\dim P=\\dim k+n=n$.",
+   "uses": [
+    "lem-sf-noetherian-polynomial-dimension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "Mathlib/RingTheory/KrullDimension/Polynomial.lean",
+    "place": "MvPolynomial.ringKrullDim_of_isNoetherianRing, lines 118--121; polynomial-source dimension used in Stacks 00QK (lemma-finite-type-domain-over-valuation-ring-dim-fibres), final inference."
+   }
+  },
+  {
+   "text": "Choose $0\\ne f\\in I$. The field $k$ is a domain, so [lem-weil-pbc-polynomial-ring-domain] makes $P$ a domain. Thus $fg=0$ forces $g=0$, which says exactly that $f$ is a nonzerodivisor. By [def-weil-pbc-algebra-hom-quotient], the quotient map $q:P\\to R=P/I$ is surjective with kernel $I$, so $q(f)=0$.",
+   "uses": [
+    "lem-weil-pbc-polynomial-ring-domain",
+    "def-weil-pbc-algebra-hom-quotient"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00QK (lemma-finite-type-domain-over-valuation-ring-dim-fibres), proof, final nonzero residue-polynomial kernel inference; basic quotient conventions in section-rings-basic."
+   }
+  },
+  {
+   "text": "Apply [lem-trf-surjective-kernel-nonzerodivisor-dimension-drop] to the commutative rings $P,R$, the surjection $q$, and the nonzerodivisor $f$ killed by $q$. All its hypotheses were checked in step 3. It yields $\\dim R+1\\le\\dim P=n$.",
+   "uses": [
+    "lem-trf-surjective-kernel-nonzerodivisor-dimension-drop"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "Mathlib/RingTheory/KrullDimension/NonZeroDivisors.lean",
+    "place": "ringKrullDim_succ_le_of_surjective, lines 60--66; supplies the strict quotient dimension drop implicit in Stacks 00QK (lemma-finite-type-domain-over-valuation-ring-dim-fibres)."
+   }
+  },
+  {
+   "text": "If $R=0$, its dimension is $-\\infty$, so the assertion holds, including $I=P$. Otherwise [def-weil-pbc-krull-dimension-ring] puts $\\dim R$ in $\\mathbf N\\cup\\{\\infty\\}$. Step 4 excludes $\\infty$ since $n$ is finite. Writing $\\dim R=m\\in\\mathbf N$, it gives $m+1\\le n$, hence $m\\le n-1$ since $n\\ge1$.",
+   "uses": [
+    "def-weil-pbc-krull-dimension-ring"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Definition 00KE (definition-Krull) and Tag 00QK (lemma-finite-type-domain-over-valuation-ring-dim-fibres), proof, last sentence: finite integer form of the strict bound."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-noetherian-ring",
+  "def-weil-pbc-krull-dimension-ring",
+  "lem-sf-noetherian-polynomial-dimension",
+  "lem-weil-pbc-polynomial-ring-domain",
+  "def-weil-pbc-algebra-hom-quotient",
+  "lem-trf-surjective-kernel-nonzerodivisor-dimension-drop"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tag 00QK (lemma-finite-type-domain-over-valuation-ring-dim-fibres), final nonzero residue-polynomial kernel inference, expanded using the existing polynomial-dimension and surjective-nonzerodivisor-bound nodes."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A nonzero ideal quotient of a polynomial ring over a field in n variables has dimension at most n minus one",
+   "results": "{\"t\": \"2026-10-22T06:46:52Z\", \"tool\": \"leanfinder\", \"query\": \"A nonzero ideal quotient of a polynomial ring over a field in n variables has dimension at most n minus one\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"instFiniteDimensionalQuotientPolynomialIdealSpanSingletonSetSmithCoeffs\", \"finrank_quotient_span_eq_natDegree_norm\", \"ringKrullDim_add_natCard_le_ringKrullDim_mvPolynomial\", \"Ideal.finrank_quotient_eq_sum\", \"MvPolynomial.ringKrullDim_of_isNoetherianRing\", \"finrank_quotient_span_eq_natDegree\", \"Polynomial.ringKrullDim_le\", \"finrank_quotient_span_eq_natDegree'\"], \"digest\": \"137b61467851dbbe\"}; Read the hits and Mathlib/RingTheory/KrullDimension/NonZeroDivisors.lean:37,61 and Polynomial.lean:120. The former gives a successor bound for a principal nonzerodivisor quotient or a surjective map; the latter computes polynomial dimension. No returned declaration gives the stated arbitrary nonzero polynomial ideal quotient bound as a direct specialization. It needs the polynomial dimension computation, the domain/nonzerodivisor argument, and quotient/chain or successor-bound assembly. Record these as ingredients, not a finished match.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "MvPolynomial, ringKrullDim",
+   "results": "{\"t\": \"2026-10-22T06:47:19Z\", \"tool\": \"loogle\", \"query\": \"MvPolynomial, ringKrullDim\", \"sub\": \"\", \"ok\": true, \"n_hits\": 6, \"note\": \"\", \"top\": [\"ringKrullDim_mvPolynomial_of_isEmpty\", \"ringKrullDim_mvPolynomial_of_infinite\", \"ringKrullDim_add_enatCard_le_ringKrullDim_mvPolynomial\", \"ringKrullDim_add_natCard_le_ringKrullDim_mvPolynomial\", \"MvPolynomial.ringKrullDim_of_isNoetherianRing\", \"MvPolynomial.ringKrullDim_of_isNoetherianRing_of_finite\"], \"digest\": \"006a2642b71e2abf\"}; Read the hits and Mathlib/RingTheory/KrullDimension/NonZeroDivisors.lean:37,61 and Polynomial.lean:120. The former gives a successor bound for a principal nonzerodivisor quotient or a surjective map; the latter computes polynomial dimension. No returned declaration gives the stated arbitrary nonzero polynomial ideal quotient bound as a direct specialization. It needs the polynomial dimension computation, the domain/nonzerodivisor argument, and quotient/chain or successor-bound assembly. Record these as ingredients, not a finished match.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "ringKrullDim.*quotient|quotient.*ringKrullDim",
+   "results": "{\"t\": \"2026-10-22T06:47:19Z\", \"tool\": \"grep\", \"query\": \"ringKrullDim.*quotient|quotient.*ringKrullDim\", \"sub\": \"RingTheory/KrullDimension\", \"ok\": true, \"n_hits\": 17, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/KrullDimension/Module.lean\", \"Mathlib/RingTheory/KrullDimension/Module.lean\", \"Mathlib/RingTheory/KrullDimension/Module.lean\", \"Mathlib/RingTheory/KrullDimension/Module.lean\", \"Mathlib/RingTheory/KrullDimension/Module.lean\", \"Mathlib/RingTheory/KrullDimension/Basic.lean\", \"Mathlib/RingTheory/KrullDimension/Basic.lean\", \"Mathlib/RingTheory/KrullDimension/NonZeroDivisors.lean\"], \"digest\": \"61c8c5b7c4fac3e6\"}; Read the hits and Mathlib/RingTheory/KrullDimension/NonZeroDivisors.lean:37,61 and Polynomial.lean:120. The former gives a successor bound for a principal nonzerodivisor quotient or a surjective map; the latter computes polynomial dimension. No returned declaration gives the stated arbitrary nonzero polynomial ideal quotient bound as a direct specialization. It needs the polynomial dimension computation, the domain/nonzerodivisor argument, and quotient/chain or successor-bound assembly. Record these as ingredients, not a finished match.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Krull dimension of a polynomial ring modulo a nonzero ideal is strictly less than the number of variables",
+   "results": "{\"t\": \"2026-10-22T06:47:19Z\", \"tool\": \"leansearch\", \"query\": \"Krull dimension of a polynomial ring modulo a nonzero ideal is strictly less than the number of variables\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"ringKrullDim_quotient_le\", \"Polynomial.ringKrullDim_le\", \"MvPolynomial.ringKrullDim_of_isNoetherianRing\", \"ringKrullDim_quotient_succ_le_of_nonZeroDivisor\", \"ringKrullDim_succ_le_ringKrullDim_polynomial\", \"ringKrullDim_le_ringKrullDim_add_spanFinrank\", \"Polynomial.ringKrullDim_of_isNoetherianRing\", \"ringKrullDim_le_ringKrullDim_quotient_add_card\"], \"digest\": \"747d3a463a18bab9\"}; Read the hits and Mathlib/RingTheory/KrullDimension/NonZeroDivisors.lean:37,61 and Polynomial.lean:120. The former gives a successor bound for a principal nonzerodivisor quotient or a surjective map; the latter computes polynomial dimension. No returned declaration gives the stated arbitrary nonzero polynomial ideal quotient bound as a direct specialization. It needs the polynomial dimension computation, the domain/nonzerodivisor argument, and quotient/chain or successor-bound assembly. Record these as ingredients, not a finished match.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Krull dimension decreases strictly for quotient of finite dimensional integral domain by a nonzero ideal",
+   "results": "{\"t\": \"2026-10-22T06:47:29Z\", \"tool\": \"leanfinder\", \"query\": \"Krull dimension decreases strictly for quotient of finite dimensional integral domain by a nonzero ideal\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"ringKrullDim_le_ringKrullDim_add_spanFinrank\", \"ringKrullDim_quotient_le\", \"ringKrullDim_quotient_succ_le_of_nonZeroDivisor\", \"Module.ringKrullDim_quotient_add_one_of_mem_nonZeroDivisors\", \"ringKrullDim_le_ringKrullDim_add_card\", \"ringKrullDim_le_ringKrullDim_quotient_add_spanFinrank\", \"ringKrullDim_le_ringKrullDim_quotSMulTop_succ\", \"ringKrullDim_quotient_span_singleton_succ_eq_ringKrullDim\"], \"digest\": \"d747bb01b968860b\"}; Read the hits and Mathlib/RingTheory/KrullDimension/NonZeroDivisors.lean:37,61 and Polynomial.lean:120. The former gives a successor bound for a principal nonzerodivisor quotient or a surjective map; the latter computes polynomial dimension. No returned declaration gives the stated arbitrary nonzero polynomial ideal quotient bound as a direct specialization. It needs the polynomial dimension computation, the domain/nonzerodivisor argument, and quotient/chain or successor-bound assembly. Record these as ingredients, not a finished match.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "ringKrullDim_succ_le_of_surjective|ringKrullDim_of_isNoetherianRing|ringKrullDim_quotient_succ_le",
+   "results": "{\"t\": \"2026-10-22T06:48:09Z\", \"tool\": \"grep\", \"query\": \"ringKrullDim_succ_le_of_surjective|ringKrullDim_of_isNoetherianRing|ringKrullDim_quotient_succ_le\", \"sub\": \"RingTheory/KrullDimension\", \"ok\": true, \"n_hits\": 11, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/KrullDimension/Regular.lean\", \"Mathlib/RingTheory/KrullDimension/NonZeroDivisors.lean\", \"Mathlib/RingTheory/KrullDimension/NonZeroDivisors.lean\", \"Mathlib/RingTheory/KrullDimension/NonZeroDivisors.lean\", \"Mathlib/RingTheory/KrullDimension/NonZeroDivisors.lean\", \"Mathlib/RingTheory/KrullDimension/NonZeroDivisors.lean\", \"Mathlib/RingTheory/KrullDimension/Polynomial.lean\", \"Mathlib/RingTheory/KrullDimension/Polynomial.lean\"], \"digest\": \"e150743fd87ed425\"}; Read the hits and Mathlib/RingTheory/KrullDimension/NonZeroDivisors.lean:37,61 and Polynomial.lean:120. The former gives a successor bound for a principal nonzerodivisor quotient or a surjective map; the latter computes polynomial dimension. No returned declaration gives the stated arbitrary nonzero polynomial ideal quotient bound as a direct specialization. It needs the polynomial dimension computation, the domain/nonzerodivisor argument, and quotient/chain or successor-bound assembly. Record these as ingredients, not a finished match.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "ringKrullDim_succ_le_of_surjective|ringKrullDim_of_isNoetherianRing",
+   "results": "{\"t\": \"2026-10-23T12:18:12Z\", \"tool\": \"grep\", \"query\": \"ringKrullDim_succ_le_of_surjective|ringKrullDim_of_isNoetherianRing\", \"sub\": \"RingTheory/KrullDimension\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/KrullDimension/NonZeroDivisors.lean\", \"Mathlib/RingTheory/KrullDimension/NonZeroDivisors.lean\", \"Mathlib/RingTheory/KrullDimension/NonZeroDivisors.lean\", \"Mathlib/RingTheory/KrullDimension/Polynomial.lean\", \"Mathlib/RingTheory/KrullDimension/Polynomial.lean\", \"Mathlib/RingTheory/KrullDimension/Polynomial.lean\", \"Mathlib/RingTheory/KrullDimension/Polynomial.lean\", \"Mathlib/RingTheory/KrullDimension/Polynomial.lean\"], \"digest\": \"31835a29992425d2\"}; Read the returned hits. Verified installed NonZeroDivisors.lean:37--66 and Polynomial.lean:118--133: these give the surjection bound and polynomial dimension separately. The exact arbitrary nonzero-ideal quotient statement requires choosing a nonzero kernel element, verifying the domain/nonzerodivisor condition, computing source dimension, and converting the successor inequality. These ingredients already have DAG nodes; no new node is needed.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Krull dimension of a finite variable polynomial ring modulo a nonzero ideal is strictly less than the number of variables",
+   "results": "{\"t\": \"2026-10-23T12:18:12Z\", \"tool\": \"leansearch\", \"query\": \"Krull dimension of a finite variable polynomial ring modulo a nonzero ideal is strictly less than the number of variables\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"ringKrullDim_quotient_le\", \"MvPolynomial.ringKrullDim_of_isNoetherianRing\", \"Polynomial.ringKrullDim_le\", \"ringKrullDim_succ_le_ringKrullDim_polynomial\", \"Polynomial.ringKrullDim_of_isNoetherianRing\", \"ringKrullDim_quotient_succ_le_of_nonZeroDivisor\", \"ringKrullDim_le_ringKrullDim_add_spanFinrank\", \"ringKrullDim_add_enatCard_le_ringKrullDim_mvPolynomial\"], \"digest\": \"821def2455c4e9cd\"}; Read the returned hits. Verified installed NonZeroDivisors.lean:37--66 and Polynomial.lean:118--133: these give the surjection bound and polynomial dimension separately. The exact arbitrary nonzero-ideal quotient statement requires choosing a nonzero kernel element, verifying the domain/nonzerodivisor condition, computing source dimension, and converting the successor inequality. These ingredients already have DAG nodes; no new node is needed.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "MvPolynomial, ringKrullDim",
+   "results": "{\"t\": \"2026-10-23T12:18:13Z\", \"tool\": \"loogle\", \"query\": \"MvPolynomial, ringKrullDim\", \"sub\": \"\", \"ok\": true, \"n_hits\": 6, \"note\": \"\", \"top\": [\"ringKrullDim_mvPolynomial_of_isEmpty\", \"ringKrullDim_mvPolynomial_of_infinite\", \"ringKrullDim_add_enatCard_le_ringKrullDim_mvPolynomial\", \"ringKrullDim_add_natCard_le_ringKrullDim_mvPolynomial\", \"MvPolynomial.ringKrullDim_of_isNoetherianRing\", \"MvPolynomial.ringKrullDim_of_isNoetherianRing_of_finite\"], \"digest\": \"006a2642b71e2abf\"}; Read the returned hits. Verified installed NonZeroDivisors.lean:37--66 and Polynomial.lean:118--133: these give the surjection bound and polynomial dimension separately. The exact arbitrary nonzero-ideal quotient statement requires choosing a nonzero kernel element, verifying the domain/nonzerodivisor condition, computing source dimension, and converting the successor inequality. These ingredients already have DAG nodes; no new node is needed.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A quotient of a polynomial ring in n variables over a field by an ideal containing a nonzero polynomial has Krull dimension at most n minus one",
+   "results": "{\"t\": \"2026-10-23T12:18:13Z\", \"tool\": \"leanfinder\", \"query\": \"A quotient of a polynomial ring in n variables over a field by an ideal containing a nonzero polynomial has Krull dimension at most n minus one\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"ringKrullDim_add_natCard_le_ringKrullDim_mvPolynomial\", \"ringKrullDim_add_enatCard_le_ringKrullDim_mvPolynomial\", \"Polynomial.ringKrullDim_le\", \"finrank_quotient_span_eq_natDegree_norm\", \"ringKrullDim_succ_le_ringKrullDim_polynomial\", \"MvPolynomial.ringKrullDim_of_isNoetherianRing\", \"instFiniteDimensionalQuotientPolynomialIdealSpanSingletonSetSmithCoeffs\", \"Polynomial.ringKrullDim_of_isNoetherianRing\"], \"digest\": \"02651b3007dfe965\"}; Read the returned hits. Verified installed NonZeroDivisors.lean:37--66 and Polynomial.lean:118--133: these give the surjection bound and polynomial dimension separately. The exact arbitrary nonzero-ideal quotient statement requires choosing a nonzero kernel element, verifying the domain/nonzerodivisor condition, computing source dimension, and converting the successor inequality. These ingredients already have DAG nodes; no new node is needed.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A surjective homomorphism from a finite dimensional polynomial algebra over a field with nonzero kernel strictly decreases Krull dimension",
+   "results": "{\"t\": \"2026-10-23T12:18:50Z\", \"tool\": \"leanfinder\", \"query\": \"A surjective homomorphism from a finite dimensional polynomial algebra over a field with nonzero kernel strictly decreases Krull dimension\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"ringKrullDim_succ_le_of_surjective\", \"ringKrullDim_le_of_surjective\", \"Polynomial.ringKrullDim_le\", \"Polynomial.not_ker_le_map_C_of_surjective_of_quasiFiniteAt\", \"ringKrullDim_add_natCard_le_ringKrullDim_mvPolynomial\", \"lift_trdeg_le_of_surjective\", \"ringKrullDim_succ_le_ringKrullDim_polynomial\", \"MvPolynomial.ringKrullDim_of_isNoetherianRing\"], \"digest\": \"23bf691bce45e24a\"}; Read the returned hits. Verified installed NonZeroDivisors.lean:37--66 and Polynomial.lean:118--133: these give the surjection bound and polynomial dimension separately. The exact arbitrary nonzero-ideal quotient statement requires choosing a nonzero kernel element, verifying the domain/nonzerodivisor condition, computing source dimension, and converting the successor inequality. These ingredients already have DAG nodes; no new node is needed.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-quasi-finite-polynomial-kernel-dimension-drop",
+  "date": "2026-10-22",
+  "group": "Q132"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Proof (1)--(2), semistable-alteration input in the nearby-cycle branch: the flat-family dimension argument for the curve and horizontal boundary, through the component-closure input. Pointwise specialization input to Stacks 0GSJ. In the proof of 0GSI: first paragraph: equality of generic and special component dimensions over the valuation base. Auxiliary used in Tag 00QK, final sentence: a nonzero polynomial kernel in a quasi-finite polynomial chart forces dimension less than the number of variables. Tag 00QK (lemma-finite-type-domain-over-valuation-ring-dim-fibres), proof, final nonzero residue-polynomial kernel inference: polynomial-source dimension and the strict dimension drop for its nonzero ideal quotient; old item steps 2 and 4.",
+   "via": [
+    "lem-trf-quasi-finite-polynomial-kernel-dimension-drop",
+    "lem-trf-valuation-domain-fibre-dimensions",
+    "lem-trf-flat-relative-associated-specialization",
+    "lem-trf-flat-associated-equidimensional",
+    "lem-trf-flat-fibre-component-closure-dimension",
+    "lem-trf-flat-dense-generic-fibre-pure-dimension",
+    "lem-trf-flatification-horizontal-curve-pair",
+    "lem-trf-dejong-relative-marked-semistable",
+    "lem-trf-relative-marked-nodal-reduction",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-trf-polynomial-nonzero-ideal-quotient-dimension-bound",
+  "worker": "stage1",
+  "summary": "Proved the unchanged nonzero polynomial ideal quotient bound in five short steps using only existing nodes: field ideals, polynomial dimension, domain and quotient map, surjective nonzerodivisor dimension drop, and extended-dimension arithmetic. Checked the unit ideal and n=1 cases, read every cited statement, searched the live library and current blueprint, and ran logged Mathlib searches in two semantic phrasings. No new nodes.",
+  "blueprint": "Proof (1)--(2), semistable-alteration input in the nearby-cycle branch: the flat-family dimension argument for the curve and horizontal boundary, through the component-closure input. Pointwise specialization input to Stacks 0GSJ. In the proof of 0GSI: first paragraph: equality of generic and special component dimensions over the valuation base. Auxiliary used in Tag 00QK, final sentence: a nonzero polynomial kernel in a quasi-finite polynomial chart forces dimension less than the number of variables. Tag 00QK (lemma-finite-type-domain-over-valuation-ring-dim-fibres), proof, final nonzero residue-polynomial kernel inference: polynomial-source dimension and the strict dimension drop for its nonzero ideal quotient; old item steps 2 and 4.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q12-4258ff22f",
+  "group": "Q12",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q12-4258ff22f (reviewer sub-agent of L); spot-checked: Read the item in full; it adds no new nodes. Source check: Stacks algebra.tex 00QK (lemma-finite-type-domain-over-valuation-ring-dim-fibres), last sentence of the proof: a nonzero kernel of k[t_1..t_n] -> S⊗k forces dim < n. The item is that inference, its statement is unchanged and true. Small cases tested: (t) in k[t] gives dim 0 (the bound is attained); (t1t2) gives dim 1; I=P gives the zero ring with dim -∞; (1+t1) gives dim n-1. The only citer, lem-trf-quasi-finite-polynomial-kernel-dimension-drop step 2, applies it with n>=1 and a nonzero kernel element, which matches the hypotheses. Steps: (1) Elementary: a field has only the ideals (0) and (1), so it is Noetherian and has dim 0, using the two definition nodes. (2) lem-sf-noetherian-polynomial-dimension, a Mathlib leaf (MvPolynomial.ringKrullDim_of_isNoetherianRing, Polynomial.lean:118-121, read in the installed Mathlib), gives dim P = n. (3) lem-weil-pbc-polynomial-ring-domain makes f a nonzerodivisor; the quotient definition node states that q is surjective with kernel I. (4) lem-trf-surjective-kernel-nonzerodivisor-dimension-drop is in the same unit and on base, with Lean ringKrullDim_succ_le_of_surjective (NonZeroDivisors.lean:60-66, no Noetherian or nontriviality hypothesis); it gives dim R + 1 <= n, and it has no proof_deps, so there is no cycle. (5) Elementary arithmetic in WithBot ℕ∞, covering both R=0 and finite m. Duplicate search over the snapshot DAG (number of variables, n-1, dim P/, nonzero ideal, hypersurface) found nothing stating the item; the nearest node, lem-weil-pbc-polynomial-quotient-dimension-at-point-height-difference, is a different statement. Blueprint from/via and the split_report blueprint entry are present; no SGA citation; the logged searches are real; mathlib_match=null is correct. This is not a re-split delivery: no repair note and no earlier run. No changes, no tool_uses."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.PolynomialNonzeroIdealQuotientDimensionBound",
+  "declaration": "MvPolynomial.ringKrullDim_quotient_le_pred_of_exists_mem_ne_zero",
+  "file": "lean/Sheaf/RingTheory/PolynomialNonzeroIdealQuotientDimensionBound.lean",
+  "statement": "theorem ringKrullDim_quotient_le_pred_of_exists_mem_ne_zero (k : Type u) [Field k] (n : ℕ) (hn : 1 ≤ n) (I : Ideal (MvPolynomial (Fin n) k)) (hI : ∃ f : MvPolynomial (Fin n) k, f ∈ I ∧ f ≠ 0) : ringKrullDim (MvPolynomial (Fin n) k ⧸ I) ≤ ((n - 1 : ℕ) : WithBot ℕ∞)",
+  "branch": "newtargets-dag",
+  "by": "Q62",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-73c9d7eb9",
+  "group": "Q62",
+  "result": "pass",
+  "note": "Item-only delivery: Sheaf.RingTheory.PolynomialNonzeroIdealQuotientDimensionBound states MvPolynomial.ringKrullDim_quotient_le_pred_of_exists_mem_ne_zero (k : Type u) [Field k] (n) (hn : 1 ≤ n) (I : Ideal (MvPolynomial (Fin n) k)) (hI : ∃ f ∈ I, f ≠ 0) : ringKrullDim (P ⧸ I) ≤ ((n-1:ℕ) : WithBot ℕ∞). Matches node clause by clause via recorded deps MvPolynomial, Ideal.Quotient, ringKrullDim; I=⊤ covered (⊥), no extra assumptions or universe restriction; true via MvPolynomial.ringKrullDim_of_isNoetherianRing + ringKrullDim_succ_le_of_surjective. Node diff vs side-live = lean record only; lean.statement verbatim; docstrings carry Stacks 00QK, blueprint id, 5 proof steps; sorry only; no exact Mathlib/project duplicate; report has Worker report and Second reading sections. No compile needed (no change)."
+ }
+}

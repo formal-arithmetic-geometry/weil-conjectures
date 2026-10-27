@@ -71,7 +71,105 @@
   "existing": true,
   "note": "Exact existing declaration in the current server source, read using scompile.py --source. Uses the canonical openImmersionLowerShriek recorded by def-sfb-finite-extension-by-zero in this same FiniteCoefficient module. Finite-limit preservation is the primary instance; the recorded adjunction supplies left adjointness, hence finite-colimit preservation by Mathlib, and the additive instance supplies abelian exactness. No duplicate statement or definition is introduced."
  },
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "rests_on_sorry",
+   "decls": [
+    {
+     "name": "AlgebraicGeometry.ProEtale.preservesFiniteLimits_openImmersionLowerShriek",
+     "module": "WeilConjectures.SixFunctors.ProEtale.LowerShriek.OpenImmersion.Defs",
+     "lines": [
+      323,
+      344
+     ],
+     "kind": "theorem",
+     "sorry": false
+    },
+    {
+     "name": "AlgebraicGeometry.ProEtale.openImmersionLowerShriek_additive",
+     "module": "WeilConjectures.SixFunctors.ProEtale.LowerShriek.OpenImmersion.Defs",
+     "lines": [
+      318,
+      321
+     ],
+     "kind": "theorem",
+     "sorry": false
+    },
+    {
+     "name": "AlgebraicGeometry.ProEtale.openImmersionLowerShriekUpperStarAdjunction",
+     "module": "WeilConjectures.SixFunctors.ProEtale.LowerShriek.OpenImmersion.Defs",
+     "lines": [
+      359,
+      363
+     ],
+     "kind": "def",
+     "sorry": false
+    }
+   ],
+   "missing": [],
+   "open": [
+    {
+     "name": "AlgebraicGeometry.ProEtale.hasLeftKanExtension_op_overPullback",
+     "module": "WeilConjectures.CategoryTheory.GrothendieckAbelian.HasLeftKanExtension",
+     "lines": [
+      290,
+      298
+     ],
+     "kind": "theorem",
+     "nodes": [],
+     "below": false
+    },
+    {
+     "name": "CategoryTheory.GrothendieckTopology.hasSheafify_of_essentiallySmall",
+     "module": "WeilConjectures.CategoryTheory.GrothendieckAbelian.HasSheafify",
+     "lines": [
+      39,
+      49
+     ],
+     "kind": "theorem",
+     "nodes": [],
+     "below": false
+    }
+   ]
+  },
+  "slopmaster2": {
+   "state": "closed",
+   "decls": [
+    {
+     "name": "AlgebraicGeometry.ProEtale.preservesFiniteLimits_openImmersionLowerShriek",
+     "module": "WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.LowerShriek.Open.Defs",
+     "lines": [
+      329,
+      350
+     ],
+     "kind": "theorem",
+     "sorry": false
+    },
+    {
+     "name": "AlgebraicGeometry.ProEtale.openImmersionLowerShriek_additive",
+     "module": "WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.LowerShriek.Open.Defs",
+     "lines": [
+      324,
+      327
+     ],
+     "kind": "theorem",
+     "sorry": false
+    },
+    {
+     "name": "AlgebraicGeometry.ProEtale.openImmersionLowerShriekUpperStarAdjunction",
+     "module": "WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.LowerShriek.Open.Defs",
+     "lines": [
+      366,
+      370
+     ],
+     "kind": "def",
+     "sorry": false
+    }
+   ],
+   "missing": [],
+   "open": []
+  }
+ },
  "reviewed_lean": {
   "date": "2026-10-16",
   "by": "L",
@@ -81,5 +179,25 @@
   "note": "Existing canonical pro-etale declaration matches the node and dependency; hypotheses, universes, exactness clauses, edge cases, searches, source, docstrings, and recorded scompile evidence checked. No fixes needed."
  },
  "chapter": "sec-six-functors-basics",
- "unit": "sk-def-sfb-finite-lower-shriek"
+ "unit": "sk-def-sfb-finite-lower-shriek",
+ "blueprint_update": {
+  "snapshot": "main-20261023-1620",
+  "commit": "7284bb09daf97437d544c51882b325f9c52cd345",
+  "changed": [
+   "statement",
+   "proof"
+  ],
+  "statement": "For an open immersion $j$, the extension by zero $j_!$ of\n[def-weil-extension-by-zero] preserves finite limits. Being also a left adjoint, it\nis exact.",
+  "proof": [
+   {
+    "text": "By the computation in the proof of [def-weil-extension-by-zero], the presheaf\n$\\operatorname{Lan}_{\\ell^{\\mathrm{op}}}F$ takes at $W$ either the value $F(W\\to U)$ or\n$0$, depending only on $W$. So $\\operatorname{Lan}_{\\ell^{\\mathrm{op}}}$ preserves finite\nlimits. The inclusion of sheaves into presheaves preserves limits, and sheafification is\nleft exact for a Grothendieck abelian $\\mathcal A$. Hence $j_!$ is left exact. It is right\nexact because it is a left adjoint ([def-sfb-finite-extension-by-zero-adjunction]).",
+    "uses": [
+     "def-weil-extension-by-zero",
+     "def-sfb-finite-extension-by-zero-adjunction"
+    ],
+    "elementary": false
+   }
+  ],
+  "note": "the current blueprint (main-20261023-1620, weil-conjectures-blueprint 7284bb09da) states or proves this differently; the node is proved in Lean: recorded 2026-10-23, not reopened"
+ }
 }

@@ -1,0 +1,329 @@
+{
+ "id": "lem-trf-completed-curve-boundary-geometry",
+ "kind": "statement",
+ "title": "Smooth locus and boundary divisor from completed curve singularities",
+ "statement": "Let $k$ be an algebraically closed field [def-weil-algebraic-closure]. Let $Z$ be an integral [def-pc-integral-scheme], proper [def-weil-proper-morphism], finite-type $k$-scheme [def-weil-finite-type-morphism] of dimension $1$ [def-kun-topological-krull-dimension]. Let $S=S_{\\mathrm{reg}}\\amalg S_{\\mathrm{node}}$ be a finite set of closed points [def-weil-closed-points] of $Z$, partitioned into disjoint subsets. Assume $Z\\setminus S$ is smooth over $k$ [def-sbc-smooth-morphisms]. At every $s\\in S_{\\mathrm{reg}}$ assume $\\widehat{\\mathcal O}_{Z,s}\\cong k[[t]]$, and at every $s\\in S_{\\mathrm{node}}$ assume $\\widehat{\\mathcal O}_{Z,s}\\cong k[[u,v]]/(uv)$, as complete local $k$-algebras; completions and power series are [def-weil-pbc-adic-completion, def-weil-pbc-multivariate-power-series].\nLet $\\nu:N\\to Z$ be the normalization in its function field [def-sc-normalization]. Then $\\nu$ is finite, $N$ is integral and is a proper smooth connected curve over $k$ [def-sc-curves], the nonsmooth locus of $Z$ is exactly $S_{\\mathrm{node}}$, and $\\nu$ is an isomorphism over $Z\\setminus S_{\\mathrm{node}}$, including over $S_{\\mathrm{reg}}$. The reduced inverse image of $S$ is the effective Cartier divisor $B=\\sum_{p\\in\\nu^{-1}(S)}[p]$ on $N$: its support is finite, each coefficient is one, and its ideal at a point $p$ of its support is the maximal ideal of $\\mathcal O_{N,p}$. Its associated invertible module is $\\mathcal O_N(B)$ [def-pc-divisor-line-bundle], with its canonical trivialization off $\\nu^{-1}(S)$. No ambient curve or adjunction line is part of the hypotheses.",
+ "source": {
+  "document": "literature/stacks-project/curves.tex",
+  "place": "Tag 0E38 (lemma-closed-subscheme-nodal-curve), final completion-regularity/smoothness argument; varieties.tex Tag 0C45 (lemma-normalize-noetherian-dim-1) for normalization geometry, supplemented by lem-sc-normalization-properties and lem-sc-point-cartier. Agent synthesis for a marked integral curve."
+ },
+ "stmt_deps": [
+  "def-weil-algebraic-closure",
+  "def-pc-integral-scheme",
+  "def-weil-proper-morphism",
+  "def-weil-finite-type-morphism",
+  "def-kun-topological-krull-dimension",
+  "def-weil-closed-points",
+  "def-sbc-smooth-morphisms",
+  "def-sc-normalization",
+  "def-sc-curves",
+  "def-pc-divisor-line-bundle",
+  "def-weil-pbc-adic-completion",
+  "def-weil-pbc-multivariate-power-series",
+  "def-weil-finite-integral-morphism",
+  "def-sc-divisor"
+ ],
+ "proof": [
+  {
+   "text": "The scheme $Z$ is Noetherian by [lem-weil-pbc-finite-type-over-noetherian], applied to $Z\\to\\operatorname{Spec}k$: a field is Noetherian since its only ideals are $0$ and $k$. In particular every $A_s=\\mathcal O_{Z,s}$ is a Noetherian local ring. By the field case $d=1$ of [lem-weil-pbc-power-series-field-cohen-regular-complete], $k[[t]]$ is regular local. The regularity equivalence of [lem-weil-pbc-completion-regular-local], transported through the assumed complete-local-ring isomorphism, therefore makes $A_s$ regular for every $s\\in S_{\\mathrm{reg}}$.",
+   "uses": [
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "lem-weil-pbc-power-series-field-cohen-regular-complete",
+    "lem-weil-pbc-completion-regular-local"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 07NY, lemma-completion-regular; algebra.tex Tag 032C, remark-Noetherian-complete-local-ring-universally-catenary; morphisms.tex Tag 01T6, lemma-finite-type-noetherian"
+   }
+  },
+  {
+   "text": "For $s\\in S_{\\mathrm{node}}$, put $R=k[[u,v]]/(uv)$. Its elements $\\bar u$ and $\\bar v$ are nonzero and $\\bar u\\bar v=0$: setting $v=0$ gives a homomorphism $R\\to k[[u]]$ sending $\\bar u$ to $u\\ne0$, and setting $u=0$ proves the other assertion. These evaluations are ring homomorphisms directly from the coefficient multiplication in [def-weil-pbc-multivariate-power-series]. Thus $R$ is not a domain, hence not regular local by [lem-sc-regular-local-domain]. By [lem-weil-pbc-completion-regular-local] and the stipulated isomorphism $\\widehat{A_s}\\cong R$, $A_s$ is not regular. This does not assert that $A_s$ itself has zero divisors: the integral curve may have an analytically reducible node.",
+   "uses": [
+    "def-weil-pbc-multivariate-power-series",
+    "lem-sc-regular-local-domain",
+    "lem-weil-pbc-completion-regular-local"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00NP, lemma-regular-domain, and more-algebra.tex Tag 07NY, lemma-completion-regular; explicit quotient evaluations written by the worker"
+   }
+  },
+  {
+   "text": "Set $U=Z\\setminus S_{\\mathrm{node}}$, an open subscheme since the removed set is a finite set of closed points. At every point of $U\\setminus S_{\\mathrm{reg}}=Z\\setminus S$ the local ring is regular by [lem-weil-pbc-smooth-scheme-over-field-regular], applied to the assumed smooth open subscheme $Z\\setminus S$. At the remaining points use step 1. Hence $U$ is regular by the locally Noetherian stalk criterion in [def-weil-regular-scheme]. An algebraically closed field is perfect (every algebraic extension is trivial), so [lem-trf-regular-perfect-field-smooth] applies to $U\\to\\operatorname{Spec}k$, which is locally of finite type, and makes $U$ smooth. Conversely a smooth neighbourhood of a point in $S_{\\mathrm{node}}$ would have regular local ring there by [lem-weil-pbc-smooth-scheme-over-field-regular], contradicting step 2. The nonsmooth locus is exactly $S_{\\mathrm{node}}$.",
+   "uses": [
+    "lem-weil-pbc-smooth-scheme-over-field-regular",
+    "def-weil-regular-scheme",
+    "lem-trf-regular-perfect-field-smooth"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tags 056S, lemma-smooth-regular, and 0B8X, lemma-dense-smooth-open-variety-over-perfect-field; properties.tex Tag 02IT, lemma-characterize-regular"
+   }
+  },
+  {
+   "text": "Apply [lem-sc-normalization-properties] to the integral finite-type $k$-scheme $Z$. It gives that $\\nu$ is finite, surjective and birational, that $N$ is proper with $\\dim N=\\dim Z=1$, and that $N$ is smooth because $k$ is perfect. The normalization construction [def-sc-normalization] makes $N$ integral: on each nonempty affine of $Z$ its normalization ring is an integral-closure subring of the common function field $k(Z)$, hence a domain, and these affine pieces have the same generic point. Therefore $N$ is nonempty and irreducible, and thus connected: two disjoint nonempty open subsets contradict irreducibility. Properness includes separatedness and finite type. These properties make $N$ a proper smooth connected curve in [def-sc-curves].",
+   "uses": [
+    "lem-sc-normalization-properties",
+    "def-sc-normalization",
+    "def-sc-curves",
+    "def-weil-proper-morphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tags 0BXR, lemma-normalization-locally-algebraic; 0C45, lemma-normalize-noetherian-dim-1; 0B8Y, lemma-regular-point-on-curve; assembly through lem-sc-normalization-properties"
+   }
+  },
+  {
+   "text": "The regular open subscheme $U$ of step 3 is normal by clause (1) of [rem-pc-regular-normal]. Clause (b) of [lem-sc-normalization-properties], with this very open $U\\subset Z$, now gives $N\\times_ZU\\xrightarrow{\\sim}U$. Thus $\\nu$ is an isomorphism over $Z\\setminus S_{\\mathrm{node}}$, in particular at all the marked regular points. No isomorphism at a node, and no assumption that all marked points are singular, has been used.",
+   "uses": [
+    "rem-pc-regular-normal",
+    "lem-sc-normalization-properties"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/properties.tex",
+    "place": "Tag 0569, lemma-regular-normal; normalization over a normal open as in lem-sc-normalization-properties(b)"
+   }
+  },
+  {
+   "text": "Let $T=\\nu^{-1}(S)$ as a set. Every fibre of $\\nu$ is finite by [lem-weil-pbc-finite-closed-map-finite-fibres], so $T$ is a finite union of finite sets and is finite. It is closed as the inverse image of the finite closed set $S$. Each point of $T$ is closed in $N$: by the birationality in step 4 the generic point of $N$ maps to the generic point of $Z$, not to $S$; let $p\\in T$ with $\\nu(p)=s$. By continuity $\\nu(\\overline{\\{p\\}})\\subseteq\\overline{\\{s\\}}=\\{s\\}$, so $\\overline{\\{p\\}}$ lies in the finite fibre over $s$. In this finite set choose $q\\in\\overline{\\{p\\}}$ with $\\overline{\\{q\\}}$ minimal; any $q'\\in\\overline{\\{q\\}}$ has $\\overline{\\{q'\\}}=\\overline{\\{q\\}}$, hence $q'=q$ as a scheme is $T_0$, so $q$ is closed. If $p$ were not closed, then $q\\ne p$ and, $p$ not being the generic point, $\\{q\\}\\subsetneq\\overline{\\{p\\}}\\subsetneq N$ would be a chain of irreducible closed subsets of length two, contradicting $\\dim N=1$ [def-kun-topological-krull-dimension]. Thus $T$ is a finite set of distinct closed points.",
+   "uses": [
+    "lem-weil-pbc-finite-closed-map-finite-fibres",
+    "def-kun-topological-krull-dimension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tags 02NU, lemma-finite-quasi-finite, and 02NH, lemma-quasi-finite; elementary dimension-one specialization argument"
+   }
+  },
+  {
+   "text": "Form the effective divisor $B=\\sum_{p\\in T}[p]$ of [def-sc-divisor], with each point occurring once. Since $N$ is a smooth connected curve and every $p\\in T$ is closed, [lem-sc-point-cartier] makes every reduced point $[p]$, and hence this finite sum, effective Cartier. Near a fixed $p\\in T$ remove all the other finitely many closed points of $T$. On this neighbourhood $B$ is just the reduced point $p$, so its stalk ideal is exactly $\\mathfrak m_p\\subset\\mathcal O_{N,p}$; outside $T$ its ideal is the unit ideal. In particular $B$ is reduced and has support $T$. The reduced inverse image of $S$ has the same ideals: on such an affine neighbourhood its radical ideal is the prime ideal of the sole closed point $p$, since a radical ideal is the intersection of the primes in its vanishing set. Consequently this reduced inverse image is $B$, and all coefficients are one. The assertion concerns the reduction, not possible multiplicities of the unreduced fibre.",
+   "uses": [
+    "def-sc-divisor",
+    "lem-sc-point-cartier"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 0B8Y, lemma-regular-point-on-curve; divisors.tex Tag 0AG8, lemma-effective-Cartier-in-points; explicit finite disjoint-support assembly"
+   }
+  },
+  {
+   "text": "Write $\\mathcal I_B$ for this Cartier ideal. By [def-pc-divisor-line-bundle] its associated module is $\\mathcal O_N(B)=\\mathcal H om_{\\mathcal O_N}(\\mathcal I_B,\\mathcal O_N)$. Where $\\mathcal I_B=(f)$ with $f$ a non-zero-divisor, the map sending a homomorphism $h$ to $h(f)$ identifies this dual with $\\mathcal O_N$: for any $a$ its inverse is $fr\\mapsto ar$, well-defined because multiplication by $f$ is injective. Hence the module is locally free of rank one, i.e. invertible [def-sc-invertible-module]. On $N\\setminus T$ the ideal is canonically $\\mathcal O_N$; evaluation at $1$ gives the canonical trivialization of its dual there. This includes $T=\\varnothing$, when $B=0$ and the trivialization is global.",
+   "uses": [
+    "def-pc-divisor-line-bundle",
+    "def-sc-invertible-module"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/divisors.tex",
+    "place": "Tag 01WX, definition-invertible-sheaf-effective-Cartier-divisor; elementary dual of a locally principal regular ideal"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-weil-pbc-power-series-field-cohen-regular-complete",
+  "lem-weil-pbc-completion-regular-local",
+  "def-weil-pbc-multivariate-power-series",
+  "lem-sc-regular-local-domain",
+  "lem-weil-pbc-smooth-scheme-over-field-regular",
+  "def-weil-regular-scheme",
+  "lem-trf-regular-perfect-field-smooth",
+  "lem-sc-normalization-properties",
+  "def-sc-normalization",
+  "def-sc-curves",
+  "def-weil-proper-morphism",
+  "rem-pc-regular-normal",
+  "lem-weil-pbc-finite-closed-map-finite-fibres",
+  "def-kun-topological-krull-dimension",
+  "def-sc-divisor",
+  "lem-sc-point-cartier",
+  "def-pc-divisor-line-bundle",
+  "def-sc-invertible-module"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/curves.tex",
+  "place": "Marked integral-curve synthesis of the completion/smoothness argument at the end of Tag 0E38 (lemma-closed-subscheme-nodal-curve), normalization properties (varieties.tex Tags 0BXR, 0C45, 0B8Y), and Cartier divisor definition (divisors.tex Tag 01WX)."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "An integral proper algebraic curve whose completed local rings at finitely many marked closed points are either k[[t]] or k[[u,v]]/(uv) has a smooth connected finite normalization and the reduced inverse image of those points is a Cartier divisor",
+   "results": "{\"t\": \"2026-10-22T06:11:40Z\", \"tool\": \"leanfinder\", \"query\": \"An integral proper algebraic curve whose completed local rings at finitely many marked closed points are either k[[t]] or k[[u,v]]/(uv) has a smooth connected finite normalization and the reduced inverse image of those points is a Cartier divisor\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Hom.instIsIntegralNormalization\", \"AlgebraicGeometry.Scheme.Hom.instIsReducedNormalization\", \"AlgebraicGeometry.Scheme.Hom.instIsIntegralHomFromNormalization\", \"AlgebraicGeometry.Scheme.Hom.instIsIsoToNormalizationOfIsIntegralHom\", \"AlgebraicGeometry.Scheme.Hom.instIsIntegralHomNormalizationDesc\", \"AlgebraicGeometry.Scheme.Hom.instIsAffineHomToNormalization\", \"AlgebraicGeometry.Scheme.Hom.toNormalization\", \"AlgebraicGeometry.Scheme.Hom.normalization\"], \"digest\": \"b6dede552913836d\"}; Relative normalization and smooth base-change instances do not give the formal smooth/nodal classification, smooth proper connected normalization, and the reduced boundary Cartier divisor together.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"normalization\", \"Smooth\"",
+   "results": "{\"t\": \"2026-10-22T06:11:17Z\", \"tool\": \"loogle\", \"query\": \"\\\"AlgebraicGeometry\\\", \\\"normalization\\\", \\\"Smooth\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Hom.instIsIsoNormalizationPullbackOfSmooth\"], \"digest\": \"4d5f27beaecd7cf5\"}; Relative normalization and smooth base-change instances do not give the formal smooth/nodal classification, smooth proper connected normalization, and the reduced boundary Cartier divisor together.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "normalization|Cartier|isRegular",
+   "results": "{\"t\": \"2026-10-22T06:11:17Z\", \"tool\": \"grep\", \"query\": \"normalization|Cartier|isRegular\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 17, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/EffectiveEpi.lean\", \"Mathlib/AlgebraicGeometry/EffectiveEpi.lean\", \"Mathlib/AlgebraicGeometry/EffectiveEpi.lean\", \"Mathlib/AlgebraicGeometry/EffectiveEpi.lean\", \"Mathlib/AlgebraicGeometry/EffectiveEpi.lean\", \"Mathlib/AlgebraicGeometry/ZariskisMainTheorem.lean\", \"Mathlib/AlgebraicGeometry/ZariskisMainTheorem.lean\", \"Mathlib/AlgebraicGeometry/ZariskisMainTheorem.lean\"], \"digest\": \"0a0162b35c27ed28\"}; Relative normalization and smooth base-change instances do not give the formal smooth/nodal classification, smooth proper connected normalization, and the reduced boundary Cartier divisor together.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "For a proper integral curve over an algebraically closed field regular or nodal formal points determine its smooth locus and any finite set pulls back to a reduced effective Cartier divisor on its normalization",
+   "results": "{\"t\": \"2026-10-22T06:11:17Z\", \"tool\": \"leansearch\", \"query\": \"For a proper integral curve over an algebraically closed field regular or nodal formal points determine its smooth locus and any finite set pulls back to a reduced effective Cartier divisor on its normalization\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.smoothLocus\", \"AlgebraicGeometry.Scheme.Hom.instIsIsoToNormalizationOfIsIntegralHom\", \"AlgebraicGeometry.Scheme.Hom.normalizationDesc\", \"AlgebraicGeometry.Scheme.Hom.instIsIntegralNormalization\", \"AlgebraicGeometry.Scheme.Hom.instIsIntegralHomFromNormalization\", \"Algebra.smoothLocus_eq_univ_iff\", \"AlgebraicGeometry.Scheme.Hom.instIsIntegralHomNormalizationDesc\", \"AlgebraicGeometry.Scheme.Hom.instIsAffineHomToNormalization\"], \"digest\": \"252123ff7af9260b\"}; Relative normalization and smooth base-change instances do not give the formal smooth/nodal classification, smooth proper connected normalization, and the reduced boundary Cartier divisor together.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Classify smooth and singular points of a proper integral curve using power series completions and construct the boundary divisor on its normalization",
+   "results": "{\"t\": \"2026-10-22T06:11:41Z\", \"tool\": \"leanfinder\", \"query\": \"Classify smooth and singular points of a proper integral curve using power series completions and construct the boundary divisor on its normalization\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"WeierstrassCurve.exists_isIntegral\", \"PowerSeries.weierstrassDiv\", \"PowerSeries.weierstrassMod\", \"WeierstrassCurve.minimal\", \"WeierstrassCurve.instIsIntegralOfIsMinimal\", \"PowerSeries.IsWeierstrassFactorization.isWeierstrassDivision\", \"WeierstrassCurve.exists_isMinimal\", \"WeierstrassCurve.Affine.FunctionField\"], \"digest\": \"88a7764cf0a5b20c\"}; Relative normalization and smooth base-change instances do not give the formal smooth/nodal classification, smooth proper connected normalization, and the reduced boundary Cartier divisor together.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "normalization|Cartier|isRegular",
+   "results": "{\"t\": \"2026-10-23T09:36:15Z\", \"tool\": \"grep\", \"query\": \"normalization|Cartier|isRegular\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 17, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/EffectiveEpi.lean\", \"Mathlib/AlgebraicGeometry/EffectiveEpi.lean\", \"Mathlib/AlgebraicGeometry/EffectiveEpi.lean\", \"Mathlib/AlgebraicGeometry/EffectiveEpi.lean\", \"Mathlib/AlgebraicGeometry/EffectiveEpi.lean\", \"Mathlib/AlgebraicGeometry/Sites/Fpqc.lean\", \"Mathlib/AlgebraicGeometry/Sites/Fpqc.lean\", \"Mathlib/AlgebraicGeometry/ZariskisMainTheorem.lean\"], \"digest\": \"abec8c9c0a916a59\"}; Read all hits: relative normalization/smooth base change, integral/reduced instances and Weierstrass-curve results do not give the completed-local-ring classification together with the marked reduced Cartier boundary.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The normalization of a proper integral nodal curve is a smooth connected curve and the reduced preimage of finitely many points is an effective Cartier divisor",
+   "results": "{\"t\": \"2026-10-23T09:36:16Z\", \"tool\": \"leansearch\", \"query\": \"The normalization of a proper integral nodal curve is a smooth connected curve and the reduced preimage of finitely many points is an effective Cartier divisor\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Hom.toNormalization_app_preimage\", \"AlgebraicGeometry.Scheme.Hom.instIsIsoToNormalizationOfIsIntegralHom\", \"AlgebraicGeometry.Scheme.Hom.normalizationDesc\", \"AlgebraicGeometry.Scheme.Hom.normalization\", \"AlgebraicGeometry.Scheme.Hom.toNormalization\", \"AlgebraicGeometry.Scheme.Hom.ker_toNormalization\", \"AlgebraicGeometry.Scheme.Hom.instIsIntegralHomFromNormalization\", \"AlgebraicGeometry.Scheme.Hom.ι_toNormalization_assoc\"], \"digest\": \"5a15fec8af601dc1\"}; Read all hits: relative normalization/smooth base change, integral/reduced instances and Weierstrass-curve results do not give the completed-local-ring classification together with the marked reduced Cartier boundary.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"normalization\", \"Smooth\"",
+   "results": "{\"t\": \"2026-10-23T09:36:16Z\", \"tool\": \"loogle\", \"query\": \"\\\"normalization\\\", \\\"Smooth\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Hom.instIsIsoNormalizationPullbackOfSmooth\"], \"digest\": \"4d5f27beaecd7cf5\"}; Read all hits: relative normalization/smooth base change, integral/reduced instances and Weierstrass-curve results do not give the completed-local-ring classification together with the marked reduced Cartier boundary.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An integral proper curve over an algebraically closed field with regular or nodal completed local rings has smooth finite normalization and a reduced boundary Cartier divisor",
+   "results": "{\"t\": \"2026-10-23T09:36:23Z\", \"tool\": \"leanfinder\", \"query\": \"An integral proper curve over an algebraically closed field with regular or nodal completed local rings has smooth finite normalization and a reduced boundary Cartier divisor\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsIntegral\", \"AlgebraicGeometry.Scheme.Hom.instIsIntegralNormalization\", \"WeierstrassCurve.IsMinimal\", \"AlgebraicGeometry.Scheme.Hom.instIsIntegralHomFromNormalization\", \"AlgebraicGeometry.Scheme.Hom.instIsReducedNormalization\", \"WeierstrassCurve.instIsIntegralOfIsMinimal\", \"AlgebraicGeometry.Scheme.Hom.instIsIsoToNormalizationOfIsIntegralHom\", \"WeierstrassCurve.IsGoodReduction\"], \"digest\": \"fe86bb1d918c16fc\"}; Read all hits: relative normalization/smooth base change, integral/reduced instances and Weierstrass-curve results do not give the completed-local-ring classification together with the marked reduced Cartier boundary.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Regularity of a curve detected by its completed local rings and reduced marked points on its normalization",
+   "results": "{\"t\": \"2026-10-23T09:36:24Z\", \"tool\": \"leanfinder\", \"query\": \"Regularity of a curve detected by its completed local rings and reduced marked points on its normalization\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"WeierstrassCurve.IsGoodReduction\", \"WeierstrassCurve.IsMinimal\", \"AlgebraicGeometry.Scheme.Hom.instIsReducedNormalization\", \"AlgebraicGeometry.IsReduced\", \"AlgebraicGeometry.Scheme.Hom.instIsIntegralNormalization\", \"AlgebraicGeometry.Scheme.Hom.instIsIntegralHomFromNormalization\", \"AlgebraicGeometry.isReduced_of_isIntegral\", \"AlgebraicGeometry.isSmooth_iff\"], \"digest\": \"77d3f66b4c76f13f\"}; Read all hits: relative normalization/smooth base change, integral/reduced instances and Weierstrass-curve results do not give the completed-local-ring classification together with the marked reduced Cartier boundary.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-nodal-normalization-adjunction",
+  "date": "2026-10-22",
+  "group": "Q94"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Proof (1)--(2), semistable-alteration input in the nearby-cycle branch: ILO Exposé X, Theorem 3.4, Step 3, invoking Temkin 2010, Theorems 1.5 and 1.1 for a semistable multipointed modification. Temkin proof component: Marked dualizing line bundle and contracted-component degrees. Auxiliary input: Normalization and simple-pole branch calculation, prior to any numerical degree computation. Re-split argument: Old step 1 (component normalization), step 7 (formal smoothness test and normalization isomorphism), and step 8 (reduced boundary Cartier divisor).",
+   "via": [
+    "lem-trf-nodal-normalization-adjunction",
+    "lem-trf-marked-nodal-dualizing-degrees",
+    "lem-trf-temkin-stable-modification",
+    "lem-trf-stable-modification-flat-curve-pair",
+    "lem-trf-dejong-relative-marked-semistable",
+    "lem-trf-relative-marked-nodal-reduction",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-trf-completed-curve-boundary-geometry",
+  "worker": "stage1",
+  "summary": "Eight steps reuse existing general results; no new nodes. Checked regular and nodal completions separately, exact nonsmooth locus, integral proper smooth connected normalization and its isomorphism on the regular open, and the reduced (not scheme-theoretic) boundary and canonical dual-ideal trivialization. Statement unchanged; added the finite-morphism and curve-divisor notion dependencies. All citations read verbatim; searches of current Mathlib find no match for the whole item.",
+  "blueprint": "Realizes the inherited ancestry place: completed-curve auxiliary argument extracted from old nodal-normalization-adjunction steps 1, 7 and 8 (component normalization, formal regularity/smoothness and reduced boundary). Current latest locality/unit texts were read; this is a generic curve-geometry sublemma below that unit, not a change to its contracting-correspondence route.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-power-series-field-cohen-regular-complete",
+    "why": "Field case d=1 supplies regularity of k[[t]]; no marked-curve-unit node gives this commutative-algebra fact."
+   },
+   {
+    "node": "lem-weil-pbc-completion-regular-local",
+    "why": "Noetherian local regularity is equivalent to completed regularity; used for both types of marked point, not to change the unit route."
+   },
+   {
+    "node": "lem-sc-regular-local-domain",
+    "why": "Regular local rings are domains; used only to rule out regularity of the nodal completed ring."
+   },
+   {
+    "node": "lem-weil-pbc-smooth-scheme-over-field-regular",
+    "why": "Smoothness over a field forces regular local rings; used on the assumed smooth open and to exclude smoothness at a node."
+   },
+   {
+    "node": "lem-sc-normalization-properties",
+    "why": "Finite normalization, properness, dimension, smoothness over a perfect field and restriction over normal opens; the standard curve-geometry input, not a replacement of the local-term route."
+   },
+   {
+    "node": "rem-pc-regular-normal",
+    "why": "Only clause (1), regular schemes are normal, applied to the smooth open before the normalization restriction theorem."
+   },
+   {
+    "node": "lem-sc-point-cartier",
+    "why": "Reduced closed points on a smooth connected curve and their effective sums are Cartier; the marked-curve unit supplies no separate divisor-theory theorem."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-power-series-field-cohen-regular-complete",
+  "lem-weil-pbc-completion-regular-local",
+  "lem-sc-regular-local-domain",
+  "lem-weil-pbc-smooth-scheme-over-field-regular",
+  "lem-sc-normalization-properties",
+  "rem-pc-regular-normal",
+  "lem-sc-point-cartier"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q61-9f6fd0f4f",
+  "group": "Q61",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q61-9f6fd0f4f (reviewer sub-agent of L); spot-checked: Read the item in full; the delivery has no new nodes. This is the item's first split; Q94 created it in the 2026-10-21 re-split of lem-trf-nodal-normalization-adjunction. All of old parent steps 1 (normalization part), 7 and 8 (Cartier part) reappear here (checked against the Q94 report). Live and side-live still have the item unsplit, so nothing supersedes it. The statement is unchanged and true: tested with S empty, the nodal cubic, and marked smooth points. The added stmt_deps (finite-integral-morphism, sc-divisor) are both used by the statement. Step checks: 1, Noetherian via finite-type-over-noetherian, k[[t]] regular (Cohen d=1), and completion-regular-local in the completed-to-local direction; 2, the evaluations (u,v)->(u,0),(0,v) give zero divisors, so R is not regular by regular-local-domain; 3, U regular by def-weil-regular-scheme, then smooth by lem-trf-regular-perfect-field-smooth (same unit), and nodes are excluded by smooth-scheme-over-field-regular; 4, normalization-properties (a)(c) plus integrality, connectedness and def-sc-curves; 5, rem-pc-regular-normal(1) with normalization-properties(b); 7, sc-divisor with point-cartier, and the stalk ideal m_p equals the reduced inverse image; 8, the dual of a principal ideal by a non-zero-divisor, with the canonical trivialization off T. FIX in step 6: the claim that every point of T is closed used a chain of length two without producing a closed point in the closure of p. Repaired: nu(closure p) lies in {s}, so closure(p) sits in the finite fibre; a point of minimal closure there is closed because schemes are T0; then {q} < closure(p) < N contradicts dim N = 1. Stacks tags 0E38, 0AG8, 07NY, 00NP, 0569, 056S, 0B8X, 0BXR, 0C45, 02NU, 01WX, 02IT and 01T6 match their labels. No duplicate: lem-sfb-nodal-completed-normalization-model only overlaps, as accepted for the parent. The declared tool_uses (generic commutative algebra and curve facts) are accepted. No SGA source is used. File: fixes/dag/nodes/sec-trace-formula/lem-trf-completed-curve-boundary-geometry.json.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.CompletedCurveBoundaryGeometry",
+  "declaration": "AlgebraicGeometry.Scheme.completed_curve_boundary_geometry",
+  "file": "lean/Sheaf/AlgebraicGeometry/CompletedCurveBoundaryGeometry.lean",
+  "statement": "theorem completed_curve_boundary_geometry (k : Type u) [Field k] [IsAlgClosed k] (Z : Scheme.{u}) [IsIntegral Z] (p : Z ⟶ Spec (.of k)) [IsProper p] (hdim : topologicalKrullDim Z = 1) (Sreg Snode : Closeds Z) (hfinite : ((Sreg : Set Z) ∪ (Snode : Set Z)).Finite) (hclosed : (Sreg : Set Z) ∪ (Snode : Set Z) ⊆ closedPoints Z) (hdisjoint : Disjoint Sreg Snode) (hsmooth : Smooth (Scheme.Opens.ι (X := Z) (Sreg ⊔ Snode).compl ≫ p)) (hreg : ∀ s ∈ Sreg, ∃ e : AdicCompletion (IsLocalRing.maximalIdeal (Z.presheaf.stalk s)) (Z.presheaf.stalk s) ≃+* MvPowerSeries (Fin 1) k, ∀ a : k, e (AdicCompletion.of (IsLocalRing.maximalIdeal (Z.presheaf.stalk s)) (Z.presheaf.stalk s) (Z.presheaf.germ ⊤ s (Set.mem_univ s) (p.appTop ((Scheme.ΓSpecIso (.of k)).inv a)))) = MvPowerSeries.C a) (hnode : ∀ s ∈ Snode, ∃ e : AdicCompletion (IsLocalRing.maximalIdeal (Z.presheaf.stalk s)) (Z.presheaf.stalk s) ≃+* (MvPowerSeries (Fin 2) k ⧸ Ideal.span {(MvPowerSeries.X 0 : MvPowerSeries (Fin 2) k) * MvPowerSeries.X 1}), ∀ a : k, e (AdicCompletion.of (IsLocalRing.maximalIdeal (Z.presheaf.stalk s)) (Z.presheaf.stalk s) (Z.presheaf.germ ⊤ s (Set.mem_univ s) (p.appTop ((Scheme.ΓSpecIso (.of k)).inv a)))) = Ideal.Quotient.mk _ (MvPowerSeries.C a)) : IsFinite Z.fromNormalization ∧ IsIntegral Z.normalization ∧ IsProper (Z.fromNormalization ≫ p) ∧ Smooth (Z.fromNormalization ≫ p) ∧ IsConnectedCurve (Z.fromNormalization ≫ p) ∧ (∀ z : Z, z ∉ p.smoothLocus ↔ z ∈ Snode) ∧ IsIso (Z.fromNormalization ∣_ Snode.compl) ∧ ∃ (E : closedPoints Z.normalization →₀ ℕ) (B : Z.normalization.IdealSheafData), (∀ x : closedPoints Z.normalization, E x = if Z.fromNormalization x.val ∈ Sreg ⊔ Snode then 1 else 0) ∧ B = Divisor.idealSheaf E ∧ B = ((IdealSheafData.vanishingIdeal (Sreg ⊔ Snode)).comap Z.fromNormalization).radical ∧ B.IsInvertible ∧ (B.support : Set Z.normalization) = Z.fromNormalization ⁻¹' (Sreg ⊔ Snode : Closeds Z) ∧ (B.support : Set Z.normalization).Finite ∧ (∀ x ∈ B.support, ∀ (U : Z.normalization.affineOpens) (hx : x ∈ (U : Z.normalization.Opens)), Ideal.map (Z.normalization.presheaf.germ U x hx).hom (B.ideal U) = IsLocalRing.maximalIdeal (Z.normalization.presheaf.stalk x)) ∧ (Modules.dual B.toModules).IsInvertible ∧ IsIso ((SheafOfModules.overFunctor Z.normalization.ringCatSheaf B.support.compl).map ((Modules.dual B.toModules).unitHomEquiv.symm ((SheafOfModules.homObjSectionsEquiv B.toModules (SheafOfModules.unit Z.normalization.ringCatSheaf)).symm B.toModulesι)))",
+  "branch": "sheaf-dag",
+  "by": "NC",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-234fbcc1c",
+  "group": "NC",
+  "result": "pass",
+  "note": "Read node, 14 stmt_dep records, Stacks 0E38/0C45/01WX places, the module and the declarations it uses (IsConnectedCurve, Divisor.idealSheaf, Modules.dual, toModulesι, IdealSheafData.comap/radical, smoothLocus, overFunctor/unitHomEquiv/homObjSectionsEquiv). Every hypothesis matches the node, including finite closed disjoint Closeds partition, smoothness of the complement and completion isos with k-scalar compatibility. Every conclusion clause matches: finite, integral, proper smooth connected normalization; nonsmooth locus = Snode; iso over Snode.compl; E with coefficient 1, B = Divisor.idealSheaf E = radical comap (reduced inverse image); invertible; finite support = preimage; stalk ideal = maximal ideal; dual invertible; canonical section iso off the support. Edge cases (S empty, no nodes, char 2, universes) OK. Item differs from live only in lean; deps unchanged; statement verbatim; single sorry; docstrings with source and steps. Notes: Divisor.idealSheaf is not listed in the def-sc-divisor record (plain upstream def); the second reading is the author's own pass. No compile reproduced, no fix."
+ }
+}

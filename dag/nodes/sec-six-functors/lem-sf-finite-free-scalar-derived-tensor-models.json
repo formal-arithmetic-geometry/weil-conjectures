@@ -1,0 +1,155 @@
+{
+ "id": "lem-sf-finite-free-scalar-derived-tensor-models",
+ "kind": "statement",
+ "title": "Normalized finite-free balancing on K-flat derived tensor models",
+ "statement": "Let C, J, A, B, r and basis be as in the constant-module sheaf scalar calculus [def-sf-finite-free-scalar-calculus-data]. Given any s : FiniteFreeScalarTensorCalculus J r basis, there exists a FiniteScalarDerivedTensorModels E U s.sheaf_balance. Thus for every K in D(J,A) and N in D(J,B), U(D(E)K tensor_B N) is naturally isomorphic to K tensor_A D(U)N. On every K-flat pair P,Q there is an isomorphism U Tot(EP tensor_B Q) to Tot(P tensor_A UQ) whose component on each homogeneous summand is the specified sheaf balancing map, and whose image under Q satisfies exactly the canonical localization-tensorator square. No boundedness, constructibility or Tor conclusion is asserted.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-tower/lem-coef-finite-free-extension.proof.md",
+  "place": "Parent scalar-calculus steps 6-7: K-flat restriction and normalized total-complex descent; Stacks 05V4 and 06YU."
+ },
+ "stmt_deps": [
+  "def-sf-finite-free-scalar-calculus-data"
+ ],
+ "proof": [
+  {
+   "text": "Given a FiniteFreeScalarTensorCalculus s, extension and restriction are exact and EP is K-flat whenever P is. For acyclic H, use the ordinary balancing of s on all homogeneous summands to identify Tot(H tensor_A UQ) with U Tot(EH tensor_B Q). Restriction preserves the sums. K-flatness of Q and exactness of E and U make this acyclic, hence UQ is K-flat. Flat-term representatives can alternatively be obtained from the existing K-flat resolution theorem and the same cancellation test proves flatness of their restricted terms.",
+   "uses": [
+    "lem-pc-kflat-resolution",
+    "lem-pur-change-of-rings-tensor-cancellation-independent",
+    "lem-weil-pbc-module-sheaves-colimits-forgetful",
+    "def-pc-kflat-complex",
+    "def-pc-flat-sheaf-modules",
+    "def-pc-tensor-complex-sheaves"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 05V4 (lemma-flat-change-of-rings), displayed tensor identity; short flatness and K-flatness tests using exact E"
+   }
+  },
+  {
+   "text": "Using the normalized sheaf balancing of s, define the two inverse total-complex maps by their homogeneous components. They commute with the differential since the scalar has degree zero, and with arbitrary chain maps. Compute both derived tensors on K-flat pairs using the canonical localization tensorators. Descend the natural isomorphism through the two K-flat localizations. The localization equation is exactly tensor_normalized, including the mapDerivedCategoryFactors on both sides and the specified homogeneous-summand equation. Localization uniqueness gives joint naturality and independence of representatives. No constructibility or Tor interval is required.",
+   "uses": [
+    "lem-weil-pbc-site-derived-tensor-descent",
+    "lem-weil-pbc-module-sheaves-colimits-forgetful",
+    "def-pc-tensor-complex-sheaves",
+    "lem-weil-pbc-localization-universal-property"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 06YU (definition-derived-tor), its K-flat construction; elementary balanced maps as in sites-modules.tex Tag 05V4"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-kflat-resolution",
+  "lem-pur-change-of-rings-tensor-cancellation-independent",
+  "lem-weil-pbc-module-sheaves-colimits-forgetful",
+  "def-pc-kflat-complex",
+  "def-pc-flat-sheaf-modules",
+  "def-pc-tensor-complex-sheaves",
+  "lem-weil-pbc-site-derived-tensor-descent",
+  "lem-weil-pbc-localization-universal-property"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-modules.tex; literature/stacks-project/sites-cohomology.tex",
+  "place": "Parent scalar-calculus steps 6-7: K-flat restriction and normalized total-complex descent; Stacks 05V4 and 06YU."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "K flat total tensor complexes restriction extension scalars projection isomorphism normalized derived tensor localization",
+   "results": "8 hits: IsLocalization.tensorProduct_isLocalizedModule, Module.Flat.rTensor_shortComplex_exact, LinearMap.tensorKerEquiv_apply, ModuleCat.preservesFiniteLimits_tensorLeft_of_ringHomFlat, RingHom.Flat.holdsForLocalizationAway, Module.Flat.iff_rTensor_preserves_shortComplex_exact, Module.Flat.lTensor_shortComplex_exact, LinearMap.tensorKerEquiv",
+   "date": "2026-10-25",
+   "verdict": "No exact match: scalar adjunction or tensor infrastructure only; not this normalized sheaf conclusion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "K flat total tensor complexes restriction extension scalars projection isomorphism normalized derived tensor localization",
+   "results": "8 hits: HomologicalComplex.HasGoodTensor₁₂, HomologicalComplex.HasGoodTensor₂₃, HomologicalComplex.instHasGoodTensor₁₂OfHasGoodTensor₁₂TensorX, Module.Flat.lTensor_shortComplex_exact, Module.Flat.rTensor_shortComplex_exact, HomologicalComplex.instHasGoodTensor₂₃OfHasGoodTensorTensor₂₃X, ModuleCat.preservesFiniteLimits_tensorLeft_of_ringHomFlat, Module.Flat.rTensor_exact",
+   "date": "2026-10-25",
+   "verdict": "No exact match: scalar adjunction or tensor infrastructure only; not this normalized sheaf conclusion."
+  },
+  {
+   "tool": "grep",
+   "query": "mapDerivedCategory|tensorObj.*[Cc]omparison|[Cc]hangeOfRings",
+   "results": "25 hits: Mathlib/Algebra/Category/ModuleCat/Pseudofunctor.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/ChangeOfRings.lean, Mathlib/Algebra/Category/ModuleCat/ChangeOfRingsExact.lean, Mathlib/Algebra/Category/ModuleCat/Presheaf/Sheafify.lean, Mathlib/Algebra/Category/ModuleCat/Presheaf/ChangeOfRings.lean, Mathlib/Algebra/Category/ModuleCat/Presheaf/Pushforward.lean, Mathlib/Algebra/Category/ModuleCat/Presheaf/Limits.lean, Mathlib/Algebra/Category/ModuleCat/EnoughInjectives.lean",
+   "date": "2026-10-25",
+   "verdict": "No exact match: scalar adjunction or tensor infrastructure only; not this normalized sheaf conclusion."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.FiniteFreeDerivedScalarCalculus",
+  "date": "2026-10-25",
+  "group": "Y5"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-coef-finite-free-extension",
+   "place": "Parent scalar-calculus steps 6-7: K-flat restriction and normalized total-complex descent; Stacks 05V4 and 06YU.",
+   "via": [
+    "lem-sf-finite-free-derived-scalar-calculus"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-thm-sf-compatibility",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.FiniteFreeScalarDerivedTensorModels",
+  "file": "lean/Sheaf/Paper/FiniteFreeScalarDerivedTensorModels.lean",
+  "declaration": "AlgebraicGeometry.finiteFreeScalarDerivedTensorModels",
+  "statement": "theorem finiteFreeScalarDerivedTensorModels (s : FiniteFreeScalarTensorCalculus J r basis) : letI := s.extension_limits letI := s.extension_colimits letI := s.restriction_limits letI := s.restriction_colimits Nonempty (FiniteScalarDerivedTensorModels (finiteScalarExtension J (algebraMap A B)) (Sheaf.restrictScalars J (algebraMap A B)) s.sheaf_balance)",
+  "branch": "sheaf-dag",
+  "by": "Y5",
+  "date": "2026-10-25"
+ },
+ "split_report": {
+  "date": "2026-10-25",
+  "item": "Sheaf.Paper.FiniteFreeDerivedScalarCalculus",
+  "worker": "Y5",
+  "summary": "Strict intermediate of the parent: Normalized finite-free balancing on K-flat derived tensor models. Complete proof retained from the parent steps, with explicit fixed-presentation normalization.",
+  "blueprint": "Parent scalar-calculus steps 6-7: K-flat restriction and normalized total-complex descent; Stacks 05V4 and 06YU.",
+  "tool_uses": [
+   {
+    "node": "lem-pc-kflat-resolution",
+    "why": "Generic ringed-site or localization infrastructure used exactly as stated; it supplies no replacement for a step of the six-functor compatibility unit."
+   },
+   {
+    "node": "lem-pur-change-of-rings-tensor-cancellation-independent",
+    "why": "Generic ringed-site or localization infrastructure used exactly as stated; it supplies no replacement for a step of the six-functor compatibility unit."
+   },
+   {
+    "node": "lem-weil-pbc-site-derived-tensor-descent",
+    "why": "Generic ringed-site or localization infrastructure used exactly as stated; it supplies no replacement for a step of the six-functor compatibility unit."
+   }
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-61eb7",
+  "group": "Y5",
+  "result": "pass",
+  "landing": "20261025T164826-L-1096829",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-61eb7",
+  "group": "Y5",
+  "result": "pass",
+  "landing": "20261025T164826-L-1096829",
+  "kind": "interface",
+  "note": "independent cc review: delivered FiniteFreeScalarCalculusData vs clone item module (verbatim extraction, public re-export); item theorem signature vs clone (identical); two new sorried statements vs the item's FiniteFreeScalarCalculus fields; direct importers NormalizedStageCoefficientCalculus and RamifiedScalarSystemTranspose compiled against the delivered modules (exit 0); #print axioms = propext, sorryAx, Classical.choice, Quot.sound"
+ }
+}

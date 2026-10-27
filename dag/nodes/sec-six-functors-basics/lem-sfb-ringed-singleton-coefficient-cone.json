@@ -1,0 +1,120 @@
+{
+ "id": "lem-sfb-ringed-singleton-coefficient-cone",
+ "kind": "statement",
+ "title": "The singleton dual Koszul coefficient cone with normalized unit and projections",
+ "statement": "Let (C,J,O) be a small ringed site with commutative ring sheaf O and let a be a global section. Let Q_n be the strict internal-dual singleton Koszul tower, let I=O[0], and let f_n be single(a^(n+1)) on I [def-weil-pbc-ringed-koszul-system]. There are chain isomorphisms e_n: Q_n ≅ cone(f_n) which carry the specified dual unit I→Q_n to the cone inclusion. The graded maps given by e_n followed by the second cone projection commute with every successor transition, in every integer degree. No tensor by an arbitrary complex is present in this coefficient statement. No flatness, regularity, nonzero scalar, coefficient field or nonempty-site hypothesis is imposed.",
+ "source": {
+  "document": "literature/stacks-project/algebraization.tex",
+  "place": "Tag 0A0E, lemma-derived-completion-koszul, finite free dual identification."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-ringed-koszul-system"
+ ],
+ "proof": [
+  {
+   "text": "Specialize ringedNegativeKoszulSuccDuality to rank one and retain its empty-subset unit identity. Compose the inverse duality isomorphism with the right unitor on the negative factor and the proved two-term doubleConeIso. The right-unitor inverse formula and unitors_inv_equal identify the empty-subset basis with the degree-zero double basis, which doubleConeHom sends to the cone inclusion. Single-source extensionality proves the coefficient unit identity.",
+   "uses": [
+    "lem-weil-pbc-ringed-negative-koszul-duality",
+    "def-cbc-signed-koszul-completion-model",
+    "def-weil-pbc-ringed-koszul-system"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The coefficient cone inclusion is an isomorphism in degree zero, with inverse its second projection, because the degree-one term of I is zero. Thus the normalized dual unit is invertible in degree zero. Dualizing ringedKoszulProjection_naturality gives naturality of the dual units for every successor. Cancel the degree-zero unit and use the normalized inclusion equation to obtain compatibility of the second projections in degree zero. Every other degree has zero target I^j, proving the remaining equations.",
+   "uses": [
+    "def-weil-pbc-ringed-koszul-system"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/algebraization.tex",
+  "place": "Tag 0A0E, lemma-derived-completion-koszul. J4: explicit negative double-complex cone identification and normalized-unit argument for successor second projections."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The internal dual of a two term rank one cochain complex is the scalar mapping cone, preserving its degree zero unit",
+   "results": "Eight results: composableArrowsFunctor_obj, mappingCone.snd, mappingCone.inl, mappingCone.rotateHomotopyEquiv, Cochain.toSingleMk, Cochain.fromSingleEquiv, mappingCone.descCochain, mappingConeHomOfDegreewiseSplitXIso.",
+   "date": "2026-10-26",
+   "verdict": "Generic cone and single-complex APIs; no normalized Koszul coefficient comparison."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"single\", \"mappingCone\"",
+   "results": "OK, zero hits.",
+   "date": "2026-10-26",
+   "verdict": "No exact match."
+  },
+  {
+   "tool": "grep",
+   "query": "double.*mappingCone|mappingCone.*double",
+   "results": "OK, zero search-service hits. Local search found the item doubleConeIso helpers and RingedNegativeKoszulDuality; the former is moved into this module and the latter is applied at rank one. Blueprint search for singleton Koszul returned zero nodes.",
+   "date": "2026-10-26",
+   "verdict": "Use existing negative duality and prove the normalization and projection identities."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.CategoryTheory.RingedSingletonKoszulCone",
+  "date": "2026-10-26",
+  "group": "J4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-thm-sf-pf-adic-open",
+   "place": "Finite Koszul coefficient identification in the reduction paragraph: normalize the internal-dual singleton complex as the cone of scalar multiplication before tensoring with an arbitrary complex.",
+   "via": [
+    "lem-sfb-internal-koszul-finite-augmentation",
+    "lem-sfb-internal-koszul-quotient-resolution",
+    "lem-sfb-internal-quotient-koszul-unit-comparison",
+    "lem-sfb-internal-completion-stacks-comparison",
+    "lem-sfb-internal-integral-residue-criterion",
+    "lem-sfb-ringed-singleton-koszul-cone"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-pf-adic",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.RingedSingletonCoefficientCone",
+  "file": "lean/Sheaf/CategoryTheory/RingedSingletonCoefficientCone.lean",
+  "declaration": "CategoryTheory.ringedSingletonCoefficientCone",
+  "statement": "theorem ringedSingletonCoefficientCone\n    (a : (O.obj ⋙ forget CommRingCat).sections) :\n    ∃ e : ∀ n : ℕ,\n        (ringedKoszulDualTower O 1 (fun _ ↦ a)).obj (op n) ≅\n          CochainComplex.mappingCone\n            ((HomologicalComplex.single _ (.up ℤ) 0).map\n              (ringedKoszulScalar O a ^ (n + 1))),\n      (∀ n, ringedKoszulDualUnit O 1 (fun _ ↦ a) n ≫ (e n).hom =\n        CochainComplex.mappingCone.inr\n          ((HomologicalComplex.single _ (.up ℤ) 0).map\n            (ringedKoszulScalar O a ^ (n + 1)))) ∧\n      (∀ (n : ℕ) (j : ℤ),\n        ((ringedKoszulDualTower O 1 (fun _ ↦ a)).map\n            (homOfLE (Nat.le_add_right n 1)).op).f j ≫\n          (e n).hom.f j ≫\n            (CochainComplex.mappingCone.snd\n              ((HomologicalComplex.single _ (.up ℤ) 0).map\n                (ringedKoszulScalar O a ^ (n + 1)))).v j j (add_zero j) =\n          (e (n + 1)).hom.f j ≫\n            (CochainComplex.mappingCone.snd\n              ((HomologicalComplex.single _ (.up ℤ) 0).map\n                (ringedKoszulScalar O a ^ (n + 1 + 1)))).v j j (add_zero j))",
+  "branch": "sheaf-dag",
+  "by": "J4",
+  "date": "2026-10-26"
+ },
+ "proof_deps": [
+  "lem-weil-pbc-ringed-negative-koszul-duality",
+  "def-cbc-signed-koszul-completion-model",
+  "def-weil-pbc-ringed-koszul-system"
+ ],
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J4",
+  "result": "pass",
+  "landing": "20261026T091814-L-3377183",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J4",
+  "result": "pass",
+  "landing": "20261026T091814-L-3377183",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

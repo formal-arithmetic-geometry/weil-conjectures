@@ -1,0 +1,289 @@
+{
+ "id": "lem-sfb-inner-frobenius-fixed-points-finite",
+ "kind": "statement",
+ "title": "Inner twists of finite-field Frobenius have finitely many fixed points",
+ "statement": "Let $k$ be a finite field [def-weil-field, def-weil-finite-field-q-elements], let $q=|k|$, and let $\\bar k$ be an algebraic closure [def-weil-algebraic-closure]. Let $A$ be an affine group scheme of finite type over $k$ [def-sc-group-scheme, def-weil-affine-spectrum, def-weil-finite-type-morphism], with coordinate algebra $C=\\Gamma(A,\\mathcal O_A)$. Identify $A(\\bar k)$ with the $k$-algebra homomorphisms $C\\to\\bar k$, and write $\\sigma(u)(c)=u(c)^q$ for arithmetic Frobenius [def-weil-frobenius-substitution]. For every $x\\in A(\\bar k)$, the set $\\{u\\in A(\\bar k):x\\sigma(u)x^{-1}=u\\}$ is finite. Neither smoothness nor connectedness nor commutativity of $A$ is assumed.",
+ "source": {
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Theorem 17.96, proof, printed p.383: f(g)=xF(g)x^{-1}, f^m=Int(y)F^m, and raising to the finite order of y. Specialize F to finite-field Frobenius; the fixed-point finiteness argument does not use connectedness or smoothness."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-weil-finite-field-q-elements",
+  "def-weil-algebraic-closure",
+  "def-sc-group-scheme",
+  "def-weil-affine-spectrum",
+  "def-weil-finite-type-morphism",
+  "def-weil-frobenius-substitution"
+ ],
+ "proof": [
+  {
+   "text": "By [lem-pc-affine-finite-type-algebra], $C$ is a finite-type $k$-algebra. Choose generators $c_1,\\ldots,c_t$ as in [def-weil-pbc-finite-type-algebra]. Evaluation $E:A(\\bar k)\\to\\bar k^t$, $u\\mapsto(u(c_i))_i$, is injective: if $u,v$ agree on the generators, then for every $c=P(c_1,\\ldots,c_t)$ with coefficients in $k$, $u(c)=P(u(c_1),\\ldots,u(c_t))=P(v(c_1),\\ldots,v(c_t))=v(c)$. This also covers $t=0$.",
+   "uses": [
+    "lem-pc-affine-finite-type-algebra",
+    "def-weil-pbc-finite-type-algebra"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 01T2, lemma-locally-finite-type-characterize: apply to the whole affine scheme; write out determination by generators."
+   }
+  },
+  {
+   "text": "Each $x(c_i)$ is algebraic over $k$ by [def-weil-algebraic-closure]. By [lem-weil-pbc-algebraic-generators-finite-extension], $L=k(x(c_1),\\ldots,x(c_t))\\subseteq\\bar k$ is finite-dimensional over $k$. A basis of length $d$ gives a bijection $k^d\\to L$ by taking coordinates, so $L$ is a finite set (of size $q^d$). All values $x(c)$ lie in $L$, by the polynomial expressions of step 1.",
+   "uses": [
+    "def-weil-algebraic-closure",
+    "lem-weil-pbc-algebraic-generators-finite-extension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/fields.tex",
+    "place": "Tag 09GH, lemma-algebraic-finitely-generated; Milne Theorem 17.96 proof, choosing a Frobenius power fixing x."
+   }
+  },
+  {
+   "text": "The field automorphism $\\varphi:z\\mapsto z^q$ of [def-weil-frobenius-substitution] sends $L$ into itself and is injective there. On the finite set $L$ it is bijective. Among its powers as maps $L\\to L$ two coincide, say $\\varphi^a=\\varphi^b$ with $0\\leq a<b$; cancellation of the permutation $\\varphi^a$ gives $\\varphi^m=1$ for $m=b-a>0$. Thus $\\sigma^m(x)=x$. Here $\\sigma$ acts by postcomposing a point with $\\varphi$; it preserves multiplication and inverse because the multiplication, inverse and identity of [def-sc-group-scheme] are morphisms over $k$, hence commute with change of the coefficient algebra by the $k$-automorphism $\\varphi$. Iterating coordinates gives $\\sigma^n(u)(c)=u(c)^{q^n}$.",
+   "uses": [
+    "def-weil-frobenius-substitution",
+    "def-sc-group-scheme"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Theorem 17.96, printed p.383, sentence choosing a Frobenius endomorphism fixing x; functor-of-points naturality and the finite permutation argument written out."
+   }
+  },
+  {
+   "text": "For every $n\\geq1$, put $H_n=\\{u:\\sigma^n(u)=u\\}$. By [lem-weil-unique-subfield-of-closure], $K_n=\\{z\\in\\bar k:z^{q^n}=z\\}$ is a finite field with $q^n$ elements. The injection $E$ of step 1 restricts to an injection $H_n\\hookrightarrow K_n^t$, since $\\sigma^n(u)=u$ forces $u(c_i)^{q^n}=u(c_i)$ for every $i$. Therefore $H_n$ is finite. It is a subgroup: $\\sigma^n(uv)=\\sigma^n(u)\\sigma^n(v)$ and $\\sigma^n(u^{-1})=\\sigma^n(u)^{-1}$, so fixed points contain the identity and are closed under products and inverses.",
+   "uses": [
+    "lem-weil-unique-subfield-of-closure"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Definition 17.95 and following paragraph, printed p.382: Frobenius has finitely many fixed points; explicit affine-coordinate count using the existing finite-subfield lemma."
+   }
+  },
+  {
+   "text": "Put $f(u)=x\\sigma(u)x^{-1}$ and $y_n=x\\sigma(x)\\cdots\\sigma^{n-1}(x)$ for $n\\geq1$. Induction gives $f^n(u)=y_n\\sigma^n(u)y_n^{-1}$. The base $n=1$ is the definition. For the induction step, apply $f$ to the formula: the conjugating element becomes $x\\sigma(y_n)=x\\sigma(x)\\cdots\\sigma^n(x)=y_{n+1}$. For $y=y_m$, the equality $\\sigma^m(x)=x$ implies $\\sigma^m(\\sigma^i(x))=\\sigma^i(x)$ for every $i$, and hence $\\sigma^m(y)=y$, so $y\\in H_m$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Theorem 17.96 proof, printed p.383: the direct calculation f^m=Int(y)F^m, expanded by induction."
+   }
+  },
+  {
+   "text": "The powers $1,y,y^2,\\ldots$ lie in the finite group $H_m$. Two coincide, $y^a=y^b$ for $a<b$; cancellation gives $y^r=1$ with $r=b-a>0$. Since $\\sigma^m(y)=y$, induction on $j\\geq0$ gives $(f^m)^j(u)=y^j\\sigma^{mj}(u)y^{-j}$. At $j=0$ this is the identity; composing with $f^m$ replaces $y^j$ by $y\\sigma^m(y^j)=y^{j+1}$. Consequently $f^{mr}=\\sigma^{mr}$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Theorem 17.96 proof, printed p.383: the second iterate identity and killing the finite-order conjugating element."
+   }
+  },
+  {
+   "text": "If $f(u)=u$, induction gives $f^s(u)=u$ for every $s\\geq0$. In particular $\\sigma^{mr}(u)=f^{mr}(u)=u$. Since $mr\\geq1$, every point in question belongs to the finite set $H_{mr}$ from step 4. A subset of a finite set is finite. All constructions used the affine finite-type coordinate algebra and the group laws only; they apply equally to nonreduced and disconnected group schemes.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Theorem 17.96 proof, printed p.383, last sentence: fixed points of f lie in the fixed points of its Frobenius iterate."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-affine-finite-type-algebra",
+  "def-weil-pbc-finite-type-algebra",
+  "def-weil-algebraic-closure",
+  "lem-weil-pbc-algebraic-generators-finite-extension",
+  "def-weil-frobenius-substitution",
+  "def-sc-group-scheme",
+  "lem-weil-unique-subfield-of-closure"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Theorem 17.96 proof, printed pp.382–383: its iteration argument, with affine-coordinate finiteness and finite-field definition-of-point details supplied for arbitrary affine finite-type group schemes."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "[Ff]robenius.*([Ff]inite|[Ff]ixed)|([Ff]inite|[Ff]ixed).*[Ff]robenius",
+   "results": "{\"t\": \"2026-10-24T07:32:41Z\", \"tool\": \"grep\", \"query\": \"[Ff]robenius.*([Ff]inite|[Ff]ixed)|([Ff]inite|[Ff]ixed).*[Ff]robenius\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Mathlib/NumberTheory/FrobeniusNumber.lean\", \"Mathlib/FieldTheory/Finite/Basic.lean\", \"Mathlib/FieldTheory/Finite/Basic.lean\", \"Mathlib/FieldTheory/Finite/Basic.lean\", \"Mathlib/FieldTheory/Finite/Extension.lean\", \"Mathlib/FieldTheory/Finite/Extension.lean\", \"Mathlib/FieldTheory/Perfect.lean\", \"Mathlib/RingTheory/Frobenius.lean\"], \"digest\": \"614b904ca1f3f218\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: read hits; field Frobenius, finite Galois automorphisms and abstract fixed-point definitions do not give finiteness for an inner twist on an arbitrary affine algebraic group."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The fixed points of an inner twist of Frobenius on an affine finite type group over a finite field are finite",
+   "results": "{\"t\": \"2026-10-24T07:32:42Z\", \"tool\": \"leansearch\", \"query\": \"The fixed points of an inner twist of Frobenius on an affine finite type group over a finite field are finite\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"FiniteField.Extension.frob\", \"MulAction.fixedPoints\", \"FintypeCat.instFiniteAut\", \"FixedPoints.mem_subgroup\", \"ConjAct.fixedPoints_eq_center\", \"MulAction.fixedPoints_of_subsingleton\", \"MulAction.mem_fixedPoints_iff_card_orbit_eq_one\", \"AlgEquiv.fintype\"], \"digest\": \"ff24aa30e6d3b428\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: read hits; field Frobenius, finite Galois automorphisms and abstract fixed-point definitions do not give finiteness for an inner twist on an arbitrary affine algebraic group."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"frobenius\", \"fixed\"",
+   "results": "{\"t\": \"2026-10-24T07:32:42Z\", \"tool\": \"loogle\", \"query\": \"\\\"frobenius\\\", \\\"fixed\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: read hits; field Frobenius, finite Galois automorphisms and abstract fixed-point definitions do not give finiteness for an inner twist on an arbitrary affine algebraic group."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A Frobenius endomorphism composed with conjugation by an algebraic element has finitely many fixed points on a linear algebraic group",
+   "results": "{\"t\": \"2026-10-24T07:32:45Z\", \"tool\": \"leanfinder\", \"query\": \"A Frobenius endomorphism composed with conjugation by an algebraic element has finitely many fixed points on a linear algebraic group\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"IsArithFrobAt.conj\", \"FiniteField.frobeniusAlgEquivOfAlgebraic_apply\", \"FiniteField.orderOf_frobeniusAlgEquivOfAlgebraic\", \"FiniteField.frobeniusAlgEquivOfAlgebraic\", \"FiniteField.coe_frobeniusAlgEquivOfAlgebraic\", \"FiniteField.bijective_frobeniusAlgEquivOfAlgebraic_pow\", \"FixedPoints.finrank_le_card\", \"top_fixedByFinite\"], \"digest\": \"c9233e4a1ab639fe\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: read hits; field Frobenius, finite Galois automorphisms and abstract fixed-point definitions do not give finiteness for an inner twist on an arbitrary affine algebraic group."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For any affine algebraic group over a finite field and any algebraic point x, the fixed points of the endomorphism g maps to x Frobenius(g) x inverse form a finite set",
+   "results": "{\"t\": \"2026-10-24T07:32:46Z\", \"tool\": \"leanfinder\", \"query\": \"For any affine algebraic group over a finite field and any algebraic point x, the fixed points of the endomorphism g maps to x Frobenius(g) x inverse form a finite set\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"arithFrobAt\", \"FixedPoints.toAlgAut_surjective\", \"FiniteField.orderOf_frobeniusAlgEquivOfAlgebraic\", \"FixedPoints.instFiniteDimensionalSubtypeMemSubfieldSubfield\", \"FixedPoints.toAlgHom_bijective\", \"FiniteField.frobeniusAlgEquivOfAlgebraic_apply\", \"FiniteField.frobeniusAlgEquivOfAlgebraic\", \"FixedPoints.finrank_le_card\"], \"digest\": \"804e55aa300118c9\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: read hits; field Frobenius, finite Galois automorphisms and abstract fixed-point definitions do not give finiteness for an inner twist on an arbitrary affine algebraic group."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For an affine algebraic group over a finite field, conjugation composed with Frobenius has finitely many fixed geometric points",
+   "results": "{\"t\": \"2026-10-24T08:02:54Z\", \"tool\": \"leanfinder\", \"query\": \"For an affine algebraic group over a finite field, conjugation composed with Frobenius has finitely many fixed geometric points\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"isConj_arithFrobAt\", \"arithFrobAt\", \"IsArithFrobAt.conj\", \"IsArithFrobAt.exists_primesOver_isConj\", \"FixedPoints.toAlgAut_surjective\", \"FiniteField.frobeniusAlgEquivOfAlgebraic\", \"FiniteField.orderOf_frobeniusAlgEquivOfAlgebraic\", \"FiniteField.bijective_frobeniusAlgEquivOfAlgebraic_pow\"], \"digest\": \"4648c46c345ffe50\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected hits; field Frobenius and abstract fixed-field or conjugacy results do not assert inner-twisted fixed-point finiteness on an arbitrary affine finite-type group scheme."
+  },
+  {
+   "tool": "grep",
+   "query": "frobenius.*(fixed|finite)|(fixed|finite).*frobenius",
+   "results": "{\"t\": \"2026-10-24T08:04:06Z\", \"tool\": \"grep\", \"query\": \"frobenius.*(fixed|finite)|(fixed|finite).*frobenius\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Mathlib/NumberTheory/FrobeniusNumber.lean\", \"Mathlib/RingTheory/Frobenius.lean\", \"Mathlib/FieldTheory/Finite/Extension.lean\", \"Mathlib/FieldTheory/Finite/Extension.lean\", \"Mathlib/FieldTheory/Perfect.lean\", \"Mathlib/FieldTheory/Finite/Basic.lean\", \"Mathlib/FieldTheory/Finite/Basic.lean\", \"Mathlib/FieldTheory/Finite/Basic.lean\"], \"digest\": \"b4d3671f3d4c09b3\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected hits; field Frobenius and abstract fixed-field or conjugacy results do not assert inner-twisted fixed-point finiteness on an arbitrary affine finite-type group scheme."
+  },
+  {
+   "tool": "leansearch",
+   "query": "For a finite type affine group scheme over a finite field the fixed points of an inner twist of Frobenius are finite",
+   "results": "{\"t\": \"2026-10-24T08:04:07Z\", \"tool\": \"leansearch\", \"query\": \"For a finite type affine group scheme over a finite field the fixed points of an inner twist of Frobenius are finite\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"FiniteField.Extension.frob\", \"FiniteField.frobeniusAlgEquivOfAlgebraic\", \"FixedPoints.finrank_eq_card\", \"FintypeCat.instFiniteAut\", \"IsGaloisGroup.fixedPoints_eq_bot\", \"AlgebraicGeometry.instFiniteCarrierCarrierCommRingCatFiberOfIsFinite\", \"FixedPoints.rank_le_card\", \"CategoryTheory.PreGaloisCategory.instFiniteAutOfIsConnected\"], \"digest\": \"c17933aed4692e27\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected hits; field Frobenius and abstract fixed-field or conjugacy results do not assert inner-twisted fixed-point finiteness on an arbitrary affine finite-type group scheme."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"frobenius\", \"fixed\"",
+   "results": "{\"t\": \"2026-10-24T08:04:07Z\", \"tool\": \"loogle\", \"query\": \"\\\"frobenius\\\", \\\"fixed\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected hits; field Frobenius and abstract fixed-field or conjugacy results do not assert inner-twisted fixed-point finiteness on an arbitrary affine finite-type group scheme."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The fixed subgroup of the composite of an inner automorphism with the cardinality power Frobenius on geometric points of an affine algebraic group is finite",
+   "results": "{\"t\": \"2026-10-24T08:04:08Z\", \"tool\": \"leanfinder\", \"query\": \"The fixed subgroup of the composite of an inner automorphism with the cardinality power Frobenius on geometric points of an affine algebraic group is finite\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"fixedByFinite\", \"top_fixedByFinite\", \"FixedPoints.finrank_le_card\", \"FixedPoints.finrank_eq_card\", \"IsGaloisGroup.card_fixingSubgroup_eq_finrank\", \"FixedPoints.toAlgAut_surjective\", \"IsGaloisGroup.finite\", \"CategoryTheory.PreGaloisCategory.instFiniteAutOfIsConnected\"], \"digest\": \"2ab52d03d6e43e58\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected hits; field Frobenius and abstract fixed-field or conjugacy results do not assert inner-twisted fixed-point finiteness on an arbitrary affine finite-type group scheme."
+  },
+  {
+   "tool": "grep",
+   "query": "frobeniusAlgEquivOfAlgebraic|orderOf_frobenius",
+   "results": "{\"t\": \"2026-10-24T08:06:03Z\", \"tool\": \"grep\", \"query\": \"frobeniusAlgEquivOfAlgebraic|orderOf_frobenius\", \"sub\": \"FieldTheory/Finite\", \"ok\": true, \"n_hits\": 13, \"note\": \"\", \"top\": [\"Mathlib/FieldTheory/Finite/GaloisField.lean\", \"Mathlib/FieldTheory/Finite/GaloisField.lean\", \"Mathlib/FieldTheory/Finite/Trace.lean\", \"Mathlib/FieldTheory/Finite/Trace.lean\", \"Mathlib/FieldTheory/Finite/Trace.lean\", \"Mathlib/FieldTheory/Finite/Trace.lean\", \"Mathlib/FieldTheory/Finite/Basic.lean\", \"Mathlib/FieldTheory/Finite/Basic.lean\"], \"digest\": \"a63f86d03de70b89\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected hits; field Frobenius and abstract fixed-field or conjugacy results do not assert inner-twisted fixed-point finiteness on an arbitrary affine finite-type group scheme."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-lang-finite-field-group-surjectivity",
+  "date": "2026-10-24",
+  "group": "Q95"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "Supporting input to Milne Proposition 17.99, first proof paragraph, printed p.384: solve the Frobenius conjugacy equation by Theorem 17.96 / Corollary 17.97, before descending a Frobenius-invariant torus. This serves the finite-field input in Proposition 17.81, p.379, on the inherited direct-image/alteration prerequisite route. Auxiliary for the Lang step: Milne Theorem 17.96, proof, the fixed-point equation f(g)=g and the iterate killing its inner conjugation.",
+   "via": [
+    "lem-sfb-lang-finite-field-group-surjectivity",
+    "lem-sfb-finite-field-geometric-maximal-torus",
+    "lem-sfb-torus-free-implies-unipotent-arbitrary-field",
+    "lem-sfb-maximal-torus-field-extension",
+    "lem-sfb-split-reductive-characteristic-sequence",
+    "lem-sfb-affine-group-picard-field-invariance",
+    "lem-sfb-affine-group-picard-stable-exponent",
+    "lem-sfb-normal-line-bundle-power-linearization",
+    "lem-sfb-normal-quasiprojective-equivariant-immersion",
+    "lem-sfb-sumihiro-normal-torus-affine-neighbourhood",
+    "lem-sfb-torus-invariant-affine-filtration",
+    "lem-sfb-torus-nonfixed-complement-annihilation",
+    "lem-sfb-torus-coherent-concentration",
+    "lem-sfb-torus-coherent-fixed-point-formula",
+    "lem-sfb-flag-line-euler-alternant",
+    "lem-sfb-induced-weyl-dimension-formula",
+    "lem-sfb-steinberg-induced-module-irreducible",
+    "lem-sfb-rho-section-self-duality",
+    "lem-sfb-steinberg-endomorphism-detection",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-inner-frobenius-fixed-points-finite",
+  "worker": "stage1",
+  "summary": "Retained the complete statement. Expanded Milne 17.96 into seven steps: finite affine generators, finite field of definition of x, a Frobenius power fixing x, finite Frobenius-fixed subgroups, both iterate identities, finite order of the conjugating element and finite containment. Reused all required algebra facts; no new nodes. No smoothness, reducedness or connectedness is used.",
+  "blueprint": "Inherited auxiliary finite-field Lang input, Milne 17.96 proof: realizes the sentence choosing a Frobenius power fixing x, the two direct calculations and final fixed-point containment. Read the current latest sk-thm-sf-ctf-stability unit and proof; this does not replace a unit step. The inherited nearest blueprint ancestor is null (blueprint_refs.py ancestor), so its from.node and via chain are preserved.",
+  "tool_uses": [
+   {
+    "node": "lem-pc-affine-finite-type-algebra",
+    "why": "Generic affine finite-type algebra criterion, needed to choose coordinate generators; not a replacement for the unit route."
+   },
+   {
+    "node": "lem-weil-unique-subfield-of-closure",
+    "why": "Generic finite-subfield cardinality and root description, used only for counting ordinary Frobenius-fixed affine points."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pc-affine-finite-type-algebra",
+  "lem-weil-unique-subfield-of-closure"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q84-2b6013049",
+  "group": "Q84",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q84-2b6013049 (reviewer sub-agent of L); spot-checked: I read the whole delivery and pass it unchanged, with no fixes. It touches only the item and its report, has no new nodes, and the statement is byte-identical to the base copy in clones/side-live (unsplit, no proof). The seven steps follow Milne iAG2017, Theorem 17.96 proof (printed p.383) and the paragraph after Def 17.95 (p.382): f(g)=xF(g)x^{-1}; a power F^m fixes x; f^m=Int(y)F^m with y=x·F(x)···F^{m-1}(x); f^{mr}=F^{mr} once r is the order of y; the fixed points of f then sit inside a finite Frobenius-fixed set. I re-derived both inductions, including the order of the noncommuting factors (x·σ(y_n)=y_{n+1}; f^m(y^jσ^{mj}u y^{-j})=y^{j+1}…). The cited statements say what the steps take from them: lem-pc-affine-finite-type-algebra gives a finite-type coordinate ring C; def-weil-pbc-finite-type-algebra gives polynomial generators, so evaluation on generators is injective; the algebraic-generators lemma (a Mathlib leaf) makes L finite; def-weil-frobenius-substitution gives φ as a k-automorphism of the closure, and σ is a group map by naturality of the functor of points (def-sc-group-scheme); clause 1 of lem-weil-unique-subfield-of-closure says K_n has q^n elements. Edge cases checked: t=0, x=e, mu_p, G_m, and finite noncommutative constant groups. The fixed-point argument never uses smoothness, connectedness, reducedness or commutativity, so the general statement is true. Accepted tool_uses: lem-pc-affine-finite-type-algebra and lem-weil-unique-subfield-of-closure, both generic algebra used as black boxes. The only citer, lem-sfb-lang-finite-field-group-surjectivity, uses just the statement, and there is no cycle. An rg -L search for duplicates (17.96, inner twist, Lang, Frobenius-fixed finiteness) found none. Stacks 01T2 (morphisms.tex:2673) and 09GH (fields.tex:693) are verified, and there is no SGA. Minor: the report mentions a citations.json that is not in the commit; this is harmless."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.InnerFrobeniusFixedPointsFinite",
+  "declaration": "AlgebraicGeometry.inner_frobenius_fixedPoints_finite",
+  "file": "lean/Sheaf/AlgebraicGeometry/InnerFrobeniusFixedPointsFinite.lean",
+  "statement": "theorem inner_frobenius_fixedPoints_finite (k : Type u) [Field k] [Fintype k] (Ω : Type u) [Field Ω] [Algebra k Ω] [IsAlgClosure k Ω] (A : Over (Spec (.of k))) [GrpObj A] [IsAffine A.left] [LocallyOfFiniteType A.hom] [QuasiCompact A.hom] (x : points A Ω) : Set.Finite {v : points A Ω | x * points.map A (FiniteField.frobeniusAlgEquivOfAlgebraic k Ω).toAlgHom v * x⁻¹ = v}",
+  "branch": "newtargets-dag",
+  "by": "Q05",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-26c473a69",
+  "group": "Q05",
+  "result": "pass",
+  "note": "Only the item's lean record and the new module InnerFrobeniusFixedPointsFinite.lean are delivered; the node statement is byte-identical to live and no dependency records are touched. Lean matches the node clause by clause: Field+Fintype k, an arbitrary IsAlgClosure Ω, GrpObj A over Spec k with IsAffine + LocallyOfFiniteType + QuasiCompact, points A Ω via the upstream abbrev with the group from Hom.group, σ = points.map along frobeniusAlgEquivOfAlgebraic (arithmetic z↦z^q, checked against coe_frobeniusAlgEquivOfAlgebraic), fixed set x*σv*x⁻¹=v in the node's order, conclusion Set.Finite, no extra assumptions. Putting k and Ω in one universe u is harmless (closures are unique up to iso, finiteness is invariant). The Milne 17.96 argument is sound; edge cases trivial group/t=0, x=1, μ_p, G_m and noncommutative constant groups are covered. No duplicate found (SemilinearFrobenius is a different result). Docstrings carry the source place, blueprint id and all 7 steps; proof is sorry only; lean.statement matches the file verbatim; report has both required sections. Not recompiled, per instructions. No findings."
+ }
+}

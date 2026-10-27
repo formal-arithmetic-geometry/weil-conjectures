@@ -1,0 +1,56 @@
+## Files written
+
+- `dag/nodes/sec-deligne-laumon-general/lem-zl-classical-lisse-weil-frontier-restriction.json`: statement, now split into six complete proof steps. Statement and statement dependencies preserved. Existing normalized realization and frontier nodes suffice: **0 new nodes, 0 Mathlib leaves**.
+- `citations.json`: 16 verbatim step/node quotations, covering every entry of every step's `uses`.
+- `searches.jsonl`: the required msearch command's own log; the six queries made by Q126 have been appended, with their actual results, to the item's inherited Mathlib-search records.
+- `report.md`: this report.
+
+## Attachments
+
+None. Searches in the live read-only `lean/WeilConjectures/` for the exact blueprint tag, frontier terminology, classical lisse/Weil realization, and normalized realization did not produce a declaration stating this item. Existing Weil-object and concrete lisse modules do not give all its normalized sf/classical, finite-coefficient and frontier clauses. No compiler, Lake, Lean writer or git command was run in the shared repository.
+
+## Literature
+
+Read the item's source `literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-general/sk-i-dl-general-real/thm-zl-real-mixed-by-curves.proof.md`, especially the last general-base reduction paragraphs (6-7), and the chapter/unit records. Read Bhatt–Scholze, *The pro-etale topology for schemes*, PDF pp. 58-62, in particular Lemma 6.8.2, Definition 6.8.3, Proposition 6.8.4(1),(4), Proposition 6.8.14(2) and Remark 6.8.15. Read Deligne, *Weil II*, (1.1.1)b-d, (1.1.7)-(1.1.10), and the explanation of Weil actions: the coefficient systems and their Hom colimits are classical; the Weil generator is geometric Frobenius and is allowed to be a rational, non-integral automorphism. Read Stacks Tag 099N (`proetale.tex`, `lemma-pushforward-Noetherian-case`) and Tag 0D6D (`sites-cohomology.tex`, `lemma-derived-pullback-composition`). Their statements give completion and ordinary composition; the stronger simultaneous normalization and coherence are taken from the cited existing comparison node, not attributed to either tag alone. No SGA source is used.
+
+WANTED: none.
+
+## What needed attention
+
+There is no statement dispute and no statement change. The imported item had no proof. Its two paragraphs must not be turned into two new nodes restating its clauses. Instead the proof uses the already existing, strictly more basic classical-system realization and geometric frontier theorem.
+
+The ambient heart object need not be lisse. The Frobenius restriction is therefore constructed in the sf category first, using completed composition on the actual ambient object, and only then realized on the lisse piece. Using lisse realization on the ambient object would add an invalid hypothesis. The initial partition is not made Frobenius-stable; the return equation is used only for an inclusion defined over the selected finite constant field. A rational Weil map need not preserve the supplied integral lattice. Its inverse is lifted independently and the inverse equations are checked by faithfulness, rather than asserting lattice invariance.
+
+## Searches and reuse
+
+The existing item's Q51 search records were retained as inherited source material. Q126 made the six new recorded searches through `/home/ubuntu/weil-launcher-all/batch2/msearch.py`, using LeanFinder twice, LeanSearch, Loogle and two greps (the second restricted to AlgebraicGeometry). All six services answered successfully. The first grep's actual hits were Weilacher/Mordell-Weil and other unrelated text; the targeted grep had zero hits. LeanSearch returned field Frobenius/perfection facts. LeanFinder returned scheme restriction or condensed local-constant functors. Loogle returned `CategoryTheory.Functor.FullyFaithful.preimageIso` and related declarations. I read `Mathlib/CategoryTheory/Functor/FullyFaithful.lean:205`: its two inverse equations are exactly the elementary fullness/faithfulness argument written in Step 3. It does not construct the adic realization, the normalized completed pullback comparison or the frontier. There is no new categorical lemma node.
+
+Blueprint searches for `frontier`, `normalized classical`, `Weil restriction`, `lisse`, and `realization`, and DAG searches for normalized realization/Weil restriction and finite-stage maps, led to reuse of `lem-zl-classical-system-raw-lisse-realization`, `lem-tw-lisse-rational-realization`, `lem-per-lisse-completed-system-comparison`, `lem-trf-integral-pullback-comparison-realization`, and `lem-zl-smooth-affine-frontier-stratification`. No other imported blueprint node states the entire item, so `same_as` remains empty. The ancestor is `thm-zl-real-mixed-by-curves`, through `lem-zl-raw-heart-adic-lisse-stratification`, as already recorded in the item.
+
+## Not duplicates
+
+No new nodes were created. In particular the classical-system realization sibling is reused for its general fully faithful realization and fibre comparison; the finite-Weil-diagram realization sibling is not recreated. The frontier node is cited directly for the entire geometric refinement. Its clauses are not relabelled as new lemmas.
+
+## Review by Q126
+
+I read delivery-errors B-E in both copies of the file, then checked the proof against the cited statements themselves, not their proofs or titles. The source for this item is the current blueprint's general-base reduction; the normalized coefficient constructions are the Bhatt–Scholze material listed above. There are no new nodes for which a further source check is needed.
+
+Step 1 uses the explicit reduction-system definition in `def-pod-lisse-l-adic-sheaves` and the restriction/scalar/identity/composition clauses of `lem-zl-classical-system-raw-lisse-realization`. The former supplies the transition equation; pulling a trivializing etale cover and its basis proves preservation of finite-level lisseness and freeness. The latter says the actual classical realization commutes with further locally closed restrictions, so it gives the localized identification and successive comparisons. I verified the domains here are separated finite-type k-schemes and the coefficients are the fixed finite E. A lattice has finite locally free reductions; no arbitrary torsion representative is substituted for its ordinary quotient tower.
+
+Step 2 uses `def-weil-frobenius-detailed` for the scalar-coordinate description, `def-weil-local-frobenius-trace` for the recursion for the iterated Weil map, and `lem-trf-integral-pullback-comparison-realization` for the completed composition maps. That comparison node explicitly includes equality of scheme morphisms, arbitrary finite iterations, rationalization and scalar coherence, so it applies to the ambient M even though M is only constructible. I checked the direction: C_j goes from j* g* M to h* j* M, hence alpha_j is j*(theta^[m]) composed with C_j inverse, and its inverse is C_j composed with j*((theta^[m]) inverse). The equality g j = j h uses the finite-field model j_0, not stability of its containing stratum.
+
+Step 3 uses the fully faithful common-stage classical realization from the classical-system node, plus the arbitrary scheme-pullback and system-pullback comparisons in `lem-tw-lisse-rational-realization` and `lem-per-lisse-completed-system-comparison`. The former explicitly allows maps that are not k-linear. This matters for h = geometric Frobenius. Both source and target are the realizations of the pulled-back supplied lattice. Fullness lifts A and B; injectivity on Hom groups then proves the inverse identities. The quoted statements actually assert these properties. I did not treat the definition of a realization datum as an existence theorem.
+
+Step 4 unfolds the directed-colimit Hom definitions in `def-pod-lisse-l-adic-sheaves` and `def-weil-algebraically-closed-coefficients`. The witnesses for a map, its inverse and each of the two equalities are finitely many. Their compositum and further equality stages give one finite coefficient extension. This is the entire finite-stage argument; it does not mean selecting a Frobenius-stable integral lattice or clearing denominators without checking equations.
+
+Step 5 uses the explicit point-fibre and iterated transport clauses of the classical-system and lisse-realization nodes, the composition coherence of the completed comparison node, and the three-factor local-operator formula in `def-weil-local-frobenius-trace`. I wrote the induction for alpha_j^[r] rather than saying that iterates are automatically compatible. All three factors (point transport, return/composition comparison, pulled-back Weil map) are individually identified by the cited statements. The point-return equation is h^r x = x g_s^[mr], not h^r x = x. No claim about arbitrary stalks commuting with an infinite inverse limit is used: the cited normalized adic fibre comparison is the needed specific theorem.
+
+Step 6 uses the literal reduction quotient in `def-weil-pbc-scheme-reduction` and the full statement of `lem-zl-smooth-affine-frontier-stratification`. The latter has precisely a finite partition of the geometric reduction by reduced locally closed subschemes, with no Frobenius-stability hypothesis, and supplies actual locally closed subscheme factorizations, not just underlying-set containments. For T = Y, the affine quotient argument explicitly kills the nilradical and makes the input into such a partition of the reduction. The theorem then supplies the common m, whole-to-empty closed chain, clopen smooth affine geometrically connected pieces, dimension per piece, and zero-dimensional/empty cases. Steps 1-5 apply to these actual maps over that same k_m. Thus there is no hidden geometry lemma left in this assembly step.
+
+Small cases checked: M = 0 (all maps and equations are the unique zero-object ones), empty Y (no pieces, length-zero chain), dimension-zero smooth geometrically connected pieces (the frontier theorem gives Spec(k_m)), disconnected schemes and varying ranks (realization nodes allow them), a nonreduced ambient scheme (factor through the reduction by killing nilpotents), m = 1, and a constant rank-one sheaf whose Weil map is multiplication by ell or ell inverse. The last case verifies why the conclusion must be rational and cannot assert preservation of the chosen lattice. I also checked a partition permuted by the original Frobenius: only the refined pieces' finite-field models enter the return equation.
+
+There are no new unsplit nodes, no new Mathlib leaf requiring a verified line, and no omitted definition search for a new notion. Every proof citation has a verbatim statement quotation in citations.json. No proof step exceeds 2000 characters (the six lengths are 1029, 1216, 1044, 970, 1282 and 1269). Each step is one restriction, comparison, categorical or frontier assembly argument; the non-elementary parts are existing cited nodes. The three comparison statements of other units are declared as generic tools in split_report.tool_uses with a separate reason for each; they do not replace the unit's finite-field frontier route.
+
+## Unfinished work
+
+None in this one-level split. Its reused unsplit dependency nodes remain separate queue items. The required server dry run and direct push are the remaining delivery operations.

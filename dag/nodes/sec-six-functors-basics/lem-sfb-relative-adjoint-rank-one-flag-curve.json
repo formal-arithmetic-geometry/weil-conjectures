@@ -1,0 +1,275 @@
+{
+ "id": "lem-sfb-relative-adjoint-rank-one-flag-curve",
+ "kind": "statement",
+ "title": "Relative pointed flag curve for an adjoint rank-one group",
+ "statement": "Let $A$ be a nonzero commutative Noetherian ring [def-weil-pbc-noetherian-ring], $S=\\operatorname{Spec}A$ [def-weil-affine-spectrum]. An $S$-group scheme is a group object in schemes over $S$, with multiplication, identity and inverse satisfying the group diagrams of [def-sc-group-scheme] over this base. A reductive $S$-group means a smooth [def-sbc-smooth-morphisms] affine finite-type [def-weil-finite-type-morphism] $S$-group all of whose geometric fibres are connected [def-weil-connected-scheme] and have no nontrivial smooth connected normal unipotent closed subgroup. Unipotent means that every geometric point is unipotent in a faithful matrix representation. A split maximal torus $T\\hookrightarrow G$ is a closed subgroup [def-weil-closed-immersion] isomorphic to $\\mathbf G_{m,S}^r$, $r\\geq0$, maximal among tori on every geometric fibre; a torus over an algebraically closed field is a product of multiplicative groups. Here $\\mathbf G_{m,S}=\\operatorname{Spec}A[z,z^{-1}]$ with multiplication of units. Semisimple rank one means that the quotient of each geometric fibre by its largest smooth connected normal solvable subgroup has maximal tori of dimension one; solvable means that successive scheme-theoretic commutator subgroups become trivial. The centre is the subgroup functor of points commuting with every point after every algebra extension. Let $G$ be reductive of semisimple rank one with trivial scheme-theoretic centre and split maximal torus $T$. Zariski locally on $S$ there is a smooth closed subgroup $B\\subseteq G$ containing $T$, with connected geometric fibres, such that the fppf sheaf of right cosets $G/B$ is represented by a smooth proper [def-weil-proper-morphism] $S$-scheme $X$. Here the sheaf quotient is the sheafification of $U\\mapsto G(U)/B(U)$ for faithfully flat finitely presented coverings. The quotient map $p:G\\to X$ has a left $G$-action induced by multiplication, and the identity of $G$ gives a section $\\sigma:S\\to X$, fixed by $B$. For every geometric point [def-weil-geometric-point] $\\bar s:\\operatorname{Spec}\\Omega\\to S$, $X_{\\bar s}=X\\times_S\\operatorname{Spec}\\Omega$ [def-pc-fibre-product] is isomorphic to $\\mathbf P^1_\\Omega$ and the homomorphism induced by this action identifies $G_{\\bar s}$ with the automorphism group sheaf $\\operatorname{Aut}_\\Omega(X_{\\bar s})$. The automorphism group sheaf assigns to an $\\Omega$-scheme $V$ the group of $V$-automorphisms of $X_{\\bar s}\\times_\\Omega V$. Quotient formation, the action, and the section commute with arbitrary base change. The projective line is the projective space with two homogeneous coordinates [def-nagata-projective-space-base-change].",
+ "source": {
+  "document": "https://math.stanford.edu/~conrad/papers/luminysga3smf.pdf",
+  "place": "Conrad, Proposition 4.2.7, proof through the section of the genus-zero curve, printed pp.123--124; the geometric action is the standard action of PGL2 on its Borel quotient. Relative quotient representability and properness are Theorem 2.3.6, printed pp.72--75; the cocharacter parabolic construction is Section 4.1. Read online; WANTED locally as literature/conrad-reductive-group-schemes.pdf. No Stacks tag states this assertion in this form."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-noetherian-ring",
+  "def-weil-affine-spectrum",
+  "def-sc-group-scheme",
+  "def-sbc-smooth-morphisms",
+  "def-weil-finite-type-morphism",
+  "def-weil-connected-scheme",
+  "def-weil-closed-immersion",
+  "def-nagata-projective-space-base-change",
+  "def-weil-proper-morphism",
+  "def-weil-geometric-point",
+  "def-pc-fibre-product",
+  "def-sfb-relative-pointed-flag-curve",
+  "def-sfb-split-torus-over-ring",
+  "def-sfb-rank-one-root-interfaces",
+  "def-sfb-reductive-torus-centralizer-terminology"
+ ],
+ "proof": [
+  {
+   "text": "First $G/S$ is finitely presented: its affine coordinate algebra is finite type over the Noetherian ring $A$, so apply [lem-weil-pbc-finite-type-noetherian-finite-presentation]. By [lem-sfb-relative-reductive-centre-weight-kernel], $Z(G_{\\bar s})=Z(G)_{\\bar s}=1$. Apply [lem-sfb-rank-one-adjoint-projective-linear] over each algebraically closed residue field to identify $G_{\\bar s}$ with $\\operatorname{PGL}_2$. The torus $T_{\\bar s}$ is maximal by hypothesis; [lem-sfb-borel-maximal-torus-conjugacy] conjugates it to the diagonal torus. That torus is maximal since commuting with $\\operatorname{diag}(z,1)$ with indeterminate $z$ forces both off-diagonal entries to vanish. Hence $r=1$ (the split-torus ranks agree by character duality [lem-sfb-relative-diagonalizable-character-duality]). Choose a splitting $\\lambda:\\mathbf G_{m,S}\\xrightarrow{\\sim}T$, composed with $T\\hookrightarrow G$.",
+   "uses": [
+    "lem-weil-pbc-finite-type-noetherian-finite-presentation",
+    "lem-sfb-relative-reductive-centre-weight-kernel",
+    "lem-sfb-rank-one-adjoint-projective-linear",
+    "lem-sfb-borel-maximal-torus-conjugacy",
+    "lem-sfb-relative-diagonalizable-character-duality"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://math.stanford.edu/~conrad/papers/luminysga3smf.pdf",
+    "place": "Proposition 4.2.7, proof, first paragraph, p.123; geometric classification used in the preceding paragraph. The arbitrary-centre base-change input is Theorem 3.3.4."
+   }
+  },
+  {
+   "text": "Use conjugation by $\\lambda$ as the action in [lem-sfb-relative-dynamic-subgroups] and set $B=P_\\lambda$. It is a smooth affine finitely presented closed subgroup with geometrically connected fibres, and its formation commutes with arbitrary base change. The orbit of each $t\\in T(W)$ is constant, so $T\\subseteq B$ as subgroup functors. On each geometric fibre $\\lambda$ is an isomorphism onto the maximal torus. Every nonzero character remains nonzero on $\\lambda$, so it is regular. By [lem-sfb-regular-cocharacter-borel-description], $B_{\\bar s}$ is a Borel subgroup, and [lem-sfb-borel-scheme-normalizer] gives $N_{G_{\\bar s}}(B_{\\bar s})=B_{\\bar s}$ as schemes, including on nonreduced test algebras.",
+   "uses": [
+    "lem-sfb-relative-dynamic-subgroups",
+    "lem-sfb-regular-cocharacter-borel-description",
+    "lem-sfb-borel-scheme-normalizer"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://math.stanford.edu/~conrad/papers/luminysga3smf.pdf",
+    "place": "Theorem 4.1.7, pp.112--114; Proposition 4.2.7, proof, p.123, construction of B and its geometric normalizer."
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-relative-smooth-subgroup-normalizer] to $B\\subseteq G$. It gives a finitely presented closed normalizer $N$ and a closed inclusion $B\\hookrightarrow N$, whose every geometric fibre is an isomorphism by step 2 and the normalizer base-change clause. The isomorphism criterion [lem-sfb-flat-geometric-fibre-open-criterion] applies: $B$ is smooth, hence flat and locally finitely presented over $S$, $N/S$ is finite type, and $B\\to N$ is finitely presented. For the last assertion, write $G=\\operatorname{Spec}C$, $N=\\operatorname{Spec}(C/I)$, $B=\\operatorname{Spec}(C/J)$; $I\\subseteq J$ and the finitely generated ideal $J$ gives the finitely generated ideal $J/I$. Thus $B=N$ over the original, possibly nonreduced base. No flatness of $N$ was assumed.",
+   "uses": [
+    "lem-sfb-relative-smooth-subgroup-normalizer",
+    "lem-sfb-flat-geometric-fibre-open-criterion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://math.stanford.edu/~conrad/papers/luminysga3smf.pdf",
+    "place": "Proposition 4.2.7, proof, p.123: passage from geometric normalizers to B=N; Proposition 2.1.6 and the fibral criterion replace the cited general flat-family equality test."
+   }
+  },
+  {
+   "text": "Fix a geometric fibre. Under the field isomorphism of step 1 and torus conjugacy, $\\lambda$ becomes $t\\mapsto\\operatorname{diag}(t^{\\pm1},1)$: character duality [lem-sfb-relative-diagonalizable-character-duality] says an automorphism of $\\mathbf G_m$ has exponent $\\pm1$. The limit definition of [lem-sfb-relative-dynamic-subgroups] then gives the upper or lower triangular subgroup, since conjugation multiplies the two off-diagonal matrix entries by $t$ and $t^{-1}$. Exchange the two coordinates in the lower-triangular case. The standard column action identifies the upper triangular subgroup with the stabilizer of $[1:0]$. By [lem-sfb-projective-frames-pgl], projective transformations lift locally to invertible matrices and two lifts differ by a scalar. The orbit map to $\\mathbf P^1$ has local lifts sending $[1:u]$ to the matrix with columns $(1,u)$ and $(0,1)$, and $[v:1]$ to the matrix with columns $(v,1)$ and $(-1,0)$, on the two affine charts [lem-weil-pbc-projective-space-standard-charts]. Two matrices have the same first-column line precisely when their ratio on the right is upper triangular. These formulas prove, as fppf sheaves on all test schemes, $G_{\\bar s}/B_{\\bar s}\\simeq\\mathbf P^1_\\Omega$, with its standard left action. This fibre quotient is projective via its identity embedding.",
+   "uses": [
+    "lem-sfb-relative-diagonalizable-character-duality",
+    "lem-sfb-relative-dynamic-subgroups",
+    "lem-sfb-projective-frames-pgl",
+    "lem-weil-pbc-projective-space-standard-charts"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://math.stanford.edu/~conrad/papers/luminysga3smf.pdf",
+    "place": "Proposition 4.2.7, proof, p.123: geometric Borel quotient is P1; explicit two-chart verification of this standard matrix calculation."
+   }
+  },
+  {
+   "text": "Now apply [lem-sfb-relative-self-normalizing-quotient] to $H=B$. The smoothness, finite presentation and geometric connectedness hypotheses hold by step 2, and self-normalization holds by step 3. Step 4 gives the projectivity of every geometric quotient required for properness. We obtain a representing smooth proper $S$-scheme $X=G/B$ and its quotient map $p:G\\to X$, with $X_{\\bar s}\\simeq\\mathbf P^1_\\Omega$. This uses no relative identification of $G$ with a matrix group and no trivialization of the family $X$.",
+   "uses": [
+    "lem-sfb-relative-self-normalizing-quotient"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://math.stanford.edu/~conrad/papers/luminysga3smf.pdf",
+    "place": "Theorem 2.3.6(1),(2), pp.72--75, applied in Proposition 4.2.7, proof, pp.123--124, before trivializing the curve."
+   }
+  },
+  {
+   "text": "Left multiplication descends to the quotient by the formula $a(g,hB)=(gh)B$: replacing $h$ by $hb$ does not change its right coset. The formulas $a(1,x)=x$ and $a(g,a(h,x))=a(gh,x)$ follow from the same identities in $G$ and hold on the quotient sheaf, hence on its representing scheme. Put $\\sigma=p\\circ e$, with $e$ the identity section of $G$; for $b\\in B$ one has $bB=B$, so $B$ fixes $\\sigma$. The base-change assertion for the represented quotient in [lem-sfb-relative-self-normalizing-quotient], together with the base-change assertion for $B$ in step 2, identifies the pullback quotient with $G_{S\\prime}/B_{S\\prime}$. Under this identification multiplication and identity are literally the pulled-back group maps, so the displayed action and section pull back to the same formulas. This proves every asserted base-change compatibility, for arbitrary $S\\prime\\to S$.",
+   "uses": [
+    "lem-sfb-relative-self-normalizing-quotient"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://math.stanford.edu/~conrad/papers/luminysga3smf.pdf",
+    "place": "Proposition 4.2.7, proof, pp.123--124, quotient base change, identity section and left translation action."
+   }
+  },
+  {
+   "text": "Finally, in the geometric-fibre quotient coordinates constructed in step 4 the homomorphism from $G_{\\bar s}$ to automorphisms of $X_{\\bar s}$ is the standard projective matrix action. Apply [lem-sfb-projective-frames-pgl] with $r=2$ over $\\Omega$: it identifies the entire automorphism sheaf of $\\mathbf P^1_\\Omega$ on $\\Omega$-schemes with $\\operatorname{PGL}_{2,\\Omega}$ by that action. Thus this homomorphism is an isomorphism of group sheaves, rather than merely a bijection of geometric points. All constructions above are available on $S$ after choosing the given torus splitting, and in particular give the required Zariski-local conclusion.",
+   "uses": [
+    "lem-sfb-projective-frames-pgl"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://math.stanford.edu/~conrad/papers/luminysga3smf.pdf",
+    "place": "Proposition 4.2.7, proof, p.124, geometric-fibre assertion about the action on G/B; projective automorphisms as in Exercise 1.6.3(iv)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-finite-type-noetherian-finite-presentation",
+  "lem-sfb-relative-reductive-centre-weight-kernel",
+  "lem-sfb-rank-one-adjoint-projective-linear",
+  "lem-sfb-borel-maximal-torus-conjugacy",
+  "lem-sfb-relative-diagonalizable-character-duality",
+  "lem-sfb-relative-dynamic-subgroups",
+  "lem-sfb-regular-cocharacter-borel-description",
+  "lem-sfb-borel-scheme-normalizer",
+  "lem-sfb-relative-smooth-subgroup-normalizer",
+  "lem-sfb-flat-geometric-fibre-open-criterion",
+  "lem-sfb-projective-frames-pgl",
+  "lem-weil-pbc-projective-space-standard-charts",
+  "lem-sfb-relative-self-normalizing-quotient"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://math.stanford.edu/~conrad/papers/luminysga3smf.pdf",
+  "place": "Conrad Proposition 4.2.7, proof through the pointed flag curve, pp.123--124; expanded sheaf and matrix arguments with existing field-theory nodes. WANTED locally as literature/conrad-reductive-group-schemes.pdf."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For an adjoint rank one reductive group scheme with a split maximal torus construct a smooth proper flag quotient with geometric fibres the projective line",
+   "results": "{\"t\": \"2026-10-24T07:54:04Z\", \"tool\": \"leanfinder\", \"query\": \"For an adjoint rank one reductive group scheme with a split maximal torus construct a smooth proper flag quotient with geometric fibres the projective line\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.AffineSpace\", \"OnePoint.exists_mem_SL2\", \"Projectivization.mk''\", \"RootPairing.EmbeddedG2.instIsG2OfIsIrreducible\", \"RootPairing.GeckConstruction.instHasTrivialRadical\", \"Projectivization.nonZeroEquivProjectivizationProdUnits\", \"RootPairing.IsG2.toIsIrreducible\", \"Projectivization.finite_of_finite\"], \"digest\": \"b109ca478913f61a\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected hits are abstract matrix groups, topological torsors, root systems or general scheme infrastructure; none states this relative scheme theorem."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry.Scheme\", \"quotient\"",
+   "results": "{\"t\": \"2026-10-24T07:54:03Z\", \"tool\": \"loogle\", \"query\": \"\\\"AlgebraicGeometry.Scheme\\\", \\\"quotient\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 3, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Hom.liftQuotient\", \"AlgebraicGeometry.Scheme.Hom.liftQuotient_comp\", \"AlgebraicGeometry.Scheme.Hom.liftQuotient_comp_assoc\"], \"digest\": \"6d7c2c7ac7bded1f\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected hits are abstract matrix groups, topological torsors, root systems or general scheme infrastructure; none states this relative scheme theorem."
+  },
+  {
+   "tool": "grep",
+   "query": "Borel|parabolic|flagVariety",
+   "results": "{\"t\": \"2026-10-24T07:54:03Z\", \"tool\": \"grep\", \"query\": \"Borel|parabolic|flagVariety\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected hits are abstract matrix groups, topological torsors, root systems or general scheme infrastructure; none states this relative scheme theorem."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A rank one adjoint group acting on its smooth proper genus zero Borel quotient over a base ring",
+   "results": "{\"t\": \"2026-10-24T07:54:03Z\", \"tool\": \"leansearch\", \"query\": \"A rank one adjoint group acting on its smooth proper genus zero Borel quotient over a base ring\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"ModularForm.levelOne_weight_zero_rank_one\", \"SpecialLinearGroup.center_eq_bot_of_finrank_le_one\", \"Valuation.RankOne.hom_eq_zero_iff\", \"SpecialLinearGroup.centerEquivRootsOfUnity_apply_of_finrank_le_one\", \"Valuation.IsRankOneDiscrete.mk'\", \"Valuation.RankOne\", \"ConjAct.mulAction₀\", \"instMulSemiringActionQuotientSubgroupSubtypeMemSubringSubring\"], \"digest\": \"8dc6978a6574587a\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected hits are abstract matrix groups, topological torsors, root systems or general scheme infrastructure; none states this relative scheme theorem."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A rank one adjoint group acting on its smooth proper genus zero Borel quotient over a base ring",
+   "results": "{\"t\": \"2026-10-24T07:54:05Z\", \"tool\": \"leanfinder\", \"query\": \"A rank one adjoint group acting on its smooth proper genus zero Borel quotient over a base ring\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"OnePoint.instGLAction\", \"cusps_subMulAction\", \"OnePoint.exists_mem_SL2\", \"Subgroup.IsRegularAtInfty\", \"CuspOrbits\", \"ModularGroup.exists_smul_mem_fd\", \"cosetToCuspOrbit_apply_mk\", \"UpperHalfPlane.instContinuousGLSMul\"], \"digest\": \"65b10ab337f6180d\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected hits are abstract matrix groups, topological torsors, root systems or general scheme infrastructure; none states this relative scheme theorem."
+  },
+  {
+   "tool": "grep",
+   "query": "Borel|parabolic|flagVariety",
+   "results": "{\"t\": \"2026-10-24T08:50:58Z\", \"tool\": \"grep\", \"query\": \"Borel|parabolic|flagVariety\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: no relative rank-one flag quotient in Mathlib"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An adjoint reductive group scheme of semisimple rank one with split maximal torus has a pointed smooth proper Borel quotient whose geometric fibers are projective lines",
+   "results": "{\"t\": \"2026-10-24T08:51:02Z\", \"tool\": \"leanfinder\", \"query\": \"An adjoint reductive group scheme of semisimple rank one with split maximal torus has a pointed smooth proper Borel quotient whose geometric fibers are projective lines\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"OnePoint.exists_mem_SL2\", \"surjective_cosetToCuspOrbit\", \"CategoryTheory.PreGaloisCategory.has_decomp_quotients\", \"CategoryTheory.PreGaloisCategory.exists_lift_of_quotient_openSubgroup\", \"CategoryTheory.PreGaloisCategory.IsFundamentalGroup.non_trivial\", \"CategoryTheory.PreGaloisCategory.IsFundamentalGroup\", \"CategoryTheory.PreGaloisCategory.IsFundamentalGroup.non_trivial'\", \"Rep.instProjective\"], \"digest\": \"17ee110ccd53f995\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: no relative rank-one flag quotient in Mathlib"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-relative-rank-one-semisimple-models",
+  "date": "2026-10-24",
+  "group": "Q19"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Haboush symmetric-power lifting for a trivial quotient representation. Supporting representation-theoretic input: Steinberg endomorphisms detect a nonzero fixed vector. Supporting Self-duality of rho section modules at characteristic-dependent weights. Supporting input: Positive-characteristic simplicity step, using irreducibility of the Steinberg induced module rather than assuming self-duality. Numerical input to the dimension comparison: Weyl dimension of the induced module. Supporting Kempf vanishing for dominant flag line bundles. Positive-characteristic Andersen–Haboush argument: trivial pushforward of M_((p^r-1)rho), before the Serre twisting calculation. Supporting input: Lemma 2.3, second assertion, and Lemma 2.1, printed pp.153--155: H^0(u,V(lambda))=K v_lambda for p-restricted dominant lambda. With roots positive in Lie(B), V(lambda)=Gamma(M_{-w0 lambda}). Supporting input: Simple-root distributions and infinitesimal subalgebra calculus. Supporting input: pinning-compatible integral-to-geometric distribution comparison, with all positive root divided powers, before simple-root generation. Integral-root-model prerequisite before the comparison: integral Chevalley construction and a positive-root coordinate chart; integral matrix-closure construction: the big cell and its Weyl translates, before identifying the special fibre. Supporting input: Integral closure atlas, exhaustion of each special fibre: exclude extra components using the generic and special identity-component big-cell dimensions. Supporting input: Lemma 3.7 (first assertion, the Iwahori--Matsumoto maximal-boundedness statement) and its application in Proposition 4.3, second paragraph, printed pp.7-8; Cartan double-coset input used to prove the maximal-boundedness prerequisite, before the torus-powers argument. Supporting input: Theorem 4.1, proof, printed p.7: Bruhat cells and approximation by integral root-group coordinates. Agent strengthening of that approximation input to all split reductive points over a local quotient; proof plan retained in report.md, with no proof stored in this unsplit node. Supporting relative structural input: a finite open atlas by affine-space times split-torus charts, before quotient-coordinate lifting. Relative structural prerequisite: constant roots, trivial root lines and normalizer representatives over the local base, before forming the open cell. Specific prerequisite: Conrad, Reductive group schemes, Lemma 4.1.3 (rank-one centralizer), Theorem 4.2.6, pp.120-121 (perfect opposite-root pairing and coroot), and Corollary 5.1.9(1), printed pp.140-141 (three-exponential normalizer element and reflection formula).  Supporting structural classification before the opposite-root matrix calculation: Conrad Theorem 5.1.8, printed pp.139-140. Supporting input to the matrix-model proof: the semisimple local models of the quotient, not the reductive central-torus reconstruction. Specific supporting place: Proposition 4.2.7, construction of B=P_G(lambda), its self-normalizer and G/B, before trivializing the pointed curve. This does not assert a relative matrix-model isomorphism.",
+   "via": [
+    "lem-sfb-relative-rank-one-semisimple-models",
+    "lem-sfb-relative-rank-one-local-matrix-model",
+    "lem-sfb-relative-opposite-root-reflection-map",
+    "lem-sfb-local-split-root-data-weyl-lifts",
+    "lem-sfb-split-reductive-local-gauss-atlas",
+    "lem-sfb-split-reductive-local-quotient-points",
+    "lem-sfb-split-reductive-dvr-cartan-decomposition",
+    "lem-sfb-split-reductive-integral-maximal-bounded",
+    "lem-sfb-quasi-reductive-special-connectedness",
+    "lem-sfb-integral-chevalley-weyl-atlas",
+    "lem-sfb-chevalley-integral-root-model",
+    "lem-sfb-borel-kostant-distribution-comparison",
+    "lem-sfb-borel-simple-root-distribution-calculus",
+    "lem-sfb-restricted-induced-infinitesimal-invariants",
+    "lem-sfb-flag-frobenius-rho-pushforward",
+    "lem-sfb-dominant-flag-line-kempf-vanishing",
+    "lem-sfb-induced-weyl-dimension-formula",
+    "lem-sfb-steinberg-induced-module-irreducible",
+    "lem-sfb-rho-section-self-duality",
+    "lem-sfb-steinberg-endomorphism-detection",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-relative-adjoint-rank-one-flag-curve",
+  "worker": "stage1",
+  "summary": "Constructed B by the existing relative dynamic-subgroup theorem, proved relative self-normalization using a represented normalizer and the existing geometric-fibre criterion, and applied the general smooth/proper quotient theorem. Two new statement-only relative representability inputs; no relative matrix-classification circularity. Expanded the geometric PGL2 quotient in two charts and the action, identity section and arbitrary-base-change formulas. Statement unchanged.",
+  "blueprint": "Retains the inherited from.place route below det-thm-sf-ctf-stability-direct-images. Latest blueprint sk-thm-sf-ctf-stability-direct-images.proof.md (3) supplies the direct-image unit context; the detailed historical alteration/GIT prerequisite chain is inherited, not claimed as text present in that latest proof. Immediate supporting source: Conrad Proposition 4.2.7, proof, p.123 first paragraph and p.124 first and third paragraphs, stopping before pointed-curve trivialization and relative PGL2 identification."
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q19-2836e0c97",
+  "group": "Q19",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q19-2836e0c97 (reviewer sub-agent of L); spot-checked: Read the item, both new unsplit nodes and every cited statement. Not a 2026-10-21 re-split (the base item was statement-only); item statement unchanged. No cycle: the item is not in the transitive closure of its citations, its only consumer is the parent relative-rank-one-semisimple-models, and the relative matrix-model nodes that depend on that parent are not cited. Steps: (1) the centre node's base-change clause gives Z(G_s̄)=1; the rank-one-adjoint node's hypotheses match the item's semisimple-rank-one definition, giving G_s̄≅PGL2; torus conjugacy gives r=1 via character duality. (2) relative-dynamic-subgroups gives P_λ smooth, f.p. and closed with connected fibres and base change; regularity holds because λ is an isomorphism onto T; regular-cocharacter-borel and borel-scheme-normalizer give a Borel with N=B on all test algebras. (3) New normalizer node plus flat-geometric-fibre-open-criterion: B flat and lfp, N lft, and B→N lfp by the f.g. ideal J/I; I checked the Tor/Nakayama argument for nonreduced bases. (4) I recomputed both det-1 chart lifts and the triangular stabilizer; this holds in characteristic 2. Projective-frames' Zariski-model PGL2 agrees with the fppf-quotient PGL2; I accept that identification as elementary. (5) Every hypothesis of the new quotient node is checked by steps 1-4. (6) Elementary descent of the action, section and base change. (7) projective-frames-pgl identifies the whole Aut sheaf of P^1 with PGL2. New nodes are true and self-contained: normalizer representability matches SGA3 XI 6.11 / Conrad 2.1.6; quotient smoothness via the torsor, separatedness via G×_X G=G×H closed, properness via EGA IV 15.7.10 using G's connected fibres (P^1⊔(P^1 minus special fibre) shows the connected-fibre hypothesis is needed). Small cases H=G and H=1 checked. Neither node restates the item. rg -L duplicate search found only field, DVR, torus or abelian-variety analogues. Conrad's pdf is not local (WANTED), so source places could not be opened; statements were checked mathematically. Batch-5 flags: all six trf endpoints are generic sk-i-curve-zero lemmas (Artin approximation, split-torus smoothness, fpqc smooth descent, fppf⊂fpqc, unramified fibre criterion, Proj Sym E), not trace-formula or Poincaré-duality statements or steps, so no assumption leaf is needed. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.GroupScheme.RelativeAdjointRankOneFlagCurve",
+  "declaration": "AlgebraicGeometry.exists_relativeAdjointRankOneFlagCurve",
+  "file": "lean/Sheaf/AlgebraicGeometry/GroupScheme/RelativeAdjointRankOneFlagCurve.lean",
+  "statement": "theorem exists_relativeAdjointRankOneFlagCurve (A : Type u) [CommRing A] [Nontrivial A] [IsNoetherianRing A] (G T : Grp (Over (Spec (.of A)))) [Smooth G.X.hom] [IsAffine G.X.left] [LocallyOfFiniteType G.X.hom] [QuasiCompact G.X.hom] (iT : T ⟶ G) [IsClosedImmersion iT.hom.hom.left] (hsplit : ∃ r : ℕ, Nonempty (T ≅ RingGroupSchemes.splitTorus A r)) (hred : ∀ (Ω : Type u) [Field Ω] [IsAlgClosed Ω] (t : Spec (.of Ω) ⟶ Spec (.of A)), ReductiveTorusCentralizer.IsReductive ((Over.pullback t).mapGrp.obj G)) (hrank : ∀ (Ω : Type u) [Field Ω] [IsAlgClosed Ω] (t : Spec (.of Ω) ⟶ Spec (.of A)), RankOneRoots.HasSemisimpleRankOne ((Over.pullback t).mapGrp.obj G)) (hmax : ∀ (Ω : Type u) [Field Ω] [IsAlgClosed Ω] (t : Spec (.of Ω) ⟶ Spec (.of A)), ReductiveTorusCentralizer.IsMaximalTorus ((Over.pullback t).mapGrp.map iT)) (hcenter : ∀ (V : Over (Spec (.of A))) (g : V ⟶ G.X), (∀ (W : Over (Spec (.of A))) (f : W ⟶ V) (h : W ⟶ G.X), Commute (f ≫ g) h) → g = 1) : ∀ s : Spec (.of A), ∃ U : (Spec (.of A)).Opens, s ∈ U ∧ Nonempty (RelativePointedFlagCurve ((Over.pullback U.ι).mapGrp.obj T) ((Over.pullback U.ι).mapGrp.obj G) ((Over.pullback U.ι).mapGrp.map iT))",
+  "branch": "newtargets-dag",
+  "by": "N0",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-7dced3523",
+  "group": "N0",
+  "result": "pass",
+  "note": "Item Lean matches node: hypotheses Nontrivial/Noetherian A, smooth affine lft+qc G, hred IsReductive / hrank HasSemisimpleRankOne / hmax IsMaximalTorus on all geometric points, hsplit Grp iso to splitTorus (r=0 allowed), closed-immersion iT, hcenter on all test schemes; conclusion ∀ s ∃ open U ∋ s with RelativePointedFlagCurve over canonical pullbacks. New def node def-sfb-relative-pointed-flag-curve matches its statement clause by clause (closed smooth B ⊇ T with connected geometric fibres, smooth proper X, ModObj action, equivariance, σ=η≫p fixed by B, coset criterion + fppf local lifts for every base change, pinned pulled action/section, X_Ω ≅ ProjectiveSpace (ULift (Fin 2)), MulEquiv G(V)≃*Aut_V(X_V) pinned by the action on all W→V); no hollow data; no duplicate (only field-level inline coset criteria and normal-kernel IsFppfGroupQuotient exist). Item statement unchanged; lean.statement verbatim for both nodes; added stmt_deps are the new node plus three landed terminology nodes. Docstrings, 7-step proof plan, sorry only, universes u, no extra assumptions. No file changed, no compile."
+ }
+}

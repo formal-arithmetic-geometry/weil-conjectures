@@ -1,0 +1,279 @@
+{
+ "id": "lem-sfb-chart-pair-finite-residual-relation",
+ "kind": "statement",
+ "title": "Finite relation fibre at a chart point gives etale quasi-compact residual self-relation",
+ "statement": "Let $S$ be a scheme [def-pc-scheme], let $X$ be an algebraic space over $S$ [def-trf-algebraic-space], and let $a:U\\to X$ be a representable etale morphism from a scheme [def-weil-etale-morphism]. Choose $u\\in U$ and put $K=\\kappa(u)=\\mathcal O_{U,u}/\\mathfrak m_u$ [def-weil-residue-field, def-weil-field]. Write $b:\\operatorname{Spec}K\\to U\\to X$ for its residue-field representative [def-weil-affine-spectrum]. Form $R=U\\times_XU$, with projections $p_1,p_2$, and $E=\\operatorname{Spec}K\\times_X\\operatorname{Spec}K$, using sheaf fibre products [lem-trf-space-fibre-products-etale-covers]. Suppose the set $\\{r\\in|R|:p_1(r)=u=p_2(r)\\}$ is finite. Then both projections $E\\to\\operatorname{Spec}K$ are etale and quasi-compact: their inverse images of affine opens are quasi-compact schemes [def-weil-pbc-quasi-compact-scheme]. No covering condition on $a$, finiteness of the fibre of $|U|\\to|X|$, or quasi-compactness of $U$ is required.",
+ "source": {
+  "document": "literature/stacks-project/decent-spaces.tex",
+  "place": "Tag 03JU (lemma-R-finite-above-x), first proof paragraph identifying the pair fibre with the residual fibre product, followed by the paragraph proving (2) to (3); that paragraph only needs finiteness of the self-pair fibre at the chosen point."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-trf-algebraic-space",
+  "def-weil-etale-morphism",
+  "def-weil-residue-field",
+  "def-weil-field",
+  "def-weil-affine-spectrum",
+  "lem-trf-space-fibre-products-etale-covers",
+  "def-weil-pbc-quasi-compact-scheme"
+ ],
+ "proof": [
+  {
+   "text": "Put $T=\\operatorname{Spec}K$ and let $i:T\\to U$ be the canonical residue-field map. By [lem-sfb-residue-field-point-monomorphism], $i$ is monic. The representable diagonal in [def-trf-algebraic-space] makes $R$ and $E$ schemes; their sheaf fibre-product universal properties are [lem-trf-space-fibre-products-etale-covers]. The induced $j:E\\to R$ is monic: equality after $j$ makes both $U$-coordinates equal, cancellation through $i$ makes both $T$-coordinates equal, and the universal property then makes the original maps equal.",
+   "uses": [
+    "lem-sfb-residue-field-point-monomorphism",
+    "def-trf-algebraic-space",
+    "lem-trf-space-fibre-products-etale-covers"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/decent-spaces.tex",
+    "place": "Tag 03JU (lemma-R-finite-above-x), first proof paragraph and implication (2) to (3)."
+   }
+  },
+  {
+   "text": "Monicity of $j$ gives injectivity on maps from every field spectrum. Apply the equivalence (1) implies (2) in [def-weil-radicial-morphism] to the scheme morphism $j$: it is universally injective, hence injective on underlying sets. Since $p_1j=i q_1$ and $p_2j=i q_2$, its image lies in $\\{r:p_1(r)=u=p_2(r)\\}$. The hypothesis therefore makes $|E|$ finite.",
+   "uses": [
+    "def-weil-radicial-morphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/decent-spaces.tex",
+    "place": "Tag 03JU (lemma-R-finite-above-x), first proof paragraph and implication (2) to (3)."
+   }
+  },
+  {
+   "text": "For the first projection put $D_1=T\\times_XU$ and for the second put $D_2=U\\times_XT$. In each case $h_\\nu:D_\\nu\\to T$ is etale by the representable-etale scheme-test definition in [def-trf-algebraic-space], applied to $a$ and $b$. The map $m_\\nu:E\\to D_\\nu$ replaces the other $T$-coordinate by its image under $i$, and $q_\\nu=h_\\nu m_\\nu$. It is monic: equality after $m_\\nu$ fixes one coordinate and fixes the other after $i$; cancel $i$ by [lem-sfb-residue-field-point-monomorphism] and use the fibre-product universal property of step 1.",
+   "uses": [
+    "def-trf-algebraic-space",
+    "lem-sfb-residue-field-point-monomorphism"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/decent-spaces.tex",
+    "place": "Tag 03JU (lemma-R-finite-above-x), first proof paragraph and implication (2) to (3)."
+   }
+  },
+  {
+   "text": "Apply [lem-weil-pbc-etale-fibre-discrete-separable-points] to $h_\\nu$ at the unique point of $T$. Its residue field is $K$ and its fibre is $D_\\nu$, so $D_\\nu=\\coprod_{\\alpha\\in A_\\nu}\\operatorname{Spec}L_{\\nu,\\alpha}$ for finite separable extensions $L_{\\nu,\\alpha}/K$. By [lem-sfb-monomorphism-into-field-coproduct], $m_\\nu$ identifies $E$, over $D_\\nu$, with the inclusion of the components indexed by a subset $B_\\nu\\subseteq A_\\nu$.",
+   "uses": [
+    "lem-weil-pbc-etale-fibre-discrete-separable-points",
+    "lem-sfb-monomorphism-into-field-coproduct"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/decent-spaces.tex",
+    "place": "Tag 03JU (lemma-R-finite-above-x), first proof paragraph and implication (2) to (3)."
+   }
+  },
+  {
+   "text": "Each component is an open subscheme by [lem-weil-pbc-scheme-coproduct-family]. Thus the inclusion of their union, with the restricted structure sheaf, is an open immersion by [def-weil-open-immersion]. Parts (1) and (2) of [lem-weil-pbc-etale-composition-cancellation] make $q_\\nu=h_\\nu m_\\nu$ etale, for both $\\nu=1,2$.",
+   "uses": [
+    "lem-weil-pbc-scheme-coproduct-family",
+    "def-weil-open-immersion",
+    "lem-weil-pbc-etale-composition-cancellation"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/decent-spaces.tex",
+    "place": "Tag 03JU (lemma-R-finite-above-x), first proof paragraph and implication (2) to (3)."
+   }
+  },
+  {
+   "text": "A finite topological space is quasi-compact: from any open cover choose one member containing each point, giving a finite subcover. Hence step 2 makes $E$ quasi-compact by [def-weil-pbc-quasi-compact-scheme]. The field spectrum $T$ has only the opens $\\varnothing$ and $T$, so the inverse images of its affine opens under either $q_\\nu$ are $\\varnothing$ or $E$. Both projections are therefore quasi-compact, as required.",
+   "uses": [
+    "def-weil-pbc-quasi-compact-scheme"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/decent-spaces.tex",
+    "place": "Tag 03JU (lemma-R-finite-above-x), first proof paragraph and implication (2) to (3)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-residue-field-point-monomorphism",
+  "def-trf-algebraic-space",
+  "lem-trf-space-fibre-products-etale-covers",
+  "def-weil-radicial-morphism",
+  "lem-weil-pbc-etale-fibre-discrete-separable-points",
+  "lem-sfb-monomorphism-into-field-coproduct",
+  "lem-weil-pbc-scheme-coproduct-family",
+  "def-weil-open-immersion",
+  "lem-weil-pbc-etale-composition-cancellation",
+  "def-weil-pbc-quasi-compact-scheme"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/decent-spaces.tex",
+  "place": "Tag 03JU (lemma-R-finite-above-x), first proof paragraph and implication (2) to (3)."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "If the self relation of an etale scheme chart above a pair consisting of the same point is finite then the residue field self relation has finite etale projections",
+   "results": "8 hits: IsLocalRing.ResidueField.finite_of_finite, Algebra.instFiniteResidueFieldOfFormallyUnramified, Algebra.instFiniteResidueFieldOfQuasiFiniteAt, Algebra.exists_etale_bijective_residueFieldMap_and_map_eq_mul_and_isCoprime, Algebra.Etale.finitePresentation, IsLocalRing.ResidueField.finite_of_module_finite, RingHom.EssFiniteType.residueFieldMap, Algebra.Etale.iff_exists_algEquiv_prod",
+   "date": "2026-10-23",
+   "verdict": "no match: the returned residue-field and scheme-fibre constructions do not assert etaleness or quasi-compactness of a field self-relation over an algebraic space"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A finite fibre of the relation over a point of an etale presentation gives an etale quasi compact equivalence relation on its residue field spectrum",
+   "results": "8 hits: Algebra.Etale.finitePresentation, Algebra.exists_etale_bijective_residueFieldMap_and_map_eq_mul_and_isCoprime, StandardEtalePresentation.lift_bijective, Algebra.etaleLocus, Algebra.IsEtaleAt, Algebra.exists_etale_of_isEtaleAt, Algebra.exists_etale_isIdempotentElem_forall_liesOver_eq, Algebra.mem_etaleLocus_iff",
+   "date": "2026-10-23",
+   "verdict": "no match: the returned residue-field and scheme-fibre constructions do not assert etaleness or quasi-compactness of a field self-relation over an algebraic space"
+  },
+  {
+   "tool": "leansearch",
+   "query": "For an etale chart U of an algebraic space X a finite fibre of U times X U over (u,u) makes Spec residue field u times X itself finite etale over the residue field",
+   "results": "8 hits: AlgebraicGeometry.Scheme.Hom.fiberToSpecResidueField, AlgebraicGeometry.LocallyRingedSpace.residueField, AlgebraicGeometry.Scheme.residueField, AlgebraicGeometry.Scheme.Hom.fiber, AlgebraicGeometry.Scheme.Hom.fiberOverSpecResidueField, AlgebraicGeometry.Scheme.Hom.fiberToSpecResidueField_apply, AlgebraicGeometry.Scheme.Etale, AlgebraicGeometry.IsEtale",
+   "date": "2026-10-23",
+   "verdict": "no match: the returned residue-field and scheme-fibre constructions do not assert etaleness or quasi-compactness of a field self-relation over an algebraic space"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicSpace\", \"IsEtale\"",
+   "results": "0 hits: ",
+   "date": "2026-10-23",
+   "verdict": "no match: the returned residue-field and scheme-fibre constructions do not assert etaleness or quasi-compactness of a field self-relation over an algebraic space"
+  },
+  {
+   "tool": "grep",
+   "query": "residueField.*[Rr]elation|[Rr]elation.*residueField|AlgebraicSpace",
+   "results": "0 hits: ",
+   "date": "2026-10-23",
+   "verdict": "no match: the returned residue-field and scheme-fibre constructions do not assert etaleness or quasi-compactness of a field self-relation over an algebraic space"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For an etale scheme chart of an algebraic space, finiteness of the relation fibre at (u,u) implies that the residue field self fibre product has etale quasi compact projections",
+   "results": "8 hits: AlgebraicGeometry.Scheme.Etale, AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified, AlgebraicGeometry.IsEtale, AlgebraicGeometry.IsEtale.instHasOfPostcompPropertyScheme, AlgebraicGeometry.IsEtale.instFormallyUnramified, Algebra.Etale.finitePresentation, AlgebraicGeometry.instFiniteCarrierCarrierCommRingCatFiberOfIsFinite, AlgebraicGeometry.Scheme.instHasPullbacksEtale",
+   "date": "2026-10-23",
+   "verdict": "no match: returned scheme etale definitions, composition/base-change instances and finite-morphism fibre results do not state this residual relation theorem over an algebraic space"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A monomorphism into a scheme etale over a field is a union of its field components, hence etale; finitely many points give quasi compactness",
+   "results": "8 hits: AlgebraicGeometry.Scheme.Etale, AlgebraicGeometry.Scheme.instCategoryEtale, AlgebraicGeometry.IsEtale, AlgebraicGeometry.IsEtale.instHasOfPostcompPropertyScheme, AlgebraicGeometry.Scheme.smallEtalePretopology, AlgebraicGeometry.Scheme.etalePretopology, AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified, AlgebraicGeometry.Scheme.instHasPullbacksEtale",
+   "date": "2026-10-23",
+   "verdict": "no match: returned scheme etale definitions, composition/base-change instances and finite-morphism fibre results do not state this residual relation theorem over an algebraic space"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicSpace\", \"IsEtale\"",
+   "results": "0 hits: ",
+   "date": "2026-10-23",
+   "verdict": "no match: returned scheme etale definitions, composition/base-change instances and finite-morphism fibre results do not state this residual relation theorem over an algebraic space"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The residual self relation of a point in an etale chart of an algebraic space is etale and quasi compact if the pair fibre is finite",
+   "results": "8 hits: AlgebraicGeometry.IsEtale, AlgebraicGeometry.Scheme.Etale, AlgebraicGeometry.instFiniteCarrierCarrierCommRingCatFiberOfIsFinite, AlgebraicGeometry.Scheme.Hom.fiber, AlgebraicGeometry.IsEtale.instHasOfPostcompPropertyScheme, AlgebraicGeometry.instLocallyQuasiFiniteOfIsFinite, AlgebraicGeometry.IsEtale.instIsStableUnderBaseChangeScheme, AlgebraicGeometry.IsSeparated.instQuasiSeparated",
+   "date": "2026-10-23",
+   "verdict": "no match: returned scheme etale definitions, composition/base-change instances and finite-morphism fibre results do not state this residual relation theorem over an algebraic space"
+  },
+  {
+   "tool": "grep",
+   "query": "AlgebraicSpace|residueField.*[Rr]elation|[Rr]elation.*residueField",
+   "results": "0 hits: ",
+   "date": "2026-10-23",
+   "verdict": "no match: returned scheme etale definitions, composition/base-change instances and finite-morphism fibre results do not state this residual relation theorem over an algebraic space"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-finite-chart-fibres-field-quasicompact",
+  "date": "2026-10-24",
+  "group": "Q92"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Affine PGL quotients with closed orbits and zero-dimensional stabilizers. Supporting affine-quotient step: Adequate moduli spaces are universal for separated targets. Alper Theorem 7.2.1, locally separated case through Proposition 7.1.1: Theorem 5.3.1(3),(5), printed pp.29--30; these supply conditions (a),(b) used in Proposition 7.1.1. Supporting input for Theorem 5.3.1(3),(5): Topology of rational points of quasi-separated algebraic spaces. Supporting input: Field monomorphisms representing points of a quasi-separated space. Pointwise finiteness criterion: Stacks 03JV, condition (2) implies (6), used after refining the atlas over affine opens of S. Supporting input: Tag 03JU (lemma-R-finite-above-x), first proof paragraph identifying the pair fibre with the residual fibre product, followed by the paragraph proving (2) to (3); that paragraph only needs finiteness of the self-pair fibre at the chosen point.",
+   "via": [
+    "lem-sfb-finite-chart-fibres-field-quasicompact",
+    "lem-sfb-qs-space-field-monomorphism",
+    "lem-sfb-qs-space-rational-point-topology",
+    "lem-sfb-adequate-geometric-fibres-submersion",
+    "lem-sfb-adequate-locally-separated-universality",
+    "lem-sfb-affine-pgl-finite-stabilizer-quotient",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-chart-pair-finite-residual-relation",
+  "worker": "stage1",
+  "summary": "Expanded Tag 03JU locally using existing residue-point monicity, the field-valued criterion for universal injectivity, etale fibre classification and monomorphisms into field coproducts. The finite pair-fibre hypothesis is used only to bound |E|. The statement is unchanged; no new nodes or Mathlib leaves are needed.",
+  "blueprint": "Supports the recorded alteration/moduli prerequisite chain under det-thm-sf-ctf-stability-direct-images (3); realizes the local Tag 03JU (2) to (3) argument without strengthening its chart assumptions. The current latest blueprint direct-image proof was read; the inherited blueprint.from.node is null and is retained as returned by blueprint_refs.py ancestor.",
+  "tool_uses": [
+   {
+    "node": "lem-trf-space-fibre-products-etale-covers",
+    "why": "Sheaf fibre-product existence and its universal property are generic constructions used for the chart relation, with no replacement of the unit route."
+   },
+   {
+    "node": "lem-weil-pbc-etale-fibre-discrete-separable-points",
+    "why": "The scheme-theoretic fibre classification is applied to the two etale schemes over the field; the unit has no more specific scheme-fibre classification."
+   },
+   {
+    "node": "lem-weil-pbc-scheme-coproduct-family",
+    "why": "Open component inclusions of a scheme coproduct identify the subset-of-components map as an open immersion; this is a generic scheme construction."
+   },
+   {
+    "node": "lem-weil-pbc-etale-composition-cancellation",
+    "why": "Etaleness of open immersions and composition finishes each projection; this is generic morphism permanence, not a different direct-image argument."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-trf-space-fibre-products-etale-covers",
+  "lem-weil-pbc-etale-fibre-discrete-separable-points",
+  "lem-weil-pbc-scheme-coproduct-family",
+  "lem-weil-pbc-etale-composition-cancellation"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q45-3052b7ddf",
+  "group": "Q45",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q45-3052b7ddf (reviewer sub-agent of L); spot-checked: I read the item, the report and every cited statement in full. The delivery creates no new nodes and leaves the statement and stmt_deps unchanged. The item is still unsplit in clones/live and clones/side-live, so nothing has superseded it. The statement agrees with Stacks decent-spaces.tex Tag 03JU (lemma-R-finite-above-x): its first proof paragraph and the (2)=>(3) paragraph use only a finite self-pair fibre at the chosen chart point. I tested the statement on a Galois field chart, on A^1/Z at a closed point (holds), and at the generic point, where the hypothesis fails and E = coproduct over Z of Spec C(t) is not quasi-compact, so the hypothesis is necessary. Step 1: the residue-point monomorphism makes j: E->R monic by coordinatewise cancellation. Step 2: def-weil-radicial-morphism (1)=>(2) makes j injective on points, so |E| injects into the finite pair fibre. Step 3: representable etale gives h_nu: D_nu->T etale, and m_nu is monic. Step 4: the etale-fibre lemma writes D_nu as a disjoint union of finite separable field spectra, and the monomorphism-into-field-coproduct lemma (the 03DP step, infinite index sets allowed) identifies m_nu with a subset of components. Step 5: by the coproduct lemma m_nu is an open immersion, and composition-cancellation (1),(2) makes q_nu etale. Step 6: a finite space is quasi-compact and the opens of Spec K are only the empty set and Spec K, so both projections are quasi-compact. proof_deps equals the union of the uses. Duplicate search (03JU across the DAG): lem-sfb-finite-point-self-relation-field-monomorphism is the (3)=>(4) implication, a different result, and no node states this one. I accept the four declared tool_uses (trf fibre products, etale fibre classification, coproduct family, etale composition) as generic black boxes. Ten Mathlib searches are recorded with a correct no-match verdict. The null blueprint.from.node is inherited from the created-node chain, not this delivery's fault; noted for the maintainer. No SGA. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.ChartPairFiniteResidualRelation",
+  "declaration": "AlgebraicGeometry.AlgebraicSpace.chart_pair_finite_residual_relation",
+  "file": "lean/Sheaf/AlgebraicGeometry/ChartPairFiniteResidualRelation.lean",
+  "statement": "theorem chart_pair_finite_residual_relation {S : Scheme.{u}} (X : AlgebraicSpace S) (U : Over S) (a : yoneda.obj U ⟶ X.obj.obj) (ha : IsEtale a) (u : U.left) (R : Over S) (p₁ p₂ : R ⟶ U) (hR : IsPullback (yoneda.map p₁) (yoneda.map p₂) a a) (hfinite : Set.Finite {r : R.left | p₁.left r = u ∧ p₂.left r = u}) : ∃ (E : Over S) (q₁ q₂ : E ⟶ Over.mk (U.left.fromSpecResidueField u ≫ U.hom)), IsPullback (yoneda.map q₁) (yoneda.map q₂) (yoneda.map (Over.homMk (U.left.fromSpecResidueField u) rfl) ≫ a) (yoneda.map (Over.homMk (U.left.fromSpecResidueField u) rfl) ≫ a) ∧ (Etale q₁.left ∧ QuasiCompact q₁.left) ∧ (Etale q₂.left ∧ QuasiCompact q₂.left)",
+  "branch": "sheaf-dag",
+  "by": "Q153",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-be7b3c59f",
+  "group": "Q153",
+  "result": "pass",
+  "note": "Read node, Stacks 03JU (decent-spaces.tex l.317-397), module, report, AlgebraicSpace/IsEtale/IsRepresentableWith and fibre-product framework, and lean records of all 8 stmt_deps. Clauses match: canonical b = homMk(fromSpecResidueField u) ≫ a with canonical structure map; R and E fixed by Yoneda IsPullback squares over X (∃E is equivalent and records representability); hfinite is exactly the (u,u) pair fibre; both projections Etale ∧ QuasiCompact (Mathlib QuasiCompact is equivalent to the node's affine-open condition). No surjectivity, QC of U, fibre finiteness, Nonempty or extra universe. lean.statement verbatim; node changed only in lean; no new nodes or defs; sorry proof; docstrings carry source, blueprint tag and the 6 proof steps. Not recompiled (no file changed). Second reading is a self-reading by Q153, noted in the report."
+ }
+}

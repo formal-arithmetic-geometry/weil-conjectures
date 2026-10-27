@@ -1,0 +1,120 @@
+{
+ "id": "lem-weil-pbc-marked-curve-diagram-refinement",
+ "kind": "statement",
+ "title": "Choose a common neighbourhood making an existing marked curve diagram good",
+ "statement": "Let f:X→S, η∈U⊆S, g:V→U finite surjective universally injective, and σ:Z→V with every point mapping to η in S. Fix finitely many commuting diagrams Y_i→B_i→T_i→V with finite etale T_i→V, open Y_i→B_i, smooth proper B_i→T_i and finite surjective ν:∐Y_i→X_V. Let W⊆X_V make ν a thickening. Suppose every point s∈T_i over η has geometrically connected proper fibre of dimension at most one and lies in the image of the marked open in Y_i. Then a restriction to some open neighbourhood U'⊆S of η gives V'→U', a lift of σ and an open immersion V'→V compatible over S, with restricted diagrams all of whose proper fibres satisfy those conditions, smooth surjective open parts, and a marked open surjecting onto every T'_i and making ν' a thickening. The old and new diagrams are related by cartesian squares over V'→V, commuting with j_i,p_i. [def-pc-scheme] [def-pc-scheme-fibre] [def-sbc-smooth-morphisms] [def-sbc-first-order-thickening]",
+ "source": {
+  "document": "literature/stacks-project/more-morphisms.tex",
+  "place": "Tag 0GK7, proof of lemma-make-good-curves: final base restrictions and simultaneous shrinking"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-scheme-fibre",
+  "def-sbc-smooth-morphisms",
+  "def-sbc-first-order-thickening"
+ ],
+ "proof": [
+  {
+   "text": "For each T_i, geometric connectedness is open in the proper smooth family,\nand the fibre-dimension-at-most-one locus is open by proper upper semicontinuity.\nThe marked open in Y_i is smooth over T_i, so its image is open. Intersect these\nthree opens. The hypotheses put every point above η in this intersection.\nEach composite T_i→V→U is finite. Apply the simultaneous finite-image shrinking\nlemma to these composites and the threefold intersections, obtaining an affine\nneighbourhood U₀ of η inside U whose inverse images lie in all those intersections.\nThe specified σ maps into its inverse image because every point maps to η.\nApply the restriction theorem to U₀. It provides U', V' and the restricted diagram.\nBase change preserves finiteness, surjectivity, etaleness, open immersions, smoothness,\nproperness, and thickenings. Coproducts commute with this base change; the original\ncommuting triangles restrict to the new ones. The three chosen loci give precisely\nthe asserted fibre conditions and marked surjectivity. Since the marked open is\ncontained in Y'_i, the latter surjectivity also gives surjectivity of Y'_i→T'_i.\nAll comparison squares are restriction pullback squares. The specified map σ lifts\nuniquely because its image lies in V'. If n=0, take U'=U and all restrictions at the\ntop open; all component conditions are vacuous. No reducedness or genericity is needed.",
+   "uses": [
+    "lem-weil-pbc-marked-curve-diagram-restriction",
+    "lem-weil-pbc-finite-images-neighbourhood-shrinking",
+    "lem-weil-pbc-proper-flat-geometric-components-locally-constant",
+    "lem-weil-pbc-proper-fibre-dimension-upper-semicontinuous"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-marked-curve-diagram-restriction",
+  "lem-weil-pbc-finite-images-neighbourhood-shrinking",
+  "lem-weil-pbc-proper-flat-geometric-components-locally-constant",
+  "lem-weil-pbc-proper-fibre-dimension-upper-semicontinuous"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/more-morphisms.tex",
+  "place": "Tag 0GK7, explicit Lean interface for the indicated part of the existing proof"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Spread a finite diagram of smooth proper curves with a marked open from a generic residue field to an open neighbourhood",
+   "results": "8 hits including spread_out_of_isGermInjective and affine-transition limit APIs; no marked diagram result",
+   "date": "2026-10-25",
+   "verdict": "ingredients only"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Base change of a finite diagram of schemes and their coproduct with cartesian comparison squares",
+   "results": "8 hits including finite base-change stability and finite coproducts of schemes; no complete interface",
+   "date": "2026-10-25",
+   "verdict": "no exact statement"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.FinitaryPreExtensive.isPullback_sigmaDesc",
+   "results": "1 hit: the general cartesian coproduct comparison",
+   "date": "2026-10-25",
+   "verdict": "base-change ingredient only"
+  },
+  {
+   "tool": "grep",
+   "query": "closedImmersion.*locus|closedImmersionLocus|exists.*marked.*diagram; rg marked curve diagram in the library and blueprint",
+   "results": "No exact declaration; existing SpreadMarkedCurveDiagram is the parent. blueprint_refs search marked curve diagram: 0 matches",
+   "date": "2026-10-25",
+   "verdict": "no duplicate"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.SpreadMarkedCurveDiagram",
+  "date": "2026-10-25",
+  "group": "Z5"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "Tag 0GK7, proof of lemma-make-good-curves: Choose a common neighbourhood making an existing marked curve diagram good",
+   "via": [
+    "lem-weil-pbc-spread-marked-curve-diagram"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.MarkedCurveDiagramRefinement",
+  "file": "lean/Sheaf/AlgebraicGeometry/MarkedCurveDiagramRefinement.lean",
+  "declaration": "AlgebraicGeometry.exists_marked_curve_diagram_refinement",
+  "statement": "theorem exists_marked_curve_diagram_refinement\n    {X S V Z : Scheme.{u}} (f : X ⟶ S) (U : S.Opens) (η : S) (hη : η ∈ U)\n    (g : V ⟶ U.toScheme) [IsFinite g] [Surjective g] [UniversallyInjective g]\n    (σ : Z ⟶ V) (hσ : ∀ z : Z, (g ≫ U.ι) (σ z) = η)\n    (n : ℕ) (T Y B : Fin n → Scheme.{u}) (t : ∀ i, T i ⟶ V)\n    (j : ∀ i, Y i ⟶ B i) (p : ∀ i, B i ⟶ T i)\n    (ν : (∐ Y) ⟶ pullback f (g ≫ U.ι)) [IsFinite ν] [Surjective ν]\n    (hcomm : ∀ i, Sigma.ι Y i ≫ ν ≫ pullback.snd f (g ≫ U.ι) = j i ≫ p i ≫ t i)\n    (ht : ∀ i, IsFinite (t i) ∧ Etale (t i))\n    (hj : ∀ i, IsOpenImmersion (j i)) (hp : ∀ i, Smooth (p i) ∧ IsProper (p i))\n    (W : (pullback f (g ≫ U.ι)).Opens) (hW : IsThickening (pullback.snd ν W.ι))\n    (hgood : ∀ i (s : T i), (t i ≫ g ≫ U.ι) s = η →\n      GeometricallyConnected ((p i).fiberToSpecResidueField s) ∧\n      topologicalKrullDim ((p i).fiber s) ≤ 1 ∧\n      s ∈ Set.range (((Sigma.ι Y i ≫ ν) ⁻¹ᵁ W).ι ≫ j i ≫ p i)) :\n    ∃ (U' : S.Opens) (_ : η ∈ U') (V' : Scheme.{u}) (g' : V' ⟶ U'.toScheme),\n      IsFinite g' ∧ Surjective g' ∧ UniversallyInjective g' ∧\n      ∃ (aV : V' ⟶ V) (σ' : Z ⟶ V'),\n        IsOpenImmersion aV ∧ σ' ≫ aV = σ ∧\n        aV ≫ g ≫ U.ι = g' ≫ U'.ι ∧\n        ∃ (T' Y' B' : Fin n → Scheme.{u})\n          (t' : ∀ i, T' i ⟶ V') (j' : ∀ i, Y' i ⟶ B' i)\n          (p' : ∀ i, B' i ⟶ T' i)\n          (ν' : (∐ Y') ⟶ pullback f (g' ≫ U'.ι)),\n          IsFinite ν' ∧ Surjective ν' ∧\n          (∀ i, Sigma.ι Y' i ≫ ν' ≫ pullback.snd f (g' ≫ U'.ι) =\n            j' i ≫ p' i ≫ t' i) ∧\n          (∀ i, IsFinite (t' i) ∧ Etale (t' i)) ∧\n          (∀ i, IsOpenImmersion (j' i)) ∧\n          (∀ i, Smooth (j' i ≫ p' i) ∧ Surjective (j' i ≫ p' i)) ∧\n          (∀ i, Smooth (p' i) ∧ IsProper (p' i) ∧\n            ∀ s : T' i, GeometricallyConnected ((p' i).fiberToSpecResidueField s) ∧\n              topologicalKrullDim ((p' i).fiber s) ≤ 1) ∧\n          (∃ W' : (pullback f (g' ≫ U'.ι)).Opens,\n            (∀ i, Surjective (((Sigma.ι Y' i ≫ ν') ⁻¹ᵁ W').ι ≫ j' i ≫ p' i)) ∧\n            IsThickening (pullback.snd ν' W'.ι)) ∧\n          ∃ (aY : ∀ i, Y' i ⟶ Y i) (aB : ∀ i, B' i ⟶ B i)\n            (aT : ∀ i, T' i ⟶ T i),\n            ∀ i,\n              IsPullback (aY i) (j' i ≫ p' i ≫ t' i) (j i ≫ p i ≫ t i) aV ∧\n              IsPullback (aB i) (p' i ≫ t' i) (p i ≫ t i) aV ∧\n              IsPullback (aT i) (t' i) (t i) aV ∧\n              j' i ≫ aB i = aY i ≫ j i ∧ p' i ≫ aT i = aB i ≫ p i",
+  "branch": "sheaf-dag",
+  "by": "Z5",
+  "date": "2026-10-25"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Z5",
+  "result": "pass",
+  "landing": "20261025T102011-L-3765735",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Z5",
+  "result": "pass",
+  "landing": "20261025T102011-L-3765735",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

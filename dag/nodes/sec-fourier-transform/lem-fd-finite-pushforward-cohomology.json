@@ -50,7 +50,32 @@
   "def-fd-artin-schreier-sheaf"
  ],
  "proof_split_by": "paragraphs",
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": [
+    "AlgebraicGeometry.Etale.mapDerivedCategoryLowerStarCompRightDerivedGlobalSectionsIso"
+   ]
+  },
+  "slopmaster2": {
+   "state": "closed",
+   "decls": [
+    {
+     "name": "AlgebraicGeometry.Etale.mapDerivedCategoryLowerStarCompRightDerivedGlobalSectionsIso",
+     "module": "WeilConjectures.SixFunctors.Finite.GlobalSections",
+     "lines": [
+      37,
+      51
+     ],
+     "kind": "def",
+     "sorry": false
+    }
+   ],
+   "missing": [],
+   "open": []
+  }
+ },
  "chapter": "sec-fourier-transform",
  "unit": "sk-lem-as-properties",
  "lean": {
@@ -63,5 +88,32 @@
   ],
   "sorry_free": true,
   "note": "recorded by L at 04:46 UTC from lean_audit (stage 2, rule 2 of the human: one definition per notion; a node whose notion has a declaration in the source repository is not stated again; audit state closed)"
+ },
+ "blueprint_update": {
+  "snapshot": "main-20261023-1620",
+  "commit": "7284bb09daf97437d544c51882b325f9c52cd345",
+  "changed": [
+   "proof"
+  ],
+  "statement": "1. For a finite morphism $\\pi:Y\\to X_0$ and a torsion etale sheaf $\\mathcal F$ on $Y$,\n\n   $$\n   H^q(X_0,\\pi_*\\mathcal F)\\cong H^q(Y,\\mathcal F)\\qquad(q\\geq0).\n   $$\n\n2. For a finite étale morphism $\\pi:Y\\to X_0$, a condensed ring $\\Lambda$ and a\n   $\\Lambda_Y$-module $\\mathcal F$ on $Y_{\\mathrm{proét}}$, one has\n   $R\\pi_*\\mathcal F\\simeq\\pi_*\\mathcal F$, and\n\n   $$\n   H^q(X_{0,\\mathrm{proét}},\\pi_*\\mathcal F)\\cong H^q(Y_{\\mathrm{proét}},\\mathcal F)\\qquad(q\\geq0).\n   $$",
+  "proof": [
+   {
+    "text": "*(1).* By [lemma-weil-pbc-finite-direct-image-exact] the functor $\\pi_*$ is exact and $R^q\\pi_*=0$ for $q>0$, so the Grothendieck spectral sequence of [lem-weil-pbc-grothendieck-spectral-sequence] for the composite $\\Gamma\\circ\\pi_*$ degenerates and computes the cohomology of $\\pi_*\\mathcal F$ as the cohomology of $\\mathcal F$; explicitly $H^q(X_0,\\pi_*\\mathcal F)=H^q(\\Gamma\\circ\\pi_*\\mathcal F)=H^q(\\Gamma_Y\\mathcal F)=H^q(Y,\\mathcal F)$.",
+    "uses": [
+     "lemma-weil-pbc-finite-direct-image-exact",
+     "lem-weil-pbc-grothendieck-spectral-sequence"
+    ],
+    "elementary": false
+   },
+   {
+    "text": "*(2).* A finite étale morphism is finite and of finite presentation, so $\\pi_*$ is exact on $\\Lambda_Y$-modules and $R\\pi_*\\mathcal F\\simeq\\pi_*\\mathcal F$ by [lem-fd-proetale-finite-pushforward-exact] (2). Its left adjoint $\\pi^*$ is exact ([det-prop-sfb-module-pullback-exact-main]), so $\\pi_*$ carries K-injective complexes to K-injective complexes: $\\operatorname{Hom}_{K}(C,\\pi_*I)=\\operatorname{Hom}_K(\\pi^*C,I)=0$ for acyclic $C$, as $\\pi^*C$ is acyclic. Let $\\mathcal F\\to I$ be a K-injective resolution in $\\Mod_{\\Lambda_Y}$ ([sk-def-sfb-module-derived-pushpull]). By exactness, $\\pi_*\\mathcal F\\to\\pi_*I$ is a K-injective resolution, and $\\Gamma(X_0,\\pi_*-)=\\Gamma(Y,-)$ since $(\\pi_*G)(X_0)=G(Y)$. Hence\n$$\nR\\Gamma(X_{0,\\mathrm{proét}},\\pi_*\\mathcal F)\\simeq\\Gamma(X_0,\\pi_*I)=\\Gamma(Y,I)\\simeq R\\Gamma(Y_{\\mathrm{proét}},\\mathcal F),\n$$\nand taking $H^q$ gives the isomorphism.",
+    "uses": [
+     "lem-fd-proetale-finite-pushforward-exact",
+     "sk-def-sfb-module-derived-pushpull"
+    ],
+    "elementary": false
+   }
+  ],
+  "note": "the current blueprint (main-20261023-1620, weil-conjectures-blueprint 7284bb09da) states or proves this differently; the node is proved in Lean: recorded 2026-10-23, not reopened"
  }
 }

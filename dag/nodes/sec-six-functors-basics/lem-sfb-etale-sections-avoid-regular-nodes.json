@@ -1,0 +1,293 @@
+{
+ "id": "lem-sfb-etale-sections-avoid-regular-nodes",
+ "kind": "statement",
+ "title": "Etale multisections avoid nodes on a regular nodal trait family",
+ "statement": "Let $R$ be a discrete valuation ring with fraction field $K$, and put $S=\\operatorname{Spec}R$ [def-sc-discrete-valuation-ring, def-pc-field-extension, def-weil-affine-spectrum]. Let $f:W\\to S$ be flat and locally of finite presentation [def-weil-flat-morphism, def-sbc-locally-finite-presentation], with nodal geometric curve fibres and smooth generic fibre. Assume that $W$ is regular [def-weil-regular-scheme]. Let $B\\to S$ be finite etale [def-weil-finite-integral-morphism, def-weil-etale-morphism], allowing $B=\\varnothing$. Every $S$-morphism $b:B\\to W$ factors through the relative smooth locus of $f$ [def-weil-open-immersion]. In particular, every section $S\\to W$ lies in that locus. Here nodal geometric curve fibres means reduced geometric fibres of pure dimension one whose nonsmooth closed points over an algebraically closed field $\\Omega$ have completed local ring $\\Omega[[u,v]]/(uv)$ [def-weil-geometric-fibre, def-weil-pure-dimension, def-sbc-smooth-morphisms, def-weil-pbc-adic-completion, def-weil-pbc-multivariate-power-series]; the fibres may be disconnected.",
+ "source": {
+  "document": "literature/stacks-project/models.tex",
+  "place": "Agent consequence of Tag 0CDD (lemma-etale-local-at-worst-nodal), nonzero-parameter case, and Tag 0CDC (example-blowup), regularity of xy=pi^n; extracted valuation argument from expanded common-model step 8. Etale trait stalks use more-algebra.tex Tag 0AP2 (lemma-Dedekind-etale-extension)."
+ },
+ "stmt_deps": [
+  "def-sc-discrete-valuation-ring",
+  "def-pc-field-extension",
+  "def-weil-affine-spectrum",
+  "def-weil-flat-morphism",
+  "def-sbc-locally-finite-presentation",
+  "def-weil-regular-scheme",
+  "def-weil-finite-integral-morphism",
+  "def-weil-etale-morphism",
+  "def-weil-open-immersion",
+  "def-weil-geometric-fibre",
+  "def-weil-pure-dimension",
+  "def-sbc-smooth-morphisms",
+  "def-weil-pbc-adic-completion",
+  "def-weil-pbc-multivariate-power-series"
+ ],
+ "proof": [
+  {
+   "text": "Let $W^{\\mathrm{sm}}$ be the union of the open neighbourhoods on which $f$ is smooth. Thus a point belongs to this open precisely when $f$ is smooth there. By [lem-trf-smooth-at-point-fibre-criterion], every point over the generic point of $S$ belongs to it: $f$ is flat and locally of finite presentation and the generic fibre is smooth. It suffices to rule out a point $\\beta\\in B$ above the closed point of $S$ for which $w=b(\\beta)$ is nonsmooth. Choose a uniformizer $\\pi$ of $R$. Apply [lem-sfb-trait-nodal-etale-dvr-model] at $w$. All its geometric-fibre hypotheses are those of the item, and the generic fibre is smooth. Obtain an etale local extension of DVRs $R\\to R'$, with the image of $\\pi$ still a uniformizer, a point $u\\in U$ over $w$, and etale maps $p:U\\to W$ and $q:U\\to M_n=\\operatorname{Spec}R'[x,y]/(xy-\\pi^n)$ over $S$, with $n\\geq1$.",
+   "uses": [
+    "lem-trf-smooth-at-point-fibre-criterion",
+    "lem-sfb-trait-nodal-etale-dvr-model"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/models.tex",
+    "place": "Tag 0CDD, lemma-etale-local-at-worst-nodal; smooth-generic refinement in Tag 0CDE, lemma-blowup-at-worst-nodal, first proof paragraph; morphisms.tex Tag 01V9"
+   }
+  },
+  {
+   "text": "The point $q(u)$ is the origin $o=(\\pi,x,y)$. Indeed it lies in the special fibre, since $u$ maps to $w$. By [lem-sfb-binomial-geometric-fibres], the special fibre of $M_n/R'$ is smooth off its crossing. Since $M_n/R'$ is flat and finitely presented by [lem-sfb-dvr-binomial-local-geometry], [lem-trf-smooth-at-point-fibre-criterion] makes $M_n\\to\\operatorname{Spec}R'$ smooth at any other special-fibre point. The etale map $\\operatorname{Spec}R'\\to S$ is smooth by [lem-weil-pbc-etale-smooth-zero-dimensional-fibres], so [lem-trf-smooth-composition] makes $M_n\\to S$ smooth near such a point. If $q(u)\\ne o$, the pointwise assertion of [lem-trf-etale-source-smoothness], applied first to $q$ and then to $p$, would make $f$ smooth at $w$, a contradiction.",
+   "uses": [
+    "lem-sfb-binomial-geometric-fibres",
+    "lem-sfb-dvr-binomial-local-geometry",
+    "lem-trf-smooth-at-point-fibre-criterion",
+    "lem-weil-pbc-etale-smooth-zero-dimensional-fibres",
+    "lem-trf-smooth-composition",
+    "lem-trf-etale-source-smoothness"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/models.tex",
+    "place": "Tag 0CDC, example-blowup, local models; morphisms.tex Tags 01V9 and 01VA; descent.tex Tag 036U"
+   }
+  },
+  {
+   "text": "Regularity of $W$ implies that $\\mathcal O_{W,w}$ is regular. Apply [lem-sfb-etale-stalk-invariants] to $p$ to deduce regularity of $\\mathcal O_{U,u}$, then to $q$ to deduce regularity of $\\mathcal O_{M_n,o}$. The final assertion of [lem-sfb-dvr-binomial-local-geometry] says that this local ring is regular exactly for $n=1$. Hence the chart equation is $xy=\\pi$, with $x$ and $y$ vanishing at $q(u)=o$.",
+   "uses": [
+    "lem-sfb-etale-stalk-invariants",
+    "lem-sfb-dvr-binomial-local-geometry"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/models.tex",
+    "place": "Tag 0CDC, example-blowup, regularity at the origin; more-algebra.tex Tag 0AH0, lemma-regular-etale-extension"
+   }
+  },
+  {
+   "text": "Form $T=B\\times_WU$. The two points $\\beta$ and $u$ have common image $w$. By [lem-weil-pbc-fibre-product-points], the points of $T$ over both are in bijection with $\\operatorname{Spec}(\\kappa(\\beta)\\otimes_{\\kappa(w)}\\kappa(u))$; this tensor product of two nonzero vector spaces over the field $\\kappa(w)$ is a nonzero ring, so it has a prime ideal, giving a point $t\\in T$ above both. The projection $T\\to B$ is etale by clause (1) of [lem-weil-pbc-etale-base-change-finite-limits]. Since $B\\to S$ is etale, clause (2) of [lem-weil-pbc-etale-composition-cancellation] makes $T\\to S$ etale. The point $t$ lies above the closed point of $S$. Apply [lem-sbc-etale-trait-stalk] to this very morphism and point. It gives the actual ring $D=\\mathcal O_{T,t}$, a domain DVR, and its canonical injective structural map $\\delta:R\\to D$, with $\\mathfrak m_D=(\\delta(\\pi))$.",
+   "uses": [
+    "lem-weil-pbc-fibre-product-points",
+    "lem-weil-pbc-etale-base-change-finite-limits",
+    "lem-weil-pbc-etale-composition-cancellation",
+    "lem-sbc-etale-trait-stalk"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0AP2, lemma-Dedekind-etale-extension, scheme-stalk version; morphisms.tex Tags 02GO and 02GN; schemes.tex Tag 01JT, lemma-points-fibre-product"
+   }
+  },
+  {
+   "text": "Pull back the functions $x,y$ from $M_1$ along $T\\to U\\to M_1$ and then to $D$. Call their images $a,c$. Because $t$ maps to $u$ and then to $o$, both $a,c$ lie in $\\mathfrak m_D$. Compatibility over $S$ gives $ac=\\delta(\\pi)$. Put $\\varpi=\\delta(\\pi)$. The equality $\\mathfrak m_D=(\\varpi)$ gives $a=\\varpi a_1$ and $c=\\varpi c_1$ for some $a_1,c_1\\in D$. Thus $\\varpi=\\varpi^2a_1c_1$. The element $\\varpi$ is nonzero by injectivity of $\\delta$ and nonzeroness of a DVR uniformizer. Cancellation in the domain $D$ gives $1=\\varpi a_1c_1\\in\\mathfrak m_D$, contradicting that a maximal ideal is proper. This is the elementary valuation obstruction; no completeness or choice of a lift of the whole multisection is used.",
+   "uses": [
+    "def-sc-discrete-valuation-ring"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00PD, lemma-characterize-dvr; elementary principal-maximal-ideal calculation in the chart of models.tex Tag 0CDC"
+   }
+  },
+  {
+   "text": "Therefore every point of $B$ maps into $W^{\\mathrm{sm}}$. The factorization through its open subscheme is obtained by restricting $b$: on $b^{-1}(V)$ for each open $V\\subseteq W^{\\mathrm{sm}}$, use the same map of structure sheaves as $b$. These maps agree on overlaps and cover $B$, and their composite with the inclusion is $b$; equivalently this is the open-subscheme description of [def-weil-open-immersion]. This also covers $B=\\varnothing$. Taking $B=S$ with its identity finite etale structure gives the section assertion.",
+   "uses": [
+    "def-weil-open-immersion"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Tags 01HE/01IO, open subschemes and open immersions; elementary restriction and gluing"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sc-discrete-valuation-ring",
+  "def-weil-open-immersion",
+  "lem-sbc-etale-trait-stalk",
+  "lem-sfb-binomial-geometric-fibres",
+  "lem-sfb-dvr-binomial-local-geometry",
+  "lem-sfb-etale-stalk-invariants",
+  "lem-sfb-trait-nodal-etale-dvr-model",
+  "lem-trf-etale-source-smoothness",
+  "lem-trf-smooth-at-point-fibre-criterion",
+  "lem-trf-smooth-composition",
+  "lem-weil-pbc-etale-base-change-finite-limits",
+  "lem-weil-pbc-etale-composition-cancellation",
+  "lem-weil-pbc-etale-smooth-zero-dimensional-fibres",
+  "lem-weil-pbc-fibre-product-points"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/models.tex",
+  "place": "Agent valuation argument from Tag 0CDD (lemma-etale-local-at-worst-nodal), Tag 0CDC (example-blowup), and more-algebra.tex Tags 0AH0 and 0AP2. The local chart and stalk theorems are existing nodes; the principal-ideal contradiction is written out."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "nodal|semistable|unramified.*smoothLocus|smoothLocus.*unramified",
+   "results": "{\"t\": \"2026-10-22T06:33:55Z\", \"tool\": \"grep\", \"query\": \"nodal|semistable|unramified.*smoothLocus|smoothLocus.*unramified\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: smooth-locus definitions, etale smoothness and formal unramifiedness do not assert avoidance of special-fibre nodes by an etale multisection of a regular nodal family."
+  },
+  {
+   "tool": "leansearch",
+   "query": "An unramified section of a regular semistable curve over a trait cannot meet a node in its special fibre",
+   "results": "{\"t\": \"2026-10-22T06:33:56Z\", \"tool\": \"leansearch\", \"query\": \"An unramified section of a regular semistable curve over a trait cannot meet a node in its special fibre\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.FormallyUnramified.recOn\", \"Algebra.unramifiedLocus\", \"AlgebraicGeometry.FormallyUnramified.casesOn\", \"RingHom.FormallyUnramified\", \"IsUnramifiedAt.of_liesOver_of_ne_bot\", \"Algebra.isOpen_unramifiedLocus\", \"AlgebraicGeometry.FormallyUnramified.formallyUnramified_of_affine_subset\", \"Ideal.ramificationIdx_eq_one_of_isUnramifiedAt\"], \"digest\": \"03db9c842526f1c7\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: smooth-locus definitions, etale smoothness and formal unramifiedness do not assert avoidance of special-fibre nodes by an etale multisection of a regular nodal family."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"smoothLocus\"",
+   "results": "{\"t\": \"2026-10-22T06:33:56Z\", \"tool\": \"loogle\", \"query\": \"\\\"AlgebraicGeometry\\\", \\\"smoothLocus\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Hom.smoothLocus\", \"AlgebraicGeometry.Scheme.Hom.dense_smoothLocus_of_perfectField\", \"AlgebraicGeometry.Scheme.Hom.genericPoint_mem_smoothLocus_of_perfectField\", \"AlgebraicGeometry.Scheme.Hom.smoothLocus_eq_top\", \"AlgebraicGeometry.Scheme.Hom.smoothLocus_eq_top_iff\", \"AlgebraicGeometry.Scheme.Hom.preimage_smoothLocus_eq\", \"AlgebraicGeometry.Scheme.Hom.isOpen_smoothLocus\", \"AlgebraicGeometry.Scheme.Hom.mem_smoothLocus\"], \"digest\": \"336f5d6238974823\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: smooth-locus definitions, etale smoothness and formal unramifiedness do not assert avoidance of special-fibre nodes by an etale multisection of a regular nodal family."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Every morphism from a finite etale scheme over a discrete valuation ring to a regular nodal curve family with smooth generic fibre lands in the relative smooth locus",
+   "results": "{\"t\": \"2026-10-22T06:33:58Z\", \"tool\": \"leanfinder\", \"query\": \"Every morphism from a finite etale scheme over a discrete valuation ring to a regular nodal curve family with smooth generic fibre lands in the relative smooth locus\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsEtale.instIsSmooth\", \"AlgebraicGeometry.IsSmoothOfRelativeDimension\", \"AlgebraicGeometry.IsSmooth\", \"Algebra.etaleLocus_eq_unramfiedLocus_inter_smoothLocus\", \"AlgebraicGeometry.instHasRingHomPropertyIsSmoothLocallyIsStandardSmooth\", \"AlgebraicGeometry.Scheme.Etale\", \"Algebra.IsStandardSmoothOfRelativeDimension.exists_etale_mvPolynomial\", \"AlgebraicGeometry.instHasRingHomPropertyIsSmoothOfRelativeDimensionLocallyIsStandardSmoothOfRelativeDimension\"], \"digest\": \"c61b603c8aae34df\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: smooth-locus definitions, etale smoothness and formal unramifiedness do not assert avoidance of special-fibre nodes by an etale multisection of a regular nodal family."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A section over an etale DVR cannot pass through xy equals pi on a regular semistable arithmetic surface",
+   "results": "{\"t\": \"2026-10-22T06:33:59Z\", \"tool\": \"leanfinder\", \"query\": \"A section over an etale DVR cannot pass through xy equals pi on a regular semistable arithmetic surface\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"StandardEtalePair.hasMap_X\", \"StandardEtalePair\", \"StandardEtalePair.HasMap\", \"StandardEtalePresentation.hasMap\", \"StandardEtalePresentation.P\", \"StandardEtalePair.existsUnique_hasMap_of_hasMap_quotient_of_sq_eq_bot\", \"Algebra.etaleLocus\", \"StandardEtalePresentation.exists_mul_aeval_x_g_pow_eq_aeval_x\"], \"digest\": \"000bf15a39a90e92\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: smooth-locus definitions, etale smoothness and formal unramifiedness do not assert avoidance of special-fibre nodes by an etale multisection of a regular nodal family."
+  },
+  {
+   "tool": "grep",
+   "query": "nodal|semistable|avoid.*singular",
+   "results": "{\"t\": \"2026-10-23T04:19:07Z\", \"tool\": \"grep\", \"query\": \"nodal|semistable|avoid.*singular\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern smoothness, etale morphisms, unramified algebras or elliptic good reduction, not the node-avoidance assertion."
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.IsEtale, AlgebraicGeometry.IsSmooth",
+   "results": "{\"t\": \"2026-10-23T04:19:08Z\", \"tool\": \"loogle\", \"query\": \"AlgebraicGeometry.IsEtale, AlgebraicGeometry.IsSmooth\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"loogle: unknown identifier 'AlgebraicGeometry.IsEtale'\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "invalid query: the endpoint does not know AlgebraicGeometry.IsEtale; replaced by the successful Algebra.Etale, IsDiscreteValuationRing query."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A section of a regular semistable curve over a discrete valuation ring avoids the nodes of the special fibre",
+   "results": "{\"t\": \"2026-10-23T04:19:09Z\", \"tool\": \"leansearch\", \"query\": \"A section of a regular semistable curve over a discrete valuation ring avoids the nodes of the special fibre\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"WeierstrassCurve.isGoodReduction_iff\", \"WeierstrassCurve.IsGoodReduction.mk\", \"WeierstrassCurve.IsGoodReduction.congr_simp\", \"WeierstrassCurve.IsGoodReduction.goodReduction\", \"WeierstrassCurve.isGoodReduction_iff_isElliptic_reduction\", \"WeierstrassCurve.IsGoodReduction\", \"WeierstrassCurve.IsMinimal.rec\", \"WeierstrassCurve.instIsIntegralOfIsMinimal\"], \"digest\": \"7977d549a5c97e77\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern smoothness, etale morphisms, unramified algebras or elliptic good reduction, not the node-avoidance assertion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A section through the singular point of xy equals pi contradicts that both coordinates lie in the maximal ideal of an unramified discrete valuation ring",
+   "results": "{\"t\": \"2026-10-23T04:19:16Z\", \"tool\": \"leanfinder\", \"query\": \"A section through the singular point of xy equals pi contradicts that both coordinates lie in the maximal ideal of an unramified discrete valuation ring\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.IsUnramifiedAt\", \"IsUnramifiedAt.of_liesOver_of_ne_bot\", \"Algebra.FormallyUnramified.of_map_maximalIdeal\", \"Algebra.isUnramifiedAt_iff_map_eq\", \"Algebra.FormallyUnramified.iff_map_maximalIdeal_eq\", \"Ideal.ramificationIdx_eq_one_of_isUnramifiedAt\", \"Algebra.isUnramifiedAt_iff_of_isDedekindDomain\", \"Valuation.Integers.maximalIdeal_eq_setOf_le_v_algebraMap\"], \"digest\": \"a9777344ef673116\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern smoothness, etale morphisms, unramified algebras or elliptic good reduction, not the node-avoidance assertion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Every map from a finite etale trait to a regular nodal curve over a DVR lands in its relative smooth locus",
+   "results": "{\"t\": \"2026-10-23T04:19:22Z\", \"tool\": \"leanfinder\", \"query\": \"Every map from a finite etale trait to a regular nodal curve over a DVR lands in its relative smooth locus\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsEtale.instIsSmooth\", \"Algebra.etaleLocus_eq_unramfiedLocus_inter_smoothLocus\", \"AlgebraicGeometry.IsSmoothOfRelativeDimension\", \"AlgebraicGeometry.instHasRingHomPropertyIsSmoothLocallyIsStandardSmooth\", \"AlgebraicGeometry.IsSmooth\", \"AlgebraicGeometry.Scheme.Etale\", \"Algebra.IsStandardSmoothOfRelativeDimension.exists_etale_mvPolynomial\", \"Algebra.etaleLocus\"], \"digest\": \"60b5a2954aaec23c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern smoothness, etale morphisms, unramified algebras or elliptic good reduction, not the node-avoidance assertion."
+  },
+  {
+   "tool": "loogle",
+   "query": "Algebra.Etale, IsDiscreteValuationRing",
+   "results": "{\"t\": \"2026-10-23T04:24:09Z\", \"tool\": \"loogle\", \"query\": \"Algebra.Etale, IsDiscreteValuationRing\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern smoothness, etale morphisms, unramified algebras or elliptic good reduction, not the node-avoidance assertion."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-common-nodal-model",
+  "date": "2026-10-22",
+  "group": "Q02"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong §3.8, last paragraph, printed pp.608--609: finite unramified Isom for unordered stable marked curves, and extension over a normal base. This is rigidity of stable pointed curves themselves, independent of any modification map.; rigidity input: Invariance of logarithmic pluricanonical lattices of semistable models; Common domination of marked nodal models over a discrete valuation ring; Agent consequence of Tag 0CDD (lemma-etale-local-at-worst-nodal), nonzero-parameter case, and Tag 0CDC (example-blowup), regularity of xy=pi^n; extracted valuation argument from expanded common-model step 8. Etale trait stalks use more-algebra.tex Tag 0AP2 (lemma-Dedekind-etale-extension).",
+   "via": [
+    "lem-sfb-common-nodal-model",
+    "lem-sfb-semistable-log-pluricanonical-lattices",
+    "lem-sfb-stable-pointed-isom-finite",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-etale-sections-avoid-regular-nodes",
+  "worker": "stage1",
+  "summary": "Preserved the statement. Reused all nodal chart, local regularity, etale-point and trait-stalk inputs already in the DAG, with no new nodes. Wrote the pointwise chart reduction, forced exponent one, and the explicit principal-maximal-ideal contradiction, then the open factorization. Checked all cited statements and edge cases.",
+  "blueprint": "The existing blueprint.from chain leads to det-thm-sf-ctf-stability-direct-images proof (3), the common marked nodal-model prerequisite: precisely the valuation argument extracted from common-model step 8. No imported blueprint node states this avoidance lemma.",
+  "tool_uses": [
+   {
+    "node": "lem-sbc-etale-trait-stalk",
+    "why": "Generic scheme-local tool: The canonical stalk of an etale scheme over a trait. Used only for its stated local assertion in the marked nodal-model valuation argument; it does not replace the unit route."
+   },
+   {
+    "node": "lem-trf-etale-source-smoothness",
+    "why": "Generic scheme-local tool: Smoothness is etale local on the source. Used only for its stated local assertion in the marked nodal-model valuation argument; it does not replace the unit route."
+   },
+   {
+    "node": "lem-trf-smooth-at-point-fibre-criterion",
+    "why": "Generic scheme-local tool: Pointwise smoothness from a smooth fibre. Used only for its stated local assertion in the marked nodal-model valuation argument; it does not replace the unit route."
+   },
+   {
+    "node": "lem-weil-pbc-etale-smooth-zero-dimensional-fibres",
+    "why": "Generic scheme-local tool: An etale morphism is smooth with zero-dimensional fibres. Used only for its stated local assertion in the marked nodal-model valuation argument; it does not replace the unit route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sbc-etale-trait-stalk",
+  "lem-trf-etale-source-smoothness",
+  "lem-trf-smooth-at-point-fibre-criterion",
+  "lem-weil-pbc-etale-smooth-zero-dimensional-fibres"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q21-4593cd409",
+  "group": "Q21",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q21-4593cd409 (reviewer sub-agent of L); spot-checked: I read the whole item and all 14 cited statements, plus models.tex 0CDC, 0CDD and the start of 0CDE, and schemes.tex 01JT. The statement is true and unchanged. The delivery adds no new nodes, and the re-split rule does not apply because the node was statement-only before. Step 1: the fibre criterion makes the generic fibre smooth, and the trait-model node gives an etale DVR chart with n>=1, maps over S and pi still a uniformizer; the item's nodal hypotheses match that node's. Step 2: the special fibre of xy=pi^n is smooth off the crossing, so by the fibre criterion, smooth composition and the pointwise etale-source clause applied to q then p, q(u) must be the origin. Step 3: regularity passes W->U->M_n through the etale-stalk equivalence, and the binomial local-geometry node then forces n=1. Step 4: T=B x_W U is etale over S, and the trait-stalk node makes D a DVR with m_D=(delta(pi)). Step 5: ac=varpi with a,c in m_D gives 1 in m_D; this is elementary and correct. Step 6: open factorization, also elementary. Edge cases: xy=pi^2 with x=y=pi shows regularity is needed; ramified traits are excluded by etaleness; empty B is vacuous. No duplicate found in the DAG. Batch 5: lem-trf-etale-source-smoothness, lem-trf-smooth-at-point-fibre-criterion and lem-trf-smooth-composition are generic scheme lemmas (036U, 01V9, 01VA), and the trait-model node reaches only the definition def-trf-strict-semistable-curve; none is a step of the trace formula or Poincare duality, so all are accepted. I accept the declared tool_uses. One C4 repair: step 4 applied the algebraic-space node lem-a1-space-fibre-product-point 'specialized to schemes', which needs |E| = scheme points, stated by no cited node. It now cites the scheme Mathlib leaf lem-weil-pbc-fibre-product-points (01JT) and says why the tensor product of the residue fields is nonzero; the source place, proof_deps and tool_uses are updated, which also removes that batch-5 flag. The corrected item is in fixes/dag/nodes/sec-six-functors-basics/.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.EtaleSectionsAvoidRegularNodes",
+  "declaration": "AlgebraicGeometry.etale_sections_factor_smoothLocus_of_regular_nodal",
+  "file": "lean/Sheaf/AlgebraicGeometry/EtaleSectionsAvoidRegularNodes.lean",
+  "statement": "theorem etale_sections_factor_smoothLocus_of_regular_nodal (R : Type u) [CommRing R] [IsDomain R] [IsDiscreteValuationRing R] (W : Scheme.{u}) (f : W ⟶ Spec (.of R)) [Flat f] [LocallyOfFinitePresentation f] (hfib : ∀ (Ω : Type u) [Field Ω] [IsAlgClosed Ω] (g : Spec (.of Ω) ⟶ Spec (.of R)), IsReduced (pullback f g) ∧ (pullback f g).IsPureDimension 1) (hnodal : ∀ (Ω : Type u) [Field Ω] [IsAlgClosed Ω] (g : Spec (.of Ω) ⟶ Spec (.of R)) (z : pullback (C := Scheme.{u}) f g), z ∈ closedPoints ↥(pullback (C := Scheme.{u}) f g) → z ∉ (pullback.snd f g).smoothLocus → Nonempty (@AlgEquiv Ω (AdicCompletion (IsLocalRing.maximalIdeal ((pullback f g).presheaf.stalk z)) ((pullback f g).presheaf.stalk z)) (MvPowerSeries (Fin 2) Ω ⧸ Ideal.span {(MvPowerSeries.X 0 : MvPowerSeries (Fin 2) Ω) * (MvPowerSeries.X 1 : MvPowerSeries (Fin 2) Ω)}) _ _ _ ((pullback.snd f g).completedLocalScalarMap z).toAlgebra inferInstance)) (hgeneric : Smooth (pullback.snd f (Spec.map (CommRingCat.ofHom (algebraMap R (FractionRing R)))))) (hregular : IsRegularScheme W) : (∀ (B : Scheme.{u}) (p : B ⟶ Spec (.of R)) [IsFinite p] [Etale p] (b : B ⟶ W), b ≫ f = p → ∃ lift : B ⟶ f.smoothLocus.toScheme, lift ≫ f.smoothLocus.ι = b) ∧ (∀ s : Spec (.of R) ⟶ W, s ≫ f = 𝟙 (Spec (.of R)) → ∃ lift : Spec (.of R) ⟶ f.smoothLocus.toScheme, lift ≫ f.smoothLocus.ι = s)",
+  "branch": "newtargets-dag",
+  "by": "NY",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-31fbffd93",
+  "group": "NY",
+  "result": "pass",
+  "note": "Statement matches the node clause by clause: DVR R with FractionRing, flat + locally finite presentation f, reduced pure-dimension-one geometric fibres (hfib), node condition at nonsmooth closed points with the canonical completedLocalScalarMap (same interface as exists_trait_nodal_etale_dvr_model), smooth generic fibre, IsRegularScheme W; both conclusions (finite étale B factoring through f.smoothLocus.ι, and sections) present. No extra hypotheses, one universe u. Edge cases covered: empty B, empty W, empty or disconnected fibres. Closed-point restriction is equivalent to the dependency's all-nonsmooth-points form under hfib (proof step 1 skips this; note only). lean.statement verbatim; only the lean field differs from the live node; no new nodes or dependency changes. No definitions, sorry only, docstrings give the source place, the blueprint id and all 6 proof steps. Inline completion rather than def-sfb-nodal-geometric-fibre-local-rings (not a stmt_dep) accepted. Not recompiled (no file changed); the worker reports a clean compile."
+ }
+}

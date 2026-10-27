@@ -1,0 +1,381 @@
+{
+ "id": "lem-trf-devissage-pointed-etale-refinement",
+ "kind": "statement",
+ "title": "Refining a pointed devissage along elementary etale target and base maps",
+ "statement": "Let $(Z,Y,i,\\pi,\\mathcal G,z,y,d)$ be a pointed affine one-step datum for $(\\mathcal F,X,B,x,b)$ as defined in [def-trf-pointed-scheme-devissage-data]. Suppose there is a commutative square of pointed schemes $(Y',y')\\to(Y,y)$ over $(B',b')\\to(B,b)$ whose horizontal maps are elementary etale. Then there exist an affine elementary etale map $(B'',b'')\\to(B',b')$, an affine open $Y''\\subset Y'\\times_{B'}B''$ containing its distinguished point $y''$, and an elementary etale map $(X'',x'')\\to(X,x)$ over $B''\\to B$, with $Z''=Z\\times_YY''$, such that the pulled-back finite morphism $\\pi'':Z''\\to Y''$, a closed immersion $i'':Z''\\hookrightarrow X''$ of finite presentation, the pullbacks $\\mathcal F'',\\mathcal G''$, and the marked points form a pointed affine one-step datum of the same smooth relative dimension $d$. The square with sides $i'',i,X''\\to X,Z''\\to Z$ is cartesian. With $h:Y''\\to Y$, there is a canonical isomorphism $h^*(\\pi_*\\mathcal G)\\cong\\pi''_*\\mathcal G''$. Consequently the pullback of any $\\alpha:\\mathcal O_Y^{\\oplus r}\\to\\pi_*\\mathcal G$ whose residue-field map at the generic point of $Y_b$ is an isomorphism has this same property at the generic point of $Y''_{b''}$, and its cokernel is $h^*\\operatorname{coker}\\alpha$. The map $h$ is elementary at the marked points; in particular $\\kappa(y'')=\\kappa(y)$ and $\\kappa(b'')=\\kappa(b)$ via the induced maps. All terminology, tensor pullbacks, fibre products, and cokernels are as in [def-trf-pointed-scheme-devissage-data].",
+ "source": {
+  "document": "literature/stacks-project/flat.tex",
+  "place": "Tag 05HE (lemma-elementary-etale-neighbourhood), diagram and proof; the same construction for the auxiliary datum omitting support-dimension equalities. Finite-pushforward base change and cokernels are the comparisons used in the proof of Tag 05HR (proposition-existence-complete-at-x)."
+ },
+ "stmt_deps": [
+  "def-trf-pointed-scheme-devissage-data"
+ ],
+ "proof": [
+  {
+   "text": "Choose an affine open $A\\subset B'$ containing $b'$, then an affine open $U\\subset Y'\\times_{B'}A$ containing $y'$, using [lem-weil-pbc-affine-opens-basis]. The composite $U\\to Y$ is etale by [lem-weil-pbc-etale-composition-cancellation], and elementary at $y'$ because open immersions preserve residue fields [lem-weil-pbc-residue-field-point-naturality]. The map $U\\to Y\\times_B A$ is etale: its composite to $Y$ and the projection to $Y$ are etale, the latter by [lem-weil-pbc-etale-scheme-base-change], so apply cancellation. First, $Y\\to B$ is smooth of relative dimension $d$ in the sense of [def-sbc-smooth-morphisms]: it is locally of finite presentation between affine schemes, hence of finite presentation and so of finite type by [lem-weil-pbc-qcqs-morphism-permanence] and [lem-weil-pbc-affine-scheme-qcqs], so each fibre $Y_t$ is of finite type over $\\kappa(t)$ by [lem-sfb-finite-type-composition-base-change]; it is irreducible of dimension $d$ by [def-trf-pointed-scheme-devissage-data], so $\\dim_{y_1}Y_t=\\dim Y_t=d$ at every $y_1\\in Y_t$ by [lem-sc-dimension-locally-algebraic]. Hence $U\\to A$ is smooth of relative dimension $d$ by [lem-sbc-smooth-relative-dimension-permanence]. It is locally of finite presentation by [def-sbc-smooth-morphisms], and of finite presentation by [lem-weil-pbc-qcqs-morphism-permanence] and [lem-weil-pbc-affine-scheme-qcqs], since source and target are affine.",
+   "uses": [
+    "lem-weil-pbc-affine-opens-basis",
+    "lem-weil-pbc-etale-composition-cancellation",
+    "lem-weil-pbc-residue-field-point-naturality",
+    "lem-weil-pbc-etale-scheme-base-change",
+    "lem-sbc-smooth-relative-dimension-permanence",
+    "def-sbc-smooth-morphisms",
+    "lem-weil-pbc-qcqs-morphism-permanence",
+    "lem-weil-pbc-affine-scheme-qcqs",
+    "lem-sfb-finite-type-composition-base-change",
+    "def-trf-pointed-scheme-devissage-data",
+    "lem-sc-dimension-locally-algebraic"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/flat.tex",
+    "place": "Tag 05HE (lemma-elementary-etale-neighbourhood), affine localization and smooth relative dimension in the proof."
+   }
+  },
+  {
+   "text": "Put $k=\\kappa(b')=\\kappa(b)$. The marked residue field of $U$ is $\\kappa(y')=\\kappa(y)$, compatibly over $k$. This extension is purely transcendental by [def-trf-pointed-scheme-devissage-data]. Its transcendence basis is finite: $U_{b'}$ is of finite type over $k$ by [lem-sfb-finite-type-composition-base-change] (finite presentation implies finite type by the definitions), so [lem-kun-finite-type-residue-trdeg] gives finite transcendence degree; an algebraically independent generating set in [def-trf-purely-transcendental-extension] therefore has finite cardinality. Apply [lem-trf-finite-smooth-integral-base-refinement] to $S_0=A$, $Y_0=U$, $n=d$, and $W_0=U$ with $\\pi_0=\\mathrm{id}_U$ and $w_0=y_0=y'$. The identity is finite and its fibre is a singleton by definition. We obtain an affine elementary etale $(C,c)\\to(A,b')$ and a quasi-compact open $V\\subset U\\times_A C$, smooth of relative dimension $d$ with geometrically integral fibres, containing a point $v$ with residue field $\\kappa(y)$; also $\\kappa(c)=\\kappa(b)$.",
+   "uses": [
+    "def-trf-pointed-scheme-devissage-data",
+    "lem-sfb-finite-type-composition-base-change",
+    "lem-kun-finite-type-residue-trdeg",
+    "def-trf-purely-transcendental-extension",
+    "lem-trf-finite-smooth-integral-base-refinement"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/flat.tex",
+    "place": "Tag 05HE, final paragraph: select the component through the marked point and spread geometrically irreducible fibres; Tag 057K supplies the existing packaged component-spreading result."
+   }
+  },
+  {
+   "text": "Choose an affine open $W\\subset V$ containing $v$ by [lem-weil-pbc-affine-opens-basis]. The morphism $V\\to C$ is smooth, hence flat and locally of finite presentation by [lem-pc-smooth-flat], and open by [lem-weil-pbc-flat-lfp-open]. Thus its image of $W$ is an open neighbourhood of $c$. Choose a principal open $B''=D(a)\\subset C$ containing $c$ and contained in this image by [lem-weil-pbc-spec-localization-away-basic-open]. It is affine with open-immersion inclusion by [lem-weil-pbc-principal-localization-open-immersion]. Put $Y''=W\\times_C B''$. It is affine by [lem-weil-pbc-fibre-product-affine-spectra], and open in $Y'\\times_{B'}B''$. Every fibre is nonempty, by the choice of $D(a)$, and is an open subscheme of the corresponding geometrically integral fibre of $V$. After any field extension it remains nonempty by [lem-pc-field-extension-surjective] and [lem-weil-pbc-surjective-base-change], and open in an integral scheme, hence irreducible and reduced: any two nonempty opens intersect, and restrictions of a reduced structure sheaf are reduced. Thus these fibres are geometrically integral in [def-pc-geometrically-irreducible]. Smooth relative dimension $d$ is unchanged by open restriction and base change, using [lem-sbc-smooth-relative-dimension-permanence] and the etaleness of open immersions. Each fibre $Y''_t$ is irreducible and of finite type over $\\kappa(t)$ (an open of the finite-type affine $W_t$), and $\\dim_{y_1}Y''_t=d$ at its points, so $\\dim Y''_t=d$ by [lem-sc-dimension-locally-algebraic]. The marked point $y''$ is the restriction of $v$; the maps $(B'',b'')\\to(B',b')$ and $h:(Y'',y'')\\to(Y,y)$ are elementary by composition and open-immersion invariance of residue fields.",
+   "uses": [
+    "lem-weil-pbc-affine-opens-basis",
+    "lem-pc-smooth-flat",
+    "lem-weil-pbc-flat-lfp-open",
+    "lem-weil-pbc-spec-localization-away-basic-open",
+    "lem-weil-pbc-principal-localization-open-immersion",
+    "lem-weil-pbc-fibre-product-affine-spectra",
+    "def-pc-geometrically-irreducible",
+    "lem-sbc-smooth-relative-dimension-permanence",
+    "lem-weil-pbc-etale-composition-cancellation",
+    "lem-weil-pbc-etale-scheme-base-change",
+    "lem-weil-pbc-residue-field-point-naturality",
+    "lem-pc-field-extension-surjective",
+    "lem-weil-pbc-surjective-base-change",
+    "lem-sc-dimension-locally-algebraic"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/flat.tex",
+    "place": "Tag 05HE, final two sentences: shrink first the target and then the base to make both affine without empty fibres."
+   }
+  },
+  {
+   "text": "Set $Z''=Z\\times_Y Y''$. The morphism $\\pi'':Z''\\to Y''$ is finite and $Z''$ is affine by [lem-weil-pbc-finite-morphism-permanence]. Its projection $e:Z''\\to Z$ is etale by [lem-weil-pbc-etale-scheme-base-change]. Every point over $y''$ maps to $z$, since $\\pi^{-1}(y)=\\{z\\}$. By [lem-weil-pbc-fibre-product-points], these points correspond to primes of $\\kappa(z)\\otimes_{\\kappa(y)}\\kappa(y'')$. The field map $\\beta:\\kappa(y)\\to\\kappa(y'')$ is an isomorphism, so $a\\otimes b\\mapsto a\\,\\pi^\\sharp(\\beta^{-1}(b))$ identifies this tensor ring with $\\kappa(z)$. It has one prime. Denote the resulting point by $z''$. By [lem-weil-pbc-fibre-product-point-residue-field], the canonical map $\\kappa(z)\\to\\kappa(z'')$ is an isomorphism. This proves the singleton-fibre requirement and the pointed hypothesis for the ambient lift.",
+   "uses": [
+    "lem-weil-pbc-finite-morphism-permanence",
+    "lem-weil-pbc-etale-scheme-base-change",
+    "lem-weil-pbc-fibre-product-points",
+    "lem-weil-pbc-fibre-product-point-residue-field"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/flat.tex",
+    "place": "Tag 05HE, first paragraph and the finite/singleton-fibre verification in the second paragraph."
+   }
+  },
+  {
+   "text": "Apply [lem-trf-pointed-etale-ambient-lift] with $S=B$, $S_1=B''$, $W=Z''$, $j=i$, $b=e$, and $r:Z''\\to Y''\\to B''$. Its base and $Z$ residue-field hypotheses were verified in steps 3 and 4. It supplies an affine $X''$, a closed immersion $i'':Z''\\hookrightarrow X''$ of finite presentation, an elementary etale $(X'',x'')\\to(X,x)$, and the required cartesian square, compatibly over $B''\\to B$. Here $x''=i''(z'')$. In particular the source morphism to $B''$ is locally of finite type: $X\\to B$ is finite type because it is locally finite type and quasi-compact by [lem-weil-pbc-qcqs-morphism-permanence] and [lem-weil-pbc-affine-scheme-qcqs]; $X\\times_B B''$ is affine by [lem-weil-pbc-fibre-product-affine-spectra], and its map to $B''$ is finite type by [lem-sfb-finite-type-composition-base-change]. The affine etale map $X''\\to X\\times_B B''$ is of finite presentation, hence finite type, by the same qcqs permanence statement. Composing gives finite type, hence locally finite type, over $B''$.",
+   "uses": [
+    "lem-trf-pointed-etale-ambient-lift",
+    "lem-weil-pbc-qcqs-morphism-permanence",
+    "lem-weil-pbc-affine-scheme-qcqs",
+    "lem-sfb-finite-type-composition-base-change",
+    "def-weil-finite-type-morphism",
+    "def-weil-etale-morphism",
+    "lem-weil-pbc-fibre-product-affine-spectra"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/flat.tex",
+    "place": "Tag 05HE, first paragraph: lift the affine etale neighbourhood across the closed immersion (Tag 057R); use B-double-prime consistently in the ambient base change."
+   }
+  },
+  {
+   "text": "Let $g:X''\\to X$, and put $\\mathcal F''=g^*\\mathcal F$, $\\mathcal G''=e^*\\mathcal G$. They are quasi-coherent and of finite type by [lem-weil-pbc-module-pullback-quasi-coherent] and [lem-weil-pbc-module-pullback-finite-type]. The closed immersion $i$ is affine: over an affine open of $X$ its inverse image is the spectrum of the quotient by its defining ideal [def-weil-closed-immersion]. Therefore the cartesian square in step 5 and [lem-weil-pbc-affine-pushforward-base-change](1) give $g^*i_*\\mathcal G\\cong i''_*e^*\\mathcal G$. Pull back the specified isomorphism $i_*\\mathcal G\\cong\\mathcal F$ to obtain $i''_*\\mathcal G''\\cong\\mathcal F''$. Together with steps 3--5, this verifies every condition of [def-trf-pointed-scheme-devissage-data]: affineness, marked incidence, singleton finite fibre, smooth geometrically irreducible fibres of dimension $d$, finite-presentation closed immersion, and the module isomorphism. The field extension $\\kappa(y'')/\\kappa(b'')$ is the old purely transcendental extension through the induced field isomorphisms.",
+   "uses": [
+    "lem-weil-pbc-module-pullback-quasi-coherent",
+    "lem-weil-pbc-module-pullback-finite-type",
+    "def-weil-closed-immersion",
+    "lem-weil-pbc-affine-pushforward-base-change",
+    "def-trf-pointed-scheme-devissage-data"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/flat.tex",
+    "place": "Tag 05HE, second paragraph: affine base change of the closed pushforward; Tag 02KG (lemma-affine-base-change)."
+   }
+  },
+  {
+   "text": "The finite morphism $\\pi$ is affine by [def-weil-finite-integral-morphism]. Apply [lem-weil-pbc-affine-pushforward-base-change](1) to its cartesian base change along $h$. The resulting canonical map is the required isomorphism $h^*(\\pi_*\\mathcal G)\\cong\\pi''_*\\mathcal G''$. In particular it identifies the pulled-back $\\alpha$ with a map $\\alpha'':\\mathcal O_{Y''}^{\\oplus r}\\to\\pi''_*\\mathcal G''$: [lem-weil-pbc-module-pullback-structure-sheaf] identifies the structure sheaves, and finite direct sums in the tensor definition [def-pc-module-pullback] are carried to finite direct sums.",
+   "uses": [
+    "def-weil-finite-integral-morphism",
+    "lem-weil-pbc-affine-pushforward-base-change",
+    "lem-weil-pbc-module-pullback-structure-sheaf",
+    "def-pc-module-pullback"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/flat.tex",
+    "place": "Tag 02KG (lemma-affine-base-change), applied to pi; the alpha comparison used in Tag 05HR."
+   }
+  },
+  {
+   "text": "Write $\\xi''$ and $\\xi$ for the unique generic points of the nonempty irreducible fibres $Y''_{b''}$ and $Y_b$. The map $U\\to Y\\times_B A$ is etale by step 1. Base changing it over $A$ to $\\operatorname{Spec}\\kappa(b'')$, then restricting to the open $Y''_{b''}\\subset U\\times_A\\operatorname{Spec}\\kappa(b'')$, gives an etale $h_b:Y''_{b''}\\to Y_b$, since $\\kappa(b'')=\\kappa(b)$, by [lem-weil-pbc-etale-scheme-base-change] and [lem-weil-pbc-etale-composition-cancellation]. It is flat and locally of finite presentation by [def-weil-etale-morphism], hence open by [lem-weil-pbc-flat-lfp-open]. Its image is a nonempty open of the irreducible $Y_b$, so contains $\\xi$. On the other hand every point of $Y''_{b''}$ is a specialization of $\\xi''$, so its image is a specialization of $h_b(\\xi'')$ by continuity. In particular $\\xi$ is a specialization of $h_b(\\xi'')$. The only point specializing to the generic point of an irreducible scheme is that generic point itself (the two points have the same closure and a scheme is $T_0$). Thus $h_b(\\xi'')=\\xi$.",
+   "uses": [
+    "lem-weil-pbc-etale-scheme-base-change",
+    "def-weil-etale-morphism",
+    "lem-weil-pbc-flat-lfp-open",
+    "lem-weil-pbc-etale-composition-cancellation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/flat.tex",
+    "place": "Tag 05HR, generic-fibre basis after elementary etale refinement; openness is Tag 01UA (lemma-fppf-open)."
+   }
+  },
+  {
+   "text": "For $\\mathcal H=\\pi_*\\mathcal G$, the natural stalk formula [lem-weil-pbc-module-stalk-pullback] and step 8 identify the residue-field map of $h^*\\alpha$ at $\\xi''$ with\n$$\\bigl(\\alpha_\\xi\\otimes_{\\mathcal O_{Y,\\xi}}\\kappa(\\xi)\\bigr)\\otimes_{\\kappa(\\xi)}\\kappa(\\xi'').$$\nIndeed associativity of tensor products identifies both its source and target with extension of scalars along the canonical field map $\\kappa(\\xi)\\to\\kappa(\\xi'')$, since the local ring map sends the maximal ideal at $\\xi$ into that at $\\xi''$. Tensoring an isomorphism gives an isomorphism (tensor its inverse), so $\\alpha''$ has the asserted generic residue-field property.",
+   "uses": [
+    "lem-weil-pbc-module-stalk-pullback"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/flat.tex",
+    "place": "Tag 05HR, preservation of the map alpha on the generic residue-field vector space under the refinement."
+   }
+  },
+  {
+   "text": "Finally $\\mathcal H=\\pi_*\\mathcal G$ is quasi-coherent by [lem-weil-pbc-affine-pushforward-base-change](1), so $\\mathcal Q=\\operatorname{coker}\\alpha$ is quasi-coherent and its sections on an affine open are the cokernel of the section map by [lem-weil-pbc-quasi-coherent-module-cokernel-image]. For an affine open of $Y''$ over an affine open of $Y$, [lem-weil-pbc-module-pullback-affine-sections] computes pullback by tensoring the section modules, naturally in $\\alpha$. By [lem-weil-pbc-tensor-right-exact], tensoring its cokernel sequence computes the cokernel of the tensored map. These natural identifications therefore give the canonical isomorphism $\\operatorname{coker}\\alpha''\\cong h^*\\mathcal Q$, with its quotient map. Together with the canonical pushforward comparison in step 7 and the field isomorphisms in steps 3--4, this proves all the remaining assertions.",
+   "uses": [
+    "lem-weil-pbc-affine-pushforward-base-change",
+    "lem-weil-pbc-quasi-coherent-module-cokernel-image",
+    "lem-weil-pbc-module-pullback-affine-sections",
+    "lem-weil-pbc-tensor-right-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/flat.tex",
+    "place": "Tag 05HR, pullback of Coker(alpha); Tag 02KG and tensor right exactness."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-affine-opens-basis",
+  "lem-weil-pbc-etale-composition-cancellation",
+  "lem-weil-pbc-residue-field-point-naturality",
+  "lem-weil-pbc-etale-scheme-base-change",
+  "lem-sbc-smooth-relative-dimension-permanence",
+  "def-sbc-smooth-morphisms",
+  "lem-weil-pbc-qcqs-morphism-permanence",
+  "lem-weil-pbc-affine-scheme-qcqs",
+  "def-trf-pointed-scheme-devissage-data",
+  "lem-sfb-finite-type-composition-base-change",
+  "lem-kun-finite-type-residue-trdeg",
+  "def-trf-purely-transcendental-extension",
+  "lem-trf-finite-smooth-integral-base-refinement",
+  "lem-pc-smooth-flat",
+  "lem-weil-pbc-flat-lfp-open",
+  "lem-weil-pbc-spec-localization-away-basic-open",
+  "lem-weil-pbc-principal-localization-open-immersion",
+  "lem-weil-pbc-fibre-product-affine-spectra",
+  "def-pc-geometrically-irreducible",
+  "lem-pc-field-extension-surjective",
+  "lem-weil-pbc-surjective-base-change",
+  "lem-weil-pbc-finite-morphism-permanence",
+  "lem-weil-pbc-fibre-product-points",
+  "lem-weil-pbc-fibre-product-point-residue-field",
+  "lem-trf-pointed-etale-ambient-lift",
+  "def-weil-finite-type-morphism",
+  "def-weil-etale-morphism",
+  "lem-weil-pbc-module-pullback-quasi-coherent",
+  "lem-weil-pbc-module-pullback-finite-type",
+  "def-weil-closed-immersion",
+  "lem-weil-pbc-affine-pushforward-base-change",
+  "def-weil-finite-integral-morphism",
+  "lem-weil-pbc-module-pullback-structure-sheaf",
+  "def-pc-module-pullback",
+  "lem-weil-pbc-module-stalk-pullback",
+  "lem-weil-pbc-quasi-coherent-module-cokernel-image",
+  "lem-weil-pbc-module-pullback-affine-sections",
+  "lem-weil-pbc-tensor-right-exact",
+  "lem-sc-dimension-locally-algebraic"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/flat.tex",
+  "place": "Tag 05HE (lemma-elementary-etale-neighbourhood), with the finite-pushforward and generic-basis comparisons used by Tag 05HR; auxiliary data omit support-dimension equalities."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Refine an affine one step devissage along elementary etale neighborhoods of its smooth target and base preserving geometrically irreducible fibres",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.IsSmooth.exists_isStandardSmooth\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y} [self : AlgebraicGeometry.IsSmooth f] (x : ↥X),\\n  ∃ U V,\\n    ∃ (_ : x ∈ ↑V) (e : ↑V ≤ (TopologicalSpace.Opens.map f.base).obj ↑U),\\n      (CommRingCat.Hom.hom (AlgebraicGeometry.Scheme.Hom.appLE f (↑U) (↑V) e)).IsStandardSmooth\", \"doc\": \"Let $f: X \\\\to Y$ be a smooth morphism of schemes. For any point $x \\\\in X$, there exist an open neighborhood $V$ of $x$ and an open neighborhood $U$ of $f(x)$ with $f(V) \\\\subseteq U$, such that the rin\"}\n  {\"name\": \"AlgebraicGeometry.IsSmoothOfRelativeDimension.exists_isStandardSmoothOfRelativeDimension\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"∀ {n : ℕ} {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y} [self : AlgebraicGeometry.IsSmoothOfRelativeDimension n f]\\n  (x : ↥X),\\n  ∃ U V,\\n    ∃ (_ : x ∈ ↑V) (e : ↑V ≤ (TopologicalSpace.Opens.map f.base).obj ↑U),\\n      RingHom.IsStandardSmoothOfRelativeDimension n\\n        (CommRingCat.Hom.hom (Algebraic\", \"doc\": \"For every point $x$ in $X$, there exist open neighborhoods $U$ of $f(x)$ in $Y$ and $V$ of $x$ in $X$ such that $V$ is contained in the preimage of $U$ under $f$, and the induced ring homomorphism on \"}\n  {\"name\": \"Algebra.IsStandardSmoothOfRelativeDimension.exists_etale_mvPolynomial\", \"module\": \"Mathlib/RingTheory/RingHom/StandardSmooth\", \"type\": \"∀ (n : ℕ) (R : Type u) (S : Type v) [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S]\\n  [Algebra.IsStandardSmoothOfRelativeDimension n R S], ∃ g, g.Etale\", \"doc\": \"If $ S $ is a standard smooth algebra of relative dimension $ n $ over a commutative ring $ R $, then there exists an étale algebra homomorphism $ g : R[x_1, \\\\dots, x_n] \\\\to S $ from the polynomial ri\"}\n  {\"name\": \"AlgebraicGeometry.IsSmoothOfRelativeDimension\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"ℕ → {X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"For a natural number $n$ and a morphism $f: X \\\\to Y$ of schemes, the proposition that $f$ is smooth of relative dimension $n$.\"}\n  {\"name\": \"AlgebraicGeometry.isSmoothOfRelativeDimension_iff\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"∀ (n : ℕ) {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y),\\n  AlgebraicGeometry.IsSmoothOfRelativeDimension n f ↔\\n    ∀ (x : ↥X),\\n      ∃ U V,\\n        ∃ (_ : x ∈ ↑V) (e : ↑V ≤ (TopologicalSpace.Opens.map f.base).obj ↑U),\\n          RingHom.IsStandardSmoothOfRelativeDimension n\\n            (CommRingCat.Ho\", \"doc\": \"Let $n$ be a natural number and let $f: X \\\\to Y$ be a morphism of schemes. The morphism $f$ is smooth of relative dimension $n$ if and only if for every point $x \\\\in X$, there exist an open neighborho\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Etale\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"AlgebraicGeometry.Scheme → Type (u + 1)\", \"doc\": \"The property of being an étale morphism to a fixed scheme $X$, defined as morphisms that are smooth of relative dimension 0, constructed via the morphism property lifting over $X$.\"}\n  {\"name\": \"AlgebraicGeometry.isSmooth_iff\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y),\\n  AlgebraicGeometry.IsSmooth f ↔\\n    ∀ (x : ↥X),\\n      ∃ U V,\\n        ∃ (_ : x ∈ ↑V) (e : ↑V ≤ (TopologicalSpace.Opens.map f.base).obj ↑U),\\n          (CommRingCat.Hom.hom (AlgebraicGeometry.Scheme.Hom.appLE f (↑U) (↑V) e)).IsStandardSmooth\", \"doc\": \"A morphism of schemes $f: X \\\\to Y$ is smooth if and only if for every point $x \\\\in X$, there exist open subsets $V$ of $X$ and $U$ of $Y$ such that $x \\\\in V$, $f(V) \\\\subseteq U$, and the induced ring \"}\n  {\"name\": \"AlgebraicGeometry.IsEtale\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"A morphism $ f: X \\\\to Y $ of schemes is étale if it is smooth of relative dimension 0.\"}\n\nThe smooth-chart and etale-localization hits are individual presentation or locus facts. The polynomial factorization lemma Algebra.exists_etale_bijective_residueFieldMap_and_map_eq_mul_and_isCoprime (RingTheory/Polynomial/UniversalFactorizationRing.lean:694) only lifts a coprime monic polynomial factorization. None refines a devissage diagram and retains smooth geometrically irreducible fibres with all module comparisons.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Lift an elementary etale localization of the smooth scheme in a finite devissage to an elementary etale localization of the ambient affine scheme",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"Algebra.Etale.of_isLocalizationAway\", \"module\": \"Mathlib.RingTheory.Etale.Basic\", \"type\": \"(r : R) [IsLocalization.Away r A] : Etale R A\", \"doc\": \"If $ A $ is the localization of a commutative ring $ R $ at an element $ r $, then $ A $ is an étale $ R $-algebra.\"}\n  {\"name\": \"Algebra.FormallyEtale.localization_map\", \"module\": \"Mathlib.RingTheory.Etale.Basic\", \"type\": \"[FormallyEtale R S] : FormallyEtale Rₘ Sₘ\", \"doc\": \"If $ S $ is a formally étale $ R $-algebra, then the localization of $ S $ at a submonoid $ M $ is a formally étale algebra over the localization of $ R $ at $ M $. Formally, given $ \\\\text{FormallyÉta\"}\n  {\"name\": \"RingHom.Etale.ofLocalizationSpan\", \"module\": \"Mathlib.RingTheory.RingHom.Etale\", \"type\": \": OfLocalizationSpan Etale\", \"doc\": \"For a ring homomorphism $ f : R → S $ and a subset $ s ⊆ R $ whose ideal span equals $ R $, if the localization of $ f $ at each element of $ s $ is étale, then $ f $ itself is étale. This means that \"}\n  {\"name\": \"RingHom.Etale.propertyIsLocal\", \"module\": \"Mathlib.RingTheory.RingHom.Etale\", \"type\": \": PropertyIsLocal Etale\", \"doc\": \"The property of a ring homomorphism between commutative rings being étale is local, meaning it can be checked after localization or on an open cover.\"}\n  {\"name\": \"Algebra.Etale.of_isLocalization_Away\", \"module\": \"Mathlib.RingTheory.Etale.Basic\", \"type\": \"∀ {R : Type u} {A : Type v} [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A] (r : R)\\n  [IsLocalization.Away r A], Algebra.Etale R A\", \"doc\": \"If $ A $ is the localization of a commutative ring $ R $ at an element $ r $, then $ A $ is an étale $ R $-algebra. This follows from the universal property of localization, where inverting powers of \"}\n  {\"name\": \"Algebra.exists_etale_of_isEtaleAt\", \"module\": \"Mathlib.RingTheory.Etale.Locus\", \"type\": \"(P : Ideal A) [P.IsPrime] [IsEtaleAt R P] : ∃ f ∉ P, Algebra.Etale R (Localization.Away f)\", \"doc\": \"If an $ R $-algebra $ A $ is étale at a prime ideal $ \\\\mathfrak{p} $, then there exists an element $ f \\\\notin \\\\mathfrak{p} $ such that the localization of $ A $ away from $ f $ is an étale $ R $-algeb\"}\n  {\"name\": \"Algebra.FormallyEtale.of_isLocalization\", \"module\": \"Mathlib.RingTheory.Etale.Basic\", \"type\": \": FormallyEtale R Rₘ\", \"doc\": \"If $ S $ is a localization of a commutative ring $ R $ at a multiplicative set, then the algebra structure map $ R \\\\to S $ is formally étale, meaning it satisfies the infinitesimal lifting property ch\"}\n  {\"name\": \"Algebra.FormallyEtale.localization_base\", \"module\": \"Mathlib.RingTheory.Etale.Basic\", \"type\": \"[FormallyEtale R Sₘ] : FormallyEtale Rₘ Sₘ\", \"doc\": \"If $ S $ is a formally étale $ R $-algebra, then the localization of $ S $ at a multiplicative set $ m $ is a formally étale $ R_m $-algebra. This asserts that the property of formal étaleness is pres\"}\n\nThe smooth-chart and etale-localization hits are individual presentation or locus facts. The polynomial factorization lemma Algebra.exists_etale_bijective_residueFieldMap_and_map_eq_mul_and_isCoprime (RingTheory/Polynomial/UniversalFactorizationRing.lean:694) only lifts a coprime monic polynomial factorization. None refines a devissage diagram and retains smooth geometrically irreducible fibres with all module comparisons.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Etale\", \"GeometricallyIrreducible\"",
+   "results": "[loogle] OK 0 hit(s)\n\nThe smooth-chart and etale-localization hits are individual presentation or locus facts. The polynomial factorization lemma Algebra.exists_etale_bijective_residueFieldMap_and_map_eq_mul_and_isCoprime (RingTheory/Polynomial/UniversalFactorizationRing.lean:694) only lifts a coprime monic polynomial factorization. None refines a devissage diagram and retains smooth geometrically irreducible fibres with all module comparisons.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "devissage|elementary.*[Ee]tale.*neigh|[Ee]tale.*devissage",
+   "results": "[grep] OK 0 hit(s)\n\nThe smooth-chart and etale-localization hits are individual presentation or locus facts. The polynomial factorization lemma Algebra.exists_etale_bijective_residueFieldMap_and_map_eq_mul_and_isCoprime (RingTheory/Polynomial/UniversalFactorizationRing.lean:694) only lifts a coprime monic polynomial factorization. None refines a devissage diagram and retains smooth geometrically irreducible fibres with all module comparisons.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A finite map with a singleton pointed fibre and purely transcendental residue field can be refined after etale base and target changes keeping smooth integral fibres",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"Algebra.IsStandardSmoothOfRelativeDimension.exists_etale_mvPolynomial\", \"module\": \"Mathlib/RingTheory/RingHom/StandardSmooth\", \"type\": \"∀ (n : ℕ) (R : Type u) (S : Type v) [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S]\\n  [Algebra.IsStandardSmoothOfRelativeDimension n R S], ∃ g, g.Etale\", \"doc\": \"If $ S $ is a standard smooth algebra of relative dimension $ n $ over a commutative ring $ R $, then there exists an étale algebra homomorphism $ g : R[x_1, \\\\dots, x_n] \\\\to S $ from the polynomial ri\"}\n  {\"name\": \"Algebra.exists_etale_bijective_residueFieldMap_and_map_eq_mul_and_isCoprime\", \"module\": \"Mathlib/RingTheory/Polynomial/UniversalFactorizationRing\", \"type\": \"∀ {R : Type u} [inst : CommRing R] (P : Ideal R) [inst_1 : P.IsPrime] (p : Polynomial R)\\n  (f g : Polynomial P.ResidueField),\\n  p.Monic →\\n    f.Monic →\\n      g.Monic →\\n        Polynomial.map (algebraMap R P.ResidueField) p = f * g →\\n          IsCoprime f g →\\n            ∃ R' x x_1,\\n              ∃ (\", \"doc\": \"Given a ring homomorphism $ f : A → B $ between commutative rings and prime ideals $ I ⊆ A $, $ J ⊆ B $ such that $ I $ is the preimage of $ J $ under $ f $, there exists a unique $ R $-algebra homomo\"}\n  {\"name\": \"StandardEtalePair.HasMap.map\", \"module\": \"Mathlib/RingTheory/Etale/StandardEtale\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} {T : Type u_3} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : CommRing T]\\n  [inst_3 : Algebra R S] [inst_4 : Algebra R T] {P : StandardEtalePair R} {x : S},\\n  P.HasMap x → ∀ (f : S →ₐ[R] T), P.HasMap (f x)\", \"doc\": \"For any $ R $-algebra homomorphism $ \\\\phi: S \\\\to T $, if $ x \\\\in S $ satisfies $ f(x) = 0 $ and $ g(x) $ is a unit in $ S $, then $ \\\\phi(x) $ satisfies $ f(\\\\phi(x)) = 0 $ and $ g(\\\\phi(x)) $ is a unit \"}\n  {\"name\": \"RingHom.IsStandardSmoothOfRelativeDimension.exists_etale_mvPolynomial\", \"module\": \"Mathlib/RingTheory/RingHom/StandardSmooth\", \"type\": \"∀ {R : Type u} {S : Type v} [inst : CommRing R] [inst_1 : CommRing S] {f : R →+* S} {n : ℕ},\\n  RingHom.IsStandardSmoothOfRelativeDimension n f → ∃ g, g.comp MvPolynomial.C = f ∧ g.Etale\", \"doc\": \"For any ring homomorphism $ f : R \\\\to S $ that is standard smooth of relative dimension $ n $, there exists an étale ring homomorphism $ g : R[x_1, \\\\dots, x_n] \\\\to S $ such that $ g \\\\circ C = f $, whe\"}\n  {\"name\": \"RingHom.IsStandardSmooth.exists_etale_mvPolynomial\", \"module\": \"Mathlib/RingTheory/RingHom/StandardSmooth\", \"type\": \"∀ {R : Type u} {S : Type v} [inst : CommRing R] [inst_1 : CommRing S] {f : R →+* S},\\n  f.IsStandardSmooth → ∃ n g, g.comp MvPolynomial.C = f ∧ g.Etale\", \"doc\": \"Given a standard smooth ring homomorphism $ f : R \\to S $, there exists a natural number $ n $ and an étale ring homomorphism $ g : R[x_1,\\\\ldots,x_n]_f \\\\to S $ such that $ g $ composed with the canonic\"}\n  {\"name\": \"AlgebraicGeometry.IsSmoothOfRelativeDimension.exists_isStandardSmoothOfRelativeDimension\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"∀ {n : ℕ} {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y} [self : AlgebraicGeometry.IsSmoothOfRelativeDimension n f]\\n  (x : ↥X),\\n  ∃ U V,\\n    ∃ (_ : x ∈ ↑V) (e : ↑V ≤ (TopologicalSpace.Opens.map f.base).obj ↑U),\\n      RingHom.IsStandardSmoothOfRelativeDimension n\\n        (CommRingCat.Hom.hom (Algebraic\", \"doc\": \"For every point $x$ in $X$, there exist open neighborhoods $U$ of $f(x)$ in $Y$ and $V$ of $x$ in $X$ such that $V$ is contained in the preimage of $U$ under $f$, and the induced ring homomorphism on \"}\n  {\"name\": \"Algebra.Etale.iff_isStandardSmoothOfRelativeDimension_zero\", \"module\": \"Mathlib/RingTheory/Smooth/StandardSmoothOfFree\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S],\\n  Algebra.Etale R S ↔ Algebra.IsStandardSmoothOfRelativeDimension 0 R S\", \"doc\": \"An $ R $-algebra $ S $ is étale if and only if it is a standard smooth algebra of relative dimension $ 0 $ over $ R $.\"}\n  {\"name\": \"RingHom.Etale.isStableUnderBaseChange\", \"module\": \"Mathlib/RingTheory/RingHom/Etale\", \"type\": \"RingHom.IsStableUnderBaseChange fun {R S} [CommRing R] [CommRing S] => RingHom.Etale\", \"doc\": \"If a ring homomorphism $ f : R \\\\to S $ is étale, then for any $ R $-algebra $ R' $, the base change homomorphism $ R' \\\\to S \\\\otimes_R R' $ is also étale. This means that étale morphisms preserve their\"}\n\nThe smooth-chart and etale-localization hits are individual presentation or locus facts. The polynomial factorization lemma Algebra.exists_etale_bijective_residueFieldMap_and_map_eq_mul_and_isCoprime (RingTheory/Polynomial/UniversalFactorizationRing.lean:694) only lifts a coprime monic polynomial factorization. None refines a devissage diagram and retains smooth geometrically irreducible fibres with all module comparisons.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Refine a finite devissage diagram along elementary etale changes of the target and base preserving smooth geometrically irreducible fibres",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"Algebra.IsStandardSmoothOfRelativeDimension.exists_etale_mvPolynomial\", \"module\": \"Mathlib/RingTheory/RingHom/StandardSmooth\", \"type\": \"∀ (n : ℕ) (R : Type u) (S : Type v) [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S]\\n  [Algebra.IsStandardSmoothOfRelativeDimension n R S], ∃ g, g.Etale\", \"doc\": \"If $ S $ is a standard smooth algebra of relative dimension $ n $ over a commutative ring $ R $, then there exists an étale algebra homomorphism $ g : R[x_1, \\\\dots, x_n] \\\\to S $ from the polynomial ri\"}\n  {\"name\": \"StandardEtalePresentation\", \"module\": \"Mathlib/RingTheory/Etale/StandardEtale\", \"type\": \"(R : Type u_4) → (S : Type u_5) → [inst : CommRing R] → [inst_1 : CommRing S] → [Algebra R S] → Type (max u_4 u_5)\", \"doc\": \"A standard étale presentation of an algebra $ S $ over a commutative ring $ R $, providing a way to express $ S $ as a localization of a polynomial ring over $ R $ modulo an ideal, satisfying the nece\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Etale\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"AlgebraicGeometry.Scheme → Type (u + 1)\", \"doc\": \"The property of being an étale morphism to a fixed scheme $X$, defined as morphisms that are smooth of relative dimension 0, constructed via the morphism property lifting over $X$.\"}\n  {\"name\": \"AlgebraicGeometry.IsSmoothOfRelativeDimension.exists_isStandardSmoothOfRelativeDimension\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"∀ {n : ℕ} {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y} [self : AlgebraicGeometry.IsSmoothOfRelativeDimension n f]\\n  (x : ↥X),\\n  ∃ U V,\\n    ∃ (_ : x ∈ ↑V) (e : ↑V ≤ (TopologicalSpace.Opens.map f.base).obj ↑U),\\n      RingHom.IsStandardSmoothOfRelativeDimension n\\n        (CommRingCat.Hom.hom (Algebraic\", \"doc\": \"For every point $x$ in $X$, there exist open neighborhoods $U$ of $f(x)$ in $Y$ and $V$ of $x$ in $X$ such that $V$ is contained in the preimage of $U$ under $f$, and the induced ring homomorphism on \"}\n  {\"name\": \"AlgebraicGeometry.IsEtale\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"A morphism $ f: X \\\\to Y $ of schemes is étale if it is smooth of relative dimension 0.\"}\n  {\"name\": \"AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"CategoryTheory.MorphismProperty.HasOfPostcompProperty (@AlgebraicGeometry.IsEtale)\\n  (@AlgebraicGeometry.LocallyOfFiniteType ⊓ @AlgebraicGeometry.FormallyUnramified)\", \"doc\": \"For any category of schemes, the composition of a morphism that is locally of finite type and a morphism that is formally unramified results in an étale morphism. This instance asserts that the proper\"}\n  {\"name\": \"Algebra.instEtaleOfIsStandardSmoothOfRelativeDimensionOfNatNat\", \"module\": \"Mathlib/RingTheory/Smooth/StandardSmoothCotangent\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S]\\n  [Algebra.IsStandardSmoothOfRelativeDimension 0 R S], Algebra.Etale R S\", \"doc\": \"If $ S $ is a standard smooth algebra of relative dimension 0 over a commutative ring $ R $, then $ S $ is an étale algebra over $ R $.\"}\n  {\"name\": \"AlgebraicGeometry.isSmoothOfRelativeDimension_iff\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"∀ (n : ℕ) {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y),\\n  AlgebraicGeometry.IsSmoothOfRelativeDimension n f ↔\\n    ∀ (x : ↥X),\\n      ∃ U V,\\n        ∃ (_ : x ∈ ↑V) (e : ↑V ≤ (TopologicalSpace.Opens.map f.base).obj ↑U),\\n          RingHom.IsStandardSmoothOfRelativeDimension n\\n            (CommRingCat.Ho\", \"doc\": \"Let $n$ be a natural number and let $f: X \\\\to Y$ be a morphism of schemes. The morphism $f$ is smooth of relative dimension $n$ if and only if for every point $x \\\\in X$, there exist an open neighborho\"}\nRead the hits: individual etale/smooth charts, base change and closed-immersion lifts do not state the complete pointed finite devissage refinement with module comparisons.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsEtale\", \"GeometricallyIrreducible\"",
+   "results": "[loogle] OK 0 hit(s)\nRead the hits: individual etale/smooth charts, base change and closed-immersion lifts do not state the complete pointed finite devissage refinement with module comparisons.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "devissage|dévissage|elementary.*[Ee]tale",
+   "results": "[grep] OK 0 hit(s)\nRead the hits: individual etale/smooth charts, base change and closed-immersion lifts do not state the complete pointed finite devissage refinement with module comparisons.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "An etale neighborhood of the smooth target of a one step devissage lifts after an elementary etale base change to the ambient closed immersion",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.IsClosedImmersion.isStableUnderBaseChange\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion\", \"type\": \": MorphismProperty.IsStableUnderBaseChange @IsClosedImmersion\", \"doc\": \"The property of being a closed immersion of schemes is stable under base change. That is, if $ f: X \\to Y $ is a closed immersion of schemes, then for any base change $ Y' \\to Y $, the induced morphism \"}\n  {\"name\": \"AlgebraicGeometry.IsEtale.instIsStableUnderBaseChangeScheme\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Etale\", \"type\": \": IsStableUnderBaseChange @IsEtale\", \"doc\": \"The property of being an étale morphism is stable under base change. That is, if a morphism of schemes is étale, then any base change (pullback) of this morphism is also étale.\"}\n  {\"name\": \"AlgebraicGeometry.IsClosedImmersion.lift\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion\", \"type\": \"{X Y Z : Scheme.{u}} (f : X ⟶ Z) (g : Y ⟶ Z) [IsClosedImmersion f] (H : f.ker ≤ g.ker) : Y ⟶ X\", \"doc\": \"Given a closed immersion $ f: X \\to Z $ and a morphism $ g: Y \\to Z $ whose kernel ideal sheaf contains that of $ f $, this constructs a morphism $ Y \\to X $ by factoring through the image subschemes. Sp\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Etale\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Etale\", \"type\": \"(X : Scheme.{u}) : Type _\", \"doc\": \"The property of being an étale morphism to a fixed scheme $X$, defined as morphisms that are smooth of relative dimension 0, constructed via the morphism property lifting over $X$.\"}\n  {\"name\": \"RingHom.Etale.isStableUnderBaseChange\", \"module\": \"Mathlib.RingTheory.RingHom.Etale\", \"type\": \": IsStableUnderBaseChange Etale\", \"doc\": \"If a ring homomorphism $ f : R \\\\to S $ is étale, then for any $ R $-algebra $ R' $, the base change homomorphism $ R' \\\\to S \\\\otimes_R R' $ is also étale. This means that étale morphisms preserve their\"}\n  {\"name\": \"AlgebraicGeometry.IsLocalIso.instIsStableUnderBaseChangeScheme\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.LocalIso\", \"type\": \": IsStableUnderBaseChange @IsLocalIso\", \"doc\": \"The property of being a local isomorphism of schemes is stable under base change. That is, if a morphism $ f : X \\to Y $ is a local isomorphism, then any base change (pullback) of $ f $ is also a local\"}\n  {\"name\": \"Algebra.FormallyEtale.of_unramified_and_smooth\", \"module\": \"Mathlib.RingTheory.Etale.Basic\", \"type\": \"∀ {R : Type u} {A : Type v} [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A]\\n  [Algebra.FormallyUnramified R A] [Algebra.FormallySmooth R A], Algebra.FormallyEtale R A\", \"doc\": \"For commutative rings $ R $ and $ A $ with an $ R $-algebra structure, if $ A $ is both formally unramified over $ R $ and formally smooth over $ R $, then $ A $ is formally étale over $ R $.\"}\n  {\"name\": \"AlgebraicGeometry.IsOpenImmersion.lift\", \"module\": \"Mathlib.AlgebraicGeometry.OpenImmersion\", \"type\": \"(H' : Set.range g ⊆ Set.range f) : Y ⟶ X\", \"doc\": \"Given an open immersion $ f: X \\to Y $ and a morphism $ g: Z \\to Y $ whose underlying continuous map has image contained in the image of $ f $, this constructs a morphism $ Y \\to X $ by taking the invers\"}\nRead the hits: individual etale/smooth charts, base change and closed-immersion lifts do not state the complete pointed finite devissage refinement with module comparisons.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Lift an affine etale cover of a closed subscheme and spread the smooth fibre component containing a rational function field point",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.IsSmooth.exists_isStandardSmooth\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y} [self : AlgebraicGeometry.IsSmooth f] (x : ↥X),\\n  ∃ U V,\\n    ∃ (_ : x ∈ ↑V) (e : ↑V ≤ (TopologicalSpace.Opens.map f.base).obj ↑U),\\n      (CommRingCat.Hom.hom (AlgebraicGeometry.Scheme.Hom.appLE f (↑U) (↑V) e)).IsStandardSmooth\", \"doc\": \"Let $f: X \\\\to Y$ be a smooth morphism of schemes. For any point $x \\\\in X$, there exist an open neighborhood $V$ of $x$ and an open neighborhood $U$ of $f(x)$ with $f(V) \\\\subseteq U$, such that the rin\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Etale\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"AlgebraicGeometry.Scheme → Type (u + 1)\", \"doc\": \"The property of being an étale morphism to a fixed scheme $X$, defined as morphisms that are smooth of relative dimension 0, constructed via the morphism property lifting over $X$.\"}\n  {\"name\": \"AlgebraicGeometry.IsSmoothOfRelativeDimension.exists_isStandardSmoothOfRelativeDimension\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"∀ {n : ℕ} {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y} [self : AlgebraicGeometry.IsSmoothOfRelativeDimension n f]\\n  (x : ↥X),\\n  ∃ U V,\\n    ∃ (_ : x ∈ ↑V) (e : ↑V ≤ (TopologicalSpace.Opens.map f.base).obj ↑U),\\n      RingHom.IsStandardSmoothOfRelativeDimension n\\n        (CommRingCat.Hom.hom (Algebraic\", \"doc\": \"For every point $x$ in $X$, there exist open neighborhoods $U$ of $f(x)$ in $Y$ and $V$ of $x$ in $X$ such that $V$ is contained in the preimage of $U$ under $f$, and the induced ring homomorphism on \"}\n  {\"name\": \"Algebra.IsStandardSmoothOfRelativeDimension.exists_etale_mvPolynomial\", \"module\": \"Mathlib/RingTheory/RingHom/StandardSmooth\", \"type\": \"∀ (n : ℕ) (R : Type u) (S : Type v) [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S]\\n  [Algebra.IsStandardSmoothOfRelativeDimension n R S], ∃ g, g.Etale\", \"doc\": \"If $ S $ is a standard smooth algebra of relative dimension $ n $ over a commutative ring $ R $, then there exists an étale algebra homomorphism $ g : R[x_1, \\\\dots, x_n] \\\\to S $ from the polynomial ri\"}\n  {\"name\": \"AlgebraicGeometry.IsEtale\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"A morphism $ f: X \\\\to Y $ of schemes is étale if it is smooth of relative dimension 0.\"}\n  {\"name\": \"Algebra.exists_etale_of_isEtaleAt\", \"module\": \"Mathlib/RingTheory/Etale/Locus\", \"type\": \"∀ {R : Type u_1} {A : Type u_2} [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A]\\n  [Algebra.FinitePresentation R A] (P : Ideal A) [inst_4 : P.IsPrime] [Algebra.IsEtaleAt R P],\\n  ∃ f ∉ P, Algebra.Etale R (Localization.Away f)\", \"doc\": \"If an $ R $-algebra $ A $ is étale at a prime ideal $ \\\\mathfrak{p} $, then there exists an element $ f \\\\notin \\\\mathfrak{p} $ such that the localization of $ A $ away from $ f $ is an étale $ R $-algeb\"}\n  {\"name\": \"AlgebraicGeometry.IsEtale.instIsSmooth\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.IsEtale f], AlgebraicGeometry.IsSmooth f\", \"doc\": \"Every étale morphism of schemes is a smooth morphism. Specifically, if a morphism $ f: X \\to Y $ of schemes is étale (i.e., smooth of relative dimension 0), then it satisfies the conditions of being a \"}\n  {\"name\": \"Algebra.etaleLocus\", \"module\": \"Mathlib/RingTheory/Etale/Locus\", \"type\": \"(R : Type u_1) → (A : Type u_2) → [inst : CommRing R] → [inst_1 : CommRing A] → [Algebra R A] → Set (PrimeSpectrum A)\", \"doc\": \"The set of prime ideals $\\\\mathfrak{p} \\\\in \\\\operatorname{Spec}(A)$ such that the algebra $A$ over the commutative ring $R$ is étale at $\\\\mathfrak{p}$. This means the localization of $A$ at $\\\\mathfrak{p\"}\nRead the hits: individual etale/smooth charts, base change and closed-immersion lifts do not state the complete pointed finite devissage refinement with module comparisons.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-complete-algebra-devissage-etale-existence",
+  "date": "2026-10-24",
+  "group": "Q101"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Historical supporting algebra in the semistable-alteration ancestry of lem-trf-local-term-locality, clauses (1)--(2), recorded in the parent: the flat-tensor weak-assassin argument uses an etale projective neighborhood. In the proof of that neighborhood, the first localization produces complete devissage, before projectivity is proved. Supporting the 05I1 existence step via the 05HR dimension induction: Refining a pointed devissage along elementary etale target and base maps.",
+   "via": [
+    "lem-trf-complete-algebra-devissage-etale-existence",
+    "lem-trf-flat-algebra-etale-projective-neighborhood",
+    "lem-trf-flat-tensor-weakass-fibre",
+    "lem-trf-vertical-principal-ideal-fibre-detection",
+    "lem-trf-valuation-smooth-branches-strict-chart",
+    "lem-trf-valuation-marked-strictification",
+    "lem-trf-valuation-common-strict-semistable-refinement",
+    "lem-trf-valuation-semistable-dominates-stable",
+    "lem-trf-stable-modification-uniqueness-normal",
+    "lem-trf-temkin-stable-modification",
+    "lem-trf-stable-modification-flat-curve-pair",
+    "lem-trf-dejong-relative-marked-semistable",
+    "lem-trf-relative-marked-nodal-reduction",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-trf-devissage-pointed-etale-refinement",
+  "worker": "stage1",
+  "summary": "Split using existing affine finite-smooth component refinement and pointed ambient lifting; no new nodes. Affine localization and a principal base shrinking ensure nonempty geometrically integral fibres. Verified both canonical affine-pushforward comparisons, the generic-point argument and cokernel pullback. Statement unchanged.",
+  "blueprint": "Historical supporting algebra in the inherited semistable/flattening ancestry of lem-trf-local-term-locality (old clauses (1)--(2)); specifically the 05HR induction step in the parent complete-algebra-devissage-etale-existence, after the elementary etale localization of its first target. Steps 1--6 realize the 05HE refinement and steps 7--10 its alpha and cokernel comparisons. The latest ancestor proof is now the contracting-correspondence route and no longer mentions this historical algebra; this split does not alter or replace that unit route.",
+  "tool_uses": [
+   {
+    "node": "lem-sbc-smooth-relative-dimension-permanence",
+    "why": "Relative smooth dimension under etale composition and base change."
+   },
+   {
+    "node": "lem-kun-finite-type-residue-trdeg",
+    "why": "Finite transcendence degree makes the marked pure transcendence basis finite."
+   },
+   {
+    "node": "lem-sc-dimension-locally-algebraic",
+    "why": "Stacks 0A21(3): for the irreducible finite-type fibres, Krull dimension d of the fibre is equivalent to dimension d at every point (relative dimension d), in steps 1 and 3; added by the reviewer."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sbc-smooth-relative-dimension-permanence",
+  "lem-kun-finite-type-residue-trdeg",
+  "lem-sc-dimension-locally-algebraic"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q35-d05737234",
+  "group": "Q35",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q35-d05737234 (reviewer sub-agent of L); spot-checked: I read flat.tex 05HE (lines 1027-1110) and the 05HR use at lines 1508-1534. The item statement matches 05HE (1)-(5) plus the alpha and cokernel comparisons of 05HR. There are no new nodes, the statement is unchanged, there is no SGA source and no repair note, and no duplicate exists: rg for 05HE finds only the parent and a limit-descent node. Steps 2 and 4-10 check out against the statements of the cited nodes. Step 2: the hypotheses of 057K base-refinement with pi0=id are met, and the basis is finite through trdeg. Step 4: the singleton fibre follows because k(z)(x)k(y'') is isomorphic to k(z). Steps 5-6: the ambient-lift hypotheses hold, including a.r=f.i.e, and the affine base change gives i''_*G''=F''. Step 7: the pushforward iso via pi affine. Step 8: the image of the generic point is the generic point, by openness plus T0. Steps 9-10: the residue map is the base change of an iso, and the cokernel is handled by right exactness on affines. One fault, a missing citation (C1/C4): the datum only says the fibres have Krull dimension d. Step 1 nevertheless applied relative-dimension permanence as if Y->B were 'smooth of relative dimension d' (dim_x of the fibre = d at every point), and step 3 never derived Krull dimension d for the new fibres. Both directions are Stacks 0A21(3), the existing node lem-sc-dimension-locally-algebraic. The fix adds that citation, with the finite-type fibre argument, to steps 1 and 3, adds it to proof_deps, and records it in split_report.tool_uses (off-unit, sk-prop-jacobian). The corrected file is fixes/dag/nodes/sec-trace-formula/lem-trf-devissage-pointed-etale-refinement.json.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.PointedDevissageEtaleRefinement",
+  "declaration": "AlgebraicGeometry.PointedAffineOneStep.exists_elementaryEtale_refinement",
+  "file": "lean/Sheaf/AlgebraicGeometry/PointedDevissageEtaleRefinement.lean",
+  "statement": "theorem PointedAffineOneStep.exists_elementaryEtale_refinement {X B : Scheme.{u}} {f : X ⟶ B} {F : X.Modules} {x : X} (s : PointedAffineOneStep f F x) {Y' B' : Scheme.{u}} (g' : Y' ⟶ B') (aY : Y' ⟶ s.Y) (aB : B' ⟶ B) (y' : Y') (b' : B') (square : aY ≫ s.g = g' ≫ aB) (marked : g' y' = b') (targetElementary : IsElementaryEtalePointed aY y' s.y) (baseElementary : IsElementaryEtalePointed aB b' (f x)) : ∃ (B'' : Scheme.{u}) (cB : B'' ⟶ B') (b'' : B''), IsAffine B'' ∧ IsElementaryEtalePointed cB b'' b' ∧ IsElementaryEtalePointed (cB ≫ aB) b'' (f x) ∧ ∃ (X'' : Scheme.{u}) (aX : X'' ⟶ X) (f'' : X'' ⟶ B'') (x'' : X'') (t : PointedAffineOneStep f'' ((Scheme.Modules.tensorPullback aX).obj F) x'') (j : t.Y ⟶ pullback g' cB) (h : t.Y ⟶ s.Y) (e : t.Z ⟶ s.Z), IsElementaryEtalePointed aX x'' x ∧ f'' x'' = b'' ∧ aX ≫ f = f'' ≫ cB ≫ aB ∧ IsOpenImmersion j ∧ j ≫ pullback.fst g' cB ≫ aY = h ∧ j ≫ pullback.snd g' cB = t.g ∧ (j ≫ pullback.fst g' cB) t.y = y' ∧ IsElementaryEtalePointed h t.y s.y ∧ e t.z = s.z ∧ t.d = s.d ∧ ∃ (finiteSquare : IsPullback e t.π s.π h) (closedSquare : IsPullback e t.i s.i aX) (eG : (Scheme.Modules.tensorPullback e).obj s.G ≅ t.G), Scheme.Modules.moduleBaseChangeMap s.i t.i aX e closedSquare.w s.G ≫ (Scheme.Modules.pushforward t.i).map eG.hom ≫ t.presentation.hom = (Scheme.Modules.tensorPullback aX).map s.presentation.hom ∧ ∃ β : (Scheme.Modules.tensorPullback h).obj ((Scheme.Modules.pushforward s.π).obj s.G) ≅ (Scheme.Modules.pushforward t.π).obj t.G, β.hom = Scheme.Modules.moduleBaseChangeMap s.π t.π h e finiteSquare.w s.G ≫ (Scheme.Modules.pushforward t.π).map eG.hom ∧ ∀ (r : ℕ) (α : SheafOfModules.free (R := s.Y.ringCatSheaf) (ULift.{u} (Fin r)) ⟶ (Scheme.Modules.pushforward s.π).obj s.G), (∀ ξ : s.g.fiber (f x), IsGenericPoint ξ Set.univ → IsResidueFibreIso α (s.g.fiberι (f x) ξ)) → ∃ (α'' : SheafOfModules.free (R := t.Y.ringCatSheaf) (ULift.{u} (Fin r)) ⟶ (Scheme.Modules.pushforward t.π).obj t.G), α'' = (Scheme.Modules.picardTensorFreeIso h (ULift.{u} (Fin r))).inv ≫ (Scheme.Modules.tensorPullback h).map α ≫ β.hom ∧ (∀ ξ'' : t.g.fiber b'', IsGenericPoint ξ'' Set.univ → IsResidueFibreIso α'' (t.g.fiberι b'' ξ'')) ∧ ∃ q : (Scheme.Modules.tensorPullback h).obj (cokernel α) ≅ cokernel α'', (Scheme.Modules.tensorPullback h).map (cokernel.π α) ≫ q.hom = β.hom ≫ cokernel.π α''",
+  "branch": "sheaf-dag",
+  "by": "ND",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-2a991e5f1",
+  "group": "ND",
+  "result": "pass",
+  "note": "Read item node, dep def-trf-pointed-scheme-devissage-data and its Lean (PointedAffineOneStep, IsElementaryEtalePointed, IsResidueFibreIso), moduleBaseChangeMap (pinned-unit adjunction mate, def-sfb-module-base-change-map), picardTensorFreeIso, module, report. Every 05HE/05HR clause rendered: affine elementary B'', open immersion j of affine t.Y into Y'xB'B'' with marked point over y',b'', elementary aX over cB≫aB, new datum t on aX^*F with t.d=s.d, finite and closed IsPullback squares, presentation pinned via base-change map, beta pinned to the canonical map, alpha'' pinned, generic residue iso, cokernel iso pinned by quotient square, h elementary. No extra hypotheses; r=0,d=0 and nonvacuous generic quantifiers checked; single universe. Statement verbatim; only lean field changed; sorry only; docstrings with all 10 steps; first S2 delivery. Advisory: def-sfb-module-base-change-map not in stmt_deps (S2 cannot add it); picardTensorFreeIso is a canonical upstream helper. No compile needed (no changes)."
+ }
+}

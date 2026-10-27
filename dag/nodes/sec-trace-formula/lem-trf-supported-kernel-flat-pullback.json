@@ -1,0 +1,272 @@
+{
+ "id": "lem-trf-supported-kernel-flat-pullback",
+ "kind": "statement",
+ "title": "Supported-section kernels commute with flat pullback for locally principal support",
+ "statement": "Let $u:Q\\to P$ be a flat morphism of schemes [def-pc-scheme, def-weil-flat-morphism], and let $D\\subseteq P$ be a closed subset that is locally principal: every point has an affine neighbourhood $V$ and $a\\in\\mathcal O_P(V)$ with $D\\cap V=V(a)$. Set $D_Q=u^{-1}D$. Let $H$ be a quasi-coherent $\\mathcal O_P$-module [pqf-def-coherent]. Define a submodule sheaf $K\\subseteq H$ by $K(V)=\\{h\\in H(V):h|_{V\\setminus D}=0\\}$ for each open $V\\subseteq P$, and define $L\\subseteq u^*H$ by $L(W)=\\{h\\in(u^*H)(W):h|_{W\\setminus D_Q}=0\\}$ for each open $W\\subseteq Q$, using ordinary module pullback [def-pc-module-pullback]. Then $K$ and $L$ are quasi-coherent, and the pulled-back inclusion $u^*(K\\hookrightarrow H)$ is injective with image exactly $L$. More explicitly, on every affine pair $W\\subseteq u^{-1}V$ with $D\\cap V=V(a)$, write $A=\\mathcal O_P(V)$, $C=\\mathcal O_Q(W)$, $M=H(V)$, and $a_C$ for the image of $a$ in $C$. Let $\\eta$ denote the unit of the adjunction $u^*\\dashv u_*$ of [def-pc-module-pullback]. The $C$-linear maps $\\Gamma_a(M)\\otimes_A C\\to(u^*K)(W)$ and $M\\otimes_A C\\to(u^*H)(W)$ given by $s\\otimes c\\mapsto c\\,\\eta(s)|_W$ are bijective, where $\\Gamma_a(M)=\\{m\\in M:\\exists n\\geq0,\\ a^nm=0\\}=K(V)$, and they carry the map $(u^*K)(W)\\to(u^*H)(W)$ to the map $\\Gamma_a(M)\\otimes_A C\\to M\\otimes_A C$ induced by inclusion. This map is injective, and its image $\\Gamma_{a_C}(M\\otimes_A C)$ is carried by the second bijection onto $L(W)$.",
+ "source": {
+  "document": "literature/stacks-project/properties.tex",
+  "place": "Tag 07ZP, lemma-sections-supported-on-closed-subset (2)-(3); compare divisors.tex Tag 080F, lemma-strict-transform-flat, affine power-torsion calculation. The flat-pullback comparison is the agent argument of the returned parent proof step 3(c)-(f)."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-flat-morphism",
+  "pqf-def-coherent",
+  "def-pc-module-pullback"
+ ],
+ "proof": [
+  {
+   "text": "Choose affine neighbourhoods $V$ as in the hypothesis, with equation $a$. On $V$ take the closed subscheme $E=V(a)$ and apply [lem-trf-locally-principal-supported-kernel] with $Y=T=V$ and $q=1_V$. Its supported kernel is exactly $K|_V$, since restriction to an open $V'\\subseteq V$ tests vanishing on $V'\\setminus D$. Thus $K|_V$ is quasi-coherent and $V\\setminus E\\to V$ is quasi-compact. The latter says that the complement is retrocompact on $V$. Apply [lem-trf-supported-sections-quasi-coherent] on $V$ with the finitely generated ideal $(a)$: $K(V)=\\{m\\in H(V):a^nm=0\\text{ for some }n\\geq0\\}=\\Gamma_a(M)$. These neighbourhoods cover $P$, so quasi-coherence of $K$ follows directly from its affine-local definition [pqf-def-coherent]. No globally defined locally principal closed subscheme with support $D$ is needed.",
+   "uses": [
+    "lem-trf-locally-principal-supported-kernel",
+    "lem-trf-supported-sections-quasi-coherent",
+    "pqf-def-coherent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/properties.tex",
+    "place": "Tag 07ZP, lemma-sections-supported-on-closed-subset (2)-(3); divisors.tex Tag 07ZT, lemma-complement-locally-principal-closed-subscheme"
+   }
+  },
+  {
+   "text": "By [lem-pc-ringed-space-tensor-pullback-qcoh], both $u^*H$ and $u^*K$ are quasi-coherent. For an affine $W\\subseteq u^{-1}V$, one has $D_Q\\cap W=V(a_C)$. Indeed at $w\\in W$ the local ring homomorphism $\\mathcal O_{P,u(w)}\\to\\mathcal O_{Q,w}$ carries $a$ to the germ of $a_C$; its inverse image of the maximal ideal is the maximal ideal, so the latter germ is a nonunit exactly when the former is. Apply [lem-trf-locally-principal-supported-kernel] on $W$ with the principal closed subscheme $V(a_C)$ and the quasi-coherent module $(u^*H)|_W$. It gives quasi-coherence of $L|_W$ and quasi-compactness of its complementary open immersion. Apply [lem-trf-supported-sections-quasi-coherent] there with $(a_C)$ to obtain $L(W)=\\Gamma_{a_C}((u^*H)(W))$. These affine opens cover $Q$, and hence $L$ is quasi-coherent by [pqf-def-coherent].",
+   "uses": [
+    "lem-pc-ringed-space-tensor-pullback-qcoh",
+    "lem-trf-locally-principal-supported-kernel",
+    "lem-trf-supported-sections-quasi-coherent",
+    "pqf-def-coherent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/modules.tex",
+    "place": "Tag 01BG, lemma-pullback-quasi-coherent; properties.tex Tag 07ZP, lemma-sections-supported-on-closed-subset (2)-(3)"
+   }
+  },
+  {
+   "text": "Apply [lem-weil-pbc-module-pullback-affine-sections] to $H$ and $K$ on this affine pair. This gives the two $C$-linear bijections $c_H:M\\otimes_A C\\to(u^*H)(W)$ and $c_K:\\Gamma_a(M)\\otimes_A C\\to(u^*K)(W)$, both with formula $s\\otimes c\\mapsto c\\,\\eta(s)|_W$. Naturality for $K\\hookrightarrow H$ gives $(u^*(K\\hookrightarrow H))_Wc_K=c_H(\\iota\\otimes1_C)$, where $\\iota:\\Gamma_a(M)\\hookrightarrow M$ is inclusion. Since $c_H$ is $C$-linear and bijective, $a_C^nx=0$ if and only if $a_C^nc_H(x)=0$; thus $c_H$ carries $\\Gamma_{a_C}(M\\otimes_A C)$ bijectively onto $L(W)$ by Step 2.",
+   "uses": [
+    "lem-weil-pbc-module-pullback-affine-sections"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Tag 01I9, lemma-widetilde-pullback (1), functorial affine pullback; Tag 01IA, lemma-quasi-coherent-affine"
+   }
+  },
+  {
+   "text": "By [lem-weil-pbc-flat-morphism-affine-criterion], $C$ is flat over $A$. The subset $T=\\Gamma_a(M)$ is a submodule: if $a^rm=0$ and $a^sn=0$, then $a^{r+s}(m+n)=0$, and $a^r(bm)=0$ for $b\\in A$. Apply [lem-weil-pbc-flat-tensor-exact] to $0\\to T\\xrightarrow{\\iota}M\\to M/T$. It follows that $\\iota\\otimes1_C:T\\otimes_A C\\to M\\otimes_A C$ is injective. Every tensor in its source is a finite sum $\\sum_i t_i\\otimes c_i$. Choose exponents $n_i$ killing $t_i$ and put $N=\\sum_i n_i$ (with $N=0$ for the empty sum). Then $a_C^N$ kills its image, by tensor balancing. Its image is therefore contained in $\\Gamma_{a_C}(M\\otimes_A C)$.",
+   "uses": [
+    "lem-weil-pbc-flat-morphism-affine-criterion",
+    "lem-weil-pbc-flat-tensor-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tags 00HB and 00HD, definition-flat and lemma-flat; morphisms.tex Tag 01U5, lemma-flat-characterize (1)-(2)"
+   }
+  },
+  {
+   "text": "Conversely, take $x\\in M\\otimes_A C$ with $a_C^nx=0$ for some $n\\geq0$. Set $T_n=\\ker(a^n:M\\to M)$, an $A$-submodule contained in $T$. The sequence $0\\to T_n\\to M\\xrightarrow{a^n}M$ is exact by the definition of kernel. By [lem-weil-pbc-flat-tensor-exact], tensoring with $C$ makes it exact at $M\\otimes_A C$. On pure tensors the last map is $m\\otimes c\\mapsto a^nm\\otimes c=m\\otimes a_C^nc=a_C^n(m\\otimes c)$, so its kernel contains $x$. Exactness supplies $y\\in T_n\\otimes_A C$ mapping to $x$. The map induced by $T_n\\subseteq T$ sends $y$ to a preimage of $x$ in $T\\otimes_A C$. This proves the reverse containment, and hence the claimed image equality. The argument includes $n=0$, where $x=0$ and $T_0=0$.",
+   "uses": [
+    "lem-weil-pbc-flat-tensor-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tags 00HB and 00HD, definition-flat and lemma-flat, applied to the kernel of multiplication by a power"
+   }
+  },
+  {
+   "text": "Steps 3--5 identify the map $u^*K\\to u^*H$ on every affine pair in the statement as an injection onto $L(W)$. These $W$ cover $Q$ and refine any open neighbourhood. A section in the kernel restricts to zero on this cover, and is zero by the sheaf uniqueness axiom. For a section of $L$ on any open, the local preimages in $u^*K$ exist by the affine result, agree on overlaps by this injectivity, and glue by the sheaf axiom. Its image sheaf is therefore exactly $L$, with the asserted affine formulas.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/properties.tex",
+    "place": "Tag 07ZP, lemma-sections-supported-on-closed-subset; sheaf axioms applied to the affine comparisons"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-trf-locally-principal-supported-kernel",
+  "lem-trf-supported-sections-quasi-coherent",
+  "pqf-def-coherent",
+  "lem-pc-ringed-space-tensor-pullback-qcoh",
+  "lem-weil-pbc-module-pullback-affine-sections",
+  "lem-weil-pbc-flat-morphism-affine-criterion",
+  "lem-weil-pbc-flat-tensor-exact"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/properties.tex",
+  "place": "Tag 07ZP, lemma-sections-supported-on-closed-subset (2)-(3), assembled with flat tensor exactness (algebra.tex Tags 00HB/00HD) and affine pullback (schemes.tex Tag 01I9); the finite-exponent kernel argument is written by Q25."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For a flat morphism of schemes the subsheaf of a quasi coherent module consisting of sections supported on a locally principal closed subset pulls back to the subsheaf supported on its inverse image",
+   "results": "8 hits: AlgebraicGeometry.Scheme.IdealSheafData.support_comap, AlgebraicGeometry.Flat.instResLE, AlgebraicGeometry.Scheme.Hom.flat_appLE, AlgebraicGeometry.Flat.instMorphismRestrict, AlgebraicGeometry.Flat.flat_appLE, AlgebraicGeometry.Scheme.preimage_zeroLocus, AlgebraicGeometry.Scheme.IdealSheafData.comap_map_le, AlgebraicGeometry.Scheme.IdealSheafData.le_map_comap. Read the returned statements: tensorKerEquiv/ker_lTensor_eq are algebraic kernel statements; flatness, zero-locus and restriction declarations do not identify the supported-section sheaves and their affine pullback maps.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Flat base change of the kernel of restriction of a quasi coherent sheaf to a principal open, using power torsion and tensor localization",
+   "results": "8 hits: Module.Flat.ker_lTensor_eq, LinearMap.lTensor_ker_subtype_tensorKerEquiv_symm, LinearMap.tensorKerEquiv, LinearMap.tensorKerEquiv_apply, AlgebraicGeometry.Scheme.ker_morphismRestrict_ideal, Module.flat_of_isLocalized_span, ModuleCat.Tilde.exists_const, AlgebraicGeometry.Scheme.IdealSheafData.ker_glueDataObjι_appTop. Read the returned statements: tensorKerEquiv/ker_lTensor_eq are algebraic kernel statements; flatness, zero-locus and restriction declarations do not identify the supported-section sheaves and their affine pullback maps.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The supported sections subsheaf of a quasi coherent module on a scheme with locally principal closed support commutes with flat pullback",
+   "results": "8 hits: SheafOfModules.sheafificationCompPullback, AlgebraicGeometry.Scheme.Modules.instAdditivePullback, AlgebraicGeometry.Scheme.IdealSheafData.support_comap, SheafOfModules.isQuasicoherent, SheafOfModules.IsQuasicoherent.recOn, SheafOfModules.pullbackObjFreeIso, AlgebraicGeometry.Scheme.Modules.restrictStalkNatIso, AlgebraicGeometry.Scheme.Modules.restrictFunctorIsoPullback. Read the returned statements: tensorKerEquiv/ker_lTensor_eq are algebraic kernel statements; flatness, zero-locus and restriction declarations do not identify the supported-section sheaves and their affine pullback maps.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"torsion\", \"TensorProduct\"",
+   "results": "0 hits: . Read the returned statements: tensorKerEquiv/ker_lTensor_eq are algebraic kernel statements; flatness, zero-locus and restriction declarations do not identify the supported-section sheaves and their affine pullback maps.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "(supportedSections|sectionsSupported|supported_sections).*(pullback|flat)|(pullback|flat).*(supportedSections|sectionsSupported|supported_sections)",
+   "results": "0 hits: . Read the returned statements: tensorKerEquiv/ker_lTensor_eq are algebraic kernel statements; flatness, zero-locus and restriction declarations do not identify the supported-section sheaves and their affine pullback maps.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "(torsion|torsionBy).*(baseChange|tensor)|(baseChange|tensor).*(torsion|torsionBy)",
+   "results": "0 hits: . Read the returned statements: tensorKerEquiv/ker_lTensor_eq are algebraic kernel statements; flatness, zero-locus and restriction declarations do not identify the supported-section sheaves and their affine pullback maps.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Flat pullback of a quasi coherent module commutes with the subsheaf of sections supported on a locally principal closed subset",
+   "results": "8 hits: AlgebraicGeometry.Scheme.Hom.flat_appLE, AlgebraicGeometry.Flat.flat_appLE, ModuleCat.Tilde.res_const, AlgebraicGeometry.Flat.flat_of_affine_subset, AlgebraicGeometry.Flat.instMorphismRestrict, AlgebraicGeometry.Flat.instResLE, SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom, SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom_assoc. Read the hits: affine flatness and tensor-kernel exactness cover ingredients, while structure-sheaf ideal kernels concern different objects; none states the supported-section sheaf comparison with its affine adjunction-unit formulas.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "(supportedSections|sectionsSupported|sections_supported).*(pullback|flat)|(pullback|flat).*(supportedSections|sectionsSupported|sections_supported)",
+   "results": "0 hits: . Read the hits: affine flatness and tensor-kernel exactness cover ingredients, while structure-sheaf ideal kernels concern different objects; none states the supported-section sheaf comparison with its affine adjunction-unit formulas.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Flat base change of the subsheaf of sections of a quasi coherent module supported on a principal closed subset",
+   "results": "8 hits: Module.Flat.isBaseChange, IsSMulRegular.of_flat_of_isBaseChange, RingHom.Flat.isStableUnderBaseChange, RingTheory.Sequence.IsWeaklyRegular.of_flat_of_isBaseChange, AlgebraicGeometry.Flat.isStableUnderBaseChange, AlgebraicGeometry.Flat.flat_appLE, AlgebraicGeometry.Flat.casesOn, AlgebraicGeometry.Flat.flat_of_affine_subset. Read the hits: affine flatness and tensor-kernel exactness cover ingredients, while structure-sheaf ideal kernels concern different objects; none states the supported-section sheaf comparison with its affine adjunction-unit formulas.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "Module.Flat, LinearMap.ker",
+   "results": "10 hits: LinearMap.kerLTensorEquivOfSurjective, LinearMap.tensorKerInv, LinearMap.tensorKerEquiv, LinearMap.tensorKerEquivOfSurjective_symm_tmul, Module.Flat.ker_lTensor_eq, LinearMap.lTensor_ker_subtype_tensorKerEquiv_symm, LinearMap.tensorKerEquiv_apply, Submodule.LinearDisjoint.linearIndependent_left_of_flat. Read the hits: affine flatness and tensor-kernel exactness cover ingredients, while structure-sheaf ideal kernels concern different objects; none states the supported-section sheaf comparison with its affine adjunction-unit formulas.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The kernel of restriction of a quasi coherent sheaf to a principal open commutes with flat extension of scalars including canonical affine section maps",
+   "results": "8 hits: AlgebraicGeometry.Scheme.ker_morphismRestrict_ideal, AlgebraicGeometry.Scheme.ideal_ker_le_ker_ΓSpecIso_inv_comp, AlgebraicGeometry.Scheme.Hom.ker_apply, AlgebraicGeometry.Scheme.IdealSheafData.ker_glueDataObjι_appTop, AlgebraicGeometry.Scheme.Hom.toImage_app, AlgebraicGeometry.Scheme.Hom.ideal_ker_le, AlgebraicGeometry.Scheme.IdealSheafData.ker_subschemeι_app, AlgebraicGeometry.Scheme.IdealSheafData.isLocalization_away. Read the hits: affine flatness and tensor-kernel exactness cover ingredients, while structure-sheaf ideal kernels concern different objects; none states the supported-section sheaf comparison with its affine adjunction-unit formulas.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "tensorKerEquiv|ker_lTensor_eq",
+   "results": "5 hits: Mathlib/RingTheory/Flat/Equalizer.lean, Mathlib/RingTheory/Flat/Equalizer.lean, Mathlib/RingTheory/Flat/Equalizer.lean, Mathlib/RingTheory/Flat/Equalizer.lean, Mathlib/RingTheory/Flat/Equalizer.lean. Read the hits: affine flatness and tensor-kernel exactness cover ingredients, while structure-sheaf ideal kernels concern different objects; none states the supported-section sheaf comparison with its affine adjunction-unit formulas. Search subdirectory: RingTheory/Flat/",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-module-strict-transform-flat-pullback",
+  "date": "2026-10-22",
+  "group": "Q77"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Proof (1)--(2), semistable-alteration input: the Raynaud--Gruson flattening argument is applied to the finite-type module i_* O_X on an affine-space neighbourhood. Stacks 0815 proof paragraph 1: the question is etale local on the source and target. Stacks 0814 proof paragraph 1: identify the pullback of the global strict transform with the local strict transform before composing the two blowups. Extracted parent argument: step 3(c)-(f), supported sections, flat tensor-localization kernel comparison and equality on an affine basis.",
+   "via": [
+    "lem-trf-module-strict-transform-flat-pullback",
+    "lem-trf-etale-flattening-descent",
+    "lem-trf-flattening-module-by-admissible-blowup",
+    "lem-trf-flattening-by-admissible-blowup",
+    "lem-trf-flatification-horizontal-curve-pair",
+    "lem-trf-dejong-relative-marked-semistable",
+    "lem-trf-relative-marked-nodal-reduction",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-trf-supported-kernel-flat-pullback",
+  "worker": "stage1",
+  "summary": "Q25 checked the complete supported-section comparison without changing its statement. Reused seven existing DAG nodes, including the precise affine adjunction-unit formula and flat tensor exactness. Wrote the finite-power kernel argument, both image containments, and sheaf gluing explicitly. No new nodes are needed.",
+  "blueprint": "The inherited blueprint provenance is lem-trf-local-term-locality, proof (1)--(2), the semistable-alteration/flattening support tool, through the existing from.via chain. This split realizes the extracted parent lem-trf-module-strict-transform-flat-pullback step 3(c)--(f): supported kernels, flatness and affine equality. It does not alter the current main-20261015 contracting-correspondence route.",
+  "tool_uses": [
+   {
+    "node": "lem-pc-ringed-space-tensor-pullback-qcoh",
+    "why": "Generic ordinary tensor pullback preserves quasi-coherence; this unit has no independent replacement for this module-theoretic tool."
+   },
+   {
+    "node": "lem-weil-pbc-module-pullback-affine-sections",
+    "why": "Generic affine section isomorphism with its adjunction-unit normalization and naturality; the supported-section argument needs exactly these formulas and the unit has no such affine comparison."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pc-ringed-space-tensor-pullback-qcoh",
+  "lem-weil-pbc-module-pullback-affine-sections"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q25-97e9f9502",
+  "group": "Q25",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q25-97e9f9502 (reviewer sub-agent of L); spot-checked: PASS, no changes. This is the first split of this item and it adds no new nodes, so the re-split rule does not apply. The report says the statement and stmt_deps are unchanged, and the stmt_deps (scheme, flat morphism, quasi-coherent, module pullback) match the notions the statement uses. I read Stacks properties.tex 07ZP lemma-sections-supported-on-closed-subset (1)-(3); the flat-pullback clause is not in the source, and proof_origin correctly says the argument is the agent's. Step 1: applies lem-trf-locally-principal-supported-kernel with Y=T=V, q=1 and E=V(a); its subsheaf is K|_V, and j quasi-compact gives the retrocompactness that lem-trf-supported-sections-quasi-coherent needs, so K(V)=Gamma_a(M) with J=(a). Quasi-coherence of K is affine-local (pqf-def-coherent). The text speaks of the chosen neighbourhoods V, but the same argument works for every affine V with D cap V=V(a), so this is not a gap. Step 2: D_Q cap W=V(a_C) follows because stalk maps are local; the same two nodes applied on W give L(W)=Gamma_{a_C}. Step 3: the affine-sections node gives c with exactly the item's formula c eta(s)|_W, and its naturality for the inclusion K into H gives the map; c_H is C-linear, so it carries the torsion submodule onto L(W). Step 4: C is flat over A by the affine criterion, 0->T->M->M/T stays exact so the map is injective, and the image is killed by a_C^N with N=sum n_i. Step 5: the exact sequence 0->T_n->M->M (multiplication by a^n) stays exact after tensoring, which gives the reverse containment. Step 6: injectivity, image in L and gluing are checked on a basis of affine W; this is elementary. Edge cases tested: a=0 or nilpotent, a a unit, M=0, W empty, n=0, unbounded torsion exponents, and the non-flat counterexample Z->Z/2 with a=2 (so flatness is needed and is assumed). Duplicate search: nagata power-torsion localization covers only localization; per-local-cohomology flat base change needs Noetherian rings; no node states the item. The tool_uses lem-pc-ringed-space-tensor-pullback-qcoh and lem-weil-pbc-module-pullback-affine-sections are generic module tools the unit lacks and are accepted. No SGA citation."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SupportedKernelFlatPullback",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.supportedSectionsKernel_flatPullback",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.Modules.supportedSectionsKernel",
+   "AlgebraicGeometry.Scheme.Modules.supportedSectionsKernelι",
+   "AlgebraicGeometry.Scheme.Modules.supportedSectionsKernel_flatPullback"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/SupportedKernelFlatPullback.lean",
+  "statement": "theorem supportedSectionsKernel_flatPullback {Q P : Scheme.{u}} (u : Q ⟶ P) [Flat u] (D : Closeds P) (hD : ∀ x : P, ∃ (V : P.affineOpens) (a : Γ(P, V.1)), x ∈ V.1 ∧ V.1 ⊓ D.compl = P.basicOpen a) (H : P.Modules) (hH : H.IsQuasicoherent) : (supportedSectionsKernel D H).IsQuasicoherent ∧ (supportedSectionsKernel (D.preimage u.base.hom.continuous) ((tensorPullback u).obj H)).IsQuasicoherent ∧ (∀ (V : P.Opens) (s : Γ(H, V)), (∃ t : Γ(supportedSectionsKernel D H, V), (supportedSectionsKernelι D H).app V t = s) ↔ H.presheaf.map (homOfLE (inf_le_left : V ⊓ D.compl ≤ V)).op s = 0) ∧ (∀ (W : Q.Opens), Function.Injective (((tensorPullback u).map (supportedSectionsKernelι D H)).app W) ∧ Set.range (((tensorPullback u).map (supportedSectionsKernelι D H)).app W) = Set.range ((supportedSectionsKernelι (D.preimage u.base.hom.continuous) ((tensorPullback u).obj H)).app W) ∧ ∀ s : Γ((tensorPullback u).obj H, W), (∃ t : Γ(supportedSectionsKernel (D.preimage u.base.hom.continuous) ((tensorPullback u).obj H), W), (supportedSectionsKernelι (D.preimage u.base.hom.continuous) ((tensorPullback u).obj H)).app W t = s) ↔ ((tensorPullback u).obj H).presheaf.map (homOfLE (inf_le_left : W ⊓ (u ⁻¹ᵁ D.compl) ≤ W)).op s = 0) ∧ ∀ (V : P.affineOpens) (W : Q.affineOpens) (e : W.1 ≤ u ⁻¹ᵁ V.1) (a : Γ(P, V.1)), V.1 ⊓ D.compl = P.basicOpen a → (∀ s : Γ(H, V.1), (∃ t : Γ(supportedSectionsKernel D H, V.1), (supportedSectionsKernelι D H).app V.1 t = s) ↔ ∃ n : ℕ, a ^ n • s = 0) ∧ ∃ (cK : (ModuleCat.extendScalars (u.appLE V.1 W.1 e).hom).obj (ModuleCat.of Γ(P, V.1) Γ(supportedSectionsKernel D H, V.1)) ≃ₗ[Γ(Q, W.1)] Γ((tensorPullback u).obj (supportedSectionsKernel D H), W.1)) (cH : (ModuleCat.extendScalars (u.appLE V.1 W.1 e).hom).obj (ModuleCat.of Γ(P, V.1) Γ(H, V.1)) ≃ₗ[Γ(Q, W.1)] Γ((tensorPullback u).obj H, W.1)), (∀ (s : Γ(supportedSectionsKernel D H, V.1)) (c : Γ(Q, W.1)), cK (c ⊗ₜ[Γ(P, V.1), (u.appLE V.1 W.1 e).hom] s) = c • ((tensorPullback u).obj (supportedSectionsKernel D H)).presheaf.map (homOfLE e).op (((tensorPullbackSectionAdjunction u).unit.app (supportedSectionsKernel D H)).app V.1 s)) ∧ (∀ (s : Γ(H, V.1)) (c : Γ(Q, W.1)), cH (c ⊗ₜ[Γ(P, V.1), (u.appLE V.1 W.1 e).hom] s) = c • ((tensorPullback u).obj H).presheaf.map (homOfLE e).op (((tensorPullbackSectionAdjunction u).unit.app H).app V.1 s)) ∧ (∀ t : (ModuleCat.extendScalars (u.appLE V.1 W.1 e).hom).obj (ModuleCat.of Γ(P, V.1) Γ(supportedSectionsKernel D H, V.1)), ((tensorPullback u).map (supportedSectionsKernelι D H)).app W.1 (cK t) = cH ((ModuleCat.extendScalars (u.appLE V.1 W.1 e).hom).map ((supportedSectionsKernelι D H).val.app (op V.1)) t)) ∧ Function.Injective ((ModuleCat.extendScalars (u.appLE V.1 W.1 e).hom).map ((supportedSectionsKernelι D H).val.app (op V.1))) ∧ (∀ t : (ModuleCat.extendScalars (u.appLE V.1 W.1 e).hom).obj (ModuleCat.of Γ(P, V.1) Γ(H, V.1)), t ∈ Set.range ((ModuleCat.extendScalars (u.appLE V.1 W.1 e).hom).map ((supportedSectionsKernelι D H).val.app (op V.1))) ↔ ∃ n : ℕ, (u.appLE V.1 W.1 e).hom a ^ n • t = 0) ∧ (∀ t : (ModuleCat.extendScalars (u.appLE V.1 W.1 e).hom).obj (ModuleCat.of Γ(P, V.1) Γ(H, V.1)), (∃ n : ℕ, (u.appLE V.1 W.1 e).hom a ^ n • t = 0) ↔ cH t ∈ Set.range ((supportedSectionsKernelι (D.preimage u.base.hom.continuous) ((tensorPullback u).obj H)).app W.1))",
+  "branch": "newtargets-dag",
+  "by": "Q74",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "The supported sheaves and their inclusions are the actual kernels of the restriction-adjunction units. Affine tensors use Mathlib extension of scalars C tensor_A M, canonically identified with the displayed M tensor_A C by tensor symmetry. No statement correction."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-a9741c717",
+  "group": "Q74",
+  "result": "fix",
+  "note": "Lean exact vs node: K/L = kernel of Mathlib restrictAdjunction unit (restriction to V⊓Dᶜ, real data), hD ⇔ D∩V=V(a) locally, H Mathlib IsQuasicoherent (pqf record), tensorPullback + normalized tensorPullbackSectionAdjunction unit (def-pc-module-pullback record); K,L QC; per-open injectivity + range equality = image L; every affine (V,W,e,a): Γ_a(M)=K(V), cK/cH pinned by pure-tensor formulas c•η(s)|_W (extendScalars C⊗_A M, symmetric convention), naturality square, tensor-of-inclusion injective, range = a_C-power torsion, cH(torsion) ⇔ ∈ L(W). No extra hyps; universes as deps; edge cases (D=∅/P, empty, H=0, nilpotent a, n=0) covered. Only lean field changed; statement verbatim; imports/docstrings/width/sorry OK; no file changed so no compile. Sole fault H11: author's own second pass → fixes/lem-trf-supported-kernel-flat-pullback.report.md (worker report verbatim + independent clause-by-clause second reading). Advisory: supportedSectionsKernel has no def node; sister supported-kernel theorem nodes should reuse it."
+ }
+}

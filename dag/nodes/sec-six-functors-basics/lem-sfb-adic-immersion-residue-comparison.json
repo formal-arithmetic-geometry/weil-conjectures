@@ -1,0 +1,115 @@
+{
+ "id": "lem-sfb-adic-immersion-residue-comparison",
+ "kind": "statement",
+ "title": "Two residue functor comparisons for the fixed completed immersion pullback",
+ "statement": "Let i:S→X be an immersion of schemes [def-pc-scheme], [def-weil-closed-immersion], [def-weil-open-immersion], A a Noetherian commutative ring and I an ideal. Use the explicitly normalized completed pullback sfbImmersionCompletedModel [def-sfb-adic-immersion-completed-model]. Let sfbFixedResiduePull be exact fixed-scalar pro-etale inverse image followed by the AsSmall and constant-module equivalences. For every completed complex K, the zeroth scalar extension of sfbImmersionCompletedModel(K) is isomorphic to derived sfbFixedResiduePull applied to sfbResidueComplex(K). For every etale A/I-complex C, this same exact derived functor applied to comparisonUpperStar(C) is isomorphic to adicResidueComparison of the explicit sfbImmersionResidue(C) [lem-sfb-adic-immersion-residue-transport]. Neither assertion requires completeness or an isomorphism presenting the residue of K.",
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-closed-immersion",
+  "def-weil-open-immersion",
+  "def-weil-pbc-noetherian-ring",
+  "def-sfb-adic-immersion-completed-model",
+  "lem-sfb-adic-immersion-residue-transport",
+  "def-sfb-adic-residue-lift-comparisons"
+ ],
+ "proof": [
+  {
+   "text": "Apply the two strictly smaller fixed-model and etale-origin comparison theorems, stated with the core fixed residue pullback that sfbFixedResiduePull abbreviates, and introduce their conjunction.",
+   "uses": [
+    "lem-sfb-adic-immersion-residue-comparison-fixed",
+    "lem-sfb-adic-immersion-residue-comparison-etale",
+    "def-sfb-adic-immersion-residue-comparison-core"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-adic-immersion-residue-comparison-fixed",
+  "lem-sfb-adic-immersion-residue-comparison-etale",
+  "def-sfb-adic-immersion-residue-comparison-core"
+ ],
+ "source": {
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Bhatt--Scholze Lemma 6.5.8; Stacks Tags 03A0, 03CY, 06YY, 099L and 099R; finite-projection and comparison-pullback squares"
+ },
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Bhatt--Scholze Lemma 6.5.8; conjunction assembly after strict clause extraction"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Transport derived complete complexes of sheaves along an immersion preserving residue and restriction to slices",
+   "results": "AlgebraicGeometry.Scheme.Modules.restrictFunctorComp, restrictFunctor, restrict, restrictFunctorComp_hom_app_app, restrictFunctorCongr, restrictFunctorCongr_hom_app_app; open immersion restriction comparisons.",
+   "date": "2026-10-26",
+   "verdict": "No complete theorem. Reuse the project exact inverse image, scalar restriction, finite-comparison and local-completeness APIs."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"SheafOfModules\", \"Equivalence\"",
+   "results": "SheafOfModules.pushforwardPushforwardEquivalence; pushforwardPushforwardEquivalence_unit_app_val_app; pushforwardPushforwardEquivalence_counit_app_val_app.",
+   "date": "2026-10-26",
+   "verdict": "Module equivalences exist, but do not state these completed-ring, residue or slice compatibilities."
+  },
+  {
+   "tool": "grep",
+   "query": "pushforwardPushforwardEquivalence|derivedEquivalence|mapDerivedCategoryEquivalence",
+   "results": "Mathlib/Topology/Sheaves/Module.lean:32; Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean:388,403,404,408,409; Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent.lean:435.",
+   "date": "2026-10-26",
+   "verdict": "No completed normalization theorem; exact derived factorization and canonical module equivalences are the applicable ingredients."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.AdicImmersionCompletedTransport",
+  "date": "2026-10-26",
+  "group": "F8"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-lem-integral-models",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-lem-integral-models-stacks",
+   "place": "Bhatt--Scholze Lemma 6.5.8; Stacks Tags 03A0, 03CY, 06YY, 099L and 099R; finite-projection and comparison-pullback squares"
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.AdicImmersionResidueComparison",
+  "file": "lean/Sheaf/Paper/AdicImmersionResidueComparison.lean",
+  "declaration": "AlgebraicGeometry.Scheme.sfbImmersion_residueComparisons",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.sfbFixedResiduePull",
+   "AlgebraicGeometry.Scheme.sfbImmersion_residueComparisons"
+  ],
+  "statement": "theorem sfbImmersion_residueComparisons\n    {X S : Scheme.{u}} (i : S ⟶ X) [IsImmersion i]\n    {A : Type (u + 1)} [CommRing A] [IsNoetherianRing A] (I : Ideal A) :\n    letI := HasDerivedCategory.standard\n      (ConstantCompletion.Mod (ConstantCompletion.constant (proEtaleModelTopology S)\n        (A ⧸ I ^ (0 + 1))))\n    (∀ K : @DerivedCategory (proEtaleRingModules X (adicLisseCompletedRing X I)) _ _\n        (proEtaleRingModules_hasDerivedCategory X (adicLisseCompletedRing X I)),\n      Nonempty ((ConstantCompletion.extend\n        (ConstantCompletion.projection (proEtaleModelTopology S) A I 0)).obj\n          (sfbImmersionCompletedModel i I K) ≅\n        (Functor.mapDerivedCategory.{u + 1, u + 2, u + 1, u + 1, u + 2, u + 2}\n          (sfbFixedResiduePull i (A ⧸ I ^ (0 + 1)))).obj\n          (DerivedCategory.Q.obj (sfbResidueComplex X I K)))) ∧\n    (∀ C : CochainComplex\n        (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} (A ⧸ I ^ (0 + 1)))) ℤ,\n      Nonempty ((Functor.mapDerivedCategory.{u + 1, u + 2, u + 1, u + 1, u + 2, u + 2}\n          (sfbFixedResiduePull i (A ⧸ I ^ (0 + 1)))).obj\n          (DerivedCategory.Q.obj\n            (((ProEtale.comparisonUpperStar.{u + 2, u}\n              (ModuleCat.{u + 1} (A ⧸ I ^ (0 + 1))) X).mapHomologicalComplex\n                (.up ℤ)).obj C)) ≅\n        (adicResidueComparison.{u, 0} S (A ⧸ I ^ (0 + 1))).obj\n          (sfbImmersionResidue i I C)))",
+  "branch": "sheaf-dag",
+  "by": "F8",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F8",
+  "result": "pass",
+  "landing": "20261026T001524-L-6141",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-18f57",
+  "group": "X9",
+  "result": "fix",
+  "landing": "20261026T071516-L-3943000",
+  "kind": "interface",
+  "note": "independent cc review: item conjunction vs two verbatim conjunct sorries (fixed/etale) + verbatim core extraction behind abbrev; node records vs Lean and base plan; importer AdicImmersionCompletedTransport compiled against delivery"
+ }
+}

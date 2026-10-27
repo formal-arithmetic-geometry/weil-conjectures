@@ -3,7 +3,7 @@
  "blueprint": {
   "is": "lem-galois-glue",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Glueing of schemes along open immersions",
@@ -12,27 +12,137 @@
   "document": "literature/blueprint/master/blueprint/sec-curve-estimates/sk-prop-h2/lem-galois-glue.md",
   "place": "node lem-galois-glue, order 963"
  },
- "stmt_deps": [],
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-open-immersion",
+  "def-pc-fibre-product"
+ ],
  "proof": [
   {
-   "text": "Form $P_0=\\coprod_iP_i$ and\n$R=\\coprod_{i,j}P_i\\times_YY_j$, with the two maps $s,t:R\\to P_0$\ngiven on the $(i,j)$-component by $\\operatorname{id}\\times Y_j$ and\n$\\varphi_{ij}$ (the coproducts and fibre products of schemes being\nthose of [def-weil-pbc-scheme-conventions]). Both are open immersions, and the cocycle condition\nsays that they define an equivalence relation on the underlying\ntopological space. The quotient topological space $P$ therefore\ncarries the sheaf of rings\n$U\\mapsto\\{(f_i):\\varphi_{ij}^*f_j=f_i\\text{ on overlaps}\\}$, a sheaf by\nthe cocycle condition, and the maps $P_i\\to Y_i\\to Y$ glue to\n$P\\to Y$; the restrictions $P\\times_YY_i\\cong P_i$ are the quotient\nmaps. Uniqueness is the uniqueness of the quotient.",
+   "text": "Write $b_i:Y_i\\hookrightarrow Y$ for the covering open immersions and $f_i:P_i\\to Y_i$, $a_i=b_i\\circ f_i$. By [lem-weil-pbc-open-preimage-fibre-product], $U_{ij}:=P_i\\times_Y Y_j$ is the open subscheme $a_i^{-1}(Y_j)$ of $P_i$. Because $\\varphi_{ij}$ is over $Y_i\\times_Y Y_j$, it preserves the map to $Y$; consequently it identifies $U_{ij}\\cap U_{ik}$ with $U_{ji}\\cap U_{jk}$. Indeed both are the inverse image of $Y_k$ in the corresponding overlap. Also $U_{ii}=P_i$, and the cocycle with $k=i$ gives $\\varphi_{ji}=\\varphi_{ij}^{-1}$. Thus the hypotheses give exactly the open-overlap gluing data, including the domain condition on triple intersections.",
    "uses": [
-    "def-weil-pbc-scheme-conventions"
+    "lem-weil-pbc-open-preimage-fibre-product"
    ],
-   "elementary": false
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Tags 01JA (section-glueing-schemes), 01JB (lemma-glue), 01JC (lemma-glue-schemes), and 01JR (lemma-open-fibre-product)"
+   }
+  },
+  {
+   "text": "Apply [lem-weil-pbc-glue-schemes] to $(P_i,U_{ij},\\varphi_{ij})$. Obtain a scheme $P$ with covering open immersions $q_i:P_i\\to P$, satisfying $q_i|_{U_{ij}}=q_j\\circ\\varphi_{ij}$ and $q_i(U_{ij})=q_i(P_i)\\cap q_j(P_j)$. The maps $a_i$ agree on these overlaps, since the given transition isomorphisms are over $Y$. By [lem-weil-pbc-scheme-morphism-gluing], there is a unique $p:P\\to Y$ with $p\\circ q_i=a_i$.",
+   "uses": [
+    "lem-weil-pbc-glue-schemes",
+    "lem-weil-pbc-scheme-morphism-gluing"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Tags 01JA (section-glueing-schemes), 01JB (lemma-glue), 01JC (lemma-glue-schemes), and 01JR (lemma-open-fibre-product)"
+   }
+  },
+  {
+   "text": "For each $i$, $q_i(P_i)=p^{-1}(Y_i)$. The forward inclusion follows from $p\\circ q_i=b_i\\circ f_i$. Conversely, write any $x\\in p^{-1}(Y_i)$ as $q_j(z)$ using the cover from [lem-weil-pbc-glue-schemes]. Then $a_j(z)=p(x)\\in Y_i$, so $z\\in U_{ji}$. The overlap equation gives $x=q_i(\\varphi_{ji}(z))$, proving the reverse inclusion. Both $q_i:P_i\\to P$ and the inclusion of $p^{-1}(Y_i)$ identify their sources with the open subscheme on this same open subset; the definition [def-weil-open-immersion] therefore identifies $P_i$ with $p^{-1}(Y_i)$ as schemes. This uses equality of open subschemes, rather than an inference about a closed subscheme from its underlying set.",
+   "uses": [
+    "lem-weil-pbc-glue-schemes",
+    "def-weil-open-immersion"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Tags 01JA (section-glueing-schemes), 01JB (lemma-glue), 01JC (lemma-glue-schemes), and 01JR (lemma-open-fibre-product)"
+   }
+  },
+  {
+   "text": "By [lem-weil-pbc-open-preimage-fibre-product], $p^{-1}(Y_i)$ is $P\\times_Y Y_i$. Hence the isomorphism of step 3 gives $P\\times_Y Y_i\\cong P_i$. Its map to $Y_i$ is $f_i$: after composition with the inclusion $b_i$ both maps are $p\\circ q_i$, and an open immersion identifies its source with an open subscheme [def-weil-open-immersion], so equality can be checked after this inclusion. On the common restriction to $Y_i\\cap Y_j$, the change from the $i$-chart to the $j$-chart is precisely $\\varphi_{ij}$, since $q_i|_{U_{ij}}=q_j\\circ\\varphi_{ij}$ in step 2. Thus these are the required compatible isomorphisms over the base opens.",
+   "uses": [
+    "lem-weil-pbc-open-preimage-fibre-product",
+    "def-weil-open-immersion"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Tags 01JA (section-glueing-schemes), 01JB (lemma-glue), 01JC (lemma-glue-schemes), and 01JR (lemma-open-fibre-product)"
+   }
+  },
+  {
+   "text": "Uniqueness includes the chosen compatible local identifications. Let $(P^{\\prime},p^{\\prime})$ be another such object, and let $q_i^{\\prime}:P_i\\to P^{\\prime}$ be the inverses of its local identifications followed by the open inclusions. These are covering open immersions by [lem-weil-pbc-open-preimage-fibre-product] and [def-weil-open-immersion]. The maps $q_i^{\\prime}\\circ q_i^{-1}:q_i(P_i)\\to P^{\\prime}$ agree on overlaps because both systems have the same transition $\\varphi_{ij}$. Apply [lem-weil-pbc-scheme-morphism-gluing] to obtain $h:P\\to P^{\\prime}$, and apply it in the opposite direction to obtain $k$. The same lemma checks on the respective covering charts that $kh=\\mathrm{id}_P$, $hk=\\mathrm{id}_{P^{\\prime}}$, and $p^{\\prime}h=p$. It also says that any map respecting the local identifications equals $h$. This proves existence and uniqueness of the compatible $Y$-isomorphism.",
+   "uses": [
+    "lem-weil-pbc-open-preimage-fibre-product",
+    "def-weil-open-immersion",
+    "lem-weil-pbc-scheme-morphism-gluing"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Tags 01JA (section-glueing-schemes), 01JB (lemma-glue), 01JC (lemma-glue-schemes), and 01JR (lemma-open-fibre-product)"
+   }
   }
  ],
  "proof_deps": [
-  "def-weil-pbc-scheme-conventions"
+  "lem-weil-pbc-open-preimage-fibre-product",
+  "lem-weil-pbc-glue-schemes",
+  "lem-weil-pbc-scheme-morphism-gluing",
+  "def-weil-open-immersion"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/master/blueprint/sec-curve-estimates/sk-prop-h2/lem-galois-glue.md",
-  "place": "## Proof"
+  "document": "literature/blueprint/latest/blueprint/sec-curve-estimates/sk-thm-curveestimate/lem-galois-glue.proof.md",
+  "place": "Proof, repaired using Stacks 01JB, 01JC and 01JR; explicit relative chart and uniqueness arguments"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "GlueData|glued|isoPullback",
+   "results": "Hits: 22, 23, 26, 27, 28; ",
+   "date": "2026-10-23",
+   "verdict": "no exact match: the hits supply general scheme gluing or relative gluing for a locally directed diagram; conversion of arbitrary cover cocycle data and the relative chart and uniqueness clauses requires the explicit argument below."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Schemes glue along open subschemes satisfying a cocycle condition",
+   "results": "Hits: AlgebraicGeometry.Scheme.LocalRepresentability.glueData, AlgebraicGeometry.Scheme.GlueData.glued, AlgebraicGeometry.Scheme.GlueData, AlgebraicGeometry.Scheme.Pullback.gluing, AlgebraicGeometry.Scheme.LocalRepresentability.glueData_V, AlgebraicGeometry.Scheme.Cover.gluedCover, AlgebraicGeometry.Scheme.Cover.glued_cover_cocycle, AlgebraicGeometry.Scheme.GlueData.mk; ",
+   "date": "2026-10-23",
+   "verdict": "no exact match: the hits supply general scheme gluing or relative gluing for a locally directed diagram; conversion of arbitrary cover cocycle data and the relative chart and uniqueness clauses requires the explicit argument below."
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Scheme.GlueData",
+   "results": "Hits: AlgebraicGeometry.Scheme.GlueData, AlgebraicGeometry.Scheme.GlueData.glued, AlgebraicGeometry.Scheme.GlueData.gluedScheme, AlgebraicGeometry.Scheme.GlueData.toLocallyRingedSpaceGlueData, AlgebraicGeometry.Scheme.Cover.gluedCover, AlgebraicGeometry.Scheme.GlueData.openCover, AlgebraicGeometry.Scheme.GlueData.toGlueData, AlgebraicGeometry.Scheme.GlueData.instHasMulticoequalizerDiagram; ",
+   "date": "2026-10-23",
+   "verdict": "no exact match: the hits supply general scheme gluing or relative gluing for a locally directed diagram; conversion of arbitrary cover cocycle data and the relative chart and uniqueness clauses requires the explicit argument below."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Schemes glue along open subschemes with isomorphisms satisfying a cocycle condition, uniquely up to compatible isomorphism",
+   "results": "Hits: AlgebraicGeometry.Scheme.GlueData, AlgebraicGeometry.Scheme.GlueData.gluedScheme, AlgebraicGeometry.Scheme.GlueData.glued, AlgebraicGeometry.Scheme.GlueData.mk.inj, AlgebraicGeometry.Scheme.Cover.glueMorphisms, AlgebraicGeometry.Scheme.GlueData.toGlueData, AlgebraicGeometry.Scheme.Cover.gluedCover, AlgebraicGeometry.Scheme.LocalRepresentability.glueData; ",
+   "date": "2026-10-23",
+   "verdict": "no exact match: the hits supply general scheme gluing or relative gluing for a locally directed diagram; conversion of arbitrary cover cocycle data and the relative chart and uniqueness clauses requires the explicit argument below."
+  },
+  {
+   "tool": "grep",
+   "query": "RelativeGluingData|vPullbackConeIsLimit|def glueMorphisms|theorem hom_ext",
+   "results": "Hits: Mathlib/AlgebraicGeometry/GluingOneHypercover.lean, Mathlib/AlgebraicGeometry/RelativeGluing.lean, Mathlib/AlgebraicGeometry/RelativeGluing.lean, Mathlib/AlgebraicGeometry/RelativeGluing.lean, Mathlib/AlgebraicGeometry/RelativeGluing.lean, Mathlib/AlgebraicGeometry/RelativeGluing.lean, Mathlib/AlgebraicGeometry/Gluing.lean, Mathlib/AlgebraicGeometry/Gluing.lean; ",
+   "date": "2026-10-23",
+   "verdict": "no exact match: the hits supply general scheme gluing or relative gluing for a locally directed diagram; conversion of arbitrary cover cocycle data and the relative chart and uniqueness clauses requires the explicit argument below."
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Scheme.Cover.RelativeGluingData",
+   "results": "Hits: AlgebraicGeometry.Scheme.Cover.RelativeGluingData, AlgebraicGeometry.Scheme.Cover.RelativeGluingData.functor, AlgebraicGeometry.Scheme.Cover.RelativeGluingData.equifibered, AlgebraicGeometry.Scheme.Cover.RelativeGluingData.glued, AlgebraicGeometry.Scheme.Cover.RelativeGluingData.cover, AlgebraicGeometry.Scheme.Cover.RelativeGluingData.toBase, AlgebraicGeometry.Scheme.Cover.RelativeGluingData.instIsLocallyDirectedI₀CompFunctorForgetOfIsThin, AlgebraicGeometry.Scheme.Cover.RelativeGluingData.instLocallyDirectedIsOpenImmersionCover; ",
+   "date": "2026-10-23",
+   "verdict": "no exact match: the hits supply general scheme gluing or relative gluing for a locally directed diagram; conversion of arbitrary cover cocycle data and the relative chart and uniqueness clauses requires the explicit argument below."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A family of schemes over an open cover of a base scheme with descent isomorphisms on overlaps has an effective descent and the local charts are pullback squares",
+   "results": "Hits: AlgebraicGeometry.Scheme.Cover.gluedCover, AlgebraicGeometry.Scheme.Cover.glueMorphisms, AlgebraicGeometry.Scheme.Cover.gluedCover_V, AlgebraicGeometry.Scheme.Cover.RelativeGluingData, AlgebraicGeometry.Scheme.GlueData, AlgebraicGeometry.Scheme.Cover.gluedCover_f, AlgebraicGeometry.Scheme.Pullback.gluing_U, AlgebraicGeometry.Scheme.isPullback_of_openCover; ",
+   "date": "2026-10-23",
+   "verdict": "no exact match: the hits supply general scheme gluing or relative gluing for a locally directed diagram; conversion of arbitrary cover cocycle data and the relative chart and uniqueness clauses requires the explicit argument below."
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "blueprint_kind": "lemma",
  "blueprint_order": 963,
@@ -40,11 +150,55 @@
   "def-weil-pbc-scheme-conventions"
  ],
  "proof_split_by": "paragraphs",
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
  "chapter": "sec-curve-estimates",
  "unit": "sk-prop-h2",
  "lead_note": "2026-10-10 L: unreached from the target since the split of thm-galois-lc-etale (11:44) replaced the blueprint's descent/gluing argument by Yoneda and 03RV; flagged unreachable, leaves the queue; reached again if a citer appears. 2026-10-10 L: reached again at 11:52 through lem-galois-flc-representable; flag removed. 2026-10-10 L: unreached again at 12:11: the corrected proof of lem-galois-descent (fpqc descent) no longer uses it; flagged unreachable.",
  "import_flags": [
   "unreachable"
- ]
+ ],
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-galois-glue",
+  "worker": "stage1",
+  "summary": "Q46: verified the current blueprint and Stacks 01JB/01JC/01JR; reused existing gluing and inverse-image leaves, exposed the relative chart and compatible uniqueness arguments, corrected the false claim that the two coproduct relation maps are open immersions. No new nodes, no Lean attachment, statement unchanged.",
+  "blueprint": "Realizes the proof paragraph: open overlaps and cocycle; glued scheme and glued base morphism; the asserted restriction isomorphisms; uniqueness. Replaces the erroneous global relation-map claim with the established gluing theorem."
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q46-d07d901ed",
+  "group": "Q46",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q46-d07d901ed (reviewer sub-agent of L); spot-checked: The item is reached through the step-4 uses of lem-sfb-isom-graph-representatives-zariski-gluing. Live still holds the imported node and there is no repair note, so this is not a re-split and not superseded. The statement is verbatim from master, main-20261015 and latest. The 5 steps are correct. Step 1: U_ij = a_i^{-1}(Y_j) by the preimage leaf, and φ being over Y gives the triple-domain condition of the glue node, with U_ii = P_i. Step 2: lem-weil-pbc-glue-schemes and morphism-gluing give P and a unique p with p∘q_i = a_i. Step 3: q_i(P_i) = p^{-1}(Y_i), with the converse from clause (3) for the pair (j,i). Step 4: P×_Y Y_i = p^{-1}(Y_i); the map is f_i since b_i is mono, and compatibility with φ is equivalent to q_i|U_ij = q_j∘φ_ij. Step 5: q'_i cover P', and gluing in both directions plus hom_ext give the compatible Y-isomorphism and its uniqueness. All cited nodes are Mathlib leaves, so no tool_uses is needed. The stmt_deps (scheme, open immersion, fibre product) are correct. The blueprint's claim that s,t: ∐P_i×_Y Y_j → ∐P_i are open immersions is a genuine source error: Y = Spec k with Y_1 = Y_2 = Y makes s non-injective. The repaired 01JB/01JC gluing keeps the same route. No duplicate found: glue-schemes is absolute gluing, 01JJ is the functorial criterion, 01LH is basis-indexed. Mathlib RelativeGluingData needs a locally directed thin index category, so it is not a leaf. Edge cases checked: one chart, disjoint charts, repeated charts, empty cover. Advisory only: proof_origin points at the moving symlink blueprint/latest, whose text is identical to main-20261015."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.ExistsSchemeOfZariskiCocycle",
+  "declaration": "AlgebraicGeometry.Scheme.exists_scheme_of_zariski_cocycle",
+  "file": "lean/Sheaf/AlgebraicGeometry/ExistsSchemeOfZariskiCocycle.lean",
+  "statement": "theorem exists_scheme_of_zariski_cocycle (Y : Scheme.{u}) (I : Type v) (Yᵢ Pᵢ : I → Scheme.{u}) (b : ∀ i : I, Yᵢ i ⟶ Y) [∀ i : I, IsOpenImmersion (b i)] (hcover : ∀ y : Y, ∃ (i : I) (x : Yᵢ i), b i x = y) (f : ∀ i : I, Pᵢ i ⟶ Yᵢ i) (φ : ∀ i j : I, pullback (f i ≫ b i) (b j) ≅ pullback (f j ≫ b j) (b i)) (hφ : ∀ i j : I, (φ i j).hom ≫ pullback.fst (f j ≫ b j) (b i) ≫ f j = pullback.snd (f i ≫ b i) (b j) ∧ (φ i j).hom ≫ pullback.snd (f j ≫ b j) (b i) = pullback.fst (f i ≫ b i) (b j) ≫ f i) (hφ_self : ∀ i : I, φ i i = Iso.refl _) (hcocycle : ∀ (i j k : I) (T : Scheme.{u}) (a : T ⟶ pullback (f i ≫ b i) (b j)) (d : T ⟶ pullback (f j ≫ b j) (b k)) (c : T ⟶ pullback (f i ≫ b i) (b k)), a ≫ (φ i j).hom ≫ pullback.fst (f j ≫ b j) (b i) = d ≫ pullback.fst (f j ≫ b j) (b k) → a ≫ pullback.fst (f i ≫ b i) (b j) = c ≫ pullback.fst (f i ≫ b i) (b k) → d ≫ pullback.snd (f j ≫ b j) (b k) = c ≫ pullback.snd (f i ≫ b i) (b k) → d ≫ (φ j k).hom ≫ pullback.fst (f k ≫ b k) (b j) = c ≫ (φ i k).hom ≫ pullback.fst (f k ≫ b k) (b i)) : ∃ (P : Scheme.{u}) (p : P ⟶ Y) (e : ∀ i : I, pullback p (b i) ≅ Pᵢ i), (∀ i : I, (e i).hom ≫ f i = pullback.snd p (b i)) ∧ (∀ i j : I, pullback.fst (f i ≫ b i) (b j) ≫ (e i).inv ≫ pullback.fst p (b i) = (φ i j).hom ≫ pullback.fst (f j ≫ b j) (b i) ≫ (e j).inv ≫ pullback.fst p (b j)) ∧ ∀ (P' : Scheme.{u}) (p' : P' ⟶ Y) (e' : ∀ i : I, pullback p' (b i) ≅ Pᵢ i), (∀ i : I, (e' i).hom ≫ f i = pullback.snd p' (b i)) → (∀ i j : I, pullback.fst (f i ≫ b i) (b j) ≫ (e' i).inv ≫ pullback.fst p' (b i) = (φ i j).hom ≫ pullback.fst (f j ≫ b j) (b i) ≫ (e' j).inv ≫ pullback.fst p' (b j)) → ∃! h : P ≅ P', h.hom ≫ p' = p ∧ ∀ i : I, (e i).inv ≫ pullback.fst p (b i) ≫ h.hom = (e' i).inv ≫ pullback.fst p' (b i)",
+  "branch": "sheaf-dag",
+  "by": "Q107",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-85e327894",
+  "group": "Q107",
+  "result": "pass",
+  "note": "Read the node, its 3 statement dependencies (identical to live), the module and the report. lean.statement is verbatim the file's theorem; the only node change is the lean field. Statement matches the node: open-immersion cover with hcover; hφ keeps both base coordinates; φ i i = Iso.refl; the test-scheme cocycle is equivalent to φ_jk∘φ_ij=φ_ik on triple overlaps; e i lies over Y_i with the compatibility on charts q_i; ∃! isomorphism over Y respecting the charts (step 5). No extra assumptions, universes bound (I : Type v independent of u). Edge cases covered: empty I, empty schemes, single chart, repeated charts, nonreduced. No duplicate in Sheaf/WeilConjectures; Mathlib GlueData and RelativeGluingData (needs locally directed index) are not this lemma. Docstrings carry the source place, blueprint tag and 5 proof steps; proof is sorry only; Worker report and Second reading sections present. No fixes, so no compile was run."
+ }
 }

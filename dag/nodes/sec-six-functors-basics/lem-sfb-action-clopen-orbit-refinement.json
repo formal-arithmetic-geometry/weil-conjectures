@@ -1,0 +1,334 @@
+{
+ "id": "lem-sfb-action-clopen-orbit-refinement",
+ "kind": "statement",
+ "title": "Finite orbits and invariant refinements of clopen partitions",
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "statement": "Use the small universes of [def-weil-size-convention]. Let $G$ be a compact Hausdorff topological group such that every neighbourhood of $1$ contains an open normal subgroup. Let $P$ be a compact topological space with a continuous left action $G\\times P\\to P$. A finite clopen partition of $P$ is a finite set of pairwise disjoint nonempty open and closed subsets whose union is $P$; for $P=\\varnothing$ the empty partition is allowed. For every such partition $\\alpha$, there is an open normal subgroup $N\\subseteq G$ such that $nA=A$ for all $n\\in N$ and $A\\in\\alpha$. The orbit $\\mathcal T=\\{g\\alpha:g\\in G\\}$, where $g\\alpha=\\{gA:A\\in\\alpha\\}$, is finite. The collection $\\beta$ of nonempty intersections obtained by choosing one block from each member of $\\mathcal T$ is a finite clopen partition refining $\\alpha$, and $G$ permutes its blocks.",
+ "source": {
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Agent expansion of Bhatt–Scholze Example 4.1.10, p. 28, invariant finite-quotient existence: returned parent proof steps 1–2 (uniform block preservation, finite coset cover, translated common refinement)."
+ },
+ "stmt_deps": [
+  "def-weil-size-convention"
+ ],
+ "proof": [
+  {
+   "text": "If $P=\\varnothing$, take $N=G$: the only partition and every translate are empty, so $\\mathcal T=\\{\\varnothing\\}$ and there are no choices of a block from its member; thus $\\beta=\\varnothing$. Henceforth let $P\\ne\\varnothing$. Each $A\\in\\alpha$ is compact by [lem-weil-pbc-closed-in-quasi-compact], since it is closed in compact $P$.",
+   "uses": [
+    "lem-weil-pbc-closed-in-quasi-compact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/topology.tex",
+    "place": "Tag 005C, label lemma-closed-in-quasi-compact; empty-space clause checked directly."
+   }
+  },
+  {
+   "text": "Write $a:G\\times P\\to P$ for the action. For each $A\\in\\alpha$, $a^{-1}(A)$ is open and contains $\\{1\\}\\times A$. The singleton $\\{1\\}$ is compact (one member of any open cover covers it). Apply [lem-sfb-compact-product-open-neighborhoods] with $K=\\{1\\}$, $L=A$, $W=a^{-1}(A)$: obtain an open neighborhood $U_A$ of $1$ with $U_A A\\subseteq A$.",
+   "uses": [
+    "lem-sfb-compact-product-open-neighborhoods"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "lean/.lake/packages/mathlib/Mathlib/Topology/Compactness/Compact.lean",
+    "place": "generalized_tube_lemma, lines 752–759; compact-product neighborhood input to the agent expansion of Bhatt–Scholze Example 4.1.10, p. 28."
+   }
+  },
+  {
+   "text": "The finite intersection $U=\\bigcap_{A\\in\\alpha}U_A$ is an open neighborhood of $1$. The assumed open-normal-subgroup basis gives an open normal subgroup $N\\subseteq U$. For $n\\in N$ we have $nA\\subseteq A$ and $n^{-1}A\\subseteq A$; applying $n$ to the latter inclusion gives $A\\subseteq nA$. Therefore $nA=A$ for every block.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Example 4.1.10, p. 28: agent expansion of the pro-finite-discrete-G-set presentation; finite invariant clopen quotient construction."
+   }
+  },
+  {
+   "text": "Each left coset $gN$ is open: left multiplication by $g$ has continuous inverse left multiplication by $g^{-1}$. These cosets cover compact $G$, so finitely many $g_1N,\\ldots,g_rN$ cover $G$. If $g=g_i n$ with $n\\in N$, then $g\\alpha=g_i(n\\alpha)=g_i\\alpha$. Consequently $\\mathcal T\\subseteq\\{g_1\\alpha,\\ldots,g_r\\alpha\\}$ is finite.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Example 4.1.10, p. 28: agent expansion of the pro-finite-discrete-G-set presentation; finite invariant clopen quotient construction."
+   }
+  },
+  {
+   "text": "For fixed $g$, the maps $p\\mapsto gp$ and $p\\mapsto g^{-1}p$ are continuous inverse maps. Thus $g\\alpha$ is a finite clopen partition. There are finitely many choices of one block $A_\\gamma$ from each $\\gamma\\in\\mathcal T$. Their intersections are clopen; discard the empty ones to obtain $\\beta$. Each $p\\in P$ selects its unique block in every $\\gamma$, so lies in one such intersection. Two distinct choices differ at some $\\gamma$ and give disjoint intersections. Since $\\alpha=1\\alpha\\in\\mathcal T$, every block of $\\beta$ lies in a block of $\\alpha$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Example 4.1.10, p. 28: agent expansion of the pro-finite-discrete-G-set presentation; finite invariant clopen quotient construction."
+   }
+  },
+  {
+   "text": "For $h\\in G$, $\\gamma\\mapsto h\\gamma$ bijects $\\mathcal T$ with itself, with inverse multiplication by $h^{-1}$. The bijection $p\\mapsto hp$ gives $h(\\bigcap_\\gamma A_\\gamma)=\\bigcap_\\gamma hA_\\gamma$; reindexing by $h\\gamma$ exhibits this as another defining intersection for $\\beta$. It is nonempty whenever the original is. Applying $h^{-1}$ proves that $h$ bijects the blocks of $\\beta$, as required.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Example 4.1.10, p. 28: agent expansion of the pro-finite-discrete-G-set presentation; finite invariant clopen quotient construction."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-closed-in-quasi-compact",
+  "lem-sfb-compact-product-open-neighborhoods"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Example 4.1.10, p. 28: agent expansion of the pro-finite-discrete-G-set presentation; finite invariant clopen quotient construction."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For a continuous action of a compact profinite group on a compact space every finite clopen partition has a finite orbit and a finite invariant clopen refinement",
+   "results": {
+    "t": "2026-10-22T06:09:42Z",
+    "tool": "leanfinder",
+    "query": "For a continuous action of a compact profinite group on a compact space every finite clopen partition has a finite orbit and a finite invariant clopen refinement",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "exists_clopen_partition_of_clopen_cover",
+     "TopologicalSpace.IsOpenCover.exists_finite_nonempty_disjoint_clopen_cover",
+     "TopologicalSpace.IsOpenCover.exists_finite_clopen_cover",
+     "ContinuousMap.exists_disjoint_nonempty_clopen_cover_of_mem_nhds_diagonal",
+     "DiscreteQuotient.finsetClopens",
+     "ProperlyDiscontinuousSMul.finite_disjoint_inter_image",
+     "IsCompact.exists_finite_cover_smul",
+     "CategoryTheory.PreGaloisCategory.has_decomp_quotients"
+    ],
+    "digest": "56d93e0ee9b3428f"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: the clopen-cover refinements have no group invariance; proper discontinuity and minimality results have different hypotheses. No result supplies uniform block preservation and finite translated common refinement."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A finite clopen partition under a compact group action is fixed blockwise by an open normal subgroup and has finitely many translates",
+   "results": {
+    "t": "2026-10-22T06:10:52Z",
+    "tool": "leanfinder",
+    "query": "A finite clopen partition under a compact group action is fixed blockwise by an open normal subgroup and has finitely many translates",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "ProperlyDiscontinuousSMul.exists_nhds_image_smul_eq_self",
+     "Subgroup.properlyDiscontinuousSMul_of_tendsto_cofinite",
+     "ProperlyDiscontinuousSMul.finite_disjoint_inter_image",
+     "IsCompact.exists_finite_cover_smul",
+     "ProperlyDiscontinuousVAdd.finite_disjoint_inter_image",
+     "ProperlyDiscontinuousVAdd.exists_nhds_image_vadd_eq_self",
+     "Subgroup.properlyDiscontinuousSMul_opposite_of_tendsto_cofinite",
+     "ProperlyDiscontinuousSMul.exists_nhds_disjoint_image"
+    ],
+    "digest": "d30a0743b6ec0d26"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: the clopen-cover refinements have no group invariance; proper discontinuity and minimality results have different hypotheses. No result supplies uniform block preservation and finite translated common refinement."
+  },
+  {
+   "tool": "loogle",
+   "query": "DiscreteQuotient, ContinuousSMul",
+   "results": {
+    "t": "2026-10-22T06:09:58Z",
+    "tool": "loogle",
+    "query": "DiscreteQuotient, ContinuousSMul",
+    "sub": "",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: the clopen-cover refinements have no group invariance; proper discontinuity and minimality results have different hypotheses. No result supplies uniform block preservation and finite translated common refinement."
+  },
+  {
+   "tool": "grep",
+   "query": "invariant.*(clopen|partition|DiscreteQuotient)|(clopen|partition|DiscreteQuotient).*invariant",
+   "results": {
+    "t": "2026-10-22T06:09:58Z",
+    "tool": "grep",
+    "query": "invariant.*(clopen|partition|DiscreteQuotient)|(clopen|partition|DiscreteQuotient).*invariant",
+    "sub": "",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: the clopen-cover refinements have no group invariance; proper discontinuity and minimality results have different hypotheses. No result supplies uniform block preservation and finite translated common refinement."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A compact group acting on a compact space has an invariant finite clopen refinement of every finite clopen partition",
+   "results": {
+    "t": "2026-10-22T06:09:58Z",
+    "tool": "leansearch",
+    "query": "A compact group acting on a compact space has an invariant finite clopen refinement of every finite clopen partition",
+    "sub": "",
+    "ok": false,
+    "n_hits": 0,
+    "note": "service unavailable: {\"error\":\"Rate limit exceeded: 60 per 1 minute\"}",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-22",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a continuous action of a compact group on a compact space every finite clopen partition has finite orbit and an invariant common refinement",
+   "results": {
+    "t": "2026-10-22T10:22:58Z",
+    "tool": "leanfinder",
+    "query": "For a continuous action of a compact group on a compact space every finite clopen partition has finite orbit and an invariant common refinement",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "CategoryTheory.PreGaloisCategory.has_decomp_quotients",
+     "IsCompact.exists_finite_cover_smul",
+     "exists_clopen_partition_of_clopen_cover",
+     "ProperlyDiscontinuousSMul.finite_disjoint_inter_image",
+     "MeasureTheory.Measure.haar.index_defined",
+     "Dynamics.coverMincard_finite_of_isCompact_invariant",
+     "IsCompact.exists_finite_cover_vadd",
+     "MeasureTheory.Measure.haar.index_elim"
+    ],
+    "digest": "b757d959c778a970"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: the clopen partition lemmas impose Hausdorff and totally disconnected hypotheses and supply no invariant refinement; the minimal-action and properly discontinuous-action hits have different hypotheses."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A clopen partition of a compact space with a continuous profinite group action is fixed blockwise by an open normal subgroup",
+   "results": {
+    "t": "2026-10-22T10:24:11Z",
+    "tool": "leanfinder",
+    "query": "A clopen partition of a compact space with a continuous profinite group action is fixed blockwise by an open normal subgroup",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "ProfiniteGrp.exist_openNormalSubgroup_sub_open_nhds_of_one",
+     "IsTopologicalGroup.exist_openNormalSubgroup_sub_clopen_nhds_of_one",
+     "CategoryTheory.PreGaloisCategory.has_decomp_quotients",
+     "IsTopologicalGroup.exist_openSubgroup_sub_clopen_nhds_of_one",
+     "IsQuotientCoveringMap.disjoint",
+     "ProperlyDiscontinuousSMul.exists_nhds_image_smul_eq_self",
+     "IsTopologicalGroup.exists_mulInvClosureNhd",
+     "IsTopologicalGroup.exist_mul_closure_nhds"
+    ],
+    "digest": "81ed51dafb331c46"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: open-normal-subgroup existence is already an explicit hypothesis here; the properly discontinuous-action statements do not give the assertion for arbitrary compact P."
+  },
+  {
+   "tool": "grep",
+   "query": "invariant.*(clopen|partition|DiscreteQuotient)|(clopen|partition|DiscreteQuotient).*invariant",
+   "results": {
+    "t": "2026-10-22T10:24:10Z",
+    "tool": "grep",
+    "query": "invariant.*(clopen|partition|DiscreteQuotient)|(clopen|partition|DiscreteQuotient).*invariant",
+    "sub": "",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: no hits in the full Mathlib source."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-profinite-action-finite-quotients",
+  "date": "2026-10-22",
+  "group": "Q138"
+ },
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "Field-site presentation in Paragraph (3), Bhatt-Scholze Example 4.1.10: passage from finite discrete Galois sets to continuous profinite Galois sets; generic equivariant finite-quotient input. Agent expansion of Bhatt–Scholze Example 4.1.10, p. 28, invariant finite-quotient existence: returned parent proof steps 1–2 (uniform block preservation, finite coset cover, translated common refinement).",
+   "via": [
+    "lem-sfb-profinite-action-finite-quotients",
+    "lem-sfb-field-profinite-galois-site",
+    "lem-sfb-condensed-galois-global-descent",
+    "lem-sfb-norm-algcl-cohomology-topology-comparison",
+    "lem-sfb-supported-finite-stage-topology-defect",
+    "lem-sfb-constructible-algcl-topology-comparison",
+    "lem-sfb-continuous-algcl-proper-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sfb-action-clopen-orbit-refinement",
+  "worker": "stage1",
+  "group": "Q22",
+  "summary": "Proved the empty case, uniform block preservation via the exact Mathlib tube lemma and existing closed-subset compactness, finite translated orbit by a compact coset cover, and the common refinement and its explicit equivariance. Added one exact Mathlib leaf; no additional separation hypotheses on P. Normalized doubled imported TeX backslashes only.",
+  "blueprint": "Field-site presentation in Paragraph (3), Bhatt–Scholze Example 4.1.10: the finite invariant quotient input, specifically returned parent proof steps 1–2 (uniform block preservation, finite coset cover, translated common refinement). The ancestor tool returns None for this pre-existing created chain; preserved its ancestor and via list."
+ },
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q22-8410acc8a",
+  "group": "Q22",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q22-8410acc8a (reviewer sub-agent of L); spot-checked: I read the item and its one new node in full. The statement is the same as the unsplit statement created by the Q138 re-split; the only change is the normalised doubled backslashes. Nothing is weakened, and the proof needs only that P is compact. The six steps carry all of the parent's old steps 1–2 (Q138 report, lines 111–117). Step 1: P=∅ gives T={∅} and β=∅; otherwise every block is closed in compact P, hence compact (lem-weil-pbc-closed-in-quasi-compact = IsClosed.isCompact). Step 2: the tube lemma with K={1}, L=A, W=a⁻¹(A) gives U_A·A⊆A; a⁻¹(A) is open by continuity and contains {1}×A by the identity law. Step 3: a finite intersection, then the assumed open normal N; nA⊆A and n⁻¹A⊆A give nA=A. Step 4: open cosets give a finite cover of compact G, and g=g_i n gives gα=g_iα. Steps 5–6: the common refinement is a finite clopen partition refining α, and it is permuted by h through γ↦hγ. Each of steps 3–6 is genuinely a few lines. Edge cases checked: P=∅, α={P}, indiscrete P, trivial G, finite discrete P. New node lem-sfb-compact-product-open-neighborhoods (status mathlib): I read generalized_tube_lemma at Mathlib/Topology/Compactness/Compact.lean:752–759; it is an exact match with no separation or nonemptiness hypotheses. Four searches are recorded. The node is self-contained and cites def-kun-subspace-topology. It is strictly smaller than the item, not a restatement of one of its clauses. A tube-lemma search over dag/nodes found no duplicate. The node cites no SGA and no off-route statement; both proof dependencies are Mathlib leaves, and the DAG has no cycle. No changes made."
+ },
+ "lean": {
+  "module": "Sheaf.Topology.ActionClopenOrbitRefinement",
+  "declaration": "MulAction.exists_openNormalSubgroup_finite_clopen_orbit_refinement",
+  "file": "lean/Sheaf/Topology/ActionClopenOrbitRefinement.lean",
+  "statement": "theorem exists_openNormalSubgroup_finite_clopen_orbit_refinement (G : Type u) [Group G] [TopologicalSpace G] [IsTopologicalGroup G] [CompactSpace G] [T2Space G] (hN : ∀ U ∈ 𝓝 (1 : G), ∃ N : OpenNormalSubgroup G, (N : Set G) ⊆ U) (P : Type v) [TopologicalSpace P] [CompactSpace P] [MulAction G P] [ContinuousSMul G P] (α : Set (Set P)) (hfinite : α.Finite) (hpartition : Setoid.IsPartition α) (hclopen : ∀ A ∈ α, IsClopen A) : (∃ N : OpenNormalSubgroup G, ∀ n ∈ N, ∀ A ∈ α, (fun p : P ↦ n • p) '' A = A) ∧ ∃ (T : Set (Set (Set P))) (β : Set (Set P)), T = Set.range (fun g : G ↦ (fun A : Set P ↦ (fun p : P ↦ g • p) '' A) '' α) ∧ T.Finite ∧ β = {B : Set P | B.Nonempty ∧ ∃ f : T → Set P, (∀ γ : T, f γ ∈ γ.val) ∧ B = ⋂ γ : T, f γ} ∧ β.Finite ∧ Setoid.IsPartition β ∧ (∀ B ∈ β, IsClopen B) ∧ (∀ B ∈ β, ∃ A ∈ α, B ⊆ A) ∧ ∀ g : G, (fun B : Set P ↦ (fun p : P ↦ g • p) '' B) '' β = β",
+  "branch": "sheaf-dag",
+  "by": "Q145",
+  "date": "2026-10-23",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-c9fcbe091",
+  "group": "Q145",
+  "result": "pass",
+  "note": "Read node, report (Worker report + Second reading by Q145 present), module, the stmt_dep def-weil-size-convention (convention record; universes u v explicit) and Mathlib Setoid.IsPartition/OpenNormalSubgroup/ContinuousSMul. Hypotheses match one for one: compact T2 topological group, open-normal-subgroup basis hN over all neighbourhoods, compact P with no extra separation, jointly continuous action, finite clopen IsPartition α. Conclusions: ∃N blockwise stabilizer; T pinned as the range of translates and finite; β pinned literally as nonempty intersections of one block per member of T; finite clopen partition refining α and invariant under every g. Edge cases checked: P=∅ (α=T-member=∅, β=∅), α={P}, trivial G, indiscrete P, T nonempty so no spurious univ. Only the lean field differs from the live node; lean.statement is verbatim in the file (checked by script); docstrings carry the source place, blueprint tag and six proof steps; sorry only; Mathlib imports only. No duplicate (InvariantDiscreteQuotient is a diagram def); live node has no lean yet (not superseded). No compile run since no file was changed; the worker reports clean module and library compiles."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "AUTO",
+  "group": "A6",
+  "result": "pass",
+  "landing": "20261023T102403-L-2887457",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)",
+  "sorry_before": [
+   "MulAction.exists_openNormalSubgroup_finite_clopen_orbit_refinement"
+  ],
+  "sorry_after": []
+ }
+}

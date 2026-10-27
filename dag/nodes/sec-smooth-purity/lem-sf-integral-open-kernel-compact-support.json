@@ -1,0 +1,139 @@
+{
+ "id": "lem-sf-integral-open-kernel-compact-support",
+ "kind": "statement",
+ "title": "Ordinary open localization kernel equals recorded compact support",
+ "statement": "Fix a prime l, a finite extension E of Q_l, and a field k in which l is invertible. Let X be a separated finite-type k-scheme, i:Z→X a closed immersion and j:U→X its complementary open immersion over k. For an integral constructible object K [def-weil-derived-complete-integral-detailed], assume its recorded integral j-pullback is constructible. The termwise derived functor of the literal kernel of the closed unit [def-sf-recollement-presentation-data], evaluated on K, is isomorphic to the underlying recorded integral compact-support value for (j,id) of that pullback [def-weil-integral-rational-qbar-compact-support]. This asserts only an object comparison, not preservation, linearity, or a distinguished triangle.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sf-localization/prop-sf-open-closed-triangle-all-stages.proof.md",
+  "place": "The triangle, integral coefficient case; Constructibility, first paragraph"
+ },
+ "stmt_deps": [
+  "def-sf-recollement-presentation-data",
+  "def-weil-derived-complete-integral-detailed",
+  "def-weil-derived-pullback-tensor-hom",
+  "def-weil-integral-rational-qbar-compact-support"
+ ],
+ "proof": [
+  {
+   "text": "Use the actual coefficient inverse-image maps. The ringed open/closed sequence identifies the kernel of the closed unit with open extension after ordinary restriction, including its kernel inclusion. Pass this exact natural identification to derived categories.",
+   "uses": [
+    "def-sf-recollement-presentation-data",
+    "lem-weil-pbc-proetale-ringed-open-closed"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Identify ordinary immersion restriction of complete K with the recorded completed integral pullback through the completion-unit-normalized comparison. Transport the coefficient presentations and their finite quotient maps, not an arbitrary isomorphism.",
+   "uses": [
+    "lem-sf-immersion-completed-pullback-comparison",
+    "lem-a1-integral-pullback-completed-comparison"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Exact open extension preserves countable products and Roos triangles. The strict open reduction comparison identifies the full finite reduction tower and every transition with the compact-support tower for (j,id). Thus the ordinary open value is the Roos limit of that tower.",
+   "uses": [
+    "lem-sf-ringed-open-roos-preservation",
+    "lem-sf-integral-open-reduction-comparison",
+    "lem-sf-open-reduction-adjunction-transport"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The normalized recorded compact-support realization is the same limit. Rotate the two distinguished Roos triangles and extend the identity on their two product vertices; two-out-of-three gives the vertex isomorphism. This includes zero K and empty U.",
+   "uses": [
+    "def-weil-integral-rational-qbar-compact-support"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-sf-recollement-presentation-data",
+  "lem-weil-pbc-proetale-ringed-open-closed",
+  "lem-sf-immersion-completed-pullback-comparison",
+  "lem-a1-integral-pullback-completed-comparison",
+  "lem-sf-ringed-open-roos-preservation",
+  "lem-sf-integral-open-reduction-comparison",
+  "lem-sf-open-reduction-adjunction-transport",
+  "def-weil-integral-rational-qbar-compact-support"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sf-localization/prop-sf-open-closed-triangle-all-stages.proof.md",
+  "place": "The triangle, integral coefficient case; Constructibility, first paragraph"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "In a derived category of sheaves the kernel of the closed restriction unit equals extension by zero from the complementary open subset",
+   "results": "Generic kernel universal properties (kernelBiproductToSubtypeIso, kerIsKernel, isKernelOfComp), no geometric comparison.",
+   "date": "2026-10-25",
+   "verdict": "No direct match."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The exact open closed localization kernel of a complete sheaf complex equals compact support extension of its completed open restriction",
+   "results": "Scheme local sections, extension on open sheaves, and HomologicalComplex isSupported; no completed comparison.",
+   "date": "2026-10-25",
+   "verdict": "Use the project geometric and Roos comparisons."
+  },
+  {
+   "tool": "grep",
+   "query": "kernel.*[Cc]losed|[Cc]losed.*kernel|derived.*[Ll]imit.*[Pp]ush|[Pp]ush.*derived.*[Ll]imit",
+   "results": "Mathlib algebraic geometry, sheaves, and derived-category searches find closed-immersion ideals, not the needed kernel or completed direct-image comparison. Whole-blueprint searches for ordinary open kernel compact support and closed direct image Roos both returned zero.",
+   "date": "2026-10-25",
+   "verdict": "A new comparison step is needed."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.SfIntegralKernelRealization",
+  "date": "2026-10-25",
+  "group": "D2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-sf-open-closed-triangle-all-stages",
+   "place": "The triangle: identify the ordinary open kernel with j!j* at integral coefficients; Constructibility: identify its recorded compact-support value.",
+   "via": [
+    "lem-sf-integral-kernel-operation-realization"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sf-open-closed-triangle",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.SfIntegralOpenKernelCompactSupport",
+  "file": "lean/Sheaf/Paper/SfIntegralOpenKernelCompactSupport.lean",
+  "declaration": "WeilConjectures.sfIntegralOpenKernel_compactSupport",
+  "statement": "theorem sfIntegralOpenKernel_compactSupport\n    (k : Type u) [Field k] (hk : IsUnit (l : k))\n    {Z U X : Scheme.{u}}\n    [X.Over (Spec (.of k))] [U.Over (Spec (.of k))]\n    [LocallyOfFiniteType (X ↘ Spec (.of k))] [QuasiCompact (X ↘ Spec (.of k))]\n    [IsSeparated (X ↘ Spec (.of k))]\n    (i : Z ⟶ X) (j : U ⟶ X) [IsClosedImmersion i] [IsOpenImmersion j]\n    [j.IsOver (Spec (.of k))]\n    (hij : Set.range j.base = (Set.range i.base)ᶜ)\n    (K : sfIntegralConstructibleCategory l E X)\n    (h : sfIntegralConstructible l E U ((integralDerivedPullback l E j).obj K.obj)) :\n    letI := sfRecollementNoetherian k X\n    letI := (sfRecollementOpenFiniteType k j).1\n    letI := (sfRecollementOpenFiniteType k j).2.1\n    letI := (sfRecollementOpenFiniteType k j).2.2\n    Nonempty ((sfRecollementModuleOpen l E i).mapDerivedCategory.obj K.obj ≅\n      (sfIntegralCompactSupportValue l E k hk\n        (Compactification.ofIsOpenImmersion j) ⟨_, h⟩).obj)",
+  "branch": "sheaf-dag",
+  "by": "D2",
+  "date": "2026-10-25"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D2",
+  "result": "pass",
+  "landing": "20261025T100900-L-3633754",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D2",
+  "result": "pass",
+  "landing": "20261025T100900-L-3633754",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

@@ -137,7 +137,18 @@
   "item": "lemma-weil-pbc-p1-exchange-geometric-stalk",
   "date": "2026-10-09"
  },
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
  "chapter": "sec-proper-base-change",
  "unit": "sk-thm-p1",
  "split_report": {
@@ -182,5 +193,52 @@
   "landing": "20261012T015900-L-944365",
   "kind": "interface",
   "note": "independent Codex review: All five modules compile cleanly; unchanged existing signature, four auxiliary signatures, DAG proof records, canonical comparisons, report, and axiom audit satisfy the stage-3 brief."
+ },
+ "blueprint_update": {
+  "snapshot": "main-20261023-1620",
+  "commit": "7284bb09daf97437d544c51882b325f9c52cd345",
+  "changed": [
+   "statement",
+   "proof"
+  ],
+  "statement": "For a morphism of schemes $u:Y\\to X$ [def-pc-scheme] and an abelian sheaf $G$ on $X_{\\Et}$ [def-weil-pbc-abelian-etale-sheaves], let $u^*:H^q(X_{\\Et},G)\\to H^q(Y_{\\Et},u^{-1}G)$ be the pullback map of [def-weil-pbc-cohomology-pullback], built from a K-injective resolution $s:G\\to I^\\bullet$ and a K-injective resolution $r:u^{-1}I^\\bullet\\to J^\\bullet$ [def-sp-kinjective-bridge], as $\\mathcal H^q$ of $a\\mapsto r(\\eta_u(a))$, $\\eta_u$ the unit of $u^{-1}\\dashv u_*$ [def-weil-pbc-inverse-image], [def-weil-pbc-direct-image]. For a morphism $\\varphi:G\\to G'$ of abelian sheaves on a scheme $T$ and K-injective resolutions $G\\to I^\\bullet$, $G'\\to I'^\\bullet$, write $H^q(\\varphi):H^q(T_{\\Et},G)\\to H^q(T_{\\Et},G')$ [def-weil-pbc-etale-cohomology] for $\\mathcal H^q(\\Gamma(T,\\tilde\\varphi))$, where $\\tilde\\varphi:I^\\bullet\\to I'^\\bullet$ is any morphism of complexes with $\\tilde\\varphi\\circ(G\\to I^\\bullet)$ homotopic to $(G'\\to I'^\\bullet)\\circ\\varphi$; such $\\tilde\\varphi$ exist and $H^q(\\varphi)$ does not depend on $\\tilde\\varphi$ (step 1 of the proof), and for $\\varphi=\\mathrm{id}_G$ these are the identifications of the groups computed from different resolutions [prop-weil-pbc-cohomology-resolution-independent]. Then:\n\n1. (Naturality.) For a morphism $\\varphi:G\\to G'$ of abelian sheaves on $X_{\\Et}$, $u^*\\circ H^q(\\varphi)=H^q(u^{-1}\\varphi)\\circ u^*$.\n2. (Composition and identity.) For a morphism $v:Z\\to Y$, let $c_{u,v}:v^{-1}u^{-1}\\xrightarrow{\\sim}(u\\circ v)^{-1}$ be the isomorphism of [lem-weil-pbc-inverse-image-composition] (compatible with the units). Then $(u\\circ v)^*=H^q(c_{u,v,G})\\circ v^*\\circ u^*:H^q(X_{\\Et},G)\\to H^q(Z_{\\Et},(u\\circ v)^{-1}G)$, and, with $e_X:\\mathrm{id}_X^{-1}\\xrightarrow{\\sim}\\mathrm{id}$ of the same lemma, $H^q(e_{X,G})\\circ\\mathrm{id}_X^*=\\mathrm{id}$.\n\nBoth identities hold for any choice of the resolutions, the groups computed from different resolutions being identified as in [prop-weil-pbc-cohomology-resolution-independent].",
+  "proof": [
+   {
+    "text": "**Step 1.** *Lifting principle (and its consequences).* Let $\\mathcal A=\\Ab(T_{\\Et})$ for a scheme $T$, let $\\sigma:A^\\bullet\\to B^\\bullet$ be a quasi-isomorphism of complexes of $\\mathcal A$ and $I^\\bullet$ a K-injective complex. Then $-\\circ\\sigma:\\operatorname{Hom}_{K(\\mathcal A)}(B^\\bullet,I^\\bullet)\\to\\operatorname{Hom}_{K(\\mathcal A)}(A^\\bullet,I^\\bullet)$ is bijective. Indeed, by [lem-weil-pbc-kinjective-hom-derived] the localization $Q$ [def-weil-abstract-derived-category] induces bijections $\\operatorname{Hom}_{K(\\mathcal A)}(N^\\bullet,I^\\bullet)\\to\\operatorname{Hom}_{D(\\mathcal A)}(QN^\\bullet,QI^\\bullet)$ for $N^\\bullet=A^\\bullet,B^\\bullet$; since $Q$ is a functor, $Q(g\\circ\\sigma)=Q(g)\\circ Q(\\sigma)$, so these bijections carry $-\\circ\\sigma$ to $-\\circ Q(\\sigma)$, which is bijective because $Q(\\sigma)$ is an isomorphism of $D(\\mathcal A)$ ($Q$ inverts quasi-isomorphisms). Consequences used below. (a) For K-injective resolutions $s:G\\to I^\\bullet$, $s':G'\\to I'^\\bullet$ [def-sp-kinjective-bridge] and $\\varphi:G\\to G'$, applying this to $\\sigma=s$ and the class of $s'\\circ\\varphi$ gives $\\tilde\\varphi:I^\\bullet\\to I'^\\bullet$ with $\\tilde\\varphi s\\simeq s'\\varphi$, unique up to homotopy; the same holds for complexes $K^\\bullet$ in place of $G$. (b) An additive functor, here $\\Gamma(T,-)$, carries a homotopy $h$ between morphisms of complexes to the homotopy $\\Gamma(T,h)$, so homotopic morphisms induce the same maps $\\mathcal H^q(\\Gamma(T,-))$; hence $H^q(\\varphi)$ of the statement is well defined, and $H^q(\\varphi'\\circ\\varphi)=H^q(\\varphi')\\circ H^q(\\varphi)$, $H^q(\\mathrm{id})=\\mathrm{id}$ (a composite of lifts is a lift of the composite, the identity a lift of the identity); for $\\varphi=\\mathrm{id}_G$ the lifts are the mutually inverse homotopy equivalences of [prop-weil-pbc-cohomology-resolution-independent]. (c) (Two out of three.) If $\\gamma\\circ\\sigma\\simeq\\tau$ with $\\sigma,\\tau$ quasi-isomorphisms, then $\\mathcal H^q(\\gamma)\\mathcal H^q(\\sigma)=\\mathcal H^q(\\tau)$ (homotopic maps agree on cohomology), so $\\mathcal H^q(\\gamma)=\\mathcal H^q(\\tau)\\mathcal H^q(\\sigma)^{-1}$ is bijective and $\\gamma$ is a quasi-isomorphism. (d) $u^{-1}$ is exact [prop-weil-pbc-inverse-image-exact], hence commutes with the cohomology of complexes [lem-weil-pbc-exact-functor-complex-cohomology] and carries quasi-isomorphisms to quasi-isomorphisms; a composite of quasi-isomorphisms is one.",
+    "uses": [
+     "lem-weil-pbc-kinjective-hom-derived",
+     "def-weil-abstract-derived-category",
+     "def-sp-kinjective-bridge",
+     "prop-weil-pbc-cohomology-resolution-independent",
+     "prop-weil-pbc-inverse-image-exact",
+     "lem-weil-pbc-exact-functor-complex-cohomology"
+    ],
+    "elementary": false
+   },
+   {
+    "text": "**Step 2.** *Clause 1 (naturality).* Let $s:G\\to I^\\bullet$, $r:u^{-1}I^\\bullet\\to J^\\bullet$ and $s':G'\\to I'^\\bullet$, $r':u^{-1}I'^\\bullet\\to J'^\\bullet$ be the resolutions defining $u^*$ for $G$ and $G'$ [def-weil-pbc-cohomology-pullback]. By step 1(a) choose $\\tilde\\varphi:I^\\bullet\\to I'^\\bullet$ with $\\tilde\\varphi s\\simeq s'\\varphi$; it computes $H^q(\\varphi)$. The complex $J'^\\bullet$ is K-injective and $r\\circ u^{-1}(s):u^{-1}G\\to J^\\bullet$ is a quasi-isomorphism (step 1(d)), and $r:u^{-1}I^\\bullet\\to J^\\bullet$ is one, so step 1 gives $\\psi:J^\\bullet\\to J'^\\bullet$ with $\\psi r\\simeq r'\\circ u^{-1}(\\tilde\\varphi)$. Then $\\psi\\circ(r\\,u^{-1}(s))\\simeq r'u^{-1}(\\tilde\\varphi s)\\simeq r'u^{-1}(s')\\circ u^{-1}(\\varphi)$ ($u^{-1}$ is additive, so it preserves homotopies), so $\\psi$ is a lift of $u^{-1}\\varphi$ and computes $H^q(u^{-1}\\varphi)$. Naturality of the unit [def-weil-pbc-inverse-image] gives $\\eta_{u,I'^\\bullet}\\circ\\tilde\\varphi=u_*u^{-1}(\\tilde\\varphi)\\circ\\eta_{u,I^\\bullet}$ exactly; on global sections, with $\\Gamma(X,u_*-)=\\Gamma(Y,-)$ [def-weil-pbc-direct-image], this says $\\eta_u(\\tilde\\varphi(a))=u^{-1}(\\tilde\\varphi)(\\eta_u(a))$. Hence the two morphisms of complexes $\\Gamma(X,I^\\bullet)\\to\\Gamma(Y,J'^\\bullet)$, $a\\mapsto r'(\\eta_u(\\tilde\\varphi(a)))=r'u^{-1}(\\tilde\\varphi)(\\eta_u(a))$ and $a\\mapsto\\psi(r(\\eta_u(a)))$, are homotopic ($\\Gamma(Y,-)$ of the homotopy $\\psi r\\simeq r'u^{-1}(\\tilde\\varphi)$), so they agree on $\\mathcal H^q$ (step 1(b)): $u^*\\circ H^q(\\varphi)=H^q(u^{-1}\\varphi)\\circ u^*$.",
+    "uses": [
+     "def-weil-pbc-cohomology-pullback",
+     "def-weil-pbc-inverse-image",
+     "def-weil-pbc-direct-image"
+    ],
+    "elementary": false
+   },
+   {
+    "text": "**Step 3.** *Independence of the choices.* Apply step 2 with $G'=G$, $\\varphi=\\mathrm{id}_G$, the first choice $(I^\\bullet,J^\\bullet)$ for $G$ and the second $(I'^\\bullet,J'^\\bullet)$ for $G'$: $u^*{}'\\circ H^q(\\mathrm{id}_G)=H^q(\\mathrm{id}_{u^{-1}G})\\circ u^*$, and $H^q(\\mathrm{id})$ are the identifications of [prop-weil-pbc-cohomology-resolution-independent] (step 1(b)).",
+    "uses": [
+     "prop-weil-pbc-cohomology-resolution-independent"
+    ],
+    "elementary": false
+   },
+   {
+    "text": "**Step 4.** *Clause 2 (composition and identity).* Choose $s:G\\to I^\\bullet$ and $r:u^{-1}I^\\bullet\\to J^\\bullet$ defining $u^*$, and $r':v^{-1}J^\\bullet\\to L^\\bullet$ a K-injective resolution on $Z_{\\Et}$, so that $v^*$ for $u^{-1}G$ is computed from $r\\,u^{-1}(s)$ and $r'$ by $b\\mapsto r'(\\eta_v(b))$. Hence $v^*u^*$ is $\\mathcal H^q$ of $a\\mapsto r'(\\eta_{v,J}(r(\\eta_{u,I}(a))))$. Naturality of $\\eta_v$ gives $\\eta_{v,J}\\circ r=v_*v^{-1}(r)\\circ\\eta_{v,u^{-1}I}$, so this is $a\\mapsto r''\\bigl(u_*(\\eta_{v,u^{-1}I})(\\eta_{u,I}(a))\\bigr)$ with $r''=r'\\circ v^{-1}(r):v^{-1}u^{-1}I^\\bullet\\to L^\\bullet$, a quasi-isomorphism (step 1(d)) to a K-injective complex. By [lem-weil-pbc-inverse-image-composition] (2), $u_*v_*(c_{u,v,I})\\circ u_*(\\eta_{v,u^{-1}I})\\circ\\eta_{u,I}=d_{u,v}\\circ\\eta_{u\\circ v,I}$; on global sections $d_{u,v}$ is the identification $\\Gamma(X,(u\\circ v)_*F)=F(Z)=\\Gamma(X,u_*v_*F)$, so $u_*(\\eta_{v,u^{-1}I})(\\eta_{u,I}(a))=c_{u,v,I}^{-1}(\\eta_{u\\circ v,I}(a))$. Therefore $v^*u^*$ is the map $(u\\circ v)^*$ computed (step 3) with the K-injective resolution $r''\\circ c_{u,v,I}^{-1}:(u\\circ v)^{-1}I^\\bullet\\to L^\\bullet$ of $(u\\circ v)^{-1}G$, followed by the identification of the target $H^q(Z,v^{-1}u^{-1}G)$, computed from $r''\\circ v^{-1}u^{-1}(s)$, with $H^q(Z,(u\\circ v)^{-1}G)$, computed from $r''c_{u,v,I}^{-1}(u\\circ v)^{-1}(s)$. By naturality of $c_{u,v}$, $r''c_{u,v,I}^{-1}(u\\circ v)^{-1}(s)\\circ c_{u,v,G}=r''\\circ v^{-1}u^{-1}(s)$, so $\\mathrm{id}_{L^\\bullet}$ is a lift of $c_{u,v,G}$ and that identification is $H^q(c_{u,v,G})$ (step 1(b)): $(u\\circ v)^*=H^q(c_{u,v,G})\\circ v^*\\circ u^*$. For the identity: by [lem-weil-pbc-inverse-image-composition] (3), $e_{X,I}\\circ d_X\\circ\\eta_{\\mathrm{id},I}=\\mathrm{id}$, so with $J^\\bullet=I^\\bullet$ and $r=e_{X,I}:\\mathrm{id}_X^{-1}I^\\bullet\\to I^\\bullet$, $\\mathrm{id}_X^*$ is $\\mathcal H^q$ of $a\\mapsto e_{X,I}(\\eta_{\\mathrm{id},I}(a))=a$, from $H^q(X,G)$ computed by $s$ to $H^q(X,\\mathrm{id}_X^{-1}G)$ computed by $e_{X,I}\\circ\\mathrm{id}_X^{-1}(s)=s\\circ e_{X,G}$; so $\\mathrm{id}_{I^\\bullet}$ lifts $e_{X,G}$ and $H^q(e_{X,G})\\circ\\mathrm{id}_X^*=\\mathrm{id}$.\n\n*Source: Stacks project, cohomology.tex, Section Tag 01F7 (Lemma 01F8, equations 01F9/01FA, Remark 01FB), with literature/stacks-project/derived.tex Lemma 070I and literature/stacks-project/sites-cohomology.tex Lemma 03F3; Stacks writes these for ringed spaces and ringed sites, the small etale site case is the same argument (written out here).*",
+    "uses": [
+     "lem-weil-pbc-inverse-image-composition"
+    ],
+    "elementary": false
+   }
+  ],
+  "note": "the current blueprint (main-20261023-1620, weil-conjectures-blueprint 7284bb09da) states or proves this differently; the node is proved in Lean: recorded 2026-10-23, not reopened"
  }
 }

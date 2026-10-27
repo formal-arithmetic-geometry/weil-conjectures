@@ -1,0 +1,154 @@
+{
+ "id": "lem-sf-finite-coefficient-kflat-representatives",
+ "kind": "statement",
+ "title": "Finite coefficient K-flat representatives give fully faithful restriction",
+ "status": "split",
+ "statement": "Let A be a finite commutative ring and X a scheme. Let P consist of unbounded cochain complexes of etale sheaves of ULift A-modules whose inverse image in the intrinsic constant-ring module category is K-flat. For any category D, restriction along the product of the two inclusions P → complexes → derived category is fully faithful on functors into D. The intrinsic K-flat test is the actual direct-sum total tensor test of [def-pc-kflat-complex].",
+ "stmt_deps": [
+  "def-weil-pbc-proetale-modules",
+  "def-pc-kflat-complex"
+ ],
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-tower/thm-coef-finite-hom.proof.md",
+  "place": "Final site-transport paragraph; Stacks Project, Cohomology on Sites, Tags 06YN and 07A4."
+ },
+ "proof": [
+  {
+   "text": "Resolve every etale complex by the functorial flat resolution. Ordinary inverse image preserves these K-flat resolutions, by flat preservation.",
+   "uses": [
+    "lem-exc-constant-inverse-image-flat"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Intrinsic realization is an exact tensor equivalence. Use its inverse on every acyclic intrinsic test complex, transfer the total-tensor test through the equivalence, and transport along the counit. This makes the image of the flat resolution intrinsically K-flat.",
+   "uses": [
+    "def-weil-pbc-proetale-modules",
+    "lem-exc-intrinsic-realization-tensor-complex"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Pass these quasi-isomorphisms to the homotopy category, apply resolving-representative restriction, and transport the resulting fully faithful restriction along quotientCompQhIso on both factors.",
+   "uses": [
+    "lem-weil-pbc-resolving-representative-whiskering"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-proetale-modules",
+  "lem-exc-constant-inverse-image-flat",
+  "lem-exc-intrinsic-realization-tensor-complex",
+  "lem-weil-pbc-resolving-representative-whiskering"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "group": "Y7",
+  "date": "2026-10-22",
+  "note": "Resolving representatives give fully faithful restriction for the supplied derived localization instance; instantiate the small etale derived category at the site comparison."
+ },
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Restriction of functors along resolving K-flat representatives of a derived category is fully faithful",
+   "results": [
+    "DerivedCategory.instFullSingleFunctor",
+    "DerivedCategory.instFullFunctorHomotopyCategoryIntUpObjWhiskeringLeftQh",
+    "CategoryTheory.Functor.mapDerivedCategoryFactorsh",
+    "CategoryTheory.Functor.mapDerivedCategoryFactors",
+    "DerivedCategory.instFaithfulFunctorHomotopyCategoryIntUpObjWhiskeringLeftQh"
+   ],
+   "date": "2026-10-22",
+   "verdict": "Generic localization APIs are available; use the existing resolving-representative restriction theorem after constructing the finite-coefficient K-flat resolutions."
+  },
+  {
+   "tool": "loogle",
+   "query": "Functor.FullyFaithful",
+   "results": "0 hits; unknown identifier Functor.FullyFaithful",
+   "date": "2026-10-22",
+   "verdict": "No specialization found."
+  },
+  {
+   "tool": "grep",
+   "query": "resolvingRepresentativesFullyFaithfulWhiskering|kFlat_mapHomologicalComplex_obj_resolutionFunctor_obj",
+   "results": "0 Mathlib search hits. Repository search found the resolving restriction theorem and the adopted flat-resolution preservation theorem.",
+   "date": "2026-10-22",
+   "verdict": "Use the stated repository declarations; prove the transport to intrinsic coefficients."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Restriction along a resolving subcategory induces a fully faithful functor on categories of functors from a localization",
+   "results": {
+    "t": "2026-10-22T03:42:54Z",
+    "tool": "leansearch",
+    "query": "Restriction along a resolving subcategory induces a fully faithful functor on categories of functors from a localization",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "CategoryTheory.Adjunction.map_restrictFullyFaithful_unit_app_assoc",
+     "CategoryTheory.Localization.LeftBousfield.isLocalization",
+     "CategoryTheory.Adjunction.map_restrictFullyFaithful_unit_app",
+     "CategoryTheory.ObjectProperty.fullyFaithfulιOfLE",
+     "CategoryTheory.Ind.inclusion.fullyFaithful",
+     "CategoryTheory.Adjunction.restrictFullyFaithful",
+     "CategoryTheory.RightExactFunctor.fullyFaithful",
+     "HomotopicalAlgebra.CofibrantObject.HoCat.localizerMorphismResolution_functor"
+    ],
+    "digest": "5a41ac67eb2a15f4"
+   },
+   "date": "2026-10-22",
+   "verdict": "No exact match: restriction of adjunctions and model-category resolutions do not directly state fully faithful restriction on pairs of K-flat representatives. The proof uses the already available resolving-localization APIs."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.FiniteCoefficientSiteHomArrow",
+  "date": "2026-10-22",
+  "group": "Y7"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "def-sf-finite-coefficient-site-hom-arrow",
+   "place": "K-flat representative computation before tensor descent",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.FiniteCoefficientKFlatRepresentatives",
+  "file": "lean/Sheaf/Paper/FiniteCoefficientKFlatRepresentatives.lean",
+  "declaration": "WeilConjectures.finiteCoefficientKFlatRepresentativesFullyFaithful",
+  "statement": "theorem finiteCoefficientKFlatRepresentativesFullyFaithful\n    (A : Type u) [CommRing A] [Finite A] (T : AlgebraicGeometry.Scheme.{u})\n    [hD : HasDerivedCategory.{s} (Sheaf T.smallEtaleTopology\n      (ModuleCat.{u + 1} (ULift.{u + 1, u} A)))]\n    (D : Type w) [Category.{v} D] :\n    let C := Sheaf T.smallEtaleTopology (ModuleCat.{u + 1} (ULift.{u + 1, u} A))\n    let P : ObjectProperty (CochainComplex C ℤ) := fun P ↦\n      @CochainComplex.IsKFlatIndependentCoefficients.{u + 1, u, u + 1}\n        T.ProEt inferInstance (essentiallySmallSelf.{0, u, u + 1} _)\n        (AlgebraicGeometry.Scheme.ProEt.topology T)\n        (AlgebraicGeometry.Scheme.proEtaleConstantRing T A)\n        (((AlgebraicGeometry.ProEtale.finiteCoefficientIntrinsicComparison\n          T A).mapHomologicalComplex\n          (.up ℤ)).obj P)\n    Nonempty (((Functor.whiskeringLeft (P.FullSubcategory × P.FullSubcategory)\n      (DerivedCategory C × DerivedCategory C) D).obj\n      ((P.ι ⋙ DerivedCategory.Q).prod (P.ι ⋙ DerivedCategory.Q))).FullyFaithful)",
+  "branch": "sheaf-dag",
+  "by": "Y7",
+  "date": "2026-10-22"
+ },
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "C-91a91",
+  "group": "Y7",
+  "result": "fix",
+  "landing": "20261022T114256-L-598666",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "C-91a91",
+  "group": "Y7",
+  "result": "fix",
+  "landing": "20261022T114256-L-598666",
+  "kind": "interface",
+  "note": "independent cc review: re-delivery 91a912d9 vs prior FIXed head 4ada08f3 (cmp: all Lean/node files identical, only change record status + report differ) and live (CoefficientRingedTensorHomModel and importer IntegralTensorReductionTowerComparison unchanged); fixed set of 10 modules compiled with run_set, exit 0; checker rule stage3_delivery.py:602-606 (Status must start with open)"
+ }
+}

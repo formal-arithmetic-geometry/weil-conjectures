@@ -1,0 +1,151 @@
+{
+ "id": "lem-sfb-proetale-projection-first-variable-exact",
+ "kind": "statement",
+ "title": "Exactness and first-variable shifts of the native pro-etale projection mate",
+ "statement": "Let f:Z→T be a morphism of schemes and A a commutative ring sheaf on the native small pro-etale site of T. Put A_Z=f⁻¹A. Use the ordinary uncompleted unbounded derived module categories, fixed exact-derived pullback L and K-injective derived direct image R with their actual adjunction [lem-sfb-derived-scalar-tensor-identification]. Let t,z be the native tensor presentations on D(A),D(A_Z). Equip their curried tensors with coherent integer shifts satisfying CanonicalTensorShifts (both signed-total representative normalizations), and equip R with a shift for which the fixed adjunction commutes with shifts. For each P∈D(A), the functors K↦t(RK,P) and K↦R(z(K,LP)) are triangulated for their induced composite shifts. There is a natural transformation between them whose component at K is exactly proEtaleProjectionFormulaMate(f,A,A_Z,id,t,z,K,P), and it commutes with all integer shifts. There is no flatness, boundedness, coefficient-change map or invertibility hypothesis.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 07A4, lemma-pullback-tensor-product, and Tag 0B56, equation-projection-formula-map; exact right adjoints: literature/stacks-project/derived.tex, Tag 0A8D, lemma-adjoint-is-exact. First-variable shift calculation expanded from the defining adjoint-of-counit formula."
+ },
+ "stmt_deps": [
+  "lem-sfb-derived-scalar-tensor-identification",
+  "def-weil-triangulated-category"
+ ],
+ "proof": [
+  {
+   "text": "Regard each prescribed native tensor model as a ProjectionRestriction.TensorModel: keep exactly its tensor and representative isomorphism, take preadditivity and the proof-only resolving descent bijection from tensorModelWithShifts_nonempty. Convert CanonicalTensorShifts to TensorShifts by postcomposing each normalization equation with the shifted inverse representative. This does not choose any new tensor data.",
+   "uses": [
+    "lem-weil-pbc-ringed-projection-global-model"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "For a fixed resolving complex P, the published K-flat fixed tensor theorem supplies first-variable exactness and a shift-compatible computation isomorphism cR. The normalized tensor-model isomorphism e identifies its representative with the native representative. Restrict the first-variable component of e along resolving inclusion followed by Q: it is cR inverse followed by representativeFirst. representativeFirst_shift supplies shift compatibility for the latter with the prescribed shifts. Resolving essential surjectivity reflects CommShift for e, so exactness transports along e. Every derived coefficient is isomorphic to Q(P) for a resolving P; functoriality of CommShift₂Int makes this last isomorphism shift-compatible and gives first-variable tensor exactness for arbitrary coefficients.",
+   "uses": [
+    "lem-weil-pbc-kflat-fixed-tensor-triangulated",
+    "lem-weil-pbc-ringed-projection-tensor-model-iso",
+    "lem-weil-pbc-ringed-projection-tensor-shifts"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Construct the canonical global operation o and its ordinary tensor comparison mu. Apply globalTensorComparison_exists to the two native tensor models with their TensorShifts from step 1, obtaining tc and both normalized shift squares. Ordinary left-adjoint uniqueness gives e:o.pullback≅nativePullback; its exact-derived image l commutes with shifts. Apply proEtaleTensorComparisonTransport with identity tensor-model isomorphisms. The normalization square says l at the tensor followed by the native comparison equals tc followed by tensor(l,l). Fix the second variable. The native first-variable comparison is therefore the composite of whiskering l inverse, the shift-compatible fixed first-variable tc, whiskering l, and tensoring with l at the fixed argument. This composite commutes with shifts. The component equality follows by canceling l and composing the two tensor maps.",
+   "uses": [
+    "lem-weil-pbc-ringed-projection-global-model",
+    "lem-weil-pbc-ringed-projection-tensor-comparison",
+    "lem-weil-pbc-proetale-projection-global-comparison",
+    "lem-weil-pbc-proetale-tensor-comparison-transport",
+    "lem-weil-pbc-commshift-nattrans-comp-whisker"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Exact pullback and its shift-compatible right adjoint are triangulated by the adjunction theorem. Compose with the exact first-variable tensor functors of step 2. Curry the native tensor comparison and use Adjunction.rightAdjointProjectionMapFlipApp to construct pi. Its components are the prescribed native adjoint-of-counit projection arrows by unfolding their definitions. The first-variable comparison from step 3 is comparisonFlipApp of the curried map, up to its trailing identity. Apply the proved commShift_rightAdjointProjectionMapFlipApp theorem to get CommShift pi.",
+   "uses": [
+    "lem-weil-pbc-adjunction-shift-compatibility-unique",
+    "def-weil-pbc-projection-formula-map",
+    "def-weil-triangulated-category",
+    "lem-sf-triangulated-right-adjoint"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-ringed-projection-global-model",
+  "lem-weil-pbc-kflat-fixed-tensor-triangulated",
+  "lem-weil-pbc-ringed-projection-tensor-model-iso",
+  "lem-weil-pbc-ringed-projection-tensor-shifts",
+  "lem-weil-pbc-ringed-projection-tensor-comparison",
+  "lem-weil-pbc-proetale-projection-global-comparison",
+  "lem-weil-pbc-proetale-tensor-comparison-transport",
+  "lem-weil-pbc-commshift-nattrans-comp-whisker",
+  "lem-weil-pbc-adjunction-shift-compatibility-unique",
+  "def-weil-pbc-projection-formula-map",
+  "def-weil-triangulated-category",
+  "lem-sf-triangulated-right-adjoint"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 07A4, lemma-pullback-tensor-product, and Tag 0B56, equation-projection-formula-map; exact right adjoints: literature/stacks-project/derived.tex, Tag 0A8D, lemma-adjoint-is-exact. First-variable shift calculation expanded from the defining adjoint-of-counit formula."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "For a morphism of ringed topoi the projection map from direct image tensor P to direct image of tensor pullback P is a natural transformation of triangulated functors in the direct image input",
+   "results": "8 hits: ordinary SheafOfModules.pushforwardNatTrans and its component formulas, sheafPushforwardContinuousNatTrans, Triangle.π₁Toπ₂ and unitToPushforwardObjUnit. No derived projection-mate theorem.",
+   "date": "2026-10-27",
+   "verdict": "No direct Mathlib match."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The canonical projection formula mate on derived sheaves of modules commutes with integer shifts in its first variable",
+   "results": "8 hits: mapDerivedCategory and factorization CommShift instances, Q and Qh shift instances, and derived linear shift instances.",
+   "date": "2026-10-27",
+   "verdict": "Generic exact-derived shift instances are useful, but do not state the native projection result."
+  },
+  {
+   "tool": "grep",
+   "query": "(projection.*[Cc]ommShift|[Cc]ommShift.*projection|[Pp]rojection.*[Ii]sTriangulated) in Mathlib/CategoryTheory and Mathlib/Algebra/Homology",
+   "results": "No Mathlib hits. Project search found the proved WeilConjectures.CategoryTheory.Adjunction.ProjectionMapShift formal mate lemma, RingedProjectionFirstShift (different site universes), and normalized tensor model/shift/transport modules. Blueprint search projection shift: 0 matches; projection formula: 64 matches, none this first-variable structural statement.",
+   "date": "2026-10-27",
+   "verdict": "Use the existing generic tools and native tensor normalization; no duplicate declaration with this signature."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.DerivedScalarMateExactStructures",
+  "date": "2026-10-27",
+  "group": "H1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "Direct-image scalar-mate subargument, step 5: first-variable exactness and integer-shift compatibility of the projection arrow before transporting to the scalar mate.",
+   "via": [
+    "lem-sfb-derived-scalar-canonical-exact-structures",
+    "lem-sfb-derived-scalar-mate-thick-locus",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.ProEtaleProjectionFirstVariableExact",
+  "file": "lean/Sheaf/Paper/ProEtaleProjectionFirstVariableExact.lean",
+  "declaration": "AlgebraicGeometry.Scheme.DerivedScalarMate.proEtale_projection_first_variable_exact",
+  "statement": "theorem proEtale_projection_first_variable_exact\n    {Z T : Scheme.{u}} (f : Z ⟶ T)\n    (A : Sheaf (ProEt.topology T) CommRingCat.{u + 1})\n    (t : ProEtaleTensorModel T A) (z : ProEtaleTensorModel Z (inverseRing f A))\n    [(Functor.curryObj t.tensor).CommShift₂Int]\n    [(Functor.curryObj z.tensor).CommShift₂Int]\n    [(push f A).CommShift ℤ] [(adjunction f A).CommShift ℤ]\n    (ht : CanonicalTensorShifts t) (hz : CanonicalTensorShifts z)\n    (P : DerivedCategory (proEtaleRingModules T A)) :\n    (push f A ⋙ (Functor.curryObj t.tensor).flip.obj P).IsTriangulated ∧\n    ((Functor.curryObj z.tensor).flip.obj ((pull f A).obj P) ⋙\n      push f A).IsTriangulated ∧\n    ∃ pi : push f A ⋙ (Functor.curryObj t.tensor).flip.obj P ⟶\n        (Functor.curryObj z.tensor).flip.obj ((pull f A).obj P) ⋙ push f A,\n      (∀ K, pi.app K =\n        proEtaleProjectionFormulaMate f A (inverseRing f A) (Iso.refl _) t z K P) ∧\n      NatTrans.CommShift pi ℤ",
+  "branch": "sheaf-dag",
+  "by": "H1",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H1",
+  "result": "pass",
+  "landing": "20261027T064453-L-2184180",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H1",
+  "result": "pass",
+  "landing": "20261027T064453-L-2184180",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

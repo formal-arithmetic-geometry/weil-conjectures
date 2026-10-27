@@ -1,0 +1,244 @@
+{
+ "id": "lem-trf-line-proj-generation-locus",
+ "kind": "statement",
+ "title": "Positive-degree images detect the invertible-module generation locus",
+ "statement": "Let f:W→T be a morphism of schemes, A a quasi-coherent graded commutative O_T-algebra, L invertible, and psi_n:f^*A_n→L^n arbitrary degreewise module maps [def-pc-module-pullback, def-sc-invertible-module, def-pur-sheaf-tensor-product, def-weil-pbc-graded-sheaf-structures]. For affine V and a in A_d(V), x belongs to the generator open G_(V,d,a) [def-trf-line-proj-fraction-chart-data] if and only if x lies over V and multiplication by the germ of psi(a) is a bijection from O_(W,x) to (L^d)_x. The union of G_(V,d,a) over all affine V, all d>0 and all a equals the set of x where at least one positive-degree stalk map (psi_d)_x is surjective. No multiplicative laws on psi or finite-generation assumptions are needed. More generally, for any scheme X, module M, open U and section s on U, membership in the ambient generating locus is equivalent to the existence of a neighbourhood B contained in U on which s is a free generator. If these neighbourhoods cover an open G contained in U, the restriction of s to G is a free generator.",
+ "stmt_deps": [
+  "def-trf-line-proj-fraction-chart-data",
+  "def-sc-invertible-module",
+  "def-pc-module-pullback",
+  "def-pur-sheaf-tensor-product",
+  "def-weil-pbc-graded-sheaf-structures",
+  "def-nagata-relative-proj",
+  "def-nagata-homogeneous-localization-degree-zero",
+  "def-pc-scheme",
+  "def-sc-local-free-generator",
+  "def-sc-section-generating-locus"
+ ],
+ "source": {
+  "document": "literature/stacks-project/constructions.tex",
+  "place": "Tags 01NK (lemma-invertible-map-into-proj), existence and uniqueness, and 01O9 (lemma-invertible-map-into-relative-proj), properties (2) and (3)."
+ },
+ "proof": [
+  {
+   "text": "First identify the ambient generating locus with the existence of a neighbourhood on which the section freely generates, using restriction along the open immersion. The free-generator property is local, so these neighbourhoods also show that the section freely generates on any covered open. The defining generator locus equals the germ-basis locus. A neighbourhood basis gives stalk bijectivity by representing both scalars and module germs on smaller opens. Conversely trivialize the invertible module near x, write the section as alpha times a frame, and use stalk bijectivity to see that the germ of alpha is a unit. Shrink to its basic open to get a neighbourhood basis.",
+   "uses": [
+    "def-sc-local-free-generator",
+    "def-sc-section-generating-locus",
+    "def-sc-invertible-module"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/constructions.tex",
+    "place": "Tags 01NK (lemma-invertible-map-into-proj), existence and uniqueness, and 01O9 (lemma-invertible-map-into-relative-proj), properties (2) and (3)."
+   }
+  },
+  {
+   "text": "Membership in a generator open supplies an element of the tensor-pullback stalk mapping to a basis; all its scalar multiples prove surjectivity. Conversely trivialize L^d near x and take a preimage of its basis under a surjective positive-degree stalk map. The tensor-pullback stalk comparison identifies this preimage with an element of O_{W,x} tensor_{O_{T,f(x)}} A_{d,f(x)}.",
+   "uses": [
+    "lem-weil-pbc-module-stalk-pullback",
+    "def-sc-invertible-module",
+    "def-pc-module-pullback"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/constructions.tex",
+    "place": "Tags 01NK (lemma-invertible-map-into-proj), existence and uniqueness, and 01O9 (lemma-invertible-map-into-relative-proj), properties (2) and (3)."
+   }
+  },
+  {
+   "text": "If the coefficient of every image of 1 tensor a were a nonunit, tensor induction would imply that the image of every tensor has nonunit coefficient: nonunits in a local ring are closed under addition, and any scalar times a nonunit is a nonunit. This contradicts the preimage with coefficient 1. Represent an a with unit image coefficient by a section on an affine neighbourhood of f(x); its image germ is a basis, hence x is in that generator open. Take the union over positive degrees. This uses no finite generation or quasi-coherence.",
+   "uses": [
+    "def-sc-local-free-generator",
+    "def-pc-scheme"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/constructions.tex",
+    "place": "Tags 01NK (lemma-invertible-map-into-proj), existence and uniqueness, and 01O9 (lemma-invertible-map-into-relative-proj), properties (2) and (3)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sc-local-free-generator",
+  "def-sc-section-generating-locus",
+  "def-sc-invertible-module",
+  "lem-weil-pbc-module-stalk-pullback",
+  "def-pc-module-pullback",
+  "def-pc-scheme"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/constructions.tex",
+  "place": "Tags 01NK (lemma-invertible-map-into-proj), existence and uniqueness, and 01O9 (lemma-invertible-map-into-relative-proj), properties (2) and (3)."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "fromOfGlobalSections|Away.map_mk|exists_tensorPullback_stalk_iso",
+   "results": {
+    "t": "2026-10-23T14:42:03Z",
+    "tool": "grep",
+    "query": "fromOfGlobalSections|Away.map_mk|exists_tensorPullback_stalk_iso",
+    "sub": "",
+    "ok": true,
+    "n_hits": 7,
+    "note": "",
+    "top": [
+     "Mathlib/RingTheory/GradedAlgebra/HomogeneousLocalization.lean",
+     "Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Functor.lean",
+     "Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Basic.lean",
+     "Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Basic.lean",
+     "Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Basic.lean",
+     "Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Basic.lean",
+     "Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Basic.lean"
+    ],
+    "digest": "e61a3817b6acdf83"
+   },
+   "date": "2026-10-23",
+   "verdict": "No theorem for arbitrary graded line-module maps. Reuse the displayed localization and Proj tools locally; prove the sheaf and transition argument in Lean."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Positive degree sections of a graded sheaf algebra generate an invertible sheaf at a point if and only if some homogeneous image is a local generator",
+   "results": {
+    "t": "2026-10-23T14:42:04Z",
+    "tool": "leanfinder",
+    "query": "Positive degree sections of a graded sheaf algebra generate an invertible sheaf at a point if and only if some homogeneous image is a local generator",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "AlgebraicGeometry.ProjectiveSpectrum.StructureSheaf.isLocallyFraction",
+     "AlgebraicGeometry.ProjectiveSpectrum.StructureSheaf.IsFraction",
+     "AlgebraicGeometry.sectionInBasicOpen",
+     "AlgebraicGeometry.ProjectiveSpectrum.StructureSheaf.isFractionPrelocal",
+     "AlgebraicGeometry.ProjectiveSpectrum.StructureSheaf.SectionSubring.one_mem'",
+     "SheafOfModules.LocalGeneratorsData.generators",
+     "SheafOfModules.LocalGeneratorsData.I",
+     "SheafOfModules.GeneratingSections.I"
+    ],
+    "digest": "ed2b8ce81fc06add"
+   },
+   "date": "2026-10-23",
+   "verdict": "No theorem for arbitrary graded line-module maps. Reuse the displayed localization and Proj tools locally; prove the sheaf and transition argument in Lean."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Stalk surjectivity to a rank one module is detected by a homogeneous local section whose image is a basis",
+   "results": {
+    "t": "2026-10-23T14:43:01Z",
+    "tool": "leansearch",
+    "query": "Stalk surjectivity to a rank one module is detected by a homogeneous local section whose image is a basis",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "ModuleCat.Tilde.toOpen_germ_apply",
+     "RingHom.SurjectiveOnStalks",
+     "AlgebraicGeometry.SurjectiveOnStalks.surj_on_stalks",
+     "AlgebraicGeometry.SurjectiveOnStalks.mk",
+     "RingHom.surjectiveOnStalks_iff_of_isLocalHom",
+     "smoothSheafCommRing.eval_surjective",
+     "RingHom.surjectiveOnStalks_of_exists_div",
+     "RingHom.surjectiveOnStalks_of_surjective"
+    ],
+    "digest": "1f0098a515c7a23d"
+   },
+   "date": "2026-10-23",
+   "verdict": "No theorem for arbitrary graded line-module maps. Reuse the displayed localization and Proj tools locally; prove the sheaf and transition argument in Lean."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.TraceFormula.LineProjAffineChartAtlas",
+  "date": "2026-10-23",
+  "group": "S4"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Local homogeneous-fraction construction and gluing of the graded line-module relative-Proj map in the polarized-descent argument.",
+   "via": [
+    "lem-trf-line-proj-affine-chart-atlas",
+    "lem-trf-space-line-module-proj-map",
+    "lem-trf-algebraic-space-ample-local",
+    "lem-trf-polarized-scheme-etale-descent",
+    "lem-trf-polarized-fine-log-etale-descent",
+    "lem-trf-coherent-log-ideal-chart-construction",
+    "lem-trf-log-blowup-normalization",
+    "lem-trf-log-regular-desingularization",
+    "lem-trf-nodal-pair-projective-resolution",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.TraceFormula.LineProjGenerationLocus",
+  "file": "lean/Sheaf/TraceFormula/LineProjGenerationLocus.lean",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.lineProj_generation_locus",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.Modules.lineProj_open_generator",
+   "AlgebraicGeometry.Scheme.Modules.lineProj_mem_generator_open",
+   "AlgebraicGeometry.Scheme.Modules.lineProj_generator_stalk",
+   "AlgebraicGeometry.Scheme.Modules.lineProj_generation_locus"
+  ],
+  "statement": "theorem lineProj_generation_locus {W T : Scheme.{u}} (f : W ⟶ T)\n    (A : RelativeProjAlgebra T) (L : W.Modules) [L.IsInvertible]\n    (ψ : ∀ n : ℕ, (tensorPullback f).obj (A.piece n) ⟶ L.tensorPow n) :\n    ((⨆ (V : T.affineOpens) (d : ℕ) (_hd : 0 < d) (a : Γ(A.piece d, V.1)),\n        lineProjGeneratorOpen f A L ψ V d a : W.Opens) : Set W) =\n      {x | ∃ d : ℕ, 0 < d ∧ Function.Surjective\n        ((TopCat.Presheaf.stalkFunctor AddCommGrpCat.{u} x).map (ψ d).mapPresheaf)}",
+  "branch": "sheaf-dag",
+  "by": "S4",
+  "date": "2026-10-23"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-trf-line-proj-generation-locus",
+  "worker": "stage3",
+  "summary": "Fully proved using the canonical tensor-pullback stalk comparison and local-ring nonunits.",
+  "blueprint": "Same positive-degree generator-open construction in the parent route.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-module-stalk-pullback",
+    "why": "Generic canonical stalk comparison for tensor pullback, used only to present a preimage as a tensor; this preserves the unit route and replaces the more specialized affine sections presentation."
+   }
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "C-60ed0",
+  "group": "S4",
+  "result": "pass",
+  "landing": "20261024T191024-L-221297",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "C-60ed0",
+  "group": "S4",
+  "result": "pass",
+  "landing": "20261024T191024-L-221297",
+  "kind": "interface",
+  "note": "independent cc review: 13 moved chart defs byte-identical to clone base; item statement unchanged; 3 new proved modules vs their nodes' lean.statement; importer LineProjChartPullback compiled against delivered modules; #print axioms traced sorryAx to pre-existing RelativeProjAlgebra.gradeRing"
+ }
+}
